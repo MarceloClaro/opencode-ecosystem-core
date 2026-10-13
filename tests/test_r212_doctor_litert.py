@@ -36,6 +36,8 @@ _OTHER_DOCTOR_CHECKS = (
     # sem isolá-los aqui, rodam de verdade e podem chamar time.time(),
     # estourando o relógio falso de 2 valores usado por este teste.
     ("_check_colibri", "colibri"),
+    ("_check_runai", "runai"),
+    ("_check_rea", "rea"),
     ("_check_llm_reduction_metrics", "llm_reduction_metrics"),
     ("_check_episteme_coverage", "episteme_coverage"),
     # Checks posteriores também devem permanecer doubles: este contrato valida
@@ -164,7 +166,7 @@ def test_check_litert_lm_mapeia_todos_os_estados_sem_falso_fail(
     )
 
     # Act: executa somente o check individual, sem qualquer I/O externo.
-    result = _required_litert_check(doctor_module)()
+    result = _required_litert_check(doctor_module)(live=True)
 
     # Assert: conserva o estado no detalhe e aplica a severidade definida pela CA9.
     assert result.name == "litert_lm"
@@ -186,7 +188,7 @@ def test_check_litert_lm_ready_nao_declara_inferencia_real(
     )
 
     # Act: converte o status do supervisor em DoctorCheck.
-    result = _required_litert_check(doctor_module)()
+    result = _required_litert_check(doctor_module)(live=True)
 
     # Assert: o detalhe pode reportar ready, mas não fabricar evidência de inferência.
     assert result.status == "pass"
@@ -217,7 +219,7 @@ def test_check_litert_lm_indisponivel_redige_segredos_do_erro_do_supervisor(
     )
 
     # Act: consulta o check sem permitir fallback para rede ou processo real.
-    result = _required_litert_check(doctor_module)()
+    result = _required_litert_check(doctor_module)(live=True)
 
     # Assert: falha de diagnóstico é unavailable/warn e seu detalhe é seguro.
     assert result.name == "litert_lm"
@@ -272,5 +274,5 @@ def test_run_doctor_inclui_exatamente_um_check_litert_lm(
     # Assert: não há omissão nem duplicação do nome canônico do check.
     check_names = [check["name"] for check in report["checks"]]
     assert check_names.count("litert_lm") == 1
-    litert_check.assert_called_once_with()
+    litert_check.assert_called_once_with(live=False)
     assert report["checks_total"] == len(report["checks"])

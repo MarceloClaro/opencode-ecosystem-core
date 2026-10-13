@@ -17,6 +17,7 @@ from typing import Any, Iterable
 
 from integrations.harness_federation.artifact import parse_frontmatter
 from transformer.pipeline import TransformerPipeline
+from integrations.execution_control import is_cancelled
 
 
 class _ExecutionStopped(Exception):
@@ -225,7 +226,7 @@ class AutonomousCoordinator:
         return payload
 
     def run(self, task: str, required_capabilities=None, max_steps: int = 3,
-            timeout: float = 120, ecosystem: str | None = None) -> dict[str, Any]:
+            timeout: float = 120, ecosystem: str | None = None, spec_id: str | None = None) -> dict[str, Any]:
         """Executa uma tarefa real, com teto de revisões e prazo global."""
         task, required = self._request(task, required_capabilities, ecosystem)
         if isinstance(max_steps, bool) or not isinstance(max_steps, int) or not 1 <= max_steps <= self.MAX_STEPS:
@@ -244,6 +245,15 @@ class AutonomousCoordinator:
         }
         if routing["status"] != "ready":
             return result
+        if spec_id is not None or self.orchestrator.strict_sdd:
+            check = self.orchestrator.sdd_preflight(spec_id) if spec_id else {"ready": False, "error": "spec_id_required"}
+            result["sdd_preflight"] = check
+            if check.get("ready") is not True:
+                result["error"] = "Especificação e histórico RED exigidos antes da execução."
+                return result
+        if is_cancelled():
+            result.update(status="failed", error="Execução cancelada antes da delegação.")
+            return result
         if time.monotonic() >= deadline:
             result.update(status="exhausted", error="Prazo global esgotado durante o roteamento.")
             return result
@@ -258,6 +268,8 @@ class AutonomousCoordinator:
             "max_steps": max_steps, "timeout_seconds": timeout,
         })
         result["task_id"] = task_id
+        if spec_id:
+            orchestrator.task_specs[task_id] = spec_id
         board_task = blackboard.tasks.get(task_id)
         agent_id = board_task.assigned_to if board_task else None
         if not agent_id or board_task.status != "assigned":
@@ -296,6 +308,8 @@ class AutonomousCoordinator:
                     parts.append(f"[SAÍDA ANTERIOR]\n{residual['revisions'][-1]['output']}")
                 parts.append(f"[TAREFA]\n{prompt}")
                 while True:
+                    if is_cancelled():
+                        raise _ExecutionStopped("failed", "Execução cancelada antes da próxima tentativa.")
                     remaining = deadline - time.monotonic()
                     if remaining <= 0:
                         raise _ExecutionStopped("exhausted", "Prazo global esgotado antes da próxima tentativa.")
@@ -318,6 +332,8 @@ class AutonomousCoordinator:
                         error = "Executor devolveu saída vazia."
                     if finished > deadline:
                         error = "Prazo global esgotado durante a execução."
+                    if is_cancelled():
+                        error = "Execução cancelada durante a tentativa."
                     attempt = dict(outcome)
                     attempt.update(ecosystem=current_executor, step=result["steps"], success=not error,
                                    error=error, elapsed_seconds=round(max(0.0, finished - (deadline - remaining)), 3))
@@ -329,6 +345,8 @@ class AutonomousCoordinator:
                     result["execution_mode"] = "adapted_instructions" if artifact and current_executor != artifact.ecosystem else "native_cli"
                     if not error:
                         return output
+                    if is_cancelled():
+                        raise _ExecutionStopped("failed", error)
                     failed_executors.add(current_executor)
                     metabus.publish("autonomous.executor_failed", {
                         "task_id": task_id, "agent_id": agent_id, "executor": current_executor,
@@ -359,6 +377,8 @@ class AutonomousCoordinator:
             except _RevisionBudgetReached:
                 best = max(context["revisions"], key=lambda revision: revision["grade"]["score"])
                 pipeline_result = {"final_output": best["output"], "final_grade": best["grade"]}
+            if is_cancelled():
+                raise _ExecutionStopped("failed", "Execução cancelada antes de registrar a conclusão.")
             result.update(status="completed", success=True, output=pipeline_result["final_output"],
                           final_grade=pipeline_result["final_grade"], error="")
             delivery = next(attempt for attempt in result["attempts"]

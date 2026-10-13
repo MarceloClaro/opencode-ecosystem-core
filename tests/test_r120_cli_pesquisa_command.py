@@ -140,10 +140,21 @@ class TestDoctorScihubCheck:
         from marceloclaro.doctor import EXTERNAL_CLIS
         assert "scihub-cli" in EXTERNAL_CLIS
 
-    def test_check_external_clis_never_fails_on_missing_scihub(self, monkeypatch):
+    def test_check_external_clis_never_fails_on_missing_scihub(self, monkeypatch, tmp_path):
         import shutil as shutil_mod
+        from pathlib import Path
         from marceloclaro import doctor as doctor_module
 
+        # Ausência precisa incluir os caminhos pessoais e a venv (R644),
+        # além do PATH; uma CLI real do operador não integra esta fixture.
+        fake_home = tmp_path / "home"
+        fake_home.mkdir()
+        monkeypatch.setattr(Path, "home", classmethod(lambda cls: fake_home))
+        monkeypatch.setattr(sys, "executable", str(tmp_path / "venv" / "bin" / "python"))
+        monkeypatch.setattr(doctor_module, "REPO_ROOT", str(tmp_path / "repo"))
+        for name in doctor_module.EXTERNAL_CLIS:
+            key = "ANTIGRAVITY_BIN" if name == "agy" else f"{name.upper()}_BIN"
+            monkeypatch.delenv(key, raising=False)
         monkeypatch.setattr(shutil_mod, "which", lambda name: None)
         check = doctor_module._check_external_clis()
         assert check.status == "warn"

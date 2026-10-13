@@ -54,7 +54,9 @@ def isolated_orchestrator(monkeypatch, tmp_path):
     metabus.subscribe("task.volunteer", blackboard._handle_volunteer)
     metabus.subscribe("task.complete", blackboard._handle_completion)
     metabus.subscribe("metacognition.reflect_request", reflexion_engine._handle_reflection)
-    orchestrator = MarceloClaroOrchestrator(auto_load_agents=False)
+    # Esta bateria testa transporte/retomada e respostas sem alegação de
+    # verificação; o modo legado é explícito. O gate estrito é testado abaixo.
+    orchestrator = MarceloClaroOrchestrator(auto_load_agents=False, strict_sdd=False)
     orchestrator.attention_router._semantic_matcher = False
     orchestrator.reduction_layer = SimpleNamespace(route=lambda _: {"confidence": 0.0})
     orchestrator.trust = SimpleNamespace(
@@ -98,6 +100,22 @@ def test_run_executes_assigned_agent_and_reports_metabus_feedback(isolated_orche
     assert "INSTRUÇÃO IMPORTADA" in runtime.calls[0][1]
     assert metabus.memory.confidence_ledger["code-reviewer"] > 0.5
     assert metabus.memory.episodic
+
+
+def test_strict_run_without_spec_does_not_invoke_executor(isolated_orchestrator, registry):
+    isolated_orchestrator.strict_sdd=True
+    runtime=RuntimeDouble()
+    result=AutonomousCoordinator(isolated_orchestrator,runtime,registry).run('Revisar código')
+    assert result['status']=='blocked' and result['success'] is False
+    assert result['sdd_preflight']['error']=='spec_id_required'
+    assert runtime.calls==[]
+
+
+def test_spec_inexistente_bloqueia_antes_de_inferencia(isolated_orchestrator,registry):
+    runtime=RuntimeDouble()
+    result=AutonomousCoordinator(isolated_orchestrator,runtime,registry).run('Revisar código',spec_id='SPEC-NOT-REGISTERED-R839')
+    assert result['status']=='blocked' and result['sdd_preflight']['error']=='spec_not_found'
+    assert runtime.calls==[] and blackboard.tasks=={}
 
 
 def test_requested_missing_executor_blocks_before_delegation(isolated_orchestrator, registry):

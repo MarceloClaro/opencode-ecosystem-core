@@ -4,10 +4,14 @@
     "AGENTS.md"
   ],
   "default_agent": "marceloclaro",
-  "model": "litert-lm/litert-community/gemma-4-E2B-it-litert-lm",
+  "model": "ollama-local/llama3.2",
   "permission": {
     "edit": "ask",
     "bash": "ask"
+  },
+  "tools": {
+    "rea_*": false,
+    "core_command": false
   },
   "provider": {
     "opencode": {
@@ -839,6 +843,10 @@
       "description": "Orquestrador central metacognitivo do ecossistema: percebe (memória global), delega (attention routing + blackboard A2A), executa (SDD/TDD) e reflete (Reflexion). Ponto de entrada de todas as tarefas.",
       "mode": "primary",
       "prompt": "{file:./marceloclaro/PROMPT.md}",
+      "tools": {
+        "rea_*": false,
+        "core_command": true
+      },
       "permission": {
         "edit": "ask",
         "bash": "ask",
@@ -1305,7 +1313,7 @@
       }
     },
     "46_agente_pesquisador_polimata": {
-      "description": "Agente pesquisador polímata da SPEC-935-R711/R712. Opera `integrations/github_polymath_labs.py`",
+      "description": "Roteia tipo de raciocínio ao lab R711 adequado, sem executar código de terceiros",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/46_agente_pesquisador_polimata.md}",
       "permission": {
@@ -1314,7 +1322,7 @@
       }
     },
     "47_agente_laboratorio_reproduzivel": {
-      "description": "Agente laboratório reproduzível da SPEC-935-R711/R712, modelo Chen et al. 2025",
+      "description": "Ergue laboratório reproduzível no modelo rasilab com issues, versão e contêineres",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/47_agente_laboratorio_reproduzivel.md}",
       "permission": {
@@ -1323,9 +1331,63 @@
       }
     },
     "48_agente_auditoria_reprodutibilidade": {
-      "description": "Agente auditoria de reprodutibilidade da SPEC-935-R711/R712. Opera padrão",
+      "description": "Audita reprodutibilidade com repro_audit, ReproRepo e PRISMA-trAIce, sem alegar prova",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/48_agente_auditoria_reprodutibilidade.md}",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny"
+      }
+    },
+    "49_agente_lean_verificacao_total": {
+      "description": "Coordena verificação total fail-closed em Lean 4; impõe sorry/admit como bloqueio e nunca declara prova total sem machine_checked.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/49_agente_lean_verificacao_total.md}",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny"
+      }
+    },
+    "50_agente_lean_matematica_formal": {
+      "description": "Formaliza matemática em Lean 4 com Mathlib; fixa imports, tipos e táticas; rejeita lema inventado.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/50_agente_lean_matematica_formal.md}",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny"
+      }
+    },
+    "51_agente_lean_tese_auditavel": {
+      "description": "Organiza tese com provas Lean auditáveis; trilha enunciado PT-BR, código, log e reconciliação por capítulo.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/51_agente_lean_tese_auditavel.md}",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny"
+      }
+    },
+    "52_agente_lean_software_critico": {
+      "description": "Especifica e verifica software crítico em Lean; exige pré/pós-condições e machine_checked para alegar correção.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/52_agente_lean_software_critico.md}",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny"
+      }
+    },
+    "53_agente_lean_estudo_teoremas": {
+      "description": "Estuda teoremas Lean existentes; explica tática por tática; nunca inventa lema ou prova.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/53_agente_lean_estudo_teoremas.md}",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny"
+      }
+    },
+    "54_agente_acesso_aberto_auditoria_fichamento": {
+      "description": "Resolver DOI por vias legais, baixar somente OA permitido e gerar pasta de auditoria com fichamento ABNT e recortes rastreáveis.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/54_agente_acesso_aberto_auditoria_fichamento.md}",
       "permission": {
         "edit": "deny",
         "bash": "deny"
@@ -1525,7 +1587,7 @@
       }
     },
     "bibtex-crossref-auditor": {
-      "description": "Agente auditor de bibliografia. Para cada referência: resolve o DOI,",
+      "description": "Audita referências bibliográficas via Crossref/DOI antes de gravar no .bib",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/bibtex-crossref-auditor.md}",
       "permission": {
@@ -2083,7 +2145,7 @@
       }
     },
     "inferencia-causal-did-iv-rdd": {
-      "description": "Agente de inferência causal da Fase B. Opera `research/discovery/causal.py`",
+      "description": "Desenha e executa DID, IV-2SLS e RDD com suposições declaradas e diagnósticos, sem alegar causalidade sem desenho",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/inferencia-causal-did-iv-rdd.md}",
       "permission": {
@@ -2200,6 +2262,25 @@
           "*": "deny",
           "python3 -m pytest tests/test_r669_requested_agents.py -q": "allow",
           "python3 -m pytest tests/test_r657_book_library.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "library-empty-input-audit": {
+      "description": "Auditoria de entradas vazias e abstenção da biblioteca local, sob coordenação central.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/library-empty-input-audit.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m pytest tests/test_r678_library_empty_input_specialist.py -q": "allow",
+          "python3 -m pytest tests/test_r677_empty_library_request.py -q": "allow",
+          "python3 -m pytest tests/test_r669_requested_agents.py -q": "allow"
         },
         "edit": "deny",
         "webfetch": "deny",
@@ -2654,7 +2735,7 @@
       }
     },
     "modelagem-bayesiana-mista": {
-      "description": "Agente bayesiano e de modelos mistos da Fase B. Opera",
+      "description": "Atualização bayesiana conjugada com prior explícito e modelos mistos leves (ICC, EP cluster-robustos)",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/modelagem-bayesiana-mista.md}",
       "permission": {
@@ -3390,6 +3471,17 @@
     }
   },
   "mcp": {
+    "rea": {
+      "type": "local",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "integrations.rea_bridge",
+        "mcp"
+      ],
+      "enabled": true,
+      "timeout": 180000
+    },
     "ecosystem-network": {
       "type": "local",
       "command": [
@@ -3451,7 +3543,7 @@
     "arxiv-mcp": {
       "type": "local",
       "command": [
-        "uvx",
+        "/home/marceloclaro/.local/bin/uvx",
         "arxiv-mcp-server"
       ],
       "enabled": true
@@ -3518,6 +3610,11 @@
     }
   },
   "command": {
+    "rea": {
+      "template": "Conduza $ARGUMENTS sob MarceloClaro usando ecosystem_rea. Consulte operation=status e session para identidade e disponibilidade. Use operation=layers para mapear a prontidão das camadas de provedor e operation=layer com layer e path local explícito para inspecionar uma camada instalada. Para análise estática JavaScript/Electron use operation=analyze com path local explícito e timeout_seconds até 180. Preserve Evidence, origem, commit, hashes e limitações. Não confunda catálogo com execução nem análise estática com execução do alvo. O gateway guarda Evidence integral em arquivo e devolve resumo com hash. Consulte trechos do arquivo quando necessário. Ferramentas diretas rea_* ficam ocultas no primário para respeitar seu contexto; outras operações requerem seleção explícita dos schemas atuais e dos efeitos autorizados.",
+      "description": "REA: inspeção local de aplicações e evidências sob MarceloClaro (R808)",
+      "agent": "marceloclaro"
+    },
     "gemini-notebook": {
       "template": "Conduza $ARGUMENTS sob MarceloClaro com ecosystem_gemini_notebook. Consulte operation=catalog para o catálogo CLI/MCP instalado e operation=skill para ler a skill oficial no contexto atual. Para executar use operation=mcp com tool/arguments ou operation=cli com argv iniciado por nlm. Faça dry_run antes de efeitos; confirm=true somente após autorização da operação concreta. Preserve perfil ativo, estado pending/partial, origem e hashes de downloads. Nunca encaminhe cookies ou promova confiança por uma execução operacional.",
       "description": "Gemini Notebook: catálogo CLI/MCP, skill e operações coordenadas (R672–R675)",
@@ -3554,92 +3651,113 @@
       "agent": "marceloclaro"
     },
     "ecosystem": {
-      "template": "Use ecosystem-network para esta solicitação: $ARGUMENTS. Para diagnóstico use ecosystem_status; para escolher agentes use ecosystem_route; para análise ou texto coordenado use ecosystem_run. Para análise seguida de revisão independente, monte etapas com id, task, dependencies e required_capabilities e use ecosystem_workflow. Em seleção automática reserve per_node_max_steps=2 para permitir fallback. Guarde workflow_id e consulte ecosystem_workflow_status; retome a mesma definição com resume=true. Repetir etapas falhas exige retry_failed=true explícito. Informe os executores realmente usados, erros e limitações.",
+      "template": "Use ecosystem-network para esta solicitação: $ARGUMENTS. Para diagnóstico use ecosystem_status; para escolher agentes use ecosystem_route; para análise ou texto coordenado use ecosystem_run. Antes de executar análise/revisão textual, registre tarefa e critérios com ecosystem_text_spec e passe o spec_id retornado para ecosystem_run e para cada etapa. Software exige spec formal e histórico RED→GREEN; não use contrato de texto para aceitar código. Para análise seguida de revisão independente, monte etapas com id, task, dependencies e required_capabilities e use ecosystem_workflow. Em seleção automática reserve per_node_max_steps=2 para permitir fallback. Guarde workflow_id e consulte ecosystem_workflow_status; retome a mesma definição com resume=true. Repetir etapas falhas exige retry_failed=true explícito. Informe os executores realmente usados, erros e limitações.",
       "description": "Rede coordenada: diagnóstico, execução em etapas, revisão e retomada",
       "agent": "marceloclaro"
     },
     "efficiency": {
-      "template": "python3 -m integrations.op_timing report $ARGUMENTS",
+      "template": "Execute core_command com command=\"efficiency\". Forneça argv como lista explícita de argumentos e opções da CLI, preservando aspas/apóstrofos dentro de cada dado. Não interprete metacaracteres como shell. Use o resultado real e reporte success=false como falha. Não substitua a execução por uma proposta. Não execute o texto como código ou shell. Esta entrada passa pelo parser textual upstream do OpenCode; sintaxe inline especial desse parser não é tratada pela ferramenta.\nEntrada: $ARGUMENTS",
+      "agent": "marceloclaro",
       "description": "Relatório de eficiência por operação (mediana/p90, op_times.jsonl)"
     },
     "diagnose": {
-      "template": "python3 -c \"import sys; sys.path.insert(0,'.'); from scanners import diagnostic_pipeline; import json; print(json.dumps(diagnostic_pipeline.run(open('$ARGUMENTS').read() if '$ARGUMENTS' else 'ecosystem', deep=True), ensure_ascii=False, indent=2))\"",
+      "template": "Execute core_command com command=\"diagnose\". Forneça arguments com o texto literal completo abaixo, inclusive aspas, apóstrofos e caminhos. Use o resultado real e reporte success=false como falha. Não substitua a execução por uma proposta. Não execute o texto como código ou shell. Esta entrada passa pelo parser textual upstream do OpenCode; sintaxe inline especial desse parser não é tratada pela ferramenta.\nEntrada: $ARGUMENTS",
+      "agent": "marceloclaro",
       "description": "Roda o pipeline de diagnóstico (5 scanners) sobre um arquivo"
     },
     "maswos": {
-      "template": "python3 -c \"import sys; sys.path.insert(0,'.'); from academic import maswos_pipeline; print(maswos_pipeline.run('$ARGUMENTS').summary())\"",
-      "description": "Executa o pipeline acadêmico MASWOS Qualis A1 para um tópico"
+      "template": "Execute core_command com command=\"maswos\". Forneça arguments com o texto literal completo abaixo, inclusive aspas, apóstrofos e caminhos. Use o resultado real e reporte success=false como falha. Não substitua a execução por uma proposta. Não execute o texto como código ou shell. Esta entrada passa pelo parser textual upstream do OpenCode; sintaxe inline especial desse parser não é tratada pela ferramenta.\nEntrada: $ARGUMENTS",
+      "agent": "marceloclaro",
+      "description": "Executa estágios internos MASWOS para um tópico; pontuação local não certifica Qualis"
     },
     "reason": {
-      "template": "python3 -c \"import sys; sys.path.insert(0,'.'); from reasoning import multi_reasoning; r = multi_reasoning.reason('$ARGUMENTS'); print(r.engine, '->', r.conclusion)\"",
+      "template": "Execute core_command com command=\"reason\". Forneça arguments com o texto literal completo abaixo, inclusive aspas, apóstrofos e caminhos. Use o resultado real e reporte success=false como falha. Não substitua a execução por uma proposta. Não execute o texto como código ou shell. Esta entrada passa pelo parser textual upstream do OpenCode; sintaxe inline especial desse parser não é tratada pela ferramenta.\nEntrada: $ARGUMENTS",
+      "agent": "marceloclaro",
       "description": "Raciocina sobre uma consulta com roteamento automático de motor"
     },
     "economy": {
-      "template": "python3 -c \"import sys; sys.path.insert(0,'.'); from economy import token_economy; import json; print(json.dumps(token_economy.report(), ensure_ascii=False, indent=2))\"",
+      "template": "Execute core_command com command=\"economy\". Forneça arguments com o texto literal completo abaixo, inclusive aspas, apóstrofos e caminhos. Use o resultado real e reporte success=false como falha. Não substitua a execução por uma proposta. Não execute o texto como código ou shell. Esta entrada passa pelo parser textual upstream do OpenCode; sintaxe inline especial desse parser não é tratada pela ferramenta.\nEntrada: $ARGUMENTS",
+      "agent": "marceloclaro",
       "description": "Relatório da economia de tokens (staking, slashing, fees)"
     },
     "models": {
-      "template": "python3 -c \"import sys; sys.path.insert(0,'.'); from integrations.model_router import model_router; import json; print(json.dumps(model_router.list_all_models(), ensure_ascii=False, indent=2))\"",
+      "template": "Execute core_command com command=\"models\". Forneça arguments com o texto literal completo abaixo, inclusive aspas, apóstrofos e caminhos. Use o resultado real e reporte success=false como falha. Não substitua a execução por uma proposta. Não execute o texto como código ou shell. Esta entrada passa pelo parser textual upstream do OpenCode; sintaxe inline especial desse parser não é tratada pela ferramenta.\nEntrada: $ARGUMENTS",
+      "agent": "marceloclaro",
       "description": "Lista todos os modelos disponíveis nos providers OpenCode Go e OpenCode Zen"
     },
     "route": {
-      "template": "python3 -c \"import sys; sys.path.insert(0,'.'); from integrations.model_router import model_router; import json; r = model_router.route('$ARGUMENTS' or 'coding'); print(json.dumps({'provider': r.provider_id, 'model': r.model_id, 'reason': r.reason, 'alternatives': [f'{p}/{m}' for p,m in r.alternatives]}, ensure_ascii=False, indent=2))\"",
+      "template": "Execute core_command com command=\"route\". Forneça arguments com o texto literal completo abaixo, inclusive aspas, apóstrofos e caminhos. Use o resultado real e reporte success=false como falha. Não substitua a execução por uma proposta. Não execute o texto como código ou shell. Esta entrada passa pelo parser textual upstream do OpenCode; sintaxe inline especial desse parser não é tratada pela ferramenta.\nEntrada: $ARGUMENTS",
+      "agent": "marceloclaro",
       "description": "Roteia uma tarefa para o melhor modelo (ex: /route coding, /route reasoning, /route academic)"
     },
     "sdd": {
-      "template": "python3 -c \"import sys; sys.path.insert(0,'.'); from sdd.spec_engine import spec_registry; import json; print(json.dumps(spec_registry.coverage_report(), ensure_ascii=False, indent=2))\"",
+      "template": "Execute core_command com command=\"sdd\". Forneça arguments com o texto literal completo abaixo, inclusive aspas, apóstrofos e caminhos. Use o resultado real e reporte success=false como falha. Não substitua a execução por uma proposta. Não execute o texto como código ou shell. Esta entrada passa pelo parser textual upstream do OpenCode; sintaxe inline especial desse parser não é tratada pela ferramenta.\nEntrada: $ARGUMENTS",
+      "agent": "marceloclaro",
       "description": "Relatório de cobertura SDD: specs formais e dinâmicas do ecossistema"
     },
     "tdd": {
-      "template": "python3 -m pytest '$ARGUMENTS' -v --tb=short 2>&1 | tail -40",
+      "template": "Execute core_command com command=\"tdd\". Forneça arguments com o texto literal completo abaixo, inclusive aspas, apóstrofos e caminhos. Use o resultado real e reporte success=false como falha. Não substitua a execução por uma proposta. Não execute o texto como código ou shell. Esta entrada passa pelo parser textual upstream do OpenCode; sintaxe inline especial desse parser não é tratada pela ferramenta.\nEntrada: $ARGUMENTS",
+      "agent": "marceloclaro",
       "description": "Executa a bateria de testes TDD (ex: /tdd tests/test_opencode_go_zen.py)"
     },
     "pypi": {
-      "template": "python3 -c \"import sys; sys.path.insert(0,'.'); from skills.tooling.pypi_search import search, format_output; q = '$ARGUMENTS'.strip(); print('Uso: /pypi <termo de busca> [--json]  (ex.: /pypi requests, /pypi scihub paper download)') if not q else print(format_output(search(q, limit=10), json_output=('--json' in sys.argv)))\"",
+      "template": "Execute core_command com command=\"pypi\". Forneça arguments com o texto literal completo abaixo, inclusive aspas, apóstrofos e caminhos. Use o resultado real e reporte success=false como falha. Não substitua a execução por uma proposta. Não execute o texto como código ou shell. Esta entrada passa pelo parser textual upstream do OpenCode; sintaxe inline especial desse parser não é tratada pela ferramenta.\nEntrada: $ARGUMENTS",
+      "agent": "marceloclaro",
       "description": "Busca bibliotecas Python no PyPI com scoring multicritério. Ex: /pypi scihub paper download, /pypi requests --json"
     },
     "goose": {
-      "template": "python3 -m integrations.goose_cli $ARGUMENTS",
+      "template": "Execute core_command com command=\"goose\". Forneça argv como lista explícita de argumentos e opções da CLI, preservando aspas/apóstrofos dentro de cada dado. Não interprete metacaracteres como shell. Use o resultado real e reporte success=false como falha. Não substitua a execução por uma proposta. Não execute o texto como código ou shell. Esta entrada passa pelo parser textual upstream do OpenCode; sintaxe inline especial desse parser não é tratada pela ferramenta.\nEntrada: $ARGUMENTS",
+      "agent": "marceloclaro",
       "description": "Agente Goose (AAIF/Linux Foundation) — executor externo orquestrável (SPEC-935-R598). Ex: /goose status, /goose run '<tarefa>', /goose doctor"
     },
     "gemini": {
-      "template": "python3 -m integrations.gemini_cli $ARGUMENTS",
+      "template": "Execute core_command com command=\"gemini\". Forneça argv como lista explícita de argumentos e opções da CLI, preservando aspas/apóstrofos dentro de cada dado. Não interprete metacaracteres como shell. Use o resultado real e reporte success=false como falha. Não substitua a execução por uma proposta. Não execute o texto como código ou shell. Esta entrada passa pelo parser textual upstream do OpenCode; sintaxe inline especial desse parser não é tratada pela ferramenta.\nEntrada: $ARGUMENTS",
+      "agent": "marceloclaro",
       "description": "Integração da CLI Gemini (Google) — executor externo orquestrável (SPEC-935-R600). Ex: /gemini status, /gemini run '<tarefa>' [--model|-m MODELO] [--output-format json|stream-json] [--timeout SEG]"
     },
     "plandex": {
-      "template": "python3 -m integrations.plandex_cli $ARGUMENTS",
+      "template": "Execute core_command com command=\"plandex\". Forneça argv como lista explícita de argumentos e opções da CLI, preservando aspas/apóstrofos dentro de cada dado. Não interprete metacaracteres como shell. Use o resultado real e reporte success=false como falha. Não substitua a execução por uma proposta. Não execute o texto como código ou shell. Esta entrada passa pelo parser textual upstream do OpenCode; sintaxe inline especial desse parser não é tratada pela ferramenta.\nEntrada: $ARGUMENTS",
+      "agent": "marceloclaro",
       "description": "Agente Plandex (plandex-ai/plandex, MIT) — executor de codificação orquestrável com planos e sandbox de diff (SPEC-935-R599). Ex: /plandex status, /plandex new, /plandex tell '<tarefa>', /plandex diff"
     },
     "reasonix": {
-      "template": "python3 -m integrations.reasonix_cli $ARGUMENTS",
+      "template": "Execute core_command com command=\"reasonix\". Forneça argv como lista explícita de argumentos e opções da CLI, preservando aspas/apóstrofos dentro de cada dado. Não interprete metacaracteres como shell. Use o resultado real e reporte success=false como falha. Não substitua a execução por uma proposta. Não execute o texto como código ou shell. Esta entrada passa pelo parser textual upstream do OpenCode; sintaxe inline especial desse parser não é tratada pela ferramenta.\nEntrada: $ARGUMENTS",
+      "agent": "marceloclaro",
       "description": "Agente Reasonix (esengine/DeepSeek-Reasonix, MIT) — agente de codificação DeepSeek-native orquestrável one-shot (SPEC-935-R602). Ex: /reasonix status, /reasonix run '<tarefa>', /reasonix doctor, /reasonix install"
     },
     "colab": {
-      "template": "python3 -m integrations.colab_cli $ARGUMENTS",
+      "template": "Execute core_command com command=\"colab\". Forneça argv como lista explícita de argumentos e opções da CLI, preservando aspas/apóstrofos dentro de cada dado. Não interprete metacaracteres como shell. Use o resultado real e reporte success=false como falha. Não substitua a execução por uma proposta. Não execute o texto como código ou shell. Esta entrada passa pelo parser textual upstream do OpenCode; sintaxe inline especial desse parser não é tratada pela ferramenta.\nEntrada: $ARGUMENTS",
+      "agent": "marceloclaro",
       "description": "Google Colab CLI (googlecolab/google-colab-cli, Apache-2.0) — executor externo orquestrável (SPEC-935-R645). Ex: /colab status, /colab new <nome> [--gpu T4], /colab run sessions, /colab exec -f t.py, /colab doctor"
     },
     "colab-mcp": {
-      "template": "python3 -m integrations.colab_mcp $ARGUMENTS",
+      "template": "Execute core_command com command=\"colab-mcp\". Forneça argv como lista explícita de argumentos e opções da CLI, preservando aspas/apóstrofos dentro de cada dado. Não interprete metacaracteres como shell. Use o resultado real e reporte success=false como falha. Não substitua a execução por uma proposta. Não execute o texto como código ou shell. Esta entrada passa pelo parser textual upstream do OpenCode; sintaxe inline especial desse parser não é tratada pela ferramenta.\nEntrada: $ARGUMENTS",
+      "agent": "marceloclaro",
       "description": "Colab MCP Server (googlecolab/colab-mcp, Apache-2.0) — ponte orquestrável in-notebook (SPEC-935-R645). Ex: /colab-mcp status, /colab-mcp config, /colab-mcp doctor"
     },
     "minizinc": {
-      "template": "python3 -m integrations.minizinc_mcp $ARGUMENTS",
+      "template": "Execute core_command com command=\"minizinc\". Forneça argv como lista explícita de argumentos e opções da CLI, preservando aspas/apóstrofos dentro de cada dado. Não interprete metacaracteres como shell. Use o resultado real e reporte success=false como falha. Não substitua a execução por uma proposta. Não execute o texto como código ou shell. Esta entrada passa pelo parser textual upstream do OpenCode; sintaxe inline especial desse parser não é tratada pela ferramenta.\nEntrada: $ARGUMENTS",
+      "agent": "marceloclaro",
       "description": "MiniZinc MCP Server (r33drichards/minizinc-mcp, MIT) — ponte constraint solving CSP/COP via solve_constraint (SPEC-935-R646). Ex: /minizinc status, /minizinc payload --model-text '...', /minizinc config --hosted, /minizinc doctor"
     },
     "claude-sdk": {
-      "template": "python3 -m integrations.claude_agent_sdk $ARGUMENTS",
+      "template": "Execute core_command com command=\"claude-sdk\". Forneça argv como lista explícita de argumentos e opções da CLI, preservando aspas/apóstrofos dentro de cada dado. Não interprete metacaracteres como shell. Use o resultado real e reporte success=false como falha. Não substitua a execução por uma proposta. Não execute o texto como código ou shell. Esta entrada passa pelo parser textual upstream do OpenCode; sintaxe inline especial desse parser não é tratada pela ferramenta.\nEntrada: $ARGUMENTS",
+      "agent": "marceloclaro",
       "description": "Claude Agent SDK Python (anthropics, MIT + Commercial Terms) — ponte de biblioteca, monta options sem executar (SPEC-935-R647). Ex: /claude-sdk status, /claude-sdk options --prompt '...' [--max-turns N], /claude-sdk doctor"
     },
     "opencode-sdk": {
-      "template": "python3 -m integrations.opencode_agent_sdk $ARGUMENTS",
+      "template": "Execute core_command com command=\"opencode-sdk\". Forneça argv como lista explícita de argumentos e opções da CLI, preservando aspas/apóstrofos dentro de cada dado. Não interprete metacaracteres como shell. Use o resultado real e reporte success=false como falha. Não substitua a execução por uma proposta. Não execute o texto como código ou shell. Esta entrada passa pelo parser textual upstream do OpenCode; sintaxe inline especial desse parser não é tratada pela ferramenta.\nEntrada: $ARGUMENTS",
+      "agent": "marceloclaro",
       "description": "OpenCode Agent SDK com provedores locais por padrão (R649/R659): ferramentas Python e hooks validados; endpoint remoto depende de configuração explícita. Ex: /opencode-sdk status, /opencode-sdk query --prompt '...' [--max-turns N], /opencode-sdk doctor"
     },
     "kaggle": {
-      "template": "python3 -m integrations.kaggle_cli $ARGUMENTS",
+      "template": "Execute core_command com command=\"kaggle\". Forneça argv como lista explícita de argumentos e opções da CLI, preservando aspas/apóstrofos dentro de cada dado. Não interprete metacaracteres como shell. Use o resultado real e reporte success=false como falha. Não substitua a execução por uma proposta. Não execute o texto como código ou shell. Esta entrada passa pelo parser textual upstream do OpenCode; sintaxe inline especial desse parser não é tratada pela ferramenta.\nEntrada: $ARGUMENTS",
+      "agent": "marceloclaro",
       "description": "Kaggle CLI (Kaggle/kaggle-cli) — executor externo orquestrável (SPEC-935-R650). Ex: /kaggle status, /kaggle run competitions list, /kaggle run quota, /kaggle doctor"
     },
     "agy": {
-      "template": "python3 -m integrations.antigravity_cli $ARGUMENTS",
+      "template": "Execute core_command com command=\"agy\". Forneça argv como lista explícita de argumentos e opções da CLI, preservando aspas/apóstrofos dentro de cada dado. Não interprete metacaracteres como shell. Use o resultado real e reporte success=false como falha. Não substitua a execução por uma proposta. Não execute o texto como código ou shell. Esta entrada passa pelo parser textual upstream do OpenCode; sintaxe inline especial desse parser não é tratada pela ferramenta.\nEntrada: $ARGUMENTS",
+      "agent": "marceloclaro",
       "description": "Antigravity CLI runner direto (SPEC-935-R651), complemento do bridge/MCP. Ex: /agy status, /agy run '<prompt>' [--agent A], /agy doctor"
     }
   }

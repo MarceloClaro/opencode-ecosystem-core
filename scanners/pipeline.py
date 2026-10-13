@@ -234,6 +234,12 @@ class DiagnosticPipeline:
         "marceloclaro/orchestrator.py", "marceloclaro/agent_loader.py",
         "trust/trust_engine.py", "economy/token_economy.py",
         "reasoning/engines.py",
+        "trust/staking_mechanism.py", "trust/slashing_mechanism.py",
+        "trust/fee_market.py", "trust/behavioral_gate.py",
+        "trust/outcome_tracker.py", "trust/stake_pool.py",
+        "reasoning/z3_solver.py", "reasoning/critical_reasoner.py",
+        "reasoning/quantum_reasoning.py", "reasoning/bayesian_inference.py",
+        "reasoning/dialectical_engine.py", "reasoning/reasoning_engines.py",
         "evolution/cycles.py",
         "opencode.json", "ARCHITECTURE.md", "README.md",
     ]
@@ -242,8 +248,8 @@ class DiagnosticPipeline:
         """Auto-descobre componentes do ecossistema e enriquece o corpus.
 
         Escaneia diretórios, NOMES DE CLASSES e CONTEÚDO de arquivos
-        reais do OpenCode Core para construir um corpus rico que permite
-        ao NoologicalScanner detectar 100% das categorias (SPEC-022).
+        reais do OpenCode Core para medir autodescoberta lexical. As menções
+        não demonstram execução funcional, conhecimento ou completude (R835).
 
         Performance v4.0:
             - Cache SHA-256 invalidado por mudança nos arquivos rastreados
@@ -257,9 +263,13 @@ class DiagnosticPipeline:
         root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
         # ── Verificação de cache ─────────────────────────────────────
-        current_hash = self._compute_corpus_hash(root, self.TRACKED_FILES)
+        source_hash = self._compute_corpus_hash(root, self.TRACKED_FILES)
+        current_hash = hashlib.sha256(
+            (source_hash + "\0" + base_corpus).encode("utf-8")).hexdigest()
         if self._cached_corpus is not None and self._cached_hash == current_hash:
             return self._cached_corpus
+        # O LRU anterior não possui versão do arquivo em sua chave.
+        self._read_file_content.cache_clear()
 
         parts = [base_corpus]
 
@@ -270,6 +280,7 @@ class DiagnosticPipeline:
             "marceloclaro", "legal", "specs", "schemas", "gametheory",
             "mci/pipeline", "installer", "data", "benchmarks",
             "tests", "notebooks", "webapp",
+            "protocolos", "infra_dados", "governanca",
         ]
 
         for rel_dir in core_dirs:
@@ -303,6 +314,12 @@ class DiagnosticPipeline:
             "legal/integration.py",
             "trust/trust_engine.py", "economy/token_economy.py",
             "reasoning/engines.py", "reasoning/quantum.py",
+            "trust/staking_mechanism.py", "trust/slashing_mechanism.py",
+            "trust/fee_market.py", "trust/behavioral_gate.py",
+            "trust/outcome_tracker.py", "trust/stake_pool.py",
+            "reasoning/z3_solver.py", "reasoning/critical_reasoner.py",
+            "reasoning/quantum_reasoning.py", "reasoning/bayesian_inference.py",
+            "reasoning/dialectical_engine.py", "reasoning/reasoning_engines.py",
             "evolution/cycles.py", "integrations/antigravity/antigravity_bridge.py",
             "integrations/opencode_cli.py",
             "marceloclaro/orchestrator.py", "marceloclaro/agent_loader.py",
@@ -362,7 +379,7 @@ class DiagnosticPipeline:
         # Processa arquivos Python em paralelo (ThreadPoolExecutor)
         with ThreadPoolExecutor(max_workers=4) as executor:
             futures = {executor.submit(_extract_py_terms, rp): rp for rp in py_content_files}
-            for future in as_completed(futures):
+            for future in sorted(futures, key=futures.get):
                 try:
                     result = future.result()
                     parts.extend(result)
@@ -400,7 +417,7 @@ class DiagnosticPipeline:
             spec_files = sorted(os.listdir(specs_dir))
             with ThreadPoolExecutor(max_workers=4) as executor:
                 futures = {executor.submit(_extract_spec_terms, sf): sf for sf in spec_files}
-                for future in as_completed(futures):
+                for future in sorted(futures, key=futures.get):
                     try:
                         parts.extend(future.result())
                     except Exception:
@@ -425,7 +442,7 @@ class DiagnosticPipeline:
 
         with ThreadPoolExecutor(max_workers=4) as executor:
             futures = {executor.submit(_read_config_snippet, cf): cf for cf in config_files}
-            for future in as_completed(futures):
+            for future in sorted(futures, key=futures.get):
                 try:
                     content = future.result()
                     if content:
@@ -453,7 +470,7 @@ class DiagnosticPipeline:
             agent_files = sorted(os.listdir(catalog_dir))
             with ThreadPoolExecutor(max_workers=4) as executor:
                 futures = {executor.submit(_read_agent_catalog, af): af for af in agent_files}
-                for future in as_completed(futures):
+                for future in sorted(futures, key=futures.get):
                     try:
                         content = future.result()
                         if content:
@@ -477,7 +494,7 @@ class DiagnosticPipeline:
 
         with ThreadPoolExecutor(max_workers=4) as executor:
             futures = {executor.submit(_read_agent_root, af): af for af in agent_root_files}
-            for future in as_completed(futures):
+            for future in sorted(futures, key=futures.get):
                 try:
                     content = future.result()
                     if content:
@@ -503,13 +520,17 @@ class DiagnosticPipeline:
             literary_params: Optional[Dict[str, Any]] = None,
             include_literary_research: bool = False,
             literary_research_params: Optional[Dict[str, Any]] = None,
-            deep: bool = False) -> Dict[str, Any]:
+            deep: bool = False,
+            corpus_mode: str = "autodiscovery",
+            corpus_id: Optional[str] = None,
+            expected_corpus_sha256: Optional[str] = None) -> Dict[str, Any]:
         """Executa o pipeline completo de diagnóstico.
 
         Refinamento SPEC-022: quando domain="ecosystem", carrega
         dimensões específicas do ecossistema e metas-padrão do Core.
-        O corpus é automaticamente enriquecido com os componentes
-        reais do filesystem.
+        Por compatibilidade, a autodescoberta é enriquecida com nomes do
+        filesystem. `corpus_mode="retained"` mede somente a entrada retida,
+        exigindo identidade e hash, sem enriquecimento com o próprio Core.
 
         Args:
             corpus: texto a diagnosticar (manuscrito, log de sessão, plano)
@@ -527,17 +548,49 @@ class DiagnosticPipeline:
                 (também habilitado para domain="literary_research")
             literary_research_params: metadados opcionais da pesquisa literária
             deep: se True, roda também o roadmap evolutivo completo
+            corpus_mode: "autodiscovery", "provided" ou "retained".
+            corpus_id: identidade da entrada; obrigatória no modo retido.
+            expected_corpus_sha256: hash UTF-8 exato; obrigatório no modo retido.
         """
+        if not isinstance(corpus, str):
+            raise ValueError("corpus deve ser texto")
+        if corpus_mode not in {"autodiscovery", "provided", "retained"}:
+            raise ValueError("modo de corpus inválido")
+        input_hash = hashlib.sha256(corpus.encode("utf-8")).hexdigest()
+        if corpus_mode == "retained":
+            if not isinstance(corpus_id, str) or not corpus_id.strip() or len(corpus_id) > 256:
+                raise ValueError("corpus retido exige identificador explícito")
+            if (not isinstance(expected_corpus_sha256, str)
+                    or re.fullmatch(r"[0-9a-f]{64}", expected_corpus_sha256) is None
+                    or input_hash != expected_corpus_sha256):
+                raise ValueError("hash do corpus retido ausente ou divergente")
         started = time.time()
         effective_domain = domain or self._domain
 
         # ─── Auto-enriquecimento do corpus para ecosystem (SPEC-022) ────
         effective_corpus = corpus
-        if effective_domain == "ecosystem":
+        autodiscovery = effective_domain == "ecosystem" and corpus_mode == "autodiscovery"
+        if autodiscovery:
             effective_corpus = self._build_ecosystem_corpus(corpus)
 
         trail = _TextAuditTrail(effective_corpus)
-        report: Dict[str, Any] = {"domain": effective_domain, "started_at": started}
+        measurement = {
+            "kind": ("autodiscovery_lexical" if autodiscovery else
+                     "retained_input_lexical" if corpus_mode == "retained" else
+                     "provided_input_lexical"),
+            "corpus_mode": corpus_mode,
+            "corpus_id": corpus_id,
+            "input_sha256": input_hash,
+            "measured_corpus_sha256": hashlib.sha256(effective_corpus.encode("utf-8")).hexdigest(),
+            "measured_bytes": len(effective_corpus.encode("utf-8")),
+            "functional_validation": False,
+            "externally_validated": False,
+            "confidence_calibrated": False,
+        }
+        report: Dict[str, Any] = {
+            "domain": effective_domain, "started_at": started,
+            "verification": "local_operation", "measurement": measurement,
+        }
 
         # ─── Metas padrão do ecossistema (SPEC-022) ──────────────────────
         effective_goals = goals
@@ -557,6 +610,7 @@ class DiagnosticPipeline:
                 "gaps": noo.get("gaps", [])[:10],
                 "summary": {k: v for k, v in noo.items()
                             if isinstance(v, (int, float, str))},
+                "measurement": dict(measurement),
             }
             # Inclui ecosystem_layers se presente (SPEC-022)
             if "ecosystem_layers" in noo:

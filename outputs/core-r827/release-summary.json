@@ -1,0 +1,40 @@
+{
+  "round": "R827",
+  "status": "complete",
+  "recorded_at_utc": "2026-10-12T09:52:25.066910+00:00",
+  "source_frozen": true,
+  "source_hashes": {
+    "integrations/ecosystem_mcp.py": "c0059d7c68214d6e44c6604036d781e0189fdf6cf37cab39d810e517061c75be",
+    "tests/test_r827_remaining_mcp_cancellation.py": "d8195a6934b13a0afb375b4b34fbc70bb56bde943a9c90c5bd3e7b8ff1c59ea8",
+    "specs/SPEC-935-R827-cancelamento-rotas-conhecimento.md": "67341fb55a8e1aa4dd1e9239a198c79f48d0813c8a5438eb4b39a4ec7403ac09"
+  },
+  "red": {
+    "tests": 14,
+    "failures": 14,
+    "errors": 0,
+    "skipped": 0
+  },
+  "green": {
+    "tests": 64,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "broad": {
+    "tests": 155,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "r827_cases": 14,
+  "public_routes": 7,
+  "preexisting_evidence": "outputs/core-r827/preexisting-queue-cancellation-evidence.json",
+  "network_calls": 0,
+  "model_calls": 0,
+  "externally_validated": false,
+  "limitations": [
+    "Os testes isolam a fila/transporte com validadores e workers de fixture; não são inferência externa.",
+    "Providers não cooperativos já iniciados são acompanhados até seu próprio prazo/conclusão; nenhuma interrupção forçada de threads é afirmada.",
+    "Cancelamento não desfaz efeitos já iniciados."
+  ]
+}

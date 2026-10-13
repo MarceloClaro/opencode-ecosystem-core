@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""gen_mod14_ativacao.py — injeta em cada módulo do manual um bloco
+r"""gen_mod14_ativacao.py — injeta em cada módulo do manual um bloco
 'Ativação e cálculo' (R613) com: gatilho, rota, função, cálculo, justificativa
 teórica, citação \citref (recorte original + tradução + página) e limitação.
 
@@ -190,7 +190,7 @@ MODULES = [
         "Gatilho: \\pth{/agents}, inventário, registro de card.",
         "Rota: \\pth{agents/catalog/*.md}; gate R608 (frontmatter tolerante, descrição não vazia).",
         "Função: inventariar 212+ cards com capacidades declaradas e proveniência.",
-        "Cálculo: parseabilidade = 212/212 cards com YAML válido; taxa de cards com descrição = 100\% após R608/R609.",
+        "Cálculo: parseabilidade = 212/212 cards com YAML válido; taxa de cards com descrição = 100\\% após R608/R609.",
         "Justificativa: um card só é ativável se descreve capacidades enxergáveis — a proveniência dos cards é o mesmo princípio FAIR aplicado a agentes.",
         "Limite: card parseável não implica desempenho; implica participação no casamento de capacidades.",
         "Wilkinson, M. D.; Dumontier, M.; Aalbersberg, I. J. et al. (2016). The FAIR Guiding Principles for scientific data management and stewardship. \\emph{Scientific Data}, 3, 160018.",
@@ -235,6 +235,10 @@ def render(entry) -> str:
      citacao, doi, pagina, just_cit, trecho, traducao) = entry
     label = file.removesuffix(".tex")[len("mod-"):len("mod-") + 4].replace("-", "") or "xx"
     label = "ativ-" + label
+    # O sexto argumento é o localizador exibido junto da tradução, conforme
+    # a assinatura real de \citref em macros.tex (não a antiga forma de 5 campos).
+    author_year = citacao.split(").", 1)[0].replace("(", ", ").strip()
+    locator = f"{author_year}, {pagina}"
     # Campos já chegam prontos para LaTeX (\\pth, \\emph, $...$, \\textrightarrow);
     # nenhum escape adicional é aplicado para preservar as macros intencionais.
     return f"""% ============================================================
@@ -271,7 +275,7 @@ localização da fonte (R110), não o mérito da afirmação.
 A citação que segue conecta a ativação e o cálculo deste módulo à literatura
 verificada na biblioteca do Módulo 11:
 
-\\citref{{{citacao}}}{{{doi}}}{{{pagina}. {just_cit}}}{{{trecho}}}{{{traducao}}}
+\\citref{{{citacao}}}{{{doi}}}{{{pagina}. {just_cit}}}{{{trecho}}}{{{traducao}}}{{{locator}}}
 """
 
 
@@ -284,8 +288,36 @@ def main() -> None:
             print(f"!! arquivo ausente: {fname}")
             continue
         text = path.read_text(encoding="utf-8")
+        if fname == "mod-10-catalogo.tex" and "ARQUIVO GERADO" in text:
+            # gen_mod10 é a fonte autoritativa de TODO o módulo: injetar um
+            # apêndice aqui quebraria a reprodução determinística do catálogo.
+            print(f"== catálogo mantido pelo gerador autoritativo: {fname}")
+            continue
+        section = r"\section[Ativação e cálculo]"
+        retired = "% SECAO-REVISADA-R814"
+        if retired in text:
+            print(f"== seção editorial preservada: {fname}")
+            continue
         if MARKER in text:
+            if section not in text:
+                # A revisão pode substituir a seção histórica inteira. Seu
+                # marcador deixa de anunciar a seção canônica ausente, mas
+                # permanece um controle explícito contra reintroduzi-la.
+                remainder = text.split(MARKER, 1)[1]
+                if r"\section" not in remainder:
+                    raise ValueError(f"Marcador sem seção editorial: {fname}")
+                path.write_text(text.replace(MARKER, retired, 1), encoding="utf-8")
+                changed.append(fname)
+                continue
             print(f"== já processado: {fname}")
+            continue
+        if section in text:
+            # R814: a redação curada não volta ao template histórico R613.
+            # Recupera-se apenas o controle de geração que impede duplicação.
+            reviewed = (MARKER + "\n% R814: seção existente preservada; "
+                        "marcador de controle reconciliado.\n" + section)
+            path.write_text(text.replace(section, reviewed, 1), encoding="utf-8")
+            changed.append(fname)
             continue
         block = render(entry)
         new = text.rstrip() + "\n\n" + block

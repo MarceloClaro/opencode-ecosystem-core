@@ -92,8 +92,8 @@ Manuscrito Final Coeso (500 laudas)
 # Verificar servidor LiteRT-LM
 curl http://localhost:9379/health
 
-# Verificar ambiente
-python3 -m nano_orchestration.orchestrator --help
+# Conferir a decomposição local de doze páginas, sem servidor nem modelo
+python3 -c "import json; from nano_orchestration.planner import NanoPlanner; print(json.dumps(NanoPlanner().estimate_from_pages(12)))"
 ```
 
 ### Configuração do Pool

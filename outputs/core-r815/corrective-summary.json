@@ -1,0 +1,117 @@
+{
+  "timestamp_utc": "2026-10-11T10:45:23.083945+00:00",
+  "red": {
+    "corrective_cases_failed": 10,
+    "sdk_no_echo_failed": 2
+  },
+  "reports": {
+    "corrective-regression.xml": {
+      "cases": 199,
+      "failed": 0,
+      "skipped": 0
+    },
+    "corrective-green-final.xml": {
+      "cases": 67,
+      "failed": 0,
+      "skipped": 0
+    },
+    "corrective-mcp-regression-final.xml": {
+      "cases": 81,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "distinct_cases": 201,
+  "broad_regression_timing_note": "199-case broad run began before the SDK decorator change; final 67 scanner cases and81 MCP contracts ran after it.",
+  "comparison": {
+    "controlled_texts": 400,
+    "unexpected_report_differences": 0,
+    "EN_PT_S4_reports_equal": true,
+    "EN_PT_S4_hashes_preserved": true
+  },
+  "performance_28800_chars_seconds": 0.06779940996784717,
+  "max_scientific_mcp_text_characters": 1000000,
+  "real_mcp": {
+    "initialize_and_tools_list_passed": true,
+    "two_scientific_tools_negation_and_excess_passed": true,
+    "excess_response_characters": 114,
+    "evidence": "outputs/core-r815/corrective-mcp-stdio-evidence.json"
+  },
+  "mutations": {
+    "source_unchanged": true,
+    "mutants": [
+      {
+        "name": "reintroduce-unbounded-prefix",
+        "module": "scanners.scientific_reasoning_scanner",
+        "selector": "repeated_28800",
+        "returncode": 0,
+        "killed": false,
+        "elapsed_seconds": 2.089510277961381,
+        "source_sha256": "4ff93b81d7dadfc985302900a7cfd5d33ddf5efe16a991e5f5178b9ebb58de98",
+        "mutant_sha256": "98c28f494221ca4c113f8629fa3e2f6d65a061cccefcdb51cbfebecff1ce47da",
+        "log": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r815/corrective-mutation-reintroduce-unbounded-prefix.txt",
+        "scope": "isolated process in-memory source mutation"
+      },
+      {
+        "name": "remove-coordinated-negation",
+        "module": "scanners.scientific_reasoning_scanner",
+        "selector": "coordinated_negation_is_recorded",
+        "returncode": 1,
+        "killed": true,
+        "elapsed_seconds": 0.7957778630079702,
+        "source_sha256": "4ff93b81d7dadfc985302900a7cfd5d33ddf5efe16a991e5f5178b9ebb58de98",
+        "mutant_sha256": "c8e3de3b323f97fdc9a7c9fbb966f8e633cbb5d287beed3e93a8744a7240d217",
+        "log": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r815/corrective-mutation-remove-coordinated-negation.txt",
+        "scope": "isolated process in-memory source mutation"
+      },
+      {
+        "name": "remove-mcp-input-limit",
+        "module": "scanners.scanners_mcp_server",
+        "selector": "oversized_scientific_text",
+        "returncode": 1,
+        "killed": true,
+        "elapsed_seconds": 1.5943254849407822,
+        "source_sha256": "e15304b4f1ba0d494705e1e9d64b26566536e93151a88dd33a27275501e59427",
+        "mutant_sha256": "480222ad8ec100bd4d81e75323fab167adb59bf5595eb90c5b5edd0919c6d149",
+        "log": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r815/corrective-mutation-remove-mcp-input-limit.txt",
+        "scope": "isolated process in-memory source mutation"
+      },
+      {
+        "name": "restore-sdk-input-echo",
+        "module": "scanners.scanners_mcp_server",
+        "selector": "registered_mcp_handler",
+        "returncode": 1,
+        "killed": true,
+        "elapsed_seconds": 1.556975646992214,
+        "source_sha256": "e15304b4f1ba0d494705e1e9d64b26566536e93151a88dd33a27275501e59427",
+        "mutant_sha256": "8f947080b90ae893bf02035b1b27ae53d0f9a5388bf388993ba8ea673ea80e7b",
+        "log": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r815/corrective-mutation-restore-sdk-input-echo.txt",
+        "scope": "isolated process in-memory source mutation"
+      },
+      {
+        "name": "reintroduce-full-prefix-clause-scan",
+        "module": "scanners.scientific_reasoning_scanner",
+        "selector": "repeated_28800",
+        "returncode": 1,
+        "killed": true,
+        "elapsed_seconds": 3.7166316310176626,
+        "source_sha256": "4ff93b81d7dadfc985302900a7cfd5d33ddf5efe16a991e5f5178b9ebb58de98",
+        "mutant_sha256": "ea0758a598fea883b2c8716d9562e47d12aaec3d04ed710cc235eba595aa3ebc",
+        "log": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r815/corrective-mutation-reintroduce-full-prefix-clause-scan.txt",
+        "scope": "isolated process in-memory source mutation"
+      }
+    ],
+    "externally_validated": false,
+    "interpretation": "A weaker full-prefix token-only mutant survives the 2s deadline; original-style clause+prefix scan is detected. This timing guard does not prove asymptotic complexity of arbitrary variants."
+  },
+  "sha256": {
+    "scanners/scientific_reasoning_scanner.py": "4ff93b81d7dadfc985302900a7cfd5d33ddf5efe16a991e5f5178b9ebb58de98",
+    "scanners/scanners_mcp_server.py": "e15304b4f1ba0d494705e1e9d64b26566536e93151a88dd33a27275501e59427",
+    "tests/test_r815_scientific_lexical_screening.py": "53e691f317351108668edbc329361247a92afb455835b1a43f12cb4943d7d9ad",
+    "docs/SCIENTIFIC_REASONING_SCANNER.md": "19acc409a1d35b11f44a71a664585765951ce693e805150f49ea2a2aef7fbb2f",
+    "specs/SPEC-935-R815-scanner-lexical-bilingue.md": "bb07d223602ba0fddb25265efd5fc4f6975fdcdd5b681e99f52596dac529c5e1"
+  },
+  "externally_validated": false,
+  "index_modified": false,
+  "evolution_written_by_agent": false
+}

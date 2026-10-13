@@ -111,7 +111,7 @@ especializados; inbound/outbound para integração externa.
 AMBIENTE MÍNIMO E COMANDOS PRINCIPAIS. Python 3.10+; pdflatex com `macros.tex`;
 dependências de testes em `tests/`. Comandos principais:
 \cod{python3 -m marceloclaro.cli doctor} (saúde), \cod{pytest tests/} (gate),
-\cod{python3 gen\_mod10.py} (regenera o catálogo do livro),
+\cod{python3 gen_mod10.py} (regenera o catálogo do livro),
 \cod{python3 check.py} (sanidade do manual).
 \end{processo}
 
@@ -163,11 +163,15 @@ propósitos'').
 \end{metodo}
 
 \begin{resultado}
-RESULTADO E CÁLCULO. Taxa de registração é a fração de cards parseáveis sobre
-cards existentes no catálogo. Medição de 2026-09-29 (ciclo R608—R609):
+\textbf{Retrato histórico de 2026-09-29 (ciclo R608—R609).}
+Taxa de registração é a fração de cards parseáveis sobre
+cards existentes no catálogo naquela medição:
 antes 201/212 (94\%), após reparo das descrições 212/212 (100\%) com nome,
 descrição e capacidades não vazios; regressão \cod{test_r608*} e
 \cod{test_r212_attention_blackboard.py}: 25 testes verdes.
+Esses denominadores pertencem ao registro histórico; a configuração corrente
+declara \CoreAgentCount{} agentes. A medição histórica não foi reexecutada
+para esse inventário e não demonstra sua taxa atual de registro.
 \end{resultado}
 
 \begin{limite}
@@ -456,7 +460,7 @@ $\rightarrow$ \cod{gen_mod10.py} $\rightarrow$ `mod-10-catalogo.tex` $\rightarro
 \begin{processo}
 AMBIENTE MÍNIMO E COMANDOS PRINCIPAIS. Ambiente: Python 3.10+, TeX Live com
 `tcolorbox`, `tabularx`, `pdflatex` T1. Comandos principais:
-\cod{python3 gen\_mod10.py} (regenera catálogo), \cod{python3 check.py} (guarda),
+\cod{python3 gen_mod10.py} (regenera catálogo), \cod{python3 check.py} (guarda),
 \cod{latexmk -pdf main.tex} (compila), \cod{pdftotext main.pdf -} (audita marcos).
 Perfis otimizados: editores de conteúdo (curadoria manual nos mod-12),
 editores de catálogo (dados), QA de build (guards tipográficos).

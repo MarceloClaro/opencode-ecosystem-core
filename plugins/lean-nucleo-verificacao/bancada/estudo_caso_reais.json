@@ -1,0 +1,134 @@
+{
+  "n_agentes": 11,
+  "tarefas": [
+    {
+      "descricao": "Refatorar modulo Python com testes primeiro",
+      "requeridas": [
+        "python",
+        "refactor"
+      ],
+      "elegiveis": [
+        "coder"
+      ],
+      "excluidos": 10,
+      "ranking": [
+        [
+          "coder",
+          1.0
+        ]
+      ],
+      "soma_pesos": 1.0,
+      "lat_ms": 27.79,
+      "cabecas_top1": {
+        "semantic": 0.6758,
+        "capability": 1.0,
+        "confidence": 0.5,
+        "load": 1.0
+      }
+    },
+    {
+      "descricao": "Revisar codigo buscando falhas de seguranca",
+      "requeridas": [
+        "revisa",
+        "seguranca"
+      ],
+      "elegiveis": [
+        "code-reviewer"
+      ],
+      "excluidos": 10,
+      "ranking": [
+        [
+          "code-reviewer",
+          1.0
+        ]
+      ],
+      "soma_pesos": 1.0,
+      "lat_ms": 0.41,
+      "cabecas_top1": {
+        "semantic": 0.6741,
+        "capability": 1.0,
+        "confidence": 0.5,
+        "load": 1.0
+      }
+    },
+    {
+      "descricao": "Comparar revisores para tarefa de revisao",
+      "requeridas": [
+        "reviewer"
+      ],
+      "elegiveis": [
+        "reviewer",
+        "code-reviewer"
+      ],
+      "excluidos": 9,
+      "ranking": [
+        [
+          "reviewer",
+          0.505
+        ],
+        [
+          "code-reviewer",
+          0.495
+        ]
+      ],
+      "soma_pesos": 1.0,
+      "lat_ms": 0.41,
+      "cabecas_top1": {
+        "semantic": 0.5589,
+        "capability": 1.0,
+        "confidence": 0.5,
+        "load": 1.0
+      }
+    },
+    {
+      "descricao": "Auditar metricas de integracao continua",
+      "requeridas": [
+        "audit",
+        "metrics"
+      ],
+      "elegiveis": [
+        "auditor"
+      ],
+      "excluidos": 10,
+      "ranking": [
+        [
+          "auditor",
+          1.0
+        ]
+      ],
+      "soma_pesos": 1.0,
+      "lat_ms": 0.45,
+      "cabecas_top1": {
+        "semantic": 0.7491,
+        "capability": 1.0,
+        "confidence": 0.5,
+        "load": 1.0
+      }
+    },
+    {
+      "descricao": "Escrever documentacao de projeto",
+      "requeridas": [
+        "docs",
+        "escreve"
+      ],
+      "elegiveis": [
+        "docs-writer"
+      ],
+      "excluidos": 10,
+      "ranking": [
+        [
+          "docs-writer",
+          1.0
+        ]
+      ],
+      "soma_pesos": 1.0,
+      "lat_ms": 0.37,
+      "cabecas_top1": {
+        "semantic": 0.7833,
+        "capability": 1.0,
+        "confidence": 0.5,
+        "load": 1.0
+      }
+    }
+  ]
+}

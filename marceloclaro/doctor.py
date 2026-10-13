@@ -38,6 +38,8 @@ except ImportError:
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+from integrations.runai import INSTALLATION_HINT as RUNAI_INSTALLATION_HINT
+
 # CLIs externas de primeira classe do ecossistema (SPEC-935-R116) e a
 # sugestão de instalação exata para cada uma quando ausente.
 EXTERNAL_CLIS = {
@@ -46,7 +48,7 @@ EXTERNAL_CLIS = {
     "claude": "npm install -g @anthropic-ai/claude-code",
     "ollama": "curl -fsSL https://ollama.com/install.sh | sh",
     "scihub-cli": "pip install scihub-cli",
-    "runai": "curl -fsSL https://canirun.ai/runai/install.sh | bash",
+    "runai": RUNAI_INSTALLATION_HINT,
     # SPEC-935-R473/M7: executor alternativo multi-provedor (tig) — integração
     # por invocação externa; upstream sem licença declarada (uso local do operador).
     "tig": "pip install tig-code",
@@ -109,6 +111,10 @@ def _check_formal_specs() -> DoctorCheck:
         from sdd.spec_engine import SpecRegistry
         registry = SpecRegistry()
         count = registry.load_formal_specs()
+        ambiguous = registry.ambiguous_spec_sources
+        if ambiguous:
+            identities = ", ".join(sorted(ambiguous))
+            return DoctorCheck("specs_formais", "fail", f"Identidades de especificação ambíguas: {identities}.")
         if count == 0:
             return DoctorCheck("specs_formais", "fail", "Nenhuma especificação formal carregada de specs/*.md.")
         return DoctorCheck("specs_formais", "pass", f"{count} especificações formais carregadas.")
@@ -218,10 +224,12 @@ def _check_opencode_config() -> DoctorCheck:
         with open(path, "r", encoding="utf-8") as f:
             config = json.load(f)
         agents = config.get("agent", {})
-        if "marceloclaro" not in agents:
+        primary = agents.get("marceloclaro", {})
+        if (primary.get("mode") != "primary"
+                or config.get("default_agent") != "marceloclaro"):
             return DoctorCheck(
-                "opencode_config", "warn",
-                "opencode.json existe mas não define o agente 'marceloclaro' como primary.",
+                "opencode_config", "fail",
+                "opencode.json precisa definir marceloclaro como primary e default_agent.",
             )
         return DoctorCheck("opencode_config", "pass", f"opencode.json válido com {len(agents)} agente(s) configurado(s).")
     except Exception as exc:
@@ -261,6 +269,12 @@ def _resolve_external_cli(name: str) -> Optional[str]:
         # Um override inválido permanece explícito; não substituir a escolha.
         return found
     candidate = Path(sys.executable).parent / (f"{name}.exe" if os.name == "nt" else name)
+    if runtime._is_executable(candidate):
+        return str(candidate)
+    # A instalação do projeto permanece disponível quando doctor é iniciado
+    # pelo Python do sistema, sem depender de ativação prévia da venv.
+    project_bin = Path(REPO_ROOT) / ".venv" / ("Scripts" if os.name == "nt" else "bin")
+    candidate = project_bin / (f"{name}.exe" if os.name == "nt" else name)
     return str(candidate) if runtime._is_executable(candidate) else None
 
 
@@ -296,7 +310,7 @@ def _npm_global_version(bin_name: str, package: str) -> Optional[str]:
     return None
 
 
-def _check_external_clis() -> DoctorCheck:
+def _check_external_clis(*, live: bool = False) -> DoctorCheck:
     """Verifica se as CLIs externas de primeira classe (OpenCode, Antigravity,
     Claude Code, Ollama, GitHub Copilot, etc.) têm instalação executável no
     PATH, em pastas do usuário ou na venv do Python atual. São
@@ -327,6 +341,8 @@ def _check_external_clis() -> DoctorCheck:
             continue
         if _resolve_external_cli(name) is None:
             missing[name] = cmd
+            continue
+        if not live:
             continue
         # SPEC-935-R598/R599: para integrações com runner próprio, enriquecer
         # o detail com a versão semântica detectada (sedas instaladas).
@@ -372,20 +388,83 @@ def _check_external_clis() -> DoctorCheck:
 
 
 def _ollama_available() -> bool:
-    """Indica se um servidor Ollama local está acessível (best-effort)."""
-    if shutil.which("ollama") is not None:
-        return True
-    host = os.environ.get("OLLAMA_HOST", "http://localhost:11434").rstrip("/")
+    """Inventaria a CLI local; instalação não demonstra prontidão do daemon."""
+    return _resolve_external_cli("ollama") is not None
+
+
+def _ollama_live_probe() -> Dict[str, Any]:
+    """GET local limitado: catálogo HTTP não comprova inferência do modelo."""
+    import urllib.error
+    import urllib.request
+    from urllib.parse import urlsplit
+
+    report = {"available": False, "models_count": 0,
+              "verification": "http_model_catalog_only", "inference_verified": False,
+              "error": None}
+    host = os.environ.get("OLLAMA_HOST", "http://127.0.0.1:11434").rstrip("/")
     try:
-        import urllib.request
-        with urllib.request.urlopen(f"{host}/api/tags", timeout=0.5) as resp:
-            return resp.status == 200
-    except Exception:
-        return False
+        parsed = urlsplit(host)
+        port = parsed.port  # Porta malformada deve ser recusada antes da conexão.
+        valid = (parsed.scheme in {"http", "https"}
+                 and parsed.hostname in {"127.0.0.1", "::1", "localhost"}
+                 and parsed.username is None and parsed.password is None
+                 and not parsed.query and not parsed.fragment and not parsed.path
+                 and (port is None or 0 < port <= 65535))
+    except (ValueError, TypeError):
+        valid = False
+    if not valid:
+        return {**report, "error": "invalid_endpoint"}
+
+    class NoRedirect(urllib.request.HTTPRedirectHandler):
+        def redirect_request(self, request, response, code, message, headers, new_url):
+            return None
+
+    # Proxies e redirects poderiam retirar a sonda do endpoint local solicitado.
+    opener = urllib.request.build_opener(urllib.request.ProxyHandler({}), NoRedirect())
+    limit = 128 * 1024
+    deadline = time.monotonic() + 0.5
+    try:
+        request = urllib.request.Request(f"{host}/api/tags", method="GET")
+        with opener.open(request, timeout=0.5) as response:
+            if response.status != 200:
+                return {**report, "error": "http_error"}
+            body = bytearray()
+            while len(body) <= limit:
+                if time.monotonic() >= deadline:
+                    raise TimeoutError()
+                chunk = response.read1(min(64 * 1024, limit + 1 - len(body)))
+                if not chunk:
+                    break
+                body.extend(chunk)
+            if len(body) > limit:
+                return {**report, "error": "response_too_large"}
+        payload = json.loads(body)
+        models = payload.get("models") if isinstance(payload, dict) else None
+        if not isinstance(models, list) or any(
+                not isinstance(model, dict) or not isinstance(model.get("name"), str)
+                or not model["name"].strip() for model in models):
+            return {**report, "error": "invalid_catalog"}
+        if not models:
+            return {**report, "error": "no_models"}
+        return {**report, "available": True, "models_count": len(models)}
+    except urllib.error.HTTPError:
+        return {**report, "error": "http_error"}
+    except (TimeoutError, urllib.error.URLError) as exc:
+        timed_out = isinstance(exc, TimeoutError) or isinstance(getattr(exc, "reason", None), TimeoutError)
+        return {**report, "error": "timeout" if timed_out else "connection_error"}
+    except (ValueError, UnicodeError):
+        return {**report, "error": "invalid_catalog"}
+    except OSError:
+        return {**report, "error": "connection_error"}
 
 
-def _check_llm_providers() -> DoctorCheck:
-    """Reporta quais provedores LLM estão disponíveis para o enriquecimento
+def _ollama_live_available() -> bool:
+    """Compatibilidade booleana, sem confundir instalação com prontidão HTTP."""
+    return _ollama_live_probe()["available"] is True
+
+
+def _check_llm_providers(*, live: bool = False) -> DoctorCheck:
+    """Reporta quais provedores LLM estão configurados para o enriquecimento
     opcional do pipeline de pesquisa (fichamento/resenha).
 
     SEGURANÇA (SPEC-935-R128): este check jamais expõe o valor de qualquer
@@ -394,7 +473,8 @@ def _check_llm_providers() -> DoctorCheck:
     é ``pass`` se há ao menos um provedor e ``warn`` (nunca ``fail``) se
     nenhum. A ordem de preferência é Ollama local (custo zero, privado) →
     OpenAI/compatível (nuvem, custa tokens)."""
-    ollama = _ollama_available()
+    local_probe = _ollama_live_probe() if live else None
+    ollama = local_probe["available"] if live else _ollama_available()
     openai_key_set = bool(os.environ.get("OPENAI_API_KEY"))
     # SPEC-935-R478/M3: provedor PAIR (Personal-AI-Router) — opt-in via ambiente;
     # reporta apenas definido/ausente, jamais host/porta/credencial (R128).
@@ -407,7 +487,10 @@ def _check_llm_providers() -> DoctorCheck:
 
     disponiveis = []
     if ollama:
-        disponiveis.append("Ollama local")
+        disponiveis.append(
+            f"Ollama local (prontidão HTTP/modelos: {local_probe['models_count']})"
+            if live else "Ollama local"
+        )
     if openai_key_set:
         # apenas o indicador — NUNCA o valor da chave
         disponiveis.append("OpenAI (OPENAI_API_KEY definida)")
@@ -417,27 +500,38 @@ def _check_llm_providers() -> DoctorCheck:
     if disponiveis:
         return DoctorCheck(
             "llm_providers", "pass",
-            "Provedor(es) LLM disponível(is): " + "; ".join(disponiveis)
-            + ". Preferência: local → PAIR → Ollama → OpenAI.",
+            "Provedor(es) LLM configurado(s): " + "; ".join(disponiveis)
+            + ". Configuração ou catálogo HTTP não comprova inferência nem autenticação.",
         )
-    return DoctorCheck(
-        "llm_providers", "warn",
+    unavailable_detail = (
         "Nenhum provedor LLM disponível — enriquecimento por LLM desativado "
-        "(o pipeline de pesquisa segue funcionando sem ele). Para habilitar: "
+        + (f"(sonda local: {local_probe['error']}). " if live else "")
+        + "(o pipeline de pesquisa segue funcionando sem ele). Para habilitar: "
         "rode o Ollama local, defina PAIR_BASE_URL/PAIR_ENDPOINTS (roteador "
         "PAIR da LAN), ou defina OPENAI_API_KEY no seu .env "
-        "(ver .env.example).",
+        "(ver .env.example)."
+    )
+    return DoctorCheck(
+        "llm_providers", "warn",
+        unavailable_detail,
     )
 
 
-def _check_litert_lm() -> DoctorCheck:
-    """Projeta o estado do supervisor sem confundi-lo com uma inferência.
+def _check_litert_lm(*, live: bool = False) -> DoctorCheck:
+    """Inventaria a CLI e, no modo live, consulta o supervisor sem inferência.
 
     O endpoint ``/v1/models`` demonstra apenas readiness do daemon HTTP. Uma
     indisponibilidade local degrada recursos on-device, mas não invalida o core
     Python nem autoriza ecoar detalhes potencialmente sensíveis de exceções.
     """
     try:
+        if not live:
+            installed = _resolve_external_cli("litert-lm") is not None
+            return DoctorCheck(
+                "litert_lm", "pass" if installed else "warn",
+                "LiteRT-LM instalado; prontidão HTTP e inferência pendentes de sondagem explícita."
+                if installed else "LiteRT-LM ausente do inventário de executáveis locais.",
+            )
         # Import local mantém o doctor carregável em instalações mínimas e deixa
         # o ponto de integração substituível por doubles nos testes.
         try:
@@ -475,8 +569,8 @@ def _check_litert_lm() -> DoctorCheck:
         )
 
 
-def _check_colibri() -> DoctorCheck:
-    """Verifica se os runtimes Colibri (GLM-5.2 e/ou OLMoE) estão disponíveis.
+def _check_colibri(*, live: bool = False) -> DoctorCheck:
+    """Inventaria Colibri/OLMoE e consulta ``coli info`` apenas no modo live.
 
     Colibri é um motor de inferência em C puro que executa modelos MoE
     localmente: GLM-5.2 (744B) via ``./coli serve``, OLMoE (1B-7B) via
@@ -489,15 +583,18 @@ def _check_colibri() -> DoctorCheck:
 
         parts = []
         if bridge.olmoe_available:
-            parts.append(f"OLMoE OK (bin={bridge.olmoe_bin}, snap={bridge.olmoe_snap})")
+            parts.append(f"OLMoE instalado (bin={bridge.olmoe_bin}, snap={bridge.olmoe_snap})")
 
         if bridge.available:
-            info = bridge.get_info()
-            status = info.get("status", "error")
-            if status == "ok":
-                parts.append(f"GLM-5.2 OK (bin={bridge.coli_bin})")
+            if not live:
+                parts.append(f"CLI Colibri instalada (bin={bridge.coli_bin}); modelo e prontidão pendentes")
             else:
-                parts.append(f"GLM-5.2 encontrado mas status={status}")
+                info = bridge.get_info()
+                status = info.get("status", "error")
+                if status == "ok":
+                    parts.append(f"Colibri respondeu a info (bin={bridge.coli_bin}); inferência não consultada")
+                else:
+                    parts.append(f"Colibri encontrado mas status={status}")
 
         if parts:
             return DoctorCheck("colibri", "pass", " | ".join(parts))
@@ -513,7 +610,7 @@ def _check_colibri() -> DoctorCheck:
                            "unavailable: não foi possível consultar o runtime Colibri.")
 
 
-def _check_runai() -> DoctorCheck:
+def _check_runai(*, live: bool = False) -> DoctorCheck:
     """Verifica se o provisionador local runai está disponível.
 
     runai não é um provider HTTP do core; é um launcher/provisionador opcional
@@ -523,17 +620,27 @@ def _check_runai() -> DoctorCheck:
         from integrations.runai import runai_provisioner
 
         if not runai_provisioner.is_available():
+            if not live:
+                return DoctorCheck(
+                    "runai", "warn",
+                    "runai ausente do inventário local; instalador remoto não consultado.",
+                )
             diagnosis = runai_provisioner.installer_diagnosis()
             if diagnosis.get("status_code") == 404:
                 return DoctorCheck(
                     "runai", "warn",
                     "runai ausente e o pacote npm documentado pelo instalador respondeu 404; "
                     "há inconsistência upstream em https://canirun.ai/runai/install.sh / @canirun/runai. "
-                    "Workaround suportado: clone https://github.com/midudev/canirun.ai e defina RUNAI_SOURCE_DIR para o checkout.",
+                    + RUNAI_INSTALLATION_HINT,
                 )
             return DoctorCheck(
                 "runai", "warn",
-                "runai ausente. Instale com: curl -fsSL https://canirun.ai/runai/install.sh | bash",
+                "runai ausente. " + RUNAI_INSTALLATION_HINT,
+            )
+        if not live:
+            return DoctorCheck(
+                "runai", "pass",
+                f"runai instalado (modo={runai_provisioner.runtime_mode()}); prontidão e inferência pendentes de sondagem explícita.",
             )
         info = runai_provisioner.provider_info()
         health = runai_provisioner.health_check()
@@ -660,8 +767,8 @@ def _check_deepmind_superhuman_reasoning() -> DoctorCheck:
         return DoctorCheck("deepmind_superhuman_reasoning", "warn", f"DeepMind reasoning indisponível: {exc}")
 
 
-def _check_opencode_deepthink_alphaproof() -> DoctorCheck:
-    """Verifica se os motores OpenCode AlphaProof, Deep Think e Erdős/Hirzebruch Solver estão íntegros (R443)."""
+def _check_opencode_deepthink_alphaproof(*, live: bool = False) -> DoctorCheck:
+    """Inventaria os componentes R443 e executa exemplos apenas no modo live."""
     try:
         from integrations.deepmind import (
             OpenCodeAlphaProof,
@@ -674,6 +781,12 @@ def _check_opencode_deepthink_alphaproof() -> DoctorCheck:
         ErdosSeriesAnalyzer()
         hirz = HirzebruchEigenweightCalculator()
 
+        if not live:
+            return DoctorCheck(
+                "opencode_deepthink_alphaproof", "pass",
+                "Componentes inspirados em AlphaProof/Deep Think e Erdős/Hirzebruch importáveis; provas e exemplos operacionais pendentes.",
+            )
+
         # Prova rápida de integridade
         quick_search = prover.search_proof("x**2 - y**2 = (x - y)*(x + y)", max_depth=1)
         hirz_res = hirz.compute_eigenweights(dim=2, rank=1)
@@ -685,12 +798,19 @@ def _check_opencode_deepthink_alphaproof() -> DoctorCheck:
         return DoctorCheck("opencode_deepthink_alphaproof", "warn", f"OpenCode AlphaProof/DeepThink indisponível: {exc}")
 
 
-def _check_lean4_egraph_engine() -> DoctorCheck:
-    """Verifica se a ponte Lean 4 e o motor de saturação de igualdade E-Graph estão operacionais (R444)."""
+def _check_lean4_egraph_engine(*, live: bool = False) -> DoctorCheck:
+    """Inventaria Lean/E-Graph e sonda prova e saturação apenas no modo live."""
     try:
         from integrations.deepmind import Lean4ProofVerifier, EqualitySaturationEngine
         lean_verifier = Lean4ProofVerifier()
         egraph_engine = EqualitySaturationEngine()
+
+        if not live:
+            compiler = "compilador instalado" if lean_verifier.has_compiler else "compilador ausente"
+            return DoctorCheck(
+                "lean4_egraph_engine", "pass",
+                f"Lean 4 & E-Graph ativos no inventário de componentes: {compiler}; prova e saturação pendentes de sondagem explícita.",
+            )
 
         # Teste rápido Lean 4
         sample_code = lean_verifier.format_theorem("sample_th", "x + 0 = x", ["intro x", "ring"])
@@ -708,12 +828,18 @@ def _check_lean4_egraph_engine() -> DoctorCheck:
         return DoctorCheck("lean4_egraph_engine", "warn", f"Lean 4 / E-Graph indisponível: {exc}")
 
 
-def _check_geometry_autoformalization_engine() -> DoctorCheck:
-    """Verifica se os motores AlphaGeometry e Auto-Formalizador Bidirecional estão operacionais (R445)."""
+def _check_geometry_autoformalization_engine(*, live: bool = False) -> DoctorCheck:
+    """Inventaria AlphaGeometry/autoformalizador e sonda exemplos no modo live."""
     try:
         from integrations.deepmind import OpenCodeAlphaGeometry, AutoFormalizerEngine
         geom = OpenCodeAlphaGeometry()
         autoform = AutoFormalizerEngine()
+
+        if not live:
+            return DoctorCheck(
+                "geometry_autoformalization_engine", "pass",
+                "Componentes AlphaGeometry (método de Wu) e autoformalizador importáveis; prova formal pendente de sondagem explícita.",
+            )
 
         # Teste rápido AlphaGeometry (Teorema da Base Média / Wu)
         geom_res = geom.solve("midpoint_theorem")
@@ -729,8 +855,8 @@ def _check_geometry_autoformalization_engine() -> DoctorCheck:
         return DoctorCheck("geometry_autoformalization_engine", "warn", f"AlphaGeometry / Auto-Formalizer indisponível: {exc}")
 
 
-def _check_clinical_game_theory_engine() -> DoctorCheck:
-    """Verifica se o motor de Decisão Clínica por Grafos, Teoria dos Jogos e Evidências Reais está operacional (R446)."""
+def _check_clinical_game_theory_engine(*, live: bool = False) -> DoctorCheck:
+    """Inventaria os componentes clínicos; no modo live, usa um caso sintético."""
     try:
         from integrations.medical import (
             ClinicalInvestigationPipeline,
@@ -740,6 +866,12 @@ def _check_clinical_game_theory_engine() -> DoctorCheck:
         pipeline = ClinicalInvestigationPipeline()
         ev_lib = ClinicalEvidenceLibrary()
         verifier = ClinicalSafetyVerifier()
+
+        if not live:
+            return DoctorCheck(
+                "clinical_game_theory_engine", "pass",
+                f"Componentes clínicos importáveis; {len(ev_lib.evidence_database)} diretrizes declaradas; cenários e validação clínica pendentes.",
+            )
 
         # Teste rápido
         test_case = {
@@ -758,13 +890,43 @@ def _check_clinical_game_theory_engine() -> DoctorCheck:
         return DoctorCheck("clinical_game_theory_engine", "warn", f"Motor clínico indisponível: {exc}")
 
 
-def run_doctor() -> Dict[str, Any]:
-    """Executa todos os checks estruturais e agrega o resultado.
+def _check_rea(*, live: bool = False) -> DoctorCheck:
+    """Verifica instalação REA sem iniciar servidor ou executar alvo (R808)."""
+    try:
+        from integrations.rea_bridge import ReaBridge
+        report = ReaBridge().status(include_commit=live)
+        version = report.get("provenance", {}).get("version", "desconhecida")
+        if report.get("success") is True:
+            return DoctorCheck("rea", "pass",
+                               f"REA {version} instalado; conexão MCP e providers exigem prova de execução separada.")
+        return DoctorCheck("rea", "warn", "REA indisponível; consulte docs/REA.md para instalação local.")
+    except Exception as exc:
+        return DoctorCheck("rea", "warn", f"Diagnóstico REA falhou: {exc}")
+
+
+def _check_browser() -> DoctorCheck:
+    """R824: inventário local sem iniciar browser, servidor ou sondagem HTTP."""
+    try:
+        from integrations.browser_bridge import BrowserBridge
+        report = BrowserBridge().status()
+        if report.get("available") is True:
+            version = report.get("provenance", {}).get("version", "desconhecida")
+            return DoctorCheck("browser", "pass",
+                f"Playwright MCP {version} e Chromium instalados; execução, sandbox e fechamento exigem prova separada.")
+        return DoctorCheck("browser", "warn", "Provider opcional de navegador indisponível; consulte docs/NAVEGADOR_REAL.md.")
+    except Exception as exc:
+        return DoctorCheck("browser", "warn", f"Inventário do navegador indisponível: {type(exc).__name__}.")
+
+
+def run_doctor(*, live: bool = False) -> Dict[str, Any]:
+    """Agrega checks estruturais, com sondagens operacionais opt-in via live.
 
     Ao contrário de scripts/quality_report.py (que roda a suíte pytest
     completa), este diagnóstico é estrutural e rápido — não substitui a
     suíte de testes, complementa-a.
     """
+    if not isinstance(live, bool):
+        raise ValueError("live deve ser booleano.")
     start = time.time()
     checks: List[DoctorCheck] = [
         _check_formal_specs(),
@@ -773,20 +935,22 @@ def run_doctor() -> Dict[str, Any]:
         _check_metacognitive_memory(),
         _check_opencode_config(),
         _check_corrigendum(),
-        _check_external_clis(),
-        _check_llm_providers(),
-        _check_litert_lm(),
-        _check_colibri(),
-        _check_runai(),
+        _check_external_clis(live=live),
+        _check_llm_providers(live=live),
+        _check_litert_lm(live=live),
+        _check_colibri(live=live),
+        _check_runai(live=live),
+        _check_rea(live=live),
+        _check_browser(),
         _check_llm_reduction_metrics(),
         _check_episteme_coverage(),
         _check_apm_integration(),
         _check_free_model_amplification(),
         _check_deepmind_superhuman_reasoning(),
-        _check_opencode_deepthink_alphaproof(),
-        _check_lean4_egraph_engine(),
-        _check_geometry_autoformalization_engine(),
-        _check_clinical_game_theory_engine(),
+        _check_opencode_deepthink_alphaproof(live=live),
+        _check_lean4_egraph_engine(live=live),
+        _check_geometry_autoformalization_engine(live=live),
+        _check_clinical_game_theory_engine(live=live),
     ]
 
     has_fail = any(c.status == "fail" for c in checks)
@@ -795,6 +959,8 @@ def run_doctor() -> Dict[str, Any]:
 
     return {
         "overall": overall,
+        "diagnostic_mode": "live" if live else "structural",
+        "verification": "runtime_probes" if live else "installation_only",
         "checks": [c.to_dict() for c in checks],
         "checks_total": len(checks),
         "checks_passed": sum(1 for c in checks if c.status == "pass"),

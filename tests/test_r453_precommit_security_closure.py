@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import importlib
+import hashlib
 import re
 import shlex
 import subprocess
@@ -25,15 +26,23 @@ tdd_runner_module = importlib.import_module("sdd.tdd_runner")
 
 
 ROOT = Path(__file__).resolve().parent.parent
-GOOGLE_API_KEY_PATTERN = re.compile("AI" + "za" + r"[0-9A-Za-z_-]{20,}")
+SECRET_TOKEN_LEFT_BOUNDARY = r"(?<![A-Za-z0-9_-])"
+GOOGLE_API_KEY_PATTERN = re.compile(SECRET_TOKEN_LEFT_BOUNDARY + "AI" + "za" + r"[0-9A-Za-z_-]{20,}")
 HIGH_CONFIDENCE_SECRET_PATTERNS = (
     GOOGLE_API_KEY_PATTERN,
-    re.compile(r"gh[pousr]_[A-Za-z0-9]{36,}"),
-    re.compile(r"glpat-[A-Za-z0-9_-]{20,}"),
-    re.compile(r"sk-ant-[A-Za-z0-9_-]{20,}"),
-    re.compile(r"sk-[A-Za-z0-9_-]{20,}"),
-    re.compile(r"AKIA[0-9A-Z]{16}"),
+    re.compile(SECRET_TOKEN_LEFT_BOUNDARY + r"gh[pousr]_[A-Za-z0-9]{36,}"),
+    re.compile(SECRET_TOKEN_LEFT_BOUNDARY + r"glpat-[A-Za-z0-9_-]{20,}"),
+    re.compile(SECRET_TOKEN_LEFT_BOUNDARY + r"sk-ant-[A-Za-z0-9_-]{20,}"),
+    re.compile(SECRET_TOKEN_LEFT_BOUNDARY + r"sk-[A-Za-z0-9_-]{20,}"),
+    re.compile(SECRET_TOKEN_LEFT_BOUNDARY + r"AKIA[0-9A-Z]{16}"),
 )
+# SPEC-935-R813: dois exemplos artificiais exatos documentados na auditoria
+# outputs/rea-r808/secret-pattern-audit.json. Não são exceções por caminho,
+# repetição ou entropia; qualquer alteração do literal volta a ser examinada.
+AUDITED_SYNTHETIC_EXAMPLE_SHA256 = {
+    "abe8cb5b23895869b16a1c56a221f138c62b041ad6d9da8b177375ec0c6c827f": "Exemplo Google artificial repetido em evidência de testes",
+    "a7c9ba235a1cb12abb1eb1cb042e842fcd9a16b2d421b000739a9beff3e1f7b3": "Exemplo sk artificial repetido em documentação de skills",
+}
 SHELL_INSTALLERS = (
     ROOT / "installer/linux/install.sh",
     ROOT / "installer/macos/install.sh",
@@ -41,6 +50,16 @@ SHELL_INSTALLERS = (
 )
 WINDOWS_WRAPPER = ROOT / "installer/windows/Install-OpenCodeEcosystem.ps1"
 WINDOWS_GUIDE = ROOT / "installer/windows/README.md"
+
+
+def _has_high_confidence_secret(text: str) -> bool:
+    """Classifica formas de token, sem imprimir ou autenticar candidatos."""
+    for pattern in HIGH_CONFIDENCE_SECRET_PATTERNS:
+        for match in pattern.finditer(text):
+            digest = hashlib.sha256(match.group(0).encode("utf-8")).hexdigest()
+            if digest not in AUDITED_SYNTHETIC_EXAMPLE_SHA256:
+                return True
+    return False
 
 
 def _tracked_text_blobs(root: Path = ROOT) -> list[tuple[str, bytes]]:
@@ -87,10 +106,7 @@ def test_tracked_index_contains_no_high_confidence_secret_pattern() -> None:
     offenders = [
         path
         for path, blob in _tracked_text_blobs()
-        if any(
-            pattern.search(blob.decode("utf-8", errors="ignore"))
-            for pattern in HIGH_CONFIDENCE_SECRET_PATTERNS
-        )
+        if _has_high_confidence_secret(blob.decode("utf-8", errors="ignore"))
     ]
 
     assert offenders == [], f"Possível chave Google/Gemini rastreada em: {offenders}"
@@ -112,6 +128,69 @@ def test_secret_scan_reads_the_index_instead_of_a_divergent_worktree(tmp_path: P
     assert tracked.read_text(encoding="utf-8") != staged_secret
 
 
+def _r813_generated_token_shapes() -> list[tuple[str, str]]:
+    """Valores artificiais variados; mensagens de falha mostram só hashes."""
+    varied = "".join("Aa1Bb2Cc3Dd4Ee5Ff6Gg7Hh8Ii9Jj0" for _ in range(2))
+    return [
+        ("google", "AI" + "za" + varied[:24]),
+        ("github", "gh" + "p_" + varied[:36]),
+        ("gitlab", "gl" + "pat-" + varied[:24]),
+        ("anthropic", "sk" + "-ant-" + varied[:24]),
+        ("sk", "sk" + "-" + varied[:24]),
+        ("aws", "AK" + "IA" + "A1B2C3D4E5F6G7H8"),
+    ]
+
+
+def _r813_check_classification(text: str, expected: bool, label: str) -> None:
+    if _has_high_confidence_secret(text) is not expected:
+        digest = hashlib.sha256(text.encode("utf-8")).hexdigest()
+        pytest.fail(f"Classificação incorreta: {label}; comprimento={len(text)}; sha256={digest}")
+
+
+@pytest.mark.parametrize("prefix", ["", '"', "token=", "Bearer "], ids=["beginning", "json-quoted", "assignment", "bearer-space"])
+def test_r813_known_token_shapes_remain_detected_in_supported_contexts(prefix: str) -> None:
+    for label, token in _r813_generated_token_shapes():
+        _r813_check_classification(prefix + token, True, label)
+
+
+def test_r813_embedded_identifier_suffix_is_not_a_secret() -> None:
+    for label, token in _r813_generated_token_shapes():
+        for prefix in ("a", "_", "-", "service"):
+            _r813_check_classification(prefix + token, False, label + "-embedded")
+    symbol = "a" + "sk" + "-user-question-example"
+    _r813_check_classification(symbol, False, "ordinary-identifier")
+
+
+def test_r813_only_exact_audited_synthetic_examples_are_ignored() -> None:
+    examples = ["AI" + "za" + "a" * 24, "sk" + "-" + "x" * 20]
+    expected_hashes = {
+        "abe8cb5b23895869b16a1c56a221f138c62b041ad6d9da8b177375ec0c6c827f",
+        "a7c9ba235a1cb12abb1eb1cb042e842fcd9a16b2d421b000739a9beff3e1f7b3",
+    }
+    assert {hashlib.sha256(value.encode("utf-8")).hexdigest() for value in examples} == expected_hashes
+    assert set(AUDITED_SYNTHETIC_EXAMPLE_SHA256) == expected_hashes
+    for example in examples:
+        _r813_check_classification('"' + example + '"', False, "audited-artificial-example")
+
+
+def test_r813_unregistered_synthetic_tokens_are_not_exempt() -> None:
+    candidates = [
+        "AI" + "za" + "x" * 24,
+        "sk" + "-" + "y" * 20,
+        "AI" + "za" + "a" * 24 + "b",
+        "sk" + "-" + "x" * 19 + "y",
+    ]
+    for candidate in candidates:
+        _r813_check_classification(candidate, True, "unregistered-artificial-token")
+
+
+def test_r813_approved_fixture_does_not_mask_another_candidate() -> None:
+    approved = "AI" + "za" + "a" * 24
+    other = "sk" + "-" + "y" * 20
+    for combined in (approved + " " + other, other + " " + approved):
+        _r813_check_classification(combined, True, "approved-plus-unregistered")
+
+
 def test_runtime_evidence_never_promotes_an_absent_delivery() -> None:
     registry = SpecRegistry()
     original_specs = dict(registry.specs)
@@ -131,13 +210,13 @@ def test_runtime_evidence_never_promotes_an_absent_delivery() -> None:
     )
     try:
         verifier = SpecVerifier(registry)
-        absent = verifier.verify(spec_id, None, trusted_test_evidence=evidence)
-        present = verifier.verify(spec_id, {"delivery": "presente"}, trusted_test_evidence=evidence)
+        absent = verifier.verify(spec_id, None, trusted_test_evidence=evidence, require_red_history=False)
+        present = verifier.verify(spec_id, {"delivery": "presente"}, trusted_test_evidence=evidence, require_red_history=False)
     finally:
         registry.specs = original_specs
 
     assert absent["verified"] is False
-    assert absent["status"] == "red"
+    assert absent["status"] == "criteria_failed"
     assert present["verified"] is True
 
 
@@ -391,10 +470,17 @@ def test_sdd_documentation_does_not_misrepresent_same_process_evidence() -> None
 
 
 def test_sdd_runtime_timeout_exceeds_the_observed_full_suite_duration() -> None:
+    import ast
+
     assert run_pytest.__defaults__ is not None
     assert run_pytest.__defaults__[1] >= 1200
     quality_report = (ROOT / "scripts/quality_report.py").read_text(encoding="utf-8")
-    assert "PYTEST_TIMEOUT_SECONDS = 1200" in quality_report
+    assignments = [node for node in ast.parse(quality_report).body
+                   if isinstance(node, ast.Assign) and any(
+                       isinstance(target, ast.Name) and target.id == "PYTEST_TIMEOUT_SECONDS"
+                       for target in node.targets)]
+    assert len(assignments) == 1
+    assert ast.literal_eval(assignments[0].value) >= 1800
 
 
 def test_installer_docs_keep_explicit_non_guarantees() -> None:

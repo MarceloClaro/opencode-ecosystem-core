@@ -22,8 +22,15 @@ O diagnóstico pode retornar avisos ou falhas conforme as dependências locais.
 Não use esta contagem como indicador de cobertura, qualidade ou validação
 externa.
 
-A configuração operacional consultada em **2026-10-07** declara **248 agentes**
-e **15 MCPs**, com **20 checks** no diagnóstico. O servidor
+<!-- core-state:start -->
+**255 agentes** · **16 MCPs** · **30 comandos** · **22 checks**
+
+Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
+
+Para conferir estes blocos, execute na raiz `.venv/bin/python scripts/reconcile_operational_docs.py --check`; para sincronizá-los, execute o mesmo comando sem `--check`.
+<!-- core-state:end -->
+
+O servidor
 `ecosystem-network` liga o orquestrador, seu roteamento Transformer inspirado
 em atenção e a memória MetaBus/Blackboard aos executores de análise e leitura
 Claude, Antigravity e Codex disponíveis no ambiente. A execução limita passos
@@ -35,6 +42,23 @@ Para coordenar análise e revisão, peça no OpenCode: `/ecosystem analise esta
 tarefa e depois peça revisão a outro especialista: ...`. A rede salva as
 etapas e informa um identificador para consultar e retomar o trabalho. Veja o
 [guia de execução em etapas](docs/WORKFLOWS_R644.md).
+
+Para páginas web, consulte o [guia do navegador coordenado](docs/NAVEGADOR_REAL.md).
+
+Para compreender aplicativos sem fontes, utilize o
+[assistente REA local](docs/ASSISTENTE_REA_LOCAL.md): `rea inspect CAMINHO
+--format text` inspeciona estaticamente e informa evidências e limitações;
+`rea explain RECIBO --format text` lê o resultado. O setup gera os perfis MCP;
+`rea agent --check` confere a configuração efetiva do cliente local antes da
+conversa. `rea site --port 8767` abre o guia em loopback. O modo local exige
+Linux/WSL com namespaces e um cliente que conserve os dados na máquina.
+
+`python3 -m marceloclaro.cli browser status` confere a instalação sem iniciar
+um navegador; `python3 -m marceloclaro.cli browser run ARQUIVO.json` executa
+as ações explícitas daquele arquivo pelo orquestrador primário. Leitura e
+snapshot observam a página; preenchimento e clique podem alterar o site.
+Defina o efeito pretendido e as origens permitidas. A sessão isolada não
+herda os logins do navegador pessoal e conserva evidência da execução.
 
 Para execução externa de Hermes/MiroFish, download de datasets e plugins,
 consulte o [guia das integrações científicas](docs/INTEGRACOES_CIENTIFICAS_R667_R671.md).
@@ -67,8 +91,9 @@ funções internas, o menu possui uma única opção `[10]`: a apresentação MI
 
 - **Blackboard**: fila compartilhada em que tarefas podem receber agentes.
 - **Memória metacognitiva**: registros de contexto e reflexões do ecossistema.
-- **doctor**: diagnóstico estrutural; os 20 checks não substituem inspeção do
-  ambiente nem avaliação externa.
+- **doctor**: diagnóstico estrutural por padrão, com os checks do inventário acima;
+  `doctor --live` executa probes locais e de rede. O inventário não substitui
+  inferência executada, prova formal ou avaliação externa.
 - **helpdesk**: leitura do diagnóstico com sugestões de próximos passos.
 - **Ajuda**: resumo embutido do próprio CLI.
 
@@ -187,6 +212,14 @@ esse catálogo pela CLI:
 
 Consulte [Gemini Notebook no Core](docs/GEMINI_NOTEBOOK_CORE.md) para login,
 perfis, efeitos que precisam de confirmação, downloads e limites das provas.
+
+## Inspecionar aplicações com REA
+
+Use `/rea <tarefa>` no OpenCode. MarceloClaro consulta o servidor local e
+coordena a análise com origem e evidências. Na CLI, use
+`.venv/bin/python -m marceloclaro.cli rea status` ou
+`rea analyze /caminho/absoluto/app`. Consulte [REA no Core](docs/REA.md)
+para catálogo, disponibilidade e instalação identificada.
 
 ## Limites e solução de problemas
 

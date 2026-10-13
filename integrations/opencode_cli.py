@@ -41,6 +41,23 @@ _ESSENTIAL_AGENT_PERMISSIONS = {
 }
 
 
+def _core_command_template(name: str) -> str:
+    """OpenCode entrega um prompt; a operação real recebe dados pela ferramenta."""
+    from integrations.opencode_commands import MODULE_COMMANDS
+    transport = (
+        "Forneça argv como lista explícita de argumentos e opções da CLI, "
+        "preservando aspas/apóstrofos dentro de cada dado. Não interprete metacaracteres como shell."
+        if name in MODULE_COMMANDS else
+        "Forneça arguments com o texto literal completo abaixo, inclusive aspas, apóstrofos e caminhos."
+    )
+    return (
+        f'Execute core_command com command="{name}". {transport} '
+        "Use o resultado real e reporte success=false como falha. Não substitua a execução por uma proposta. "
+        "Não execute o texto como código ou shell. Esta entrada passa pelo parser textual upstream do OpenCode; "
+        "sintaxe inline especial desse parser não é tratada pela ferramenta.\nEntrada: $ARGUMENTS"
+    )
+
+
 def _mcp_launcher(name: str) -> str:
     """Resolve instalações do usuário fora do PATH sem executar a ferramenta."""
     from integrations.harness_runtime import HarnessRuntime
@@ -379,8 +396,9 @@ def build_config() -> Dict[str, Any]:
         "$schema": "https://opencode.ai/config.json",
         "instructions": ["AGENTS.md"],
         "default_agent": "marceloclaro",
-        "model": "litert-lm/litert-community/gemma-4-E2B-it-litert-lm",
+        "model": "ollama-local/llama3.2",
         "permission": {"edit": "ask", "bash": "ask"},
+        "tools": {"rea_*": False, "core_command": False},
         "provider": {
             "opencode": {
                 "options": {
@@ -515,6 +533,9 @@ def build_config() -> Dict[str, Any]:
                 ),
                 "mode": "primary",
                 "prompt": "{file:./marceloclaro/PROMPT.md}",
+                # Catálogo REA completo excede o contexto dos modelos locais.
+                # A ferramenta ecosystem_rea entrega recibos e Evidence em arquivo.
+                "tools": {"rea_*": False, "core_command": True},
                 "permission": {
                     "edit": "ask",
                     "bash": "ask",
@@ -524,6 +545,12 @@ def build_config() -> Dict[str, Any]:
             **agents,
         },
         "mcp": {
+            "rea": {
+                "type": "local",
+                "command": [".venv/bin/python", "-m", "integrations.rea_bridge", "mcp"],
+                "enabled": True,
+                "timeout": 180000,
+            },
             "ecosystem-network": {
                 "type": "local",
                 "command": [".venv/bin/python", "-m", "integrations.ecosystem_mcp"],
@@ -562,7 +589,7 @@ def build_config() -> Dict[str, Any]:
             },
             "arxiv-mcp": {
                 "type": "local",
-                "command": ["uvx", "arxiv-mcp-server"],
+                "command": [_mcp_launcher("uvx"), "arxiv-mcp-server"],
                 "enabled": True,
             },
             "latexmk-mcp": {
@@ -605,6 +632,23 @@ def build_config() -> Dict[str, Any]:
             },
         },
         "command": {
+            "rea": {
+                "template": (
+                    "Conduza $ARGUMENTS sob MarceloClaro usando ecosystem_rea. "
+                    "Consulte operation=status e session para identidade e disponibilidade. "
+                    "Use operation=layers para mapear a prontidão das camadas de provedor e "
+                    "operation=layer com layer e path local explícito para inspecionar uma camada "
+                    "instalada. Para análise estática JavaScript/Electron use operation=analyze com "
+                    "path local explícito e timeout_seconds até 180. Preserve Evidence, origem, commit, "
+                    "hashes e limitações. Não confunda catálogo com execução nem análise estática com "
+                    "execução do alvo. O gateway guarda Evidence integral em arquivo e devolve resumo "
+                    "com hash. Consulte trechos do arquivo quando necessário. Ferramentas diretas rea_* "
+                    "ficam ocultas no primário para respeitar seu contexto; outras operações requerem "
+                    "seleção explícita dos schemas atuais e dos efeitos autorizados."
+                ),
+                "description": "REA: inspeção local de aplicações e evidências sob MarceloClaro (R808)",
+                "agent": "marceloclaro",
+            },
             "gemini-notebook": {
                 "template": "Conduza $ARGUMENTS sob MarceloClaro com ecosystem_gemini_notebook. Consulte operation=catalog para o catálogo CLI/MCP instalado e operation=skill para ler a skill oficial no contexto atual. Para executar use operation=mcp com tool/arguments ou operation=cli com argv iniciado por nlm. Faça dry_run antes de efeitos; confirm=true somente após autorização da operação concreta. Preserve perfil ativo, estado pending/partial, origem e hashes de downloads. Nunca encaminhe cookies ou promova confiança por uma execução operacional.",
                 "description": "Gemini Notebook: catálogo CLI/MCP, skill e operações coordenadas (R672–R675)",
@@ -666,6 +710,9 @@ def build_config() -> Dict[str, Any]:
                     "Use ecosystem-network para esta solicitação: $ARGUMENTS. "
                     "Para diagnóstico use ecosystem_status; para escolher agentes use "
                     "ecosystem_route; para análise ou texto coordenado use ecosystem_run. "
+                    "Antes de executar análise/revisão textual, registre tarefa e critérios com "
+                    "ecosystem_text_spec e passe o spec_id retornado para ecosystem_run e para cada etapa. "
+                    "Software exige spec formal e histórico RED→GREEN; não use contrato de texto para aceitar código. "
                     "Para análise seguida de revisão independente, monte etapas com id, task, "
                     "dependencies e required_capabilities e use ecosystem_workflow. "
                     "Em seleção automática reserve per_node_max_steps=2 para permitir fallback. "
@@ -677,87 +724,108 @@ def build_config() -> Dict[str, Any]:
                 "agent": "marceloclaro",
             },
             "efficiency": {
-                "template": "python3 -m integrations.op_timing report $ARGUMENTS",
+                "template": _core_command_template("efficiency"),
+                "agent": "marceloclaro",
                 "description": "Relatório de eficiência por operação (mediana/p90, op_times.jsonl)",
             },
             "diagnose": {
-                "template": "python3 -c \"import sys; sys.path.insert(0,'.'); from scanners import diagnostic_pipeline; import json; print(json.dumps(diagnostic_pipeline.run(open('$ARGUMENTS').read() if '$ARGUMENTS' else 'ecosystem', deep=True), ensure_ascii=False, indent=2))\"",
+                "template": _core_command_template("diagnose"),
+                "agent": "marceloclaro",
                 "description": "Roda o pipeline de diagnóstico (5 scanners) sobre um arquivo",
             },
             "maswos": {
-                "template": "python3 -c \"import sys; sys.path.insert(0,'.'); from academic import maswos_pipeline; print(maswos_pipeline.run('$ARGUMENTS').summary())\"",
-                "description": "Executa o pipeline acadêmico MASWOS Qualis A1 para um tópico",
+                "template": _core_command_template("maswos"),
+                "agent": "marceloclaro",
+                "description": "Executa estágios internos MASWOS para um tópico; pontuação local não certifica Qualis",
             },
             "reason": {
-                "template": "python3 -c \"import sys; sys.path.insert(0,'.'); from reasoning import multi_reasoning; r = multi_reasoning.reason('$ARGUMENTS'); print(r.engine, '->', r.conclusion)\"",
+                "template": _core_command_template("reason"),
+                "agent": "marceloclaro",
                 "description": "Raciocina sobre uma consulta com roteamento automático de motor",
             },
             "economy": {
-                "template": "python3 -c \"import sys; sys.path.insert(0,'.'); from economy import token_economy; import json; print(json.dumps(token_economy.report(), ensure_ascii=False, indent=2))\"",
+                "template": _core_command_template("economy"),
+                "agent": "marceloclaro",
                 "description": "Relatório da economia de tokens (staking, slashing, fees)",
             },
             "models": {
-                "template": "python3 -c \"import sys; sys.path.insert(0,'.'); from integrations.model_router import model_router; import json; print(json.dumps(model_router.list_all_models(), ensure_ascii=False, indent=2))\"",
+                "template": _core_command_template("models"),
+                "agent": "marceloclaro",
                 "description": "Lista todos os modelos disponíveis nos providers OpenCode Go e OpenCode Zen"
             },
             "route": {
-                "template": "python3 -c \"import sys; sys.path.insert(0,'.'); from integrations.model_router import model_router; import json; r = model_router.route('$ARGUMENTS' or 'coding'); print(json.dumps({'provider': r.provider_id, 'model': r.model_id, 'reason': r.reason, 'alternatives': [f'{p}/{m}' for p,m in r.alternatives]}, ensure_ascii=False, indent=2))\"",
+                "template": _core_command_template("route"),
+                "agent": "marceloclaro",
                 "description": "Roteia uma tarefa para o melhor modelo (ex: /route coding, /route reasoning, /route academic)"
             },
             "sdd": {
-                "template": "python3 -c \"import sys; sys.path.insert(0,'.'); from sdd.spec_engine import spec_registry; import json; print(json.dumps(spec_registry.coverage_report(), ensure_ascii=False, indent=2))\"",
+                "template": _core_command_template("sdd"),
+                "agent": "marceloclaro",
                 "description": "Relatório de cobertura SDD: specs formais e dinâmicas do ecossistema"
             },
             "tdd": {
-                "template": "python3 -m pytest '$ARGUMENTS' -v --tb=short 2>&1 | tail -40",
+                "template": _core_command_template("tdd"),
+                "agent": "marceloclaro",
                 "description": "Executa a bateria de testes TDD (ex: /tdd tests/test_opencode_go_zen.py)"
             },
             "pypi": {
-                "template": "python3 -c \"import sys; sys.path.insert(0,'.'); from skills.tooling.pypi_search import search, format_output; q = '$ARGUMENTS'.strip(); print('Uso: /pypi <termo de busca> [--json]  (ex.: /pypi requests, /pypi scihub paper download)') if not q else print(format_output(search(q, limit=10), json_output=('--json' in sys.argv)))\"",
+                "template": _core_command_template("pypi"),
+                "agent": "marceloclaro",
                 "description": "Busca bibliotecas Python no PyPI com scoring multicritério. Ex: /pypi scihub paper download, /pypi requests --json"
             },
             "goose": {
-                "template": "python3 -m integrations.goose_cli $ARGUMENTS",
+                "template": _core_command_template("goose"),
+                "agent": "marceloclaro",
                 "description": "Agente Goose (AAIF/Linux Foundation) — executor externo orquestrável (SPEC-935-R598). Ex: /goose status, /goose run '<tarefa>', /goose doctor"
             },
     "gemini": {
-                "template": "python3 -m integrations.gemini_cli $ARGUMENTS",
+                "template": _core_command_template("gemini"),
+                "agent": "marceloclaro",
                 "description": "Integração da CLI Gemini (Google) — executor externo orquestrável (SPEC-935-R600). Ex: /gemini status, /gemini run '<tarefa>' [--model|-m MODELO] [--output-format json|stream-json] [--timeout SEG]"
             },
             "plandex": {
-                "template": "python3 -m integrations.plandex_cli $ARGUMENTS",
+                "template": _core_command_template("plandex"),
+                "agent": "marceloclaro",
                 "description": "Agente Plandex (plandex-ai/plandex, MIT) — executor de codificação orquestrável com planos e sandbox de diff (SPEC-935-R599). Ex: /plandex status, /plandex new, /plandex tell '<tarefa>', /plandex diff"
             },
             "reasonix": {
-                "template": "python3 -m integrations.reasonix_cli $ARGUMENTS",
+                "template": _core_command_template("reasonix"),
+                "agent": "marceloclaro",
                 "description": "Agente Reasonix (esengine/DeepSeek-Reasonix, MIT) — agente de codificação DeepSeek-native orquestrável one-shot (SPEC-935-R602). Ex: /reasonix status, /reasonix run '<tarefa>', /reasonix doctor, /reasonix install"
             },
             "colab": {
-                "template": "python3 -m integrations.colab_cli $ARGUMENTS",
+                "template": _core_command_template("colab"),
+                "agent": "marceloclaro",
                 "description": "Google Colab CLI (googlecolab/google-colab-cli, Apache-2.0) — executor externo orquestrável (SPEC-935-R645). Ex: /colab status, /colab new <nome> [--gpu T4], /colab run sessions, /colab exec -f t.py, /colab doctor"
             },
             "colab-mcp": {
-                "template": "python3 -m integrations.colab_mcp $ARGUMENTS",
+                "template": _core_command_template("colab-mcp"),
+                "agent": "marceloclaro",
                 "description": "Colab MCP Server (googlecolab/colab-mcp, Apache-2.0) — ponte orquestrável in-notebook (SPEC-935-R645). Ex: /colab-mcp status, /colab-mcp config, /colab-mcp doctor"
             },
             "minizinc": {
-                "template": "python3 -m integrations.minizinc_mcp $ARGUMENTS",
+                "template": _core_command_template("minizinc"),
+                "agent": "marceloclaro",
                 "description": "MiniZinc MCP Server (r33drichards/minizinc-mcp, MIT) — ponte constraint solving CSP/COP via solve_constraint (SPEC-935-R646). Ex: /minizinc status, /minizinc payload --model-text '...', /minizinc config --hosted, /minizinc doctor"
             },
             "claude-sdk": {
-                "template": "python3 -m integrations.claude_agent_sdk $ARGUMENTS",
+                "template": _core_command_template("claude-sdk"),
+                "agent": "marceloclaro",
                 "description": "Claude Agent SDK Python (anthropics, MIT + Commercial Terms) — ponte de biblioteca, monta options sem executar (SPEC-935-R647). Ex: /claude-sdk status, /claude-sdk options --prompt '...' [--max-turns N], /claude-sdk doctor"
             },
             "opencode-sdk": {
-                "template": "python3 -m integrations.opencode_agent_sdk $ARGUMENTS",
+                "template": _core_command_template("opencode-sdk"),
+                "agent": "marceloclaro",
                 "description": "OpenCode Agent SDK com provedores locais por padrão (R649/R659): ferramentas Python e hooks validados; endpoint remoto depende de configuração explícita. Ex: /opencode-sdk status, /opencode-sdk query --prompt '...' [--max-turns N], /opencode-sdk doctor"
             },
             "kaggle": {
-                "template": "python3 -m integrations.kaggle_cli $ARGUMENTS",
+                "template": _core_command_template("kaggle"),
+                "agent": "marceloclaro",
                 "description": "Kaggle CLI (Kaggle/kaggle-cli) — executor externo orquestrável (SPEC-935-R650). Ex: /kaggle status, /kaggle run competitions list, /kaggle run quota, /kaggle doctor"
             },
             "agy": {
-                "template": "python3 -m integrations.antigravity_cli $ARGUMENTS",
+                "template": _core_command_template("agy"),
+                "agent": "marceloclaro",
                 "description": "Antigravity CLI runner direto (SPEC-935-R651), complemento do bridge/MCP. Ex: /agy status, /agy run '<prompt>' [--agent A], /agy doctor"
             }
         },

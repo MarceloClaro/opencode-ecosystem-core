@@ -24,13 +24,14 @@ class TestR234StandaloneReadiness(unittest.TestCase):
         self.assertTrue(res["is_fully_autonomous"])
         self.assertFalse(res["external_dependencies_required"])
 
-    def test_spec_verifier_execution(self):
+    def test_criteria_only_inspection(self):
         spec = spec_registry.get("SPEC-935-R234")
         if spec:
             spec.add_criterion("Autonomia Standalone validada", lambda out: out.get("auto") is True)
-        res = spec_verifier.verify("SPEC-935-R234", {"auto": True})
+        res = spec_verifier.verify("SPEC-935-R234", {"auto": True}, require_red_history=False)
         self.assertTrue(res["verified"])
-        self.assertEqual(res["status"], "green")
+        self.assertEqual(res["verification_scope"], "criteria_only")
+        self.assertEqual(res["status"], "criteria_passed")
 
 
 if __name__ == "__main__":

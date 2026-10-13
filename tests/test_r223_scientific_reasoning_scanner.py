@@ -39,13 +39,14 @@ class TestR223ScientificReasoningScanner(unittest.TestCase):
         self.assertTrue(res["is_testable"])
         self.assertEqual(res["status"], "valid_hypothesis")
 
-    def test_spec_verifier_execution(self):
+    def test_criteria_only_inspection(self):
         spec = spec_registry.get("SPEC-935-R223")
         if spec:
             spec.add_criterion("Scanner de raciocínio científico validado", lambda out: out.get("scanner") is True)
-        res = spec_verifier.verify("SPEC-935-R223", {"scanner": True})
+        res = spec_verifier.verify("SPEC-935-R223", {"scanner": True}, require_red_history=False)
         self.assertTrue(res["verified"])
-        self.assertEqual(res["status"], "green")
+        self.assertEqual(res["verification_scope"], "criteria_only")
+        self.assertEqual(res["status"], "criteria_passed")
 
 
 if __name__ == "__main__":

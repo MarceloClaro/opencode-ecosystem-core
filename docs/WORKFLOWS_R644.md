@@ -10,6 +10,13 @@ O orquestrador monta etapas com dependências. Cada especialista recebe a
 entrega anterior identificada pela origem, pelo executor e pela tarefa. O
 progresso é salvo no projeto e o resultado informa `workflow_id`.
 
+Antes de executar análise ou revisão de texto, use `ecosystem_text_spec` na
+mesma sessão MCP, com tarefa e critérios explícitos. Inclua o `spec_id` retornado
+em `ecosystem_run` ou em cada etapa do workflow. Esse contrato é heurístico e
+transitório; não aceita entrega de software. Código exige spec formal e o
+histórico RED→GREEN exigido pelo gate. O primário permanece compartilhado entre
+biblioteca, análise e workflow; consultar a biblioteca não chama um modelo.
+
 ```mermaid
 flowchart LR
     Pedido --> Analise[Análise por especialista]
@@ -33,9 +40,9 @@ Exemplo de `etapas.json`:
 ```json
 {
   "nodes": [
-    {"id": "analysis", "task": "Resumir a arquitetura proposta",
+    {"id": "analysis", "task": "Resumir a arquitetura proposta", "spec_id": "ID_DA_SPEC_ANALISE",
      "required_capabilities": ["summarize"], "per_node_max_steps": 2},
-    {"id": "review", "task": "Revisar a análise e indicar limitações",
+    {"id": "review", "task": "Revisar a análise e indicar limitações", "spec_id": "ID_DA_SPEC_REVISAO",
      "dependencies": ["analysis"], "required_capabilities": ["review"],
      "per_node_max_steps": 2}
   ]
@@ -52,6 +59,11 @@ Para escolher um serviço, adicione `"ecosystem": "codex"`, `"claude"` ou
 `"antigravity"` na etapa. No modo automático, dois passos por etapa permitem
 uma alternativa após falha. Passos usados continuam consumidos na retomada;
 ampliar `--max-steps` autoriza orçamento adicional, até 24 passos totais.
+
+Os identificadores acima são campos a preencher com contratos carregáveis
+pela CLI, com a evidência exigida pelo gate. Um ID dinâmico criado em outra
+sessão MCP não é persistido para a CLI. Sem spec válida, a execução é bloqueada
+antes da inferência; não desative SDD para fazer o exemplo passar.
 
 ## Saúde e limites
 

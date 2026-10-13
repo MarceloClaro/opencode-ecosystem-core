@@ -1,0 +1,55 @@
+{
+  "spec": "SPEC-935-R844",
+  "operation": "analyze_function",
+  "provider": {
+    "id": "hopper",
+    "name": "Hopper Disassembler",
+    "version": "launcher-sha256:0294ced141cc373468ee22d8343e7dac41980cb05a937994ca81c9f09afe7ded"
+  },
+  "evidence_id": "ev_f4cb73bba8405de06cc72368bc1da74d98eb15e8ba920f769ab7ff4dba8b251b",
+  "response_sha256": "57ee39265faf0a40c297be76aad39b0b3aa004dac810ad25cf8fb404f52cc91c",
+  "subject": {
+    "name": "hopper_probe",
+    "digest": {
+      "sha256": "28e6cd981dc38e56d98c85113db6e34185b45a21793d2f863f1f1b38f0a329d3"
+    },
+    "format": "elf",
+    "architecture": "x86_64",
+    "local_path": "/tmp/hopper_probe"
+  },
+  "authority": "shipped-artifact",
+  "confidence": "observed",
+  "predicate_type": "rea.analysis",
+  "target": "/tmp/hopper_probe (ELF x86-64, gcc -g -O0)",
+  "function": {
+    "name": "soma",
+    "address": "0x1149",
+    "signature": "int soma(int arg0, int arg1)"
+  },
+  "pseudocode": "    rax = arg1 + arg0;\n    return rax;\n",
+  "assembly": [
+    "0x1149: endbr64",
+    "0x114d: push rbp",
+    "0x114e: mov rbp, rsp",
+    "0x1151: mov dword [rbp+var_4], edi",
+    "0x1154: mov dword [rbp+var_8], esi",
+    "0x1157: mov edx, dword [rbp+var_4]",
+    "0x115a: mov eax, dword [rbp+var_8]",
+    "0x115d: add eax, edx",
+    "0x115f: pop rbp",
+    "0x1160: ret"
+  ],
+  "callers": [
+    "main"
+  ],
+  "limitations": [
+    "Results depend on Hopper's completed static analysis.",
+    "String values cover native typed objects. Hopper may split long literals into adjacent unterminated fragments; string searches match each object independently.",
+    "Undecodable typed objects retain native display text with an explicit decoding unknown; these values do not establish decoded source literals.",
+    "Reported string encodings are inferred from typed bytes and native display; the original source's intended encoding is unknown."
+  ],
+  "flags": {
+    "externally_validated": false,
+    "confidence_promoted": false
+  }
+}

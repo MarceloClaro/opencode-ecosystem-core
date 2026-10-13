@@ -1,0 +1,48 @@
+{
+  "spec": "SPEC-935-R852",
+  "action": "install_jeb_ce",
+  "artifact": {
+    "product": "JEB Decompiler - Community Edition (JEB CE)",
+    "version": "5.48.0.202610071539",
+    "build_type": "jeb-ce",
+    "license": "release/full/individual/air-gap/any-client/core-api/perpetual",
+    "download_page": "https://www.pnfsoftware.com/jeb/community-edition",
+    "url": "https://www.pnfsoftware.com/dl?jeb4ce",
+    "resolved_url": "https://jebbuilds2.s3.amazonaws.com/jeb4ce/jeb-ce-5.48.0.202610071539-JEBDecompiler-624458483834837192.zip",
+    "bytes": 697549250,
+    "sha256": "709e7fe8e88bb0e9e2bc03b028f8b9fc78cec0289d04abe54fc26cda6369e175",
+    "integrity_verified": true,
+    "download_requires_account": false,
+    "install_path": "~/.local/share/opencode-core/native-rea/jeb-ce-5.48.0",
+    "extracted_size": "~1.2G",
+    "launcher_sha256": "6ef872c11786a3de32c23f3f9d98fa508131d420cd2e84aa0c3ff45063dc7245",
+    "jeb_jar_sha256": "703f6022473320ddf60615dd672fa0e04192cadd800016709acdac430717a5a3"
+  },
+  "requirements": {
+    "jre_min": 21,
+    "jre_used": "Eclipse Adoptium 21.0.12.1 (native-rea/jdk-21.0.12.1+1)"
+  },
+  "activation": {
+    "eula": "accepted by the licensee (operator) on record before this run",
+    "method": "first-run license key generated from the machine-bound license-data blob via the official endpoint POST https://www.pnfsoftware.com/genlkrequest (fields keyname, licdata); no account/login",
+    "machine_bound": true,
+    "license_key_persisted": true,
+    "license_key_recorded_in_receipt": false,
+    "note": "The key is tied to computer, OS, user account and licensee; it is not stored in this receipt nor in any Core artifact."
+  },
+  "mcp": {
+    "command": "./jeb_linux.sh -c --mcp --interface=127.0.0.1 --port=8425",
+    "server": "jeb-mcp-server",
+    "server_version": "1.3.0",
+    "protocol_version": "2024-11-05",
+    "transport": "streamable HTTP (SSE)",
+    "endpoint": "http://127.0.0.1:8425/mcp",
+    "tools_advertised": 27,
+    "rei_env": "REA_JEB_MCP_URL",
+    "note": "REA verified against JEB 5.48.0 serving jeb-mcp-server 1.3.0 over streamable HTTP (docs/jeb-analysis.md); this install reproduces exactly that version/server pair."
+  },
+  "flags": {
+    "externally_validated": false,
+    "confidence_promoted": false
+  }
+}

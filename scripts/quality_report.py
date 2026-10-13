@@ -10,49 +10,122 @@ Gera relatorio consolidado de qualidade do ecossistema:
   - Score de qualidade (0-10)
   - Recomendacoes
 
-Uso: python scripts/quality_report.py [--json] [--output report.json] [--quick]
+Uso: python scripts/quality_report.py [--json] [--output report.json]
+     [--junit pytest.xml | --quick]
 """
 
 import argparse
+import hashlib
 import json
 import re
 import subprocess
 import sys
 from pathlib import Path
+import xml.etree.ElementTree as ET
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-# A suíte integral ultrapassa cinco minutos em ambientes limpos; o relatório
-# é um gate da CI e deve aguardar a mesma janela usada pelo executor SDD.
-PYTEST_TIMEOUT_SECONDS = 1200
+# A execução direta conserva uma janela suficiente para a suíte integral.
+# A CI fornece --junit e não executa a mesma bateria novamente.
+PYTEST_TIMEOUT_SECONDS = 3600
 
 
 def _parse_pytest_counts(output: str) -> dict:
     """Extrai passed/failed/skipped da saída do pytest."""
-    counts = {"passed": 0, "failed": 0, "skipped": 0}
-    for count, label in re.findall(r"(\d+)\s+(passed|failed|skipped)", output):
-        counts[label] = int(count)
+    counts = {"passed": 0, "failed": 0, "skipped": 0, "errors": 0}
+    for count, label in re.findall(r"(\d+)\s+(passed|failed|skipped|errors?)", output):
+        counts["errors" if label.startswith("error") else label] = int(count)
 
-    total = counts["passed"] + counts["failed"] + counts["skipped"]
+    total = sum(counts.values())
     return {
         "total": total,
-        "passed": counts["passed"],
-        "failed": counts["failed"],
-        "skipped": counts["skipped"],
+        **counts,
         "pass_rate": round(counts["passed"] / max(total, 1) * 100, 1),
     }
 
 
 def run_tests() -> dict:
     """Executa pytest e captura resultados."""
-    result = subprocess.run(
-        [sys.executable, "-m", "pytest", "tests/", "-q", "--tb=short"],
-        capture_output=True, text=True, timeout=PYTEST_TIMEOUT_SECONDS,
-        cwd=str(REPO_ROOT)
-    )
+    try:
+        result = subprocess.run(
+            [sys.executable, "-m", "pytest", "tests/", "-q", "--tb=short"],
+            capture_output=True, text=True, timeout=PYTEST_TIMEOUT_SECONDS,
+            cwd=str(REPO_ROOT)
+        )
+    except subprocess.TimeoutExpired:
+        return {**_parse_pytest_counts(""), "executed": True,
+                "source": "pytest_cli", "exit_code": None,
+                "execution_error": "timeout", "raw_output": ""}
     output = result.stdout + result.stderr
     parsed = _parse_pytest_counts(output)
     parsed["raw_output"] = output[:1000]
+    parsed.update(executed=True, source="pytest_cli", exit_code=result.returncode)
     return parsed
+
+
+def load_junit_results(path: str | Path) -> dict:
+    """Conta testcases do JUnit fornecido, sem executar nem autenticar a suíte."""
+    source = Path(path)
+    if source.stat().st_size > 32 * 1024 * 1024:
+        raise ValueError("JUnit excede o limite de 32 MiB.")
+    raw = source.read_bytes()
+    if b"<!doctype" in raw.lower() or b"<!entity" in raw.lower():
+        raise ValueError("Declarações DTD/ENTITY não são aceitas no JUnit.")
+    try:
+        root = ET.fromstring(raw)
+    except ET.ParseError as exc:
+        raise ValueError("JUnit inválido.") from exc
+    if root.tag not in {"testsuite", "testsuites"}:
+        raise ValueError("Raiz JUnit não reconhecida.")
+    cases = list(root.iter("testcase"))
+    if not cases:
+        raise ValueError("JUnit não contém casos de teste.")
+
+    def count_cases(selected):
+        counts = {"passed": 0, "failed": 0, "errors": 0, "skipped": 0}
+        for case in selected:
+            flags = [(tag, case.find(tag) is not None) for tag in ("failure", "error", "skipped")]
+            outcomes = [tag for tag, present in flags if present]
+            if len(outcomes) > 1:
+                raise ValueError("JUnit contém desfechos conflitantes no mesmo caso.")
+            outcome = outcomes[0] if outcomes else "passed"
+            counts[{"failure": "failed", "error": "errors"}.get(outcome, outcome)] += 1
+        return counts
+
+    counts = count_cases(cases)
+    unrepresented_tests = 0
+    declared_tests = len(cases)
+    # Atributos agregados validam coerência, mas não somam novamente os casos.
+    for suite in root.iter():
+        if suite.tag not in {"testsuite", "testsuites"}:
+            continue
+        selected = list(suite.iter("testcase"))
+        selected_counts = count_cases(selected)
+        expected = {"tests": len(selected), "failures": selected_counts["failed"],
+                    "errors": selected_counts["errors"], "skipped": selected_counts["skipped"]}
+        for field, value in expected.items():
+            if field in suite.attrib:
+                try:
+                    declared = int(suite.attrib[field])
+                except ValueError as exc:
+                    raise ValueError("Contador JUnit inválido.") from exc
+                # Pytest pode incluir subtestes no agregado sem serializar um
+                # testcase para cada aprovação. Registrar o desvio não cria
+                # aprovações adicionais nem transforma o atributo em medida.
+                if (field == "tests" and declared > value
+                        and suite.tag == "testsuite" and suite.get("name") == "pytest"):
+                    unrepresented_tests += declared - value
+                    declared_tests += declared - value
+                    continue
+                if declared != value:
+                    raise ValueError("Contadores JUnit não correspondem aos casos registrados.")
+    measured = counts["passed"] + counts["failed"] + counts["errors"] > 0
+    return {"total": len(cases), **counts,
+            "pass_rate": round(counts["passed"] / len(cases) * 100, 1) if measured else None,
+            "executed": measured, "source": "provided_junit", "exit_code": None,
+            "declared_tests": declared_tests, "unrepresented_tests": unrepresented_tests,
+            "suite_aggregate_fully_represented": unrepresented_tests == 0,
+            "junit_path": str(source.resolve()), "junit_sha256": hashlib.sha256(raw).hexdigest(),
+            "provenance_verified": False}
 
 
 def estimate_coverage() -> dict:
@@ -90,7 +163,10 @@ def check_lint() -> dict:
 
 
 def calculate_score(test_results: dict, coverage: dict, lint: dict) -> dict:
-    """Calcula score de qualidade (0-10)."""
+    """Calcula heurística local; não representa cobertura funcional ou certificação."""
+    if test_results.get("pass_rate") is None:
+        return {"overall_score": None, "dimensions": {}, "weights": {},
+                "score_kind": "not_measured"}
     scores = {}
 
     # Test pass rate (peso 3)
@@ -128,16 +204,22 @@ def calculate_score(test_results: dict, coverage: dict, lint: dict) -> dict:
         "overall_score": round(weighted_score, 1),
         "dimensions": scores,
         "weights": weights,
+        "score_kind": "heuristic_inventory",
     }
 
 
-def generate_report(quick: bool = False) -> dict:
+def generate_report(quick: bool = False, junit_path: str | Path | None = None) -> dict:
     """Gera relatorio completo."""
     print("[quality] Gerando relatorio de qualidade...")
 
-    if quick:
+    if quick and junit_path is not None:
+        raise ValueError("Modo quick e JUnit fornecido são mutuamente exclusivos.")
+    if junit_path is not None:
+        test_results = load_junit_results(junit_path)
+    elif quick:
         test_results = {"total": 0, "passed": 0, "failed": 0,
-                        "skipped": 0, "pass_rate": 100.0}
+                        "skipped": 0, "errors": 0, "pass_rate": None,
+                        "executed": False, "source": "not_run", "exit_code": None}
         print("  (quick mode - test execution skipped)")
     else:
         test_results = run_tests()
@@ -153,18 +235,35 @@ def generate_report(quick: bool = False) -> dict:
     print(f"  Lint: {lint['status']} ({lint['errors']} erros)")
 
     score = calculate_score(test_results, coverage, lint)
-    print(f"  Score: {score['overall_score']}/10")
+    print(f"  Score: {score['overall_score']}/10" if score["overall_score"] is not None else "  Score: não medido")
     # Recomendacoes
     recommendations = []
     if test_results.get("failed", 0) > 0:
         recommendations.append(f"Corrigir {test_results['failed']} teste(s) falhando")
+    if test_results.get("errors", 0) > 0:
+        recommendations.append(f"Corrigir {test_results['errors']} erro(s) de execução/coleta")
     if lint.get("errors", 0) > 0:
         recommendations.append(f"Corrigir {lint['errors']} erro(s) de lint")
-    if score["overall_score"] < 7:
+    if score["overall_score"] is not None and score["overall_score"] < 7:
         recommendations.append("Aumentar cobertura de testes")
+    if not test_results.get("executed"):
+        recommendations.append("Não houve medição de testes executados; execute a suíte ou forneça seu JUnit.")
+    if test_results.get("unrepresented_tests", 0):
+        recommendations.append(
+            f"{test_results['unrepresented_tests']} item(ns) do agregado pytest sem testcase próprio; "
+            "não incluídos na contagem de aprovações."
+        )
     if not recommendations:
         recommendations.append("Nenhuma acao urgente identificada")
 
+    if (test_results.get("failed", 0) or test_results.get("errors", 0)
+            or test_results.get("execution_error")
+            or test_results.get("exit_code") not in (None, 0)):
+        overall_status = "FAIL"
+    elif not test_results.get("executed") or test_results["passed"] == 0:
+        overall_status = "NOT_RUN"
+    else:
+        overall_status = "PASS_WITH_SKIPS" if test_results["skipped"] else "PASS"
     report = {
         "timestamp": __import__("datetime").datetime.now().isoformat(),
         "repository": "opencode-ecosystem-core",
@@ -173,7 +272,9 @@ def generate_report(quick: bool = False) -> dict:
         "lint": lint,
         "quality_score": score,
         "recommendations": recommendations,
-        "overall_status": "PASS" if test_results["failed"] == 0 else "FAIL",
+        "overall_status": overall_status,
+        "verification_scope": "local_test_report",
+        "externally_validated": False,
     }
 
     return report
@@ -182,11 +283,16 @@ def generate_report(quick: bool = False) -> dict:
 def main():
     parser = argparse.ArgumentParser(description="Quality Report Generator")
     parser.add_argument("--json", action="store_true", help="Print JSON output")
-    parser.add_argument("--quick", action="store_true", help="Pular execucao de testes (usa dados sinteticos)")
+    inputs = parser.add_mutually_exclusive_group()
+    inputs.add_argument("--quick", action="store_true", help="Gerar inventário sem medição de testes (NOT_RUN)")
+    inputs.add_argument("--junit", type=Path, help="Reutilizar JUnit de pytest já executado, sem repetir a suíte")
     parser.add_argument("--output", "-o", type=str, help="Save report to file")
     args = parser.parse_args()
 
-    report = generate_report(quick=args.quick)
+    try:
+        report = generate_report(quick=args.quick, junit_path=args.junit)
+    except (ValueError, OSError) as exc:
+        parser.error(str(exc))
 
     if args.output:
         output_path = Path(args.output)
@@ -203,7 +309,9 @@ def main():
         print(f"  Lint: {report['lint']['status']}")
         print(f"  Recomendacoes: {report['recommendations'][0] if report['recommendations'] else 'Nenhuma'}")
 
-    return 0 if report["overall_status"] == "PASS" else 1
+    if report["overall_status"] == "NOT_RUN":
+        return 0 if args.quick else 2
+    return 0 if report["overall_status"] in {"PASS", "PASS_WITH_SKIPS"} else 1
 
 
 if __name__ == "__main__":

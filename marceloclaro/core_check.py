@@ -164,10 +164,13 @@ def _check_hermetic_modules():
         for node in ast.walk(tree):
             if isinstance(node, ast.Import):
                 for a in node.names:
-                    found.add(a.name.split(".")[0])
+                    found.add(a.name)
             elif isinstance(node, ast.ImportFrom) and node.module:
-                found.add(node.module.split(".")[0])
-        hits = sorted(found & banned_imports)
+                found.add(node.module)
+                found.update(f"{node.module}.{a.name}" for a in node.names)
+        hits = sorted(banned for banned in banned_imports
+                      if any(name == banned or name.startswith(banned + ".")
+                             for name in found))
         if hits:
             bad.append(f"{rel}: {', '.join(hits)}")
     return bad

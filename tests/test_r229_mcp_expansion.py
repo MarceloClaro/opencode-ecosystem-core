@@ -37,13 +37,14 @@ class TestR229McpExpansion(unittest.TestCase):
         self.assertTrue(audit_res["ok"])
         self.assertIn("excellence_score", audit_res["result"])
 
-    def test_spec_verifier_execution(self):
+    def test_criteria_only_inspection(self):
         spec = spec_registry.get("SPEC-935-R229")
         if spec:
             spec.add_criterion("Expansão dos servidores MCP validada", lambda out: out.get("mcp") is True)
-        res = spec_verifier.verify("SPEC-935-R229", {"mcp": True})
+        res = spec_verifier.verify("SPEC-935-R229", {"mcp": True}, require_red_history=False)
         self.assertTrue(res["verified"])
-        self.assertEqual(res["status"], "green")
+        self.assertEqual(res["verification_scope"], "criteria_only")
+        self.assertEqual(res["status"], "criteria_passed")
 
 
 if __name__ == "__main__":

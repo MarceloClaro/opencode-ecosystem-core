@@ -1,0 +1,149 @@
+{
+  "status": "complete_scoped_local_verification",
+  "externally_validated": false,
+  "historic_backfill": false,
+  "current_gate": {
+    "required_for_software": true,
+    "missing_red": "blocked",
+    "declarative_inspection": "criteria_only_no_state_or_confidence_promotion"
+  },
+  "regression": {
+    "tests": 170,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "semantic_red_receipts": {
+    "delivery-red": {
+      "tests": 2,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0
+    },
+    "cleanup-red": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "source-binding-red": {
+      "tests": 2,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0
+    },
+    "autocorrection-red": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "oracle-support-red": {
+      "tests": 5,
+      "failures": 5,
+      "errors": 0,
+      "skipped": 0
+    },
+    "refactor-red": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "inspection-state-red": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "pytest-selection-red": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "bootstrap_history_red": "API absence assertion only, not semantic regression evidence",
+  "persistent_proof": "outputs/core-r839/persistent-local-pair.json",
+  "private_key_published": false,
+  "sources_sha256": {
+    "sdd/tdd_history.py": "193ccd75b85df9b28e3345351fc55dc114707801ef09efbdf5a34d78c74e22ca",
+    "sdd/tdd_runner.py": "1eeb7d8b544c33871c98de1e85063387271ead9b96ae1efae0ab760c106610d5",
+    "sdd/spec_engine.py": "9f4e077a643b6fa31adcbf14c96dbaa4be617d237a77737e825783411fa421da",
+    "marceloclaro/orchestrator.py": "5545b61d5aa5aecf0705a69bf43127a7f0c8bcf48a54b7abe75a9314d7e2b66b",
+    "marceloclaro/autonomous.py": "fb9b1404486a47ec051c3f62e550ae83c0259da7e93ec43b4b9e9aac1cac7ad1",
+    "marceloclaro/workflow.py": "b869567d4ee75429608c5677cfcd0bb17f97457dee65a1ea4a67e5102e4fa5c0",
+    "marceloclaro/cli.py": "60cfe797c8f05f8976a812d63d9b3d2b9b34030026a436c7f6465bead9166ea1",
+    "integrations/ecosystem_mcp.py": "f140aaf4e3b334dae012cd318fa77f933282cfb9415404f6863bbcfe55d9ced0",
+    "mci/self_correction.py": "047eb110800cb79809fe5cdecdaff32fcf878f74783edac53a60fc390e44a7ec",
+    "specs/SPEC-935-R839-historico-red-executado.md": "96a40670d3b8242735fc4d86ca30ad2ed1c325ec5e65686f3d7e4788b9f90a87",
+    "tests/test_r839_tdd_history.py": "d883fe928317982dda0a9727b35e074175f7a92034cb9b80c42639058a792177",
+    "tests/test_r839_red_delivery.py": "7c3f88e8033ce7c30248deed1af554bdb52adac3c6bf0746fee1f0043b6cfefa",
+    "tests/test_r839_verifier_delivery.py": "1d85a09e894bc29b4ae8ae9ed883ab281808078fae04813772100e584905d3e8",
+    "docs/TDD_HISTORICO_RED.md": "7ac63999dc81255eba315b639beeebd07f07ffb4d7efccd1fba308b8e6c16a2f",
+    ".github/workflows/ci.yml": "335e76cd0f6b9560e6694f70c6796c9673b0ee6e478ac21ca09ab9fed16edb3b"
+  },
+  "limitations": [
+    "Autenticação local não isola o dono do host nem valida o oráculo.",
+    "Prova persistente usa projeto controlado com pytest real; não usa LLM.",
+    "O histórico antigo incompleto permanece identificado; nenhum evento no passado foi inventado.",
+    "Escopo do oráculo restrito a tests; dependências externas exigem verificação própria.",
+    "The local global-suite receipt is consolidated in R820; skips and external-validation limits remain separate."
+  ],
+  "global_suite": "outputs/core-r820/attempt-7",
+  "lint_returncode": 0,
+  "types_returncode": 0,
+  "doctor": {
+    "checks_passed": 22,
+    "checks_total": 22,
+    "scope": "structural_installation_only"
+  },
+  "authenticated_reexecution": "outputs/core-r839/r838-authenticated-reexecution.json",
+  "reexecution_scope": "Pre-R838 copies conservadas: RED 8 falhas/5 aprovações; GREEN 13 aprovações, mesmos testes, datas atuais e assinatura local.",
+  "interrupted_attempt_4": {
+    "passed": 2163,
+    "failed": 1,
+    "skipped": 51,
+    "reason": "Teste antigo lia reflection; contrato atual registra observation sem promover confiança. Interrompido para corrigir e repetir o conjunto."
+  },
+  "deep_diagnostic_regression": "outputs/core-r839/deep-diagnose-final.xml",
+  "deep_diagnostic_green": {
+    "tests": 10,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "recorded_at_utc": "2026-10-13T02:23:58.963003+00:00",
+  "independent_audit": "outputs/core-r840/final-independent-audit.json",
+  "actual_core_primary_gate": "outputs/core-r840/core-canonical-delivery-accepted.json",
+  "core_canonical_oracle_override_fixed": "outputs/core-r840/oracle-override-audit/receipt.json",
+  "interrupted_attempt_6": {
+    "passed": 2147,
+    "failed": 0,
+    "skipped": 51,
+    "reason": "Independent counterexample revealed external oracle selector; interrupted with source hashes unchanged, canonical test fixed and real current RED/GREEN and primary gate repeated."
+  },
+  "global_attempt_5": {
+    "passed": 6899,
+    "failed": 2,
+    "skipped": 77,
+    "sources_changed_during_tests": false,
+    "reason": "R110 latency and hierarchical-memory fixture leakage, corrected in R840 while preserving original latency/ranking contracts."
+  },
+  "additional_archived_reexecutions": "outputs/core-r839/historical-reexecutions/summary.json",
+  "global_suite_receipt": {
+    "started_at_utc": "2026-10-12T22:20:02.082059+00:00",
+    "ended_at_utc": "2026-10-12T22:42:56.127109+00:00",
+    "command": [
+      "/home/marceloclaro/opencode-ecosystem-core/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "--junitxml=/home/marceloclaro/opencode-ecosystem-core/outputs/core-r820/attempt-7/full-suite.xml"
+    ],
+    "returncode": 0,
+    "duration_seconds": 1373.4467943640193,
+    "source_changes_during_tests": [],
+    "operational_source_changes_during_tests": []
+  }
+}

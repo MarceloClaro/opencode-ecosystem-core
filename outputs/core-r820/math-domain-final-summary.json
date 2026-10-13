@@ -1,0 +1,97 @@
+{
+  "recorded_at_utc": "2026-10-11T20:27:08.0118926Z",
+  "scope": "R818/R821 arithmetic-domain corrections authorized after independent reproduction",
+  "new_spec_or_test_file_added": false,
+  "evolution_modified": false,
+  "sources_frozen": true,
+  "source_sha256": {
+    "reasoning/engines.py": "40d21f1672b6221d8090d853e312bbb403aa07daf440c0a30d1dd136caa2c24f",
+    "tests/test_r818_restricted_math_engine.py": "3b96b44fab887ba9908e79d7c47536e91b744fbcc6205bd312844a9325442ef7",
+    "tests/test_r821_z3_fail_closed.py": "afda207a6a0e3800ebfa30992d614b485a9e10c1dd9518c897e6dc0910577eea",
+    "specs/SPEC-935-R818-parsing-matematico-restrito.md": "401aa480b246354b6e2ecad36f625c3990595d7cc9fa778a0e6c72b8085ec9f8",
+    "specs/SPEC-935-R821-z3-fail-closed.md": "323b1f1f698637be181dbb58d21ffa11331d59c121dec23611788224e9df546c",
+    "docs/REASONING_MATH_INPUT.md": "9b848895a6edcf58659a8df514dcab29466fa1a7919e1a8566df55040c581a33",
+    "docs/REASONING_Z3_INPUT.md": "894fe15e4a7a61974c84d1a7898b5f1665a259187e9090790c638960d5f98731"
+  },
+  "runs": {
+    "math-domain-red": {
+      "tests": 168,
+      "failures": 29,
+      "errors": 0,
+      "skipped": 0,
+      "duration_s": 4.244,
+      "junit": "outputs/core-r820/math-domain-red.xml"
+    },
+    "math-power-red": {
+      "tests": 21,
+      "failures": 12,
+      "errors": 0,
+      "skipped": 0,
+      "duration_s": 1.267,
+      "junit": "outputs/core-r820/math-power-red.xml"
+    },
+    "math-domain-final-green": {
+      "tests": 189,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "duration_s": 2.612,
+      "junit": "outputs/core-r820/math-domain-final-green.xml"
+    },
+    "math-domain-final-regression": {
+      "tests": 283,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "duration_s": 15.707,
+      "junit": "outputs/core-r820/math-domain-final-regression.xml"
+    }
+  },
+  "mutations": [
+    {
+      "variant": "remove_real_division",
+      "killed": true,
+      "observed_summary": "6 failed, 1 passed, 76 deselected in 1.45s",
+      "log": "outputs/core-r820/math-domain-final-mutant-remove_real_division.txt"
+    },
+    {
+      "variant": "remove_division_domain",
+      "killed": true,
+      "observed_summary": "6 failed, 77 deselected in 2.62s",
+      "log": "outputs/core-r820/math-domain-final-mutant-remove_division_domain.txt"
+    },
+    {
+      "variant": "remove_known_zero_refusal",
+      "killed": true,
+      "observed_summary": "6 failed, 77 deselected in 3.10s",
+      "log": "outputs/core-r820/math-domain-final-mutant-remove_known_zero_refusal.txt"
+    },
+    {
+      "variant": "remove_undefined_result_guard",
+      "killed": true,
+      "observed_summary": "10 failed, 1 passed, 95 deselected in 4.14s",
+      "log": "outputs/core-r820/math-domain-final-mutant-remove_undefined_result_guard.txt"
+    },
+    {
+      "variant": "remove_negative_power_domain",
+      "killed": true,
+      "observed_summary": "5 failed, 78 deselected in 1.20s",
+      "log": "outputs/core-r820/math-domain-final-mutant-remove_negative_power_domain.txt"
+    },
+    {
+      "variant": "remove_symbolic_zero_exponent_convention",
+      "killed": true,
+      "observed_summary": "2 failed, 5 passed, 76 deselected in 1.23s",
+      "log": "outputs/core-r820/math-domain-final-mutant-remove_symbolic_zero_exponent_convention.txt"
+    }
+  ],
+  "real_backend_evidence": "outputs/core-r820/math-domain-real-probe.json",
+  "original_independent_evidence": "outputs/core-r820/math-independent-probe.json",
+  "power_red_evidence": "outputs/core-r820/math-domain-power-red-probe.json",
+  "limitations": [
+    "Z3 solver timeout does not bound construction or total process memory/time.",
+    "Symbolic SymPy expressions with unknown finiteness are preserved; no universal domain claim.",
+    "unknown is injected in the test suite and is not claimed as an observed real solver outcome.",
+    "Internal confidence values have no external scientific calibration."
+  ]
+}

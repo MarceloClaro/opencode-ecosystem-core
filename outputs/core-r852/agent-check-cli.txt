@@ -1,0 +1,27 @@
+{
+  "success": true,
+  "operation": "agent",
+  "verification": "resolved_configuration_only",
+  "model": "rea_local/modelo-local",
+  "model_endpoint": "http://127.0.0.1:11434/v1",
+  "enabled_mcp": [
+    "rea-local-assistant"
+  ],
+  "model_inference_verified": false,
+  "externally_validated": false,
+  "limitations": [
+    "Configuração conferida no OpenCode instalado; modelo ainda precisa responder localmente."
+  ],
+  "metacognition": {
+    "observation_id": "70c12951-eded-49b6-81f2-096857612d75",
+    "persisted": true,
+    "scope_id": "9582d23051851dbac6183532d82a2a60f0d77305a21aa3cf8650631c73c8efaf",
+    "previous_observation_id": null,
+    "state_transition": {
+      "from": null,
+      "to": null
+    },
+    "confidence_promoted": false,
+    "externally_validated": false
+  }
+}

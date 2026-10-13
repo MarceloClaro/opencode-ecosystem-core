@@ -1,0 +1,65 @@
+{
+  "spec": "SPEC-935-R853",
+  "target": {
+    "url": "https://rx.engenhariaorofacial.com.br/",
+    "name": "Panoramica AI",
+    "kind": "web-application (SPA + FastAPI backend)",
+    "captured_at_utc": "2026-10-13",
+    "retrieval": "public HTTP GET (no authentication); authenticated areas were probed read-only and refused with 401"
+  },
+  "rea": {
+    "provider": "rea-javascript-application (REA 6.4.0)",
+    "method": "analyze_javascript_application (static, inert; bundle never executed)",
+    "passes": [
+      {
+        "pass": 1,
+        "input_tree_sha256": "e3cadad5fef9f47f21b787f60c26fd0966ca3659caea8db8b1d06e24e6b96766",
+        "evidence_id": "ev_a4d5e31a13e4bb312d7de212c8f7a10c2d88728c48231d2df1b75e736fb31590",
+        "relevant_files": 7,
+        "parsed_javascript_files": 1,
+        "visited_ast_nodes": 16947,
+        "findings": 6,
+        "note": "somente editor.js foi parseado como JS; o HTML ficou inerte"
+      },
+      {
+        "pass": 2,
+        "input_tree_sha256": "a1dcb837da40ea7f05e8466fa7841701ed1bafdc536952e75c709e543d8b54a8",
+        "evidence_id": "ev_adc1c84bda0b19556be146095455b89aaae4a38cf84529eca3e4c70dc53a2251",
+        "relevant_files": 5,
+        "parsed_javascript_files": 5,
+        "visited_ast_nodes": 26631,
+        "findings": 17,
+        "note": "scripts inline de index/review/validacao extraídos para .js e reanalisados"
+      }
+    ],
+    "endpoints_recovered": [
+      { "value": "/health", "mechanism": "call:fetch" },
+      { "value": "/predict/images", "mechanism": "call:fetch" },
+      { "value": "/segment/sam", "mechanism": "call:fetch" },
+      { "value": "/feedback", "mechanism": "call:fetch" },
+      { "value": "/admin/api/session", "mechanism": "call:fetch" }
+    ],
+    "storage_recovered": [
+      { "kind": "session-storage", "name": "panoramica-review-notice", "mechanism": "call:sessionStorage.setItem" }
+    ],
+    "renderers": ["index.html", "review.html", "validacao.html", "docs.html"],
+    "limitations": [
+      "JavaScript e HTML foram tratados como texto inerte; o bundle nunca foi executado.",
+      "Relações estáticas não provam execução em runtime.",
+      "Caminhos dinâmicos (template literals como /admin/api/images/${id}) podem permanecer não resolvidos."
+    ]
+  },
+  "artifacts_sha256": {
+    "index.html": "9638d56ae8aa3ef620abe98e755c316b1f121cccf7acedf2d197b6cd041a61f8",
+    "editor.js": "6c8cce034d66fdaccc5e98b66628272f515a1c82183d95e84e753bda7df331ea",
+    "review.html": "00e6f639ba44e52dacc22d262e9eb5aaa382b72be206b24e496cfc25c5887ece",
+    "validacao.html": "8e0c89949140aa624404c1af0f939fb3df75910493a7b9c0b3cb3d40c2d664a7",
+    "docs.html": "ed858cea6baef521fa5e62522a00dc000f54b9a1b9fd0f6bf4db8f68672cdb70",
+    "health.json": "7bf309d1f9f89c8f06178134a1e679bf4f978cb159f2c20bfaaa545498c09308",
+    "openapi.json": "f461e425729b068f2172bb6bb8b205561a7f5b9df6ee0a96bb0c8a46ff15fb1b"
+  },
+  "flags": {
+    "externally_validated": false,
+    "confidence_promoted": false
+  }
+}

@@ -46,13 +46,14 @@ class TestR219AgentEvalHarness(unittest.TestCase):
         self.assertEqual(report["overall_tsr"], 100.0)
         self.assertIn("marceloclaro", report["by_agent"])
 
-    def test_spec_verifier_execution(self):
+    def test_criteria_only_inspection(self):
         spec = spec_registry.get("SPEC-935-R219")
         if spec:
             spec.add_criterion("Agent Eval Harness validado", lambda out: out.get("harness") is True)
-        res = spec_verifier.verify("SPEC-935-R219", {"harness": True})
+        res = spec_verifier.verify("SPEC-935-R219", {"harness": True}, require_red_history=False)
         self.assertTrue(res["verified"])
-        self.assertEqual(res["status"], "green")
+        self.assertEqual(res["verification_scope"], "criteria_only")
+        self.assertEqual(res["status"], "criteria_passed")
 
 
 if __name__ == "__main__":

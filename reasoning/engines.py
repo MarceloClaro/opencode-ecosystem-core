@@ -4,8 +4,9 @@ Multi-Reasoning Engines — 11 Motores de Raciocínio (v2.0)
 =========================================================
 Evolução SPEC-917: 4 originais (corrigidos) + 7 novos motores.
 
-SEGURANÇA: nenhuma execução dinâmica de código. Z3 usa parser controlado
-por AST; SymPy usa sympify direto (seguro).
+ENTRADA MATEMÁTICA: Z3 e SymPy usam gramáticas controladas por AST.
+Texto externo não é encaminhado a parsing dinâmico do SymPy. Somente operações
+matemáticas explicitamente permitidas são construídas após validação integral.
 
 Motores:
   1. Z3Engine          — lógico-formal SAT/SMT          (z3-solver opcional)
@@ -25,6 +26,7 @@ Motores:
 from __future__ import annotations
 
 import ast
+import math
 import operator
 import re
 import time
@@ -74,27 +76,81 @@ _Z3_ALLOWED_OPS = {
 
 
 def _safe_build_z3_constraint(expr: str, variables: Dict[str, Any]) -> Any:
-    """Avalia expressão aritmética/lógica SEGURA para constraints Z3.
+    """Valida integralmente uma fórmula limitada antes de construir Z3.
 
-    Usa AST parser controlado com vocabulário restrito.
-    Retorna um objeto z3.BoolRef ou z3 expressiono.
+    O orçamento de potências reutiliza R818. Esses limites sintáticos não
+    garantem um teto de memória ou tempo total para toda fórmula aceita.
     """
+    if not isinstance(expr, str) or not expr.strip() or len(expr) > 4096:
+        raise ValueError("restrição vazia, inválida ou acima do limite")
+    try:
+        tree = ast.parse(expr.strip(), mode="eval")
+    except (SyntaxError, ValueError, RecursionError) as exc:
+        raise ValueError("sintaxe de restrição inválida") from exc
+    if sum(1 for _ in ast.walk(tree)) > 256:
+        raise ValueError("número de nós acima do limite")
+
+    def validate(node: ast.AST, depth: int = 0) -> str:
+        if depth > 32:
+            raise ValueError("profundidade acima do limite")
+        if isinstance(node, ast.Constant):
+            if type(node.value) is bool:
+                return "boolean"
+            if type(node.value) not in (int, float):
+                raise ValueError("somente constantes numéricas ou booleanas")
+            if type(node.value) is int and node.value.bit_length() > 256:
+                raise ValueError("inteiro acima do limite")
+            if type(node.value) is float and not math.isfinite(node.value):
+                raise ValueError("constante não finita")
+            return "numeric"
+        if isinstance(node, ast.Name):
+            if re.fullmatch(r"[A-Za-z][A-Za-z0-9_]{0,63}", node.id) is None:
+                raise ValueError("identificador privado ou inválido")
+            return "numeric"
+        if isinstance(node, ast.UnaryOp):
+            kind = validate(node.operand, depth + 1)
+            if isinstance(node.op, ast.Not) and kind == "boolean":
+                return "boolean"
+            if isinstance(node.op, (ast.UAdd, ast.USub)) and kind == "numeric":
+                return "numeric"
+            raise ValueError("operador unário ou tipo não suportado")
+        if isinstance(node, ast.BinOp) and isinstance(node.op, (ast.Add, ast.Sub, ast.Mult, ast.Div, ast.Pow)):
+            if validate(node.left, depth + 1) != "numeric" or validate(node.right, depth + 1) != "numeric":
+                raise ValueError("aritmética exige operandos numéricos")
+            if isinstance(node.op, ast.Pow):
+                # Somente validação restrita; nenhum objeto SymPy é criado.
+                _safe_math_ast(ast.unparse(node))
+            return "numeric"
+        if isinstance(node, ast.Compare):
+            if len(node.ops) != 1 or not isinstance(node.ops[0], (ast.Eq, ast.NotEq, ast.Gt, ast.Lt, ast.GtE, ast.LtE)):
+                raise ValueError("apenas comparações simples permitidas")
+            if validate(node.left, depth + 1) != "numeric" or validate(node.comparators[0], depth + 1) != "numeric":
+                raise ValueError("comparação exige operandos numéricos")
+            return "boolean"
+        if isinstance(node, ast.BoolOp) and isinstance(node.op, (ast.And, ast.Or)):
+            for value in node.values:
+                if validate(value, depth + 1) != "boolean":
+                    raise ValueError("operador lógico exige fórmulas booleanas")
+            return "boolean"
+        raise ValueError(f"nó AST não suportado: {type(node).__name__}")
+
+    if validate(tree.body) != "boolean":
+        raise ValueError("restrição deve ser uma fórmula booleana")
     import z3
 
     # Constrói dict com objetos z3 para variáveis conhecidas
     env: Dict[str, Any] = {}
     for name in variables:
         env[name] = variables[name]
+    arithmetic_domains: List[Any] = []
 
     def _eval_node(node: ast.AST) -> Any:
         if isinstance(node, ast.Constant):
-            if isinstance(node.value, (int, float)):
-                # Constantes numéricas no Z3
-                try:
-                    return z3.IntVal(int(node.value))
-                except Exception:
-                    return z3.RealVal(float(node.value))
-            return node.value
+            if type(node.value) is bool:
+                return z3.BoolVal(node.value)
+            if type(node.value) is int:
+                return z3.IntVal(node.value)
+            return z3.RealVal(str(node.value))
         elif isinstance(node, ast.Name):
             if node.id in env:
                 return env[node.id]
@@ -106,6 +162,10 @@ def _safe_build_z3_constraint(expr: str, variables: Dict[str, Any]) -> Any:
         elif isinstance(node, ast.UnaryOp):
             if isinstance(node.op, ast.USub):
                 return -_eval_node(node.operand)
+            if isinstance(node.op, ast.UAdd):
+                return _eval_node(node.operand)
+            if isinstance(node.op, ast.Not):
+                return z3.Not(_eval_node(node.operand))
             raise ValueError(f"operador unário não suportado: {type(node.op)}")
         elif isinstance(node, ast.BinOp):
             left = _eval_node(node.left)
@@ -117,9 +177,23 @@ def _safe_build_z3_constraint(expr: str, variables: Dict[str, Any]) -> Any:
             elif isinstance(node.op, ast.Mult):
                 return left * right
             elif isinstance(node.op, ast.Div):
-                return left / right
+                # A gramática usa divisão real usual, inclusive entre dois
+                # inteiros; o / de IntRef faria divisão inteira silenciosa.
+                if z3.is_true(z3.simplify(right == 0)):
+                    raise ValueError("divisão por zero: denominador comprovadamente nulo")
+                arithmetic_domains.append(right != 0)
+                real_left = z3.ToReal(left) if z3.is_int(left) else left
+                real_right = z3.ToReal(right) if z3.is_int(right) else right
+                return real_left / real_right
             elif isinstance(node.op, ast.Pow):
-                return left ** right
+                if z3.is_true(z3.simplify(z3.And(left == 0, right < 0))):
+                    raise ValueError("potência indefinida: base zero com expoente negativo")
+                arithmetic_domains.append(z3.Or(right >= 0, left != 0))
+                # Convenção da fachada matemática (também usada pelo SymPy):
+                # a**0 = 1, incluindo 0**0; Z3 totaliza 0**0 arbitrariamente.
+                if z3.is_true(z3.simplify(right == 0)):
+                    return z3.RealVal(1)
+                return z3.If(right == 0, z3.RealVal(1), left ** right)
             raise ValueError(f"operador binário não suportado: {type(node.op)}")
         elif isinstance(node, ast.Compare):
             left = _eval_node(node.left)
@@ -147,12 +221,12 @@ def _safe_build_z3_constraint(expr: str, variables: Dict[str, Any]) -> Any:
             elif isinstance(node.op, ast.Or):
                 return z3.Or(*values)
             raise ValueError(f"operador booleano não suportado: {type(node.op)}")
-        elif isinstance(node, ast.Not):
-            return z3.Not(_eval_node(node.operand))
         raise ValueError(f"nó AST não suportado: {type(node)}")
 
-    tree = ast.parse(expr, mode="eval")
-    return _eval_node(tree.body)
+    formula = _eval_node(tree.body)
+    # O domínio vale para a fórmula inteira. Dentro de Not/Or, uma guarda
+    # poderia ser negada ou ocultada por outro ramo e admitir operações indefinidas.
+    return z3.And(*arithmetic_domains, formula) if arithmetic_domains else formula
 
 
 class Z3Engine:
@@ -173,26 +247,47 @@ class Z3Engine:
     def reason(self, query: str, constraints: Optional[List[str]] = None) -> ReasoningResult:
         started = time.time()
         steps: List[str] = []
-        if self.available:
-            import z3
-            solver = z3.Solver()
-            variables: Dict[str, Any] = {}
-            for c in constraints or []:
-                try:
+        invalid_collection = constraints is not None and (
+            not isinstance(constraints, (list, tuple))
+            or len(constraints) > 64
+            or any(not isinstance(c, str) for c in constraints)
+            or sum(len(c) for c in constraints) > 16384
+        )
+        if invalid_collection:
+            conclusion = "Operação Z3 recusada: forneça até 64 restrições textuais (16384 caracteres totais)"
+            confidence = 0.0
+        elif not constraints:
+            conclusion = (
+                "Sem restrições formais: somente tautologia vazia; "
+                "a query não avaliada exige uma fórmula explícita"
+            )
+            confidence = 0.0
+        elif self.available:
+            try:
+                import z3
+                solver = z3.Solver()
+                solver.set(timeout=5000, rlimit=100000)
+                variables: Dict[str, Any] = {}
+                for c in constraints:
                     z3_expr = _safe_build_z3_constraint(c, variables)
                     solver.add(z3_expr)
                     steps.append(f"restrição adicionada (safe AST): {c}")
-                except Exception as exc:
-                    steps.append(f"restrição ignorada ({c}): {exc}")
-            verdict = solver.check()
-            if str(verdict) == "sat":
-                model = solver.model()
-                assignment = {str(d): str(model[d]) for d in model.decls()}
-                conclusion = f"SATISFATÍVEL — modelo: {assignment}"
-                confidence = 0.95
-            else:
-                conclusion = f"Veredicto Z3: {verdict}"
-                confidence = 0.9
+                verdict = solver.check()
+                if str(verdict) == "sat":
+                    model = solver.model()
+                    assignment = {str(d): str(model[d]) for d in model.decls()}
+                    conclusion = f"SATISFATÍVEL — modelo: {assignment}"
+                    confidence = 0.95
+                elif str(verdict) == "unsat":
+                    conclusion = f"Veredicto Z3: {verdict}"
+                    confidence = 0.9
+                else:
+                    conclusion = f"Veredicto Z3 inconclusivo: {verdict}"
+                    confidence = 0.0
+            except Exception as exc:
+                conclusion = f"Operação Z3 recusada: {exc}"
+                confidence = 0.0
+                steps.append("Problema integral recusado; nenhuma conclusão sobre restrições parciais")
         else:
             # Fallback: análise proposicional por contradição direta
             steps.append("z3-solver ausente — fallback proposicional")
@@ -215,11 +310,186 @@ class Z3Engine:
 # 2. SymPyEngine — Simbólico-Matemático (CORRIGIDO: sem execução dinâmica)
 # ═══════════════════════════════════════════════════════════════════════════
 
-class SymPyEngine:
-    """Motor simbólico-matemático (sympy) com fallback aritmético stdlib.
+_MATH_CALL_ARITIES = {
+    "sin": (1, 1), "cos": (1, 1), "tan": (1, 1), "sqrt": (1, 1),
+    "exp": (1, 1), "log": (1, 2), "Abs": (1, 1),
+    "solve": (1, 2), "integrate": (2, 2), "diff": (2, 3),
+}
+_MATH_CONSTANTS = {"pi", "E", "I"}
+_MATH_BINARY_OPS = (ast.Add, ast.Sub, ast.Mult, ast.Div, ast.Mod, ast.Pow)
 
-    CORRIGIDO v2.0: execução dinâmica substituída por sympy.sympify (seguro por natureza)
-    + parser de equações com split por '='.
+
+def _math_literal_integer(node: ast.AST) -> Optional[int]:
+    if isinstance(node, ast.Constant) and type(node.value) is int:
+        return node.value
+    if isinstance(node, ast.UnaryOp) and isinstance(node.op, (ast.UAdd, ast.USub)):
+        value = _math_literal_integer(node.operand)
+        if value is not None:
+            return -value if isinstance(node.op, ast.USub) else value
+    return None
+
+
+def _safe_math_ast(text: str) -> Tuple[ast.AST, Optional[ast.AST]]:
+    """Valida toda a gramática antes de construir ou calcular qualquer objeto.
+
+    Limites sintáticos reduzem entradas patológicas; não constituem timeout
+    dos algoritmos de resolução ou integração do backend.
+    """
+    if not isinstance(text, str) or not text.strip() or len(text) > 4096:
+        raise ValueError("texto matemático vazio, inválido ou acima do limite")
+    text = text.strip()
+    if re.fullmatch(r"[A-Za-z0-9_+\-*/%().,\s=]+", text) is None:
+        raise ValueError("caractere fora da gramática matemática")
+    if "=" in text:
+        if text.count("=") != 1:
+            raise ValueError("apenas igualdade simples lhs = rhs é permitida")
+        parts = text.split("=")
+    else:
+        parts = [text]
+    try:
+        trees = [ast.parse(part.strip(), mode="eval").body for part in parts]
+    except (SyntaxError, ValueError, RecursionError) as exc:
+        raise ValueError("sintaxe matemática inválida") from exc
+    if sum(sum(1 for _ in ast.walk(tree)) for tree in trees) > 256:
+        raise ValueError("número de nós acima do limite")
+
+    def validate(node: ast.AST, depth: int = 0) -> None:
+        if depth > 32:
+            raise ValueError("profundidade acima do limite")
+        if isinstance(node, ast.Constant):
+            if type(node.value) not in (int, float):
+                raise ValueError("somente constantes numéricas são permitidas")
+            if isinstance(node.value, int) and node.value.bit_length() > 256:
+                raise ValueError("inteiro acima do limite")
+            if isinstance(node.value, float) and not math.isfinite(node.value):
+                raise ValueError("constante não finita")
+        elif isinstance(node, ast.Name):
+            if re.fullmatch(r"[A-Za-z][A-Za-z0-9_]{0,63}", node.id) is None:
+                raise ValueError("identificador privado ou inválido")
+            if node.id in _MATH_CALL_ARITIES:
+                raise ValueError("função matemática exige chamada explícita")
+        elif isinstance(node, ast.UnaryOp) and isinstance(node.op, (ast.UAdd, ast.USub)):
+            validate(node.operand, depth + 1)
+        elif isinstance(node, ast.BinOp) and isinstance(node.op, _MATH_BINARY_OPS):
+            validate(node.left, depth + 1)
+            validate(node.right, depth + 1)
+            if isinstance(node.op, ast.Pow):
+                if any(isinstance(child, ast.BinOp) and isinstance(child.op, ast.Pow)
+                       for side in (node.left, node.right) for child in ast.walk(side)):
+                    raise ValueError("potências aninhadas não são permitidas")
+                exponent = _math_literal_integer(node.right)
+                if exponent is None:
+                    symbolic = isinstance(node.right, ast.Name) or (
+                        isinstance(node.right, ast.UnaryOp)
+                        and isinstance(node.right.operand, ast.Name)
+                    )
+                    if not symbolic:
+                        if any(isinstance(child, (ast.Name, ast.Call)) for child in ast.walk(node.right)):
+                            raise ValueError("expoente composto simbólico ou por chamada não permitido")
+                        # Só aritmética finita já validada; não chama o backend.
+                        exponent = _safe_arithmetic_compute(node.right)
+                base_nodes = sum(1 for _ in ast.walk(node.left))
+                if base_nodes > 16:
+                    raise ValueError("base de potência acima do limite")
+                if exponent is not None:
+                    if abs(exponent) > 256 or base_nodes * max(1, abs(exponent)) > 512:
+                        raise ValueError("expoente acima do limite")
+                    base = _math_literal_integer(node.left)
+                    if base is not None and base.bit_length() * max(1, abs(exponent)) > 4096:
+                        raise ValueError("resultado da potência acima do limite")
+                    if not any(isinstance(child, (ast.Name, ast.Call)) for child in ast.walk(node.left)):
+                        numeric_base = abs(_safe_arithmetic_compute(node.left))
+                        if numeric_base not in (0, 1) and abs(math.log2(numeric_base) * exponent) > 4096:
+                            raise ValueError("resultado da potência calculada acima do limite")
+        elif isinstance(node, ast.Call):
+            if not isinstance(node.func, ast.Name) or node.func.id not in _MATH_CALL_ARITIES:
+                raise ValueError("chamada fora da tabela matemática permitida")
+            name = node.func.id
+            lower, upper = _MATH_CALL_ARITIES[name]
+            if node.keywords or not lower <= len(node.args) <= upper:
+                raise ValueError("argumentos não permitidos para função matemática")
+            for index, argument in enumerate(node.args):
+                if name == "integrate" and index == 1 and isinstance(argument, ast.Tuple):
+                    if len(argument.elts) != 3 or not isinstance(argument.elts[0], ast.Name):
+                        raise ValueError("limites de integral exigem (variável, inferior, superior)")
+                    for element in argument.elts:
+                        validate(element, depth + 1)
+                else:
+                    validate(argument, depth + 1)
+            if name in {"diff", "integrate", "solve"} and len(node.args) >= 2:
+                variable = node.args[1]
+                if not isinstance(variable, ast.Name) and not (
+                    name == "integrate" and isinstance(variable, ast.Tuple)
+                ):
+                    raise ValueError("variável matemática deve ser um símbolo simples")
+            if name == "diff" and len(node.args) == 3:
+                order = _math_literal_integer(node.args[2])
+                if order is None or not 0 <= order <= 32:
+                    raise ValueError("ordem de derivação inválida ou acima do limite")
+        else:
+            raise ValueError(f"nó fora da gramática matemática: {type(node).__name__}")
+
+    for tree in trees:
+        validate(tree)
+    return trees[0], trees[1] if len(trees) == 2 else None
+
+
+def _require_defined_math_result(value: Any, sympy: Any) -> None:
+    """Recusa resultados indefinidos sem exigir finitude de todo símbolo."""
+    if isinstance(value, sympy.Basic):
+        if value.has(sympy.nan, sympy.zoo, sympy.oo, -sympy.oo):
+            raise ValueError("resultado matemático indefinido ou infinito")
+    elif isinstance(value, dict):
+        for key, item in value.items():
+            _require_defined_math_result(key, sympy)
+            _require_defined_math_result(item, sympy)
+    elif isinstance(value, (list, tuple, set)):
+        for item in value:
+            _require_defined_math_result(item, sympy)
+    elif type(value) is float and not math.isfinite(value):
+        raise ValueError("resultado numérico indefinido ou infinito")
+
+
+def _build_sympy_math(node: ast.AST, sympy: Any) -> Any:
+    """Constrói somente objetos de uma AST já validada, sem reparsar texto."""
+    functions = {
+        "sin": sympy.sin, "cos": sympy.cos, "tan": sympy.tan,
+        "sqrt": sympy.sqrt, "exp": sympy.exp, "log": sympy.log,
+        "Abs": sympy.Abs, "solve": sympy.solve,
+        "integrate": sympy.integrate, "diff": sympy.diff,
+    }
+    constants = {"pi": sympy.pi, "E": sympy.E, "I": sympy.I}
+    operations = {ast.Add: operator.add, ast.Sub: operator.sub,
+                  ast.Mult: operator.mul, ast.Div: operator.truediv,
+                  ast.Mod: operator.mod, ast.Pow: operator.pow}
+    if isinstance(node, ast.Constant):
+        result = sympy.Integer(node.value) if type(node.value) is int else sympy.Float(node.value)
+    elif isinstance(node, ast.Name):
+        result = constants[node.id] if node.id in constants else sympy.Symbol(node.id)
+    elif isinstance(node, ast.UnaryOp):
+        value = _build_sympy_math(node.operand, sympy)
+        result = -value if isinstance(node.op, ast.USub) else value
+    elif isinstance(node, ast.BinOp):
+        result = operations[type(node.op)](_build_sympy_math(node.left, sympy),
+                                          _build_sympy_math(node.right, sympy))
+    elif isinstance(node, ast.Tuple):
+        result = tuple(_build_sympy_math(element, sympy) for element in node.elts)
+    elif isinstance(node, ast.Call):
+        arguments = [_build_sympy_math(argument, sympy) for argument in node.args]
+        if node.func.id == "diff" and len(arguments) == 3:
+            arguments[2] = int(arguments[2])
+        result = functions[node.func.id](*arguments)
+    else:
+        raise ValueError("AST matemática não reconhecida")
+    _require_defined_math_result(result, sympy)
+    return result
+
+
+class SymPyEngine:
+    """Motor simbólico com AST validada e fallback numérico sem sanitização.
+
+    R818: texto externo não é reparsado pelo backend. Somente operações
+    matemáticas permitidas são construídas após validação da árvore inteira.
     """
 
     name = "sympy"
@@ -234,85 +504,74 @@ class SymPyEngine:
     def reason(self, query: str, expression: Optional[str] = None) -> ReasoningResult:
         started = time.time()
         steps: List[str] = []
-        expr = (expression or query).strip()
-        if self.available:
-            import sympy
-            try:
-                # Equação: detecta "=" simples (não confundir com "==")
-                if "=" in expr and "==" not in expr:
-                    # Parser de equação manual: split no primeiro "="
-                    idx = expr.index("=")
-                    left_str = expr[:idx].strip()
-                    right_str = expr[idx + 1:].strip()
-                    left = sympy.sympify(left_str)
-                    right = sympy.sympify(right_str)
-                    eq = sympy.Eq(left, right)
-                    symbols = sorted(eq.free_symbols, key=str)
+        expr = query if expression is None else expression
+        try:
+            left_ast, right_ast = _safe_math_ast(expr)
+            if expression is None and isinstance(left_ast, ast.Name) and right_ast is None:
+                if len(left_ast.id) > 1 and left_ast.id not in _MATH_CONSTANTS:
+                    raise ValueError("consulta descritiva exige expression matemática explícita")
+            if self.available:
+                import sympy
+                left = _build_sympy_math(left_ast, sympy)
+                if right_ast is not None:
+                    right = _build_sympy_math(right_ast, sympy)
+                    equation = sympy.Eq(left, right)
+                    symbols = sorted(equation.free_symbols, key=str)
                     if symbols:
-                        solutions = sympy.solve(eq, symbols[0])
+                        solutions = sympy.solve(equation, symbols[0])
+                        _require_defined_math_result(solutions, sympy)
                         conclusion = f"soluções para {symbols[0]}: {solutions}"
                     else:
-                        conclusion = f"equação sem símbolos: {eq}"
-                    steps.append(f"equação resolvida simbolicamente: {expr}")
-                    confidence = 0.95
+                        conclusion = f"equação sem símbolos: {equation}"
+                    steps.append(f"equação resolvida simbolicamente por AST validada: {expr}")
                 else:
-                    simplified = sympy.simplify(sympy.sympify(expr))
+                    simplified = left if isinstance(left, (list, dict, tuple)) else sympy.simplify(left)
+                    _require_defined_math_result(simplified, sympy)
                     conclusion = f"forma simplificada: {simplified}"
-                    steps.append(f"expressão simplificada: {expr}")
-                    confidence = 0.95
-            except Exception as exc:
-                conclusion = f"não foi possível processar simbolicamente: {exc}"
-                confidence = 0.3
-        else:
-            # Fallback aritmético SEGURO usando ast.literal_eval
-            steps.append("sympy ausente — fallback aritmético seguro")
-            try:
-                # Permite apenas números e operadores aritméticos básicos
-                safe_expr = re.sub(r"[^0-9+\-*/().% ]", "", expr)
-                # Remove caracteres solitários que não formam expressões
-                safe_expr = re.sub(r"\b[a-zA-Z_]\w*\b", "", safe_expr)
-                if "=" in safe_expr:
-                    safe_expr = safe_expr.split("=")[0]
-                if safe_expr.strip():
-                    # Usa operator de forma controlada via AST
-                    tree = ast.parse(safe_expr, mode="eval")
-                    result = _safe_arithmetic_compute(tree.body)
-                    conclusion = f"avaliação numérica: {result}"
-                    confidence = 0.6
-                else:
-                    conclusion = "expressão vazia após sanitização"
-                    confidence = 0.2
-            except Exception as exc:
-                conclusion = f"expressão não numérica — requer sympy ({exc})"
-                confidence = 0.2
+                    steps.append(f"expressão simplificada por AST validada: {expr}")
+                confidence = 0.95
+            else:
+                steps.append("sympy ausente — fallback aritmético por AST validada")
+                if right_ast is not None:
+                    raise ValueError("equações exigem SymPy")
+                result = _safe_arithmetic_compute(left_ast)
+                conclusion = f"avaliação numérica: {result}"
+                confidence = 0.6
+        except Exception as exc:
+            conclusion = f"expressão matemática recusada: {exc}"
+            confidence = 0.0
+            steps.append("entrada ou operação recusada; nenhum resultado matemático concluído")
         return ReasoningResult(self.name, query, conclusion, confidence, steps,
                                self.available, round(time.time() - started, 4))
 
 
 def _safe_arithmetic_compute(node: ast.AST) -> float:
-    """Avalia expressão aritmética SEGURA via AST."""
-    ops = {
+    """Calcula somente uma AST numérica validada, recusando resultados não finitos."""
+    operations = {
         ast.Add: operator.add, ast.Sub: operator.sub,
         ast.Mult: operator.mul, ast.Div: operator.truediv,
-        ast.Pow: operator.pow, ast.USub: operator.neg,
-        ast.Mod: operator.mod,
+        ast.Pow: operator.pow, ast.Mod: operator.mod,
     }
     if isinstance(node, ast.Constant):
-        if isinstance(node.value, (int, float)):
+        if type(node.value) in (int, float) and math.isfinite(node.value):
             return float(node.value)
-        raise ValueError(f"constante não numérica: {node.value}")
-    elif isinstance(node, ast.UnaryOp):
+        raise ValueError("constante não numérica ou não finita")
+    if isinstance(node, ast.UnaryOp):
+        value = _safe_arithmetic_compute(node.operand)
         if isinstance(node.op, ast.USub):
-            return -_safe_arithmetic_compute(node.operand)
-        raise ValueError(f"unário não suportado: {type(node.op)}")
-    elif isinstance(node, ast.BinOp):
-        op_func = ops.get(type(node.op))
-        if op_func is None:
-            raise ValueError(f"operador não suportado: {type(node.op)}")
-        return op_func(_safe_arithmetic_compute(node.left), _safe_arithmetic_compute(node.right))
-    elif isinstance(node, ast.Expression):
-        return _safe_arithmetic_compute(node.body)
-    raise ValueError(f"nó não suportado: {type(node)}")
+            return -value
+        if isinstance(node.op, ast.UAdd):
+            return value
+        raise ValueError("operador unário não permitido")
+    if isinstance(node, ast.BinOp):
+        function = operations.get(type(node.op))
+        if function is None:
+            raise ValueError("operador numérico não permitido")
+        value = function(_safe_arithmetic_compute(node.left), _safe_arithmetic_compute(node.right))
+        if not math.isfinite(value):
+            raise ValueError("resultado numérico não finito")
+        return value
+    raise ValueError("fallback aceita somente expressões numéricas")
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -1211,7 +1470,7 @@ class MultiReasoningEngine:
     def reason(self, query: str, engine: str = "auto", **kwargs) -> ReasoningResult:
         requested_engine = engine
         if engine == "auto":
-            engine = self._route(query)
+            engine = "sympy" if kwargs.get("expression") is not None else self._route(query)
         eng = self.engines.get(engine)
         if not eng:
             raise ValueError(
@@ -1290,9 +1549,14 @@ class MultiReasoningEngine:
             return "z3"
 
         # Simbólico-matemático
-        if any(k in q for k in ["resolver", "equação", "simplifi", "derivada", "integral",
-                                 "=", "integrate", "differentiate"]):
+        if re.search(r"\b(?:equação|equações|equation|equations|derivada|derivadas|derivative|integral|integrate|differentiate|diff|solve)\b", q):
             return "sympy"
+        try:
+            math_ast, equation_ast = _safe_math_ast(query)
+            if equation_ast is not None or not isinstance(math_ast, ast.Name) or len(math_ast.id) == 1 or math_ast.id in _MATH_CONSTANTS:
+                return "sympy"
+        except ValueError:
+            pass
 
         # Relacional
         if any(k in q for k in ["relação", "fato", "quem é", "parentesco", "grafo",

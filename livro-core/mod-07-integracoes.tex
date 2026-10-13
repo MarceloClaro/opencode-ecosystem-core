@@ -19,7 +19,7 @@
 \elemento{Integrar sem delegar responsabilidade}{\metainfo{ID}{I-00} \hfill \metainfo{Camada}{6 deste manual} \hfill \metainfo{Regra}{fail-closed + anti-overclaim}}
 
 \begin{descricao}
-A integração conecta o Core ao mundo: 7 servidores MCP, executores externos
+A configuração declara \CoreMCPCount{} servidores MCP e integrações com executores externos
 (Gemini, Reasonix, Plandex, Goose, Haystack, MiroFish via proxy e NotebookLM via
 ponte) e dezenas de repositórios que inspiram padrões. A regra transversal é
 \emph{fail-closed}: se o serviço não está disponível ou não valida, o pedido falha
@@ -27,12 +27,13 @@ com clareza — nunca degrada silenciosamente para ``sucesso''.
 \end{descricao}
 
 \clearpage
-\section{Os sete servidores MCP}
+\section{Servidores MCP: declarações e execução}
 
-\elemento{Inventário verificado dos MCPs}{\metainfo{Fonte}{opencode.json (chave mcp)} \hfill \metainfo{Total}{7}}
+\elemento{Retrato histórico de sete MCPs}{\metainfo{Fonte}{edição de 29/09/2026} \hfill \metainfo{Total histórico}{7}}
 
 \begin{resultado}
-Servidores MCP configurados (ordem do arquivo de configuração):\par
+Retrato histórico da configuração, conservado para comparação; esta lista de sete
+entradas não é o inventário corrente e não foi reexecutada nesta revisão:\par
 \smallskip
 {\footnotesize
 \begin{tabularx}{\textwidth}{lY}
@@ -82,9 +83,15 @@ Como um MCP se apoia no ciclo:
 \end{flowch}
 
 \begin{descricao}
-\textbf{Como funciona e por quê.} O desenho tem quatro nós --- \emph{Requisição}, \emph{Transporte}, \emph{Ferramenta}, \emph{Resposta} --- e a seta da requisição para o transporte é assíncrona, o que o desenho indica com estilo distinto. A assimetria relevante: a \emph{resposta} volta por um caminho que não é o inverso do caminho de ida, porque pode ser \textbf{truncada} ou \textbf{negada}, e o cliente precisa tratar os três casos como estados distintos.
-\textbf{Justificativa.} A separação entre protocolo e implementação responde ao problema da complexidade acidental discutido por Brooks: sem uma fronteira clara, o trabalho tende a se deslocar para a camada errada. Ao explicitar essa fronteira, a integração reduz dependências específicas de ferramentas e passa a depender do contrato declarado \citref{BROOKS, F. P. No silver bullet: essence and accidents of software engineering. \emph{Computer}, v.~20, n.~4, p.~10-19, 1987}{10.1109/MC.1987.1663532}{A separação entre protocolo e implementação responde ao problema da complexidade acidental discutido por Brooks: sem uma fronteira clara, o trabalho tende a se deslocar para a camada errada. Ao explicitar essa fronteira, a integração reduz dependências específicas de ferramentas e passa a depender do contrato declarado.}{There is no single development, in either technology or management technique, which by itself promises even one order-of-magnitude improvement within a decade in productivity, in reliability, in simplicity}{Não há um único desenvolvimento, seja em tecnologia ou técnica de gestão, que por si só prometa uma melhoria de uma ordem de magnitude em produtividade, confiabilidade e simplicidade dentro de uma década.}{BROOKS, 1987, p.~10--19}.
+\textbf{Como funciona e por quê.} A interface encaminha argumentos à ferramenta; o servidor valida ou interpreta a operação e retorna uma resposta. Nesta ferramenta local, postar uma tarefa a leva ao MetaBus e ao Blackboard; acompanhar a conclusão requer outra leitura de estado.
+\textbf{Justificativa.} Separar resposta do protocolo e estado da tarefa impede tratar o aceite de uma chamada como conclusão do trabalho anunciado.
+\textbf{Limite.} Este é um esquema genérico, não a especificação completa do protocolo MCP. Servidor declarado, ferramenta descoberta e tarefa concluída são evidências diferentes.
 \end{descricao}
+\fontecore{mci/mcp_server.py}{mci_post_task}
+
+
+\noindent\textit{Contexto bibliográfico geral, sem certificação desta rota.} \citref{BROOKS, F. P. No silver bullet: essence and accidents of software engineering. \emph{Computer}, v.~20, n.~4, p.~10-19, 1987}{10.1109/MC.1987.1663532}{Enquadramento teórico geral; a implementação desta rota é conferida na fonte primária local. Este artigo não certifica o funcionamento nem o desempenho do Core.}{There is no single development, in either technology or management technique, which by itself promises even one order-of-magnitude improvement within a decade in productivity, in reliability, in simplicity}{Não há um único desenvolvimento, seja em tecnologia ou técnica de gestão, que por si só prometa uma melhoria de uma ordem de magnitude em produtividade, confiabilidade e simplicidade dentro de uma década.}{BROOKS, 1987, p.~10--19}
+
 
 \begin{niveis}
 \textbf{Intuição:} tomadas padrão na parede: qualquer aparelho que siga o padrão
@@ -96,6 +103,33 @@ skills e plugins.\\
 \end{niveis}
 
 \clearpage
+% BEGIN-R814-INVENTARIO
+\begin{resultado}
+\textbf{Inventário corrente de declarações MCP.} Fonte: \pth{opencode.json},
+gerada por \pth{gen_inventario.py}. Esta edição declara 16 servidores.
+{\footnotesize\begin{tabularx}{\textwidth}{YYY}
+\toprule Nome & Tipo declarado & Ativação declarada \\ \midrule
+\pth{antigravity-bridge} & local & habilitado na configuração \\
+\pth{artigo-academico-mcp} & local & habilitado na configuração \\
+\pth{arxiv-mcp} & local & habilitado na configuração \\
+\pth{colibri-mcp} & local & habilitado na configuração \\
+\pth{ecosystem-network} & local & habilitado na configuração \\
+\pth{fetch} & local & habilitado na configuração \\
+\pth{filesystem} & local & habilitado na configuração \\
+\pth{latexmk-mcp} & local & habilitado na configuração \\
+\pth{litert-lm} & local & habilitado na configuração \\
+\pth{metacognitive-interconnect} & local & habilitado na configuração \\
+\pth{polymath-labs-mcp} & local & habilitado na configuração \\
+\pth{pypi-search} & local & habilitado na configuração \\
+\pth{rea} & local & habilitado na configuração \\
+\pth{scanners-mcp} & local & habilitado na configuração \\
+\pth{sequential-thinking} & local & habilitado na configuração \\
+\pth{web-deploy-mcp} & local & habilitado na configuração \\
+\bottomrule\end{tabularx}}
+Habilitação na configuração não comprova processo iniciado, autenticação, conectividade, descoberta de ferramentas ou operação concluída. Comandos, URLs e variáveis de conexão não são publicados nesta tabela.
+\end{resultado}
+% END-R814-INVENTARIO
+
 \section{Servidores MCP nativos}
 
 \elemento{O Core como fornecedor de MCP}{\metainfo{Rota}{.opencode/mcp/}}
@@ -215,9 +249,15 @@ github.com/lucas-cirilo/abnt2025-latex & template ABNT LaTeX (SPEC-916) \\
 \end{flowch}
 
 \begin{descricao}
-\textbf{Como funciona e por quê.} O desenho mostra \emph{observação} $\to$ \emph{especificação} $\to$ \emph{implementação} $\to$ \emph{medição}, e o detalhe é que a seta de retorno da medição aponta para a \emph{observação}, não para a implementação. É um ciclo de \textbf{calibração}: a medição não corrige o código, corrige a percepção do que era problema. Por isso a seta de retorno é mais longa que as outras.
-\textbf{Justificativa.} Um trabalho só é reprodutível se o procedimento inteiro é repetível, não se o resultado é repetível. Aplicado a integração, isso significa que adotar uma ferramenta externa sem medir o efeito sobre o sistema é \textbf{trabalho não reprodutível}: na segunda execução, com a ferramenta presente, o resultado muda, e ninguém sabe dizer por quê. A seta de retorno para a observação é o registro dessa mudança \citref{PENG, R. D. Reproducible research in computational science. \emph{Science}, v.~334, n.~6060, p.~1226-1227, 2011}{10.1126/science.1213847}{Um trabalho só é reprodutível se o procedimento inteiro é repetível, não se o resultado é repetível. Aplicado a integração, isso significa que adotar uma ferramenta externa sem medir o efeito sobre o sistema é \textbf{trabalho não reprodutível}: na segunda execução, com a ferramenta presente, o resultado muda, e ninguém sabe dizer por quê. A seta de retorno para a observação é o registro dessa mudança.}{Reproducibility has the potential to serve as a minimum standard for judging scientific claims when full independent replication of a study is not possible}{A reprodutibilidade tem o potencial de servir como padrão mínimo para julgar alegações científicas quando a replicação independente completa de um estudo não é possível.}{PENG, 2011, p.~1226--1227}.
+\textbf{Como funciona e por quê.} As setas distinguem fonte de inspiração, análise, adaptação, especificação, testes e registro. A adaptação é uma decisão local cuja origem e diferenças devem ser documentadas; testes verificam o comportamento exigido pela spec.
+\textbf{Justificativa.} Registrar proveniência e diferenças permite conferir o que foi incorporado e o que permaneceu somente como proposta.
+\textbf{Limite.} Semelhança com um projeto externo não comprova equivalência, licença adequada, eficácia ou execução integrada. O registro documenta a mudança, não substitui essas verificações.
 \end{descricao}
+\fontecore{evolution/cycles.py}{EvolutionRegistry.record}
+
+
+\noindent\textit{Contexto bibliográfico geral, sem certificação desta rota.} \citref{PENG, R. D. Reproducible research in computational science. \emph{Science}, v.~334, n.~6060, p.~1226-1227, 2011}{10.1126/science.1213847}{Enquadramento teórico geral; a implementação desta rota é conferida na fonte primária local. Este artigo não certifica o funcionamento nem o desempenho do Core.}{Reproducibility has the potential to serve as a minimum standard for judging scientific claims when full independent replication of a study is not possible}{A reprodutibilidade tem o potencial de servir como padrão mínimo para julgar alegações científicas quando a replicação independente completa de um estudo não é possível.}{PENG, 2011, p.~1226--1227}
+
 
 \begin{aviso}
 Atribuir inspiração não equivale a endosse nem a meia-verdade de licença: as
@@ -269,15 +309,214 @@ cada uma, escreva uma frase do que ela expõe e uma limitação declarada.
 %  execuções (marcador impede reescrita).
 % ============================================================
 
+% BEGIN-R822-INTEGRATION-SUPPLEMENT
+% Fonte autoral: novos percursos primários e limites locais, 12/10/2026.
+\clearpage
+\section{REA: análise estática sob o agente primário}
+
+\elemento{Análise binária com REA e Ghidra}{\metainfo{ID}{I-REA} \hfill
+\metainfo{Revisão}{R823, 12/10/2026}}
+
+\begin{descricao}
+A entrada \pth{MarceloClaroOrchestrator.rea_action} coordena o REA 6.4.0.
+A operação \pth{analyze} conserva a análise de aplicações JavaScript;
+\pth{analyze_binary} recebe um arquivo binário local explícito e uma função
+ou endereço. O provider Ghidra 12.1.4 faz importação e descompilação estáticas:
+o Core não executa o alvo, não inicia depuração e não expõe arbitrariamente
+as operações de alteração anunciadas pelo REA.
+\end{descricao}
+
+\begin{metodo}
+\textbf{Percurso concreto.} A CLI \pth{python3 -m marceloclaro.cli rea}, o comando
+OpenCode \pth{/rea} e a ferramenta \pth{ecosystem_rea} passam pelo primário.
+A ponte valida arquivo, função e prazo; abre uma sessão isolada com
+\pth{open_binary}, solicita \pth{analyze_function}, consulta
+\pth{binary_session} e tenta \pth{close_binary}. A conclusão exige evidência
+da função, identidade/versionamento do provider, digest compatível do alvo e
+fechamento confirmado. O recibo compacto aponta para a resposta integral por
+hash; o MetaBus registra a observação sem promover confiança científica.
+\end{metodo}
+\fontecore{integrations/rea_bridge.py}{ReaBridge.action}
+\fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator.rea_action}
+
+\begin{arquitetura}
+Ghidra e o JDK completo 21 ficam isolados em
+\pth{~/.local/share/opencode-core/native-rea}, fora do Core, com procedência
+e hashes registrados. A instalação desta revisão conservou o Java padrão do
+sistema. \pth{GHIDRA_INSTALL_DIR} e \pth{JAVA_HOME} explícitos prevalecem;
+se forem inválidos, a operação é bloqueada em vez de usar outro runtime
+silenciosamente. Instalação e catálogo não demonstram uma sessão concluída.
+\end{arquitetura}
+
+\begin{resultado}
+\textbf{Prova local e seu alcance.} O recibo R823 analisou uma fixture C
+própria compilada como ELF de leitura, com provider Ghidra 12.1.4. A função
+selecionada retornou pseudocódigo, identidade da sessão e evidência integral;
+o fechamento normal foi confirmado. O alvo permaneceu sem execução.
+A prova sustenta esse percurso estático local, sem certificar equivalência
+ao código-fonte original, comportamento dinâmico ou todos os formatos binários.
+\end{resultado}
+
+\begin{limite}
+Admite-se arquivo de até 128 MiB, identificação textual de função de até
+256 caracteres e prazo finito de operação de até 180 segundos. A limpeza tem
+prazo adicional próprio: o prazo da operação não é um limite absoluto do tempo
+até retornar. Na prova de timeout, os processos e o projeto temporário foram
+removidos, mas não houve confirmação graciosa de fechamento pelo protocolo;
+esse caso permaneceu falha. Hopper e IDA opcionais não foram configurados por
+essa instalação. Examine \pth{docs/REA_GHIDRA.md} e
+\pth{outputs/core-r823/summary.json} antes de transferir o resultado para outro host.
+\end{limite}
+
+\clearpage
+\section{Navegador real: observar e agir com escopo explícito}
+
+\elemento{Playwright MCP coordenado}{\metainfo{ID}{I-WEB} \hfill
+\metainfo{Revisão}{R824, 12/10/2026}}
+
+\begin{descricao}
+\pth{MarceloClaroOrchestrator.browser_action} coordena uma sessão nova,
+isolada e headless. A CLI \pth{python3 -m marceloclaro.cli browser} e a ferramenta
+\pth{ecosystem_browser} usam essa entrada no servidor
+\pth{ecosystem-network} existente. Essa extensão não cria outro orquestrador,
+agente ou servidor MCP. O provider oficial \pth{@playwright/mcp} 0.0.83 e o
+Chromium estão instalados fora do Core; a versão efetiva do mecanismo consta
+no recibo e é distinta da versão do wrapper MCP.
+\end{descricao}
+
+\begin{metodo}
+\textbf{Percurso concreto.} \pth{browser status} confere a instalação sem
+iniciar navegador. \pth{browser run ARQUIVO.json} recebe URL HTTP(S), origens
+autorizadas, prazo e passos explícitos. \pth{read} e \pth{snapshot} observam
+a página; \pth{fill} e \pth{click} podem alterar um formulário ou acionar uma
+operação remota. Informe o efeito pretendido: uma lista de origens limita
+destinos, mas não interpreta a autorização para publicar, pagar ou excluir.
+Os alvos de clique e preenchimento usam papel e nome acessíveis com
+correspondência exata; os templates não recebem JavaScript, shell ou seletor
+arbitrário enviado pelo usuário ou pela página.
+\end{metodo}
+\fontecore{integrations/browser_bridge.py}{BrowserBridge.action}
+\fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator.browser_action}
+
+\begin{arquitetura}
+A sessão solicita sandbox Chromium e não herda os logins do Chrome pessoal.
+A configuração admite até oito origens e dezesseis passos; a origem inicial
+deve estar autorizada. Esquema, host e porta definem uma origem: um recurso
+de CDN pode exigir outra autorização explícita. Um proxy HTTP/CONNECT local
+por sessão valida destinos antes de abrir conexões, incluindo os saltos de
+redirecionamento. A prova RED mostrou que a interceptação de rotas do navegador,
+sozinha, não impedia esses saltos; o controle pelo proxy foi acrescentado a partir
+desse resultado. Seu alcance é o tráfego enviado ao proxy, não isolamento
+universal contra todos os canais de rede.
+\end{arquitetura}
+\fontecore{integrations/browser_proxy.py}{BrowserOriginProxy}
+
+\begin{resultado}
+\textbf{Prova local e seu alcance.} Em uma página local conhecida, a execução
+real navegou, preencheu, clicou e leu o resultado; snapshot e PNG receberam
+evidência e hashes. A chamada pelo gateway MCP passou pelo primário e persistiu
+observação no MetaBus. Os testes de redirecionamento simples e encadeado não
+alcançaram a origem de teste não autorizada. Esses resultados sustentam os
+casos locais registrados, sem demonstrar êxito em todo site.
+\end{resultado}
+
+\begin{limite}
+O prazo de operação é positivo, finito e de até 120 segundos, seguido de
+limpeza com orçamento próprio. Sites que exigem login, captcha, extensão,
+recursos de outras origens ou políticas especiais podem impedir o fluxo.
+A configuração não constitui um controle de semântica de negócio: o operador
+continua responsável por autorizar os efeitos pretendidos. Conteúdo web é dado
+sem autoridade para modificar instruções do Core. Consulte
+\pth{docs/NAVEGADOR_REAL.md} e o recibo selecionado
+\pth{outputs/core-r824/release-summary.json}; as reproduções RED anteriores
+permanecem identificadas e não foram reescritas como sucesso.
+\end{limite}
+
+\clearpage
+\section{Interrupção: conservar estado e encerrar a chamada}
+
+\elemento{Cancelamento cooperativo e limpeza}{\metainfo{ID}{I-CANCEL} \hfill
+\metainfo{Revisão}{R825, 12/10/2026}}
+
+\begin{descricao}
+Cancelar a espera do cliente não basta para interromper um trabalho delegado.
+A R825 propaga um sinal da requisição MCP ao coordenador, ao workflow e à CLI.
+A interrupção impede fallback, revisão ou nó posterior e conserva a incerteza
+de uma etapa ativa. Ela não transforma uma execução incompleta em conclusão.
+\end{descricao}
+
+\begin{metodo}
+No POSIX, cada CLI da chamada usa um grupo próprio. Prazo, cancelamento e saída
+normal são seguidos de limpeza limitada dos processos desse grupo, incluindo
+descendentes e pipes herdados. A exclusão de execução permanece retida até a
+limpeza terminar; uma requisição cancelada enquanto aguardava a rede não inicia
+a operação protegida. As sessões REA e do navegador tentam fechamento com prazo
+próprio antes de limpar o transporte.
+\end{metodo}
+\fontecore{integrations/execution_control.py}{run_cancellable}
+\fontecore{integrations/harness_runtime.py}{HarnessRuntime.execute}
+
+\noindent A R827 estendeu o mesmo wrapper às sete rotas de conhecimento com
+mutação. A contraprova mostrou que runtime, download e notebook cancelados na
+fila ainda podiam iniciar depois da liberação. Agora o sinal é verificado antes
+da entrada no método primário. Um worker ativo permanece acompanhado até a
+limpeza ou conclusão; providers que não consultem o sinal continuam sujeitos
+aos próprios prazos. Isso não demonstra reversão de efeitos já iniciados.
+\fontecore{integrations/ecosystem_mcp.py}{ecosystem_scientific_runtime}
+
+\begin{resultado}
+\textbf{Prova local e seu alcance.} Processos Python inertes reais foram usados
+para reproduzir timeout, cancelamento e saída normal com descendente. No GREEN,
+pai e filho não estavam em execução após o retorno. Checkpoints conservam etapas
+concluídas; uma etapa ativa interrompida não é repetida sem
+\pth{retry_failed=True}. Etapas ainda não iniciadas dependem de uma retomada
+explícita e do orçamento restante. Esses controles foram observados sem chamada
+de modelo, serviço científico ou validação externa.
+\end{resultado}
+\fontecore{marceloclaro/workflow.py}{WorkflowCoordinator}
+
+\begin{limite}
+A prova POSIX não certifica o Windows nem a interoperabilidade Windows/WSL.
+No Windows, a limpeza da árvore usa os recursos disponíveis e possui limitações;
+processos que escapem deliberadamente do grupo/session POSIX também ficam fora
+do alcance demonstrado. Operações de terceiros que não consultem o sinal
+dependem dos próprios prazos. Encerramento, evidência de execução e autonomia
+científica validada externamente são afirmações distintas. Consulte
+\pth{outputs/core-r825/freeze-summary.json} para casos e limites reais.
+\end{limite}
+\clearpage
+\section{Planejamento Nano: conservar a alocação de páginas}
+
+\begin{metodo}
+A R826 corrigiu a distribuição de páginas e a validação do plano Nano. Cada
+seção declarada recebe um número inteiro positivo de páginas; a soma corresponde
+ao total solicitado. O preview padrão conserva seis seções e exige pelo menos
+seis páginas. Um documento de uma a cinco páginas precisa declarar menos seções
+explicitamente: duas páginas podem corresponder a Introdução e Conclusão, uma
+página para cada. O planner recusa o pedido incompatível antes de criar blocos,
+em vez de destinar páginas negativas à última seção.
+\end{metodo}
+\fontecore{nano_orchestration/planner.py}{NanoPlanner.estimate_from_pages}
+
+\begin{limite}
+O plano registra a alocação e a densidade de blocos e verifica soma, cobertura
+de seções e contadores. Checkpoints legados sem alocação persistida recebem
+validação estrutural com aviso de escopo; a distribuição ausente não é
+fabricada. O orçamento de planejamento admite até 50.000 blocos. Páginas,
+linhas e tokens continuam estimativas operacionais; um plano válido não comprova
+extensão final nem qualidade científica do manuscrito.
+\end{limite}
+% END-R822-INTEGRATION-SUPPLEMENT
+
 \section[Leitura guiada]{Leitura guiada — Integrações: interfaces, contratos e falhas}
 
 \elemento{Leitura guiada — Integrações}{\metainfo{ID}{N-07} \hfill \metainfo{Ciclo}{R616} \hfill \metainfo{Estilo}{portas, não atalhos}}
 
 \begin{descricao}
-\textbf{A pergunta.} Como identificar uma dependência externa e entender o que
+\textbf{O fenômeno: A pergunta}  Como identificar uma dependência externa e entender o que
 acontece quando ela não responde? Uma interface nomeada torna a chamada mais
 visível e permite declarar formatos de entrada, saída e erro. Neste checkout,
-\pth{opencode.json} declara \textbf{7 servidores MCP}. A configuração informa
+\pth{opencode.json} declara \textbf{\CoreMCPCount{} servidores MCP}. A configuração informa
 quais integrações foram declaradas; não demonstra que estejam instaladas,
 disponíveis ou funcionando. O capítulo examina os contratos e as respostas de
 falha documentados para cada integração.
@@ -286,8 +525,8 @@ falha documentados para cada integração.
 \begin{definicao}
 \textbf{Grandezas e definições.}
 \begin{itemize}[leftmargin=1.3em,itemsep=1pt]
-  \item \textbf{Porta} (servidor MCP): superfície nomeada; aqui $n = 7$.
-  \item \textbf{Executor externo}: CLI de terceiro orquestrável (Gemini, Goose, Plandex, Reasonix, Haystack, NotebookLM) --- $m = 6$.
+  \item \textbf{Porta} (servidor MCP): superfície nomeada; o inventário corrente declara $n = \CoreMCPCount$.
+  \item \textbf{Executor externo}: programa independente; os seis nomes citados são exemplos históricos, não um inventário exaustivo do ambiente corrente.
   \item \textbf{Disponibilidade} ($s$): executores presentes $/$ executores declarados, numa máquina e num instante especificados.
   \item \textbf{Degradação controlada}: comportamento de uma integração quando a dependência falta; precisa ser conferido em cada caminho.
   \item \textbf{Skill orquestrável}: procedimento que encapsula a chamada e sua política de credencial.
@@ -315,7 +554,14 @@ execução falha, fica bloqueada ou usa uma alternativa configurada.
 \end{resultado}
 
 \begin{resultado}
-\textbf{Ordem de grandeza e verificação.} O runtime conecta $7$ servidores MCP, $14$ comandos customizados e $14$ skills, e mantém $4$ executores externos opcionais. Essa é a ordem de grandeza de uma integração que ainda é auditável: uma dúzia de canais, não centenas. Cada canal adicional multiplica o custo de manutenção e de verificação, e é por isso que o número de $4$ externos --- todos dependentes de credencial do usuário --- é declarado como limite conhecido, não como detalhe de implementação. Verificação: \cod{grep -c mcp opencode.json} e a contagem de diretórios em \pth{.opencode/skills/}. O sinal de alerta é a assimetria: se o número de canais crescer muito mais rápido que o de testes de integração, a integração está sendo adicionada sem verificação.
+\textbf{Ordem de grandeza e verificação.} O inventário lê \CoreMCPCount{} nomes
+de servidor MCP e \CoreCommandCount{} comandos da configuração, sem observar
+conexões. Reexecute \pth{gen_inventario.py} e compare as chaves do JSON; contar
+linhas que contêm a palavra MCP não mede servidores. Para uma operação concreta,
+registre transporte, autenticação quando exigida, ferramenta chamada, resposta
+e erro observado. A cobertura dos testes deve ser relacionada aos contratos e
+aos casos de falha, e não inferida da razão entre quantidade de servidores e
+arquivos de teste. Um novo nome de configuração não é uma nova integração testada.
 \end{resultado}
 
 \begin{aviso}

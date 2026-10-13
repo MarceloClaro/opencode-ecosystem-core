@@ -1,0 +1,28 @@
+{
+  "name": "lean-nucleo-verificacao",
+  "version": "0.1.0",
+  "spec": "SPEC-935-R747",
+  "agentes": [
+    "49_agente_lean_verificacao_total",
+    "50_agente_lean_matematica_formal",
+    "51_agente_lean_tese_auditavel",
+    "52_agente_lean_software_critico",
+    "53_agente_lean_estudo_teoremas"
+  ],
+  "skills": [
+    "lean-verificacao-total",
+    "lean-tese-provas-auditaveis"
+  ],
+  "mcp": "integrations/lean_proof_mcp.py",
+  "mcp_funcoes": [
+    "lean_verify",
+    "lean_export",
+    "lean_autoformalize",
+    "lean_saturate"
+  ],
+  "motores_reutilizados": [
+    "integrations/deepmind/lean4_verifier.py",
+    "integrations/deepmind/autoformalizer.py",
+    "integrations/deepmind/egraph_rewriter.py"
+  ]
+}

@@ -195,6 +195,38 @@ ALLOWLIST: list[dict] = [
         "licenca": "MIT",
         "status_licenca": "ok",
     },
+    {
+        "id": "lean4",
+        "url": "https://github.com/leanprover/lean4",
+        "tipo_raciocinio": ["dedutivo", "formal", "verificacao"],
+        "uso_polimata": "Compilador Lean 4 para machine_checked no núcleo R747 (verificação total).",
+        "licenca": "Apache-2.0",
+        "status_licenca": "ok",
+    },
+    {
+        "id": "mathlib4",
+        "url": "https://github.com/leanprover-community/mathlib4",
+        "tipo_raciocinio": ["dedutivo", "formal", "matematica"],
+        "uso_polimata": "Biblioteca matemática e táticas Mathlib para formalização R747.",
+        "licenca": "Apache-2.0",
+        "status_licenca": "ok",
+    },
+    {
+        "id": "batteries",
+        "url": "https://github.com/leanprover-community/batteries",
+        "tipo_raciocinio": ["dedutivo", "formal", "biblioteca"],
+        "uso_polimata": "Std estendido Lean 4 via lake update para o núcleo R747.",
+        "licenca": "Apache-2.0",
+        "status_licenca": "ok",
+    },
+    {
+        "id": "aesop",
+        "url": "https://github.com/leanprover-community/aesop",
+        "tipo_raciocinio": ["dedutivo", "formal", "automacao"],
+        "uso_polimata": "Busca de prova aesop/aesop? para candidatos Lean auditáveis.",
+        "licenca": "Apache-2.0",
+        "status_licenca": "ok",
+    },
 ]
 
 _URLS_NORMALIZADAS = {e["url"].lower(): e["url"] for e in ALLOWLIST}

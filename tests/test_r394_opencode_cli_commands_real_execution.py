@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Testes TDD — SPEC-935-R394: os 9 comandos customizados do opencode.json
+"""Testes TDD — SPEC-935-R394/R816: os comandos customizados do opencode.json
 executam de verdade, sem NameError/ImportError/traceback escondido.
 
 Achados nesta auditoria (pedida pelo usuário: "revise o opencode cli"):
@@ -11,14 +11,15 @@ Achados nesta auditoria (pedida pelo usuário: "revise o opencode cli"):
     então a invocação mais simples e comum (/pypi sem argumento) sempre
     retornava zero resultados.
 
-Este teste roda o comando shell REAL de cada entrada (não só importa o
-módulo Python) para pegar qualquer classe futura do mesmo bug -- import
+Este teste roda o transporte JSON REAL e a operação de cada entrada para
+pegar qualquer classe futura do mesmo bug -- import
 faltante, exceção não tratada, ou saída vazia/inútil para o caso mais
 comum de uso (sem argumento).
 """
 
 from __future__ import annotations
 
+import json
 import subprocess
 import sys
 from pathlib import Path
@@ -57,6 +58,7 @@ _ERROR_MARKERS = (
 
 
 _PROMPT_TOOLS = {
+    "rea": "ecosystem_rea",
     "gemini-notebook": "ecosystem_gemini_notebook",
     "runtime-cientifico": "ecosystem_scientific_runtime",
     "datasets": "ecosystem_dataset_download",
@@ -74,6 +76,15 @@ def _command_names():
     return sorted(set(build_config()["command"]) - set(_PROMPT_TOOLS))
 
 
+def _execute(name, argument=""):
+    """O prompt OpenCode não é shell: executa a API local que ele solicita."""
+    return subprocess.run(
+        [sys.executable, "-m", "integrations.opencode_commands"],
+        input=json.dumps({"command": name, "arguments": argument}, ensure_ascii=False),
+        shell=False, cwd=PROJECT_ROOT, capture_output=True, text=True, timeout=90,
+    )
+
+
 @pytest.mark.parametrize("name,tool_name", sorted(_PROMPT_TOOLS.items()))
 def test_prompt_commands_keep_orchestrator_and_available_tool(name, tool_name):
     import asyncio
@@ -87,18 +98,11 @@ def test_prompt_commands_keep_orchestrator_and_available_tool(name, tool_name):
 
 @pytest.mark.parametrize("name", _command_names())
 def test_command_executes_without_hidden_python_error(name):
-    template = build_config()["command"][name]["template"]
+    command = build_config()["command"][name]
     argument = _SAMPLE_ARGUMENTS.get(name, "")
-    shell_command = template.replace("$ARGUMENTS", argument)
-
-    completed = subprocess.run(
-        shell_command,
-        shell=True,
-        cwd=str(PROJECT_ROOT),
-        capture_output=True,
-        text=True,
-        timeout=90,
-    )
+    assert command["agent"] == "marceloclaro"
+    assert "core_command" in command["template"]
+    completed = _execute(name, argument)
     combined = completed.stdout + completed.stderr
 
     for marker in _ERROR_MARKERS:
@@ -108,31 +112,34 @@ def test_command_executes_without_hidden_python_error(name):
     assert completed.returncode == 0, (
         f"/{name} saiu com código {completed.returncode}:\n{combined[-1500:]}"
     )
+    report = json.loads(completed.stdout)
+    assert report["success"] and report["status"] == "completed"
+    assert report["command"] == name and report["coordinator"] == "marceloclaro"
+    assert report["result"]
+    from integrations.opencode_commands import MODULE_COMMANDS
+    if name in MODULE_COMMANDS:
+        assert report["result"]["returncode"] == 0
+        assert report["result"]["stdout"].strip()
+    elif name == "tdd":
+        assert report["result"]["all_passed"]
+        assert report["result"]["passed_count"] > 0
 
 
 def test_diagnose_reversa_section_has_no_error_key():
     """Regressão direta do bug real achado: report['reversa'] não pode
     conter 'error' quando ReversaScanner está devidamente importado."""
 
-    template = build_config()["command"]["diagnose"]["template"]
-    shell_command = template.replace("$ARGUMENTS", "")
-    completed = subprocess.run(
-        shell_command, shell=True, cwd=str(PROJECT_ROOT),
-        capture_output=True, text=True, timeout=60,
-    )
+    completed = _execute("diagnose")
     assert "ReversaScanner' is not defined" not in completed.stdout
+    assert completed.returncode == 0
+    assert "error" not in json.loads(completed.stdout)["result"]["reversa"]
 
 
 def test_pypi_empty_argument_prints_usage_instead_of_broken_wildcard_search():
     """Regressão direta do bug real achado: /pypi sem argumento não pode
     mais depender de search('*', ...), que sempre retornava 0 resultados."""
 
-    template = build_config()["command"]["pypi"]["template"]
-    shell_command = template.replace("$ARGUMENTS", "")
-    completed = subprocess.run(
-        shell_command, shell=True, cwd=str(PROJECT_ROOT),
-        capture_output=True, text=True, timeout=30,
-    )
+    completed = _execute("pypi")
     assert completed.returncode == 0
     assert "Uso: /pypi" in completed.stdout
     assert "0 encontrados" not in completed.stdout

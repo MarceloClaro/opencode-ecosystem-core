@@ -9,10 +9,15 @@ etapas é necessária ou arbitrária.
 Este gate exige, para 100% dos fluxogramas:
   (1) um bloco "Como funciona e por quê" imediatamente após o desenho;
   (2) com rótulo de mecanismo E de justificativa;
-  (3) com pelo menos uma citação real, cujo DOI esteja na biblioteca auditada.
+  (3) com DOI da biblioteca ou fonte primária local identificável e existente.
+
+R814: comportamento implementado é fundamentado pelo arquivo/API correspondente;
+literatura geral não certifica a execução do Core. Fontes locais ausentes,
+símbolos inventados e caminhos fora do repositório continuam reprovados.
 """
 from __future__ import annotations
 
+import ast
 import re
 from pathlib import Path
 
@@ -28,6 +33,40 @@ RE_FLUXO = re.compile(r"\\begin\{flowch\}(?:\[(?P<titulo>[^\]]*)\])?\{(?P<legend
 RE_DOIS = re.compile(r"10\.\d{4,9}/[^\s}{]+")  # para no fechamento do campo
 MARCADOR = "Como funciona e por quê"
 JUSTIFICA = "Justificativa"
+
+
+def _local_source_is_valid(relative_path: str, symbol: str) -> bool:
+    """R814: valida a origem primária local, inclusive o símbolo Python."""
+    path = (ROOT / relative_path).resolve()
+    if not path.is_relative_to(ROOT.resolve()) or not path.is_file() or not symbol:
+        return False
+    text = path.read_text(encoding="utf-8")
+    if path.suffix != ".py":
+        return symbol in text
+    declared = set()
+
+    def visit(node, prefix=""):
+        for child in ast.iter_child_nodes(node):
+            if isinstance(child, (ast.ClassDef, ast.FunctionDef, ast.AsyncFunctionDef)):
+                qualified = prefix + child.name
+                declared.add(qualified)
+                visit(child, qualified + ".")
+            else:
+                visit(child, prefix)
+
+    visit(ast.parse(text))
+    return symbol in declared
+
+
+@pytest.mark.parametrize("path,symbol,valid", [
+    ("marceloclaro/orchestrator.py", "MarceloClaroOrchestrator.delegate", True),
+    ("marceloclaro/orchestrator.py", "MarceloClaroOrchestrator.invented_method", False),
+    ("marceloclaro/no_such_file.py", "main", False),
+    ("../outside.py", "main", False),
+])
+def test_local_primary_source_is_identifiable_and_stays_in_repository(path, symbol, valid):
+    """R814: fonte local só serve quando arquivo e API declarada existem."""
+    assert _local_source_is_valid(path, symbol) is valid
 
 
 def _fluxos(t: str) -> list[tuple[str, str, str]]:
@@ -83,18 +122,23 @@ def test_ac3_todo_fluxograma_cita_biblioteca_verificada():
     biblioteca = (LIVRO / "mod-11-apendices.tex").read_text(encoding="utf-8")
     validos = set(RE_DOIS.findall(biblioteca))
     assert validos, "bibliografia sem DOI reconhecido"
-    sem, fora = [], []
+    sem, fora, locais_invalidas = [], [], []
     for f, titulo, _, trecho in _todos():
         # trecho já começa no fim do desenho: a explicação é o que vem a seguir
         bloco = trecho[:2500]
         dois = RE_DOIS.findall(bloco)
-        if not dois:
+        locais = re.findall(r"\\fontecore\{([^}]+)\}\{([^}]+)\}", bloco)
+        if not dois and not locais:
             sem.append(f"{f} :: {titulo}")
+        for path, symbol in locais:
+            if not _local_source_is_valid(path, symbol):
+                locais_invalidas.append(f"{f} :: {titulo} -> {path}::{symbol}")
         for d in dois:
             if d not in validos:
                 fora.append(f"{f} :: {titulo} -> {d}")
     assert not sem, f"explicação sem citação: {sem}"
     assert not fora, f"DOI fora da biblioteca auditada: {fora}"
+    assert not locais_invalidas, f"fonte primária local ausente ou inválida: {locais_invalidas}"
 
 
 # ------------------------------------------------------- AC4
@@ -239,7 +283,7 @@ def test_ac7_todo_citref_tem_cinco_campos_bem_formados():
     for f in MODS:
         for item in _citacoes(f.read_text(encoding="utf-8")):
             if item is None:
-                achadas.append(f"{f.name}: \citref truncado")
+                achadas.append(f"{f.name}: \\citref truncado")
                 continue
             k, cs = item
             if not cs[0].strip() or not cs[1].strip().startswith("10."):

@@ -40,13 +40,14 @@ class TestR232McpServerHardening(unittest.TestCase):
         res = asyncio.run(call_colibri_tool("colibri_status", {}))
         self.assertFalse(res.isError)
 
-    def test_spec_verifier_execution(self):
+    def test_criteria_only_inspection(self):
         spec = spec_registry.get("SPEC-935-R232")
         if spec:
             spec.add_criterion("Servidores MCP fortalecidos", lambda out: out.get("mcp") is True)
-        res = spec_verifier.verify("SPEC-935-R232", {"mcp": True})
+        res = spec_verifier.verify("SPEC-935-R232", {"mcp": True}, require_red_history=False)
         self.assertTrue(res["verified"])
-        self.assertEqual(res["status"], "green")
+        self.assertEqual(res["verification_scope"], "criteria_only")
+        self.assertEqual(res["status"], "criteria_passed")
 
 
 if __name__ == "__main__":

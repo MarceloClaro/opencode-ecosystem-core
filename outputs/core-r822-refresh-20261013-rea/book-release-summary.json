@@ -1,0 +1,212 @@
+{
+  "status": "complete",
+  "completed_at": "2026-10-13T10:52:24.968805+00:00",
+  "validation_scope": "source_inventory_refresh_editorial_gates_all_pages_pixel_comparison_and_changed_pages_visual_review",
+  "externally_validated": false,
+  "scientific_confidence_promoted": false,
+  "independent_visual_review": {
+    "performed": false,
+    "reason": "review agents unavailable due to usage limit"
+  },
+  "pdf_sha256": "ae20d559682836d213450e13a6601baaeeb8f3fb0e173e427e3c74cefaebc1f0",
+  "pages": 388,
+  "pdf": {
+    "path": "/home/marceloclaro/opencode-ecosystem-core/output/pdf/opencode-ecosystem-core-revisado.pdf",
+    "source_path": "/home/marceloclaro/opencode-ecosystem-core/livro-core/main.pdf",
+    "sha256": "ae20d559682836d213450e13a6601baaeeb8f3fb0e173e427e3c74cefaebc1f0",
+    "pages": 388,
+    "bytes": 27843187,
+    "format": "A4",
+    "source_and_delivery_identical": true
+  },
+  "baseline": {
+    "prior_complete_receipt": "outputs/core-r822-refresh-20261012T2157Z/book-release-summary.json",
+    "prior_complete_receipt_sha256": "107f631978dce8dd58147c8a48418871d92dfe1624b8ab9d1dc0e579d486e341",
+    "pdf_sha256": "733cfaa720bf04318dbd8c3ddb16a0f17b02f6ed6e32dc8b78dc9add132e4ff8",
+    "recorded_at": "2026-10-13T10:03:30.984312+00:00",
+    "scope": "current REA source inventory refresh; prior approved local artifact preserved"
+  },
+  "current_counts": {
+    "agents": 255,
+    "mcp_servers": 16,
+    "commands": 30,
+    "specs": 507,
+    "round_specs": 417,
+    "round_test_files": 384,
+    "references": 14,
+    "citation_calls": 88,
+    "condensed_cards": 13
+  },
+  "inventory": {
+    "path": "/home/marceloclaro/opencode-ecosystem-core/livro-core/inventario-core.json",
+    "sha256": "fbb142977f42761acf6a9977ac96d1f79d618c6b2131e9f065a726bb65731ea0",
+    "counts": {
+      "agents": 255,
+      "mcp_servers": 16,
+      "commands": 30,
+      "specs": 507,
+      "round_specs": 417,
+      "round_test_files": 384,
+      "references": 14,
+      "citation_calls": 88,
+      "condensed_cards": 13
+    },
+    "verification": "source_inventory_only",
+    "sources_checked": 65,
+    "source_hash_changes": []
+  },
+  "gates": {
+    "tests": 73,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "scope": [
+      "R617",
+      "R618",
+      "R619",
+      "R620",
+      "R814"
+    ],
+    "logs": [
+      "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r822-refresh-20261013-rea/editorial.xml",
+      "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r822-refresh-20261013-rea/editorial.txt",
+      "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r822-refresh-20261013-rea/check.txt"
+    ]
+  },
+  "generation": {
+    "runs": 2,
+    "identical": true,
+    "changed": [],
+    "sha256": {
+      "livro-core/gen_inventario.py": "53310b80e55b6f29ef5fcde514817c578c3e28c70ab44bfff49eebe4babc7660",
+      "livro-core/gen_mod10.py": "4ba2c3e1e4f71f8143cf85323f8a08b087d04455964570a1eff5e24c710c9caf",
+      "livro-core/gen_mod14_ativacao.py": "7896f9298c06f4f91506a949379898350857d039b3a8abe0dd9e4730838571df",
+      "livro-core/inventario-core.json": "fbb142977f42761acf6a9977ac96d1f79d618c6b2131e9f065a726bb65731ea0",
+      "livro-core/inventario-core.tex": "ec97a2c84d8805a62f3ca80f7acc15e5f87fc211e326f6649e0cec725b70468b",
+      "livro-core/macros.tex": "3053e884ea68005d02ab48f4ecf346aca495bdd49c254ef451334f5f166df2a3",
+      "livro-core/main.tex": "e2aa00f17be9db4d83f875cf424272623c517cbd46064b673fb0201e9197cf97",
+      "livro-core/mod-00-capa.tex": "82a8b78dcab349a61e59f9602bb52e0ef9d4f332b8bfdfdab786929054c5f2b5",
+      "livro-core/mod-00a-enredo-prefacio.tex": "dd130633c6b1f843869faef7dc597d7e0c4da9a0b16b806f090ba319d736c8b6",
+      "livro-core/mod-00b-jornada-leitor.tex": "45ffae1ad5261a31d0387459a27a6b3da280e8e5e246e4cb4cdf2eaefce2e757",
+      "livro-core/mod-00c-projeto-pedagogico.tex": "6cce6055ae2646290cb1486fc924782d0df3f3e922935bac3f31ff9b61775f32",
+      "livro-core/mod-01-fundacoes.tex": "d2d504589801efa38d1b265781b13acb626cd8c3e1c7466b601f7c2440ac614f",
+      "livro-core/mod-01b-historia.tex": "6f2df633df66bcafb64abe53005654358e788f4fa8d5675609e0ff9d23623f7a",
+      "livro-core/mod-01c-instalacao.tex": "abf26007d71de3c6af4d8ccfb393959567be1a84adbab8ddf12bbfcbed152cf5",
+      "livro-core/mod-01d-arquitetura.tex": "19a16e26ae3ffd0b8c8e7842cfbbc9d0986c56877ced583c9d0554cde0e2ebac",
+      "livro-core/mod-02-orquestracao.tex": "7f9096a6729a2ff8a023bbbca2ec11abdb42f0b6222830b62f2866f7c0b2ac96",
+      "livro-core/mod-03-memoria-mci.tex": "b1ca2d735883450efef1fa0d12ed3325f2b2247314ee59f229fda61a33c7a238",
+      "livro-core/mod-04-qualidade-sdd.tex": "c9d6bd00ba6aee79963391da6154162f6f0767c7f52d3192578e4cc97269d85d",
+      "livro-core/mod-05-raciocinio.tex": "0491a45fa61e7198ea9cbcf5dd8dbe4862c281952c1a2f0239a063b6cc544fcb",
+      "livro-core/mod-06-ciencia.tex": "c6ed3157568394f48f7e7e1f5a01ae23cb32bce7dd3527695ce663a7bbda9723",
+      "livro-core/mod-07-integracoes.tex": "f502b8f235c975e1e9927b44635e0ed5326c925fbf425030f214d17274d1b7b2",
+      "livro-core/mod-08-ecossistema.tex": "329dc437702d8f2a33a1015c6d617e702ac0886f8d465bc4139af5a9d9004201",
+      "livro-core/mod-09-infra.tex": "03a2f484132ec2fb5f458b16dc82862f48dcb641838b806c8fe938c52ce435df",
+      "livro-core/mod-09a-comparada.tex": "aba9ccce224c9efa7100baa989320320b5c7a1856e6d5d90fafc49e13d7f179c",
+      "livro-core/mod-10-catalogo.tex": "d6e81a3e9b8bffc302d140e02feec027275347b6ae3cdb1684483dbfea38e1ad",
+      "livro-core/mod-11-apendices.tex": "0e7e6a1fabe78af54c0dbd4928d826e0e44f2b94290d1d6102e69232e0d55f24",
+      "livro-core/mod-12-fichas-nucleo.tex": "332b5a993d9d0ec091844791dc96d2219b9f1d60c9a9db26cc63b41237cce40a",
+      "livro-core/mod-13-ativacao-agentes.tex": "3abe40db62fff4b4ee5bf0a5402fbad203f02869a30be2354d0787e28e2b6d2a",
+      "livro-core/mod-14-lote-categorias.tex": "8985249811670508092eb5f0ee5f5e72902b619e3782e86af599e8b4744618fc",
+      "livro-core/mod-15-epilogo-reproducao.tex": "da4a060cf29f29787f8a3d183aaec82b1c4c3d35c6361a5eabe5687ee431514c",
+      "livro-core/mod-16-mapas-fluxogramas.tex": "cd1051cd0a694fb626a4131c2c272e95178c8257c85646a183f580b49c650226",
+      "livro-core/mod-17-e1e7-para-leigos.tex": "a343277dbde664987a6745ad19c96827e5e7601a32b1c00aa08f323b6c6e4dec",
+      "livro-core/mod-18-nivel0-universal.tex": "ad52f4649120a2204aaee22f38bcf6585eb16907a01ce310a634c82d6d029392",
+      "livro-core/mod-19-podcast.tex": "2f40c64b8a29e6c37ea2199db6fc51bcf3994d25c406454500f11e3532fcf542",
+      "livro-core/mod-20-podcast-modulos.tex": "e8fa2d6944e0b8201a636e8140652a09c85ddbc574b9a89cb0b3622e1d93f5cd",
+      "livro-core/mod-21-mapa-teorias.tex": "81c805fd5262ad114b01df2f5f9e7196455df22ffd28728d0476e907082e17fe",
+      "livro-core/mod-22-reproducao-wsl-leigo.tex": "5edb5c95d914aef6f3a15a2df7906ab99880917ea9535c031823be1d078ff256",
+      "livro-core/mod-23-atlas-infograficos.tex": "9a269e7702f2ad2a473171cc7450279ab05e5e5b989c38ed35a50c622ef54270",
+      "livro-core/mod-24-kit-mindmap-slides.tex": "593e6c3de9bc17f78f35503e361a99254c0cc337247265c48ec1ba9554463b2a"
+    }
+  },
+  "compilation": {
+    "returncode": 0,
+    "attempt": 1,
+    "command": [
+      "latexmk",
+      "-pdf",
+      "-interaction=nonstopmode",
+      "-halt-on-error",
+      "main.tex"
+    ],
+    "started_at": "2026-10-13T10:42:32.025885+00:00",
+    "finished_at": "2026-10-13T10:44:29.031080+00:00",
+    "clean_build": false,
+    "log": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r822-refresh-20261013-rea/latexmk.txt",
+    "warnings": {
+      "overfull": 0,
+      "underfull_hbox": 18,
+      "footskip_too_small": 0,
+      "undefined_references": 0,
+      "undefined_citations": 0,
+      "fatal_errors": 0,
+      "babel_deprecated_brazil": 1
+    },
+    "pdf_sha256": "ae20d559682836d213450e13a6601baaeeb8f3fb0e173e427e3c74cefaebc1f0",
+    "pages": 388,
+    "book_source_hash_changes": [],
+    "cited_source_hash_changes": [],
+    "cover_preserved": true
+  },
+  "warnings": {
+    "overfull": 0,
+    "underfull_hbox": 18,
+    "footskip_too_small": 0,
+    "undefined_references": 0,
+    "undefined_citations": 0,
+    "fatal_errors": 0,
+    "babel_deprecated_brazil": 1
+  },
+  "cover": {
+    "preserved": true,
+    "prior_complete_receipt": "outputs/core-r822/cover-release-summary.json",
+    "jpg_sha256": {
+      "livro-core/capa-ecosistema-core.jpg": "9bd9c48de47e1d0c51ca9cc65b3a6e699e149534722509fb94dcf55522fc67f0",
+      "livro-core/capa-ecosistema-original.jpg": "5b00fb7acf5cdd7954eb400ba8da234571dbf09e8dead6794c753f53904abefb",
+      "livro-core/capa-ecosistema.jpg": "9bd9c48de47e1d0c51ca9cc65b3a6e699e149534722509fb94dcf55522fc67f0"
+    },
+    "regenerated": false
+  },
+  "pixel_comparison": {
+    "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r822-refresh-20261013-rea/pixel-comparison.json",
+    "sha256": "d09ab7c027497a323153024b39c221cf967fc160ebdc655a9e0068f877b82e4b",
+    "dpi": 72,
+    "workers": 1,
+    "old_pages": 388,
+    "new_pages": 388,
+    "changed_pages": [
+      383
+    ],
+    "unchanged_pages": 387
+  },
+  "visual_reviews": [
+    {
+      "accepted": true,
+      "reviewer": "root_visual_local",
+      "pdf_sha256": "ae20d559682836d213450e13a6601baaeeb8f3fb0e173e427e3c74cefaebc1f0",
+      "changed_pages_inspected": [
+        383
+      ],
+      "observations": [
+        "Inventário passou de 496 para 507 specs, 406 para 417 specs de rodada e 374 para 384 arquivos test_r.",
+        "Contagens continuam legíveis no quadro, sem corte ou sobreposição; paginação e referências permanecem na mesma posição.",
+        "Comparação RGB de todas as 388 páginas encontrou apenas esta página alterada; 387 páginas idênticas."
+      ],
+      "scope": "local visual inspection of changed page plus complete pixel comparison",
+      "externally_validated": false,
+      "independent_reviewer_performed": false
+    }
+  ],
+  "source_freeze": {
+    "files_checked": 39,
+    "unchanged": true,
+    "changed": []
+  },
+  "delivery_pdf_updated": true,
+  "limitations": [
+    "A comparação completa refere-se a pixels RGB a 72 dpi e pode não revelar diferenças abaixo dessa resolução.",
+    "A inspeção atual cobre as páginas alteradas; o aceite anterior inspecionou 164 páginas selecionadas, não todas as 388.",
+    "Inventário local e testes editoriais não certificam qualidade científica ou funcionamento universal do ecossistema.",
+    "A decisão final humana permanece independente do aceite operacional local."
+  ]
+}

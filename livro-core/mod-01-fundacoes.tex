@@ -110,8 +110,15 @@ routing + blackboard A2A) $\to$ \textbf{EXECUTA} (SDD/TDD) $\to$ \textbf{REFLETE
 \end{flowch}
 
 \begin{descricao}
-\textbf{Como funciona e por quê.} O desenho encadeia quatro momentos --- \emph{Percebe}, \emph{Delega}, \emph{Executa} e \emph{Reflete} --- e a seta entre eles não indica ``próximo passo qualquer'': indica \textbf{devolução de resultado}. É um ciclo, não uma fila, porque o quarto momento alimenta o primeiro: o que a reflexão grava no MetaBus muda o que a percepção seguinte carrega. A seta é o canal de retorno; sem ela o desenho seria uma sequência e a orquestração seria um \emph{script}.
-\textbf{Justificativa.} O ciclo fechado decorre do papel da memória descrito no Capítulo 2: sem retorno da execução, o agente não exerce metacognição; apenas repete ações. Newell distingue sistemas que \textbf{manipulam representações} daqueles que apenas reagem. O Core se propõe a operar do primeiro modo, e um indício observável disso é o resultado da execução voltar a alterar a representação usada no ciclo seguinte \citref{NEWELL, A. The knowledge level. \emph{Artificial Intelligence}, v.~18, n.~1, p.~87-127, 1982}{10.1016/0004-3702(82)90012-1}{O ciclo fechado decorre do papel da memória descrito no Capítulo 2: sem retorno da execução, o agente não exerce metacognição; apenas repete ações. }{there is another computer system level immediately above the symbol (or program) level and knowledge itself is the processing medium at this level and the principle of rationality plays a central role}{há outro nível de sistema de computador imediatamente acima do nível simbólico (ou de programa), e o próprio conhecimento é o meio de processamento nesse nível, e o princípio da racionalidade desempenha um papel central.}{NEWELL, 1982, p.~87--127}.\end{descricao}
+\textbf{Como funciona e por quê.} As setas ligam preparação do contexto, delegação, execução e reflexão. A volta da reflexão à percepção significa reutilizar registros na tarefa seguinte; a API perceive lê contexto recente, lições e indicadores de confiança.
+\textbf{Justificativa.} Separar seleção, execução e avaliação permite localizar em qual etapa faltou informação ou evidência.
+\textbf{Limite.} É uma decomposição conceitual: comandos diretos e rotas de integração não precisam atravessar todos os quatro nós, e memória disponível não comprova melhoria de desempenho.
+\end{descricao}
+\fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator}
+
+
+\noindent\textit{Contexto bibliográfico geral, sem certificação desta rota.} \citref{NEWELL, A. The knowledge level. \emph{Artificial Intelligence}, v.~18, n.~1, p.~87-127, 1982}{10.1016/0004-3702(82)90012-1}{Enquadramento teórico geral; a implementação desta rota é conferida na fonte primária local. Este artigo não certifica o funcionamento nem o desempenho do Core.}{there is another computer system level immediately above the symbol (or program) level and knowledge itself is the processing medium at this level and the principle of rationality plays a central role}{há outro nível de sistema de computador imediatamente acima do nível simbólico (ou de programa), e o próprio conhecimento é o meio de processamento nesse nível, e o princípio da racionalidade desempenha um papel central.}{NEWELL, 1982, p.~87--127}
+
 
 \begin{definicao}
 Um \textbf{nó de passo} (step node): ação de um circuito de atenção (layer 3 do
@@ -160,7 +167,10 @@ Ciclos de evolução & \pth{evolution/cycles.json} & 455 \\
 Arquivos Markdown de especificação & \pth{specs/} & 371 (285 da série R*) \\
 \end{tabular}\par}
 
-\textbf{Fonte:} contagens dos arquivos e configurações indicados em cada linha.
+\textbf{Fonte histórica:} contagens dos arquivos e configurações indicados em cada linha.
+Esses números pertencem ao retrato de 29/09/2026; não foram reexecutados nesta
+revisão. O inventário de fontes da edição atual declara \CoreAgentCount{} agentes,
+\CoreMCPCount{} servidores MCP e \CoreCommandCount{} comandos (Módulo 11).
 O comando \pth{doctor} reportou 135 especificações formais carregadas; esse
 número descreve os registros reconhecidos pelo diagnóstico, enquanto 371 conta
 arquivos Markdown presentes em \pth{specs/}. As duas contagens têm escopos
@@ -209,8 +219,8 @@ anote num parágrafo em que situação o modelo \emph{não} deveria ser invocado
 \elemento{Leitura guiada — Fundações}{\metainfo{ID}{N-01} \hfill \metainfo{Ciclo}{R614} \hfill \metainfo{Roteiro}{problema, modelo, evidência}}
 
 \begin{descricao}
-\textbf{A pergunta.} O arquivo de configuração consultado nesta edição declara
-\textbf{216 agentes}: um orquestrador e 215 subagentes. Essa contagem informa o
+\textbf{O fenômeno: A pergunta}  O arquivo de configuração consultado nesta edição declara
+\textbf{\CoreAgentCount{} agentes declarados}: orquestrador e perfis especializados. Essa contagem informa o
 tamanho do catálogo configurado, mas não diz quantos agentes serão usados numa
 tarefa nem qual será a qualidade das respostas. Para entender o mecanismo,
 acompanhe um caso simples: chega uma solicitação, o orquestrador identifica as
@@ -226,7 +236,7 @@ os gates no código, não inferindo eficácia a partir da contagem.
 os termos que nele aparecem:
 \begin{itemize}[leftmargin=1.3em,itemsep=1pt]
   \item \textbf{Tarefa} ($T$): unidade de trabalho com entrada, critério de aceite e saída.
-  \item \textbf{Agente} ($A$): unidade capaz de executar tarefas; aqui $A = 216$.
+  \item \textbf{Agente} ($A$): perfil declarado para tarefas; aqui $A = \CoreAgentCount$ no inventário, sem inferir execução.
   \item \textbf{Delegação} ($D$): atribuição de $T$ a um agente, registrada no Blackboard.
   \item \textbf{Confiança} ($\tau$): escore usado pelo Trust Engine; sua interpretação depende da regra de cálculo e dos dados que o alimentam.
   \item \textbf{Carga} ($\lambda$): medida de ocupação usada pelo runtime; o significado prático depende da métrica e do ponto de coleta.
@@ -271,7 +281,7 @@ ilustrar a fórmula; não significa que o Core faça essa agregação.
 \end{resultado}
 
 \begin{resultado}
-\textbf{Verificação do inventário.} Conte as entradas da chave \pth{agent} em
+\textbf{Ordem de grandeza e verificação: Verificação do inventário} Conte as entradas da chave \pth{agent} em
 \pth{opencode.json} para reproduzir o total registrado nesta edição. Em seguida,
 compare o catálogo configurado com as fichas do Módulo 10: diferenças entre os
 dois totais indicam que configuração e documentação respondem a perguntas

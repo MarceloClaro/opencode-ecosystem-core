@@ -1,0 +1,40 @@
+{
+  "model": "litert-lm/litert-community/gemma-4-E2B-it-litert-lm",
+  "small_model": null,
+  "default_agent": "marceloclaro",
+  "enabled_providers": [
+    "rea_local"
+  ],
+  "tools": {
+    "*": false,
+    "rea-local-assistant_*": true,
+    "rea_*": false,
+    "core_command": false
+  },
+  "plugin": [
+    "file:///home/marceloclaro/opencode-ecosystem-core/.opencode/plugins/acesso-aberto-auditoria.ts",
+    "file:///home/marceloclaro/opencode-ecosystem-core/.opencode/plugins/litert-lm-provider.ts",
+    "file:///home/marceloclaro/opencode-ecosystem-core/.opencode/plugins/deploy-guards.ts"
+  ],
+  "share": "disabled",
+  "mcp_enabled": {
+    "rea": true,
+    "ecosystem-network": true,
+    "litert-lm": true,
+    "metacognitive-interconnect": true,
+    "antigravity-bridge": true,
+    "pypi-search": true,
+    "colibri-mcp": true,
+    "scanners-mcp": true,
+    "arxiv-mcp": true,
+    "latexmk-mcp": true,
+    "artigo-academico-mcp": true,
+    "polymath-labs-mcp": true,
+    "web-deploy-mcp": true,
+    "fetch": true,
+    "sequential-thinking": true,
+    "filesystem": true,
+    "rea-local-assistant": true
+  },
+  "primary_model": "rea_local/modelo-local"
+}

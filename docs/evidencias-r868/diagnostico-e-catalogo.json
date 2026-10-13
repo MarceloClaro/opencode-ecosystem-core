@@ -1,0 +1,25 @@
+{
+  "format": "sanitized_local_summary",
+  "externally_validated": false,
+  "scope": "structural snapshot and separate prior HTTP catalog probe; neither executes inference",
+  "structural": {
+    "overall": "healthy",
+    "diagnostic_mode": "structural",
+    "verification": "installation_only",
+    "checks_total": 22,
+    "checks_passed": 22,
+    "checks_warned": 0,
+    "checks_failed": 0
+  },
+  "catalog_snapshot": {
+    "available": true,
+    "models_count": 9,
+    "verification": "http_model_catalog_only",
+    "inference_verified": false,
+    "error": null
+  },
+  "source_sha256": {
+    "doctor-final.txt": "fba8640bea18495b54b3f8ca64caef51887b8d05ec1e402d8e02a18dc53ce4e1",
+    "local-http-probe.json": "4137e7a5e8616faef3f0dd9ceacc8acfed78eb84e4e25a0e75b24ea13076b517"
+  }
+}

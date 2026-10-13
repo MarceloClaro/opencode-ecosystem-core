@@ -1,6 +1,6 @@
 % ============================================================
 %  MÓDULO 13 — ATIVAÇÃO DE AGENTES E SUBAGENTES (minuciosa)
-%  Pipeline determinístico único + ativação por categoria.
+%  Modelo didático de ativação + rotas concretas por categoria.
 %  Teoria, função, cálculo e gates, com citações DOI verificadas
 %  (cronologia 1..7 confere com a biblioteca do Módulo 11).
 % ============================================================
@@ -28,7 +28,6 @@ integração e ambiente. Não se deve presumir que todos os sete passos ocorram
 sempre nem que a seleção seja determinística. As seções distinguem o fluxo
 documentado das partes que precisam de confirmação operacional e dos exemplos
 matemáticos, que são ilustrativos até serem avaliados com execuções observadas.
-categoria.
 \end{resultado}
 
 % ============================================================
@@ -49,23 +48,22 @@ gatilhos. Isso é deliberado: o conceito de agente neste ecossistema segue a
 tríade que Wooldridge e Jennings tornaram canônica — reatividade à mudança do
 ambiente, proatividade orientada a objetivos e habilidade social de
 interação \citref{WOOLDRIDGE, M.; JENNINGS, N. R. Intelligent agents: theory and practice. \emph{The Knowledge Engineering Review}, v.~10, n.~2, p.~115-152, 1995}{10.1017/S0269888900008122}{é o lastro teórico da especificação do gatilho: um agente só é um agente se é reativo, proativo e social — propriedades que o pipeline de ativação transforma em regras de roteamento (reagir à tarefa publicada, perseguir o objetivo declarado e interagir via Blackboard/MetaBus)}{The concept of an agent has become important in both artificial intelligence and mainstream computer science}{O conceito de agente tornou-se importante tanto na inteligência artificial quanto na ciência da computação.}{WOOLDRIDGE; JENNINGS, 1995, p.~115--152}.\begin{processo}
-ETAPA 2 — ROTEAMENTO. O orquestrador decide o caminho de ativação em ordem de
-preferência rígida: (a) skill marcada como API-alvo da tarefa; (b) agente
-nomeado explicitamente (rota inline em \pth{opencode.json}); (c) subagente do
-catálogo cujas capacidades casem com o gatilho; (d) fallback: ``executante
-genérico'' sem especialização. A escolha (b) roda direto; a (c) entra no
-Blackboard para voluntariado.
+ETAPA 2 — ROTEAMENTO. Identifique a interface e a rota concreta: comando
+do Core, perfil do OpenCode, skill ou tarefa do Blackboard. A API
+\pth{MarceloClaroOrchestrator.delegate} publica uma tarefa; o runtime
+\pth{dispatch_ready} seleciona candidatos elegíveis para tarefas de um DAG.
+Esses caminhos têm controles diferentes. Não existe aqui uma preferência
+universal comprovada entre skill, agente nomeado e executante genérico.
 \end{processo}
 
 \begin{processo}
-ETAPA 3 — CASAMENTO DE CAPACIDADES. Para a rota (c), calcula-se o escore de
-ativação de cada card voluntário. Seja $K$ o conjunto de tokens-chave do
-gatilho (remoção de stopwords) e $C_a$ as capacidades declaradas do agente
-$a$; o escore é a interseção em união (Jaccard ponderado):
-$A(a) = |K \cap C_a| / |K \cup C_a|$, $0 \le A \le 1$. Empates são
-desfeitos por prioridade de categoria (curation \textgreater research
-\textgreater audit) e, em último caso, por ordem alfabética — nunca por
-aleatoriedade, para preservar a reprodutibilidade.
+ETAPA 3 — CASAMENTO DE CAPACIDADES. A razão
+$J(K,C_a)=|K\cap C_a|/|K\cup C_a|$ é um exemplo didático de comparação de
+conjuntos de palavras, não a fórmula universal da atenção. A implementação
+\pth{AttentionRouter} combina sinais de semântica, capacidade, confiança e
+carga depois de condições obrigatórias. No Blackboard, a elegibilidade e o
+voluntariado usam suas próprias regras. Consulte a API da rota antes de
+assumir pesos, desempates ou comportamento para conjuntos vazios.
 \end{processo}
 
 \begin{processo}
@@ -96,17 +94,18 @@ manual, o ciclo de evolução é registrado com score e lições. O resultado n�
 \end{processo}
 
 \begin{processo}
-ETAPA 7 — REGISTRO. Cada ativação que mudou estado gera um ciclo em
-\pth{evolution/cycles.json} — objetivo, mudanças, score, lições e
-round\_id sem colisão com specs (SPEC-935-R611). Reprogramar a execução
-exige fonte de verdade: o mesmo gatilho + mesmo catálogo produz a mesma
-rotação (determinismo).
+ETAPA 7 — REGISTRO. Mudanças relevantes devem gerar um ciclo de evolução
+conforme as instruções do repositório. Uma consulta de leitura, uma chamada
+direta e uma execução de workflow não implicam automaticamente um novo ciclo.
+O registro informa objetivo, mudanças, evidências e lições; seu score é interno.
+Reproduzir uma execução também exige versões, parâmetros, estado, sementes
+quando aplicáveis e condições dos provedores. Igualdade do catálogo não garante
+respostas idênticas de um serviço externo.
 \end{processo}
 
-O requisito de determinarismo — mesmo gatilho, mesmo catálogo, mesmo manual —
-é o padrão mínimo de reprodutibilidade para alegações computacionais. Como o
-manual é gerado a partir do catálogo, a reprodutibilidade da ativação é
-herdada pela reprodutibilidade da geração; quando a replicação integral é
+A reprodução do catálogo permite conferir a transformação das fontes em fichas.
+Isso não implica reprodução automática da ativação ou das respostas: a execução
+precisa de evidências e condições próprias; quando a replicação integral é
 impossível, a reprodutibilidade serve como padrão mínimo de julgamento \citref{PENG, R. D. Reproducible research in computational science. \emph{Science}, v.~334, n.~6060, p.~1226-1227, 2011}{10.1126/science.1213847}{ancora a política de determinismo do pipeline de ativação e do gerador do manual: reprodutibilidade é o padrão mínimo para julgar alegações computacionais quando a replicação completa não é viável — princípio que o livro aplica ao próprio livro}{Reproducibility has the potential to serve as a minimum standard for judging scientific claims when full independent replication of a study is not possible}{A reprodutibilidade tem o potencial de servir como padrão mínimo para julgar alegações científicas quando a replicação independente completa de um estudo não é possível.}{PENG, 2011, p.~1226--1227}.\begin{arquitetura}
 FUNÇÕES ÚNICAS POR ETAPA. E1 gatilho: `parsea gatilho e publica tarefa` em
 \pth{mci/mcp_server.py} (mci\_post\_task). E2 roteamento: `decide caminho`
@@ -134,7 +133,7 @@ ORGANIZAÇÃO. As seções a seguir aplicam o pipeline de 7 etapas a CADA
 categoria do catálogo (mod-10). Para cada categoria: gatilho típico, rota
 dominante, função do agente, cálculo específico, justificativa teórica,
 impactos e limites e aviso. As categorias são as 12+ do gerador
-\pth{gen\_mod10.py} — orquestração, acadêmica, pesquisa, auditoria, jurídica,
+\pth{gen_mod10.py} — orquestração, acadêmica, pesquisa, auditoria, jurídica,
 dados, inferência, engenharia, testes, literária e cura (paisagem; mapeia o
 card do agente-alvo e recomenda capacidades, sem substituir o pipeline E1--E7),
 integração, MIRA, MASWOS e utilidade.
@@ -385,7 +384,7 @@ as mesmas etapas.
 \end{definicao}
 
 \begin{metodo}
-\textbf{Como analisar uma rota.} Para cada caminho encontrado no código,
+\textbf{Dedução passo a passo: Como analisar uma rota}  Para cada caminho encontrado no código,
 registre: (1) qual evento o inicia; (2) que regra escolhe o executor; (3) que
 permissões são consultadas; (4) que chamada efetivamente ocorre; (5) que saída
 fica registrada. Se as regras e entradas forem fixas e não houver estado externo
@@ -397,7 +396,7 @@ e seu executor estiverem identificados na implementação.
 \end{metodo}
 
 \begin{resultado}
-\textbf{Exemplo hipotético.} Suponha que, em um conjunto de tarefas, a rota
+\textbf{Exemplo resolvido: Exemplo hipotético}  Suponha que, em um conjunto de tarefas, a rota
 que usa o quadro seja escolhida em $p=0{,}2$ dos casos. Se ela acrescentar em
 média $c=2$ operações observáveis em relação à rota direta, o custo médio
 adicional estimado é $p\,c = 0{,}2\times2=0{,}4$ operação por tarefa. O cálculo
@@ -407,7 +406,7 @@ amostra de execuções e reporte distribuição e falhas, não apenas a média.
 \end{resultado}
 
 \begin{resultado}
-\textbf{Verificação.} A existência de uma etapa descrita no livro não demonstra
+\textbf{Ordem de grandeza e verificação: Verificação} A existência de uma etapa descrita no livro não demonstra
 que ela esteja implementada. Para conferi-la, localize o ponto de entrada, siga
 as chamadas e examine os testes ou registros aplicáveis. Um contador de
 marcadores editoriais mede presença de texto, não cobertura do código nem

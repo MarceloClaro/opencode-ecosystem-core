@@ -1,0 +1,745 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Revisão do banco | Panoramica AI</title>
+  <style>
+    :root { color-scheme: dark; font: 15px system-ui, sans-serif; background: #0b0f14; color: #e5e7eb; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-width: 320px; background: #0b0f14; }
+    button, input, select { font: inherit; }
+    button, select, input { min-height: 38px; border: 1px solid #3f4854; border-radius: 6px; background: #151b23; color: #e5e7eb; }
+    button { padding: 8px 13px; cursor: pointer; font-weight: 650; }
+    button:hover:not(:disabled) { border-color: #5eead4; }
+    button:disabled { opacity: .55; cursor: wait; }
+    .primary { background: #0f766e; border-color: #2dd4bf; }
+    .quiet { background: transparent; }
+    .danger { background: #3a171b; border-color: #b94a55; color: #fecaca; }
+    .danger:hover:not(:disabled) { border-color: #f87171; }
+    .detail-link { display: grid; place-items: center; min-height: 38px; padding: 8px 13px; border: 1px solid #3f4854; border-radius: 6px; color: #e5e7eb; font-weight: 650; text-decoration: none; }
+    .detail-link:hover { border-color: #5eead4; }
+    [hidden] { display: none !important; }
+    #login-view { min-height: 100dvh; display: grid; place-items: center; padding: 20px; }
+    #login-form { width: min(380px, 100%); display: grid; gap: 16px; padding: 24px; border: 1px solid #343d48; border-radius: 8px; background: #11161d; }
+    #login-form h1 { margin: 0; font-size: 22px; }
+    #login-form label { display: grid; gap: 7px; color: #cbd5e1; }
+    #login-form input { width: 100%; padding: 9px 10px; }
+    .error { color: #fca5a5; }
+    .shell { min-height: 100dvh; }
+    .topbar { position: sticky; top: 0; z-index: 4; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 62px; padding: 10px 24px; border-bottom: 1px solid #2d3540; background: #0f141b; }
+    .topbar h1 { margin: 0; font-size: 19px; }
+    .topbar nav { display: flex; align-items: center; gap: 10px; }
+    .topbar a { color: #5eead4; }
+    main { width: min(1500px, 100%); margin: 0 auto; padding: 22px 24px 40px; }
+    .metrics { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); border: 1px solid #303945; border-radius: 8px; overflow: hidden; }
+    .metric { min-width: 0; padding: 14px 16px; background: #111820; }
+    .metric + .metric { border-left: 1px solid #303945; }
+    .metric span { display: block; color: #94a3b8; font-size: 12px; }
+    .metric strong { display: block; margin-top: 3px; font-size: 23px; }
+    .metric.reviewed strong { color: #5eead4; }
+    .metric.pending strong { color: #fbbf24; }
+    .metric-button { border: 0; border-radius: 0; color: inherit; font-weight: 400; text-align: left; cursor: pointer; }
+    .metric-button:hover { background: #17212b; box-shadow: inset 0 -3px 0 #5eead4; }
+    .metric-button.pending:hover { box-shadow: inset 0 -3px 0 #fbbf24; }
+    .toolbar { display: flex; flex-wrap: wrap; align-items: end; gap: 10px; margin: 20px 0; padding: 14px 0; border-bottom: 1px solid #303945; }
+    .toolbar label { display: grid; gap: 5px; color: #94a3b8; font-size: 12px; }
+    .toolbar select { min-width: 210px; padding: 7px 9px; }
+    .batch-controls { display: flex; flex: 1 1 420px; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 10px; }
+    #batch-status { color: #a7f3d0; font-size: 13px; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 12px; margin: 22px 0 10px; }
+    .section-head h2 { margin: 0; font-size: 17px; }
+    .section-head p { margin: 0; color: #94a3b8; }
+    .review-heading-tools { display: flex; flex-wrap: wrap; align-items: end; justify-content: flex-end; gap: 14px; }
+    .review-heading-tools label { display: grid; gap: 5px; color: #94a3b8; font-size: 12px; }
+    .review-heading-tools select { min-width: 160px; padding: 7px 9px; }
+    #review-class-filter { min-width: 250px; }
+    #review-age-filter { min-width: 160px; }
+    #review-list { border-top: 1px solid #303945; }
+    .review-row { display: grid; grid-template-columns: 220px minmax(220px, 1fr) minmax(210px, .7fr); gap: 18px; align-items: center; padding: 16px 0; border-bottom: 1px solid #303945; }
+    .thumbnail-button { width: 220px; min-height: 0; padding: 0; overflow: hidden; background: #05080c; }
+    .thumbnail-button:focus-visible { outline: 2px solid #5eead4; outline-offset: 2px; }
+    .review-row .thumbnail-button img { display: block; width: 100%; aspect-ratio: 7 / 4; object-fit: contain; }
+    .review-data { min-width: 0; }
+    .review-data strong { display: block; overflow-wrap: anywhere; }
+    .review-badge { display: inline-flex; align-items: center; gap: 7px; width: fit-content; margin-top: 9px; padding: 5px 9px; border: 1px solid #2f7668; border-radius: 6px; background: #102c28; color: #a7f3d0; font-size: 13px; font-weight: 700; }
+    .review-badge.pending { border-color: #59616c; background: #1a2028; color: #cbd5e1; }
+    .review-check { display: grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; background: #14b8a6; color: #071411; font-size: 13px; line-height: 1; }
+    .review-badge.pending .review-check { background: #59616c; color: #f1f5f9; }
+    .review-data dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 5px 12px; margin: 10px 0 0; }
+    .review-data dt { color: #94a3b8; }
+    .review-data dd { margin: 0; }
+    .review-actions { display: grid; gap: 8px; justify-items: stretch; }
+    .age-choice { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .age-choice-label { grid-column: 1 / -1; color: #94a3b8; font-size: 12px; }
+    .age-option { min-width: 0; background: #151b23; }
+    .age-option[aria-pressed="true"] { border-color: #2dd4bf; background: #0f766e; color: #ecfeff; }
+    .job-state { min-height: 38px; margin: 0; color: #a7f3d0; font-size: 13px; overflow-wrap: anywhere; }
+    .pagination { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 18px 0 30px; }
+    .table-wrap { overflow: auto; border: 1px solid #303945; border-radius: 8px; }
+    table { width: 100%; border-collapse: collapse; background: #10161d; }
+    th, td { padding: 10px 12px; border-bottom: 1px solid #29313b; text-align: left; white-space: nowrap; }
+    th { position: sticky; top: 0; background: #171e27; color: #aab6c5; font-size: 12px; text-transform: uppercase; }
+    tbody tr:last-child td { border-bottom: 0; }
+    .positive { color: #5eead4; font-weight: 700; }
+    .negative { color: #fca5a5; font-weight: 700; }
+    .pending-change { color: #fbbf24; font-weight: 700; }
+    .empty { padding: 30px 0; color: #94a3b8; }
+    #global-status { min-height: 22px; margin: 8px 0; color: #a7f3d0; }
+    dialog { width: min(720px, calc(100% - 28px)); max-height: min(720px, calc(100dvh - 40px)); padding: 0; border: 1px solid #3f4854; border-radius: 8px; background: #10161d; color: #e5e7eb; }
+    dialog::backdrop { background: rgb(3 7 12 / 75%); }
+    .dialog-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 16px; border-bottom: 1px solid #303945; }
+    .dialog-head h2 { margin: 0; font-size: 17px; }
+    .dialog-close { width: 38px; padding: 0; font-size: 24px; line-height: 1; }
+    .dialog-body { max-height: calc(100dvh - 120px); padding: 16px; overflow: auto; }
+    #image-preview-dialog { width: min(96vw, 1800px); max-width: none; height: min(94dvh, 1200px); max-height: none; }
+    #image-preview-dialog .dialog-body { display: grid; place-items: center; height: calc(100% - 64px); max-height: none; padding: 10px; background: #05080c; }
+    #image-preview { display: block; width: 100%; height: 100%; object-fit: contain; }
+    #image-preview-status { color: #94a3b8; }
+    @media (max-width: 850px) {
+      .review-row { grid-template-columns: 150px minmax(0, 1fr); }
+      .thumbnail-button { width: 150px; }
+      .review-actions { grid-column: 1 / -1; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); align-items: center; }
+    }
+    @media (max-width: 560px) {
+      .topbar, main { padding-left: 14px; padding-right: 14px; }
+      .topbar { align-items: flex-start; }
+      .topbar nav { flex-wrap: wrap; justify-content: flex-end; }
+      .metrics { grid-template-columns: 1fr; }
+      .metric + .metric { border-left: 0; border-top: 1px solid #303945; }
+      .review-row { grid-template-columns: 1fr; }
+      .thumbnail-button { width: 100%; }
+      .review-actions { grid-column: auto; grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <section id="login-view">
+    <form id="login-form">
+      <h1>Revisão do banco</h1>
+      <label>Usuário<input id="username" name="username" autocomplete="username" required></label>
+      <label>Senha<input id="password" name="password" type="password" autocomplete="current-password" required></label>
+      <button class="primary" type="submit">Entrar</button>
+      <p id="login-error" class="error" role="alert"></p>
+    </form>
+  </section>
+
+  <div id="admin-view" class="shell" hidden>
+    <header class="topbar">
+      <h1>Panoramica AI · Revisão do banco</h1>
+      <nav><a href="/">Análise</a><a href="/validacao">Validação</a><span id="signed-user"></span><button id="logout" class="quiet" type="button">Sair</button></nav>
+    </header>
+    <main>
+      <section class="metrics" aria-label="Resumo do banco">
+        <div class="metric"><span>Radiografias</span><strong id="metric-images">0</strong></div>
+        <div class="metric reviewed"><span>Revisadas</span><strong id="metric-reviewed">0</strong></div>
+        <button id="show-reviewed-classes" class="metric metric-button reviewed" type="button" title="Ver classes ampliadas já revisadas"><span>Classes ampliadas revisadas</span><strong id="metric-classes-increased">0</strong></button>
+        <button id="show-pending-classes" class="metric metric-button pending" type="button" title="Ver classes ampliadas aguardando revisão"><span>Classes ampliadas pendentes</span><strong id="metric-pending-classes">0</strong></button>
+        <div class="metric"><span>Anotações</span><strong id="metric-annotations">0</strong></div>
+        <div class="metric"><span>Com contorno</span><strong id="metric-segmented">0</strong></div>
+        <div class="metric"><span>Tempo medio / radiografia</span><strong id="metric-review-time">-</strong></div>
+      </section>
+
+      <section class="toolbar" aria-label="Ações do banco">
+        <label>Banco<select id="export-group"><option value="all" selected>Completo · todas as classes</option><option value="quadrants">Somente quadrantes</option><option value="teeth">Somente dentes / FDI</option><option value="findings">Somente achados DENTEX</option><option value="additional">Somente Dental31 / anatomia</option></select></label>
+        <button id="export-detect" type="button">Baixar localização</button>
+        <button id="export-segment" type="button">Baixar segmentação</button>
+        <div id="batch-controls" class="batch-controls" hidden>
+          <span id="batch-status" role="status" aria-live="polite"></span>
+          <button id="batch-start" class="primary" type="button">Processar pendentes em lote</button>
+          <button id="batch-refresh-teeth" class="primary" type="button">Atualizar análises automáticas</button>
+          <button id="batch-stop" class="danger" type="button" hidden>Parar lote</button>
+        </div>
+      </section>
+      <p id="global-status" role="status" aria-live="polite"></p>
+
+      <section aria-labelledby="reviews-title">
+        <div class="section-head">
+          <h2 id="reviews-title">Radiografias</h2>
+          <div class="review-heading-tools">
+            <p id="review-total"></p>
+            <label>Banco de origem<select id="review-source-filter"><option value="">Todos os bancos</option><option value="dental_dataset">Dental_dataset · idade</option><option value="dental31">Dental31</option><option value="dentex">DENTEX</option><option value="teeth_segmentation">Segmentação dentária</option></select></label>
+            <label>Classe encontrada<select id="review-class-filter"><option value="">Todas as classes</option></select></label>
+            <label>Faixa etária<select id="review-age-filter"><option value="">Todas</option><option value="child">Criança</option><option value="adult">Adulto</option><option value="uncertain">A conferir</option><option value="unclassified">Não classificada</option></select></label>
+            <label>Situação<select id="review-filter"><option value="pending" selected>Não revisadas</option><option value="reviewed">Revisadas</option><option value="all">Todas</option></select></label>
+            <label>Organizar<select id="review-probability-order" disabled><option value="">Mais recentes</option><option value="highest">Maior probabilidade primeiro</option><option value="lowest">Menor probabilidade primeiro</option></select></label>
+          </div>
+        </div>
+        <div id="review-list"></div>
+        <div class="pagination">
+          <button id="previous" type="button">Anterior</button>
+          <span id="page-label">Página 1 de 1</span>
+          <button id="next" type="button">Próxima</button>
+        </div>
+      </section>
+
+      <section aria-labelledby="classes-title">
+        <div class="section-head">
+          <h2 id="classes-title">Exemplos por classe</h2>
+          <label>Exibir <select id="class-group"><option value="quadrants">Quadrantes</option><option value="teeth">Dentes / FDI</option><option value="findings">Achados DENTEX</option><option value="additional">Dental31 / anatomia</option></select></label>
+        </div>
+        <div class="table-wrap">
+          <table><thead><tr><th>Classe</th><th>Radiografias</th><th>Anotações</th><th>Segmentadas</th><th>Variação não revisada</th><th>Variação na revisão</th></tr></thead><tbody id="class-rows"></tbody></table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="image-preview-dialog" aria-labelledby="image-preview-title">
+    <div class="dialog-head">
+      <h2 id="image-preview-title">Radiografia ampliada</h2>
+      <button id="image-preview-close" class="dialog-close quiet" type="button" title="Fechar" aria-label="Fechar">×</button>
+    </div>
+    <div class="dialog-body">
+      <span id="image-preview-status">Carregando imagem original...</span>
+      <img id="image-preview" alt="" hidden>
+    </div>
+  </dialog>
+
+  <dialog id="class-changes-dialog" aria-labelledby="class-changes-title">
+    <div class="dialog-head">
+      <h2 id="class-changes-title">Classes ampliadas</h2>
+      <button id="class-changes-close" class="dialog-close quiet" type="button" title="Fechar" aria-label="Fechar">×</button>
+    </div>
+    <div class="dialog-body">
+      <div class="table-wrap">
+        <table><thead><tr><th>Grupo</th><th>Classe</th><th>Aumento</th></tr></thead><tbody id="class-changes-rows"></tbody></table>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    const byId = id => document.getElementById(id);
+    let csrf = '', currentPage = 1, totalPages = 1, statistics = null;
+    let currentRole = '', currentUsername = '';
+    let batchTimer = null, batchWasActive = false, activeBatchId = null;
+    let reviewRequestGeneration = 0;
+    const pollers = new Map();
+    const classNames = {
+      caries: 'Cárie', deep_caries: 'Cárie profunda', crown: 'Coroa', filling: 'Restauração',
+      implant: 'Implante', malaligned: 'Dente mal posicionado', mandibular_canal: 'Canal mandibular',
+      missing_teeth: 'Dente ausente', periapical_lesion: 'Lesão periapical', retained_root: 'Raiz retida',
+      root_canal_treatment: 'Tratamento de canal', root_piece: 'Fragmento radicular',
+      impacted: 'Dente impactado', impacted_tooth: 'Dente impactado', maxillary_sinus: 'Seio maxilar',
+      bone_loss: 'Perda óssea', fracture_teeth: 'Fratura dentária', permanent_teeth: 'Dente permanente',
+      supra_eruption: 'Supraerupção', tad: 'Dispositivo de ancoragem temporária',
+      abutment: 'Pilar protético', attrition: 'Atrição', bone_defect: 'Defeito ósseo',
+      gingival_former: 'Cicatrizador gengival', metal_band: 'Banda metálica',
+      orthodontic_brackets: 'Bráquetes ortodônticos', permanent_retainer: 'Contenção permanente',
+      post_core: 'Núcleo intrarradicular', plating: 'Placa de osteossíntese',
+      wire: 'Fio ortodôntico', cyst: 'Cisto', root_resorption: 'Reabsorção radicular',
+      primary_teeth: 'Dente decíduo'
+    };
+    const classDisplayName = label => classNames[label] || String(label).replaceAll('_', ' ');
+
+    async function request(path, options = {}) {
+      const response = await fetch(path, {cache: 'no-store', ...options});
+      const type = response.headers.get('content-type') || '';
+      const body = type.includes('application/json') ? await response.json() : null;
+      if (!response.ok) throw new Error(body?.detail || `Falha HTTP ${response.status}.`);
+      return body;
+    }
+
+    function showLogin(message = '') {
+      byId('admin-view').hidden = true;
+      byId('login-view').hidden = false;
+      byId('login-error').textContent = message;
+      byId('password').value = '';
+    }
+
+    async function enterAdmin(session) {
+      csrf = session.csrf;
+      currentRole = session.role || (session.is_admin ? 'admin' : 'reviewer');
+      currentUsername = session.username;
+      byId('signed-user').textContent = session.username;
+      byId('login-view').hidden = true;
+      byId('admin-view').hidden = false;
+      await Promise.all([loadStatistics(), loadReviews(1)]);
+      try {
+        const notice = sessionStorage.getItem('panoramica-review-notice');
+        if (notice) {
+          sessionStorage.removeItem('panoramica-review-notice');
+          byId('global-status').textContent = notice;
+        }
+      } catch (_) { /* A lista continua funcional sem armazenamento da sessão. */ }
+      byId('batch-controls').hidden = !session.is_admin;
+      const student = currentRole === 'student';
+      byId('export-group').parentElement.hidden = student;
+      byId('export-detect').hidden = student;
+      byId('export-segment').hidden = student;
+      if (session.is_admin) await loadBatch();
+    }
+
+    byId('login-form').addEventListener('submit', async event => {
+      event.preventDefault();
+      const button = event.submitter;
+      button.disabled = true;
+      byId('login-error').textContent = '';
+      try {
+        const session = await request('/admin/api/login', {
+          method: 'POST', headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({username: byId('username').value, password: byId('password').value})
+        });
+        await enterAdmin(session);
+      } catch (error) { showLogin(error.message); }
+      finally { button.disabled = false; }
+    });
+
+    byId('logout').addEventListener('click', async () => {
+      try { await request('/admin/api/logout', {method: 'POST', headers: {'X-Panoramica-CSRF': csrf}}); }
+      finally { clearTimeout(batchTimer); csrf = ''; showLogin(); }
+    });
+
+    function formatDate(value) {
+      return new Intl.DateTimeFormat('pt-BR', {dateStyle: 'short', timeStyle: 'short'}).format(new Date(value));
+    }
+
+    function openImagePreview(item) {
+      const dialog = byId('image-preview-dialog');
+      const preview = byId('image-preview');
+      const status = byId('image-preview-status');
+      byId('image-preview-title').textContent = `Radiografia ampliada · ${item.image_id}`;
+      status.hidden = false; status.textContent = 'Carregando imagem original...';
+      preview.hidden = true;
+      preview.alt = `Radiografia ampliada ${item.image_id}`;
+      preview.onload = () => { status.hidden = true; preview.hidden = false; };
+      preview.onerror = () => { preview.hidden = true; status.hidden = false; status.textContent = 'Não foi possível carregar a imagem.'; };
+      preview.src = `/admin/api/images/${encodeURIComponent(item.image_id)}/image`;
+      dialog.showModal();
+    }
+
+    function closeImagePreview() {
+      const dialog = byId('image-preview-dialog');
+      dialog.close();
+      const preview = byId('image-preview');
+      preview.onload = null; preview.onerror = null; preview.removeAttribute('src'); preview.hidden = true;
+    }
+
+    function rowElement(item, activeJob, editLock) {
+      const article = document.createElement('article');
+      article.className = 'review-row';
+      const image = document.createElement('img');
+      image.src = `/admin/api/images/${encodeURIComponent(item.image_id)}/thumbnail`;
+      image.alt = `Miniatura da radiografia ${item.image_id.slice(0, 10)}`;
+      image.loading = 'lazy';
+      const thumbnailButton = document.createElement('button');
+      thumbnailButton.type = 'button'; thumbnailButton.className = 'thumbnail-button';
+      thumbnailButton.title = 'Ampliar radiografia';
+      thumbnailButton.setAttribute('aria-label', `Ampliar radiografia ${item.image_id.slice(0, 10)}`);
+      thumbnailButton.append(image);
+      thumbnailButton.addEventListener('click', () => openImagePreview(item));
+      const data = document.createElement('div'); data.className = 'review-data';
+      const title = document.createElement('strong'); title.textContent = item.image_id;
+      const badge = document.createElement('div');
+      badge.className = `review-badge${item.reviewed ? '' : ' pending'}`;
+      const check = document.createElement('span'); check.className = 'review-check';
+      check.textContent = item.reviewed ? '✓' : '–'; check.setAttribute('aria-hidden', 'true');
+      const reviewer = document.createElement('span');
+      reviewer.textContent = item.reviewed ? `Revisada por ${item.reviewer}` : 'Aguardando revisão';
+      badge.setAttribute('aria-label', reviewer.textContent); badge.append(check, reviewer);
+      const details = document.createElement('dl');
+      const age = item.age_classification;
+      const ageNames = {child: 'Criança', adult: 'Adulto', uncertain: 'A conferir'};
+      const sourceNames = {dental_dataset: 'Dental_dataset · idade', dental31: 'Dental31', dentex: 'DENTEX', teeth_segmentation: 'Segmentação dentária', other: 'Outro'};
+      const ageDescription = !age ? 'Não classificada' : age.reviewed
+        ? `${ageNames[age.label]} · conferida${age.reviewed_by ? ` por ${age.reviewed_by}` : ''}`
+        : `${ageNames[age.label]} (${Math.round(age.confidence * 100)}%)`;
+      const probabilityNames = {class: 'Probabilidade da classe', child: 'Probabilidade de criança',
+        adult: 'Probabilidade de adulto', uncertain: 'Grau de incerteza'};
+      const displayedDetails = [
+        ['Revisão', item.revision], ['Atualizada', formatDate(item.created_at)],
+        ['Banco', sourceNames[item.source_database] || item.source_database],
+        ['Faixa etária', ageDescription],
+        ['Dimensão', `${item.width} × ${item.height}`],
+        ['Marcações', item.annotation_count], ['Contornos', `${item.segmented_count}/${item.annotation_count}`],
+        ['Grupos completos', item.complete_groups.join(', ') || 'Nenhum']
+      ];
+      if (item.sort_probability != null) displayedDetails.splice(4, 0, [
+        probabilityNames[item.probability_basis] || 'Probabilidade',
+        `${(item.sort_probability * 100).toFixed(1)}%`
+      ]);
+      for (const [name, value] of displayedDetails) {
+        const dt = document.createElement('dt'); dt.textContent = name;
+        const dd = document.createElement('dd'); dd.textContent = value;
+        details.append(dt, dd);
+      }
+      data.append(title, badge, details);
+      const actions = document.createElement('div'); actions.className = 'review-actions';
+      const ageChoice = document.createElement('div'); ageChoice.className = 'age-choice';
+      const ageChoiceLabel = document.createElement('span'); ageChoiceLabel.className = 'age-choice-label';
+      ageChoiceLabel.textContent = 'Confirmar faixa etária';
+      ageChoice.append(ageChoiceLabel);
+      const ageButtons = [];
+      for (const [label, text] of [['child', 'Criança'], ['adult', 'Adulto']]) {
+        const ageButton = document.createElement('button');
+        ageButton.type = 'button'; ageButton.className = 'age-option'; ageButton.textContent = text;
+        ageButton.setAttribute('aria-pressed', String(!!age?.reviewed && age.label === label));
+        ageButton.addEventListener('click', async () => {
+          for (const choice of ageButtons) choice.disabled = true;
+          state.textContent = `Salvando como ${text.toLowerCase()}...`;
+          try {
+            await request(`/admin/api/images/${encodeURIComponent(item.image_id)}/age`, {
+              method: 'PUT',
+              headers: {'Content-Type': 'application/json', 'X-Panoramica-CSRF': csrf},
+              body: JSON.stringify({label})
+            });
+            byId('global-status').textContent = `Faixa etária confirmada: ${text}.`;
+            await loadReviews(currentPage);
+          } catch (error) {
+            state.textContent = error.message;
+            for (const choice of ageButtons) choice.disabled = false;
+          }
+        });
+        ageButtons.push(ageButton); ageChoice.append(ageButton);
+      }
+      const detailLink = document.createElement('a'); detailLink.className = 'detail-link';
+      detailLink.href = `/?review=${encodeURIComponent(item.image_id)}`;
+      detailLink.textContent = 'Ver detalhes e editar';
+      const button = document.createElement('button'); button.type = 'button'; button.className = 'primary';
+      const needsApi = item.segmented_count !== item.annotation_count || !item.group_counts.quadrants;
+      button.textContent = needsApi ? 'Processar localização + segmentação' : 'Refazer dentes com modelo atual';
+      button.disabled = !!activeJob;
+      const deleteButton = document.createElement('button'); deleteButton.type = 'button';
+      deleteButton.className = 'danger'; deleteButton.textContent = 'Excluir radiografia';
+      deleteButton.disabled = !!activeJob;
+      const state = document.createElement('p'); state.className = 'job-state'; state.setAttribute('role', 'status');
+      if (editLock && editLock.editing_by !== currentUsername) {
+        detailLink.removeAttribute('href'); detailLink.setAttribute('aria-disabled', 'true');
+        detailLink.style.opacity = '.55'; detailLink.style.cursor = 'not-allowed';
+        state.textContent = `Em edicao por ${editLock.editing_by}.`;
+      }
+      if (currentRole === 'student') {
+        button.hidden = true; deleteButton.hidden = true;
+      }
+      if (activeJob) {
+        state.textContent = jobText(activeJob); button.disabled = true;
+        pollJob(activeJob.job_id, state, button);
+      }
+      button.addEventListener('click', () => startSegmentation(
+        item.image_id, state, button, !needsApi
+      ));
+      deleteButton.addEventListener('click', () => deleteRadiograph(item, state, button, deleteButton));
+      actions.append(ageChoice, detailLink, button, deleteButton, state);
+      article.append(thumbnailButton, data, actions);
+      return article;
+    }
+
+    async function loadReviews(page = currentPage) {
+      const requestGeneration = ++reviewRequestGeneration;
+      const status = byId('review-filter').value;
+      const parameters = new URLSearchParams({page, status});
+      const selectedClass = byId('review-class-filter').value;
+      const selectedAge = byId('review-age-filter').value;
+      const selectedSource = byId('review-source-filter').value;
+      if (selectedAge) parameters.set('age_group', selectedAge);
+      if (selectedSource) parameters.set('source_group', selectedSource);
+      const probabilityOrder = byId('review-probability-order').value;
+      if (probabilityOrder) parameters.set('probability_order', probabilityOrder);
+      if (selectedClass) {
+        const [group, label] = JSON.parse(selectedClass);
+        parameters.set('class_group', group);
+        parameters.set('class_label', label);
+      }
+      const result = await request(`/admin/api/reviews?${parameters}`);
+      if (requestGeneration !== reviewRequestGeneration) return;
+      currentPage = result.page; totalPages = result.pages;
+      byId('review-total').textContent = `${result.total} radiografia${result.total === 1 ? '' : 's'}`;
+      byId('page-label').textContent = `Página ${currentPage} de ${totalPages}`;
+      byId('previous').disabled = currentPage <= 1;
+      byId('next').disabled = currentPage >= totalPages;
+      const list = byId('review-list'); list.replaceChildren();
+      if (!result.items.length) {
+        const empty = document.createElement('p'); empty.className = 'empty'; empty.textContent = 'Nenhuma radiografia revisada.'; list.append(empty);
+      } else {
+        for (const item of result.items) list.append(rowElement(
+          item, result.active_jobs[item.image_id], result.edit_locks?.[item.image_id]
+        ));
+      }
+    }
+
+    byId('previous').addEventListener('click', () => loadReviews(currentPage - 1));
+    byId('next').addEventListener('click', () => loadReviews(currentPage + 1));
+    byId('review-filter').addEventListener('change', () => loadReviews(1));
+    function updateProbabilityOrder() {
+      const available = !!byId('review-class-filter').value ||
+        ['child', 'adult', 'uncertain'].includes(byId('review-age-filter').value);
+      const select = byId('review-probability-order');
+      select.disabled = !available;
+      if (!available) select.value = '';
+    }
+    byId('review-class-filter').addEventListener('change', () => {
+      updateProbabilityOrder(); loadReviews(1);
+    });
+    byId('review-age-filter').addEventListener('change', () => {
+      updateProbabilityOrder(); loadReviews(1);
+    });
+    byId('review-probability-order').addEventListener('change', () => loadReviews(1));
+    byId('review-source-filter').addEventListener('change', () => loadReviews(1));
+
+    function jobText(job) {
+      if (job.status === 'queued') return 'Aguardando o modelo.';
+      if (job.status === 'processing') return `Processando ${job.current || 0} de ${job.total || 0} marcações.`;
+      return job.message || (job.status === 'failed' ? 'Falha no processamento.' : 'Processamento concluído.');
+    }
+
+    async function startSegmentation(imageId, state, button, replaceTeeth = false) {
+      if (replaceTeeth && !window.confirm(
+        'Criar uma nova revisão substituindo os dentes pelo modelo atual? A revisão anterior será preservada.'
+      )) return;
+      button.disabled = true; state.textContent = 'Iniciando processamento...';
+      try {
+        const suffix = replaceTeeth ? '?replace_teeth=true' : '';
+        const job = await request(`/admin/api/images/${encodeURIComponent(imageId)}/segment${suffix}`, {
+          method: 'POST', headers: {'X-Panoramica-CSRF': csrf}
+        });
+        state.textContent = jobText(job); pollJob(job.job_id, state, button);
+      } catch (error) { state.textContent = error.message; button.disabled = false; }
+    }
+
+    function pollJob(jobId, state, button) {
+      if (pollers.has(jobId)) return;
+      const check = async () => {
+        try {
+          const job = await request(`/admin/api/jobs/${encodeURIComponent(jobId)}`);
+          state.textContent = jobText(job);
+          if (['queued', 'processing'].includes(job.status)) return;
+          clearInterval(pollers.get(jobId)); pollers.delete(jobId);
+          button.disabled = true;
+          await Promise.all([loadStatistics(), loadReviews(currentPage)]);
+        } catch (error) {
+          clearInterval(pollers.get(jobId)); pollers.delete(jobId);
+          state.textContent = error.message; button.disabled = false;
+        }
+      };
+      pollers.set(jobId, setInterval(check, 3000)); check();
+    }
+
+    async function deleteRadiograph(item, state, segmentButton, deleteButton) {
+      const confirmed = window.confirm(
+        `Excluir esta radiografia e todas as suas ${item.annotation_count} anotações?\n\n` +
+        'Todas as revisões também serão removidas. Esta ação não pode ser desfeita.'
+      );
+      if (!confirmed) return;
+      segmentButton.disabled = true; deleteButton.disabled = true;
+      state.textContent = 'Excluindo radiografia e anotações...';
+      try {
+        await request(`/admin/api/images/${encodeURIComponent(item.image_id)}`, {
+          method: 'DELETE', headers: {'X-Panoramica-CSRF': csrf}
+        });
+        const targetPage = document.querySelectorAll('.review-row').length === 1 && currentPage > 1
+          ? currentPage - 1 : currentPage;
+        byId('global-status').textContent = 'Radiografia e anotações excluídas.';
+        await Promise.all([loadStatistics(), loadReviews(targetPage)]);
+      } catch (error) {
+        state.textContent = error.message;
+        segmentButton.disabled = item.segmented_count === item.annotation_count && !!item.group_counts.quadrants;
+        deleteButton.disabled = false;
+      }
+    }
+
+    function populateReviewClassFilter() {
+      const select = byId('review-class-filter');
+      const previous = select.value;
+      const all = document.createElement('option');
+      all.value = ''; all.textContent = 'Todas as classes';
+      select.replaceChildren(all);
+      const groupNames = {
+        quadrants: 'Quadrantes', teeth: 'Dentes / FDI',
+        findings: 'Achados DENTEX', additional: 'Dental31 / anatomia'
+      };
+      for (const [group, groupName] of Object.entries(groupNames)) {
+        const classes = statistics.classes
+          .filter(item => item.group === group && item.images > 0)
+          .sort((first, second) => classDisplayName(first.label).localeCompare(classDisplayName(second.label), 'pt-BR'));
+        if (!classes.length) continue;
+        const options = document.createElement('optgroup'); options.label = groupName;
+        for (const item of classes) {
+          const option = document.createElement('option');
+          option.value = JSON.stringify([item.group, item.label]);
+          option.textContent = `${classDisplayName(item.label)} (${item.images})`;
+          options.append(option);
+        }
+        select.append(options);
+      }
+      if ([...select.options].some(option => option.value === previous)) select.value = previous;
+    }
+
+    async function loadStatistics() {
+      statistics = await request('/admin/api/statistics');
+      const annotations = statistics.classes.reduce((sum, row) => sum + row.annotations, 0);
+      const segmented = statistics.classes.reduce((sum, row) => sum + row.segmented, 0);
+      byId('metric-images').textContent = statistics.images;
+      byId('metric-reviewed').textContent = statistics.reviewed_images;
+      byId('metric-classes-increased').textContent = statistics.classes_increased;
+      byId('metric-pending-classes').textContent = statistics.classes.filter(row => row.pending_delta > 0).length;
+      byId('metric-annotations').textContent = annotations;
+      byId('metric-segmented').textContent = segmented;
+      const seconds = statistics.average_review_seconds;
+      byId('metric-review-time').textContent = seconds == null ? '-' :
+        `${Math.floor(seconds / 60)}min ${Math.round(seconds % 60)}s`;
+      byId('metric-review-time').title = `${statistics.measured_reviews || 0} revisoes medidas`;
+      populateReviewClassFilter();
+      renderClasses();
+    }
+
+    function renderClasses() {
+      const group = byId('class-group').value;
+      const rows = byId('class-rows'); rows.replaceChildren();
+      for (const item of statistics.classes.filter(row => row.group === group)) {
+        const tr = document.createElement('tr');
+        for (const value of [classDisplayName(item.label), item.images, item.annotations, item.segmented]) {
+          const td = document.createElement('td'); td.textContent = value; tr.append(td);
+        }
+        const pendingDelta = document.createElement('td');
+        pendingDelta.textContent = item.pending_delta > 0 ? `+${item.pending_delta}` : item.pending_delta;
+        if (item.pending_delta !== 0) pendingDelta.className = 'pending-change';
+        tr.append(pendingDelta);
+        const delta = document.createElement('td');
+        delta.textContent = item.review_delta > 0 ? `+${item.review_delta}` : item.review_delta;
+        if (item.review_delta > 0) delta.className = 'positive';
+        if (item.review_delta < 0) delta.className = 'negative';
+        tr.append(delta);
+        rows.append(tr);
+      }
+    }
+    byId('class-group').addEventListener('change', renderClasses);
+
+    function openClassChanges(kind) {
+      if (!statistics) return;
+      const reviewed = kind === 'reviewed';
+      const field = reviewed ? 'review_delta' : 'pending_delta';
+      const groupNames = {
+        quadrants: 'Quadrantes', teeth: 'Dentes / FDI',
+        findings: 'Achados DENTEX', additional: 'Dental31 / anatomia'
+      };
+      byId('class-changes-title').textContent = reviewed
+        ? 'Classes ampliadas revisadas' : 'Classes ampliadas pendentes';
+      const body = byId('class-changes-rows'); body.replaceChildren();
+      const changed = statistics.classes.filter(row => row[field] > 0)
+        .sort((first, second) => second[field] - first[field] || first.label.localeCompare(second.label));
+      for (const item of changed) {
+        const tr = document.createElement('tr');
+        for (const value of [groupNames[item.group] || item.group, classDisplayName(item.label), `+${item[field]}`]) {
+          const td = document.createElement('td'); td.textContent = value; tr.append(td);
+        }
+        tr.lastChild.className = reviewed ? 'positive' : 'pending-change';
+        body.append(tr);
+      }
+      byId('class-changes-dialog').showModal();
+    }
+
+    byId('show-reviewed-classes').addEventListener('click', () => openClassChanges('reviewed'));
+    byId('show-pending-classes').addEventListener('click', () => openClassChanges('pending'));
+    byId('class-changes-close').addEventListener('click', () => byId('class-changes-dialog').close());
+    byId('class-changes-dialog').addEventListener('click', event => {
+      if (event.target === byId('class-changes-dialog')) byId('class-changes-dialog').close();
+    });
+    byId('image-preview-close').addEventListener('click', closeImagePreview);
+    byId('image-preview-dialog').addEventListener('click', event => {
+      if (event.target === byId('image-preview-dialog')) closeImagePreview();
+    });
+    byId('image-preview-dialog').addEventListener('close', () => {
+      const preview = byId('image-preview');
+      preview.onload = null; preview.onerror = null; preview.removeAttribute('src'); preview.hidden = true;
+    });
+
+    function batchText(job) {
+      if (job.status === 'idle') return '';
+      const progress = `${job.current || 0}/${job.total || 0}`;
+      const counts = `${job.succeeded || 0} prontas · ${job.skipped || 0} já prontas · ${job.failed || 0} falhas`;
+      if (job.status === 'queued') return `Lote aguardando · ${progress}`;
+      if (job.status === 'processing') return `Processando ${progress} · ${counts}`;
+      if (job.status === 'cancelling') return `Parando ${progress} · ${counts}`;
+      return `${job.message || 'Lote finalizado.'} ${progress} · ${counts}`;
+    }
+
+    function renderBatch(job) {
+      const active = ['queued', 'processing', 'cancelling'].includes(job.status);
+      byId('batch-status').textContent = batchText(job);
+      byId('batch-start').disabled = active;
+      byId('batch-refresh-teeth').disabled = active;
+      byId('batch-stop').hidden = !active;
+      byId('batch-stop').disabled = job.status === 'cancelling';
+      activeBatchId = active ? job.batch_id : null;
+      if (batchWasActive && !active) Promise.all([loadStatistics(), loadReviews(currentPage)]);
+      batchWasActive = active;
+      clearTimeout(batchTimer);
+      if (active) batchTimer = setTimeout(loadBatch, 5000);
+    }
+
+    async function loadBatch() {
+      try { renderBatch(await request('/admin/api/batch')); }
+      catch (error) { byId('batch-status').textContent = error.message; }
+    }
+
+    byId('batch-start').addEventListener('click', async () => {
+      const pending = Math.max(0, statistics.images - statistics.reviewed_images);
+      if (!window.confirm(`Processar em lote as ${pending} radiografias não revisadas?`)) return;
+      byId('batch-start').disabled = true;
+      byId('batch-status').textContent = 'Criando fila de processamento...';
+      try {
+        const job = await request('/admin/api/batch', {
+          method: 'POST', headers: {'X-Panoramica-CSRF': csrf}
+        });
+        renderBatch(job);
+      } catch (error) {
+        byId('batch-status').textContent = error.message;
+        byId('batch-start').disabled = false;
+      }
+    });
+
+    byId('batch-refresh-teeth').addEventListener('click', async () => {
+      const question = 'Atualizar em lote somente as análises automáticas antigas? Revisões humanas e marcações importadas serão preservadas.';
+      if (!window.confirm(question)) return;
+      byId('batch-refresh-teeth').disabled = true;
+      byId('batch-status').textContent = 'Localizando análises automáticas antigas...';
+      try {
+        const job = await request('/admin/api/batch?replace_ai_annotations=true', {
+          method: 'POST', headers: {'X-Panoramica-CSRF': csrf}
+        });
+        renderBatch(job);
+      } catch (error) {
+        byId('batch-status').textContent = error.message;
+        byId('batch-refresh-teeth').disabled = false;
+      }
+    });
+
+    byId('batch-stop').addEventListener('click', async () => {
+      if (!activeBatchId) return;
+      byId('batch-stop').disabled = true;
+      try {
+        renderBatch(await request(`/admin/api/batch/${encodeURIComponent(activeBatchId)}`, {
+          method: 'DELETE', headers: {'X-Panoramica-CSRF': csrf}
+        }));
+      } catch (error) {
+        byId('batch-status').textContent = error.message;
+        byId('batch-stop').disabled = false;
+      }
+    });
+
+    async function downloadDataset(task) {
+      const group = byId('export-group').value;
+      const status = byId('global-status'); status.textContent = 'Preparando arquivo...';
+      try {
+        const response = await fetch(`/admin/api/export?group=${group}&task=${task}`, {cache: 'no-store'});
+        if (!response.ok) {
+          const error = await response.json(); throw new Error(error.detail || `Falha HTTP ${response.status}.`);
+        }
+        const url = URL.createObjectURL(await response.blob());
+        const anchor = document.createElement('a'); anchor.href = url;
+        anchor.download = group === 'all'
+          ? `banco-revisado-${task === 'detect' ? 'localizacao' : 'segmentacao'}.zip`
+          : `revisoes-${group}-${task}.zip`;
+        anchor.click();
+        setTimeout(() => URL.revokeObjectURL(url), 30000);
+        status.textContent = 'Arquivo gerado.';
+      } catch (error) { status.textContent = error.message; }
+    }
+    byId('export-detect').addEventListener('click', () => downloadDataset('detect'));
+    byId('export-segment').addEventListener('click', () => downloadDataset('segment'));
+
+    request('/admin/api/session').then(enterAdmin).catch(() => showLogin());
+  </script>
+</body>
+</html>

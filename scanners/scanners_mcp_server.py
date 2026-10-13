@@ -2,11 +2,11 @@
 """
 Scanners MCP Server — Servidor MCP para o SuperRigorPipeline e Scanners
 ========================================================================
-Expõe as ferramentas dos 8 scanners e auditoria do ecossistema via MCP.
+Expõe triagens heurísticas e diagnóstico do ecossistema via MCP.
 
 Ferramentas:
-  - super_rigor_audit:          Executa auditoria completa através dos 8 scanners
-  - scientific_reasoning_scan:   Avalia o Índice de Rigor Científico (SRI 0-100)
+  - super_rigor_audit:          Combina diagnóstico heurístico e triagem lexical
+  - scientific_reasoning_scan:   Triagem lexical PT/EN, sem avaliação científica
   - merkle_integrity_check:     Verifica a integridade SHA-256 via Árvore de Merkle
 
 SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
@@ -73,13 +73,17 @@ def _call_tool_result(data: dict) -> CallToolResult:
 
 app = Server("scanners-mcp")
 
+# Limite de caracteres Unicode, anunciado no schema e validado antes de qualquer
+# scanner tanto no servidor assíncrono quanto no wrapper síncrono (R815).
+MAX_SCIENTIFIC_TEXT_CHARS = 1_000_000
+
 TOOL_SCHEMAS = {
     "super_rigor_audit": {
-        "type": "object", "properties": {"text": {"type": "string"}},
+        "type": "object", "properties": {"text": {"type": "string", "maxLength": MAX_SCIENTIFIC_TEXT_CHARS}},
         "required": ["text"], "additionalProperties": False,
     },
     "scientific_reasoning_scan": {
-        "type": "object", "properties": {"text": {"type": "string"}},
+        "type": "object", "properties": {"text": {"type": "string", "maxLength": MAX_SCIENTIFIC_TEXT_CHARS}},
         "required": ["text"], "additionalProperties": False,
     },
     "merkle_integrity_check": {"type": "object", "properties": {}, "additionalProperties": False},
@@ -93,39 +97,58 @@ TOOL_SCHEMAS = {
     },
 }
 
+TOOL_DESCRIPTIONS = {
+    "super_rigor_audit": (
+        "Combina diagnósticos heurísticos do ecossistema e triagem lexical científica. "
+        "Preserva scores e status legados; não avalia qualidade científica, "
+        "validade clínica ou risco de viés. Entrada limitada a 1.000.000 caracteres Unicode."
+    ),
+    "scientific_reasoning_scan": (
+        "Realiza triagem lexical PT/EN de conceitos e gatilhos categóricos. "
+        "Não avalia qualidade científica, validade clínica ou risco de viés; "
+        "os scores e rótulos legados são indicadores heurísticos. Entrada limitada a 1.000.000 caracteres Unicode."
+    ),
+    "merkle_integrity_check": "Verifica a integridade criptográfica SHA-256 do código-fonte através da Árvore de Merkle",
+    "literary_scanner_suite": "Realiza triagem heurística literária: narrativa, personagem, estilo, símbolos, teoria, leitor, ética e inovação",
+    "literary_research_scanner_suite": "Realiza triagem heurística de pesquisa literária: bibliografia, corpus comparativo, teoria e estrutura de relato",
+}
+
 
 @app.list_tools()
 async def list_tools() -> list[Tool]:
     return [
         Tool(
             name="super_rigor_audit",
-            description="Executa auditoria completa através dos 8 scanners do ecossistema e calcula o Score de Excelência (EXS)",
+            description=TOOL_DESCRIPTIONS["super_rigor_audit"],
             inputSchema=TOOL_SCHEMAS["super_rigor_audit"],
         ),
         Tool(
             name="scientific_reasoning_scan",
-            description="Avalia o Índice de Rigor Científico (SRI 0-100) e detecta falácias epistemológicas no texto",
+            description=TOOL_DESCRIPTIONS["scientific_reasoning_scan"],
             inputSchema=TOOL_SCHEMAS["scientific_reasoning_scan"],
         ),
         Tool(
             name="merkle_integrity_check",
-            description="Verifica a integridade criptográfica SHA-256 do código-fonte através da Árvore de Merkle",
+            description=TOOL_DESCRIPTIONS["merkle_integrity_check"],
             inputSchema=TOOL_SCHEMAS["merkle_integrity_check"],
         ),
         Tool(
             name="literary_scanner_suite",
-            description="Executa 8 scanners literários: narrativa, personagem, estilo, símbolos, teoria, leitor, ética e inovação",
+            description=TOOL_DESCRIPTIONS["literary_scanner_suite"],
             inputSchema=TOOL_SCHEMAS["literary_scanner_suite"],
         ),
         Tool(
             name="literary_research_scanner_suite",
-            description="Executa 4 scanners de pesquisa literária internacional: bibliografia, corpus comparativo, teoria e rigor",
+            description=TOOL_DESCRIPTIONS["literary_research_scanner_suite"],
             inputSchema=TOOL_SCHEMAS["literary_research_scanner_suite"],
         ),
     ]
 
 
-@app.call_tool()
+# O SDK usa ValidationError.message e ecoaria a entrada rejeitada inteira.
+# O handler abaixo aplica o mesmo schema com diagnósticos de regra/caminho,
+# sem valores, antes de executar qualquer scanner.
+@app.call_tool(validate_input=False)
 async def call_tool(name: str, arguments: dict) -> CallToolResult | list[TextContent]:
     supported_tools = {"super_rigor_audit", "scientific_reasoning_scan", "merkle_integrity_check", "literary_scanner_suite", "literary_research_scanner_suite"}
     if not isinstance(name, str) or name not in supported_tools:
@@ -203,23 +226,23 @@ class ScannersMcpServer:
     def get_tools(self) -> Dict[str, Any]:
         return {
             "super_rigor_audit": {
-                "description": "Executa auditoria completa através dos 8 scanners do ecossistema",
+                "description": TOOL_DESCRIPTIONS["super_rigor_audit"],
                 "parameters": {"text": "Texto a ser auditado"},
             },
             "scientific_reasoning_scan": {
-                "description": "Avalia o Índice de Rigor Científico (SRI 0-100)",
+                "description": TOOL_DESCRIPTIONS["scientific_reasoning_scan"],
                 "parameters": {"text": "Texto científico a ser analisado"},
             },
             "merkle_integrity_check": {
-                "description": "Verifica a integridade criptográfica SHA-256 do código-fonte",
+                "description": TOOL_DESCRIPTIONS["merkle_integrity_check"],
                 "parameters": {},
             },
             "literary_scanner_suite": {
-                "description": "Executa 8 scanners literários rigorosos",
+                "description": TOOL_DESCRIPTIONS["literary_scanner_suite"],
                 "parameters": {"text": "Texto literário", "metadata": "Metadados opcionais"},
             },
             "literary_research_scanner_suite": {
-                "description": "Executa 4 scanners de pesquisa literária internacional",
+                "description": TOOL_DESCRIPTIONS["literary_research_scanner_suite"],
                 "parameters": {"text": "Pesquisa literária", "metadata": "Metadados opcionais"},
             },
         }

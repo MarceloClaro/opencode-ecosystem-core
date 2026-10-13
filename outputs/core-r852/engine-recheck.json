@@ -1,0 +1,31 @@
+{
+  "engines": {
+    "unblob": {
+      "returncode": 0,
+      "version": "26.6.4",
+      "path": "/home/marceloclaro/.local/share/opencode-core/native-rea/bin/unblob",
+      "sha256": "b978ea05b12cacf9cf95c62ed5a813b45eee70d750d33560719fefea57cf7721"
+    },
+    "apktool": {
+      "returncode": 0,
+      "version": "2.7.0-dirty",
+      "path": "/home/marceloclaro/.local/share/opencode-core/native-rea/bin/apktool",
+      "sha256": "be48b391e31b59fbfebfc64894ff2001d159697202a9cb8c45a828e3525a21ab"
+    },
+    "binwalk": {
+      "returncode": 0,
+      "version": "binwalk 3.1.0",
+      "path": "/home/marceloclaro/.local/share/opencode-core/native-rea/bin/binwalk",
+      "sha256": "cd5d04a1fa1986c9174eb5f55ee108046a4af34d5b7f0e5446d809fe2b029984"
+    }
+  },
+  "submodules": [
+    "4fdab3d464d97b68e0af9088df3f9e2e1545b21c third_party/binwalk (4fdab3d)",
+    "effeb734fc570c32650f88b159608979dc7b423e third_party/ghidra-nativeaot (heads/main)",
+    "5844800a486d2248fa949b74c9896285f5b54de2 third_party/jadx-headless-mcp (5844800)",
+    "1fcc7a0a584a70a96c31f5a276c20944d199a089 third_party/unblob (1fcc7a0)",
+    "8219bf5016a063d7fb215101a8c45d5959ec733f third_party/wakaru (8219bf5)"
+  ],
+  "scope": "version/provenance probes; not all layer execution",
+  "externally_validated": false
+}

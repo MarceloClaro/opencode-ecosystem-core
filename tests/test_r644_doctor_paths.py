@@ -16,6 +16,7 @@ def isolated_installations(monkeypatch, tmp_path):
     home.mkdir()
     monkeypatch.setattr(Path, "home", classmethod(lambda cls: home))
     monkeypatch.setattr(sys, "executable", str(tmp_path / "venv" / "bin" / "python"))
+    monkeypatch.setattr(doctor, "REPO_ROOT", str(tmp_path / "repo"))
     monkeypatch.setattr(doctor.shutil, "which", lambda name: None)
     for name in doctor.EXTERNAL_CLIS:
         key = "ANTIGRAVITY_BIN" if name == "agy" else f"{name.upper()}_BIN"

@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Validação dos modelos | Panoramica AI</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080d12;
+      --surface: #10171f;
+      --surface-2: #151e28;
+      --line: #293542;
+      --text: #f4f7fa;
+      --muted: #9eb0c1;
+      --mint: #37e6bd;
+      --cyan: #55c7f3;
+      --coral: #ff8066;
+      --amber: #f7bd4f;
+      --danger: #ff6b7a;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-width: 320px; background: var(--bg); color: var(--text); }
+    button, a, select { font: inherit; }
+    a { color: inherit; }
+    button:focus-visible, a:focus-visible { outline: 2px solid var(--mint); outline-offset: 3px; }
+    .shell { width: min(1480px, calc(100% - 40px)); margin: 0 auto; }
+    .topbar { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: rgba(8, 13, 18, .94); backdrop-filter: blur(14px); }
+    .topbar-inner { min-height: 66px; display: flex; align-items: center; gap: 20px; }
+    .brand { display: flex; align-items: center; gap: 11px; text-decoration: none; font-weight: 760; }
+    .brand-mark { width: 28px; height: 28px; display: grid; place-items: center; border: 1px solid #3d4a56; border-radius: 7px; color: var(--mint); font-size: 13px; }
+    .nav { margin-left: auto; display: flex; align-items: center; gap: 20px; color: var(--muted); font-size: 14px; }
+    .nav a { text-decoration: none; }
+    .nav a:hover, .nav .active { color: var(--text); }
+    .user { padding-left: 20px; border-left: 1px solid var(--line); color: var(--text); }
+    main { padding: 34px 0 64px; }
+    .page-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 28px; }
+    .eyebrow { margin: 0 0 8px; color: var(--mint); text-transform: uppercase; font-size: 12px; font-weight: 760; letter-spacing: .08em; }
+    h1 { margin: 0; max-width: 840px; font-size: 46px; line-height: 1.04; letter-spacing: 0; }
+    .lede { max-width: 700px; margin: 13px 0 0; color: var(--muted); font-size: 16px; line-height: 1.6; }
+    .back { color: var(--muted); text-decoration: none; white-space: nowrap; }
+    .back:hover { color: var(--text); }
+    .summary-band { display: grid; grid-template-columns: repeat(4, 1fr); margin-bottom: 34px; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--surface); }
+    .summary-item { min-height: 108px; padding: 21px 24px; border-right: 1px solid var(--line); }
+    .summary-item:last-child { border-right: 0; }
+    .summary-label { color: var(--muted); font-size: 13px; }
+    .summary-value { display: block; margin-top: 8px; font-size: 27px; font-weight: 780; font-variant-numeric: tabular-nums; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin: 38px 0 16px; }
+    .section-head h2 { margin: 0; font-size: 20px; }
+    .section-head p { margin: 4px 0 0; color: var(--muted); font-size: 14px; }
+    .model-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .model-card { --accent: var(--mint); position: relative; min-height: 292px; display: flex; flex-direction: column; padding: 25px; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--surface); }
+    .model-card::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 3px; background: var(--accent); }
+    .model-card[data-accent="cyan"] { --accent: var(--cyan); }
+    .model-card[data-accent="coral"] { --accent: var(--coral); }
+    .model-card[data-accent="amber"] { --accent: var(--amber); }
+    .card-top { display: flex; justify-content: space-between; gap: 16px; }
+    .model-type { color: var(--accent); font-size: 12px; font-weight: 750; text-transform: uppercase; letter-spacing: .07em; }
+    .status { display: inline-flex; align-items: center; gap: 7px; color: var(--muted); font-size: 12px; }
+    .status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 0 3px color-mix(in srgb, var(--amber) 15%, transparent); }
+    .status.complete::before { background: var(--mint); box-shadow: 0 0 0 3px color-mix(in srgb, var(--mint) 15%, transparent); }
+    .model-card h3 { margin: 18px 0 8px; font-size: 25px; }
+    .model-card .description { min-height: 48px; margin: 0; color: var(--muted); line-height: 1.5; }
+    .progress-track { height: 6px; margin-top: 21px; overflow: hidden; border-radius: 3px; background: #26313b; }
+    .progress-bar { height: 100%; background: var(--accent); transition: width .25s ease; }
+    .progress-copy { display: flex; justify-content: space-between; margin-top: 8px; color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+    .metric-context { margin-top: 17px; color: var(--accent); font-size: 12px; font-weight: 700; }
+    .card-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 20px 0; }
+    .card-metrics span { display: block; color: var(--muted); font-size: 11px; }
+    .card-metrics strong { display: block; margin-top: 4px; font-size: 17px; font-variant-numeric: tabular-nums; }
+    .open-model { margin-top: auto; align-self: flex-start; color: var(--text); text-decoration: none; font-weight: 720; }
+    .open-model:hover { color: var(--accent); }
+    .notice { padding: 18px 20px; border: 1px solid var(--line); border-left: 3px solid var(--amber); border-radius: 6px; background: var(--surface); color: var(--muted); }
+    .metrics-band { grid-template-columns: repeat(6, 1fr); }
+    .metrics-band .summary-item { min-height: 98px; padding: 18px; }
+    .plot-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    figure { margin: 0; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: #fff; }
+    figure button { width: 100%; padding: 0; border: 0; cursor: zoom-in; background: #fff; }
+    figure img { display: block; width: 100%; height: 440px; object-fit: contain; }
+    figcaption { padding: 13px 16px; border-top: 1px solid var(--line); background: var(--surface); font-weight: 680; }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; }
+    table { width: 100%; border-collapse: collapse; background: var(--surface); font-size: 14px; }
+    th, td { padding: 13px 16px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    th { color: var(--muted); background: var(--surface-2); font-size: 11px; text-transform: uppercase; }
+    th:first-child, td:first-child { position: sticky; left: 0; z-index: 1; text-align: left; background: inherit; }
+    tr:last-child td { border-bottom: 0; }
+    .examples { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    .example { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--surface); }
+    .example-head { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+    .example-id { min-width: 0; overflow: hidden; text-overflow: ellipsis; color: var(--muted); font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 12px; white-space: nowrap; }
+    .example-actions { flex: 0 0 auto; display: flex; align-items: center; gap: 8px; }
+    .example-actions .btn { min-height: 34px; padding: 0 11px; font-size: 12px; }
+    .comparison-panes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); background: #03070b; }
+    .image-panel + .image-panel { border-left: 1px solid var(--line); }
+    .panel-label { display: block; padding: 9px 13px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 12px; font-weight: 700; }
+    .annotated-preview { position: relative; background: #03070b; }
+    .annotated-preview img { display: block; width: 100%; height: auto; }
+    .annotation-layer { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .annotation-hit { fill: color-mix(in srgb, var(--annotation-color) 13%, transparent); stroke: var(--annotation-color); stroke-width: 2.5px; vector-effect: non-scaling-stroke; cursor: pointer; }
+    .annotation-hit:hover, .annotation-hit:focus, .annotation-hit.selected { fill: color-mix(in srgb, var(--annotation-color) 24%, transparent); stroke-width: 4px; outline: none; }
+    .contour-selection { min-height: 46px; display: flex; align-items: center; gap: 9px; padding: 10px 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+    .contour-swatch { width: 10px; height: 10px; flex: 0 0 auto; border-radius: 2px; background: var(--line); }
+    .pager { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 22px; }
+    .btn { min-height: 42px; display: inline-flex; align-items: center; justify-content: center; padding: 0 17px; border: 1px solid #40505f; border-radius: 6px; background: var(--surface-2); color: var(--text); text-decoration: none; cursor: pointer; }
+    .btn:hover:not(:disabled) { border-color: var(--mint); }
+    .btn:disabled { opacity: .45; cursor: default; }
+    .pager span { color: var(--muted); font-size: 13px; }
+    dialog { width: min(96vw, 1560px); height: min(94vh, 1080px); max-height: 94vh; padding: 0; border: 1px solid #455465; border-radius: 8px; overflow: hidden; background: #03070b; color: var(--text); }
+    dialog::backdrop { background: rgba(0, 0, 0, .82); backdrop-filter: blur(5px); }
+    dialog > img { display: block; max-width: 100%; max-height: calc(94vh - 58px); margin: auto; object-fit: contain; }
+    .dialog-head { height: 58px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; border-bottom: 1px solid var(--line); background: var(--surface); }
+    .dialog-close { width: 36px; height: 36px; border: 1px solid #40505f; border-radius: 6px; background: transparent; color: var(--text); font-size: 22px; cursor: pointer; }
+    .dialog-body { height: calc(100% - 58px); display: grid; grid-template-rows: minmax(0, 1fr) auto; overflow: hidden; }
+    .dialog-body > img { display: block; max-width: 100%; max-height: 100%; margin: auto; object-fit: contain; }
+    .dialog-comparison { min-height: 0; overflow: auto; }
+    .dialog-comparison .annotated-preview { min-height: 220px; }
+    .dialog-selection { z-index: 8; min-height: 58px; background: rgba(16, 23, 31, .97); box-shadow: 0 -8px 24px rgba(0, 0, 0, .42); color: var(--text); }
+    .annotation-tooltip { position: fixed; z-index: 2147483647; max-width: min(320px, calc(100vw - 24px)); display: none; padding: 8px 11px; border: 1px solid var(--tooltip-color, var(--mint)); border-radius: 5px; background: rgba(8, 13, 18, .97); color: var(--text); box-shadow: 0 8px 26px rgba(0, 0, 0, .5); font-size: 12px; line-height: 1.4; pointer-events: none; }
+    .annotation-tooltip.visible { display: block; }
+    .loading { min-height: 280px; display: grid; place-items: center; color: var(--muted); }
+    .spinner { width: 28px; height: 28px; margin: 0 auto 12px; border: 3px solid #2c3945; border-top-color: var(--mint); border-radius: 50%; animation: spin .8s linear infinite; }
+    .error { max-width: 620px; margin: 80px auto; padding: 28px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); text-align: center; }
+    .error p { color: var(--muted); line-height: 1.5; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @media (max-width: 1000px) {
+      .summary-band, .metrics-band { grid-template-columns: repeat(2, 1fr); }
+      .summary-item:nth-child(2n) { border-right: 0; }
+      .summary-item { border-bottom: 1px solid var(--line); }
+      .model-grid, .plot-grid { grid-template-columns: 1fr; }
+      figure img { height: auto; max-height: 620px; }
+    }
+    @media (max-width: 650px) {
+      .shell { width: min(100% - 24px, 1480px); }
+      .topbar-inner { min-height: 58px; }
+      .brand span:last-child { display: none; }
+      .nav { gap: 13px; }
+      .user { display: none; }
+      main { padding-top: 24px; }
+      .page-heading { display: block; }
+      .back { display: inline-block; margin-top: 18px; }
+      h1 { font-size: 31px; }
+      .summary-band, .metrics-band { grid-template-columns: 1fr; }
+      .summary-item { min-height: 86px; border-right: 0; }
+      .card-metrics { gap: 7px; }
+      .model-card { padding: 20px; }
+      .comparison-panes { grid-template-columns: 1fr; }
+      .image-panel + .image-panel { border-left: 0; border-top: 1px solid var(--line); }
+      .example-head { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="/validacao"><span class="brand-mark">PA</span><span>Panoramica AI</span></a>
+      <nav class="nav" aria-label="Navegacao principal">
+        <a href="/">Analise</a>
+        <a href="/review">Revisao</a>
+        <a class="active" href="/validacao">Validação</a>
+        <span class="user" id="userName"></span>
+      </nav>
+    </div>
+  </header>
+  <main class="shell" id="app">
+    <div class="loading"><div><div class="spinner"></div>Carregando validação...</div></div>
+  </main>
+  <dialog id="imageDialog">
+    <div class="dialog-head"><strong id="dialogTitle">Visualizacao</strong><button class="dialog-close" type="button" title="Fechar" aria-label="Fechar">&times;</button></div>
+    <div class="dialog-body" id="dialogBody"><img id="dialogImage" alt="Visualizacao ampliada"></div>
+  </dialog>
+  <div class="annotation-tooltip" id="annotationTooltip" role="tooltip"></div>
+  <script>
+    const app = document.querySelector('#app');
+    const dialog = document.querySelector('#imageDialog');
+    const annotationTooltip = document.querySelector('#annotationTooltip');
+    let sessionCsrf = '';
+    const modelSlug = decodeURIComponent(location.pathname.replace(/^\/validacao\/?/, '').split('/')[0]);
+    const formatInteger = value => new Intl.NumberFormat('pt-BR').format(Number(value || 0));
+    const formatPercent = value => value === null || value === undefined || value === ''
+      ? '-' : `${(Number(value) * 100).toFixed(1).replace('.', ',')}%`;
+    const classTranslations = {
+      tooth: 'Dente', impacted: 'Dente impactado', impacted_tooth: 'Dente impactado',
+      caries: 'Cárie', deep_caries: 'Cárie profunda', crown: 'Coroa', filling: 'Restauração',
+      implant: 'Implante', malaligned: 'Dente mal posicionado', mandibular_canal: 'Canal mandibular',
+      missing_teeth: 'Dente ausente', periapical_lesion: 'Lesão periapical', retained_root: 'Raiz retida',
+      root_canal_treatment: 'Tratamento de canal', root_piece: 'Fragmento radicular',
+      maxillary_sinus: 'Seio maxilar', bone_loss: 'Perda óssea', fracture_teeth: 'Fratura dentária',
+      permanent_teeth: 'Dente permanente', supra_eruption: 'Supraerupção',
+      tad: 'Dispositivo de ancoragem temporária', abutment: 'Pilar protético', attrition: 'Atrição',
+      bone_defect: 'Defeito ósseo', gingival_former: 'Cicatrizador gengival', metal_band: 'Banda metálica',
+      orthodontic_brackets: 'Bráquetes ortodônticos', permanent_retainer: 'Contenção permanente',
+      post_core: 'Núcleo intrarradicular', plating: 'Placa de osteossíntese', wire: 'Fio ortodôntico',
+      cyst: 'Cisto', root_resorption: 'Reabsorção radicular', primary_teeth: 'Dente decíduo'
+    };
+    const translateClass = value => classTranslations[String(value)] || String(value).replaceAll('_', ' ');
+    const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, character => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    })[character]);
+    const metric = (metrics, key) => formatPercent(metrics?.[key]);
+
+    async function requestJson(url) {
+      const response = await fetch(url, {credentials: 'same-origin', cache: 'no-store'});
+      if (response.status === 401) throw new Error('AUTH');
+      if (!response.ok) throw new Error(await response.text());
+      return response.json();
+    }
+
+    function accessError(error) {
+      const auth = error.message === 'AUTH';
+      app.innerHTML = `<section class="error"><p class="eyebrow">${auth ? 'Acesso protegido' : 'Não foi possível carregar'}</p>
+        <h1>${auth ? 'Entre para consultar a validação' : 'O relatório não está disponível'}</h1>
+        <p>${auth ? 'Use uma conta de revisão para acessar métricas e radiografias.' : escapeHtml(error.message)}</p>
+        <a class="btn" href="${auth ? '/review' : '/validacao'}">${auth ? 'Ir para o login' : 'Tentar novamente'}</a></section>`;
+    }
+
+    function progressInfo(model) {
+      const processed = Number(model.progress?.processed || 0);
+      const total = Number(model.progress?.total || 0);
+      const complete = model.progress?.status === 'complete';
+      return {processed, total, complete, percent: total ? Math.min(100, processed / total * 100) : 0};
+    }
+
+    function modelCard(model) {
+      const state = progressInfo(model);
+      const training = model.training_validation || {};
+      const metrics = training.metrics || model.summary?.metrics || {};
+      const metricContext = training.metrics
+        ? `Validação do treinamento · melhor época ${formatInteger(training.epoch)} · ${formatInteger(training.images)} imagens`
+        : `Teste independente · ${formatInteger(state.total)} imagens`;
+      const labels = model.kind === 'age'
+        ? [['Acurácia', 'accuracy'], ['Sensib. criança', 'recall_child_sensitivity'], ['ROC AUC', 'roc_auc']]
+        : [['mAP50', 'map50'], ['Precisão', 'precision'], ['mAP50-95', 'map50_95']];
+      return `<article class="model-card" data-accent="${escapeHtml(model.accent)}">
+        <div class="card-top"><span class="model-type">${escapeHtml(model.eyebrow)}</span><span class="status ${state.complete ? 'complete' : ''}">${state.complete ? 'Concluída' : state.total ? 'Processando' : 'Aguardando'}</span></div>
+        <h3>${escapeHtml(model.name)}</h3><p class="description">${escapeHtml(model.description)}</p>
+        <div class="progress-track" aria-label="Progresso"><div class="progress-bar" style="width:${state.percent}%"></div></div>
+        <div class="progress-copy"><span>Teste independente: ${formatInteger(state.processed)} de ${formatInteger(state.total)}</span><span>${state.percent.toFixed(0)}%</span></div>
+        <div class="metric-context">${metricContext}</div>
+        <div class="card-metrics">
+          ${labels.map(([label, key]) => `<div><span>${label}</span><strong>${metric(metrics, key)}</strong></div>`).join('')}
+        </div>
+        <a class="open-model" href="/validacao/${encodeURIComponent(model.slug)}">Abrir relatório &rarr;</a>
+      </article>`;
+    }
+
+    async function renderDashboard() {
+      const data = await requestJson('/validacao/api/modelos');
+      const states = data.models.map(progressInfo);
+      const completed = states.filter(state => state.complete).length;
+      const processed = states.reduce((sum, state) => sum + state.processed, 0);
+      const total = states.reduce((sum, state) => sum + state.total, 0);
+      app.innerHTML = `<section class="page-heading"><div><p class="eyebrow">Qualidade dos modelos</p><h1>Validação clínica e técnica em um só lugar</h1><p class="lede">Acompanhe desempenho, segmentação, erros por classe e cada radiografia usada na avaliação.</p></div></section>
+        <section class="summary-band" aria-label="Resumo da validação">
+          <div class="summary-item"><span class="summary-label">Modelos avaliados</span><strong class="summary-value">${data.models.length}</strong></div>
+          <div class="summary-item"><span class="summary-label">Validações concluídas</span><strong class="summary-value">${completed}</strong></div>
+          <div class="summary-item"><span class="summary-label">Imagens processadas</span><strong class="summary-value">${formatInteger(processed)}</strong></div>
+          <div class="summary-item"><span class="summary-label">Total planejado</span><strong class="summary-value">${formatInteger(total)}</strong></div>
+        </section>
+        <div class="section-head"><div><h2>Modelos</h2><p>Abra um modelo para explorar todas as métricas e imagens.</p></div></div>
+        <section class="model-grid">${data.models.map(modelCard).join('')}</section>`;
+      if (data.models.some(model => progressInfo(model).total && !progressInfo(model).complete)) {
+        setTimeout(() => renderDashboard().catch(accessError), 10000);
+      }
+    }
+
+    const metricItem = (label, value) => `<div class="summary-item"><span class="summary-label">${label}</span><strong class="summary-value">${value}</strong></div>`;
+
+    function renderClassTable(rows, segment) {
+      if (!rows.length) return '<div class="notice">A tabela por classe sera liberada ao final do processamento.</div>';
+      const headers = segment
+        ? [['class', 'Classe'], ['support', 'Suporte'], ['precision', 'Precisão'], ['recall_sensitivity', 'Recall'], ['ap50', 'AP50'], ['pixel_iou_jaccard', 'IoU'], ['pixel_dice', 'Dice'], ['boundary_f1', 'Boundary F1']]
+        : [['class', 'Classe'], ['support', 'Suporte'], ['precision', 'Precisão'], ['recall_sensitivity', 'Recall'], ['f1', 'F1'], ['ap50', 'AP50'], ['map50_95', 'mAP50-95'], ['roc_auc_image_presence', 'ROC AUC']];
+      return `<div class="table-wrap"><table><thead><tr>${headers.map(([, label]) => `<th>${label}</th>`).join('')}</tr></thead><tbody>${rows.map(row =>
+        `<tr>${headers.map(([key]) => `<td>${key === 'class' ? escapeHtml(translateClass(row[key])) : key === 'support' ? formatInteger(row[key]) : formatPercent(row[key])}</td>`).join('')}</tr>`
+      ).join('')}</tbody></table></div>`;
+    }
+
+    const annotationCache = new Map();
+
+    function bindImages() {
+      document.querySelectorAll('[data-zoom-image]').forEach(button => button.addEventListener('click', async () => {
+        const body = document.querySelector('#dialogBody');
+        document.querySelector('#dialogTitle').textContent = button.dataset.title;
+        if (button.dataset.annotations) {
+          const image = escapeHtml(button.dataset.zoomImage);
+          const annotations = escapeHtml(button.dataset.annotations);
+          body.innerHTML = `<div class="comparison-panes dialog-comparison"><section class="image-panel"><strong class="panel-label">Referência</strong><div class="annotated-preview" data-side="reference" data-annotations="${annotations}"><img src="${image}" alt="Radiografia de referência ampliada"><svg class="annotation-layer" role="group" aria-label="Contornos de referência clicáveis"></svg></div></section><section class="image-panel"><strong class="panel-label">Predição</strong><div class="annotated-preview" data-side="prediction" data-annotations="${annotations}"><img src="${image}" alt="Predição ampliada"><svg class="annotation-layer" role="group" aria-label="Contornos de predição clicáveis"></svg></div></section></div><div class="contour-selection dialog-selection" aria-live="polite"><i class="contour-swatch"></i><span>Clique em uma marcação para ver a classe, a origem e a confiança.</span></div>`;
+        } else {
+          body.innerHTML = `<img id="dialogImage" src="${escapeHtml(button.dataset.zoomImage)}" alt="Visualização ampliada">`;
+        }
+        dialog.showModal();
+        dialog.append(annotationTooltip);
+        if (button.dataset.annotations) await bindContours(dialog);
+      }));
+    }
+
+    function bindReviewButtons() {
+      document.querySelectorAll('[data-send-review]').forEach(button => button.addEventListener('click', async () => {
+        const originalText = button.textContent;
+        button.disabled = true;
+        button.textContent = 'Preparando revisão...';
+        try {
+          if (button.dataset.reviewUrl) {
+            location.href = button.dataset.reviewUrl;
+            return;
+          }
+          const response = await fetch(`/validacao/api/modelos/${encodeURIComponent(button.dataset.model)}/imagens/${encodeURIComponent(button.dataset.imageId)}/revisao`, {
+            method: 'POST', credentials: 'same-origin', headers: {'X-Panoramica-CSRF': sessionCsrf}
+          });
+          const payload = await response.json();
+          if (!response.ok) throw new Error(payload.detail || 'Não foi possível levar a imagem para revisão.');
+          location.href = payload.review_url;
+        } catch (error) {
+          button.disabled = false;
+          button.textContent = originalText;
+          alert(error.message);
+        }
+      }));
+    }
+
+    async function bindContours(root = document) {
+      const namespace = 'http://www.w3.org/2000/svg';
+      const palette = ['#2dd4bf', '#e879f9', '#fb923c', '#60a5fa', '#f87171', '#facc15', '#c084fc', '#4ade80'];
+      await Promise.all([...root.querySelectorAll('.annotated-preview')].map(async preview => {
+        if (preview.dataset.bound === 'true') return;
+        preview.dataset.bound = 'true';
+        if (!annotationCache.has(preview.dataset.annotations)) annotationCache.set(preview.dataset.annotations, requestJson(preview.dataset.annotations));
+        const data = await annotationCache.get(preview.dataset.annotations);
+        const sourceImage = preview.querySelector('img');
+        if (!sourceImage.complete) await new Promise((resolve, reject) => { sourceImage.addEventListener('load', resolve, {once: true}); sourceImage.addEventListener('error', reject, {once: true}); });
+        const svg = preview.querySelector('svg');
+        const scope = preview.closest('.example') || preview.closest('dialog');
+        const selection = scope.querySelector('.contour-selection');
+        svg.setAttribute('viewBox', `0 0 ${sourceImage.naturalWidth} ${sourceImage.naturalHeight}`);
+        const prediction = preview.dataset.side === 'prediction';
+        const source = prediction ? 'Predição' : 'Referência';
+        const rows = prediction
+          ? data.predictions.filter(row => Number(row.confidence) >= Number(data.fixed_confidence))
+          : data.ground_truth;
+        const hasPolygons = rows.some(row => row.polygon_xy?.length);
+        const panelLabel = preview.closest('.image-panel')?.querySelector('.panel-label');
+        if (panelLabel) panelLabel.textContent = `${prediction ? 'Saída do modelo' : 'Anotação original'} · ${hasPolygons ? 'caixa + polígono' : 'caixa'}`;
+        rows.forEach(row => {
+          const shape = document.createElementNS(namespace, 'g');
+          const box = document.createElementNS(namespace, 'rect');
+          const [x1, y1, x2, y2] = row.bbox_xyxy;
+          box.setAttribute('x', x1); box.setAttribute('y', y1);
+          box.setAttribute('width', Math.max(1, x2 - x1)); box.setAttribute('height', Math.max(1, y2 - y1));
+          box.setAttribute('fill', 'none');
+          shape.append(box);
+          if (row.polygon_xy?.length) {
+            const polygon = document.createElementNS(namespace, 'polygon');
+            polygon.setAttribute('points', row.polygon_xy.map(([x, y]) => `${x},${y}`).join(' '));
+            shape.append(polygon);
+          }
+          const classIndex = Math.max(0, data.classes.indexOf(row.label));
+          const color = palette[classIndex % palette.length];
+          const readableLabel = translateClass(row.label);
+          const confidence = source === 'Predição' ? ` · confiança ${(Number(row.confidence) * 100).toFixed(1).replace('.', ',')}%` : '';
+          shape.setAttribute('class', 'annotation-hit');
+          shape.style.setProperty('--annotation-color', color);
+          shape.setAttribute('tabindex', '0');
+          shape.setAttribute('aria-label', `${source}: ${readableLabel}${confidence}`);
+          const tooltipText = `${source}: ${readableLabel}${confidence}`;
+          const positionTooltip = event => {
+            annotationTooltip.textContent = tooltipText;
+            annotationTooltip.style.setProperty('--tooltip-color', color);
+            annotationTooltip.classList.add('visible');
+            const margin = 12;
+            const width = annotationTooltip.offsetWidth;
+            const height = annotationTooltip.offsetHeight;
+            annotationTooltip.style.left = `${Math.min(event.clientX + 15, innerWidth - width - margin)}px`;
+            annotationTooltip.style.top = `${Math.min(event.clientY + 15, innerHeight - height - margin)}px`;
+          };
+          const select = () => {
+            scope.querySelectorAll('.selected').forEach(item => item.classList.remove('selected'));
+            shape.classList.add('selected');
+            selection.querySelector('.contour-swatch').style.background = color;
+            selection.querySelector('span:last-child').textContent = `${source}: ${readableLabel}${confidence}`;
+          };
+          shape.addEventListener('click', event => { event.stopPropagation(); select(); });
+          shape.addEventListener('pointerenter', positionTooltip);
+          shape.addEventListener('pointermove', positionTooltip);
+          shape.addEventListener('pointerleave', () => annotationTooltip.classList.remove('visible'));
+          shape.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); select(); } });
+          svg.append(shape);
+        });
+      }));
+    }
+
+    async function renderDetail(page = 1) {
+      const model = await requestJson(`/validacao/api/modelos/${encodeURIComponent(modelSlug)}?page=${page}&page_size=10`);
+      const state = progressInfo(model);
+      const metrics = model.summary?.metrics || {};
+      const training = model.training_validation || {};
+      const segment = model.summary?.task === 'segment';
+      const ageClassification = model.kind === 'age';
+      const primaryMetrics = ageClassification ? `
+          ${metricItem('Imagens', formatInteger(model.summary?.images || state.processed))}
+          ${metricItem('Acurácia', metric(metrics, 'accuracy'))}
+          ${metricItem('Sensib. criança', metric(metrics, 'recall_child_sensitivity'))}
+          ${metricItem('Especificidade adulto', metric(metrics, 'specificity_adult'))}
+          ${metricItem('ROC AUC', metric(metrics, 'roc_auc'))}
+          ${metricItem('Cobertura segura', formatPercent(model.summary?.operational_coverage))}` : `
+          ${metricItem('Imagens', formatInteger(model.summary?.images || state.processed))}
+          ${metricItem('Instancias', formatInteger(model.summary?.ground_truth_instances))}
+          ${metricItem('mAP50', metric(metrics, 'map50'))}
+          ${metricItem('mAP50-95', metric(metrics, 'map50_95'))}
+          ${metricItem(segment ? 'Dice macro' : 'Precisão', metric(metrics, segment ? 'macro_pixel_dice' : 'precision'))}
+          ${metricItem(segment ? 'IoU macro' : 'Recall', metric(metrics, segment ? 'macro_pixel_iou_jaccard' : 'recall_sensitivity'))}`;
+      const plotHtml = model.plots.length ? model.plots.map(plot => `<figure><button type="button" data-zoom-image="${escapeHtml(plot.url)}" data-title="${escapeHtml(plot.name)}"><img loading="lazy" src="${escapeHtml(plot.url)}" alt="${escapeHtml(plot.name)}"></button><figcaption>${escapeHtml(plot.name)}</figcaption></figure>`).join('') : '<div class="notice">Os diagramas completos serão publicados ao final desta validação.</div>';
+      const exampleHtml = model.examples.length ? model.examples.map(example => `<article class="example"><div class="example-head"><span class="example-id" title="${escapeHtml(example.id)}">${escapeHtml(example.id)}</span><div class="example-actions"><button class="btn" type="button" data-send-review data-model="${escapeHtml(model.slug)}" data-image-id="${escapeHtml(example.id)}" data-review-url="${escapeHtml(example.review_url || '')}">Levar para revisão</button><button class="btn" type="button" data-zoom-image="${escapeHtml(example.original)}" data-annotations="${escapeHtml(example.annotations)}" data-title="${escapeHtml(example.id)}">Ampliar</button></div></div><div class="comparison-panes"><section class="image-panel"><strong class="panel-label">Referência</strong><div class="annotated-preview" data-side="reference" data-annotations="${escapeHtml(example.annotations)}"><img loading="lazy" src="${escapeHtml(example.original)}" alt="Radiografia de referência ${escapeHtml(example.id)}"><svg class="annotation-layer" role="group" aria-label="Contornos de referência clicáveis"></svg></div></section><section class="image-panel"><strong class="panel-label">Predição</strong><div class="annotated-preview" data-side="prediction" data-annotations="${escapeHtml(example.annotations)}"><img loading="lazy" src="${escapeHtml(example.original)}" alt="Predição sobre a radiografia ${escapeHtml(example.id)}"><svg class="annotation-layer" role="group" aria-label="Contornos de predição clicáveis"></svg></div></section></div><div class="contour-selection" aria-live="polite"><i class="contour-swatch"></i><span>Clique em um contorno para identificar a classe.</span></div></article>`).join('') : '<div class="notice">Nenhuma imagem processada ainda.</div>';
+      app.innerHTML = `<section class="page-heading"><div><p class="eyebrow">${escapeHtml(model.eyebrow)}</p><h1>${escapeHtml(model.name)}</h1><p class="lede">${escapeHtml(model.description)}</p></div><a class="back" href="/validacao">&larr; Todos os modelos</a></section>
+        ${!state.complete ? `<div class="notice">Processamento em andamento: ${formatInteger(state.processed)} de ${formatInteger(state.total)} imagens (${state.percent.toFixed(0)}%). Esta página é atualizada conforme os resultados ficam prontos.</div>` : ''}
+        ${training.metrics ? `<div class="section-head"><div><h2>Validação do treinamento</h2><p>Melhor época ${formatInteger(training.epoch)} de ${formatInteger(training.epochs_completed)}, avaliada em ${formatInteger(training.images)} imagens.</p></div></div>
+        <section class="summary-band metrics-band" aria-label="Métricas da validação do treinamento">
+          ${metricItem('Imagens', formatInteger(training.images))}
+          ${metricItem('Melhor época', formatInteger(training.epoch))}
+          ${metricItem('mAP50', metric(training.metrics, 'map50'))}
+          ${metricItem('mAP50-95', metric(training.metrics, 'map50_95'))}
+          ${metricItem('Precisão', metric(training.metrics, 'precision'))}
+          ${metricItem('Recall', metric(training.metrics, 'recall_sensitivity'))}
+        </section>` : ''}
+        <div class="section-head"><div><h2>Teste independente</h2><p>Avaliação final em imagens separadas do treinamento e da seleção da melhor época.</p></div></div>
+        <section class="summary-band metrics-band" aria-label="Métricas principais">
+          ${primaryMetrics}
+        </section>
+        <div class="section-head"><div><h2>Diagramas</h2><p>Matriz percentual, curvas e diagnósticos completos.</p></div></div><section class="plot-grid">${plotHtml}</section>
+        <div class="section-head"><div><h2>Desempenho por classe</h2><p>${segment ? 'Métricas de detecção, pixels, contorno e sobreposição.' : 'Métricas de detecção e classificação por achado.'}</p></div></div>${renderClassTable(model.per_class, segment)}
+        <div class="section-head"><div><h2>Imagens de validação</h2><p>Verdade de referência ao lado da predição gerada.</p></div><span class="summary-label">${formatInteger(model.pagination.total)} exemplos</span></div>
+        <section class="examples">${exampleHtml}</section>
+        <div class="pager"><button class="btn" id="previousPage" ${page <= 1 ? 'disabled' : ''}>Anterior</button><span>Página ${model.pagination.page} de ${model.pagination.pages}</span><button class="btn" id="nextPage" ${page >= model.pagination.pages ? 'disabled' : ''}>Próxima</button></div>`;
+      document.querySelector('#previousPage').addEventListener('click', () => renderDetail(page - 1).catch(accessError));
+      document.querySelector('#nextPage').addEventListener('click', () => renderDetail(page + 1).catch(accessError));
+      bindImages();
+      bindReviewButtons();
+      bindContours().catch(accessError);
+      if (!state.complete) setTimeout(() => renderDetail(page).catch(accessError), 15000);
+    }
+
+    document.querySelector('.dialog-close').addEventListener('click', () => dialog.close());
+    dialog.addEventListener('close', () => {
+      annotationTooltip.classList.remove('visible');
+      document.body.append(annotationTooltip);
+    });
+    dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+    requestJson('/admin/api/session').then(session => {
+      sessionCsrf = session.csrf;
+      document.querySelector('#userName').textContent = session.username;
+      return modelSlug ? renderDetail() : renderDashboard();
+    }).catch(accessError);
+  </script>
+</body>
+</html>

@@ -175,8 +175,15 @@ e `opencode.json` declarava **7 MCPs** e **215 agentes**. São
 contagens estruturais locais, não resultados de cobertura, testes ou validação
 externa.
 
-A configuração operacional consultada em **2026-10-07** declara **248 agentes**
-e **15 MCPs**, com **20 checks** no diagnóstico, incluindo
+<!-- core-state:start -->
+**255 agentes** · **16 MCPs** · **30 comandos** · **22 checks**
+
+Inventário derivado de [opencode.json](../../opencode.json) e do [diagnóstico estrutural](../../marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
+
+Para conferir estes blocos, execute na raiz `.venv/bin/python scripts/reconcile_operational_docs.py --check`; para sincronizá-los, execute o mesmo comando sem `--check`.
+<!-- core-state:end -->
+
+A configuração inclui
 `ecosystem-network`. O servidor coordena análise e leitura com limites de
 passos e tempo; sua presença não comprova instalação, autenticação ou execução
 dos executores no WSL. Consulte [o manual](../../MANUAL.md) para os comandos

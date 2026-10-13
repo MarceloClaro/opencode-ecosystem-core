@@ -1,0 +1,120 @@
+{
+  "spec": "SPEC-935-R843",
+  "operation": "validate_operator_engine_config",
+  "summary": {
+    "total": 18,
+    "ready": 16,
+    "pending": 2,
+    "inspectable": 11
+  },
+  "pending": [
+    "native_ida",
+    "jeb"
+  ],
+  "flags": {
+    "externally_validated": false,
+    "confidence_promoted": false
+  },
+  "gates": {
+    "native_ida": {
+      "requirement": "REA_IDA_MCP_CONFIG",
+      "accepted": [
+        "command+args (stdio legado/moderno)",
+        "command+args+mode=headless+env(IDADIR)",
+        "url(local)+mode=headless",
+        "mcpServers.ida-pro-mcp"
+      ],
+      "rejected": [
+        "config vazia",
+        "JSON inválido",
+        "args não-string",
+        "mode desconhecido",
+        "mcpServers sem ida-pro-mcp"
+      ],
+      "source": "rea/docs/ida-provider.md",
+      "owner_action": "licença IDA + ida-pro-mcp instalado"
+    },
+    "native_hopper": {
+      "requirement": "HOPPER_LAUNCHER_PATH",
+      "accepted": [
+        "executável absoluto em HOPPER_LAUNCHER_PATH",
+        "/opt/hopper/bin/Hopper",
+        "~/.local/share/rea/hopper/bin/Hopper",
+        "macOS: /Applications/Hopper Disassembler.app/Contents/MacOS/hopper"
+      ],
+      "corrected": "REA_HOPPER_CONFORMANCE_MANIFEST_PATH (script-only) substituído pela env real",
+      "source": "rea/docs/installation.md#hopper",
+      "owner_action": "Hopper demo/licença do operador",
+      "resolved": true
+    },
+    "jeb": {
+      "requirement": "REA_JEB_MCP_URL",
+      "accepted": [
+        "http(s) absoluto, host literal 127.0.0.1 ou [::1]"
+      ],
+      "rejected": [
+        "host remoto/nome",
+        "credenciais",
+        "query",
+        "fragmento",
+        "esquema não-http"
+      ],
+      "default_reference": "http://127.0.0.1:8425/mcp (exige configuração explícita na sonda)",
+      "source": "rea/docs/jeb-analysis.md",
+      "owner_action": "JEB 5.x licenciado servindo MCP"
+    }
+  },
+  "probe": {
+    "native_ida": {
+      "ready": false,
+      "env": [
+        {
+          "name": "REA_IDA_MCP_CONFIG",
+          "kind": "path",
+          "optional": false,
+          "set": false,
+          "value": null,
+          "resolved": null,
+          "ok": false,
+          "source": null,
+          "reason": "REA_IDA_MCP_CONFIG não configurado"
+        }
+      ]
+    },
+    "native_hopper": {
+      "ready": true,
+      "env": [
+        {
+          "name": "HOPPER_LAUNCHER_PATH",
+          "kind": "command",
+          "optional": false,
+          "set": true,
+          "value": "/opt/hopper/bin/Hopper",
+          "resolved": "/opt/hopper/bin/Hopper",
+          "ok": true,
+          "source": "isolated_engine",
+          "reason": null
+        }
+      ]
+    },
+    "jeb": {
+      "ready": false,
+      "env": [
+        {
+          "name": "REA_JEB_MCP_URL",
+          "kind": "url",
+          "optional": false,
+          "set": false,
+          "value": null,
+          "resolved": null,
+          "ok": false,
+          "source": null,
+          "reason": "REA_JEB_MCP_URL não configurado"
+        }
+      ]
+    }
+  },
+  "resolved_since": {
+    "native_hopper": "instalado e provado em outputs/core-r844 (SPEC-935-R844)"
+  }
+}

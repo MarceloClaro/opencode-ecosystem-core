@@ -1,0 +1,765 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Analise radiografias panoramicas com apoio de inteligencia artificial.">
+  <link rel="canonical" href="https://rx.engenhariaorofacial.com.br/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Panoramica AI">
+  <meta property="og:title" content="Panoramica AI | Analise de radiografias">
+  <meta property="og:description" content="Visualizacao e analise assistida de radiografias panoramicas odontologicas.">
+  <meta property="og:url" content="https://rx.engenhariaorofacial.com.br/">
+  <meta property="og:image" content="https://rx.engenhariaorofacial.com.br/og-image.png">
+  <meta property="og:image:secure_url" content="https://rx.engenhariaorofacial.com.br/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1733">
+  <meta property="og:image:height" content="907">
+  <meta property="og:image:alt" content="Radiografia panoramica odontologica com marcacoes de analise.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Panoramica AI | Analise de radiografias">
+  <meta name="twitter:description" content="Visualizacao e analise assistida de radiografias panoramicas odontologicas.">
+  <meta name="twitter:image" content="https://rx.engenhariaorofacial.com.br/og-image.png">
+  <title>Panoramica AI — Visualizador</title>
+  <style>
+    :root { color-scheme: dark; font: 16px system-ui, sans-serif; background: #0b1220; color: #e2e8f0; }
+    body { max-width: 1600px; margin: auto; padding: 28px; }
+    header { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+    h1 { font-size: 26px; margin: 0; } h2 { font-size: 16px; margin: 0; }
+    p, small { color: #94a3b8; } a { color: #5eead4; }
+    form, figure { border: 1px solid #334155; border-radius: 12px; background: #111c2f; }
+    .workspace { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 20px; align-items: start; margin-top: 24px; }
+    .workspace-content, .command-panel { min-width: 0; }
+    .command-panel { display: grid; gap: 16px; }
+    form { display: grid; gap: 18px; padding: 20px; margin: 0; }
+    .command-panel input:not([type=checkbox]), .command-panel select { box-sizing: border-box; width: 100%; min-width: 0; }
+    label { display: grid; gap: 8px; font-size: 14px; }
+    input, button { border: 1px solid #475569; border-radius: 6px; padding: 10px; background: #0b1220; color: inherit; }
+    input[type=number] { width: 100px; } input[type=password] { width: 180px; }
+    button { background: #0f766e; border-color: #14b8a6; font-weight: 600; cursor: pointer; }
+    button:disabled { opacity: .6; cursor: wait; }
+    #status { min-height: 24px; margin: 12px 0; } #status.error { color: #fca5a5; }
+    .processing { display: grid; grid-template-columns: 28px minmax(0, 1fr); align-items: center; gap: 14px; min-height: 52px; margin: 12px 0 20px; padding: 14px 16px; border: 1px solid #0f766e; border-radius: 8px; background: #0d2428; }
+    .processing strong, .processing small { display: block; }
+    .processing small { margin-top: 3px; color: #a7f3d0; }
+    .spinner { box-sizing: border-box; width: 28px; height: 28px; border: 3px solid #134e4a; border-top-color: #5eead4; border-radius: 50%; animation: spin .8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { .spinner { animation-duration: 1.8s; } }
+    .images { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
+    figure { margin: 0; overflow: hidden; }
+    details { margin: 16px 0; } summary { cursor: pointer; margin-bottom: 12px; }
+    figcaption { padding: 14px 18px; display: flex; justify-content: space-between; gap: 12px; }
+    .viewport { position: relative; min-height: 200px; display: grid; place-items: center; background: #030712; }
+    .viewport img { display: block; width: 100%; height: auto; }
+    .annotation-tooltip { position: fixed; z-index: 2147483647; display: none; max-width: min(320px, calc(100vw - 24px)); padding: 8px 11px; border: 1px solid var(--tooltip-color, #5eead4); border-radius: 5px; background: rgb(8 13 24 / .97); color: #e2e8f0; box-shadow: 0 8px 26px rgb(0 0 0 / .5); font-size: 12px; line-height: 1.4; pointer-events: none; }
+    .annotation-tooltip.visible { display: block; }
+    .placeholder { padding: 32px; text-align: center; color: #64748b; }
+    .legend { display: flex; flex-wrap: wrap; gap: 18px; margin: 20px 0; font-size: 14px; }
+    .legend span::before { content: ''; display: inline-block; width: 10px; height: 10px; margin-right: 7px; border-radius: 3px; background: var(--color); }
+    .teeth-details { margin-top: 20px; }
+    .report-actions, .image-actions { display: grid; gap: 12px; padding: 16px; border: 1px solid #334155; border-radius: 12px; background: #111c2f; }
+    .image-actions section { display: grid; gap: 10px; }
+    #print-preview { box-sizing: border-box; width: 100%; max-width: 900px; margin: 0 auto; padding: 0; border: 1px solid #475569; border-radius: 12px; background: #182235; color: #e2e8f0; }
+    body.preview-open > :not(#print-preview) { display: none !important; }
+    .preview-toolbar { position: sticky; top: 0; z-index: 1; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 20px; background: #111c2f; border-bottom: 1px solid #334155; }
+    .preview-toolbar p { margin: 4px 0 0; font-size: 13px; }
+    .preview-buttons { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; margin-left: auto; }
+    #close-preview { background: transparent; border-color: #475569; }
+    #print-pages { padding: 20px; display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 20px; }
+    .print-page { box-sizing: border-box; display: flex; flex-direction: column; width: 190mm; height: 276mm; min-width: 0; max-width: 100%; padding: 8mm; background: white; color: #172033; box-shadow: 0 4px 20px rgb(0 0 0 / .25); font-size: 10pt; color-scheme: light; }
+    .print-header { display: block; border-bottom: 2px solid #0f766e; padding-bottom: 4mm; overflow-wrap: anywhere; }
+    .print-brand { color: #0f766e; font-weight: 700; font-size: 11pt; }
+    .print-header h2 { margin: 2mm 0; font-size: 18pt; }
+    .print-meta, .print-summary, .print-note { margin: 2mm 0 0; color: #475569; font-size: 9pt; }
+    .print-image-area { display: flex; align-items: center; justify-content: center; flex: 1; min-height: 0; padding: 6mm 0; }
+    .print-image-area img { display: block; width: 100%; height: 100%; object-fit: contain; }
+    .print-image-area.print-image-pair { flex-direction: column; gap: 6mm; }
+    .print-image-pair > img, .print-image-pair > svg { display: block; flex: 1; min-height: 0; width: 100%; height: 0; }
+    .print-card-grid { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 4mm; padding: 5mm 0; }
+    .print-card { margin: 0; min-width: 0; min-height: 0; border: 0; border-radius: 0; background: none; display: flex; align-items: center; }
+    .print-card svg { display: block; width: 100%; height: 100%; }
+    .print-empty { flex: 1; display: grid; place-items: center; color: #475569; }
+    .print-footer { display: flex; justify-content: space-between; gap: 4mm; border-top: 1px solid #cbd5e1; padding-top: 3mm; font-size: 8pt; color: #475569; }
+    .print-footer span:first-child { max-width: 80%; }
+    [hidden] { display: none !important; }
+    select, textarea { border: 1px solid #475569; border-radius: 6px; padding: 8px; background: #0b1220; color: inherit; }
+    .editable-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; padding: 16px; }
+    .editable-card { border: 1px solid #334155; border-radius: 10px; padding: 12px; min-width: 0; }
+    .editable-card header { margin-bottom: 10px; color: #2dd4bf; }
+    .editable-card canvas { width: 100%; background: #030712; }
+    .editable-card p { margin: 6px 0; font-size: 13px; overflow-wrap: anywhere; }
+    .editable-card .tooth-score, .editable-card .review-corrected { color: #2dd4bf; }
+    .editable-card .review-pending { color: #fbbf24; }
+    html:has(#annotation-editor[open]), body:has(#annotation-editor[open]) { overflow: hidden; }
+    #annotation-editor { box-sizing: border-box; position: fixed; inset: auto; top: var(--editor-top, 0px); left: var(--editor-left, 0px); width: var(--editor-width, 100dvw); max-width: 100dvw; height: var(--editor-height, 100dvh); max-height: 100dvh; min-width: 0; min-height: 0; margin: 0; padding: 10px 12px; overflow: hidden; background: #111c2f; color: #e2e8f0; border: 0; border-radius: 0; }
+    #annotation-editor[open] { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: 8px; }
+    #annotation-editor::backdrop { background: rgb(0 0 0 / .7); }
+    .editor-tools, .feedback-tools { display: grid; gap: 12px; padding: 12px 0; }
+    .editor-body { display: grid; grid-template-columns: minmax(0, 1fr) clamp(320px, 21vw, 370px); gap: 12px; min-width: 0; min-height: 0; overflow: hidden; }
+    .editor-stage { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; min-width: 0; min-height: 0; }
+    .editor-canvas-viewport { position: relative; min-width: 0; min-height: 0; overflow: hidden; background: #030712; }
+    .editor-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-content: start; gap: 6px 8px; min-width: 0; min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-gutter: stable; padding-right: 4px; font-size: 13px; }
+    .editor-fields select, .editor-fields textarea { box-sizing: border-box; width: 100%; min-width: 0; }
+    .editor-fields label { gap: 4px; font-size: 13px; }
+    .editor-fields select, .editor-fields textarea { padding: 6px 7px; }
+    .editor-fields button { min-height: 36px; padding: 7px 8px; font-size: 13px; }
+    .editor-fields > .editor-tools, .editor-fields > label:first-of-type,
+    .editor-fields > label:nth-of-type(4), .editor-fields > label:nth-of-type(5),
+    .editor-fields > p { grid-column: 1 / -1; }
+    .editor-tools { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; padding: 0 0 4px; }
+    .editor-tools > label:first-child, .editor-tools > #brush-size-control,
+    .editor-tools > #sam-status { grid-column: 1 / -1; }
+    .editor-display { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) auto; gap: 8px; align-items: end; margin-bottom: 6px; }
+    .editor-display label { gap: 4px; }
+    .editor-display input { box-sizing: border-box; width: 100%; min-width: 0; padding: 0; }
+    #sam-status { max-height: 3.2em; margin: 2px 0; overflow-y: auto; overflow-wrap: anywhere; font-size: 12px; }
+    #edit-canvas { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: block; max-width: 100%; max-height: 100%; touch-action: none; background: #030712; cursor: crosshair; }
+    .editor-actions { display: flex; justify-content: flex-end; gap: 8px; border-top: 1px solid #334155; padding-top: 8px; }
+    .editor-actions button { min-height: 38px; padding: 7px 12px; }
+    #editor-hint { max-height: 3.2em; margin: 5px 0 0; overflow-y: auto; font-size: 12px; }
+    #edit-notes { min-height: 48px; max-height: 80px; resize: vertical; }
+    #edit-coordinates { margin: 2px 0; font-size: 12px; }
+    #feedback-panel { margin: 0; padding: 16px; border: 1px solid #334155; border-radius: 12px; }
+    #review-status { min-height: 24px; }
+    #review-status .validation-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    #review-status .validation-actions button { padding: 8px 12px; border-color: #fb7185; background: #3f1723; }
+    @media (max-width: 700px) { .editable-cards { grid-template-columns: 1fr; } }
+    @media (max-width: 900px) { body { padding: 16px; } .workspace { grid-template-columns: minmax(0, 1fr) 280px; } }
+    @media (max-width: 600px) {
+      .workspace { grid-template-columns: minmax(0, 1fr); }
+      .command-panel { grid-row: 1; }
+      #annotation-editor { padding: 8px; gap: 8px; }
+      .editor-body { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1.4fr) minmax(0, 1fr); gap: 8px; }
+      .editor-stage { grid-template-rows: auto minmax(0, 1fr) auto; }
+      .editor-fields { overflow-y: auto; overscroll-behavior: contain; padding-right: 0; }
+      .editor-display { grid-template-columns: repeat(3, minmax(0, 1fr)) auto; gap: 6px; margin-bottom: 6px; }
+      .editor-display label { grid-template-columns: 1fr auto; gap: 4px; min-width: 0; }
+      .editor-display input { grid-column: 1 / -1; }
+      #reset-display { padding: 6px; font-size: 11px; max-width: 85px; }
+      #editor-hint { font-size: 11px; max-height: 3.5em; overflow-y: auto; }
+      .editor-actions { padding-top: 8px; }
+      #print-pages { padding: 8px; }
+      .print-page { height: 210mm; padding: 5mm; }
+      .print-header h2 { font-size: 14pt; }
+      .preview-toolbar { padding: 12px; }
+    }
+    @page { size: A4 portrait; margin: 10mm; }
+    @media print {
+      :root { color-scheme: light; background: white; }
+      body { max-width: none; margin: 0; padding: 0; }
+      body.print-ready > :not(#print-preview) { display: none !important; }
+      body.print-ready #print-preview { display: block !important; position: static; width: auto; max-width: none; height: auto; max-height: none; margin: 0; padding: 0; border: 0; border-radius: 0; overflow: visible; background: white; }
+      .preview-toolbar { display: none !important; }
+      #print-pages { display: block; padding: 0; }
+      .print-page { width: 190mm; max-width: none; height: 276mm; padding: 8mm; box-shadow: none; break-inside: avoid; break-after: page; page-break-after: always; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      .print-page:last-child { break-after: auto; page-break-after: auto; }
+      .print-header h2 { font-size: 18pt; }
+    }
+  </style>
+</head>
+<body>
+  <header><h1>Panoramica AI</h1><nav><a href="/review">Revisão do banco</a> · <a href="/validacao">Validação</a> · <a href="/docs" target="_top">API / JSON</a></nav></header>
+  <p>Carregue uma radiografia para obter o resultado principal, a anatomia e os recortes dente a dente.</p>
+  <div class="workspace">
+    <main class="workspace-content">
+      <div id="processing" class="processing" role="status" aria-live="assertive" hidden>
+        <span class="spinner" aria-hidden="true"></span>
+        <span><strong>Processando a radiografia</strong><small>Os modelos estão analisando dentes e estruturas. Isso pode levar alguns minutos.</small></span>
+      </div>
+      <div id="status" role="status" aria-live="polite">Selecione uma imagem de até 10 MiB.</div>
+      <details id="diagnostics" hidden>
+        <summary>Scores e filtros das 31 classes</summary>
+        <p id="diagnostic-note"></p>
+        <div style="overflow-x:auto"><table><thead><tr><th>ID</th><th>Classe</th><th>Candidatos</th><th>Score máximo</th><th>Corte</th><th>Aceitos</th><th>Resultado</th></tr></thead><tbody id="diagnostic-rows"></tbody></table></div>
+      </details>
+      <details>
+        <summary>Radiografia original</summary>
+        <figure>
+          <figcaption><h2>Original</h2></figcaption>
+          <div class="viewport"><img id="original" alt="Radiografia original" hidden><span id="original-empty" class="placeholder">A imagem selecionada aparece aqui.</span></div>
+        </figure>
+      </details>
+      <div class="images">
+        <figure>
+          <figcaption><h2>Numeração FDI e quadrantes</h2><span id="annotation-source-status" role="status"></span></figcaption>
+          <div class="viewport"><img id="annotated" alt="Radiografia com caixas de numeração FDI e quadrantes" hidden><span id="annotated-empty" class="placeholder">As marcações aparecem após a análise.</span></div>
+        </figure>
+        <figure>
+          <figcaption><h2>Segmentação dentária</h2></figcaption>
+          <div class="viewport"><img id="tooth-segmentation" alt="Radiografia com os contornos da segmentação dentária e números FDI" hidden><span id="tooth-segmentation-empty" class="placeholder">Os contornos dentários aparecem após a análise.</span></div>
+        </figure>
+        <figure>
+          <figcaption><h2>Anotações adicionais</h2></figcaption>
+          <div class="viewport"><img id="additional-annotations" alt="Radiografia somente com anotações adicionais Dental31" hidden><span id="additional-annotations-empty" class="placeholder">As anotações adicionais aparecem após a análise.</span></div>
+        </figure>
+        <figure>
+          <figcaption><h2>Seios maxilares e canal mandibular</h2></figcaption>
+          <div class="viewport"><img id="anatomy" alt="Radiografia com seios maxilares e canal mandibular destacados" hidden><span id="anatomy-empty" class="placeholder">As estruturas detectadas aparecem após a análise.</span></div>
+          <p id="anatomy-status" role="status" style="padding:0 18px" hidden></p>
+          <ul id="anatomy-notes" hidden></ul>
+        </figure>
+      </div>
+      <figure id="teeth-figure" class="teeth-details">
+        <figcaption><h2>Dente a dente — original e marcado</h2></figcaption>
+        <div class="viewport"><img id="teeth" alt="Cards por dente com recorte original, recorte marcado e informações associadas" hidden><span id="teeth-empty" class="placeholder">Cada dente aparece com seus próprios recortes e informações após a análise.</span></div>
+        <div id="editable-cards" class="editable-cards" hidden></div>
+      </figure>
+    </main>
+    <aside class="command-panel" aria-label="Comandos">
+      <form id="analyze">
+        <label>Radiografia PNG/JPEG<input id="file" type="file" accept="image/png,image/jpeg" required></label>
+        <label>Modelos<select id="model-scope"><option value="combined">Pipeline completo</option><option value="dental31">Somente Kaggle / Dental31</option></select></label>
+        <label><span>Diagnosticar scores das 31 classes</span><input id="diagnose" type="checkbox"></label>
+          <label>Score mínimo<input id="confidence" type="number" value="0.25" min="0.01" max="1" step="0.01" required></label>
+          <label>Score mínimo FDI<input id="fdi-confidence" type="number" value="0.40" min="0.01" max="1" step="0.01" required></label>
+        <label>Score mínimo de canal e seio<input id="anatomy-confidence" type="number" value="0.10" min="0.01" max="1" step="0.01" required></label>
+        <label>Resolução do modelo<input id="imgsz" type="number" value="640" min="32" max="1280" step="32" required></label>
+        <label><span>Informações adicionais e anatomia</span><input id="additional" type="checkbox" disabled></label>
+        <label>Chave da API (se configurada)<input id="key" type="password" autocomplete="off"></label>
+        <button id="submit" type="submit">Analisar imagem</button>
+      </form>
+      <div class="report-actions">
+        <button id="print-report" type="button" disabled aria-controls="print-preview" aria-expanded="false">Imprimir laudo</button>
+        <small>Prévia A4: uma folha por imagem grande e até quatro dentes por folha, com original e marcado.</small>
+      </div>
+      <section class="image-actions" aria-label="Ações das imagens">
+        <section>
+          <h2>Numeração FDI e quadrantes</h2>
+          <button id="edit-quadrants" type="button" disabled>Editar quadrantes</button>
+          <button id="edit-teeth" type="button" disabled>Editar caixas / FDI</button>
+          <button id="edit-findings" type="button" disabled>Editar achados DENTEX</button>
+          <a id="download" download="panoramica-fdi-quadrantes.png" hidden>Baixar PNG</a>
+        </section>
+        <section>
+          <h2>Segmentação dentária</h2>
+          <button id="edit-tooth-masks" type="button" disabled>Editar máscaras</button>
+          <a id="download-tooth-segmentation" download="panoramica-segmentacao-dentaria.png" hidden>Baixar PNG</a>
+        </section>
+        <section>
+          <h2>Anotações adicionais</h2>
+          <button id="edit-additional" type="button" disabled>Editar anotações adicionais</button>
+          <a id="download-additional" download="panoramica-anotacoes-adicionais.png" hidden>Baixar PNG</a>
+        </section>
+        <section>
+          <h2>Seios maxilares e canal mandibular</h2>
+          <button id="edit-anatomy" type="button" disabled>Editar anatomia</button>
+          <a id="download-anatomy" download="panoramica-anatomia.png" hidden>Baixar PNG</a>
+        </section>
+        <section>
+          <h2>Dente a dente</h2>
+          <a id="download-teeth" download="panoramica-dentes.png" hidden>Baixar PNG</a>
+        </section>
+      </section>
+      <section id="feedback-panel" hidden>
+        <h2>Revisões para treinamento</h2>
+        <p>Marque um grupo somente após conferir todas as suas marcações na radiografia. Salvar mantém um histórico no backend; o retreino é executado quando você decidir.</p>
+        <label id="review-source-control" hidden>Marcações exibidas<select id="review-source"><option value="model">Análise atual</option><option value="saved">Revisão salva</option></select></label>
+        <div class="feedback-tools">
+          <label>Grupo de paciente (pseudônimo opcional)<input id="patient-group" maxlength="100" autocomplete="off"></label>
+          <label>Faixa etária<select id="review-age-group"><option value="adult">Adulto</option><option value="child">Criança</option><option value="uncertain">A conferir</option></select></label>
+          <label><span><input id="complete-all" type="checkbox"> Todos os grupos revisados</span></label>
+          <label><span><input id="complete-teeth" type="checkbox"> Todos os dentes revisados</span></label>
+          <label><span><input id="complete-findings" type="checkbox"> Todos os achados revisados</span></label>
+          <label><span><input id="complete-additional" type="checkbox"> Todas as classes Dental31 revisadas</span></label>
+          <label><span><input id="complete-quadrants" type="checkbox"> Todos os quadrantes revisados</span></label>
+          <button id="save-feedback" type="button">Salvar revisões no backend</button>
+        </div>
+        <div class="feedback-tools">
+          <label>Exportar grupo<select id="export-group"><option value="quadrants">Quadrantes</option><option value="teeth">Dentes / FDI</option><option value="findings">Achados DENTEX</option><option value="additional">Dental31 (inclui seios e canal)</option></select></label>
+          <label>Tarefa<select id="export-task"><option value="segment">Segmentação (contornos)</option><option value="detect">Detecção (caixas)</option></select></label>
+          <button id="export-feedback" type="button">Baixar dataset revisado</button>
+        </div>
+        <p id="review-status" role="status" aria-live="polite"></p>
+      </section>
+    </aside>
+  </div>
+  <dialog id="annotation-editor" aria-labelledby="editor-title">
+    <header><h2 id="editor-title">Editar marcações</h2></header>
+    <div class="editor-body">
+      <div class="editor-stage">
+        <div class="editor-display">
+          <label for="edit-contrast">Contraste <output id="contrast-value">100%</output><input id="edit-contrast" type="range" min="25" max="400" value="100" step="5"></label>
+          <label for="edit-brightness">Brilho <output id="brightness-value">100%</output><input id="edit-brightness" type="range" min="25" max="250" value="100" step="5"></label>
+          <label for="edit-zoom">Zoom <output id="zoom-value">100%</output><input id="edit-zoom" type="range" min="100" max="500" value="100" step="10"></label>
+          <button id="reset-display" type="button">Restaurar imagem</button>
+        </div>
+        <div class="editor-canvas-viewport"><canvas id="edit-canvas" tabindex="0" aria-label="Editor de caixas e contornos"></canvas></div><p id="editor-hint" role="status">Clique nos pontos para desenhar. Use o botão direito sobre um ponto para excluí-lo. Clique em um ponto anterior para fechar. Use Separar um ponto para editar um contorno fechado.</p>
+      </div>
+      <div class="editor-fields">
+        <div class="editor-tools">
+          <label>Ferramenta<select id="edit-tool"><option value="move">Mover / ajustar caixa e contorno</option><option value="brush-add">Pincel: adicionar área</option><option value="brush-erase">Borracha: remover área</option><option value="box">Desenhar caixa</option><option value="polygon">Desenhar contorno</option><option value="split">Separar um ponto</option></select></label>
+          <label id="brush-size-control" hidden>Tamanho do pincel <output id="brush-size-value">40 px</output><input id="brush-size" type="range" min="4" max="200" value="40" step="2"></label>
+          <button id="finish-polygon" type="button">Concluir contorno</button>
+          <button id="delete-polygon-point" type="button" disabled>Excluir último ponto</button>
+          <button id="split-polygon" type="button">Separar um ponto</button>
+          <label><span><input id="full-image" type="checkbox"> Panorâmica inteira</span></label>
+          <button id="new-annotation" type="button">Adicionar marcação</button>
+          <button id="duplicate-annotation" type="button" title="Cria outro dente com a mesma caixa e o mesmo contorno">Duplicar caixa e contorno</button>
+          <button id="delete-contour" type="button" title="Remove somente o contorno e mantém a caixa e os dados da marcação">Excluir contorno</button>
+          <button id="delete-annotation" type="button">Excluir selecionada</button>
+          <button id="suggest-sam" type="button">Sugerir contorno com SAM</button>
+          <button id="accept-sam" type="button" hidden>Aceitar contorno SAM</button>
+          <button id="discard-sam" type="button" hidden>Descartar sugestão</button>
+          <p id="sam-status" role="status" aria-live="polite">Selecione ou desenhe uma caixa para guiar o SAM.</p>
+        </div>
+        <label>Marcação<select id="edit-selection"></select></label>
+        <label>Grupo<select id="edit-group"><option value="quadrants">Quadrante</option><option value="teeth">Dente / FDI</option><option value="findings">Achado DENTEX</option><option value="additional">Dental31 / anatomia</option></select></label>
+        <label>Classe / FDI<select id="edit-label"></select></label>
+        <button id="add-class" type="button" title="Adiciona uma classe ao banco revisado para o próximo treinamento">Adicionar classe</button>
+        <button id="renumber-posterior" type="button" title="Continua a numeração FDI nos dentes posteriores do mesmo quadrante">Renumerar posteriores</button>
+        <label>Dente associado<select id="edit-tooth"></select></label>
+        <label>Observações<textarea id="edit-notes" maxlength="4000"></textarea></label>
+        <p id="edit-coordinates"></p>
+      </div>
+    </div>
+    <footer class="editor-actions">
+      <button id="apply-edit" type="button">Aplicar alterações</button>
+      <button id="cancel-edit" type="button">Cancelar</button>
+    </footer>
+  </dialog>
+  <div class="annotation-tooltip" id="review-annotation-tooltip" role="tooltip"></div>
+  <div class="legend">
+    <span style="--color:#2dd4bf">Dente / número candidato</span>
+    <span style="--color:#fbbf24">Impactado</span>
+    <span style="--color:#f87171">Cárie</span>
+    <span style="--color:#c084fc">Lesão periapical</span>
+    <span style="--color:#fb923c">Cárie profunda</span>
+    <span style="--color:#60a5fa">Informação adicional / Dental31</span>
+    <span style="--color:#60a5fa">Seio maxilar (anatomia)</span>
+    <span style="--color:#f472b6">Canal mandibular (anatomia)</span>
+  </div>
+  <small id="additional-status">Verificando disponibilidade do modelo adicional…</small><br>
+  <small>Numeração por quadrante, de 1 a 8 do centro para fora. Dentes ausentes e achados exigem revisão clínica. Os scores não são probabilidades de doença.</small>
+  <section id="print-preview" aria-labelledby="preview-title" hidden>
+    <div class="preview-toolbar">
+      <div><h2 id="preview-title" tabindex="-1">Prévia do laudo</h2><p id="preview-page-count"></p></div>
+      <div class="preview-buttons">
+        <button id="close-preview" type="button">Fechar</button>
+        <button id="confirm-print" type="button">Imprimir / Salvar PDF</button>
+      </div>
+    </div>
+    <div id="print-pages"></div>
+  </section>
+  <script>
+    const byId = id => document.getElementById(id);
+    const form = byId('analyze');
+    let originalUrl = null;
+    let annotatedUrl = null;
+    let toothSegmentationUrl = null;
+    let additionalAnnotationsUrl = null;
+    let anatomyUrl = null;
+    let teethUrl = null;
+    let additionalAvailable = false;
+    let teethLayout = null;
+    let reportInfo = null;
+
+    function textElement(tag, className, text) {
+      const element = document.createElement(tag);
+      element.className = className;
+      element.textContent = text;
+      return element;
+    }
+
+    function reportPage(title) {
+      const page = document.createElement('section');
+      page.className = 'print-page';
+      const header = document.createElement('header');
+      header.className = 'print-header';
+      header.append(
+        textElement('div', 'print-brand', 'PANORAMICA AI · LAUDO VISUAL'),
+        textElement('h2', '', title),
+        textElement('p', 'print-meta', `Exame: ${reportInfo.filename} · Análise: ${reportInfo.date}`),
+        textElement('p', 'print-summary', reportInfo.summary)
+      );
+      page.append(header);
+      return page;
+    }
+
+    function buildPrintPreview() {
+      const pages = [];
+      for (const [id, title, note] of [
+        ['original', 'Radiografia original', 'Imagem original, sem marcações.'],
+        ['annotated', 'Numeração FDI e quadrantes', 'Segmentação, numeração FDI, quadrantes e achados DENTEX.'],
+        ['additional-annotations', 'Anotações adicionais', 'Somente as classes adicionais Dental31.'],
+        ['anatomy', 'Seios maxilares e canal mandibular', [byId('anatomy-status').textContent,
+          ...Array.from(byId('anatomy-notes').children, item => item.textContent)].join(' ')]
+      ]) {
+        const source = byId(id);
+        if (source.hidden || !source.getAttribute('src')) continue;
+        const page = reportPage(title);
+        page.append(textElement('p', 'print-note', note));
+        const area = document.createElement('div');
+        area.className = 'print-image-area';
+        if (id === 'annotated') {
+          area.append(renderPrintSegmentation());
+        } else if (id === 'additional-annotations') {
+          area.append(renderPrintSegmentation({additionalOnly: true}));
+        } else {
+          const image = document.createElement('img');
+          image.src = source.src;
+          image.alt = source.alt;
+          area.append(image);
+        }
+        page.append(area);
+        pages.push(page);
+      }
+      const cards = teethLayout.cards;
+      for (let offset = 0; offset < Math.max(1, cards.length); offset += 4) {
+        if (byId('teeth-figure').hidden) break;
+        const page = reportPage('Dente a dente · original e marcado');
+        page.append(textElement('p', 'print-note', 'Recortes e informações associados a cada dente. FDI e associações exigem revisão clínica.'));
+        if (!cards.length) {
+          page.append(textElement('p', 'print-empty', 'Nenhum dente detectado para recortar.'));
+        } else {
+          const grid = document.createElement('div');
+          grid.className = 'print-card-grid';
+          for (const card of cards.slice(offset, offset + 4)) {
+            // Recorta a mesma prancha via viewBox, sem duplicar bitmaps em canvas/base64.
+            const figure = document.createElement('figure');
+            figure.className = 'print-card';
+            const namespace = 'http://www.w3.org/2000/svg';
+            const svg = document.createElementNS(namespace, 'svg');
+            svg.setAttribute('viewBox', `${card.x} ${card.y} ${card.width} ${card.height}`);
+            svg.setAttribute('role', 'img');
+            svg.setAttribute('aria-label', card.title);
+            const image = document.createElementNS(namespace, 'image');
+            image.setAttribute('href', teethUrl);
+            image.setAttribute('width', teethLayout.width);
+            image.setAttribute('height', teethLayout.height);
+            const clip = document.createElementNS(namespace, 'clipPath');
+            const clipId = `print-card-${offset + grid.children.length}`;
+            clip.setAttribute('id', clipId);
+            const rect = document.createElementNS(namespace, 'rect');
+            for (const key of ['x', 'y', 'width', 'height']) rect.setAttribute(key, card[key]);
+            clip.append(rect);
+            image.setAttribute('clip-path', `url(#${clipId})`);
+            svg.append(clip, image);
+            figure.append(svg);
+            grid.append(figure);
+          }
+          page.append(grid);
+        }
+        pages.push(page);
+      }
+      pages.forEach((page, index) => {
+        const footer = document.createElement('footer');
+        footer.className = 'print-footer';
+        footer.append(
+          textElement('span', '', 'Análise automatizada para revisão clínica. Scores não são probabilidades de doença. Ausência de achados não indica saúde.'),
+          textElement('span', '', `${index + 1} / ${pages.length}`)
+        );
+        page.append(footer);
+      });
+      byId('print-pages').replaceChildren(...pages);
+      byId('preview-page-count').textContent = `${pages.length} páginas · A4 retrato · até 4 dentes por folha`;
+      document.body.classList.add('print-ready');
+    }
+
+    byId('print-report').addEventListener('click', () => {
+      buildPrintPreview();
+      byId('print-preview').hidden = false;
+      document.body.classList.add('preview-open');
+      byId('print-report').setAttribute('aria-expanded', 'true');
+      byId('preview-title').focus();
+      window.scrollTo(0, 0);
+    });
+    function closePrintPreview() {
+      byId('print-preview').hidden = true;
+      document.body.classList.remove('preview-open');
+      byId('print-report').setAttribute('aria-expanded', 'false');
+    }
+    byId('close-preview').addEventListener('click', () => {
+      closePrintPreview();
+      byId('print-report').focus();
+    });
+    byId('confirm-print').addEventListener('click', () => window.print());
+    window.addEventListener('beforeprint', () => {
+      if (reportInfo && teethLayout) buildPrintPreview();
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && document.body.classList.contains('preview-open')) {
+        closePrintPreview();
+        byId('print-report').focus();
+      }
+    });
+    async function checkAdditionalModel() {
+      try {
+        const response = await fetch('/health', {cache: 'no-store'});
+        if (!response.ok) throw new Error('health');
+        const health = await response.json();
+        additionalAvailable = health.additional_model?.status === 'ready';
+        byId('additional').disabled = !additionalAvailable;
+        byId('additional').checked = additionalAvailable;
+        syncModelScope();
+        byId('additional-status').textContent = additionalAvailable
+          ? 'Modelo adicional disponível. Seios maxilares e canal mandibular aparecem na segunda imagem.'
+          : 'Modelo adicional indisponível. A segunda imagem ficará sem marcações anatômicas.';
+      } catch {
+        byId('additional-status').textContent = 'Não foi possível verificar o modelo adicional. Recarregue a página.';
+      }
+    }
+    const additionalModelCheck = checkAdditionalModel();
+
+    function syncModelScope() {
+      const solo = byId('model-scope').value === 'dental31';
+      if (solo) byId('additional').checked = true;
+      byId('additional').disabled = solo || !additionalAvailable;
+    }
+    byId('model-scope').addEventListener('change', syncModelScope);
+
+    function showDiagnostics(diagnostics) {
+      byId('diagnostics').hidden = !diagnostics;
+      byId('diagnostic-rows').replaceChildren();
+      if (!diagnostics) return;
+      byId('diagnostic-note').textContent = `Candidatos após NMS com score mínimo ${diagnostics.confidence_floor}. Sem candidato não significa classe ausente na radiografia. Scores baixos podem ser falsos positivos.${diagnostics.candidate_limit_reached ? ' Limite de 512 candidatos atingido; contagens podem estar truncadas.' : ''}`;
+      const statuses = {detected: 'Detectado', below_threshold: 'Filtrado pelo score', no_candidate: 'Sem candidato'};
+      for (const row of diagnostics.classes) {
+        const tr = document.createElement('tr');
+        for (const value of [row.class_id, row.class_name, row.candidates, row.max_score ?? '—', row.threshold, row.accepted, statuses[row.status]]) {
+          tr.append(textElement('td', '', String(value)));
+        }
+        byId('diagnostic-rows').append(tr);
+      }
+    }
+
+    function setStatus(message, error = false) {
+      byId('status').textContent = message;
+      byId('status').classList.toggle('error', error);
+    }
+
+    function setProcessing(active) {
+      byId('processing').hidden = !active;
+      byId('analyze').setAttribute('aria-busy', String(active));
+      byId('submit').textContent = active ? 'Processando...' : 'Analisar imagem';
+    }
+
+    function clearResult() {
+      if (typeof resetFeedback === 'function') resetFeedback();
+      showDiagnostics(null);
+      byId('print-report').disabled = true;
+      closePrintPreview();
+      byId('print-pages').replaceChildren();
+      document.body.classList.remove('print-ready');
+      teethLayout = null;
+      reportInfo = null;
+      if (annotatedUrl) URL.revokeObjectURL(annotatedUrl);
+      annotatedUrl = null;
+      byId('annotated').removeAttribute('src');
+      byId('annotated').hidden = true;
+      byId('annotated-empty').hidden = false;
+      byId('download').removeAttribute('href');
+      byId('download').hidden = true;
+      if (toothSegmentationUrl) URL.revokeObjectURL(toothSegmentationUrl);
+      toothSegmentationUrl = null;
+      byId('tooth-segmentation').removeAttribute('src');
+      byId('tooth-segmentation').hidden = true;
+      byId('tooth-segmentation-empty').hidden = false;
+      byId('download-tooth-segmentation').removeAttribute('href');
+      byId('download-tooth-segmentation').hidden = true;
+      if (additionalAnnotationsUrl) URL.revokeObjectURL(additionalAnnotationsUrl);
+      additionalAnnotationsUrl = null;
+      byId('additional-annotations').removeAttribute('src');
+      byId('additional-annotations').hidden = true;
+      byId('additional-annotations-empty').hidden = false;
+      byId('download-additional').removeAttribute('href');
+      byId('download-additional').hidden = true;
+      if (anatomyUrl) URL.revokeObjectURL(anatomyUrl);
+      anatomyUrl = null;
+      byId('anatomy').removeAttribute('src');
+      byId('anatomy').hidden = true;
+      byId('anatomy-empty').hidden = false;
+      byId('download-anatomy').removeAttribute('href');
+      byId('download-anatomy').hidden = true;
+      byId('anatomy-status').hidden = true;
+      byId('anatomy-status').textContent = '';
+      if (teethUrl) URL.revokeObjectURL(teethUrl);
+      teethUrl = null;
+      byId('teeth').removeAttribute('src');
+      byId('teeth').hidden = true;
+      byId('teeth-empty').hidden = false;
+      byId('download-teeth').removeAttribute('href');
+      byId('download-teeth').hidden = true;
+    }
+
+    function readImageBundle(buffer) {
+      // O endpoint usa ZIP_STORED: extração local sem dependências ou descompressão.
+      const view = new DataView(buffer);
+      const decoder = new TextDecoder();
+      const expected = new Set(['panoramica-anotada.png', 'panoramica-anatomia.png', 'panoramica-dentes.png']);
+      const layoutName = 'panoramica-impressao.json';
+      const images = new Map();
+      let layout = null;
+      let offset = 0;
+      while (offset + 30 <= view.byteLength && view.getUint32(offset, true) === 0x04034b50) {
+        const flags = view.getUint16(offset + 6, true);
+        const compression = view.getUint16(offset + 8, true);
+        const size = view.getUint32(offset + 18, true);
+        const nameLength = view.getUint16(offset + 26, true);
+        const extraLength = view.getUint16(offset + 28, true);
+        const start = offset + 30 + nameLength + extraLength;
+        const end = start + size;
+        if (flags !== 0 || compression !== 0 || end > view.byteLength) {
+          throw new Error('Formato de resposta de imagens inválido.');
+        }
+        const name = decoder.decode(new Uint8Array(buffer, offset + 30, nameLength));
+        const bytes = new Uint8Array(buffer, start, size);
+        if (name === layoutName && !layout) {
+          layout = JSON.parse(decoder.decode(bytes));
+        } else {
+          if (!expected.has(name) || images.has(name)) throw new Error('Imagens retornadas inválidas.');
+          images.set(name, new Blob([bytes], {type: 'image/png'}));
+        }
+        offset = end;
+      }
+      if (images.size !== expected.size) throw new Error('A API não retornou as três imagens.');
+      if (!layout || !Number.isSafeInteger(layout.width) || layout.width <= 0 ||
+          !Number.isSafeInteger(layout.height) || layout.height <= 0 || !Array.isArray(layout.cards) ||
+          layout.cards.some(card => typeof card.title !== 'string' ||
+            ![card.x, card.y, card.width, card.height].every(Number.isSafeInteger) ||
+            card.x < 0 || card.y < 0 || card.width <= 0 || card.height <= 0 ||
+            card.x + card.width > layout.width || card.y + card.height > layout.height)) {
+        throw new Error('Dados de impressão dos dentes inválidos.');
+      }
+      return {images, layout};
+    }
+
+    byId('file').addEventListener('change', () => {
+      if (originalUrl) URL.revokeObjectURL(originalUrl);
+      originalUrl = null;
+      byId('original').removeAttribute('src');
+      byId('original').hidden = true;
+      byId('original-empty').hidden = false;
+      clearResult();
+      const file = byId('file').files[0];
+      if (!file) return;
+      if (file.size > 10 * 1024 * 1024) {
+        setStatus('O arquivo excede o limite de 10 MiB.', true);
+        return;
+      }
+      originalUrl = URL.createObjectURL(file);
+      byId('original').src = originalUrl;
+      byId('original').hidden = false;
+      byId('original-empty').hidden = true;
+      setStatus('Imagem selecionada. Clique em Analisar imagem.');
+    });
+
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      await additionalModelCheck;
+      const file = byId('file').files[0];
+      if (!file || file.size > 10 * 1024 * 1024) {
+        setStatus('Selecione uma imagem de até 10 MiB.', true);
+        return;
+      }
+      clearResult();
+      const body = new FormData();
+      body.append('file', file);
+      const query = new URLSearchParams({
+        confidence: byId('confidence').value, fdi_confidence: byId('fdi-confidence').value,
+        imgsz: byId('imgsz').value,
+        include_additional: String(byId('additional').checked),
+        anatomy_confidence: byId('anatomy-confidence').value,
+        model_scope: byId('model-scope').value,
+        diagnose: String(byId('diagnose').checked)
+      });
+      const headers = {};
+      if (byId('key').value) headers['X-API-Key'] = byId('key').value;
+      const controls = Array.from(form.elements);
+      controls.forEach(control => control.disabled = true);
+      setProcessing(true);
+      setStatus('Analisando dentes, achados e estruturas anatômicas…');
+      try {
+        const response = await fetch(`/predict/images?${query}`, {method: 'POST', body, headers, cache: 'no-store'});
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(typeof error.detail === 'string' ? error.detail : `Requisição inválida (HTTP ${response.status}).`);
+        }
+        const {images, layout} = readImageBundle(await response.arrayBuffer());
+        showDiagnostics(layout.dental31_diagnostics);
+        const solo = response.headers.get('X-Model-Scope') === 'dental31';
+        byId('teeth-figure').hidden = solo;
+        teethLayout = layout;
+        annotatedUrl = URL.createObjectURL(images.get('panoramica-anotada.png'));
+        anatomyUrl = URL.createObjectURL(images.get('panoramica-anatomia.png'));
+        byId('annotated').src = annotatedUrl;
+        byId('annotated').hidden = false;
+        byId('annotated-empty').hidden = true;
+        byId('download').href = annotatedUrl;
+        byId('download').hidden = false;
+        byId('anatomy').src = anatomyUrl;
+        byId('anatomy').hidden = false;
+        byId('anatomy-empty').hidden = true;
+        byId('download-anatomy').href = anatomyUrl;
+        byId('download-anatomy').hidden = false;
+        teethUrl = URL.createObjectURL(images.get('panoramica-dentes.png'));
+        byId('teeth').src = teethUrl;
+        byId('teeth').hidden = false;
+        byId('teeth-empty').hidden = true;
+        byId('download-teeth').href = teethUrl;
+        byId('download-teeth').hidden = false;
+        const additionalStatus = response.headers.get('X-Additional-Status');
+        const additionalCount = response.headers.get('X-Additional-Count') || '0';
+        const additionalSummary = additionalStatus === 'completed'
+          ? additionalCount === '0'
+            ? ' Modelo adicional executado, sem detecções acima do score mínimo.'
+            : ` ${additionalCount} informações adicionais detectadas.`
+          : additionalStatus === 'failed'
+            ? ' O modelo adicional falhou; o resultado principal está disponível.'
+            : additionalStatus === 'not_configured'
+              ? ' Informações adicionais indisponíveis: modelo não configurado.'
+              : additionalStatus === 'disabled'
+                ? ' Informações adicionais desativadas nesta análise.'
+                : ' Status do modelo adicional indisponível.';
+        const anatomyCount = response.headers.get('X-Anatomy-Count') || '0';
+        byId('anatomy-status').textContent = additionalStatus === 'completed'
+          ? anatomyCount === '0'
+            ? 'Nenhum canal mandibular ou seio maxilar detectado acima do score selecionado. A radiografia foi preservada sem marcações.'
+            : `${anatomyCount} estruturas detectadas: seios maxilares em azul e canal mandibular em rosa.`
+          : additionalStatus === 'failed'
+            ? 'A análise anatômica falhou. Execute a análise novamente.'
+            : additionalStatus === 'disabled'
+              ? 'Análise anatômica desativada. Ative Informações adicionais e anatomia.'
+              : 'Análise anatômica indisponível: modelo adicional não configurado.';
+        byId('anatomy-status').hidden = false;
+        const anatomySummary = anatomyCount === '0'
+          ? ' Segunda imagem sem marcações anatômicas.'
+          : ` ${anatomyCount} estruturas anatômicas destacadas na segunda imagem.`;
+        const summary = solo
+          ? `Somente Dental31: ${additionalCount} detecções. Numeração FDI e recortes por dente não executados.`
+          : `${response.headers.get('X-Teeth-Count')} dentes e ${response.headers.get('X-Findings-Count')} achados detectados.${additionalSummary} Recortes disponíveis na terceira imagem.`;
+        setStatus(`${summary}${anatomySummary}`);
+        await Promise.all(['original', 'annotated', 'anatomy', 'teeth']
+          .filter(id => !byId(id).hidden).map(id => byId(id).decode()));
+        if (byId('teeth').naturalWidth !== layout.width || byId('teeth').naturalHeight !== layout.height) {
+          throw new Error('A prancha de dentes não corresponde aos dados de impressão.');
+        }
+        reportInfo = {
+          filename: file.name,
+          date: new Date().toLocaleString('pt-BR'),
+          summary
+        };
+        await initializeFeedback(layout);
+        byId('print-report').disabled = false;
+      } catch (error) {
+        clearResult();
+        setStatus(error.message || 'Falha ao conectar com a API.', true);
+      } finally {
+        setProcessing(false);
+        controls.forEach(control => control.disabled = false);
+        syncModelScope();
+      }
+    });
+
+    window.addEventListener('pagehide', () => {
+      if (originalUrl) URL.revokeObjectURL(originalUrl);
+      if (annotatedUrl) URL.revokeObjectURL(annotatedUrl);
+      if (toothSegmentationUrl) URL.revokeObjectURL(toothSegmentationUrl);
+      if (additionalAnnotationsUrl) URL.revokeObjectURL(additionalAnnotationsUrl);
+      if (anatomyUrl) URL.revokeObjectURL(anatomyUrl);
+      if (teethUrl) URL.revokeObjectURL(teethUrl);
+    });
+  </script>
+  <script src="/editor.js"></script>
+</body>
+</html>

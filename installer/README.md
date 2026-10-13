@@ -79,8 +79,15 @@ No estado estrutural documentado em **2026-09-26**, esse diagnóstico tinha
 Esses números devem ser reavaliados no checkout instalado e não representam
 resultado de testes, cobertura ou validação externa.
 
-A configuração operacional consultada em **2026-10-07** declara **248 agentes**
-e **15 MCPs**, com **20 checks** no diagnóstico, incluindo
+<!-- core-state:start -->
+**255 agentes** · **16 MCPs** · **30 comandos** · **22 checks**
+
+Inventário derivado de [opencode.json](../opencode.json) e do [diagnóstico estrutural](../marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
+
+Para conferir estes blocos, execute na raiz `.venv/bin/python scripts/reconcile_operational_docs.py --check`; para sincronizá-los, execute o mesmo comando sem `--check`.
+<!-- core-state:end -->
+
+A configuração inclui
 `ecosystem-network` para coordenar análise e leitura por executores externos
 com limites de passos e tempo. Sua presença não comprova instalação,
 autenticação ou execução dos executores; consulte [o manual](../MANUAL.md).

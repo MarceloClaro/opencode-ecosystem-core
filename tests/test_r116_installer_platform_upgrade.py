@@ -124,6 +124,7 @@ class TestDoctorExternalClis:
 
         monkeypatch.setattr(Path, "home", classmethod(lambda cls: tmp_path / "home"))
         monkeypatch.setattr(sys, "executable", str(tmp_path / "venv" / "bin" / "python"))
+        monkeypatch.setattr(doctor_mod, "REPO_ROOT", str(tmp_path / "repo"))
         for name in doctor_mod.EXTERNAL_CLIS:
             key = "ANTIGRAVITY_BIN" if name == "agy" else f"{name.upper()}_BIN"
             monkeypatch.delenv(key, raising=False)

@@ -1,0 +1,33 @@
+{
+  "success": true,
+  "java_ghidra_observed": true,
+  "owned_processes": {
+    "1127129": {
+      "start": "79882357",
+      "command": "/usr/bin/unshare --user --map-root-user --net --pid --fork --kill-child=SIGKILL --mount-proc /home/marceloclaro/opencode-ecosystem-core/.venv/bin/python -m integrations.rea_local_worker "
+    },
+    "1127130": {
+      "start": "79882357",
+      "command": "/home/marceloclaro/opencode-ecosystem-core/.venv/bin/python -m integrations.rea_local_worker "
+    },
+    "1127164": {
+      "start": "79883328",
+      "command": "/usr/bin/node /home/marceloclaro/.local/share/opencode-core/rea/scripts/rea.mjs mcp "
+    },
+    "1127216": {
+      "start": "79884767",
+      "command": "/home/marceloclaro/.local/share/opencode-core/native-rea/jdk-21.0.12.1+1/bin/java -XX:-UsePerfData -XshowSettings:properties -version "
+    },
+    "1127233": {
+      "start": "79884868",
+      "command": "/home/marceloclaro/.local/share/opencode-core/native-rea/jdk-21.0.12.1+1/bin/java -Duser.home=/tmp/rea-ghidra-S2EUvJ/home -Djava.io.tmpdir=/tmp/rea-ghidra-S2EUvJ/tmp -cp /home/marceloclaro/.local/share/opencode-core/native-rea/ghidra_12.1.4_PUBLIC/support/LaunchSupport.jar LaunchSupport /home/marceloclaro/.local/share/opencode-core/native-rea/ghidra_12.1.4_PUBLIC -envvars "
+    }
+  },
+  "owned_live_after": [],
+  "cooperative_cancellation": true,
+  "cleanup_seconds": 3.431,
+  "target_sha256": "172e8f12d2754e0f5c55b302b27d98725c81e511f43c79fb6afac1ec6338d92e",
+  "target_execution_sentinel_absent": true,
+  "scope": "actual analytical namespace and Ghidra descendants; controlled ELF, no LLM",
+  "externally_validated": false
+}

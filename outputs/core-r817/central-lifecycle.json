@@ -1,0 +1,37 @@
+{
+  "start": {
+    "ok": true,
+    "exit_code": 0,
+    "stdout": "│\n◆  runai daemon started (PID 652857) on port 11435\n│\n●  Logs: /home/marceloclaro/.runai/runai.log\n│\n●  Stop with: runai stop\n",
+    "stderr": "",
+    "command": [
+      "runai",
+      "serve",
+      "--detach",
+      "--model",
+      "llama3.2-1b"
+    ],
+    "mode": "binary"
+  },
+  "health": {
+    "ok": true,
+    "service": "runai",
+    "pid": 652857,
+    "model": "llama3.2-1b",
+    "active_requests": 0,
+    "queued_requests": 0
+  },
+  "stop": {
+    "ok": true,
+    "exit_code": 0,
+    "stdout": "│\n◆  Stopped runai daemon (PID 652857)\n",
+    "stderr": "",
+    "command": [
+      "runai",
+      "stop"
+    ],
+    "mode": "binary",
+    "termination_confirmed": true
+  },
+  "still_serving": false
+}

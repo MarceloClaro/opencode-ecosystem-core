@@ -1,0 +1,103 @@
+{
+  "status": "complete",
+  "scope": "R822_documentation_and_sync",
+  "completed_at": "2026-10-12T09:52:25.066910+00:00",
+  "current_counts": {
+    "agents": 255,
+    "mcps": 16,
+    "commands": 30,
+    "checks": 22
+  },
+  "gates": {
+    "tests": 40,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "gate_scope": [
+    "R822",
+    "R448",
+    "R449",
+    "R455",
+    "R129",
+    "R640-bridge-truthfulness"
+  ],
+  "gate_xml": "outputs/core-r822/docs-final.xml",
+  "generator_check": {
+    "returncode": 0,
+    "changed_documents": [],
+    "source": "observed real CLI tool session 5131"
+  },
+  "idempotence": {
+    "runs": 2,
+    "changed_documents": [
+      [],
+      []
+    ],
+    "hashes_unchanged": true
+  },
+  "legacy_progress": {
+    "bytes": 77096,
+    "sha256": "d2993638fe56282c01043edcac33275920cb4b7af6c825d1d2363b7f4fc8f7a3",
+    "preserved_byte_for_byte": true
+  },
+  "mutations": {
+    "status": "passed",
+    "scope": "three_isolated_document_sync_mutants",
+    "operational_sources_modified": false,
+    "generator_sha256": "61e3286f56c2751718691ad72cd2472ca6e1a644dd1a062256b3e3f8a254f7bc",
+    "results": [
+      {
+        "mutant": "wrong_agent_cardinality",
+        "killed": true,
+        "test": "test_sync_derives_cardinalities_and_preserves_history",
+        "failure_type": "AssertionError",
+        "reason": ""
+      },
+      {
+        "mutant": "check_mode_writes",
+        "killed": true,
+        "test": "test_check_reports_every_stale_document_without_writing",
+        "failure_type": "AssertionError",
+        "reason": ""
+      },
+      {
+        "mutant": "duplicate_marker_accepted",
+        "killed": true,
+        "test": "test_bad_marker_in_last_document_prevents_all_writes",
+        "failure_type": "Failed",
+        "reason": "DID NOT RAISE ValueError"
+      }
+    ]
+  },
+  "current_local_links_missing": [],
+  "source_freeze": {
+    "README.md": "c522bedb9fd26239a48bf2b3582dbc2963c91b76cde71b5f3ac3f8709834f545",
+    "MANUAL.md": "d8aed7c909db2d31de68de5833e2ef628a69b21532f87fe58cbaa11aba73ffc3",
+    "ARCHITECTURE.md": "5fe9d772287303e624863797c9c17efaf1bd725536d4ab5f49cb4817ff3185f2",
+    "CLAUDE.md": "bc1218f382561f12d4556f9d8ba7e532952f1a70f3f584e6945e7584b7e4aae3",
+    "PROGRESS.md": "6a7cf0c61205796ef89d308ce95a82e43b9b82eab6bd5f76920a700b30933408",
+    "installer/README.md": "ab5e46aae775b60d4ced9367e2292ffd8b729601213cd6f309cb195e975bb2b9",
+    "installer/windows/README.md": "dfa22d4e7e34718513cd983dc3943bc05048928ba265b1e99ff102d40edb1d84",
+    "scripts/reconcile_operational_docs.py": "61e3286f56c2751718691ad72cd2472ca6e1a644dd1a062256b3e3f8a254f7bc",
+    "tests/test_r822_documentation_current_state.py": "d0e385d91b96a16a94fa747fa44cd2f8b9891d05d433942723ed4a497ad18df1",
+    "docs/HF_HUB_PROFILE_SETUP.md": "87f333f327bd4458580d17c9473216b244b4e12e21379243953c9f04d7245261",
+    "docs/MANUAL_NANO_ORCHESTRATION.md": "c7cafeb5ec431eb5fce3c6aab6172c3a7aa76bdf2d590939538f2f46a2714939"
+  },
+  "spec_path": "/home/marceloclaro/opencode-ecosystem-core/specs/SPEC-935-R822-documentacao-estado-corrente.md",
+  "spec_status": "implemented",
+  "full_suite_completed": false,
+  "external_validation": false,
+  "remaining_review_candidates": [],
+  "gates_before_extra_references": {
+    "tests": 38,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "corrected_extra_references": [
+    "docs/HF_HUB_PROFILE_SETUP.md",
+    "docs/MANUAL_NANO_ORCHESTRATION.md"
+  ],
+  "nano_preview_defect": "Corrigido e validado na R826; exemplo local de 12 páginas passou no gate documental."
+}

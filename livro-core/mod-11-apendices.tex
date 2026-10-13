@@ -25,14 +25,37 @@ para o português é rotulada como tal. Um DOI que não resolve em
 \pth{https://doi.org} ou cujo trecho não confere com a fonte \textbf{não entra}
 no livro. Verificação corrente: \textbf{29 de setembro de 2026}.
 
-\textbf{Normas ABNT atualizadas.} As referências seguem a
-\textbf{ABNT NBR 6023:2018} (Informação e documentação --- Referências:
-elaboração) e as citações seguem a \textbf{ABNT NBR 10520:2023} (Informação e
+\textbf{Referencial de normalização.} A norma de referências adotada é a
+\textbf{ABNT NBR 6023:2025} (Informação e documentação --- Referências:
+elaboração), terceira edição de 21/05/2025, que substitui a edição de 2018.
+Essa atualização de edição foi conferida no prefácio da norma original;
+não equivale a uma auditoria integral de conformidade de todas as entradas.\footnote{ABNT. Informação e documentação — Referências — Elaboração.
+ABNT NBR 6023:2025. Terceira edição, 21 maio 2025, prefácio, p.~v.
+Exemplar institucional consultado em 11 out. 2026:
+\url{https://www.fho.edu.br/assets/documentos/FHO_Biblioteca_Referencia_ABNT_6023_2025.pdf}.}
+As citações adotam a \textbf{ABNT NBR 10520:2023} (Informação e
 documentação --- Citações em documentos: apresentação). Adota-se o
 \textbf{sistema numérico}: a chamada no texto é a remissão à nota de rodapé, que
 traz a \textbf{referência completa} em ABNT, o DOI com \textbf{data de acesso}
 e, quando há citação direta, o \textbf{trecho textual} e sua página.
 \end{resultado}
+
+% BEGIN-R814-INVENTARIO
+\begin{resultado}
+\textbf{Inventário de fontes desta edição.} A configuração declara
+\textbf{255} agentes, \textbf{16} servidores MCP e
+\textbf{30} comandos. O repositório contém 514 specs,
+das quais 424 são da série R, e 393 arquivos
+\pth{test_r*.py}. A biblioteca contém 14 blocos de referência;
+as fontes dos módulos contêm 88 chamadas de \cod{\string\citref}
+e 13 fichas condensadas de categoria.
+\textbf{Como reproduzir.} Execute \pth{python3 livro-core/gen_inventario.py};
+o arquivo \pth{livro-core/inventario-core.json} conserva os hashes SHA-256 das
+fontes lidas. Contam-se registros e chamadas no código-fonte, não inferências,
+fontes independentes nem resultados científicos confirmados. A quantidade de
+citações não avalia sua pertinência: a fonte precisa sustentar a afirmação.
+\end{resultado}
+% END-R814-INVENTARIO
 
 \section{Biblioteca de referências auditadas}
 
@@ -197,7 +220,7 @@ publicar como artigo de periódico.
   \item \textbf{Tradução} — a tradução pt-BR é rotulada como tradução livre e
         fiel, mantendo números, negações e entidades do original.
   \item \textbf{Forma (ABNT)} — a referência é redigida conforme a
-        \textbf{NBR 6023:2018} (sobrenome em maiúsculas, título da publicação
+        \textbf{NBR 6023:2025} (sobrenome em maiúsculas, título da publicação
         em destaque, volume, número, páginas com hífen, ano, DOI e data de
         acesso) e a citação conforme a \textbf{NBR 10520:2023} no
         \textbf{sistema numérico}: a chamada remete à nota de rodapé, que traz
@@ -259,53 +282,63 @@ localização da fonte (R110), não o mérito da afirmação.
 %  N-11 — Leitura guiada do Módulo 11 (adicionada no ciclo R619)
 % ----------------------------------------------------------------------
 \section[Leitura guiada]{Leitura guiada — Módulo 11: citar é tornar a afirmação auditável}
-
-\elemento{Leitura guiada — Referências e metodologia ABNT}{\metainfo{ID}{N-11} \hfill \metainfo{Ciclo}{R619} \hfill \metainfo{Estilo}{a citação auditável é mais longa que a afirmação que sustenta}}
-
-
+\elemento{Referências: localizar, confrontar e interpretar}{\metainfo{ID}{N-11} \hfill \metainfo{Revisão}{R814}}
 \begin{descricao}
-\textbf{O fenômeno.} Uma nota de rodapé é o único lugar do livro em que um terceiro pode sair do texto sem equipamento e conferir a afirmação. O fenômeno a explicar não é o formato da nota, mas a assimetria entre duas afirmações de aparência idêntica: ``a taxa de ativação de DOI é de 1'' apoiada numa fonte endereçável, e a mesma frase sem lastro. A primeira é auditável; a segunda é retórica. Marcadores de leitura e de conveniência anulam essa diferença: é o que a seção de biblioteca tenta impedir.
+\textbf{O fenômeno.} Uma referência permite sair da afirmação e consultar sua fonte.
+O endereço, o trecho e a interpretação cumprem funções diferentes: um DOI pode
+resolver corretamente enquanto a passagem citada não sustenta a conclusão.
+O rastro documental precisa permitir esse confronto, inclusive quando a resposta
+é que a fonte foi usada além de seu escopo. Os registros de auditoria desta
+biblioteca pertencem às datas declaradas; uma nova compilação não os renova.
 \end{descricao}
-
 \begin{definicao}
-\textbf{Grandezas e definições.}\par
-(1) \emph{Referência verificada (R110)}: entrada bibliográfica com identificador persistente (DOI) conferido externamente em data declarada.\par
-(2) \emph{Chamada de citação} (\cod{\string\citref}): comando de $5$ campos --- referência, DOI, relevância ao contexto, citação direta com página e tradução livre declarada.\par
-(3) \emph{Cobertura documental}: razão entre módulos com ao menos uma chamada e módulos que afirmam algo externo.\par
-(4) \emph{Concentração de lastro}: fração das chamadas supridas pelas $k$ fontes mais citadas.\par
-(5) \emph{Densidade de citação}: chamadas por página do livro.
+\textbf{Grandezas e definições.} $R=\CoreReferenceCount$ conta blocos de referência;
+$C=\CoreCitationCallCount$ conta chamadas nas fontes dos módulos. Uma chamada
+repetida não constitui nova fonte independente. A macro \cod{\string\citref}
+tem seis campos: referência, DOI, relevância, trecho original, tradução livre
+e indicação de autoria e localizador. A concentração seria a fração das chamadas
+atribuída a um conjunto de fontes, após identificar cada chamada pelo DOI.
 \end{definicao}
-
 \begin{metodo}
-\textbf{Dedução passo a passo.} Por que a citação direta exige número de página?\par
-(1) O DOI resolve para o \emph{trabalho}, não para a \emph{passagem}: ele é um endereço de documento, não de trecho.\par
-(2) Um trabalho de $30$ páginas pode conter a afirmação --- ou apenas o tema dela. Quem só tem o DOI precisa caçar a passagem em centenas de páginas.\par
-(3) Logo, o DOI sozinho não é auditável no sentido forte; o par (DOI, página + citação direta) é. É por isso que o quarto campo do \cod{\string\citref} não é decorativo: é o que converte um endereço em prova.\par
-(4) E por que o quinto campo é \emph{tradução livre} e não ``versão original'': a NBR 10520:2023 exige que a tradução seja identificada como tradução. Declarar o procedimento é o que impede que uma paráfrase minha seja lida como voz da fonte.\par
-(5) Consequência prática: a nota de rodapé deste livro é mais longa que a afirmação que ela sustenta. Esse desequilíbrio é intencional --- é a assinatura de um livro auditável.
+\textbf{Dedução passo a passo.} Primeiro localize a edição usada; depois confira
+a passagem, sua tradução e o contexto. O DOI identifica o objeto, enquanto a
+página ou outro localizador identifica a passagem. Em seguida pergunte se a
+passagem apoia a afirmação inteira ou somente parte dela. Registre o acesso
+efetivamente realizado e sua data. O par DOI--localizador facilita a auditoria;
+não constitui prova de que a interpretação seja correta. Uma paráfrase deve
+preservar qualificações e não assumir a voz do autor como citação direta.
 \end{metodo}
-
 \begin{resultado}
-\textbf{Exemplo resolvido.} Estado medido em 29/09/2026: a biblioteca auditada contém $R = 14$ referências, e o livro inteiro usa $C = 70$ chamadas de \cod{\string\citref}.\par
-(1) Chamadas por referência: $\frac{C}{R} = \frac{70}{14} \approx 5{,}00$. Ou seja: nenhuma fonte da biblioteca é citada uma única vez e nenhuma é citada de forma massiva --- a biblioteca é \emph{usada}, não decorativa.\par
-(2) Concentração: as três fontes mais citadas (Princípios FAIR, \emph{Why most published research findings are false} e \emph{Metacognition and cognitive monitoring}) somam $9 + 9 + 8 = 26$ das $70$ chamadas. A concentração de lastro é, portanto, $\frac{26}{70} \approx 37{,}1\%$ vinda de $\frac{3}{14} \approx 21{,}4\%$ das fontes.\par
-(3) Leitura honesta desse número: quase metade das citações do livro se apoia em três obras --- o que indica um núcleo conceitual pequeno e explicitado, mas também uma diversidade de lastro modesta. Um revisor que queira contestá-lo deve começar por essas três.
+\textbf{Exemplo resolvido.} O inventário acima lê $R$ e $C$ das fontes desta edição.
+A média de uso é $C/R$ chamadas por referência, uma grandeza documental. Uma
+média não informa quantas fontes foram pouco usadas: por exemplo, em um conjunto
+\emph{hipotético} de quatro referências com contagens $1,1,1,9$, a média é
+$12/4=3$, embora três referências apareçam uma vez. Para medir concentração
+é necessário obter as contagens individuais, não deduzi-las da média.
+\end{resultado}
+\begin{resultado}
+\textbf{Ordem de grandeza e verificação.} Reexecute \pth{gen_inventario.py}
+e compare contagens e hashes com \pth{inventario-core.json}. O procedimento
+conta comandos no código-fonte e não linhas de texto, páginas ou notas visíveis.
+Uma densidade por página só pode ser calculada após a compilação e a definição
+do denominador. Mesmo então, mede apresentação editorial; não mede pertinência,
+diversidade, independência das evidências ou qualidade científica.
+\end{resultado}
+\begin{aviso}
+\textbf{Limite de validade.} Acesso ao DOI, completude dos campos e integridade
+do arquivo são verificações diferentes da leitura crítica. O inventário é local:
+não reconsulta editores, não autentica citações históricas e não mede validação
+externa. Uma fonte primária do próprio Core pode sustentar a descrição de uma
+API; para uma conclusão científica externa é preciso uma fonte pertinente ao
+fenômeno, ao método e à população estudados.
+\end{aviso}
+\begin{resultado}
+\textbf{Exercícios.} (1) Reproduza $R$ e $C$ sem confundir chamadas com fontes.
+(2) No exemplo hipotético, calcule a concentração da fonte com nove chamadas
+e explique por que $75\%$ não é uma probabilidade de acerto.
+(3) Reabra uma fonte, confira a passagem e registre a data real do acesso.
+(4) Identifique uma afirmação que a passagem não sustenta por inteiro e proponha
+uma formulação mais limitada, preservando a conclusão que a fonte permite.
 \end{resultado}
 
-\begin{resultado}
-\textbf{Ordem de grandeza e verificação.} Com o livro completo em $P = 234$ páginas (medida que já inclui esta seção) e $C = 70$ chamadas, a densidade é $\frac{70}{234} \approx 0{,}30$ citação por página --- isto é, cerca de uma nota de rodapé a cada cinco páginas. Verificação mecânica: \cod{grep -c citref mod-*.tex} deve devolver $70$; se devolver menos, uma citação foi perdida em alguma edição posterior. O contraste é o argumento didático do capítulo: um manual \emph{derivativo} (que expõe a mecânica interna) é majoritariamente feito de dedução própria --- o que um livro de história da ciência, com densidade de citação ordens de grandeza maior, não seria.
-\end{resultado}
-
-\begin{aviso}
-\textbf{Limite de validade.} A verificação de DOI atesta que a fonte \emph{existe} e é legível, não que ela sustente a afirmação --- o próprio capítulo adverte isso. Três limites de honestidade: (1) $100\%$ das referências com DOI não é $100\%$ do texto com lastro; os Módulos 1--4 descrevem a mecânica deste repositório, verificável por replicação local, não por citação --- e é essa a evidência adequada ali; (2) citação sem identificador persistente (artigo antigo ou livro) é admitida apenas com justificativa registrada na própria nota, porque a verificação automática não a alcança; (3) a concentração de $45{,}8\%$ em três fontes significa que este manual é menos independente do que parece: ele é, em parte, a leitura de três autores.
-\end{aviso}
-
-\begin{aviso}
-\textbf{Exercícios.}\par
-(E1) Rode \cod{grep -o citref mod-*.tex | sort | uniq -c | sort -rn | head} e confirme que a fonte mais citada aparece com $8$ ocorrências. Se aparecer com $9$, uma citação foi duplicada na última edição.\par
-(E2) Calcule a concentração de lastro se as três fontes mais citadas fossem de citações $9$, $9$ e $8$ (total $70$). O número sobe ou desce? O que isso diria sobre a robustez do manual a um único autor?\par
-(E3) Abra um DOI desta biblioteca e verifique se a citação direta indicada aparece na página declarada. Documente a data da conferência na própria nota --- é o que transforma a conferência em evidência.\par
-(E4) Escreva uma afirmação metodológica do Módulo 2 e identifique qual de seus $5$ campos seria impossível preencher honestamente. O que a dificuldade revela sobre a afirmativa?
-\end{aviso}
-
-\noindent\textit{Critério de resposta:} Ao revisar uma afirmação metodológica, verifique se outra pessoa conseguiria refazer a operação com a descrição disponível: quais entradas, versões e parâmetros foram usados, qual procedimento foi executado e qual saída foi observada. Se algum campo não puder ser preenchido sem adivinhação, a alegação ainda não está suficientemente especificada para repetição independente. O exercício pede que a lacuna seja identificada, não que evidência ausente seja substituída por autoridade bibliográfica \citref{PENG, R. D. Reproducible research in computational science. \emph{Science}, v.~334, n.~6060, p.~1226-1227, 2011}{10.1126/science.1213847}{p.~1226-1226 (editorial). ancora o argumento de que o padrão de auditoria de uma afirmação é a reprodutibilidade, não a autoridade da fonte: um método que pode ser reexecutado dispensa citação para se defender, e é por isso que a densidade de citação deste manual é baixa onde ele é alta}{Reproducibility has the potential to serve as a minimum standard for judging scientific claims when full independent replication of a study is not possible}{A reprodutibilidade tem o potencial de servir como padrão mínimo para julgar alegações científicas quando a replicação independente completa de um estudo não é possível.}{PENG, 2011, p.~1226}
+\noindent\textit{Critério de resposta:} Ao revisar uma afirmação metodológica, verifique se outra pessoa conseguiria refazer a operação com a descrição disponível: quais entradas, versões e parâmetros foram usados, qual procedimento foi executado e qual saída foi observada. Se algum campo não puder ser preenchido sem adivinhação, a alegação ainda não está suficientemente especificada para repetição independente. O exercício pede que a lacuna seja identificada, não que evidência ausente seja substituída por autoridade bibliográfica \citref{PENG, R. D. Reproducible research in computational science. \emph{Science}, v.~334, n.~6060, p.~1226-1227, 2011}{10.1126/science.1213847}{p.~1226-1226 (editorial). ancora o argumento de que o padrão de auditoria de uma afirmação é a reprodutibilidade, não a autoridade da fonte: a reexecução oferece um rastro que complementa a leitura crítica das fontes; não dispensa referências pertinentes nem validação independente}{Reproducibility has the potential to serve as a minimum standard for judging scientific claims when full independent replication of a study is not possible}{A reprodutibilidade tem o potencial de servir como padrão mínimo para julgar alegações científicas quando a replicação independente completa de um estudo não é possível.}{PENG, 2011, p.~1226}

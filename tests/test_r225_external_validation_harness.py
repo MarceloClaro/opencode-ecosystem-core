@@ -39,13 +39,14 @@ class TestR225ExternalValidationHarness(unittest.TestCase):
         self.assertFalse(res["is_valid"])
         self.assertEqual(res["tier"], "research_grade")
 
-    def test_spec_verifier_execution(self):
+    def test_criteria_only_inspection(self):
         spec = spec_registry.get("SPEC-935-R225")
         if spec:
             spec.add_criterion("External Validation Harness validado", lambda out: out.get("proof") is True)
-        res = spec_verifier.verify("SPEC-935-R225", {"proof": True})
+        res = spec_verifier.verify("SPEC-935-R225", {"proof": True}, require_red_history=False)
         self.assertTrue(res["verified"])
-        self.assertEqual(res["status"], "green")
+        self.assertEqual(res["verification_scope"], "criteria_only")
+        self.assertEqual(res["status"], "criteria_passed")
 
 
 if __name__ == "__main__":

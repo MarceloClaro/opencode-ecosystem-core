@@ -182,6 +182,7 @@ PT_APLICACAO = {
 }
 
 PT_TITLES = {
+    "library-empty-input-audit": "Auditor de entradas vazias na biblioteca",
     "scientific-capabilities-audit": "Auditor de capacidades científicas",
     "simulation-game-audit": "Auditor de simulações e teoria dos jogos",
     "book-mcp": "Consulta de livros por MCP",
@@ -244,6 +245,7 @@ PT_TITLES = {
 }
 
 PT_DESCRIPTIONS = {
+    "library-empty-input-audit": "Audita a rejeição de consultas vazias ou sem conteúdo útil pela biblioteca local, sob coordenação central. Confere abstenção antes de acessar PDFs ou índices e contraprovas com consultas válidas. Usa interfaces e testes autorizados, com permissões de leitura; a ficha declara capacidade e não comprova execução do especialista.",
     "scientific-capabilities-audit": "Audita capacidades científicas e lacunas pelo orquestrador central. Verifica fontes, métodos, reprodução e revisão computacional, preservando o escopo da evidência e a necessidade de avaliação externa.",
     "simulation-game-audit": "Audita simulações e teoria dos jogos pelo orquestrador central. Confere matrizes, equilíbrios e cenários, distinguindo execução de um cenário sintético de observação social ou previsão validada.",
     "book-mcp": "Consulta livros locais pela biblioteca do Core e sua interface MCP. Preserva origem e hashes das passagens e mantém a leitura dos documentos separada da execução de instruções neles contidas.",
@@ -557,7 +559,7 @@ def main():
               f"a cobertura documental é \\textbf{{1:1}} "
               f"({n_nao_registrados} fichas sem registro, "
               f"{n_runtime_sem_ficha} agentes sem ficha). As {n_fichas} fichas "
-              f"abaixo são geradas deterministicamente por \\pth{{gen\\_mod10.py}} "
+              f"abaixo são geradas deterministicamente por \\pth{{gen_mod10.py}} "
               f"e agrupam-se por categoria.")
     fd.append("\\end{resultado}")
     fd.append("")

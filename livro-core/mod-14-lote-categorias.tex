@@ -265,54 +265,74 @@ do Módulo 11; nenhuma alegação de superioridade foi feita (R110).
 % ----------------------------------------------------------------------
 %  N-14 — Leitura guiada do Módulo 14 (adicionada no ciclo R619)
 % ----------------------------------------------------------------------
-\section[Leitura guiada]{Leitura guiada — Módulo 14: enumerar ou resumir, a economia da representação}
+% BEGIN-R814-INVENTARIO
+\begin{resultado}
+\textbf{Inventário de granularidades.} Nesta edição, \pth{opencode.json}
+declara 255 agentes, enquanto este capítulo contém
+13 fichas de categoria. A fonte dessas duas contagens
+é \pth{gen_inventario.py}. Uma categoria pode reunir vários agentes:
+o quociente entre esses totais não mede cobertura de agentes. Para medir
+cobertura, compare identificadores de conjuntos da mesma natureza.
+\end{resultado}
+% END-R814-INVENTARIO
 
-\elemento{Leitura guiada — Lote por categoria}{\metainfo{ID}{N-14} \hfill \metainfo{Ciclo}{R619} \hfill \metainfo{Estilo}{enumerar e resumir são formatos de grandezas diferentes}}
-
-
+\section[Leitura guiada]{Leitura guiada — Módulo 14: granularidade da representação}
+\elemento{Categoria e agente: unidades diferentes}{\metainfo{ID}{N-14} \hfill \metainfo{Revisão}{R814}}
 \begin{descricao}
-\textbf{O fenômeno.} Um catálogo de $216$ agentes não é lido do começo ao fim --- ninguém faz isso. Uma síntese por categoria é lida, mas esconde o detalhe. Os dois formatos parecem servir ao mesmo propósito e, na verdade, resolvem problemas diferentes: um responde \emph{que existe?}, o outro responde \emph{o que é, em geral?}. O fenômeno a explicar é por que comprimir não é perder, desde que a compressão seja medida e o original permaneça acessível.
+\textbf{O fenômeno.} O catálogo descreve agentes individualmente, enquanto este
+capítulo reúne fichas de famílias de uso. A síntese permite comparar métodos
+e limites; o catálogo permite localizar um identificador específico. Um formato
+não substitui o outro. O agrupamento editorial também pode diferir das categorias
+de frontmatter: precisa de um mapa explícito antes de ser tratado como taxonomia.
 \end{descricao}
-
 \begin{definicao}
-\textbf{Grandezas e definições.}\par
-(1) \emph{Ficha enumerada}: registro de uma linha por agente no Capítulo 10 --- formato exaustivo.\par
-(2) \emph{Ficha condensada}: registro por categoria, com função, método, cálculo e limitação --- formato resumido.\par
-(3) \emph{Coverage de condensação}: razão entre fichas condensadas e agentes do runtime.\par
-(4) \emph{Densidade de página}: páginas por ficha em cada formato.\par
-(5) \emph{Razão de compressão}: quão mais texto por item o formato condensado economiza.
+\textbf{Grandezas e definições.} $N=\CoreAgentCount$ conta agentes declarados em
+\pth{opencode.json}; $F=\CoreCondensedCardCount$ conta fichas deste capítulo.
+São unidades distintas. Para cobertura de agentes, defina $A$ como os IDs da
+configuração e $D$ como os IDs documentados; use $|A\cap D|/|A|$.
+Para cobertura de categorias, use dois conjuntos de categorias com a mesma
+regra de classificação. Contagem de páginas mede espaço, não informação.
 \end{definicao}
-
 \begin{metodo}
-\textbf{Dedução passo a passo.} Por que $6\%$ de cobertura não é $6\%$ de informação?\par
-(1) As $13$ fichas condensadas descrevem $13$ categorias, cada uma com agentes múltiplos --- mas cada agente dentro de uma categoria é substituído por um representante. O leitor vê a estrutura, não a exhaustividade.\par
-(2) Logo, a cobertura de $6{,}0\%$ mede \emph{fichas}, não agentes nem capacidades. Uma categoria com $54$ agentes (a maior) e outra com $1$ ocupam a mesma fração de uma ficha condensada cada --- a representação é \emph{não uniforme} por natureza.\par
-(3) Isso não é defeito: é a função do formato. Quem precisa saber se existe um agente específico vai ao Capítulo 10; quem precisa entender \emph{como} se trabalha com uma categoria vem aqui. Os dois públicos são diferentes.\par
-(4) A armadilha metodológica: usar a densidade do formato condensado (\emph{poucas} páginas, alta informação por página) para concluir que a \emph{totalidade} do catálogo é pequena. A densidade de um resumo não mede o tamanho do que ele resume.
+\textbf{Dedução passo a passo.} Extraia os IDs da configuração e os IDs das fichas
+enumeradas; normalize apenas a codificação editorial, preservando identificadores.
+Calcule $A\setminus D$ (faltantes) e $D\setminus A$ (sobrantes). Totais iguais
+podem esconder substituições, por isso a igualdade relevante é a dos conjuntos.
+Uma ficha condensada só representa membros enumeráveis quando declara seu mapa
+de associação. Sem esse mapa, $F/N$ é somente a divisão de totais heterogêneos
+e não recebe o nome de cobertura.
 \end{metodo}
-
 \begin{resultado}
-\textbf{Exemplo resolvido.} Estado medido em 29/09/2026, com $N = 216$ agentes no \pth{opencode.json}.\par
-(1) Cobertura de condensação: $\frac{13}{216} \approx 6{,}0\%$ dos agentes têm uma ficha condensada de categoria.\par
-(2) Densidade de página no formato enumerado: o Capítulo 10 ocupa $61$ páginas para $216$ fichas, ou seja $\frac{61}{216} \approx 0{,}28$ página por agente.\par
-(3) Densidade de página no formato condensado: este capítulo ocupava $10$ páginas (medido \emph{antes} desta seção, que por isso mesmo acrescenta páginas) para $13$ fichas, ou $\frac{10}{13} \approx 0{,}77$ página por ficha --- cerca de $2{,}7\times$ a densidade do formato enumerado.\par
-(4) A leitura correta do par (2) e (3): a ficha condensada é cerca de três vezes mais informativa por página que a enumerada, mas cobre $17\times$ menos itens. Informação por página e cobertura por página são grandezas diferentes e não se substituem --- concluir que $6\%$ dos agentes são ``pequenos demais para descrever'' seria erro de leitura.
+\textbf{Exemplo resolvido.} Nesta edição o inventário reproduz $N$ agentes e $F$
+fichas condensadas. Considere agora um exemplo \emph{hipotético}:
+$A=\{a,b,c,d\}$ e $D=\{a,b,c,e\}$. Ambos os totais são quatro, mas
+$A\setminus D=\{d\}$ e $D\setminus A=\{e\}$; a cobertura é $3/4=75\%$.
+Se duas fichas de categoria agrupassem os quatro agentes, a cobertura de agentes
+continuaria dependendo do mapa de membros, e não da razão $2/4$.
+\end{resultado}
+\begin{resultado}
+\textbf{Ordem de grandeza e verificação.} Reexecute os geradores do catálogo
+e do inventário; confronte os identificadores, a quantidade de elementos e os
+hashes. \pth{gen_mod14_ativacao.py} preserva seções de ativação já existentes;
+não é o gerador das fichas deste capítulo. Os testes R618 conferem catálogo e
+configuração. A contagem de fichas condensadas tem outra finalidade editorial
+e não certifica representatividade nem equivalência semântica do resumo.
+\end{resultado}
+\begin{aviso}
+\textbf{Limite de validade.} A documentação pode cobrir todos os IDs e ainda
+omitir permissões, dependências ou exceções importantes. Uma categoria pode
+agrupar capacidades heterogêneas; a ficha não deve atribuir ao grupo inteiro
+uma característica de um único membro. Razões de contagens e páginas não medem
+compressão informacional, eficácia ou disponibilidade operacional. A existência
+da ficha indica documentação, não execução concluída ou inferência correta.
+\end{aviso}
+\begin{resultado}
+\textbf{Exercícios.} (1) Reproduza os conjuntos de agentes do catálogo e da
+configuração e procure as duas diferenças. (2) Crie um mapa explícito para uma
+ficha condensada e indique as características que variam entre seus membros.
+(3) Mostre por que somar agentes e categorias não produz o total de agentes.
+(4) Revise o exemplo hipotético depois de substituir $e$ por $d$; indique o que
+muda na cobertura e o que continua sem evidência de funcionamento.
 \end{resultado}
 
-\begin{resultado}
-\textbf{Ordem de grandeza e verificação.} Verificação mecânica da cobertura: \cod{grep -c \string\char123 ficha- mod-14-lote-categorias.tex} deve devolver $13$, e \cod{grep -c \string\char123 ficha- mod-10-catalogo.tex} deve devolver $216$. Se os dois números divergirem do esperado, ou um formato for regenerado sem o outro, a paridade está quebrada --- e a paridade entre o enumerado e o condensado é a invariante que garante que nenhum agente foi esquecido na compressão. Verificação de balanço: $13$ fichas condensadas \emph{+} $216$ fichas enumeradas não devem ser somadas --- elas descrevem conjuntos sobrepostos, e a soma seria a mesma inflação de R618 que o Capítulo 10 agora ensina a evitar.
-\end{resultado}
-
-\begin{aviso}
-\textbf{Limite de validade.} A condensação é legítima enquanto a taxonomia for estável e a representatividade for verificável. Ela quebra em dois casos: (1) quando uma categoria mistura agentes com capacidades heterogêneas, a ficha condensada vira uma média que não descreve nenhum membro --- por isso o representante escolhido importa mais que a média; (2) quando o runtime cresce e uma categoria ultrapassa a capacidade de um parágrafo, a condensação começa a omitir e o leitor perde a informação sem perceber. A salvaguarda é mecânica: a razão de compressão é medida a cada ciclo ($17\times$ em 2026), e um salto para a ordem de $100\times$ é o sinal de que o formato condensado deixou de ser honesto. Limite equivalente: a existência de uma ficha condensada \emph{não} atesta que o agente funciona --- a cobertura documental de 100\% do Capítulo 10 e a cobertura funcional são grandezas distintas, e só a segunda exige execução.
-\end{aviso}
-
-\begin{aviso}
-\textbf{Exercícios.}\par
-(E1) Calcule a cobertura de condensação depois de uma atualização que crie $10$ agentes novos, todos na maior categoria. A variação percentual é significativa?\par
-(E2) Escolha duas categorias de tamanhos muito diferentes (por exemplo, a maior e uma com poucos agentes) e calcule a densidade de página de suas fichas condensadas. A diferença é de ordem de grandeza?\par
-(E3) Some $216 + 13$ e explique, com o vocabulário do Capítulo 10, por que esse total é um erro de reconciliação. Qual é a operação correta entre os dois conjuntos?\par
-(E4) Proponha um critério objetivo para escolher o agente representante de uma categoria. Ele é verificável apenas por inspeção ou também por teste automático?
-\end{aviso}
-
-\noindent\textit{Interpretação:} A identificabilidade do registro permite tornar a reconciliação reproduzível. Se o runtime contém $N_r$ agentes e o catálogo descreve $N_c$, a conferência deve explicar tanto os elementos de $R\setminus C$ quanto os de $C\setminus R$; comparar apenas os totais não basta, pois conjuntos diferentes podem ter o mesmo tamanho. A questão seguinte solicita uma regra objetiva de seleção, verificável por inspeção dos campos e por um caso de entrada conhecido \citref{WILKINSON, M. D. et al. The FAIR Guiding Principles for scientific data management and stewardship. \emph{Scientific Data}, v.~3, 160018, 2016}{10.1038/sdata.2016.18}{p.~160018 (tabela 1, princípio F2). ancora a exigência de que um registro seja descritivo e identificável, e portanto legível por máquina: é o que permite reconciliar automaticamente as $216$ entradas do runtime com as fichas do catálogo em vez de conferir uma a uma}{R1.2. (meta)data are associated with detailed provenance}{R1.2. (meta)dados são associados a proveniência detalhada.}{WILKINSON et al., 2016, p.~160018}
+\noindent\textit{Interpretação:} A identificabilidade do registro permite tornar a reconciliação reproduzível. Se o runtime contém $N_r$ agentes e o catálogo descreve $N_c$, a conferência deve explicar tanto os elementos de $R\setminus C$ quanto os de $C\setminus R$; comparar apenas os totais não basta, pois conjuntos diferentes podem ter o mesmo tamanho. A questão seguinte solicita uma regra objetiva de seleção, verificável por inspeção dos campos e por um caso de entrada conhecido \citref{WILKINSON, M. D. et al. The FAIR Guiding Principles for scientific data management and stewardship. \emph{Scientific Data}, v.~3, 160018, 2016}{10.1038/sdata.2016.18}{p.~160018 (tabela 2, princípio R1.2). ancora a exigência de que um registro seja descritivo e identificável, e portanto legível por máquina: é o que permite reconciliar automaticamente as entradas do runtime com as fichas do catálogo em vez de conferir uma a uma}{R1.2. (meta)data are associated with detailed provenance}{R1.2. (meta)dados são associados a proveniência detalhada.}{WILKINSON et al., 2016, p.~160018}

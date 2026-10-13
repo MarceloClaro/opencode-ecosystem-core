@@ -32,12 +32,20 @@ def _isolated_registry() -> Iterator[SpecRegistry]:
     """Isola o singleton do registro para specs temporárias."""
     registry = SpecRegistry()
     original_specs = dict(registry.specs)
+    original_sources = dict(registry._formal_sources)
+    original_ambiguities = dict(registry.ambiguous_spec_sources)
     registry.specs.clear()
+    registry._formal_sources.clear()
+    registry.ambiguous_spec_sources.clear()
     try:
         yield registry
     finally:
         registry.specs.clear()
         registry.specs.update(original_specs)
+        registry._formal_sources.clear()
+        registry._formal_sources.update(original_sources)
+        registry.ambiguous_spec_sources.clear()
+        registry.ambiguous_spec_sources.update(original_ambiguities)
 
 
 def _write_spec(
@@ -142,7 +150,7 @@ def test_v1_contract_requires_every_markdown_criterion(tmp_path: Path) -> None:
             },
         )
 
-        result = SpecVerifier(registry).verify(spec_id, {"delivery": "presente"})
+        result = SpecVerifier(registry).verify(spec_id, {"delivery": "presente"}, require_red_history=False)
 
     assert spec.evidence_contract_mode == "criterion-runtime-v1"
     assert spec.evidence_contract_valid is False
@@ -171,6 +179,7 @@ def test_v1_rejects_global_evidence_without_criterion_records(
             spec_id,
             {"delivery": "presente"},
             trusted_test_evidence=global_only,
+            require_red_history=False,
         )
 
     assert spec.evidence_contract_valid is True
@@ -186,7 +195,7 @@ def test_v1_rejects_global_evidence_without_criterion_records(
 def test_v1_requires_matching_runtime_bound_records(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """Registros selados precisam coincidir com IDs, alvos e fingerprint v1."""
+    """Inspeção de registros selados exige IDs, alvos e fingerprint; sem histórico RED."""
     with _isolated_registry() as registry:
         _, spec_id, spec = _load_strict_spec(tmp_path)
         monkeypatch.setattr(tdd_runner_module, "run_pytest", _passing_outcome)
@@ -196,6 +205,7 @@ def test_v1_requires_matching_runtime_bound_records(
             spec_id,
             {"delivery": "presente"},
             trusted_test_evidence=evidence,
+            require_red_history=False,
         )
         replay_with_other_contract = _issue_trusted_test_evidence(
             spec_id,
@@ -211,6 +221,7 @@ def test_v1_requires_matching_runtime_bound_records(
             spec_id,
             {"delivery": "presente"},
             trusted_test_evidence=replay_with_other_contract,
+            require_red_history=False,
         )
         agent_payload = SpecVerifier(registry).verify(
             spec_id,
@@ -220,12 +231,14 @@ def test_v1_requires_matching_runtime_bound_records(
                     "beta": {"passed": True},
                 }
             },
+            require_red_history=False,
         )
 
     assert evidence.to_dict()["scope"] == "local_runtime"
     assert evidence.to_dict()["external_validation"] is False
     assert len(evidence.criterion_records) == 2
     assert result["verified"] is True
+    assert result["verification_scope"] == "criteria_only"
     assert rejected["verified"] is False
     assert agent_payload["verified"] is False
 
@@ -245,11 +258,14 @@ def test_v1_rejects_invalid_targets_and_nonpassing_outcomes(
             },
         )
         invalid_result = SpecVerifier(registry).verify(
-            invalid_spec_id, {"delivery": "presente"}
+            invalid_spec_id, {"delivery": "presente"},
+            require_red_history=False,
         )
         assert invalid_spec.evidence_contract_valid is False
 
         registry.specs.clear()
+        registry._formal_sources.clear()
+        registry.ambiguous_spec_sources.clear()
         _, spec_id, spec = _load_strict_spec(tmp_path / "valid")
 
         def skipped_outcome(_target: str) -> dict[str, object]:
@@ -270,6 +286,7 @@ def test_v1_rejects_invalid_targets_and_nonpassing_outcomes(
             spec_id,
             {"delivery": "presente"},
             trusted_test_evidence=evidence,
+            require_red_history=False,
         )
 
     assert invalid_result["verified"] is False
@@ -290,7 +307,7 @@ def test_v1_loaded_green_frontmatter_starts_red(tmp_path: Path) -> None:
 def test_legacy_markdown_contracts_remain_compatible(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """Specs sem contrato v1 mantêm a rota histórica, explicitamente legada."""
+    """Inspeção de contrato sem v1 é legada; GREEN isolado não é aceite de entrega."""
     spec_id = "SPEC-TEST-R454-LEGADA"
     with _isolated_registry() as registry:
         _write_spec(tmp_path, spec_id)
@@ -303,11 +320,13 @@ def test_legacy_markdown_contracts_remain_compatible(
             spec_id,
             {"delivery": "presente"},
             trusted_test_evidence=evidence,
+            require_red_history=False,
         )
 
     assert spec.evidence_contract_mode == "legacy"
     assert result["verified"] is True
-    assert result["status"] == "green"
+    assert result["status"] == "criteria_passed"
+    assert result["verification_scope"] == "criteria_only"
 
 
 def test_r447_receipt_and_criteria_are_traceable() -> None:
@@ -368,6 +387,7 @@ def test_runtime_evidence_is_locally_scoped(tmp_path: Path, monkeypatch: pytest.
             spec_id,
             {"delivery": "presente"},
             trusted_test_evidence=evidence,
+            require_red_history=False,
         )
 
     projection = evidence.to_dict()

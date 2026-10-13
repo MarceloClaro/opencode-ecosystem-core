@@ -1,5 +1,5 @@
 ---
-spec_id: SPEC-935-R440
+spec_id: SPEC-935-R440-microsoft-apm-integration
 title: Integração com Microsoft APM (Agent Package Manager)
 component: integrations/apm, marceloclaro/cli, marceloclaro/orchestrator, doctor
 status: verified

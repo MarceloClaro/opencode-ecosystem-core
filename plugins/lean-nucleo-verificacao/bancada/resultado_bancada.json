@@ -1,0 +1,95 @@
+{
+  "seeds": "11,22,33,44,55",
+  "n_decisoes": 200,
+  "atencao": {
+    "regret_medio": 0.042129070196756734,
+    "regret_ci95": 0.010485649589724554,
+    "hit_rate": 0.625,
+    "hit_ci95": 0.06709601329438285
+  },
+  "aleatorio": {
+    "regret_medio": 0.1882442013158154,
+    "regret_ci95": 0.021944298385093076,
+    "hit_rate": 0.2,
+    "hit_ci95": 0.055437171645025325
+  },
+  "menor_carga": {
+    "regret_medio": 0.21672938169919892,
+    "regret_ci95": 0.024984665750796456,
+    "hit_rate": 0.215,
+    "hit_ci95": 0.05693707228159874
+  },
+  "maior_cobertura": {
+    "regret_medio": 0.2117704733933451,
+    "regret_ci95": 0.021470227249410667,
+    "hit_rate": 0.165,
+    "hit_ci95": 0.051442999523744724
+  },
+  "atencao_lat_ms": {
+    "media": 2.1652001788606867,
+    "max": 31.241488992236555
+  },
+  "softmax_desvio_max": 1.1102230246251565e-16,
+  "amostra": [
+    {
+      "seed": 11,
+      "task": 0,
+      "n_elig": 4,
+      "oracle_best": 0.8823401876326291,
+      "atencao_escolha": "ag_00",
+      "atencao_regret": 0.0,
+      "atencao_hit": 1,
+      "atencao_lat_ms": 31.241488992236555,
+      "softmax_sum": 1.0,
+      "aleatorio_escolha": "ag_07",
+      "menor_carga_escolha": "ag_07",
+      "maior_cobertura_escolha": "ag_07",
+      "aleatorio_regret": 0.07739468623161194,
+      "aleatorio_hit": 0,
+      "menor_carga_regret": 0.07739468623161194,
+      "menor_carga_hit": 0,
+      "maior_cobertura_regret": 0.07739468623161194,
+      "maior_cobertura_hit": 0
+    },
+    {
+      "seed": 11,
+      "task": 1,
+      "n_elig": 6,
+      "oracle_best": 0.9893160524792669,
+      "atencao_escolha": "ag_32",
+      "atencao_regret": 0.1860276732480003,
+      "atencao_hit": 0,
+      "atencao_lat_ms": 2.270071068778634,
+      "softmax_sum": 1.0,
+      "aleatorio_escolha": "ag_25",
+      "menor_carga_escolha": "ag_03",
+      "maior_cobertura_escolha": "ag_27",
+      "aleatorio_regret": 0.5818477472094881,
+      "aleatorio_hit": 0,
+      "menor_carga_regret": 0.412825110091508,
+      "menor_carga_hit": 0,
+      "maior_cobertura_regret": 0.22854489374948017,
+      "maior_cobertura_hit": 0
+    },
+    {
+      "seed": 11,
+      "task": 2,
+      "n_elig": 4,
+      "oracle_best": 0.8823401876326291,
+      "atencao_escolha": "ag_00",
+      "atencao_regret": 0.0,
+      "atencao_hit": 1,
+      "atencao_lat_ms": 1.2811570195481181,
+      "softmax_sum": 1.0,
+      "aleatorio_escolha": "ag_09",
+      "menor_carga_escolha": "ag_03",
+      "maior_cobertura_escolha": "ag_03",
+      "aleatorio_regret": 0.177020923739184,
+      "aleatorio_hit": 0,
+      "menor_carga_regret": 0.3058492452448702,
+      "menor_carga_hit": 0,
+      "maior_cobertura_regret": 0.3058492452448702,
+      "maior_cobertura_hit": 0
+    }
+  ]
+}

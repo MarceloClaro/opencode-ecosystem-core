@@ -1,0 +1,91 @@
+{
+  "spec": "SPEC-935-R852",
+  "provider": {
+    "id": "jeb",
+    "name": "JEB",
+    "version": "5.48.0.202610071539",
+    "endpoint": "http://127.0.0.1:8425/mcp",
+    "server": "jeb-mcp-server 1.3.0"
+  },
+  "rei_env": "REA_JEB_MCP_URL=http://127.0.0.1:8425/mcp",
+  "subject": {
+    "name": "soma",
+    "sha256": "bc50349dc46a1225e40307d2a3b54ec65775478f3358510ca4df507c0935cabd",
+    "bytes": 15800,
+    "format": "elf",
+    "architecture": "x86_64",
+    "local_path": "/tmp/opencode/jeb/target/soma",
+    "source": "int soma(int a, int b) { return a + b; }\nint main(void) { return soma(2, 3); }\n",
+    "build": "cc -O0 (gcc), not stripped"
+  },
+  "engine_start": {
+    "note": "headless JEB 5.48.0 does not advertise open_project (REA preserves the refusal); the target was selected at engine start with --infile",
+    "command": "./jeb_linux.sh -c --mcp --interface=127.0.0.1 --port=8425 --infile=/tmp/opencode/jeb/target/soma"
+  },
+  "observations": [
+    {
+      "operation": "inspect_jeb_client",
+      "evidence_id": "ev_81d15d2a61e256e9d99a088c684790539206ccb5a069444dc83c085b97993cfe",
+      "raw_result": {
+        "success": true,
+        "version": "5.48.0.202610071539",
+        "gui_client": false,
+        "startup_ts": 1791881113
+      },
+      "confidence": "observed",
+      "authority": "shipped-artifact"
+    },
+    {
+      "operation": "list_jeb_units",
+      "evidence_id": "ev_5aa858e10a3f235a3ba34540a6d440b3930ecc55fd2670df1dbcbd94b4d94038",
+      "units": [
+        { "unit_path": "soma/soma", "unit_type": "elf" },
+        { "unit_path": "soma/soma/metadata", "unit_type": "generic" },
+        { "unit_path": "soma/soma/x86_64-image", "unit_type": "x86_64" }
+      ],
+      "coverage": "complete",
+      "confidence": "observed",
+      "authority": "shipped-artifact"
+    },
+    {
+      "operation": "decompile_jeb_item",
+      "evidence_id": "ev_874890adf3cfcfbd76296277c30e7c8ec48b4ba1a88580d546da51c42900c06b",
+      "parameters": { "unit_path": "soma/soma/x86_64-image", "item_address": "soma", "item_kind": "method" },
+      "text": "long soma(int param0, int param1) {\n    return (uint64_t)(param1 + param0);\n}\n",
+      "confidence": "derived",
+      "authority": "shipped-artifact"
+    },
+    {
+      "operation": "decompile_jeb_item",
+      "evidence_id": "ev_a561ce57172274fea8f707f0685a20f22507c0c4be4e34e55f50ac6477865664",
+      "parameters": { "unit_path": "soma/soma/x86_64-image", "item_address": "main", "item_kind": "method" },
+      "text": "int main() {\n    return (int)soma(2, 3);\n}\n",
+      "confidence": "derived",
+      "authority": "shipped-artifact"
+    },
+    {
+      "operation": "decompile_jeb_item",
+      "evidence_id": "ev_c0e2490948207ebecf508f360ec4ee707d649206d294319b03419c35066cd4ea",
+      "parameters": { "unit_path": "soma/soma/x86_64-image", "item_address": "sub_11026", "item_kind": "method" },
+      "text": "long sub_11026() {\n    return gvar_13FD0();\n}\n",
+      "confidence": "derived",
+      "authority": "shipped-artifact"
+    }
+  ],
+  "engine_limitations": [
+    "headless JEB 5.48.0 does not advertise open_project; the target must be selected at engine start (--infile)",
+    "Artifact identity is unavailable for this observation.",
+    "The engine caps unit pages at 100; a full page means more units may exist."
+  ],
+  "reproduce": [
+    "export REA_JEB_MCP_URL='http://127.0.0.1:8425/mcp'",
+    "node ~/.local/share/opencode-core/rea/scripts/rea.mjs inspect-jeb-client",
+    "node ~/.local/share/opencode-core/rea/scripts/rea.mjs list-jeb-units --count 20 --format json",
+    "node ~/.local/share/opencode-core/rea/scripts/rea.mjs decompile-jeb-item soma method --unit-path soma/soma/x86_64-image --format json",
+    "node ~/.local/share/opencode-core/rea/scripts/rea.mjs decompile-jeb-item main method --unit-path soma/soma/x86_64-image --format json"
+  ],
+  "flags": {
+    "externally_validated": false,
+    "confidence_promoted": false
+  }
+}

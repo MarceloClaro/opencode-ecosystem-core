@@ -88,8 +88,15 @@ Pipeline típico:
 \end{flowch}
 
 \begin{descricao}
-\textbf{Como funciona e por quê.} Os dezesseis estágios do MASWOS aparecem no desenho como \emph{cadeia com portões}, e a semântica da seta muda quando atravessa um portão: antes do portão é \emph{texto}, depois é \emph{evidência}. É essa mudança de tipo que o desenho precisa comunicar, porque um pipeline de estágios onde todos os nós são texto é apenas um índice remissivo.
-\textbf{Justificativa.} A exigência de relato completo e rastreável em revisões sistemáticas define o padrão técnico: cada afirmação precisa de um método declarado e de um rastro verificável até os dados. A corrente do portão é a tradução disso para escrita --- um estágio que não produz um item verificável não avançou, e o pipeline de texto sem portão é o que a comunidade acadêmica já pagou um preço alto em casos de fraude e retratação \citref{PAGE, M. J. et al. PRISMA 2020 explanation and elaboration: updated guidance and exemplars for reporting systematic reviews. \emph{BMJ}, v.~372, n160, 2021}{10.1136/bmj.n160}{A exigência de relato completo e rastreável em revisões sistemáticas define o padrão técnico: cada afirmação precisa de um método declarado e de um rastro verificável até os dados. }{reports of systematic reviews should be transparent and complete}{os relatos de revisões sistemáticas devem ser transparentes e completos.}{PAGE et al., 2021, p.~n160}.\end{descricao}
+\textbf{Como funciona e por quê.} As setas ordenam um roteiro de produção: delimitação, busca, evidências, estrutura, revisão, método, resultados, conclusão e controle editorial. Em cada passagem, os insumos precisam sustentar a seção seguinte; lacunas devem permanecer explícitas.
+\textbf{Justificativa.} Definir a pergunta e as fontes antes de escrever resultados evita preencher a estrutura com evidência inexistente.
+\textbf{Limite.} O diagrama organiza trabalho editorial. Rubrica interna e configuração de etapas não significam coleta de dados, avaliação clínica, aprovação de banca ou aceitação por periódico.
+\end{descricao}
+\fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator.academic_pipeline}
+
+
+\noindent\textit{Contexto bibliográfico geral, sem certificação desta rota.} \citref{PAGE, M. J. et al. PRISMA 2020 explanation and elaboration: updated guidance and exemplars for reporting systematic reviews. \emph{BMJ}, v.~372, n160, 2021}{10.1136/bmj.n160}{Enquadramento teórico geral; a implementação desta rota é conferida na fonte primária local. Este artigo não certifica o funcionamento nem o desempenho do Core.}{reports of systematic reviews should be transparent and complete}{os relatos de revisões sistemáticas devem ser transparentes e completos.}{PAGE et al., 2021, p.~n160}
+
 
 \begin{niveis}
 \textbf{Intuição:} uma equipe de redatores trabalhando em esteira: cada especialista
@@ -183,8 +190,15 @@ Pipeline de auditoria:
 \end{flowch}
 
 \begin{descricao}
-\textbf{Como funciona e por quê.} O desenho mostra vários verificadores em paralelo alimentando um \emph{agregador}, e a seta do agregador para o veredito é uma \textbf{redução} de múltiplas dimensões a uma só. O detalhe do desenho é que existe uma seta que \textbf{não passa} pelo agregador: o bloqueio por erro duro, que interrompe antes da redução. Sem essa saída lateral, um erro fatal viraria apenas ``um escore mais baixo''.
-\textbf{Justificativa.} A metacognição inclui monitorar o próprio conhecimento, não só produzi-lo --- e monitorar exige distinguir \emph{o que eu sei} de \emph{o que eu acho que sei}. O agregador do desenho é a implementação dessa distinção quando aplicada a um texto: cada scanner é uma sondagem de uma dimensão específica, e a redução só é legítima porque as dimensões são independentes e declaradas \citref{FLAVELL, J. H. Metacognition and cognitive monitoring: a new area of cognitive-developmental inquiry. \emph{American Psychologist}, v.~34, n.~10, p.~906-911, 1979}{10.1037/0003-066X.34.10.906}{A metacognição inclui monitorar o próprio conhecimento, não só produzi-lo --- e monitorar exige distinguir \emph{o que eu sei} de \emph{o que eu acho que sei}. }{Metacognition refers, among other things, to the active monitoring and consequent regulation and orchestration of these processes}{A metacognição refere-se, entre outras coisas, ao monitoramento ativo e à consequente regulação e orquestração desses processos.}{FLAVELL, 1979, p.~906--911}.\end{descricao}
+\textbf{Como funciona e por quê.} Os scanners recebem um corpus e produzem achados que a consolidação reúne com seu escopo e recomendações. As setas convergentes indicam reunião de resultados; não demonstram que cada scanner rode simultaneamente.
+\textbf{Justificativa.} Conservar o corpus e a origem do achado permite reproduzir a regra que o sinalizou e distinguir falha estrutural de análise de conteúdo.
+\textbf{Limite.} Scores e heurísticas são internos. Um texto pode satisfazer padrões lexicais sem ter mérito científico; decisões negativas precisam de interpretação e evidência contextual.
+\end{descricao}
+\fontecore{scanners/pipeline.py}{DiagnosticPipeline.run}
+
+
+\noindent\textit{Contexto bibliográfico geral, sem certificação desta rota.} \citref{FLAVELL, J. H. Metacognition and cognitive monitoring: a new area of cognitive-developmental inquiry. \emph{American Psychologist}, v.~34, n.~10, p.~906-911, 1979}{10.1037/0003-066X.34.10.906}{Enquadramento teórico geral; a implementação desta rota é conferida na fonte primária local. Este artigo não certifica o funcionamento nem o desempenho do Core.}{Metacognition refers, among other things, to the active monitoring and consequent regulation and orchestration of these processes}{A metacognição refere-se, entre outras coisas, ao monitoramento ativo e à consequente regulação e orquestração desses processos.}{FLAVELL, 1979, p.~906--911}
+
 
 \begin{aviso}
 Escolário SRI e EXS são \emph{heurísticos internos de auditoria}: nunca uma
@@ -316,7 +330,7 @@ disciplina (MiroFish). Cada um com limite declarado — é dessa cultura de
 
 \begin{resultado}
 \textbf{O que você deve ter aprendido:} (1) pipelines científicos com
-pré-registro, evidência e replicação federada; (2) \pth{mci/metacognitive\_evaluator.py}
+pré-registro, evidência e replicação federada; (2) \pth{mci/metacognitive_evaluator.py}
 classifica prontidão e nunca ``verificado'' sem validação externa;
 (3) CORRIGENDUM documenta alegações corrigidas.
 \textbf{Exercício sugerido:} pegue uma afirmação técnica que você acredita
@@ -376,7 +390,7 @@ o item crítico carrega a informação que a média apaga.
 \end{resultado}
 
 \begin{resultado}
-\textbf{Como conferir a rubrica.} O SRI é apresentado neste projeto numa escala
+\textbf{Ordem de grandeza e verificação: Como conferir a rubrica} O SRI é apresentado neste projeto numa escala
 de 0 a 100. Para saber como uma lacuna afeta a nota, abra a regra de pontuação do
 scanner e compare dois textos controlados, alterando um item por vez. Um exemplo
 hipotético: se a rubrica descontar 20 pontos pela falta de um requisito crítico,

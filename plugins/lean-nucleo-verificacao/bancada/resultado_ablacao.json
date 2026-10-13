@@ -1,0 +1,44 @@
+{
+  "n_decisoes": 200,
+  "estrategias": {
+    "atencao": {
+      "regret_medio": 0.029225389074862506,
+      "regret_ci95": 0.007230945339903801
+    },
+    "conf_embaralhada": {
+      "regret_medio": 0.22426679160131038,
+      "regret_ci95": 0.022864333607136075,
+      "diff_pareado_medio": 0.1950414025264479,
+      "diff_pareado_ci95": 0.02498802673358949,
+      "atencao_vence_ou_empata": 0.92
+    },
+    "conf_anticorrelacionada": {
+      "regret_medio": 0.3603971388968031,
+      "regret_ci95": 0.016170828148907815,
+      "diff_pareado_medio": 0.3311717498219406,
+      "diff_pareado_ci95": 0.01940787132374983,
+      "atencao_vence_ou_empata": 0.97
+    },
+    "conf_ruidosa": {
+      "regret_medio": 0.15148709627560522,
+      "regret_ci95": 0.020627974336632736,
+      "diff_pareado_medio": 0.12226170720074273,
+      "diff_pareado_ci95": 0.021799694354323294,
+      "atencao_vence_ou_empata": 0.93
+    },
+    "media_igual": {
+      "regret_medio": 0.06379858794583657,
+      "regret_ci95": 0.012449442784500341,
+      "diff_pareado_medio": 0.03457319887097407,
+      "diff_pareado_ci95": 0.0111843088089073,
+      "atencao_vence_ou_empata": 0.99
+    },
+    "sem_confianca": {
+      "regret_medio": 0.21443099589507905,
+      "regret_ci95": 0.022839732456783026,
+      "diff_pareado_medio": 0.18520560682021653,
+      "diff_pareado_ci95": 0.02367528180202713,
+      "atencao_vence_ou_empata": 0.98
+    }
+  }
+}

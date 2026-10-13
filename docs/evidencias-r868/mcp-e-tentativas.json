@@ -1,0 +1,65 @@
+{
+  "format": "sanitized_local_summary",
+  "externally_validated": false,
+  "scope": "MCP status completed; separate target-analysis attempts failed or were blocked, not accepted analytical deliveries",
+  "completed_mcp_status": {
+    "tool": "core_rea_status",
+    "success": true,
+    "verification": "local_readiness_probe",
+    "installation_available": true,
+    "installation_verification": "installation_only",
+    "guard_success": true,
+    "external_route_available": false,
+    "target_analysis_completed": false
+  },
+  "interactive_status_attempt": {
+    "returncode": 0,
+    "duration_seconds": 76.37961538100012,
+    "verification": "client_exit_only",
+    "target_analysis_completed": false
+  },
+  "prior_failed_analysis_attempt": {
+    "returncode": 0,
+    "tools": [
+      {
+        "tool": "core_rea_inspect",
+        "status": "error"
+      },
+      {
+        "tool": "core_rea_explain",
+        "status": "error"
+      },
+      {
+        "tool": "core_rea_status",
+        "status": "completed"
+      }
+    ],
+    "failure_categories": [
+      "invalid_kind_argument",
+      "invalid_receipt_argument"
+    ],
+    "accepted_target_analysis": false,
+    "limitation": "client exit zero and generated text did not establish analysis success"
+  },
+  "guarded_prompt_attempt": {
+    "success": false,
+    "verification": "blocked_unverified_agent_output",
+    "verified_target_analysis": false,
+    "model_inference_verified": false
+  },
+  "qwen_prompt_attempt": {
+    "returncode": 1,
+    "duration_seconds": 305.88083391600003,
+    "timeout_seconds": 300,
+    "error_category": "timeout",
+    "accepted_target_analysis": false
+  },
+  "source_sha256": {
+    "inspection-agent-receipt.json": "4cb1c83471b9700ea788fb6eeea981036109c71edf933474d2a2b4005fc32e91",
+    "capability-agent-exit.json": "8bedf8abfc4a1c2645c6f4b1307dfd6b55e1a415413c25618e5734add1d7ecb8",
+    "capability-agent-real.txt": "1c4b0c9a98743607ecd070c62383553fb5094b4bd7ece45963458c46fee8d4dc",
+    "inspection-agent-typed.txt": "35272de5a164d397dc56c312bc332deeb5ddcf537facccb3d8d0afcf1b44cc48",
+    "qwen-compact-analysis-receipt.json": "c9c68d8a56380c38f65e6a26a0da5d9480b7b0ac72bfe258f0b2290accfd2bfc",
+    "qwen-compact-analysis.txt": "5af17ce85936699e7ff9eb1b9db58f8cbd0eb1d171b7d4a25f13d49b78f8c159"
+  }
+}

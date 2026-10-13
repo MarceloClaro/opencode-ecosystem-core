@@ -1,3 +1,57 @@
+# PROGRESS — Estado corrente e arquivo de checkpoints
+
+## Estado atual — orientação de 12/10/2026
+
+A retomada parte do checkout e da tarefa atual. O bloco abaixo deriva as
+contagens das fontes locais; o histórico R414 preservado ao final não representa
+o último estado operacional do Core.
+
+<!-- core-state:start -->
+**255 agentes** · **16 MCPs** · **30 comandos** · **22 checks**
+
+Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
+
+Para conferir estes blocos, execute na raiz `.venv/bin/python scripts/reconcile_operational_docs.py --check`; para sincronizá-los, execute o mesmo comando sem `--check`.
+<!-- core-state:end -->
+
+Leia [MANUAL.md](MANUAL.md) para os comandos correntes e
+[ARCHITECTURE.md](ARCHITECTURE.md) para as rotas do orquestrador. Consulte
+[as specs](specs/) e [o registro de evolução](evolution/cycles.json) para o
+escopo de cada revisão. [REA](docs/REA.md), [o navegador coordenado](docs/NAVEGADOR_REAL.md)
+e [o contrato de interrupção](specs/SPEC-935-R825-execution-cancellation.md)
+explicam integrações e limites específicos. Recibos datados em `outputs/` e
+`docs/evidence/` são evidências de execuções determinadas; uma suíte interrompida
+não comprova o aceite integral.
+
+## Como retomar
+
+1. Confira a tarefa corrente, as instruções de `AGENTS.md` e `git status --short`.
+2. Execute `.venv/bin/python -m marceloclaro.cli doctor`; distingua inventário,
+   credenciais e inferência efetivamente executada.
+3. Leia a spec e os recibos da frente atual. Retome apenas o trabalho que falta,
+   preservando alterações e resultados das outras frentes.
+4. Confira os blocos de inventário com
+   `.venv/bin/python scripts/reconcile_operational_docs.py --check`.
+
+## Próximos passos de cada revisão
+
+Registre o requisito e a falha, aplique a correção e valide seu escopo. Consolide
+os gates necessários antes de declarar conclusão. Ao alterar o catálogo,
+regenere `opencode.json`; ao alterar contagens ou fontes do livro, regenere seu
+inventário e confira novamente o PDF. Atualize esta orientação sem apagar o
+arquivo histórico ou transformar suas pendências em estado corrente.
+
+## Arquivo histórico preservado — até R414, de 13/08/2026
+
+O texto abaixo foi preservado integralmente. Suas contagens, estado de branch,
+pendências de manuscritos, dependências e instruções de retomada pertencem aos
+checkpoints antigos. Consulte a evidência e o responsável de cada frente antes
+de reutilizar uma conclusão científica ou uma pendência de publicação.
+
+<details>
+<summary>Consultar os checkpoints anteriores</summary>
+
+<!-- core-progress-history:start -->
 # PROGRESS — Checkpoint de trabalho resumível
 
 > Arquivo vivo (R129). Serve para **retomar o trabalho de onde parou** se
@@ -1040,3 +1094,6 @@
 
 Trabalho longo é quebrado em **passos pequenos, cada um commitável e verificável**.
 Se a sessão acabar, a próxima retoma sem re-derivar contexto — a perda máxima é o passo em andamento, não o trabalho inteiro.
+<!-- core-progress-history:end -->
+
+</details>

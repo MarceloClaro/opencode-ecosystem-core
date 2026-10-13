@@ -1,0 +1,55 @@
+{
+  "scope": "R496: diagnóstico profundo preservado pela entrada estruturada R816",
+  "verification": "real_local_tool_and_orchestrator",
+  "external_model_inference_executed": false,
+  "operational_product_changed_by_this_subtask": false,
+  "old_representation_red": {
+    "failed": 2,
+    "passed": 1,
+    "artifact": "regression-r496-red.txt"
+  },
+  "historical_concurrent_gate": {
+    "tests": 71,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 0,
+    "duration_seconds": 362.583
+  },
+  "concurrent_failure": "TimeoutExpired(90 s) enquanto havia renderização pesada; mantido no histórico.",
+  "cold_same_test": {
+    "passed": 1,
+    "duration_seconds": 28.28,
+    "artifact": "regression-route-cold.txt"
+  },
+  "final_gate": {
+    "tests": 71,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "duration_seconds": 282.097
+  },
+  "mutants_killed": 2,
+  "mutations": [
+    {
+      "name": "dispatch_diagnose_without_deep",
+      "killed": true,
+      "exception": "KeyError",
+      "message": "'inertia'",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/marceloclaro/opencode-ecosystem-core/outputs/core-r816/regression-mutation.py\", line 48, in <module>\n    regression._diagnose_from_config(config)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^\n  File \"/home/marceloclaro/opencode-ecosystem-core/tests/test_r496_pipeline_integration.py\", line 189, in _diagnose_from_config\n    assert report[\"inertia\"][\"n_assessments\"] > 0\n           ~~~~~~^^^^^^^^^^^\nKeyError: 'inertia'\n"
+    },
+    {
+      "name": "configured_diagnose_routes_to_reason",
+      "killed": true
+    }
+  ],
+  "source_sha256": {
+    "integrations/opencode_commands.py": "8db6b5d7b29c8672c59fadbef423721cefa9c0d0b48db02fad39e08d082aa894",
+    "integrations/opencode_cli.py": "e1839aa62ddd549cbe3e9cfee3957b7b2d29ff6298967a6b452a2e035ff2d4e3",
+    ".opencode/tools/core_command.ts": "ef1e010030a341d5afd6d49ee64257c5c22f9a2886fd12d428ba331fba32c013",
+    "tests/test_r496_pipeline_integration.py": "7d408b76b223516458037607dc9bbfd283a6853bf4f5684d4c3908e4f750e6b5"
+  },
+  "limitations": [
+    "A ferramenta estruturada real foi executada; não houve prova da interpretação do prompt por um modelo.",
+    "O parser textual upstream do OpenCode permanece uma fronteira distinta."
+  ]
+}

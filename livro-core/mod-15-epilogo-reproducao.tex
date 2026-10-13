@@ -27,7 +27,7 @@ A infraestrutura de reutiliza\c{c}\~ao \'e a condi\c{c}\~ao para que a reprodu\c
 \elemento{Planta em doze passos}{\metainfo{ID}{REP-12} \hfill \metainfo{Tempo}{cerca de uma tarde} \hfill \metainfo{Gate}{parar no primeiro desvio}}
 
 \begin{descricao}
-Passos 1 a 4 preparam o terreno. Passo 1: clone ou atualize o reposit\'orio e anote o hash do commit. Passo 2: crie o ambiente virtual Python 3 e ative-o. Passo 3: instale com \pth{make install} e \pth{make setup}, depois \pth{make setup-dev} ou \pth{make setup-science} se precisar. Passo 4: rode \pth{python3 -m marceloclaro.cli doctor} e guarde as 20 linhas de veredito. Esperado: specs formais carregadas, registro de evolu\c{c}\~ao \'integro, mem\'oria acess\'ivel. Se faltar CLI externa, o diagn\'ostico avisa em amarelo; anote como depend\^encia opcional ausente, n\~ao como falha total.
+Passos 1 a 4 preparam o terreno. Passo 1: clone ou atualize o reposit\'orio e anote o hash do commit. Passo 2: crie o ambiente virtual Python 3 e ative-o. Passo 3: instale com \pth{make install} e \pth{make setup}, depois \pth{make setup-dev} ou \pth{make setup-science} se precisar. Passo 4: rode \pth{python3 -m marceloclaro.cli doctor} e guarde as linhas de veredito. Esperado: specs formais carregadas, registro de evolu\c{c}\~ao \'integro, mem\'oria acess\'ivel. Se faltar CLI externa, o diagn\'ostico avisa em amarelo; anote como depend\^encia opcional ausente, n\~ao como falha total.
 \end{descricao}
 
 \begin{descricao}
@@ -107,3 +107,35 @@ Limite do ep\'ilogo. A planta foi testada neste checkout em 05/10/2026; depend\^
 \begin{referencia}
 \textbf{RAFIQUE, Y.; MISIC, V. B.} The effects of TDD: a meta-analysis. \emph{IEEE Transactions on Software Engineering}, v.~39, n.~6, p.~835-856, 2013. DOI: \href{https://doi.org/10.1109/TSE.2012.28}{10.1109/TSE.2012.28}. Uso: limite do que TDD promete.
 \end{referencia}
+
+
+% R814: leitura guiada substantiva; cenários hipotéticos rotulados.
+\section[Leitura guiada]{Leitura guiada — Reprodução: repetir uma operação e registrar seu alcance}
+\elemento{Leitura guiada — R814-15}{\metainfo{Ciclo}{R814}}
+\begin{descricao}
+\textbf{O fenômeno.} Repetir uma instrução pode produzir um arquivo diferente ou falhar por uma dependência ausente. A finalidade do roteiro é preservar as condições e o resultado, incluindo resultados negativos.
+\end{descricao}
+
+\begin{definicao}
+\textbf{Grandezas e definições.} Versão identifica o código; parâmetro define uma condição de execução; hash identifica bytes; critério de aceite especifica a comparação. Igualdade de hash não prova validade científica.
+\end{definicao}
+
+\begin{metodo}
+\textbf{Dedução passo a passo.} Escolha uma operação, registre fontes, ambiente e parâmetros, execute e compare a saída com o critério. Se houver divergência, preserve os dois resultados e descreva a condição antes de alterar o procedimento.
+\end{metodo}
+
+\begin{resultado}
+\textbf{Exemplo resolvido.} Considere três artefatos de uma operação hipotética. Se dois hashes coincidem e um diverge, há igualdade de bytes em $2/3$ dos artefatos comparados. Não conclua que a reprodução está completa: investigue o terceiro e verifique se os dois primeiros são os artefatos corretos.
+\end{resultado}
+
+\begin{resultado}
+\textbf{Ordem de grandeza e verificação.} Use o inventário gerado e os logs de testes e compilação. Confira também a aparência do PDF, porque igualdade de fontes ou compilação sem erro não demonstra que uma tabela esteja legível.
+\end{resultado}
+
+\begin{aviso}
+\textbf{Limite de validade.} Reprodução local não é replicação independente de uma conclusão científica. Modelos remotos, credenciais e hardware podem limitar a repetição; esses limites devem acompanhar o resultado.
+\end{aviso}
+
+\begin{resultado}
+\textbf{Exercícios.} Defina um artefato cuja igualdade precisa ser exata e outro que admite variação. Escreva o critério antes da execução. Registre uma divergência sem substituí-la por uma aprovação.
+\end{resultado}

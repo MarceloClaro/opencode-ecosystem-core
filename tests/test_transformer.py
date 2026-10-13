@@ -91,7 +91,13 @@ def test_pipeline_generate_verify_revise():
     assert result["layers_used"] >= 2, "Deve ter havido pelo menos uma revisão"
 
 
-def test_hierarchical_memory_retrieve():
+def test_hierarchical_memory_retrieve(monkeypatch):
+    # Unidade com os dois registros definidos abaixo. O histórico de outros
+    # testes contém observações reais com palavras iguais e não é seu corpus.
+    monkeypatch.setattr(metabus.memory, "episodic", [])
+    monkeypatch.setattr(metabus.memory, "semantic", {})
+    monkeypatch.setattr(metabus.memory, "confidence_ledger", {})
+    monkeypatch.setattr(metabus.memory, "_save", lambda: None)
     metabus.memory.add_reflection("researcher", "busca de artigos sobre atenção",
                                   "usar bases indexadas primeiro", 0.9)
     metabus.memory.add_reflection("coder", "correção de bug no parser yaml",

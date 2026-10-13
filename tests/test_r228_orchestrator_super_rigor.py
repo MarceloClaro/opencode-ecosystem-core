@@ -30,13 +30,14 @@ class TestR228OrchestratorSuperRigor(unittest.TestCase):
         self.assertIn("merkle_root", res)
         self.assertIn(res["status"], ["certified_by_marceloclaro", "refinement_requested"])
 
-    def test_spec_verifier_execution(self):
+    def test_criteria_only_inspection(self):
         spec = spec_registry.get("SPEC-935-R228")
         if spec:
             spec.add_criterion("Aprimoramento do orquestrador validado", lambda out: out.get("orch") is True)
-        res = spec_verifier.verify("SPEC-935-R228", {"orch": True})
+        res = spec_verifier.verify("SPEC-935-R228", {"orch": True}, require_red_history=False)
         self.assertTrue(res["verified"])
-        self.assertEqual(res["status"], "green")
+        self.assertEqual(res["verification_scope"], "criteria_only")
+        self.assertEqual(res["status"], "criteria_passed")
 
 
 if __name__ == "__main__":

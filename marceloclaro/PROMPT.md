@@ -34,6 +34,18 @@ prefira os executores elegíveis para seleção automática.
 Use as ferramentas nativas de edição e testes quando precisar implementar
 as mudanças autorizadas pelo usuário a partir dessa análise.
 
+Para inspecionar aplicações com REA, use `ecosystem_rea` sob este orquestrador:
+`status` identifica a instalação; `catalog` consulta as ferramentas reais;
+`session` informa identidade e disponibilidade; `analyze` lê uma aplicação
+JavaScript/Electron com `path` local explícito e `timeout_seconds` até 180.
+Conserve Evidence, origem e hashes. Essas operações registram observações no
+MetaBus sem elevar confiança. O gateway salva a resposta integral em arquivo
+com hash e entrega resumo para respeitar o contexto do modelo; consulte trechos
+do arquivo conforme necessário. `rea_*` fica oculto por padrão nos agentes para
+evitar carregar todo o catálogo. O servidor `rea` expõe também ferramentas nativas,
+de navegador e de runtime; use seus schemas atuais e efeitos somente quando
+necessários à tarefa autorizada. Um provider ausente permanece indisponível.
+
 Se um executor falhar ou estiver ausente, informe a falha e prossiga com os
 recursos disponíveis. Nunca apresente artefato descoberto, tarefa enfileirada
 ou prompt para copiar como execução concluída. Os artefatos importados são

@@ -252,13 +252,14 @@ responsabilidade, não afirmar que todo pedido real siga a mesma sequência.
 \end{flowch}
 
 \begin{descricao}
-Uma seta tracejada indica uma possibilidade de retorno, não uma promessa de
-tentativas infinitas. Se um teste falha, a implementação pode ser corrigida; se
-um serviço não existe, a rota pode avisar ou bloquear; se não há critério
-definido, a entrega precisa ser descrita como não verificada por aquele
-critério. O resultado correto pode ser ``bloqueado'' ou ``inconclusivo'', e não
-necessariamente ``concluído''.
+\textbf{Como funciona e por quê.} As setas representam o encaminhamento entre interface, preparação do contexto, escolha de rota, executor, verificação e resposta. O retorno tracejado sai da verificação e volta à decisão de rota para corrigir, explicar ou bloquear uma falha.
+\textbf{Justificativa.} A resposta deve conservar os avisos e as evidências da rota utilizada; essa separação evita confundir despacho de uma tarefa com resultado aceito.
+\textbf{Limite.} As ferramentas e verificações variam por operação. O desenho não estabelece um executor universal nem repetição ilimitada após falhas.
 \end{descricao}
+\fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator}
+
+
+
 
 \section{Duas formas de organizar trabalho entre agentes}
 
@@ -621,4 +622,36 @@ critério de conclusão e o arquivo em que a evidência fica registrada.
 \textbf{Exercício 3.} Compare uma tarefa publicada no Blackboard com uma tarefa
 em um DAG do \texttt{TaskRuntime}. Escreva qual estado cada mecanismo controla
 e que tipo de dependência cada um representa.
+\end{resultado}
+
+
+% R814: leitura guiada substantiva; cenários hipotéticos rotulados.
+\section[Leitura guiada]{Leitura guiada — Arquitetura: seguir uma rota concreta}
+\elemento{Leitura guiada — R814-01d}{\metainfo{Ciclo}{R814}}
+\begin{descricao}
+\textbf{O fenômeno.} Um mapa reúne muitos componentes, enquanto uma solicitação usa apenas um caminho. A questão é identificar quais relações são dependências de código, quais são eventos e quais são possibilidades condicionais.
+\end{descricao}
+
+\begin{definicao}
+\textbf{Grandezas e definições.} Ponto de entrada recebe a solicitação; chamada invoca uma rotina; evento publica informação; artefato conserva uma saída. Uma camada é uma organização de leitura, não uma unidade de tempo.
+\end{definicao}
+
+\begin{metodo}
+\textbf{Dedução passo a passo.} Comece no comando da CLI, siga a função chamada e registre cada passagem de dados. Compare o caminho com o diagrama. Marque os retornos condicionais e as dependências que não foram usadas.
+\end{metodo}
+
+\begin{resultado}
+\textbf{Exemplo resolvido.} Em uma rota hipotética, a interface chama um serviço que devolve um relatório. São dois vínculos dirigidos, não oito etapas só porque o mapa tem oito camadas. Uma saída de falha pode encerrar a rota sem produzir o artefato pretendido.
+\end{resultado}
+
+\begin{resultado}
+\textbf{Ordem de grandeza e verificação.} Confira chamadas na fonte e resultados nos testes pertinentes. Para um evento, identifique quem publica e quem assina; para um arquivo, confira o caminho e o conteúdo. A presença de ambos os módulos não demonstra uma ligação executada.
+\end{resultado}
+
+\begin{aviso}
+\textbf{Limite de validade.} O mapa é uma abstração da versão consultada. Concorrência, serviços externos e caminhos de exceção exigem análise própria; o desenho não demonstra disponibilidade nem desempenho.
+\end{aviso}
+
+\begin{resultado}
+\textbf{Exercícios.} Compare doctor com uma delegação pelo Blackboard. Identifique as entradas e saídas. Desenhe apenas as ligações que conseguiu localizar na implementação.
 \end{resultado}

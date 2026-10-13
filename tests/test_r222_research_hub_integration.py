@@ -32,13 +32,14 @@ class TestR222ResearchHubIntegration(unittest.TestCase):
         self.assertIn("bridge_status", manifest)
         self.assertEqual(manifest["bridge_status"], "published_to_blackboard_and_metabus")
 
-    def test_spec_verifier_execution(self):
+    def test_criteria_only_inspection(self):
         spec = spec_registry.get("SPEC-935-R222")
         if spec:
             spec.add_criterion("Ponte de integração do ResearchHub validada", lambda out: out.get("bridge") is True)
-        res = spec_verifier.verify("SPEC-935-R222", {"bridge": True})
+        res = spec_verifier.verify("SPEC-935-R222", {"bridge": True}, require_red_history=False)
         self.assertTrue(res["verified"])
-        self.assertEqual(res["status"], "green")
+        self.assertEqual(res["verification_scope"], "criteria_only")
+        self.assertEqual(res["status"], "criteria_passed")
 
 
 if __name__ == "__main__":

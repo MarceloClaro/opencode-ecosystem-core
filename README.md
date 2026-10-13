@@ -8,15 +8,28 @@
 
 ### Ecossistema de Orquestração Multi‑Agente para Pesquisa Científica, Automação e Metacognição
 
+Rede de memória no terminal: `python -m webapp.memory_network_visualizer`.
+A mesma projeção está na aba **Rede de memória** do painel Streamlit;
+[uso e limites da visualização](docs/REDE_MEMORIA_CORE.md).
+
 **Transformando dados em conhecimento, e conhecimento em ferramentas para a educação e a ciência aberta.**
 
 [![GitHub Stars](https://img.shields.io/github/stars/MarceloClaro/opencode-ecosystem-core?style=for-the-badge&logo=github&logoColor=white&color=181717)](https://github.com/MarceloClaro/opencode-ecosystem-core)
 [![License MIT](https://img.shields.io/badge/Licen%C3%A7a-MIT-22c55e?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3b82f6?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![MCP Servers](https://img.shields.io/badge/MCP%20Servers-15-8b5cf6?style=for-the-badge&logo=mcp&logoColor=white)](ARCHITECTURE.md)
+[![MCP Servers](https://img.shields.io/badge/MCP%20Servers-configurados-8b5cf6?style=for-the-badge&logo=mcp&logoColor=white)](ARCHITECTURE.md)
 [![OpenCode](https://img.shields.io/badge/OpenCode%20CLI-native-0ea5e9?style=for-the-badge&logo=opencode&logoColor=white)](opencode.json)
 
-**248 agentes** · **157 auto‑registrados no Blackboard (registro histórico R596)** · **15 MCPs configurados** · **426+ ciclos de evolução** · **53 lições semânticas** · **7+ skills**
+<!-- core-state:start -->
+**255 agentes** · **16 MCPs** · **30 comandos** · **22 checks**
+
+Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
+
+Para conferir estes blocos, execute na raiz `.venv/bin/python scripts/reconcile_operational_docs.py --check`; para sincronizá-los, execute o mesmo comando sem `--check`.
+<!-- core-state:end -->
+
+Registro histórico R596: **157 auto‑registrados no Blackboard** naquela revisão.
+A contagem desse registro não representa o catálogo corrente.
 
 ---
 
@@ -42,10 +55,10 @@
 
 ## Visão geral
 
-O **OpenCode Ecosystem Core** é um ecossistema de orquestração multi‑agente onde o orquestrador primário `marceloclaro` coordena **248 agentes configurados** via **Blackboard (protocolo A2A)** com **memória metacognitiva compartilhada (MetaBus)**, **gates SDD/TDD estritos**, **economia de tokens** (stake/slashing · Trust Engine) e **15 MCPs configurados**.
+O **OpenCode Ecosystem Core** é um ecossistema de orquestração multi‑agente onde o orquestrador primário `marceloclaro` coordena o catálogo configurado via **Blackboard (protocolo A2A)** com **memória metacognitiva compartilhada (MetaBus)**, **gates SDD/TDD estritos**, **economia de tokens** (stake/slashing · Trust Engine) e os **servidores MCP configurados**. O inventário corrente acima é derivado das fontes locais.
 
-Na consulta de **2026-10-04**, o diagnóstico manteve **20 checks**. As evoluções
-R657/R658 acrescentam [consulta aos livros locais e integridade de dados para
+O diagnóstico é estrutural por padrão; sua quantidade de checks consta no
+inventário acima. As evoluções R657/R658 acrescentam [consulta aos livros locais e integridade de dados para
 fine-tuning](docs/BIBLIOTECA_AI_R657.md). No OpenCode, use `/biblioteca tema`.
 
 O [Gemini Notebook na orquestração central](docs/GEMINI_NOTEBOOK_CORE.md)
@@ -55,6 +68,24 @@ use `/gemini-notebook`; pela CLI, `notebook --config ARQUIVO`.
 R667–R671 acrescentam [Hermes/MiroFish externos, datasets por CLI e plugins
 científicos](docs/INTEGRACOES_CIENTIFICAS_R667_R671.md), com provas reais e
 [oito novos perfis](docs/AGENTES_R669.md), incluindo Live mirofish hermes.
+
+R808 integra [REA à orquestração central](docs/REA.md): `/rea` usa o gateway
+`ecosystem_rea`, com evidência completa por hash e memória metacognitiva. A
+[revisão do ecossistema](docs/REVISAO_ECOSSISTEMA_R808.md) registra provas e limites.
+
+O [assistente REA local](docs/ASSISTENTE_REA_LOCAL.md) acrescenta inspeção em
+namespace de rede privado, explicação em português, recibos por hash e um site
+de instruções. Utilize `rea setup`, `rea inspect CAMINHO --format text` e
+`rea agent --check` pela CLI do primário. O perfil de conversa exige modelo em
+endpoint local; configuração não comprova inferência. `rea layers` mostra a
+prontidão das camadas, sem alegar que todas foram executadas.
+
+O [navegador coordenado](docs/NAVEGADOR_REAL.md) recebe ações explícitas por
+`marceloclaro.cli browser` ou `ecosystem_browser`, no gateway existente.
+Leitura e snapshot observam a página; preenchimento e clique podem produzir
+efeitos no site. Declare o efeito pretendido e as origens permitidas. A sessão
+isolada não herda logins do Chrome, e uma prova local não assegura acesso ou
+êxito em qualquer site.
 
 Regra de ouro: **toda entrega nasce de uma especificação formal** (`specs/SPEC-*.md`) **e só é concluída com testes verdes e prova física** — jamais "parece que funciona".
 
@@ -73,7 +104,7 @@ Regra de ouro: **toda entrega nasce de uma especificação formal** (`specs/SPEC
 | 🏆 **Estudo de raciocínio** | Benchmark pareado IMO 9×3 (R500‑R506), réplicas auditáveis e artigos ABNT/arXiv/arXiv‑PT |
 | 📁 **Evidência de pesquisa** | Pesquisa real R522 (IA Generativa no Direito): manuscritos v20→v49, execução (OpenAlex + PDFs) e pacote de depósito OSF/Zenodo |
 | 🌐 **Deploy estático** | GitHub Pages com verificação física (GET+Range, 404 real, marcador de conteúdo) |
-| 🕸️ **Blackboard A2A vivo** | 157 Agent Cards do catálogo registrados automaticamente no boot (R596) — matching de capacidades real para CFP e roteamento |
+| 🕸️ **Blackboard A2A** | Carrega Agent Cards do catálogo para matching de capacidades, CFP e roteamento. R596 registrou 157 cards como medição histórica; consulte o runtime para uma nova contagem. |
 
 ---
 
@@ -153,7 +184,7 @@ Detalhes, requisitos e solução de problemas: [installer/README.md](installer/R
 | Comando | O que faz |
 |---|---|
 | `.venv/bin/python -m marceloclaro.cli` | Menu interativo principal |
-| `.venv/bin/python -m marceloclaro.cli doctor` | Diagnóstico estrutural (20 checks) |
+| `.venv/bin/python -m marceloclaro.cli doctor` | Diagnóstico estrutural; quantidade de checks no inventário acima |
 | `.venv/bin/python -m marceloclaro.cli helpdesk` | Ajuda guiada |
 | `.venv/bin/python -m marceloclaro.cli pesquisa "tema"` | Pesquisa científica |
 | `.venv/bin/python -m marceloclaro.cli agent-register` | Auto‑registro dos agentes no Blackboard (A2A) |
@@ -204,6 +235,7 @@ flowchart TB
 > componentes estruturalmente auditados; não lista todos os arquivos, classes
 > auxiliares ou serviços opcionais do ecossistema.
 
+<!-- core-runtime-diagram:start -->
 ```mermaid
 flowchart TB
     Usuario2[Usuário ou automação] --> CLI2[CLI marceloclaro]
@@ -214,12 +246,15 @@ flowchart TB
     Orq2 --> TDDRunner2[TDDRunner]
     Orq2 --> MetaBus2[MetaBus]
     Orq2 --> Blackboard2[Blackboard]
-    Orq2 --> MCP2[15 MCPs configurados]
-    Orq2 --> Agents2[248 agentes configurados]
+    Orq2 --> MCP2[16 MCPs configurados]
+    Orq2 --> Agents2[255 agentes configurados]
     Orq2 --> Mira2[mira-presenter]
+    Mira2 --> Deck2[MiraDeckPipeline]
+    Deck2 --> Engine2[MiraEngine]
 ```
+<!-- core-runtime-diagram:end -->
 
-Na R640, o oitavo MCP, `ecosystem-network`, conecta o orquestrador e seu
+O MCP `ecosystem-network`, acrescentado na R640, conecta o orquestrador e seu
 roteamento Transformer por atenção aos executores de análise e leitura Claude,
 Antigravity e Codex disponíveis no ambiente, com registros no Blackboard e na
 memória MetaBus. A coordenação limita passos e tempo e exige a conclusão para
@@ -379,7 +414,7 @@ flowchart LR
   `tests/test_r449_readme_release.py`, `tests/test_r455_readme_historico_operacional.py`.
 - Recibo de validação local registrado em [VALIDATION_R448.md](VALIDATION_R448.md),
   incluindo **quatro subtestes aprovados.** e o gate **SPEC-935-R448**.
-- Estado observado no último baseline completo (Linux WSL2, Python 3.14.4):
+- Registro histórico do baseline R448 (Linux WSL2, Python 3.14.4):
   `doctor` **18/20 checks** (0 falhas, 2 avisos de executores opcionais) e
   suíte **4.539 passed, 67 skipped**.
 - Dependências de desenvolvimento: `.venv/bin/python -m pip install -r requirements-dev.txt`.
@@ -458,7 +493,7 @@ Links: [GitHub](https://github.com/MarceloClaro/opencode-ecosystem-core) ·
 
 Distribuído sob a [licença MIT](LICENSE).
 
-### Integridade operacional (2026-10-07)
+### Integridade operacional (2026-10-11)
 
 Escopos verdes com gate: polímata, núcleo científico e config reproduzível;
 `doctor` com 18 checks sem falha e 2 avisos de dependência externa. Frentes de

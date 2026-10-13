@@ -2,7 +2,7 @@
 %  MÓDULO 10 — Catálogo Completo de Agentes e Subagentes
 %  ARQUIVO GERADO — não editar à mão. Rode: python3 gen_mod10.py
 % ============================================================
-\chapter{Catálogo Completo — 248 Fichas de Agente (248 registradas no runtime)}
+\chapter{Catálogo Completo — 255 Fichas de Agente (255 registradas no runtime)}
 
 \roteirodidatico
 {Este catálogo é um inventário de perfis descritos no projeto. Para encontrar um agente, comece pela categoria e leia a ficha como uma declaração de escopo e instruções.}
@@ -12,11 +12,11 @@
 {O que a ficha permite concluir sobre o perfil e que observação adicional seria necessária para afirmar que ele executou bem uma tarefa?}
 
 \begin{resultado}
-O \pth{opencode.json} registra \textbf{248} agentes (1 orquestrador, 247 subagentes), e o acervo \pth{agents/catalog/} traz \textbf{248} fichas. Cada agente tem exatamente uma ficha e cada ficha um agente: a cobertura documental é \textbf{1:1} (0 fichas sem registro, 0 agentes sem ficha). As 248 fichas abaixo são geradas deterministicamente por \pth{gen\_mod10.py} e agrupam-se por categoria.
+O \pth{opencode.json} registra \textbf{255} agentes (1 orquestrador, 254 subagentes), e o acervo \pth{agents/catalog/} traz \textbf{255} fichas. Cada agente tem exatamente uma ficha e cada ficha um agente: a cobertura documental é \textbf{1:1} (0 fichas sem registro, 0 agentes sem ficha). As 255 fichas abaixo são geradas deterministicamente por \pth{gen_mod10.py} e agrupam-se por categoria.
 \end{resultado}
 
 \begin{aviso}
-\textbf{Convenção de nomes (verificada em 29/09/2026, SPEC-935-R618).} O \pth{frontmatter} de cada card usa o \emph{nome humano} (ex.: \emph{Cloud SQL PostgreSQL Specialist}), enquanto \pth{opencode.json} registra o \emph{slug} em kebab-case (ex.: \cod{cloud-sql-postgres-specialist}). Uma versão anterior deste capítulo comparava os dois textos literalmente e reportava trinta e nove fichas como não registradas — falso positivo de convenção, não lacuna de runtime: reconciliadas pelo slug e por alias declarado, todas as 248 fichas estão registradas. Ficha documentada ainda $\neq$ agente testado: registrar não prova que o agente funcione.
+\textbf{Convenção de nomes (verificada em 29/09/2026, SPEC-935-R618).} O \pth{frontmatter} de cada card usa o \emph{nome humano} (ex.: \emph{Cloud SQL PostgreSQL Specialist}), enquanto \pth{opencode.json} registra o \emph{slug} em kebab-case (ex.: \cod{cloud-sql-postgres-specialist}). Uma versão anterior deste capítulo comparava os dois textos literalmente e reportava trinta e nove fichas como não registradas — falso positivo de convenção, não lacuna de runtime: reconciliadas pelo slug e por alias declarado, todas as 255 fichas estão registradas. Ficha documentada ainda $\neq$ agente testado: registrar não prova que o agente funcione.
 \end{aviso}
 
 \begin{processo}
@@ -28,7 +28,7 @@ FUNCAO. transformar o catalogo enumerativo em um teste de consistencia executave
 \section[Leitura guiada]{Leitura guiada — Módulo 10: o catálogo como teste de consistência}
 
 \begin{descricao}
-\textbf{O fenômeno.} Um capítulo que enumera 248 agentes produz a impressão de catálogo fiel. Mas a enumeração é a forma mais fácil de mascarar um erro de reconciliação: se o procedimento de contagem compara o nome humano do card com o slug do runtime, a lista parece cheia de agentes faltantes que não faltam. Foi exatamente o que aconteceu: o capítulo afirmava não estarem registradas fichas que estavam todas registradas, apenas sob outra convenção de nome.
+\textbf{O fenômeno.} Um capítulo que enumera 255 agentes produz a impressão de catálogo fiel. Mas a enumeração é a forma mais fácil de mascarar um erro de reconciliação: se o procedimento de contagem compara o nome humano do card com o slug do runtime, a lista parece cheia de agentes faltantes que não faltam. Foi exatamente o que aconteceu: o capítulo afirmava não estarem registradas fichas que estavam todas registradas, apenas sob outra convenção de nome.
 \end{descricao}
 
 \begin{definicao}
@@ -50,16 +50,16 @@ FUNCAO. transformar o catalogo enumerativo em um teste de consistencia executave
 \end{metodo}
 
 \begin{resultado}
-\textbf{Exemplo resolvido.} Estado da configuração consultada nesta geração, com $N = 248$ agentes no \pth{opencode.json} e $F = 248$ fichas em \pth{agents/catalog/}.\par
-(1) Contagem ingênua por igualdade textual: $42$ fichas sem correspondência exata, o que sugeriria cobertura de $\frac{206}{248} \approx 83\%$ — número plausível, e por isso mesmo perigoso.\par
+\textbf{Exemplo resolvido.} Estado da configuração consultada nesta geração, com $N = 255$ agentes no \pth{opencode.json} e $F = 255$ fichas em \pth{agents/catalog/}.\par
+(1) Contagem ingênua por igualdade textual: $42$ fichas sem correspondência exata, o que sugeriria cobertura de $\frac{213}{255} \approx 84\%$ — número plausível, e por isso mesmo perigoso.\par
 (2) Reconciliação por slug: os $42$ casos se resolvem em $24$ por equivalência direta de slug e em $18$ por alias declarado (ex.: \emph{Synthetic University — Orquestrador Acadêmico Transversal} $\to$ \cod{university_synthetic}).\par
 (3) Resíduo: $42 - 24 - 18 = 0$ fichas sem agente; e $0$ agentes sem ficha.\par
-(4) Cobertura documental correta: $\frac{248}{248} = 1 = 100\%$.\par
+(4) Cobertura documental correta: $\frac{255}{255} = 1 = 100\%$.\par
 (5) Leitura correta do número verdadeiro: uma versão anterior somava os dois acervos como se fossem disjuntos e obtinha um total maior que o número real de agentes — supercontagem devida a aliases contados em duplicidade.
 \end{resultado}
 
 \begin{resultado}
-\textbf{Ordem de grandeza e verificação.} A cobertura de $100\%$ é exata e, ainda assim, diz pouco: as duas maiores categorias ($128$ e $52$ fichas, de 11 no total) somam $\frac{180}{248} \approx 72,6\%$, de modo que a média por categoria ($248/11 \approx 22,5$) descreve mal a distribuição — o mesmo mecanismo de concentração que oculta o desequilíbrio no Módulo 8. \emph{Verifique você mesmo:} rode \cod{python3 gen_mod10.py} e confira quantos elementos são emitidos; alterar o \pth{opencode.json} e reexecutar deve mover esse número na mesma medida.
+\textbf{Ordem de grandeza e verificação.} A cobertura de $100\%$ é exata e, ainda assim, diz pouco: as duas maiores categorias ($128$ e $58$ fichas, de 11 no total) somam $\frac{186}{255} \approx 72,9\%$, de modo que a média por categoria ($255/11 \approx 23,2$) descreve mal a distribuição — o mesmo mecanismo de concentração que oculta o desequilíbrio no Módulo 8. \emph{Verifique você mesmo:} rode \cod{python3 gen_mod10.py} e confira quantos elementos são emitidos; alterar o \pth{opencode.json} e reexecutar deve mover esse número na mesma medida.
 \end{resultado}
 
 \begin{aviso}
@@ -81,10 +81,10 @@ Contagem por categoria (ordem decrescente de fichas):\par
 Categoria & Fichas & Exemplo de agentes \\
 \midrule
 Ferramentas e apoio transversal & 128 & Gestor de decisões arquiteturais, Moderador de fórum e debates multiagente, Pipeline de extração e análise de documentos \\
-Produção acadêmica & 52 & 00 editor chefe phd, 01 agente diagnostico escopo, 02 agente busca curadoria \\
+Produção acadêmica & 58 & 00 editor chefe phd, 01 agente diagnostico escopo, 02 agente busca curadoria \\
 Engenharia & 16 & Abnt latex modular, Programador de, Docx abnt converter \\
 Pesquisa e evidências & 14 & Auditoria reprodutibilidade, Bibtex crossref auditor, Inferencia causal did iv rdd \\
-Auditoria e qualidade & 13 & Auditor, Preparação de livros para ajuste fino, Consulta de livros por MCP \\
+Auditoria e qualidade & 14 & Auditor, Preparação de livros para ajuste fino, Consulta de livros por MCP \\
 Escrita e tradução & 13 & Author voice guardian, Back translation verifier, Cultural episteme agente \\
 Apoio jurídico & 4 & Especialista em síntese de documentos jurídicos, Auxjuris email drafter, Auxjuris jurídico assistant \\
 Dados e proveniência & 3 & Especialista em Haystack RAG, Mira chart, Mira chart race \\
@@ -145,7 +145,7 @@ No Core, este perfil apoia tarefas relacionadas a agente planejador do MIRA que 
 \end{arquitetura}
 
 \clearpage
-\section{Categoria: Produção acadêmica (52 perfis)}
+\section{Categoria: Produção acadêmica (58 perfis)}
 
 \begin{descricao}
 Reúne etapas especializadas da escrita acadêmica. Os perfis podem apoiar partes do fluxo MASWOS, da delimitação do problema à revisão editorial; citações e resultados continuam sujeitos a conferência (Módulo 6).
@@ -795,6 +795,90 @@ No Core, este perfil apoia tarefas relacionadas a eleva a nota do critério 'Di�
 \textbf{Modo de execução declarado:} subagente · \textbf{Permissões:} edit: deny; bash: deny
 \end{arquitetura}
 
+\elemento{49 agente lean verificacao total (v1.0.0)}{\metainfo{Categoria}{Produção acadêmica} \hfill \metainfo{Tipo}{maswos-agent} \hfill \metainfo{Identificador}{49\_agente\_lean\_verificacao\_total} \hfill \metainfo{Ficha}{49\_agente\_lean\_verificacao\_total.md}}
+
+\begin{descricao}
+Coordena verificação total fail-closed em Lean 4; impõe sorry/admit como bloqueio e nunca declara prova total sem machine\_checked.
+\end{descricao}
+
+\begin{funcao}
+No Core, este perfil apoia tarefas relacionadas a coordena verificação total fail-closed em Lean 4. O orquestrador pode encaminhar-lhe o trabalho na etapa correspondente; a resposta retorna ao fluxo principal para integração e conferência de fontes, critérios e permissões. A ficha documenta a função, mas não comprova que o perfil tenha sido chamado ou executado a tarefa.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente · \textbf{Permissões:} edit: deny; bash: deny
+\end{arquitetura}
+
+\elemento{50 agente lean matematica formal (v1.0.0)}{\metainfo{Categoria}{Produção acadêmica} \hfill \metainfo{Tipo}{maswos-agent} \hfill \metainfo{Identificador}{50\_agente\_lean\_matematica\_formal} \hfill \metainfo{Ficha}{50\_agente\_lean\_matematica\_formal.md}}
+
+\begin{descricao}
+Formaliza matemática em Lean 4 com Mathlib; fixa imports, tipos e táticas; rejeita lema inventado. Capacidades descritas: Formaliza enunciados matemáticos em Lean 4 auditável conforme SPEC-935-R747. tags: [lean, mathlib, formal] examples: [Formalize este teorema de álgebra em Lean, Converta este enunciado para Lean 4]
+\end{descricao}
+
+\begin{funcao}
+No Core, este perfil apoia tarefas relacionadas a formaliza matemática em Lean 4 com Mathlib. O orquestrador pode encaminhar-lhe o trabalho na etapa correspondente; a resposta retorna ao fluxo principal para integração e conferência de fontes, critérios e permissões. A ficha documenta a função, mas não comprova que o perfil tenha sido chamado ou executado a tarefa.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente · \textbf{Permissões:} edit: deny; bash: deny
+\end{arquitetura}
+
+\elemento{51 agente lean tese auditavel (v1.0.0)}{\metainfo{Categoria}{Produção acadêmica} \hfill \metainfo{Tipo}{maswos-agent} \hfill \metainfo{Identificador}{51\_agente\_lean\_tese\_auditavel} \hfill \metainfo{Ficha}{51\_agente\_lean\_tese\_auditavel.md}}
+
+\begin{descricao}
+Organiza tese com provas Lean auditáveis; trilha enunciado PT-BR, código, log e reconciliação por capítulo. Capacidades descritas: Monta capítulos de tese com custódia Lean conforme SPEC-935-R747. tags: [lean, tese, auditoria] examples: [Estruture este capítulo com provas Lean auditáveis]
+\end{descricao}
+
+\begin{funcao}
+No Core, este perfil apoia tarefas relacionadas a organiza tese com provas Lean auditáveis. O orquestrador pode encaminhar-lhe o trabalho na etapa correspondente; a resposta retorna ao fluxo principal para integração e conferência de fontes, critérios e permissões. A ficha documenta a função, mas não comprova que o perfil tenha sido chamado ou executado a tarefa.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente · \textbf{Permissões:} edit: deny; bash: deny
+\end{arquitetura}
+
+\elemento{52 agente lean software critico (v1.0.0)}{\metainfo{Categoria}{Produção acadêmica} \hfill \metainfo{Tipo}{maswos-agent} \hfill \metainfo{Identificador}{52\_agente\_lean\_software\_critico} \hfill \metainfo{Ficha}{52\_agente\_lean\_software\_critico.md}}
+
+\begin{descricao}
+Especifica e verifica software crítico em Lean; exige pré/pós-condições e machine\_checked para alegar correção. Capacidades descritas: Verifica correção de software crítico em Lean conforme SPEC-935-R747. tags: [lean, software-critico, verificacao] examples: [Especifique este algoritmo em Lean, Prove a correção desta função]
+\end{descricao}
+
+\begin{funcao}
+No Core, este perfil apoia tarefas relacionadas a especifica e verifica software crítico em Lean. O orquestrador pode encaminhar-lhe o trabalho na etapa correspondente; a resposta retorna ao fluxo principal para integração e conferência de fontes, critérios e permissões. A ficha documenta a função, mas não comprova que o perfil tenha sido chamado ou executado a tarefa.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente · \textbf{Permissões:} edit: deny; bash: deny
+\end{arquitetura}
+
+\elemento{53 agente lean estudo teoremas (v1.0.0)}{\metainfo{Categoria}{Produção acadêmica} \hfill \metainfo{Tipo}{maswos-agent} \hfill \metainfo{Identificador}{53\_agente\_lean\_estudo\_teoremas} \hfill \metainfo{Ficha}{53\_agente\_lean\_estudo\_teoremas.md}}
+
+\begin{descricao}
+Estuda teoremas Lean existentes; explica tática por tática; nunca inventa lema ou prova. Capacidades descritas: Explica e estuda teoremas Lean com rigor conforme SPEC-935-R747. tags: [lean, estudo, didatica] examples: [Explique esta prova Lean passo a passo, Estude este teorema Mathlib]
+\end{descricao}
+
+\begin{funcao}
+No Core, este perfil apoia tarefas relacionadas a estuda teoremas Lean existentes. O orquestrador pode encaminhar-lhe o trabalho na etapa correspondente; a resposta retorna ao fluxo principal para integração e conferência de fontes, critérios e permissões. A ficha documenta a função, mas não comprova que o perfil tenha sido chamado ou executado a tarefa.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente · \textbf{Permissões:} edit: deny; bash: deny
+\end{arquitetura}
+
+\elemento{54 agente acesso aberto auditoria fichamento (v1.0.0)}{\metainfo{Categoria}{Produção acadêmica} \hfill \metainfo{Tipo}{maswos-agent} \hfill \metainfo{Identificador}{54\_agente\_acesso\_aberto\_auditoria\_fichamento} \hfill \metainfo{Ficha}{54\_agente\_acesso\_aberto\_auditoria\_fichamento.md}}
+
+\begin{descricao}
+Resolver DOI por vias legais, baixar somente OA permitido e gerar pasta de auditoria com fichamento ABNT e recortes rastreáveis.
+\end{descricao}
+
+\begin{funcao}
+No Core, este perfil apoia tarefas relacionadas a resolver DOI por vias legais, baixar somente OA permitido e gerar pasta de auditoria com fichamento ABNT e recortes rastreáveis.. O orquestrador pode encaminhar-lhe o trabalho na etapa correspondente; a resposta retorna ao fluxo principal para integração e conferência de fontes, critérios e permissões. A ficha documenta a função, mas não comprova que o perfil tenha sido chamado ou executado a tarefa.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente · \textbf{Permissões:} edit: deny; bash: deny
+\end{arquitetura}
+
 \elemento{Redator de acadêmico (v1.0.0)}{\metainfo{Categoria}{Produção acadêmica} \hfill \metainfo{Tipo}{maswos-agent} \hfill \metainfo{Identificador}{academic\_writer} \hfill \metainfo{Ficha}{academic\_writer.md}}
 
 \begin{descricao}
@@ -1083,7 +1167,7 @@ No Core, este perfil apoia tarefas relacionadas a localiza o artigo-gap que nort
 \end{arquitetura}
 
 \clearpage
-\section{Categoria: Auditoria e qualidade (13 perfis)}
+\section{Categoria: Auditoria e qualidade (14 perfis)}
 
 \begin{descricao}
 Reúne perfis de inspeção e revisão. Seus achados podem informar verificações de qualidade e rigor, mas a existência de um auditor não equivale a aprovação independente (Módulos 4 e 6).
@@ -1199,6 +1283,20 @@ No Core, este perfil apoia tarefas relacionadas a verifica estrutura, índice, c
 
 \begin{arquitetura}
 \textbf{Modo de execução declarado:} subagente · \textbf{Permissões:} read: allow; glob: allow; grep: allow; bash: \{'*': 'deny', 'python3 -m pytest tests/test\_r669\_requested\_agents.py -q': 'allow', 'python3 -m pytest tests/test\_r657\_book\_library.py -q': 'allow'\}; edit: deny; webfetch: deny; task: deny
+\end{arquitetura}
+
+\elemento{Auditor de entradas vazias na biblioteca (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{library-empty-input-audit} \hfill \metainfo{Ficha}{library-empty-input-audit.md}}
+
+\begin{descricao}
+Audita a rejeição de consultas vazias ou sem conteúdo útil pela biblioteca local, sob coordenação central. Confere abstenção antes de acessar PDFs ou índices e contraprovas com consultas válidas. Usa interfaces e testes autorizados, com permissões de leitura; a ficha declara capacidade e não comprova execução do especialista.
+\end{descricao}
+
+\begin{funcao}
+No Core, este perfil apoia tarefas relacionadas a audita a rejeição de consultas vazias ou sem conteúdo útil pela biblioteca local, sob coordenação central.. O orquestrador pode encaminhar-lhe o trabalho na etapa correspondente; a resposta retorna ao fluxo principal para integração e conferência de fontes, critérios e permissões. A ficha documenta a função, mas não comprova que o perfil tenha sido chamado ou executado a tarefa.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente · \textbf{Permissões:} read: allow; glob: allow; grep: allow; bash: \{'*': 'deny', 'python3 -m pytest tests/test\_r678\_library\_empty\_input\_specialist.py -q': 'allow', 'python3 -m pytest tests/test\_r677\_empty\_library\_request.py -q': 'allow', 'python3 -m pytest tests/test\_r669\_requested\_agents.py -q': 'allow'\}; edit: deny; webfetch: deny; task: deny
 \end{arquitetura}
 
 \elemento{Execução externa de MiroFish e Hermes (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{live-mirofish-hermes} \hfill \metainfo{Ficha}{live-mirofish-hermes.md}}

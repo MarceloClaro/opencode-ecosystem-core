@@ -331,7 +331,8 @@ def test_generated_config_does_not_register_litert_lm_serve_as_mcp():
 
 
 def test_generated_mcp_commands_do_not_use_absolute_machine_paths():
-    """CA6: comandos MCP devem ser portáteis e relativos ao projeto."""
+    """R812: scripts relativos; launcher resolvido e escopo explícito local."""
+    from integrations.opencode_cli import ROOT, _mcp_launcher
 
     # Arrange
     config: Dict[str, Any] = build_config()
@@ -347,6 +348,12 @@ def test_generated_mcp_commands_do_not_use_absolute_machine_paths():
     assert commands
     for name, command in commands:
         assert isinstance(command, list), f"MCP {name} deve usar command como lista"
-        assert all(
-            not Path(str(argument)).is_absolute() for argument in command
-        ), f"MCP {name} contém caminho absoluto: {command!r}"
+        for position, argument in enumerate(command):
+            if not Path(str(argument)).is_absolute():
+                continue
+            if position == 0 and name in {"fetch", "arxiv-mcp"}:
+                assert argument == _mcp_launcher("uvx")
+            elif name == "filesystem" and position == len(command) - 1:
+                assert argument == ROOT
+            else:
+                raise AssertionError(f"MCP {name} contém caminho fixado: {command!r}")

@@ -24,13 +24,14 @@ class TestR215BenchmarksAlignment(unittest.TestCase):
         tier_v = classify_metacognitive_tier(95.0, external_validation=True)
         self.assertEqual(tier_v, "metacognitive_superhuman_verified")
 
-    def test_spec_verifier_execution(self):
+    def test_criteria_only_inspection(self):
         spec = spec_registry.get("SPEC-935-R215")
         if spec:
             spec.add_criterion("Alinhamento SOTA ativo", lambda out: out.get("aligned") is True)
-        res = spec_verifier.verify("SPEC-935-R215", {"aligned": True})
+        res = spec_verifier.verify("SPEC-935-R215", {"aligned": True}, require_red_history=False)
         self.assertTrue(res["verified"])
-        self.assertEqual(res["status"], "green")
+        self.assertEqual(res["verification_scope"], "criteria_only")
+        self.assertEqual(res["status"], "criteria_passed")
 
 
 if __name__ == "__main__":

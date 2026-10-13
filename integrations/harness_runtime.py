@@ -11,6 +11,7 @@ import json
 import math
 import os
 import re
+import signal
 import shutil
 import subprocess
 import time
@@ -18,6 +19,7 @@ from pathlib import Path
 from typing import Any
 
 from integrations.harness_health import HarnessHealthStore
+from integrations.execution_control import ExecutionCancelled, is_cancelled
 
 
 class HarnessRuntime:
@@ -242,9 +244,79 @@ class HarnessRuntime:
                 details += " " + " ".join(str(event.get(key, "")) for key in ("result", "error", "message"))
         return details
 
+    @staticmethod
+    def _stop_process_tree(process, *, gentle=False):
+        """Grupo exclusivo POSIX; taskkill limitado para árvore Windows ativa."""
+        if os.name == "nt":
+            if process.poll() is None:
+                try:
+                    stopped = subprocess.run(["taskkill", "/PID", str(process.pid), "/T", "/F"],
+                                             capture_output=True, timeout=2, shell=False)
+                    if stopped.returncode != 0:
+                        process.kill()
+                except (OSError, subprocess.TimeoutExpired):
+                    process.kill()
+            return
+        try:
+            os.killpg(process.pid, signal.SIGTERM if gentle else signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+
+    @classmethod
+    def _run_cli(cls, command, **options):
+        """Comunica com prazo/cancelamento e limpa o grupo mesmo após saída."""
+        timeout = options.pop("timeout")
+        input_text = options.pop("input", None)
+        options.pop("capture_output", None)
+        if input_text is not None:
+            options["stdin"] = subprocess.PIPE
+        if is_cancelled():
+            raise ExecutionCancelled("Execução cancelada antes de iniciar a CLI.")
+        options["start_new_session"] = os.name != "nt"
+        if os.name == "nt":
+            options["creationflags"] = subprocess.CREATE_NEW_PROCESS_GROUP
+        process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, **options)
+        deadline = time.monotonic() + timeout
+        try:
+            while True:
+                if is_cancelled():
+                    raise ExecutionCancelled("Execução cancelada durante a CLI.")
+                remaining = deadline - time.monotonic()
+                if remaining <= 0:
+                    raise subprocess.TimeoutExpired(command, timeout)
+                try:
+                    stdout, stderr = process.communicate(input=input_text, timeout=min(0.1, remaining))
+                    if is_cancelled():
+                        raise ExecutionCancelled("Execução cancelada durante a CLI.")
+                    return subprocess.CompletedProcess(command, process.returncode, stdout, stderr)
+                except subprocess.TimeoutExpired:
+                    input_text = None
+        finally:
+            # Descendentes podem herdar pipes ou sobreviver à saída da CLI.
+            # O grupo é exclusivo desta chamada, inclusive com líder encerrado.
+            if process.poll() is None:
+                cls._stop_process_tree(process, gentle=True)
+                try:
+                    process.communicate(timeout=0.5)
+                except subprocess.TimeoutExpired:
+                    pass
+            cls._stop_process_tree(process)
+            try:
+                process.communicate(timeout=0.5)
+            except subprocess.TimeoutExpired:
+                # Um processo fora do grupo pode reter os pipes. Não esperar
+                # indefinidamente por um recurso que esta chamada não possui.
+                for stream in (process.stdin, process.stdout, process.stderr):
+                    if stream is not None:
+                        stream.close()
+                process.wait(timeout=0.5)
+
     def execute(self, ecosystem: str, prompt: str, timeout: float = 180, agent_id: str | None = None) -> dict[str, Any]:
         ecosystem = self._ALIASES.get(ecosystem, ecosystem)
         result = {"success": False, "output": "", "error": "", "ecosystem": ecosystem, "execution_mode": "unavailable"}
+        if is_cancelled():
+            result["error"] = "Execução cancelada antes de iniciar."
+            return result
         if ecosystem == "chatgpt":
             result["error"] = "A interface ChatGPT não é controlada; selecione explicitamente codex para a CLI Codex."
             return result
@@ -292,7 +364,11 @@ class HarnessRuntime:
             return result
 
         try:
-            process = subprocess.run(command, **options)
+            process = type(self)._run_cli(command, **options)
+        except ExecutionCancelled:
+            result["error"] = "Execução cancelada; a CLI foi interrompida."
+            result["cancelled"] = True
+            return finish("execution_failed")
         except subprocess.TimeoutExpired:
             result["error"] = f"A CLI excedeu o limite de {bounded_timeout:g} segundos."
             return finish("timeout")

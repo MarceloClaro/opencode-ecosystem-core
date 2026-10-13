@@ -478,6 +478,7 @@ class TrustedTestEvidence:
         "error",
         "scope",
         "external_validation",
+        "tdd_history_receipt_id",
         "contract_sha256",
         "criterion_records",
         "execution_id",
@@ -501,6 +502,7 @@ class TrustedTestEvidence:
         execution_id: str,
         _run_seal: object,
         _seal: object,
+        tdd_history_receipt_id: Optional[str] = None,
     ):
         if _seal is not _RUNTIME_TEST_EVIDENCE_SEAL:
             raise TypeError(
@@ -517,6 +519,7 @@ class TrustedTestEvidence:
         # parâmetros do construtor para não abrirem alegações de certificação.
         object.__setattr__(self, "scope", "local_runtime")
         object.__setattr__(self, "external_validation", False)
+        object.__setattr__(self, "tdd_history_receipt_id", tdd_history_receipt_id)
         object.__setattr__(self, "contract_sha256", contract_sha256)
         object.__setattr__(self, "criterion_records", tuple(criterion_records))
         object.__setattr__(self, "execution_id", execution_id)
@@ -541,6 +544,7 @@ class TrustedTestEvidence:
             "error": self.error,
             "scope": self.scope,
             "external_validation": self.external_validation,
+            "tdd_history_receipt_id": self.tdd_history_receipt_id,
             "contract_sha256": self.contract_sha256,
             "criterion_records": tuple(
                 record.to_dict()
@@ -587,6 +591,7 @@ def _issue_trusted_test_evidence(
     criterion_records: Tuple[CriterionRuntimeRecord, ...] = (),
     execution_id: Optional[str] = None,
     _run_seal: object = _UNSET_RUNTIME_RUN_SEAL,
+    tdd_history_receipt_id: Optional[str] = None,
 ) -> TrustedTestEvidence:
     """Emite evidência selada; uso restrito ao runtime em ``tdd_runner``."""
     if _run_seal is _UNSET_RUNTIME_RUN_SEAL:
@@ -606,6 +611,7 @@ def _issue_trusted_test_evidence(
         execution_id=execution_id,
         _run_seal=_run_seal,
         _seal=_RUNTIME_TEST_EVIDENCE_SEAL,
+        tdd_history_receipt_id=tdd_history_receipt_id,
     )
 
 
@@ -960,12 +966,19 @@ class SpecRegistry:
         if self._initialized:
             return
         self.specs: Dict[str, Specification] = {}
+        self._formal_sources: Dict[str, str] = {}
+        self.ambiguous_spec_sources: Dict[str, Tuple[str, ...]] = {}
         self._initialized = True
         self.load_formal_specs()
 
     def load_formal_specs(self, specs_dir: str = SPECS_DIR) -> int:
         """Carrega as especificações formais de specs/*.md."""
         count = 0
+        scope = os.path.realpath(specs_dir)
+        previous_sources = getattr(self, "_formal_sources", {})
+        sources = {path: identifier for path, identifier in previous_sources.items()
+                   if os.path.dirname(path) != scope and os.path.isfile(path)}
+        pages = []
         for path in sorted(glob.glob(os.path.join(specs_dir, "SPEC-*.md"))):
             try:
                 with open(path, "r", encoding="utf-8") as f:
@@ -974,6 +987,30 @@ class SpecRegistry:
                 spec_id = meta.get("spec_id")
                 if not spec_id:
                     continue
+                identifier = _metadata_text(meta, "spec_id")
+                canonical_path = os.path.realpath(path)
+                sources[canonical_path] = identifier
+                pages.append((path, content, meta, identifier))
+            except Exception as e:
+                logger.error(f"Erro ao ler spec {path}: {e}")
+        groups: Dict[str, List[str]] = {}
+        for path, identifier in sources.items():
+            groups.setdefault(identifier, []).append(path)
+        self._formal_sources = sources
+        self.ambiguous_spec_sources = {
+            identifier: tuple(sorted(paths)) for identifier, paths in groups.items()
+            if len(paths) > 1
+        }
+        # Nunca escolher pela ordem de arquivos ou pela última pasta carregada.
+        for identifier in set(previous_sources.values()) | set(sources.values()):
+            if identifier in self.ambiguous_spec_sources or identifier not in groups:
+                self.specs.pop(identifier, None)
+        for identifier, paths in self.ambiguous_spec_sources.items():
+            logger.error("Identidade formal ambígua %s: %s", identifier, paths)
+        for path, content, meta, spec_id in pages:
+            if spec_id in self.ambiguous_spec_sources:
+                continue
+            try:
                 parsed_criteria = _parse_executable_acceptance_criteria(content)
                 test_file = _metadata_text(meta, "test_file")
                 declared_status = _metadata_text(meta, "status", "draft")
@@ -1072,6 +1109,8 @@ class SpecRegistry:
         return spec
 
     def get(self, spec_id: str) -> Optional[Specification]:
+        if spec_id in getattr(self, "ambiguous_spec_sources", {}):
+            return None
         return self.specs.get(spec_id)
 
     def coverage_report(self) -> Dict[str, Any]:
@@ -1281,6 +1320,8 @@ class SpecVerifier:
         output: Any,
         *,
         trusted_test_evidence: Optional[TrustedTestEvidence] = None,
+        require_red_history: Optional[bool] = None,
+        history: Any = None,
     ) -> Dict[str, Any]:
         """Executa todos os critérios da spec contra a entrega.
 
@@ -1296,6 +1337,19 @@ class SpecVerifier:
 
         output_present = output is not None
         runtime_evidence_required = spec.requires_trusted_test_evidence
+        software_contract = bool(spec.test_file or runtime_evidence_required)
+        history_required = software_contract if require_red_history is None else bool(require_red_history and software_contract)
+        history_check = {"verified": False, "reason_codes": ["red_history_missing"]}
+        if history_required:
+            try:
+                from sdd.tdd_history import TDDHistory
+                if history is None:
+                    history = TDDHistory(root=REPO_ROOT)
+                if type(history) is TDDHistory and history.root == Path(REPO_ROOT).resolve() and type(trusted_test_evidence) is TrustedTestEvidence:
+                    history_check = history.validate_pair(spec, trusted_test_evidence.tdd_history_receipt_id)
+            except Exception as exc:
+                history_check = {"verified": False, "reason_codes": ["history_unavailable"], "error": str(exc)[:200]}
+        history_valid = history_check.get("verified") is True
         uses_criterion_runtime_records = bool(
             runtime_evidence_required and spec.requires_criterion_runtime_records
         )
@@ -1307,7 +1361,7 @@ class SpecVerifier:
             # Uma execução completa é consumida na primeira tentativa com uma
             # entrega. Isso impede que o mesmo objeto selado seja reciclado em
             # outra promoção após a saída do agente mudar.
-            if runtime_evidence_valid and output_present:
+            if runtime_evidence_valid and output_present and (not history_required or history_valid):
                 if not _consume_strict_runtime_execution(trusted_test_evidence):
                     runtime_evidence_valid = False
                     strict_criterion_results = {
@@ -1317,9 +1371,11 @@ class SpecVerifier:
         else:
             runtime_evidence_valid = (
                 _matches_trusted_test_evidence(trusted_test_evidence, spec)
-                if runtime_evidence_required
+                if runtime_evidence_required or history_required
                 else False
             )
+            if history_required and runtime_evidence_valid and history_valid and output_present:
+                runtime_evidence_valid = _consume_strict_runtime_execution(trusted_test_evidence)
         results = []
         for criterion in spec.criteria:
             # Uma entrega ausente não pode ser promovida por uma função de
@@ -1336,6 +1392,8 @@ class SpecVerifier:
                     passed = output_present and runtime_evidence_valid
             else:
                 passed = output_present and criterion.check(output)
+            if history_required:
+                passed = bool(passed and runtime_evidence_valid and history_valid)
             results.append({
                 "criterion_id": criterion.criterion_id,
                 "description": criterion.description,
@@ -1343,12 +1401,15 @@ class SpecVerifier:
             })
 
         all_passed = all(r["passed"] for r in results) if results else False
-        spec.status = "green" if all_passed else "red"
+        inspection_only = software_contract and not history_required
+        if not inspection_only:
+            spec.status = "green" if all_passed else "red"
 
         result = {
             "spec_id": spec_id,
             "verified": all_passed,
-            "status": spec.status,
+            "status": ("criteria_passed" if all_passed else "criteria_failed") if inspection_only else spec.status,
+            "spec_status": spec.status,
             "criteria_results": results,
             "passed_count": sum(1 for r in results if r["passed"]),
             "total_count": len(results),
@@ -1359,6 +1420,10 @@ class SpecVerifier:
             "evidence_contract_error": spec.evidence_contract_error,
             "evidence_contract_sha256": spec.evidence_contract_sha256,
             "criterion_runtime_records_required": uses_criterion_runtime_records,
+            "red_history_required": history_required,
+            "red_history_valid": history_valid,
+            "red_history": history_check,
+            "verification_scope": "software_delivery_gate" if history_required else "criteria_only",
         }
         if isinstance(trusted_test_evidence, TrustedTestEvidence):
             result["trusted_test_evidence"] = trusted_test_evidence.to_dict()
@@ -1370,10 +1435,15 @@ class SpecVerifier:
                 "verified": all_passed,
                 "passed_count": result["passed_count"],
                 "total_count": result["total_count"],
+                "verification_scope": result["verification_scope"],
+                "red_history_valid": history_valid,
             },
             source_agent="spec_verifier",
         )
-        metabus.memory.update_topic_confidence("sdd", 1.0 if all_passed else 0.4)
+        # Uma inspeção de critérios não promove confiança como execução TDD.
+        metabus.memory.record_observation("spec_verifier", f"verificação {spec_id}",
+            {"verified": all_passed, "verification_scope": result["verification_scope"],
+             "red_history_valid": history_valid, "externally_validated": False})
         return result
 
 

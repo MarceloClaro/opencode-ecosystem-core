@@ -45,8 +45,14 @@ Todo mapa deste capitulo usa as mesmas formas: retangulo simples e etapa, retang
 \end{flowch}
 
 \begin{descricao}
-Leitura funcional: de fora, entra pedido e sai resposta com fonte. Leitura estrutural: camadas 1 a 3 atendem e roteiam; 2 guarda; 4 barra; 6 chama fora. Codigo: \pth{marceloclaro/orchestrator.py}, \pth{mci/}, \pth{trust/}, \pth{opencode.json}. Limite: seta aqui e dependencia principal, nao unica possivel.
+\textbf{Como funciona e por quê.} O mapa resume dependências de oito camadas; percorrer a coluna é uma leitura da organização do Core, não uma sequência de chamadas obrigatória.
+\textbf{Justificativa.} Separar integração, roteamento, memória e verificação ajuda a localizar a responsabilidade de uma falha sem atribuí-la a uma camada inteira.
+\textbf{Limite.} As oito camadas são uma organização editorial do repositório. Contagens de configuração indicam componentes declarados, sem atestar conexão ou execução de inferência.
 \end{descricao}
+\fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator}
+
+
+
 
 \begin{flowch}[M2 -- Ciclo de orquestracao]{fonte: marceloclaro/orchestrator.py}
 \matrix[matrix of nodes,name=m2,row sep=5mm,column sep=4mm,nodes={fn},ampersand replacement=\&]{
@@ -59,8 +65,14 @@ Leitura funcional: de fora, entra pedido e sai resposta com fonte. Leitura estru
 \end{flowch}
 
 \begin{descricao}
-Ana ve um balcao unico que nunca divide sem anotar. Bruno ve quatro funcoes encadeadas com retorno gravado. Sem a seta de baixo, seria fila; com ela, e ciclo com aprendizado.
+\textbf{Como funciona e por quê.} A seta de volta representa a consulta de lições em uma nova tarefa; o esquema resume fases sem impor um loop sem fim.
+\textbf{Justificativa.} Separar seleção, execução e avaliação permite localizar em qual etapa faltou informação ou evidência.
+\textbf{Limite.} É uma decomposição conceitual: comandos diretos e rotas de integração não precisam atravessar todos os quatro nós, e memória disponível não comprova melhoria de desempenho.
 \end{descricao}
+\fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator}
+
+
+
 
 \section{Coordenacao e memoria}
 
@@ -77,8 +89,14 @@ Ana ve um balcao unico que nunca divide sem anotar. Bruno ve quatro funcoes enca
 \end{flowch}
 
 \begin{descricao}
-O Orquestrador publica a chamada, agentes voluntariam-se por capacidade, o Quadro registra dono de cada parte. Rastro: entradas do Quadro com tarefa, candidato, escore e decisao.
+\textbf{Como funciona e por quê.} As ligações entre tarefa, quadro e especialistas representam anúncio e interação. Não significam que busca, resumo e revisão sejam sempre despachados em paralelo.
+\textbf{Justificativa.} Separar anúncio, atribuição e conclusão permite rastrear quem assumiu uma tarefa e por que um anúncio sem resposta ainda não é execução.
+\textbf{Limite.} O fluxo é orientado a eventos, e não um percurso obrigatório por todos os agentes. Matching e confiança interna não atestam qualidade científica.
 \end{descricao}
+\fontecore{mci/blackboard.py}{Blackboard}
+
+
+
 
 \begin{flowch}[M4 -- Memoria e MetaBus]{fonte: mci/}
 \matrix[matrix of nodes,name=m4,row sep=3mm,column sep=4mm,nodes={fn},ampersand replacement=\&]{
@@ -94,8 +112,14 @@ O Orquestrador publica a chamada, agentes voluntariam-se por capacidade, o Quadr
 \end{flowch}
 
 \begin{descricao}
-Fazer gera episodio; refletir extrai licao; lembrar carrega contexto. Sem caderno, cada pedido comeca do zero; com ele, erro vira criterio.
+\textbf{Como funciona e por quê.} As setas distinguem evento de execução, reflexão, registro episódico, extração de lições e consulta de contexto na próxima tarefa.
+\textbf{Justificativa.} Persistir a reflexão torna examinável o que se aprendeu e de qual execução a lição veio, permitindo contestá-la depois.
+\textbf{Limite.} Reflexão e confiança são registros internos; não são probabilidades calibradas nem garantia de que a próxima tarefa terá resultado melhor.
 \end{descricao}
+\fontecore{mci/metabus.py}{MetacognitiveMemory.add_reflection}
+
+
+
 
 \section{Qualidade e roteamento}
 
@@ -113,8 +137,14 @@ Fazer gera episodio; refletir extrai licao; lembrar carrega contexto. Sem cadern
 \end{flowch}
 
 \begin{descricao}
-Na duvida, reprova. Teste verde fora do criterio nao abre gate; criterio sem teste nao fecha entrega. Verificacao: \pth{specs/SPEC-935-R*.md} mais \pth{tests/test_r*.py}.
+\textbf{Como funciona e por quê.} O caminho RED, GREEN e refatoração representa execução de testes antes e depois da mudança. O gate deve avaliar a evidência vinculada ao contrato, inclusive após refatorar.
+\textbf{Justificativa.} Critérios explícitos permitem que a verificação associe uma execução e um artefato ao requisito correspondente, em vez de confiar em uma declaração de conclusão.
+\textbf{Limite.} Prova, neste esquema, significa evidência do teste vinculado. Não implica demonstração matemática, prova de segurança universal ou validação externa.
 \end{descricao}
+\fontecore{sdd/spec_engine.py}{SpecVerifier.verify}
+
+
+
 
 \begin{flowch}[M6 -- Roteamento por atencao]{fonte: transformer/ e Vaswani et al., 2017}
 \matrix[matrix of nodes,name=m6,row sep=3mm,column sep=4mm,nodes={fn},ampersand replacement=\&]{
@@ -130,8 +160,14 @@ Na duvida, reprova. Teste verde fora do criterio nao abre gate; criterio sem tes
 \end{flowch}
 
 \begin{descricao}
-Pergunta compara com candidatos, historico pondera, softmax concentra peso, regra escolhe, fallback salva. Pontuacao ordena; nao certifica competencia.
+\textbf{Como funciona e por quê.} Os rótulos Q, K e V são uma analogia para tarefa, candidatos e histórico. A escolha local combina sinais após gates; esses rótulos não provam equivalência com atenção neural treinada.
+\textbf{Justificativa.} Gates obrigatórios impedem que bons sinais de afinidade compensem ausência de permissão, capacidade ou disponibilidade.
+\textbf{Limite.} O roteador é um mecanismo computacional local inspirado em atenção. Seus scores não medem compreensão humana, validade científica ou probabilidade calibrada de sucesso.
 \end{descricao}
+\fontecore{transformer/attention.py}{AttentionRouter}
+
+
+
 
 \section{Operacao e reproducao}
 
@@ -150,8 +186,14 @@ Pergunta compara com candidatos, historico pondera, softmax concentra peso, regr
 \end{flowch}
 
 \begin{descricao}
-Cada comando tem saida esperada. Amarelo em CLI opcional nao e falha total; vermelho em specs ou memoria interrompe. Anote versoes e credenciais ausentes.
+\textbf{Como funciona e por quê.} A sequência clone, ambiente, instalação e doctor confere pré-requisitos. O nó final significa aptidão para iniciar uma tarefa compatível, não sucesso de todos os executores.
+\textbf{Justificativa.} Um inventário rápido permite localizar pré-requisitos ausentes antes do trabalho, mantendo operações externas fora do diagnóstico estrutural padrão.
+\textbf{Limite.} Um pass estrutural não observa inferência, disponibilidade de rede ou conclusão de prova nativa. Consulte o modo e o detalhe antes de dizer que uma integração funciona.
 \end{descricao}
+\fontecore{marceloclaro/doctor.py}{run_doctor}
+
+
+
 
 \begin{flowch}[M8 -- FAIR e 12 passos]{fonte: epilogo REP-12}
 \matrix[matrix of nodes,name=m8,row sep=3mm,column sep=4mm,nodes={fn},ampersand replacement=\&]{
@@ -167,8 +209,14 @@ Cada comando tem saida esperada. Amarelo em CLI opcional nao e falha total; verm
 \end{flowch}
 
 \begin{descricao}
-Os 12 passos do epilogo cabem em seis casas: preparar, inventariar, executar, conferir DOI, recompilar e registrar. Sem passo 12, a reproducao serviu so a voce.
+\textbf{Como funciona e por quê.} O mapa organiza encontrabilidade, acesso, interoperabilidade e reutilização como perguntas de documentação. Recompilar e registrar torna fontes e mudanças rastreáveis; não constitui certificação FAIR.
+\textbf{Justificativa.} Separar as perguntas ajuda o leitor a localizar fonte, procedimento, resultado e limite antes de concluir que uma etapa foi realizada.
+\textbf{Limite.} É um roteiro pedagógico. A descrição não mede eficácia de aprendizagem, qualidade científica ou execução autônoma de todas as etapas.
 \end{descricao}
+\fontecore{livro-core/mod-15-epilogo-reproducao.tex}{roteirodidatico}
+
+
+
 
 \section{Jornada e ativacao}
 
@@ -182,8 +230,14 @@ Os 12 passos do epilogo cabem em seis casas: preparar, inventariar, executar, co
 \end{flowch}
 
 \begin{descricao}
-Funcional promete contrato; estrutural mostra encanamento; teorica explica gate; reproducao entrega chave. Quem conta a mesma cena nas quatro linguas entendeu o bastante para usar sem se enganar.
+\textbf{Como funciona e por quê.} As quatro estações são um percurso de leitura: experimentar uma função, localizar a estrutura, examinar a explicação e reproduzir a operação. As personagens são recursos narrativos, não sujeitos de um experimento.
+\textbf{Justificativa.} Separar as perguntas ajuda o leitor a localizar fonte, procedimento, resultado e limite antes de concluir que uma etapa foi realizada.
+\textbf{Limite.} É um roteiro pedagógico. A descrição não mede eficácia de aprendizagem, qualidade científica ou execução autônoma de todas as etapas.
 \end{descricao}
+\fontecore{livro-core/mod-00b-jornada-leitor.tex}{roteirodidatico}
+
+
+
 
 \begin{flowch}[M10 -- Ativacao E1 a E7]{fonte: mod-13 e mod-14}
 \matrix[matrix of nodes,name=m10,row sep=2.5mm,column sep=2.5mm,nodes={fn},ampersand replacement=\&]{
@@ -204,15 +258,53 @@ Funcional promete contrato; estrutural mostra encanamento; teorica explica gate;
 \end{flowch}
 
 \begin{descricao}
-Gatilho sem registro nao e ativacao; escore sem desempate nao e escolha; entrega sem fonte volta. Este e o checklist que cada ficha do catalogo deve passar.
+\textbf{Como funciona e por quê.} Os sete nós de gatilho a entrega ajudam a perguntar qual entrada, decisão, executor e evidência foram registrados. Compare essa lista com a rota real em vez de presumir que cada operação percorreu os sete nós.
+\textbf{Justificativa.} Separar as perguntas ajuda o leitor a localizar fonte, procedimento, resultado e limite antes de concluir que uma etapa foi realizada.
+\textbf{Limite.} É um roteiro pedagógico. A descrição não mede eficácia de aprendizagem, qualidade científica ou execução autônoma de todas as etapas.
 \end{descricao}
+\fontecore{livro-core/mod-13-ativacao-agentes.tex}{roteirodidatico}
+
+
+
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.92\textwidth]{fig-infografico-core.png}
+\includegraphics[width=0.92\textwidth,height=0.78\textheight,keepaspectratio]{fig-infografico-core.png}
 \caption{Infogr\'afico do Core gerado no NotebookLM em pt-BR a partir da capa oficial: logotipo, paleta com RGB, 8 camadas, ciclo, m\'etricas e planta de 12 passos. Figura ilustrativa: microtextos podem conter trocas de letras do gerador; valem os n\'umeros do texto.}
 \end{figure}
 
 \begin{aviso}
 Limite do atlas. Os dez mapas cobrem arququetipos por camada e por processo; fichas individuais do catalogo herdam o mapa da sua camada. Mapa algum substitui abrir o arquivo e rodar o comando.
 \end{aviso}
+
+
+% R814: leitura guiada substantiva; cenários hipotéticos rotulados.
+\section[Leitura guiada]{Leitura guiada — Atlas: conferir o significado de uma seta}
+\elemento{Leitura guiada — R814-16}{\metainfo{Ciclo}{R814}}
+\begin{descricao}
+\textbf{O fenômeno.} Dois desenhos visualmente parecidos podem representar relações diferentes. Antes de seguir uma seta, o leitor precisa saber se ela representa chamada, dependência, evento ou uma sequência didática.
+\end{descricao}
+
+\begin{definicao}
+\textbf{Grandezas e definições.} Nó representa um componente ou estado; seta dirigida representa uma relação; decisão contém uma condição; retorno indica uma possibilidade de revisão. Cor e estilo são convenções definidas na legenda.
+\end{definicao}
+
+\begin{metodo}
+\textbf{Dedução passo a passo.} Escolha um mapa e leia sua legenda e explicação imediata. Identifique a origem e o destino de cada seta. Em mapas da implementação, confronte a relação com a fonte local indicada.
+\end{metodo}
+
+\begin{resultado}
+\textbf{Exemplo resolvido.} Um desenho hipotético tem uma seta cheia de entrada e uma tracejada de retorno. Existem duas relações desenhadas, mas o retorno só ocorre se sua condição se verificar. Contar duas setas não demonstra que ambas tenham sido percorridas.
+\end{resultado}
+
+\begin{resultado}
+\textbf{Ordem de grandeza e verificação.} Para cada relação, escreva a condição e a observação que a confirmaria. Confira o identificador da fonte. Uma fonte existente permite inspeção; um log ou teste pertinente é necessário para afirmar execução.
+\end{resultado}
+
+\begin{aviso}
+\textbf{Limite de validade.} Mapas omitem detalhes e não são provas formais. Setas de aprendizagem não demonstram melhora da tarefa seguinte; é preciso definir e medir essa melhora separadamente.
+\end{aviso}
+
+\begin{resultado}
+\textbf{Exercícios.} Escolha uma seta de evento e uma de chamada. Indique como diferenciá-las na fonte. Mostre um caminho de falha que o mapa resume ou não apresenta.
+\end{resultado}

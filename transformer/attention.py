@@ -7,7 +7,7 @@ somente os candidatos elegíveis recebem scores normalizados e pesos softmax.
 """
 
 import math
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 from .embedder import TaskEmbedder
 

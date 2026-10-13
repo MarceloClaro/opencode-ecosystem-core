@@ -103,8 +103,15 @@ sido outro) em sequência governada.
 \end{flowch}
 
 \begin{descricao}
-\textbf{Como funciona e por quê.} O fluxograma classifica o problema antes de escolher o motor: a seta de entrada é uma pergunta de natureza (é simbólico, é numérico, é textual, é criativo?) e não de ferramenta. O desenho tem cinco saídas e cada saída é um motor; a seta que desvia para \emph{fallback} é a única que admite falha, e ela é \textbf{nomeada} no desenho justamente para tornar a degradação visível.
-\textbf{Justificativa.} A classificação por natureza segue a tradição de Simon de que a escolha de procedimento é parte do próprio problema, não um detalhe de engenharia: o mesmo enunciado formulado como pergunta ou como equação requer procedimentos diferentes, e tratar a escolha como heurística é o que produz respostas plausíveis sem justificativa. O fluxograma transforma essa heurística em \textbf{regra declarativa}, que é testável \citref{SIMON, H. A. A behavioral model of rational choice. \emph{The Quarterly Journal of Economics}, v.~69, n.~1, p.~99-118, 1955}{10.2307/1884852}{A classificação por natureza segue a tradição de Simon de que a escolha de procedimento é parte do próprio problema, não um detalhe de engenharia: o mesmo enunciado formulado como pergunta ou como equação requer procedimentos diferentes, e tratar a escolha como heurística é o que produz respostas plausíveis sem justificativa. }{Broadly stated, the task is to replace the global rationality of economic man with a kind of rational behavior that is compatible with the access to information and the computational capacities that are actually possessed by organisms}{Em termos amplos, a tarefa é substituir a racionalidade global do homem econômico por um tipo de comportamento racional compatível com o acesso à informação e com as capacidades computacionais efetivamente possuídas pelos organismos.}{SIMON, 1955, p.~99--118}.\end{descricao}
+\textbf{Como funciona e por quê.} As bifurcações distinguem perguntas simbólicas, inferência com evidência e análise de cenários. A seta de cada família ao resultado exige explicitar premissas e conferir a saída. A ligação tracejada é uma possibilidade de fallback que precisa ser declarada.
+\textbf{Justificativa.} Escolher um método adequado à pergunta evita usar um solucionador formal para uma premissa empírica ainda sem evidência, ou tratar um cenário como observação.
+\textbf{Limite.} A classificação é conceitual. Confirme argumentos, motores instalados e rotas suportadas na API reason antes de supor que todas as opções do esquema sejam executadas.
+\end{descricao}
+\fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator.reason}
+
+
+\noindent\textit{Contexto bibliográfico geral, sem certificação desta rota.} \citref{SIMON, H. A. A behavioral model of rational choice. \emph{The Quarterly Journal of Economics}, v.~69, n.~1, p.~99-118, 1955}{10.2307/1884852}{Enquadramento teórico geral; a implementação desta rota é conferida na fonte primária local. Este artigo não certifica o funcionamento nem o desempenho do Core.}{Broadly stated, the task is to replace the global rationality of economic man with a kind of rational behavior that is compatible with the access to information and the computational capacities that are actually possessed by organisms}{Em termos amplos, a tarefa é substituir a racionalidade global do homem econômico por um tipo de comportamento racional compatível com o acesso à informação e com as capacidades computacionais efetivamente possuídas pelos organismos.}{SIMON, 1955, p.~99--118}
+
 
 \begin{niveis}
 \textbf{Intuição:} um canivete de raciocínio: não se abre lata com tesoura; cada
@@ -158,9 +165,16 @@ cognitivo.
 \draw[seta] (trf-5-1)--(trf-6-1);
 \end{flowch}
 
+\begin{descricao}
+\textbf{Como funciona e por quê.} O texto pode ser representado por vetores, comparado a capacidades e usado em um mecanismo de atenção. As setas distinguem transformação, comparação, ordenação e memória. A implementação do pipeline recebe dados e produz saídas; o estado intermediário precisa ser consultado na API concreta.
+\textbf{Justificativa.} Etapas separadas permitem conferir o vetor, o sinal de afinidade e a decisão sem atribuir o resultado inteiro a uma caixa opaca.
+\textbf{Limite.} A stack local não é um modelo de linguagem treinado do zero. Afinidade vetorial e memória não demonstram raciocínio correto nem correspondem automaticamente ao treinamento Transformer original.
+\end{descricao}
+\fontecore{transformer/pipeline.py}{TransformerPipeline}
 
-\textbf{Como funciona e por quê.} O desenho encadeia \emph{entrada} $\to$ \emph{análise} $\to$ \emph{MemBus} $\to$ \emph{resposta}, e o que o torna pipeline e não função única é que cada etapa \textbf{lê e escreve estado explícito}: a etapa seguinte não recebe argumentos, lê o que a anterior deixou. As setas são, portanto, \emph{pipes} de estado, e uma falha no meio deixa o estado parcial inspecionável.
-\textbf{Justificativa.} O ganho de explicitar o estado intermediário é o mesmo que a observabilidade exige de sistemas distribuídos: um resultado que não pode ser inspecionado no meio do caminho é um resultado que só se aceita ou se rejeita em bloco. A decomposição em etapas com estado legível é o que permite \textbf{auditar} uma resposta em vez de apenas recebê-la \citref{NII, H. P. Blackboard systems: the blackboard model of problem solving and the evolution of blackboard architectures. \emph{AI Magazine}, v.~7, n.~2, p.~38-53, 1986}{10.1609/aimag.v7i2.537}{O ganho de explicitar o estado intermediário é o mesmo que a observabilidade exige de sistemas distribuídos: um resultado que não pode ser inspecionado no meio do caminho é um resultado que só se aceita ou se rejeita em bloco. }{Opportunistic reasoning has the advantage that order of application of the knowledge sources is not predetermined, once it is decided which knowledge sources to activate, the order is determined dynamically}{O raciocínio oportunista tem a vantagem de que a ordem de aplicação das fontes de conhecimento não é pré-determinada; uma vez decidido quais fontes ativar, a ordem é determinada dinamicamente.}{NII, 1986, p.~38--53}.\begin{limite}
+
+\noindent\textit{Contexto bibliográfico geral, sem certificação desta rota.} \citref{NII, H. P. Blackboard systems: the blackboard model of problem solving and the evolution of blackboard architectures. \emph{AI Magazine}, v.~7, n.~2, p.~38-53, 1986}{10.1609/aimag.v7i2.537}{Enquadramento teórico geral; a implementação desta rota é conferida na fonte primária local. Este artigo não certifica o funcionamento nem o desempenho do Core.}{Opportunistic reasoning has the advantage that order of application of the knowledge sources is not predetermined, once it is decided which knowledge sources to activate, the order is determined dynamically}{O raciocínio oportunista tem a vantagem de que a ordem de aplicação das fontes de conhecimento não é pré-determinada; uma vez decidido quais fontes ativar, a ordem é determinada dinamicamente.}{NII, 1986, p.~38--53}
+\begin{limite}
 Os componentes da stack implementam o \emph{conceito} de atenção no MetaBus; não
 são um GPT treinado do zero. Sua força é a \emph{composição dentro do Core}, não a
 competição com modelos de fronteira.
@@ -173,7 +187,7 @@ competição com modelos de fronteira.
 
 \begin{descricao}
 O Core encaminha tarefas a modelos por \textbf{tipo de tarefa}: o
-\pth{marceloclaro/model_router.py} conhece os perfis \emph{coding}, \emph{reasoning},
+\pth{integrations/model_router.py} conhece os perfis \emph{coding}, \emph{reasoning},
 \emph{academic}, \emph{writing}, \emph{fast}, \emph{local} e \emph{math}, com
 \textit{fallback} transparente. Os provedores conhecidos pelo roteamento são
 \pth{litert-lm} e
@@ -227,8 +241,15 @@ sem exceção.
 \end{flowch}
 
 \begin{descricao}
-\textbf{Como funciona e por quê.} O desenho tem uma cadeia de tentativas e o detalhe auditável é a última: quando todas as rotas falham, o sistema \textbf{declara} a falha em vez de devolver texto. A seta para \emph{declarar falha} é a que impede que um erro de infraestrutura apareça como resposta competente --- e é a seta mais importante do desenho, porque é a que quase nunca é implementada.
-\textbf{Justificativa.} O modo de falha mais estudado em raciocínio automatizado é o resultado silenciosamente errado: o modo de falha mais caro de um sistema autônomo não é a queda, é a resposta plausível e errada. Ioannidis estima que a maior parte das hipóteses publicadas em ciências empíricas não se sustenta --- o que, transposto para software, vira a regra de que \textbf{declarar a incerteza} é comportamento correto e não defeito \citref{IOANNIDIS, J. P. A. Why most published research findings are false. \emph{PLoS Medicine}, v.~2, n.~8, e124, 2005}{10.1371/journal.pmed.0020124}{O modo de falha mais estudado em raciocínio automatizado é o resultado silenciosamente errado: o modo de falha mais caro de um sistema autônomo não é a queda, é a resposta plausível e errada. }{There is increasing concern that most current published research findings are false}{Há preocupação crescente de que a maioria dos resultados de pesquisa atualmente publicados seja falsa.}{IOANNIDIS, 2005, p.~e124}.\end{descricao}
+\textbf{Como funciona e por quê.} O roteador avalia candidatos conforme o perfil e as condições do ambiente; caminhos locais, configurados e alternativos podem ser considerados. As bifurcações representam disponibilidade e configuração, enquanto o resultado identifica a rota e se houve fallback.
+\textbf{Justificativa.} Declarar a troca de rota conserva a proveniência e permite entender diferenças de modelo, custo, ambiente ou comportamento.
+\textbf{Limite.} A ordem ilustrada não é uma preferência universal. A política depende do perfil e da configuração. Escolher uma rota não comprova resposta do modelo; registre a execução e seus erros.
+\end{descricao}
+\fontecore{integrations/model_router.py}{ModelRouter.route}
+
+
+\noindent\textit{Contexto bibliográfico geral, sem certificação desta rota.} \citref{IOANNIDIS, J. P. A. Why most published research findings are false. \emph{PLoS Medicine}, v.~2, n.~8, e124, 2005}{10.1371/journal.pmed.0020124}{Enquadramento teórico geral; a implementação desta rota é conferida na fonte primária local. Este artigo não certifica o funcionamento nem o desempenho do Core.}{There is increasing concern that most current published research findings are false}{Há preocupação crescente de que a maioria dos resultados de pesquisa atualmente publicados seja falsa.}{IOANNIDIS, 2005, p.~e124}
+
 
 \elemento{Impactos da escolha de modelo}{\metainfo{ID}{R-09} \hfill \metainfo{Perfil}{SPEC-935-R607}}
 

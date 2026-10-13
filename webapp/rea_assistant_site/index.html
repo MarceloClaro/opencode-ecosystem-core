@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Instruções locais do assistente de engenharia reversa REA: configuração, exemplos, evidências e limites.">
+  <title>REA · Assistente local de engenharia reversa</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+  <header class="site-header">
+    <a class="brand" href="#inicio" aria-label="REA, início"><span class="brand-mark" aria-hidden="true">R</span><span>REA<span class="brand-caption">Assistente local</span></span></a>
+    <nav aria-label="Navegação principal">
+      <a href="#comecar">Começar</a><a href="#exemplos">Exemplos</a><a href="#evidencias">Evidências</a><a href="#limites">Limites</a>
+    </nav>
+    <span class="local-label"><span aria-hidden="true">◉</span> Loopback</span>
+  </header>
+
+  <main id="conteudo">
+    <section class="hero section" id="inicio" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">OpenCode Core / Engenharia reversa</p>
+        <h1 id="hero-title">Compreenda aplicativos.<br><span>Conserve a evidência.</span></h1>
+        <p class="hero-description">Inspecione JavaScript/Electron, binários nativos, metadados .NET e HTML pelo agente MarceloClaro. Receba achados em português com a origem e os limites da análise.</p>
+        <div class="hero-actions"><a class="primary-link" href="#comecar">Configurar e começar <span aria-hidden="true">↗</span></a><a class="text-link" href="#fluxo">Conhecer o fluxo <span aria-hidden="true">→</span></a></div>
+        <div class="hero-tags"><span>Inspeção estática</span><span>CLI e MCP stdio</span><span>Sem upload no site</span></div>
+      </div>
+      <aside class="hero-panel" aria-label="Como usar este guia">
+        <div class="panel-heading"><span class="tiny-label">No seu computador</span><span class="panel-symbol" aria-hidden="true">⌘</span></div>
+        <h2>Da entrada ao recibo</h2>
+        <ol class="mini-steps"><li><span>01</span><div><strong>Configure o modo local</strong><p>Perfil de agente e conexões MCP.</p></div></li><li><span>02</span><div><strong>Inspecione um alvo autorizado</strong><p>Arquivo local ou snapshot loopback.</p></div></li><li><span>03</span><div><strong>Leia os achados e os limites</strong><p>Uma evidência identifica cada resultado.</p></div></li></ol>
+        <p class="panel-note">O guia é informativo. A análise acontece pela CLI/MCP; a aplicação alvo não é executada.</p>
+      </aside>
+    </section>
+
+    <section class="architecture section" id="fluxo" aria-labelledby="flow-heading">
+      <div class="section-heading"><div><p class="eyebrow">Um caminho de execução</p><h2 id="flow-heading">Coordenação com rastreabilidade</h2></div><p>O primário coordena a ponte REA. Descoberta de ferramentas e prontidão não demonstram qualidade da análise.</p></div>
+      <div class="flow-scroll" tabindex="0" aria-label="Diagrama de arquitetura; pode ser rolado horizontalmente em telas pequenas">
+        <svg class="flow-svg" viewBox="0 0 1250 206" role="img" aria-labelledby="flow-title flow-description">
+          <title id="flow-title">Fluxo do assistente local REA</title>
+          <desc id="flow-description">Agente local segue por CLI ou MCP, MarceloClaro, REA e provedores. EvidenceLedger conserva a proveniência e fornece achados e limites. IDA, Hopper e JEB são opcionais; sem licença não estão prontos.</desc>
+          <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" class="arrow-head"/></marker></defs>
+          <path class="flow-line" d="M151 74 H181 M331 74 H361 M511 74 H541 M691 74 H721 M871 74 H901 M1051 74 H1081" marker-end="url(#arrow)"/>
+          <g class="flow-node"><rect x="1" y="32" width="150" height="84" rx="12"/><text x="76" y="66">Agente local</text><text x="76" y="90" class="flow-sub">modelo loopback</text></g>
+          <g class="flow-node"><rect x="181" y="32" width="150" height="84" rx="12"/><text x="256" y="66">CLI / MCP</text><text x="256" y="90" class="flow-sub">entrada local</text></g>
+          <g class="flow-node flow-primary"><rect x="361" y="32" width="150" height="84" rx="12"/><text x="436" y="66">MarceloClaro</text><text x="436" y="90" class="flow-sub">agente primário</text></g>
+          <g class="flow-node"><rect x="541" y="32" width="150" height="84" rx="12"/><text x="616" y="66">REA</text><text x="616" y="90" class="flow-sub">ponte analítica</text></g>
+          <g class="flow-node"><rect x="721" y="32" width="150" height="84" rx="12"/><text x="796" y="66">Provedores</text><text x="796" y="90" class="flow-sub">Ghidra / JS / .NET</text></g>
+          <g class="flow-node"><rect x="901" y="32" width="150" height="84" rx="12"/><text x="976" y="66">EvidenceLedger</text><text x="976" y="90" class="flow-sub">origem e hashes</text></g>
+          <g class="flow-node"><rect x="1081" y="32" width="168" height="84" rx="12"/><text x="1165" y="66">Achados e limites</text><text x="1165" y="90" class="flow-sub">explicação em português</text></g>
+          <path class="flow-optional-line" d="M796 116 V140"/>
+          <g class="flow-optional"><rect x="662" y="142" width="268" height="47" rx="9"/><text x="796" y="161">IDA / Hopper / JEB · opcionais</text><text x="796" y="179" class="flow-sub">licença e configuração exigidas</text></g>
+        </svg>
+      </div>
+      <p class="diagram-note">A explicação do recibo é determinística: um LLM não é requisito para ler o resultado.</p>
+    </section>
+
+    <section class="section" id="comecar" aria-labelledby="start-heading">
+      <div class="section-heading"><div><p class="eyebrow">Guia de execução</p><h2 id="start-heading">Comece em quatro passos</h2></div><p>Execute os comandos no terminal, a partir da raiz do OpenCode Core no Ubuntu/WSL. Os exemplos usam a instalação local em <code>.venv</code>.</p></div>
+      <div class="steps-grid">
+        <article class="step-card"><div class="step-title"><span class="step-number">01</span><h3>Configure o assistente</h3></div><p>Gere o perfil local de agente e os exemplos MCP para Linux e Windows/WSL. O setup informa onde os arquivos foram gravados.</p><div class="command-block"><div class="command-bar"><span>Terminal · Ubuntu/WSL</span><button type="button" data-copy-target="cmd-setup" aria-label="Copiar comando de configuração">Copiar</button></div><pre><code id="cmd-setup">.venv/bin/python -m marceloclaro.cli rea setup</code></pre></div><p class="card-footnote">A configuração aceita modelo e endpoint em loopback. Modelo configurado não significa inferência executada.</p></article>
+        <article class="step-card"><div class="step-title"><span class="step-number">02</span><h3>Inspecione o alvo</h3></div><p>Informe um caminho autorizado. A seleção automática considera assinatura e extensão; a prontidão do provedor é conferida na operação.</p><div class="command-block"><div class="command-bar"><span>Substitua CAMINHO</span><button type="button" data-copy-target="cmd-inspect" aria-label="Copiar comando de inspeção">Copiar</button></div><pre><code id="cmd-inspect">.venv/bin/python -m marceloclaro.cli rea inspect CAMINHO --kind auto --format text</code></pre></div><p class="card-footnote">O worker exige namespaces Linux de usuário, rede e PID. Se o isolamento não estiver disponível, a análise é bloqueada.</p></article>
+        <article class="step-card"><div class="step-title"><span class="step-number">03</span><h3>Leia a evidência</h3></div><p>Use o caminho do recibo emitido pela inspeção. A explicação reúne achados, identificadores de evidência e limitações do provedor.</p><div class="command-block"><div class="command-bar"><span>Substitua RECIBO</span><button type="button" data-copy-target="cmd-explain" aria-label="Copiar comando de explicação">Copiar</button></div><pre><code id="cmd-explain">.venv/bin/python -m marceloclaro.cli rea explain RECIBO --format text</code></pre></div><p class="card-footnote">Um resultado sem evidência identificada não comprova sucesso. Limitações permanecem na explicação.</p></article>
+        <article class="step-card"><div class="step-title"><span class="step-number">04</span><h3>Conecte um cliente local</h3></div><p>Configure o cliente com o perfil MCP gerado pelo setup. O cliente inicia este processo e se comunica pelo transporte stdio.</p><div class="command-block"><div class="command-bar"><span>MCP · processo local</span><button type="button" data-copy-target="cmd-mcp" aria-label="Copiar comando do servidor MCP">Copiar</button></div><pre><code id="cmd-mcp">.venv/bin/python -m integrations.rea_assistant_mcp</code></pre></div><p class="card-footnote">O cliente precisa conservar a política local. Se enviar os dados à nuvem, esse uso fica fora da garantia do modo local.</p></article>
+      </div>
+      <aside class="inline-note"><strong>Sobre o agente</strong><p>Inspeção e explicação funcionam sem LLM. O valor padrão modelo-local é um marcador: escolha um modelo instalado com <code>rea setup --model NOME_DO_MODELO</code>. Ative a conversa por <code>rea agent</code>, que usa configuração própria fora do projeto. Confirme a inferência separadamente; OPENCODE_CONFIG sozinho pode ser sobreposto pela configuração do projeto.</p></aside>
+      <div class="command-block"><div class="command-bar"><span>Confira a configuração efetiva sem inferência</span><button type="button" data-copy-target="cmd-agent-check" aria-label="Copiar verificação do agente local">Copiar</button></div><pre><code id="cmd-agent-check">.venv/bin/python -m marceloclaro.cli rea agent --check</code></pre></div>
+    </section>
+
+    <section class="section examples-section" id="exemplos" aria-labelledby="examples-heading">
+      <div class="section-heading"><div><p class="eyebrow">Alvos de exemplo</p><h2 id="examples-heading">Escolha a entrada apropriada</h2></div><p>Os caminhos abaixo são ilustrativos. Substitua por arquivos que você tem autorização para analisar; esses exemplos não são resultados executados.</p></div>
+      <div class="example-grid">
+        <article class="example-card"><span class="type-tag">JavaScript / Electron</span><h3>Código empacotado</h3><p>Estrutura, referências e sinais estáticos de JavaScript/Electron. Não executa a aplicação nem demonstra comportamento em uso.</p><div class="command-block"><div class="command-bar"><span>Arquivo local</span><button type="button" data-copy-target="cmd-js" aria-label="Copiar exemplo JavaScript">Copiar</button></div><pre><code id="cmd-js">.venv/bin/python -m marceloclaro.cli rea inspect ./aplicativo.js --kind auto --format text</code></pre></div></article>
+        <article class="example-card"><span class="type-tag">Nativo / Ghidra</span><h3>Binário compilado</h3><p>Ghidra instalado integra a rota nativa. Suporte a formatos e achados dependem do provedor e do arquivo; não há execução do alvo.</p><div class="command-block"><div class="command-bar"><span>Arquivo local</span><button type="button" data-copy-target="cmd-native" aria-label="Copiar exemplo de binário nativo">Copiar</button></div><pre><code id="cmd-native">.venv/bin/python -m marceloclaro.cli rea inspect ./aplicativo --kind auto --format text</code></pre></div></article>
+        <article class="example-card"><span class="type-tag">.NET / Metadados</span><h3>Assembly gerenciado</h3><p>Inspeção de metadados e estrutura do artefato .NET. A leitura de metadados não comprova reconstrução integral do código-fonte.</p><div class="command-block"><div class="command-bar"><span>Arquivo local</span><button type="button" data-copy-target="cmd-dotnet" aria-label="Copiar exemplo .NET">Copiar</button></div><pre><code id="cmd-dotnet">.venv/bin/python -m marceloclaro.cli rea inspect ./Biblioteca.dll --kind auto --format text</code></pre></div></article>
+        <article class="example-card"><span class="type-tag">HTML / Snapshot</span><h3>Estrutura de uma página</h3><p>Arquivos HTML exportados ou snapshot de URL literal loopback. Não segue redirects, acessa sites remotos ou executa JavaScript da página.</p><div class="command-block"><div class="command-bar"><span>Arquivo local</span><button type="button" data-copy-target="cmd-html" aria-label="Copiar exemplo HTML">Copiar</button></div><pre><code id="cmd-html">.venv/bin/python -m marceloclaro.cli rea inspect ./pagina.html --kind auto --format text</code></pre></div></article>
+      </div>
+      <p class="examples-note">Para URL loopback, use o endereço numérico local, como <code>http://127.0.0.1:8000/</code>. O snapshot tem limitações próprias e não é um teste dinâmico do site.</p>
+    </section>
+
+    <section class="section evidence-section" id="evidencias" aria-labelledby="evidence-heading">
+      <div class="section-heading"><div><p class="eyebrow">Leia o resultado com contexto</p><h2 id="evidence-heading">O que cada estado comprova</h2></div><p>A confiança deve acompanhar a evidência da operação solicitada. A explicação não promove uma hipótese a fato confirmado.</p></div>
+      <div class="state-grid"><article><span class="state-index">I</span><h3>Instalação</h3><p>O componente e sua versão foram localizados. Isso não prova configuração válida nem uma análise concluída.</p></article><article><span class="state-index">II</span><h3>Prontidão</h3><p>Pré-requisitos e configuração da camada foram conferidos. Ainda é necessário executar a operação e verificar a resposta.</p></article><article><span class="state-index">III</span><h3>Execução</h3><p>A operação retornou evidência identificada, vinculada ao alvo. O recibo conserva proveniência, achados e limitações.</p></article></div>
+      <div class="evidence-details"><div><h3>Procure no recibo</h3><ul><li>Alvo, tipo reconhecido e hash do artefato.</li><li>Provedor, versão e operação solicitada.</li><li>Identificadores de evidência dos achados.</li><li>Limitações, erros e escopo realmente executado.</li></ul></div><div><h3>Confira a implementação</h3><p>Os testes abaixo verificam o servidor de instruções e os contratos locais do backend. Eles não medem a qualidade universal da engenharia reversa.</p><div class="command-block"><div class="command-bar"><span>Testes locais do projeto</span><button type="button" data-copy-target="cmd-tests" aria-label="Copiar comando de testes">Copiar</button></div><pre><code id="cmd-tests">.venv/bin/python -m pytest -q tests/test_r851_rea_assistant_site.py tests/test_r850_rea_assistant_local.py</code></pre></div></div></div>
+    </section>
+
+    <section class="section limits-section" id="limites" aria-labelledby="limits-heading">
+      <div class="section-heading"><div><p class="eyebrow">Limites de uso</p><h2 id="limits-heading">Localidade com escopo explícito</h2></div><p>A inspeção busca compreender o artefato. Ela não recupera necessariamente o projeto original, nem comprova segurança ou equivalência funcional.</p></div>
+      <div class="limits-grid"><article><h3>Rede privada do worker</h3><p>O processo analítico usa namespaces de usuário, rede e PID com loopback privado, sem saída para host ou internet. A ausência dessa condição bloqueia a análise.</p></article><article><h3>O cliente também importa</h3><p>MCP stdio entrega informações ao cliente local. Clientes que remetem esses dados a serviços de nuvem estão fora da garantia desta configuração.</p></article><article><h3>Provedores comerciais opcionais</h3><p>IDA, Hopper e JEB exigem licença e configuração do operador. Sem esses requisitos, permanecem pendentes; o inventário não demonstra execução.</p></article><article><h3>Inspeção estática</h3><p>O alvo não é executado. Snapshots HTML não executam scripts. Os achados não são evidência de comportamento dinâmico ou de reconstrução completa.</p></article></div>
+      <p class="boundary-note">Isolamento de rede não é uma sandbox universal de arquivos nem protege contra o proprietário do host. Analise somente artefatos que você tem autorização para examinar.</p>
+    </section>
+
+    <section class="section launch-section" aria-labelledby="launch-heading"><div><p class="eyebrow">Para abrir este guia novamente</p><h2 id="launch-heading">Instruções no endereço local</h2><p>O servidor aceita apenas os arquivos deste site em <code>127.0.0.1</code>. Feche com <kbd>Ctrl</kbd> + <kbd>C</kbd> no terminal.</p></div><div class="command-block"><div class="command-bar"><span>http://127.0.0.1:8767/</span><button type="button" data-copy-target="cmd-site" aria-label="Copiar comando do site local">Copiar</button></div><pre><code id="cmd-site">.venv/bin/python -m marceloclaro.cli rea site --port 8767</code></pre></div></section>
+  </main>
+  <footer class="site-footer"><span>REA · OpenCode Core</span><p>Guia local em português · Recursos locais · Sem análise por HTTP</p><a href="#inicio">Voltar ao início ↑</a></footer>
+  <div class="copy-feedback" id="copy-status" role="status" aria-live="polite" aria-atomic="true"></div>
+</body>
+</html>

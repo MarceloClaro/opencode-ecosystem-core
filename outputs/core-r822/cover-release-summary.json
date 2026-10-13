@@ -1,0 +1,87 @@
+{
+  "status": "complete",
+  "recorded_at_utc": "2026-10-12T11:01:50.954718+00:00",
+  "requested_file_updated": {
+    "path": "/home/marceloclaro/opencode-ecosystem-core/livro-core/capa-ecosistema.jpg",
+    "sha256": "9bd9c48de47e1d0c51ca9cc65b3a6e699e149534722509fb94dcf55522fc67f0",
+    "pixels": [
+      2481,
+      3508
+    ],
+    "dpi_metadata": [
+      300,
+      300
+    ],
+    "bytes": 1654831
+  },
+  "versioned_file": {
+    "path": "/home/marceloclaro/opencode-ecosystem-core/livro-core/capa-ecosistema-core.jpg",
+    "sha256": "9bd9c48de47e1d0c51ca9cc65b3a6e699e149534722509fb94dcf55522fc67f0",
+    "pixels": [
+      2481,
+      3508
+    ],
+    "dpi_metadata": [
+      300,
+      300
+    ],
+    "bytes": 1654831
+  },
+  "original_preserved": {
+    "path": "/home/marceloclaro/opencode-ecosystem-core/livro-core/capa-ecosistema-original.jpg",
+    "sha256": "5b00fb7acf5cdd7954eb400ba8da234571dbf09e8dead6794c753f53904abefb",
+    "pixels": [
+      1755,
+      2483
+    ],
+    "dpi_metadata": [
+      213,
+      213
+    ],
+    "bytes": 957347
+  },
+  "title": "Ecossistema OpenCode Core",
+  "subtitle": "Arquitetura, Orquestração e Validação Computacional de Sistemas Multiagente com Metacognição Funcional",
+  "author_and_location_preserved": true,
+  "portrait_and_logo": "Original bitmap preserved as book underlay; no generated portrait used in final cover.",
+  "typography": "Native vector text in livro-core/mod-00-capa.tex, matched to title page and PDF metadata.",
+  "final_mode": "book_native_typography_then_page_render_300_dpi",
+  "imagegen_mode": "builtin_tool_two_editorial_prototypes",
+  "imagegen_prototypes": [
+    {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r822/cover-imagegen-attempt-1.png",
+      "sha256": "6907f54174cff778b07cd7f1fe6af04179e52cc8e743a1ee4c1690922125c956",
+      "pixels": [
+        1054,
+        1492
+      ],
+      "dpi_metadata": null,
+      "bytes": 2256928
+    },
+    {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r822/cover-imagegen-attempt-2.png",
+      "sha256": "75adefd7061f37c2f11272db60fa77e7ece7952ee64a8dff622d41768edeb8af",
+      "pixels": [
+        1054,
+        1492
+      ],
+      "dpi_metadata": null,
+      "bytes": 2327417
+    }
+  ],
+  "prompt_file": "outputs/core-r822/cover-prompts.txt",
+  "prototype_selection": "Both generators returned 1054x1492; archived, not used as high-resolution portrait source.",
+  "original_effective_a4_dpi": [
+    212.27142857142854,
+    212.35084175084174
+  ],
+  "resolution_scope": "JPEG is a 300 dpi page render with vector text; photographic detail remains that of the original approx. 213 dpi source.",
+  "quality": "JPEG export quality95; no claim of recovered photographic detail.",
+  "source_hashes": {
+    "livro-core/mod-00-capa.tex": "82a8b78dcab349a61e59f9602bb52e0ef9d4f332b8bfdfdab786929054c5f2b5",
+    "livro-core/main.tex": "e2aa00f17be9db4d83f875cf424272623c517cbd46064b673fb0201e9197cf97",
+    "livro-core/capa-ecosistema-original.jpg": "5b00fb7acf5cdd7954eb400ba8da234571dbf09e8dead6794c753f53904abefb"
+  },
+  "visual_review": "Title, four subtitle lines, accents, authorship, original portrait/logo and location inspected; safe margins retained.",
+  "externally_validated": false
+}

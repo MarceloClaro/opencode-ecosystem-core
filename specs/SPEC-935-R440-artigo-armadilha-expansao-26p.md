@@ -1,5 +1,5 @@
 ---
-spec_id: SPEC-935-R440
+spec_id: SPEC-935-R440-artigo-armadilha-expansao-26p
 component: producao_cientifica.armadilha_renda_media_ideb
 title: Artigo Qualis A1 expandido (26 páginas) — sem seção interna de banca, tabelas/figuras nas margens
 version: 1.0.0

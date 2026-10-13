@@ -1,0 +1,45 @@
+{
+  "scope": "root read/execution review; no completed independent review due to reviewer usage limit",
+  "findings_corrected": [
+    {
+      "problem": "single JavaScript file routed to directory-only REA tool",
+      "evidence": "outputs/core-r850/initial-live-attempt/javascript-stdout.txt",
+      "fix": "byte-preserving temporary directory and declared limit"
+    },
+    {
+      "problem": "project configuration overrides OPENCODE_CONFIG and re-enables inherited MCPs",
+      "evidence": "outputs/core-r850/profile-precedence-before.json",
+      "fix": "separate client home/cwd plus resolved configuration check"
+    },
+    {
+      "problem": "configured model endpoint, MCP command or primary permission could diverge in resolved config",
+      "evidence": "outputs/core-r852/resolved-guard-red.xml",
+      "fix": "strict checks before conversation"
+    },
+    {
+      "problem": "worker structured failures discarded and guard failures reported successful",
+      "evidence": "outputs/core-r852/core-red-attempt-1-cli.txt",
+      "fix": "typed failures and readiness conjunction"
+    },
+    {
+      "problem": "new primary per MCP call accumulated subscriptions",
+      "evidence": "outputs/core-r852/mcp-primary-reuse-red.xml",
+      "fix": "one locked initialization per server"
+    },
+    {
+      "problem": "duplicate formal IDs silently overwrite prior specification",
+      "evidence": "outputs/core-r853/core-current-oracles-red-cli.txt",
+      "fix": "IDs namespaced, duplicate identities blocked, per-test registry state isolated"
+    }
+  ],
+  "current_source_sha256": {
+    "integrations/rea_assistant.py": "90776d34247a7e65c7d2b4fc54b50e607e4451d7f6ae38a20f0a3c97ab8f33d8",
+    "integrations/rea_local_worker.py": "d9d53cabbbc8097cf7442ec58c3d712f4262058a21b07c8043196fa86c08fd40",
+    "integrations/rea_assistant_mcp.py": "d37bc17f05e7650bbe8e5d326b7b38ef86d856c73399a8f96488488db1c05624",
+    "integrations/rea_layers.py": "6afdd99f714c618c34cd454d884a26062aea019a0032845965557339c16faa09",
+    "integrations/rea_bridge.py": "33a4105bbb178e8360001b290cd8f3c29247f8cdf2a5c2ac5142136bcc35cba7",
+    "marceloclaro/rea_cli.py": "f7549a2c3322a9a02b5b4fe0603677bcb601af42f6b6cc43f35ffd95b9e63774",
+    "sdd/spec_engine.py": "91e205b31969cec0f75b568b544f58f7e9779662adf88a696db5981404e2a3f5"
+  },
+  "externally_validated": false
+}

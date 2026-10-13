@@ -43,13 +43,19 @@ def _make_executor(runner=None, bin_path="/usr/bin/tig", allowlist=None):
 
 
 class TestDisponibilidade:
-    def test_binario_ausente_nao_disponivel_e_nao_executa(self):
-        ex = TigExecutor(bin_path="", runner=_runner_ok())
+    def test_binario_ausente_nao_disponivel_e_nao_executa(self, monkeypatch):
+        # Uma string vazia solicita a descoberta automática: isole todas
+        # as fontes consultadas, mesmo quando o operador já instalou Tig.
+        monkeypatch.delenv("TIG_BIN", raising=False)
+        monkeypatch.setattr("agent_runners.tig_executor.shutil.which", lambda name: None)
+        tracer = []
+        ex = TigExecutor(bin_path="", runner=_runner_ok(tracer=tracer))
         assert ex.available() is False
         receipt = ex.run(task="pesquisa", mode="architect")
         assert receipt.success is False
         assert receipt.provider is None
         assert receipt.exit_code is None
+        assert tracer == []
 
     def test_executor_disponivel_com_binario(self):
         ex = _make_executor(bin_path="/usr/bin/tig")

@@ -29,13 +29,14 @@ class TestR224RigorousScannersPipeline(unittest.TestCase):
         self.assertIn("scientific_rigor", res)
         self.assertGreaterEqual(res["excellence_score"], 0.0)
 
-    def test_spec_verifier_execution(self):
+    def test_criteria_only_inspection(self):
         spec = spec_registry.get("SPEC-935-R224")
         if spec:
             spec.add_criterion("SuperRigorPipeline validado", lambda out: out.get("pipeline") is True)
-        res = spec_verifier.verify("SPEC-935-R224", {"pipeline": True})
+        res = spec_verifier.verify("SPEC-935-R224", {"pipeline": True}, require_red_history=False)
         self.assertTrue(res["verified"])
-        self.assertEqual(res["status"], "green")
+        self.assertEqual(res["verification_scope"], "criteria_only")
+        self.assertEqual(res["status"], "criteria_passed")
 
 
 if __name__ == "__main__":

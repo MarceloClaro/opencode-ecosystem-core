@@ -35,13 +35,14 @@ class TestR218LazyAgentCatalog(unittest.TestCase):
         card2 = self.catalog.load_agent_card(first_agent)
         self.assertIs(card1, card2)
 
-    def test_spec_verifier_execution(self):
+    def test_criteria_only_inspection(self):
         spec = spec_registry.get("SPEC-935-R218")
         if spec:
             spec.add_criterion("Lazy Agent Catalog validado", lambda out: out.get("lazy") is True)
-        res = spec_verifier.verify("SPEC-935-R218", {"lazy": True})
+        res = spec_verifier.verify("SPEC-935-R218", {"lazy": True}, require_red_history=False)
         self.assertTrue(res["verified"])
-        self.assertEqual(res["status"], "green")
+        self.assertEqual(res["verification_scope"], "criteria_only")
+        self.assertEqual(res["status"], "criteria_passed")
 
 
 if __name__ == "__main__":

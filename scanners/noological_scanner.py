@@ -302,7 +302,6 @@ ECOSYSTEM_KEYWORDS: dict[str, dict[str, list[str]]] = {
         "trajectory_mapper": ["trajectory_mapper", "trajectory mapper", "trajectory", "TrajectoryMapper"],
         "autoevolve_pipeline": ["autoevolve", "auto_evolve", "auto-evolve", "autoevolve"],
         "evolutionary_roadmap": ["evolutionary_roadmap", "roadmap", "evolutionary pipeline", "EvolutionaryRoadmap", "evolutionary_pipeline"],
-        "successor_generator": ["successor_generator", "successor generator", "plausible successors", "SuccessorGenerator"],
     },
     "protocolos": {
         "sdd_spec_first": ["sdd", "spec-first", "spec_first", "especificação formal", "spec-", "Specification Driven"],
@@ -311,7 +310,6 @@ ECOSYSTEM_KEYWORDS: dict[str, dict[str, list[str]]] = {
         "mcp_interconnect": ["mcp", "model context protocol", "mcp_interconnect", "metacognitive", "mcp_server", "MCP interconnect"],
         "bernstein_orchestration": ["bernstein", "orchestration", "pipeline multi-agente", "BernsteinOrchestrator"],
         "sdd_gate": ["sdd gate", "spec verifier", "specverifier", "SDD Gate", "SpecVerifier"],
-        "behavioral_gate": ["behavioral_gate", "behavioral gate", "gate", "BehavioralGate"],
         "reflexion_middleware": ["reflexion", "reflection middleware", "auto-reflexão", "ReflexionMiddleware"],
     },
     "integracoes": {
@@ -344,6 +342,39 @@ ECOSYSTEM_KEYWORDS: dict[str, dict[str, list[str]]] = {
         "tokenomics": ["token", "token economy", "tokenomics", "economy", "TokenEconomy"],
     },
 }
+
+
+# R835: projeções por dimensão preservam consumidores históricos, enquanto
+# cada categoria é medida uma única vez no catálogo canônico. As fachadas não
+# possuem um segundo vocabulário nem constituem uma segunda implementação.
+ECOSYSTEM_CATEGORY_ALIASES: dict[tuple[str, str], str] = {
+    ("protocolos", "behavioral_gate"): "trust_economy",
+    ("evolucao", "successor_generator"): "scanners",
+}
+
+
+def _canonical_ecosystem_categories() -> dict[str, dict[str, Any]]:
+    categories: dict[str, dict[str, Any]] = {}
+    for dimension, descriptor in ECOSYSTEM_DIMENSIONS.items():
+        for category in descriptor.categories:
+            if (dimension, category) in ECOSYSTEM_CATEGORY_ALIASES:
+                continue
+            if category in categories:
+                raise ValueError(f"categoria duplicada sem alias: {category}")
+            keywords = ECOSYSTEM_KEYWORDS[dimension][category]
+            categories[category] = {
+                "dimension": dimension,
+                "keywords": tuple(dict.fromkeys(keywords)),
+            }
+    for (dimension, category), owner in ECOSYSTEM_CATEGORY_ALIASES.items():
+        if category not in ECOSYSTEM_DIMENSIONS[dimension].categories:
+            raise ValueError(f"alias sem projeção: {dimension}.{category}")
+        if categories[category]["dimension"] != owner:
+            raise ValueError(f"alias sem proprietário canônico: {category}")
+    return categories
+
+
+ECOSYSTEM_CANONICAL_CATEGORIES = _canonical_ecosystem_categories()
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -571,9 +602,10 @@ class NoologicalScanner:
         import re as _re
 
         # Compila ECOSYSTEM_KEYWORDS
-        if dim_key in ECOSYSTEM_KEYWORDS:
+        if self._domain == "ecosystem" and dim_key in ECOSYSTEM_DIMENSIONS:
             patterns = []
-            for kw_cat, keywords in ECOSYSTEM_KEYWORDS[dim_key].items():
+            for kw_cat in ECOSYSTEM_DIMENSIONS[dim_key].categories:
+                keywords = ECOSYSTEM_CANONICAL_CATEGORIES[kw_cat]["keywords"]
                 for kw in keywords:
                     if ' ' in kw:
                         patterns.append((kw_cat, _re.compile(_re.escape(kw), _re.IGNORECASE)))
@@ -608,7 +640,7 @@ class NoologicalScanner:
                          corpus: str) -> bool:
         """Busca em patterns compilados (v4.0)."""
         for kw_cat, pattern in patterns:
-            if kw_cat in cat_lower:
+            if (kw_cat == cat_lower if self._domain == "ecosystem" else kw_cat in cat_lower):
                 if pattern.search(corpus):
                     return True
         return False
@@ -645,6 +677,16 @@ class NoologicalScanner:
         dimension_results = {}
         total_covered = 0
         total_categories = 0
+        canonical_covered: set[str] = set()
+        canonical_categories: set[str] = set()
+        canonical_matches: dict[str, bool] = {}
+
+        # R830: ativa ECOSYSTEM_KEYWORDS (v4.0 previa compilação mas nunca chamava).
+        for dim_key in list(self.dimensions.keys()):
+            try:
+                self._compile_dimension_patterns(dim_key)
+            except Exception:
+                pass
 
         for dim_key, dimension in self.dimensions.items():
             covered, absent = [], []
@@ -652,14 +694,23 @@ class NoologicalScanner:
 
             for category in dimension.categories:
                 total_categories += 1
-                if self._category_present_v2(category, corpus_lower, dim_key, text_analyzer):
+                if self._domain == "ecosystem":
+                    canonical_categories.add(category)
+                    if category not in canonical_matches:
+                        canonical_matches[category] = self._category_present_v2(
+                            category, corpus_lower, dim_key, text_analyzer)
+                    present = canonical_matches[category]
+                else:
+                    present = self._category_present_v2(category, corpus_lower, dim_key, text_analyzer)
+                if present:
                     covered.append(category)
                     total_covered += 1
+                    canonical_covered.add(category)
                 else:
                     absent.append(category)
 
             density = len(covered) / max(1, len(dimension.categories))
-            confidence = 0.85 if text_analyzer else 0.70
+            confidence = None if self._domain == "ecosystem" else (0.85 if text_analyzer else 0.70)
             blind_spot_score = (0.2 - density) * weight if density < 0.2 else 0
 
             dimension_results[dim_key] = {
@@ -674,7 +725,17 @@ class NoologicalScanner:
                 "weighted_coverage": round(density * weight * 100),
                 "blind_spot_score": round(blind_spot_score, 3),
             }
+            if self._domain == "ecosystem":
+                dimension_results[dim_key]["category_aliases"] = {
+                    category: f"{owner}.{category}"
+                    for (alias_dimension, category), owner in ECOSYSTEM_CATEGORY_ALIASES.items()
+                    if alias_dimension == dim_key
+                }
+                dimension_results[dim_key]["confidence_method"] = "not_calibrated"
 
+        if self._domain == "ecosystem":
+            total_categories = len(canonical_categories)
+            total_covered = len(canonical_covered)
         overall_density = total_covered / max(1, total_categories)
         blind_spots = self._identify_blind_spots_v2(dimension_results)
         comfort_zones = self._detect_comfort_zones(dimension_results)
@@ -701,7 +762,12 @@ class NoologicalScanner:
             "comfort_zones": comfort_zones,
             "blind_spots": blind_spots,
             "recommendations": recommendations,
-            "completeness_grade": self._grade(overall_density),
+            "completeness_grade": (self._grade(overall_density).replace(
+                "Cobertura Epistemológica Ampla", "Cobertura Lexical Ampla")
+                if self._domain == "ecosystem" else self._grade(overall_density)),
+            "measurement_kind": "lexical_category_mentions",
+            "functional_validation": False,
+            "externally_validated": False,
         }
         if ecosystem_layers is not None:
             self.scan_results["ecosystem_layers"] = ecosystem_layers
@@ -821,20 +887,22 @@ class NoologicalScanner:
             dims_in_layer = [k for k in dim_keys if k in dimension_results]
             if not dims_in_layer:
                 continue
-            total_cats = sum(len(dimension_results[k].get("covered", []) +
-                               dimension_results[k].get("absent", []))
-                           for k in dims_in_layer)
-            total_covered = sum(len(dimension_results[k].get("covered", []))
-                               for k in dims_in_layer)
+            categories = {category for k in dims_in_layer
+                          for category in dimension_results[k].get("covered", []) +
+                          dimension_results[k].get("absent", [])}
+            covered = {category for k in dims_in_layer
+                       for category in dimension_results[k].get("covered", [])}
+            total_cats = len(categories)
+            total_covered = len(covered)
             covered_pct = round(total_covered / max(1, total_cats) * 100)
             status = "boa" if covered_pct >= 50 else "parcial" if covered_pct >= 20 else "crítica"
             layers[layer_name] = {
                 "coverage_pct": covered_pct,
                 "status": status,
-                "components_found": sum(len(dimension_results[k].get("covered", []))
-                                       for k in dims_in_layer),
-                "components_absent": sum(len(dimension_results[k].get("absent", []))
-                                        for k in dims_in_layer),
+                "covered": total_covered,
+                "total_categories": total_cats,
+                "components_found": total_covered,
+                "components_absent": total_cats - total_covered,
                 "dimensions": dims_in_layer,
             }
 

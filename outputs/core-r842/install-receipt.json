@@ -1,0 +1,124 @@
+{
+  "spec": "SPEC-935-R842",
+  "round": "R842",
+  "motores_instalados": {
+    "adb": {
+      "versao": "Android Debug Bridge version 1.0.41",
+      "origem": "apt (android platform tools 34.0.5)",
+      "sha256": null
+    },
+    "gdb": {
+      "versao": "GNU gdb (Ubuntu 17.1-2ubuntu1) 17.1",
+      "origem": "apt 17.1"
+    },
+    "py_pwntools": {
+      "python": "3.12.14 via uv (python-build-standalone)",
+      "pacotes": {
+        "pwntools": "4.15.x",
+        "pyelftools": "0.33",
+        "unicorn": "2.1.2"
+      },
+      "path": "/home/marceloclaro/.local/share/opencode-core/native-rea/py-pwntools/bin/python"
+    },
+    "pwndbg": {
+      "commit": "b5162e66edbd",
+      "versao": "2026.9.15",
+      "path": "/home/marceloclaro/.local/share/opencode-core/native-rea/pwndbg"
+    },
+    "chromium": {
+      "path": "/home/marceloclaro/.local/share/opencode-core/playwright-mcp/browsers/chromium-1247/chrome-linux64/chrome",
+      "sha256": "adf078f8f80eb9e980a07b4418af23b0f4008a83bc5756d5588055bc4d76c5a0"
+    }
+  },
+  "readiness": {
+    "total": 18,
+    "ready": 15,
+    "pending": 3,
+    "inspectable": 11
+  },
+  "ready": [
+    "javascript",
+    "native_ghidra",
+    "apple",
+    "android_jadx",
+    "android_apktool",
+    "android_adb",
+    "firmware",
+    "native_offline_elf",
+    "native_core_crash",
+    "managed_dotnet",
+    "pe_resources",
+    "evm",
+    "browser",
+    "artifact",
+    "reference"
+  ],
+  "pending": [
+    {
+      "id": "native_ida",
+      "reason": "Motores externos pendentes: REA_IDA_MCP_CONFIG."
+    },
+    {
+      "id": "native_hopper",
+      "reason": "Motores externos pendentes: REA_HOPPER_CONFORMANCE_MANIFEST_PATH."
+    },
+    {
+      "id": "jeb",
+      "reason": "Motores externos pendentes: REA_JEB_MCP_URL."
+    }
+  ],
+  "inspecoes_reais": {
+    "native_offline_elf": {
+      "status": "completed",
+      "success": true,
+      "evidence_id": "ev_ab3af30fe4e8a13c5a2d15840ea43179bc084085c8cd1fc9c4ff081237ff1830",
+      "response_sha256": "b1410295e251f5f41bab19ec4d8e00e297c662de9b821dc28bf62b8425d257c3",
+      "subject": {
+        "name": "pw",
+        "digest": {
+          "sha256": "233eec3c29df6aa12eb59c2291c766880010b599d41b495bbfe22b04a121f13a"
+        },
+        "format": "elf",
+        "architecture": "x86_64",
+        "local_path": "/tmp/pw"
+      },
+      "verification": "mcp_execution"
+    },
+    "evm": {
+      "status": "completed",
+      "success": true,
+      "evidence_id": "ev_088ef500f2166c084336787f0653047420b8850eca3d0eb59361c17d916eca7a",
+      "response_sha256": "f6fb0466292a45322784bc7b29012280221a8068b5ee3295642659831b53d22a",
+      "subject": {
+        "name": "evm.hex",
+        "digest": {
+          "sha256": "75708f8c8b2929289c50a4f726f89b94f6671f3e82ab9832e78f4e9b6de4ba78"
+        },
+        "format": "file",
+        "architecture": null,
+        "local_path": "/tmp/evm.hex"
+      },
+      "verification": "mcp_execution"
+    },
+    "firmware": {
+      "status": "completed",
+      "success": true,
+      "evidence_id": "ev_3f5917bf546ff943aeb4ed0da5f9f621ec1d6c54416e01937b7ed0f1d6af8acf",
+      "response_sha256": "33781f419dc7be480ff57278605bbfa76003822da70dfd76ada814057e75a83b",
+      "subject": {
+        "name": "firmware.img",
+        "digest": {
+          "sha256": "ded03aaaefd4f690dab1ea04b18d98dd3942c4a1aa0537d16716a42ecc4e63c3"
+        },
+        "format": "file",
+        "architecture": null,
+        "local_path": "/tmp/firmware.img"
+      },
+      "verification": "mcp_execution"
+    }
+  },
+  "flags": {
+    "externally_validated": false,
+    "confidence_promoted": false
+  }
+}

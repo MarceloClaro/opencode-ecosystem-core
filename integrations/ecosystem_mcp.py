@@ -15,6 +15,7 @@ from mcp.server.fastmcp import FastMCP
 from mcp.server.fastmcp.prompts.base import UserMessage
 from mcp.types import ToolAnnotations
 from pydantic import Field
+from integrations.execution_control import ExecutionBusy, execution_gate, run_cancellable
 
 mcp = FastMCP("ecosystem-network")
 _coordinator: Any = None
@@ -47,7 +48,7 @@ def _library_text(value: str, name: str) -> str:
 
 def _knowledge_operation(method: str, config: dict[str, Any]) -> dict[str, Any]:
     # MetaBus é compartilhado com execuções da rede; serializar suas mutações.
-    with _execution_lock:
+    with execution_gate(_execution_lock):
         return getattr(get_library_orchestrator(), method)(**config)
 
 
@@ -61,7 +62,7 @@ async def ecosystem_knowledge_plan(config: dict[str, Any]) -> dict[str, Any]:
     """
     from marceloclaro.knowledge_evolution import validate_plan_config
     config = validate_plan_config(config)
-    return await asyncio.to_thread(_knowledge_operation, "knowledge_evolution_plan", config)
+    return await run_cancellable(_knowledge_operation, "knowledge_evolution_plan", config)
 
 
 @mcp.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=False, openWorldHint=True))
@@ -74,7 +75,7 @@ async def ecosystem_scientific_run(config: dict[str, Any]) -> dict[str, Any]:
     """
     from marceloclaro.knowledge_evolution import validate_science_config
     config = validate_science_config(config)
-    return await asyncio.to_thread(_knowledge_operation, "scientific_reproducible_run", config)
+    return await run_cancellable(_knowledge_operation, "scientific_reproducible_run", config)
 
 
 @mcp.tool(annotations=ToolAnnotations(readOnlyHint=True, destructiveHint=False))
@@ -87,11 +88,42 @@ async def ecosystem_integration_status() -> dict[str, Any]:
 
 
 @mcp.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=False, openWorldHint=False))
+async def ecosystem_rea(config: dict[str, Any]) -> dict[str, Any]:
+    """REA sob MarceloClaro: status, catalog, session, layers, layer, analyze ou analyze_binary.
+
+    config: operation, path (análises e layer), layer e encoding (inspeção de camada),
+    procedure (binário), timeout_seconds (até 180). layers mapeia a prontidão das camadas
+    de provedor sem abrir alvos; layer inspeciona estaticamente um caminho com a ferramenta
+    real da camada. Ghidra analisa binário local até 128 MiB e fecha a sessão; não executa o
+    alvo. Registra observação no MetaBus sem promover confiança ou executar o alvo. O catálogo
+    não comprova disponibilidade de ferramentas nativas externas.
+    """
+    from marceloclaro.rea_reports import compact_rea_report
+    from integrations.execution_control import run_cancellable
+    report = await run_cancellable(_knowledge_operation, "rea_action", {"config": config})
+    return await asyncio.to_thread(compact_rea_report, report)
+
+
+@mcp.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=True, openWorldHint=True))
+async def ecosystem_browser(config: dict[str, Any]) -> dict[str, Any]:
+    """Navegador isolado real, por MarceloClaro; status ou run com URL e passos.
+
+    Passos delimitados: read, snapshot, click(role/name), fill(textbox/name/value).
+    Requer origens autorizadas, até 16 passos e prazo até 120 s. Encerra a sessão;
+    não herda logins. Evidência integral por hash, sem promoção científica.
+    """
+    from integrations.execution_control import run_cancellable
+    from integrations.browser_bridge import BrowserBridge
+    BrowserBridge()._validate(config)
+    return await run_cancellable(_knowledge_operation, "browser_action", {"config": config})
+
+
+@mcp.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=False, openWorldHint=False))
 async def ecosystem_scientific_runtime(config: dict[str, Any]) -> dict[str, Any]:
     """Executa Hermes ou MiroFish/OASIS externo com modelo local e recibos de inferência."""
     from marceloclaro.runtime_actions import validate_action
     config = validate_action("runtime", config)
-    return await asyncio.to_thread(_knowledge_operation, "scientific_runtime_run", config)
+    return await run_cancellable(_knowledge_operation, "scientific_runtime_run", config)
 
 
 @mcp.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=False, openWorldHint=True))
@@ -99,7 +131,7 @@ async def ecosystem_dataset_download(config: dict[str, Any]) -> dict[str, Any]:
     """Baixa arquivos delimitados por Kaggle/HF CLI e registra versão, licença e hashes."""
     from marceloclaro.runtime_actions import validate_action
     config = validate_action("dataset", config)
-    return await asyncio.to_thread(_knowledge_operation, "scientific_dataset_download", config)
+    return await run_cancellable(_knowledge_operation, "scientific_dataset_download", config)
 
 
 @mcp.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=False, openWorldHint=False))
@@ -107,7 +139,7 @@ async def ecosystem_dataset_custom(config: dict[str, Any]) -> dict[str, Any]:
     """Normaliza fontes Iris compatíveis e cria dataset/splits com proveniência por observação."""
     from marceloclaro.runtime_actions import validate_action
     config = validate_action("personalizar", config)
-    return await asyncio.to_thread(_knowledge_operation, "scientific_dataset_custom", config)
+    return await run_cancellable(_knowledge_operation, "scientific_dataset_custom", config)
 
 
 @mcp.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=False, openWorldHint=True))
@@ -120,7 +152,7 @@ async def ecosystem_scientific_plugins(config: dict[str, Any]) -> dict[str, Any]
     """
     from marceloclaro.runtime_actions import validate_action
     config = validate_action("plugins", config)
-    return await asyncio.to_thread(_knowledge_operation, "scientific_plugin_action", config)
+    return await run_cancellable(_knowledge_operation, "scientific_plugin_action", config)
 
 
 @mcp.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=True, openWorldHint=True))
@@ -134,7 +166,7 @@ async def ecosystem_gemini_notebook(config: dict[str, Any]) -> dict[str, Any]:
     """
     from integrations.gemini_notebook import validate_notebook_config
     config = validate_notebook_config(config)
-    return await asyncio.to_thread(_knowledge_operation, "gemini_notebook_action", config)
+    return await run_cancellable(_knowledge_operation, "gemini_notebook_action", config)
 
 
 @mcp.tool(annotations=ToolAnnotations(readOnlyHint=True, destructiveHint=False))
@@ -234,7 +266,9 @@ def get_coordinator() -> Any:
     with _initialization_lock:
         if _coordinator is None:
             from marceloclaro.autonomous import AutonomousCoordinator
-            _coordinator = AutonomousCoordinator()
+            primary = get_library_orchestrator()
+            primary.ensure_agents_loaded()
+            _coordinator = AutonomousCoordinator(orchestrator=primary)
     return _coordinator
 
 
@@ -247,6 +281,20 @@ def get_workflow_coordinator() -> Any:
             from marceloclaro.workflow import WorkflowCoordinator
             _workflow_coordinator = WorkflowCoordinator(coordinator=coordinator)
     return _workflow_coordinator
+
+
+@mcp.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=False, openWorldHint=False))
+async def ecosystem_text_spec(task: LibraryText, criteria: list[str]) -> dict[str, Any]:
+    """Registra contrato de análise/revisão textual antes de ecosystem_run/workflow.
+
+    Retorna spec_id válido nesta sessão. Critérios são heurísticos; não invoca
+    modelo, não entrega software e não substitui histórico RED→GREEN de software.
+    """
+    task = _library_text(task, "task")
+    if (not isinstance(criteria, list) or not 1 <= len(criteria) <= 10
+            or any(not isinstance(item, str) or not item.strip() or len(item) > 1000 for item in criteria)):
+        raise ValueError("Declare entre 1 e 10 critérios textuais não vazios, de até 1000 caracteres.")
+    return await run_cancellable(_knowledge_operation, "create_text_task_spec", {"task": task, "criteria": criteria})
 
 
 def compact_report(report: dict[str, Any]) -> dict[str, Any]:
@@ -290,7 +338,7 @@ async def ecosystem_route(task: str, required_capabilities: list[str] | None = N
 @mcp.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=False))
 async def ecosystem_run(task: str, required_capabilities: list[str] | None = None,
                         max_steps: int = 3, timeout: float = 120,
-                        ecosystem: str | None = None) -> dict[str, Any]:
+                        ecosystem: str | None = None, spec_id: str | None = None) -> dict[str, Any]:
     """Executa análise/texto coordenado, com revisão limitada e memória de resultado.
 
     Usa executores de leitura Claude, Antigravity ou Codex. Relata bloqueio,
@@ -300,16 +348,15 @@ async def ecosystem_run(task: str, required_capabilities: list[str] | None = Non
     def execute() -> dict[str, Any]:
         # O Blackboard e a memória do orquestrador são compartilhados neste
         # processo. Serializar execuções impede dois leases na mesma tarefa.
-        if not _execution_lock.acquire(blocking=False):
-            return {"success": False, "status": "blocked",
-                    "error": "Já existe uma execução na rede; aguarde sua conclusão."}
         try:
-            return compact_report(get_coordinator().run(
-                task, required_capabilities, max_steps, timeout, ecosystem
-            ))
-        finally:
-            _execution_lock.release()
-    return await asyncio.to_thread(execute)
+            with execution_gate(_execution_lock, wait=False):
+                delivery_options = {"spec_id": spec_id} if spec_id is not None else {}
+                return compact_report(get_coordinator().run(
+                    task, required_capabilities, max_steps, timeout, ecosystem, **delivery_options
+                ))
+        except ExecutionBusy as exc:
+            return {"success": False, "status": "blocked", "error": str(exc)}
+    return await run_cancellable(execute)
 
 
 @mcp.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=False))
@@ -325,17 +372,15 @@ async def ecosystem_workflow(nodes: list[dict[str, Any]], max_steps: int = 6,
     concluídas são reutilizadas; repetir falha/interrupção exige retry_failed.
     """
     def execute():
-        if not _execution_lock.acquire(blocking=False):
-            return {"success": False, "status": "blocked",
-                    "error": "Já existe uma execução na rede; aguarde sua conclusão."}
         try:
-            return compact_report(get_workflow_coordinator().run(
-                nodes, max_steps=max_steps, timeout=timeout, workflow_id=workflow_id,
-                resume=resume, retry_failed=retry_failed
-            ))
-        finally:
-            _execution_lock.release()
-    return await asyncio.to_thread(execute)
+            with execution_gate(_execution_lock, wait=False):
+                return compact_report(get_workflow_coordinator().run(
+                    nodes, max_steps=max_steps, timeout=timeout, workflow_id=workflow_id,
+                    resume=resume, retry_failed=retry_failed
+                ))
+        except ExecutionBusy as exc:
+            return {"success": False, "status": "blocked", "error": str(exc)}
+    return await run_cancellable(execute)
 
 
 @mcp.tool(annotations=ToolAnnotations(readOnlyHint=True))

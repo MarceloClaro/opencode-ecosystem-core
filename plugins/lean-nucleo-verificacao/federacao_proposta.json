@@ -1,0 +1,69 @@
+{
+  "spec_id": "SPEC-935-R715",
+  "gerador": "marceloclaro",
+  "gerado_em": "2026-10-09T22:48:35.663913+00:00",
+  "classes": {
+    "ativo": {
+      "dias": 90
+    },
+    "formal-estavel": {
+      "dias": 730
+    },
+    "sintese-referencia": {
+      "dias": 730
+    },
+    "laboratorio-estavel": {
+      "dias": 1095
+    }
+  },
+  "total": 6,
+  "propostos": 6,
+  "retidos": 0,
+  "decisoes": [
+    {
+      "url": "https://github.com/z3prover/z3",
+      "classe": "formal-estavel",
+      "decisao": "proposto",
+      "motivo": "dentro da janela formal-estavel (0d ≤ 730d)",
+      "licenca": "MIT"
+    },
+    {
+      "url": "https://github.com/sympy/sympy",
+      "classe": "formal-estavel",
+      "decisao": "proposto",
+      "motivo": "dentro da janela formal-estavel (0d ≤ 730d)",
+      "licenca": "BSD"
+    },
+    {
+      "url": "https://github.com/leanprover/lean4",
+      "classe": "formal-estavel",
+      "decisao": "proposto",
+      "motivo": "dentro da janela formal-estavel (0d ≤ 730d)",
+      "licenca": "Apache-2.0"
+    },
+    {
+      "url": "https://github.com/leanprover-community/mathlib4",
+      "classe": "formal-estavel",
+      "decisao": "proposto",
+      "motivo": "dentro da janela formal-estavel (0d ≤ 730d)",
+      "licenca": "Apache-2.0"
+    },
+    {
+      "url": "https://github.com/leanprover-community/batteries",
+      "classe": "formal-estavel",
+      "decisao": "proposto",
+      "motivo": "dentro da janela formal-estavel (0d ≤ 730d)",
+      "licenca": "Apache-2.0"
+    },
+    {
+      "url": "https://github.com/leanprover-community/aesop",
+      "classe": "formal-estavel",
+      "decisao": "proposto",
+      "motivo": "dentro da janela formal-estavel (3d ≤ 730d)",
+      "licenca": "Apache-2.0"
+    }
+  ],
+  "rotulo": "candidato_a_inspecao",
+  "exige_validacao_externa": true,
+  "nota": "Proposta para decisão humana; nada federado automaticamente."
+}

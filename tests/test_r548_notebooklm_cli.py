@@ -24,6 +24,7 @@ def isolated_cli_installations(monkeypatch, tmp_path):
 
     monkeypatch.setattr(Path, "home", classmethod(lambda cls: tmp_path / "home"))
     monkeypatch.setattr(sys, "executable", str(tmp_path / "venv" / "bin" / "python"))
+    monkeypatch.setattr(_load_doctor(), "REPO_ROOT", str(tmp_path / "repo"))
     for name in _load_doctor().EXTERNAL_CLIS:
         key = "ANTIGRAVITY_BIN" if name == "agy" else f"{name.upper()}_BIN"
         monkeypatch.delenv(key, raising=False)

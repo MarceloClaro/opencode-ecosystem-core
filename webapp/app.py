@@ -10,9 +10,10 @@ Interface web interativa (Streamlit) para todo o ecossistema:
 Uso:
     streamlit run webapp/app.py
 
-Framework de 8 abas organizadas em dois modos:
+Framework de 9 abas organizadas em dois modos e uma projeção de memória:
     [PRODUCAO]  Home | Pipeline | Deep Research | Peer Review | Paper Composer
     [CONSULTA]  Evolution | Consultation | System
+    [OBSERVAÇÃO] Rede de memória
 """
 
 from __future__ import annotations
@@ -87,6 +88,53 @@ def card(text: str, label: str = ""):
         st.info(text)
 
 
+def _render_consistency_report(consist: Dict[str, Any]):
+    """Renderiza consistency_report heterogeneo sem quebrar st.metric.
+
+    Aceita tanto full_report {overall_score, consistency: {...}, claims_evidence: {...},
+    total_checks, passed_checks} quanto verify() {abstract_intro_coherence: {...}, ...}.
+    Numeros vao para st.metric; bool vira Sim/Nao; dict/list vao para expander JSON.
+    """
+    if not isinstance(consist, dict) or not consist:
+        st.info("Relatório de consistência indisponível.")
+        return
+    highlights: Dict[str, Any] = {}
+    for key in ("overall_score", "total_checks", "passed_checks"):
+        val = consist.get(key)
+        if isinstance(val, bool):
+            continue
+        if isinstance(val, (int, float)):
+            highlights[key] = val
+    claims = consist.get("claims_evidence")
+    if isinstance(claims, dict):
+        rate = claims.get("verification_rate")
+        if isinstance(rate, (int, float)) and not isinstance(rate, bool):
+            highlights["verification_rate"] = rate
+    if highlights:
+        cols = st.columns(len(highlights))
+        for idx, (key, val) in enumerate(highlights.items()):
+            with cols[idx]:
+                st.metric(label=key, value=val)
+    for key, val in consist.items():
+        if key in highlights:
+            continue
+        if isinstance(val, bool):
+            st.metric(label=key, value="Sim" if val else "Não")
+        elif isinstance(val, (int, float)):
+            st.metric(label=key, value=val)
+        elif isinstance(val, str):
+            if len(val) <= 60:
+                st.metric(label=key, value=val)
+            else:
+                st.markdown(f"**{key}:** {val}")
+        else:
+            with st.expander(f"{key} (detalhes)", expanded=False):
+                try:
+                    st.json(json.loads(json.dumps(val, ensure_ascii=False, default=str)))
+                except Exception:
+                    st.write(str(val))
+
+
 # ── Inicializacao ─────────────────────────────────────────────────
 orch = get_orchestrator()
 
@@ -103,13 +151,6 @@ with st.sidebar:
     st.markdown("""
     ## OpenCode Ecosystem Core v3.0
     **Framework de Consulta e Producao**
-
-    | Metrica | Valor |
-    |---|---|
-    | Testes | 1062 |
-    | Ciclos | 65 |
-    | MCP Tools | 14 |
-    | Score Medio | 9.4/10 |
 
     [![GitHub](https://img.shields.io/badge/GitHub-Repo-blue)](https://github.com/MarceloClaro/opencode-ecosystem-core)
     """)
@@ -130,6 +171,7 @@ tabs = st.tabs([
     "🧬 Evolution",
     "🔎 Consultation",
     "⚙️ System",
+    "🕸️ Rede de memória",
 ])
 
 # =====================================================================
@@ -138,15 +180,15 @@ tabs = st.tabs([
 with tabs[0]:
     st.title("🧠 OpenCode Ecosystem Core v3.0")
     st.markdown("""
-    **Framework de Consulta e Producao Academica** — 65 ciclos evolutivos,
-    1062 testes, pipeline academico agentivo completo (R101-R105).
+    **Framework de Consulta e Produção Acadêmica.**
+    Os inventários abaixo são locais; disponibilidade não comprova execução.
     """)
 
     # Linha de metricas principais
     c1, c2, c3, c4, c5 = st.columns(5)
     c1.metric("Ciclos de Evolucao", EVO_STATS["count"])
-    c2.metric("Score Medio", f'{EVO_STATS["avg_score"]:.1f}/10')
-    c3.metric("Testes", "1062")
+    c2.metric("Score histórico do ledger", f'{EVO_STATS["avg_score"]:.1f}/10')
+    c3.metric("Arquivos de teste", len(list((ROOT / "tests").glob("test_*.py"))))
     c4.metric("MCP Tools", len(MCP_TOOLS))
     c5.metric("Licoes Registradas", EVO_STATS["total_lessons"])
 
@@ -166,7 +208,7 @@ with tabs[0]:
         st.info("""
         ### 🔎 Consulta
         Navegue pelo historico completo do ecossistema.
-        - **Evolution Cycles:** 64 registros (R47-R106)
+        - **Evolution Cycles:** registros do ledger local
         - **Evidence Graph:** entidades, relacoes, evidencias
         - **Producoes Anteriores:** pastas de pesquisa
         - **Specs:** especificacoes formais SDD
@@ -183,7 +225,7 @@ with tabs[0]:
             with cols[i]:
                 st.metric(
                     label=cycle.get("round_id", "?"),
-                    value=f'{cycle.get("score", 0):.1f}',
+                    value=f'{cycle["score"]:.1f}' if isinstance(cycle.get("score"), (int, float)) else "Não registrado",
                     delta=cycle.get("objective", "")[:30] + "..."
                 )
     else:
@@ -198,6 +240,10 @@ with tabs[0]:
     cq1.metric("Score Geral", f'{quality.get("quality_score", {}).get("overall_score", "N/A")}/10')
     cq2.metric("Status", quality.get("overall_status", "N/A"))
     cq3.metric("Testes", f'{quality.get("test_results", {}).get("passed", 0)} passados')
+    if quality.get("test_results", {}).get("total", 1) == 0:
+        st.caption("⚠️ Modo rápido: suíte pytest não executada (total 0 por estimativa). "
+                   "PASS aqui = zero falhas no modo rápido, não certificação. "
+                   "Gate real: `scripts/check_coverage.py` + CI matrix 3.10–3.14.")
 
     # Quick actions
     st.divider()
@@ -329,10 +375,7 @@ with tabs[1]:
                         "\n".join(paper.get("citations_formatted", [])), height=100)
             consist = paper.get("consistency_report", {})
             if consist:
-                c_cols = st.columns(len(consist))
-                for i, (k, v) in enumerate(consist.items()):
-                    with c_cols[i]:
-                        st.metric(label=k, value=v)
+                _render_consistency_report(consist)
 
     # ── Execucao individual ──
     st.divider()
@@ -382,6 +425,7 @@ with tabs[2]:
         if st.button("🔎 Executar Pesquisa Profunda", type="primary", use_container_width=True):
             with st.spinner("Executando BFRS (largura) + DFRS (profundidade)..."):
                 result = run_deep_research(question, max_depth, max_rounds, dr_verbose)
+            st.session_state['memory_network_research_result'] = result
             st.success("Pesquisa concluida!")
             dc1, dc2, dc3 = st.columns(3)
             dc1.metric("Entidades no Grafo", result.get("entity_count", 0))
@@ -401,7 +445,8 @@ with tabs[2]:
         section_header("Evidence Graph Browser",
                        "Navegue pelo grafo epistemologico: entidades, relacoes e evidencias acumuladas.",
                        "🕸️")
-        eg_summary = get_evidence_graph_summary()
+        current_graph = st.session_state.get('memory_network_research_result', {}).get('graph_data', {})
+        eg_summary = get_evidence_graph_summary(current_graph)
         ec1, ec2, ec3 = st.columns(3)
         ec1.metric("Entidades", eg_summary.get("entity_count", 0))
         ec2.metric("Relacoes", eg_summary.get("relation_count", 0))
@@ -409,10 +454,11 @@ with tabs[2]:
 
         entity_query = st.text_input("Consultar entidade especifica", "", key="eg_query")
         if st.button("🔍 Consultar", key="eg_consult"):
-            result = query_evidence_graph(entity_query)
+            result = query_evidence_graph(entity_query, current_graph)
             st.metric("Entidades Encontradas", result.get("entities_found", 0))
             st.metric("Relacoes Encontradas", result.get("relations_found", 0))
-            st.metric("Evidencias Encontradas", result.get("evidences_found", 0))
+            count = result.get("evidences_found")
+            st.metric("Evidências Encontradas", count if count is not None else "Não registradas")
             with st.expander("Subgrafo Completo"):
                 show_json(result.get("subgraph", {}))
 
@@ -585,8 +631,7 @@ with tabs[4]:
             consist = paper.get("consistency_report", {})
             if consist:
                 st.subheader("Verificacao de Consistencia")
-                for k, v in consist.items():
-                    st.metric(label=k, value=v)
+                _render_consistency_report(consist)
 
     with tab_comp_revision:
         section_header("Revisar Manuscrito (R104d)",
@@ -624,7 +669,7 @@ with tabs[5]:
     st.title("🧬 Evolution Lab (R97 + R98)")
     st.markdown("""
     Navegue pelo registro evolutivo completo do ecossistema. 
-    65 ciclos (R47-R107) com scores, licoes e trajetoria.
+    Registros do ledger local, com scores quando disponíveis, lições e trajetória.
     """)
 
     tab_ev_cycles, tab_ev_memory, tab_ev_novelty, tab_ev_rag = st.tabs([
@@ -924,6 +969,12 @@ with tabs[7]:
 st.divider()
 st.caption(
     "OpenCode Ecosystem Core v3.0 — Pipeline Academico Agentivo | "
-    "65 ciclos evolutivos | 1062 testes | Score medio 9.4/10 | "
+    "Inventários e escores locais não certificam qualidade científica | "
     "[GitHub](https://github.com/MarceloClaro/opencode-ecosystem-core)"
 )
+
+
+# R829: o índice corresponde à aba realmente criada acima.
+with tabs[8]:
+    from webapp.memory_network_streamlit import render_memory_network_streamlit
+    render_memory_network_streamlit(orch)

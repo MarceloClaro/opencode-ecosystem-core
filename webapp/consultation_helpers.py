@@ -98,6 +98,19 @@ def list_producoes(limit: int = 20) -> List[Dict[str, Any]]:
 
 def get_evidence_graph_summary(graph: Optional[Any] = None) -> Dict[str, Any]:
     """Retorna sumário do grafo de evidências usando a API pública real."""
+    if isinstance(graph, dict):
+        def entries(name):
+            value = graph.get(name, {})
+            values = value.values() if isinstance(value, dict) else value if isinstance(value, list) else []
+            return [entry for entry in values if isinstance(entry, dict)]
+        entities, relations, evidence = entries("entities"), entries("relations"), entries("evidence")
+        return {
+            "entity_count": len(entities), "relation_count": len(relations),
+            "evidence_count": len(evidence),
+            "entity_types": sorted({str(e.get("type", e.get("entity_type", "concept"))) for e in entities}),
+            "relation_types": sorted({str(e.get("type", e.get("relation_type", "relation"))) for e in relations}),
+            "verification": "source_graph_inventory",
+        }
     try:
         from agentic_science_v2.evidence_graph import (
             ENTITY_TYPES,

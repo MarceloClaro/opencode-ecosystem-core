@@ -20,8 +20,15 @@ python3 -m marceloclaro.cli doctor
 python3 -c "import json; c=json.load(open('opencode.json', encoding='utf-8')); print({'mcps': len(c.get('mcp', {})), 'agentes': len(c.get('agent', {}))})"
 ```
 
-A configuração operacional consultada em **2026-10-07** declara **248 agentes**
-e **15 MCPs**, incluindo `ecosystem-network` e `polymath-labs-mcp`. O diagnóstico mantém **20 checks**.
+<!-- core-state:start -->
+**255 agentes** · **16 MCPs** · **30 comandos** · **22 checks**
+
+Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
+
+Para conferir estes blocos, execute na raiz `.venv/bin/python scripts/reconcile_operational_docs.py --check`; para sincronizá-los, execute o mesmo comando sem `--check`.
+<!-- core-state:end -->
+
+A configuração inclui `ecosystem-network` e `polymath-labs-mcp`.
 A contagem de 2026-09-26 acima é um registro histórico.
 
 Specs, ciclos, testes e cobertura mudam com o checkout. Consulte,
@@ -36,8 +43,8 @@ graph TD
     CLI --> Orquestrador[MarceloClaroOrchestrator]
     Orquestrador --> SDD[SpecRegistry e SpecVerifier]
     Orquestrador --> MCI[MetaBus e Blackboard]
-    Orquestrador --> MCP[15 MCPs configurados]
-    Orquestrador --> Agentes[248 agentes configurados]
+    Orquestrador --> MCP[MCPs configurados]
+    Orquestrador --> Agentes[Agentes configurados]
     Orquestrador --> MIRA[mira-presenter]
 ```
 
@@ -56,8 +63,8 @@ flowchart TB
     Orq2 --> TDDRunner2[TDDRunner]
     Orq2 --> MetaBus2[MetaBus]
     Orq2 --> Blackboard2[Blackboard]
-    Orq2 --> MCP2[15 MCPs configurados]
-    Orq2 --> Agents2[248 agentes configurados]
+    Orq2 --> MCP2[MCPs configurados]
+    Orq2 --> Agents2[Agentes configurados]
     Orq2 --> Mira2[mira-presenter]
     Mira2 --> Deck2[MiraDeckPipeline]
     Deck2 --> Engine2[MiraEngine]
@@ -75,19 +82,26 @@ flowchart TB
 
 ## Servidores MCP Interoperáveis
 
-Os **11 MCPs** configurados em `opencode.json` são:
+As entradas abaixo são derivadas das chaves `mcp` de `opencode.json`:
 
-1. `litert-lm`;
-2. `metacognitive-interconnect`;
-3. `antigravity-bridge`;
-4. `pypi-search`;
-5. `colibri-mcp`;
-6. `scanners-mcp`;
-7. `web-deploy-mcp`;
-8. `ecosystem-network`;
-9. `fetch`;
-10. `sequential-thinking`;
-11. `filesystem`.
+<!-- core-mcp:start -->
+1. `antigravity-bridge`;
+2. `artigo-academico-mcp`;
+3. `arxiv-mcp`;
+4. `colibri-mcp`;
+5. `ecosystem-network`;
+6. `fetch`;
+7. `filesystem`;
+8. `latexmk-mcp`;
+9. `litert-lm`;
+10. `metacognitive-interconnect`;
+11. `polymath-labs-mcp`;
+12. `pypi-search`;
+13. `rea`;
+14. `scanners-mcp`;
+15. `sequential-thinking`;
+16. `web-deploy-mcp`;
+<!-- core-mcp:end -->
 
 O MCP `ecosystem-network` conecta o `MarceloClaroOrchestrator`, o roteamento
 Transformer inspirado em atenção e a memória MetaBus/Blackboard aos executores
@@ -108,12 +122,12 @@ usa metadados sanitizados em SQLite e pausa automática de 120 segundos.
 
 A presença dessas entradas de configuração não implica disponibilidade de toda
 dependência externa em cada máquina. O `doctor` expõe a situação encontrada
-localmente entre os seus 20 checks.
+localmente nos checks do inventário estrutural acima.
 
 ## Agentes e orquestração
 
-O arquivo `opencode.json` é a fonte da contagem de **238 agentes** configurados
-para a integração OpenCode. O Blackboard pode apresentar registros em momentos
+O arquivo `opencode.json` é a fonte da contagem corrente de agentes configurados
+para a integração OpenCode, reproduzida no inventário acima. O Blackboard pode apresentar registros em momentos
 diferentes do processo de inicialização; por isso, não se deve misturar uma
 contagem de runtime com a contagem declarada no arquivo de configuração.
 
@@ -190,6 +204,15 @@ Os contratos, limites e provas locais estão em
 [docs/BIBLIOTECA_AI_R657.md](docs/BIBLIOTECA_AI_R657.md).
 
 ## Integridade e procedência
+
+### REA sob coordenação central (R808)
+
+`integrations.rea_bridge.ReaBridge` conecta o runtime externo identificado ao
+`MarceloClaroOrchestrator.rea_action`. CLI e MCP `ecosystem_rea` convergem
+nesse método; resultado e proveniência alimentam observações MetaBus sem
+promover confiança. O OpenCode registra também o servidor `rea`, lançado pelo
+adaptador, e mantém o agente primário `marceloclaro`. Reversa Universal mantém
+seu papel existente. Contratos e limites: [REA](docs/REA.md).
 
 `MerkleIntegrityGuard` e os mecanismos SHA-256 permitem comparar os bytes de
 artefatos definidos. Eles ajudam a detectar divergência do material conferido,

@@ -38,8 +38,14 @@
 \end{flowch}
 
 \begin{descricao}
-Guarde este desenho. Cada secao a seguir e um zoom em uma caixa. A seta so anda para frente quando ha registro; volta quando o fiscal manda refazer.
+\textbf{Como funciona e por quê.} Portaria, plaquinhas, lousa, oficina e fiscal são analogias para entrada, capacidades, delegação, execução e verificação. As setas representam dependência entre perguntas, não uma promessa de execução completa.
+\textbf{Justificativa.} A analogia reduz o vocabulário inicial e conserva uma pergunta operacional: qual registro permite conferir cada passagem?
+\textbf{Limite.} O fluxo real depende da rota. Nenhuma analogia permite concluir que seleção, permissões ou testes foram executados sem os respectivos registros.
 \end{descricao}
+\fontecore{livro-core/mod-13-ativacao-agentes.tex}{roteirodidatico}
+
+
+
 
 \section{E1 -- Gatilho: o pedido precisa estar escrito}
 
@@ -142,6 +148,48 @@ Fechar com responsabilidade: quem recebe sabe o que usar, o que nao usar e a que
 \draw[seta] (jac-3-1)--(jac-3-2);
 \end{flowch}
 
+\begin{descricao}
+\textbf{Como funciona e por quê.} As setas levam dos conjuntos de palavras à interseção e à união; a divisão $|K\cap C|/|K\cup C|$ mede sobreposição lexical quando a união não é vazia.
+\textbf{Justificativa.} Mostrar numerador e denominador permite refazer a conta e perceber que palavras sem coincidência reduzem a razão.
+\textbf{Limite.} É um exemplo didático, não o score universal do Blackboard ou do AttentionRouter. Empates e conjuntos vazios exigem regra explicitada; afinidade lexical não mede competência.
+\end{descricao}
+\fontecore{livro-core/mod-17-e1e7-para-leigos.tex}{roteirodidatico}
+
+
+
+
 \begin{aviso}
 Limite do capitulo. E1 a E7 e pipeline explicativo, nao promessa de desempenho. Escore mede casamento semantico; gate mede conformidade com criterio; nenhum dos dois mede verdade geral. NotebookLM ajudou a organizar o roteiro leigo e a conferir fontes; a conta e a conferencia final sao locais e repetiveis.
 \end{aviso}
+
+
+% R814: leitura guiada substantiva; cenários hipotéticos rotulados.
+\section[Leitura guiada]{Leitura guiada — E1 a E7: separar descrição, seleção e resultado}
+\elemento{Leitura guiada — R814-17}{\metainfo{Ciclo}{R814}}
+\begin{descricao}
+\textbf{O fenômeno.} Uma ficha pode existir sem que seu perfil tenha executado uma tarefa. E1 a E7 é um roteiro explicativo para investigar a passagem entre descrição, escolha, chamada e avaliação; a implementação de cada rota precisa ser conferida.
+\end{descricao}
+
+\begin{definicao}
+\textbf{Grandezas e definições.} Gatilho é o pedido ou evento; capacidade é uma declaração; seleção escolhe um candidato sob uma regra; gate compara condições; execução produz uma saída. Pontuação de seleção não é probabilidade de acerto.
+\end{definicao}
+
+\begin{metodo}
+\textbf{Dedução passo a passo.} Registre a tarefa, os candidatos e os requisitos. Localize a regra de seleção e suas exclusões. Depois identifique a chamada e o critério de avaliação, sem inferir uma operação pela existência do nome da etapa.
+\end{metodo}
+
+\begin{resultado}
+\textbf{Exemplo resolvido.} No exemplo de conjuntos, a tarefa pede dois termos e um perfil compartilha um deles; a união tem três. Jaccard é $1/3$. Essa conta verifica o exemplo lexical, não descreve sozinha o roteador atual, que combina outros sinais e gates.
+\end{resultado}
+
+\begin{resultado}
+\textbf{Ordem de grandeza e verificação.} Confira os conjuntos usados na conta e, para o Core atual, leia a regra de utilidade e os motivos de exclusão em AttentionRouter. Guarde decisão e resultado como observações distintas.
+\end{resultado}
+
+\begin{aviso}
+\textbf{Limite de validade.} Uma lista de sete posições não demonstra cobertura operacional universal. Falta de executor ou de critério pode produzir bloqueio ou resultado inconclusivo, mesmo com uma ficha completa.
+\end{aviso}
+
+\begin{resultado}
+\textbf{Exercícios.} Recalcule Jaccard para conjuntos iguais e disjuntos. Identifique um requisito que exclua um candidato. Explique por que o maior escore pode produzir uma resposta inadequada.
+\end{resultado}

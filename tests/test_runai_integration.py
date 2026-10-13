@@ -23,7 +23,8 @@ def test_runai_doctor_structured_when_absent(monkeypatch):
     result = bridge.doctor()
     assert result["ok"] is False
     assert result["exit_code"] == 127
-    assert "install.sh" in result["stderr"]
+    assert "RUNAI_SOURCE_DIR" in result["stderr"]
+    assert "https://github.com/midudev/canirun.ai" in result["stderr"]
 
 
 def test_runai_doctor_success(monkeypatch):
@@ -263,7 +264,7 @@ def test_doctor_check_runai_warns_on_upstream_404(monkeypatch):
     monkeypatch.setattr("urllib.request.urlopen", fake_urlopen)
     from marceloclaro import doctor as doctor_mod
 
-    check = doctor_mod._check_runai()
+    check = doctor_mod._check_runai(live=True)
     assert check.status == "warn"
     assert "404" in check.detail or "inconsistência upstream" in check.detail
 
@@ -279,7 +280,7 @@ def test_doctor_check_runai_pass_when_available(monkeypatch):
     monkeypatch.setattr(subprocess, "run", lambda *a, **k: R())
     from marceloclaro import doctor as doctor_mod
 
-    check = doctor_mod._check_runai()
+    check = doctor_mod._check_runai(live=True)
     assert check.status == "pass"
     assert "doctor OK" in check.detail
 

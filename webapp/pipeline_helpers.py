@@ -120,33 +120,9 @@ def _coerce_review_package(review_package: Optional[Dict[str, Any]]) -> Dict[str
 def _build_graph_from_export(graph_data: Optional[Dict[str, Any]]):
     from agentic_science_v2.evidence_graph import EvidenceGraph
 
-    graph = EvidenceGraph()
     if not graph_data:
-        return graph
-
-    id_map: Dict[str, str] = {}
-    for item in _iter_payload_items(graph_data.get("entities", {})):
-        entity = graph.add_entity(
-            name=item.get("name") or item.get("label") or item.get("title") or item.get("id") or "Entity",
-            entity_type=item.get("type") or item.get("entity_type") or item.get("group") or "concept",
-            description=item.get("description", ""),
-            aliases=item.get("aliases", []),
-        )
-        if item.get("id"):
-            id_map[item["id"]] = entity.id
-
-    for item in _iter_payload_items(graph_data.get("relations", {})):
-        source_id = id_map.get(item.get("source") or item.get("source_id") or item.get("from"))
-        target_id = id_map.get(item.get("target") or item.get("target_id") or item.get("to"))
-        if source_id and target_id:
-            graph.add_relation(
-                source_id=source_id,
-                target_id=target_id,
-                relation_type=item.get("type") or item.get("relation_type") or item.get("label") or "ASSOCIATED_WITH",
-                weight=item.get("weight", item.get("width", 1.0)) or 1.0,
-            )
-
-    return graph
+        return EvidenceGraph()
+    return EvidenceGraph.from_dict(graph_data)
 
 
 # =========================================================================
@@ -258,18 +234,20 @@ def query_evidence_graph(entity: str, graph_data: Optional[Dict[str, Any]] = Non
             "entities_found": 0,
             "relations_found": 0,
             "evidences_found": 0,
+            "evidence_membership": "unknown",
             "subgraph": {"entities": [], "relations": [], "total_entities": 0, "total_relations": 0},
         }
 
     subgraph = graph.subgraph_query([entity_node.id])
-    evidences_found = sum(item.get("evidence_count", 0) for item in subgraph.get("entities", []))
-    evidences_found += sum(item.get("evidence_count", 0) for item in subgraph.get("relations", []))
+    membership = subgraph["evidence_membership"]
+    evidences_found = None if membership == "unknown" else len(subgraph["evidence"])
 
     return {
         "query": entity,
         "entities_found": subgraph.get("total_entities", 0),
         "relations_found": subgraph.get("total_relations", 0),
         "evidences_found": evidences_found,
+        "evidence_membership": membership,
         "subgraph": subgraph,
     }
 

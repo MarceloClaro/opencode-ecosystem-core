@@ -96,13 +96,14 @@ def test_verifier_blocks_bad_output():
     spec.add_criterion("Entrega possui >= 100 caracteres",
                        lambda out: isinstance(out, str) and len(out) >= 100)
 
-    bad = spec_verifier.verify(spec.spec_id, "curto demais")
+    bad = spec_verifier.verify(spec.spec_id, "curto demais", require_red_history=False)
     assert not bad["verified"]
     assert spec.status == "red"
 
-    good = spec_verifier.verify(spec.spec_id, "x" * 120)
+    good = spec_verifier.verify(spec.spec_id, "x" * 120, require_red_history=False)
     assert good["verified"]
     assert spec.status == "green"
+    assert good["verification_scope"] == "criteria_only"
 
 
 # ----------------------------------------------------------------------
@@ -110,7 +111,7 @@ def test_verifier_blocks_bad_output():
 # ----------------------------------------------------------------------
 
 def test_task_spec_red_to_green():
-    """O ciclo TDD converge de RED para GREEN com produtor iterativo."""
+    """Inspeção de critérios converge; este caso não executa pytest RED histórico."""
     spec = spec_registry.create_task_spec("somar lista", "produzir a soma de [1,2,3]")
     spec.criteria = []
     spec.add_criterion("Resultado é 6", lambda out: out == 6)
@@ -129,10 +130,11 @@ def test_task_spec_red_to_green():
     # Histórico deve conter a fase RED com 0 critérios passando (definição de TDD)
     red = [h for h in result["history"] if h["phase"] == "red"]
     assert red and red[0]["verification"]["passed_count"] == 0
+    assert red[0]["verification"]["verification_scope"] == "criteria_only"
 
 
-def test_tdd_refactor_reverts_on_break():
-    """REFACTOR que quebra critérios deve ser revertido (INV do ciclo)."""
+def test_tdd_refactor_blocks_on_break():
+    """REFACTOR reprovado fecha o ciclo; rollback não é presumido."""
     spec = spec_registry.create_task_spec("gerar texto", "texto com a palavra 'ok'")
     spec.criteria = []
     spec.add_criterion("Contém 'ok'", lambda out: isinstance(out, str) and "ok" in out)
@@ -143,8 +145,9 @@ def test_tdd_refactor_reverts_on_break():
         producer_fn=lambda obj, fb: "resultado ok",
         refactor_fn=lambda out, ctx: "quebrado",  # refatoração ruim
     )
-    assert result["success"]
-    assert result["output"] == "resultado ok", "Refatoração que quebra deve ser revertida"
+    assert result["success"] is False and result["phase"] == "refactor"
+    assert result["output"] == "quebrado"
+    assert spec.status == "red"
 
 
 def test_tdd_requires_criteria():

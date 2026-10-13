@@ -29,7 +29,7 @@ def response(output="Análise concluída", error=False, returncode=0, stderr="")
 
 
 def test_initial_status_does_not_run_any_subprocess_or_create_database(runtime, monkeypatch):
-    monkeypatch.setattr("integrations.harness_runtime.subprocess.run", lambda *a, **k: pytest.fail("Inventário não executa CLIs"))
+    monkeypatch.setattr("integrations.harness_runtime.HarnessRuntime._run_cli", lambda *a, **k: pytest.fail("Inventário não executa CLIs"))
     state = runtime.status()["claude"]
     assert state["available"] and state["eligible_for_auto"]
     assert state["verification"] == "installation_only"
@@ -40,7 +40,7 @@ def test_initial_status_does_not_run_any_subprocess_or_create_database(runtime, 
 def test_success_persists_real_execution_and_duration_without_content(runtime, monkeypatch):
     ticks = iter([2.0, 3.25])
     monkeypatch.setattr("integrations.harness_runtime.time.monotonic", lambda: next(ticks))
-    monkeypatch.setattr("integrations.harness_runtime.subprocess.run", lambda *a, **k: response("private_output_935"))
+    monkeypatch.setattr("integrations.harness_runtime.HarnessRuntime._run_cli", lambda *a, **k: response("private_output_935"))
     assert runtime.execute("claude", "private_prompt_935")["success"]
     store = runtime.health_store
     reloaded = HarnessHealthStore(store.path)
@@ -60,7 +60,7 @@ def test_provider_failure_is_sanitized_and_cools_only_automatic_selection(runtim
     def run(*args, **kwargs):
         calls.append(args)
         return response(failure + " api_key=private_secret_935", True, 1)
-    monkeypatch.setattr("integrations.harness_runtime.subprocess.run", run)
+    monkeypatch.setattr("integrations.harness_runtime.HarnessRuntime._run_cli", run)
     result = runtime.execute("claude", "private_prompt_935")
     state = runtime.status()["claude"]
     assert not result["success"]
@@ -76,7 +76,7 @@ def test_provider_failure_is_sanitized_and_cools_only_automatic_selection(runtim
 
 
 def test_failure_reported_in_success_exit_is_also_classified(runtime, monkeypatch):
-    monkeypatch.setattr("integrations.harness_runtime.subprocess.run", lambda *a, **k: response("Credit balance is too low secret_marker_935", True))
+    monkeypatch.setattr("integrations.harness_runtime.HarnessRuntime._run_cli", lambda *a, **k: response("Credit balance is too low secret_marker_935", True))
     result = runtime.execute("claude", "Analise")
     assert not result["success"]
     assert runtime.status()["claude"]["health"]["error_category"] == "account_limit"
@@ -100,7 +100,7 @@ def test_cooldown_expires_and_success_clears_it(tmp_path):
 
 
 def test_binary_change_invalidates_observation_and_cooldown(runtime, monkeypatch):
-    monkeypatch.setattr("integrations.harness_runtime.subprocess.run", lambda *a, **k: response("authentication failed", True, 1))
+    monkeypatch.setattr("integrations.harness_runtime.HarnessRuntime._run_cli", lambda *a, **k: response("authentication failed", True, 1))
     runtime.execute("claude", "Analise")
     binary = Path(runtime._resolve_cli("claude"))
     original = binary.stat()
@@ -130,7 +130,7 @@ def test_binary_updated_during_execution_cannot_inherit_its_old_health(runtime, 
         original = binary.stat()
         os.utime(binary, ns=(original.st_atime_ns, original.st_mtime_ns + 1_000_000_000))
         return response()
-    monkeypatch.setattr("integrations.harness_runtime.subprocess.run", update_while_running)
+    monkeypatch.setattr("integrations.harness_runtime.HarnessRuntime._run_cli", update_while_running)
     assert runtime.execute("claude", "Analise")["success"]
     assert runtime.status()["claude"]["verification"] == "installation_only"
 
@@ -149,16 +149,16 @@ def test_symlink_database_target_is_not_modified(tmp_path):
 def test_timeout_and_spawn_failure_are_observed(runtime, monkeypatch):
     def timeout(*args, **kwargs):
         raise subprocess.TimeoutExpired(args[0], kwargs["timeout"], output="private_partial_935")
-    monkeypatch.setattr("integrations.harness_runtime.subprocess.run", timeout)
+    monkeypatch.setattr("integrations.harness_runtime.HarnessRuntime._run_cli", timeout)
     assert not runtime.execute("claude", "Analise", timeout=.1)["success"]
     assert runtime.status()["claude"]["health"]["error_category"] == "timeout"
-    monkeypatch.setattr("integrations.harness_runtime.subprocess.run", lambda *a, **k: (_ for _ in ()).throw(OSError("private_os_error_935")))
+    monkeypatch.setattr("integrations.harness_runtime.HarnessRuntime._run_cli", lambda *a, **k: (_ for _ in ()).throw(OSError("private_os_error_935")))
     assert not runtime.execute("claude", "Analise")["success"]
     assert runtime.status()["claude"]["health"]["error_category"] == "unavailable"
 
 
 def test_invalid_input_is_not_a_real_execution_observation(runtime, monkeypatch):
-    monkeypatch.setattr("integrations.harness_runtime.subprocess.run", lambda *a, **k: pytest.fail("Não iniciar CLI"))
+    monkeypatch.setattr("integrations.harness_runtime.HarnessRuntime._run_cli", lambda *a, **k: pytest.fail("Não iniciar CLI"))
     assert not runtime.execute("claude", "", timeout=1)["success"]
     assert not runtime.execute("claude", "Analise", timeout=0)["success"]
     assert runtime.status()["claude"]["health"]["last_outcome"] is None
@@ -170,7 +170,7 @@ def test_unwritable_storage_keeps_execution_and_in_memory_health(tmp_path, monke
     monkeypatch.setenv("HARNESS_HEALTH_PATH", str(blocker / "health.sqlite3"))
     harness = HarnessRuntime(tmp_path)
     monkeypatch.setattr(harness, "_resolve_cli", lambda name: "/tools/claude")
-    monkeypatch.setattr("integrations.harness_runtime.subprocess.run", lambda *a, **k: response("authentication failed", True, 1))
+    monkeypatch.setattr("integrations.harness_runtime.HarnessRuntime._run_cli", lambda *a, **k: response("authentication failed", True, 1))
     assert not harness.execute("claude", "Analise")["success"]
     state = harness.status()["claude"]
     assert not state["eligible_for_auto"]
@@ -205,7 +205,7 @@ def test_late_writer_preserves_latest_outcome_and_both_history_timestamps(tmp_pa
 def test_corrupt_database_never_breaks_status_or_execution(runtime, monkeypatch):
     runtime.health_store.path.write_bytes(b"corrupt database")
     assert runtime.status()["claude"]["eligible_for_auto"]
-    monkeypatch.setattr("integrations.harness_runtime.subprocess.run", lambda *a, **k: response())
+    monkeypatch.setattr("integrations.harness_runtime.HarnessRuntime._run_cli", lambda *a, **k: response())
     assert runtime.execute("claude", "Analise")["success"]
     assert runtime.status()["claude"]["health"]["last_outcome"] == "success"
     assert runtime.status()["claude"]["health"]["storage"] == "memory"

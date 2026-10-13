@@ -39,8 +39,10 @@ import os
 import re
 import glob
 import logging
+from copy import deepcopy
+from functools import lru_cache
 import yaml
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Callable, Dict, List, Optional, Tuple
 
 logger = logging.getLogger("catalog_loader")
 
@@ -449,6 +451,36 @@ def _extract_skills(meta: Dict[str, Any]) -> List[Dict[str, Any]]:
 # CARREGAMENTO DO CATÁLOGO
 # ═══════════════════════════════════════════════════════════════════════════
 
+_FRONTMATTER_CACHE_MAXSIZE = 512
+_FRONTMATTER_CACHE_MAX_BYTES = 128 * 1024
+
+
+def _decode_catalog_content(raw_content: bytes) -> str:
+    """Preserva UTF-8 e novas linhas universais do leitor textual original."""
+    return raw_content.decode("utf-8").replace("\r\n", "\n").replace("\r", "\n")
+
+
+@lru_cache(maxsize=_FRONTMATTER_CACHE_MAXSIZE)
+def _cached_frontmatter(
+    raw_content: bytes, parser: Callable[[str], Dict[str, Any]],
+) -> Dict[str, Any]:
+    """Guarda apenas YAML, com chave de bytes completos e identidade do parser.
+
+    A função parser é a função vigente de `_parse_frontmatter_v2`; a comparação
+    de funções usa identidade. O caminho e a taxonomia não compõem o resultado
+    armazenado. O consumidor recebe outra cópia em `_load_frontmatter`.
+    """
+    return deepcopy(parser(_decode_catalog_content(raw_content)))
+
+
+def _load_frontmatter(raw_content: bytes) -> Dict[str, Any]:
+    """Reutiliza interpretação limitada; não reutiliza cartões ou leituras."""
+    parser = _parse_frontmatter_v2
+    if len(raw_content) > _FRONTMATTER_CACHE_MAX_BYTES:
+        return deepcopy(parser(_decode_catalog_content(raw_content)))
+    return deepcopy(_cached_frontmatter(raw_content, parser))
+
+
 def load_catalog_definitions(catalog_dir: str = CATALOG_DIR) -> List[Dict[str, Any]]:
     """Lê agents/catalog/*.md e retorna definições normalizadas (A2A v1.0).
 
@@ -459,12 +491,13 @@ def load_catalog_definitions(catalog_dir: str = CATALOG_DIR) -> List[Dict[str, A
     definitions: List[Dict[str, Any]] = []
     for path in sorted(glob.glob(os.path.join(catalog_dir, "*.md"))):
         try:
-            with open(path, "r", encoding="utf-8") as f:
-                content = f.read()
+            with open(path, "rb") as f:
+                raw_content = f.read()
         except OSError:
             continue
 
-        meta = _parse_frontmatter_v2(content)
+        content = _decode_catalog_content(raw_content)
+        meta = _load_frontmatter(raw_content)
         file_stem = os.path.splitext(os.path.basename(path))[0]
         name = meta.get("name") or file_stem
         # agent_id deve ser um identificador estável (slug), não o rótulo de

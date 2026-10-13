@@ -94,9 +94,9 @@ def test_r360_spec_verifier_executes_acceptance_gate():
                 for delta in out["aggregate"]["proposed_terminology_deltas"]
             ),
         )
-    result = spec_verifier.verify("SPEC-935-R360", _artifact())
+    result = spec_verifier.verify("SPEC-935-R360", _artifact(), require_red_history=False)
     assert result["verified"] is True
-    assert result["status"] == "green"
+    assert result["status"] == "criteria_passed"
     assert result["passed_count"] == result["total_count"] == 6
 
 

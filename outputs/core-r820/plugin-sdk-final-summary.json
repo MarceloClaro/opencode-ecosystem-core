@@ -1,0 +1,70 @@
+{
+  "recorded_at_utc": "2026-10-11T20:37:13.1787826Z",
+  "scope": "R819/R979 OpenCode advisory plugin SDK correction",
+  "sources_frozen": true,
+  "source_sha256": {
+    ".opencode/plugins/acesso-aberto-auditoria.ts": "c976a7aebd3dc5697c9b0c1f1cdfb8ab074a951b366b7c650a5516d50b691efb",
+    "tests/test_r979_agente_skill_plugin_mcp.py": "4bcf35fb4da4952d1e5a97ca999eed9d6e2e522e2b13afa9f9460864dceb89cc",
+    "specs/SPEC-935-R819-opencode-esm.md": "43dfc3f9f5e7264f506e84f4301eb5dde5834a99a50b8a01002c82a652528fab",
+    "specs/SPEC-979-agente-skill-plugin-mcp-acesso-aberto.md": "43f170309a1ecd3179646d8092eeef4000c4e28d4282be88a481f3a3b13c1823"
+  },
+  "sdk_version": "1.18.4",
+  "node_version": "22.23.1",
+  "primary_contract_sources": [
+    ".opencode/node_modules/@opencode-ai/plugin/dist/index.d.ts",
+    ".opencode/node_modules/@opencode-ai/plugin/dist/tool.d.ts",
+    ".opencode/node_modules/@opencode-ai/plugin/dist/tool.js"
+  ],
+  "runs": {
+    "plugin-sdk-red": {
+      "tests": 29,
+      "failures": 13,
+      "errors": 0,
+      "skipped": 0,
+      "duration_s": 11.102,
+      "junit": "outputs/core-r820/plugin-sdk-red.xml"
+    },
+    "plugin-sdk-schema-red": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "duration_s": 0.384,
+      "junit": "outputs/core-r820/plugin-sdk-schema-red.xml"
+    },
+    "plugin-sdk-final-green": {
+      "tests": 30,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "duration_s": 9.98,
+      "junit": "outputs/core-r820/plugin-sdk-final-green.xml"
+    }
+  },
+  "typecheck": {
+    "red": "outputs/core-r820/typecheck-plugin-red.txt",
+    "red_error": "TS2322: factory returned Plugin instead of Hooks",
+    "final": "outputs/core-r820/typecheck-final.txt",
+    "exit_code": 0
+  },
+  "baseline_tests_preserved": 5,
+  "added_tests_in_existing_file": 25,
+  "new_spec_or_test_file_added": false,
+  "evolution_modified": false,
+  "runtime_proof": "Node imports actual Plugin/SDK and executes tool, Zod argument schema and JSON Schema converter; network and file-write instrumentation observed zero effects",
+  "response_contract": {
+    "guidance_only": true,
+    "file_creation": false,
+    "pipeline_executed": false,
+    "network_performed": false,
+    "evidence_eligible": false
+  },
+  "limitations": [
+    "DOI syntax validation does not confirm registration or article metadata.",
+    "Candidate URL is not fetched and does not establish open-access or license status.",
+    "Directory path is suggested; no dossier, excerpt or audit is created.",
+    "JSON Schema publication and local runtime are exercised; external model/provider UI inference is not claimed.",
+    "Whole-object runtime validation retains custom refinements that are not fully represented by generic JSON Schema."
+  ],
+  "summary": "outputs/core-r820/plugin-sdk-final-review.md"
+}

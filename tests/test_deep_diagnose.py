@@ -134,20 +134,24 @@ def test_reports_md(deep_report):
 
 # ---------------------------------------------------------------- R7
 def test_orchestrator_deep(tmp_path, monkeypatch):
-    """R7: orch.diagnose(deep=True) registra reflexão com síntese profunda."""
+    """Diagnóstico profundo registra observação heurística sem promover confiança."""
+    from copy import deepcopy
     from marceloclaro.orchestrator import MarceloClaroOrchestrator
     from mci.metabus import metabus
 
     orch = MarceloClaroOrchestrator()
+    confidence_before = deepcopy(metabus.memory.confidence_ledger)
     report = orch.diagnose(CORPUS, domain="multiagent_systems",
                            goals=GOALS, deep=True)
     assert "epistemic_opportunities" in report
     assert "successors" in report
-    # reflexão registrada na memória episódica global (Global Workspace)
     recent = metabus.memory.get_recent_context(limit=10)
-    assert any("Camada profunda" in str(e.get("reflection", ""))
-               for e in recent), \
-        "reflexão da camada profunda não registrada"
+    observations = [e for e in recent if e.get("type") == "observation"
+                    and "Camada profunda" in e.get("observation", {}).get("detail", "")]
+    assert observations, "observação da camada profunda não registrada"
+    payload = observations[-1]["observation"]
+    assert payload["heuristic"] is True and payload["promotes_confidence"] is False
+    assert metabus.memory.confidence_ledger == confidence_before
 
 
 # ---------------------------------------------------------------- R8 / INV2

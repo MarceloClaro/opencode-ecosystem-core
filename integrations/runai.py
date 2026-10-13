@@ -36,6 +36,13 @@ PROVIDER_ID = "runai"
 RUNAI_BIN = os.environ.get("RUNAI_BIN", "runai")
 NPM_PACKAGE_URL = "https://registry.npmjs.org/@canirun%2Frunai"
 SOURCE_REPOSITORY_URL = "https://github.com/midudev/canirun.ai"
+INSTALLATION_HINT = (
+    "Instale pelo código-fonte oficial: clone " + SOURCE_REPOSITORY_URL + ". "
+    "Com Bun e pnpm disponíveis, rode 'pnpm install --frozen-lockfile' e "
+    "'pnpm packages:build' na raiz do checkout; defina RUNAI_SOURCE_DIR "
+    "para esse diretório. O pacote npm pode estar indisponível; "
+    "consulte docs/RUNTIMES_OPCIONAIS.md para a instalação local registrada."
+)
 
 # Catálogo mínimo curado para o ecossistema. Não é espelho da canirun.ai.
 MODEL_ALIASES: Dict[str, str] = {
@@ -323,10 +330,7 @@ class RunAIProvisioner:
                 "exit_code": 127,
                 "stdout": "",
                 "stderr": (
-                    "CLI 'runai' não encontrada no PATH. Instale com: "
-                    "curl -fsSL https://canirun.ai/runai/install.sh | bash. "
-                    "Se o npm estiver inconsistente, use o checkout-fonte em "
-                    "RUNAI_SOURCE_DIR (repo canirun.ai)."
+                    "CLI 'runai' não encontrada no PATH. " + INSTALLATION_HINT
                 ),
                 "command": [self.binary] + list(args),
                 "mode": "unavailable",
@@ -454,9 +458,21 @@ class RunAIProvisioner:
         """Verifica /health do daemon. Nunca lança exceção — retorna dict."""
         try:
             body = self._http_get_json("/health", timeout=5.0)
-            return {"ok": True, **body}
+            if not (
+                isinstance(body, dict) and body.get("ok") is True
+                and body.get("service") == "runai"
+                and type(body.get("pid")) is int and body["pid"] > 0
+            ):
+                return {"ok": False, "error": "invalid_server_identity",
+                        "server_state": "unknown",
+                        "detail": "A resposta /health não identifica um servidor RunAI válido."}
+            return body
         except Exception as exc:  # pragma: no cover - daemon ausente/offline
-            return {"ok": False, "detail": str(exc)}
+            cause = exc.reason if isinstance(exc, urllib.error.URLError) else exc
+            # Timeout, resposta inválida ou HTTP de erro não comprovam término.
+            absent = isinstance(cause, ConnectionRefusedError)
+            return {"ok": False, "server_state": "absent" if absent else "unknown",
+                    "detail": str(exc)}
 
     def is_serving(self) -> bool:
         """True se o daemon HTTP do runai está ativo e respondendo."""
@@ -479,7 +495,19 @@ class RunAIProvisioner:
 
     def stop(self) -> Dict[str, Any]:
         """Para o daemon `runai serve` em background."""
-        return self._run_cli(["stop"], timeout=30.0)
+        result = self._run_cli(["stop"], timeout=30.0)
+        if result.get("ok"):
+            health = self.api_health()
+            if health.get("ok"):
+                return {**result, "ok": False, "error": "server_still_serving",
+                        "termination_confirmed": False,
+                        "detail": "A CLI encerrou, mas o servidor RunAI continua respondendo."}
+            if health.get("server_state") != "absent":
+                return {**result, "ok": False, "error": "termination_unconfirmed",
+                        "termination_confirmed": False, "server_state": "unknown",
+                        "detail": "A saúde HTTP não confirma o término do servidor RunAI."}
+            return {**result, "termination_confirmed": True}
+        return result
 
     def chat(
         self,

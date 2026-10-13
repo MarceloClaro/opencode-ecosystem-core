@@ -1,0 +1,275 @@
+{
+  "round": "R824",
+  "status": "complete",
+  "recorded_at_utc": "2026-10-12T04:57:56.670117+00:00",
+  "source_frozen": true,
+  "source_hashes": {
+    "integrations/browser_bridge.py": "7932856dc7a0bc713bb72201c2e336917b4fa77dfc2193600469edb0952d5499",
+    "integrations/browser_proxy.py": "ae691fc5ff38b01806ba74713fb6c443761c2f4c92196d68b1fca1b3994d3a8f",
+    "marceloclaro/browser_cli.py": "e7e5c3b36a7a508c97f01c45fdb2b579ba881de828cb1dc19214af8514de4f5a",
+    "marceloclaro/orchestrator.py": "0ec35c5bea453e38d23d427f1f8502c463fafeab126136d63b81f08468290f19",
+    "marceloclaro/cli.py": "46f93ed33e70d1120eda920c675744a93f960aa993fcd37b7ee9c52bdb41c2de",
+    "marceloclaro/doctor.py": "2fc9ed58daa8276d9da5abf9f07ab8ecb4729fa198ef77cd322846fa1f666885",
+    "integrations/ecosystem_mcp.py": "fb3a23c4cc3016cd417a484e8708ffc8cf767cd04a9e5bdc243160a4b5f26eed",
+    "tests/test_r824_browser_real.py": "422e95443af67dd110978721924403038b55dcbd041b3ef3ab5bdaca5d86aea5",
+    "tests/test_r640_ecosystem_surface.py": "adf9954d1fd5c0a1139eff4ce90a7835c35cba236e039be0425e42898f4fda27",
+    "specs/SPEC-935-R824-navegador-real-coordenado.md": "c88f8955093b7698472620d11a381f17f84ca9d2337d922a74cce7fa25fb5be1",
+    "docs/NAVEGADOR_REAL.md": "7449b7b8105a01fccfcf6eb2f457e947373defa4ea73873710f9b4c618a857d4",
+    "docs/ADR-R824-NAVEGADOR.md": "2ce81e0edc166c39ab55bb2b132094862bd5c1e4f2e78e699c3fce0b6132dc94"
+  },
+  "installation": {
+    "started_at_utc": "2026-10-12T03:50:08.003549+00:00",
+    "status": "installed",
+    "repository": "https://github.com/microsoft/playwright-mcp",
+    "version": "0.0.83",
+    "runtime_dir": "/home/marceloclaro/.local/share/opencode-core/playwright-mcp",
+    "commands": [
+      {
+        "argv": [
+          "/usr/bin/npm",
+          "install",
+          "--ignore-scripts",
+          "--save-exact",
+          "--no-fund",
+          "--no-audit",
+          "--registry=https://registry.npmjs.org",
+          "--fetch-retries=0",
+          "--fetch-timeout=30000",
+          "@playwright/mcp@0.0.83"
+        ],
+        "returncode": 0,
+        "log": "outputs/core-r824/installation-step-0.txt",
+        "sha256": "c4307d64b5a147f052e2e513ea1e8a6eee29a843d64c201e638d0a6b934f3ed8"
+      },
+      {
+        "argv": [
+          "/usr/bin/node",
+          "/home/marceloclaro/.local/share/opencode-core/playwright-mcp/node_modules/playwright/cli.js",
+          "install",
+          "chromium"
+        ],
+        "returncode": 0,
+        "log": "outputs/core-r824/installation-step-1.txt",
+        "sha256": "e91ed8a7075adca0ccfc4d9e123a1503dcbb71e570431143f8eeb3ad36ee30af"
+      }
+    ],
+    "node": "/usr/bin/node",
+    "npm": "/usr/bin/npm",
+    "verification": "installation_only",
+    "browser_execution_proved": false,
+    "dist_integrity_from_registry": "sha512-oNcl+Ae2/IAjhfPeP46BfIkSakfmprY+aOtkv5MjrQ4lPav4/yNtPhL0iq8SlIM90oApWgBDUxaNKvktazUKOg==",
+    "ended_at_utc": "2026-10-12T03:51:49.275105+00:00",
+    "dependencies": {
+      "playwright": "1.64.0-alpha-1790635538000",
+      "playwright-core": "1.64.0-alpha-1790635538000"
+    },
+    "package_lock_sha256": "4b4f2e19dfad3502df078699e3c396a4b238c66d49aac873022ba26a8b1ee6cd"
+  },
+  "real_flow": {
+    "status": "completed",
+    "completed_actions": [
+      "navigate",
+      "fill",
+      "click",
+      "read"
+    ],
+    "final_page": {
+      "url": "http://127.0.0.1:34451/",
+      "title": "Prova do navegador Core",
+      "text_excerpt": "Prova do navegador Core\nMensagem Mostrar CORE_BROWSER_REAL_824"
+    },
+    "browser_close_confirmed": true,
+    "image_artifacts": [
+      {
+        "path": "/home/marceloclaro/opencode-ecosystem-core/.opencode/browser/runs/1dba08d9-5542-42a9-bb58-61cd349e8af4/snapshot.png",
+        "sha256": "370a7d4580056c3a2078c3d4bc9ab7e02231249c993d8330f0151af70a95c793",
+        "bytes": 17658
+      }
+    ],
+    "parent_visual_review": "Campo e resultado CORE_BROWSER_REAL_824 legíveis na captura final."
+  },
+  "redirect_proof": [
+    {
+      "path": "/redirect",
+      "report": {
+        "operation": "run",
+        "status": "failed",
+        "success": false,
+        "browser_executed": true,
+        "response_sha256": "49fcc1d890d8f910de5d061988d203af5f12515bf1e60d746ee4cf88bed0a58c",
+        "request_sha256": "20cde638cc544d910f11054fa47f64fa2c9cd503ab4ea99cfdaba1aff3e842e3",
+        "provenance": {
+          "repository": "https://github.com/microsoft/playwright-mcp",
+          "version": "0.0.83"
+        },
+        "duration_seconds": 3.5207875560736284,
+        "error": "ValueError: Provider retornou isError; consulte a evidência.",
+        "externally_validated": false,
+        "evidence_artifact": {
+          "path": "/home/marceloclaro/opencode-ecosystem-core/.opencode/browser/evidence/49fcc1d890d8f910de5d061988d203af5f12515bf1e60d746ee4cf88bed0a58c.json",
+          "sha256": "49fcc1d890d8f910de5d061988d203af5f12515bf1e60d746ee4cf88bed0a58c",
+          "bytes": 2682,
+          "complete": true
+        },
+        "completed_actions": [],
+        "browser_close_confirmed": true,
+        "artifacts": [],
+        "response_delivery": "summary_with_complete_local_artifact",
+        "metacognition": {
+          "observation_id": "119cea12-f136-400a-80ba-44b6b395f769",
+          "persisted": true,
+          "scope_id": "d8374981850ec2521ad2e9aa97865923161a780f7fdb1a3f124ed95fc18fdb7a",
+          "previous_observation_id": null,
+          "state_transition": {
+            "from": null,
+            "to": "failed"
+          },
+          "confidence_promoted": false,
+          "externally_validated": false
+        }
+      },
+      "trap_requests": []
+    },
+    {
+      "path": "/chain",
+      "report": {
+        "operation": "run",
+        "status": "failed",
+        "success": false,
+        "browser_executed": true,
+        "response_sha256": "0307fa64c8a4be9cf165c6fd8ce7d43898a4214a48db26645e1baf1afaafc0c5",
+        "request_sha256": "817599095cc1ea1234627a38ac09d82fa1d58cf49620f54f0bfa751dd0830ed2",
+        "provenance": {
+          "repository": "https://github.com/microsoft/playwright-mcp",
+          "version": "0.0.83"
+        },
+        "duration_seconds": 3.368662121007219,
+        "error": "ValueError: Provider retornou isError; consulte a evidência.",
+        "externally_validated": false,
+        "evidence_artifact": {
+          "path": "/home/marceloclaro/opencode-ecosystem-core/.opencode/browser/evidence/0307fa64c8a4be9cf165c6fd8ce7d43898a4214a48db26645e1baf1afaafc0c5.json",
+          "sha256": "0307fa64c8a4be9cf165c6fd8ce7d43898a4214a48db26645e1baf1afaafc0c5",
+          "bytes": 2743,
+          "complete": true
+        },
+        "completed_actions": [],
+        "browser_close_confirmed": true,
+        "artifacts": [],
+        "response_delivery": "summary_with_complete_local_artifact",
+        "metacognition": {
+          "observation_id": "7375e575-eb09-42da-9302-4d9d8a131606",
+          "persisted": true,
+          "scope_id": "778d66fba556541737820139c13f95f9677786af6535913adfbecf287bf773e9",
+          "previous_observation_id": null,
+          "state_transition": {
+            "from": null,
+            "to": "failed"
+          },
+          "confidence_promoted": false,
+          "externally_validated": false
+        }
+      },
+      "trap_requests": []
+    }
+  ],
+  "gateway": {
+    "status": "passed",
+    "tool_count": 18,
+    "central_orchestrator": true,
+    "real_browser": true,
+    "metabus_persisted": true,
+    "external_validation": false,
+    "evidence_sha256": "d597cc8cd73e0a897613cf3f6a8a1e4bdb7da401205f4df6c69e4b13a25e4729"
+  },
+  "cli": {
+    "status": "passed",
+    "real_cli": true,
+    "results": [
+      {
+        "operation": "status",
+        "returncode": 0,
+        "browser_executed": false,
+        "evidence_sha256": null
+      },
+      {
+        "operation": "run",
+        "returncode": 0,
+        "browser_executed": true,
+        "evidence_sha256": "87559fa000e314ea383e02ef560e2acd866b69d8c512a136deeecd21297127dd"
+      }
+    ],
+    "externally_validated": false
+  },
+  "lifecycle": {
+    "status": "passed",
+    "cancel_elapsed_seconds": 0.5203117600176483,
+    "processes_after_timeout": [],
+    "processes_after_cancel": [],
+    "no_no_sandbox_argument": true,
+    "browser_close_confirmed": true
+  },
+  "tests": {
+    "tests": 66,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "r824_cases": 31,
+    "invalid_unicode_red_cases": 3,
+    "mutants_killed": 2,
+    "mutants_survived": 0
+  },
+  "evidence_artifacts_verified": [
+    {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/.opencode/browser/evidence/57bcb85effc63adb9758d88a972960d53cdcbfc99625b6c807443bbb7a1f53f1.json",
+      "sha256": "57bcb85effc63adb9758d88a972960d53cdcbfc99625b6c807443bbb7a1f53f1",
+      "bytes": 6202,
+      "complete": true
+    },
+    {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/.opencode/browser/evidence/d597cc8cd73e0a897613cf3f6a8a1e4bdb7da401205f4df6c69e4b13a25e4729.json",
+      "sha256": "d597cc8cd73e0a897613cf3f6a8a1e4bdb7da401205f4df6c69e4b13a25e4729",
+      "bytes": 3497,
+      "complete": true
+    },
+    {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/.opencode/browser/evidence/9126f1024909a87345d6a2195be545b2c47c281de55d195d67ee5adf3772bf7f.json",
+      "sha256": "9126f1024909a87345d6a2195be545b2c47c281de55d195d67ee5adf3772bf7f",
+      "bytes": 2294,
+      "complete": true
+    }
+  ],
+  "evidence_sha256": {
+    "installation-receipt.json": "5a947ffd82e5dbc03fec9814a11d278acf5199443e580f5cc7c4b902dcf8584c",
+    "attempt-6/real-browser.json": "e097ba9ee3ed9741cceb96414626981ac123e27e8d7214c3e03bb66d52317579",
+    "attempt-6/real-redirect.json": "0d3d60280d0fb2ce8688c50c87ca97a0c3fe0a3e987c5afa5f8b93ce13497f11",
+    "gateway-3/mcp-gateway.json": "b780f698e99e6319edbee32df5f330a219d0df47bae7a560adba7255e5380788",
+    "gateway-3/mcp-gateway-summary.json": "5483aa3d683da710b9a23459e36f9968f8eec6946739ec901a0664c54cc24b65",
+    "cli-final/summary.json": "d8a1fb339bf92e2582546eaee87565cce253bc1e434245655e62776a2e68b802",
+    "lifecycle-2/lifecycle-summary.json": "f6dc9dbfb8649651f441111d159e55587df8237927e85e09708d6682476425f2",
+    "lifecycle-2/lifecycle-timeout.json": "6a0d0b860214e203364887f63e568e3998501690bc5f092afb48c8fadd30c35e",
+    "mutation-summary.json": "861c3768d22525043d09f61c304e4f57f51e0c709adc635200acb8ee53e6162d",
+    "review-final-green-2.xml": "11a8dab2cd32c61b46622710d80ac1389a4c322e46ccce44b572765c5c7b99e6",
+    "review-final-green-2.txt": "845ea672d328661d417cf3bb0c21e6a7b4bedf26e0bc48857fa48d32b698d410",
+    "unicode-red.xml": "2fc42d392a2c9f470c5c5024fa97edb1fec89046a28616bf1be3a90d1934c4dd"
+  },
+  "historical_red_preserved": [
+    "real-browser.json",
+    "mcp-gateway.json",
+    "attempt-3/real-redirect.json",
+    "guard-green.xml",
+    "unicode-red.xml",
+    "review-final-green.txt"
+  ],
+  "proof_source_scope": "As provas reais usam a fonte imediatamente anterior à validação Unicode; somente a recusa prévia UTF-8 foi adicionada, com três contraprovas e 66 regressões na fonte final.",
+  "externally_validated": false,
+  "scientific_confidence_promoted": false,
+  "limitations": [
+    "A prova real usa páginas locais conhecidas; não demonstra sucesso em todo site.",
+    "O proxy limita o tráfego HTTP/CONNECT enviado a ele; não certifica isolamento universal de rede.",
+    "HTTPS é túnel CONNECT; HTTP chunked/upgrade simples são recusados.",
+    "Sessões são novas e isoladas; logins pessoais não são compartilhados.",
+    "O pacote fixado 0.0.83 depende de Playwright alpha; versões e lock estão no recibo.",
+    "Sandbox solicitado e ausência do argumento --no-sandbox observada; sem certificação de todas as camadas de isolamento.",
+    "BrowserMCP com extensão e AI-Researcher foram avaliados, sem instalação."
+  ]
+}

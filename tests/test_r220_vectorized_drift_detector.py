@@ -35,13 +35,14 @@ class TestR220VectorizedDriftDetector(unittest.TestCase):
         self.assertTrue(res["drifted"])
         self.assertEqual(res["status"], "drift_detected")
 
-    def test_spec_verifier_execution(self):
+    def test_criteria_only_inspection(self):
         spec = spec_registry.get("SPEC-935-R220")
         if spec:
             spec.add_criterion("Vectorized Drift Detector validado", lambda out: out.get("drift") is True)
-        res = spec_verifier.verify("SPEC-935-R220", {"drift": True})
+        res = spec_verifier.verify("SPEC-935-R220", {"drift": True}, require_red_history=False)
         self.assertTrue(res["verified"])
-        self.assertEqual(res["status"], "green")
+        self.assertEqual(res["verification_scope"], "criteria_only")
+        self.assertEqual(res["status"], "criteria_passed")
 
 
 if __name__ == "__main__":

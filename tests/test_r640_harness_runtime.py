@@ -58,7 +58,7 @@ def test_claude_preserves_prompt_and_card_without_hooks(runtime, monkeypatch):
         calls.append((command, kwargs))
         return completed(json.dumps({"type": "result", "subtype": "success", "is_error": False, "result": "Análise concluída"}))
 
-    monkeypatch.setattr("integrations.harness_runtime.subprocess.run", run)
+    monkeypatch.setattr("integrations.harness_runtime.HarnessRuntime._run_cli", run)
     result = runtime.execute("claude", "Analise $(id) e `literal`", agent_id="reviewer")
     assert result["success"]
     assert result["output"] == "Análise concluída"
@@ -82,7 +82,7 @@ def test_antigravity_uses_supported_print_and_plan_flags(runtime, monkeypatch):
         calls.append((command, kwargs))
         return completed(json.dumps({"type": "result", "is_error": False, "result": "Parecer real"}))
 
-    monkeypatch.setattr("integrations.harness_runtime.subprocess.run", run)
+    monkeypatch.setattr("integrations.harness_runtime.HarnessRuntime._run_cli", run)
     result = runtime.execute("antigravity", "Analise o projeto")
     assert result["success"]
     command, options = calls[0]
@@ -105,7 +105,7 @@ def test_codex_requires_completed_turn_and_final_agent_message(runtime, monkeypa
         calls.append((command, kwargs))
         return completed("\n".join(json.dumps(event) for event in events))
 
-    monkeypatch.setattr("integrations.harness_runtime.subprocess.run", run)
+    monkeypatch.setattr("integrations.harness_runtime.HarnessRuntime._run_cli", run)
     result = runtime.execute("codex", "Explique o roteamento")
     assert result["success"]
     assert result["output"] == "Resultado analisado"
@@ -119,7 +119,7 @@ def test_codex_requires_completed_turn_and_final_agent_message(runtime, monkeypa
 
 @pytest.mark.parametrize("output", ["", "Resposta simulada", '{"result":""}', '{"is_error":true,"result":"falha"}', '{"result":"pending"}'])
 def test_claude_rejects_empty_invalid_error_and_placeholder_output(runtime, monkeypatch, output):
-    monkeypatch.setattr("integrations.harness_runtime.subprocess.run", lambda *args, **kwargs: completed(output))
+    monkeypatch.setattr("integrations.harness_runtime.HarnessRuntime._run_cli", lambda *args, **kwargs: completed(output))
     result = runtime.execute("claude", "Analise")
     assert not result["success"]
     assert result["error"]
@@ -127,12 +127,12 @@ def test_claude_rejects_empty_invalid_error_and_placeholder_output(runtime, monk
 
 def test_codex_does_not_accept_message_without_completed_turn(runtime, monkeypatch):
     message = {"type": "item.completed", "item": {"type": "agent_message", "text": "Texto parcial"}}
-    monkeypatch.setattr("integrations.harness_runtime.subprocess.run", lambda *args, **kwargs: completed(json.dumps(message)))
+    monkeypatch.setattr("integrations.harness_runtime.HarnessRuntime._run_cli", lambda *args, **kwargs: completed(json.dumps(message)))
     assert not runtime.execute("codex", "Analise")["success"]
 
 
 def test_nonzero_and_secret_stderr_do_not_claim_success(runtime, monkeypatch):
-    monkeypatch.setattr("integrations.harness_runtime.subprocess.run", lambda *args, **kwargs: completed('{"result":"parecer"}', 1, "api_key=secret-value token: another-secret"))
+    monkeypatch.setattr("integrations.harness_runtime.HarnessRuntime._run_cli", lambda *args, **kwargs: completed('{"result":"parecer"}', 1, "api_key=secret-value token: another-secret"))
     result = runtime.execute("claude", "Analise")
     assert not result["success"]
     assert "secret-value" not in result["error"]
@@ -144,7 +144,7 @@ def test_timeout_is_bounded_and_returns_failure(runtime, monkeypatch):
         assert kwargs["timeout"] == 600
         raise subprocess.TimeoutExpired(args[0], 600, output="secret partial output")
 
-    monkeypatch.setattr("integrations.harness_runtime.subprocess.run", run)
+    monkeypatch.setattr("integrations.harness_runtime.HarnessRuntime._run_cli", run)
     result = runtime.execute("claude", "Analise", timeout=100000)
     assert not result["success"]
     assert "secret partial output" not in result["error"]
@@ -159,7 +159,7 @@ def test_missing_cli_and_chatgpt_are_explicit_failures(runtime, monkeypatch):
 
 
 def test_invalid_agent_cannot_escape_catalog(runtime, monkeypatch):
-    monkeypatch.setattr("integrations.harness_runtime.subprocess.run", lambda *args, **kwargs: pytest.fail("Não executar caminho inválido"))
+    monkeypatch.setattr("integrations.harness_runtime.HarnessRuntime._run_cli", lambda *args, **kwargs: pytest.fail("Não executar caminho inválido"))
     result = runtime.execute("claude", "Analise", agent_id="../../private")
     assert not result["success"]
     assert "agente" in result["error"].lower()
@@ -174,7 +174,7 @@ def test_windows_codex_interop_converts_repo_to_unc(runtime, monkeypatch):
         calls.append(command)
         return completed('\n'.join([json.dumps({"type": "item.completed", "item": {"type": "agent_message", "text": "Parecer"}}), json.dumps({"type": "turn.completed"})]))
 
-    monkeypatch.setattr("integrations.harness_runtime.subprocess.run", run)
+    monkeypatch.setattr("integrations.harness_runtime.HarnessRuntime._run_cli", run)
     result = runtime.execute("codex", "Analise")
     assert result["success"]
     assert result["execution_mode"] == "cli-read-only-windows-interop"
@@ -199,7 +199,7 @@ def test_chatgpt_never_claims_control_even_with_codex(runtime):
 
 @pytest.mark.parametrize("timeout", [0, -1, float("nan"), float("inf"), "invalid"])
 def test_invalid_timeout_never_starts_process(runtime, monkeypatch, timeout):
-    monkeypatch.setattr("integrations.harness_runtime.subprocess.run", lambda *args, **kwargs: pytest.fail("Timeout inválido"))
+    monkeypatch.setattr("integrations.harness_runtime.HarnessRuntime._run_cli", lambda *args, **kwargs: pytest.fail("Timeout inválido"))
     assert not runtime.execute("claude", "Analise", timeout=timeout)["success"]
 
 
@@ -208,12 +208,12 @@ def test_remaining_budget_below_one_second_is_respected(runtime, monkeypatch):
         assert kwargs["timeout"] == 0.2
         raise subprocess.TimeoutExpired(args[0], kwargs["timeout"])
 
-    monkeypatch.setattr("integrations.harness_runtime.subprocess.run", run)
+    monkeypatch.setattr("integrations.harness_runtime.HarnessRuntime._run_cli", run)
     assert not runtime.execute("claude", "Analise", timeout=0.2)["success"]
 
 
 def test_failure_explains_authentication_without_echoing_credentials(runtime, monkeypatch):
-    monkeypatch.setattr("integrations.harness_runtime.subprocess.run", lambda *args, **kwargs: completed("", 1, "authentication failed for api_key=super-secret"))
+    monkeypatch.setattr("integrations.harness_runtime.HarnessRuntime._run_cli", lambda *args, **kwargs: completed("", 1, "authentication failed for api_key=super-secret"))
     result = runtime.execute("claude", "Analise")
     assert "autenticação" in result["error"]
     assert "super-secret" not in result["error"]
@@ -226,7 +226,7 @@ def test_antigravity_real_json_response_shape_and_active_plan_mode(runtime, monk
         calls.append(command)
         return completed(json.dumps({"conversation_id": "example", "status": "SUCCESS", "response": "RUNTIME_PROBE_OK\n", "num_turns": 1}))
 
-    monkeypatch.setattr("integrations.harness_runtime.subprocess.run", run)
+    monkeypatch.setattr("integrations.harness_runtime.HarnessRuntime._run_cli", run)
     result = runtime.execute("antigravity", "Analise")
     assert result["success"]
     assert result["output"] == "RUNTIME_PROBE_OK"
@@ -236,13 +236,13 @@ def test_antigravity_real_json_response_shape_and_active_plan_mode(runtime, monk
 
 @pytest.mark.parametrize("status", ["ERROR", "FAILED", "PENDING", "UNKNOWN"])
 def test_antigravity_does_not_accept_non_success_status(runtime, monkeypatch, status):
-    monkeypatch.setattr("integrations.harness_runtime.subprocess.run", lambda *args, **kwargs: completed(json.dumps({"status": status, "response": "Texto de falha", "result": "Texto de falha"})))
+    monkeypatch.setattr("integrations.harness_runtime.HarnessRuntime._run_cli", lambda *args, **kwargs: completed(json.dumps({"status": status, "response": "Texto de falha", "result": "Texto de falha"})))
     assert not runtime.execute("antigravity", "Analise")["success"]
 
 
 def test_claude_credit_error_in_stdout_is_classified_without_echo(runtime, monkeypatch):
     response = {"type": "result", "subtype": "success", "is_error": True, "result": "Credit balance is too low api_key=secret-credit"}
-    monkeypatch.setattr("integrations.harness_runtime.subprocess.run", lambda *args, **kwargs: completed(json.dumps(response), 1))
+    monkeypatch.setattr("integrations.harness_runtime.HarnessRuntime._run_cli", lambda *args, **kwargs: completed(json.dumps(response), 1))
     result = runtime.execute("claude", "Analise")
     assert not result["success"]
     assert "saldo" in result["error"]
@@ -301,10 +301,10 @@ def test_failed_wslpath_does_not_guess_windows_distro(runtime, monkeypatch):
 
 @pytest.mark.parametrize("response", [{"status": {}, "result": "Parecer"}, {"subtype": [], "result": "Parecer"}])
 def test_malformed_json_metadata_returns_failure_instead_of_crashing(runtime, monkeypatch, response):
-    monkeypatch.setattr("integrations.harness_runtime.subprocess.run", lambda *args, **kwargs: completed(json.dumps(response)))
+    monkeypatch.setattr("integrations.harness_runtime.HarnessRuntime._run_cli", lambda *args, **kwargs: completed(json.dumps(response)))
     assert not runtime.execute("claude", "Analise")["success"]
 
 
 def test_none_timeout_returns_failure_instead_of_crashing(runtime, monkeypatch):
-    monkeypatch.setattr("integrations.harness_runtime.subprocess.run", lambda *args, **kwargs: pytest.fail("Timeout inválido"))
+    monkeypatch.setattr("integrations.harness_runtime.HarnessRuntime._run_cli", lambda *args, **kwargs: pytest.fail("Timeout inválido"))
     assert not runtime.execute("claude", "Analise", timeout=None)["success"]

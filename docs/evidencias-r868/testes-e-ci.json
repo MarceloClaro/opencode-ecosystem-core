@@ -1,0 +1,34 @@
+{
+  "format": "sanitized_local_summary",
+  "externally_validated": false,
+  "scope": "targeted local regressions and parsing of an earlier suite JUnit; not the consolidated current suite",
+  "doctor_targeted_regression": {
+    "passed": 60,
+    "failed": 0,
+    "source_sha256": "caa29174002a60e13b8b78fdfecf6653ff12481ac316f0ae7196f823be483ba7"
+  },
+  "ci_targeted_regression": {
+    "passed": 51,
+    "failed": 0,
+    "source_sha256": "53c74df48b293df90b0192d1613f137752f92878b9909ec89224ee63f52cb586"
+  },
+  "provided_prior_junit": {
+    "total": 7139,
+    "passed": 7074,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 65,
+    "declared_tests": 7173,
+    "unrepresented_tests": 34,
+    "suite_aggregate_fully_represented": false,
+    "junit_sha256": "a0ca88a8b45efc9d8cf6962facdb180f295bef0cca2263cb13b0880815e92372",
+    "provenance_verified": false
+  },
+  "provided_prior_junit_status": "PASS_WITH_SKIPS",
+  "provided_junit_rerun": false,
+  "ci_executed_on_github": false,
+  "source_sha256": {
+    "ci-implementation-receipt.json": "6aca71d173c0af8da84f5c2f9fdf70aee38c66cf9ede966130ed164f43723bdb",
+    "provided-prior-suite-quality.json": "7d6a912bbc906a2af9ff0663e32396b51aeba585a60a414f46e3c032bb87e7c8"
+  }
+}

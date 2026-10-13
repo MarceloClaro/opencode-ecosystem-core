@@ -1,0 +1,47 @@
+{
+  "format": "sanitized_local_summary",
+  "externally_validated": false,
+  "scope": "direct CLI static inspection and explanation of an operator-owned controlled HTML fixture; no LLM required",
+  "inspect_returncode": 0,
+  "explain_returncode": 0,
+  "target_digest": {
+    "sha256": "af45ad89be3cbe54ede471118849035b8c8ad95d970c46fa18bf5ad9a756f2d3",
+    "files": 1,
+    "bytes": 115,
+    "algorithm": "sha256"
+  },
+  "target_unchanged": true,
+  "privacy": {
+    "mode": "isolated_local_analysis",
+    "interfaces": [
+      "lo"
+    ],
+    "external_route_available": false,
+    "host_probe_connected": false,
+    "scope": "analytical_worker_and_descendants; trusted_local_MCP_client_required"
+  },
+  "findings_count": 2,
+  "findings": [
+    {
+      "description": "Título declarado: Uso local do Core.",
+      "evidence_id": "ev_core_html_af45ad89be3cbe54ede47111"
+    },
+    {
+      "description": "HTML declara 0 formulário(s) e 0 script(s).",
+      "evidence_id": "ev_core_html_af45ad89be3cbe54ede47111"
+    }
+  ],
+  "limitations": [
+    "A aplicação alvo não foi executada; achados são estáticos.",
+    "Inspeção e metadados não recuperam necessariamente o código-fonte original.",
+    "A garantia local cobre o worker; clientes de inferência em nuvem não fazem parte deste modo.",
+    "Links e scripts foram enumerados, sem acesso aos destinos nem execução de JavaScript."
+  ],
+  "receipt_sha256": "c16d780c83e9168df930c3aeb26f463c7f3932979f4934fea7b4de33b8dd5b35",
+  "llm_required": false,
+  "source_sha256": {
+    "direct-local-proof.json": "442f0820e57c507b13c9f2e1ec7e95ba3689b1fe8be4a3e8ffe3ac520178a503",
+    "direct-inspection-final.json": "4e3eb94bd95343680d353243cce69dd2203dbb32004888c07e02386ac85666d5",
+    "direct-explanation-final.txt": "ad48944eed615337e2223672b83257e23b5f6188ef55f86b9188a03eeb9832fd"
+  }
+}

@@ -1,0 +1,104 @@
+% ============================================================
+%  MÓDULO 21 — Mapa das teorias: o que cada artigo justifica (R100/R101)
+%  Tabela única teoria para mecanismo, com limite anti-overclaim
+% ============================================================
+\chapter{Mapa das Teorias: O Que Cada Artigo Ensina ao Core}
+
+\roteirodidatico
+{Cada capítulo cita artigos famosos e o leitor pode pensar que citar é provar. Este capítulo desfaz o mal-entendido: mostra em uma tabela o que cada teoria inspira, que regra do Core ela justifica e o que ela jamais prova sozinha.}
+{\emph{Lastro} é a ideia que empresta sentido à regra; \emph{Regra} é o comportamento implementado no código; \emph{Limite} é o que nem o artigo nem o código garantem sem teste e validação externa.}
+{Leia a tabela linha a linha; para cada linha, abra o DOI e o arquivo do Core indicados antes de aceitar a ligação.}
+{Artigo localiza a fonte da ideia; arquivo localiza a implementação; teste localiza a evidência daquele caso. Nenhum dos três, sozinho, é selo geral.}
+{Para a regra que você mais usa, qual artigo a inspira e qual teste a sustenta hoje?}
+
+\casoguiado{o roteador e o artigo de atenção}
+{Bruno lê que o Core roteia por atenção e imagina que o artigo do Transformer prova que o roteador acerta. Ana pergunta o que o artigo mostra de fato: uma forma de ponderar por relevância. Os dois abrem o DOI e o arquivo \pth{transformer/attention.py} e concluem juntos: o artigo empresta a conta, o código implementa a ordenação, só registros de decisões com gabarito diriam se escolhe bem. Citar não é certificar.}
+
+\section{A tabela única em duas páginas}
+
+\elemento{Teoria para regra: lastro, implementação e limite}{\metainfo{ID}{TEO-MAPA} \hfill \metainfo{Leitura}{teórica} \hfill \metainfo{Gate}{R110}}
+
+\begin{descricao}
+Leia cada linha como um contrato de três colunas. Primeira: o que a teoria diz no original. Segunda: que regra do Core bebe dessa fonte. Terceira: o que continua exigindo teste, comando ou validação externa. A última coluna é a mais importante deste livro.
+\end{descricao}
+
+\begin{resultado}
+{\footnotesize
+\begin{tabularx}{\textwidth}{lY}
+\toprule
+Teoria (DOI) & Lastro para regra do Core / Limite \\
+\midrule
+Wooldridge e Jennings 1995 \texttt{10.1017/S0269888900008122} &
+Agente = reativo + proativo + social. Regra: gatilho só vira ativação com registro, roteamento e entrega confrontada. Limite: preencher a tríade no texto não prova que um perfil age bem. \\
+Nii 1986 \texttt{10.1609/aimag.v7i2.537} &
+Blackboard: especialistas cooperam por quadro compartilhado, ordem oportunista. Regra: Quadro A2A + voluntariado E1--E7. Limite: lousa cheia não prova serviço bom. \\
+Smith 1980 \texttt{10.1109/TC.1980.1675516} &
+Rede de contratos: anuncia, licita, escolhe por custo entre elegíveis. Regra: \pth{mci_post_task} e escolha entre candidatos que cumprem requisitos. Limite: licitação não valida a entrega. \\
+Vaswani et al. 2017 \texttt{10.48550/arXiv.1706.03762} &
+Atenção como \texttt{softmax(QKt/sqrt(dk))V}. Regra: ordenar candidatos por relevância ponderada. Limite: peso alto é casamento de sinais, não garantia de acerto. \\
+Newell 1982 \texttt{10.1016/0004-3702(82)90012-1} &
+Nível de conhecimento acima do nível de símbolo. Regra: separar o que o sistema declara saber do programa que executa. Limite: declarar nível não mede compreensão. \\
+Simon 1955 \texttt{10.2307/1884852} &
+Racionalidade limitada à informação e computação disponíveis. Regra: gates, limites de confiança e carga, fallbacks. Limite: limite configurado não prova decisão ótima. \\
+Nelson e Narens 1990 \texttt{10.1016/S0079-7421(08)60053-5} &
+Monitorar e controlar como processos distintos. Regra: PERCEBE e REFLETE com MetaBus. Limite: registrar reflexão não garante próxima tarefa melhor. \\
+Flavell 1979 \texttt{10.1037/0003-066X.34.10.906} &
+Metacognição como conhecimento sobre os próprios processos. Regra: memória metacognitiva persistida. Limite: caderno de lições não é consciência nem prova de aprendizado. \\
+Fucci et al. 2017 \texttt{10.1109/TSE.2016.2616877} &
+Ganhos do TDD vêm de granularidade e uniformidade. Regra: fichas curtas, comandos curtos, verificação frequente. Limite: ciclo curto não elimina erro fora do critério. \\
+Rafique e Misic 2013 \texttt{10.1109/TSE.2012.28} &
+Meta-análise de 27 estudos: efeito do TDD condicionado ao desenho. Regra: SDD/TDD como disciplina auditável. Limite: efeito médio publicado não promete efeito neste repo. \\
+Ioannidis 2005 \texttt{10.1371/journal.pmed.0020124} &
+PPV depende de poder, viés e razão de verdadeiros. Regra: anti-overclaim e cálculo de PPV do livro. Limite: número bonito sem taxa-base não sustenta conclusão. \\
+Peng 2011 \texttt{10.1126/science.1213847} &
+Artigo = texto + ambiente completo. Regra: epílogo de 12 passos e capítulo WSL com comandos. Limite: planta testada aqui pode divergir em outra máquina. \\
+Wilkinson et al. 2016 \texttt{10.1038/sdata.2016.18} &
+FAIR: encontrável, acessível, interoperável, reutilizável. Regra: proveniência por observação (comando, versão, hash, seed). Limite: metadado rico não prova verdade do conteúdo. \\
+Brooks 1987 \texttt{10.1109/MC.1987.1663532} &
+Sem bala de prata em engenharia de software. Regra: composição de disciplinas em 8 camadas. Limite: somar técnicas não soma garantia. \\
+Amdahl 1967 \texttt{10.1145/1465482.1465560} &
+Paralelo sem sequencial rápido desperdiça esforço. Regra: distinguir delegação paralela de verificação sequencial. Limite: lei de speedup não mede qualidade da resposta. \\
+\bottomrule
+\end{tabularx}\par}
+\end{resultado}
+
+\section{Como usar a tabela sem se enganar}
+
+\begin{metodo}
+Para qualquer linha: (1) abra o DOI em \pth{https://doi.org/} mais o sufixo e leia o resumo; (2) abra o arquivo do Core citado no capítulo correspondente; (3) procure o teste ou registro que mostra o comportamento naquele caso. Se um dos três faltar, escreva a lacuna no caderno em vez de completar com entusiasmo. Essa é a disciplina SDD aplicada à leitura.
+\end{metodo}
+
+A arquitetura que introduziu a atenção empilha atenção pura sem recorrência nem convolução, e é dela que o Core toma a ideia de rotear por relevância ponderada \citref{VASWANI, A. et al. Attention is all you need. Advances in Neural Information Processing Systems, v.~30, p.~5998-6008, 2017}{10.48550/arXiv.1706.03762}{Empresta a conta de ponderação por relevância ao roteador; não prova que o roteador escolha bem.}{We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely}{Propomos uma nova arquitetura simples, o Transformer, baseada apenas em mecanismos de atenção, dispensando totalmente recorrência e convoluções.}{VASWANI et al., 2017, p.~5998-6008}.
+
+O ensaio sobre achados falsos mostra que a probabilidade de uma alegação ser verdadeira depende de poder, viés e razão de verdadeiros no campo \citref{IOANNIDIS, J. P. A. Why most published research findings are false. PLoS Medicine, v.~2, n.~8, e124, 2005}{10.1371/journal.pmed.0020124}{Fundamenta o gate anti-overclaim: sem taxa-base, número bonito não sustenta conclusão.}{Simulations show that for most study designs and settings, it is more likely for a research claim to be false than true}{Simulações mostram que, para a maioria dos desenhos e cenários, é mais provável que uma alegação seja falsa do que verdadeira.}{IOANNIDIS, 2005, e124}.
+
+\begin{aviso}
+Limite do mapa. A tabela organiza a leitura; não é revisão sistemática da literatura nem prova de que o Core instancia corretamente cada teoria. Divergência entre figura e código se resolve a favor da fonte primária local e da evidência observada.
+\end{aviso}
+
+\begin{resultado}
+\textbf{Exercícios.} (1) Escolha duas linhas e escreva a regra e o limite com suas palavras. (2) Para uma delas, localize arquivo e teste correspondentes. (3) Explique por que DOI ativo prova localização da fonte, não acerto da interpretação.
+\end{resultado}
+
+\section[Leitura guiada]{Leitura guiada: passar da teoria à evidência local}
+\begin{descricao}
+\textbf{O fenômeno.} Uma analogia arquitetural pode ser útil sem reproduzir o mecanismo ou os resultados do artigo que a inspirou.
+\end{descricao}
+\begin{definicao}
+\textbf{Grandezas e definições.} Separe três objetos: a proposição da fonte, a regra implementada e a observação do teste. Correspondência conceitual e desempenho empírico são relações diferentes.
+\end{definicao}
+\begin{metodo}
+\textbf{Dedução passo a passo.} Localize o trecho primário; descreva a ideia em uma frase; encontre a implementação; leia a entrada e a saída do teste; registre o que permanece sem comparação. Cada passagem exige evidência própria.
+\end{metodo}
+\begin{resultado}
+\textbf{Exemplo resolvido.} O roteador emprega ponderação de relevância inspirada em atenção. O artigo citado descreve uma arquitetura Transformer; o arquivo local descreve o roteador. Um teste de seleção demonstra a resposta àquela entrada, sem provar que o Core implementa um Transformer treinado ou obtém seu desempenho.
+\end{resultado}
+\begin{resultado}
+\textbf{Ordem de grandeza e verificação.} Para uma linha do mapa, confira um trecho, uma regra e um caso executado. Se faltar o caso, registre a lacuna; três links por si só não representam três confirmações de eficácia.
+\end{resultado}
+\begin{aviso}
+\textbf{Limite de validade.} O mapa organiza leitura e rastreabilidade. Não é revisão sistemática, calibração do roteador nem validação externa do ecossistema.
+\end{aviso}
+\begin{resultado}
+\textbf{Exercícios.} Escolha uma analogia do mapa; escreva o mecanismo comum e uma diferença; localize uma entrada de teste; proponha uma comparação necessária antes de alegar ganho de desempenho.
+\end{resultado}

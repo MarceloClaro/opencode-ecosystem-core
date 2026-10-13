@@ -44,15 +44,15 @@ próprias.
     \item \texttt{python3\ -m\ marceloclaro.cli\ doctor}
   \end{itemize}
   \item Se houver um instalador específico da plataforma, siga as instruções
-        correspondentes em \pth{common/} e consulte \pth{specs/} quando precisar
+        correspondentes em \pth{installer/} e consulte \pth{specs/} quando precisar
         da especificação.
 \end{enumerate}
 \end{metodo}
 
 \begin{funcao}
-Garantir que o Core consiga: carregar specs, ler o registro de evolução,
-acessar a memória metacognitiva e despachar agentes — exatamente o que o
-\texttt{doctor} confere.
+Conferir condições estruturais: carregamento de specs, leitura do registro de
+evolução, acesso à memória e instalação/configuração de dependências. Despacho,
+autenticação e inferência continuam exigindo uma operação e sua evidência própria.
 \end{funcao}
 
 \begin{niveis}
@@ -60,9 +60,9 @@ acessar a memória metacognitiva e despachar agentes — exatamente o que o
 regras e um comando de cheque médico (\texttt{doctor}).\\
 \textbf{Implementação:} venv isolado + requirements por perfil (base/dev/scientific),
 instaladores por SO e unit para systemd.\\
-\textbf{Formalização:} o \texttt{doctor} é um oráculo de health-checks (20 checks na última
-configuração registrada) ligando specs $\leftrightarrow$ código $\leftrightarrow$
-memória; é a primeira etapa do protocolo de auditoria.
+\textbf{Formalização:} o \texttt{doctor} relaciona checks estruturais de
+specs, código, memória e dependências; sua lista é consultada em execução.
+É uma etapa de conferência de pré-requisitos, sem substituir a execução do caminho escolhido.
 \end{niveis}
 
 \clearpage
@@ -78,14 +78,14 @@ Operar o ecossistema sem editar arquivos de configuração manualmente.
 \begin{processo}
 \textbf{Menu de operação} (visão consolidada do \pth{CLI}):
 \begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
-  \item \texttt{python3\ -m\ marceloclaro.cli\ menu} — menu principal.
+  \item \texttt{python3\ -m\ marceloclaro.cli} — menu principal, sem argumento adicional.
   \item \texttt{python3\ -m\ marceloclaro.cli\ doctor} — diagnóstico de saúde (rode
         \emph{antes} de qualquer edição).
   \item \texttt{python3\ -m\ marceloclaro.cli\ helpdesk} — ajuda guiada em linguagem
         simples.
   \item \pth{opencode.json},
         catálogo de agentes e comandos customizados (após editar cards em
-         \pth{skills/}).
+         \pth{agents/catalog/}; regenere com \pth{python3 -m integrations.opencode_cli}).
   \item Skills instaladas em \pth{.opencode/skills/} — pesquisa científica,
         médico virtual supremo, nano-orquestração, deploy GitHub Pages, MiroFish,
         prestação de contas, entre outras.
@@ -257,7 +257,7 @@ seu terminal e anote cada coluna do resultado — o que cada um verifica.
 \elemento{Leitura guiada — Instalação e ambiente}{\metainfo{ID}{N-01c} \hfill \metainfo{Ciclo}{R614} \hfill \metainfo{Estilo}{calibrar antes de medir}}
 
 \begin{descricao}
-\textbf{A pergunta.} Como outra pessoa pode reconstruir o ambiente em que um
+\textbf{O fenômeno: A pergunta}  Como outra pessoa pode reconstruir o ambiente em que um
 resultado foi produzido? Fixar arquivos de dependência ajuda, mas não basta:
 versões do sistema, serviços externos, credenciais e fontes de aleatoriedade
 também podem alterar uma execução. O comando
@@ -299,7 +299,7 @@ ambiente:} rode \texttt{python3\ -m\ marceloclaro.cli\ doctor} e use o valor de
 \end{resultado}
 
 \begin{resultado}
-\textbf{Sequência de conferência.} Para mudanças sujeitas ao fluxo SDD/TDD deste
+\textbf{Ordem de grandeza e verificação: Sequência de conferência} Para mudanças sujeitas ao fluxo SDD/TDD deste
 repositório, consulte o diagnóstico, a especificação aplicável, os testes e o
 registro de evolução; regenere \pth{opencode.json} apenas quando a alteração
 envolver os catálogos que o produzem. A ordem exata depende da tarefa. Para

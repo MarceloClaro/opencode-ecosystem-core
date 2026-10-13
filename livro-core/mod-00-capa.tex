@@ -7,15 +7,26 @@
 \thispagestyle{empty}
 \pagestyle{empty}
 % --- Capa (página 1) -----------------------------------------
-% R621: a capa passa a ser a arte_final do autor (monografia "OpenCode
-% Ecosystem v5.1.0", fonte: PDF Canva do próprio autor). Substitui a capa
-% desenhada em TikZ que vigorou de R599 a R620. A arte é raster em A4 cheio
-% (1755x2483 px, ~213 dpi): entra como imagem, não como texto, para que a
-% diagramação do PDF de origem não seja reinterpretada nem recomposta.
+% R621: arte original do autor, preservada como imagem de 1755x2483 pixels.
+% R822: ajuste editorial solicitado em 12/10/2026. Retrato/logotipo originais
+% conservados; título e subtítulo são tipografia vetorial do livro.
 \noindent
 \begin{tikzpicture}[remember picture,overlay]
   \node[inner sep=0,anchor=center] at (current page.center)
-    {\includegraphics[width=\paperwidth,height=\paperheight]{capa-ecosistema.jpg}};
+    {\includegraphics[width=\paperwidth,height=\paperheight]{capa-ecosistema-original.jpg}};
+  \fill[black] (current page.north west) rectangle ([yshift=-40mm]current page.north east);
+  \node[anchor=north,inner sep=0,text=white,font={\sffamily\bfseries\fontsize{34}{36}\selectfont}]
+    at ([yshift=-6mm]current page.north) {ECOSSISTEMA};
+  \node[anchor=north,inner sep=0,text=white,font={\sffamily\bfseries\fontsize{34}{36}\selectfont}]
+    at ([yshift=-19mm]current page.north) {OPENCODE CORE};
+  \node[anchor=north,inner sep=0,text=white,font={\sffamily\mdseries\fontsize{13}{16}\selectfont}]
+    at ([yshift=-32mm]current page.north) {MARCELO CLARO};
+  \fill[black] ([xshift=4mm,yshift=23mm]current page.south west)
+    rectangle ([xshift=93mm,yshift=53mm]current page.south west);
+  \foreach \offset/\line in {48/{Arquitetura, Orquestração e},42.7/{Validação Computacional de},37.4/{Sistemas Multiagente com},32.1/{Metacognição Funcional}} {
+    \node[anchor=north west,inner sep=0,text=white,font={\sffamily\bfseries\fontsize{13}{15}\selectfont}]
+      at ([xshift=6mm,yshift=\offset mm]current page.south west) {\line};
+  }
 \end{tikzpicture}%
 \null
 \clearpage
@@ -50,10 +61,10 @@ Obrigado por fazer parte desta jornada.
 \sffamily
 {\color{plumAccent}\rule{0.16\linewidth}{1.4pt}}\\[8pt]
 {\small\bfseries\color{steel}\MakeUppercase{Série técnica e científica}}\\[12pt]
-{\fontsize{25}{29}\selectfont\bfseries\color{textmain}Manual Técnico-Dev-Científico\\[3pt]do OpenCode Ecosystem Core}\\[10pt]
+{\fontsize{25}{29}\selectfont\bfseries\color{textmain}Ecossistema OpenCode Core}\\[10pt]
 {\color{plumAccent}\rule{0.32\linewidth}{0.8pt}}\\[12pt]
-{\large\color{textmuted}Elemento, agente e subagente: ficha de raio-x com descrição, conceito, cálculo,\\
-fluxo de trabalho, interações, impacto, limites, arquitetura e fluxograma}\\[22pt]
+{\large\color{textmuted}Arquitetura, Orquestração e Validação Computacional\\
+de Sistemas Multiagente com Metacognição Funcional}\\[22pt]
 \begin{tcolorbox}[width=0.9\linewidth,colback=panel,colframe=plumAccent,boxrule=0.6pt,arc=1.5mm,left=5mm,right=5mm,top=4mm,bottom=4mm]
 {\small Coordenação do ecossistema: \textbf{MarceloClaro Orchestrator} (proto-coordenação A2A/MetaBus)\\[3pt]
 Autor/organizador: \textbf{Marcelo Claro Laranjeira} \;$\cdot$\; ORCID \href{https://orcid.org/0000-0001-8996-2887}{0000-0001-8996-2887} \;$\cdot$\; \texttt{marceloclaro@gmail.com}\\[3pt]

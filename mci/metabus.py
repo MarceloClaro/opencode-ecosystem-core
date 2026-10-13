@@ -164,6 +164,8 @@ class MetacognitiveMemory:
         results: List[Dict[str, Any]] = []
 
         for entry in reversed(self.episodic):
+            if not isinstance(entry, dict):
+                continue
             hay = " ".join([
                 str(entry.get("agent_id", "")),
                 str(entry.get("context", "")),
@@ -175,9 +177,11 @@ class MetacognitiveMemory:
                     return results
 
         for topic, data in self.semantic.items():
+            if not isinstance(data, dict):
+                continue
             hay = " ".join([
                 topic,
-                " ".join(data.get("lessons", []) or []),
+                json.dumps(data.get("lessons", []), ensure_ascii=False),
                 json.dumps(data.get("metadata", {}), ensure_ascii=False),
             ]).lower()
             if _matches(hay):

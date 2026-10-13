@@ -1,0 +1,29 @@
+{
+  "spec": "SPEC-935-R844",
+  "action": "install_hopper",
+  "planned_by": "rea setup --yes --install-hopper --dry-run (plan id=install_hopper)",
+  "reason_pkexec": "rea setup aplicado retornou status=needs_human, code=authorization_or_package_manager_failed (pkexec/polkit sem sessão gráfica)",
+  "remediation_applied": "install the planned Hopper package and Linux runtime dependencies, then rerun rea setup",
+  "artifact": {
+    "url": "https://www.hopperapp.com:443/downloader/public/Hopper-6.4.2-Linux-demo.deb",
+    "bytes": 35755772,
+    "sha1": "e4f79dff602648a8ff4a88b773875b6bfac0dc65",
+    "integrity_verified": true,
+    "downloader_headers": {
+      "accept": "application/json",
+      "user-agent": "rea-installer"
+    }
+  },
+  "install_command": "sudo apt-get install -y ./Hopper-6.4.2-Linux-demo.deb xvfb xauth python3 libx11-6 libxtst6",
+  "launcher": "/opt/hopper/bin/Hopper",
+  "doctor_hopper": {
+    "healthy": true,
+    "hopper": "healthy",
+    "hopper_version": "healthy",
+    "demo_runtime": "user-mount-namespace; /tmp/.X11-unix mode 0777"
+  },
+  "flags": {
+    "externally_validated": false,
+    "confidence_promoted": false
+  }
+}

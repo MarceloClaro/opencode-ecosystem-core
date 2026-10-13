@@ -16400,6 +16400,3866 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R754",
+      "objective": "Publicacao total: 9daaf7b + c97a3ae no GitHub",
+      "changes": [
+        "CHANGELOG [Nao lancado]",
+        "README integridade operacional",
+        "push f2d5374..c97a3ae"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Consolidacao honesta rotula o alheio em vez de assinar; changelog e recibo da publicacao."
+      ],
+      "timestamp": 1791459745.5751157,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R755",
+      "objective": "README com polimata + mapa dinamico + CI escopos",
+      "changes": [
+        "README (2 secoes)",
+        "maps regenerado (1402n/2217v)"
+      ],
+      "score": 0.88,
+      "lessons": [
+        "Mapa gerado, nunca manual; README cita artefatos, nao duplica numeros volateis."
+      ],
+      "timestamp": 1791461020.5694628,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R756",
+      "objective": "Site GitHub Pages do ecossistema (build built, 200, marcador)",
+      "changes": [
+        "MarceloClaro/opencode-ecosystem-core-site:index.html (16 labs verificados)"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Tabela validada contra federados.json antes de publicar; Pages exige index na raiz; prova por marcador, nunca so status."
+      ],
+      "timestamp": 1791471879.4847157,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R757",
+      "objective": "Revista digital do livro no ar (26 caps + capa)",
+      "changes": [
+        "site/livro/index.html",
+        "site/livro/capa.jpg"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Capitulos extraidos dos chapter LaTeX; hero com capa oficial."
+      ],
+      "timestamp": 1791475174.7705445,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R758",
+      "objective": "Site profissional no ar (mapa+podcast+negocio+estudo)",
+      "changes": [
+        "site 6 secoes, audios 206, pdf 200"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Tabela e conteudo validados antes do push; mermaid com fallback."
+      ],
+      "timestamp": 1791476586.342855,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R759",
+      "objective": "EP1 NotebookLM no ar (10MB)",
+      "changes": [
+        "site/podcast/apresentacao.mp3"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "NotebookLM gera m4a 41MB; imageio-ffmpeg comprime sem ffmpeg de sistema; nota de proveniencia na pagina."
+      ],
+      "timestamp": 1791481626.0018919,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R760",
+      "objective": "EP1 em pt-BR no ar (7MB)",
+      "changes": [
+        "site/podcast/apresentacao.mp3 pt"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "--language pt completa; download so apos completed; limpar artefatos travados."
+      ],
+      "timestamp": 1791482868.2914608,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R761",
+      "objective": "Tema cyberpunk neon no ar",
+      "changes": [
+        "site 6 paginas"
+      ],
+      "score": 0.88,
+      "lessons": [
+        "Tema via regex de bloco style preserva flags e conteudo."
+      ],
+      "timestamp": 1791487111.799323,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R762",
+      "objective": "Tema profissional corporativo no ar",
+      "changes": [
+        "site 6 paginas"
+      ],
+      "score": 0.88,
+      "lessons": [
+        "Canvas do mapa acompanha o tema; smoke via arquivo, nao pipe."
+      ],
+      "timestamp": 1791504420.4482913,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R763",
+      "objective": "UX tech de impacto no ar",
+      "changes": [
+        "site 6 paginas"
+      ],
+      "score": 0.89,
+      "lessons": [
+        "Reveal via IntersectionObserver com fallback visivel; gradientes contidos."
+      ],
+      "timestamp": 1791510291.9444542,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R764",
+      "objective": "Reescrita total com impacto maximo",
+      "changes": [
+        "site 6 paginas reescritas"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "git rm exige recriar diretorios; verificar as 6 antes do push."
+      ],
+      "timestamp": 1791510559.7377398,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R765",
+      "objective": "Heroi MIRA com capa dinamica",
+      "changes": [
+        "site index hero"
+      ],
+      "score": 0.88,
+      "lessons": [
+        "background-attachment fixed + zoom 26s = movimento perpetuo; veus preservam legibilidade."
+      ],
+      "timestamp": 1791510918.4158845,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R766",
+      "objective": "Grafo com selecao e legenda explicativa",
+      "changes": [
+        "site mapa"
+      ],
+      "score": 0.89,
+      "lessons": [
+        "Painel por clique + legenda por camada com tecnica; smoke do JS antes do push."
+      ],
+      "timestamp": 1791512884.2725563,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R767",
+      "objective": "Grafo neural em arvore de decisao",
+      "changes": [
+        "site mapa"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Somas com halo + pulsos nas arestas; profundidade por camada."
+      ],
+      "timestamp": 1791513280.4182076,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R768",
+      "objective": "Grafo 3D com legenda tecnica",
+      "changes": [
+        "site mapa 3D"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Legenda estatica garante prova mesmo sem WebGL; modulo via importmap."
+      ],
+      "timestamp": 1791513637.4662771,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R769",
+      "objective": "Fix 3D: 26 camadas mapeadas, 1402 visiveis",
+      "changes": [
+        "site mapa"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Validar chaves reais dos dados antes de filtrar; defaults silenciosos escondem bugs."
+      ],
+      "timestamp": 1791514307.8151321,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R770",
+      "objective": "Painel por-no com 1278 descricoes reais",
+      "changes": [
+        "site mapa/detalhes.json + painel"
+      ],
+      "score": 0.92,
+      "lessons": [
+        "Texto por-no extraido da fonte, nunca generico; brace auditado por rastreio de profundidade."
+      ],
+      "timestamp": 1791537268.1657743,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R771",
+      "objective": "Detalhes reais nos 1402 nos",
+      "changes": [
+        "site mapa/detalhes.json"
+      ],
+      "score": 0.92,
+      "lessons": [
+        "Frontmatter com comentario exige busca de fence, nao ancora; AST supera regex para docstrings."
+      ],
+      "timestamp": 1791537697.916804,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R772",
+      "objective": "Fluxograma branco navegavel",
+      "changes": [
+        "site mapa fluxo"
+      ],
+      "score": 0.88,
+      "lessons": [
+        "Pan/zoom proprios sem depender do mermaid; MutationObserver aplica apos render."
+      ],
+      "timestamp": 1791538132.3423963,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R773",
+      "objective": "Fluxograma renderizado sem titulo",
+      "changes": [
+        "site mapa"
+      ],
+      "score": 0.88,
+      "lessons": [
+        "Mermaid exige texto cru, nunca escapado; um init unico."
+      ],
+      "timestamp": 1791538416.2268193,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R774",
+      "objective": "Saidas destacadas + zoom ampliado",
+      "changes": [
+        "site mapa fluxo"
+      ],
+      "score": 0.88,
+      "lessons": [
+        "Saida e aresta terminal, nao no isolado; zoom inicial 1.3 legivel."
+      ],
+      "timestamp": 1791538769.402953,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R775",
+      "objective": "UX legenda didatica + chips",
+      "changes": [
+        "site mapa"
+      ],
+      "score": 0.89,
+      "lessons": [
+        "Texto exato do titular sem reescrita; chips filtram por camada."
+      ],
+      "timestamp": 1791539265.066928,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R776",
+      "objective": "Legenda de saidas restaurada",
+      "changes": [
+        "site mapa fluxo"
+      ],
+      "score": 0.87,
+      "lessons": [
+        "Reescritas derrubam seções: verificar por marcador após cada uma."
+      ],
+      "timestamp": 1791539529.8544092,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R777",
+      "objective": "Fluxograma contido nas margens",
+      "changes": [
+        "site mapa fluxo"
+      ],
+      "score": 0.88,
+      "lessons": [
+        "Atributo style duplicado anula o segundo; travar pan por viewBox."
+      ],
+      "timestamp": 1791541449.3803322,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R778",
+      "objective": "Pagina OdontoCA com link Rx",
+      "changes": [
+        "site odonto + nav"
+      ],
+      "score": 0.88,
+      "lessons": [
+        "Link externo verificado 200 antes de publicar."
+      ],
+      "timestamp": 1791542849.3832777,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R747",
+      "objective": "Núcleo Lean R747: 5 agentes, 2 skills, MCP lean_proof_mcp e plugin verificação total",
+      "changes": [
+        "specs/SPEC-935-R747-nucleo-lean-verificacao-total.md",
+        "tests/test_r747_nucleo_lean.py",
+        "integrations/lean_proof_mcp.py",
+        "agents/catalog/49-53 lean",
+        "skills lean-verificacao-total lean-tese-provas-auditaveis",
+        "plugins/lean-nucleo-verificacao"
+      ],
+      "score": 8.5,
+      "lessons": [
+        "Workflow bloqueou sem agente interno elegível, prova da lacuna; ecosystem_run com fallback Codex entregou escopo",
+        "Fail-closed sorry/admit + anti-overclaim sem compilador garantem 8/8 TDD e 31/31 sem regressão R444/R445",
+        "opencode.json 248->253 agentes"
+      ],
+      "timestamp": 1791585226.6701107,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R748",
+      "objective": "Sequência polimata Lean: manifesto + auditoria clones + orientação pinagem viva Z3/SymPy",
+      "changes": [
+        "plugins/lean-nucleo-verificacao/labs_manifest.json",
+        "auditoria 21 labs 0 clones",
+        "gates vivos pinar/propor/revalidar orientados sem rede",
+        "R747 8/8 mantido"
+      ],
+      "score": 7.5,
+      "lessons": [
+        "manifesto_labs sem rede ok 21 entradas commit_pin null",
+        "auditar_clones sem subprocesso 0 existentes não fatal",
+        "pinar/propor/revalidar exigem fetcher vivo operador GET api.github + ls-remote, nada federado automaticamente",
+        "lean4/mathlib/batteries/aesop fora allowlist seguem bloqueados até extensão R711"
+      ],
+      "timestamp": 1791585486.5638828,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R749",
+      "objective": "Autorização e validação R749: dossiê extensão R711 Lean sem federar",
+      "changes": [
+        "plugins/lean-nucleo-verificacao/dossie_extensao_R711.md",
+        "revalidação 6 URLs 2 ok 4 fora allowlist",
+        "licenças Apache-2.0 declaradas sha256 pendente",
+        "R747 8/8 mantido"
+      ],
+      "score": 8.0,
+      "lessons": [
+        "autorize e valide como consentimento para dossiê, não para clone/install",
+        "override R715 exige sha256_license+confirmado_por humanos",
+        "gates vivos mantêm fail-closed sem rede"
+      ],
+      "timestamp": 1791585672.302166,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R750",
+      "objective": "Validação viva somente-leitura R750: API+LICENSE dos 4 Lean",
+      "changes": [
+        "API 4 repos push outubro-2026 archived false Apache-2.0",
+        "raw LICENSE 4 lidos sha exato pendente",
+        "dossie R711 adendo R750",
+        "R747 8/8 mantido"
+      ],
+      "score": 8.2,
+      "lessons": [
+        "fetch read-only valida licença/push/arquivado sem clone",
+        "sha256 autoritativo exige bytes exatos + git ls-remote operador",
+        "fora allowlist permanece deny até extensão aprovada"
+      ],
+      "timestamp": 1791585828.058794,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R751",
+      "objective": "Execução R751: ls-remote 6 commits + sha256 6 LICENSE + pins+propor",
+      "changes": [
+        "6 commits 40hex custódia",
+        "6 sha256 bytes exatos licenses/",
+        "labs_pins+federacao_gate+federacao_proposta 2 propostos 4 retidos",
+        "dossie §7 R751"
+      ],
+      "score": 8.8,
+      "lessons": [
+        "ls-remote+curl com ordem explícita preenche commit+sha sem clone",
+        "pinar/propor mantêm fail-closed: Lean retido fora allowlist",
+        "proposto não é federado nem pronto sem decisão humana"
+      ],
+      "timestamp": 1791586024.7372656,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R752",
+      "objective": "Aprovação R752: extensão allowlist 21→25 Lean + proposta 6/0",
+      "changes": [
+        "github_polymath_labs 4 Lean Apache-2.0",
+        "polymath_federacao formal-estavel 7 urls",
+        "labs_manifest 25 pins 6 propor 6/0",
+        "regressão 24 passed R711/R713/R715/R747"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "MCP cache 21 vs disco 25 exige recarga; verdade por processo fresco",
+        "fail-closed preservado: fora allowlist retido até aprovação explícita",
+        "proposto não é federado nem pronto"
+      ],
+      "timestamp": 1791586144.4814003,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R753",
+      "objective": "Install/build R753: elan+stable v4.34.1 e fallback Mathlib-ausente honesto",
+      "changes": [
+        "elan 4.2.4 + Lean 4.34.1 + Lake 5.0.0 via elan-init oficial",
+        "sympy 1.14 z3 4.16 já presentes, sem pip",
+        "lean4_verifier fallback syntax_verified só p/ Mathlib ausente",
+        "35 passed R747/R444/R711/R713/R715; machine_checked puro decide"
+      ],
+      "score": 8.7,
+      "lessons": [
+        "install via master/scripts 404; oficial é elan-init.sh",
+        "compiler real quebrou 3 testes Mathlib-sem-projeto; fallback específico restaurou verde sem mascarar prova",
+        "norm_num é Mathlib, decide/rfl é núcleo; machine_checked exige código núcleo ou projeto lake+mathlib (próxima fase)"
+      ],
+      "timestamp": 1791586840.7170749,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R754",
+      "objective": "R754: lake new math + cache Mathlib + lake-env machine_checked + fallback tática-Mathlib",
+      "changes": [
+        "projeto lean-build/lean-mathlib-demo toolchain v4.34.1 mathlib rev v4.34.1 7.7G",
+        "lake exe cache get 4760 oleans ok após mover p/ disco",
+        "TestR747.lean lake env lean exit 0 47s (simp/omega/ring)",
+        "SPEC R754 + verify_lean_code project_dir + lean_verify passthrough + 4 testes",
+        "fallback unknown-tactic-Mathlib-sem-import p/ R445; 51 passed 7 suítes"
+      ],
+      "score": 9.2,
+      "lessons": [
+        "tmpfs 100% exigiu mover projeto p/ disco + TMPDIR",
+        "norm_num/ring são Mathlib; decide/rfl núcleo; machine_checked Mathlib exige lake env",
+        "fallback só p/ erro-ambiente comprovado; prova falsa segue compiler_error"
+      ],
+      "timestamp": 1791624319.4204266,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R755",
+      "objective": "R755: teorema eficiência roteamento-atenção 3/3 machine_checked",
+      "changes": [
+        "SPEC R755 + teoremas/roteamento_atencao.lean T1-T3",
+        "T2 reescrito sem notação in (parse 4.34)",
+        "test_r755 3/3 via lake-env",
+        "54 passed 8 suítes"
+      ],
+      "score": 9.3,
+      "lessons": [
+        "∑ i in s falhou no parse 4.34; Finset.sum explícito é à prova de versão",
+        "iteração Mathlib ~5min: agrupar hipóteses por run",
+        "T1/T3 passaram de primeira; erro único e localizado"
+      ],
+      "timestamp": 1791625458.1176016,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R756",
+      "objective": "R756: pacote 1+2+3 — invariância, Ioo, bilateral, 6/6 machine_checked",
+      "changes": [
+        "T4 softmax_invariante_max exp_sub+sum_div+field_simp",
+        "T5 softmax_mem_Ioo Nontrivial+add_sum_erase+linarith",
+        "T6 limite inferior espelho T2",
+        "SPEC+teste 6 nomes; 57 passed 8 suítes; audit sorry limpo"
+      ],
+      "score": 9.4,
+      "lessons": [
+        "field_simp fechou sozinho; ring virou warning — remover",
+        "provas novas passaram de primeira; custo total 2 runs (~10s warm)"
+      ],
+      "timestamp": 1791626315.6977232,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R757",
+      "objective": "R757: bancada interna + 2 revisões independentes + relatório honesto",
+      "changes": [
+        "bancada_routing.py 200 decisões regret 0.04 vs 0.19-0.22",
+        "Task 28/31 falhou free-tier; fallback codex 2 revisões",
+        "relatorio_bancada_revisao.md com vereditos e condições"
+      ],
+      "score": 8.5,
+      "lessons": [
+        "revisores acertaram: proxy privilegiada, baselines fracos, analogia cosmética até Q/K/V",
+        "5 seeds limitam precisão; documentar IC e pareamento",
+        "evidência preliminar não sustenta nada externo"
+      ],
+      "timestamp": 1791626875.498498,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R758",
+      "objective": "R758: máxima eficiência — T7+axiomas, fuzz 20k, ablações qw, sensibilidade",
+      "changes": [
+        "T7 singleton + sorryAx pego e corrigido via audit",
+        "axiomas.txt 7/7 padrão",
+        "contraprova 0 violações",
+        "ablações 3 mundos + pareado; sem-confiança≈aleatório",
+        "relatório §5; 55 passed; doctor baseline"
+      ],
+      "score": 9.5,
+      "lessons": [
+        "auditoria axioms é rede de segurança real: pegou sorryAx silencioso",
+        "achado desconfortável deve ir ao relatório, não ao rodapé",
+        "sensibilidade em 3 mundos responde pesos arbitrários com pouco custo"
+      ],
+      "timestamp": 1791627209.0363896,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R759",
+      "objective": "Artigo PUCRS: revalidação exaustiva + PDF 5p compilado",
+      "changes": [
+        "55 passed + fuzz 20k + axiomas 7/7 + ablação reproduzida",
+        "2 DOI verificadas Crossref; 1 suposição errada descartada",
+        "claim audit 0 achados; PDF refs resolvidas; DOI em url"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "auditar_referencia pegou DOI errado que eu supus correto",
+        "warnings latex de passo 1 são falsos positivos em dir fresco; validar no PDF final",
+        "placeholders autor/email/veículo pendentes de decisão humana"
+      ],
+      "timestamp": 1791627575.5480216,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R760",
+      "objective": "Artigo PUCRS ampliado: autoria+teoria+impactos, claim limpo, PDF 6p",
+      "changes": [
+        "autoria ORCID/email/bit.ly + nota OSF",
+        "esboço teórico Q/K/V parcial + matemático provas",
+        "seção Impactos + limites mensuráveis (claim 0)",
+        "PDF 6p refs resolvidas"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "triagem marca absoluto até em limitação; reformular mensurável",
+        "warnings passo-1 em dir fresco são falsos positivos; validar no PDF",
+        "placeholders restantes: veículo PUCRS e leitura final humana"
+      ],
+      "timestamp": 1791628003.6018121,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R761",
+      "objective": "R761 T8 monotonicidade mais T9 top-k mais artigo 9 lemas",
+      "changes": [
+        "T8",
+        "T9",
+        "axiomas 9 de 9",
+        "55 passed",
+        "PDF 6p"
+      ],
+      "score": 9.4,
+      "lessons": [
+        "consultar Mathlib pinado",
+        "rascunho fora do repo",
+        "QKV formal segue tese"
+      ],
+      "timestamp": 1791628544.6514933,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R762",
+      "objective": "Dissertacao ABNT 35p: 7 capitulos + QKV + 9 teoremas + estatistica total + Lean integral",
+      "changes": [
+        "abntex2 xelatex DejaVu listings",
+        "fichacatalografica substituida; verbatim trocado por listings",
+        "PDF 35p sem interrogacoes; Unicode ok",
+        "claim 0 achados"
+      ],
+      "score": 9.1,
+      "lessons": [
+        "classe antiga mais memoir novo quebra envs; simplificar",
+        "dir fresco gera warnings passo-1 falsos; validar no PDF final"
+      ],
+      "timestamp": 1791628948.53904,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R763",
+      "objective": "R763: T10 temperatura + T11 overflow-free + correlacoes Pearson + benchmarks externos mapeados",
+      "changes": [
+        "11 de 11 machine_checked axiomas padrao",
+        "correlacao cabeca constante pos-gate; confianca-q 0.85",
+        "AgentBench/PerspectiveGap/OrchRM mapeados; externo bloqueado sem chaves",
+        "55 passed; doctor baseline"
+      ],
+      "score": 9.4,
+      "lessons": [
+        "Nontrivial exigido pelo compilador em T10: singleton invalida nitidez",
+        "nan explicado: gate decide cobertura; resto decide escolha",
+        "Z3-FP sem exp: via inadequada documentada"
+      ],
+      "timestamp": 1791629548.0126448,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R764",
+      "objective": "R764: correcao minuciosa total + sincronia 11 + recalculos",
+      "changes": [
+        "admit e axiom bloqueados no verificador; provenance uniforme",
+        "log_text e imports mortos removidos; fuzz simplificado",
+        "artigo e dissertacao 9 para 11 + PDFs verificados",
+        "fuzz seed 99 zero; determinismo bit a bit; 55 passed"
+      ],
+      "score": 9.3,
+      "lessons": [
+        "defesa em profundidade: checagem duplicada verificador e MCP",
+        "absoluto ate em limitacao cai na triagem; forma mensuravel passa",
+        "dossie de sincronia: grep de contagens antes de fechar"
+      ],
+      "timestamp": 1791630040.8490705,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R765",
+      "objective": "R765: dissertacao modular 9 modulos + 12 refs + teoria ampliada",
+      "changes": [
+        "main mais inputs absolutos",
+        "QKV parcial + 7 preprints declarados + T10 T11",
+        "claim ancorado em T10; PDF 35p zero interrogacoes"
+      ],
+      "score": 9.2,
+      "lessons": [
+        "dir fresco exige 2 passes; validar so no PDF final",
+        "triagem pega efeito mesmo provado: ancorar em T-numero",
+        "preprints: citar ID sem DOI com rotulo explicito"
+      ],
+      "timestamp": 1791630593.4608083,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R766",
+      "objective": "R766: revisao por gaps — pipeline inexistente + varredura total sem derivas",
+      "changes": [
+        "scanners.diagnostic_pipeline inexistente; comando colado falharia",
+        "manifesto 25 proposta 6 zero; SPEC teste axiomas em 11",
+        "5 Lean em opencode.json 253; sem aux; git so esperado",
+        "55 passed; doctor baseline"
+      ],
+      "score": 8.8,
+      "lessons": [
+        "comando colado com open de frase falharia em 2 pontos; revisar antes de rodar",
+        "chave agent singular no opencode.json, nao agents"
+      ],
+      "timestamp": 1791630931.8320737,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R767",
+      "objective": "R767: diagnostic_pipeline + gap real pego em estreia",
+      "changes": [
+        "SPEC R767 + scanners diagonal hermetico + 8 testes",
+        "estreia pegou 2 nomes fora do teste; regex maiuscula era artefato",
+        "63 passed 9 suites"
+      ],
+      "score": 9.2,
+      "lessons": [
+        "ferramenta nova deve auditar o repo na estreia",
+        "distinguir gap real de artefato do proprio regex"
+      ],
+      "timestamp": 1791631180.2362523,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R768",
+      "objective": "R768: pesquisa refeita — bateria fresca + docs 63-9 + PDFs",
+      "changes": [
+        "lean 11 exit 0; fuzz 2 seeds zero; 3 mundos identicos",
+        "Pearson identico; 63 passed; doctor baseline",
+        "artigo 6p + dissertacao 35p verificados sem interrogacoes"
+      ],
+      "score": 9.3,
+      "lessons": [
+        "refazer pesquisa com mesmos seeds e oraculo: reprodutibilidade e o proprio teste",
+        "documentos citam numeros que a bateria confirma; pipeline vigia"
+      ],
+      "timestamp": 1791631597.7476766,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R769",
+      "objective": "R769: apendice didatico leigo + maswos_pipeline inexistente",
+      "changes": [
+        "academic tem maswos.py sem maswos_pipeline; comando colado falharia",
+        "gap didatico confirmado: sem glossario; apendice C criado",
+        "absolutos leigos ancorados em T-numeros; PDF 38p zero interrogacoes"
+      ],
+      "score": 8.9,
+      "lessons": [
+        "auditar sequencia didatica: coerente p/ especialista, opaca p/ leigo",
+        "override humano de absolutos deve ir para o texto, nao so resposta"
+      ],
+      "timestamp": 1791632945.135203,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R770",
+      "objective": "R770: modulos expandidos — enunciados integrais + pareada + ABNT vigente",
+      "changes": [
+        "04 com 11 equacoes numeradas T1-T11",
+        "05 tabela pareada + 08 URLs acesso + keywords ponto-e-virgula",
+        "PDF 38p zero interrogacoes; claim 0"
+      ],
+      "score": 9.2,
+      "lessons": [
+        "equacoes numeradas manualmente colidem em warning; aceitar ou usar subequations",
+        "linhas longas de .tex quebram matching exato: ler bytes antes"
+      ],
+      "timestamp": 1791634377.1152632,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R771",
+      "objective": "R771: versao arXiv — 11 lemas com provas + contexto didatico",
+      "changes": [
+        "arxiv.tex 4p: lemmas com Proof + remark QKV + apendice",
+        "sem perda: mesmos numeros, refs e limites",
+        "PDF verificado zero interrogacoes"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "incluir hyperref antes do primeiro uso de url",
+        "duplicata de pacote compila mas polui; remover"
+      ],
+      "timestamp": 1791635419.4458902,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R772",
+      "objective": "R772: preprint integralmente em PT-BR",
+      "changes": [
+        "11 lemas com provas em portugues; contexto didatico",
+        "claim 0 achados; PDF 4p zero interrogacoes"
+      ],
+      "score": 8.9,
+      "lessons": [
+        "verter sem perda: mesmos numeros, refs e limites"
+      ],
+      "timestamp": 1791635569.163648,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R773",
+      "objective": "R773: dissertacao 80 laudas — 82p modular ABNT vigente",
+      "changes": [
+        "11 equacoes T1-T11 + tabela pareada + mundos + seeds",
+        "QKV + related + taticas + validade + riscos + estrutura",
+        "agradecimentos + simbolos + listoftables + specs + transcricoes",
+        "PDF 82p zero interrogacoes; claim 0"
+      ],
+      "score": 9.4,
+      "lessons": [
+        "lauda honesta vem de evidencia, nao enchimento: cada pagina rastreia artefato",
+        "ABNT vigente: ponto-e-virgula, URL mais acesso, siglas e simbolos"
+      ],
+      "timestamp": 1791636064.3141265,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R774",
+      "objective": "R774: 80 laudas exatas — brancas removidas + comentarios citados",
+      "changes": [
+        "openany oneside sem brancas; 11 equacoes T1-T11",
+        "tabelas pareada mundos seeds riscos revisao + QKV",
+        "ABNT vigente URLs acesso keywords siglas simbolos",
+        "PDF 80p zero interrogacoes; claim auditado"
+      ],
+      "score": 9.4,
+      "lessons": [
+        "branca removida custa lauda: repor com evidencia, nunca enchimento",
+        "triagem marca ate limitacao bem escrita; forma mensuravel resolve"
+      ],
+      "timestamp": 1791638029.1763163,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R775",
+      "objective": "R775: varredura ampla — 0 gaps reais, 4 artefatos de desenho",
+      "changes": [
+        "regex sem grupo abortou fail-closed correto",
+        "T-numeros vs snake_names: namespaces distintos por desenho",
+        "mcp helper declarado; classes contidas case-insensitive 25-25",
+        "63 passed"
+      ],
+      "score": 8.7,
+      "lessons": [
+        "varredura ampla pega desenho ruim antes de virar divida",
+        "normalizacao de caixa deve constar no plano, nao no dado"
+      ],
+      "timestamp": 1791638547.1505682,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R776",
+      "objective": "R776: exegese estado-da-arte + 02d fiado (estava órfão)",
+      "changes": [
+        "modulo 02e: etapas evidencias calculos lemas softmax comparacoes matriz",
+        "02d-trabalhos-relacionados fiado no main",
+        "claim 0; PDF 83p zero interrogacoes"
+      ],
+      "score": 9.1,
+      "lessons": [
+        "modulo orfao e falha silenciosa: pipeline de sincronia deve cobrir inputs",
+        "exegese honesta ancora novidade na composicao, nao nas pecas"
+      ],
+      "timestamp": 1791638787.353197,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R775",
+      "objective": "R775: 80 laudas materia + 41 DOIs verificados tecidos",
+      "changes": [
+        "preliminares + 38 verbetes DOI + tecido argumentativo",
+        "baker berger excluidos apos 3 falhas",
+        "PDF 88p zero interrogacoes; claim 0"
+      ],
+      "score": 9.5,
+      "lessons": [
+        "cada DOI verificado na fonte antes de citar; suposicao custou 1 erro pego",
+        "resumo de preprint rotulado como tal; DOI so com Crossref"
+      ],
+      "timestamp": 1791639313.241049,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R776b",
+      "objective": "R776b: 80 laudas materia — preliminares + 41 DOIs tecidos",
+      "changes": [
+        "02a preliminares 6 secoes",
+        "41 DOIs verificados tecidos; baker berger fora",
+        "materia medida por sumaio no PDF"
+      ],
+      "score": 9.2,
+      "lessons": [
+        "contar laudas por capitulos no PDF, nao por palpite"
+      ],
+      "timestamp": 1791639921.216959,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R776c",
+      "objective": "R776c: compilacao local auditada — MCP retornou path obsoleto",
+      "changes": [
+        "latexmk local exit 0, 89p verificadas por pdfinfo",
+        "preliminares e DOIs presentes; zero interrogacoes",
+        "aux limpos; ferramenta MCP marcada nao-confiavel p/ output"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "nunca aceitar path temporario sem pdfinfo + md5",
+        "falha silenciosa com sucesso aparente e o pior modo"
+      ],
+      "timestamp": 1791640060.0703337,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R779",
+      "objective": "Revisão editorial e ABNT atualizada da dissertação PUCRS de roteamento inspirado em atenção",
+      "changes": [
+        "Apresentação NBR14724 corrigida2025, citações10520:2023 e referências6023:2025",
+        "51 referências conferidas em fontes primárias; autor-data e correspondência integral",
+        "Escopo científico corrigido: reais versus floats, intervalos exploratórios, agrupamento, sementes e cartões sem execução",
+        "PDF97 páginas e fonte consolidada; QA sem referências indefinidas, caixas excedentes ou caracteres ausentes",
+        "Backup original e pendências autorais/institucionais preservados"
+      ],
+      "score": null,
+      "lessons": [
+        "Adequação editorial não equivale à validação externa ou aprovação institucional.",
+        "Normalização softmax não demonstra calibração probabilística.",
+        "A alteração de qw com cobertura unitária reescala a perda; não testa outro ranking do oráculo."
+      ],
+      "timestamp": 1791643038.9487846,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R780",
+      "objective": "Publicar no GitHub a dissertação revista em ABNT, com fonte consolidada e registros editoriais.",
+      "changes": [
+        "Publicados 11 arquivos em artigos/pucrs-roteamento-atencao na branch main, commit ea00de87b6b8e1e481ddcaaa9b6bc89ea0ebdb5b.",
+        "Hashes SHA-256 dos 11 arquivos confirmados pela API GitHub no commit publicado.",
+        "Adicionado README com instruções de compilação e pendências institucionais e científicas; preservadas alterações locais alheias ao pacote."
+      ],
+      "score": null,
+      "lessons": [
+        "Publicação de artefatos editoriais não representa submissão institucional nem validação científica externa."
+      ],
+      "timestamp": 1791643529.8851604,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R781",
+      "objective": "Criar e publicar site didático MIRA da dissertação de roteamento inspirado em atenção.",
+      "changes": [
+        "MIRA executado pelo MarceloClaroOrchestrator.present_task, tarefa task-aae73499 e inspetor original sem violações.",
+        "Site com SVG animado, laboratório interativo, apresentação por teclado, pausa e layout responsivo; 20 testes funcionais aprovados.",
+        "Publicados 17 arquivos na main, commit d081cfaf8cc71e897b1eaff5bf99911feb72da2d, preservando demais alterações locais.",
+        "GitHub Pages built na branch codex/gh-pages, commit 771c8446ddac2b9a8a902675d7297044a5d13975; HTTP 200 e arquivos centrais idênticos ao conteúdo testado."
+      ],
+      "score": null,
+      "lessons": [
+        "Explicitar a fronteira entre demonstração didática, saída do MIRA e evidência histórica do artigo.",
+        "Conformidade do pipeline MIRA e testes de interface são verificações internas e não validação científica externa."
+      ],
+      "timestamp": 1791645109.8425124,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R782",
+      "objective": "Tornar o site da dissertação didático para leigos e interativo, preservando UX e escopo científico.",
+      "changes": [
+        "SPEC-935-R782; analogia de equipe navegável em quatro etapas.",
+        "Três desafios calculados pelo roteador, pistas e progresso na memória da página.",
+        "Questionário com feedback, nova tentativa e reinício; linguagem leiga e matemática opcional.",
+        "MIRA executado pelo orquestrador: task-601b4d9a; relatório original sem violações.",
+        "49 testes aprovados; conferência da interface em computador, celular e modo de apresentação."
+      ],
+      "score": null,
+      "lessons": [
+        "Carga alta e status indisponível têm papéis distintos.",
+        "Pesos da comparação não são probabilidades de sucesso ou parcelas da tarefa.",
+        "Interatividade didática não comprova eficácia educacional."
+      ],
+      "timestamp": 1791647720.9273567,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R783",
+      "objective": "R777: aplicar revisão de 10 itens à dissertação PUCRS (residuais + consolidações + medição honesta)",
+      "changes": [
+        "02e: único par->ambiente escolhido; mínimo padrão->axiomas registrados; alternativa linear removida; T11 certifica->limita",
+        "02h: Fichamento profundo->Leitura por obra (resumos como fonte)",
+        "02c: padrão->ambiente escolhido e utilizado",
+        "05b: typo catálogo duplicado",
+        "glossário: verbete Maximizador (T3 finitude+não-vazio)",
+        "02d: consolidação 02d+02h+02e (Leitura por obra + Síntese matriz cobertura)",
+        "09: 04c em tabelas no apêndice (micro-provas + diário de erros)",
+        "tabela_historico: R757 revisões internas automatizadas; linhas R774-R777; medição 100p/pp.12-38",
+        "recompilação xelatex: 100p, 0 erros, 0 [?], 0 ??",
+        "51 citadas = 51 bibitem; 41 DOIs; sem Baker/Berger"
+      ],
+      "score": 9.2,
+      "lessons": [
+        "Matéria real pp.12-38 (27p), longe da meta de 80: suplementação por arguições exige decisão do autor",
+        "verificar_citacoes MCP só enxerga .bib; bibliografia manual exige checagem própria (51=51 ok)",
+        "teste lake falha por timeout frio e passa com cache aquecido (223s): reexecutar antes de declarar falha",
+        "R773 registra 80 laudas-82p históricos; R777 ancora a medição atual sem reescrever história"
+      ],
+      "timestamp": 1791648119.0384595,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R784",
+      "objective": "R778: capítulo de arguições antecipadas e respostas (32 itens, sem dados novos)",
+      "changes": [
+        "novo modulos/06b-arguicoes.tex: 32 perguntas em 5 blocos (provas, desenho, numérico, literatura, limites/ética/reprodução)",
+        "respostas restritas a números e teses já registrados; lacunas remetidas a tab:riscos/tab:futuro",
+        "ligação em dissertacao.tex + menção na Estrutura da Introdução",
+        "recompilação: 104p, 0 erros, 0 [?], 0 ??; matéria pp.12-42 (31p)",
+        "auditoria de alegações do capítulo: 1 achado heurístico (compromisso metodológico), mantido por decisão humana"
+      ],
+      "score": 8.8,
+      "lessons": [
+        "capítulo Q&A rendeu +4p de matéria (27->31p); ritmo sugere que 80p exigem aprofundar respostas ou novos suplementos honestos",
+        "aguardar revisão do autor antes de expandir"
+      ],
+      "timestamp": 1791652393.0269036,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R785",
+      "objective": "R779: aprofundar arguições (40 itens + derivações passo a passo + leitura guiada)",
+      "changes": [
+        "32 respostas expandidas com derivações (T10 cross-termos, T4 exp_sub, s_n=0.0758, Ana/Cid conferência e^u)",
+        "novo bloco Leitura guiada das tabelas e apêndices (Q33-Q40: ax, pins, temp/seeds, bench/pareado, sessão, apêndices, OEs, leitor só-PDF)",
+        "novo label ap:reproducao; refs ap:testes/ap:specs verificados",
+        "recompilação: 108p, 0 erros, 0 [?], 0 ??; matéria pp.12-46 (35p)",
+        "auditoria: 1 achado heurístico em domínio fechado (5 linhas da tabela), mantido"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "verificação aritmética à mão (pesos Ana/Cid) é suplemento honesto e barato em laudas",
+        "cada rodada Q&A rende ~4p; 80p exigem mais 2-3 rodadas ou capítulos de método expandido"
+      ],
+      "timestamp": 1791652630.1077542,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R783",
+      "objective": "Apresentar o OpenCode Ecosystem Core no site da dissertação com percurso acessível e apresentação MIRA.",
+      "changes": [
+        "Nova seção interativa com quatro etapas e três perspectivas.",
+        "Limites do estudo do roteador e papel comunicacional do MIRA explicitados.",
+        "Navegação por teclado, foco, aria-live, pausa e regras de movimento reduzido.",
+        "Deck regenerado pelo orquestrador com 17 slides e conformidade interna original preservada.",
+        "79 testes funcionais aprovados e conferência em navegador a 1280x720 e 390x844."
+      ],
+      "score": null,
+      "lessons": [
+        "Encaminhamento direto pelo coordenador e uso do roteador são caminhos distintos.",
+        "Escolha de um agente e conclusão dependente do ambiente devem ser explicadas separadamente.",
+        "Conformidade da apresentação não equivale à validação científica."
+      ],
+      "timestamp": 1791653139.0006874,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R786",
+      "objective": "(a) rodadas Q41-Q58: objeções externas simuladas + por objetivo",
+      "changes": [
+        "bloco Segunda rodada Q41-Q50 (benchmarks, pesos fixos, desempate, n=200, divisor n, Pearson, latências, gate vazio, singleton, Q/K/V)",
+        "bloco Terceira rodada Q51-Q58 (cadeia OE1, estimação OE2, inventário OE3, FAIR OE4, falsificadores, renúncias, mapa OE-seções, aceites futuro)",
+        "correção Lonely-item: bibitem no corpo -> entradas"
+      ],
+      "score": 8.9,
+      "lessons": [
+        "comando LaTeX em texto corrido quebra a compilação com erro opaco; revisar diff antes de compilar"
+      ],
+      "timestamp": 1791655003.7798774,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R787",
+      "objective": "(b+c) protocolo operacional no Método + integração e medição",
+      "changes": [
+        "03-metodo: seção Protocolo operacional (ambiente, 11 lemas, bancada/ablações, fuzz/suíte, pinos/sincronia) + falha conhecida de cache frio 300s",
+        "histórico R779; recompilação 111p, 0 erros, 0 [?], 0 ??; matéria pp.12-49 (38p)",
+        "auditoria Q41-58: 1 achado em domínio fechado, mantido"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "protocolo documenta a falha conhecida em vez de escondê-la; matéria 38p, ritmo ~3-4p/rodada"
+      ],
+      "timestamp": 1791655003.8496869,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R788",
+      "objective": "R780: rodadas Q59-Q80 + roteiro JSON + 116p, matéria pp.13-53 (41p)",
+      "changes": [
+        "blocos Quarta (registros brutos Q59-63, valores exatos JSON), Quinta (pacotes Q64-69), Sexta (famílias Q70-75), Sétima (tabelas Q76-80)",
+        "roteiro de inspeção manual dos JSONs no Método; label ap:reproducao",
+        "80 itens sequenciais verificados; Q80 corrigido para doze blocos",
+        "recompilação 116p, 0 erros, 0 [?], 0 ??; matéria pp.13-53 (41p)",
+        "auditoria: 1 achado ancorado no artefato (nota do JSON), mantido"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "valores exatos dos JSONs (0.0421, 0.8538, lat 2.1652) rendem suplemento fiel sem novas coletas",
+        "faltam ~39p para 80; próximos vetores: rodadas por capítulo, dicionário de termos expandido na matéria, protocolo de inspeção dos .lean/.py linha a linha"
+      ],
+      "timestamp": 1791655392.4307694,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R789",
+      "objective": "R781: rodadas Q81-Q110 (por capítulo + dicionário operacional) + roteiro Lean",
+      "changes": [
+        "Oitava rodada Q81-Q100 (promessas/pagamentos, tese, casos-limite, preliminares, Q/K/V, anatomia T7/T9/T10 no código, 05c, 05b, correlações, Discussão, C1-C5, fecho)",
+        "Nona rodada Q101-Q110 (dicionário operacional de 10 termos com chaves JSON)",
+        "roteiro de inspeção do código Lean no Método (150 linhas, hipóteses, táticas-chave)",
+        "Q100 atualizado; 110 itens verificados; recompilação 119p, 0 erros; matéria pp.13-56 (44p)",
+        "auditoria: 2 achados (descrição de código + compromisso metodológico), mantidos"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "leitura do .lean linha a linha ancora as respostas sobre provas sem novas alegações",
+        "faltam ~36p; continuar rodadas temáticas ou expandir protocolo de inspeção dos .py"
+      ],
+      "timestamp": 1791655533.2532856,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R783-PODCAST-20261010",
+      "objective": "Gerar podcast da dissertação PUCRS e do OpenCode Ecosystem Core pelo NotebookLM CLI.",
+      "changes": [
+        "Duas fontes adicionadas a notebook dedicado pelo orquestrador central.",
+        "Áudio real solicitado em pt-BR, formato deep_dive, com escopo e limites científicos explícitos.",
+        "Conclusão remota acompanhada e download específico do artefato obtido.",
+        "Original fragmentado preservado; contêiner compatível preparado sem recodificar AAC.",
+        "Arquivo com SHA-256, duração e decodificação integral conferidos."
+      ],
+      "score": null,
+      "lessons": [
+        "Aceitação da geração e conclusão do podcast são estados diferentes.",
+        "Áudios em MP4 fragmentado podem ter duração zero no cabeçalho; conferir e preparar navegação sem modificar a locução."
+      ],
+      "timestamp": 1791655664.0678935,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R784-QA",
+      "objective": "Concluir conferência do podcast publicado e recuperação de falha temporária",
+      "changes": [
+        "Áudio público íntegro; HTTPRange206 e busca observada no navegador",
+        "Fluxo de falha503 induzida e recuperação com novo carregamento de source",
+        "Teclado, animação, reflexões, quiz e apresentação conferidos",
+        "Corrigida capa persistente indevida no modo de apresentação móvel"
+      ],
+      "score": null,
+      "lessons": [
+        "Falhas em source exigem observação direta do evento de erro",
+        "Estado de mídia pode permanecer em espera após falha de fonte; nova tentativa precisa reinicializar",
+        "Interface móvel de apresentação precisa isolar a seção atual"
+      ],
+      "timestamp": 1791657299.5057251,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R790",
+      "objective": "R782: rodadas Q111-Q138 (scripts, apêndices, dicionário II) + roteiro Python",
+      "changes": [
+        "Décima rodada Q111-Q120 (make_pool/make_task/oráculo/ci95/baselines/ataques/renormalização/Pearson/fuzz/_softmax/validador)",
+        "Décima primeira Q121-Q128 (nove listagens, seis JSONs, transcrições, histórico, SPECs, sessão)",
+        "Décima segunda Q129-Q138 (10 termos operacionais II)",
+        "roteiro de inspeção dos scripts Python no Método (linhas e funções por arquivo)",
+        "recompilação 122p, 0 erros, 0 [?], 0 ??; matéria pp.13-59 (47p); auditoria sem achados"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "auditoria limpa quando o texto descreve mecanismos com endereço no código",
+        "faltam ~33p; vetores: inspeção do roteador/MCP/pipeline, rodadas por SPEC, dicionário III"
+      ],
+      "timestamp": 1791682845.541469,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R791",
+      "objective": "R783: rodadas Q139-Q166 (roteador/MCP/pipeline, SPECs, dicionário III)",
+      "changes": [
+        "Décima terceira Q139-Q148 (gates, vazio, índice fixo, fsum/ranking, explain, MCP 4 funções, pipeline, 8 testes, HEAD_WEIGHTS, fronteira roteador-simulador)",
+        "Décima quarta Q149-Q156 (4 SPECs + 4 transcrições)",
+        "Décima quinta Q157-Q166 (dicionário III)",
+        "roteiro de inspeção do roteador/pipeline no Método; fragmento <<kep>> corrigido",
+        "recompilação 124p, 0 erros, 0 [?], 0 ??; matéria pp.13-61 (49p); auditoria: 1 achado ancorado no código, mantido"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "166 itens sequenciais verificados por script; contadores internos Q80/Q100 atualizados",
+        "faltam ~31p; vetores: rodadas por teste/transcrição, dicionário IV, inspeção do estudo_caso/diagnostic em código"
+      ],
+      "timestamp": 1791683157.5002978,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R792",
+      "objective": "R784: rodadas Q167-Q196 (estudo/pipeline, MCP/testes, dicionário IV)",
+      "changes": [
+        "Décima sexta Q167-Q176 (12 nomes/11 cartões, regex, fixas, 5 tarefas, hermeticidade, 5 motivos de gap, validação do plano, _nomes, esperados+proibidos, limites)",
+        "Décima sétima Q177-Q186 (bloqueios regex, rebaixamento, export, procedência, 8 testes, 63-histórico, anti-overclaim, apoio, fronteira)",
+        "Décima oitava Q187-Q196 (dicionário IV)",
+        "roteiro de inspeção estudo/MCP/testes no Método",
+        "recompilação 127p, 0 erros, 0 [?], 0 ??; matéria pp.13-64 (52p); auditoria sem achados"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "ausência de technical-writer no catálogo documentada impede citação errada de doze",
+        "faltam ~28p; vetores: dicionário V, rodadas por linha de tabela, inspeção de test_r747 em código"
+      ],
+      "timestamp": 1791683271.540662,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R793",
+      "objective": "R785: rodadas Q197-Q222 (testes, transcrições, dicionário V) + pior shift zero",
+      "changes": [
+        "Décima nona Q197-Q204 (SPEC, agentes, skills, fail-closed ruim/bom, export SHA, autoformalize, manifesto, anti-overclaim condicional)",
+        "Vigésima Q205-Q212 (índice, verboso 63/248s, ambiente, fuzz 7/99 com shift zero, pipeline, lake-env, tempos, 159 linhas)",
+        "Vigésima primeira Q213-Q222 (dicionário V)",
+        "05-calibracao: pior deslocamento zero registrado; roteiro de testes no Método",
+        "recompilação 129p, 0 erros, 0 [?], 0 ??; matéria pp.13-66 (54p); auditoria sem achados"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "pior_shift=0.00e+00 autoriza citar o zero antes omitido por cautela",
+        "faltam ~26p; vetores: dicionário VI, rodadas por linha de código restante, glossário expandido na matéria"
+      ],
+      "timestamp": 1791683389.3732426,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R794",
+      "objective": "R786: rodadas Q223-Q250 (cabeças, ablações, dicionário VI) + roteiro cabeças",
+      "changes": [
+        "Vigésima segunda Q223-Q232 (matcher top20, neutro 0.5, fração, per-skill top50, 1-carga, unit_score, independência, Ana/Cid, 4 cabeças, limites)",
+        "Vigésima terceira Q233-Q240 (5 condições + escala + taxas + lacuna v=q)",
+        "Vigésima quarta Q241-Q250 (dicionário VI)",
+        "roteiro de inspeção das cabeças no Método",
+        "recompilação 131p, 0 erros, 0 [?], 0 ??; matéria pp.13-68 (56p); auditoria: 1 achado em domínio fechado, mantido"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "cabeças lidas no código ancoram respostas sobre semântica sem extrapolar",
+        "faltam ~24p; vetores: por semente-narrativas, dicionário VII, inspeção de heads restantes/embedder"
+      ],
+      "timestamp": 1791683524.7676861,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R795",
+      "objective": "R787: reverificação Lean 4 (4/4 em 191s) + rodadas Q251-Q281",
+      "changes": [
+        "Vigésima quinta Q251-Q258 (reexecução, cobertura, cache frio, histórico, porquê Lean, axiomas, vocabulário, fronteira)",
+        "Vigésima sexta Q259-Q263 (5 narrativas de semente com valores exatos)",
+        "Vigésima sétima Q264-Q271 + oitava Q272-Q281 (incorporador e dicionário VII)",
+        "roteiro do incorporador/reverificação no Método",
+        "recompilação 133p, 0 erros, 0 [?], 0 ??; matéria pp.13-70 (58p); auditoria: 1 achado modesto, mantido"
+      ],
+      "score": 9.1,
+      "lessons": [
+        "reverificação Lean executada de verdade nesta rodada (4/4 em 191s), não apenas citada",
+        "faltam ~22p; vetores: dicionário VIII, rodadas por frase do resumo, inspeção de semantic_matcher"
+      ],
+      "timestamp": 1791683944.9325366,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R796",
+      "objective": "R788: rodadas Q282-Q307 (resumo, matcher, dicionário VIII)",
+      "changes": [
+        "Vigésima nona Q282-Q289 (resumo frase a frase com endereço por sentença)",
+        "Trigésima Q290-Q297 (dimensões 64/128, hierarquia, sonda, cache 500, handbook, top_k, singleton, caminho da bancada)",
+        "Trigésima primeira Q298-Q307 (dicionário VIII)",
+        "roteiro do casamento semântico no Método; Q297 suavizado pós-auditoria",
+        "recompilação 134p, 0 erros, 0 [?], 0 ??; matéria pp.13-71 (59p); auditoria: 1 achado, corrigido na redação"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "auditoria flagrou garante; reformulação mecanística resolve sem perder conteúdo",
+        "faltam ~21p; vetores: dicionário IX, rodadas por parágrafo da conclusão, inspeção de handbook em código"
+      ],
+      "timestamp": 1791684185.0354319,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R797",
+      "objective": "R789: rodadas Q308-Q333 (conclusão, handbook, dicionário IX)",
+      "changes": [
+        "Trigésima segunda Q308-Q315 (dois níveis, C1-C5, 3+1, futuros-contrato, fecho sem novo, limites, tese em uma frase)",
+        "Trigésima terceira Q316-Q323 (idempotência, tags, override/fail-open, médias móveis, filtros, composto, nove campos, fronteira)",
+        "Trigésima quarta Q324-Q333 (dicionário IX)",
+        "roteiro do handbook/conclusão no Método",
+        "recompilação 137p, 0 erros, 0 [?], 0 ??; matéria pp.14-74 (61p); auditoria sem achados"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "fail-open da episteme vs fail-closed das provas: diferença deliberada documentada",
+        "faltam ~19p; vetores: dicionário X, rodadas por linha de código do handbook, inspeção de episteme"
+      ],
+      "timestamp": 1791689794.7337458,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R798",
+      "objective": "R790: rodadas Q334-Q359 (episteme, handbook, dicionário X)",
+      "changes": [
+        "Trigésima quinta Q334-Q341 (6 regimes, léxico, MIN_SINAIS=2, dominante/secundária, afinidade, metadados, fail-open deliberado, cobertura pura, fronteira)",
+        "Trigésima sexta Q342-Q349 (expand_tags, tokens do id, vetor, perfil, médias móveis, ordem do casamento, estatísticas, fronteira)",
+        "Trigésima sétima Q350-Q359 (dicionário X)",
+        "roteiro da episteme/handbook no Método",
+        "recompilação 139p, 0 erros, 0 [?], 0 ??; matéria pp.14-76 (63p); auditoria: 2 nuncas em domínio fechado/citação de código, mantidos"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "citar a docstring (nunca metas) ancora a frase no artefato",
+        "faltam ~17p; vetores: dicionário XI, rodadas por função do handbook, inspeção de EmbeddingEngine"
+      ],
+      "timestamp": 1791689983.3053362,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R799",
+      "objective": "R791: rodadas Q360-Q385 (engine, funções, dicionário XI)",
+      "changes": [
+        "Trigésima oitava Q360-Q367 (granularidade, convenções 0.0/0.5, caminhos LiteRT/Colibri, stats, sonda, cache, fronteira)",
+        "Trigésima nona Q368-Q375 (perfil, stats, serialização, cobertura, retornos, vazio, episteme na resposta, fronteira)",
+        "Quadragésima Q376-Q385 (dicionário XI)",
+        "roteiro do motor no Método",
+        "recompilação 141p, 0 erros, 0 [?], 0 ??; matéria pp.14-78 (65p); auditoria sem achados"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "duas convenções de degeneração (0.0 vs 0.5) documentadas impedem confusão entre módulos",
+        "faltam ~15p; vetores: dicionário XII, rodadas por parágrafo do abstract, inspeção de cache/stats"
+      ],
+      "timestamp": 1791690141.9038343,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R800",
+      "objective": "R792: rodadas Q386-Q411 (abstract, observabilidade, dicionário XII)",
+      "changes": [
+        "Quadragésima primeira Q386-Q393 (espelho, dígitos, ressalvas, chaves, promessa, limites, norma, fronteira)",
+        "Quadragésima segunda Q394-Q401 (chamadas, handbook, cópia, despejo, sonda, cache, mérito, fronteira)",
+        "Quadragésima terceira Q402-Q411 (dicionário XII)",
+        "roteiro do abstract/observabilidade no Método; sempre reformulado pós-auditoria",
+        "recompilação 142p, 0 erros, 0 [?], 0 ??; matéria pp.14-79 (66p); auditoria: 1 achado, corrigido"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "auditoria frase a frase antes de compilar evita retrabalho",
+        "faltam ~14p; vetores: dicionário XIII, rodadas por capítulo da conclusão, inspeção de to_dict/get_stats"
+      ],
+      "timestamp": 1791690328.122154,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R801",
+      "objective": "R793: rodadas Q412-Q437 (perfil/stats/serialização, tese, dicionário XIII)",
+      "changes": [
+        "Quadragésima quarta Q412-Q419 (agregado, totais, chave composta, zeros, acoplamento, sucessos/custo, recomputação, fronteira)",
+        "Quadragésima quinta Q420-Q427 (tese em 8 termos com endereço)",
+        "Quadragésima sexta Q428-Q437 (dicionário XIII)",
+        "roteiro de perfil/serialização no Método",
+        "recompilação 143p, 0 erros, 0 [?], 0 ??; matéria pp.14-80 (67p); auditoria sem achados"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "tese-index: cada termo da tese com endereço verificável",
+        "faltam ~13p; vetores: dicionário XIV, rodadas por verbo da tese, inspeção de EmbeddingEngine.get_stats"
+      ],
+      "timestamp": 1791690515.3533344,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R802",
+      "objective": "R794: rodadas Q438-Q465 (verbos, números, dicionário XIV)",
+      "changes": [
+        "Quadragésima sétima Q438-Q445 (8 verbos da tese com endereço)",
+        "Quadragésima oitava Q446-Q455 (10 números com chave)",
+        "Quadragésima nona Q456-Q465 (dicionário XIV: pilar, composição, dispensa, verbo, número, rastro, lastro, conta, retrato, guarda)",
+        "roteiro de verbos/números no Método",
+        "recompilação 144p, 0 erros, 0 [?], 0 ??; matéria pp.14-81 (68p); auditoria sem achados"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "dicionário XIV fecha o arco pilar/número/rastro/lastro/conta",
+        "faltam ~12p; vetores: dicionário XV, rodadas por seção do método, inspeção de explain/route"
+      ],
+      "timestamp": 1791690704.592719,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R803",
+      "objective": "R795: rodadas Q466-Q491 (método, route/explain, dicionário XV)",
+      "changes": [
+        "Quinquagésima Q466-Q473 (8 seções do Método destrinchadas)",
+        "Quinquagésima primeira Q474-Q481 (assinatura, descarte, avaliação única, eco, determinismo triplo, docstrings, fronteira)",
+        "Quinquagésima segunda Q482-Q491 (dicionário XV: capítulo, parágrafo, legenda, fonte, nota, remissão, citação, verbete, bloco, item)",
+        "roteiro de route/explain no Método",
+        "recompilação 146p, 0 erros, 0 [?], 0 ??; matéria pp.14-83 (70p); auditoria: 1 nenhum metodológico, mantido"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "método destrinchado pergunta a pergunta rende matéria densa sem dados novos",
+        "faltam ~10p; vetores: dicionário XVI, rodadas por roteiro, inspeção de explain em uso"
+      ],
+      "timestamp": 1791690809.6011734,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R804",
+      "objective": "R796: rodadas Q492-Q517 (roteiros, explain em uso, dicionário XVI)",
+      "changes": [
+        "Quinquagésima terceira Q492-Q499 (8 roteiros + porquê de dezesseis)",
+        "Quinquagésima quarta Q500-Q507 (chamadas pela suíte, teste dedicado, economia de formato, avaliação única, eco, pureza, docstring, fronteira)",
+        "Quinquagésima quinta Q508-Q517 (dicionário XVI)",
+        "roteiro de explain em uso no Método",
+        "recompilação 148p, 0 erros, 0 [?], 0 ??; matéria pp.14-85 (72p); auditoria: 1 nenhum metodológico, mantido"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "explain usado por testes, não pela bancada: honestidade de cobertura registrada",
+        "faltam ~8p; vetores: dicionário XVII, rodadas por teste r212, inspeção de _partition_cards"
+      ],
+      "timestamp": 1791690947.6557457,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R805",
+      "objective": "R797: rodadas Q518-Q543 (r212, partição, dicionário XVII)",
+      "changes": [
+        "Quinquagésima sexta Q518-Q525 (6 classes r212: tudo-ou-nada, confiança, extremos, pesos, determinismo, carga viva, explain, contagem)",
+        "Quinquagésima sétima Q526-Q533 (tipo errado, sem id, duplicata, espaços, cópia, vazio, mapa, fronteira)",
+        "Quinquagésima oitava Q534-Q543 (dicionário XVII)",
+        "roteiro de r212/partição no Método",
+        "recompilação 149p, 0 erros, 0 [?], 0 ??; matéria pp.14-86 (73p); auditoria: 1 nenhum metodológico, mantido"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "partição que elimina ambas as duplicatas é detalhe que banca pergunta",
+        "faltam ~7p; vetores: dicionário XVIII, rodadas por motivo de gap, inspeção de _hard_gate_reasons"
+      ],
+      "timestamp": 1791691052.2488472,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R806",
+      "objective": "R798: rodadas Q544-Q569 (gaps, gates, dicionário XVIII)",
+      "changes": [
+        "Sexagésima Q544-Q551 (5 motivos + agregação + plano inválido + fronteira)",
+        "Sexagésima primeira Q552-Q559 (status, string, inválidas, faltantes, duplicata, mapa, cópia, fronteira)",
+        "Sexagésima segunda Q560-Q569 (dicionário XVIII)",
+        "roteiro de gaps/gates no Método; textit falho corrigido antes de compilar",
+        "recompilação 150p, 0 erros, 0 [?], 0 ??; matéria pp.14-87 (74p); auditoria: 1 nenhum metodológico, mantido"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "revisão do diff antes de compilar pega comandos LaTeX inválidos",
+        "faltam ~6p; vetores: dicionário XIX, rodadas por linha do pipeline, inspeção de _checar_nomes/_checar_cobertura"
+      ],
+      "timestamp": 1791691159.4812071,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R807",
+      "objective": "R799: rodadas Q570-Q595 (checagens, cobertura, dicionário XIX)",
+      "changes": [
+        "Sexagésima terceira Q570-Q577 (listas, achados, faltante, excedente, proibido, formato, abortos, fronteira)",
+        "Sexagésima quarta Q578-Q585 (referência, ausência, nomes, grupo, dedupe, None, soma, fronteira)",
+        "Sexagésima quinta Q586-Q595 (dicionário XIX)",
+        "roteiro das checagens no Método",
+        "recompilação 153p, 0 erros, 0 [?], 0 ??; matéria pp.15-90 (76p); auditoria: 2 nuncas de código, mantidos"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "falha nomeada em todo caminho é o padrão do pipeline",
+        "faltam ~4p; vetores: dicionário XX, rodadas por função _ler/_nomes, inspeção de varrer"
+      ],
+      "timestamp": 1791692839.4266486,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R808",
+      "objective": "REA instalado e coordenado por MarceloClaro com Evidence completa e revisão do ecossistema",
+      "changes": [
+        "Runtime externo fixado no commit solicitado",
+        "Ponte MCP, CLI, /rea e gateway coordenado",
+        "Evidence integral por hash; timeout/cancelamento/erros/identidade fail-closed",
+        "Análise estática real e MetaBus sem promoção de confiança"
+      ],
+      "score": null,
+      "lessons": [
+        "Testes e probes locais têm escopo explícito; nenhuma auditoria externa foi atribuída",
+        "Preservar falhas/skips/limites e Evidence integral em vez de promover confiança"
+      ],
+      "timestamp": 1791712390.6130288,
+      "artifact_hashes": {
+        "specs/SPEC-935-R808-rea-orquestrado.md": "eb48942985ef0ea17070f1af2266cd43c42c0bd060462e86b393c8273e90498f"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "specs/SPEC-935-R808-rea-orquestrado.md",
+        "docs/REVISAO_ECOSSISTEMA_R808.md",
+        "outputs/rea-r808/release-review.json"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "4d215e84fac990b1f6c63d5f4e23478d2d32e6fb",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R809",
+      "objective": "Revisão de integridade do diagnóstico e do core check",
+      "changes": [
+        "Detecção de urllib.request inclusive aliases",
+        "IDs ausentes/duplicados rejeitados",
+        "Cobertura Lean reconciliada e compatibilidade de importação do diagnóstico"
+      ],
+      "score": null,
+      "lessons": [
+        "Testes e probes locais têm escopo explícito; nenhuma auditoria externa foi atribuída",
+        "Preservar falhas/skips/limites e Evidence integral em vez de promover confiança"
+      ],
+      "timestamp": 1791712390.696145,
+      "artifact_hashes": {
+        "specs/SPEC-935-R809-revisao-integridade.md": "42e4ccf482ba4cdd0f5ddf2f2ecbfda9cacf5e169d05ebcc848bd764740daf95"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "specs/SPEC-935-R809-revisao-integridade.md",
+        "docs/REVISAO_ECOSSISTEMA_R808.md",
+        "outputs/rea-r808/release-review.json"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "4d215e84fac990b1f6c63d5f4e23478d2d32e6fb",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R810",
+      "objective": "Doctor estrutural sem efeitos operacionais implícitos",
+      "changes": [
+        "Inventário local por padrão e doctor --live para probes",
+        "Mantido limite de desempenho R110",
+        "21 checks preservados; disponibilidade não confundida com prova ou inferência"
+      ],
+      "score": null,
+      "lessons": [
+        "Testes e probes locais têm escopo explícito; nenhuma auditoria externa foi atribuída",
+        "Preservar falhas/skips/limites e Evidence integral em vez de promover confiança"
+      ],
+      "timestamp": 1791712390.7642148,
+      "artifact_hashes": {
+        "specs/SPEC-935-R810-doctor-estrutural.md": "66be99f7ad9f542bf36aacca2546f72126621c4202b85fe4a182dd9d47d5ff0b"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "specs/SPEC-935-R810-doctor-estrutural.md",
+        "docs/REVISAO_ECOSSISTEMA_R808.md",
+        "outputs/rea-r808/release-review.json"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "4d215e84fac990b1f6c63d5f4e23478d2d32e6fb",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R811",
+      "objective": "Restaurar perfil de auditoria R678 para registro e atribuição centrais",
+      "changes": [
+        "library-empty-input-audit restaurado",
+        "Permissões restritas e métodos centrais existentes",
+        "Registro e atribuição A2A testados, sem simular execução de LLM"
+      ],
+      "score": null,
+      "lessons": [
+        "Testes e probes locais têm escopo explícito; nenhuma auditoria externa foi atribuída",
+        "Preservar falhas/skips/limites e Evidence integral em vez de promover confiança"
+      ],
+      "timestamp": 1791712390.8265703,
+      "artifact_hashes": {
+        "specs/SPEC-935-R811-restauracao-perfil-biblioteca.md": "613abe779cc70f8c4ad3512ffd3d0bd18381f33cbdbdb7b41200881c58862f16"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "specs/SPEC-935-R811-restauracao-perfil-biblioteca.md",
+        "docs/REVISAO_ECOSSISTEMA_R808.md",
+        "outputs/rea-r808/release-review.json"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "4d215e84fac990b1f6c63d5f4e23478d2d32e6fb",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R812",
+      "objective": "Reconciliar contratos de inventário e documentação operacional",
+      "changes": [
+        "Catálogo crescente mantém migração R380",
+        "Launchers locais resolvidos e workspace explícito",
+        "Documentos atuais e opencode.json reconciliados com gerador"
+      ],
+      "score": null,
+      "lessons": [
+        "Testes e probes locais têm escopo explícito; nenhuma auditoria externa foi atribuída",
+        "Preservar falhas/skips/limites e Evidence integral em vez de promover confiança"
+      ],
+      "timestamp": 1791712390.8980048,
+      "artifact_hashes": {
+        "specs/SPEC-935-R812-contratos-inventario-atual.md": "5ac0eba74fe9fe6853ff2b7374525f1bf93602a7802a8c5cb13a250da4a39f9e"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "specs/SPEC-935-R812-contratos-inventario-atual.md",
+        "docs/REVISAO_ECOSSISTEMA_R808.md",
+        "outputs/rea-r808/release-review.json"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "4d215e84fac990b1f6c63d5f4e23478d2d32e6fb",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R813",
+      "objective": "Remover falsos alarmes demonstrados do gate de segredos",
+      "changes": [
+        "Fronteira esquerda de token em padrões",
+        "Somente dois hashes artificiais auditados são exceções",
+        "Preservada leitura do índice e bloqueio de candidatos não registrados"
+      ],
+      "score": null,
+      "lessons": [
+        "Testes e probes locais têm escopo explícito; nenhuma auditoria externa foi atribuída",
+        "Preservar falhas/skips/limites e Evidence integral em vez de promover confiança"
+      ],
+      "timestamp": 1791712390.9673214,
+      "artifact_hashes": {
+        "specs/SPEC-935-R813-secret-pattern-boundaries.md": "1840ee6714fae03d7272842ea3bf45bf399786fab58e0e2e4977e4342d6f477f"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "specs/SPEC-935-R813-secret-pattern-boundaries.md",
+        "docs/REVISAO_ECOSSISTEMA_R808.md",
+        "outputs/rea-r808/release-review.json"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "4d215e84fac990b1f6c63d5f4e23478d2d32e6fb",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R829",
+      "objective": "R828 GREEN mínimo SDD/TDD governança",
+      "changes": [
+        "spec R828 proposta",
+        "verify_delivery em spec_engine",
+        "require_red_first em tdd_runner (+método classe)",
+        "trust_engine.route fail-closed",
+        "federation_license.classify",
+        "reason_router.route fallback",
+        "tests 7/7 GREEN",
+        "regressão 273 pass R821-R827"
+      ],
+      "score": 0.55,
+      "lessons": [
+        "diagnose estrutural inalterado 42%/0.381: scanner mede categorias, não apenas funções; próximo ciclo deve mapear 48 ausentes",
+        "from sdd import tdd_runner importa singleton, não módulo: exigir método na classe",
+        "core_command diagnose com arguments não vazio trata como caminho: usar vazio"
+      ],
+      "timestamp": 1791812861.8903806,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R831",
+      "objective": "R830 12 categorias razao+trust + fix scanner ECOSYSTEM_KEYWORDS",
+      "changes": [
+        "fix _compile_dimension_patterns em scan",
+        "12 facades trust/reasoning",
+        "TRACKED_FILES+py_content_files atualizados",
+        "tests 16/16 GREEN",
+        "coverage 42->100 tele 0.381->1.0 gaps 58->0"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "48 ausentes eram contagens sem nomes; taxonomia real em ECOSYSTEM_DIMENSIONS 83",
+        "fallback split por espaco quebra snake_case; ECOSYSTEM_KEYWORDS inerte por falta de chamada",
+        "filenames em core_dirs garantem literal; CamelCase nao gera underscore",
+        "inspiracoes externas como referencia sem copiar/executar"
+      ],
+      "timestamp": 1791813586.7206774,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R833",
+      "objective": "R832 36 restantes com realidade verificavel",
+      "changes": [
+        "5 agents",
+        "3 mci",
+        "4 evolution",
+        "8 protocolos",
+        "6 integrations",
+        "6 infra_dados via infra_dados/",
+        "5 governanca",
+        "core_dirs+protocolos/infra_dados/governanca",
+        "tests 3/3 GREEN",
+        "regressao 299 pass"
+      ],
+      "score": 0.92,
+      "lessons": [
+        "namespace packages sem __init__ importam; novos dirs exigem __init__",
+        "protocolo behavioral_gate delega a trust para evitar duplicacao",
+        "diagnose permanece 100/A; realidade provada por auditoria funcional 36/36, nao por contagem"
+      ],
+      "timestamp": 1791814024.4500554,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R834",
+      "objective": "R834 blind-remediacao: testes estritos, sem eval, facade declarada, cycles canonico, fronteiras do primario",
+      "changes": [
+        "z3_solver sem eval (gramatica segura)",
+        "reasoning_engines sympify da query",
+        "R832 testes estritos+negativos",
+        "behavioral_gate facade declarada",
+        "cycles_manager canonico sem alias/offset",
+        "orchestrator gate sem spec=falha sem recompensa; legado=legacy_unverified",
+        "diagnose via record_observation + measurement_scope",
+        "diagnostic_explanations delimitada",
+        "R828 4/4 GREEN"
+      ],
+      "score": 0.88,
+      "lessons": [
+        "blind review rejeitou 2/3: needle-in-str, eval, gaming de scanner",
+        "falha gera fix, nao defesa; slashing proporcional aplicado ao ciclo",
+        "diagnose nao promove confianca; cobertura 100 = autodescoberta, nao qualidade"
+      ],
+      "timestamp": 1791821905.8346174,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R841",
+      "objective": "Completar o REA com os motores das camadas de provedor e expor inspeção estática coordenada (layers/layer) sob MarceloClaro.",
+      "changes": [
+        "integrations/rea_layers.py: registro de 18 camadas com sonda local, engine_environment() e requisitos.",
+        "integrations/rea_bridge.py: OPERATIONS += layers/layer; validação, despacho e erro da camada; merge de engines no ambiente do filho.",
+        "marceloclaro/rea_cli.py: choices layers/layer e flags --layer/--encoding.",
+        "marceloclaro/rea_reports.py: compactação delimitada de layers.",
+        "integrations/ecosystem_mcp.py e integrations/opencode_cli.py: docstring e template /rea.",
+        "Motores no prefixo isolado: unblob 26.6.4, binwalk 3.1.0 (cargo), apktool 2.7.0, jadx-headless-mcp 0.7.1 (gradle shadowJar).",
+        "specs/SPEC-935-R841-rea-camadas-provedor.md, tests/test_r841_rea_layers.py (29 testes), outputs/core-r841/install-receipt.json."
+      ],
+      "score": null,
+      "lessons": [
+        "O gate de catálogo real (170 ferramentas) reprovou nomes inventados em native_ghidra (decompile/list_functions) — verificar cada tool contra a evidência MCP antes de declarar cobertura.",
+        "Firmware só ficou pronta somando unblob e binwalk; binwalk 3.1.x não tem binário pré-compilado e precisou de 'cargo build --release' da fonte.",
+        "Sonda de prontidão é evidência local e não prova execução da camada; 7 camadas permanecem pendentes por bloqueadores de host/externos."
+      ],
+      "timestamp": 1791854137.7981656,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R842",
+      "objective": "Fechar as pendências de motores do REA (R841): adb, browser, pwntools e pwndbg instalados e provados; IDA/Hopper/JEB documentados como licença comercial.",
+      "changes": [
+        "apt: adb 34.0.5 e gdb 17.1 instalados.",
+        "Python 3.12.14 isolado via uv + venv py-pwntools com pwntools, pyelftools 0.33, unicorn 2.1.2.",
+        "pwndbg 2026.9.15 (commit b5162e6) clonado; setup.sh com venv isolado; ~/.gdbinit global revertido.",
+        "Browser: descoberta usa o Chromium Playwright do SPEC-935-R824 (chromium-1247).",
+        "rea_layers.engine_environment(): descoberta de REA_ADB_PATH, REA_BROWSER_EXECUTABLE, REA_PWNTOOLS_PYTHON, REA_PWNDBG_GDB/GDBINIT/VENV_PATH; browser exigido; override do operador preservado.",
+        "Specs/SPEC-935-R842, tests/test_r842_rea_engines.py (38+ testes), outputs/core-r842/{install-receipt,live-evidence}.json.",
+        "Inspeções reais comprovadas: inspect_binary_layout (pwntools/ELF), inspect_evm_interface, inspect_firmware_regions (binwalk+unblob)."
+      ],
+      "score": null,
+      "lessons": [
+        "Python 3.14 do host inviabiliza pwntools (unicorn sem wheel): um interpretador 3.12 isolado via uv resolve sem tocar o sistema.",
+        "pwndbg setup.sh escreve em ~/.gdbinit global — efeito colateral precisa ser revertido e a invocação feita via REA_PWNDBG_GDBINIT isolado.",
+        "Prontidão por descoberta real (which/glob/existência) é honesta e reproduzível; camadas de licença comercial devem permanecer pendentes e documentadas, não simuladas."
+      ],
+      "timestamp": 1791856958.783981,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R843",
+      "objective": "R843: gates fail-closed para as 3 camadas comerciais do REA e correção do nome inventado REA_HOPPER_CONFORMANCE_MANIFEST_PATH.",
+      "changes": [
+        "rea_layers: _validate_ida_mcp_config (formatos de docs/ida-provider.md), _validate_local_mcp_url (restrições de docs/jeb-analysis.md), _env_state com format/require_explicit e motivo por estado.",
+        "native_hopper: env corrigida para HOPPER_LAUNCHER_PATH (kind command) + descoberta dos caminhos padrão /opt/hopper e ~/.local/share/rea/hopper.",
+        "jeb: exige REA_JEB_MCP_URL explicita e local; default nao marca pronta (fail-closed).",
+        "REQUIREMENTS atualizados; specs/SPEC-935-R843; tests/test_r843_rea_config_gates.py (20 casos); outputs/core-r843/config-gates.json.",
+        "tests/test_r841 atualizado: {} deixa de ser config IDA valida."
+      ],
+      "score": null,
+      "lessons": [
+        "Nome de env var tambem pode ser inventado: REA_HOPPER_CONFORMANCE_MANIFEST_PATH existe so nos scripts do REA, nao no runtime; a env real e HOPPER_LAUNCHER_PATH.",
+        "Prontidao por presenca de arquivo/URL e overclaim silencioso: validar FORMATO (JSON/f URL local) evita camada 'pronta' que falha na execucao.",
+        "Camada comercial so fica pronta com configuracao explicita do operador; o default do REA nao substitui consentimento nem prova liveness."
+      ],
+      "timestamp": 1791858629.4315302,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R844",
+      "objective": "R844: instalar o Hopper demo (acao install_hopper planejada pelo REA) com integridade verificada e obter prova real de analise.",
+      "changes": [
+        "Baixado .deb oficial com os headers do REA (accept/json, ua=rea-installer); verificado 35755772 bytes e SHA-1 e4f79dff...",
+        "pkexec falhou (authorization_or_package_manager_failed); aplicada a remediacao oficial com sudo apt-get install do pacote verificado + xvfb xauth python3 libx11-6 libxtst6.",
+        "Launcher /opt/hopper/bin/Hopper; rea doctor --provider hopper healthy (demo runtime user-mount-namespace).",
+        "Prova real: rea function /tmp/hopper_probe soma --provider hopper -> evidence ev_f4cb73bb..., pseudo 'rax = arg1 + arg0; return rax;', assembly endbr64..ret, callers [main].",
+        "specs/SPEC-935-R844; tests/test_r844_hopper_install.py; outputs/core-r844/{install-receipt,live-evidence}.json; receipt R843 atualizado (pending=2).",
+        "rea_layers: caminhos padrao do Hopper extraidos para HOPPER_DEFAULT_LAUNCHERS (isolavel em teste)."
+      ],
+      "score": null,
+      "lessons": [
+        "pkexec/polkit nao funciona sem sessao grafica; a remediacao oficial do REA autoriza instalar o pacote planejado e repetir o setup.",
+        "Antes de instalar: replicar os headers exatos do downloader (accept/json + ua=rea-installer) e verificar bytes+SHA1; o URL direto sem headers retorna 403.",
+        "Instalar software real no host quebra testes herméticos que veem caminhos absolutos; descoberta precisa ser constante de modulo substituivel.",
+        "Hopper demo prova analise real (pseudo+assembly+callers) sob Xvfb; prontidao e execucao agora comprovadas."
+      ],
+      "timestamp": 1791859737.536366,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R852",
+      "objective": "R852: instalar a JEB Community Edition (gratuita, sem conta) e fechar a camada `jeb` com prova real de decompilacao via REA.",
+      "changes": [
+        "Baixado ZIP oficial (https://www.pnfsoftware.com/dl?jeb4ce -> S3 da PNF) SEM conta: 697549250 bytes, SHA-256 709e7fe8...; ZIP testado e extraido em native-rea/jeb-ce-5.48.0 (~1.2G).",
+        "Requisito JRE>=21 atendido (Eclipse Adoptium 21.0.12.1); build jeb-ce release/full/perpetual (licenca gratuita).",
+        "EULA aceita pelo licenciado (operador); chave de maquina gerada via endpoint oficial POST /genlkrequest (campos keyname, licdata) e NUNCA gravada em artefato do Core.",
+        "MCP headless: ./jeb_linux.sh -c --mcp --interface=127.0.0.1 --port=8425; serverInfo = jeb-mcp-server 1.3.0 (exatamente a versao verificada pelo REA 6.4.0).",
+        "Gate fail-closed do Core (REA_JEB_MCP_URL) marca jeb pronta; sonda final 18 camadas, 17 prontas, 1 pendente (native_ida).",
+        "Prova real via REA: inspect-jeb-client (ev_81d15d2a...), list-jeb-units (ev_5aa858e1...), decompile-jeb-item soma -> 'long soma(int param0,int param1){return (uint64_t)(param1+param0);}' (ev_874890ad...) e main -> 'int main(){return (int)soma(2,3);}' (ev_a561ce57...).",
+        "specs/SPEC-935-R852-jeb-provider-fechado.md; tests/test_r852_jeb_provider.py (10 testes); outputs/core-r852/{install-receipt,live-evidence}.json; RUNBOOK-REA-IDA-JEB.md.",
+        "round_id fixado explicitamente em R852 (o auto-incremento sugeria R853 por o numeral R852 passar a existir em specs/); nada promovido: externally_validated=false, confidence_promoted=false."
+      ],
+      "score": null,
+      "lessons": [
+        "IDA Free NAO serve para ida-pro-mcp (sem IDAPython/plugins) — nao ha caminho gratuito para `native_ida`; a alternativa nativa gratuita e `native_ghidra` (ja pronta).",
+        "A JEB CE e gratuita e baixa sem conta; o MCP e nativo (-c --mcp) e o endpoint default 8425/mcp casa com o REA.",
+        "JEB exige aceitar EULA no 1o uso (ato do licenciado, nao do agente) e uma chave de licenca ligada a maquina, gerada pelo endpoint oficial genlkrequest; a chave e estavel por maquina e nao deve ser gravada.",
+        "JEB 5.48.0 headless NAO anuncia open_project; o alvo precisa ser selecionado na partida do engine (--infile). O REA preserva a recusa.",
+        "Nomear artefatos pelo numeral sequencial do registro (next_round_id) evita mismatch; specs/ ja reservava R850/R851, logo o round correto era R852 (nao R845)."
+      ],
+      "timestamp": 1791883001.8056655,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R853",
+      "objective": "REA 6.4.0: documentar (2 passadas, analyze_javascript_application) e reproduzir o contrato HTTP + fluxo de I/O do site Panoramica AI (rx.engenhariaorofacial.com.br), com backend FastAPI e motor stub determinístico.",
+      "changes": [
+        "outputs/core-r853-rx/README.md — documentação REA + contrato + limite (modelo não obtido)",
+        "outputs/core-r853-rx/rea-evidence.json — 2 evidence_id + hashes SHA-256 dos artefatos",
+        "outputs/core-r853-rx/api/{openapi.json,health.json,pages/*} — superfície pública preservada",
+        "outputs/core-r853-rx/repro/{backend/app.py,frontend/*} — reprodução FastAPI + front fiel",
+        "specs/SPEC-935-R853-rx-panoramica-reproducao.md — especificação formal",
+        "tests/test_r853_rx_repro.py — 9 testes (ZIP_STORED, cards, dimensões, cabeçalhos, sessão)"
+      ],
+      "score": null,
+      "lessons": [
+        "REA ev_*: estático e inerte; HTML/JS não provam execução em runtime.",
+        "Modelo treinado NÃO é acessível publicamente: /health só expõe hashes/métricas; /models//weights/ -> 404; admin -> 401.",
+        "next_round_id() escaneia specs/ — nomear artefatos antes de registrar exige round_id explícito (senão colide: R853 -> R854).",
+        "Ordem de rotas FastAPI: rota estática (/feedback/export) DEVE vir antes da dinâmica (/feedback/{id})."
+      ],
+      "timestamp": 1791884720.5283625,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R814",
+      "objective": "Reconciliar e reproduzir o livro Core",
+      "changes": [
+        "Catálogo e inventários gerados a partir das fontes correntes, incluindo o perfil 54.",
+        "Leituras guiadas, fontes e justificativas dos diagramas reconciliadas; medições históricas delimitadas.",
+        "Gates editoriais, compilação limpa e inspeção visual registrada do PDF final."
+      ],
+      "score": null,
+      "lessons": [
+        "Execução local e testes não equivalem a validação externa ou calibração científica."
+      ],
+      "timestamp": 1791892536.5741305,
+      "artifact_hashes": {
+        "outputs/core-r822/book-baseline-2026-10-11.pdf": "423feb56c133ff7b1c1a6ce9ec2fdd6c8ba68858accef6552a2e920dd4d8f8ab",
+        "specs/SPEC-935-R814-livro-reconciliado.md": "350c654d103c6ad60fa667a42298082db9dcc96703b742947394f30f96ceffd7",
+        "outputs/core-r814/book-release-summary.json": "8565520f7ed7637badc2b717a378fae1eafecca5dc93c257e23cd840a8c1b915",
+        "outputs/core-r814/editorial-close.xml": "bf34e2862dcaf3c44b2036bf7f84015b777436a3ea351764ca2be15aaa7b6ed8",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json": "cb8fbabbaef4053cd437467cb7dc5e278fe1e47f0dafdf41610a3007474974da",
+        "outputs/core-r820/attempt-9/full-suite.xml": "a0ca88a8b45efc9d8cf6962facdb180f295bef0cca2263cb13b0880815e92372"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "outputs/core-r822/book-baseline-2026-10-11.pdf",
+        "specs/SPEC-935-R814-livro-reconciliado.md",
+        "outputs/core-r814/book-release-summary.json",
+        "outputs/core-r814/editorial-close.xml",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json",
+        "outputs/core-r820/attempt-9/full-suite.xml"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R815",
+      "objective": "Corrigir a triagem científica lexical e seu transporte MCP",
+      "changes": [
+        "Negação, modalidade e atribuição preservadas como observações lexicais, sem validação científica inferida.",
+        "Contextos indexados e finitos, limite de entrada MCP e mensagens de erro sem eco do texto excessivo.",
+        "Regressões bilíngues, comparação de 400 textos, execução stdio real e limites de mutação documentados."
+      ],
+      "score": null,
+      "lessons": [
+        "Execução local e testes não equivalem a validação externa ou calibração científica."
+      ],
+      "timestamp": 1791892536.690275,
+      "artifact_hashes": {
+        "scanners/scientific_reasoning_scanner.py": "4ff93b81d7dadfc985302900a7cfd5d33ddf5efe16a991e5f5178b9ebb58de98",
+        "scanners/scanners_mcp_server.py": "e15304b4f1ba0d494705e1e9d64b26566536e93151a88dd33a27275501e59427",
+        "outputs/core-r815/corrective-summary.json": "02a3e1613017634978afaa499c70fdf66890c56831c6d5033be0cd0600440622",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json": "cb8fbabbaef4053cd437467cb7dc5e278fe1e47f0dafdf41610a3007474974da",
+        "outputs/core-r820/attempt-9/full-suite.xml": "a0ca88a8b45efc9d8cf6962facdb180f295bef0cca2263cb13b0880815e92372"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "scanners/scientific_reasoning_scanner.py",
+        "scanners/scanners_mcp_server.py",
+        "outputs/core-r815/corrective-summary.json",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json",
+        "outputs/core-r820/attempt-9/full-suite.xml"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R816",
+      "objective": "Transportar argumentos de comandos pelo orquestrador central",
+      "changes": [
+        "21 comandos passaram a core_command com JSON e allowlist, sem interpolação Python/shell nos templates.",
+        "Permissão exclusiva do primário, cancelamento, encerramento de processos e erros estruturados preservados.",
+        "Diagnóstico profundo comprovado na ferramenta real pelos comandos salvo e gerado; limite do parser upstream explícito."
+      ],
+      "score": null,
+      "lessons": [
+        "Execução local e testes não equivalem a validação externa ou calibração científica."
+      ],
+      "timestamp": 1791892536.759022,
+      "artifact_hashes": {
+        "integrations/opencode_commands.py": "8db6b5d7b29c8672c59fadbef423721cefa9c0d0b48db02fad39e08d082aa894",
+        ".opencode/tools/core_command.ts": "ef1e010030a341d5afd6d49ee64257c5c22f9a2886fd12d428ba331fba32c013",
+        "outputs/core-r816/regression-summary.json": "61b8252b45dd98e5ce22139f22b7804aac29489ccfff10ccb9e6f0b78d26a2e0",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json": "cb8fbabbaef4053cd437467cb7dc5e278fe1e47f0dafdf41610a3007474974da",
+        "outputs/core-r820/attempt-9/full-suite.xml": "a0ca88a8b45efc9d8cf6962facdb180f295bef0cca2263cb13b0880815e92372"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "integrations/opencode_commands.py",
+        ".opencode/tools/core_command.ts",
+        "outputs/core-r816/regression-summary.json",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json",
+        "outputs/core-r820/attempt-9/full-suite.xml"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R817",
+      "objective": "Instalar e verificar runtimes locais e sua descoberta",
+      "changes": [
+        "RunAI compilado da fonte oficial e Tig instalado em ambiente isolado; instruções inexistentes de instalação corrigidas.",
+        "Doctor resolve executáveis da venv e preserva precedência/overrides; testes de ausência isolados do host real.",
+        "RunAI executou chat, conclusão, embedding e ciclo central de iniciar/encerrar com identidade e ausência confirmadas."
+      ],
+      "score": null,
+      "lessons": [
+        "Execução local e testes não equivalem a validação externa ou calibração científica."
+      ],
+      "timestamp": 1791892536.845375,
+      "artifact_hashes": {
+        "integrations/runai.py": "e63a1fbe715c675041f90ef3a1e7ebcacfbfada84113bf504e318d783c548844",
+        "marceloclaro/doctor.py": "2fc9ed58daa8276d9da5abf9f07ab8ecb4729fa198ef77cd322846fa1f666885",
+        "outputs/core-r817/installation-receipt.json": "03fe8e1d2fb0072eaf775bd9da0334be88f0c018f871c82fc1e389966b849ab7",
+        "outputs/core-r817/central-inference.json": "c48c19f70954da06b964dab91a9d57b9da0b323c64a9eb748050f205f2e3f74c",
+        "outputs/core-r817/central-lifecycle.json": "7fd214b4a0b6ca074a165c35cef535f5d7389b9c1efcc400253107f8ea016ec7",
+        "outputs/core-r817/regression-summary.json": "edbcc005cfe5587f90413dd704b480a6d67faf9468534bd6bc722d0c6ec3e6e5",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json": "cb8fbabbaef4053cd437467cb7dc5e278fe1e47f0dafdf41610a3007474974da",
+        "outputs/core-r820/attempt-9/full-suite.xml": "a0ca88a8b45efc9d8cf6962facdb180f295bef0cca2263cb13b0880815e92372"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "integrations/runai.py",
+        "marceloclaro/doctor.py",
+        "outputs/core-r817/installation-receipt.json",
+        "outputs/core-r817/central-inference.json",
+        "outputs/core-r817/central-lifecycle.json",
+        "outputs/core-r817/regression-summary.json",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json",
+        "outputs/core-r820/attempt-9/full-suite.xml"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R818",
+      "objective": "Restringir entradas matemáticas e recusar resultados indefinidos",
+      "changes": [
+        "AST integral, funções permitidas e orçamentos substituem parsing de strings externo pelo backend.",
+        "Fallback numérico compartilha validação, prosa não é sanitizada como cálculo e resultados indefinidos não recebem confiança.",
+        "Cálculos reais, casos adversos e mutações executados; custo algébrico universal não certificado."
+      ],
+      "score": null,
+      "lessons": [
+        "Execução local e testes não equivalem a validação externa ou calibração científica."
+      ],
+      "timestamp": 1791892536.9681823,
+      "artifact_hashes": {
+        "reasoning/engines.py": "40d21f1672b6221d8090d853e312bbb403aa07daf440c0a30d1dd136caa2c24f",
+        "tests/test_r818_restricted_math_engine.py": "3b96b44fab887ba9908e79d7c47536e91b744fbcc6205bd312844a9325442ef7",
+        "docs/REASONING_MATH_INPUT.md": "9b848895a6edcf58659a8df514dcab29466fa1a7919e1a8566df55040c581a33",
+        "outputs/core-r818/execution-summary.json": "52a4ee044b2821edaff941cf6e37aa6fbd2b8e33a9c7b6e97a8331c6a8701838",
+        "outputs/core-r820/math-domain-final-summary.json": "c5699a0c8208bda3b512caca243956ef4134cd13a48f47a2f219311e9e57a7ac",
+        "outputs/core-r820/math-domain-real-probe.json": "cb67f3ef30ba9aed3613d21366fd4da3c5f2a96367433d94f402d0041e37dc3f",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json": "cb8fbabbaef4053cd437467cb7dc5e278fe1e47f0dafdf41610a3007474974da",
+        "outputs/core-r820/attempt-9/full-suite.xml": "a0ca88a8b45efc9d8cf6962facdb180f295bef0cca2263cb13b0880815e92372"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "reasoning/engines.py",
+        "tests/test_r818_restricted_math_engine.py",
+        "docs/REASONING_MATH_INPUT.md",
+        "outputs/core-r818/execution-summary.json",
+        "outputs/core-r820/math-domain-final-summary.json",
+        "outputs/core-r820/math-domain-real-probe.json",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json",
+        "outputs/core-r820/attempt-9/full-suite.xml"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R819",
+      "objective": "Corrigir o carregamento e os contratos das ferramentas OpenCode",
+      "changes": [
+        "Pacote OpenCode declara ESM; configuração TypeScript inclui ferramentas e plugins.",
+        "Plugin de acesso aberto usa o contrato real do SDK; valida entradas e retorna orientação serializada sem afirmar execução de pipeline.",
+        "Verificação global de tipos e imports reais passaram, sem alteração desnecessária de dependências."
+      ],
+      "score": null,
+      "lessons": [
+        "Execução local e testes não equivalem a validação externa ou calibração científica."
+      ],
+      "timestamp": 1791892537.0673475,
+      "artifact_hashes": {
+        ".opencode/package.json": "c5b27a018099cedcaf6a1bab4c398afea30534360b6c98bfec0e0f433a1728ae",
+        ".opencode/tsconfig.json": "e874294cc8a0844a15cafc3041fca5589cc4f75043c35345c04738a5fe323e52",
+        ".opencode/plugins/acesso-aberto-auditoria.ts": "c976a7aebd3dc5697c9b0c1f1cdfb8ab074a951b366b7c650a5516d50b691efb",
+        "tests/test_r979_agente_skill_plugin_mcp.py": "4bcf35fb4da4952d1e5a97ca999eed9d6e2e522e2b13afa9f9460864dceb89cc",
+        "outputs/core-r820/typecheck-final.txt": "8fa1cf5506304e8abac55868e7f1a136c9b1dde57a3981a382da4c21ea129a6f",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json": "cb8fbabbaef4053cd437467cb7dc5e278fe1e47f0dafdf41610a3007474974da",
+        "outputs/core-r820/attempt-9/full-suite.xml": "a0ca88a8b45efc9d8cf6962facdb180f295bef0cca2263cb13b0880815e92372"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        ".opencode/package.json",
+        ".opencode/tsconfig.json",
+        ".opencode/plugins/acesso-aberto-auditoria.ts",
+        "tests/test_r979_agente_skill_plugin_mcp.py",
+        "outputs/core-r820/typecheck-final.txt",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json",
+        "outputs/core-r820/attempt-9/full-suite.xml"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R821",
+      "objective": "Preservar o domínio matemático e falhar fechado na fachada Z3",
+      "changes": [
+        "Uma restrição inválida recusa toda a operação; ausência de fórmula e unknown não promovem certeza.",
+        "Divisão real, domínio de divisores/potências e expoente zero reconciliados com a fachada matemática.",
+        "Validação prévia da AST e limites do solver permanecem; SAT/UNSAT restringem-se às fórmulas aceitas."
+      ],
+      "score": null,
+      "lessons": [
+        "Execução local e testes não equivalem a validação externa ou calibração científica."
+      ],
+      "timestamp": 1791892537.154183,
+      "artifact_hashes": {
+        "reasoning/engines.py": "40d21f1672b6221d8090d853e312bbb403aa07daf440c0a30d1dd136caa2c24f",
+        "tests/test_r821_z3_fail_closed.py": "afda207a6a0e3800ebfa30992d614b485a9e10c1dd9518c897e6dc0910577eea",
+        "docs/REASONING_Z3_INPUT.md": "894fe15e4a7a61974c84d1a7898b5f1665a259187e9090790c638960d5f98731",
+        "outputs/core-r821/execution-summary.json": "5bd03a2584e85f545e9ab7222d54c3ac860e78afbc13784773b5fd8134f74048",
+        "outputs/core-r820/math-domain-final-summary.json": "c5699a0c8208bda3b512caca243956ef4134cd13a48f47a2f219311e9e57a7ac",
+        "outputs/core-r820/math-domain-real-probe.json": "cb67f3ef30ba9aed3613d21366fd4da3c5f2a96367433d94f402d0041e37dc3f",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json": "cb8fbabbaef4053cd437467cb7dc5e278fe1e47f0dafdf41610a3007474974da",
+        "outputs/core-r820/attempt-9/full-suite.xml": "a0ca88a8b45efc9d8cf6962facdb180f295bef0cca2263cb13b0880815e92372"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "reasoning/engines.py",
+        "tests/test_r821_z3_fail_closed.py",
+        "docs/REASONING_Z3_INPUT.md",
+        "outputs/core-r821/execution-summary.json",
+        "outputs/core-r820/math-domain-final-summary.json",
+        "outputs/core-r820/math-domain-real-probe.json",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json",
+        "outputs/core-r820/attempt-9/full-suite.xml"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R822",
+      "objective": "Reconciliar documentação corrente e atualizar o livro com as integrações",
+      "changes": [
+        "Contagens e rotas dos guias são geradas da configuração e diagnóstico atuais; checkpoint histórico preservado integralmente.",
+        "Referências obsoletas corrigidas e separação entre instalação, execução e validação externa explicitada.",
+        "Assets citados têm hashes rastreados; capa e folha de rosto padronizadas com tipografia vetorial, mantendo o retrato original.",
+        "Livro regenerado, compilado e inspecionado após as integrações; recibo e PDF anteriores preservados como baseline datado."
+      ],
+      "score": null,
+      "lessons": [
+        "Execução local e testes não equivalem a validação externa ou calibração científica."
+      ],
+      "timestamp": 1791892537.2612517,
+      "artifact_hashes": {
+        "outputs/core-r822/release-summary.json": "eb7c86e787b5952ff2b35dcddd9a05bdbfd705d4ffa601f647ffa30a703a3ce5",
+        "outputs/core-r822/book-release-summary.json": "4477e79cb35871c3adcef4c83583e4b048f9fbee5bd1c918b4083cde45e10366",
+        "outputs/core-r822/assets-release-summary.json": "f30c01be3f8996c33a02088b431d6641bcf03e7e059f4119f37bd3a680d29815",
+        "outputs/core-r822/cover-release-summary.json": "929afb96f11a7883ab7ddcb769f3f8653de35eba0572981e778c1d67713aad5f",
+        "livro-core/main.pdf": "ae20d559682836d213450e13a6601baaeeb8f3fb0e173e427e3c74cefaebc1f0",
+        "livro-core/inventario-core.json": "fbb142977f42761acf6a9977ac96d1f79d618c6b2131e9f065a726bb65731ea0",
+        "scripts/reconcile_operational_docs.py": "61e3286f56c2751718691ad72cd2472ca6e1a644dd1a062256b3e3f8a254f7bc",
+        "tests/test_r822_documentation_current_state.py": "d0e385d91b96a16a94fa747fa44cd2f8b9891d05d433942723ed4a497ad18df1",
+        "outputs/core-r822-refresh-20261013-rea/book-release-summary.json": "5f2596107b2e7e6b73978a00bf24c7bc6430d63102803ca8513890c19367baf7",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json": "cb8fbabbaef4053cd437467cb7dc5e278fe1e47f0dafdf41610a3007474974da",
+        "outputs/core-r820/attempt-9/full-suite.xml": "a0ca88a8b45efc9d8cf6962facdb180f295bef0cca2263cb13b0880815e92372"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "outputs/core-r822/release-summary.json",
+        "outputs/core-r822/book-release-summary.json",
+        "outputs/core-r822/assets-release-summary.json",
+        "outputs/core-r822/cover-release-summary.json",
+        "livro-core/main.pdf",
+        "livro-core/inventario-core.json",
+        "scripts/reconcile_operational_docs.py",
+        "tests/test_r822_documentation_current_state.py",
+        "outputs/core-r822-refresh-20261013-rea/book-release-summary.json",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json",
+        "outputs/core-r820/attempt-9/full-suite.xml"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R823",
+      "objective": "Executar análise nativa Ghidra pelo REA coordenado",
+      "changes": [
+        "Ghidra 12.1.4 e JDK 21 privados instalados com hashes conferidos; Java global preservado.",
+        "Análise estática de ELF conhecido recuperou função esperada sem executar o alvo; sessão fechada verificada por consulta posterior.",
+        "Cancelamento e timeout reais removeram processos e projeto; ausência de ACK no timeout registrada como limite."
+      ],
+      "score": null,
+      "lessons": [
+        "Execução local e testes não equivalem a validação externa ou calibração científica."
+      ],
+      "timestamp": 1791892537.568581,
+      "artifact_hashes": {
+        "integrations/rea_bridge.py": "33a4105bbb178e8360001b290cd8f3c29247f8cdf2a5c2ac5142136bcc35cba7",
+        "outputs/core-r823/summary.json": "1f09ae84977de5331472fbb3dd97238b51efab6b225996246f7c8699f7344b8a",
+        "outputs/core-r823/real-primary-gateway-final.json": "15bf01d4fd8a74fed9e2e54b84b19f016b2ba3e81b7f405ee6212146e7bbd746",
+        "outputs/core-r823/broad-final.xml": "0f7febed6ca629c139ed207b7aae93d05116e0c4f990d061f91bee03d50f6a61",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json": "cb8fbabbaef4053cd437467cb7dc5e278fe1e47f0dafdf41610a3007474974da",
+        "outputs/core-r820/attempt-9/full-suite.xml": "a0ca88a8b45efc9d8cf6962facdb180f295bef0cca2263cb13b0880815e92372"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "integrations/rea_bridge.py",
+        "outputs/core-r823/summary.json",
+        "outputs/core-r823/real-primary-gateway-final.json",
+        "outputs/core-r823/broad-final.xml",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json",
+        "outputs/core-r820/attempt-9/full-suite.xml"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R824",
+      "objective": "Operar navegador real por CLI e MCP do agente primário",
+      "changes": [
+        "Playwright MCP com versão fixada, Chromium, sessão isolada e ações delimitadas operados pelo MarceloClaro.",
+        "Fluxo real de leitura/preenchimento/clique/captura e persistência MetaBus; proxy de sessão bloqueou redirects a origem proibida antes da conexão.",
+        "Timeout, cancelamento, hashes integrais, mutações e recusa prévia de Unicode inválido verificados; sem certificação universal de rede."
+      ],
+      "score": null,
+      "lessons": [
+        "Execução local e testes não equivalem a validação externa ou calibração científica."
+      ],
+      "timestamp": 1791892537.6613984,
+      "artifact_hashes": {
+        "integrations/browser_bridge.py": "7932856dc7a0bc713bb72201c2e336917b4fa77dfc2193600469edb0952d5499",
+        "integrations/browser_proxy.py": "ae691fc5ff38b01806ba74713fb6c443761c2f4c92196d68b1fca1b3994d3a8f",
+        "outputs/core-r824/release-summary.json": "0e3c2b5a65ef9ece78d91f90ab683ab661ca00c3857edaeffecb7909c239d4e2",
+        "outputs/core-r824/mutation-summary.json": "861c3768d22525043d09f61c304e4f57f51e0c709adc635200acb8ee53e6162d",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json": "cb8fbabbaef4053cd437467cb7dc5e278fe1e47f0dafdf41610a3007474974da",
+        "outputs/core-r820/attempt-9/full-suite.xml": "a0ca88a8b45efc9d8cf6962facdb180f295bef0cca2263cb13b0880815e92372"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "integrations/browser_bridge.py",
+        "integrations/browser_proxy.py",
+        "outputs/core-r824/release-summary.json",
+        "outputs/core-r824/mutation-summary.json",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json",
+        "outputs/core-r820/attempt-9/full-suite.xml"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R825",
+      "objective": "Propagar cancelamento cooperativo e encerrar processos dos executores",
+      "changes": [
+        "Sinal por requisição atravessa workers e filas; limpeza aguardada inclusive sob cancelamentos repetidos e AnyIO.",
+        "Workflow interrompido não inicia novos nós; etapas de efeito incerto exigem repetição explícita.",
+        "Processos locais reais encerraram sem descendentes observados; Windows nativo e escape de grupo permanecem limites declarados."
+      ],
+      "score": null,
+      "lessons": [
+        "Execução local e testes não equivalem a validação externa ou calibração científica."
+      ],
+      "timestamp": 1791892537.756188,
+      "artifact_hashes": {
+        "integrations/execution_control.py": "44e050d58228cee1032d325da1d8ce2338b309bbe79b142ae5bb05573a44d942",
+        "integrations/harness_runtime.py": "08579638d6cfb5c2f47b966eee5c68f51e43dea737f6022aa47de0f8be52fc1a",
+        "outputs/core-r825/freeze-summary.json": "b4856c88b7df3a5b1ea36fb7d1149ef2d37fdebab9aa2994314f42bc23f74af7",
+        "outputs/core-r825/real-process-proof.json": "97869658b4d281717875b7d7b386d5a4e220267d307a9c692e9f393d4aa309a2",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json": "cb8fbabbaef4053cd437467cb7dc5e278fe1e47f0dafdf41610a3007474974da",
+        "outputs/core-r820/attempt-9/full-suite.xml": "a0ca88a8b45efc9d8cf6962facdb180f295bef0cca2263cb13b0880815e92372"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "integrations/execution_control.py",
+        "integrations/harness_runtime.py",
+        "outputs/core-r825/freeze-summary.json",
+        "outputs/core-r825/real-process-proof.json",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json",
+        "outputs/core-r820/attempt-9/full-suite.xml"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R826",
+      "objective": "Conservar o orçamento de páginas no planejamento Nano",
+      "changes": [
+        "Alocação de páginas respeita o domínio de entrada e o total solicitado, inclusive em planos pequenos.",
+        "Validação recusa distribuições inválidas em vez de aprovar páginas negativas.",
+        "Regressões executadas sobre o planejamento e seus consumidores; sem promoção de qualidade editorial externa."
+      ],
+      "score": null,
+      "lessons": [
+        "Execução local e testes não equivalem a validação externa ou calibração científica."
+      ],
+      "timestamp": 1791892537.8194227,
+      "artifact_hashes": {
+        "outputs/core-r826/release-summary.json": "5278894cad690b8422552d13b3cde214f9486447cbddd1014c553b286df05f5b",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json": "cb8fbabbaef4053cd437467cb7dc5e278fe1e47f0dafdf41610a3007474974da",
+        "outputs/core-r820/attempt-9/full-suite.xml": "a0ca88a8b45efc9d8cf6962facdb180f295bef0cca2263cb13b0880815e92372"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "outputs/core-r826/release-summary.json",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json",
+        "outputs/core-r820/attempt-9/full-suite.xml"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R827",
+      "objective": "Impedir início tardio de operações MCP canceladas na fila",
+      "changes": [
+        "Todas as rotas de conhecimento com mutação usam o sinal comum por requisição e aguardam o worker.",
+        "Contraprovas de runtime, download e notebook demonstraram início após cancelamento; a fila cooperativa agora recusa esse início.",
+        "Limites de interrupção de providers já iniciados permanecem explícitos; cancelamento não implica desfazer efeitos."
+      ],
+      "score": null,
+      "lessons": [
+        "Execução local e testes não equivalem a validação externa ou calibração científica."
+      ],
+      "timestamp": 1791892537.9023404,
+      "artifact_hashes": {
+        "integrations/ecosystem_mcp.py": "f140aaf4e3b334dae012cd318fa77f933282cfb9415404f6863bbcfe55d9ced0",
+        "outputs/core-r827/release-summary.json": "bf543ebfb405f80e1866d1b6739537ae7309227196e9deb046028d9a5b8c9d58",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json": "cb8fbabbaef4053cd437467cb7dc5e278fe1e47f0dafdf41610a3007474974da",
+        "outputs/core-r820/attempt-9/full-suite.xml": "a0ca88a8b45efc9d8cf6962facdb180f295bef0cca2263cb13b0880815e92372"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "integrations/ecosystem_mcp.py",
+        "outputs/core-r827/release-summary.json",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json",
+        "outputs/core-r820/attempt-9/full-suite.xml"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R820",
+      "objective": "Consolidar revisão local do ecossistema e seus limites",
+      "changes": [
+        "Suíte integral com recibo de execução e guarda de fontes; testes não executados permanecem separados.",
+        "Instalação, conexão, execução e validação externa distinguidas nas integrações e no diagnóstico.",
+        "Metas numéricas históricas R828 não foram tratadas como medição ou como metas cumpridas."
+      ],
+      "score": null,
+      "lessons": [
+        "Execução local e testes não equivalem a validação externa ou calibração científica."
+      ],
+      "timestamp": 1791892537.9797637,
+      "artifact_hashes": {
+        "docs/REVISAO_CEGA_R828_R830_R832.md": "2384e8b3a37ff5fdf3f8fb8d8cb91e6919f2b85967a5579ac125d39aa6ba9373",
+        "outputs/core-r837/regression-receipt.json": "3a4be398f93e8fcb15a6aba2a0e91485eaa9dc6d298367e1688af7bc39401e25",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json": "cb8fbabbaef4053cd437467cb7dc5e278fe1e47f0dafdf41610a3007474974da",
+        "outputs/core-r820/attempt-9/full-suite.xml": "a0ca88a8b45efc9d8cf6962facdb180f295bef0cca2263cb13b0880815e92372"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "docs/REVISAO_CEGA_R828_R830_R832.md",
+        "outputs/core-r837/regression-receipt.json",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json",
+        "outputs/core-r820/attempt-9/full-suite.xml"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R835",
+      "objective": "Distinguir autodescoberta lexical de funcionamento",
+      "changes": [
+        "81 categorias canônicas; aliases de fachada não contam duas vezes.",
+        "Etapa noológica retida exige entrada identificada por SHA; cache considera a entrada.",
+        "Corpus humano retido teve 4/81 categorias; número não representa cobertura funcional ou benchmark externo."
+      ],
+      "score": null,
+      "lessons": [
+        "Execução local e testes não equivalem a validação externa ou calibração científica."
+      ],
+      "timestamp": 1791892538.065685,
+      "artifact_hashes": {
+        "outputs/core-r835/review-repair-receipt.json": "e22111d391555326c076796e5fe4c23a185d4a919fc2a706b9b2d6837db72f2d",
+        "outputs/core-r828/retained-diagnostic-real.json": "f77d78c1ebef1a06bb4eb05bd7a7e4add5b263656bb9a1162a6978401b69618c",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json": "cb8fbabbaef4053cd437467cb7dc5e278fe1e47f0dafdf41610a3007474974da",
+        "outputs/core-r820/attempt-9/full-suite.xml": "a0ca88a8b45efc9d8cf6962facdb180f295bef0cca2263cb13b0880815e92372"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "outputs/core-r835/review-repair-receipt.json",
+        "outputs/core-r828/retained-diagnostic-real.json",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json",
+        "outputs/core-r820/attempt-9/full-suite.xml"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R836",
+      "objective": "Derivar numeral do ledger e endurecer testes R832",
+      "changes": [
+        "Sem aliases ou offset; ledger inválido é recusado e histórico preservado.",
+        "Asserções tipadas/exatas e negativas distinguem dados de comportamento e planos de execução."
+      ],
+      "score": null,
+      "lessons": [
+        "Execução local e testes não equivalem a validação externa ou calibração científica."
+      ],
+      "timestamp": 1791892538.1533895,
+      "artifact_hashes": {
+        "outputs/core-r836/release-summary.json": "6b0bf7356c9e19d00d9559e2426846b0d8dd041498321c72b7fdac2d72c9c922",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json": "cb8fbabbaef4053cd437467cb7dc5e278fe1e47f0dafdf41610a3007474974da",
+        "outputs/core-r820/attempt-9/full-suite.xml": "a0ca88a8b45efc9d8cf6962facdb180f295bef0cca2263cb13b0880815e92372"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "outputs/core-r836/release-summary.json",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json",
+        "outputs/core-r820/attempt-9/full-suite.xml"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R837",
+      "objective": "Corrigir regressões de verificação reproduzidas",
+      "changes": [
+        "HTTP controlado preserva falha fechada em datasets; prontidão nativa separada da limpeza de cancelamento.",
+        "Imports Lean específicos permitiram compilação real sem alterar os 11 enunciados/corpos; contraprova rejeitada."
+      ],
+      "score": null,
+      "lessons": [
+        "Execução local e testes não equivalem a validação externa ou calibração científica."
+      ],
+      "timestamp": 1791892538.2305157,
+      "artifact_hashes": {
+        "outputs/core-r837/regression-receipt.json": "3a4be398f93e8fcb15a6aba2a0e91485eaa9dc6d298367e1688af7bc39401e25",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json": "cb8fbabbaef4053cd437467cb7dc5e278fe1e47f0dafdf41610a3007474974da",
+        "outputs/core-r820/attempt-9/full-suite.xml": "a0ca88a8b45efc9d8cf6962facdb180f295bef0cca2263cb13b0880815e92372"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "outputs/core-r837/regression-receipt.json",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json",
+        "outputs/core-r820/attempt-9/full-suite.xml"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R838",
+      "objective": "Corrigir raciocínio após revisão cega severa",
+      "changes": [
+        "Fachadas reutilizam gramáticas restritas; expressão completa e atribuições participam do SMT.",
+        "Soma e integral formal refletem entrada, prosa recusada retorna fallback e trust não calibrado fica não registrado.",
+        "Removidos atalhos SDD/TDD sem consumidores; contratos de entrada não se apresentam como gates executados."
+      ],
+      "score": null,
+      "lessons": [
+        "Execução local e testes não equivalem a validação externa ou calibração científica."
+      ],
+      "timestamp": 1791892538.280649,
+      "artifact_hashes": {
+        "outputs/core-r838/review-repair-receipt.json": "106c8121e1be29d5fe13342ee99de1cf1798dd1c474acf313dabd55718c2ff5a",
+        "outputs/core-r828/declarative-boundaries-receipt.json": "6247cd287f662dddde16950367f310e5ee871d97fb858e06cb752b3835e5cf6a",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json": "cb8fbabbaef4053cd437467cb7dc5e278fe1e47f0dafdf41610a3007474974da",
+        "outputs/core-r820/attempt-9/full-suite.xml": "a0ca88a8b45efc9d8cf6962facdb180f295bef0cca2263cb13b0880815e92372"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "outputs/core-r838/review-repair-receipt.json",
+        "outputs/core-r828/declarative-boundaries-receipt.json",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json",
+        "outputs/core-r820/attempt-9/full-suite.xml"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R839",
+      "objective": "Exigir histórico RED executado antes da entrega de software",
+      "changes": [
+        "Pytest real, assinatura local, cadeia de hashes e vínculo de spec, alvos, testes, helpers, fixtures e configurações.",
+        "GREEN isolado ou contrato adulterado fecha o gate; execução autônoma e autocorreção conferem antes de agir.",
+        "Refatoração reprovada não declara rollback inexistente; inspeção de critérios não promove estado de software ou confiança.",
+        "Prova controlada persistente sem LLM; nenhum RED histórico inexistente foi criado retroativamente."
+      ],
+      "score": null,
+      "lessons": [
+        "Execução local e testes não equivalem a validação externa ou calibração científica."
+      ],
+      "timestamp": 1791892538.335251,
+      "artifact_hashes": {
+        "outputs/core-r839/release-summary.json": "3fa2fd97de8a7923021d92284d661f8183ad3f17e890e02b36c1278b35b78252",
+        "outputs/core-r839/persistent-local-pair.json": "2e3aeadd7037f68ad0370b851fa1502f169232bab5cbacd6c415e15f95afe69a",
+        "specs/SPEC-935-R839-historico-red-executado.md": "96a40670d3b8242735fc4d86ca30ad2ed1c325ec5e65686f3d7e4788b9f90a87",
+        "docs/TDD_HISTORICO_RED.md": "7ac63999dc81255eba315b639beeebd07f07ffb4d7efccd1fba308b8e6c16a2f",
+        "outputs/core-r839/r838-authenticated-reexecution.json": "c31c4d130dc3f282d41783a723a45654ff14648e438bfcad8cb1d47caf622291",
+        "outputs/core-r839/historical-reexecutions/summary.json": "bbc8ccf7924103098aa159f42c5e2e829def562baab8182c9643f90a7058896c",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json": "cb8fbabbaef4053cd437467cb7dc5e278fe1e47f0dafdf41610a3007474974da",
+        "outputs/core-r820/attempt-9/full-suite.xml": "a0ca88a8b45efc9d8cf6962facdb180f295bef0cca2263cb13b0880815e92372"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "outputs/core-r839/release-summary.json",
+        "outputs/core-r839/persistent-local-pair.json",
+        "specs/SPEC-935-R839-historico-red-executado.md",
+        "docs/TDD_HISTORICO_RED.md",
+        "outputs/core-r839/r838-authenticated-reexecution.json",
+        "outputs/core-r839/historical-reexecutions/summary.json",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json",
+        "outputs/core-r820/attempt-9/full-suite.xml"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R840",
+      "objective": "Reduzir parsing repetido do catálogo com oráculo canônico",
+      "changes": [
+        "Leitura fresca dos arquivos e cache limitado por bytes/parser, cópias profundas e compatibilidade dos 255 cartões reais.",
+        "Mantido o requisito de latência R110; memória da unidade hierárquica isolada dos efeitos de outras baterias.",
+        "Selector externo removido do teste canônico após contraprova; novo RED/GREEN autenticado e entrega pelo primário, sem LLM."
+      ],
+      "score": null,
+      "lessons": [
+        "Execução local e testes não equivalem a validação externa ou calibração científica."
+      ],
+      "timestamp": 1791892538.4242125,
+      "artifact_hashes": {
+        "outputs/core-r840/release-summary.json": "0f3785f8ea50a194cdd5c1805f6bddf3d9a4cee97b75072a4d995ee3b61ee9cf",
+        "outputs/core-r840/core-canonical-delivery-accepted.json": "473cba33de2a6ed4b890193f83b5e2d585ac5a38cd2bde43459afb0ad1a0b9b7",
+        "outputs/core-r840/benchmark.json": "fb4e5e0f93e44d286c8942a5a2a03b5a15a8276a3e8c77ad03ac5a06cfd13f39",
+        "specs/SPEC-935-R840-cache-frontmatter-catalogo.md": "b3d3039f22900e4a8068261c50c8fb20c5315379e7bb242480fac94645204f36",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json": "cb8fbabbaef4053cd437467cb7dc5e278fe1e47f0dafdf41610a3007474974da",
+        "outputs/core-r820/attempt-9/full-suite.xml": "a0ca88a8b45efc9d8cf6962facdb180f295bef0cca2263cb13b0880815e92372"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "outputs/core-r840/release-summary.json",
+        "outputs/core-r840/core-canonical-delivery-accepted.json",
+        "outputs/core-r840/benchmark.json",
+        "specs/SPEC-935-R840-cache-frontmatter-catalogo.md",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json",
+        "outputs/core-r820/attempt-9/full-suite.xml"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R850",
+      "objective": "Entregar assistente REA local com CLI, MCP e evidências",
+      "changes": [
+        "Worker de análise em namespaces locais de usuário/rede/PID; bloqueio sem isolamento e ambiente sem credenciais externas.",
+        "JavaScript, ELF/Ghidra, metadados .NET e HTML/snapshot loopback inspecionados em artefatos controlados; alvos não executados.",
+        "Perfis MCP Linux/Windows e agente local registrados; configuração não comprova inferência de modelo."
+      ],
+      "score": null,
+      "lessons": [
+        "Execução local e testes não equivalem a validação externa ou calibração científica."
+      ],
+      "timestamp": 1791892538.5163677,
+      "artifact_hashes": {
+        "outputs/core-r850/live-summary.json": "e620b2a65f6b619f64c432de38aeef557cb1ccd8b3cdc72aca3d2d7263c99fde",
+        "outputs/core-r850/mcp-live.json": "026c58aa1024fa621f0c652020cc03bad27ee059e8fc987f750e6623a653e3ae",
+        "outputs/core-r850/cancellation-live.json": "52e335822acb470462e64e41d2e515d05f63211beac1e82531ce495f72495a3f",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json": "cb8fbabbaef4053cd437467cb7dc5e278fe1e47f0dafdf41610a3007474974da",
+        "outputs/core-r820/attempt-9/full-suite.xml": "a0ca88a8b45efc9d8cf6962facdb180f295bef0cca2263cb13b0880815e92372"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "outputs/core-r850/live-summary.json",
+        "outputs/core-r850/mcp-live.json",
+        "outputs/core-r850/cancellation-live.json",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json",
+        "outputs/core-r820/attempt-9/full-suite.xml"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R851",
+      "objective": "Publicar guia local do assistente REA",
+      "changes": [
+        "Site loopback com recursos locais, allowlist e recusa de origens, caminhos e métodos não permitidos.",
+        "Desktop/mobile e cópia de comandos exercitados em navegador real; nenhuma análise ou upload pelo site."
+      ],
+      "score": null,
+      "lessons": [
+        "Execução local e testes não equivalem a validação externa ou calibração científica."
+      ],
+      "timestamp": 1791892538.6140523,
+      "artifact_hashes": {
+        "outputs/core-r851/browser-receipt.json": "4609929b10ba6c3e676aac278bec2af63da33eaaf8175f5b238fb6dfb7aeeef2",
+        "docs/ASSISTENTE_REA_LOCAL.md": "287dcb3986a345515e182be5c2132107f6ae1a2ee449a2df4c8c95e7724b7946",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json": "cb8fbabbaef4053cd437467cb7dc5e278fe1e47f0dafdf41610a3007474974da",
+        "outputs/core-r820/attempt-9/full-suite.xml": "a0ca88a8b45efc9d8cf6962facdb180f295bef0cca2263cb13b0880815e92372"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "outputs/core-r851/browser-receipt.json",
+        "docs/ASSISTENTE_REA_LOCAL.md",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json",
+        "outputs/core-r820/attempt-9/full-suite.xml"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R860",
+      "objective": "Corrigir integração REA por execução e configuração efetiva",
+      "changes": [
+        "Arquivo JS avulso adaptado sem alterar bytes; explicações usam campos reais da Evidence e preservam limites.",
+        "Cliente OpenCode usa HOME/cwd próprios e confere endpoint, comando MCP, primário e permissões antes de conversar.",
+        "Falhas estruturadas e guard indisponível não resultam em sucesso; MCP reutiliza um primário por servidor."
+      ],
+      "score": null,
+      "lessons": [
+        "Execução local e testes não equivalem a validação externa ou calibração científica."
+      ],
+      "timestamp": 1791892538.6718986,
+      "artifact_hashes": {
+        "outputs/core-r860/core-current-oracles-red-cli.txt": "a6c76ad7aa738b7b6333d765542d22605e46def40dae97771f41a4f69f0ccf3e",
+        "outputs/core-r860/core-final-oracles-green-cli.txt": "a8e5e7c8ea0a456d02282c083516b079c287d7da11e03eee69caa82b9924c73c",
+        "outputs/core-r862/root-review.json": "60372103f61caef6971f78828f4b584557953f34943bc2a543e83516249f86ff",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json": "cb8fbabbaef4053cd437467cb7dc5e278fe1e47f0dafdf41610a3007474974da",
+        "outputs/core-r820/attempt-9/full-suite.xml": "a0ca88a8b45efc9d8cf6962facdb180f295bef0cca2263cb13b0880815e92372"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "outputs/core-r860/core-current-oracles-red-cli.txt",
+        "outputs/core-r860/core-final-oracles-green-cli.txt",
+        "outputs/core-r862/root-review.json",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json",
+        "outputs/core-r820/attempt-9/full-suite.xml"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R861",
+      "objective": "Aceitar contratos integrados do assistente pelo primário",
+      "changes": [
+        "44 casos das baterias R850/R851/R860 e registros por critério aceitos pelo gate atual do MarceloClaro.",
+        "Baselines conservados reexecutados com os oráculos atuais; nenhum evento histórico ausente foi retrodatado."
+      ],
+      "score": null,
+      "lessons": [
+        "Execução local e testes não equivalem a validação externa ou calibração científica."
+      ],
+      "timestamp": 1791892538.7701254,
+      "artifact_hashes": {
+        "outputs/core-r861/primary-delivery-accepted.json": "61cf896a106bf0f1a37ae707a909431e711e5f4420eb9174f798ade54778701a",
+        "outputs/core-r861/reexecution-provenance.json": "711fbd65edb8b153a7b7037b1a0037f1c13320d7d08abf1d9cc09820d85fcc49",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json": "cb8fbabbaef4053cd437467cb7dc5e278fe1e47f0dafdf41610a3007474974da",
+        "outputs/core-r820/attempt-9/full-suite.xml": "a0ca88a8b45efc9d8cf6962facdb180f295bef0cca2263cb13b0880815e92372"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "outputs/core-r861/primary-delivery-accepted.json",
+        "outputs/core-r861/reexecution-provenance.json",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json",
+        "outputs/core-r820/attempt-9/full-suite.xml"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R862",
+      "objective": "Recusar identidades ambíguas de especificação",
+      "changes": [
+        "Registro bloqueia IDs formais duplicados entre arquivos/diretórios e permite recarga da definição única.",
+        "IDs próprios realocados sem modificar os trabalhos JEB/RX; dois corpos históricos R440 preservados com IDs específicos.",
+        "Estado formal das fixtures de teste isolado; dependências HTTP de teste instaladas sem mudar MCP/Starlette/Pydantic."
+      ],
+      "score": null,
+      "lessons": [
+        "Execução local e testes não equivalem a validação externa ou calibração científica."
+      ],
+      "timestamp": 1791892538.8202615,
+      "artifact_hashes": {
+        "outputs/core-r862/primary-delivery-accepted.json": "9d73ac807562ba78b627f3eeb8bc28cf242f79c1e326abe3aa60f74314d0290d",
+        "outputs/core-r862/identity-migration.json": "9d04053d004afab33a5280a158b09b114b774783bbad8042918fa6c2952b23c0",
+        "outputs/core-r862/test-dependencies-receipt.json": "f9495b627f5ca8defbbed6d1a2f6b5bb7b0e47045cf88398816305060eb83793",
+        "outputs/core-r862/dependency-isolation.json": "29238b034b498849f956402c97a88405de4594e10a8361468aa32c973d257641",
+        "outputs/core-r862/post-dependency-regression.xml": "d3dd1b33aac61dc0fd7ffe7f9b93f53ff9cb2b266f40e2ba3176a72eafaa459a",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json": "cb8fbabbaef4053cd437467cb7dc5e278fe1e47f0dafdf41610a3007474974da",
+        "outputs/core-r820/attempt-9/full-suite.xml": "a0ca88a8b45efc9d8cf6962facdb180f295bef0cca2263cb13b0880815e92372"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "outputs/core-r862/primary-delivery-accepted.json",
+        "outputs/core-r862/identity-migration.json",
+        "outputs/core-r862/test-dependencies-receipt.json",
+        "outputs/core-r862/dependency-isolation.json",
+        "outputs/core-r862/post-dependency-regression.xml",
+        "outputs/core-r820/attempt-9/full-suite-receipt.json",
+        "outputs/core-r820/attempt-9/full-suite.xml"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R863",
+      "objective": "Distinguir prontidão local e diagnóstico estrutural",
+      "changes": [
+        "Sonda loopback limitada; catálogo de modelos não comprova inferência."
+      ],
+      "score": null,
+      "lessons": [
+        "Verificações locais não constituem validação externa; limitações conservadas nos recibos."
+      ],
+      "timestamp": 1791905891.9749153,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R864",
+      "objective": "Entregar repositório reproduzível sem estado privado",
+      "changes": [
+        "Allowlist de evidência pequena; histórico privado conservado fora do índice."
+      ],
+      "score": null,
+      "lessons": [
+        "Verificações locais não constituem validação externa; limitações conservadas nos recibos."
+      ],
+      "timestamp": 1791905892.050756,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R865",
+      "objective": "Compartilhar primário na biblioteca e execução MCP",
+      "changes": [
+        "Inicialização idempotente do primário; especificação explícita para texto."
+      ],
+      "score": null,
+      "lessons": [
+        "Verificações locais não constituem validação externa; limitações conservadas nos recibos."
+      ],
+      "timestamp": 1791905892.2662256,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R866",
+      "objective": "Reutilizar execução de testes no gate de CI",
+      "changes": [
+        "JUnit reutilizado; skips e itens agregados separados; CI remota não executada."
+      ],
+      "score": null,
+      "lessons": [
+        "Verificações locais não constituem validação externa; limitações conservadas nos recibos."
+      ],
+      "timestamp": 1791905892.5372314,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R867",
+      "objective": "Corrigir portabilidade e higiene da entrega",
+      "changes": [
+        "Caminhos relativos nos testes Lean; chave real removida de teste; lock npm preservado."
+      ],
+      "score": null,
+      "lessons": [
+        "Verificações locais não constituem validação externa; limitações conservadas nos recibos."
+      ],
+      "timestamp": 1791905892.7942703,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R868",
+      "objective": "Conferir perfil local e impedir achados inventados",
+      "changes": [
+        "Prompt dedicado e permissões efetivas; saída exige recibo CAS e explicação determinística."
+      ],
+      "score": null,
+      "lessons": [
+        "Verificações locais não constituem validação externa; limitações conservadas nos recibos."
+      ],
+      "timestamp": 1791905893.04716,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R869",
+      "objective": "Entregar prompts reais ao executor sem expô-los em argumentos",
+      "changes": [
+        "stdin PIPE quando há entrada; UTF-8 grande e cancelamento testados.",
+        "Execução real pelo primário e Codex somente leitura retornou15 para8+7."
+      ],
+      "score": null,
+      "lessons": [
+        "Mocks de opções não provam transporte de entrada; processos reais detectaram a falha.",
+        "Tarefa aritmética não valida análises autônomas de alvos REA."
+      ],
+      "timestamp": 1791910577.9606001,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ]
 }

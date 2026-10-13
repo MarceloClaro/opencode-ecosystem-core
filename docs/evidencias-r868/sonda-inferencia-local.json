@@ -1,0 +1,14 @@
+{
+  "format": "sanitized_local_summary",
+  "externally_validated": false,
+  "scope": "historical response from configured loopback model endpoint; model process egress was not isolated or observed",
+  "model": "llama3.2:latest",
+  "inference_executed": true,
+  "response_recorded": true,
+  "model_process_network_isolated": false,
+  "external_egress_observed": null,
+  "limitation": "a loopback endpoint does not establish absence of external network activity by the model process",
+  "source_sha256": {
+    "local-model-small-inference.json": "3d938655e117313cf2c9fdd0419372cd6ae5e4d07f24a12894a471c99ab69e76"
+  }
+}

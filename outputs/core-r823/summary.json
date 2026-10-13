@@ -1,0 +1,277 @@
+{
+  "round": "R823",
+  "status": "completed_scoped_internal",
+  "timestamp": 1791780337.9297874,
+  "installation": {
+    "status": "installed",
+    "timestamp_started": 1791751745.0626788,
+    "root": "/home/marceloclaro/.local/share/opencode-core/native-rea",
+    "artifacts": [
+      {
+        "component": "ghidra",
+        "version": "12.1.4",
+        "name": "ghidra_12.1.4_PUBLIC_20260921.zip",
+        "url": "https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_12.1.4_build/ghidra_12.1.4_PUBLIC_20260921.zip",
+        "size": 569649598,
+        "sha256": "ddac49f903da9d5bac833e5cc79395098b9c33cfd3279be5f31bd00387d2d4db",
+        "license": "Apache-2.0",
+        "verified_sha256": "ddac49f903da9d5bac833e5cc79395098b9c33cfd3279be5f31bd00387d2d4db"
+      },
+      {
+        "component": "jdk",
+        "version": "21.0.12.1+1",
+        "name": "OpenJDK21U-jdk_x64_linux_hotspot_21.0.12.1_1.tar.gz",
+        "url": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jdk_x64_linux_hotspot_21.0.12.1_1.tar.gz",
+        "size": 207473347,
+        "sha256": "ce79869e1307ed8ee1e2baa86a412b1eb5b75d10a01006d788a6f968bcfaee94",
+        "license": "GPL-2.0-with-Classpath-exception",
+        "verified_sha256": "ce79869e1307ed8ee1e2baa86a412b1eb5b75d10a01006d788a6f968bcfaee94"
+      }
+    ],
+    "system_java_before": "/usr/lib/jvm/java-25-openjdk-amd64/bin/java",
+    "system_defaults_changed": false,
+    "ghidra_install_dir": "/home/marceloclaro/.local/share/opencode-core/native-rea/ghidra_12.1.4_PUBLIC",
+    "java_home": "/home/marceloclaro/.local/share/opencode-core/native-rea/jdk-21.0.12.1+1",
+    "timestamp_completed": 1791752019.942984,
+    "system_java_after": "/usr/lib/jvm/java-25-openjdk-amd64/bin/java"
+  },
+  "rea": {
+    "version": "6.4.0",
+    "commit": "4daea941bfeeb426886f2d048aed7f3cb2dbf97b",
+    "mcp_tool_count": 170,
+    "embedded_build_commit": null,
+    "ghidra_provider_available": true
+  },
+  "doctor": {
+    "scope_healthy": true,
+    "environment_healthy": false,
+    "scope_checks": [
+      {
+        "name": "node",
+        "ok": true,
+        "classification": "healthy",
+        "detail": "22.23.1"
+      },
+      {
+        "name": "ghidra",
+        "ok": true,
+        "classification": "healthy",
+        "detail": "/home/marceloclaro/.local/share/opencode-core/native-rea/ghidra_12.1.4_PUBLIC"
+      },
+      {
+        "name": "ghidra-platform",
+        "ok": true,
+        "classification": "healthy",
+        "detail": "linux"
+      },
+      {
+        "name": "ghidra-architecture",
+        "ok": true,
+        "classification": "healthy",
+        "detail": "x64"
+      },
+      {
+        "name": "ghidra-installation",
+        "ok": true,
+        "classification": "healthy",
+        "detail": "/home/marceloclaro/.local/share/opencode-core/native-rea/ghidra_12.1.4_PUBLIC/Ghidra/application.properties"
+      },
+      {
+        "name": "ghidra-version",
+        "ok": true,
+        "classification": "healthy",
+        "detail": "12.1.4"
+      },
+      {
+        "name": "ghidra-headless",
+        "ok": true,
+        "classification": "healthy",
+        "detail": "/home/marceloclaro/.local/share/opencode-core/native-rea/ghidra_12.1.4_PUBLIC/support/analyzeHeadless"
+      },
+      {
+        "name": "ghidra-native_decompiler",
+        "ok": true,
+        "classification": "healthy",
+        "detail": "/home/marceloclaro/.local/share/opencode-core/native-rea/ghidra_12.1.4_PUBLIC/Ghidra/Features/Decompiler/os/linux_x86_64/decompile reports elf x86_64, which matches linux/x64"
+      },
+      {
+        "name": "ghidra-java",
+        "ok": true,
+        "classification": "healthy",
+        "detail": "21.0.12.1; 64-bit; JDK; /home/marceloclaro/.local/share/opencode-core/native-rea/jdk-21.0.12.1+1; accepted a 64-bit full JDK 21 or newer"
+      }
+    ],
+    "informational_limitations": "Optional clients/skill/Hopper/IDA are not configured; no global setup was performed."
+  },
+  "real_analysis": {
+    "success": true,
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "evidence_id": "ev_6f83a5d171145255ea16dbf6b501bbccce3159304a462d81542b0c19258fc39a",
+    "procedure": "fixture_add",
+    "pseudocode": "\nint fixture_add(int left,int right)\n\n{\n  int right_local;\n  int left_local;\n  \n  return right + left + 7;\n}\n\n",
+    "subject": {
+      "architecture": "x86_64",
+      "digest": {
+        "sha256": "172e8f12d2754e0f5c55b302b27d98725c81e511f43c79fb6afac1ec6338d92e"
+      },
+      "format": "elf",
+      "local_path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r823/known_inert.elf",
+      "name": "known_inert.elf"
+    },
+    "artifact": {
+      "path": "/home/marceloclaro/opencode-ecosystem-core/.opencode/rea/evidence/ef694393d0468298cd424bbac730b5cc532966fb23298f0821213ebce7d0fd79.json",
+      "sha256": "ef694393d0468298cd424bbac730b5cc532966fb23298f0821213ebce7d0fd79",
+      "bytes": 1079787,
+      "complete": true
+    },
+    "cleanup": {
+      "attempted": true,
+      "closed": true
+    },
+    "closed_session_open": false,
+    "lineage": {
+      "snapshots": [
+        {
+          "observation": {
+            "descendants": [
+              {
+                "parent_pid": 803621,
+                "pid": 803691,
+                "process_group_id": 803621
+              },
+              {
+                "parent_pid": 803621,
+                "pid": 803708,
+                "process_group_id": 803621
+              }
+            ],
+            "launcher_parent_pid": 803518,
+            "launcher_pid": 803621,
+            "observed_at": "2026-10-12T04:37:35.733Z",
+            "process_group_id": 803621,
+            "status": "verified"
+          },
+          "provider": {
+            "id": "ghidra",
+            "name": "Ghidra",
+            "version": "12.1.4"
+          }
+        }
+      ],
+      "status": "snapshots"
+    },
+    "target_executed": false,
+    "execution_marker_present": false,
+    "target_permission": "0o444"
+  },
+  "real_cancellation": {
+    "java_pid": 804226,
+    "node_pid": 804103,
+    "java_group": 804226,
+    "runtime_root": "/tmp/rea-ghidra-VzOMW2",
+    "cancel_sent_at_seconds": 17.783,
+    "kind": "real_native_gateway_cancellation",
+    "cancelled": true,
+    "elapsed_seconds": 18.721,
+    "java_alive_after": false,
+    "node_alive_after": false,
+    "runtime_exists_after": false,
+    "target_sha256": "0f6ca9d57a0098d98e4dd85c0f95c57ad25515829a1e85170ed977290a1a78cb",
+    "target_unchanged": true,
+    "target_marker_absent": true
+  },
+  "real_timeout": {
+    "kind": "real_native_gateway_timeout",
+    "timeout_seconds": 10,
+    "elapsed_seconds": 21.426,
+    "success": false,
+    "error_code": "timeout",
+    "cleanup": {
+      "attempted": true,
+      "closed": false
+    },
+    "native_process_snapshots": [
+      {
+        "java_pid": 809730,
+        "node_pid": 809643,
+        "runtime_root": "/tmp/rea-ghidra-U0fZpd",
+        "java_alive_after": false,
+        "node_alive_after": false,
+        "runtime_exists_after": false
+      }
+    ],
+    "target_sha256": "d571ae3833a6f66003fabb43620de36fab2c56c5b91b74dced53c0cdde6bb16c",
+    "target_unchanged": true,
+    "target_marker_absent": true
+  },
+  "tests": {
+    "red_initial": {
+      "failed": 14,
+      "passed": 6
+    },
+    "red_launcher_status": {
+      "failed": 2
+    },
+    "red_close_contract": {
+      "failed": 2
+    },
+    "focused_green": 86,
+    "broad": {
+      "tests": 132.0,
+      "failures": 0.0,
+      "errors": 0.0,
+      "skipped": 0.0,
+      "time": 41.852
+    },
+    "mutation_killed": 3,
+    "mutation_total": 3,
+    "broad_final": {
+      "tests": 134.0,
+      "failures": 0.0,
+      "errors": 0.0,
+      "skipped": 0.0,
+      "time": 31.443
+    },
+    "focused_final_cases": 87,
+    "red_prelaunch_cancellation": {
+      "failed": 1
+    },
+    "mutation_final": {
+      "killed": 3,
+      "total": 3,
+      "source_sha256": "4a0b229db52ede7027fdd7eeae5b2232ed5d92cbb5681445399d3ddab0590f3c",
+      "source_unchanged": true
+    }
+  },
+  "source_hashes": {
+    "integrations/rea_bridge.py": "4a0b229db52ede7027fdd7eeae5b2232ed5d92cbb5681445399d3ddab0590f3c",
+    "marceloclaro/rea_cli.py": "2449378aed25e014a9157cc1cdc81e57b8baf55627e0baf48a40e63023faf3a4",
+    "marceloclaro/rea_reports.py": "fd3db0ab26b84f37d8fc2f6314d1d3d0454fd8d18e08621ebdcdf51db3c3b2cc",
+    "tests/test_r808_rea_bridge.py": "eae03c813203d65be94d1765df15050145cbee2f0780dac17513f099ba0eb2e7",
+    "tests/test_r823_ghidra_native_rea.py": "6b7365892770ad2d4133fe5b4ad89ae562c89ecb318c27e1bdc8e4d7bca7c38b",
+    "specs/SPEC-935-R823-ghidra-nativo-rea.md": "fa0cb5b1ac89a271bf7f2770ee158e53f2f0531bae332e88872c6bb0fa76d07a",
+    "docs/REA_GHIDRA.md": "af9143ac4e2c7bbd06318b6912babd9bc65ea1fb1ac3ef5e91f5dd53212ca55c"
+  },
+  "source_frozen": true,
+  "external_validation": false,
+  "limitations": [
+    "Static decompilation is not original source or dynamic execution.",
+    "Provider/session availability is distinct from optional REA client registrations.",
+    "Timeout cleanup removed native processes/project but did not receive graceful MCP close confirmation.",
+    "Primary gateway proof called the actual ecosystem_rea function and real REA MCP; raw Core launcher also performed separate real MCP handshake/session.",
+    "No book generation, evolution registry or Git index changes."
+  ],
+  "timestamp_final": 1791780655.3767664,
+  "test_logs": {
+    "red.log": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r823/red.log",
+    "red-launcher.log": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r823/red-launcher.log",
+    "red-close-contract.log": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r823/red-close-contract.log",
+    "red-prelaunch-cancel.log": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r823/red-prelaunch-cancel.log",
+    "broad-final.log": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r823/broad-final.log",
+    "broad-final.xml": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r823/broad-final.xml"
+  }
+}

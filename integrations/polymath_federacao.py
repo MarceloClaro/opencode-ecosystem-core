@@ -26,7 +26,9 @@ CLASSES: Dict[str, Dict[str, Any]] = {
         "https://github.com/mckinsey/causalnex"]},
     "formal-estavel": {"dias": 730, "urls": [
         "https://github.com/z3prover/z3", "https://github.com/sympy/sympy",
-        "https://github.com/reasonkit/reasonkit-core"]},
+        "https://github.com/reasonkit/reasonkit-core",
+        "https://github.com/leanprover/lean4", "https://github.com/leanprover-community/mathlib4",
+        "https://github.com/leanprover-community/batteries", "https://github.com/leanprover-community/aesop"]},
     "sintese-referencia": {"dias": 730, "urls": [
         "https://github.com/proportione/prisma", "https://github.com/cqh4046/prisma-traice",
         "https://github.com/ohdsi/evidencesynthesis", "https://github.com/aweai-team/aiscientist",

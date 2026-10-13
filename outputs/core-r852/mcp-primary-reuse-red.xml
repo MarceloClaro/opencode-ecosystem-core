@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="8.002" timestamp="2026-10-13T06:53:02.411457-03:00" hostname="OPENCODE"><testcase classname="tests.test_r852_rea_runtime_review" name="test_servidor_mcp_reutiliza_primario" time="1.169"><failure message="assert 2 == 1&#10; +  where 2 = len([&lt;test_r852_rea_runtime_review.test_servidor_mcp_reutiliza_primario.&lt;locals&gt;.Primary object at 0x7623f76d2ba0&gt;, &lt;test_r852_rea_runtime_review.test_servidor_mcp_reutiliza_primario.&lt;locals&gt;.Primary object at 0x7623f76f5310&gt;])">monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7623f88ccd60&gt;
+
+    def test_servidor_mcp_reutiliza_primario(monkeypatch):
+        from integrations.rea_assistant_mcp import create_mcp_server
+        from marceloclaro import orchestrator
+        created=[]
+        class Primary:
+            def __init__(self,**kwargs):created.append(self)
+            def rea_assistant_action(self,config):return {'success':True,'operation':config['operation']}
+        monkeypatch.setattr(orchestrator,'MarceloClaroOrchestrator',Primary)
+        server=create_mcp_server()
+        async def calls():
+            await server.call_tool('core_rea_status',{})
+            await server.call_tool('core_rea_status',{})
+        asyncio.run(calls())
+&gt;       assert len(created)==1
+E       assert 2 == 1
+E        +  where 2 = len([&lt;test_r852_rea_runtime_review.test_servidor_mcp_reutiliza_primario.&lt;locals&gt;.Primary object at 0x7623f76d2ba0&gt;, &lt;test_r852_rea_runtime_review.test_servidor_mcp_reutiliza_primario.&lt;locals&gt;.Primary object at 0x7623f76f5310&gt;])
+
+tests/test_r852_rea_runtime_review.py:116: AssertionError</failure></testcase></testsuite></testsuites>

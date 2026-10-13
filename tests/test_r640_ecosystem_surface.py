@@ -36,7 +36,7 @@ def test_mcp_lists_real_network_tools():
                       "ecosystem_knowledge_plan", "ecosystem_scientific_run",
                       "ecosystem_scientific_runtime", "ecosystem_dataset_download",
                       "ecosystem_dataset_custom", "ecosystem_scientific_plugins",
-                      "ecosystem_gemini_notebook"}
+                      "ecosystem_gemini_notebook", "ecosystem_rea", "ecosystem_browser", "ecosystem_text_spec"}
 
 
 def test_mcp_preserves_blocked_result_and_bounds(monkeypatch):
@@ -78,3 +78,19 @@ def test_cli_routes_whole_description_without_flags(monkeypatch, capsys):
     assert cli.main() == 0
     result = json.loads(capsys.readouterr().out)
     assert result["task"] == "revisar código" and result["ecosystem"] == "claude"
+
+
+def test_cli_e_mcp_transmitem_spec_explicitamente(monkeypatch,capsys):
+    from marceloclaro import cli
+    from integrations import ecosystem_mcp as surface
+    calls=[]
+    class BoundCoordinator(FakeCoordinator):
+        def run(self,*args,spec_id=None,**kwargs):
+            calls.append(spec_id)
+            return {'success':False,'status':'blocked','spec_id':spec_id}
+    monkeypatch.setattr(surface,'get_coordinator',lambda:BoundCoordinator())
+    monkeypatch.setattr(cli.sys,'argv',['marceloclaro','network','run','analisar','--spec','SPEC-935-R839'])
+    assert cli.main()==1
+    assert json.loads(capsys.readouterr().out)['spec_id']=='SPEC-935-R839'
+    result=asyncio.run(surface.ecosystem_run('analisar',spec_id='SPEC-935-R839'))
+    assert result['spec_id']=='SPEC-935-R839' and calls==['SPEC-935-R839']*2

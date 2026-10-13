@@ -1,0 +1,41 @@
+{
+  "round": "R826",
+  "status": "complete",
+  "recorded_at_utc": "2026-10-12T09:52:25.066910+00:00",
+  "source_frozen": true,
+  "source_hashes": {
+    "nano_orchestration/planner.py": "6a50719b29d161561a4668c87e668dd0db2b3285fdf9d2efb01ec6203bb3f03b",
+    "tests/test_r826_nano_positive_allocation.py": "ab5f8f73c39c38bc9b73ed6682acffbb4570fc23cde8f81cce011eabeb0dd3bb",
+    "specs/SPEC-935-R826-nano-positive-allocation.md": "c1349410bf32e3356aac7d39ccdcd40e95d9b26618d69dc68fd4c34c5f00959c"
+  },
+  "green_final": {
+    "tests": 171,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "red_initial": {
+    "tests": 83,
+    "failures": 81,
+    "errors": 0,
+    "skipped": 0
+  },
+  "red_checkpoint": {
+    "tests": 10,
+    "failures": 2,
+    "errors": 0,
+    "skipped": 0
+  },
+  "local_preview": "outputs/core-r826/real-local-preview.json",
+  "r826_cases": 95,
+  "legacy_nano_cases": 76,
+  "model_calls": 0,
+  "network_calls": 0,
+  "externally_validated": false,
+  "limitations": [
+    "Plano padrão possui seis seções e exige ao menos seis páginas; menos páginas exigem seções explícitas.",
+    "Orçamento máximo de planejamento: 50.000 blocos.",
+    "Checkpoints sem alocação persistida recebem validação estrutural com escopo explícito.",
+    "Estimativas de páginas/linhas/tokens não certificam extensão final ou qualidade científica."
+  ]
+}

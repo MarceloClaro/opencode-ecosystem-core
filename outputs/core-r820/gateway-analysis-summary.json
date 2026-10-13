@@ -1,0 +1,111 @@
+{
+  "server": "ecosystem-network",
+  "tool_count": 17,
+  "status": "completed",
+  "rea_tool_count": 170,
+  "compact_bytes": 3502,
+  "evidence_artifact": {
+    "path": "/home/marceloclaro/opencode-ecosystem-core/.opencode/rea/evidence/d51a9a9332de1138fb6d6c1178d30f6c345b3f42e4bbfe45ada37d7851a9a7fd.json",
+    "sha256": "d51a9a9332de1138fb6d6c1178d30f6c345b3f42e4bbfe45ada37d7851a9a7fd",
+    "bytes": 759664,
+    "complete": true
+  },
+  "metacognition": {
+    "observation_id": "6f43bc81-3fbb-4546-94d0-68122627f73f",
+    "persisted": true,
+    "scope_id": "d4961415c24dc7b2fbbe0b05c77730dad851e15458168c9e2d810ee669ee8c54",
+    "previous_observation_id": "783f1cee-2778-497d-9a83-869b6bf76131",
+    "state_transition": {
+      "from": "completed",
+      "to": "completed"
+    },
+    "confidence_promoted": false,
+    "externally_validated": false
+  },
+  "evidence": {
+    "evidence_id": "ev_73b442f1353e3bcaa49406675ad6c11c9c4188c95689fcaecb4878db620aeb85",
+    "operation": "analyze_javascript_application",
+    "confidence": "derived",
+    "authority": "shipped-artifact",
+    "limitations": [
+      "CommonJS and ESM binding relationships were recovered from inert syntax and resolved only within the inventoried artifact container.",
+      "JavaScript and HTML were parsed as inert text; bundle bootstrap code was never executed.",
+      "Static imports, entrypoints, workers, endpoints, and storage relationships do not prove runtime execution.",
+      "Static paths and relationships may remain unresolved when expressions are dynamic or obfuscated.",
+      "Webpack/Rspack factories were recovered from AST literals; REA did not invoke push handlers or bundle bootstrap code."
+    ],
+    "input_path": "/home/marceloclaro/opencode-ecosystem-core/research/producao_real/deploy_estatico_cloudflare/src",
+    "root_artifact_sha256": "6e8ee19b744bd97f56419b637d31b3f72f82d774f1e84d28ad7d7bd5667f0b76",
+    "statistics": {
+      "relevant_files": 1,
+      "nested_asar_containers": 0,
+      "text_bytes_read": 2309,
+      "invalid_utf8_files": 0,
+      "parsed_javascript_files": 1,
+      "visited_ast_nodes": 342,
+      "findings": 1,
+      "modules": 0,
+      "parse_failures": 0
+    },
+    "artifact_graph": {
+      "nodes": 4,
+      "edges": 3,
+      "coverage": {
+        "status": "complete",
+        "truncated": false,
+        "omitted_count": 0,
+        "limits": []
+      }
+    },
+    "semantic_graph": {
+      "nodes": 233,
+      "relations": 176,
+      "unknowns": 67,
+      "coverage": {
+        "status": "unknown",
+        "truncated": false,
+        "omitted_nodes": 0,
+        "omitted_relations": 0,
+        "limits": [],
+        "families": [
+          {
+            "fields": 5
+          },
+          {
+            "fields": 5
+          },
+          {
+            "fields": 5
+          },
+          {
+            "fields": 5
+          },
+          {
+            "fields": 5
+          },
+          {
+            "fields": 5
+          },
+          {
+            "fields": 5
+          },
+          {
+            "fields": 5
+          },
+          {
+            "fields": 5
+          },
+          {
+            "fields": 5
+          },
+          {
+            "fields": 5
+          },
+          {
+            "fields": 5
+          }
+        ]
+      }
+    }
+  }
+}

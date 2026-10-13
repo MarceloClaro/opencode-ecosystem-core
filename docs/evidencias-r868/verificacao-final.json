@@ -1,0 +1,120 @@
+{
+  "verification_scope": "local executed tests and bounded operational observations",
+  "externally_validated": false,
+  "full_suite": {
+    "scope": "all nodes collected from the complete tests directory, every file dispatched exactly once",
+    "started_at_utc": "2026-10-13T17:14:03.792033+00:00",
+    "ended_at_utc": "2026-10-13T17:25:26.347627+00:00",
+    "duration_seconds": 682.5556420310004,
+    "counts": {
+      "physical_cases": 7269,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 65,
+      "passed": 7204
+    },
+    "collected_nodes": 7269,
+    "source_files_hashed": 3904,
+    "source_changes_during_tests": [],
+    "successful": true
+  },
+  "junit": {
+    "sha256": "7f8014a10e8081b1cd1cfc7de577419734448899094cc1d0e1b90d9812c315f1",
+    "declared_aggregate": 7303,
+    "unrepresented_tests": 34,
+    "status": "PASS_WITH_SKIPS",
+    "independent_provenance_verified": false
+  },
+  "execution": {
+    "shards": 2,
+    "returncodes": [
+      0,
+      0
+    ],
+    "test_files": 438,
+    "counting": "7204 physical testcases passed; 65 skips; 34 aggregate subtests are not added to passed"
+  },
+  "index_binding": {
+    "matched_source_blobs": 356,
+    "mismatches": [],
+    "concurrent_worktree_changes_excluded": true
+  },
+  "orchestration": {
+    "scope": "one arithmetic task; read-only; fresh isolated metacognitive state; no REA target supplied",
+    "shared_primary": true,
+    "spec_created_before_execution": true,
+    "success": true,
+    "status": "completed",
+    "ecosystem": "codex",
+    "execution_mode": "cli-read-only-windows-interop",
+    "steps": 1,
+    "duration_seconds": 9.303285209000023,
+    "output": "15",
+    "exact_expected_output": true,
+    "error": "",
+    "externally_validated": false
+  },
+  "clean_export": {
+    "tree_before_final_documentation": "3f3f3f5021157847a2c82e5fe1410b9fda6aba79",
+    "npm_ci_ignore_scripts_returncode": 0,
+    "typescript_returncode": 0,
+    "targeted_passed": 81,
+    "python_runtime": "existing local runtime, not fresh dependency installation"
+  },
+  "evolution": {
+    "candidate_ledger_start": 703,
+    "candidate_ledger_end": 710,
+    "previous_prefix_preserved": true,
+    "scope": "staged ledger; concurrent working ledger updates are separate"
+  },
+  "book": {
+    "main_sha256": "c790e30604dbde5993283169fae5c8f50be4d23880c048fdfd169d573087fa7e",
+    "delivery_sha256": "c790e30604dbde5993283169fae5c8f50be4d23880c048fdfd169d573087fa7e",
+    "previous_delivery_preserved": true,
+    "pages": 388
+  },
+  "limitations": {
+    "autonomous_local_llm_rea_analysis_accepted": false,
+    "all_formats_and_engines_verified": false,
+    "remote_github_ci_executed": false,
+    "global_lint": {
+      "errors": 14195,
+      "status": "issues_found"
+    },
+    "guarantee_of_zero_defects": false
+  },
+  "full_receipt_sha256": "a052187d6081a6b1bd7f532bd145a15df9cc628618a9449c00db604416805bfe",
+  "software_delivery_gates": [
+    {
+      "spec_id": "SPEC-935-R868",
+      "scope": "isolated index-export execution, authenticated local RED and GREEN, no LLM inference",
+      "status": "completed",
+      "verified": true,
+      "red_history_valid": true,
+      "passed_criteria": 6,
+      "total_criteria": 6,
+      "red_receipt_id": "tdd-6b2ac03cd1fb480e9f255d99bfbb48a5",
+      "initial_green_receipt_id": "tdd-5c61685f19dd4d16b4f22e1e71bbbc0e",
+      "delivery_green_receipt_id": "tdd-a3961d544c044332be88edd529fcd70c",
+      "receipt_sha256": "4a043e6c62dfad21311c5a93eed5f43dbbc47610431b09525bee8913889f7cb8",
+      "historical_backfill": false,
+      "externally_validated": false
+    },
+    {
+      "spec_id": "SPEC-935-R869",
+      "scope": "isolated index-export execution, authenticated local RED and GREEN, no LLM inference",
+      "status": "completed",
+      "verified": true,
+      "red_history_valid": true,
+      "passed_criteria": 4,
+      "total_criteria": 4,
+      "red_receipt_id": "tdd-e508d7685f45433683b01ea413252d60",
+      "initial_green_receipt_id": "tdd-cf4082c9842e4efcb1972c4cdfbd3890",
+      "delivery_green_receipt_id": "tdd-83cd31459c314b3fa8febe34f67954cf",
+      "receipt_sha256": "52d781dfcfda7b5e963baf700180365c620daa81bf90f19b347a943dc26488ba",
+      "historical_backfill": false,
+      "externally_validated": false
+    }
+  ],
+  "isolated_candidate_source_blobs_match_index_after_gates": 497
+}

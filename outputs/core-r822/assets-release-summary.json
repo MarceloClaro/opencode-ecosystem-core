@@ -1,0 +1,59 @@
+{
+  "round": "R822",
+  "subscope": "cited_book_asset_directories",
+  "status": "sources_frozen_after_fixture_green",
+  "source_frozen": true,
+  "source_hashes": {
+    "livro-core/gen_inventario.py": "c75293c4db766442b0c6b2e467f3ba529eb271a8f874bd86c5158b1bf809c71d",
+    "tests/test_r814_livro_reconciliado.py": "92915db2104d59e1cc45192068e79995e1b4b0c164c5d5df832a55cfe7562bc9",
+    "specs/SPEC-935-R822-documentacao-estado-corrente.md": "e568f4478123a9b488007fde63cc24a60e08e5487cc5d2c80845164b039a891c"
+  },
+  "red_counterproof": {
+    "tests": 2,
+    "failures": 2,
+    "errors": 0,
+    "skipped": 0,
+    "returncode": 1,
+    "method": "Original file-only selector injected into loaded generator in an isolated pytest process; product source was not reverted.",
+    "evidence": "outputs/core-r822/assets-selector-red-final.xml"
+  },
+  "fixture_green": {
+    "tests": 13,
+    "passed": 13,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "deselected": 5,
+    "console_seconds": 0.82,
+    "returncode": 0,
+    "evidence": "outputs/core-r822/assets-green-final.xml"
+  },
+  "coverage": [
+    "Files inside explicitly cited directories, including nested PNG/PPTX/JSON and hidden manifest files.",
+    "Existing direct-file and opencode hashes are unchanged when their bytes are unchanged.",
+    "Inventory counts are unaffected by cited asset expansion.",
+    "Source keys are sorted and repeated collection is identical.",
+    "Unmentioned directories are excluded.",
+    "File/directory links escaping the workspace are not read; directory-link cycles are not traversed."
+  ],
+  "real_generator_executed": false,
+  "real_book_tex_modified": false,
+  "real_inventory_json_modified": false,
+  "fixture_root_only": true,
+  "diagnostic_attempt": {
+    "command": "python3 -B -m marceloclaro.cli doctor",
+    "before_product_edit": true,
+    "returncode": 0,
+    "captured_stdout_bytes": 0,
+    "counts_claimed_from_this_empty_log": false
+  },
+  "provenance_limits": [
+    "The initial RED selection did not produce a usable failure log; a later attempt reported missing test node IDs. Neither is counted as behavioral RED.",
+    "The valid RED is the isolated original-selector counterproof recorded separately above.",
+    "The earlier historical inventory run had 11 passes before the restored asset tests were present; final acceptance uses the 13-case run.",
+    "Only temporary fixture inventories were collected; primary compilation and real inventory regeneration remain with the root agent.",
+    "Nested symbolic directories are skipped even when their targets are inside the workspace.",
+    "Asset hashes inventory bytes and do not establish scientific validity or external execution."
+  ],
+  "externally_validated": false
+}

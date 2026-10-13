@@ -16,6 +16,8 @@ from __future__ import annotations
 
 import json
 import logging
+import math
+import copy
 import time
 import uuid
 from dataclasses import dataclass, field
@@ -47,18 +49,20 @@ class Evidence:
     text: str = ""
     source: str = ""              # DOI, PMID, URL
     source_type: str = ""         # pubmed, clinical_trial, kg, web
-    confidence: float = 0.5       # 0.0 a 1.0
-    timestamp: float = field(default_factory=time.time)
+    confidence: Optional[float] = 0.5  # escore interno; ausente na importação = desconhecido
+    timestamp: Optional[float] = field(default_factory=time.time)
     agent: str = ""               # qual agente registrou
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "id": self.id,
-            "text": self.text[:200],
+            "text": self.text,
+            "text_preview": self.text[:200],
             "source": self.source,
             "source_type": self.source_type,
             "confidence": self.confidence,
             "agent": self.agent,
+            "timestamp": self.timestamp,
         }
 
 
@@ -72,15 +76,21 @@ class Entity:
     aliases: List[str] = field(default_factory=list)
     metadata: Dict[str, Any] = field(default_factory=dict)
     evidence: List[str] = field(default_factory=list)  # Evidence ids
+    evidence_membership_known: bool = True
+    declared_evidence_count: Optional[int] = None
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "id": self.id,
             "name": self.name,
             "type": self.entity_type,
-            "description": self.description[:200],
-            "aliases": self.aliases[:3],
-            "evidence_count": len(self.evidence),
+            "description": self.description,
+            "description_preview": self.description[:200],
+            "aliases": list(self.aliases),
+            "metadata": copy.deepcopy(self.metadata),
+            "evidence": list(self.evidence) if self.evidence_membership_known else None,
+            "evidence_count": (len(self.evidence) if self.evidence_membership_known else self.declared_evidence_count),
+            "evidence_membership": "known" if self.evidence_membership_known else "unknown",
         }
 
 
@@ -91,9 +101,11 @@ class Relation:
     source_id: str = ""
     target_id: str = ""
     relation_type: str = "ASSOCIATED_WITH"
-    weight: float = 1.0
+    weight: Optional[float] = 1.0
     evidence: List[str] = field(default_factory=list)
     bidirectional: bool = False
+    evidence_membership_known: bool = True
+    declared_evidence_count: Optional[int] = None
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -102,7 +114,10 @@ class Relation:
             "target": self.target_id,
             "type": self.relation_type,
             "weight": self.weight,
-            "evidence_count": len(self.evidence),
+            "bidirectional": self.bidirectional,
+            "evidence": list(self.evidence) if self.evidence_membership_known else None,
+            "evidence_count": (len(self.evidence) if self.evidence_membership_known else self.declared_evidence_count),
+            "evidence_membership": "known" if self.evidence_membership_known else "unknown",
         }
 
 
@@ -221,7 +236,7 @@ class EvidenceGraph:
             if (existing and existing.source_id == source_id
                     and existing.target_id == target_id
                     and existing.relation_type == relation_type):
-                existing.weight = max(existing.weight, weight)
+                existing.weight = weight if existing.weight is None else max(existing.weight, weight)
                 return existing
 
         relation = Relation(
@@ -364,11 +379,23 @@ class EvidenceGraph:
                     if neighbor not in visited:
                         frontier.append((neighbor, depth + 1))
 
+        reference_ids = {
+            evidence_id for item in list(nodes.values()) + list(edges.values())
+            for evidence_id in item.evidence
+        }
+        unresolved = sorted(reference_ids - self.evidence_store.keys())
+        membership = ("unknown" if any(not item.evidence_membership_known
+                        for item in list(nodes.values()) + list(edges.values())) else
+                      "partial" if unresolved else "known")
         return {
             "entities": [e.to_dict() for e in nodes.values()],
             "relations": [r.to_dict() for r in edges.values()],
             "total_entities": len(nodes),
             "total_relations": len(edges),
+            "evidence": {eid: self.evidence_store[eid].to_dict()
+                         for eid in sorted(reference_ids) if eid in self.evidence_store},
+            "unresolved_evidence_ids": unresolved,
+            "evidence_membership": membership,
         }
 
     # ---- Estatisticas ----
@@ -399,6 +426,118 @@ class EvidenceGraph:
         return round(total / len(self.entities), 2)
 
     # ---- Exportacao ----
+
+    @classmethod
+    def from_dict(cls, payload: Dict[str, Any]) -> "EvidenceGraph":
+        """Restaura IDs e registros existentes, sem criar fatos ou evidências.
+
+        Contagens de exportações antigas não permitem inferir vínculos. Nesses
+        casos a associação é desconhecida. IDs duplicados conflitantes e pesos
+        não finitos são rejeitados em vez de corrigidos silenciosamente.
+        """
+        if not isinstance(payload, dict):
+            raise ValueError("grafo exportado deve ser um objeto")
+
+        def records(value):
+            if isinstance(value, dict):
+                items = value.items()
+            elif isinstance(value, list):
+                items = ((None, item) for item in value)
+            else:
+                raise ValueError("coleção do grafo deve ser lista ou objeto")
+            for key, item in items:
+                if not isinstance(item, dict):
+                    raise ValueError("registro do grafo inválido")
+                identifier = item.get("id", key)
+                if not isinstance(identifier, str) or not identifier.strip():
+                    raise ValueError("registro sem identificador original")
+                if key is not None and key != identifier:
+                    raise ValueError("identificador difere da chave exportada")
+                yield identifier, item
+
+        def text(value, field):
+            if not isinstance(value, str):
+                raise ValueError(f"{field} deve ser texto")
+            return value
+
+        def number(value, field, unit=False):
+            if value is None:
+                return None
+            if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
+                raise ValueError(f"{field} deve ser número finito")
+            if unit and not 0 <= value <= 1:
+                raise ValueError(f"{field} fora do intervalo de 0 a 1")
+            return value
+
+        def references(item):
+            refs = item.get("evidence")
+            known = isinstance(refs, list) and item.get("evidence_membership") != "unknown"
+            if refs is not None and not isinstance(refs, list):
+                raise ValueError("referências de evidência devem ser uma lista")
+            if any(not isinstance(ref, str) or not ref.strip() for ref in refs or []):
+                raise ValueError("identificador de evidência inválido")
+            declared = item.get("evidence_count")
+            if declared is not None and (isinstance(declared, bool) or not isinstance(declared, int) or declared < 0):
+                raise ValueError("contagem declarada de evidência inválida")
+            return list(dict.fromkeys(refs or [])) if known else [], known, declared
+
+        def insert(store, identifier, record):
+            if identifier in store and store[identifier] != record:
+                raise ValueError(f"identificador duplicado conflitante: {identifier}")
+            store[identifier] = record
+
+        graph = cls()
+        for identifier, item in records(payload.get("evidence", {})):
+            insert(graph.evidence_store, identifier, Evidence(
+                id=identifier, text=text(item.get("text", ""), "evidência"),
+                source=text(item.get("source", ""), "fonte"),
+                source_type=text(item.get("source_type", ""), "tipo de fonte"),
+                agent=text(item.get("agent", ""), "agente"),
+                confidence=number(item.get("confidence"), "confiança", unit=True),
+                timestamp=number(item.get("timestamp"), "instante"),
+            ))
+        for identifier, item in records(payload.get("entities", payload.get("nodes", {}))):
+            refs, known, declared = references(item)
+            aliases = item.get("aliases", [])
+            metadata = item.get("metadata", {})
+            if not isinstance(aliases, list) or any(not isinstance(alias, str) for alias in aliases):
+                raise ValueError("aliases devem ser textos")
+            if not isinstance(metadata, dict):
+                raise ValueError("metadados devem ser um objeto")
+            entity = Entity(
+                id=identifier, name=text(item.get("name", item.get("label", item.get("title", identifier))), "nome"),
+                entity_type=text(item.get("type", item.get("entity_type", item.get("group", "concept"))), "tipo"),
+                description=text(item.get("description", ""), "descrição"),
+                aliases=list(aliases), metadata=copy.deepcopy(metadata), evidence=refs,
+                evidence_membership_known=known, declared_evidence_count=declared,
+            )
+            insert(graph.entities, identifier, entity)
+        for entity in graph.entities.values():
+            graph._name_index.setdefault(entity.name.lower().strip(), entity.id)
+            graph._type_index.setdefault(entity.entity_type, []).append(entity.id)
+            graph._adjacency[entity.id] = []
+        for identifier, item in records(payload.get("relations", payload.get("edges", {}))):
+            source = item.get("source", item.get("source_id", item.get("from")))
+            target = item.get("target", item.get("target_id", item.get("to")))
+            if not isinstance(source, str) or not isinstance(target, str) or source not in graph.entities or target not in graph.entities:
+                raise ValueError("relação aponta para entidade ausente")
+            refs, known, declared = references(item)
+            bidirectional = item.get("bidirectional", False)
+            if not isinstance(bidirectional, bool):
+                raise ValueError("direção da relação inválida")
+            relation = Relation(
+                id=identifier, source_id=source, target_id=target,
+                relation_type=text(item.get("type", item.get("relation_type", item.get("label", "UNKNOWN"))), "tipo de relação"),
+                weight=number(item.get("weight", item.get("width")), "peso"),
+                evidence=refs, bidirectional=bidirectional,
+                evidence_membership_known=known, declared_evidence_count=declared,
+            )
+            insert(graph.relations, identifier, relation)
+        for relation in graph.relations.values():
+            graph._adjacency[relation.source_id].append(relation.id)
+            if relation.bidirectional:
+                graph._adjacency[relation.target_id].append(relation.id)
+        return graph
 
     def to_dict(self) -> Dict[str, Any]:
         """Exporta grafo completo."""

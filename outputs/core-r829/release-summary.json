@@ -1,0 +1,130 @@
+{
+  "status": "locally_executed",
+  "externally_validated": false,
+  "human_final_decision": true,
+  "terminal_green": {
+    "tests": 20,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "evidence_roundtrip": {
+    "round": "R829",
+    "scope": "evidence graph exported browser fidelity",
+    "verification": "local_operation",
+    "externally_validated": false,
+    "red": {
+      "tests": 12,
+      "failures": 12,
+      "errors": 0,
+      "skipped": 0
+    },
+    "green": {
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "related": {
+      "tests": 91,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "mutations": {
+      "method": "isolated in-memory mutation; production files unchanged",
+      "mutants": [
+        {
+          "mutant": "zero_becomes_one",
+          "returncode": 1,
+          "detected": true,
+          "test": "test_reidratacao_preserva_ids_pesos_e_grafo_inteiro[0.0]"
+        },
+        {
+          "mutant": "references_discarded",
+          "returncode": 1,
+          "detected": true,
+          "test": "test_exportacao_publica_preserva_referencias_conteudo_e_instante"
+        },
+        {
+          "mutant": "count_shared_twice",
+          "returncode": 1,
+          "detected": true,
+          "test": "test_browser_braf_tem_tres_evidencias_reais_sem_dupla_contagem"
+        }
+      ]
+    },
+    "source_sha256": {
+      "agentic_science_v2/evidence_graph.py": "dc2a38eb9281b71cfbaf203051393ddefc696d3c4419e6c7e33c6bd3fa021afd",
+      "webapp/pipeline_helpers.py": "746fd019817abec81680d5e690a656f31480dc510453faed16f08fb797eba4ce",
+      "tests/test_r829_evidence_roundtrip.py": "65177003083f04ce4ec0c388a7b4e384d7bfca14cef65a27be9a831443e0896c"
+    },
+    "functional_result": {
+      "entities": 2,
+      "relations": 1,
+      "unique_evidence": 3,
+      "relation_weight": 0.0,
+      "membership": "known"
+    },
+    "limits": [
+      "Legacy export without membership cannot recover association from counts alone.",
+      "Legacy truncated evidence text cannot be reconstructed.",
+      "These test records do not validate the biomedical statements.",
+      "No global suite or external validation was executed by this subtask."
+    ]
+  },
+  "browser": {
+    "status": "passed",
+    "real_browser": true,
+    "externally_validated": false,
+    "before": "74ddb8522a27750c68f3dbdd6aadfde42fc2128dfaaee57332e932521383c901",
+    "after": "74ddb8522a27750c68f3dbdd6aadfde42fc2128dfaaee57332e932521383c901",
+    "memory_unchanged": true,
+    "errors": [],
+    "facts": [
+      {
+        "step": "observed",
+        "mode": "DADOS LOCAIS OBSERVADOS"
+      },
+      {
+        "step": "real_search",
+        "result": "Última busca: 3 registros encontrados. Operação lexical local; inferência não executada."
+      },
+      {
+        "step": "demo",
+        "mode": "DEMONSTRAÇÃO — DADOS SIMULADOS"
+      },
+      {
+        "step": "paused_selection",
+        "details": "Tipo: Consulta\nOrigem: Demonstração\nID original: q\nRelevância: não registrada\nMétrica calibrada: não\n{}"
+      },
+      {
+        "step": "return_observed",
+        "mode": "DADOS LOCAIS OBSERVADOS"
+      }
+    ]
+  },
+  "proof_images": {
+    "outputs/core-r829/ui-error.png": "139174d276a4a1ed0fed2bfecd0b15a91d23035720b49b6e660aa95d3547044b",
+    "outputs/core-r829/ui-real-search.png": "bc2c7758fef43e5c2ca78922f7e13680684554180e63fd672537b898b91ef85c",
+    "outputs/core-r829/ui-demo.png": "518f3306b617efa306066e446ba1f8db9acc83dc499b694af7c777ded41b8dd6",
+    "outputs/core-r829/ui-observed-network.png": "7f62ad778085b9149cf80e29d1ffb75c5227459cbc401853657a44f5eb04b8d5",
+    "outputs/core-r829/ui-observed.png": "190aceeed5598e99e2d5fea405ad9bba9c9bfebd33213c57e82507ed80e7b409"
+  },
+  "source_hashes": {
+    "webapp/memory_network_visualizer.py": "491d8fc93d0f208128c52d2c8e8f10bf0d039c3d40edfdfd92d499f58d9596b3",
+    "webapp/memory_network_view.py": "a3a9dc9775e86314875af2b8816ceb715904aa3c75fdd200bf07b5620dd551a4",
+    "webapp/memory_network_streamlit.py": "ad340ad9b88c166237110bd837c728b158866f15bf8eea37bb5f451fdcfea2ab",
+    "marceloclaro/orchestrator.py": "16bbf41150f0eb4418a636f032f4a0b42d24953bb9c2e6e15310ac91a2a374bc",
+    "mci/metabus.py": "d59df0532771d765c86a66d9a10fb822df8b4f7453af27d96b223037b3a264fc",
+    "webapp/app.py": "d091c5937dc826d7622fab03ed8e11fce30af0056bf957a0e77668caf8a4a975",
+    "webapp/pipeline_helpers.py": "746fd019817abec81680d5e690a656f31480dc510453faed16f08fb797eba4ce",
+    "agentic_science_v2/evidence_graph.py": "dc2a38eb9281b71cfbaf203051393ddefc696d3c4419e6c7e33c6bd3fa021afd"
+  },
+  "limits": [
+    "Real query is lexical retrieval, not LLM inference.",
+    "Window five seconds; selection100 nodes/200edges; canvas eight nodes/type; terminal35nodes/12edges.",
+    "Browser tests performed local query, demo, pause, node selection and return to observed; no external validation.",
+    "Initial browser failures led to score-null and structured legacy-memory fixes; subsequent probe errors were DOM refresh/hidden styled radio targeting."
+  ]
+}

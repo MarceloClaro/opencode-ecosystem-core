@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="3" time="3.858" timestamp="2026-10-13T06:32:03.004809-03:00" hostname="OPENCODE"><testcase classname="tests.test_r852_rea_runtime_review" name="test_lancamento_recusa_configuracao_resolvida_divergente[endpoint]" time="0.010"><failure message="assert False is True">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-1020/test_lancamento_recusa_configu0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7d5252c24b00&gt;
+field = 'endpoint'
+
+    @pytest.mark.parametrize('field',['endpoint','mcp-command','primary-permission'])
+    def test_lancamento_recusa_configuracao_resolvida_divergente(tmp_path,monkeypatch,field):
+        module=importlib.import_module('integrations.rea_assistant')
+        setup_local_agent(root=tmp_path,model='local-model')
+        binary=tmp_path/'opencode';binary.write_text('placeholder');binary.chmod(0o700)
+        monkeypatch.setenv('OPENCODE_BIN',str(binary))
+        def run(command,**kwargs):
+            config=json.loads(kwargs['env']['OPENCODE_CONFIG_CONTENT'])
+            if field=='endpoint':config['provider']['rea_local']['options']['baseURL']='https://remote.invalid/v1'
+            elif field=='mcp-command':config['mcp']['rea-local-assistant']['command']=['/local/foreign-client']
+            else:config['agent']['marceloclaro']['permission']['*']='allow'
+            kwargs['stdout'].write(json.dumps(config));kwargs['stdout'].flush()
+            return type('Done',(),{'returncode':0,'stderr':''})()
+        monkeypatch.setattr(module.subprocess,'run',run)
+        rejected=False
+        try:api('launch_local_agent')(root=tmp_path,check_only=True)
+        except ValueError:rejected=True
+&gt;       assert rejected is True
+E       assert False is True
+
+tests/test_r852_rea_runtime_review.py:89: AssertionError</failure></testcase><testcase classname="tests.test_r852_rea_runtime_review" name="test_lancamento_recusa_configuracao_resolvida_divergente[mcp-command]" time="0.004"><failure message="assert False is True">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-1020/test_lancamento_recusa_configu1')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7d5252c248a0&gt;
+field = 'mcp-command'
+
+    @pytest.mark.parametrize('field',['endpoint','mcp-command','primary-permission'])
+    def test_lancamento_recusa_configuracao_resolvida_divergente(tmp_path,monkeypatch,field):
+        module=importlib.import_module('integrations.rea_assistant')
+        setup_local_agent(root=tmp_path,model='local-model')
+        binary=tmp_path/'opencode';binary.write_text('placeholder');binary.chmod(0o700)
+        monkeypatch.setenv('OPENCODE_BIN',str(binary))
+        def run(command,**kwargs):
+            config=json.loads(kwargs['env']['OPENCODE_CONFIG_CONTENT'])
+            if field=='endpoint':config['provider']['rea_local']['options']['baseURL']='https://remote.invalid/v1'
+            elif field=='mcp-command':config['mcp']['rea-local-assistant']['command']=['/local/foreign-client']
+            else:config['agent']['marceloclaro']['permission']['*']='allow'
+            kwargs['stdout'].write(json.dumps(config));kwargs['stdout'].flush()
+            return type('Done',(),{'returncode':0,'stderr':''})()
+        monkeypatch.setattr(module.subprocess,'run',run)
+        rejected=False
+        try:api('launch_local_agent')(root=tmp_path,check_only=True)
+        except ValueError:rejected=True
+&gt;       assert rejected is True
+E       assert False is True
+
+tests/test_r852_rea_runtime_review.py:89: AssertionError</failure></testcase><testcase classname="tests.test_r852_rea_runtime_review" name="test_lancamento_recusa_configuracao_resolvida_divergente[primary-permission]" time="0.003"><failure message="assert False is True">tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-1020/test_lancamento_recusa_configu2')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7d5252c59010&gt;
+field = 'primary-permission'
+
+    @pytest.mark.parametrize('field',['endpoint','mcp-command','primary-permission'])
+    def test_lancamento_recusa_configuracao_resolvida_divergente(tmp_path,monkeypatch,field):
+        module=importlib.import_module('integrations.rea_assistant')
+        setup_local_agent(root=tmp_path,model='local-model')
+        binary=tmp_path/'opencode';binary.write_text('placeholder');binary.chmod(0o700)
+        monkeypatch.setenv('OPENCODE_BIN',str(binary))
+        def run(command,**kwargs):
+            config=json.loads(kwargs['env']['OPENCODE_CONFIG_CONTENT'])
+            if field=='endpoint':config['provider']['rea_local']['options']['baseURL']='https://remote.invalid/v1'
+            elif field=='mcp-command':config['mcp']['rea-local-assistant']['command']=['/local/foreign-client']
+            else:config['agent']['marceloclaro']['permission']['*']='allow'
+            kwargs['stdout'].write(json.dumps(config));kwargs['stdout'].flush()
+            return type('Done',(),{'returncode':0,'stderr':''})()
+        monkeypatch.setattr(module.subprocess,'run',run)
+        rejected=False
+        try:api('launch_local_agent')(root=tmp_path,check_only=True)
+        except ValueError:rejected=True
+&gt;       assert rejected is True
+E       assert False is True
+
+tests/test_r852_rea_runtime_review.py:89: AssertionError</failure></testcase></testsuite></testsuites>

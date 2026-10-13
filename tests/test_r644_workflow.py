@@ -66,6 +66,18 @@ class CoordinatorDouble:
                 "output": f"Entrega {len(self.calls)}"}
 
 
+def test_workflow_encaminha_spec_e_vincula_checkpoint():
+    store=MemoryStore()
+    class BoundCoordinator(CoordinatorDouble):
+        def run(self,*args,spec_id=None,**kwargs):
+            assert spec_id=='SPEC-935-R839'
+            return super().run(*args,**kwargs)
+    coordinator=BoundCoordinator(store)
+    result=WorkflowCoordinator(coordinator,store).run([{'id':'a','task':'analisar','spec_id':'SPEC-935-R839'}])
+    assert result['status']=='completed'
+    assert result['definition']['nodes'][0]['spec_id']=='SPEC-935-R839'
+
+
 @pytest.fixture()
 def setup():
     store = MemoryStore()
@@ -379,7 +391,8 @@ def test_workflow_reuses_real_autonomous_a2a_lifecycle_with_mocked_executor(tmp_
     metabus.subscribe("task.volunteer", blackboard._handle_volunteer)
     metabus.subscribe("task.complete", blackboard._handle_completion)
     metabus.subscribe("metacognition.reflect_request", reflexion_engine._handle_reflection)
-    orchestrator = MarceloClaroOrchestrator(auto_load_agents=False)
+    # Transporte hermético explícito; sem alegar entrega de software validada.
+    orchestrator = MarceloClaroOrchestrator(auto_load_agents=False, strict_sdd=False)
     orchestrator.attention_router._semantic_matcher = False
     orchestrator.reduction_layer = SimpleNamespace(route=lambda _: {"confidence": 0.0})
     orchestrator.trust = SimpleNamespace(execute=lambda _: SimpleNamespace(allowed=True, reason="local", trust_score=0.8),

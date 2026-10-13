@@ -80,7 +80,9 @@ def test_structural_counts_are_consistent_in_operational_documents() -> None:
     """As contagens expostas vêm da configuração e do diagnóstico atuais."""
     config = json.loads((ROOT / "opencode.json").read_text(encoding="utf-8"))
     assert "ecosystem-network" in config["mcp"]
-    markers = ("20 checks", f"{len(config['mcp'])} MCPs", f"{len(config['agent'])} agentes")
+    from marceloclaro.doctor import run_doctor
+    markers = (f"{len(run_doctor()['checks'])} checks",
+               f"{len(config['mcp'])} MCPs", f"{len(config['agent'])} agentes")
     for relative_path in DOC_PATHS:
         content = _document(relative_path)
         for marker in markers:

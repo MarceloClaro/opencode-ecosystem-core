@@ -30,7 +30,7 @@ metacognitiva exige para declarar qualquer coisa \emph{verificada}.
 sabe}: guardar reflexões, lições e confianças por domínio, e reutilizar esse
 conhecimento no próximo ciclo. No Core, isso é implementado por \pth{mci/metabus.py},
 que combina um barramento de eventos (publicar/subscrever) com uma memória
-persistente em \pth{shared\_memory.json}.
+persistente em \pth{shared_memory.json}.
 \end{conceito}
 
 \par\smallskip
@@ -145,24 +145,35 @@ MetaBus (\cod{mci_get_memory} permite inspecionar o histórico).
 \end{enumerate}
 \end{processo}
 
-\begin{flowch}[Delegação por quadro (Blackboard)]{\pth{mci/blackboard.py}; evento \cod{task.completed}}
-\matrix[matrix of nodes,name=bb,row sep=5mm,column sep=5mm,nodes={fn},ampersand replacement=\&]{
- |[fne]|Publica \nodep{post_task} \& |[fns]|Match por \nodep{capabilities} \& |[fns]|Avalia \nodep{fitness} \\
- |[fns]|Agente voluntário \& |[fde]|Fitness \& |[fns]|Reflexão no \nodep{MetaBus} \\
+\begin{flowch}[Delegação por quadro (Blackboard)]{\pth{mci/blackboard.py}; eventos de tarefa e reflexão}
+\matrix[matrix of nodes,name=bb,row sep=3mm,nodes={fn},ampersand replacement=\&]{
+ |[fne]|Publica \nodep{task.post} \\
+ |[fde]|Disponível e todas as capacidades? \\
+ |[fns]|Anuncia candidatos: \nodep{task.cfp} \\
+ |[fns]|Voluntariado e atribuição \\
+ |[fns]|Execução e \nodep{task.complete} \\
+ |[fns]|Atualiza estado e libera agente \\
+ |[fne]|Solicita reflexão no MetaBus \\
 };
-\draw[seta] (bb-1-1)--(bb-1-2);
-\draw[seta] (bb-1-2)--(bb-1-3);
-\draw[seta] (bb-1-3)--(bb-2-3);
-\draw[seta] (bb-2-3)--(bb-2-1);
-\draw[seta] (bb-2-1)--(bb-1-1);
-\draw[seta,plumAccent,dashed] (bb-1-2.north) to[out=90,in=90,looseness=1.6]
-  node[above=2pt,fill=papel,inner sep=1pt,text=plumAccent,font=\scriptsize]{sem match}
-  (bb-1-1.north);
+\draw[seta] (bb-1-1)--(bb-2-1);
+\draw[seta] (bb-2-1)--(bb-3-1);
+\draw[seta] (bb-3-1)--(bb-4-1);
+\draw[seta] (bb-4-1)--(bb-5-1);
+\draw[seta] (bb-5-1)--(bb-6-1);
+\draw[seta] (bb-6-1)--(bb-7-1);
+\node[fn,anchor=west,right=8mm of bb-2-1,font=\tiny]{sem elegível: permanece aberta};
 \end{flowch}
 
 \begin{descricao}
-\textbf{Como funciona e por quê.} O desenho mostra três papéis: \emph{controlador}, \emph{Blackboard} e \emph{solucionadores}. A seta do controlador para o quadro representa uma \emph{chamada para propostas (CFP)}; a seta de volta representa a \emph{proposta de um agente voluntário}. O ponto central é que o \emph{solucionador} \textbf{não fala diretamente com o controlador}, mas com o quadro. Essa comunicação indireta permite que um terceiro participe do processo sem integração prévia.
-\textbf{Justificativa.} O Contract Net Protocol fornece a gramática dessa conversa, formalizada por Smith: um gerente anuncia a tarefa, os solucionadores tomam conhecimento dela e apresentam propostas; então, o gerente aceita uma delas. A vantagem mensurável é a \textbf{escalabilidade}: o custo de adicionar um solver é a mensagem, não a integração -- que é exatamente a propriedade que o Blackboard herda e que a chamada direta de função não tem \citref{SMITH, R. G. The Contract Net Protocol: high-level communication and control in a distributed problem solver. \emph{IEEE Transactions on Computers}, v.~C-29, n.~12, p.~1104-1113, 1980}{10.1109/TC.1980.1675516}{O Contract Net Protocol fornece a gramática dessa conversa, formalizada por Smith: um gerente anuncia a tarefa, os solucionadores tomam conhecimento dela e apresentam propostas; então, o gerente aceita uma delas. }{The contract net protocol has been developed to specify problem-solving communication and control for nodes in a distributed problem solver}{O protocolo da rede de contratos foi desenvolvido para especificar comunicação e controle de resolução de problemas para nós em um solucionador distribuído de problemas.}{SMITH, 1980, p.~1104--1113}.\end{descricao}
+\textbf{Como funciona e por quê.} task.post cria a tarefa; o matching exige disponibilidade e todas as capacidades requeridas. task.cfp anuncia candidatos elegíveis; task.volunteer leva à atribuição. A conclusão libera o agente e publica um pedido de reflexão.
+\textbf{Justificativa.} Separar anúncio, atribuição e conclusão permite rastrear quem assumiu uma tarefa e por que um anúncio sem resposta ainda não é execução.
+\textbf{Limite.} O fluxo é orientado a eventos, e não um percurso obrigatório por todos os agentes. Matching e confiança interna não atestam qualidade científica.
+\end{descricao}
+\fontecore{mci/blackboard.py}{Blackboard}
+
+
+\noindent\textit{Contexto bibliográfico geral, sem certificação desta rota.} \citref{SMITH, R. G. The Contract Net Protocol: high-level communication and control in a distributed problem solver. \emph{IEEE Transactions on Computers}, v.~C-29, n.~12, p.~1104-1113, 1980}{10.1109/TC.1980.1675516}{Enquadramento teórico geral; a implementação desta rota é conferida na fonte primária local. Este artigo não certifica o funcionamento nem o desempenho do Core.}{The contract net protocol has been developed to specify problem-solving communication and control for nodes in a distributed problem solver}{O protocolo da rede de contratos foi desenvolvido para especificar comunicação e controle de resolução de problemas para nós em um solucionador distribuído de problemas.}{SMITH, 1980, p.~1104--1113}
+
 
 \begin{resultado}
 \emph{Fatos mensuráveis do ecossistema:} a superfície MCP

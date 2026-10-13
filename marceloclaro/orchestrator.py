@@ -21,6 +21,7 @@ import math
 import uuid
 import time
 import logging
+from threading import Lock
 from dataclasses import dataclass
 from typing import Any, Callable, Dict, Iterable, List, Mapping, Optional, Sequence, Tuple
 
@@ -47,7 +48,7 @@ from marceloclaro.helpdesk import run_helpdesk
 from marceloclaro.inspiration_audit import audit_inspirations as run_inspiration_audit
 from trust import create_trust_engine
 from economy import TokenEconomy
-from scanners import diagnostic_pipeline
+from scanners.pipeline import diagnostic_pipeline
 from academic import MaswosPipeline
 from reasoning import multi_reasoning, run_experiment_suite
 from reasoning.production_scaffolds import audit_scientific_manuscript
@@ -147,23 +148,14 @@ class MarceloClaroOrchestrator:
             f"{self.id}:metacognition.reflected",
         )
 
-        if auto_load_agents:
-            register_all_agents(metabus)
-
-        # Catálogo de 128+ agentes especializados (portados do OpenCode_Ecosystem)
+        # Leituras leves e coordenação compartilham o mesmo primário. O catálogo
+        # pode ser ativado depois sem substituir os callbacks registrados acima.
+        self._agents_load_lock = Lock()
+        self._agents_loaded = False
         self.catalog_size = 0
-        if auto_load_agents:
-            try:
-                self.catalog_size = register_catalog_agents(metabus)
-                logger.info(f"[{self.id}] Catálogo registrado: {self.catalog_size} agentes especializados")
-            except Exception as exc:
-                logger.warning(f"[{self.id}] Falha ao registrar catálogo: {exc}")
-
-        # MIRA R126: o executor só é registrado no modo normal; a opção
-        # auto_load_agents=False continua útil para testes e chamadas leves.
         self._mira_agent = None
         if auto_load_agents:
-            self.register_mira_agent()
+            self.ensure_agents_loaded()
 
         # Loop Engineering R109: registro idempotente e independente do
         # carregamento do catálogo, para que describe_scientific_loop() seja
@@ -210,6 +202,101 @@ class MarceloClaroOrchestrator:
     # ------------------------------------------------------------------
     # 1. PERCEPÇÃO METACOGNITIVA
     # ------------------------------------------------------------------
+    def tdd_history_probe(self, spec_id: str, phase: str = "red", timeout_seconds: int = 1200) -> Dict[str, Any]:
+        """Registra uma fase pytest real pelo primário; não importa claims."""
+        from sdd.tdd_history import TDDHistory
+        registry = getattr(spec_verifier, "registry", spec_registry)
+        spec = registry.get(spec_id)
+        if spec is None:
+            raise ValueError("Especificação não encontrada.")
+        history = getattr(self, "_tdd_history", None) or TDDHistory()
+        receipt = history.run(spec, phase=phase, timeout_seconds=timeout_seconds)
+        result = {"spec_id": spec_id, "phase": receipt.phase, "accepted": receipt.accepted,
+                  "receipt_id": receipt.receipt_id, "receipt_path": receipt.receipt_path,
+                  "verification": "local_pytest_execution", "externally_validated": False}
+        if phase == "green":
+            result["red_green_pair"] = history.validate_pair(spec, receipt)
+        metabus.memory.record_observation(self.id, f"histórico TDD {spec_id}", result)
+        return result
+
+    def ensure_agents_loaded(self) -> None:
+        """Ativa uma vez os agentes neste primário, sem criar outro orquestrador."""
+        with self._agents_load_lock:
+            if self._agents_loaded:
+                return
+            register_all_agents(metabus)
+            self.catalog_size = register_catalog_agents(metabus)
+            self.register_mira_agent()
+            self._agents_loaded = True
+            logger.info(f"[{self.id}] Catálogo registrado: {self.catalog_size} agentes especializados")
+
+    def create_text_task_spec(self, task: str, criteria: List[str]) -> Dict[str, Any]:
+        """Especifica análise/revisão textual antes da execução; não aceita software."""
+        if not isinstance(task, str) or not task.strip() or len(task) > 2000:
+            raise ValueError("Tarefa textual deve conter entre 1 e 2000 caracteres úteis.")
+        if (not isinstance(criteria, list) or not 1 <= len(criteria) <= 10
+                or any(not isinstance(item, str) or not item.strip() or len(item) > 1000 for item in criteria)):
+            raise ValueError("Declare entre 1 e 10 critérios textuais não vazios, de até 1000 caracteres.")
+        spec = spec_registry.create_task_spec(task.strip(), task.strip(), [item.strip() for item in criteria])
+        return {"success": True, "spec_id": spec.spec_id, "task": spec.objective,
+                "criteria": [item.description for item in spec.criteria],
+                "verification": "criteria_only", "software_delivery": False,
+                "externally_validated": False,
+                "limitations": ["Critérios de texto são heurísticos; não comprovam qualidade ou correção.",
+                                "ID válido nesta sessão MCP; não constitui entrega de software nem substitui RED→GREEN."]}
+
+    def sdd_preflight(self, spec_id: str) -> Dict[str, Any]:
+        """Confere vínculo e RED antes de autorizar um executor de software."""
+        registry = getattr(spec_verifier, "registry", spec_registry)
+        spec = registry.get(spec_id)
+        if spec is None:
+            return {"ready": False, "error": "spec_not_found"}
+        if spec.test_file or spec.requires_trusted_test_evidence:
+            from pathlib import Path
+            from sdd import spec_engine as spec_module
+            from sdd.tdd_history import TDDHistory
+            history = getattr(self, "_tdd_history", None) or TDDHistory()
+            if type(history) is not TDDHistory or history.root != Path(spec_module.REPO_ROOT).resolve():
+                return {"ready": False, "red_history_required": True, "error": "history_scope_invalid"}
+            check = history.preflight(spec)
+            return {"ready": check.get("verified") is True, "red_history_required": True, "history": check}
+        return {"ready": True, "red_history_required": False, "verification_scope": "criteria_only"}
+
+    def memory_network_query(self, query: str, limit: int = 10) -> Dict[str, Any]:
+        """Busca lexical real, com eventos observáveis; não inicia inferência."""
+        from webapp.memory_network_visualizer import safe_text
+        if not isinstance(query, str) or not query.strip() or len(query) > 1000:
+            raise ValueError("Consulta deve conter de 1 a 1000 caracteres.")
+        if type(limit) is not int or not 1 <= limit <= 20:
+            raise ValueError("Limite deve ser inteiro entre 1 e 20.")
+        query = query.strip()
+        ident = "memory-query-" + uuid.uuid4().hex
+        results = metabus.memory.search_memory(query, limit=limit)
+        records = []
+        for item in results:
+            if not isinstance(item, dict):
+                continue
+            records.append({"kind": safe_text(item.get("kind"), 30),
+                            "id": safe_text(item.get("id", item.get("topic", "")), 160),
+                            "context": safe_text(item.get("context", item.get("topic", "")), 250)})
+        metabus.publish("memory.query", {"query_id": ident, "query": query}, source_agent=self.id)
+        metabus.publish("memory.retrieved", {"query_id": ident, "records": records}, source_agent=self.id)
+        metabus.publish("memory.response", {"query_id": ident, "matches": len(records),
+                        "answer": f"Busca lexical local: {len(records)} registros encontrados."}, source_agent=self.id)
+        return {"query_id": ident, "query": query, "matches": len(records), "records": records,
+                "verification": "local_memory_search", "inference_executed": False,
+                "calibrated": False, "confidence_promoted": False}
+
+    def memory_network_snapshot(self, science_graph=None) -> Dict[str, Any]:
+        """R829: observa memória/grafo sem executar agentes ou promover confiança."""
+        from webapp.memory_network_visualizer import CoreMemoryNetworkSource
+        if not hasattr(self, "_memory_network_source"):
+            self._memory_network_source = CoreMemoryNetworkSource()
+        cards = [card.to_dict() for card in list(blackboard.registry.values())]
+        snapshot = self._memory_network_source.snapshot(science_graph=science_graph, registry=cards)
+        snapshot["coordinator"] = self.id
+        return snapshot
+
     def perceive(self, topic: str = "general_execution", limit: int = 5) -> Dict[str, Any]:
         """Consulta o Global Workspace antes de decidir: lições + contexto recente."""
         return {
@@ -691,9 +778,13 @@ class MarceloClaroOrchestrator:
                 spec is not None
                 and getattr(spec, "requires_trusted_test_evidence", False)
             )
-            if requires_trusted_test_evidence:
+            software_contract = bool(spec is not None and (spec.test_file or requires_trusted_test_evidence))
+            history = None
+            if software_contract:
                 try:
-                    trusted_test_evidence = tdd_runner.run_spec_test(spec)
+                    from sdd.tdd_history import TDDHistory
+                    history = getattr(self, "_tdd_history", None) or TDDHistory()
+                    trusted_test_evidence = tdd_runner.run_delivery_test(spec, history=history)
                 except Exception as exc:
                     logger.warning(
                         "[%s] Execução do test_file da spec %s falhou: %s",
@@ -706,6 +797,8 @@ class MarceloClaroOrchestrator:
                 spec_id,
                 result,
                 trusted_test_evidence=trusted_test_evidence,
+                require_red_history=software_contract,
+                history=history,
             )
             metabus.memory.add_reflection(
                 agent_id=agent_id,
@@ -720,7 +813,7 @@ class MarceloClaroOrchestrator:
             # A ausência/falha de teste de um contrato Markdown é sempre
             # fail-closed, inclusive quando o modo legado não estrito foi
             # solicitado. Specs legadas mantêm o comportamento pré-existente.
-            hard_runtime_gate = requires_trusted_test_evidence
+            hard_runtime_gate = software_contract or spec is None
             if (
                 (self.strict_sdd or hard_runtime_gate)
                 and not verification.get("verified", False)
@@ -730,6 +823,18 @@ class MarceloClaroOrchestrator:
                     f"REPROVADA na spec {spec_id}; registrando como falha."
                 )
                 success = False
+        elif self.strict_sdd:
+            # R828: entrega sem vínculo de spec no modo estrito é falha;
+            # sem recompensa de trust/stake (success=False propaga).
+            verification = {"verified": False, "status": "blocked_no_spec"}
+            logger.warning(
+                f"[{self.id}] GATE SDD: entrega de {agent_id} para {task_id} "
+                f"sem spec vinculada; registrando como falha."
+            )
+            success = False
+        else:
+            # R828 legado: aceita sem verificar, mas declara explicitamente.
+            verification = {"verified": False, "status": "legacy_unverified"}
 
         metabus.publish("task.complete", {
             "task_id": task_id,
@@ -1922,12 +2027,72 @@ class MarceloClaroOrchestrator:
             "confidence_promoted": False, "externally_validated": False}
         return report
 
+    def browser_action(self, config: Dict[str, Any]) -> Dict[str, Any]:
+        """Coordena navegador real, exporta evidência e registra observação delimitada."""
+        from integrations.browser_bridge import BrowserBridge, compact_browser_report
+        report = BrowserBridge().action(config)
+        report = compact_browser_report(report)
+        observation = {"status": report.get("status"), "method": "browser:" + config.get("operation", "status"),
+                       "browser_executed": report.get("browser_executed", False),
+                       "request_sha256": report.get("request_sha256"),
+                       "report_sha256": report.get("response_sha256"),
+                       "browser_close_confirmed": report.get("browser_close_confirmed", False),
+                       "externally_validated": False}
+        report["metacognition"] = {
+            **self._record_knowledge_outcome("ecosystem.browser", str(config.get("url", "status")), observation),
+            "confidence_promoted": False, "externally_validated": False}
+        return report
+
+    def rea_assistant_action(self, config: Dict[str, Any]) -> Dict[str, Any]:
+        """Entrada R850: setup, inspeção isolada, explicação e instruções locais."""
+        from pathlib import Path
+        import os
+        from integrations.rea_assistant import LocalReaAssistant
+        if config.get("operation") == "site":
+            from webapp.rea_assistant_site import serve_instructions
+            serve_instructions(port=config.get("port", 8767))
+            return {"success": True, "operation": "site", "server_stopped": True}
+        root = Path(os.environ.get("CORE_REA_WORKSPACE", Path(__file__).resolve().parents[1]))
+        report = LocalReaAssistant(root=root).action(config)
+        observation = {"operation": config.get("operation"), "success": report.get("success"),
+            "receipt_sha256": report.get("receipt_sha256"), "privacy": report.get("privacy"),
+            "verification": "local_operation", "externally_validated": False}
+        report["metacognition"] = {**self._record_knowledge_outcome(
+            "ecosystem.rea.local_assistant", str(config.get("operation")), observation),
+            "confidence_promoted": False, "externally_validated": False}
+        return report
+
+    def rea_action(self, config: Dict[str, Any]) -> Dict[str, Any]:
+        """Coordena inspeção REA local e persiste observação sem promover confiança."""
+        from integrations.rea_bridge import ReaBridge
+        report = ReaBridge().action(config)
+        operation = config.get("operation", "status")
+        observation = {
+            "status": report.get("status"),
+            "method": "rea:" + operation,
+            "operation": operation,
+            "path": config.get("path"),
+            "provenance": report.get("provenance", {}),
+            "response_sha256": report.get("provenance", {}).get("response_sha256"),
+            "report_sha256": report.get("provenance", {}).get("response_sha256"),
+            "externally_validated": False,
+        }
+        report["metacognition"] = {
+            **self._record_knowledge_outcome(
+                "ecosystem.rea", operation + ":" + str(config.get("path", "")), observation),
+            "confidence_promoted": False,
+            "externally_validated": False,
+        }
+        return report
+
     def diagnose(self, corpus: str, domain: str = "",
                  goals: Optional[List[Dict[str, Any]]] = None,
                  deep: bool = False,
                  include_legal_impact: bool = False,
                  legal_params: Optional[Dict[str, Any]] = None,
-                 knowledge_config: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+                 knowledge_config: Optional[Dict[str, Any]] = None,
+                 corpus_mode: str = "autodiscovery", corpus_id: Optional[str] = None,
+                 expected_corpus_sha256: Optional[str] = None) -> Dict[str, Any]:
         """Pipeline de diagnóstico com os scanners (noológico, teleológico,
         evolutivo, potentiality, social impact, reversa e opcionalmente legal impact).
 
@@ -1939,6 +2104,10 @@ class MarceloClaroOrchestrator:
         if knowledge_config is not None:
             from marceloclaro.knowledge_evolution import validate_plan_config
             knowledge_config = validate_plan_config(knowledge_config)
+        measurement_options = {}
+        if corpus_mode != "autodiscovery" or corpus_id is not None or expected_corpus_sha256 is not None:
+            measurement_options = {"corpus_mode": corpus_mode, "corpus_id": corpus_id,
+                                   "expected_corpus_sha256": expected_corpus_sha256}
         report = diagnostic_pipeline.run(
             corpus,
             domain=domain,
@@ -1946,6 +2115,7 @@ class MarceloClaroOrchestrator:
             deep=deep,
             include_legal_impact=include_legal_impact,
             legal_params=legal_params,
+            **measurement_options,
         )
         if knowledge_config is not None:
             report["knowledge_evolution"] = self.knowledge_evolution_plan(**knowledge_config)
@@ -1977,10 +2147,8 @@ class MarceloClaroOrchestrator:
                     "last_metacognitive_gain": payload["metacognitive_gain_score"],
                 },
             )
-            metabus.memory.update_domain_confidence(
-                domain_id,
-                float(payload["metacognitive_gain_score"] or 0.0) / 100.0,
-            )
+            # Impacto jurídico também é uma heurística local, não um outcome
+            # independente que possa promover o ledger de confiança.
         gaps = report.get("evolutionary", {}).get("total_gaps", 0)
         extra = ""
         if deep:
@@ -1990,13 +2158,28 @@ class MarceloClaroOrchestrator:
                      f"epistemológicas ({eo.get('breakthroughs', 0)} "
                      f"breakthroughs) e {su.get('total', 0)} sucessores "
                      f"plausíveis ({su.get('immediate', 0)} imediatos).")
-        metabus.memory.add_reflection(
+        metabus.memory.record_observation(
             agent_id=self.id,
             task_context=f"diagnóstico do ecossistema (domínio: {domain or 'geral'})",
-            reflection=f"Diagnóstico concluído: {gaps} lacunas identificadas. "
-                       f"{report['evolutionary']['recommendation']}" + extra,
-            score=max(0.0, 1.0 - gaps / 10.0),
+            observation={
+                "gaps": gaps,
+                "domain": domain or "geral",
+                "heuristic": True,
+                "promotes_confidence": False,
+                "recommendation": report.get("evolutionary", {}).get("recommendation", ""),
+                "detail": f"Diagnóstico concluído: {gaps} lacunas identificadas. "
+                          f"{report.get('evolutionary', {}).get('recommendation', '')}" + extra,
+            },
         )
+        report["measurement_scope"] = {
+            **report.get("measurement", {}),
+            "functional_validation": False,
+            "heuristic": True,
+            "promotes_confidence": False,
+            "verification": "local_operation",
+        }
+        from marceloclaro.diagnostic_explanations import explain_diagnostic_report
+        report["interpretation"] = explain_diagnostic_report(report)
         return report
 
     def academic_pipeline(self, topic: str, manuscript: str = "",
@@ -3303,11 +3486,20 @@ class MarceloClaroOrchestrator:
         from illustrations.mira_agent import MIRA_AGENT_ID
 
         self.register_mira_agent()
+        # A produção de um deck é uma tarefa de artefato, com critérios físicos;
+        # não é uma entrega de alteração da implementação do Core.
+        registry = getattr(spec_verifier, "registry", spec_registry)
+        spec = registry.create_task_spec("Produzir apresentação MIRA", "Gerar artefato local solicitado")
+        spec.criteria.clear()
+        spec.add_criterion("Gate MIRA e arquivo HTML produzidos", lambda output:
+            isinstance(output, dict) and output.get("ok") is True and output.get("passed") is True
+            and (_P(production_folder) / "apresentacao" / "deck.html").is_file())
         task_id = self.delegate(
             f"Apresentação MIRA da produção {_P(production_folder).name[:60]}",
             required_capabilities=["apresentacao-mira"],
             context={"production_folder": production_folder},
         )
+        self.task_specs[task_id] = spec.spec_id
         result = self._mira_agent.execute({"production_folder": production_folder})
         success = bool(result.get("ok")) and bool(result.get("passed", False))
         self.report_completion(task_id, MIRA_AGENT_ID, result, success=success)

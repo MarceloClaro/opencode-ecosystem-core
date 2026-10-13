@@ -1,0 +1,54 @@
+┌  MCP Servers
+│
+●  ✓ rea [90mconnected
+│      [90m.venv/bin/python -m integrations.rea_bridge mcp
+│
+●  ✓ ecosystem-network [90mconnected
+│      [90m.venv/bin/python -m integrations.ecosystem_mcp
+│
+●  ✓ litert-lm [90mconnected
+│      [90m.venv/bin/python .opencode/mcp/litert_lm_server.py
+│
+●  ✓ metacognitive-interconnect [90mconnected
+│      [90m.venv/bin/python mci/mcp_server.py
+│
+●  ✓ antigravity-bridge [90mconnected
+│      [90m.venv/bin/python integrations/antigravity/antigravity_mcp_server.py
+│
+●  ✓ pypi-search [90mconnected
+│      [90m.venv/bin/python skills/tooling/pypi_mcp_server.py
+│
+●  ✓ colibri-mcp [90mconnected
+│      [90m.venv/bin/python colibri/colibri_mcp_server.py
+│
+●  ✓ scanners-mcp [90mconnected
+│      [90m.venv/bin/python scanners/scanners_mcp_server.py
+│
+●  ✓ arxiv-mcp [90mconnected
+│      [90m/home/marceloclaro/.local/bin/uvx arxiv-mcp-server
+│
+●  ✓ latexmk-mcp [90mconnected
+│      [90mnpx -y latexmk-mcp
+│
+●  ✓ artigo-academico-mcp [90mconnected
+│      [90m.venv/bin/python integrations/artigo_academico_mcp.py
+│
+●  ✓ polymath-labs-mcp [90mconnected
+│      [90m.venv/bin/python integrations/polymath_labs_mcp.py
+│
+●  ✓ web-deploy-mcp [90mconnected
+│      [90m.venv/bin/python .opencode/mcp/web_deploy_server.py
+│
+●  ✓ fetch [90mconnected
+│      [90m/home/marceloclaro/.local/bin/uvx mcp-server-fetch
+│
+●  ✓ sequential-thinking [90mconnected
+│      [90mnpx -y @modelcontextprotocol/server-sequential-thinking
+│
+●  ✓ filesystem [90mconnected
+│      [90mnpx -y @modelcontextprotocol/server-filesystem /home/marceloclaro/opencode-ecosystem-core
+│
+└  16 server(s)
+
+
+[0m

@@ -34,12 +34,20 @@ def _isolated_registry() -> Iterator[SpecRegistry]:
     """Isola o singleton do registro enquanto uma spec temporária é carregada."""
     registry = SpecRegistry()
     original_specs = dict(registry.specs)
+    original_sources = dict(registry._formal_sources)
+    original_ambiguities = dict(registry.ambiguous_spec_sources)
     registry.specs.clear()
+    registry._formal_sources.clear()
+    registry.ambiguous_spec_sources.clear()
     try:
         yield registry
     finally:
         registry.specs.clear()
         registry.specs.update(original_specs)
+        registry._formal_sources.clear()
+        registry._formal_sources.update(original_sources)
+        registry.ambiguous_spec_sources.clear()
+        registry.ambiguous_spec_sources.update(original_ambiguities)
 
 
 def _write_spec(
@@ -136,10 +144,11 @@ def test_verifier_fails_closed_for_absent_or_partial_structured_evidence(
             "passed": True,
             "returncode": 0,
         },
+        require_red_history=False,
     )
 
     assert result["verified"] is False
-    assert result["status"] == "red"
+    assert result["status"] == "criteria_failed"
     assert result["total_count"] == 2
     assert result["passed_count"] < result["total_count"]
 
@@ -162,17 +171,17 @@ def test_verifier_rejects_agent_claim_without_runtime_test_evidence(
         }
     }
 
-    result = SpecVerifier(registry).verify(spec_id, output)
+    result = SpecVerifier(registry).verify(spec_id, output, require_red_history=False)
 
     assert result["verified"] is False
-    assert result["status"] == "red"
+    assert result["status"] == "criteria_failed"
     assert result["passed_count"] == 0
 
 
 def test_runtime_issued_evidence_for_the_spec_test_file_can_verify_markdown_contracts(
     executable_spec: tuple[SpecRegistry, str], monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """Somente o runner produz a evidência aceita após executar o test_file vinculado."""
+    """Inspeção de selos do runner, sem alegar histórico RED ou aceite de entrega."""
     registry, spec_id = executable_spec
     spec = registry.get(spec_id)
     assert spec is not None
@@ -188,6 +197,7 @@ def test_runtime_issued_evidence_for_the_spec_test_file_can_verify_markdown_cont
         spec_id,
         {"evidence": {"proof_is_sound": {"passed": True}}},
         trusted_test_evidence=evidence,
+        require_red_history=False,
     )
 
     assert invoked_paths == ["tests/test_r448_sdd_contracts.py"]
@@ -195,8 +205,9 @@ def test_runtime_issued_evidence_for_the_spec_test_file_can_verify_markdown_cont
     with pytest.raises(AttributeError):
         evidence.passed = False
     assert result["verified"] is True
-    assert result["status"] == "green"
+    assert result["status"] == "criteria_passed"
     assert result["passed_count"] == result["total_count"] == 2
+    assert result["verification_scope"] == "criteria_only"
 
 
 @pytest.mark.parametrize(
@@ -224,11 +235,12 @@ def test_failed_test_execution_cannot_issue_green_evidence(
         spec_id,
         {"evidence": {"proof_is_sound": {"passed": True}}},
         trusted_test_evidence=evidence,
+        require_red_history=False,
     )
 
     assert evidence.passed is False
     assert result["verified"] is False
-    assert result["status"] == "red"
+    assert result["status"] == "criteria_failed"
 
 
 def test_runtime_evidence_is_bound_to_its_originating_spec(
@@ -257,6 +269,7 @@ def test_runtime_evidence_is_bound_to_its_originating_spec(
             second_spec_id,
             {"evidence": {"runtime_bound": {"passed": True}}},
             trusted_test_evidence=evidence,
+            require_red_history=False,
         )
 
     assert evidence.passed is True
@@ -286,11 +299,12 @@ def test_absent_test_file_cannot_issue_green_evidence(tmp_path: Path) -> None:
             spec_id,
             {"evidence": {"requires_real_test": {"passed": True}}},
             trusted_test_evidence=evidence,
+            require_red_history=False,
         )
 
     assert evidence.passed is False
     assert result["verified"] is False
-    assert result["status"] == "red"
+    assert result["status"] == "criteria_failed"
 
 
 def test_runtime_can_bind_a_spec_to_a_contained_test_directory(
@@ -324,6 +338,7 @@ def test_runtime_can_bind_a_spec_to_a_contained_test_directory(
             spec_id,
             {"evidence": {"full_suite": {"passed": True}}},
             trusted_test_evidence=evidence,
+            require_red_history=False,
         )
 
     assert invoked_paths == ["tests"]
@@ -363,6 +378,7 @@ def test_test_file_outside_repository_is_rejected_before_execution(
             spec_id,
             {"evidence": {"contained_test": {"passed": True}}},
             trusted_test_evidence=evidence,
+            require_red_history=False,
         )
 
     assert invoked is False
@@ -388,6 +404,7 @@ def test_test_runner_exception_cannot_issue_green_evidence(
         spec_id,
         {"evidence": {"proof_is_sound": {"passed": True}}},
         trusted_test_evidence=evidence,
+        require_red_history=False,
     )
 
     assert evidence.executed is False
@@ -467,10 +484,11 @@ def test_orchestrator_rejects_self_attested_markdown_evidence_without_runtime_te
     assert registry.get(spec_id).status == "red"
 
 
-def test_orchestrator_uses_runtime_test_execution_for_markdown_specs(
-    executable_spec: tuple[SpecRegistry, str], monkeypatch: pytest.MonkeyPatch
+@pytest.mark.parametrize("strict_sdd", [True, False])
+def test_orchestrator_blocks_green_without_executed_red_before_running_bound_tests(
+    executable_spec: tuple[SpecRegistry, str], monkeypatch: pytest.MonkeyPatch, strict_sdd: bool
 ) -> None:
-    """O caminho verde do orquestrador recebe evidência recém-emitida pelo runner."""
+    """GREEN disponível sem RED autenticado não conclui software, inclusive no legado."""
     registry, spec_id = executable_spec
     verifier = SpecVerifier(registry)
     invoked_paths: list[str] = []
@@ -487,17 +505,22 @@ def test_orchestrator_uses_runtime_test_execution_for_markdown_specs(
         "publish",
         lambda topic, payload, source_agent=None: published.append((topic, payload)),
     )
-    orchestrator = MarceloClaroOrchestrator(auto_load_agents=False, strict_sdd=True)
+    orchestrator = MarceloClaroOrchestrator(auto_load_agents=False, strict_sdd=strict_sdd)
     task_id = "task-r448-runtime"
     orchestrator.task_specs[task_id] = spec_id
+    outcomes: list[tuple[str, bool]] = []
+    monkeypatch.setattr(orchestrator.trust, "learn", lambda action, success: outcomes.append(("trust", success)))
+    monkeypatch.setattr(orchestrator.economy, "resolve", lambda task, success: outcomes.append(("stake", success)))
+    orchestrator.task_stakes[task_id] = {"agent_id": "agent-test"}
 
     orchestrator.report_completion(task_id, "agent-test", {"agent": "output"})
 
-    assert invoked_paths == ["tests/test_r448_sdd_contracts.py"]
-    assert published[-1][1]["status"] == "completed"
+    assert invoked_paths == []  # O gate fecha antes da própria suíte: não há recursão.
+    assert published[-1][1]["status"] == "failed"
     verification = published[-1][1]["sdd_verification"]
     assert isinstance(verification, dict)
-    assert verification["verified"] is True
+    assert verification["verified"] is False
+    assert outcomes == [("trust", False), ("stake", False)]
 
 
 def test_orchestrator_fails_closed_for_missing_markdown_test_even_when_non_strict(
@@ -539,10 +562,10 @@ def test_orchestrator_fails_closed_for_missing_markdown_test_even_when_non_stric
     assert verification["verified"] is False
 
 
-def test_tdd_runner_executes_the_bound_test_file_for_markdown_specs(
+def test_tdd_runner_blocks_software_without_executed_red_before_bound_tests(
     executable_spec: tuple[SpecRegistry, str], monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """O ciclo TDD também não aceita a alegação do produtor sem teste vinculado."""
+    """Inspeção de entrega ausente não substitui RED executado para software."""
     registry, spec_id = executable_spec
     spec = registry.get(spec_id)
     assert spec is not None
@@ -565,9 +588,8 @@ def test_tdd_runner_executes_the_bound_test_file_for_markdown_specs(
         },
     )
 
-    assert invoked_paths == ["tests/test_r448_sdd_contracts.py"]
-    assert result["success"] is True
-    assert result["phase"] == "verified"
+    assert invoked_paths == []
+    assert result["success"] is False
 
 
 def test_legacy_spec_without_executable_section_still_loads(tmp_path: Path) -> None:
@@ -595,7 +617,7 @@ def test_legacy_spec_without_executable_section_still_loads(tmp_path: Path) -> N
 def test_legacy_programmatic_criteria_keep_their_existing_verification_path(
     tmp_path: Path,
 ) -> None:
-    """A blindagem vale para contratos Markdown, sem quebrar critérios legados."""
+    """Inspeção explícita de critérios legados não constitui aceite de software."""
     spec_id = "SPEC-TEST-LEGADA-COMPATIVEL"
     _write_spec(
         tmp_path,
@@ -608,10 +630,11 @@ def test_legacy_programmatic_criteria_keep_their_existing_verification_path(
         assert spec is not None
         spec.add_criterion("Saída legada válida", lambda output: output == {"ok": True})
 
-        result = SpecVerifier(registry).verify(spec_id, {"ok": True})
+        result = SpecVerifier(registry).verify(spec_id, {"ok": True}, require_red_history=False)
 
     assert result["verified"] is True
-    assert result["status"] == "green"
+    assert result["status"] == "criteria_passed"
+    assert result["verification_scope"] == "criteria_only"
 
 
 def _requirement_lines(path: Path) -> list[str]:
@@ -707,8 +730,15 @@ def test_ci_uses_declared_dev_dependencies_and_does_not_hide_late_failures() -> 
 
 def test_quality_report_timeout_covers_the_full_suite_duration() -> None:
     """O relatório chamado pela CI não pode abortar antes da suíte integral."""
+    import ast
+
     root = Path(__file__).resolve().parent.parent
     quality_report = (root / "scripts" / "quality_report.py").read_text(encoding="utf-8")
 
-    assert "PYTEST_TIMEOUT_SECONDS = 1200" in quality_report
+    assignments = [node for node in ast.parse(quality_report).body
+                   if isinstance(node, ast.Assign) and any(
+                       isinstance(target, ast.Name) and target.id == "PYTEST_TIMEOUT_SECONDS"
+                       for target in node.targets)]
+    assert len(assignments) == 1
+    assert ast.literal_eval(assignments[0].value) >= 1800
     assert '[sys.executable, "-m", "ruff", "check"' in quality_report

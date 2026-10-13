@@ -1,0 +1,122 @@
+{
+  "overall": "healthy",
+  "diagnostic_mode": "structural",
+  "verification": "installation_only",
+  "checks": [
+    {
+      "name": "specs_formais",
+      "status": "pass",
+      "detail": "206 especificações formais carregadas."
+    },
+    {
+      "name": "evolution_registry",
+      "status": "pass",
+      "detail": "678/678 ciclos carregados corretamente. | Custódia: 0.3% (2/678); recente R462+ 0.5% (2/400); âncoras merkle 2; rejeitados 1; legados 618"
+    },
+    {
+      "name": "loop_specs",
+      "status": "pass",
+      "detail": "2 loop spec(s) registrado(s), todos bem formados."
+    },
+    {
+      "name": "memoria_metacognitiva",
+      "status": "pass",
+      "detail": "MetaBus memory acessível; 409 entradas episódicas."
+    },
+    {
+      "name": "opencode_config",
+      "status": "pass",
+      "detail": "opencode.json válido com 255 agente(s) configurado(s)."
+    },
+    {
+      "name": "corrigendum",
+      "status": "pass",
+      "detail": "CORRIGENDUM.md presente (19372 bytes)."
+    },
+    {
+      "name": "external_clis",
+      "status": "pass",
+      "detail": "Todas as 17 CLIs externas instaladas: opencode, agy, claude, ollama, scihub-cli, runai, tig, copilot, nlm, gemini, goose, plandex, reasonix, colab, colab-mcp, minizinc, kaggle. Autenticação e inferência não verificadas por este diagnóstico."
+    },
+    {
+      "name": "llm_providers",
+      "status": "pass",
+      "detail": "Provedor(es) LLM configurado(s): Ollama local. Configuração não confirma autenticação ou inferência."
+    },
+    {
+      "name": "litert_lm",
+      "status": "pass",
+      "detail": "LiteRT-LM instalado; prontidão HTTP e inferência pendentes de sondagem explícita."
+    },
+    {
+      "name": "colibri",
+      "status": "pass",
+      "detail": "OLMoE instalado (bin=/home/marceloclaro/opencode-ecosystem-core/colibri/c/olmoe, snap=/home/marceloclaro/models/olmoe_merged)"
+    },
+    {
+      "name": "runai",
+      "status": "pass",
+      "detail": "runai instalado (modo=binary); prontidão e inferência pendentes de sondagem explícita."
+    },
+    {
+      "name": "rea",
+      "status": "pass",
+      "detail": "REA 6.4.0 instalado; conexão MCP e providers exigem prova de execução separada."
+    },
+    {
+      "name": "browser",
+      "status": "pass",
+      "detail": "Playwright MCP 0.0.83 e Chromium instalados; execução, sandbox e fechamento exigem prova separada."
+    },
+    {
+      "name": "llm_reduction_metrics",
+      "status": "pass",
+      "detail": "Redução LLM ativa: 0 chamadas evitadas, 0 rotas processadas. Threshold: 0.85."
+    },
+    {
+      "name": "episteme_coverage",
+      "status": "pass",
+      "detail": "164/255 agentes com episteme (64%): 3 explícita(s), 161 inferida(s), 91 sem sinais."
+    },
+    {
+      "name": "apm_integration",
+      "status": "pass",
+      "detail": "Microsoft APM ativo (v1.0.0): 222 primitivas declaradas (com lockfile íntegro)."
+    },
+    {
+      "name": "free_model_amplification",
+      "status": "pass",
+      "detail": "Amplificação DeepSeek Harness ativa: RAG local Whoosh3 + Scaffold CoT para modelos free (Ox Alpha, DeepSeek Free)."
+    },
+    {
+      "name": "deepmind_superhuman_reasoning",
+      "status": "pass",
+      "detail": "Componentes locais inspirados na DeepMind: Aletheia scaffold + verificador (SymPy ativo) + amostra IMO (9 problemas). Disponibilidade não comprova desempenho equivalente."
+    },
+    {
+      "name": "opencode_deepthink_alphaproof",
+      "status": "pass",
+      "detail": "Componentes inspirados em AlphaProof/Deep Think e Erdős/Hirzebruch importáveis; provas e exemplos operacionais pendentes."
+    },
+    {
+      "name": "lean4_egraph_engine",
+      "status": "pass",
+      "detail": "Lean 4 & E-Graph ativos no inventário de componentes: compilador instalado; prova e saturação pendentes de sondagem explícita."
+    },
+    {
+      "name": "geometry_autoformalization_engine",
+      "status": "pass",
+      "detail": "Componentes AlphaGeometry (método de Wu) e autoformalizador importáveis; prova formal pendente de sondagem explícita."
+    },
+    {
+      "name": "clinical_game_theory_engine",
+      "status": "pass",
+      "detail": "Componentes clínicos importáveis; 7 diretrizes declaradas; cenários e validação clínica pendentes."
+    }
+  ],
+  "checks_total": 22,
+  "checks_passed": 22,
+  "checks_warned": 0,
+  "checks_failed": 0,
+  "duration_seconds": 8.7
+}

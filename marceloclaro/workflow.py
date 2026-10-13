@@ -21,6 +21,7 @@ import threading
 import time
 from typing import Any
 from uuid import uuid4
+from integrations.execution_control import is_cancelled
 
 
 _WORKFLOW_EXECUTION_LOCK = threading.Lock()
@@ -84,7 +85,7 @@ class WorkflowCoordinator:
         if not isinstance(nodes, list) or not 1 <= len(nodes) <= cls.MAX_NODES:
             raise ValueError(f"nodes deve ser uma lista com 1 a {cls.MAX_NODES} etapas.")
         normalized: dict[str, dict[str, Any]] = {}
-        allowed = {"id", "task", "dependencies", "required_capabilities", "ecosystem", "per_node_max_steps"}
+        allowed = {"id", "task", "dependencies", "required_capabilities", "ecosystem", "per_node_max_steps", "spec_id"}
         for node in nodes:
             if not isinstance(node, dict) or set(node) - allowed:
                 raise ValueError("Cada etapa deve ser um objeto somente com os campos suportados.")
@@ -115,6 +116,11 @@ class WorkflowCoordinator:
             normalized[node_id] = {"id": node_id, "task": task.strip(), "dependencies": dependencies,
                                    "required_capabilities": sorted(set(required)), "ecosystem": ecosystem,
                                    "per_node_max_steps": limit}
+            if "spec_id" in node:
+                spec_id = node["spec_id"]
+                if not isinstance(spec_id, str) or not spec_id.strip() or len(spec_id) > 256:
+                    raise ValueError("spec_id deve conter um identificador não vazio de até 256 caracteres.")
+                normalized[node_id]["spec_id"] = spec_id.strip()
 
         successors = {node_id: [] for node_id in normalized}
         degrees = {}
@@ -311,6 +317,11 @@ class WorkflowCoordinator:
                 node = record["nodes"][node_id]
                 if node["status"] != "queued":
                     continue
+                if is_cancelled():
+                    node.update(status="exhausted", success=False,
+                                error="Execução cancelada antes de iniciar esta etapa.")
+                    self._save(record)
+                    continue
                 failed_parents = [dependency for dependency in node["dependencies"]
                                   if record["nodes"][dependency]["status"] != "completed"]
                 if failed_parents:
@@ -328,23 +339,35 @@ class WorkflowCoordinator:
                 record["steps"] += allocation
                 self._save(record)  # Falha aqui impede a chamada externa.
                 remaining_time = deadline - time.monotonic()
-                if remaining_time <= 0:
+                cancelled_before_call = is_cancelled()
+                if cancelled_before_call or remaining_time <= 0:
                     record["steps"] -= allocation
                     node.update(status="exhausted", reserved_steps=0, execution_attempted=False,
-                                error="Prazo global esgotado antes da chamada ao coordenador.")
+                                error="Execução cancelada antes da chamada ao coordenador."
+                                if cancelled_before_call else "Prazo global esgotado antes da chamada ao coordenador.")
                     self._save(record)
                     continue
                 try:
+                    delivery_options = {"spec_id": node["spec_id"]} if "spec_id" in node else {}
                     result = self.coordinator.run(
                         self._task_with_dependencies(node, record["nodes"]),
                         required_capabilities=node["required_capabilities"], max_steps=allocation,
                         timeout=remaining_time, ecosystem=node["ecosystem"],
+                        **delivery_options,
                     )
                 except Exception as exc:
                     # Uma exceção sem resultado não prova que não houve chamada
                     # externa. Consome a reserva e exige repetição explícita.
                     node.update(status="failed", success=False, steps=allocation,
                                 execution_uncertain=True, error=f"Falha no coordenador: {exc}")
+                    self._save(record)
+                    continue
+                if is_cancelled():
+                    # Mesmo uma resposta tardia não prova que a operação foi
+                    # aceita antes da interrupção. Conservar a reserva e exigir
+                    # repetição explícita, sem iniciar os nós posteriores.
+                    node.update(status="failed", success=False, steps=allocation,
+                                execution_uncertain=True, error="Execução cancelada durante a etapa.")
                     self._save(record)
                     continue
                 if not isinstance(result, dict):

@@ -5,12 +5,12 @@ import sys
 
 sys.path.insert(0, ".")
 
-from integrations.opencode_cli import build_config  # noqa: E402
+from integrations.opencode_cli import build_config, _mcp_launcher  # noqa: E402
 
 
 def test_mcp_referencia_presentes():
     mcp = build_config()["mcp"]
-    assert mcp["fetch"]["command"] == ["uvx", "mcp-server-fetch"]
+    assert mcp["fetch"]["command"] == [_mcp_launcher("uvx"), "mcp-server-fetch"]
     assert mcp["sequential-thinking"]["command"] == [
         "npx", "-y", "@modelcontextprotocol/server-sequential-thinking"]
     fs_cmd = mcp["filesystem"]["command"]

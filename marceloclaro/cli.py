@@ -10,6 +10,7 @@ Uso:
     python3 -m marceloclaro.cli biblioteca buscar "split por grupo"
     python3 -m marceloclaro.cli fine-dados validar dados.json
     python3 -m marceloclaro.cli integracoes status
+    python3 -m marceloclaro.cli tdd-history red SPEC-ID [--timeout 1200]
     python3 -m marceloclaro.cli status   # comando direto
     python3 -m marceloclaro.cli pesquisa "tema"  # pesquisa acadêmica
     python3 -m marceloclaro.cli apresentacao pasta  # deck MIRA
@@ -308,6 +309,7 @@ def _cmd_network(argv):
     parser.add_argument("--capabilities", default="")
     parser.add_argument("--max-steps", type=int)
     parser.add_argument("--timeout", type=float)
+    parser.add_argument("--spec", help="Especificação vinculada; software exige RED executado")
     parser.add_argument("--workflow-id")
     parser.add_argument("--resume", action="store_true")
     parser.add_argument("--retry-failed", action="store_true")
@@ -336,9 +338,10 @@ def _cmd_network(argv):
         elif args.action == "route":
             report = get_coordinator().route(task, required, args.ecosystem)
         else:
+            delivery_options = {"spec_id": args.spec} if args.spec else {}
             report = get_coordinator().run(task, required,
                 args.max_steps if args.max_steps is not None else 3,
-                args.timeout if args.timeout is not None else 120, args.ecosystem)
+                args.timeout if args.timeout is not None else 120, args.ecosystem, **delivery_options)
     except (ValueError, OSError) as exc:
         print(json.dumps({"success": False, "status": "invalid", "error": str(exc)},
                          ensure_ascii=False, indent=2))
@@ -352,9 +355,14 @@ def main() -> int:
     if len(sys.argv) > 1:
         cmd = sys.argv[1]
         if cmd == "doctor":
+            import argparse
             from marceloclaro import doctor as doctor_module
 
-            report = doctor_module.run_doctor()
+            parser = argparse.ArgumentParser(prog="marceloclaro doctor")
+            parser.add_argument("--live", action="store_true",
+                                help="executa sondagens HTTP, CLIs e exemplos internos explicitamente")
+            args = parser.parse_args(sys.argv[2:])
+            report = doctor_module.run_doctor(live=args.live)
             print(json.dumps(report, indent=2, ensure_ascii=False))
             return 0 if report.get("overall") in {"healthy", "degraded"} else 1
 
@@ -363,6 +371,32 @@ def main() -> int:
 
             report = run_core_check()
             return 0 if report["overall"] in {"healthy", "degraded"} else 1
+
+        if cmd == "rea":
+            from marceloclaro.rea_cli import run_rea_cli
+            return run_rea_cli(sys.argv[2:], MarceloClaroOrchestrator)
+
+        if cmd == "browser":
+            from marceloclaro.browser_cli import run_browser_cli
+            return run_browser_cli(sys.argv[2:], MarceloClaroOrchestrator)
+
+        if cmd == "tdd-history":
+            if len(sys.argv) not in (4, 6) or sys.argv[2] not in ("red", "green"):
+                print("Uso: marceloclaro tdd-history red|green SPEC-ID [--timeout SEGUNDOS]")
+                return 1
+            timeout = 1200
+            try:
+                if len(sys.argv) == 6:
+                    if sys.argv[4] != "--timeout":
+                        raise ValueError("Opção inválida.")
+                    timeout = int(sys.argv[5])
+                coordinator = MarceloClaroOrchestrator(auto_load_agents=False)
+                result = coordinator.tdd_history_probe(sys.argv[3], sys.argv[2], timeout)
+            except (ValueError, RuntimeError, OSError) as exc:
+                print(json.dumps({"accepted": False, "error": str(exc)}, ensure_ascii=False))
+                return 1
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+            return 0 if result["accepted"] and (sys.argv[2] == "red" or result["red_green_pair"]["verified"]) else 1
 
         if cmd == "apm":
             from integrations.apm import APMPackageManager

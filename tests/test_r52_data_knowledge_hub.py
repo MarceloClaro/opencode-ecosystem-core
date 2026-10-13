@@ -8,9 +8,12 @@ Ciclo: RED → GREEN → REFACTOR
 """
 
 import json
+import io
 import os
 import sys
 import time
+import urllib.error
+import urllib.parse
 from datetime import datetime
 from pathlib import Path
 
@@ -254,7 +257,38 @@ class TestKnowledgeDataSource:
 # ═══════════════════════════════════════════════════════════════
 
 class TestDatasetDataSource:
-    """RED: testes esperam DatasetDataSource com Zenodo, DataCite, UCI, Figshare."""
+    """Contrato HTTP com respostas controladas; nenhuma consulta de rede nestes casos."""
+
+    @pytest.fixture(autouse=True)
+    def dataset_http(self, monkeypatch):
+        from skills.tooling.data_knowledge_hub import datasets
+
+        payloads = {
+            "zenodo.org": {"hits": {"hits": [{"id": 7, "metadata": {
+                "title": "Controlled climate record", "doi": "10.0000/fixture.zenodo",
+                "creators": [{"name": "Fixture Author"}], "publication_date": "2025-01-02",
+                "resource_type": {"type": "dataset"}}}]}},
+            "api.datacite.org": {"data": [{"attributes": {
+                "doi": "10.0000/fixture.datacite", "titles": [{"title": "Controlled ML record"}],
+                "creators": [{"name": "Fixture Author"}], "publicationYear": 2025,
+                "publisher": "Fixture Publisher"}}]},
+            "archive.ics.uci.edu": '<a href="datasets/fixture">Controlled Iris record</a>',
+            "api.figshare.com": [{"id": 9, "title": "Controlled biology record",
+                "item_type": 3, "published_date": "2025-01-02", "authors": [{"full_name": "Fixture Author"}]}],
+        }
+        requests = []
+
+        def urlopen(request, *, timeout):
+            requests.append(request.full_url)
+            assert timeout == 15
+            parsed = urllib.parse.urlparse(request.full_url)
+            assert parsed.scheme == "https"
+            payload = payloads[parsed.hostname]
+            encoded = payload if isinstance(payload, str) else json.dumps(payload)
+            return io.BytesIO(encoded.encode("utf-8"))
+
+        monkeypatch.setattr(datasets.urllib.request, "urlopen", urlopen)
+        return requests
 
     def test_dataset_module_exists(self):
         """Módulo datasets deve existir."""
@@ -268,7 +302,12 @@ class TestDatasetDataSource:
         dds = DatasetDataSource()
         result = dds.search("climate", source="zenodo")
         assert result["source"] == "zenodo"
-        assert result["status"] in ("online", "offline")
+        assert result["status"] == "online"
+        assert result["results"][0]["id"] == 7
+        assert result["results"][0]["titulo"] == "Controlled climate record"
+        assert result["evidence_eligible"] is True
+        assert result["synthetic"] is False
+        assert result["provenance"]["acquisition"] == "http_request"
 
     def test_dataset_search_datacite(self):
         """DatasetDataSource busca DataCite."""
@@ -277,7 +316,9 @@ class TestDatasetDataSource:
         dds = DatasetDataSource()
         result = dds.search("machine learning", source="datacite")
         assert result["source"] == "datacite"
-        assert result["status"] in ("online", "offline")
+        assert result["status"] == "online"
+        assert result["results"][0]["doi"] == "10.0000/fixture.datacite"
+        assert result["results"][0]["titulo"] == "Controlled ML record"
 
     def test_dataset_search_uci(self):
         """DatasetDataSource busca UCI ML Repository."""
@@ -286,11 +327,10 @@ class TestDatasetDataSource:
         dds = DatasetDataSource()
         result = dds.search("iris", source="uci")
         assert result["source"] == "uci"
-        # Endpoint legado datasets.php morto no upstream: fonte inalcançável
-        # declara 'unavailable' com evidence_eligible False (nunca elegível).
-        assert result["status"] in ("online", "offline", "demonstration", "unavailable")
-        if result["status"] != "online":
-            assert result["evidence_eligible"] is False
+        assert result["status"] == "online"
+        assert result["results"][0]["nome"] == "Controlled Iris record"
+        # A fixture valida apenas o parser legado; não afirma disponibilidade upstream.
+        assert result["results"][0]["url"] == "https://archive.ics.uci.edu/ml/datasets/fixture"
 
     def test_dataset_search_figshare(self):
         """DatasetDataSource busca Figshare."""
@@ -299,7 +339,9 @@ class TestDatasetDataSource:
         dds = DatasetDataSource()
         result = dds.search("biology", source="figshare")
         assert result["source"] == "figshare"
-        assert result["status"] in ("online", "offline")
+        assert result["status"] == "online"
+        assert result["results"][0]["id"] == 9
+        assert result["results"][0]["titulo"] == "Controlled biology record"
 
     def test_dataset_auto_route(self):
         """DatasetDataSource roteia por domínio."""
@@ -307,16 +349,32 @@ class TestDatasetDataSource:
 
         dds = DatasetDataSource()
         r = dds.search("dataset climate change")
-        assert r["source"] in ("zenodo", "datacite", "uci", "figshare", "offline")
+        assert r["source"] == "zenodo"
+        assert r["results"][0]["id"] == 7
 
-    def test_dataset_mock_data(self):
-        """DatasetDataSource deve ter fallback offline."""
-        from skills.tooling.data_knowledge_hub.datasets import DatasetDataSource
+    @pytest.mark.parametrize("source", ["zenodo", "datacite", "uci", "figshare"])
+    @pytest.mark.parametrize("demo", [False, True])
+    def test_dataset_failure_is_closed_and_demo_requires_opt_in(self, monkeypatch, source, demo):
+        """Erro de aquisição não pode devolver exemplos como evidência observada."""
+        from skills.tooling.data_knowledge_hub import datasets
 
-        dds = DatasetDataSource()
-        result = dds.search("climate", source="zenodo")
-        if result["status"] == "offline":
-            assert len(result["results"]) > 0
+        def failed_request(*args, **kwargs):
+            raise urllib.error.URLError("controlled acquisition failure")
+
+        monkeypatch.setattr(datasets.urllib.request, "urlopen", failed_request)
+        result = datasets.DatasetDataSource(allow_demo_fallback=demo).search("fixture", source=source)
+        assert result["source"] == source
+        assert result["status"] == ("demonstration" if demo else "unavailable")
+        assert result["synthetic"] is demo
+        assert result["evidence_eligible"] is False
+        assert result["provenance"]["error_type"] == "URLError"
+        assert result["provenance"]["acquisition"] == ("demonstration_fallback" if demo else "failed_http_request")
+        if demo:
+            assert result["results"]
+            assert all(record["synthetic"] is True and record["evidence_kind"] == "demonstration"
+                       for record in result["results"])
+        else:
+            assert result["results"] == []
 
 
 # ═══════════════════════════════════════════════════════════════

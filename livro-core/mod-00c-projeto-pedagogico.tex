@@ -1,0 +1,98 @@
+% ============================================================
+%  MÓDULO 00C — Projeto pedagógico do livro didático (R100/R101)
+%  Contrato de leitura: quem é Ana/Bruno, 3 trilhas, avaliação
+% ============================================================
+\chapter{Projeto Pedagógico: Como Este Livro Ensina}
+
+\roteirodidatico
+{Você abriu um livro de centenas de páginas sobre um ecossistema de IAs e quer saber por onde começar sem se perder. Este capítulo é o contrato: diz quem o livro imagina que você é, o que cada parte promete e como conferir se aprendeu.}
+{\emph{Ana} usa sem programar; \emph{Bruno} reconstrói com comandos; \emph{Trilha} é um caminho de leitura com início, meio e checkpoint; \emph{Checkpoint} é a pergunta que autoriza avançar.}
+{Leia este capítulo inteiro, escolha sua trilha na tabela e marque seu checkpoint atual. Depois siga a trilha sem pular checkpoints.}
+{História ajuda a lembrar; só arquivo, comando e teste provam. Design claro ajuda o olho; conteúdo verificável sustenta a conclusão.}
+{Qual é seu objetivo hoje: usar bem, reconstruir ou auditar com rigor?}
+
+\casoguiado{três leitores na mesma página}
+{Ana é professora e quer um resumo fiel com fonte. Bruno é desenvolvedor e quer repetir o pipeline em outra máquina. Carla é auditora e quer saber o que o livro não pode afirmar. Os três leem a mesma ficha, mas param em lugares diferentes: Ana para no exemplo e no limite; Bruno segue até o comando e o hash; Carla confere DOI, escopo da contagem e data da fotografia. Este livro foi reformulado para que os três usem a mesma página sem fingir ser um ao outro.}
+
+\section{O novo design: por que fundo claro e cor com sentido}
+
+\begin{dicaleigo}
+Em 30 segundos: fundo escuro cansa e gasta tinta. Fundo claro de papel imprime bem, fotocopia bem e deixa ler por horas. Cada cor agora tem um trabalho: azul guia o leigo, roxo marca orquestração, verde marca prova passada, amarelo pede atenção ao limite, vermelho barra sem critério.
+\end{dicaleigo}
+
+\begin{paratecnico}
+Onde conferir: \pth{livro-core/macros.tex} e a paleta R100. \pth{ink} agora é papel claro (253,252,245); \pth{textmain} é tinta escura (30,36,48). Mesma API de caixas, novo visual. Cabeçalho e rodapé finos em \pth{navy} e \pth{gold}. Fluxogramas com nós claros (\pth{fn}, \pth{fns}) e decisão em losango âmbar (\pth{fde}).
+\end{paratecnico}
+
+\elemento{Legenda visual do livro}{\metainfo{ID}{DES-00C} \hfill \metainfo{Rota}{\pth{livro-core/macros.tex}}}
+
+\begin{descricao}
+Todo capítulo usa o mesmo alfabeto visual. Roteiro de aprendizagem abre; exemplo guiado conta a cena de Ana e Bruno; descrição, definição, método, resultado e limite respondem as cinco perguntas; aviso fecha com anti-overclaim. Caixas novas: \textbf{Para leigos} traduz em 30 segundos; \textbf{Para técnicos} dá o caminho de arquivo; \textbf{Checkpoint} trava o avanço sem evidência.
+\end{descricao}
+
+\begin{funcao}
+Fazer o olho achar rápido o que o cérebro precisa: promessa, prova e limite em lugares fixos, para leitura diagonal sem autoengano.
+\end{funcao}
+
+\section{As três trilhas de leitura}
+
+\elemento{Escolha sua trilha}{\metainfo{ID}{TRI-00C} \hfill \metainfo{Tempo}{Ana: 3h; Bruno: 1 tarde; Carla: 2 tardes}}
+
+\begin{descricao}
+\textbf{Trilha Ana (usar bem, 3 horas).} Leia: prefácio, este capítulo, jornada do leitor (mod-00b), dicionário Nível 0 (mod-18), E1 a E7 para leigos (mod-17), epílogo de 12 passos só observando. Pule código; exija de cada resposta: fonte, limite e direito de devolver. Checkpoint: você consegue pedir com critério escrito e devolver sem fonte.
+
+\textbf{Trilha Bruno (reconstruir, 1 tarde).} Faça a trilha Ana em 40 minutos e execute: instalação (mod-01c), arquitetura (mod-01d), orquestração (mod-02), epílogo capítulo 15 mais o novo capítulo WSL (mod-22). Anote saída real ao lado da esperada. Checkpoint: \pth{python3 -m marceloclaro.cli doctor} roda, \pth{pdflatex main.tex} recompila, \pth{python3 check.py} diz ok.
+
+\textbf{Trilha Carla (auditar, 2 tardes).} Faça a trilha Bruno e leia: qualidade SDD (mod-04), mapa de teorias (mod-21), apêndices (mod-11). Para cada afirmação forte, pergunte: que arquivo prova existência, que comando prova disponibilidade, que teste prova comportamento. Checkpoint: você lista três afirmações que o livro deliberadamente não faz.
+\end{descricao}
+
+\begin{funcao}
+Evitar dois erros gêmeos: o leigo que decora jargão sem saber conferir e o técnico que executa sem ler o limite.
+\end{funcao}
+
+\begin{niveis}
+\textbf{Intuição:} três pessoas, mesma casa, ritmos diferentes.\\
+\textbf{Implementação:} trilhas mapeiam capítulos a evidências exigidas por perfil.\\
+\textbf{Formalização:} objetivos em taxonomia de Bloom: lembrar (glossário), entender (cenas), aplicar (12 passos), analisar (comparar rotas), avaliar (gates e limites), criar (registrar ciclo de evolução).
+\end{niveis}
+
+A opção por exemplo guiado antes do formalismo segue a pesquisa sobre carga cognitiva: buscar fins por análise de meios e fins consome memória de trabalho que faria falta para formar esquemas.
+
+Exemplos trabalhados reduzem essa busca e liberam capacidade para o esquema \citref{SWELLER, J. Cognitive load during problem solving: effects on learning. Cognitive Science, v.~12, n.~2, p.~257-285, 1988}{10.1016/0364-0213(88)90023-7}{Justifica abrir cada capítulo por cena e exemplo antes da formalização.}{Considerable evidence indicates that domain specific knowledge in the form of schemas is the primary factor distinguishing experts from novices in problem-solving skill}{Há evidência considerável de que o conhecimento específico de domínio, na forma de esquemas, é o principal fator que distingue especialistas de novatos.}{SWELLER, 1988, p.~257-285}.
+
+\section{Como saber se aprendeu: checkpoints e anti-overclaim}
+
+\begin{checkpoint}
+Você pode avançar se responde sem olhar: o que o Core promete neste capítulo, onde se confere (arquivo ou comando) e o que não se pode concluir. Se faltar um dos três, volte uma seção. Fiscal que reprova é o livro funcionando, não falha sua.
+\end{checkpoint}
+
+\begin{aviso}
+Limite do projeto pedagógico. Trilhas são proposta editorial, não experimento sobre eficácia de ensino. Passar por todos os checkpoints não certifica domínio profissional nem autoriza uso em saúde, justiça, segurança ou dinheiro sem responsável humano e critério escrito.
+\end{aviso}
+
+\begin{resultado}
+\textbf{Exercícios.} (1) Escreva seu objetivo em uma frase e escolha a trilha. (2) Para o capítulo que você vai ler, copie a questão de verificação do roteiro e responda com fonte. (3) Liste uma afirmação que você gostaria que fosse verdade e que o livro se recusa a fazer sem validação externa.
+\end{resultado}
+
+\section[Leitura guiada]{Leitura guiada: escolher a trilha e conferir o checkpoint}
+\begin{descricao}
+\textbf{O fenômeno.} Leitores com objetivos diferentes precisam de percursos diferentes. Ler um comando não equivale a executá-lo, e executar não demonstra aprendizagem ou eficácia científica.
+\end{descricao}
+\begin{definicao}
+\textbf{Grandezas e definições.} Uma trilha é a sequência proposta de capítulos; um checkpoint contém objetivo, evidência exigida e limite. Para uma tarefa de leitura, $c$ é o número de critérios atendidos e $n$ o número de critérios escritos antes de começar.
+\end{definicao}
+\begin{metodo}
+\textbf{Dedução passo a passo.} Declare seu objetivo; escolha a trilha correspondente; leia seu primeiro capítulo; produza a evidência solicitada; compare-a com cada critério. A proporção $c/n$ organiza essa conferência, sem medir domínio profissional.
+\end{metodo}
+\begin{resultado}
+\textbf{Exemplo resolvido.} Ana quer pedir um resumo com fonte. Seus três critérios são fonte identificável, correspondência com o trecho e limite escrito. Se encontra fonte e limite, mas não compara o trecho, registra dois de três critérios e conserva a comparação pendente.
+\end{resultado}
+\begin{resultado}
+\textbf{Ordem de grandeza e verificação.} Um checkpoint curto pode conter três critérios. Confira cada um separadamente; não substitua a comparação ausente por uma nota média ou pelo tempo de leitura.
+\end{resultado}
+\begin{aviso}
+\textbf{Limite de validade.} As trilhas e tempos deste capítulo são propostas editoriais. O exercício não valida eficácia de ensino nem o conteúdo científico do resumo.
+\end{aviso}
+\begin{resultado}
+\textbf{Exercícios.} Escreva três critérios para seu objetivo; indique a evidência de cada um; identifique um critério que depende de execução e outro que exige revisão do conteúdo.
+\end{resultado}

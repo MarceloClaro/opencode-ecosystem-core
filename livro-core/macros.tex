@@ -1,15 +1,18 @@
 % ======================================================================
-%  MACROS — Sistema de design editorial do livro (A4, marinho + ouro + papel)
+%  MACROS — Design didatico claro do livro (A4, papel claro + semantica)
+%  REFORMULACAO R100 — de tema escuro para manual didatico imprimivel
+%  API preservada: mesmos comandos e ambientes, novo visual.
 % ======================================================================
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[brazil]{babel}
 \usepackage{lmodern}
-\renewcommand{\familydefault}{\sfdefault}
+% Corpo em serifada para leitura longa; titulos em sem-serifa.
+\renewcommand{\familydefault}{\rmdefault}
 \usepackage{microtype}
 \usepackage{textcomp}
 \usepackage[table]{xcolor}
-\usepackage[a4paper,inner=2.65cm,outer=2.25cm,bottom=1.8cm,top=2.7cm,headheight=22pt,headsep=0.2cm,footskip=12pt]{geometry}
+\usepackage[a4paper,inner=2.65cm,outer=2.25cm,bottom=1.8cm,top=2.7cm,headheight=22pt,headsep=0.2cm,footskip=14pt]{geometry}
 \usepackage{booktabs,colortbl,tabularx,array,ragged2e,longtable,multirow}
 \usepackage{enumitem}
 \usepackage{chngcntr}
@@ -22,32 +25,42 @@
 \tcbuselibrary{breakable,skins,listings}
 \usepackage{tikz}
 \usetikzlibrary{positioning,arrows.meta,shapes.geometric,calc,matrix,fit,backgrounds}
+\PassOptionsToPackage{obeyspaces}{url}
 \usepackage{hyperref}
 
 % ----------------------------------------------------------------------
-%  PALETA
+%  PALETA DIDATICA CLARA — semantica por cor (R100)
+%  Azul = caminho do leigo / intuicao
+%  Roxo = orquestracao / arquitetura
+%  Verde = rigor provado (teste verde, gate passado)
+%  Ambar = atencao / limite / anti-overclaim
+%  Vermelho contido = fail-closed / gate que reprova
+%  Papel claro = fundo imprimivel, economia de tinta
 % ----------------------------------------------------------------------
-\definecolor{navy}{RGB}{48,17,76}          % roxo profundo do cabeçalho/rodapé de referência
-\definecolor{steel}{RGB}{187,125,242}      % violeta luminoso de destaque
-\definecolor{steelV}{RGB}{48,17,76}        % roxo profundo para fundos
-\definecolor{teal}{RGB}{187,125,242}       % acento unificado
-\definecolor{violet}{RGB}{187,125,242}     % destaque violeta
-\definecolor{amber}{RGB}{187,125,242}      % acento unificado
-\definecolor{green}{RGB}{187,125,242}      % acento unificado
-\definecolor{red}{RGB}{187,125,242}        % acento unificado
-\definecolor{slate}{RGB}{170,170,170}      % cinza secundário
-\definecolor{papel}{RGB}{34,34,34}         % fundo carvão
-\definecolor{gold}{RGB}{187,125,242}       % compatibilidade: detalhes em violeta
-\definecolor{mist}{RGB}{52,52,52}          % painel cinza
-\definecolor{ink}{RGB}{34,34,34}           % fundo carvão da referência
-\definecolor{panel}{RGB}{42,42,42}         % painel principal
-\definecolor{panelAlt}{RGB}{48,48,48}      % painel alternado
-\definecolor{textmain}{RGB}{204,204,204}   % texto cinza-claro
-\definecolor{textmuted}{RGB}{178,178,178}  % texto secundário
-\definecolor{lineDark}{RGB}{92,92,92}      % divisórias
+\definecolor{navy}{RGB}{27,42,74}
+\definecolor{steel}{RGB}{29,95,168}
+\definecolor{teal}{RGB}{14,124,123}
+\definecolor{violet}{RGB}{91,42,134}
+\definecolor{amber}{RGB}{140,106,0}
+\definecolor{amberBg}{RGB}{255,248,225}
+\definecolor{green}{RGB}{27,122,61}
+\definecolor{greenBg}{RGB}{232,245,233}
+\definecolor{red}{RGB}{176,58,46}
+\definecolor{redBg}{RGB}{253,237,236}
+\definecolor{blueBg}{RGB}{235,243,253}
+\definecolor{slate}{RGB}{74,85,104}
+\definecolor{papel}{RGB}{253,252,245}
+\definecolor{gold}{RGB}{140,106,0}
+\definecolor{mist}{RGB}{244,241,232}
+\definecolor{ink}{RGB}{253,252,245}
+\definecolor{panel}{RGB}{255,255,255}
+\definecolor{panelAlt}{RGB}{244,241,232}
+\definecolor{textmain}{RGB}{30,36,48}
+\definecolor{textmuted}{RGB}{74,85,104}
+\definecolor{lineDark}{RGB}{208,207,198}
 \colorlet{plumDeep}{navy}
-\colorlet{plumAccent}{steel}
-\colorlet{.}{textmain} % padrão do documento: evita resets para preto no tema escuro
+\colorlet{plumAccent}{violet}
+\colorlet{.}{textmain}
 
 % ----------------------------------------------------------------------
 %  COLUNAS / TABELAS
@@ -58,251 +71,261 @@
 \arrayrulecolor{lineDark}
 
 % ----------------------------------------------------------------------
-%  TÍTULOS (part / chapter / section)
+%  TITULOS (part / chapter / section) — didatico claro
 % ----------------------------------------------------------------------
 \titleformat{\part}[display]
-  {\thispagestyle{plain}\sffamily\bfseries\raggedright}
-  {\fontsize{90}{90}\selectfont{\color{gold!35}\thepart}\\[-24pt]{\color{gold}\rule{\linewidth}{2.5pt}}}
-  {10pt}{\fontsize{26}{30}\selectfont\color{textmain}}
+  {\thispagestyle{plain}\sffamily\bfseries\raggedright\color{textmain}}
+  {\fontsize{90}{90}\selectfont{\color{navy!15}\thepart}\\[-24pt]{\color{gold}\rule{\linewidth}{2.5pt}}}
+  {10pt}{\fontsize{26}{30}\selectfont\color{navy}}
   [{\vspace{6pt}{\color{steel}\hrule width \linewidth height 1pt}\vspace{4pt}\color{textmuted}\normalsize\normalfont\itshape\partcontent}]
 
 \titleformat{\chapter}[display]
-  {\thispagestyle{fancy}\sffamily\bfseries\filleft}
-  {\noindent\color{plumAccent}\small\MakeUppercase{\chapterlabel}\hfill
-   {\fontsize{48}{48}\selectfont\thechapter\hspace{2mm}}\colorbox{plumAccent}{\rule{0.08\linewidth}{0.9cm}}}
-  {4pt}{\fontsize{25}{29}\selectfont\color{textmain}}
-  [\vspace{5pt}{\color{plumAccent}\rule{\linewidth}{1.8pt}}]
+  {\thispagestyle{fancy}\sffamily\bfseries\filleft\color{textmain}}
+  {\noindent\color{violet}\small\MakeUppercase{\chapterlabel}\hfill
+   {\fontsize{48}{48}\selectfont\thechapter\hspace{2mm}}\colorbox{navy}{\color{white}\rule{0.08\linewidth}{0.9cm}}}
+  {4pt}{\fontsize{25}{29}\selectfont\color{navy}}
+  [\vspace{5pt}{\color{gold}\rule{\linewidth}{1.8pt}}]
 
 \titleformat{\section}
-  {\normalfont\sffamily\bfseries\large\color{textmain}}
+  {\normalfont\sffamily\bfseries\large\color{navy}}
   {\thesection.}{0.6em}{}
-  [\vspace{1pt}{\color{lineDark}\rule{0.35\linewidth}{0.6pt}}]
+  [\vspace{1pt}{\color{gold}\rule{0.35\linewidth}{0.9pt}}]
 
 \titleformat{\subsection}
-  {\normalfont\sffamily\bfseries\small\color{gold}}
+  {\normalfont\sffamily\bfseries\small\color{steel}}
   {\thesubsection.}{0.6em}{}
 
-% Babel pt-BR substitui "Capítulo" por "Capítulo" (default) — garantimos os rótulos:
-\renewcommand\chaptername{Elemento}
-\newcommand\chapterlabel{Elemento}
-\newcommand\partcontent{Parte do manual técnico-dev-científico do OpenCode Ecosystem Core}
+\renewcommand\chaptername{Capitulo}
+\newcommand\chapterlabel{Capitulo}
+\newcommand\partcontent{Manual didatico do OpenCode Ecosystem Core: o que e, como funciona, como reproduzir}
 
 % ----------------------------------------------------------------------
-%  CABEÇALHO E RODAPÉ
+%  CABECALHO E RODAPE — finos, claros, imprimiveis (sem faixas pesadas)
 % ----------------------------------------------------------------------
-% Marcas correntes: título da seção no alto e capítulo no rodapé.
-\renewcommand{\chaptermark}[1]{\markboth{Capítulo \thechapter. #1}{}}
+\renewcommand{\chaptermark}[1]{\markboth{Capitulo \thechapter. #1}{}}
 \renewcommand{\sectionmark}[1]{\markright{#1}}
 \pagestyle{fancy}
 \fancyhf{}
-% Texto alinhado junto às bordas da página e centralizado verticalmente nas faixas.
 \fancyhfoffset[L]{2.25cm}
 \fancyhfoffset[R]{1.85cm}
-\fancyhead[L]{\raisebox{31pt}[0pt][0pt]{\parbox[b]{0.92\headwidth}{\raggedright\sffamily\bfseries\footnotesize\color{white}\MakeUppercase{\rightmark}}}}
+\fancyhead[L]{\raisebox{6pt}[0pt][0pt]{\parbox[b]{0.92\headwidth}{\raggedright\sffamily\bfseries\footnotesize\color{navy}\MakeUppercase{\rightmark}}}}
 \fancyhead[R]{}
-\fancyfoot[L]{\raisebox{-20pt}[0pt][0pt]{\parbox[b]{0.88\headwidth}{\raggedright\sffamily\bfseries\footnotesize\color{white}\MakeUppercase{\leftmark}}}}
-\fancyfoot[R]{\raisebox{-20pt}[0pt][0pt]{\footnotesize\sffamily\bfseries\color{white}\thepage}}
-\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\raisebox{-6pt}[0pt][0pt]{\parbox[b]{0.88\headwidth}{\raggedright\sffamily\footnotesize\color{textmuted}\leftmark}}}
+\fancyfoot[R]{\raisebox{-6pt}[0pt][0pt]{\footnotesize\sffamily\bfseries\color{navy}\thepage}}
+\renewcommand{\headrulewidth}{0.8pt}
+\renewcommand{\footrulewidth}{0.4pt}
 \setlength{\headheight}{22pt}
-% Faixas roxas contínuas, inspiradas no cabeçalho e rodapé do livro de referência.
+% Sem fundo pesado no shipout: apenas filete superior e inferior.
 \AddToHook{shipout/background}{%
   \begin{tikzpicture}[remember picture,overlay]
-    \fill[plumDeep] (current page.north west) rectangle ([yshift=-24mm]current page.north east);
-    \fill[plumDeep] (current page.south west) rectangle ([yshift=15mm]current page.south east);
+    \fill[navy] (current page.north west) rectangle ([yshift=-8mm]current page.north east);
+    \fill[gold] ([yshift=-8mm]current page.north west) rectangle ([yshift=-9.2mm]current page.north east);
+    \fill[navy] (current page.south west) rectangle ([yshift=6mm]current page.south east);
   \end{tikzpicture}%
 }
 \fancypagestyle{plain}{%
   \fancyhf{}
-  \fancyhead[L]{\raisebox{31pt}[0pt][0pt]{\parbox[b]{0.92\headwidth}{\raggedright\sffamily\bfseries\footnotesize\color{white}\MakeUppercase{\rightmark}}}}
-  \fancyfoot[L]{\raisebox{-20pt}[0pt][0pt]{\parbox[b]{0.88\headwidth}{\raggedright\sffamily\bfseries\footnotesize\color{white}\MakeUppercase{\leftmark}}}}
-  \fancyfoot[R]{\raisebox{-20pt}[0pt][0pt]{\footnotesize\sffamily\bfseries\color{white}\thepage}}
-  \renewcommand{\headrulewidth}{0pt}
+  \fancyhead[L]{\raisebox{6pt}[0pt][0pt]{\parbox[b]{0.92\headwidth}{\raggedright\sffamily\bfseries\footnotesize\color{navy}\MakeUppercase{\rightmark}}}}
+  \fancyfoot[L]{\raisebox{-6pt}[0pt][0pt]{\parbox[b]{0.88\headwidth}{\raggedright\sffamily\footnotesize\color{textmuted}\leftmark}}}
+  \fancyfoot[R]{\raisebox{-6pt}[0pt][0pt]{\footnotesize\sffamily\bfseries\color{navy}\thepage}}
+  \renewcommand{\headrulewidth}{0.8pt}
 }
 
 % ----------------------------------------------------------------------
-%  Cabeçalho de ELEMENTO — painel preto com título branco
+%  CABECALHO DE ELEMENTO — cartao branco com tarja lateral semantica
 % ----------------------------------------------------------------------
 \newcommand{\elemento}[2]{%
   \par\medskip
-  \begin{tcolorbox}[enhanced,breakable,boxrule=0.8pt,arc=1.6mm,
-    colback=plumDeep,colbacktitle=plumDeep,colframe=plumDeep,coltitle=white,
-    borderline west={1.5pt}{0pt}{gold},
+  \begin{tcolorbox}[enhanced,breakable,boxrule=0.7pt,arc=1.6mm,
+    colback=white,colbacktitle=navy,colframe=navy,coltitle=white,
+    borderline west={3pt}{0pt}{violet},
     title={\hspace{2mm}\parbox[b]{\dimexpr\linewidth-4mm}{#1}},
-    fonttitle=\bfseries\normalsize,
+    fonttitle=\bfseries\normalsize\sffamily,
     left=2mm,right=2mm,top=1.6mm,bottom=2.2mm]
-    \footnotesize\color{white}#2
+    \footnotesize\color{textmain}#2
   \end{tcolorbox}
   \par\nointerlineskip\vspace{1mm}\par}
 
-\newcommand{\metainfo}[2]{\footnotesize\color{white}\textbf{#1:}~#2}
+\newcommand{\metainfo}[2]{\footnotesize\color{slate}\textbf{#1:}~#2}
 
 % ----------------------------------------------------------------------
-%  CITAÇÃO AUDITADA — nota de rodapé verificável (regra R110 / anti-overclaim)
-%  args: {referência}{DOI ativo}{relevância ao contexto (pt-BR)}
-%        {trecho original}{tradução pt-BR do trecho}
-%  Uso SOMENTE em parágrafo corrido (fora de tcolorbox) e com DOI
-%  previamente verificado por sondagem/webfetch — nunca de memória.
-% ----------------------------------------------------------------------
-% ----------------------------------------------------------------------
-%  CITAÇÃO AUDITADA — nota de rodapé verificável (regra R110 / anti-overclaim)
-%  Sistema NUMÉRICO de chamada em nota de rodapé, conforme ABNT NBR
-%  10520:2023; a referência completa segue a ABNT NBR 6023:2018.
-%  args: {referência ABNT (sem DOI)}{DOI ativo}{relevância ao contexto (pt-BR)}
-%        {trecho original}{tradução pt-BR do trecho}{AUTOR, ANO, p. PÁGINA}
-%  Uso SOMENTE em parágrafo corrido (fora de tcolorbox) e com DOI
-%  previamente verificado por sondagem/webfetch — nunca de memória.
+%  CITACAO AUDITADA — nota de rodape verificavel (R110 / anti-overclaim)
 % ----------------------------------------------------------------------
 \makeatletter
 \newcommand{\citref}[6]{%
-  % Usa o contador global, inclusive dentro de caixas tcolorbox.
   \begingroup
   \def\@mpfn{footnote}\def\thempfn{\thefootnote}%
-  (#6)\footnote{\footnotesize\color{white}\textbf{Referência bibliográfica:} #1.%
+  (#6)\footnote{\footnotesize\color{textmain}\textbf{Referencia bibliografica:} #1.%
     \par\smallskip\textbf{DOI:} \href{https://doi.org/#2}{\texttt{#2}}.%
-    \par\smallskip\textbf{Relevância a este contexto:} #3.%
-    \par\smallskip\textbf{Citação direta (ABNT NBR 10520:2023):} ``{\itshape #4}''.%
-    \par\smallskip\textbf{Tradução livre (pt-BR):} ``#5''.}%
+    \par\smallskip\textbf{Relevancia a este contexto:} #3.%
+    \par\smallskip\textbf{Citacao direta (ABNT NBR 10520:2023):} ``{\itshape #4}''.%
+    \par\smallskip\textbf{Traducao livre (pt-BR):} ``#5''.}%
   \endgroup
 }
 \makeatother
 
-% Notas sempre claras no tema escuro, inclusive quando vêm de caixas ou referências.
-% A numeração bibliográfica segue sem reiniciar nos capítulos.
 \counterwithout{footnote}{chapter}
 \renewcommand{\thefootnote}{\arabic{footnote}}
 \makeatletter
 \long\def\@makefntext#1{%
   \parindent 1em\noindent
-  {\everypar{\color{white}}\color{white}%
+  {\everypar{\color{textmain}}\color{textmain}%
     \hb@xt@1.8em{\hss\@makefnmark}#1}%
 }
 \renewcommand{\footnoterule}{%
   \kern-3pt
-  {\color{white}\hrule width .4\columnwidth height .4pt}%
+  {\color{gold}\hrule width .4\columnwidth height .6pt}%
   \kern2.6pt
 }
-% Evita que a continuação de uma nota longa perca a cor ao atravessar páginas.
 \interfootnotelinepenalty=10000
 \makeatother
 
 % ----------------------------------------------------------------------
-%  BIBLIOTECA DE CAMPOS DA FICHA (boxes temáticos)
+%  FICHAS DIDATICAS — mesma API, cores claras com tarja semantica
 % ----------------------------------------------------------------------
-\newtcolorbox{descricao}{enhanced,breakable,boxrule=0.5pt,arc=1mm,
+\newtcolorbox{descricao}{enhanced,breakable,boxrule=0.6pt,arc=1.4mm,
   left=2.5mm,right=2.5mm,top=1.6mm,bottom=2mm,
-  colback=panel,colframe=plumAccent,colbacktitle=plumDeep,coltitle=white,
-  fonttitle=\bfseries\small,title={Descrição}}
+  colback=white,colframe=steel,colbacktitle=steel,coltitle=white,
+  borderline west={3pt}{0pt}{steel},
+  fonttitle=\bfseries\small\sffamily,title={Descricao — o que e}}
 
-\newtcolorbox{funcao}{enhanced,breakable,boxrule=0.5pt,arc=1mm,
+\newtcolorbox{funcao}{enhanced,breakable,boxrule=0.6pt,arc=1.4mm,
   left=2.5mm,right=2.5mm,top=1.6mm,bottom=2mm,
-  colback=panelAlt,colframe=plumAccent,colbacktitle=plumDeep,coltitle=white,
-  fonttitle=\bfseries\small,title={Função}}
+  colback=blueBg,colframe=steel,colbacktitle=navy,coltitle=white,
+  borderline west={3pt}{0pt}{navy},
+  fonttitle=\bfseries\small\sffamily,title={Funcao — para que serve}}
 
-\newtcolorbox{definicao}{enhanced,breakable,boxrule=0.5pt,arc=1mm,
+\newtcolorbox{definicao}{enhanced,breakable,boxrule=0.6pt,arc=1.4mm,
   left=2.5mm,right=2.5mm,top=1.6mm,bottom=2mm,
-  colback=panelAlt,colframe=plumAccent,colbacktitle=plumDeep,coltitle=white,
-  fonttitle=\bfseries\small,title={Definição}}
+  colback=white,colframe=navy,colbacktitle=navy,coltitle=white,
+  borderline west={3pt}{0pt}{navy},
+  fonttitle=\bfseries\small\sffamily,title={Definicao}}
 
-\newtcolorbox{conceito}{enhanced,breakable,boxrule=0.5pt,arc=1mm,
+\newtcolorbox{conceito}{enhanced,breakable,boxrule=0.6pt,arc=1.4mm,
   left=2.5mm,right=2.5mm,top=1.6mm,bottom=2mm,
-  colback=panelAlt,colframe=plumAccent,colbacktitle=plumDeep,coltitle=white,
-  fonttitle=\bfseries\small,title={Conceito}}
+  colback=white,colframe=violet,colbacktitle=violet,coltitle=white,
+  borderline west={3pt}{0pt}{violet},
+  fonttitle=\bfseries\small\sffamily,title={Conceito}}
 
-\newtcolorbox{metodo}{enhanced,breakable,boxrule=0.5pt,arc=1mm,
+\newtcolorbox{metodo}{enhanced,breakable,boxrule=0.6pt,arc=1.4mm,
   left=2.5mm,right=2.5mm,top=1.6mm,bottom=2mm,
-  colback=panelAlt,colframe=plumAccent,colbacktitle=plumDeep,coltitle=white,
-  fonttitle=\bfseries\small,title={Método}}
+  colback=white,colframe=teal,colbacktitle=teal,coltitle=white,
+  borderline west={3pt}{0pt}{teal},
+  fonttitle=\bfseries\small\sffamily,title={Metodo — passo a passo}}
 
-\newtcolorbox{resultado}{enhanced,breakable,boxrule=0.5pt,arc=1mm,
+\newtcolorbox{resultado}{enhanced,breakable,boxrule=0.6pt,arc=1.4mm,
   left=2.5mm,right=2.5mm,top=1.6mm,bottom=2mm,
-  colback=panelAlt,colframe=plumAccent,colbacktitle=plumDeep,coltitle=white,
-  fonttitle=\bfseries\small,title={Resultado e Cálculo}}
+  colback=greenBg,colframe=green,colbacktitle=green,coltitle=white,
+  borderline west={3pt}{0pt}{green},
+  fonttitle=\bfseries\small\sffamily,title={Resultado e Calculo}}
 
-\newtcolorbox{limite}{enhanced,breakable,boxrule=0.5pt,arc=1mm,
+\newtcolorbox{limite}{enhanced,breakable,boxrule=0.6pt,arc=1.4mm,
   left=2.5mm,right=2.5mm,top=1.6mm,bottom=2mm,
-  colback=panelAlt,colframe=plumAccent,colbacktitle=plumDeep,coltitle=white,
-  fonttitle=\bfseries\small,title={Impacto e Limites}}
+  colback=amberBg,colframe=amber,colbacktitle=amber,coltitle=white,
+  borderline west={3pt}{0pt}{amber},
+  fonttitle=\bfseries\small\sffamily,title={Limite — o que nao concluir}}
 
-\newtcolorbox{arquitetura}{enhanced,breakable,boxrule=0.5pt,arc=1mm,
+\newtcolorbox{arquitetura}{enhanced,breakable,boxrule=0.6pt,arc=1.4mm,
   left=2.5mm,right=2.5mm,top=1.6mm,bottom=2mm,
-  colback=panelAlt,colframe=slate,colbacktitle=plumDeep,coltitle=white,
-  fonttitle=\bfseries\small,title={Arquitetura e Elementos Técnicos}}
+  colback=white,colframe=slate,colbacktitle=slate,coltitle=white,
+  borderline west={3pt}{0pt}{slate},
+  fonttitle=\bfseries\small\sffamily,title={Arquitetura e Elementos Tecnicos}}
 
-\newtcolorbox{niveis}{enhanced,breakable,boxrule=0.5pt,arc=1mm,
+\newtcolorbox{niveis}{enhanced,breakable,boxrule=0.6pt,arc=1.4mm,
   left=2.5mm,right=2.5mm,top=1.6mm,bottom=2mm,
-  colback=panelAlt,colframe=slate,colbacktitle=plumDeep,coltitle=white,
-  fonttitle=\bfseries\small,title={Leitura do Elemento — Intuição $\rightarrow$ Implementação $\rightarrow$ Formalização}}
+  colback=blueBg,colframe=navy,colbacktitle=white,coltitle=navy,
+  borderline west={3pt}{0pt}{steel},
+  fonttitle=\bfseries\small\sffamily,title={Leitura em 3 niveis — Intuicao, Implementacao, Formalizacao}}
 
-% Roteiro pedagógico usado em cada módulo: situa quem está começando,
-% define o vocabulário, conduz à leitura técnica e termina com uma pergunta
-% que exige evidência. A sequência evita pressupor conhecimento prévio.
 \newcommand{\roteirodidatico}[5]{%
-  \begin{tcolorbox}[enhanced,breakable,boxrule=0.55pt,arc=1mm,
-    left=2.5mm,right=2.5mm,top=1.6mm,bottom=2mm,
-    colback=panel,colframe=plumAccent,colbacktitle=plumDeep,coltitle=white,
-    fonttitle=\bfseries\small,title={Roteiro de aprendizagem: do primeiro contato à análise avançada}]
-    \textbf{Ponto de partida.} #1\par\smallskip
-    \textbf{Vocabulário essencial.} #2\par\smallskip
-    \textbf{Percurso técnico.} #3\par\smallskip
-    \textbf{Leitura avançada.} #4\par\smallskip
-    \textbf{Questão de verificação.} #5
+  \begin{tcolorbox}[enhanced,breakable,boxrule=0.7pt,arc=1.6mm,
+    left=2.5mm,right=2.5mm,top=1.8mm,bottom=2.2mm,
+    colback=blueBg,colframe=steel,colbacktitle=navy,coltitle=white,
+    borderline west={4pt}{0pt}{steel},
+    fonttitle=\bfseries\small\sffamily,title={Roteiro de aprendizagem: do primeiro contato a analise avancada}]
+    \color{textmain}\textbf{Ponto de partida.} #1\par\smallskip
+    \textbf{Vocabulario essencial.} #2\par\smallskip
+    \textbf{Percurso tecnico.} #3\par\smallskip
+    \textbf{Leitura avancada.} #4\par\smallskip
+    \textbf{Questao de verificacao.} #5
   \end{tcolorbox}\par\smallskip
 }
 \newcommand{\casoguiado}[2]{%
-  \begin{tcolorbox}[enhanced,breakable,boxrule=0.45pt,arc=1mm,
+  \begin{tcolorbox}[enhanced,breakable,boxrule=0.6pt,arc=1.4mm,
     left=2.5mm,right=2.5mm,top=1.4mm,bottom=1.8mm,
-    colback=panelAlt,colframe=steel,colbacktitle=plumDeep,coltitle=white,
-    fonttitle=\bfseries\small,title={Exemplo guiado — #1}]
-    #2
+    colback=white,colframe=gold,colbacktitle=white,coltitle=navy,
+    borderline west={4pt}{0pt}{gold},
+    fonttitle=\bfseries\small\sffamily,title={Exemplo guiado — #1}]
+    \color{textmain}#2
   \end{tcolorbox}\par\smallskip
 }
 
-\newtcolorbox{aviso}{enhanced,breakable,boxrule=0.5pt,arc=1mm,
+\newtcolorbox{aviso}{enhanced,breakable,boxrule=0.7pt,arc=1.4mm,
   left=2.5mm,right=2.5mm,top=1.6mm,bottom=2mm,
-  colback=panelAlt,colframe=plumAccent,colbacktitle=plumDeep,coltitle=white,
-  fonttitle=\bfseries\small,title={Aviso / Anti-overclaim}}
+  colback=amberBg,colframe=amber,colbacktitle=red,coltitle=white,
+  borderline west={4pt}{0pt}{red},
+  fonttitle=\bfseries\small\sffamily,title={Aviso / Anti-overclaim}}
 
-% Processo = fluxo de trabalho em etapas numeradas
-\newtcolorbox{processo}{enhanced,breakable,boxrule=0.5pt,arc=1mm,
+\newtcolorbox{processo}{enhanced,breakable,boxrule=0.6pt,arc=1.4mm,
   left=2.5mm,right=2.5mm,top=1.6mm,bottom=2mm,
-  colback=panelAlt,colframe=plumAccent,colbacktitle=plumDeep,coltitle=white,
-  fonttitle=\bfseries\small,title={Fluxo de Trabalho (Processo)}}
+  colback=white,colframe=teal,colbacktitle=teal,coltitle=white,
+  borderline west={3pt}{0pt}{teal},
+  fonttitle=\bfseries\small\sffamily,title={Fluxo de Trabalho (Processo)}}
 
-% Referência auditada (biblioteca do apêndice)
-\newtcolorbox{referencia}{enhanced,breakable,boxrule=0.5pt,arc=1mm,
+\newtcolorbox{referencia}{enhanced,breakable,boxrule=0.6pt,arc=1.4mm,
   left=2.5mm,right=2.5mm,top=1.6mm,bottom=2mm,
-  colback=panelAlt,colframe=plumAccent,colbacktitle=plumDeep,coltitle=white,
-  fonttitle=\bfseries\small,title={Referência auditada}}
+  colback=white,colframe=navy,colbacktitle=navy,coltitle=white,
+  borderline west={3pt}{0pt}{navy},
+  fonttitle=\bfseries\small\sffamily,title={Referencia auditada}}
 
-% Texto claro em todos os painéis editoriais do tema escuro.
+% Caixas novas do livro didatico (R100): sem quebrar as antigas.
+\newtcolorbox{dicaleigo}{enhanced,breakable,boxrule=0.6pt,arc=1.4mm,
+  left=2.5mm,right=2.5mm,top=1.6mm,bottom=2mm,
+  colback=blueBg,colframe=steel,colbacktitle=steel,coltitle=white,
+  borderline west={4pt}{0pt}{steel},
+  fonttitle=\bfseries\small\sffamily,title={Para leigos — em 30 segundos}}
+
+\newtcolorbox{paratecnico}{enhanced,breakable,boxrule=0.6pt,arc=1.4mm,
+  left=2.5mm,right=2.5mm,top=1.6mm,bottom=2mm,
+  colback=white,colframe=slate,colbacktitle=slate,coltitle=white,
+  borderline west={4pt}{0pt}{slate},
+  fonttitle=\bfseries\small\sffamily,title={Para tecnicos — onde conferir}}
+
+\newtcolorbox{checkpoint}{enhanced,breakable,boxrule=0.7pt,arc=1.4mm,
+  left=2.5mm,right=2.5mm,top=1.6mm,bottom=2mm,
+  colback=greenBg,colframe=green,colbacktitle=green,coltitle=white,
+  borderline west={4pt}{0pt}{green},
+  fonttitle=\bfseries\small\sffamily,title={Checkpoint — posso avancar?}}
+
 \tcbset{coltext=textmain,fontupper=\color{textmain}}
 
 % ----------------------------------------------------------------------
-%  FLUXOGRAMAS (tikz)
+%  FLUXOGRAMAS (tikz) — nos claros para papel
 % ----------------------------------------------------------------------
 \tikzset{
-  fn/.style={draw=lineDark,rounded corners=2pt,fill=panel,align=center,text=textmain,
+  fn/.style={draw=slate,rounded corners=2pt,fill=white,align=center,text=textmain,
              inner sep=3pt,minimum height=6mm,font=\scriptsize,text width=3.3cm},
-  fns/.style={draw=steel,rounded corners=2pt,fill=steelV,align=center,text=textmain,
+  fns/.style={draw=steel,rounded corners=2pt,fill=blueBg,align=center,text=navy,
              inner sep=3pt,minimum height=6mm,font=\scriptsize\bfseries,
              text width=3.3cm},
-  fne/.style={draw=gold,rounded corners=9pt,fill=navy,align=center,
+  fne/.style={draw=navy,rounded corners=9pt,fill=navy,align=center,
              inner sep=3pt,minimum height=6mm,font=\scriptsize\bfseries,
              text=white,text width=3.3cm},
-  fde/.style={draw=amber,fill=amber!45!navy,align=center,text=textmain,
+  fde/.style={draw=amber,fill=amberBg,align=center,text=textmain,
              inner sep=3pt,minimum height=6mm,font=\scriptsize,
              diamond,aspect=2.2,text width=3.3cm},
-  seta/.style={-Stealth,draw=textmuted,thick},
+  seta/.style={-Stealth,draw=slate,thick},
 }
 \newcommand{\nodep}[1]{{\urlstyle{tt}\scriptsize\bfseries\path{#1}}}
 
 \newenvironment{flowch}[2][Fluxograma]{%
   \par\smallskip
-  {\small\sffamily\bfseries\color{steel}#1}\hfill
+  \noindent\begin{minipage}{\linewidth}%
+  {\small\sffamily\bfseries\color{navy}#1}\hfill
   {\scriptsize\color{textmuted}#2}\par\smallskip
   \begin{center}\begin{tikzpicture}[font=\scriptsize]
 }{%
-  \end{tikzpicture}\end{center}\par\smallskip}
+  \end{tikzpicture}\end{center}\end{minipage}\par\smallskip}
 
 % ----------------------------------------------------------------------
 %  LISTAS INTERPRETATIVAS
@@ -312,29 +335,26 @@
   \end{description}}
 
 % ----------------------------------------------------------------------
-%  RÓTULOS DE CÓDIGO / CAMINHOS — tipos literais seguros dentro de boxes:
-%  o pacote "url" permite quebra de linha em / _ . - e mantém os caracteres
-%  literais (sem erro de math mode com "_" etc.).
+%  ROTULOS DE CODIGO / CAMINHOS
 % ----------------------------------------------------------------------
 \usepackage{url}
 \newcommand{\pth}[1]{{\urlstyle{tt}\small\path{#1}}}
+\newcommand{\fontecore}[2]{\par\smallskip\textbf{Fonte primaria local:}
+  \pth{#1}.\par\nobreak
+  Identificador: \pth{#2}. Versao e hash no inventario desta edicao.\par}
 \newcommand{\cod}[1]{{\urlstyle{tt}\small\path{#1}}}
 \emergencystretch=3em
 \setlength{\hbadness}{4000}
 
 % ----------------------------------------------------------------------
-%  Conteúdo (Sumário) com hiperlinks
+%  SUMARIO com hiperlinks
 % ----------------------------------------------------------------------
 \usepackage[nottoc]{tocbibind}
 
-% ----------------------------------------------------------------------
-%  SUMÁRIO: reserva largura suficiente para números de página romanos
-%  longos (ex.: "xxii"/"xviii"), que estouravam ~0,6 pt cada entrada.
-% ----------------------------------------------------------------------
 \makeatletter
 \renewcommand{\@pnumwidth}{2.2em}
 \renewcommand{\@tocrmarg}{2.8em}
-\renewcommand{\cftpartpagefont}{\color{textmain}}
+\renewcommand{\cftpartpagefont}{\color{navy}}
 \renewcommand{\cftchappagefont}{\color{textmain}}
 \renewcommand{\cftsecpagefont}{\color{textmuted}}
 \renewcommand{\cftsubsecpagefont}{\color{textmuted}}

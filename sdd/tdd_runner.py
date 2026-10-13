@@ -55,6 +55,30 @@ class TDDRunner:
             return self._run_criterion_runtime_spec_test(spec)
         return self._run_legacy_spec_test(spec)
 
+    def run_delivery_test(self, spec: Specification, *, history=None) -> TrustedTestEvidence:
+        """Gate de software: exige RED anterior antes de iniciar o GREEN."""
+        from sdd.tdd_history import TDDHistory
+        history = history or TDDHistory(root=REPO_ROOT)
+        def closed(reason):
+            return _issue_trusted_test_evidence(spec.spec_id, _canonical_spec_test_file(spec.test_file) or "",
+                executed=False, passed=False, returncode=None, summary="Entrega bloqueada pelo histórico TDD.", error=reason)
+        if type(history) is not TDDHistory or str(history.root) != os.path.realpath(REPO_ROOT) or history.preflight(spec).get("verified") is not True:
+            return closed("red_history_missing_or_invalid")
+        green = history.run(spec, phase="green")
+        pair = history.validate_pair(spec, green)
+        if pair.get("verified") is not True:
+            return closed("red_green_pair_invalid")
+        # Preserva a validação granular já existente, independente do recibo
+        # global da fase. Esta segunda execução GREEN é explícita no histórico.
+        evidence = self.run_spec_test(spec)
+        if not evidence.passed or history.validate_pair(spec, green).get("verified") is not True:
+            return closed("current_green_invalid")
+        return _issue_trusted_test_evidence(spec.spec_id, evidence.test_file,
+            executed=evidence.executed, passed=evidence.passed, returncode=evidence.returncode,
+            summary=evidence.summary, error=evidence.error, contract_sha256=evidence.contract_sha256,
+            criterion_records=evidence.criterion_records, execution_id=evidence.execution_id,
+            _run_seal=evidence._run_seal, tdd_history_receipt_id=green.receipt_id)
+
     def _run_legacy_spec_test(self, spec: Specification) -> TrustedTestEvidence:
         """Executa o ``test_file`` vinculado e emite evidência selada.
 
@@ -361,8 +385,8 @@ class TDDRunner:
     def _verify_output(self, spec: Specification, output: Any) -> Dict[str, Any]:
         """Verifica a entrega e injeta prova de teste apenas quando ela é exigida."""
         trusted_test_evidence = (
-            self.run_spec_test(spec)
-            if spec.requires_trusted_test_evidence
+            self.run_delivery_test(spec)
+            if spec.requires_trusted_test_evidence or spec.test_file
             else None
         )
         return spec_verifier.verify(
@@ -382,11 +406,16 @@ class TDDRunner:
         """
         history: List[Dict[str, Any]] = []
 
-        # --- FASE RED ---
+        # --- PRÉ-CONDIÇÃO / FASE RED ---
         if not spec.criteria:
             return {"phase": "red", "success": False,
                     "error": "Spec sem critérios de aceitação: TDD exige critérios antes da implementação."}
         spec.status = "red"
+        if spec.test_file or spec.requires_trusted_test_evidence:
+            from sdd.tdd_history import TDDHistory
+            preflight = TDDHistory(root=REPO_ROOT).preflight(spec)
+            if preflight.get("verified") is not True:
+                return {"phase": "red", "success": False, "error": "red_history_missing_or_invalid", "history": [preflight]}
         red_check = spec_verifier.verify(spec.spec_id, None)
         history.append({"phase": "red", "verification": red_check})
         logger.info(f"[RED] {spec.spec_id}: {red_check['passed_count']}/{red_check['total_count']} (esperado: 0)")
@@ -416,7 +445,10 @@ class TDDRunner:
                 output = refactored  # aceita a refatoração somente se continuar verde
                 logger.info(f"[REFACTOR] {spec.spec_id}: mantido verde, refatoração aceita")
             else:
-                logger.warning(f"[REFACTOR] {spec.spec_id}: refatoração quebrou critérios, revertida")
+                spec.status = "red"
+                logger.warning(f"[REFACTOR] {spec.spec_id}: critérios reprovados; ciclo bloqueado sem presumir rollback")
+                return {"phase": "refactor", "success": False, "output": refactored,
+                        "error": "refactor_validation_failed", "history": history}
 
         spec.status = "verified"
         return {"phase": "verified", "success": True, "output": output, "history": history}

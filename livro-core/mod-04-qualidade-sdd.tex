@@ -21,7 +21,7 @@ Você aprenderá: (1) o ciclo \textbf{SDD/TDD} do Core; (2) a estrutura de uma
 \pth{Specification} com critérios de aceitação e registros de execução; (3) as
 regras contra injeção no motor de especificações; (4) as contagens observadas
 neste checkout em 29/09/2026 (371 arquivos em \pth{specs/}, 285 da série R*,
-260 módulos \pth{test\_r*} e 455 registros de evolução).
+260 módulos \pth{test_r*} e 455 registros de evolução).
 \end{resultado}
 
 \section{O ciclo de especificação (Spec-Driven Development)}
@@ -78,7 +78,7 @@ controle, sem caminhos absolutos).
 \item \textbf{Seletor de teste} — \cod{_is_safe_pytest_selector} e
 \cod{_canonical_pytest_target} traduzem a critério para um alvo de
 \pth{pytest} canônico (sem injeção de comando).
-\item \textbf{Rodar} — \pth{sdd/tdd\_runner.py} executa a família
+\item \textbf{Rodar} — \pth{sdd/tdd_runner.py} executa a família
 \pth{tests/test_r*}; cada critério produz um
 \pth{CriterionRuntimeRecord} de saída.
 \item \textbf{Registrar} — o ciclo de evolução vai a
@@ -96,8 +96,15 @@ controle, sem caminhos absolutos).
 \end{flowch}
 
 \begin{descricao}
-\textbf{Como funciona e por quê.} O desenho tem uma seta interrompida de propósito: entre \emph{especificação} e \emph{implementação} há uma \textbf{comporta} que só abre com rastro verificado. O caminho alternativo é a seta que volta: spec insuficiente $\to$ nova spec. A seta tracejada não é estilo, é \emph{tipo diferente de ligação}: retroalimentação, não fluxo.
-\textbf{Justificativa.} Um registro verificável distingue \emph{estado da arte} de \emph{estado da prática}: as diretrizes PRISMA exigem relatos completos e transparentes das revisões sistemáticas, e um relatório sem rastro é um relatório em que ninguém confia. A comporta do desenho é a tradução dessa exigência editorial para um portão técnico -- o mesmo princípio aplicado a código \citref{PAGE, M. J. et al. PRISMA 2020 explanation and elaboration: updated guidance and exemplars for reporting systematic reviews. \emph{BMJ}, v.~372, n160, 2021}{10.1136/bmj.n160}{Um rastro verificável é o que separa \emph{estado da arte} de \emph{estado da prática}: as diretrizes PRISMA exigem relatos completos e transparentes das revisões sistemáticas, e um relatório sem rastro é um relatório em que ninguém confia. }{reports of systematic reviews should be transparent and complete}{os relatos de revisões sistemáticas devem ser transparentes e completos.}{PAGE et al., 2021, p.~n160}.\end{descricao}
+\textbf{Como funciona e por quê.} As setas levam da especificação aos critérios e aos testes associados. O retorno marcado sem prova indica que não se deve aceitar o cumprimento quando a evidência exigida pelo contrato está ausente ou falhou.
+\textbf{Justificativa.} Critérios explícitos permitem que a verificação associe uma execução e um artefato ao requisito correspondente, em vez de confiar em uma declaração de conclusão.
+\textbf{Limite.} Prova, neste esquema, significa evidência do teste vinculado. Não implica demonstração matemática, prova de segurança universal ou validação externa.
+\end{descricao}
+\fontecore{sdd/spec_engine.py}{SpecVerifier.verify}
+
+
+\noindent\textit{Contexto bibliográfico geral, sem certificação desta rota.} \citref{PAGE, M. J. et al. PRISMA 2020 explanation and elaboration: updated guidance and exemplars for reporting systematic reviews. \emph{BMJ}, v.~372, n160, 2021}{10.1136/bmj.n160}{Enquadramento teórico geral; a implementação desta rota é conferida na fonte primária local. Este artigo não certifica o funcionamento nem o desempenho do Core.}{reports of systematic reviews should be transparent and complete}{os relatos de revisões sistemáticas devem ser transparentes e completos.}{PAGE et al., 2021, p.~n160}
+
 
 \section{As regras duras de saneamento}
 
@@ -181,9 +188,9 @@ spec $\to$ teste $\to$ implementação; (2) a critério vira um
 \pth{AcceptanceCriterion} com \cod{check()}; (3) registro de execução é
 defensivo e intransigente; (4) saneamento impede injeção via frontmatter e
 seletor.\par\smallskip
-\textbf{Exercício sugerido:} abra \pth{sdd/spec\_engine.py}, implemente uma
+\textbf{Exercício sugerido:} abra \pth{sdd/spec_engine.py}, implemente uma
 \pth{Specification} de brinquedo com uma function \cod{check()} que falha,
-rode \pth{sdd/tdd\_runner.py} contra \pth{tests/test_r*}, e descreva por
+rode \pth{sdd/tdd_runner.py} contra \pth{tests/test_r*}, e descreva por
 escrito o que o \pth{CriterionRuntimeRecord} registra. Depois tente um seletor
 com \cod{; rm -rf} e observe o saneamento recusar — em ambiente de teste isolado.
 \end{resultado}
@@ -200,7 +207,7 @@ com \cod{; rm -rf} e observe o saneamento recusar — em ambiente de teste isola
 \elemento{Leitura guiada — Qualidade pela raiz}{\metainfo{ID}{N-04} \hfill \metainfo{Ciclo}{R614} \hfill \metainfo{Estilo}{medir o que se promete}}
 
 \begin{descricao}
-\textbf{A pergunta.} No Módulo 1, um cálculo hipotético mostrou como a
+\textbf{O fenômeno: A pergunta}  No Módulo 1, um cálculo hipotético mostrou como a
 probabilidade de ao menos uma falha pode crescer quando muitas saídas são
 reunidas. Esse exemplo não mede o Core. Agora examinaremos o mecanismo concreto:
 o que significa uma verificação aprovada, e qual parte do comportamento ela
@@ -235,7 +242,7 @@ a solução?
 \end{metodo}
 
 \begin{resultado}
-\textbf{Exemplo resolvido.} Há $T=260$ arquivos \pth{tests/test\_r*.py} e
+\textbf{Exemplo resolvido.} Há $T=260$ arquivos \pth{tests/test_r*.py} e
 $S=371$ arquivos Markdown em \pth{specs/}. A razão de contagens é
 \[ q = \frac{T}{S} = \frac{260}{371} \approx 0{,}701 \quad (\approx 70\%). \]
 Esse quociente não é cobertura: um arquivo de teste pode verificar vários
@@ -248,7 +255,7 @@ total por $S$. Separadamente, $285/371 \approx 0{,}768$, portanto cerca de
 
 \begin{resultado}
 \textbf{Ordem de grandeza e verificação.} No mesmo checkout há 285 specs da
-série R e 260 arquivos \pth{tests/test\_r*.py}; a razão simples é
+série R e 260 arquivos \pth{tests/test_r*.py}; a razão simples é
 $260/285 \approx 0{,}91$ arquivo de teste por spec. Ela não prova uma relação
 um a um: para isso, é necessário conferir os seletores e os critérios de cada
 spec. As contagens podem ser reproduzidas com \texttt{find\ specs\ -maxdepth\ 1\ -name\ 'SPEC-935-R*.md'} e \texttt{find\ tests\ -maxdepth\ 1\ -name\ 'test\_r*.py'}. O total de

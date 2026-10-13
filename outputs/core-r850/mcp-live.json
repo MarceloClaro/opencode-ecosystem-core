@@ -1,0 +1,69 @@
+{
+  "tools": [
+    "core_rea_status",
+    "core_rea_inspect",
+    "core_rea_explain",
+    "core_rea_setup"
+  ],
+  "status_guard": true,
+  "inspect": {
+    "schema": "core-rea-local-v1",
+    "success": true,
+    "status": "completed",
+    "operation": "inspect",
+    "target_kind": "html",
+    "target_path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r850/fixtures/index.html",
+    "target_digest": {
+      "sha256": "afafd5eb1d830af23d0a3f19ab6f82556995e130ce342c43be8b51a4cbe2be91",
+      "files": 1,
+      "bytes": 183,
+      "algorithm": "sha256"
+    },
+    "target_unchanged": true,
+    "privacy": {
+      "mode": "isolated_local_analysis",
+      "network_namespace": "net:[4026532298]",
+      "pid_namespace": "pid:[4026532297]",
+      "interfaces": [
+        "lo"
+      ],
+      "external_route_available": false,
+      "host_probe_connected": false,
+      "scope": "analytical_worker_and_descendants; trusted_local_MCP_client_required"
+    },
+    "findings": [
+      {
+        "description": "Título declarado: Exemplo local Core.",
+        "evidence_id": "ev_core_html_afafd5eb1d830af23d0a3f19"
+      },
+      {
+        "description": "HTML declara 1 formulário(s) e 1 script(s).",
+        "evidence_id": "ev_core_html_afafd5eb1d830af23d0a3f19"
+      }
+    ],
+    "limitations": [
+      "A aplicação alvo não foi executada; achados são estáticos.",
+      "Inspeção e metadados não recuperam necessariamente o código-fonte original.",
+      "A garantia local cobre o worker; clientes de inferência em nuvem não fazem parte deste modo.",
+      "Links e scripts foram enumerados, sem acesso aos destinos nem execução de JavaScript."
+    ],
+    "externally_validated": false,
+    "receipt_path": "/home/marceloclaro/opencode-ecosystem-core/.opencode/rea/local-assistant/evidence/13c7697b94fed3f2896996c93429df0c9cbfa14db8bd0816ddaf5a633668a818.json",
+    "receipt_sha256": "13c7697b94fed3f2896996c93429df0c9cbfa14db8bd0816ddaf5a633668a818",
+    "metacognition": {
+      "observation_id": "6bfab51c-1f4e-4390-b2a0-d223125b2526",
+      "persisted": true,
+      "scope_id": "c87d43ce04605f7533aa99690b735226b696c7546c3ff0baca727b43c0876322",
+      "previous_observation_id": "2ca46beb-9429-409b-80d9-63f350ba4913",
+      "state_transition": {
+        "from": null,
+        "to": null
+      },
+      "confidence_promoted": false,
+      "externally_validated": false
+    }
+  },
+  "explanation": "Inspeção local estática: html.\nTítulo declarado: Exemplo local Core. [evidência: ev_core_html_afafd5eb1d830af23d0a3f19]\nHTML declara 1 formulário(s) e 1 script(s). [evidência: ev_core_html_afafd5eb1d830af23d0a3f19]\nLimites:\n- A aplicação alvo não foi executada; achados são estáticos.\n- Inspeção e metadados não recuperam necessariamente o código-fonte original.\n- A garantia local cobre o worker; clientes de inferência em nuvem não fazem parte deste modo.\n- Links e scripts foram enumerados, sem acesso aos destinos nem execução de JavaScript.\nRecibo local: /home/marceloclaro/opencode-ecosystem-core/.opencode/rea/local-assistant/evidence/13c7697b94fed3f2896996c93429df0c9cbfa14db8bd0816ddaf5a633668a818.json",
+  "transport": "real_stdio_sdk",
+  "externally_validated": false
+}

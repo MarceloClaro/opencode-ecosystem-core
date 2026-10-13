@@ -139,21 +139,15 @@ registros tenham seguido exatamente as mesmas etapas.
 \end{flowch}
 
 \begin{descricao}
-\textbf{Como ler o desenho.} As setas ligam \emph{SENSE}, \emph{DISCOVER},
-\emph{INSTALL}, \emph{VERIFY}, \emph{EVOLVE} e \emph{LEARN}, nesta ordem.
-Assim, uma necessidade identificada leva à busca de uma solução; a solução é
-instalada, verificada e registrada; por fim, o aprendizado retorna ao sistema.
-A seta tracejada marcada ``falhou'' volta da verificação para a descoberta: um
-resultado reprovado exige revisar a solução antes de tentar novamente.
-\textbf{Justificativa.} A sequência separa a intenção da mudança, sua execução e
-a evidência de que o resultado atende ao critério. Essa separação favorece a
-reprodutibilidade porque permite a outra pessoa reconstruir o que foi alterado e
-qual evidência sustentou a conclusão. Peng discute a reprodutibilidade como um
-padrão mínimo para avaliar alegações científicas quando uma replicação
-independente completa não está disponível. A aplicação ao Core é uma analogia
-metodológica: o artigo não descreve o registro de ciclos deste repositório
-\citref{PENG, R. D. Reproducible research in computational science. \emph{Science}, v.~334, n.~6060, p.~1226-1227, 2011}{10.1126/science.1213847}{A sequência separa intenção, execução e verificação; sua relação com Peng é uma analogia de método. O artigo sustenta a reprodutibilidade como padrão mínimo para avaliar alegações, não uma regra específica de backup ou registro de software.}{Reproducibility has the potential to serve as a minimum standard for judging scientific claims when full independent replication of a study is not possible}{A reprodutibilidade tem o potencial de servir como padrão mínimo para julgar alegações científicas quando a replicação independente completa de um estudo não é possível.}{PENG, 2011, p.~1226--1227}.
+\textbf{Como funciona e por quê.} Leia as setas na ordem SENSE, DISCOVER, INSTALL, VERIFY, EVOLVE e LEARN. O retorno tracejado de VERIFY a DISCOVER representa revisar uma mudança reprovada, sem promover a falha a um ciclo aprovado.
+\textbf{Justificativa.} O registro de evolução conserva objetivo, mudanças, lições e evidências; verificar antes de registrar uma conclusão aceita torna sua proveniência examinável.
+\textbf{Limite.} As seis etapas são um roteiro didático. O método record registra o ciclo recebido; ele não instala componentes nem executa automaticamente todos esses passos.
 \end{descricao}
+\fontecore{evolution/cycles.py}{EvolutionRegistry.record}
+
+
+\noindent\textit{Contexto bibliográfico geral, sem certificação desta rota.} \citref{PENG, R. D. Reproducible research in computational science. \emph{Science}, v.~334, n.~6060, p.~1226-1227, 2011}{10.1126/science.1213847}{Enquadramento teórico geral; a implementação desta rota é conferida na fonte primária local. Este artigo não certifica o funcionamento nem o desempenho do Core.}{Reproducibility has the potential to serve as a minimum standard for judging scientific claims when full independent replication of a study is not possible}{A reprodutibilidade tem o potencial de servir como padrão mínimo para julgar alegações científicas quando a replicação independente completa de um estudo não é possível.}{PENG, 2011, p.~1226--1227}
+
 
 \begin{funcao}
 Transformar ``mudança numérica de versão'' em \emph{memória documentada}: qualquer
@@ -299,7 +293,7 @@ relações entre especificações, mudanças e testes.
 \end{resultado}
 
 \begin{resultado}
-\textbf{Como interpretar a série temporal.} Em 29/09/2026, o arquivo
+\textbf{Ordem de grandeza e verificação: Como interpretar a série temporal} Em 29/09/2026, o arquivo
 \pth{evolution/cycles.json} continha 455 registros com carimbo temporal; o mais
 antigo era de 22/07/2026. A diferença entre essas datas é de 69 dias, portanto a
 razão aritmética é $455/69 \approx 6{,}6$ registros por dia. Esse valor descreve

@@ -1,0 +1,86 @@
+{
+  "operation": "analyze",
+  "status": "failed",
+  "success": false,
+  "available": true,
+  "installed": true,
+  "verification": "mcp_execution",
+  "provenance": {
+    "repository": "https://github.com/MarceloClaro/rea",
+    "commit": "4daea941bfeeb426886f2d048aed7f3cb2dbf97b",
+    "version": "6.4.0",
+    "runtime": {
+      "source_dir": "/home/marceloclaro/.local/share/opencode-core/rea",
+      "node": "/usr/bin/node",
+      "launcher": "/home/marceloclaro/.local/share/opencode-core/rea/scripts/rea.mjs"
+    },
+    "response_sha256": "5e567bf8d7625d65c87dbc0aa9e6c7028ab615b671a440ee72b343e7b49f8f33"
+  },
+  "native_provider": {
+    "provider": "ghidra",
+    "configuration_available": true,
+    "verification": "installation_only",
+    "ghidra_install_dir": "/home/marceloclaro/.local/share/opencode-core/native-rea/ghidra_12.1.4_PUBLIC",
+    "java_home": "/home/marceloclaro/.local/share/opencode-core/native-rea/jdk-21.0.12.1+1",
+    "declared_version": "12.1.4"
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"error\":{\"code\":\"unsupported_target\",\"category\":\"unsupported_target\",\"message\":\"Unsupported target for analyze_javascript_application at /home/marceloclaro/opencode-ecosystem-core/outputs/core-r850/fixtures/app.js: JavaScript application analysis accepts only a directory or an .asar file\",\"retryable\":false,\"remediation\":{\"action\":\"Select an extracted application directory, an app bundle, or an .asar file such as Contents/Resources/app.asar.\"},\"details\":{\"operation\":\"analyze_javascript_application\",\"path\":\"/home/marceloclaro/opencode-ecosystem-core/outputs/core-r850/fixtures/app.js\",\"reason\":\"JavaScript application analysis accepts only a directory or an .asar file\"}}}"
+      }
+    ],
+    "isError": true
+  },
+  "error": "REA retornou isError; consulte a resposta MCP preservada.",
+  "reason": "Conclusão operacional MCP não atribui validação externa ou confiança adicional.",
+  "server": {
+    "name": "rea",
+    "version": "6.4.0"
+  },
+  "tool_count": 170,
+  "tool": "analyze_javascript_application",
+  "stderr": "{\"level\":40,\"time\":1791882661249,\"application\":\"rea\",\"mode\":\"mcp\",\"layer\":\"server\",\"tool\":\"analyze_javascript_application\",\"durationMs\":51.45,\"status\":\"error\",\"msg\":\"MCP tool execution completed\"}\n",
+  "stderr_truncated": false,
+  "error_code": "tool_failure",
+  "elapsed_seconds": 19.263,
+  "metacognition": {
+    "observation_id": "9f927e2f-0080-4e32-ae70-315b9d0fd79e",
+    "persisted": true,
+    "scope_id": "c87d43ce04605f7533aa99690b735226b696c7546c3ff0baca727b43c0876322",
+    "previous_observation_id": null,
+    "state_transition": {
+      "from": null,
+      "to": null
+    },
+    "confidence_promoted": false,
+    "externally_validated": false
+  },
+  "privacy": {
+    "mode": "isolated_local_analysis",
+    "network_namespace": "net:[4026532296]",
+    "pid_namespace": "pid:[4026532295]",
+    "interfaces": [
+      "lo"
+    ],
+    "external_route_available": false,
+    "host_probe_connected": false,
+    "scope": "analytical_worker_and_descendants; trusted_local_MCP_client_required"
+  },
+  "target_kind": "javascript",
+  "target_digest": {
+    "sha256": "f13b598bf21632a1ea712cf0d15bdde397a5367e288cd7efef9a036a4e7f6b37",
+    "files": 1,
+    "bytes": 275,
+    "algorithm": "sha256"
+  },
+  "limitations": [
+    "A aplicação alvo não foi executada; achados são estáticos.",
+    "Inspeção e metadados não recuperam necessariamente o código-fonte original.",
+    "A garantia local cobre o worker; clientes de inferência em nuvem não fazem parte deste modo."
+  ],
+  "externally_validated": false,
+  "receipt_path": "/home/marceloclaro/opencode-ecosystem-core/.opencode/rea/local-assistant/evidence/d3a4c99e2bd8578135eedfa22f1cd215ffabfc363659d8ffa41c0771ed00f8d7.json",
+  "receipt_sha256": "d3a4c99e2bd8578135eedfa22f1cd215ffabfc363659d8ffa41c0771ed00f8d7"
+}

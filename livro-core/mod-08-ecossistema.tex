@@ -61,7 +61,7 @@ garante que o agente ou servidor esteja instalado ou pronto para uso.
 \matrix[matrix of nodes,name=cfg,row sep=5mm,column sep=4mm,nodes={fn},ampersand replacement=\&]{
  |[fns]|AGENTS.md + catálogo + docs \\[2mm]
  |[fns]|\nodep{integrations/opencode_cli.py} \\[2mm]
- |[fns]|\nodep{compila (modos, permissões, MCP)} \\[2mm]
+ |[fns]|compila modos, permissões e MCP \\[2mm]
  |[fns]|escreve opencode.json \\[2mm]
  |[fns]|CLI carrega ecossistema \\ \\
 };
@@ -75,21 +75,15 @@ garante que o agente ou servidor esteja instalado ou pronto para uso.
 \end{flowch}
 
 \begin{descricao}
-\textbf{Como ler o diagrama.} Uma ficha do catálogo é a descrição original; o
-compilador transforma essas descrições em JSON; o aplicativo lê o JSON durante
-sua inicialização. Chamamos o JSON de \emph{derivado} porque ele foi produzido a
-partir de outras fontes. Se alguém o editar diretamente, a próxima geração pode
-apagar a edição. A regra prática é alterar a ficha ou o documento de origem e
-depois regenerar o arquivo.
-
-\textbf{Por que essa regra existe.} Manter uma fonte principal evita que duas
-versões discordantes disputem qual delas vale. A ideia é parecida com guardar
-uma planilha de dados e gerar um gráfico a partir dela: se o gráfico estiver
-errado, corrige-se a planilha ou o procedimento que o produz. Os princípios
-FAIR são orientações para que dados sejam encontráveis, acessíveis,
-interoperáveis e reutilizáveis; também destacam a importância de identificar
-as fontes de informação \citref{WILKINSON, M. D. et al. The FAIR Guiding Principles for scientific data management and stewardship. \emph{Scientific Data}, v.~3, 160018, 2016}{10.1038/sdata.2016.18}{O princípio de encontrabilidade ajuda o leitor a localizar a fonte que deve ser reutilizada.}{Findability is the first step in the reuse of data}{A localização é o primeiro passo para reutilizar dados.}{WILKINSON et al., 2016, p.~160018}.
+\textbf{Como funciona e por quê.} Os documentos do catálogo e as definições do gerador são entradas para \pth{build_config}, que produz agentes, ferramentas e comandos de opencode.json. As setas representam compilação da configuração; a comparação reproduzível identifica alterações ou divergências.
+\textbf{Justificativa.} Gerar novamente a partir das fontes reduz a chance de configurações editadas manualmente divergirem do catálogo.
+\textbf{Limite.} Configuração reproduzível demonstra essa transformação de arquivos. O hospedeiro ainda precisa carregá-la, e cada integração exige sua própria evidência operacional.
 \end{descricao}
+\fontecore{integrations/opencode_cli.py}{build_config}
+
+
+\noindent\textit{Contexto bibliográfico geral, sem certificação desta rota.} \citref{WILKINSON, M. D. et al. The FAIR Guiding Principles for scientific data management and stewardship. \emph{Scientific Data}, v.~3, 160018, 2016}{10.1038/sdata.2016.18}{Enquadramento teórico geral; a implementação desta rota é conferida na fonte primária local. Este artigo não certifica o funcionamento nem o desempenho do Core.}{Findability is the first step in the reuse of data}{A localização é o primeiro passo para reutilizar dados.}{WILKINSON et al., 2016, p.~160018}
+
 
 \begin{metodo}
 Para atualizar um agente: (1) edite sua ficha Markdown no catálogo; Markdown é
@@ -103,7 +97,7 @@ ele não testa automaticamente toda resposta produzida por um agente.
 \clearpage
 \section{Os agentes: da ficha à tarefa}
 
-\elemento{Do catálogo à execução de uma tarefa}{\metainfo{Fonte}{agents/catalog/} \hfill \metainfo{Configuração local}{216 entradas}}
+\elemento{Do catálogo à execução de uma tarefa}{\metainfo{Fonte}{agents/catalog/} \hfill \metainfo{Configuração local}{\CoreAgentCount{} entradas}}
 
 \begin{descricao}
 Um \emph{agente} é um perfil de trabalho para o modelo: combina instruções,
@@ -151,24 +145,15 @@ do trabalho ainda precisa ser avaliada pela tarefa e por seus critérios.
 \end{flowch}
 
 \begin{descricao}
-\textbf{O que acontece em cada etapa.} A ficha declara o propósito do agente;
-o compilador cria a entrada de configuração; o orquestrador ou o aplicativo
-seleciona uma rota; se houver uma tarefa publicada no Blackboard, um agente
-elegível pode aceitá-la; por fim, o resultado volta ao componente que solicitou
-o trabalho. Há duas situações que não devem ser confundidas: \emph{não
-selecionado} significa que outro candidato foi escolhido ou que faltou uma
-condição; \emph{reprovado} significa que o agente executou, mas o resultado não
-atendeu ao critério.
-
-\textbf{Por que mostrar falhas no diagrama.} Um fluxo que mostra apenas sucesso
-esconde o que o operador deve fazer quando o trabalho não é aceito ou falha. Na
-literatura, agentes são descritos por sua capacidade de reagir, agir em busca de
-objetivos e interagir com outros componentes. Aqui, reação significa responder
-a uma tarefa ou evento; objetivo significa perseguir o resultado pedido dentro
-das regras; interação significa devolver estado e resultado ao orquestrador.
-Esses conceitos ajudam a explicar o modelo, mas não certificam a qualidade de
-uma implementação específica \citref{WOOLDRIDGE, M.; JENNINGS, N. R. Intelligent agents: theory and practice. \emph{The Knowledge Engineering Review}, v.~10, n.~2, p.~115-152, 1995}{10.1017/S0269888900008122}{Os autores discutem agentes como tema importante da inteligência artificial e da ciência da computação.}{The concept of an agent has become important in both artificial intelligence and mainstream computer science}{O conceito de agente tornou-se importante tanto na inteligência artificial quanto na ciência da computação.}{WOOLDRIDGE; JENNINGS, 1995, p.~115--152}.
+\textbf{Como funciona e por quê.} O catálogo descreve um perfil; o registro fornece um cartão ao quadro; uma tarefa elegível pode gerar atribuição e execução. A conclusão atualiza o estado. As setas mostram transições que precisam de evidências distintas.
+\textbf{Justificativa.} Estados separados tornam visível se o agente está somente documentado, registrado, selecionado ou concluído em uma tarefa específica.
+\textbf{Limite.} Não há ativação automática de todo o catálogo. Registro não garante executor autenticado, resposta correta ou execução em um provedor externo.
 \end{descricao}
+\fontecore{mci/blackboard.py}{Blackboard}
+
+
+\noindent\textit{Contexto bibliográfico geral, sem certificação desta rota.} \citref{WOOLDRIDGE, M.; JENNINGS, N. R. Intelligent agents: theory and practice. \emph{The Knowledge Engineering Review}, v.~10, n.~2, p.~115-152, 1995}{10.1017/S0269888900008122}{Enquadramento teórico geral; a implementação desta rota é conferida na fonte primária local. Este artigo não certifica o funcionamento nem o desempenho do Core.}{The concept of an agent has become important in both artificial intelligence and mainstream computer science}{O conceito de agente tornou-se importante tanto na inteligência artificial quanto na ciência da computação.}{WOOLDRIDGE; JENNINGS, 1995, p.~115--152}
+
 
 \begin{niveis}
 \textbf{Intuição:} a ficha de um especialista explica que trabalho ele pode
@@ -272,9 +257,9 @@ lembrar de seguir uma recomendação escrita. Guardas encontradas no diretório
 \toprule
 Hook & Função \\
 \midrule
-\pth{budget\_guard.sh} & interrompe a rota quando o limite configurado de uso é excedido. \\
-\pth{credential\_guard.sh} & procura credenciais, como chaves de acesso, antes que sejam expostas. \\
-\pth{js\_smoke\_dom.sh} & faz uma verificação rápida de JavaScript que manipula elementos de uma página. \\
+\pth{budget_guard.sh} & interrompe a rota quando o limite configurado de uso é excedido. \\
+\pth{credential_guard.sh} & procura credenciais, como chaves de acesso, antes que sejam expostas. \\
+\pth{js_smoke_dom.sh} & faz uma verificação rápida de JavaScript que manipula elementos de uma página. \\
 \bottomrule
 \end{tabularx}\par}
 \end{resultado}
@@ -354,20 +339,15 @@ funções distintas: diagnóstico, orientação e navegação.
 \end{flowch}
 
 \begin{descricao}
-\textbf{Como interpretar o resultado.} O diagnóstico percorre verificações e
-classifica cada uma como aprovada, falha ou aviso. Uma aprovação quer dizer que
-aquela verificação local passou naquele momento. Um aviso relata uma condição
-que não bloqueou o diagnóstico, como uma ferramenta opcional ausente. Uma falha
-indica que uma condição necessária não foi satisfeita. Essas categorias ajudam
-o operador a escolher o próximo passo; elas não avaliam, por si sós, se uma
-resposta de pesquisa ou um texto está correto.
-
-\textbf{Por que registrar incertezas.} Em psicologia, metacognição inclui
-monitorar e regular o próprio pensamento. Neste sistema, usamos a expressão de
-modo operacional: guardar sinais sobre verificações, execuções e limitações
-anteriores. Isso permite distinguir ``não está instalado'' de ``foi executado e
-falhou'', uma distinção necessária para agir sobre o diagnóstico \citref{FLAVELL, J. H. Metacognition and cognitive monitoring: a new area of cognitive-developmental inquiry. \emph{American Psychologist}, v.~34, n.~10, p.~906-911, 1979}{10.1037/0003-066X.34.10.906}{Flavell descreve o monitoramento ativo e a regulação dos processos cognitivos como parte da metacognição.}{Metacognition refers, among other things, to the active monitoring and consequent regulation and orchestration of these processes}{A metacognição inclui o monitoramento ativo e a regulação dos processos cognitivos.}{FLAVELL, 1979, p.~906--911}.
+\textbf{Como funciona e por quê.} doctor reúne verificações estruturais da configuração, especificações, memória e componentes locais. Cada resultado conserva pass, warn ou fail e um detalhe. A opção --live habilita sondagens operacionais explícitas, que podem ter dependências e falhas próprias.
+\textbf{Justificativa.} Um inventário rápido permite localizar pré-requisitos ausentes antes do trabalho, mantendo operações externas fora do diagnóstico estrutural padrão.
+\textbf{Limite.} Um pass estrutural não observa inferência, disponibilidade de rede ou conclusão de prova nativa. Consulte o modo e o detalhe antes de dizer que uma integração funciona.
 \end{descricao}
+\fontecore{marceloclaro/doctor.py}{run_doctor}
+
+
+\noindent\textit{Contexto bibliográfico geral, sem certificação desta rota.} \citref{FLAVELL, J. H. Metacognition and cognitive monitoring: a new area of cognitive-developmental inquiry. \emph{American Psychologist}, v.~34, n.~10, p.~906-911, 1979}{10.1037/0003-066X.34.10.906}{Enquadramento teórico geral; a implementação desta rota é conferida na fonte primária local. Este artigo não certifica o funcionamento nem o desempenho do Core.}{Metacognition refers, among other things, to the active monitoring and consequent regulation and orchestration of these processes}{A metacognição inclui o monitoramento ativo e a regulação dos processos cognitivos.}{FLAVELL, 1979, p.~906--911}
+
 
 \section{Resumo e exercícios}
 
@@ -397,7 +377,7 @@ tarefa real.
 \elemento{Leitura guiada — Declaração não é execução}{\metainfo{ID}{N-08} \hfill \metainfo{Estilo}{inventário e evidência}}
 
 \begin{descricao}
-\textbf{A pergunta.} Se a configuração lista 216 agentes, isso quer dizer que
+\textbf{O fenômeno: A pergunta}  Se a configuração lista 216 agentes, isso quer dizer que
 216 agentes estão prontos para trabalhar? Não necessariamente. O número conta
 entradas declaradas no arquivo de configuração. Para saber se um agente pode
 ser usado, é preciso verificar se sua ficha foi carregada, se as ferramentas
@@ -413,7 +393,7 @@ correta.
 \end{descricao}
 
 \begin{definicao}
-\textbf{Quatro estados que não devem ser confundidos.}
+\textbf{Grandezas e definições: Quatro estados que não devem ser confundidos}
 \begin{itemize}[leftmargin=1.3em,itemsep=1pt]
   \item \textbf{Documentado:} existe uma ficha de texto com nome e descrição.
   \item \textbf{Configurado:} a ficha aparece no arquivo que o aplicativo lê.
@@ -425,7 +405,7 @@ correta.
 \end{definicao}
 
 \begin{metodo}
-\textbf{Exemplo de cálculo.} Suponha, apenas para ilustrar a conta, que um
+\textbf{Dedução passo a passo: Exemplo de cálculo}  Suponha, apenas para ilustrar a conta, que um
 catálogo tenha 20 fichas e que 18 delas apareçam na configuração. A cobertura
 de registro seria $18/20=0{,}90$, ou 90\%. Isso mede a correspondência entre
 fichas e configuração; não mede quantos agentes estão ativos nem se produzem
@@ -440,7 +420,7 @@ bons resultados.
 \end{metodo}
 
 \begin{resultado}
-\textbf{O que sabemos no retrato local.} Em 29/09/2026, o diagnóstico contou 216
+\textbf{Exemplo resolvido: O que sabemos no retrato local}  Em 29/09/2026, o diagnóstico contou 216
 entradas de agentes na configuração. Esse retrato não fornece, por si só, o
 número de agentes que passaram por uma tarefa de avaliação. Não se deve chamar
 essa contagem de ``216 agentes testados'' ou ``216 agentes prontos'': são
@@ -448,7 +428,7 @@ afirmações diferentes e exigem evidências diferentes.
 \end{resultado}
 
 \begin{resultado}
-\textbf{Como verificar.} Compare fichas do catálogo com entradas geradas na
+\textbf{Ordem de grandeza e verificação: Como verificar} Compare fichas do catálogo com entradas geradas na
 configuração e anote quais não têm correspondência. Depois escolha uma tarefa
 representativa, execute-a pela rota documentada e guarde entrada, saída e
 critério de avaliação. O primeiro passo confere registro; o segundo observa
@@ -470,7 +450,7 @@ concluir? (3) Dê um exemplo de uma descrição que ajude a escolher entre dois
 agentes parecidos.
 \end{resultado}
 
-% ATIVACAO-R613
+% SECAO-REVISADA-R814
 \section[Economia interna]{Economia interna: caução, penalidade e preço}
 \elemento{Como são usados os termos econômicos}{\metainfo{Ciclo}{R613} \hfill \metainfo{Módulo}{mod-08-ecossistema.tex}}
 
@@ -520,7 +500,7 @@ Para a taxa, a prioridade normal custa 1 unidade quando não há congestionament
 prioridade alta aplica multiplicador 2, portanto custa 2 unidades nessa mesma
 condição. Dez tarefas abertas acrescentam 10\%: a taxa normal passa a
 $1\times1\times1{,}1=1{,}1$ unidade. O número de tarefas abertas e o nível de
-prioridade entram na fórmula descrita em \pth{economy/token\_economy.py}.
+prioridade entram na fórmula descrita em \pth{economy/token_economy.py}.
 \end{resultado}
 
 \begin{aviso}
@@ -539,7 +519,7 @@ chamada porque o nome não corresponde à assinatura; o bloco captura a exceçã
 segue adiante. A taxa pode já ter sido debitada pela instrução anterior, mas a
 caução não é registrada nem há estorno nesse bloco. Antes de afirmar que um
 desconto ocorreu, confira a assinatura e o registro da tarefa. A divergência está em
-\pth{marceloclaro/orchestrator.py} e \pth{economy/token\_economy.py}.
+\pth{marceloclaro/orchestrator.py} e \pth{economy/token_economy.py}.
 \end{aviso}
 
 \noindent\textit{Exemplo.} Se uma rota admite apenas cinco candidatos por limite de tempo e permissões, ela pode comparar os cinco que passaram pelos filtros obrigatórios. Não deve afirmar que examinou todos os perfis do catálogo. Se nenhum dos cinco satisfaz os critérios, a resposta apropriada é registrar a insuficiência ou pedir decisão humana, em vez de escolher uma opção incompatível.

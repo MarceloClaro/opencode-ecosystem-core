@@ -192,16 +192,30 @@ def test_ac6_inventario_citado_bate_com_o_runtime():
 
     cfg = json.loads((ROOT / "opencode.json").read_text(encoding="utf-8"))
     n = len(cfg["agent"])
-    obsoletos = {"255", "212"}  # totais históricos de catálogo
+    # Um total antes incorreto pode tornar-se o inventário corrente. A fonte
+    # do número válido é a configuração, não uma lista fixa de números banidos.
+    obsoletos = {"255", "212"} - {str(n)}
+
+    def historico_delimitado(texto, posicao):
+        inicio = texto.rfind(r"\begin{resultado}", 0, posicao)
+        if inicio < 0 or texto.rfind(r"\end{resultado}", 0, posicao) > inicio:
+            return False
+        fim = texto.find(r"\end{resultado}", posicao)
+        if fim < 0:
+            return False
+        bloco = texto[inicio:fim]
+        return ("Retrato histórico" in bloco
+                and re.search(r"20\d{2}-\d{2}-\d{2}", bloco) is not None
+                and r"\CoreAgentCount" in bloco)
     for f in sorted(glob.glob(str(ROOT / "livro-core" / "mod-*.tex"))):
         t = Path(f).read_text(encoding="utf-8")
         for m in re.finditer(r"\b(\d{3})\s+fichas\b", t):
-            assert m.group(1) != "255", (
-                f"{Path(f).name}: ainda cita o total obsoleto 255 fichas"
+            assert m.group(1) not in obsoletos or historico_delimitado(t, m.start()), (
+                f"{Path(f).name}: ainda cita o total obsoleto {m.group(1)} fichas"
             )
-        for m in re.finditer(r"(\\d{3})/(\\d{3})", t):
+        for m in re.finditer(r"(\d{3})/(\d{3})", t):
             den = int(m.group(2))
-            if den in (255, 212):
+            if str(den) in obsoletos and not historico_delimitado(t, m.start()):
                 raise AssertionError(
                     f"{Path(f).name}: fração com denominador obsoleto: {m.group(0)}"
                 )

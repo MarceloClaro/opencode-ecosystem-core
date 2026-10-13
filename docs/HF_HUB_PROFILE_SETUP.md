@@ -119,6 +119,6 @@ Após configurar, verifique:
 
 <div align="center">
 
-**Voltar ao [README Principal](README.md)**
+**Voltar ao [README Principal](../README.md)**
 
 </div>

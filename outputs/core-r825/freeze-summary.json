@@ -1,0 +1,174 @@
+{
+  "recorded_at_utc": "2026-10-12T04:45:01.419266+00:00",
+  "status": "sources_frozen_after_local_green",
+  "externally_validated": false,
+  "red": {
+    "red-behavior.xml": {
+      "tests": 3,
+      "errors": 0,
+      "failures": 3,
+      "skipped": 0,
+      "seconds": 67.42
+    },
+    "red-repeat-behavior.xml": {
+      "tests": 7,
+      "errors": 0,
+      "failures": 1,
+      "skipped": 0,
+      "seconds": 16.016
+    },
+    "red-anyio-queue.xml": {
+      "tests": 2,
+      "errors": 0,
+      "failures": 2,
+      "skipped": 0,
+      "seconds": 3.055
+    },
+    "red-precall.xml": {
+      "tests": 3,
+      "errors": 0,
+      "failures": 1,
+      "skipped": 0,
+      "seconds": 11.36
+    },
+    "red-windows-fallback.xml": {
+      "tests": 1,
+      "errors": 0,
+      "failures": 1,
+      "skipped": 0,
+      "seconds": 6.92
+    }
+  },
+  "broad_green": {
+    "tests": 249,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "seconds": 161.792
+  },
+  "final_green": {
+    "tests": 68,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "seconds": 13.372
+  },
+  "verification_order": [
+    "Broad R640/R644/R824/R825/R816: 249 passed.",
+    "One further Windows taskkill failure fallback was reproduced and fixed.",
+    "Final R825/R640 Harness/R644 health: 68 passed on the frozen sources."
+  ],
+  "doctor": {
+    "checks_total": 22,
+    "checks_passed": 22,
+    "checks_warned": 0,
+    "checks_failed": 0
+  },
+  "source_sha256": {
+    "integrations/execution_control.py": "44e050d58228cee1032d325da1d8ce2338b309bbe79b142ae5bb05573a44d942",
+    "integrations/harness_runtime.py": "08579638d6cfb5c2f47b966eee5c68f51e43dea737f6022aa47de0f8be52fc1a",
+    "integrations/ecosystem_mcp.py": "fb3a23c4cc3016cd417a484e8708ffc8cf767cd04a9e5bdc243160a4b5f26eed",
+    "marceloclaro/autonomous.py": "641b3f088a4772d0ff90318ba20ae2d64ba7231a0c9585736b1a06fa2bd5f3e0",
+    "marceloclaro/workflow.py": "be4f05fa90d97fe62cc137b0ce30c8c2e3f7788a20231c8e536e707518a54627",
+    "specs/SPEC-935-R825-execution-cancellation.md": "4c375d1440e7dfd4540d7111daa5b032628346b0007ff09fd298f9b513afebf5",
+    "tests/test_r825_execution_cancellation.py": "8f5313a7e701ede4320965ec8863acabfac5d11e87015d5e8351d06a08d03a5f",
+    "tests/test_r640_harness_runtime.py": "e0890b796c63b48cf57cabb0d4720696d17443668074fb532928599319ee6811",
+    "tests/test_r644_harness_health.py": "13ab3c5ddc5aa755524599e74eefdee86f93c20cf66bac80f9e8fd7085a97ad9"
+  },
+  "proof_sha256": {
+    "outputs/core-r825/red-behavior.xml": "23ab8994b71d4894144da77ae80c176241e4dfda56e88db76688870d03096e02",
+    "outputs/core-r825/red-repeat-behavior.xml": "667aa8b8f6a0ea88e99a6c067522793439bbd0d46df75b2ad63cbec264bf7b7d",
+    "outputs/core-r825/red-anyio-queue.xml": "51598ac0416aae0d1e7d35fbb954f55861f0b8c22372ce6f4d7a7b24530843e8",
+    "outputs/core-r825/red-precall.xml": "c7a09a9cd9699e37347d7d5232f3f0d5edb6a088bda6a6c6f7448acb4c2c5244",
+    "outputs/core-r825/red-windows-fallback.xml": "ccdf0e312affffad975707eb9f8e6cc09ce73819f7dd7ad2436c2fcc42e9411d",
+    "outputs/core-r825/green-final.xml": "d2e9fddf03463da30979fc2454f416f7600d95904d55ff8cb3606f18a27dbbfb",
+    "outputs/core-r825/green-freeze.xml": "51e7086b29bb7bf1849e594225724ee41bbcc04c5328c1290ed25d8c9ff9c68d",
+    "outputs/core-r825/real-process-proof.json": "97869658b4d281717875b7d7b386d5a4e220267d307a9c692e9f393d4aa309a2",
+    "outputs/core-r825/doctor-final.json": "ded631ad1e2d8d55a56e39d204944944c735530bf1cd9555ecf11de72087c30b"
+  },
+  "real_process_proof": {
+    "scope": "Processos Python inertes POSIX reais, sem rede/modelos/credenciais",
+    "externally_validated": false,
+    "cases": [
+      {
+        "mode": "timeout",
+        "elapsed_seconds": 0.909,
+        "identities": {
+          "parent": 803289,
+          "child": 803290,
+          "group": 803289
+        },
+        "states_after_return": {
+          "parent": "absent",
+          "child": "absent"
+        },
+        "result": {
+          "success": false,
+          "output": "",
+          "error": "A CLI excedeu o limite de 0.4 segundos.",
+          "ecosystem": "claude",
+          "execution_mode": "cli-read-only",
+          "duration_seconds": 0.9059565430507064
+        }
+      },
+      {
+        "mode": "cancel",
+        "elapsed_seconds": 0.11,
+        "identities": {
+          "parent": 803292,
+          "child": 803293,
+          "group": 803292
+        },
+        "states_after_return": {
+          "parent": "absent",
+          "child": "absent"
+        },
+        "result": {
+          "success": false,
+          "output": "",
+          "error": "Execução cancelada; a CLI foi interrompida.",
+          "ecosystem": "claude",
+          "execution_mode": "cli-read-only",
+          "cancelled": true,
+          "duration_seconds": 0.10568393603898585
+        }
+      },
+      {
+        "mode": "normal_exit",
+        "elapsed_seconds": 0.102,
+        "identities": {
+          "parent": 803294,
+          "child": 803295,
+          "group": 803294
+        },
+        "states_after_return": {
+          "parent": "absent",
+          "child": "absent"
+        },
+        "result": {
+          "success": true,
+          "output": "Sonda inerte concluída",
+          "error": "",
+          "ecosystem": "claude",
+          "execution_mode": "cli-read-only",
+          "returncode": 0,
+          "duration_seconds": 0.09941056789830327
+        }
+      }
+    ],
+    "limitations": [
+      "Z identifica processo encerrado aguardando coleta; não está em execução.",
+      "Windows e interop Windows/WSL não foram certificados por esta prova.",
+      "Descendentes que escapem deliberadamente do grupo não são cobertos."
+    ]
+  },
+  "limitations": [
+    "Local tests and process probes do not prove inference or external scientific validation.",
+    "Windows tree cleanup is best effort while primary CLI is alive; native Windows and Windows/WSL interop were not certified.",
+    "Taskkill failure test simulates its Windows command and uses a real local primary process.",
+    "Descendants deliberately escaping the process group/session are outside the POSIX guarantee.",
+    "Cleanup has its own bounded interval beyond the operation timeout.",
+    "Third-party operations that do not consult the cancellation signal remain subject to their own deadlines.",
+    "The shared ecosystem_mcp.py hash reflects this freeze; the global release manifest is authoritative for other agents' final changes."
+  ]
+}

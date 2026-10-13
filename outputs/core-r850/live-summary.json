@@ -1,0 +1,280 @@
+{
+  "scope": "controlled_local_targets_not_original_source_recovery",
+  "cases": [
+    {
+      "case": "setup",
+      "elapsed_seconds": 3.315,
+      "returncode": 0,
+      "success": true,
+      "receipt_path": null,
+      "target_digest": null,
+      "finding_count": 0,
+      "target_kind": null,
+      "privacy": null,
+      "externally_validated": false
+    },
+    {
+      "case": "javascript",
+      "elapsed_seconds": 43.598,
+      "returncode": 0,
+      "success": true,
+      "receipt_path": "/home/marceloclaro/opencode-ecosystem-core/.opencode/rea/local-assistant/evidence/ad8af685969473ae9126237c1f34f3239524b3241f52de1a724943045e79ca2b.json",
+      "target_digest": {
+        "sha256": "f13b598bf21632a1ea712cf0d15bdde397a5367e288cd7efef9a036a4e7f6b37",
+        "files": 1,
+        "bytes": 275,
+        "algorithm": "sha256"
+      },
+      "finding_count": 16,
+      "target_kind": "javascript",
+      "privacy": {
+        "mode": "isolated_local_analysis",
+        "network_namespace": "net:[4026532296]",
+        "pid_namespace": "pid:[4026532295]",
+        "interfaces": [
+          "lo"
+        ],
+        "external_route_available": false,
+        "host_probe_connected": false,
+        "scope": "analytical_worker_and_descendants; trusted_local_MCP_client_required"
+      },
+      "externally_validated": false
+    },
+    {
+      "case": "javascript-explain",
+      "elapsed_seconds": 7.803,
+      "returncode": 0,
+      "success": true,
+      "receipt_path": "/home/marceloclaro/opencode-ecosystem-core/.opencode/rea/local-assistant/evidence/ad8af685969473ae9126237c1f34f3239524b3241f52de1a724943045e79ca2b.json",
+      "target_digest": {
+        "algorithm": "sha256",
+        "bytes": 275,
+        "files": 1,
+        "sha256": "f13b598bf21632a1ea712cf0d15bdde397a5367e288cd7efef9a036a4e7f6b37"
+      },
+      "finding_count": 16,
+      "target_kind": "javascript",
+      "privacy": {
+        "external_route_available": false,
+        "host_probe_connected": false,
+        "interfaces": [
+          "lo"
+        ],
+        "mode": "isolated_local_analysis",
+        "network_namespace": "net:[4026532296]",
+        "pid_namespace": "pid:[4026532295]",
+        "scope": "analytical_worker_and_descendants; trusted_local_MCP_client_required"
+      },
+      "externally_validated": false
+    },
+    {
+      "case": "html",
+      "elapsed_seconds": 15.46,
+      "returncode": 0,
+      "success": true,
+      "receipt_path": "/home/marceloclaro/opencode-ecosystem-core/.opencode/rea/local-assistant/evidence/c9d5893cb86f8ff1d46e0b2d49838aedf8a066d00ba9eba40b6b6e57b9715593.json",
+      "target_digest": {
+        "sha256": "afafd5eb1d830af23d0a3f19ab6f82556995e130ce342c43be8b51a4cbe2be91",
+        "files": 1,
+        "bytes": 183,
+        "algorithm": "sha256"
+      },
+      "finding_count": 2,
+      "target_kind": "html",
+      "privacy": {
+        "mode": "isolated_local_analysis",
+        "network_namespace": "net:[4026532296]",
+        "pid_namespace": "pid:[4026532295]",
+        "interfaces": [
+          "lo"
+        ],
+        "external_route_available": false,
+        "host_probe_connected": false,
+        "scope": "analytical_worker_and_descendants; trusted_local_MCP_client_required"
+      },
+      "externally_validated": false
+    },
+    {
+      "case": "html-explain",
+      "elapsed_seconds": 7.974,
+      "returncode": 0,
+      "success": true,
+      "receipt_path": "/home/marceloclaro/opencode-ecosystem-core/.opencode/rea/local-assistant/evidence/c9d5893cb86f8ff1d46e0b2d49838aedf8a066d00ba9eba40b6b6e57b9715593.json",
+      "target_digest": {
+        "algorithm": "sha256",
+        "bytes": 183,
+        "files": 1,
+        "sha256": "afafd5eb1d830af23d0a3f19ab6f82556995e130ce342c43be8b51a4cbe2be91"
+      },
+      "finding_count": 2,
+      "target_kind": "html",
+      "privacy": {
+        "external_route_available": false,
+        "host_probe_connected": false,
+        "interfaces": [
+          "lo"
+        ],
+        "mode": "isolated_local_analysis",
+        "network_namespace": "net:[4026532296]",
+        "pid_namespace": "pid:[4026532295]",
+        "scope": "analytical_worker_and_descendants; trusted_local_MCP_client_required"
+      },
+      "externally_validated": false
+    },
+    {
+      "case": "managed",
+      "elapsed_seconds": 30.779,
+      "returncode": 0,
+      "success": true,
+      "receipt_path": "/home/marceloclaro/opencode-ecosystem-core/.opencode/rea/local-assistant/evidence/b4f81e1e9015de51a02262dc2849188d5791e32442924663967bc8f0145cb643.json",
+      "target_digest": {
+        "sha256": "7f1702f8bd1e47e791e248f65efe991237f317cc1839b317fb6289eda51daa58",
+        "files": 1,
+        "bytes": 4096,
+        "algorithm": "sha256"
+      },
+      "finding_count": 5,
+      "target_kind": "dotnet",
+      "privacy": {
+        "mode": "isolated_local_analysis",
+        "network_namespace": "net:[4026532296]",
+        "pid_namespace": "pid:[4026532295]",
+        "interfaces": [
+          "lo"
+        ],
+        "external_route_available": false,
+        "host_probe_connected": false,
+        "scope": "analytical_worker_and_descendants; trusted_local_MCP_client_required"
+      },
+      "externally_validated": false
+    },
+    {
+      "case": "managed-explain",
+      "elapsed_seconds": 8.855,
+      "returncode": 0,
+      "success": true,
+      "receipt_path": "/home/marceloclaro/opencode-ecosystem-core/.opencode/rea/local-assistant/evidence/b4f81e1e9015de51a02262dc2849188d5791e32442924663967bc8f0145cb643.json",
+      "target_digest": {
+        "algorithm": "sha256",
+        "bytes": 4096,
+        "files": 1,
+        "sha256": "7f1702f8bd1e47e791e248f65efe991237f317cc1839b317fb6289eda51daa58"
+      },
+      "finding_count": 5,
+      "target_kind": "dotnet",
+      "privacy": {
+        "external_route_available": false,
+        "host_probe_connected": false,
+        "interfaces": [
+          "lo"
+        ],
+        "mode": "isolated_local_analysis",
+        "network_namespace": "net:[4026532296]",
+        "pid_namespace": "pid:[4026532295]",
+        "scope": "analytical_worker_and_descendants; trusted_local_MCP_client_required"
+      },
+      "externally_validated": false
+    },
+    {
+      "case": "native",
+      "elapsed_seconds": 109.339,
+      "returncode": 0,
+      "success": true,
+      "receipt_path": "/home/marceloclaro/opencode-ecosystem-core/.opencode/rea/local-assistant/evidence/2758cf6628c632b71bd440f6819461a56835b1c2522039edb11b7400d1531337.json",
+      "target_digest": {
+        "sha256": "172e8f12d2754e0f5c55b302b27d98725c81e511f43c79fb6afac1ec6338d92e",
+        "files": 1,
+        "bytes": 19096,
+        "algorithm": "sha256"
+      },
+      "finding_count": 1,
+      "target_kind": "native",
+      "privacy": {
+        "mode": "isolated_local_analysis",
+        "network_namespace": "net:[4026532296]",
+        "pid_namespace": "pid:[4026532295]",
+        "interfaces": [
+          "lo"
+        ],
+        "external_route_available": false,
+        "host_probe_connected": false,
+        "scope": "analytical_worker_and_descendants; trusted_local_MCP_client_required"
+      },
+      "externally_validated": false
+    },
+    {
+      "case": "native-explain",
+      "elapsed_seconds": 11.639,
+      "returncode": 0,
+      "success": true,
+      "receipt_path": "/home/marceloclaro/opencode-ecosystem-core/.opencode/rea/local-assistant/evidence/2758cf6628c632b71bd440f6819461a56835b1c2522039edb11b7400d1531337.json",
+      "target_digest": {
+        "algorithm": "sha256",
+        "bytes": 19096,
+        "files": 1,
+        "sha256": "172e8f12d2754e0f5c55b302b27d98725c81e511f43c79fb6afac1ec6338d92e"
+      },
+      "finding_count": 1,
+      "target_kind": "native",
+      "privacy": {
+        "external_route_available": false,
+        "host_probe_connected": false,
+        "interfaces": [
+          "lo"
+        ],
+        "mode": "isolated_local_analysis",
+        "network_namespace": "net:[4026532296]",
+        "pid_namespace": "pid:[4026532295]",
+        "scope": "analytical_worker_and_descendants; trusted_local_MCP_client_required"
+      },
+      "externally_validated": false
+    },
+    {
+      "case": "loopback-snapshot",
+      "elapsed_seconds": 14.769,
+      "returncode": 0,
+      "success": true,
+      "receipt_path": "/home/marceloclaro/opencode-ecosystem-core/.opencode/rea/local-assistant/evidence/3c4228f0d3d53017bad9925f45a8576cd329267d80b258bc9b2e805eec227604.json",
+      "target_digest": {
+        "sha256": "afafd5eb1d830af23d0a3f19ab6f82556995e130ce342c43be8b51a4cbe2be91",
+        "files": 1,
+        "bytes": 183,
+        "algorithm": "sha256"
+      },
+      "finding_count": 2,
+      "target_kind": "html",
+      "privacy": {
+        "mode": "isolated_local_analysis",
+        "network_namespace": "net:[4026532296]",
+        "pid_namespace": "pid:[4026532295]",
+        "interfaces": [
+          "lo"
+        ],
+        "external_route_available": false,
+        "host_probe_connected": false,
+        "scope": "analytical_worker_and_descendants; trusted_local_MCP_client_required"
+      },
+      "externally_validated": false
+    },
+    {
+      "case": "redirect-refused",
+      "elapsed_seconds": 7.229,
+      "returncode": 2,
+      "success": false,
+      "receipt_path": null,
+      "target_digest": null,
+      "finding_count": 0,
+      "target_kind": null,
+      "privacy": null,
+      "externally_validated": false
+    }
+  ],
+  "mcp": {
+    "tool_count": 4,
+    "inspection_succeeded": true
+  },
+  "managed_fixture": "source-owned PE32/CLI fixture generated from REA; not compiled production .NET software",
+  "native_target_executed": false,
+  "llm_inference_executed": false,
+  "externally_validated": false
+}

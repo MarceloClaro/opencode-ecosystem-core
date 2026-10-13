@@ -48,7 +48,8 @@ def test_agent_loader_reads_frontmatter():
 
 
 def test_blackboard_full_cycle():
-    orchestrator = MarceloClaroOrchestrator(auto_load_agents=True)
+    # Transporte legado explícito; não representa entrega SDD/TDD verificada.
+    orchestrator = MarceloClaroOrchestrator(auto_load_agents=True, strict_sdd=False)
     assert len(orchestrator.list_agents()) >= 5
 
     task_id = orchestrator.delegate("Pesquisar padrões A2A", required_capabilities=["search"])

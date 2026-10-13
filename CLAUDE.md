@@ -7,7 +7,15 @@ Este arquivo é lido automaticamente pelo Claude Code sempre que ele opera neste
 
 ## O que é este projeto
 
-Um ecossistema de orquestração multiagente (`marceloclaro/orchestrator.py::MarceloClaroOrchestrator`) que integra: MCI (MetaBus/Blackboard/Reflexion — memória metacognitiva compartilhada), Trust Engine, Token Economy, um pipeline científico agentivo (EvoSci → Deep Research → Peer Review → Revision → Paper Composer), SDD/TDD, Loop Engineering, LLM Reduction Layer (6 componentes determinísticos), DataKnowledgeHub (16 fontes), e um catálogo de 186+ agentes especializados.
+Um ecossistema de orquestração multiagente (`marceloclaro/orchestrator.py::MarceloClaroOrchestrator`) que integra: MCI (MetaBus/Blackboard/Reflexion — memória metacognitiva compartilhada), Trust Engine, Token Economy, um pipeline científico agentivo (EvoSci → Deep Research → Peer Review → Revision → Paper Composer), SDD/TDD, Loop Engineering, LLM Reduction Layer, DataKnowledgeHub e o catálogo de agentes especializados.
+
+<!-- core-state:start -->
+**255 agentes** · **16 MCPs** · **30 comandos** · **22 checks**
+
+Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
+
+Para conferir estes blocos, execute na raiz `.venv/bin/python scripts/reconcile_operational_docs.py --check`; para sincronizá-los, execute o mesmo comando sem `--check`.
+<!-- core-state:end -->
 
 ## Comandos essenciais
 
@@ -18,7 +26,7 @@ python3 -m marceloclaro.cli
 # Comandos diretos
 python3 -m marceloclaro.cli status     # status geral do ecossistema
 python3 -m marceloclaro.cli agents     # lista agentes registrados
-python3 -m marceloclaro.cli doctor     # diagnóstico de saúde (specs, evolução, CLIs externas...)
+python3 -m marceloclaro.cli doctor     # inventário estrutural; autenticação e inferência requerem prova própria
 python3 -m marceloclaro.cli helpdesk   # doctor + sugestões de correção em linguagem simples
 python3 -m marceloclaro.cli ajuda      # resumo de ajuda + caminho do manual
 
@@ -31,7 +39,7 @@ python3 -m pytest tests/ -q
 
 ## Antes de editar código
 
-1. Rode `python3 -m marceloclaro.cli doctor` — confirma que specs formais carregam, o registro de evolução não perdeu histórico, e as CLIs externas relevantes estão disponíveis.
+1. Rode `python3 -m marceloclaro.cli doctor` — confere carregamento de specs, registro de evolução, memória e instalação/configuração de dependências. Um resultado estrutural aprovado não confirma autenticação, inferência nem desempenho de executores externos; `doctor --live` solicita sondagens explícitas.
 2. Este projeto segue disciplina SDD/TDD real: toda mudança de peso ganha uma especificação em `specs/SPEC-935-R*.md` **antes** da implementação, e testes em `tests/test_r*.py` **antes** de considerar a tarefa concluída.
 3. Nunca declare algo "superhuman", "verificado" ou "Qualis A1" sem validação externa explícita — ver `mci/metacognitive_evaluator.py::classify_metacognitive_tier()` (política já codificada) e `CORRIGENDUM.md` (histórico de alegações da própria documentação já corrigidas).
 
@@ -45,9 +53,9 @@ python3 -m pytest tests/ -q
 
 Sessões do Claude Code podem terminar no meio (limite de sessão/tokens do plano). Para que o trabalho **nunca** se perca:
 
-1. **Leia `PROGRESS.md` na raiz primeiro.** É o checkpoint vivo: estado atual, próximos passos resumíveis e como retomar. Complementa o histórico de `evolution/cycles.json`.
+1. **Leia a seção Estado atual de `PROGRESS.md` na raiz primeiro.** Ela aponta para as fontes correntes e orienta a retomada. A seção Arquivo histórico preserva checkpoints antigos e pendências de outras frentes; não trate a R414 como último estado do Core. Consulte também `evolution/cycles.json` e as specs e evidências da tarefa em andamento.
 2. **Quebre trabalho longo em passos pequenos**, cada um commitável e verificável (spec → testes → implementação → ciclo → commit escopado). A perda máxima passa a ser o passo em andamento, não o trabalho inteiro.
-3. **Atualize `PROGRESS.md` e commite a cada passo concluído** (ou quando pausar), para a próxima sessão retomar sem re-derivar contexto.
+3. **Atualize a orientação corrente de `PROGRESS.md` ao concluir ou pausar um passo**, preservando o arquivo histórico e registrando a evidência correspondente. Em commits escopados, inclua somente os arquivos daquele passo.
 4. **Tarefas demoradas (suíte completa, downloads) rodam em background**; o estado fica persistido em commits + `PROGRESS.md`.
 
 ## Onde encontrar o quê

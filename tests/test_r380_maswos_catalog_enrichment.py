@@ -111,27 +111,25 @@ class TestMigracaoAplicada:
 
 class TestCatalogoIntacto:
     def test_205_registros_carregam(self, catalog_defs):
-        # Contrato atualizado em 2026-09-26 (SPEC-935-R603/R604): o catálogo tem
-        # 212 arquivos em agents/catalog/*.md (205 registros do ciclo R380 +
-        # evolução posterior: landscape-curator R482, R521, skot-1..4,
-        # haystack-rag R604 etc.).
-        assert len(catalog_defs) == 212
+        # R812: a migração histórica permanece íntegra enquanto o catálogo cresce.
+        expected = {path.resolve() for path in CATALOG_DIR.glob("*.md")}
+        loaded = [definition["agent_id"] for definition in catalog_defs]
+        assert len(loaded) == len(set(loaded))
+        sources = [Path(definition["source_file"]).resolve() for definition in catalog_defs]
+        assert len(sources) == len(set(sources))
+        assert set(sources) == expected
 
     def test_placeholder_restante_e_o_esperado(self, catalog_defs):
-        """53 registros fora do escopo deste ciclo continuam com placeholder
-        -- achado documentado, não regressão.
+        """Os 46 perfis migrados não podem retornar à descrição genérica.
 
-        Era 54 quando esta contagem foi fixada; `contextscout.md` tinha dois
-        blocos de frontmatter empilhados (um placeholder genérico primeiro,
-        cobrindo o card real e rico com as permissões de segurança logo
-        abaixo) -- corrigido removendo o placeholder duplicado (ciclo de
-        triagem de 2026-08-03), o que também restaurou a aplicação real das
-        negações write/edit desse agente (ver test_r212_opencode_permissions).
+        A quantidade de placeholders de outros perfis pode variar com a
+        evolução do catálogo e não certifica a migração histórica de R380.
         """
         placeholders = [
             d["agent_id"] for d in catalog_defs
             if d["description"].strip().lower().startswith("agente especializado")
         ]
-        assert len(placeholders) == 56  # 53 remanescentes + 3 artefatos não-agente
+        # Descrições de perfis posteriores não pertencem ao contrato de R380.
+        assert len(placeholders) == len(set(placeholders))
         for agent_id in MASWOS_46:
             assert agent_id not in placeholders

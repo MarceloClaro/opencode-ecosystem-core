@@ -1,0 +1,342 @@
+{
+  "spec_id": "SPEC-935-R711",
+  "gerado_em": "2026-10-09T22:48:55.020298+00:00",
+  "gerador": "marceloclaro",
+  "total": 25,
+  "entradas": [
+    {
+      "id": "z3",
+      "url": "https://github.com/Z3Prover/z3",
+      "sha256_url": "fb0ff9cb9145ad290735476af5bce2fe5fdd24f198556c85949e4cb082268187",
+      "tipo_raciocinio": [
+        "dedutivo",
+        "formal",
+        "smt"
+      ],
+      "uso_polimata": "Prova de teoremas e checagem de consistência lógica de protocolos.",
+      "licenca": "MIT",
+      "status_licenca": "ok",
+      "commit_pin": null
+    },
+    {
+      "id": "sympy",
+      "url": "https://github.com/sympy/sympy",
+      "sha256_url": "6b19b50142def20bbae3140deefa25b91a071d2e20bb115d3bc47c4a35116c81",
+      "tipo_raciocinio": [
+        "dedutivo",
+        "simbolico"
+      ],
+      "uso_polimata": "Derivação simbólica e apêndices matemáticos auditáveis.",
+      "licenca": "BSD",
+      "status_licenca": "ok",
+      "commit_pin": null
+    },
+    {
+      "id": "reasonkit-core",
+      "url": "https://github.com/reasonkit/reasonkit-core",
+      "sha256_url": "7ecf05606736ec2ad51d72602d8a3c2bbff246c5cadef99575c681fcae32ef52",
+      "tipo_raciocinio": [
+        "dedutivo",
+        "auditoria"
+      ],
+      "uso_polimata": "Padrão prompt-em-protocolo com trilha auditável.",
+      "licenca": "Apache-2.0 (a confirmar)",
+      "status_licenca": "license_undeclared",
+      "commit_pin": null
+    },
+    {
+      "id": "scireason",
+      "url": "https://github.com/InternScience/SciReason",
+      "sha256_url": "5107ac2c05e2a1a4989e3fd232ad007634db9cbe6786ada461843135568095fe",
+      "tipo_raciocinio": [
+        "indutivo",
+        "benchmark"
+      ],
+      "uso_polimata": "Régua multidisciplinar de raciocínio científico sobre OpenCompass.",
+      "licenca": "Apache-2.0",
+      "status_licenca": "ok",
+      "commit_pin": null
+    },
+    {
+      "id": "scir",
+      "url": "https://github.com/idiap/SciR",
+      "sha256_url": "d760318aa5a02e9671c0d3e59309ba99b062c2cd84530c11a98affd8d0e173cc",
+      "tipo_raciocinio": [
+        "dedutivo",
+        "indutivo",
+        "abdutivo-causal"
+      ],
+      "uso_polimata": "Benchmark multi-documento com verdade verificável e distratores.",
+      "licenca": "a confirmar",
+      "status_licenca": "license_undeclared",
+      "commit_pin": null
+    },
+    {
+      "id": "cot-evo",
+      "url": "https://github.com/Irving-Feng/CoT-Evo",
+      "sha256_url": "f02d1885321b20a71df23fb5f5233d3e9b8b130c9d3bf6303b0884b971616a0e",
+      "tipo_raciocinio": [
+        "indutivo",
+        "evolutivo"
+      ],
+      "uso_polimata": "Destilação evolutiva de CoT compacta para ciência (química/bio).",
+      "licenca": "MIT",
+      "status_licenca": "ok",
+      "commit_pin": null
+    },
+    {
+      "id": "abduction-syllogism",
+      "url": "https://github.com/kmineshima/abduction-syllogism-llm",
+      "sha256_url": "d86d35e2289d3cda753bdb1d6f3fa1031396a4dda63bdb1a769f25f1718594a2",
+      "tipo_raciocinio": [
+        "abdutivo",
+        "dedutivo"
+      ],
+      "uso_polimata": "Dataset que separa gerar hipótese de provar consequência.",
+      "licenca": "a confirmar",
+      "status_licenca": "license_undeclared",
+      "commit_pin": null
+    },
+    {
+      "id": "research-reasoning-engine",
+      "url": "https://github.com/Aswinesag/research-reasoning-engine",
+      "sha256_url": "187d91d0236db5b8087cfefa0112fd9bfc8f7df39ae7f17a81de7d138febb800",
+      "tipo_raciocinio": [
+        "causal",
+        "abdutivo"
+      ],
+      "uso_polimata": "Grafo causal esparso com hipótese fundamentada e controle de especulação.",
+      "licenca": "a confirmar",
+      "status_licenca": "license_undeclared",
+      "commit_pin": null
+    },
+    {
+      "id": "pgmpy",
+      "url": "https://github.com/pgmpy/pgmpy",
+      "sha256_url": "868074933181978ed4d38ace01cb3f52bcd00134e8c6f5098ecb220ab6ef642b",
+      "tipo_raciocinio": [
+        "causal",
+        "probabilistico",
+        "bayesiano"
+      ],
+      "uso_polimata": "Descoberta causal, inferência intervencional e simulação sob do(X).",
+      "licenca": "MIT",
+      "status_licenca": "ok",
+      "commit_pin": null
+    },
+    {
+      "id": "dowhy",
+      "url": "https://github.com/py-why/dowhy",
+      "sha256_url": "426fad7b9b9a2fd50a5997f99411d13537386d3e983b9bcb2f3d2c76afef2f38",
+      "tipo_raciocinio": [
+        "causal",
+        "contrafactual"
+      ],
+      "uso_polimata": "Modelagem explícita + refutadores placebo/confundidor.",
+      "licenca": "MIT",
+      "status_licenca": "ok",
+      "commit_pin": null
+    },
+    {
+      "id": "causalpy",
+      "url": "https://github.com/pymc-labs/CausalPy",
+      "sha256_url": "0d360d64dcd8f18ae538713b9747b722c4001eddbe5146cd4cccd5d735938398",
+      "tipo_raciocinio": [
+        "causal",
+        "bayesiano",
+        "quase-experimental"
+      ],
+      "uso_polimata": "DID, controle sintético, RDD, ITS, VI com HDI bayesiano.",
+      "licenca": "Apache-2.0",
+      "status_licenca": "ok",
+      "commit_pin": null
+    },
+    {
+      "id": "causalnex",
+      "url": "https://github.com/mckinsey/causalnex",
+      "sha256_url": "ab7bb111be16b253669791c1b86d5ba052c08d1bd5d2d6be10c5c14fc1596625",
+      "tipo_raciocinio": [
+        "causal",
+        "bayesiano"
+      ],
+      "uso_polimata": "Redes bayesianas what-if com conhecimento de domínio.",
+      "licenca": "Apache-2.0",
+      "status_licenca": "ok",
+      "commit_pin": null
+    },
+    {
+      "id": "prisma",
+      "url": "https://github.com/Proportione/prisma",
+      "sha256_url": "7b953ad7648debaaa291019b80d76afcfb4616aefb490290cec7270aa721dc69",
+      "tipo_raciocinio": [
+        "sintese-evidencias",
+        "sistematico"
+      ],
+      "uso_polimata": "Revisão sistemática PRISMA 2020 + MMAT com log de auditoria.",
+      "licenca": "MIT",
+      "status_licenca": "ok",
+      "commit_pin": null
+    },
+    {
+      "id": "prisma-traice",
+      "url": "https://github.com/cqh4046/PRISMA-trAIce",
+      "sha256_url": "b88a46c460be422c6cb5926816c65143de36be5230099143593b6b6d418490ba",
+      "tipo_raciocinio": [
+        "sintese-evidencias",
+        "transparencia-ia"
+      ],
+      "uso_polimata": "Checklist de relato transparente de IA em revisão sistemática.",
+      "licenca": "MIT",
+      "status_licenca": "ok",
+      "commit_pin": null
+    },
+    {
+      "id": "evidence-synthesis",
+      "url": "https://github.com/OHDSI/EvidenceSynthesis",
+      "sha256_url": "77f81ba4e6b9c8a317038692993bab29249feccb086686f0d06990150a1f42db",
+      "tipo_raciocinio": [
+        "sintese-evidencias",
+        "meta-analise"
+      ],
+      "uso_polimata": "Meta-análise multi-site bayesiana e forest plots.",
+      "licenca": "Apache-2.0",
+      "status_licenca": "ok",
+      "commit_pin": null
+    },
+    {
+      "id": "ai-scientist",
+      "url": "https://github.com/SakanaAI/AI-Scientist",
+      "sha256_url": "d8b5b41bf681a5e0a360f06caaa8ef6d72eb57b0e13cdada7282b61405303c22",
+      "tipo_raciocinio": [
+        "autonomo",
+        "indutivo"
+      ],
+      "uso_polimata": "Esqueleto fim-a-fim ideia-experimento-escrita sob supervisão; exige disclosure de geração (AI Scientist Clause).",
+      "licenca": "AI Scientist Source Code License v1.0 (custom restritiva, revisão jurídica exigida)",
+      "status_licenca": "license_undeclared",
+      "commit_pin": null
+    },
+    {
+      "id": "aiscientist-filebus",
+      "url": "https://github.com/AweAI-Team/AiScientist",
+      "sha256_url": "39e1492f5674ff899e16f7add98e8db54e7c69bdcc7042a955ad3550ac43652c",
+      "tipo_raciocinio": [
+        "autonomo",
+        "orquestracao"
+      ],
+      "uso_polimata": "Coordenação File-as-Bus para horizontes longos, trilhas paper/mle.",
+      "licenca": "MIT",
+      "status_licenca": "ok",
+      "commit_pin": null
+    },
+    {
+      "id": "agent-laboratory",
+      "url": "https://github.com/SamuelSchmidgall/AgentLaboratory",
+      "sha256_url": "a56b87884a2f38b50376f2a5f56a55614cbc48f7dc11da74dac21ec6da535d29",
+      "tipo_raciocinio": [
+        "autonomo",
+        "colaborativo"
+      ],
+      "uso_polimata": "Assistente em 3 fases com AgentRxiv cumulativo supervisionado.",
+      "licenca": "a confirmar",
+      "status_licenca": "license_undeclared",
+      "commit_pin": null
+    },
+    {
+      "id": "github-demo-lab",
+      "url": "https://github.com/rasilab/github_demo",
+      "sha256_url": "569618cee4fbe6c1a97f99bf49add70d6d7a50c14a6831e765b068538d406821",
+      "tipo_raciocinio": [
+        "reprodutibilidade",
+        "laboratorio"
+      ],
+      "uso_polimata": "Exemplo PLOS Biology de issues + versão + contêineres (DOI 10.1371/journal.pbio.3003029).",
+      "licenca": "a confirmar",
+      "status_licenca": "license_undeclared",
+      "commit_pin": null
+    },
+    {
+      "id": "github-template-lab",
+      "url": "https://github.com/rasilab/github_template",
+      "sha256_url": "49a1a7fcf8d8629d89b5ca4a4a8d7928b94a6521250f8d71ad6e71abd09ac6c1",
+      "tipo_raciocinio": [
+        "reprodutibilidade",
+        "laboratorio"
+      ],
+      "uso_polimata": "Template copiável de laboratório reproduzível.",
+      "licenca": "a confirmar",
+      "status_licenca": "license_undeclared",
+      "commit_pin": null
+    },
+    {
+      "id": "repro-audit",
+      "url": "https://github.com/aqibrahimbt/repro_audit",
+      "sha256_url": "77e33d00034c552eb80a6971f1b1fd58546961fa3929a5b0a87190a8e1a98514",
+      "tipo_raciocinio": [
+        "auditoria",
+        "reprodutibilidade"
+      ],
+      "uso_polimata": "Gate estático seeds/hiperparâmetros/splits/dependências antes da submissão.",
+      "licenca": "MIT",
+      "status_licenca": "ok",
+      "commit_pin": null
+    },
+    {
+      "id": "lean4",
+      "url": "https://github.com/leanprover/lean4",
+      "sha256_url": "04eb615451cd9764f6d7967a4ebfa7bb02fb46a635b2be77e7d622e0901276ca",
+      "tipo_raciocinio": [
+        "dedutivo",
+        "formal",
+        "verificacao"
+      ],
+      "uso_polimata": "Compilador Lean 4 para machine_checked no núcleo R747 (verificação total).",
+      "licenca": "Apache-2.0",
+      "status_licenca": "ok",
+      "commit_pin": null
+    },
+    {
+      "id": "mathlib4",
+      "url": "https://github.com/leanprover-community/mathlib4",
+      "sha256_url": "460e6da8f448477ae69625467962aaccc6bd2ff9eb8ac69db6fee17135ff9cef",
+      "tipo_raciocinio": [
+        "dedutivo",
+        "formal",
+        "matematica"
+      ],
+      "uso_polimata": "Biblioteca matemática e táticas Mathlib para formalização R747.",
+      "licenca": "Apache-2.0",
+      "status_licenca": "ok",
+      "commit_pin": null
+    },
+    {
+      "id": "batteries",
+      "url": "https://github.com/leanprover-community/batteries",
+      "sha256_url": "251bc183d8f7c63e7b986ffe7a85777252fac0966ce0fbbc2706abcab39a0566",
+      "tipo_raciocinio": [
+        "dedutivo",
+        "formal",
+        "biblioteca"
+      ],
+      "uso_polimata": "Std estendido Lean 4 via lake update para o núcleo R747.",
+      "licenca": "Apache-2.0",
+      "status_licenca": "ok",
+      "commit_pin": null
+    },
+    {
+      "id": "aesop",
+      "url": "https://github.com/leanprover-community/aesop",
+      "sha256_url": "c801dc760f21ba06f408d8c3890aa4a7c60347a779390b7fb1bd6c19f508a49c",
+      "tipo_raciocinio": [
+        "dedutivo",
+        "formal",
+        "automacao"
+      ],
+      "uso_polimata": "Busca de prova aesop/aesop? para candidatos Lean auditáveis.",
+      "licenca": "Apache-2.0",
+      "status_licenca": "ok",
+      "commit_pin": null
+    }
+  ],
+  "nota": "Manifesto de curadoria; clonagem e pinagem viva pertencem ao operador."
+}

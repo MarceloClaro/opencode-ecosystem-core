@@ -13,6 +13,8 @@ from __future__ import annotations
 
 import json
 import re
+import shutil
+import subprocess
 from pathlib import Path
 
 import pytest
@@ -139,17 +141,71 @@ class TestEffectiveness:
 ROOT = Path(__file__).resolve().parent.parent
 
 
+def _diagnose_from_config(config):
+    """Executa a ferramenta solicitada pelo prompt, sem simular o pipeline.
+
+    OpenCode entrega esse template ao agente. A prova cobre a chamada
+    estruturada local; a interpretação do prompt por um modelo é externa.
+    """
+    command = config["command"]["diagnose"]
+    assert command["agent"] == "marceloclaro"
+    assert config["tools"]["core_command"] is False
+    assert config["agent"][command["agent"]]["tools"]["core_command"] is True
+    operation = re.match(r'^Execute core_command com command="([a-z-]+)"\.',
+                         command["template"])
+    assert operation, "O prompt precisa encaminhar a operação à ferramenta real."
+    assert operation.group(1) == "diagnose"
+    assert "$ARGUMENTS" in command["template"]
+
+    node = shutil.which("node")
+    assert node, "Node é necessário para executar a ferramenta OpenCode real."
+    document = ROOT / "specs" / "SPEC-935-R200-LIVRO-ALFABETIZACAO.md"
+    script = """
+import {readFileSync} from 'node:fs';
+const {default: operation} = await import(process.argv[1]);
+const request = JSON.parse(readFileSync(0, 'utf8'));
+const result = await operation.execute(request.args, {
+  agent: request.agent, worktree: process.argv[2], directory: process.argv[2],
+  abort: new AbortController().signal, sessionID:'R496', messageID:'deep-diagnose'
+});
+console.log(result);
+"""
+    process = subprocess.run(
+        [node, "--experimental-strip-types", "--input-type=module", "-e", script,
+         (ROOT / ".opencode/tools/core_command.ts").as_uri(), str(ROOT)],
+        input=json.dumps({"args": {"command": operation.group(1),
+                                  "arguments": str(document)},
+                          "agent": command["agent"]}, ensure_ascii=False),
+        capture_output=True, text=True, cwd=ROOT, timeout=90, shell=False,
+    )
+    assert process.returncode == 0, process.stderr[-1500:]
+    envelope = json.loads(process.stdout)
+    assert envelope["success"] and envelope["status"] == "completed", envelope
+    assert envelope["coordinator"] == "marceloclaro"
+    assert envelope["command"] == "diagnose"
+    assert envelope["input"]["arguments"] == str(document)
+    assert envelope["process"]["returncode"] == 0
+    report = envelope["result"]
+    assert report["inertia"]["n_assessments"] > 0
+    assert report["noise"]["level"] in ("seguro", "moderado", "destrutivo")
+    assert {"cr", "cps", "dg", "compressed_text"} <= set(report["compression"])
+    assert report["successors"]["total"] >= 1
+    for section in ("inertia", "noise", "compression"):
+        assert "error" not in report[section], report[section]
+        assert report[section]["report_md"].strip(), section
+    return report
+
+
 class TestRealPipeContract:
     """O pipe invocado pelo usuário não é demo: carrega a camada profunda."""
 
     def test_opencode_json_diagnose_uses_deep(self):
         cfg = json.loads((ROOT / "opencode.json").read_text(encoding="utf-8"))
-        template = cfg["command"]["diagnose"]["template"]
-        assert "deep=True" in template, "comando /diagnose precisa chamar deep=True"
+        _diagnose_from_config(cfg)
 
-    def test_generator_source_has_deep(self):
-        src = (ROOT / "integrations" / "opencode_cli.py").read_text(encoding="utf-8")
-        assert 'deep=True' in src, "fonte geradora do opencode.json precisa usar deep=True"
+    def test_generated_diagnose_command_runs_deep(self):
+        from integrations.opencode_cli import build_config
+        _diagnose_from_config(build_config())
 
     def test_real_document_run_deep_report(self):
         """Pipe real sobre documento real do repo (spec R200) entrega blocos novos."""
