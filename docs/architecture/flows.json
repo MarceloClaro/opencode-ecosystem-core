@@ -1,0 +1,557 @@
+{
+  "version": 1,
+  "flows": [
+    {
+      "id": "panorama",
+      "title": "Panorama completo por camadas",
+      "description": "Interfaces, primário, execução, governança, conhecimento e fronteiras externas.",
+      "file": "flows/01-panorama.mmd",
+      "sources": [
+        {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator",
+          "line": 77
+        },
+        {
+          "path": "integrations/ecosystem_mcp.py",
+          "symbol": "get_coordinator",
+          "line": 264
+        },
+        {
+          "path": "integrations/opencode_cli.py",
+          "symbol": "build_config",
+          "line": 378
+        }
+      ],
+      "limitations": [
+        "Relações de composição curadas; a existência do componente não comprova sua execução."
+      ]
+    },
+    {
+      "id": "orquestracao",
+      "title": "Orquestração primária e execução CLI",
+      "description": "Primário compartilhado, especificação textual, roteamento, Blackboard, executor e aceite autoritativo.",
+      "file": "flows/02-orquestracao.mmd",
+      "sources": [
+        {
+          "path": "integrations/ecosystem_mcp.py",
+          "symbol": "get_library_orchestrator",
+          "line": 33
+        },
+        {
+          "path": "integrations/ecosystem_mcp.py",
+          "symbol": "get_coordinator",
+          "line": 264
+        },
+        {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "create_text_task_spec",
+          "line": 233
+        },
+        {
+          "path": "marceloclaro/autonomous.py",
+          "symbol": "AutonomousCoordinator",
+          "line": 33
+        },
+        {
+          "path": "integrations/harness_runtime.py",
+          "symbol": "_run_cli",
+          "line": 266
+        },
+        {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "report_completion",
+          "line": 758
+        }
+      ],
+      "limitations": [
+        "Criteria_only não entrega software.",
+        "Ranking e instalação não comprovam autenticação, saldo ou inferência."
+      ]
+    },
+    {
+      "id": "workflow",
+      "title": "Workflow DAG e retomada",
+      "description": "Definição normalizada, checkpoint durável, orçamento global e repetição explícita de falhas.",
+      "file": "flows/03-workflow-dag.mmd",
+      "sources": [
+        {
+          "path": "marceloclaro/workflow.py",
+          "symbol": "WorkflowCoordinator",
+          "line": 42
+        },
+        {
+          "path": "marceloclaro/workflow.py",
+          "symbol": "_definition",
+          "line": 84
+        },
+        {
+          "path": "marceloclaro/workflow.py",
+          "symbol": "_resume",
+          "line": 237
+        },
+        {
+          "path": "marceloclaro/workflow_store.py",
+          "symbol": "WorkflowStore",
+          "line": 17
+        }
+      ],
+      "limitations": [
+        "A execução das etapas é sequencial, apesar das dependências em DAG.",
+        "Etapa interrompida tem resultado incerto; retry_failed precisa ser explícito."
+      ]
+    },
+    {
+      "id": "sdd-tdd",
+      "title": "SDD e histórico RED–GREEN",
+      "description": "Especificação, contratos por critério, execução pytest real e recibos autenticados no escopo local.",
+      "file": "flows/04-sdd-tdd.mmd",
+      "sources": [
+        {
+          "path": "sdd/spec_engine.py",
+          "symbol": "Specification",
+          "line": 70
+        },
+        {
+          "path": "sdd/spec_engine.py",
+          "symbol": "SpecVerifier",
+          "line": 1308
+        },
+        {
+          "path": "sdd/tdd_history.py",
+          "symbol": "TDDHistory",
+          "line": 114
+        },
+        {
+          "path": "sdd/tdd_history.py",
+          "symbol": "validate_pair",
+          "line": 490
+        },
+        {
+          "path": "sdd/tdd_runner.py",
+          "symbol": "TDDRunner",
+          "line": 46
+        },
+        {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "sdd_preflight",
+          "line": 248
+        }
+      ],
+      "limitations": [
+        "Recibo retrospectivo não pode substituir RED que não foi executado.",
+        "Aceite local não certifica qualidade editorial nem validação externa."
+      ]
+    },
+    {
+      "id": "rea-provedores",
+      "title": "REA e camadas de provedores",
+      "description": "Registro informativo das 18 camadas, sondas estruturais e percursos efetivamente implementados: analyze JavaScript, analyze_binary Ghidra e layer com inspeção definida.",
+      "file": "flows/05-rea-provedores.mmd",
+      "sources": [
+        {
+          "path": "integrations/rea_layers.py",
+          "symbol": "layers_status",
+          "line": 445
+        },
+        {
+          "path": "integrations/rea_layers.py",
+          "symbol": "probe_layer",
+          "line": 422
+        },
+        {
+          "path": "integrations/rea_layers.py",
+          "symbol": "engine_environment",
+          "line": 465
+        },
+        {
+          "path": "integrations/rea_bridge.py",
+          "symbol": "ReaBridge",
+          "line": 40
+        },
+        {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "rea_action",
+          "line": 2065
+        },
+        {
+          "path": "marceloclaro/rea_cli.py",
+          "symbol": "run_rea_cli",
+          "line": 7
+        },
+        {
+          "path": "integrations/rea_bridge.py",
+          "symbol": "_validate",
+          "line": 174
+        },
+        {
+          "path": "integrations/rea_bridge.py",
+          "symbol": "status",
+          "line": 108
+        },
+        {
+          "path": "integrations/rea_bridge.py",
+          "symbol": "_child_environment",
+          "line": 50
+        },
+        {
+          "path": "integrations/rea_bridge.py",
+          "symbol": "action",
+          "line": 479
+        },
+        {
+          "path": "integrations/rea_layers.py",
+          "symbol": "layer_inspection",
+          "line": 305
+        }
+      ],
+      "limitations": [
+        "O registro declara 18 camadas; layer Core recusa inspection nulo.",
+        "analyze_binary exige Ghidra; não alterna automaticamente para IDA/Hopper.",
+        "IDA, Hopper, adb, browser, JEB e reference possuem runtimes/configuração próprios e não oferecem layer nesta ponte.",
+        "Status e sondas de camada não abrem alvo nem iniciam análise.",
+        "Ferramentas comerciais, dispositivos e engines exigem configuração e licenças próprias."
+      ]
+    },
+    {
+      "id": "rea-local",
+      "title": "REA local direto e evidência",
+      "description": "Inspeção estática com rede/PID privados, digest antes/depois, recibo por hash e explicação derivada.",
+      "file": "flows/06-rea-local.mmd",
+      "sources": [
+        {
+          "path": "integrations/rea_assistant.py",
+          "symbol": "LocalReaAssistant",
+          "line": 625
+        },
+        {
+          "path": "integrations/rea_assistant.py",
+          "symbol": "run_isolated_worker",
+          "line": 42
+        },
+        {
+          "path": "integrations/rea_assistant.py",
+          "symbol": "_snapshot_loopback",
+          "line": 603
+        },
+        {
+          "path": "integrations/rea_local_worker.py",
+          "symbol": "main",
+          "line": 40
+        },
+        {
+          "path": "integrations/rea_assistant.py",
+          "symbol": "explain_report",
+          "line": 164
+        }
+      ],
+      "limitations": [
+        "Garantia de rede privada cobre o worker e seus descendentes.",
+        "Aplicação alvo não é executada no percurso estático; .NET pode fornecer apenas metadados.",
+        "Snapshot loopback não executa scripts nem busca recursos externos."
+      ]
+    },
+    {
+      "id": "rea-agente",
+      "title": "REA com agente local e gate de recibos",
+      "description": "Setup próprio, configuração efetiva, quatro ferramentas, timeout e validação do resultado do cliente.",
+      "file": "flows/07-rea-agente.mmd",
+      "sources": [
+        {
+          "path": "integrations/rea_assistant.py",
+          "symbol": "setup_local_agent",
+          "line": 280
+        },
+        {
+          "path": "integrations/rea_assistant.py",
+          "symbol": "launch_local_agent",
+          "line": 447
+        },
+        {
+          "path": "integrations/rea_assistant.py",
+          "symbol": "_run_agent_client",
+          "line": 353
+        },
+        {
+          "path": "integrations/rea_assistant.py",
+          "symbol": "validate_agent_trace",
+          "line": 544
+        },
+        {
+          "path": "integrations/rea_assistant_mcp.py",
+          "symbol": "create_mcp_server",
+          "line": 17
+        }
+      ],
+      "limitations": [
+        "Cliente OpenCode preserva a rede host para o endpoint loopback; não tem a garantia de rede privada do worker.",
+        "Status, configuração ou saída TUI não comprovam análise autônoma do alvo.",
+        "Análise REA autônoma pelo LLM local não foi comprovada nos recibos de prontidão R868/R869."
+      ]
+    },
+    {
+      "id": "conhecimento",
+      "title": "Conhecimento, RAG e grafos de evidência",
+      "description": "Recuperação de fontes, abstenção, referências e dois modelos de grafo com responsabilidades distintas.",
+      "file": "flows/08-conhecimento-rag.mmd",
+      "sources": [
+        {
+          "path": "rag/enhanced_search_rag.py",
+          "symbol": "UnifiedSearchRAG",
+          "line": 761
+        },
+        {
+          "path": "rag/enhanced_search_rag.py",
+          "symbol": "EnhancedRAG",
+          "line": 312
+        },
+        {
+          "path": "rag/enhanced_search_rag.py",
+          "symbol": "ReferenceAuditor",
+          "line": 602
+        },
+        {
+          "path": "mci/evidence_graph.py",
+          "symbol": "EvidenceGraph",
+          "line": 22
+        },
+        {
+          "path": "agentic_science_v2/evidence_graph.py",
+          "symbol": "EvidenceGraph",
+          "line": 128
+        },
+        {
+          "path": "agentic_science_v2/deep_research.py",
+          "symbol": "OrchestratorAgent",
+          "line": 468
+        }
+      ],
+      "limitations": [
+        "Busca externa depende dos provedores escolhidos; não integra a garantia local do REA.",
+        "Grafo de conhecimento e evidência recuperada não comprovam experimento ou probabilidade calibrada."
+      ]
+    },
+    {
+      "id": "memoria",
+      "title": "Rede de memória observável",
+      "description": "Eventos reais, memória persistida, claims, cartões e visualização em terminal/Streamlit.",
+      "file": "flows/09-memoria-observavel.mmd",
+      "sources": [
+        {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "memory_network_query",
+          "line": 265
+        },
+        {
+          "path": "mci/metabus.py",
+          "symbol": "MetacognitiveMemory",
+          "line": 51
+        },
+        {
+          "path": "webapp/memory_network_visualizer.py",
+          "symbol": "CoreMemoryNetworkSource",
+          "line": 161
+        },
+        {
+          "path": "webapp/memory_network_visualizer.py",
+          "symbol": "MemoryNetworkVisualizer",
+          "line": 365
+        },
+        {
+          "path": "webapp/memory_network_streamlit.py",
+          "symbol": "render_memory_network_streamlit",
+          "line": 17
+        }
+      ],
+      "limitations": [
+        "A animação representa eventos e relações observadas, não ativações internas de uma rede neural.",
+        "Simulação e registro de agente disponível são distintos de inferência executada."
+      ]
+    },
+    {
+      "id": "raciocinio",
+      "title": "Raciocínio restrito e fallbacks",
+      "description": "AST permitida, tradução SMT integral, cálculo simbólico da entrada e falha sem conclusão inventada.",
+      "file": "flows/10-raciocinio.mmd",
+      "sources": [
+        {
+          "path": "reasoning/reasoning_engines.py",
+          "symbol": "route",
+          "line": 7
+        },
+        {
+          "path": "reasoning/z3_solver.py",
+          "symbol": "check",
+          "line": 41
+        },
+        {
+          "path": "reasoning/engines.py",
+          "symbol": "_safe_build_z3_constraint",
+          "line": 78
+        },
+        {
+          "path": "reasoning/engines.py",
+          "symbol": "_safe_math_ast",
+          "line": 332
+        },
+        {
+          "path": "reasoning/engines.py",
+          "symbol": "SymPyEngine",
+          "line": 488
+        },
+        {
+          "path": "reasoning/engines.py",
+          "symbol": "MultiReasoningEngine",
+          "line": 1446
+        }
+      ],
+      "limitations": [
+        "SAT/UNSAT exige conclusão do backend; erro ou indisponibilidade retorna fallback.",
+        "Motores heurísticos e confidence interna não equivalem a prova SMT ou validação externa."
+      ]
+    },
+    {
+      "id": "diagnostico",
+      "title": "Diagnóstico, confiança, federação e evolução",
+      "description": "Autodescoberta e corpus retido, categorias canônicas, remediação, políticas e ledger de evolução.",
+      "file": "flows/11-diagnostico-governanca.mmd",
+      "sources": [
+        {
+          "path": "marceloclaro/doctor.py",
+          "symbol": "run_doctor",
+          "line": 921
+        },
+        {
+          "path": "scanners/pipeline.py",
+          "symbol": "DiagnosticPipeline",
+          "line": 96
+        },
+        {
+          "path": "scanners/noological_scanner.py",
+          "symbol": "NoologicalScanner",
+          "line": 495
+        },
+        {
+          "path": "integrations/harness_federation/artifact.py",
+          "symbol": "HarnessArtifact",
+          "line": 406
+        },
+        {
+          "path": "trust/trust_engine.py",
+          "symbol": "TrustEngine",
+          "line": 540
+        },
+        {
+          "path": "economy/token_economy.py",
+          "symbol": "TokenEconomy",
+          "line": 184
+        },
+        {
+          "path": "evolution/cycles.py",
+          "symbol": "EvolutionRegistry",
+          "line": 84
+        },
+        {
+          "path": "scanners/diagnostic_pipeline.py",
+          "symbol": "varrer",
+          "line": 46
+        },
+        {
+          "path": "scanners/diagnostic_pipeline.py",
+          "symbol": "run",
+          "line": 142
+        }
+      ],
+      "limitations": [
+        "Cobertura lexical não mede cobertura funcional ou completude epistêmica.",
+        "Confiança e licença declarada são sinais e políticas locais, não certificações externas.",
+        "scanners.diagnostic_pipeline.varrer é auditoria hermética de sincronia; run desse módulo é fachada do diagnóstico lexical."
+      ]
+    },
+    {
+      "id": "ciencia",
+      "title": "Ciência, proveniência e publicação",
+      "description": "Execução científica e descoberta com gates, revisão interna, composição e entrega editorial humana.",
+      "file": "flows/12-ciencia-publicacao.mmd",
+      "sources": [
+        {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "scientific_reproducible_run",
+          "line": 1904
+        },
+        {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "scientific_discovery_pipeline",
+          "line": 2263
+        },
+        {
+          "path": "integrations/live_scientific_runtime.py",
+          "symbol": "LiveScientificRuntime",
+          "line": 189
+        },
+        {
+          "path": "research/provenance_pipeline.py",
+          "symbol": "ScientificProvenancePipeline",
+          "line": 260
+        },
+        {
+          "path": "agentic_science_v2/paper_composer.py",
+          "symbol": "OrchestratorComposer",
+          "line": 496
+        },
+        {
+          "path": "mci/pipeline/scientific_governance_pipeline.py",
+          "symbol": "run_scientific_governance_pipeline",
+          "line": 15
+        },
+        {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "scientific_runtime_run",
+          "line": 1926
+        },
+        {
+          "path": "research/statistical_methods.py",
+          "symbol": "execute_analysis",
+          "line": 84
+        }
+      ],
+      "limitations": [
+        "Deep Research sem evidência elegível bloqueia a descoberta estrita.",
+        "Governança de entradas reportadas não executa experimento sobre dados brutos.",
+        "Composição e revisão internas não constituem parecer editorial ou validação clínica."
+      ]
+    },
+    {
+      "id": "entrega",
+      "title": "Validação e entrega",
+      "description": "Suíte/JUnit, contagens físicas, exportação limpa, manifesto, commit e resultado remoto independente.",
+      "file": "flows/13-validacao-entrega.mmd",
+      "sources": [
+        {
+          "path": "scripts/quality_report.py",
+          "symbol": "load_junit_results",
+          "line": 65
+        },
+        {
+          "path": "scripts/quality_report.py",
+          "symbol": "generate_report",
+          "line": 211
+        },
+        {
+          "path": "sdd/tdd_runner.py",
+          "symbol": "run_pytest",
+          "line": 554
+        },
+        {
+          "path": "marceloclaro/doctor.py",
+          "symbol": "run_doctor",
+          "line": 921
+        }
+      ],
+      "limitations": [
+        "Suíte local, lint e CI remota são verificações distintas.",
+        "Diagrama representa o procedimento de entrega; resultado remoto deve ser observado separadamente."
+      ]
+    }
+  ]
+}

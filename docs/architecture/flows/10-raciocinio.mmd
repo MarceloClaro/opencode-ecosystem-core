@@ -1,0 +1,29 @@
+flowchart TB
+  IN["Expressão matemática ou consulta explícita"] --> ENTRY{"Rota escolhida"}
+  ENTRY -->|"reasoning_engines.route"| PARSE["AST parse mode eval: apenas classificação estrutural"]
+  ENTRY -->|"primário.reason"| MULTI["MultiReasoningEngine: auto ou engine declarado"]
+  PARSE --> VALID{"Entrada válida e dentro dos limites?"}
+  VALID -->|"não"| FALL["fallback / available false / not_evaluated"]
+  VALID -->|"sim"| BOOL{"Comparação ou operação booleana?"}
+  BOOL -->|"sim"| Z["z3_solver.check: validar atribuições numéricas finitas"]
+  Z --> SMT["_safe_build_z3_constraint: traduzir fórmula integral"]
+  SMT --> LIMIT["Domínio de símbolos inteiros / solver timeout 5 s / rlimit"]
+  LIMIT --> SOLVER["Z3 Solver.check"]
+  SOLVER --> VERDICT{"sat ou unsat concluído?"}
+  VERDICT -->|"sim"| SAT["local_smt_execution + fórmula codificada"]
+  VERDICT -->|"não"| FALL
+  BOOL -->|"não"| MATH["SymPyEngine: _safe_math_ast / _build_sympy_math"]
+  MATH --> WHITELIST["Gramática permitida / chamadas permitidas / limites numéricos"]
+  WHITELIST --> COMPUTE["Computar expressão real da entrada e exigir resultado definido"]
+  COMPUTE --> OUT["local_symbolic_execution / resultado / passos"]
+  COMPUTE --> FALL
+  MULTI --> ZENGINE["Z3Engine.reason: backend canônico"]
+  ZENGINE --> SMT
+  MULTI --> MATH
+  MULTI --> OTHER["Kanren / Critical / Bayesian / Causal / Temporal / outros"]
+  OTHER --> HEUR["Saída específica do motor / disponibilidade / confiança interna"]
+  SAT --> REPORT["Resultado com trilha e escopo declarado"]
+  OUT --> REPORT
+  FALL --> REPORT
+  HEUR --> REPORT
+  REPORT -. "não promover conclusão parcial a prova" .-> BOUND["Sem eval de código Python; heurísticas não equivalem a SMT ou prova externa"]

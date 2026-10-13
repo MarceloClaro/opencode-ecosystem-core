@@ -1,0 +1,29 @@
+flowchart TB
+  SPEC["SPEC-935-R...: frontmatter / objetivo / critérios / testes"] --> REG["SpecRegistry.load_formal_specs"]
+  REG --> CONTRACT["Validar test_file / selectors / evidence_contract"]
+  CONTRACT --> KIND{"Software com teste ou evidência confiável exigida?"}
+  KIND -->|"não"| TEXT["criteria_only: checagem textual heurística"]
+  KIND -->|"sim"| RED["TDDHistory.run phase red: pytest REAL no baseline"]
+  RED --> CONTEXT["Contexto: spec + config + árvore de testes + fontes"]
+  CONTEXT --> ANALYSE["Analisar JUnit / falha funcional / ausência de erro de setup"]
+  ANALYSE --> ROK{"RED elegível com falha funcional?"}
+  ROK -->|"não"| NO["Recibo rejeitado; não fabricar RED histórico"]
+  ROK -->|"sim"| SIGN["Recibo HMAC + hash de fontes + encadeamento do ledger"]
+  SIGN --> PREF["sdd_preflight: recibo RED e escopo compatíveis"]
+  PREF --> CODE["Implementação / execução autorizada"]
+  CODE --> GREEN["TDDHistory.run phase green: pytest no código atual"]
+  GREEN --> PAIR["validate_pair: RED anterior / HMAC / contrato / mesmos testes"]
+  PAIR --> POK{"Par autenticado e GREEN aprovado?"}
+  POK -->|"não"| NO
+  POK -->|"sim"| TDD["TDDRunner.run_delivery_test"]
+  TDD --> TARGETS["Executar targets canônicos registrados por critério"]
+  TARGETS --> RECORD["CriterionRuntimeRecord + TrustedTestEvidence"]
+  RECORD --> VERIFY["SpecVerifier.verify: consumir evidência de runtime"]
+  TEXT --> VERIFY
+  VERIFY --> SUCCESS{"Todos critérios e gates satisfeitos no escopo?"}
+  SUCCESS -->|"não"| REJ["report_completion: recusa / status falha / reflexão"]
+  SUCCESS -->|"sim"| ACC["report_completion: aceite local da entrega"]
+  ACC --> BB["task.complete: Blackboard + Trust + economia"]
+  REJ --> BB
+  BB --> MEM["MetaBus: observação e trilha de decisão"]
+  ACC -. "não equivale a validação externa" .-> LIMIT["Limite: provas e qualidade editorial exigem evidências próprias"]

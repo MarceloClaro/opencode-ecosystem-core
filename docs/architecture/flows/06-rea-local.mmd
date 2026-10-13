@@ -1,0 +1,32 @@
+flowchart TB
+  IN["rea inspect / MCP core_rea_inspect"] --> LOCAL["Primário.rea_assistant_action / LocalReaAssistant.action"]
+  LOCAL --> PATH{"Arquivo local ou URL literal loopback?"}
+  PATH -->|"loopback"| HTTP["GET limitado: HTTP 200 / sem redirect / máximo 1 MiB"]
+  HTTP --> SNAP["Snapshot HTML por hash; sem scripts ou recursos externos"]
+  PATH -->|"arquivo"| RES["Resolver caminho existente / tipo auto ou explícito"]
+  SNAP --> RES
+  RES --> PARAM["Validar kind / timeout finito de até 180 s / procedure"]
+  PARAM --> ISO{"Linux/WSL e unshare disponíveis?"}
+  ISO -->|"não"| BLOCK["Bloquear: sem alternativa fora do isolamento"]
+  ISO -->|"sim"| NS["unshare user + network + PID / kill-child / mount-proc"]
+  NS --> WORKER["rea_local_worker: PID 1 / rede privada / apenas lo"]
+  WORKER --> DIGEST["Digest independente ANTES da inspeção"]
+  DIGEST --> TYPE{"Tipo de alvo"}
+  TYPE -->|"HTML"| PARSER["LocalHTML: título / elementos / referências declaradas"]
+  TYPE -->|"JavaScript"| PREP["Arquivo avulso: cópia temporária; ASAR/diretório próprios"]
+  TYPE -->|"native / dotnet / plist / Android / firmware / ELF"| PROVIDER["Primário mínimo → ReaBridge → ferramenta de provedor"]
+  PREP --> PROVIDER
+  PROVIDER --> CHECK["Exigir Evidence identificada / comparar digest declarado"]
+  PARSER --> AFTER["Digest independente DEPOIS da inspeção"]
+  CHECK --> AFTER
+  AFTER --> SAME{"Alvo inalterado?"}
+  SAME -->|"não"| REJ["Recusar resultado"]
+  SAME -->|"sim"| REPORT["Achados estáticos + evidência + privacy + limitações"]
+  REPORT --> PRIV{"Namespace privado / interfaces apenas lo / sem rota externa?"}
+  PRIV -->|"não"| REJ
+  PRIV -->|"sim"| CAS["Serializar JSON / SHA-256 / recibo em diretório privado"]
+  CAS --> EXPLAIN["rea explain: contenção de caminho / tamanho / hash"]
+  EXPLAIN --> OUT["Explicação clara derivada do recibo"]
+  WORKER --> TIME["Timeout ou cancelamento: encerrar grupo e descendentes"]
+  TIME --> BLOCK
+  OUT -. "limite da garantia" .-> LIMIT["Worker isolado; cliente MCP e endpoint local devem ser confiáveis"]

@@ -515,3 +515,16 @@ validação externa.
 **[⬆ voltar ao topo](#-opencode-ecosystem-core)**
 
 </div>
+
+## Arquitetura completa e fluxogramas atuais
+
+Explore o [mapa navegável R879](docs/architecture_map.html), com busca por módulo
+e símbolo, zoom, 13 fluxogramas e inventário completo do snapshot Git do Core.
+O [guia minucioso](docs/ARQUITETURA_COMPLETA_CORE_R879.md) registra fontes,
+fronteiras e instruções de reprodução. Estão disponíveis
+[SVG completo](docs/architecture/dependencies.svg),
+[fonte DOT](docs/architecture/dependencies.dot) e
+[inventário JSON](docs/architecture/architecture-inventory.json).
+As arestas AST representam imports declarados; os fluxos de CLI/MCP e seus
+gates possuem documentação própria. Contagens estáticas não medem qualidade
+em execução. O mapa R433–R438 continua disponível como registro histórico.

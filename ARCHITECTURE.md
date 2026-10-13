@@ -35,6 +35,31 @@ Specs, ciclos, testes e cobertura mudam com o checkout. Consulte,
 respectivamente, `specs/`, `evolution/cycles.json`, `tests/` e a configuração
 de CI em vez de tratar números de documentos antigos como estado atual.
 
+## Mapa completo atual e fluxogramas — R879
+
+A [página navegável da arquitetura](docs/architecture_map.html) reúne a visão
+operacional, o grafo completo de dependências e um inventário pesquisável de
+arquivos e símbolos. Funciona offline, sem CDN. O
+[guia minucioso](docs/ARQUITETURA_COMPLETA_CORE_R879.md) explica os 13 fluxos e
+suas fontes; [JSON](docs/architecture/architecture-inventory.json),
+[DOT](docs/architecture/dependencies.dot) e
+[SVG completo](docs/architecture/dependencies.svg) permitem reprodução e exportação.
+
+O snapshot `6380cfaff4aac0dd940d42011826bb21126e5635` inclui o Core consolidado
+até R869: primário compartilhado, transporte real de prompts CLI, workflows,
+recebimento e custódia RED/GREEN, análise REA direta e por agente, isolamento e
+cancelamento, memória/grafos, raciocínio restrito, diagnósticos e publicação.
+O inventário registra 677 módulos Python próprios em 45 pacotes, 6.432 símbolos,
+1.051 declarações de importação internas que formam 935 pares de módulos,
+oito superfícies TypeScript/JavaScript/Lean e 9.672 arquivos classificados.
+Módulos isolados são incluídos. Templates, testes, evidências históricas,
+artefatos de domínio e vendor possuem categorias próprias.
+
+Essas contagens descrevem fontes daquele commit; não comprovam execução,
+qualidade, cobertura funcional ou validação externa. Conexões dinâmicas,
+imports externos e integrações opcionais são explicitamente delimitados.
+O [mapa R433–R438](docs/MAPA_ARQUITETURA_R433_R438.md) permanece histórico.
+
 ## Visão das camadas
 
 ```mermaid

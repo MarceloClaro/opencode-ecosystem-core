@@ -1,0 +1,40 @@
+flowchart TB
+  IN["CLI / ecosystem_rea / primário.rea_action"] --> VAL["ReaBridge._validate: operação / prazo / campos permitidos"]
+  VAL --> OP{"Operação validada?"}
+  OP -->|"status"| STATUS["ReaBridge.status: arquivos / dependências / configuração Ghidra"]
+  STATUS --> STRUCT["installation_only: sem handshake nem análise"]
+  OP -->|"layers"| LAYERS["layers_status: registro canônico e probe_layer por camada"]
+  LAYERS --> READY["Sonda estrutural de ambiente / paths / comandos; sem análise"]
+  LAYERS -. "registro informativo: 18 camadas" .-> DECL["LAYERS / SURFACES: ferramentas declaradas pelo REA"]
+  DECL -. "grupos declarados; não operações Core" .-> DJS["javascript / apple / managed_dotnet / pe_resources / evm / artifact"]
+  DECL -. "grupos declarados; não operações Core" .-> DN["native_ghidra / native_ida / native_hopper / native_offline_elf / native_core_crash"]
+  DECL -. "grupos declarados; não operações Core" .-> DA["android_jadx / android_apktool / android_adb / jeb"]
+  DECL -. "grupos declarados; não operações Core" .-> DO["firmware / browser / reference"]
+  OP -->|"layer"| INS["layer_inspection: contrato estático por caminho"]
+  INS --> SUPPORTED{"inspection definido e não nulo?"}
+  SUPPORTED -->|"não"| REJECT["Recusar camada sem inspeção estática por caminho"]
+  SUPPORTED -->|"sim"| STATIC["javascript / apple / android_jadx / android_apktool / firmware / native_offline_elf / native_core_crash / managed_dotnet / pe_resources / evm / artifact"]
+  STATIC --> TARGET["Validar path local; ferramenta / path_field / fixed; encoding EVM"]
+  TARGET --> PROBE["probe_layer selecionada: prontidão adicionada à proveniência"]
+  OP -->|"analyze"| JS["JavaScript: caminho local para analyze_javascript_application"]
+  OP -->|"analyze_binary"| GH["Arquivo até 128 MiB / procedure / digest; Ghidra obrigatório"]
+  GH --> GENV["_child_environment native_required: Ghidra + JDK executáveis"]
+  GENV --> PROVIDER["REA_ANALYSIS_PROVIDER ghidra"]
+  PROBE --> INST["ReaBridge.status: runtime Node REA disponível?"]
+  JS --> INST
+  PROVIDER --> INST
+  INST --> AVAILABLE{"Instalação disponível?"}
+  AVAILABLE -->|"não"| ERROR["Indisponibilidade / falha / timeout explícitos"]
+  AVAILABLE -->|"sim"| ENV["_child_environment: defaults + engine_environment; allowlist no modo local"]
+  ENV --> IPC["_exchange: Node REA / stdio MCP / prazo / cancelamento"]
+  IPC --> HAND["Handshake / ferramenta e schema do percurso selecionado"]
+  HAND --> EVID["Resposta estruturada: Evidence da operação executada"]
+  EVID --> CHECK["Conferir operação da camada; nativo: digest / sessão Ghidra / cleanup closed"]
+  CHECK --> RESULT["Resultado Core: success ou tool_failure + proveniência"]
+  RESULT --> OBS["Primário: record_observation sem incremento de confiança"]
+  IPC --> ERROR
+  OP -->|"catalog / session"| INFO["Runtime disponível: _exchange para catálogo/sessão, sem análise de alvo"]
+  INFO --> RESPONSE["Resposta informativa da operação solicitada"]
+  DECL -. "inspection nulo: configuração e runtime próprios" .-> OTHER["native_ghidra / native_ida / native_hopper / android_adb / browser / jeb / reference"]
+  OTHER -. "ferramentas externas condicionais; não via layer Core" .-> EXTERNAL["Runtime MCP REA próprio / licenças / dispositivos / serviço local"]
+  OTHER -. "somente native_ghidra: percurso separado analyze_binary" .-> GH

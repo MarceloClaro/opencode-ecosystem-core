@@ -1,0 +1,36 @@
+flowchart TB
+  U["Questão / fontes / dados / plano de análise"] --> PRIMARY["MarceloClaroOrchestrator: coordenação científica"]
+  PRIMARY --> REPRO["scientific_reproducible_run: percurso de execução definido"]
+  REPRO --> PROV["ScientificProvenancePipeline: validar dados e referências"]
+  PROV --> SNAP["Snapshot imutável CSV / hashes / proveniência declarada"]
+  SNAP --> STAT["execute_analysis: método e variáveis validados"]
+  STAT --> REP["Subprocesso reproduce.py: mesmos bytes e resultado comparado"]
+  REP --> ANALYSIS["Análise reproduzível e artefatos com hashes"]
+  PRIMARY --> RUNTIME["scientific_runtime_run: execução externa Hermes/MiroFish"]
+  RUNTIME --> LIVE["LiveScientificRuntime: contrato / comando / audit proxy"]
+  LIVE --> EXEC["Execução selecionada + recibo de resposta + artefatos"]
+  EXEC --> CLASS["classify_execution: evidência executada vs saída incompleta"]
+  CLASS --> ELIG{"Dados e evidência elegíveis no escopo?"}
+  ELIG -->|"não"| BLOCK["blocked / abstenção / limitações preservadas"]
+  ELIG -->|"sim"| OBS["Observação de runtime e artefatos no escopo da execução"]
+  PRIMARY --> DISC["scientific_discovery_pipeline: EvoSci R101"]
+  DISC --> DEEP["Deep Research R102: fontes / grafo / relatórios"]
+  DEEP --> G102{"evidence_eligible e experiment_executed true?"}
+  G102 -->|"não"| BLOCK
+  G102 -->|"sim"| REVIEW["R103 OrchestratorReviewer: revisão interna"]
+  REVIEW --> G103{"export_gate_passed e strict_gates?"}
+  G103 -->|"reprovado no modo estrito"| BLOCK
+  G103 -->|"passagem permitida"| REV["R104d: contrato de revisão / integridade / rollback"]
+  REV --> COMPOSE["R105 compose_paper: estrutura / seções / citações"]
+  ANALYSIS --> MAN["research.manuscript: gates / TeX / DOCX / produção"]
+  OBS -. "evidência de runtime, sem equiparar a análise estatística" .-> MAN
+  SNAP --> MAN
+  COMPOSE --> CONSIST["CrossConsistencyVerifier + auditoria de movimentos científicos"]
+  CONSIST --> MAN
+  MAN --> HUMAN["Revisão humana: autoria / declarações / adequação editorial"]
+  HUMAN --> EXPORT["Pacote local de publicação / site / material didático"]
+  EXPORT -. "somente mediante configuração e autorização próprias" .-> PUB["Depósito ou publicação externa"]
+  PRIMARY --> GOV["Governança OQS → MCI → VSEE → EGS"]
+  GOV --> INPUTS["reported_inputs_and_executor_output: não executa experimento bruto"]
+  INPUTS -. "evidence_eligible false / external_validation false" .-> BLOCK
+  REVIEW -. "revisão interna não substitui parecer externo" .-> LIMIT["Sem certificação editorial, clínica ou científica implícita"]

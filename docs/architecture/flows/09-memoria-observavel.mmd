@@ -1,0 +1,22 @@
+flowchart TB
+  USER["Consulta lexical local de memória"] --> Q["Primário.memory_network_query: validar consulta e limite"]
+  Q --> SEARCH["MetaBus.memory.search_memory"]
+  SEARCH --> EVENTS["memory.query → memory.retrieved → memory.response"]
+  EVENTS --> LOG["metabus_events.jsonl"]
+  STATE["shared_memory.json: episódica / semântica / ledger"] --> READ["CoreMemoryNetworkSource: leitura limitada e cache por arquivo"]
+  LOG --> READ
+  CLAIMS["data/evidence_graph.json: claims e versões"] --> READ
+  SCI["EvidenceGraph científico opcional fornecido à snapshot"] --> READ
+  REG["Blackboard.registry: AgentCards existentes"] --> READ
+  READ --> VALID["JSON válido / janela de eventos / avisos de fonte indisponível"]
+  VALID --> GRAPH["MemoryNetworkGraph: limite de nós e arestas / texto seguro"]
+  GRAPH --> TYPES["Tipos: consulta / memória / contexto / agente / resposta / evidência"]
+  TYPES --> EDGE["Arestas por eventos, registro e referências existentes"]
+  EDGE --> ACT["Ativação por timestamp observado; limites temporais"]
+  ACT --> ASCII["MemoryNetworkVisualizer.render_ascii_graph: terminal"]
+  ACT --> STREAM["render_memory_network_streamlit: nós e detalhes"]
+  STREAM --> UI["Streamlit: atualização e exploração visual"]
+  ASCII --> CLI["python -m webapp.memory_network_visualizer"]
+  SIM["MemoryNetworkSimulator: dados demonstrativos"] -. "modo separado e identificado" .-> GRAPH
+  EVENTS -. "inference_executed false / calibrated false" .-> LIMIT["Animação representa eventos e dados, não pesos neurais internos"]
+  REG -. "available não comprova inferência" .-> LIMIT

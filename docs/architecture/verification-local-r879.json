@@ -1,0 +1,117 @@
+{
+  "scope": "local static architecture extraction, diagram rendering, browser and software-contract verification",
+  "source_commit": "6380cfaff4aac0dd940d42011826bb21126e5635",
+  "source_tree": "c48fa21de736075074d024f099bd9bdb192f0988",
+  "counts": {
+    "classifications": {
+      "configuration": 17,
+      "documentation": 1356,
+      "domain_artifact": 807,
+      "evidence_output": 65,
+      "example": 53,
+      "historical_snapshot": 2577,
+      "production": 706,
+      "repository_asset": 423,
+      "template": 2399,
+      "test": 487,
+      "vendor": 782
+    },
+    "declared_import_edges": 1051,
+    "dynamic_imports": 6,
+    "external_imports": 3867,
+    "non_python_surfaces": 8,
+    "parse_errors": 0,
+    "python_production_modules": 677,
+    "tracked_files": 9672,
+    "unique_module_pairs": 935
+  },
+  "symbols": 6432,
+  "flow_count": 13,
+  "source_anchors": 78,
+  "graphviz_svg": {
+    "nodes": 677,
+    "unique_edges": 935
+  },
+  "mermaid_svg": {
+    "rendered": 13,
+    "returncodes": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "renderer": "@mermaid-js/mermaid-cli 12.0.0, font embedding disabled"
+  },
+  "tests": {
+    "targeted_passed": 57,
+    "failed": 0,
+    "scope": "R879 generator/page/cross-source contract and documentation/CI regressions; not a rerun of the entire Core suite",
+    "index_secret_scan": "passed",
+    "total_in_final_invocation": 58
+  },
+  "browser": {
+    "scope": "headless browser verification, local file, no external requests",
+    "initial": {
+      "modules": "677",
+      "flows": "13",
+      "svg": true,
+      "width": 1640
+    },
+    "nodeCount": 677,
+    "filterMatches": 4,
+    "selectedModuleVisible": true,
+    "flowsRendered": 13,
+    "inventoryRows": 9672,
+    "mobile": {
+      "width": 390,
+      "viewport": 390
+    },
+    "externalRequests": [],
+    "pageErrors": [],
+    "success": true
+  },
+  "sdd_delivery": {
+    "status": "completed",
+    "verified": true,
+    "red_history_valid": true,
+    "passed_criteria": 6,
+    "total_criteria": 6,
+    "red_receipt_id": "tdd-6337e22c338c4520a6fb799a7ff996f9",
+    "green_receipt_id": "tdd-6c47ade6c6be4232bd024550e11463d6",
+    "historical_backfill": false
+  },
+  "reproduction": {
+    "canonical_ref_check": "matching",
+    "json_dot_deterministic": true,
+    "source_modules_executed_for_extraction": false
+  },
+  "limitations": [
+    "Snapshot de arquivos versionados no commit indicado; arquivos privados, ignorados e mudanças não commitadas não são lidos.",
+    "Imports AST declarados não comprovam chamadas, execução, prontidão, qualidade ou validação externa.",
+    "Produção é uma classificação por caminho/extensão; o índice preserva todas as demais categorias separadamente.",
+    "Imports externos ou não encontrados não distinguem biblioteca padrão, dependência opcional e import inválido.",
+    "Imports dinâmicos são registrados, sem serem promovidos a arestas executadas.",
+    "Declarações TS/JS/Lean são extração lexical, não parser semântico; podem conter falsos positivos de comentários/strings e omitir formas não suportadas.",
+    "Relações CLI/MCP, gates e fluxos documentados exigem mapas operacionais separados; não são inferidos do grafo AST.",
+    "Submódulos e symlinks permanecem no índice; seus destinos nunca são seguidos.",
+    "Hashes SHA-256 são de blobs locais; não representam assinatura, auditoria externa ou taxa de cobertura."
+  ],
+  "externally_validated": false,
+  "artifact_sha256": {
+    "architecture/architecture-inventory.json": "75fe9e2cdd127e3ebb2916508b06453a6d5ce062a9b8a95821e94aca16da9fb0",
+    "architecture/dependencies.svg": "f7f8c9ea40e9cb853c8305b513c6f5fcb67d646261b14c2c6b06d75319347b58",
+    "architecture/overview.svg": "577be677baeb43ced6af819def41048b1860d01c34af98f7ed3cf35cc0463036",
+    "architecture/curated-overview.svg": "a8daf49c86ff10f93c771baabad7557a53732c330a34bb8d9a45d4b648894ba7",
+    "architecture_map.html": "a3e24547bdd71dc8eebabefd957abb446ff3e43050e0ae2b4bcc150885089ae5",
+    "architecture/flows.json": "41365cd04ccbdffaa32ed823c97533ccc562348a9638496c17a68f45b7eaa86a"
+  }
+}

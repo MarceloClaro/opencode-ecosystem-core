@@ -1,0 +1,40 @@
+flowchart TB
+  IN["ecosystem_workflow: nodes / budgets / id / resume"] --> DEF["_definition: normalizar nós e dependências"]
+  DEF --> V{"IDs únicos / dependências existentes / DAG sem ciclo?"}
+  V -->|"não"| BAD["Recusar definição"]
+  V -->|"sim"| HASH["Ordem topológica determinística + input_hash"]
+  HASH --> CLAIM["WorkflowStore.claim: posse exclusiva"]
+  CLAIM --> RESUME{"resume?"}
+  RESUME -->|"não"| NEW["create_record: queued / steps zero"]
+  RESUME -->|"sim"| LOAD["load checkpoint existente"]
+  LOAD --> MATCH{"Mesma definição / hash / orçamento válido?"}
+  MATCH -->|"não"| BAD
+  MATCH -->|"sim"| CHECK["Validar schema e evidência dos nós completed"]
+  CHECK --> REC["running interrompido vira failed / execution_uncertain"]
+  REC --> RETRY{"Falha e retry_failed explícito?"}
+  RETRY -->|"sim"| QUEUE["Guardar history e recolocar etapa em queued"]
+  RETRY -->|"não"| KEEP["Preservar falha; completed é reutilizado"]
+  NEW --> LOOP["Percorrer ordem topológica sequencialmente"]
+  QUEUE --> LOOP
+  KEEP --> LOOP
+  LOOP --> REMAIN{"Há etapa na ordem a percorrer?"}
+  REMAIN -->|"sim"| DONE{"Etapa já concluída?"}
+  DONE -->|"sim"| NEXT["Próxima etapa"]
+  DONE -->|"não"| DEP{"Dependências completed?"}
+  DEP -->|"não"| B["blocked_by: dependências sem aceite"]
+  DEP -->|"sim"| BUDGET{"Tempo e passos globais restantes?"}
+  BUDGET -->|"não"| E["exhausted"]
+  BUDGET -->|"sim"| RES["Reservar passos e salvar running ANTES do executor"]
+  RES --> CTX["Acrescentar saídas aceitas das dependências ao contexto"]
+  CTX --> AC["AutonomousCoordinator.run: spec da etapa / primário"]
+  AC --> R{"completed / success true / steps positivos / prazo?"}
+  R -->|"sim"| C["Salvar completed + resultado + consumo"]
+  R -->|"não"| F["Salvar failed / blocked / exhausted; incerteza explícita"]
+  C --> NEXT
+  F --> NEXT
+  B --> NEXT
+  E --> NEXT
+  NEXT --> LOOP
+  REMAIN -->|"não"| END["_overall: sucesso somente se todos completed"]
+  END --> STORE["Checkpoint durável: save / publicação atômica"]
+  STORE --> STATUS["ecosystem_workflow_status: leitura sem execução"]

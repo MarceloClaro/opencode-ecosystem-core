@@ -1,6 +1,9 @@
-# Mapa Completo da Arquitetura Testada e Reproduzível — R433–R438
+# Mapa histórico da arquitetura — R433–R438
 
-Este arquivo é a fonte única do diagrama Mermaid da arquitetura completa. Ele é **testado** via `npx @mermaid-js/mermaid-cli` e **reproduzível** para dev.
+Este arquivo preserva o mapa histórico R433–R438. As contagens e resultados
+abaixo pertencem àquela edição e não representam o estado atual. Consulte o
+[mapa completo R879](ARQUITETURA_COMPLETA_CORE_R879.md) e a
+[página navegável atual](architecture_map.html) para as novas implementações.
 
 ## Como reproduzir
 

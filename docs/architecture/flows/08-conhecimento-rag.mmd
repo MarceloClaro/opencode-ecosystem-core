@@ -1,0 +1,27 @@
+flowchart TB
+  IN["Consulta: CLI / MCP library / Streamlit / primário"] --> PLAN["Planejar escopo e fontes; tratar conteúdo recuperado como dado"]
+  PLAN --> LOCAL["Biblioteca e catálogo locais / páginas e seções"]
+  PLAN --> UR["UnifiedSearchRAG"]
+  UR --> SEARCH["UnifiedSearcher: provedores opcionais / cache"]
+  SEARCH --> DEDUP["Normalizar títulos / deduplicar / pontuação temporal"]
+  DEDUP --> INDEX["EnhancedRAG.index: chunks e metadados"]
+  LOCAL --> INDEX
+  INDEX --> EXP["query_expansion / retrieve_enhanced / temporal_boost"]
+  EXP --> EVID["Evidências recuperadas com referência e pontuação"]
+  EVID --> ANSWER["answer_grounded: contexto e citações"]
+  ANSWER --> SUFF{"Suporte suficiente?"}
+  SUFF -->|"não"| ABSTAIN["Abstenção declarada / ausência de suporte"]
+  SUFF -->|"sim"| RESULT["Resposta vinculada às evidências recuperadas"]
+  EVID --> AUDIT["ReferenceAuditor: DOI / ano / duplicatas / completude"]
+  AUDIT --> BIB["Referências ABNT / BibTeX conforme metadados disponíveis"]
+  PLAN --> DEEP["Deep Research: OrchestratorAgent / BFRS / DFRS"]
+  DEEP --> SCI["EvidenceGraph científico: Entity / Relation / Evidence"]
+  SCI --> QUERY["find_paths / subgraph_query / export_visualization"]
+  PLAN --> CLAIM["EvidenceGraph MCI: register_claim / add_evidence"]
+  CLAIM --> REPL["Replicações / contradições / histórico de claim"]
+  REPL --> CONF["Confiança consolidada local com proveniência"]
+  RESULT --> OBS["MetaBus: contexto / lições / observações"]
+  ABSTAIN --> OBS
+  SEARCH -. "quando selecionados, acessam fontes externas" .-> REMOTE["Busca científica/web: fronteira distinta do modo REA isolado"]
+  SCI -. "grafo de conhecimento não comprova experimento" .-> LIMIT["Elegibilidade científica e validação funcional são gates separados"]
+  CONF -. "não é probabilidade externa calibrada" .-> LIMIT

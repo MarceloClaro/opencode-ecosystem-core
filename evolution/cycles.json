@@ -20260,6 +20260,31 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R879",
+      "objective": "Mapa arquitetural completo e fluxogramas com snapshot Git e limites explícitos",
+      "changes": [
+        "Inventário Git/AST reproduzível de fontes próprias, camadas, símbolos e imports",
+        "13 fluxogramas com78âncoras; UIoffline, zoom, busca e downloads",
+        "Mapa legado etiquetado como histórico;57testes de contrato/docs aprovados; renderrealSVG"
+      ],
+      "score": null,
+      "lessons": [
+        "Importação estática não comprova execução. Camadas REA declaradas não equivalem a inspeções Core disponíveis.",
+        "Snapshot Git isola mudanças concorrentes e não exporta runtime privado."
+      ],
+      "timestamp": 1791929879.377327,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ]
 }

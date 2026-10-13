@@ -1,0 +1,29 @@
+flowchart TB
+  SET["rea setup: modelo e endpoint literal loopback"] --> FILES["Perfil próprio + MCP stdio + launcher; gravação transacional"]
+  FILES --> PROFILE["Somente provider rea_local / quatro ferramentas REA / deny demais"]
+  PROFILE --> RUN["rea agent: cliente fora do projeto / HOME e XDG próprios"]
+  RUN --> DEBUG["OpenCode debug config: ler configuração efetiva"]
+  DEBUG --> VALID{"Modelo / prompt / MCP / permissões / limites correspondem?"}
+  VALID -->|"não"| STOP["Bloquear antes da conversa"]
+  VALID -->|"sim"| CHECK{"check_only?"}
+  CHECK -->|"sim"| STRUCT["resolved_configuration_only / sem inferência"]
+  CHECK -->|"não"| PROMPT{"Prompt finito fornecido?"}
+  PROMPT -->|"não"| TUI["TUI interativa: client_exit_only"]
+  PROMPT -->|"sim"| NS["Cliente: namespace PID/user; rede do host para modelo loopback"]
+  NS --> CLIENT["OpenCode run: eventos JSONL / prazo global"]
+  CLIENT --> MODEL["Modelo local: decisão de chamada de ferramenta"]
+  MODEL --> MCP["rea_assistant_mcp: primário mínimo único por servidor"]
+  MCP --> WORKER["core_rea_inspect: worker em namespace de rede privado"]
+  WORKER --> RECEIPT["Recibo CAS local / digest / alvo inalterado / limites"]
+  RECEIPT --> TRACE["Evento tool_use: ferramenta esperada / completed / success true"]
+  TRACE --> GATE["validate_agent_trace: reler recibo por core explain"]
+  GATE --> OK{"Hash / caminho / digest / privacy / operação válidos?"}
+  OK -->|"sim"| OUT["executed_tool_and_local_receipt: explicação determinística"]
+  OK -->|"não"| STATUS{"Somente prontidão válida executada?"}
+  STATUS -->|"sim"| READY["executed_readiness_tool_only / alvo não analisado"]
+  STATUS -->|"não"| BAD["blocked_unverified_agent_output: texto livre não publicado"]
+  CLIENT --> CANCEL["Timeout / interrupção: namespace e descendentes encerrados"]
+  CANCEL --> STOP
+  MODEL -. "texto livre nunca é evidência de inspeção" .-> BAD
+  TUI -. "não atesta análise nem inferência" .-> LIMIT["Cliente interativo: examinar recibos próprios"]
+  OUT -. "não prova qualidade do modelo" .-> LIMIT

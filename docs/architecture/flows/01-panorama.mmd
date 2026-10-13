@@ -1,0 +1,101 @@
+flowchart TB
+  U["Operador / solicitação / alvo local"]
+  subgraph interfaces["Interfaces e contratos de entrada"]
+    CLI["marceloclaro.cli / rea_cli / science_cli"]
+    OC["OpenCode: configuração compilada e comandos"]
+    MCP["ecosystem-network: MCP stdio"]
+    UI["Streamlit: consulta / evidência / memória"]
+    SITE["Site local REA: instruções e exemplos"]
+  end
+  subgraph primary["Coordenação primária e memória compartilhada"]
+    MC["MarceloClaroOrchestrator"]
+    CAT["Registro idempotente: agentes e catálogo"]
+    BB["Blackboard / AgentCard / task.cfp"]
+    BUS["MetaBus: eventos e memória metacognitiva"]
+    ATT["AttentionRouter: capacidade / semântica / confiança / carga"]
+    TRANS["TransformerPipeline + GradingHead: revisão limitada"]
+    TASK["TaskRuntime: DAG / lease / orçamento / recuperação"]
+    AUTO["AutonomousCoordinator"]
+    WF["WorkflowCoordinator + WorkflowStore"]
+  end
+  subgraph execution["Execução e integrações condicionais"]
+    HAR["HarnessRuntime: CLI / stdin / prazo / cancelamento"]
+    EXT["Codex / Claude / Antigravity: autenticação e saldo próprios"]
+    FED["Federação: artefatos / políticas / integridade / licença"]
+    REA["ReaBridge + registro rea_layers"]
+    LOCAL["LocalReaAssistant: worker isolado e recibo"]
+    BROW["Navegador coordenado / cenários / snapshots"]
+    MODEL["Provedores locais opcionais: Ollama / runai / LiteRT"]
+  end
+  subgraph assurance["Especificação, governança e evidência"]
+    SPEC["SpecRegistry / Specification / critérios"]
+    HIST["TDDHistory: RED e GREEN autenticados"]
+    RUN["TDDRunner: teste e contrato por critério"]
+    GATE["SpecVerifier / report_completion: aceite ou recusa"]
+    TRUST["Trust Engine / confidence ledger / behavioral gate"]
+    ECON["TokenEconomy: staking / release / slash / fee"]
+    DIAG["Doctor + DiagnosticPipeline: medições locais"]
+    EVO["EvolutionRegistry: ledger / encadeamento / auditoria"]
+    CI["pytest / JUnit / quality_report / CI"]
+  end
+  subgraph knowledge["Conhecimento, raciocínio e pesquisa"]
+    RAG["UnifiedSearchRAG: busca / recuperação / abstenção"]
+    EG["EvidenceGraph MCI: claims / evidências / replicações"]
+    SCI["EvidenceGraph científico: entidades / relações / fontes"]
+    REASON["Motores: AST restrita / SMT / simbólico / heurísticas"]
+    RESEARCH["Pesquisa: proveniência / execução reprodutível / revisão"]
+    PUB["Composer / manuscrito / LaTeX / DOCX / material didático"]
+    VIS["Rede de memória: terminal e Streamlit observacionais"]
+  end
+  U --> CLI
+  U --> OC
+  U --> MCP
+  U --> UI
+  U --> SITE
+  CLI --> MC
+  OC --> MCP
+  MCP --> MC
+  UI --> MC
+  MC --> CAT
+  CAT --> BB
+  MC --> BUS
+  MC --> ATT
+  MC --> TRANS
+  MC --> TASK
+  MCP --> AUTO
+  AUTO --> MC
+  MCP --> WF
+  WF --> AUTO
+  AUTO --> HAR
+  HAR --> EXT
+  AUTO --> FED
+  MC --> REA
+  MC --> LOCAL
+  MC --> BROW
+  OC -. "configuração opcional" .-> MODEL
+  MC --> SPEC
+  SPEC --> HIST
+  SPEC --> RUN
+  HIST --> GATE
+  RUN --> GATE
+  MC --> GATE
+  GATE --> BB
+  GATE --> TRUST
+  GATE --> ECON
+  GATE --> BUS
+  MC --> DIAG
+  MC --> EVO
+  CI --> RUN
+  MC --> RAG
+  MC --> REASON
+  MC --> RESEARCH
+  RESEARCH --> EG
+  RESEARCH --> SCI
+  RESEARCH --> PUB
+  RAG -. "resultados de recuperação" .-> SCI
+  BUS --> VIS
+  EG --> VIS
+  SCI --> VIS
+  BB --> VIS
+  VIS --> UI
+  SITE -. "orienta operação; não executa análise" .-> LOCAL

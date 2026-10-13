@@ -1,0 +1,24 @@
+flowchart TB
+  SRC["Código / specs / testes / lockfiles / documentação"] --> COLLECT["pytest: coletar universo físico e targets"]
+  COLLECT --> RUN["Execução da suíte com JUnit; erros e skips explícitos"]
+  RUN --> XML["JUnit: passed / failures / errors / skipped"]
+  XML --> QR["quality_report reutiliza JUnit existente"]
+  QR --> COUNTS["Contagens físicas e subtests separados; sem percentual inventado"]
+  SRC --> NODE["npm ci / typecheck com versão declarada"]
+  SRC --> DOC["Doctor: sanidade estrutural local"]
+  SRC --> EXPORT["Exportar índice Git em diretório limpo"]
+  EXPORT --> CHECK["Validar dependências, imports, assets e testes selecionados"]
+  RUN --> HASH["Hashes antes/depois: detectar mudança durante verificação"]
+  HASH --> GATE{"Sem falhas e código verificado corresponde à entrega?"}
+  COUNTS --> GATE
+  NODE --> GATE
+  DOC --> GATE
+  CHECK --> GATE
+  GATE -->|"não"| FIX["Reproduzir falha / corrigir com spec / repetir escopo afetado"]
+  FIX --> RUN
+  GATE -->|"sim"| MANIFEST["Manifesto explícito: excluir segredos, dados privados e trabalho concorrente"]
+  MANIFEST --> COMMIT["Commit local identificável"]
+  COMMIT --> PUSH["Push autorizado da branch ao GitHub"]
+  PUSH --> REMOTE["CI remota: resultado próprio ainda precisa ser observado"]
+  REMOTE --> STATUS["Relatório de entrega com escopo e limites"]
+  RUN -. "suíte local aprovada não prova CI remota" .-> LIMIT["Testes, lint, análise real e validação externa são evidências distintas"]

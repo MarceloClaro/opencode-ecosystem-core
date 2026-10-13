@@ -1,0 +1,35 @@
+flowchart TB
+  IN["doctor / diagnose / status da federação"] --> DOC["run_doctor: specs / evolução / memória / configuração / integrações"]
+  DOC --> INST["Sondas estruturais e catálogo loopback: instalação ≠ inferência"]
+  IN --> DP["scanners.pipeline.DiagnosticPipeline.run: cobertura lexical"]
+  FACADE["scanners.diagnostic_pipeline.run: fachada de compatibilidade"] --> DP
+  DP --> MODE{"corpus_mode"}
+  MODE -->|"autodiscovery"| SELF["Corpus enriquecido com nomes e conteúdo do próprio Core"]
+  MODE -->|"retained"| RET["Corpus externo retido / corpus_id / hash esperado obrigatório"]
+  SELF --> NOO["NoologicalScanner: categorias canônicas sem dupla contagem"]
+  RET --> NOO
+  NOO --> COV["Cobertura lexical e camadas: presentes / ausentes / density"]
+  DP --> TELEO["Teleológico: aderência heurística a metas e protocolos"]
+  COV --> GAPS["Evolutivo: categorias ausentes + gaps teleológicos"]
+  TELEO --> GAPS
+  DP --> DEEP["Deep opcional: sucessores / inércia / ruído / compressão / reversa"]
+  GAPS --> REPORT["Relatório local + limites de verificação"]
+  DEEP --> REPORT
+  REPORT --> OBS["MetaBus.record_observation / semantic topic; sem promoção diagnóstica de confiança"]
+  IN --> FED["Federação: harvest / HarnessArtifact.validate"]
+  FED --> POL["invocation_policy / integridade da fonte / suporte / licença"]
+  POL --> STATE["available / degraded / blocking_reasons"]
+  STATE --> RANK["Roteamento exclui artefatos inaptos"]
+  RANK --> TRUST["Trust Engine: outcome / gate / supervisão conforme ação"]
+  TRUST --> ECON["TokenEconomy: stake / release / slashing / fee"]
+  REPORT --> PLAN["Propor remediação com spec e critérios próprios"]
+  PLAN --> TEST["Executar testes e medir novamente: evidência separada"]
+  TEST --> EVO["EvolutionRegistry.record / record_audited quando elegível"]
+  EVO --> LEDGER["cycles.json: round derivado do ledger / prefixo preservado"]
+  LEDGER --> CHAIN["verify_state_chain / custódia / Merkle / histórico"]
+  SELF -. "mede autodescoberta" .-> BOUND["Cobertura lexical não mede completude funcional, qualidade epistêmica ou validação externa"]
+  RET -. "mede cobertura sobre entrada retida" .-> BOUND
+  PLANART["Plano explícito: arquivos / regex / nomes / cobertura esperada"] --> HERM["scanners.diagnostic_pipeline.DiagnosticPipeline.varrer"]
+  HERM --> CHECKART["Auditar sincronia de artefatos: stdlib / sem rede, subprocesso ou LLM"]
+  CHECKART --> ARTOUT["gaps / passaram / falharam / candidato_a_inspecao"]
+  ARTOUT -. "exige_validacao_externa true; não substitui compilação ou testes" .-> BOUND
