@@ -20631,6 +20631,32 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R884",
+      "objective": "R884: publicação da reprodução RX na branch principal (main) para deploy pelo Render — fast-forward do branch codex/core-prontidao-rea para main, habilitando 'Deploy from GitHub' com Root Directory=repro.",
+      "changes": [
+        "git: push origin codex/core-prontidao-rea:main (fast-forward 4d215e8..52c3143), sem merge commit e sem tocar a árvore de trabalho",
+        "main (local e remoto) passa a conter R874-R883 (deploy Docker, admin/persistência, MedSAM CPU, composição por capacidade, dual-stack, rastreabilidade .gitignore)",
+        "Excluído do commit: R881 (mermaid) por 26 testes falhando (WIP) e trabalho alheio (artigos/*, livro-core/*, .opencode/gemini-notebook/*)"
+      ],
+      "score": null,
+      "lessons": [
+        "Publicar em main por fast-forward remoto (git push origin BRANCH:main) evita checkout/stash quando a árvore tem mudanças não relacionadas.",
+        "Nunca publicar trilha WIP: R881 falhou 26 testes e foi corretamente deixado de fora — checar testes antes de empurrar.",
+        "Commit seletivo: staged só 27 arquivos RX (nada de artigos/livro-core/gemini), após varredura de segredos limpa."
+      ],
+      "timestamp": 1791943247.890037,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ]
 }
