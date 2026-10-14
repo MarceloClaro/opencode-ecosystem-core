@@ -1,0 +1,80 @@
+% Preprint estilo arXiv, em português brasileiro — roteamento por atenção
+% Autor: Marcelo Claro Laranjeira (PUCRS). Minuta, não submetida.
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{margin=2.8cm}
+\newtheorem{theorem}{Teorema}
+\newtheorem{lemma}{Lema}
+\theoremstyle{definition}
+\newtheorem{remark}{Observação}
+\title{Roteamento por Atenção com Garantias Verificadas por Máquina:\\Lemas em Lean 4, Calibração Empírica Interna e Limites Declarados}
+\author{Marcelo Claro Laranjeira\\Pontifícia Universidade Católica do Rio Grande do Sul (PUCRS)\\ORCID: \url{https://orcid.org/0000-0001-8996-2887}\\ \texttt{marceloclaro@gmail.com} --- \url{https://bit.ly/geomaker}}
+\date{Outubro de 2026 --- minuta, não submetida}
+\begin{document}
+\maketitle
+\begin{abstract}
+\textbf{Resumo.} Relatamos a formalização e a calibração interna de um mecanismo de roteamento por atenção para orquestração de agentes, inspirado no mecanismo de atenção do Transformer~\cite{vaswani2017}. Onze lemas foram verificados por máquina em Lean~4 (v4.34.1) com Mathlib (rev.\ v4.34.1): normalização do softmax, limitação bilateral da combinação convexa, maximizador finito, invariância à subtração do máximo, pesos em $(0,1)$, peso unitário no singleton, monotonicidade estrita, dominância top-\textit{k}, nitidez por temperatura e ausência de overflow; todos sobre os axiomas padrão (\textit{propext}, \textit{Classical.choice}, \textit{Quot.sound}), sem \texttt{sorry}. Uma bancada sintética interna (200 decisões, 5 sementes) comparou o roteador real a baselines ingênuos (arrependimento médio $0{,}042\pm0{,}011$ contra $0{,}19$--$0{,}22$), com ablações, sensibilidade em três mundos, contraprova numérica de 20\,000 vetores (0 violações), correlações de Pearson e duas revisões independentes internas delimitando os achados. Reivindicamos apenas otimalidade relativa e evidência preliminar, com trilha de reprodução publicada.
+\end{abstract}
+\noindent\textbf{Palavras-chave:} assistentes de prova, Lean 4, Mathlib, roteamento por atenção, verificação formal, reprodutibilidade.
+\section{Introdução e contexto}
+Decidir, por tarefa, qual agente executar sob critérios múltiplos (aderência semântica, capacidades, confiança, carga) é rotina na orquestração, mas raramente acompanha garantias formais sobre pesos ou regra de seleção. Este trabalho anexa matemática verificada por máquina a um desses roteadores: cada propriedade operacional alegada corresponde a um lema provado. Contexto para o não especialista: um \textit{peso} é uma fatia de 100\%; o \textit{softmax} transforma notas nessas fatias; a \textit{temperatura} afia ($\tau\!\downarrow$) ou suaviza ($\tau\!\uparrow$) as fatias; \textit{verificado por máquina} significa conferido pelo núcleo de provas até os axiomas. Defendemos apenas otimalidade relativa e evidência preliminar interna.
+\section{A matemática do roteamento}
+Sejam escores finitos $f_1,\dots,f_n$ com pesos $w_i=e^{f_i}/\sum_j e^{f_j}$ e utilidade combinada $u(a)=\sum_h\alpha_h s_h(a)$, $\sum_h\alpha_h=1$, $\alpha_h\ge 0$.
+\begin{lemma}[T1, normalização]
+$\sum_i (e^{f_i}/\sum_j e^{f_j})=1$ em tipo finito não vazio.
+\textit{Prova.} Positividade da exponencial, somas finitas sobre o universo, reescrita de somas de quocientes, autodivisão. \end{lemma}
+\begin{lemma}[T2/T6, limitação bilateral convexa]
+Pesos não negativos somando $1$ e $m\le x_i\le M$ implicam $m\le\sum w_ix_i\le M$.
+\textit{Prova.} Monotonicidade termo a termo da multiplicação por não negativos mais reescrita de somas. É o conteúdo formal do validador que rejeita pesos cuja soma difere de 1. \end{lemma}
+\begin{lemma}[T3, maximizador finito]
+Um conjunto finito não vazio de candidatos tem elemento de utilidade máxima.
+\textit{Prova.} Máximo de imagem sobre conjuntos finitos. \end{lemma}
+\begin{lemma}[T4, invariância a deslocamento]
+Subtrair uma constante $c$ não altera nenhum peso.
+\textit{Prova.} Exponencial da diferença, soma de quocientes, simplificação de corpos. Licencia a subtração do máximo por estabilidade numérica. \end{lemma}
+\begin{lemma}[T5/T7, pesos em $(0,1)$, singleton $1$]
+Cada peso está em $(0,1)$ com ao menos dois candidatos (divisão, soma do resto positivo, linearidade); candidato único recebe peso $1$ (soma de um termo). \end{lemma}
+\begin{lemma}[T8, monotonicidade estrita]
+$x\mapsto e^x/(e^x+C)$ é estritamente crescente para $C>0$.
+\textit{Prova.} Divisão de desigualdades na forma vigente mais linearidade. Justifica decidir pelo máximo. \end{lemma}
+\begin{lemma}[T9, dominância top-$k$]
+Numa lista pairwise-decrescente, todo elemento dos $k$ primeiros domina todo elemento do resto.
+\textit{Prova.} Concatenação take/drop mais caracterização de ordem pairwise em concatenação. É o padrão sortead+take do ranking. \end{lemma}
+\begin{lemma}[T10, nitidez por temperatura]
+Com maximizador único, esfriar ($\tau_1<\tau_2$) aumenta estritamente seu peso --- forma elementar da calibração por temperatura, sem limites.
+\textit{Prova.} Somas fatoradas, divisão de desigualdades, soma estrita com testemunha explícita; a não-trivialidade é necessária (o singleton falsifica a tese). \end{lemma}
+\begin{lemma}[T11, ausência de overflow]
+Escores deslocados por majorante têm expoentes não positivos.
+\textit{Prova.} Caracterização da exponencial. Certifica o truque de subtrair o máximo usado no código. \end{lemma}
+\begin{remark}[Correspondência Q/K/V, parcial]
+Consulta $\leftrightarrow$ vetor da tarefa, chave $\leftrightarrow$ vetor do cartão do agente, escore $\leftrightarrow$ similaridade mais cabeças, valor $\leftrightarrow$ (utilidade, identificador), agregação $\leftrightarrow$ combinação convexa seguida de softmax, decisão $\leftrightarrow$ máximo. Analogia estrutural apenas; nenhuma propriedade de Transformers treinados é transferida ou avaliada. \end{remark}
+\section{Calibração empírica}
+Quarenta agentes sintéticos por semente com qualidade latente $q$ oculta do roteador; oráculo $\text{cobertura}\times((1-q_w)+q_wq)$, $q_w\in\{0{,}3;0{,}6;0{,}9\}$; 5 sementes $\times$ 40 tarefas; IC95 normal; diferenças pareadas. Resultado principal (200 decisões): atenção $0{,}042\pm0{,}011$ (acerto $0{,}625\pm0{,}067$) contra $0{,}19$--$0{,}22$ dos baselines, ICs sem sobreposição; latência $2{,}17$\,ms; softmax soma 1 até $1{,}1\times10^{-16}$. Ablações: confiança embaralhada/ruidosa/anticorrelacionada, fusão igualitária e remoção da confiança, todas pareadas; a atenção vence nos três mundos, e sem a cabeça de confiança o roteador equivale ao acaso neste simulador --- dependência de reputação calibrada, declarada. Pearson ($n=200$): arrependimento $\times$ elegíveis $+0{,}08$, confiança $\times$ $q$ $+0{,}85$ (o proxy quantificado), cabeças quase descorrelacionadas. Contraprova numérica: 0 violações em $2\times20{.}000$ vetores. Regressão: 63 testes verdes; ambiente íntegro (18/20 verificações, 2 advertências pré-existentes de CLIs externas).
+\section{Discussão e limites}
+As revisões internas classificam a bancada como evidência preliminar restrita ao simulador e os lemas como material de revisão maior (resultados elementares, analogia cosmética sem Q/K/V formal completo, lacunas floats/top-\textit{k}/gates). Originalidade, comparação externa direta (cf.\ benchmarks de agentes~\cite{agentbench2023,perspectivegap2026,orchrm2026,orchestrator2025}) e reprodução independente seguem indispensáveis. A literatura de calibração por temperatura~\cite{xuan2025,komisarenko2024,xie2024} e de ponto flutuante~\cite{bagnara2019,murray2026} orienta a discussão; nada dela é reivindicado como resultado nosso.
+\section{Conclusão}
+Núcleo matemático de onze lemas com provas verificadas por máquina, calibração interna contra baselines ingênuos e auditoria até os axiomas, com trilha de reprodução integralmente publicada. Otimalidade relativa e evidência preliminar, apenas.
+\begin{thebibliography}{9}
+\bibitem{moura2021} L.~de Moura e S.~Ullrich, The Lean 4 theorem prover and programming language, \textit{LNCS}, p.\ 625--635, 2021. DOI: \url{https://doi.org/10.1007/978-3-030-79876-5_37}.
+\bibitem{mathlib2020} The mathlib Community, The lean mathematical library, em \textit{Proc.\ CPP 2020}, p.\ 367--381. DOI: \url{https://doi.org/10.1145/3372885.3373824}.
+\bibitem{vaswani2017} A.~Vaswani et al., Attention is all you need, em \textit{NeurIPS 30}, 2017, p.\ 5998--6008.
+\bibitem{xuan2025} H.~Xuan et al., Exploring the impact of temperature scaling in softmax, arXiv:2502.20604, 2025. \url{https://arxiv.org/abs/2502.20604}.
+\bibitem{komisarenko2024} V.~Komisarenko e M.~Kull, Improving calibration by relating focal loss, temperature scaling, and properness, arXiv:2408.11598, 2024. \url{https://arxiv.org/abs/2408.11598}.
+\bibitem{xie2024} J.~Xie et al., Calibrating language models with adaptive temperature scaling, arXiv:2409.19817, 2024. \url{https://arxiv.org/abs/2409.19817}.
+\bibitem{bagnara2019} R.~Bagnara et al., Correct approximation of IEEE 754 floating-point arithmetic for program verification, arXiv:1903.06119, 2019. \url{https://arxiv.org/abs/1903.06119}.
+\bibitem{murray2026} T.~Murray, Lipschitz-based robustness certification under floating-point execution, arXiv:2603.13334, 2026. \url{https://arxiv.org/abs/2603.13334}.
+\bibitem{agentbench2023} X.~Liu et al., AgentBench: evaluating LLMs as agents, arXiv:2308.03688, 2023. \url{https://arxiv.org/abs/2308.03688}.
+\bibitem{perspectivegap2026} Y.~Sun et al., PerspectiveGap: a benchmark for multi-agent orchestration prompting, arXiv:2606.08878, 2026. \url{https://arxiv.org/abs/2606.08878}.
+\bibitem{orchrm2026} K.~Y.~Tsang et al., Reward modeling for multi-agent orchestration, arXiv:2606.13598, 2026. \url{https://arxiv.org/abs/2606.13598}.
+\bibitem{orchestrator2025} L.~Beckenbauer et al., Orchestrator: active inference for multi-agent systems, arXiv:2509.05651, 2025. \url{https://arxiv.org/abs/2509.05651}.
+\end{thebibliography}
+\appendix
+\section{Trilha de reprodução}
+Lean 4 v4.34.1, Lake 5.0.0, elan 4.2.4; Mathlib rev.\ v4.34.1 (4760 oleans). Sementes 11--55, 40 tarefas cada. Comandos: \texttt{lake env lean RoteamentoAtencao.lean} (saída 0); suíte de 63 testes verde. Pinos (2026-10-09): lean4 \texttt{5e96ee11}, mathlib4 \texttt{a02a63c2}, batteries \texttt{b71aaf60}, aesop \texttt{04879b1e}, z3 \texttt{0d0e28c3}, sympy \texttt{04a7da3a}. Contato: \texttt{marceloclaro@gmail.com}, \url{https://bit.ly/geomaker}, ORCID \url{https://orcid.org/0000-0001-8996-2887}.
+\end{document}

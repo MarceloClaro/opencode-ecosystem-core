@@ -1,0 +1,25 @@
+% Módulo 07 — Conclusão (R762+)
+\chapter{Conclusão}\label{cap:conclusao}
+Retomando a questão da Seção~\ref{cap:intro}, registramos o que foi demonstrado, o que foi medido e o que permanece aberto.
+A questão da pesquisa foi respondida em dois níveis: os registros documentam onze lemas do modelo matemático formalizados em Lean 4 e uma avaliação preliminar da implementação no simulador, com artefatos locais de reprodução. Reivindica-se otimalidade relativa e evidência preliminar. Contribuições numeradas: (C1) onze lemas com provas verificadas por máquina e axiomas auditados; (C2) pipeline de verificação lake-env com bloqueio a atalhos; (C3) bancada com intervalos exploratórios, pareamento e variação de escala do oráculo; (C4) testes aleatórios de propriedades numéricas e auditoria de alegações e referências; (C5) trilha de reprodução com pinos, hashes e protocolo de sincronia. Trabalhos futuros: Q/K/V formal completo, erro numérico certificado à Flocq, análise com agrupamento por piscina, temperatura com limites, benchmark externo com suíte compartilhada e orçamento próprio.
+Os objetivos de formalização (OE1), comparação interna (OE2) e auditoria documental (OE3) são sustentados pelos registros locais nos limites explicitados. O objetivo de disponibilização pública (OE4) permanece parcialmente atendido: os artefatos estão organizados localmente, mas o depósito público e sua identificação persistente estão pendentes.
+A Tabela~\ref{tab:futuro} sintetiza os requisitos de continuidade da pesquisa.
+\begin{table}[htbp]
+\fontsize{10}{12}\selectfont\SingleSpacing
+\centering
+\caption{Programa de trabalhos futuros (pacotes com aceite).}
+\label{tab:futuro}
+\begin{tabularx}{\textwidth}{lXX}
+\toprule
+Pacote & Método & Aceite \\
+\midrule
+Q/K/V formal & Estruturas + refinamento & machine-checked \\
+Erro certificado & Intervalos + Flocq & cotas verificadas \\
+Temperatura limite & Análise assintótica & teoremas de limite \\
+Benchmark externo & Suíte + orçamento & head-to-head executado \\
+Reprodução independente & Terceiros + pins & mesmos números \\
+Seleção parcial & Heap + benchmark & mesmos top-\textit{k}, menor latência \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaboração própria (2026), a partir dos artefatos e das fontes identificados no texto.}
+\end{table}

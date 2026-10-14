@@ -1,0 +1,24 @@
+\chapter{Discussão}\label{cap:discussao}
+Os resultados articulam duas formas de evidência com alcances diferentes: as provas documentam propriedades do modelo matemático; a bancada descreve o comportamento de uma implementação em instâncias sintéticas. A composição torna explícitos os pressupostos da decisão, mas não fornece uma certificação integral da execução nem uma comparação de desempenho em tarefas reais.
+\section{Alcance das garantias formais}
+Os onze lemas são propriedades matemáticas elementares, formalizadas sobre o objeto estudado. Não se reivindica originalidade desses fatos. T3 estabelece existência de maximizador finito, enquanto T9 descreve a dominância de um prefixo de lista já ordenada. A correspondência entre essas propriedades e o código exige demonstrar a preservação de hipóteses pelo filtro, pelos escores, pelo desempate e pela aritmética utilizada. T11 limita a exponencial deslocada em reais exatos; erros de arredondamento, underflow, entradas não finitas e operações intermediárias permanecem fora dessa prova.
+\section{Dependência do desenho sintético}
+A vantagem observada depende da confiança, construída como proxy da qualidade latente. Sua remoção aumenta o arrependimento no conjunto de ablações, sem estabelecer equivalência com a seleção aleatória. Mesmo confiança igual à qualidade latente não garantiria que a utilidade combinada preservasse o ranking do oráculo, pois semântica e carga também influenciam a escolha. Essa configuração não foi avaliada.
+Os três valores de $q_w$ reescalam a perda sem mudar o ranking do oráculo entre elegíveis. Sua estabilidade não constitui evidência independente de robustez a outros critérios de utilidade. Os intervalos preservados ignoram a dependência dentro das piscinas; uma análise que considere agrupamento pode alterar as margens e a interpretação comparativa.
+\section{Riscos residuais e avaliação interna}
+\begin{table}[htbp]
+\fontsize{10}{12}\selectfont\SingleSpacing\centering
+\caption{Limitações identificadas e requisitos de avaliação futura.}\label{tab:riscos}
+\begin{tabularx}{\textwidth}{XX}\toprule
+Limitação & Requisito futuro \\\midrule
+Oráculo arbitrário e proxy privilegiada & Outros critérios de qualidade e confiança sem acesso ao gerador latente \\
+Cinco piscinas e intervalos sem agrupamento & Mais piscinas independentes e análise na unidade correta \\
+Modelo real e implementação em ponto flutuante & Refinamento formal e tratamento de casos numéricos especiais \\
+Comparadores internos & Benchmark externo executado com orçamento e critérios comuns \\
+Artefatos locais & Depósito versionado e reprodução independente \\
+\bottomrule\end{tabularx}
+\fonte{Elaboração própria (2026), a partir dos artefatos e das fontes identificados no texto.}
+\end{table}
+Duas revisões internas automatizadas examinaram a bancada e os teoremas. Não constituem revisão cega ou validação externa. As objeções sobre proxy, comparadores, analogia Q/K/V e lacuna numérica são compatíveis com as limitações descritas na Tabela~\ref{tab:riscos}. As ablações acrescentam comparações entre ponderações e perturbações, mas não eliminam essas objeções.
+\section{Relação com a literatura e perspectivas}
+A literatura de calibração por temperatura \cite{komisarenko2024,xuan2025,xie2024} aborda objetivos que não foram medidos aqui: a normalização por softmax não demonstra calibração probabilística. Os estudos de aritmética flutuante \cite{bagnara2019,murray2026} indicam a necessidade de garantias próprias para a execução numérica. Os benchmarks de agentes \cite{agentbench2023,perspectivegap2026,orchrm2026,orchestrator2025} fornecem contextos para comparação futura, sem validar os resultados locais. A interpretação educacional das trilhas auditáveis é uma hipótese de aplicação futura, sem avaliação com estudantes nesta pesquisa.

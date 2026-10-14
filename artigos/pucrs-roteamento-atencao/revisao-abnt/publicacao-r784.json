@@ -1,0 +1,162 @@
+{
+  "data": "2026-10-10",
+  "source_commit": "4d215e84fac990b1f6c63d5f4e23478d2d32e6fb",
+  "pages_commit": "a631ebfae7f85fb309fde88a644e6cf1b9d03f75",
+  "pages_parent": "cb2c7d488f296df7e45027cc56a6241c75485d96",
+  "deployed_files": [
+    "README.md",
+    "app.mjs",
+    "assets/favicon.svg",
+    "assets/podcast-uma-escolha-explicavel.m4a",
+    "ecosystem.mjs",
+    "index.html",
+    "learning.mjs",
+    "manifesto_site.json",
+    "mira/apresentacao/CONFORMIDADE.md",
+    "mira/apresentacao/deck.html",
+    "mira/execucao.json",
+    "mira/manuscrito.md",
+    "podcast/fonte-editorial.md",
+    "podcast/guia-leitura.md",
+    "podcast/proveniencia.json",
+    "podcast.mjs",
+    "qa.json",
+    "router.mjs",
+    "styles.css"
+  ],
+  "url": "https://marceloclaro.github.io/opencode-ecosystem-core/",
+  "tests_passed": 116,
+  "build_status": "built",
+  "http_verificacao": [
+    {
+      "arquivo": "index.html",
+      "status": 200,
+      "sha256_confere": true
+    },
+    {
+      "arquivo": "styles.css",
+      "status": 200,
+      "sha256_confere": true
+    },
+    {
+      "arquivo": "app.mjs",
+      "status": 200,
+      "sha256_confere": true
+    },
+    {
+      "arquivo": "podcast.mjs",
+      "status": 200,
+      "sha256_confere": true
+    },
+    {
+      "arquivo": "manifesto_site.json",
+      "status": 200,
+      "sha256_confere": true
+    },
+    {
+      "arquivo": "podcast/proveniencia.json",
+      "status": 200,
+      "sha256_confere": true
+    },
+    {
+      "arquivo": "podcast/guia-leitura.md",
+      "status": 200,
+      "sha256_confere": true
+    },
+    {
+      "arquivo": "assets/podcast-uma-escolha-explicavel.m4a",
+      "status": 200,
+      "sha256_confere": true
+    }
+  ],
+  "http_range": {
+    "status": 206,
+    "content_range": "bytes 1000000-1001023/43619097",
+    "bytes": 1024,
+    "conteudo_confere": true
+  },
+  "publicacao_inicial": {
+    "source_commit": "48ba81beed055b41d927734bc9555b2562ad48a0",
+    "pages_commit": "cb2c7d488f296df7e45027cc56a6241c75485d96",
+    "http_verificacao": [
+      {
+        "arquivo": "index.html",
+        "status": 200,
+        "sha256_confere": true
+      },
+      {
+        "arquivo": "styles.css",
+        "status": 200,
+        "sha256_confere": true
+      },
+      {
+        "arquivo": "app.mjs",
+        "status": 200,
+        "sha256_confere": true
+      },
+      {
+        "arquivo": "podcast.mjs",
+        "status": 200,
+        "sha256_confere": true
+      },
+      {
+        "arquivo": "manifesto_site.json",
+        "status": 200,
+        "sha256_confere": true
+      },
+      {
+        "arquivo": "podcast/proveniencia.json",
+        "status": 200,
+        "sha256_confere": true
+      },
+      {
+        "arquivo": "podcast/guia-leitura.md",
+        "status": 200,
+        "sha256_confere": true
+      },
+      {
+        "arquivo": "assets/podcast-uma-escolha-explicavel.m4a",
+        "status": 200,
+        "sha256_confere": true
+      }
+    ],
+    "http_range": {
+      "status": 206,
+      "content_range": "bytes 1000000-1001023/43619097",
+      "bytes": 1024,
+      "conteudo_confere": true
+    }
+  },
+  "http_verificacao_final": [
+    {
+      "arquivo": "index.html",
+      "status": 200,
+      "sha256_confere": true
+    },
+    {
+      "arquivo": "styles.css",
+      "status": 200,
+      "sha256_confere": true
+    },
+    {
+      "arquivo": "app.mjs",
+      "status": 200,
+      "sha256_confere": true
+    },
+    {
+      "arquivo": "podcast.mjs",
+      "status": 200,
+      "sha256_confere": true
+    },
+    {
+      "arquivo": "manifesto_site.json",
+      "status": 200,
+      "sha256_confere": true
+    },
+    {
+      "arquivo": "qa.json",
+      "status": 200,
+      "sha256_confere": true
+    }
+  ]
+}

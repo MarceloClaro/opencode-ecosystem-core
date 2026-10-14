@@ -1,0 +1,26 @@
+% Módulo 04b — Demonstrações integrais por teorema (R775+; tratado R776+)
+\section{Demonstrações integrais, teorema por teorema}
+Cada subseção traz enunciado, derivação completa, instância numérica real e necessidade das hipóteses; os nomes de lemas entre parênteses são os usados no código Lean do Apêndice~\ref{ap:lean}.
+\subsection{T1 --- soma unitária}
+Enunciado: $\sum_i(e^{f_i}/\sum_j e^{f_j})=1$ em tipo finito não vazio. Derivação: cada termo exponencial é positivo (\texttt{exp\_pos}), logo a soma $S$ sobre o universo não vazio é positiva (\texttt{sum\_pos}) e não nula; reescreva a soma de quocientes como quociente das somas (\texttt{sum\_div}); obtém-se $S/S=1$ (\texttt{div\_self}). Instância: $f=[1,2,3]$ dá pesos $[0{,}0900;\ 0{,}2447;\ 0{,}6652]$ somando $1{,}0$. Sem o não-vazio, o denominador seria soma vazia ($=0$) e a fração indefinida.
+\subsection{T2/T6 --- limitação bilateral convexa}
+Enunciados: $m\leq\sum w_ix_i\leq M$ sob $w_i\geq0$, $\sum w_i=1$, $m\leq x_i\leq M$. Derivação: termo a termo, $w_im\leq w_ix_i\leq w_iM$ (\nolinkurl{mul_le_mul_of_nonneg_left}); somar preserva cada lado (\texttt{sum\_le\_sum}); fatorar a constante (\texttt{sum\_mul}) e usar soma $=1$. Instância: $w=[0{,}3;0{,}7]$, $x=[2,8]$: $6{,}2\in[2,8]$. Contraexemplo sem a hipótese: pesos $[2,-1]$ somando 1 com valores $[0,10]$ devolvem $-10<\min$ --- por isso o validador rejeita pesos fora de $[0,1]$.
+\subsection{T3 --- maximizador finito}
+Enunciado: existe maximizador em conjunto finito não vazio. Derivação: invocação direta do máximo de imagem (\texttt{exists\_max\_image}); finitude impede fuga ao infinito, não-vazio garante testemunha. Sem finitude ($\mathbb{N}$ com identidade), não há máximo.
+\subsection{T4 --- invariância a deslocamento}
+Enunciado: subtrair $c$ nada altera. Derivação: $e^{f_j-c}=e^{f_j}/e^c$ (\texttt{exp\_sub}); soma de quocientes vira quociente das somas; simplificação de corpos fecha sozinha (\texttt{field\_simp}), pois $e^c\neq0$. Instância: $[1,2,3]$ e $[-4,-3,-2]$ produzem os mesmos pesos em aritmética real; os valores arredondados do exemplo coincidem.
+\subsection{T5 --- pertinência a $(0,1)$}
+Enunciado: cada peso em $(0,1)$ com ao menos dois candidatos. Derivação: positividade por divisão de positivos; escreva $S=e^{f_i}+R$ com $R>0$ (resto via \texttt{add\_sum\_erase}, não vazio por testemunha da não-trivialidade); então $e^{f_i}/S<1$ por divisão e linearidade. Instância: os três pesos de $[1,2,3]$ estão em $(0,1)$. Sem dois candidatos, o singleton dá peso 1 --- caso de T7.
+\subsection{T7 --- peso unitário no singleton}
+Enunciado: candidato único recebe peso 1. Derivação: a soma colapsa no único termo (\texttt{sum\_eq\_single\_of\_mem} com elemento explícito --- cuja ausência gerou \texttt{sorryAx}, capturado pela auditoria) e $e/e=1$. Instância: $[5]\to[1{,}0]$, também observada no roteador real.
+\subsection{T8 --- monotonicidade estrita}
+Enunciado: $x\mapsto e^x/(e^x+C)$ estritamente crescente para $C>0$. Derivação: reduza a produtos cruzados (divisão de desigualdades na forma vigente, consultada no fonte pinado) e conclua por linearidade com $e^aC<e^bC$. Instância: $C=1$ dá $0{,}7311<0{,}8808$. Sem $C>0$, a fração degenera.
+\subsection{T9 --- dominância top-\textit{k}}
+Enunciado: numa lista pairwise-decrescente, o prefixo domina o resto. Derivação: reescreva como take $++$ drop, decomponha a ordem da concatenação e aplique a componente cruzada. É a anatomia do padrão ordenar-e-fatiar, independente do algoritmo de ordenação.
+\subsection{T10 --- nitidez por temperatura}
+Enunciado: com maximizador único, esfriar aumenta seu peso. Derivação: fatore $A(\tau_1)S(\tau_2)$ contra $A(\tau_2)S(\tau_1)$; cada termo com $j\neq i^*$ é estrito pela identidade das diferenças positivas; some com testemunha estrita e conclua por divisão de desigualdades. Instância: $0{,}6652\to0{,}8668$. O enunciado formal adota maximizador único e pelo menos dois candidatos como hipóteses suficientes. Máximos empatados podem ganhar massa quando existem escores inferiores; se todos os escores forem iguais, a temperatura não altera os pesos.
+\subsection{T11 --- limite superior da exponencial após deslocamento}
+Enunciado: se $f_i\leq M$, então $e^{f_i-M}\leq1$ em reais exatos. Derivação: monotonicidade da exponencial e $e^0=1$. A prova não certifica subtração, exponenciação, soma ou divisão IEEE-754. Instâncias: $e^{-2}\approx0{,}1353$ e $e^{0}=1{,}0$. Sem majorante, nada limita os expoentes.
+\par Mapa de dependências: T1 sustenta T5 e T7; T2/T6 sustentam a combinação das cabeças; T4 sustenta a implementação estável usada em T10; T3 sustenta a decisão por máximo ao lado de T8; T9 descreve a ordenação do top-\textit{k}, sem constituir sozinho prova do algoritmo concreto.
+\section{Necessidade das hipóteses (contraexemplos)}
+Reunidas: T1 exige não-vazio; T2 exige não-negatividade e soma 1; T3 exige finitude e não-vazio; T5 exige dois candidatos; T8 exige $C>0$; T10 exige maximizador único e não-trivialidade; T11 exige majorante. As hipóteses delimitam os enunciados formalizados. Os contraexemplos apresentados mostram falhas específicas quando algumas delas são removidas; não demonstram a necessidade individual de todas as hipóteses.

@@ -1,0 +1,92 @@
+% Dissertação — minuta para revisão do autor (não defendida, não submetida)
+% Marcelo Claro Laranjeira — PUCRS
+% Estrutura modular: cada tópico em modulos/*.tex, compilado neste main.
+\documentclass[12pt,openany,oneside,a4paper,brazil]{abntex2}
+% Compilar com XeLaTeX ou LuaLaTeX (código Lean com Unicode no Apêndice).
+\usepackage{fontspec}
+\setmonofont{DejaVu Sans Mono}[Scale=0.82]
+\usepackage{listings}
+\lstset{basicstyle=\footnotesize\ttfamily, breaklines=true, breakatwhitespace=false, columns=fullflexible, keepspaces=true,
+literate={á}{{\'a}}1 {à}{{\`a}}1 {â}{{\^a}}1 {ã}{{\~a}}1 {é}{{\'e}}1 {è}{{\`e}}1 {ê}{{\^e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ô}{{\^o}}1 {õ}{{\~o}}1 {ú}{{\'u}}1 {ç}{{\c c}}1 {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Õ}{{\~O}}1 {Ú}{{\'U}}1 {Ç}{{\c C}}1 {—}{{---}}1 {–}{{--}}1 {°}{{\textdegree}}1 {±}{{$\pm$}}1 {×}{{$\times$}}1 {→}{{$\to$}}1 {≤}{{$\le$}}1 {≥}{{$\ge$}}1 {≠}{{$\ne$}}1}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{verbatim}
+\titulo{Roteamento por Atenção com Garantias Verificadas por Máquina: Teoremas em Lean 4, Calibração Empírica Interna e Limites Declarados}
+\autor{Marcelo Claro Laranjeira}
+\local{Porto Alegre}
+\data{2026}
+\orientador{[Orientador(a) --- preencher]}
+\instituicao{Pontifícia Universidade Católica do Rio Grande do Sul (PUCRS)}
+\tipotrabalho{Dissertação (Mestrado)}
+\preambulo{Dissertação apresentada ao Programa de Pós-Graduação da Pontifícia Universidade Católica do Rio Grande do Sul como requisito parcial para obtenção do título de Mestre. Área: [preencher]. Linha de pesquisa: [preencher].}
+\begin{document}
+\frenchspacing
+\imprimircapa
+\imprimirfolhaderosto
+\clearpage\thispagestyle{empty}\vspace*{\fill}
+\begin{center}
+\textbf{Ficha catalográfica --- preencher na biblioteca:} dados de catalogação (autor, título, ano, páginas, área, orientador). Minuta sem catalogação.
+\end{center}
+\vspace*{\fill}\clearpage
+\begin{folhadeaprovacao}
+Trabalho aprovado em [dia] de [mês] de [ano] pela banca: [membros --- preencher]. (Minuta: banca não constituída.)
+\end{folhadeaprovacao}
+\begin{resumo}
+Formalização e calibração interna de roteamento por atenção para orquestração de agentes. Onze lemas verificados por máquina em Lean 4 (v4.34.1) com Mathlib (rev.\ v4.34.1): normalização do softmax, limitação bilateral da combinação convexa, maximizador finito, invariância à subtração do máximo, pesos em $(0,1)$, peso unitário no singleton, monotonicidade estrita, dominação top-\textit{k}, nitidez por temperatura e ausência de overflow; axiomas restritos a \textit{propext}, \textit{Classical.choice} e \textit{Quot.sound}, sem \textit{sorry}. Bancada sintética interna (200 decisões, 5 sementes): arrependimento $0{,}042\pm0{,}011$ contra $0{,}19$--$0{,}22$ de baselines ingênuos. Ablações, sensibilidade em três mundos, contraprova numérica (20\,000 vetores, 0 violações) e duas revisões independentes internas delimitam os achados. Evidência preliminar com reprodução publicada; sem alegação de superioridade externa, inovação ou disrupção.\\
+\textbf{Palavras-chave:} assistentes de prova; Lean 4; Mathlib; atenção; verificação formal; reprodutibilidade.
+\end{resumo}
+\begin{resumo}[Abstract]
+\begin{otherlanguage*}{english}
+Formalization and internal calibration of attention-based routing for agent orchestration. Eleven lemmas machine-checked in Lean 4 (v4.34.1) with Mathlib (rev.\ v4.34.1): softmax normalization, two-sided convex bounds, finite maximizer, max-subtraction invariance, weights in $(0,1)$, singleton unit weight, strict monotonicity, top-\textit{k} dominance, temperature sharpening and overflow-freedom; axioms restricted to \textit{propext}, \textit{Classical.choice}, \textit{Quot.sound}, no \textit{sorry}. Internal synthetic benchmark (200 decisions, 5 seeds): regret $0.042\pm0.011$ versus $0.19$--$0.22$ for naive baselines. Ablations, three-world sensitivity, numeric counterproof (20,000 vectors, 0 violations) and two internal independent reviews bound the findings. Preliminary evidence with published reproduction trail; no claim of external superiority, innovativeness, or disruption.\\
+\textbf{Keywords:} proof assistants; Lean 4; Mathlib; attention; formal verification; reproducibility.
+\end{otherlanguage*}
+\end{resumo}
+\begin{agradecimentos}
+Às comunidades Lean, Mathlib, Crossref e arXiv, pelo conhecimento aberto que sustenta a trilha de reprodução; às ferramentas livres que executaram cada verificação registrada.
+\end{agradecimentos}
+\begin{siglas}
+\item[IC] Intervalo de confiança
+\item[Q/K/V] Consulta, chave e valor (\textit{query, key, value})
+\item[SDD] Desenvolvimento orientado a especificação (\textit{Specification-Driven Development})
+\item[TDD] Desenvolvimento orientado a testes (\textit{Test-Driven Development})
+\item[MCP] Protocolo de contexto de modelo (\textit{Model Context Protocol})
+\item[OSF] Arcabouço de ciência aberta (\textit{Open Science Framework})
+\end{siglas}
+\begin{simbolos}
+\item[$w_i$] Peso de atenção do candidato $i$
+\item[$\tau$] Temperatura do softmax
+\item[$q$] Qualidade latente do agente (oculta do roteador)
+\item[$q_w$] Peso da qualidade no oráculo sintético
+\item[$u(a)$] Utilidade combinada do candidato $a$
+\end{simbolos}
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\listoftables*
+\cleardoublepage
+\textual
+\input{/home/marceloclaro/opencode-ecosystem-core/artigos/pucrs-roteamento-atencao/modulos/01-introducao}
+\input{/home/marceloclaro/opencode-ecosystem-core/artigos/pucrs-roteamento-atencao/modulos/02a-preliminares}
+\input{/home/marceloclaro/opencode-ecosystem-core/artigos/pucrs-roteamento-atencao/modulos/02f-nucleo-matematico}
+\input{/home/marceloclaro/opencode-ecosystem-core/artigos/pucrs-roteamento-atencao/modulos/02g-curso-embutido}
+\input{/home/marceloclaro/opencode-ecosystem-core/artigos/pucrs-roteamento-atencao/modulos/02-fundamentacao}
+\input{/home/marceloclaro/opencode-ecosystem-core/artigos/pucrs-roteamento-atencao/modulos/02b-contexto-atencao}
+\input{/home/marceloclaro/opencode-ecosystem-core/artigos/pucrs-roteamento-atencao/modulos/02c-lean-tutorial}
+\input{/home/marceloclaro/opencode-ecosystem-core/artigos/pucrs-roteamento-atencao/modulos/02d-trabalhos-relacionados}
+\input{/home/marceloclaro/opencode-ecosystem-core/artigos/pucrs-roteamento-atencao/modulos/02h-fichamento-obras}
+\input{/home/marceloclaro/opencode-ecosystem-core/artigos/pucrs-roteamento-atencao/modulos/02e-exegese-estado-da-arte}
+\input{/home/marceloclaro/opencode-ecosystem-core/artigos/pucrs-roteamento-atencao/modulos/03-metodo}
+\input{/home/marceloclaro/opencode-ecosystem-core/artigos/pucrs-roteamento-atencao/modulos/03b-estatistica}
+\input{/home/marceloclaro/opencode-ecosystem-core/artigos/pucrs-roteamento-atencao/modulos/04-provas}
+\input{/home/marceloclaro/opencode-ecosystem-core/artigos/pucrs-roteamento-atencao/modulos/04c-sessao-lean}
+\input{/home/marceloclaro/opencode-ecosystem-core/artigos/pucrs-roteamento-atencao/modulos/04b-provas-detalhadas}
+\input{/home/marceloclaro/opencode-ecosystem-core/artigos/pucrs-roteamento-atencao/modulos/04d-demonstracoes-totais}
+\input{/home/marceloclaro/opencode-ecosystem-core/artigos/pucrs-roteamento-atencao/modulos/05-calibracao}
+\input{/home/marceloclaro/opencode-ecosystem-core/artigos/pucrs-roteamento-atencao/modulos/05b-estudo-caso-reais}
+\input{/home/marceloclaro/opencode-ecosystem-core/artigos/pucrs-roteamento-atencao/modulos/05c-estrategias}
+\input{/home/marceloclaro/opencode-ecosystem-core/artigos/pucrs-roteamento-atencao/modulos/06-discussao}
+\input{/home/marceloclaro/opencode-ecosystem-core/artigos/pucrs-roteamento-atencao/modulos/07-conclusao}
+\input{/home/marceloclaro/opencode-ecosystem-core/artigos/pucrs-roteamento-atencao/modulos/08-referencias}
+\postextual
+\input{/home/marceloclaro/opencode-ecosystem-core/artigos/pucrs-roteamento-atencao/modulos/09-apendices}
+\input{/home/marceloclaro/opencode-ecosystem-core/artigos/pucrs-roteamento-atencao/modulos/10-apendice-glossario}
+\end{document}

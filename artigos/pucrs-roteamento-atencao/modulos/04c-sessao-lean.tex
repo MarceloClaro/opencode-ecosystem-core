@@ -1,0 +1,39 @@
+% Módulo 04c — Sessão Lean demonstrativa (R774; saídas reais)
+Da teoria à execução: o verificador em ação, com saídas reais.
+\section{Sessão demonstrativa do verificador}
+Transcrição real de \texttt{lean\_verify} (compilador presente): \texttt{sorry} $\to$ inválido (\texttt{incomplete\_sorry}); \texttt{admit} $\to$ inválido; \texttt{axiom} declarado $\to$ inválido (\texttt{axiom\_nao\_declarado}); \texttt{theorem t : 2 + 2 = 4 := by decide} $\to$ válido (\texttt{machine\_checked}); código com \texttt{import Mathlib.Tactic} fora de projeto lake $\to$ válido (\texttt{syntax\_verified}, sem alegar compilação). A ausência de \texttt{decide}/\texttt{trivial}/\texttt{rfl}/\texttt{assumption} no vocabulário de táticas, detectada nesta revisão, foi corrigida: sem o compilador no \texttt{PATH}, o mesmo teorema caía em \texttt{syntax\_error} em vez do correto \texttt{syntax\_verified}.
+\par Segunda sessão (R763): \texttt{div\_lt\_div\_iff} inexistente na Mathlib pinada (forma vigente \texttt{div\_lt\_div\_iff₀}, consultada no fonte) e \texttt{Nontrivial} exigido pelo compilador em T10, pois o singleton falsifica a nitidez --- ambas corrigidas em rascunho antes de incorporar.
+\section{Galeria de erros reais e correções}
+\textit{Parse da notação:} \texttt{∑ i in s} rejeitado na v4.34 --- reescrito com \texttt{Finset.sum} explícito. \textit{Elemento explícito:} soma unitária exigia o elemento antes da pertinência --- ordem corrigida. \textit{Vocabulário:} táticas do núcleo ausentes da lista estática --- quatro nomes acrescentados. \textit{Ambiente sem compilador:} \texttt{decide} sem \texttt{PATH} caía em erro de sintaxe em vez do correto \texttt{syntax\_verified} --- corrigido.
+\begin{table}[htbp]
+\fontsize{10}{12}\selectfont\SingleSpacing
+\centering
+\caption{Micro-provas por tática, todas verificadas (núcleo via verificador direto; aritmética via projeto lake).}
+\label{tab:microprovas}
+\begin{tabularx}{\textwidth}{lXX}
+\toprule
+Táticas & Miniatura provada & Veredito \\
+\midrule
+\texttt{intro} + \texttt{exact} & simetria da igualdade & machine-checked \\
+\texttt{rw} & reescrita por hipótese & machine-checked \\
+\texttt{simp} & identidade aditiva & machine-checked \\
+\texttt{omega} & sucessor maior que o número & machine-checked \\
+\texttt{decide} & $2+2=4$ por computação & machine-checked \\
+\texttt{cases} & booleanos esgotados & machine-checked \\
+\texttt{trivial} & verdade imediata & machine-checked \\
+\texttt{rfl} & igualdade por reflexividade & machine-checked \\
+\texttt{assumption} & hipótese do contexto & machine-checked \\
+\texttt{apply} & regra com unificação & machine-checked \\
+\texttt{induction} & indução nos naturais & machine-checked \\
+\texttt{contradiction} & absurdo fecha tudo & machine-checked \\
+\texttt{have} & lema local intermediário & machine-checked \\
+\texttt{obtain} & extração de testemunha & machine-checked \\
+\texttt{norm\_num} & aritmética real (via projeto) & machine-checked \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaboração própria (2026), a partir dos artefatos e das fontes identificados no texto.}
+\end{table}
+\section{Diário de erros integral}
+\textit{Notação:} \texttt{unexpected token 'in'} na v4.34 --- reescrito sem notação. \textit{Assinatura:} soma unitária pedia o elemento antes da pertinência --- ordem corrigida após leitura da mensagem de tipos. \textit{Vocabulário:} quatro táticas do núcleo ausentes --- acrescentadas após o \texttt{syntax\_error} indevido. \textit{Hipótese:} \texttt{Nontrivial} exigido em T10 --- o singleton falsificaria a tese. \textit{Nome:} forma vigente de divisão de desigualdades consultada no fonte pinado. \textit{Silencioso:} \texttt{sorryAx} herdado de erro de aplicação --- pego só pela auditoria de axiomas. Cada item acima reproduz mensagem real do compilador, nunca suposição.
+\section{Mensagens verídicas (transcrição resumida)}
+\texttt{Unknown identifier `div\_lt\_div\_iff'}; \texttt{unexpected token 'in'; expected ','}; \nolinkurl{Application type mismatch} em soma unitária; \nolinkurl{failed to synthesize Nontrivial}; saída de auditoria com \texttt{sorryAx} em T7 antes da correção. Cada uma acima exigiu leitura da mensagem, nunca tentativa cega.

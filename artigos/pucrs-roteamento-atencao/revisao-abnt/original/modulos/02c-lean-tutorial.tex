@@ -1,0 +1,27 @@
+% Módulo 02c — Tutorial didático de Lean e Mathlib (R773)
+Da matemática à máquina: como essas ideias viram provas conferidas por computador.
+\section{Verificação formal para leigos}
+Um assistente de provas é um corretor implacável: cada passo lógico é conferido pelo núcleo até axiomas explícitos. Em Lean 4 \cite{moura2021}, teoremas são programas cujo tipo é a proposição; \textit{táticas} (\texttt{simp}, \texttt{ring}, \texttt{omega}, \texttt{linarith}, \texttt{exact}) são comandos que transformam objetivos. A Mathlib \cite{mathlib2020} é a biblioteca comunitária com milhares de lemas reusados aqui (somas finitas, exponencial real, máximos). \texttt{Sorry} e \texttt{admit} são atalhos que afirmam sem provar --- bloqueados neste trabalho em duas camadas. \texttt{\#print axioms} lista os axiomas de cada teorema: todos os onze usam só \textit{propext}, \textit{Classical.choice} e \textit{Quot.sound}, o padrão da matemática formalizada sem atalhos.
+\section{Ler uma prova deste trabalho}
+Cada prova combina: fatos de positividade (exponencial sempre positiva), reescrita de somas (tirar denominador comum de somatórios), monotonicidade (multiplicar desigualdade por número não negativo preserva o sentido) e linearidade (combinar desigualdades). Exemplo guiado (T2): para mostrar que a média ponderada não passa do máximo $M$, majoramos cada termo $w_ix_i$ por $w_iM$ (válido pois $w_i\geq0$), somamos as $n$ desigualdades e fatoramos $M$ para fora da soma, que vale 1 por hipótese.
+\begin{table}[h]
+\centering
+\caption{Táticas usadas nas onze provas (guia de leitura).}
+\label{tab:taticas}\begin{tabular}{ll}
+\toprule
+Tática/lema & Papel \\
+\midrule
+\texttt{Finset.sum\_pos} & positividade de somatórios \\
+\texttt{Finset.sum\_div} / \texttt{sum\_mul} & reescrita de somas com divisão/multiplicação \\
+\texttt{div\_self} / \texttt{div\_lt\_div\_iff₀} & quocientes: igualdade e desigualdade \\
+\texttt{mul\_le\_mul\_of\_nonneg\_left} & monotonicidade por não negativos \\
+\texttt{linarith} & combinação linear de desigualdades \\
+\texttt{field\_simp} & limpeza de denominadores \\
+\texttt{Real.exp\_*} & álgebra da exponencial \\
+\texttt{Finset.exists\_max\_image} & maximizador finito \\
+\texttt{take\_append\_drop} / \texttt{pairwise\_append} & anatomia do top-\textit{k} \\
+\bottomrule
+\end{tabular}
+\end{table}
+\section{Quinze táticas em prosa}
+\textit{Introduzir e instanciar:} \texttt{intro} traz hipóteses; \texttt{exact} entrega a prova pronta; \texttt{apply} ajusta conclusões; \texttt{refine} deixa buracos honestos. \textit{Reescrever:} \texttt{rw} substitui iguais; \texttt{simp} simplifica com a base; \texttt{ring} e \texttt{omega} decidem anéis e inteiros; \texttt{decide} computa verdades decidíveis. \textit{Estruturar:} \texttt{cases} e \texttt{induction} quebram formas; \texttt{constructor} monta pares e existências; \texttt{obtain} extrai testemunhas. \textit{Fechar:} \texttt{linarith} combina lineares; \texttt{field\_simp} limpa denominadores; \texttt{trivial} e \texttt{assumption} encerram o óbvio; \texttt{contradiction} e \texttt{by\_contra} exploram o absurdo.

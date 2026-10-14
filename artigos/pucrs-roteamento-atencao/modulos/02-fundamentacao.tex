@@ -1,0 +1,30 @@
+% Módulo 02 — Fundamentação teórica (R762+; Q/K/V parcial honesto)
+\chapter{Fundamentação teórica}\label{cap:fundamentacao}
+Antes de provar ou medir, fixamos o vocabulário: o que a ponderação exponencial garante, onde ela se inspira e onde a analogia termina. A base axiomática da programação \cite{hoare1969} sustenta a verificação dedutiva; a computação numérica e simbólica executa-se sobre arranjos e algoritmos fundamentais \cite{harris2020,virtanen2020}, com apoio simbólico e SMT \cite{meurer2017,demoura2008}.
+\section{Ponderação exponencial normalizada}
+A soma unitária dos pesos não demonstra calibração probabilística. A avaliação deste trabalho mede arrependimento e acerto, sem ajuste de temperatura, aprendizagem de pesos ou estimação de métricas de calibração.
+Dados escores finitos $f_1,\dots,f_n$, os pesos $w_i=e^{f_i}/\sum_j e^{f_j}$ somam 1 (T1), situam-se em $(0,1)$ com ao menos dois candidatos (T5) e valem 1 no singleton (T7); deslocar escores por constante nada altera (T4), autorizando a subtração do máximo por estabilidade numérica. A calibração da temperatura, amplamente estudada como parâmetro de nitidez e calibração de classificadores \cite{komisarenko2024,xuan2025,xie2024}, aparece aqui em forma elementar, demonstrada por máquina (T10): esfriar aumenta o peso do maximizador único. A verificação de programas com aritmética de ponto flutuante exige análise própria \cite{bagnara2019,murray2026}; este trabalho documenta a ponte empírica (fuzz) e um lema de limite superior da exponencial após deslocamento (T11), sem reivindicar certificação total de floats.
+\section{Correspondência Q/K/V (parcial e estrutural)}
+\begin{table}[htbp]
+\fontsize{10}{12}\selectfont\SingleSpacing
+\centering
+\caption{Analogia Transformer $\leftrightarrow$ roteador (sem transferência de propriedades).}
+\label{tab:qkv}
+\begin{tabularx}{\textwidth}{lXX}
+\toprule
+Transformer & Roteador & Natureza \\
+\midrule
+Consulta (Q) & Vetor da tarefa & Estrutural \\
+Chave (K) & Vetor do cartão do agente & Estrutural \\
+Escore QK & Similaridade + 4 cabeças & Parcial (sem produto escalado/temperatura) \\
+Valor (V) & (utilidade, identificador) & Parcial (sem mistura de valores) \\
+Agregação & Convexa + softmax & Demonstrada (T2, T6) \\
+Decisão & Máximo / top-\textit{k} & Demonstrada (T3, T9) \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaboração própria (2026), a partir dos artefatos e das fontes identificados no texto.}
+\end{table}
+\section{Combinação convexa e seleção gulosa}
+Com pesos não negativos somando 1, a utilidade $u(a)=\sum_h\alpha_h s_h(a)$ situa-se entre mínimo e máximo dos componentes (T2, T6): conteúdo formal do validador que rejeita somas distintas de 1. Em conjunto finito não vazio há maximizador (T3); o padrão top-\textit{k} domina o resto sob ordem pairwise (T9); o peso cresce com o próprio escore (T8). Custo documentado: ordenação completa onde bastaria seleção parcial.
+\section{Assistentes de prova e orquestração multiagente}
+Lean 4 \cite{moura2021} e Mathlib \cite{mathlib2020} fundamentam a verificação; o mecanismo de atenção, \cite{vaswani2017}. Benchmarks de agentes e orquestração multiagente (\textit{AgentBench} \cite{agentbench2023}, \textit{PerspectiveGap} \cite{perspectivegap2026}, recompensa de orquestração \cite{orchrm2026}, arcabouços atencionais \cite{orchestrator2025}) delimitam o contexto externo: nenhum foi executado aqui, e a comparação permanece como trabalho futuro (protocolo proposto na Seção~\ref{cap:conclusao}).

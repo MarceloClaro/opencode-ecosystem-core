@@ -1,0 +1,116 @@
+% Módulo 09 — Apêndices (R762+; código integral + trilhas com hashes)
+\apendices
+\chapter{Código Lean integral}
+\label{ap:lean}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/plugins/lean-nucleo-verificacao/teoremas/roteamento_atencao.lean}
+\chapter{Trilha de reprodução}
+\label{ap:reproducao}
+Lean 4 v4.34.1, Lake 5.0.0, elan 4.2.4; Mathlib rev.\ v4.34.1 (4760 oleans). Bancada principal: sementes 11, 22, 33, 44 e 55; 40 tarefas por semente. Ablações: sementes efetivas 10011, 10022, 10033, 10044 e 10055. Os códigos e transcrições reproduzidos são artefatos históricos; a execução integral da fonte atual não foi revalidada nesta revisão editorial. Comandos: \nolinkurl{lake env lean RoteamentoAtencao.lean} (saída 0); \texttt{pytest} 9 suítes (63 aprovados). Sincronia automatizada entre teoremas, testes, SPEC e axiomas: \nolinkurl{scanners/diagnostic_pipeline} (SPEC-935-R767, 8 testes herméticos).
+A Tabela~\ref{tab:pins} reproduz os identificadores históricos dos repositórios e das licenças.
+\begin{table}[htbp]
+\fontsize{10}{12}\selectfont\SingleSpacing
+\centering
+\caption{Pinos verificados por \texttt{git ls-remote} (2026-10-09) e SHA-256 das licenças.}
+\label{tab:pins}
+\begin{tabularx}{\textwidth}{lXX}
+\toprule
+Repositório & Commit HEAD (8) & SHA-256 licença (8) \\
+\midrule
+leanprover/lean4 & 5e96ee11 & 8b28515f \\
+mathlib4 & a02a63c2 & b40930bb \\
+batteries & b71aaf60 & c71d239d \\
+aesop & 04879b1e & c71d239d \\
+Z3Prover/z3 & 0d0e28c3 & e617cad2 \\
+sympy/sympy & 04a7da3a & 07a5e981 \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaboração própria (2026), a partir dos artefatos e das fontes identificados no texto.}
+\end{table}
+Depósito público dos artefatos pendente do autor. ORCID: \url{https://orcid.org/0000-0001-8996-2887}. Contato: \texttt{marceloclaro@gmail.com}, \url{https://bit.ly/geomaker}.
+\chapter{Código dos experimentos e do pipeline}
+\label{ap:codigo}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/plugins/lean-nucleo-verificacao/bancada/bancada_routing.py}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/plugins/lean-nucleo-verificacao/bancada/bancada_ablacao.py}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/plugins/lean-nucleo-verificacao/bancada/correlacoes.py}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/plugins/lean-nucleo-verificacao/bancada/contraprova_float.py}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/scanners/diagnostic_pipeline.py}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/transformer/attention.py}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/integrations/lean_proof_mcp.py}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/tests/test_r747_nucleo_lean.py}
+\chapter{Resultados em JSON}
+\label{ap:json}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/plugins/lean-nucleo-verificacao/bancada/resultado_bancada.json}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/plugins/lean-nucleo-verificacao/bancada/resultado_ablacao_q0p3.json}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/plugins/lean-nucleo-verificacao/bancada/resultado_ablacao_q0p6.json}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/plugins/lean-nucleo-verificacao/bancada/resultado_ablacao_q0p9.json}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/plugins/lean-nucleo-verificacao/bancada/correlacoes.json}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/plugins/lean-nucleo-verificacao/bancada/per_seed.json}
+\chapter{Transcrição da suíte de testes}
+\label{ap:testes}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/artigos/pucrs-roteamento-atencao/transcricao_testes.txt}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/artigos/pucrs-roteamento-atencao/transcricao_pytest_verbose.txt}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/artigos/pucrs-roteamento-atencao/impressao_ambiente.txt}
+\chapter{Sessão do verificador (tabelas)}
+\label{ap:sessao}
+Transcrição real de \texttt{lean\_verify} (compilador presente): \texttt{sorry} $\to$ inválido (\texttt{incomplete\_sorry}); \texttt{admit} $\to$ inválido; \texttt{axiom} declarado $\to$ inválido (\texttt{axiom\_nao\_declarado}); \texttt{theorem t : 2 + 2 = 4 := by decide} $\to$ válido (\texttt{machine\_checked}); código com \texttt{import Mathlib.Tactic} fora de projeto lake $\to$ válido (\texttt{syntax\_verified}, sem alegar compilação). A ausência de \texttt{decide}/\texttt{trivial}/\texttt{rfl}/\texttt{assumption} no vocabulário de táticas, detectada nesta revisão, foi corrigida: sem o compilador no \texttt{PATH}, o mesmo teorema caía em \texttt{syntax\_error} em vez do correto \texttt{syntax\_verified}. Segunda sessão (R763): \texttt{div\_lt\_div\_iff} inexistente na Mathlib pinada (forma vigente \texttt{div\_lt\_div\_iff₀}, consultada no fonte) e \texttt{Nontrivial} exigido pelo compilador em T10, pois o singleton falsifica a nitidez --- ambas corrigidas em rascunho antes de incorporar.
+\begin{table}[htbp]
+\fontsize{10}{12}\selectfont\SingleSpacing
+\centering
+\caption{Micro-provas por tática, todas verificadas (núcleo via verificador direto; aritmética via projeto lake).}
+\label{tab:microprovas-ap}
+\begin{tabularx}{\textwidth}{lXX}
+\toprule
+Táticas & Miniatura provada & Veredito \\
+\midrule
+\texttt{intro} + \texttt{exact} & simetria da igualdade & machine-checked \\
+\texttt{rw} & reescrita por hipótese & machine-checked \\
+\texttt{simp} & identidade aditiva & machine-checked \\
+\texttt{omega} & sucessor maior que o número & machine-checked \\
+\texttt{decide} & $2+2=4$ por computação & machine-checked \\
+\texttt{cases} & booleanos esgotados & machine-checked \\
+\texttt{trivial} & verdade imediata & machine-checked \\
+\texttt{rfl} & igualdade por reflexividade & machine-checked \\
+\texttt{assumption} & hipótese do contexto & machine-checked \\
+\texttt{apply} & regra com unificação & machine-checked \\
+\texttt{induction} & indução nos naturais & machine-checked \\
+\texttt{contradiction} & absurdo fecha tudo & machine-checked \\
+\texttt{have} & lema local intermediário & machine-checked \\
+\texttt{obtain} & extração de testemunha & machine-checked \\
+\texttt{norm\_num} & aritmética real (via projeto) & machine-checked \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaboração própria (2026), a partir dos artefatos e das fontes identificados no texto.}
+\end{table}
+\begin{table}[htbp]
+\fontsize{10}{12}\selectfont\SingleSpacing
+\centering
+\caption{Diário de erros reais e correções (mensagens verídicas do compilador).}
+\label{tab:erros-ap}
+\begin{tabularx}{\textwidth}{lXX}
+\toprule
+Item & Mensagem ou sintoma & Correção \\
+\midrule
+Notação & \texttt{unexpected token 'in'} na v4.34 & reescrito com \texttt{Finset.sum} explícito \\
+Assinatura & \nolinkurl{Application type mismatch} em soma unitária & elemento explícito antes da pertinência \\
+Vocabulário & quatro táticas do núcleo ausentes; \texttt{syntax\_error} indevido & nomes acrescentados \\
+Hipótese & \nolinkurl{failed to synthesize Nontrivial} em T10 & hipótese adicionada (singleton falsificaria a tese) \\
+Nome & \texttt{Unknown identifier `div\_lt\_div\_iff'} & forma vigente consultada no fonte pinado \\
+Silencioso & saída de auditoria com \texttt{sorryAx} em T7 & erro de aplicação corrigido; pego só pela auditoria \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaboração própria (2026), a partir dos artefatos e das fontes identificados no texto.}
+\end{table}
+\chapter{Histórico de auditoria}
+\label{ap:historico}
+Ciclos desta linhagem (registro compartilhado; homônimos legados com escores $\approx0{,}9$ pertencem a outra linhagem e foram excluídos pelo filtro de escore e tema):
+A Tabela~\ref{tab:historico} apresenta os ciclos do registro evolutivo, cujos escores são internos.
+\begin{SingleSpacing}
+\fontsize{10}{12}\selectfont
+\input{modulos/tabela_historico.tex}
+\end{SingleSpacing}
+\chapter{Especificações formais}
+\label{ap:specs}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/specs/SPEC-935-R755-teorema-roteamento-atencao.md}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/specs/SPEC-935-R754-lake-env-machine-checked.md}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/specs/SPEC-935-R747-nucleo-lean-verificacao-total.md}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/specs/SPEC-935-R767-diagnostic-pipeline.md}

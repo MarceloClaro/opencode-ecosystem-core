@@ -1,0 +1,17 @@
+% Módulo 03 — Método (R762+; protocolo auditável)
+\chapter{Método}
+Com os fundamentos postos, este capítulo descreve o protocolo de modo repetível: provas, bancada, contraprovas, ameaças e validade.
+\section{Provas formais}
+Arquivo \texttt{roteamento\_atencao.lean} (Apêndice~\ref{ap:lean}) verificado por \texttt{lake env lean} em projeto pinado (Lean v4.34.1, Mathlib rev.\ v4.34.1, 4760 oleans oficiais); auditoria \texttt{\#print axioms} por teorema; bloqueio \textit{fail-closed} a \texttt{sorry}, \texttt{admit} e axiomas não declarados em duas camadas (verificador e MCP). Desenvolvimento em rascunho fora do repositório, incorporação somente no verde.
+\section{Bancada sintética}
+Piscina de 40 agentes por semente com qualidade latente $q$ oculta do roteador; oráculo $cobertura\times((1-q_w)+q_w q)$ com $q_w\in\{0{,}3;0{,}6;0{,}9\}$; 5 sementes $\times$ 40 tarefas = 200 decisões por configuração; estratégias: roteador real, aleatório, menor carga, maior cobertura, média igualitária, sem-confiança, confianças embaralhada/anticorrelacionada/ruidosa. Métricas: arrependimento médio, taxa de acerto, IC95 por aproximação normal, diferenças pareadas por decisão e taxa de vitória/empate. Latência por decisão e desvio da soma softmax registrados.
+\section{Contraprovas e correlações}
+Fuzz de 20\,000 vetores (magnitudes até $\pm1000$, tamanhos 1--50) contra seis invariantes da implementação real; segunda semente independente. Correlações de Pearson entre arrependimento, acerto, tamanho do elegível, dispersão do oráculo, cabeças entre si e confiança versus $q$.
+\section{Ameaças e ética}
+Oráculo sintético e arbitrário; proxy de confiança correlacionada com $q$; baselines ingênuos; 5 sementes; floats versus reais; sem tarefas reais nem concorrentes executados. Sem dados humanos, sem risco ético aplicável; decisão final sobre alegações reservada ao autor.
+\section{Validade por dimensão}
+\textit{Construção:} oráculo e utilidade medem faces distintas (verdade oculta versus decisão observável); a correlação confiança--$q$ de $+0{,}85$ é documentada como limite. \textit{Interna:} pareamento por decisão e sementes fixas eliminam variação espúria entre estratégias. \textit{Externa:} restrita ao simulador; nenhuma generalização é reivindicada. \textit{Conclusão:} ICs, sensibilidade em três mundos e rerreplicação bit a bit sustentam apenas as conclusões delimitadas.
+\section{Cenários de ameaça concretos}
+\textit{Oráculo viciado:} se a qualidade latente fosse ruído puro, a confiança nada carregaria e a vantagem sumiria --- a sensibilidade mede exatamente essa fronteira. \textit{Vazamento semântico:} descrições que entregam a resposta inflariam a cabeça semântica; mitigado por palavras de ruído nas tarefas. \textit{Semente sortuda:} cinco sementes com vitória em todas reduzem, sem eliminar, o risco; o pareamento impede que uma semente fácil decida sozinha. \textit{Empate degenerado:} utilidades idênticas decidem-se pelo identificador --- determinístico e documentado, não aleatório.
+\section{Protocolo de execução (SDD/TDD)}
+Cada funcionalidade nasceu de especificação formal (SPEC-935), validada por testes antes da implementação (ciclo RED--GREEN), com auditoria e registro evolutivo após cada entrega: R747 (núcleo), R754 (lake-env), R755 (teoremas), R767 (sincronia). Falhas geraram correção documentada --- nunca mascaramento --- incluindo 	\texttt{sorryAx} silencioso, vocabulário incompleto de táticas e nome de lema desatualizado, todos capturados por verificador, auditoria ou compilador.

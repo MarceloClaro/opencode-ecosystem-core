@@ -1,0 +1,13 @@
+% Módulo 04d — Derivações completas com instâncias numéricas (R776+)
+\section{Derivações completas com instâncias numéricas}
+Cada derivação abaixo acompanha a prova verificada por máquina com todos os passos intermediários e uma instância numérica real calculada pela implementação.
+\subsection{T1, passo a passo}
+$S=\sum_j e^{f_j}>0$ pois cada termo é positivo. Então $\sum_i(e^{f_i}/S)=(\sum_i e^{f_i})/S=S/S=1$. Instância: $f=[1,2,3]$, $S=e+e^2+e^3$, pesos $[0{,}0900;\ 0{,}2447;\ 0{,}6652]$, soma $1{,}0$.
+\subsection{T2, passo a passo}
+De $m\leq x_i\leq M$ e $w_i\geq0$ segue $w_im\leq w_ix_i\leq w_iM$; somando, $\sum w_im\leq\sum w_ix_i\leq\sum w_iM$; fatorando, $m\sum w_i\leq\cdot\leq M\sum w_i$; com soma $1$, $m\leq\cdot\leq M$. Instância: $w=[0{,}3;0{,}7]$, $x=[2,8]$: $0{,}3\cdot2+0{,}7\cdot8=6{,}2\in[2,8]$.
+\subsection{T4, passo a passo}
+$e^{f_i-c}=e^{f_i}/e^c$; o peso deslocado é $(e^{f_i}/e^c)/(\sum_je^{f_j}/e^c)$; somar quocientes dá $(\sum_je^{f_j})/e^c$ no denominador; cancelar $e^c\neq0$ devolve $e^{f_i}/\sum_je^{f_j}$. Instância: $[1,2,3]$ e $[-4,-3,-2]$ produzem ambos $[0{,}0900;\ 0{,}2447;\ 0{,}6652]$.
+\subsection{T8, passo a passo}
+Para $a<b$ e $C>0$: $e^a/(e^a+C)<e^b/(e^b+C)$ equivale, por produtos cruzados com denominadores positivos, a $e^a(e^b+C)<e^b(e^a+C)$, isto é, $e^ae^b+e^aC<e^be^a+e^bC$; cancelado o termo comum, resta $e^aC<e^bC$, verdade pois $e^a<e^b$ e $C>0$. Instância com $C=1$: $0{,}7311<0{,}8808$.
+\subsection{T10, passo a passo}
+Com maximizador único $i^*$: compare $A_1S_2$ contra $A_2S_1$ expandindo em somas; o termo $j=i^*$ é igual dos dois lados; cada outro termo é estrito pela identidade $(a_1+b_2)-(a_2+b_1)=(a-b)(1/\tau_1-1/\tau_2)>0$ com $a-b=f_{i^*}-f_j>0$; somar com a testemunha estrita decide. Instância em $[1,2,3]$: $\tau=1{,}0\to0{,}6652$ contra $\tau=0{,}5\to0{,}8668$.

@@ -1,0 +1,20 @@
+% Módulo 02f — Núcleo matemático: MaxEnt, cálculo softmax, temperatura, top-k (R776+)
+\section{Cálculo da ponderação exponencial}
+A entropia de uma distribuição, na teoria matemática da comunicação \cite{shannon1948}, mede incerteza; dada média fixada dos escores, a distribuição de máxima entropia tem forma exponencial \cite{jaynes1957} --- é a origem variacional do softmax, cuja interpretação probabilística em classificação foi estabelecida em \cite{bridle1990}. Três cálculos sustentam o uso: (i) normalização, $\sum_i w_i=1$ por construção (T1); (ii) invariância a deslocamento (T4), que autoriza a subtração do máximo; (iii) ausência de overflow após majorante (T11). A Tabela~\ref{tab:temp} mostra a nitidez por temperatura em escores $[1,2,3]$: o peso máximo sobe $0{,}5065\to0{,}6652\to0{,}8668\to0{,}9817$ ao esfriar --- o conteúdo numérico de T10.
+\begin{table}[h]
+\centering
+\caption{Afiação por temperatura em $[1,2,3]$ (calculado pela implementação).}
+\label{tab:temp}
+\begin{tabular}{lccc}
+\toprule
+$\tau$ & $w_1$ & $w_2$ & $w_3$ \\
+\midrule
+2,0 & $0{,}1863$ & $0{,}3072$ & $0{,}5065$ \\
+1,0 & $0{,}0900$ & $0{,}2447$ & $0{,}6652$ \\
+0,5 & $0{,}0159$ & $0{,}1173$ & $0{,}8668$ \\
+0,25 & $0{,}0003$ & $0{,}0180$ & $0{,}9817$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+\section{Ordenação e top-\textit{k}}
+Ordenar $n$ utilidades custa $O(n\log n)$; extrair os $k$ maiores por heap custa $O(n\log k)$. A implementação ordena tudo e fatia o topo; com 40 agentes e latência de $2{,}17$\,ms, a seleção parcial segue como melhoria medida pendente. O desempate é determinístico (menor identificador vence), logo a decisão é reproduzível bit a bit --- fato usado pela rerreplicação. A garantia matemática independe do algoritmo: sob ordem pairwise decrescente, o prefixo domina o sufixo (T9).

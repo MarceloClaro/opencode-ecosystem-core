@@ -1,0 +1,43 @@
+% Módulo 06 — Discussão (R762+)
+\chapter{Discussão}
+Medido e provado, o trabalho foi submetido a revisores internos severos; este capítulo registra vereditos, respostas e o que permanece aberto.
+Revisões internas: bancada como evidência preliminar restrita (proxy, baselines, sementes); teoremas em revisão maior (elementaridade, analogia cosmética sem Q/K/V formal completo, lacuna floats/top-\textit{k}/gates). A Tabela~\ref{tab:qkv} responde parcialmente com a correspondência documentada; T9, T10 e as ablações reduzem, sem eliminar, as demais. Achado desconfortável mantido: sem a cabeça de confiança, o roteador equivale ao acaso neste simulador --- a vantagem depende de reputação calibrada. Originalidade, comparação externa e reprodução independente seguem indispensáveis antes de qualquer alegação de inovação ou disrupção.
+\begin{table}[h]
+\centering
+\caption{Riscos residuais e mitigação.}
+\label{tab:riscos}
+\begin{tabular}{ll}
+\toprule
+Risco & Mitigação e estado \\
+\midrule
+Oráculo arbitrário & Sensibilidade em 3 mundos; ranking estável \\
+Proxy de confiança & Quantificada ($r=+0{,}85$); ablações adversariais \\
+Floats vs.\ reais & Fuzz 40k + T11; certificação total futura \\
+Amostra pequena & ICs, pareamento, rerreplicação determinística \\
+Analogia excessiva & Tabela Q/K/V parcial + renúncias explícitas \\
+\bottomrule
+\end{tabular}
+\end{table}
+\begin{table}[h]
+\centering
+\caption{Resposta ponto a ponto às revisões internas.}
+\label{tab:revisao}
+\begin{tabular}{ll}
+\toprule
+Objeção & Resposta com evidência \\
+\midrule
+Proxy privilegiada & Quantificada ($r=+0{,}85$) e atacada por ablações \\
+Baselines fracos & Somados comparadores fortes e pareamento \\
+Analogia cosmética & Tabela Q/K/V parcial + T8--T11 \\
+Lacuna floats & Fuzz 40k + T11; certificação total futura \\
+\bottomrule
+\end{tabular}
+\end{table}
+\section{Arguição simulada}
+\textit{``Os lemas não são originais?''} --- Não se reivindica originalidade dos fatos elementares, e sim da composição verificada sobre este objeto, com trilha pública. \textit{``Por que o baseline de cobertura perde?''} --- Porque o oráculo pondera qualidade latente que só a confiança enxerga; medido em $r=+0{,}85$. \textit{``E se a confiança for ruim?''} --- As ablações mostram degradação honesta até $0{,}54$; calibrar reputação é pré-requisito declarado. \textit{``Floats provados?''} --- Não; T11 em reais exatos mais fuzz de 40\,000 vetores, com certificação total futura. \textit{``E a comparação externa?''} --- Pendente de suíte compartilhada e orçamento; protocolo pronto.
+\section{Linha do tempo da construção (verificável no Apêndice de histórico)}
+Núcleo e especificação; manifesto e auditoria de clones; dossiê de extensão; validação viva somente-leitura; pinagem com custódia; extensão aprovada da allowlist; toolchain Lean instalado; projeto lake com Mathlib; teoremas de calibração; pacote de melhorias; bancada e revisões; singleton e contraprovas; artigo; autoria; monotonicidade e top-\textit{k}; dissertação; temperatura e overflow; correções minuciosas; modularização; pipeline de sincronia; pesquisa refeita; glossário; preprint; dissertação de 80 laudas; brancas removidas; referencial com DOIs; exegese do estado da arte. Cada etapa com veredito, escore e lição registrados.
+\section{Segunda rodada de arguição}
+\textit{``E se o oráculo for outro?''} --- Três mundos medidos; ranking estável. \textit{``E se houver 400 agentes?''} --- Não medido; a complexidade documentada é $O(n\log n)$ com melhoria $O(n\log k)$ pendente. \textit{``E se a confiança for perfeita?''} --- Limite superior: a decisão iguala o oráculo sempre; não medido porque irrelevante na prática. \textit{``Por que não p-valor?''} --- Relato por intervalos, conforme a estatística por estimação \cite{cumming2014} e a advertência sobre valores-\textit{p} \cite{wasserstein2016}. \textit{``O que falta para publicar fora?''} --- Reprodução independente e comparação externa executada; protocolo pronto.
+\section{Revisões na íntegra (internas, via executor)}
+\textit{Auditoria da bancada:} desenho com 200 decisões não equivale a 200 observações independentes; oráculo com pesos arbitrários exige sensibilidade (feita em três mundos); confiança correlacionada com $q$ é proxy privilegiada e exige ablações adversariais (feitas); baselines ingênuos viram espantalhos sem comparadores fortes (somados: média igualitária e remoção de cabeça); veredito: evidência preliminar restrita ao simulador. \textit{Revisor dos teoremas:} título de ``eficiência'' excede normalização e existência; originalidade indeterminada sem demarcação; analogia cosmética sem Q/K/V; lacuna floats/top-\textit{k}/gates; veredito de revisão maior com condições --- todas registradas e parcialmente respondidas nos artefatos.

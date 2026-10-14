@@ -1,0 +1,77 @@
+% Módulo 05 — Contraprovas e calibração estatística (R762+; números integrais)
+\chapter{Contraprovas e calibração estatística}
+Teoremas provados, hora de medir: este capítulo submete a implementação a contraprovas e estatística.
+\section{Fuzz em ponto flutuante}
+Duas sementes independentes de 20\,000 vetores: 0 violações em soma (pior $2{,}2\times10^{-16}$), limites, invariância a deslocamento (exata), preservação de argmax, singleton e vazio. A tradição de testar confiabilidade por entradas aleatórias remonta ao estudo empírico de utilitários Unix \cite{miller1990}. Leitura da tolerância: o pior desvio dividido pelo épsilon de máquina ($2^{-52}$) vale $0{,}9998\approx1$ --- o erro máximo observado é de exatamente uma unidade na última casa, o piso teórico do formato.
+\section{Bancada principal e sensibilidade}
+Bancada principal (200 decisões): atenção $0{,}042\pm0{,}011$ (acerto $0{,}625\pm0{,}067$) contra $0{,}19$--$0{,}22$; latência $2{,}17$\,ms; soma softmax 1 até $1{,}1\times10^{-16}$ (Tabela~\ref{tab:bench}).
+\begin{table}[h]
+\centering
+\caption{Bancada (200 decisões) e sensibilidade do oráculo (diferenças pareadas vs.\ atenção).}
+\label{tab:bench}
+\begin{tabular}{lccc}
+\toprule
+$q_w$ & Atenção & Pesos iguais (dif.) & Sem confiança (dif.) \\
+\midrule
+0,3 & $0{,}0146$ & $0{,}0319$ (+0,017) & $0{,}1072$ (+0,093) \\
+0,6 & $0{,}0292$ & $0{,}0638$ (+0,035) & $0{,}2144$ (+0,185) \\
+0,9 & $0{,}0438$ & $0{,}0957$ (+0,052) & $0{,}3216$ (+0,278) \\
+\bottomrule
+\end{tabular}
+\end{table}
+Mundos adicionais ($q_w=0{,}6$): confiança embaralhada $0{,}2243$ (+0,195), anticorrelacionada $0{,}3604$ (+0,331), ruidosa $0{,}1515$ (+0,122); vitória/empate da atenção $\geq 0{,}92$ em todos os pareamentos. Rerreplicação determinística bit a bit confirmada.
+\begin{table}[h]
+\centering
+\caption{Diferenças pareadas por decisão vs.\ atenção ($q_w=0{,}6$) e taxa de vitória/empate.}
+\label{tab:pareado}
+\begin{tabular}{lcc}
+\toprule
+Estratégia & Diferença (IC95) & Atenção vence/empata \\
+\midrule
+Média igualitária & $+0{,}035\pm0{,}011$ & $0{,}99$ \\
+Sem confiança & $+0{,}185\pm0{,}024$ & $0{,}98$ \\
+Confiança ruidosa & $+0{,}122\pm0{,}022$ & $0{,}93$ \\
+Confiança embaralhada & $+0{,}195\pm0{,}025$ & $0{,}92$ \\
+Confiança anticorrelacionada & $+0{,}331\pm0{,}019$ & $0{,}97$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+\begin{table}[h]
+\centering
+\caption{Arrependimento por estratégia nos três mundos (200 decisões cada).}
+\label{tab:mundos}
+\begin{tabular}{lccc}
+\toprule
+Estratégia & $q_w=0{,}3$ & $q_w=0{,}6$ & $q_w=0{,}9$ \\
+\midrule
+Atenção & $0{,}0146$ & $0{,}0292$ & $0{,}0438$ \\
+Média igualitária & $0{,}0319$ & $0{,}0638$ & $0{,}0957$ \\
+Sem confiança & $0{,}1072$ & $0{,}2144$ & $0{,}3216$ \\
+Confiança ruidosa & $0{,}0757$ & $0{,}1515$ & $0{,}2272$ \\
+Confiança embaralhada & $0{,}1121$ & $0{,}2243$ & $0{,}3364$ \\
+Confiança anticorrelacionada & $0{,}1802$ & $0{,}3604$ & $0{,}5406$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+Ranking estável nos três mundos avaliados (Tabela~\ref{tab:mundos}): a fusão ponderada superou pesos iguais nas três configurações, com diferenças pareadas positivas em toda a faixa dos ICs; atribui-se o efeito à maior ponderação da cabeça informativa, hipótese consistente com $r=+0{,}85$, não prova causal.
+\begin{table}[h]
+\centering
+\caption{Arrependimento por semente e estratégia (40 decisões cada; acerto da atenção entre parênteses).}
+\label{tab:seeds}
+\begin{tabular}{lcccc}
+\toprule
+Semente & Atenção & Aleatório & Menor carga & Maior cobertura \\
+\midrule
+11 & $0{,}0752$ (0,45) & $0{,}1889$ & $0{,}3157$ & $0{,}2319$ \\
+22 & $0{,}0172$ (0,78) & $0{,}2463$ & $0{,}2276$ & $0{,}2310$ \\
+33 & $0{,}0337$ (0,55) & $0{,}1719$ & $0{,}2447$ & $0{,}2033$ \\
+44 & $0{,}0716$ (0,60) & $0{,}1992$ & $0{,}2038$ & $0{,}2309$ \\
+55 & $0{,}0129$ (0,75) & $0{,}1350$ & $0{,}0918$ & $0{,}1618$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+A atenção obteve o menor arrependimento nas 5 sementes avaliadas (Tabela~\ref{tab:seeds}).
+\section{Estudo de caso completo: Ana contra Cid}
+Na tarefa-guia, as cabeças mediram: semântica Ana $0{,}8417$ contra Cid $0{,}7703$; capacidade $1{,}0$ para ambas (o gate já havia decidido); confiança $0{,}9$ contra $0{,}7$; carga livre $0{,}9$ contra $0{,}6$. Utilidades: Ana $0{,}30\cdot0{,}8417+0{,}35\cdot1{,}0+0{,}25\cdot0{,}9+0{,}10\cdot0{,}9=0{,}9175$; Cid $0{,}30\cdot0{,}7703+0{,}35\cdot1{,}0+0{,}25\cdot0{,}7+0{,}10\cdot0{,}6=0{,}8161$. Pesos finais $0{,}5253$ contra $0{,}4747$. Note-se a capacidade constante: com cobertura total dos elegíveis, a decisão correu nas outras três cabeças --- exatamente o fenômeno quantificado nas correlações.
+\section{Correlações de Pearson (200 decisões)}
+Arrependimento $\times$ elegíveis $+0{,}08$; arrependimento $\times$ dispersão $-0{,}16$; acerto $\times$ elegíveis $-0{,}19$; acerto $\times$ dispersão $+0{,}13$; confiança $\times$ $q$ $+0{,}85$ (checagem de desenho: proxy forte, fonte da circularidade parcial); cabeças quase descorrelacionadas (semântica $\times$ confiança $+0{,}05$); capability constante pós-gate (o gate decide cobertura; a escolha corre nas outras cabeças). Regressão: 63 testes em 9 suítes; ambiente sem falhas (18/20, 2 advertências pré-existentes).

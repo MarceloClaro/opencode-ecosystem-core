@@ -1,0 +1,62 @@
+% Módulo 09 — Apêndices (R762+; código integral + trilhas com hashes)
+\appendix
+\chapter{Código Lean integral}
+\label{ap:lean}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/plugins/lean-nucleo-verificacao/teoremas/roteamento_atencao.lean}
+\chapter{Trilha de reprodução}
+Lean 4 v4.34.1, Lake 5.0.0, elan 4.2.4; Mathlib rev.\ v4.34.1 (4760 oleans). Sementes 11--55; 40 tarefas por semente. Comandos: \texttt{lake env lean RoteamentoAtencao.lean} (saída 0); \texttt{pytest} 9 suítes (63 aprovados). Sincronia automatizada entre teoremas, testes, SPEC e axiomas: \texttt{scanners/diagnostic\_pipeline} (SPEC-935-R767, 8 testes herméticos).
+\begin{table}[h]
+\centering
+\caption{Pinos verificados por \texttt{git ls-remote} (2026-10-09) e SHA-256 das licenças.}
+\label{tab:pins}
+\begin{tabular}{lll}
+\toprule
+Repositório & Commit HEAD (8) & SHA-256 licença (8) \\
+\midrule
+leanprover/lean4 & 5e96ee11 & 8b28515f \\
+mathlib4 & a02a63c2 & b40930bb \\
+batteries & b71aaf60 & c71d239d \\
+aesop & 04879b1e & c71d239d \\
+Z3Prover/z3 & 0d0e28c3 & e617cad2 \\
+sympy/sympy & 04a7da3a & 07a5e981 \\
+\bottomrule
+\end{tabular}
+\end{table}
+Depósito OSF pendente do autor. ORCID: \url{https://orcid.org/0000-0001-8996-2887}. Contato: \texttt{marceloclaro@gmail.com}, \url{https://bit.ly/geomaker}.
+\chapter{Código dos experimentos e do pipeline}
+\label{ap:codigo}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/plugins/lean-nucleo-verificacao/bancada/bancada_routing.py}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/plugins/lean-nucleo-verificacao/bancada/bancada_ablacao.py}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/plugins/lean-nucleo-verificacao/bancada/correlacoes.py}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/plugins/lean-nucleo-verificacao/bancada/contraprova_float.py}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/scanners/diagnostic_pipeline.py}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/transformer/attention.py}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/integrations/lean_proof_mcp.py}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/tests/test_r747_nucleo_lean.py}
+\chapter{Resultados em JSON}
+\label{ap:json}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/plugins/lean-nucleo-verificacao/bancada/resultado_bancada.json}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/plugins/lean-nucleo-verificacao/bancada/resultado_ablacao_q0p3.json}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/plugins/lean-nucleo-verificacao/bancada/resultado_ablacao_q0p6.json}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/plugins/lean-nucleo-verificacao/bancada/resultado_ablacao_q0p9.json}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/plugins/lean-nucleo-verificacao/bancada/correlacoes.json}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/plugins/lean-nucleo-verificacao/bancada/per_seed.json}
+\chapter{Transcrição da suíte de testes}
+\label{ap:testes}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/artigos/pucrs-roteamento-atencao/transcricao_testes.txt}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/artigos/pucrs-roteamento-atencao/transcricao_pytest_verbose.txt}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/artigos/pucrs-roteamento-atencao/impressao_ambiente.txt}
+\chapter{Histórico de auditoria}
+\label{ap:historico}
+Ciclos desta linhagem (registro compartilhado; homônimos legados com escores $\approx0{,}9$ pertencem a outra linhagem e foram excluídos pelo filtro de escore e tema):
+\begin{table}[h]
+\centering
+\caption{Ciclos de evolução da linhagem Lean-roteamento.}
+\input{/home/marceloclaro/opencode-ecosystem-core/artigos/pucrs-roteamento-atencao/modulos/tabela_historico.tex}
+\end{table}
+\chapter{Especificações formais}
+\label{ap:specs}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/specs/SPEC-935-R755-teorema-roteamento-atencao.md}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/specs/SPEC-935-R754-lake-env-machine-checked.md}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/specs/SPEC-935-R747-nucleo-lean-verificacao-total.md}
+\lstinputlisting{/home/marceloclaro/opencode-ecosystem-core/specs/SPEC-935-R767-diagnostic-pipeline.md}

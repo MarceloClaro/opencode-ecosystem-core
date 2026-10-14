@@ -1,0 +1,292 @@
+% Artigo científico — submissão PUCRS (minuta para revisão do autor)
+% Roteamento por atenção com garantias verificadas por máquina
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{margin=3cm}
+\title{Roteamento por Atenção com Garantias Verificadas por Máquina:\\
+Teoremas em Lean 4, Calibração Empírica Interna e Limites Declarados}
+\author{Marcelo Claro Laranjeira \\ Mestre em Ciência da Educação \\ Pontifícia Universidade Católica do Rio Grande do Sul (PUCRS) \\ ORCID: \url{https://orcid.org/0000-0001-8996-2887} \\ \texttt{marceloclaro@gmail.com} --- \url{https://bit.ly/geomaker}}
+\date{Outubro de 2026 --- minuta, não submetida}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\textbf{Resumo.} Este artigo relata a formalização e a calibração interna de um
+mecanismo de roteamento por atenção para orquestração de agentes, inspirado no
+mecanismo de atenção do Transformer. Onze lemas foram verificados por máquina
+(\textit{machine-checked}) em Lean 4 (v4.34.1) com Mathlib (rev.\ v4.34.1):
+normalização do softmax, limitação bilateral da combinação convexa, existência
+de candidato de utilidade máxima, invariância à subtração do máximo, pesos em
+$(0,1)$ e peso unitário no caso singleton, monotonicidade estrita (T8),
+dominação top-\textit{k} (T9), nitidez por temperatura (T10) e ausência de
+overflow (T11); todos dependem apenas dos axiomas
+padrão (\textit{propext}, \textit{Classical.choice}, \textit{Quot.sound}), sem
+\textit{sorry}. Uma bancada sintética interna (200 decisões, 5 sementes)
+comparou o roteador real a baselines ingênuos: arrependimento (\textit{regret})
+médio de $0{,}042\pm0{,}011$ contra $0{,}19$--$0{,}22$ dos baselines, com
+intervalos de confiança sem sobreposição. Ablações e análise de sensibilidade
+delimitam a validade dos achados, incluindo a dependência da cabeça de
+confiança. Nada aqui autoriza alegações de superioridade externa, inovação ou
+disrupção: trata-se de evidência preliminar com trilha de reprodução publicada.
+\\
+\textbf{Palavras-chave:} assistentes de prova; Lean 4; Mathlib; roteamento por
+atenção; verificação formal; reprodutibilidade.
+\end{abstract}
+
+\begin{abstract}
+\textbf{Abstract.} This paper reports the formalization and internal
+calibration of an attention-based routing mechanism for agent orchestration,
+inspired by the Transformer attention mechanism. Eleven lemmas were
+machine-checked in Lean 4 (v4.34.1) with Mathlib (rev.\ v4.34.1): softmax
+normalization, two-sided convex-combination bounds, existence of a
+utility-maximal candidate, max-subtraction invariance, weights in $(0,1)$,
+and unit weight in the singleton case, strict monotonicity (T8), top-\textit{k}
+dominance (T9), temperature sharpening (T10) and overflow-freedom (T11); all depend only on the standard axioms
+(\textit{propext}, \textit{Classical.choice}, \textit{Quot.sound}), with no
+\textit{sorry}. An internal synthetic benchmark (200 decisions, 5 seeds)
+compared the real router against naive baselines: mean regret
+$0.042\pm0.011$ versus $0.19$--$0.22$ for baselines, with non-overlapping
+confidence intervals. Ablations and sensitivity analysis bound the findings,
+including dependence on the confidence head. Nothing here supports claims of
+external superiority, innovativeness, or disruption: this is preliminary
+evidence with a published reproduction trail.
+\\
+\textbf{Keywords:} proof assistants; Lean 4; Mathlib; attention routing;
+formal verification; reproducibility.
+\end{abstract}
+
+\section{Introdução}
+
+A orquestração de agentes de software exige decidir, por tarefa, qual agente
+executar sob critérios múltiplos (aderência semântica, capacidades,
+confiança, carga). Mecanismos inspirados na atenção do Transformer
+\cite{vaswani2017} ponderam candidatos por pesos normalizados, mas raramente
+acompanham garantias formais sobre esses pesos ou sobre a otimalidade da
+seleção. Este trabalho registra, com trilha auditável completa: (i) sete
+lemas verificados por máquina sobre o núcleo matemático desse roteamento, em
+Lean 4 com Mathlib \cite{moura2021,mathlib2020}; (ii) calibração empírica
+interna contra baselines ingênuos; (iii) ablações, contraprovas numéricas e
+revisões independentes internas; (iv) limites explícitos do que foi e do que
+não foi demonstrado. A contribuição reivindicada é deliberadamente restrita:
+otimalidade \textit{relativa} à utilidade definida, com reprodução publicada.
+
+\section{Fundamentação}
+
+O roteador estudado combina quatro cabeças normalizadas em $[0,1]$
+(semântica $0{,}30$, capacidade $0{,}35$, confiança $0{,}25$, carga $0{,}10$),
+exige soma unitária dos pesos sob pena de erro, aplica softmax com subtração
+do máximo e ordena os candidatos do melhor ao pior. A Equação~\ref{eq:soft}
+define os pesos; a Equação~\ref{eq:util} a utilidade combinada.
+\begin{equation}
+w_i = \frac{e^{f_i}}{\sum_j e^{f_j}} \label{eq:soft}
+\end{equation}
+\begin{equation}
+u(a) = \sum_h \alpha_h \cdot s_h(a), \quad \sum_h \alpha_h = 1,\ \alpha_h \geq 0 \label{eq:util}
+\end{equation}
+Os onze lemas formalizam: soma unitária (T1), limitação bilateral por
+combinação convexa (T2, T6), existência de maximizador em conjunto finito
+não vazio (T3), invariância à subtração de constante (T4), pertinência a
+$(0,1)$ com ao menos dois candidatos (T5), peso unitário no singleton (T7),
+monotonicidade estrita no próprio escore (T8), dominação top-\textit{k} (T9),
+nitidez por temperatura (T10) e ausência de overflow (T11).
+
+\subsection{Esboço teórico: atenção como ponderação exponencial calibrada}
+
+Dada uma lista finita de escores $f_1,\dots,f_n$, a Equação~\ref{eq:soft}
+define a ponderação exponencial normalizada. Três fatos elementares,
+aqui verificados por máquina, sustentam seu uso decisório. Primeiro, a massa
+total é exatamente 1 (T1): os pesos são uma distribuição de probabilidade
+sobre os candidatos, e a calibração empírica confirma soma 1 até
+$1{,}1\times10^{-16}$. Segundo, deslocar todos os escores por uma constante
+não altera nenhum peso (T4) --- é o que autoriza subtrair o máximo por
+estabilidade numérica sem mudar a decisão; a contraprova em ponto flutuante
+registrou invariância exata em 20\,000 vetores. Terceiro, cada peso está em
+$(0,1)$ com ao menos dois candidatos (T5) e vale 1 no singleton (T7): nenhum
+candidato é anulado nem absolutizado, salvo unicidade.
+
+A correspondência com o Transformer é estrutural e parcial, não transferência
+de propriedades: consulta $\leftrightarrow$ vetor da tarefa, chave
+$\leftrightarrow$ vetor do cartão do agente, escore $\leftrightarrow$
+similaridade e cabeças, valor $\leftrightarrow$ (utilidade, identificador),
+agregação $\leftrightarrow$ combinação convexa seguida de softmax, decisão
+$\leftrightarrow$ máximo. Nenhuma capacidade representacional ou desempenho
+de Transformers treinados é herdada por essa analogia.
+
+\subsection{Esboço matemático: combinação convexa e seleção gulosa}
+
+Com pesos não negativos somando 1, a utilidade combinada da
+Equação~\ref{eq:util} situa-se entre o mínimo e o máximo dos componentes
+(T2, T6): o escore final nunca escapa ao intervalo das cabeças, o que dá
+sentido formal ao validador que rejeita pesos cuja soma difere de 1. Em
+conjunto finito não vazio existe maximizador (T3), e a regra top-1 o
+seleciona; o padrão top-\textit{k} domina o resto sob ordem pairwise (T9), e
+o peso cresce estritamente com o próprio escore (T8), o que justifica decidir
+pelo máximo; a nitidez cresce ao esfriar (T10) e os expoentes deslocados não
+estouram (T11); o custo documentado é o da ordenação completa onde bastaria
+seleção parcial. Em Lean, as provas usam positividade da exponencial,
+reescrita de somas (\texttt{Finset.sum\_div}, \texttt{Finset.sum\_mul}),
+monotonicidade da multiplicação por não negativos e existência de máximo de
+imagem finita --- todos sobre os axiomas padrão, auditados um a um.
+
+\section{Método}
+
+\textit{Provas.} Arquivo \texttt{roteamento\_atencao.lean} verificado por
+\texttt{lake env lean} em projeto pinado (Lean v4.34.1, Mathlib rev.\
+v4.34.1, 4760 oleans pré-compilados oficiais); auditoria \texttt{\#print
+axioms} por teorema; bloqueio \textit{fail-closed} para \texttt{sorry},
+\texttt{admit} e axiomas não declarados. \textit{Bancada.} Piscina de 40
+agentes sintéticos por semente com qualidade latente $q$ oculta do roteador;
+oráculo $cobertura\times(0{,}4+0{,}6q)$; 5 sementes $\times$ 40 tarefas = 200
+decisões; estratégias: roteador real, aleatório, menor carga, maior cobertura;
+métricas: arrependimento médio e taxa de acerto, IC95 por aproximação normal.
+\textit{Ablações.} Confiança embaralhada, anticorrelacionada e ruidosa; média
+igualitária das cabeças; remoção da cabeça de confiança; análise pareada e
+sensibilidade do oráculo em $q_w\in\{0{,}3;0{,}6;0{,}9\}$.
+\textit{Contraprova numérica.} 20\,000 vetores aleatórios (magnitudes até
+$\pm1000$) contra a implementação real em ponto flutuante.
+\textit{Revisões.} Duas revisões independentes internas (bancada e teoremas)
+via executores externos; revisores por agente indisponíveis no ambiente
+(falha registrada). Ameaças: oráculo sintético e arbitrário; confiança
+correlacionada com $q$ (proxy privilegiada); baselines ingênuos; 5 sementes;
+lacuna floats versus reais; sem tarefas reais nem concorrentes executados.
+
+\section{Resultados}
+
+Os 11 lemas listados na Tabela~\ref{tab:ax} obtiveram \textit{machine-checked} (saída 0 do kernel em 2026-10-10),
+com axiomas restritos a \textit{propext}, \textit{Classical.choice} e
+\textit{Quot.sound} (Tabela~\ref{tab:ax}).
+\begin{table}[h]
+\centering
+\caption{Auditoria de axiomas por teorema (\texttt{\#print axioms}).}
+\label{tab:ax}
+\begin{tabular}{ll}
+\toprule
+Teorema & Axiomas \\
+\midrule
+\texttt{softmax\_soma\_um} & propext, Classical.choice, Quot.sound \\
+\texttt{combinacao\_convexa\_limitada} & propext, Classical.choice, Quot.sound \\
+\texttt{roteamento\_guloso\_otimo} & propext, Classical.choice, Quot.sound \\
+\texttt{softmax\_invariante\_max} & propext, Classical.choice, Quot.sound \\
+\texttt{softmax\_mem\_Ioo} & propext, Classical.choice, Quot.sound \\
+\texttt{combinacao\_convexa\_limitada\_baixo} & propext, Classical.choice, Quot.sound \\
+\texttt{softmax\_peso\_total\_singleton} & propext, Classical.choice, Quot.sound \\
+\texttt{peso\_cresce\_com\_escore} & propext, Classical.choice, Quot.sound \\
+\texttt{topk\_dominam\_resto} & propext, Classical.choice, Quot.sound \\
+\texttt{temperatura\_aguca\_maximo} & propext, Classical.choice, Quot.sound \\
+\texttt{sem\_overflow\_apos\_max} & propext, Classical.choice, Quot.sound \\
+\bottomrule
+\end{tabular}
+\end{table}
+A primeira versão de T7 continha \texttt{sorryAx} por erro de aplicação; a
+auditoria detectou e a correção foi re-verificada --- evidência de que a
+trilha funciona. Na bancada (Tabela~\ref{tab:bench}), o roteador obteve
+arrependimento $0{,}042\pm0{,}011$ e acerto $0{,}625\pm0{,}067$, com ICs sem
+sobreposição com os baselines ($0{,}19$--$0{,}22$); latência média $2{,}17$\,ms;
+soma do softmax igual a 1 até $1{,}1\times10^{-16}$.
+\begin{table}[h]
+\centering
+\caption{Bancada principal (200 decisões).}
+\label{tab:bench}
+\begin{tabular}{lcc}
+\toprule
+Estratégia & Arrependimento & Acerto \\
+\midrule
+Atenção (roteador real) & $0{,}042\pm0{,}011$ & $0{,}625\pm0{,}067$ \\
+Aleatório & $0{,}188\pm0{,}022$ & $0{,}200\pm0{,}055$ \\
+Menor carga & $0{,}217\pm0{,}025$ & $0{,}215\pm0{,}057$ \\
+Maior cobertura & $0{,}212\pm0{,}022$ & $0{,}165\pm0{,}051$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+A contraprova numérica registrou 0 violações em 20\,000 vetores (pior desvio
+de soma $2{,}2\times10^{-16}$; invariância a deslocamento exata). Nas
+ablações, a atenção venceu em todos os mundos e a fusão ponderada superou
+pesos iguais (vitória em $0{,}99$ das decisões); registra-se o achado
+desconfortável de que, sem a cabeça de confiança, o roteador equivale ao
+acaso neste simulador --- a vantagem depende de reputação calibrada.
+Bateria de regressão: 63 testes aprovados; diagnóstico do ambiente sem
+falhas (18/20 verificações, 2 advertências pré-existentes de CLIs externas).
+
+\section{Impactos teóricos, práticos e científicos}
+
+\textit{Teórico.} O núcleo matemático do roteamento deixa de ser heurística
+opaca: cada propriedade operacional (pesos que somam 1, decisão invariante a
+deslocamento, escores limitados, seleção máxima) corresponde a um enunciado
+verificado por máquina com axiomas auditados. A invariância (T4) fundamenta a
+prática de estabilidade numérica; o par (T5, T7) elimina o caso omisso do
+singleton; o par (T2, T6) dá conteúdo formal à exigência de soma unitária.
+\textit{Prático.} As decisões do roteador passam a carregar pesos calibrados
+(soma 1 até $10^{-16}$) e regra de seleção provadamente máxima quanto à
+utilidade definida, ao custo medido de $2{,}17$\,ms por decisão; a seleção
+parcial segue como melhoria medida pendente. \textit{Científico.} A trilha
+funcionou como instrumento: a auditoria de axiomas capturou um
+\texttt{sorryAx} silencioso, a auditoria de referências descartou uma citação
+suposta, e as ablações quantificaram a dependência da cabeça de confiança ---
+achados que integram o relato em vez de escondê-lo. \textit{Limites do
+escopo:} superioridade sobre plataformas existentes não foi testada; a
+avaliação restringiu-se ao simulador descrito no Método; propriedades de
+Transformers treinados não foram avaliadas.
+
+\section{Discussão}
+
+As revisões internas classificaram a evidência como preliminar restrita ao
+simulador (bancada) e os teoremas como revisão maior: os lemas são
+elementares, a analogia com o Transformer permanece cosmética sem
+correspondência consulta--chave--valor formalizada, e persiste a lacuna entre
+reais formalizados e floats executados, top-\textit{k}, gates e empates. A
+renúncia a superioridade universal delimita, mas não prova, eficiência
+operacional. Originalidade, comparação \textit{head-to-head} com plataformas
+maduras e reprodução independente permanecem como trabalho futuro
+indispensável antes de qualquer alegação de inovação ou disrupção.
+
+\section{Conclusão}
+
+Entrega-se um núcleo matemático do roteamento por atenção verificado por
+máquina, calibrado internamente contra baselines ingênuos e auditado até os
+axiomas, com trilha de reprodução integralmente publicada (código, sementes,
+versões, hashes e comandos no Apêndice). Reivindica-se exclusivamente
+otimalidade relativa e evidência preliminar.
+
+\begin{thebibliography}{9}
+\bibitem{moura2021} MOURA, L. de; ULLRICH, S. The Lean 4 theorem prover and
+programming language. \textit{Lecture Notes in Computer Science}, p. 625--635,
+2021. DOI: \url{https://doi.org/10.1007/978-3-030-79876-5_37}.
+Verificada na fonte primária (Crossref).
+\bibitem{mathlib2020} THE MATHLIB COMMUNITY. The lean mathematical library.
+In: \textit{Proceedings of the 9th ACM SIGPLAN International Conference on
+Certified Programs and Proofs}, 2020. p. 367--381. DOI:
+\url{https://doi.org/10.1145/3372885.3373824}.
+Verificada na fonte primária (Crossref).
+\bibitem{vaswani2017} VASWANI, A. et al. Attention is all you need. In:
+\textit{Advances in Neural Information Processing Systems 30}, Long Beach,
+2017. p. 5998--6008. (Sem DOI; obra de conferência amplamente referenciada.)
+\end{thebibliography}
+
+\appendix
+\sloppy
+\section{Trilha de reprodução}
+
+Lean 4 v4.34.1, Lake 5.0.0, elan 4.2.4; projeto \texttt{lean-mathlib-demo},
+\texttt{lean-toolchain} \texttt{leanprover/lean4:v4.34.1}, Mathlib rev.\
+\texttt{v4.34.1}; commits verificados por \texttt{git ls-remote} em
+2026-10-09: lean4 \texttt{5e96ee11\ldots}, mathlib4 \texttt{a02a63c2\ldots},
+batteries \texttt{b71aaf60\ldots}, aesop \texttt{04879b1e\ldots},
+z3 \texttt{0d0e28c3\ldots}, sympy \texttt{04a7da3a\ldots}; licenças Apache-2.0
+(Lean), MIT (z3), BSD (sympy) com SHA-256 custodiados. Sementes 11, 22, 33,
+44, 55; 40 tarefas por semente. Arquivos: teoremas em
+\url{plugins/lean-nucleo-verificacao/teoremas/}; bancada, ablações,
+contrafuzz e auditoria de axiomas em
+\url{plugins/lean-nucleo-verificacao/bancada/}; testes
+\texttt{test\_r747}, \texttt{test\_r754}, \texttt{test\_r755}; especificações
+SPEC-935-R747/R754/R755. Reprodução: \texttt{lake env lean
+RoteamentoAtencao.lean} (saída 0) e \texttt{pytest} das 9 suítes (63
+aprovados). Depósito em repositório aberto (OSF): pendente de ação do autor;
+materiais sob custódia nos caminhos citados. Contatos e ORCID no cabeçalho.
+
+\end{document}

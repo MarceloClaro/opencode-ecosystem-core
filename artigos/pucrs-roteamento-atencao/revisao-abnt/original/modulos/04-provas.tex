@@ -1,0 +1,54 @@
+% Módulo 04 — Provas formais detalhadas (R762+; 11 teoremas)
+\chapter{Provas formais}
+Do protocolo aos enunciados: o que foi demonstrado, em notação matemática, antes da dissecação.
+Os onze enunciados, em notação matemática. Comentário geral, com lastro: normalização e limitação convexa são o conteúdo formal da exigência de soma unitária dos pesos, prática padrão em ponderação exponencial desde \cite{vaswani2017} e objeto de calibração na literatura \cite{komisarenko2024,xuan2025}; maximizador finito e seleção gulosa formalizam a regra de decisão; invariância, pertinência, singleton, monotonicidade, top-\textit{k}, nitidez e overflow cobrem estabilidade, casos-limite e decisão, cada qual demonstrado em Lean sobre Mathlib \cite{moura2021,mathlib2020}:
+\begin{equation}
+\sum_i\left(e^{f_i}/\sum_j e^{f_j}\right)=1 \tag{T1}
+\end{equation}
+\begin{equation}
+m\leq\sum_{i\in s}w_ix_i\leq M,\quad \sum_{i\in s}w_i=1,\ w_i\geq0,\ m\leq x_i\leq M \tag{T2/T6}
+\end{equation}
+\begin{equation}
+\exists\,\text{melhor}\in C,\ \forall a\in C,\ u(a)\leq u(\text{melhor}) \tag{T3}
+\end{equation}
+\begin{equation}
+e^{f_i-c}/\sum_j e^{f_j-c}=e^{f_i}/\sum_j e^{f_j} \tag{T4}
+\end{equation}
+\begin{equation}
+0<e^{f_i}/\sum_j e^{f_j}<1\ \text{(2+ candidatos)};\quad =1\ \text{(singleton)} \tag{T5/T7}
+\end{equation}
+\begin{equation}
+x\mapsto e^x/(e^x+C)\ \text{estritamente crescente para }C>0 \tag{T8}
+\end{equation}
+\begin{equation}
+l\ \text{pairwise-decrescente}\Rightarrow\forall x\in\text{drop}_k,\forall y\in\text{take}_k,\ y\geq x \tag{T9}
+\end{equation}
+\begin{equation}
+\tau_1<\tau_2\Rightarrow w_{i^*}(\tau_1)>w_{i^*}(\tau_2)\ \text{(maximizador único)} \tag{T10}
+\end{equation}
+\begin{equation}
+f_i\leq M\Rightarrow e^{f_i-M}\leq1 \tag{T11}
+\end{equation}
+Ingredientes de prova, por teorema: (T1) $\sum_i(e^{f_i}/\sum_j e^{f_j})=1$ em tipo finito não vazio (positividade da exponencial, \texttt{Finset.sum\_pos} sobre o universo, reescrita \texttt{Finset.sum\_div}, \texttt{div\_self}). (T2/T6) $m\leq\sum w_ix_i\leq M$ sob pesos convexos (monotonicidade da multiplicação por não negativos, reescrita \texttt{Finset.sum\_mul}, hipótese de soma 1). (T3) $\exists$ maximizador finito (máximo de imagem, \texttt{Finset.exists\_max\_image}). (T4) invariância a $f_i-c$ (subtração da exponencial, soma de quocientes, simplificação de corpos que fecha sozinha). (T5) pesos em $(0,1)$ sob não-trivialidade (divisão, soma do resto positivo via \texttt{add\_sum\_erase}, linear). (T7) peso 1 no singleton (soma de um termo, \texttt{sum\_eq\_single\_of\_mem} com elemento explícito --- cuja ausência gerou \texttt{sorryAx} na primeira versão, capturado pela auditoria). (T8) monotonicidade estrita no próprio escore (divisão de desigualdades na forma atual \texttt{div\_lt\_div\_iff₀}, linear; nome consultado no Mathlib pinado, não na memória). (T9) take-\textit{k} domina o resto sob pairwise (concatenação take/drop, \texttt{pairwise\_append}). (T10) nitidez por temperatura: com maximizador único, esfriar aumenta seu peso (fatoração de somas, divisão de desigualdades, soma estrita com testemunha, exigindo não-trivialidade --- sem a qual a tese é falsa). (T11) ausência de overflow: expoentes deslocados $\leq 0$ (caracterização da exponencial). Auditoria: todos com axiomas restritos a \textit{propext}, \textit{Classical.choice}, \textit{Quot.sound} (Tabela~\ref{tab:ax}), sem \texttt{sorryAx}.
+\begin{table}[h]
+\centering
+\caption{Auditoria de axiomas (\texttt{\#print axioms}).}
+\label{tab:ax}
+\begin{tabular}{ll}
+\toprule
+Teorema & Axiomas \\
+\midrule
+T1 \texttt{softmax\_soma\_um} & propext, Classical.choice, Quot.sound \\
+T2 \texttt{combinacao\_convexa\_limitada} & propext, Classical.choice, Quot.sound \\
+T3 \texttt{roteamento\_guloso\_otimo} & propext, Classical.choice, Quot.sound \\
+T4 \texttt{softmax\_invariante\_max} & propext, Classical.choice, Quot.sound \\
+T5 \texttt{softmax\_mem\_Ioo} & propext, Classical.choice, Quot.sound \\
+T6 \texttt{combinacao\_convexa\_limitada\_baixo} & propext, Classical.choice, Quot.sound \\
+T7 \texttt{softmax\_peso\_total\_singleton} & propext, Classical.choice, Quot.sound \\
+T8 \texttt{peso\_cresce\_com\_escore} & propext, Classical.choice, Quot.sound \\
+T9 \texttt{topk\_dominam\_resto} & propext, Classical.choice, Quot.sound \\
+T10 \texttt{temperatura\_aguca\_maximo} & propext, Classical.choice, Quot.sound \\
+T11 \texttt{sem\_overflow\_apos\_max} & propext, Classical.choice, Quot.sound \\
+\bottomrule
+\end{tabular}
+\end{table}

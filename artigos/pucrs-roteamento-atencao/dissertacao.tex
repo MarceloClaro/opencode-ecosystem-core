@@ -1,0 +1,172 @@
+% !TeX program = xelatex
+% Revisão editorial e normativa em 10/10/2026; dados autorais pendentes.
+\documentclass[12pt,openany,oneside,a4paper,brazil,chapter=TITLE]{abntex2}
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Termes}
+\setsansfont{TeX Gyre Termes}
+\setmonofont{DejaVu Sans Mono}[Scale=0.82]
+\usepackage{amsmath,amssymb,booktabs,tabularx,longtable,array,verbatim,listings}
+\usepackage[authoryear,round]{natbib}
+\usepackage{xurl}
+\setlength{\emergencystretch}{2em}
+\setcitestyle{aysep={,},citesep={;}}
+\let\cite\citep
+\renewcommand{\bibsection}{\chapter*{Referências}\addcontentsline{toc}{chapter}{REFERÊNCIAS}}
+\setlength{\bibhang}{0pt}
+\setlength{\bibsep}{\baselineskip}
+\renewcommand{\ABNTEXchapterfont}{\normalfont\bfseries}
+\renewcommand{\ABNTEXchapterfontsize}{\normalsize}
+\renewcommand{\ABNTEXsectionfont}{\normalfont\bfseries}
+\renewcommand{\ABNTEXsectionfontsize}{\normalsize}
+\renewcommand{\ABNTEXsubsectionfont}{\normalfont\bfseries}
+\renewcommand{\ABNTEXsubsectionfontsize}{\normalsize}
+\setlength{\beforechapskip}{0pt}
+\setlength{\afterchapskip}{1.5\baselineskip}
+\setlrmarginsandblock{3cm}{2cm}{*}
+\setulmarginsandblock{3cm}{2cm}{*}
+\checkandfixthelayout[fixed]
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{0pt}
+\OnehalfSpacing
+\makepagestyle{abntsubmissao}
+\makeoddhead{abntsubmissao}{}{}{\fontsize{10}{12}\selectfont\thepage}
+\makeevenhead{abntsubmissao}{}{}{\fontsize{10}{12}\selectfont\thepage}
+\makeoddfoot{abntsubmissao}{}{}{}
+\makeevenfoot{abntsubmissao}{}{}{}
+\captionnamefont{\fontsize{10}{12}\selectfont}
+\captiontitlefont{\fontsize{10}{12}\selectfont}
+\captiondelim{ --- }
+\captionstyle{\raggedright}
+\setlength{\tabcolsep}{4pt}
+\lstset{basicstyle=\fontsize{10}{12}\selectfont\ttfamily,breaklines=true,
+breakatwhitespace=false,columns=fullflexible,keepspaces=true,showstringspaces=false,
+literate={á}{{\'a}}1 {à}{{\`a}}1 {â}{{\^a}}1 {ã}{{\~a}}1 {é}{{\'e}}1 {è}{{\`e}}1 {ê}{{\^e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ô}{{\^o}}1 {õ}{{\~o}}1 {ú}{{\'u}}1 {ç}{{\c c}}1 {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Õ}{{\~O}}1 {Ú}{{\'U}}1 {Ç}{{\c C}}1 {—}{{---}}1 {–}{{--}}1 {°}{{\textdegree}}1 {±}{{$\pm$}}1 {×}{{$\times$}}1 {→}{{$\to$}}1 {≤}{{$\le$}}1 {≥}{{$\ge$}}1 {≠}{{$\ne$}}1}
+\titulo{Roteamento inspirado em atenção: formalização do núcleo matemático em Lean 4 e avaliação empírica interna}
+\autor{Marcelo Claro Laranjeira}
+\local{Porto Alegre}
+\data{2026}
+\orientador{[nome e titulação do orientador --- preencher]}
+\instituicao{Pontifícia Universidade Católica do Rio Grande do Sul}
+\tipotrabalho{Dissertação (Mestrado)}
+\preambulo{Dissertação apresentada ao Programa de Pós-Graduação em [nome do programa --- preencher] da Pontifícia Universidade Católica do Rio Grande do Sul como requisito parcial para obtenção do título de Mestre em [denominação do título --- preencher]. Área de concentração: [preencher]. Linha de pesquisa: [preencher].}
+\hypersetup{hidelinks,pdftitle={Roteamento inspirado em atenção: formalização do núcleo matemático em Lean 4 e avaliação empírica interna},pdfauthor={Marcelo Claro Laranjeira},pdfsubject={Dissertação: revisão editorial e normativa para submissão},pdfkeywords={Lean 4; verificação formal; roteamento; atenção; avaliação empírica}}
+\begin{document}
+\frenchspacing
+\hypersetup{pageanchor=false}
+\begin{capa}
+\begin{center}
+\imprimirinstituicao\par
+Programa de Pós-Graduação em [nome do programa --- preencher]\par
+\vspace{2cm}
+\imprimirautor\par
+\vfill
+\textbf{\MakeUppercase{\imprimirtitulo}}\par
+\vfill
+\imprimirlocal\par
+\imprimirdata
+\end{center}
+\end{capa}
+\setcounter{page}{1}
+\begin{folhaderosto}
+\begin{center}
+\imprimirautor\par
+\vfill
+\textbf{\imprimirtitulo}\par
+\vfill
+\end{center}
+\noindent\hspace*{0.5\textwidth}\begin{minipage}{0.5\textwidth}
+\SingleSpacing
+\imprimirpreambulo\par\vspace{\baselineskip}
+Orientação: \imprimirorientador.
+\end{minipage}
+\vfill
+\begin{center}\imprimirlocal\par\imprimirdata\end{center}
+\end{folhaderosto}
+% Ficha imediatamente após o rosto; esta página não entra na contagem.
+\thispagestyle{empty}\vspace*{\fill}
+\begin{center}\begin{minipage}{0.8\textwidth}\SingleSpacing
+\textbf{Ficha catalográfica}\par
+[Inserir a ficha emitida pelo serviço de catalogação da instituição após a confirmação dos dados autorais e da versão final.]
+\end{minipage}\end{center}
+\vspace*{\fill}\clearpage\addtocounter{page}{-1}
+\begin{folhadeaprovacao}
+\begin{center}\imprimirautor\par\vspace{\baselineskip}\textbf{\imprimirtitulo}\end{center}
+\vspace{\baselineskip}
+\noindent\hspace*{0.5\textwidth}\begin{minipage}{0.5\textwidth}\SingleSpacing\imprimirpreambulo\end{minipage}
+\vspace{2\baselineskip}
+\noindent Data da aprovação: [preencher somente após a defesa].\par
+\noindent Banca examinadora: [nomes, titulações, instituições e assinaturas --- preencher].\par
+\vspace{2\baselineskip}
+\noindent [A aprovação e as assinaturas ainda não foram registradas nesta versão.]
+\end{folhadeaprovacao}
+\begin{agradecimentos}
+Às comunidades Lean e Mathlib, pela manutenção das ferramentas e bibliotecas utilizadas, e às iniciativas de ciência aberta que apoiam a documentação e a consulta das fontes deste trabalho.
+\end{agradecimentos}
+\begin{resumo}
+Este trabalho investiga a formalização do núcleo matemático e a avaliação empírica interna de um mecanismo de roteamento de tarefas entre agentes de software, inspirado na ponderação por atenção. A pesquisa combina provas em Lean 4 com Mathlib, inspeção dos artefatos de execução, uma bancada sintética e testes aleatórios de propriedades numéricas. Os registros locais documentam onze lemas sobre normalização do softmax, limites de combinações convexas, existência de maximizador finito, invariância a deslocamento, pesos positivos, caso de candidato único, monotonicidade, ordenação top-\textit{k}, temperatura e limite superior da exponencial após deslocamento. As provas referem-se à aritmética real exata e não certificam integralmente a implementação em ponto flutuante. Na bancada principal, com 200 decisões distribuídas por cinco sementes, o arrependimento médio registrado foi $0{,}042$, com margem exploratória de $0{,}011$, frente a valores entre $0{,}19$ e $0{,}22$ dos comparadores simples. Ablações em um conjunto distinto de instâncias indicam dependência da confiança, construída como proxy da qualidade latente. A variação do parâmetro do oráculo apenas reescala a perda entre candidatos plenamente elegíveis. Os intervalos desconsideram o agrupamento por piscina de agentes e devem ser interpretados como resumos exploratórios. O relatório numérico registra 20\,000 vetores sem violações acima das tolerâncias examinadas. Conclui-se que os artefatos sustentam propriedades do modelo abstrato e resultados preliminares no simulador, permanecendo pendentes a certificação numérica completa, a análise estatística com agrupamento, a comparação externa e a reprodução independente.
+\par\vspace{\baselineskip}
+\noindent\textbf{Palavras-chave:} roteamento de agentes; atenção; Lean 4; verificação formal; avaliação empírica; reprodutibilidade.
+\end{resumo}
+\begin{resumo}[Abstract]
+\begin{otherlanguage*}{english}
+This dissertation investigates the formalization of the mathematical core and the internal empirical evaluation of a task router for software agents inspired by attention-based weighting. The study combines proofs in Lean 4 with Mathlib, inspection of execution artifacts, a synthetic benchmark, and randomized tests of numerical properties. Local records document eleven lemmas on softmax normalization, convex-combination bounds, existence of a finite maximizer, shift invariance, positive weights, the singleton case, monotonicity, top-\textit{k} ordering, temperature, and an upper bound on shifted exponentials. The proofs concern exact real arithmetic and do not fully certify the floating-point implementation. In the main benchmark, comprising 200 decisions across five seeds, recorded mean regret was $0.042$, with an exploratory margin of $0.011$, compared with values between $0.19$ and $0.22$ for simple baselines. Ablations on a distinct set of instances indicate dependence on confidence, which was constructed as a proxy for latent quality. Changing the oracle parameter only rescales regret among fully eligible candidates. The reported intervals disregard clustering within agent pools and should be interpreted as exploratory summaries. The numerical report records 20,000 vectors with no violations above the tested tolerances. The artifacts support properties of the abstract model and preliminary findings within the simulator. Full numerical certification, statistical analysis accounting for clustering, external comparison, and independent reproduction remain pending.
+\par\vspace{\baselineskip}
+\noindent\textbf{Keywords:} agent routing; attention; Lean 4; formal verification; empirical evaluation; reproducibility.
+\end{otherlanguage*}
+\end{resumo}
+\pdfbookmark[0]{Lista de tabelas}{lot}
+\listoftables*
+\begin{siglas}
+\item[ABNT] Associação Brasileira de Normas Técnicas
+\item[IC] Intervalo de confiança
+\item[IEEE] Institute of Electrical and Electronics Engineers
+\item[JSON] JavaScript Object Notation
+\item[MCP] Model Context Protocol
+\item[OSF] Open Science Framework
+\item[PUCRS] Pontifícia Universidade Católica do Rio Grande do Sul
+\item[Q/K/V] Consulta, chave e valor (\textit{query, key, value})
+\item[SDD] Desenvolvimento orientado a especificação
+\item[SMT] Satisfatibilidade módulo teorias
+\item[TDD] Desenvolvimento orientado a testes
+\end{siglas}
+\begin{simbolos}
+\item[$w_i$] Peso de atenção do candidato $i$
+\item[$f_i$] Escore do candidato $i$
+\item[$\tau$] Temperatura positiva do softmax
+\item[$q$] Qualidade latente do agente no simulador
+\item[$q_w$] Peso da qualidade no oráculo sintético
+\item[$u(a)$] Utilidade combinada do candidato $a$
+\item[$\alpha_h$] Peso fixo da cabeça $h$
+\end{simbolos}
+\pdfbookmark[0]{Sumário}{toc}
+\tableofcontents*
+\clearpage
+\textual
+\pagestyle{abntsubmissao}\aliaspagestyle{chapter}{abntsubmissao}
+\hypersetup{pageanchor=true}
+\input{modulos/01-introducao}
+\input{modulos/02a-preliminares}
+\input{modulos/02f-nucleo-matematico}
+\input{modulos/02g-curso-embutido}
+\input{modulos/02-fundamentacao}
+\input{modulos/02b-contexto-atencao}
+\input{modulos/02c-lean-tutorial}
+\input{modulos/02d-trabalhos-relacionados}
+\input{modulos/03-metodo}
+\input{modulos/03b-estatistica}
+\input{modulos/04-provas}
+\input{modulos/04b-provas-detalhadas}
+\input{modulos/05-calibracao}
+\input{modulos/05b-estudo-caso-reais}
+\input{modulos/05c-estrategias}
+\input{modulos/06-discussao}
+\input{modulos/06b-arguicoes}
+\input{modulos/07-conclusao}
+\postextual
+\begin{SingleSpacing}
+\raggedright
+\input{modulos/08-referencias}
+\end{SingleSpacing}
+\input{modulos/10-apendice-glossario}
+\input{modulos/09-apendices}
+\end{document}
