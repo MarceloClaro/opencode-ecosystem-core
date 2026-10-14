@@ -1,0 +1,154 @@
+# INCLUSÃO DE CRIANÇAS COM DEFICIÊNCIA NA EDUCAÇÃO INFANTIL: BARREIRAS INSTITUCIONAIS, PRÁTICAS PEDAGÓGICAS E PERSPECTIVAS DE EQUIDADE
+
+**Antônia Francivalda Oliveira Marques Evangelista**¹
+E-mail: francivaldaoliveiramarques@gmail.com
+
+¹ [INFORMAR afiliação institucional completa, cidade/UF e ORCID antes da submissão. Ex.: Universidade [...] – ORCID: https://orcid.org/0000-0000-0000-0000]
+
+## Resumo
+
+Este artigo analisa os desafios e as possibilidades da inclusão de crianças com deficiência na Educação Infantil brasileira, com ênfase nas condições institucionais, na formação docente e nas práticas pedagógicas. Adota-se abordagem qualitativa, fundamentada em revisão bibliográfica narrativa e análise documental da legislação educacional. A discussão organiza-se em quatro eixos: fundamentos da educação inclusiva; direito à educação e marcos normativos; barreiras à participação e à aprendizagem; e estratégias pedagógicas e institucionais de inclusão. A literatura examinada sugere que a matrícula, isoladamente, não assegura participação efetiva, sendo necessárias acessibilidade, planejamento pedagógico flexível, apoio especializado, colaboração entre profissionais e diálogo com as famílias. Evidencia-se, ainda, que a formação continuada não deve ser tratada como responsabilidade individual do professor, mas como parte de políticas institucionais de apoio. Conclui-se que a efetivação da inclusão pressupõe articulação entre direitos, recursos, organização escolar e acompanhamento das experiências e aprendizagens das crianças. Por se tratar de revisão narrativa sem protocolo sistemático documentado, os achados constituem síntese interpretativa, sem pretensão de estimar prevalência de barreiras ou de mensurar causalmente a eficácia de intervenções.
+
+**Palavras-chave:** Educação inclusiva; Educação Infantil; Crianças com deficiência; Formação docente; Acessibilidade pedagógica.
+
+## Abstract
+
+This article examines the challenges and possibilities of including children with disabilities in Brazilian early childhood education, focusing on institutional conditions, teacher education and pedagogical practices. It adopts a qualitative approach, based on a narrative literature review and documentary analysis of educational legislation. The discussion is organized into four themes: foundations of inclusive education; the right to education and regulatory frameworks; barriers to participation and learning; and pedagogical and institutional inclusion strategies. The literature discussed suggests that enrollment alone does not ensure meaningful participation, which also requires accessibility, flexible pedagogical planning, specialized support, collaboration among professionals and dialogue with families. It further indicates that continuing professional development should be treated not as an individual teacher's responsibility, but as part of institutional support policies. The article concludes that effective inclusion depends on integrating rights, resources, school organization and ongoing monitoring of children's experiences and learning. As a narrative review without a documented systematic protocol, its findings are interpretive and do not establish the prevalence of barriers or the causal effectiveness of interventions.
+
+**Keywords:** Inclusive education; Early childhood education; Children with disabilities; Teacher education; Pedagogical accessibility.
+
+## 1 Introdução
+
+A Educação Infantil constitui a primeira etapa da Educação Básica e representa um contexto decisivo para a ampliação das experiências de convivência, brincadeira, expressão e aprendizagem. Nessa etapa, a inclusão de crianças com deficiência não pode ser reduzida à matrícula ou à presença física em turmas comuns: implica assegurar condições reais de participação nas interações cotidianas, de acesso às propostas pedagógicas e de reconhecimento das diferentes maneiras de comunicar, explorar e construir conhecimentos.
+
+Embora o ordenamento jurídico brasileiro reconheça a educação como direito de todos, a construção de ambientes educacionais inclusivos continua a demandar transformações na infraestrutura, na organização escolar e nas concepções de ensino. A discussão sobre as barreiras à inclusão deve evitar que dificuldades institucionais sejam atribuídas às próprias crianças. Sob a perspectiva social da deficiência, o foco analítico desloca-se das supostas limitações individuais para as condições que restringem o exercício de direitos e a participação educacional.
+
+Mantoan (2003) destaca a necessidade de revisar concepções e práticas escolares excludentes, enquanto Pletsch (2009) examina as relações entre formação docente, políticas e inclusão educacional. Essas contribuições permitem reconhecer que uma escola inclusiva demanda mais do que iniciativas isoladas: pressupõe compromisso institucional, organização do trabalho pedagógico e suporte aos profissionais.
+
+A questão orientadora deste estudo é: quais barreiras institucionais e pedagógicas dificultam a inclusão de crianças com deficiência na Educação Infantil e quais estratégias, identificadas na literatura e na legislação, podem favorecer sua participação e aprendizagem? O objetivo geral é analisar criticamente tais barreiras e possibilidades. Como objetivos específicos, busca-se: (a) discutir os fundamentos da inclusão nessa etapa; (b) examinar os principais marcos normativos brasileiros; (c) identificar desafios relacionados a recursos, formação e organização pedagógica; e (d) sistematizar orientações para práticas escolares mais acessíveis.
+
+A contribuição pretendida é integrar dimensões normativas e pedagógicas em uma análise orientada pelo direito à participação. A revisão não apresenta dados empíricos originais nem pretende demonstrar a eficácia causal de estratégias específicas; sua finalidade é reunir e problematizar argumentos relevantes para pesquisas e decisões educacionais.
+
+A estrutura do artigo compreende: fundamentação teórica e normativa; metodologia; síntese e discussão dos eixos analisados; e considerações finais com limites e agenda de pesquisa.
+
+## 2 Fundamentação teórica e normativa
+
+### 2.1 Inclusão, infância e participação
+
+A inclusão na Educação Infantil pressupõe reconhecer cada criança como sujeito de direitos, cuja participação nas experiências pedagógicas deve ser planejada sem a exigência de adaptação unilateral a um padrão único de desenvolvimento. A convivência com diferentes modos de aprender e comunicar pode ampliar as oportunidades de interação, desde que mediada por práticas respeitosas e adequadas às singularidades infantis.
+
+A compreensão sociocultural do desenvolvimento, associada às contribuições de Vigotski (2010), permite atribuir centralidade às interações sociais, às mediações e às condições de aprendizagem. Tal perspectiva não significa desconsiderar necessidades específicas, mas evitar que diagnósticos sejam utilizados como explicação única para os percursos educativos.
+
+Para a Educação Infantil, a inclusão deve articular brincadeiras, interações, linguagens, exploração de espaços e participação em atividades coletivas. A flexibilização de tempos, materiais, formas de comunicação e propostas pode beneficiar diferentes crianças. Não se trata de substituir o currículo por tarefas segregadas, mas de diversificar os meios de acesso e participação.
+
+### 2.2 Direitos educacionais e mudanças no marco legal
+
+A Constituição Federal de 1988 estabelece a educação como direito social (BRASIL, 1988), e a Lei n. 9.394/1996 organiza as bases da educação nacional e da Educação Especial (BRASIL, 1996). A Convenção sobre os Direitos das Pessoas com Deficiência, promulgada no Brasil pelo Decreto n. 6.949/2009, reforça o compromisso com o sistema educacional inclusivo, em igualdade de oportunidades (BRASIL, 2009). A Lei n. 13.146/2015, Lei Brasileira de Inclusão, consolida deveres de acessibilidade, apoio e não discriminação (BRASIL, 2015).
+
+A Política Nacional de Educação Especial na Perspectiva da Educação Inclusiva (BRASIL, 2008) constitui marco histórico para a compreensão das mudanças no atendimento educacional. O Plano Nacional de Educação aprovado pela Lei n. 13.005/2014 incluiu, em sua Meta 4, objetivos voltados ao acesso à Educação Básica e ao atendimento educacional especializado para o público da educação especial (BRASIL, 2014). Cumpre distinguir esse plano do Decreto n. 7.611/2011, que disciplinava a educação especial e o atendimento educacional especializado e foi expressamente revogado pelo Decreto n. 12.686/2025.
+
+No marco normativo mais recente, o Decreto n. 12.686, de 20 de outubro de 2025, institui a Política Nacional de Educação Especial Inclusiva e a Rede Nacional de Educação Especial Inclusiva, com alterações promovidas pelo Decreto n. 12.773, de 8 de dezembro de 2025 (BRASIL, 2025a, 2025b). Sua abordagem explicita a articulação entre acesso, permanência, participação, aprendizagem, acessibilidade, apoio educacional e enfrentamento da discriminação, incluindo o capacitismo. Entre os pontos enfatizados na regulamentação destacam-se a oferta transversal da educação especial, a garantia de atendimento educacional especializado complementar ou suplementar — sem substituir a matrícula em classe comum — e a previsão de apoio a partir de avaliação pedagógica. A interpretação dos dispositivos requer consulta às versões vigentes e atenção à implementação pelos sistemas de ensino, inclusive quanto à regulamentação complementar por portaria do Ministério da Educação.
+
+Essas normas definem obrigações e princípios, mas não demonstram, por si sós, que a inclusão esteja plenamente efetivada. O problema analítico central reside em compreender como direitos formalmente assegurados se materializam nas condições concretas de escolarização e na rotina das instituições.
+
+### 2.3 Formação docente e organização institucional
+
+A formação dos profissionais constitui dimensão estratégica da educação inclusiva. Pletsch (2009) chama a atenção para as tensões entre as diretrizes de inclusão, os percursos formativos e as condições concretas de atuação. Uma leitura crítica dessa relação impede responsabilizar exclusivamente o professor por dificuldades que envolvem planejamento, recursos, gestão e políticas educacionais.
+
+A formação continuada tende a ser mais relevante quando vinculada aos desafios cotidianos das instituições e desenvolvida por meio de estudo de casos pedagógicos, planejamento colaborativo, acompanhamento das práticas e diálogo com profissionais do atendimento educacional especializado. Sua efetividade, entretanto, depende de tempo de trabalho, condições materiais e ações coordenadas pela gestão escolar e pelas redes de ensino.
+
+A colaboração com as famílias também integra a inclusão, desde que não lhes transfira responsabilidades que competem ao poder público e às instituições escolares. Escuta, comunicação acessível e corresponsabilidade podem contribuir para a identificação de barreiras e para o acompanhamento dos percursos das crianças.
+
+### 2.4 Barreiras estruturais, atitudinais e pedagógicas
+
+As barreiras estruturais incluem obstáculos de circulação, ambientes e mobiliário inadequados e ausência de materiais acessíveis. As barreiras pedagógicas manifestam-se em propostas rigidamente padronizadas, avaliações pouco sensíveis aos diferentes modos de participação e insuficiência de recursos de comunicação. Barreiras atitudinais decorrem de estereótipos, baixas expectativas e práticas discriminatórias, incluindo o capacitismo.
+
+Essas dimensões interagem entre si. Um recurso de comunicação alternativa, por exemplo, será pouco efetivo quando não houver planejamento para seu uso nas interações e brincadeiras. De modo semelhante, equipamentos e serviços não substituem a necessidade de condições concretas para participação nas atividades comuns.
+
+Em vez de compreender a inclusão como esforço para tornar todas as crianças semelhantes, é mais produtivo examiná-la como reorganização das condições de ensino para acolher diferenças legítimas e garantir oportunidades equitativas. Isso requer planejamento institucional e monitoramento contínuo das barreiras presentes nas práticas escolares.
+
+## 3 Metodologia
+
+Este trabalho caracteriza-se como revisão bibliográfica narrativa, de abordagem qualitativa, complementada por análise documental de marcos normativos. Seu objeto são os argumentos científicos e os princípios legais relacionados à inclusão de crianças com deficiência na Educação Infantil brasileira.
+
+As fontes bibliográficas foram localizadas no Google Acadêmico, na SciELO e no Portal de Periódicos CAPES. As expressões de busca, as datas de consulta, os critérios formais de elegibilidade e o número de publicações triadas não foram registrados de forma sistemática. Por essa razão, não se reivindica caráter sistemático, exaustividade da recuperação bibliográfica ou reprodutibilidade plena do processo de seleção, nos termos de diretrizes como PRISMA. Recomenda-se que, em versão futura, sejam documentados protocolo de busca, recorte temporal efetivo, fluxograma de seleção e lista de incluídos e excluídos.
+
+A organização interpretativa do material segue quatro eixos: (a) fundamentos e participação; (b) direitos e normas; (c) barreiras à inclusão; e (d) possibilidades pedagógicas e institucionais. A discussão contrapõe prescrições normativas e desafios relatados na literatura, com vistas a identificar implicações para o planejamento escolar. Não foram realizadas entrevistas, observações, aplicação de instrumentos ou análises estatísticas.
+
+Por não envolver participantes humanos nem dados primários, o estudo não foi submetido a Comitê de Ética em Pesquisa, nos termos da Resolução n. 510/2016 do Conselho Nacional de Saúde para pesquisas com dados públicos e documentais. Como limitação, registra-se a impossibilidade de aferir a abrangência da literatura recuperada ou de generalizar frequências e efeitos. Os resultados devem ser lidos como síntese interpretativa.
+
+## 4 Resultados da síntese e discussão
+
+### 4.1 O acesso à escola não equivale à inclusão
+
+A articulação entre a literatura discutida e os marcos normativos permite distinguir três dimensões que frequentemente são tratadas como equivalentes: acesso, permanência e participação com aprendizagem. A matrícula representa um ponto de partida, mas a inclusão exige oportunidades efetivas para tomar parte nas atividades comuns, comunicar necessidades, interagir com outras crianças e construir conhecimentos. Essa distinção possui implicações relevantes para a avaliação da qualidade educacional.
+
+A existência de políticas públicas deve, portanto, ser acompanhada de análise das práticas cotidianas. Quando o planejamento ignora diferenças de comunicação, mobilidade ou ritmo, a criança pode permanecer formalmente matriculada sem acessar plenamente as experiências proporcionadas aos demais integrantes do grupo.
+
+### 4.2 Formação e recursos são condições articuladas
+
+A literatura examinada destaca a importância da formação docente, mas também aponta que conhecimentos profissionais não operam de forma independente das condições de trabalho. Ações pontuais de capacitação, desacompanhadas de apoio técnico, gestão participativa e materiais adequados, tendem a ter alcance limitado. Inversamente, a presença de recursos não garante inclusão quando estes não são integrados intencionalmente às práticas.
+
+A principal implicação é a necessidade de planejamento colaborativo entre docentes, coordenação pedagógica, profissionais do atendimento educacional especializado e demais agentes educacionais, respeitadas as atribuições de cada um. Essa articulação pode favorecer a identificação de barreiras e a definição de apoios, sem retirar das crianças as experiências compartilhadas com o grupo.
+
+### 4.3 Estratégias pedagógicas e acompanhamento
+
+Entre as possibilidades discutidas estão a flexibilização do planejamento, a diversificação das formas de expressão e participação, o uso contextualizado de recursos de acessibilidade e comunicação alternativa, a adequação de ambientes e a valorização das interações e brincadeiras. O atendimento educacional especializado deve ser compreendido de maneira articulada à escolarização, respeitada sua finalidade complementar ou suplementar, conforme o público atendido e a legislação aplicável.
+
+O acompanhamento pedagógico pode observar não apenas a realização de tarefas, mas a participação em atividades coletivas, a comunicação, a autonomia possível, as oportunidades de interação e a ampliação das experiências de aprendizagem. Para tanto, são necessários registros contextualizados e revisão periódica das ações desenvolvidas, evitando interpretações baseadas exclusivamente em diagnósticos.
+
+### 4.4 Síntese das implicações institucionais
+
+O Quadro 1 sistematiza, em caráter interpretativo, as relações entre dimensões da inclusão, barreiras recorrentes na literatura e estratégias discutidas. Não se trata de resultado de pesquisa de campo, mas de proposição analítica para orientar planejamento e avaliação institucional.
+
+**Quadro 1 – Síntese interpretativa: dimensões, barreiras e estratégias para inclusão na Educação Infantil**
+
+| Dimensão | Barreiras recorrentes na literatura | Estratégias discutidas |
+|---|---|---|
+| Acesso, permanência e participação | Matrícula sem participação efetiva; planejamento padronizado; avaliação pouco sensível a diferentes modos de comunicar e participar | Diferenciação de meios de acesso sem segregação curricular; observação da participação em atividades comuns; revisão periódica de barreiras |
+| Recursos e acessibilidade | Ausência de materiais acessíveis; ambientes e mobiliário inadequados; uso descontextualizado de tecnologia assistiva | Adequação de ambientes; disponibilização e uso planejado de recursos de acessibilidade e comunicação alternativa nas brincadeiras e interações |
+| Formação e trabalho docente | Capacitações pontuais desvinculadas do cotidiano; responsabilização individual do professor; falta de tempo para planejamento coletivo | Formação continuada vinculada a casos pedagógicos reais; planejamento colaborativo; articulação com AEE, coordenação e gestão |
+| Gestão institucional e famílias | Fragmentação entre setores; comunicação pouco acessível; transferência indevida de responsabilidades às famílias | Gestão participativa; definição de atribuições; escuta e comunicação acessível com famílias; corresponsabilidade sem substituição do dever estatal |
+
+Fonte: Elaboração da autora a partir da bibliografia e dos documentos normativos discutidos neste artigo (2026).
+
+Nota: O quadro apresenta proposições interpretativas derivadas de revisão narrativa; sua aplicabilidade e seus efeitos demandam verificação empírica em diferentes redes e instituições.
+
+Em conjunto, esses eixos sustentam a compreensão da inclusão como processo institucional contínuo, cujo alcance não pode ser inferido apenas da existência de normas ou de iniciativas individuais.
+
+## 5 Considerações finais
+
+O estudo teve como objetivo analisar os desafios e as possibilidades da inclusão de crianças com deficiência na Educação Infantil, relacionando fundamentos teóricos, políticas educacionais e condições institucionais de ensino. A síntese aponta que a garantia do acesso escolar, embora indispensável, não assegura isoladamente participação, pertencimento e aprendizagem em condições de equidade.
+
+Os obstáculos analisados incluem barreiras físicas, pedagógicas e atitudinais, insuficiência de materiais acessíveis, fragilidades na formação continuada e limitações na articulação entre profissionais e setores responsáveis pela educação. Tais desafios não devem ser tratados como deficiências individuais dos estudantes ou como responsabilidades exclusivas dos docentes: envolvem decisões de gestão, prioridades de financiamento e organização do trabalho educativo.
+
+Entre as possibilidades de enfrentamento, destacam-se o planejamento pedagógico flexível, o uso contextualizado de recursos de acessibilidade, o apoio especializado integrado às experiências comuns, a formação continuada no cotidiano escolar e a comunicação colaborativa com as famílias. Essas medidas devem ser acompanhadas por registros de participação, observação pedagógica e revisão das barreiras identificadas.
+
+Do ponto de vista científico, a contribuição do artigo consiste na sistematização crítica dessas dimensões e na distinção entre previsão normativa e efetivação escolar. Reconhece-se, contudo, que o caráter narrativo da revisão e a ausência de documentação completa da estratégia de busca limitam a reprodutibilidade e impedem generalizações sobre a frequência dos problemas ou a eficácia das propostas.
+
+Recomenda-se, em investigações futuras, o desenvolvimento de estudos empíricos e de revisões com protocolos transparentes, capazes de examinar como as estratégias inclusivas são implementadas, quais apoios são disponibilizados e como as experiências das crianças e das famílias são consideradas. Assim, a inclusão na Educação Infantil deixa de ser compreendida apenas como obrigação formal e passa a constituir responsabilidade pedagógica, política e institucional, orientada pela participação efetiva de todas as crianças.
+
+## Referências
+
+BRASIL. Constituição da República Federativa do Brasil de 1988. Brasília, DF: Presidência da República, 1988. Disponível em: https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm. Acesso em: 9 out. 2026.
+
+BRASIL. Lei n. 9.394, de 20 de dezembro de 1996. Estabelece as diretrizes e bases da educação nacional. Brasília, DF: Presidência da República, 1996. Disponível em: https://www.planalto.gov.br/ccivil_03/leis/l9394.htm. Acesso em: 9 out. 2026.
+
+BRASIL. Ministério da Educação. Política Nacional de Educação Especial na Perspectiva da Educação Inclusiva. Brasília, DF: MEC, 2008. Disponível em: http://portal.mec.gov.br/arquivos/pdf/politicaeducespecial.pdf. Acesso em: 9 out. 2026.
+
+BRASIL. Decreto n. 6.949, de 25 de agosto de 2009. Promulga a Convenção Internacional sobre os Direitos das Pessoas com Deficiência e seu Protocolo Facultativo. Brasília, DF: Presidência da República, 2009. Disponível em: https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2009/decreto/d6949.htm. Acesso em: 9 out. 2026.
+
+BRASIL. Lei n. 13.005, de 25 de junho de 2014. Aprova o Plano Nacional de Educação – PNE e dá outras providências. Brasília, DF: Presidência da República, 2014. Disponível em: https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2014/lei/l13005.htm. Acesso em: 9 out. 2026.
+
+BRASIL. Lei n. 13.146, de 6 de julho de 2015. Institui a Lei Brasileira de Inclusão da Pessoa com Deficiência (Estatuto da Pessoa com Deficiência). Brasília, DF: Presidência da República, 2015. Disponível em: https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13146.htm. Acesso em: 9 out. 2026.
+
+BRASIL. Decreto n. 12.686, de 20 de outubro de 2025. Institui a Política Nacional de Educação Especial Inclusiva e a Rede Nacional de Educação Especial Inclusiva. Brasília, DF: Presidência da República, 2025a. Disponível em: https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/decreto/D12686.htm. Acesso em: 9 out. 2026.
+
+BRASIL. Decreto n. 12.773, de 8 de dezembro de 2025. Altera o Decreto n. 12.686, de 20 de outubro de 2025. Brasília, DF: Presidência da República, 2025b. Disponível em: https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/decreto/D12773.htm. Acesso em: 9 out. 2026.
+
+MANTOAN, Maria Teresa Eglér. **Inclusão escolar: o que é? Por quê? Como fazer?** São Paulo: Moderna, 2003. [CONFIRMAR edição efetivamente consultada – há edições de 2003/Moderna e 2015/Summus; ajustar ano, editora e páginas citadas conforme exemplar em mãos].
+
+PLETSCH, Márcia Denise. A formação de professores para a educação inclusiva: legislação, diretrizes políticas e resultados de pesquisas. **Educar em Revista**, Curitiba, n. 33, p. 143-156, 2009. DOI: https://doi.org/10.1590/S0104-40602009000100010.
+
+VIGOTSKI, L. S. Aprendizagem e desenvolvimento intelectual na idade escolar. In: VIGOTSKII, L. S.; LURIA, A. R.; LEONTIEV, A. N. **Linguagem, desenvolvimento e aprendizagem**. Tradução Maria da Penha Villalobos. 11. ed. São Paulo: Ícone, 2010. p. 103-116. [CONFIRMAR edição efetivamente consultada; se utilizada edição anterior, ajustar ano, tradutor e paginação].
+
