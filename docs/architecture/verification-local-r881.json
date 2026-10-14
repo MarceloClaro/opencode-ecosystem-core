@@ -1,0 +1,130 @@
+{
+  "schema_version": "r881.local-verification.v1",
+  "checked_utc": "2026-10-14T04:38:39.938794+00:00",
+  "verification": "local_operation",
+  "external_validation": false,
+  "source_git": {
+    "commit": "6380cfaff4aac0dd940d42011826bb21126e5635",
+    "requested_ref": "6380cfaff4aac0dd940d42011826bb21126e5635",
+    "tree": "c48fa21de736075074d024f099bd9bdb192f0988"
+  },
+  "delivery_parent_at_verification": "a8ee9813c1c33e64b4a74d162cc47be49d4b75c5",
+  "doctor": {
+    "overall": "healthy",
+    "checks_passed": 22,
+    "checks_total": 22,
+    "verification": "installation_only",
+    "inference_checked": false
+  },
+  "counts": {
+    "ast_declarations": 1051,
+    "layers": 18,
+    "module_pairs": 935,
+    "modules": 677,
+    "packages": 45,
+    "symbols": 6432
+  },
+  "parity": {
+    "inventory_to_graphviz_to_mermaid_nodes_equal": true,
+    "inventory_to_graphviz_to_mermaid_pairs_equal": true,
+    "rendered_mermaid_svg_nodes_equal": true,
+    "rendered_mermaid_svg_pairs_equal": true,
+    "legend_excluded": true
+  },
+  "readme": {
+    "catalog_flows": 13,
+    "exact_source_copies": 13,
+    "total_mermaid_blocks": 19,
+    "rendered_svg_files": 19,
+    "relative_link_occurrences_checked": 185,
+    "missing_relative_targets": 0,
+    "all_19_rendered_svgs_inert_check_passed": true,
+    "flow_source_anchors": 78
+  },
+  "rendering": {
+    "cli": "@mermaid-js/mermaid-cli@12.0.0",
+    "engine": "12.2.0",
+    "full_svg_viewbox": "4 4 30410.078125 31070.494140625",
+    "config": "docs/architecture/mermaid-render-config.json",
+    "github_full_graph_rendering_verified": false,
+    "visual_inspection": [
+      "overview screenshot created",
+      "orchestrator detail screenshot inspected; labels and declared-import arrows legible when enlarged"
+    ],
+    "rendered_source_sha256": "cfc93ff052a093cd5b3a3b6164a5e0e2ae708d8937d33e654be96305fb6a4cce"
+  },
+  "tests": {
+    "scope": "R881 + regressões de README/mapas R127/R449/R455/R879 + inspeção de segredos no índice",
+    "new_contract_tests": 31,
+    "regressions_and_index_security": 46,
+    "junit_local_receipts": {
+      "mermaid-red.xml": {
+        "tests": 14,
+        "failures": 13,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 0.567,
+        "sha256": "9f90d17263d1506606c96309e18b8f23193cdeda19fa4661a5b6f779d4d021b3"
+      },
+      "readme-red.xml": {
+        "tests": 13,
+        "failures": 13,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 1.198,
+        "sha256": "9cdb498f1504013fe1309b18365c9a64aa2f9e564a87e7a6b17fe41efd69950a"
+      },
+      "destination-red.xml": {
+        "tests": 2,
+        "failures": 2,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 0.159,
+        "sha256": "86294dd0035affe4b3fd0221a6153ed39345e7840412f9a8cb8166ff39d5f169"
+      },
+      "release-green.xml": {
+        "tests": 77,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 57.834,
+        "sha256": "df5cbf8b3cf2b09d3bc2d0309a48306e1e602f2b48a4c22d3125e79ff86ed474"
+      }
+    },
+    "initial_red_scope": "Stub de exportação e sincronizador ainda ausente; não constitui RED autenticado de implementações históricas do Core.",
+    "review_regression_red": "Dois casos de destino igual, direto e symlink, falharam antes da correção.",
+    "local_logs_distributed": false,
+    "historical_authentication_claimed": false
+  },
+  "review": {
+    "method": "revisão independente por subagente Codex e testes executados localmente",
+    "findings_resolved": [
+      "Diretivas Mermaid em comentários JSON neutralizadas por escape Unicode e teste de roundtrip.",
+      "Destinos Mermaid/manifesto iguais, inclusive por symlink, recusados antes de escrever."
+    ],
+    "external_audit": false
+  },
+  "artifact_sha256": {
+    "README.md": "c99843d11c2c43598ad8e1dd8fee72cb5c3be9edefeb1866066811af4c49d575",
+    "scripts/build_mermaid_architecture.py": "25e64aca71b2df6e96c421665128482e5e1abf8daa7564bdf9d58215e1b5432b",
+    "scripts/sync_readme_flowcharts.py": "3ec28534dad9273131774d439c2b3d627e5cf319797994beba494cde948e065e",
+    "tests/test_r881_mermaid_integral.py": "5cdaa474311ad3f7ac4c0f79812f9584b3893a2de45166307f4983f285c67cc5",
+    "tests/test_r881_readme_flowcharts.py": "bb2af051330f0006fe663cae94c2e3b1452266b2d9ca80306fd5346c9ed018e4",
+    "specs/SPEC-935-R881-mermaid-integral-fluxogramas-readme.md": "dde61daf1ed73317b4a96397cc92c1033ff0fc929b0ae918cfe086327ae99120",
+    "docs/architecture/architecture-inventory.json": "75fe9e2cdd127e3ebb2916508b06453a6d5ce062a9b8a95821e94aca16da9fb0",
+    "docs/architecture/dependencies.svg": "f7f8c9ea40e9cb853c8305b513c6f5fcb67d646261b14c2c6b06d75319347b58",
+    "docs/architecture/dependencies.mmd": "cfc93ff052a093cd5b3a3b6164a5e0e2ae708d8937d33e654be96305fb6a4cce",
+    "docs/architecture/dependencies-mermaid.svg": "5deee56d41e804964bd65ca64df05485542acd100c46825f292f32f808c79b25",
+    "docs/architecture/mermaid-correspondence.json": "e3ef6bebff296240fda2e4bf0e2a30077a0f7af6f2bac3a564647f5b11b7e53b",
+    "docs/architecture/mermaid-render-config.json": "720bd98d818629ce3024102c2848b9c1b7bd6a7c4c06ed0580e7b9f04b61ff30",
+    "docs/architecture/MERMAID_INTEGRAL.md": "94186de04e15e9c1bf26a89d5bbc7517ad49362980bb47558b1b16538fc836da",
+    "docs/architecture/flows.json": "41365cd04ccbdffaa32ed823c97533ccc562348a9638496c17a68f45b7eaa86a"
+  },
+  "limitations": [
+    "O snapshot estrutural 6380cfa foi preservado; não é nova extração do HEAD.",
+    "Imports AST são dependências declaradas, sem comprovar execução.",
+    "Não foi reexecutada a suíte integral do Core nesta alteração documental/exportadora.",
+    "SVGs podem variar com versões do engine, Chromium e fontes.",
+    "Logs locais RED/GREEN não são atestação independente de um histórico TDD."
+  ]
+}
