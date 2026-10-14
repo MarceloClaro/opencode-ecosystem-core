@@ -1,9 +1,14 @@
 # Render Blueprint — reprodução RX / ODONTOCA (SPEC-935-R882)
 #
-# IMPORTANTE: defina o "Root Directory" do serviço como
+# NOTA (SPEC-935-R885): a Render só procura `render.yaml` na RAIZ do repositório,
+# então o blueprint CANÔNICO (com `rootDir`) está em `./render.yaml` (raiz). Este
+# arquivo aqui é a MESMA definição mantida junto do app, como referência
+# (contexto de build = este diretório) e para os testes — não é auto-detectado.
+#
+# Contexto de build (onde ficam o Dockerfile e o código):
 #   outputs/core-r853-rx/repro
-# (é onde ficam o Dockerfile e o contexto de build). Alternativamente, crie o
-# serviço manualmente no painel Render apontando esse diretório.
+# Alternativamente, crie o serviço manualmente no painel Render apontando esse
+# diretório como "Root Directory".
 services:
   - type: web
     name: odontoca-rx

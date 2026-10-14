@@ -43,8 +43,12 @@ Docker/Python. O código permanece no GitHub; só a *execução* vai para o host
    sem disco, o banco é recriado a cada deploy (dados de demonstração).
 6. Primeiro build leva ~2–4 min. A URL sai como `https://<nome>.onrender.com`.
 
-Atalho: o `repro/render.yaml` é um Blueprint — **New → Blueprint** (ajustando o
-Root Directory) já pré-configura healthcheck e env.
+Atalho (Blueprint): o **`render.yaml` na RAIZ do repositório** é o Blueprint
+canônico — a Render **só** procura `render.yaml` na raiz, nunca em subpastas.
+Use **New → Blueprint** → conecte o repo → ele já traz `rootDir:
+outputs/core-r853-rx/repro`, `healthCheckPath: /health` e as envs; não precisa
+preencher o Root Directory à mão. O `repro/render.yaml` é a **mesma** definição
+mantida junto do app (referência e testes), mas **não** é auto-detectado.
 
 > Plano Free hiberna após inatividade: o **primeiro** acesso depois disso é lento.
 > Para os motores `weights`/`open_base` (SAM/MedSAM reais) o Free **não** serve —

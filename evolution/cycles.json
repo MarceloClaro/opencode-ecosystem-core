@@ -20657,6 +20657,32 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R885",
+      "objective": "R885: corrigir a inconsistência do blueprint Render — a Render só procura render.yaml na RAIZ do repo; o arquivo estava só em repro/ e nunca seria auto-detectado por 'New → Blueprint'.",
+      "changes": [
+        "render.yaml na raiz (blueprint canônico) com rootDir: outputs/core-r853-rx/repro, runtime docker, healthCheckPath /health, envs RX_ENGINE/RX_HOST/RX_ADMIN_DB",
+        "repro/render.yaml: nota apontando para o canônico (mantida a definição junto do app p/ contexto e testes)",
+        "DEPLOY.md: 'Atalho (Blueprint)' corrigido — canônico na raiz; repro/ NÃO é auto-detectado",
+        "tests/test_r882_rx_deploy.py: novo teste de regressão test_render_blueprint_canonico_na_raiz_do_repo (verifica raiz + rootDir + /health)"
+      ],
+      "score": null,
+      "lessons": [
+        "Render só descobre render.yaml na raiz do repositório; em monorepo, o canônico fica na raiz com rootDir e mantém-se uma cópia junto do app para testes.",
+        "git check-ignore -v imprime padrões de negação que apenas 'casam'; o veredito é o exit code (1 = NÃO ignorado), não a linha impressa."
+      ],
+      "timestamp": 1791952328.7338684,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ]
 }

@@ -1,0 +1,35 @@
+# Render Blueprint (CANÔNICO) — SPEC-935-R885
+#
+# A Render procura o `render.yaml` na RAIZ do repositório (não em subpastas).
+# Por isso o blueprint canônico fica AQUI, e o contexto de build é apontado por
+# `rootDir`. A cópia em `outputs/core-r853-rx/repro/render.yaml` é mantida junto
+# do app como referência/testes, mas NÃO é detectada automaticamente pela Render.
+#
+# App: reprodução RX / ODONTOCA (FastAPI). Engine `stub` por padrão — roda no
+# container mínimo (sem torch/pesos). Healthcheck em /health.
+services:
+  - type: web
+    name: odontoca-rx
+    runtime: docker
+    plan: free
+    region: oregon
+    # Contexto de build (onde ficam Dockerfile, serve.py, backend/, frontend/).
+    rootDir: outputs/core-r853-rx/repro
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    autoDeploy: false
+    envVars:
+      # Demo: engine stub (sem pesos).
+      - key: RX_ENGINE
+        value: stub
+      # Render injeta PORT; 0.0.0.0 é obrigatório para receber tráfego externo.
+      - key: RX_HOST
+        value: 0.0.0.0
+      - key: RX_ADMIN_DB
+        value: /data/admin.db
+# Persistência opcional (paga): descomente e dimensione para manter o SQLite.
+#    disks:
+#      - name: dados
+#        mountPath: /data
+#        sizeGB: 1

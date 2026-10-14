@@ -86,6 +86,22 @@ def test_render_blueprint():
     assert "/health" in y
 
 
+def test_render_blueprint_canonico_na_raiz_do_repo():
+    """Regressão (SPEC-935-R885): a Render só descobre `render.yaml` na RAIZ.
+
+    O blueprint canônico precisa ficar na raiz e apontar o contexto de build via
+    `rootDir`; caso contrário "New → Blueprint" não encontra o arquivo (que, se
+    estiver só em repro/, nunca é detectado).
+    """
+    repo = Path(__file__).resolve().parents[1]
+    root_yaml = repo / "render.yaml"
+    assert root_yaml.is_file(), "render.yaml canônico ausente na raiz do repositório"
+    y = root_yaml.read_text(encoding="utf-8")
+    assert "runtime: docker" in y
+    assert "/health" in y
+    assert "rootDir: outputs/core-r853-rx/repro" in y
+
+
 def test_arquivos_de_deploy_nao_ignorados_pelo_git():
     """Deploy from GitHub exige que o runtime da reprodução esteja RASTREADO.
 
