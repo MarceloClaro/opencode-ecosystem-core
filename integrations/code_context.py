@@ -13,6 +13,7 @@ import os
 import re
 import shutil
 import signal
+import sqlite3
 import subprocess
 import tarfile
 import tempfile
@@ -36,6 +37,14 @@ MAX_FILE_BYTES = 512 * 1024
 MAX_CORPUS_BYTES = 32 * 1024 * 1024
 MAX_FILES = 2000
 MAX_RESPONSE_BYTES = 64 * 1024
+_SQLITE_COLUMNS = {
+    "files": {"id": "INTEGER", "repo_name": "TEXT", "path": "TEXT", "content_hash": "TEXT", "last_indexed": "TIMESTAMP", "size_bytes": "INTEGER"},
+    "symbols": {"id": "INTEGER", "repo_name": "TEXT", "name": "TEXT", "qualified_name": "TEXT", "kind": "TEXT", "file_path": "TEXT", "content_hash": "TEXT", "code_block": "TEXT", "start_line": "INTEGER", "end_line": "INTEGER", "language": "TEXT", "indexed_at": "TIMESTAMP"},
+    "vec_symbols": {"symbol_id": "INTEGER", "repo_name": "TEXT", "embedding": "BLOB"},
+    "fts_symbols": {key: "" for key in ("symbol_id", "repo_name", "name", "qualified_name", "kind", "signature", "extra_keywords")},
+    "memories": {"id": "INTEGER", "symbol_id": "INTEGER", "note": "TEXT", "author": "TEXT", "is_stale": "BOOLEAN", "stale_reason": "TEXT", "last_known_symbol": "TEXT", "last_known_file": "TEXT", "created_at": "TIMESTAMP", "updated_at": "TIMESTAMP"},
+    "vec_meta": {"key": "TEXT", "value": "TEXT"},
+}
 
 
 def _digest(data: bytes) -> str:
@@ -256,7 +265,7 @@ class CodeContextProvider:
             files, _, _ = self._source_files()
             for value in files.values():
                 value.pop("_data")
-            if manifest.get("head") != self._git("rev-parse", "HEAD").decode().strip() or manifest.get("files") != files:
+            if manifest.get("files") != files:
                 return False
             if corpus is not None:
                 corpus = Path(corpus)
@@ -327,14 +336,105 @@ class CodeContextProvider:
         manifest = json.loads((generation / "manifest.json").read_text())
         return generation, manifest
 
+    def _audit_index(self, generation, manifest, log_path):
+        """Confere os dados persistidos; code=0/ping não demonstram índice íntegro."""
+        expected = manifest["files"]
+        audit = {"schema_version": 1, "complete": False, "expected_files": len(expected),
+                 "indexed_files": 0, "stats": {}, "log_name": Path(log_path).name}
+        try:
+            _no_symlinks(Path(log_path))
+            text = Path(log_path).read_text(encoding="utf-8", errors="replace").rsplit("Indexing complete:", 1)[-1]
+            labels = {"Files discovered": "discovered", "Files indexed": "indexed", "Files unchanged": "unchanged",
+                      "Files deleted": "deleted", "Files skipped": "skipped", "Errors": "errors"}
+            for label, key in labels.items():
+                match = re.search(r"^\s*" + re.escape(label) + r":\s*(\d+)\s*$", text, flags=re.MULTILINE)
+                if match:
+                    audit["stats"][key] = int(match.group(1))
+            db_path = generation / "work" / "index.db"
+            _no_symlinks(db_path)
+            connection = sqlite3.connect(db_path.resolve().as_uri() + "?mode=ro", uri=True, timeout=2)
+            try:
+                for table, required_columns in _SQLITE_COLUMNS.items():
+                    columns = connection.execute(f"PRAGMA table_info({table})").fetchall()
+                    if {column[1]: column[2].upper() for column in columns} != required_columns:
+                        raise ValueError("schema SQLite incompatível com a revisão fixada")
+                    if table in {"files", "symbols", "memories"} and not any(column[1] == "id" and column[5] == 1 for column in columns):
+                        raise ValueError("chave primária SQLite incompatível")
+                    table_sql = connection.execute("SELECT type,sql FROM sqlite_master WHERE name=?", (table,)).fetchone()
+                    if not table_sql or table_sql[0] != "table" or (table == "fts_symbols" and "using fts5" not in table_sql[1].lower()):
+                        raise ValueError("tipo SQLite incompatível")
+                rows = connection.execute("SELECT repo_name,path,content_hash,size_bytes FROM files LIMIT ?", (MAX_FILES + 1,)).fetchall()
+                audit["indexed_files"] = len(rows)
+                indexed = {path: {"sha256": sha, "bytes": size} for repo, path, sha, size in rows if repo == "corpus"}
+                mismatches = [path for path in sorted(set(expected) | set(indexed)) if expected.get(path) != indexed.get(path)]
+                audit["missing_or_changed"] = mismatches[:20]
+                audit["missing_or_changed_count"] = len(mismatches)
+                stats = audit["stats"]
+                stats_ok = set(stats) == set(labels.values()) and stats["discovered"] == len(expected) and stats["indexed"] + stats["unchanged"] == len(expected) and not any(stats[k] for k in ("deleted", "skipped", "errors"))
+                files_ok = not mismatches and len(rows) == len(expected) and len(indexed) == len(rows)
+                if files_ok and stats_ok:
+                    counts = {name: connection.execute(f"SELECT COUNT(*) FROM {name}").fetchone()[0]
+                              for name in ("symbols", "vec_symbols", "fts_symbols", "memories")}
+                    audit["table_counts"] = counts
+                    dimensions = connection.execute("SELECT value FROM vec_meta WHERE key='embedding_dim'").fetchall()
+                    foreign_symbols = connection.execute("SELECT COUNT(*) FROM symbols s LEFT JOIN files f ON f.repo_name=s.repo_name AND f.path=s.file_path WHERE f.id IS NULL").fetchone()[0]
+                    bad_vectors = connection.execute("SELECT COUNT(*) FROM vec_symbols v LEFT JOIN symbols s ON s.id=v.symbol_id AND s.repo_name=v.repo_name WHERE s.id IS NULL OR length(v.embedding)!=512").fetchone()[0]
+                    bad_fts = connection.execute("SELECT COUNT(*) FROM fts_symbols f LEFT JOIN symbols s ON s.id=f.symbol_id AND s.repo_name=f.repo_name WHERE s.id IS NULL").fetchone()[0]
+                    missing_vectors = connection.execute("SELECT COUNT(*) FROM symbols s LEFT JOIN vec_symbols v ON s.id=v.symbol_id AND s.repo_name=v.repo_name WHERE v.symbol_id IS NULL").fetchone()[0]
+                    missing_fts = connection.execute("SELECT COUNT(*) FROM (SELECT id,repo_name FROM symbols EXCEPT SELECT symbol_id,repo_name FROM fts_symbols)").fetchone()[0]
+                    audit["invalid_relationships"] = foreign_symbols + bad_vectors + bad_fts + missing_vectors + missing_fts
+                    audit["complete"] = counts["symbols"] == counts["vec_symbols"] == counts["fts_symbols"] and counts["memories"] == 0 and dimensions == [("128",)] and audit["invalid_relationships"] == 0
+                if not audit["complete"]:
+                    audit["reason"] = "Resumo nativo ou arquivos/hashes/embeddings SQLite não correspondem integralmente ao corpus."
+            finally:
+                connection.close()
+        except (OSError, ValueError, sqlite3.Error) as exc:
+            audit["reason"] = f"Auditoria local indisponível: {type(exc).__name__}"
+        return audit
+
+    def _current_quality(self, generation, manifest):
+        audit = manifest.get("index_audit", {})
+        name = audit.get("log_name", "")
+        if audit.get("schema_version") != 1 or not audit.get("complete") or not re.fullmatch(r"index(?:\.\d+)?\.stderr\.log", name):
+            return {"schema_version": 1, "complete": False, "reason": "Geração sem auditoria integral R889; reindexação explícita necessária."}
+        return self._audit_index(generation, manifest, generation / "work" / name)
+
+    def _pending_candidate(self, binary_sha256):
+        """Retoma somente cópias/arquivos/binário idênticos; nunca promove aqui."""
+        pointer_path = self.state_root / "pending.json"
+        _no_symlinks(pointer_path)
+        if not pointer_path.is_file():
+            return None
+        pointer = json.loads(pointer_path.read_text())
+        name = pointer.get("generation", "")
+        if not re.fullmatch(r"[a-f0-9]{32}", name):
+            raise ValueError("candidato pendente inválido")
+        generation = self.state_root / "generations" / name
+        draft = generation / "manifest-draft.json"
+        _no_symlinks(draft)
+        if not draft.is_file():
+            return None
+        manifest = json.loads(draft.read_text())
+        if manifest.get("binary_sha256") != binary_sha256 or not self._manifest_current(manifest, generation / "corpus"):
+            return None
+        return generation, manifest
+
+    def _revision_metadata(self, manifest):
+        current_head = self._git("rev-parse", "HEAD").decode().strip()
+        return {"source_head": manifest["head"], "current_head": current_head,
+                "revision_relation": "same_commit" if current_head == manifest["head"] else "unchanged_selected_content"}
+
     def _status(self, config):
         installation = self._installation()
         current = self._current()
+        quality = self._current_quality(*current) if current else None
         ready = bool(current and self._manifest_current(current[1], current[0] / "corpus"))
         isolation = self._network_probe() if installation["installed"] else {"available": False, "reason": "not_installed"}
-        ready = bool(ready and installation["installed"] and isolation["available"])
-        return {"ok": True, "status": "ready" if ready else "not_installed" if not installation["installed"] else "stale" if current else "not_indexed",
+        ready = bool(ready and installation["installed"] and isolation["available"] and quality and quality["complete"])
+        return {"ok": True, "status": "ready" if ready else "not_installed" if not installation["installed"] else "index_failed_partial" if current and quality and not quality["complete"] else "stale" if current else "not_indexed",
                 **installation, "index_ready": ready, "available": ready, "network_isolation": isolation,
+                "index_audit": quality,
+                "revision": self._revision_metadata(current[1]) if ready and current else None,
                 "manifest": {k: v for k, v in current[1].items() if k != "files"} if current else None,
                 "query_verified": bool(ready and current and current[1].get("mcp_smoke_verified")),
                 "query_verification_scope": "ping initialize/tools-list/call; não valida toda semântica de consulta"}
@@ -342,46 +442,104 @@ class CodeContextProvider:
     def _index(self, config):
         if not self._installation()["installed"]:
             return {"ok": False, "status": "not_installed", "index_ready": False, "available": False}
+        import fcntl
+        self._prepare_state()
+        lock_path = self.state_root / "index.lock"
+        _no_symlinks(lock_path)
+        descriptor = os.open(lock_path, os.O_CREAT | os.O_RDWR | os.O_NOFOLLOW, 0o600)
+        with os.fdopen(descriptor, "a+") as lock:
+            try:
+                fcntl.flock(lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+            except BlockingIOError:
+                return {"ok": False, "status": "index_busy", "index_ready": False, "available": False}
+            return self._index_locked(config)
+
+    def _index_locked(self, config):
+        started = time.monotonic()
+        deadline = started + config.get("timeout_seconds", 30)
+        def remaining():
+            budget = deadline - time.monotonic()
+            if budget <= 0:
+                raise TimeoutError("orçamento global de indexação excedido")
+            return budget
+        if not self._installation()["installed"]:
+            return {"ok": False, "status": "not_installed", "index_ready": False, "available": False}
         isolation = self._network_probe()
         if not isolation["available"]:
             return {"ok": False, "status": "isolation_unavailable", "index_ready": False, "available": False, "network_isolation": isolation}
         self._prepare_state()
         generations = self.state_root / "generations"
+        _no_symlinks(generations)
         generations.mkdir(exist_ok=True, mode=0o700)
-        generation = generations / uuid.uuid4().hex
-        generation.mkdir(mode=0o700)
+        installation = self._installation()
+        pending = self._pending_candidate(installation["binary_sha256"])
+        if pending:
+            generation, manifest = pending
+        else:
+            generation = generations / uuid.uuid4().hex
+            generation.mkdir(mode=0o700)
+            manifest = self._export_corpus(generation / "corpus")
+            manifest["binary_sha256"] = installation["binary_sha256"]
+            _write_json(generation / "manifest-draft.json", manifest)
+            _write_json(self.state_root / "pending.json", {"generation": generation.name})
         work = generation / "work"
-        work.mkdir(mode=0o700)
+        _no_symlinks(work)
+        work.mkdir(mode=0o700, exist_ok=True)
         (work / "config.yaml").write_text('model_path: ""\nvocab_path: ""\nort_lib_path: ""\nlog_level: warn\n', encoding="utf-8")
-        manifest = self._export_corpus(generation / "corpus")
         if not manifest["files"]:
             return {"ok": False, "status": "empty_corpus", "index_ready": False, "available": False}
-        started = time.monotonic()
-        with (work / "index.stdout.log").open("wb") as stdout, (work / "index.stderr.log").open("wb") as stderr:
-            process = subprocess.Popen(self._command(generation, "index"), stdout=stdout, stderr=stderr, env=self._env(), start_new_session=True)
-            try:
-                code = process.wait(timeout=config.get("timeout_seconds", 30))
-            except subprocess.TimeoutExpired:
-                os.killpg(process.pid, signal.SIGKILL)
-                process.wait()
-                raise TimeoutError("indexação excedeu orçamento")
-        if code:
-            return {"ok": False, "status": "index_failed", "index_ready": False, "available": False,
-                    "exit_code": code, "error": (work / "index.stderr.log").read_text(errors="replace")[-1500:]}
-        smoke = asyncio.run(self._mcp_call(generation, "ping", {}, config.get("timeout_seconds", 30)))
+        history_path = generation / "index_attempts.json"
+        _no_symlinks(history_path)
+        history = json.loads(history_path.read_text()).get("attempts", []) if history_path.is_file() else []
+        attempts = []
+        previous_logs = [int(path.name.split(".")[1]) for path in work.glob("index.*.stderr.log") if path.name.split(".")[1].isdigit()]
+        first_attempt = max(previous_logs, default=0) + 1
+        for invocation_attempt in range(1, 7):
+            attempt = first_attempt + invocation_attempt - 1
+            stderr_path = work / f"index.{attempt}.stderr.log"
+            with (work / f"index.{attempt}.stdout.log").open("wb") as stdout, stderr_path.open("wb") as stderr:
+                process = subprocess.Popen(self._command(generation, "index"), stdout=stdout, stderr=stderr, env=self._env(), start_new_session=True)
+                try:
+                    code = process.wait(timeout=remaining())
+                except (subprocess.TimeoutExpired, TimeoutError):
+                    os.killpg(process.pid, signal.SIGKILL)
+                    process.wait()
+                    interrupted = {"attempt": attempt, "exit_code": None, "status": "timeout", "audit": self._audit_index(generation, manifest, stderr_path)}
+                    attempts.append(interrupted)
+                    _write_json(history_path, {"attempts": history + attempts, "status": "timeout", "active_attempt": attempt})
+                    return {"ok": False, "status": "timeout", "index_ready": False, "available": False,
+                            "attempts": attempts, "generation": generation.name, "resumable": True}
+            audit = self._audit_index(generation, manifest, stderr_path)
+            attempts.append({"attempt": attempt, "exit_code": code, "audit": audit})
+            _write_json(history_path, {"attempts": history + attempts})
+            remaining()
+            if code:
+                return {"ok": False, "status": "index_failed", "index_ready": False, "available": False,
+                        "exit_code": code, "attempts": attempts, "error": stderr_path.read_text(errors="replace")[-1500:]}
+            if audit["complete"]:
+                break
+            # A fresh process avoids reusing the failed upstream parser. Keep the
+            # same complete corpus/DB: successful hashes are skipped incrementally.
+            if invocation_attempt == 6 or (len(attempts) > 1 and audit["indexed_files"] <= attempts[-2]["audit"]["indexed_files"]):
+                return {"ok": False, "status": "index_failed_partial", "index_ready": False, "available": False,
+                        "index_audit": audit, "attempts": attempts, "generation": generation.name, "resumable": True}
+        smoke = asyncio.run(self._mcp_call(generation, "ping", {}, remaining()))
         ping = smoke.get("result", {}).get("structuredContent", {})
         if smoke.get("isError") or smoke.get("result", {}).get("isError") or ping.get("status") != "ok" or ping.get("version") != VERSION:
             return {"ok": False, "status": "index_smoke_failed", "index_ready": False, "available": False,
                     "reason": "ping MCP não confirmou status/version da release fixada", "smoke": smoke}
         if not self._manifest_current(manifest, generation / "corpus"):
             return {"ok": False, "status": "sources_changed", "index_ready": False, "available": False}
+        remaining()
         manifest.update({"index_seconds": round(time.monotonic() - started, 4), "mcp_smoke_verified": True,
                          "binary_sha256": self._installation()["binary_sha256"], "network_isolation": isolation,
-                         "tools": smoke["tools"], "generation": generation.name})
+                         "tools": smoke["tools"], "generation": generation.name, "index_audit": audit, "index_attempt_count": len(history) + len(attempts)})
         _write_json(generation / "manifest.json", manifest)
         _write_json(self.state_root / "current.json", {"generation": generation.name})
+        (self.state_root / "pending.json").unlink(missing_ok=True)
         return {"ok": True, "status": "indexed", "installed": True, "index_ready": True, "available": True,
-                "query_verified": True, "manifest": {k: v for k, v in manifest.items() if k != "files"}, "smoke": smoke}
+                "query_verified": True, "manifest": {k: v for k, v in manifest.items() if k != "files"}, "smoke": smoke,
+                "attempts": attempts, "resumed": bool(pending), "revision": self._revision_metadata(manifest)}
 
     @staticmethod
     def _validate_tools(tools):
@@ -431,6 +589,9 @@ class CodeContextProvider:
         if not current:
             return {"ok": False, "status": "not_indexed", "available": False}
         generation, manifest = current
+        quality = self._current_quality(generation, manifest)
+        if not quality["complete"]:
+            return {"ok": False, "status": "index_failed_partial", "index_ready": False, "available": False, "index_audit": quality}
         if not self._manifest_current(manifest, generation / "corpus"):
             return {"ok": False, "status": "stale", "index_ready": False, "available": False}
         isolation = self._network_probe()
@@ -462,7 +623,7 @@ class CodeContextProvider:
         error = bool(out.get("isError") or out.get("result", {}).get("isError") or structured.get("error_count", 0) or structured.get("error"))
         return {"ok": not error, "status": out.get("status", "query_failed" if error else "completed"), "available": True, "index_ready": True,
                 "query_verified": not error, "query_verification_scope": "chamada MCP concluída; precisão geral não calibrada", "tool": config["tool"], **out, "response": out.get("result"), "sources": sources[:10], "source_head": manifest["head"],
-                "provenance": {"provider": "context-link", "version": VERSION, "source_head": manifest["head"], "generation": generation.name,
+                "provenance": {"provider": "context-link", "version": VERSION, **self._revision_metadata(manifest), "generation": generation.name,
                                "manifest_sha256": _digest((generation / "manifest.json").read_bytes()), "sources": sources[:10], "scope": manifest["scope"]},
                 "generation": generation.name, "network_isolation": isolation, "duration_seconds": round(time.monotonic() - started, 4),
                 "tokens_measured": False, "source_provenance_truncated": len(sources) > 10}

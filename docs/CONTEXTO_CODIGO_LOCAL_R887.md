@@ -17,7 +17,10 @@ flowchart TD
   Corpus --> Sandbox
   Sandbox --> ContextLink[context-link v1.1.0]
   ContextLink --> DB[Índice privado: escrita permitida]
-  ContextLink --> Contrato[Consulta permitida / limite / proveniência]
+  DB --> Auditoria[Auditoria: arquivos, hashes, schema e identidades]
+  Auditoria -->|Completo e smoke correto|Contrato[Consulta permitida / limite / proveniência]
+  Auditoria -->|Parcial ou inválido|Candidato[Candidato privado: consultas bloqueadas]
+  Candidato -->|Nova indexação explícita, com orçamento|Sandbox
   Contrato --> Primario
   Primario --> MetaBus[Observação: sem promover confiança]
   Primario --> Briefing[Briefing limitado: código é dado não confiável]
@@ -56,7 +59,9 @@ A fachada MCP permite somente `status` e `query`; indexação e instalação pas
 pela ação explícita da CLI. Delegações com capacidades `python`, `coding`,
 `code_review`, `software` ou `python_development` consultam o índice pronto para
 compor contexto. Fontes alteradas exigem nova indexação; não se usa conteúdo
-obsoleto como se fosse atual. As permissões do executor e o gate SDD continuam
+obsoleto como se fosse atual. O [aceite integral R889](INDEXACAO_INTEGRAL_R889.md)
+exige auditoria do banco e retomada explícita de candidatos parciais. Um código
+de saída zero com ping bem-sucedido não é suficiente para declarar prontidão. As permissões do executor e o gate SDD continuam
 responsáveis pela entrega: recuperar código não comprova sua correção.
 
 ## Ferramentas e limites observados

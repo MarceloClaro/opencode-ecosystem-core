@@ -1,5 +1,7 @@
 """R887: controles do provedor de código, sem binário/rede nos testes herméticos."""
 import importlib
+import json
+import sqlite3
 import subprocess
 
 import pytest
@@ -172,6 +174,7 @@ def test_index_smoke_error_never_promotes_generation(local, monkeypatch):
     monkeypatch.setattr(p, "_installation", lambda: {"installed": True, "binary_sha256": "fixture"})
     monkeypatch.setattr(p, "_network_probe", lambda: {"available": True})
     monkeypatch.setattr(p, "_command", lambda *args: ["/usr/bin/python3", "-c", "pass"])
+    monkeypatch.setattr(p, "_audit_index", lambda *args: {"schema_version": 1, "complete": True, "indexed_files": 1})
     async def failed_ping(*args):
         return {"isError": True, "status": "response_too_large", "tools": list(importlib.import_module("integrations.code_context").TOOLS)}
     monkeypatch.setattr(p, "_mcp_call", failed_ping)
@@ -189,3 +192,144 @@ def test_modified_private_corpus_is_stale_even_if_original_unchanged(local, tmp_
     (corpus / "app.py").chmod(0o600)
     (corpus / "app.py").write_text("def forged(): pass\n")
     assert p._manifest_current(manifest, corpus) is False
+
+
+def test_partial_native_index_exit_zero_is_not_complete(local, tmp_path):
+    p, _ = local
+    generation = tmp_path / "generation"
+    work = generation / "work"
+    work.mkdir(parents=True)
+    manifest = p._export_corpus(generation / "corpus")
+    log = work / "index.stderr.log"
+    log.write_text("Indexing complete:\n  Files discovered: 1\n  Files indexed: 0\n  Files unchanged: 0\n  Files deleted: 0\n  Files skipped: 1\n  Errors: 1\n")
+    db = sqlite3.connect(work / "index.db")
+    db.execute("CREATE TABLE files(repo_name TEXT,path TEXT,content_hash TEXT,size_bytes INTEGER)")
+    db.commit()
+    db.close()
+    audit = p._audit_index(generation, manifest, log)
+    assert audit["complete"] is False
+    assert audit["expected_files"] == 1
+    assert audit["indexed_files"] == 0
+    assert audit["stats"]["errors"] == 1
+
+
+def test_old_generation_without_quality_audit_is_unavailable(local, monkeypatch):
+    p, _ = local
+    p._prepare_state()
+    generation = p.state_root / "generations" / ("a" * 32)
+    generation.mkdir(parents=True)
+    manifest = p._export_corpus(generation / "corpus")
+    manifest["mcp_smoke_verified"] = True
+    (generation / "manifest.json").write_text(json.dumps(manifest))
+    (p.state_root / "current.json").write_text(json.dumps({"generation": generation.name}))
+    monkeypatch.setattr(p, "_installation", lambda: {"installed": True, "binary_sha256": "fixture"})
+    monkeypatch.setattr(p, "_network_probe", lambda: {"available": True})
+    assert p.run({"operation": "status"})["status"] == "index_failed_partial"
+    out = p.run({"operation": "query", "tool": "ping"})
+    assert out["success"] is False
+    assert out["status"] == "index_failed_partial"
+
+
+def test_incremental_retry_stops_at_six_attempts_without_promoting(local, monkeypatch):
+    p, _ = local
+    monkeypatch.setattr(p, "_installation", lambda: {"installed": True, "binary_sha256": "fixture"})
+    monkeypatch.setattr(p, "_network_probe", lambda: {"available": True})
+    monkeypatch.setattr(p, "_command", lambda *args: ["/usr/bin/python3", "-c", "pass"])
+    audits = iter({"schema_version": 1, "complete": False, "indexed_files": n} for n in range(1, 7))
+    monkeypatch.setattr(p, "_audit_index", lambda *args: next(audits))
+    out = p.run({"operation": "index"})
+    assert out["success"] is False
+    assert out["status"] == "index_failed_partial"
+    assert len(out["attempts"]) == 6
+    assert not (p.state_root / "current.json").exists()
+    pending = json.loads((p.state_root / "pending.json").read_text())
+    generation = p.state_root / "generations" / pending["generation"]
+    assert (generation / "manifest-draft.json").is_file()
+    assert p._pending_candidate("fixture")[0] == generation
+
+
+def test_incremental_retry_stops_when_no_progress(local, monkeypatch):
+    p, _ = local
+    monkeypatch.setattr(p, "_installation", lambda: {"installed": True, "binary_sha256": "fixture"})
+    monkeypatch.setattr(p, "_network_probe", lambda: {"available": True})
+    monkeypatch.setattr(p, "_command", lambda *args: ["/usr/bin/python3", "-c", "pass"])
+    monkeypatch.setattr(p, "_audit_index", lambda *args: {"schema_version": 1, "complete": False, "indexed_files": 0})
+    out = p.run({"operation": "index"})
+    assert out["status"] == "index_failed_partial"
+    assert len(out["attempts"]) == 2
+
+
+def test_index_global_timeout_kills_own_process_and_preserves_current(local, monkeypatch):
+    p, _ = local
+    monkeypatch.setattr(p, "_installation", lambda: {"installed": True, "binary_sha256": "fixture"})
+    monkeypatch.setattr(p, "_network_probe", lambda: {"available": True})
+    monkeypatch.setattr(p, "_command", lambda *args: ["/usr/bin/python3", "-c", "import time; time.sleep(5)"])
+    out = p.run({"operation": "index", "timeout_seconds": 1})
+    assert out["status"] == "timeout"
+    assert out["success"] is False
+    assert not (p.state_root / "current.json").exists()
+
+
+def test_equal_counts_with_wrong_sqlite_schema_are_rejected(local, tmp_path):
+    p, _ = local
+    generation = tmp_path / "generation"
+    work = generation / "work"
+    work.mkdir(parents=True)
+    manifest = p._export_corpus(generation / "corpus")
+    log = work / "index.stderr.log"
+    log.write_text("Indexing complete:\n  Files discovered: 1\n  Files indexed: 1\n  Files unchanged: 0\n  Files deleted: 0\n  Files skipped: 0\n  Errors: 0\n")
+    db = sqlite3.connect(work / "index.db")
+    db.execute("CREATE TABLE files(repo_name TEXT,path TEXT,content_hash TEXT,size_bytes INTEGER)")
+    info = manifest["files"]["app.py"]
+    db.execute("INSERT INTO files VALUES('corpus','app.py',?,?)", (info["sha256"], info["bytes"]))
+    for name in ("symbols", "vec_symbols", "fts_symbols"):
+        db.execute(f"CREATE TABLE {name}(unexpected_column TEXT)")
+        db.execute(f"INSERT INTO {name} VALUES('fake')")
+    db.execute("CREATE TABLE memories(unexpected_column TEXT)")
+    db.commit()
+    db.close()
+    assert p._audit_index(generation, manifest, log)["complete"] is False
+
+
+def test_documentation_only_commit_keeps_selected_content_current(local, tmp_path):
+    p, root = local
+    corpus = tmp_path / "corpus"
+    manifest = p._export_corpus(corpus)
+    (root / "README.md").write_text("Documentação nova.\n")
+    subprocess.run(["git", "-C", str(root), "add", "README.md"], check=True)
+    subprocess.run(["git", "-C", str(root), "-c", "user.name=Fixture", "-c", "user.email=fixture@local", "commit", "-qm", "docs"], check=True)
+    assert p._git("rev-parse", "HEAD").decode().strip() != manifest["head"]
+    assert p._manifest_current(manifest, corpus) is True
+
+
+def test_valid_schema_still_rejects_equal_counts_with_orphan_vector_id(local, tmp_path):
+    p, _ = local
+    generation = tmp_path / "generation"
+    work = generation / "work"
+    work.mkdir(parents=True)
+    manifest = p._export_corpus(generation / "corpus")
+    log = work / "index.stderr.log"
+    log.write_text("Indexing complete:\n  Files discovered: 1\n  Files indexed: 1\n  Files unchanged: 0\n  Files deleted: 0\n  Files skipped: 0\n  Errors: 0\n")
+    db = sqlite3.connect(work / "index.db")
+    db.executescript('''
+    CREATE TABLE files(id INTEGER PRIMARY KEY,repo_name TEXT,path TEXT,content_hash TEXT,last_indexed TIMESTAMP,size_bytes INTEGER);
+    CREATE TABLE symbols(id INTEGER PRIMARY KEY,repo_name TEXT,name TEXT,qualified_name TEXT,kind TEXT,file_path TEXT,content_hash TEXT,code_block TEXT,start_line INTEGER,end_line INTEGER,language TEXT,indexed_at TIMESTAMP);
+    CREATE TABLE vec_symbols(symbol_id INTEGER,repo_name TEXT,embedding BLOB);
+    CREATE VIRTUAL TABLE fts_symbols USING fts5(symbol_id UNINDEXED,repo_name UNINDEXED,name,qualified_name,kind,signature,extra_keywords);
+    CREATE TABLE memories(id INTEGER PRIMARY KEY,symbol_id INTEGER,note TEXT,author TEXT,is_stale BOOLEAN,stale_reason TEXT,last_known_symbol TEXT,last_known_file TEXT,created_at TIMESTAMP,updated_at TIMESTAMP);
+    CREATE TABLE vec_meta(key TEXT,value TEXT);
+    INSERT INTO vec_meta VALUES('embedding_dim','128');
+    INSERT INTO symbols VALUES(1,'corpus','add','add','function','app.py','symbolhash','def add(a, b):',1,2,'python',NULL);
+    INSERT INTO fts_symbols VALUES(1,'corpus','add','add','function','def add(a, b):','');
+    ''')
+    info = manifest["files"]["app.py"]
+    db.execute("INSERT INTO files VALUES(1,'corpus','app.py',?,NULL,?)", (info["sha256"], info["bytes"]))
+    db.execute("INSERT INTO vec_symbols VALUES(999,'corpus',?)", (bytes(512),))
+    db.commit()
+    audit = p._audit_index(generation, manifest, log)
+    assert audit["complete"] is False
+    assert audit["invalid_relationships"] == 2
+    db.execute("UPDATE vec_symbols SET symbol_id=1")
+    db.commit()
+    db.close()
+    assert p._audit_index(generation, manifest, log)["complete"] is True
