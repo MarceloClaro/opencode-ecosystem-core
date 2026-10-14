@@ -20262,6 +20262,241 @@
       "prev_state_merkle_root": ""
     },
     {
+      "round_id": "R870",
+      "objective": "R870: expor as 3 opções de motor (pesos reais / treino / modelos abertos) no Panoramica AI reproduzido (R853), com seleção pelo usuário e fail-closed.",
+      "changes": [
+        "repro/backend/engines.py: registro de motores (stub/weights/training/open_base) com detecção honesta de deps e require_available fail-closed",
+        "repro/backend/app.py: /opcoes (GET HTML seletor + POST aplicar), /opcoes.json, bloco 'engine' em /health, despacho de /predict*, /segment/sam por motor ativo (409 sem fake)",
+        "repro/training/: README, datasets.md, download_datasets.sh (só instruções), requirements-train.txt, configs/teeth-yolo.yaml, train_teeth.sh (YOLO), train_teeth_mmdet.py (Mask DINO+Swin-B)",
+        "OPCOES.md: documento das opções para o usuário",
+        "tests/test_r853_rx_repro.py: +7 testes (opções listadas, health engine, stub ok, 409 fail-closed, engine desconhecido 422, scaffold existe, contrato do registro) -> 16/16",
+        "specs/SPEC-935-R853-rx-panoramica-reproducao.md e README.md atualizados",
+        "Verificado ao vivo (uvicorn): weights indisponível -> /predict/images 409 com causa; stub -> 200"
+      ],
+      "score": null,
+      "lessons": [
+        "Fail-closed é a única postura honesta quando o motor real não está disponível: 409 com causa, nunca inferência sintética presentada como real.",
+        "Pesos do alvo não são públicos (só SHA-256); extração via API = model extraction, recusado. Reimplementar a receita publicada é o caminho legítimo.",
+        "Dataclass com 'from __future__ import annotations' carregado por spec_from_file_location exige registro em sys.modules (Python 3.14).",
+        "Colisões de round_id são normais neste repo; registrar com round_id explícito evita deslocar o número por escaneamento de specs."
+      ],
+      "timestamp": 1791915851.6662195,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R871",
+      "objective": "R871: provisionar e VERIFICAR a Opção 1 (inferência real com pesos .pt via Ultralytics) do Panoramica AI reproduzido (R853).",
+      "changes": [
+        ".venv: instalado ultralytics 8.4.177 (+torch 2.14.1, torchvision 0.29.1, opencv-python 5.0.0.93)",
+        "obtido peso de demonstração yolo11n-seg.pt (COCO-seg, sha256 55ed65c5…) e verificado /predict com detecções reais (5: 4×person, 1×bus)",
+        "op1-verificacao/: op1-live-evidence.json + sample-bus.jpg + sample-gray.png (hashes)",
+        "tests/test_r853_rx_repro.py: +test_option1_real_inference_when_available (pula sem ultralytics/.pt) e endurecido test_unavailable_engine_fails_closed; 17 testes (16 pass + 1 skip no python do sistema); sob .venv 17/17",
+        "OPCOES.md e README.md: status da Opção 1 = verificada; evidência referenciada"
+      ],
+      "score": null,
+      "lessons": [
+        "Fail-closed preservado: availability = ultralytics E pesos; instalar o pacote sem .pt NÃO habilita a Opção 1.",
+        "Verificação honesta distingue 'código pronto' de 'inferência real executada': só a segunda produz caixas de um objeto real.",
+        "O peso usado é de demonstração (COCO), explicitamente NÃO odontológico; não se alega equivalência clínica.",
+        "Teste condicional com pytest.skip evita simular inferência real quando o ambiente não a suporta."
+      ],
+      "timestamp": 1791916722.2821383,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R872",
+      "objective": "R872: provisionar e VERIFICAR a Opção 3 (segmentação real via SAM/segment_anything) do Panoramica AI reproduzido (R853).",
+      "changes": [
+        ".venv: instalado segment-anything-py 1.0.1",
+        "obtido checkpoint SAM ViT-B base sam_vit_b_01ec64.pth (375 MB, sha256 ec2df627…) do host fbaipublicfiles",
+        "verificado /segment/sam com contorno REAL de 2031 pontos a partir de caixa (HTTP 200, engine open_base)",
+        "op3-verificacao/op3-live-evidence.json (checkpoint, hashes, checks, reprodução)",
+        "tests/test_r853_rx_repro.py: +test_option3_real_sam_when_available (pula sem segment_anything/checkpoint); sob .venv 18/18; system 16 pass + 2 skip",
+        "OPCOES.md e README.md: Opção 3 = verificada (SAM base; alvo usa MedSAM da mesma arquitetura)"
+      ],
+      "score": null,
+      "lessons": [
+        "O alvo usa MedSAM (fine-tune ViT-B); o checkpoint base SAM prova o caminho de código sem alegar o modelo odontológico.",
+        "Checkpoint de 375 MB não é versionado: evidência guarda URL + sha256; download é passo de reprodução.",
+        "Fail-closed mantido: open_base exige torch E segment_anything E checkpoint existente.",
+        "Verificação honesta: opção só é 'real' quando executa o modelo e retorna saída não-trivial (contorno fechado ≥3 pontos)."
+      ],
+      "timestamp": 1791917430.0639186,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R873",
+      "objective": "R873: persistir os checkpoints de demonstração das Opções 1/3 em ~/.cache/rx-weights (sair do tmpfs /tmp) e atualizar docs/evidências/teste.",
+      "changes": [
+        "movido /tmp/opencode/rx-w/yolo11n-seg.pt -> ~/.cache/rx-weights/yolo11n-seg.pt (sha256 55ed65c5… mantido)",
+        "movido /tmp/opencode/rx-sam/sam_vit_b.pth -> ~/.cache/rx-weights/sam_vit_b.pth (sha256 ec2df627… mantido)",
+        "op1-verificacao/op1-live-evidence.json e op3-verificacao/op3-live-evidence.json: env_vars e passos de reprodução atualizados para ~/.cache/rx-weights",
+        "OPCOES.md: nova seção 'Caminhos persistidos neste host' com os dois checkpoints e hashes",
+        "tests/test_r853_rx_repro.py: teste da Opção 1 usa sample-bus.jpg versionado (não mais /tmp)",
+        "verificado pós-movimentação: .venv 18/18; system 16 pass + 2 skip; nenhum /tmp residual nos docs/testes"
+      ],
+      "score": null,
+      "lessons": [
+        "/tmp em tmpfs é RAM e some no reboot: checkpoints de teste pertencem a ~/.cache (persistente em disco).",
+        "Mover artefatos exige atualizar evidências e passos de reprodução — a evidência aponta um caminho que deve existir após o reboot.",
+        "Testes não devem depender de arquivos em /tmp; usar amostras versionadas no repositório torna o teste portátil.",
+        "Hashes conferidos antes/depois da movimentação garantem integridade do que foi verificado."
+      ],
+      "timestamp": 1791918200.5031369,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R874",
+      "objective": "R874: completar a superfície administrativa da reprodução Panoramica AI (SPEC-935-R853) — implementar as 11 rotas de /review e /validacao que faltavam e persistir sessões/imagens/anotações/jobs/lotes/feedback/validação em SQLite; sem GPU e sem modelos clínicos (dados de demonstração sintéticos).",
+      "changes": [
+        "novo outputs/core-r853-rx/repro/backend/store.py: store SQLite (sessões, imagens, anotações, jobs, lotes, edit_locks, feedback, modelos, class_deltas) com semeadura de demonstração (12 radiografias sintéticas, 5 relatórios de modelo) e imagens PNG geradas",
+        "app.py: substitui _SESSIONS/_FEEDBACK em memória por store; login devolve csrf/role/is_admin/username; /admin/api/reviews paginado/filtrável no formato do front",
+        "app.py: rotas antes ausentes — /admin/api/images/{id}(+/thumbnail,/image,/age,/edit-lock,/segment), /admin/api/jobs/{id}, /admin/api/batch[/{id}], /admin/api/export(ZIP), /validacao/api/modelos/{slug}, .../imagens/{id}/revisao, /validacao/{slug} (HTML), /validacao/media e /validacao/annotations",
+        "specs/SPEC-935-R874-rx-admin-completude-persistencia.md (SDD) + tests/test_r874_rx_admin.py (19 testes, RED->GREEN)",
+        "README.md do core-r853-rx: seção de completude admin + persistência e comando RX_ADMIN_DB"
+      ],
+      "score": null,
+      "lessons": [
+        "Stub de contrato precisa ser validado contra o consumo REAL do front (campos e formatos), não só contra o OpenAPI: /admin/api/reviews devolvia lista crua e o front esperava page/pages/total/items/active_jobs/edit_locks — contrato de I/O se descobre no consumidor.",
+        "Persistência (SQLite por thread, caminho relido a cada conexão) permite isolar testes por arquivo temporário e provar reabertura sem tocar o banco padrão.",
+        "Dados sintéticos de demonstração devem ser rotulados como tais (synthetic:true no manifesto) para não sugerirem mérito clínico; mantém externally_validated=false.",
+        "Ao substituir estado em memória por store, preservar as chaves que testes anteriores asseguravam (authenticated/modelos) evita regressão cruzada entre rodadas."
+      ],
+      "timestamp": 1791919433.682191,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R875",
+      "objective": "R875: integrar o checkpoint REAL do MedSAM (Opção 3) à reprodução Panoramica AI e corrigir o carregamento em host CPU-only; verificação funcional (arquitetura + inferência), sem GPU e sem os pesos clínicos do alvo.",
+      "changes": [
+        "obtido ~/.cache/rx-weights/medsam_vit_b.pth (375.049.145 B; sha256 34b34b78…) de espelho HF; 5 repos convergem no mesmo blob xet 56122fe2… (proveniência funcional, não criptográfica)",
+        "app.py: novo _load_sam (torch.load map_location=cpu + registry['vit_b'](checkpoint=None) + load_state_dict(strict=True) + eval, com cache por caminho); _medsam_segment usa _load_sam",
+        "DEFEITO corrigido: segment_anything carrega via torch.load SEM map_location e o checkpoint MedSAM ancora storages em CUDA -> falhava em CPU-only (base sam_vit_b não expunha o bug)",
+        "specs/SPEC-935-R875-medsam-real-cpu.md (SDD) + tests/test_r875_medsam_cpu.py (3 testes unitários sem GPU, via torch/registry falsos) + evidência op3-verificacao/medsam-live-evidence.json",
+        "OPCOES.md/README.md: MedSAM real verificado em CPU e o defeito do map_location documentados"
+      ],
+      "score": null,
+      "lessons": [
+        "Um mesmo código de carga pode funcionar com um checkpoint (SAM base, storages CPU) e falhar com outro da MESMA arquitetura (MedSAM, storages CUDA): a origem das storages é do arquivo, não do código — sempre usar map_location na carga.",
+        "Verificação por convergência (vários espelhos servindo o mesmo blob) aumenta a confiança sobre a integridade do arquivo, mas NÃO substitui atestação de origem — declarar como 'verificação funcional', não criptográfica.",
+        "Testar o caminho de carga com torch/registry FALSOS torna a regressão independente de GPU, de torch instalado e do checkpoint de 375 MB.",
+        "Cachear o modelo por caminho absoluto evita reler 375 MB a cada requisição /segment/sam."
+      ],
+      "timestamp": 1791920995.055999,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R876",
+      "objective": "R876: compor por capacidade o motor de inferência da reprodução Panoramica AI (SPEC-935-R876) — cada rota é servida pelo motor ATIVO quando ele cobre a capacidade, senão pelo melhor motor DISPONÍVEL; fail-closed real (409) só quando NENHUM motor disponível cobre. Corrige o 409 indevido de /predict com open_base ativo.",
+      "changes": [
+        "engines.py: _PREFERENCE=('weights','open_base','stub'); providers_for(cap); resolve_capability(cap, preferred) (ativo se cobre+disponível, senão 1º disponível, senão None); serving_map(preferred) — motores reais antes do stub",
+        "app.py: novo _service_engine(capability) (409 só se None); _detect() devolve (caixas, motor_efetivo); /predict reporta o motor REAL usado e /predict/images adiciona cabeçalho X-Engine; /segment/sam usa _service_engine('sam')",
+        "app.py: /health e /opcoes.json expõem engine.serving {detection,sam,bundle}; página /opcoes mostra capability->motor (ou 409 em vermelho)",
+        "corrige erro do operador: {\"detail\":\"motor 'open_base' não cobre 'detection'\"} (409) com RX_MEDSAM_CKPT; agora /predict=200 (fallback stub) e /segment/sam=200 (MedSAM real)",
+        "testes: tests/test_r876_rx_capability.py (9: unidade resolve_capability/providers_for/serving_map + integração app + fail-closed 409); test_r853 test_unavailable_engine_fails_closed atualizado ao novo contrato (fallback honesto via X-Engine)",
+        "verificação: suíte RX .venv 47 passed/2 skipped; system python3 28 passed; doctor 22/22; live :8799 -> /predict 200 engine=stub, /predict/images 200 x-engine=stub, /segment/sam 200 engine=open_base 241 pts em 19.1s; páginas 200; login 200"
+      ],
+      "score": null,
+      "lessons": [
+        "Um único motor ativo + guard por rota gera 409 indevido quando o motor ativo cobre só parte das capacidades; compor por capacidade preserva o fail-closed apenas na indisponibilidade real.",
+        "Fallback honesto: preferir motores REAIS antes do stub, mas NÃO promover silenciosamente pesos de domínio errado — deixar RX_WEIGHTS_DIR desligado faz a detecção cair no stub rotulado (demo coerente), mantendo o MedSAM real em /segment/sam.",
+        "Ao mudar semântica, atualizar o teste antigo que codifica o comportamento anterior (R853 test_unavailable_engine_fails_closed) em vez de mascarar."
+      ],
+      "timestamp": 1791924644.3573499,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R877",
+      "objective": "R877: rebrand da reprodução Panoramica AI -> 'ODONTOCA - Prof. Marcelo Claro' (título do serviço, páginas locais e docs da reprodução), preservando evidências congeladas do alvo, o ledger de ciclos e os tokens de contrato.",
+      "changes": [
+        "repro/backend/app.py: FastAPI title + docstring + página /opcoes -> 'ODONTOCA - Prof. Marcelo Claro'",
+        "repro/backend/store.py docstring; repro/frontend/{index,review,validacao}.html (title/h1/og/twitter/print-brand) e brand-mark PA->OC; repro/training/download_datasets.sh",
+        "README.md: título da reprodução renomeado + nota de rebrand explicando que o ALVO observado permanece 'Panoramica AI' nas evidências/REA (fidelidade)",
+        "PRESERVADOS (inalterados): evidências api/* (hashes REFACT), rea-evidence.json, op*-verificacao/*, evolution/cycles.json, .mci_state; tokens de contrato panoramica-*.{png,json}, X-Panoramica-CSRF, panoramica-review-notice; nome do alvo em README l3/l33 e specs (REA do site observado)",
+        "verificação: py_compile OK; suíte RX .venv 47 passed/2 skipped; live :8799 -> index <title>/<h1>, /openapi.json title=ODONTOCA, /opcoes, /review, /validacao (brand OC) com o novo nome; /health 200 e /predict 200; ZIP bundle mantém panoramica-anotada.png/anatomia/dentes/impressao.json"
+      ],
+      "score": null,
+      "lessons": [
+        "pkill -f com padrão que casa a própria linha de comando do shell mata o shell e trava a sessão — matar por PID (arquivo) em vez de pkill -f genérico.",
+        "Rebrand de cópia local NÃO deve tocar evidências congeladas (hashes) nem o ledger; renomear capturas do alvo falsificaria a prova (anti-overclaim).",
+        "Distinguir nome de EXIBIÇÃO da reprodução de identificadores FUNCIONAIS (nomes de arquivo no ZIP, header CSRF, chaves de storage) e de referências ao alvo."
+      ],
+      "timestamp": 1791926003.0816731,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
       "round_id": "R879",
       "objective": "Mapa arquitetural completo e fluxogramas com snapshot Git e limites explícitos",
       "changes": [
@@ -20300,6 +20535,92 @@
         "Recibos históricos conservam seus hashes; revisão documental recebe seu próprio registro."
       ],
       "timestamp": 1791931941.8921082,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R878",
+      "objective": "R878: servidor dual-stack (IPv4+IPv6) da reprodução RX — atende 127.0.0.1/localhost/[::1]/LAN numa única instância, resolvendo o 'Failed to fetch' de rede (localhost->::1 sem bind IPv6) e habilitando acesso de outro dispositivo na LAN.",
+      "changes": [
+        "outputs/core-r853-rx/repro/serve.py (novo): launcher dual-stack — socket AF_INET6 em [::] com IPV6_V6ONLY=0 entregue ao uvicorn via Server.run(sockets=[...]); uvicorn>=0.30 não aceita app_dir, então repro/backend entra em sys.path",
+        "specs/SPEC-935-R878-rx-servidor-dual-stack.md (implemented)",
+        "tests/test_r878_rx_dualstack.py (4 testes): IPV6_V6ONLY==0 e aceitação de conexão IPv4 (mapeada) E IPv6 no mesmo socket",
+        "Execução verificada: ss mostra '*:8799' (dual-stack); curl 200 em 127.0.0.1, localhost, [::1] e LAN 172.17.162.153; /predict/images 200",
+        "Suíte RX: 51 passed, 2 skipped"
+      ],
+      "score": null,
+      "lessons": [
+        "uvicorn --host :: NÃO é dual-stack no uvicorn 0.51 (força IPV6_V6ONLY=1); só um socket pré-ligado com V6ONLY=0 cobre as duas famílias num processo.",
+        "uvicorn.Config >=0.30 removeu o parâmetro app_dir; usar sys.path.insert(0, backend).",
+        "Expor [::] coloca o serviço na LAN — aceito pelo operador; rotas admin são de demonstração, não usar com dados reais."
+      ],
+      "timestamp": 1791936167.6442587,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R882",
+      "objective": "R882: empacotamento de deploy (container) da reprodução RX — publicar a app real num host Python (PaaS/Docker), já que GitHub Pages é estático. Imagem mínima com engine stub (sem pesos/torch).",
+      "changes": [
+        "outputs/core-r853-rx/repro/serve.py: _resolve_bind(env) — default local ('::',8799) dual-stack; nuvem via RX_HOST + PORT (precedência sobre RX_PORT); ramo de bind convencional (uvicorn.run) para 0.0.0.0:$PORT",
+        "repro/backend/requirements.txt (novo): runtime mínimo fastapi/uvicorn/pillow/python-multipart (sem torch/opencv/ultralytics/segment-anything)",
+        "repro/Dockerfile (novo): python:3.12-slim, instala requirements, copia serve.py+backend+frontend, EXPOSE 8799, HEALTHCHECK /health, CMD python serve.py",
+        "repro/.dockerignore (novo) e repro/render.yaml (novo): Blueprint Render (runtime docker, healthcheck /health, RX_ENGINE=stub, RX_HOST=0.0.0.0)",
+        "outputs/core-r853-rx/DEPLOY.md (novo): Render (principal) + Railway/Fly/Cloud Run/HF Spaces, env vars, persistência, verificação HTTP anti-overclaim",
+        "specs/SPEC-935-R882-rx-deploy-container.md (implemented)",
+        "tests/test_r882_rx_deploy.py (8): bind (3), artefatos (4), prova de container mínimo (subprocesso com torch/cv2/numpy/segment_anything bloqueados) -> MINIMAL_OK"
+      ],
+      "score": null,
+      "lessons": [
+        "GitHub Pages não executa Python: app FastAPI completa só roda em host Python/Docker; front sozinho em Pages daria 'Failed to fetch'.",
+        "Deps pesadas (torch/cv2/numpy/segment_anything) já são lazy em app/engines/store -> docker python:3.12-slim com 4 pacotes serve a app inteira no engine stub (provado por teste com import bloqueado).",
+        "Provedores PaaS exigem bind 0.0.0.0 e injetam PORT; RX_HOST/PORT cobrem isso sem quebrar o dual-stack local (R878).",
+        "Teste de contrato de requirements deve ignorar linhas de comentário (falso negativo por menção textual).",
+        "Deploy é ato do operador; verificação é HTTP observado (/health 200), nunca 'build passou' (anti-overclaim)."
+      ],
+      "timestamp": 1791938161.0723426,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R883",
+      "objective": "R883 (corretiva de R882): rastreabilidade da reprodução no git — o .gitignore ignorava engines.py, store.py e os artefatos de deploy, deixando o clone do GitHub INCOMPLETO (app.py importa engines/store). Sem isso o deploy from GitHub falharia.",
+      "changes": [
+        ".gitignore: re-inclui (!) DEPLOY.md, repro/serve.py, repro/Dockerfile, repro/.dockerignore, repro/render.yaml, repro/backend/{app.py,engines.py,store.py,requirements.txt}",
+        "tests/test_r882_rx_deploy.py: novo teste test_arquivos_de_deploy_nao_ignorados_pelo_git (git check-ignore) — 9 testes no total",
+        "specs/SPEC-935-R882-rx-deploy-container.md: requisito 8 (rastreabilidade) + lição"
+      ],
+      "score": null,
+      "lessons": [
+        "FALHA detectada: propus deploy from GitHub sem verificar rastreamento — engines.py/store.py estavam ignorados desde R870/R874; o repo remoto NÃO tinha o runtime completo.",
+        "Antes de qualquer entrega 'deployável', checar git ls-files/check-ignore do pacote inteiro, não só do arquivo editado.",
+        "Teste de contrato com `git check-ignore` (com skip se git ausente) blinda contra regressão silenciosa do .gitignore."
+      ],
+      "timestamp": 1791938335.6256373,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",

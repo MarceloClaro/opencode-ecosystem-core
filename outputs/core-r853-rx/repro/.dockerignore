@@ -1,0 +1,25 @@
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+*.egg-info/
+
+# Pesos e datasets não entram na imagem (montados/servidos fora do container).
+*.pth
+*.pt
+*.onnx
+*.safetensors
+weights/
+
+# Banco local (efêmero no container; usar /data com disco persistente).
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+
+# Sem git, docs de treino e temporários.
+.git/
+.gitignore
+training/
+*.log
+*.zip

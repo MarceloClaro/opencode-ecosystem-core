@@ -143,3 +143,151 @@ def test_admin_endpoints_require_session(client):
     assert client.post("/admin/api/login", json={"user": "admin"}).status_code == 200
     assert client.get("/admin/api/session").json()["authenticated"] is True
     assert client.get("/validacao/api/modelos").json()["modelos"]
+
+
+# --- Opções de motor (1/2/3) -------------------------------------------------
+
+def test_options_page_lists_three_options(client):
+    client.post("/opcoes", data={"engine": "stub"})
+    html = client.get("/opcoes").text
+    for opt in ("Opção 0", "Opção 1", "Opção 2", "Opção 3"):
+        assert opt in html
+    data = client.get("/opcoes.json").json()
+    ids = {e["id"] for e in data["engines"]}
+    assert ids == {"stub", "weights", "training", "open_base"}
+    assert data["active"] == "stub"
+
+
+def test_health_reports_engine_block(client):
+    client.post("/opcoes", data={"engine": "stub"})
+    eng = client.get("/health").json()["engine"]
+    assert eng["active"] == "stub"
+    assert {e["id"] for e in eng["options"]} == {"stub", "weights", "training", "open_base"}
+    assert isinstance(eng["environment"], dict)
+
+
+def test_stub_engine_is_available_and_works(client):
+    # volta ao stub (estado de módulo pode ter sido alterado)
+    client.post("/opcoes", data={"engine": "stub"})
+    r = client.post("/predict/images", files={"file": ("rx.png", _png(), "image/png")})
+    assert r.status_code == 200
+
+
+def test_unavailable_engine_fails_closed(client):
+    """Motor ativo indisponível NÃO finge inferência (SPEC-935-R876).
+
+    Com `weights` selecionado mas indisponível (sem `ultralytics` + `.pt`), a
+    detecção é servida pelo melhor motor DISPONÍVEL (stub) — HTTP 200, com o
+    cabeçalho `X-Engine` diferente do motor indisponível. O fail-closed (409)
+    agora só ocorre quando NENHUM motor disponível cobre a capacidade
+    (ver `tests/test_r876_rx_capability.py`).
+    """
+    import importlib.util as u
+    import os
+    from pathlib import Path as _P
+    has_pt = False
+    wdir = os.environ.get("RX_WEIGHTS_DIR", "")
+    if wdir and _P(wdir).expanduser().exists():
+        has_pt = any(_P(wdir).expanduser().rglob("*.pt"))
+    weights_ok = (u.find_spec("ultralytics") is not None) and has_pt
+    client.post("/opcoes", data={"engine": "weights"})
+    r = client.post("/predict/images", files={"file": ("rx.png", _png(), "image/png")})
+    assert r.status_code == 200, r.text
+    if weights_ok:
+        assert r.headers.get("X-Engine") == "weights"  # Opção 1 realmente armada
+    else:
+        assert r.headers.get("X-Engine") == "stub"     # fallback honesto
+    client.post("/opcoes", data={"engine": "stub"})  # restaura
+
+
+def test_option1_real_inference_when_available(client):
+    """Opção 1 ponta a ponta: com ultralytics + .pt, /predict faz inferência REAL.
+
+    Só roda quando o ambiente tem as duas coisas (ex.: rodar sob .venv com
+    RX_WEIGHTS_DIR apontando para um .pt). Caso contrário, é PULADO — nunca
+    simulamos inferência real.
+    """
+    import importlib.util as u
+    import os
+    from pathlib import Path as _P
+    wdir = os.environ.get("RX_WEIGHTS_DIR", "")
+    if u.find_spec("ultralytics") is None or not wdir:
+        pytest.skip("Opção 1 indisponível: falta ultralytics ou RX_WEIGHTS_DIR")
+    pts = sorted(_P(wdir).expanduser().rglob("*.pt")) if _P(wdir).expanduser().exists() else []
+    if not pts:
+        pytest.skip(f"nenhum .pt em {wdir}")
+
+    client.post("/opcoes", data={"engine": "weights"})
+    # imagem com objeto real (COCO) -> deve produzir detecções
+    sample = R853 / "op1-verificacao" / "sample-bus.jpg"
+    if not sample.exists():
+        r = client.post("/predict/images", files={"file": ("rx.png", _png(), "image/png")})
+        assert r.status_code == 200
+    else:
+        r = client.post("/predict", files={"file": ("bus.jpg", sample.read_bytes(), "image/jpeg")})
+        assert r.status_code == 200
+        data = r.json()
+        assert data["engine"] == "weights"
+        assert len(data["additional"]) >= 1, "inferência real deveria detectar ≥1 objeto"
+    client.post("/opcoes", data={"engine": "stub"})  # restaura
+
+
+
+def test_unknown_engine_rejected(client):
+    assert client.post("/opcoes", data={"engine": "nao_existe"}).status_code == 422
+
+
+def test_option3_real_sam_when_available(client):
+    """Opção 3 ponta a ponta: com segment_anything + checkpoint, /segment/sam é REAL.
+
+    Só roda quando o ambiente tem as duas coisas (rodar sob .venv com RX_MEDSAM_CKPT
+    válido). Caso contrário, PULA — nunca simulamos segmentação real.
+    """
+    import importlib.util as u
+    import os
+    from pathlib import Path as _P
+    ckpt = os.environ.get("RX_MEDSAM_CKPT", "")
+    if u.find_spec("segment_anything") is None or not ckpt or not _P(ckpt).expanduser().exists():
+        pytest.skip("Opção 3 indisponível: falta segment_anything ou RX_MEDSAM_CKPT")
+
+    client.post("/opcoes", data={"engine": "open_base"})
+    r = client.post("/segment/sam", data={"box": "[10,10,100,100]", "target": "generic"},
+                    files={"file": ("rx.png", _png(160, 160), "image/png")})
+    assert r.status_code == 200
+    data = r.json()
+    assert data["engine"] == "open_base"
+    assert len(data["contour"]) >= 3  # contorno real fechado
+    client.post("/opcoes", data={"engine": "stub"})  # restaura
+
+
+
+def test_training_scaffold_files_exist():
+    tr = R853 / "repro" / "training"
+    for name in ("README.md", "datasets.md", "download_datasets.sh",
+                 "requirements-train.txt", "train_teeth.sh", "train_teeth_mmdet.py",
+                 "configs/teeth-yolo.yaml"):
+        assert (tr / name).exists(), name
+
+
+def test_engines_registry_contract():
+    """O registro de motores declara capabilities e availability honestas."""
+    import importlib.util as u
+    import sys
+    spec = util.spec_from_file_location("rx_engines", R853 / "repro" / "backend" / "engines.py")
+    mod = util.module_from_spec(spec)
+    sys.modules["rx_engines"] = mod  # necessário p/ resolução de dataclass (Py3.14)
+    spec.loader.exec_module(mod)
+    statuses = {e.id: e for e in mod.engine_statuses()}
+    assert statuses["stub"].available is True
+    assert statuses["stub"].capabilities and "detection" in statuses["stub"].capabilities
+    # weights só fica disponível com ultralytics + .pt; aqui não há
+    if u.find_spec("ultralytics") is None:
+        assert statuses["weights"].available is False
+    assert statuses["training"].kind == "training"
+    # require_available é fail-closed
+    import pytest as _pytest
+    with _pytest.raises(ValueError):
+        mod.require_available("stub", "train")      # stub não treina
+    with _pytest.raises(ValueError):
+        mod.require_available("open_base", "detection")  # open_base só faz sam
+

@@ -1,0 +1,9 @@
+# Runtime MÍNIMO do container (engine `stub`) — SPEC-935-R882.
+# Dependências pesadas (torch, opencv-python, ultralytics, segment-anything)
+# NÃO entram aqui: são importadas sob demanda apenas pelos motores
+# 'weights'/'open_base'. Com RX_ENGINE=stub a app completa (front, admin,
+# persistência SQLite, /predict stub, /segment/sam retangular) roda só com isto.
+fastapi==0.143.0
+uvicorn==0.51.0
+pillow==12.3.0
+python-multipart==0.0.32

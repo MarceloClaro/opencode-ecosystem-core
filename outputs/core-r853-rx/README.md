@@ -1,9 +1,16 @@
-# Panoramica AI — documentação (REA) e reprodução
+# ODONTOCA - Prof. Marcelo Claro — documentação (REA) e reprodução
+
+> **Rebrand da reprodução.** A aplicação **reproduzida** (backend + páginas locais)
+> chama-se agora **ODONTOCA - Prof. Marcelo Claro**. O **alvo observado**
+> (`https://rx.engenhariaorofacial.com.br/`) permanece referido pelo seu nome real,
+> **"Panoramica AI"**, nas evidências e no REA (abaixo) — por fidelidade; renomear
+> capturas congeladas falsificaria a prova. Tokens de contrato (`panoramica-*.png`,
+> `X-Panoramica-CSRF`, `panoramica-review-notice`) **não** foram alterados.
 
 **Alvo:** `https://rx.engenhariaorofacial.com.br/` — aplicação web "Panoramica AI"
 (visualização e análise assistida de radiografias panorâmicas odontológicas).
-**Spec:** `specs/SPEC-935-R853-rx-panoramica-reproducao.md`
-**Rodada:** R853 · **Teste:** `tests/test_r853_rx_repro.py`
+**Spec:** `specs/SPEC-935-R853-rx-panoramica-reproducao.md` · `specs/SPEC-935-R874-rx-admin-completude-persistencia.md` · `specs/SPEC-935-R875-medsam-real-cpu.md` · `specs/SPEC-935-R876-rx-composicao-por-capacidade.md`
+**Rodada:** R853 (reprodução) · R874 (completude admin + persistência) · R875 (MedSAM real em CPU) · R876 (composição por capacidade) · **Testes:** `tests/test_r853_rx_repro.py`, `tests/test_r874_rx_admin.py`, `tests/test_r875_medsam_cpu.py`, `tests/test_r876_rx_capability.py`
 
 > Documento produzido por leitura pública (HTTP GET, sem autenticação) e por
 > análise estática do REA 6.4.0. Áreas administrativas foram sondadas em
@@ -89,19 +96,108 @@ fluxo de I/O**, não a qualidade clínica.
 ## 5. Reprodução (`repro/`)
 
 - `repro/frontend/` — cópia fiel dos artefatos públicos (`index.html`, `editor.js`, `review.html`, `validacao.html`)
-- `repro/backend/app.py` — **FastAPI** que reproduz o contrato, com "motor"
-  determinístico explícito (stub) que gera caixas/pranchas a partir do tamanho da
-  imagem. Substitui os modelos reais; **não** é detecção clínica.
+- `repro/backend/app.py` — **FastAPI** que reproduz o contrato, com **seleção de motor**
+  (`stub` determinístico por padrão; `weights`/`open_base` reais quando disponíveis;
+  `training` apenas receita). **Fail-closed**: motor indisponível → **409**, nunca
+  resultado falso.
+- `repro/backend/engines.py` — registro dos motores com detecção honesta de dependências.
+- `repro/training/` — pipeline de treino (Opção 2): receita publicada (Mask DINO + Swin-B),
+  rota YOLO, datasets públicos e `download_datasets.sh` (só instruções).
+
+### Três opções de motor (ver `OPCOES.md`)
+
+| # | Motor | Precisa de | Aqui |
+|---|---|---|---|
+| 1 | `weights` | `ultralytics` + `RX_WEIGHTS_DIR` | **verificada** (`.venv` + `.pt`; ver `op1-verificacao/`) |
+| 2 | `training` | GPU + datasets | não executável aqui |
+| 3 | `open_base` | `torch`+`segment_anything`+`RX_MEDSAM_CKPT` | **verificada** (`.venv` + SAM ViT-B **e MedSAM real**; ver `op3-verificacao/`) |
+| 0 | `stub` | — | **pronto** (padrão) |
+
+As **Opções 1 e 3** foram verificadas ponta a ponta em `.venv`: `POST /predict`
+retornou **detecções reais** (person/bus) e `POST /segment/sam` retornou um
+contorno **real** de 2031 pontos. Evidências: `op1-verificacao/op1-live-evidence.json`
+e `op3-verificacao/op3-live-evidence.json`. Os pesos usados são de **demonstração**
+(COCO / SAM base), **não** odontológicos.
+
+A **Opção 3** foi reforçada com o **MedSAM real** (`medsam_vit_b.pth`,
+sha256 `34b34b78…`, SPEC-935-R875): `POST /segment/sam` retorna contorno real em
+**CPU**. Defeito corrigido — o checkpoint MedSAM ancora storages em CUDA e o
+`segment_anything` carrega sem `map_location`; a reprodução usa `_load_sam`
+(`map_location="cpu"` + `load_state_dict(strict=True)`, cache por caminho).
 
 Rodar:
 
 ```bash
-python3 -m uvicorn app:app --app-dir outputs/core-r853-rx/repro/backend --port 8799
-# Front-end: http://127.0.0.1:8799/   Swagger: http://127.0.0.1:8799/docs
+# Forma recomendada — servidor DUAL-STACK (IPv4 + IPv6) num único processo (R878):
+cd outputs/core-r853-rx/repro
+RX_ENGINE=open_base RX_MEDSAM_CKPT=~/.cache/rx-weights/medsam_vit_b.pth \
+    python3 serve.py
+# Visualizador: http://127.0.0.1:8799/  (ou http://localhost:8799/)  Opções: /opcoes   Swagger: /docs
+# LAN: http://<IP-do-host>:8799/   (ex.: http://172.17.162.153:8799/)
+# Porta: RX_PORT=9000 python3 serve.py
+# Escolher motor: RX_ENGINE=weights|open_base|stub  ou a interface /opcoes
+# Banco (persistência): RX_ADMIN_DB=/caminho/admin.db  (default ~/.cache/rx-admin/admin.db)
 ```
 
-Verificar: `python3 -m pytest tests/test_r853_rx_repro.py -q`
-(o teste replica `readImageBundle` e confere ZIP_STORED, cards, dimensões e cabeçalhos).
+> `serve.py` (R878) abre um socket AF_INET6 em `[::]` com `IPV6_V6ONLY=0` e o
+> entrega ao uvicorn — o `uvicorn --host` liga só **uma** família por processo
+> (`--host 127.0.0.1` = só IPv4; `--host ::` = só IPv6). Necessário porque
+> `localhost` resolve para `::1` neste host. **Atenção:** expõe o serviço na LAN;
+> as rotas admin usam credenciais de **demonstração** — não usar com dados reais.
+>
+> Forma alternativa (IPv4 apenas, uvicorn clássico):
+> `python3 -m uvicorn app:app --app-dir outputs/core-r853-rx/repro/backend --port 8799`
+
+### Publicar online (container) — R882
+
+O GitHub Pages **não** roda a app (é estático/sem Python). Para publicar a app
+**funcionando**, use um host Python via Docker — o pacote já está pronto em
+`repro/`: `Dockerfile`, `backend/requirements.txt` (runtime mínimo: fastapi/
+uvicorn/pillow/python-multipart), `.dockerignore` e o Blueprint `render.yaml`.
+Com `RX_ENGINE=stub` a imagem roda **sem pesos e sem torch** (testado).
+Passo a passo completo (Render/Railway/Fly/Cloud Run/HF Spaces) em
+[`DEPLOY.md`](./DEPLOY.md). O deploy é executado pelo operador; a verificação é
+por HTTP (`/health` 200), não por "o build passou".
+
+### Áreas administrativas completas + persistência (R874)
+
+A reprodução cobre agora **as 23 rotas do contrato** e as **11 rotas admin que o
+front `/review` e `/validacao` realmente chamam** (antes ausentes → 404):
+
+`/admin/api/images/{id}` (+`/thumbnail`,`/image`,`/age`,`/edit-lock`,`/segment`),
+`/admin/api/jobs/{id}`, `/admin/api/batch[/{id}]`, `/admin/api/export`,
+`/validacao/api/modelos/{slug}`, `/validacao/api/modelos/{slug}/imagens/{id}/revisao`,
+`/validacao/{slug}` (HTML). Sessões, imagens, anotações, jobs, lotes, lock de
+edição, feedback e relatórios de validação persistem em **SQLite** (`store.py`).
+
+Os dados semeados são **DEMONSTRAÇÃO SINTÉTICA** (12 radiografias geradas
+proceduralmente, 5 relatórios de modelo) — apenas para exercitar a interface;
+**não** são o banco real do alvo nem dados clínicos. As páginas `/review`,
+`/validacao` e `/validacao/{slug}` funcionam ponta a ponta (login → listar →
+revisar → exportar).
+
+Verificar: `python3 -m pytest tests/test_r853_rx_repro.py tests/test_r874_rx_admin.py -q`
+(**R853**: 18 testes — contrato, ZIP_STORED, cards/dimensões, cabeçalhos, SAM,
+feedback, admin 401, opções de motor, fallback honesto (R876), scaffold de treino,
+Opções 1 e 3 reais sob `.venv`; **R874**: 19 testes — sessão/CSRF, statistics, reviews
+paginadas, imagens PNG, idade, lock, job, lote, export ZIP, relatórios de validação,
+persistência após reabertura, 401 sem sessão, 404 de slug).
+
+### Composição por capacidade (R876)
+
+O erro relatado pelo operador —
+`{"detail":"motor 'open_base' não cobre 'detection' …"}` (409) com `RX_MEDSAM_CKPT`
+— decorria de um **único motor ativo** com *guard* por rota. A reprodução agora
+**compõe por capacidade**: o motor ativo serve o que ele cobre; o restante é
+servido pelo **melhor motor disponível** (motores reais antes do `stub`). Com
+`open_base` ativo, `POST /predict` responde **200** (detecção → `stub`) e
+`POST /segment/sam` responde **200** via **MedSAM real**. `/health` e `/opcoes.json`
+expõem `engine.serving` (`detection/sam/bundle`); a página `/opcoes` mostra o mapa.
+O **fail-closed permanece**: 409 **apenas** quando nenhum motor disponível cobre a
+capacidade. Ver: `specs/SPEC-935-R876-rx-composicao-por-capacidade.md`,
+`tests/test_r876_rx_capability.py` (9 testes).
+
+Verificar: `python3 -m pytest tests/test_r853_rx_repro.py tests/test_r874_rx_admin.py tests/test_r875_medsam_cpu.py tests/test_r876_rx_capability.py -q`
 
 ## 6. Ética e escopo
 

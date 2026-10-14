@@ -1,0 +1,30 @@
+# Render Blueprint — reprodução RX / ODONTOCA (SPEC-935-R882)
+#
+# IMPORTANTE: defina o "Root Directory" do serviço como
+#   outputs/core-r853-rx/repro
+# (é onde ficam o Dockerfile e o contexto de build). Alternativamente, crie o
+# serviço manualmente no painel Render apontando esse diretório.
+services:
+  - type: web
+    name: odontoca-rx
+    runtime: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    autoDeploy: false
+    envVars:
+      # Demo: engine stub (sem pesos). Nossa rede: só o que o container precisa.
+      - key: RX_ENGINE
+        value: stub
+      # Render injeta PORT; 0.0.0.0 é obrigatório para receber tráfego externo.
+      - key: RX_HOST
+        value: 0.0.0.0
+      - key: RX_ADMIN_DB
+        value: /data/admin.db
+# Persistência opcional (paga): descomente e dimensione para manter o SQLite.
+#    disks:
+#      - name: dados
+#        mountPath: /data
+#        sizeGB: 1

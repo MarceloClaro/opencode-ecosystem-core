@@ -38,6 +38,13 @@ são acessíveis publicamente.
 7. Não declarar acesso ao modelo treinado; nada promovido
    (`externally_validated=false`, `confidence_promoted=false`).
 8. Ética: nada destrutivo, sem credenciais, sem contornar autenticação.
+9. **Opções de motor** expostas ao usuário (pedido do operador): `stub` (padrão,
+   sempre pronto), `weights` (Opção 1 — inferência real com `.pt` do operador via
+   `RX_WEIGHTS_DIR`+`ultralytics`), `training` (Opção 2 — pipeline de treino em
+   `repro/training/`, requer GPU/datasets) e `open_base` (Opção 3 — `/segment/sam`
+   real via MedSAM). Selecionável em `/opcoes` (HTML) e `GET/POST /opcoes`, e por
+   `RX_ENGINE`. **Fail-closed**: motor indisponível devolve **409** com o motivo —
+   jamais resultado falso.
 
 ## Resultado
 
@@ -48,14 +55,23 @@ são acessíveis publicamente.
 - **Artefatos** (`api/`): `openapi.json`, `health.json`, `pages/{index.html,editor.js,review.html,validacao.html,docs.html}`
   com hashes registrados em `rea-evidence.json`.
 - **Reprodução** (`repro/`): FastAPI + front-end fiel; teste `test_r853_rx_repro.py`
-  **9/9** (ZIP_STORED, cards, dimensões, cabeçalhos, SAM, feedback, sessão admin).
+  **16/16** (ZIP_STORED, cards, dimensões, cabeçalhos, SAM, feedback, sessão admin,
+  opções de motor, fail-closed 409, scaffold de treino). Verificado ao vivo
+  (uvicorn): `/opcoes.json` lista 4 motores; ativar `weights` sem `ultralytics` →
+  `/predict/images` **409** com causa; `stub` → **200**.
 - **Modelo treinado**: **não obtido**. `/health` só expõe hashes e métricas;
   `/models/`, `/weights/`, `/artifacts/`, `/static/models/` → **404**; admin → **401**.
+  Extração de pesos via API foi **recusada** (model extraction não autorizado).
 
 ## Limites
 
 A qualidade clínica dos modelos não é reproduzida. Áreas administrativas
-(`/admin/api/*`, `/validacao/api/*`) são reproduzidas como stub autenticado, sem
+(`/admin/api/*`, `/validacao/api/*`) foram reproduzidas como stub autenticado, sem
 os dados reais de banco. Caminhos dinâmicos (`/admin/api/images/${id}`) não são
 totalmente resolvidos pela análise estática. Presuma-se autorização do titular
 para reutilização de código/ativos.
+
+> **Continuação (R874):** a completude das rotas admin/validação e a persistência
+> (SQLite) foram implementadas em `SPEC-935-R874-rx-admin-completude-persistencia.md`
+> — as 11 rotas que o front `/review` e `/validacao` chamam de fato deixaram de
+> faltar, com dados de **demonstração sintética**.
