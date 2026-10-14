@@ -80,7 +80,7 @@ Esses números devem ser reavaliados no checkout instalado e não representam
 resultado de testes, cobertura ou validação externa.
 
 <!-- core-state:start -->
-**255 agentes** · **16 MCPs** · **30 comandos** · **22 checks**
+**255 agentes** · **16 MCPs** · **31 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](../opencode.json) e do [diagnóstico estrutural](../marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 

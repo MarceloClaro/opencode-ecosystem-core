@@ -1,0 +1,851 @@
+{
+  "schema": "core.repo_review.r888.a.v1",
+  "reviewed_at_utc": "2026-10-14T09:56:01.664421+00:00",
+  "verification": "local_static_source_review",
+  "method": "GitHub API commit/tree + raw pinned selected files + REA local assistant through MarceloClaroOrchestrator(auto_load_agents=False)",
+  "third_party_runtime_installed": false,
+  "third_party_target_executed": false,
+  "all_sources_trusted": false,
+  "externally_validated": false,
+  "confidence_promoted": false,
+  "repositories": [
+    {
+      "repository": "MarceloClaro/mira-animator",
+      "url": "https://github.com/MarceloClaro/mira-animator",
+      "commit": "3e72a6533cf4642e3bfd9128b69e7cf3431fcf7c",
+      "default_branch": "main",
+      "fork": true,
+      "upstream": "sandeco/mira-animator",
+      "tree_truncated": false,
+      "tree_blob_count": 681,
+      "license": {
+        "code": "PolyForm-Noncommercial-1.0.0",
+        "evidence": "LICENSE:1-9; package.json:license"
+      },
+      "sample_files": [
+        {
+          "repo": "mira-animator",
+          "path": "README.md",
+          "bytes": 13469,
+          "sha256": "e5d71b82672feb7dfa2e4a63f5720df2a9e740117b63a1a81771258b6e3e9a34",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/mira-animator/3e72a6533cf4642e3bfd9128b69e7cf3431fcf7c/README.md",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/mira-animator/README.md"
+        },
+        {
+          "repo": "mira-animator",
+          "path": "LICENSE",
+          "bytes": 4678,
+          "sha256": "f98bcd1c459c1f719144d3952742d8981bc24be8baf5697ab1c6618025a8985b",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/mira-animator/3e72a6533cf4642e3bfd9128b69e7cf3431fcf7c/LICENSE",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/mira-animator/LICENSE"
+        },
+        {
+          "repo": "mira-animator",
+          "path": "package.json",
+          "bytes": 2058,
+          "sha256": "085b2b0ab9a118ddfcb217d802e888fecad2bfe7d3ecb299339e4ac9360658e3",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/mira-animator/3e72a6533cf4642e3bfd9128b69e7cf3431fcf7c/package.json",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/mira-animator/package.json"
+        },
+        {
+          "repo": "mira-animator",
+          "path": "bin/mira.js",
+          "bytes": 2394,
+          "sha256": "d409c342264caa06076254e26b75d9c2478e55e93aa44e1e993c10626015e77f",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/mira-animator/3e72a6533cf4642e3bfd9128b69e7cf3431fcf7c/bin/mira.js",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/mira-animator/bin/mira.js"
+        },
+        {
+          "repo": "mira-animator",
+          "path": "mira-serve.js",
+          "bytes": 5260,
+          "sha256": "e8322279a9a5b759da64f4e7ed679b86eb0ec80dbb21a8f1d8e1c9d364f360fe",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/mira-animator/3e72a6533cf4642e3bfd9128b69e7cf3431fcf7c/mira-serve.js",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/mira-animator/mira-serve.js"
+        },
+        {
+          "repo": "mira-animator",
+          "path": "lib/runtime/version-notice.js",
+          "bytes": 4252,
+          "sha256": "ee4b1bd110cad936e5d3ec6b1525db0f073249ae15763a1425ea47bfca1e5146",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/mira-animator/3e72a6533cf4642e3bfd9128b69e7cf3431fcf7c/lib/runtime/version-notice.js",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/mira-animator/lib/runtime/version-notice.js"
+        },
+        {
+          "repo": "mira-animator",
+          "path": "lib/installer/writer.js",
+          "bytes": 6054,
+          "sha256": "728a7ce6bb6b7ca4e2bdc7d066d5c030ec4354e3da34f1998ff866e7e59d693b",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/mira-animator/3e72a6533cf4642e3bfd9128b69e7cf3431fcf7c/lib/installer/writer.js",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/mira-animator/lib/installer/writer.js"
+        },
+        {
+          "repo": "mira-animator",
+          "path": "lib/commands/install.js",
+          "bytes": 5225,
+          "sha256": "6a0979fccafabeeecdd651301467efaea4051df0f58195774e4549963ef36209",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/mira-animator/3e72a6533cf4642e3bfd9128b69e7cf3431fcf7c/lib/commands/install.js",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/mira-animator/lib/commands/install.js"
+        },
+        {
+          "repo": "mira-animator",
+          "path": "lib/commands/new.js",
+          "bytes": 5392,
+          "sha256": "e229d79549b595a7936e76f649ac65d558375205c0256f318cb8f83eaa2cf0fb",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/mira-animator/3e72a6533cf4642e3bfd9128b69e7cf3431fcf7c/lib/commands/new.js",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/mira-animator/lib/commands/new.js"
+        },
+        {
+          "repo": "mira-animator",
+          "path": "templates/decks/demo-tecnica/index.html",
+          "bytes": 23784,
+          "sha256": "322e9527f6b82f854de62884be7e488644b3e86506376040f7b491da382c34c9",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/mira-animator/3e72a6533cf4642e3bfd9128b69e7cf3431fcf7c/templates/decks/demo-tecnica/index.html",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/mira-animator/templates/decks/demo-tecnica/index.html"
+        }
+      ],
+      "decision": {
+        "priority": "reference_only_license_scoped",
+        "adaptation": "Padrão abstrato de fonte vinculada somente leitura e artefato de apresentação isolado. Não transplantar instalador, skills, templates ou hooks.",
+        "core_targets": [
+          "webapp/memory_network_visualizer.py",
+          "docs/architecture/",
+          "mci/evidence_graph.py"
+        ],
+        "network_findings": [
+          "lib/runtime/version-notice.js: fetch registry.npmjs.org em processo destacado",
+          "mira-serve.js: servidor loopback com CORS * e POST gravável",
+          "README: templates CDN/Google Forms/Iconify; offline exige preparação específica"
+        ]
+      },
+      "rea": {
+        "receipt": "outputs/core-r888/a-rea-mira-animator.json",
+        "receipt_sha256": "1ece51ed7e6151a9574d675df0d01873e66a31b75779347f112fef48792d0899",
+        "success": true,
+        "kind": "javascript",
+        "analysis_executed": true,
+        "unsupported_kind_rejection": false,
+        "target_unchanged": true,
+        "target_digest": {
+          "sha256": "d409c342264caa06076254e26b75d9c2478e55e93aa44e1e993c10626015e77f",
+          "files": 1,
+          "bytes": 2394,
+          "algorithm": "sha256"
+        },
+        "privacy": {
+          "mode": "isolated_local_analysis",
+          "network_namespace": "net:[4026532231]",
+          "pid_namespace": "pid:[4026532230]",
+          "interfaces": [
+            "lo"
+          ],
+          "external_route_available": false,
+          "host_probe_connected": false,
+          "scope": "analytical_worker_and_descendants; trusted_local_MCP_client_required"
+        },
+        "metacognition": {
+          "observation_id": "76376b3b-2102-4629-a153-d6b30f3012ce",
+          "persisted": true,
+          "scope_id": "c87d43ce04605f7533aa99690b735226b696c7546c3ff0baca727b43c0876322",
+          "previous_observation_id": "eb5d3e75-a914-459d-8ae2-133c8d752ed5",
+          "state_transition": {
+            "from": null,
+            "to": null
+          },
+          "confidence_promoted": false,
+          "externally_validated": false
+        },
+        "error": null,
+        "limitations": [
+          "A aplicação alvo não foi executada; achados são estáticos.",
+          "Inspeção e metadados não recuperam necessariamente o código-fonte original.",
+          "A garantia local cobre o worker; clientes de inferência em nuvem não fazem parte deste modo.",
+          "Arquivo JavaScript avulso copiado sem alteração para diretório temporário: imports e arquivos vizinhos não foram incluídos.",
+          "CommonJS and ESM binding relationships were recovered from inert syntax and resolved only within the inventoried artifact container.",
+          "JavaScript and HTML were parsed as inert text; bundle bootstrap code was never executed.",
+          "Static imports, entrypoints, workers, endpoints, and storage relationships do not prove runtime execution.",
+          "Static paths and relationships may remain unresolved when expressions are dynamic or obfuscated.",
+          "Webpack/Rspack factories were recovered from AST literals; REA did not invoke push handlers or bundle bootstrap code."
+        ],
+        "provider_provenance": {
+          "repository": "https://github.com/MarceloClaro/rea",
+          "commit": "4daea941bfeeb426886f2d048aed7f3cb2dbf97b",
+          "version": "6.4.0",
+          "runtime": {
+            "source_dir": "/home/marceloclaro/.local/share/opencode-core/rea",
+            "node": "/usr/bin/node",
+            "launcher": "/home/marceloclaro/.local/share/opencode-core/rea/scripts/rea.mjs"
+          },
+          "response_sha256": "cbaf6d9d57d97346b707840d7d3d2b57356f51ca5166b4dbc85384f0d520eaf0"
+        }
+      }
+    },
+    {
+      "repository": "MarceloClaro/RAGnaRock",
+      "url": "https://github.com/MarceloClaro/RAGnaRock",
+      "commit": "45637fea5e97ae4dec6ce1da697abf5575dbe008",
+      "default_branch": "main",
+      "fork": true,
+      "upstream": "pacmanalx/RAGnaRock",
+      "tree_truncated": false,
+      "tree_blob_count": 136,
+      "license": {
+        "code": "MIT",
+        "data": "Licenças de dicionários/thesauri não cobertas automaticamente por MIT",
+        "evidence": "LICENSE.md; README.md:License"
+      },
+      "sample_files": [
+        {
+          "repo": "RAGnaRock",
+          "path": "README.md",
+          "bytes": 8402,
+          "sha256": "eb7b02537888bcb3289877b3f155997bf55a6e0c59d3e466c99b992e9ee04609",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/RAGnaRock/45637fea5e97ae4dec6ce1da697abf5575dbe008/README.md",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/RAGnaRock/README.md"
+        },
+        {
+          "repo": "RAGnaRock",
+          "path": "LICENSE.md",
+          "bytes": 1074,
+          "sha256": "592085c83c4d1b479afe972a44e624335eb8ab12810e40ab78a90c1f99d612c2",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/RAGnaRock/45637fea5e97ae4dec6ce1da697abf5575dbe008/LICENSE.md",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/RAGnaRock/LICENSE.md"
+        },
+        {
+          "repo": "RAGnaRock",
+          "path": "ARCHITECTURE.md",
+          "bytes": 39244,
+          "sha256": "32c261789bea1e058d980870b074d662cecd24bb5c00b343cb67f5d8bf023193",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/RAGnaRock/45637fea5e97ae4dec6ce1da697abf5575dbe008/ARCHITECTURE.md",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/RAGnaRock/ARCHITECTURE.md"
+        },
+        {
+          "repo": "RAGnaRock",
+          "path": "JSONCONTRACT.md",
+          "bytes": 9675,
+          "sha256": "59f144742addb1526d6531efe90e52335f2eaf087adb963ea060b5a3ce305970",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/RAGnaRock/45637fea5e97ae4dec6ce1da697abf5575dbe008/JSONCONTRACT.md",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/RAGnaRock/JSONCONTRACT.md"
+        },
+        {
+          "repo": "RAGnaRock",
+          "path": "examples/mcp/mcp_ragnarock_server.py",
+          "bytes": 12744,
+          "sha256": "4b3478946943d16ee1b2633956e7b974a77acc631f6b4dfe9ffc1607c08b555d",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/RAGnaRock/45637fea5e97ae4dec6ce1da697abf5575dbe008/examples/mcp/mcp_ragnarock_server.py",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/RAGnaRock/examples/mcp/mcp_ragnarock_server.py"
+        },
+        {
+          "repo": "RAGnaRock",
+          "path": "examples/mcp/requirements.txt",
+          "bytes": 142,
+          "sha256": "1d0f69dfa7211f16e0734678eae2ef75ea8a8097006e4b65a7f65db1cfc3a769",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/RAGnaRock/45637fea5e97ae4dec6ce1da697abf5575dbe008/examples/mcp/requirements.txt",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/RAGnaRock/examples/mcp/requirements.txt"
+        },
+        {
+          "repo": "RAGnaRock",
+          "path": "ragd/Cargo.toml",
+          "bytes": 496,
+          "sha256": "163f9bf3f357c3cbc125dd92a6aaba6a6dd021b6bd9b957026303702b2fa3bc9",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/RAGnaRock/45637fea5e97ae4dec6ce1da697abf5575dbe008/ragd/Cargo.toml",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/RAGnaRock/ragd/Cargo.toml"
+        },
+        {
+          "repo": "RAGnaRock",
+          "path": "ragd/src/main.rs",
+          "bytes": 147341,
+          "sha256": "eeeb4f18489606b5b93e0077e6f7ed9ac0909ab55289a8b08346a457a40d0633",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/RAGnaRock/45637fea5e97ae4dec6ce1da697abf5575dbe008/ragd/src/main.rs",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/RAGnaRock/ragd/src/main.rs"
+        },
+        {
+          "repo": "RAGnaRock",
+          "path": "ragd/src/rag.rs",
+          "bytes": 35756,
+          "sha256": "157d9ed06e66b1ba8643d5709a3368980cd6e67307012a7173285bffe1dedf7b",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/RAGnaRock/45637fea5e97ae4dec6ce1da697abf5575dbe008/ragd/src/rag.rs",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/RAGnaRock/ragd/src/rag.rs"
+        },
+        {
+          "repo": "RAGnaRock",
+          "path": "ragd/src/index.rs",
+          "bytes": 394,
+          "sha256": "02801946cc88e1c643f74934def9e1bc9580951564f0bcc54c1aaf8eb4cd299f",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/RAGnaRock/45637fea5e97ae4dec6ce1da697abf5575dbe008/ragd/src/index.rs",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/RAGnaRock/ragd/src/index.rs"
+        },
+        {
+          "repo": "RAGnaRock",
+          "path": "ragd/src/tokenizer.rs",
+          "bytes": 7472,
+          "sha256": "83365e3ee4baa909aeab1204e8f9b1a1d078dc66f0976b67ac6860563bee9e6b",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/RAGnaRock/45637fea5e97ae4dec6ce1da697abf5575dbe008/ragd/src/tokenizer.rs",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/RAGnaRock/ragd/src/tokenizer.rs"
+        },
+        {
+          "repo": "RAGnaRock",
+          "path": "ragd/src/ingestor.rs",
+          "bytes": 17751,
+          "sha256": "9f68227cf56af6dfc00ca4622e298f1123749b5c26fecf1e6518a3b97d3dbb83",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/RAGnaRock/45637fea5e97ae4dec6ce1da697abf5575dbe008/ragd/src/ingestor.rs",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/RAGnaRock/ragd/src/ingestor.rs"
+        },
+        {
+          "repo": "RAGnaRock",
+          "path": "ragnarock.cfg.example",
+          "bytes": 4231,
+          "sha256": "645669394e633e04a59cd6b6a71e2e33c8bda81339a1f87befc533e8768f4221",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/RAGnaRock/45637fea5e97ae4dec6ce1da697abf5575dbe008/ragnarock.cfg.example",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/RAGnaRock/ragnarock.cfg.example"
+        },
+        {
+          "repo": "RAGnaRock",
+          "path": "python_concept/sylkit/index.py",
+          "bytes": 574,
+          "sha256": "15b2c558af7cc35cd9c6b8e1f99be21d609b65e38c50fe5e9ed047ce15e4443f",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/RAGnaRock/45637fea5e97ae4dec6ce1da697abf5575dbe008/python_concept/sylkit/index.py",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/RAGnaRock/python_concept/sylkit/index.py"
+        },
+        {
+          "repo": "RAGnaRock",
+          "path": "python_concept/sylkit/vector.py",
+          "bytes": 2380,
+          "sha256": "a776c8037a35fcd85fa3176dc9614c6cb1febe5cced9543f93c844cb5d59f341",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/RAGnaRock/45637fea5e97ae4dec6ce1da697abf5575dbe008/python_concept/sylkit/vector.py",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/RAGnaRock/python_concept/sylkit/vector.py"
+        },
+        {
+          "repo": "RAGnaRock",
+          "path": "python_concept/sylkit/tokenizer.py",
+          "bytes": 5178,
+          "sha256": "83070fc3ef50bed69bc6e8f655a1a23c23b795293aeff8bfaf37d61d764bdbaf",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/RAGnaRock/45637fea5e97ae4dec6ce1da697abf5575dbe008/python_concept/sylkit/tokenizer.py",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/RAGnaRock/python_concept/sylkit/tokenizer.py"
+        },
+        {
+          "repo": "RAGnaRock",
+          "path": "python_concept/sylkit/vocab.py",
+          "bytes": 1686,
+          "sha256": "22185a41c5b4eeb7247477c094a94ba428e6ea2785112723b02774b3b67a3576",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/RAGnaRock/45637fea5e97ae4dec6ce1da697abf5575dbe008/python_concept/sylkit/vocab.py",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/RAGnaRock/python_concept/sylkit/vocab.py"
+        },
+        {
+          "repo": "RAGnaRock",
+          "path": "python_concept/sylkit/chunk.py",
+          "bytes": 844,
+          "sha256": "3ef020cd5699c78c09e587b65d3e1cfdf3abcfba53dcc25ed9c9001217563c3a",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/RAGnaRock/45637fea5e97ae4dec6ce1da697abf5575dbe008/python_concept/sylkit/chunk.py",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/RAGnaRock/python_concept/sylkit/chunk.py"
+        },
+        {
+          "repo": "RAGnaRock",
+          "path": "ragd/src/dashboard.html",
+          "bytes": 90597,
+          "sha256": "e2cb90aec838f3b47e403207f5a6d078c391eb101dbc8952e3c5a4623e45ac65",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/RAGnaRock/45637fea5e97ae4dec6ce1da697abf5575dbe008/ragd/src/dashboard.html",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/RAGnaRock/ragd/src/dashboard.html"
+        }
+      ],
+      "decision": {
+        "priority": "adapt_contract_not_daemon",
+        "adaptation": "Resultado de recuperação compacto, escopado e com citações de origem; separar consulta de ingestão e registrar ausência/OOV sem promover confiança.",
+        "core_targets": [
+          "mci/metabus.py:MetacognitiveMemory.search_memory",
+          "mci/metacognitive_loop.py:MetacognitiveLoop.prepare",
+          "integrations/code_context.py (piloto R887)"
+        ],
+        "network_findings": [
+          "ragd/src/main.rs:651,671 bind 0.0.0.0 API/painel",
+          "ragd/src/main.rs:907-950 expansão opcional envia consulta a OpenAI/Anthropic via wget",
+          "API pública tem rotas de leitura e ingestão; painel tem autenticação própria, não demonstrada na API principal",
+          "examples/mcp/mcp_ragnarock_server.py permite RAGD_URL arbitrário, urllib com redirects padrão e ingestão mutável"
+        ]
+      },
+      "rea": {
+        "receipt": "outputs/core-r888/a-rea-RAGnaRock.json",
+        "receipt_sha256": "a0384ff6bc43486af299fcb606057dd901451720e6d72d292299810e2f582fbb",
+        "success": true,
+        "kind": "html",
+        "analysis_executed": true,
+        "unsupported_kind_rejection": false,
+        "target_unchanged": true,
+        "target_digest": {
+          "sha256": "e2cb90aec838f3b47e403207f5a6d078c391eb101dbc8952e3c5a4623e45ac65",
+          "files": 1,
+          "bytes": 90597,
+          "algorithm": "sha256"
+        },
+        "privacy": {
+          "mode": "isolated_local_analysis",
+          "network_namespace": "net:[4026532232]",
+          "pid_namespace": "pid:[4026532231]",
+          "interfaces": [
+            "lo"
+          ],
+          "external_route_available": false,
+          "host_probe_connected": false,
+          "scope": "analytical_worker_and_descendants; trusted_local_MCP_client_required"
+        },
+        "metacognition": {
+          "observation_id": "45b103cb-0ff2-434b-a64c-3557537fb509",
+          "persisted": true,
+          "scope_id": "c87d43ce04605f7533aa99690b735226b696c7546c3ff0baca727b43c0876322",
+          "previous_observation_id": "76376b3b-2102-4629-a153-d6b30f3012ce",
+          "state_transition": {
+            "from": null,
+            "to": null
+          },
+          "confidence_promoted": false,
+          "externally_validated": false
+        },
+        "error": null,
+        "limitations": [
+          "A aplicação alvo não foi executada; achados são estáticos.",
+          "Inspeção e metadados não recuperam necessariamente o código-fonte original.",
+          "A garantia local cobre o worker; clientes de inferência em nuvem não fazem parte deste modo.",
+          "Links e scripts foram enumerados, sem acesso aos destinos nem execução de JavaScript."
+        ],
+        "provider_provenance": null
+      }
+    },
+    {
+      "repository": "MarceloClaro/superhuman",
+      "url": "https://github.com/MarceloClaro/superhuman",
+      "commit": "ddd68dc9191022a0c8bbb7c5a417e7ce2e90f2f7",
+      "default_branch": "main",
+      "fork": true,
+      "upstream": "google-deepmind/superhuman",
+      "tree_truncated": false,
+      "tree_blob_count": 62,
+      "license": {
+        "code": "Apache-2.0",
+        "data": "CC-BY-4.0",
+        "evidence": "README.md:License and disclaimer"
+      },
+      "sample_files": [
+        {
+          "repo": "superhuman",
+          "path": "README.md",
+          "bytes": 2237,
+          "sha256": "a4ccd45694d8cb9869205cb93cc9cc66ab3e875bbc22b0e3fb959b88c02cf553",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/superhuman/ddd68dc9191022a0c8bbb7c5a417e7ce2e90f2f7/README.md",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/superhuman/README.md"
+        },
+        {
+          "repo": "superhuman",
+          "path": "LICENSE",
+          "bytes": 11358,
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/superhuman/ddd68dc9191022a0c8bbb7c5a417e7ce2e90f2f7/LICENSE",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/superhuman/LICENSE"
+        },
+        {
+          "repo": "superhuman",
+          "path": "aletheia/README.md",
+          "bytes": 4416,
+          "sha256": "593259f06139dd43cbc31846ac3fc61f37673be91a47b40b224493fd7759d328",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/superhuman/ddd68dc9191022a0c8bbb7c5a417e7ce2e90f2f7/aletheia/README.md",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/superhuman/aletheia/README.md"
+        },
+        {
+          "repo": "superhuman",
+          "path": "imobench/README.md",
+          "bytes": 2616,
+          "sha256": "27d3eb55a649950ffc15db169c0bab822f11602c016f928a827cea2abf01f4e9",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/superhuman/ddd68dc9191022a0c8bbb7c5a417e7ce2e90f2f7/imobench/README.md",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/superhuman/imobench/README.md"
+        }
+      ],
+      "decision": {
+        "priority": "repair_existing_benchmark_first",
+        "adaptation": "Separar gabarito e entrada do solver; sem executor não há resultado; separar acerto textual, nota heurística e prova formal; versões v2 e corpus retido com hash em avaliação futura.",
+        "core_targets": [
+          "integrations/deepmind/imobench_harness.py",
+          "integrations/deepmind/aletheia_scaffold.py",
+          "benchmarks/scientific_reasoning/runner.py"
+        ],
+        "network_findings": [
+          "Amostra contém dados/prompts/TeX, sem runtime Aletheia publicamente executável neste fork",
+          "Links para Gemini Deep Think não conferem disponibilidade nem validação ao Core"
+        ]
+      },
+      "rea": {
+        "receipt": "outputs/core-r888/a-rea-superhuman.json",
+        "receipt_sha256": null,
+        "success": false,
+        "kind": null,
+        "analysis_executed": false,
+        "unsupported_kind_rejection": true,
+        "target_unchanged": null,
+        "target_digest": null,
+        "privacy": null,
+        "metacognition": null,
+        "error": "Tipo de inspeção não suportado.",
+        "limitations": [],
+        "provider_provenance": null
+      }
+    },
+    {
+      "repository": "MarceloClaro/opentwins",
+      "url": "https://github.com/MarceloClaro/opentwins",
+      "commit": "2511ffebb245c47098f6809e8dd632387de7ee2f",
+      "default_branch": "main",
+      "fork": true,
+      "upstream": "ertis-research/opentwins",
+      "tree_truncated": false,
+      "tree_blob_count": 184,
+      "license": {
+        "code": "Apache-2.0",
+        "evidence": "LICENSE"
+      },
+      "sample_files": [
+        {
+          "repo": "opentwins",
+          "path": "README.md",
+          "bytes": 2367,
+          "sha256": "29377af2ddf1e27c67cda13a90abc683ab9342ebe5e1af75ee2efda42414b936",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/opentwins/2511ffebb245c47098f6809e8dd632387de7ee2f/README.md",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/opentwins/README.md"
+        },
+        {
+          "repo": "opentwins",
+          "path": "LICENSE",
+          "bytes": 11357,
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/opentwins/2511ffebb245c47098f6809e8dd632387de7ee2f/LICENSE",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/opentwins/LICENSE"
+        },
+        {
+          "repo": "opentwins",
+          "path": ".gitmodules",
+          "bytes": 910,
+          "sha256": "f84d4a46a0628ba5e656e52c2e63a20741dad275ea83742e515c5ad78120ebf2",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/opentwins/2511ffebb245c47098f6809e8dd632387de7ee2f/.gitmodules",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/opentwins/.gitmodules"
+        },
+        {
+          "repo": "opentwins",
+          "path": "docs/package.json",
+          "bytes": 1169,
+          "sha256": "d106f5887c952a094baec070179a848eb267efbecc1dc6efeb23acb0912473b1",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/opentwins/2511ffebb245c47098f6809e8dd632387de7ee2f/docs/package.json",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/opentwins/docs/package.json"
+        },
+        {
+          "repo": "opentwins",
+          "path": "files_for_manual_deploy/values-cloud2edge.yaml",
+          "bytes": 279,
+          "sha256": "2d80d1d93f89669773e73c639f2980514c0cf1b8a85960cc1916152c3de995f4",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/opentwins/2511ffebb245c47098f6809e8dd632387de7ee2f/files_for_manual_deploy/values-cloud2edge.yaml",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/opentwins/files_for_manual_deploy/values-cloud2edge.yaml"
+        },
+        {
+          "repo": "opentwins",
+          "path": "files_for_manual_deploy/values-grafana.yaml",
+          "bytes": 72,
+          "sha256": "899eef4fc21661a8f4f25f2bb4504ed714661e468bb467e06b4470b03dee71c3",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/opentwins/2511ffebb245c47098f6809e8dd632387de7ee2f/files_for_manual_deploy/values-grafana.yaml",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/opentwins/files_for_manual_deploy/values-grafana.yaml"
+        },
+        {
+          "repo": "opentwins",
+          "path": "files_for_manual_deploy/values-influxdb2.yaml",
+          "bytes": 111,
+          "sha256": "384e28b81c2ffc7c99bcdf286b63e066b9c05f2e23765c613d4062c55eb6bb56",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/opentwins/2511ffebb245c47098f6809e8dd632387de7ee2f/files_for_manual_deploy/values-influxdb2.yaml",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/opentwins/files_for_manual_deploy/values-influxdb2.yaml"
+        },
+        {
+          "repo": "opentwins",
+          "path": "files_for_manual_deploy/ext-api-deployment.yaml",
+          "bytes": 1016,
+          "sha256": "9c935115d080d9e82bf576ce732178fad7502970ced88265fe4a93c0f0b7a3b2",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/opentwins/2511ffebb245c47098f6809e8dd632387de7ee2f/files_for_manual_deploy/ext-api-deployment.yaml",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/opentwins/files_for_manual_deploy/ext-api-deployment.yaml"
+        },
+        {
+          "repo": "opentwins",
+          "path": "files_for_manual_deploy/pod-kafka.yaml",
+          "bytes": 1477,
+          "sha256": "830f373096aa43f69f15680b0faa694069c122c198b7f7b33a250b82dd976b90",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/opentwins/2511ffebb245c47098f6809e8dd632387de7ee2f/files_for_manual_deploy/pod-kafka.yaml",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/opentwins/files_for_manual_deploy/pod-kafka.yaml"
+        },
+        {
+          "repo": "opentwins",
+          "path": "docs/docs/guides/fmi/API.md",
+          "bytes": 12621,
+          "sha256": "6e1b86470276c26239c73e2475342489e1d8ff9dfea950540f17e415b3d00403",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/opentwins/2511ffebb245c47098f6809e8dd632387de7ee2f/docs/docs/guides/fmi/API.md",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/opentwins/docs/docs/guides/fmi/API.md"
+        },
+        {
+          "repo": "opentwins",
+          "path": "docs/babel.config.js",
+          "bytes": 89,
+          "sha256": "599159185d1c4b953d9603f93fdf9a23a4f20fb78d03ae8bf4de77043969332e",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/opentwins/2511ffebb245c47098f6809e8dd632387de7ee2f/docs/babel.config.js",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/opentwins/docs/babel.config.js"
+        }
+      ],
+      "decision": {
+        "priority": "domain_optional_not_core_dependency",
+        "adaptation": "Padrão abstrato de estado observado separado do desejado e eventos de mudança com identidade/proveniência; Core já possui Blackboard, MetaBus e saúde dos harnesses.",
+        "core_targets": [
+          "mci/blackboard.py",
+          "mci/metabus.py",
+          "integrations/harness_health.py"
+        ],
+        "network_findings": [
+          "Manifests Kubernetes expõem serviços NodePort e usam imagens de registros externos",
+          "Arquitetura envolve Kafka, Ditto/Hono, MongoDB, RabbitMQ, InfluxDB, Grafana",
+          "README declara em desenvolvimento e não recomenda produção",
+          ".gitmodules lista cinco componentes, mas árvore examinada não contém entradas gitlink nem código desses componentes"
+        ]
+      },
+      "rea": {
+        "receipt": "outputs/core-r888/a-rea-opentwins.json",
+        "receipt_sha256": "04337a85b02880ef03405fe366c70147aa8810ba7be0d47f2c8430a4461f090f",
+        "success": true,
+        "kind": "javascript",
+        "analysis_executed": true,
+        "unsupported_kind_rejection": false,
+        "target_unchanged": true,
+        "target_digest": {
+          "sha256": "599159185d1c4b953d9603f93fdf9a23a4f20fb78d03ae8bf4de77043969332e",
+          "files": 1,
+          "bytes": 89,
+          "algorithm": "sha256"
+        },
+        "privacy": {
+          "mode": "isolated_local_analysis",
+          "network_namespace": "net:[4026532232]",
+          "pid_namespace": "pid:[4026532231]",
+          "interfaces": [
+            "lo"
+          ],
+          "external_route_available": false,
+          "host_probe_connected": false,
+          "scope": "analytical_worker_and_descendants; trusted_local_MCP_client_required"
+        },
+        "metacognition": {
+          "observation_id": "3c5b55be-6369-4ffc-abf9-5d6c08949068",
+          "persisted": true,
+          "scope_id": "c87d43ce04605f7533aa99690b735226b696c7546c3ff0baca727b43c0876322",
+          "previous_observation_id": "45b103cb-0ff2-434b-a64c-3557537fb509",
+          "state_transition": {
+            "from": null,
+            "to": null
+          },
+          "confidence_promoted": false,
+          "externally_validated": false
+        },
+        "error": null,
+        "limitations": [
+          "A aplicação alvo não foi executada; achados são estáticos.",
+          "Inspeção e metadados não recuperam necessariamente o código-fonte original.",
+          "A garantia local cobre o worker; clientes de inferência em nuvem não fazem parte deste modo.",
+          "Arquivo JavaScript avulso copiado sem alteração para diretório temporário: imports e arquivos vizinhos não foram incluídos.",
+          "CommonJS and ESM binding relationships were recovered from inert syntax and resolved only within the inventoried artifact container.",
+          "JavaScript and HTML were parsed as inert text; bundle bootstrap code was never executed.",
+          "Static imports, entrypoints, workers, endpoints, and storage relationships do not prove runtime execution.",
+          "Static paths and relationships may remain unresolved when expressions are dynamic or obfuscated.",
+          "Webpack/Rspack factories were recovered from AST literals; REA did not invoke push handlers or bundle bootstrap code."
+        ],
+        "provider_provenance": {
+          "repository": "https://github.com/MarceloClaro/rea",
+          "commit": "4daea941bfeeb426886f2d048aed7f3cb2dbf97b",
+          "version": "6.4.0",
+          "runtime": {
+            "source_dir": "/home/marceloclaro/.local/share/opencode-core/rea",
+            "node": "/usr/bin/node",
+            "launcher": "/home/marceloclaro/.local/share/opencode-core/rea/scripts/rea.mjs"
+          },
+          "response_sha256": "81478f17a1197deeffaaa76c1fbe0240d754520c6d12711e78c38f3795dee41e"
+        }
+      }
+    },
+    {
+      "repository": "MarceloClaro/transformers",
+      "url": "https://github.com/MarceloClaro/transformers",
+      "commit": "3a3b59cb1a7c0238c8d1072e35d3879c5faff48e",
+      "default_branch": "main",
+      "fork": true,
+      "upstream": "huggingface/transformers",
+      "tree_truncated": false,
+      "tree_blob_count": 5644,
+      "license": {
+        "code": "Apache-2.0",
+        "model_weights": "Licença separada por checkpoint, não auditada",
+        "evidence": "LICENSE"
+      },
+      "sample_files": [
+        {
+          "repo": "transformers",
+          "path": "README.md",
+          "bytes": 17907,
+          "sha256": "fafccc7bb85a952465ed102c8e720f3d0e7a1c95fd6beafd669663964b12b0d7",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/transformers/3a3b59cb1a7c0238c8d1072e35d3879c5faff48e/README.md",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/transformers/README.md"
+        },
+        {
+          "repo": "transformers",
+          "path": "LICENSE",
+          "bytes": 11418,
+          "sha256": "77fd4710def9ec3c0f6225800e0235f15a425abd4a8b03559127fcd782612049",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/transformers/3a3b59cb1a7c0238c8d1072e35d3879c5faff48e/LICENSE",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/transformers/LICENSE"
+        },
+        {
+          "repo": "transformers",
+          "path": "pyproject.toml",
+          "bytes": 5771,
+          "sha256": "58b6a216d955318a90163e8be85fa5992faf573aaca8a7d86b42f0d848cf0c8d",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/transformers/3a3b59cb1a7c0238c8d1072e35d3879c5faff48e/pyproject.toml",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/transformers/pyproject.toml"
+        },
+        {
+          "repo": "transformers",
+          "path": "setup.py",
+          "bytes": 12956,
+          "sha256": "ac6215dbe5fd018d36924863d087090cd20bf81393b657f2f7ee8501d35ec61d",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/transformers/3a3b59cb1a7c0238c8d1072e35d3879c5faff48e/setup.py",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/transformers/setup.py"
+        },
+        {
+          "repo": "transformers",
+          "path": "src/transformers/utils/hub.py",
+          "bytes": 39387,
+          "sha256": "f9ed705661d670f15a5b88840c1bd10f668c9ada2a510e03e74601768cd7a845",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/transformers/3a3b59cb1a7c0238c8d1072e35d3879c5faff48e/src/transformers/utils/hub.py",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/transformers/src/transformers/utils/hub.py"
+        },
+        {
+          "repo": "transformers",
+          "path": "src/transformers/models/auto/auto_factory.py",
+          "bytes": 32126,
+          "sha256": "6ef2102211ae7fffeeed26e5d3e72f6ca0f2897e7fb5b2b7e32303152a444e00",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/transformers/3a3b59cb1a7c0238c8d1072e35d3879c5faff48e/src/transformers/models/auto/auto_factory.py",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/transformers/src/transformers/models/auto/auto_factory.py"
+        },
+        {
+          "repo": "transformers",
+          "path": "src/transformers/dynamic_module_utils.py",
+          "bytes": 34752,
+          "sha256": "bf7df9726c658edfdae520844488037b714bcdf6ae19e61961c4d84654efdeb8",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/transformers/3a3b59cb1a7c0238c8d1072e35d3879c5faff48e/src/transformers/dynamic_module_utils.py",
+          "local_path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r888/transformers/src/transformers/dynamic_module_utils.py"
+        }
+      ],
+      "decision": {
+        "priority": "optional_backend_isolated",
+        "adaptation": "Contrato explícito de modelo local, revisão/arquivos fixados, local_files_only e trust_remote_code=False; não substituir roteador/harnesses nem adicionar peso ao ambiente principal.",
+        "core_targets": [
+          "integrations/model_router.py",
+          "integrations/litert_lm.py",
+          "integrations/harness_runtime.py",
+          "transformer/embedder.py"
+        ],
+        "network_findings": [
+          "utils/hub.py local_files_only=False por padrão e download pelo Hub",
+          "utils/hub.py http_user_agent tem controle HF_HUB_DISABLE_TELEMETRY",
+          "dynamic_module_utils.py executa módulo customizado quando autorizado por trust_remote_code",
+          "setup.py versão 5.3.0.dev0, Python>=3.10, torch>=2.4 opcional extras; compatibilidade de wheels Python3.14 não executada"
+        ]
+      },
+      "rea": {
+        "receipt": "outputs/core-r888/a-rea-transformers.json",
+        "receipt_sha256": null,
+        "success": false,
+        "kind": null,
+        "analysis_executed": false,
+        "unsupported_kind_rejection": true,
+        "target_unchanged": null,
+        "target_digest": null,
+        "privacy": null,
+        "metacognition": null,
+        "error": "Tipo de inspeção não suportado.",
+        "limitations": [],
+        "provider_provenance": null
+      }
+    }
+  ],
+  "core_reproducer": {
+    "path": "outputs/core-r888/a-core-imobench-reproducer.json",
+    "before_fix": true,
+    "source_sha256": "41e55c520a56b131a61dba09c47a24c8d11c16c77b9a264033cb113184d1bf35"
+  },
+  "limits": [
+    "Amostragem dirigida, não auditoria integral nem prova de ausência de chamadas de rede.",
+    "Python e Markdown não suportados pelo REA local inspect nesta versão; rejeições registradas, leitura estática separada.",
+    "O parser HTML do Core não executa o provider Node REA; recibo distingue provider local de bridge externo.",
+    "O download de fontes consultou GitHub; isolamento sem rota externa se aplica ao worker analítico REA, não à aquisição de fontes."
+  ],
+  "implementation": {
+    "status": "implemented_in_local_scope",
+    "spec": "specs/SPEC-935-R888-curadoria-e-integridade-benchmarks.md",
+    "files": [
+      {
+        "path": "integrations/deepmind/imobench_harness.py",
+        "sha256": "b5228ee84fdc97176cf68739a79f5d35d3aab8a789b9524f1ac55b1c954410d7"
+      },
+      {
+        "path": "integrations/deepmind/imo_real_solver.py",
+        "sha256": "90fd43da8b6c7cbc90045c51566b154739980e64e20bbf826981bc2667672f34"
+      },
+      {
+        "path": "integrations/deepmind/deep_think_engine.py",
+        "sha256": "e99ea71be9965f6cb1e3093eebc9b8f54a94c6711964f8dc1095e7ed0e219d01"
+      },
+      {
+        "path": "tests/test_r888_imobench_integrity.py",
+        "sha256": "d5d257fb9e23d8c123f288a597849a938a0eb7cd3efc6078893d7aeb57b021a5"
+      },
+      {
+        "path": "tests/test_r442_deepmind_superhuman_reasoning.py",
+        "sha256": "4a5a2018db3cf5b8afeeae633f38a94675f2416b5d143bc6f58e3dbdb1e3ada4"
+      },
+      {
+        "path": "tests/test_r443_opencode_alphaproof_deepthink.py",
+        "sha256": "96a2022d8d88c877f6d70508d8f338ca3b71a867a844475839a2064276d7f313"
+      },
+      {
+        "path": "tests/test_r499_imo_real_solver.py",
+        "sha256": "c72c0500262643154f7ca3628175f9f3544abc88699ab6b4c98b00acdc7b6f2c"
+      },
+      {
+        "path": "tests/test_r503_contraprova_imo.py",
+        "sha256": "3ea8fec98b09352efa0c2f6e0cfbe7922230181393f05dea6364f94d78189bb7"
+      }
+    ],
+    "adaptations": [
+      "Gabarito reservado ao avaliador e callback com entrada pública imutável.",
+      "Resposta curta explícita e igualdade completa; heurística não calibrada separada.",
+      "Solver determinístico emite resposta calculada, justificativa e status candidate quando apropriado.",
+      "Consumidor Deep Think aceita apenas alegação original reexecutada em SymPy disponível; recusa candidato falso, claim trocado e fallback.",
+      "Primário registra observação sem atualizar confiança a partir de seu próprio resultado."
+    ],
+    "verification": {
+      "junit": "outputs/core-r888/a-release-final.xml",
+      "tests": 71,
+      "failures": 0,
+      "errors": 0,
+      "duration_seconds": 9.409,
+      "ruff_exit_code": 0,
+      "ruff_receipt": "outputs/core-r888/a-ruff.txt",
+      "red_receipts": [
+        "outputs/core-r888/a-imobench-red.xml",
+        "outputs/core-r888/a-deepthink-red.xml",
+        "outputs/core-r888/a-primary-invariance-red.xml"
+      ],
+      "execution_receipt": "outputs/core-r888/a-core-after-fix.json"
+    },
+    "limits": [
+      "Teste e benchmark locais sobre amostra interna, sem validação externa.",
+      "O relatório de avaliação contém gabaritos para auditoria e não deve retornar como entrada a um benchmark alegadamente independente.",
+      "A inspeção não instalou runtimes dos repositórios externos."
+    ]
+  }
+}

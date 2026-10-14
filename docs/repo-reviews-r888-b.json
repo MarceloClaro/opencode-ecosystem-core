@@ -1,0 +1,714 @@
+{
+  "schema": "core.repository-review.r888.v1",
+  "reviewed_utc": "2026-10-14T09:54:47.544800+00:00",
+  "scope": "B: science-skills, feynman-tutor, MiroFish, MiroFish-Offline",
+  "source_policy": "Selected public raw GitHub files pinned to current default-branch commit; each file <= 1 MB; no third-party code executed or installed.",
+  "verification": "local_source_review_and_scoped_mcp_execution",
+  "repositories": [
+    {
+      "repository": "MarceloClaro/science-skills",
+      "url": "https://github.com/MarceloClaro/science-skills",
+      "commit": "48df32bf95d3ee512e4962f1a6b67831b19e3549",
+      "commit_date": "2026-05-20T10:35:08Z",
+      "retrieved_utc": "2026-10-14T09:50:02.286674+00:00",
+      "branch": "main",
+      "tree_complete": true,
+      "repository_blob_count": 193,
+      "selected_file_count": 15,
+      "selected_bytes": 130866,
+      "source_files": [
+        {
+          "path": "README.md",
+          "bytes": 3857,
+          "sha256": "2eb4111b6557efc9a952b917292d61da264221b6b1c44427f7876049e2f3b44c",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/science-skills/48df32bf95d3ee512e4962f1a6b67831b19e3549/README.md"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 11358,
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/science-skills/48df32bf95d3ee512e4962f1a6b67831b19e3549/LICENSE"
+        },
+        {
+          "path": "SKILL_LICENSES.md",
+          "bytes": 3933,
+          "sha256": "8557fad5e97c0c3f5ec0b33e5e09e2a643efc63587dbf11466c84b4da6bfe150",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/science-skills/48df32bf95d3ee512e4962f1a6b67831b19e3549/SKILL_LICENSES.md"
+        },
+        {
+          "path": "plugin.json",
+          "bytes": 256,
+          "sha256": "621e1700fb9840f55bf9614440d6e006c7ee9e735fb51f7b6093a40a04b569e6",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/science-skills/48df32bf95d3ee512e4962f1a6b67831b19e3549/plugin.json"
+        },
+        {
+          "path": "skills/science_skills_common/SKILL.md",
+          "bytes": 719,
+          "sha256": "3f3841cda98969cfb62d6969412f8eb26383284c141d980286350b3d02114410",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/science-skills/48df32bf95d3ee512e4962f1a6b67831b19e3549/skills/science_skills_common/SKILL.md"
+        },
+        {
+          "path": "skills/science_skills_common/http_client.py",
+          "bytes": 26889,
+          "sha256": "b7067c015df94b9d94b0c30cb29246f7b19f7b561f3f3bd083fec68165b9a78a",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/science-skills/48df32bf95d3ee512e4962f1a6b67831b19e3549/skills/science_skills_common/http_client.py"
+        },
+        {
+          "path": "skills/science_skills_common/pyproject.toml",
+          "bytes": 272,
+          "sha256": "5c5d0d34765c9a916d01b3e8169270d2b67d60004bcfaa6876cb959760d4c641",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/science-skills/48df32bf95d3ee512e4962f1a6b67831b19e3549/skills/science_skills_common/pyproject.toml"
+        },
+        {
+          "path": "skills/pubmed_database/SKILL.md",
+          "bytes": 8774,
+          "sha256": "9f03c6d6357dff6683a76a2ab71a7dfc28d4ffcdfcb30d419d9915d12de15c7a",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/science-skills/48df32bf95d3ee512e4962f1a6b67831b19e3549/skills/pubmed_database/SKILL.md"
+        },
+        {
+          "path": "skills/pubmed_database/scripts/pubmed_api.py",
+          "bytes": 21566,
+          "sha256": "2f7e119f4994cdd2c9f07c2cf39a892b1d47c3f45d14186c9aeaaacdfeca7e5b",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/science-skills/48df32bf95d3ee512e4962f1a6b67831b19e3549/skills/pubmed_database/scripts/pubmed_api.py"
+        },
+        {
+          "path": "skills/alphagenome_single_variant_analysis/SKILL.md",
+          "bytes": 12412,
+          "sha256": "9dd82a17fd4daaa988feb5e8b3fd6d5f2783665681ff9715e48e63bec3160e81",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/science-skills/48df32bf95d3ee512e4962f1a6b67831b19e3549/skills/alphagenome_single_variant_analysis/SKILL.md"
+        },
+        {
+          "path": "skills/alphagenome_single_variant_analysis/docs/interpretation-guide.md",
+          "bytes": 17785,
+          "sha256": "848d3a1dd6b340c9898502a0c1eff7b1d022c44c4b6f2f92794b5464c125053b",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/science-skills/48df32bf95d3ee512e4962f1a6b67831b19e3549/skills/alphagenome_single_variant_analysis/docs/interpretation-guide.md"
+        },
+        {
+          "path": "skills/alphagenome_single_variant_analysis/docs/report-templates.md",
+          "bytes": 2909,
+          "sha256": "77d8f754d13ea06093e358fb2683acee0b89233e64e7edc8f6c4fc3d9eaf848a",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/science-skills/48df32bf95d3ee512e4962f1a6b67831b19e3549/skills/alphagenome_single_variant_analysis/docs/report-templates.md"
+        },
+        {
+          "path": "skills/literature_search_openalex/SKILL.md",
+          "bytes": 7403,
+          "sha256": "8e6b12d9830de7e99ba721ab51e7bdeec35ec9cff040761bd22996a1061c6ef3",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/science-skills/48df32bf95d3ee512e4962f1a6b67831b19e3549/skills/literature_search_openalex/SKILL.md"
+        },
+        {
+          "path": "skills/workflow_skill_creator/SKILL.md",
+          "bytes": 11487,
+          "sha256": "14a4086265b52a4c385ee61045ede3a9464c5f5d4872c6b646354d3f00bec566",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/science-skills/48df32bf95d3ee512e4962f1a6b67831b19e3549/skills/workflow_skill_creator/SKILL.md"
+        },
+        {
+          "path": "skills/uv/SKILL.md",
+          "bytes": 1246,
+          "sha256": "0c8cfa3e8aadfea0088405e6da35769a8811ce6063529ca9bb170a96300e7e0f",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/science-skills/48df32bf95d3ee512e4962f1a6b67831b19e3549/skills/uv/SKILL.md"
+        }
+      ],
+      "rea_attempts": [
+        {
+          "path": "outputs/core-r888/b-science-skills-rea.json",
+          "sha256": "d19187a1643357abcb29fce8e6f680d321e921d9967fb81a83cab79be89eea9c",
+          "status": "unsupported",
+          "error": "Tipo não reconhecido; informe --kind ou use uma camada explícita do REA.",
+          "primary": "MarceloClaroOrchestrator"
+        }
+      ],
+      "rea_result": null,
+      "review_method": "directed static source review plus real primary-routed REA MCP where supported",
+      "upstream_installed": false,
+      "upstream_runtime_executed": false,
+      "external_validation": false,
+      "telemetry_review": "No explicit telemetry/posthog/sentry/mixpanel/analytics/amplitude token found in selected files; transitive dependencies and unsampled code were not audited.",
+      "priority": "high_selective_patterns",
+      "license_scope": "Apache-2.0 software; CC-BY-4.0 other materials per README; third-party database terms are separate",
+      "decision": "Adaptar governança de evidências, resultados nulos e descoberta seletiva de skills. Não importar o bundle inteiro nem substituir integrações científicas existentes.",
+      "core_targets": [
+        "integrations/scientific_plugins.py",
+        "mci/pipeline/scientific_governance_pipeline.py",
+        "mci/evidence_graph.py"
+      ],
+      "patterns": [
+        "Referência de fonte por resultado, limites declarados, resultados negativos preservados.",
+        "Carregamento por necessidade: SKILL curto, referência da operação, script e schema de saída antes da chamada.",
+        "Rate limit por API, retry transitório e Retry-After dentro de orçamento global explícito."
+      ],
+      "risks": [
+        "Rede e termos de uso variam por base; AlphaGenome/OpenAlex pedem chave.",
+        "uv e ambiente de dependências do bundle não foram instalados; cliente comum importa fcntl (Linux).",
+        "Não generalizar thresholds biológicos de AlphaGenome para confiança de todo o Core."
+      ]
+    },
+    {
+      "repository": "MarceloClaro/feynman-tutor",
+      "url": "https://github.com/MarceloClaro/feynman-tutor",
+      "commit": "9e9ec6fa08bd2242b7aea1cf3419e28ea2e70664",
+      "commit_date": "2026-05-18T06:05:23Z",
+      "retrieved_utc": "2026-10-14T09:50:02.225891+00:00",
+      "branch": "main",
+      "tree_complete": true,
+      "repository_blob_count": 17,
+      "selected_file_count": 9,
+      "selected_bytes": 143098,
+      "source_files": [
+        {
+          "path": "README.en.md",
+          "bytes": 15696,
+          "sha256": "a00f56207391f5ab487942c71d35ae1d98440025cdd27523a73195d50693742f",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/feynman-tutor/9e9ec6fa08bd2242b7aea1cf3419e28ea2e70664/README.en.md"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1056,
+          "sha256": "1126322e2cc8d165adc4c792eeb195717de2bcc7b39be1ce77959d78e87ef685",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/feynman-tutor/9e9ec6fa08bd2242b7aea1cf3419e28ea2e70664/LICENSE"
+        },
+        {
+          "path": "SKILL.md",
+          "bytes": 9764,
+          "sha256": "d5c386ea544cbc59b7dad3fd28fc7f330be5dfa48335d92f7d1775b5102b87fe",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/feynman-tutor/9e9ec6fa08bd2242b7aea1cf3419e28ea2e70664/SKILL.md"
+        },
+        {
+          "path": "scripts/run.py",
+          "bytes": 6655,
+          "sha256": "379dfd77e2fc7fabf13fd8c36c36643970c8ac100f35d2b05f82fb0bd2b386c6",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/feynman-tutor/9e9ec6fa08bd2242b7aea1cf3419e28ea2e70664/scripts/run.py"
+        },
+        {
+          "path": "scripts/extract_content.py",
+          "bytes": 74563,
+          "sha256": "747a7253446228ee7ae2c7bc9fcc700b55790975c443afd7a9f613bf86847cb5",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/feynman-tutor/9e9ec6fa08bd2242b7aea1cf3419e28ea2e70664/scripts/extract_content.py"
+        },
+        {
+          "path": "references/note-management.md",
+          "bytes": 11680,
+          "sha256": "074bf7d6403e0edfd142ae293daf1bf3d575f20cb82adfb04decb662046dd527",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/feynman-tutor/9e9ec6fa08bd2242b7aea1cf3419e28ea2e70664/references/note-management.md"
+        },
+        {
+          "path": "references/inference-engineering-testing.md",
+          "bytes": 7330,
+          "sha256": "0c3271c13c6370daf745d643838397e920bd735b73e3c227fb691b1ed0fd5666",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/feynman-tutor/9e9ec6fa08bd2242b7aea1cf3419e28ea2e70664/references/inference-engineering-testing.md"
+        },
+        {
+          "path": "references/linear-algebra-testing.md",
+          "bytes": 11297,
+          "sha256": "bd55f9f013541e8a4d3f4c73cadbfb635225e419e1f217365a14b7301412b33d",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/feynman-tutor/9e9ec6fa08bd2242b7aea1cf3419e28ea2e70664/references/linear-algebra-testing.md"
+        },
+        {
+          "path": "references/grimoire-handoff.md",
+          "bytes": 5057,
+          "sha256": "c4f81cf195b957f528491605efeee9c9537af682283549ddd9659a57fa6c7458",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/feynman-tutor/9e9ec6fa08bd2242b7aea1cf3419e28ea2e70664/references/grimoire-handoff.md"
+        }
+      ],
+      "rea_attempts": [
+        {
+          "path": "outputs/core-r888/b-feynman-tutor-rea.json",
+          "sha256": "9266213bf965276ba67af87445a6585d87285d4c1b752eb0537643de271bb4aa",
+          "status": "unsupported",
+          "error": "Tipo não reconhecido; informe --kind ou use uma camada explícita do REA.",
+          "primary": "MarceloClaroOrchestrator"
+        }
+      ],
+      "rea_result": null,
+      "review_method": "directed static source review plus real primary-routed REA MCP where supported",
+      "upstream_installed": false,
+      "upstream_runtime_executed": false,
+      "external_validation": false,
+      "telemetry_review": "No explicit telemetry/posthog/sentry/mixpanel/analytics/amplitude token found in selected files; transitive dependencies and unsampled code were not audited.",
+      "priority": "medium_high_pattern_only",
+      "license_scope": "MIT",
+      "decision": "Adaptar perguntas de compreensão e memória com proveniência no MetaBus existente; não instalar um segundo sistema de notas ou extratores.",
+      "core_targets": [
+        "mci/metacognitive_loop.py",
+        "mci/metabus.py",
+        "reversa_feynman/feynman_gates.py"
+      ],
+      "patterns": [
+        "Separar observação, interpretação e preferência explícita; não criar perfil estável a partir de uma interação.",
+        "Recuperação de tema e vizinhança com orçamento; no upstream, aproximadamente nove notas.",
+        "Registrar compreensão como evidência de conversa, sem inferir competência validada ou elevar trust."
+      ],
+      "risks": [
+        "SKILL corrente diverge da descrição simplificada do README; foi lido o código/instrução fixado.",
+        "scripts/run.py auto-instala pacotes e navegadores sem versões fixadas no caminho normal.",
+        "Extratores fazem acessos remotos; tutoria por Markdown não implica ingestão offline.",
+        "Não é o repositório feynman de pesquisa nem o módulo Core reversa_feynman."
+      ]
+    },
+    {
+      "repository": "MarceloClaro/MiroFish",
+      "url": "https://github.com/MarceloClaro/MiroFish",
+      "commit": "fa0f6519b10c4a25b78f1bcc1f00dfcd8bf1ab41",
+      "commit_date": "2026-04-02T08:52:29Z",
+      "retrieved_utc": "2026-10-14T09:50:02.202820+00:00",
+      "branch": "main",
+      "tree_complete": true,
+      "repository_blob_count": 96,
+      "selected_file_count": 20,
+      "selected_bytes": 471957,
+      "source_files": [
+        {
+          "path": "README.md",
+          "bytes": 9124,
+          "sha256": "8772c15cefbfbdb378adf7e551c53df6aecc7db004b6efd7fa909862ebcbcd6d",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish/fa0f6519b10c4a25b78f1bcc1f00dfcd8bf1ab41/README.md"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 34523,
+          "sha256": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish/fa0f6519b10c4a25b78f1bcc1f00dfcd8bf1ab41/LICENSE"
+        },
+        {
+          "path": "backend/pyproject.toml",
+          "bytes": 1053,
+          "sha256": "03874714bde91d2c1dcc2fe6934955b26f32d50bc84dba59239894f4caaba1f0",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish/fa0f6519b10c4a25b78f1bcc1f00dfcd8bf1ab41/backend/pyproject.toml"
+        },
+        {
+          "path": "backend/requirements.txt",
+          "bytes": 873,
+          "sha256": "556a6817d43ccbd5a0a0179ebb182d56ca390b6fd0d8d132911d7a98903b98a1",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish/fa0f6519b10c4a25b78f1bcc1f00dfcd8bf1ab41/backend/requirements.txt"
+        },
+        {
+          "path": "backend/app/config.py",
+          "bytes": 2687,
+          "sha256": "834dad3e0c3994e8cedef78bae8dee37cb55b83565fa99118b32d2b7ed9baabb",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish/fa0f6519b10c4a25b78f1bcc1f00dfcd8bf1ab41/backend/app/config.py"
+        },
+        {
+          "path": "backend/run.py",
+          "bytes": 1294,
+          "sha256": "893a01b2e1881e4eb06bdbc4737e444d72eb374f9f326a1249dbc9aa04274483",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish/fa0f6519b10c4a25b78f1bcc1f00dfcd8bf1ab41/backend/run.py"
+        },
+        {
+          "path": "backend/app/__init__.py",
+          "bytes": 2712,
+          "sha256": "f04d262decf6c11437280c0f0c1353774f642888b2ef3f02dfa0e96e992b3c1c",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish/fa0f6519b10c4a25b78f1bcc1f00dfcd8bf1ab41/backend/app/__init__.py"
+        },
+        {
+          "path": "backend/app/api/simulation.py",
+          "bytes": 94510,
+          "sha256": "88acf11916aec0b008ced373154292ebb9e06ac669fb7a671037fc6c0804de74",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish/fa0f6519b10c4a25b78f1bcc1f00dfcd8bf1ab41/backend/app/api/simulation.py"
+        },
+        {
+          "path": "backend/app/services/graph_builder.py",
+          "bytes": 18180,
+          "sha256": "97ff58a96a819c6c14a6cd01b5ba7642e75b1fbc3c115825a13727f6e4e84246",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish/fa0f6519b10c4a25b78f1bcc1f00dfcd8bf1ab41/backend/app/services/graph_builder.py"
+        },
+        {
+          "path": "backend/app/services/report_agent.py",
+          "bytes": 99275,
+          "sha256": "bc514324305ca8aa88aa6d5f2b411a718fbc64ebb5d45977be36a47f5fff726a",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish/fa0f6519b10c4a25b78f1bcc1f00dfcd8bf1ab41/backend/app/services/report_agent.py"
+        },
+        {
+          "path": "backend/app/services/simulation_manager.py",
+          "bytes": 20285,
+          "sha256": "ca2f75e673688cab0d6eb047d9e665811cffb89e26ef707b66f10235ed0e57f7",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish/fa0f6519b10c4a25b78f1bcc1f00dfcd8bf1ab41/backend/app/services/simulation_manager.py"
+        },
+        {
+          "path": "backend/app/services/simulation_runner.py",
+          "bytes": 69185,
+          "sha256": "0a2eb30a6647d3e262aebd9079fc611411012839ae688155253bd6c10c3f2b83",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish/fa0f6519b10c4a25b78f1bcc1f00dfcd8bf1ab41/backend/app/services/simulation_runner.py"
+        },
+        {
+          "path": "backend/app/services/simulation_config_generator.py",
+          "bytes": 39947,
+          "sha256": "387a314651581dbef72f1a57d9474d7974513d6c079663f6822a35061df253b7",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish/fa0f6519b10c4a25b78f1bcc1f00dfcd8bf1ab41/backend/app/services/simulation_config_generator.py"
+        },
+        {
+          "path": "frontend/package.json",
+          "bytes": 419,
+          "sha256": "defd3f7bf9b1a5e7cea47a209f7d370313e36a9b81f5bb36a6fcdbcc70365d80",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish/fa0f6519b10c4a25b78f1bcc1f00dfcd8bf1ab41/frontend/package.json"
+        },
+        {
+          "path": "frontend/src/api/index.js",
+          "bytes": 1858,
+          "sha256": "93add4d0c804a44b649abe9a037953bf82f5b0bce095116c8ddf43424585a7fa",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish/fa0f6519b10c4a25b78f1bcc1f00dfcd8bf1ab41/frontend/src/api/index.js"
+        },
+        {
+          "path": "frontend/src/api/simulation.js",
+          "bytes": 5412,
+          "sha256": "c46609697a65bd2b57d7614d9eb29e3bed0779a1e215e3597169653744b49de7",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish/fa0f6519b10c4a25b78f1bcc1f00dfcd8bf1ab41/frontend/src/api/simulation.js"
+        },
+        {
+          "path": "package.json",
+          "bytes": 702,
+          "sha256": "fac3f0d464b5daacfc4b003fd1191cff3996296844c48865a61e23fda3064a3a",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish/fa0f6519b10c4a25b78f1bcc1f00dfcd8bf1ab41/package.json"
+        },
+        {
+          "path": ".env.example",
+          "bytes": 714,
+          "sha256": "380974eab06fc4bffad4d3e9abfc4eaecc638f91e3f29caa1dfaafe950204541",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish/fa0f6519b10c4a25b78f1bcc1f00dfcd8bf1ab41/.env.example"
+        },
+        {
+          "path": "backend/app/services/zep_tools.py",
+          "bytes": 66234,
+          "sha256": "18dd5ebef7075c502bb029b173a060f116b8a77dee6ac0fd8128d937d506a489",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish/fa0f6519b10c4a25b78f1bcc1f00dfcd8bf1ab41/backend/app/services/zep_tools.py"
+        },
+        {
+          "path": "backend/app/utils/llm_client.py",
+          "bytes": 2970,
+          "sha256": "0b065e02d2128c49ed640093c85b6e1dd77d61a17b2671e213f700ecf2fd9d57",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish/fa0f6519b10c4a25b78f1bcc1f00dfcd8bf1ab41/backend/app/utils/llm_client.py"
+        }
+      ],
+      "rea_attempts": [
+        {
+          "path": "outputs/core-r888/b-MiroFish-rea.json",
+          "sha256": "8bd8ba4e70a478875e93669394bcac90f0d22f1e208ee363ee1a6dd3227b323f",
+          "status": "failed",
+          "error": "REA retornou isError; consulte a resposta MCP preservada.",
+          "primary": "MarceloClaroOrchestrator"
+        },
+        {
+          "path": "outputs/core-r888/b-MiroFish-rea-frontend.json",
+          "sha256": "17e7c3479b36d3bd816c651540de843fbf23f255a2fc1b524f31d186b79109c7",
+          "status": "completed",
+          "primary": "MarceloClaroOrchestrator",
+          "success": true,
+          "verification": "mcp_execution",
+          "provider_commit": "4daea941bfeeb426886f2d048aed7f3cb2dbf97b",
+          "response_sha256": "66f16d67384611877b3e2deb3816b52ead852ef2930b8d2b00ec342cdf05e75b",
+          "metacognition": {
+            "observation_id": "38ea74c4-0420-453e-acff-d85e266863a5",
+            "persisted": true,
+            "scope_id": "abfafd6a33b12fea26a2f70e9da48b50e438b9b75a600d920db66abcbcc621af",
+            "previous_observation_id": null,
+            "state_transition": {
+              "from": null,
+              "to": "completed"
+            },
+            "confidence_promoted": false,
+            "externally_validated": false
+          }
+        }
+      ],
+      "rea_result": {
+        "scope": "selected frontend directory only",
+        "file_count": 3,
+        "javascript_files": 2,
+        "text_bytes_read": 7689,
+        "parse_failures": 0,
+        "graph_nodes": 44,
+        "graph_edges": 46,
+        "evidence_id": "ev_d104b79d57282eb46272fa6296ad34c8570a98e1e341c917c3c523deb086a20c",
+        "target_sha256": "52aba8d2d91059a402b81bb1b923a1954cba03bdc31a48ef5a3952d79d85f964",
+        "limitations": [
+          "CommonJS and ESM binding relationships were recovered from inert syntax and resolved only within the inventoried artifact container.",
+          "JavaScript and HTML were parsed as inert text; bundle bootstrap code was never executed.",
+          "Static imports, entrypoints, workers, endpoints, and storage relationships do not prove runtime execution.",
+          "Static paths and relationships may remain unresolved when expressions are dynamic or obfuscated.",
+          "Webpack/Rspack factories were recovered from AST literals; REA did not invoke push handlers or bundle bootstrap code."
+        ],
+        "executed_upstream_javascript": false
+      },
+      "review_method": "directed static source review plus real primary-routed REA MCP where supported",
+      "upstream_installed": false,
+      "upstream_runtime_executed": false,
+      "external_validation": false,
+      "telemetry_review": "No explicit telemetry/posthog/sentry/mixpanel/analytics/amplitude token found in selected files; transitive dependencies and unsampled code were not audited.",
+      "priority": "low_runtime_medium_patterns",
+      "license_scope": "AGPL-3.0 declared by LICENSE and backend pyproject",
+      "decision": "Não incorporar o runtime; reimplementar apenas contratos gerais de simulação, orçamento e explicação dentro do primário.",
+      "core_targets": [
+        "mci/hypothesis_engine.py",
+        "mci/metacognitive_loop.py",
+        "mci/evidence_graph.py",
+        "marceloclaro/orchestrator.py"
+      ],
+      "patterns": [
+        "Distinguir corpus de origem, cenário, agentes/perfis, rodadas e relato.",
+        "Orçamento explícito de ferramentas e reflexão por etapa.",
+        "Rastrear início, progresso, encerramento e artefatos da execução."
+      ],
+      "risks": [
+        "LLM remoto OpenAI por default e Zep Cloud requerido: não atende local-only como recebido.",
+        "CAMEL/OASIS mais Flask/Vue criariam runtime e coordenador sobrepostos.",
+        "Predições de população simulada não são previsão calibrada nem observação real.",
+        "Evitar transposição de código AGPL sem decisão explícita de compatibilidade e distribuição."
+      ]
+    },
+    {
+      "repository": "MarceloClaro/MiroFish-Offline",
+      "url": "https://github.com/MarceloClaro/MiroFish-Offline",
+      "commit": "313fe642853ff9fff05e3ecae2e439886c2d29f4",
+      "commit_date": "2026-03-24T18:52:36Z",
+      "retrieved_utc": "2026-10-14T09:50:02.340971+00:00",
+      "branch": "main",
+      "tree_complete": true,
+      "repository_blob_count": 102,
+      "selected_file_count": 25,
+      "selected_bytes": 460731,
+      "source_files": [
+        {
+          "path": "README.md",
+          "bytes": 8589,
+          "sha256": "ef4604e09f3a368a0ab59777749ebd50647c6d8ddcb05859e9c0c1af2322d923",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish-Offline/313fe642853ff9fff05e3ecae2e439886c2d29f4/README.md"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 34523,
+          "sha256": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish-Offline/313fe642853ff9fff05e3ecae2e439886c2d29f4/LICENSE"
+        },
+        {
+          "path": "backend/pyproject.toml",
+          "bytes": 1079,
+          "sha256": "22d96fbab314ce17e10d2d8fa1d32a68438132e91a77211caf7f29955abc8b17",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish-Offline/313fe642853ff9fff05e3ecae2e439886c2d29f4/backend/pyproject.toml"
+        },
+        {
+          "path": "backend/requirements.txt",
+          "bytes": 945,
+          "sha256": "30a2a91870b22af8d4536af118a01a4510000435d82a2440262fea24fd724da1",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish-Offline/313fe642853ff9fff05e3ecae2e439886c2d29f4/backend/requirements.txt"
+        },
+        {
+          "path": "backend/app/config.py",
+          "bytes": 3243,
+          "sha256": "ea342c8ae3b5a66c215e9631af65d73f45e8040ca3efb0333d3fddc22093208e",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish-Offline/313fe642853ff9fff05e3ecae2e439886c2d29f4/backend/app/config.py"
+        },
+        {
+          "path": "backend/run.py",
+          "bytes": 1350,
+          "sha256": "907bb3c83049893b22695d1d107aed9600c0d7d3e9960953c7b50ed5fa31f5ae",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish-Offline/313fe642853ff9fff05e3ecae2e439886c2d29f4/backend/run.py"
+        },
+        {
+          "path": "backend/app/__init__.py",
+          "bytes": 3303,
+          "sha256": "9b540b21f8fc30012abd97e500ce1d8a4b0a054820d369e508586a28153f4fa5",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish-Offline/313fe642853ff9fff05e3ecae2e439886c2d29f4/backend/app/__init__.py"
+        },
+        {
+          "path": "backend/app/api/simulation.py",
+          "bytes": 97799,
+          "sha256": "4de1ab8aa1466ad993f5523d67db87a07cf65db137894230c5570628a3e3c7be",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish-Offline/313fe642853ff9fff05e3ecae2e439886c2d29f4/backend/app/api/simulation.py"
+        },
+        {
+          "path": "backend/app/services/graph_builder.py",
+          "bytes": 8320,
+          "sha256": "a03a0ce486509a24b1e2cdf1ff99c1e28204457142d5aa9ff3e27a935551523d",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish-Offline/313fe642853ff9fff05e3ecae2e439886c2d29f4/backend/app/services/graph_builder.py"
+        },
+        {
+          "path": "backend/app/services/report_agent.py",
+          "bytes": 102470,
+          "sha256": "95a2e8fad32e46f84b181cbd2fbd57e54b9da1b6a1d4e7bbe2c7ddae5abbe14e",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish-Offline/313fe642853ff9fff05e3ecae2e439886c2d29f4/backend/app/services/report_agent.py"
+        },
+        {
+          "path": "backend/app/services/simulation_manager.py",
+          "bytes": 20854,
+          "sha256": "eeddf43f7b568d7f9dae50a8878d393ee18302566eab39a90a3ca407fa666954",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish-Offline/313fe642853ff9fff05e3ecae2e439886c2d29f4/backend/app/services/simulation_manager.py"
+        },
+        {
+          "path": "backend/app/services/simulation_runner.py",
+          "bytes": 70428,
+          "sha256": "1d85a8697dce2f7e520c25438ffc3599a0d0c234eaa1cca221d6684b6e818e08",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish-Offline/313fe642853ff9fff05e3ecae2e439886c2d29f4/backend/app/services/simulation_runner.py"
+        },
+        {
+          "path": "backend/app/services/simulation_config_generator.py",
+          "bytes": 39928,
+          "sha256": "5af0602a340c78ca80f9ff741189eca59d153770b4ef9281248132d4382ebd81",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish-Offline/313fe642853ff9fff05e3ecae2e439886c2d29f4/backend/app/services/simulation_config_generator.py"
+        },
+        {
+          "path": "backend/app/storage/graph_storage.py",
+          "bytes": 3763,
+          "sha256": "3585cc8f6736122cb251f3f4fc55fc7b4bfa1827fa49abc9963aea4faf75f6ec",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish-Offline/313fe642853ff9fff05e3ecae2e439886c2d29f4/backend/app/storage/graph_storage.py"
+        },
+        {
+          "path": "backend/app/storage/neo4j_storage.py",
+          "bytes": 24996,
+          "sha256": "1a65e8f7cd1ae5538986361134e28a41c67fcda4bde8add575016f00ded008b2",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish-Offline/313fe642853ff9fff05e3ecae2e439886c2d29f4/backend/app/storage/neo4j_storage.py"
+        },
+        {
+          "path": "backend/app/storage/embedding_service.py",
+          "bytes": 6621,
+          "sha256": "e6e1cd7aec82378193f60cebffbdb7088517cfd92883bb8e6533669bce72b1e8",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish-Offline/313fe642853ff9fff05e3ecae2e439886c2d29f4/backend/app/storage/embedding_service.py"
+        },
+        {
+          "path": "backend/app/storage/ner_extractor.py",
+          "bytes": 9156,
+          "sha256": "e61ddcd8fcfcb35e729cb6774bf05d3bd8d717939b87d6956bd5a0252e9883d1",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish-Offline/313fe642853ff9fff05e3ecae2e439886c2d29f4/backend/app/storage/ner_extractor.py"
+        },
+        {
+          "path": "backend/app/storage/search_service.py",
+          "bytes": 8132,
+          "sha256": "260320d8e909dfe331356da5ae094796f33f400d807c9bf4fe894da2018a8242",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish-Offline/313fe642853ff9fff05e3ecae2e439886c2d29f4/backend/app/storage/search_service.py"
+        },
+        {
+          "path": "frontend/package.json",
+          "bytes": 392,
+          "sha256": "c928dd48b18c974fdce0a0c790cd1f76125ea690226e53d4453b93ce29c9dcf8",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish-Offline/313fe642853ff9fff05e3ecae2e439886c2d29f4/frontend/package.json"
+        },
+        {
+          "path": "frontend/src/api/index.js",
+          "bytes": 1776,
+          "sha256": "e90d19ee942d2458b64a524fb7619cdcf75a7065d968cca2af476d4b3ec99834",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish-Offline/313fe642853ff9fff05e3ecae2e439886c2d29f4/frontend/src/api/index.js"
+        },
+        {
+          "path": "frontend/src/api/simulation.js",
+          "bytes": 5571,
+          "sha256": "97f4e6234f416003bf83cef6a87d7ce53dbaec99cf331aac4ff8fe2cfb6dad5e",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish-Offline/313fe642853ff9fff05e3ecae2e439886c2d29f4/frontend/src/api/simulation.js"
+        },
+        {
+          "path": "package.json",
+          "bytes": 726,
+          "sha256": "5b86aca38d5c53c8d11bfc82eb61eb3208e129e2a6802622e80f64590e1e2845",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish-Offline/313fe642853ff9fff05e3ecae2e439886c2d29f4/package.json"
+        },
+        {
+          "path": ".env.example",
+          "bytes": 1605,
+          "sha256": "da82a3463d8a26c6b134ef31c9ab2fc3294153270479d56efac627f0ad6eb186",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish-Offline/313fe642853ff9fff05e3ecae2e439886c2d29f4/.env.example"
+        },
+        {
+          "path": "docker-compose.yml",
+          "bytes": 1514,
+          "sha256": "758788b7963849ee632e589cc1b7f6c00d0d9dfeca7db8d2b9e4385ad25eda6d",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish-Offline/313fe642853ff9fff05e3ecae2e439886c2d29f4/docker-compose.yml"
+        },
+        {
+          "path": "backend/app/utils/llm_client.py",
+          "bytes": 3648,
+          "sha256": "ad20c7bd531771f1a981882b63a4cd0c8ff6d64bfdc4329193121ed75cc7e354",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/MiroFish-Offline/313fe642853ff9fff05e3ecae2e439886c2d29f4/backend/app/utils/llm_client.py"
+        }
+      ],
+      "rea_attempts": [
+        {
+          "path": "outputs/core-r888/b-MiroFish-Offline-rea.json",
+          "sha256": "af3037d9fa7329eab102f21b368c8f41c4dd8f3f950cb6876b1936f8254ea324",
+          "status": "failed",
+          "error": "REA retornou isError; consulte a resposta MCP preservada.",
+          "primary": "MarceloClaroOrchestrator"
+        },
+        {
+          "path": "outputs/core-r888/b-MiroFish-Offline-rea-frontend.json",
+          "sha256": "303c0195b453dad9b76f68886d24f9ebbb07f45d6da41e2866702d2abbf9a8b8",
+          "status": "completed",
+          "primary": "MarceloClaroOrchestrator",
+          "success": true,
+          "verification": "mcp_execution",
+          "provider_commit": "4daea941bfeeb426886f2d048aed7f3cb2dbf97b",
+          "response_sha256": "1ed0fc049a41ecc0985f7e2101eb39d8c5bb8a3d4f8cbb394bb6f5989b16a533",
+          "metacognition": {
+            "observation_id": "8100d759-41a8-40d0-8a16-494d3a93aa8f",
+            "persisted": true,
+            "scope_id": "8b55329b37357ee7946ca4b1435d1ec6dc57cdfaeead591da327c3bcb587d79e",
+            "previous_observation_id": null,
+            "state_transition": {
+              "from": null,
+              "to": "completed"
+            },
+            "confidence_promoted": false,
+            "externally_validated": false
+          }
+        }
+      ],
+      "rea_result": {
+        "scope": "selected frontend directory only",
+        "file_count": 3,
+        "javascript_files": 2,
+        "text_bytes_read": 7739,
+        "parse_failures": 0,
+        "graph_nodes": 42,
+        "graph_edges": 44,
+        "evidence_id": "ev_3b196c0f4ecc2d2b566c1b2b8d483062df9f267c8690ec589780075d833b8dc2",
+        "target_sha256": "31077634ad03226e2f543cdac4e229cb4902ac2beac9951034073fa05b21da41",
+        "limitations": [
+          "CommonJS and ESM binding relationships were recovered from inert syntax and resolved only within the inventoried artifact container.",
+          "JavaScript and HTML were parsed as inert text; bundle bootstrap code was never executed.",
+          "Static imports, entrypoints, workers, endpoints, and storage relationships do not prove runtime execution.",
+          "Static paths and relationships may remain unresolved when expressions are dynamic or obfuscated.",
+          "Webpack/Rspack factories were recovered from AST literals; REA did not invoke push handlers or bundle bootstrap code."
+        ],
+        "executed_upstream_javascript": false
+      },
+      "review_method": "directed static source review plus real primary-routed REA MCP where supported",
+      "upstream_installed": false,
+      "upstream_runtime_executed": false,
+      "external_validation": false,
+      "telemetry_review": "No explicit telemetry/posthog/sentry/mixpanel/analytics/amplitude token found in selected files; transitive dependencies and unsampled code were not audited.",
+      "priority": "medium_patterns_optional_future_adapter",
+      "license_scope": "AGPL-3.0 declared by LICENSE and backend pyproject",
+      "decision": "Melhor referência do par para adaptador local futuro, mas sem instalar Neo4j/Ollama/OASIS neste ciclo; usar MetaBus/EvidenceGraph existentes.",
+      "core_targets": [
+        "mci/metabus.py",
+        "mci/evidence_graph.py",
+        "mci/hypothesis_engine.py",
+        "integrations/scientific_plugins.py"
+      ],
+      "patterns": [
+        "Interface de armazenamento separada do provedor; Neo4j é implementação e não autoridade semântica.",
+        "Embeddings em lote e cache limitado; procedência de extração e busca híbrida declarada.",
+        "Resultados de agentes simulados rotulados e excluídos de promoção automática de confiança."
+      ],
+      "risks": [
+        "Defaults localhost não impedem URLs remotas configuradas; nome Offline não comprova ausência de egress.",
+        "Flask default 0.0.0.0, DEBUG True, CORS *, senha Neo4j de exemplo e portas Docker publicadas sem loopback.",
+        "Modelo LLM default qwen2.5:32b e Neo4j até 2 GB de heap exigem orçamento de máquina.",
+        "Ollama/Neo4j não foram executados; suporte ao Python 3.14 do Core não foi demonstrado.",
+        "Código AGPL não foi copiado para produto."
+      ]
+    }
+  ],
+  "adaptation_contract": {
+    "coordinator": "MarceloClaroOrchestrator",
+    "memory_authority": "MetaBus",
+    "evidence_authority": "existing EvidenceGraph with source kind and declared limitations",
+    "required_result_fields": [
+      "origin_repository",
+      "source_commit",
+      "source_sha256",
+      "method",
+      "source_kind",
+      "limitations",
+      "externally_validated"
+    ],
+    "simulation_rule": "simulation is a hypothesis/scenario; it must not be counted as observed external evidence or automatically promote trust",
+    "confidence_promoted": false
+  },
+  "implementation_in_this_report": "none; recommendations for primary integration after specification and tests"
+}

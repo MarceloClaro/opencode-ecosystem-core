@@ -75,7 +75,11 @@ class TestOpenCodeAlphaProofDeepThinkR443(unittest.TestCase):
 
         self.assertEqual(res["compute_budget"], 3)
         self.assertEqual(res["total_trajectories_evaluated"], 3)
-        self.assertGreaterEqual(res["best_grade_0_to_7"], 5)
+        self.assertLessEqual(res["best_grade_0_to_7"], 4)
+        self.assertFalse(res["best_trajectory"]["is_valid"])
+        self.assertEqual(res["proof_status"], "unproven")
+        self.assertIsNone(res["confidence_score"])
+        self.assertFalse(res["calibrated"])
         self.assertIn("<think>", res["final_solution"])
         self.assertIn("[Deep Think Decision]", res["final_solution"])
 

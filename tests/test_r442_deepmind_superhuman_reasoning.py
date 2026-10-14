@@ -91,20 +91,21 @@ class TestDeepMindSuperhumanReasoningR442(unittest.TestCase):
         self.assertIn("\\qed", doc)
 
     def test_imobench_problems_and_grading_head(self):
-        """Valida o carregamento dos problemas do IMO Bench e a calibração do grading head (0 a 7)."""
+        """O grading head registra apenas sinais textuais, sem calibração ou prova."""
         problems = self.harness.sample_dataset
         self.assertGreaterEqual(len(problems), 3)
 
         problem = problems[0]
         grading = GradingHeadDeepMind()
 
-        # Resposta perfeita
+        # Marcas textuais não equivalem a uma resposta perfeita
         score_7, msg_7 = grading.grade(problem, "Pelo método da indução matemática e lema 1, a resposta exata é 3. Equação: N = 3.")
-        self.assertEqual(score_7, 7)
+        self.assertEqual(score_7, 4)
+        self.assertIn("heurística", msg_7.lower())
 
-        # Resposta com gap menor
+        # Prosa curta sem sinais estruturais
         score_5, _ = grading.grade(problem, "A resposta final encontrada para o problema é 3.")
-        self.assertEqual(score_5, 5)
+        self.assertEqual(score_5, 1)
 
         # Resposta vazia
         score_0, _ = grading.grade(problem, "")
@@ -114,8 +115,10 @@ class TestDeepMindSuperhumanReasoningR442(unittest.TestCase):
         """Valida a execução completa da bateria de benchmark."""
         report = self.harness.run_benchmark(limit=3)
         self.assertEqual(report["total_problems"], 3)
-        self.assertGreaterEqual(report["accuracy"], 0.6)
-        self.assertGreaterEqual(report["average_grade_0_to_7"], 4.0)
+        self.assertEqual(report["status"], "not_executed")
+        self.assertIsNone(report["accuracy"])
+        self.assertIsNone(report["average_grade_0_to_7"])
+        self.assertEqual(report["results"], [])
 
     def test_orchestrator_deepmind_methods(self):
         """Valida os métodos integrados no MarceloClaroOrchestrator."""

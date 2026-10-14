@@ -23,7 +23,7 @@ especificações, gates de entrega e rastreabilidade local.
 [![OpenCode](https://img.shields.io/badge/OpenCode%20CLI-native-0ea5e9?style=for-the-badge&logo=opencode&logoColor=white)](opencode.json)
 
 <!-- core-state:start -->
-**255 agentes** · **16 MCPs** · **30 comandos** · **22 checks**
+**255 agentes** · **16 MCPs** · **31 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 
@@ -317,10 +317,20 @@ externos não foram instalados ou executados nesta etapa.
 
 As [verificações locais R886](docs/verification-local-r886.json) delimitam o
 escopo executado. Para codificação eficiente, o [piloto R887](specs/SPEC-935-R887-code-intelligence-local.md)
-está proposto com um único provedor, context-link, conforme a
-[avaliação comparativa](docs/AVALIACAO_CODE_INTELLIGENCE_R887.md) e a
-[curadoria complementar](docs/CURADORIA_CODIFICACAO_EFICIENTE.md). O piloto
-ainda não está instalado nem ativo.
+usa um único provedor, context-link, subordinado ao primário e à memória canônica.
+O [guia de contexto local](docs/CONTEXTO_CODIGO_LOCAL_R887.md) descreve instalação,
+consulta, isolamento e limites. O smoke nativo encontrou falhas em relações de
+chamadas Python: três consultas de grafo ficam bloqueadas; busca, código e
+estrutura permanecem no piloto. Não há ganho de tokens comprovado.
+A [avaliação comparativa](docs/AVALIACAO_CODE_INTELLIGENCE_R887.md) registra a
+seleção e a [curadoria complementar](docs/CURADORIA_CODIFICACAO_EFICIENTE.md)
+contextualiza as alternativas.
+
+A revisão R888 dos [nove repositórios — grupo A](docs/AVALIACAO_REPOS_R888_A.md)
+e [grupo B](docs/AVALIACAO_REPOS_R888_B.md) utiliza fontes fixadas e inspeções
+REA compatíveis. A [decisão de adaptação](docs/DECISOES_ADAPTACAO_REPOS_R888.md) corrige o benchmark
+IMO existente e seu consumidor DeepThink para separar execução, gabarito,
+heurística e verificação formal, sem instalar nove runtimes paralelos.
 
 ## Arquitetura completa e fluxogramas atuais
 

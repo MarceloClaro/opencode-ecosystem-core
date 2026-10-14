@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
 """
 Real IMO Solver — SPEC-935-R499
 ===============================
 Solver determinístico para o corpus amostral do IMO-AnswerBench (Shortlist
-2020–2022) com **anti-leak**: nenhuma solução recebe a resposta esperada.
+2020–2022) sem consultar o gabarito. No caminho R888, submit recebe apenas a visão pública.
 
 Métodos:
   - algebra-001: enumeração exata com divisão inteira ("quotient" floor)
@@ -21,7 +20,7 @@ from __future__ import annotations
 
 from fractions import Fraction
 from itertools import permutations
-from typing import Any, Dict
+from typing import Any
 
 from integrations.deepmind.imobench_harness import IMOProblem
 
@@ -50,7 +49,7 @@ class RealIMOSolver:
         return hits
 
     # ── algebra-004: desigualdade (evidência numérica forte) ─────────────
-    def solve_alg004(self) -> Dict[str, Any]:
+    def solve_alg004(self) -> dict[str, Any]:
         """Verifica numericamente, para u=2..6 e grade de t, se
         C = 2^(u-2) satisfaz (t^(2^u)+1)/2 <= (C(t-1)^2+t)^(2^(u-1)).
         Não prova formalmente: status 'parcial'."""
@@ -59,12 +58,12 @@ class RealIMOSolver:
         failed: list[tuple[int, float]] = []
         for u in u_range:
             exp_u = 2 ** u
-            lhs = lambda t: (t ** exp_u + 1) / 2.0
             C = 2 ** (u - 2)
-            rhs = lambda t: ((C * (t - 1) ** 2 + t) ** (2 ** (u - 1)))
             # grade de t cobre região relevante (t real; ampla amostragem)
             for t in [x / 20.0 for x in range(-200, 201)]:
-                if lhs(t) > rhs(t) + 1e-6:
+                lhs = (t ** exp_u + 1) / 2.0
+                rhs = (C * (t - 1) ** 2 + t) ** (2 ** (u - 1))
+                if lhs > rhs + 1e-6:
                     failed.append((u, t))
                     break
         return {
@@ -87,11 +86,11 @@ class RealIMOSolver:
         return hits
 
     # ── combinatorics-001: local maximum incluindo extremos ──────────────
-    def solve_comb001(self) -> Dict[str, Any]:
+    def solve_comb001(self) -> dict[str, Any]:
         """Conta permutações de 1..n com exatamente um local maximum
         (elemento maior que todos os vizinhos existentes — inclui extremos)
         e verifica a fórmula 2^(n-1) para n=1..6."""
-        counts: Dict[int, int] = {}
+        counts: dict[int, int] = {}
         for n in range(1, 7):
             cnt = 0
             for perm in permutations(range(1, n + 1)):
@@ -123,13 +122,13 @@ class RealIMOSolver:
 
     def solve_nt003(self) -> int:
         """Maior expoente e com 3^e | 2023! (fórmula de Legendre)."""
-        n, e, p = 2023, 0, 3
+        n, e = 2023, 0
         while n > 0:
             n //= 3
             e += n
         return e
 
-    def solve_comb002(self) -> Dict[str, Any]:
+    def solve_comb002(self) -> dict[str, Any]:
         """Conta permutações de 1..5 com exatamente DOIS máximos locais."""
         n = 5
         cnt = 0
@@ -147,6 +146,46 @@ class RealIMOSolver:
     def solve_geo001(self) -> int:
         """Número de diagonais de um 2023-ágono convexo: n(n-3)/2."""
         return 2023 * 2020 // 2
+
+    def submit(self, problem) -> dict[str, Any]:
+        """Resposta explícita derivada dos cálculos, separada da justificativa.
+
+        Aceita a visão pública R888, sem consultar gabaritos. Fórmulas inferidas
+        por amostragem conservam status candidate e não constituem prova.
+        """
+        pid = problem.problem_id
+        status = "computed"
+        if pid == "imo-bench-algebra-001":
+            values = self.solve_alg001()
+            answer = str(values[0]) if len(values) == 1 else str(values)
+        elif pid == "imo-bench-algebra-004":
+            result = self.solve_alg004()
+            if result["status"] != "parcial":
+                raise ValueError("A validação numérica refutou o candidato.")
+            candidate = result["candidate"]
+            answer = "2^{" + candidate.removeprefix("2**(").removesuffix(")") + "}"
+            status = "candidate"
+        elif pid == "imo-bench-number-theory-001":
+            pairs = self.solve_nt001()
+            answer = str(pairs[0]) if len(pairs) == 1 else str(pairs)
+        elif pid == "imo-bench-combinatorics-001":
+            result = self.solve_comb001()
+            if not result["confirmed"]:
+                raise ValueError("A fórmula candidata não coincidiu com a enumeração.")
+            answer, status = "2^{n-1}", "candidate"
+        elif pid == "imo-bench-algebra-002":
+            answer = str(min(self.solve_alg002()))
+        elif pid == "imo-bench-number-theory-002":
+            answer = "{" + ", ".join(str(value) for value in self.solve_nt002()) + "}"
+        elif pid == "imo-bench-number-theory-003":
+            answer = str(self.solve_nt003())
+        elif pid == "imo-bench-combinatorics-002":
+            answer = str(self.solve_comb002()["count_two_peaks"])
+        elif pid == "imo-bench-geometry-001":
+            answer = str(self.solve_geo001())
+        else:
+            raise ValueError(f"Problema fora do corpus canônico: {pid}")
+        return {"answer": answer, "reasoning": self.solve(problem), "answer_status": status}
 
     # ── interface única: problema -> texto de solução deduzida ───────────
     def solve(self, problem: IMOProblem) -> str:

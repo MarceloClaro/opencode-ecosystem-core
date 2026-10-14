@@ -1,0 +1,76 @@
+{
+  "cycle": "R888",
+  "date": "2026-10-14",
+  "verification": "local_operation",
+  "externally_validated": false,
+  "status": "implemented_scoped_adaptations",
+  "curation": {
+    "repositories": 9,
+    "selected_source_files": 120,
+    "runtimes_installed_from_nine_repositories": 0,
+    "manifests": [
+      "docs/repo-reviews-r888-a.json",
+      "docs/repo-reviews-r888-b.json"
+    ]
+  },
+  "rea": {
+    "successful_compatible_inspections": 5,
+    "javascript_mcp_inspections": 4,
+    "html_local_assistant_inspections": 1,
+    "unsupported_or_invalid_attempts_preserved": true,
+    "runtime_apps_executed": false,
+    "python_and_markdown_semantics_analyzed_by_rea": false,
+    "source_repository": "https://github.com/MarceloClaro/rea",
+    "observed_commit": "4daea941bfeeb426886f2d048aed7f3cb2dbf97b"
+  },
+  "adaptations": [
+    "Compact cited code context in the existing primary/MCP path; deduplication by source and qualified symbol, bounded output, estimated cost counters omitted.",
+    "IMOBenchmark public solver view excludes answer key; missing solver not_executed, full answer equality, textual grade never proof.",
+    "RealIMOSolver returns computed answer separately from justification; known small corpus, not general mathematical performance.",
+    "DeepThink rechecks the original identity with the symbolic backend and declares unsupported natural claims unproven.",
+    "Primary DeepThink/AlphaProof record observations without EMA confidence updates."
+  ],
+  "proofs": [
+    {
+      "path": "outputs/core-r888/a-core-imobench-reproducer.json",
+      "sha256": "b4398920d070c862f02be029dcb05368bc21ade0ff3abc44963467c19240c940"
+    },
+    {
+      "path": "outputs/core-r888/a-release-final.xml",
+      "sha256": "a24a8b6f806cd42ed47b1bb7afb642c6313f1fc07a386b0c577656a724112103",
+      "tests": 71,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "path": "outputs/core-r888/primary-green.xml",
+      "sha256": "ad8dfd3a1e6c4f6ae7c541872dd138c7afc64535a4adeccba78551d1c99ea26d",
+      "tests": 42,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "path": "outputs/core-r888/b-review-compact-final.xml",
+      "sha256": "e55f93d2b74741be07bcf685bb1e28d6d2607fddbe9b749e9719e169cf524c0c",
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "limitations": [
+    "The repository review is a directed sample, not a complete dependency audit.",
+    "No external validation, calibrated confidence, human learning or predictive simulation demonstrated.",
+    "Benchmark output exposes the evaluator answer for auditing and must not be recycled into an independent solver input.",
+    "Callable isolation is an API boundary for trusted Python callbacks, not a process sandbox.",
+    "Historical local TDD XML is not authenticated external custody."
+  ],
+  "artifact_hashes": {
+    "integrations/deepmind/imobench_harness.py": "b5228ee84fdc97176cf68739a79f5d35d3aab8a789b9524f1ac55b1c954410d7",
+    "integrations/deepmind/imo_real_solver.py": "90fd43da8b6c7cbc90045c51566b154739980e64e20bbf826981bc2667672f34",
+    "integrations/deepmind/deep_think_engine.py": "e99ea71be9965f6cb1e3093eebc9b8f54a94c6711964f8dc1095e7ed0e219d01",
+    "marceloclaro/orchestrator.py": "756f6700dcb72d9ef868d8c9abf4c4489cbffb9b3cfb48679f430b886b4f2aeb"
+  }
+}

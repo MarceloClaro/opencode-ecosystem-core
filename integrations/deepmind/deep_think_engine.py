@@ -1,19 +1,20 @@
-# -*- coding: utf-8 -*-
 """
 OpenCode Deep Think Engine — SPEC-935-R443
 ===========================================
 Motor de raciocínio profundo com alocação dinâmica de Test-Time Compute
 inspirado no Gemini Deep Think do Google DeepMind.
 
-Explora trajetórias concorrentes de resolução, executa auto-crítica
+Explora trajetórias locais de resolução, executa auto-crítica
 e poda de ramos inconsistentes, selecionando a derivação de maior rigor.
 """
 
 from __future__ import annotations
 
+import hashlib
+import json
 import time
 from dataclasses import dataclass, field
-from typing import Any, Callable, Dict, List, Optional
+from typing import Any
 
 from integrations.deepmind.alphaproof_engine import OpenCodeAlphaProof
 from integrations.deepmind.formal_verifier import FormalProofVerifier
@@ -29,10 +30,11 @@ class ReasoningTrajectory:
     candidate_answer: str
     grade_score_0_to_7: int
     is_valid: bool
-    verified_steps: List[str] = field(default_factory=list)
+    verified_steps: list[str] = field(default_factory=list)
     latency_ms: float = 0.0
+    verification: dict[str, Any] = field(default_factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         return {
             "trajectory_id": self.trajectory_id,
             "approach_name": self.approach_name,
@@ -42,6 +44,7 @@ class ReasoningTrajectory:
             "is_valid": self.is_valid,
             "verified_steps": self.verified_steps,
             "latency_ms": round(self.latency_ms, 2),
+            "verification": self.verification,
         }
 
 
@@ -50,97 +53,101 @@ class OpenCodeDeepThink:
 
     def __init__(
         self,
-        verifier: Optional[FormalProofVerifier] = None,
-        alphaproof: Optional[OpenCodeAlphaProof] = None,
+        verifier: FormalProofVerifier | None = None,
+        alphaproof: OpenCodeAlphaProof | None = None,
     ) -> None:
         self.verifier = verifier or FormalProofVerifier()
         self.alphaproof = alphaproof or OpenCodeAlphaProof(verifier=self.verifier)
         self.grading_head = GradingHeadDeepMind()
 
+    def _verify_candidate(self, claim: str, candidate: dict) -> dict:
+        """Reexecuta a identidade original; nenhum sinal textual fecha o gate."""
+        receipt = {"claim": claim, "claim_sha256": hashlib.sha256(claim.encode()).hexdigest(),
+                   "backend": None, "execution_performed": False, "verified": False,
+                   "method": "restricted_symbolic_identity", "calibrated": False,
+                   "externally_validated": False,
+                   "limitation": "Somente identidades algébricas com SymPy disponível são aceitas neste consumidor."}
+        if (candidate.get("is_proven") is not True or candidate.get("proof_status") != "proven"
+                or candidate.get("theorem") != claim):
+            receipt["message"] = "O candidato não demonstrou a mesma alegação de entrada."
+        elif self.verifier.has_sympy is not True:
+            receipt["message"] = "Backend simbólico indisponível; fallback textual não é promovido."
+        else:
+            equation = FormalProofVerifier._split_algebraic_equation(claim)
+            if equation is None:
+                receipt["message"] = "A alegação está fora do fragmento de identidade algébrica."
+            else:
+                receipt.update(backend="sympy", execution_performed=True)
+                try:
+                    confirmed, message = self.verifier.verify_algebraic_identity(*equation)
+                    receipt.update(verified=confirmed is True, message=message)
+                except (ArithmeticError, RuntimeError, TypeError, ValueError) as error:
+                    receipt["message"] = "Verificação falhou: " + type(error).__name__
+        receipt["receipt_sha256"] = hashlib.sha256(json.dumps(
+            receipt, ensure_ascii=False, sort_keys=True).encode()).hexdigest()
+        return receipt
+
     def think(
         self,
         problem_statement: str,
         domain: str = "general",
-        compute_budget: int = 3,  # 1 a 5 (número de ramos de exploração)
+        compute_budget: int = 3,
         target_confidence: float = 0.95,
-    ) -> Dict[str, Any]:
-        """Executa a busca profunda de trajetórias e sintetiza a melhor solução."""
+    ) -> dict[str, Any]:
+        """Busca local com verificação vinculada à entrada, sem probabilidade calibrada.
+
+        As tentativas são sequenciais sobre o mesmo prover; seus nomes não
+        demonstram diversidade independente de raciocínio. target_confidence
+        é preservado na assinatura, mas não constitui limiar de aceitação.
+        """
         start_time = time.time()
-        trajectories: List[ReasoningTrajectory] = []
-
+        trajectories: list[ReasoningTrajectory] = []
         approaches = [
-            ("Decomposição Estrutural & Lemas", "induction"),
-            ("Análise de Invariantes & Casos de Borda", "cases"),
-            ("Equivalência Algébrica & Redução Simbólica", "algebra"),
-            ("Redução ao Absurdo & Falsificação Popperiana", "contradiction"),
-            ("Síntese Direta e Verificação Z3", "direct"),
+            "Decomposição Estrutural & Lemas",
+            "Análise de Invariantes & Casos de Borda",
+            "Equivalência Algébrica & Redução Simbólica",
+            "Redução ao Absurdo & Falsificação Popperiana",
+            "Síntese Direta e Verificação",
         ]
-
         active_approaches = approaches[:max(1, min(len(approaches), compute_budget))]
-
-        for idx, (appr_name, tactic_key) in enumerate(active_approaches, start=1):
-            t0 = time.time()
-            # Gera busca de prova com AlphaProof
-            proof_res = self.alphaproof.search_proof(problem_statement)
-
-            thinking_trace = (
-                f"=== [Ramo {idx}: {appr_name}] ===\n"
-                f"1. Premissas: {proof_res['premises']}\n"
-                f"2. Táticas aplicadas: {proof_res['tactics_applied']}\n"
-                f"3. Verificação Formal: {len(proof_res['proof_steps'])} passos validados via SymPy/Z3.\n"
-                f"4. Análise de Consistência: Ausência de contra-exemplos."
-            )
-
-            candidate_solution = f"Solução rigorosa para '{problem_statement[:50]}': Demonstrado via {appr_name}. Resposta comprovada com certeza formal."
-
-            # Simula problema para avaliar com GradingHead
-            dummy_prob = IMOProblem(
-                problem_id=f"deepthink-task-{idx}",
-                problem_text=problem_statement,
-                short_answer="demonstrado",
-                category=domain,
-            )
-
-            # Solução com termos para o grading head
-            full_text = f"Pelo método da indução e lemas de {appr_name}, a resposta é demonstrado. Equação: ="
-            grade, feedback = self.grading_head.grade(dummy_prob, full_text, self.verifier)
-
-            traj = ReasoningTrajectory(
-                trajectory_id=idx,
-                approach_name=appr_name,
-                thinking_trace=thinking_trace,
-                candidate_answer=candidate_solution,
-                grade_score_0_to_7=grade,
-                is_valid=(grade >= 5 and proof_res["is_proven"]),
-                verified_steps=proof_res["proof_steps"],
-                latency_ms=(time.time() - t0) * 1000,
-            )
-            trajectories.append(traj)
-
-        # Seleciona a melhor trajetória
-        best_trajectory = max(trajectories, key=lambda t: (t.grade_score_0_to_7, -t.latency_ms))
-        total_time_ms = (time.time() - start_time) * 1000
-
-        consolidated_think = "\n\n".join(t.thinking_trace for t in trajectories)
-        final_answer = (
-            f"<think>\n{consolidated_think}\n\n"
-            f"[Deep Think Decision]: Trajetória {best_trajectory.trajectory_id} ({best_trajectory.approach_name}) "
-            f"selecionada com score {best_trajectory.grade_score_0_to_7}/7.\n</think>\n\n"
-            f"**Demonstração Formal Concluída:**\n"
-            f"{best_trajectory.candidate_answer}\n\n"
-            f"**Passos Formais Verificados:**\n" +
-            "\n".join(f"- {s}" for s in best_trajectory.verified_steps[:4])
-        )
-
+        for idx, name in enumerate(active_approaches, start=1):
+            started = time.time()
+            candidate = self.alphaproof.search_proof(problem_statement)
+            verification = self._verify_candidate(problem_statement, candidate)
+            confirmed = verification["verified"] is True
+            steps = [problem_statement] if confirmed else []
+            trace = (f"=== [Tentativa local {idx}: {name}] ===\n"
+                     f"Alegação examinada: {problem_statement}\n"
+                     f"Resultado do verificador: {verification['message']}\n"
+                     "A ausência de prova não demonstra falsidade nem ausência de contraexemplos.")
+            answer = (f"Identidade algébrica confirmada no fragmento local: {problem_statement}"
+                      if confirmed else f"Alegação pendente de demonstração: {problem_statement}")
+            public = IMOProblem(problem_id=f"deepthink-task-{idx}", problem_text=problem_statement,
+                                short_answer="", category=domain).solver_input()
+            grade, _ = self.grading_head.grade(public, "\n".join(steps) if steps else answer)
+            trajectories.append(ReasoningTrajectory(
+                trajectory_id=idx, approach_name=name, thinking_trace=trace,
+                candidate_answer=answer, grade_score_0_to_7=grade, is_valid=confirmed,
+                verified_steps=steps, latency_ms=(time.time() - started) * 1000,
+                verification=verification))
+        # A validade vem do verificador; a heurística apenas desempata tentativas.
+        best = max(trajectories, key=lambda item: (item.is_valid, item.grade_score_0_to_7, -item.latency_ms))
+        trace = "\n\n".join(item.thinking_trace for item in trajectories)
+        status = "proven" if best.is_valid else "unproven"
+        heading = "Identidade confirmada no escopo local" if best.is_valid else "Demonstração pendente"
+        final_answer = (f"<think>\n{trace}\n\n[Deep Think Decision]: Tentativa {best.trajectory_id}; "
+                        f"heurística textual {best.grade_score_0_to_7}/7, não calibrada.\n</think>\n\n"
+                        f"**{heading}:**\n{best.candidate_answer}")
         return {
-            "problem": problem_statement,
-            "domain": domain,
-            "compute_budget": compute_budget,
-            "total_trajectories_evaluated": len(trajectories),
-            "best_trajectory": best_trajectory.to_dict(),
-            "final_solution": final_answer,
-            "best_grade_0_to_7": best_trajectory.grade_score_0_to_7,
-            "confidence_score": 0.98 if best_trajectory.grade_score_0_to_7 == 7 else 0.92,
-            "total_duration_ms": round(total_time_ms, 2),
-            "trajectories": [t.to_dict() for t in trajectories],
+            "problem": problem_statement, "domain": domain, "compute_budget": compute_budget,
+            "total_trajectories_evaluated": len(trajectories), "best_trajectory": best.to_dict(),
+            "final_solution": final_answer, "best_grade_0_to_7": best.grade_score_0_to_7,
+            "proof_status": status, "verification": best.verification,
+            "confidence_score": None, "calibrated": False, "confidence_promoted": False,
+            "target_confidence_applied": False, "externally_validated": False,
+            "total_duration_ms": round((time.time() - start_time) * 1000, 2),
+            "trajectories": [item.to_dict() for item in trajectories],
+            "limitations": ["As tentativas locais usam o mesmo prover, sem comprovar diversidade independente.",
+                            "A confirmação simbólica limita-se à identidade recebida, sem validar enunciados naturais ou equivalência geral.",
+                            "O recibo é local; não representa prova independente do software, calibração ou avaliação externa."],
         }

@@ -2,25 +2,24 @@
 spec_id: SPEC-935-R887
 title: Piloto de code-intelligence local com um único provedor MCP
 component: integrations.code_context
-status: proposed
+status: implemented
 test_file: tests/test_r887_code_context.py
 ---
 
-# R887 — Piloto especificado, ainda não instalado
+# R887 — Piloto local subordinado ao primário
 
 ## Decisão e estado
 
 Selecionar somente `context-link-mcp/context-link`, revisão
 `e5af49c11c5b2228c6b611dd3594d93014997306` / tag `v1.1.0`, Apache-2.0.
-Esta especificação reserva R887; não registra uma implementação ou ciclo de
-evolução concluído. O código e a configuração do piloto ainda não existem.
-R886 permanece um trabalho separado de memória/reflexão, sem este provedor.
-O `test_file` reservado ainda não existe: tentar aceitar uma entrega por esta
-spec deve manter o gate fechado até a implementação e o histórico RED/GREEN.
+O usuário autorizou a continuidade do piloto após a especificação. A execução
+segue o plano `docs/PLANO_IMPLEMENTACAO_R887.md`. O ciclo registra testes e sondagens locais do piloto, com três consultas de grafo
+bloqueadas após contraprova. R886 permanece uma etapa distinta de memória/reflexão.
 
 O levantamento e as fontes estão em
-`docs/AVALIACAO_CODE_INTELLIGENCE_R887.md`. A compatibilidade do binário e as
-alegações de economia ainda precisam de execução local.
+`docs/AVALIACAO_CODE_INTELLIGENCE_R887.md`. O binário foi instalado e consultado em fixtures locais sob isolamento; o
+recibo `docs/verification-local-r887.json` registra os testes e as limitações.
+O benchmark pequeno não demonstrou economia de tokens.
 
 ## Contrato de integração
 
@@ -36,13 +35,20 @@ alegações de economia ainda precisam de execução local.
 - Sem watcher, inferência externa ou download automático de pesos. A
   afirmação de operação sem rede depende de bloqueio e teste do ambiente;
   processo local, por si, não demonstra isolamento de rede.
-- Expor somente `ping`, `semantic_search_symbols`, `get_code_by_symbol`,
+- O processo nativo anuncia `ping`, `semantic_search_symbols`, `get_code_by_symbol`,
   `get_file_skeleton`, `get_symbol_usages`, `get_call_tree`, `get_blast_radius`.
+  O smoke real v1.1.0 encontrou chamadas/usos incorretos em Python: as três
+  últimas consultas ficam bloqueadas na fachada (`blocked_semantic_validation`).
+  Somente ping, busca de símbolos, código e skeleton estão habilitados no piloto.
   Bloquear `reindex`, ferramentas de memória e demais operações. Começar com
   parâmetros escalares compatíveis com os schemas publicados.
 - O primário define consulta e orçamento. O retorno inclui fonte, hash,
   limites, provedor e estado de indexação. Tool indisponível, timeout,
   caminho inválido ou índice obsoleto deve produzir estado explícito.
+- O servidor nativo é um processo filho consultado por `ecosystem-network`; a
+  fachada expõe somente status/query. Setup e indexação exigem a CLI explícita.
+  O primário registra proveniência no MetaBus e inclui contexto de código limitado
+  nos briefings de delegação de software quando o índice estiver pronto.
 - Configuração MCP deriva do gerador canônico do Core, com testes de
   reprodução; não editar somente `opencode.json` nem duplicar servidores.
 
@@ -52,6 +58,8 @@ alegações de economia ainda precisam de execução local.
    obsoleto, timeout, schema inválido e indisponibilidade do provedor.
 2. Smoke real MCP: `initialize`, `tools/list`, `ping` e consultas de símbolo,
    skeleton, uso e chamadas sobre fixture local com resultado conhecido.
+   Falhas semânticas do provedor devem bloquear a consulta afetada, preservando
+   a contraprova no recibo, sem substituição por saída simulada.
 3. Confirmar que todas as consultas permitidas preservam os hashes dos
    arquivos originais; escrita somente no índice/cache declarado.
 4. Confirmar isolamento de rede, ou reportar bloqueio/degradação sem alegar

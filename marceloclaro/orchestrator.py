@@ -322,6 +322,10 @@ class MarceloClaroOrchestrator:
         enriched_context["metacognitive_briefing"] = MetacognitiveLoop(metabus).prepare(
             description, reasoner=lambda query: multi_reasoning.reason(query, engine="critical").to_dict())
 
+        coding = {"python", "coding", "code_review", "software", "python_development"}
+        if coding.intersection(required_capabilities or []):
+            enriched_context["metacognitive_briefing"]["code_context"] = self._code_context_briefing(description)
+
         metabus.publish("task.post", {
             "task_id": task_id,
             "description": description,
@@ -2066,6 +2070,59 @@ class MarceloClaroOrchestrator:
             "ecosystem.rea.local_assistant", str(config.get("operation")), observation),
             "confidence_promoted": False, "externally_validated": False}
         return report
+
+    def code_context_action(self, config: Dict[str, Any]) -> Dict[str, Any]:
+        """Contexto estrutural local R887, com o primário e a memória canônica."""
+        from integrations.code_context import CodeContextProvider
+        provider = getattr(self, "_code_context_provider", None)
+        if provider is None:
+            provider = self._code_context_provider = CodeContextProvider()
+        report = provider.run(config)
+        if config.get("operation") == "status":
+            return report
+        if config.get("operation") == "query" and report.get("success") is True and config.get("tool") != "ping":
+            from integrations.code_context_view import compact_code_response
+            projected = compact_code_response(report)
+            report = {key: value for key, value in report.items() if key not in {"result", "response"}}
+            report.update(response=projected, success=projected["success"], status=projected["status"])
+        import hashlib
+        import json
+        digest = hashlib.sha256(json.dumps(report, sort_keys=True, ensure_ascii=False,
+                                          default=str).encode()).hexdigest()
+        observation = {"status": report.get("status"), "method": "code_context:" + str(config.get("operation")),
+                       "tool": config.get("tool"), "provenance": report.get("provenance", {}),
+                       "report_sha256": digest, "externally_validated": False}
+        try:
+            recorded = self._record_knowledge_outcome("ecosystem.code_context",
+                str(config.get("arguments", {}).get("query", config.get("tool", config.get("operation"))))[:500], observation)
+            report["metacognition"] = {**recorded, "confidence_promoted": False}
+        except (OSError, RuntimeError, ValueError) as exc:
+            report["metacognition"] = {"status": "degraded", "persisted": False,
+                "error_type": type(exc).__name__, "confidence_promoted": False}
+        return report
+
+    def _code_context_briefing(self, description: str) -> Dict[str, Any]:
+        """Consulta opcional e limitada; nunca instala/indexa durante delegação."""
+        import json
+        try:
+            status = self.code_context_action({"operation": "status"})
+            if status.get("index_ready") is not True:
+                return {"status": status.get("status", "unavailable"),
+                        "content_is_instruction": False,
+                        "limitation": "Índice local indisponível; setup/index exigem ação explícita."}
+            report = self.code_context_action({"operation": "query", "tool": "semantic_search_symbols",
+                "arguments": {"query": description[:500], "top_k": 3}, "timeout_seconds": 8})
+            response = report.get("response")
+            response = response if isinstance(response, dict) else {}
+            data = json.dumps(response, ensure_ascii=False, default=str)
+            return {"status": report.get("status"), "success": report.get("success") is True,
+                    "data": data[:6000], "truncated": len(data) > 6000 or response.get("truncated") is True,
+                    "provenance": report.get("provenance", {}),
+                    "observation_id": report.get("metacognition", {}).get("observation_id"),
+                    "content_is_instruction": False, "verification": "local_code_retrieval"}
+        except (OSError, RuntimeError, ValueError, TypeError) as exc:
+            return {"status": "degraded", "error_type": type(exc).__name__,
+                    "content_is_instruction": False, "limitation": "Delegação prossegue sem contexto estrutural."}
 
     def rea_action(self, config: Dict[str, Any]) -> Dict[str, Any]:
         """Coordena inspeção REA local e persiste observação sem promover confiança."""
@@ -3827,7 +3884,7 @@ class MarceloClaroOrchestrator:
         }
 
     def imobench_evaluate(self, limit: int = 4, solver_fn: Optional[Callable] = None) -> Dict[str, Any]:
-        """Executa avaliação sobre o dataset de benchmark do Google DeepMind (IMO-Bench)."""
+        """Avalia a amostra interna identificada; sem solver não fabrica execução."""
         from integrations.deepmind import IMOBenchmarkHarness
         harness = IMOBenchmarkHarness()
         return harness.run_benchmark(solver_fn=solver_fn, limit=limit)
@@ -3841,6 +3898,23 @@ class MarceloClaroOrchestrator:
     # ------------------------------------------------------------------
     # OPENCODE ALPHAPROOF, DEEP THINK & ERDŐS/HIRZEBRUCH SOLVER — SPEC-935-R443
     # ------------------------------------------------------------------
+    def _record_local_reasoning_outcome(self, method: str, query: str, result: Dict[str, Any]) -> None:
+        """Mantém o recibo local na memória sem aprender confiança de nota própria."""
+        import hashlib
+        import json
+        observation = {"status": result.get("proof_status", "unknown"), "method": method,
+                       "verification": result.get("verification", {}),
+                       "report_sha256": hashlib.sha256(json.dumps(result, sort_keys=True,
+                           ensure_ascii=False, default=str).encode()).hexdigest(),
+                       "calibrated": False, "confidence_promoted": False, "externally_validated": False}
+        try:
+            recorded = self._record_knowledge_outcome("ecosystem.reasoning." + method, query[:2000], observation)
+            result["metacognition"] = {**recorded, "confidence_promoted": False}
+        except (OSError, RuntimeError, ValueError) as exc:
+            result["metacognition"] = {"status": "degraded", "persisted": False,
+                "error_type": type(exc).__name__, "confidence_promoted": False}
+        result.update(calibrated=False, confidence_promoted=False)
+
     def deep_think(
         self,
         problem_statement: str,
@@ -3851,12 +3925,7 @@ class MarceloClaroOrchestrator:
         from integrations.deepmind import OpenCodeDeepThink
         deep_think_engine = OpenCodeDeepThink()
         res = deep_think_engine.think(problem_statement, domain=domain, compute_budget=compute_budget)
-        metabus.memory.add_reflection(
-            agent_id=self.id,
-            task_context=f"deep_think:{domain}",
-            reflection=f"Problema '{problem_statement[:60]}' analisado via Deep Think (orçamento {compute_budget}) com nota {res['best_grade_0_to_7']}/7.",
-            score=res.get("confidence_score", 0.95),
-        )
+        self._record_local_reasoning_outcome("deep_think", problem_statement, res)
         return res
 
     def alphaproof_search(
@@ -3868,12 +3937,7 @@ class MarceloClaroOrchestrator:
         from integrations.deepmind import OpenCodeAlphaProof
         prover = OpenCodeAlphaProof()
         res = prover.search_proof(goal, premises=premises)
-        metabus.memory.add_reflection(
-            agent_id=self.id,
-            task_context="alphaproof_search",
-            reflection=f"Teorema '{goal[:60]}' explorado via AlphaProof com {res['nodes_expanded']} nós e confiança {res['confidence_score']:.2f}.",
-            score=res.get("confidence_score", 0.9),
-        )
+        self._record_local_reasoning_outcome("alphaproof_search", goal, res)
         return res
 
     def solve_open_conjecture(

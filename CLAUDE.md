@@ -10,7 +10,7 @@ Este arquivo é lido automaticamente pelo Claude Code sempre que ele opera neste
 Um ecossistema de orquestração multiagente (`marceloclaro/orchestrator.py::MarceloClaroOrchestrator`) que integra: MCI (MetaBus/Blackboard/Reflexion — memória metacognitiva compartilhada), Trust Engine, Token Economy, um pipeline científico agentivo (EvoSci → Deep Research → Peer Review → Revision → Paper Composer), SDD/TDD, Loop Engineering, LLM Reduction Layer, DataKnowledgeHub e o catálogo de agentes especializados.
 
 <!-- core-state:start -->
-**255 agentes** · **16 MCPs** · **30 comandos** · **22 checks**
+**255 agentes** · **16 MCPs** · **31 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 

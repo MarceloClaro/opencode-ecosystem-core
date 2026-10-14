@@ -1,125 +1,127 @@
-# -*- coding: utf-8 -*-
-"""
-IMO Bench Harness & DeepMind Grading Head — SPEC-935-R442
-=========================================================
-Harness de benchmarking baseado nos datasets abertos do Google DeepMind
-(IMO-AnswerBench, IMO-ProofBench e IMO-GradingBench).
+"""SPEC-935-R442 / R888: benchmark local sem gabarito na entrada do solver.
 
-Permite avaliar e calibrar objetivamente o raciocínio matemático e científico
-dos agentes do ecossistema.
+Acerto textual, sinais heurísticos e evidência formal têm contratos distintos.
+A amostra interna não constitui execução do IMO Bench completo nem calibração.
 """
-
 from __future__ import annotations
 
+import logging
 import re
-from dataclasses import dataclass, field
-from typing import Any, Callable, Dict, List, Optional
+from collections.abc import Callable
+from dataclasses import asdict, dataclass
+from typing import Any, ClassVar
 
 from integrations.deepmind.formal_verifier import FormalProofVerifier
+
+logger = logging.getLogger(__name__)
+
+
+@dataclass(frozen=True, slots=True)
+class IMOSolverInput:
+    """Visão pública; não é um sandbox para callbacks Python não confiáveis."""
+    problem_id: str
+    problem_text: str
+    category: str
+    subcategory: str = ""
+    source: str = ""
+    difficulty: str = ""
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
 
 
 @dataclass
 class IMOProblem:
-    """Instância de problema do IMO Bench."""
+    """Problema privado do avaliador, incluindo o gabarito reservado."""
     problem_id: str
     problem_text: str
     short_answer: str
     category: str
     subcategory: str = ""
     source: str = ""
+    difficulty: str = ""
 
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "problem_id": self.problem_id,
-            "problem_text": self.problem_text,
-            "short_answer": self.short_answer,
-            "category": self.category,
-            "subcategory": self.subcategory,
-            "source": self.source,
-        }
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+    def solver_input(self) -> IMOSolverInput:
+        return IMOSolverInput(self.problem_id, self.problem_text, self.category,
+                              self.subcategory, self.source, self.difficulty)
 
 
 @dataclass
 class IMOEvalResult:
-    """Resultado da avaliação de um problema do IMO Bench."""
     problem_id: str
-    is_correct: bool
+    is_correct: bool | None
     predicted_answer: str
     expected_answer: str
-    grade_score_0_to_7: int
+    grade_score_0_to_7: int | None
     grade_feedback: str
     justification: str = ""
     formal_verified: bool = False
+    formal_verification_status: str = "not_performed"
+    grading_kind: str = "textual_heuristic_uncalibrated"
+    answer_match_method: str = "full_normalized_exact"
+    answer_status: str = "submitted"
+    status: str = "evaluated"
+    error: str | None = None
 
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "problem_id": self.problem_id,
-            "is_correct": self.is_correct,
-            "predicted_answer": self.predicted_answer,
-            "expected_answer": self.expected_answer,
-            "grade_score_0_to_7": self.grade_score_0_to_7,
-            "grade_feedback": self.grade_feedback,
-            "justification": self.justification,
-            "formal_verified": self.formal_verified,
-        }
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+def _normalized_answer(value: str) -> str:
+    """Normaliza apresentação, não equivalência algébrica ou semântica.
+
+    Preserva caixa, conjuntos versus tuplas, dígitos separados e expoentes.
+    Não aplica NFKC, que transformaria indevidamente '3²' em '32'.
+    """
+    text = value.strip()
+    for left, right in (("$$", "$$"), ("$", "$"), (r"\(", r"\)")):
+        if text.startswith(left) and text.endswith(right) and len(text) >= len(left) + len(right):
+            text = text[len(left):-len(right)].strip()
+            break
+    text = re.sub(r"\s+", " ", text)
+    return re.sub(r"\s*([,;(){}=+*/^])\s*", r"\1", text)
 
 
 class GradingHeadDeepMind:
-    """Grading head calibrado com base no dataset IMO-GradingBench (0 a 7 pontos)."""
+    """Heurística de traços textuais; não calibrada com IMO-GradingBench.
 
-    RUBRIC_LEVELS = {
-        0: "Sem progresso substancial ou premissa fundamentalmente errada.",
-        1: "Progresso menor; identificação trivial de casos particulares.",
-        2: "Construção de premissas corretas, mas sem avanço na prova.",
-        3: "Abordagem correta iniciada; lemas intermediários faltantes.",
-        4: "Lema chave demonstrado, mas lacuna significativa na conclusão.",
-        5: "Solução quase completa; gaps menores de justificação algébrica.",
-        6: "Solução completa e correta com omissões puramente estilísticas.",
-        7: "Prova rigorosa, formalmente justificada e 100% correta.",
+    O nome público é mantido por compatibilidade. A escala legada é 0–7;
+    este avaliador usa somente 0–4 e não atribui completude ou prova.
+    O argumento verifier é preservado, mas nenhum verificador é invocado.
+    """
+    RUBRIC_LEVELS: ClassVar[dict[int, str]] = {
+        0: "Heurística textual: resposta vazia; nenhuma avaliação de prova.",
+        1: "Heurística textual: texto curto; correção e prova não avaliadas.",
+        2: "Heurística textual: texto extenso; correção e prova não avaliadas.",
+        3: "Heurística textual: marca algébrica ou de lema; correção e prova não avaliadas.",
+        4: "Heurística textual: marcas algébricas e de lema; correção e prova não avaliadas.",
     }
 
-    def grade(self, problem: IMOProblem, solution_text: str,
-              verifier: Optional[FormalProofVerifier] = None) -> Tuple[int, str]:
-        """Avalia a solução gerada na escala de 0 a 7 pontos."""
-        clean_sol = solution_text.strip().lower()
-        clean_expected = problem.short_answer.strip().lower().replace("$", "").replace(" ", "")
-
-        if not clean_sol:
-            return 0, self.RUBRIC_LEVELS[0]
-
-        # Checagem de acerto da resposta curta
-        has_answer = clean_expected in clean_sol.replace(" ", "")
-
-        # Verificação formal se houver equações
-        has_algebra = "=" in solution_text
-        has_induction = bool(re.search(r'\b(indução|inducao|induction|lema|lemas|lemma|lemmas)\b', clean_sol))
-
-        if has_answer and has_algebra and has_induction:
-            return 7, self.RUBRIC_LEVELS[7]
-        elif has_answer and (has_algebra or has_induction):
-            return 6, self.RUBRIC_LEVELS[6]
-        elif has_answer:
-            return 5, self.RUBRIC_LEVELS[5]
-        elif has_induction and has_algebra:
-            return 4, self.RUBRIC_LEVELS[4]
-        elif has_algebra:
-            return 3, self.RUBRIC_LEVELS[3]
-        elif len(clean_sol) > 50:
-            return 2, self.RUBRIC_LEVELS[2]
-        else:
-            return 1, self.RUBRIC_LEVELS[1]
+    def grade(self, problem: IMOProblem | IMOSolverInput, solution_text: str,
+              verifier: FormalProofVerifier | None = None) -> tuple[int, str]:
+        if not isinstance(solution_text, str):
+            raise TypeError("A justificativa da heurística deve ser textual.")
+        text = solution_text.strip()
+        has_algebra = "=" in text
+        has_lemma = bool(re.search(r"\b(indução|inducao|induction|lema|lemas|lemma|lemmas)\b", text.casefold()))
+        score = (0 if not text else 4 if has_algebra and has_lemma else 3
+                 if has_algebra or has_lemma else 2 if len(text) > 50 else 1)
+        return score, self.RUBRIC_LEVELS[score]
 
 
 class IMOBenchmarkHarness:
-    """Harness executivo para benchmarks baseados no IMO Bench."""
+    """Avalia respostas explícitas sobre uma amostra interna identificada."""
 
-    def __init__(self, verifier: Optional[FormalProofVerifier] = None) -> None:
+    def __init__(self, verifier: FormalProofVerifier | None = None) -> None:
         self.verifier = verifier or FormalProofVerifier()
         self.grading_head = GradingHeadDeepMind()
-        self.sample_dataset: List[IMOProblem] = self._load_canonical_sample()
+        self.sample_dataset: list[IMOProblem] = self._load_canonical_sample()
 
-    def _load_canonical_sample(self) -> List[IMOProblem]:
-        """Carrega problemas canônicos do IMO-AnswerBench."""
+    def _load_canonical_sample(self) -> list[IMOProblem]:
+        """Amostra interna adaptada/derivada; não carrega o dataset upstream."""
         return [
             IMOProblem(
                 problem_id="imo-bench-algebra-001",
@@ -197,43 +199,79 @@ class IMOBenchmarkHarness:
             ),
         ]
 
-    def run_benchmark(self, solver_fn: Optional[Callable[[IMOProblem], str]] = None,
-                      limit: int = 4) -> Dict[str, Any]:
-        """Executa a bateria de benchmark sobre os problemas amostrados."""
+    def run_benchmark(self, solver_fn: Callable[[IMOSolverInput], str | dict] | None = None,
+                      limit: int = 4) -> dict[str, Any]:
+        """O callback recebe somente o problema público, sem gabarito.
+
+        Retorno: resposta curta inteira em string ou {answer, reasoning}.
+        Prosa sem campo answer não é interpretada como resposta escondida.
+        O relatório final contém gabaritos para auditoria; não deve voltar ao
+        solver como entrada de uma avaliação supostamente independente.
+        """
+        if type(limit) is not int or limit <= 0:
+            raise ValueError("limit deve ser inteiro positivo.")
+        if solver_fn is not None and not callable(solver_fn):
+            raise ValueError("solver_fn deve ser um callback explícito.")
         problems = self.sample_dataset[:limit]
-        results: List[IMOEvalResult] = []
-
-        for p in problems:
-            if solver_fn is not None:
-                solution = solver_fn(p)
-            else:
-                # Solver determinístico padrão / zero-shot
-                solution = f"Solução estruturada para {p.problem_id}: Pela aplicação de lemas e indução formal, a resposta obtida é {p.short_answer}. Demonstração: ="
-
-            grade_score, feedback = self.grading_head.grade(p, solution, self.verifier)
-            is_correct = grade_score >= 5
-
-            results.append(
-                IMOEvalResult(
-                    problem_id=p.problem_id,
-                    is_correct=is_correct,
-                    predicted_answer=p.short_answer if is_correct else "incompleto",
-                    expected_answer=p.short_answer,
-                    grade_score_0_to_7=grade_score,
-                    grade_feedback=feedback,
-                    justification=solution,
-                    formal_verified=(grade_score == 7),
-                )
-            )
-
-        total = len(results)
-        correct_count = sum(1 for r in results if r.is_correct)
-        avg_grade = sum(r.grade_score_0_to_7 for r in results) / total if total > 0 else 0.0
-
-        return {
-            "total_problems": total,
-            "correct_problems": correct_count,
-            "accuracy": round(correct_count / total, 4) if total > 0 else 0.0,
-            "average_grade_0_to_7": round(avg_grade, 2),
-            "results": [r.to_dict() for r in results],
+        report = {
+            "status": "not_executed", "total_problems": len(problems),
+            "executed_problems": 0, "evaluated_problems": 0, "failed_problems": 0,
+            "correct_problems": None, "accuracy": None, "average_grade_0_to_7": None,
+            "results": [], "dataset_scope": "internal_sample_with_derived_problems",
+            "verification": "not_executed", "calibrated": False,
+            "confidence_promoted": False, "externally_validated": False,
+            "limitations": [
+                "Acerto compara a resposta curta inteira após normalização de apresentação; não decide equivalência algébrica.",
+                "A nota é heurística textual não calibrada; nenhuma prova formal é executada por este harness.",
+                "A amostra interna não é o dataset upstream completo; exposição prévia do solver não foi medida.",
+                "Callbacks Python são confiáveis para execução local; a visão pública não é um isolamento de processo.",
+            ],
         }
+        if solver_fn is None or not problems:
+            return report
+        results: list[IMOEvalResult] = []
+        # Conservar os gabaritos fora dos objetos transmitidos ao callback.
+        prepared = [(problem.problem_id, problem.short_answer, problem.solver_input()) for problem in problems]
+        for problem_id, expected, public in prepared:
+            try:
+                submission = solver_fn(public)
+                if isinstance(submission, str):
+                    answer, reasoning, answer_status = submission, "", "submitted"
+                elif type(submission) is dict:
+                    answer = submission.get("answer")
+                    reasoning = submission.get("reasoning", "")
+                    answer_status = submission.get("answer_status", "submitted")
+                    if answer_status not in {"submitted", "computed", "candidate"}:
+                        raise ValueError("answer_status deve ser submitted, computed ou candidate.")
+                else:
+                    raise ValueError("O solver deve retornar resposta textual ou objeto com answer.")
+                if not isinstance(answer, str) or not _normalized_answer(answer):
+                    raise ValueError("A resposta curta deve conter texto explícito não vazio.")
+                if not isinstance(reasoning, str):
+                    raise TypeError("reasoning deve ser textual.")
+                score, feedback = self.grading_head.grade(public, reasoning or answer)
+                results.append(IMOEvalResult(
+                    problem_id=problem_id,
+                    is_correct=bool(_normalized_answer(expected)) and _normalized_answer(answer) == _normalized_answer(expected),
+                    predicted_answer=answer, expected_answer=expected,
+                    grade_score_0_to_7=score, grade_feedback=feedback,
+                    justification=reasoning, answer_status=answer_status))
+            except Exception as error:
+                logger.exception("Falha explícita no callback/contrato do problema %s", problem_id)
+                results.append(IMOEvalResult(
+                    problem_id=problem_id, is_correct=None, predicted_answer="", expected_answer=expected,
+                    grade_score_0_to_7=None, grade_feedback="Resposta não avaliada por falha de execução/contrato.",
+                    status="failed", error=type(error).__name__ + ": " + str(error)[:400]))
+        evaluated = [row for row in results if row.status == "evaluated"]
+        failed = len(results) - len(evaluated)
+        correct = sum(row.is_correct is True for row in evaluated)
+        report.update(
+            status="completed" if not failed else "partial" if evaluated else "execution_failed",
+            executed_problems=len(results), evaluated_problems=len(evaluated), failed_problems=failed,
+            correct_problems=correct, results=[row.to_dict() for row in results],
+            verification="local_solver_execution",
+        )
+        if not failed:
+            report["accuracy"] = round(correct / len(results), 4)
+            report["average_grade_0_to_7"] = round(sum(row.grade_score_0_to_7 for row in evaluated) / len(evaluated), 2)
+        return report

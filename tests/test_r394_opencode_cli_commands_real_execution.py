@@ -58,6 +58,7 @@ _ERROR_MARKERS = (
 
 
 _PROMPT_TOOLS = {
+    "code-context": "ecosystem_code_context",
     "rea": "ecosystem_rea",
     "gemini-notebook": "ecosystem_gemini_notebook",
     "runtime-cientifico": "ecosystem_scientific_runtime",

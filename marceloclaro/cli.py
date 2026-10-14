@@ -372,6 +372,10 @@ def main() -> int:
             report = run_core_check()
             return 0 if report["overall"] in {"healthy", "degraded"} else 1
 
+        if cmd == "code-context":
+            from marceloclaro.code_context_cli import run_code_context_cli
+            return run_code_context_cli(sys.argv[2:], MarceloClaroOrchestrator)
+
         if cmd == "rea":
             from marceloclaro.rea_cli import run_rea_cli
             return run_rea_cli(sys.argv[2:], MarceloClaroOrchestrator)

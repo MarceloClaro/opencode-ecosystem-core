@@ -1,0 +1,113 @@
+{
+  "cycle": "R887",
+  "date": "2026-10-14",
+  "verification": "local_operation",
+  "externally_validated": false,
+  "status": "implemented_pilot_with_explicit_blocks",
+  "provider": {
+    "repository": "https://github.com/context-link-mcp/context-link",
+    "version": "1.1.0",
+    "commit": "e5af49c11c5b2228c6b611dd3594d93014997306",
+    "archive_sha256": "cb61fe2618d1aa27724520c5c9205440d57802fc4e1bee9a0690c2c652927b1a",
+    "installed": true,
+    "license": "Apache-2.0"
+  },
+  "queries_enabled": [
+    "ping",
+    "semantic_search_symbols",
+    "get_code_by_symbol",
+    "get_file_skeleton"
+  ],
+  "queries_blocked": {
+    "get_symbol_usages": "incorrect caller in minimum Python fixture",
+    "get_call_tree": "missing calculate -> add edge",
+    "get_blast_radius": "missing affected caller"
+  },
+  "network": {
+    "mechanism": "bubblewrap user/network/mount namespaces + prlimit",
+    "observed_tcp_connect_errno": 101,
+    "source_originals_mounted": false,
+    "setup_download_uses_network": true
+  },
+  "connected_path": [
+    "CLI or existing ecosystem-network MCP",
+    "shared MarceloClaroOrchestrator",
+    "CodeContextProvider",
+    "bounded cited projection",
+    "MetaBus observation without confidence promotion",
+    "metacognitive briefing",
+    "Blackboard"
+  ],
+  "proofs": [
+    {
+      "path": "outputs/core-r887/setup.json",
+      "sha256": "8458f16592e87c9f93371a1368c5811197d9cc6c364d295939909047de484dd8"
+    },
+    {
+      "path": "outputs/core-r887/fixture-smoke.json",
+      "sha256": "c4167ad8d7e6b6e6aa991150ff8e5be2d1043f5f1ad159583ae6ae616f288d09"
+    },
+    {
+      "path": "outputs/core-r887/fixture-pilot.json",
+      "sha256": "9ca7f6cfaf49b73b6c6a0b6144117f79524c0ef8b0837c24addbb1051cbe3e3e"
+    },
+    {
+      "path": "outputs/core-r887/release-final.xml",
+      "sha256": "54781832de5889954cb651e6ea73fb3d321597bb99e831fa1b011a4e805f2388",
+      "tests": 146,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "path": "outputs/core-r888/b-primary-context-real.json",
+      "sha256": "f0157ede9cd1a7c0fbab670bebe77c42787a13bd4cfa70a46375d13a943c0d34"
+    },
+    {
+      "path": "outputs/core-r888/b-qualified-native.json",
+      "sha256": "fce28fd4c4eb2fbd85775809cf50503b5417e17a75785f05372d6e3a41dc7841"
+    },
+    {
+      "path": "outputs/core-r888/b-review-compact-final.xml",
+      "sha256": "e55f93d2b74741be07bcf685bb1e28d6d2607fddbe9b749e9719e169cf524c0c",
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "benchmark": {
+    "scope": "three tasks, 71-byte Python fixture",
+    "baseline": "rg plus equivalent snippets",
+    "baseline_bytes": [
+      49,
+      36,
+      0
+    ],
+    "native_mcp_bytes": [
+      1322,
+      1285,
+      605
+    ],
+    "negotiation_schema_bytes_per_session": 5758,
+    "token_usage_measured": false,
+    "token_savings_demonstrated": false,
+    "quality_generalization_measured": false
+  },
+  "limitations": [
+    "Native query correctness evaluated only on fixtures; similarity is uncalibrated.",
+    "Three graph queries fail closed; no complete call graph claimed.",
+    "Source filtering detects selected markers; it is not a DLP audit.",
+    "Core index must be refreshed explicitly after the final commit; post-commit receipt stays local in outputs/core-r887.",
+    "XML RED/GREEN receipts do not authenticate historical TDD custody.",
+    "The previous global suite was interrupted by resource pressure; these regressions are scoped."
+  ],
+  "artifact_hashes": {
+    "integrations/code_context.py": "6c1eef9fee55bb93083c930c6e12d7a649d20caf0deb7f3f4633adf027824fca",
+    "integrations/code_context_view.py": "c3d2ffac718f3736480bb4c7c0a6cbbc2b8a219702865dd61bb51889684b3f68",
+    "marceloclaro/code_context_cli.py": "d51183e99cb2ffa74430d8a8c7372ab0b0f44f22e700d79ad756ae76bf5d6f2f",
+    "integrations/ecosystem_mcp.py": "5a6a094ac09e2456c84d2940bd41fe8905b03d1fd17804e65a9fbf51efe93ada",
+    "integrations/opencode_cli.py": "4dd7b70ef881379eab538d4c4d480eb0638200e010e51d17d404f74d74283150",
+    "marceloclaro/orchestrator.py": "756f6700dcb72d9ef868d8c9abf4c4489cbffb9b3cfb48679f430b886b4f2aeb"
+  }
+}

@@ -69,19 +69,21 @@ def test_solver_sem_short_answer(solver, harness):
 
 
 def test_harness_sem_leak(solver, harness):
-    report = harness.run_benchmark(solver_fn=solver.solve, limit=4)
+    report = harness.run_benchmark(solver_fn=solver.submit, limit=4)
     assert report["total_problems"] == 4
     # o solver padrão (leak) daria 4/4 a 7; com solver real os números são
     # determinados pela dedução — garantimos que pelo menos 2 problemas são
     # resolvidos por enumeração exata e que média < 7
     assert report["correct_problems"] >= 2
     assert report["average_grade_0_to_7"] < 7
+    assert report["status"] == "completed"
+    assert all(row["formal_verified"] is False for row in report["results"])
 
 
 # ── Anti-overclaim ──────────────────────────────────────────────────────
 
 def test_saida_sem_overclaim(solver, harness):
-    report = harness.run_benchmark(solver_fn=solver.solve, limit=4)
+    report = harness.run_benchmark(solver_fn=solver.submit, limit=4)
     blob = str(report)
     for pattern in BANNED:
         assert not re.search(pattern, blob, re.IGNORECASE), pattern

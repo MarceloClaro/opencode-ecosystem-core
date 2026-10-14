@@ -56,24 +56,17 @@ class TestHarnessCompleto:
     def test_run_benchmark_9_problemas(self):
         h = IMOBenchmarkHarness()
         s = RealIMOSolver()
-        res = h.run_benchmark(solver_fn=s.solve, limit=9)
+        res = h.run_benchmark(solver_fn=s.submit, limit=9)
         assert len(res["results"]) == 9
         assert res.get("total_problems", 0) == 9
-        # Verificação round-trip: cada solução determinística contém a
-        # resposta esperada (substring normalizada) — validação cruzada
-        # entre solver e resposta esperada, sem depender do grading head.
-        for p in h.sample_dataset:
-            texto = s.solve(p)
-            esperado = EXPECTED_BY_ID[p.problem_id]
-            norm = texto.lower().replace(" ", "")
-            # formas esperadas em cada solução determinística
-            assert esperado.lower().replace(" ", "") in norm or {
-                "imo-bench-algebra-002": "menorn=5",
-                "imo-bench-number-theory-002": "primos:[3]",
-                "imo-bench-number-theory-003": "expoentee=1006",
-                "imo-bench-combinatorics-002": "88",
-                "imo-bench-geometry-001": "diagonais=2043230",
-            }.get(p.problem_id, "") in norm, p.problem_id
-        # Grading head antigo reconhece pelo menos os 3 canônicos
-        solved = [r for r in res["results"] if r.get("is_correct")]
-        assert len(solved) >= 3
+        # Respostas explícitas calculadas; a justificativa não fornece acerto
+        # por substring. O mapa esperado pertence somente ao teste.
+        expected = {key: value.replace(" ", "") for key, value in EXPECTED_BY_ID.items()}
+        submitted = {row["problem_id"]: row["predicted_answer"].replace(" ", "")
+                     for row in res["results"]}
+        assert submitted == expected
+        assert all(row["is_correct"] is True for row in res["results"])
+        assert all(row["formal_verified"] is False for row in res["results"])
+        assert res["correct_problems"] == 9
+        assert res["accuracy"] == 1.0
+        assert res["dataset_scope"] == "internal_sample_with_derived_problems"
