@@ -41,47 +41,25 @@ class ReflexionEngine:
         agent_id = payload.get("agent_id", "unknown")
         context = payload.get("context", "")
         result = payload.get("result", "")
-        success = payload.get("success", True)
+        success = payload.get("success", False)
         
-        # Em um sistema real, isso chamaria o LLM (Ollama) para gerar a reflexão.
-        # Aqui, simulamos a extração de lições baseada no sucesso/falha.
-        
-        if success:
-            reflection = f"O agente {agent_id} concluiu a tarefa com sucesso. Estratégia utilizada foi eficaz."
-            score = 1.0
-            lesson = f"Contexto '{context[:30]}...' resolvido adequadamente."
-        else:
-            reflection = f"O agente {agent_id} falhou na tarefa. A abordagem inicial não produziu o resultado esperado."
-            score = 0.2
-            lesson = f"Evitar a mesma abordagem para '{context[:30]}...'."
-            
-        # 1. Salva na memória episódica
-        ref_id = metabus.memory.add_reflection(
-            agent_id=agent_id,
-            task_context=context,
-            reflection=reflection,
-            score=score
-        )
-        
-        # 2. Extrai lições para a memória semântica (tópico genérico por enquanto)
-        topic = "general_execution"
-        if topic not in metabus.memory.semantic:
-            metabus.memory.semantic[topic] = {"lessons": []}
-            
-        if lesson not in metabus.memory.semantic[topic]["lessons"]:
-            metabus.memory.semantic[topic]["lessons"].append(lesson)
-            
-        metabus.memory._save()
-        
-        # 3. Publica que a reflexão foi concluída
-        metabus.publish("metacognition.reflected", {
-            "reflection_id": ref_id,
-            "agent_id": agent_id,
-            "score": score,
-            "new_confidence": metabus.memory.confidence_ledger.get(agent_id)
-        }, source_agent="reflexion_engine")
-        
-        logger.info(f"Reflexão gerada para {agent_id} (Score: {score})")
+        from .metacognitive_loop import MetacognitiveLoop
+
+        try:
+            report = MetacognitiveLoop(metabus).complete(
+                task_id=payload.get("task_id", event.get("event_id", "unknown")),
+                agent_id=agent_id, context=context, result=result,
+                success=success is True, sdd_verification=payload.get("sdd_verification"))
+        except Exception as error:
+            metabus.publish("metacognition.failed", {
+                "task_id": payload.get("task_id"), "agent_id": agent_id,
+                "status": "degraded", "error_type": type(error).__name__,
+                "confidence_promoted": False, "calibrated": False,
+            }, source_agent="reflexion_engine")
+            logger.warning("Reflexão não persistida: %s", type(error).__name__)
+            return
+        metabus.publish("metacognition.reflected", report, source_agent="reflexion_engine")
+        logger.info("Reflexão contextual persistida para %s", agent_id)
 
 # Instância global Singleton
 reflexion_engine = ReflexionEngine()

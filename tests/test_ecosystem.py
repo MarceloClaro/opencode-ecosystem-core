@@ -62,19 +62,20 @@ def test_blackboard_full_cycle():
     assigned = task.assigned_to
     assert assigned is not None
 
+    confidence_before = dict(metabus.memory.confidence_ledger)
     orchestrator.report_completion(task_id, assigned, "ok", success=True)
     assert blackboard.tasks[task_id].status == "completed"
 
-    # A reflexão deve ter atualizado a confiança do agente atribuído
-    assert metabus.memory.confidence_ledger.get(assigned, 0) > 0.5
+    # R886: o transporte legado gera observação, sem confiança por autoavaliação.
+    assert metabus.memory.confidence_ledger == confidence_before
 
 
-def test_failed_task_lowers_confidence():
+def test_failed_task_records_outcome_without_self_scored_confidence():
     orchestrator = MarceloClaroOrchestrator(auto_load_agents=True)
     task_id = orchestrator.delegate("Implementar parser", required_capabilities=["python"])
     assigned = blackboard.tasks[task_id].assigned_to
     assert assigned is not None
-    before = metabus.memory.confidence_ledger.get(assigned, 0.5)
+    before = dict(metabus.memory.confidence_ledger)
     orchestrator.report_completion(task_id, assigned, "erro de sintaxe", success=False)
-    after = metabus.memory.confidence_ledger[assigned]
-    assert after < before
+    assert metabus.memory.confidence_ledger == before
+    assert blackboard.tasks[task_id].status == "failed"

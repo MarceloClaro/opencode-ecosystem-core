@@ -52,6 +52,7 @@ class ReasoningResult:
             "conclusion": self.conclusion, "confidence": self.confidence,
             "steps": self.steps, "available": self.available,
             "duration_s": self.duration_s,
+            "calibrated": False, "confidence_promoted": False,
         }
 
 
@@ -1491,12 +1492,8 @@ class MultiReasoningEngine:
                 },
                 source_agent="reasoning_engine",
             )
-            metabus.memory.upsert_semantic_topic(
-                f"reasoning.{engine}",
-                lesson=f"Consulta roteada para {engine} com confiança {result.confidence:.2f}.",
-                metadata={"last_query": query[:120], "last_confidence": result.confidence},
-            )
-            metabus.memory.update_topic_confidence(f"reasoning:{engine}", result.confidence)
+            # R886: nota do próprio motor é heurística, não feedback externo.
+            # O primário registra a conclusão como observação contextual.
         except Exception:
             pass
         return result

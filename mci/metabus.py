@@ -48,6 +48,16 @@ MEMORY_FILE = os.path.join(STATE_DIR, "shared_memory.json")
 EVENTS_FILE = os.path.join(STATE_DIR, "metabus_events.jsonl")
 
 
+def memory_entry_text(entry: Dict[str, Any]) -> str:
+    """Projeção textual comum às buscas lexical e hierárquica (R886)."""
+    observation = entry.get("observation", {})
+    try:
+        body = json.dumps(observation, ensure_ascii=False, allow_nan=False)
+    except (TypeError, ValueError, RecursionError):
+        body = ""
+    return " ".join(str(entry.get(key, "")) for key in ("agent_id", "context", "reflection")) + " " + body
+
+
 class MetacognitiveMemory:
     """Memória episódica e semântica compartilhada entre agentes."""
     
@@ -166,11 +176,7 @@ class MetacognitiveMemory:
         for entry in reversed(self.episodic):
             if not isinstance(entry, dict):
                 continue
-            hay = " ".join([
-                str(entry.get("agent_id", "")),
-                str(entry.get("context", "")),
-                str(entry.get("reflection", "")),
-            ]).lower()
+            hay = memory_entry_text(entry).lower()
             if _matches(hay):
                 results.append({"kind": "episodic", **entry})
                 if len(results) >= limit:

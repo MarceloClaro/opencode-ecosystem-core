@@ -1,0 +1,397 @@
+{
+  "schema_version": 1,
+  "cycle": "R886",
+  "assessed_on": "2026-10-14",
+  "verification": "repository_source_inspection",
+  "scope": "Avaliação estática de candidatos externos para melhorias metacognitivas e orquestração do Core; sem instalação ou execução de código externo nesta fase.",
+  "method": {
+    "connector": "GitHub",
+    "operations": [
+      "GET metadados do repositório",
+      "GET branch main e commit HEAD",
+      "GET árvore recursiva não truncada",
+      "Leitura de arquivos fixados no HEAD"
+    ],
+    "runtime_execution_performed": false,
+    "installed_by_this_review": false,
+    "external_validation_performed": false,
+    "local_clone_search": {
+      "root": "/home/marceloclaro",
+      "max_depth": 4,
+      "matched_repository_directory_names": [],
+      "excluded": [
+        ".cache",
+        ".npm",
+        ".venv",
+        "node_modules",
+        ".git",
+        ".local",
+        ".cargo",
+        ".rustup"
+      ],
+      "limitation": "Busca nominal limitada; não comprova ausência de instalações, diretórios renomeados ou clones fora do escopo."
+    }
+  },
+  "core_integration_principles": [
+    "MarceloClaroOrchestrator permanece coordenador primário.",
+    "MetaBus permanece autoridade canônica de memória do Core.",
+    "Memória, conselho de modelo, evidência observada e validação funcional permanecem estados distintos.",
+    "Provedor opcional indisponível produz limitação explícita; não simula execução bem-sucedida.",
+    "Não há instalação externa neste levantamento."
+  ],
+  "candidates": [
+    {
+      "repository_full_name": "MarceloClaro/laya",
+      "repository_url": "https://github.com/MarceloClaro/laya",
+      "default_branch": "main",
+      "head_sha": "c73908d96ff73c0062c340a11bf7c54ec7d8bc4d",
+      "head_commit_date": "2026-10-12T09:29:59Z",
+      "fork": true,
+      "parent_repository": "NandhaKishorM/laya",
+      "parent_last_push_at_review": "2026-10-14T04:59:31Z",
+      "fork_last_push_at_review": "2026-10-12T09:30:04Z",
+      "archived": false,
+      "license_spdx": "Apache-2.0",
+      "license_source": {
+        "path": "LICENSE",
+        "url": "https://github.com/MarceloClaro/laya/blob/c73908d96ff73c0062c340a11bf7c54ec7d8bc4d/LICENSE"
+      },
+      "role": "auxiliary_typed_decision",
+      "priority": "candidate_after_local_calibration",
+      "version": "0.4.6",
+      "purpose": "Decisões curtas tipadas (choice, score, noul), seleção de checkpoint e abstenção.",
+      "interfaces": [
+        "SDK Python Router.route / Router.predict / decide",
+        "MCP stdio laya-mcp-server: laya_status, laya_route, laya_predict, laya_decide e operações batch",
+        "HTTP opcional POST /v1/systemone e /v1/systemone/batch"
+      ],
+      "core_contract": "Conselho auxiliar do orquestrador; decisão do modelo não altera TrustEngine, não promove estado epistêmico e não autoriza efeitos externos.",
+      "costs": [
+        "Python >=3.10, PyTorch e Transformers.",
+        "Primeira inferência baixa pesos do Hugging Face; cache local posterior. Inglês/typed-decisions ~421M parâmetros; multilíngue ~322M.",
+        "RAM, CPU/GPU e latência dependem do checkpoint; não medidos nesta avaliação.",
+        "MCP por sessão pode carregar modelos; servidor HTTP local compartilhado evita multiplicar processos de pesos."
+      ],
+      "limitations": [
+        "README do próprio projeto relata sobreconfiança, falhas em negação e sensibilidade a rótulos.",
+        "Probabilidade/confiança não equivale à correção; requer dados retidos em português e calibração da tarefa real.",
+        "LAYA_BASE_URL pode apontar para serviço remoto; HTTP tem host padrão 0.0.0.0.",
+        "Licença de código Apache-2.0 não constitui verificação da licença de cada artefato de pesos."
+      ],
+      "telemetry": {
+        "status": "not_comprehensively_audited",
+        "notes": "Foram examinados SDK/servidor/MCP e documentação; não foi realizada auditoria completa de dependências ou tráfego. Downloads iniciais e modo HTTP remoto são explícitos."
+      },
+      "sources": [
+        {
+          "path": "pyproject.toml",
+          "url": "https://github.com/MarceloClaro/laya/blob/c73908d96ff73c0062c340a11bf7c54ec7d8bc4d/pyproject.toml#L5-L50"
+        },
+        {
+          "path": "docs/cli-mcp.md",
+          "url": "https://github.com/MarceloClaro/laya/blob/c73908d96ff73c0062c340a11bf7c54ec7d8bc4d/docs/cli-mcp.md#L156-L231"
+        },
+        {
+          "path": "laya/mcp/server.py",
+          "url": "https://github.com/MarceloClaro/laya/blob/c73908d96ff73c0062c340a11bf7c54ec7d8bc4d/laya/mcp/server.py#L132-L187"
+        },
+        {
+          "path": "laya/serve.py",
+          "url": "https://github.com/MarceloClaro/laya/blob/c73908d96ff73c0062c340a11bf7c54ec7d8bc4d/laya/serve.py#L1-L26"
+        },
+        {
+          "path": "README.md",
+          "url": "https://github.com/MarceloClaro/laya/blob/c73908d96ff73c0062c340a11bf7c54ec7d8bc4d/README.md#L1551-L1580"
+        }
+      ]
+    },
+    {
+      "repository_full_name": "MarceloClaro/knowl",
+      "repository_url": "https://github.com/MarceloClaro/knowl",
+      "default_branch": "main",
+      "head_sha": "b90ca83c82c284a4f58f43934ea1de7dd03bcab3",
+      "head_commit_date": "2026-09-10T06:12:55Z",
+      "fork": true,
+      "parent_repository": "dat999zx/knowl",
+      "parent_last_push_at_review": "2026-10-12T20:35:58Z",
+      "fork_last_push_at_review": "2026-09-10T06:13:41Z",
+      "archived": false,
+      "license_spdx": "Apache-2.0",
+      "license_source": {
+        "path": "LICENSE",
+        "url": "https://github.com/MarceloClaro/knowl/blob/b90ca83c82c284a4f58f43934ea1de7dd03bcab3/LICENSE"
+      },
+      "role": "optional_typed_memory",
+      "priority": "first_optional_integration_candidate",
+      "version": "5.23.0",
+      "purpose": "Memória persistente em SQLite com átomos tipados, fontes, histórico, conflitos e substituição de fatos antigos.",
+      "interfaces": [
+        "CLI knowl; knowl serve publica MCP stdio; knowl init altera configuração de hosts.",
+        "MCP knowl_store / knowl_ingest_atoms / knowl_decide / knowl_query / knowl_timeline / knowl_conflicts / knowl_evidence_list / knowl_update.",
+        "Schema SQLite inclui source_commit, provenance, superseded_by_id, evidence e knowledge_assertions."
+      ],
+      "core_contract": "Adaptador opcional de projeção/consulta sob o MarceloClaroOrchestrator. MetaBus preserva a autoridade do Core; IDs, fontes, estado epistêmico e substituições devem cruzar a fronteira sem promover memória a observação.",
+      "costs": [
+        "Node >=22 e dependências nativas; SQLite por projeto em .knowl/knowl.db.",
+        "Operações estruturadas de armazenamento e consulta não exigem configuração de IA do Knowl.",
+        "Embeddings locais são dependência opcional; ingestão de texto bruto por IA e nuvem são recursos separados e exigem configuração própria.",
+        "Worktrees compartilham o store do checkout principal segundo a documentação; concorrência e isolamento precisam de teste de contrato."
+      ],
+      "limitations": [
+        "Manter sincronização unidirecional com IDs estáveis inicialmente; cópia bidirecional sem regra de autoridade recria ilhas e contradições.",
+        "knowl init registra hosts e modifica configuração; não foi executado.",
+        "O termo confidence do store não é confiança calibrada de agente nem validação externa.",
+        "Asserções conflitantes e memórias stale/superseded devem permanecer auditáveis e não entrar como fatos ativos."
+      ],
+      "telemetry": {
+        "status": "local_core_documented_optional_network_features",
+        "notes": "README declara armazenamento local sem conta para o núcleo e nuvem opcional. Dependências incluem provedores de IA; operação estritamente local requer desabilitar esses recursos e comprovar tráfego por execução, ainda não realizada."
+      },
+      "sources": [
+        {
+          "path": "package.json",
+          "url": "https://github.com/MarceloClaro/knowl/blob/b90ca83c82c284a4f58f43934ea1de7dd03bcab3/package.json#L1-L27"
+        },
+        {
+          "path": "src/mcp/server.ts",
+          "url": "https://github.com/MarceloClaro/knowl/blob/b90ca83c82c284a4f58f43934ea1de7dd03bcab3/src/mcp/server.ts#L144-L163"
+        },
+        {
+          "path": "src/mcp/tool-definitions.ts",
+          "url": "https://github.com/MarceloClaro/knowl/blob/b90ca83c82c284a4f58f43934ea1de7dd03bcab3/src/mcp/tool-definitions.ts#L459-L543"
+        },
+        {
+          "path": "src/mcp/tool-definitions.ts",
+          "url": "https://github.com/MarceloClaro/knowl/blob/b90ca83c82c284a4f58f43934ea1de7dd03bcab3/src/mcp/tool-definitions.ts#L640-L740"
+        },
+        {
+          "path": "src/store/schema.ts",
+          "url": "https://github.com/MarceloClaro/knowl/blob/b90ca83c82c284a4f58f43934ea1de7dd03bcab3/src/store/schema.ts#L1-L108"
+        },
+        {
+          "path": "README.md",
+          "url": "https://github.com/MarceloClaro/knowl/blob/b90ca83c82c284a4f58f43934ea1de7dd03bcab3/README.md#L842-L858"
+        }
+      ]
+    },
+    {
+      "repository_full_name": "MarceloClaro/awesome-llm-apps",
+      "repository_url": "https://github.com/MarceloClaro/awesome-llm-apps",
+      "default_branch": "main",
+      "head_sha": "6272f8bd1fdeb75153d1a95d7fc761e26e477116",
+      "head_commit_date": "2026-09-13T03:46:11Z",
+      "fork": true,
+      "parent_repository": "Shubhamsaboo/awesome-llm-apps",
+      "parent_last_push_at_review": "2026-10-13T16:16:14Z",
+      "fork_last_push_at_review": "2026-09-13T03:46:11Z",
+      "archived": false,
+      "license_spdx": "Apache-2.0",
+      "license_source": {
+        "path": "LICENSE",
+        "url": "https://github.com/MarceloClaro/awesome-llm-apps/blob/6272f8bd1fdeb75153d1a95d7fc761e26e477116/LICENSE"
+      },
+      "role": "selective_reference",
+      "priority": "reference_only",
+      "version": null,
+      "purpose": "Coleção de exemplos, não um runtime único de orquestração.",
+      "interfaces": [
+        "Exemplo de RAG tipado: Answer, Citation, RetrievalEvidence e validate_grounded_answer.",
+        "Exemplo Multi-MCP Agent Forge conecta ClientSession por stdio e roteia especialistas.",
+        "Exemplo Corrective RAG reavalia recuperação e usa fallback de busca."
+      ],
+      "core_contract": "Transpor ideias e contratos úteis para módulos/testes existentes do Core, com referência de origem; não importar a coleção inteira nem criar um segundo orquestrador.",
+      "costs": [
+        "Dependências variam por exemplo: Pydantic AI, LangGraph, Streamlit, bancos vetoriais e provedores.",
+        "RAG tipado consultado escolhe OpenAI/Anthropic por variáveis de ambiente; Forge usa Anthropic e inicia servidores npx.",
+        "Custos de API e acesso à rede pertencem ao exemplo escolhido; não medidos."
+      ],
+      "limitations": [
+        "Alegações do README sobre testes são do projeto; a avaliação não executou sua suíte.",
+        "Checar quote como substring do chunk valida a ligação textual, não demonstra que a fonte sustenta semanticamente a conclusão.",
+        "Exemplos com npx -y sem versão fixa exigem fixação/revisão antes de qualquer adoção.",
+        "Instalar muitos frameworks duplicaria o núcleo de roteamento e memória."
+      ],
+      "telemetry": {
+        "status": "per_example_not_audited",
+        "notes": "Não existe conclusão única de privacidade para a coleção; revisar cada aplicação e dependência adotada."
+      },
+      "sources": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/MarceloClaro/awesome-llm-apps/blob/6272f8bd1fdeb75153d1a95d7fc761e26e477116/README.md#L194-L229"
+        },
+        {
+          "path": "rag_tutorials/agentic_typed_rag_pydanticai/agent.py",
+          "url": "https://github.com/MarceloClaro/awesome-llm-apps/blob/6272f8bd1fdeb75153d1a95d7fc761e26e477116/rag_tutorials/agentic_typed_rag_pydanticai/agent.py#L26-L63"
+        },
+        {
+          "path": "rag_tutorials/agentic_typed_rag_pydanticai/agent.py",
+          "url": "https://github.com/MarceloClaro/awesome-llm-apps/blob/6272f8bd1fdeb75153d1a95d7fc761e26e477116/rag_tutorials/agentic_typed_rag_pydanticai/agent.py#L174-L217"
+        },
+        {
+          "path": "rag_tutorials/agentic_typed_rag_pydanticai/test_typed_rag.py",
+          "url": "https://github.com/MarceloClaro/awesome-llm-apps/blob/6272f8bd1fdeb75153d1a95d7fc761e26e477116/rag_tutorials/agentic_typed_rag_pydanticai/test_typed_rag.py"
+        },
+        {
+          "path": "mcp_ai_agents/multi_mcp_agent_router/agent_forge.py",
+          "url": "https://github.com/MarceloClaro/awesome-llm-apps/blob/6272f8bd1fdeb75153d1a95d7fc761e26e477116/mcp_ai_agents/multi_mcp_agent_router/agent_forge.py#L150-L227"
+        },
+        {
+          "path": "rag_tutorials/corrective_rag/corrective_rag.py",
+          "url": "https://github.com/MarceloClaro/awesome-llm-apps/blob/6272f8bd1fdeb75153d1a95d7fc761e26e477116/rag_tutorials/corrective_rag/corrective_rag.py"
+        }
+      ]
+    },
+    {
+      "repository_full_name": "MarceloClaro/OpenShell",
+      "repository_url": "https://github.com/MarceloClaro/OpenShell",
+      "default_branch": "main",
+      "head_sha": "5b9daab9351b1e053f9a5e0ce4c899f5d3f674b0",
+      "head_commit_date": "2026-09-12T00:17:15Z",
+      "fork": true,
+      "parent_repository": "NVIDIA/OpenShell",
+      "parent_last_push_at_review": "2026-10-14T04:00:27Z",
+      "fork_last_push_at_review": "2026-09-13T00:54:21Z",
+      "archived": false,
+      "license_spdx": "Apache-2.0",
+      "license_source": {
+        "path": "LICENSE",
+        "url": "https://github.com/MarceloClaro/OpenShell/blob/5b9daab9351b1e053f9a5e0ce4c899f5d3f674b0/LICENSE"
+      },
+      "role": "optional_execution_sandbox",
+      "priority": "optional_after_runtime_probe",
+      "version": null,
+      "purpose": "Runtime de sandbox com política declarativa de arquivos, processos, rede e provedores; não é motor metacognitivo.",
+      "interfaces": [
+        "CLI openshell sandbox create/connect/list, policy set, provider create/attach e logs.",
+        "Políticas YAML; gateway e compute drivers Docker, Podman, MicroVM e Kubernetes.",
+        "SDK Python separado do binário CLI; módulo MCP interno modela versões/opções para política."
+      ],
+      "core_contract": "Backend de execução opcional do HarnessRuntime/REA, preservando tarefa, política, recibos e artefatos no Core. Apenas execução comprovadamente isolada pode declarar o isolamento correspondente.",
+      "costs": [
+        "Requer runtime local Docker/Podman ou virtualização; WSL 2 é experimental conforme README deste snapshot.",
+        "Build Rust declara toolchain >=1.94; PyPI instala apenas SDK.",
+        "GPU exige drivers/NVIDIA Container Toolkit e imagem adequada; suporte experimental.",
+        "Gateway, imagens, espaço em disco e políticas adicionam manutenção operacional."
+      ],
+      "limitations": [
+        "Não melhora o raciocínio por si; sua função é contenção da execução.",
+        "Telemetria padrão precisa de opt-out e comprovante de tráfego para política local estrita.",
+        "Sandbox pode ter saída autorizada para modelos/ferramentas; uso local não prova ausência de rede.",
+        "Compatibilidade efetiva com a máquina, CLI do Core e isolamento não foram executados nesta avaliação."
+      ],
+      "telemetry": {
+        "status": "enabled_by_default_documented_opt_out",
+        "disable": [
+          "OPENSHELL_TELEMETRY_ENABLED=false no deployment do gateway",
+          "Helm server.telemetryEnabled=false",
+          "Build --no-default-features --features defaults-without-telemetry"
+        ],
+        "notes": "README esclarece que o opt-out cobre apenas telemetria do OpenShell, não serviços de terceiros."
+      },
+      "sources": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/MarceloClaro/OpenShell/blob/5b9daab9351b1e053f9a5e0ce4c899f5d3f674b0/README.md#L21-L50"
+        },
+        {
+          "path": "README.md",
+          "url": "https://github.com/MarceloClaro/OpenShell/blob/5b9daab9351b1e053f9a5e0ce4c899f5d3f674b0/README.md#L169-L180"
+        },
+        {
+          "path": "README.md",
+          "url": "https://github.com/MarceloClaro/OpenShell/blob/5b9daab9351b1e053f9a5e0ce4c899f5d3f674b0/README.md#L261-L294"
+        },
+        {
+          "path": "architecture/security-policy.md",
+          "url": "https://github.com/MarceloClaro/OpenShell/blob/5b9daab9351b1e053f9a5e0ce4c899f5d3f674b0/architecture/security-policy.md#L11-L50"
+        },
+        {
+          "path": "Cargo.toml",
+          "url": "https://github.com/MarceloClaro/OpenShell/blob/5b9daab9351b1e053f9a5e0ce4c899f5d3f674b0/Cargo.toml#L8-L13"
+        },
+        {
+          "path": "crates/openshell-core/src/mcp.rs",
+          "url": "https://github.com/MarceloClaro/OpenShell/blob/5b9daab9351b1e053f9a5e0ce4c899f5d3f674b0/crates/openshell-core/src/mcp.rs#L1-L24"
+        }
+      ]
+    },
+    {
+      "repository_full_name": "MarceloClaro/feynman",
+      "repository_url": "https://github.com/MarceloClaro/feynman",
+      "default_branch": "main",
+      "head_sha": "dfdcb7cf2c73183cff7b10aa8ea8ce370c8b152c",
+      "head_commit_date": "2026-09-06T18:51:09Z",
+      "fork": true,
+      "parent_repository": "Companion-Inc/feynman",
+      "parent_last_push_at_review": "2026-10-13T10:02:18Z",
+      "fork_last_push_at_review": "2026-09-06T18:51:09Z",
+      "archived": false,
+      "license_spdx": "MIT",
+      "license_source": {
+        "path": "LICENSE",
+        "url": "https://github.com/MarceloClaro/feynman/blob/dfdcb7cf2c73183cff7b10aa8ea8ce370c8b152c/LICENSE"
+      },
+      "role": "optional_research_specialist",
+      "priority": "optional_bounded_cli_adapter",
+      "version": "0.3.49",
+      "purpose": "CLI/agente de pesquisa construído sobre Pi e alphaXiv, com workflows e revisor/verificador.",
+      "interfaces": [
+        "CLI feynman deepresearch / lit / rank / paper / audit e execução pontual --prompt.",
+        "Skills/prompts podem ser instalados separadamente para OpenCode/Codex; isso não instala o runtime.",
+        "Modelo local via LM Studio/LiteLLM/custom provider é configurável; busca e conectores podem usar rede."
+      ],
+      "core_contract": "Especialista de pesquisa chamado pelo orquestrador com orçamento/timeout e ingestão de artefatos/fontes no EvidenceGraph. O resultado permanece resultado de provedor até validação do Core; não inicia um coordenador concorrente.",
+      "costs": [
+        "Node >=22.22.0 e <26, ou bundle com runtime próprio; dependências Pi/alphaHub e extensões.",
+        "Modelos hospedados e conectores podem exigir contas/chaves e gerar custos; locais consomem recursos da máquina.",
+        "Telemetria PostHog/OpenTelemetry requer revisão/desativação; estado de pesquisa fora do Core exige regra de importação de artefatos."
+      ],
+      "limitations": [
+        "reversa_feynman/ do Core tem origem MarceloClaro/reversa (SPEC-935-R504); não é integração deste CLI.",
+        "Arquivos de instruções do verificador expressam comportamento pretendido; não comprovam verificação sem execução.",
+        "A interface publicada examinada é CLI; não se presume um servidor MCP cognitivo a partir dos arquivos de gestão de MCP do workbench.",
+        "Pesquisa online/modelo remoto contradiz promessa de análise sem saída da máquina; impor política explícita por tarefa."
+      ],
+      "telemetry": {
+        "status": "enabled_by_default_in_source",
+        "disable": [
+          "FEYNMAN_TELEMETRY=false",
+          "DO_NOT_TRACK=1"
+        ],
+        "notes": "src/telemetry/posthog.ts resolve configuração enabled:true por padrão e permite roteamento OTLP; revisar extensões e provedores separadamente."
+      },
+      "sources": [
+        {
+          "path": "package.json",
+          "url": "https://github.com/MarceloClaro/feynman/blob/dfdcb7cf2c73183cff7b10aa8ea8ce370c8b152c/package.json#L1-L12"
+        },
+        {
+          "path": "README.md",
+          "url": "https://github.com/MarceloClaro/feynman/blob/dfdcb7cf2c73183cff7b10aa8ea8ce370c8b152c/README.md#L53-L119"
+        },
+        {
+          "path": "README.md",
+          "url": "https://github.com/MarceloClaro/feynman/blob/dfdcb7cf2c73183cff7b10aa8ea8ce370c8b152c/README.md#L123-L223"
+        },
+        {
+          "path": "src/cli.ts",
+          "url": "https://github.com/MarceloClaro/feynman/blob/dfdcb7cf2c73183cff7b10aa8ea8ce370c8b152c/src/cli.ts#L926-L944"
+        },
+        {
+          "path": "src/telemetry/posthog.ts",
+          "url": "https://github.com/MarceloClaro/feynman/blob/dfdcb7cf2c73183cff7b10aa8ea8ce370c8b152c/src/telemetry/posthog.ts#L249-L302"
+        },
+        {
+          "path": ".feynman/agents/verifier.md",
+          "url": "https://github.com/MarceloClaro/feynman/blob/dfdcb7cf2c73183cff7b10aa8ea8ce370c8b152c/.feynman/agents/verifier.md#L1-L20"
+        },
+        {
+          "path": "prompts/deepresearch.md",
+          "url": "https://github.com/MarceloClaro/feynman/blob/dfdcb7cf2c73183cff7b10aa8ea8ce370c8b152c/prompts/deepresearch.md#L1-L19"
+        }
+      ]
+    }
+  ],
+  "freshness_limit": "Datas e SHAs são fotografia da consulta em 2026-10-14. Último push de fork e upstream não quantifica divergência nem demonstra qualidade/manutenção; comparação de commits e execução não foram realizadas."
+}

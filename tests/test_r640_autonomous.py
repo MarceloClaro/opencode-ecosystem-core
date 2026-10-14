@@ -48,7 +48,7 @@ def isolated_orchestrator(monkeypatch, tmp_path):
     ):
         monkeypatch.setattr(obj, attr, value)
     monkeypatch.setattr(metabus_module, "EVENTS_FILE", str(tmp_path / "events.jsonl"))
-    monkeypatch.setattr(metabus.memory, "_save", lambda: None)
+    monkeypatch.setattr(metabus.memory, "_save", lambda **kwargs: None)
     metabus.subscribe("agent.register", blackboard._handle_registration)
     metabus.subscribe("task.post", blackboard._handle_task_post)
     metabus.subscribe("task.volunteer", blackboard._handle_volunteer)
@@ -87,6 +87,7 @@ def registry(tmp_path):
 def test_run_executes_assigned_agent_and_reports_metabus_feedback(isolated_orchestrator, registry):
     runtime = RuntimeDouble()
     coordinator = AutonomousCoordinator(orchestrator=isolated_orchestrator, runtime=runtime, registry=registry)
+    confidence_before = dict(metabus.memory.confidence_ledger)
     result = coordinator.run("Revisar código", ["code_review"])
 
     assert result["status"] == "completed" and result["success"] is True
@@ -98,7 +99,8 @@ def test_run_executes_assigned_agent_and_reports_metabus_feedback(isolated_orche
     assert result["origin_ecosystem"] == "codex"
     assert result["execution_mode"] == "adapted_instructions"
     assert "INSTRUÇÃO IMPORTADA" in runtime.calls[0][1]
-    assert metabus.memory.confidence_ledger["code-reviewer"] > 0.5
+    # R886: execução simulada e autoavaliação não promovem confiança.
+    assert metabus.memory.confidence_ledger == confidence_before
     assert metabus.memory.episodic
 
 
@@ -222,6 +224,7 @@ def test_changed_import_is_excluded_and_never_read_as_instructions(isolated_orch
 
 def test_sdd_rejection_is_reflected_in_return_value(isolated_orchestrator, registry, monkeypatch, tmp_path):
     import json
+    confidence_before = dict(metabus.memory.confidence_ledger)
     complete = isolated_orchestrator.report_completion
     monkeypatch.setattr(isolated_orchestrator, "report_completion",
                         lambda task_id, agent_id, result, success=True: complete(task_id, agent_id, result, success=False))
@@ -238,7 +241,7 @@ def test_sdd_rejection_is_reflected_in_return_value(isolated_orchestrator, regis
     assert completions[0]["status"] == "failed"
     assert completions[0]["result"].get("success") is not True
     assert completions[0]["result"].get("status") != "completed"
-    assert metabus.memory.confidence_ledger["code-reviewer"] < 0.5
+    assert metabus.memory.confidence_ledger == confidence_before
 
 
 def test_accepted_completion_is_synchronized_without_duplicate_events(isolated_orchestrator, registry, tmp_path):
@@ -252,6 +255,37 @@ def test_accepted_completion_is_synchronized_without_duplicate_events(isolated_o
     reflections = [event for event in events if event["topic"] == "metacognition.reflected"]
     assert len(completions) == len(reflections) == 1
     assert completions[0]["payload"]["status"] == "completed"
+
+
+@pytest.mark.parametrize("first_success", [True, False], ids=["resultado", "erro"])
+def test_r886_simulated_network_recalls_first_run_in_second_prompt(
+        isolated_orchestrator, registry, first_success):
+    """Dublê de executor: comprova o encadeamento local, sem inferência real."""
+    marker = "evidencia_simulada_delta" if first_success else "timeout_simulado_delta"
+    first_response = (
+        {"success": True, "output": f"Revisar código: resultado simulado {marker}."}
+        if first_success else {"success": False, "output": "", "error": marker})
+    runtime = RuntimeDouble(responses=[
+        first_response,
+        {"success": True, "output": "Revisar código: segunda execução simulada concluída."},
+    ])
+    coordinator = AutonomousCoordinator(isolated_orchestrator, runtime, registry)
+    confidence_before = dict(metabus.memory.confidence_ledger)
+
+    first = coordinator.run("Revisar código", ["code_review"], max_steps=1)
+    second = coordinator.run("Revisar código", ["code_review"], max_steps=1)
+
+    assert first["success"] is first_success
+    assert second["success"] is True
+    assert len(runtime.calls) == 2
+    assert marker not in runtime.calls[0][1]
+    assert marker in runtime.calls[1][1]
+    assert first["metacognition"]["status"] == "recorded"
+    assert second["metacognition"]["status"] == "recorded"
+    first_reflection = first["metacognition"]["reflection_id"]
+    briefing = blackboard.tasks[second["task_id"]].context["metacognitive_briefing"]
+    assert first_reflection in [record["id"] for record in briefing["records"]]
+    assert metabus.memory.confidence_ledger == confidence_before
 
 
 @pytest.mark.parametrize("parameters", [{"max_steps": 0}, {"max_steps": True},

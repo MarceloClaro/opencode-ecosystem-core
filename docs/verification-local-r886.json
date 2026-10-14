@@ -1,0 +1,182 @@
+{
+  "schema_version": "r886.local-verification.v1",
+  "checked_utc": "2026-10-14T05:44:05.556940+00:00",
+  "verification": "local_operation",
+  "external_validation": false,
+  "scope": "Ciclo metacognitivo pelo primário, memória compartilhada, reflexão pós-gate e recuperação na próxima tarefa.",
+  "focused_tests": {
+    "tests": 315,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 61.341,
+    "junit_sha256": "25ba784e470b02834bce8e3bb8cb796c2428b3684769c06c9d1cfdc7b5349b3c",
+    "command": "python -m pytest tests/test_r886_metacognitive_loop.py tests/test_r886_memory_reasoning.py tests/test_r640_autonomous.py tests/test_ecosystem.py tests/test_r644_workflow.py tests/test_r828_remediacao_cobertura_governanca.py tests/test_r829_memory_network.py tests/test_r839_red_delivery.py tests/test_r818_restricted_math_engine.py tests/test_r821_z3_fail_closed.py -q"
+  },
+  "red_local_receipts": {
+    "memory-red.xml": {
+      "tests": 8,
+      "failures": 8,
+      "errors": 0,
+      "sha256": "55a12a8071ade08cec66b73d7b3308530be7022d70c87c6d457402f748a22836"
+    },
+    "loop-red.xml": {
+      "tests": 6,
+      "failures": 6,
+      "errors": 0,
+      "sha256": "1fcdb8ff008ba30ad59c7d982945389c7bd8f8b5945ec60ecc1ed0cfbd82411c"
+    },
+    "review-red.xml": {
+      "tests": 2,
+      "failures": 2,
+      "errors": 0,
+      "sha256": "7c65318203e97a7355df2d5e794eadee5e41d4c403a2d2a633a6c1718f51781a"
+    },
+    "supersession-red.xml": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "sha256": "10f70773adfb2fc796521ed1603e4b5980f7957491b18db332f793eb687d8249"
+    },
+    "semantic-red.xml": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "sha256": "4ebfc408c75d3f35690ec14efe7efb5872e04e8b223fa10ed59e0adceff1b7df"
+    }
+  },
+  "historical_tdd_authentication_claimed": false,
+  "broad_suite": {
+    "status": "interrupted",
+    "last_observed_progress_percent": 74,
+    "failure_markers_observed": 1,
+    "junit_report_available": false,
+    "last_observed_fixture": "test_machine_checked_mathlib_no_projeto (R754)",
+    "environment_error": "WSL/Service/0x8007274c",
+    "vm_working_set_bytes_observed": 9367449600,
+    "passed_claimed": false,
+    "limitation": "A suíte abrangente não foi concluída; houve falha na etapa Mathlib e indisponibilidade do serviço WSL. Não se atribui causa raiz sem o relatório final. Os quatro testes R754 passaram posteriormente em processo isolado; isso não completa a suíte geral.",
+    "lean_isolated_retest": {
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 48.532,
+      "junit_sha256": "55ceb732095fca2aa369d911f5ae4661dc900c61071a9a3a4f83549104a5fa11"
+    }
+  },
+  "symbolic_restart_probe": {
+    "verification": "local_symbolic_execution_across_process_restart",
+    "results": [
+      "forma simplificada: 5",
+      "forma simplificada: 5"
+    ],
+    "retrieved_after_restart": true,
+    "confidence_ledger_unchanged": true,
+    "inference_executed": false,
+    "receipt_sha256": "708d54423d8f8a82476a95df669e40518f521e566a3e81ee68ba6a78eb5c5941"
+  },
+  "live_codex_canary": {
+    "verification": "live_codex_text_canary",
+    "scope": "Somente textos sintéticos em fixture Git temporária; sem dados de alvos locais.",
+    "first_status": "completed",
+    "second_status": "completed",
+    "first_episode_retrieved_by_second": true,
+    "software_delivery": false,
+    "gate_scope": "Critérios textuais locais; não é aceitação de software nem qualidade científica.",
+    "receipt_sha256": "2e7c2ea37348a71ed997e83cbb6e2ba7e5aca3e551fb4e408d17e92f51ca0a25",
+    "initial_trial": "A tentativa anterior em fixture sem Git encerrou com código 1; a nova fixture Git concluiu. A primeira causa não foi diagnosticada de modo conclusivo."
+  },
+  "review": {
+    "independent_codex_subagent": true,
+    "external_audit": false,
+    "latest_r886_tests_reexecuted": 17,
+    "resolved_findings": [
+      "Referências declaradas limitadas e não verificadas preservadas.",
+      "Replay consecutivo idempotente; revisões A-B-A conservam três estados.",
+      "Revisão antiga excluída por ID globalmente substituído.",
+      "Memória semântica sem ID preservada."
+    ]
+  },
+  "candidates": [
+    {
+      "repository_full_name": "MarceloClaro/laya",
+      "head_sha": "c73908d96ff73c0062c340a11bf7c54ec7d8bc4d",
+      "license_spdx": "Apache-2.0"
+    },
+    {
+      "repository_full_name": "MarceloClaro/knowl",
+      "head_sha": "b90ca83c82c284a4f58f43934ea1de7dd03bcab3",
+      "license_spdx": "Apache-2.0"
+    },
+    {
+      "repository_full_name": "MarceloClaro/awesome-llm-apps",
+      "head_sha": "6272f8bd1fdeb75153d1a95d7fc761e26e477116",
+      "license_spdx": "Apache-2.0"
+    },
+    {
+      "repository_full_name": "MarceloClaro/OpenShell",
+      "head_sha": "5b9daab9351b1e053f9a5e0ce4c899f5d3f674b0",
+      "license_spdx": "Apache-2.0"
+    },
+    {
+      "repository_full_name": "MarceloClaro/feynman",
+      "head_sha": "dfdcb7cf2c73183cff7b10aa8ea8ce370c8b152c",
+      "license_spdx": "MIT"
+    }
+  ],
+  "external_runtimes_installed_in_this_stage": false,
+  "r887_state": "Proposta separada; nenhuma instalação ou novo MCP ativo.",
+  "artifact_sha256": {
+    "README.md": "0f18d7edc8623b9c7bcd1ed7d27a78508575c40d3a86c8555e8353cf4a3d3a76",
+    "mci/metacognitive_loop.py": "c732ffb5c38f5f6b891751d1920c48ac73cec64e6e6932b47e766bb063751873",
+    "mci/metabus.py": "2f70d0da69be020b7120034032c524a34170acf330ce2e07e842712968b14221",
+    "mci/reflexion.py": "12d0a08b16172b322bac61866413c0eb364eddb0ef72587e07ea0900ca799d2d",
+    "mci/blackboard.py": "edd862bf312498c52b43b2376bb50004fa2c90bc5b2e28f8a08ef838cd59a0f8",
+    "marceloclaro/orchestrator.py": "62d4cafdd03fc7409a3cf51ab749f66d1e50d27e89673077a56070799211026c",
+    "marceloclaro/autonomous.py": "417ca2b23f855c542012f05c24f806edad20479c7cf8bb9c5e0bd882d18d4e5a",
+    "reasoning/engines.py": "2fadcfd5d7b17b85a27a01b438ecc72da5a1bdd4dc34d927d23d167b73203bc9",
+    "transformer/memory.py": "3ff9ed510a82cd5ea99d31432ca9002626f7a249d6dd635f09e874bdac1ae88a",
+    "specs/SPEC-935-R886-ciclo-metacognitivo-integrado.md": "edfa890331c4c57efd483a095312536ecf85429b621f332bc4d237e89cea8c9a",
+    "tests/test_r886_metacognitive_loop.py": "505dc820bd9f2cf859ed40ab0c37a834e199862f9e9c60d94ec3e5445ac3bbe3",
+    "tests/test_r886_memory_reasoning.py": "5f6c59ed17e2bf690d22fb96e8ec0cdce9bec40020d5f0bd86594f9a8acd9077",
+    "tests/test_r640_autonomous.py": "75627240c19161a6b5eddd830a1f3260bfd0ee82c857f6085895698f77c3f3db",
+    "tests/test_ecosystem.py": "e4e4cca68f343ce03fd48fb2448a7c872d8492778c76004696774320680b2db3",
+    "docs/METACOGNICA_INTEGRADA_R886.md": "76094f3abc1898f3201381a4c7c715a08e97f75215903a207754767e9b1bb862",
+    "docs/architecture/metacognitive-loop-r886.svg": "80d83fbaa7414be6c33918a5330f80c2cbccda4b9c5a60d176350b7b17edee13",
+    "docs/AVALIACAO_REPOS_METACOGNICA_R886.md": "fe884058944a3a232af9476158a3c04e6087a92faeece583db08187054bdce86",
+    "docs/metacognition-candidates-r886.json": "d5c01473042135dbecff9ee285c80e6d25e8aef1d9d72103a6bf27802fc77a7b"
+  },
+  "limitations": [
+    "Recuperação lexical não demonstra verdade ou apoio semântico.",
+    "O contexto recuperado não modifica expressão formal do solver.",
+    "Avaliação unitária não mede adaptação histórica nem calibração.",
+    "API add_reflection legada e TrustEngine mantêm seus contratos explícitos.",
+    "Não há garantia de ausência de outras ilhas ou falhas no ecossistema."
+  ],
+  "doctor_final": {
+    "overall": "healthy",
+    "diagnostic_mode": "structural",
+    "verification": "installation_only",
+    "checks_total": 22,
+    "checks_passed": 22,
+    "checks_failed": 0,
+    "duration_seconds": 8.37
+  },
+  "exploratory_timing_failure": {
+    "test": "R110: test_is_fast_not_a_full_pytest_run",
+    "threshold_seconds": 5,
+    "observed_seconds": [
+      5.07,
+      5.38
+    ],
+    "test_modified": false,
+    "limitation": "Limite de tempo absoluto falhou em rodadas sob carga; os checks estruturais passaram. Não se afirma cumprimento de SLA de latência."
+  },
+  "docs_and_index_security": {
+    "tests": 56,
+    "failures": 0,
+    "errors": 0,
+    "seconds": 127.006,
+    "junit_sha256": "5aa4b6e4d5db0d531aad5495aca1a882d828129721c097ad77d86b2c2fd49854"
+  }
+}

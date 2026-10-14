@@ -48,6 +48,7 @@ do ambiente e da operação solicitada.
 - [Uso básico](#uso-básico)
 - [Engenharia reversa local REA](#engenharia-reversa-local-rea)
 - [Memória no terminal e painel](#memória-no-terminal-e-painel)
+- [Ciclo metacognitivo integrado](#ciclo-metacognitivo-integrado)
 - [Arquitetura completa e fluxogramas atuais](#arquitetura-completa-e-fluxogramas-atuais)
 - [Arquitetura resumida](#arquitetura-resumida)
   - [Mapa da Arquitetura Completa (v3.9.0)](#mapa-da-arquitetura-completa-v390)
@@ -299,7 +300,29 @@ histórico** (para preservar a documentação legada) e depois o **diagrama
 operacional atual** do runtime observável no checkout. O snapshot histórico é
 exatamente isso — um snapshot documental, **não é um inventário do checkout**.
 
-### Arquitetura completa e fluxogramas atuais
+### Ciclo metacognitivo integrado
+
+A R886 conecta a memória de resultados à próxima delegação do primário:
+recuperação contextual → análise crítica local → Blackboard → executor →
+gate SDD/TDD → reflexão contextual → memória. Resultado, erro observado,
+próxima ação e referências declaradas permanecem vinculados à tarefa.
+Os escores dos motores são heurísticos e não promovem confiança automaticamente.
+
+O [guia do ciclo](docs/METACOGNICA_INTEGRADA_R886.md) explica os contratos,
+o tratamento de replay e degradação e o limite entre contexto e expressão formal.
+A [avaliação dos cinco repositórios](docs/AVALIACAO_REPOS_METACOGNICA_R886.md)
+prioriza Knowl como candidato de memória e Laya como auxílio consultivo;
+Awesome LLM Apps, OpenShell e Feynman têm papéis próprios. Esses runtimes
+externos não foram instalados ou executados nesta etapa.
+
+As [verificações locais R886](docs/verification-local-r886.json) delimitam o
+escopo executado. Para codificação eficiente, o [piloto R887](specs/SPEC-935-R887-code-intelligence-local.md)
+está proposto com um único provedor, context-link, conforme a
+[avaliação comparativa](docs/AVALIACAO_CODE_INTELLIGENCE_R887.md) e a
+[curadoria complementar](docs/CURADORIA_CODIFICACAO_EFICIENTE.md). O piloto
+ainda não está instalado nem ativo.
+
+## Arquitetura completa e fluxogramas atuais
 
 [![Visão operacional do Core](docs/architecture/curated-overview.svg)](docs/ARQUITETURA_COMPLETA_CORE_R879.md)
 

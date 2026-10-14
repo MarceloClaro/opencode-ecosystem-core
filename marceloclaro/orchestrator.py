@@ -30,6 +30,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from mci.metabus import metabus
+from mci.metacognitive_loop import MetacognitiveLoop
 from mci.blackboard import blackboard
 from mci.task_runtime import AcceptanceCriterion, NanoTaskSpec, TaskGraph, TaskRuntime
 from synthetic_university import SyntheticUniversity
@@ -86,6 +87,7 @@ class MarceloClaroOrchestrator:
         self.id = "marceloclaro"
         self.pending_cfps: Dict[str, List[str]] = {}  # task_id -> agentes elegíveis
         self.results: Dict[str, Any] = {}
+        self._metacognitive_reports: Dict[str, Dict[str, Any]] = {}
 
         # Modo SDD estrito: nenhuma conclusão aceita sem verificação de spec (INV-006.1)
         self.strict_sdd = strict_sdd
@@ -147,6 +149,8 @@ class MarceloClaroOrchestrator:
             self._on_reflected,
             f"{self.id}:metacognition.reflected",
         )
+        metabus.subscribe("metacognition.failed", self._on_reflected,
+                          f"{self.id}:metacognition.failed")
 
         # Leituras leves e coordenação compartilham o mesmo primário. O catálogo
         # pode ser ativado depois sem substituir os callbacks registrados acima.
@@ -314,12 +318,9 @@ class MarceloClaroOrchestrator:
         task_id = f"task-{uuid.uuid4().hex[:8]}"
 
         # Percepção metacognitiva pré-delegação
-        awareness = self.perceive()
         enriched_context = dict(context or {})
-        enriched_context["metacognitive_briefing"] = {
-            "lessons": awareness["lessons"][-5:],
-            "orchestrator": self.id,
-        }
+        enriched_context["metacognitive_briefing"] = MetacognitiveLoop(metabus).prepare(
+            description, reasoner=lambda query: multi_reasoning.reason(query, engine="critical").to_dict())
 
         metabus.publish("task.post", {
             "task_id": task_id,
@@ -860,6 +861,10 @@ class MarceloClaroOrchestrator:
 
     def _on_reflected(self, event: Dict[str, Any]):
         payload = event.get("payload", {})
+        if payload.get("task_id"):
+            if not hasattr(self, "_metacognitive_reports"):
+                self._metacognitive_reports = {}
+            self._metacognitive_reports[payload["task_id"]] = copy.deepcopy(payload)
         logger.info(
             f"[{self.id}] Reflexão registrada para {payload.get('agent_id')} "
             f"(nova confiança: {payload.get('new_confidence')})"
@@ -2740,15 +2745,18 @@ class MarceloClaroOrchestrator:
         return output
 
     def reason(self, query: str, engine: str = "auto", **kwargs) -> Dict[str, Any]:
-        """Raciocínio formal com os 4 motores (Z3, SymPy, Kanren, Critical)."""
+        """Motores locais com memória compartilhada e limites de autoavaliação."""
+        loop = MetacognitiveLoop(metabus)
+        briefing = loop.prepare(query)
         result = multi_reasoning.reason(query, engine=engine, **kwargs)
-        metabus.memory.add_reflection(
-            agent_id=self.id,
-            task_context=f"raciocínio ({result.engine}): {query[:80]}",
-            reflection=f"Conclusão: {result.conclusion[:200]}",
-            score=result.confidence,
-        )
-        return result.to_dict()
+        payload = result.to_dict()
+        try:
+            payload["metacognition"] = loop.observe_reasoning(query, payload, briefing)
+        except Exception as error:
+            payload["metacognition"] = {"status": "degraded", "observation_id": None,
+                                        "error_type": type(error).__name__,
+                                        "calibrated": False, "confidence_promoted": False}
+        return payload
 
     def quantum_experiment(self, n_qubits: int = 3,
                            seeds: Optional[List[int]] = None,

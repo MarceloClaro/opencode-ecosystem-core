@@ -213,7 +213,8 @@ class Blackboard:
                 "agent_id": agent_id,
                 "context": task.description,
                 "result": task.result,
-                "success": status == "completed"
+                "success": status == "completed",
+                "sdd_verification": payload.get("sdd_verification"),
             }, source_agent="blackboard")
             
             logger.info(f"Tarefa {task_id} finalizada por {agent_id} com status {status}")

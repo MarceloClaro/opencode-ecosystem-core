@@ -31,7 +31,8 @@ class HierarchicalMemory:
         self.embedder = TaskEmbedder()
 
     def _entry_text(self, entry: Dict[str, Any]) -> str:
-        return f"{entry.get('agent_id', '')} {entry.get('context', '')} {entry.get('reflection', '')}"
+        from mci.metabus import memory_entry_text
+        return memory_entry_text(entry)
 
     def _build_chunks(self) -> List[Dict[str, Any]]:
         """Agrupa a memória episódica em chunks com sumário vetorial."""
