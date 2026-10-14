@@ -1,0 +1,544 @@
+{
+  "schema": "core.repo_review.r890.a.v1",
+  "reviewed_at_utc": "2026-10-14T14:55:41.540124+00:00",
+  "verification": "local_static_source_review",
+  "third_party_runtime_installed": false,
+  "third_party_source_executed": false,
+  "externally_validated": false,
+  "confidence_promoted": false,
+  "repositories": [
+    {
+      "repository": "MarceloClaro/deepchem",
+      "url": "https://github.com/MarceloClaro/deepchem",
+      "commit": "5dafef7771067f3baddedeafd579e0e179def87f",
+      "default_branch": "master",
+      "upstream": "deepchem/deepchem",
+      "tree_truncated": false,
+      "tree_blob_count": 1497,
+      "source_files": [
+        {
+          "repository": "deepchem",
+          "path": "README.md",
+          "bytes": 7338,
+          "sha256": "abdbe5435eedd208e4110b1d4310983add99c48124d0bc0f058fc35a3a7be720",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/deepchem/5dafef7771067f3baddedeafd579e0e179def87f/README.md"
+        },
+        {
+          "repository": "deepchem",
+          "path": "LICENSE",
+          "bytes": 1047,
+          "sha256": "e93ec2f869cea11536743939feb7943e195096ea363e16298620d4622046631f",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/deepchem/5dafef7771067f3baddedeafd579e0e179def87f/LICENSE"
+        },
+        {
+          "repository": "deepchem",
+          "path": "setup.py",
+          "bytes": 2859,
+          "sha256": "13107e089d0727966869dca98bd261e3bfba7039a1f789622532ee32e9b4ca03",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/deepchem/5dafef7771067f3baddedeafd579e0e179def87f/setup.py"
+        },
+        {
+          "repository": "deepchem",
+          "path": "deepchem/__init__.py",
+          "bytes": 373,
+          "sha256": "b7a9df94449d45f0770fdcaac19bdd75b5f090ac73dd8c43ae355fbb5952b329",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/deepchem/5dafef7771067f3baddedeafd579e0e179def87f/deepchem/__init__.py"
+        },
+        {
+          "repository": "deepchem",
+          "path": "deepchem/molnet/load_function/molnet_loader.py",
+          "bytes": 8680,
+          "sha256": "7964cf030563748160f6390bddb7d4e5e813629dd6035a81f7a3240ca27fce05",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/deepchem/5dafef7771067f3baddedeafd579e0e179def87f/deepchem/molnet/load_function/molnet_loader.py"
+        },
+        {
+          "repository": "deepchem",
+          "path": "deepchem/utils/data_utils.py",
+          "bytes": 23055,
+          "sha256": "eaf89035fe0810195dbb0b54c0ce2ac213537f19a1c16378ecad0cb99438beb3",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/deepchem/5dafef7771067f3baddedeafd579e0e179def87f/deepchem/utils/data_utils.py"
+        },
+        {
+          "repository": "deepchem",
+          "path": "deepchem/models/torch_models/torch_model.py",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/deepchem/5dafef7771067f3baddedeafd579e0e179def87f/deepchem/models/torch_models/torch_model.py",
+          "bytes": 56369,
+          "sha256": "9a0dc80635f10b69126eff2ef5973dac9cf9ed4f3527c1dba1c7f8835f1b9d5d"
+        },
+        {
+          "repository": "deepchem",
+          "path": "deepchem/splits/splitters.py",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/deepchem/5dafef7771067f3baddedeafd579e0e179def87f/deepchem/splits/splitters.py",
+          "bytes": 64330,
+          "sha256": "5adf9a5cbd1dca6419458f9ccf173dab1b0003228f820e436f8da4823b657d60"
+        }
+      ],
+      "decision": "adapter_especialista_opcional",
+      "license": "MIT",
+      "contribution": "Padrão de dataset identificado, separação treino/validação/teste e transformações ajustadas somente no treino; especialista para química/biologia quando houver demanda concreta.",
+      "entrypoints": [
+        "deepchem/__init__.py",
+        "deepchem/molnet/load_function/molnet_loader.py",
+        "deepchem/utils/data_utils.py"
+      ],
+      "dependency_findings": [
+        "setup.py: Python>=3.7,<3.13; incompatibilidade declarada com Python3.14 do ambiente principal",
+        "numpy<2, RDKit, scipy>=1.10.1, scikit-learn e outros; extras torch==2.2.1 ou jax==0.4.30",
+        "README menciona suporte3.7–3.10; setup é mais amplo até<3.13, versões documentais não coincidem"
+      ],
+      "network_findings": [
+        "download_url usa urllib.urlretrieve; loaders podem baixar dados quando cache não atende",
+        "Suporte opcional Weights&Biases no treinamento; não foi auditada telemetria transitiva",
+        "data_utils possui pickle/joblib/np.load(allow_pickle=True); não desserializar arquivos não confiáveis"
+      ],
+      "core_overlap": [
+        "mci/experiment_designer.py",
+        "mci/preregistration_protocol.py",
+        "mci/statistical_validator.py",
+        "integrations/scientific_plugins.py"
+      ],
+      "rea": {
+        "compatible_javascript_html_targets": [],
+        "target_analysis_executed": false,
+        "reason": "Alvos principais Python/TeX/PDF sem tipo correspondente no contrato inspect; nenhum parsing nativo foi forçado."
+      }
+    },
+    {
+      "repository": "MarceloClaro/ipleiria-thesis",
+      "url": "https://github.com/MarceloClaro/ipleiria-thesis",
+      "commit": "faadc18cb4bacc407abc5fec4520c1ea80b2efd0",
+      "default_branch": "master",
+      "upstream": "joseareia/ipleiria-thesis",
+      "tree_truncated": false,
+      "tree_blob_count": 78,
+      "source_files": [
+        {
+          "repository": "ipleiria-thesis",
+          "path": "README.md",
+          "bytes": 4364,
+          "sha256": "4a67663f0ddc8da646cfeb60f1a9af5f63877b9748591186c53f41b567eb228b",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ipleiria-thesis/faadc18cb4bacc407abc5fec4520c1ea80b2efd0/README.md"
+        },
+        {
+          "repository": "ipleiria-thesis",
+          "path": "LICENSE",
+          "bytes": 19101,
+          "sha256": "eda29e7f018ce4f0b7bdfba6d6229a46f71ce7ba199c70c0013a77382931266f",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ipleiria-thesis/faadc18cb4bacc407abc5fec4520c1ea80b2efd0/LICENSE"
+        },
+        {
+          "repository": "ipleiria-thesis",
+          "path": "IPLeiriaMain.tex",
+          "bytes": 2204,
+          "sha256": "996ca507b385e14d0986f06571e90fd7562bd1e73f5a054c2fcfda4da07a5ded",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ipleiria-thesis/faadc18cb4bacc407abc5fec4520c1ea80b2efd0/IPLeiriaMain.tex"
+        },
+        {
+          "repository": "ipleiria-thesis",
+          "path": "IPLeiriaThesis.cls",
+          "bytes": 8516,
+          "sha256": "895fc5fa2c22966407388fe17b3fd2bbd510112750d7813b9242118a7afefe67",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ipleiria-thesis/faadc18cb4bacc407abc5fec4520c1ea80b2efd0/IPLeiriaThesis.cls"
+        },
+        {
+          "repository": "ipleiria-thesis",
+          "path": ".latexmkrc",
+          "bytes": 1864,
+          "sha256": "a113ffad74dbfe22ba296196a2926e86ed25a1a4cfb9b964a2de712efca30051",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ipleiria-thesis/faadc18cb4bacc407abc5fec4520c1ea80b2efd0/.latexmkrc"
+        },
+        {
+          "repository": "ipleiria-thesis",
+          "path": "Makefile",
+          "bytes": 2046,
+          "sha256": "9dd2368d3660f5067f53f73f937bf54ed2206d9f970d0eff574f914b130c8913",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ipleiria-thesis/faadc18cb4bacc407abc5fec4520c1ea80b2efd0/Makefile"
+        },
+        {
+          "repository": "ipleiria-thesis",
+          "path": ".github/workflows/latex.yml",
+          "bytes": 818,
+          "sha256": "9af518c56179a6541ff6671aa360af01eb2b3779ac0f1b8df74f39bdbd472794",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ipleiria-thesis/faadc18cb4bacc407abc5fec4520c1ea80b2efd0/.github/workflows/latex.yml"
+        },
+        {
+          "repository": "ipleiria-thesis",
+          "path": "Configurations/00-Fonts.sty",
+          "bytes": 958,
+          "sha256": "8099277cd280c5ff6df535e18b58f1500fcad216efa9d10356e3d865bf78b1cd",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ipleiria-thesis/faadc18cb4bacc407abc5fec4520c1ea80b2efd0/Configurations/00-Fonts.sty"
+        },
+        {
+          "repository": "ipleiria-thesis",
+          "path": "Configurations/03-References.sty",
+          "bytes": 2359,
+          "sha256": "0fc8f3b88d913269c037b28aca95a5a5ac3530ce27bf13f49cb4e31344983e86",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ipleiria-thesis/faadc18cb4bacc407abc5fec4520c1ea80b2efd0/Configurations/03-References.sty"
+        }
+      ],
+      "decision": "referencia_editorial_sem_trocar_modelo_institucional",
+      "license": "LPPL-1.3c",
+      "contribution": "Separação modular entre metadados, estilos, capítulos, elementos pré/pós-textuais e bibliografia; compilação com biber --validate-datamodel.",
+      "entrypoints": [
+        "IPLeiriaMain.tex",
+        "IPLeiriaThesis.cls",
+        ".latexmkrc"
+      ],
+      "dependency_findings": [
+        "XeLaTeX, latexmk, biblatex/biber, makeglossaries e fontes",
+        "Amostra inclui configuração para MinionPro; termos de fontes/imagens não auditados por transitividade",
+        "Bibliografia authoryear não representa conformidade ABNT/PUCRS"
+      ],
+      "network_findings": [
+        "Compilação local não exige Overleaf, mas workflow executa serviçoGitHubActions e obtém ações/imagem externa",
+        ".latexmkrc usa --shell-escape, comandos makeglossaries e execução de shell; foi lido, não executado"
+      ],
+      "core_overlap": [
+        "livro-core/",
+        "artigos/pucrs-roteamento-atencao/",
+        "integrations/artigo_academico_mcp.py"
+      ],
+      "rea": {
+        "compatible_javascript_html_targets": [],
+        "target_analysis_executed": false,
+        "reason": "Alvos principais Python/TeX/PDF sem tipo correspondente no contrato inspect; nenhum parsing nativo foi forçado."
+      }
+    },
+    {
+      "repository": "MarceloClaro/torchquantum",
+      "url": "https://github.com/MarceloClaro/torchquantum",
+      "commit": "57f19172981b8e1d360038a62bec53e157f3a57d",
+      "default_branch": "main",
+      "upstream": "mit-han-lab/torchquantum",
+      "tree_truncated": false,
+      "tree_blob_count": 349,
+      "source_files": [
+        {
+          "repository": "torchquantum",
+          "path": "README.md",
+          "bytes": 17300,
+          "sha256": "0e169d8ac71d28de2436403685c64bf5cf0020548f54b145f0747daa85b577cc",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/torchquantum/57f19172981b8e1d360038a62bec53e157f3a57d/README.md"
+        },
+        {
+          "repository": "torchquantum",
+          "path": "LICENSE",
+          "bytes": 1082,
+          "sha256": "053923e67c139199857ca98b1086a3b63d92dc2e06ce1b5b2fb9e31bad5869c8",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/torchquantum/57f19172981b8e1d360038a62bec53e157f3a57d/LICENSE"
+        },
+        {
+          "repository": "torchquantum",
+          "path": "setup.py",
+          "bytes": 2043,
+          "sha256": "e46b96924c8a5f84c31a97e34c2e4ab2c692a28d795338aae528e185fd64d9c1",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/torchquantum/57f19172981b8e1d360038a62bec53e157f3a57d/setup.py"
+        },
+        {
+          "repository": "torchquantum",
+          "path": "requirements.txt",
+          "bytes": 399,
+          "sha256": "06e487629e93f6faba1d0e184216fb4352d55c246d0330ae78e5d410bfa2c881",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/torchquantum/57f19172981b8e1d360038a62bec53e157f3a57d/requirements.txt"
+        },
+        {
+          "repository": "torchquantum",
+          "path": "torchquantum/__init__.py",
+          "bytes": 2244,
+          "sha256": "a16e21dee58e7eaa130266167b5f0142a5e0aa579925f1e9358ef49009531904",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/torchquantum/57f19172981b8e1d360038a62bec53e157f3a57d/torchquantum/__init__.py"
+        },
+        {
+          "repository": "torchquantum",
+          "path": "torchquantum/device/devices.py",
+          "bytes": 5357,
+          "sha256": "14240ca1b3ef6672e186754fdf2bdec595cc4559c3fea8cb9049714c64ba36ab",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/torchquantum/57f19172981b8e1d360038a62bec53e157f3a57d/torchquantum/device/devices.py"
+        },
+        {
+          "repository": "torchquantum",
+          "path": "torchquantum/plugin/qiskit/qiskit_processor.py",
+          "bytes": 16797,
+          "sha256": "0f0afd05d0458389d423fb6542bb567702c0ecde8428f0af8b4020368110c5d2",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/torchquantum/57f19172981b8e1d360038a62bec53e157f3a57d/torchquantum/plugin/qiskit/qiskit_processor.py"
+        },
+        {
+          "repository": "torchquantum",
+          "path": "torchquantum/measurement/measurements.py",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/torchquantum/57f19172981b8e1d360038a62bec53e157f3a57d/torchquantum/measurement/measurements.py",
+          "bytes": 16513,
+          "sha256": "5d45a564be2a0f07029bad04b2be6ff65b008ee876609c27d92efc1d59c75aa2"
+        }
+      ],
+      "decision": "adaptar_contrato_de_simulacao_existente",
+      "license": "MIT",
+      "contribution": "Separar simulação clássica PyTorch/CPU/GPU de execução em hardware quântico e informar backend, shots, seed e origem das medições.",
+      "entrypoints": [
+        "torchquantum/device/devices.py",
+        "torchquantum/plugin/qiskit/qiskit_processor.py",
+        "torchquantum/measurement/measurements.py"
+      ],
+      "dependency_findings": [
+        "torch, tensorflow, qiskit==1.4.3, qiskit_ibm_runtime, qiskit-aer, pyscf, torchpack e outras",
+        "setup declara Python>=3.5, mas isso não comprova suporte das dependências no Python3.14",
+        "QuantumDevice aloca tensor 2**n_wires; escalabilidade depende de algoritmo/backend/hardware real"
+      ],
+      "network_findings": [
+        "use_real_qc=False→AerSampler; True→QiskitRuntimeService com backend explícito",
+        "Mesmo no ramo de simulação, noise_model_name+token pode consultar serviço IBM remoto",
+        "Nenhuma conta IBM, GPU ou QPU foi acionada nesta avaliação"
+      ],
+      "core_overlap": [
+        "reasoning/quantum.py",
+        "reasoning/engines.py:QuantumReasoningEngine",
+        "mci/metacognitive_loop.py:observe_reasoning",
+        "marceloclaro/orchestrator.py:reason,quantum_experiment"
+      ],
+      "rea": {
+        "compatible_javascript_html_targets": [],
+        "target_analysis_executed": false,
+        "reason": "Alvos principais Python/TeX/PDF sem tipo correspondente no contrato inspect; nenhum parsing nativo foi forçado."
+      }
+    },
+    {
+      "repository": "MarceloClaro/ai-edge-quantizer",
+      "url": "https://github.com/MarceloClaro/ai-edge-quantizer",
+      "commit": "87cda53576a55a71114a4945b3ff18e27c2fa42b",
+      "default_branch": "main",
+      "upstream": "google-ai-edge/ai-edge-quantizer",
+      "tree_truncated": false,
+      "tree_blob_count": 234,
+      "source_files": [
+        {
+          "repository": "ai-edge-quantizer",
+          "path": "README.md",
+          "bytes": 11308,
+          "sha256": "ed77cc0453b1386a1238e2c58919d714d8f6c771c039e0702f00d65a9ba212b0",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ai-edge-quantizer/87cda53576a55a71114a4945b3ff18e27c2fa42b/README.md"
+        },
+        {
+          "repository": "ai-edge-quantizer",
+          "path": "LICENSE",
+          "bytes": 11357,
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ai-edge-quantizer/87cda53576a55a71114a4945b3ff18e27c2fa42b/LICENSE"
+        },
+        {
+          "repository": "ai-edge-quantizer",
+          "path": "setup.py",
+          "bytes": 2774,
+          "sha256": "b2f64dea0f32765322f96f454ad99033693e15d93b43dc33cd9b37547477d9c9",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ai-edge-quantizer/87cda53576a55a71114a4945b3ff18e27c2fa42b/setup.py"
+        },
+        {
+          "repository": "ai-edge-quantizer",
+          "path": "requirements.txt",
+          "bytes": 73,
+          "sha256": "e4c565ef5116240cb378405f1c64bd4cb96a88314112e3b6a7ce12ae8e8aaaa9",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ai-edge-quantizer/87cda53576a55a71114a4945b3ff18e27c2fa42b/requirements.txt"
+        },
+        {
+          "repository": "ai-edge-quantizer",
+          "path": "ai_edge_quantizer/quantizer.py",
+          "bytes": 13202,
+          "sha256": "8370cca8532b329b7d8d0b6d084d1671d35b32d9342599e6379326087acd7723",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ai-edge-quantizer/87cda53576a55a71114a4945b3ff18e27c2fa42b/ai_edge_quantizer/quantizer.py"
+        },
+        {
+          "repository": "ai-edge-quantizer",
+          "path": "ai_edge_quantizer/model_modifier.py",
+          "bytes": 7110,
+          "sha256": "b5e19af08ea41af9fa4d063a5efe7760521cfe940484dbccf596f86ef85ecf2c",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ai-edge-quantizer/87cda53576a55a71114a4945b3ff18e27c2fa42b/ai_edge_quantizer/model_modifier.py"
+        },
+        {
+          "repository": "ai-edge-quantizer",
+          "path": "ai_edge_quantizer/calibrator.py",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ai-edge-quantizer/87cda53576a55a71114a4945b3ff18e27c2fa42b/ai_edge_quantizer/calibrator.py",
+          "bytes": 12071,
+          "sha256": "4a6b3bfc02073c7f46e7115acf911fddae603e1c6e216408f1dd8b50cf02f7a2"
+        },
+        {
+          "repository": "ai-edge-quantizer",
+          "path": "ai_edge_quantizer/model_validator.py",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ai-edge-quantizer/87cda53576a55a71114a4945b3ff18e27c2fa42b/ai_edge_quantizer/model_validator.py",
+          "bytes": 13153,
+          "sha256": "1e3d3fe68f8e6b7752949debc958d186fb327a51cdc9e9351abb46f5bb8c7338"
+        },
+        {
+          "repository": "ai-edge-quantizer",
+          "path": "ai_edge_quantizer/recipe.py",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ai-edge-quantizer/87cda53576a55a71114a4945b3ff18e27c2fa42b/ai_edge_quantizer/recipe.py",
+          "bytes": 2919,
+          "sha256": "151d2e25c7ae999ae795ed95452390675b97ba9e12d5c4d82911fe379de6591a"
+        },
+        {
+          "repository": "ai-edge-quantizer",
+          "path": "ai_edge_quantizer/qtyping.py",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ai-edge-quantizer/87cda53576a55a71114a4945b3ff18e27c2fa42b/ai_edge_quantizer/qtyping.py",
+          "bytes": 16654,
+          "sha256": "27cd5a65709ee63503b102cfe13eac94299521f37547eb1db8605738b1ae6910"
+        }
+      ],
+      "decision": "avaliacao_futura_em_ambiente_isolado",
+      "license": "Apache-2.0",
+      "contribution": "Receita de quantização explícita por operador/escopo, separação de calibração e comparação numérica, e distinção entre sanity check e qualidade de tarefa.",
+      "entrypoints": [
+        "ai_edge_quantizer/quantizer.py",
+        "ai_edge_quantizer/calibrator.py",
+        "ai_edge_quantizer/model_validator.py"
+      ],
+      "dependency_findings": [
+        "Versão fonte0.3.0; setup Python>=3.9, README3.9–3.12 Linux/macOS",
+        "tf-nightly e ai-edge-litert-nightly; não misturar automaticamente ao ambiente Core",
+        "Entrada esperada FP32 FlatBuffer.tflite; compatibilidade com artefato/servidor LiteRT-LM precisa ser demonstrada"
+      ],
+      "network_findings": [
+        "Conversão/validação principal inspecionada opera sobre bytes locais, mas dependências/tutorials são externos",
+        "Nenhum modelo baixado, calibrado, convertido ou servido nesta avaliação"
+      ],
+      "core_overlap": [
+        "integrations/litert_lm.py",
+        "integrations/litert_lm_provider.py",
+        "mci/preregistration_protocol.py"
+      ],
+      "rea": {
+        "compatible_javascript_html_targets": [],
+        "target_analysis_executed": false,
+        "reason": "Alvos principais Python/TeX/PDF sem tipo correspondente no contrato inspect; nenhum parsing nativo foi forçado."
+      }
+    },
+    {
+      "repository": "MarceloClaro/AI-ML-Cheatsheets",
+      "url": "https://github.com/MarceloClaro/AI-ML-Cheatsheets",
+      "commit": "65f5a291b42ac3ad8ff27f6db4d439c94b6e18b6",
+      "default_branch": "main",
+      "upstream": "analyticalrohit/AI-ML-Cheatsheets",
+      "tree_truncated": false,
+      "tree_blob_count": 9,
+      "source_files": [
+        {
+          "repository": "AI-ML-Cheatsheets",
+          "path": "README.md",
+          "bytes": 3693,
+          "sha256": "45d0a9edc75d0d7cb2029742526cbb322ec905faa687f4b19771401e7141c9a0",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/AI-ML-Cheatsheets/65f5a291b42ac3ad8ff27f6db4d439c94b6e18b6/README.md"
+        },
+        {
+          "repository": "AI-ML-Cheatsheets",
+          "path": "LICENSE",
+          "bytes": 1089,
+          "sha256": "3f1e01d47723adf677565d806587f03b7a557020ff3a584f3165c8bb3304578a",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/AI-ML-Cheatsheets/65f5a291b42ac3ad8ff27f6db4d439c94b6e18b6/LICENSE"
+        }
+      ],
+      "decision": "referencia_didatica_opcional",
+      "license": "MIT declarada na raiz; proveniência/licenças de cada PDF não auditadas",
+      "contribution": "Material de consulta para guias didáticos; manter autor, título, página, origem e hash quando citar. Não é motor nem validação científica.",
+      "entrypoints": [
+        "README.md"
+      ],
+      "dependency_findings": [
+        "Árvore com9arquivos: README, LICENSE e7PDFs; sem runtime de agentes",
+        "Conteúdo dos PDFs não foi incorporado nem tratado como softwareexecutável"
+      ],
+      "network_findings": [
+        "README incorpora badges/imagens/links externos para redes e newsletter; sem serviço local de análise",
+        "Não foram abertos destinos de newsletter ou conectadas contas"
+      ],
+      "core_overlap": [
+        "livro-core/",
+        "integrations/artigo_academico_mcp.py",
+        "integrations/scientific_plugins.py"
+      ],
+      "rea": {
+        "compatible_javascript_html_targets": [],
+        "target_analysis_executed": false,
+        "reason": "Alvos principais Python/TeX/PDF sem tipo correspondente no contrato inspect; nenhum parsing nativo foi forçado."
+      }
+    }
+  ],
+  "rea_capability_receipt": "outputs/core-r890/a-rea-capability.json",
+  "local_core_reproducer": "outputs/core-r890/a-core-quantum-reproducer.json",
+  "proposed_adaptation": {
+    "status": "implemented_and_locally_tested",
+    "spec": "specs/SPEC-935-R890-curadoria-e-simulacao-delimitada.md",
+    "files": [
+      "reasoning/quantum.py",
+      "reasoning/engines.py",
+      "mci/metacognitive_loop.py"
+    ],
+    "contract": [
+      "execution_kind=classical_simulation;backend=python_statevector;quantum_hardware_used=false;query_evaluated=false",
+      "Eliminar confiança0.85 como resposta à pergunta ignorada",
+      "Substituir falsa fidelity por support_mass e TVDempírica; rotularShannonmeasurement_entropy",
+      "Limite20qubitsindependentementeQiskit;tiposorçamentosantesdeallocate/loops",
+      "Guardarproveniência/digest/configuração na memória, semhistogramasnemautopromoção"
+    ]
+  },
+  "limits": [
+    "Amostragem dirigida e leitura estática, não auditoria integral.",
+    "REAinventárioinstallation_only não é análise de alvo, autenticação ou inferência.",
+    "O reprodutor executa apenas código pré-existente do próprio Core em2qubits,1–8shots,1seed.",
+    "Nenhum modelo, circuito remoto, pipeline de química, PDFcompilado ou implementação de terceiro foi executado."
+  ],
+  "implementation": {
+    "spec": "specs/SPEC-935-R890-curadoria-e-simulacao-delimitada.md",
+    "files": [
+      {
+        "path": "reasoning/quantum.py",
+        "sha256": "fc05f960c2b6b636cb9d051e6dad8338063d31c12c4b5a58aa832c8bc526b693"
+      },
+      {
+        "path": "reasoning/engines.py",
+        "sha256": "575873e86148a0db2bbb4cd6c59682b404d6fb693b3b044b979851fdbdf40144"
+      },
+      {
+        "path": "mci/metacognitive_loop.py",
+        "sha256": "9a3e96651a4a1ee2ec7a372ae60cf0941395949e711f2a9569967ae5a077e020"
+      },
+      {
+        "path": "tests/test_r890_quantum_provenance.py",
+        "sha256": "095a7b873c5e0de749f97521bc58f9862e38e1dbac0f26006e5fb074c31dd3f1"
+      },
+      {
+        "path": "tests/test_reasoning_evolution.py",
+        "sha256": "77295de43d0ce80f1939fe70cc8eae3de40ad7f6fbb795cb76f5c1460b4730a6"
+      },
+      {
+        "path": "tests/test_advanced_subsystems.py",
+        "sha256": "9340caa7595ad886756171ecb4616e34b7899478c46d88daa65c0c16bd421ede"
+      }
+    ],
+    "source_frozen": true,
+    "verification": {
+      "junit": "outputs/core-r890/a-release-final.xml",
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "291",
+      "time": "17.643",
+      "timestamp": "2026-10-14T12:05:53.320829-03:00",
+      "hostname": "OPENCODE",
+      "new_r890_cases": 41
+    },
+    "red_receipt": "outputs/core-r890/a-quantum-red.xml",
+    "execution_receipt": "outputs/core-r890/a-core-after-fix.json",
+    "ruff_receipt": "outputs/core-r890/a-ruff.txt",
+    "confidence_ledger_unchanged": true,
+    "query_evaluated": false,
+    "quantum_hardware_used": false,
+    "seed_contract": {
+      "type": "strict_integer",
+      "minimum": 0,
+      "maximum": 9223372036854775807,
+      "validation_before_circuit": true,
+      "int_max_digits_changed": false,
+      "red_receipt": "outputs/core-r890/a-seed-magnitude-red.xml"
+    },
+    "additional_red_receipts": [
+      "outputs/core-r890/a-seed-magnitude-red.xml"
+    ]
+  }
+}

@@ -36,3 +36,32 @@ correspondentes. A integridade do índice refere-se às fontes selecionadas e ao
 hashes; não demonstra correção semântica geral dos símbolos, comportamento em
 execução, ganho de tokens ou ausência de falhas no provedor. A recuperação por
 processos novos não comprova que a causa raiz upstream tenha sido eliminada.
+
+## Execução integral no Core
+
+A execução sobre `818d951` concluiu **763 de 763 fontes selecionadas** em
+três operações explícitas e quinze passadas nativas. A última passada registrou
+zero erros; o banco contém 8.024 símbolos, 8.024 vetores e 8.024 entradas FTS,
+sem relações inválidas ou hashes ausentes/divergentes. As falhas intermediárias
+foram preservadas no histórico privado; não houve redução do corpus.
+
+O primário consultou código de `MetacognitiveLoop`, a estrutura de
+`mci/metacognitive_loop.py` e busca semântica. Uma delegação de sondagem recebeu
+o contexto citado no Blackboard; nenhum executor de LLM foi acionado nessa
+sondagem. O ledger de confiança permaneceu igual antes e depois.
+
+Uma conexão MCP stdio real ao `ecosystem-network` completou inicialização,
+catálogo, consulta da classe com hash e linha corretos e controles negativos:
+travessia de caminho, arquivo ausente, grafo bloqueado e instalação não exposta.
+A memória dessa sondagem MCP foi temporária e isolada.
+
+O [recibo R889](verification-local-r889.json) fixa resultados e hashes. Os
+registros detalhados em `outputs/core-r889/` são locais e ignorados pelo Git.
+O índice é privado e não é publicado no repositório.
+
+A [fonte do parser fixado](https://github.com/context-link-mcp/context-link/blob/e5af49c11c5b2228c6b611dd3594d93014997306/internal/indexer/parser.go)
+usa timeout de cinco segundos e reutiliza parsers. O erro
+[`operation limit was hit` no binding](https://github.com/smacker/go-tree-sitter/blob/dd81d9e9be82/bindings.go)
+é uma classificação genérica da árvore nula; a mensagem sozinha não identifica
+quota ou causa. A recuperação observada por processos novos não demonstra
+correção definitiva dessa causa upstream.

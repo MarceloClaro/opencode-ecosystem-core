@@ -1,0 +1,135 @@
+{
+  "cycle": "R889",
+  "date": "2026-10-14",
+  "verification": "local_operation",
+  "status": "integral_selected_corpus_ready",
+  "externally_validated": false,
+  "source_commit": "818d951227679c8f3e88ae6d8159de21cce2bfb9",
+  "provider": {
+    "name": "context-link",
+    "version": "1.1.0",
+    "commit": "e5af49c11c5b2228c6b611dd3594d93014997306",
+    "binary_sha256": "7a5dd6de4fce49605578a7a7825c1b9b5fe5216766167be86c74d4f460688a9c"
+  },
+  "real_index": {
+    "expected_files": 763,
+    "indexed_files": 763,
+    "table_counts": {
+      "symbols": 8024,
+      "vec_symbols": 8024,
+      "fts_symbols": 8024,
+      "memories": 0
+    },
+    "invalid_relationships": 0,
+    "missing_or_changed_count": 0,
+    "final_native_errors": 0,
+    "explicit_operations": 3,
+    "native_passes": 15,
+    "operation_seconds": [
+      110.302,
+      40.329,
+      34.09
+    ],
+    "scope": "tracked_production_sources",
+    "complete_selected_corpus": true,
+    "manifest_sha256": "65bfd5e0c35978c36744cbe49ee90884b915518843f139e86298d0f902f980d2"
+  },
+  "acceptance": [
+    "Native summary, all selected file paths and content hashes agree.",
+    "Strict SQLite tables, FTS5, symbol/file relations, vectors/FTS identifiers and dimensions audited.",
+    "Private resumable candidate; at most six passes per explicit operation, overall time budget at most120seconds.",
+    "Doc-only HEAD changes accepted only when every selected source/copy hash remains identical.",
+    "Unknown schemas, partial generations, symlinks and divergent hashes fail closed."
+  ],
+  "network_isolation": {
+    "available": true,
+    "mechanism": "bubblewrap_user_network_mount_namespace",
+    "probe": "TCP 1.1.1.1:443",
+    "connect_errno": 101,
+    "sources_mounted": false
+  },
+  "real_queries": {
+    "primary": [
+      "get_code_by_symbol",
+      "get_file_skeleton",
+      "semantic_search_symbols"
+    ],
+    "metacognitive_briefing_connected_to_blackboard": true,
+    "executor_inference_performed": false,
+    "mcp_facade_stdio": {
+      "initialize_and_tools_list": true,
+      "integral_index_ready": true,
+      "skeleton_symbol_source_hash_and_line": true,
+      "path_traversal_rejected": true,
+      "missing_file_rejected": true,
+      "known_bad_graph_rejected": true,
+      "setup_not_exposed": true,
+      "original_source_unchanged": true
+    },
+    "mcp_protocol_version": "2025-11-25",
+    "original_source_sha256": "9a3e96651a4a1ee2ec7a372ae60cf0941395949e711f2a9569967ae5a077e020",
+    "source_line": 23
+  },
+  "confidence_ledger_unchanged": true,
+  "queries_still_blocked": [
+    "get_symbol_usages",
+    "get_call_tree",
+    "get_blast_radius"
+  ],
+  "proofs": [
+    {
+      "path": "outputs/core-r887/core-post-commit.json",
+      "sha256": "6bfbb7e93f71fcbe303adc3d415485a11bd84909eecb710837fa0b2c60413aa3"
+    },
+    {
+      "path": "outputs/core-r889/index-recovery.json",
+      "sha256": "56cdaf213adba5c7ec10ad21867e36c9c25e96f0a563945792d06d4c60947638"
+    },
+    {
+      "path": "outputs/core-r889/symlink-release.xml",
+      "sha256": "a5e84a1df83a60533bb784ba44ac0df3a40dbdaa925164dfeeadb73a5c694216",
+      "tests": 59,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "path": "outputs/core-r890/root-release.xml",
+      "sha256": "5e45115db45919d6ed7f3b8b7ea23b5c8a53be14049914683495e0d9374c9260",
+      "tests": 149,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "path": "outputs/core-r889/core-index-final.json",
+      "sha256": "a75390e0c9aa33e2d48eed9a65d4559c53e282b344d5b9bea14ca62537e1ff59"
+    },
+    {
+      "path": "outputs/core-r889/primary-core-queries.json",
+      "sha256": "6ae051c486c2c505f1ab6b51140c09ab2f0e977913316adee7121dd0456419f1"
+    },
+    {
+      "path": "outputs/core-r889/mcp-facade-smoke.json",
+      "sha256": "fb385cb9e128f60b00dbc00740386e7f858017802681d667641db611d10ada6f"
+    }
+  ],
+  "artifact_hashes": {
+    "integrations/code_context.py": "e651c93de6a83acdd7f6cf0b4cc9ffabf119090080e4b0ff28d3dc404d14e172",
+    "integrations/code_context_view.py": "c3d2ffac718f3736480bb4c7c0a6cbbc2b8a219702865dd61bb51889684b3f68",
+    "marceloclaro/code_context_cli.py": "d51183e99cb2ffa74430d8a8c7372ab0b0f44f22e700d79ad756ae76bf5d6f2f",
+    "integrations/ecosystem_mcp.py": "5a6a094ac09e2456c84d2940bd41fe8905b03d1fd17804e65a9fbf51efe93ada",
+    "marceloclaro/orchestrator.py": "5a5c9feaa68d9742c74b8ccab43c972e1b18c8fcb12fb52f3c80e21b68c72d64",
+    "tests/test_r887_code_context.py": "e5ac53e52a66faa041ae0c41460a03fa3521c925b550e3f7c2f8db7ad8ca62b8",
+    "tests/test_r887_orchestration.py": "7803d51a2eb7641da5253bb64e6a6857059c30c5b9cd39273bebf81ea936882f"
+  },
+  "limitations": [
+    "Integral means the763selected production source files, not all repository files or functional ecosystem coverage.",
+    "No proof that the transient upstream parser cause was eliminated; failures and interrupted runs preserved.",
+    "Three graph queries remain blocked by semantic counterexamples.",
+    "Source selection/redaction is heuristic, not a DLP/security certificate.",
+    "No model inference or token savings are demonstrated by the context/briefing smoke.",
+    "Scoped regressions only; the global suite remains incomplete.",
+    "Local RED/GREEN receipts do not establish externally authenticated historical TDD custody."
+  ]
+}

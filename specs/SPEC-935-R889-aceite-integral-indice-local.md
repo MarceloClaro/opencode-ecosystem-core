@@ -2,7 +2,7 @@
 spec_id: SPEC-935-R889
 title: Reprovar índice parcial e recuperar processos limitados do provedor local
 component: integrations.code_context
-status: specified
+status: implemented
 test_file: tests/test_r887_code_context.py
 ---
 

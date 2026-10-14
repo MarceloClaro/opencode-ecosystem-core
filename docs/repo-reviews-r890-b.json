@@ -1,0 +1,1124 @@
+{
+  "schema": "core.repository-review.r890.v1",
+  "reviewed_utc": "2026-10-14T14:53:49.206029+00:00",
+  "scope": "B: five voice/device/multimodal repositories",
+  "verification": "local_source_review_and_scoped_primary_REA_execution",
+  "repositories": [
+    {
+      "repository": "MarceloClaro/ASSISTENTE-SHI",
+      "url": "https://github.com/MarceloClaro/ASSISTENTE-SHI",
+      "commit": "d60749a608b3c1317b527b491bfc50cafb98cecb",
+      "commit_date": "2026-01-14T20:54:30-03:00",
+      "branch": "main",
+      "retrieved_utc": "2026-10-14T14:47:55.237078+00:00",
+      "source_method": "shallow bare clone, filter=blob:none, no checkout or execution",
+      "repository_path_count": 468,
+      "selected_file_count": 21,
+      "selected_bytes": 394720,
+      "source_files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1063,
+          "sha256": "49ddd0fdc520a6e936b6c618dbcc66055d31b746ddd1972337f2a6e96135ba4d",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ASSISTENTE-SHI/d60749a608b3c1317b527b491bfc50cafb98cecb/LICENSE"
+        },
+        {
+          "path": "README.en.md",
+          "bytes": 15844,
+          "sha256": "049b92979f37590a075e7d178b5197a28e82a19f4938b0fd6b0ee767d9566e51",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ASSISTENTE-SHI/d60749a608b3c1317b527b491bfc50cafb98cecb/README.en.md"
+        },
+        {
+          "path": "pyproject.toml",
+          "bytes": 598,
+          "sha256": "2f4ba84d610c1dfa6ed9e6973662608a5151bd0b28046040c95d15c46ed4dd30",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ASSISTENTE-SHI/d60749a608b3c1317b527b491bfc50cafb98cecb/pyproject.toml"
+        },
+        {
+          "path": "requirements.txt",
+          "bytes": 891,
+          "sha256": "2d22b38167f5cb47dac270aab450ffa154770945332af08fa8658e3976dea382",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ASSISTENTE-SHI/d60749a608b3c1317b527b491bfc50cafb98cecb/requirements.txt"
+        },
+        {
+          "path": "main.py",
+          "bytes": 8873,
+          "sha256": "c0d712799373234d58dd605a334360a7ea7eca93984ed3ea936abdcd7fa8112c",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ASSISTENTE-SHI/d60749a608b3c1317b527b491bfc50cafb98cecb/main.py"
+        },
+        {
+          "path": "src/application.py",
+          "bytes": 24295,
+          "sha256": "9f8a2b0b132d65ad715b88615e21c1abcdd57f957d57f42a389eaefd04b2c39f",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ASSISTENTE-SHI/d60749a608b3c1317b527b491bfc50cafb98cecb/src/application.py"
+        },
+        {
+          "path": "src/protocols/websocket_protocol.py",
+          "bytes": 21217,
+          "sha256": "38bf7ac478ee8dbf19e2316acd1eb69eb1f7ab91f389d6ab7b37214f299568c6",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ASSISTENTE-SHI/d60749a608b3c1317b527b491bfc50cafb98cecb/src/protocols/websocket_protocol.py"
+        },
+        {
+          "path": "src/protocols/mqtt_protocol.py",
+          "bytes": 33338,
+          "sha256": "ad27c0292afd2ac0e7c37924b49d89467ab9f6676f28ce3a103edf02a1ced279",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ASSISTENTE-SHI/d60749a608b3c1317b527b491bfc50cafb98cecb/src/protocols/mqtt_protocol.py"
+        },
+        {
+          "path": "src/utils/config_manager.py",
+          "bytes": 10458,
+          "sha256": "7eb1cdb029fae734fb6addf214fd07f03d0e36827e3a5d6893e8c7474935ec62",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ASSISTENTE-SHI/d60749a608b3c1317b527b491bfc50cafb98cecb/src/utils/config_manager.py"
+        },
+        {
+          "path": "src/mcp/mcp_server.py",
+          "bytes": 23293,
+          "sha256": "d7056c3e735382340c674fe44575838a32eb09bb8edb3b19cec7e9c0cb635f61",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ASSISTENTE-SHI/d60749a608b3c1317b527b491bfc50cafb98cecb/src/mcp/mcp_server.py"
+        },
+        {
+          "path": "src/plugins/audio.py",
+          "bytes": 9387,
+          "sha256": "7d6c98b4660a6c5838f808b9ed4983d5c782ca93fc67de30404fe6c3e2cd1511",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ASSISTENTE-SHI/d60749a608b3c1317b527b491bfc50cafb98cecb/src/plugins/audio.py"
+        },
+        {
+          "path": "src/audio_processing/wake_word_detect.py",
+          "bytes": 12475,
+          "sha256": "6b067f4b34f77ba2f155b38f61f3dc25ce7be1f3293e179e2f985ef488dae3bd",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ASSISTENTE-SHI/d60749a608b3c1317b527b491bfc50cafb98cecb/src/audio_processing/wake_word_detect.py"
+        },
+        {
+          "path": "src/utils/device_activator.py",
+          "bytes": 13231,
+          "sha256": "11014b36102144573dc32eb100986b07e9c3ab128a89167940f86fde76c61e1f",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ASSISTENTE-SHI/d60749a608b3c1317b527b491bfc50cafb98cecb/src/utils/device_activator.py"
+        },
+        {
+          "path": "src/utils/device_fingerprint.py",
+          "bytes": 14830,
+          "sha256": "ad03ed2dd922d1091bb1511b45300cd134160df4ad37918b8b30a7dd94335414",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ASSISTENTE-SHI/d60749a608b3c1317b527b491bfc50cafb98cecb/src/utils/device_fingerprint.py"
+        },
+        {
+          "path": "README.md",
+          "bytes": 152972,
+          "sha256": "deebb9b51b6ffdfa7ea99ac31d1e9a23538d8e0170226974909b9071e6c30249",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ASSISTENTE-SHI/d60749a608b3c1317b527b491bfc50cafb98cecb/README.md"
+        },
+        {
+          "path": "config/config.json",
+          "bytes": 3459,
+          "sha256": "9c9b8637b457c4e2643bc709494c506a379bdec8af8477f63a071b7a4c922e57",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ASSISTENTE-SHI/d60749a608b3c1317b527b491bfc50cafb98cecb/config/config.json"
+        },
+        {
+          "path": "src/mcp/tools/camera/smolvlm2_optimized.py",
+          "bytes": 12967,
+          "sha256": "1fdce2549a85bc6aa3f407d88b19b3303895b67f746d3ce753a2ae2411f68820",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ASSISTENTE-SHI/d60749a608b3c1317b527b491bfc50cafb98cecb/src/mcp/tools/camera/smolvlm2_optimized.py"
+        },
+        {
+          "path": "src/mcp/tools/providers/vllm_openai_provider.py",
+          "bytes": 3198,
+          "sha256": "46902a8b5fba10ee5a70ac3bb2da775ede1a78cf0898d61292835520be87ec2e",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ASSISTENTE-SHI/d60749a608b3c1317b527b491bfc50cafb98cecb/src/mcp/tools/providers/vllm_openai_provider.py"
+        },
+        {
+          "path": "src/audio_tts/local_tts_fallback.py",
+          "bytes": 2235,
+          "sha256": "b2c359faec552146aeef639a7f41e72d032e79a1a3165fee4eb9cf733dd80977",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ASSISTENTE-SHI/d60749a608b3c1317b527b491bfc50cafb98cecb/src/audio_tts/local_tts_fallback.py"
+        },
+        {
+          "path": "src/utils/rag_manager.py",
+          "bytes": 17753,
+          "sha256": "7c504a332b905124b8cf1e2efa69b86c65b8289c63fb20b68713d2612b8b4d26",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ASSISTENTE-SHI/d60749a608b3c1317b527b491bfc50cafb98cecb/src/utils/rag_manager.py"
+        },
+        {
+          "path": "src/utils/ai_model_manager.py",
+          "bytes": 12343,
+          "sha256": "ed20ff33cb12a236095acd078f22a27d087b376bbe3a366fee9c9c6bb0b59e17",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/ASSISTENTE-SHI/d60749a608b3c1317b527b491bfc50cafb98cecb/src/utils/ai_model_manager.py"
+        }
+      ],
+      "rea": {
+        "status": "unsupported",
+        "success": false,
+        "primary": "MarceloClaroOrchestrator",
+        "scope": "main.py",
+        "receipt": "outputs/core-r890/b-ASSISTENTE-SHI-rea.json",
+        "receipt_sha256": "04e2366e759710236bf6a6bb6bd84d40b34e61d743259cd52350d11a0deb9a09",
+        "metacognition": null,
+        "limitations": [],
+        "error": "Tipo não reconhecido; informe --kind ou use uma camada explícita do REA."
+      },
+      "telemetry_markers": [],
+      "telemetry_scope": "directed selected-source scan; not a transitive dependency audit or guarantee of no telemetry",
+      "runtime_installed": false,
+      "target_executed": false,
+      "microphone_activated": false,
+      "camera_activated": false,
+      "external_validation": false,
+      "license": "MIT (root LICENSE)",
+      "priority": "medium_patterns_no_runtime_install",
+      "contribution": "Cliente de voz/PT-BR e adaptadores de visão como fronteiras opcionais de entrada/saída; não coordenador adicional.",
+      "overlap": "Fork de py-xiaozhi, protocolos e grande parte do cliente coincidem; não integrar os dois como runtimes independentes.",
+      "evidence": [
+        {
+          "file": "src/protocols/websocket_protocol.py",
+          "lines": [
+            13,
+            72,
+            81,
+            93
+          ],
+          "finding": "WSS usa contexto SSL sem verificação de certificado."
+        },
+        {
+          "file": "src/audio_tts/local_tts_fallback.py",
+          "lines": [
+            25,
+            57,
+            63,
+            65
+          ],
+          "finding": "Fallback chamado local usa gTTS via internet."
+        },
+        {
+          "file": "src/mcp/tools/camera/smolvlm2_optimized.py",
+          "lines": [
+            118,
+            120,
+            143,
+            148,
+            163,
+            167
+          ],
+          "finding": "from_pretrained com trust_remote_code=True; download/execução dependem de preparação e revisão."
+        },
+        {
+          "file": "src/utils/config_manager.py",
+          "lines": [
+            22,
+            27,
+            45
+          ],
+          "finding": "Defaults de ativação/OTA e Vision incluem serviços remotos."
+        }
+      ],
+      "network": "Híbrido e remoto por default em partes do cliente; Ollama/SmolVLM2 não tornam todo o fluxo offline.",
+      "constraints": [
+        "Não ativado microfone/câmera; não iniciados GUI/Ollama/serviços.",
+        "Não importar ferramentas MCP de sistema, calendário e captura indiscriminadamente.",
+        "Certificado TLS e fallback de rede devem ser corrigidos antes de eventual integração.",
+        "Alegações README de velocidade/sucesso não foram reproduzidas."
+      ]
+    },
+    {
+      "repository": "MarceloClaro/py-xiaozhi",
+      "url": "https://github.com/MarceloClaro/py-xiaozhi",
+      "commit": "2c6eca47873d19f5fc7227a1d0460926c1b55e69",
+      "commit_date": "2026-01-12T17:06:29-03:00",
+      "branch": "main",
+      "retrieved_utc": "2026-10-14T14:47:56.251568+00:00",
+      "source_method": "shallow bare clone, filter=blob:none, no checkout or execution",
+      "repository_path_count": 288,
+      "selected_file_count": 16,
+      "selected_bytes": 197890,
+      "source_files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1063,
+          "sha256": "49ddd0fdc520a6e936b6c618dbcc66055d31b746ddd1972337f2a6e96135ba4d",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/py-xiaozhi/2c6eca47873d19f5fc7227a1d0460926c1b55e69/LICENSE"
+        },
+        {
+          "path": "README.en.md",
+          "bytes": 15844,
+          "sha256": "049b92979f37590a075e7d178b5197a28e82a19f4938b0fd6b0ee767d9566e51",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/py-xiaozhi/2c6eca47873d19f5fc7227a1d0460926c1b55e69/README.en.md"
+        },
+        {
+          "path": "pyproject.toml",
+          "bytes": 549,
+          "sha256": "276d72ed1d112c9a432f5bc6e774b99d64fea962362305ff11669ed8c8afcce2",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/py-xiaozhi/2c6eca47873d19f5fc7227a1d0460926c1b55e69/pyproject.toml"
+        },
+        {
+          "path": "requirements.txt",
+          "bytes": 763,
+          "sha256": "2350f3061d111a54b8aa7d15ea516aa3d91a679dea05d5e16b6f0ca8812759f0",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/py-xiaozhi/2c6eca47873d19f5fc7227a1d0460926c1b55e69/requirements.txt"
+        },
+        {
+          "path": "main.py",
+          "bytes": 5343,
+          "sha256": "63e10faca221dfcbdc9edc0c86bf3b5f9fea7675af652cb87d2b3305516bf4c0",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/py-xiaozhi/2c6eca47873d19f5fc7227a1d0460926c1b55e69/main.py"
+        },
+        {
+          "path": "src/application.py",
+          "bytes": 19437,
+          "sha256": "391721aa274c15a65294dfb485a449d9345bbdb5dc54df1b6808f96dc4ae359d",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/py-xiaozhi/2c6eca47873d19f5fc7227a1d0460926c1b55e69/src/application.py"
+        },
+        {
+          "path": "src/protocols/websocket_protocol.py",
+          "bytes": 21415,
+          "sha256": "d21671272c22870b64cc81a3aad3e815951b584ce11465ba405589774805fda2",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/py-xiaozhi/2c6eca47873d19f5fc7227a1d0460926c1b55e69/src/protocols/websocket_protocol.py"
+        },
+        {
+          "path": "src/protocols/mqtt_protocol.py",
+          "bytes": 34413,
+          "sha256": "ecf4a61db746a893135be450e43f1320d3ea8bb9a8fbb7bb2f75b0ef3458ea95",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/py-xiaozhi/2c6eca47873d19f5fc7227a1d0460926c1b55e69/src/protocols/mqtt_protocol.py"
+        },
+        {
+          "path": "src/utils/config_manager.py",
+          "bytes": 10839,
+          "sha256": "84420d48e02d0839c15b8dec4e4bb3c583b6ef8b8020ef18180c7c7e7421f113",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/py-xiaozhi/2c6eca47873d19f5fc7227a1d0460926c1b55e69/src/utils/config_manager.py"
+        },
+        {
+          "path": "src/mcp/mcp_server.py",
+          "bytes": 18841,
+          "sha256": "7774cba4b9f458fa9991569c8f4dc47c31ac137c52f97807ce02080f95b418a1",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/py-xiaozhi/2c6eca47873d19f5fc7227a1d0460926c1b55e69/src/mcp/mcp_server.py"
+        },
+        {
+          "path": "src/plugins/audio.py",
+          "bytes": 8870,
+          "sha256": "1eed43351af261ad0c8d4b0f0e0850b26b445ff0914842e2a9cf3c3a271a9282",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/py-xiaozhi/2c6eca47873d19f5fc7227a1d0460926c1b55e69/src/plugins/audio.py"
+        },
+        {
+          "path": "src/audio_processing/wake_word_detect.py",
+          "bytes": 11517,
+          "sha256": "c92578a1a4f11e28fca586063ce3e2cf0d17fbb7b0029bffedf2012c4c9b98c7",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/py-xiaozhi/2c6eca47873d19f5fc7227a1d0460926c1b55e69/src/audio_processing/wake_word_detect.py"
+        },
+        {
+          "path": "src/utils/device_activator.py",
+          "bytes": 13495,
+          "sha256": "273bcbf68967bed184bd78adde7bc96d93ef1eeb8410628b7e6f3e313bdac329",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/py-xiaozhi/2c6eca47873d19f5fc7227a1d0460926c1b55e69/src/utils/device_activator.py"
+        },
+        {
+          "path": "src/utils/device_fingerprint.py",
+          "bytes": 16180,
+          "sha256": "7a027eef614c235d07d2ec5c8c3832208753a7666825bf63f74a18fe9466caa6",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/py-xiaozhi/2c6eca47873d19f5fc7227a1d0460926c1b55e69/src/utils/device_fingerprint.py"
+        },
+        {
+          "path": "README.md",
+          "bytes": 14128,
+          "sha256": "5aa4ec55a22817f86a24653b5a7943db8b693644ed8dbe3f7462fe9fba6add25",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/py-xiaozhi/2c6eca47873d19f5fc7227a1d0460926c1b55e69/README.md"
+        },
+        {
+          "path": "src/mcp/tools/camera/vl_camera.py",
+          "bytes": 5193,
+          "sha256": "f5e51e21087f258d20d61b21f4c1bd9c78d30e97631314a4d5dff8244b8827e0",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/py-xiaozhi/2c6eca47873d19f5fc7227a1d0460926c1b55e69/src/mcp/tools/camera/vl_camera.py"
+        }
+      ],
+      "rea": {
+        "status": "unsupported",
+        "success": false,
+        "primary": "MarceloClaroOrchestrator",
+        "scope": "main.py",
+        "receipt": "outputs/core-r890/b-py-xiaozhi-rea.json",
+        "receipt_sha256": "84cd52e17675a2e5a3567dbdf7d5ac9f591cd3070f1da574193da2aed1454ed6",
+        "metacognition": null,
+        "limitations": [],
+        "error": "Tipo não reconhecido; informe --kind ou use uma camada explícita do REA."
+      },
+      "telemetry_markers": [],
+      "telemetry_scope": "directed selected-source scan; not a transitive dependency audit or guarantee of no telemetry",
+      "runtime_installed": false,
+      "target_executed": false,
+      "microphone_activated": false,
+      "camera_activated": false,
+      "external_validation": false,
+      "license": "MIT (root LICENSE)",
+      "priority": "low_medium_due_to_shi_overlap",
+      "contribution": "Referência do protocolo assíncrono de áudio, estados de escuta e contrato MCP de dispositivo.",
+      "overlap": "Ancestral do cliente SHI; um único adaptador de transporte deve servir ao Core.",
+      "evidence": [
+        {
+          "file": "src/protocols/websocket_protocol.py",
+          "lines": [
+            13,
+            72,
+            81,
+            93
+          ],
+          "finding": "Mesmo contexto WSS sem validação de certificado."
+        },
+        {
+          "file": "src/utils/config_manager.py",
+          "lines": [
+            22,
+            27,
+            45
+          ],
+          "finding": "OTA, ativação e Vision remotos configurados por default."
+        },
+        {
+          "file": "src/utils/device_fingerprint.py",
+          "lines": [
+            126,
+            131,
+            139,
+            146,
+            147
+          ],
+          "finding": "Identidade persistida inclui informações de máquina e rede; não equivale a telemetria anônima."
+        },
+        {
+          "file": "requirements.txt",
+          "finding": "Cliente depende de PyQt5, sounddevice, Opus, sherpa-onnx e numpy1.26.4; compatibilidade com venv Python3.14 Core não foi demonstrada."
+        }
+      ],
+      "network": "Serviço Xiaozhi remoto e endpoints configuráveis; local-only não é garantido.",
+      "constraints": [
+        "Sem runtime instalado ou entrada de áudio acionada.",
+        "Não duplicar memória ou ferramentas do orquestrador.",
+        "Aplicar isolamento de dependências se um cliente for adotado futuramente."
+      ]
+    },
+    {
+      "repository": "MarceloClaro/xiaozhi-esp32-server",
+      "url": "https://github.com/MarceloClaro/xiaozhi-esp32-server",
+      "commit": "1f6a89ada5375ac10f09c5246ef8c6f389aef167",
+      "commit_date": "2026-01-09T14:32:22+08:00",
+      "branch": "main",
+      "retrieved_utc": "2026-10-14T14:47:57.299094+00:00",
+      "source_method": "shallow bare clone, filter=blob:none, no checkout or execution",
+      "repository_path_count": 984,
+      "selected_file_count": 19,
+      "selected_bytes": 169790,
+      "source_files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1068,
+          "sha256": "65e7d56732b4b42f2efcd0cba4d199d153b3faa9cc6def8bfad90f0d8193d273",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/xiaozhi-esp32-server/1f6a89ada5375ac10f09c5246ef8c6f389aef167/LICENSE"
+        },
+        {
+          "path": "README_en.md",
+          "bytes": 21438,
+          "sha256": "ca4ac34facc700ffbaf2ec827cb97b767a5bfd51cb982195458cd42faf68828a",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/xiaozhi-esp32-server/1f6a89ada5375ac10f09c5246ef8c6f389aef167/README_en.md"
+        },
+        {
+          "path": "main/xiaozhi-server/app.py",
+          "bytes": 5236,
+          "sha256": "5b9bf810e935b9d5a29a0c042ebdc06a677123b8f5c60e740763fe9d5b821b53",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/xiaozhi-esp32-server/1f6a89ada5375ac10f09c5246ef8c6f389aef167/main/xiaozhi-server/app.py"
+        },
+        {
+          "path": "main/xiaozhi-server/requirements.txt",
+          "bytes": 852,
+          "sha256": "02e7d856c2fcec480df97fc50ac38f196239cee6935e83da4310cf544a7a97a7",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/xiaozhi-esp32-server/1f6a89ada5375ac10f09c5246ef8c6f389aef167/main/xiaozhi-server/requirements.txt"
+        },
+        {
+          "path": "main/xiaozhi-server/config.yaml",
+          "bytes": 49135,
+          "sha256": "064075da6043366f8c4970f660618e2c697cf4f531f4bc02d95010fae48fe389",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/xiaozhi-esp32-server/1f6a89ada5375ac10f09c5246ef8c6f389aef167/main/xiaozhi-server/config.yaml"
+        },
+        {
+          "path": "main/xiaozhi-server/core/auth.py",
+          "bytes": 2388,
+          "sha256": "27b0af12c591c97a532ccf95ee7c28c088482ea942faf749ef8c6670ac651e90",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/xiaozhi-esp32-server/1f6a89ada5375ac10f09c5246ef8c6f389aef167/main/xiaozhi-server/core/auth.py"
+        },
+        {
+          "path": "main/xiaozhi-server/core/connection.py",
+          "bytes": 52192,
+          "sha256": "691d1d293d3bfd43b06a1313f2fbfc282d0ae6113ab78d28ada280de90f26d0c",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/xiaozhi-esp32-server/1f6a89ada5375ac10f09c5246ef8c6f389aef167/main/xiaozhi-server/core/connection.py"
+        },
+        {
+          "path": "main/xiaozhi-server/core/websocket_server.py",
+          "bytes": 9395,
+          "sha256": "b393dd1f44c66b304449126bd694f3d0d2f7d6bbe76443d80da4271da88da7bb",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/xiaozhi-esp32-server/1f6a89ada5375ac10f09c5246ef8c6f389aef167/main/xiaozhi-server/core/websocket_server.py"
+        },
+        {
+          "path": "main/xiaozhi-server/core/providers/asr/sherpa_onnx_local.py",
+          "bytes": 6119,
+          "sha256": "460eececa1aaafb5184e81dbcf67077fee13f29a89bbfefda567ebef9dbb664c",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/xiaozhi-esp32-server/1f6a89ada5375ac10f09c5246ef8c6f389aef167/main/xiaozhi-server/core/providers/asr/sherpa_onnx_local.py"
+        },
+        {
+          "path": "main/xiaozhi-server/core/providers/asr/vosk.py",
+          "bytes": 4372,
+          "sha256": "912d67c14dd2007eecf58b27c0f60dba6321433615254ac87bc7a653ee4385c7",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/xiaozhi-esp32-server/1f6a89ada5375ac10f09c5246ef8c6f389aef167/main/xiaozhi-server/core/providers/asr/vosk.py"
+        },
+        {
+          "path": "main/xiaozhi-server/core/providers/asr/openai.py",
+          "bytes": 3004,
+          "sha256": "69a57e49c65770e9576931eafd1d88a3afb46fc1c92cd5a9302e0afefffc247d",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/xiaozhi-esp32-server/1f6a89ada5375ac10f09c5246ef8c6f389aef167/main/xiaozhi-server/core/providers/asr/openai.py"
+        },
+        {
+          "path": "main/xiaozhi-server/core/providers/tts/edge.py",
+          "bytes": 1811,
+          "sha256": "81005591329da614c9ea7ee1b6d5b3f0dc848b6cf3ed715358c84754e7fa7f83",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/xiaozhi-esp32-server/1f6a89ada5375ac10f09c5246ef8c6f389aef167/main/xiaozhi-server/core/providers/tts/edge.py"
+        },
+        {
+          "path": "main/xiaozhi-server/core/providers/tts/default.py",
+          "bytes": 742,
+          "sha256": "528be7df708e32f8331011dd24037aaa74699bf6356624ff3e1801dd29d3c51e",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/xiaozhi-esp32-server/1f6a89ada5375ac10f09c5246ef8c6f389aef167/main/xiaozhi-server/core/providers/tts/default.py"
+        },
+        {
+          "path": "main/xiaozhi-server/core/providers/tts/openai.py",
+          "bytes": 1967,
+          "sha256": "8dd1c8843f698621cd37c2f2e36ae33aa69ddd881ef4126f9316c48c4ccc8e84",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/xiaozhi-esp32-server/1f6a89ada5375ac10f09c5246ef8c6f389aef167/main/xiaozhi-server/core/providers/tts/openai.py"
+        },
+        {
+          "path": "main/xiaozhi-server/core/utils/asr.py",
+          "bytes": 839,
+          "sha256": "0266133babc9bf9ce26960520843a53d106dbafc4a2d060bb44d1d1f19590fee",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/xiaozhi-esp32-server/1f6a89ada5375ac10f09c5246ef8c6f389aef167/main/xiaozhi-server/core/utils/asr.py"
+        },
+        {
+          "path": "main/xiaozhi-server/core/utils/tts.py",
+          "bytes": 5036,
+          "sha256": "69d02a947239517d963f6d93d36a972899e89c776c5d7379439dbf111c6d00e4",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/xiaozhi-esp32-server/1f6a89ada5375ac10f09c5246ef8c6f389aef167/main/xiaozhi-server/core/utils/tts.py"
+        },
+        {
+          "path": "main/manager-web/package.json",
+          "bytes": 1250,
+          "sha256": "d04a9065e1618a050fc82a9519b94ed6e5dba185afa81516c67357303f3fef14",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/xiaozhi-esp32-server/1f6a89ada5375ac10f09c5246ef8c6f389aef167/main/manager-web/package.json"
+        },
+        {
+          "path": "main/manager-web/src/main.js",
+          "bytes": 764,
+          "sha256": "36f38af7658a900f4eb5fe4c1ad370fc566a06b92ba8fde44cc04aa7000807ad",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/xiaozhi-esp32-server/1f6a89ada5375ac10f09c5246ef8c6f389aef167/main/manager-web/src/main.js"
+        },
+        {
+          "path": "main/manager-web/src/store/index.js",
+          "bytes": 2182,
+          "sha256": "5735db1c14b35febec1f327349bc49c543b03f8abcdc37a32ff4d2a021359d90",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/xiaozhi-esp32-server/1f6a89ada5375ac10f09c5246ef8c6f389aef167/main/manager-web/src/store/index.js"
+        }
+      ],
+      "rea": {
+        "status": "completed",
+        "success": true,
+        "primary": "MarceloClaroOrchestrator",
+        "scope": "main/manager-web",
+        "receipt": "outputs/core-r890/b-xiaozhi-esp32-server-rea.json",
+        "receipt_sha256": "67705bc3a04cfa2682e383bafc91dbb3e22799327a95e5f778b69213b07b555e",
+        "metacognition": {
+          "observation_id": "5539c606-4881-40c6-a6c7-05673696eee0",
+          "persisted": true,
+          "scope_id": "d7c3744b4452f44cf582efd46c225804d007fa9abd77e6ae941a32ff32111d4a",
+          "previous_observation_id": null,
+          "state_transition": {
+            "from": null,
+            "to": "completed"
+          },
+          "confidence_promoted": false,
+          "externally_validated": false
+        },
+        "limitations": [
+          "CommonJS and ESM binding relationships were recovered from inert syntax and resolved only within the inventoried artifact container.",
+          "JavaScript and HTML were parsed as inert text; bundle bootstrap code was never executed.",
+          "Static imports, entrypoints, workers, endpoints, and storage relationships do not prove runtime execution.",
+          "Static paths and relationships may remain unresolved when expressions are dynamic or obfuscated.",
+          "Webpack/Rspack factories were recovered from AST literals; REA did not invoke push handlers or bundle bootstrap code."
+        ],
+        "evidence_id": "ev_34ea8693df38386f853a44ad6e4a351585b1fa75f7ec3d853b8443c08a981081",
+        "statistics": {
+          "relevant_files": 3,
+          "nested_asar_containers": 0,
+          "text_bytes_read": 4196,
+          "invalid_utf8_files": 0,
+          "parsed_javascript_files": 2,
+          "visited_ast_nodes": 406,
+          "findings": 40,
+          "modules": 0,
+          "parse_failures": 0
+        },
+        "nodes": 40,
+        "edges": 46,
+        "rea_commit": "4daea941bfeeb426886f2d048aed7f3cb2dbf97b"
+      },
+      "telemetry_markers": [],
+      "telemetry_scope": "directed selected-source scan; not a transitive dependency audit or guarantee of no telemetry",
+      "runtime_installed": false,
+      "target_executed": false,
+      "microphone_activated": false,
+      "camera_activated": false,
+      "external_validation": false,
+      "license": "MIT (root LICENSE)",
+      "priority": "medium_optional_voice_provider_patterns",
+      "contribution": "Separação de VAD/ASR/LLM/TTS e providers substituíveis; útil para metadados de capacidades e política de fallback.",
+      "overlap": "É servidor autônomo com memória/plugins próprios; preferir um adaptador subordinado ao primário, não hospedar outro ecossistema inteiro.",
+      "evidence": [
+        {
+          "file": "main/xiaozhi-server/config.yaml",
+          "lines": [
+            11,
+            12,
+            14,
+            31,
+            33,
+            59,
+            213,
+            217,
+            219,
+            223
+          ],
+          "finding": "Listen 0.0.0.0, auth.enabled=false por default, delete_audio=true e seleção explícita ASR/LLM/TTS."
+        },
+        {
+          "file": "main/xiaozhi-server/core/providers/asr/sherpa_onnx_local.py",
+          "lines": [
+            14,
+            59,
+            60,
+            78,
+            88
+          ],
+          "finding": "ASR local baixa modelo ausente via ModelScope antes de usar recognizer offline."
+        },
+        {
+          "file": "main/xiaozhi-server/core/connection.py",
+          "lines": [
+            27,
+            100,
+            103,
+            104,
+            1056,
+            1079
+          ],
+          "finding": "Pipeline de relatórios de fala depende de configuração obtida pela API; não assumir ausência de persistência/transmissão por delete_audio."
+        },
+        {
+          "file": "main/xiaozhi-server/requirements.txt",
+          "finding": "Recomenda Python3.10 e fixa torch/torchaudio2.2.2,numpy1.26.4; não foi instalado na venv3.14 Core."
+        }
+      ],
+      "network": "Providers locais e remotos coexistem. Default de TTS EdgeTTS e LLM ChatGLMLLM não representa fluxo exclusivamente local.",
+      "constraints": [
+        "Sem servidor, modelos, contas ou websocket de dispositivo ativados.",
+        "Auth/listen e retenção de voz exigem configuração específica antes de uso.",
+        "REA cobre apenas três arquivos do manager-web selecionado, não o backend Python."
+      ]
+    },
+    {
+      "repository": "MarceloClaro/xiaozhi-esp32",
+      "url": "https://github.com/MarceloClaro/xiaozhi-esp32",
+      "commit": "b48506171b89f25eff99f46d18ac7808cd3564b6",
+      "commit_date": "2026-01-10T16:29:12+08:00",
+      "branch": "main",
+      "retrieved_utc": "2026-10-14T14:47:58.362058+00:00",
+      "source_method": "shallow bare clone, filter=blob:none, no checkout or execution",
+      "repository_path_count": 1375,
+      "selected_file_count": 12,
+      "selected_bytes": 146587,
+      "source_files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1140,
+          "sha256": "0a5a839033bfe18fe75d32b50d9d028912cf876f69ef59c2791aeb2971335d05",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/xiaozhi-esp32/b48506171b89f25eff99f46d18ac7808cd3564b6/LICENSE"
+        },
+        {
+          "path": "README.md",
+          "bytes": 9384,
+          "sha256": "79b89fce382fb8b758255c23bd38f30503656a89a3c69e5e457b88a9a3bd584f",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/xiaozhi-esp32/b48506171b89f25eff99f46d18ac7808cd3564b6/README.md"
+        },
+        {
+          "path": "main/idf_component.yml",
+          "bytes": 2931,
+          "sha256": "2306ce76dad38191727fd0c95eaca9624907f8d906a112960f8034eb5378ebc7",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/xiaozhi-esp32/b48506171b89f25eff99f46d18ac7808cd3564b6/main/idf_component.yml"
+        },
+        {
+          "path": "main/main.cc",
+          "bytes": 823,
+          "sha256": "7f37b7c76b365bdc6370f4167f83c7e5205ab6d2acfd6b8ccf45c6f96303bb65",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/xiaozhi-esp32/b48506171b89f25eff99f46d18ac7808cd3564b6/main/main.cc"
+        },
+        {
+          "path": "main/application.cc",
+          "bytes": 37747,
+          "sha256": "19fc795bfb726db7814e2afe0615c4845ec2c46e11c1de9de754ac084e758536",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/xiaozhi-esp32/b48506171b89f25eff99f46d18ac7808cd3564b6/main/application.cc"
+        },
+        {
+          "path": "main/mcp_server.cc",
+          "bytes": 22115,
+          "sha256": "f2088e08456ed9996cb8f6ae454bb8e682ccde136886f96ce940c8efb5a663f8",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/xiaozhi-esp32/b48506171b89f25eff99f46d18ac7808cd3564b6/main/mcp_server.cc"
+        },
+        {
+          "path": "main/protocols/websocket_protocol.cc",
+          "bytes": 9536,
+          "sha256": "5d84b742cf071e180998dcedd11d4419b3940342e28f7a54f520c5f8d642a7c9",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/xiaozhi-esp32/b48506171b89f25eff99f46d18ac7808cd3564b6/main/protocols/websocket_protocol.cc"
+        },
+        {
+          "path": "main/protocols/mqtt_protocol.cc",
+          "bytes": 13576,
+          "sha256": "cb00beaeaeee75a25d6a013b542a3326dc323316308d123c5ff1a2f21a739f29",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/xiaozhi-esp32/b48506171b89f25eff99f46d18ac7808cd3564b6/main/protocols/mqtt_protocol.cc"
+        },
+        {
+          "path": "main/ota.cc",
+          "bytes": 15989,
+          "sha256": "13e437da1099ab85e087eb7ce1b0f6a27bc0912351d8997fd88d22b0ffd4beb9",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/xiaozhi-esp32/b48506171b89f25eff99f46d18ac7808cd3564b6/main/ota.cc"
+        },
+        {
+          "path": "docs/websocket.md",
+          "bytes": 17721,
+          "sha256": "c9f0e216d652f900e190bce8885e7ae2def51126df29c19e9ed485bc6c1e55b9",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/xiaozhi-esp32/b48506171b89f25eff99f46d18ac7808cd3564b6/docs/websocket.md"
+        },
+        {
+          "path": "docs/mcp-protocol.md",
+          "bytes": 9705,
+          "sha256": "4c43225d1abdc4922f561b93af9d1b00d4959b16ca5837955f09d2f411968b77",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/xiaozhi-esp32/b48506171b89f25eff99f46d18ac7808cd3564b6/docs/mcp-protocol.md"
+        },
+        {
+          "path": "scripts/sonic_wifi_config.html",
+          "bytes": 5920,
+          "sha256": "28361d2652a48fbdec95b605dfbc473e060b6cf8d0b8dee747cc395774aefc34",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/xiaozhi-esp32/b48506171b89f25eff99f46d18ac7808cd3564b6/scripts/sonic_wifi_config.html"
+        }
+      ],
+      "rea": {
+        "status": "completed",
+        "success": true,
+        "primary": "MarceloClaroOrchestrator",
+        "scope": "scripts/sonic_wifi_config.html",
+        "receipt": "outputs/core-r890/b-xiaozhi-esp32-rea.json",
+        "receipt_sha256": "22f8ad90a7b4ac431640392641c96b16a2d0ee28897422e21115b136a382f518",
+        "metacognition": {
+          "observation_id": "2b6726ad-9a87-4f73-a447-83ee78b60ac9",
+          "persisted": true,
+          "scope_id": "c87d43ce04605f7533aa99690b735226b696c7546c3ff0baca727b43c0876322",
+          "previous_observation_id": "45b103cb-0ff2-434b-a64c-3557537fb509",
+          "state_transition": {
+            "from": null,
+            "to": null
+          },
+          "confidence_promoted": false,
+          "externally_validated": false
+        },
+        "limitations": [
+          "A aplicação alvo não foi executada; achados são estáticos.",
+          "Inspeção e metadados não recuperam necessariamente o código-fonte original.",
+          "A garantia local cobre o worker; clientes de inferência em nuvem não fazem parte deste modo.",
+          "Links e scripts foram enumerados, sem acesso aos destinos nem execução de JavaScript."
+        ],
+        "target_unchanged": true,
+        "target_digest": {
+          "sha256": "28361d2652a48fbdec95b605dfbc473e060b6cf8d0b8dee747cc395774aefc34",
+          "files": 1,
+          "bytes": 5920,
+          "algorithm": "sha256"
+        },
+        "privacy": {
+          "mode": "isolated_local_analysis",
+          "network_namespace": "net:[4026532293]",
+          "pid_namespace": "pid:[4026532291]",
+          "interfaces": [
+            "lo"
+          ],
+          "external_route_available": false,
+          "host_probe_connected": false,
+          "scope": "analytical_worker_and_descendants; trusted_local_MCP_client_required"
+        },
+        "provider_report": {
+          "success": true,
+          "evidence_id": "ev_core_html_28361d2652a48fbdec95b605",
+          "operation": "inspect_local_html",
+          "title": "小智声波配网",
+          "declared_elements": {
+            "script": 1,
+            "form": 0,
+            "a": 0,
+            "input": 3
+          },
+          "references": []
+        }
+      },
+      "telemetry_markers": [],
+      "telemetry_scope": "directed selected-source scan; not a transitive dependency audit or guarantee of no telemetry",
+      "runtime_installed": false,
+      "target_executed": false,
+      "microphone_activated": false,
+      "camera_activated": false,
+      "external_validation": false,
+      "license": "MIT (root LICENSE)",
+      "priority": "medium_future_edge_device_reference",
+      "contribution": "Negociação explícita de formato Opus/sample_rate/canais e capacidades MCP no hello; distinção de ferramentas comuns e user-only.",
+      "overlap": "Firmware é terminal de borda, não executor de programação para o Core hospedeiro.",
+      "evidence": [
+        {
+          "file": "main/protocols/websocket_protocol.cc",
+          "lines": [
+            28,
+            105,
+            211,
+            215,
+            216,
+            217,
+            218
+          ],
+          "finding": "Transporte envia áudio e anuncia MCP/Opus16kHz/mono; credencial transportada via header."
+        },
+        {
+          "file": "main/mcp_server.cc",
+          "lines": [
+            33,
+            55,
+            68,
+            128,
+            318,
+            413
+          ],
+          "finding": "Registro de ferramentas controla volume/tela/dispositivo e separa user-only; não autoriza importar todas ao Core."
+        },
+        {
+          "file": "main/idf_component.yml",
+          "finding": "Firmware depende de ESP-IDF>=5.4 e componentes de hardware; não é pacote Python para instalar no Core."
+        },
+        {
+          "file": "scripts/sonic_wifi_config.html",
+          "finding": "REA inspecionou estaticamente HTML de configuração Wi-Fi; não emitiu som nem configurou rede/dispositivo."
+        }
+      ],
+      "network": "Firmware usa Wi-Fi/OTA/WebSocket/MQTT e serviços configuráveis; localidade depende do endpoint, do servidor e da política de transporte.",
+      "constraints": [
+        "Nenhum ESP32 conectado, compilado ou gravado.",
+        "Sem prova de áudio, latência, execução MCP em hardware ou inferência.",
+        "Não houve análise Ghidra de binário; apenas leitura C++ e inspeção HTML compatível."
+      ]
+    },
+    {
+      "repository": "MarceloClaro/anny",
+      "url": "https://github.com/MarceloClaro/anny",
+      "commit": "68a310e2a0eaa2dba1a9e0676525f99f94886bc4",
+      "commit_date": "2025-11-17T08:02:00-05:00",
+      "branch": "main",
+      "retrieved_utc": "2026-10-14T14:47:59.580246+00:00",
+      "source_method": "shallow bare clone, filter=blob:none, no checkout or execution",
+      "repository_path_count": 1782,
+      "selected_file_count": 19,
+      "selected_bytes": 162723,
+      "source_files": [
+        {
+          "path": "LICENSE",
+          "bytes": 10875,
+          "sha256": "1d459b13c9650c763d6351ce21ad3b02433c80131195cf9d908de4fbc213cf27",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/anny/68a310e2a0eaa2dba1a9e0676525f99f94886bc4/LICENSE"
+        },
+        {
+          "path": "README.md",
+          "bytes": 2320,
+          "sha256": "3d7ebd744cb9a670c305cedccf48d70aa69e06387bde3e2c407787e7b3dc679f",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/anny/68a310e2a0eaa2dba1a9e0676525f99f94886bc4/README.md"
+        },
+        {
+          "path": "pyproject.toml",
+          "bytes": 714,
+          "sha256": "5b80adc166b0042d671f42300c1f2c71e9f42b782940c2ce83ab123c7acc2dfc",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/anny/68a310e2a0eaa2dba1a9e0676525f99f94886bc4/pyproject.toml"
+        },
+        {
+          "path": "package.json",
+          "bytes": 3889,
+          "sha256": "8f06ba061daf14299e3d0d50a2c392a51d0c322255ea0b1dbe0dab6023f1a793",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/anny/68a310e2a0eaa2dba1a9e0676525f99f94886bc4/package.json"
+        },
+        {
+          "path": "server/_core/index.ts",
+          "bytes": 4450,
+          "sha256": "bcbcbe5de26ca3073016faacd02f78cda84eee6fd947cc6fc47e32c8545acae5",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/anny/68a310e2a0eaa2dba1a9e0676525f99f94886bc4/server/_core/index.ts"
+        },
+        {
+          "path": "server/_core/env.ts",
+          "bytes": 428,
+          "sha256": "15356c6c79afa61c60b20e126691853d07b51c48b9e57f205b7ce63dd02d622b",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/anny/68a310e2a0eaa2dba1a9e0676525f99f94886bc4/server/_core/env.ts"
+        },
+        {
+          "path": "server/_core/llm.ts",
+          "bytes": 7262,
+          "sha256": "c97e3f5b9662dccb7488d965630f90d1e57ea147228aa7ce5df6cc29cddb05c3",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/anny/68a310e2a0eaa2dba1a9e0676525f99f94886bc4/server/_core/llm.ts"
+        },
+        {
+          "path": "server/_core/voiceTranscription.ts",
+          "bytes": 8107,
+          "sha256": "c53b328b12e54adfacbc632e668c2b58b9954547ce9d3313907096c8b2db330c",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/anny/68a310e2a0eaa2dba1a9e0676525f99f94886bc4/server/_core/voiceTranscription.ts"
+        },
+        {
+          "path": "server/_core/notification.ts",
+          "bytes": 3139,
+          "sha256": "550bf6544bf792b6d13c68539679deb363b70fbf07c0dbde189a98787f66f003",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/anny/68a310e2a0eaa2dba1a9e0676525f99f94886bc4/server/_core/notification.ts"
+        },
+        {
+          "path": "server/routers.ts",
+          "bytes": 26999,
+          "sha256": "4cea5c07b203c616bf13878b56880bd7e1c8c5f1263bb38af5b74873716011c5",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/anny/68a310e2a0eaa2dba1a9e0676525f99f94886bc4/server/routers.ts"
+        },
+        {
+          "path": "server/multi_vision_analyzer.py",
+          "bytes": 6742,
+          "sha256": "ce225eb35d7632653c0d099736e0178a388d795cc188fc63e1d5984202fbb767",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/anny/68a310e2a0eaa2dba1a9e0676525f99f94886bc4/server/multi_vision_analyzer.py"
+        },
+        {
+          "path": "server/audit_logger.py",
+          "bytes": 10123,
+          "sha256": "4d11dd3e09913b544d45d969b8ac2c0bbc0fd32cf044cd5c0df2e1eedd340682",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/anny/68a310e2a0eaa2dba1a9e0676525f99f94886bc4/server/audit_logger.py"
+        },
+        {
+          "path": "server/skin_classifier.py",
+          "bytes": 8555,
+          "sha256": "8b349962cec7946116d1d074ec7184f84144978afea601288b27aae2387da773",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/anny/68a310e2a0eaa2dba1a9e0676525f99f94886bc4/server/skin_classifier.py"
+        },
+        {
+          "path": "server/gemini_vision_analyzer.py",
+          "bytes": 12069,
+          "sha256": "be2391ebc0ea454d3f013b55c5f7988f138fd8c1d5438c77a7a874a8d173e3d1",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/anny/68a310e2a0eaa2dba1a9e0676525f99f94886bc4/server/gemini_vision_analyzer.py"
+        },
+        {
+          "path": "client/index.html",
+          "bytes": 895,
+          "sha256": "57731b38f12cc7367a9213075e76e67c8f14ad914e088fafc6722ee9a98cea0e",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/anny/68a310e2a0eaa2dba1a9e0676525f99f94886bc4/client/index.html"
+        },
+        {
+          "path": "client/src/pages/SkinClassifier.tsx",
+          "bytes": 18417,
+          "sha256": "0d8af3403c6888c5735f97232534aa0254dcfeac8f0d5bc4eebecfb85f362f18",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/anny/68a310e2a0eaa2dba1a9e0676525f99f94886bc4/client/src/pages/SkinClassifier.tsx"
+        },
+        {
+          "path": "src/anny/models/full_model.py",
+          "bytes": 30397,
+          "sha256": "c8c86779269f9be891fdf4268aeb472cfedac7a74404198a0f331b91e57e4a9d",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/anny/68a310e2a0eaa2dba1a9e0676525f99f94886bc4/src/anny/models/full_model.py"
+        },
+        {
+          "path": "src/anny/paths.py",
+          "bytes": 380,
+          "sha256": "83b54ba30521a8d51822fddabaaf11de5a55735d734022ddc3ebcf991fe74da8",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/anny/68a310e2a0eaa2dba1a9e0676525f99f94886bc4/src/anny/paths.py"
+        },
+        {
+          "path": "src/anny/data/mpfb2/LICENSE.md",
+          "bytes": 6962,
+          "sha256": "f6089cba01cb570a24712b41ab8a586ccd3cc5ef53dc266ca50b95c288956d2c",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/anny/68a310e2a0eaa2dba1a9e0676525f99f94886bc4/src/anny/data/mpfb2/LICENSE.md"
+        }
+      ],
+      "rea": {
+        "status": "completed",
+        "success": true,
+        "primary": "MarceloClaroOrchestrator",
+        "scope": "client/index.html",
+        "receipt": "outputs/core-r890/b-anny-rea.json",
+        "receipt_sha256": "319b6097ac7c4e0067e8f3e742a48bd9e9cc39667a6960d4cf8dadc2ef132dfb",
+        "metacognition": {
+          "observation_id": "ccae4513-7035-4136-a946-ba0b17291cc3",
+          "persisted": true,
+          "scope_id": "c87d43ce04605f7533aa99690b735226b696c7546c3ff0baca727b43c0876322",
+          "previous_observation_id": "2b6726ad-9a87-4f73-a447-83ee78b60ac9",
+          "state_transition": {
+            "from": null,
+            "to": null
+          },
+          "confidence_promoted": false,
+          "externally_validated": false
+        },
+        "limitations": [
+          "A aplicação alvo não foi executada; achados são estáticos.",
+          "Inspeção e metadados não recuperam necessariamente o código-fonte original.",
+          "A garantia local cobre o worker; clientes de inferência em nuvem não fazem parte deste modo.",
+          "Links e scripts foram enumerados, sem acesso aos destinos nem execução de JavaScript."
+        ],
+        "target_unchanged": true,
+        "target_digest": {
+          "sha256": "57731b38f12cc7367a9213075e76e67c8f14ad914e088fafc6722ee9a98cea0e",
+          "files": 1,
+          "bytes": 895,
+          "algorithm": "sha256"
+        },
+        "privacy": {
+          "mode": "isolated_local_analysis",
+          "network_namespace": "net:[4026532295]",
+          "pid_namespace": "pid:[4026532293]",
+          "interfaces": [
+            "lo"
+          ],
+          "external_route_available": false,
+          "host_probe_connected": false,
+          "scope": "analytical_worker_and_descendants; trusted_local_MCP_client_required"
+        },
+        "provider_report": {
+          "success": true,
+          "evidence_id": "ev_core_html_57731b38f12cc7367a921307",
+          "operation": "inspect_local_html",
+          "title": "%VITE_APP_TITLE%",
+          "declared_elements": {
+            "script": 2,
+            "form": 0,
+            "a": 0,
+            "input": 0
+          },
+          "references": [
+            {
+              "tag": "link",
+              "attribute": "href",
+              "value": "%VITE_APP_LOGO%"
+            },
+            {
+              "tag": "link",
+              "attribute": "href",
+              "value": "%VITE_APP_LOGO%"
+            },
+            {
+              "tag": "script",
+              "attribute": "src",
+              "value": "/src/main.tsx"
+            },
+            {
+              "tag": "script",
+              "attribute": "src",
+              "value": "%VITE_ANALYTICS_ENDPOINT%/umami"
+            }
+          ]
+        }
+      },
+      "telemetry_markers": [
+        {
+          "file": "client/index.html",
+          "line": 24,
+          "term": "umami"
+        },
+        {
+          "file": "client/index.html",
+          "line": 25,
+          "term": "analytics"
+        }
+      ],
+      "telemetry_scope": "directed selected-source scan; not a transitive dependency audit or guarantee of no telemetry",
+      "runtime_installed": false,
+      "target_executed": false,
+      "microphone_activated": false,
+      "camera_activated": false,
+      "external_validation": false,
+      "license": "Apache-2.0 para Anny body; CC0-1.0 para assets MPFB2 segundo README; package.json da aplicação web declara MIT (licenciamento heterogêneo).",
+      "priority": "low_for_core_orchestration",
+      "contribution": "Somente padrões de fronteira multimodal/auditoria; modelo de corpo humano pode apoiar avatar/visão no futuro se houver objetivo específico.",
+      "overlap": "Fork mistura src/anny (modelo de corpo em PyTorch) com aplicação de classificação de pele React/Express e providers Vision; não importar o repositório inteiro.",
+      "evidence": [
+        {
+          "file": "README.md",
+          "finding": "README apresenta modelo de corpo humano, enquanto package.json descreve skin_cancer_classifier_k230_page."
+        },
+        {
+          "file": "server/_core/llm.ts",
+          "lines": [
+            212,
+            215,
+            315,
+            319
+          ],
+          "finding": "Helper LLM chama Forge remoto por default."
+        },
+        {
+          "file": "server/_core/voiceTranscription.ts",
+          "lines": [
+            97,
+            106,
+            109,
+            111,
+            146
+          ],
+          "finding": "Helper baixa audioUrl e só depois confere limite16MB; envia à API STT configurada. Exposição desse helper em deploy não foi demonstrada."
+        },
+        {
+          "file": "client/index.html",
+          "lines": [
+            13,
+            14,
+            15,
+            24,
+            25
+          ],
+          "finding": "Google Fonts e script Umami com placeholders de analytics estão declarados no HTML."
+        },
+        {
+          "file": "server/multi_vision_analyzer.py",
+          "lines": [
+            168
+          ],
+          "finding": "Texto contém sensibilidade/especificidade aproximada82%; não é medida executada nesta avaliação nem validação clínica."
+        }
+      ],
+      "network": "Aplicação web contém integrações remotas de LLM/visão/STT/analytics; pacote de corpo e aplicação web têm escopos distintos.",
+      "constraints": [
+        "Sem datasets, imagens, modelos, treino ou inferência médica baixados/executados.",
+        "Não transferir alegações de classificação/diagnóstico para o Core.",
+        "Licenças de subcomponentes e dados devem permanecer separadas.",
+        "REA HTML confirma referências declaradas; não confirma envio de dados ou configuração de analytics em produção."
+      ]
+    }
+  ],
+  "adaptation_proposal": {
+    "status": "proposed_only_not_implemented",
+    "name": "explicit_modality_and_network_policy_before_provider_fallback",
+    "existing_core_files": [
+      "integrations/harness_runtime.py",
+      "integrations/harness/model_registry.py",
+      "marceloclaro/autonomous.py",
+      "mci/blackboard.py"
+    ],
+    "contract": [
+      "Declare input/output modalities and endpoint/network requirements separately from installation and authentication.",
+      "When local_only is required, providers requiring remote service or automatic download are ineligible; undeclared locality must not be treated as local.",
+      "Do not switch to gTTS/remoteVision/STT silently; return blocked/degraded with reason and preserve primary coordination.",
+      "Microphone, camera, ESP32 tools and runtime setup remain explicit separate actions."
+    ],
+    "acceptance_tests": [
+      "Remote fallback rejected for local_only task even if provider filename contains local.",
+      "Unknown modality or undeclared locality fails closed.",
+      "Existing text workflow still routes without activating capture hardware.",
+      "Declared local provider still requires actual readiness evidence; no trust promotion from labels."
+    ]
+  },
+  "conclusion": "Prefer selective contracts and one adapter per role; none of the five should replace the Core primary or be imported wholesale."
+}

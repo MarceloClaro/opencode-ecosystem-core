@@ -20788,6 +20788,57 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R889",
+      "objective": "Aceitar o índice local somente com corpus integral auditado e recuperação limitada",
+      "changes": [
+        "Validação de schema/IDs/hashes do SQLite, recusa de índices parciais e de symlinks privados; candidatos retomáveis com orçamento global.",
+        "Execução no Core no commit 818d951: 763/763 fontes, 8.024 símbolos/vetores/FTS, zero erros finais após 15 passadas em 3 operações.",
+        "Consultas do primário, briefing no Blackboard e fachada MCP stdio reais aprovados, ledger inalterado; 59 regressões de retomada e 149 combinadas com R890."
+      ],
+      "score": null,
+      "lessons": [
+        "Exit code zero + ping não bastam para prontidão. Recuperação não comprova causa upstream eliminada.",
+        "Corpus integral selecionado não equivale a qualidade semântica global; três ferramentas de grafo permanecem bloqueadas."
+      ],
+      "timestamp": 1791990911.8518648,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R890",
+      "objective": "Avaliar quinze repositórios e corrigir o contrato da simulação clássica existente",
+      "changes": [
+        "Quinze forks fixados, 174 fontes selecionadas e 4 inspeções REA compatíveis; runtimes externos não instalados.",
+        "Simulação declara backend clássico, consulta não avaliada, seed 0..2**63-1, qubits 2..20 e orçamento antes da alocação; métricas TVD/support_mass/Shannon e digest.",
+        "Primário e MetaBus conservam proveniência compacta sem promover confiança; 41 testes R890 incluídos em 291 regressões aprovadas; 52 regressões documentais passaram."
+      ],
+      "score": null,
+      "lessons": [
+        "Simulação não equivale a QPU, vantagem quântica ou interpretação de query; Shannon de medição não prova emaranhamento.",
+        "Voz, dispositivos, SQL e comunicação têm contratos/efeitos próprios. Repositório denominado local não assegura offline.",
+        "RED local preservado não é custódia externa histórica; suíte global continua incompleta."
+      ],
+      "timestamp": 1791990911.85211,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ]
 }

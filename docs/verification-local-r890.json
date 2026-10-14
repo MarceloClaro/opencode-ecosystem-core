@@ -1,0 +1,150 @@
+{
+  "cycle": "R890",
+  "date": "2026-10-14",
+  "verification": "local_operation",
+  "status": "implemented_scoped_adaptation",
+  "externally_validated": false,
+  "calibrated": false,
+  "confidence_promoted": false,
+  "source_commit": "818d951227679c8f3e88ae6d8159de21cce2bfb9",
+  "curation": {
+    "repositories": 15,
+    "selected_source_files": 174,
+    "runtimes_installed_from_reviewed_repositories": 0,
+    "manifests": [
+      "docs/repo-reviews-r890-a.json",
+      "docs/repo-reviews-r890-b.json",
+      "docs/repo-reviews-r890-c.json"
+    ]
+  },
+  "rea": {
+    "successful_compatible_inspections": 4,
+    "javascript_or_html_only": true,
+    "python_tex_pdf_semantics_analyzed": false,
+    "unsupported_and_failed_attempts_preserved": true,
+    "network_isolated_for_final_compatible_inspections": true,
+    "target_applications_executed": false
+  },
+  "implementation": {
+    "execution_kind": "classical_simulation",
+    "backend": "python_statevector",
+    "quantum_hardware_used": false,
+    "query_evaluated": false,
+    "configuration_limits": {
+      "qubits": [
+        2,
+        20
+      ],
+      "shots": [
+        1,
+        10000
+      ],
+      "seeds_count": [
+        1,
+        10
+      ],
+      "seed_range": [
+        0,
+        9223372036854775807
+      ]
+    },
+    "metrics": [
+      "support_mass",
+      "total_variation_distance",
+      "measurement_entropy"
+    ],
+    "primary_and_metabus_provenance": true,
+    "ledger_unchanged_in_actual_probe": true,
+    "new_r890_test_cases": 41
+  },
+  "proofs": [
+    {
+      "path": "outputs/core-r890/a-core-quantum-reproducer.json",
+      "sha256": "780e2b80fd8a3faf8abe821a8c4d2763a78f0419e1edf5d3eb8d1b745b6f47cb"
+    },
+    {
+      "path": "outputs/core-r890/a-quantum-red.xml",
+      "sha256": "c1e583925f6652148d29750d74a12c3e39fedde1d24ba2eb94c10d993d680acc",
+      "tests": 30,
+      "failures": 24,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "path": "outputs/core-r890/a-seed-magnitude-red.xml",
+      "sha256": "9854f65c7983def309073c67f50a45445b08dd529621616f47643d8a80217923",
+      "tests": 3,
+      "failures": 3,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "path": "outputs/core-r890/a-release-final.xml",
+      "sha256": "a596a93cef515217c6a7cb7603282aede65c15dd0505fd31ded5ca42e3255389",
+      "tests": 291,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "path": "outputs/core-r890/root-release.xml",
+      "sha256": "5e45115db45919d6ed7f3b8b7ea23b5c8a53be14049914683495e0d9374c9260",
+      "tests": 149,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "path": "outputs/core-r890/a-core-after-fix.json",
+      "sha256": "c594e3b1113b40b483d7b1e415dddd2e5695803c85094786bee12516d9000e79"
+    },
+    {
+      "path": "outputs/core-r890/b-review-integrity.json",
+      "sha256": "aa4c781f7e73a3992b6161ef930ed17ea613812e02e682c761b15a6c6ea5a001"
+    },
+    {
+      "path": "outputs/core-r890/c-rea-isolated.json",
+      "sha256": "2a44e7674a7a18e1608712c1def6589a7ee277469326fad999ad64802323bb8a"
+    },
+    {
+      "path": "outputs/core-r890/a-rea-capability.json",
+      "sha256": "5e73d8729d88c89101d05f079ada8009797c2ef8cf9f09cb7a87eb573727a846"
+    },
+    {
+      "path": "outputs/core-r890/docs-regression.xml",
+      "sha256": "5a6d7ae64fbe0751e6aa775f61088305a8985e427132b050d7dc32907b9cf287",
+      "tests": 52,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "path": "outputs/core-r890/doctor-final.json",
+      "sha256": "504f9593e769c134705bb456cf9170807c47b7c78f837b5bc082ff61f80c4f66"
+    }
+  ],
+  "artifact_hashes": {
+    "reasoning/quantum.py": "fc05f960c2b6b636cb9d051e6dad8338063d31c12c4b5a58aa832c8bc526b693",
+    "reasoning/engines.py": "575873e86148a0db2bbb4cd6c59682b404d6fb693b3b044b979851fdbdf40144",
+    "mci/metacognitive_loop.py": "9a3e96651a4a1ee2ec7a372ae60cf0941395949e711f2a9569967ae5a077e020",
+    "marceloclaro/orchestrator.py": "5a5c9feaa68d9742c74b8ccab43c972e1b18c8fcb12fb52f3c80e21b68c72d64",
+    "tests/test_r890_quantum_provenance.py": "095a7b873c5e0de749f97521bc58f9862e38e1dbac0f26006e5fb074c31dd3f1"
+  },
+  "limits": [
+    "Directed source sampling, not a complete dependency/security audit.",
+    "The REA inspections cover compatible static subsets; they do not execute the external products.",
+    "The proposed voice/network adapter and MCP manifest preflight remain proposals.",
+    "Metrics compare simulated samples with the simulator distribution, not physical hardware or task quality.",
+    "The deprecated entanglement_entropy alias still returns measurement Shannon; it does not measure entanglement.",
+    "No new model inference, clinical validation, calibrated quantum performance or token savings demonstrated.",
+    "The global repository suite was not completed; regressions listed here are scoped.",
+    "Local XML receipts are not externally authenticated historical TDD custody."
+  ],
+  "doctor": {
+    "overall": "healthy",
+    "diagnostic_mode": "structural",
+    "verification": "installation_only",
+    "checks_total": 22,
+    "checks_passed": 22
+  }
+}

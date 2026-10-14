@@ -1,0 +1,875 @@
+{
+  "schema": "core-repository-review-v1",
+  "cycle": "R890",
+  "group": "C",
+  "reviewed_at_utc": "2026-10-14T14:59:20.231916+00:00",
+  "method": "Directed static review of pinned primary GitHub sources; local REA inert JavaScript projection via primary and isolated assistant",
+  "source_count": 50,
+  "externally_validated": false,
+  "calibrated": false,
+  "confidence_promoted": false,
+  "candidate_runtimes_installed": false,
+  "candidate_applications_executed": false,
+  "candidate_network_services_started": false,
+  "accounts_accessed": false,
+  "messages_sent": false,
+  "models_downloaded": false,
+  "repositories": [
+    {
+      "name": "MarceloClaro/TorBot",
+      "sha": "abb44f69d44d59bbf53301911e860e2f15440cb9",
+      "date": "2025-10-29T20:11:33Z",
+      "tree": "7b31ed592499110a8d1ed33ee3fb33a6e9eb8b62",
+      "fork": true,
+      "parent": "DedSecInside/TorBot",
+      "license": {
+        "key": "other",
+        "name": "Other",
+        "spdx_id": "NOASSERTION",
+        "url": null,
+        "node_id": "MDc6TGljZW5zZTA="
+      },
+      "default_branch": "dev",
+      "review": {
+        "priority": "low",
+        "decision": "reference_only_network_specialist",
+        "license_observed": "GPL version 3 text and GPLv3 classifier; API NOASSERTION; exact only/or-later not normalized",
+        "version": "4.1.0",
+        "requirements": [
+          "Python >=3.7 declared; Python3.14 not tested",
+          "HTTPX SOCKS5, BeautifulSoup, igraph, scientific Python",
+          "pyproject and requirements pins differ"
+        ],
+        "entrypoints": [
+          "main.py"
+        ],
+        "network": [
+          "Crawls explicit URL and depth",
+          "Default IP display requests check.torproject.org",
+          "--disable-socks5 permits direct HTTP",
+          "--update may git init/remote/pull"
+        ],
+        "adaptation": "Link inventory/provenance pattern only; optional network collection separate from local analysis",
+        "evidence_paths": [
+          "pyproject.toml",
+          "requirements.txt",
+          "main.py",
+          "src/torbot/modules/api.py",
+          "src/torbot/modules/updater.py",
+          "LICENSE.md"
+        ]
+      },
+      "sources": [
+        {
+          "repo": "TorBot",
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/TorBot/abb44f69d44d59bbf53301911e860e2f15440cb9/README.md",
+          "sha256": "ffeefb51d753c3bbf47f02f03b66e552b08592a1b0e1ae6263001a103e00e21f",
+          "bytes": 10190,
+          "status": "read"
+        },
+        {
+          "repo": "TorBot",
+          "path": "LICENSE.md",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/TorBot/abb44f69d44d59bbf53301911e860e2f15440cb9/LICENSE.md",
+          "sha256": "d4bb0280b39901ae0c4b11e2190d9666deb13fef3343e5e0a6025da04e75aa70",
+          "bytes": 35179,
+          "status": "read"
+        },
+        {
+          "repo": "TorBot",
+          "path": "pyproject.toml",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/TorBot/abb44f69d44d59bbf53301911e860e2f15440cb9/pyproject.toml",
+          "sha256": "ee5741832feb9805f3f0304c60008755f8847360044225bea431a9084deff7ba",
+          "bytes": 1286,
+          "status": "read"
+        },
+        {
+          "repo": "TorBot",
+          "path": "requirements.txt",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/TorBot/abb44f69d44d59bbf53301911e860e2f15440cb9/requirements.txt",
+          "sha256": "8cfd2344550ffb6ae08753cb4064057eca20bc51092849090a39b1d2d13c61f5",
+          "bytes": 849,
+          "status": "read"
+        },
+        {
+          "repo": "TorBot",
+          "path": "main.py",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/TorBot/abb44f69d44d59bbf53301911e860e2f15440cb9/main.py",
+          "sha256": "429051418a8b4676c41c5496bf3d8943e8b69446603deb974ffdb96bc606d1a5",
+          "bytes": 6068,
+          "status": "read"
+        },
+        {
+          "repo": "TorBot",
+          "path": "src/torbot/modules/api.py",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/TorBot/abb44f69d44d59bbf53301911e860e2f15440cb9/src/torbot/modules/api.py",
+          "sha256": "c48a2265afe2f83a561af81e5e4674bb2c730d58983c3cb0d43fd7be25827700",
+          "bytes": 1239,
+          "status": "read"
+        },
+        {
+          "repo": "TorBot",
+          "path": "src/torbot/modules/config.py",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/TorBot/abb44f69d44d59bbf53301911e860e2f15440cb9/src/torbot/modules/config.py",
+          "sha256": "cf88ee5cdffe7aee1743aa94764e33eeaba74b47795b2218889b1decdafecd74",
+          "bytes": 1030,
+          "status": "read"
+        },
+        {
+          "repo": "TorBot",
+          "path": "src/torbot/modules/linktree.py",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/TorBot/abb44f69d44d59bbf53301911e860e2f15440cb9/src/torbot/modules/linktree.py",
+          "sha256": "e53d2e286b11b9f3380af43c2e4e346672acc0d0f04dd347aebcf48793c7c5d1",
+          "bytes": 6604,
+          "status": "read"
+        },
+        {
+          "repo": "TorBot",
+          "path": "src/torbot/modules/updater.py",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/TorBot/abb44f69d44d59bbf53301911e860e2f15440cb9/src/torbot/modules/updater.py",
+          "sha256": "0e1c3fc13609c6ddec30accf7df8e9bf83c3a0d1e16f41458c96f65aaa900524",
+          "bytes": 1372,
+          "status": "read"
+        }
+      ]
+    },
+    {
+      "name": "MarceloClaro/litert-samples",
+      "sha": "d7939f4f8720ed444afc2078674560dfac09b259",
+      "date": "2025-12-05T19:01:38Z",
+      "tree": "ca4d173039a20c5a89fb2af44efd81782f129108",
+      "fork": true,
+      "parent": "google-ai-edge/litert-samples",
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0",
+        "spdx_id": "Apache-2.0",
+        "url": "https://api.github.com/licenses/apache-2.0",
+        "node_id": "MDc6TGljZW5zZTI="
+      },
+      "default_branch": "main",
+      "review": {
+        "priority": "medium_future_vision",
+        "decision": "reference_only_device_vision",
+        "license_observed": "Apache-2.0",
+        "version": "Selected v2 Android build uses LiteRT2.0.3; README still mentions2.0.0-alpha",
+        "requirements": [
+          "Android CPU/GPU sample: Kotlin2.1.0, AGP8.10.0, minSdk23, compileSdk34, ARM ABIs",
+          "NPU variants require supported mobile hardware; not CoreWSL inference evidence"
+        ],
+        "entrypoints": [
+          "v2/image_segmentation/kotlin_cpu_gpu/android/app/src/main/java/com/google/ai/edge/examples/image_segmentation/ImageSegmentationHelper.kt"
+        ],
+        "network": [
+          "preBuild download_model.gradle retrieves TFLite model from HuggingFace",
+          "Build dependencies require preparation; no model downloaded in this review"
+        ],
+        "adaptation": "Future bounded local vision backend with model hash and measured actual device/delegate; no replacement of current LiteRT-LM",
+        "evidence_paths": [
+          "v2/image_segmentation/README.md",
+          "v2/image_segmentation/kotlin_cpu_gpu/android/gradle/libs.versions.toml",
+          "v2/image_segmentation/kotlin_cpu_gpu/android/app/build.gradle.kts",
+          "v2/image_segmentation/kotlin_cpu_gpu/android/app/download_model.gradle"
+        ]
+      },
+      "sources": [
+        {
+          "repo": "litert-samples",
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/litert-samples/d7939f4f8720ed444afc2078674560dfac09b259/README.md",
+          "sha256": "a7f943ea8390bcc31fbd2182f86add5dbc9c1fd36fbeaa5f7a308bd9d7cbd72c",
+          "bytes": 153,
+          "status": "read"
+        },
+        {
+          "repo": "litert-samples",
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/litert-samples/d7939f4f8720ed444afc2078674560dfac09b259/LICENSE",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "bytes": 11358,
+          "status": "read"
+        },
+        {
+          "repo": "litert-samples",
+          "path": "v2/image_segmentation/README.md",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/litert-samples/d7939f4f8720ed444afc2078674560dfac09b259/v2/image_segmentation/README.md",
+          "sha256": "a83b1355749443c2d9c788396f4934933075587f4071543d1f2cf14d5ffca9f7",
+          "bytes": 2418,
+          "status": "read"
+        },
+        {
+          "repo": "litert-samples",
+          "path": "v2/image_segmentation/kotlin_cpu_gpu/android/app/build.gradle.kts",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/litert-samples/d7939f4f8720ed444afc2078674560dfac09b259/v2/image_segmentation/kotlin_cpu_gpu/android/app/build.gradle.kts",
+          "sha256": "c8bfe1365ca569949a50bc04a5c35d862590592f16f7f118f90e07e1eb96f5ab",
+          "bytes": 3734,
+          "status": "read"
+        },
+        {
+          "repo": "litert-samples",
+          "path": "v2/image_segmentation/kotlin_cpu_gpu/android/gradle/libs.versions.toml",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/litert-samples/d7939f4f8720ed444afc2078674560dfac09b259/v2/image_segmentation/kotlin_cpu_gpu/android/gradle/libs.versions.toml",
+          "sha256": "3f2045485d75ee25c7c0db15703a0cbb771929524122c242caa7d897e7cb3a7a",
+          "bytes": 3971,
+          "status": "read"
+        },
+        {
+          "repo": "litert-samples",
+          "path": "v2/image_segmentation/kotlin_cpu_gpu/android/app/src/main/java/com/google/ai/edge/examples/image_segmentation/ImageSegmentationHelper.kt",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/litert-samples/d7939f4f8720ed444afc2078674560dfac09b259/v2/image_segmentation/kotlin_cpu_gpu/android/app/src/main/java/com/google/ai/edge/examples/image_segmentation/ImageSegmentationHelper.kt",
+          "sha256": "a9ee13fb9f283901ddcb2ef4a52f2aa24082245f4663d276e4fc2cac82596c69",
+          "bytes": 11273,
+          "status": "read"
+        },
+        {
+          "repo": "litert-samples",
+          "path": "v2/image_segmentation/kotlin_npu/android/README.md",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/litert-samples/d7939f4f8720ed444afc2078674560dfac09b259/v2/image_segmentation/kotlin_npu/android/README.md",
+          "sha256": "118b856889c918db014cee19032ac5cb4e734f7f4a3253687345d99a26a326a7",
+          "bytes": 2606,
+          "status": "read"
+        },
+        {
+          "repo": "litert-samples",
+          "path": "v2/image_segmentation/kotlin_cpu_gpu/android/app/download_model.gradle",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/litert-samples/d7939f4f8720ed444afc2078674560dfac09b259/v2/image_segmentation/kotlin_cpu_gpu/android/app/download_model.gradle",
+          "sha256": "dc4107517b4ce558dd507c0323990a4ab75ffecb8071048203fbd8205cd81f34",
+          "bytes": 285,
+          "status": "read"
+        }
+      ]
+    },
+    {
+      "name": "MarceloClaro/mcp_server_exe",
+      "sha": "ad5555bc090813f26bdc9fdf402e7d517102de2b",
+      "date": "2025-08-21T04:39:36Z",
+      "tree": "f19fa29b54ff1c10aa5229a90ef801c846fb1cf9",
+      "fork": true,
+      "parent": "shadowcz007/mcp_server_exe",
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit",
+        "node_id": "MDc6TGljZW5zZTEz"
+      },
+      "default_branch": "main",
+      "review": {
+        "priority": "low_runtime_medium_policy_pattern",
+        "decision": "avoid_second_router_reuse_policy_lessons",
+        "license_observed": "MIT",
+        "version": "mcp_exe0.12.0",
+        "requirements": [
+          "TypeScript/Node; package targets Node18 Windows/macOS via pkg5.8.1",
+          "MCP SDK^1.12.1, Express, WebSocket, Zod imports; no runtime installed"
+        ],
+        "entrypoints": [
+          "bin/cli.js",
+          "src/server.ts",
+          "src/mcpRouterServer.ts",
+          "src/serverComposer.ts",
+          "wsMcp.js"
+        ],
+        "network": [
+          "SSE default; host fallback0.0.0.0",
+          "CORS origin* in router",
+          "WebSocket destination configurable; examples include external endpoint",
+          "Custom JS configuration loaded via require; stdio definitions become child processes"
+        ],
+        "adaptation": "Keep existing primary; require passive configuration/transport/destination/effect preflight; no exe execution",
+        "evidence_paths": [
+          "package.json",
+          "src/server.ts",
+          "src/mcpRouterServer.ts",
+          "src/serverComposer.ts",
+          "src/tools/mcpConfig.js"
+        ]
+      },
+      "sources": [
+        {
+          "repo": "mcp_server_exe",
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/mcp_server_exe/ad5555bc090813f26bdc9fdf402e7d517102de2b/README.md",
+          "sha256": "4a130fdbf0fd1755c4b233ba437c9d9dc54692ac5fcd979855eb19a0b2b1b817",
+          "bytes": 12285,
+          "status": "read"
+        },
+        {
+          "repo": "mcp_server_exe",
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/mcp_server_exe/ad5555bc090813f26bdc9fdf402e7d517102de2b/LICENSE",
+          "sha256": "7efe28fb2f5b0f49ac76f62e92be88a8bad8b416d59f908c2603587aed5c39bc",
+          "bytes": 1063,
+          "status": "read"
+        },
+        {
+          "repo": "mcp_server_exe",
+          "path": "package.json",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/mcp_server_exe/ad5555bc090813f26bdc9fdf402e7d517102de2b/package.json",
+          "sha256": "1b4711299a16a7b425a69fff01831974b6aebcd9bb234b56b899ccd1790b6cb3",
+          "bytes": 3019,
+          "status": "read"
+        },
+        {
+          "repo": "mcp_server_exe",
+          "path": "bin/cli.js",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/mcp_server_exe/ad5555bc090813f26bdc9fdf402e7d517102de2b/bin/cli.js",
+          "sha256": "083cbefa914ec875bd1b3283295ef475de275a890401ec2e090b084900e89c97",
+          "bytes": 1653,
+          "status": "read"
+        },
+        {
+          "repo": "mcp_server_exe",
+          "path": "src/index.ts",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/mcp_server_exe/ad5555bc090813f26bdc9fdf402e7d517102de2b/src/index.ts",
+          "sha256": "37a216c77c98084f7f315b0c6ee138b3fa469e1a4c1922584b3cc3a39d34f93c",
+          "bytes": 501,
+          "status": "read"
+        },
+        {
+          "repo": "mcp_server_exe",
+          "path": "src/server.ts",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/mcp_server_exe/ad5555bc090813f26bdc9fdf402e7d517102de2b/src/server.ts",
+          "sha256": "68f7f25d0a0268969044235012ffde48d8e6bb5fd960af2dffdcfdd1b49d0017",
+          "bytes": 12900,
+          "status": "read"
+        },
+        {
+          "repo": "mcp_server_exe",
+          "path": "src/mcpRouterServer.ts",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/mcp_server_exe/ad5555bc090813f26bdc9fdf402e7d517102de2b/src/mcpRouterServer.ts",
+          "sha256": "6294ea17150d3da8b1e64fbf2a09c1b07b3a357f9c679e1fabb040872db0e584",
+          "bytes": 14307,
+          "status": "read"
+        },
+        {
+          "repo": "mcp_server_exe",
+          "path": "src/serverComposer.ts",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/mcp_server_exe/ad5555bc090813f26bdc9fdf402e7d517102de2b/src/serverComposer.ts",
+          "sha256": "c46c8e01002685f283cfd88d5954a81d857e1e5f6e332a47743d4d9e6ed23d23",
+          "bytes": 27558,
+          "status": "read"
+        },
+        {
+          "repo": "mcp_server_exe",
+          "path": "src/tools/mcpConfig.js",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/mcp_server_exe/ad5555bc090813f26bdc9fdf402e7d517102de2b/src/tools/mcpConfig.js",
+          "sha256": "8499acbbe854ab6b7488f389e18fbe4c334852332179605466eff5d5e44b54e6",
+          "bytes": 1834,
+          "status": "read"
+        },
+        {
+          "repo": "mcp_server_exe",
+          "path": "src/tools/serverConfig.js",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/mcp_server_exe/ad5555bc090813f26bdc9fdf402e7d517102de2b/src/tools/serverConfig.js",
+          "sha256": "22e555965ba86c7d878637d2717b17f35273f520875c6ac91c62bd8a2456f931",
+          "bytes": 2256,
+          "status": "read"
+        },
+        {
+          "repo": "mcp_server_exe",
+          "path": "src/expressSseTransport.ts",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/mcp_server_exe/ad5555bc090813f26bdc9fdf402e7d517102de2b/src/expressSseTransport.ts",
+          "sha256": "a504bb89914d24ac380c1447cf058c8fe45a4531f82e8f91d272e2ae933bfaa1",
+          "bytes": 3351,
+          "status": "read"
+        },
+        {
+          "repo": "mcp_server_exe",
+          "path": "src/webSocketServer.ts",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/mcp_server_exe/ad5555bc090813f26bdc9fdf402e7d517102de2b/src/webSocketServer.ts",
+          "sha256": "b97faec29b4140c53defe49d3470d43417f69f6f579297f39fbc4d7f4f1ea3a2",
+          "bytes": 6690,
+          "status": "read"
+        },
+        {
+          "repo": "mcp_server_exe",
+          "path": "wsMcp.js",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/mcp_server_exe/ad5555bc090813f26bdc9fdf402e7d517102de2b/wsMcp.js",
+          "sha256": "36a2f774e4d45711b7b768c294b8c27a9dec748e064e6aee75b09bf589ee9886",
+          "bytes": 8982,
+          "status": "read"
+        }
+      ]
+    },
+    {
+      "name": "MarceloClaro/whatsapp-mcp",
+      "sha": "7d6a06dcdce1f01dfb24f60e1030d5efba9f3b88",
+      "date": "2025-07-13T17:22:00Z",
+      "tree": "f44f4b090fa70124e2084018afac331382528d68",
+      "fork": true,
+      "parent": "lharries/whatsapp-mcp",
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit",
+        "node_id": "MDc6TGljZW5zZTEz"
+      },
+      "default_branch": "main",
+      "review": {
+        "priority": "optional_only",
+        "decision": "not_enabled_account_and_network_required",
+        "license_observed": "MIT",
+        "version": "Python server0.1.0",
+        "requirements": [
+          "Python >=3.11, MCP>=1.6.0, HTTPX, Requests",
+          "Go1.24.1, whatsmeow, go-sqlite3/CGo; optional ffmpeg for audio"
+        ],
+        "entrypoints": [
+          "whatsapp-bridge/main.go",
+          "whatsapp-mcp-server/main.py"
+        ],
+        "network": [
+          "Personal account WhatsApp multidevice network and QR authentication",
+          "REST binds :8080; inspected send/download handlers do not show authentication",
+          "MCP includes send_message, send_file, send_audio_message, download_media",
+          "Local SQLite does not prevent an LLM client from receiving tool-accessible message content"
+        ],
+        "adaptation": "Optional communication specialist only after scoped account/data policy, separate read/write tools and explicit message authorization",
+        "evidence_paths": [
+          "README.md",
+          "whatsapp-bridge/go.mod",
+          "whatsapp-bridge/main.go",
+          "whatsapp-mcp-server/pyproject.toml",
+          "whatsapp-mcp-server/main.py",
+          "whatsapp-mcp-server/whatsapp.py"
+        ]
+      },
+      "sources": [
+        {
+          "repo": "whatsapp-mcp",
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/whatsapp-mcp/7d6a06dcdce1f01dfb24f60e1030d5efba9f3b88/README.md",
+          "sha256": "ad3e4cc17892d2ec2ad7c2ad989a174c076f8991fad305c63feb8a72b957a0cb",
+          "bytes": 9025,
+          "status": "read"
+        },
+        {
+          "repo": "whatsapp-mcp",
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/whatsapp-mcp/7d6a06dcdce1f01dfb24f60e1030d5efba9f3b88/LICENSE",
+          "sha256": "86861f8ef4b108e301646f0f599eda922838d14c20303115c243338a70f9c3a0",
+          "bytes": 1069,
+          "status": "read"
+        },
+        {
+          "repo": "whatsapp-mcp",
+          "path": "whatsapp-bridge/go.mod",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/whatsapp-mcp/7d6a06dcdce1f01dfb24f60e1030d5efba9f3b88/whatsapp-bridge/go.mod",
+          "sha256": "071a8525a7470cf28e517f324ebdd734f12bca3870e506987db842573b6f6d73",
+          "bytes": 748,
+          "status": "read"
+        },
+        {
+          "repo": "whatsapp-mcp",
+          "path": "whatsapp-bridge/main.go",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/whatsapp-mcp/7d6a06dcdce1f01dfb24f60e1030d5efba9f3b88/whatsapp-bridge/main.go",
+          "sha256": "0f8a6ac2875e77b9ef4000c75b4722ac35fd7e4770042164bd050fba5e54b998",
+          "bytes": 39103,
+          "status": "read"
+        },
+        {
+          "repo": "whatsapp-mcp",
+          "path": "whatsapp-mcp-server/pyproject.toml",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/whatsapp-mcp/7d6a06dcdce1f01dfb24f60e1030d5efba9f3b88/whatsapp-mcp-server/pyproject.toml",
+          "sha256": "d505213ebea640c9014f0fed9b3832ab78763e7cf76018180f37675bbc39802c",
+          "bytes": 234,
+          "status": "read"
+        },
+        {
+          "repo": "whatsapp-mcp",
+          "path": "whatsapp-mcp-server/main.py",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/whatsapp-mcp/7d6a06dcdce1f01dfb24f60e1030d5efba9f3b88/whatsapp-mcp-server/main.py",
+          "sha256": "5c9c59adcab09d6ee0bedfe2e9eb68c3dca47616cb669f096d16f714ad78f3a3",
+          "bytes": 8824,
+          "status": "read"
+        },
+        {
+          "repo": "whatsapp-mcp",
+          "path": "whatsapp-mcp-server/whatsapp.py",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/whatsapp-mcp/7d6a06dcdce1f01dfb24f60e1030d5efba9f3b88/whatsapp-mcp-server/whatsapp.py",
+          "sha256": "dc0e013ece15aab71c53433d8bdcaa84912c4a5f5b98df727914e7ef01b5ed1b",
+          "bytes": 24712,
+          "status": "read"
+        }
+      ]
+    },
+    {
+      "name": "MarceloClaro/genai-toolbox",
+      "sha": "648eede62b65b4d3d6d1728e726237384df5f32c",
+      "date": "2025-07-07T18:41:49Z",
+      "tree": "81646557910e4b8f1b9b876ba792b0e12a53bbc9",
+      "fork": true,
+      "parent": "googleapis/mcp-toolbox",
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0",
+        "spdx_id": "Apache-2.0",
+        "url": "https://api.github.com/licenses/apache-2.0",
+        "node_id": "MDc6TGljZW5zZTI="
+      },
+      "default_branch": "main",
+      "review": {
+        "priority": "highest_pattern_in_group",
+        "decision": "adopt_design_pattern_not_runtime_now",
+        "license_observed": "Apache-2.0",
+        "version": "Fork README demonstrates0.8.0; not an executed version check",
+        "requirements": [
+          "Go1.23.8 with toolchain1.24.4",
+          "SQLite pureGo plus numerous database/cloud drivers"
+        ],
+        "entrypoints": [
+          "cmd/root.go",
+          "internal/server/mcp.go",
+          "internal/tools/sqlitesql/sqlitesql.go"
+        ],
+        "network": [
+          "HTTP default127.0.0.1:5000; --stdio supported",
+          "GCP telemetry false and OTLP empty by default; exporters enabled through explicit options",
+          "Cloud sources and configured auth/exporters may use network"
+        ],
+        "adaptation": "Named parameterized queries/toolsets, scoped effects and read-only DB policy; no free SQL/templates as default",
+        "limitations": [
+          "sqlite-sql documentation explicitly permits INSERT/UPDATE/DELETE/DDL",
+          "SQLite source does not impose read-only DSN",
+          "templateParameters changes SQL text",
+          "Static finding Toolset.Initialize preallocates length N then appends N pointers; effect on consumers not executed"
+        ],
+        "evidence_paths": [
+          "go.mod",
+          "cmd/root.go",
+          "internal/telemetry/telemetry.go",
+          "internal/tools/toolsets.go",
+          "internal/tools/sqlitesql/sqlitesql.go",
+          "internal/sources/sqlite/sqlite.go",
+          "docs/en/resources/tools/sqlite/sqlite-sql.md"
+        ]
+      },
+      "sources": [
+        {
+          "repo": "genai-toolbox",
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/genai-toolbox/648eede62b65b4d3d6d1728e726237384df5f32c/README.md",
+          "sha256": "456fe1c82132779a87706e7a4af7bf8bada5b62180ecdd5a2a8256d9f320e32f",
+          "bytes": 14365,
+          "status": "read"
+        },
+        {
+          "repo": "genai-toolbox",
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/genai-toolbox/648eede62b65b4d3d6d1728e726237384df5f32c/LICENSE",
+          "sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd",
+          "bytes": 11357,
+          "status": "read"
+        },
+        {
+          "repo": "genai-toolbox",
+          "path": "go.mod",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/genai-toolbox/648eede62b65b4d3d6d1728e726237384df5f32c/go.mod",
+          "sha256": "564322660657cda056a2e78bfbd5a9a81815600222b0003d1f421ce3f7d456d8",
+          "bytes": 7071,
+          "status": "read"
+        },
+        {
+          "repo": "genai-toolbox",
+          "path": "cmd/options.go",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/genai-toolbox/648eede62b65b4d3d6d1728e726237384df5f32c/cmd/options.go",
+          "sha256": "eb70cd13b7e0bca170456d7ab3e989cc4f0e6d31efc1c659025526c68832be96",
+          "bytes": 861,
+          "status": "read"
+        },
+        {
+          "repo": "genai-toolbox",
+          "path": "cmd/root.go",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/genai-toolbox/648eede62b65b4d3d6d1728e726237384df5f32c/cmd/root.go",
+          "sha256": "b9fb029133648e0767e1e3f48acc21b191c355e1166acad18e011e2532887ee9",
+          "bytes": 21000,
+          "status": "read"
+        },
+        {
+          "repo": "genai-toolbox",
+          "path": "internal/server/config.go",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/genai-toolbox/648eede62b65b4d3d6d1728e726237384df5f32c/internal/server/config.go",
+          "sha256": "8e55d6897800acf9b78a0041f6ce7ea6418765a62dbd7dd7657d5063296031b5",
+          "bytes": 7512,
+          "status": "read"
+        },
+        {
+          "repo": "genai-toolbox",
+          "path": "internal/server/mcp.go",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/genai-toolbox/648eede62b65b4d3d6d1728e726237384df5f32c/internal/server/mcp.go",
+          "sha256": "e295528357630b6e1ee003b0e4a52e1e74b0a4f139047daa49b4b1bb0b11f623",
+          "bytes": 13972,
+          "status": "read"
+        },
+        {
+          "repo": "genai-toolbox",
+          "path": "internal/telemetry/telemetry.go",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/genai-toolbox/648eede62b65b4d3d6d1728e726237384df5f32c/internal/telemetry/telemetry.go",
+          "sha256": "69325b7b5b3d35e5f3f17ffc86eb410c8c6c3e3ff5d6dcca5accdd22ea70293c",
+          "bytes": 6177,
+          "status": "read"
+        },
+        {
+          "repo": "genai-toolbox",
+          "path": "internal/sources/sqlite/sqlite.go",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/genai-toolbox/648eede62b65b4d3d6d1728e726237384df5f32c/internal/sources/sqlite/sqlite.go",
+          "sha256": "63bf5c519c675aaa76383896e1163e4a61f3d18d4a0bcc44c3d65e32f8e2e91e",
+          "bytes": 2798,
+          "status": "read"
+        },
+        {
+          "repo": "genai-toolbox",
+          "path": "internal/tools/sqlitesql/sqlitesql.go",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/genai-toolbox/648eede62b65b4d3d6d1728e726237384df5f32c/internal/tools/sqlitesql/sqlitesql.go",
+          "sha256": "e26ef4555d48fc58326547a3af1941585df245457a70d81d1b8a49dc4f007265",
+          "bytes": 5987,
+          "status": "read"
+        },
+        {
+          "repo": "genai-toolbox",
+          "path": "internal/tools/toolsets.go",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/genai-toolbox/648eede62b65b4d3d6d1728e726237384df5f32c/internal/tools/toolsets.go",
+          "sha256": "0fc80a52988c4b1ccd4837d60dfbc1532dd7e5ef6d254c44c9509e6d18c40ff7",
+          "bytes": 1898,
+          "status": "read"
+        },
+        {
+          "repo": "genai-toolbox",
+          "path": "docs/en/resources/tools/sqlite/sqlite-sql.md",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/genai-toolbox/648eede62b65b4d3d6d1728e726237384df5f32c/docs/en/resources/tools/sqlite/sqlite-sql.md",
+          "sha256": "4112dc4b932c01aabc82c3a8067de7d0ef47e33e1861b324811e0a07ef768e76",
+          "bytes": 3919,
+          "status": "read"
+        },
+        {
+          "repo": "genai-toolbox",
+          "path": "docs/en/resources/sources/sqlite.md",
+          "url": "https://raw.githubusercontent.com/MarceloClaro/genai-toolbox/648eede62b65b4d3d6d1728e726237384df5f32c/docs/en/resources/sources/sqlite.md",
+          "sha256": "53c626e07ce9560407fd2b8c80b365d1df47524a0ead4d3d17686aad4cdf64b2",
+          "bytes": 2073,
+          "status": "read"
+        }
+      ]
+    }
+  ],
+  "rea": {
+    "source_file": "mcp_server_exe/src/tools/mcpConfig.js",
+    "source_sha256": "8499acbbe854ab6b7488f389e18fbe4c334852332179605466eff5d5e44b54e6",
+    "source_bytes": 1834,
+    "projection_files": 1,
+    "reports": [
+      {
+        "receipt": "outputs/core-r890/c-rea-mcp-config.json",
+        "receipt_file_sha256": "e90f83e7317a02c95a709db32503dd1da2c1eee85db348338104599344d69508",
+        "success": false,
+        "status": "failed",
+        "scope": "directed selected source sample",
+        "provider": {
+          "repository": "https://github.com/MarceloClaro/rea",
+          "commit": "4daea941bfeeb426886f2d048aed7f3cb2dbf97b",
+          "version": "6.4.0",
+          "runtime": {
+            "source_dir": "/home/marceloclaro/.local/share/opencode-core/rea",
+            "node": "/usr/bin/node",
+            "launcher": "/home/marceloclaro/.local/share/opencode-core/rea/scripts/rea.mjs"
+          },
+          "response_sha256": "8f32202eb59dfc41dcedb08cb046108155f28580a3fc37dbd5cf1051b9bebed8",
+          "layer": "javascript",
+          "layer_tool": "analyze_javascript_application",
+          "layer_readiness": {
+            "ready": true,
+            "engine": "Analisador JavaScript embarcado no REA",
+            "reason": "Motor embarcado no REA; sem dependência externa obrigatória."
+          }
+        },
+        "evidence_id": null,
+        "statistics": null,
+        "error": {
+          "code": "unsupported_target",
+          "category": "unsupported_target",
+          "message": "Unsupported target for analyze_javascript_application at /home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r890/mcp_server_exe/src/tools/mcpConfig.js: JavaScript application analysis accepts only a directory or an .asar file",
+          "retryable": false,
+          "remediation": {
+            "action": "Select an extracted application directory, an app bundle, or an .asar file such as Contents/Resources/app.asar."
+          },
+          "details": {
+            "operation": "analyze_javascript_application",
+            "path": "/home/marceloclaro/opencode-ecosystem-core/.mci_state/repo_reviews/r890/mcp_server_exe/src/tools/mcpConfig.js",
+            "reason": "JavaScript application analysis accepts only a directory or an .asar file"
+          }
+        }
+      },
+      {
+        "receipt": "outputs/core-r890/c-rea-mcp-directory.json",
+        "receipt_file_sha256": "1eafa0b31412aa1439115a11fd36c7551281a59ba6cb5ff8a764199c384ea205",
+        "success": false,
+        "status": "failed",
+        "scope": "directed selected source sample",
+        "provider": {
+          "repository": "https://github.com/MarceloClaro/rea",
+          "commit": "4daea941bfeeb426886f2d048aed7f3cb2dbf97b",
+          "version": "6.4.0",
+          "runtime": {
+            "source_dir": "/home/marceloclaro/.local/share/opencode-core/rea",
+            "node": "/usr/bin/node",
+            "launcher": "/home/marceloclaro/.local/share/opencode-core/rea/scripts/rea.mjs"
+          },
+          "response_sha256": "6ade16ff46ff6bd0acb5d1f6c0152f5a5e25d58ed6141984ae9ff3946df444cd",
+          "layer": "javascript",
+          "layer_tool": "analyze_javascript_application",
+          "layer_readiness": {
+            "ready": true,
+            "engine": "Analisador JavaScript embarcado no REA",
+            "reason": "Motor embarcado no REA; sem dependência externa obrigatória."
+          }
+        },
+        "evidence_id": null,
+        "statistics": null,
+        "error": {
+          "code": "resource_constraint",
+          "category": "resource_constraint",
+          "message": "The operation completed, but its complete MCP response exceeds the stdio response budget. The analysis result was not truncated. Export retained evidence to consume the complete analysis, or use complete CLI JSON output.",
+          "retryable": false,
+          "remediation": {
+            "action": "Discover retained records with get_evidence_bundle and detail: summary, then inspect compatible records through inspect_analysis_view using an exact Evidence reference. Export complete retained session evidence through export_evidence_bundle to a caller-selected path, or use complete CLI JSON output. The connection remains usable."
+          },
+          "details": {
+            "operation": "analyze_javascript_application",
+            "resource": "transport",
+            "reason": "The operation completed, but its complete MCP response exceeds the stdio response budget. The analysis result was not truncated. Export retained evidence to consume the complete analysis, or use complete CLI JSON output.",
+            "reported_limits": {
+              "boundary": "mcp-response",
+              "default_receive_buffer_bytes": 10485760,
+              "result_budget_bytes": 10484736,
+              "max_string_code_units": 536869864,
+              "response_bytes_at_least": 10550084,
+              "response_code_units_at_least": 10550084,
+              "constraint": "receive-buffer",
+              "evidence_id": "ev_215f0b45c4debca72cf26ec562bdc5d526405ce9cf1fc210bf55af1586172495",
+              "evidence_reference": {
+                "kind": "retained-evidence",
+                "evidence_id": "ev_215f0b45c4debca72cf26ec562bdc5d526405ce9cf1fc210bf55af1586172495"
+              }
+            }
+          }
+        }
+      },
+      {
+        "receipt": "outputs/core-r890/c-rea-projection.json",
+        "receipt_file_sha256": "8fddad3f1d43e0404b61d156e8e08ae19447e1c07205cff0a191a87cdd48be2e",
+        "success": true,
+        "status": "completed",
+        "scope": "single inert source projection",
+        "provider": {
+          "repository": "https://github.com/MarceloClaro/rea",
+          "commit": "4daea941bfeeb426886f2d048aed7f3cb2dbf97b",
+          "version": "6.4.0",
+          "runtime": {
+            "source_dir": "/home/marceloclaro/.local/share/opencode-core/rea",
+            "node": "/usr/bin/node",
+            "launcher": "/home/marceloclaro/.local/share/opencode-core/rea/scripts/rea.mjs"
+          },
+          "response_sha256": "7e3e660b112b0211c54d9452d4219e7cc16a20f73433459a9789fa92d4155ae9",
+          "layer": "javascript",
+          "layer_tool": "analyze_javascript_application",
+          "layer_readiness": {
+            "ready": true,
+            "engine": "Analisador JavaScript embarcado no REA",
+            "reason": "Motor embarcado no REA; sem dependência externa obrigatória."
+          }
+        },
+        "evidence_id": "ev_1cd2e04b8a090bc9c96bfa54b935b0ae063a4360633a255fac64e510cd2576e8",
+        "statistics": {
+          "relevant_files": 1,
+          "nested_asar_containers": 0,
+          "text_bytes_read": 1834,
+          "invalid_utf8_files": 0,
+          "parsed_javascript_files": 1,
+          "visited_ast_nodes": 227,
+          "findings": 1,
+          "modules": 0,
+          "parse_failures": 0
+        },
+        "error": null
+      },
+      {
+        "receipt": "outputs/core-r890/c-rea-isolated.json",
+        "receipt_file_sha256": "2a44e7674a7a18e1608712c1def6589a7ee277469326fad999ad64802323bb8a",
+        "success": true,
+        "status": "completed",
+        "scope": "single inert source projection",
+        "provider": {
+          "repository": "https://github.com/MarceloClaro/rea",
+          "commit": "4daea941bfeeb426886f2d048aed7f3cb2dbf97b",
+          "version": "6.4.0",
+          "runtime": {
+            "source_dir": "/home/marceloclaro/.local/share/opencode-core/rea",
+            "node": "/usr/bin/node",
+            "launcher": "/home/marceloclaro/.local/share/opencode-core/rea/scripts/rea.mjs"
+          },
+          "response_sha256": "7e3e660b112b0211c54d9452d4219e7cc16a20f73433459a9789fa92d4155ae9"
+        },
+        "privacy": {
+          "mode": "isolated_local_analysis",
+          "interfaces": [
+            "lo"
+          ],
+          "external_route_available": false,
+          "host_probe_connected": false,
+          "scope": "analytical_worker_and_descendants; trusted_local_MCP_client_required"
+        },
+        "target_unchanged": true,
+        "target_digest": {
+          "sha256": "0a25b0764128beb1428f8c402a32c99d765e7acd7be7cff0f0e7e86a42890f23",
+          "files": 1,
+          "bytes": 1834,
+          "algorithm": "sorted-relative-path-nul-content-nul-excluding-node_modules"
+        },
+        "receipt_sha256": "3fd55e9c8e21fc60ea34ecee8d060e7d4ff3ad299a27602583ba27fc6bd51bf6",
+        "metacognition": {
+          "observation_id": "474f18d4-0cad-4350-bf63-c3be911e015d",
+          "persisted": true,
+          "scope_id": "c87d43ce04605f7533aa99690b735226b696c7546c3ff0baca727b43c0876322",
+          "previous_observation_id": "ccae4513-7035-4136-a946-ba0b17291cc3",
+          "state_transition": {
+            "from": null,
+            "to": null
+          },
+          "confidence_promoted": false,
+          "externally_validated": false
+        }
+      }
+    ],
+    "limitations": [
+      "REA sample is not whole-repository validation",
+      "Direct bridge calls sanitize environment but do not independently prove network confinement; isolated assistant receipt is the network-scope evidence",
+      "No JavaScript plugin/bootstrap code executed",
+      "Full selected source directory exceeded MCP response budget; single-file directory projection succeeded"
+    ]
+  },
+  "proposed_adaptation": {
+    "name": "Passive MCP activation policy preflight",
+    "implementation_status": "proposed_not_implemented",
+    "core_locations": [
+      "integrations/mcp_validation.py",
+      "integrations/opencode_cli.py",
+      "marceloclaro/orchestrator.py"
+    ],
+    "scope": [
+      "Data-only manifest with transport, command/args, allowed roots/destination, allowed tools/effects",
+      "Reject executable JS config and unknown tools",
+      "Reject public bind in local profile and remote destinations in no-network profile",
+      "Keep installation/configuration/authentication/completed-operation separate",
+      "Use existing primary and validators; no second MCP coordinator"
+    ],
+    "acceptance": [
+      "No subprocess/network started during preflight",
+      "Negative tests for JS configuration, public interface, prohibited remote destination, undeclared tool",
+      "Diagnostic must not echo credentials",
+      "Configuration assertions do not replace runtime isolation and observed outcomes"
+    ]
+  }
+}

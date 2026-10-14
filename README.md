@@ -332,6 +332,21 @@ REA compatíveis. A [decisão de adaptação](docs/DECISOES_ADAPTACAO_REPOS_R888
 IMO existente e seu consumidor DeepThink para separar execução, gabarito,
 heurística e verificação formal, sem instalar nove runtimes paralelos.
 
+O [aceite integral R889](docs/INDEXACAO_INTEGRAL_R889.md) adiciona auditoria
+de arquivos, hashes e relações do banco, com retomada limitada de candidatos
+privados. Um processo que termina sem erro continua insuficiente para aceitar
+um índice parcial. A recuperação preserva o corpus e os limites de isolamento. A execução local
+[R889](docs/verification-local-r889.json) concluiu as 763 fontes selecionadas;
+isso não mede cobertura funcional de todo o ecossistema.
+
+A [curadoria dos quinze projetos R890](docs/DECISOES_ADAPTACAO_REPOS_R890.md)
+avalia química, materiais acadêmicos, voz, dispositivos, visão e ferramentas MCP.
+A adaptação executada corrige a suíte Bell/GHZ/superposição existente: simulação
+clássica declarada, métricas amostrais próprias, orçamento validado e proveniência
+no MetaBus, sem elevar confiança nem apresentar circuitos fixos como resposta
+à consulta. Os [recibos R890](docs/verification-local-r890.json) distinguem os
+testes locais das propostas de integração e dos runtimes externos não ativados.
+
 ## Arquitetura completa e fluxogramas atuais
 
 [![Visão operacional do Core](docs/architecture/curated-overview.svg)](docs/ARQUITETURA_COMPLETA_CORE_R879.md)
