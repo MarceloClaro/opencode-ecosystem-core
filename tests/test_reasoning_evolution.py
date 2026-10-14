@@ -176,7 +176,10 @@ class TestSpec917Engines:
         )
 
         assert result.engine == "quantum"
-        assert "experimentos quânticos" in result.conclusion
+        assert "simulações clássicas" in result.conclusion
+        assert result.confidence == 0.0
+        assert result.evidence["query_evaluated"] is False
+        assert result.evidence["quantum_hardware_used"] is False
         assert any("bell" in step.lower() for step in result.steps)
 
 

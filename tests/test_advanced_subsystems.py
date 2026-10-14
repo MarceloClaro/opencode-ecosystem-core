@@ -144,12 +144,12 @@ class TestQuantum:
         counts = bell_state(seed=42).measure(shots=500)
         assert set(counts.keys()) <= {"00", "11"}  # apenas estados correlacionados
 
-    def test_ghz_entanglement(self):
+    def test_ghz_correlations_and_measurement_entropy(self):
         from reasoning import ghz_state
         sim = ghz_state(3, seed=42)
         probs = sim.probabilities()
         assert set(probs.keys()) == {"000", "111"}
-        assert abs(sim.entanglement_entropy() - 1.0) < 0.01  # 1 bit de entropia
+        assert abs(sim.measurement_entropy() - 1.0) < 0.01  # Shannon de medição; não é uma medida de emaranhamento
 
     def test_qubit_range_validation(self):
         from reasoning import QuantumSimulator

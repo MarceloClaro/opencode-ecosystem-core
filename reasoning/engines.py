@@ -45,15 +45,19 @@ class ReasoningResult:
     steps: List[str] = field(default_factory=list)
     available: bool = True
     duration_s: float = 0.0
+    evidence: Dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        return {
+        payload = {
             "engine": self.engine, "query": self.query,
             "conclusion": self.conclusion, "confidence": self.confidence,
             "steps": self.steps, "available": self.available,
             "duration_s": self.duration_s,
             "calibrated": False, "confidence_promoted": False,
         }
+        if self.evidence:
+            payload["evidence"] = self.evidence
+        return payload
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -1403,41 +1407,25 @@ class CounterfactualEngine:
 # ═══════════════════════════════════════════════════════════════════════════
 
 class QuantumReasoningEngine:
-    """Motor de raciocínio quântico via `reasoning.quantum`.
-
-    Encapsula a suíte reprodutível Bell/GHZ/Superposição para integrar o
-    simulador quântico ao roteamento geral de raciocínio.
-    """
+    """Executa a suíte clássica predefinida, sem interpretar a consulta textual."""
 
     name = "quantum"
     available = True
 
-    def reason(self, query: str,
-               n_qubits: int = 2,
-               shots: int = 256,
+    def reason(self, query: str, n_qubits: int = 2, shots: int = 256,
                seeds: Optional[List[int]] = None) -> ReasoningResult:
         started = time.time()
-        steps: List[str] = []
         from reasoning.quantum import DEFAULT_SEEDS, run_experiment_suite
-
-        seeds = seeds or DEFAULT_SEEDS[:2]
-        report = run_experiment_suite(n_qubits=n_qubits, seeds=seeds, shots=shots)
-
-        steps.append(f"Suíte quântica: n_qubits={n_qubits}, shots={shots}, seeds={seeds}")
+        report = run_experiment_suite(n_qubits=n_qubits,
+            seeds=DEFAULT_SEEDS[:2] if seeds is None else seeds, shots=shots)
+        steps = [f"Simulação clássica: n_qubits={n_qubits}, shots={shots}, seeds={report['seeds']}"]
         for name, payload in report["experiments"].items():
-            steps.append(
-                f"Experimento {name}: best_seed={payload['best_seed']}, "
-                f"worst_seed={payload['worst_seed']}"
-            )
-
-        conclusion = (
-            f"experimentos quânticos executados: bell, ghz e superposition "
-            f"com {n_qubits} qubits, {shots} shots e {len(seeds)} seeds."
-        )
-        confidence = 0.85
-
-        return ReasoningResult(self.name, query, conclusion, confidence, steps,
-                               True, round(time.time() - started, 4))
+            steps.append(f"Circuito {name}: {payload['n_qubits']} qubits; seeds com menor/maior distância amostral: "
+                         f"{payload['best_seed']}/{payload['worst_seed']}")
+        conclusion = ("Suíte predefinida de simulações clássicas Bell, GHZ e superposição executada. "
+                      "A consulta textual não foi interpretada nem respondida; nenhum hardware quântico foi utilizado.")
+        return ReasoningResult(self.name, query, conclusion, 0.0, steps, True,
+                               round(time.time() - started, 4), evidence=report)
 
 
 # ═══════════════════════════════════════════════════════════════════════════

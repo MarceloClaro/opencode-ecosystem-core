@@ -2818,14 +2818,25 @@ class MarceloClaroOrchestrator:
     def quantum_experiment(self, n_qubits: int = 3,
                            seeds: Optional[List[int]] = None,
                            shots: int = 1024) -> Dict[str, Any]:
-        """Suite quântica reprodutível (Bell, GHZ, superposição) com 5 seeds."""
+        """Experimentos clássicos predefinidos; sem avaliar uma pergunta geral."""
+        import hashlib
+        import json
         report = run_experiment_suite(n_qubits, seeds, shots)
-        metabus.memory.add_reflection(
-            agent_id=self.id,
-            task_context=f"experimento quântico ({n_qubits} qubits)",
-            reflection=f"Suite quântica concluída com seeds {report['seeds']}.",
-            score=0.9,
-        )
+        digest = report.get("report_sha256") or hashlib.sha256(
+            json.dumps(report, sort_keys=True, ensure_ascii=False, allow_nan=False).encode()).hexdigest()
+        execution = {key: report.get(key) for key in ("execution_kind", "backend",
+                     "quantum_hardware_used", "query_evaluated", "configuration")}
+        execution["report_sha256"] = digest
+        observation = {"status": "completed", "method": "quantum_experiment",
+                       "execution": execution, "report_sha256": digest,
+                       "calibrated": False, "confidence_promoted": False, "externally_validated": False}
+        try:
+            recorded = self._record_knowledge_outcome("ecosystem.quantum_experiment",
+                f"simulação clássica predefinida ({n_qubits} qubits)", observation)
+            report["metacognition"] = {**recorded, "confidence_promoted": False}
+        except (OSError, RuntimeError, ValueError) as exc:
+            report["metacognition"] = {"status": "degraded", "persisted": False,
+                "error_type": type(exc).__name__, "confidence_promoted": False}
         return report
 
     def record_evolution(

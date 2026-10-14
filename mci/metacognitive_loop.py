@@ -86,6 +86,28 @@ class MetacognitiveLoop:
                    "retrieved_ids": [record["id"] for record in briefing["records"]],
                    "calibrated": False, "confidence_promoted": False,
                    "verification": "local_reasoning_observation"}
+        evidence = result.get("evidence")
+        if result.get("engine") == "quantum" and isinstance(evidence, dict):
+            from reasoning.quantum import validate_configuration
+            configuration = evidence.get("configuration")
+            digest = evidence.get("report_sha256")
+            if (evidence.get("execution_kind") == "classical_simulation"
+                    and evidence.get("backend") == "python_statevector"
+                    and evidence.get("quantum_hardware_used") is False
+                    and evidence.get("query_evaluated") is False
+                    and isinstance(configuration, dict) and isinstance(digest, str)
+                    and len(digest) == 64 and all(char in "0123456789abcdef" for char in digest)):
+                try:
+                    configuration = validate_configuration(configuration.get("n_qubits"),
+                        configuration.get("seeds"), configuration.get("shots"))
+                except ValueError:
+                    pass
+                else:
+                    payload["execution"] = {
+                        "execution_kind": "classical_simulation", "backend": "python_statevector",
+                        "quantum_hardware_used": False, "query_evaluated": False,
+                        "configuration": configuration, "report_sha256": digest,
+                        "verification": "local_execution_metadata_recorded", "calibrated": False}
         identifier = self.bus.memory.record_observation("marceloclaro", query[:2000], payload)
         return {"observation_id": identifier, "retrieved_records": len(briefing["records"]),
                 "record_ids": payload["retrieved_ids"],
