@@ -20683,6 +20683,32 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R881",
+      "objective": "R881: inventário estrutural integral em Mermaid e os 13 fluxogramas completos no README (677 módulos, 935 pares internos, 1.051 declarações AST, 6.432 símbolos, 45 pacotes, 18 camadas). Finalização/registro: a trilha foi gerada por processo concorrente durante a sessão; aqui verifico, registro o ciclo (que faltava no ledger) e publico o commit.",
+      "changes": [
+        "scripts/build_mermaid_architecture.py + docs/architecture/dependencies.mmd (2,2 MB) + mermaid-correspondence.json + mermaid-render-config.json + dependencies-mermaid.svg",
+        "scripts/sync_readme_flowcharts.py + bloco <!-- core-flowcharts:start/end --> no README (13 fluxos integrais, +828 linhas aditivas)",
+        "docs/architecture/MERMAID_INTEGRAL.md (guia de edição); spec SPEC-935-R881; testes test_r881_mermaid_integral.py e test_r881_readme_flowcharts.py"
+      ],
+      "score": null,
+      "lessons": [
+        "Snapshot de teste pode enganar: R881 apareceu '26 falhas' por estar em GERAÇÃO por processo concorrente; reavaliar antes de concluir que uma trilha está quebrada.",
+        "Ledger tinha LACUNA em R881 (R880/R882 existiam); registrar retrospectivamente com round_id explícito mantém a numeração auditável.",
+        "Verificação de trilha de terceiros = rodar contratos (30 passed) + os --check dos geradores (0) antes de publicar, sem alegar renderização Mermaid que eu não executei."
+      ],
+      "timestamp": 1791952605.118859,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ]
 }

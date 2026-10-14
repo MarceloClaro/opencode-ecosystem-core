@@ -54,6 +54,7 @@ do ambiente e da operação solicitada.
   - [Diagrama Operacional Atual](#diagrama-operacional-atual)
   - [Fluxos multiárea do checkout atual](#fluxos-multiárea-do-checkout-atual)
 - [MIRA e apresentações](#apresentações-mira)
+- [Todos os 13 fluxogramas com legenda](#fluxogramas-operacionais-completos)
 - [Limites de segurança e operação](#limites-de-segurança-e-operação)
 - [Validação, contribuição e release](#validação-contribuição-e-release)
 - [Documentação e licença](#documentação-e-licença)
@@ -520,6 +521,833 @@ flowchart LR
 - **Evolução**: `EvolutionRegistry` conserva os ciclos; registro, hashes e auditoria externa são operações distintas.
 
 ---
+
+<!-- core-flowcharts:start -->
+## Fluxogramas operacionais completos
+
+Os fluxogramas abaixo são cópias integrais das mesmas fontes usadas no
+[mapa navegável](docs/architecture_map.html). A ordem, as descrições, as fontes
+e as limitações seguem o [catálogo de fluxos](docs/architecture/flows.json).
+A edição estrutural de referência é o snapshot `6380cfa`; estes desenhos
+não representam uma nova execução de todos os componentes.
+
+### Legenda e critérios de leitura
+
+| Elemento | Como interpretar |
+|---|---|
+| Retângulo | Componente, etapa, dado ou artefato indicado pelo rótulo. |
+| Losango | Decisão ou condição; siga o texto de cada saída. |
+| Grupo delimitado | Subsistema ou fronteira de responsabilidade. Não implica isolamento de rede. |
+| Seta contínua | Direção de controle, dado ou composição conforme o título e o rótulo; não implica chamada direta entre todas as caixas. |
+| Seta pontilhada | Caminho condicional, dependência opcional ou relação explicativa; leia o rótulo e os limites do fluxo. |
+| Cores | Auxílio visual de agrupamento; nomes e rótulos conservam a informação sem depender da cor. |
+| Fonte de código | Âncora de arquivo, símbolo e linha no retrato documentado; não é recibo de execução. |
+
+Instalação, disponibilidade, autenticação, inferência concluída, entrega aceita
+e validação externa são estados distintos. Evidências de uma operação local
+valem apenas para seu escopo. Referências a agentes ou ferramentas opcionais
+não garantem saldo, licença, credenciais, isolamento ou funcionamento atual.
+
+No grafo estrutural integral, a seta tem significado mais restrito:
+**módulo importador → dependência Python declarada**. Consulte a
+[fonte Mermaid integral](docs/architecture/dependencies.mmd), o
+[SVG equivalente](docs/architecture/dependencies-mermaid.svg) e o
+[guia da legenda e reprodução](docs/architecture/MERMAID_INTEGRAL.md).
+
+### 01. Panorama completo por camadas
+
+Interfaces, primário, execução, governança, conhecimento e fronteiras externas.
+
+```mermaid
+flowchart TB
+  U["Operador / solicitação / alvo local"]
+  subgraph interfaces["Interfaces e contratos de entrada"]
+    CLI["marceloclaro.cli / rea_cli / science_cli"]
+    OC["OpenCode: configuração compilada e comandos"]
+    MCP["ecosystem-network: MCP stdio"]
+    UI["Streamlit: consulta / evidência / memória"]
+    SITE["Site local REA: instruções e exemplos"]
+  end
+  subgraph primary["Coordenação primária e memória compartilhada"]
+    MC["MarceloClaroOrchestrator"]
+    CAT["Registro idempotente: agentes e catálogo"]
+    BB["Blackboard / AgentCard / task.cfp"]
+    BUS["MetaBus: eventos e memória metacognitiva"]
+    ATT["AttentionRouter: capacidade / semântica / confiança / carga"]
+    TRANS["TransformerPipeline + GradingHead: revisão limitada"]
+    TASK["TaskRuntime: DAG / lease / orçamento / recuperação"]
+    AUTO["AutonomousCoordinator"]
+    WF["WorkflowCoordinator + WorkflowStore"]
+  end
+  subgraph execution["Execução e integrações condicionais"]
+    HAR["HarnessRuntime: CLI / stdin / prazo / cancelamento"]
+    EXT["Codex / Claude / Antigravity: autenticação e saldo próprios"]
+    FED["Federação: artefatos / políticas / integridade / licença"]
+    REA["ReaBridge + registro rea_layers"]
+    LOCAL["LocalReaAssistant: worker isolado e recibo"]
+    BROW["Navegador coordenado / cenários / snapshots"]
+    MODEL["Provedores locais opcionais: Ollama / runai / LiteRT"]
+  end
+  subgraph assurance["Especificação, governança e evidência"]
+    SPEC["SpecRegistry / Specification / critérios"]
+    HIST["TDDHistory: RED e GREEN autenticados"]
+    RUN["TDDRunner: teste e contrato por critério"]
+    GATE["SpecVerifier / report_completion: aceite ou recusa"]
+    TRUST["Trust Engine / confidence ledger / behavioral gate"]
+    ECON["TokenEconomy: staking / release / slash / fee"]
+    DIAG["Doctor + DiagnosticPipeline: medições locais"]
+    EVO["EvolutionRegistry: ledger / encadeamento / auditoria"]
+    CI["pytest / JUnit / quality_report / CI"]
+  end
+  subgraph knowledge["Conhecimento, raciocínio e pesquisa"]
+    RAG["UnifiedSearchRAG: busca / recuperação / abstenção"]
+    EG["EvidenceGraph MCI: claims / evidências / replicações"]
+    SCI["EvidenceGraph científico: entidades / relações / fontes"]
+    REASON["Motores: AST restrita / SMT / simbólico / heurísticas"]
+    RESEARCH["Pesquisa: proveniência / execução reprodutível / revisão"]
+    PUB["Composer / manuscrito / LaTeX / DOCX / material didático"]
+    VIS["Rede de memória: terminal e Streamlit observacionais"]
+  end
+  U --> CLI
+  U --> OC
+  U --> MCP
+  U --> UI
+  U --> SITE
+  CLI --> MC
+  OC --> MCP
+  MCP --> MC
+  UI --> MC
+  MC --> CAT
+  CAT --> BB
+  MC --> BUS
+  MC --> ATT
+  MC --> TRANS
+  MC --> TASK
+  MCP --> AUTO
+  AUTO --> MC
+  MCP --> WF
+  WF --> AUTO
+  AUTO --> HAR
+  HAR --> EXT
+  AUTO --> FED
+  MC --> REA
+  MC --> LOCAL
+  MC --> BROW
+  OC -. "configuração opcional" .-> MODEL
+  MC --> SPEC
+  SPEC --> HIST
+  SPEC --> RUN
+  HIST --> GATE
+  RUN --> GATE
+  MC --> GATE
+  GATE --> BB
+  GATE --> TRUST
+  GATE --> ECON
+  GATE --> BUS
+  MC --> DIAG
+  MC --> EVO
+  CI --> RUN
+  MC --> RAG
+  MC --> REASON
+  MC --> RESEARCH
+  RESEARCH --> EG
+  RESEARCH --> SCI
+  RESEARCH --> PUB
+  RAG -. "resultados de recuperação" .-> SCI
+  BUS --> VIS
+  EG --> VIS
+  SCI --> VIS
+  BB --> VIS
+  VIS --> UI
+  SITE -. "orienta operação; não executa análise" .-> LOCAL
+```
+
+[Fonte Mermaid](docs/architecture/flows/01-panorama.mmd) · [Abrir SVG](docs/architecture/flows/01-panorama.svg)
+
+**Fontes de código:**
+
+- [marceloclaro/orchestrator.py:77](marceloclaro/orchestrator.py#L77) — `MarceloClaroOrchestrator`.
+- [integrations/ecosystem_mcp.py:264](integrations/ecosystem_mcp.py#L264) — `get_coordinator`.
+- [integrations/opencode_cli.py:378](integrations/opencode_cli.py#L378) — `build_config`.
+
+**Limitações:**
+
+- Relações de composição curadas; a existência do componente não comprova sua execução.
+
+### 02. Orquestração primária e execução CLI
+
+Primário compartilhado, especificação textual, roteamento, Blackboard, executor e aceite autoritativo.
+
+```mermaid
+flowchart TB
+  IN["MCP: solicitação de análise textual"] --> READ["get_library_orchestrator: um primário por processo"]
+  READ --> TEXT["create_text_task_spec: critérios antes da execução"]
+  TEXT --> SID["spec_id de sessão / criteria_only / software_delivery false"]
+  IN --> GET["get_coordinator reutiliza o mesmo primário"]
+  GET --> LOAD["ensure_agents_loaded: Lock / registro uma vez"]
+  LOAD --> AC["AutonomousCoordinator.run"]
+  SID --> PREF["sdd_preflight: especificação vinculada"]
+  AC --> ROUTE["route: inventário federado + status do executor"]
+  ROUTE --> AT["AttentionRouter: ranking com gates de elegibilidade"]
+  AT --> READY{"Executor elegível e instruções válidas?"}
+  READY -->|"não"| BLOCK["blocked: sem execução aceita"]
+  READY -->|"sim"| PREF
+  PREF --> OK{"Preflight aceito?"}
+  OK -->|"não"| BLOCK
+  OK -->|"sim"| D["primário.delegate: task.cfp + contexto + spec_id"]
+  D --> BB["Blackboard: agentes elegíveis / voluntariado / seleção"]
+  BB --> ASSIGN["task.assigned / agente / stake"]
+  ASSIGN --> EX["Construir instruções + contexto + memória"]
+  EX --> HR["HarnessRuntime.execute"]
+  HR --> PROC["_run_cli: stdin PIPE quando há input"]
+  PROC --> WAIT["communicate: saída / prazo / cancelamento"]
+  WAIT --> PARSE["Parsear eventos CLI e exigir saída real"]
+  PARSE --> GOOD{"Execução concluída com saída válida?"}
+  GOOD -->|"não"| CLASS["Classificar falha: conta / timeout / indisponibilidade"]
+  CLASS --> FALL{"Executor alternativo elegível e orçamento?"}
+  FALL -->|"sim"| HR
+  FALL -->|"não"| FAIL["failed / blocked / exhausted"]
+  GOOD -->|"sim"| PIPE["TransformerPipeline: avaliações e revisão limitada"]
+  PIPE --> CP["report_completion: gate autoritativo do primário"]
+  FAIL --> CP
+  CP --> SV["SpecVerifier + TDD se entrega de software"]
+  SV --> ACCEPT{"Blackboard terminou completed?"}
+  ACCEPT -->|"não"| REJECT["Conclusão recusada / success false"]
+  ACCEPT -->|"sim"| RESULT["Resultado aceito no escopo declarado"]
+  CP --> T["Trust / economia / Reflexion / MetaBus"]
+  T --> MEM["Memória e outcomes persistidos"]
+  RESULT --> REPORT["Relatório: passos / executor / duração / limites"]
+  REJECT --> REPORT
+  BLOCK --> REPORT
+```
+
+[Fonte Mermaid](docs/architecture/flows/02-orquestracao.mmd) · [Abrir SVG](docs/architecture/flows/02-orquestracao.svg)
+
+**Fontes de código:**
+
+- [integrations/ecosystem_mcp.py:33](integrations/ecosystem_mcp.py#L33) — `get_library_orchestrator`.
+- [integrations/ecosystem_mcp.py:264](integrations/ecosystem_mcp.py#L264) — `get_coordinator`.
+- [marceloclaro/orchestrator.py:233](marceloclaro/orchestrator.py#L233) — `create_text_task_spec`.
+- [marceloclaro/autonomous.py:33](marceloclaro/autonomous.py#L33) — `AutonomousCoordinator`.
+- [integrations/harness_runtime.py:266](integrations/harness_runtime.py#L266) — `_run_cli`.
+- [marceloclaro/orchestrator.py:758](marceloclaro/orchestrator.py#L758) — `report_completion`.
+
+**Limitações:**
+
+- Criteria_only não entrega software.
+- Ranking e instalação não comprovam autenticação, saldo ou inferência.
+
+### 03. Workflow DAG e retomada
+
+Definição normalizada, checkpoint durável, orçamento global e repetição explícita de falhas.
+
+```mermaid
+flowchart TB
+  IN["ecosystem_workflow: nodes / budgets / id / resume"] --> DEF["_definition: normalizar nós e dependências"]
+  DEF --> V{"IDs únicos / dependências existentes / DAG sem ciclo?"}
+  V -->|"não"| BAD["Recusar definição"]
+  V -->|"sim"| HASH["Ordem topológica determinística + input_hash"]
+  HASH --> CLAIM["WorkflowStore.claim: posse exclusiva"]
+  CLAIM --> RESUME{"resume?"}
+  RESUME -->|"não"| NEW["create_record: queued / steps zero"]
+  RESUME -->|"sim"| LOAD["load checkpoint existente"]
+  LOAD --> MATCH{"Mesma definição / hash / orçamento válido?"}
+  MATCH -->|"não"| BAD
+  MATCH -->|"sim"| CHECK["Validar schema e evidência dos nós completed"]
+  CHECK --> REC["running interrompido vira failed / execution_uncertain"]
+  REC --> RETRY{"Falha e retry_failed explícito?"}
+  RETRY -->|"sim"| QUEUE["Guardar history e recolocar etapa em queued"]
+  RETRY -->|"não"| KEEP["Preservar falha; completed é reutilizado"]
+  NEW --> LOOP["Percorrer ordem topológica sequencialmente"]
+  QUEUE --> LOOP
+  KEEP --> LOOP
+  LOOP --> REMAIN{"Há etapa na ordem a percorrer?"}
+  REMAIN -->|"sim"| DONE{"Etapa já concluída?"}
+  DONE -->|"sim"| NEXT["Próxima etapa"]
+  DONE -->|"não"| DEP{"Dependências completed?"}
+  DEP -->|"não"| B["blocked_by: dependências sem aceite"]
+  DEP -->|"sim"| BUDGET{"Tempo e passos globais restantes?"}
+  BUDGET -->|"não"| E["exhausted"]
+  BUDGET -->|"sim"| RES["Reservar passos e salvar running ANTES do executor"]
+  RES --> CTX["Acrescentar saídas aceitas das dependências ao contexto"]
+  CTX --> AC["AutonomousCoordinator.run: spec da etapa / primário"]
+  AC --> R{"completed / success true / steps positivos / prazo?"}
+  R -->|"sim"| C["Salvar completed + resultado + consumo"]
+  R -->|"não"| F["Salvar failed / blocked / exhausted; incerteza explícita"]
+  C --> NEXT
+  F --> NEXT
+  B --> NEXT
+  E --> NEXT
+  NEXT --> LOOP
+  REMAIN -->|"não"| END["_overall: sucesso somente se todos completed"]
+  END --> STORE["Checkpoint durável: save / publicação atômica"]
+  STORE --> STATUS["ecosystem_workflow_status: leitura sem execução"]
+```
+
+[Fonte Mermaid](docs/architecture/flows/03-workflow-dag.mmd) · [Abrir SVG](docs/architecture/flows/03-workflow-dag.svg)
+
+**Fontes de código:**
+
+- [marceloclaro/workflow.py:42](marceloclaro/workflow.py#L42) — `WorkflowCoordinator`.
+- [marceloclaro/workflow.py:84](marceloclaro/workflow.py#L84) — `_definition`.
+- [marceloclaro/workflow.py:237](marceloclaro/workflow.py#L237) — `_resume`.
+- [marceloclaro/workflow_store.py:17](marceloclaro/workflow_store.py#L17) — `WorkflowStore`.
+
+**Limitações:**
+
+- A execução das etapas é sequencial, apesar das dependências em DAG.
+- Etapa interrompida tem resultado incerto; retry_failed precisa ser explícito.
+
+### 04. SDD e histórico RED–GREEN
+
+Especificação, contratos por critério, execução pytest real e recibos autenticados no escopo local.
+
+```mermaid
+flowchart TB
+  SPEC["SPEC-935-R...: frontmatter / objetivo / critérios / testes"] --> REG["SpecRegistry.load_formal_specs"]
+  REG --> CONTRACT["Validar test_file / selectors / evidence_contract"]
+  CONTRACT --> KIND{"Software com teste ou evidência confiável exigida?"}
+  KIND -->|"não"| TEXT["criteria_only: checagem textual heurística"]
+  KIND -->|"sim"| RED["TDDHistory.run phase red: pytest REAL no baseline"]
+  RED --> CONTEXT["Contexto: spec + config + árvore de testes + fontes"]
+  CONTEXT --> ANALYSE["Analisar JUnit / falha funcional / ausência de erro de setup"]
+  ANALYSE --> ROK{"RED elegível com falha funcional?"}
+  ROK -->|"não"| NO["Recibo rejeitado; não fabricar RED histórico"]
+  ROK -->|"sim"| SIGN["Recibo HMAC + hash de fontes + encadeamento do ledger"]
+  SIGN --> PREF["sdd_preflight: recibo RED e escopo compatíveis"]
+  PREF --> CODE["Implementação / execução autorizada"]
+  CODE --> GREEN["TDDHistory.run phase green: pytest no código atual"]
+  GREEN --> PAIR["validate_pair: RED anterior / HMAC / contrato / mesmos testes"]
+  PAIR --> POK{"Par autenticado e GREEN aprovado?"}
+  POK -->|"não"| NO
+  POK -->|"sim"| TDD["TDDRunner.run_delivery_test"]
+  TDD --> TARGETS["Executar targets canônicos registrados por critério"]
+  TARGETS --> RECORD["CriterionRuntimeRecord + TrustedTestEvidence"]
+  RECORD --> VERIFY["SpecVerifier.verify: consumir evidência de runtime"]
+  TEXT --> VERIFY
+  VERIFY --> SUCCESS{"Todos critérios e gates satisfeitos no escopo?"}
+  SUCCESS -->|"não"| REJ["report_completion: recusa / status falha / reflexão"]
+  SUCCESS -->|"sim"| ACC["report_completion: aceite local da entrega"]
+  ACC --> BB["task.complete: Blackboard + Trust + economia"]
+  REJ --> BB
+  BB --> MEM["MetaBus: observação e trilha de decisão"]
+  ACC -. "não equivale a validação externa" .-> LIMIT["Limite: provas e qualidade editorial exigem evidências próprias"]
+```
+
+[Fonte Mermaid](docs/architecture/flows/04-sdd-tdd.mmd) · [Abrir SVG](docs/architecture/flows/04-sdd-tdd.svg)
+
+**Fontes de código:**
+
+- [sdd/spec_engine.py:70](sdd/spec_engine.py#L70) — `Specification`.
+- [sdd/spec_engine.py:1308](sdd/spec_engine.py#L1308) — `SpecVerifier`.
+- [sdd/tdd_history.py:114](sdd/tdd_history.py#L114) — `TDDHistory`.
+- [sdd/tdd_history.py:490](sdd/tdd_history.py#L490) — `validate_pair`.
+- [sdd/tdd_runner.py:46](sdd/tdd_runner.py#L46) — `TDDRunner`.
+- [marceloclaro/orchestrator.py:248](marceloclaro/orchestrator.py#L248) — `sdd_preflight`.
+
+**Limitações:**
+
+- Recibo retrospectivo não pode substituir RED que não foi executado.
+- Aceite local não certifica qualidade editorial nem validação externa.
+
+### 05. REA e camadas de provedores
+
+Registro informativo das 18 camadas, sondas estruturais e percursos efetivamente implementados: analyze JavaScript, analyze_binary Ghidra e layer com inspeção definida.
+
+```mermaid
+flowchart TB
+  IN["CLI / ecosystem_rea / primário.rea_action"] --> VAL["ReaBridge._validate: operação / prazo / campos permitidos"]
+  VAL --> OP{"Operação validada?"}
+  OP -->|"status"| STATUS["ReaBridge.status: arquivos / dependências / configuração Ghidra"]
+  STATUS --> STRUCT["installation_only: sem handshake nem análise"]
+  OP -->|"layers"| LAYERS["layers_status: registro canônico e probe_layer por camada"]
+  LAYERS --> READY["Sonda estrutural de ambiente / paths / comandos; sem análise"]
+  LAYERS -. "registro informativo: 18 camadas" .-> DECL["LAYERS / SURFACES: ferramentas declaradas pelo REA"]
+  DECL -. "grupos declarados; não operações Core" .-> DJS["javascript / apple / managed_dotnet / pe_resources / evm / artifact"]
+  DECL -. "grupos declarados; não operações Core" .-> DN["native_ghidra / native_ida / native_hopper / native_offline_elf / native_core_crash"]
+  DECL -. "grupos declarados; não operações Core" .-> DA["android_jadx / android_apktool / android_adb / jeb"]
+  DECL -. "grupos declarados; não operações Core" .-> DO["firmware / browser / reference"]
+  OP -->|"layer"| INS["layer_inspection: contrato estático por caminho"]
+  INS --> SUPPORTED{"inspection definido e não nulo?"}
+  SUPPORTED -->|"não"| REJECT["Recusar camada sem inspeção estática por caminho"]
+  SUPPORTED -->|"sim"| STATIC["javascript / apple / android_jadx / android_apktool / firmware / native_offline_elf / native_core_crash / managed_dotnet / pe_resources / evm / artifact"]
+  STATIC --> TARGET["Validar path local; ferramenta / path_field / fixed; encoding EVM"]
+  TARGET --> PROBE["probe_layer selecionada: prontidão adicionada à proveniência"]
+  OP -->|"analyze"| JS["JavaScript: caminho local para analyze_javascript_application"]
+  OP -->|"analyze_binary"| GH["Arquivo até 128 MiB / procedure / digest; Ghidra obrigatório"]
+  GH --> GENV["_child_environment native_required: Ghidra + JDK executáveis"]
+  GENV --> PROVIDER["REA_ANALYSIS_PROVIDER ghidra"]
+  PROBE --> INST["ReaBridge.status: runtime Node REA disponível?"]
+  JS --> INST
+  PROVIDER --> INST
+  INST --> AVAILABLE{"Instalação disponível?"}
+  AVAILABLE -->|"não"| ERROR["Indisponibilidade / falha / timeout explícitos"]
+  AVAILABLE -->|"sim"| ENV["_child_environment: defaults + engine_environment; allowlist no modo local"]
+  ENV --> IPC["_exchange: Node REA / stdio MCP / prazo / cancelamento"]
+  IPC --> HAND["Handshake / ferramenta e schema do percurso selecionado"]
+  HAND --> EVID["Resposta estruturada: Evidence da operação executada"]
+  EVID --> CHECK["Conferir operação da camada; nativo: digest / sessão Ghidra / cleanup closed"]
+  CHECK --> RESULT["Resultado Core: success ou tool_failure + proveniência"]
+  RESULT --> OBS["Primário: record_observation sem incremento de confiança"]
+  IPC --> ERROR
+  OP -->|"catalog / session"| INFO["Runtime disponível: _exchange para catálogo/sessão, sem análise de alvo"]
+  INFO --> RESPONSE["Resposta informativa da operação solicitada"]
+  DECL -. "inspection nulo: configuração e runtime próprios" .-> OTHER["native_ghidra / native_ida / native_hopper / android_adb / browser / jeb / reference"]
+  OTHER -. "ferramentas externas condicionais; não via layer Core" .-> EXTERNAL["Runtime MCP REA próprio / licenças / dispositivos / serviço local"]
+  OTHER -. "somente native_ghidra: percurso separado analyze_binary" .-> GH
+```
+
+[Fonte Mermaid](docs/architecture/flows/05-rea-provedores.mmd) · [Abrir SVG](docs/architecture/flows/05-rea-provedores.svg)
+
+**Fontes de código:**
+
+- [integrations/rea_layers.py:445](integrations/rea_layers.py#L445) — `layers_status`.
+- [integrations/rea_layers.py:422](integrations/rea_layers.py#L422) — `probe_layer`.
+- [integrations/rea_layers.py:465](integrations/rea_layers.py#L465) — `engine_environment`.
+- [integrations/rea_bridge.py:40](integrations/rea_bridge.py#L40) — `ReaBridge`.
+- [marceloclaro/orchestrator.py:2065](marceloclaro/orchestrator.py#L2065) — `rea_action`.
+- [marceloclaro/rea_cli.py:7](marceloclaro/rea_cli.py#L7) — `run_rea_cli`.
+- [integrations/rea_bridge.py:174](integrations/rea_bridge.py#L174) — `_validate`.
+- [integrations/rea_bridge.py:108](integrations/rea_bridge.py#L108) — `status`.
+- [integrations/rea_bridge.py:50](integrations/rea_bridge.py#L50) — `_child_environment`.
+- [integrations/rea_bridge.py:479](integrations/rea_bridge.py#L479) — `action`.
+- [integrations/rea_layers.py:305](integrations/rea_layers.py#L305) — `layer_inspection`.
+
+**Limitações:**
+
+- O registro declara 18 camadas; layer Core recusa inspection nulo.
+- analyze_binary exige Ghidra; não alterna automaticamente para IDA/Hopper.
+- IDA, Hopper, adb, browser, JEB e reference possuem runtimes/configuração próprios e não oferecem layer nesta ponte.
+- Status e sondas de camada não abrem alvo nem iniciam análise.
+- Ferramentas comerciais, dispositivos e engines exigem configuração e licenças próprias.
+
+### 06. REA local direto e evidência
+
+Inspeção estática com rede/PID privados, digest antes/depois, recibo por hash e explicação derivada.
+
+```mermaid
+flowchart TB
+  IN["rea inspect / MCP core_rea_inspect"] --> LOCAL["Primário.rea_assistant_action / LocalReaAssistant.action"]
+  LOCAL --> PATH{"Arquivo local ou URL literal loopback?"}
+  PATH -->|"loopback"| HTTP["GET limitado: HTTP 200 / sem redirect / máximo 1 MiB"]
+  HTTP --> SNAP["Snapshot HTML por hash; sem scripts ou recursos externos"]
+  PATH -->|"arquivo"| RES["Resolver caminho existente / tipo auto ou explícito"]
+  SNAP --> RES
+  RES --> PARAM["Validar kind / timeout finito de até 180 s / procedure"]
+  PARAM --> ISO{"Linux/WSL e unshare disponíveis?"}
+  ISO -->|"não"| BLOCK["Bloquear: sem alternativa fora do isolamento"]
+  ISO -->|"sim"| NS["unshare user + network + PID / kill-child / mount-proc"]
+  NS --> WORKER["rea_local_worker: PID 1 / rede privada / apenas lo"]
+  WORKER --> DIGEST["Digest independente ANTES da inspeção"]
+  DIGEST --> TYPE{"Tipo de alvo"}
+  TYPE -->|"HTML"| PARSER["LocalHTML: título / elementos / referências declaradas"]
+  TYPE -->|"JavaScript"| PREP["Arquivo avulso: cópia temporária; ASAR/diretório próprios"]
+  TYPE -->|"native / dotnet / plist / Android / firmware / ELF"| PROVIDER["Primário mínimo → ReaBridge → ferramenta de provedor"]
+  PREP --> PROVIDER
+  PROVIDER --> CHECK["Exigir Evidence identificada / comparar digest declarado"]
+  PARSER --> AFTER["Digest independente DEPOIS da inspeção"]
+  CHECK --> AFTER
+  AFTER --> SAME{"Alvo inalterado?"}
+  SAME -->|"não"| REJ["Recusar resultado"]
+  SAME -->|"sim"| REPORT["Achados estáticos + evidência + privacy + limitações"]
+  REPORT --> PRIV{"Namespace privado / interfaces apenas lo / sem rota externa?"}
+  PRIV -->|"não"| REJ
+  PRIV -->|"sim"| CAS["Serializar JSON / SHA-256 / recibo em diretório privado"]
+  CAS --> EXPLAIN["rea explain: contenção de caminho / tamanho / hash"]
+  EXPLAIN --> OUT["Explicação clara derivada do recibo"]
+  WORKER --> TIME["Timeout ou cancelamento: encerrar grupo e descendentes"]
+  TIME --> BLOCK
+  OUT -. "limite da garantia" .-> LIMIT["Worker isolado; cliente MCP e endpoint local devem ser confiáveis"]
+```
+
+[Fonte Mermaid](docs/architecture/flows/06-rea-local.mmd) · [Abrir SVG](docs/architecture/flows/06-rea-local.svg)
+
+**Fontes de código:**
+
+- [integrations/rea_assistant.py:625](integrations/rea_assistant.py#L625) — `LocalReaAssistant`.
+- [integrations/rea_assistant.py:42](integrations/rea_assistant.py#L42) — `run_isolated_worker`.
+- [integrations/rea_assistant.py:603](integrations/rea_assistant.py#L603) — `_snapshot_loopback`.
+- [integrations/rea_local_worker.py:40](integrations/rea_local_worker.py#L40) — `main`.
+- [integrations/rea_assistant.py:164](integrations/rea_assistant.py#L164) — `explain_report`.
+
+**Limitações:**
+
+- Garantia de rede privada cobre o worker e seus descendentes.
+- Aplicação alvo não é executada no percurso estático; .NET pode fornecer apenas metadados.
+- Snapshot loopback não executa scripts nem busca recursos externos.
+
+### 07. REA com agente local e gate de recibos
+
+Setup próprio, configuração efetiva, quatro ferramentas, timeout e validação do resultado do cliente.
+
+```mermaid
+flowchart TB
+  SET["rea setup: modelo e endpoint literal loopback"] --> FILES["Perfil próprio + MCP stdio + launcher; gravação transacional"]
+  FILES --> PROFILE["Somente provider rea_local / quatro ferramentas REA / deny demais"]
+  PROFILE --> RUN["rea agent: cliente fora do projeto / HOME e XDG próprios"]
+  RUN --> DEBUG["OpenCode debug config: ler configuração efetiva"]
+  DEBUG --> VALID{"Modelo / prompt / MCP / permissões / limites correspondem?"}
+  VALID -->|"não"| STOP["Bloquear antes da conversa"]
+  VALID -->|"sim"| CHECK{"check_only?"}
+  CHECK -->|"sim"| STRUCT["resolved_configuration_only / sem inferência"]
+  CHECK -->|"não"| PROMPT{"Prompt finito fornecido?"}
+  PROMPT -->|"não"| TUI["TUI interativa: client_exit_only"]
+  PROMPT -->|"sim"| NS["Cliente: namespace PID/user; rede do host para modelo loopback"]
+  NS --> CLIENT["OpenCode run: eventos JSONL / prazo global"]
+  CLIENT --> MODEL["Modelo local: decisão de chamada de ferramenta"]
+  MODEL --> MCP["rea_assistant_mcp: primário mínimo único por servidor"]
+  MCP --> WORKER["core_rea_inspect: worker em namespace de rede privado"]
+  WORKER --> RECEIPT["Recibo CAS local / digest / alvo inalterado / limites"]
+  RECEIPT --> TRACE["Evento tool_use: ferramenta esperada / completed / success true"]
+  TRACE --> GATE["validate_agent_trace: reler recibo por core explain"]
+  GATE --> OK{"Hash / caminho / digest / privacy / operação válidos?"}
+  OK -->|"sim"| OUT["executed_tool_and_local_receipt: explicação determinística"]
+  OK -->|"não"| STATUS{"Somente prontidão válida executada?"}
+  STATUS -->|"sim"| READY["executed_readiness_tool_only / alvo não analisado"]
+  STATUS -->|"não"| BAD["blocked_unverified_agent_output: texto livre não publicado"]
+  CLIENT --> CANCEL["Timeout / interrupção: namespace e descendentes encerrados"]
+  CANCEL --> STOP
+  MODEL -. "texto livre nunca é evidência de inspeção" .-> BAD
+  TUI -. "não atesta análise nem inferência" .-> LIMIT["Cliente interativo: examinar recibos próprios"]
+  OUT -. "não prova qualidade do modelo" .-> LIMIT
+```
+
+[Fonte Mermaid](docs/architecture/flows/07-rea-agente.mmd) · [Abrir SVG](docs/architecture/flows/07-rea-agente.svg)
+
+**Fontes de código:**
+
+- [integrations/rea_assistant.py:280](integrations/rea_assistant.py#L280) — `setup_local_agent`.
+- [integrations/rea_assistant.py:447](integrations/rea_assistant.py#L447) — `launch_local_agent`.
+- [integrations/rea_assistant.py:353](integrations/rea_assistant.py#L353) — `_run_agent_client`.
+- [integrations/rea_assistant.py:544](integrations/rea_assistant.py#L544) — `validate_agent_trace`.
+- [integrations/rea_assistant_mcp.py:17](integrations/rea_assistant_mcp.py#L17) — `create_mcp_server`.
+
+**Limitações:**
+
+- Cliente OpenCode preserva a rede host para o endpoint loopback; não tem a garantia de rede privada do worker.
+- Status, configuração ou saída TUI não comprovam análise autônoma do alvo.
+- Análise REA autônoma pelo LLM local não foi comprovada nos recibos de prontidão R868/R869.
+
+### 08. Conhecimento, RAG e grafos de evidência
+
+Recuperação de fontes, abstenção, referências e dois modelos de grafo com responsabilidades distintas.
+
+```mermaid
+flowchart TB
+  IN["Consulta: CLI / MCP library / Streamlit / primário"] --> PLAN["Planejar escopo e fontes; tratar conteúdo recuperado como dado"]
+  PLAN --> LOCAL["Biblioteca e catálogo locais / páginas e seções"]
+  PLAN --> UR["UnifiedSearchRAG"]
+  UR --> SEARCH["UnifiedSearcher: provedores opcionais / cache"]
+  SEARCH --> DEDUP["Normalizar títulos / deduplicar / pontuação temporal"]
+  DEDUP --> INDEX["EnhancedRAG.index: chunks e metadados"]
+  LOCAL --> INDEX
+  INDEX --> EXP["query_expansion / retrieve_enhanced / temporal_boost"]
+  EXP --> EVID["Evidências recuperadas com referência e pontuação"]
+  EVID --> ANSWER["answer_grounded: contexto e citações"]
+  ANSWER --> SUFF{"Suporte suficiente?"}
+  SUFF -->|"não"| ABSTAIN["Abstenção declarada / ausência de suporte"]
+  SUFF -->|"sim"| RESULT["Resposta vinculada às evidências recuperadas"]
+  EVID --> AUDIT["ReferenceAuditor: DOI / ano / duplicatas / completude"]
+  AUDIT --> BIB["Referências ABNT / BibTeX conforme metadados disponíveis"]
+  PLAN --> DEEP["Deep Research: OrchestratorAgent / BFRS / DFRS"]
+  DEEP --> SCI["EvidenceGraph científico: Entity / Relation / Evidence"]
+  SCI --> QUERY["find_paths / subgraph_query / export_visualization"]
+  PLAN --> CLAIM["EvidenceGraph MCI: register_claim / add_evidence"]
+  CLAIM --> REPL["Replicações / contradições / histórico de claim"]
+  REPL --> CONF["Confiança consolidada local com proveniência"]
+  RESULT --> OBS["MetaBus: contexto / lições / observações"]
+  ABSTAIN --> OBS
+  SEARCH -. "quando selecionados, acessam fontes externas" .-> REMOTE["Busca científica/web: fronteira distinta do modo REA isolado"]
+  SCI -. "grafo de conhecimento não comprova experimento" .-> LIMIT["Elegibilidade científica e validação funcional são gates separados"]
+  CONF -. "não é probabilidade externa calibrada" .-> LIMIT
+```
+
+[Fonte Mermaid](docs/architecture/flows/08-conhecimento-rag.mmd) · [Abrir SVG](docs/architecture/flows/08-conhecimento-rag.svg)
+
+**Fontes de código:**
+
+- [rag/enhanced_search_rag.py:761](rag/enhanced_search_rag.py#L761) — `UnifiedSearchRAG`.
+- [rag/enhanced_search_rag.py:312](rag/enhanced_search_rag.py#L312) — `EnhancedRAG`.
+- [rag/enhanced_search_rag.py:602](rag/enhanced_search_rag.py#L602) — `ReferenceAuditor`.
+- [mci/evidence_graph.py:22](mci/evidence_graph.py#L22) — `EvidenceGraph`.
+- [agentic_science_v2/evidence_graph.py:128](agentic_science_v2/evidence_graph.py#L128) — `EvidenceGraph`.
+- [agentic_science_v2/deep_research.py:468](agentic_science_v2/deep_research.py#L468) — `OrchestratorAgent`.
+
+**Limitações:**
+
+- Busca externa depende dos provedores escolhidos; não integra a garantia local do REA.
+- Grafo de conhecimento e evidência recuperada não comprovam experimento ou probabilidade calibrada.
+
+### 09. Rede de memória observável
+
+Eventos reais, memória persistida, claims, cartões e visualização em terminal/Streamlit.
+
+```mermaid
+flowchart TB
+  USER["Consulta lexical local de memória"] --> Q["Primário.memory_network_query: validar consulta e limite"]
+  Q --> SEARCH["MetaBus.memory.search_memory"]
+  SEARCH --> EVENTS["memory.query → memory.retrieved → memory.response"]
+  EVENTS --> LOG["metabus_events.jsonl"]
+  STATE["shared_memory.json: episódica / semântica / ledger"] --> READ["CoreMemoryNetworkSource: leitura limitada e cache por arquivo"]
+  LOG --> READ
+  CLAIMS["data/evidence_graph.json: claims e versões"] --> READ
+  SCI["EvidenceGraph científico opcional fornecido à snapshot"] --> READ
+  REG["Blackboard.registry: AgentCards existentes"] --> READ
+  READ --> VALID["JSON válido / janela de eventos / avisos de fonte indisponível"]
+  VALID --> GRAPH["MemoryNetworkGraph: limite de nós e arestas / texto seguro"]
+  GRAPH --> TYPES["Tipos: consulta / memória / contexto / agente / resposta / evidência"]
+  TYPES --> EDGE["Arestas por eventos, registro e referências existentes"]
+  EDGE --> ACT["Ativação por timestamp observado; limites temporais"]
+  ACT --> ASCII["MemoryNetworkVisualizer.render_ascii_graph: terminal"]
+  ACT --> STREAM["render_memory_network_streamlit: nós e detalhes"]
+  STREAM --> UI["Streamlit: atualização e exploração visual"]
+  ASCII --> CLI["python -m webapp.memory_network_visualizer"]
+  SIM["MemoryNetworkSimulator: dados demonstrativos"] -. "modo separado e identificado" .-> GRAPH
+  EVENTS -. "inference_executed false / calibrated false" .-> LIMIT["Animação representa eventos e dados, não pesos neurais internos"]
+  REG -. "available não comprova inferência" .-> LIMIT
+```
+
+[Fonte Mermaid](docs/architecture/flows/09-memoria-observavel.mmd) · [Abrir SVG](docs/architecture/flows/09-memoria-observavel.svg)
+
+**Fontes de código:**
+
+- [marceloclaro/orchestrator.py:265](marceloclaro/orchestrator.py#L265) — `memory_network_query`.
+- [mci/metabus.py:51](mci/metabus.py#L51) — `MetacognitiveMemory`.
+- [webapp/memory_network_visualizer.py:161](webapp/memory_network_visualizer.py#L161) — `CoreMemoryNetworkSource`.
+- [webapp/memory_network_visualizer.py:365](webapp/memory_network_visualizer.py#L365) — `MemoryNetworkVisualizer`.
+- [webapp/memory_network_streamlit.py:17](webapp/memory_network_streamlit.py#L17) — `render_memory_network_streamlit`.
+
+**Limitações:**
+
+- A animação representa eventos e relações observadas, não ativações internas de uma rede neural.
+- Simulação e registro de agente disponível são distintos de inferência executada.
+
+### 10. Raciocínio restrito e fallbacks
+
+AST permitida, tradução SMT integral, cálculo simbólico da entrada e falha sem conclusão inventada.
+
+```mermaid
+flowchart TB
+  IN["Expressão matemática ou consulta explícita"] --> ENTRY{"Rota escolhida"}
+  ENTRY -->|"reasoning_engines.route"| PARSE["AST parse mode eval: apenas classificação estrutural"]
+  ENTRY -->|"primário.reason"| MULTI["MultiReasoningEngine: auto ou engine declarado"]
+  PARSE --> VALID{"Entrada válida e dentro dos limites?"}
+  VALID -->|"não"| FALL["fallback / available false / not_evaluated"]
+  VALID -->|"sim"| BOOL{"Comparação ou operação booleana?"}
+  BOOL -->|"sim"| Z["z3_solver.check: validar atribuições numéricas finitas"]
+  Z --> SMT["_safe_build_z3_constraint: traduzir fórmula integral"]
+  SMT --> LIMIT["Domínio de símbolos inteiros / solver timeout 5 s / rlimit"]
+  LIMIT --> SOLVER["Z3 Solver.check"]
+  SOLVER --> VERDICT{"sat ou unsat concluído?"}
+  VERDICT -->|"sim"| SAT["local_smt_execution + fórmula codificada"]
+  VERDICT -->|"não"| FALL
+  BOOL -->|"não"| MATH["SymPyEngine: _safe_math_ast / _build_sympy_math"]
+  MATH --> WHITELIST["Gramática permitida / chamadas permitidas / limites numéricos"]
+  WHITELIST --> COMPUTE["Computar expressão real da entrada e exigir resultado definido"]
+  COMPUTE --> OUT["local_symbolic_execution / resultado / passos"]
+  COMPUTE --> FALL
+  MULTI --> ZENGINE["Z3Engine.reason: backend canônico"]
+  ZENGINE --> SMT
+  MULTI --> MATH
+  MULTI --> OTHER["Kanren / Critical / Bayesian / Causal / Temporal / outros"]
+  OTHER --> HEUR["Saída específica do motor / disponibilidade / confiança interna"]
+  SAT --> REPORT["Resultado com trilha e escopo declarado"]
+  OUT --> REPORT
+  FALL --> REPORT
+  HEUR --> REPORT
+  REPORT -. "não promover conclusão parcial a prova" .-> BOUND["Sem eval de código Python; heurísticas não equivalem a SMT ou prova externa"]
+```
+
+[Fonte Mermaid](docs/architecture/flows/10-raciocinio.mmd) · [Abrir SVG](docs/architecture/flows/10-raciocinio.svg)
+
+**Fontes de código:**
+
+- [reasoning/reasoning_engines.py:7](reasoning/reasoning_engines.py#L7) — `route`.
+- [reasoning/z3_solver.py:41](reasoning/z3_solver.py#L41) — `check`.
+- [reasoning/engines.py:78](reasoning/engines.py#L78) — `_safe_build_z3_constraint`.
+- [reasoning/engines.py:332](reasoning/engines.py#L332) — `_safe_math_ast`.
+- [reasoning/engines.py:488](reasoning/engines.py#L488) — `SymPyEngine`.
+- [reasoning/engines.py:1446](reasoning/engines.py#L1446) — `MultiReasoningEngine`.
+
+**Limitações:**
+
+- SAT/UNSAT exige conclusão do backend; erro ou indisponibilidade retorna fallback.
+- Motores heurísticos e confidence interna não equivalem a prova SMT ou validação externa.
+
+### 11. Diagnóstico, confiança, federação e evolução
+
+Autodescoberta e corpus retido, categorias canônicas, remediação, políticas e ledger de evolução.
+
+```mermaid
+flowchart TB
+  IN["doctor / diagnose / status da federação"] --> DOC["run_doctor: specs / evolução / memória / configuração / integrações"]
+  DOC --> INST["Sondas estruturais e catálogo loopback: instalação ≠ inferência"]
+  IN --> DP["scanners.pipeline.DiagnosticPipeline.run: cobertura lexical"]
+  FACADE["scanners.diagnostic_pipeline.run: fachada de compatibilidade"] --> DP
+  DP --> MODE{"corpus_mode"}
+  MODE -->|"autodiscovery"| SELF["Corpus enriquecido com nomes e conteúdo do próprio Core"]
+  MODE -->|"retained"| RET["Corpus externo retido / corpus_id / hash esperado obrigatório"]
+  SELF --> NOO["NoologicalScanner: categorias canônicas sem dupla contagem"]
+  RET --> NOO
+  NOO --> COV["Cobertura lexical e camadas: presentes / ausentes / density"]
+  DP --> TELEO["Teleológico: aderência heurística a metas e protocolos"]
+  COV --> GAPS["Evolutivo: categorias ausentes + gaps teleológicos"]
+  TELEO --> GAPS
+  DP --> DEEP["Deep opcional: sucessores / inércia / ruído / compressão / reversa"]
+  GAPS --> REPORT["Relatório local + limites de verificação"]
+  DEEP --> REPORT
+  REPORT --> OBS["MetaBus.record_observation / semantic topic; sem promoção diagnóstica de confiança"]
+  IN --> FED["Federação: harvest / HarnessArtifact.validate"]
+  FED --> POL["invocation_policy / integridade da fonte / suporte / licença"]
+  POL --> STATE["available / degraded / blocking_reasons"]
+  STATE --> RANK["Roteamento exclui artefatos inaptos"]
+  RANK --> TRUST["Trust Engine: outcome / gate / supervisão conforme ação"]
+  TRUST --> ECON["TokenEconomy: stake / release / slashing / fee"]
+  REPORT --> PLAN["Propor remediação com spec e critérios próprios"]
+  PLAN --> TEST["Executar testes e medir novamente: evidência separada"]
+  TEST --> EVO["EvolutionRegistry.record / record_audited quando elegível"]
+  EVO --> LEDGER["cycles.json: round derivado do ledger / prefixo preservado"]
+  LEDGER --> CHAIN["verify_state_chain / custódia / Merkle / histórico"]
+  SELF -. "mede autodescoberta" .-> BOUND["Cobertura lexical não mede completude funcional, qualidade epistêmica ou validação externa"]
+  RET -. "mede cobertura sobre entrada retida" .-> BOUND
+  PLANART["Plano explícito: arquivos / regex / nomes / cobertura esperada"] --> HERM["scanners.diagnostic_pipeline.DiagnosticPipeline.varrer"]
+  HERM --> CHECKART["Auditar sincronia de artefatos: stdlib / sem rede, subprocesso ou LLM"]
+  CHECKART --> ARTOUT["gaps / passaram / falharam / candidato_a_inspecao"]
+  ARTOUT -. "exige_validacao_externa true; não substitui compilação ou testes" .-> BOUND
+```
+
+[Fonte Mermaid](docs/architecture/flows/11-diagnostico-governanca.mmd) · [Abrir SVG](docs/architecture/flows/11-diagnostico-governanca.svg)
+
+**Fontes de código:**
+
+- [marceloclaro/doctor.py:921](marceloclaro/doctor.py#L921) — `run_doctor`.
+- [scanners/pipeline.py:96](scanners/pipeline.py#L96) — `DiagnosticPipeline`.
+- [scanners/noological_scanner.py:495](scanners/noological_scanner.py#L495) — `NoologicalScanner`.
+- [integrations/harness_federation/artifact.py:406](integrations/harness_federation/artifact.py#L406) — `HarnessArtifact`.
+- [trust/trust_engine.py:540](trust/trust_engine.py#L540) — `TrustEngine`.
+- [economy/token_economy.py:184](economy/token_economy.py#L184) — `TokenEconomy`.
+- [evolution/cycles.py:84](evolution/cycles.py#L84) — `EvolutionRegistry`.
+- [scanners/diagnostic_pipeline.py:46](scanners/diagnostic_pipeline.py#L46) — `varrer`.
+- [scanners/diagnostic_pipeline.py:142](scanners/diagnostic_pipeline.py#L142) — `run`.
+
+**Limitações:**
+
+- Cobertura lexical não mede cobertura funcional ou completude epistêmica.
+- Confiança e licença declarada são sinais e políticas locais, não certificações externas.
+- scanners.diagnostic_pipeline.varrer é auditoria hermética de sincronia; run desse módulo é fachada do diagnóstico lexical.
+
+### 12. Ciência, proveniência e publicação
+
+Execução científica e descoberta com gates, revisão interna, composição e entrega editorial humana.
+
+```mermaid
+flowchart TB
+  U["Questão / fontes / dados / plano de análise"] --> PRIMARY["MarceloClaroOrchestrator: coordenação científica"]
+  PRIMARY --> REPRO["scientific_reproducible_run: percurso de execução definido"]
+  REPRO --> PROV["ScientificProvenancePipeline: validar dados e referências"]
+  PROV --> SNAP["Snapshot imutável CSV / hashes / proveniência declarada"]
+  SNAP --> STAT["execute_analysis: método e variáveis validados"]
+  STAT --> REP["Subprocesso reproduce.py: mesmos bytes e resultado comparado"]
+  REP --> ANALYSIS["Análise reproduzível e artefatos com hashes"]
+  PRIMARY --> RUNTIME["scientific_runtime_run: execução externa Hermes/MiroFish"]
+  RUNTIME --> LIVE["LiveScientificRuntime: contrato / comando / audit proxy"]
+  LIVE --> EXEC["Execução selecionada + recibo de resposta + artefatos"]
+  EXEC --> CLASS["classify_execution: evidência executada vs saída incompleta"]
+  CLASS --> ELIG{"Dados e evidência elegíveis no escopo?"}
+  ELIG -->|"não"| BLOCK["blocked / abstenção / limitações preservadas"]
+  ELIG -->|"sim"| OBS["Observação de runtime e artefatos no escopo da execução"]
+  PRIMARY --> DISC["scientific_discovery_pipeline: EvoSci R101"]
+  DISC --> DEEP["Deep Research R102: fontes / grafo / relatórios"]
+  DEEP --> G102{"evidence_eligible e experiment_executed true?"}
+  G102 -->|"não"| BLOCK
+  G102 -->|"sim"| REVIEW["R103 OrchestratorReviewer: revisão interna"]
+  REVIEW --> G103{"export_gate_passed e strict_gates?"}
+  G103 -->|"reprovado no modo estrito"| BLOCK
+  G103 -->|"passagem permitida"| REV["R104d: contrato de revisão / integridade / rollback"]
+  REV --> COMPOSE["R105 compose_paper: estrutura / seções / citações"]
+  ANALYSIS --> MAN["research.manuscript: gates / TeX / DOCX / produção"]
+  OBS -. "evidência de runtime, sem equiparar a análise estatística" .-> MAN
+  SNAP --> MAN
+  COMPOSE --> CONSIST["CrossConsistencyVerifier + auditoria de movimentos científicos"]
+  CONSIST --> MAN
+  MAN --> HUMAN["Revisão humana: autoria / declarações / adequação editorial"]
+  HUMAN --> EXPORT["Pacote local de publicação / site / material didático"]
+  EXPORT -. "somente mediante configuração e autorização próprias" .-> PUB["Depósito ou publicação externa"]
+  PRIMARY --> GOV["Governança OQS → MCI → VSEE → EGS"]
+  GOV --> INPUTS["reported_inputs_and_executor_output: não executa experimento bruto"]
+  INPUTS -. "evidence_eligible false / external_validation false" .-> BLOCK
+  REVIEW -. "revisão interna não substitui parecer externo" .-> LIMIT["Sem certificação editorial, clínica ou científica implícita"]
+```
+
+[Fonte Mermaid](docs/architecture/flows/12-ciencia-publicacao.mmd) · [Abrir SVG](docs/architecture/flows/12-ciencia-publicacao.svg)
+
+**Fontes de código:**
+
+- [marceloclaro/orchestrator.py:1904](marceloclaro/orchestrator.py#L1904) — `scientific_reproducible_run`.
+- [marceloclaro/orchestrator.py:2263](marceloclaro/orchestrator.py#L2263) — `scientific_discovery_pipeline`.
+- [integrations/live_scientific_runtime.py:189](integrations/live_scientific_runtime.py#L189) — `LiveScientificRuntime`.
+- [research/provenance_pipeline.py:260](research/provenance_pipeline.py#L260) — `ScientificProvenancePipeline`.
+- [agentic_science_v2/paper_composer.py:496](agentic_science_v2/paper_composer.py#L496) — `OrchestratorComposer`.
+- [mci/pipeline/scientific_governance_pipeline.py:15](mci/pipeline/scientific_governance_pipeline.py#L15) — `run_scientific_governance_pipeline`.
+- [marceloclaro/orchestrator.py:1926](marceloclaro/orchestrator.py#L1926) — `scientific_runtime_run`.
+- [research/statistical_methods.py:84](research/statistical_methods.py#L84) — `execute_analysis`.
+
+**Limitações:**
+
+- Deep Research sem evidência elegível bloqueia a descoberta estrita.
+- Governança de entradas reportadas não executa experimento sobre dados brutos.
+- Composição e revisão internas não constituem parecer editorial ou validação clínica.
+
+### 13. Validação e entrega
+
+Suíte/JUnit, contagens físicas, exportação limpa, manifesto, commit e resultado remoto independente.
+
+```mermaid
+flowchart TB
+  SRC["Código / specs / testes / lockfiles / documentação"] --> COLLECT["pytest: coletar universo físico e targets"]
+  COLLECT --> RUN["Execução da suíte com JUnit; erros e skips explícitos"]
+  RUN --> XML["JUnit: passed / failures / errors / skipped"]
+  XML --> QR["quality_report reutiliza JUnit existente"]
+  QR --> COUNTS["Contagens físicas e subtests separados; sem percentual inventado"]
+  SRC --> NODE["npm ci / typecheck com versão declarada"]
+  SRC --> DOC["Doctor: sanidade estrutural local"]
+  SRC --> EXPORT["Exportar índice Git em diretório limpo"]
+  EXPORT --> CHECK["Validar dependências, imports, assets e testes selecionados"]
+  RUN --> HASH["Hashes antes/depois: detectar mudança durante verificação"]
+  HASH --> GATE{"Sem falhas e código verificado corresponde à entrega?"}
+  COUNTS --> GATE
+  NODE --> GATE
+  DOC --> GATE
+  CHECK --> GATE
+  GATE -->|"não"| FIX["Reproduzir falha / corrigir com spec / repetir escopo afetado"]
+  FIX --> RUN
+  GATE -->|"sim"| MANIFEST["Manifesto explícito: excluir segredos, dados privados e trabalho concorrente"]
+  MANIFEST --> COMMIT["Commit local identificável"]
+  COMMIT --> PUSH["Push autorizado da branch ao GitHub"]
+  PUSH --> REMOTE["CI remota: resultado próprio ainda precisa ser observado"]
+  REMOTE --> STATUS["Relatório de entrega com escopo e limites"]
+  RUN -. "suíte local aprovada não prova CI remota" .-> LIMIT["Testes, lint, análise real e validação externa são evidências distintas"]
+```
+
+[Fonte Mermaid](docs/architecture/flows/13-validacao-entrega.mmd) · [Abrir SVG](docs/architecture/flows/13-validacao-entrega.svg)
+
+**Fontes de código:**
+
+- [scripts/quality_report.py:65](scripts/quality_report.py#L65) — `load_junit_results`.
+- [scripts/quality_report.py:211](scripts/quality_report.py#L211) — `generate_report`.
+- [sdd/tdd_runner.py:554](sdd/tdd_runner.py#L554) — `run_pytest`.
+- [marceloclaro/doctor.py:921](marceloclaro/doctor.py#L921) — `run_doctor`.
+
+**Limitações:**
+
+- Suíte local, lint e CI remota são verificações distintas.
+- Diagrama representa o procedimento de entrega; resultado remoto deve ser observado separadamente.
+
+Para atualizar esta seção, execute na raiz
+`python3 scripts/sync_readme_flowcharts.py`. Para conferir sem escrever, use
+`python3 scripts/sync_readme_flowcharts.py --check`.
+
+<!-- core-flowcharts:end -->
 
 ## Limites de segurança e operação
 
