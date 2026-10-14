@@ -333,3 +333,26 @@ def test_valid_schema_still_rejects_equal_counts_with_orphan_vector_id(local, tm
     db.commit()
     db.close()
     assert p._audit_index(generation, manifest, log)["complete"] is True
+
+
+@pytest.mark.parametrize("file_name", ["config.yaml", "index.1.stdout.log"])
+def test_resumed_work_symlink_never_writes_outside_private_directory(local, tmp_path, monkeypatch, file_name):
+    p, _ = local
+    p._prepare_state()
+    generation = p.state_root / "generations" / ("b" * 32)
+    generation.mkdir(parents=True)
+    manifest = p._export_corpus(generation / "corpus")
+    manifest["binary_sha256"] = "fixture"
+    (generation / "manifest-draft.json").write_text(json.dumps(manifest))
+    (p.state_root / "pending.json").write_text(json.dumps({"generation": generation.name}))
+    work = generation / "work"
+    work.mkdir()
+    victim = tmp_path / "original-source.py"
+    victim.write_text("MUST REMAIN UNCHANGED\n")
+    (work / file_name).symlink_to(victim)
+    monkeypatch.setattr(p, "_installation", lambda: {"installed": True, "binary_sha256": "fixture"})
+    monkeypatch.setattr(p, "_network_probe", lambda: {"available": True})
+    monkeypatch.setattr(p, "_command", lambda *args: ["/usr/bin/python3", "-c", "pass"])
+    out = p.run({"operation": "index"})
+    assert victim.read_text() == "MUST REMAIN UNCHANGED\n"
+    assert out["success"] is False

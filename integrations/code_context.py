@@ -63,6 +63,15 @@ def _write_json(path: Path, value: dict) -> None:
     temporary.replace(path)
 
 
+def _open_private(path: Path, mode: str):
+    """Nunca siga um link deixado pelo processo confinado no diretório gravável."""
+    _no_symlinks(path)
+    flags = os.O_WRONLY | os.O_CREAT | os.O_NOFOLLOW
+    flags |= os.O_APPEND if "a" in mode else os.O_TRUNC
+    descriptor = os.open(path, flags, 0o600)
+    return os.fdopen(descriptor, mode, encoding=None if "b" in mode else "utf-8")
+
+
 class CodeContextProvider:
     """Adaptador local síncrono; o primário controla orçamento e invocação."""
 
@@ -485,7 +494,8 @@ class CodeContextProvider:
         work = generation / "work"
         _no_symlinks(work)
         work.mkdir(mode=0o700, exist_ok=True)
-        (work / "config.yaml").write_text('model_path: ""\nvocab_path: ""\nort_lib_path: ""\nlog_level: warn\n', encoding="utf-8")
+        with _open_private(work / "config.yaml", "w") as configuration:
+            configuration.write('model_path: ""\nvocab_path: ""\nort_lib_path: ""\nlog_level: warn\n')
         if not manifest["files"]:
             return {"ok": False, "status": "empty_corpus", "index_ready": False, "available": False}
         history_path = generation / "index_attempts.json"
@@ -493,11 +503,13 @@ class CodeContextProvider:
         history = json.loads(history_path.read_text()).get("attempts", []) if history_path.is_file() else []
         attempts = []
         previous_logs = [int(path.name.split(".")[1]) for path in work.glob("index.*.stderr.log") if path.name.split(".")[1].isdigit()]
+        for previous_log in work.glob("index.*.stderr.log"):
+            _no_symlinks(previous_log)
         first_attempt = max(previous_logs, default=0) + 1
         for invocation_attempt in range(1, 7):
             attempt = first_attempt + invocation_attempt - 1
             stderr_path = work / f"index.{attempt}.stderr.log"
-            with (work / f"index.{attempt}.stdout.log").open("wb") as stdout, stderr_path.open("wb") as stderr:
+            with _open_private(work / f"index.{attempt}.stdout.log", "wb") as stdout, _open_private(stderr_path, "wb") as stderr:
                 process = subprocess.Popen(self._command(generation, "index"), stdout=stdout, stderr=stderr, env=self._env(), start_new_session=True)
                 try:
                     code = process.wait(timeout=remaining())
@@ -559,7 +571,7 @@ class CodeContextProvider:
         from mcp.client.stdio import stdio_client
         command = self._command(generation, "serve")
         params = StdioServerParameters(command=command[0], args=command[1:], env=self._env(), cwd=str(generation / "work"))
-        with (generation / "work" / "serve.stderr.log").open("a", encoding="utf-8") as error_log:
+        with _open_private(generation / "work" / "serve.stderr.log", "a") as error_log:
             async with asyncio.timeout(timeout):
                 async with stdio_client(params, errlog=error_log) as (read, write):
                     async with ClientSession(read, write) as session:
