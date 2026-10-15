@@ -78,6 +78,21 @@ async def ecosystem_scientific_run(config: dict[str, Any]) -> dict[str, Any]:
     return await run_cancellable(_knowledge_operation, "scientific_reproducible_run", config)
 
 
+@mcp.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=False, openWorldHint=False))
+async def ecosystem_scientific_verify(config: dict[str, Any]) -> dict[str, Any]:
+    """Revalida pacote científico local: hashes, artefatos e análise reproduzida.
+
+    config: package_dir e timeout_seconds opcional, até 60 s. Executa somente
+    os métodos confiáveis do Core, sem rodar código contido no pacote, instalar
+    dependências ou consultar a rede. O pacote é somente leitura; MetaBus recebe
+    observação sem promoção de confiança. Aceite computacional local não é
+    revisão humana, validação externa, aprovação editorial ou autorização de envio.
+    """
+    from research.scientific_release import validate_verify_config
+    config = validate_verify_config(config)
+    return await run_cancellable(_knowledge_operation, "scientific_verify_package", config)
+
+
 @mcp.tool(annotations=ToolAnnotations(readOnlyHint=True, destructiveHint=False))
 async def ecosystem_integration_status() -> dict[str, Any]:
     """Diagnostica configuração de agentes, hooks, MCPs, CLI, plugins e skills.

@@ -9,7 +9,9 @@ def annotate(workspace: Path, project_id: str, claim_id: str, study_id: str,
              source_file: Path | None = None, human: bool = False,
              verbatim: bool = False) -> Path:
     if status not in {"candidate","verified","rejected"}: raise ValueError("status inválido")
-    if status=="verified" and (not human or source_file is None):
+    if type(human) is not bool:
+        raise ValueError("human exige booleano explícito; texto ou número não é decisão humana")
+    if status=="verified" and (human is not True or source_file is None):
         raise ValueError("verified exige decisão humana e source_file para provenance")
     source_sha=sha256_file(source_file) if source_file else None
     obj={"schema_version":"1.0","annotation_id":uid("EANN",12),"project_id":project_id,

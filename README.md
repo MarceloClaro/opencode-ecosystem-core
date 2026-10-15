@@ -347,6 +347,13 @@ no MetaBus, sem elevar confiança nem apresentar circuitos fixos como resposta
 à consulta. Os [recibos R890](docs/verification-local-r890.json) distinguem os
 testes locais das propostas de integração e dos runtimes externos não ativados.
 
+O [aceite científico local R891–R893](docs/ACEITE_CIENTIFICO_LOCAL_R891.md)
+conecta artigos e experimentos ao mesmo primário, CLI e MCP: verifica pacotes,
+hashes e reexecução por código confiável, propaga falhas sem conclusão fictícia
+e preserva a busca Whoosh entre processos. O perfil de regressões é enumerado,
+com orçamento e recibos; aceite computacional não equivale a revisão humana,
+mérito científico ou escalabilidade multi-host.
+
 ## Arquitetura completa e fluxogramas atuais
 
 [![Visão operacional do Core](docs/architecture/curated-overview.svg)](docs/ARQUITETURA_COMPLETA_CORE_R879.md)

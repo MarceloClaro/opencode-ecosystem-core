@@ -21,9 +21,11 @@ import pytest
 def _eligible_research_contract_fixture(monkeypatch):
     """Exercita auditoria editorial com fixture; não comprova pesquisa executada."""
     from agentic_science_v2 import deep_research
+    from agentic_science_v2.review_agent import OrchestratorReviewer
+    monkeypatch.setattr(OrchestratorReviewer, "review", lambda self, paper: _fake_r103_package())
     monkeypatch.setattr(deep_research, "run_deep_research", lambda **kwargs: {
         "status": "completed", "evidence_eligible": True, "experiment_executed": True,
-        "reports": [{"summary": "Conteúdo sintético para testar o contrato editorial.", "confidence": 0.7}],
+        "reports": [{"summary": "Abstract\nFixture editorial.\nIntroduction\nContexto.\nMethods\nTeste de contrato.\nResults\nSem medição científica.\nConclusion\nFixture apenas.", "confidence": 0.7}],
         "evidence_graph": {}, "plans": []})
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -75,27 +77,23 @@ class TestEstagioR106Real:
         result = orch.scientific_discovery_pipeline(
             "dominio de teste rigor manuscrito", max_rounds=1, strict_gates=False
         )
-        assert result["status"] in ("completed", "error")
-        if result["status"] == "completed":
-            assert "r381" in result["stages"]
-            audit = result["stages"]["r381"]
-            if audit.get("status") != "skipped":
-                assert audit["schema_version"] == "1.0.0"
-                assert "moves_presentes" in audit
-                assert "findings" in audit
-                assert "human_gate" in audit
-                assert "disclaimer" in audit
+        assert result["status"] == "completed"
+        audit = result["stages"]["r381"]
+        assert audit["schema_version"] == "1.0.0"
+        assert "moves_presentes" in audit
+        assert "findings" in audit
+        assert "human_gate" in audit
+        assert "disclaimer" in audit
 
     def test_manuscript_rigor_gate_resumo_presente(self):
         orch = _make_orchestrator()
         result = orch.scientific_discovery_pipeline(
             "dominio de teste resumo rigor", max_rounds=1, strict_gates=False
         )
-        if result["status"] == "completed":
-            assert "manuscript_rigor_gate" in result
-            resumo = result["manuscript_rigor_gate"]
-            assert "human_gate" in resumo
-            assert "high_severity_findings" in resumo
+        assert result["status"] == "completed"
+        resumo = result["manuscript_rigor_gate"]
+        assert "human_gate" in resumo
+        assert "high_severity_findings" in resumo
 
 
 # ═══════════════════════════════════════════════════════════════════════
@@ -122,9 +120,8 @@ class TestChamadaComSecoesReais:
             "dominio de teste spy", max_rounds=1, strict_gates=False
         )
 
-        if result["status"] == "completed" and result["stages"].get("r105", {}).get("sections"):
-            assert "sections" in captured
-            assert captured["sections"] == result["stages"]["r105"]["sections"]
+        assert result["status"] == "completed"
+        assert captured["sections"] == result["stages"]["r105"]["sections"]
 
 
 # ═══════════════════════════════════════════════════════════════════════
@@ -152,10 +149,9 @@ class TestSemFabricacao:
         result = orch.scientific_discovery_pipeline(
             "dominio de teste r105 falho", max_rounds=1, strict_gates=False
         )
-        if result["status"] == "completed":
-            audit = result["stages"]["r381"]
-            assert audit.get("status") == "skipped"
-            assert "reason" in audit
+        assert result["status"] == "blocked"
+        assert result["failed_stage"] == "r105"
+        assert "r381" not in result["stages"]
 
     def test_gate_bloqueado_no_r103_nao_chega_no_r106(self, monkeypatch):
         from agentic_science_v2.review_agent import OrchestratorReviewer
@@ -201,10 +197,10 @@ class TestNaoBloqueante:
         result = orch.scientific_discovery_pipeline(
             "dominio de teste nao bloqueante", max_rounds=1, strict_gates=False
         )
-        if result["status"] == "completed" and result["stages"].get("r105", {}).get("sections"):
-            assert result["status"] == "completed"
-            assert result["stages"]["r381"]["human_gate"] == "required"
-            assert result["manuscript_rigor_gate"]["human_gate"] == "required"
+        assert result["status"] == "completed"
+        assert result["stages"]["r381"]["human_gate"] == "required"
+        assert result["manuscript_rigor_gate"]["human_gate"] == "required"
+        assert result["scientific_acceptance"] is False
 
 
 # ═══════════════════════════════════════════════════════════════════════

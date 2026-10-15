@@ -676,9 +676,12 @@ def build_config() -> Dict[str, Any]:
                     "examine DNA, potenciais, insumos, predecessoras, paralelismo e bloqueios. "
                     "Para dados reais use ecosystem_scientific_run com configuração explícita, "
                     "fontes, método e diretório de saída. Preserve hashes, reprodução e revisão "
-                    "computacional; nunca trate hipótese, simulação ou mock como evidência real."
+                    "computacional; nunca trate hipótese, simulação ou mock como evidência real. "
+                    "Para revalidar uma entrega use ecosystem_scientific_verify com package_dir "
+                    "e timeout_seconds: confira hashes e reexecução sem executar scripts do pacote. "
+                    "Aceite local não comprova validade científica nem autoriza publicação."
                 ),
-                "description": "Potenciais, roadmap e pesquisa reproduzível com proveniência (R663–R666)",
+                "description": "Pesquisa reproduzível e verificação local de pacotes científicos (R663–R891)",
                 "agent": "marceloclaro",
             },
             "integracoes": {

@@ -156,8 +156,8 @@ class ContextAmplifier:
     """Expande o contexto do modelo gratuito usando fontes locais e federadas a custo zero."""
 
     def __init__(self, whoosh_engine: Optional[Whoosh3Engine] = None, data_hub: Optional[DataKnowledgeHub] = None):
-        self.whoosh = whoosh_engine or Whoosh3Engine("opencode_memoria")
-        self.data_hub = data_hub or DataKnowledgeHub()
+        self.whoosh = whoosh_engine if whoosh_engine is not None else Whoosh3Engine("opencode_memoria")
+        self.data_hub = data_hub if data_hub is not None else DataKnowledgeHub()
 
     def expand_context(
         self,
@@ -174,10 +174,22 @@ class ContextAmplifier:
             try:
                 whoosh_results = self.whoosh.search(query, limit=max_items)
                 for r in whoosh_results:
+                    content = r.get("content", "")
+                    if (not isinstance(content, str) or not content.strip()
+                            or r.get("content_unavailable") is True
+                            or r.get("evidence_scope") == "metadata"):
+                        # Índices legados podem localizar termos sem armazenar o
+                        # texto. Metadados não são convertidos em corpo inventado.
+                        continue
                     evidence_items.append({
-                        "source": f"whoosh:{r.get('source', 'local')}",
-                        "title": r.get("title", "Documento Local"),
-                        "content": r.get("content", ""),
+                        "source": f"whoosh:{r.get('source', '')}",
+                        "source_document_id": r.get("id"),
+                        "index_name": self.whoosh.index_name,
+                        "title": r.get("title", ""),
+                        "content": content[:4000],
+                        "content_characters": len(content),
+                        "content_truncated": len(content) > 4000,
+                        "evidence_scope": "document_text",
                         "score": float(r.get("score", 1.0)),
                     })
             except Exception as e:

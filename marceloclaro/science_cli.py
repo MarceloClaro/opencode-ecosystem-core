@@ -26,7 +26,7 @@ def _unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
 def run_science_cli(argv: list[str], orchestrator: Any = None) -> int:
     parser = _Parser(prog="ciencia", description="Evolução do conhecimento e pesquisa reproduzível.")
     sub = parser.add_subparsers(dest="operation", required=True)
-    for operation in ("planejar", "executar", "runtime", "dataset", "personalizar", "plugins", "notebook"):
+    for operation in ("planejar", "executar", "verificar", "runtime", "dataset", "personalizar", "plugins", "notebook"):
         command = sub.add_parser(operation)
         command.add_argument("--config")
         if operation == "planejar":
@@ -48,10 +48,13 @@ def run_science_cli(argv: list[str], orchestrator: Any = None) -> int:
         elif args.operation == "planejar":
             config = {"problem": args.problema, "target_state": args.objetivo}
         else:
-            raise ValueError("executar exige --config.")
+            raise ValueError(f"{args.operation} exige --config.")
         from marceloclaro.runtime_actions import METHODS, validate_action
         if args.operation in METHODS:
             config = validate_action(args.operation, config)
+        elif args.operation == "verificar":
+            from research.scientific_release import validate_verify_config
+            config = validate_verify_config(config)
         else:
             validator = validate_plan_config if args.operation == "planejar" else validate_science_config
             config = validator(config)
@@ -60,10 +63,17 @@ def run_science_cli(argv: list[str], orchestrator: Any = None) -> int:
             orchestrator = MarceloClaroOrchestrator(auto_load_agents=False)
         if args.operation in METHODS:
             method = getattr(orchestrator, METHODS[args.operation])
+        elif args.operation == "verificar":
+            method = orchestrator.scientific_verify_package
         else:
             method = orchestrator.knowledge_evolution_plan if args.operation == "planejar" else orchestrator.scientific_reproducible_run
         result = method(**config)
         print(json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False))
+        if args.operation == "verificar":
+            accepted = (result.get("status") == "locally_verified"
+                        and result.get("success") is True
+                        and result.get("local_computational_acceptance") is True)
+            return 0 if accepted else 1
         return 1 if result.get("status") in {"blocked", "error", "failed", "partial", "lost"} else 0
     except (ValueError, OSError, ImportError, RuntimeError, TypeError) as exc:
         print(json.dumps({"status": "error", "error": str(exc)}, ensure_ascii=False))

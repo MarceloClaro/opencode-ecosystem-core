@@ -1,0 +1,111 @@
+{
+  "generated_at": "2026-10-15T09:39:15.626342+00:00",
+  "verification": "local_operation",
+  "external_validation": false,
+  "human_scientific_acceptance": false,
+  "global_suite_executed": false,
+  "scientific_scale_validated": false,
+  "audited_externally": false,
+  "head_at_execution": "f6388a2c69acb5aa2e48632fb78b6997316f7b96",
+  "cycle": "R893",
+  "scope": "Whoosh persistence, initialization locking, truthful commits and recovered text in ContextAmplifier",
+  "source_hashes": {
+    "skills/tooling/whoosh3_engine.py": "1ce84337f6f244ee2fc16a89284112986560db3f7cdbbf1ec72fbad1c1e53f49",
+    "integrations/deepseek_harness/free_model_amplifier.py": "28475c6eeaff47eead37584c868bec8226de09f1c5e1188dc3096f2cb0073ca8",
+    "tests/test_r893_whoosh_persistence.py": "023060b047ea51c6e2a8d64f0f9da0e4e59b43ca04ad336f25d56a26ae505ea7"
+  },
+  "red_green": [
+    {
+      "local_path": "outputs/core-r893/red.xml",
+      "sha256": "9e0bf6142c9a1c7413b766ed222569813bb001d977ba2d97430d0755bf1cf0ea",
+      "bytes": 18331,
+      "junit_counts": {
+        "tests": 11,
+        "failures": 11,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "local_path": "outputs/core-r893/green.xml",
+      "sha256": "ff64d14d4a13cbb4c3bfcabea90c675e2b5ff71d183debd465428cc588c1ffc4",
+      "bytes": 2193,
+      "junit_counts": {
+        "tests": 14,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "local_path": "outputs/core-r893/context-red.xml",
+      "sha256": "7965dbaffd320c6822e85402877671df9ee348f3e12c09bc4ade7f353bda1557",
+      "bytes": 9618,
+      "junit_counts": {
+        "tests": 20,
+        "failures": 6,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "local_path": "outputs/core-r893/context-regression.xml",
+      "sha256": "b3f6a142de01409cf0675dacf9764643e282943ac38f82e3ab0b451d11fdbca0",
+      "bytes": 4245,
+      "junit_counts": {
+        "tests": 28,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "local_path": "outputs/core-r893/nontext-red.xml",
+      "sha256": "f4a21bcf6c401089b1d74f692a14799fd8afae5abd660198c3cfb8a70e23562f",
+      "bytes": 7114,
+      "junit_counts": {
+        "tests": 4,
+        "failures": 4,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "local_path": "outputs/core-r893/nontext-green.xml",
+      "sha256": "8f2d33aa57537106774746ff2b70fb9032c2070b50a80c74cc164f155dd65ef1",
+      "bytes": 3778,
+      "junit_counts": {
+        "tests": 25,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "local_path": "outputs/core-r893/selected-legacy.xml",
+      "sha256": "c21a162ad4b5e4d17bcad73ef95c2872fd00fa5a73c0c77e765ac5cc10de1915",
+      "bytes": 871,
+      "junit_counts": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  ],
+  "final_profile_reference": "verification-local-r891.json",
+  "final_r893_selected_nodeids": 25,
+  "acceptance": [
+    "Index, reopen in another interpreter, retrieve actual text and construct grounding.",
+    "Concurrent initialization preserves a valid index; corrupted TOC is not silently recreated.",
+    "Commit failure reports no documents indexed and releases writer resources.",
+    "Legacy indexes without stored text remain byte-preserved and metadata-only.",
+    "Non-text content is rejected before modification, including atomic invalid batches."
+  ],
+  "limitations": [
+    "Destructive clear() was not validated with concurrent writers and requires exclusive use.",
+    "Legacy lost text cannot be reconstructed or invented; reindex from original sources when needed.",
+    "Single-host filesystem index tests do not establish multi-host scaling or a latency SLA.",
+    "Grounding contains recovered text, not a guarantee of truth or calibrated relevance."
+  ]
+}

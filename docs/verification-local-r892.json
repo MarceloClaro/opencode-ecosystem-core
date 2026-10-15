@@ -1,0 +1,91 @@
+{
+  "generated_at": "2026-10-15T09:39:15.626342+00:00",
+  "verification": "local_operation",
+  "external_validation": false,
+  "human_scientific_acceptance": false,
+  "global_suite_executed": false,
+  "scientific_scale_validated": false,
+  "audited_externally": false,
+  "head_at_execution": "f6388a2c69acb5aa2e48632fb78b6997316f7b96",
+  "cycle": "R892",
+  "scope": "Fail-closed scientific stages, actual Blackboard output and strict human decision flags",
+  "source_hashes": {
+    "marceloclaro/orchestrator.py": "cae5531b403f47b6326c05d017ee398cf324043d1c2e2eb83b2b0a403c1908f5",
+    "academic/maswos.py": "6095f593fce60b7a2c7ea5d647a0e6e51542a4acd098d86a3ef69cd4fc90553b",
+    "scientific_lab/native/evidence.py": "7c06c3e61889f9f048ee06b8720fdb2cdd7fe76878deecee7cd89f5738c11db7",
+    "tests/test_r892_scientific_fail_closed.py": "1b0747e04a636b055a2cb1cbd30f1ebef5188258195c613f9830fbf63f5abadd",
+    "tests/test_r108_marceloclaro_scientific_fusion.py": "c9b1ed4e14a6f00517349251f87a6efe800f28a0d430a2d970e0e261b73357c8",
+    "tests/test_r381_manuscript_rigor_gate_integration.py": "eff46bfe1bc35570a04738f4faece68ac24df5ba9ab01b9cf708ea70ed2ee93e"
+  },
+  "red_green": [
+    {
+      "local_path": "outputs/core-r892/red.xml",
+      "sha256": "5d4d6c28669ef1029f941a6aeb9d1eeedb6623bf70d5716a93548be60abf75b7",
+      "bytes": 20276,
+      "junit_counts": {
+        "tests": 33,
+        "failures": 32,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "local_path": "outputs/core-r892/red-valid.xml",
+      "sha256": "52d370b1b509e90872b3059ea853bfa7b092eddbdfa767748481088e944fb438",
+      "bytes": 26870,
+      "junit_counts": {
+        "tests": 38,
+        "failures": 37,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "local_path": "outputs/core-r892/green.xml",
+      "sha256": "38ff1ed6c8c1aee9af53e4ecfe90ffdb0ebe387466e8adaeb9033d2532a4d49a",
+      "bytes": 5702,
+      "junit_counts": {
+        "tests": 38,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "local_path": "outputs/core-r892/red-review-c.xml",
+      "sha256": "f03869f3bcc3de2eb5f6f48a2a25700b2cb5357fa9967ee02670da349121e213",
+      "bytes": 13878,
+      "junit_counts": {
+        "tests": 50,
+        "failures": 11,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "local_path": "outputs/core-r892/regression-green-review-c.xml",
+      "sha256": "fe14da338e3ea827eddbb089b50103636aa1ba5785ac42137386ab7f202fccb7",
+      "bytes": 51181,
+      "junit_counts": {
+        "tests": 312,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  ],
+  "final_profile_reference": "verification-local-r891.json",
+  "final_r892_selected_nodeids": 50,
+  "fixes": [
+    "R102 requires completed, useful reports and strict execution flags.",
+    "R104d/R105 failures stop downstream completion; strict_gates=False cannot manufacture success.",
+    "MASWOS posting does not simulate completed execution; empty/dry-run/failed stages cannot approve.",
+    "Mandatory board failure propagates; human evidence flags require real booleans.",
+    "Internal content and structural scores do not raise trust or claim empirical calibration."
+  ],
+  "limitations": [
+    "No new agent executor or model inference was validated by synthetic control-path fixtures.",
+    "Internal board acceptance is not external peer review or editorial approval.",
+    "The initial RED contains malformed fixture constructor failures and is not treated as valid behavioral RED; red-valid.xml is the corrected behavioral counterproof."
+  ]
+}

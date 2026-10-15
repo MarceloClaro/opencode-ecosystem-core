@@ -93,6 +93,10 @@ class MaswosRun:
             "stages_total": len(self.stages),
             "final_score": self.final_score,
             "approved": self.approved,
+            "execution_completed": bool(self.stages) and all(s.status == "completed" for s in self.stages),
+            "score_kind": "internal_heuristic",
+            "scientific_acceptance": False,
+            "human_review_required": True,
             "duration_s": round(time.time() - self.started_at, 2),
         }
         # Anexa dados da banca quando presentes (R439)
@@ -108,6 +112,8 @@ class MaswosRun:
             base["board_iterations"] = self.board_iterations
         if self.board_score is not None:
             base["board_score"] = self.board_score
+        if self.board_error is not None:
+            base["board_error"] = self.board_error
         return base
 
 
@@ -145,7 +151,9 @@ class MaswosPipeline:
                         f"[MASWOS:{stage_name}] Tópico: {topic}. "
                         f"Contexto atual: {accumulated[-2000:] if accumulated else '(início)'}"
                     )
-                    result.output = output or ""
+                    if not isinstance(output, str) or not output.strip():
+                        raise RuntimeError("Delegação sem conteúdo de execução.")
+                    result.output = output
                     accumulated += f"\n\n## [{stage_name}]\n{result.output}"
                     result.status = "completed"
                 else:
@@ -159,7 +167,8 @@ class MaswosPipeline:
 
         # Quality gate final: AUTO_SCORE_QUALIS
         run.final_score = round(self.score_fn(accumulated or topic), 2)
-        run.approved = run.final_score >= QUALITY_GATE_THRESHOLD
+        execution_completed = bool(run.stages) and all(stage.status == "completed" for stage in run.stages)
+        run.approved = execution_completed and run.final_score >= QUALITY_GATE_THRESHOLD
         # Anexa manuscrito acumulado para uso pela banca rigorosa
         run.manuscript = accumulated  # type: ignore
         return run
@@ -231,22 +240,21 @@ class MaswosPipeline:
                     },
                     source_agent="maswos_rigorous_board",
                 )
-                metabus.memory.add_reflection(
-                    agent_id="maswos_pipeline",
-                    task_context=f"banca rigorosa {venue}: {topic[:60]}",
-                    reflection=(
-                        f"Banca {venue} concluiu {loop_result['iterations']} iteração(ões): "
-                        f"{final_decision.status} (score {final_decision.overall_score}/10), "
-                        f"{len(final_decision.gaps)} gaps, {loop_result['gaps_cleaned']} limpos."
-                    ),
-                    score=final_decision.overall_score / 10.0,
+                metabus.memory.record_observation(
+                    "maswos_pipeline", f"banca rigorosa {venue}: {topic[:60]}",
+                    {"board_status": final_decision.status,
+                     "score_proxy": final_decision.overall_score,
+                     "iterations": loop_result["iterations"], "approved": run.approved,
+                     "score_kind": "internal_heuristic", "externally_validated": False,
+                     "confidence_promoted": False},
                 )
             except Exception:
                 pass
 
         except Exception as exc:
-            # Falha da banca não deve derrubar pipeline — registra e mantém decisão original
+            # A banca é obrigatória neste percurso; sua ausência impede entrega.
             run.board_error = str(exc)  # type: ignore
+            run.approved = False
 
         return run
 
@@ -336,7 +344,9 @@ def run_maswos_cloud(
                     f"Skills de referência em scripts/cloud/. "
                     f"Contexto: {accumulated[-2000:] if accumulated else '(início)'}",
                 )
-                result.output = output or ""
+                if not isinstance(output, str) or not output.strip():
+                    raise RuntimeError("Delegação cloud sem conteúdo de execução.")
+                result.output = output
                 accumulated += f"\n\n## [{stage_name}]\n{result.output}"
                 result.status = "completed"
             else:
@@ -352,7 +362,8 @@ def run_maswos_cloud(
         run.stages.append(result)
 
     run.final_score = round(pipeline.score_fn(accumulated or topic), 2)
-    run.approved = run.final_score >= QUALITY_GATE_THRESHOLD
+    execution_completed = bool(run.stages) and all(stage.status == "completed" for stage in run.stages)
+    run.approved = execution_completed and run.final_score >= QUALITY_GATE_THRESHOLD
     return run
 
 

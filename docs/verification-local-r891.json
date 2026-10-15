@@ -1,0 +1,1170 @@
+{
+  "generated_at": "2026-10-15T09:39:15.626342+00:00",
+  "verification": "local_operation",
+  "external_validation": false,
+  "human_scientific_acceptance": false,
+  "global_suite_executed": false,
+  "scientific_scale_validated": false,
+  "audited_externally": false,
+  "head_at_execution": "f6388a2c69acb5aa2e48632fb78b6997316f7b96",
+  "cycle": "R891",
+  "scope": "Local scientific package verification and enumerated regression profile",
+  "source_hashes": {
+    "research/scientific_release.py": "6af6761280b9386a586c954a84a7971c24bdd1530b3c3c666be449b097618e7f",
+    "research/statistical_methods.py": "1d365348d6215025d519a5da4d11cdfec24ae2e0e56266419aa9409bedc9f4b8",
+    "research/provenance_pipeline.py": "40abe1c827eb8313e711eb5e4dc116fbbdf092371f137ef4217c8db5061b4bb6",
+    "marceloclaro/science_cli.py": "8f85c4f6319bbfb5a3986c1ebacc107102420d545084633565f22c72346d2e33",
+    "marceloclaro/orchestrator.py": "cae5531b403f47b6326c05d017ee398cf324043d1c2e2eb83b2b0a403c1908f5",
+    "integrations/ecosystem_mcp.py": "16b7ea26dff93b33966afc039587a21e51198753c3eaaf185e7f10e6dd7bcd57",
+    "scripts/validate_scientific_profile.py": "280c5f86513d0624052268b1286a476c8b16c7f41381aaddf61768a0883bdd6f",
+    "requirements-scientific-profile.txt": "573a876c7bf81ffb3f7a820c3fbf0e1493439a36151f7445c90f69399e582187",
+    "requirements.txt": "fa2d8c68328c7afd2d30386bf89411d2fced5f08f2462a977da933730697ce9c",
+    ".github/workflows/scientific-acceptance.yml": "9c399c64271adcc3968fa92566f3ee577c0b3ec7400624cd0ffb96cc33b08a46",
+    ".github/workflows/scientific-lab.yml": "243c83ceb9af8a1933e7ad616da9a1a30ab750bcb637877ec474d05ea9862042",
+    "tests/test_r891_scientific_release.py": "c07f648eb89650ecb7a9a668d2f3dacc047ddc2d64aa55a54fa0638eb2efc546",
+    "tests/test_r891_scientific_orchestration.py": "244e648584c403cb9e577464d6d33cf4ccce41d05b5de1a8034491664f1c7fb9",
+    "tests/test_r891_scientific_profile.py": "e7245c773985e326ade0ccf8f145c436dd29b4ed7a08f008720a1182c5e85025"
+  },
+  "profile": {
+    "run_id": "20261015T093443-9a48ace70840448789db12acb536617b",
+    "status": "passed",
+    "scope": "enumerated_scientific_regression_profile",
+    "totals": {
+      "total": 863,
+      "passed": 863,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "dependency_versions": {
+      "pytest": "9.1.1",
+      "pytest-timeout": "2.4.0",
+      "numpy": "2.5.1",
+      "scipy": "1.18.0",
+      "psutil": "7.2.2"
+    },
+    "changed_sources": [],
+    "not_executed_groups": [],
+    "profile_exclusions": {
+      "tests/test_r706_manuscript_scale.py::test_pptx_theme_falha_fechada_sem_dependencia": "Guarda condicional faz skip quando python-pptx está instalado; não pertence ao perfil.",
+      "other_tests": "Demais testes não enumerados, compiladores, GPU e cargas externas não executados."
+    },
+    "limits": {
+      "group_timeout_seconds": 180,
+      "max_rss_bytes": 1610612736,
+      "rss_scope": "pytest_process_and_descendants_sampled_every_25ms",
+      "thread_environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "VECLIB_MAXIMUM_THREADS": "1",
+        "BLIS_NUM_THREADS": "1"
+      }
+    },
+    "limitations": [
+      "Perfil local enumerado; não representa a suíte global.",
+      "RSS amostrado; não constitui isolamento por cgroup ou limite instantâneo.",
+      "Hashes antes/depois não detectam alteração transitória revertida durante execução.",
+      "Nenhuma validação externa de dados, referências, mérito ou escala científica."
+    ],
+    "summary": {
+      "local_path": "reports/scientific-profile/20261015T093443-9a48ace70840448789db12acb536617b/summary.json",
+      "sha256": "6f257e5b554b7de55ad5616b7018812363e4978f389b17e91a4a97b7f207bd3c",
+      "bytes": 1630110
+    },
+    "source_before_digest": "21d0e5c5d2770a7092c0f8eaa8486b0a337eb3f0995b6a182597d6fd6653efc1",
+    "source_after_digest": "21d0e5c5d2770a7092c0f8eaa8486b0a337eb3f0995b6a182597d6fd6653efc1",
+    "source_count": 3804,
+    "groups": [
+      {
+        "name": "provenance_release",
+        "status": "passed",
+        "counts": {
+          "total": 193,
+          "passed": 193,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "targets": [
+          "tests/test_r663_scientific_provenance.py",
+          "tests/test_r891_scientific_release.py",
+          "tests/test_r891_scientific_orchestration.py",
+          "tests/test_r891_scientific_profile.py",
+          "tests/test_r892_scientific_fail_closed.py"
+        ],
+        "duration_seconds": 58.843,
+        "peak_rss_bytes": 414498816,
+        "max_rss_bytes": 1610612736,
+        "timeout_seconds": 180,
+        "junit_sha256": "724e80d46a8e42431353ec0cbaeed382d877bb5f1a8f05368d619ef99ba955de",
+        "ledger_sha256": "e262d1cd4403c4decb0d34754ec7cee21cb36f6d35ccd547841495d1ef67276b",
+        "log_sha256": "37245460d96ab77b7fcf135e40087543cf2b5391cf0c00a12585ec9aa459dfb1",
+        "selection_sha256": "01b0bdd74e1a5d511755196eeb37b0a8258c04b47279ecb3c383133dd5dd29fb",
+        "problems": []
+      },
+      {
+        "name": "manuscripts",
+        "status": "passed",
+        "counts": {
+          "total": 173,
+          "passed": 173,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "targets": [
+          "tests/test_r108_marceloclaro_scientific_fusion.py",
+          "tests/test_r109_loop_engineering.py",
+          "tests/test_r103_peer_review.py",
+          "tests/test_r104d_agentic_revision.py",
+          "tests/test_r105_paper_composer.py",
+          "tests/test_r381_manuscript_rigor_gate_integration.py",
+          "tests/test_scientific_lab_v41_core_integration.py",
+          "tests/test_scientific_lab_v42_native.py",
+          "tests/test_r706_manuscript_scale.py::test_config_valida_gera_slug_e_modulos",
+          "tests/test_r706_manuscript_scale.py::test_config_rejeita_tipo_invalido",
+          "tests/test_r706_manuscript_scale.py::test_config_rejeita_titulo_e_autores_vazios",
+          "tests/test_r706_manuscript_scale.py::test_tipos_cobrem_cinco_modalidades",
+          "tests/test_r706_manuscript_scale.py::test_scaffold_cria_workspace_isolado",
+          "tests/test_r706_manuscript_scale.py::test_scaffold_nega_sobrescrita_sem_force",
+          "tests/test_r706_manuscript_scale.py::test_parse_tabular_cabecalho_linhas_regras",
+          "tests/test_r706_manuscript_scale.py::test_parse_bbl_duas_referencias_com_negrito",
+          "tests/test_r706_manuscript_scale.py::test_citacoes_expandem_autor_data",
+          "tests/test_r706_manuscript_scale.py::test_iter_blocos_reconhece_tipos",
+          "tests/test_r706_manuscript_scale.py::test_gates_citacoes_indefinidas",
+          "tests/test_r706_manuscript_scale.py::test_gates_diretorio_inexistente",
+          "tests/test_r706_manuscript_scale.py::test_gates_forca_alegacao_sinaliza",
+          "tests/test_r706_manuscript_scale.py::test_produzir_lote_isola_falhas",
+          "tests/test_r706_manuscript_scale.py::test_docx_builder_generico"
+        ],
+        "duration_seconds": 8.451,
+        "peak_rss_bytes": 342589440,
+        "max_rss_bytes": 1610612736,
+        "timeout_seconds": 180,
+        "junit_sha256": "dc55e94b5192cf6b13acbe0bf52eeb7292dd85ceedb9277655929067dd83addf",
+        "ledger_sha256": "ff86cd3462938b181eac111d81269d6112801f8bc27c96156346644ba63d658c",
+        "log_sha256": "11e10bad5517e9c652bbc0205ed5819e3e44adf573f7927c6c2ef2a6db709dc6",
+        "selection_sha256": "8af6e30ab43947362d1abc1aacf7b9c86cc1bbcd71f314373af0b50ab64d0412",
+        "problems": []
+      },
+      {
+        "name": "workflow_memory",
+        "status": "passed",
+        "counts": {
+          "total": 121,
+          "passed": 121,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "targets": [
+          "tests/test_r644_workflow.py",
+          "tests/test_r644_workflow_store.py",
+          "tests/test_r825_execution_cancellation.py",
+          "tests/test_r827_remaining_mcp_cancellation.py",
+          "tests/test_r886_memory_reasoning.py",
+          "tests/test_r886_metacognitive_loop.py",
+          "tests/test_r893_whoosh_persistence.py"
+        ],
+        "duration_seconds": 19.912,
+        "peak_rss_bytes": 585080832,
+        "max_rss_bytes": 1610612736,
+        "timeout_seconds": 180,
+        "junit_sha256": "f94fc1b8a847666d4e84ef73e76d9e850a61da992cab0031da2e148c20eb3829",
+        "ledger_sha256": "4fad88fc66dd241ff0c81e8e7ea3ce45e6e7781830ef0c9c688ccc1612eb88dd",
+        "log_sha256": "cd4af1e5d656bcfb34a4f9813dd71e69a4dcf9d7b09de4297a8dfbff61bbb4b6",
+        "selection_sha256": "e4efbfb9ae1dc6f6c93913133b3cbeb91d8700767f8427099eb3ec30cca70897",
+        "problems": []
+      },
+      {
+        "name": "reasoning_integrity",
+        "status": "passed",
+        "counts": {
+          "total": 329,
+          "passed": 329,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "targets": [
+          "tests/test_r818_restricted_math_engine.py",
+          "tests/test_r821_z3_fail_closed.py",
+          "tests/test_r888_imobench_integrity.py",
+          "tests/test_r890_quantum_provenance.py",
+          "tests/test_r815_scientific_lexical_screening.py"
+        ],
+        "duration_seconds": 12.598,
+        "peak_rss_bytes": 395862016,
+        "max_rss_bytes": 1610612736,
+        "timeout_seconds": 180,
+        "junit_sha256": "77f0580d36837d54fc22cc7f103d70f8ec8af365d96ad2ce1bb67091a9217449",
+        "ledger_sha256": "8e345fc7c0a2919e8506b0d317628dbad27dd31c9c13780e6f192e69c79faa31",
+        "log_sha256": "66d767570c86facc017ef5caf8c3aee29893ac43bed762edd4e38f086a9be083",
+        "selection_sha256": "4af650996f3335d3f6d27bfd9cde25f24404f50f4d6d643b92953f2100dccef3",
+        "problems": []
+      },
+      {
+        "name": "delivery_contracts",
+        "status": "passed",
+        "counts": {
+          "total": 47,
+          "passed": 47,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "targets": [
+          "tests/test_r137_opencode_config_reproducible.py",
+          "tests/test_r839_tdd_history.py",
+          "tests/test_r839_red_delivery.py",
+          "tests/test_r839_verifier_delivery.py"
+        ],
+        "duration_seconds": 128.605,
+        "peak_rss_bytes": 360820736,
+        "max_rss_bytes": 1610612736,
+        "timeout_seconds": 180,
+        "junit_sha256": "b08e1a35b110afac42ca84da5b467362610ef7c44721640284589fa2d5f6e511",
+        "ledger_sha256": "733400009ab23aeb7e8e61d1eb72b6d6b2483c4f744d7d1c0445d2f39973c93d",
+        "log_sha256": "0d4410c73910fd38f59f2cd0daebb34e2df86cb0a733c2343a589441c3ec659b",
+        "selection_sha256": "b11bb43a005cf690ccd777f4b1df589826ce66edd5eb5be86369d9e5f732dce8",
+        "problems": []
+      }
+    ]
+  },
+  "real_execution": {
+    "receipt": {
+      "local_path": "outputs/core-r891/real-acceptance.json",
+      "sha256": "fefcc1f85c92fc769dc0aa63f4c23160dc6f9088c8ffa394af65b46007e6bdc2",
+      "bytes": 57677
+    },
+    "run_dir": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332",
+    "source_hashes": {
+      "research/provenance_pipeline.py": "40abe1c827eb8313e711eb5e4dc116fbbdf092371f137ef4217c8db5061b4bb6",
+      "research/statistical_methods.py": "1d365348d6215025d519a5da4d11cdfec24ae2e0e56266419aa9409bedc9f4b8",
+      "research/scientific_release.py": "6af6761280b9386a586c954a84a7971c24bdd1530b3c3c666be449b097618e7f",
+      "marceloclaro/orchestrator.py": "cae5531b403f47b6326c05d017ee398cf324043d1c2e2eb83b2b0a403c1908f5",
+      "marceloclaro/science_cli.py": "8f85c4f6319bbfb5a3986c1ebacc107102420d545084633565f22c72346d2e33",
+      "integrations/ecosystem_mcp.py": "16b7ea26dff93b33966afc039587a21e51198753c3eaaf185e7f10e6dd7bcd57",
+      "skills/tooling/whoosh3_engine.py": "1ce84337f6f244ee2fc16a89284112986560db3f7cdbbf1ec72fbad1c1e53f49",
+      "integrations/deepseek_harness/free_model_amplifier.py": "28475c6eeaff47eead37584c868bec8226de09f1c5e1188dc3096f2cb0073ca8"
+    },
+    "checks": {
+      "standalone_cli_verification": true,
+      "relocated_package": true,
+      "modified_data_rejected_before_replay": true,
+      "modified_code_never_executed": true,
+      "artifact_hashes_match": true,
+      "production_ledger_unchanged": true,
+      "source_hashes_unchanged": true
+    },
+    "model_inference_executed": false,
+    "sources": {
+      "verification": "actual_public_http_retrieval",
+      "receipts": [
+        {
+          "url": "https://archive.ics.uci.edu/static/public/53/iris.zip",
+          "retrieved_at": "2026-10-14T20:21:05.053364+00:00",
+          "status_code": 200,
+          "sha256": "d11fe30213d36434a0879aab7cb00ce3c812eb7ba2495874438abff7b7b762e9",
+          "bytes": 3738
+        },
+        {
+          "url": "https://api.crossref.org/works/10.1111/j.1469-1809.1936.tb02137.x",
+          "retrieved_at": "2026-10-14T20:21:05.498494+00:00",
+          "status_code": 200,
+          "sha256": "f9bdbe03608a7462c5b461b14c25f3d64af8ea139783aed07c90983ee5289afa",
+          "bytes": 3401
+        }
+      ],
+      "normalized_csv_rows": 150,
+      "external_validation": false,
+      "source_pages": [
+        "https://archive.ics.uci.edu/dataset/53/iris"
+      ]
+    },
+    "runs": {
+      "pearson": {
+        "surface": "CLI -> primary",
+        "analysis": {
+          "method": "pearson",
+          "n": 150,
+          "variables": {
+            "x": "petal_length",
+            "y": "petal_width"
+          },
+          "alpha": 0.05,
+          "seed": 663,
+          "experiment_executed": true,
+          "causal_inference": false,
+          "missing_values_policy": "reject",
+          "assumptions": [
+            "Observações independentes; esta premissa não é confirmada pelo código.",
+            "A origem e a adequação da amostra dependem da proveniência informada.",
+            "Um único método é executado, sem busca por resultados significativos.",
+            "O p-valor paramétrico e o intervalo de Fisher pressupõem distribuição bivariada adequada; o teste de permutação pressupõe permutabilidade sob a hipótese nula."
+          ],
+          "null_hypothesis": "Correlação linear populacional igual a zero.",
+          "estimate": 0.9628654314027961,
+          "statistic": 0.9628654314027961,
+          "p_value": 4.675003907328585e-86,
+          "alternative": "two-sided",
+          "confidence_interval_95": [
+            0.9490524593111144,
+            0.9729853173787971
+          ],
+          "descriptive": {
+            "petal_length": {
+              "n": 150,
+              "mean": 3.758,
+              "standard_deviation": 1.7652982332594664,
+              "median": 4.35,
+              "min": 1.0,
+              "max": 6.9
+            },
+            "petal_width": {
+              "n": 150,
+              "mean": 1.1993333333333334,
+              "standard_deviation": 0.7622376689603466,
+              "median": 1.3,
+              "min": 0.1,
+              "max": 2.5
+            }
+          },
+          "permutation": {
+            "replicates": 999,
+            "seed": 663,
+            "p_value": 0.001,
+            "extreme": 0
+          },
+          "limitations": [
+            "A análise não estabelece causalidade.",
+            "A revisão computacional não substitui revisão humana por pares.",
+            "Não há certificação externa de originalidade ou generalização."
+          ]
+        },
+        "artifacts": {
+          "dataset": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/pearson/dataset.csv",
+            "sha256": "09d1766be79ec606b4c045059bc4b0d3e6a693b61d1cdfc6bdd45af42531df65",
+            "bytes": 4608
+          },
+          "configuration": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/pearson/configuration.json",
+            "sha256": "c5450083d6fd73ec31d837b9fbf5ed37eba79e8efaff5cbede5d795820161ebe",
+            "bytes": 271
+          },
+          "analysis": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/pearson/analysis.json",
+            "sha256": "4c679924fcddce72815625fd4dde36a293efd73eaf11413f9faf8e4210341cad",
+            "bytes": 1663
+          },
+          "methods_code": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/pearson/statistical_methods.py",
+            "sha256": "1d365348d6215025d519a5da4d11cdfec24ae2e0e56266419aa9409bedc9f4b8",
+            "bytes": 8566
+          },
+          "reproduce_code": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/pearson/reproduce.py",
+            "sha256": "ca1016cf9715a26ce804eb6197794a0e9e00784787e90a216d06a44d58c60575",
+            "bytes": 1110
+          },
+          "references": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/pearson/references.json",
+            "sha256": "517c246ef1312370fb85d892ad8dd05826c0f83dce1031870d44b4dced2b51db",
+            "bytes": 278
+          },
+          "reference_source_1": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/pearson/reference-source-1.json",
+            "sha256": "1561d9796e561cdeeec48f1a1bc782166eeb45ba28aa2d4401992965bca4e532",
+            "bytes": 506
+          },
+          "reproduction": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/pearson/reproduction.json",
+            "sha256": "bf6c8037851207235f5e96b65fc73446b3a2ec86787f42249f25d7310e5ad55a",
+            "bytes": 244
+          },
+          "computational_review": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/pearson/computational-review.json",
+            "sha256": "f80f21f5af0d80b116cf235aeb2c0a77dc7786388ba3f97b98b881bb3df5f46b",
+            "bytes": 304
+          },
+          "rag_corpus": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/pearson/rag-corpus.json",
+            "sha256": "331b4373d4f376c530b3657f2436ae9a43570fd88b0e9a2831a217d8016e40b8",
+            "bytes": 398
+          },
+          "rag_retrieval": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/pearson/rag-query.json",
+            "sha256": "9136fcd1e6c2c95ea6818e6b3a3e0bdf1baaf07cac7f21312664df9286080fc1",
+            "bytes": 401
+          },
+          "article": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/pearson/article.md",
+            "sha256": "47e55c8a7ed80abf9c8e44434c0faafe441bb9c9ec08a2b3070fc9d704b2a8a7",
+            "bytes": 5131
+          },
+          "manifest": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/pearson/manifest.json",
+            "sha256": "3f3e9534ada72ce59c7bb254a04c2e0ccdd5708a82208362967b36fc191bc509",
+            "bytes": 8125
+          }
+        },
+        "release_check": {
+          "status": "locally_verified",
+          "success": true,
+          "local_computational_acceptance": true,
+          "human_submission_acceptance": false,
+          "human_review_status": "pending",
+          "external_validation": false,
+          "confidence_promoted": false,
+          "evidence_scope": "local_package_bytes_and_trusted_core_replay",
+          "verified_artifacts": {
+            "dataset": {
+              "name": "dataset.csv",
+              "sha256": "09d1766be79ec606b4c045059bc4b0d3e6a693b61d1cdfc6bdd45af42531df65",
+              "bytes": 4608
+            },
+            "configuration": {
+              "name": "configuration.json",
+              "sha256": "c5450083d6fd73ec31d837b9fbf5ed37eba79e8efaff5cbede5d795820161ebe",
+              "bytes": 271
+            },
+            "analysis": {
+              "name": "analysis.json",
+              "sha256": "4c679924fcddce72815625fd4dde36a293efd73eaf11413f9faf8e4210341cad",
+              "bytes": 1663
+            },
+            "methods_code": {
+              "name": "statistical_methods.py",
+              "sha256": "1d365348d6215025d519a5da4d11cdfec24ae2e0e56266419aa9409bedc9f4b8",
+              "bytes": 8566
+            },
+            "reproduce_code": {
+              "name": "reproduce.py",
+              "sha256": "ca1016cf9715a26ce804eb6197794a0e9e00784787e90a216d06a44d58c60575",
+              "bytes": 1110
+            },
+            "references": {
+              "name": "references.json",
+              "sha256": "517c246ef1312370fb85d892ad8dd05826c0f83dce1031870d44b4dced2b51db",
+              "bytes": 278
+            },
+            "reproduction": {
+              "name": "reproduction.json",
+              "sha256": "bf6c8037851207235f5e96b65fc73446b3a2ec86787f42249f25d7310e5ad55a",
+              "bytes": 244
+            },
+            "computational_review": {
+              "name": "computational-review.json",
+              "sha256": "f80f21f5af0d80b116cf235aeb2c0a77dc7786388ba3f97b98b881bb3df5f46b",
+              "bytes": 304
+            },
+            "rag_corpus": {
+              "name": "rag-corpus.json",
+              "sha256": "331b4373d4f376c530b3657f2436ae9a43570fd88b0e9a2831a217d8016e40b8",
+              "bytes": 398
+            },
+            "rag_retrieval": {
+              "name": "rag-query.json",
+              "sha256": "9136fcd1e6c2c95ea6818e6b3a3e0bdf1baaf07cac7f21312664df9286080fc1",
+              "bytes": 401
+            },
+            "article": {
+              "name": "article.md",
+              "sha256": "47e55c8a7ed80abf9c8e44434c0faafe441bb9c9ec08a2b3070fc9d704b2a8a7",
+              "bytes": 5131
+            },
+            "reference_source_1": {
+              "name": "reference-source-1.json",
+              "sha256": "1561d9796e561cdeeec48f1a1bc782166eeb45ba28aa2d4401992965bca4e532",
+              "bytes": 506
+            }
+          },
+          "replay": {
+            "process_executed": true,
+            "matched": true,
+            "runtime": {
+              "python": "3.14.4",
+              "scipy": "1.18.0"
+            },
+            "max_abs_difference": 0.0,
+            "numeric_difference_overflow": false,
+            "numeric_tolerance": {
+              "rtol": 1e-12,
+              "atol": 1e-12
+            },
+            "method": "pearson",
+            "analysis_sha256": "4c679924fcddce72815625fd4dde36a293efd73eaf11413f9faf8e4210341cad",
+            "trusted_methods_sha256": "1d365348d6215025d519a5da4d11cdfec24ae2e0e56266419aa9409bedc9f4b8",
+            "package_code_executed": false,
+            "isolated_python": true,
+            "cpu_seconds_limit": 44,
+            "address_space_bytes_limit": 2147483648
+          },
+          "limitations": [
+            "Hashes identificam conteúdo; não certificam origem ou verdade dos dados e referências.",
+            "Não avalia sustentação de citações, originalidade, causalidade ou revisão por pares.",
+            "Aceite humano para submissão e validação externa permanecem pendentes."
+          ],
+          "manifest_sha256": "3f3e9534ada72ce59c7bb254a04c2e0ccdd5708a82208362967b36fc191bc509",
+          "original_runtime": {
+            "python": "3.14.4",
+            "scipy": "1.18.0"
+          },
+          "verification_runtime": {
+            "python": "3.14.4"
+          },
+          "report_sha256": "62412122484021fc7c48a7f0c06eaa51de82a781f9e1ab024bea5879d2f23626",
+          "metacognition": {
+            "observation_id": "41947065-c8a5-4ab0-8da6-438d8767fe22",
+            "persisted": true,
+            "scope_id": "e57759dec2d44c5e993e2da4562031d9d7ab0ea6f91c55e43e03143dd489359c",
+            "previous_observation_id": null,
+            "state_transition": {
+              "from": null,
+              "to": "locally_verified"
+            },
+            "confidence_promoted": false
+          }
+        }
+      },
+      "welch_t": {
+        "surface": "real MCP stdio -> primary",
+        "analysis": {
+          "method": "welch_t",
+          "n": 100,
+          "variables": {
+            "value": "petal_width",
+            "group": "species",
+            "groups": [
+              "Iris-versicolor",
+              "Iris-virginica"
+            ]
+          },
+          "alpha": 0.05,
+          "seed": 663,
+          "experiment_executed": true,
+          "causal_inference": false,
+          "missing_values_policy": "reject",
+          "assumptions": [
+            "Observações independentes; esta premissa não é confirmada pelo código.",
+            "A origem e a adequação da amostra dependem da proveniência informada.",
+            "Um único método é executado, sem busca por resultados significativos.",
+            "Os grupos são independentes; a inferência de Welch exige distribuição aproximadamente normal ou amostras adequadas e não implica equivalência de grupos não aleatorizados."
+          ],
+          "null_hypothesis": "Diferença entre as médias populacionais igual a zero.",
+          "estimate": -0.6999999999999997,
+          "statistic": -14.625367047410148,
+          "p_value": 2.111534400988574e-25,
+          "degrees_of_freedom": 89.04337511251656,
+          "alternative": "two-sided",
+          "confidence_interval_95": [
+            -0.7951002289073511,
+            -0.6048997710926484
+          ],
+          "group_sizes": {
+            "Iris-versicolor": 50,
+            "Iris-virginica": 50
+          },
+          "descriptive": {
+            "Iris-versicolor": {
+              "n": 50,
+              "mean": 1.326,
+              "standard_deviation": 0.19775268000454405,
+              "median": 1.3,
+              "min": 1.0,
+              "max": 1.8
+            },
+            "Iris-virginica": {
+              "n": 50,
+              "mean": 2.026,
+              "standard_deviation": 0.27465005563666733,
+              "median": 2.0,
+              "min": 1.4,
+              "max": 2.5
+            }
+          },
+          "limitations": [
+            "A análise não estabelece causalidade.",
+            "A revisão computacional não substitui revisão humana por pares.",
+            "Não há certificação externa de originalidade ou generalização."
+          ]
+        },
+        "artifacts": {
+          "dataset": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/welch_t/dataset.csv",
+            "sha256": "8e6de96d86fbfe22f4fd00bea58e5f159fcb222bfb22e2a52721b68c7a5bbc62",
+            "bytes": 3208
+          },
+          "configuration": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/welch_t/configuration.json",
+            "sha256": "ccd07c0fa21d7ce2ab6c4ba7aa7953944831e017fad936c40946d36bf7b212c7",
+            "bytes": 345
+          },
+          "analysis": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/welch_t/analysis.json",
+            "sha256": "645a86d76e43fafd608a74c87bc388204c582db30111278948cac25e8dce2453",
+            "bytes": 1769
+          },
+          "methods_code": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/welch_t/statistical_methods.py",
+            "sha256": "1d365348d6215025d519a5da4d11cdfec24ae2e0e56266419aa9409bedc9f4b8",
+            "bytes": 8566
+          },
+          "reproduce_code": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/welch_t/reproduce.py",
+            "sha256": "ca1016cf9715a26ce804eb6197794a0e9e00784787e90a216d06a44d58c60575",
+            "bytes": 1110
+          },
+          "references": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/welch_t/references.json",
+            "sha256": "517c246ef1312370fb85d892ad8dd05826c0f83dce1031870d44b4dced2b51db",
+            "bytes": 278
+          },
+          "reference_source_1": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/welch_t/reference-source-1.json",
+            "sha256": "1561d9796e561cdeeec48f1a1bc782166eeb45ba28aa2d4401992965bca4e532",
+            "bytes": 506
+          },
+          "reproduction": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/welch_t/reproduction.json",
+            "sha256": "6eebacd6e12f4bab7dc227362547cd5fa9db1bad50dd745a78028fcd460ef4fc",
+            "bytes": 244
+          },
+          "computational_review": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/welch_t/computational-review.json",
+            "sha256": "f80f21f5af0d80b116cf235aeb2c0a77dc7786388ba3f97b98b881bb3df5f46b",
+            "bytes": 304
+          },
+          "rag_corpus": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/welch_t/rag-corpus.json",
+            "sha256": "331b4373d4f376c530b3657f2436ae9a43570fd88b0e9a2831a217d8016e40b8",
+            "bytes": 398
+          },
+          "rag_retrieval": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/welch_t/rag-query.json",
+            "sha256": "18fb21177963e80643c2b80ab832ec752266669b5bd1b24cbb493fd434a3c09b",
+            "bytes": 405
+          },
+          "article": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/welch_t/article.md",
+            "sha256": "31be34e2c03c6419aa76d28fbc2fc0c84b194e1dacd9ca538b1cb4af324fdab1",
+            "bytes": 5321
+          },
+          "manifest": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/welch_t/manifest.json",
+            "sha256": "950ca278ac322a6f5f75ea51533217874388acfd68cbafbe3c9433cb604165c8",
+            "bytes": 8257
+          }
+        },
+        "release_check": {
+          "status": "locally_verified",
+          "success": true,
+          "local_computational_acceptance": true,
+          "human_submission_acceptance": false,
+          "human_review_status": "pending",
+          "external_validation": false,
+          "confidence_promoted": false,
+          "evidence_scope": "local_package_bytes_and_trusted_core_replay",
+          "verified_artifacts": {
+            "dataset": {
+              "name": "dataset.csv",
+              "sha256": "8e6de96d86fbfe22f4fd00bea58e5f159fcb222bfb22e2a52721b68c7a5bbc62",
+              "bytes": 3208
+            },
+            "configuration": {
+              "name": "configuration.json",
+              "sha256": "ccd07c0fa21d7ce2ab6c4ba7aa7953944831e017fad936c40946d36bf7b212c7",
+              "bytes": 345
+            },
+            "analysis": {
+              "name": "analysis.json",
+              "sha256": "645a86d76e43fafd608a74c87bc388204c582db30111278948cac25e8dce2453",
+              "bytes": 1769
+            },
+            "methods_code": {
+              "name": "statistical_methods.py",
+              "sha256": "1d365348d6215025d519a5da4d11cdfec24ae2e0e56266419aa9409bedc9f4b8",
+              "bytes": 8566
+            },
+            "reproduce_code": {
+              "name": "reproduce.py",
+              "sha256": "ca1016cf9715a26ce804eb6197794a0e9e00784787e90a216d06a44d58c60575",
+              "bytes": 1110
+            },
+            "references": {
+              "name": "references.json",
+              "sha256": "517c246ef1312370fb85d892ad8dd05826c0f83dce1031870d44b4dced2b51db",
+              "bytes": 278
+            },
+            "reproduction": {
+              "name": "reproduction.json",
+              "sha256": "6eebacd6e12f4bab7dc227362547cd5fa9db1bad50dd745a78028fcd460ef4fc",
+              "bytes": 244
+            },
+            "computational_review": {
+              "name": "computational-review.json",
+              "sha256": "f80f21f5af0d80b116cf235aeb2c0a77dc7786388ba3f97b98b881bb3df5f46b",
+              "bytes": 304
+            },
+            "rag_corpus": {
+              "name": "rag-corpus.json",
+              "sha256": "331b4373d4f376c530b3657f2436ae9a43570fd88b0e9a2831a217d8016e40b8",
+              "bytes": 398
+            },
+            "rag_retrieval": {
+              "name": "rag-query.json",
+              "sha256": "18fb21177963e80643c2b80ab832ec752266669b5bd1b24cbb493fd434a3c09b",
+              "bytes": 405
+            },
+            "article": {
+              "name": "article.md",
+              "sha256": "31be34e2c03c6419aa76d28fbc2fc0c84b194e1dacd9ca538b1cb4af324fdab1",
+              "bytes": 5321
+            },
+            "reference_source_1": {
+              "name": "reference-source-1.json",
+              "sha256": "1561d9796e561cdeeec48f1a1bc782166eeb45ba28aa2d4401992965bca4e532",
+              "bytes": 506
+            }
+          },
+          "replay": {
+            "process_executed": true,
+            "matched": true,
+            "runtime": {
+              "python": "3.14.4",
+              "scipy": "1.18.0"
+            },
+            "max_abs_difference": 0.0,
+            "numeric_difference_overflow": false,
+            "numeric_tolerance": {
+              "rtol": 1e-12,
+              "atol": 1e-12
+            },
+            "method": "welch_t",
+            "analysis_sha256": "645a86d76e43fafd608a74c87bc388204c582db30111278948cac25e8dce2453",
+            "trusted_methods_sha256": "1d365348d6215025d519a5da4d11cdfec24ae2e0e56266419aa9409bedc9f4b8",
+            "package_code_executed": false,
+            "isolated_python": true,
+            "cpu_seconds_limit": 44,
+            "address_space_bytes_limit": 2147483648
+          },
+          "limitations": [
+            "Hashes identificam conteúdo; não certificam origem ou verdade dos dados e referências.",
+            "Não avalia sustentação de citações, originalidade, causalidade ou revisão por pares.",
+            "Aceite humano para submissão e validação externa permanecem pendentes."
+          ],
+          "manifest_sha256": "950ca278ac322a6f5f75ea51533217874388acfd68cbafbe3c9433cb604165c8",
+          "original_runtime": {
+            "python": "3.14.4",
+            "scipy": "1.18.0"
+          },
+          "verification_runtime": {
+            "python": "3.14.4"
+          },
+          "report_sha256": "7f63b9292f3d2525195f37eb4e7166276718e81a74b7557da80314ef12fa43fd",
+          "metacognition": {
+            "observation_id": "a3c3e5b8-003c-4f48-9a8f-4177abf0858f",
+            "persisted": true,
+            "scope_id": "58803a48ae8221ca6150d67ecb3488f376cad12546637266637fdaa3a6d895a2",
+            "previous_observation_id": null,
+            "state_transition": {
+              "from": null,
+              "to": "locally_verified"
+            },
+            "confidence_promoted": false
+          }
+        }
+      },
+      "descriptive": {
+        "surface": "primary direct",
+        "analysis": {
+          "method": "descriptive",
+          "n": 150,
+          "variables": {
+            "value": "sepal_length"
+          },
+          "alpha": 0.05,
+          "seed": 663,
+          "experiment_executed": true,
+          "causal_inference": false,
+          "missing_values_policy": "reject",
+          "assumptions": [
+            "Observações independentes; esta premissa não é confirmada pelo código.",
+            "A origem e a adequação da amostra dependem da proveniência informada.",
+            "Um único método é executado, sem busca por resultados significativos."
+          ],
+          "null_hypothesis": null,
+          "estimate": 5.843333333333334,
+          "p_value": null,
+          "descriptive": {
+            "sepal_length": {
+              "n": 150,
+              "mean": 5.843333333333334,
+              "standard_deviation": 0.828066127977863,
+              "median": 5.8,
+              "min": 4.3,
+              "max": 7.9
+            }
+          },
+          "limitations": [
+            "A análise não estabelece causalidade.",
+            "A revisão computacional não substitui revisão humana por pares.",
+            "Não há certificação externa de originalidade ou generalização."
+          ]
+        },
+        "artifacts": {
+          "dataset": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/descriptive/dataset.csv",
+            "sha256": "09d1766be79ec606b4c045059bc4b0d3e6a693b61d1cdfc6bdd45af42531df65",
+            "bytes": 4608
+          },
+          "configuration": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/descriptive/configuration.json",
+            "sha256": "09d83e86234c5927ed0023ec3f4e08d67ae38e44eebd258da59bc78c031144ea",
+            "bytes": 255
+          },
+          "analysis": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/descriptive/analysis.json",
+            "sha256": "f3da30fc23c669e6b48875b101fa54612188535e3b6aebf948c5d8633e0a335e",
+            "bytes": 989
+          },
+          "methods_code": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/descriptive/statistical_methods.py",
+            "sha256": "1d365348d6215025d519a5da4d11cdfec24ae2e0e56266419aa9409bedc9f4b8",
+            "bytes": 8566
+          },
+          "reproduce_code": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/descriptive/reproduce.py",
+            "sha256": "ca1016cf9715a26ce804eb6197794a0e9e00784787e90a216d06a44d58c60575",
+            "bytes": 1110
+          },
+          "references": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/descriptive/references.json",
+            "sha256": "517c246ef1312370fb85d892ad8dd05826c0f83dce1031870d44b4dced2b51db",
+            "bytes": 278
+          },
+          "reference_source_1": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/descriptive/reference-source-1.json",
+            "sha256": "1561d9796e561cdeeec48f1a1bc782166eeb45ba28aa2d4401992965bca4e532",
+            "bytes": 506
+          },
+          "reproduction": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/descriptive/reproduction.json",
+            "sha256": "b9dc1843babb6729e6142bd62b08a7b65d51f6a0f68d4625ea3ab11b85bf03c2",
+            "bytes": 244
+          },
+          "computational_review": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/descriptive/computational-review.json",
+            "sha256": "f80f21f5af0d80b116cf235aeb2c0a77dc7786388ba3f97b98b881bb3df5f46b",
+            "bytes": 304
+          },
+          "rag_corpus": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/descriptive/rag-corpus.json",
+            "sha256": "331b4373d4f376c530b3657f2436ae9a43570fd88b0e9a2831a217d8016e40b8",
+            "bytes": 398
+          },
+          "rag_retrieval": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/descriptive/rag-query.json",
+            "sha256": "44d363f168bba2f52708f56b8a5048978cb3067df16d2b184ee5d8cd88efec88",
+            "bytes": 385
+          },
+          "article": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/descriptive/article.md",
+            "sha256": "0346c3ca2b42fc1a959c28eb8050d8b3eab501fefc75f0b24250d677f9faaedb",
+            "bytes": 4171
+          },
+          "manifest": {
+            "path": "/home/marceloclaro/opencode-ecosystem-core/outputs/core-r891/real/acceptance-20261015T093332/descriptive/manifest.json",
+            "sha256": "9461a478917272f41b855927145ce66207138427d99b335569529b1ca9841033",
+            "bytes": 7422
+          }
+        },
+        "release_check": {
+          "status": "locally_verified",
+          "success": true,
+          "local_computational_acceptance": true,
+          "human_submission_acceptance": false,
+          "human_review_status": "pending",
+          "external_validation": false,
+          "confidence_promoted": false,
+          "evidence_scope": "local_package_bytes_and_trusted_core_replay",
+          "verified_artifacts": {
+            "dataset": {
+              "name": "dataset.csv",
+              "sha256": "09d1766be79ec606b4c045059bc4b0d3e6a693b61d1cdfc6bdd45af42531df65",
+              "bytes": 4608
+            },
+            "configuration": {
+              "name": "configuration.json",
+              "sha256": "09d83e86234c5927ed0023ec3f4e08d67ae38e44eebd258da59bc78c031144ea",
+              "bytes": 255
+            },
+            "analysis": {
+              "name": "analysis.json",
+              "sha256": "f3da30fc23c669e6b48875b101fa54612188535e3b6aebf948c5d8633e0a335e",
+              "bytes": 989
+            },
+            "methods_code": {
+              "name": "statistical_methods.py",
+              "sha256": "1d365348d6215025d519a5da4d11cdfec24ae2e0e56266419aa9409bedc9f4b8",
+              "bytes": 8566
+            },
+            "reproduce_code": {
+              "name": "reproduce.py",
+              "sha256": "ca1016cf9715a26ce804eb6197794a0e9e00784787e90a216d06a44d58c60575",
+              "bytes": 1110
+            },
+            "references": {
+              "name": "references.json",
+              "sha256": "517c246ef1312370fb85d892ad8dd05826c0f83dce1031870d44b4dced2b51db",
+              "bytes": 278
+            },
+            "reproduction": {
+              "name": "reproduction.json",
+              "sha256": "b9dc1843babb6729e6142bd62b08a7b65d51f6a0f68d4625ea3ab11b85bf03c2",
+              "bytes": 244
+            },
+            "computational_review": {
+              "name": "computational-review.json",
+              "sha256": "f80f21f5af0d80b116cf235aeb2c0a77dc7786388ba3f97b98b881bb3df5f46b",
+              "bytes": 304
+            },
+            "rag_corpus": {
+              "name": "rag-corpus.json",
+              "sha256": "331b4373d4f376c530b3657f2436ae9a43570fd88b0e9a2831a217d8016e40b8",
+              "bytes": 398
+            },
+            "rag_retrieval": {
+              "name": "rag-query.json",
+              "sha256": "44d363f168bba2f52708f56b8a5048978cb3067df16d2b184ee5d8cd88efec88",
+              "bytes": 385
+            },
+            "article": {
+              "name": "article.md",
+              "sha256": "0346c3ca2b42fc1a959c28eb8050d8b3eab501fefc75f0b24250d677f9faaedb",
+              "bytes": 4171
+            },
+            "reference_source_1": {
+              "name": "reference-source-1.json",
+              "sha256": "1561d9796e561cdeeec48f1a1bc782166eeb45ba28aa2d4401992965bca4e532",
+              "bytes": 506
+            }
+          },
+          "replay": {
+            "process_executed": true,
+            "matched": true,
+            "runtime": {
+              "python": "3.14.4",
+              "scipy": "1.18.0"
+            },
+            "max_abs_difference": 0.0,
+            "numeric_difference_overflow": false,
+            "numeric_tolerance": {
+              "rtol": 1e-12,
+              "atol": 1e-12
+            },
+            "method": "descriptive",
+            "analysis_sha256": "f3da30fc23c669e6b48875b101fa54612188535e3b6aebf948c5d8633e0a335e",
+            "trusted_methods_sha256": "1d365348d6215025d519a5da4d11cdfec24ae2e0e56266419aa9409bedc9f4b8",
+            "package_code_executed": false,
+            "isolated_python": true,
+            "cpu_seconds_limit": 44,
+            "address_space_bytes_limit": 2147483648
+          },
+          "limitations": [
+            "Hashes identificam conteúdo; não certificam origem ou verdade dos dados e referências.",
+            "Não avalia sustentação de citações, originalidade, causalidade ou revisão por pares.",
+            "Aceite humano para submissão e validação externa permanecem pendentes."
+          ],
+          "manifest_sha256": "9461a478917272f41b855927145ce66207138427d99b335569529b1ca9841033",
+          "original_runtime": {
+            "python": "3.14.4",
+            "scipy": "1.18.0"
+          },
+          "verification_runtime": {
+            "python": "3.14.4"
+          },
+          "report_sha256": "7dc3df85650bff531fd60f80dc787a66860151539e435275bb12258657c39425",
+          "metacognition": {
+            "observation_id": "ec257675-c187-4ccb-8569-b3ddfe9734c9",
+            "persisted": true,
+            "scope_id": "b52b7af6c2a5759f24f4ba08105551dfad7a3d12f704fd5fb70a07bedbe87cd7",
+            "previous_observation_id": null,
+            "state_transition": {
+              "from": null,
+              "to": "locally_verified"
+            },
+            "confidence_promoted": false
+          }
+        }
+      }
+    }
+  },
+  "red_green": [
+    {
+      "local_path": "outputs/core-r891/orchestration-red.xml",
+      "sha256": "c96d9958bf2fb4f21e0cbac59f8960de8bb574f99dd01effdd49622616110a5e",
+      "bytes": 20161,
+      "junit_counts": {
+        "tests": 12,
+        "failures": 12,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "local_path": "outputs/core-r891/orchestration-green.xml",
+      "sha256": "3e051ab4d136ecfad25145a133143f3054df4fc9b4c1caf1df22adcd70a815d5",
+      "bytes": 7293,
+      "junit_counts": {
+        "tests": 45,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "local_path": "outputs/core-r891/review-final-float-red.xml",
+      "sha256": "b0a02975f469ebcc98feafccdc4202deeace0ac1f78a61892892b6cc469f206a",
+      "bytes": 7644,
+      "junit_counts": {
+        "tests": 12,
+        "failures": 3,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "local_path": "outputs/core-r891/review-final-overflow-red.xml",
+      "sha256": "ba60664789dce5b50d971986b4f770968986b64f7ddd4b2b9ea5d4a6eb0c8dd5",
+      "bytes": 5576,
+      "junit_counts": {
+        "tests": 1,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "local_path": "outputs/core-r891/review-final-overflow-green.xml",
+      "sha256": "96f9aee04215817f7fbaed8e3a006910f55b53d6421c608ee73be2878847f3ed",
+      "bytes": 20465,
+      "junit_counts": {
+        "tests": 137,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "local_path": "outputs/core-r891/persistence-flag-red.xml",
+      "sha256": "2618a83c5ad8770c5453ca2e7cd421244492261c7eea4f7300b733e3cfff0fd5",
+      "bytes": 1539,
+      "junit_counts": {
+        "tests": 1,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "local_path": "outputs/core-r891/persistence-flag-green.xml",
+      "sha256": "3c62a94685052b70c4d22258d0e3754cf261b645788b742e79ebfb1dd8079360",
+      "bytes": 2001,
+      "junit_counts": {
+        "tests": 12,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "local_path": "outputs/core-r891/recorder-repair-20261015T092937Z-11e72138/red.xml",
+      "sha256": "bf016e6cf0a832d22112abeb581f6fc00a3991fa747921dff956a3233eb6b861",
+      "bytes": 1742,
+      "junit_counts": {
+        "tests": 2,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "local_path": "outputs/core-r891/recorder-repair-20261015T092937Z-11e72138/green.xml",
+      "sha256": "22987f77c76cf08db00c773d5025c5b9b7c54becc183430e96fe5ec64aae089e",
+      "bytes": 518,
+      "junit_counts": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "local_path": "outputs/core-r891/recorder-repair-20261015T092937Z-11e72138/contracts.xml",
+      "sha256": "0a63a59d8e8e842b3a15e0038ac18ea67d1badfa48b3cda0fc42dcaf7ffa785a",
+      "bytes": 4620,
+      "junit_counts": {
+        "tests": 30,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  ],
+  "blocked_profile_retained": {
+    "local_path": "reports/scientific-profile/20261015T092600-a1f0e993f1894f8daea320d188bee3df/summary.json",
+    "sha256": "b39da466af1213e38d96f9b2b42cb83aa14bab538c585efaecd15c38d3152d81",
+    "bytes": 1488000
+  },
+  "dependency_check": {
+    "returncode": 0,
+    "stdout": "No broken requirements found.\n",
+    "stderr": "",
+    "versions": {
+      "numpy": "2.5.1",
+      "scipy": "1.18.0",
+      "psutil": "7.2.2",
+      "requests": "2.33.0",
+      "starlette": "0.49.1",
+      "mcp": "1.28.1",
+      "pytest": "9.1.1",
+      "Whoosh": "2.7.4"
+    }
+  },
+  "installation_reports": [
+    {
+      "local_path": "outputs/core-r891/install-report.json",
+      "sha256": "bffc91aaf3dfb0380ca2ea5466ef2b955ae6b1ff054d17a9327e6d6d5ec48481",
+      "bytes": 13972
+    },
+    {
+      "local_path": "outputs/core-r891/install-fixed-report.json",
+      "sha256": "7a54203ea71e63a493f3db51ae63e5524d6ae4b8bb3fa582fc8eb07ee2a15fdd",
+      "bytes": 6664
+    }
+  ],
+  "workflow_step": {
+    "local_path": "outputs/core-r891/restricted-workflow-green.json",
+    "sha256": "2d7345a9d5192e2f668678eddd5a6b794987ea468395e0a6da41928975359f10",
+    "bytes": 158
+  },
+  "ci_remote_status_at_receipt": "not_executed_before_push",
+  "limitations": [
+    "Only the enumerated profile was executed; all other tests remain outside this acceptance.",
+    "Local RED/GREEN receipts are not an externally timestamped attestation of historical TDD.",
+    "Template article and bibliographic metadata require human semantic/editorial review.",
+    "The MetaBus JSON store requires a coordinated single writer; independent multi-host writers were not validated.",
+    "Numerical tolerance is 1e-12 relative/absolute only for replay floats; bytes, types and cross-document checks remain exact."
+  ],
+  "post_validation_metadata_updates": [
+    "evolution/cycles.json",
+    "specs/SPEC-935-R891-aceite-cientifico-local.md",
+    "specs/SPEC-935-R892-falhas-pipeline-cientifico.md",
+    "specs/SPEC-935-R893-whoosh-persistencia-concorrencia.md"
+  ],
+  "metadata_change_scope": "Only spec status/verification wording and append-only evolution records; tested production code, tests, manifests and workflows remain unchanged."
+}

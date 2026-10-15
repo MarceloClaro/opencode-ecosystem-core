@@ -1916,6 +1916,16 @@ class MarceloClaroOrchestrator:
         from research.provenance_pipeline import ScientificProvenancePipeline
         config = validate_science_config(config)
         report = ScientificProvenancePipeline().run(**config)
+        if report.get("status") == "completed":
+            release = self.scientific_verify_package(package_dir=config["output_dir"])
+            report["release_check"] = release
+            accepted = (release.get("status") == "locally_verified"
+                        and release.get("success") is True
+                        and release.get("local_computational_acceptance") is True)
+            report["local_computational_acceptance"] = accepted
+            report["human_submission_acceptance"] = False
+            if not accepted:
+                report.update(status="blocked", reason="scientific_package_verification_failed")
         dataset = report.get("provenance", {}).get("dataset", {})
         observation = {"status": report.get("status"), "reason": report.get("reason"),
                        "executed": report.get("experiment_executed") is True,
@@ -1923,6 +1933,9 @@ class MarceloClaroOrchestrator:
                        "dataset_provenance": {key: dataset.get(key) for key in ("title", "source_url", "sha256", "evidence_kind")},
                        "reproduction": report.get("reproduction", {}),
                        "computational_review": report.get("computational_review", {}),
+                        "local_computational_acceptance": report.get("local_computational_acceptance") is True,
+                        "human_submission_acceptance": False,
+                        "release_report_sha256": report.get("release_check", {}).get("report_sha256"),
                        "artifacts": report.get("artifacts", {}),
                        "externally_validated": False,
                        "scope": "Uma análise específica; não comprova competência universal."}
@@ -1930,6 +1943,35 @@ class MarceloClaroOrchestrator:
         report["metacognition"] = {
             **self._record_knowledge_outcome("science.reproducible", config["question"], observation),
             "confidence_promoted": False, "externally_validated": False}
+        return report
+
+    def scientific_verify_package(self, **config: Any) -> Dict[str, Any]:
+        """R891: revalida pacote local por código confiável e registra sua evidência."""
+        from research.scientific_release import validate_verify_config, verify_scientific_package
+        config = validate_verify_config(config)
+        report = verify_scientific_package(**config)
+        observation = {
+            "status": report.get("status"), "method": "scientific_package_verification",
+            "local_computational_acceptance": report.get("local_computational_acceptance") is True,
+            "human_submission_acceptance": False, "externally_validated": False,
+            "report_sha256": report.get("report_sha256"),
+            "manifest_sha256": report.get("manifest_sha256"),
+            "replay": report.get("replay", {}),
+            "scope": "Bytes e cálculo deste pacote; mérito científico e submissão exigem revisão humana.",
+        }
+        try:
+            recorded = self._record_knowledge_outcome(
+                "science.package_verification", config["package_dir"][:2000], observation)
+            report["metacognition"] = {**recorded, "confidence_promoted": False}
+        except (OSError, ValueError, RuntimeError) as exc:
+            import hashlib
+            from research.provenance_pipeline import _json
+            report["package_check_sha256"] = report.pop("report_sha256", None)
+            report.update(status="blocked", success=False, local_computational_acceptance=False,
+                          reason="metacognitive_persistence_failed")
+            report["report_sha256"] = hashlib.sha256(_json(report).encode()).hexdigest()
+            report["metacognition"] = {"persisted": False, "status": "degraded",
+                "error_type": type(exc).__name__, "confidence_promoted": False}
         return report
 
     def scientific_runtime_run(self, **config: Any) -> Dict[str, Any]:
@@ -2246,16 +2288,16 @@ class MarceloClaroOrchestrator:
 
     def academic_pipeline(self, topic: str, manuscript: str = "",
                           stages: Optional[List[str]] = None) -> Dict[str, Any]:
-        """Pipeline acadêmico MASWOS Qualis A1 (16 estágios + AUTO_SCORE gate)."""
+        """Executa MASWOS com avaliação estrutural local, sem aceite editorial."""
         run = self.maswos.run(topic, manuscript, stages)
         summary = run.summary()
-        metabus.memory.add_reflection(
-            agent_id=self.id,
-            task_context=f"pipeline acadêmico MASWOS: {topic}",
-            reflection=f"MASWOS: {summary['stages_completed']}/{summary['stages_total']} "
-                       f"estágios, nota final {summary['final_score']}/10 "
-                       f"({'APROVADO' if summary['approved'] else 'reprovado'} no gate Qualis A1).",
-            score=(summary["final_score"] or 0) / 10.0,
+        metabus.memory.record_observation(
+            self.id, f"pipeline acadêmico MASWOS: {topic}",
+            {"stages_completed": summary["stages_completed"],
+             "stages_total": summary["stages_total"],
+             "score_proxy": summary["final_score"], "approved": summary["approved"],
+             "score_kind": "internal_heuristic", "externally_validated": False,
+             "confidence_promoted": False},
         )
         return summary
 
@@ -2294,24 +2336,20 @@ class MarceloClaroOrchestrator:
         try:
             board_status = board_report.get("status", "unknown") if isinstance(board_report, dict) else "unknown"
             board_score = board_report.get("overall_score", 0) if isinstance(board_report, dict) else 0
-            metabus.memory.add_reflection(
-                agent_id=self.id,
-                task_context=f"banca rigorosa {venue}: {topic[:60]}",
-                reflection=(
-                    f"Banca rigorosa {venue} ({summary.get('board_iterations',1)} iterações): "
-                    f"{board_status} (score {board_score}/10), "
-                    f"{summary.get('gaps_cleaned',0)} gaps limpos, "
-                    f"MASWOS {summary['final_score']}/10 → "
-                    f"{'ENTREGUE' if summary['approved'] else 'BLOQUEADO até correções'}."
-                ),
-                score=board_score / 10.0 if board_score else (summary["final_score"] or 0) / 10.0,
+            metabus.memory.record_observation(
+                self.id, f"banca rigorosa {venue}: {topic[:60]}",
+                {"board_status": board_status, "score_proxy": board_score,
+                 "approved": summary["approved"], "score_kind": "internal_heuristic",
+                 "externally_validated": False, "confidence_promoted": False},
             )
             # Também registra no EvolutionRegistry via academic pipeline
             if summary.get("approved"):
                 metabus.memory.upsert_semantic_topic(
                     f"academic.board.{venue}",
-                    lesson=f"Banca {venue} aprovou '{topic[:40]}' com {board_score}/10 após {summary.get('board_iterations',1)} iterações.",
-                    metadata={"venue": venue, "score": board_score, "gaps_cleaned": summary.get("gaps_cleaned", 0)},
+                    lesson=f"Avaliação estrutural interna de '{topic[:40]}': {board_status}; pendente de revisão humana.",
+                    metadata={"venue": venue, "score": board_score,
+                              "gaps_cleaned": summary.get("gaps_cleaned", 0),
+                              "score_kind": "internal_heuristic", "externally_validated": False},
                 )
         except Exception:
             pass
@@ -2329,8 +2367,8 @@ class MarceloClaroOrchestrator:
 
         A implementação mantém as fronteiras dos cinco estágios, mas faz a
         orquestração no MarceloClaro: o gate de exportação do R103 é uma
-        barreira real, as confidências são calibradas com evidência do run e
-        a avaliação metacognitiva usa os próprios rastros da execução.
+        barreira real e os escores internos usam os rastros da execução.
+        Esses escores são heurísticos, sem calibração externa demonstrada.
         Erros são retornados como dados estruturados; não há alegação de
         validação externa ou superioridade implícita.
         """
@@ -2359,6 +2397,8 @@ class MarceloClaroOrchestrator:
                     "actual_verdict": "supported" if succeeded else "refuted",
                 },
             )
+            result.update(score_kind="internal_heuristic", externally_validated=False,
+                          confidence_promoted=False)
             calibrated_confidences[stage] = result
             return result
 
@@ -2382,12 +2422,27 @@ class MarceloClaroOrchestrator:
                 self.id, f"{stage}: {seed_domain[:80]}",
                 {"outcome": outcome, "reflection": reflection,
                  "confidence_proxy": after, "score_kind": "internal_heuristic",
-                 "externally_validated": False})
+                  "externally_validated": False, "confidence_promoted": False})
             metabus.publish_subsystem_event(
-                "scientific_pipeline", f"{stage}.completed",
+                "scientific_pipeline", f"{stage}.{outcome}",
                 {"outcome": outcome, "confidence": after},
                 source_agent=self.id,
             )
+
+        def _blocked_stage(stage: str, output: Any, detail: str) -> Dict[str, Any]:
+            supplied_reason = (output.get("error") or output.get("reason")) if isinstance(output, dict) else None
+            reason = f"{stage}: {supplied_reason or detail}"
+            decision = {"passed": False, "reason": reason, "failed_stage": stage,
+                        "execution_completed": False}
+            timeline["total"] = round(time.time() - start, 1)
+            metabus.publish_subsystem_event("scientific_pipeline", "gate.blocked",
+                                            decision, source_agent=self.id)
+            return {"status": "blocked", "failed_stage": stage, "reason": reason,
+                    "seed_domain": seed_domain, "venue": venue, "timeline": timeline,
+                    "stages": stages, "gate_decision": decision,
+                    "calibrated_confidences": calibrated_confidences,
+                    "metacognitive_report": MetacognitiveEvaluator().evaluate(traces),
+                    "scientific_acceptance": False, "human_review_required": True}
 
         try:
             # R101 — EvoSci
@@ -2436,11 +2491,18 @@ class MarceloClaroOrchestrator:
             )
             timeline["r102"] = round(time.time() - t1, 1)
             stages["r102"] = r102
-            r102_reports = r102.get("reports", [])
-            r102_ineligible = (r102.get("status") in {"error", "blocked", "simulation", "demonstration", "offline"}
-                               or r102.get("evidence_eligible") is not True
-                               or r102.get("experiment_executed") is not True)
-            r102_failed = r102.get("status") == "error" or r102_ineligible
+            r102_data = r102 if isinstance(r102, dict) else {}
+            r102_reports = r102_data.get("reports", [])
+            reports_usable = (
+                isinstance(r102_reports, list) and bool(r102_reports)
+                and all(isinstance(report, dict)
+                        and isinstance(report.get("summary"), str)
+                        and bool(report["summary"].strip()) for report in r102_reports)
+            )
+            r102_ineligible = (r102_data.get("status") != "completed" or not reports_usable
+                               or r102_data.get("evidence_eligible") is not True
+                               or r102_data.get("experiment_executed") is not True)
+            r102_failed = r102_ineligible
             r102_confidence = 0.0 if r102_failed else (
                 float(r102_reports[-1].get("confidence", 0.5))
                 if r102_reports else 0.5
@@ -2452,7 +2514,7 @@ class MarceloClaroOrchestrator:
                 f"calibrada {calibration['calibrated_confidence']:.2f}.",
                 before=r102_confidence,
                 after=calibration["calibrated_confidence"],
-                evidence_count=len(r102_reports),
+                evidence_count=len(r102_reports) if isinstance(r102_reports, list) else 0,
                 error_type="pipeline_error" if r102_failed else None,
             )
 
@@ -2467,7 +2529,9 @@ class MarceloClaroOrchestrator:
                         "venue": venue, "timeline": timeline, "stages": stages,
                         "gate_decision": gate_decision, "calibrated_confidences": calibrated_confidences,
                         "metacognitive_report": MetacognitiveEvaluator().evaluate(traces),
-                        "evidence_eligible": False, "experiment_executed": False}
+                        "evidence_eligible": False, "experiment_executed": False,
+                        "failed_stage": "r102", "scientific_acceptance": False,
+                        "human_review_required": True}
 
             # R103 — Peer Review
             t2 = time.time()
@@ -2483,7 +2547,7 @@ class MarceloClaroOrchestrator:
             timeline["r103"] = round(time.time() - t2, 1)
             stages["r103"] = r103
             r103_confidence = float(r103.get("overall_score", 0.5))
-            gate_passed = bool(r103.get("export_gate_passed", False))
+            gate_passed = r103.get("export_gate_passed") is True
             calibration = _calibrate("r103", r103_confidence, gate_passed)
             _trace(
                 "r103", "success" if gate_passed else "blocked",
@@ -2534,21 +2598,32 @@ class MarceloClaroOrchestrator:
             r104d = create_revision(review_package.to_revision_contract(), manuscript_seed)
             timeline["r104d"] = round(time.time() - t3, 1)
             stages["r104d"] = r104d
-            r104d_failed = r104d.get("status") == "error"
-            r104d_report = r104d.get("report", {}) or {}
-            r104d_confidence = float(r104d_report.get("traceability_pct", 0)) / 100.0
+            r104d_report = r104d.get("report") if isinstance(r104d, dict) else None
+            r104d_integrity = r104d.get("integrity") if isinstance(r104d, dict) else None
+            r104d_failed = (
+                not isinstance(r104d, dict) or r104d.get("status") != "completed"
+                or not isinstance(r104d_report, dict) or not r104d_report
+                or not isinstance(r104d_integrity, dict) or r104d_integrity.get("intact") is not True
+                or not isinstance(r104d.get("revisions"), list)
+            )
+            r104d_report = r104d_report if isinstance(r104d_report, dict) else {}
+            r104d_integrity = r104d_integrity if isinstance(r104d_integrity, dict) else {}
+            r104d_confidence = 0.0 if r104d_failed else float(r104d_report.get("traceability_pct", 0)) / 100.0
             calibration = _calibrate("r104d", r104d_confidence, not r104d_failed)
             _trace(
                 "r104d", "failure" if r104d_failed else "success",
                 f"Revisão de manuscrito: traceability_pct="
                 f"{r104d_report.get('traceability_pct', 0)}, "
-                f"integridade={r104d.get('integrity', {}).get('intact')}, "
-                f"auto_rollback={r104d.get('integrity', {}).get('auto_rolled_back', False)}.",
+                f"integridade={r104d_integrity.get('intact')}, "
+                f"auto_rollback={r104d_integrity.get('auto_rolled_back', False)}.",
                 before=r104d_confidence,
                 after=calibration["calibrated_confidence"],
                 evidence_count=r104d_report.get("total_claims", 0),
                 error_type="pipeline_error" if r104d_failed else None,
             )
+
+            if r104d_failed:
+                return _blocked_stage("r104d", r104d, "Revisão não concluída ou saída/integridade ausente.")
 
             # R105 — Paper Composer
             t4 = time.time()
@@ -2568,19 +2643,31 @@ class MarceloClaroOrchestrator:
             )
             timeline["r105"] = round(time.time() - t4, 1)
             stages["r105"] = r105
-            r105_failed = r105.get("status") == "error"
+            r105_sections = r105.get("sections") if isinstance(r105, dict) else None
+            r105_manuscript = r105.get("manuscript") if isinstance(r105, dict) else None
+            r105_failed = (
+                not isinstance(r105, dict) or r105.get("status") != "completed"
+                or not isinstance(r105_sections, dict) or not r105_sections
+                or not any(isinstance(text, str) and text.strip() for text in r105_sections.values())
+                or not isinstance(r105_manuscript, str) or not r105_manuscript.strip()
+            )
+            r105_consistency = r105.get("consistency_report", {}) if isinstance(r105, dict) else {}
+            r105_consistency = r105_consistency if isinstance(r105_consistency, dict) else {}
             r105_confidence = 0.0 if r105_failed else float(
-                r105.get("consistency_report", {}).get("overall_score", 50)
+                r105_consistency.get("overall_score", 50)
             ) / 100.0
             calibration = _calibrate("r105", r105_confidence, not r105_failed)
             _trace(
                 "r105", "failure" if r105_failed else "success",
                 "Composição final: consistency "
-                f"overall_score={r105.get('consistency_report', {}).get('overall_score', 'N/A')}.",
+                f"overall_score={r105_consistency.get('overall_score', 'N/A')}.",
                 before=r105_confidence,
                 after=calibration["calibrated_confidence"],
                 error_type="pipeline_error" if r105_failed else None,
             )
+
+            if r105_failed:
+                return _blocked_stage("r105", r105, "Composição não concluída ou manuscrito/seções ausentes.")
 
             # Auditoria de Rigor do Manuscrito (SPEC-935-R381)
             t5 = time.time()
@@ -2598,7 +2685,7 @@ class MarceloClaroOrchestrator:
                     f"Auditoria de rigor (R369): {len(r381.get('moves_presentes', []))} "
                     f"movimentos presentes, {len(r381.get('findings', []))} achados, "
                     f"human_gate={r381.get('human_gate')}. Não bloqueia o pipeline "
-                    "(consultivo, como R104d/R105).",
+                    "(auditoria consultiva; execução de R104d/R105 é obrigatória).",
                     before=r381_confidence,
                     after=calibration["calibrated_confidence"],
                     evidence_count=len(r381.get("findings", [])),
@@ -2628,7 +2715,7 @@ class MarceloClaroOrchestrator:
             timeline["total"] = round(time.time() - start, 1)
             metacog = MetacognitiveEvaluator().evaluate(traces)
             result = {
-                "status": "completed",
+                "status": "completed" if gate_passed else "blocked",
                 "seed_domain": seed_domain,
                 "venue": venue,
                 "timeline": timeline,
@@ -2637,7 +2724,13 @@ class MarceloClaroOrchestrator:
                 "calibrated_confidences": calibrated_confidences,
                 "metacognitive_report": metacog,
                 "revised_manuscript": revised_manuscript,
+                "scientific_acceptance": False,
+                "human_review_required": True,
+                "verification": "local_operation",
             }
+            if not gate_passed:
+                result["reason"] = gate_decision["reason"]
+                result["draft_only"] = True
             if manuscript_rigor_gate is not None:
                 result["manuscript_rigor_gate"] = manuscript_rigor_gate
             return result
@@ -2718,7 +2811,8 @@ class MarceloClaroOrchestrator:
                 terminal_state = "error"
                 reason = f"Iteração {iteration} falhou com exceção não tratada: {result.get('error')}"
                 break
-            if result.get("status") == "completed":
+            if (result.get("status") == "completed"
+                    and result.get("gate_decision", {}).get("passed") is True):
                 terminal_state = "success"
                 reason = f"Gate aprovado e pipeline completo na iteração {iteration}."
                 break
@@ -2760,26 +2854,17 @@ class MarceloClaroOrchestrator:
                 )
 
         duration = round(time.time() - start, 1)
-        metabus.memory.add_reflection(
-            agent_id=self.id,
-            task_context=f"loop científico: {seed_domain[:80]}",
-            reflection=(
-                f"Loop terminou em '{terminal_state}' após {len(iterations)} "
-                f"iteração(ões): {reason}"
-            ),
-            score={
-                "success": 1.0, "no_op": 0.5, "blocked": 0.3,
-                "stalled": 0.2, "error": 0.0,
-            }.get(terminal_state, 0.0),
+        metabus.memory.record_observation(
+            self.id, f"loop científico: {seed_domain[:80]}",
+            {"terminal_state": terminal_state, "iterations": len(iterations),
+             "reason": reason, "score_kind": "internal_heuristic",
+             "externally_validated": False, "confidence_promoted": False},
         )
         metabus.publish_subsystem_event(
             "scientific_pipeline_loop", "loop.terminal",
             {"seed_domain": seed_domain, "terminal_state": terminal_state,
              "iterations": len(iterations)},
             source_agent=self.id,
-        )
-        self.trust.learn(
-            "scientific_discovery_loop", success=(terminal_state == "success"),
         )
         return {
             "terminal_state": terminal_state,
@@ -2793,12 +2878,30 @@ class MarceloClaroOrchestrator:
         }
 
     def _maswos_delegate(self, agent_id: str, capability: str, description: str) -> str:
-        """Delegação interna dos estágios MASWOS via Blackboard."""
+        """Lê conclusão real do Blackboard; postar tarefa não executa estágio.
+
+        Sem executor síncrono e saída elegível, o consumidor recebe bloqueio.
+        Não conclui a própria tarefa nem recompensa confiança por texto gerado.
+        """
         task_id = self.delegate(description, required_capabilities=[capability])
         task = blackboard.tasks.get(task_id)
-        assigned = getattr(task, "assigned_to", None) or agent_id
-        output = f"[{assigned}] estágio executado: {description[:120]}"
-        self.report_completion(task_id, assigned, output, success=True)
+        state = getattr(task, "status", "missing")
+        assigned = getattr(task, "assigned_to", None)
+        if state != "completed" or not assigned:
+            raise RuntimeError(f"Delegação MASWOS bloqueada/pendente: tarefa {task_id}, estado {state}, sem conclusão elegível.")
+        output = getattr(task, "result", None)
+        if isinstance(output, dict):
+            if (("success" in output and output["success"] is not True)
+                    or ("status" in output and output["status"] not in {
+                        "completed", "execution_succeeded", "success"})):
+                raise RuntimeError(f"Delegação MASWOS bloqueada: resultado inelegível em {task_id}.")
+            output = output.get("output") or output.get("content") or output.get("text")
+        if not isinstance(output, str) or not output.strip() or output.strip().lower() in {
+            "completed", "success", "ok", "pending", "queued", "assigned", "available", "ready",
+            "failed", "blocked", "error", "failure", "false", "true", "done", "running", "skipped",
+            "open", "offline", "abstained", "installation_only", "simulation", "demonstration",
+        }:
+            raise RuntimeError(f"Delegação MASWOS bloqueada: tarefa {task_id} sem conteúdo de execução.")
         return output
 
     def reason(self, query: str, engine: str = "auto", **kwargs) -> Dict[str, Any]:

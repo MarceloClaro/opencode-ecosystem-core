@@ -32,7 +32,7 @@ def _eligible_research_contract_fixture(monkeypatch):
     from agentic_science_v2 import deep_research
     monkeypatch.setattr(deep_research, "run_deep_research", lambda **kwargs: {
         "status": "completed", "evidence_eligible": True, "experiment_executed": True,
-        "reports": [{"summary": "Conteúdo de teste de contrato, sem resultado científico.", "confidence": 0.7}],
+        "reports": [{"summary": "Abstract\nFixture sem resultado científico.\nIntroduction\nContexto.\nMethods\nTeste de contrato.\nResults\nSem medição científica.\nConclusion\nFixture apenas.", "confidence": 0.7}],
         "evidence_graph": {}, "plans": []})
 
 
@@ -111,7 +111,9 @@ class TestGateReal:
         orch = _make_orchestrator()
         result = orch.scientific_discovery_pipeline("dominio de teste", max_rounds=1, strict_gates=False)
 
-        assert result["status"] in ("completed", "error")
+        assert result["status"] == "blocked"
+        assert result["draft_only"] is True
+        assert result["scientific_acceptance"] is False
         assert "r104d" in result["stages"]
         assert "r105" in result["stages"]
 
