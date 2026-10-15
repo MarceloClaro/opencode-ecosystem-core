@@ -201,3 +201,11 @@ nos caminhos locais e com hashes no recibo. Contagens desses ensaios dirigidos
 se sobrepõem; não devem ser somadas ao perfil como testes únicos adicionais.
 Os ciclos são locais, sem nota ou declaração de auditoria externa. O resultado
 remoto da CI deve ser consultado na execução correspondente no GitHub.
+
+O [recibo posterior ao commit de código](verification-local-r891-index.json)
+registra o índice atualizado: 765/765 arquivos selecionados, 8.762 símbolos,
+consulta ao novo verificador e percurso MCP real. Três operações de grafo
+continuam bloqueadas por contraprovas semânticas. O doctor passou 22/22 em modo
+estrutural e carregou os 734 ciclos. O GitHub criou os jobs da nova CI, mas uma
+restrição da conta impediu o início dos runners: **nenhuma etapa remota foi
+executada**. O aceite remoto permanece pendente; isso não é CI aprovada.

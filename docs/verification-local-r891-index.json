@@ -1,0 +1,231 @@
+{
+  "generated_at": "2026-10-15T09:46:40.460209+00:00",
+  "verification": "local_operation",
+  "code_commit": "12a48ed964f6736c3090e247b84f22e296c88b7b",
+  "global_suite_executed": false,
+  "external_validation": false,
+  "confidence_promoted": false,
+  "index": {
+    "provider": "context-link",
+    "version": "1.1.0",
+    "index_ready": true,
+    "index_audit": {
+      "schema_version": 1,
+      "complete": true,
+      "expected_files": 765,
+      "indexed_files": 765,
+      "stats": {
+        "discovered": 765,
+        "indexed": 59,
+        "unchanged": 706,
+        "deleted": 0,
+        "skipped": 0,
+        "errors": 0
+      },
+      "log_name": "index.7.stderr.log",
+      "missing_or_changed": [],
+      "missing_or_changed_count": 0,
+      "table_counts": {
+        "symbols": 8762,
+        "vec_symbols": 8762,
+        "fts_symbols": 8762,
+        "memories": 0
+      },
+      "invalid_relationships": 0
+    },
+    "revision": {
+      "source_head": "12a48ed964f6736c3090e247b84f22e296c88b7b",
+      "current_head": "12a48ed964f6736c3090e247b84f22e296c88b7b",
+      "revision_relation": "same_commit"
+    },
+    "validated_tools": [
+      "ping",
+      "semantic_search_symbols",
+      "get_code_by_symbol",
+      "get_file_skeleton"
+    ],
+    "blocked_tools": [
+      "get_symbol_usages",
+      "get_call_tree",
+      "get_blast_radius"
+    ],
+    "network_isolation": {
+      "available": true,
+      "mechanism": "bubblewrap_user_network_mount_namespace",
+      "probe": "TCP 1.1.1.1:443",
+      "connect_errno": 101,
+      "sources_mounted": false
+    },
+    "limitations": [
+      "Grafo estático; não comprova execução nem ausência de comportamento dinâmico.",
+      "Filtro de segredos é heurístico; não constitui auditoria DLP.",
+      "Índice/cache privado pode receber escrita; fontes originais não são montadas no provedor."
+    ]
+  },
+  "index_operations": [
+    {
+      "invocation": 1,
+      "seconds": 119.936,
+      "status": "index_failed_partial",
+      "index_ready": false,
+      "attempts": 6
+    },
+    {
+      "invocation": 2,
+      "seconds": 22.222,
+      "status": "indexed",
+      "index_ready": true,
+      "attempts": 1
+    }
+  ],
+  "index_ledger_unchanged": true,
+  "mcp_smoke": {
+    "schema": "r889.mcp_facade_smoke.v1",
+    "success": true,
+    "execution_path": "MCP stdio -> ecosystem_code_context -> MarceloClaroOrchestrator -> CodeContextProvider",
+    "memory_scope": "temporary isolated smoke-test MetaBus",
+    "installation_performed": false,
+    "indexing_performed": false,
+    "authentication": "local stdio process; no external account",
+    "confidence_promoted": false,
+    "externally_validated": false,
+    "checks": {
+      "initialize_and_tools_list": true,
+      "integral_index_ready": true,
+      "skeleton_symbol_source_hash_and_line": true,
+      "path_traversal_rejected": true,
+      "missing_file_rejected": true,
+      "known_bad_graph_rejected": true,
+      "setup_not_exposed": true,
+      "original_source_unchanged": true
+    },
+    "protocol_version": "2025-11-25",
+    "server": {
+      "name": "ecosystem-network",
+      "title": null,
+      "version": "1.28.1",
+      "websiteUrl": null,
+      "icons": null
+    },
+    "tool_count": 21,
+    "index": {
+      "schema_version": 1,
+      "expected_files": 765,
+      "indexed_files": 765,
+      "table_counts": {
+        "symbols": 8762,
+        "vec_symbols": 8762,
+        "fts_symbols": 8762,
+        "memories": 0
+      },
+      "invalid_relationships": 0
+    },
+    "source": {
+      "path": "mci/metacognitive_loop.py",
+      "sha256": "9a3e96651a4a1ee2ec7a372ae60cf0941395949e711f2a9569967ae5a077e020",
+      "symbol": "MetacognitiveLoop",
+      "start_line": 23,
+      "manifest_sha256": "2ba6a0539d1b6dcf4975dee76c4d28a1ecaeab9b244c6cfdd766b5d634d98b1c",
+      "source_head": "12a48ed964f6736c3090e247b84f22e296c88b7b",
+      "current_head": "12a48ed964f6736c3090e247b84f22e296c88b7b",
+      "revision_relation": "same_commit",
+      "snippets_returned": 7,
+      "truncated": false
+    },
+    "duration_seconds": 11.168
+  },
+  "new_module_query": {
+    "tool": "get_code_by_symbol",
+    "checks": {
+      "success": true,
+      "exact_function": true,
+      "current_source_hash": true,
+      "ledger_unchanged": true
+    },
+    "sources": [
+      {
+        "path": "research/scientific_release.py",
+        "sha256": "6af6761280b9386a586c954a84a7971c24bdd1530b3c3c666be449b097618e7f",
+        "bytes": 21704
+      }
+    ],
+    "snippets": [
+      {
+        "symbol": "verify_scientific_package",
+        "path": "research/scientific_release.py",
+        "start_line": 308,
+        "end_line": 380,
+        "truncated": true
+      }
+    ],
+    "preview_limit": "File skeleton intentionally truncated at ten snippets; missing later function in that preview was an invalid test assumption, not a missing index entry."
+  },
+  "doctor": {
+    "overall": "healthy",
+    "diagnostic_mode": "structural",
+    "verification": "installation_only",
+    "checks_total": 22,
+    "checks_passed": 22,
+    "checks_warned": 0,
+    "checks_failed": 0
+  },
+  "evolution": {
+    "cycles_loaded": 734,
+    "new_rounds": [
+      "R891",
+      "R892",
+      "R893"
+    ],
+    "score": null,
+    "audited_externally": false,
+    "legacy": true,
+    "previous_records_preserved": true
+  },
+  "remote_ci": {
+    "url": "https://github.com/MarceloClaro/opencode-ecosystem-core/actions/runs/38714878263",
+    "head_sha": "12a48ed964f6736c3090e247b84f22e296c88b7b",
+    "status": "not_started",
+    "github_conclusion": "failure",
+    "job_count": 2,
+    "executed_steps": 0,
+    "reason": "GitHub account restriction prevented runners from starting; remote acceptance remains pending.",
+    "tests_executed_remotely": false
+  },
+  "raw_local_receipts": {
+    "outputs/core-r891/core-index-final.json": {
+      "sha256": "e88fb7cf0d47f4d45db6f65510ea6d18264b458be035be6a8c1207524a347eb1",
+      "bytes": 24742
+    },
+    "outputs/core-r891/mcp-facade-smoke.json": {
+      "sha256": "8ac5b557e70d4fd60f410196154b48b70bc763f5bb1eac991ae56a532740a007",
+      "bytes": 1731
+    },
+    "outputs/core-r891/new-module-code-context.json": {
+      "sha256": "4b5a40ddb2f5d28be0b6c90e8ff7eaa7fb6c550a3c54d134bc92e7310179a02d",
+      "bytes": 5488
+    },
+    "outputs/core-r891/new-module-skeleton-truncated.json": {
+      "sha256": "abf14e293be1014f26ffc9a5d2ec85c2c0f309399917b818637005d648e039d9",
+      "bytes": 7812
+    },
+    "outputs/core-r891/new-module-query-checks.json": {
+      "sha256": "61a88d244fdf49914886c858bd66008da05359b53cbbe28fd3dc4d282538f7c2",
+      "bytes": 316
+    },
+    "outputs/core-r891/doctor-final.txt": {
+      "sha256": "aad9026e76a4e978ed2e68fb8c364d631bcd8cb3e5ae985a088f2bc5f95246ee",
+      "bytes": 4679
+    },
+    "outputs/core-r891/post-profile-metadata.json": {
+      "sha256": "034241a95fdaa8b7664748435f7ec83334a8d2e24c1a57800e791d2c98511779",
+      "bytes": 266
+    }
+  },
+  "limitations": [
+    "765 files are the selected tracked production corpus, not every repository asset or test.",
+    "Three graph tools remain blocked by semantic counterexamples; index completeness does not authorize them.",
+    "Static symbol retrieval is not runtime behavior or measured token efficiency.",
+    "CI did not execute; local passes do not imply a green remote build.",
+    "Doctor is structural/installation_only, not scientific or cluster validation."
+  ]
+}
