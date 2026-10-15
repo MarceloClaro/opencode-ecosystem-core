@@ -83,7 +83,7 @@ def validate_action(kind, config):
         if "cache_root" in out and (not isinstance(out["cache_root"], str) or not 1 <= len(out["cache_root"]) <= 2000):
             raise ValueError("Cache inválido")
         ids = out.get("plugin_ids", list(PLUGINS))
-        if not isinstance(ids, list) or not 1 <= len(ids) <= 12 or any(pid not in PLUGINS for pid in ids) or len(set(ids)) != len(ids):
+        if not isinstance(ids, list) or not 1 <= len(ids) <= len(PLUGINS) or any(not isinstance(pid, str) or pid not in PLUGINS for pid in ids) or len(set(ids)) != len(ids):
             raise ValueError("Seleção de plugins inválida")
     if operation == "response":
         if not isinstance(out.get("request_sha256"), str) or not re.fullmatch(r"[a-f0-9]{64}", out["request_sha256"]):

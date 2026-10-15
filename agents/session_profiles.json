@@ -1,0 +1,388 @@
+{
+  "schema_version": 1,
+  "source": "Task labels or explicit user request; names do not prove execution.",
+  "profiles": [
+    {
+      "agent_id": "ecosystem-review",
+      "aliases": [
+        "ecosystem_review",
+        "Ecosystem Review"
+      ],
+      "definition_only": true
+    },
+    {
+      "agent_id": "rea-runtime",
+      "aliases": [
+        "rea_runtime",
+        "Rea Runtime"
+      ],
+      "definition_only": true
+    },
+    {
+      "agent_id": "rea-adapter",
+      "aliases": [
+        "rea_adapter",
+        "Rea Adapter"
+      ],
+      "definition_only": true
+    },
+    {
+      "agent_id": "runtime-regression",
+      "aliases": [
+        "runtime_regression",
+        "Runtime Regression"
+      ],
+      "definition_only": true
+    },
+    {
+      "agent_id": "command-regression",
+      "aliases": [
+        "command_regression",
+        "Command Regression"
+      ],
+      "definition_only": true
+    },
+    {
+      "agent_id": "book-release",
+      "aliases": [
+        "book_release",
+        "Book Release"
+      ],
+      "definition_only": true
+    },
+    {
+      "agent_id": "github-gap-research",
+      "aliases": [
+        "github_gap_research",
+        "Github Gap Research"
+      ],
+      "definition_only": true
+    },
+    {
+      "agent_id": "blind-review-scanner",
+      "aliases": [
+        "blind_review_scanner",
+        "Blind Review Scanner"
+      ],
+      "definition_only": true
+    },
+    {
+      "agent_id": "blind-review-ledger",
+      "aliases": [
+        "blind_review_ledger",
+        "Blind Review Ledger"
+      ],
+      "definition_only": true
+    },
+    {
+      "agent_id": "regression-remaining",
+      "aliases": [
+        "regression_remaining",
+        "Regression Remaining"
+      ],
+      "definition_only": true
+    },
+    {
+      "agent_id": "red-history-final-audit",
+      "aliases": [
+        "red_history_final_audit",
+        "Red History Final Audit"
+      ],
+      "definition_only": true
+    },
+    {
+      "agent_id": "local-rea-site",
+      "aliases": [
+        "local_rea_site",
+        "Local Rea Site"
+      ],
+      "definition_only": true
+    },
+    {
+      "agent_id": "readiness-audit",
+      "aliases": [
+        "readiness_audit",
+        "Readiness Audit"
+      ],
+      "definition_only": true
+    },
+    {
+      "agent_id": "commit-scope-audit",
+      "aliases": [
+        "commit_scope_audit",
+        "Commit Scope Audit"
+      ],
+      "definition_only": true
+    },
+    {
+      "agent_id": "rea-profile-audit",
+      "aliases": [
+        "rea_profile_audit",
+        "Rea Profile Audit"
+      ],
+      "definition_only": true
+    },
+    {
+      "agent_id": "architecture-inventory",
+      "aliases": [
+        "architecture_inventory",
+        "Architecture Inventory"
+      ],
+      "definition_only": true
+    },
+    {
+      "agent_id": "architecture-flows",
+      "aliases": [
+        "architecture_flows",
+        "Architecture Flows"
+      ],
+      "definition_only": true
+    },
+    {
+      "agent_id": "architecture-source-audit",
+      "aliases": [
+        "architecture_source_audit",
+        "Architecture Source Audit"
+      ],
+      "definition_only": true
+    },
+    {
+      "agent_id": "readme-contract-audit",
+      "aliases": [
+        "readme_contract_audit",
+        "Readme Contract Audit"
+      ],
+      "definition_only": true
+    },
+    {
+      "agent_id": "readme-usage-audit",
+      "aliases": [
+        "readme_usage_audit",
+        "Readme Usage Audit"
+      ],
+      "definition_only": true
+    },
+    {
+      "agent_id": "mermaid-integral",
+      "aliases": [
+        "mermaid_integral",
+        "Mermaid Integral"
+      ],
+      "definition_only": true
+    },
+    {
+      "agent_id": "readme-all-flows",
+      "aliases": [
+        "readme_all_flows",
+        "Readme All Flows"
+      ],
+      "definition_only": true
+    },
+    {
+      "agent_id": "mermaid-review",
+      "aliases": [
+        "mermaid_review",
+        "Mermaid Review"
+      ],
+      "definition_only": true
+    },
+    {
+      "agent_id": "r881-final-audit",
+      "aliases": [
+        "r881_final_audit",
+        "R881 Final Audit"
+      ],
+      "definition_only": true
+    },
+    {
+      "agent_id": "metacognition-audit",
+      "aliases": [
+        "metacognition_audit",
+        "Metacognition Audit"
+      ],
+      "definition_only": true
+    },
+    {
+      "agent_id": "evaluate-repositories",
+      "aliases": [
+        "evaluate_repositories",
+        "Evaluate Repositories"
+      ],
+      "definition_only": true
+    },
+    {
+      "agent_id": "r886-review",
+      "aliases": [
+        "r886_review",
+        "R886 Review"
+      ],
+      "definition_only": true
+    },
+    {
+      "agent_id": "code-context-backend",
+      "aliases": [
+        "code_context_backend",
+        "Code Context Backend"
+      ],
+      "definition_only": true
+    },
+    {
+      "agent_id": "repos-rea-analysis",
+      "aliases": [
+        "repos_rea_analysis",
+        "Repos Rea Analysis"
+      ],
+      "definition_only": true
+    },
+    {
+      "agent_id": "repos-science-analysis",
+      "aliases": [
+        "repos_science_analysis",
+        "Repos Science Analysis"
+      ],
+      "definition_only": true
+    },
+    {
+      "agent_id": "scientific-profile",
+      "aliases": [
+        "scientific_profile",
+        "Scientific Profile"
+      ],
+      "definition_only": true
+    },
+    {
+      "agent_id": "scientific-review",
+      "aliases": [
+        "scientific_review",
+        "Scientific Review"
+      ],
+      "definition_only": true
+    },
+    {
+      "agent_id": "whoosh-persistence",
+      "aliases": [
+        "whoosh_persistence",
+        "Whoosh Persistence"
+      ],
+      "definition_only": true
+    },
+    {
+      "agent_id": "r893-final-review",
+      "aliases": [
+        "r893_final_review",
+        "R893 Final Review"
+      ],
+      "definition_only": true
+    },
+    {
+      "agent_id": "codesight-source",
+      "aliases": [
+        "codesight_source",
+        "Codesight Source"
+      ],
+      "definition_only": true
+    }
+  ],
+  "plugin_profiles": [
+    {
+      "agent_id": "plugin-superpowers",
+      "plugin_id": "superpowers",
+      "definition_only": true
+    },
+    {
+      "agent_id": "plugin-scigrant",
+      "plugin_id": "scigrant",
+      "definition_only": true
+    },
+    {
+      "agent_id": "plugin-wolfram",
+      "plugin_id": "wolfram",
+      "definition_only": true
+    },
+    {
+      "agent_id": "plugin-anthropic-skills",
+      "plugin_id": "anthropic-skills",
+      "definition_only": true
+    },
+    {
+      "agent_id": "plugin-cowork-plugin-management",
+      "plugin_id": "cowork-plugin-management",
+      "definition_only": true
+    },
+    {
+      "agent_id": "plugin-bio-research",
+      "plugin_id": "bio-research",
+      "definition_only": true
+    },
+    {
+      "agent_id": "plugin-plugin-creator",
+      "plugin_id": "plugin-creator",
+      "definition_only": true
+    },
+    {
+      "agent_id": "plugin-data",
+      "plugin_id": "data",
+      "definition_only": true
+    },
+    {
+      "agent_id": "plugin-design",
+      "plugin_id": "design",
+      "definition_only": true
+    },
+    {
+      "agent_id": "plugin-visualize",
+      "plugin_id": "visualize",
+      "definition_only": true
+    },
+    {
+      "agent_id": "plugin-human-resources",
+      "plugin_id": "human-resources",
+      "definition_only": true
+    },
+    {
+      "agent_id": "plugin-work-pets",
+      "plugin_id": "work-pets",
+      "definition_only": true
+    },
+    {
+      "agent_id": "plugin-enterprise-search",
+      "plugin_id": "enterprise-search",
+      "definition_only": true
+    },
+    {
+      "agent_id": "plugin-life-sciences-literature",
+      "plugin_id": "life-sciences-literature",
+      "definition_only": true
+    },
+    {
+      "agent_id": "plugin-legal",
+      "plugin_id": "legal",
+      "definition_only": true
+    },
+    {
+      "agent_id": "plugin-productivity",
+      "plugin_id": "productivity",
+      "definition_only": true
+    },
+    {
+      "agent_id": "plugin-dr-alex-ramos",
+      "plugin_id": "dr-alex-ramos",
+      "definition_only": true
+    },
+    {
+      "agent_id": "plugin-contas-escolares-airam-veras",
+      "plugin_id": "contas-escolares-airam-veras",
+      "definition_only": true
+    },
+    {
+      "agent_id": "plugin-medico-virtual-supremo",
+      "plugin_id": "medico-virtual-supremo",
+      "definition_only": true
+    },
+    {
+      "agent_id": "plugin-sites",
+      "plugin_id": "sites",
+      "definition_only": true
+    }
+  ]
+}

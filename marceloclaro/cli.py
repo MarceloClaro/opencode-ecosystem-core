@@ -376,6 +376,10 @@ def main() -> int:
             from marceloclaro.code_context_cli import run_code_context_cli
             return run_code_context_cli(sys.argv[2:], MarceloClaroOrchestrator)
 
+        if cmd in {"agentes", "ci-local"}:
+            from marceloclaro.governed_cli import run_governed_cli
+            return run_governed_cli(cmd, sys.argv[2:], MarceloClaroOrchestrator)
+
         if cmd == "rea":
             from marceloclaro.rea_cli import run_rea_cli
             return run_rea_cli(sys.argv[2:], MarceloClaroOrchestrator)

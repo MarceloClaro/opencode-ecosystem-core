@@ -234,6 +234,113 @@ class MarceloClaroOrchestrator:
             self._agents_loaded = True
             logger.info(f"[{self.id}] Catálogo registrado: {self.catalog_size} agentes especializados")
 
+    def agent_profile_action(self, config: Dict[str, Any]) -> Dict[str, Any]:
+        """R894: valida e registra perfis; ativar prepara tarefa, sem simular inferência."""
+        from agents.lifecycle import AgentLifecycleService, validate_lifecycle_request, _metadata
+        import hashlib
+        import json
+        from pathlib import Path
+        config = validate_lifecycle_request(config)
+        root = Path(__file__).resolve().parents[1]
+        service = getattr(self, "_agent_lifecycle", None) or AgentLifecycleService(root)
+        operation = config["operation"]
+        if operation == "inventory":
+            return service.inventory()
+        result = (service.create(config["profile"]) if operation == "create"
+                  else service.validate(config["agent_id"]))
+        result = {**result, "registered": False, "executed": False, "confidence_promoted": False}
+        if result.get("definition_validated") is not True:
+            return {**result, "status": "legacy_preserved", "reason": "Perfil histórico sem contrato gerenciado de ativação."}
+        meta = result["profile"]
+        if operation in {"create", "register", "activate"}:
+            # Publicação e prompt usam a mesma definição cujo hash foi validado.
+            raw = (service.root / result["source_file"]).read_bytes()
+            if hashlib.sha256(raw).hexdigest() != result["source_sha256"]:
+                raise ValueError("Perfil alterado antes do registro")
+            schema = {"output_contract": meta["output_contract"], "parent": self.id,
+                      "source_sha256": result["source_sha256"]}
+            card = blackboard.registry.get(meta["agent_id"])
+            occupied = ((card is not None and card.status == "busy") or any(
+                task.assigned_to == meta["agent_id"] and task.status in {"assigned", "running"}
+                for task in blackboard.tasks.values()))
+            same_definition = (card is not None and card.capabilities == meta["tags"]
+                               and card.name == meta["name"] and card.description == meta["description"]
+                               and card.input_schema == schema)
+            if occupied and not same_definition:
+                return {**result, "status": "blocked", "reason": "profile_changed_while_busy"}
+            # Republicar agent.register recriaria um cartão disponível, apagando busy.
+            # Definições iguais conservam a identidade e o estado do cartão A2A.
+            if not same_definition:
+                metabus.publish("agent.register", {
+                    "agent_id": meta["agent_id"], "name": meta["name"], "description": meta["description"],
+                    "capabilities": meta["tags"], "skills": meta["skills"], "schema": schema,
+                }, source_agent=self.id)
+                card = blackboard.registry.get(meta["agent_id"])
+            if (card is None or card.capabilities != meta["tags"] or card.input_schema != schema
+                    or card.name != meta["name"] or card.description != meta["description"]):
+                return {**result, "status": "blocked", "reason": "Registro Blackboard não confirmado."}
+            result["registered"] = True
+            if operation == "activate" and occupied:
+                return {**result, "status": "busy", "reason": "profile_busy",
+                        "execution_status": "not_started"}
+        if operation == "activate":
+            raw = (service.root / result["source_file"]).read_bytes()
+            if hashlib.sha256(raw).hexdigest() != result["source_sha256"]:
+                raise ValueError("Perfil alterado antes da ativação")
+            _, prompt = _metadata(raw)
+            task_id = self.delegate(config["task"], required_capabilities=[result["unique_capability"]], context={
+                "agent_profile": {"agent_id": meta["agent_id"], "source_file": result["source_file"],
+                                  "source_sha256": result["source_sha256"], "instructions": prompt,
+                                  "output_contract": meta["output_contract"]},
+                "sdd": {"spec_file": meta["spec_file"], "test_file": meta["test_file"]},
+            })
+            task = blackboard.tasks.get(task_id)
+            result.update(task_id=task_id, status=getattr(task, "status", "blocked"),
+                          assigned_to=getattr(task, "assigned_to", None), execution_status="pending_executor")
+            if task is not None and task.assigned_to not in (None, meta["agent_id"]):
+                foreign_id = task.assigned_to
+                task.status, task.assigned_to = "blocked", None
+                foreign = blackboard.registry.get(foreign_id)
+                if (foreign is not None and foreign.status == "busy" and not any(
+                        other is not task and other.assigned_to == foreign_id
+                        and other.status == "assigned" for other in blackboard.tasks.values())):
+                    foreign.status = "available"
+                result.update(status="blocked", reason="profile_assignment_mismatch",
+                              assigned_to=None, execution_status="blocked")
+        else:
+            result["status"] = "registered" if result["registered"] else "definition_validated"
+        result["metacognition"] = self._record_knowledge_outcome(
+            "agents.lifecycle", meta["agent_id"],
+            {key: result.get(key) for key in ("status", "source_sha256", "registered", "executed", "task_id", "validation_scope")})
+        if operation == "create" and service.root == root:
+            from integrations.opencode_cli import build_config
+            import tempfile
+            target = root / "opencode.json"
+            fd, tmp = tempfile.mkstemp(dir=root, prefix=".opencode-", suffix=".tmp")
+            try:
+                with os.fdopen(fd, "w", encoding="utf-8") as stream:
+                    json.dump(build_config(), stream, ensure_ascii=False, indent=2)
+                    stream.write("\n")
+                os.replace(tmp, target)
+            finally:
+                Path(tmp).unlink(missing_ok=True)
+            result["configuration_regenerated"] = True
+        return result
+
+    def local_ci_action(self, config: Dict[str, Any]) -> Dict[str, Any]:
+        """R897: CI local pelo mesmo primário, sem depender do runner hospedado."""
+        from integrations.local_ci import LocalCIService
+        from marceloclaro.governed_cli import validate_ci_config
+        config = validate_ci_config(config)
+        service = getattr(self, "_local_ci", None) or LocalCIService()
+        operation = config.pop("operation")
+        result = getattr(service, operation)(**config)
+        result["metacognition"] = self._record_knowledge_outcome(
+            "ci.local", operation, {key: result.get(key) for key in
+                                    ("status", "run_id", "profile", "current_compatibility", "scope")})
+        result["confidence_promoted"] = False
+        return result
+
     def create_text_task_spec(self, task: str, criteria: List[str]) -> Dict[str, Any]:
         """Especifica análise/revisão textual antes da execução; não aceita software."""
         if not isinstance(task, str) or not task.strip() or len(task) > 2000:

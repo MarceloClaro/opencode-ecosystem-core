@@ -7,7 +7,7 @@ import json
 
 def run_code_context_cli(argv, orchestrator_factory) -> int:
     parser = argparse.ArgumentParser(prog="marceloclaro code-context")
-    parser.add_argument("operation", choices=("setup", "index", "status", "query"))
+    parser.add_argument("operation", choices=("setup", "index", "status", "query", "python_graph"))
     parser.add_argument("--tool", help="Ferramenta de consulta permitida")
     parser.add_argument("--arguments", default="{}", help="Objeto JSON dos parâmetros da consulta")
     parser.add_argument("--timeout", type=float, default=30.0)
@@ -17,12 +17,12 @@ def run_code_context_cli(argv, orchestrator_factory) -> int:
         if not isinstance(arguments, dict):
             raise TypeError("arguments deve ser um objeto JSON.")
         config = {"operation": args.operation, "timeout_seconds": args.timeout}
-        if args.operation == "query":
+        if args.operation in {"query", "python_graph"}:
             if args.tool is None:
-                raise ValueError("query exige --tool.")
+                raise ValueError("Consulta exige --tool.")
             config.update(tool=args.tool, arguments=arguments)
         elif args.tool is not None or arguments:
-            raise ValueError("tool/arguments somente se aplicam a query.")
+            raise ValueError("tool/arguments somente se aplicam a query/python_graph.")
         report = orchestrator_factory(auto_load_agents=False).code_context_action(config)
     except SystemExit as exc:
         return int(exc.code)

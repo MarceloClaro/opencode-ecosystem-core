@@ -1,0 +1,67 @@
+{
+  "cycle": "R897",
+  "generated_at": "2026-10-15T14:47:32.195526+00:00",
+  "verification": "local_operation",
+  "external_validation": false,
+  "global_suite_executed": false,
+  "scientific_scale_validated": false,
+  "source_hashes": {
+    "integrations/local_ci.py": "ac5462db94156edbdba9ebb37743acbb91206f3f08c5e2a8e78220c16ffb0b84",
+    "scripts/validate_scientific_profile.py": "f072e2f8bc2aa3143f0b34982c3ebfe12b50dbe5d697df2d4f017876cb4afb5b",
+    "tests/test_r897_local_ci.py": "7b4185f020732a15f505382f1d8b41f4ff2f2c1cb2f8edf1fe8b90182ece80c9",
+    "tests/test_r891_scientific_profile.py": "3095bccc3458766b921d233baa668f935695c32cb490c082ee43e041c8954eb0"
+  },
+  "receipts": [
+    {
+      "path": "outputs/core-r897/backend-red.xml",
+      "sha256": "281b06368f5a250ca7adb8d22fbcb691564114ae139a037bcf84cfa3ada57876",
+      "junit_counts": {
+        "tests": 30,
+        "failures": 30,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "outputs/core-r897/backend-hardening-red.xml",
+      "sha256": "8d38741b3980e90fe8c9c2bf529abd28b5aae6ec0cbd645395cef8252c986b7c",
+      "junit_counts": {
+        "tests": 3,
+        "failures": 2,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "outputs/core-r897/backend-green-final.xml",
+      "sha256": "744d47d1befe9676c06d87656878ce9b9f982afdd95a4dece922a3ff48a36295",
+      "junit_counts": {
+        "tests": 33,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "outputs/core-r897/profile-expansion-red.xml",
+      "sha256": "368f7ba530cd5bd742d5f14ff39878b3c9bb96c91d71e93e64d09faa363c0bf3",
+      "junit_counts": {
+        "tests": 1,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "outputs/core-r897/profile-expansion-green-final.xml",
+      "sha256": "47f0b565b6535f6705b42bf995c96c5a6e2eeb753a0f83844adc917030ad282b",
+      "junit_counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  ],
+  "full_current_ci": "execute ci-local scientific on final commit; result remains a local run artifact"
+}

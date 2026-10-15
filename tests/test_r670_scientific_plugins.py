@@ -20,9 +20,11 @@ def source(tmp_path):
 
 
 def test_twelve_requested_plugins_without_execution_claim(tmp_path):
-    assert len(PLUGINS) == 12
+    assert {"genomic-intelligence", "wolfram", "boltz-api-cli", "ngs-analysis-workbench",
+            "cowork-plugin-management", "data", "plugin-management", "academixpertplus-kariri",
+            "scigrant", "life-sciences-literature", "plugin-creator", "anthropic-skills"} <= set(PLUGINS)
     result = ScientificPluginService(tmp_path).status()
-    assert len(result["plugins"]) == 12
+    assert {p["id"] for p in result["plugins"]} == set(PLUGINS)
     assert result["executed"] is False
     assert all(p["local_connector_execution"] is False for p in result["plugins"])
 

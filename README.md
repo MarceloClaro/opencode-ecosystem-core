@@ -23,7 +23,7 @@ especificações, gates de entrega e rastreabilidade local.
 [![OpenCode](https://img.shields.io/badge/OpenCode%20CLI-native-0ea5e9?style=for-the-badge&logo=opencode&logoColor=white)](opencode.json)
 
 <!-- core-state:start -->
-**255 agentes** · **16 MCPs** · **31 comandos** · **22 checks**
+**310 agentes** · **16 MCPs** · **33 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 
@@ -42,6 +42,7 @@ do ambiente e da operação solicitada.
 ## 📑 Índice
 
 - [Visão geral](#visão-geral)
+- [Agentes, plugins e verificação local](#agentes-plugins-e-verificação-local)
 - [Capacidades principais](#capacidades-principais)
 - [Início rápido local](#início-rápido-local)
 - [Instalação segura e procedência](#instalação-segura-e-procedência)
@@ -94,6 +95,42 @@ origens permitidas; cliques e preenchimentos podem produzir efeitos no site.
 
 Regra de entrega: especificar antes de implementar, executar os testes
 registrados e conservar a evidência e os limites do resultado.
+
+## Agentes, plugins e verificação local
+
+A atualização [R894–R897](docs/ORQUESTRACAO_AGENTES_PLUGINS_CI_R894_R897.md)
+incorpora **35 perfis de trabalho desta tarefa e 20 perfis de plugins** ao catálogo
+orquestrado por MarceloClaro. Novos perfis passam por definição, política,
+especificação, testes e hash antes do registro. Ativação preparada e execução
+concluída continuam sendo estados distintos.
+
+```mermaid
+flowchart LR
+    U894[CLI e MCP] --> P894[MarceloClaro primário]
+    P894 --> A894[Perfis validados e catálogo persistente]
+    A894 --> B894[Blackboard: identidade e capacidade exclusiva]
+    B894 --> E894[Executor e gate SDD/TDD]
+    P894 --> G894[Grafo estático Python com proveniência]
+    P894 --> I894[Plugins: instruções locais e tickets do host]
+    P894 --> C894[CI local com perfil científico enumerado]
+    E894 --> M894[MetaBus e evidências delimitadas]
+    G894 --> M894
+    I894 --> M894
+    C894 --> M894
+```
+
+Os comandos `agentes` e `ci-local` possuem entradas CLI e MCP. O backend
+`python_graph` fornece três consultas estáticas para Python; as operações
+nativas de grafo conhecidas como incorretas continuam bloqueadas. A CI local
+executa sem depender da cobrança GitHub, preserva recibos e não cria checks
+remotos. Consulte o guia para escopo, limites e comandos completos.
+
+[WolframResearch pode contribuir](docs/AVALIACAO_WOLFRAM_CORE_R895.md) com
+AgentTools, cliente Python e notebooks. Uma
+[amostra hospedada real](docs/verification-wolfram-host-r895.json) calculou soma,
+integral e fatoração pelo contrato existente. Runtime/licença locais requerem
+verificação própria. O [ZIP REA fornecido](docs/AVALIACAO_ZIP_REA_PTBR.md) foi
+avaliado como referência didática e não substituiu o Core.
 
 ## Capacidades principais
 
@@ -432,7 +469,7 @@ flowchart TB
     Orq2 --> MetaBus2[MetaBus]
     Orq2 --> Blackboard2[Blackboard]
     Orq2 --> MCP2[16 MCPs configurados]
-    Orq2 --> Agents2[255 agentes configurados]
+    Orq2 --> Agents2[310 agentes configurados]
     Orq2 --> Mira2[mira-presenter]
     Mira2 --> Deck2[MiraDeckPipeline]
     Deck2 --> Engine2[MiraEngine]

@@ -1,0 +1,109 @@
+{
+  "cycle": "R894",
+  "generated_at": "2026-10-15T14:47:32.186532+00:00",
+  "verification": "local_operation",
+  "external_validation": false,
+  "global_suite_executed": false,
+  "scientific_scale_validated": false,
+  "source_hashes": {
+    "agents/lifecycle.py": "80f1fca2c93e373ef8da8a45d69d3154e495fd36d6766de7dd60834edd92c083",
+    "agents/lifecycle_baseline.json": "5bd2d9d8464fa548f195a21fae0a3651f3cf2be74b62c81440753cda768dd9cf",
+    "agents/session_profiles.json": "c7237ddb22a4467b8b1ee446b685a05ebc8dc7f26ffaeb0adbd1b6485f2e1a81",
+    "marceloclaro/governed_cli.py": "1d2d995f6f9f80d3945b5d440adcbfb43ae2910e3e79a182bf4195e4805d120b",
+    "marceloclaro/orchestrator.py": "d3981f751bf66d53d1ab04abc77c64c2360c35379640530a70c2e2439fedebfe",
+    "integrations/opencode_cli.py": "f1eef169534badcdcea479156f0c38d6e03f55cb9dc8fe390e16327258be52e7",
+    "tests/test_r894_agent_lifecycle.py": "40b656a001fa28226cdd6c14ecb6e1a4c04f29eb051e30ab52691a98e84a3db3",
+    "tests/test_r894_orchestration_surfaces.py": "a946064b3e59da1b3b05907185f5c775c2a7d8c7b449313b5f75cfed66e9a783"
+  },
+  "receipts": [
+    {
+      "path": "outputs/core-r894/red.xml",
+      "sha256": "e163326505f9ab25007ce7f3adb188e92acf4988e2df7c707385aae8099969fd",
+      "bytes": 37255,
+      "junit_counts": {
+        "tests": 22,
+        "failures": 22,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "outputs/core-r894/review-red.xml",
+      "sha256": "520650eeeba93b265288fae7963391d913ad47b480797d6760c996d0e1f3ec24",
+      "bytes": 9865,
+      "junit_counts": {
+        "tests": 30,
+        "failures": 6,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "outputs/core-r894/review-green.xml",
+      "sha256": "4415a06027d0dffa700309912ea80d81db1dde53118d6609d3f4f78e91f0c667",
+      "bytes": 4249,
+      "junit_counts": {
+        "tests": 30,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "outputs/core-r894/primary-gates-red-functional.xml",
+      "sha256": "fc99fbe52d121f53b101862535b59e080885a07b915c955a81904af6620ed7e9",
+      "bytes": 1250,
+      "junit_counts": {
+        "tests": 2,
+        "failures": 2,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "outputs/core-r894/primary-gates-green.xml",
+      "sha256": "6b8cdae73d782301875013e0997fd7be62084497c967abf796f86a5df2a3d252",
+      "bytes": 1831,
+      "junit_counts": {
+        "tests": 11,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "outputs/core-r894/busy-repair/red.xml",
+      "sha256": "d2ebbd51ff9dbacaf593d13c3cc3a17b35251512686e5585c9446ca7feff94ca",
+      "bytes": 6328,
+      "junit_counts": {
+        "tests": 4,
+        "failures": 4,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "outputs/core-r894/busy-repair/green.xml",
+      "sha256": "f817e449e21edbc41a1abbc8ad4e46710df2ec85e5d993c303ccd7e6543e780b",
+      "bytes": 6416,
+      "junit_counts": {
+        "tests": 45,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "outputs/core-r894/integrated-final.xml",
+      "sha256": "cc6e367f0f18fbec52390c37ec2f8559cb0a570489d7292a0df2450de8f664b3",
+      "bytes": 15325,
+      "junit_counts": {
+        "tests": 105,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  ],
+  "full_current_ci": "execute ci-local scientific on final commit; result remains a local run artifact"
+}

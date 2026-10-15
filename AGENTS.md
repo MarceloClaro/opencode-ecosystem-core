@@ -12,6 +12,18 @@ Este arquivo é lido automaticamente pelo OpenCode CLI (`opencode.json.instructi
 6. **Depois de mudanças relevantes**: registre um ciclo de evolução (`evolution_registry.record(...)`, ver `evolution/cycles.py`) e, se aplicável, uma spec formal em `specs/SPEC-935-R*.md`.
 7. **Invocação de skills e continuidade de pipelines**: quando uma skill filha estiver marcada com `disable-model-invocation: true` no `SKILL.md` ou `policy.allow_implicit_invocation: false` em `agents/openai.yaml`, **não** tente acioná-la implicitamente pelo Skill tool nem pelo mecanismo de subagente por nome. O orquestrador deve localizar e ler o `SKILL.md` correspondente e executar suas instruções no contexto atual. Se o usuário já respondeu `CONTINUAR` ao próximo passo sugerido, isso é consentimento explícito para esse handoff; não interrompa o pipeline exigindo que ele digite `/nome-da-skill`. Para resolução determinística, use `reversa_universal.skill_dispatch.ReversaSkillDispatcher` (SPEC-935-R471).
 
+## Criação permanente de agentes e subagentes
+
+Antes de criar um novo agente/subagente de trabalho, use `MarceloClaroOrchestrator.agent_profile_action`
+(CLI `agentes criar` ou MCP `ecosystem_agent_profile`) para validar e persistir seu perfil,
+spec/teste, capacidades, origem, contrato de saída e permissões. Depois use `registrar`/`ativar`
+pelo mesmo primário. Reutilize perfis existentes quando o escopo já estiver coberto.
+O gate de carga/compilação recusa novos cartões sem contrato; o baseline conserva somente
+os bytes das definições históricas. Alterações nesses cartões exigem migração explícita.
+Em ferramentas externas que criam subagentes, registre primeiro o perfil correspondente
+e correlacione a tarefa A2A ao trabalho efetivo. O Core não intercepta ferramentas de
+outros aplicativos. Registro/atribuição não significam inferência ou conclusão executada.
+
 ## Onde encontrar o quê
 
 - Manual de uso (linguagem simples): `MANUAL.md`

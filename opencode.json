@@ -1480,6 +1480,60 @@
         "bash": "deny"
       }
     },
+    "architecture-flows": {
+      "description": "Reconstruir fluxos operacionais e conferir interfaces implementadas.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/architecture-flows.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "architecture-inventory": {
+      "description": "Inventariar módulos e conexões presentes na fonte.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/architecture-inventory.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "architecture-source-audit": {
+      "description": "Conferir mapas contra imports, métodos, comandos e contratos da fonte.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/architecture-source-audit.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
     "author-voice-guardian": {
       "description": "Guarda de voz autoral que audita traduções contra o perfil de voz da obra — marcadores regionais e orais, modernismos proibidos e deriva de registro pragmático — sempre com revisão humana para alto ri",
       "mode": "subagent",
@@ -1595,6 +1649,42 @@
         "bash": "deny"
       }
     },
+    "blind-review-ledger": {
+      "description": "Auditar registros, hashes, custódia e estados históricos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/blind-review-ledger.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "blind-review-scanner": {
+      "description": "Auditar scanners e medidas com corpus negativo independente.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/blind-review-scanner.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
     "book-finetuning": {
       "description": "Preparação de dados de livros com separação por grupo e licença.",
       "mode": "subagent",
@@ -1627,6 +1717,24 @@
           "python3 -m pytest tests/test_r657_book_mcp.py -q": "allow"
         },
         "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "book-release": {
+      "description": "Preparar artefatos do livro com verificação de fontes e compilação.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/book-release.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "allow",
         "webfetch": "deny",
         "task": "deny"
       }
@@ -1739,6 +1847,24 @@
         "bash": "deny"
       }
     },
+    "code-context-backend": {
+      "description": "Integrar inteligência de código local com proveniência e confinamento.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/code-context-backend.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "allow",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
     "code-reviewer": {
       "description": "Revisa codigo para qualidade, seguranca e melhores praticas",
       "mode": "subagent",
@@ -1798,6 +1924,24 @@
         "bash": "deny"
       }
     },
+    "codesight-source": {
+      "description": "Avaliar fonte e licença de Codesight sem duplicar provedores.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/codesight-source.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
     "colab-cli": {
       "description": "Executor externo orquestrável: `colab` (googlecolab/google-colab-cli, Apache-2.0). Provisiona runtimes CPU/GPU/TPU, executa código e jobs efêmeros, gerencia arquivos do Colab via terminal.",
       "mode": "subagent",
@@ -1823,6 +1967,42 @@
       "permission": {
         "edit": "deny",
         "bash": "deny"
+      }
+    },
+    "command-regression": {
+      "description": "Conferir comandos, códigos de saída e configuração reproduzível.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/command-regression.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "allow",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "commit-scope-audit": {
+      "description": "Auditar escopo de commits preservando alterações alheias.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/commit-scope-audit.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
       }
     },
     "context-manager": {
@@ -1964,6 +2144,24 @@
         "bash": "deny"
       }
     },
+    "ecosystem-review": {
+      "description": "Revisar integração do ecossistema contra fontes e contratos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/ecosystem-review.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
     "eval-runner": {
       "description": "Test harness for evaluation framework - DO NOT USE DIRECTLY",
       "mode": "subagent",
@@ -1971,6 +2169,24 @@
       "permission": {
         "edit": "deny",
         "bash": "deny"
+      }
+    },
+    "evaluate-repositories": {
+      "description": "Avaliar licença, adequação e sobreposição de repositórios candidatos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/evaluate-repositories.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
       }
     },
     "externalscout": {
@@ -2088,6 +2304,24 @@
       "permission": {
         "bash": "allow",
         "edit": "deny"
+      }
+    },
+    "github-gap-research": {
+      "description": "Avaliar lacunas e candidatos no GitHub com origem e licença.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/github-gap-research.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
       }
     },
     "goose-cli": {
@@ -2431,6 +2665,24 @@
         "bash": "deny"
       }
     },
+    "local-rea-site": {
+      "description": "Manter interface e instruções locais conectadas ao backend REA.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/local-rea-site.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "allow",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
     "master-orchestrator": {
       "description": "Orquestrador mestre e controlador de ciclo de vida (end-to-end) para o Ecossistema OpenCode e Polimata. Inicializa e finaliza as demandas do usuário, garantindo auditoria e reprodutibilidade de longo ",
       "mode": "subagent",
@@ -2516,6 +2768,60 @@
       "permission": {
         "edit": "deny",
         "bash": "deny"
+      }
+    },
+    "mermaid-integral": {
+      "description": "Construir diagramas Mermaid com legenda e proveniência.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/mermaid-integral.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "allow",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "mermaid-review": {
+      "description": "Revisar sintaxe, nós, relações e limites dos diagramas Mermaid.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/mermaid-review.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "metacognition-audit": {
+      "description": "Auditar memória, feedback e confiança contra evidência circular.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/metacognition-audit.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
       }
     },
     "minizinc-mcp": {
@@ -2830,6 +3136,366 @@
         "bash": "deny"
       }
     },
+    "plugin-anthropic-skills": {
+      "description": "Coordenar capacidades de anthropic-skills sob o MarceloClaro com proveniência e limites.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/plugin-anthropic-skills.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r895_requested_plugins.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "plugin-bio-research": {
+      "description": "Coordenar capacidades de Bio Research sob o MarceloClaro com proveniência e limites.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/plugin-bio-research.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r895_requested_plugins.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "plugin-contas-escolares-airam-veras": {
+      "description": "Coordenar capacidades de Contas Escolares Airam Veras sob o MarceloClaro com proveniência e limites.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/plugin-contas-escolares-airam-veras.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r895_requested_plugins.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "plugin-cowork-plugin-management": {
+      "description": "Coordenar capacidades de cowork-plugin-management sob o MarceloClaro com proveniência e limites.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/plugin-cowork-plugin-management.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r895_requested_plugins.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "plugin-data": {
+      "description": "Coordenar capacidades de data sob o MarceloClaro com proveniência e limites.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/plugin-data.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r895_requested_plugins.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "plugin-design": {
+      "description": "Coordenar capacidades de Design sob o MarceloClaro com proveniência e limites.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/plugin-design.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r895_requested_plugins.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "plugin-dr-alex-ramos": {
+      "description": "Coordenar capacidades de Dr. Alex Ramos sob o MarceloClaro com proveniência e limites.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/plugin-dr-alex-ramos.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r895_requested_plugins.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "plugin-enterprise-search": {
+      "description": "Coordenar capacidades de Enterprise Search sob o MarceloClaro com proveniência e limites.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/plugin-enterprise-search.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r895_requested_plugins.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "plugin-human-resources": {
+      "description": "Coordenar capacidades de Human Resources sob o MarceloClaro com proveniência e limites.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/plugin-human-resources.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r895_requested_plugins.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "plugin-legal": {
+      "description": "Coordenar capacidades de Legal sob o MarceloClaro com proveniência e limites.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/plugin-legal.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r895_requested_plugins.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "plugin-life-sciences-literature": {
+      "description": "Coordenar capacidades de Life Sciences Literature sob o MarceloClaro com proveniência e limites.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/plugin-life-sciences-literature.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r895_requested_plugins.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "plugin-medico-virtual-supremo": {
+      "description": "Coordenar capacidades de Médico Virtual Supremo sob o MarceloClaro com proveniência e limites.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/plugin-medico-virtual-supremo.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r895_requested_plugins.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "plugin-plugin-creator": {
+      "description": "Coordenar capacidades de Plugin Creator sob o MarceloClaro com proveniência e limites.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/plugin-plugin-creator.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r895_requested_plugins.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "plugin-productivity": {
+      "description": "Coordenar capacidades de Productivity sob o MarceloClaro com proveniência e limites.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/plugin-productivity.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r895_requested_plugins.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "plugin-scigrant": {
+      "description": "Coordenar capacidades de SciGrant sob o MarceloClaro com proveniência e limites.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/plugin-scigrant.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r895_requested_plugins.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "plugin-sites": {
+      "description": "Coordenar capacidades de Sites sob o MarceloClaro com proveniência e limites.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/plugin-sites.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r895_requested_plugins.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "plugin-superpowers": {
+      "description": "Coordenar capacidades de Superpowers sob o MarceloClaro com proveniência e limites.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/plugin-superpowers.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r895_requested_plugins.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "plugin-visualize": {
+      "description": "Coordenar capacidades de Visualize sob o MarceloClaro com proveniência e limites.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/plugin-visualize.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r895_requested_plugins.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "plugin-wolfram": {
+      "description": "Coordenar capacidades de Wolfram sob o MarceloClaro com proveniência e limites.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/plugin-wolfram.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r895_requested_plugins.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "plugin-work-pets": {
+      "description": "Coordenar capacidades de Work Pets sob o MarceloClaro com proveniência e limites.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/plugin-work-pets.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r895_requested_plugins.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
     "prioritization-engine": {
       "description": "Agente especializado prioritization-engine",
       "mode": "subagent",
@@ -2861,6 +3527,186 @@
         "bash": "deny"
       }
     },
+    "r881-final-audit": {
+      "description": "Auditar artefatos históricos R881 na versão correspondente.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/r881-final-audit.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "r886-review": {
+      "description": "Auditar a integração metacognitiva R886 com contraprovas.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/r886-review.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "r893-final-review": {
+      "description": "Auditar busca e grounding R893 em processos separados.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/r893-final-review.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "rea-adapter": {
+      "description": "Adaptar o REA às interfaces do Core sem executar alvos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/rea-adapter.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "allow",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "rea-profile-audit": {
+      "description": "Auditar camadas e provedores do assistente REA.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/rea-profile-audit.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "rea-runtime": {
+      "description": "Implementar e verificar o runtime local REA confinado.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/rea-runtime.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "allow",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "readiness-audit": {
+      "description": "Conferir prontidão distinguindo instalação, autenticação e inferência.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/readiness-audit.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "readme-all-flows": {
+      "description": "Conferir presença e coerência de todos os fluxogramas documentados.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/readme-all-flows.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "readme-contract-audit": {
+      "description": "Conferir comandos, capacidades e limites declarados no README.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/readme-contract-audit.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "readme-usage-audit": {
+      "description": "Conferir exemplos de uso, retornos e pré-requisitos locais.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/readme-usage-audit.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
     "reasonix-cli": {
       "description": "Executor externo orquestrável: `reasonix` (`esengine/DeepSeek-Reasonix`, MIT).",
       "mode": "subagent",
@@ -2868,6 +3714,78 @@
       "permission": {
         "edit": "deny",
         "bash": "deny"
+      }
+    },
+    "red-history-final-audit": {
+      "description": "Conferir RED/GREEN, hashes e limites de cronologia local.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/red-history-final-audit.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "regression-remaining": {
+      "description": "Corrigir regressões remanescentes por contraprovas executadas.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/regression-remaining.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "allow",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "repos-rea-analysis": {
+      "description": "Analisar repositórios com REA para adaptação sem executar alvos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/repos-rea-analysis.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "repos-science-analysis": {
+      "description": "Avaliar componentes científicos distinguindo proposta de execução.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/repos-science-analysis.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
       }
     },
     "reversa-agent-forum": {
@@ -3203,6 +4121,24 @@
         "webfetch": "deny"
       }
     },
+    "runtime-regression": {
+      "description": "Reproduzir regressões de execução, prazo e cancelamento.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/runtime-regression.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "allow",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
     "scientific-capabilities-audit": {
       "description": "Auditoria de capacidades científicas, proveniência e limites.",
       "mode": "subagent",
@@ -3215,6 +4151,42 @@
           "*": "deny",
           "python3 -m pytest tests/test_r669_requested_agents.py -q": "allow",
           "python3 -m pytest tests/test_r663_scientific_provenance.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "scientific-profile": {
+      "description": "Manter perfil científico enumerado, orçamentos e recibos novos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/scientific-profile.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "allow",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "scientific-review": {
+      "description": "Revisar aceites, cálculos, referências e limites científicos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/scientific-review.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
         },
         "edit": "deny",
         "webfetch": "deny",
@@ -3418,6 +4390,24 @@
         "todoread": "deny",
         "todowrite": "deny",
         "webfetch": "deny"
+      }
+    },
+    "whoosh-persistence": {
+      "description": "Verificar persistência e recuperação de texto real do Whoosh.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/whoosh-persistence.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "allow",
+        "webfetch": "deny",
+        "task": "deny"
       }
     },
     "ws-academic-pipeline": {
@@ -3633,6 +4623,16 @@
     "plugins-cientificos": {
       "template": "Integre os plugins de $ARGUMENTS sob MarceloClaro com ecosystem_scientific_plugins. Leia a skill instalada preservando sua política. Para conector hospedado, request cria ticket; chame host_tool disponível com arguments e devolva response vinculado ao request_id e request_sha256. Credenciais ficam no host; não trate awaiting_host como execução. SciGrant exige redação de projeto, não diagnóstico.",
       "description": "Skills, CLIs e conectores científicos autenticados no host",
+      "agent": "marceloclaro"
+    },
+    "agentes-core": {
+      "template": "Sob MarceloClaro, use ecosystem_agent_profile para: $ARGUMENTS. Antes de criar qualquer novo agente/subagente, valide e persista perfil, spec/teste, capacidades e permissões; depois registre e ative no mesmo primário. Atribuição não significa inferência ou conclusão.",
+      "description": "Perfis permanentes, validação e ativação A2A pelo MarceloClaro (R894)",
+      "agent": "marceloclaro"
+    },
+    "ci-local": {
+      "template": "Use ecosystem_local_ci para: $ARGUMENTS. start executa somente o perfil scientific fechado; status/runs/cancel usam run_id. Aceite exige recibos novos, fontes e JUnit íntegros. Não represente resultado local como aprovação remota ou revisão científica externa.",
+      "description": "CI científica local independente de runner hospedado (R897)",
       "agent": "marceloclaro"
     },
     "ciencia": {

@@ -1,33 +1,58 @@
-"""R670: instruções locais e tickets de conectores científicos hospedados."""
+"""R670/R895: registro canônico de instruções locais e tickets hospedados.
+
+Importar instruções não executa hooks, tarefas de domínio ou conectores.
+Autenticação pertence ao host e não é transferida ao Core pela importação.
+"""
 from __future__ import annotations
 
 import hashlib
 import json
 import os
-from pathlib import Path
 import re
 import shutil
 import subprocess
 import sys
 import tempfile
 import uuid
+from pathlib import Path, PurePosixPath
 from typing import Any
-
 
 PLUGINS = {
     "genomic-intelligence": ("Genomic Intelligence", "openai-curated-remote/app-6a73c480231c819181d7440a0e1499c9", "1.1.0"),
     "wolfram": ("Wolfram", "openai-curated-remote/app-69fe0bf66c8481919c513d799406436e", "3.0.0"),
     "boltz-api-cli": ("Boltz", "openai-curated-remote/boltz-api-cli", "0.1.1"),
-    "ngs-analysis-workbench": ("NGS Analysis Workbench", "openai-curated-remote/ngs-analysis-workbench", "0.2.16"),
+    "ngs-analysis-workbench": ("NGS Analysis Workbench", "openai-curated-remote/ngs-analysis-workbench", "0.2.18"),
     "cowork-plugin-management": ("cowork-plugin-management", "claude-cowork/cowork-plugin-management", "0.2.2"),
     "data": ("data", "claude-cowork/data", "1.1.0"),
     "plugin-management": ("Plugin Management", "openai-curated-remote/plugin-management", "0.1.0"),
     "academixpertplus-kariri": ("AcademiXpertPlus KARIRI", "created-by-me-remote/gpt-d8a67608fa47bd06edd9d64b5f46fa6d", "0.5.1+bundle.4c816d33a9b41bebd57e17594e90d987"),
     "scigrant": ("SciGrant", "openai-curated-remote/app-6ab77d700b148191a79dc4d2df6babb6", "0.1.0"),
     "life-sciences-literature": ("Life Sciences Literature", "openai-curated-remote/life-sciences-literature", "0.1.5"),
-    "plugin-creator": ("Plugin Creator", "openai-curated-remote/plugin-creator", "0.1.22"),
+    "plugin-creator": ("Plugin Creator", "openai-curated-remote/plugin-creator", "0.1.27"),
     "anthropic-skills": ("anthropic-skills", "claude-cowork/anthropic-skills", "1.0.0"),
+    "superpowers": ("Superpowers", "openai-curated-remote/superpowers", "6.4.2"),
+    "bio-research": ("Bio Research", "claude-cowork/bio-research", "1.2.0"),
+    "design": ("Design", "claude-cowork/design", "1.2.0"),
+    "visualize": ("Visualize", "openai-bundled/visualize", "1.0.49"),
+    "human-resources": ("Human Resources", "claude-cowork/human-resources", "1.3.0"),
+    "work-pets": ("Work Pets", "openai-curated-remote/work-pets", "0.1.6"),
+    "enterprise-search": ("Enterprise Search", "claude-cowork/enterprise-search", "1.3.0"),
+    "legal": ("Legal", "claude-cowork/legal", "1.3.0"),
+    "productivity": ("Productivity", "claude-cowork/productivity", "1.3.1"),
+    "dr-alex-ramos": ("Dr. Alex Ramos", "created-by-me-remote/gpt-e7255c6825a9703dd051c73056c06459", "1.6.0"),
+    "contas-escolares-airam-veras": ("Contas Escolares Airam Veras", "created-by-me-remote/contas-escolares-airam-veras", "1.1.0"),
+    "medico-virtual-supremo": ("Médico Virtual Supremo", "created-by-me-remote/gpt-6ceee9ff15bc7f1a4007d43b810f1876", "0.4.0"),
+    "sites": ("Sites", "openai-curated-remote/sites", "1.0.2-remix-a.1"),
 }
+# Seleção solicitada, não outro registro: os cinco perfis legados adicionais
+# continuam no mesmo PLUGINS e na mesma registry.json.
+REQUESTED_PLUGIN_IDS = (
+    "superpowers", "scigrant", "wolfram", "anthropic-skills",
+    "cowork-plugin-management", "bio-research", "plugin-creator", "data", "design",
+    "visualize", "human-resources", "work-pets", "enterprise-search",
+    "life-sciences-literature", "legal", "productivity", "dr-alex-ramos",
+    "contas-escolares-airam-veras", "medico-virtual-supremo", "sites",
+)
 # Ferramentas hospedadas são chamadas pelo host que já mantém a conexão OAuth.
 # Nenhuma URL de transporte ou credencial é inferida do identificador de app.
 HOST_OPERATIONS = {
@@ -35,15 +60,27 @@ HOST_OPERATIONS = {
     ("genomic-intelligence", "fetch_sequence"): ("mcp__codex_apps__genomic_intelligence_fetch_ensembl_sequence", {"gene", "species", "flank_bp"}),
     ("wolfram", "context"): ("mcp__codex_apps__wolfram_wolframcontext", {"context"}),
     ("wolfram", "evaluate"): ("mcp__codex_apps__wolfram_wolframlanguageevaluator", {"code", "timeConstraint"}),
-    ("wolfram", "query"): ("mcp__codex_apps__wolfram_wolframalpha", {"input"}),
+    ("wolfram", "query"): ("mcp__codex_apps__wolfram_wolframalpha", {"query"}),
     ("ngs-analysis-workbench", "targets"): ("mcp__ngs_compute__list_compute_targets", set()),
     ("scigrant", "workflow"): ("mcp__codex_apps__scigrant_get_scigrant_workflow", set()),
     ("plugin-management", "search"): ("mcp__codex_apps__plugin_management_search_plugins", {"query", "limit"}),
     ("plugin-management", "dependencies"): ("mcp__codex_apps__plugin_management_get_plugin_dependencies", {"plugin_reference"}),
     ("plugin-creator", "metadata"): ("mcp__codex_apps__plugin_creator_get_plugin_metadata", {"plugin_id"}),
+    ("work-pets", "list"): ("mcp__codex_apps__pets_list_pets", {"cursor", "limit"}),
+    ("sites", "list"): ("mcp__codex_apps__sites_list_sites", {"cursor", "limit", "include_editable", "role"}),
 }
 _ID = re.compile(r"[A-Za-z0-9_-]{1,100}\Z")
-_SECRET = re.compile(r"(?:api[_-]?key|access[_-]?token|refresh[_-]?token|password|secret|authorization)", re.I)
+_SECRET = re.compile(r"(?:api[_-]?key|access[_-]?token|refresh[_-]?token|password|secret|authorization)", re.IGNORECASE)
+_CREDENTIAL_NAMES = frozenset({".env", "credentials.json", "credentials", "auth.json",
+                              "token.json", "tokens.json", "id_rsa", "id_ed25519"})
+
+
+def _host_arguments(plugin_id, operation, arguments):
+    """Compatibilidade R670 para Wolfram; tickets novos usam o schema oficial."""
+    if (plugin_id == "wolfram" and operation == "query" and isinstance(arguments, dict)
+            and set(arguments) == {"input"}):
+        return {"query": arguments["input"]}
+    return arguments
 
 
 def _slug(value: str) -> str:
@@ -74,11 +111,68 @@ def _json(value: Any, limit: int = 131072) -> bytes:
     return raw
 
 
+def _manifest_json(registry: Any) -> bytes:
+    """Serializa somente metadados canônicos; nomes de arquivos não são campos de payload.
+
+    A exceção ao filtro de nomes de segredo limita-se ao mapa relativo path→SHA256.
+    Argumentos, respostas e demais metadados continuam passando por _json.
+    """
+    fields = {"id", "name", "version", "source_root", "package_root", "files", "skills", "origin"}
+    if not isinstance(registry, dict) or len(registry) > len(PLUGINS):
+        raise ValueError("Manifesto de plugins inválido")
+    metadata = {}
+    maps = {}
+    for pid, entry in registry.items():
+        if (not isinstance(pid, str) or pid not in PLUGINS or not isinstance(entry, dict)
+                or set(entry) != fields or entry.get("id") != pid
+                or entry.get("name") != PLUGINS[pid][0]
+                or entry.get("origin") != "third_party_or_user"):
+            raise ValueError("Manifesto de plugin inválido")
+        if any(not isinstance(entry.get(key), str) or not 1 <= len(entry[key]) <= 4096
+               for key in ("version", "source_root", "package_root")):
+            raise ValueError("Metadados de manifesto inválidos")
+        skills = entry["skills"]
+        if (not isinstance(skills, list) or len(skills) > 2000
+                or any(not isinstance(skill, str) or not _ID.fullmatch(skill) for skill in skills)
+                or len(set(skills)) != len(skills)):
+            raise ValueError("Skills de manifesto inválidas")
+        files = entry["files"]
+        if not isinstance(files, dict) or not 1 <= len(files) <= 2000:
+            raise ValueError("Arquivos de manifesto inválidos")
+        for relative, digest in files.items():
+            if (not isinstance(relative, str) or not 1 <= len(relative) <= 4096
+                    or "\\" in relative or ":" in relative
+                    or any(ord(char) < 32 for char in relative)):
+                raise ValueError("Caminho de manifesto inválido")
+            path = PurePosixPath(relative)
+            if (path.is_absolute() or relative != path.as_posix()
+                    or any(part in {".", ".."} for part in path.parts)):
+                raise ValueError("Caminho de manifesto inválido")
+            for part in path.parts:
+                lowered = part.lower()
+                if (lowered in _CREDENTIAL_NAMES or lowered in {".ssh", ".git"}
+                        or (lowered.startswith(".env.") and lowered not in {
+                            ".env.example", ".env.sample", ".env.template"})):
+                    raise ValueError("Caminho sensível de credenciais no manifesto")
+            if not isinstance(digest, str) or not re.fullmatch(r"[0-9a-f]{64}", digest):
+                raise ValueError("SHA256 de arquivo inválido no manifesto")
+        metadata[pid] = {key: value for key, value in entry.items() if key != "files"}
+        maps[pid] = files
+    normalized = json.loads(_json(metadata, 8 * 1024 * 1024))
+    for pid, files in maps.items():
+        normalized[pid]["files"] = files
+    raw = json.dumps(normalized, ensure_ascii=False, sort_keys=True, allow_nan=False).encode()
+    if len(raw) > 8 * 1024 * 1024:
+        raise ValueError("Manifesto excede limite de bytes")
+    return raw
+
+
 def validate_plugin_request(plugin_id, operation, arguments, intent=None):
     _slug(plugin_id)
     _slug(operation)
     if (plugin_id, operation) not in HOST_OPERATIONS:
         raise ValueError("Operação hospedada não registrada")
+    arguments = _host_arguments(plugin_id, operation, arguments)
     if not isinstance(arguments, dict):
         raise ValueError("Argumentos devem ser objeto JSON")
     tool, fields = HOST_OPERATIONS[plugin_id, operation]
@@ -86,7 +180,7 @@ def validate_plugin_request(plugin_id, operation, arguments, intent=None):
         raise ValueError("Argumentos desconhecidos")
     _json(arguments)
     required = {"list_models": "task", "fetch_sequence": "gene", "evaluate": "code",
-                "context": "context", "query": "input", "search": "query",
+                "context": "context", "query": "query", "search": "query",
                 "dependencies": "plugin_reference", "metadata": "plugin_id"}.get(operation)
     if required and (not isinstance(arguments.get(required), str) or not arguments[required].strip()):
         raise ValueError("Argumento obrigatório ausente ou inválido")
@@ -102,6 +196,15 @@ def validate_plugin_request(plugin_id, operation, arguments, intent=None):
         raise ValueError("Flanco genômico inválido")
     if "limit" in arguments and (type(arguments["limit"]) is not int or not 1 <= arguments["limit"] <= 50):
         raise ValueError("Limite de busca inválido")
+    if plugin_id == "work-pets" and arguments.get("limit", 20) > 20:
+        raise ValueError("Limite de pets deve estar entre 1 e 20")
+    if "cursor" in arguments and arguments["cursor"] is not None and (
+            not isinstance(arguments["cursor"], str) or not 1 <= len(arguments["cursor"]) <= 2000):
+        raise ValueError("Cursor inválido")
+    if "include_editable" in arguments and type(arguments["include_editable"]) is not bool:
+        raise ValueError("include_editable deve ser booleano")
+    if "role" in arguments and arguments["role"] not in (None, "owner", "editor"):
+        raise ValueError("Papel de site inválido")
     return tool
 
 
@@ -117,8 +220,8 @@ class ScientificPluginService:
         return path
 
     @staticmethod
-    def _write(path, value):
-        raw = _json(value, 8 * 1024 * 1024)
+    def _write(path, value, *, manifest=False):
+        raw = _manifest_json(value) if manifest else _json(value, 8 * 1024 * 1024)
         path.parent.mkdir(parents=True, exist_ok=True)
         descriptor, temp = tempfile.mkstemp(dir=path.parent, prefix=".receipt-")
         try:
@@ -141,19 +244,44 @@ class ScientificPluginService:
 
     def _registry(self):
         path = self._path("registry.json")
-        return self._load(path) if path.exists() else {}
+        registry = self._load(path) if path.exists() else {}
+        if not isinstance(registry, dict):
+            raise ValueError("Registro de plugins inválido")
+        return registry
+
+    def _instruction_state(self, plugin_id, entry):
+        if not isinstance(entry, dict) or not entry:
+            return "not_installed", False
+        version = PLUGINS[plugin_id][2]
+        if entry.get("version") != version:
+            return "version_mismatch", False
+        try:
+            package = self._path("packages", plugin_id, version)
+            valid = bool(entry.get("files")) and self._snapshot(package) == entry["files"]
+        except (OSError, ValueError, TypeError):
+            valid = False
+        return ("ready", True) if valid else ("integrity_failed", False)
 
     def status(self):
         registry = self._registry()
         plugins = []
         for key, (name, source, version) in PLUGINS.items():
             entry = registry.get(key, {})
+            instruction_status, integrity = self._instruction_state(key, entry)
+            operations = [op for (pid, op) in HOST_OPERATIONS if pid == key]
+            kinds = ["local_instructions"]
+            if operations:
+                kinds.append("host_connector")
+            if key in {"boltz-api-cli", "life-sciences-literature"}:
+                kinds.append("allowlisted_local_cli")
             plugins.append({"id": key, "name": name, "version": version,
-                            "source_cache": source, "instructions_installed": bool(entry),
-                            "skills": entry.get("skills", []),
-                            "host_operations": [op for (pid, op) in HOST_OPERATIONS if pid == key],
+                            "source_cache": source, "instructions_installed": integrity,
+                            "instruction_status": instruction_status, "hash_integrity": integrity,
+                            "skills": entry.get("skills", []) if integrity else [],
+                            "capability_kinds": kinds, "host_operations": operations,
+                            "host_authentication": "not_verified" if operations else "not_applicable",
                             "local_connector_execution": False,
-                            "connector_scope": "authenticated_host" if any(pid == key for pid, _ in HOST_OPERATIONS) else "local_instructions_or_cli"})
+                            "connector_scope": "authenticated_host" if operations else "local_instructions_or_cli"})
         return {"status": "catalogued", "plugins": plugins, "executed": False,
                 "external_validation": False}
 
@@ -164,18 +292,25 @@ class ScientificPluginService:
         for path in sorted(package.rglob("*")):
             if path.is_symlink():
                 raise ValueError("Links não são importados")
+            relative_parts = path.relative_to(package).parts
+            if path.name.lower() in _CREDENTIAL_NAMES or any(part in {".ssh", ".git"} for part in relative_parts):
+                raise ValueError("Arquivo sensível de credenciais não é importado")
+            if path.name.lower().startswith(".env.") and path.name.lower() not in {
+                    ".env.example", ".env.sample", ".env.template"}:
+                raise ValueError("Arquivo sensível de credenciais não é importado")
             if path.is_file():
                 if not path.resolve().is_relative_to(package.resolve()):
                     raise ValueError("Arquivo fora da origem")
                 total += path.stat().st_size
                 if total > 128 * 1024 * 1024 or len(files) >= 2000:
                     raise ValueError("Pacote excede limites de importação")
-                files[str(path.relative_to(package))] = hashlib.sha256(path.read_bytes()).hexdigest()
+                files[path.relative_to(package).as_posix()] = hashlib.sha256(path.read_bytes()).hexdigest()
         return files
 
     def sync(self, *, cache_root: str | Path, plugin_ids=None):
         ids = list(PLUGINS) if plugin_ids is None else plugin_ids
-        if not isinstance(ids, list) or not 1 <= len(ids) <= 12 or len(set(ids)) != len(ids):
+        if (not isinstance(ids, list) or not 1 <= len(ids) <= len(PLUGINS)
+                or any(not isinstance(pid, str) for pid in ids) or len(set(ids)) != len(ids)):
             raise ValueError("Seleção de plugins inválida")
         if any(pid not in PLUGINS for pid in ids):
             raise ValueError("Plugin não solicitado")
@@ -213,23 +348,28 @@ class ScientificPluginService:
                      "files": files, "skills": skills, "origin": "third_party_or_user"}
             registry[pid] = entry
             result.append(entry)
-        self._write(self._path("registry.json"), registry)
+        self._write(self._path("registry.json"), registry, manifest=True)
         return {"status": "completed", "plugins": result, "executed": False,
                 "credentials_copied": False}
 
     def skill(self, plugin_id, skill_name):
         _slug(plugin_id)
         _slug(skill_name)
+        if plugin_id not in PLUGINS:
+            raise ValueError("Plugin não registrado")
         entry = self._registry().get(plugin_id)
         if not entry or skill_name not in entry["skills"]:
             raise ValueError("Skill do plugin não instalada")
+        if entry.get("version") != PLUGINS[plugin_id][2]:
+            raise ValueError("Versão instalada divergente; sincronize o plugin")
         package = self._path("packages", plugin_id, PLUGINS[plugin_id][2])
         if self._snapshot(package) != entry["files"]:
             raise ValueError("Falha de integridade do pacote")
         path = package / "skills" / skill_name / "SKILL.md"
-        from reversa_universal.skill_dispatch import ReversaSkillDispatcher
-        from integrations.harness_federation.artifact import invocation_policy
         import yaml
+
+        from integrations.harness_federation.artifact import invocation_policy
+        from reversa_universal.skill_dispatch import ReversaSkillDispatcher
         dispatcher = ReversaSkillDispatcher(self.root)
         decision = dispatcher.plan_path(path).to_dict()
         raw = path.read_bytes()
@@ -246,6 +386,7 @@ class ScientificPluginService:
                 "executed": False, "status": "instruction_only"}
 
     def request(self, plugin_id, operation, arguments, *, intent=None):
+        arguments = _host_arguments(plugin_id, operation, arguments)
         tool = validate_plugin_request(plugin_id, operation, arguments, intent)
         body = {"plugin_id": plugin_id, "operation": operation, "host_tool": tool,
                 "arguments": json.loads(_json(arguments)), "intent": intent}
@@ -281,6 +422,11 @@ class ScientificPluginService:
         is_error = normalized.get("isError") is True
         nested = normalized.get("structuredContent", {})
         if isinstance(nested, dict) and nested.get("isError") is True:
+            is_error = True
+        # Estado de habilitação é autoritativo, mesmo com transporte MCP válido.
+        unavailable = {"failed", "error", "unavailable", "not_entitled", "expired", "suspended",
+                       "not_started", "temporarily_unavailable", "authentication_required", "blocked"}
+        if normalized.get("status") in unavailable or (isinstance(nested, dict) and nested.get("status") in unavailable):
             is_error = True
         receipt = {"request_id": request_id, "request_sha256": expected,
                    "plugin_id": request["plugin_id"], "host_tool": host_tool,

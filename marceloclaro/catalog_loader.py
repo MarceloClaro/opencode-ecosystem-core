@@ -496,6 +496,8 @@ def load_catalog_definitions(catalog_dir: str = CATALOG_DIR) -> List[Dict[str, A
         except OSError:
             continue
 
+        from agents.lifecycle import enforce_catalog_contract
+        enforce_catalog_contract(path, raw_content)
         content = _decode_catalog_content(raw_content)
         meta = _load_frontmatter(raw_content)
         file_stem = os.path.splitext(os.path.basename(path))[0]

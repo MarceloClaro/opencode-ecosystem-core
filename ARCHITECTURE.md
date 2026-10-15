@@ -21,7 +21,7 @@ python3 -c "import json; c=json.load(open('opencode.json', encoding='utf-8')); p
 ```
 
 <!-- core-state:start -->
-**255 agentes** · **16 MCPs** · **31 comandos** · **22 checks**
+**310 agentes** · **16 MCPs** · **33 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 
@@ -247,3 +247,16 @@ A instalação deve começar por uma versão identificada, um commit Git complet
 e uma soma SHA-256 publicada para o artefato que será conferido. O procedimento
 reprodutível e as limitações por plataforma estão em
 [installer/README.md](installer/README.md).
+
+
+## Atualização de orquestração R894–R897
+
+O [mapa dos novos percursos](docs/ORQUESTRACAO_AGENTES_PLUGINS_CI_R894_R897.md)
+conecta o ciclo de vida de agentes ao mesmo primário, gerador, Blackboard e
+MetaBus. Os perfis persistentes ficam no catálogo canônico. A compilação lê os
+mesmos bytes validados e o registro mantém sua identidade e hash. Instruções de
+plugins, conexão hospedada, grafo Python estático e CI local têm fronteiras e
+recibos separados; nenhum deles promove automaticamente confiança científica.
+
+O [parecer Wolfram](docs/AVALIACAO_WOLFRAM_CORE_R895.md) explica o encaixe no
+contrato de plugins existente e as condições de uma futura engine local.

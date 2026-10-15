@@ -1,0 +1,32 @@
+{
+  "request_id": "c6da68be719f4a9da336279b7713d2f1",
+  "request_sha256": "14789157f3a1e9fc5b4c7954ee162dc933e86db7b6816aa981822ecfb5a563e3",
+  "status": "completed",
+  "host_tool": "mcp__codex_apps__wolfram_wolframlanguageevaluator",
+  "response_sha256": "5630adf81c7f320ecb9af0c15c45a1de06dcbf480e8a870c24e4d1d42785577a",
+  "host_reported_execution": true,
+  "local_connector_execution": false,
+  "external_validation": false,
+  "scope": "hosted_smoke_only",
+  "input": {
+    "code": "{2+3, Integrate[Sin[x], x], Factor[x^2 - 1]}",
+    "timeConstraint": 10
+  },
+  "output": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Out[1]= {5, -Cos[x], (-1 + x)*(1 + x)}"
+      }
+    ],
+    "isError": false
+  },
+  "local_runtime_discovery": {
+    "wolframscript": null,
+    "WolframKernel": null,
+    "math": null,
+    "docker": null
+  },
+  "licensing_verified": false,
+  "production_scale_verified": false
+}

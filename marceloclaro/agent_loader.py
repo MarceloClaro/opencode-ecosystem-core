@@ -60,7 +60,10 @@ def load_agent_definitions(agents_dir: str = AGENTS_DIR) -> List[Dict[str, Any]]
     for path in sorted(glob.glob(os.path.join(agents_dir, "*.md"))):
         try:
             with open(path, "r", encoding="utf-8") as f:
-                parsed = _parse_frontmatter(f.read())
+                content = f.read()
+            from agents.lifecycle import enforce_catalog_contract
+            enforce_catalog_contract(path, content.encode("utf-8"))
+            parsed = _parse_frontmatter(content)
             meta = parsed["meta"]
             if not meta.get("id"):
                 logger.warning(f"Arquivo sem frontmatter válido ignorado: {path}")

@@ -1,0 +1,60 @@
+{
+  "cycle": "R895",
+  "generated_at": "2026-10-15T14:47:32.192020+00:00",
+  "verification": "local_operation",
+  "external_validation": false,
+  "global_suite_executed": false,
+  "scientific_scale_validated": false,
+  "source_hashes": {
+    "integrations/scientific_plugins.py": "37c7863de83d899b1c18a42762e923ce1cebe462d4ac4c090634ecba4c2cf0fb",
+    "tests/test_r895_requested_plugins.py": "a775dc79ad1f1d39094f18eff7a325196c3cc57ce630deac665c76c17ffdb56e",
+    "tests/test_r670_scientific_plugins.py": "ecb9125e9674355d767c87e56c67c47c18f549a524b6a754e07ff98c287bf4a5"
+  },
+  "receipts": [
+    {
+      "path": "outputs/core-r895/red.xml",
+      "sha256": "f40fb6f41d2433934d7e1269a41cf3dcd7b239a434253f85dde8b077d10f5023",
+      "bytes": 19280,
+      "junit_counts": {
+        "tests": 22,
+        "failures": 12,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "outputs/core-r895/green.xml",
+      "sha256": "2bc70b2779ad5824548b6666362e591bc5709db9fffbec4f3c773e6da230b1d8",
+      "bytes": 7022,
+      "junit_counts": {
+        "tests": 40,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "outputs/core-r895/manifest-repair/red.xml",
+      "sha256": "645ce1e69e7dc2f7c3b0f43af8913555ea6160719e91a808b3efc57797520aa3",
+      "bytes": 21979,
+      "junit_counts": {
+        "tests": 17,
+        "failures": 9,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "outputs/core-r895/manifest-repair/green.xml",
+      "sha256": "492e364c8d801dafd017f0ff1983f02050cd363a67ab9021c070ea32baf9b78c",
+      "bytes": 8770,
+      "junit_counts": {
+        "tests": 57,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  ],
+  "full_current_ci": "execute ci-local scientific on final commit; result remains a local run artifact"
+}

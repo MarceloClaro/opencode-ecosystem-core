@@ -129,6 +129,8 @@ def parse_agent_catalog_md(path: Path, content: Optional[str] = None) -> Optiona
         except (OSError, UnicodeDecodeError):
             return None
 
+    from agents.lifecycle import enforce_catalog_contract
+    enforce_catalog_contract(path, content.encode("utf-8"))
     start_idx, end_idx = _locate_frontmatter(content)
     if start_idx is None:
         return None

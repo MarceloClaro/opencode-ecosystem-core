@@ -21052,6 +21052,130 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R894",
+      "objective": "Ciclo de vida validado dos perfis históricos e de plugins",
+      "changes": [
+        "Persistir 35 perfis históricos e 20 perfis de plugins no catálogo canônico.",
+        "Bloquear colisão de identidade, symlinks, política alterada e redefinição de perfil ocupado.",
+        "Validar registro, atribuição ALL_OF, CLI e MCP sem declarar inferência."
+      ],
+      "score": null,
+      "lessons": [
+        "Verificações locais delimitadas; inferência geral, escala científica e revisão externa não são demonstradas por configuração ou testes."
+      ],
+      "timestamp": 1792075728.7861762,
+      "artifact_hashes": {
+        "specs/SPEC-935-R894-agentes-ciclo-vida-validado.md": "3e6c2bed385e99b80e203740e73a824812a6f616faf8d631d2d27c2e8bdd35f9",
+        "docs/verification-local-r894.json": "be24ccc8f342ce1414fd03ca0b24d42f343cbe8b29dcee862009730c8b7f4525"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "specs/SPEC-935-R894-agentes-ciclo-vida-validado.md",
+        "docs/verification-local-r894.json",
+        "docs/ORQUESTRACAO_AGENTES_PLUGINS_CI_R894_R897.md"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "b663fd6af89c3f0a1988af50918d30d7463bfdd6",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R895",
+      "objective": "Importação local dos vinte plugins solicitados e operação hospedada Wolfram",
+      "changes": [
+        "Importar vinte pacotes por versão/hash sem executar hooks ou copiar credenciais.",
+        "Corrigir serializer do manifesto sem relaxar a proteção de payloads hospedados.",
+        "Executar amostra Wolfram por ticket do primário e registrar curadorias Wolfram/ZIP."
+      ],
+      "score": null,
+      "lessons": [
+        "Verificações locais delimitadas; inferência geral, escala científica e revisão externa não são demonstradas por configuração ou testes."
+      ],
+      "timestamp": 1792075728.8375542,
+      "artifact_hashes": {
+        "specs/SPEC-935-R895-plugins-solicitados-orquestrados.md": "0df58da8015aff5b47fcd6c7d216dea4afe90fdac45019e5d1bbfc3d674dd288",
+        "docs/verification-local-r895.json": "7ef423ad43622da1659e96bc6b80ef5e3c9281eae3e4611e434a5c38a55c430f"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "specs/SPEC-935-R895-plugins-solicitados-orquestrados.md",
+        "docs/verification-local-r895.json",
+        "docs/ORQUESTRACAO_AGENTES_PLUGINS_CI_R894_R897.md"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "b663fd6af89c3f0a1988af50918d30d7463bfdd6",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R896",
+      "objective": "Consultas de grafo Python por AST com proveniência delimitada",
+      "changes": [
+        "Adicionar backend explícito core_python_ast para chamadas, usos e raio de impacto.",
+        "Preservar relações não resolvidas, limites, erros e bloqueios nativos do provedor.",
+        "Testar semântica adversarial de escopo, ciclos e proveniência."
+      ],
+      "score": null,
+      "lessons": [
+        "Verificações locais delimitadas; inferência geral, escala científica e revisão externa não são demonstradas por configuração ou testes."
+      ],
+      "timestamp": 1792075728.8775795,
+      "artifact_hashes": {
+        "specs/SPEC-935-R896-grafo-python-ast-confinado.md": "5d48adc94eddb2cd57e25cf273e873f941a0219c776d2b86c4f2b92f701d8141",
+        "docs/verification-local-r896.json": "91375191e97ff7df09e135b55d403d1f27e833e1e91d0dcc6d131920b434fb63"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "specs/SPEC-935-R896-grafo-python-ast-confinado.md",
+        "docs/verification-local-r896.json",
+        "docs/ORQUESTRACAO_AGENTES_PLUGINS_CI_R894_R897.md"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "b663fd6af89c3f0a1988af50918d30d7463bfdd6",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R897",
+      "objective": "CI científica local assíncrona independente de cobrança hospedada",
+      "changes": [
+        "Adicionar supervisor local efêmero, exclusão mútua, cancelamento e recibos íntegros.",
+        "Validar seleção exata, fases executadas, hashes, atualidade e estado histórico separado.",
+        "Ampliar perfil científico de cinco para dez grupos mantendo limites por grupo."
+      ],
+      "score": null,
+      "lessons": [
+        "Verificações locais delimitadas; inferência geral, escala científica e revisão externa não são demonstradas por configuração ou testes."
+      ],
+      "timestamp": 1792075728.9103322,
+      "artifact_hashes": {
+        "specs/SPEC-935-R897-ci-local-independente.md": "f282828ccd7bb2d79d63a85bdac114dedf1f54d521200579d35454c19eeab27f",
+        "docs/verification-local-r897.json": "f11d24b7f04de45cf4a809f33896258d9d7a5f7f8c467d2dc315c9f6c68a3b02"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "specs/SPEC-935-R897-ci-local-independente.md",
+        "docs/verification-local-r897.json",
+        "docs/ORQUESTRACAO_AGENTES_PLUGINS_CI_R894_R897.md"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "b663fd6af89c3f0a1988af50918d30d7463bfdd6",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ]
 }

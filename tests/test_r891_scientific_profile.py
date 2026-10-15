@@ -41,14 +41,22 @@ def execute(root, tmp_path, source, *, timeout=15, memory=256 * 1024 * 1024):
 
 def test_profile_is_closed_explicit_and_bounded():
     module = api()
-    assert len(module.PROFILE_GROUPS) == 5
+    assert tuple(name for name, _ in module.PROFILE_GROUPS) == (
+        "provenance_release", "manuscripts", "workflow_memory", "reasoning_integrity",
+        "delivery_contracts", "managed_agents_plugins", "python_graph",
+        "local_ci_lifecycle", "local_ci_receipt_integrity", "local_ci_selection_freshness",
+    )
     targets = [target for _, group in module.PROFILE_GROUPS for target in group]
     assert len(targets) == len(set(targets))
     assert all(target.startswith("tests/test_") and "*" not in target for target in targets)
     assert module.DEFAULT_GROUP_TIMEOUT == 180
     assert module.DEFAULT_MAX_RSS_BYTES == 1536 * 1024 * 1024
-    assert "tests/test_r891_scientific_profile.py" in targets
-    assert all("lean" not in target.lower() for target in targets)
+    assert {"tests/test_r891_scientific_profile.py", "tests/test_r894_agent_lifecycle.py",
+            "tests/test_r894_orchestration_surfaces.py", "tests/test_r895_requested_plugins.py",
+            "tests/test_r896_python_code_graph.py"} <= set(targets)
+    assert "tests/test_r897_local_ci.py::test_tampered_metadata_or_artifacts_never_display_passed" in targets
+    assert "tests/test_r897_local_ci.py::test_collection_must_preserve_exact_registered_target_scope" in targets
+    assert all("lean" not in target.split("::", 1)[0].lower() for target in targets)
 
 
 def test_real_passing_run_records_selection_hashes_and_junit(project, tmp_path, monkeypatch):

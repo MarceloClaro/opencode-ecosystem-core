@@ -129,18 +129,20 @@ def _yaml_scalar(raw_value: str) -> Any:
     return value
 
 
-def _frontmatter_policy_sections(path: str) -> Dict[str, Any]:
+def _frontmatter_policy_sections(path: str, *, content: str | None = None) -> Dict[str, Any]:
     """Lê ``tools`` e ``permission`` de um frontmatter YAML simples.
 
     O gerador não depende de PyYAML em runtime. O parser é deliberadamente
     estreito: aceita os escalares e os dois níveis de mapas usados pelas regras
     OpenCode, preservando a ordem de inserção que define a precedência.
     """
-    try:
-        with open(path, "r", encoding="utf-8") as source:
-            content = _strip_leading_html_comment(source.read())
-    except OSError:
-        return {}
+    if content is None:
+        try:
+            with open(path, "r", encoding="utf-8") as source:
+                content = source.read()
+        except OSError:
+            return {}
+    content = _strip_leading_html_comment(content)
 
     match = re.match(r"^---\s*\n(.*?)\n---", content, re.DOTALL)
     if match is None:
@@ -189,7 +191,7 @@ def _frontmatter_policy_sections(path: str) -> Dict[str, Any]:
     return sections
 
 
-def _frontmatter_scalars(path: str) -> Dict[str, Any]:
+def _frontmatter_scalars(path: str, *, content: str | None = None) -> Dict[str, Any]:
     """Lê escalares simples do frontmatter para campos OpenCode opcionais.
 
     Mantém o parser sem dependência YAML e ignora seções aninhadas como
@@ -197,11 +199,13 @@ def _frontmatter_scalars(path: str) -> Dict[str, Any]:
     agente. Usado para propagar, por exemplo, ``model: openai/gpt-4.1`` de
     agentes autorais do catálogo para o ``opencode.json`` gerado.
     """
-    try:
-        with open(path, "r", encoding="utf-8") as source:
-            content = _strip_leading_html_comment(source.read())
-    except OSError:
-        return {}
+    if content is None:
+        try:
+            with open(path, "r", encoding="utf-8") as source:
+                content = source.read()
+        except OSError:
+            return {}
+    content = _strip_leading_html_comment(content)
 
     match = re.match(r"^---\s*\n(.*?)\n---", content, re.DOTALL)
     if match is None:
@@ -266,9 +270,10 @@ def _copy_permissions(permissions: Mapping[str, Any]) -> Dict[str, Any]:
 def _agent_permissions(
     source_file: str,
     fallback: Mapping[str, Any] | None = None,
+    *, content: str | None = None,
 ) -> Dict[str, Any]:
     """Deriva permissões autorais e aplica defaults fechados às mutações."""
-    sections = _frontmatter_policy_sections(source_file)
+    sections = _frontmatter_policy_sections(source_file, content=content)
     permissions: Dict[str, Any] = {}
 
     tools = sections.get("tools")
@@ -323,6 +328,14 @@ def _catalog_agents() -> Dict[str, Any]:
         # isso tornava o opencode.json não-reproduzível; ver SPEC-935-R137).
         slug = os.path.splitext(os.path.basename(d["source_file"]))[0]
         source_file = str(d["source_file"])
+        from pathlib import Path
+
+        from agents.lifecycle import enforce_catalog_contract
+        raw = Path(source_file).read_bytes()
+        enforce_catalog_contract(source_file, raw)
+        # A política e os escalares são derivados do mesmo snapshot validado;
+        # nenhuma segunda abertura pode introduzir permissões não validadas.
+        content = raw.decode("utf-8")
         agent = {
             "description": d["description"][:200],
             "mode": "subagent",
@@ -334,9 +347,10 @@ def _catalog_agents() -> Dict[str, Any]:
             "permission": _agent_permissions(
                 source_file,
                 _ESSENTIAL_AGENT_PERMISSIONS.get(slug, _DEFAULT_AGENT_PERMISSIONS),
+                content=content,
             ),
         }
-        frontmatter = _frontmatter_scalars(source_file)
+        frontmatter = _frontmatter_scalars(source_file, content=content)
         if frontmatter.get("model"):
             agent["model"] = str(frontmatter["model"])
         agents[slug] = agent
@@ -349,6 +363,12 @@ def _essential_agents() -> Dict[str, Any]:
     agents_dir = os.path.join(ROOT, "agents")
     for name in sorted(os.listdir(agents_dir)):
         if name.endswith(".md"):
+            from pathlib import Path
+
+            from agents.lifecycle import enforce_catalog_contract
+            source = Path(agents_dir) / name
+            raw = source.read_bytes()
+            enforce_catalog_contract(source, raw)
             agent_id = os.path.splitext(name)[0]
             agents[agent_id] = {
                 "description": f"Agente essencial do Core com protocolo SDD/TDD: {agent_id}",
@@ -359,6 +379,7 @@ def _essential_agents() -> Dict[str, Any]:
                     _ESSENTIAL_AGENT_PERMISSIONS.get(
                         agent_id, _DEFAULT_AGENT_PERMISSIONS
                     ),
+                    content=raw.decode("utf-8"),
                 ),
             }
     return agents
@@ -667,6 +688,16 @@ def build_config() -> Dict[str, Any]:
             "plugins-cientificos": {
                 "template": "Integre os plugins de $ARGUMENTS sob MarceloClaro com ecosystem_scientific_plugins. Leia a skill instalada preservando sua política. Para conector hospedado, request cria ticket; chame host_tool disponível com arguments e devolva response vinculado ao request_id e request_sha256. Credenciais ficam no host; não trate awaiting_host como execução. SciGrant exige redação de projeto, não diagnóstico.",
                 "description": "Skills, CLIs e conectores científicos autenticados no host",
+                "agent": "marceloclaro",
+            },
+            "agentes-core": {
+                "template": "Sob MarceloClaro, use ecosystem_agent_profile para: $ARGUMENTS. Antes de criar qualquer novo agente/subagente, valide e persista perfil, spec/teste, capacidades e permissões; depois registre e ative no mesmo primário. Atribuição não significa inferência ou conclusão.",
+                "description": "Perfis permanentes, validação e ativação A2A pelo MarceloClaro (R894)",
+                "agent": "marceloclaro",
+            },
+            "ci-local": {
+                "template": "Use ecosystem_local_ci para: $ARGUMENTS. start executa somente o perfil scientific fechado; status/runs/cancel usam run_id. Aceite exige recibos novos, fontes e JUnit íntegros. Não represente resultado local como aprovação remota ou revisão científica externa.",
+                "description": "CI científica local independente de runner hospedado (R897)",
                 "agent": "marceloclaro",
             },
             "ciencia": {

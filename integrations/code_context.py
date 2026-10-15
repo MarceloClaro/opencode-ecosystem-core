@@ -90,13 +90,15 @@ class CodeContextProvider:
         base = {"provider": "context-link", "version": VERSION, "source_commit": SOURCE_COMMIT,
                 "calibrated": False, "confidence_promoted": False, "source_read_only": True,
                 "validated_tools": list(VALIDATED_TOOLS), "blocked_tools": list(BLOCKED_TOOLS),
+                "python_graph_tools": list(BLOCKED_TOOLS), "python_graph_backend": "core_python_ast",
                 "limitations": ["Grafo estático; não comprova execução nem ausência de comportamento dinâmico.",
                                 "Filtro de segredos é heurístico; não constitui auditoria DLP.",
                                 "Índice/cache privado pode receber escrita; fontes originais não são montadas no provedor."]}
         try:
             self._validate_request(config)
             operation = config.get("operation", "status")
-            result = {"status": self._status, "setup": self._setup, "index": self._index, "query": self._query}[operation](config)
+            result = {"status": self._status, "setup": self._setup, "index": self._index, "query": self._query,
+                      "python_graph": self._python_graph}[operation](config)
             return {**base, **result, "success": bool(result.get("ok"))}
         except (ValueError, TypeError) as exc:
             return {**base, "ok": False, "success": False, "available": False, "index_ready": False, "status": "invalid_request", "error": str(exc)[:400]}
@@ -118,18 +120,20 @@ class CodeContextProvider:
         if not isinstance(config, dict) or set(config) - {"operation", "tool", "arguments", "timeout_seconds"}:
             raise ValueError("campos de operação inválidos")
         operation = config.get("operation", "status")
-        if operation not in {"setup", "index", "status", "query"}:
+        if operation not in {"setup", "index", "status", "query", "python_graph"}:
             raise ValueError("operação inválida")
         timeout = config.get("timeout_seconds", 30)
         if type(timeout) not in (int, float) or not math.isfinite(timeout) or not 1 <= timeout <= 120:
             raise ValueError("timeout_seconds deve estar entre 1 e 120")
-        if operation != "query":
+        if operation not in {"query", "python_graph"}:
             if set(config) & {"tool", "arguments"}:
                 raise ValueError("tool/arguments somente em query")
             return
         tool, args = config.get("tool"), config.get("arguments", {})
         if tool not in TOOLS or not isinstance(args, dict):
             raise ValueError("tool fora da allowlist ou arguments inválido")
+        if operation == "python_graph" and tool not in BLOCKED_TOOLS:
+            raise ValueError("python_graph aceita somente as três ferramentas de grafo Python")
         props = {"ping": set(), "semantic_search_symbols": {"query", "top_k", "kind", "file_path_prefix", "min_similarity"},
                  "get_file_skeleton": {"file_path"}, "get_code_by_symbol": {"symbol_name", "depth"},
                  "get_symbol_usages": {"symbol_name"}, "get_call_tree": {"symbol_name", "direction", "depth"},
@@ -639,3 +643,39 @@ class CodeContextProvider:
                                "manifest_sha256": _digest((generation / "manifest.json").read_bytes()), "sources": sources[:10], "scope": manifest["scope"]},
                 "generation": generation.name, "network_isolation": isolation, "duration_seconds": round(time.monotonic() - started, 4),
                 "tokens_measured": False, "source_provenance_truncated": len(sources) > 10}
+
+    def _python_graph(self, config):
+        """R896: AST próprio sobre snapshot Git; não lança o provedor nativo."""
+        from integrations.python_code_graph import analyze_python_graph
+        started = time.monotonic()
+        sources, excluded, total = self._source_files()
+        deadline = min(config.get("timeout_seconds", 30), 30)
+        remaining = deadline - (time.monotonic() - started)
+        if remaining <= 0:
+            raise TimeoutError("python_graph_deadline_exceeded")
+        graph = analyze_python_graph(sources, config["tool"], config.get("arguments", {}), timeout_seconds=remaining)
+        manifest = {"files": {path: {key: value for key, value in info.items() if key != "_data"}
+                              for path, info in sources.items()}}
+        if not self._manifest_current(manifest):
+            return {"ok": False, "status": "sources_changed", "available": False,
+                    "backend": "core_python_ast", "static_only": True}
+        if time.monotonic() - started > deadline:
+            raise TimeoutError("python_graph_deadline_exceeded")
+        paths = {row["file_path"] for row in graph["symbols"]}
+        paths.update(row["file_path"] for row in graph.get("parse_errors", []))
+        provenance = [{"path": path, "sha256": sources[path]["sha256"], "bytes": sources[path]["bytes"]}
+                      for path in sorted(paths)]
+        snapshot_digest = _digest(json.dumps(manifest, sort_keys=True, separators=(",", ":")).encode())
+        return {"ok": graph["ok"], "status": graph["status"], "available": True, "index_ready": False,
+                "index_required": False, "backend": "core_python_ast", "provider": "core_python_ast",
+                "version": "r896.v1", "source_commit": None, "upstream_not_used": True,
+                "static_only": True, "tool": config["tool"], "graph_ready": graph["ok"],
+                "limitations": graph["limitations"] + ["Snapshot de fontes rastreadas; nenhum processo upstream é iniciado."],
+                "coverage_complete": graph["coverage_complete"], "response": {"structuredContent": graph},
+                "provenance": {"provider": "core_python_ast", "sources": provenance,
+                               "scope": "tracked_worktree_python_snapshot", "snapshot_sha256": snapshot_digest,
+                               "source_head": self._git("rev-parse", "HEAD").decode().strip(), "head_is_metadata_only": True},
+                "source_file_count": len(sources), "source_bytes": total, "excluded": excluded,
+                "query_verified": graph["ok"], "query_verification_scope": "static_python_ast_only",
+                "duration_seconds": round(time.monotonic() - started, 4),
+                "source_provenance_truncated": False, "tokens_measured": False}

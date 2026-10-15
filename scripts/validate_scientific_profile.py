@@ -82,6 +82,38 @@ PROFILE_GROUPS = (
         "tests/test_r839_red_delivery.py", "tests/test_r839_verifier_delivery.py",
     )),
 )
+# R894–R897: grupos novos preservam os cinco grupos históricos. Contratos de
+# CI criam subprocessos reais; separar por finalidade mantém cada orçamento.
+PROFILE_GROUPS += (
+    ("managed_agents_plugins", (
+        "tests/test_r894_agent_lifecycle.py", "tests/test_r894_orchestration_surfaces.py",
+        "tests/test_r895_requested_plugins.py", "tests/test_r670_scientific_plugins.py",
+        "tests/test_r596_agent_autoregister.py", "tests/test_r608_catalog_bootstrap_frontmatter.py",
+        "tests/test_r644_catalog_capabilities.py", "tests/test_r840_catalog_frontmatter_cache.py",
+    )),
+    ("python_graph", ("tests/test_r896_python_code_graph.py", "tests/test_r887_code_context.py")),
+    ("local_ci_lifecycle", (
+        "tests/test_r897_local_ci.py::test_idle_is_not_a_passing_run",
+        "tests/test_r897_local_ci.py::test_real_async_run_has_validated_fresh_receipts_and_scope",
+        "tests/test_r897_local_ci.py::test_historical_result_remains_separate_from_current_compatibility",
+        "tests/test_r897_local_ci.py::test_single_writer_blocks_other_process_and_cancel_releases_lock",
+        "tests/test_r897_local_ci.py::test_cancel_cleans_owned_descendant_in_separate_session",
+        "tests/test_r897_local_ci.py::test_failure_skip_or_zero_exit_without_receipt_never_pass",
+        "tests/test_r897_local_ci.py::test_source_change_during_run_blocks_acceptance",
+        "tests/test_r897_local_ci.py::test_supervisor_enforces_lowered_bounds",
+        "tests/test_r897_local_ci.py::test_public_profile_rejects_arbitrary_commands_and_types",
+        "tests/test_r897_local_ci.py::test_run_listing_requires_bounded_integer",
+        "tests/test_r897_local_ci.py::test_ids_and_state_symlinks_are_rejected",
+    )),
+    ("local_ci_receipt_integrity", (
+        "tests/test_r897_local_ci.py::test_tampered_metadata_or_artifacts_never_display_passed",
+    )),
+    ("local_ci_selection_freshness", (
+        "tests/test_r897_local_ci.py::test_collection_must_preserve_exact_registered_target_scope",
+        "tests/test_r897_local_ci.py::test_previous_summary_cannot_be_reused_in_a_new_execution",
+    )),
+)
+
 PROFILE_EXCLUSIONS = {
     "tests/test_r706_manuscript_scale.py::test_pptx_theme_falha_fechada_sem_dependencia":
         "Guarda condicional faz skip quando python-pptx está instalado; não pertence ao perfil.",

@@ -176,7 +176,7 @@ contagens estruturais locais, não resultados de cobertura, testes ou validaçã
 externa.
 
 <!-- core-state:start -->
-**255 agentes** · **16 MCPs** · **31 comandos** · **22 checks**
+**310 agentes** · **16 MCPs** · **33 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](../../opencode.json) e do [diagnóstico estrutural](../../marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 

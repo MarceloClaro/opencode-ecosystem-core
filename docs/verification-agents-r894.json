@@ -1,0 +1,532 @@
+{
+  "registered_count": 55,
+  "profiles": [
+    {
+      "agent_id": "ecosystem-review",
+      "source_file": "agents/catalog/ecosystem-review.md",
+      "source_sha256": "3eedb4ba87bc3264d43bc7d712ca59ca96e6007cb642582ded7e4784fdeef3b1",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_ecosystem_review"
+    },
+    {
+      "agent_id": "rea-runtime",
+      "source_file": "agents/catalog/rea-runtime.md",
+      "source_sha256": "a1815ef70be41d50de73aecc83f62798a9482e4cdd383650c0b7453629856657",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_rea_runtime"
+    },
+    {
+      "agent_id": "rea-adapter",
+      "source_file": "agents/catalog/rea-adapter.md",
+      "source_sha256": "a7d7a7d2e0ce2d9b119ad0db0d917746aa4988a55ea4402db0b10394c4e4a8d5",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_rea_adapter"
+    },
+    {
+      "agent_id": "runtime-regression",
+      "source_file": "agents/catalog/runtime-regression.md",
+      "source_sha256": "4080ebf109fc2b0617b08ff9d5e1a9f9704813b3ac64bacb5c8f3228125d0a30",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_runtime_regression"
+    },
+    {
+      "agent_id": "command-regression",
+      "source_file": "agents/catalog/command-regression.md",
+      "source_sha256": "3f6d047d43c58ca3ba4805538e98cba7da8e2423c5a3880f8b36f47122433d75",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_command_regression"
+    },
+    {
+      "agent_id": "book-release",
+      "source_file": "agents/catalog/book-release.md",
+      "source_sha256": "44bcd79dc96f0e51b8f06406052275d4f5c01b7fd63ea14b68d05c0193804881",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_book_release"
+    },
+    {
+      "agent_id": "github-gap-research",
+      "source_file": "agents/catalog/github-gap-research.md",
+      "source_sha256": "96ca04c26232e795158bd1e40a023969b7e94ad1cb0bf46acb2df47b286e6df5",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_github_gap_research"
+    },
+    {
+      "agent_id": "blind-review-scanner",
+      "source_file": "agents/catalog/blind-review-scanner.md",
+      "source_sha256": "5f13bbbfb24a3287d74778b36130c6e2ec990592295ff9ea4eafb1db9a99b633",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_blind_review_scanner"
+    },
+    {
+      "agent_id": "blind-review-ledger",
+      "source_file": "agents/catalog/blind-review-ledger.md",
+      "source_sha256": "33d03b86cdb7084103a253e15cf0769931571a233781f8438d713e7a71c30bde",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_blind_review_ledger"
+    },
+    {
+      "agent_id": "regression-remaining",
+      "source_file": "agents/catalog/regression-remaining.md",
+      "source_sha256": "8221a5eb063eab810e36ec0ce7bd1f1a8ecc883796fe513bf2f10b2f1d2d5234",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_regression_remaining"
+    },
+    {
+      "agent_id": "red-history-final-audit",
+      "source_file": "agents/catalog/red-history-final-audit.md",
+      "source_sha256": "d6ae84557bc4c4ed2c1d4eb1aefd4d00e3142e75adeffc41bff6d6fdc0205f2f",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_red_history_final_audit"
+    },
+    {
+      "agent_id": "local-rea-site",
+      "source_file": "agents/catalog/local-rea-site.md",
+      "source_sha256": "2f2e12883611e006790c9c1695402450fdbb80579ec3e69a1a68f9cb763f6add",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_local_rea_site"
+    },
+    {
+      "agent_id": "readiness-audit",
+      "source_file": "agents/catalog/readiness-audit.md",
+      "source_sha256": "dd6da24b6a9047f4df4fa958fdca28f2fc4466e326e2981ce272c1773136d673",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_readiness_audit"
+    },
+    {
+      "agent_id": "commit-scope-audit",
+      "source_file": "agents/catalog/commit-scope-audit.md",
+      "source_sha256": "22e9b3e522feb3e94d96f5750bac9fa108a2e6d9dbd502df09f50e7e336c03b1",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_commit_scope_audit"
+    },
+    {
+      "agent_id": "rea-profile-audit",
+      "source_file": "agents/catalog/rea-profile-audit.md",
+      "source_sha256": "7720bb144e6b76024fbaa28a8368b8b734a4a6e9f1423040b40ec476107b5b32",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_rea_profile_audit"
+    },
+    {
+      "agent_id": "architecture-inventory",
+      "source_file": "agents/catalog/architecture-inventory.md",
+      "source_sha256": "3d6628aff042b8f28a3aacd863bb953e12354692b44f1fd2208dc4ea979ad440",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_architecture_inventory"
+    },
+    {
+      "agent_id": "architecture-flows",
+      "source_file": "agents/catalog/architecture-flows.md",
+      "source_sha256": "fe6f2bf4d86c413f6b19f734cab959afb7732f6aa05035cbc78183c139cf08f5",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_architecture_flows"
+    },
+    {
+      "agent_id": "architecture-source-audit",
+      "source_file": "agents/catalog/architecture-source-audit.md",
+      "source_sha256": "63eb5c58a75e3e4260e1ba3067e5e617f1b890a5ca76163931c71f4ebe7c8226",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_architecture_source_audit"
+    },
+    {
+      "agent_id": "readme-contract-audit",
+      "source_file": "agents/catalog/readme-contract-audit.md",
+      "source_sha256": "f1a869292301a3a8e9518255d1fd7b89d6b1da16bbd6a6dbdcb9b80caf6dc685",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_readme_contract_audit"
+    },
+    {
+      "agent_id": "readme-usage-audit",
+      "source_file": "agents/catalog/readme-usage-audit.md",
+      "source_sha256": "82c191fdc3d12c2ad7a7d3c1f6ffa69c104dfec0708e8c197ae0f8d8a82959e0",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_readme_usage_audit"
+    },
+    {
+      "agent_id": "mermaid-integral",
+      "source_file": "agents/catalog/mermaid-integral.md",
+      "source_sha256": "6af8c6cfb6d1936b373b9398e235f8223310fe2f07bc512ea66dad9f9ade7be2",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_mermaid_integral"
+    },
+    {
+      "agent_id": "readme-all-flows",
+      "source_file": "agents/catalog/readme-all-flows.md",
+      "source_sha256": "d32db7659965d29e0917c25a68209dfb1eda2dbc86750321958653e7da3fcd04",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_readme_all_flows"
+    },
+    {
+      "agent_id": "mermaid-review",
+      "source_file": "agents/catalog/mermaid-review.md",
+      "source_sha256": "f75a686cd230321129e5536a44afd562c493a9570b9ca647063b888cde9e22ff",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_mermaid_review"
+    },
+    {
+      "agent_id": "r881-final-audit",
+      "source_file": "agents/catalog/r881-final-audit.md",
+      "source_sha256": "da1452b44d7a7389eb5f6d0b7dfc2507abd9716a81fdc92a5a325a92e45165ab",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_r881_final_audit"
+    },
+    {
+      "agent_id": "metacognition-audit",
+      "source_file": "agents/catalog/metacognition-audit.md",
+      "source_sha256": "1374b2492c464333724ed7b10774f45aa9cf7c042cc849cb5eec07f90f656daf",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_metacognition_audit"
+    },
+    {
+      "agent_id": "evaluate-repositories",
+      "source_file": "agents/catalog/evaluate-repositories.md",
+      "source_sha256": "14e17a11dc1c43cd29f69ab99209e77d63b722788e6719e987a7d2d0e2e70d9a",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_evaluate_repositories"
+    },
+    {
+      "agent_id": "r886-review",
+      "source_file": "agents/catalog/r886-review.md",
+      "source_sha256": "ee501caa5c6b69b76d3e3af6ddb5eceb56ad32bee176ffde4330d7cb2dcedb66",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_r886_review"
+    },
+    {
+      "agent_id": "code-context-backend",
+      "source_file": "agents/catalog/code-context-backend.md",
+      "source_sha256": "82656d0c4231e7c757a00e37271305f0d25ad1bf3e9e55ecc39fadacb00d02a1",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_code_context_backend"
+    },
+    {
+      "agent_id": "repos-rea-analysis",
+      "source_file": "agents/catalog/repos-rea-analysis.md",
+      "source_sha256": "6b8049b865d5d45e6c07287744deb9dc121f681ab6fdd8315982855fab643eb2",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_repos_rea_analysis"
+    },
+    {
+      "agent_id": "repos-science-analysis",
+      "source_file": "agents/catalog/repos-science-analysis.md",
+      "source_sha256": "5f3dbe456f87a64228368069ec18d342083f219affb58d3e4f6454ea0762f582",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_repos_science_analysis"
+    },
+    {
+      "agent_id": "scientific-profile",
+      "source_file": "agents/catalog/scientific-profile.md",
+      "source_sha256": "dca996c9f8931ca0e11ec8a422bd074f3ebee4f9c1a74f9b0498450d718612a7",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_scientific_profile"
+    },
+    {
+      "agent_id": "scientific-review",
+      "source_file": "agents/catalog/scientific-review.md",
+      "source_sha256": "a4570a2b1c34738c560964f0a47f6a2881816e9a0e2de7797b1dc9a10ffe3f61",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_scientific_review"
+    },
+    {
+      "agent_id": "whoosh-persistence",
+      "source_file": "agents/catalog/whoosh-persistence.md",
+      "source_sha256": "9f1e826b6e837c730023ddb44baab1e6f0b40540044c11723482f03ee75d0950",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_whoosh_persistence"
+    },
+    {
+      "agent_id": "r893-final-review",
+      "source_file": "agents/catalog/r893-final-review.md",
+      "source_sha256": "cf99fff5ea4eb3983ac3c92ab8b867015fc669b26018edfe72d03c31dcebcfee",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_r893_final_review"
+    },
+    {
+      "agent_id": "codesight-source",
+      "source_file": "agents/catalog/codesight-source.md",
+      "source_sha256": "6e5362f54513c62131e6c28519dac4abde5475fd766f4e31254b7801b351ddb2",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_codesight_source"
+    },
+    {
+      "agent_id": "plugin-superpowers",
+      "source_file": "agents/catalog/plugin-superpowers.md",
+      "source_sha256": "c523198f643b721c8a2f04061ed36ba19845886b7c4d1e10114c9b2a7aaac67f",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_plugin_superpowers"
+    },
+    {
+      "agent_id": "plugin-scigrant",
+      "source_file": "agents/catalog/plugin-scigrant.md",
+      "source_sha256": "1ba4ba508716ea91291c84eb9562f2e6a370ace4b968b5a3a06bd984e371fb4c",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_plugin_scigrant"
+    },
+    {
+      "agent_id": "plugin-wolfram",
+      "source_file": "agents/catalog/plugin-wolfram.md",
+      "source_sha256": "78faf2612aef0ec03bb8da0b7aeabbff67cc804446e4efec23a08a9363f695ad",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_plugin_wolfram"
+    },
+    {
+      "agent_id": "plugin-anthropic-skills",
+      "source_file": "agents/catalog/plugin-anthropic-skills.md",
+      "source_sha256": "8b74f12c88a230b407699701a3fcee523e32fd6b09d5186f90adfba19bdd0084",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_plugin_anthropic_skills"
+    },
+    {
+      "agent_id": "plugin-cowork-plugin-management",
+      "source_file": "agents/catalog/plugin-cowork-plugin-management.md",
+      "source_sha256": "4dfd447013407dc9531f35b31876054dcb85367c320417d427eaf0e89d0cab7d",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_plugin_cowork_plugin_management"
+    },
+    {
+      "agent_id": "plugin-bio-research",
+      "source_file": "agents/catalog/plugin-bio-research.md",
+      "source_sha256": "cd52ca4cef06e1873d4a4cafb89b57d362e024d43219f2c5a39c257e8e9e4899",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_plugin_bio_research"
+    },
+    {
+      "agent_id": "plugin-plugin-creator",
+      "source_file": "agents/catalog/plugin-plugin-creator.md",
+      "source_sha256": "c27e1c2bd8a2ac0886e5111786304889cd625feb07afcf368d60e0ab90d40309",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_plugin_plugin_creator"
+    },
+    {
+      "agent_id": "plugin-data",
+      "source_file": "agents/catalog/plugin-data.md",
+      "source_sha256": "b010bd040ea64e0a7271bc3c50c1c5e7c554e2a8081bf9f330c65e86a3923e17",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_plugin_data"
+    },
+    {
+      "agent_id": "plugin-design",
+      "source_file": "agents/catalog/plugin-design.md",
+      "source_sha256": "aa7165ffcd1e5f7044349582a0e17e4810ba0440f0d0c17477cd718e7d348824",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_plugin_design"
+    },
+    {
+      "agent_id": "plugin-visualize",
+      "source_file": "agents/catalog/plugin-visualize.md",
+      "source_sha256": "f85688f18fa3ba444fa041b190f5d301562764760c234e6bc4a54789e88f722f",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_plugin_visualize"
+    },
+    {
+      "agent_id": "plugin-human-resources",
+      "source_file": "agents/catalog/plugin-human-resources.md",
+      "source_sha256": "ea9bdcd7a5694dcfeaa75fe9d421df260048c7725569c8bc88a5e39b19df9aad",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_plugin_human_resources"
+    },
+    {
+      "agent_id": "plugin-work-pets",
+      "source_file": "agents/catalog/plugin-work-pets.md",
+      "source_sha256": "1d761768af403e4c9eb99abe741c3f7137187d2a87e9df67715f435580708760",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_plugin_work_pets"
+    },
+    {
+      "agent_id": "plugin-enterprise-search",
+      "source_file": "agents/catalog/plugin-enterprise-search.md",
+      "source_sha256": "74a2c7241bd4db42d37e55f217e7be0cb899deea7c4dc10ac5bf3f3eeb90012f",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_plugin_enterprise_search"
+    },
+    {
+      "agent_id": "plugin-life-sciences-literature",
+      "source_file": "agents/catalog/plugin-life-sciences-literature.md",
+      "source_sha256": "ef335b842e44a5bf41075938962fe8ab3bef24a968f489f012c80e19a79ae40d",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_plugin_life_sciences_literature"
+    },
+    {
+      "agent_id": "plugin-legal",
+      "source_file": "agents/catalog/plugin-legal.md",
+      "source_sha256": "7eacd66fed6228f6f1231606a3220b3c111fe9789b87180760644929fd5bb1bd",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_plugin_legal"
+    },
+    {
+      "agent_id": "plugin-productivity",
+      "source_file": "agents/catalog/plugin-productivity.md",
+      "source_sha256": "9981b4653299bf8821309d2672c83387a5d9553dabbf7447b5fd6cf10e6cc022",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_plugin_productivity"
+    },
+    {
+      "agent_id": "plugin-dr-alex-ramos",
+      "source_file": "agents/catalog/plugin-dr-alex-ramos.md",
+      "source_sha256": "48497d045b45956bd32a36393f98ce1de6eb97c047207f945d0944067903f918",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_plugin_dr_alex_ramos"
+    },
+    {
+      "agent_id": "plugin-contas-escolares-airam-veras",
+      "source_file": "agents/catalog/plugin-contas-escolares-airam-veras.md",
+      "source_sha256": "25142e9948977770065f18d6756ca12af58d87d916bd6650ce26697364e58c99",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_plugin_contas_escolares_airam_veras"
+    },
+    {
+      "agent_id": "plugin-medico-virtual-supremo",
+      "source_file": "agents/catalog/plugin-medico-virtual-supremo.md",
+      "source_sha256": "f843a7e91943f15bffa13abd9124ddd32cb27994b4c357c4eb9ded7cb0f06577",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_plugin_medico_virtual_supremo"
+    },
+    {
+      "agent_id": "plugin-sites",
+      "source_file": "agents/catalog/plugin-sites.md",
+      "source_sha256": "b26b95b38e2729ff7f01c1f126667e646e10baffb2fe676adc4483826a9d7dce",
+      "validation_scope": "definition_policy_and_references",
+      "registered": true,
+      "executed": false,
+      "unique_capability": "profile_plugin_sites"
+    }
+  ],
+  "activations": [
+    {
+      "agent_id": "architecture-source-audit",
+      "source_sha256": "63eb5c58a75e3e4260e1ba3067e5e617f1b890a5ca76163931c71f4ebe7c8226",
+      "task_id": "task-6a9e0c2f",
+      "status": "assigned",
+      "assigned_to": "architecture-source-audit",
+      "executed": false,
+      "execution_status": "pending_executor"
+    },
+    {
+      "agent_id": "metacognition-audit",
+      "source_sha256": "1374b2492c464333724ed7b10774f45aa9cf7c042cc849cb5eec07f90f656daf",
+      "task_id": "task-6fb47427",
+      "status": "assigned",
+      "assigned_to": "metacognition-audit",
+      "executed": false,
+      "execution_status": "pending_executor"
+    },
+    {
+      "agent_id": "plugin-wolfram",
+      "source_sha256": "78faf2612aef0ec03bb8da0b7aeabbff67cc804446e4efec23a08a9363f695ad",
+      "task_id": "task-7f56dfad",
+      "status": "assigned",
+      "assigned_to": "plugin-wolfram",
+      "executed": false,
+      "execution_status": "pending_executor"
+    }
+  ],
+  "confidence_ledger_unchanged": true,
+  "llm_inference_executed": false,
+  "external_validation": false
+}

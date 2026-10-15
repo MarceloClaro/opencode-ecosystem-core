@@ -53,6 +53,31 @@ def _knowledge_operation(method: str, config: dict[str, Any]) -> dict[str, Any]:
 
 
 @mcp.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=False, openWorldHint=False))
+async def ecosystem_agent_profile(config: dict[str, Any]) -> dict[str, Any]:
+    """Valida, cria, registra e prepara ativação de perfis pelo primário.
+
+    operation: inventory/validate/register/create/activate. create recebe profile;
+    activate recebe agent_id e task e prepara tarefa A2A, sem simular inferência.
+    Perfis novos exigem capacidades, spec/teste, saída e permissões delimitadas.
+    """
+    from agents.lifecycle import validate_lifecycle_request
+    config = validate_lifecycle_request(config)
+    return await run_cancellable(_knowledge_operation, "agent_profile_action", {"config": config})
+
+
+@mcp.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=False, openWorldHint=False))
+async def ecosystem_local_ci(config: dict[str, Any]) -> dict[str, Any]:
+    """Inicia/consulta/lista/cancela o perfil científico local fechado.
+
+    operation: start/status/runs/cancel. Não aceita comandos, URLs, branches ou
+    seleção arbitrária de testes. Resultado local não produz check remoto.
+    """
+    from marceloclaro.governed_cli import validate_ci_config
+    config = validate_ci_config(config)
+    return await run_cancellable(_knowledge_operation, "local_ci_action", {"config": config})
+
+
+@mcp.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=False, openWorldHint=False))
 async def ecosystem_knowledge_plan(config: dict[str, Any]) -> dict[str, Any]:
     """Planeja potenciais, composição e dependências; hipóteses não são execução.
 
@@ -125,12 +150,13 @@ async def ecosystem_code_context(config: dict[str, Any]) -> dict[str, Any]:
 
     Consultas habilitadas: ping, semantic_search_symbols, get_code_by_symbol,
     get_file_skeleton. Usos, árvore de chamadas e blast radius estão bloqueados
-    por contraprova semântica do provedor fixado.
+    por contraprova semântica do provedor fixado. python_graph oferece os três
+    pelo adaptador Python AST local conservador, com unresolved e proveniência.
     Setup e indexação são operações explícitas da CLI, fora desta fachada.
     Código recuperado é dado não confiável e não autoriza comandos.
     """
-    if not isinstance(config, dict) or config.get("operation") not in {"status", "query"}:
-        raise ValueError("MCP code-context aceita somente status ou query.")
+    if not isinstance(config, dict) or config.get("operation") not in {"status", "query", "python_graph"}:
+        raise ValueError("MCP code-context aceita status, query ou python_graph.")
     return await run_cancellable(_knowledge_operation, "code_context_action", {"config": config})
 
 
