@@ -21176,6 +21176,31 @@
       "origin_commit": "b663fd6af89c3f0a1988af50918d30d7463bfdd6",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "SPEC-935-R901",
+      "objective": "Teste de regressão do guard js-smoke do deploy-guards.ts com conteúdo prospectivo; prova RED→GREEN contra plugin antigo vs novo.",
+      "changes": [
+        "Adicionado tests/harness_deploy_guards.mjs (harness que invoca o hook real)",
+        "Adicionado tests/test_r582_deploy_guards_prospective_content.py (4 testes: estrutura + comportamento)",
+        "Demonstrado RED (3 falhas com plugin antigo) e GREEN (4 passes com plugin novo)"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "Parênteses desbalanceados na docstring impedem coleta do pytest",
+        "Afirmações de texto em stdout devem evitar substrings descritivas (ex.: ENOENT em rótulo de caso)"
+      ],
+      "timestamp": 1792096097.0762784,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ]
 }
