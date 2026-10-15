@@ -393,6 +393,31 @@ mérito científico ou escalabilidade multi-host.
 
 ## Arquitetura completa e fluxogramas atuais
 
+### Snapshot estrutural atualizado R894–R897
+
+O inventário reproduzível mais recente foi gerado do snapshot Git
+[`f930e19`](docs/architecture-r900/README.md), que inclui R894–R897 e sucede
+R900. Ele contém 10.033 arquivos versionados, 691 módulos Python de produção,
+1.083 importações declaradas, 965 pares de dependências, 6.670 símbolos,
+45 pacotes e 18 camadas; o parser AST não registrou erros nesse snapshot.
+Templates, vendor e snapshots históricos aparecem no inventário com classes
+próprias. Esses números descrevem estrutura estática, não cobertura funcional,
+execução, segurança ou prontidão científica.
+
+| Artefato atualizado | Conteúdo |
+|---|---|
+| [Guia e legenda do mapa](docs/architecture-r900/README.md) | Snapshot, escopo, limites e comandos de reprodução |
+| [Visão por subsistema em SVG](docs/architecture-r900/overview.svg) | Interfaces, camadas e domínios do Core |
+| [Dependências completas em SVG](docs/architecture-r900/dependencies.svg) | Imports Python declarados entre módulos |
+| [Grafo em DOT](docs/architecture-r900/dependencies.dot) | Fonte editável do grafo de dependências |
+| [Mapa Mermaid integral](docs/architecture-r900/architecture-complete.mmd) | Módulos, símbolos, camadas, pacotes e relações extraídas |
+| [Inventário JSON](docs/architecture-r900/architecture-inventory.json) | Arquivos, hashes, declarações e classificações |
+| [Correspondência Mermaid](docs/architecture-r900/mermaid-correspondence.json) | Rastreio das relações serializadas para o Mermaid |
+
+Os fluxogramas operacionais anteriores continuam integralmente reproduzidos
+abaixo, com legenda e limites; os novos percursos de agentes, plugins, grafo
+Python e CI local estão no [guia R894–R897](docs/ORQUESTRACAO_AGENTES_PLUGINS_CI_R894_R897.md).
+
 [![Visão operacional do Core](docs/architecture/curated-overview.svg)](docs/ARQUITETURA_COMPLETA_CORE_R879.md)
 
 A edição **R879** descreve o snapshot de implementação `6380cfa`:
