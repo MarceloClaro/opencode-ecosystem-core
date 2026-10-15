@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Validação — o que é e o que NÃO é validado | Laboratório local</title>
+<style>
+  :root{--bg:#0a1119;--panel:#0d1a24;--line:#1d3242;--txt:#e2e8f0;--mut:#9fb1c5;--acc:#2dd4bf;--acc2:#5eead4;--warn:#fbbf24;--err:#f87171}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.55 system-ui,-apple-system,sans-serif;padding-bottom:44px}
+  header.top{position:sticky;top:0;z-index:5;display:flex;gap:16px;align-items:center;flex-wrap:wrap;
+    padding:12px 20px;background:#071018;border-bottom:1px solid var(--line)}
+  header.top h1{font-size:15px;margin:0;color:var(--acc2);letter-spacing:.02em}
+  nav a{color:var(--mut);text-decoration:none;font-size:13px;padding:4px 8px;border-radius:6px}
+  nav a:hover{color:#fff;background:#132532}
+  nav a[aria-current]{color:#04121a;background:var(--acc)}
+  main{max-width:1120px;margin:0 auto;padding:22px 20px}
+  .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+  section.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px}
+  section.panel h2{font-size:14px;margin:0 0 12px;display:flex;align-items:center;gap:8px;color:#fff}
+  .badge{font:700 10px/1 system-ui;padding:4px 7px;border-radius:999px;letter-spacing:.06em}
+  .badge.real{background:#0f3d36;color:var(--acc2);border:1px solid #1d6d63}
+  .badge.block{background:#3d1414;color:#fca5a5;border:1px solid #7f1d1d}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{text-align:left;padding:7px 8px;border-bottom:1px solid #16283a;vertical-align:top}
+  th{color:var(--mut);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  pre{background:#060d14;border:1px solid #16283a;border-radius:8px;padding:12px;
+    overflow:auto;max-height:340px;font-size:12px;color:#b8e6df;margin:10px 0 0}
+  .muted{color:var(--mut);font-size:12px}
+  ul.clean{margin:6px 0 0;padding-left:18px}
+  ul.clean li{margin:3px 0}
+  .stat{display:flex;gap:18px;flex-wrap:wrap;margin:4px 0 0}
+  .stat div{background:#08131c;border:1px solid var(--line);border-radius:8px;padding:9px 12px;min-width:110px}
+  .stat b{display:block;font-size:19px;color:var(--acc2);font-variant-numeric:tabular-nums}
+  .stat span{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.05em}
+  .flag{border-left:3px solid var(--warn);padding:6px 10px;background:#1c1708;border-radius:0 6px 6px 0;margin:8px 0}
+  .ok{color:var(--acc2)} .bad{color:var(--err)} .warn{color:var(--warn)}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>Panoramica AI · Laboratório local</h1>
+  <nav>
+    <a href="/">Análise</a>
+    <a href="/review">Revisão &amp; CA</a>
+    <a href="/cadastro">Cadastro &amp; Treino</a>
+    <a href="/validacao" aria-current="page">Validação</a>
+    <a href="/docs">API / JSON</a>
+  </nav>
+</header>
+<main>
+  <div class="grid">
+    <section class="panel">
+      <h2>Gate de coorte travada <span class="badge real">REAL</span></h2>
+      <p class="muted">Reprodução da coorte clínica a partir do <code>Table_S1.xlsx</code>, com SHA-256 conferido. Divergência de contagem reprova o gate (fail-closed).</p>
+      <div class="stat" id="gate-stats"></div>
+      <div id="gate-body"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Nível honesto de alegação <span class="badge real">REAL</span></h2>
+      <div id="tier-body"><p class="muted">carregando…</p></div>
+    </section>
+
+    <section class="panel">
+      <h2>Validação externa <span class="badge block">BLOQUEADO</span></h2>
+      <div id="ext-body"><p class="muted">carregando…</p></div>
+    </section>
+
+    <section class="panel">
+      <h2>Laboratórios e métricas <span class="badge real">REAL</span></h2>
+      <div id="lab-body"><p class="muted">carregando…</p></div>
+    </section>
+  </div>
+  <section class="panel" style="margin-top:16px">
+    <h2>Notas de integridade</h2>
+    <div id="notes-body"><p class="muted">carregando…</p></div>
+    <pre id="raw"></pre>
+  </section>
+</main>
+<script>
+const $=(s)=>document.querySelector(s);
+const esc=(v)=>String(v??'').replace(/[&<>"]/g,(c)=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const n4=(v)=>v==null?'—':Number(v).toFixed(4);
+const sha=(s)=>s?`${s.slice(0,12)}…${s.slice(-8)}`:'—';
+const li=(arr)=>`<ul class="clean">${(arr||[]).map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`;
+async function j(url){const r=await fetch(url,{cache:'no-store'});let d=null;try{d=await r.json()}catch(_){}
+  return{ok:r.ok,status:r.status,data:d};}
+
+function renderGate(g){
+  const ok=g.locked_ok===true;
+  const exp=g.expected||{},obs=g.observed||{};
+  $('#gate-stats').innerHTML=[
+    `<div><b class="${ok?'ok':'bad'}">${ok?'APROVADO':'REPROVADO'}</b><span>locked gate</span></div>`,
+    `<div><b>${obs.rows??'—'}</b><span>linhas obs.</span></div>`,
+    `<div><b>${obs.events??'—'}</b><span>eventos obs.</span></div>`,
+    `<div><b>${obs.children??'—'}</b><span>crianças obs.</span></div>`,
+  ].join('');
+  $('#gate-body').innerHTML=`
+    <table><tbody>
+      <tr><td>fonte</td><td><code>${esc(g.source)}</code></td></tr>
+      <tr><td>sha256 (arquivo)</td><td><code class="${g.sha256_ok?'ok':'bad'}">${sha(g.sha256)}</code> ${g.sha256_ok?'✓ confere':'✗ divergente'}</td></tr>
+      <tr><td>sha256 (esperado)</td><td><code>${sha(g.sha256_expected)}</code></td></tr>
+      <tr><td>esperado (rows/events/children)</td><td>${exp.rows} / ${exp.events} / ${exp.children}</td></tr>
+      <tr><td>observado (rows/events/children)</td><td>${obs.rows} / ${obs.events} / ${obs.children}</td></tr>
+    </tbody></table>
+    ${g.error?`<div class="flag bad">erro: ${esc(g.error)}</div>`:''}`;
+}
+function renderTier(t){
+  $('#tier-body').innerHTML=`
+    <p class="muted">nível: <b class="warn">${esc(t.level)}</b></p>
+    <h4 style="color:var(--acc2);margin:10px 0 2px">Escopo local coberto</h4>${li(t.local_scope)}
+    <h4 style="color:var(--err);margin:12px 0 2px">NÃO validado / NÃO afirmado</h4>${li(t.not_validated)}`;
+}
+function renderExt(e){
+  $('#ext-body').innerHTML=`
+    <p class="muted">status: <b class="bad">${esc(e.status)}</b></p>
+    <p>${esc(e.reason||'')}</p>
+    <p class="muted">protocolo exigido: <code>${esc(e.protocol||'')}</code></p>`;
+}
+function renderLabs(labs,disclaimer){
+  $('#lab-body').innerHTML=`<p class="muted">${esc(disclaimer||'')}</p>`+labs.map(l=>{
+    const m=l.metrics||{};const ci=m.ci95_auroc||{};
+    const ciTxt=(ci.lo!=null&&ci.hi!=null)?` [${Number(ci.lo).toFixed(3)}–${Number(ci.hi).toFixed(3)}]`:'';
+    return `<h4 style="margin:12px 0 4px;color:#fff">${esc(l.label||l.lab)}</h4>
+      <table><tbody>
+      <tr><td>AUROC</td><td class="num">${n4(m.auroc)}${ciTxt}</td></tr>
+      <tr><td>AUPRC</td><td class="num">${n4(m.auprc)}</td></tr>
+      <tr><td>Brier</td><td class="num">${n4(m.brier)}</td></tr>
+      <tr><td>sens/spec (opt)</td><td class="num">${n4(m.sensitivity_opt)} / ${n4(m.specificity_opt)}</td></tr>
+      <tr><td>linhas / eventos</td><td class="num">${l.n_rows??'—'} / ${l.events??'—'}</td></tr>
+      <tr><td>claim_level</td><td>${esc(l.claim_level)}</td></tr>
+      ${m.flag?`<tr><td>flag</td><td class="warn">${esc(m.flag)}</td></tr>`:''}
+      </tbody></table>`;
+  }).join('');
+}
+async function load(){
+  const r=await j('/api/validation');
+  if(!r.ok||!r.data){$('#tier-body').innerHTML='<span class="bad">falha ao ler /api/validation</span>';return;}
+  const d=r.data;
+  renderGate(d.cohort_gate||{});
+  renderTier(d.honest_tier||{});
+  renderExt(d.external_validation||{});
+  renderLabs(d.laboratories||[],d.disclaimer);
+  $('#notes-body').innerHTML=li(d.notes);
+  $('#raw').textContent=JSON.stringify(d,null,1);
+}
+load();
+</script>
+</body>
+</html>

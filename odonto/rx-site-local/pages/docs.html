@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>API / JSON — catálogo de endpoints | Laboratório local</title>
+<style>
+  :root{--bg:#0a1119;--panel:#0d1a24;--line:#1d3242;--txt:#e2e8f0;--mut:#9fb1c5;--acc:#2dd4bf;--acc2:#5eead4;--warn:#fbbf24;--err:#f87171}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.55 system-ui,-apple-system,sans-serif;padding-bottom:44px}
+  header.top{position:sticky;top:0;z-index:5;display:flex;gap:16px;align-items:center;flex-wrap:wrap;
+    padding:12px 20px;background:#071018;border-bottom:1px solid var(--line)}
+  header.top h1{font-size:15px;margin:0;color:var(--acc2);letter-spacing:.02em}
+  nav a{color:var(--mut);text-decoration:none;font-size:13px;padding:4px 8px;border-radius:6px}
+  nav a:hover{color:#fff;background:#132532}
+  nav a[aria-current]{color:#04121a;background:var(--acc)}
+  main{max-width:1120px;margin:0 auto;padding:22px 20px}
+  section.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:16px}
+  section.panel h2{font-size:14px;margin:0 0 12px;display:flex;align-items:center;gap:8px;color:#fff}
+  .badge{font:700 10px/1 system-ui;padding:4px 7px;border-radius:999px;letter-spacing:.06em}
+  .badge.real{background:#0f3d36;color:var(--acc2);border:1px solid #1d6d63}
+  .badge.mock{background:#3d2f0f;color:var(--warn);border:1px solid #6d5a1d}
+  .badge.get{background:#0e2b3d;color:#93c5fd;border:1px solid #1e4d6b}
+  .badge.post{background:#0f3d36;color:var(--acc2);border:1px solid #1d6d63}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{text-align:left;padding:8px;border-bottom:1px solid #16283a;vertical-align:top}
+  th{color:var(--mut);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+  code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  code.path{color:#b8e6df}
+  pre{background:#060d14;border:1px solid #16283a;border-radius:8px;padding:12px;
+    overflow:auto;max-height:420px;font-size:12px;color:#b8e6df;margin:0}
+  button{cursor:pointer;font:650 12px/1 system-ui;padding:7px 10px;background:#132532;color:var(--txt);
+    border:1px solid #2b4b5e;border-radius:7px}
+  button:hover{background:var(--acc);color:#04121a;border-color:var(--acc)}
+  .muted{color:var(--mut);font-size:12px}
+  .ok{color:var(--acc2)} .bad{color:var(--err)} .warn{color:var(--warn)}
+  .split{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(380px,1fr))}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>Panoramica AI · Laboratório local</h1>
+  <nav>
+    <a href="/">Análise</a>
+    <a href="/review">Revisão &amp; CA</a>
+    <a href="/cadastro">Cadastro &amp; Treino</a>
+    <a href="/validacao">Validação</a>
+    <a href="/docs" aria-current="page">API / JSON</a>
+  </nav>
+</header>
+<main>
+  <section class="panel">
+    <h2>Endpoints reais <span class="badge real">REAL</span></h2>
+    <p class="muted">Computação real neste servidor sobre dados locais (<code>SPEC-935-R900</code>). Clique em <b>testar</b> para executar e ver o JSON. Os resultados são <b>comparação empírica</b> / <b>descritivo, não causal</b> — não é inferência hospedada nem validação clínica.</p>
+    <div class="split">
+      <table><thead><tr><th>endpoint</th><th>descrição</th><th></th></tr></thead>
+      <tbody id="cat-real"></tbody></table>
+      <div>
+        <p class="muted" id="req-info">nenhuma requisição executada.</p>
+        <pre id="api-out">// clique em "testar" em um endpoint</pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Endpoints simulados (interface) <span class="badge mock">MOCK</span></h2>
+    <p class="muted">Servidos pelo backend simulado (<code>SPEC-935-R899</code>). Nenhum resultado é inferência de IA — demonstração de interface.</p>
+    <table><thead><tr><th>método</th><th>endpoint</th><th>descrição</th><th></th></tr></thead>
+    <tbody id="cat-mock"></tbody></table>
+  </section>
+</main>
+<script>
+const $=(s)=>document.querySelector(s);
+const esc=(v)=>String(v??'').replace(/[&<>"]/g,(c)=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const H=(meth)=>`<span class="badge ${meth==='POST'?'post':'get'}">${meth}</span>`;
+
+const REAL=[
+  {m:'GET', p:'/api/health', d:'capacidades, versão Python, contagem de datasets/labs', demo:true},
+  {m:'GET', p:'/api/datasets', d:'inventário real + allowlist + SHA-256'},
+  {m:'GET', p:'/api/datasets/sample', d:'amostra real de um dataset', q:{name:'caries_features.csv',n:'3'}},
+  {m:'GET', p:'/api/models', d:'relatórios reais de treino (métricas + artefatos)'},
+  {m:'GET', p:'/api/train/jobs', d:'jobs de treino já executados'},
+  {m:'GET', p:'/api/train/status', d:'estado/progresso de um job', q:{id:''}},
+  {m:'POST', p:'/api/train', d:'inicia treino real em thread', body:{dataset:'caries_features.csv',task:'default',folds:2,seed:0,sample_rows:200}},
+  {m:'GET', p:'/api/ca/demo', d:'cenário reprodutível do autômato celular (H→C)'},
+  {m:'POST', p:'/api/ca/simulate', d:'simula o autômato celular (rule: prior|fitted)', body:{rule:'prior',steps:3,seed:7,n_teeth:32}},
+  {m:'GET', p:'/api/validation', d:'gate de coorte + nível honesto + validação externa'},
+  {m:'GET', p:'/training-progress', d:'progresso real do laboratório de treino'},
+];
+const MOCK=[
+  {m:'GET', p:'/health', d:'saúde do backend simulado'},
+  {m:'POST', p:'/predict/images', d:'detecção simulada (caixas DEMO-FDI, mock:true)'},
+  {m:'GET', p:'/desejos', d:'rota stub de interface'},
+];
+
+function row(e){
+  return `<tr><td>${H(e.m)}<br><code class="path">${esc(e.p)}</code></td><td class="muted">${esc(e.d)}</td>
+    <td><button data-i="${esc(e._i)}">testar</button></td></tr>`;
+}
+function url(e){
+  let u=e.p;
+  if(e.q){const qs=Object.entries(e.q).map(([k,v])=>`${encodeURIComponent(k)}=${encodeURIComponent(v)}`).join('&');u+='?'+qs;}
+  return u;
+}
+function render(){
+  REAL.forEach((e,i)=>e._i='r'+i); MOCK.forEach((e,i)=>e._i='m'+i);
+  $('#cat-real').innerHTML=REAL.map(row).join('');
+  $('#cat-mock').innerHTML=MOCK.map(row).join('');
+}
+async function run(e){
+  const u=url(e);
+  const init={cache:'no-store'};
+  if(e.m==='POST'){init.method='POST';init.headers={'Content-Type':'application/json'};init.body=JSON.stringify(e.body||{});}
+  $('#req-info').innerHTML=`<b>${e.m}</b> <code>${esc(u)}</code> ${e.body?'· body: <code>'+esc(JSON.stringify(e.body))+'</code>':''}`;
+  $('#api-out').textContent='executando…';
+  try{
+    const r=await fetch(u,init);
+    let d=null,txt='';try{txt=await r.text();d=JSON.parse(txt);}catch(_){d=null;}
+    $('#req-info').innerHTML+=` → <span class="${r.ok?'ok':'bad'}">HTTP ${r.status}</span>`;
+    $('#api-out').textContent=d?JSON.stringify(d,null,1):txt.slice(0,4000);
+  }catch(err){
+    $('#api-out').textContent='erro: '+String(err);
+  }
+}
+document.body.addEventListener('click',(ev)=>{
+  const b=ev.target&&ev.target.closest?ev.target.closest('button[data-i]'):null;
+  if(!b) return;
+  const id=b.getAttribute('data-i');
+  const e=REAL.concat(MOCK).find(x=>x._i===id);
+  if(e) run(e);
+});
+render();
+</script>
+</body>
+</html>

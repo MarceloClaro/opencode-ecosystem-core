@@ -20932,6 +20932,126 @@
       "origin_commit": "f6388a2c69acb5aa2e48632fb78b6997316f7b96",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "SPEC-935-R898",
+      "objective": "SPEC-935-R898 — tornar OdontoCA executável localmente com autômatos celulares + ML, treinando na fonte primária verificada e em dataset Kaggle",
+      "changes": [
+        "specs/SPEC-935-R898-odontoca-local-ca-caries.md (SDD, 12 FRs)",
+        "odonto/local/odontoca/* (data/topology/ca/models/train/predict/cli/imagefeatures)",
+        "odonto/local/tests/* (26 testes TDD, RED->GREEN)",
+        "odonto/local/README.md + odonto/REA_AUDIT_rx-site.md"
+      ],
+      "score": 8.5,
+      "lessons": [
+        "Future_Status_Tooth da Table_S1 nao e transicao temporal; derivar H->C por Timepoint/Month",
+        "Pandas 3 usa dtype str, nao object: testar dtype quebra silenciosamente",
+        "Limiar 0.5 e inutil em alvo desbalanceado; usar Youden no OOF",
+        "SHA-256 b7819fee... da Table_S1 confere: proveniencia fail-closed validada",
+        "Sem torch/TF: features classicas OpenCV dao AUROC 0.896 em dataset Kaggle de imagens",
+        "Executor Antigravity com 0/676 concluidas nesta sessao: nao depender dele"
+      ],
+      "timestamp": 1792064781.0300467,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "SPEC-935-R898b",
+      "objective": "SPEC-935-R898b — alinhar a derivacao de coorte onset ao gate fail-closed do manuscrito e retificar metricas",
+      "changes": [
+        "train.py::prepare_onset_s1 reescrito (delta_timepoints==1 e delta_months>0, exclui T5161)",
+        "train.py::verify_locked_cohort + CohortMismatchError + LOCKED_COHORT (996/83/81)",
+        "cli.py: flag --verify-locked (saida 3 em divergencia)",
+        "tests/test_train.py: 5 testes novos (gap, intervalo, composto, coorte travada, gate)",
+        "README.md e SPEC-935-R898 (FR-004 corrigido, FR-013 adicionado; AUROC 0.827->0.805)"
+      ],
+      "score": 9.5,
+      "lessons": [
+        "Definicao de coorte domina a metrica; comparar com gate do artefato de origem antes de publicar numeros",
+        "O filtro exato da coorte travada e delta_months>0 sobre transicoes de um passo",
+        "Ensemble nao supera todos os base na coorte clinica (so no dataset de imagens): ganho e especifico do dataset",
+        "Metricas derivadas de coorte divergente devem ser retiradas, nao apenas anotadas"
+      ],
+      "timestamp": 1792067337.122238,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "SPEC-935-R899",
+      "objective": "SPEC-935-R899 — tornar a cópia local da Panoramica AI funcional: servidor MOCK (stdlib+PIL) respondendo JSON/ZIP no contrato do front-end, sem inferência de IA.",
+      "changes": [
+        "odonto/rx-site-local/serve.py: ThreadingHTTPServer com /health, /admin/api/session, /training-progress, /reviewer-ranking, /reviewer-profiles, /administrator-statistics, POST /predict/images (ZIP STORED + headers X-*), /segment/sam, /feedback, /admin/api/wishes, /admin/api/logout, edit-lock e /feedback/export.",
+        "FR-005/FR-009: padrão sem detecções (X-Teeth-Count=0); --simulate N gera caixas DEMO-FDI com 'mock':true; favicon/og-image/colaboradores viram PNG 1x1 transparente.",
+        "FR-006 (REFACTOR): aviso #mock-notice movido para o rodapé com pointer-events:none após o Playwright reportar que o banner sticky interceptava cliques da navegação (evidência 7898ed24).",
+        "FR-010: odonto/rx-site-local/tests/test_serve.py (10 testes: multipart, ZIP sem data descriptor, dimensões da prancha == layout.width/height, degradação de upload).",
+        "Documentação: odonto/rx-site-local/README.md e specs/SPEC-935-R899-panoramica-local-mock.md."
+      ],
+      "score": 9.0,
+      "lessons": [
+        "Evidência dura: erros de console no navegador 9 -> 1 (único restante training-video.mp4, arquivo genuinamente ausente da cópia capturada).",
+        "Injetar avisos de UI sempre com pointer-events:none e fora da barra fixa; um banner sticky quebrou a navegação e só foi detectado por execução real no navegador.",
+        "O contrato ZIP do readImageBundle exige flags==0 e compression==0; zipfile sobre BytesIO (seekable) satisfaz, mas isso precisa ser verificado por teste, não suposto.",
+        "Servidor amarrado a 127.0.0.1: nenhuma radiografia sai da máquina local."
+      ],
+      "timestamp": 1792069490.278194,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "SPEC-935-R900",
+      "objective": "SPEC-935-R900 — implementar laboratórios REAIS na cópia local da Panoramica AI: backend /api/* sobre odontoca (dataset, treino, autômato celular, gate de coorte), 4 páginas no navegador; corrigir o guard ESM/CJS que negava edição de .html.",
+      "changes": [
+        "specs/SPEC-935-R900-rx-local-laboratorios-reais.md (SDD, 15 FRs)",
+        "odonto/rx-site-local/backend/{paths,datasets,labs,jobs,ca_lab,api}.py — endpoints reais /api/*",
+        "odonto/rx-site-local/pages/{review,validacao,cadastro,docs}.html — laboratórios no navegador",
+        "odonto/rx-site-local/serve.py — integração híbrida: LAB_PAGES, LAB_BANNER, delegação /api/*, /training-progress real",
+        "odonto/rx-site-local/tests/test_real_api.py (15 testes) + tests/test_r581_deploy_guards.py (4 testes)",
+        ".opencode/hooks/smoke_dom_stub.js — corrigido de CJS para ESM (import fs/vm)",
+        ".opencode/plugins/deploy-guards.ts — gate de smoke sobre conteúdo PROSPECTIVO (ativa no próximo restart)"
+      ],
+      "score": 9.0,
+      "lessons": [
+        "Hook .js sob .opencode/package.json {type:module} precisa ser ESM (import), não require: um crash do stub negava TODA edição .html em fail-closed silencioso.",
+        "Plugin tool.execute.before deve validar o conteúdo PROSPECTIVO (args.content; oldString->newString), não o arquivo em disco: em write novo o alvo não existe (ENOENT) e em edit o disco ainda tem a versão antiga.",
+        "Plugin do OpenCode não recarrega a quente: a correção de deploy-guards.ts só produz efeito após reinício do host.",
+        "Banner de aviso sempre com pointer-events:none e fora da barra fixa; sticky no topo intercepta cliques (Playwright 'intercepts pointer events').",
+        "Nível de alegação honesto: CA=descritivo_nao_causal; treino=comparacao_empirica; validação externa bloqueada; AUROC 0.827 retirado."
+      ],
+      "timestamp": 1792073444.5820563,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ]
 }

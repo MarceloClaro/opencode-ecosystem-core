@@ -17,8 +17,8 @@
  *
  * Exit: 0 = ok; 1 = exceção de runtime ou contagem divergente.
  */
-const fs = require("fs");
-const vm = require("vm");
+import fs from "node:fs";
+import vm from "node:vm";
 
 const file = process.argv[2];
 if (!file) { console.error("uso: node smoke_dom_stub.js arquivo.html [--assert-count N]"); process.exit(2); }

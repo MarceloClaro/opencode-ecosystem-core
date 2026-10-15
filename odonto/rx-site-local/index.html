@@ -1,0 +1,1393 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Analise radiografias panoramicas com apoio de inteligencia artificial.">
+  <link rel="canonical" href="https://rx.engenhariaorofacial.com.br/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Panoramica AI">
+  <meta property="og:title" content="Panoramica AI | Analise de radiografias">
+  <meta property="og:description" content="Visualizacao e analise assistida de radiografias panoramicas odontologicas.">
+  <meta property="og:url" content="https://rx.engenhariaorofacial.com.br/">
+  <meta property="og:image" content="https://rx.engenhariaorofacial.com.br/og-image.png">
+  <meta property="og:image:secure_url" content="https://rx.engenhariaorofacial.com.br/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1733">
+  <meta property="og:image:height" content="907">
+  <meta property="og:image:alt" content="Radiografia panoramica odontologica com marcacoes de analise.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Panoramica AI | Analise de radiografias">
+  <meta name="twitter:description" content="Visualizacao e analise assistida de radiografias panoramicas odontologicas.">
+  <meta name="twitter:image" content="https://rx.engenhariaorofacial.com.br/og-image.png">
+  <title>Panoramica AI — Visualizador</title>
+  <link rel="stylesheet" href="/navigation.css">
+  <script src="/navigation.js"></script>
+  <style>
+    :root { color-scheme: dark; font: 16px system-ui, sans-serif; background: #0b1220; color: #e2e8f0; }
+    body { box-sizing: border-box; max-width: 1600px; margin: auto; padding: 28px; padding-top: 0; }
+    body > header { box-sizing: border-box; position: sticky; top: 0; z-index: 20; width: 100vw; margin-left: calc(50% - 50vw); display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 52px; padding: 9px max(28px, calc((100vw - 1600px) / 2 + 28px)); border: 0; border-bottom: 1px solid #29384a; border-radius: 0; background: rgb(13 20 29 / .98); box-shadow: 0 8px 24px rgb(0 0 0 / .22); backdrop-filter: blur(16px); }
+    .site-brand { display: flex; align-items: center; gap: 10px; color: #f8fafc; font-size: 17px; font-weight: 760; text-decoration: none; }
+    .site-brand-mark { display: grid; place-items: center; width: 32px; height: 32px; border: 1px solid #2dd4bf; border-radius: 7px; background: #0d302f; color: #5eead4; font-size: 11px; box-shadow: 0 0 18px rgb(45 212 191 / .12); }
+    .top-nav { display: flex; align-items: center; justify-content: flex-end; gap: 4px; padding: 4px; border: 1px solid #29384a; border-radius: 8px; background: #101a27; }
+    .top-nav a { padding: 8px 12px; border-radius: 6px; color: #9fb1c5; font-size: 14px; font-weight: 650; text-decoration: none; }
+    .top-nav a:hover { background: #172538; color: #f8fafc; }
+    .top-nav a[aria-current="page"] { background: #17343a; color: #5eead4; box-shadow: inset 0 0 0 1px rgb(45 212 191 / .18); }
+    .top-nav > span { display: none; }
+    #viewer-logout { padding: 7px 12px; margin-left: 4px; background: #17202b; border-color: #475569; }
+    #viewer-logout:hover, #viewer-logout:focus-visible { border-color: #f87171; color: #fecaca; background: #3f171d; }
+    h1 { font-size: 26px; margin: 0; } h2 { font-size: 16px; margin: 0; }
+    p, small { color: #94a3b8; } a { color: #5eead4; }
+    form, figure { border: 1px solid #334155; border-radius: 12px; background: #111c2f; }
+    .page-intro { margin: 10px 2px 6px; }
+    .workspace { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 20px; align-items: start; margin-top: 8px; }
+    .status-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 42px; margin-bottom: 4px; }
+    #status { min-width: 0; }
+    #training-toggle { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; background: #17343a; border-color: #2dd4bf; }
+    #training-toggle::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #5eead4; box-shadow: 0 0 10px rgb(94 234 212 / .65); }
+    .workspace-content, .command-panel { min-width: 0; }
+    .command-panel { display: grid; gap: 16px; }
+    form { display: grid; gap: 18px; padding: 20px; margin: 0; }
+    .command-panel input:not([type=checkbox]), .command-panel select { box-sizing: border-box; width: 100%; min-width: 0; }
+    .premium-field-title { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .premium-badge { padding: 3px 7px; border: 1px solid #0d9488; border-radius: 4px; background: #12343a; color: #99f6e4; font-size: 11px; font-weight: 700; line-height: 1; text-transform: uppercase; }
+    #file:invalid { border-color: #2dd4bf; background: #0c2026; animation: upload-glow 1.55s ease-in-out infinite; }
+    #file:valid { animation: none; }
+    @keyframes upload-glow {
+      0%, 100% { border-color: #2dd4bf; box-shadow: 0 0 0 1px rgb(45 212 191 / .18), 0 0 8px rgb(45 212 191 / .18); }
+      50% { border-color: #99f6e4; box-shadow: 0 0 0 3px rgb(45 212 191 / .3), 0 0 20px rgb(45 212 191 / .52); }
+    }
+    label { display: grid; gap: 8px; font-size: 14px; }
+    input, button { border: 1px solid #475569; border-radius: 6px; padding: 10px; background: #0b1220; color: inherit; }
+    input[type=number] { width: 100px; } input[type=password] { width: 180px; }
+    button { background: #0f766e; border-color: #14b8a6; font-weight: 600; cursor: pointer; }
+    button:disabled { opacity: .6; cursor: wait; }
+    button.danger-action { border-color: #ef4444; background: #7f1d1d; color: #fee2e2; }
+    button.danger-action:hover:not(:disabled) { border-color: #fb7185; background: #991b1b; }
+    #status { min-height: 24px; margin: 12px 0; } #status.error { color: #fca5a5; }
+    .processing { display: grid; grid-template-columns: 28px minmax(0, 1fr); align-items: center; gap: 14px; min-height: 52px; margin: 12px 0 20px; padding: 14px 16px; border: 1px solid #0f766e; border-radius: 8px; background: #0d2428; }
+    .processing strong, .processing small { display: block; }
+    .processing small { margin-top: 3px; color: #a7f3d0; }
+    .spinner { box-sizing: border-box; width: 28px; height: 28px; border: 3px solid #134e4a; border-top-color: #5eead4; border-radius: 50%; animation: spin .8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) {
+      .spinner { animation-duration: 1.8s; }
+      #file:invalid { animation: none; box-shadow: 0 0 0 2px rgb(45 212 191 / .28); }
+    }
+    .images { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
+    figure { margin: 0; overflow: hidden; }
+    details { margin: 16px 0; } summary { cursor: pointer; margin-bottom: 12px; }
+    figcaption { padding: 10px 12px 10px 18px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .figure-heading, .figure-actions { display: flex; align-items: center; gap: 8px; min-width: 0; }
+    .figure-heading { flex: 1; justify-content: space-between; }
+    .figure-heading > span { overflow-wrap: anywhere; text-align: right; }
+    .figure-actions { flex: 0 0 auto; }
+    .figure-action { box-sizing: border-box; display: inline-grid; place-items: center; width: 36px; height: 36px; padding: 0; border-color: #475569; background: #172033; }
+    .figure-action:hover:not(:disabled) { border-color: #5eead4; background: #12343a; }
+    .figure-action.danger { border-color: #7f1d1d; background: #3f1723; color: #fecaca; }
+    .figure-action.danger:hover:not(:disabled) { border-color: #fb7185; background: #581c29; }
+    .figure-action svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .icon-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+    .viewport { position: relative; min-height: 200px; display: grid; place-items: center; background: #030712; }
+    .viewport img { display: block; width: 100%; height: auto; }
+    .annotation-tooltip { position: fixed; z-index: 2147483647; display: none; max-width: min(320px, calc(100vw - 24px)); padding: 8px 11px; border: 1px solid var(--tooltip-color, #5eead4); border-radius: 5px; background: rgb(8 13 24 / .97); color: #e2e8f0; box-shadow: 0 8px 26px rgb(0 0 0 / .5); font-size: 12px; line-height: 1.4; pointer-events: none; }
+    .annotation-tooltip.visible { display: block; }
+    .placeholder { padding: 32px; text-align: center; color: #64748b; }
+    .legend { display: flex; flex-wrap: wrap; gap: 18px; margin: 20px 0; font-size: 14px; }
+    .legend span::before { content: ''; display: inline-block; width: 10px; height: 10px; margin-right: 7px; border-radius: 3px; background: var(--color); }
+    .reviewers, .administrators { margin-top: 30px; padding-top: 24px; border-top: 1px solid #334155; }
+    .reviewers > h2, .administrators > h2 { margin-bottom: 14px; font-size: 18px; }
+    .reviewer-list, .administrator-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+    .reviewer-card { display: grid; grid-template-columns: 88px minmax(0, 1fr) auto; align-items: center; gap: 16px; padding: 14px; border: 2px solid #334155; border-radius: 8px; background: #111c2f; }
+    .reviewer-card.podium-gold { border-color: #fbbf24; box-shadow: 0 0 0 1px rgb(251 191 36 / .2), 0 8px 24px rgb(251 191 36 / .12); }
+    .reviewer-card.podium-silver { border-color: #cbd5e1; box-shadow: 0 0 0 1px rgb(203 213 225 / .18), 0 8px 24px rgb(203 213 225 / .1); }
+    .reviewer-card.podium-bronze { border-color: #c97a40; box-shadow: 0 0 0 1px rgb(201 122 64 / .2), 0 8px 24px rgb(201 122 64 / .12); }
+    .reviewer-photo { display: block; width: 88px; height: 88px; border-radius: 6px; object-fit: cover; object-position: center 30%; }
+    .reviewer-info { min-width: 0; }
+    .reviewer-info h3 { margin: 0 0 5px; font-size: 16px; overflow-wrap: anywhere; }
+    .reviewer-info p { margin: 0; font-size: 14px; }
+    .reviewer-score { margin-top: 7px !important; color: #94a3b8; font-size: 12px !important; }
+    .reviewer-score strong { color: #5eead4; font-size: 15px; }
+    .reviewer-rank { color: #fbbf24; font-weight: 700; }
+    .podium-silver .reviewer-rank { color: #e2e8f0; }
+    .podium-bronze .reviewer-rank { color: #e59a61; }
+    .administrator-score { display: flex; flex-wrap: wrap; gap: 5px 12px; margin-top: 8px !important; color: #94a3b8; font-size: 12px !important; }
+    .administrator-score strong { color: #5eead4; font-size: 15px; }
+    .reviewer-links { display: flex; gap: 8px; }
+    .reviewer-link { box-sizing: border-box; display: inline-grid; place-items: center; width: 38px; height: 38px; border: 1px solid #475569; border-radius: 6px; color: #cbd5e1; background: #0b1220; }
+    .reviewer-link:hover, .reviewer-link:focus-visible { border-color: #5eead4; color: #5eead4; background: #12343a; }
+    .reviewer-link svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .training-milestone { position: relative; isolation: isolate; display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 420px); gap: 28px; align-items: center; margin-top: 34px; padding: 30px; overflow: hidden; border: 1px solid #1d6d73; border-radius: 8px; background: #07141d; box-shadow: inset 0 0 0 1px rgb(45 212 191 / .05), 0 18px 50px rgb(0 0 0 / .28), 0 0 34px rgb(45 212 191 / .08); }
+    .training-milestone::before { content: ''; position: absolute; z-index: -1; top: 0; bottom: 0; left: -35%; width: 24%; background: linear-gradient(90deg, transparent, rgb(94 234 212 / .08), rgb(96 165 250 / .13), transparent); transform: skewX(-12deg); animation: milestone-scan 7s ease-in-out infinite; pointer-events: none; }
+    .milestone-signal { position: absolute; top: 0; right: 0; left: 0; display: grid; grid-template-columns: 1.5fr .45fr 2.3fr .3fr 1fr; gap: 7px; height: 3px; }
+    .milestone-signal span { background: #2dd4bf; box-shadow: 0 0 12px rgb(45 212 191 / .72); animation: milestone-signal 2.8s ease-in-out infinite; }
+    .milestone-signal span:nth-child(2), .milestone-signal span:nth-child(5) { background: #60a5fa; animation-delay: -.9s; }
+    .milestone-signal span:nth-child(4) { background: #fbbf24; animation-delay: -1.7s; }
+    .milestone-kicker { display: flex; align-items: center; gap: 9px; margin: 0 0 12px; color: #7dd3fc; font-size: 12px; font-weight: 760; letter-spacing: 0; text-transform: uppercase; }
+    .milestone-pulse { width: 8px; height: 8px; flex: 0 0 auto; border-radius: 50%; background: #5eead4; box-shadow: 0 0 0 0 rgb(94 234 212 / .5); animation: milestone-pulse 2s ease-out infinite; }
+    .milestone-copy h2 { max-width: 850px; margin: 0; color: #f8fafc; font-size: 27px; line-height: 1.18; }
+    .milestone-copy h2 strong { color: #5eead4; text-shadow: 0 0 20px rgb(45 212 191 / .32); }
+    .milestone-copy > p:last-child { max-width: 780px; margin: 13px 0 0; color: #a9bbcf; line-height: 1.65; }
+    .milestone-counter { min-width: 0; padding-left: 26px; border-left: 1px solid #295064; }
+    .milestone-number { display: flex; align-items: baseline; gap: 8px; color: #f8fafc; }
+    .milestone-number strong { font-size: 64px; line-height: 1; text-shadow: 0 0 24px rgb(96 165 250 / .28); }
+    .milestone-number span { color: #7dd3fc; font-size: 22px; font-weight: 700; }
+    .milestone-label { display: block; margin-top: 5px; color: #a9bbcf; font-size: 13px; }
+    .milestone-progress { position: relative; height: 8px; margin-top: 18px; overflow: hidden; border: 1px solid #275063; border-radius: 4px; background: #0c2430; }
+    .milestone-progress-fill { position: absolute; inset: 0 auto 0 0; width: 0; min-width: 3px; border-radius: inherit; background: linear-gradient(90deg, #14b8a6, #38bdf8 68%, #fbbf24); box-shadow: 0 0 16px rgb(56 189 248 / .55); transition: width 1.1s cubic-bezier(.2,.8,.2,1); }
+    .milestone-progress-fill::after { content: ''; position: absolute; inset: 0; width: 42%; background: linear-gradient(90deg, transparent, rgb(255 255 255 / .65), transparent); animation: milestone-progress 2.7s linear infinite; }
+    .milestone-progress-meta { display: flex; justify-content: space-between; gap: 12px; margin-top: 9px; color: #7f96ad; font-size: 12px; }
+    .milestone-progress-meta strong { color: #fbbf24; }
+    .milestone-flow { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin: 0; padding: 0; border: 1px solid #203b4d; border-radius: 6px; overflow: hidden; list-style: none; background: #203b4d; }
+    .milestone-flow li { display: flex; align-items: center; gap: 10px; min-width: 0; padding: 11px 14px; background: #0a1924; color: #9fb1c5; font-size: 12px; font-weight: 650; }
+    .milestone-flow b { display: grid; place-items: center; width: 22px; height: 22px; flex: 0 0 auto; border: 1px solid #2a7980; border-radius: 50%; color: #5eead4; font-size: 10px; }
+    .wishlist-invite { margin-top: 16px; }
+    .wishlist-launch { position: relative; isolation: isolate; box-sizing: border-box; width: 100%; min-height: 150px; display: grid; grid-template-columns: 150px minmax(0, 1fr) auto; align-items: center; gap: 26px; overflow: hidden; padding: 22px 28px; border: 1px solid #2dd4bf; border-radius: 8px; background: #09231f; color: #ecfdf5; text-align: left; box-shadow: inset 0 0 30px rgb(45 212 191 / .06), 0 14px 38px rgb(0 0 0 / .22), 0 0 26px rgb(45 212 191 / .11); }
+    .wishlist-launch::after { content: ''; position: absolute; z-index: -1; top: -60%; bottom: -60%; left: -20%; width: 14%; background: rgb(153 246 228 / .12); transform: rotate(18deg); animation: wish-shine 5.8s ease-in-out infinite; }
+    .wishlist-launch:hover, .wishlist-launch:focus-visible { border-color: #99f6e4; background: #0b2d28; box-shadow: inset 0 0 34px rgb(45 212 191 / .1), 0 16px 44px rgb(0 0 0 / .26), 0 0 32px rgb(45 212 191 / .2); }
+    .gift-visual { position: relative; width: 112px; height: 104px; justify-self: center; filter: drop-shadow(0 12px 16px rgb(0 0 0 / .3)); animation: gift-float 3.4s ease-in-out infinite; }
+    .gift-box, .gift-lid { position: absolute; left: 8px; width: 96px; border: 1px solid #6ee7b7; background: #0f766e; box-shadow: inset 0 0 18px rgb(167 243 208 / .2), 0 0 18px rgb(45 212 191 / .25); }
+    .gift-box { bottom: 0; height: 68px; border-radius: 5px; }
+    .gift-lid { top: 22px; left: 2px; width: 108px; height: 22px; border-radius: 4px; animation: gift-lid 3.4s ease-in-out infinite; }
+    .gift-ribbon-v { position: absolute; z-index: 2; top: 22px; bottom: 0; left: 48px; width: 16px; background: #a7f3d0; box-shadow: 0 0 12px rgb(167 243 208 / .45); }
+    .gift-ribbon-h { position: absolute; z-index: 3; top: 27px; left: 2px; width: 108px; height: 11px; background: #a7f3d0; }
+    .gift-bow { position: absolute; z-index: 1; top: 1px; left: 31px; width: 28px; height: 25px; border: 7px solid #5eead4; border-radius: 50% 50% 18% 50%; transform: rotate(18deg); }
+    .gift-bow:last-child { left: 57px; border-radius: 50% 50% 50% 18%; transform: rotate(-18deg); }
+    .wishlist-copy { min-width: 0; }
+    .wishlist-copy small { display: block; margin-bottom: 7px; color: #6ee7b7; font-size: 11px; font-weight: 800; text-transform: uppercase; }
+    .wishlist-copy strong { display: block; color: #f0fdfa; font-size: 24px; line-height: 1.2; }
+    .wishlist-copy span { display: block; max-width: 760px; margin-top: 8px; color: #a7c7c0; font-size: 14px; font-weight: 450; line-height: 1.55; }
+    .wishlist-cta { padding: 9px 12px; border: 1px solid #5eead4; border-radius: 6px; color: #ccfbf1; background: #124e48; white-space: nowrap; }
+    #wishlist-dialog { box-sizing: border-box; width: min(920px, calc(100vw - 28px)); max-height: min(850px, calc(100dvh - 28px)); padding: 0; overflow: hidden; border: 1px solid #2b746f; border-radius: 8px; background: #0c1622; color: #e2e8f0; box-shadow: 0 28px 90px rgb(0 0 0 / .7), 0 0 34px rgb(45 212 191 / .12); }
+    #wishlist-dialog::backdrop { background: rgb(2 6 12 / .78); backdrop-filter: blur(6px); }
+    .wishlist-dialog-shell { display: grid; grid-template-rows: auto auto minmax(0, 1fr); max-height: min(850px, calc(100dvh - 28px)); }
+    .wishlist-dialog-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 20px; border-bottom: 1px solid #294153; background: #101d2b; }
+    .wishlist-dialog-head h2 { font-size: 19px; }
+    .wishlist-dialog-head p { margin: 4px 0 0; font-size: 12px; }
+    #wishlist-close { width: 36px; height: 36px; padding: 0; border-color: #475569; background: #172334; color: #cbd5e1; font-size: 24px; line-height: 1; }
+    .wishlist-form { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; margin: 0; padding: 16px 20px; border: 0; border-bottom: 1px solid #294153; border-radius: 0; background: #0e1926; }
+    .wishlist-form label { grid-column: 1 / -1; }
+    .wishlist-form textarea, .wish-comment-form input { box-sizing: border-box; width: 100%; border: 1px solid #465468; border-radius: 6px; background: #08111d; color: #f8fafc; font: inherit; outline: none; }
+    .wishlist-form textarea { min-height: 86px; resize: vertical; padding: 11px 12px; }
+    .wishlist-form textarea:focus, .wish-comment-form input:focus { border-color: #2dd4bf; box-shadow: 0 0 0 3px rgb(45 212 191 / .12); }
+    .wishlist-form-meta { align-self: center; color: #7890a8; font-size: 12px; }
+    .wishlist-form button { min-width: 150px; }
+    #wishlist-status { grid-column: 1 / -1; min-height: 18px; margin: 0; color: #94a3b8; font-size: 12px; }
+    #wishlist-status.error { color: #fca5a5; }
+    #wishlist-status.success { color: #6ee7b7; }
+    .wishlist-auth-gate { padding: 28px 20px; border-bottom: 1px solid #294153; text-align: center; }
+    .wishlist-auth-gate p { margin: 0 0 16px; }
+    .wishlist-auth-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
+    .wishlist-auth-actions a { padding: 9px 14px; border: 1px solid #2dd4bf; border-radius: 6px; background: #0f766e; color: white; font-weight: 700; text-decoration: none; }
+    .wishlist-auth-actions a:last-child { border-color: #475569; background: #172334; }
+    .wishlist-feed { min-height: 180px; overflow: auto; padding: 18px 20px 24px; }
+    .wishlist-feed-empty { padding: 34px 12px; color: #7890a8; text-align: center; }
+    .wish-card { padding: 16px 0; border-bottom: 1px solid #26384a; }
+    .wish-card:first-child { padding-top: 0; }
+    .wish-card:last-child { border-bottom: 0; }
+    .wish-meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: #7f96ad; font-size: 12px; }
+    .wish-meta strong { color: #ccfbf1; font-size: 13px; }
+    .wish-content { margin: 10px 0 12px; color: #dce7f3; line-height: 1.55; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .wish-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+    .wish-like, .wish-delete { padding: 7px 10px; background: #142233; border-color: #3c5269; font-size: 12px; }
+    .wish-like[aria-pressed="true"] { border-color: #2dd4bf; background: #123f3b; color: #99f6e4; }
+    .wish-delete { margin-left: auto; border-color: #7f1d1d; background: #3f1723; color: #fecaca; }
+    .wish-comments { margin-top: 13px; padding-left: 12px; border-left: 2px solid #244558; }
+    .wish-comment { margin: 0; padding: 7px 0; color: #aebed0; font-size: 12px; line-height: 1.45; }
+    .wish-comment strong { color: #d8e7f4; }
+    .wish-comment-form { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; margin: 8px 0 0; padding: 0; border: 0; border-radius: 0; background: transparent; }
+    .wish-comment-form input { min-width: 0; padding: 8px 10px; }
+    .wish-comment-form button { padding: 7px 11px; font-size: 12px; }
+    @keyframes gift-float { 0%, 100% { transform: translateY(2px); } 50% { transform: translateY(-5px); } }
+    @keyframes gift-lid { 0%, 38%, 100% { transform: translateY(0) rotate(0); } 48% { transform: translateY(-7px) rotate(-2deg); } 58% { transform: translateY(-3px) rotate(1deg); } }
+    @keyframes wish-shine { 0%, 28% { left: -20%; opacity: 0; } 42%, 67% { opacity: 1; } 82%, 100% { left: 112%; opacity: 0; } }
+    .site-footer { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-top: 24px; padding: 18px 2px 4px; border-top: 1px solid #253449; color: #8093aa; font-size: 12px; }
+    .site-footer-brand, .site-footer-meta { display: flex; align-items: center; gap: 9px; }
+    .site-footer-brand strong { color: #cbd5e1; font-size: 13px; }
+    .site-footer-mark { display: grid; place-items: center; width: 24px; height: 24px; border: 1px solid #267b75; border-radius: 5px; color: #5eead4; font-size: 9px; font-weight: 800; }
+    .site-footer-open { padding-right: 10px; border-right: 1px solid #334155; color: #5eead4; font-weight: 700; }
+    .site-footer-flag { font-size: 17px; line-height: 1; }
+    @keyframes milestone-scan { 0%, 18% { left: -35%; opacity: 0; } 32%, 72% { opacity: 1; } 86%, 100% { left: 118%; opacity: 0; } }
+    @keyframes milestone-signal { 0%, 100% { opacity: .28; } 50% { opacity: 1; } }
+    @keyframes milestone-pulse { 0% { box-shadow: 0 0 0 0 rgb(94 234 212 / .55); } 75%, 100% { box-shadow: 0 0 0 9px rgb(94 234 212 / 0); } }
+    @keyframes milestone-progress { from { transform: translateX(-120%); } to { transform: translateX(260%); } }
+    .teeth-details { margin-top: 20px; }
+    .report-actions, .image-actions { display: grid; gap: 12px; padding: 16px; border: 1px solid #334155; border-radius: 12px; background: #111c2f; }
+    .image-actions section { display: grid; gap: 10px; }
+    .image-actions button, .figure-action[data-panel-edit] { border-color: #facc15; background: #a16207; color: #fef9c3; }
+    .image-actions button:hover:not(:disabled), .figure-action[data-panel-edit]:hover:not(:disabled) { border-color: #fde047; background: #ca8a04; color: #fff; }
+    #print-preview { box-sizing: border-box; width: 100%; max-width: 900px; margin: 0 auto; padding: 0; border: 1px solid #475569; border-radius: 12px; background: #182235; color: #e2e8f0; }
+    body.preview-open > :not(#print-preview) { display: none !important; }
+    .preview-toolbar { position: sticky; top: 0; z-index: 1; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 20px; background: #111c2f; border-bottom: 1px solid #334155; }
+    .preview-toolbar p { margin: 4px 0 0; font-size: 13px; }
+    .preview-buttons { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; margin-left: auto; }
+    #close-preview { background: transparent; border-color: #475569; }
+    #print-pages { padding: 20px; display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 20px; }
+    .print-page { box-sizing: border-box; display: flex; flex-direction: column; width: 190mm; height: 276mm; min-width: 0; max-width: 100%; padding: 8mm; background: white; color: #172033; box-shadow: 0 4px 20px rgb(0 0 0 / .25); font-size: 10pt; color-scheme: light; }
+    .print-header { display: block; border-bottom: 2px solid #0f766e; padding-bottom: 4mm; overflow-wrap: anywhere; }
+    .print-brand { color: #0f766e; font-weight: 700; font-size: 11pt; }
+    .print-header h2 { margin: 2mm 0; font-size: 18pt; }
+    .print-meta, .print-summary, .print-note { margin: 2mm 0 0; color: #475569; font-size: 9pt; }
+    .print-image-area { display: flex; align-items: center; justify-content: center; flex: 1; min-height: 0; padding: 6mm 0; }
+    .print-image-area img { display: block; width: 100%; height: 100%; object-fit: contain; }
+    .print-image-area.print-image-pair { flex-direction: column; gap: 6mm; }
+    .print-image-pair > img, .print-image-pair > svg { display: block; flex: 1; min-height: 0; width: 100%; height: 0; }
+    .print-card-grid { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 4mm; padding: 5mm 0; }
+    .print-card { margin: 0; min-width: 0; min-height: 0; border: 0; border-radius: 0; background: none; display: flex; align-items: center; }
+    .print-card svg { display: block; width: 100%; height: 100%; }
+    .print-empty { flex: 1; display: grid; place-items: center; color: #475569; }
+    .print-footer { display: flex; justify-content: space-between; gap: 4mm; border-top: 1px solid #cbd5e1; padding-top: 3mm; font-size: 8pt; color: #475569; }
+    .print-footer span:first-child { max-width: 80%; }
+    [hidden] { display: none !important; }
+    select, textarea { border: 1px solid #475569; border-radius: 6px; padding: 8px; background: #0b1220; color: inherit; }
+    .editable-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; padding: 16px; }
+    .editable-card { border: 1px solid #334155; border-radius: 10px; padding: 12px; min-width: 0; }
+    .editable-card header { margin-bottom: 10px; color: #2dd4bf; }
+    .editable-card canvas { width: 100%; background: #030712; }
+    .editable-card p { margin: 6px 0; font-size: 13px; overflow-wrap: anywhere; }
+    .editable-card .tooth-score, .editable-card .review-corrected { color: #2dd4bf; }
+    .editable-card .review-pending { color: #fbbf24; }
+    html:has(#annotation-editor[open]), body:has(#annotation-editor[open]) { overflow: hidden; }
+    #annotation-editor { box-sizing: border-box; position: fixed; inset: auto; top: var(--editor-top, 0px); left: var(--editor-left, 0px); width: var(--editor-width, 100dvw); max-width: 100dvw; height: var(--editor-height, 100dvh); max-height: 100dvh; min-width: 0; min-height: 0; margin: 0; padding: 10px 12px; overflow: hidden; background: #111c2f; color: #e2e8f0; border: 0; border-radius: 0; }
+    #annotation-editor[open] { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: 8px; }
+    #annotation-editor::backdrop { background: rgb(0 0 0 / .7); }
+    .editor-tools, .feedback-tools { display: grid; gap: 12px; padding: 12px 0; }
+    .editor-body { display: grid; grid-template-columns: minmax(0, 1fr) clamp(320px, 21vw, 370px); gap: 12px; min-width: 0; min-height: 0; overflow: hidden; }
+    .editor-stage { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; min-width: 0; min-height: 0; }
+    .editor-canvas-viewport { position: relative; min-width: 0; min-height: 0; overflow: hidden; background: #030712; }
+    .editor-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-content: start; gap: 6px 8px; min-width: 0; min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-gutter: stable; padding-right: 4px; font-size: 13px; }
+    .editor-fields select, .editor-fields textarea { box-sizing: border-box; width: 100%; min-width: 0; }
+    .editor-fields label { gap: 4px; font-size: 13px; }
+    .editor-fields select, .editor-fields textarea { padding: 6px 7px; }
+    .editor-fields button { min-height: 36px; padding: 7px 8px; font-size: 13px; }
+    .editor-fields > .editor-tools, .editor-fields > label:first-of-type,
+    .editor-fields > label:nth-of-type(4), .editor-fields > label:nth-of-type(5),
+    .editor-fields > p { grid-column: 1 / -1; }
+    .editor-tools { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; padding: 0 0 4px; }
+    .editor-tools > label:first-child, .editor-tools > #brush-size-control,
+    .editor-tools > #sam-status { grid-column: 1 / -1; }
+    .editor-display { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) auto; gap: 8px; align-items: end; margin-bottom: 6px; }
+    .editor-display label { gap: 4px; }
+    .editor-display input { box-sizing: border-box; width: 100%; min-width: 0; padding: 0; }
+    #sam-status { max-height: 3.2em; margin: 2px 0; overflow-y: auto; overflow-wrap: anywhere; font-size: 12px; }
+    #edit-canvas { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: block; max-width: 100%; max-height: 100%; touch-action: none; background: #030712; cursor: crosshair; }
+    .editor-actions { display: flex; justify-content: flex-end; gap: 8px; border-top: 1px solid #334155; padding-top: 8px; }
+    .editor-actions button { min-height: 38px; padding: 7px 12px; }
+    #editor-hint { max-height: 3.2em; margin: 5px 0 0; overflow-y: auto; font-size: 12px; }
+    #edit-notes { min-height: 48px; max-height: 80px; resize: vertical; }
+    #edit-coordinates { margin: 2px 0; font-size: 12px; }
+    .training-flyout { position: fixed; top: var(--training-top, 53px); left: 0; z-index: 19; width: min(380px, calc(100vw - 16px)); max-height: calc(100dvh - var(--training-top, 53px) - 16px); overflow: hidden; border: 1px solid #3b4d63; border-left: 0; border-radius: 0 0 8px 0; background: #101a27; box-shadow: 0 20px 55px rgb(0 0 0 / .48); }
+    .training-flyout:not([hidden]) { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; }
+    .training-flyout-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 48px; padding: 8px 10px 8px 16px; border-bottom: 1px solid #304055; background: #142132; }
+    .training-flyout-head h2 { font-size: 15px; }
+    #training-close { display: grid; place-items: center; width: 34px; min-height: 34px; padding: 0; border-color: transparent; background: transparent; color: #b8c7d9; font-size: 22px; line-height: 1; }
+    #training-close:hover { border-color: #64748b; color: white; }
+    .training-flyout-body { min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 14px; }
+    .backend-save-actions { margin-top: 12px; padding: 12px; border: 1px solid #304055; border-radius: 7px; background: #142132; }
+    #save-feedback { width: 100%; border-color: #2dd4bf; background: #0f766e; }
+    .backend-save-actions #review-status:not(:empty) { margin: 10px 0 0; padding: 10px; border: 1px solid currentColor; border-radius: 6px; background: #0b1524; line-height: 1.4; }
+    .training-video { margin-bottom: 14px; overflow: hidden; border: 1px solid #304055; border-radius: 7px; background: #060b12; }
+    .training-video-stage { position: relative; aspect-ratio: 16 / 9; background: #060b12; }
+    #training-video { display: block; width: 100%; height: 100%; object-fit: contain; background: #060b12; }
+    #training-video-expand { position: absolute; top: 8px; right: 8px; display: grid; place-items: center; width: 34px; min-height: 34px; padding: 0; border-color: #64748b; background: rgb(8 18 32 / .9); color: white; }
+    #training-video-expand svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; }
+    #training-video-missing { margin: 0; padding: 9px 11px; border-top: 1px solid #304055; color: #9fb1c5; font-size: 12px; }
+    #training-empty { margin: 4px 0; line-height: 1.5; }
+    #feedback-panel { margin: 0; }
+    #feedback-panel > h2 { display: none; }
+    #review-status { min-height: 24px; }
+    #review-status .validation-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    #review-status .validation-actions button { padding: 8px 12px; border-color: #fb7185; background: #3f1723; }
+    @media (max-width: 1200px) { .reviewer-list, .administrator-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 700px) { .editable-cards, .reviewer-list, .administrator-list { grid-template-columns: 1fr; } .training-milestone { grid-template-columns: 1fr; padding: 23px 18px; } .milestone-counter { padding: 20px 0 0; border-top: 1px solid #295064; border-left: 0; } .milestone-copy h2 { font-size: 23px; } .milestone-number strong { font-size: 52px; } .milestone-flow { grid-template-columns: 1fr; } .wishlist-launch { grid-template-columns: 96px minmax(0, 1fr); gap: 14px; padding: 18px 16px; } .gift-visual { width: 90px; transform: scale(.78); transform-origin: center; } .wishlist-cta { grid-column: 1 / -1; text-align: center; } .wishlist-copy strong { font-size: 20px; } .wishlist-form { grid-template-columns: 1fr; } .wishlist-form button, .wishlist-form-meta, #wishlist-status { grid-column: 1; } .wish-comment-form { grid-template-columns: 1fr; } .site-footer { align-items: flex-start; flex-direction: column; } }
+    @media (max-width: 900px) { body { padding: 0 16px 16px; } body > header { padding-inline: 16px; } .workspace { grid-template-columns: minmax(0, 1fr) 280px; } }
+    @media (max-width: 600px) {
+      .site-brand span:last-child { display: none; }
+      .top-nav { max-width: calc(100vw - 92px); overflow-x: auto; justify-content: flex-start; }
+      .top-nav a { white-space: nowrap; }
+      .status-toolbar { align-items: flex-start; flex-direction: column; }
+      .training-flyout { width: calc(100vw - 16px); max-height: calc(100dvh - var(--training-top, 53px) - 10px); }
+      .workspace { grid-template-columns: minmax(0, 1fr); }
+      .command-panel { grid-row: 1; }
+      #annotation-editor { padding: 8px; gap: 8px; }
+      .editor-body { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1.4fr) minmax(0, 1fr); gap: 8px; }
+      .editor-stage { grid-template-rows: auto minmax(0, 1fr) auto; }
+      .editor-fields { overflow-y: auto; overscroll-behavior: contain; padding-right: 0; }
+      .editor-display { grid-template-columns: repeat(3, minmax(0, 1fr)) auto; gap: 6px; margin-bottom: 6px; }
+      .editor-display label { grid-template-columns: 1fr auto; gap: 4px; min-width: 0; }
+      .editor-display input { grid-column: 1 / -1; }
+      #reset-display { padding: 6px; font-size: 11px; max-width: 85px; }
+      #editor-hint { font-size: 11px; max-height: 3.5em; overflow-y: auto; }
+      .editor-actions { padding-top: 8px; }
+      #print-pages { padding: 8px; }
+      .print-page { height: 210mm; padding: 5mm; }
+      .print-header h2 { font-size: 14pt; }
+      .preview-toolbar { padding: 12px; }
+      .reviewer-card { grid-template-columns: 72px minmax(0, 1fr); }
+      .reviewer-photo { width: 72px; height: 72px; }
+      .reviewer-links { grid-column: 2; }
+    }
+    @page { size: A4 portrait; margin: 10mm; }
+    @media print {
+      :root { color-scheme: light; background: white; }
+      body { max-width: none; margin: 0; padding: 0; }
+      body.print-ready > :not(#print-preview) { display: none !important; }
+      body.print-ready #print-preview { display: block !important; position: static; width: auto; max-width: none; height: auto; max-height: none; margin: 0; padding: 0; border: 0; border-radius: 0; overflow: visible; background: white; }
+      .preview-toolbar { display: none !important; }
+      #print-pages { display: block; padding: 0; }
+      .print-page { width: 190mm; max-width: none; height: 276mm; padding: 8mm; box-shadow: none; break-inside: avoid; break-after: page; page-break-after: always; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      .print-page:last-child { break-after: auto; page-break-after: auto; }
+      .print-header h2 { font-size: 18pt; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .training-milestone::before, .milestone-signal span, .milestone-pulse, .milestone-progress-fill::after, .wishlist-launch::after, .gift-visual, .gift-lid { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <svg class="icon-sprite" aria-hidden="true">
+    <symbol id="icon-pencil" viewBox="0 0 24 24"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.986L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></symbol>
+    <symbol id="icon-trash" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M10 11v6"/><path d="M14 11v6"/></symbol>
+  </svg>
+  <panoramica-nav current="analysis" logout-id="viewer-logout" logout-hidden></panoramica-nav>
+  <p class="page-intro">Carregue uma radiografia para obter o resultado principal, a anatomia e os recortes dente a dente.</p>
+  <div class="workspace">
+    <main class="workspace-content">
+      <div id="processing" class="processing" role="status" aria-live="assertive" hidden>
+        <span class="spinner" aria-hidden="true"></span>
+        <span><strong>Processando a radiografia</strong><small>Os modelos estão analisando dentes e estruturas. Isso pode levar alguns minutos.</small></span>
+      </div>
+      <div class="status-toolbar">
+        <div id="status" role="status" aria-live="polite">Selecione uma imagem de até 10 MiB.</div>
+        <button id="training-toggle" type="button" aria-controls="training-flyout" aria-expanded="false">Fazer treinamento</button>
+      </div>
+      <details id="diagnostics" hidden>
+        <summary>Scores e filtros das 31 classes</summary>
+        <p id="diagnostic-note"></p>
+        <div style="overflow-x:auto"><table><thead><tr><th>ID</th><th>Classe</th><th>Candidatos</th><th>Score máximo</th><th>Corte</th><th>Aceitos</th><th>Resultado</th></tr></thead><tbody id="diagnostic-rows"></tbody></table></div>
+      </details>
+      <details>
+        <summary>Radiografia original</summary>
+        <figure>
+          <figcaption><div class="figure-heading"><h2>Original</h2></div><div class="figure-actions"><button class="figure-action" type="button" data-panel-edit data-scope="all" title="Editar marcações desta radiografia" aria-label="Editar marcações desta radiografia" disabled><svg aria-hidden="true"><use href="#icon-pencil"/></svg></button><button class="figure-action danger" type="button" data-delete-image title="Excluir esta radiografia do banco" aria-label="Excluir esta radiografia do banco" hidden><svg aria-hidden="true"><use href="#icon-trash"/></svg></button></div></figcaption>
+          <div class="viewport"><img id="original" alt="Radiografia original" hidden><span id="original-empty" class="placeholder">A imagem selecionada aparece aqui.</span></div>
+        </figure>
+      </details>
+      <div class="images">
+        <figure>
+          <figcaption><div class="figure-heading"><h2>Numeração FDI e quadrantes</h2><span id="annotation-source-status" role="status"></span></div><div class="figure-actions"><button class="figure-action" type="button" data-panel-edit data-scope="teeth" data-geometry="boxes" title="Editar caixas e numeração FDI" aria-label="Editar caixas e numeração FDI" disabled><svg aria-hidden="true"><use href="#icon-pencil"/></svg></button><button class="figure-action danger" type="button" data-delete-image title="Excluir esta radiografia do banco" aria-label="Excluir esta radiografia do banco" hidden><svg aria-hidden="true"><use href="#icon-trash"/></svg></button></div></figcaption>
+          <div class="viewport"><img id="annotated" alt="Radiografia com caixas de numeração FDI e quadrantes" hidden><span id="annotated-empty" class="placeholder">As marcações aparecem após a análise.</span></div>
+        </figure>
+        <figure>
+          <figcaption><div class="figure-heading"><h2>Segmentação dentária</h2></div><div class="figure-actions"><button class="figure-action" type="button" data-panel-edit data-scope="teeth" data-geometry="masks" title="Editar máscaras dentárias" aria-label="Editar máscaras dentárias" disabled><svg aria-hidden="true"><use href="#icon-pencil"/></svg></button><button class="figure-action danger" type="button" data-delete-image title="Excluir esta radiografia do banco" aria-label="Excluir esta radiografia do banco" hidden><svg aria-hidden="true"><use href="#icon-trash"/></svg></button></div></figcaption>
+          <div class="viewport"><img id="tooth-segmentation" alt="Radiografia com os contornos da segmentação dentária e números FDI" hidden><span id="tooth-segmentation-empty" class="placeholder">Os contornos dentários aparecem após a análise.</span></div>
+        </figure>
+        <figure>
+          <figcaption><div class="figure-heading"><h2>Anotações adicionais</h2></div><div class="figure-actions"><button class="figure-action" type="button" data-panel-edit data-scope="additional" title="Editar anotações adicionais" aria-label="Editar anotações adicionais" disabled><svg aria-hidden="true"><use href="#icon-pencil"/></svg></button><button class="figure-action danger" type="button" data-delete-image title="Excluir esta radiografia do banco" aria-label="Excluir esta radiografia do banco" hidden><svg aria-hidden="true"><use href="#icon-trash"/></svg></button></div></figcaption>
+          <div class="viewport"><img id="additional-annotations" alt="Radiografia somente com anotações adicionais Dental31" hidden><span id="additional-annotations-empty" class="placeholder">As anotações adicionais aparecem após a análise.</span></div>
+        </figure>
+        <figure>
+          <figcaption><div class="figure-heading"><h2>Seios maxilares e canal mandibular</h2></div><div class="figure-actions"><button class="figure-action" type="button" data-panel-edit data-scope="anatomy" title="Editar seios maxilares e canal mandibular" aria-label="Editar seios maxilares e canal mandibular" disabled><svg aria-hidden="true"><use href="#icon-pencil"/></svg></button><button class="figure-action danger" type="button" data-delete-image title="Excluir esta radiografia do banco" aria-label="Excluir esta radiografia do banco" hidden><svg aria-hidden="true"><use href="#icon-trash"/></svg></button></div></figcaption>
+          <div class="viewport"><img id="anatomy" alt="Radiografia com seios maxilares e canal mandibular destacados" hidden><span id="anatomy-empty" class="placeholder">As estruturas detectadas aparecem após a análise.</span></div>
+          <p id="anatomy-status" role="status" style="padding:0 18px" hidden></p>
+          <ul id="anatomy-notes" hidden></ul>
+        </figure>
+      </div>
+      <figure id="teeth-figure" class="teeth-details">
+        <figcaption><div class="figure-heading"><h2>Dente a dente — original e marcado</h2></div><div class="figure-actions"><button class="figure-action" type="button" data-panel-edit data-scope="teeth" data-geometry="boxes" title="Editar caixas e numeração FDI" aria-label="Editar caixas e numeração FDI" disabled><svg aria-hidden="true"><use href="#icon-pencil"/></svg></button><button class="figure-action danger" type="button" data-delete-image title="Excluir esta radiografia do banco" aria-label="Excluir esta radiografia do banco" hidden><svg aria-hidden="true"><use href="#icon-trash"/></svg></button></div></figcaption>
+        <div class="viewport"><img id="teeth" alt="Cards por dente com recorte original, recorte marcado e informações associadas" hidden><span id="teeth-empty" class="placeholder">Cada dente aparece com seus próprios recortes e informações após a análise.</span></div>
+        <div id="editable-cards" class="editable-cards" hidden></div>
+      </figure>
+    </main>
+    <aside class="command-panel" aria-label="Comandos">
+      <form id="analyze">
+        <label>Radiografia PNG/JPEG<input id="file" type="file" accept="image/png,image/jpeg" required></label>
+        <label>Modelos<select id="model-scope"><option value="combined">Pipeline completo</option><option value="dental31">Somente Kaggle / Dental31</option></select></label>
+        <label><span>Diagnosticar scores das 31 classes</span><input id="diagnose" type="checkbox"></label>
+          <label>Score mínimo<input id="confidence" type="number" value="0.25" min="0.01" max="1" step="0.01" required></label>
+          <label>Score mínimo FDI<input id="fdi-confidence" type="number" value="0.40" min="0.01" max="1" step="0.01" required></label>
+        <label>Score mínimo de canal e seio<input id="anatomy-confidence" type="number" value="0.10" min="0.01" max="1" step="0.01" required></label>
+        <label>Resolução do modelo<input id="imgsz" type="number" value="640" min="32" max="1280" step="32" required></label>
+        <label><span>Informações adicionais e anatomia</span><input id="additional" type="checkbox" disabled></label>
+        <label><span class="premium-field-title">Chave da API <span class="premium-badge">Somente Premium</span></span><input id="key" type="password" autocomplete="off"></label>
+        <button id="submit" type="submit">Analisar imagem</button>
+      </form>
+      <div class="report-actions">
+        <button id="print-report" type="button" disabled aria-controls="print-preview" aria-expanded="false">Imprimir laudo</button>
+        <small>Prévia A4: uma folha por imagem grande e até quatro dentes por folha, com original e marcado.</small>
+      </div>
+      <section class="image-actions" aria-label="Ações das imagens">
+        <section>
+          <h2>Numeração FDI e quadrantes</h2>
+          <button id="edit-quadrants" type="button" disabled>Editar quadrantes</button>
+          <button id="edit-teeth" type="button" disabled>Editar caixas / FDI</button>
+          <button id="edit-findings" type="button" disabled>Editar achados DENTEX</button>
+          <a id="download" download="panoramica-fdi-quadrantes.png" hidden>Baixar PNG</a>
+        </section>
+        <section>
+          <h2>Segmentação dentária</h2>
+          <button id="edit-tooth-masks" type="button" disabled>Editar máscaras</button>
+          <a id="download-tooth-segmentation" download="panoramica-segmentacao-dentaria.png" hidden>Baixar PNG</a>
+        </section>
+        <section>
+          <h2>Anotações adicionais</h2>
+          <button id="edit-additional" type="button" disabled>Editar anotações adicionais</button>
+          <a id="download-additional" download="panoramica-anotacoes-adicionais.png" hidden>Baixar PNG</a>
+        </section>
+        <section>
+          <h2>Seios maxilares e canal mandibular</h2>
+          <button id="edit-anatomy" type="button" disabled>Editar anatomia</button>
+          <a id="download-anatomy" download="panoramica-anatomia.png" hidden>Baixar PNG</a>
+        </section>
+        <section>
+          <h2>Dente a dente</h2>
+          <a id="download-teeth" download="panoramica-dentes.png" hidden>Baixar PNG</a>
+        </section>
+      </section>
+      <section id="backend-save-actions" class="backend-save-actions" aria-label="Salvar revisao no backend">
+        <button id="save-feedback" type="button" disabled>Salvar revis&atilde;o no backend</button>
+        <p id="review-status" role="status" aria-live="polite"></p>
+      </section>
+      <section id="training-flyout" class="training-flyout" aria-label="Treinamento" hidden>
+        <div class="training-flyout-head"><h2>Treinamento</h2><button id="training-close" type="button" title="Minimizar" aria-label="Minimizar painel">&times;</button></div>
+        <div class="training-flyout-body">
+          <div class="training-video">
+            <div class="training-video-stage">
+              <video id="training-video" controls playsinline preload="metadata" poster="/og-image.png">
+                <source id="training-video-source" src="/training-video.mp4" type="video/mp4">
+              </video>
+              <button id="training-video-expand" type="button" title="Expandir vídeo" aria-label="Expandir vídeo">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/></svg>
+              </button>
+            </div>
+            <p id="training-video-missing" hidden>Estamos confeccionando este vídeo. Um dos nossos revisores colaboradores está preparando todo o conteúdo da melhor forma possível.</p>
+          </div>
+          <p id="training-empty">Analise uma radiografia para liberar os controles de treinamento.</p>
+      <section id="feedback-panel" hidden>
+        <h2>Revisões para treinamento</h2>
+        <p>Marque um grupo somente após conferir todas as suas marcações na radiografia. Salvar mantém um histórico no backend; o retreino é executado quando você decidir.</p>
+        <label id="review-source-control" hidden>Marcações exibidas<select id="review-source"><option value="model">Análise atual</option><option value="saved">Revisão salva</option></select></label>
+        <div class="feedback-tools">
+          <label>Grupo de paciente (pseudônimo opcional)<input id="patient-group" maxlength="100" autocomplete="off"></label>
+          <label>Faixa etária<select id="review-age-group"><option value="adult">Adulto</option><option value="child">Criança</option><option value="uncertain">A conferir</option></select></label>
+          <label><span><input id="complete-all" type="checkbox"> Todos os grupos revisados</span></label>
+          <label><span><input id="complete-teeth" type="checkbox"> Todos os dentes revisados</span></label>
+          <label><span><input id="complete-findings" type="checkbox"> Todos os achados revisados</span></label>
+          <label><span><input id="complete-additional" type="checkbox"> Todas as classes Dental31 revisadas</span></label>
+          <label><span><input id="complete-quadrants" type="checkbox"> Todos os quadrantes revisados</span></label>
+        </div>
+        <div class="feedback-tools">
+          <label>Exportar grupo<select id="export-group"><option value="quadrants">Quadrantes</option><option value="teeth">Dentes / FDI</option><option value="findings">Achados DENTEX</option><option value="additional">Dental31 (inclui seios e canal)</option></select></label>
+          <label>Tarefa<select id="export-task"><option value="segment">Segmentação (contornos)</option><option value="detect">Detecção (caixas)</option></select></label>
+          <button id="export-feedback" type="button">Baixar dataset revisado</button>
+        </div>
+      </section>
+        </div>
+      </section>
+    </aside>
+  </div>
+  <dialog id="annotation-editor" aria-labelledby="editor-title">
+    <header><h2 id="editor-title">Editar marcações</h2></header>
+    <div class="editor-body">
+      <div class="editor-stage">
+        <div class="editor-display">
+          <label for="edit-contrast">Contraste <output id="contrast-value">100%</output><input id="edit-contrast" type="range" min="25" max="400" value="100" step="5"></label>
+          <label for="edit-brightness">Brilho <output id="brightness-value">100%</output><input id="edit-brightness" type="range" min="25" max="250" value="100" step="5"></label>
+          <label for="edit-zoom">Zoom <output id="zoom-value">100%</output><input id="edit-zoom" type="range" min="100" max="500" value="100" step="10"></label>
+          <button id="reset-display" type="button">Restaurar imagem</button>
+        </div>
+        <div class="editor-canvas-viewport"><canvas id="edit-canvas" tabindex="0" aria-label="Editor de caixas e contornos"></canvas></div><p id="editor-hint" role="status">Clique nos pontos para desenhar. Use o botão direito sobre um ponto para excluí-lo. Clique em um ponto anterior para fechar. Use Separar um ponto para editar um contorno fechado.</p>
+      </div>
+      <div class="editor-fields">
+        <div class="editor-tools">
+          <label>Ferramenta<select id="edit-tool"><option value="move">Mover / ajustar caixa e contorno</option><option value="brush-add">Pincel: adicionar área</option><option value="brush-erase">Borracha: remover área</option><option value="box">Desenhar caixa</option><option value="polygon">Desenhar contorno</option><option value="split">Separar um ponto</option></select></label>
+          <label id="brush-size-control" hidden>Tamanho do pincel <output id="brush-size-value">40 px</output><input id="brush-size" type="range" min="4" max="200" value="40" step="2"></label>
+          <button id="finish-polygon" type="button">Concluir contorno</button>
+          <button id="delete-polygon-point" class="danger-action" type="button" disabled>Excluir último ponto</button>
+          <button id="split-polygon" type="button">Separar um ponto</button>
+          <label><span><input id="full-image" type="checkbox"> Panorâmica inteira</span></label>
+          <button id="new-annotation" type="button">Adicionar marcação</button>
+          <button id="duplicate-annotation" type="button" title="Cria outro dente com a mesma caixa e o mesmo contorno">Duplicar caixa e contorno</button>
+          <button id="delete-contour" class="danger-action" type="button" title="Remove somente o contorno e mantém a caixa e os dados da marcação">Excluir contorno</button>
+          <button id="delete-annotation" class="danger-action" type="button">Excluir selecionada</button>
+          <button id="suggest-sam" type="button">Sugerir contorno com SAM</button>
+          <button id="accept-sam" type="button" hidden>Aceitar contorno SAM</button>
+          <button id="discard-sam" type="button" hidden>Descartar sugestão</button>
+          <p id="sam-status" role="status" aria-live="polite">Selecione ou desenhe uma caixa para guiar o SAM.</p>
+        </div>
+        <label>Marcação<select id="edit-selection"></select></label>
+        <label>Grupo<select id="edit-group"><option value="quadrants">Quadrante</option><option value="teeth">Dente / FDI</option><option value="findings">Achado DENTEX</option><option value="additional">Dental31 / anatomia</option></select></label>
+        <label>Classe / FDI<select id="edit-label"></select></label>
+        <button id="add-class" type="button" title="Adiciona uma classe ao banco revisado para o próximo treinamento">Adicionar classe</button>
+        <button id="renumber-posterior" type="button" title="Continua a numeração FDI nos dentes posteriores do mesmo quadrante">Renumerar posteriores</button>
+        <label>Dente associado<select id="edit-tooth"></select></label>
+        <label>Observações<textarea id="edit-notes" maxlength="4000"></textarea></label>
+        <p id="edit-coordinates"></p>
+      </div>
+    </div>
+    <footer class="editor-actions">
+      <button id="apply-edit" type="button">Aplicar alterações</button>
+      <button id="cancel-edit" class="danger-action" type="button">Cancelar</button>
+    </footer>
+  </dialog>
+  <div class="annotation-tooltip" id="review-annotation-tooltip" role="tooltip"></div>
+  <div class="legend">
+    <span style="--color:#2dd4bf">Dente / número FDI</span>
+    <span style="--color:#fbbf24">Impactado</span>
+    <span style="--color:#f87171">Cárie</span>
+    <span style="--color:#c084fc">Lesão periapical</span>
+    <span style="--color:#fb923c">Cárie profunda</span>
+    <span style="--color:#60a5fa">Informação adicional / Dental31</span>
+    <span style="--color:#60a5fa">Seio maxilar (anatomia)</span>
+    <span style="--color:#f472b6">Canal mandibular (anatomia)</span>
+  </div>
+  <small id="additional-status">Verificando disponibilidade do modelo adicional…</small><br>
+  <small>Numeração por quadrante, de 1 a 8 do centro para fora. Dentes ausentes e achados exigem revisão clínica. Os scores não são probabilidades de doença.</small>
+  <section class="reviewers" aria-labelledby="reviewers-title">
+    <h2 id="reviewers-title">Colaboradores da ferramenta</h2>
+    <div class="reviewer-list">
+      <article class="reviewer-card" data-reviewer-index="0">
+        <img class="reviewer-photo" src="/colaboradores/fernanda-oliveira.jpg" alt="Fernanda Oliveira e Silva" loading="lazy">
+        <div class="reviewer-info">
+          <h3>Fernanda Oliveira e Silva</h3>
+          <p>Ortodontia</p>
+          <p class="reviewer-score"><span class="reviewer-rank" data-review-rank>–</span> · <strong data-review-count>0</strong> <span data-review-label>radiografias corrigidas</span></p>
+        </div>
+        <div class="reviewer-links">
+          <a class="reviewer-link" href="https://www.instagram.com/dra.fernanda.oliveira/" target="_blank" rel="noopener noreferrer" title="Instagram de Fernanda Oliveira e Silva" aria-label="Abrir Instagram de Fernanda Oliveira e Silva em nova aba">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a class="reviewer-link" href="https://www.linkedin.com/in/fernanda-oliveira-08971a249/?isSelfProfile=false" target="_blank" rel="noopener noreferrer" title="LinkedIn de Fernanda Oliveira e Silva" aria-label="Abrir LinkedIn de Fernanda Oliveira e Silva em nova aba">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6Z"/><path d="M2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="reviewer-card" data-reviewer-index="1">
+        <img class="reviewer-photo" src="/colaboradores/priscila-galhardo-segura.jpg" alt="Priscila Galhardo Segura" loading="lazy">
+        <div class="reviewer-info">
+          <h3>Priscila Galhardo Segura</h3>
+          <p>Ortodontista</p>
+          <p class="reviewer-score"><span class="reviewer-rank" data-review-rank>–</span> · <strong data-review-count>0</strong> <span data-review-label>radiografias corrigidas</span></p>
+        </div>
+        <div class="reviewer-links">
+          <a class="reviewer-link" href="https://www.instagram.com/pripri_g/" target="_blank" rel="noopener noreferrer" title="Instagram de Priscila Galhardo Segura" aria-label="Abrir Instagram de Priscila Galhardo Segura em nova aba">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a class="reviewer-link" href="https://www.linkedin.com/in/priscilagalhardo/" target="_blank" rel="noopener noreferrer" title="LinkedIn de Priscila Galhardo Segura" aria-label="Abrir LinkedIn de Priscila Galhardo Segura em nova aba">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6Z"/><path d="M2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="reviewer-card" data-reviewer-index="2">
+        <img class="reviewer-photo" src="/colaboradores/juliane-santos.jpg" alt="Juliane Santos" loading="lazy">
+        <div class="reviewer-info">
+          <h3>Juliane Santos</h3>
+          <p>Dentística</p>
+          <p class="reviewer-score"><span class="reviewer-rank" data-review-rank>–</span> · <strong data-review-count>0</strong> <span data-review-label>radiografias corrigidas</span></p>
+        </div>
+        <div class="reviewer-links">
+          <a class="reviewer-link" href="https://www.instagram.com/julianealmeida.odontologia/" target="_blank" rel="noopener noreferrer" title="Instagram de Juliane Santos" aria-label="Abrir Instagram de Juliane Santos em nova aba">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a class="reviewer-link" href="https://www.linkedin.com/in/juliane-santos-73b47a164/" target="_blank" rel="noopener noreferrer" title="LinkedIn de Juliane Santos" aria-label="Abrir LinkedIn de Juliane Santos em nova aba">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6Z"/><path d="M2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="reviewer-card" data-reviewer-index="3">
+        <img class="reviewer-photo" src="/colaboradores/aline-rodrigues-mota.jpg" alt="Aline Rodrigues Mota" loading="lazy">
+        <div class="reviewer-info">
+          <h3>Aline Rodrigues Mota</h3>
+          <p>Ciência de Dados</p>
+          <p class="reviewer-score"><span class="reviewer-rank" data-review-rank>–</span> · <strong data-review-count>0</strong> <span data-review-label>radiografias corrigidas</span></p>
+        </div>
+        <div class="reviewer-links">
+          <a class="reviewer-link" href="https://www.linkedin.com/in/aline-r-mota/" target="_blank" rel="noopener noreferrer" title="LinkedIn de Aline Rodrigues Mota" aria-label="Abrir LinkedIn de Aline Rodrigues Mota em nova aba">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6Z"/><path d="M2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="reviewer-card" data-reviewer-index="4">
+        <img class="reviewer-photo" src="/colaboradores/jarbas-cangirana.jpg" alt="Jarbas Cangirana" loading="lazy">
+        <div class="reviewer-info">
+          <h3>Jarbas Cangirana</h3>
+          <p>Endodontia</p>
+          <p class="reviewer-score"><span class="reviewer-rank" data-review-rank>–</span> · <strong data-review-count>0</strong> <span data-review-label>radiografias corrigidas</span></p>
+        </div>
+        <div class="reviewer-links">
+          <a class="reviewer-link" href="https://www.linkedin.com/in/jarbas-cangirana-31685b1a3" target="_blank" rel="noopener noreferrer" title="LinkedIn de Jarbas Cangirana" aria-label="Abrir LinkedIn de Jarbas Cangirana em nova aba">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6Z"/><path d="M2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="reviewer-card" data-reviewer-index="5">
+        <img class="reviewer-photo" src="/colaboradores/eduardo-ferreira.jpg" alt="Eduardo Ferreira" loading="lazy">
+        <div class="reviewer-info">
+          <h3>Eduardo Ferreira</h3>
+          <p>Implantodontia</p>
+          <p class="reviewer-score"><span class="reviewer-rank" data-review-rank>–</span> · <strong data-review-count>0</strong> <span data-review-label>radiografias corrigidas</span></p>
+        </div>
+        <div class="reviewer-links">
+          <a class="reviewer-link" href="https://www.instagram.com/dr.eduardoff" target="_blank" rel="noopener noreferrer" title="Instagram de Eduardo Ferreira" aria-label="Abrir Instagram de Eduardo Ferreira em nova aba">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a class="reviewer-link" href="https://www.linkedin.com/in/eduardo-ferreira-88790b439" target="_blank" rel="noopener noreferrer" title="LinkedIn de Eduardo Ferreira" aria-label="Abrir LinkedIn de Eduardo Ferreira em nova aba">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6Z"/><path d="M2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+        </div>
+      </article>
+    </div>
+  </section>
+  <section class="administrators" aria-labelledby="administrators-title">
+    <h2 id="administrators-title">Administradores da ferramenta</h2>
+    <div class="administrator-list">
+      <article class="reviewer-card administrator-card">
+        <img class="reviewer-photo" src="/colaboradores/ronnei-borges-peres.jpg" alt="Ronnei Borges Peres" loading="lazy">
+        <div class="reviewer-info">
+          <h3>Ronnei Borges Peres</h3>
+          <p>Administrador</p>
+          <p class="administrator-score">
+            <span><strong data-admin-adult>0</strong> adultos</span>
+            <span><strong data-admin-child>0</strong> crianças</span>
+          </p>
+        </div>
+        <div class="reviewer-links">
+          <a class="reviewer-link" href="https://www.instagram.com/ronnei_bp/" target="_blank" rel="noopener noreferrer" title="Instagram de Ronnei Borges Peres" aria-label="Abrir Instagram de Ronnei Borges Peres em nova aba">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a class="reviewer-link" href="https://www.linkedin.com/in/ronnei-borges" target="_blank" rel="noopener noreferrer" title="LinkedIn de Ronnei Borges Peres" aria-label="Abrir LinkedIn de Ronnei Borges Peres em nova aba">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6Z"/><path d="M2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+        </div>
+      </article>
+    </div>
+  </section>
+  <section class="training-milestone" aria-labelledby="training-milestone-title">
+    <div class="milestone-signal" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="milestone-copy">
+      <p class="milestone-kicker"><span class="milestone-pulse" aria-hidden="true"></span>Próximo ciclo de inteligência</p>
+      <h2 id="training-milestone-title">A próxima evolução da IA começa com <strong>300 radiografias completas</strong>.</h2>
+      <p>Cada revisão clínica aproxima o modelo de uma nova rodada de treinamento, construída com dados conferidos e decisões humanas de alta qualidade.</p>
+    </div>
+    <div class="milestone-counter">
+      <div class="milestone-number"><strong data-training-completed>0</strong><span>/ 300</span></div>
+      <span class="milestone-label">radiografias validadas para o próximo ciclo</span>
+      <div class="milestone-progress" role="progressbar" aria-label="Progresso para o próximo treinamento" aria-valuemin="0" aria-valuemax="300" aria-valuenow="0">
+        <span class="milestone-progress-fill"></span>
+      </div>
+      <div class="milestone-progress-meta"><span><strong data-training-remaining>300</strong> restantes</span><span data-training-percentage>0%</span></div>
+    </div>
+    <ol class="milestone-flow" aria-label="Etapas do próximo ciclo">
+      <li><b>01</b><span>Revisão especializada</span></li>
+      <li><b>02</b><span>Curadoria do banco</span></li>
+      <li><b>03</b><span>Novo treinamento da IA</span></li>
+    </ol>
+  </section>
+  <section class="wishlist-invite" aria-labelledby="wishlist-invite-title">
+    <button id="wishlist-open" class="wishlist-launch" type="button" aria-controls="wishlist-dialog">
+      <span class="gift-visual" aria-hidden="true"><span class="gift-bow"></span><span class="gift-bow"></span><span class="gift-box"></span><span class="gift-lid"></span><span class="gift-ribbon-v"></span><span class="gift-ribbon-h"></span></span>
+      <span class="wishlist-copy"><small>Caixinha de desejos</small><strong id="wishlist-invite-title">O que você gostaria de ver na Panoramica AI?</strong><span>Compartilhe uma ideia para as próximas versões. A comunidade pode apoiar e conversar sobre cada pedido.</span></span>
+      <span class="wishlist-cta">Escrever um desejo</span>
+    </button>
+  </section>
+  <footer class="site-footer">
+    <div class="site-footer-brand"><span class="site-footer-mark" aria-hidden="true">PA</span><strong>Panoramica AI</strong></div>
+    <div class="site-footer-meta"><span class="site-footer-open">Open Source</span><span>Feito no Brasil</span><span class="site-footer-flag" role="img" aria-label="Bandeira do Brasil">🇧🇷</span></div>
+  </footer>
+  <dialog id="wishlist-dialog" aria-labelledby="wishlist-title">
+    <div class="wishlist-dialog-shell">
+      <header class="wishlist-dialog-head"><div><h2 id="wishlist-title">Caixinha de desejos</h2><p>Conte qual novidade faria diferença para você.</p></div><button id="wishlist-close" type="button" title="Fechar" aria-label="Fechar">&times;</button></header>
+      <form id="wishlist-form" class="wishlist-form">
+        <label for="wishlist-content">Seu desejo<textarea id="wishlist-content" maxlength="1200" required placeholder="Descreva a melhoria ou recurso que você gostaria de usar..."></textarea></label>
+        <span class="wishlist-form-meta"><span id="wishlist-count">0</span>/1200 caracteres</span>
+        <button id="wishlist-submit" type="submit">Publicar desejo</button>
+        <p id="wishlist-status" role="status"></p>
+      </form>
+      <div class="wishlist-auth-actions" style="padding: 0 20px 20px"><a id="wishlist-wall-link" href="/desejos" target="_blank" rel="noopener">Abrir mural em nova aba</a></div>
+    </div>
+  </dialog>
+  <section id="print-preview" aria-labelledby="preview-title" hidden>
+    <div class="preview-toolbar">
+      <div><h2 id="preview-title" tabindex="-1">Prévia do laudo</h2><p id="preview-page-count"></p></div>
+      <div class="preview-buttons">
+        <button id="close-preview" type="button">Fechar</button>
+        <button id="confirm-print" type="button">Imprimir / Salvar PDF</button>
+      </div>
+    </div>
+    <div id="print-pages"></div>
+  </section>
+  <script>
+    const byId = id => document.getElementById(id);
+    const form = byId('analyze');
+    let originalUrl = null;
+    let annotatedUrl = null;
+    let toothSegmentationUrl = null;
+    let additionalAnnotationsUrl = null;
+    let anatomyUrl = null;
+    let teethUrl = null;
+    let additionalAvailable = false;
+    let teethLayout = null;
+    let reportInfo = null;
+
+    function textElement(tag, className, text) {
+      const element = document.createElement(tag);
+      element.className = className;
+      element.textContent = text;
+      return element;
+    }
+
+    function reportPage(title) {
+      const page = document.createElement('section');
+      page.className = 'print-page';
+      const header = document.createElement('header');
+      header.className = 'print-header';
+      header.append(
+        textElement('div', 'print-brand', 'PANORAMICA AI · LAUDO VISUAL'),
+        textElement('h2', '', title),
+        textElement('p', 'print-meta', `Exame: ${reportInfo.filename} · Análise: ${reportInfo.date}`),
+        textElement('p', 'print-summary', reportInfo.summary)
+      );
+      page.append(header);
+      return page;
+    }
+
+    function buildPrintPreview() {
+      const pages = [];
+      for (const [id, title, note] of [
+        ['original', 'Radiografia original', 'Imagem original, sem marcações.'],
+        ['annotated', 'Numeração FDI e quadrantes', 'Segmentação, numeração FDI, quadrantes e achados DENTEX.'],
+        ['additional-annotations', 'Anotações adicionais', 'Somente as classes adicionais Dental31.'],
+        ['anatomy', 'Seios maxilares e canal mandibular', [byId('anatomy-status').textContent,
+          ...Array.from(byId('anatomy-notes').children, item => item.textContent)].join(' ')]
+      ]) {
+        const source = byId(id);
+        if (source.hidden || !source.getAttribute('src')) continue;
+        const page = reportPage(title);
+        page.append(textElement('p', 'print-note', note));
+        const area = document.createElement('div');
+        area.className = 'print-image-area';
+        if (id === 'annotated') {
+          area.append(renderPrintSegmentation());
+        } else if (id === 'additional-annotations') {
+          area.append(renderPrintSegmentation({additionalOnly: true}));
+        } else {
+          const image = document.createElement('img');
+          image.src = source.src;
+          image.alt = source.alt;
+          area.append(image);
+        }
+        page.append(area);
+        pages.push(page);
+      }
+      const cards = teethLayout.cards;
+      for (let offset = 0; offset < Math.max(1, cards.length); offset += 4) {
+        if (byId('teeth-figure').hidden) break;
+        const page = reportPage('Dente a dente · original e marcado');
+        page.append(textElement('p', 'print-note', 'Recortes e informações associados a cada dente. FDI e associações exigem revisão clínica.'));
+        if (!cards.length) {
+          page.append(textElement('p', 'print-empty', 'Nenhum dente detectado para recortar.'));
+        } else {
+          const grid = document.createElement('div');
+          grid.className = 'print-card-grid';
+          for (const card of cards.slice(offset, offset + 4)) {
+            // Recorta a mesma prancha via viewBox, sem duplicar bitmaps em canvas/base64.
+            const figure = document.createElement('figure');
+            figure.className = 'print-card';
+            const namespace = 'http://www.w3.org/2000/svg';
+            const svg = document.createElementNS(namespace, 'svg');
+            svg.setAttribute('viewBox', `${card.x} ${card.y} ${card.width} ${card.height}`);
+            svg.setAttribute('role', 'img');
+            svg.setAttribute('aria-label', card.title);
+            const image = document.createElementNS(namespace, 'image');
+            image.setAttribute('href', teethUrl);
+            image.setAttribute('width', teethLayout.width);
+            image.setAttribute('height', teethLayout.height);
+            const clip = document.createElementNS(namespace, 'clipPath');
+            const clipId = `print-card-${offset + grid.children.length}`;
+            clip.setAttribute('id', clipId);
+            const rect = document.createElementNS(namespace, 'rect');
+            for (const key of ['x', 'y', 'width', 'height']) rect.setAttribute(key, card[key]);
+            clip.append(rect);
+            image.setAttribute('clip-path', `url(#${clipId})`);
+            svg.append(clip, image);
+            figure.append(svg);
+            grid.append(figure);
+          }
+          page.append(grid);
+        }
+        pages.push(page);
+      }
+      pages.forEach((page, index) => {
+        const footer = document.createElement('footer');
+        footer.className = 'print-footer';
+        footer.append(
+          textElement('span', '', 'Análise automatizada para revisão clínica. Scores não são probabilidades de doença. Ausência de achados não indica saúde.'),
+          textElement('span', '', `${index + 1} / ${pages.length}`)
+        );
+        page.append(footer);
+      });
+      byId('print-pages').replaceChildren(...pages);
+      byId('preview-page-count').textContent = `${pages.length} páginas · A4 retrato · até 4 dentes por folha`;
+      document.body.classList.add('print-ready');
+    }
+
+    byId('print-report').addEventListener('click', () => {
+      buildPrintPreview();
+      byId('print-preview').hidden = false;
+      document.body.classList.add('preview-open');
+      byId('print-report').setAttribute('aria-expanded', 'true');
+      byId('preview-title').focus();
+      window.scrollTo(0, 0);
+    });
+    function closePrintPreview() {
+      byId('print-preview').hidden = true;
+      document.body.classList.remove('preview-open');
+      byId('print-report').setAttribute('aria-expanded', 'false');
+    }
+    byId('close-preview').addEventListener('click', () => {
+      closePrintPreview();
+      byId('print-report').focus();
+    });
+    byId('confirm-print').addEventListener('click', () => window.print());
+    window.addEventListener('beforeprint', () => {
+      if (reportInfo && teethLayout) buildPrintPreview();
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && document.body.classList.contains('preview-open')) {
+        closePrintPreview();
+        byId('print-report').focus();
+      }
+    });
+    async function checkAdditionalModel() {
+      try {
+        const response = await fetch('/health', {cache: 'no-store'});
+        if (!response.ok) throw new Error('health');
+        const health = await response.json();
+        additionalAvailable = health.additional_model?.status === 'ready';
+        byId('additional').disabled = !additionalAvailable;
+        byId('additional').checked = additionalAvailable;
+        syncModelScope();
+        byId('additional-status').textContent = additionalAvailable
+          ? 'Modelo adicional disponível. Seios maxilares e canal mandibular aparecem na segunda imagem.'
+          : 'Modelo adicional indisponível. A segunda imagem ficará sem marcações anatômicas.';
+      } catch {
+        byId('additional-status').textContent = 'Não foi possível verificar o modelo adicional. Recarregue a página.';
+      }
+    }
+    const additionalModelCheck = checkAdditionalModel();
+
+    function syncModelScope() {
+      const solo = byId('model-scope').value === 'dental31';
+      if (solo) byId('additional').checked = true;
+      byId('additional').disabled = solo || !additionalAvailable;
+    }
+    byId('model-scope').addEventListener('change', syncModelScope);
+
+    function showDiagnostics(diagnostics) {
+      byId('diagnostics').hidden = !diagnostics;
+      byId('diagnostic-rows').replaceChildren();
+      if (!diagnostics) return;
+      byId('diagnostic-note').textContent = `Candidatos após NMS com score mínimo ${diagnostics.confidence_floor}. Sem candidato não significa classe ausente na radiografia. Scores baixos podem ser falsos positivos.${diagnostics.candidate_limit_reached ? ' Limite de 512 candidatos atingido; contagens podem estar truncadas.' : ''}`;
+      const statuses = {detected: 'Detectado', below_threshold: 'Filtrado pelo score', no_candidate: 'Sem candidato'};
+      for (const row of diagnostics.classes) {
+        const tr = document.createElement('tr');
+        for (const value of [row.class_id, row.class_name, row.candidates, row.max_score ?? '—', row.threshold, row.accepted, statuses[row.status]]) {
+          tr.append(textElement('td', '', String(value)));
+        }
+        byId('diagnostic-rows').append(tr);
+      }
+    }
+
+    function setStatus(message, error = false) {
+      byId('status').textContent = message;
+      byId('status').classList.toggle('error', error);
+    }
+
+    const trainingStorageKey = 'panoramica-training-panel-open';
+    function alignTrainingPanel() {
+      const header = document.querySelector('body > header');
+      const headerBounds = header.getBoundingClientRect();
+      byId('training-flyout').style.setProperty(
+        '--training-top', `${Math.ceil(headerBounds.bottom)}px`
+      );
+    }
+    function syncTrainingPanelContent() {
+      const feedbackHidden = byId('feedback-panel').hidden;
+      byId('training-empty').hidden = !feedbackHidden;
+      const saveButton = byId('save-feedback');
+      saveButton.disabled = feedbackHidden;
+    }
+    function setTrainingPanelOpen(open) {
+      byId('training-flyout').hidden = !open;
+      byId('training-toggle').setAttribute('aria-expanded', String(open));
+      try { localStorage.setItem(trainingStorageKey, open ? '1' : '0'); } catch (_) {}
+      if (open) { alignTrainingPanel(); syncTrainingPanelContent(); }
+    }
+    byId('training-toggle').addEventListener('click', () => {
+      setTrainingPanelOpen(byId('training-flyout').hidden);
+    });
+    byId('training-close').addEventListener('click', () => {
+      setTrainingPanelOpen(false);
+      byId('training-toggle').focus();
+    });
+    new MutationObserver(syncTrainingPanelContent).observe(byId('feedback-panel'), {
+      attributes: true, attributeFilter: ['hidden']
+    });
+    byId('training-video-source').addEventListener('error', () => {
+      byId('training-video-missing').hidden = false;
+    });
+    byId('training-video').addEventListener('loadedmetadata', () => {
+      byId('training-video-missing').hidden = true;
+    });
+    byId('training-video-expand').addEventListener('click', async () => {
+      const video = byId('training-video');
+      try {
+        if (document.fullscreenElement) await document.exitFullscreen();
+        else if (video.requestFullscreen) await video.requestFullscreen();
+        else if (video.webkitEnterFullscreen) video.webkitEnterFullscreen();
+      } catch (_) { /* Os controles nativos do vídeo continuam disponíveis. */ }
+    });
+    window.addEventListener('resize', alignTrainingPanel);
+    try {
+      if (localStorage.getItem(trainingStorageKey) === '1') setTrainingPanelOpen(true);
+    } catch (_) {}
+
+    function setProcessing(active) {
+      byId('processing').hidden = !active;
+      byId('analyze').setAttribute('aria-busy', String(active));
+      byId('submit').textContent = active ? 'Processando...' : 'Analisar imagem';
+    }
+
+    function clearResult() {
+      if (typeof resetFeedback === 'function') resetFeedback();
+      showDiagnostics(null);
+      byId('print-report').disabled = true;
+      closePrintPreview();
+      byId('print-pages').replaceChildren();
+      document.body.classList.remove('print-ready');
+      teethLayout = null;
+      reportInfo = null;
+      if (annotatedUrl) URL.revokeObjectURL(annotatedUrl);
+      annotatedUrl = null;
+      byId('annotated').removeAttribute('src');
+      byId('annotated').hidden = true;
+      byId('annotated-empty').hidden = false;
+      byId('download').removeAttribute('href');
+      byId('download').hidden = true;
+      if (toothSegmentationUrl) URL.revokeObjectURL(toothSegmentationUrl);
+      toothSegmentationUrl = null;
+      byId('tooth-segmentation').removeAttribute('src');
+      byId('tooth-segmentation').hidden = true;
+      byId('tooth-segmentation-empty').hidden = false;
+      byId('download-tooth-segmentation').removeAttribute('href');
+      byId('download-tooth-segmentation').hidden = true;
+      if (additionalAnnotationsUrl) URL.revokeObjectURL(additionalAnnotationsUrl);
+      additionalAnnotationsUrl = null;
+      byId('additional-annotations').removeAttribute('src');
+      byId('additional-annotations').hidden = true;
+      byId('additional-annotations-empty').hidden = false;
+      byId('download-additional').removeAttribute('href');
+      byId('download-additional').hidden = true;
+      if (anatomyUrl) URL.revokeObjectURL(anatomyUrl);
+      anatomyUrl = null;
+      byId('anatomy').removeAttribute('src');
+      byId('anatomy').hidden = true;
+      byId('anatomy-empty').hidden = false;
+      byId('download-anatomy').removeAttribute('href');
+      byId('download-anatomy').hidden = true;
+      byId('anatomy-status').hidden = true;
+      byId('anatomy-status').textContent = '';
+      if (teethUrl) URL.revokeObjectURL(teethUrl);
+      teethUrl = null;
+      byId('teeth').removeAttribute('src');
+      byId('teeth').hidden = true;
+      byId('teeth-empty').hidden = false;
+      byId('download-teeth').removeAttribute('href');
+      byId('download-teeth').hidden = true;
+    }
+
+    function readImageBundle(buffer) {
+      // O endpoint usa ZIP_STORED: extração local sem dependências ou descompressão.
+      const view = new DataView(buffer);
+      const decoder = new TextDecoder();
+      const expected = new Set(['panoramica-anotada.png', 'panoramica-anatomia.png', 'panoramica-dentes.png']);
+      const layoutName = 'panoramica-impressao.json';
+      const images = new Map();
+      let layout = null;
+      let offset = 0;
+      while (offset + 30 <= view.byteLength && view.getUint32(offset, true) === 0x04034b50) {
+        const flags = view.getUint16(offset + 6, true);
+        const compression = view.getUint16(offset + 8, true);
+        const size = view.getUint32(offset + 18, true);
+        const nameLength = view.getUint16(offset + 26, true);
+        const extraLength = view.getUint16(offset + 28, true);
+        const start = offset + 30 + nameLength + extraLength;
+        const end = start + size;
+        if (flags !== 0 || compression !== 0 || end > view.byteLength) {
+          throw new Error('Formato de resposta de imagens inválido.');
+        }
+        const name = decoder.decode(new Uint8Array(buffer, offset + 30, nameLength));
+        const bytes = new Uint8Array(buffer, start, size);
+        if (name === layoutName && !layout) {
+          layout = JSON.parse(decoder.decode(bytes));
+        } else {
+          if (!expected.has(name) || images.has(name)) throw new Error('Imagens retornadas inválidas.');
+          images.set(name, new Blob([bytes], {type: 'image/png'}));
+        }
+        offset = end;
+      }
+      if (images.size !== expected.size) throw new Error('A API não retornou as três imagens.');
+      if (!layout || !Number.isSafeInteger(layout.width) || layout.width <= 0 ||
+          !Number.isSafeInteger(layout.height) || layout.height <= 0 || !Array.isArray(layout.cards) ||
+          layout.cards.some(card => typeof card.title !== 'string' ||
+            ![card.x, card.y, card.width, card.height].every(Number.isSafeInteger) ||
+            card.x < 0 || card.y < 0 || card.width <= 0 || card.height <= 0 ||
+            card.x + card.width > layout.width || card.y + card.height > layout.height)) {
+        throw new Error('Dados de impressão dos dentes inválidos.');
+      }
+      return {images, layout};
+    }
+
+    byId('file').addEventListener('change', () => {
+      if (originalUrl) URL.revokeObjectURL(originalUrl);
+      originalUrl = null;
+      byId('original').removeAttribute('src');
+      byId('original').hidden = true;
+      byId('original-empty').hidden = false;
+      clearResult();
+      const file = byId('file').files[0];
+      if (!file) return;
+      if (file.size > 10 * 1024 * 1024) {
+        setStatus('O arquivo excede o limite de 10 MiB.', true);
+        return;
+      }
+      originalUrl = URL.createObjectURL(file);
+      byId('original').src = originalUrl;
+      byId('original').hidden = false;
+      byId('original-empty').hidden = true;
+      setStatus('Imagem selecionada. Clique em Analisar imagem.');
+    });
+
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      await additionalModelCheck;
+      const file = byId('file').files[0];
+      if (!file || file.size > 10 * 1024 * 1024) {
+        setStatus('Selecione uma imagem de até 10 MiB.', true);
+        return;
+      }
+      clearResult();
+      const body = new FormData();
+      body.append('file', file);
+      const query = new URLSearchParams({
+        confidence: byId('confidence').value, fdi_confidence: byId('fdi-confidence').value,
+        imgsz: byId('imgsz').value,
+        include_additional: String(byId('additional').checked),
+        anatomy_confidence: byId('anatomy-confidence').value,
+        model_scope: byId('model-scope').value,
+        diagnose: String(byId('diagnose').checked)
+      });
+      const headers = {};
+      if (byId('key').value) headers['X-API-Key'] = byId('key').value;
+      const controls = Array.from(form.elements);
+      controls.forEach(control => control.disabled = true);
+      setProcessing(true);
+      setStatus('Analisando dentes, achados e estruturas anatômicas…');
+      try {
+        const response = await fetch(`/predict/images?${query}`, {method: 'POST', body, headers, cache: 'no-store'});
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(typeof error.detail === 'string' ? error.detail : `Requisição inválida (HTTP ${response.status}).`);
+        }
+        const {images, layout} = readImageBundle(await response.arrayBuffer());
+        showDiagnostics(layout.dental31_diagnostics);
+        const solo = response.headers.get('X-Model-Scope') === 'dental31';
+        byId('teeth-figure').hidden = solo;
+        teethLayout = layout;
+        annotatedUrl = URL.createObjectURL(images.get('panoramica-anotada.png'));
+        anatomyUrl = URL.createObjectURL(images.get('panoramica-anatomia.png'));
+        byId('annotated').src = annotatedUrl;
+        byId('annotated').hidden = false;
+        byId('annotated-empty').hidden = true;
+        byId('download').href = annotatedUrl;
+        byId('download').hidden = false;
+        byId('anatomy').src = anatomyUrl;
+        byId('anatomy').hidden = false;
+        byId('anatomy-empty').hidden = true;
+        byId('download-anatomy').href = anatomyUrl;
+        byId('download-anatomy').hidden = false;
+        teethUrl = URL.createObjectURL(images.get('panoramica-dentes.png'));
+        byId('teeth').src = teethUrl;
+        byId('teeth').hidden = false;
+        byId('teeth-empty').hidden = true;
+        byId('download-teeth').href = teethUrl;
+        byId('download-teeth').hidden = false;
+        const additionalStatus = response.headers.get('X-Additional-Status');
+        const additionalCount = response.headers.get('X-Additional-Count') || '0';
+        const additionalSummary = additionalStatus === 'completed'
+          ? additionalCount === '0'
+            ? ' Modelo adicional executado, sem detecções acima do score mínimo.'
+            : ` ${additionalCount} informações adicionais detectadas.`
+          : additionalStatus === 'failed'
+            ? ' O modelo adicional falhou; o resultado principal está disponível.'
+            : additionalStatus === 'not_configured'
+              ? ' Informações adicionais indisponíveis: modelo não configurado.'
+              : additionalStatus === 'disabled'
+                ? ' Informações adicionais desativadas nesta análise.'
+                : ' Status do modelo adicional indisponível.';
+        const anatomyCount = response.headers.get('X-Anatomy-Count') || '0';
+        byId('anatomy-status').textContent = additionalStatus === 'completed'
+          ? anatomyCount === '0'
+            ? 'Nenhum canal mandibular ou seio maxilar detectado acima do score selecionado. A radiografia foi preservada sem marcações.'
+            : `${anatomyCount} estruturas detectadas: seios maxilares em azul e canal mandibular em rosa.`
+          : additionalStatus === 'failed'
+            ? 'A análise anatômica falhou. Execute a análise novamente.'
+            : additionalStatus === 'disabled'
+              ? 'Análise anatômica desativada. Ative Informações adicionais e anatomia.'
+              : 'Análise anatômica indisponível: modelo adicional não configurado.';
+        byId('anatomy-status').hidden = false;
+        const anatomySummary = anatomyCount === '0'
+          ? ' Segunda imagem sem marcações anatômicas.'
+          : ` ${anatomyCount} estruturas anatômicas destacadas na segunda imagem.`;
+        const summary = solo
+          ? `Somente Dental31: ${additionalCount} detecções. Numeração FDI e recortes por dente não executados.`
+          : `${response.headers.get('X-Teeth-Count')} dentes e ${response.headers.get('X-Findings-Count')} achados detectados.${additionalSummary} Recortes disponíveis na terceira imagem.`;
+        setStatus(`${summary}${anatomySummary}`);
+        await Promise.all(['original', 'annotated', 'anatomy', 'teeth']
+          .filter(id => !byId(id).hidden).map(id => byId(id).decode()));
+        if (byId('teeth').naturalWidth !== layout.width || byId('teeth').naturalHeight !== layout.height) {
+          throw new Error('A prancha de dentes não corresponde aos dados de impressão.');
+        }
+        reportInfo = {
+          filename: file.name,
+          date: new Date().toLocaleString('pt-BR'),
+          summary
+        };
+        await initializeFeedback(layout);
+        byId('print-report').disabled = false;
+      } catch (error) {
+        clearResult();
+        setStatus(error.message || 'Falha ao conectar com a API.', true);
+      } finally {
+        setProcessing(false);
+        controls.forEach(control => control.disabled = false);
+        syncModelScope();
+      }
+    });
+
+    async function loadReviewerRanking() {
+      try {
+        const [rankingResponse, profilesResponse] = await Promise.all([
+          fetch('/reviewer-ranking', {cache: 'no-store'}),
+          fetch('/reviewer-profiles', {cache: 'no-store'})
+        ]);
+        if (!rankingResponse.ok) return;
+        const result = await rankingResponse.json();
+        const profileResult = profilesResponse.ok ? await profilesResponse.json() : {profiles: []};
+        const counts = Array.isArray(result.counts) ? result.counts.map(value => Number(value) || 0) : [];
+        const list = document.querySelector('.reviewer-list');
+        for (const oldCard of list.querySelectorAll('[data-dynamic-reviewer]')) oldCard.remove();
+        for (const profile of profileResult.profiles || []) {
+          const card = document.createElement('article');
+          card.className = 'reviewer-card';
+          card.dataset.dynamicReviewer = profile.username;
+          card.dataset.reviewCount = Number(profile.reviewed_images) || 0;
+          const image = document.createElement('img');
+          image.className = 'reviewer-photo'; image.src = profile.photo_url;
+          image.alt = profile.full_name; image.loading = 'lazy';
+          const info = document.createElement('div'); info.className = 'reviewer-info';
+          const name = document.createElement('h3'); name.textContent = profile.full_name;
+          const specialty = document.createElement('p');
+          specialty.textContent = `${profile.specialty} · ${profile.account_type_name}`;
+          const score = document.createElement('p'); score.className = 'reviewer-score';
+          const rank = document.createElement('span'); rank.className = 'reviewer-rank';
+          rank.dataset.reviewRank = '';
+          const separator = document.createTextNode(' · ');
+          const count = document.createElement('strong'); count.dataset.reviewCount = '';
+          const label = document.createElement('span'); label.dataset.reviewLabel = '';
+          score.append(rank, separator, count, document.createTextNode(' '), label);
+          info.append(name, specialty, score);
+          const links = document.createElement('div'); links.className = 'reviewer-links';
+          const socialLinks = [
+            [profile.instagram, 'Instagram', '<rect width="18" height="18" x="3" y="3" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor" stroke="none"/>'],
+            [profile.linkedin, 'LinkedIn', '<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6Z"/><path d="M2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/>']
+          ];
+          for (const [url, network, icon] of socialLinks) {
+            if (!url) continue;
+            const link = document.createElement('a'); link.className = 'reviewer-link';
+            link.href = url; link.target = '_blank'; link.rel = 'noopener noreferrer';
+            link.title = `${network} de ${profile.full_name}`;
+            link.setAttribute('aria-label', `Abrir ${network} de ${profile.full_name} em nova aba`);
+            link.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon}</svg>`;
+            links.append(link);
+          }
+          card.append(image, info, links); list.append(card);
+        }
+        const cards = [...list.querySelectorAll('.reviewer-card')];
+        const allCounts = cards.map(card => card.dataset.reviewerIndex !== undefined
+          ? counts[Number(card.dataset.reviewerIndex)] || 0
+          : Number(card.dataset.reviewCount) || 0);
+        const medals = {1: '\u{1F947}', 2: '\u{1F948}', 3: '\u{1F949}'};
+        const podiumClasses = {1: 'podium-gold', 2: 'podium-silver', 3: 'podium-bronze'};
+        cards.forEach((card, originalOrder) => card.dataset.rankingOrder = originalOrder);
+        for (let index = 0; index < cards.length; index += 1) {
+          const card = cards[index], count = allCounts[index];
+          const rank = count > 0 ? 1 + allCounts.filter(value => value > count).length : null;
+          const tied = count > 0 && allCounts.filter(value => value === count).length > 1;
+          card.classList.remove('podium-gold', 'podium-silver', 'podium-bronze');
+          if (podiumClasses[rank]) card.classList.add(podiumClasses[rank]);
+          card.querySelector('[data-review-count]').textContent = count;
+          card.querySelector('[data-review-rank]').textContent = rank
+            ? `${medals[rank] || ''} ${tied ? 'Empate em ' : ''}${rank}º lugar`.trim()
+            : 'Ainda sem revisão';
+          card.querySelector('[data-review-label]').textContent = count === 1
+            ? 'radiografia corrigida' : 'radiografias corrigidas';
+        }
+        cards.sort((left, right) => {
+          const leftCount = left.dataset.reviewerIndex !== undefined
+            ? counts[Number(left.dataset.reviewerIndex)] || 0 : Number(left.dataset.reviewCount) || 0;
+          const rightCount = right.dataset.reviewerIndex !== undefined
+            ? counts[Number(right.dataset.reviewerIndex)] || 0 : Number(right.dataset.reviewCount) || 0;
+          return rightCount - leftCount || Number(left.dataset.rankingOrder) - Number(right.dataset.rankingOrder);
+        });
+        list.append(...cards);
+      } catch (_) { /* Os cards permanecem disponíveis mesmo sem o ranking. */ }
+    }
+
+    loadReviewerRanking();
+
+    async function loadAdministratorStatistics() {
+      try {
+        const response = await fetch('/administrator-statistics', {cache: 'no-store'});
+        if (!response.ok) return;
+        const counts = await response.json();
+        document.querySelector('[data-admin-adult]').textContent = Number(counts.adult) || 0;
+        document.querySelector('[data-admin-child]').textContent = Number(counts.child) || 0;
+      } catch (_) { /* O card continua disponível mesmo sem as contagens. */ }
+    }
+
+    loadAdministratorStatistics();
+
+    async function loadTrainingProgress() {
+      try {
+        const response = await fetch('/training-progress', {cache: 'no-store'});
+        if (!response.ok) return;
+        const progress = await response.json();
+        const completed = Math.max(0, Number(progress.completed) || 0);
+        const target = Math.max(1, Number(progress.target) || 300);
+        const remaining = Math.max(0, Number(progress.remaining) || 0);
+        const percentage = Math.max(0, Math.min(100, Number(progress.percentage) || 0));
+        document.querySelector('[data-training-completed]').textContent = completed;
+        document.querySelector('.milestone-number span').textContent = `/ ${target}`;
+        document.querySelector('[data-training-remaining]').textContent = remaining;
+        document.querySelector('[data-training-percentage]').textContent = `${percentage.toLocaleString('pt-BR')}%`;
+        const bar = document.querySelector('.milestone-progress');
+        bar.setAttribute('aria-valuemax', String(target));
+        bar.setAttribute('aria-valuenow', String(Math.min(completed, target)));
+        requestAnimationFrame(() => {
+          document.querySelector('.milestone-progress-fill').style.width = `${percentage}%`;
+        });
+      } catch (_) { /* O marco continua visível mesmo se o contador estiver indisponível. */ }
+    }
+
+    loadTrainingProgress();
+
+    const wishlistDialog = byId('wishlist-dialog');
+    const wishlistContent = byId('wishlist-content');
+    const wishlistStatus = byId('wishlist-status');
+    let wishlistSession = null;
+
+    function setWishlistStatus(message, kind = '') {
+      wishlistStatus.textContent = message;
+      wishlistStatus.className = kind;
+    }
+
+    async function refreshWishlistSession() {
+      try {
+        const response = await fetch('/admin/api/session', {cache: 'no-store'});
+        if (!response.ok) throw new Error();
+        wishlistSession = await response.json();
+        byId('wishlist-submit').textContent = 'Publicar desejo';
+        byId('wishlist-wall-link').hidden = false;
+        const savedDraft = sessionStorage.getItem('panoramica-wish-draft');
+        if (savedDraft && !wishlistContent.value) {
+          wishlistContent.value = savedDraft;
+          byId('wishlist-count').textContent = String(savedDraft.length);
+          setWishlistStatus('Seu desejo foi recuperado. Clique em Publicar desejo para finalizar.', 'success');
+        } else {
+          setWishlistStatus(`Você publicará como ${wishlistSession.username}.`);
+        }
+      } catch (_) {
+        wishlistSession = null;
+        byId('wishlist-submit').textContent = 'Cadastrar e publicar';
+        byId('wishlist-wall-link').hidden = true;
+        setWishlistStatus('Você poderá escrever agora. O cadastro será solicitado apenas para finalizar a publicação.');
+      }
+    }
+
+    byId('wishlist-open').addEventListener('click', async () => {
+      wishlistDialog.showModal();
+      await refreshWishlistSession();
+      wishlistContent.focus();
+    });
+    byId('wishlist-close').addEventListener('click', () => wishlistDialog.close());
+    wishlistDialog.addEventListener('click', event => {
+      if (event.target === wishlistDialog) wishlistDialog.close();
+    });
+    wishlistContent.addEventListener('input', () => {
+      byId('wishlist-count').textContent = wishlistContent.value.length;
+    });
+    byId('wishlist-form').addEventListener('submit', async event => {
+      event.preventDefault();
+      const content = wishlistContent.value.trim();
+      if (content.length < 3) {
+        setWishlistStatus('Escreva um pouco mais sobre o seu desejo.', 'error'); return;
+      }
+      if (!wishlistSession) {
+        sessionStorage.setItem('panoramica-wish-draft', content);
+        location.assign('/cadastro?wish=1');
+        return;
+      }
+      const button = byId('wishlist-submit');
+      button.disabled = true; button.textContent = 'Publicando...';
+      try {
+        const response = await fetch('/admin/api/wishes', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json', 'X-Panoramica-CSRF': wishlistSession.csrf},
+          body: JSON.stringify({content})
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(result.detail || 'Não foi possível publicar o desejo.');
+        sessionStorage.removeItem('panoramica-wish-draft');
+        wishlistContent.value = ''; byId('wishlist-count').textContent = '0';
+        setWishlistStatus('Desejo publicado. Você já pode acompanhá-lo no mural.', 'success');
+      } catch (error) {
+        setWishlistStatus(error.message || 'Não foi possível publicar o desejo.', 'error');
+      } finally {
+        button.disabled = false; button.textContent = 'Publicar desejo';
+      }
+    });
+
+    if (new URLSearchParams(location.search).get('wishlist') === 'published') {
+      wishlistDialog.showModal();
+      refreshWishlistSession().then(() => setWishlistStatus(
+        'Cadastro concluído e desejo publicado com sucesso.', 'success'
+      ));
+    } else if (location.hash === '#wishlist') {
+      wishlistDialog.showModal();
+      refreshWishlistSession().then(() => wishlistContent.focus());
+    }
+
+    window.addEventListener('pagehide', () => {
+      if (originalUrl) URL.revokeObjectURL(originalUrl);
+      if (annotatedUrl) URL.revokeObjectURL(annotatedUrl);
+      if (toothSegmentationUrl) URL.revokeObjectURL(toothSegmentationUrl);
+      if (additionalAnnotationsUrl) URL.revokeObjectURL(additionalAnnotationsUrl);
+      if (anatomyUrl) URL.revokeObjectURL(anatomyUrl);
+      if (teethUrl) URL.revokeObjectURL(teethUrl);
+    });
+  </script>
+  <script src="/editor.js"></script>
+</body>
+</html>

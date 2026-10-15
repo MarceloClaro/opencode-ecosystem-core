@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Revisão &amp; Autômatos celulares | Laboratório local</title>
+<style>
+  :root{--bg:#0a1119;--panel:#0d1a24;--line:#1d3242;--txt:#e2e8f0;--mut:#9fb1c5;--acc:#2dd4bf;--acc2:#5eead4;--warn:#fbbf24;--err:#f87171}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.55 system-ui,-apple-system,sans-serif;padding-bottom:44px}
+  header.top{position:sticky;top:0;z-index:5;display:flex;gap:16px;align-items:center;flex-wrap:wrap;
+    padding:12px 20px;background:#071018;border-bottom:1px solid var(--line)}
+  header.top h1{font-size:15px;margin:0;color:var(--acc2);letter-spacing:.02em}
+  nav a{color:var(--mut);text-decoration:none;font-size:13px;padding:4px 8px;border-radius:6px}
+  nav a:hover{color:#fff;background:#132532}
+  nav a[aria-current]{color:#04121a;background:var(--acc)}
+  main{max-width:1120px;margin:0 auto;padding:22px 20px}
+  .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+  section.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px}
+  section.panel h2{font-size:14px;margin:0 0 12px;display:flex;align-items:center;gap:8px;color:#fff}
+  .badge{font:700 10px/1 system-ui;padding:4px 7px;border-radius:999px;letter-spacing:.06em}
+  .badge.real{background:#0f3d36;color:var(--acc2);border:1px solid #1d6d63}
+  .badge.mock{background:#3d2f0f;color:var(--warn);border:1px solid #6d5a1d}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{text-align:left;padding:7px 8px;border-bottom:1px solid #16283a;vertical-align:top}
+  th{color:var(--mut);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  pre{background:#060d14;border:1px solid #16283a;border-radius:8px;padding:12px;
+    overflow:auto;max-height:340px;font-size:12px;color:#b8e6df;margin:10px 0 0}
+  label{display:block;font-size:12px;color:var(--mut);margin:10px 0 4px}
+  input,select,button{font:inherit;padding:7px 9px;background:#08131c;color:var(--txt);
+    border:1px solid var(--line);border-radius:7px;min-height:36px}
+  input,select{width:100%}
+  button{cursor:pointer;background:#132532;border-color:#2b4b5e}
+  button.primary{background:var(--acc);color:#04121a;border-color:var(--acc);font-weight:650}
+  button:disabled{opacity:.5;cursor:not-allowed}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}
+  .row>div{flex:1 1 120px}
+  .muted{color:var(--mut);font-size:12px}
+  .stat{display:flex;gap:18px;flex-wrap:wrap;margin:4px 0 0}
+  .stat div{background:#08131c;border:1px solid var(--line);border-radius:8px;padding:9px 12px;min-width:110px}
+  .stat b{display:block;font-size:19px;color:var(--acc2);font-variant-numeric:tabular-nums}
+  .stat span{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.05em}
+  .arch{display:grid;grid-template-columns:repeat(8,1fr);gap:6px;margin-top:6px}
+  .tooth{border-radius:7px;padding:8px 4px;text-align:center;font:650 12px/1.2 ui-monospace,monospace;border:1px solid #34506e}
+  .tooth small{display:block;font-size:9px;font-weight:600;opacity:.85;margin-top:3px}
+  .s-H{background:#0f2a24;border-color:#1d6d63;color:#9fe8dc}
+  .s-C{background:#3a1414;border-color:#7f1d1d;color:#fca5a5}
+  .s-F{background:#1a2233;border-color:#34506e;color:#93c5fd}
+  .s-M{background:#242424;border-color:#555;color:#9ca3af}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;margin:12px 0 0;font-size:12px}
+  .legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-2px;border:1px solid #34506e}
+  .hist{display:flex;gap:10px;align-items:flex-end;height:120px;margin-top:10px}
+  .hist .col{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px}
+  .hist .col i{display:block;width:100%;background:linear-gradient(180deg,var(--acc2),#0f6b60);border-radius:4px 4px 0 0;min-height:2px}
+  .ok{color:var(--acc2)} .bad{color:var(--err)} .warn{color:var(--warn)}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>Panoramica AI · Laboratório local</h1>
+  <nav>
+    <a href="/">Análise</a>
+    <a href="/review" aria-current="page">Revisão &amp; CA</a>
+    <a href="/cadastro">Cadastro &amp; Treino</a>
+    <a href="/validacao">Validação</a>
+    <a href="/docs">API / JSON</a>
+  </nav>
+</header>
+<main>
+  <div class="grid">
+    <section class="panel">
+      <h2>Autômato celular de progressão H→C <span class="badge real">REAL</span></h2>
+      <p class="muted">Roda <code>odonto/local/odontoca/ca.py</code> neste servidor. Regra <b>prior</b> = heurística declarada; <b>fitted</b> = regra ajustada nas transições H→C reais do <code>Table_S1.xlsx</code>. Nível: <b>descritivo, não causal</b>.</p>
+      <div class="row">
+        <div style="flex:0 0 120px"><label for="ca-rule">regra</label>
+          <select id="ca-rule"><option value="prior">prior</option><option value="fitted">fitted</option></select></div>
+        <div style="flex:0 0 90px"><label for="ca-steps">passos</label><input id="ca-steps" type="number" value="3" min="1" max="20"></div>
+        <div style="flex:0 0 90px"><label for="ca-seed">seed</label><input id="ca-seed" type="number" value="7"></div>
+        <div style="flex:0 0 100px"><label for="ca-teeth">n_teeth</label><input id="ca-teeth" type="number" value="32" min="1" max="32"></div>
+        <div style="flex:0 0 150px"><button id="ca-go" class="primary">Simular</button></div>
+      </div>
+      <div class="stat" id="ca-stats"></div>
+      <p class="muted" id="ca-note">carregando cenário reprodutível…</p>
+      <div class="hist" id="ca-hist"></div>
+      <div class="arch" id="ca-arch"></div>
+      <div class="legend">
+        <span><i class="s-H"></i>H — saudável</span>
+        <span><i class="s-C"></i>C — cárie (onset)</span>
+        <span><i class="s-F"></i>F — restaurado</span>
+        <span><i class="s-M"></i>M — perdido</span>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Modelos reais no disco <span class="badge real">REAL</span></h2>
+      <p class="muted">Relatórios lidos de <code>odonto/local/outputs/*/report.json</code>. <b>Comparação empírica</b> — não é desempenho clínico validado.</p>
+      <div id="md-body"><p class="muted">carregando…</p></div>
+    </section>
+  </div>
+</main>
+<script>
+const $=(s)=>document.querySelector(s);
+const esc=(v)=>String(v??'').replace(/[&<>"]/g,(c)=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const n4=(v)=>v==null?'—':Number(v).toFixed(4);
+async function j(url,opts){const r=await fetch(url,{cache:'no-store',...(opts||{})});let d=null;try{d=await r.json()}catch(_){}
+  return{ok:r.ok,status:r.status,data:d};}
+
+function renderResult(d){
+  $('#ca-note').innerHTML=`<span class="muted">${esc(d.evidence||'')} · <b>${esc(d.claim_level)}</b></span>`;
+  $('#ca-stats').innerHTML=[
+    `<div><b>${esc(d.rule)}</b><span>regra</span></div>`,
+    `<div><b>${d.steps}</b><span>passos</span></div>`,
+    `<div><b>${d.n_teeth}</b><span>dentes</span></div>`,
+    `<div><b>${d.seed}</b><span>seed</span></div>`,
+  ].join('');
+  const hist=d.history||[];
+  const maxP=Math.max(0.0001,...hist.map(h=>Number(h.prevalence_caries)||0));
+  $('#ca-hist').innerHTML=hist.map(h=>{
+    const pct=Math.round(100*(Number(h.prevalence_caries)||0));
+    const hp=Math.max(2,Math.round(100*(Number(h.prevalence_caries)||0)/maxP));
+    return `<div class="col"><span class="muted">${pct}%</span><i style="height:${hp}%"></i><span class="muted">t${h.step}</span></div>`;
+  }).join('');
+  $('#ca-arch').innerHTML=(d.final||[]).map(t=>{
+    const s=esc(t.Status_Tooth);
+    return `<div class="tooth s-${s}">${esc(t.tooth_fdi)}<small>${s}</small></div>`;
+  }).join('');
+}
+async function loadDemo(){
+  const r=await j('/api/ca/demo');
+  if(!r.ok||!r.data){$('#ca-note').innerHTML='<span class="bad">falha ao ler /api/ca/demo</span>';return;}
+  renderResult(r.data);
+}
+$('#ca-go').onclick=async()=>{
+  const payload={rule:$('#ca-rule').value,steps:Number($('#ca-steps').value||3),
+    seed:Number($('#ca-seed').value||0),n_teeth:Number($('#ca-teeth').value||32)};
+  $('#ca-go').disabled=true;$('#ca-note').textContent='simulando (real)…';
+  const r=await j('/api/ca/simulate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+  $('#ca-go').disabled=false;
+  if(!r.ok||!r.data){$('#ca-note').innerHTML=`<span class="bad">${esc(r.data&&r.data.detail||('HTTP '+r.status))}</span>`;return;}
+  renderResult(r.data);
+};
+
+async function loadModels(){
+  const r=await j('/api/models');
+  if(!r.ok||!r.data){$('#md-body').innerHTML='<span class="bad">falha ao ler /api/models</span>';return;}
+  const labs=r.data.laboratories||[];
+  $('#md-body').innerHTML=`<p class="muted">${esc(r.data.disclaimer||'')}</p>`+labs.map(l=>{
+    const m=l.metrics||{};const ci=m.ci95_auroc||{};
+    const ciTxt=(ci.lo!=null&&ci.hi!=null)?` [${Number(ci.lo).toFixed(3)}–${Number(ci.hi).toFixed(3)}]`:'';
+    return `<h4 style="margin:12px 0 4px;color:#fff">${esc(l.label||l.lab)}</h4>
+      <table><tbody>
+      <tr><td>AUROC</td><td class="num">${n4(m.auroc)}${ciTxt}</td></tr>
+      <tr><td>AUPRC</td><td class="num">${n4(m.auprc)}</td></tr>
+      <tr><td>Brier</td><td class="num">${n4(m.brier)}</td></tr>
+      <tr><td>linhas / eventos</td><td class="num">${l.n_rows??'—'} / ${l.events??'—'}</td></tr>
+      <tr><td>folds / seed</td><td class="num">${l.n_folds??'—'} / ${l.seed??'—'}</td></tr>
+      </tbody></table>`;
+  }).join('');
+}
+loadDemo();
+loadModels();
+</script>
+</body>
+</html>

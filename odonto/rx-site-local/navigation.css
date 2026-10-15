@@ -1,0 +1,21 @@
+html, body { max-width: 100%; overflow-x: clip; }
+panoramica-nav { display: block; height: 64px; color-scheme: dark; }
+.pa-topbar { box-sizing: border-box; position: fixed; inset: 0 0 auto; z-index: 100; width: auto; min-height: 64px; border-bottom: 1px solid #29384a; background: rgb(10 17 25 / .97); box-shadow: 0 8px 28px rgb(0 0 0 / .24); backdrop-filter: blur(16px); }
+.pa-topbar-inner { box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 20px; width: min(1544px, calc(100% - 40px)); min-height: 64px; margin: 0 auto; }
+.pa-brand { display: flex; flex: 0 0 auto; align-items: center; gap: 10px; color: #f8fafc; font: 760 17px/1 system-ui, sans-serif; text-decoration: none; }
+.pa-brand-mark { box-sizing: border-box; display: grid; place-items: center; width: 32px; height: 32px; border: 1px solid #2dd4bf; border-radius: 7px; background: #0d302f; color: #5eead4; font-size: 11px; box-shadow: 0 0 18px rgb(45 212 191 / .14); }
+.pa-nav-scroll { min-width: 0; overflow-x: auto; scrollbar-width: thin; scrollbar-color: #3d5268 transparent; }
+.pa-nav { box-sizing: border-box; display: flex; align-items: center; justify-content: flex-end; gap: 4px; width: max-content; min-width: 100%; padding: 4px; border: 1px solid #29384a; border-radius: 8px; background: #101a27; box-shadow: 0 8px 28px rgb(0 0 0 / .18); }
+.pa-nav a { box-sizing: border-box; flex: 0 0 auto; padding: 8px 12px; border-radius: 6px; color: #9fb1c5; font: 650 14px/1.25 system-ui, sans-serif; text-decoration: none; white-space: nowrap; }
+.pa-nav a:hover { background: #172538; color: #f8fafc; }
+.pa-nav a[aria-current="page"] { background: #17343a; color: #5eead4; box-shadow: inset 0 0 0 1px rgb(45 212 191 / .18); }
+.pa-nav-user { flex: 0 1 auto; max-width: 180px; overflow: hidden; padding: 0 8px; color: #f8fafc; font: 650 13px/1.25 system-ui, sans-serif; text-overflow: ellipsis; white-space: nowrap; }
+.pa-nav-logout { box-sizing: border-box; min-height: 34px; margin-left: 2px; padding: 7px 11px; border: 1px solid #475569; border-radius: 6px; background: #17202b; color: #f8fafc; font: 650 14px/1 system-ui, sans-serif; cursor: pointer; }
+.pa-nav-logout:hover, .pa-nav-logout:focus-visible { border-color: #f87171; background: #3f171d; color: #fecaca; }
+@media (max-width: 720px) {
+  .pa-topbar-inner { width: calc(100% - 24px); gap: 10px; }
+  .pa-brand > span:last-child { display: none; }
+  .pa-nav-scroll { flex: 1; }
+  .pa-nav { justify-content: flex-start; min-width: max-content; }
+  .pa-nav-user { display: none; }
+}

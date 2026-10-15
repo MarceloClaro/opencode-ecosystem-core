@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cadastro — datasets e treinamento real | Laboratório local</title>
+<style>
+  :root{--bg:#0a1119;--panel:#0d1a24;--line:#1d3242;--txt:#e2e8f0;--mut:#9fb1c5;--acc:#2dd4bf;--acc2:#5eead4;--warn:#fbbf24;--err:#f87171}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.55 system-ui,-apple-system,sans-serif;padding-bottom:44px}
+  header.top{position:sticky;top:0;z-index:5;display:flex;gap:16px;align-items:center;flex-wrap:wrap;
+    padding:12px 20px;background:#071018;border-bottom:1px solid var(--line)}
+  header.top h1{font-size:15px;margin:0;color:var(--acc2);letter-spacing:.02em}
+  nav a{color:var(--mut);text-decoration:none;font-size:13px;padding:4px 8px;border-radius:6px}
+  nav a:hover{color:#fff;background:#132532}
+  nav a[aria-current]{color:#04121a;background:var(--acc)}
+  main{max-width:1120px;margin:0 auto;padding:22px 20px}
+  .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+  section.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px}
+  section.panel h2{font-size:14px;margin:0 0 12px;display:flex;align-items:center;gap:8px;color:#fff}
+  .badge{font:700 10px/1 system-ui;padding:4px 7px;border-radius:999px;letter-spacing:.06em}
+  .badge.real{background:#0f3d36;color:var(--acc2);border:1px solid #1d6d63}
+  .badge.mock{background:#3d2f0f;color:var(--warn);border:1px solid #6d5a1d}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{text-align:left;padding:7px 8px;border-bottom:1px solid #16283a;vertical-align:top}
+  th{color:var(--mut);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  pre{background:#060d14;border:1px solid #16283a;border-radius:8px;padding:12px;
+    overflow:auto;max-height:340px;font-size:12px;color:#b8e6df;margin:10px 0 0}
+  label{display:block;font-size:12px;color:var(--mut);margin:10px 0 4px}
+  input,select,button{font:inherit;padding:7px 9px;background:#08131c;color:var(--txt);
+    border:1px solid var(--line);border-radius:7px;min-height:36px}
+  input,select{width:100%}
+  button{cursor:pointer;background:#132532;border-color:#2b4b5e}
+  button.primary{background:var(--acc);color:#04121a;border-color:var(--acc);font-weight:650}
+  button:disabled{opacity:.5;cursor:not-allowed}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}
+  .row>div{flex:1 1 120px}
+  .muted{color:var(--mut);font-size:12px}
+  .bar{height:10px;background:#0b1a24;border:1px solid var(--line);border-radius:999px;overflow:hidden;margin-top:10px}
+  .bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--acc),var(--acc2));transition:width .3s}
+  .stat{display:flex;gap:18px;flex-wrap:wrap;margin:4px 0 0}
+  .stat div{background:#08131c;border:1px solid var(--line);border-radius:8px;padding:9px 12px;min-width:110px}
+  .stat b{display:block;font-size:19px;color:var(--acc2);font-variant-numeric:tabular-nums}
+  .stat span{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.05em}
+  .ok{color:var(--acc2)} .bad{color:var(--err)} .warn{color:var(--warn)}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>Panoramica AI · Laboratório local</h1>
+  <nav>
+    <a href="/">Análise</a>
+    <a href="/review">Revisão &amp; CA</a>
+    <a href="/cadastro" aria-current="page">Cadastro &amp; Treino</a>
+    <a href="/validacao">Validação</a>
+    <a href="/docs">API / JSON</a>
+  </nav>
+</header>
+<main>
+  <div class="grid">
+    <section class="panel">
+      <h2>Datasets locais <span class="badge real">REAL</span></h2>
+      <p class="muted">Inventário real lido de <code>odonto/local/datasets</code> + <code>Table_S1.xlsx</code>. SHA-256 conferido contra o manuscrito OdontoCA.</p>
+      <div class="stat" id="ds-stats"></div>
+      <table><thead><tr><th>dataset</th><th>tipo</th><th class="num">bytes</th><th class="num">linhas</th><th>sha256</th></tr></thead>
+      <tbody id="ds-body"><tr><td colspan="5" class="muted">carregando…</td></tr></tbody></table>
+    </section>
+
+    <section class="panel">
+      <h2>Amostra real <span class="badge real">REAL</span></h2>
+      <div class="row">
+        <div><label for="s-name">dataset</label><select id="s-name"></select></div>
+        <div style="flex:0 0 90px"><label for="s-n">n</label><input id="s-n" type="number" value="5" min="1" max="50"></div>
+        <div style="flex:0 0 120px"><button id="s-go" class="primary">Ver amostra</button></div>
+      </div>
+      <div id="s-out"><p class="muted">Escolha um dataset e clique em "Ver amostra".</p></div>
+    </section>
+
+    <section class="panel">
+      <h2>Treinamento real (scikit-learn) <span class="badge real">REAL</span></h2>
+      <p class="muted">Roda neste servidor, em thread, sobre os dados locais. Artefatos reais em <code>outputs/_jobs/&lt;id&gt;</code>. Nível de alegação: <b>comparação empírica</b> — não é desempenho clínico validado.</p>
+      <div class="row">
+        <div><label for="t-dataset">dataset</label><select id="t-dataset"></select></div>
+        <div style="flex:0 0 130px"><label for="t-task">tarefa</label>
+          <select id="t-task"><option value="default">default</option><option value="onset">onset (Table_S1)</option></select></div>
+        <div style="flex:0 0 80px"><label for="t-folds">folds</label><input id="t-folds" type="number" value="5" min="2" max="10"></div>
+        <div style="flex:0 0 80px"><label for="t-seed">seed</label><input id="t-seed" type="number" value="0"></div>
+        <div style="flex:0 0 130px"><label for="t-rows">subamostra</label><input id="t-rows" type="number" placeholder="(todas)" min="40"></div>
+        <div style="flex:0 0 130px"><button id="t-go" class="primary">Treinar</button></div>
+      </div>
+      <div class="bar"><i id="t-bar"></i></div>
+      <p class="muted" id="t-status">nenhum job iniciado.</p>
+      <div class="stat" id="t-stats"></div>
+      <div id="t-report"></div>
+    </section>
+  </div>
+</main>
+<script>
+const $=(s)=>document.querySelector(s);
+const esc=(v)=>String(v??'').replace(/[&<>"]/g,(c)=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const human=(b)=>b==null?'—':b<1024?`${b} B`:b<1048576?`${(b/1024).toFixed(1)} KB`:`${(b/1048576).toFixed(1)} MB`;
+const sha=(s)=>s?`${s.slice(0,10)}…${s.slice(-6)}`:'—';
+async function j(url,opts){const r=await fetch(url,{cache:'no-store',...(opts||{})});let d=null;try{d=await r.json()}catch(_){}
+  return{ok:r.ok,status:r.status,data:d};}
+
+let DATASETS=[];
+function renderDatasets(list){
+  DATASETS=list;
+  const tot=list.reduce((a,d)=>a+(d.bytes||0),0);
+  const okSrc=list.filter(d=>d.sha256_ok===true).length;
+  $('#ds-stats').innerHTML=[
+    `<div><b>${list.length}</b><span>datasets</span></div>`,
+    `<div><b>${human(tot)}</b><span>total</span></div>`,
+    `<div><b>${list.filter(d=>d.kind==='dir').length}</b><span>diretorios</span></div>`,
+    `<div><b>${okSrc}</b><span>hash conferido</span></div>`,
+  ].join('');
+  $('#ds-body').innerHTML=list.map(d=>{
+    const bad=d.sha256_ok===false;
+    return `<tr><td><code>${esc(d.name)}</code></td><td>${esc(d.kind)}${d.files?` · ${d.files} arq`:''}</td>
+      <td class="num">${human(d.bytes)}</td><td class="num">${d.rows??(d.images??'—')}</td>
+      <td>${d.sha256?`<span class="${bad?'bad':'ok'}">${sha(d.sha256)}</span>`:'—'}</td></tr>`;
+  }).join('');
+  const opts=list.map(d=>`<option value="${esc(d.name)}">${esc(d.name)}</option>`).join('');
+  $('#s-name').innerHTML=opts;
+  $('#t-dataset').innerHTML=opts;
+  $('#t-dataset').value='Table_S1.xlsx';
+}
+async function loadDatasets(){
+  const r=await j('/api/datasets');
+  if(!r.ok||!r.data){$('#ds-body').innerHTML='<tr><td colspan="5" class="bad">falha ao ler /api/datasets</td></tr>';return;}
+  renderDatasets(r.data.datasets||[]);
+}
+$('#s-go').onclick=async()=>{
+  const name=$('#s-name').value,n=$('#s-n').value||5;
+  $('#s-out').innerHTML='<p class="muted">lendo…</p>';
+  const r=await j(`/api/datasets/sample?name=${encodeURIComponent(name)}&n=${encodeURIComponent(n)}`);
+  if(!r.ok){$('#s-out').innerHTML=`<p class="bad">${esc(r.data&&r.data.detail||('HTTP '+r.status))}</p>`;return;}
+  const d=r.data;
+  const head=d.columns.map(c=>`<th>${esc(c)}</th>`).join('');
+  const body=d.rows.map(row=>`<tr>${d.columns.map(c=>`<td>${esc(row[c])}</td>`).join('')}</tr>`).join('');
+  $('#s-out').innerHTML=`<p class="muted">${d.n} linha(s) reais de <code>${esc(d.name)}</code> · ${d.columns.length} colunas</p>
+    <table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table>`;
+};
+
+let POLL=null;
+function fmtMetrics(rep){
+  const m=(rep.models||{}).ensemble||{};
+  const g=(k)=>m[k]==null?'—':Number(m[k]).toFixed(4);
+  const ci=m.ci95_auroc||(m.ci95&&m.ci95.auroc)||{};
+  const ciTxt=ci.lo?(` [${Number(ci.lo).toFixed(3)}–${Number(ci.hi).toFixed(3)}]`):'';
+  return `<div class="stat">
+    <div><b>${g('auroc')}</b><span>auroc${ciTxt}</span></div>
+    <div><b>${g('auprc')}</b><span>auprc</span></div>
+    <div><b>${g('brier')}</b><span>brier</span></div>
+    <div><b>${rep.n_rows??'—'}</b><span>linhas</span></div>
+    <div><b>${rep.events??'—'}</b><span>eventos</span></div>
+    <div><b>${esc(rep.claim_level||'')}</b><span>alegacao</span></div>
+  </div>
+  <pre>${esc(JSON.stringify(rep.models||{},null,1))}</pre>`;
+}
+$('#t-go').onclick=async()=>{
+  const payload={dataset:$('#t-dataset').value,task:$('#t-task').value,
+    folds:Number($('#t-folds').value||5),seed:Number($('#t-seed').value||0)};
+  const rows=Number($('#t-rows').value||0); if(rows>=40) payload.sample_rows=rows;
+  $('#t-go').disabled=true;$('#t-report').innerHTML='';$('#t-stats').innerHTML='';
+  $('#t-status').textContent='iniciando job real…';
+  const r=await j('/api/train',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+  if(!r.ok){$('#t-status').innerHTML=`<span class="bad">${esc(r.data&&r.data.detail||('HTTP '+r.status))}</span>`;$('#t-go').disabled=false;return;}
+  const id=r.data.job.id;
+  if(POLL) clearInterval(POLL);
+  POLL=setInterval(async()=>{
+    const s=await j(`/api/train/status?id=${encodeURIComponent(id)}`);
+    if(!s.ok||!s.data){return;}
+    const st=s.data,p=st.progress||{};
+    $('#t-bar').style.width=`${p.percentage||0}%`;
+    $('#t-stats').innerHTML=`<div><b>${p.completed}/${p.total}</b><span>estagios</span></div>
+      <div><b>${esc(st.stage)}</b><span>etapa</span></div>
+      <div><b>${st.n_rows??'—'}</b><span>linhas</span></div>
+      <div><b>${st.subsampled?'sim':'nao'}</b><span>subamostra</span></div>`;
+    if(st.state==='done'){
+      clearInterval(POLL);POLL=null;$('#t-go').disabled=false;
+      $('#t-status').innerHTML=`<span class="ok">concluido (real)</span> · artefatos em <code>${esc(st.out_dir||'')}</code>`;
+      if(st.report) $('#t-report').innerHTML=fmtMetrics(st.report);
+    } else if(st.state==='error'){
+      clearInterval(POLL);POLL=null;$('#t-go').disabled=false;
+      $('#t-status').innerHTML=`<span class="bad">erro: ${esc(st.error||'')}</span>`;
+    } else {
+      $('#t-status').textContent=`executando… (${p.percentage||0}%)`;
+    }
+  },700);
+};
+loadDatasets();
+</script>
+</body>
+</html>
