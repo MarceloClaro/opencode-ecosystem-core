@@ -1,0 +1,44 @@
+% R911: gerado; alterar dados e gerador, não esta prancha.
+
+\refstepcounter{figure}\label{fig:AR12-mental}
+\noindent{\large\sffamily\bfseries\color{navy}AR12 · Mapa mental}\par\smallskip
+\noindent\textbf{Fronteiras MCP e conectores do host}\par
+\noindent\textit{Onde termina uma chamada local e começa a operação de um conector externo?}\par\medskip
+\begin{center}
+
+\tikzset{
+ atlasnode/.style={draw=steel,fill=blueBg,rounded corners=2mm,align=center,
+  text width=4cm,inner sep=5pt,font=\fontsize{9.5}{11.8}\selectfont,text=textmain},
+ atlasroot/.style={atlasnode,fill=navy,text=white,text width=2.8cm,font=\fontsize{10}{12}\selectfont\bfseries},
+ atlasdecision/.style={diamond,aspect=2.1,draw=amber,fill=amberBg,align=center,
+  text width=3cm,inner sep=2pt,font=\fontsize{9.5}{11.5}\selectfont},
+ atlascall/.style={-Stealth,draw=steel,thick},
+ atlasevent/.style={-Stealth,draw=violet,dashed,thick},
+ atlasdata/.style={-Stealth,draw=teal,densely dotted,thick},
+ atlasstructure/.style={draw=slate,thick},
+ atlasboundary/.style={-Stealth,draw=amber,dash dot,thick},
+ atlasedgelabel/.style={fill=papel,inner sep=1.3pt,font=\fontsize{9}{10}\selectfont}
+}
+
+\begin{tikzpicture}
+\node[atlasroot] (root) at (0,0) {AR12\\Fronteiras MCP e conectores do host};
+
+\node[atlasnode] (branch0) at (-4.5,2.5) {\textbf{Fachada}\\Schema de entrada\\Cancelamento\\Serialização};
+\draw[atlasstructure] (root) -- (branch0);
+
+\node[atlasnode] (branch1) at (4.5,2.5) {\textbf{Primário}\\Validação de ação\\Serviço específico\\Observação local};
+\draw[atlasstructure] (root) -- (branch1);
+
+\node[atlasnode] (branch2) at (-4.5,-2.5) {\textbf{Host externo}\\Ticket de operação\\Autenticação do host\\Resposta vinculada};
+\draw[atlasstructure] (root) -- (branch2);
+
+\node[atlasnode] (branch3) at (4.5,-2.5) {\textbf{Alternativa local}\\Allowlist estreita\\Executável presente\\Código de saída};
+\draw[atlasstructure] (root) -- (branch3);
+\end{tikzpicture}
+\end{center}
+{\small\textbf{Figura \thefigure.} Mapa mental --- Fronteiras MCP e conectores do host}\par\smallskip
+\noindent\textbf{Como funciona e por quê.} Parta do centro e leia os quatro ramos. As linhas associam conceitos; não representam chamadas de funções.\par
+\noindent\textbf{Justificativa.} No ramo de conector externo, request produz awaiting\_host. O host autenticado deve chamar a ferramenta declarada e devolver resposta ligada ao hash da requisição. A aceitação valida esse vínculo e registra host\_reported. O ramo local é distinto e usa lista estreita de operações executáveis. O fluxo ilustra o ramo externo, condicionado à autorização.\par
+\noindent\textbf{Limite.} O agrupamento é didático; cada responsabilidade será localizada no diagrama e conferida no fluxo.\par\smallskip
+\fontecore{integrations/ecosystem_mcp.py}{ecosystem_scientific_plugins}
+\fontecore{integrations/ecosystem_mcp.py}{_knowledge_operation}

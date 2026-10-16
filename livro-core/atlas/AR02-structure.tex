@@ -1,0 +1,43 @@
+% R911: gerado; alterar dados e gerador, não esta prancha.
+\clearpage
+\refstepcounter{figure}\label{fig:AR02-structure}
+\noindent{\large\sffamily\bfseries\color{navy}AR02 · Diagrama de arquitetura}\par\smallskip
+\noindent\textbf{Primário, elegibilidade e seleção de agentes}\par
+\noindent\textit{Como a delegação A2A distingue agente elegível de executor real?}\par\medskip
+\begin{center}
+
+\tikzset{
+ atlasnode/.style={draw=steel,fill=blueBg,rounded corners=2mm,align=center,
+  text width=4cm,inner sep=5pt,font=\fontsize{9.5}{11.8}\selectfont,text=textmain},
+ atlasroot/.style={atlasnode,fill=navy,text=white,text width=2.8cm,font=\fontsize{10}{12}\selectfont\bfseries},
+ atlasdecision/.style={diamond,aspect=2.1,draw=amber,fill=amberBg,align=center,
+  text width=3cm,inner sep=2pt,font=\fontsize{9.5}{11.5}\selectfont},
+ atlascall/.style={-Stealth,draw=steel,thick},
+ atlasevent/.style={-Stealth,draw=violet,dashed,thick},
+ atlasdata/.style={-Stealth,draw=teal,densely dotted,thick},
+ atlasstructure/.style={draw=slate,thick},
+ atlasboundary/.style={-Stealth,draw=amber,dash dot,thick},
+ atlasedgelabel/.style={fill=papel,inner sep=1.3pt,font=\fontsize{9}{10}\selectfont}
+}
+
+\begin{tikzpicture}
+\node[atlasnode] (c0) at (-4.3,0) {\textbf{C1: Delegação pelo primário}\\Enriquece contexto e publica a tarefa};
+\node[atlasnode] (c1) at (4.3,0) {\textbf{C2: Elegibilidade no Blackboard}\\Filtra estado e capacidades all-of};
+\node[atlasnode] (c2) at (-4.3,-3.0) {\textbf{C3: Seleção pelo primário}\\Aplica gate e escolhe candidato};
+\node[atlasnode] (c3) at (4.3,-3.0) {\textbf{C4: Trust Engine canônico}\\Decide a permissão da ação consultada};
+\node[atlasnode] (c4) at (-4.3,-6.0) {\textbf{C5: Roteamento por atenção}\\Ordena candidatos quando solicitado};
+\node[atlasnode] (c5) at (4.3,-6.0) {\textbf{C6: Recepção da entrega}\\Verifica entrega conforme spec associada};
+\draw[atlasevent] (c0.east) to[out=0,in=180] node[atlasedgelabel,pos=.25]{E1} (c1.west);
+\draw[atlasevent] (c1.west) to[out=180,in=0] node[atlasedgelabel,pos=.25]{E2} (c2.east);
+\draw[atlascall] (c2.east) to[out=0,in=180] node[atlasedgelabel,pos=.25]{E3} (c3.west);
+\draw[atlascall] (c2.south) -- node[atlasedgelabel,pos=.25]{E4} (c4.north);
+\draw[atlasstructure] (c2.east) to[out=0,in=180] node[atlasedgelabel,pos=.25]{E5} (c5.west);
+\end{tikzpicture}
+\end{center}
+{\small\textbf{Figura \thefigure.} Diagrama de arquitetura --- Primário, elegibilidade e seleção de agentes}\par\smallskip
+{\footnotesize\textbf{Chave das relações.} E1: C1 para C2 --- task.post via MetaBus (evento); E2: C2 para C3 --- task.cfp (evento); E3: C3 para C4 --- gate de delegação (chamada); E4: C3 para C5 --- alternativa à redução (chamada); E5: C3 para C6 --- atribuição antes da entrega (estrutura).}\par\smallskip
+\noindent\textbf{Como funciona e por quê.} Localize as seis responsabilidades C1--C6. Os identificadores E1--E5 permitem conferir o significado de cada conexão na chave das relações.\par
+\noindent\textbf{Justificativa.} Separar componentes e tipos de relação ajuda a localizar onde uma dependência, um evento ou uma fronteira foi declarado.\par
+\noindent\textbf{Limite.} O fluxo curado descreve a rota CFP, não todas as operações diretas. Pontuações não são probabilidades calibradas. A atribuição não prova execução; economia de tokens é auxiliar e não constitui gate obrigatório universal.\par\smallskip
+\fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator.delegate}
+\fontecore{mci/blackboard.py}{Blackboard._match_task}

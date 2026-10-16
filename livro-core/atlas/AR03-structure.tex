@@ -1,0 +1,45 @@
+% R911: gerado; alterar dados e gerador, não esta prancha.
+\clearpage
+\refstepcounter{figure}\label{fig:AR03-structure}
+\noindent{\large\sffamily\bfseries\color{navy}AR03 · Diagrama de arquitetura}\par\smallskip
+\noindent\textbf{Blackboard A2A e circulação no MetaBus}\par
+\noindent\textit{O que é tarefa compartilhada e o que é evento no barramento?}\par\medskip
+\begin{center}
+
+\tikzset{
+ atlasnode/.style={draw=steel,fill=blueBg,rounded corners=2mm,align=center,
+  text width=4cm,inner sep=5pt,font=\fontsize{9.5}{11.8}\selectfont,text=textmain},
+ atlasroot/.style={atlasnode,fill=navy,text=white,text width=2.8cm,font=\fontsize{10}{12}\selectfont\bfseries},
+ atlasdecision/.style={diamond,aspect=2.1,draw=amber,fill=amberBg,align=center,
+  text width=3cm,inner sep=2pt,font=\fontsize{9.5}{11.5}\selectfont},
+ atlascall/.style={-Stealth,draw=steel,thick},
+ atlasevent/.style={-Stealth,draw=violet,dashed,thick},
+ atlasdata/.style={-Stealth,draw=teal,densely dotted,thick},
+ atlasstructure/.style={draw=slate,thick},
+ atlasboundary/.style={-Stealth,draw=amber,dash dot,thick},
+ atlasedgelabel/.style={fill=papel,inner sep=1.3pt,font=\fontsize{9}{10}\selectfont}
+}
+
+\begin{tikzpicture}
+\node[atlasnode] (c0) at (-4.3,0) {\textbf{C1: Registro de cartões}\\Mantém o cadastro A2A em memória};
+\node[atlasnode] (c1) at (4.3,0) {\textbf{C2: Entrada de tarefas}\\Cria tarefa e procura candidatos};
+\node[atlasnode] (c2) at (-4.3,-3.0) {\textbf{C3: Inscrições no MetaBus}\\Associa tópicos a funções receptoras};
+\node[atlasnode] (c3) at (4.3,-3.0) {\textbf{C4: Publicação no MetaBus}\\Registra evento e chama receptores};
+\node[atlasnode] (c4) at (-4.3,-6.0) {\textbf{C5: Atribuição A2A}\\Atribui tarefa aberta ao voluntário};
+\node[atlasnode] (c5) at (4.3,-6.0) {\textbf{C6: Conclusão no Blackboard}\\Atualiza tarefa e solicita reflexão};
+\draw[atlasstructure] (c2.east) to[out=0,in=180] node[atlasedgelabel,pos=.25]{E1} (c3.west);
+\draw[atlasevent] (c3.west) to[out=180,in=0] node[atlasedgelabel,pos=.25]{E2} (c0.east);
+\draw[atlasevent] (c3.north) -- node[atlasedgelabel,pos=.25]{E3} (c1.south);
+\draw[atlasevent] (c3) to[bend left=14] node[atlasedgelabel,pos=.25]{E4} (c4);
+\draw[atlasevent] (c4) to[bend left=14] node[atlasedgelabel,pos=.25]{E5} (c3);
+\draw[atlasevent] (c3) to[bend left=14] node[atlasedgelabel,pos=.25]{E6} (c5);
+\draw[atlasevent] (c5) to[bend left=14] node[atlasedgelabel,pos=.25]{E7} (c3);
+\end{tikzpicture}
+\end{center}
+{\small\textbf{Figura \thefigure.} Diagrama de arquitetura --- Blackboard A2A e circulação no MetaBus}\par\smallskip
+{\footnotesize\textbf{Chave das relações.} E1: C3 para C4 --- receptores por tópico (estrutura); E2: C4 para C1 --- agent.register (evento); E3: C4 para C2 --- task.post (evento); E4: C4 para C5 --- task.volunteer (evento); E5: C5 para C4 --- task.assigned (evento); E6: C4 para C6 --- task.complete (evento); E7: C6 para C4 --- metacognition.reflect\_request (evento).}\par\smallskip
+\noindent\textbf{Como funciona e por quê.} Localize as seis responsabilidades C1--C6. Os identificadores E1--E7 permitem conferir o significado de cada conexão na chave das relações.\par
+\noindent\textbf{Justificativa.} Separar componentes e tipos de relação ajuda a localizar onde uma dependência, um evento ou uma fronteira foi declarado.\par
+\noindent\textbf{Limite.} A sequência é explicativa e condicionada aos eventos recebidos. Este A2A local não demonstra rede distribuída tolerante a falhas. Publicar não assegura escrita durável nem consumo externo; erros de escrita e receptores são registrados, e nem todo estado é compartilhado em disco.\par\smallskip
+\fontecore{mci/blackboard.py}{Blackboard.__init__}
+\fontecore{mci/blackboard.py}{Blackboard._match_task}

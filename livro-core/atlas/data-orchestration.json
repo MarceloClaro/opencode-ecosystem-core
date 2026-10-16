@@ -1,0 +1,1849 @@
+[
+  {
+    "id": "AR01",
+    "title": "Interfaces, configuração e entrada no Core",
+    "chapters": [
+      "mod-01c-instalacao"
+    ],
+    "question": "Como o pedido chega ao Core por CLI, painel ou MCP?",
+    "mental": [
+      {
+        "label": "Entradas",
+        "items": [
+          "CLI Python",
+          "Painel Streamlit",
+          "Ferramentas MCP"
+        ]
+      },
+      {
+        "label": "Coordenação",
+        "items": [
+          "Contrato primário",
+          "Coordenador",
+          "Operação escolhida"
+        ]
+      },
+      {
+        "label": "Configuração",
+        "items": [
+          "Agentes",
+          "Comandos",
+          "Servidores MCP"
+        ]
+      },
+      {
+        "label": "Evidência",
+        "items": [
+          "Resposta delimitada",
+          "Estado de execução",
+          "Erros explícitos"
+        ]
+      }
+    ],
+    "components": [
+      {
+        "id": "cli",
+        "label": "CLI de uso direto",
+        "path": "marceloclaro/cli.py",
+        "symbol": "main",
+        "role": "Interpreta argumentos e seleciona operação"
+      },
+      {
+        "id": "web",
+        "label": "Painel Streamlit",
+        "path": "webapp/app.py",
+        "symbol": "get_orchestrator",
+        "role": "Obtém a instância usada pelo painel"
+      },
+      {
+        "id": "mcp",
+        "label": "Ferramenta MCP de execução",
+        "path": "integrations/ecosystem_mcp.py",
+        "symbol": "ecosystem_run",
+        "role": "Expõe execução limitada e cancelável"
+      },
+      {
+        "id": "primary",
+        "label": "Contrato primário marceloclaro",
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator",
+        "role": "Reúne serviços na instância do processo"
+      },
+      {
+        "id": "executor",
+        "label": "Coordenador autônomo",
+        "path": "marceloclaro/autonomous.py",
+        "symbol": "AutonomousCoordinator.run",
+        "role": "Conduz tarefa com limites e preflight"
+      },
+      {
+        "id": "config",
+        "label": "Configuração OpenCode",
+        "path": "integrations/opencode_cli.py",
+        "symbol": "build_config",
+        "role": "Compila agentes, comandos e MCPs"
+      }
+    ],
+    "edges": [
+      {
+        "source": "cli",
+        "target": "primary",
+        "label": "instancia no processo CLI",
+        "kind": "call",
+        "evidence": {
+          "path": "marceloclaro/cli.py",
+          "symbol": "main"
+        }
+      },
+      {
+        "source": "web",
+        "target": "primary",
+        "label": "instância do processo web",
+        "kind": "call",
+        "evidence": {
+          "path": "webapp/app.py",
+          "symbol": "get_orchestrator"
+        }
+      },
+      {
+        "source": "mcp",
+        "target": "executor",
+        "label": "solicita execução",
+        "kind": "call",
+        "evidence": {
+          "path": "integrations/ecosystem_mcp.py",
+          "symbol": "ecosystem_run"
+        }
+      },
+      {
+        "source": "executor",
+        "target": "primary",
+        "label": "delega quando pronto",
+        "kind": "call",
+        "evidence": {
+          "path": "marceloclaro/autonomous.py",
+          "symbol": "AutonomousCoordinator.run"
+        }
+      },
+      {
+        "source": "config",
+        "target": "cli",
+        "label": "configuração declarada",
+        "kind": "structure",
+        "evidence": {
+          "path": "integrations/opencode_cli.py",
+          "symbol": "build_config"
+        }
+      },
+      {
+        "source": "config",
+        "target": "mcp",
+        "label": "servidores declarados",
+        "kind": "structure",
+        "evidence": {
+          "path": "integrations/opencode_cli.py",
+          "symbol": "build_config"
+        }
+      }
+    ],
+    "flow": {
+      "steps": [
+        "Escolher uma interface",
+        "Informar a operação e seus limites",
+        "Validar os argumentos da rota",
+        "Acionar o serviço correspondente",
+        "Receber resultado ou bloqueio",
+        "Interpretar o alcance da resposta"
+      ],
+      "decision_after": 3,
+      "question": "A rota e os parâmetros são aceitos?",
+      "no": "Recusar entrada inválida",
+      "recovery": "Corrigir parâmetros antes de repetir",
+      "evidence": [
+        {
+          "path": "marceloclaro/cli.py",
+          "symbol": "main"
+        },
+        {
+          "path": "integrations/ecosystem_mcp.py",
+          "symbol": "ecosystem_run"
+        },
+        {
+          "path": "marceloclaro/autonomous.py",
+          "symbol": "AutonomousCoordinator.run"
+        }
+      ]
+    },
+    "mechanism": "As entradas usam o contrato do primário, mas criam instâncias e caches por processo. O MCP de execução usa o coordenador autônomo; outras ferramentas acionam serviços específicos. A configuração descreve possibilidades e permissões. O fluxo é uma leitura curada das fronteiras de entrada, condicionada à operação escolhida.",
+    "example": "Para análise textual, um cliente pode chamar ecosystem_run com tarefa, especificação e prazo. Uma consulta de estado apenas lê configuração; abrir o painel não inicia automaticamente essa análise.",
+    "limits": "Não há uma instância global distribuída entre CLI, painel e servidores MCP. Interface aberta e comando disponível não comprovam autenticação, inferência ou entrega. A figura reúne rotas alternativas e contratos; não representa um traço executado.",
+    "sources": [
+      {
+        "path": "marceloclaro/cli.py",
+        "symbol": "main"
+      },
+      {
+        "path": "webapp/app.py",
+        "symbol": "get_orchestrator"
+      },
+      {
+        "path": "integrations/ecosystem_mcp.py",
+        "symbol": "ecosystem_run"
+      },
+      {
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator"
+      },
+      {
+        "path": "marceloclaro/autonomous.py",
+        "symbol": "AutonomousCoordinator.run"
+      },
+      {
+        "path": "integrations/opencode_cli.py",
+        "symbol": "build_config"
+      }
+    ]
+  },
+  {
+    "id": "AR02",
+    "title": "Primário, elegibilidade e seleção de agentes",
+    "chapters": [
+      "mod-02-orquestracao"
+    ],
+    "question": "Como a delegação A2A distingue agente elegível de executor real?",
+    "mental": [
+      {
+        "label": "Pedido",
+        "items": [
+          "Descrição",
+          "Capacidades",
+          "Contexto"
+        ]
+      },
+      {
+        "label": "Elegibilidade",
+        "items": [
+          "Disponibilidade",
+          "Todas as capacidades",
+          "Gate de trust"
+        ]
+      },
+      {
+        "label": "Seleção",
+        "items": [
+          "Redução heurística",
+          "Atenção ponderada",
+          "Voluntariado"
+        ]
+      },
+      {
+        "label": "Entrega",
+        "items": [
+          "Executor necessário",
+          "Spec associada",
+          "Resultado delimitado"
+        ]
+      }
+    ],
+    "components": [
+      {
+        "id": "delegate",
+        "label": "Delegação pelo primário",
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator.delegate",
+        "role": "Enriquece contexto e publica a tarefa"
+      },
+      {
+        "id": "match",
+        "label": "Elegibilidade no Blackboard",
+        "path": "mci/blackboard.py",
+        "symbol": "Blackboard._match_task",
+        "role": "Filtra estado e capacidades all-of"
+      },
+      {
+        "id": "cfp",
+        "label": "Seleção pelo primário",
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator._on_cfp",
+        "role": "Aplica gate e escolhe candidato"
+      },
+      {
+        "id": "trust",
+        "label": "Trust Engine canônico",
+        "path": "trust/trust_engine.py",
+        "symbol": "TrustEngine.execute",
+        "role": "Decide a permissão da ação consultada"
+      },
+      {
+        "id": "attention",
+        "label": "Roteamento por atenção",
+        "path": "transformer/attention.py",
+        "symbol": "AttentionRouter.route",
+        "role": "Ordena candidatos quando solicitado"
+      },
+      {
+        "id": "completion",
+        "label": "Recepção da entrega",
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator.report_completion",
+        "role": "Verifica entrega conforme spec associada"
+      }
+    ],
+    "edges": [
+      {
+        "source": "delegate",
+        "target": "match",
+        "label": "task.post via MetaBus",
+        "kind": "event",
+        "evidence": {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.delegate"
+        }
+      },
+      {
+        "source": "match",
+        "target": "cfp",
+        "label": "task.cfp",
+        "kind": "event",
+        "evidence": {
+          "path": "mci/blackboard.py",
+          "symbol": "Blackboard._match_task"
+        }
+      },
+      {
+        "source": "cfp",
+        "target": "trust",
+        "label": "gate de delegação",
+        "kind": "call",
+        "evidence": {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator._on_cfp"
+        }
+      },
+      {
+        "source": "cfp",
+        "target": "attention",
+        "label": "alternativa à redução",
+        "kind": "call",
+        "evidence": {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator._on_cfp"
+        }
+      },
+      {
+        "source": "cfp",
+        "target": "completion",
+        "label": "atribuição antes da entrega",
+        "kind": "structure",
+        "evidence": {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.report_completion"
+        }
+      }
+    ],
+    "flow": {
+      "steps": [
+        "Receber descrição e capacidades",
+        "Publicar tarefa com contexto",
+        "Filtrar elegibilidade e trust",
+        "Selecionar por redução ou atenção",
+        "Aguardar trabalho do executor",
+        "Conferir a entrega recebida"
+      ],
+      "decision_after": 3,
+      "question": "Há candidato aceito pelos filtros?",
+      "no": "Marcar bloqueio sem atribuir",
+      "recovery": "Rever capacidades, estado e motivo do gate",
+      "evidence": [
+        {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.delegate"
+        },
+        {
+          "path": "mci/blackboard.py",
+          "symbol": "Blackboard._match_task"
+        },
+        {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator._on_cfp"
+        },
+        {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.report_completion"
+        }
+      ]
+    },
+    "mechanism": "Nesta rota A2A, delegate publica task.post; o Blackboard emite CFP para candidatos disponíveis com todas as capacidades. O primário consulta TrustEngine.execute e tenta redução antes da atenção. A atribuição prepara trabalho. report_completion trata posteriormente a entrega, com verificação SDD condicionada à especificação associada.",
+    "example": "Uma tarefa que exige Python e revisão não pode usar um cartão que declare apenas Python. Se nenhum candidato passar, não há atribuição aceita. A execução posterior depende de um executor efetivo e de seus limites.",
+    "limits": "O fluxo curado descreve a rota CFP, não todas as operações diretas. Pontuações não são probabilidades calibradas. A atribuição não prova execução; economia de tokens é auxiliar e não constitui gate obrigatório universal.",
+    "sources": [
+      {
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator.delegate"
+      },
+      {
+        "path": "mci/blackboard.py",
+        "symbol": "Blackboard._match_task"
+      },
+      {
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator._on_cfp"
+      },
+      {
+        "path": "trust/trust_engine.py",
+        "symbol": "TrustEngine.execute"
+      },
+      {
+        "path": "transformer/attention.py",
+        "symbol": "AttentionRouter.route"
+      },
+      {
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator.report_completion"
+      }
+    ]
+  },
+  {
+    "id": "AR03",
+    "title": "Blackboard A2A e circulação no MetaBus",
+    "chapters": [
+      "mod-03-memoria-mci"
+    ],
+    "question": "O que é tarefa compartilhada e o que é evento no barramento?",
+    "mental": [
+      {
+        "label": "Cartões",
+        "items": [
+          "Identidade",
+          "Capacidades",
+          "Estado disponível"
+        ]
+      },
+      {
+        "label": "Tarefas",
+        "items": [
+          "Pedido",
+          "Responsável",
+          "Resultado"
+        ]
+      },
+      {
+        "label": "Eventos",
+        "items": [
+          "Inscrição",
+          "Publicação",
+          "Identidade lógica"
+        ]
+      },
+      {
+        "label": "Memória",
+        "items": [
+          "Log local",
+          "Reflexão solicitada",
+          "Falha de persistência"
+        ]
+      }
+    ],
+    "components": [
+      {
+        "id": "register",
+        "label": "Registro de cartões",
+        "path": "mci/blackboard.py",
+        "symbol": "Blackboard._handle_registration",
+        "role": "Mantém o cadastro A2A em memória"
+      },
+      {
+        "id": "post",
+        "label": "Entrada de tarefas",
+        "path": "mci/blackboard.py",
+        "symbol": "Blackboard._handle_task_post",
+        "role": "Cria tarefa e procura candidatos"
+      },
+      {
+        "id": "subscribe",
+        "label": "Inscrições no MetaBus",
+        "path": "mci/metabus.py",
+        "symbol": "MetaBus.subscribe",
+        "role": "Associa tópicos a funções receptoras"
+      },
+      {
+        "id": "publish",
+        "label": "Publicação no MetaBus",
+        "path": "mci/metabus.py",
+        "symbol": "MetaBus.publish",
+        "role": "Registra evento e chama receptores"
+      },
+      {
+        "id": "assign",
+        "label": "Atribuição A2A",
+        "path": "mci/blackboard.py",
+        "symbol": "Blackboard._handle_volunteer",
+        "role": "Atribui tarefa aberta ao voluntário"
+      },
+      {
+        "id": "complete",
+        "label": "Conclusão no Blackboard",
+        "path": "mci/blackboard.py",
+        "symbol": "Blackboard._handle_completion",
+        "role": "Atualiza tarefa e solicita reflexão"
+      }
+    ],
+    "edges": [
+      {
+        "source": "subscribe",
+        "target": "publish",
+        "label": "receptores por tópico",
+        "kind": "structure",
+        "evidence": {
+          "path": "mci/metabus.py",
+          "symbol": "MetaBus.subscribe"
+        }
+      },
+      {
+        "source": "publish",
+        "target": "register",
+        "label": "agent.register",
+        "kind": "event",
+        "evidence": {
+          "path": "mci/blackboard.py",
+          "symbol": "Blackboard.__init__"
+        }
+      },
+      {
+        "source": "publish",
+        "target": "post",
+        "label": "task.post",
+        "kind": "event",
+        "evidence": {
+          "path": "mci/blackboard.py",
+          "symbol": "Blackboard.__init__"
+        }
+      },
+      {
+        "source": "publish",
+        "target": "assign",
+        "label": "task.volunteer",
+        "kind": "event",
+        "evidence": {
+          "path": "mci/blackboard.py",
+          "symbol": "Blackboard.__init__"
+        }
+      },
+      {
+        "source": "assign",
+        "target": "publish",
+        "label": "task.assigned",
+        "kind": "event",
+        "evidence": {
+          "path": "mci/blackboard.py",
+          "symbol": "Blackboard._handle_volunteer"
+        }
+      },
+      {
+        "source": "publish",
+        "target": "complete",
+        "label": "task.complete",
+        "kind": "event",
+        "evidence": {
+          "path": "mci/blackboard.py",
+          "symbol": "Blackboard.__init__"
+        }
+      },
+      {
+        "source": "complete",
+        "target": "publish",
+        "label": "metacognition.reflect_request",
+        "kind": "event",
+        "evidence": {
+          "path": "mci/blackboard.py",
+          "symbol": "Blackboard._handle_completion"
+        }
+      }
+    ],
+    "flow": {
+      "steps": [
+        "Registrar cartões no quadro",
+        "Receber uma tarefa publicada",
+        "Procurar cartões compatíveis",
+        "Processar voluntariado aceito",
+        "Registrar conclusão do responsável",
+        "Solicitar reflexão pelo barramento"
+      ],
+      "decision_after": 3,
+      "question": "O quadro encontra candidato compatível?",
+      "no": "Não emitir CFP para a tarefa",
+      "recovery": "Conferir cartões, estado e capacidades",
+      "evidence": [
+        {
+          "path": "mci/blackboard.py",
+          "symbol": "Blackboard._handle_task_post"
+        },
+        {
+          "path": "mci/blackboard.py",
+          "symbol": "Blackboard._match_task"
+        },
+        {
+          "path": "mci/blackboard.py",
+          "symbol": "Blackboard._handle_volunteer"
+        },
+        {
+          "path": "mci/blackboard.py",
+          "symbol": "Blackboard._handle_completion"
+        }
+      ]
+    },
+    "mechanism": "O Blackboard conserva cartões e tarefas; o MetaBus distribui eventos aos receptores inscritos. São singletons locais ao processo. A publicação chama receptores e tenta escrever log local. A conclusão só atualiza a tarefa correspondente ao agente atribuído e publica um pedido de reflexão.",
+    "example": "task.volunteer pode transformar tarefa aberta em atribuída e marcar seu cartão como ocupado. Uma conclusão com agente incompatível não satisfaz a verificação de identidade do Blackboard.",
+    "limits": "A sequência é explicativa e condicionada aos eventos recebidos. Este A2A local não demonstra rede distribuída tolerante a falhas. Publicar não assegura escrita durável nem consumo externo; erros de escrita e receptores são registrados, e nem todo estado é compartilhado em disco.",
+    "sources": [
+      {
+        "path": "mci/blackboard.py",
+        "symbol": "Blackboard.__init__"
+      },
+      {
+        "path": "mci/blackboard.py",
+        "symbol": "Blackboard._match_task"
+      },
+      {
+        "path": "mci/blackboard.py",
+        "symbol": "Blackboard._handle_completion"
+      },
+      {
+        "path": "mci/metabus.py",
+        "symbol": "MetaBus.subscribe"
+      },
+      {
+        "path": "mci/metabus.py",
+        "symbol": "MetaBus.publish"
+      }
+    ]
+  },
+  {
+    "id": "AR04",
+    "title": "Workflows, checkpoints e executores de leitura",
+    "chapters": [
+      "mod-02-orquestracao"
+    ],
+    "question": "Como dependências, limites e retomada controlam o trabalho composto?",
+    "mental": [
+      {
+        "label": "Definição",
+        "items": [
+          "Nós",
+          "Dependências",
+          "Spec por etapa"
+        ]
+      },
+      {
+        "label": "Controle",
+        "items": [
+          "Ordem válida",
+          "Prazo global",
+          "Reserva de etapas"
+        ]
+      },
+      {
+        "label": "Execução",
+        "items": [
+          "Coordenador",
+          "Harness escolhido",
+          "Saída não vazia"
+        ]
+      },
+      {
+        "label": "Retomada",
+        "items": [
+          "Checkpoint",
+          "Mesma definição",
+          "Repetição explícita"
+        ]
+      }
+    ],
+    "components": [
+      {
+        "id": "mcp",
+        "label": "Entrada de workflow MCP",
+        "path": "integrations/ecosystem_mcp.py",
+        "symbol": "ecosystem_workflow",
+        "role": "Recebe DAG e controla acesso à execução"
+      },
+      {
+        "id": "workflow",
+        "label": "Coordenador de workflow",
+        "path": "marceloclaro/workflow.py",
+        "symbol": "WorkflowCoordinator.run",
+        "role": "Percorre dependências com orçamento"
+      },
+      {
+        "id": "store",
+        "label": "Armazenamento de checkpoints",
+        "path": "marceloclaro/workflow_store.py",
+        "symbol": "WorkflowStore.save",
+        "role": "Publica o estado persistido do workflow"
+      },
+      {
+        "id": "coordinator",
+        "label": "Coordenador de execução",
+        "path": "marceloclaro/autonomous.py",
+        "symbol": "AutonomousCoordinator.run",
+        "role": "Liga delegação, execução e revisão"
+      },
+      {
+        "id": "runtime",
+        "label": "Runtime de harnesses",
+        "path": "integrations/harness_runtime.py",
+        "symbol": "HarnessRuntime.execute",
+        "role": "Inicia executor e relata sua execução"
+      },
+      {
+        "id": "health",
+        "label": "Histórico de executores",
+        "path": "integrations/harness_health.py",
+        "symbol": "HarnessHealthStore.record",
+        "role": "Registra evidência local de saúde"
+      }
+    ],
+    "edges": [
+      {
+        "source": "mcp",
+        "target": "workflow",
+        "label": "solicita workflow",
+        "kind": "call",
+        "evidence": {
+          "path": "integrations/ecosystem_mcp.py",
+          "symbol": "ecosystem_workflow"
+        }
+      },
+      {
+        "source": "workflow",
+        "target": "store",
+        "label": "salva checkpoint",
+        "kind": "call",
+        "evidence": {
+          "path": "marceloclaro/workflow.py",
+          "symbol": "WorkflowCoordinator._save"
+        }
+      },
+      {
+        "source": "workflow",
+        "target": "coordinator",
+        "label": "etapa pronta",
+        "kind": "call",
+        "evidence": {
+          "path": "marceloclaro/workflow.py",
+          "symbol": "WorkflowCoordinator.run"
+        }
+      },
+      {
+        "source": "coordinator",
+        "target": "runtime",
+        "label": "executa harness",
+        "kind": "call",
+        "evidence": {
+          "path": "marceloclaro/autonomous.py",
+          "symbol": "AutonomousCoordinator.run"
+        }
+      },
+      {
+        "source": "runtime",
+        "target": "health",
+        "label": "tentativa iniciada",
+        "kind": "call",
+        "evidence": {
+          "path": "integrations/harness_runtime.py",
+          "symbol": "HarnessRuntime.execute"
+        }
+      }
+    ],
+    "flow": {
+      "steps": [
+        "Validar DAG e orçamento global",
+        "Criar ou carregar checkpoint",
+        "Conferir dependências da etapa",
+        "Executar etapa com limite restante",
+        "Salvar resultado e estado observado",
+        "Encerrar ou retomar explicitamente"
+      ],
+      "decision_after": 3,
+      "question": "Dependências concluídas e prazo disponível?",
+      "no": "Bloquear ou esgotar a etapa",
+      "recovery": "Resolver dependências; autorizar repetição",
+      "evidence": [
+        {
+          "path": "marceloclaro/workflow.py",
+          "symbol": "WorkflowCoordinator.run"
+        },
+        {
+          "path": "marceloclaro/workflow.py",
+          "symbol": "WorkflowCoordinator._resume"
+        },
+        {
+          "path": "marceloclaro/workflow_store.py",
+          "symbol": "WorkflowStore.claim"
+        },
+        {
+          "path": "marceloclaro/autonomous.py",
+          "symbol": "AutonomousCoordinator.run"
+        }
+      ]
+    },
+    "mechanism": "A fachada MCP conduz ao WorkflowCoordinator, que valida a definição, protege o registro e salva estados antes de executar cada etapa. O código percorre a ordem sequencialmente, exigindo max_parallel igual a um. Dependências fracassadas bloqueiam descendentes. Retomar preserva entregas concluídas e exige definição compatível; repetir falhas ou interrupções requer retry_failed.",
+    "example": "Em análise seguida de revisão, a revisão fica bloqueada se a análise não concluir com sucesso e saída útil. A retomada pode reaproveitar a análise aceita e repetir uma falha somente sob a opção explícita.",
+    "limits": "Este fluxo curado é condicionado ao estado do checkpoint. O DAG de workflow difere do TaskRuntime de nanotarefas com leases. Não há paralelismo demonstrado nesta rota. Histórico de sucesso não comprova saldo, autenticação ou execução atual de um harness; interrupção pode deixar execução incerta.",
+    "sources": [
+      {
+        "path": "integrations/ecosystem_mcp.py",
+        "symbol": "ecosystem_workflow"
+      },
+      {
+        "path": "marceloclaro/workflow.py",
+        "symbol": "WorkflowCoordinator.run"
+      },
+      {
+        "path": "marceloclaro/workflow.py",
+        "symbol": "WorkflowCoordinator._resume"
+      },
+      {
+        "path": "marceloclaro/workflow_store.py",
+        "symbol": "WorkflowStore.save"
+      },
+      {
+        "path": "marceloclaro/autonomous.py",
+        "symbol": "AutonomousCoordinator.run"
+      },
+      {
+        "path": "integrations/harness_runtime.py",
+        "symbol": "HarnessRuntime.execute"
+      },
+      {
+        "path": "integrations/harness_health.py",
+        "symbol": "HarnessHealthStore.record"
+      }
+    ]
+  },
+  {
+    "id": "AR05",
+    "title": "Ciclo de vida de agentes e perfis gerenciados",
+    "chapters": [
+      "mod-13-ativacao-agentes"
+    ],
+    "question": "Como criar, validar, registrar e preparar um agente sem simular trabalho?",
+    "mental": [
+      {
+        "label": "Perfil",
+        "items": [
+          "Origem",
+          "Capacidades",
+          "Permissões"
+        ]
+      },
+      {
+        "label": "Contrato",
+        "items": [
+          "Spec",
+          "Teste",
+          "Formato de saída"
+        ]
+      },
+      {
+        "label": "Publicação",
+        "items": [
+          "Cartão gerenciado",
+          "Hash da definição",
+          "Configuração regenerada"
+        ]
+      },
+      {
+        "label": "Ativação",
+        "items": [
+          "Primário",
+          "Tarefa A2A",
+          "Executor pendente"
+        ]
+      }
+    ],
+    "components": [
+      {
+        "id": "entry",
+        "label": "Operação do primário",
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator.agent_profile_action",
+        "role": "Centraliza criação e ativação de perfil"
+      },
+      {
+        "id": "create",
+        "label": "Criação persistente",
+        "path": "agents/lifecycle.py",
+        "symbol": "AgentLifecycleService.create",
+        "role": "Valida documento e publica cartão novo"
+      },
+      {
+        "id": "validate",
+        "label": "Contrato do cartão",
+        "path": "agents/lifecycle.py",
+        "symbol": "validate_managed_card",
+        "role": "Confere spec, teste e permissões"
+      },
+      {
+        "id": "load",
+        "label": "Carga do catálogo",
+        "path": "marceloclaro/catalog_loader.py",
+        "symbol": "load_catalog_definitions",
+        "role": "Recusa cartões fora do contrato aplicável"
+      },
+      {
+        "id": "config",
+        "label": "Compilação OpenCode",
+        "path": "integrations/opencode_cli.py",
+        "symbol": "build_config",
+        "role": "Reúne definições na configuração"
+      },
+      {
+        "id": "delegate",
+        "label": "Delegação de ativação",
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator.delegate",
+        "role": "Publica tarefa com identidade do perfil"
+      }
+    ],
+    "edges": [
+      {
+        "source": "entry",
+        "target": "create",
+        "label": "operation=create",
+        "kind": "call",
+        "evidence": {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.agent_profile_action"
+        }
+      },
+      {
+        "source": "create",
+        "target": "validate",
+        "label": "valida antes de publicar",
+        "kind": "call",
+        "evidence": {
+          "path": "agents/lifecycle.py",
+          "symbol": "AgentLifecycleService.create"
+        }
+      },
+      {
+        "source": "entry",
+        "target": "config",
+        "label": "regenera após criação",
+        "kind": "call",
+        "evidence": {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.agent_profile_action"
+        }
+      },
+      {
+        "source": "config",
+        "target": "load",
+        "label": "carrega catálogo",
+        "kind": "call",
+        "evidence": {
+          "path": "integrations/opencode_cli.py",
+          "symbol": "_catalog_agents"
+        }
+      },
+      {
+        "source": "entry",
+        "target": "delegate",
+        "label": "operation=activate",
+        "kind": "call",
+        "evidence": {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.agent_profile_action"
+        }
+      },
+      {
+        "source": "load",
+        "target": "validate",
+        "label": "contrato gerenciado",
+        "kind": "structure",
+        "evidence": {
+          "path": "agents/lifecycle.py",
+          "symbol": "enforce_catalog_contract"
+        }
+      }
+    ],
+    "flow": {
+      "steps": [
+        "Reutilizar ou descrever um perfil",
+        "Informar capacidades e contrato",
+        "Validar spec, teste e permissões",
+        "Persistir e registrar a definição",
+        "Preparar tarefa pelo primário",
+        "Vincular trabalho e evidência efetivos"
+      ],
+      "decision_after": 3,
+      "question": "O perfil satisfaz o contrato gerenciado?",
+      "no": "Recusar publicação ou manter legado",
+      "recovery": "Corrigir contrato sem alterar legado ocultamente",
+      "evidence": [
+        {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.agent_profile_action"
+        },
+        {
+          "path": "agents/lifecycle.py",
+          "symbol": "AgentLifecycleService.create"
+        },
+        {
+          "path": "agents/lifecycle.py",
+          "symbol": "enforce_catalog_contract"
+        }
+      ]
+    },
+    "mechanism": "O serviço gerenciado exige origem, capacidades, spec, teste, permissões e contrato de saída. O primário valida hashes antes de registrar ou ativar. Uma ativação delega tarefa A2A ao perfil e retorna executor pendente. Cartões históricos conservam a exceção de baseline somente para bytes previamente aceitos. O fluxo reúne operações explícitas, não uma ativação automática universal.",
+    "example": "Um editor de livro com permissão de escrita recebe escopo e evidências esperadas. Sua criação válida não prova edição realizada: é preciso correlacionar a tarefa atribuída com alterações e verificações do trabalho efetivo.",
+    "limits": "O Core não intercepta automaticamente ferramentas externas que criam subagentes. Registro, ativação e cartão available não significam inferência ou conclusão. Alterações de perfis históricos exigem migração explícita, sem usar o baseline para encobrir novas definições.",
+    "sources": [
+      {
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator.agent_profile_action"
+      },
+      {
+        "path": "agents/lifecycle.py",
+        "symbol": "AgentLifecycleService.create"
+      },
+      {
+        "path": "agents/lifecycle.py",
+        "symbol": "validate_managed_card"
+      },
+      {
+        "path": "agents/lifecycle.py",
+        "symbol": "enforce_catalog_contract"
+      },
+      {
+        "path": "marceloclaro/catalog_loader.py",
+        "symbol": "load_catalog_definitions"
+      },
+      {
+        "path": "integrations/opencode_cli.py",
+        "symbol": "build_config"
+      }
+    ]
+  },
+  {
+    "id": "AR06",
+    "title": "Memória metacognitiva, observação e leitura visual",
+    "chapters": [
+      "mod-03-memoria-mci"
+    ],
+    "question": "Como recuperar experiências sem transformar memória em verdade ou instrução?",
+    "mental": [
+      {
+        "label": "Preparação",
+        "items": [
+          "Consulta local",
+          "Lições anteriores",
+          "Limite de registros"
+        ]
+      },
+      {
+        "label": "Registro",
+        "items": [
+          "Contexto",
+          "Resultado observado",
+          "Próxima ação"
+        ]
+      },
+      {
+        "label": "Avaliação",
+        "items": [
+          "Heurística",
+          "Sem calibração",
+          "Sem promoção automática"
+        ]
+      },
+      {
+        "label": "Leitura visual",
+        "items": [
+          "Snapshot",
+          "Eventos",
+          "Simulação identificada"
+        ]
+      }
+    ],
+    "components": [
+      {
+        "id": "prepare",
+        "label": "Preparação contextual",
+        "path": "mci/metacognitive_loop.py",
+        "symbol": "MetacognitiveLoop.prepare",
+        "role": "Recupera contexto e análise delimitada"
+      },
+      {
+        "id": "search",
+        "label": "Busca na memória",
+        "path": "mci/metabus.py",
+        "symbol": "MetacognitiveMemory.search_memory",
+        "role": "Seleciona registros locais por consulta"
+      },
+      {
+        "id": "complete",
+        "label": "Reflexão de conclusão",
+        "path": "mci/metacognitive_loop.py",
+        "symbol": "MetacognitiveLoop.complete",
+        "role": "Registra episódio sem validar a conclusão"
+      },
+      {
+        "id": "record",
+        "label": "Persistência de observações",
+        "path": "mci/metabus.py",
+        "symbol": "MetacognitiveMemory.record_observation",
+        "role": "Salva observação ou explicita falha"
+      },
+      {
+        "id": "bus",
+        "label": "Eventos metacognitivos",
+        "path": "mci/metabus.py",
+        "symbol": "MetaBus.publish",
+        "role": "Distribui registros de preparação"
+      },
+      {
+        "id": "visual",
+        "label": "Fonte da rede visual",
+        "path": "webapp/memory_network_visualizer.py",
+        "symbol": "CoreMemoryNetworkSource.snapshot",
+        "role": "Converte estado local em vista da rede"
+      }
+    ],
+    "edges": [
+      {
+        "source": "prepare",
+        "target": "search",
+        "label": "recupera registros",
+        "kind": "call",
+        "evidence": {
+          "path": "mci/metacognitive_loop.py",
+          "symbol": "MetacognitiveLoop.prepare"
+        }
+      },
+      {
+        "source": "prepare",
+        "target": "bus",
+        "label": "metacognition.prepared",
+        "kind": "event",
+        "evidence": {
+          "path": "mci/metacognitive_loop.py",
+          "symbol": "MetacognitiveLoop.prepare"
+        }
+      },
+      {
+        "source": "complete",
+        "target": "record",
+        "label": "grava episódio",
+        "kind": "call",
+        "evidence": {
+          "path": "mci/metacognitive_loop.py",
+          "symbol": "MetacognitiveLoop.complete"
+        }
+      },
+      {
+        "source": "record",
+        "target": "search",
+        "label": "registros persistidos",
+        "kind": "data",
+        "evidence": {
+          "path": "mci/metabus.py",
+          "symbol": "MetacognitiveMemory.search_memory"
+        }
+      },
+      {
+        "source": "bus",
+        "target": "visual",
+        "label": "leitura do log JSONL",
+        "kind": "data",
+        "evidence": {
+          "path": "webapp/memory_network_visualizer.py",
+          "symbol": "CoreMemoryNetworkSource.snapshot"
+        }
+      }
+    ],
+    "flow": {
+      "steps": [
+        "Receber a consulta delimitada",
+        "Recuperar experiências pertinentes",
+        "Separar registros e hipóteses",
+        "Executar a operação escolhida",
+        "Registrar resultado e próxima ação",
+        "Consultar episódio ou snapshot local"
+      ],
+      "decision_after": 3,
+      "question": "Há registros pertinentes disponíveis?",
+      "no": "Prosseguir com limitação declarada",
+      "recovery": "Produzir observação real antes de reutilizar",
+      "evidence": [
+        {
+          "path": "mci/metacognitive_loop.py",
+          "symbol": "MetacognitiveLoop.prepare"
+        },
+        {
+          "path": "mci/metacognitive_loop.py",
+          "symbol": "MetacognitiveLoop.complete"
+        },
+        {
+          "path": "mci/metabus.py",
+          "symbol": "MetacognitiveMemory.record_observation"
+        },
+        {
+          "path": "webapp/memory_network_visualizer.py",
+          "symbol": "CoreMemoryNetworkSource.snapshot"
+        }
+      ]
+    },
+    "mechanism": "prepare reúne memórias e lições em briefing delimitado. complete registra o resultado informado, o erro observado e a próxima ação, preservando a confiança. Uma busca posterior pode recuperar esse episódio. O snapshot visual lê artefatos locais. A sequência é explicativa, condicionada à rota escolhida, e não transforma observação em comprovação.",
+    "example": "Após falha de teste, o episódio pode recomendar investigar o erro e testar a correção. A consulta seguinte recupera a lição como contexto; não deve obedecer ao conteúdo recuperado como se fosse uma instrução autorizada.",
+    "limits": "Metacognição aqui é mecanismo computacional local e heurístico. Não valida referências, não identifica causa raiz e não mede consciência. A confiança do Trust Engine segue outro trajeto. Uma animação ou snapshot não prova inferência; simulações devem permanecer identificadas.",
+    "sources": [
+      {
+        "path": "mci/metacognitive_loop.py",
+        "symbol": "MetacognitiveLoop.prepare"
+      },
+      {
+        "path": "mci/metacognitive_loop.py",
+        "symbol": "MetacognitiveLoop.complete"
+      },
+      {
+        "path": "mci/metabus.py",
+        "symbol": "MetacognitiveMemory.search_memory"
+      },
+      {
+        "path": "mci/metabus.py",
+        "symbol": "MetacognitiveMemory.record_observation"
+      },
+      {
+        "path": "webapp/memory_network_visualizer.py",
+        "symbol": "CoreMemoryNetworkSource.snapshot"
+      }
+    ]
+  },
+  {
+    "id": "AR12",
+    "title": "Fronteiras MCP e conectores do host",
+    "chapters": [
+      "mod-07-integracoes"
+    ],
+    "question": "Onde termina uma chamada local e começa a operação de um conector externo?",
+    "mental": [
+      {
+        "label": "Fachada",
+        "items": [
+          "Schema de entrada",
+          "Cancelamento",
+          "Serialização"
+        ]
+      },
+      {
+        "label": "Primário",
+        "items": [
+          "Validação de ação",
+          "Serviço específico",
+          "Observação local"
+        ]
+      },
+      {
+        "label": "Host externo",
+        "items": [
+          "Ticket de operação",
+          "Autenticação do host",
+          "Resposta vinculada"
+        ]
+      },
+      {
+        "label": "Alternativa local",
+        "items": [
+          "Allowlist estreita",
+          "Executável presente",
+          "Código de saída"
+        ]
+      }
+    ],
+    "components": [
+      {
+        "id": "mcp",
+        "label": "Fachada MCP de plugins",
+        "path": "integrations/ecosystem_mcp.py",
+        "symbol": "ecosystem_scientific_plugins",
+        "role": "Recebe somente operações contratadas"
+      },
+      {
+        "id": "dispatch",
+        "label": "Despacho serializado",
+        "path": "integrations/ecosystem_mcp.py",
+        "symbol": "_knowledge_operation",
+        "role": "Aciona método do primário sob gate"
+      },
+      {
+        "id": "primary",
+        "label": "Operação no primário",
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator.scientific_plugin_action",
+        "role": "Seleciona ramo e registra observação"
+      },
+      {
+        "id": "request",
+        "label": "Ticket para conector do host",
+        "path": "integrations/scientific_plugins.py",
+        "symbol": "ScientificPluginService.request",
+        "role": "Vincula argumentos e hash da requisição"
+      },
+      {
+        "id": "response",
+        "label": "Recibo informado pelo host",
+        "path": "integrations/scientific_plugins.py",
+        "symbol": "ScientificPluginService.accept_host_response",
+        "role": "Confere vínculo e preserva origem declarada"
+      },
+      {
+        "id": "local",
+        "label": "Operação local permitida",
+        "path": "integrations/scientific_plugins.py",
+        "symbol": "ScientificPluginService.run_local",
+        "role": "Executa apenas operações locais previstas"
+      }
+    ],
+    "edges": [
+      {
+        "source": "mcp",
+        "target": "dispatch",
+        "label": "operação validada",
+        "kind": "call",
+        "evidence": {
+          "path": "integrations/ecosystem_mcp.py",
+          "symbol": "ecosystem_scientific_plugins"
+        }
+      },
+      {
+        "source": "dispatch",
+        "target": "primary",
+        "label": "método selecionado",
+        "kind": "call",
+        "evidence": {
+          "path": "integrations/ecosystem_mcp.py",
+          "symbol": "_knowledge_operation"
+        }
+      },
+      {
+        "source": "primary",
+        "target": "request",
+        "label": "ramo request",
+        "kind": "call",
+        "evidence": {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.scientific_plugin_action"
+        }
+      },
+      {
+        "source": "primary",
+        "target": "response",
+        "label": "ramo response",
+        "kind": "call",
+        "evidence": {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.scientific_plugin_action"
+        }
+      },
+      {
+        "source": "primary",
+        "target": "local",
+        "label": "ramo local registrado",
+        "kind": "call",
+        "evidence": {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.scientific_plugin_action"
+        }
+      },
+      {
+        "source": "request",
+        "target": "response",
+        "label": "host externo intermediário",
+        "kind": "boundary",
+        "evidence": {
+          "path": "integrations/scientific_plugins.py",
+          "symbol": "ScientificPluginService.accept_host_response"
+        }
+      }
+    ],
+    "flow": {
+      "steps": [
+        "Selecionar plugin e operação",
+        "Validar argumentos e intenção",
+        "Criar requisição vinculada por hash",
+        "Aguardar chamada do host autenticado",
+        "Conferir vínculo da resposta recebida",
+        "Registrar resultado e sua procedência"
+      ],
+      "decision_after": 2,
+      "question": "A operação e a intenção estão autorizadas?",
+      "no": "Recusar a requisição inválida",
+      "recovery": "Reformular dentro do contrato permitido",
+      "evidence": [
+        {
+          "path": "integrations/ecosystem_mcp.py",
+          "symbol": "ecosystem_scientific_plugins"
+        },
+        {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.scientific_plugin_action"
+        },
+        {
+          "path": "integrations/scientific_plugins.py",
+          "symbol": "ScientificPluginService.request"
+        },
+        {
+          "path": "integrations/scientific_plugins.py",
+          "symbol": "ScientificPluginService.accept_host_response"
+        }
+      ]
+    },
+    "mechanism": "No ramo de conector externo, request produz awaiting_host. O host autenticado deve chamar a ferramenta declarada e devolver resposta ligada ao hash da requisição. A aceitação valida esse vínculo e registra host_reported. O ramo local é distinto e usa lista estreita de operações executáveis. O fluxo ilustra o ramo externo, condicionado à autorização.",
+    "example": "Uma requisição bibliográfica pode ficar aguardando o host até a chamada do conector. A resposta deve corresponder à ferramenta e aos argumentos originais; um recibo de outra requisição é rejeitado.",
+    "limits": "A assinatura MCP não garante funcionamento remoto nem disponibilidade de conta. host_reported não é autenticação independente da origem. Serviços externos podem transmitir dados: o limite estritamente local não se estende automaticamente a todos os plugins. O nome declarado da ferramenta não é executado como comando shell.",
+    "sources": [
+      {
+        "path": "integrations/ecosystem_mcp.py",
+        "symbol": "ecosystem_scientific_plugins"
+      },
+      {
+        "path": "integrations/ecosystem_mcp.py",
+        "symbol": "_knowledge_operation"
+      },
+      {
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator.scientific_plugin_action"
+      },
+      {
+        "path": "integrations/scientific_plugins.py",
+        "symbol": "ScientificPluginService.request"
+      },
+      {
+        "path": "integrations/scientific_plugins.py",
+        "symbol": "ScientificPluginService.accept_host_response"
+      },
+      {
+        "path": "integrations/scientific_plugins.py",
+        "symbol": "ScientificPluginService.run_local"
+      }
+    ]
+  },
+  {
+    "id": "AR14",
+    "title": "Inteligência estrutural de código e grafo Python",
+    "chapters": [
+      "mod-07-integracoes"
+    ],
+    "question": "Como consultar estrutura com proveniência sem confiar em um grafo incorreto?",
+    "mental": [
+      {
+        "label": "Entrada",
+        "items": [
+          "Consulta limitada",
+          "Ferramenta permitida",
+          "Fontes como dados"
+        ]
+      },
+      {
+        "label": "Índice local",
+        "items": [
+          "Exportação de corpus",
+          "Hashes",
+          "Isolamento de rede"
+        ]
+      },
+      {
+        "label": "Dois caminhos",
+        "items": [
+          "Busca context-link",
+          "Grafo upstream bloqueado",
+          "AST Python do Core"
+        ]
+      },
+      {
+        "label": "Saída",
+        "items": [
+          "Símbolos",
+          "Unresolved explícito",
+          "Proveniência estática"
+        ]
+      }
+    ],
+    "components": [
+      {
+        "id": "mcp",
+        "label": "Fachada de contexto de código",
+        "path": "integrations/ecosystem_mcp.py",
+        "symbol": "ecosystem_code_context",
+        "role": "Expõe consultas delimitadas pelo primário"
+      },
+      {
+        "id": "primary",
+        "label": "Consulta no primário",
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator.code_context_action",
+        "role": "Projeta saída e registra proveniência"
+      },
+      {
+        "id": "provider",
+        "label": "Provedor de contexto local",
+        "path": "integrations/code_context.py",
+        "symbol": "CodeContextProvider.run",
+        "role": "Valida operação e escolhe o backend"
+      },
+      {
+        "id": "query",
+        "label": "Consulta upstream permitida",
+        "path": "integrations/code_context.py",
+        "symbol": "CodeContextProvider._query",
+        "role": "Exige índice atual e isolamento"
+      },
+      {
+        "id": "ast",
+        "label": "Adaptador de grafo Python",
+        "path": "integrations/code_context.py",
+        "symbol": "CodeContextProvider._python_graph",
+        "role": "Analisa snapshot sem iniciar upstream"
+      },
+      {
+        "id": "graph",
+        "label": "Análise AST conservadora",
+        "path": "integrations/python_code_graph.py",
+        "symbol": "analyze_python_graph",
+        "role": "Produz relações e limites estáticos"
+      }
+    ],
+    "edges": [
+      {
+        "source": "mcp",
+        "target": "primary",
+        "label": "operação de contexto",
+        "kind": "call",
+        "evidence": {
+          "path": "integrations/ecosystem_mcp.py",
+          "symbol": "ecosystem_code_context"
+        }
+      },
+      {
+        "source": "primary",
+        "target": "provider",
+        "label": "provider.run",
+        "kind": "call",
+        "evidence": {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.code_context_action"
+        }
+      },
+      {
+        "source": "provider",
+        "target": "query",
+        "label": "ramo query",
+        "kind": "call",
+        "evidence": {
+          "path": "integrations/code_context.py",
+          "symbol": "CodeContextProvider.run"
+        }
+      },
+      {
+        "source": "provider",
+        "target": "ast",
+        "label": "ramo python_graph",
+        "kind": "call",
+        "evidence": {
+          "path": "integrations/code_context.py",
+          "symbol": "CodeContextProvider.run"
+        }
+      },
+      {
+        "source": "ast",
+        "target": "graph",
+        "label": "snapshot Python rastreado",
+        "kind": "call",
+        "evidence": {
+          "path": "integrations/code_context.py",
+          "symbol": "CodeContextProvider._python_graph"
+        }
+      },
+      {
+        "source": "query",
+        "target": "ast",
+        "label": "alternativas distintas",
+        "kind": "structure",
+        "evidence": {
+          "path": "integrations/code_context.py",
+          "symbol": "CodeContextProvider.run"
+        }
+      }
+    ],
+    "flow": {
+      "steps": [
+        "Escolher consulta e ferramenta",
+        "Validar limites e argumentos",
+        "Conferir backend e estado exigido",
+        "Consultar índice ou analisar AST",
+        "Verificar fontes e proveniência",
+        "Devolver resultado e lacunas explícitas"
+      ],
+      "decision_after": 3,
+      "question": "O backend admite a consulta neste estado?",
+      "no": "Retornar bloqueio ou índice desatualizado",
+      "recovery": "Indexar explicitamente ou usar AST delimitado",
+      "evidence": [
+        {
+          "path": "integrations/code_context.py",
+          "symbol": "CodeContextProvider._validate_request"
+        },
+        {
+          "path": "integrations/code_context.py",
+          "symbol": "CodeContextProvider._query"
+        },
+        {
+          "path": "integrations/code_context.py",
+          "symbol": "CodeContextProvider._python_graph"
+        },
+        {
+          "path": "integrations/python_code_graph.py",
+          "symbol": "analyze_python_graph"
+        }
+      ]
+    },
+    "mechanism": "O primário encaminha consultas ao CodeContextProvider. Busca e extração upstream dependem de instalação, índice atual e isolamento. Três operações de grafo upstream permanecem bloqueadas por contraprova semântica; python_graph oferece caminho independente, conservador, sobre AST de fontes Python rastreadas. O fluxo é condicionado ao backend escolhido, com hashes e relações não resolvidas explícitas.",
+    "example": "Ao investigar quem chama uma função Python, python_graph permite inspecionar relações estáticas e unresolved. Solicitar a mesma operação ao backend upstream bloqueado deve devolver o bloqueio, sem inventar uma árvore de chamadas.",
+    "limits": "Análise estática não comprova execução nem resolve todo comportamento dinâmico. O AST local não corrige o provedor upstream nem o valida para outras linguagens. Precisão geral e economia de tokens não estão calibradas. Código recuperado não autoriza comandos.",
+    "sources": [
+      {
+        "path": "integrations/ecosystem_mcp.py",
+        "symbol": "ecosystem_code_context"
+      },
+      {
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator.code_context_action"
+      },
+      {
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator._code_context_briefing"
+      },
+      {
+        "path": "integrations/code_context.py",
+        "symbol": "CodeContextProvider.run"
+      },
+      {
+        "path": "integrations/code_context.py",
+        "symbol": "CodeContextProvider._query"
+      },
+      {
+        "path": "integrations/code_context.py",
+        "symbol": "CodeContextProvider._python_graph"
+      },
+      {
+        "path": "integrations/python_code_graph.py",
+        "symbol": "analyze_python_graph"
+      }
+    ]
+  },
+  {
+    "id": "AR17",
+    "title": "Plugins, skills e federação de artefatos",
+    "chapters": [
+      "mod-08-ecossistema"
+    ],
+    "question": "Como descobrir e preparar artefatos sem confundir catálogo com execução?",
+    "mental": [
+      {
+        "label": "Descoberta",
+        "items": [
+          "Raízes locais",
+          "Origem",
+          "Duplicatas"
+        ]
+      },
+      {
+        "label": "Contrato",
+        "items": [
+          "Integridade",
+          "Licença declarada",
+          "Política de invocação"
+        ]
+      },
+      {
+        "label": "Preparação",
+        "items": [
+          "Handoff",
+          "Raiz confiável",
+          "Instruções como dados"
+        ]
+      },
+      {
+        "label": "Emissão",
+        "items": [
+          "Formato do harness",
+          "Avisos explícitos",
+          "Sem execução implícita"
+        ]
+      }
+    ],
+    "components": [
+      {
+        "id": "primary",
+        "label": "Federação pelo primário",
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator.harness_federation",
+        "role": "Obtém registro de artefatos sob demanda"
+      },
+      {
+        "id": "harvest",
+        "label": "Descoberta de artefatos",
+        "path": "integrations/harness_federation/harvest.py",
+        "symbol": "HarnessHarvester.discover",
+        "role": "Varre raízes e deduplica definições"
+      },
+      {
+        "id": "artifact",
+        "label": "Contrato do artefato",
+        "path": "integrations/harness_federation/artifact.py",
+        "symbol": "HarnessArtifact.validate",
+        "role": "Lista problemas da definição descoberta"
+      },
+      {
+        "id": "handoff",
+        "label": "Plano de handoff",
+        "path": "transformer/harness_head.py",
+        "symbol": "HarnessRegistry.plan_handoff",
+        "role": "Confere integridade e política atual"
+      },
+      {
+        "id": "skill",
+        "label": "Resolução de skill",
+        "path": "reversa_universal/skill_dispatch.py",
+        "symbol": "ReversaSkillDispatcher.plan_path",
+        "role": "Respeita raízes e invocação explícita"
+      },
+      {
+        "id": "emit",
+        "label": "Emissão para harness",
+        "path": "integrations/harness_federation/emit.py",
+        "symbol": "HarnessEmitter.dispatch",
+        "role": "Gera artefatos no formato solicitado"
+      }
+    ],
+    "edges": [
+      {
+        "source": "primary",
+        "target": "handoff",
+        "label": "registro disponibilizado",
+        "kind": "structure",
+        "evidence": {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.harness_federation"
+        }
+      },
+      {
+        "source": "harvest",
+        "target": "artifact",
+        "label": "artefato e degradações",
+        "kind": "structure",
+        "evidence": {
+          "path": "integrations/harness_federation/artifact.py",
+          "symbol": "build_artifact"
+        }
+      },
+      {
+        "source": "handoff",
+        "target": "harvest",
+        "label": "carrega artefatos atuais",
+        "kind": "call",
+        "evidence": {
+          "path": "transformer/harness_head.py",
+          "symbol": "HarnessRegistry.artifacts"
+        }
+      },
+      {
+        "source": "handoff",
+        "target": "skill",
+        "label": "skill íntegra e permitida",
+        "kind": "call",
+        "evidence": {
+          "path": "transformer/harness_head.py",
+          "symbol": "HarnessRegistry.plan_handoff"
+        }
+      },
+      {
+        "source": "artifact",
+        "target": "emit",
+        "label": "contrato para emissão",
+        "kind": "structure",
+        "evidence": {
+          "path": "integrations/harness_federation/emit.py",
+          "symbol": "HarnessEmitter._refuse_degraded"
+        }
+      }
+    ],
+    "flow": {
+      "steps": [
+        "Descobrir artefatos nas raízes locais",
+        "Ler origem e estado de integridade",
+        "Conferir impedimentos e política",
+        "Preparar handoff ou emissão explícita",
+        "Ler instruções no contexto permitido",
+        "Registrar trabalho efetivamente realizado"
+      ],
+      "decision_after": 3,
+      "question": "Integridade e política permitem o handoff?",
+      "no": "Recusar preparo e informar razões",
+      "recovery": "Corrigir origem, contrato ou integridade",
+      "evidence": [
+        {
+          "path": "integrations/harness_federation/harvest.py",
+          "symbol": "HarnessHarvester.inventory"
+        },
+        {
+          "path": "transformer/harness_head.py",
+          "symbol": "HarnessRegistry.plan_handoff"
+        },
+        {
+          "path": "reversa_universal/skill_dispatch.py",
+          "symbol": "ReversaSkillDispatcher.plan_path"
+        },
+        {
+          "path": "integrations/harness_federation/emit.py",
+          "symbol": "HarnessEmitter.dispatch"
+        }
+      ]
+    },
+    "mechanism": "A federação descobre agentes, skills, plugins e outros artefatos em raízes disponíveis. O registro mantém proveniência e planos de handoff, que verificam integridade e impedimentos atuais. Skills respeitam política de invocação e raiz confiável. Emissão é operação distinta. O fluxo reúne passos explicativos, condicionados ao artefato e à solicitação explícita.",
+    "example": "Uma skill encontrada pode ter arquivo íntegro, aviso de licença e invocação implícita proibida. O plano deve preservar esses sinais e orientar leitura explícita; não deve disparar scripts somente porque a skill consta do inventário.",
+    "limits": "Descoberto, emitido, instalado e executado são estados diferentes. Avisos de licença não são autorização jurídica nem necessariamente bloqueio técnico de toda leitura. O último passo exige trabalho externo correlacionado: o plano por si só não o realiza.",
+    "sources": [
+      {
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator.harness_federation"
+      },
+      {
+        "path": "integrations/harness_federation/harvest.py",
+        "symbol": "HarnessHarvester.discover"
+      },
+      {
+        "path": "integrations/harness_federation/harvest.py",
+        "symbol": "HarnessHarvester.inventory"
+      },
+      {
+        "path": "integrations/harness_federation/artifact.py",
+        "symbol": "HarnessArtifact.validate"
+      },
+      {
+        "path": "transformer/harness_head.py",
+        "symbol": "HarnessRegistry.plan_handoff"
+      },
+      {
+        "path": "reversa_universal/skill_dispatch.py",
+        "symbol": "ReversaSkillDispatcher.plan_path"
+      },
+      {
+        "path": "integrations/harness_federation/emit.py",
+        "symbol": "HarnessEmitter.dispatch"
+      }
+    ]
+  }
+]

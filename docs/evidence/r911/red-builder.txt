@@ -1,0 +1,15 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+__________ test_atlas_builder_is_available_for_source_and_edge_checks __________
+
+    def test_atlas_builder_is_available_for_source_and_edge_checks():
+>       assert (ROOT / 'livro-core/gen_architecture_atlas.py').is_file(), 'Gerador e validador do atlas ainda ausentes'
+E       AssertionError: Gerador e validador do atlas ainda ausentes
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = (PosixPath('/home/marceloclaro/opencode-ecosystem-core') / 'livro-core/gen_architecture_atlas.py').is_file
+
+tests/test_r911_book_architecture_atlas.py:31: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_r911_book_architecture_atlas.py::test_atlas_builder_is_available_for_source_and_edge_checks
+1 failed in 0.23s

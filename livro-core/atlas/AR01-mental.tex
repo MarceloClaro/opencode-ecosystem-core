@@ -1,0 +1,44 @@
+% R911: gerado; alterar dados e gerador, não esta prancha.
+
+\refstepcounter{figure}\label{fig:AR01-mental}
+\noindent{\large\sffamily\bfseries\color{navy}AR01 · Mapa mental}\par\smallskip
+\noindent\textbf{Interfaces, configuração e entrada no Core}\par
+\noindent\textit{Como o pedido chega ao Core por CLI, painel ou MCP?}\par\medskip
+\begin{center}
+
+\tikzset{
+ atlasnode/.style={draw=steel,fill=blueBg,rounded corners=2mm,align=center,
+  text width=4cm,inner sep=5pt,font=\fontsize{9.5}{11.8}\selectfont,text=textmain},
+ atlasroot/.style={atlasnode,fill=navy,text=white,text width=2.8cm,font=\fontsize{10}{12}\selectfont\bfseries},
+ atlasdecision/.style={diamond,aspect=2.1,draw=amber,fill=amberBg,align=center,
+  text width=3cm,inner sep=2pt,font=\fontsize{9.5}{11.5}\selectfont},
+ atlascall/.style={-Stealth,draw=steel,thick},
+ atlasevent/.style={-Stealth,draw=violet,dashed,thick},
+ atlasdata/.style={-Stealth,draw=teal,densely dotted,thick},
+ atlasstructure/.style={draw=slate,thick},
+ atlasboundary/.style={-Stealth,draw=amber,dash dot,thick},
+ atlasedgelabel/.style={fill=papel,inner sep=1.3pt,font=\fontsize{9}{10}\selectfont}
+}
+
+\begin{tikzpicture}
+\node[atlasroot] (root) at (0,0) {AR01\\Interfaces, configuração e entrada no Core};
+
+\node[atlasnode] (branch0) at (-4.5,2.5) {\textbf{Entradas}\\CLI Python\\Painel Streamlit\\Ferramentas MCP};
+\draw[atlasstructure] (root) -- (branch0);
+
+\node[atlasnode] (branch1) at (4.5,2.5) {\textbf{Coordenação}\\Contrato primário\\Coordenador\\Operação escolhida};
+\draw[atlasstructure] (root) -- (branch1);
+
+\node[atlasnode] (branch2) at (-4.5,-2.5) {\textbf{Configuração}\\Agentes\\Comandos\\Servidores MCP};
+\draw[atlasstructure] (root) -- (branch2);
+
+\node[atlasnode] (branch3) at (4.5,-2.5) {\textbf{Evidência}\\Resposta delimitada\\Estado de execução\\Erros explícitos};
+\draw[atlasstructure] (root) -- (branch3);
+\end{tikzpicture}
+\end{center}
+{\small\textbf{Figura \thefigure.} Mapa mental --- Interfaces, configuração e entrada no Core}\par\smallskip
+\noindent\textbf{Como funciona e por quê.} Parta do centro e leia os quatro ramos. As linhas associam conceitos; não representam chamadas de funções.\par
+\noindent\textbf{Justificativa.} As entradas usam o contrato do primário, mas criam instâncias e caches por processo. O MCP de execução usa o coordenador autônomo; outras ferramentas acionam serviços específicos. A configuração descreve possibilidades e permissões. O fluxo é uma leitura curada das fronteiras de entrada, condicionada à operação escolhida.\par
+\noindent\textbf{Limite.} O agrupamento é didático; cada responsabilidade será localizada no diagrama e conferida no fluxo.\par\smallskip
+\fontecore{marceloclaro/cli.py}{main}
+\fontecore{webapp/app.py}{get_orchestrator}

@@ -1,0 +1,43 @@
+% R911: gerado; alterar dados e gerador, não esta prancha.
+\clearpage
+\refstepcounter{figure}\label{fig:AR10-structure}
+\noindent{\large\sffamily\bfseries\color{navy}AR10 · Diagrama de arquitetura}\par\smallskip
+\noindent\textbf{Raciocínio, matemática e otimização}\par
+\noindent\textit{Que motor responde e o que ele demonstra?}\par\medskip
+\begin{center}
+
+\tikzset{
+ atlasnode/.style={draw=steel,fill=blueBg,rounded corners=2mm,align=center,
+  text width=4cm,inner sep=5pt,font=\fontsize{9.5}{11.8}\selectfont,text=textmain},
+ atlasroot/.style={atlasnode,fill=navy,text=white,text width=2.8cm,font=\fontsize{10}{12}\selectfont\bfseries},
+ atlasdecision/.style={diamond,aspect=2.1,draw=amber,fill=amberBg,align=center,
+  text width=3cm,inner sep=2pt,font=\fontsize{9.5}{11.5}\selectfont},
+ atlascall/.style={-Stealth,draw=steel,thick},
+ atlasevent/.style={-Stealth,draw=violet,dashed,thick},
+ atlasdata/.style={-Stealth,draw=teal,densely dotted,thick},
+ atlasstructure/.style={draw=slate,thick},
+ atlasboundary/.style={-Stealth,draw=amber,dash dot,thick},
+ atlasedgelabel/.style={fill=papel,inner sep=1.3pt,font=\fontsize{9}{10}\selectfont}
+}
+
+\begin{tikzpicture}
+\node[atlasnode] (c0) at (-4.3,0) {\textbf{C1: Raciocínio pelo primário}\\Prepara contexto e observa a conclusão};
+\node[atlasnode] (c1) at (4.3,0) {\textbf{C2: Seletor de motores locais}\\Seleciona e invoca um motor};
+\node[atlasnode] (c2) at (-4.3,-3.0) {\textbf{C3: Álgebra simbólica restrita}\\Analisa expressão na gramática aceita};
+\node[atlasnode] (c3) at (4.3,-3.0) {\textbf{C4: Restrições lógicas SMT}\\Traduz restrições e consulta solver};
+\node[atlasnode] (c4) at (-4.3,-6.0) {\textbf{C5: Prova Lean via integração}\\Rejeita buracos e consulta verificador};
+\node[atlasnode] (c5) at (4.3,-6.0) {\textbf{C6: Otimização por MiniZinc}\\Solicita resolução ao servidor previsto};
+\draw[atlascall] (c0.east) to[out=0,in=180] node[atlasedgelabel,pos=.25]{E1} (c1.west);
+\draw[atlascall] (c1.west) to[out=180,in=0] node[atlasedgelabel,pos=.25]{E2} (c2.east);
+\draw[atlascall] (c1.south) -- node[atlasedgelabel,pos=.25]{E3} (c3.north);
+\draw[atlasboundary] (c3.west) to[out=180,in=0] node[atlasedgelabel,pos=.25]{E4} (c4.east);
+\draw[atlasboundary] (c4.east) to[out=0,in=180] node[atlasedgelabel,pos=.25]{E5} (c5.west);
+\end{tikzpicture}
+\end{center}
+{\small\textbf{Figura \thefigure.} Diagrama de arquitetura --- Raciocínio, matemática e otimização}\par\smallskip
+{\footnotesize\textbf{Chave das relações.} E1: C1 para C2 --- encaminha query e motor (chamada); E2: C2 para C3 --- seleção por nome de motor (chamada); E3: C2 para C4 --- seleção por nome de motor (chamada); E4: C4 para C5 --- SMT e prova: alcances distintos (fronteira); E5: C5 para C6 --- prova e otimização: rotas próprias (fronteira).}\par\smallskip
+\noindent\textbf{Como funciona e por quê.} Localize as seis responsabilidades C1--C6. Os identificadores E1--E5 permitem conferir o significado de cada conexão na chave das relações.\par
+\noindent\textbf{Justificativa.} Separar componentes e tipos de relação ajuda a localizar onde uma dependência, um evento ou uma fronteira foi declarado.\par
+\noindent\textbf{Limite.} SAT indica satisfatibilidade da fórmula traduzida; não prova uma tese científica. Uma prova Lean vale para o enunciado e hipóteses aceitos, sem validar dados empíricos. Backend ausente, expressão inválida e status rebaixado devem permanecer explícitos. O catálogo de motores não significa que todos foram executados nesta análise.\par\smallskip
+\fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator.reason}
+\fontecore{reasoning/engines.py}{MultiReasoningEngine.reason}

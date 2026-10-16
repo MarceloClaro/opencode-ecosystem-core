@@ -1,0 +1,58 @@
+........................................................................ [ 52%]
+..............................................................FF..       [100%]
+=================================== FAILURES ===================================
+_______ test_manifest_and_every_local_view_reproduce_authoritative_data ________
+
+builder = <module 'r911_atlas_builder' from '/home/marceloclaro/opencode-ecosystem-core/livro-core/gen_architecture_atlas.py'>
+source_architectures = [{'id': 'AR01', 'title': 'Interfaces, configuração e entrada no Core', 'chapters': ['mod-01c-instalacao'], 'question':...3-memoria-mci'], 'question': 'Como recuperar experiências sem transformar memória em verdade ou instrução?', ...}, ...]
+
+    def test_manifest_and_every_local_view_reproduce_authoritative_data(builder, source_architectures):
+        manifest = json.loads((ATLAS / "architectures.json").read_text())
+        published = manifest["architectures"]
+        assert manifest["revision"] == "R911"
+        assert manifest["static_layers_are_different_taxonomy"] is True
+        assert len(published) == len(source_architectures)
+        published_by_id = {entry["id"]: entry for entry in published}
+        for source in source_architectures:
+            entry = published_by_id[source["id"]]
+            assert {key: value for key, value in entry.items() if key != "views"} == source
+            for kind, filename in entry["views"].items():
+>               assert (ATLAS / filename).read_text() == builder.page(source, kind)
+E               AssertionError: assert '% R911: gera...match_task}\n' == '% R911: gera...match_task}\n'
+E
+E                 Skipping 2104 identical leading characters in diff, use -v to show
+E                 - event] (c3) to[bend left=14] node[atlasedgelabel,pos=.25]{E4} (c4);
+E                 ?                ^^^^^^^^   ^
+E                 + event] (c3.west) to[out=180,in=0] node[atlasedgelabel,pos=.25]{E4} (c4.east);
+E                 ?           +++++     ^^   ^^^^^^^                                      +++++
+E                 - \draw[atlasevent] (c4) to[bend left=14] node[atlasedgelabel,pos=.25]{E5} (c3);...
+E
+E                 ...Full output truncated (20 lines hidden), use '-vv' to show
+
+tests/test_r911_book_architecture_atlas.py:266: AssertionError
+________________ test_global_views_and_matrix_reproduce_sources ________________
+
+builder = <module 'r911_atlas_builder' from '/home/marceloclaro/opencode-ecosystem-core/livro-core/gen_architecture_atlas.py'>
+source_architectures = [{'id': 'AR01', 'title': 'Interfaces, configuração e entrada no Core', 'chapters': ['mod-01c-instalacao'], 'question':...3-memoria-mci'], 'question': 'Como recuperar experiências sem transformar memória em verdade ou instrução?', ...}, ...]
+snapshot = {'configurations': [{'agents': ['00_editor_chefe_phd', '01_agente_diagnostico_escopo', '02_agente_busca_curadoria', '0...clared_import', 'line': 17, 'path': 'academic/rigorous_board.py', 'source': 'academic.rigorous_board', ...}, ...], ...}
+
+    def test_global_views_and_matrix_reproduce_sources(builder, source_architectures, snapshot):
+        published = (ATLAS / "global.tex").read_text()
+        expected, ledger = builder.global_atlas(source_architectures, snapshot)
+>       assert published == expected
+E       AssertionError: assert '\\clearpage\...ile_action}\n' == '\\clearpage\...ile_action}\n'
+E
+E         Skipping 38237 identical leading characters in diff, use -v to show
+E         - tnotesize\noindent\begin{tabularx}{\linewidth}{YYYY}\toprule ID & Camada & ID & Camada \\ \midrule
+E         ?          ---------
+E         + tnotesize\begin{tabularx}{\linewidth}{YYYY}\toprule ID & Camada & ID & Camada \\ \midrule
+E
+E           L01 & agentes & L10 & memoria\_e\_evidencias \\...
+E
+E         ...Full output truncated (40 lines hidden), use '-vv' to show
+
+tests/test_r911_book_architecture_atlas.py:272: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_r911_book_architecture_atlas.py::test_manifest_and_every_local_view_reproduce_authoritative_data
+FAILED tests/test_r911_book_architecture_atlas.py::test_global_views_and_matrix_reproduce_sources
+2 failed, 136 passed in 17.95s

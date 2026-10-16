@@ -1,0 +1,44 @@
+% R911: gerado; alterar dados e gerador, não esta prancha.
+
+\refstepcounter{figure}\label{fig:AR18-mental}
+\noindent{\large\sffamily\bfseries\color{navy}AR18 · Mapa mental}\par\smallskip
+\noindent\textbf{Publicação, livro e provas Lean}\par
+\noindent\textit{Como preservar a rastreabilidade do livro?}\par\medskip
+\begin{center}
+
+\tikzset{
+ atlasnode/.style={draw=steel,fill=blueBg,rounded corners=2mm,align=center,
+  text width=4cm,inner sep=5pt,font=\fontsize{9.5}{11.8}\selectfont,text=textmain},
+ atlasroot/.style={atlasnode,fill=navy,text=white,text width=2.8cm,font=\fontsize{10}{12}\selectfont\bfseries},
+ atlasdecision/.style={diamond,aspect=2.1,draw=amber,fill=amberBg,align=center,
+  text width=3cm,inner sep=2pt,font=\fontsize{9.5}{11.5}\selectfont},
+ atlascall/.style={-Stealth,draw=steel,thick},
+ atlasevent/.style={-Stealth,draw=violet,dashed,thick},
+ atlasdata/.style={-Stealth,draw=teal,densely dotted,thick},
+ atlasstructure/.style={draw=slate,thick},
+ atlasboundary/.style={-Stealth,draw=amber,dash dot,thick},
+ atlasedgelabel/.style={fill=papel,inner sep=1.3pt,font=\fontsize{9}{10}\selectfont}
+}
+
+\begin{tikzpicture}
+\node[atlasroot] (root) at (0,0) {AR18\\Publicação, livro e provas Lean};
+
+\node[atlasnode] (branch0) at (-4.5,2.5) {\textbf{Fontes editoriais}\\módulos\\geradores\\referências};
+\draw[atlasstructure] (root) -- (branch0);
+
+\node[atlasnode] (branch1) at (4.5,2.5) {\textbf{Matemática}\\enunciados\\hipóteses\\Lean};
+\draw[atlasstructure] (root) -- (branch1);
+
+\node[atlasnode] (branch2) at (-4.5,-2.5) {\textbf{Custódia}\\versões\\hashes\\recibo};
+\draw[atlasstructure] (root) -- (branch2);
+
+\node[atlasnode] (branch3) at (4.5,-2.5) {\textbf{Publicação}\\compilação\\figuras\\inspeção};
+\draw[atlasstructure] (root) -- (branch3);
+\end{tikzpicture}
+\end{center}
+{\small\textbf{Figura \thefigure.} Mapa mental --- Publicação, livro e provas Lean}\par\smallskip
+\noindent\textbf{Como funciona e por quê.} Parta do centro e leia os quatro ramos. As linhas associam conceitos; não representam chamadas de funções.\par
+\noindent\textbf{Justificativa.} O inventário identifica fontes; o verificador fixa Lean, Mathlib e dependências, compila declarações e audita seus axiomas. As macros expõem esses fundamentos por prova. O validador editorial confere nomes e campos nas deduções locais. A compilação e a inspeção do PDF completam um percurso editorial curado, distinto de um único programa automático.\par
+\noindent\textbf{Limite.} O agrupamento é didático; cada responsabilidade será localizada no diagrama e conferida no fluxo.\par\smallskip
+\fontecore{livro-core/gen_inventario.py}{collect_inventory}
+\fontecore{scripts/verify_book_lean.py}{verify}

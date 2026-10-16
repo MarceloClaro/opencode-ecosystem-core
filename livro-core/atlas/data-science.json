@@ -1,0 +1,1800 @@
+[
+  {
+    "id": "AR07",
+    "title": "RAG, conhecimento e evidências",
+    "chapters": [
+      "mod-03-memoria-mci",
+      "mod-06-ciencia"
+    ],
+    "question": "Como recuperar contexto e rastrear evidências?",
+    "mental": [
+      {
+        "label": "Recuperação",
+        "items": [
+          "consulta",
+          "índice",
+          "relevância"
+        ]
+      },
+      {
+        "label": "Fundamentação",
+        "items": [
+          "fontes",
+          "limiar",
+          "abstenção"
+        ]
+      },
+      {
+        "label": "Grafo",
+        "items": [
+          "alegações",
+          "relações",
+          "contradições"
+        ]
+      },
+      {
+        "label": "Leitura crítica",
+        "items": [
+          "origem",
+          "atualidade",
+          "limites"
+        ]
+      }
+    ],
+    "components": [
+      {
+        "id": "C1",
+        "label": "Consulta pelo primário",
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator.rag_query",
+        "role": "Entrada de RAG e reflexão local"
+      },
+      {
+        "id": "C2",
+        "label": "Fachada de recuperação",
+        "path": "rag/enhanced_search_rag.py",
+        "symbol": "UnifiedSearchRAG.rag_query",
+        "role": "Encaminha consulta ao RAG aprimorado"
+      },
+      {
+        "id": "C3",
+        "label": "Recuperação aprimorada",
+        "path": "rag/enhanced_search_rag.py",
+        "symbol": "EnhancedRAG.retrieve_enhanced",
+        "role": "Ordena evidências recuperadas"
+      },
+      {
+        "id": "C4",
+        "label": "Resposta ou abstenção",
+        "path": "rag/enhanced_search_rag.py",
+        "symbol": "EnhancedRAG.answer_grounded",
+        "role": "Aplica limiar e devolve evidências"
+      },
+      {
+        "id": "C5",
+        "label": "Grafo de alegações MCI",
+        "path": "mci/evidence_graph.py",
+        "symbol": "EvidenceGraph",
+        "role": "Persiste alegações e evidências"
+      },
+      {
+        "id": "C6",
+        "label": "Rede visual de memória",
+        "path": "webapp/memory_network_visualizer.py",
+        "symbol": "CoreMemoryNetworkSource.snapshot",
+        "role": "Lê registros para uma visualização"
+      }
+    ],
+    "edges": [
+      {
+        "source": "C1",
+        "target": "C2",
+        "label": "encaminha pergunta",
+        "kind": "call",
+        "evidence": {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.rag_query"
+        }
+      },
+      {
+        "source": "C2",
+        "target": "C4",
+        "label": "solicita resposta",
+        "kind": "call",
+        "evidence": {
+          "path": "rag/enhanced_search_rag.py",
+          "symbol": "UnifiedSearchRAG.rag_query"
+        }
+      },
+      {
+        "source": "C4",
+        "target": "C3",
+        "label": "recupera antes de responder",
+        "kind": "call",
+        "evidence": {
+          "path": "rag/enhanced_search_rag.py",
+          "symbol": "EnhancedRAG.answer_grounded"
+        }
+      },
+      {
+        "source": "C3",
+        "target": "C5",
+        "label": "evidências: domínios distintos",
+        "kind": "structure",
+        "evidence": {
+          "path": "mci/evidence_graph.py",
+          "symbol": "EvidenceGraph"
+        }
+      },
+      {
+        "source": "C5",
+        "target": "C6",
+        "label": "snapshot do arquivo de alegações",
+        "kind": "data",
+        "evidence": {
+          "path": "webapp/memory_network_visualizer.py",
+          "symbol": "CoreMemoryNetworkSource.snapshot"
+        }
+      }
+    ],
+    "flow": {
+      "steps": [
+        "Definir uma pergunta delimitada",
+        "Consultar o índice disponível",
+        "Recuperar e filtrar evidências",
+        "Produzir resposta com suas fontes",
+        "Examinar alegações registradas",
+        "Inspecionar o snapshot visual"
+      ],
+      "decision_after": 3,
+      "question": "Há evidência acima do limiar?",
+      "no": "Abster-se e declarar insuficiência",
+      "recovery": "Ampliar o índice e reformular a pergunta",
+      "evidence": [
+        {
+          "path": "rag/enhanced_search_rag.py",
+          "symbol": "EnhancedRAG.answer_grounded"
+        },
+        {
+          "path": "webapp/memory_network_visualizer.py",
+          "symbol": "CoreMemoryNetworkSource.snapshot"
+        }
+      ]
+    },
+    "mechanism": "O primário encaminha a consulta à fachada de RAG, que recupera evidências e pode abster-se. O grafo MCI guarda alegações em arquivo próprio; a rede visual lê esse arquivo e registros do MetaBus. A ligação estrutural entre RAG e grafo representa responsabilidades próximas, sem afirmar gravação automática de cada resposta no grafo.",
+    "example": "Uma pergunta sobre um resultado recebe itens recuperados e seus identificadores. O leitor verifica a origem dos itens e consulta separadamente uma alegação já registrada para observar evidências favoráveis e contrárias.",
+    "limits": "A relevância recuperada é heurística local. Snapshot visual não demonstra atividade neural, execução contínua nem inferência de um agente. A ausência de documentos ou do backend pode produzir abstenção. O percurso de inspeção do grafo é curado e não corresponde a uma chamada automática do RAG.",
+    "sources": [
+      {
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator.rag_query"
+      },
+      {
+        "path": "rag/enhanced_search_rag.py",
+        "symbol": "EnhancedRAG.answer_grounded"
+      },
+      {
+        "path": "mci/evidence_graph.py",
+        "symbol": "EvidenceGraph"
+      },
+      {
+        "path": "webapp/memory_network_visualizer.py",
+        "symbol": "CoreMemoryNetworkSource.snapshot"
+      }
+    ]
+  },
+  {
+    "id": "AR08",
+    "title": "Especificação, TDD e aceite",
+    "chapters": [
+      "mod-04-qualidade-sdd",
+      "mod-13-ativacao-agentes"
+    ],
+    "question": "Que evidência permite aceitar uma entrega?",
+    "mental": [
+      {
+        "label": "Contrato",
+        "items": [
+          "objetivo",
+          "critérios",
+          "spec"
+        ]
+      },
+      {
+        "label": "Histórico",
+        "items": [
+          "RED",
+          "GREEN",
+          "REFACTOR"
+        ]
+      },
+      {
+        "label": "Verificação",
+        "items": [
+          "teste real",
+          "recibo",
+          "vínculo"
+        ]
+      },
+      {
+        "label": "Aceite",
+        "items": [
+          "modo estrito",
+          "bloqueio",
+          "revisão"
+        ]
+      }
+    ],
+    "components": [
+      {
+        "id": "C1",
+        "label": "Ciclo solicitado ao primário",
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator.run_tdd_cycle",
+        "role": "Cria contrato e coordena o ciclo"
+      },
+      {
+        "id": "C2",
+        "label": "Registro de especificações",
+        "path": "sdd/spec_engine.py",
+        "symbol": "SpecRegistry.create_task_spec",
+        "role": "Registra especificação da tarefa"
+      },
+      {
+        "id": "C3",
+        "label": "Histórico RED e GREEN",
+        "path": "sdd/tdd_history.py",
+        "symbol": "TDDHistory.preflight",
+        "role": "Confere a evidência histórica exigida"
+      },
+      {
+        "id": "C4",
+        "label": "Executor TDD e teste de entrega",
+        "path": "sdd/tdd_runner.py",
+        "symbol": "TDDRunner",
+        "role": "Executa ciclo e testes de entrega"
+      },
+      {
+        "id": "C5",
+        "label": "Verificador da especificação",
+        "path": "sdd/spec_engine.py",
+        "symbol": "SpecVerifier.verify",
+        "role": "Avalia critérios e evidência vinculada"
+      },
+      {
+        "id": "C6",
+        "label": "Entrega no orquestrador",
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator.report_completion",
+        "role": "Aplica gate conforme contrato e modo"
+      }
+    ],
+    "edges": [
+      {
+        "source": "C1",
+        "target": "C2",
+        "label": "cria especificação",
+        "kind": "call",
+        "evidence": {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.run_tdd_cycle"
+        }
+      },
+      {
+        "source": "C1",
+        "target": "C4",
+        "label": "solicita ciclo",
+        "kind": "call",
+        "evidence": {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.run_tdd_cycle"
+        }
+      },
+      {
+        "source": "C4",
+        "target": "C3",
+        "label": "pré-condição de contrato executável",
+        "kind": "call",
+        "evidence": {
+          "path": "sdd/tdd_runner.py",
+          "symbol": "TDDRunner.run_cycle"
+        }
+      },
+      {
+        "source": "C4",
+        "target": "C5",
+        "label": "verifica a produção",
+        "kind": "call",
+        "evidence": {
+          "path": "sdd/tdd_runner.py",
+          "symbol": "TDDRunner._verify_output"
+        }
+      },
+      {
+        "source": "C6",
+        "target": "C5",
+        "label": "verifica spec vinculada",
+        "kind": "call",
+        "evidence": {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.report_completion"
+        }
+      },
+      {
+        "source": "C6",
+        "target": "C4",
+        "label": "executa teste de entrega exigido",
+        "kind": "call",
+        "evidence": {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.report_completion"
+        }
+      }
+    ],
+    "flow": {
+      "steps": [
+        "Definir spec e critérios verificáveis",
+        "Vincular teste e histórico exigidos",
+        "Executar preflight de histórico RED",
+        "Produzir e executar teste GREEN",
+        "Refatorar preservando os critérios",
+        "Reportar o resultado e seu aceite"
+      ],
+      "decision_after": 3,
+      "question": "Histórico exigido está válido?",
+      "no": "Bloquear o ciclo antes da produção",
+      "recovery": "Obter RED real e preservar seu recibo",
+      "evidence": [
+        {
+          "path": "sdd/tdd_runner.py",
+          "symbol": "TDDRunner.run_cycle"
+        },
+        {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.report_completion"
+        }
+      ]
+    },
+    "mechanism": "O ciclo cria uma especificação e executa verificações após a produção. Contratos executáveis exigem histórico RED e evidência de testes vinculada. Na entrega ao orquestrador, o gate consulta a especificação associada; em modo estrito, a ausência de vínculo reprova. Refatoração que falha encerra o ciclo sem presumir reversão automática.",
+    "example": "Uma correção possui critério negativo que inicialmente falha. Após a implementação, o teste passa e a entrega apresenta evidência emitida pelo runner. Uma alteração posterior que invalida o teste bloqueia a aceitação.",
+    "limits": "O fluxo desenhado resume caminhos presentes no código; não comprova execução de uma tarefa concreta. O comportamento depende da especificação e do modo estrito. O modo legado pode registrar entrega não verificada. A fachada protocolos.sdd_gate valida somente a forma de entrada e não substitui o gate de execução.",
+    "sources": [
+      {
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator.run_tdd_cycle"
+      },
+      {
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator.report_completion"
+      },
+      {
+        "path": "sdd/spec_engine.py",
+        "symbol": "SpecVerifier.verify"
+      },
+      {
+        "path": "sdd/tdd_runner.py",
+        "symbol": "TDDRunner.run_cycle"
+      },
+      {
+        "path": "sdd/tdd_history.py",
+        "symbol": "TDDHistory.preflight"
+      },
+      {
+        "path": "protocolos/sdd_gate.py",
+        "symbol": "check"
+      }
+    ]
+  },
+  {
+    "id": "AR09",
+    "title": "Confiança, economia e governança",
+    "chapters": [
+      "mod-02-orquestracao",
+      "mod-04-qualidade-sdd",
+      "mod-08-ecossistema"
+    ],
+    "question": "Quem pode receber a tarefa e sob que regras?",
+    "mental": [
+      {
+        "label": "Elegibilidade",
+        "items": [
+          "capacidade",
+          "confiança",
+          "limiar"
+        ]
+      },
+      {
+        "label": "Decisão",
+        "items": [
+          "risco",
+          "negação",
+          "histórico"
+        ]
+      },
+      {
+        "label": "Economia interna",
+        "items": [
+          "saldo",
+          "reserva",
+          "liquidação"
+        ]
+      },
+      {
+        "label": "Governança",
+        "items": [
+          "rastro",
+          "resultado",
+          "supervisão"
+        ]
+      }
+    ],
+    "components": [
+      {
+        "id": "C1",
+        "label": "Propostas recebidas pelo primário",
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator._on_cfp",
+        "role": "Filtra elegíveis antes do roteamento"
+      },
+      {
+        "id": "C2",
+        "label": "Fachada de confiança",
+        "path": "trust/trust_engine.py",
+        "symbol": "TrustEngine",
+        "role": "Coordena decisão e aprendizado local"
+      },
+      {
+        "id": "C3",
+        "label": "Gate comportamental canônico",
+        "path": "trust/trust_engine.py",
+        "symbol": "BehavioralGate.gate",
+        "role": "Retorna decisão de permitir ou bloquear"
+      },
+      {
+        "id": "C4",
+        "label": "Escore por histórico de ação",
+        "path": "trust/trust_engine.py",
+        "symbol": "TrustScorer.get_trust",
+        "role": "Consulta escore interno da ação"
+      },
+      {
+        "id": "C5",
+        "label": "Economia de tarefas",
+        "path": "economy/token_economy.py",
+        "symbol": "TokenEconomy",
+        "role": "Coordena taxas, reservas e liquidação"
+      },
+      {
+        "id": "C6",
+        "label": "Livro de saldos internos",
+        "path": "economy/token_economy.py",
+        "symbol": "TokenLedger",
+        "role": "Registra saldos e transferências"
+      }
+    ],
+    "edges": [
+      {
+        "source": "C1",
+        "target": "C2",
+        "label": "consulta trust.execute",
+        "kind": "call",
+        "evidence": {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator._on_cfp"
+        }
+      },
+      {
+        "source": "C2",
+        "target": "C3",
+        "label": "solicita decisão de risco",
+        "kind": "call",
+        "evidence": {
+          "path": "trust/trust_engine.py",
+          "symbol": "TrustEngine.execute"
+        }
+      },
+      {
+        "source": "C3",
+        "target": "C4",
+        "label": "consulta histórico da ação",
+        "kind": "call",
+        "evidence": {
+          "path": "trust/trust_engine.py",
+          "symbol": "BehavioralGate.gate"
+        }
+      },
+      {
+        "source": "C1",
+        "target": "C5",
+        "label": "cota taxa e reserva stake",
+        "kind": "call",
+        "evidence": {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator._on_cfp"
+        }
+      },
+      {
+        "source": "C5",
+        "target": "C6",
+        "label": "compõe ledger, reserva e taxas",
+        "kind": "structure",
+        "evidence": {
+          "path": "economy/token_economy.py",
+          "symbol": "TokenEconomy.__init__"
+        }
+      },
+      {
+        "source": "C2",
+        "target": "C4",
+        "label": "aprende via OutcomeTracker",
+        "kind": "structure",
+        "evidence": {
+          "path": "trust/trust_engine.py",
+          "symbol": "OutcomeTracker.record"
+        }
+      }
+    ],
+    "flow": {
+      "steps": [
+        "Receber candidatos de uma tarefa",
+        "Consultar confiança de cada ação",
+        "Aplicar o gate comportamental",
+        "Ordenar os candidatos elegíveis",
+        "Tentar registrar taxa e reserva",
+        "Resolver resultado e atualizar rastro"
+      ],
+      "decision_after": 3,
+      "question": "Há candidato permitido pelo gate?",
+      "no": "Manter a tarefa bloqueada",
+      "recovery": "Revisar capacidade e histórico do agente",
+      "evidence": [
+        {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator._on_cfp"
+        },
+        {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.report_completion"
+        },
+        {
+          "path": "economy/token_economy.py",
+          "symbol": "TokenEconomy.resolve"
+        }
+      ]
+    },
+    "mechanism": "No caminho de propostas, o primário consulta TrustEngine.execute e exclui decisões negadas ou com erro. O gate usa o histórico da ação. Após escolher um agente, o primário tenta reservar recursos na economia interna. O relato de conclusão atualiza o aprendizado e a liquidação conforme o resultado registrado.",
+    "example": "Dois agentes possuem a capacidade solicitada. O gate bloqueia a ação com confiança insuficiente; o roteamento considera os restantes. O resultado posterior alimenta o histórico interno e a reserva associada à tarefa.",
+    "limits": "O escore é confiança operacional interna, sem probabilidade externa calibrada. Os tokens representam contabilidade do Core, sem valor monetário demonstrado. A tentativa de economia trata falhas separadamente. O gate deste caminho não implica interceptação universal de integrações diretas, processos de outros aplicativos ou sessões distintas.",
+    "sources": [
+      {
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator._on_cfp"
+      },
+      {
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator.report_completion"
+      },
+      {
+        "path": "trust/trust_engine.py",
+        "symbol": "TrustEngine.execute"
+      },
+      {
+        "path": "trust/trust_engine.py",
+        "symbol": "BehavioralGate.gate"
+      },
+      {
+        "path": "economy/token_economy.py",
+        "symbol": "TokenEconomy"
+      }
+    ]
+  },
+  {
+    "id": "AR10",
+    "title": "Raciocínio, matemática e otimização",
+    "chapters": [
+      "mod-05-raciocinio",
+      "mod-01-fundacoes",
+      "mod-21-mapa-teorias"
+    ],
+    "question": "Que motor responde e o que ele demonstra?",
+    "mental": [
+      {
+        "label": "Formulação",
+        "items": [
+          "expressão",
+          "domínio",
+          "hipóteses"
+        ]
+      },
+      {
+        "label": "Motores",
+        "items": [
+          "SymPy",
+          "Z3",
+          "MiniZinc"
+        ]
+      },
+      {
+        "label": "Prova formal",
+        "items": [
+          "Lean",
+          "enunciado",
+          "axiomas"
+        ]
+      },
+      {
+        "label": "Interpretação",
+        "items": [
+          "resultado",
+          "limitações",
+          "observação"
+        ]
+      }
+    ],
+    "components": [
+      {
+        "id": "C1",
+        "label": "Raciocínio pelo primário",
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator.reason",
+        "role": "Prepara contexto e observa a conclusão"
+      },
+      {
+        "id": "C2",
+        "label": "Seletor de motores locais",
+        "path": "reasoning/engines.py",
+        "symbol": "MultiReasoningEngine.reason",
+        "role": "Seleciona e invoca um motor"
+      },
+      {
+        "id": "C3",
+        "label": "Álgebra simbólica restrita",
+        "path": "reasoning/engines.py",
+        "symbol": "SymPyEngine.reason",
+        "role": "Analisa expressão na gramática aceita"
+      },
+      {
+        "id": "C4",
+        "label": "Restrições lógicas SMT",
+        "path": "reasoning/engines.py",
+        "symbol": "Z3Engine.reason",
+        "role": "Traduz restrições e consulta solver"
+      },
+      {
+        "id": "C5",
+        "label": "Prova Lean via integração",
+        "path": "integrations/lean_proof_mcp.py",
+        "symbol": "lean_verify",
+        "role": "Rejeita buracos e consulta verificador"
+      },
+      {
+        "id": "C6",
+        "label": "Otimização por MiniZinc",
+        "path": "integrations/minizinc_mcp.py",
+        "symbol": "solve_via_server",
+        "role": "Solicita resolução ao servidor previsto"
+      }
+    ],
+    "edges": [
+      {
+        "source": "C1",
+        "target": "C2",
+        "label": "encaminha query e motor",
+        "kind": "call",
+        "evidence": {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.reason"
+        }
+      },
+      {
+        "source": "C2",
+        "target": "C3",
+        "label": "seleção por nome de motor",
+        "kind": "call",
+        "evidence": {
+          "path": "reasoning/engines.py",
+          "symbol": "MultiReasoningEngine.reason"
+        }
+      },
+      {
+        "source": "C2",
+        "target": "C4",
+        "label": "seleção por nome de motor",
+        "kind": "call",
+        "evidence": {
+          "path": "reasoning/engines.py",
+          "symbol": "MultiReasoningEngine.reason"
+        }
+      },
+      {
+        "source": "C4",
+        "target": "C5",
+        "label": "SMT e prova: alcances distintos",
+        "kind": "boundary",
+        "evidence": {
+          "path": "integrations/lean_proof_mcp.py",
+          "symbol": "lean_verify"
+        }
+      },
+      {
+        "source": "C5",
+        "target": "C6",
+        "label": "prova e otimização: rotas próprias",
+        "kind": "boundary",
+        "evidence": {
+          "path": "integrations/minizinc_mcp.py",
+          "symbol": "solve_via_server"
+        }
+      }
+    ],
+    "flow": {
+      "steps": [
+        "Escrever pergunta e hipóteses explícitas",
+        "Escolher domínio e rota de resolução",
+        "Validar expressão e disponibilidade",
+        "Executar o motor compatível",
+        "Ler resultado com seu alcance",
+        "Registrar observação e limitações"
+      ],
+      "decision_after": 3,
+      "question": "Entrada e motor são compatíveis?",
+      "no": "Declarar falha ou indisponibilidade",
+      "recovery": "Reformular a expressão ou preparar o motor",
+      "evidence": [
+        {
+          "path": "reasoning/engines.py",
+          "symbol": "MultiReasoningEngine.reason"
+        },
+        {
+          "path": "reasoning/engines.py",
+          "symbol": "SymPyEngine.reason"
+        },
+        {
+          "path": "integrations/lean_proof_mcp.py",
+          "symbol": "lean_verify"
+        }
+      ]
+    },
+    "mechanism": "A rota reason usa o seletor local, cujo resultado é observado pelo circuito metacognitivo. SymPy e Z3 operam sobre domínios e gramáticas delimitados. Lean e MiniZinc dispõem de integrações próprias; as fronteiras do desenho distinguem prova formal, satisfatibilidade e otimização. O fluxograma é uma leitura curada dessas rotas, não uma cascata automática entre todos os motores.",
+    "example": "Uma expressão algébrica segue para SymPy; uma restrição inteira pode seguir para Z3. Uma alegação que exige demonstração recebe enunciado Lean próprio. O leitor examina separadamente pressupostos, saída e status do compilador.",
+    "limits": "SAT indica satisfatibilidade da fórmula traduzida; não prova uma tese científica. Uma prova Lean vale para o enunciado e hipóteses aceitos, sem validar dados empíricos. Backend ausente, expressão inválida e status rebaixado devem permanecer explícitos. O catálogo de motores não significa que todos foram executados nesta análise.",
+    "sources": [
+      {
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator.reason"
+      },
+      {
+        "path": "reasoning/engines.py",
+        "symbol": "MultiReasoningEngine.reason"
+      },
+      {
+        "path": "reasoning/engines.py",
+        "symbol": "SymPyEngine.reason"
+      },
+      {
+        "path": "reasoning/engines.py",
+        "symbol": "Z3Engine.reason"
+      },
+      {
+        "path": "integrations/lean_proof_mcp.py",
+        "symbol": "lean_verify"
+      },
+      {
+        "path": "integrations/minizinc_mcp.py",
+        "symbol": "solve_via_server"
+      }
+    ]
+  },
+  {
+    "id": "AR11",
+    "title": "Ciência, artigos e experimentos",
+    "chapters": [
+      "mod-06-ciencia",
+      "mod-15-epilogo-reproducao"
+    ],
+    "question": "Como ligar dados, análise e texto científico?",
+    "mental": [
+      {
+        "label": "Pergunta",
+        "items": [
+          "objetivo",
+          "variáveis",
+          "método"
+        ]
+      },
+      {
+        "label": "Procedência",
+        "items": [
+          "CSV",
+          "hash",
+          "origem declarada"
+        ]
+      },
+      {
+        "label": "Execução",
+        "items": [
+          "análise",
+          "reexecução",
+          "comparação"
+        ]
+      },
+      {
+        "label": "Comunicação",
+        "items": [
+          "artigo",
+          "referências",
+          "revisão humana"
+        ]
+      }
+    ],
+    "components": [
+      {
+        "id": "C1",
+        "label": "Execução científica pelo primário",
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator.scientific_reproducible_run",
+        "role": "Coordena análise e revalidação do pacote"
+      },
+      {
+        "id": "C2",
+        "label": "Pipeline de procedência",
+        "path": "research/provenance_pipeline.py",
+        "symbol": "ScientificProvenancePipeline.run",
+        "role": "Valida entrada e exporta artefatos"
+      },
+      {
+        "id": "C3",
+        "label": "Método estatístico selecionado",
+        "path": "research/statistical_methods.py",
+        "symbol": "execute_analysis",
+        "role": "Calcula o método declarado no CSV"
+      },
+      {
+        "id": "C4",
+        "label": "Texto científico derivado",
+        "path": "research/provenance_pipeline.py",
+        "symbol": "_article",
+        "role": "Produz relato a partir dos resultados"
+      },
+      {
+        "id": "C5",
+        "label": "Revalidação pelo primário",
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator.scientific_verify_package",
+        "role": "Registra o resultado da verificação local"
+      },
+      {
+        "id": "C6",
+        "label": "Verificador do pacote científico",
+        "path": "research/scientific_release.py",
+        "symbol": "verify_scientific_package",
+        "role": "Confere bytes e refaz análise confiável"
+      }
+    ],
+    "edges": [
+      {
+        "source": "C1",
+        "target": "C2",
+        "label": "executa percurso com procedência",
+        "kind": "call",
+        "evidence": {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.scientific_reproducible_run"
+        }
+      },
+      {
+        "source": "C2",
+        "target": "C3",
+        "label": "analisa snapshot do dataset",
+        "kind": "call",
+        "evidence": {
+          "path": "research/provenance_pipeline.py",
+          "symbol": "ScientificProvenancePipeline.run"
+        }
+      },
+      {
+        "source": "C2",
+        "target": "C4",
+        "label": "gera relato dos resultados",
+        "kind": "call",
+        "evidence": {
+          "path": "research/provenance_pipeline.py",
+          "symbol": "ScientificProvenancePipeline.run"
+        }
+      },
+      {
+        "source": "C1",
+        "target": "C5",
+        "label": "revalida pacote concluído",
+        "kind": "call",
+        "evidence": {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.scientific_reproducible_run"
+        }
+      },
+      {
+        "source": "C5",
+        "target": "C6",
+        "label": "confere pacote local",
+        "kind": "call",
+        "evidence": {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.scientific_verify_package"
+        }
+      },
+      {
+        "source": "C2",
+        "target": "C6",
+        "label": "manifesto, dados e recibos",
+        "kind": "data",
+        "evidence": {
+          "path": "research/scientific_release.py",
+          "symbol": "verify_scientific_package"
+        }
+      }
+    ],
+    "flow": {
+      "steps": [
+        "Delimitar pergunta, método e variáveis",
+        "Informar CSV e procedência declarada",
+        "Validar entrada e congelar snapshot",
+        "Calcular e executar reprodução local",
+        "Exportar artigo e manifesto de dados",
+        "Revalidar pacote antes da revisão humana"
+      ],
+      "decision_after": 3,
+      "question": "Entrada atende ao contrato científico?",
+      "no": "Bloquear e explicar o dado ausente",
+      "recovery": "Corrigir procedência ou configuração",
+      "evidence": [
+        {
+          "path": "research/provenance_pipeline.py",
+          "symbol": "ScientificProvenancePipeline.run"
+        },
+        {
+          "path": "research/scientific_release.py",
+          "symbol": "verify_scientific_package"
+        }
+      ]
+    },
+    "mechanism": "O pipeline recebe pergunta, CSV, método e procedência declarada; analisa um snapshot e exporta resultados, referências e artigo. Um processo de reprodução compara a saída. Após conclusão, o primário aciona a revalidação do pacote, que usa código confiável do Core para refazer o cálculo e verificar a integridade dos artefatos.",
+    "example": "Uma análise de correlação usa as variáveis previamente escolhidas. O pacote guarda os bytes do CSV, configuração, resultado e código de reprodução. O artigo descreve essa análise específica; a revisão humana examina se a pergunta e a interpretação são cientificamente adequadas.",
+    "limits": "A origem real do dado é declarada pelo usuário e não autenticada pelo hash. Reexecução local não demonstra causalidade, originalidade, competência universal ou revisão por pares. Metadados bibliográficos não equivalem à leitura integral. Aceite computacional permanece separado do aceite humano de submissão e de validação externa.",
+    "sources": [
+      {
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator.scientific_reproducible_run"
+      },
+      {
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator.scientific_verify_package"
+      },
+      {
+        "path": "research/provenance_pipeline.py",
+        "symbol": "ScientificProvenancePipeline.run"
+      },
+      {
+        "path": "research/statistical_methods.py",
+        "symbol": "execute_analysis"
+      },
+      {
+        "path": "research/scientific_release.py",
+        "symbol": "verify_scientific_package"
+      }
+    ]
+  },
+  {
+    "id": "AR13",
+    "title": "REA, camadas e inspeção local",
+    "chapters": [
+      "mod-07-integracoes",
+      "mod-09a-comparada"
+    ],
+    "question": "Que alvo pode ser inspecionado localmente?",
+    "mental": [
+      {
+        "label": "Alvos",
+        "items": [
+          "binário",
+          "JavaScript",
+          "assembly"
+        ]
+      },
+      {
+        "label": "Prontidão",
+        "items": [
+          "camada",
+          "motor",
+          "ambiente"
+        ]
+      },
+      {
+        "label": "Inspeção",
+        "items": [
+          "isolamento",
+          "sessão",
+          "operação"
+        ]
+      },
+      {
+        "label": "Evidência",
+        "items": [
+          "hash",
+          "recibo",
+          "limitações"
+        ]
+      }
+    ],
+    "components": [
+      {
+        "id": "C1",
+        "label": "REA pelo primário",
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator.rea_action",
+        "role": "Encaminha operação e registra observação"
+      },
+      {
+        "id": "C2",
+        "label": "Ponte de operações REA",
+        "path": "integrations/rea_bridge.py",
+        "symbol": "ReaBridge.action",
+        "role": "Valida pedido e executa troca MCP"
+      },
+      {
+        "id": "C3",
+        "label": "Sonda de camadas",
+        "path": "integrations/rea_layers.py",
+        "symbol": "probe_layer",
+        "role": "Confere configuração do motor local"
+      },
+      {
+        "id": "C4",
+        "label": "Ambiente dos motores",
+        "path": "integrations/rea_layers.py",
+        "symbol": "engine_environment",
+        "role": "Resolve motores já presentes no host"
+      },
+      {
+        "id": "C5",
+        "label": "Assistente local isolado",
+        "path": "integrations/rea_assistant.py",
+        "symbol": "LocalReaAssistant.action",
+        "role": "Inspeciona alvos e grava recibos locais"
+      },
+      {
+        "id": "C6",
+        "label": "Worker com rede isolada",
+        "path": "integrations/rea_assistant.py",
+        "symbol": "run_isolated_worker",
+        "role": "Inicia namespace e aplica limites"
+      }
+    ],
+    "edges": [
+      {
+        "source": "C1",
+        "target": "C2",
+        "label": "encaminha operação direta",
+        "kind": "call",
+        "evidence": {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.rea_action"
+        }
+      },
+      {
+        "source": "C2",
+        "target": "C3",
+        "label": "consulta camada selecionada",
+        "kind": "call",
+        "evidence": {
+          "path": "integrations/rea_bridge.py",
+          "symbol": "ReaBridge.action"
+        }
+      },
+      {
+        "source": "C2",
+        "target": "C4",
+        "label": "ambiente do processo filho",
+        "kind": "structure",
+        "evidence": {
+          "path": "integrations/rea_bridge.py",
+          "symbol": "ReaBridge._child_environment"
+        }
+      },
+      {
+        "source": "C2",
+        "target": "C5",
+        "label": "rotas REA com contratos próprios",
+        "kind": "boundary",
+        "evidence": {
+          "path": "integrations/rea_assistant.py",
+          "symbol": "LocalReaAssistant.action"
+        }
+      },
+      {
+        "source": "C5",
+        "target": "C6",
+        "label": "inspeciona em worker isolado",
+        "kind": "call",
+        "evidence": {
+          "path": "integrations/rea_assistant.py",
+          "symbol": "LocalReaAssistant.action"
+        }
+      }
+    ],
+    "flow": {
+      "steps": [
+        "Delimitar o alvo e a operação local",
+        "Consultar camada e motor disponíveis",
+        "Validar caminho e pré-condições",
+        "Executar pela rota REA escolhida",
+        "Conferir evidências e hash do alvo",
+        "Explicar achados com suas limitações"
+      ],
+      "decision_after": 3,
+      "question": "A rota possui suas pré-condições?",
+      "no": "Bloquear sem presumir análise concluída",
+      "recovery": "Preparar motor ou escolher rota compatível",
+      "evidence": [
+        {
+          "path": "integrations/rea_bridge.py",
+          "symbol": "ReaBridge.action"
+        },
+        {
+          "path": "integrations/rea_layers.py",
+          "symbol": "probe_layer"
+        },
+        {
+          "path": "integrations/rea_assistant.py",
+          "symbol": "LocalReaAssistant.action"
+        }
+      ]
+    },
+    "mechanism": "rea_action chama a ponte diretamente e registra observação; esse caminho não requer um CFP do Blackboard. A ponte valida a operação, consulta camadas e preserva resposta e procedência. O assistente local possui rota própria de inspeção com worker isolado, limites de tempo e recibo por hash. A fronteira distingue as duas superfícies.",
+    "example": "Para um binário local, o leitor consulta a camada nativa, verifica o motor resolvido e escolhe a operação compatível. Após a execução, compara o hash do alvo e lê evidências sobre funções ou estruturas efetivamente inspecionadas.",
+    "limits": "Prontidão de camada não prova execução. O worker isolado depende do suporte Linux/WSL e bloqueia quando o isolamento falha. A garantia local do assistente não deve ser estendida a agentes de nuvem nem a toda operação externa. Achados estáticos não demonstram comportamento completo do aplicativo em produção.",
+    "sources": [
+      {
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator.rea_action"
+      },
+      {
+        "path": "integrations/rea_bridge.py",
+        "symbol": "ReaBridge.action"
+      },
+      {
+        "path": "integrations/rea_layers.py",
+        "symbol": "probe_layer"
+      },
+      {
+        "path": "integrations/rea_layers.py",
+        "symbol": "engine_environment"
+      },
+      {
+        "path": "integrations/rea_assistant.py",
+        "symbol": "LocalReaAssistant.action"
+      },
+      {
+        "path": "integrations/rea_assistant.py",
+        "symbol": "run_isolated_worker"
+      }
+    ]
+  },
+  {
+    "id": "AR15",
+    "title": "Diagnóstico e evolução rastreável",
+    "chapters": [
+      "mod-08-ecossistema",
+      "mod-15-epilogo-reproducao"
+    ],
+    "question": "Que lacunas locais justificam nova evolução?",
+    "mental": [
+      {
+        "label": "Corpus",
+        "items": [
+          "autodescoberta",
+          "entrada retida",
+          "hash"
+        ]
+      },
+      {
+        "label": "Diagnóstico",
+        "items": [
+          "categorias",
+          "metas",
+          "lacunas"
+        ]
+      },
+      {
+        "label": "Evolução",
+        "items": [
+          "prioridade",
+          "mudanças",
+          "novo ciclo"
+        ]
+      },
+      {
+        "label": "Custódia",
+        "items": [
+          "artefatos",
+          "auditoria",
+          "limites"
+        ]
+      }
+    ],
+    "components": [
+      {
+        "id": "C1",
+        "label": "Diagnóstico pelo primário",
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator.diagnose",
+        "role": "Encaminha corpus e guarda observação"
+      },
+      {
+        "id": "C2",
+        "label": "Pipeline de diagnóstico",
+        "path": "scanners/pipeline.py",
+        "symbol": "DiagnosticPipeline.run",
+        "role": "Identifica escopo e reúne scanners"
+      },
+      {
+        "id": "C3",
+        "label": "Scanner de categorias",
+        "path": "scanners/noological_scanner.py",
+        "symbol": "NoologicalScanner.scan",
+        "role": "Mede sinais lexicais das categorias"
+      },
+      {
+        "id": "C4",
+        "label": "Metas e desalinhamentos",
+        "path": "scanners/teleological_scanner.py",
+        "symbol": "TeleologicalReverseScanner.compare_with_scan",
+        "role": "Confronta requisitos com o diagnóstico"
+      },
+      {
+        "id": "C5",
+        "label": "Registro de evolução",
+        "path": "evolution/cycles.py",
+        "symbol": "EvolutionRegistry.record",
+        "role": "Persiste ciclo e sua identificação"
+      },
+      {
+        "id": "C6",
+        "label": "Auditoria de custódia",
+        "path": "evolution/audit_gate.py",
+        "symbol": "EvolutionAuditGate.verify_cycle",
+        "role": "Confere contrato e artefatos de auditoria"
+      }
+    ],
+    "edges": [
+      {
+        "source": "C1",
+        "target": "C2",
+        "label": "executa diagnóstico local",
+        "kind": "call",
+        "evidence": {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.diagnose"
+        }
+      },
+      {
+        "source": "C2",
+        "target": "C3",
+        "label": "varre categorias do corpus",
+        "kind": "call",
+        "evidence": {
+          "path": "scanners/pipeline.py",
+          "symbol": "DiagnosticPipeline.run"
+        }
+      },
+      {
+        "source": "C2",
+        "target": "C4",
+        "label": "compara scan com requisitos",
+        "kind": "call",
+        "evidence": {
+          "path": "scanners/pipeline.py",
+          "symbol": "DiagnosticPipeline.run"
+        }
+      },
+      {
+        "source": "C4",
+        "target": "C5",
+        "label": "subsídio curado para nova mudança",
+        "kind": "structure",
+        "evidence": {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.record_evolution"
+        }
+      },
+      {
+        "source": "C5",
+        "target": "C6",
+        "label": "caminhos legado e auditado distintos",
+        "kind": "boundary",
+        "evidence": {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.record_evolution"
+        }
+      }
+    ],
+    "flow": {
+      "steps": [
+        "Identificar corpus, domínio e modo",
+        "Preservar identificação e hash da entrada",
+        "Executar scanners e registrar erros",
+        "Ler lacunas e propor mudança delimitada",
+        "Implementar e testar com nova medida",
+        "Registrar ciclo com escopo de custódia"
+      ],
+      "decision_after": 3,
+      "question": "O relatório possui evidência suficiente?",
+      "no": "Declarar falha ou limitação da medida",
+      "recovery": "Corrigir entrada e executar nova comparação",
+      "evidence": [
+        {
+          "path": "scanners/pipeline.py",
+          "symbol": "DiagnosticPipeline.run"
+        },
+        {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.record_evolution"
+        },
+        {
+          "path": "evolution/cycles.py",
+          "symbol": "EvolutionRegistry.record"
+        }
+      ]
+    },
+    "mechanism": "O diagnóstico distingue corpus fornecido, retido e autodescoberta. O scanner noológico conta sinais de categorias; o teleológico compara esses sinais a requisitos. O planejamento de mudança usa o relatório como subsídio. O registro evolutivo possui caminho legado explícito e caminho de custódia que exige contrato de auditoria e artefatos.",
+    "example": "Um corpus retido recebe identidade e hash antes da varredura. A equipe corrige uma lacuna específica, repete a mesma medida e registra os artefatos. A comparação só é interpretável quando entrada e escopo permanecem documentados.",
+    "limits": "Cobertura lexical de autodescoberta não é cobertura funcional nem qualidade científica. Erros de scanner podem ser registrados sem derrubar o pipeline. Registro de ciclo não significa custódia auditada ou validação externa. As setas que ligam diagnóstico à decisão evolutiva representam trabalho curado; não provam correção autônoma das lacunas.",
+    "sources": [
+      {
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator.diagnose"
+      },
+      {
+        "path": "scanners/pipeline.py",
+        "symbol": "DiagnosticPipeline.run"
+      },
+      {
+        "path": "scanners/noological_scanner.py",
+        "symbol": "NoologicalScanner.scan"
+      },
+      {
+        "path": "scanners/teleological_scanner.py",
+        "symbol": "TeleologicalReverseScanner.compare_with_scan"
+      },
+      {
+        "path": "marceloclaro/orchestrator.py",
+        "symbol": "MarceloClaroOrchestrator.record_evolution"
+      },
+      {
+        "path": "evolution/audit_gate.py",
+        "symbol": "EvolutionAuditGate.verify_cycle"
+      }
+    ]
+  },
+  {
+    "id": "AR16",
+    "title": "Infraestrutura, dados e segurança local",
+    "chapters": [
+      "mod-09-infra",
+      "mod-01c-instalacao",
+      "mod-22-reproducao-wsl-leigo"
+    ],
+    "question": "Como executar verificações locais rastreáveis?",
+    "mental": [
+      {
+        "label": "Dados de execução",
+        "items": [
+          "snapshot",
+          "hash",
+          "recibos"
+        ]
+      },
+      {
+        "label": "Controle",
+        "items": [
+          "perfil fechado",
+          "tempo",
+          "memória"
+        ]
+      },
+      {
+        "label": "Processos",
+        "items": [
+          "supervisor",
+          "runner",
+          "limpeza"
+        ]
+      },
+      {
+        "label": "Inspeção",
+        "items": [
+          "assinatura local",
+          "status",
+          "compatibilidade"
+        ]
+      }
+    ],
+    "components": [
+      {
+        "id": "C1",
+        "label": "Serviço de CI local",
+        "path": "integrations/local_ci.py",
+        "symbol": "LocalCIService.start",
+        "role": "Aceita somente perfil científico fechado"
+      },
+      {
+        "id": "C2",
+        "label": "Snapshot de fontes",
+        "path": "scripts/validate_scientific_profile.py",
+        "symbol": "source_snapshot",
+        "role": "Identifica as fontes do perfil executado"
+      },
+      {
+        "id": "C3",
+        "label": "Supervisor de execução local",
+        "path": "integrations/local_ci.py",
+        "symbol": "LocalCIService._work",
+        "role": "Observa runner e limites de recursos"
+      },
+      {
+        "id": "C4",
+        "label": "Runner do perfil científico",
+        "path": "scripts/validate_scientific_profile.py",
+        "symbol": "run_profile",
+        "role": "Executa os grupos de testes enumerados"
+      },
+      {
+        "id": "C5",
+        "label": "Validador de recibos",
+        "path": "scripts/validate_scientific_profile.py",
+        "symbol": "validate_group_receipts",
+        "role": "Confere resultados dos grupos previstos"
+      },
+      {
+        "id": "C6",
+        "label": "Consulta do estado local",
+        "path": "integrations/local_ci.py",
+        "symbol": "LocalCIService.status",
+        "role": "Exibe status e compatibilidade de fontes"
+      }
+    ],
+    "edges": [
+      {
+        "source": "C1",
+        "target": "C2",
+        "label": "identifica fontes via workspace",
+        "kind": "structure",
+        "evidence": {
+          "path": "integrations/local_ci.py",
+          "symbol": "LocalCIService._workspace"
+        }
+      },
+      {
+        "source": "C1",
+        "target": "C3",
+        "label": "inicia supervisor em processo filho",
+        "kind": "boundary",
+        "evidence": {
+          "path": "integrations/local_ci.py",
+          "symbol": "LocalCIService.start"
+        }
+      },
+      {
+        "source": "C3",
+        "target": "C4",
+        "label": "inicia runner do perfil fechado",
+        "kind": "boundary",
+        "evidence": {
+          "path": "integrations/local_ci.py",
+          "symbol": "LocalCIService._work"
+        }
+      },
+      {
+        "source": "C4",
+        "target": "C5",
+        "label": "grupo confere os próprios recibos",
+        "kind": "structure",
+        "evidence": {
+          "path": "scripts/validate_scientific_profile.py",
+          "symbol": "_run_group"
+        }
+      },
+      {
+        "source": "C3",
+        "target": "C5",
+        "label": "revalida via contrato de saída",
+        "kind": "structure",
+        "evidence": {
+          "path": "integrations/local_ci.py",
+          "symbol": "LocalCIService._validate_output"
+        }
+      },
+      {
+        "source": "C3",
+        "target": "C6",
+        "label": "registro persistido de execução",
+        "kind": "data",
+        "evidence": {
+          "path": "integrations/local_ci.py",
+          "symbol": "LocalCIService._view"
+        }
+      }
+    ],
+    "flow": {
+      "steps": [
+        "Solicitar o perfil científico fechado",
+        "Obter lock e identificar fontes",
+        "Conferir contrato e compatibilidade",
+        "Executar runner sob supervisão local",
+        "Validar recibos e limpeza dos processos",
+        "Consultar status e conferir compatibilidade"
+      ],
+      "decision_after": 3,
+      "question": "Fontes e exclusividade estão válidas?",
+      "no": "Recusar ou manter execução bloqueada",
+      "recovery": "Encerrar conflito e revisar fontes do perfil",
+      "evidence": [
+        {
+          "path": "integrations/local_ci.py",
+          "symbol": "LocalCIService.start"
+        },
+        {
+          "path": "integrations/local_ci.py",
+          "symbol": "LocalCIService._work"
+        },
+        {
+          "path": "scripts/validate_scientific_profile.py",
+          "symbol": "run_profile"
+        }
+      ]
+    },
+    "mechanism": "O serviço local aceita um perfil enumerado, registra fontes e inicia supervisor. Este cria o runner, observa tempo e memória e conserva recibos locais. A consulta de estado confere registros e compatibilidade com o workspace atual. O desenho detalha esse caminho de infraestrutura; utilitários de dados do repositório possuem contratos próprios.",
+    "example": "Uma execução do perfil científico recebe identificador local. O usuário acompanha se está na fila, executando, aprovada ou bloqueada, e verifica se as fontes atuais ainda correspondem às fontes usadas na execução.",
+    "limits": "A assinatura HMAC detecta alterações dos registros segundo o contrato local; não isola o proprietário do host. Essa CI não cria check no GitHub nem equivale a validação científica externa. Os testes cobrem o perfil enumerado. normalize, schemas_validator e batch_executor são utilitários simples, sem garantia implícita de segurança ou distribuição.",
+    "sources": [
+      {
+        "path": "integrations/local_ci.py",
+        "symbol": "LocalCIService.start"
+      },
+      {
+        "path": "integrations/local_ci.py",
+        "symbol": "LocalCIService._work"
+      },
+      {
+        "path": "integrations/local_ci.py",
+        "symbol": "LocalCIService.status"
+      },
+      {
+        "path": "scripts/validate_scientific_profile.py",
+        "symbol": "run_profile"
+      },
+      {
+        "path": "scripts/validate_scientific_profile.py",
+        "symbol": "validate_group_receipts"
+      },
+      {
+        "path": "infra_dados/data_pipeline.py",
+        "symbol": "normalize"
+      },
+      {
+        "path": "infra_dados/schemas_validator.py",
+        "symbol": "validate"
+      },
+      {
+        "path": "infra_dados/batch_executor.py",
+        "symbol": "order"
+      }
+    ]
+  },
+  {
+    "id": "AR18",
+    "title": "Publicação, livro e provas Lean",
+    "chapters": [
+      "mod-15-epilogo-reproducao",
+      "mod-11-apendices",
+      "mod-24-kit-mindmap-slides"
+    ],
+    "question": "Como preservar a rastreabilidade do livro?",
+    "mental": [
+      {
+        "label": "Fontes editoriais",
+        "items": [
+          "módulos",
+          "geradores",
+          "referências"
+        ]
+      },
+      {
+        "label": "Matemática",
+        "items": [
+          "enunciados",
+          "hipóteses",
+          "Lean"
+        ]
+      },
+      {
+        "label": "Custódia",
+        "items": [
+          "versões",
+          "hashes",
+          "recibo"
+        ]
+      },
+      {
+        "label": "Publicação",
+        "items": [
+          "compilação",
+          "figuras",
+          "inspeção"
+        ]
+      }
+    ],
+    "components": [
+      {
+        "id": "C1",
+        "label": "Inventário de fontes do livro",
+        "path": "livro-core/gen_inventario.py",
+        "symbol": "collect_inventory",
+        "role": "Conta e identifica fontes por hash"
+      },
+      {
+        "id": "C2",
+        "label": "Verificador formal do livro",
+        "path": "scripts/verify_book_lean.py",
+        "symbol": "verify",
+        "role": "Fixa ambiente e audita todas as provas"
+      },
+      {
+        "id": "C3",
+        "label": "Execução do compilador Lean",
+        "path": "scripts/verify_book_lean.py",
+        "symbol": "run_lean",
+        "role": "Compila declarações e imprime axiomas"
+      },
+      {
+        "id": "C4",
+        "label": "Macros de axiomas auditados",
+        "path": "livro-core/gen_lean_axioms.py",
+        "symbol": "render_axiom_macros",
+        "role": "Gera exposição por declaração auditada"
+      },
+      {
+        "id": "C5",
+        "label": "Validação das deduções locais",
+        "path": "scripts/book_local_deductions.py",
+        "symbol": "validate_local_deductions",
+        "role": "Confere campos e nomes de provas locais"
+      },
+      {
+        "id": "C6",
+        "label": "Integridade sintática editorial",
+        "path": "livro-core/check.py",
+        "symbol": "main",
+        "role": "Confere estrutura básica do TeX"
+      }
+    ],
+    "edges": [
+      {
+        "source": "C1",
+        "target": "C2",
+        "label": "fontes e versões sob custódia",
+        "kind": "structure",
+        "evidence": {
+          "path": "scripts/verify_book_lean.py",
+          "symbol": "context_sources"
+        }
+      },
+      {
+        "source": "C2",
+        "target": "C3",
+        "label": "compila e audita cada fonte",
+        "kind": "call",
+        "evidence": {
+          "path": "scripts/verify_book_lean.py",
+          "symbol": "verify"
+        }
+      },
+      {
+        "source": "C2",
+        "target": "C4",
+        "label": "recibo com nomes e axiomas",
+        "kind": "data",
+        "evidence": {
+          "path": "livro-core/gen_lean_axioms.py",
+          "symbol": "render_axiom_macros"
+        }
+      },
+      {
+        "source": "C4",
+        "target": "C5",
+        "label": "nomes auditados na exposição local",
+        "kind": "structure",
+        "evidence": {
+          "path": "scripts/book_local_deductions.py",
+          "symbol": "validate_local_deductions"
+        }
+      },
+      {
+        "source": "C1",
+        "target": "C6",
+        "label": "fontes editoriais compartilhadas",
+        "kind": "structure",
+        "evidence": {
+          "path": "livro-core/check.py",
+          "symbol": "main"
+        }
+      },
+      {
+        "source": "C5",
+        "target": "C6",
+        "label": "gates editoriais complementares",
+        "kind": "structure",
+        "evidence": {
+          "path": "scripts/book_local_deductions.py",
+          "symbol": "main"
+        }
+      }
+    ],
+    "flow": {
+      "steps": [
+        "Revisar fontes e exposição das deduções",
+        "Congelar dependências e fontes matemáticas",
+        "Compilar provas e auditar os axiomas",
+        "Gerar macros e conferir vínculos locais",
+        "Compilar o livro existente e seus mapas",
+        "Inspecionar PDF e registrar a edição"
+      ],
+      "decision_after": 3,
+      "question": "Compilação e auditoria foram aceitas?",
+      "no": "Rejeitar o recibo e impedir alegação de prova",
+      "recovery": "Corrigir enunciado ou prova e recompilar",
+      "evidence": [
+        {
+          "path": "scripts/verify_book_lean.py",
+          "symbol": "verify"
+        },
+        {
+          "path": "livro-core/gen_lean_axioms.py",
+          "symbol": "render_axiom_macros"
+        },
+        {
+          "path": "scripts/book_local_deductions.py",
+          "symbol": "validate_local_deductions"
+        }
+      ]
+    },
+    "mechanism": "O inventário identifica fontes; o verificador fixa Lean, Mathlib e dependências, compila declarações e audita seus axiomas. As macros expõem esses fundamentos por prova. O validador editorial confere nomes e campos nas deduções locais. A compilação e a inspeção do PDF completam um percurso editorial curado, distinto de um único programa automático.",
+    "example": "Ao modificar uma fórmula, a equipe revisa enunciado e hipóteses, recompila sua prova, regenera os fundamentos exibidos e confere o quadro no PDF. Mudança de fonte invalida o recibo anterior até nova verificação compatível.",
+    "limits": "Lean confere proposições formalizadas sob suas hipóteses, sem provar dados, eficácia pedagógica ou mérito editorial. A presença dos nomes certos não certifica tradução semântica perfeita da prosa. Contagens e hashes identificam a edição; amostragem visual deve declarar seu alcance. Aceite humano e revisão externa permanecem separados.",
+    "sources": [
+      {
+        "path": "livro-core/gen_inventario.py",
+        "symbol": "collect_inventory"
+      },
+      {
+        "path": "scripts/verify_book_lean.py",
+        "symbol": "verify"
+      },
+      {
+        "path": "scripts/verify_book_lean.py",
+        "symbol": "run_lean"
+      },
+      {
+        "path": "livro-core/gen_lean_axioms.py",
+        "symbol": "render_axiom_macros"
+      },
+      {
+        "path": "scripts/book_local_deductions.py",
+        "symbol": "validate_local_deductions"
+      },
+      {
+        "path": "livro-core/check.py",
+        "symbol": "main"
+      }
+    ]
+  }
+]

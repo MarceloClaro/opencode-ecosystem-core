@@ -1,0 +1,44 @@
+% R911: gerado; alterar dados e gerador, não esta prancha.
+\clearpage
+\refstepcounter{figure}\label{fig:AR18-structure}
+\noindent{\large\sffamily\bfseries\color{navy}AR18 · Diagrama de arquitetura}\par\smallskip
+\noindent\textbf{Publicação, livro e provas Lean}\par
+\noindent\textit{Como preservar a rastreabilidade do livro?}\par\medskip
+\begin{center}
+
+\tikzset{
+ atlasnode/.style={draw=steel,fill=blueBg,rounded corners=2mm,align=center,
+  text width=4cm,inner sep=5pt,font=\fontsize{9.5}{11.8}\selectfont,text=textmain},
+ atlasroot/.style={atlasnode,fill=navy,text=white,text width=2.8cm,font=\fontsize{10}{12}\selectfont\bfseries},
+ atlasdecision/.style={diamond,aspect=2.1,draw=amber,fill=amberBg,align=center,
+  text width=3cm,inner sep=2pt,font=\fontsize{9.5}{11.5}\selectfont},
+ atlascall/.style={-Stealth,draw=steel,thick},
+ atlasevent/.style={-Stealth,draw=violet,dashed,thick},
+ atlasdata/.style={-Stealth,draw=teal,densely dotted,thick},
+ atlasstructure/.style={draw=slate,thick},
+ atlasboundary/.style={-Stealth,draw=amber,dash dot,thick},
+ atlasedgelabel/.style={fill=papel,inner sep=1.3pt,font=\fontsize{9}{10}\selectfont}
+}
+
+\begin{tikzpicture}
+\node[atlasnode] (c0) at (-4.3,0) {\textbf{C1: Inventário de fontes do livro}\\Conta e identifica fontes por hash};
+\node[atlasnode] (c1) at (4.3,0) {\textbf{C2: Verificador formal do livro}\\Fixa ambiente e audita todas as provas};
+\node[atlasnode] (c2) at (-4.3,-3.0) {\textbf{C3: Execução do compilador Lean}\\Compila declarações e imprime axiomas};
+\node[atlasnode] (c3) at (4.3,-3.0) {\textbf{C4: Macros de axiomas auditados}\\Gera exposição por declaração auditada};
+\node[atlasnode] (c4) at (-4.3,-6.0) {\textbf{C5: Validação das deduções locais}\\Confere campos e nomes de provas locais};
+\node[atlasnode] (c5) at (4.3,-6.0) {\textbf{C6: Integridade sintática editorial}\\Confere estrutura básica do TeX};
+\draw[atlasstructure] (c0.east) to[out=0,in=180] node[atlasedgelabel,pos=.25]{E1} (c1.west);
+\draw[atlascall] (c1.west) to[out=180,in=0] node[atlasedgelabel,pos=.25]{E2} (c2.east);
+\draw[atlasdata] (c1.south) -- node[atlasedgelabel,pos=.25]{E3} (c3.north);
+\draw[atlasstructure] (c3.west) to[out=180,in=0] node[atlasedgelabel,pos=.25]{E4} (c4.east);
+\draw[atlasstructure] (c0.east) to[out=0,in=180] node[atlasedgelabel,pos=.25]{E5} (c5.west);
+\draw[atlasstructure] (c4.east) to[out=0,in=180] node[atlasedgelabel,pos=.25]{E6} (c5.west);
+\end{tikzpicture}
+\end{center}
+{\small\textbf{Figura \thefigure.} Diagrama de arquitetura --- Publicação, livro e provas Lean}\par\smallskip
+{\footnotesize\textbf{Chave das relações.} E1: C1 para C2 --- fontes e versões sob custódia (estrutura); E2: C2 para C3 --- compila e audita cada fonte (chamada); E3: C2 para C4 --- recibo com nomes e axiomas (dado); E4: C4 para C5 --- nomes auditados na exposição local (estrutura); E5: C1 para C6 --- fontes editoriais compartilhadas (estrutura); E6: C5 para C6 --- gates editoriais complementares (estrutura).}\par\smallskip
+\noindent\textbf{Como funciona e por quê.} Localize as seis responsabilidades C1--C6. Os identificadores E1--E6 permitem conferir o significado de cada conexão na chave das relações.\par
+\noindent\textbf{Justificativa.} Separar componentes e tipos de relação ajuda a localizar onde uma dependência, um evento ou uma fronteira foi declarado.\par
+\noindent\textbf{Limite.} Lean confere proposições formalizadas sob suas hipóteses, sem provar dados, eficácia pedagógica ou mérito editorial. A presença dos nomes certos não certifica tradução semântica perfeita da prosa. Contagens e hashes identificam a edição; amostragem visual deve declarar seu alcance. Aceite humano e revisão externa permanecem separados.\par\smallskip
+\fontecore{livro-core/gen_inventario.py}{collect_inventory}
+\fontecore{scripts/verify_book_lean.py}{verify}

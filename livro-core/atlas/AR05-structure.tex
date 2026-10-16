@@ -1,0 +1,44 @@
+% R911: gerado; alterar dados e gerador, não esta prancha.
+\clearpage
+\refstepcounter{figure}\label{fig:AR05-structure}
+\noindent{\large\sffamily\bfseries\color{navy}AR05 · Diagrama de arquitetura}\par\smallskip
+\noindent\textbf{Ciclo de vida de agentes e perfis gerenciados}\par
+\noindent\textit{Como criar, validar, registrar e preparar um agente sem simular trabalho?}\par\medskip
+\begin{center}
+
+\tikzset{
+ atlasnode/.style={draw=steel,fill=blueBg,rounded corners=2mm,align=center,
+  text width=4cm,inner sep=5pt,font=\fontsize{9.5}{11.8}\selectfont,text=textmain},
+ atlasroot/.style={atlasnode,fill=navy,text=white,text width=2.8cm,font=\fontsize{10}{12}\selectfont\bfseries},
+ atlasdecision/.style={diamond,aspect=2.1,draw=amber,fill=amberBg,align=center,
+  text width=3cm,inner sep=2pt,font=\fontsize{9.5}{11.5}\selectfont},
+ atlascall/.style={-Stealth,draw=steel,thick},
+ atlasevent/.style={-Stealth,draw=violet,dashed,thick},
+ atlasdata/.style={-Stealth,draw=teal,densely dotted,thick},
+ atlasstructure/.style={draw=slate,thick},
+ atlasboundary/.style={-Stealth,draw=amber,dash dot,thick},
+ atlasedgelabel/.style={fill=papel,inner sep=1.3pt,font=\fontsize{9}{10}\selectfont}
+}
+
+\begin{tikzpicture}
+\node[atlasnode] (c0) at (-4.3,0) {\textbf{C1: Operação do primário}\\Centraliza criação e ativação de perfil};
+\node[atlasnode] (c1) at (4.3,0) {\textbf{C2: Criação persistente}\\Valida documento e publica cartão novo};
+\node[atlasnode] (c2) at (-4.3,-3.0) {\textbf{C3: Contrato do cartão}\\Confere spec, teste e permissões};
+\node[atlasnode] (c3) at (4.3,-3.0) {\textbf{C4: Carga do catálogo}\\Recusa cartões fora do contrato aplicável};
+\node[atlasnode] (c4) at (-4.3,-6.0) {\textbf{C5: Compilação OpenCode}\\Reúne definições na configuração};
+\node[atlasnode] (c5) at (4.3,-6.0) {\textbf{C6: Delegação de ativação}\\Publica tarefa com identidade do perfil};
+\draw[atlascall] (c0.east) to[out=0,in=180] node[atlasedgelabel,pos=.25]{E1} (c1.west);
+\draw[atlascall] (c1.west) to[out=180,in=0] node[atlasedgelabel,pos=.25]{E2} (c2.east);
+\draw[atlascall] (c0.west) -- (-7.0,0) -- node[atlasedgelabel,pos=.25]{E3} (-7.0,-6.0) -- (c4.west);
+\draw[atlascall] (c4.east) to[out=0,in=180] node[atlasedgelabel,pos=.25]{E4} (c3.west);
+\draw[atlascall] (c0.east) to[out=0,in=180] node[atlasedgelabel,pos=.25]{E5} (c5.west);
+\draw[atlasstructure] (c3.west) to[out=180,in=0] node[atlasedgelabel,pos=.25]{E6} (c2.east);
+\end{tikzpicture}
+\end{center}
+{\small\textbf{Figura \thefigure.} Diagrama de arquitetura --- Ciclo de vida de agentes e perfis gerenciados}\par\smallskip
+{\footnotesize\textbf{Chave das relações.} E1: C1 para C2 --- operation=create (chamada); E2: C2 para C3 --- valida antes de publicar (chamada); E3: C1 para C5 --- regenera após criação (chamada); E4: C5 para C4 --- carrega catálogo (chamada); E5: C1 para C6 --- operation=activate (chamada); E6: C4 para C3 --- contrato gerenciado (estrutura).}\par\smallskip
+\noindent\textbf{Como funciona e por quê.} Localize as seis responsabilidades C1--C6. Os identificadores E1--E6 permitem conferir o significado de cada conexão na chave das relações.\par
+\noindent\textbf{Justificativa.} Separar componentes e tipos de relação ajuda a localizar onde uma dependência, um evento ou uma fronteira foi declarado.\par
+\noindent\textbf{Limite.} O Core não intercepta automaticamente ferramentas externas que criam subagentes. Registro, ativação e cartão available não significam inferência ou conclusão. Alterações de perfis históricos exigem migração explícita, sem usar o baseline para encobrir novas definições.\par\smallskip
+\fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator.agent_profile_action}
+\fontecore{agents/lifecycle.py}{AgentLifecycleService.create}

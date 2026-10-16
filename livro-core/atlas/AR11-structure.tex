@@ -1,0 +1,44 @@
+% R911: gerado; alterar dados e gerador, não esta prancha.
+\clearpage
+\refstepcounter{figure}\label{fig:AR11-structure}
+\noindent{\large\sffamily\bfseries\color{navy}AR11 · Diagrama de arquitetura}\par\smallskip
+\noindent\textbf{Ciência, artigos e experimentos}\par
+\noindent\textit{Como ligar dados, análise e texto científico?}\par\medskip
+\begin{center}
+
+\tikzset{
+ atlasnode/.style={draw=steel,fill=blueBg,rounded corners=2mm,align=center,
+  text width=4cm,inner sep=5pt,font=\fontsize{9.5}{11.8}\selectfont,text=textmain},
+ atlasroot/.style={atlasnode,fill=navy,text=white,text width=2.8cm,font=\fontsize{10}{12}\selectfont\bfseries},
+ atlasdecision/.style={diamond,aspect=2.1,draw=amber,fill=amberBg,align=center,
+  text width=3cm,inner sep=2pt,font=\fontsize{9.5}{11.5}\selectfont},
+ atlascall/.style={-Stealth,draw=steel,thick},
+ atlasevent/.style={-Stealth,draw=violet,dashed,thick},
+ atlasdata/.style={-Stealth,draw=teal,densely dotted,thick},
+ atlasstructure/.style={draw=slate,thick},
+ atlasboundary/.style={-Stealth,draw=amber,dash dot,thick},
+ atlasedgelabel/.style={fill=papel,inner sep=1.3pt,font=\fontsize{9}{10}\selectfont}
+}
+
+\begin{tikzpicture}
+\node[atlasnode] (c0) at (-4.3,0) {\textbf{C1: Execução científica pelo primário}\\Coordena análise e revalidação do pacote};
+\node[atlasnode] (c1) at (4.3,0) {\textbf{C2: Pipeline de procedência}\\Valida entrada e exporta artefatos};
+\node[atlasnode] (c2) at (-4.3,-3.0) {\textbf{C3: Método estatístico selecionado}\\Calcula o método declarado no CSV};
+\node[atlasnode] (c3) at (4.3,-3.0) {\textbf{C4: Texto científico derivado}\\Produz relato a partir dos resultados};
+\node[atlasnode] (c4) at (-4.3,-6.0) {\textbf{C5: Revalidação pelo primário}\\Registra o resultado da verificação local};
+\node[atlasnode] (c5) at (4.3,-6.0) {\textbf{C6: Verificador do pacote científico}\\Confere bytes e refaz análise confiável};
+\draw[atlascall] (c0.east) to[out=0,in=180] node[atlasedgelabel,pos=.25]{E1} (c1.west);
+\draw[atlascall] (c1.west) to[out=180,in=0] node[atlasedgelabel,pos=.25]{E2} (c2.east);
+\draw[atlascall] (c1.south) -- node[atlasedgelabel,pos=.25]{E3} (c3.north);
+\draw[atlascall] (c0.west) -- (-7.0,0) -- node[atlasedgelabel,pos=.25]{E4} (-7.0,-6.0) -- (c4.west);
+\draw[atlascall] (c4.east) to[out=0,in=180] node[atlasedgelabel,pos=.25]{E5} (c5.west);
+\draw[atlasdata] (c1.east) -- (7.0,0) -- node[atlasedgelabel,pos=.25]{E6} (7.0,-6.0) -- (c5.east);
+\end{tikzpicture}
+\end{center}
+{\small\textbf{Figura \thefigure.} Diagrama de arquitetura --- Ciência, artigos e experimentos}\par\smallskip
+{\footnotesize\textbf{Chave das relações.} E1: C1 para C2 --- executa percurso com procedência (chamada); E2: C2 para C3 --- analisa snapshot do dataset (chamada); E3: C2 para C4 --- gera relato dos resultados (chamada); E4: C1 para C5 --- revalida pacote concluído (chamada); E5: C5 para C6 --- confere pacote local (chamada); E6: C2 para C6 --- manifesto, dados e recibos (dado).}\par\smallskip
+\noindent\textbf{Como funciona e por quê.} Localize as seis responsabilidades C1--C6. Os identificadores E1--E6 permitem conferir o significado de cada conexão na chave das relações.\par
+\noindent\textbf{Justificativa.} Separar componentes e tipos de relação ajuda a localizar onde uma dependência, um evento ou uma fronteira foi declarado.\par
+\noindent\textbf{Limite.} A origem real do dado é declarada pelo usuário e não autenticada pelo hash. Reexecução local não demonstra causalidade, originalidade, competência universal ou revisão por pares. Metadados bibliográficos não equivalem à leitura integral. Aceite computacional permanece separado do aceite humano de submissão e de validação externa.\par\smallskip
+\fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator.scientific_reproducible_run}
+\fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator.scientific_verify_package}

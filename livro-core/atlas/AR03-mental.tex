@@ -1,0 +1,44 @@
+% R911: gerado; alterar dados e gerador, não esta prancha.
+
+\refstepcounter{figure}\label{fig:AR03-mental}
+\noindent{\large\sffamily\bfseries\color{navy}AR03 · Mapa mental}\par\smallskip
+\noindent\textbf{Blackboard A2A e circulação no MetaBus}\par
+\noindent\textit{O que é tarefa compartilhada e o que é evento no barramento?}\par\medskip
+\begin{center}
+
+\tikzset{
+ atlasnode/.style={draw=steel,fill=blueBg,rounded corners=2mm,align=center,
+  text width=4cm,inner sep=5pt,font=\fontsize{9.5}{11.8}\selectfont,text=textmain},
+ atlasroot/.style={atlasnode,fill=navy,text=white,text width=2.8cm,font=\fontsize{10}{12}\selectfont\bfseries},
+ atlasdecision/.style={diamond,aspect=2.1,draw=amber,fill=amberBg,align=center,
+  text width=3cm,inner sep=2pt,font=\fontsize{9.5}{11.5}\selectfont},
+ atlascall/.style={-Stealth,draw=steel,thick},
+ atlasevent/.style={-Stealth,draw=violet,dashed,thick},
+ atlasdata/.style={-Stealth,draw=teal,densely dotted,thick},
+ atlasstructure/.style={draw=slate,thick},
+ atlasboundary/.style={-Stealth,draw=amber,dash dot,thick},
+ atlasedgelabel/.style={fill=papel,inner sep=1.3pt,font=\fontsize{9}{10}\selectfont}
+}
+
+\begin{tikzpicture}
+\node[atlasroot] (root) at (0,0) {AR03\\Blackboard A2A e circulação no MetaBus};
+
+\node[atlasnode] (branch0) at (-4.5,2.5) {\textbf{Cartões}\\Identidade\\Capacidades\\Estado disponível};
+\draw[atlasstructure] (root) -- (branch0);
+
+\node[atlasnode] (branch1) at (4.5,2.5) {\textbf{Tarefas}\\Pedido\\Responsável\\Resultado};
+\draw[atlasstructure] (root) -- (branch1);
+
+\node[atlasnode] (branch2) at (-4.5,-2.5) {\textbf{Eventos}\\Inscrição\\Publicação\\Identidade lógica};
+\draw[atlasstructure] (root) -- (branch2);
+
+\node[atlasnode] (branch3) at (4.5,-2.5) {\textbf{Memória}\\Log local\\Reflexão solicitada\\Falha de persistência};
+\draw[atlasstructure] (root) -- (branch3);
+\end{tikzpicture}
+\end{center}
+{\small\textbf{Figura \thefigure.} Mapa mental --- Blackboard A2A e circulação no MetaBus}\par\smallskip
+\noindent\textbf{Como funciona e por quê.} Parta do centro e leia os quatro ramos. As linhas associam conceitos; não representam chamadas de funções.\par
+\noindent\textbf{Justificativa.} O Blackboard conserva cartões e tarefas; o MetaBus distribui eventos aos receptores inscritos. São singletons locais ao processo. A publicação chama receptores e tenta escrever log local. A conclusão só atualiza a tarefa correspondente ao agente atribuído e publica um pedido de reflexão.\par
+\noindent\textbf{Limite.} O agrupamento é didático; cada responsabilidade será localizada no diagrama e conferida no fluxo.\par\smallskip
+\fontecore{mci/blackboard.py}{Blackboard.__init__}
+\fontecore{mci/blackboard.py}{Blackboard._match_task}

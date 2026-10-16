@@ -104,6 +104,7 @@ def checked_dependency(path: Path, revision: str) -> dict:
 
 def context_sources() -> list[Path]:
     return sorted({*ROOT.glob('livro-core/*.tex'), *ROOT.glob('livro-core/gen*.py'),
+                   *ROOT.glob('livro-core/atlas/*.json'), *ROOT.glob('livro-core/atlas/*.tex'),
                    ROOT/'livro-core/lean/lean-toolchain', ROOT/'livro-core/lean/lakefile.toml',
                    ROOT/'livro-core/lean/lake-manifest.json', Path(__file__).resolve(),
                    ROOT/'tests/test_r908_book_lean.py', ROOT/'docs/VERIFICACAO_FORMAL_LIVRO_R908.md',
@@ -113,7 +114,12 @@ def context_sources() -> list[Path]:
                    ROOT/'scripts/book_local_deductions.py', ROOT/'tests/test_r910_book_local_deductions.py',
                    ROOT/'docs/DEDUCOES_LOCAIS_LIVRO_R910.md',
                    ROOT/'specs/SPEC-935-R910-deducoes-locais-livro-lean.md',
-                   ROOT/'docs/superpowers/plans/2026-10-16-deducoes-locais-lean.md'})
+                   ROOT/'docs/superpowers/plans/2026-10-16-deducoes-locais-lean.md',
+                   ROOT/'tests/test_r911_book_architecture_atlas.py',
+                   ROOT/'specs/SPEC-935-R911-atlas-arquiteturas-livro.md',
+                   ROOT/'docs/superpowers/plans/2026-10-16-atlas-arquiteturas.md',
+                   ROOT/'docs/ARQUITETURAS_LIVRO_R911.md',
+                   ROOT/'docs/architecture-r911/architecture-inventory.json'})
 
 
 def validate_math_map(mapping: dict, known_names: set[str]) -> dict:

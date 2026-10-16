@@ -1,0 +1,43 @@
+% R911: gerado; alterar dados e gerador, não esta prancha.
+\clearpage
+\refstepcounter{figure}\label{fig:AR04-structure}
+\noindent{\large\sffamily\bfseries\color{navy}AR04 · Diagrama de arquitetura}\par\smallskip
+\noindent\textbf{Workflows, checkpoints e executores de leitura}\par
+\noindent\textit{Como dependências, limites e retomada controlam o trabalho composto?}\par\medskip
+\begin{center}
+
+\tikzset{
+ atlasnode/.style={draw=steel,fill=blueBg,rounded corners=2mm,align=center,
+  text width=4cm,inner sep=5pt,font=\fontsize{9.5}{11.8}\selectfont,text=textmain},
+ atlasroot/.style={atlasnode,fill=navy,text=white,text width=2.8cm,font=\fontsize{10}{12}\selectfont\bfseries},
+ atlasdecision/.style={diamond,aspect=2.1,draw=amber,fill=amberBg,align=center,
+  text width=3cm,inner sep=2pt,font=\fontsize{9.5}{11.5}\selectfont},
+ atlascall/.style={-Stealth,draw=steel,thick},
+ atlasevent/.style={-Stealth,draw=violet,dashed,thick},
+ atlasdata/.style={-Stealth,draw=teal,densely dotted,thick},
+ atlasstructure/.style={draw=slate,thick},
+ atlasboundary/.style={-Stealth,draw=amber,dash dot,thick},
+ atlasedgelabel/.style={fill=papel,inner sep=1.3pt,font=\fontsize{9}{10}\selectfont}
+}
+
+\begin{tikzpicture}
+\node[atlasnode] (c0) at (-4.3,0) {\textbf{C1: Entrada de workflow MCP}\\Recebe DAG e controla acesso à execução};
+\node[atlasnode] (c1) at (4.3,0) {\textbf{C2: Coordenador de workflow}\\Percorre dependências com orçamento};
+\node[atlasnode] (c2) at (-4.3,-3.0) {\textbf{C3: Armazenamento de checkpoints}\\Publica o estado persistido do workflow};
+\node[atlasnode] (c3) at (4.3,-3.0) {\textbf{C4: Coordenador de execução}\\Liga delegação, execução e revisão};
+\node[atlasnode] (c4) at (-4.3,-6.0) {\textbf{C5: Runtime de harnesses}\\Inicia executor e relata sua execução};
+\node[atlasnode] (c5) at (4.3,-6.0) {\textbf{C6: Histórico de executores}\\Registra evidência local de saúde};
+\draw[atlascall] (c0.east) to[out=0,in=180] node[atlasedgelabel,pos=.25]{E1} (c1.west);
+\draw[atlascall] (c1.west) to[out=180,in=0] node[atlasedgelabel,pos=.25]{E2} (c2.east);
+\draw[atlascall] (c1.south) -- node[atlasedgelabel,pos=.25]{E3} (c3.north);
+\draw[atlascall] (c3.west) to[out=180,in=0] node[atlasedgelabel,pos=.25]{E4} (c4.east);
+\draw[atlascall] (c4.east) to[out=0,in=180] node[atlasedgelabel,pos=.25]{E5} (c5.west);
+\end{tikzpicture}
+\end{center}
+{\small\textbf{Figura \thefigure.} Diagrama de arquitetura --- Workflows, checkpoints e executores de leitura}\par\smallskip
+{\footnotesize\textbf{Chave das relações.} E1: C1 para C2 --- solicita workflow (chamada); E2: C2 para C3 --- salva checkpoint (chamada); E3: C2 para C4 --- etapa pronta (chamada); E4: C4 para C5 --- executa harness (chamada); E5: C5 para C6 --- tentativa iniciada (chamada).}\par\smallskip
+\noindent\textbf{Como funciona e por quê.} Localize as seis responsabilidades C1--C6. Os identificadores E1--E5 permitem conferir o significado de cada conexão na chave das relações.\par
+\noindent\textbf{Justificativa.} Separar componentes e tipos de relação ajuda a localizar onde uma dependência, um evento ou uma fronteira foi declarado.\par
+\noindent\textbf{Limite.} Este fluxo curado é condicionado ao estado do checkpoint. O DAG de workflow difere do TaskRuntime de nanotarefas com leases. Não há paralelismo demonstrado nesta rota. Histórico de sucesso não comprova saldo, autenticação ou execução atual de um harness; interrupção pode deixar execução incerta.\par\smallskip
+\fontecore{integrations/ecosystem_mcp.py}{ecosystem_workflow}
+\fontecore{marceloclaro/workflow.py}{WorkflowCoordinator.run}

@@ -1,0 +1,43 @@
+% R911: gerado; alterar dados e gerador, não esta prancha.
+\clearpage
+\refstepcounter{figure}\label{fig:AR17-structure}
+\noindent{\large\sffamily\bfseries\color{navy}AR17 · Diagrama de arquitetura}\par\smallskip
+\noindent\textbf{Plugins, skills e federação de artefatos}\par
+\noindent\textit{Como descobrir e preparar artefatos sem confundir catálogo com execução?}\par\medskip
+\begin{center}
+
+\tikzset{
+ atlasnode/.style={draw=steel,fill=blueBg,rounded corners=2mm,align=center,
+  text width=4cm,inner sep=5pt,font=\fontsize{9.5}{11.8}\selectfont,text=textmain},
+ atlasroot/.style={atlasnode,fill=navy,text=white,text width=2.8cm,font=\fontsize{10}{12}\selectfont\bfseries},
+ atlasdecision/.style={diamond,aspect=2.1,draw=amber,fill=amberBg,align=center,
+  text width=3cm,inner sep=2pt,font=\fontsize{9.5}{11.5}\selectfont},
+ atlascall/.style={-Stealth,draw=steel,thick},
+ atlasevent/.style={-Stealth,draw=violet,dashed,thick},
+ atlasdata/.style={-Stealth,draw=teal,densely dotted,thick},
+ atlasstructure/.style={draw=slate,thick},
+ atlasboundary/.style={-Stealth,draw=amber,dash dot,thick},
+ atlasedgelabel/.style={fill=papel,inner sep=1.3pt,font=\fontsize{9}{10}\selectfont}
+}
+
+\begin{tikzpicture}
+\node[atlasnode] (c0) at (-4.3,0) {\textbf{C1: Federação pelo primário}\\Obtém registro de artefatos sob demanda};
+\node[atlasnode] (c1) at (4.3,0) {\textbf{C2: Descoberta de artefatos}\\Varre raízes e deduplica definições};
+\node[atlasnode] (c2) at (-4.3,-3.0) {\textbf{C3: Contrato do artefato}\\Lista problemas da definição descoberta};
+\node[atlasnode] (c3) at (4.3,-3.0) {\textbf{C4: Plano de handoff}\\Confere integridade e política atual};
+\node[atlasnode] (c4) at (-4.3,-6.0) {\textbf{C5: Resolução de skill}\\Respeita raízes e invocação explícita};
+\node[atlasnode] (c5) at (4.3,-6.0) {\textbf{C6: Emissão para harness}\\Gera artefatos no formato solicitado};
+\draw[atlasstructure] (c0.east) to[out=0,in=180] node[atlasedgelabel,pos=.25]{E1} (c3.west);
+\draw[atlasstructure] (c1.west) to[out=180,in=0] node[atlasedgelabel,pos=.25]{E2} (c2.east);
+\draw[atlascall] (c3.north) -- node[atlasedgelabel,pos=.25]{E3} (c1.south);
+\draw[atlascall] (c3.west) to[out=180,in=0] node[atlasedgelabel,pos=.25]{E4} (c4.east);
+\draw[atlasstructure] (c2.east) to[out=0,in=180] node[atlasedgelabel,pos=.25]{E5} (c5.west);
+\end{tikzpicture}
+\end{center}
+{\small\textbf{Figura \thefigure.} Diagrama de arquitetura --- Plugins, skills e federação de artefatos}\par\smallskip
+{\footnotesize\textbf{Chave das relações.} E1: C1 para C4 --- registro disponibilizado (estrutura); E2: C2 para C3 --- artefato e degradações (estrutura); E3: C4 para C2 --- carrega artefatos atuais (chamada); E4: C4 para C5 --- skill íntegra e permitida (chamada); E5: C3 para C6 --- contrato para emissão (estrutura).}\par\smallskip
+\noindent\textbf{Como funciona e por quê.} Localize as seis responsabilidades C1--C6. Os identificadores E1--E5 permitem conferir o significado de cada conexão na chave das relações.\par
+\noindent\textbf{Justificativa.} Separar componentes e tipos de relação ajuda a localizar onde uma dependência, um evento ou uma fronteira foi declarado.\par
+\noindent\textbf{Limite.} Descoberto, emitido, instalado e executado são estados diferentes. Avisos de licença não são autorização jurídica nem necessariamente bloqueio técnico de toda leitura. O último passo exige trabalho externo correlacionado: o plano por si só não o realiza.\par\smallskip
+\fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator.harness_federation}
+\fontecore{integrations/harness_federation/harvest.py}{HarnessHarvester.discover}

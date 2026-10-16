@@ -1,0 +1,43 @@
+% R911: gerado; alterar dados e gerador, não esta prancha.
+\clearpage
+\refstepcounter{figure}\label{fig:AR13-structure}
+\noindent{\large\sffamily\bfseries\color{navy}AR13 · Diagrama de arquitetura}\par\smallskip
+\noindent\textbf{REA, camadas e inspeção local}\par
+\noindent\textit{Que alvo pode ser inspecionado localmente?}\par\medskip
+\begin{center}
+
+\tikzset{
+ atlasnode/.style={draw=steel,fill=blueBg,rounded corners=2mm,align=center,
+  text width=4cm,inner sep=5pt,font=\fontsize{9.5}{11.8}\selectfont,text=textmain},
+ atlasroot/.style={atlasnode,fill=navy,text=white,text width=2.8cm,font=\fontsize{10}{12}\selectfont\bfseries},
+ atlasdecision/.style={diamond,aspect=2.1,draw=amber,fill=amberBg,align=center,
+  text width=3cm,inner sep=2pt,font=\fontsize{9.5}{11.5}\selectfont},
+ atlascall/.style={-Stealth,draw=steel,thick},
+ atlasevent/.style={-Stealth,draw=violet,dashed,thick},
+ atlasdata/.style={-Stealth,draw=teal,densely dotted,thick},
+ atlasstructure/.style={draw=slate,thick},
+ atlasboundary/.style={-Stealth,draw=amber,dash dot,thick},
+ atlasedgelabel/.style={fill=papel,inner sep=1.3pt,font=\fontsize{9}{10}\selectfont}
+}
+
+\begin{tikzpicture}
+\node[atlasnode] (c0) at (-4.3,0) {\textbf{C1: REA pelo primário}\\Encaminha operação e registra observação};
+\node[atlasnode] (c1) at (4.3,0) {\textbf{C2: Ponte de operações REA}\\Valida pedido e executa troca MCP};
+\node[atlasnode] (c2) at (-4.3,-3.0) {\textbf{C3: Sonda de camadas}\\Confere configuração do motor local};
+\node[atlasnode] (c3) at (4.3,-3.0) {\textbf{C4: Ambiente dos motores}\\Resolve motores já presentes no host};
+\node[atlasnode] (c4) at (-4.3,-6.0) {\textbf{C5: Assistente local isolado}\\Inspeciona alvos e grava recibos locais};
+\node[atlasnode] (c5) at (4.3,-6.0) {\textbf{C6: Worker com rede isolada}\\Inicia namespace e aplica limites};
+\draw[atlascall] (c0.east) to[out=0,in=180] node[atlasedgelabel,pos=.25]{E1} (c1.west);
+\draw[atlascall] (c1.west) to[out=180,in=0] node[atlasedgelabel,pos=.25]{E2} (c2.east);
+\draw[atlasstructure] (c1.south) -- node[atlasedgelabel,pos=.25]{E3} (c3.north);
+\draw[atlasboundary] (c1.west) to[out=180,in=0] node[atlasedgelabel,pos=.25]{E4} (c4.east);
+\draw[atlascall] (c4.east) to[out=0,in=180] node[atlasedgelabel,pos=.25]{E5} (c5.west);
+\end{tikzpicture}
+\end{center}
+{\small\textbf{Figura \thefigure.} Diagrama de arquitetura --- REA, camadas e inspeção local}\par\smallskip
+{\footnotesize\textbf{Chave das relações.} E1: C1 para C2 --- encaminha operação direta (chamada); E2: C2 para C3 --- consulta camada selecionada (chamada); E3: C2 para C4 --- ambiente do processo filho (estrutura); E4: C2 para C5 --- rotas REA com contratos próprios (fronteira); E5: C5 para C6 --- inspeciona em worker isolado (chamada).}\par\smallskip
+\noindent\textbf{Como funciona e por quê.} Localize as seis responsabilidades C1--C6. Os identificadores E1--E5 permitem conferir o significado de cada conexão na chave das relações.\par
+\noindent\textbf{Justificativa.} Separar componentes e tipos de relação ajuda a localizar onde uma dependência, um evento ou uma fronteira foi declarado.\par
+\noindent\textbf{Limite.} Prontidão de camada não prova execução. O worker isolado depende do suporte Linux/WSL e bloqueia quando o isolamento falha. A garantia local do assistente não deve ser estendida a agentes de nuvem nem a toda operação externa. Achados estáticos não demonstram comportamento completo do aplicativo em produção.\par\smallskip
+\fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator.rea_action}
+\fontecore{integrations/rea_bridge.py}{ReaBridge.action}

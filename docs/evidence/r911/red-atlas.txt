@@ -1,0 +1,28 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+__________________ test_architectures_have_three_local_views ___________________
+
+    def test_architectures_have_three_local_views():
+        path = ROOT / 'livro-core/atlas/architectures.json'
+>       assert path.is_file(), 'Atlas por arquitetura ainda ausente'
+E       AssertionError: Atlas por arquitetura ainda ausente
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/marceloclaro/opencode-ecosystem-core/livro-core/atlas/architectures.json').is_file
+
+tests/test_r911_book_architecture_atlas.py:10: AssertionError
+_______ test_complete_graph_exports_are_not_only_an_illustrative_summary _______
+
+    def test_complete_graph_exports_are_not_only_an_illustrative_summary():
+        path = ROOT / 'docs/architecture-r911/mermaid-correspondence.json'
+>       assert path.is_file(), 'Mapa integral estático ainda ausente'
+E       AssertionError: Mapa integral estático ainda ausente
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/marceloclaro/opencode-ecosystem-core/docs/architecture-r911/mermaid-correspondence.json').is_file
+
+tests/test_r911_book_architecture_atlas.py:24: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_r911_book_architecture_atlas.py::test_architectures_have_three_local_views
+FAILED tests/test_r911_book_architecture_atlas.py::test_complete_graph_exports_are_not_only_an_illustrative_summary
+2 failed in 0.30s

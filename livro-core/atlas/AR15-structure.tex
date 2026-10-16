@@ -1,0 +1,43 @@
+% R911: gerado; alterar dados e gerador, não esta prancha.
+\clearpage
+\refstepcounter{figure}\label{fig:AR15-structure}
+\noindent{\large\sffamily\bfseries\color{navy}AR15 · Diagrama de arquitetura}\par\smallskip
+\noindent\textbf{Diagnóstico e evolução rastreável}\par
+\noindent\textit{Que lacunas locais justificam nova evolução?}\par\medskip
+\begin{center}
+
+\tikzset{
+ atlasnode/.style={draw=steel,fill=blueBg,rounded corners=2mm,align=center,
+  text width=4cm,inner sep=5pt,font=\fontsize{9.5}{11.8}\selectfont,text=textmain},
+ atlasroot/.style={atlasnode,fill=navy,text=white,text width=2.8cm,font=\fontsize{10}{12}\selectfont\bfseries},
+ atlasdecision/.style={diamond,aspect=2.1,draw=amber,fill=amberBg,align=center,
+  text width=3cm,inner sep=2pt,font=\fontsize{9.5}{11.5}\selectfont},
+ atlascall/.style={-Stealth,draw=steel,thick},
+ atlasevent/.style={-Stealth,draw=violet,dashed,thick},
+ atlasdata/.style={-Stealth,draw=teal,densely dotted,thick},
+ atlasstructure/.style={draw=slate,thick},
+ atlasboundary/.style={-Stealth,draw=amber,dash dot,thick},
+ atlasedgelabel/.style={fill=papel,inner sep=1.3pt,font=\fontsize{9}{10}\selectfont}
+}
+
+\begin{tikzpicture}
+\node[atlasnode] (c0) at (-4.3,0) {\textbf{C1: Diagnóstico pelo primário}\\Encaminha corpus e guarda observação};
+\node[atlasnode] (c1) at (4.3,0) {\textbf{C2: Pipeline de diagnóstico}\\Identifica escopo e reúne scanners};
+\node[atlasnode] (c2) at (-4.3,-3.0) {\textbf{C3: Scanner de categorias}\\Mede sinais lexicais das categorias};
+\node[atlasnode] (c3) at (4.3,-3.0) {\textbf{C4: Metas e desalinhamentos}\\Confronta requisitos com o diagnóstico};
+\node[atlasnode] (c4) at (-4.3,-6.0) {\textbf{C5: Registro de evolução}\\Persiste ciclo e sua identificação};
+\node[atlasnode] (c5) at (4.3,-6.0) {\textbf{C6: Auditoria de custódia}\\Confere contrato e artefatos de auditoria};
+\draw[atlascall] (c0.east) to[out=0,in=180] node[atlasedgelabel,pos=.25]{E1} (c1.west);
+\draw[atlascall] (c1.west) to[out=180,in=0] node[atlasedgelabel,pos=.25]{E2} (c2.east);
+\draw[atlascall] (c1.south) -- node[atlasedgelabel,pos=.25]{E3} (c3.north);
+\draw[atlasstructure] (c3.west) to[out=180,in=0] node[atlasedgelabel,pos=.25]{E4} (c4.east);
+\draw[atlasboundary] (c4.east) to[out=0,in=180] node[atlasedgelabel,pos=.25]{E5} (c5.west);
+\end{tikzpicture}
+\end{center}
+{\small\textbf{Figura \thefigure.} Diagrama de arquitetura --- Diagnóstico e evolução rastreável}\par\smallskip
+{\footnotesize\textbf{Chave das relações.} E1: C1 para C2 --- executa diagnóstico local (chamada); E2: C2 para C3 --- varre categorias do corpus (chamada); E3: C2 para C4 --- compara scan com requisitos (chamada); E4: C4 para C5 --- subsídio curado para nova mudança (estrutura); E5: C5 para C6 --- caminhos legado e auditado distintos (fronteira).}\par\smallskip
+\noindent\textbf{Como funciona e por quê.} Localize as seis responsabilidades C1--C6. Os identificadores E1--E5 permitem conferir o significado de cada conexão na chave das relações.\par
+\noindent\textbf{Justificativa.} Separar componentes e tipos de relação ajuda a localizar onde uma dependência, um evento ou uma fronteira foi declarado.\par
+\noindent\textbf{Limite.} Cobertura lexical de autodescoberta não é cobertura funcional nem qualidade científica. Erros de scanner podem ser registrados sem derrubar o pipeline. Registro de ciclo não significa custódia auditada ou validação externa. As setas que ligam diagnóstico à decisão evolutiva representam trabalho curado; não provam correção autônoma das lacunas.\par\smallskip
+\fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator.diagnose}
+\fontecore{scanners/pipeline.py}{DiagnosticPipeline.run}

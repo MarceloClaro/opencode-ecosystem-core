@@ -3,7 +3,7 @@
   "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
   "toolchain": "leanprover/lean4:v4.34.1",
   "mathlib_revision": "d13f23b723b8a846827a245b89c10fc7d3f11612",
-  "checked_at_utc": "2026-10-16T07:04:27.494813+00:00",
+  "checked_at_utc": "2026-10-16T22:53:39.081087+00:00",
   "allowed_foundational_axioms": [
     "Classical.choice",
     "Quot.sound",
@@ -15,7 +15,7 @@
     "livro-core/lean/Algebra.lean": {
       "status": "machine_checked",
       "returncode": 0,
-      "seconds": 8.676,
+      "seconds": 171.28,
       "output": "'BookAlgebra.complement_from_product_model' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.complement_probability_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.independent_error_216_interval' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.independent_error_216_tight_interval' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.independent_error_216_high_accuracy_interval' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.logarithm_rounded_product' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.percent_unscale' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.coverage_fraction_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.weighted_coverage_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.critical_gate_rejects' depends on axioms: [propext]\n'BookAlgebra.critical_gate_acceptance_requires_critical' depends on axioms: [propext]\n'BookAlgebra.ppv_denominator_expansion' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.ppv_from_counts' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.ppv_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.ppv_low_power_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.ppv_high_power_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.ppv_low_power_interval' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.ppv_high_power_interval' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.ppv_equal_odds_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.prisma_conservation' depends on axioms: [propext, Quot.sound]\n'BookAlgebra.partition_cardinality' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.prisma_included_le_identified' depends on axioms: [propext, Quot.sound]\n'BookAlgebra.ema_70_30_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.ema_70_30_example' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.ema_moves_toward_score' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.ema_out_of_range_counterexample' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.amdahl_single_worker_time' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.amdahl_time_positive' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.amdahl_speedup_ceiling' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.amdahl_zero_sequential' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.amdahl_single_worker_speedup' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.amdahl_limit' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.amdahl_natural_executor_limit' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.amdahl_thirteen_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.amdahl_thirteen_interval' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.amdahl_four_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.amdahl_eight_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.staking_reward_formula' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.staking_reward_example' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.slashing_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.slashing_example' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.congestion_below_first_block' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.congestion_first_block' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.normal_fee_example' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.high_priority_fee_example' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.catalog_reconciliation' depends on axioms: [propext]\n'BookAlgebra.catalog_largest_categories' depends on axioms: [propext]\n'BookAlgebra.catalog_concentration_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.catalog_concentration_interval' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.catalog_mean_interval' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.historical_coverage_interval' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.fair_item_accounting' depends on axioms: [propext]\n'BookAlgebra.unit_coverage_complement_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.expected_cost_example' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
       "command": [
         "lake",
@@ -344,7 +344,7 @@
     "livro-core/lean/Attention.lean": {
       "status": "machine_checked",
       "returncode": 0,
-      "seconds": 5.46,
+      "seconds": 7.436,
       "output": "'BookAttention.softmax_soma_um' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.combinacao_convexa_limitada' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.roteamento_guloso_otimo' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.softmax_invariante_max' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.softmax_mem_Ioo' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.combinacao_convexa_limitada_baixo' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.softmax_peso_total_singleton' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.peso_cresce_com_escore' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.topk_dominam_resto' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.temperatura_aguca_maximo' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.exp_apos_subtrair_majorante_le_um' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.head_weights_sum_one' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.utility_mem_unit' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.utility_example_075' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.utility_example_064' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.jaccard_mem_unit' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.jaccard_symmetric' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.jaccard_identical' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.jaccard_disjoint' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.jaccard_example_half' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.jaccard_example_third' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.jaccard_example_three_fifths' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.eligible_minimum_exists' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.eligible_maximum_exists' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.excluded_cannot_be_chosen' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.contract_example_c2_minimizes' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.two_row_softmax_sum' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.two_row_reversed' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.two_row_tie' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.two_row_translation_invariant' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.exp_two_rational_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.softmax_2_0_rational_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.softmax_0_2_rational_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.exp_point11_rational_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.utility_softmax_reduction' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.utility_softmax_075_064_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.utility_softmax_064_075_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.softmax_same_pool_order' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.eligible_pool_membership' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.unavailable_not_eligible' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.missing_capability_not_eligible' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
       "command": [
         "lake",
@@ -607,7 +607,7 @@
     "livro-core/lean/Foundations.lean": {
       "status": "machine_checked",
       "returncode": 0,
-      "seconds": 8.081,
+      "seconds": 9.717,
       "output": "'BookFoundations.independent_equal_event_intersection' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.independent_error_probability' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.independent_error_probability_real' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.error_union_is_complement' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.log_099_hasSum' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.log_099_taylor_error' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.log_099_taylor_interval' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.logarithm_power_identity' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.exponential_logarithm_power_identity' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.exponential_probability_example' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.linear_equation_iff' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.difference_of_squares_factorization' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.simple_sum_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.sine_antiderivative' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.modus_ponens' does not depend on any axioms\n'BookFoundations.four_binary_indicators' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.four_binary_indicators_percent' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.five_consecutive_intervals' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.consecutive_duration_nonnegative' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.mebibyte_bytes' depends on axioms: [propext]\n'BookFoundations.megabyte_bytes' depends on axioms: [propext]\n'BookFoundations.mebibyte_megabyte_difference' depends on axioms: [propext]\n'BookFoundations.directory_weight_guard_rejects_example' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.file_weight_guard_rejects_example' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
       "command": [
         "lake",
@@ -758,7 +758,7 @@
     "livro-core/lean/Models.lean": {
       "status": "machine_checked",
       "returncode": 0,
-      "seconds": 3.598,
+      "seconds": 4.999,
       "output": "'BookModels.reference_counts_sum' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.reference_counts_mean' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.equal_cardinality_not_equal_sets' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.cardinality_equality_insufficient' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.reduction_ratio_nonnegative_le_total' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.reduction_ratio_at_least_one' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.reduction_example_40_5' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.bernoulli_mass_normalized' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.bernoulli_mass_nonnegative' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.bernoulli_finite_cost_equals_product' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.bernoulli_product_expansion' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.bernoulli_example_02_2' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.bernoulli_exercise_05_2' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.bernoulli_cost_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.additive_cost_identity' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.additive_cost_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.reducing_accidental_reduces_total' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.discrepancy_reconstructs_observed' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.discrepancy_zero_iff' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.discrepancy_reversed' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.test_spec_ratio_260_371_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.test_spec_ratio_rounds_0701' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.series_spec_ratio_285_371_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.series_spec_ratio_rounds_0768' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.tests_per_series_spec_260_285_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.tests_per_series_spec_rounds_091' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.specs_per_cycle_371_455_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.specs_per_cycle_rounds_0815' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.cycles_per_day_455_69_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.cycles_per_day_rounds_66' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.amortized_diagnosis_339_12_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.amortized_diagnosis_rounds_028' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.four_sixths_equals_two_thirds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.four_sixths_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.one_eleventh_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.one_eleventh_rounds_0091' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.two_thirds_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.attention_dimension_sqrt_four' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.attention_dimension_scaled_four' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.attention_matrix_scale' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.attention_output_identity' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.reference_concentration_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.ppv_eight_thirteenths_complement' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.ppv_complement_percentage_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.full_coverage_identity' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.eighteen_twentieths_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.four_fifths_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.two_sixths_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.eight_tenths_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.three_tenths_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.three_fourths_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.zero_elevenths_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.coverage_complement_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
       "command": [
         "lake",
@@ -1093,7 +1093,10 @@
   },
   "context_files": {
     "README.md": {
-      "sha256": "5917a087f6b8b73d953a25210b196c6a567c49daf9f6e51575fb18a8dd3d304c"
+      "sha256": "973da36fcc7419ce797046fdaed92a6c616fe745dd19f7ec59ad569d873f9262"
+    },
+    "docs/ARQUITETURAS_LIVRO_R911.md": {
+      "sha256": "08aff347184a3b1462fe208b6fa3f024100858cf58525b327e65720a8d5bfa16"
     },
     "docs/DEDUCOES_LOCAIS_LIVRO_R910.md": {
       "sha256": "52ce62cea79af286a5fdcc040960d4b5a55a7c9bf2a671f552ea996486db8298"
@@ -1101,17 +1104,203 @@
     "docs/VERIFICACAO_FORMAL_LIVRO_R908.md": {
       "sha256": "ad2c2c475a2c737a719800a1fdcbcc33606fdc554c5b55dbacd1e3fc451f7238"
     },
+    "docs/architecture-r911/architecture-inventory.json": {
+      "sha256": "5bd3a881c11b082d65cd6a679e27259ad55d0d5bbfec0e0ec5d945e92c329db2"
+    },
     "docs/book-math-map-r908.json": {
       "sha256": "b80d097cb2911373952075dd94e327f57e87ad167b5e9fd0b6aee2a3df1ebb7c"
     },
     "docs/superpowers/plans/2026-10-15-livro-lean4.md": {
       "sha256": "daad7c86a0778b7a059da1b57acd54f274e9bb556dca0e3335d2d5bdc29a0062"
     },
+    "docs/superpowers/plans/2026-10-16-atlas-arquiteturas.md": {
+      "sha256": "b5d525a3aae7d25e2b9673370e01bedf7a65bb89b71258f39e525b10bd69b419"
+    },
     "docs/superpowers/plans/2026-10-16-deducoes-locais-lean.md": {
       "sha256": "97e87079fcf10c014b6a4ef0835d5597301c5e7066ebb82417d0c141e0a93c9f"
     },
+    "livro-core/atlas/AR01-flow.tex": {
+      "sha256": "c6a15aefe2fc3c86e506907e9fd5fc15cf63e9ec2ad66b9ebaae92b422891f30"
+    },
+    "livro-core/atlas/AR01-mental.tex": {
+      "sha256": "d7eb89ff9af334ad27c5efebdc4fa707ad20b78d978ebda7415e49d0fd16b091"
+    },
+    "livro-core/atlas/AR01-structure.tex": {
+      "sha256": "2d580a36ee2a42bfd200df24cac08bde7a245757daf140d547a5217e24b92519"
+    },
+    "livro-core/atlas/AR02-flow.tex": {
+      "sha256": "afe6cb79f80f6db67707469da68bad9df5f5b6a75b124c487dafd4a62297d2ed"
+    },
+    "livro-core/atlas/AR02-mental.tex": {
+      "sha256": "2c47346c773361476b6062691f9a178d85e36707cbe666c279b9dffea817a658"
+    },
+    "livro-core/atlas/AR02-structure.tex": {
+      "sha256": "9df92e947a9a0a82427f9a924501d3116ad6bc723153caca2ee987a59c665d09"
+    },
+    "livro-core/atlas/AR03-flow.tex": {
+      "sha256": "ade4ae790e4e7b2284754f41d31ac10d9b27544ecfb8a51e247cc204e3666364"
+    },
+    "livro-core/atlas/AR03-mental.tex": {
+      "sha256": "c700d21a35e301d8aa51184e95db0f0333693833a8533d2c7c3abba59fac42f4"
+    },
+    "livro-core/atlas/AR03-structure.tex": {
+      "sha256": "49758caec42bbfbf4e9e96276c5dff751d40b42cada4d5ab3d99c8bb6d603f58"
+    },
+    "livro-core/atlas/AR04-flow.tex": {
+      "sha256": "1510ff5b29b17bee7eaf9df39f6b4974f88cdca3b222c30c843897af7d10723e"
+    },
+    "livro-core/atlas/AR04-mental.tex": {
+      "sha256": "fc55f2806962b74a1420ee3bc2feaa88d0a731440d2dfda8a45dc9316202a103"
+    },
+    "livro-core/atlas/AR04-structure.tex": {
+      "sha256": "b31c79ffac0feeb89f276e96179017641ed9970c64697b7596b77ccd215fda05"
+    },
+    "livro-core/atlas/AR05-flow.tex": {
+      "sha256": "48248e6e9069fd8430060ec11f28e571e74bbdf88eeb71d86d56f4d08a3320d5"
+    },
+    "livro-core/atlas/AR05-mental.tex": {
+      "sha256": "264b0a7ff73b933bf73eaeef0a3d45adea757c59145a1e12937b3412d7cc62fe"
+    },
+    "livro-core/atlas/AR05-structure.tex": {
+      "sha256": "3281d9d4c8312c19223e23867c9d5212998d434e4f99fa43033d98b68d973bd0"
+    },
+    "livro-core/atlas/AR06-flow.tex": {
+      "sha256": "52057cd827f7ebe4484b0e95074e427710720edaae4122a63232e9efb41c5f68"
+    },
+    "livro-core/atlas/AR06-mental.tex": {
+      "sha256": "15040e5426fdb5763860f69c6727f64970f1ea5fb913eca72005b9e076f33703"
+    },
+    "livro-core/atlas/AR06-structure.tex": {
+      "sha256": "f3b6cca728fcb66a02d39dcfe5b5e13c95fd47f4bc5593709952688e43db76f1"
+    },
+    "livro-core/atlas/AR07-flow.tex": {
+      "sha256": "c158ec6d8d2dce3418bd66280c17e0c5d36437c38a5ad5cd3919e72cec4c5f6f"
+    },
+    "livro-core/atlas/AR07-mental.tex": {
+      "sha256": "eaa6d789fa5078537f63ba64396996b20609901da1c2f42b92ac9d97e54b3179"
+    },
+    "livro-core/atlas/AR07-structure.tex": {
+      "sha256": "b1e9ad1dbe580e65c8475cae8eac180bf80e5df958fb90fa27aaa56f2bec2b9b"
+    },
+    "livro-core/atlas/AR08-flow.tex": {
+      "sha256": "6e995585bd032743eeeeb160a5b5c09b1d4997a47aa9fa41109e5b51e7b7485d"
+    },
+    "livro-core/atlas/AR08-mental.tex": {
+      "sha256": "e64d4d0b377b6a1a665c0d724a6c097e6d1a5379e27e084c5916268a0f435bd6"
+    },
+    "livro-core/atlas/AR08-structure.tex": {
+      "sha256": "eab922190d92eef48c70cfb4e307ca451ead764d405747372af8f499f75a9b42"
+    },
+    "livro-core/atlas/AR09-flow.tex": {
+      "sha256": "a17b2a9aaab336083e390c2700e27a3228a1c44ed22244016f49ddc186fd81ce"
+    },
+    "livro-core/atlas/AR09-mental.tex": {
+      "sha256": "06f936a875c901a1d1c12477d8d0c599ca0dfff8bc8cdc87098a67aeac8131f8"
+    },
+    "livro-core/atlas/AR09-structure.tex": {
+      "sha256": "5548d6b50706dbffcef7b4f5d6b15f2bf1e9d6b2b428208ef8f61a3f007f8596"
+    },
+    "livro-core/atlas/AR10-flow.tex": {
+      "sha256": "1463e3e3403607dd3fc68843ca7493c8f4c7dec3c81ca5f703c45a562770aee6"
+    },
+    "livro-core/atlas/AR10-mental.tex": {
+      "sha256": "e2b89d7ea756afe8c13568bbde8fdfe582110a353322657edefbaef3f21e0920"
+    },
+    "livro-core/atlas/AR10-structure.tex": {
+      "sha256": "f9b666eb940e52b04d06590998fcdcb364101d25dade539d8f768ebcb9ed16da"
+    },
+    "livro-core/atlas/AR11-flow.tex": {
+      "sha256": "3fa2a9affb68537f7307e07d91f5528d7691f4e4fd5e58af1b049f405aba1356"
+    },
+    "livro-core/atlas/AR11-mental.tex": {
+      "sha256": "8e76f66a3f7d1b8ca36480e556d319c5631461e2d346dd7ae34a877de46d7fdb"
+    },
+    "livro-core/atlas/AR11-structure.tex": {
+      "sha256": "7c19c19f29002692bfdaa3fed1c60ff886164e7858c8486b169e0878d16e694e"
+    },
+    "livro-core/atlas/AR12-flow.tex": {
+      "sha256": "0a706e8ba7eca19c974fd428cd6d321b42904871779730095f01b2940731a6b2"
+    },
+    "livro-core/atlas/AR12-mental.tex": {
+      "sha256": "7b70c5914957e29b009bc21d6b7f224fe6d76274aa60a2c6de50f53017742adc"
+    },
+    "livro-core/atlas/AR12-structure.tex": {
+      "sha256": "d88ab141535c0ad6ebe6a71b8b67cb966d975a7002e1909c286c877b9e947a3f"
+    },
+    "livro-core/atlas/AR13-flow.tex": {
+      "sha256": "00cb26b271efdb3dbdad575b8da909a3458f11971a86da193969d12f30ba6773"
+    },
+    "livro-core/atlas/AR13-mental.tex": {
+      "sha256": "f6b67ffe87a12b1844dd0a6c2e3b3ebba05ee58b62b84ee37708a5af5dd2749b"
+    },
+    "livro-core/atlas/AR13-structure.tex": {
+      "sha256": "ac46e555dd5b559e9958236f01d3b5893c46c74974c0ceacc13e0f5ee18a67bc"
+    },
+    "livro-core/atlas/AR14-flow.tex": {
+      "sha256": "d759de7b2d6421510c1249cfc6ceba13d8af1f8af952b7fd9a1946020076ea68"
+    },
+    "livro-core/atlas/AR14-mental.tex": {
+      "sha256": "86f588561a7ba76a72dfeee3b858de6b7e7da9857eec1390d3c257ee61d15472"
+    },
+    "livro-core/atlas/AR14-structure.tex": {
+      "sha256": "3d6878cbd82611eb3f0ccc7a459494e1672a07a9e0e21adf2503d6f2e505f793"
+    },
+    "livro-core/atlas/AR15-flow.tex": {
+      "sha256": "07b53967d4c1f55975139f5732f0cbf21b2ee8c99a5bb996c3c67621646f7be3"
+    },
+    "livro-core/atlas/AR15-mental.tex": {
+      "sha256": "fc116a22a1706755de6ee470b7773bb72e8ad0435ec0cd9ff6090207ca5407cd"
+    },
+    "livro-core/atlas/AR15-structure.tex": {
+      "sha256": "d141ddfe7174bcfcfb6aef8c99b932a4f9dea3cbcc79c8a455c0fcfee7e1647c"
+    },
+    "livro-core/atlas/AR16-flow.tex": {
+      "sha256": "d8b3b6dce06ad764b2cfeb5c74becd1876f780b22fcadb3785a1636adacbf423"
+    },
+    "livro-core/atlas/AR16-mental.tex": {
+      "sha256": "8cff5ce5854ec1a0845d637825e796c9541fb0176f8941b5fd72350a4a650020"
+    },
+    "livro-core/atlas/AR16-structure.tex": {
+      "sha256": "4e3a911c6414b8455003a5eec5169f00d182f10846d8a9f91a58a32e541fe8ef"
+    },
+    "livro-core/atlas/AR17-flow.tex": {
+      "sha256": "a961fd588efb4311b12434e92d2ac5b96d8b98039fc4a2b429569026e1614015"
+    },
+    "livro-core/atlas/AR17-mental.tex": {
+      "sha256": "3bd5935d3fed71e61461fa86d8fe65440bbf0188076e6c1692f35e15d86b15a3"
+    },
+    "livro-core/atlas/AR17-structure.tex": {
+      "sha256": "bf5b643a1140ea6d6583886477424c00861b790c54f82ceab39c7f56277ab8f3"
+    },
+    "livro-core/atlas/AR18-flow.tex": {
+      "sha256": "3ce017fa46cefb501f0c3a3968109b75ccb77d450d1daccc86c81ee0a527c1c0"
+    },
+    "livro-core/atlas/AR18-mental.tex": {
+      "sha256": "cc64193e3af252b5aca4705aefdb9f84ebc2bfaca12cef667edf0c6266ae3298"
+    },
+    "livro-core/atlas/AR18-structure.tex": {
+      "sha256": "a55f2ad5558faec39e02220e3992abe356a09614ee2987d8a73d355ddf318884"
+    },
+    "livro-core/atlas/architectures.json": {
+      "sha256": "4aa602a9bf267cb259946b1b87a9d1b70c2862f6df1a6f97c6f5f10700c3e54f"
+    },
+    "livro-core/atlas/data-orchestration.json": {
+      "sha256": "3f0a0fea6130913cb38fbb3ea4e17e1ddc7b260cda76f45b1f89c83e7eb81ab1"
+    },
+    "livro-core/atlas/data-science.json": {
+      "sha256": "8c707ac249cfbf328e1f8bcf3a668923f07259fb980132ae8cad35ee4dcc138f"
+    },
+    "livro-core/atlas/global.tex": {
+      "sha256": "fd318b97c117ff70b38613840cbf8e8651125c203c506eae137701df2f0dba05"
+    },
+    "livro-core/atlas/layer-relations.json": {
+      "sha256": "e674a85c652f58166ac94d5e287d28ffd3146ad3029156c91c6b2464e9070c63"
+    },
+    "livro-core/gen_architecture_atlas.py": {
+      "sha256": "bcd76c7e2846f3dcdeb6e4a9943e7b9af5aead0906df07020bb06c4a02f618a7"
+    },
     "livro-core/gen_inventario.py": {
-      "sha256": "c32af9598a604f955294f177d6135312c02f5f54a9e6c2a0020bd544b50174f3"
+      "sha256": "e7bd86cf438b4ec4e812f8b422a9a59e53b88396a0b5ef8b0f9936378d75bbc9"
     },
     "livro-core/gen_lean_axioms.py": {
       "sha256": "6a5a8600f86010b0978aef927fca3e903ef0110dcae47c160d2a86a2e164f35f"
@@ -1123,7 +1312,7 @@
       "sha256": "4a8c866f176c801ce98f91aadae2eab9df26783e57722de5e9c7b1decffb83dc"
     },
     "livro-core/inventario-core.tex": {
-      "sha256": "4603e81ef3b7f7ee5e9e480b742b5a4551d7119fe838ff83f5c115bcf677225b"
+      "sha256": "a4875de854059d57041aa317aa35dab7e68573f8671bbfb81f69618f1d26bb1a"
     },
     "livro-core/lean/lake-manifest.json": {
       "sha256": "299b633ef39b37696183630392b7600c420d7eb65847e3d71f83cd3480511809"
@@ -1156,64 +1345,64 @@
       "sha256": "2d7f799c60dc7c9e2ab7969ad37014e673c9e229d4eab5545b28c9264c5d9b5c"
     },
     "livro-core/mod-01-fundacoes.tex": {
-      "sha256": "6418cdfecd24c8b054342e7987e791b7521a4cd66e2d7ce3c43abc221c11b711"
+      "sha256": "32a201c9ff75c06fa2bd5aee22318940f87614b6cfb20afbce143cc636616550"
     },
     "livro-core/mod-01b-historia.tex": {
       "sha256": "2e201624c0326f9ddc0c62252a85159d3680020bae5073e9d36f3d210392317b"
     },
     "livro-core/mod-01c-instalacao.tex": {
-      "sha256": "bdd946f9f105cf5ec58808a1ff539c3f794932cf2802fab038b6ea7f6c344007"
+      "sha256": "48c23b5dfc49ecd1053aeaf3462f039da86b330df2514944e02f75ddbe78104b"
     },
     "livro-core/mod-01d-arquitetura.tex": {
-      "sha256": "849d6f566fb0f4bf3b95fd82a041f75e1bb73886fc2dae7c6be091d0648374fa"
+      "sha256": "010575f98923d2804727080249be1f3ee6d52a5e8a83b70f3f40d3b229915506"
     },
     "livro-core/mod-02-orquestracao.tex": {
-      "sha256": "87cb6dd48974969e43a6a41944e9de1839163d3badabc96b8e9245c268461050"
+      "sha256": "0cffb3365f0f2da4b2908b0d78a324622602a2866a37e6980b9cecf65ceeb50d"
     },
     "livro-core/mod-03-memoria-mci.tex": {
-      "sha256": "728a81e6c9a6e50d13eb55ebb3737f8d08aef3eee78c0503b4e7f2ca562d3a90"
+      "sha256": "24acd7e816b94ebef04b691c34344849d90778046b741905f854896ec71d28bc"
     },
     "livro-core/mod-04-qualidade-sdd.tex": {
-      "sha256": "f2b5a4c0d6d59fd490a54a432c2785e74cd43b4e8e989808f2fd4fe832d7ed3d"
+      "sha256": "78b3df02c9ee91268e3799b83045412d3a3182804918de15f44a485d43177fe0"
     },
     "livro-core/mod-05-raciocinio.tex": {
-      "sha256": "9f77b4b5b198ba61fa1dae112890386e60d591378d89d9f55c2886ebe31c2996"
+      "sha256": "2d5f88882140192362b174ef4a313bf672e8503a4d72f86cdc6d36cfc8ef06d4"
     },
     "livro-core/mod-06-ciencia.tex": {
-      "sha256": "5b546e81deccde1a833949e8aab162cc9adac94e70b22de379bb6e0f0fb15138"
+      "sha256": "63837104853ee3696e2117f994195a228f4f4389217099e78e95142f68e0e265"
     },
     "livro-core/mod-07-integracoes.tex": {
-      "sha256": "6151a754afad8f0972453c6c622ff0fed9dd7e42e17de0746339a1db38aed149"
+      "sha256": "ceb4169034d45efca17c4f64a8bd1b62067b083bd7e984d1d22889ce5db231e7"
     },
     "livro-core/mod-08-ecossistema.tex": {
-      "sha256": "523124b4d79809e4df4238df960153ac98bdd3edd519f679f607504741cddb44"
+      "sha256": "282a76af8577bea443b9cdd7139f454c501ec68d303ff67b496380212ca9474f"
     },
     "livro-core/mod-09-infra.tex": {
-      "sha256": "87f1eeabb69a1676c33ff473e8ba0a0e2f9157c4b9fdc36acbac47fa6c7625d0"
+      "sha256": "315944325a0f5defb73b457e2dc94cd47d39788fedb90116cbbec9cd4b3f9b60"
     },
     "livro-core/mod-09a-comparada.tex": {
-      "sha256": "ad25847da9eb27027f58ae5fa28b8f1c9bca13e1ad21232109a8f6e3d5c08889"
+      "sha256": "5cd209a108c9d101481e49d67b205b1864419ac8c3a5a4e6d76cddf1f7bc8d64"
     },
     "livro-core/mod-10-catalogo.tex": {
       "sha256": "b33ca02d07bb9626d79384dec45fc6195b57d1da5110656d0ced06891068e16d"
     },
     "livro-core/mod-11-apendices.tex": {
-      "sha256": "8bded58402b23d04765d29d408dea5f0290dacafa88a6f7b7fe7d636cd0fef7c"
+      "sha256": "7c263ceae4a3b9144bf0a73bf8fe022245a511b1c732057ab77fc418b8b61962"
     },
     "livro-core/mod-12-fichas-nucleo.tex": {
       "sha256": "384427f60a1b9bbc61188ff622522eeee25a22a34df44735d8e652c226d0b8cb"
     },
     "livro-core/mod-13-ativacao-agentes.tex": {
-      "sha256": "9655fddfb131cda6fc42b673fe8ea6a1944cc6b5fc169d8fe8ce7652ef67c060"
+      "sha256": "59017a1812ab1b5748300afeeb11402c08249e92436651c217ee95a0d8ead137"
     },
     "livro-core/mod-14-lote-categorias.tex": {
       "sha256": "b9f5c1d39fb86e5b135f25b91635f916bb7222b2a4a6ff98ade74dd40f1d4de0"
     },
     "livro-core/mod-15-epilogo-reproducao.tex": {
-      "sha256": "3d61811eaff0c2dc2dd6a1490f0e3288aee7de99e5e59442d0919048b0e6e05d"
+      "sha256": "66472412e6b0b74827a6923f219a6c60a53c8d4440d3805977f5fc887cb3b720"
     },
     "livro-core/mod-16-mapas-fluxogramas.tex": {
-      "sha256": "6999158e62ac6793ff7893c0b0211e2e8dddb573c715e70e5ad41f625c87681e"
+      "sha256": "805e4e1239def99b54dd8f9ccd16940c35b8779cfd82fb6ee690f25a67560ece"
     },
     "livro-core/mod-17-e1e7-para-leigos.tex": {
       "sha256": "e9f6a6f31a3c2cc2a821bc847c10060a68eb45b1f72ba02d529d8faf28e0c925"
@@ -1228,22 +1417,22 @@
       "sha256": "616aaba11cde79195f9916a4207d9e4a8ffab195d863da7d1e21fd537271f8fe"
     },
     "livro-core/mod-21-mapa-teorias.tex": {
-      "sha256": "2137652af1506a129b138d7fce3983529cd80056138f725f70194abe89490842"
+      "sha256": "a5da496d0b1df081d8ecd8dc7fc9165650c8b529b95ac913af437040e8c0b1c5"
     },
     "livro-core/mod-22-reproducao-wsl-leigo.tex": {
-      "sha256": "620cf63ece37f399510d03af1ad97c6a8b28efd26e386f043a358148b7a7a75d"
+      "sha256": "c749f39134cbdd38ed3959650709caa1e0b5f254c4338758b0549956e325a7da"
     },
     "livro-core/mod-23-atlas-infograficos.tex": {
-      "sha256": "fbc2a3bdd07d0a3bd0bf38a9d583b5fe452fdbd4d2013bea4ca5e381865e8bff"
+      "sha256": "57f0e0aa67abe36f73517a6d994af06ac0e25ce3261a7a234bcc3ab499d7585c"
     },
     "livro-core/mod-24-kit-mindmap-slides.tex": {
-      "sha256": "b326cc7451412b183b975d6af05bcf0e7366a80039c61c5149d88c3759b8414a"
+      "sha256": "9ca12609e682ce25d7c68ce4b21894aad816ed5186cc2adc9925cc2d88ad481e"
     },
     "scripts/book_local_deductions.py": {
       "sha256": "f43461f3f7d91f7eb5b55a00690b2f150b465ebd23ce10b0241c75cfcebc0e14"
     },
     "scripts/verify_book_lean.py": {
-      "sha256": "864a0e6f4d8466cbfa813218194089089499256124b4205e2469a4d09d92f2d6"
+      "sha256": "7f4c97236df8eb71c6caf6874d0432770b09db89d018b65946e6db129bae469a"
     },
     "specs/SPEC-935-R908-livro-provas-lean4.md": {
       "sha256": "d0bda6fbdf16ea6db0428a161bd60eaa087fff53191e3990dace1b5066b29504"
@@ -1251,11 +1440,17 @@
     "specs/SPEC-935-R910-deducoes-locais-livro-lean.md": {
       "sha256": "32859caf009a73be35180fe32f24b672b024efc189d0783a60e11bdd73814cde"
     },
+    "specs/SPEC-935-R911-atlas-arquiteturas-livro.md": {
+      "sha256": "af31269d63cfd6056a74f4670cc4c7090ed11e67011bb30b5c6ada539b349617"
+    },
     "tests/test_r908_book_lean.py": {
       "sha256": "e64d5739cf9f765a14473afed39733fb61a97e89edff3e42141c9e8b50802317"
     },
     "tests/test_r910_book_local_deductions.py": {
       "sha256": "3cf25f948e343b76066d1b71f1f9a74afbe71f8788925e912889947212b0dfb1"
+    },
+    "tests/test_r911_book_architecture_atlas.py": {
+      "sha256": "b7595779f9180f66b17eea24f77f357b01cbc131b4478e605d4ef2d1df876867"
     }
   },
   "environment": {
@@ -1308,7 +1503,7 @@
     "positive": {
       "status": "machine_checked",
       "returncode": 0,
-      "seconds": 7.613,
+      "seconds": 8.487,
       "output": "",
       "command": [
         "lake",
@@ -1320,8 +1515,8 @@
     "false_equality": {
       "status": "compiler_rejected",
       "returncode": 1,
-      "seconds": 7.867,
-      "output": "/home/marceloclaro/opencode-ecosystem-core/livro-core/lean/book-r908-dco30w96.lean:2:41: error: unsolved goals\n⊢ False\n",
+      "seconds": 6.706,
+      "output": "/home/marceloclaro/opencode-ecosystem-core/livro-core/lean/book-r908-h1xji4t8.lean:2:41: error: unsolved goals\n⊢ False\n",
       "command": [
         "lake",
         "env",
@@ -1346,8 +1541,8 @@
     "mutated_ema": {
       "status": "compiler_rejected",
       "returncode": 1,
-      "seconds": 7.388,
-      "output": "/home/marceloclaro/opencode-ecosystem-core/livro-core/lean/book-r908-e4iuqxa5.lean:2:60: error: unsolved goals\n⊢ False\n",
+      "seconds": 8.49,
+      "output": "/home/marceloclaro/opencode-ecosystem-core/livro-core/lean/book-r908-5pn33a1n.lean:2:60: error: unsolved goals\n⊢ False\n",
       "command": [
         "lake",
         "env",

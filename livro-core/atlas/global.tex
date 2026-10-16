@@ -1,0 +1,702 @@
+\clearpage\section{Mapa completo: do panorama às arquiteturas locais}
+
+\label{sec:atlas-integral-r911}
+
+Este atlas oferece três leituras complementares: conceitos no mapa mental, responsabilidades no diagrama e decisões no fluxograma. As 18 arquiteturas didáticas não são as 18 camadas classificadas por pasta, nem os oito andares editoriais: cada organização responde a uma pergunta diferente.
+
+O grafo integral acompanha o livro em formatos SVG, DOT e Mermaid. Preserva todos os 693 módulos Python classificados no snapshot \pth{759d25325c0c}, incluindo os isolados, e 965 pares de importação em 1083 declarações AST. Import não demonstra execução. Arquivos históricos, testes, vendor e artefatos de domínio permanecem classificados separadamente; o livro Lean não é contado como módulo Python de produção.
+
+\begin{descricao}\textbf{Legenda comum.} Azul cheio: chamada curada; roxo tracejado: evento; verde pontilhado: dado; cinza sem ponta: organização; âmbar traço-ponto: fronteira ou recusa. Linhas de mapa mental são associações conceituais. Nas vistas estáticas, a direção é importador para dependência. As cores não indicam qualidade ou prontidão.\end{descricao}
+
+\subsection*{Roteiro das 18 arquiteturas}
+
+{\small\begin{longtable}{p{1cm}p{7.2cm}p{5.5cm}}
+
+\toprule ID & Arquitetura & Figuras de consulta \\ \midrule\endhead
+
+AR01 & Interfaces, configuração e entrada no Core & \hyperref[fig:AR01-mental]{mental}, \hyperref[fig:AR01-structure]{estrutura}, \hyperref[fig:AR01-flow]{fluxo} \\
+
+AR02 & Primário, elegibilidade e seleção de agentes & \hyperref[fig:AR02-mental]{mental}, \hyperref[fig:AR02-structure]{estrutura}, \hyperref[fig:AR02-flow]{fluxo} \\
+
+AR03 & Blackboard A2A e circulação no MetaBus & \hyperref[fig:AR03-mental]{mental}, \hyperref[fig:AR03-structure]{estrutura}, \hyperref[fig:AR03-flow]{fluxo} \\
+
+AR04 & Workflows, checkpoints e executores de leitura & \hyperref[fig:AR04-mental]{mental}, \hyperref[fig:AR04-structure]{estrutura}, \hyperref[fig:AR04-flow]{fluxo} \\
+
+AR05 & Ciclo de vida de agentes e perfis gerenciados & \hyperref[fig:AR05-mental]{mental}, \hyperref[fig:AR05-structure]{estrutura}, \hyperref[fig:AR05-flow]{fluxo} \\
+
+AR06 & Memória metacognitiva, observação e leitura visual & \hyperref[fig:AR06-mental]{mental}, \hyperref[fig:AR06-structure]{estrutura}, \hyperref[fig:AR06-flow]{fluxo} \\
+
+AR07 & RAG, conhecimento e evidências & \hyperref[fig:AR07-mental]{mental}, \hyperref[fig:AR07-structure]{estrutura}, \hyperref[fig:AR07-flow]{fluxo} \\
+
+AR08 & Especificação, TDD e aceite & \hyperref[fig:AR08-mental]{mental}, \hyperref[fig:AR08-structure]{estrutura}, \hyperref[fig:AR08-flow]{fluxo} \\
+
+AR09 & Confiança, economia e governança & \hyperref[fig:AR09-mental]{mental}, \hyperref[fig:AR09-structure]{estrutura}, \hyperref[fig:AR09-flow]{fluxo} \\
+
+AR10 & Raciocínio, matemática e otimização & \hyperref[fig:AR10-mental]{mental}, \hyperref[fig:AR10-structure]{estrutura}, \hyperref[fig:AR10-flow]{fluxo} \\
+
+AR11 & Ciência, artigos e experimentos & \hyperref[fig:AR11-mental]{mental}, \hyperref[fig:AR11-structure]{estrutura}, \hyperref[fig:AR11-flow]{fluxo} \\
+
+AR12 & Fronteiras MCP e conectores do host & \hyperref[fig:AR12-mental]{mental}, \hyperref[fig:AR12-structure]{estrutura}, \hyperref[fig:AR12-flow]{fluxo} \\
+
+AR13 & REA, camadas e inspeção local & \hyperref[fig:AR13-mental]{mental}, \hyperref[fig:AR13-structure]{estrutura}, \hyperref[fig:AR13-flow]{fluxo} \\
+
+AR14 & Inteligência estrutural de código e grafo Python & \hyperref[fig:AR14-mental]{mental}, \hyperref[fig:AR14-structure]{estrutura}, \hyperref[fig:AR14-flow]{fluxo} \\
+
+AR15 & Diagnóstico e evolução rastreável & \hyperref[fig:AR15-mental]{mental}, \hyperref[fig:AR15-structure]{estrutura}, \hyperref[fig:AR15-flow]{fluxo} \\
+
+AR16 & Infraestrutura, dados e segurança local & \hyperref[fig:AR16-mental]{mental}, \hyperref[fig:AR16-structure]{estrutura}, \hyperref[fig:AR16-flow]{fluxo} \\
+
+AR17 & Plugins, skills e federação de artefatos & \hyperref[fig:AR17-mental]{mental}, \hyperref[fig:AR17-structure]{estrutura}, \hyperref[fig:AR17-flow]{fluxo} \\
+
+AR18 & Publicação, livro e provas Lean & \hyperref[fig:AR18-mental]{mental}, \hyperref[fig:AR18-structure]{estrutura}, \hyperref[fig:AR18-flow]{fluxo} \\
+
+\bottomrule\end{longtable}}
+
+\clearpage\refstepcounter{figure}\label{fig:global-mental}
+
+\subsection*{Mapa mental completo dos 18 temas}
+
+\begin{center}
+
+
+\tikzset{
+ atlasnode/.style={draw=steel,fill=blueBg,rounded corners=2mm,align=center,
+  text width=4cm,inner sep=5pt,font=\fontsize{9.5}{11.8}\selectfont,text=textmain},
+ atlasroot/.style={atlasnode,fill=navy,text=white,text width=2.8cm,font=\fontsize{10}{12}\selectfont\bfseries},
+ atlasdecision/.style={diamond,aspect=2.1,draw=amber,fill=amberBg,align=center,
+  text width=3cm,inner sep=2pt,font=\fontsize{9.5}{11.5}\selectfont},
+ atlascall/.style={-Stealth,draw=steel,thick},
+ atlasevent/.style={-Stealth,draw=violet,dashed,thick},
+ atlasdata/.style={-Stealth,draw=teal,densely dotted,thick},
+ atlasstructure/.style={draw=slate,thick},
+ atlasboundary/.style={-Stealth,draw=amber,dash dot,thick},
+ atlasedgelabel/.style={fill=papel,inner sep=1.3pt,font=\fontsize{9}{10}\selectfont}
+}
+
+\begin{tikzpicture}
+\node[atlasroot] (core) at (0,0) {Core\\18 temas\\três vistas};
+\node[atlasnode,text width=4.1cm] (g0) at (-4.8,4.8) {\textbf{Entrada e extensões}\\AR01: Interfaces, configuração e entrada no Core\\[3pt]AR12: Fronteiras MCP e conectores do host\\[3pt]AR17: Plugins, skills e federação de artefatos};
+\draw[atlasstructure] (core) -- (g0);
+\node[atlasnode,text width=4.1cm] (g1) at (4.8,4.8) {\textbf{Coordenação}\\AR02: Primário, elegibilidade e seleção de agentes\\[3pt]AR03: Blackboard A2A e circulação no MetaBus\\[3pt]AR04: Workflows, checkpoints e executores de leitura};
+\draw[atlasstructure] (core) -- (g1);
+\node[atlasnode,text width=4.1cm] (g2) at (-4.8,0.0) {\textbf{Critérios e contratos}\\AR05: Ciclo de vida de agentes e perfis gerenciados\\[3pt]AR08: Especificação, TDD e aceite\\[3pt]AR09: Confiança, economia e governança};
+\draw[atlasstructure] (core) -- (g2);
+\node[atlasnode,text width=4.1cm] (g3) at (4.8,0.0) {\textbf{Conhecimento situado}\\AR06: Memória metacognitiva, observação e leitura visual\\[3pt]AR07: RAG, conhecimento e evidências\\[3pt]AR14: Inteligência estrutural de código e grafo Python};
+\draw[atlasstructure] (core) -- (g3);
+\node[atlasnode,text width=4.1cm] (g4) at (-4.8,-4.8) {\textbf{Investigação}\\AR10: Raciocínio, matemática e otimização\\[3pt]AR11: Ciência, artigos e experimentos\\[3pt]AR13: REA, camadas e inspeção local};
+\draw[atlasstructure] (core) -- (g4);
+\node[atlasnode,text width=4.1cm] (g5) at (4.8,-4.8) {\textbf{Sustentação e publicação}\\AR15: Diagnóstico e evolução rastreável\\[3pt]AR16: Infraestrutura, dados e segurança local\\[3pt]AR18: Publicação, livro e provas Lean};
+\draw[atlasstructure] (core) -- (g5);
+\end{tikzpicture}
+
+\end{center}
+
+\noindent\textbf{Figura \thefigure.} Panorama conceitual do Core.\par
+
+\noindent\textbf{Como funciona e por quê.} Reconheça os seis agrupamentos e seus 18 identificadores. Cada identificador leva às três pranchas locais do roteiro anterior.\par
+
+\noindent\textbf{Justificativa.} O agrupamento distingue finalidades antes de detalhar dependências e decisões, reduzindo a necessidade de memorizar nomes de arquivos durante a primeira leitura.\par
+
+\noindent\textbf{Limite.} As linhas associam conceitos e não estabelecem uma topologia de execução. O agrupamento é uma escolha editorial explicitada, não uma classificação inferida pelo programa.\par
+
+\clearpage\refstepcounter{figure}\label{fig:global-processes}
+
+\subsection*{Diagrama geral: entradas, instâncias e caminhos}
+
+\begin{center}
+
+
+\tikzset{
+ atlasnode/.style={draw=steel,fill=blueBg,rounded corners=2mm,align=center,
+  text width=4cm,inner sep=5pt,font=\fontsize{9.5}{11.8}\selectfont,text=textmain},
+ atlasroot/.style={atlasnode,fill=navy,text=white,text width=2.8cm,font=\fontsize{10}{12}\selectfont\bfseries},
+ atlasdecision/.style={diamond,aspect=2.1,draw=amber,fill=amberBg,align=center,
+  text width=3cm,inner sep=2pt,font=\fontsize{9.5}{11.5}\selectfont},
+ atlascall/.style={-Stealth,draw=steel,thick},
+ atlasevent/.style={-Stealth,draw=violet,dashed,thick},
+ atlasdata/.style={-Stealth,draw=teal,densely dotted,thick},
+ atlasstructure/.style={draw=slate,thick},
+ atlasboundary/.style={-Stealth,draw=amber,dash dot,thick},
+ atlasedgelabel/.style={fill=papel,inner sep=1.3pt,font=\fontsize{9}{10}\selectfont}
+}
+
+\begin{tikzpicture}
+\node[atlasnode] (cli) at (-5,0) {\textbf{Processo CLI}\\Primário criado para a invocação};
+\node[atlasnode] (mcp) at (0,0) {\textbf{Servidor MCP}\\Primário em cache no servidor};
+\node[atlasnode] (web) at (5,0) {\textbf{Processo Streamlit}\\Primário em cache na aplicação};
+\node[atlasroot,text width=5cm] (contract) at (0,-2.4) {MarceloClaroOrchestrator\\Contrato compartilhado; instâncias próprias};
+\draw[atlasstructure] (cli.south) -- (contract.north west);
+\draw[atlasstructure] (mcp.south) -- (contract.north);
+\draw[atlasstructure] (web.south) -- (contract.north east);
+\node[atlasnode] (direct) at (-4.3,-5) {\textbf{Operação direta}\\Exemplo: rea\_action chama ReaBridge};
+\node[atlasnode] (delegated) at (4.3,-5) {\textbf{Trabalho delegado}\\CFP, atribuição e executor elegível};
+\draw[atlascall] (contract.south west) -- node[atlasedgelabel,left]{D1} (direct.north);
+\draw[atlascall] (contract.south east) -- node[atlasedgelabel,right]{D2} (delegated.north);
+\node[atlasnode] (local) at (-4.3,-7.4) {\textbf{Blackboard e MetaBus}\\Estado e coordenação dentro do processo};
+\node[atlasnode] (storage) at (4.3,-7.4) {\textbf{Registros persistidos}\\Conforme o contrato de cada operação};
+\draw[atlasstructure] (delegated.west) -- (local.east);
+\draw[atlasdata] (direct.south) -- node[atlasedgelabel,pos=.25]{D3} (storage.west);
+\end{tikzpicture}
+
+
+\end{center}
+
+\noindent\textbf{Figura \thefigure.} Fronteiras do primário e dois caminhos distintos.\par
+
+\noindent\textbf{Como funciona e por quê.} Os três processos usam a classe do primário, mas não uma única instância distribuída. D1 representa a chamada direta de REA; D2, a abertura de tarefa A2A; D3, a observação persistida pela operação REA.\par
+
+\noindent\textbf{Justificativa.} Diferenciar contrato, processo e persistência impede interpretar o desenho como um barramento distribuído já implementado.\par
+
+\noindent\textbf{Limite.} As ligações cinzas indicam organização. O diagrama seleciona relações; o índice, as 54 pranchas e o grafo estático completam o detalhamento, cada qual dentro do seu escopo.\par
+
+\fontecore{integrations/ecosystem_mcp.py}{get_library_orchestrator}
+
+\fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator.rea_action}
+
+\clearpage\refstepcounter{figure}\label{fig:global-flow}
+
+\subsection*{Fluxograma geral de uso e conferência}
+
+\begin{center}
+
+
+\tikzset{
+ atlasnode/.style={draw=steel,fill=blueBg,rounded corners=2mm,align=center,
+  text width=4cm,inner sep=5pt,font=\fontsize{9.5}{11.8}\selectfont,text=textmain},
+ atlasroot/.style={atlasnode,fill=navy,text=white,text width=2.8cm,font=\fontsize{10}{12}\selectfont\bfseries},
+ atlasdecision/.style={diamond,aspect=2.1,draw=amber,fill=amberBg,align=center,
+  text width=3cm,inner sep=2pt,font=\fontsize{9.5}{11.5}\selectfont},
+ atlascall/.style={-Stealth,draw=steel,thick},
+ atlasevent/.style={-Stealth,draw=violet,dashed,thick},
+ atlasdata/.style={-Stealth,draw=teal,densely dotted,thick},
+ atlasstructure/.style={draw=slate,thick},
+ atlasboundary/.style={-Stealth,draw=amber,dash dot,thick},
+ atlasedgelabel/.style={fill=papel,inner sep=1.3pt,font=\fontsize{9}{10}\selectfont}
+}
+
+\begin{tikzpicture}
+\node[atlasnode,text width=5cm] (entry) at (0,0) {Escolher entrada e operação\\CLI, MCP ou painel};
+\node[atlasnode,text width=5cm,below=6mm of entry] (scope) {Conferir escopo, permissões\\e configuração exigidos pela operação};
+\draw[atlascall] (entry) -- (scope);
+\node[atlasdecision,below=6mm of scope] (route) {O caminho escolhido exige delegação?};
+\draw[atlascall] (scope) -- (route);
+\node[atlasnode,below left=6mm and 0mm of route] (direct) {\textbf{Não: operação direta}\\Exemplo: análise REA local};
+\node[atlasnode,below right=6mm and 0mm of route] (task) {\textbf{Sim: trabalho A2A}\\CFP e condições do executor};
+\draw[atlascall] (route.west) -| (direct.north);
+\draw[atlascall] (route.east) -| (task.north);
+\node[fit=(direct)(task),inner sep=0pt] (branches) {};
+\node[atlasnode,text width=5.3cm,below=6mm of branches] (receipt) {Conferir retorno, recibo ou pendência\\Instalação e atribuição não provam execução};
+\draw[atlascall] (direct.south) -- (receipt.north west);
+\draw[atlascall] (task.south) -- (receipt.north east);
+\node[atlasnode,text width=5.3cm,below=6mm of receipt] (review) {Aplicar testes e critérios pertinentes\\Decisão científica e editorial humana};
+\draw[atlascall] (receipt) -- (review);
+\end{tikzpicture}
+
+
+\end{center}
+
+\noindent\textbf{Figura \thefigure.} Percurso didático para selecionar e conferir uma operação.\par
+
+\noindent\textbf{Como funciona e por quê.} A pergunta central distingue operação direta de trabalho delegado. Em ambos os caminhos, o leitor precisa conferir o resultado efetivamente obtido, inclusive erro ou pendência.\par
+
+\noindent\textbf{Justificativa.} O recibo permite confrontar a intenção com a execução; testes e avaliação humana têm funções próprias.\par
+
+\noindent\textbf{Limite.} Este é um roteiro de uso, não um pipeline universal executado automaticamente. Os gates concretos, a autenticação e os critérios de conclusão dependem do caminho descrito nas pranchas locais.\par
+
+\fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator.delegate}
+
+\clearpage\refstepcounter{figure}\label{fig:global-matrix}
+
+\subsection*{Matriz completa das relações entre camadas estáticas}
+
+\noindent Cada linha é uma camada importadora; cada coluna, uma dependência. O número na célula conta declarações AST, inclusive relações internas na diagonal. Uma célula vazia significa que esse extrator não registrou import correspondente; não demonstra ausência de comunicação dinâmica.\par\medskip
+
+\begin{center}
+
+\begin{tikzpicture}[x=.66cm,y=.56cm,font=\fontsize{9}{10}\selectfont]
+\node[rotate=90,anchor=west] at (0.5,.2) {L01};
+\node[anchor=east] at (-.12,-0.5) {L01};
+\filldraw[fill=white,draw=lineDark] (0,0) rectangle (1,-1);
+\filldraw[fill=white,draw=lineDark] (1,0) rectangle (2,-1);
+\filldraw[fill=white,draw=lineDark] (2,0) rectangle (3,-1);
+\filldraw[fill=white,draw=lineDark] (3,0) rectangle (4,-1);
+\filldraw[fill=white,draw=lineDark] (4,0) rectangle (5,-1);
+\filldraw[fill=white,draw=lineDark] (5,0) rectangle (6,-1);
+\filldraw[fill=white,draw=lineDark] (6,0) rectangle (7,-1);
+\filldraw[fill=white,draw=lineDark] (7,0) rectangle (8,-1);
+\filldraw[fill=white,draw=lineDark] (8,0) rectangle (9,-1);
+\filldraw[fill=white,draw=lineDark] (9,0) rectangle (10,-1);
+\filldraw[fill=white,draw=lineDark] (10,0) rectangle (11,-1);
+\filldraw[fill=white,draw=lineDark] (11,0) rectangle (12,-1);
+\filldraw[fill=white,draw=lineDark] (12,0) rectangle (13,-1);
+\filldraw[fill=white,draw=lineDark] (13,0) rectangle (14,-1);
+\filldraw[fill=white,draw=lineDark] (14,0) rectangle (15,-1);
+\filldraw[fill=white,draw=lineDark] (15,0) rectangle (16,-1);
+\filldraw[fill=white,draw=lineDark] (16,0) rectangle (17,-1);
+\filldraw[fill=white,draw=lineDark] (17,0) rectangle (18,-1);
+\node[rotate=90,anchor=west] at (1.5,.2) {L02};
+\node[anchor=east] at (-.12,-1.5) {L02};
+\filldraw[fill=white,draw=lineDark] (0,-1) rectangle (1,-2);
+\filldraw[fill=blueBg,draw=lineDark] (1,-1) rectangle (2,-2);
+\node at (1.5,-1.5) {44};
+\filldraw[fill=blueBg,draw=lineDark] (2,-1) rectangle (3,-2);
+\node at (2.5,-1.5) {1};
+\filldraw[fill=white,draw=lineDark] (3,-1) rectangle (4,-2);
+\filldraw[fill=white,draw=lineDark] (4,-1) rectangle (5,-2);
+\filldraw[fill=white,draw=lineDark] (5,-1) rectangle (6,-2);
+\filldraw[fill=white,draw=lineDark] (6,-1) rectangle (7,-2);
+\filldraw[fill=blueBg,draw=lineDark] (7,-1) rectangle (8,-2);
+\node at (7.5,-1.5) {1};
+\filldraw[fill=white,draw=lineDark] (8,-1) rectangle (9,-2);
+\filldraw[fill=blueBg,draw=lineDark] (9,-1) rectangle (10,-2);
+\node at (9.5,-1.5) {1};
+\filldraw[fill=white,draw=lineDark] (10,-1) rectangle (11,-2);
+\filldraw[fill=white,draw=lineDark] (11,-1) rectangle (12,-2);
+\filldraw[fill=white,draw=lineDark] (12,-1) rectangle (13,-2);
+\filldraw[fill=white,draw=lineDark] (13,-1) rectangle (14,-2);
+\filldraw[fill=white,draw=lineDark] (14,-1) rectangle (15,-2);
+\filldraw[fill=white,draw=lineDark] (15,-1) rectangle (16,-2);
+\filldraw[fill=white,draw=lineDark] (16,-1) rectangle (17,-2);
+\filldraw[fill=white,draw=lineDark] (17,-1) rectangle (18,-2);
+\node[rotate=90,anchor=west] at (2.5,.2) {L03};
+\node[anchor=east] at (-.12,-2.5) {L03};
+\filldraw[fill=white,draw=lineDark] (0,-2) rectangle (1,-3);
+\filldraw[fill=white,draw=lineDark] (1,-2) rectangle (2,-3);
+\filldraw[fill=blueBg,draw=lineDark] (2,-2) rectangle (3,-3);
+\node at (2.5,-2.5) {10};
+\filldraw[fill=white,draw=lineDark] (3,-2) rectangle (4,-3);
+\filldraw[fill=white,draw=lineDark] (4,-2) rectangle (5,-3);
+\filldraw[fill=white,draw=lineDark] (5,-2) rectangle (6,-3);
+\filldraw[fill=white,draw=lineDark] (6,-2) rectangle (7,-3);
+\filldraw[fill=blueBg,draw=lineDark] (7,-2) rectangle (8,-3);
+\node at (7.5,-2.5) {1};
+\filldraw[fill=white,draw=lineDark] (8,-2) rectangle (9,-3);
+\filldraw[fill=blueBg,draw=lineDark] (9,-2) rectangle (10,-3);
+\node at (9.5,-2.5) {2};
+\filldraw[fill=white,draw=lineDark] (10,-2) rectangle (11,-3);
+\filldraw[fill=white,draw=lineDark] (11,-2) rectangle (12,-3);
+\filldraw[fill=white,draw=lineDark] (12,-2) rectangle (13,-3);
+\filldraw[fill=white,draw=lineDark] (13,-2) rectangle (14,-3);
+\filldraw[fill=white,draw=lineDark] (14,-2) rectangle (15,-3);
+\filldraw[fill=white,draw=lineDark] (15,-2) rectangle (16,-3);
+\filldraw[fill=white,draw=lineDark] (16,-2) rectangle (17,-3);
+\filldraw[fill=white,draw=lineDark] (17,-2) rectangle (18,-3);
+\node[rotate=90,anchor=west] at (3.5,.2) {L04};
+\node[anchor=east] at (-.12,-3.5) {L04};
+\filldraw[fill=white,draw=lineDark] (0,-3) rectangle (1,-4);
+\filldraw[fill=white,draw=lineDark] (1,-3) rectangle (2,-4);
+\filldraw[fill=white,draw=lineDark] (2,-3) rectangle (3,-4);
+\filldraw[fill=blueBg,draw=lineDark] (3,-3) rectangle (4,-4);
+\node at (3.5,-3.5) {11};
+\filldraw[fill=white,draw=lineDark] (4,-3) rectangle (5,-4);
+\filldraw[fill=blueBg,draw=lineDark] (5,-3) rectangle (6,-4);
+\node at (5.5,-3.5) {2};
+\filldraw[fill=white,draw=lineDark] (6,-3) rectangle (7,-4);
+\filldraw[fill=white,draw=lineDark] (7,-3) rectangle (8,-4);
+\filldraw[fill=white,draw=lineDark] (8,-3) rectangle (9,-4);
+\filldraw[fill=white,draw=lineDark] (9,-3) rectangle (10,-4);
+\filldraw[fill=white,draw=lineDark] (10,-3) rectangle (11,-4);
+\filldraw[fill=white,draw=lineDark] (11,-3) rectangle (12,-4);
+\filldraw[fill=white,draw=lineDark] (12,-3) rectangle (13,-4);
+\filldraw[fill=white,draw=lineDark] (13,-3) rectangle (14,-4);
+\filldraw[fill=white,draw=lineDark] (14,-3) rectangle (15,-4);
+\filldraw[fill=white,draw=lineDark] (15,-3) rectangle (16,-4);
+\filldraw[fill=white,draw=lineDark] (16,-3) rectangle (17,-4);
+\filldraw[fill=white,draw=lineDark] (17,-3) rectangle (18,-4);
+\node[rotate=90,anchor=west] at (4.5,.2) {L05};
+\node[anchor=east] at (-.12,-4.5) {L05};
+\filldraw[fill=white,draw=lineDark] (0,-4) rectangle (1,-5);
+\filldraw[fill=white,draw=lineDark] (1,-4) rectangle (2,-5);
+\filldraw[fill=blueBg,draw=lineDark] (2,-4) rectangle (3,-5);
+\node at (2.5,-4.5) {1};
+\filldraw[fill=blueBg,draw=lineDark] (3,-4) rectangle (4,-5);
+\node at (3.5,-4.5) {3};
+\filldraw[fill=blueBg,draw=lineDark] (4,-4) rectangle (5,-5);
+\node at (4.5,-4.5) {4};
+\filldraw[fill=blueBg,draw=lineDark] (5,-4) rectangle (6,-5);
+\node at (5.5,-4.5) {9};
+\filldraw[fill=white,draw=lineDark] (6,-4) rectangle (7,-5);
+\filldraw[fill=blueBg,draw=lineDark] (7,-4) rectangle (8,-5);
+\node at (7.5,-4.5) {10};
+\filldraw[fill=white,draw=lineDark] (8,-4) rectangle (9,-5);
+\filldraw[fill=blueBg,draw=lineDark] (9,-4) rectangle (10,-5);
+\node at (9.5,-4.5) {1};
+\filldraw[fill=blueBg,draw=lineDark] (10,-4) rectangle (11,-5);
+\node at (10.5,-4.5) {11};
+\filldraw[fill=blueBg,draw=lineDark] (11,-4) rectangle (12,-5);
+\node at (11.5,-4.5) {24};
+\filldraw[fill=blueBg,draw=lineDark] (12,-4) rectangle (13,-5);
+\node at (12.5,-4.5) {3};
+\filldraw[fill=white,draw=lineDark] (13,-4) rectangle (14,-5);
+\filldraw[fill=white,draw=lineDark] (14,-4) rectangle (15,-5);
+\filldraw[fill=white,draw=lineDark] (15,-4) rectangle (16,-5);
+\filldraw[fill=white,draw=lineDark] (16,-4) rectangle (17,-5);
+\filldraw[fill=white,draw=lineDark] (17,-4) rectangle (18,-5);
+\node[rotate=90,anchor=west] at (5.5,.2) {L06};
+\node[anchor=east] at (-.12,-5.5) {L06};
+\filldraw[fill=white,draw=lineDark] (0,-5) rectangle (1,-6);
+\filldraw[fill=white,draw=lineDark] (1,-5) rectangle (2,-6);
+\filldraw[fill=white,draw=lineDark] (2,-5) rectangle (3,-6);
+\filldraw[fill=white,draw=lineDark] (3,-5) rectangle (4,-6);
+\filldraw[fill=white,draw=lineDark] (4,-5) rectangle (5,-6);
+\filldraw[fill=blueBg,draw=lineDark] (5,-5) rectangle (6,-6);
+\node at (5.5,-5.5) {10};
+\filldraw[fill=white,draw=lineDark] (6,-5) rectangle (7,-6);
+\filldraw[fill=blueBg,draw=lineDark] (7,-5) rectangle (8,-6);
+\node at (7.5,-5.5) {1};
+\filldraw[fill=white,draw=lineDark] (8,-5) rectangle (9,-6);
+\filldraw[fill=blueBg,draw=lineDark] (9,-5) rectangle (10,-6);
+\node at (9.5,-5.5) {3};
+\filldraw[fill=white,draw=lineDark] (10,-5) rectangle (11,-6);
+\filldraw[fill=white,draw=lineDark] (11,-5) rectangle (12,-6);
+\filldraw[fill=white,draw=lineDark] (12,-5) rectangle (13,-6);
+\filldraw[fill=white,draw=lineDark] (13,-5) rectangle (14,-6);
+\filldraw[fill=white,draw=lineDark] (14,-5) rectangle (15,-6);
+\filldraw[fill=white,draw=lineDark] (15,-5) rectangle (16,-6);
+\filldraw[fill=white,draw=lineDark] (16,-5) rectangle (17,-6);
+\filldraw[fill=white,draw=lineDark] (17,-5) rectangle (18,-6);
+\node[rotate=90,anchor=west] at (6.5,.2) {L07};
+\node[anchor=east] at (-.12,-6.5) {L07};
+\filldraw[fill=white,draw=lineDark] (0,-6) rectangle (1,-7);
+\filldraw[fill=white,draw=lineDark] (1,-6) rectangle (2,-7);
+\filldraw[fill=white,draw=lineDark] (2,-6) rectangle (3,-7);
+\filldraw[fill=white,draw=lineDark] (3,-6) rectangle (4,-7);
+\filldraw[fill=white,draw=lineDark] (4,-6) rectangle (5,-7);
+\filldraw[fill=white,draw=lineDark] (5,-6) rectangle (6,-7);
+\filldraw[fill=white,draw=lineDark] (6,-6) rectangle (7,-7);
+\filldraw[fill=white,draw=lineDark] (7,-6) rectangle (8,-7);
+\filldraw[fill=white,draw=lineDark] (8,-6) rectangle (9,-7);
+\filldraw[fill=white,draw=lineDark] (9,-6) rectangle (10,-7);
+\filldraw[fill=white,draw=lineDark] (10,-6) rectangle (11,-7);
+\filldraw[fill=white,draw=lineDark] (11,-6) rectangle (12,-7);
+\filldraw[fill=white,draw=lineDark] (12,-6) rectangle (13,-7);
+\filldraw[fill=white,draw=lineDark] (13,-6) rectangle (14,-7);
+\filldraw[fill=white,draw=lineDark] (14,-6) rectangle (15,-7);
+\filldraw[fill=white,draw=lineDark] (15,-6) rectangle (16,-7);
+\filldraw[fill=white,draw=lineDark] (16,-6) rectangle (17,-7);
+\filldraw[fill=white,draw=lineDark] (17,-6) rectangle (18,-7);
+\node[rotate=90,anchor=west] at (7.5,.2) {L08};
+\node[anchor=east] at (-.12,-7.5) {L08};
+\filldraw[fill=blueBg,draw=lineDark] (0,-7) rectangle (1,-8);
+\node at (0.5,-7.5) {4};
+\filldraw[fill=white,draw=lineDark] (1,-7) rectangle (2,-8);
+\filldraw[fill=blueBg,draw=lineDark] (2,-7) rectangle (3,-8);
+\node at (2.5,-7.5) {3};
+\filldraw[fill=white,draw=lineDark] (3,-7) rectangle (4,-8);
+\filldraw[fill=blueBg,draw=lineDark] (4,-7) rectangle (5,-8);
+\node at (4.5,-7.5) {2};
+\filldraw[fill=blueBg,draw=lineDark] (5,-7) rectangle (6,-8);
+\node at (5.5,-7.5) {19};
+\filldraw[fill=white,draw=lineDark] (6,-7) rectangle (7,-8);
+\filldraw[fill=blueBg,draw=lineDark] (7,-7) rectangle (8,-8);
+\node at (7.5,-7.5) {144};
+\filldraw[fill=white,draw=lineDark] (8,-7) rectangle (9,-8);
+\filldraw[fill=blueBg,draw=lineDark] (9,-7) rectangle (10,-8);
+\node at (9.5,-7.5) {21};
+\filldraw[fill=blueBg,draw=lineDark] (10,-7) rectangle (11,-8);
+\node at (10.5,-7.5) {4};
+\filldraw[fill=blueBg,draw=lineDark] (11,-7) rectangle (12,-8);
+\node at (11.5,-7.5) {16};
+\filldraw[fill=blueBg,draw=lineDark] (12,-7) rectangle (13,-8);
+\node at (12.5,-7.5) {12};
+\filldraw[fill=white,draw=lineDark] (13,-7) rectangle (14,-8);
+\filldraw[fill=white,draw=lineDark] (14,-7) rectangle (15,-8);
+\filldraw[fill=white,draw=lineDark] (15,-7) rectangle (16,-8);
+\filldraw[fill=blueBg,draw=lineDark] (16,-7) rectangle (17,-8);
+\node at (16.5,-7.5) {2};
+\filldraw[fill=blueBg,draw=lineDark] (17,-7) rectangle (18,-8);
+\node at (17.5,-7.5) {7};
+\node[rotate=90,anchor=west] at (8.5,.2) {L09};
+\node[anchor=east] at (-.12,-8.5) {L09};
+\filldraw[fill=white,draw=lineDark] (0,-8) rectangle (1,-9);
+\filldraw[fill=white,draw=lineDark] (1,-8) rectangle (2,-9);
+\filldraw[fill=white,draw=lineDark] (2,-8) rectangle (3,-9);
+\filldraw[fill=white,draw=lineDark] (3,-8) rectangle (4,-9);
+\filldraw[fill=white,draw=lineDark] (4,-8) rectangle (5,-9);
+\filldraw[fill=white,draw=lineDark] (5,-8) rectangle (6,-9);
+\filldraw[fill=white,draw=lineDark] (6,-8) rectangle (7,-9);
+\filldraw[fill=blueBg,draw=lineDark] (7,-8) rectangle (8,-9);
+\node at (7.5,-8.5) {1};
+\filldraw[fill=blueBg,draw=lineDark] (8,-8) rectangle (9,-9);
+\node at (8.5,-8.5) {6};
+\filldraw[fill=white,draw=lineDark] (9,-8) rectangle (10,-9);
+\filldraw[fill=blueBg,draw=lineDark] (10,-8) rectangle (11,-9);
+\node at (10.5,-8.5) {2};
+\filldraw[fill=blueBg,draw=lineDark] (11,-8) rectangle (12,-9);
+\node at (11.5,-8.5) {4};
+\filldraw[fill=blueBg,draw=lineDark] (12,-8) rectangle (13,-9);
+\node at (12.5,-8.5) {7};
+\filldraw[fill=white,draw=lineDark] (13,-8) rectangle (14,-9);
+\filldraw[fill=white,draw=lineDark] (14,-8) rectangle (15,-9);
+\filldraw[fill=white,draw=lineDark] (15,-8) rectangle (16,-9);
+\filldraw[fill=white,draw=lineDark] (16,-8) rectangle (17,-9);
+\filldraw[fill=white,draw=lineDark] (17,-8) rectangle (18,-9);
+\node[rotate=90,anchor=west] at (9.5,.2) {L10};
+\node[anchor=east] at (-.12,-9.5) {L10};
+\filldraw[fill=blueBg,draw=lineDark] (0,-9) rectangle (1,-10);
+\node at (0.5,-9.5) {1};
+\filldraw[fill=white,draw=lineDark] (1,-9) rectangle (2,-10);
+\filldraw[fill=white,draw=lineDark] (2,-9) rectangle (3,-10);
+\filldraw[fill=white,draw=lineDark] (3,-9) rectangle (4,-10);
+\filldraw[fill=white,draw=lineDark] (4,-9) rectangle (5,-10);
+\filldraw[fill=blueBg,draw=lineDark] (5,-9) rectangle (6,-10);
+\node at (5.5,-9.5) {5};
+\filldraw[fill=white,draw=lineDark] (6,-9) rectangle (7,-10);
+\filldraw[fill=blueBg,draw=lineDark] (7,-9) rectangle (8,-10);
+\node at (7.5,-9.5) {1};
+\filldraw[fill=white,draw=lineDark] (8,-9) rectangle (9,-10);
+\filldraw[fill=blueBg,draw=lineDark] (9,-9) rectangle (10,-10);
+\node at (9.5,-9.5) {48};
+\filldraw[fill=white,draw=lineDark] (10,-9) rectangle (11,-10);
+\filldraw[fill=white,draw=lineDark] (11,-9) rectangle (12,-10);
+\filldraw[fill=white,draw=lineDark] (12,-9) rectangle (13,-10);
+\filldraw[fill=white,draw=lineDark] (13,-9) rectangle (14,-10);
+\filldraw[fill=white,draw=lineDark] (14,-9) rectangle (15,-10);
+\filldraw[fill=white,draw=lineDark] (15,-9) rectangle (16,-10);
+\filldraw[fill=blueBg,draw=lineDark] (16,-9) rectangle (17,-10);
+\node at (16.5,-9.5) {1};
+\filldraw[fill=white,draw=lineDark] (17,-9) rectangle (18,-10);
+\node[rotate=90,anchor=west] at (10.5,.2) {L11};
+\node[anchor=east] at (-.12,-10.5) {L11};
+\filldraw[fill=white,draw=lineDark] (0,-10) rectangle (1,-11);
+\filldraw[fill=white,draw=lineDark] (1,-10) rectangle (2,-11);
+\filldraw[fill=blueBg,draw=lineDark] (2,-10) rectangle (3,-11);
+\node at (2.5,-10.5) {1};
+\filldraw[fill=white,draw=lineDark] (3,-10) rectangle (4,-11);
+\filldraw[fill=white,draw=lineDark] (4,-10) rectangle (5,-11);
+\filldraw[fill=blueBg,draw=lineDark] (5,-10) rectangle (6,-11);
+\node at (5.5,-10.5) {2};
+\filldraw[fill=white,draw=lineDark] (6,-10) rectangle (7,-11);
+\filldraw[fill=blueBg,draw=lineDark] (7,-10) rectangle (8,-11);
+\node at (7.5,-10.5) {6};
+\filldraw[fill=white,draw=lineDark] (8,-10) rectangle (9,-11);
+\filldraw[fill=blueBg,draw=lineDark] (9,-10) rectangle (10,-11);
+\node at (9.5,-10.5) {3};
+\filldraw[fill=blueBg,draw=lineDark] (10,-10) rectangle (11,-11);
+\node at (10.5,-10.5) {159};
+\filldraw[fill=white,draw=lineDark] (11,-10) rectangle (12,-11);
+\filldraw[fill=blueBg,draw=lineDark] (12,-10) rectangle (13,-11);
+\node at (12.5,-10.5) {13};
+\filldraw[fill=white,draw=lineDark] (13,-10) rectangle (14,-11);
+\filldraw[fill=white,draw=lineDark] (14,-10) rectangle (15,-11);
+\filldraw[fill=white,draw=lineDark] (15,-10) rectangle (16,-11);
+\filldraw[fill=white,draw=lineDark] (16,-10) rectangle (17,-11);
+\filldraw[fill=white,draw=lineDark] (17,-10) rectangle (18,-11);
+\node[rotate=90,anchor=west] at (11.5,.2) {L12};
+\node[anchor=east] at (-.12,-11.5) {L12};
+\filldraw[fill=blueBg,draw=lineDark] (0,-11) rectangle (1,-12);
+\node at (0.5,-11.5) {5};
+\filldraw[fill=blueBg,draw=lineDark] (1,-11) rectangle (2,-12);
+\node at (1.5,-11.5) {11};
+\filldraw[fill=blueBg,draw=lineDark] (2,-11) rectangle (3,-12);
+\node at (2.5,-11.5) {5};
+\filldraw[fill=blueBg,draw=lineDark] (3,-11) rectangle (4,-12);
+\node at (3.5,-11.5) {3};
+\filldraw[fill=blueBg,draw=lineDark] (4,-11) rectangle (5,-12);
+\node at (4.5,-11.5) {1};
+\filldraw[fill=blueBg,draw=lineDark] (5,-11) rectangle (6,-12);
+\node at (5.5,-11.5) {17};
+\filldraw[fill=white,draw=lineDark] (6,-11) rectangle (7,-12);
+\filldraw[fill=blueBg,draw=lineDark] (7,-11) rectangle (8,-12);
+\node at (7.5,-11.5) {75};
+\filldraw[fill=blueBg,draw=lineDark] (8,-11) rectangle (9,-12);
+\node at (8.5,-11.5) {3};
+\filldraw[fill=blueBg,draw=lineDark] (9,-11) rectangle (10,-12);
+\node at (9.5,-11.5) {12};
+\filldraw[fill=blueBg,draw=lineDark] (10,-11) rectangle (11,-12);
+\node at (10.5,-11.5) {17};
+\filldraw[fill=blueBg,draw=lineDark] (11,-11) rectangle (12,-12);
+\node at (11.5,-11.5) {62};
+\filldraw[fill=blueBg,draw=lineDark] (12,-11) rectangle (13,-12);
+\node at (12.5,-11.5) {22};
+\filldraw[fill=white,draw=lineDark] (13,-11) rectangle (14,-12);
+\filldraw[fill=white,draw=lineDark] (14,-11) rectangle (15,-12);
+\filldraw[fill=blueBg,draw=lineDark] (15,-11) rectangle (16,-12);
+\node at (15.5,-11.5) {1};
+\filldraw[fill=blueBg,draw=lineDark] (16,-11) rectangle (17,-12);
+\node at (16.5,-11.5) {4};
+\filldraw[fill=blueBg,draw=lineDark] (17,-11) rectangle (18,-12);
+\node at (17.5,-11.5) {1};
+\node[rotate=90,anchor=west] at (12.5,.2) {L13};
+\node[anchor=east] at (-.12,-12.5) {L13};
+\filldraw[fill=white,draw=lineDark] (0,-12) rectangle (1,-13);
+\filldraw[fill=white,draw=lineDark] (1,-12) rectangle (2,-13);
+\filldraw[fill=white,draw=lineDark] (2,-12) rectangle (3,-13);
+\filldraw[fill=white,draw=lineDark] (3,-12) rectangle (4,-13);
+\filldraw[fill=white,draw=lineDark] (4,-12) rectangle (5,-13);
+\filldraw[fill=white,draw=lineDark] (5,-12) rectangle (6,-13);
+\filldraw[fill=white,draw=lineDark] (6,-12) rectangle (7,-13);
+\filldraw[fill=blueBg,draw=lineDark] (7,-12) rectangle (8,-13);
+\node at (7.5,-12.5) {6};
+\filldraw[fill=white,draw=lineDark] (8,-12) rectangle (9,-13);
+\filldraw[fill=blueBg,draw=lineDark] (9,-12) rectangle (10,-13);
+\node at (9.5,-12.5) {14};
+\filldraw[fill=white,draw=lineDark] (10,-12) rectangle (11,-13);
+\filldraw[fill=white,draw=lineDark] (11,-12) rectangle (12,-13);
+\filldraw[fill=blueBg,draw=lineDark] (12,-12) rectangle (13,-13);
+\node at (12.5,-12.5) {92};
+\filldraw[fill=white,draw=lineDark] (13,-12) rectangle (14,-13);
+\filldraw[fill=white,draw=lineDark] (14,-12) rectangle (15,-13);
+\filldraw[fill=white,draw=lineDark] (15,-12) rectangle (16,-13);
+\filldraw[fill=white,draw=lineDark] (16,-12) rectangle (17,-13);
+\filldraw[fill=blueBg,draw=lineDark] (17,-12) rectangle (18,-13);
+\node at (17.5,-12.5) {1};
+\node[rotate=90,anchor=west] at (13.5,.2) {L14};
+\node[anchor=east] at (-.12,-13.5) {L14};
+\filldraw[fill=white,draw=lineDark] (0,-13) rectangle (1,-14);
+\filldraw[fill=white,draw=lineDark] (1,-13) rectangle (2,-14);
+\filldraw[fill=white,draw=lineDark] (2,-13) rectangle (3,-14);
+\filldraw[fill=white,draw=lineDark] (3,-13) rectangle (4,-14);
+\filldraw[fill=white,draw=lineDark] (4,-13) rectangle (5,-14);
+\filldraw[fill=white,draw=lineDark] (5,-13) rectangle (6,-14);
+\filldraw[fill=white,draw=lineDark] (6,-13) rectangle (7,-14);
+\filldraw[fill=white,draw=lineDark] (7,-13) rectangle (8,-14);
+\filldraw[fill=white,draw=lineDark] (8,-13) rectangle (9,-14);
+\filldraw[fill=white,draw=lineDark] (9,-13) rectangle (10,-14);
+\filldraw[fill=blueBg,draw=lineDark] (10,-13) rectangle (11,-14);
+\node at (10.5,-13.5) {5};
+\filldraw[fill=white,draw=lineDark] (11,-13) rectangle (12,-14);
+\filldraw[fill=white,draw=lineDark] (12,-13) rectangle (13,-14);
+\filldraw[fill=white,draw=lineDark] (13,-13) rectangle (14,-14);
+\filldraw[fill=white,draw=lineDark] (14,-13) rectangle (15,-14);
+\filldraw[fill=white,draw=lineDark] (15,-13) rectangle (16,-14);
+\filldraw[fill=white,draw=lineDark] (16,-13) rectangle (17,-14);
+\filldraw[fill=white,draw=lineDark] (17,-13) rectangle (18,-14);
+\node[rotate=90,anchor=west] at (14.5,.2) {L15};
+\node[anchor=east] at (-.12,-14.5) {L15};
+\filldraw[fill=white,draw=lineDark] (0,-14) rectangle (1,-15);
+\filldraw[fill=white,draw=lineDark] (1,-14) rectangle (2,-15);
+\filldraw[fill=white,draw=lineDark] (2,-14) rectangle (3,-15);
+\filldraw[fill=white,draw=lineDark] (3,-14) rectangle (4,-15);
+\filldraw[fill=white,draw=lineDark] (4,-14) rectangle (5,-15);
+\filldraw[fill=blueBg,draw=lineDark] (5,-14) rectangle (6,-15);
+\node at (5.5,-14.5) {1};
+\filldraw[fill=white,draw=lineDark] (6,-14) rectangle (7,-15);
+\filldraw[fill=white,draw=lineDark] (7,-14) rectangle (8,-15);
+\filldraw[fill=white,draw=lineDark] (8,-14) rectangle (9,-15);
+\filldraw[fill=white,draw=lineDark] (9,-14) rectangle (10,-15);
+\filldraw[fill=white,draw=lineDark] (10,-14) rectangle (11,-15);
+\filldraw[fill=white,draw=lineDark] (11,-14) rectangle (12,-15);
+\filldraw[fill=white,draw=lineDark] (12,-14) rectangle (13,-15);
+\filldraw[fill=white,draw=lineDark] (13,-14) rectangle (14,-15);
+\filldraw[fill=white,draw=lineDark] (14,-14) rectangle (15,-15);
+\filldraw[fill=white,draw=lineDark] (15,-14) rectangle (16,-15);
+\filldraw[fill=white,draw=lineDark] (16,-14) rectangle (17,-15);
+\filldraw[fill=white,draw=lineDark] (17,-14) rectangle (18,-15);
+\node[rotate=90,anchor=west] at (15.5,.2) {L16};
+\node[anchor=east] at (-.12,-15.5) {L16};
+\filldraw[fill=white,draw=lineDark] (0,-15) rectangle (1,-16);
+\filldraw[fill=white,draw=lineDark] (1,-15) rectangle (2,-16);
+\filldraw[fill=white,draw=lineDark] (2,-15) rectangle (3,-16);
+\filldraw[fill=white,draw=lineDark] (3,-15) rectangle (4,-16);
+\filldraw[fill=white,draw=lineDark] (4,-15) rectangle (5,-16);
+\filldraw[fill=white,draw=lineDark] (5,-15) rectangle (6,-16);
+\filldraw[fill=white,draw=lineDark] (6,-15) rectangle (7,-16);
+\filldraw[fill=white,draw=lineDark] (7,-15) rectangle (8,-16);
+\filldraw[fill=white,draw=lineDark] (8,-15) rectangle (9,-16);
+\filldraw[fill=blueBg,draw=lineDark] (9,-15) rectangle (10,-16);
+\node at (9.5,-15.5) {1};
+\filldraw[fill=white,draw=lineDark] (10,-15) rectangle (11,-16);
+\filldraw[fill=white,draw=lineDark] (11,-15) rectangle (12,-16);
+\filldraw[fill=white,draw=lineDark] (12,-15) rectangle (13,-16);
+\filldraw[fill=white,draw=lineDark] (13,-15) rectangle (14,-16);
+\filldraw[fill=white,draw=lineDark] (14,-15) rectangle (15,-16);
+\filldraw[fill=blueBg,draw=lineDark] (15,-15) rectangle (16,-16);
+\node at (15.5,-15.5) {2};
+\filldraw[fill=white,draw=lineDark] (16,-15) rectangle (17,-16);
+\filldraw[fill=white,draw=lineDark] (17,-15) rectangle (18,-16);
+\node[rotate=90,anchor=west] at (16.5,.2) {L17};
+\node[anchor=east] at (-.12,-16.5) {L17};
+\filldraw[fill=white,draw=lineDark] (0,-16) rectangle (1,-17);
+\filldraw[fill=white,draw=lineDark] (1,-16) rectangle (2,-17);
+\filldraw[fill=white,draw=lineDark] (2,-16) rectangle (3,-17);
+\filldraw[fill=white,draw=lineDark] (3,-16) rectangle (4,-17);
+\filldraw[fill=white,draw=lineDark] (4,-16) rectangle (5,-17);
+\filldraw[fill=white,draw=lineDark] (5,-16) rectangle (6,-17);
+\filldraw[fill=white,draw=lineDark] (6,-16) rectangle (7,-17);
+\filldraw[fill=white,draw=lineDark] (7,-16) rectangle (8,-17);
+\filldraw[fill=white,draw=lineDark] (8,-16) rectangle (9,-17);
+\filldraw[fill=blueBg,draw=lineDark] (9,-16) rectangle (10,-17);
+\node at (9.5,-16.5) {2};
+\filldraw[fill=blueBg,draw=lineDark] (10,-16) rectangle (11,-17);
+\node at (10.5,-16.5) {1};
+\filldraw[fill=white,draw=lineDark] (11,-16) rectangle (12,-17);
+\filldraw[fill=white,draw=lineDark] (12,-16) rectangle (13,-17);
+\filldraw[fill=white,draw=lineDark] (13,-16) rectangle (14,-17);
+\filldraw[fill=white,draw=lineDark] (14,-16) rectangle (15,-17);
+\filldraw[fill=white,draw=lineDark] (15,-16) rectangle (16,-17);
+\filldraw[fill=blueBg,draw=lineDark] (16,-16) rectangle (17,-17);
+\node at (16.5,-16.5) {18};
+\filldraw[fill=white,draw=lineDark] (17,-16) rectangle (18,-17);
+\node[rotate=90,anchor=west] at (17.5,.2) {L18};
+\node[anchor=east] at (-.12,-17.5) {L18};
+\filldraw[fill=white,draw=lineDark] (0,-17) rectangle (1,-18);
+\filldraw[fill=white,draw=lineDark] (1,-17) rectangle (2,-18);
+\filldraw[fill=white,draw=lineDark] (2,-17) rectangle (3,-18);
+\filldraw[fill=white,draw=lineDark] (3,-17) rectangle (4,-18);
+\filldraw[fill=white,draw=lineDark] (4,-17) rectangle (5,-18);
+\filldraw[fill=white,draw=lineDark] (5,-17) rectangle (6,-18);
+\filldraw[fill=white,draw=lineDark] (6,-17) rectangle (7,-18);
+\filldraw[fill=blueBg,draw=lineDark] (7,-17) rectangle (8,-18);
+\node at (7.5,-17.5) {1};
+\filldraw[fill=white,draw=lineDark] (8,-17) rectangle (9,-18);
+\filldraw[fill=blueBg,draw=lineDark] (9,-17) rectangle (10,-18);
+\node at (9.5,-17.5) {1};
+\filldraw[fill=blueBg,draw=lineDark] (10,-17) rectangle (11,-18);
+\node at (10.5,-17.5) {2};
+\filldraw[fill=white,draw=lineDark] (11,-17) rectangle (12,-18);
+\filldraw[fill=blueBg,draw=lineDark] (12,-17) rectangle (13,-18);
+\node at (12.5,-17.5) {7};
+\filldraw[fill=white,draw=lineDark] (13,-17) rectangle (14,-18);
+\filldraw[fill=white,draw=lineDark] (14,-17) rectangle (15,-18);
+\filldraw[fill=white,draw=lineDark] (15,-17) rectangle (16,-18);
+\filldraw[fill=white,draw=lineDark] (16,-17) rectangle (17,-18);
+\filldraw[fill=blueBg,draw=lineDark] (17,-17) rectangle (18,-18);
+\node at (17.5,-17.5) {43};
+\end{tikzpicture}
+
+\end{center}
+
+{\footnotesize\noindent\begin{tabularx}{\linewidth}{YYYY}\toprule ID & Camada & ID & Camada \\ \midrule
+
+L01 & agentes & L10 & memoria\_e\_evidencias \\
+
+L02 & diagnostico & L11 & modulos\_adicionais \\
+
+L03 & engenharia\_reversa & L12 & orquestracao \\
+
+L04 & evolucao & L13 & pesquisa\_e\_rag \\
+
+L05 & ferramentas & L14 & plugins \\
+
+L06 & governanca & L15 & protocolos \\
+
+L07 & infraestrutura & L16 & publicacao \\
+
+L08 & integracoes & L17 & raciocinio \\
+
+L09 & interfaces & L18 & skills \\
+
+\bottomrule\end{tabularx}}
+
+\noindent\textbf{Como funciona e por quê.} A matriz conserva todos os totais entre as camadas do inventário. O SVG integral conserva os identificadores individuais, inclusive módulos sem arestas; por isso a leitura por camadas e a leitura por módulo não são intercambiáveis.\par
+
+\noindent\textbf{Justificativa.} Agregar somente para a orientação evita imprimir centenas de nomes em caracteres minúsculos. A exportação vetorial permite ampliar o mapa integral sem perder os rótulos.\par
+
+\noindent\textbf{Limite.} Imports dinâmicos e superfícies não Python têm limites próprios de extração; a matriz não inventa ligações para completar visualmente o desenho.\par
+
+\fontecore{scripts/build_architecture_maps.py}{build_snapshot}
+
+\clearpage\subsection*{Mapa integral para ampliação e inventário pesquisável}
+
+\noindent\href{https://github.com/MarceloClaro/opencode-ecosystem-core/blob/codex/core-prontidao-rea/docs/architecture-r911/dependencies.svg}{Abrir o mapa vetorial completo por módulo}. Os arquivos locais estão em \pth{docs/architecture-r911/}: \pth{dependencies.svg}, \pth{dependencies.dot}, \pth{dependencies.mmd}, \pth{architecture-inventory.json} e \pth{mermaid-correspondence.json}. O último arquivo conserva a correspondência de nós e pares entre formatos, sem contar a legenda como arquitetura.\par
+
+CLI, servidor MCP e Streamlit podem manter instâncias próprias do mesmo contrato de primário. O cache compartilhado em um servidor não estabelece uma instância distribuída universal. MetaBus e Blackboard também têm estado de processo; persistência de alguns registros não torna todo o estado global.
+
+\noindent\textbf{Percurso de leitura.} Localize o tema no índice; abra o mapa mental para reconhecer a pergunta; use C1--C6 para identificar responsabilidades; siga o fluxograma da operação delimitada e seu ramo de recusa. Depois confronte a fonte e o recibo da operação realmente executada.\par
+
+\noindent\textbf{Fronteiras.} Uma operação REA direta não precisa passar por CFP. Uma tarefa atribuída ainda pode estar em \pth{pending_executor}. O workflow atual pode ter dependências em DAG e execução sequencial. Um gate SDD exige as condições do seu caminho e da especificação associada; não se desenha um portão universal que o código não implementa.\par
+
+\fontecore{integrations/ecosystem_mcp.py}{get_library_orchestrator}
+
+\fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator.agent_profile_action}

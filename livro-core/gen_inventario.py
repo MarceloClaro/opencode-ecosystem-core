@@ -59,13 +59,22 @@ def collect_inventory(root: Path) -> dict:
     authoritative = {root / 'livro-core' / name for name in (
         'main.tex', 'macros.tex', 'gen_mod10.py', 'gen_mod14_ativacao.py', 'gen_inventario.py')}
     authoritative.update((root / 'livro-core/lean').glob('*.lean'))
+    # R911: dados curados e pranchas vetoriais pertencem à edição do livro.
+    # Globs rasos não incorporam caches, recibos ou saídas circulares.
+    authoritative.update((root / 'livro-core/atlas').glob('*.json'))
+    authoritative.update((root / 'livro-core/atlas').glob('*.tex'))
     authoritative.update(root / name for name in (
         'livro-core/lean/lean-toolchain', 'livro-core/lean/lakefile.toml',
         'livro-core/lean/lake-manifest.json', 'scripts/verify_book_lean.py',
         'docs/VERIFICACAO_FORMAL_LIVRO_R908.md', 'docs/book-math-map-r908.json',
         'docs/PREFACIO_ASSINATURA_COGNITIVA_R909.md', 'docs/preface-sources-r909.json',
         'livro-core/gen_lean_axioms.py', 'livro-core/lean-axiomas.tex',
-        'scripts/book_local_deductions.py', 'docs/DEDUCOES_LOCAIS_LIVRO_R910.md'))
+        'scripts/book_local_deductions.py', 'docs/DEDUCOES_LOCAIS_LIVRO_R910.md',
+        'livro-core/gen_architecture_atlas.py', 'tests/test_r911_book_architecture_atlas.py',
+        'specs/SPEC-935-R911-atlas-arquiteturas-livro.md',
+        'docs/superpowers/plans/2026-10-16-atlas-arquiteturas.md',
+        'docs/ARQUITETURAS_LIVRO_R911.md',
+        'docs/architecture-r911/architecture-inventory.json'))
     sources = {str(path.relative_to(root)): {
         "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
     } for path in sorted({config_path, *modules, *local_paths, *authoritative}) if path.is_file()}

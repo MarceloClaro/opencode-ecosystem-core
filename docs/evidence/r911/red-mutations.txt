@@ -1,0 +1,26 @@
+R911 — Evidência de RED e mutações dirigidas
+Escopo: contratos editoriais, grafos estáticos, reprodução e custódia de arquivos.
+Não constitui execução de produção nem nova verificação das provas Lean.
+Não houve alteração persistente do gerador ou dos dados para produzir as mutações.
+
+RED físico de reprodução: pytest tests/test_r911_book_architecture_atlas.py -q --tb=short
+Resultado observado: 1 failed, 26 passed em 3,39 s.
+Falha: test_global_views_and_matrix_reproduce_sources rejeitou atlas/global.tex desatualizado.
+Diferença: gerador incluiu noindent após footnotesize; global.tex ainda não refletia a mudança.
+Recuperação: regenerar as saídas a partir das fontes autoritativas e repetir os testes.
+
+Mutações em memória e validação negativa:
+REJEITADA: Decisão deslocada um passo: 2/2 posições de gate (após passos 2 e 3).
+REJEITADA: Continuação sem rótulo sim: 2/2 posições de gate (após passos 2 e 3).
+REJEITADA: Ramo mental removido: Mapa mental exige quatro ramos de três conceitos
+REJEITADA: Recusa removida: Fluxo precisa mostrar condição, recusa e recuperação
+REJEITADA: Símbolo inexistente: Símbolo inexistente: marceloclaro/cli.py:R911NoSuchSymbol
+REJEITADA: Extremo de aresta inexistente: Extremo ou tipo de relação inválido: AR01
+REJEITADA: Tipo de aresta inválido: Extremo ou tipo de relação inválido: AR01
+REJEITADA: Todas as arestas removidas: Diagrama sem relação ou com densidade acima do contrato A4
+REJEITADA: alteração posterior em JSON do atlas invalidou recibo de custódia da fixture.
+O recibo usado nessa fixture não declara prova ou execução Lean.
+
+O teste de conservação usa snapshot independente e declarações visuais DOT/Mermaid,
+além dos registros de correspondência. A fixture preserva módulo isolado e duas
+declarações AST do mesmo par; remoção do isolado é rejeitada pelo exportador.

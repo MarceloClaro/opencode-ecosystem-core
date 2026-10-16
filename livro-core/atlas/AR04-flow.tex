@@ -1,0 +1,46 @@
+% R911: gerado; alterar dados e gerador, não esta prancha.
+\clearpage
+\refstepcounter{figure}\label{fig:AR04-flow}
+\noindent{\large\sffamily\bfseries\color{navy}AR04 · Fluxograma}\par\smallskip
+\noindent\textbf{Workflows, checkpoints e executores de leitura}\par
+\noindent\textit{Como dependências, limites e retomada controlam o trabalho composto?}\par\medskip
+\begin{center}
+
+\tikzset{
+ atlasnode/.style={draw=steel,fill=blueBg,rounded corners=2mm,align=center,
+  text width=4cm,inner sep=5pt,font=\fontsize{9.5}{11.8}\selectfont,text=textmain},
+ atlasroot/.style={atlasnode,fill=navy,text=white,text width=2.8cm,font=\fontsize{10}{12}\selectfont\bfseries},
+ atlasdecision/.style={diamond,aspect=2.1,draw=amber,fill=amberBg,align=center,
+  text width=3cm,inner sep=2pt,font=\fontsize{9.5}{11.5}\selectfont},
+ atlascall/.style={-Stealth,draw=steel,thick},
+ atlasevent/.style={-Stealth,draw=violet,dashed,thick},
+ atlasdata/.style={-Stealth,draw=teal,densely dotted,thick},
+ atlasstructure/.style={draw=slate,thick},
+ atlasboundary/.style={-Stealth,draw=amber,dash dot,thick},
+ atlasedgelabel/.style={fill=papel,inner sep=1.3pt,font=\fontsize{9}{10}\selectfont}
+}
+
+\begin{tikzpicture}
+\node[atlasnode,text width=5cm] (s0) {Validar DAG e orçamento global};
+\node[atlasnode,text width=5cm,below=6mm of s0] (s1) {Criar ou carregar checkpoint};
+\draw[atlascall] (s0) -- (s1);
+\node[atlasnode,text width=5cm,below=6mm of s1] (s2) {Conferir dependências da etapa};
+\draw[atlascall] (s1) -- (s2);
+\node[atlasdecision,below=6mm of s2] (decision) {Dependências concluídas e prazo disponível?};
+\draw[atlascall] (s2) -- (decision);
+\node[atlasnode,fill=amberBg,text width=3.1cm,right=12mm of decision] (refusal) {\textbf{Recusa ou pendência}\\Bloquear ou esgotar a etapa};
+\draw[atlasboundary] (decision.east) -- node[above,font=\small]{não} (refusal.west);
+\node[atlasnode,text width=5cm,below=6mm of decision] (s3) {Executar etapa com limite restante};
+\draw[atlascall] (decision) -- node[right,font=\small]{sim} (s3);
+\node[atlasnode,text width=5cm,below=6mm of s3] (s4) {Salvar resultado e estado observado};
+\draw[atlascall] (s3) -- (s4);
+\node[atlasnode,text width=5cm,below=6mm of s4] (s5) {Encerrar ou retomar explicitamente};
+\draw[atlascall] (s4) -- (s5);
+\end{tikzpicture}
+\end{center}
+{\small\textbf{Figura \thefigure.} Fluxograma --- Workflows, checkpoints e executores de leitura}\par\smallskip
+\noindent\textbf{Como funciona e por quê.} Siga a coluna como uma sequência explicativa da operação delimitada. No losango, compare as condições antes de avançar.\par
+\noindent\textbf{Justificativa.} Em análise seguida de revisão, a revisão fica bloqueada se a análise não concluir com sucesso e saída útil. A retomada pode reaproveitar a análise aceita e repetir uma falha somente sob a opção explícita.\par
+\noindent\textbf{Limite.} Este fluxo curado é condicionado ao estado do checkpoint. O DAG de workflow difere do TaskRuntime de nanotarefas com leases. Não há paralelismo demonstrado nesta rota. Histórico de sucesso não comprova saldo, autenticação ou execução atual de um harness; interrupção pode deixar execução incerta. Recuperação: Resolver dependências; autorizar repetição\par\smallskip
+\fontecore{marceloclaro/workflow.py}{WorkflowCoordinator.run}
+\fontecore{marceloclaro/workflow.py}{WorkflowCoordinator._resume}
