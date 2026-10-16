@@ -1,0 +1,107 @@
+{
+  "revision": "R909",
+  "status": "concluido_no_escopo_editorial_local",
+  "date": "2026-10-16",
+  "timezone": "America/Fortaleza",
+  "external_validation": false,
+  "human_review_recorded": false,
+  "review_method": "Redação e revisão cruzada assistidas por IA, inspeção de fontes primárias disponíveis, metadados e PDF",
+  "author_note": {
+    "preserved": true,
+    "sha256": "dda6db71fbc55e7f24364166c5b60ba81ce5e3eb1eea1ef23f3263b28bd2b838"
+  },
+  "argument_scope": "Assinatura cognitiva como interpretação situada de escolhas documentadas; sem alegação universal, biomarcador, perfil de personalidade ou diagnóstico.",
+  "disciplines": [
+    "técnica",
+    "humanista",
+    "psicologia",
+    "filosofia",
+    "sociologia",
+    "neuropsicopedagogia",
+    "neurociência",
+    "pedagogia",
+    "psiquiatria"
+  ],
+  "sources": {
+    "new_dois": 10,
+    "registered_and_resolving": 10,
+    "resolver_http": 302,
+    "crossref_success_http": 200,
+    "initial_rate_limits_with_successful_retry": 3,
+    "source_receipt": "docs/preface-sources-r909.json",
+    "source_receipt_sha256": "3b439734283f72fd0a7c4c8d1c67d72f5482aee240131b586dd44e720526f6a7",
+    "scope": "Somente 10 fontes acrescentadas, não reaudita todos os DOIs históricos."
+  },
+  "tests": {
+    "passed": 110,
+    "failed": 0,
+    "scope": "R617-R620,R814,R901,R907,R908",
+    "global_suite_executed": false,
+    "log_sha256": "c7f34244eda149a5f5c705952b16c6fcebb81e9b189c8b9bf06f15da5f77b46e"
+  },
+  "formal_verification": {
+    "cycle": "R908",
+    "theorems": 158,
+    "status": "machine_checked",
+    "receipt": "docs/verification-book-lean-r908.json",
+    "receipt_sha256": "2c22117041fe82bc1b1d87dd945c4d7efa9845557647e83216239795a762a962",
+    "fresh_sources_checked": true,
+    "proves_humanistic_preface_thesis": false,
+    "unchanged_proof_sources": true,
+    "stale_context_rejected_during_edit": true,
+    "stale_context_receipt_sha256": "dec0868f9435df57660d1787e4a3350b464ddb2ca0e1979d9adc46d278431a1e"
+  },
+  "doctor": {
+    "checks_passed": 22,
+    "checks_total": 22,
+    "verification": "installation_only",
+    "log_sha256": "3c52c8af756a75572afc56d974cb362f412310802cd7ae57258905664837c323"
+  },
+  "pdf": {
+    "file": "livro-core/main.pdf",
+    "bytes": 6830742,
+    "sha256": "e70f83fe5d125a5f2ebe27d0430602a371a895fe75a2700fb01d140d6f86896c",
+    "compile_entry": "livro-core/main.tex",
+    "compile_exit_code": 0,
+    "pages": 543,
+    "off_page_words": 0,
+    "horizontal_violations": 0,
+    "max_extension_pt": 0.274,
+    "horizontal_tolerance_pt": 2,
+    "cover_full_bleed_excluded_from_body_margins": true,
+    "visual_inspection": "amostragem das páginas2–8,537–539; após último ajuste reinspecionadas3–7,537–538",
+    "preface_pages": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "original_author_note_page": 2,
+    "references_pages": [
+      537,
+      538
+    ],
+    "overfull_hbox_count": 0,
+    "residual_overfull_vbox_pt": 0.79533,
+    "editor_fragment_compiler": "fragmento modular não é standalone; compilador isolado retorna Missing begin{document}; main.tex compilado com sucesso no ambiente completo"
+  },
+  "learning_effectiveness_measured": false,
+  "artifact_hashes": {
+    "README.md": "e56daf72bf12ad18c7d3b901cb5328688c199b8e4d7ed72a88d956cfdc5a1a3f",
+    "livro-core/mod-00-capa.tex": "10c0a5bed7f4da4e0d766858dfa057af8e4e1f6f12fdf3536c2e0b90ce05b4b6",
+    "livro-core/mod-00a-enredo-prefacio.tex": "3c2ea470a122db7472fff8f8c62d2f0f3a4715621e02e68866f3f17d9c8dcd60",
+    "livro-core/mod-11-apendices.tex": "4c38938bb95b2f1f84f4562093048810c00da8ecd9dbcd630c0db6d099835de7",
+    "livro-core/macros.tex": "b07e44e11c5d60d915467c66a4177c0014d390aaa0e9955a866f2bdf5d426aac",
+    "livro-core/gen_inventario.py": "c07fedbd3bde8ea24347cbe17d72a295f07e38e1e0480e9c90f1026dd5555588",
+    "livro-core/inventario-core.json": "43a77808106d89ddb673f1a3e9b26af1ba85d44af1b886976554a5a6e37a4313",
+    "docs/PREFACIO_ASSINATURA_COGNITIVA_R909.md": "481753af1a9b7f60e35f23bace79c7b0b07a22e335f7a438ef6a38d4638f3629",
+    "docs/preface-sources-r909.json": "3b439734283f72fd0a7c4c8d1c67d72f5482aee240131b586dd44e720526f6a7",
+    "specs/SPEC-935-R909-prefacio-assinatura-cognitiva.md": "19912aae68a011188c8ecfa26a88452c801eb27096ceb50f047eaab26da43e6a"
+  },
+  "limitations": [
+    "DOI resolvido não implica acesso aberto ou validação da alegação.",
+    "Leitura assistida por IA e uso de resumo/indexação primária não são revisão humana independente.",
+    "Provas Lean não certificam dados empíricos, equivalência do runtimePython, segurançaIEEE754 ou a tese humanística do prefácio.",
+    "Testes e apresentação não medem aprendizagem ou conforto do leitor."
+  ]
+}

@@ -266,3 +266,9 @@ Proposições principais: `BookAlgebra.unit_coverage_complement_exact`, `BookAlg
 O teorema de exponencial após subtrair o máximo limita um número real a 1. Ele não modela arredondamento, subnormais ou overflow IEEE-754. Similarmente, pesos normalizados não são probabilidades calibradas de acerto. As provas das políticas são modelos explícitos, sem alegar equivalência integral com o código Python. Catálogo, ensaios científicos, qualidade editorial e revisão externa conservam verificações próprias. A correção da tradução do texto para o formalismo recebe revisão humana e permanece uma obrigação de manutenção.
 
 Fundamentos: [documentação oficial de Lean — Axioms and Computation](https://lean-lang.org/theorem_proving_in_lean4/Axioms-and-Computation/) e [Mathlib4](https://github.com/leanprover-community/mathlib4).
+
+A ampliação R909 do prefácio discute autoria como tese interpretativa. Ela não
+acrescenta fórmula nem é apresentada como teorema Lean; sua fundamentação
+bibliográfica e seus limites estão em `docs/PREFACIO_ASSINATURA_COGNITIVA_R909.md`.
+A custódia é reexecutada para os novos bytes do livro, mantendo as 158 provas
+matemáticas no mesmo alcance.

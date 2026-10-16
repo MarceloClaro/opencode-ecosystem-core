@@ -54,9 +54,188 @@ Obrigado por fazer parte desta jornada.
 \end{elemento}
 \clearpage
 
+
+% BEGIN-R909-PREFACIO-ASSINATURA
+\begingroup
+\interfootnotelinepenalty=10000
+% Notas deste prefácio permanecem inteiras, inclusive entre parágrafos.
+\let\prefaceoriginalfootnote\footnote
+\renewcommand{\footnote}[1]{\prefaceoriginalfootnote{%
+  \parbox[t]{\dimexpr\linewidth-1.8em\relax}{#1}}}
+\section*{A assinatura cognitiva de um ecossistema agêntico}
+\addcontentsline{toc}{section}{Prefácio: autoria, cognição e responsabilidade}
+
+Uma casa conserva decisões de quem a concebeu: a disposição das portas, o
+caminho entre os ambientes e os espaços reservados ao encontro. Isso não faz
+da planta um retrato completo da vida mental do arquiteto. A mesma distinção
+orienta a leitura deste ecossistema. Perguntas consideradas importantes,
+formas de decompor problemas, fontes escolhidas, regras de memória e critérios
+de aceite deixam marcas no projeto. Reconhecer essas marcas é reconhecer uma
+história humana de construção, inclusive quando parte do trabalho é realizada
+com modelos de linguagem e agentes de programação.
+
+Neste prefácio, \emph{assinatura cognitiva autoral} designa essa configuração
+situada de escolhas documentáveis. A expressão dá nome a uma interpretação
+do projeto: não a um biomarcador, a um teste de personalidade ou a uma prova
+de consciência artificial. Dizer que um ecossistema carrega uma assinatura de
+seu autor é defensável nesse sentido de autoria e responsabilidade. A versão
+mais forte da frase --- todo ecossistema revelaria, de maneira única e
+recuperável, a cognição de um único criador --- ultrapassa a evidência aqui
+reunida. Uma definição interpretativa não se transforma em lei universal
+apenas porque diferentes disciplinas ajudam a compreendê-la.
+
+\paragraph{Do estilo técnico à história social da criação.}
+Há um apoio técnico concreto para a ideia de marcas autorais. Caliskan e
+colaboradores investigaram atribuição de autoria por características
+estilísticas de programas, inclusive após compilação. O resultado mostra que
+certas regularidades do artefato podem conservar informação sobre sua
+produção, nas condições estudadas. Não demonstra acesso à personalidade ou à
+mente do programador. Coautoria, rótulos de autoria, compiladores, linguagens e
+transformações do código impõem limites; o desenvolvimento com os LLMs atuais
+acrescenta condições que aquele estudo não avaliou
+\citparafrase{CALISKAN, A. et al. When coding style survives compilation: de-anonymizing programmers from executable binaries. \emph{Network and Distributed System Security Symposium}, 2018}{10.14722/ndss.2018.23304}{Texto primário, introdução e seção VIII. Apoia atribuição estilística sob condições; não mensura cognição, personalidade ou este Core}{CALISKAN et al., 2018}.
+
+A sociologia das organizações desloca o olhar do indivíduo para as relações
+que tornam o trabalho possível. MacCormack, Baldwin e Rusnak examinaram a
+hipótese de espelhamento entre organização e produto em pares de sistemas de
+software. A modularidade observada se relaciona às formas de coordenação do
+desenvolvimento. Assim, uma arquitetura pode conservar marcas de comunicação,
+governança e divisão do trabalho, além das escolhas iniciais do fundador.
+A amostra delimitada não estabelece uma lei sem exceções nem identifica
+estrutura organizacional com estrutura mental
+\citparafrase{MACCORMACK, A.; BALDWIN, C.; RUSNAK, J. Exploring the duality between product and organizational architectures: a test of the mirroring hypothesis. \emph{Research Policy}, v.~41, n.~8, p.~1309-1324, 2012}{10.1016/j.respol.2012.04.011}{Texto integral, resumo e discussão. Relação sociotécnica estudada em cinco pares; não prova identidade entre mente individual e software}{MACCORMACK; BALDWIN; RUSNAK, 2012}.
+
+Esse deslocamento é reforçado pela abordagem da cognição distribuída. Ao analisar
+pessoas, instrumentos e procedimentos em uma cabine de avião, Hutchins mostra
+por que a unidade relevante pode ser o sistema coordenado, cujas propriedades
+não se reduzem às dos indivíduos. A aproximação com agentes computacionais é
+uma analogia de organização, não uma equivalência experimental. A produção do Core reúne
+contribuições humanas e o emprego de bibliotecas, dados, modelos e práticas
+herdadas. A assinatura pode ser composta, modificada e até contrariada pelo
+uso; atribuir tudo a uma única pessoa apagaria essa contribuição coletiva
+\citparafrase{HUTCHINS, E. How a cockpit remembers its speeds. \emph{Cognitive Science}, v.~19, n.~3, p.~265-288, 1995}{10.1207/s15516709cog1903_1}{Texto primário, resumo e análise do sistema distribuído. Fundamenta a unidade pessoa-instrumento-procedimento; sua aplicação ao Core é analogia arquitetural}{HUTCHINS, 1995}.
+
+\paragraph{Valores, vieses e responsabilidade humana.}
+A filosofia da tecnologia acrescenta que decisões de projeto não organizam
+apenas operações: também favorecem ou dificultam maneiras de agir. Verbeek
+discute essa mediação e sua dimensão ética. Exigir proveniência, permitir
+contestação e delimitar permissões são, neste livro, exemplos de escolhas que
+podem materializar compromissos humanos. O argumento filosófico ajuda a
+interrogar essas escolhas; não prova que uma regra declarada seja cumprida nem
+que o autor tenha as virtudes que o texto anuncia
+\citparafrase{VERBEEK, P.-P. Materializing morality: design ethics and technological mediation. \emph{Science, Technology, \& Human Values}, v.~31, n.~3, p.~361-380, 2006}{10.1177/0162243905285847}{Resumo primário disponibilizado pela instituição do autor. Apoio à análise ética da mediação tecnológica; a aplicação às regras do Core é interpretação deste prefácio}{VERBEEK, 2006}.
+
+A psicologia oferece também uma objeção ao entusiasmo do criador: é possível
+procurar preferencialmente aquilo que confirma uma crença e dar menos peso ao
+que a contraria. A revisão de Nickerson descreve diferentes formas desse viés.
+A consequência de projeto proposta aqui é manter critérios prévios, casos
+negativos e revisão por outras pessoas. Essa passagem da literatura para o
+procedimento é uma escolha metodológica do livro. Não autoriza afirmar que
+um autor específico foi diagnosticado com um viés, nem que os controles
+eliminem todas as distorções
+\citparafrase{NICKERSON, R. S. Confirmation bias: a ubiquitous phenomenon in many guises. \emph{Review of General Psychology}, v.~2, n.~2, p.~175-220, 1998}{10.1037/1089-2680.2.2.175}{Texto integral, resumo e revisão. Fundamenta uma cautela sobre seleção e interpretação da evidência; não avalia o autor nem demonstra eficácia dos controles deste projeto}{NICKERSON, 1998}.
+
+Há, portanto, vantagens e riscos em reconhecer uma assinatura autoral.
+A vantagem é tornar examináveis prioridades, pressupostos e responsabilidades.
+O risco é transformar preferência em autoridade, coerência estética em prova
+ou crítica ao sistema em julgamento da pessoa. Uma arquitetura pode ser
+criticada, comparada e corrigida sem que a dignidade de quem a criou esteja
+em discussão. Humanizar a técnica inclui preservar essa separação.
+
+\paragraph{Pedagogia e neuropsicopedagogia: uma ponte que exige tradução.}
+No plano pedagógico, a assinatura aparece na maneira de convidar alguém a
+aprender: a sequência das explicações, o lugar do exemplo, a relação entre
+texto e imagem e a oportunidade de refazer um procedimento. Mayer e Moreno
+investigam o desenho multimídia considerando limites de processamento e
+aprendizagem significativa. Esse trabalho oferece razões para explicar mapas,
+segmentar complexidade e retirar ornamentação que disputa atenção com o
+conteúdo. Não demonstra, por si, que esta edição ensine melhor
+\citparafrase{MAYER, R. E.; MORENO, R. Nine ways to reduce cognitive load in multimedia learning. \emph{Educational Psychologist}, v.~38, n.~1, p.~43-52, 2003}{10.1207/S15326985EP3801_6}{Texto integral, especialmente p.~43-45. Fundamenta decisões sobre palavras, imagens e carga cognitiva; resultados dos estudos citados não medem os leitores deste livro}{MAYER; MORENO, 2003}.
+
+A aproximação neuropsicopedagógica adotada aqui é uma ponte crítica entre
+conhecimento psicológico, aprendizagem e questões neurocientíficas. Não é um
+atalho que permita deduzir um modo de ensinar diretamente de uma imagem do
+cérebro. Howard-Jones examina distorções que surgem nessa tradução. Por isso,
+as trilhas de leitura e os exercícios deste livro foram organizados para
+contemplar diferenças de conhecimento prévio e necessidades de acesso, sem atribuir aos leitores tipos
+cerebrais fixos. Beleza visual, conforto percebido, retenção e transferência
+para uma tarefa nova precisam de avaliações pertinentes, não de um rótulo
+neurocientífico
+\citparafrase{HOWARD-JONES, P. A. Neuroscience and education: myths and messages. \emph{Nature Reviews Neuroscience}, v.~15, p.~817-824, 2014}{10.1038/nrn3817}{Resumo e texto primário indexado, p.~817. Discute neuromitos e dificuldades de tradução entre neurociência e educação; não valida uma prática ou este livro apenas por ser chamada neuropsicopedagógica}{HOWARD-JONES, 2014}.
+
+\paragraph{Neurociência: nomes semelhantes não demonstram mecanismos iguais.}
+Poldrack distingue poder preditivo e interpretação neurobiológica ao discutir
+inferências sobre estados mentais a partir de neuroimagem. A advertência é
+metodológica: a conclusão exige evidência compatível com a inferência que se
+pretende fazer. Sua aplicação ao software é uma analogia explicitada neste
+prefácio. Dar a módulos nomes como memória, atenção ou metacognição não os
+torna medidas da memória humana, da atenção cerebral ou da personalidade do
+autor. Nem o fluxo de agentes é um exame do cérebro, nem uma semelhança de
+vocabulário demonstra identidade de mecanismos
+\citparafrase{POLDRACK, R. A. Inferring mental states from neuroimaging data: from reverse inference to large-scale decoding. \emph{Neuron}, v.~72, n.~5, p.~692-697, 2011}{10.1016/j.neuron.2011.11.001}{Manuscrito do autor, discussão de inferência reversa e limites da decodificação. A fronteira aplicada ao Core é uma analogia metodológica; o artigo não estudou arquiteturas agênticas}{POLDRACK, 2011}.
+
+O mesmo cuidado vale para generalizar uma interpretação autoral. Yarkoni
+examina a distância entre hipóteses amplas e o alcance dos modelos e amostras
+que as sustentam. Um histórico de decisões deste repositório pode fundamentar
+um estudo de caso; não basta para concluir que qualquer sistema ou qualquer
+autor se comportará da mesma forma. Descrever uma trajetória e demonstrar uma
+regularidade geral são tarefas diferentes
+\citparafrase{YARKONI, T. The generalizability crisis. \emph{Behavioral and Brain Sciences}, v.~45, e1, 2022. Publicação eletrônica: 2020}{10.1017/S0140525X20001685}{Resumo primário. Fundamenta a distinção entre amplitude da hipótese e alcance da evidência; não exclui estudos de caso nem avalia este Core}{YARKONI, 2022}.
+
+\paragraph{Psiquiatria: o respeito à pessoa delimita a interpretação.}
+A discussão sobre autoria não é uma avaliação clínica. O RDoC apresentado
+por Insel e colaboradores é uma proposta de pesquisa em transtornos mentais,
+com exigências próprias de investigação e validação. O NIMH esclarece que
+esse quadro não foi concebido como instrumento de diagnóstico clínico.
+Nenhuma dessas fontes autoriza classificar a saúde mental de um programador
+pela quantidade de agentes, pela complexidade da arquitetura ou pelo rigor
+de seus controles. Neste livro, a palavra assinatura permanece no plano de
+escolhas de trabalho documentadas; qualquer conclusão clínica exigiria dados,
+contexto, método e competência profissional adequados
+\citparafrase{INSEL, T. et al. Research domain criteria (RDoC): toward a new classification framework for research on mental disorders. \emph{American Journal of Psychiatry}, v.~167, n.~7, p.~748-751, 2010}{10.1176/appi.ajp.2010.09091379}{Comentário primário consultado por indexação do editor/PDF; acesso direto restrito. A condição de quadro de pesquisa é esclarecida também no FAQ atual do NIMH: não é uma validação diagnóstica da autoria digital}{INSEL et al., 2010}.
+A explicitação institucional pode ser consultada no
+\href{https://www.nimh.nih.gov/research/research-funded-by-nimh/rdoc/resources/rdoc-frequently-asked-questions-faq}{FAQ do RDoC, do NIMH}.
+
+\paragraph{Da assinatura reconhecida à práxis examinável.}
+A tese retorna, assim, ao compromisso inicial de democratizar conhecimento.
+O que merece ser preservado não é a imagem infalível de um criador, mas a
+possibilidade de entender suas escolhas, reconhecer outras contribuições e
+alterar o que não funciona. No Core, o ponto de partida são especificações,
+registros de versão, regras de roteamento e evidências de execução. Uma
+preferência declarada por clareza só ganha consequências observáveis quando
+outra pessoa consegue acompanhar o percurso e apontar onde ele falha.
+
+\begin{flowch}[Da autoria à responsabilidade compartilhada]{Mapa interpretativo; as setas não medem estados mentais.}
+\node[fns,text width=3.5cm] (historia) {Pessoas e contexto\\perguntas e valores};
+\node[fn,text width=3.5cm,right=7mm of historia] (escolhas) {Escolhas documentadas\\dados, regras e arquitetura};
+\node[fn,text width=3.5cm,right=7mm of escolhas] (critica) {Uso e exame crítico\\revisão e aprendizagem};
+\draw[seta] (historia)--(escolhas);\draw[seta] (escolhas)--(critica);
+\end{flowch}
+\begin{descricao}
+\textbf{Como funciona e por quê.} A primeira seta propõe examinar como
+intenções e condições sociais participam de escolhas registradas. A segunda
+leva essas escolhas ao uso e à crítica por outras pessoas.
+\textbf{Justificativa.} O mapa organiza a interpretação sociotécnica discutida
+neste prefácio; não representa uma cadeia causal já demonstrada para o Core.
+Sua leitura apoia-se na mediação tecnológica discutida por Verbeek,
+DOI: \href{https://doi.org/10.1177/0162243905285847}{10.1177/0162243905285847}.
+\end{descricao}
+
+Três personagens didáticas conduzirão o percurso. Para Ana, a professora, a pergunta é: que escolhas desta ferramenta favorecem ou limitam
+minha compreensão? Para Bruno, o desenvolvedor: que decisão consigo localizar, modificar e
+confrontar com um resultado? Para Carla, a revisora: que evidência poderia contrariar a
+explicação proposta? São três acessos ao mesmo equilíbrio entre didática e
+práxis. As demonstrações em Lean conferem enunciados matemáticos sob hipóteses;
+não demonstram esta interpretação humanística de autoria. É com essa distinção
+que o próximo prólogo nos convida a entrar na casa: reconhecer quem a constrói,
+compreender sua organização e conservar o direito de refazê-la.
+\clearpage
+\endgroup
+% END-R909-PREFACIO-ASSINATURA
+
 % --- Folha de rosto ------------------------------------------
 \thispagestyle{plain}
-\vspace*{0.20\paperheight}
+\vspace*{0.17\paperheight}
 \begin{center}
 \sffamily
 {\color{plumAccent}\rule{0.16\linewidth}{1.4pt}}\\[8pt]
@@ -78,7 +257,7 @@ registros de evolução, testes e mapa do ecossistema (MAPA\_ECOSSISTEMA\_COMPLE
 \vfill
 \begin{minipage}{\linewidth}
 \small\color{textmuted}
-\textbf{Sobre esta edição.} Revisão documental R901, de 15 de outubro de 2026.
+\textbf{Sobre esta edição.} Revisão documental R901/R907, formalização R908 e ampliação do prefácio R909, de 16 de outubro de 2026.
 O percurso principal vai do problema à reprodução; os catálogos, as fichas e os
 roteiros de áudio são materiais de consulta ao final. As contagens correntes são
 geradas das fontes locais: \CoreAgentCount{} agentes, \CoreMCPCount{} MCPs e
@@ -89,6 +268,7 @@ execução de testes e avaliação científica externa são verificações disti
 \vspace{5mm}
 {\small\sffamily\centering Nenhuma afirmação deste manual deve ser lida como mérito de qualidade externa\\[1pt]
 (Qualis A1, benchmark, "superhuman") sem validação externa explícita — ver CORRIGENDUM.\par}
+\vspace*{8mm}
 \clearpage
 
 % --- Sumário -------------------------------------------------

@@ -1604,6 +1604,8 @@ A [revisão editorial R901/R907](docs/REVISAO_LIVRO_R907.md) e o [manifesto de v
 
 A [verificação formal R908](docs/VERIFICACAO_FORMAL_LIVRO_R908.md) acrescenta 158 teoremas aceitos pelo Lean 4.34.1, com Mathlib fixada, auditoria de axiomas e controles negativos. A [matriz de fórmulas](docs/book-math-map-r908.json) distingue 27 famílias matemáticas/modelos de uma família de observações empíricas. O [recibo da execução](docs/verification-book-lean-r908.json) identifica fontes e dependências; as provas não certificam dados experimentais, o runtime Python ou segurança IEEE-754.
 
+O [prefácio ampliado R909](docs/PREFACIO_ASSINATURA_COGNITIVA_R909.md) discute autoria e escolhas de projeto nos planos técnico, social, filosófico, psicológico, pedagógico e clínico. Dez fontes com [DOIs conferidos](docs/preface-sources-r909.json) sustentam os argumentos e seus limites; “assinatura cognitiva” é uma interpretação situada, sem atribuição de personalidade, diagnóstico ou prova universal.
+
 ### Integridade operacional
 
 O diagnóstico estrutural R868 registrou 22 checks aprovados, com alcance
