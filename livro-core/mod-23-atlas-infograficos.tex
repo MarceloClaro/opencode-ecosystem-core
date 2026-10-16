@@ -1,98 +1,164 @@
-% ============================================================
-%  MÓDULO 23 — Atlas de infográficos NotebookLM (R101)
-%  6 PNGs curtos revisados, textos curtos, ortografia conferida
-% ============================================================
-\chapter{Atlas Visual: Seis Infográficos do NotebookLM}
+% R901: pranchas vetoriais autorais; imagens históricas preservadas no acervo.
+\chapter{Pranchas de Leitura: da Analogia ao Mecanismo}
+
+% R901-PONTE-ABERTURA
+Já podemos ler o percurso em duas linguagens: técnica e cotidiana. Estas pranchas aproximam ambas sem substituir o código por metáforas ou a evidência por uma ilustração.
+
 
 \roteirodidatico
-{Seis imagens valem mais que sessenta parágrafos quando mostram o mesmo caminho com ícones. Este atlas reúne os infográficos gerados no caderno Livro Core Infográficos Didáticos R100, versão curta revisada (R101): textos curtos, ortografia conferida, cada figura com fonte e capítulo.}
-{\emph{Infográfico} resume visualmente um capítulo; \emph{Atlas} é a coleção ordenada; \emph{Revisão humana} é a conferência do texto da imagem contra o capítulo.}
-{Olhe a imagem, leia a legenda de uso e confira o capítulo indicado antes de citar a figura.}
-{Imagem gerada por IA pode conter deslize de número em ícone; só o texto do capítulo e a fonte primária valem como prova.}
-{Que figura você mostraria a alguém em 1 minuto para explicar o Core?}
+{Depois do atlas de fluxos, o leitor já conhece os componentes. Estas pranchas ajudam a relacionar uma ideia familiar à responsabilidade técnica correspondente.}
+{\emph{Analogia} aproxima um conceito; \emph{diagrama} representa relações selecionadas; \emph{estado} identifica uma condição observada, sem antecipar o resultado seguinte.}
+{Leia o centro de cada prancha, siga uma ligação e explique-a com suas palavras. Depois confronte a explicação com a fonte local indicada.}
+{A simplificação conserva a distinção entre atribuição, execução e aceite. Nenhuma imagem mede inteligência, correção geral ou eficácia pedagógica.}
+{Que parte do desenho você consegue converter em uma pergunta verificável?}
 
-\casoguiado{Bruno imprime, Ana aponta}
-{Bruno imprime as seis em A4 e espalha na mesa. Ana aponta para a casa de 8 andares e pergunta onde mora o fiscal. Bruno aponta a camada da qualidade. Ela aponta a encomenda em 7 passos e pergunta onde fica a nota. Ele aponta o passo 3. Cada apontar termina com a mesma frase: agora confira no capítulo.}
+\casoguiado{a mesma nota científica sobre a mesa}
+{Ana observa quatro cartões: pergunta, método, resultado e limite. Bruno associa cada cartão a arquivos e ferramentas; Carla verifica o que ainda falta. A prancha não resolve a pesquisa por eles. Ela ajuda a apontar onde a informação foi produzida e onde deve ser confrontada com o pedido.}
 
-\section{As seis figuras e onde usá-las}
+\section{Prancha 1: um mapa mental do trabalho}
 
-\elemento{INF-S01 — A casa de 8 andares}{\metainfo{ID}{INF-S01} \hfill \metainfo{Arquivo}{\pth{INF-S01-casa-curta.png}} \hfill \metainfo{Capítulo}{mod-01d e mod-02}}
-
+\begin{flowch}[Perguntas que cercam a nota científica]{ligações: organização conceitual, sem ordem obrigatória}
+\node[fne,text width=3.4cm] (centro) {Nota científica\\com evidências};
+\node[fns,text width=3.2cm,above left=13mm and 14mm of centro] (pergunta) {Qual é a pergunta?\\Fonte e escopo};
+\node[fn,text width=3.2cm,above right=13mm and 14mm of centro] (metodo) {Como examinar?\\Premissas e método};
+\node[fn,text width=3.2cm,below left=13mm and 14mm of centro] (resultado) {O que ocorreu?\\Artefatos e recibos};
+\node[fns,text width=3.2cm,below right=13mm and 14mm of centro] (limite) {O que concluir?\\Aceite e limitações};
+\draw[seta] (centro)--(pergunta);
+\draw[seta] (centro)--(metodo);
+\draw[seta] (centro)--(resultado);
+\draw[seta] (centro)--(limite);
+\end{flowch}
 \begin{descricao}
-Vista geral das camadas com ícones e frases curtas: fundação, entrada, maestro, qualidade e topo. Use para abrir qualquer explicação: comece pelo todo antes do detalhe.
+\textbf{Como funciona e por quê. Mecanismo.} As ligações distribuem quatro perguntas
+sobre o mesmo artefato. A fonte informa o problema; o método orienta a operação;
+o recibo registra o que foi observado; o aceite compara esse resultado ao contrato.
+\textbf{Justificativa.} A disposição permite localizar uma lacuna sem confundir
+método planejado com resultado produzido.
+\textbf{Limite.} É um mapa mental editorial, não o grafo de chamadas do software.
 \end{descricao}
+\fontecore{research/scientific_release.py}{verify_scientific_package}
 
-\begin{center}
-\includegraphics[width=0.96\linewidth,height=0.80\textheight,keepaspectratio]{INF-S01-casa-curta.png}
-\end{center}
+\section{Prancha 2: a encomenda e os seus estados}
 
-\begin{aviso}
-Figura gerada por IA a partir de roteiro curto do autor (ortografia do texto principal conferida visualmente). Detalhes de ícone podem divergir; para citar, use os nomes do texto: \pth{marceloclaro/orchestrator.py}, \pth{opencode.json}, \pth{mci/}. Caderno: Livro Core Infográficos Didáticos R100, pasta \pth{output/infografico-R101}. A primeira versão longa (R100, com erros de rótulo) fica arquivada em \pth{output/infografico-R100} e não entra no livro.
-\end{aviso}
-
-\elemento{INF-S02 — Ciclo em 4 fases}{\metainfo{ID}{INF-S02} \hfill \metainfo{Arquivo}{\pth{INF-S02-ciclo-curto.png}} \hfill \metainfo{Capítulo}{mod-02}}
-
+\begin{flowch}[Receber não é entregar]{setas: transições que exigem evidência própria}
+\matrix[matrix of nodes,name=estado,row sep=3.5mm,column sep=5mm,nodes={fn},ampersand replacement=\&]{
+ |[fns]|Pedido delimitado \\
+ |[fn]|Tarefa atribuída \\
+ |[fn]|Operação executada \\
+ |[fne]|Entrega conferida \\
+};
+\draw[seta] (estado-1-1)--(estado-2-1);
+\draw[seta] (estado-2-1)--node[right,font=\scriptsize]{requer executor} (estado-3-1);
+\draw[seta] (estado-3-1)--node[right,font=\scriptsize]{requer gate} (estado-4-1);
+\end{flowch}
 \begin{descricao}
-O laço Percebe, Delega, Executa, Reflete com rastro mínimo (critério, prova, registro, memória). Use para responder como uma tarefa atravessa o Core sem pular verificação.
+\textbf{Como funciona e por quê. Mecanismo.} A atribuição dá uma identidade à tarefa.
+A seta seguinte depende de um executor que realmente a consuma. Depois, um gate
+pode avaliar a entrega conforme seus critérios. Um retorno \cod{pending_executor}
+não percorreu automaticamente as duas últimas caixas.
+\textbf{Justificativa.} O rastro de estados impede que uma mensagem de encaminhamento
+seja apresentada como cálculo ou análise concluída.
+\textbf{Limite.} A aceitação computacional local continua separada da revisão científica.
 \end{descricao}
+\fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator.agent_profile_action}
 
-\begin{center}
-\includegraphics[width=0.96\linewidth,height=0.80\textheight,keepaspectratio]{INF-S02-ciclo-curto.png}
-\end{center}
+\section{Prancha 3: o caderno e a próxima pergunta}
 
-\elemento{INF-S03 — Encomenda em 7 passos}{\metainfo{ID}{INF-S03} \hfill \metainfo{Arquivo}{\pth{INF-S03-passos-curta.png}} \hfill \metainfo{Capítulo}{mod-17}}
-
+\begin{flowch}[Memória como registro examinável]{setas: gravação e recuperação; sem autopromoção de confiança}
+\matrix[matrix of nodes,name=cad,row sep=4mm,column sep=4mm,nodes={fn},ampersand replacement=\&]{
+ |[fns]|Resultado ou falha \& |[fn]|Observação tipada \\
+ |[fn]|Novo briefing \& |[fn]|Persistência e origem \\
+};
+\draw[seta] (cad-1-1)--(cad-1-2);
+\draw[seta] (cad-1-2)--(cad-2-2);
+\draw[seta] (cad-2-2)--(cad-2-1);
+\end{flowch}
 \begin{descricao}
-A encomenda de Ana em 7 passos numerados: balcão, placas, nota, lousa, oficina, fiscal e entrega com fonte. Use com leigos absolutos antes de qualquer código.
+\textbf{Como funciona e por quê. Mecanismo.} Uma observação conserva resultado,
+origem, limites e próxima ação. Uma consulta posterior pode recuperá-la para o
+briefing. As setas representam armazenamento e consulta, não aumento automático
+de competência ou do ledger de confiança.
+\textbf{Justificativa.} Separar memória e julgamento permite revisar uma observação
+sem transformá-la em verdade apenas porque foi persistida.
+\textbf{Limite.} Recuperação lexical e relevância heurística podem falhar ou trazer
+contexto insuficiente; a aplicação precisa declarar a degradação observada.
 \end{descricao}
+\fontecore{mci/metacognitive_loop.py}{MetacognitiveLoop.complete}
 
-\begin{center}
-\includegraphics[width=0.96\linewidth,height=0.80\textheight,keepaspectratio]{INF-S03-passos-curta.png}
-\end{center}
+\section{Prancha 4: a porta de conferência}
 
-\elemento{INF-S04 — Lousa e caderno}{\metainfo{ID}{INF-S04} \hfill \metainfo{Arquivo}{\pth{INF-S04-lousa-curta.png}} \hfill \metainfo{Capítulo}{mod-03}}
-
+\begin{flowch}[O fiscal confere um contrato]{setas: percurso de avaliação com ramo de recusa}
+\node[fns] (artefato) {Spec, artefato e\\evidência de teste};
+\node[fde,below=8mm of artefato,text width=2.8cm] (gate) {Critérios e custódia\\atendidos?};
+\node[fns,below left=8mm and 9mm of gate] (recusa) {Recusar com motivo};
+\node[fne,below right=8mm and 9mm of gate] (aceite) {Aceitar no escopo};
+\draw[seta] (artefato)--(gate);
+\draw[seta] (gate)--node[above left,font=\scriptsize]{não} (recusa);
+\draw[seta] (gate)--node[above right,font=\scriptsize]{sim} (aceite);
+\end{flowch}
 \begin{descricao}
-Quadro negro (trabalho: tarefas e voluntários) versus caderno (memória: histórico e lições). Use para fixar que trabalho é diferente de memória e que mensagem enviada não é tarefa pronta.
+\textbf{Como funciona e por quê. Mecanismo.} O gate confronta a entrega com as
+condições da especificação e com as evidências exigidas. A recusa conserva um
+motivo; o ramo positivo vale para aquele contrato.
+\textbf{Justificativa.} Uma decisão explícita torna examinável por que o fluxo
+avançou ou parou, sem usar uma nota média para compensar requisito obrigatório.
+\textbf{Limite.} O desenho não demonstra correção universal, mérito editorial ou
+validação empírica fora dos casos conferidos.
 \end{descricao}
+\fontecore{sdd/spec_engine.py}{SpecVerifier.verify}
 
-\begin{center}
-\includegraphics[width=0.96\linewidth,height=0.80\textheight,keepaspectratio]{INF-S04-lousa-curta.png}
-\end{center}
+\section{Prancha 5: o que fica na máquina e o que atravessa a fronteira}
 
-\elemento{INF-S05 — Fiscal fechado}{\metainfo{ID}{INF-S05} \hfill \metainfo{Arquivo}{\pth{INF-S05-fiscal-curto.png}} \hfill \metainfo{Capítulo}{mod-04}}
-
+\begin{flowch}[Uma ferramenta, dois percursos]{setas: chamadas condicionais; ler a política de cada operação}
+\matrix[matrix of nodes,name=fronteira,row sep=5mm,column sep=7mm,nodes={fn},ampersand replacement=\&]{
+ |[fne]|Primário \& |[fn]|Operação local \\
+ |[fn]|Ticket permitido \& |[fn]|Host e serviço externo \\
+ |[fns]|Resposta vinculada \& |[fn]|Recibo e limites \\
+};
+\draw[seta] (fronteira-1-1)--(fronteira-1-2);
+\draw[seta] (fronteira-1-1)--(fronteira-2-1);
+\draw[seta] (fronteira-2-1)--(fronteira-2-2);
+\draw[seta] (fronteira-2-2)--(fronteira-3-1);
+\draw[seta] (fronteira-3-1)--(fronteira-3-2);
+\end{flowch}
 \begin{descricao}
-Combinado antes (regra escrita), prova depois (teste com gabarito) e fiscal que reprova na dúvida. Use para justificar por que prova verde não é selo geral.
+\textbf{Como funciona e por quê. Mecanismo.} Uma operação local e uma operação
+hospedada não têm a mesma fronteira de dados. Na rota de plugins hospedados, o
+primário prepara o ticket permitido e registra a resposta vinculada.
+\textbf{Justificativa.} A localização do arquivo do plugin não informa onde a
+ferramenta executa. A fronteira precisa ser examinada por operação.
+\textbf{Limite.} Uma amostra Wolfram hospedada não demonstra kernel licenciado local
+nem execução offline. O REA isolado também não controla um cliente LLM externo.
 \end{descricao}
+\fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator.scientific_plugin_action}
 
-\begin{center}
-\includegraphics[width=0.96\linewidth,height=0.80\textheight,keepaspectratio]{INF-S05-fiscal-curto.png}
-\end{center}
+\section{Prancha 6: quatro perguntas para qualquer número}
 
-\elemento{INF-S06 — Números e 12 passos}{\metainfo{ID}{INF-S06} \hfill \metainfo{Arquivo}{\pth{INF-S06-numeros-curta.png}} \hfill \metainfo{Capítulo}{mod-15 e mod-22}}
-
+\begin{flowch}[Antes de reutilizar uma métrica]{ligações: dimensões de interpretação, não graus de mérito}
+\matrix[matrix of nodes,name=numero,row sep=4mm,column sep=5mm,nodes={fn},ampersand replacement=\&]{
+ |[fns]|O que foi contado? \& |[fn]|Em qual conjunto? \\
+ |[fn]|Em qual versão? \& |[fns]|Com que limite? \\
+};
+\draw[seta] (numero-1-1)--(numero-1-2);
+\draw[seta] (numero-1-2)--(numero-2-2);
+\draw[seta] (numero-2-2)--(numero-2-1);
+\end{flowch}
 \begin{descricao}
-Os números 62 e 94 pertencem ao exemplo da ilustração; não são uma medição corrente desta revisão. A figura apresenta também rastreabilidade (origem, versão, código) e a trilha de 12 passos. Para relatar desempenho, consulte o experimento e seu escopo em vez de reutilizar o número do desenho.
+\textbf{Como funciona e por quê. Mecanismo.} Para interpretar um resultado, identifique
+unidade, seleção, revisão e limite. O recibo de 1.130 testes no snapshot \cod{f930e19}
+se refere ao perfil científico enumerado; não conta todos os testes do repositório.
+\textbf{Justificativa.} Essas perguntas evitam comparar agentes, categorias, arquivos
+e testes como se fossem a mesma unidade.
+\textbf{Limite.} Uma seleção sem falhas observadas não garante ausência de bugs nem
+produz validação científica externa.
 \end{descricao}
+\fontecore{scripts/validate_scientific_profile.py}{run_profile}
 
-\begin{center}
-\includegraphics[width=0.96\linewidth,height=0.80\textheight,keepaspectratio]{INF-S06-numeros-curta.png}
-\end{center}
-
-\begin{funcao}
-Dar ao professor um kit imprimível: 6 A4 para a parede da sala, cada um apontando para o capítulo que o sustenta, sem substituir a leitura.
-\end{funcao}
-
-\begin{limite}
-Atlas é recurso didático gerado por IA externa (Gemini Notebook) a partir de roteiros curtos do autor, com ortografia do texto principal conferida por leitura visual em 11/10/2026. Números em ícones decorativos podem divergir; em caso de divergência, valem capítulo, arquivo e teste. Revisão humana obrigatória antes de uso em sala.
-\end{limite}
-\fontecore{livro-core/INF-S01-casa-curta.png}{caderno-419f77cb-PNG-curto-1}
-\fontecore{livro-core/INF-S02-ciclo-curto.png}{caderno-419f77cb-PNG-curto-2}
-\fontecore{livro-core/INF-S03-passos-curta.png}{caderno-419f77cb-PNG-curto-3}
-\fontecore{livro-core/INF-S04-lousa-curta.png}{caderno-419f77cb-PNG-curto-4}
-\fontecore{livro-core/INF-S05-fiscal-curto.png}{caderno-419f77cb-PNG-curto-5}
-\fontecore{livro-core/INF-S06-numeros-curta.png}{caderno-419f77cb-PNG-curto-6}
+As pranchas podem ser lidas antes da implementação para orientar perguntas, ou
+depois dela para conferir o entendimento. Se a analogia divergir do comportamento
+observado, corrija a explicação e conserve a evidência. Os PNGs históricos do
+acervo continuam disponíveis, mas não substituem estas figuras editáveis nem
+servem de inventário numérico da edição atual.
 
 \section[Leitura guiada]{Leitura guiada: usar a figura sem promover seu conteúdo a prova}
 \begin{descricao}
@@ -116,3 +182,6 @@ Atlas é recurso didático gerado por IA externa (Gemini Notebook) a partir de r
 \begin{resultado}
 \textbf{Exercícios.} Relacione uma figura a uma fonte; encontre um número que exige data e escopo; descreva uma simplificação do desenho; escreva uma legenda que conserve esse limite.
 \end{resultado}
+
+% R901-PONTE-FECHO
+A imagem ganha valor quando o leitor consegue explicá-la e confrontá-la com o mecanismo. O material seguinte orienta como transformar esse entendimento em um mapa de estudo ou em uma apresentação própria.

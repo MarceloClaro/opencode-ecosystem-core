@@ -21201,6 +21201,169 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R902",
+      "objective": "Corrigir remissoes incorretas de capitulos e partes no livro-core (tarefas P2)",
+      "changes": [
+        "mod-01-fundacoes.tex: substituiu remissao ao capitulo de arquitetura como proximo capitulo pelo titulo da Parte IV (Arquitetura Integral - Como o Core se Organiza)",
+        "mod-06-ciencia.tex:128: substituiu referencia generica a parte de qualidade por titulo da Parte IV (Qualidade, Especificacao e Rigor SDD/TDD)",
+        "mod-07-integracoes.tex:66: substituiu referencia generica a parte de qualidade por titulo da Parte IV",
+        "mod-07-integracoes.tex:49: ajustou referencia a parte MCI com titulo da Parte III (Memoria, Metacognicao e Interconexao)"
+      ],
+      "score": 1.0,
+      "lessons": [
+        "Referencias a partes numeradas (II, III, IV) desatualizam quando a estrutura do sumario muda; usar titulos das partes evita novos deslocamentos.",
+        "Remissoes ao capitulo seguinte devem ser validadas contra main.tex antes de afirmar o tema do proximo capitulo."
+      ],
+      "timestamp": 1792104438.4603593,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R903",
+      "objective": "Extrair seções didáticas do guia de formulas para modulos LaTeX do livro-core (estilo Nussenzveig)",
+      "changes": [
+        "mod-01-fundacoes.tex: inserida secao didatica sobre probabilidade 1-p^N (saidas independentes) com deducao passo a passo e calculo numerico detalhado",
+        "mod-06-ciencia.tex: inseridas secoes didaticas sobre cobertura kappa com gate do item critico e igualdades de conservacao PRISMA",
+        "mod-07-integracoes.tex: inseridas secoes didaticas sobre disponibilidade s=p/d e tempo total de delegacao negociada",
+        "mod-09a-comparada.tex: inseridas secoes didaticas sobre cobertura comparativa b=n/e e Valor Preditivo Positivo (PPV) de Ioannidis",
+        "mod-11-apendices.tex: inserida secao didatica sobre taxa de ativacao de DOIs (Da/Dt)",
+        "mod-12-fichas-nucleo.tex: inserida secao didatica sobre cobertura de dimensoes de ficha (dp/13)"
+      ],
+      "score": 1.0,
+      "lessons": [
+        "O estilo Nussenzveig exige definicao de simbolos antes de qualquer formula, deducao sem pular etapas e limites de validade explicitos.",
+        "Cada secao do guia foi mapeada para o modulo LaTeX onde a formula ja aparecia no livro, preservando a rastreabilidade.",
+        "O scanner Merkle confirmou integridade do codigo-fonte apos as edições nos arquivos .tex."
+      ],
+      "timestamp": 1792108109.050608,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R904",
+      "objective": "Extrair e didatizar fórmulas matemáticas restantes dos módulos do livro-core (estilo Nussenzveig)",
+      "changes": [
+        "mod-03-memoria-mci.tex: inserida seção didática sobre EMA de confiança τt = 0,7·τt−1 + 0,3·st com dedução passo a passo e cálculo numérico (τ0=0,5, s1=0,9 → τ1=0,62)",
+        "mod-04-qualidade-sdd.tex: inserida seção didática sobre razão de contagens specs/teste q = T/S = 260/371 ≈ 0,701 com interpretação dos limites",
+        "mod-05-raciocinio.tex: inserida seção didática sobre Lei de Amdahl A(N) = 1/(s + (1−s)/N) com dedução de 4 passos, exemplo A(13) ≈ 3,8 e teto assintótico 1/s = 5",
+        "mod-08-ecossistema.tex: inserida seção didática sobre Token Economy — staking/slashing (sucesso: 2+0,2×2=2,4; falha: 2×(1−0,5)=1) e taxa de prioridade com congestionamento",
+        "mod-10-catalogo.tex: inserida seção didática sobre cobertura documental do catálogo e reconciliação de aliases (213/312 ≈ 68% ingênuo vs 312/312 = 100% correto, resíduo 99−81−18=0)",
+        "mod-15-epilogo-reproducao.tex: inserida seção didática sobre softmax de atenção com QK^T=[[4,0],[0,4]] e dk=4, mostrando escala √dk=2 e pesos [0,88, 0,12]"
+      ],
+      "score": 1.0,
+      "lessons": [
+        "Cada fórmula do livro-core merece um apêndice didático próprio com definição de símbolos, dedução sem pular etapas, cálculo numérico explícito e limites de validade.",
+        "O estilo Nussenzveig exige que o problema concreto preceda o formalismo matemático.",
+        "O scanner Merkle confirmou integridade do código-fonte após todas as edições."
+      ],
+      "timestamp": 1792109240.0084517,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R905",
+      "objective": "Extrair e didatizar fórmulas matemáticas de mod-09-infra (estilo Nussenzveig)",
+      "changes": [
+        "mod-09-infra.tex: inserida seção didática sobre cobertura de rastro c = np/nr com dedução passo a passo e interpretação dos limites",
+        "mod-09-infra.tex: inserida seção didática sobre orçamento de peso para publicação com exemplo numérico (1.240 MiB total, 1.000 MiB limite diretório, 1.180 MiB arquivo, 25 MiB limite arquivo)",
+        "mod-09-infra.tex: inserida seção didática sobre FAIR como índice de completude Cm = np/nr com interpretação dos limites"
+      ],
+      "score": 1.0,
+      "lessons": [
+        "O estilo Nussenzveig exige definição de símbolos antes de qualquer fórmula, dedução sem pular etapas, cálculo numérico explícito e limites de validade.",
+        "Cada fórmula do livro-core merece um apêndice didático próprio com problema concreto, símbolos, dedução, cálculo e limites.",
+        "O scanner Merkle confirmou integridade do código-fonte após todas as edições."
+      ],
+      "timestamp": 1792109418.3094554,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R906",
+      "objective": "Extrair e didatizar fórmulas matemáticas de mod-02-orquestracao (estilo Nussenzveig)",
+      "changes": [
+        "mod-02-orquestracao.tex: inserida seção didática sobre fator de redução de candidatos M/k = 40/5 = 8 com dedução passo a passo e interpretação dos limites",
+        "mod-02-orquestracao.tex: inserida seção didática sobre seleção por custo mínimo i* = arg min_{i in C} K_i com exemplo numérico (c1=10, c2=7, c3=12 → i* = c2)"
+      ],
+      "score": 1.0,
+      "lessons": [
+        "O estilo Nussenzveig exige definição de símbolos antes de qualquer fórmula, dedução sem pular etapas, cálculo numérico explícito e limites de validade.",
+        "Cada fórmula do livro-core merece um apêndice didático próprio com problema concreto, símbolos, dedução, cálculo e limites.",
+        "O scanner Merkle confirmou integridade do código-fonte após todas as edições."
+      ],
+      "timestamp": 1792110121.9231176,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R907",
+      "objective": "Concluir revisão integral R901 do livro ampliado: sequência, práxis, margens e visuais explicativos",
+      "changes": [
+        "Preservadas vinte seções didáticas R903–R906; corrigidas hipóteses, fontes e remissões.",
+        "Tabelas com quebra local, identificadores longos e diagramas sem sobreposição material; 57 fluxos/diagramas no livro.",
+        "Catálogo autoritativo conserva a ampliação com contagens da geração; perfis editoriais persistentes registrados pelo primário.",
+        "92 testes editoriais aprovados; PDF completo de 536 páginas compilado; coordenadas das palavras conferidas em todo o PDF e 38 páginas físicas inspecionadas.",
+        "Manifesto público docs/verification-book-r907.json conserva hashes, escopos e limitações."
+      ],
+      "score": null,
+      "lessons": [
+        "Fórmula didática não demonstra o cálculo da rota real; exemplos e implementação precisam de confronto próprio.",
+        "Inventário de configuração, execução, aceite e validação externa são estados diferentes.",
+        "Compilar e inspecionar páginas complementa o gate de fonte; nenhum desses procedimentos mede aprendizagem."
+      ],
+      "timestamp": 1792113722.435097,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ]
 }

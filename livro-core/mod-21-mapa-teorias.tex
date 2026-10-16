@@ -4,6 +4,10 @@
 % ============================================================
 \chapter{Mapa das Teorias: O Que Cada Artigo Ensina ao Core}
 
+% R901-PONTE-ABERTURA
+O material visual tornou as relações mais visíveis, mas não validou suas justificativas. Este capítulo confere o papel de cada referência: qual ideia fornece, como é usada e o que continua sem demonstrar.
+
+
 \roteirodidatico
 {Cada capítulo cita artigos famosos e o leitor pode pensar que citar é provar. Este capítulo desfaz o mal-entendido: mostra em uma tabela o que cada teoria inspira, que regra do Core ela justifica e o que ela jamais prova sozinha.}
 {\emph{Lastro} é a ideia que empresta sentido à regra; \emph{Regra} é o comportamento implementado no código; \emph{Limite} é o que nem o artigo nem o código garantem sem teste e validação externa.}
@@ -14,53 +18,62 @@
 \casoguiado{o roteador e o artigo de atenção}
 {Bruno lê que o Core roteia por atenção e imagina que o artigo do Transformer prova que o roteador acerta. Ana pergunta o que o artigo mostra de fato: uma forma de ponderar por relevância. Os dois abrem o DOI e o arquivo \pth{transformer/attention.py} e concluem juntos: o artigo empresta a conta, o código implementa a ordenação, só registros de decisões com gabarito diriam se escolhe bem. Citar não é certificar.}
 
-\section{A tabela única em duas páginas}
+\section{Das fontes às decisões de projeto}
 
 \elemento{Teoria para regra: lastro, implementação e limite}{\metainfo{ID}{TEO-MAPA} \hfill \metainfo{Leitura}{teórica} \hfill \metainfo{Gate}{R110}}
 
 \begin{descricao}
-Leia cada linha como um contrato de três colunas. Primeira: o que a teoria diz no original. Segunda: que regra do Core bebe dessa fonte. Terceira: o que continua exigindo teste, comando ou validação externa. A última coluna é a mais importante deste livro.
+Cada linha liga uma fonte à decisão de projeto que ela ajuda a compreender. A coluna da direita explicita também o limite dessa relação. A fonte sustenta uma ideia; o comportamento local exige evidência própria.
 \end{descricao}
 
-\begin{resultado}
 {\footnotesize
-\begin{tabularx}{\textwidth}{lY}
+\noindent\begin{tabularx}{\linewidth}{>{\hsize=.75\hsize\linewidth=\hsize}Y>{\hsize=1.25\hsize\linewidth=\hsize}Y}
 \toprule
-Teoria (DOI) & Lastro para regra do Core / Limite \\
+Fonte & Relação com o Core e limite \\
 \midrule
-Wooldridge e Jennings 1995 \texttt{10.1017/S0269888900008122} &
+Wooldridge e Jennings 1995 \path{10.1017/S0269888900008122} &
 Agente = reativo + proativo + social. Regra: gatilho só vira ativação com registro, roteamento e entrega confrontada. Limite: preencher a tríade no texto não prova que um perfil age bem. \\
-Nii 1986 \texttt{10.1609/aimag.v7i2.537} &
+Nii 1986 \path{10.1609/aimag.v7i2.537} &
 Blackboard: especialistas cooperam por quadro compartilhado, ordem oportunista. Regra: Quadro A2A + voluntariado E1--E7. Limite: lousa cheia não prova serviço bom. \\
-Smith 1980 \texttt{10.1109/TC.1980.1675516} &
+Smith 1980 \path{10.1109/TC.1980.1675516} &
 Rede de contratos: anuncia, licita, escolhe por custo entre elegíveis. Regra: \pth{mci_post_task} e escolha entre candidatos que cumprem requisitos. Limite: licitação não valida a entrega. \\
-Vaswani et al. 2017 \texttt{10.48550/arXiv.1706.03762} &
+Vaswani et al. 2017 \path{10.48550/arXiv.1706.03762} &
 Atenção como \texttt{softmax(QKt/sqrt(dk))V}. Regra: ordenar candidatos por relevância ponderada. Limite: peso alto é casamento de sinais, não garantia de acerto. \\
-Newell 1982 \texttt{10.1016/0004-3702(82)90012-1} &
+Newell 1982 \path{10.1016/0004-3702(82)90012-1} &
 Nível de conhecimento acima do nível de símbolo. Regra: separar o que o sistema declara saber do programa que executa. Limite: declarar nível não mede compreensão. \\
-Simon 1955 \texttt{10.2307/1884852} &
+Simon 1955 \path{10.2307/1884852} &
 Racionalidade limitada à informação e computação disponíveis. Regra: gates, limites de confiança e carga, fallbacks. Limite: limite configurado não prova decisão ótima. \\
-Nelson e Narens 1990 \texttt{10.1016/S0079-7421(08)60053-5} &
+Nelson e Narens 1990 \path{10.1016/S0079-7421(08)60053-5} &
 Monitorar e controlar como processos distintos. Regra: PERCEBE e REFLETE com MetaBus. Limite: registrar reflexão não garante próxima tarefa melhor. \\
-Flavell 1979 \texttt{10.1037/0003-066X.34.10.906} &
+Flavell 1979 \path{10.1037/0003-066X.34.10.906} &
 Metacognição como conhecimento sobre os próprios processos. Regra: memória metacognitiva persistida. Limite: caderno de lições não é consciência nem prova de aprendizado. \\
-Fucci et al. 2017 \texttt{10.1109/TSE.2016.2616877} &
-Ganhos do TDD vêm de granularidade e uniformidade. Regra: fichas curtas, comandos curtos, verificação frequente. Limite: ciclo curto não elimina erro fora do critério. \\
-Rafique e Misic 2013 \texttt{10.1109/TSE.2012.28} &
+\bottomrule
+\end{tabularx}}
+
+\par\medskip
+{\footnotesize
+\noindent\begin{tabularx}{\linewidth}{>{\hsize=.75\hsize\linewidth=\hsize}Y>{\hsize=1.25\hsize\linewidth=\hsize}Y}
+\toprule
+Fonte (continuação) & Relação com o Core e limite \\
+\midrule
+Fucci et al. 2017 \path{10.1109/TSE.2016.2616877} &
+O estudo observa associações entre granularidade, uniformidade e resultados no seu desenho. Regra: fichas curtas, comandos curtos, verificação frequente. Limite: ciclo curto não elimina erro fora do critério. \\
+Rafique e Misic 2013 \path{10.1109/TSE.2012.28} &
 Meta-análise de 27 estudos: efeito do TDD condicionado ao desenho. Regra: SDD/TDD como disciplina auditável. Limite: efeito médio publicado não promete efeito neste repo. \\
-Ioannidis 2005 \texttt{10.1371/journal.pmed.0020124} &
+Ioannidis 2005 \path{10.1371/journal.pmed.0020124} &
 PPV depende de poder, viés e razão de verdadeiros. Regra: anti-overclaim e cálculo de PPV do livro. Limite: número bonito sem taxa-base não sustenta conclusão. \\
-Peng 2011 \texttt{10.1126/science.1213847} &
-Artigo = texto + ambiente completo. Regra: epílogo de 12 passos e capítulo WSL com comandos. Limite: planta testada aqui pode divergir em outra máquina. \\
-Wilkinson et al. 2016 \texttt{10.1038/sdata.2016.18} &
+Peng 2011 \path{10.1126/science.1213847} &
+Artigo = texto + ambiente completo. Regra: epílogo de 12 passos e capítulo WSL com comandos. Limite: cada percurso exige execução própria; os registros locais não comprovam a reprodução integral em outra máquina. \\
+Wilkinson et al. 2016 \path{10.1038/sdata.2016.18} &
 FAIR: encontrável, acessível, interoperável, reutilizável. Regra: proveniência por observação (comando, versão, hash, seed). Limite: metadado rico não prova verdade do conteúdo. \\
-Brooks 1987 \texttt{10.1109/MC.1987.1663532} &
+Brooks 1987 \path{10.1109/MC.1987.1663532} &
 Sem bala de prata em engenharia de software. Regra: composição de disciplinas em 8 camadas. Limite: somar técnicas não soma garantia. \\
-Amdahl 1967 \texttt{10.1145/1465482.1465560} &
+Amdahl 1967 \path{10.1145/1465482.1465560} &
 Paralelo sem sequencial rápido desperdiça esforço. Regra: distinguir delegação paralela de verificação sequencial. Limite: lei de speedup não mede qualidade da resposta. \\
 \bottomrule
-\end{tabularx}\par}
-\end{resultado}
+\end{tabularx}}
+
+
 
 \section{Como usar a tabela sem se enganar}
 
@@ -102,3 +115,6 @@ Limite do mapa. A tabela organiza a leitura; não é revisão sistemática da li
 \begin{resultado}
 \textbf{Exercícios.} Escolha uma analogia do mapa; escreva o mecanismo comum e uma diferença; localize uma entrada de teste; proponha uma comparação necessária antes de alegar ganho de desempenho.
 \end{resultado}
+
+% R901-PONTE-FECHO
+Com as justificativas delimitadas, resta testar o percurso no próprio ambiente. A reprodução WSL começa pela localização dos arquivos e termina na comparação entre fonte, log e documento produzido.

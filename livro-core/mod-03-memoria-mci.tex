@@ -4,6 +4,10 @@
 \thispagestyle{fancy}
 \chapter{A Memória Metacognitiva (MCI): MetaBus, Blackboard e Global Workspace}
 
+% R901-PONTE-ABERTURA
+A tarefa já tem um percurso de coordenação. Agora precisamos entender o que pode ser recuperado antes da ação e o que merece permanecer depois dela, sem tratar o registro como verdade automática.
+
+
 \roteirodidatico
 {Uma equipe precisa distinguir mensagens temporárias de anotações que serão úteis depois. Este capítulo acompanha como o Core representa memória e comunicação entre componentes.}
 {\emph{Evento} registra algo que ocorreu; \emph{assinante} recebe eventos de um tópico; \emph{Blackboard} é um quadro de coordenação; \emph{persistência} conserva dados além da execução corrente.}
@@ -41,7 +45,7 @@ metacognitivo é o conhecimento armazenado sobre si e os outros como agentes
 cognitivos, sobre tarefas e sobre estratégias. ``Saber o que já sabe'' é, aqui,
 a tradução operacional dessas crenças para um sistema de software — com a
 diferença crítica de que, no Core, esse conhecimento é \emph{persistido e
-revisado}, não apenas introspecção em tempo de execução \citref{FLAVELL, J. H. Metacognition and cognitive monitoring: a new area of cognitive-developmental inquiry. \emph{American Psychologist}, v.~34, n.~10, p.~906-911, 1979}{10.1037/0003-066X.34.10.906}{embasa a definição do que o MetaBus persiste como ``reflexão/lição/confiança'': sem esse lastro conceitual, o termo \emph{metacognição} usado nas fichas do ecossistema seria reivindicação sem fundamento}{Metacognitive knowledge is one's stored knowledge or beliefs about oneself and others as cognitive agents, about tasks, about actions or strategies, and about how all these interact to affect the outcomes of any sort of intellectual enterprise}{Conhecimento metacognitivo é o conhecimento ou as crenças armazenadas de alguém sobre si mesmo e sobre os outros como agentes cognitivos, sobre tarefas, sobre ações ou estratégias e sobre como tudo isso interage para afetar os resultados de qualquer empreendimento intelectual.}{FLAVELL, 1979, p.~906--911}.\elemento{MetaBus}{
+revisado}, não apenas introspecção em tempo de execução \citparafrase{FLAVELL, J. H. Metacognition and cognitive monitoring: a new area of cognitive-developmental inquiry. \emph{American Psychologist}, v.~34, n.~10, p.~906-911, 1979}{10.1037/0003-066X.34.10.906}{Referência conceitual sobre monitoramento e conhecimento metacognitivo. A associação ao Core é uma interpretação de arquitetura, não prova de consciência, aprendizagem ou eficácia. O acesso primário não foi recuperado nesta revisão; não se conserva uma transcrição literal incerta}{FLAVELL, 1979, p.~906--911}.\elemento{MetaBus}{
 \metainfo{Código}{mci/metabus.py} \hfill \metainfo{Padrão}{Singleton} \hfill
 \metainfo{Registro}{specs/ (série SPEC-935-R*)}}
 
@@ -61,40 +65,118 @@ comum onde as portas têm etiquetas.
 \begin{arquitetura}
 A memória expõe operações granulares e auditáveis:
 \begin{interpreta}
-\item[\cod{add_reflection(agent_id, task, reflection, score)}] grava uma
-\emph{reflexão} datada de um agente sobre uma tarefa.
+\item[\cod{record_observation(agent_id, task_context, observation)}] grava
+uma observação estruturada sem promover o ledger por autoavaliação.
+\item[\cod{add_reflection(agent_id, task_context, reflection, score)}] API
+legada explícita que grava reflexão e atualiza o ledger pela nota recebida.
 \item[\cod{extract_lessons(topic)}] extrai as lições acumuladas de um tópico.
 \item[\cod{search_memory(query, limit)}] busca memórias por texto.
 \item[\cod{get_recent_context(limit)}] devolve o contexto recente (janela
 metacognitiva para o orquestrador).
 \item[\cod{upsert_semantic_topic(topic, ...)}] mantém um tópico semântico.
 \item[\cod{update_domain_confidence(domain, score)}] e
-\cod{update_topic_confidence(topic, score)}] ajustam confiança — o numerador
-da \emph{economia} de atenção do sistema.
+\cod{update_topic_confidence(topic, score)} ajustam indicadores internos
+quando chamadas explicitamente; não demonstram competência calibrada.
 \end{interpreta}
 \end{arquitetura}
 
 \begin{metodo}
-Fluxo canônico de uma reflexão:
+Fluxo automático R886 após uma entrega:
 \begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
-\item O agente conclui uma tarefa e \textbf{avalia} o próprio resultado.
-\item Grava \cod{add_reflection(...)} com a pontuação de autoconfiança.
-\item O orquestrador consulta \cod{extract_lessons(topic)} antes de reutilizar
-o mesmo agente para um problema similar.
-\item A confiança por domínio (\cod{update_domain_confidence}) pondera a
-\emph{chance} de escalar ou substituir o executor.
+\item O primário recebe a entrega e aplica o gate autoritativo da tarefa.
+\item O Blackboard transmite resultado, sucesso ou falha e decisão SDD ao
+middleware Reflexion, que chama \cod{MetacognitiveLoop.complete}.
+\item O controlador registra um episódio com resumo, falha observada,
+próxima ação, origem e limites. Referências permanecem \cod{declared_unverified}.
+\item Na próxima delegação, \cod{prepare} recupera observações relevantes
+com seus IDs; a avaliação heurística não aumenta o ledger pela própria nota.
 \end{enumerate}
 \end{metodo}
+
+\subsection{Um episódio útil: o que faltou na nota científica}
+
+Suponha que a nota do caso condutor tenha uma conclusão numérica, mas não
+inclua o CSV exigido pelo contrato. O gate recusa a entrega. Uma observação
+útil registra ``CSV obrigatório ausente'', conserva o estado SDD e propõe
+obter o dado e repetir a verificação. Ela não conclui que a causa foi descuido
+do pesquisador: essa causa não foi observada. Na tarefa seguinte, o briefing
+pode recuperar esse episódio e seu identificador antes de tentar o cálculo.
+
+\begin{arquitetura}
+O episódio \cod{r886.v1} separa \cod{task_id}, \cod{result_summary},
+\cod{observed_error}, \cod{next_action}, \cod{sdd_status} e
+\cod{declared_references}. A avaliação registra \cod{calibrated=false} e
+\cod{confidence_promoted=false}. Repetir exatamente uma conclusão já registrada
+reutiliza o episódio; uma revisão diferente gera outro registro com
+\cod{supersedes}. O briefing exclui revisões substituídas. Se a gravação falhar,
+o middleware publica \cod{metacognition.failed}; persistência não pode ser
+deduzida da simples existência de uma resposta.
+\end{arquitetura}
+\fontecore{mci/metacognitive_loop.py}{MetacognitiveLoop.complete}
+
+\begin{flowch}[Memória e metacognição em dois percursos]{o episódio automático registra a experiência; a EMA pertence a uma chamada explícita distinta}
+\node[fne,text width=3.5cm] (memEntrega) at (-2.8,0) {Entrega e decisão do gate};
+\node[fns,text width=3.5cm,below=6mm of memEntrega] (memCompleta) {R886: observar\\\cod{complete}};
+\node[fn,text width=3.5cm,below=6mm of memCompleta] (memEpisodio) {Episódio com origem,\\limites e próxima ação};
+\node[fn,text width=3.5cm,below=6mm of memEpisodio] (memPersiste) {Episódio persistido\\Sem promoção de confiança};
+\node[fn,text width=2.0cm,draw=amber,fill=amberBg,left=6mm of memPersiste] (memFalha) {Falha de gravação\\Estado degradado};
+\node[fns,text width=3.5cm,below=6mm of memPersiste] (memPrepara) {Nova tarefa: recuperar\\\cod{prepare}};
+\node[fn,text width=3.5cm,below=6mm of memPrepara] (memBriefing) {Briefing com IDs\\e contexto relevante};
+\node[fne,text width=3.5cm] (memLegado) at (2.8,-1.5) {API legada explícita\\\cod{add_reflection}};
+\node[fn,text width=3.5cm,below=7mm of memLegado] (memNota) {Nota fornecida pelo chamador\\Faixa não validada pela API};
+\node[fn,text width=3.5cm,below=7mm of memNota] (memEMA) {Atualiza o ledger por EMA\\$0{,}7\tau_{t-1}+0{,}3s_t$};
+\draw[seta] (memEntrega)--(memCompleta);
+\draw[seta] (memCompleta)--(memEpisodio);
+\draw[seta] (memEpisodio)--(memPersiste);
+\draw[seta,draw=amber] (memEpisodio.west)-|(memFalha.north);
+\draw[seta] (memPersiste)--(memPrepara);
+\draw[seta] (memPrepara)--(memBriefing);
+\draw[seta] (memLegado)--(memNota);
+\draw[seta] (memNota)--(memEMA);
+\draw[draw=gold,dashed,thick] ($(memLegado.north west)+(-7mm,0)$)--($(memEMA.south west)+(-7mm,-4mm)$);
+\end{flowch}
+\begin{descricao}
+\textbf{Como funciona e por quê.} As setas da coluna esquerda acompanham o
+episódio automático: a decisão da tarefa é registrada com sua origem e pode
+ser recuperada no briefing seguinte. A coluna direita começa em uma chamada
+explícita distinta, que recebe uma nota e aplica a média móvel ao ledger.
+A linha tracejada separa os contratos; não existe seta de autopromoção entre
+as colunas. O ramo lateral de falha não chega ao episódio persistido: exige
+um estado observável, não um anúncio de memória salva.
+\textbf{Justificativa.} Mostrar as duas rotas lado a lado evita atribuir à
+reflexão R886 a atualização de confiança de uma API histórica. No caso da nota
+científica, recordar que faltou o CSV orienta a próxima tentativa sem provar
+que o agente se tornou mais competente.
+\textbf{Limite.} O desenho resume chamadas locais. Recuperação de um episódio
+não certifica sua interpretação, e uma nota recebida pela EMA não demonstra
+calibração nem mérito científico. A API legada recebe um \emph{float}, mas não
+impõe a faixa de 0 a 1; essa faixa é uma pré-condição do exemplo didático.
+\end{descricao}
+\fontecore{mci/metacognitive_loop.py}{MetacognitiveLoop.prepare}
+\fontecore{mci/metabus.py}{MetacognitiveMemory.add_reflection}
+
+\subsection{A fórmula legada não é uma recompensa automática da reflexão}
+
+Na API explícita \cod{add_reflection}, o ledger aplica
+$\tau_t=0{,}7\tau_{t-1}+0{,}3s_t$. Em um exemplo hipotético com
+$\tau_0=0{,}5$ e $s_1=0{,}9$, obtém-se $\tau_1=0{,}62$.
+Isso descreve uma atualização numérica, sem estimar a probabilidade de uma
+resposta estar correta. O controlador automático R886 conserva o mesmo valor
+de confiança antes e depois de sua avaliação heurística; a fórmula não deve
+ser usada para atribuir autopromoção a esse percurso. O Trust Engine operacional
+mantém seu contrato próprio de resultados e gates.
+\fontecore{mci/metabus.py}{MetacognitiveMemory.add_reflection}
 
 \section{O quadro de tarefas: Blackboard e o protocolo A2A}
 
 \begin{definicao}
 O \textbf{Blackboard} é o \emph{quadro-público} de trabalho do Core
 (\pth{mci/blackboard.py}). Nele o orquestrador \textbf{publica tarefas} com
-capacidades exigidas, e qualquer agente \textbf{se voluntaria} se tiver a
-capacidade declarada. É a materialização do protocolo \emph{Agent-to-Agent}
-(A2A) do ecossistema: ninguém espera ser chamado pelo nome — \emph{todo mundo
-olha o quadro e se apresenta}.
+capacidades exigidas. O matching exige todas as capacidades e disponibilidade;
+o CFP torna os candidatos observáveis. Na rota coordenada pelo primário,
+\cod{_on_cfp} escolhe um candidato e publica o voluntariado. Esse contrato A2A
+local permite seguir a atribuição pelo ID da tarefa; não implica que todo
+perfil execute um processo que observa o quadro autonomamente.
 \end{definicao}
 
 \par\smallskip
@@ -132,14 +214,15 @@ cards registrados.
 \begin{processo}
 Ciclo completo de delegação por quadro:
 \begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
-\item \textbf{Registro} — cada agente publica seu \pth{AgentCard}
-(\cod{mci_register_agent}).
+\item \textbf{Registro} — o perfil gerenciado passa pelo primário e pelo
+ciclo R894 antes da publicação de seu \pth{AgentCard}. A superfície legada
+\cod{mci_register_agent} não substitui a criação persistente desse perfil.
 \item \textbf{Publicação} — alguém posta uma \pth{BlackboardTask} com as
 capacidades exigidas (\cod{mci_post_task}).
 \item \textbf{Match} — o Blackboard compara capacidades exigidas vs.\ cards.
-\item \textbf{Voluntariado} — para cada candidato, o \emph{fitness} pondera
-confiança ao vivo (\cod{_live_confidence}) e carga atual
-(\cod{_live_load}); o melhor candidato é acionado.
+\item \textbf{Voluntariado} — o primário aplica o gate comportamental e a
+seleção por redução ou atenção. Um candidato escolhido origina
+\cod{task.volunteer}; o quadro registra \cod{task.assigned} e o estado ocupado.
 \item \textbf{Conclusão} — o resultado volta ao quadro e a reflexão vai ao
 MetaBus (\cod{mci_get_memory} permite inspecionar o histórico).
 \end{enumerate}
@@ -151,7 +234,7 @@ MetaBus (\cod{mci_get_memory} permite inspecionar o histórico).
  |[fde]|Disponível e todas as capacidades? \\
  |[fns]|Anuncia candidatos: \nodep{task.cfp} \\
  |[fns]|Voluntariado e atribuição \\
- |[fns]|Execução e \nodep{task.complete} \\
+ |[fns]|Executor entrega; gate e \nodep{task.complete} \\
  |[fns]|Atualiza estado e libera agente \\
  |[fne]|Solicita reflexão no MetaBus \\
 };
@@ -161,7 +244,7 @@ MetaBus (\cod{mci_get_memory} permite inspecionar o histórico).
 \draw[seta] (bb-4-1)--(bb-5-1);
 \draw[seta] (bb-5-1)--(bb-6-1);
 \draw[seta] (bb-6-1)--(bb-7-1);
-\node[fn,anchor=west,right=8mm of bb-2-1,font=\tiny]{sem elegível: permanece aberta};
+\node[fn,anchor=west,right=8mm of bb-2-1,font=\footnotesize]{sem elegível: permanece aberta};
 \end{flowch}
 
 \begin{descricao}
@@ -218,13 +301,14 @@ hipóteses verdadeiras e testadas em cada campo. Por isso o Core trata
 não por ceticismo estético, mas por base de evidência \citref{IOANNIDIS, J. P. A. Why most published research findings are false. \emph{PLoS Medicine}, v.~2, n.~8, e124, 2005}{10.1371/journal.pmed.0020124}{justifica o gate \cod{no_verified_without_external} do avaliador metacognitivo: a literatura mostra que testes internos e viés local tornam a alegação ``verificada'' sem validação externa improvável de ser verdadeira; o avaliador é a tradução pragmática dessa cautela em \emph{fail-closed}}{Simulations show that for most study designs and settings, it is more likely for a research claim to be false than true}{Simulações mostram que, para a maioria dos desenhos e cenários de estudo, é mais provável que uma alegação de pesquisa seja falsa do que verdadeira.}{IOANNIDIS, 2005, p.~e124}.\begin{limite}
 A memória metacognitiva é \emph{local ao Core} e \emph{revisível por lógica},
 não por peer review. Ela pode conter reflexões divergentes entre agentes; o
-valor está no \emph{embate documentado}, não no consenso. Não há ferramenta de
-esquecimento seletivo neste sub-sistema — confianças antigas só expiram por
-atualização de domínio explícita.
+valor está no \emph{embate documentado}, não no consenso. As APIs aqui descritas
+não oferecem esquecimento seletivo geral. No briefing R886, uma revisão pode
+substituir outra para a consulta, preservando a proveniência; isso não é
+apagar o histórico nem validar seu conteúdo.
 \end{limite}
 
 \begin{niveis}
-\textbf{Intuição:} é um “caderno comum” onde os robôs anotam o que aprenderam e
+\textbf{Intuição:} é um “caderno comum” de observações sobre tarefas e resultados e
 um “quadro de avisos” onde pedem ajuda pelas habilidades.\par\smallskip
 \textbf{Implementação:} MetaBus combina publicação e assinatura de eventos com
 armazenamento persistente; Blackboard organiza tarefas e contribuições segundo
@@ -238,12 +322,55 @@ Identifique o que cada mecanismo realmente expõe antes de atribuir essa
 propriedade ao sistema.
 \end{niveis}
 
+\section{Persistência e recuperação: o cuidado adicional com Whoosh}
+
+Guardar episódios em \pth{shared_memory.json} e manter um índice de busca são
+responsabilidades distintas. R893 corrige a reabertura de índices Whoosh:
+o engine usa a detecção de existência da biblioteca, abre dados já presentes
+e serializa a criação inicial. Uma nova sessão não deve recriar um índice
+válido apenas porque seu cache em memória está vazio.
+
+Na escrita, a quantidade indexada só é confirmada depois do commit real;
+falhas cancelam o writer e precisam permanecer visíveis. Na leitura, índices
+novos conservam o conteúdo textual. Um índice legado sem texto pode devolver
+metadados com \cod{content_unavailable=true}; o consumidor não deve apresentar
+esses metadados como se fossem uma passagem recuperada. Assim, a nota
+científica distingue ``encontrei um registro da fonte'' de ``recuperei o
+conteúdo que sustenta esta frase''.
+\fontecore{skills/tooling/whoosh3_engine.py}{Whoosh3Engine.search}
+
+\begin{aviso}
+Persistência entre processos, commit confirmado e conteúdo recuperável são
+propriedades locais delimitadas. Elas não comprovam semântica neural, serviço
+distribuído, validade de uma referência ou melhoria da próxima resposta.
+\end{aviso}
+
+\begin{verbatim}
+.venv/bin/python - <<'PY'
+from marceloclaro.orchestrator import MarceloClaroOrchestrator
+p = MarceloClaroOrchestrator(auto_load_agents=False)
+print(p.memory_network_query("science", limit=3))
+PY
+\end{verbatim}
+
+\praticacore
+{Conferir a origem de uma memória antes de usá-la na nota científica.}
+{O checkout da edição e o trecho de consulta lexical acima.}
+{Execute a consulta; escolha um ID retornado e localize sua observação na
+memória canônica. Separe resumo, resultado declarado e evidência vinculada.}
+{O retorno identifica registros e declara \cod{inference_executed=false}.
+Conte os matches efetivos e confira o contexto do registro escolhido.}
+{Sem matches, registre zero; se a observação estiver antiga ou incompleta,
+não a transforme em prova atual. Erro de persistência exige investigação própria.}
+{Que parte da próxima ação veio de uma falha observada e que parte ainda é
+hipótese? Como o leitor distinguiria texto recuperado de simples metadados?}
+
 \section{Resumo e exercícios}
 
 \begin{resultado}
 \textbf{O que você deve ter aprendido:} (1) MetaBus guarda reflexões e
 confianças; (2) Blackboard publica tarefas por capacidades e processa
-voluntariado com fitness; (3) as quatro ferramentas MCP são as portas de acesso;
+seleção e atribuição por eventos; (3) as quatro ferramentas MCP são portas legadas de acesso;
 (4) memória $\neq$ prova, e o tier só é \emph{verificado} com validação externa.
 \textbf{Exercício sugerido:} abra \pth{mci/blackboard.py}, publique uma tarefa
 de exemplo com \cod{required_capabilities} e rastreie qual card atende;
@@ -262,8 +389,8 @@ depois repita com uma exigência impossível e observe o caminho \emph{sem match
 \elemento{Leitura guiada — Memória metacognitiva}{\metainfo{ID}{N-03} \hfill \metainfo{Ciclo}{R614} \hfill \metainfo{Estilo}{duas memórias, um quadro}}
 
 \begin{descricao}
-\textbf{O fenômeno.} Um sistema que aprende precisa de dois tipos de lembrança, e
-confundi-los é erro de projeto. Ao terminar uma tarefa, o Core guarda duas coisas
+\textbf{O fenômeno.} Um sistema que conserva histórico precisa distinguir memória de trabalho
+e coordenação de tarefas. Ao terminar uma tarefa, o Core guarda duas coisas
 diferentes: \emph{o que aconteceu} (memória: reflexões, confiança) e \emph{o que
 precisa ser feito} (trabalho: tarefas abertas, voluntários). A primeira é o
 \textbf{MetaBus}; a segunda é o \textbf{Blackboard}. São canais separados ---
@@ -277,39 +404,40 @@ diário do professor (histórico).
   \item \textbf{MetaBus}: memória metacognitiva; guarda reflexões e confiança por agente.
   \item \textbf{Blackboard}: quadro A2A de tarefas por capacidades; publica tarefas e recebe voluntários.
   \item \textbf{Ferramentas MCP}: 4 portas públicas --- \cod{mci_register_agent}, \cod{mci_post_task}, \cod{mci_get_memory}, \cod{mci_get_blackboard_state}.
-  \item \textbf{Escore de confiança} ($\tau_t$): valor interno atualizado a cada registro; o código combina 70\% do escore anterior com 30\% do novo score.
-  \item \textbf{Card}: ficha de capacidade de um agente; aqui $212$ cards.
+  \item \textbf{Observação}: registro tipado do que foi declarado ou observado,
+        incluindo seu contexto e seus limites.
+  \item \textbf{Ledger}: indicador interno; a observação R886 não o promove
+        por autoavaliação. A API legada explícita tem outra regra.
+  \item \textbf{Card}: ficha de capacidade; a configuração desta edição declara
+        \CoreAgentCount{} agentes, sem implicar igual número de executores ativos.
 \end{itemize}
 \end{definicao}
 
 \begin{metodo}
-\textbf{Dedução passo a passo.} Como o ledger atualiza o escore de confiança?
+\textbf{Dedução passo a passo.} Como uma falha se torna contexto recuperável?
 \begin{enumerate}[leftmargin=1.4em,itemsep=2pt]
-  \item O ledger lê o escore atual $\tau_{t-1}$; se não houver valor salvo, começa em $0{,}5$.
-  \item Recebe o novo score $s_t$ e calcula $\tau_t = 0{,}7\tau_{t-1} + 0{,}3s_t$.
-  \item Assim, o valor recente altera o indicador, enquanto a influência do histórico diminui a cada atualização.
-  \item Lições com o mesmo tema são agrupadas no MetaBus, evitando duplicação de memória.
-  \item A leitura por tópico usa um limite (\pth{mci_get_memory}), então o orquestrador não ``traz o mundo inteiro''.
+  \item A entrega chega ao gate com seu vínculo de spec e evidência.
+  \item A reflexão recebe o resultado e o estado do gate, sem inventar sua causa.
+  \item O episódio conserva resumo, erro observado, próxima ação e origem.
+  \item A gravação bem-sucedida produz um ID; falha de gravação produz degradação.
+  \item Outra tarefa consulta registros relevantes e identifica quais foram usados.
 \end{enumerate}
 \end{metodo}
 
 \begin{resultado}
-\textbf{Exemplo resolvido.} Começando pelo valor padrão $\tau_0=0{,}5$ e recebendo
-scores $s_1=0{,}9$, $s_2=0{,}7$ e $s_3=0{,}5$:
-\[\tau_1=0{,}7(0{,}5)+0{,}3(0{,}9)=0{,}62.\]
-\[\tau_2=0{,}7(0{,}62)+0{,}3(0{,}7)=0{,}644.\]
-\[\tau_3=0{,}7(0{,}644)+0{,}3(0{,}5)=0{,}6008\approx0{,}60.\]
-Se o gate configurado no Módulo 2 comparar o último valor com $0{,}25$, então
-$0{,}60>0{,}25$ passa esse critério numérico. Isso não certifica a resposta do
-agente: mostra apenas como o valor do ledger se relaciona ao limiar.
+\textbf{Exemplo resolvido.} Em um cenário hipotético, a primeira versão da nota
+falha por CSV ausente e gera o episódio $e_1$. A versão corrigida gera $e_2$
+com \cod{supersedes} apontando para $e_1$. Se o mesmo resultado de $e_2$ for
+reportado novamente, o controlador reutiliza o registro; uma revisão posterior
+diferente gera outro episódio. A próxima preparação deve recuperar a revisão
+pertinente, sem tratar a repetição do registro como nova evidência independente.
 \end{resultado}
 
 \begin{resultado}
-\textbf{Ordem de grandeza e verificação.} O bootstraper registra os \textbf{212
-cards} no quadro; como há \textbf{216} entradas de agente, faltam $216 - 212 = 4$
-sem card declarado ($212/216 = 0{,}981$, isto é, $98{,}1\%$ cobertos).
-\emph{Verifique:} conte as entradas em \pth{opencode.json} e os arquivos em
-\pth{agents/catalog/}.
+\textbf{Ordem de grandeza e verificação.} O briefing recupera até cinco registros
+e limita o tamanho dos campos. Esse orçamento restringe o contexto transportado;
+não mede completude da memória. Confira os IDs recuperados e o estado de
+persistência, separando-os das \CoreAgentCount{} entradas da configuração.
 \end{resultado}
 
 \begin{aviso}
@@ -320,10 +448,10 @@ aparece com validação externa explícita (regra anti-overclaim do Módulo 3).
 \end{aviso}
 
 \begin{resultado}
-\textbf{Exercícios.} (1) Refaça a sequência com $s_1=s_2=s_3=1$ e calcule a
-distância entre $\tau_3$ e $1$. (2) Explique por que a regra dá mais influência
-ao histórico do que a uma única observação nova. (3) Por que separar ``tarefa''
-de ``memória'' evita misturar estado de execução e registro de contexto?
+\textbf{Exercícios.} (1) Escreva uma observação para uma falha sem causa conhecida.
+(2) Indique qual ID uma revisão substituiria. (3) Explique por que dois registros
+iguais não são duas confirmações independentes. (4) Diga que evidência falta
+quando há apenas metadados da fonte, sem o texto recuperado.
 \end{resultado}
 
 % ATIVACAO-R613
@@ -333,11 +461,14 @@ de ``memória'' evita misturar estado de execução e registro de contexto?
 \begin{processo}
 GATILHO. consulta ao MetaBus/Global Workspace por lições e confiança.
 ROTA. MCP \pth{metacognitive-interconnect}; gate: memória auditável.
-FUNÇÃO. prover contexto e histórico de confiança para que a ativação não repita erros registrados.
+FUNÇÃO. disponibilizar observações e sua origem para a próxima decisão;
+evitar a repetição de um erro ainda depende de interpretar esse contexto.
 \end{processo}
 
 \begin{resultado}
-CÁLCULO. o ledger atualiza a confiança como $\tau_t=0{,}7\tau_{t-1}+0{,}3s_t$; lições com o mesmo tema são agrupadas no MetaBus.
+CÁLCULO. A EMA $\tau_t=0{,}7\tau_{t-1}+0{,}3s_t$ pertence à API legada explícita
+\cod{add_reflection}. No episódio automático R886, a avaliação conserva o ledger:
+\cod{confidence_promoted=false}. Nenhum dos dois campos é probabilidade calibrada.
 \end{resultado}
 
 \begin{descricao}
@@ -350,3 +481,94 @@ localização da fonte (R110), não o mérito da afirmação.
 \end{aviso}
 
 \noindent\textit{Interpretação:} A distinção entre objeto e meta-nível explica por que guardar eventos não basta para aprender. O nível-objeto registra o que ocorreu; o meta-nível compara o registro com o objetivo, decide se a estratégia deve mudar e acompanha o efeito do ajuste. Para cada ciclo, convém preservar o par $(e_t,a_t)$ — evidência observada e decisão tomada — e depois registrar o resultado $e_{t+1}$. Sem esse retorno, há memória de atividade, mas não evidência de que a regulação melhorou o processo \citref{NELSON, T. O.; NARENS, L. Metamemory: a theoretical framework and new findings. In: BOWER, G. H. (org.). \emph{The Psychology of Learning and Motivation}. San Diego: Academic Press, v.~26, p.~125-173, 1990}{10.1016/S0079-7421(08)60053-5}{p.~125--173 (resumo do capítulo, p.~125). é a base do desenho meta-nível/objeto-nível do MetaBus: o meta-nível adquire informação do objeto-nível (monitoramento) e o altera (controle) — exatamente o fluxo entre memória compartilhada e ativação dos agentes.}{This eventuated in the present theoretical framework that emphasizes the role of control and monitoring processes}{Isso resultou no presente arcabouço teórico que enfatiza o papel dos processos de controle e monitoramento.}{NELSON, 1990, p.~125}
+
+\clearpage
+\section{Apêndice Didático: Atualização de confiança por média móvel exponencial}
+
+\elemento{EMA de confiança no MetaBus}{\metainfo{ID}{DID-EMA} \hfill \metainfo{Fonte}{mci/metabus.py — MetacognitiveMemory.add\_reflection}}
+
+\begin{descricao}
+\textbf{O problema concreto.} A API legada explícita do MetaBus conserva um
+indicador $\tau$ para cada agente. Supondo que o chamador forneça uma nota $s_t$
+entre 0 e 1, como combinar essa nota com o histórico anterior? A API não
+valida essa faixa; ela é uma pré-condição desta conta. Uma avaliação
+binária pode usar 1 para sucesso e 0 para falha, mas o exemplo abaixo usa a
+nota contínua $0{,}9$. O fluxo automático R886 não chama essa atualização para
+promover sua própria avaliação.
+\end{descricao}
+
+\begin{definicao}
+\textbf{Símbolos.}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{>{\hsize=.55\hsize\linewidth=\hsize}Y>{\hsize=1.65\hsize\linewidth=\hsize}Y>{\hsize=.80\hsize\linewidth=\hsize}Y}
+Símbolo & Significado & Valor no exemplo \\
+\midrule
+$\tau_t$ & Confiança no instante $t$ & — \\
+$\tau_{t-1}$ & Confiança no instante anterior & $\tau_0 = 0{,}5$ \\
+$s_t$ & Nota fornecida à API; assume-se faixa de 0 a 1 neste exemplo & $s_1 = 0{,}9$ \\
+$0{,}7$ & Peso dado à confiança anterior (memória) & — \\
+$0{,}3$ & Peso dado ao resultado novo (novidade) & — \\
+\end{tabularx}
+\end{center}
+\end{definicao}
+
+\begin{metodo}
+\textbf{Dedução da fórmula $\tau_t = 0{,}7\tau_{t-1} + 0{,}3s_t$.}
+
+\paragraph{Passo 1 — O intuito da média móvel.}
+Queremos combinar o indicador anterior com a nota nova. Se usássemos apenas
+a nota nova, o indicador perderia a contribuição de seu valor anterior. Se
+usássemos apenas o valor anterior, ele não refletiria as notas recebidas.
+Essa combinação numérica não demonstra aprendizagem do modelo.
+
+\paragraph{Passo 2 — Pesos que somam um.}
+Os dois pesos $0{,}7$ e $0{,}3$ somam $1$. Se tanto $\tau_{t-1}$ quanto $s_t$
+pertencerem ao intervalo de 0 a 1, a combinação permanece nesse intervalo.
+Sem essa pré-condição, a soma dos pesos não garante um indicador nessa faixa.
+
+\paragraph{Passo 3 — Aplicação dos pesos.}
+A confiança anterior contribui com $70\%$ de seu valor: $0{,}7 \times \tau_{t-1}$. O resultado novo contribui com $30\%$ de seu valor: $0{,}3 \times s_t$. Somando as duas partes:
+
+\[
+\boxed{\tau_t = 0{,}7\tau_{t-1} + 0{,}3s_t}
+\]
+
+\paragraph{Passo 4 — Cálculo numérico.}
+Com $\tau_0 = 0{,}5$ e $s_1 = 0{,}9$:
+
+\[
+\tau_1 = 0{,}7 \times 0{,}5 + 0{,}3 \times 0{,}9 = 0{,}35 + 0{,}27 = 0{,}62
+\]
+
+\[
+\boxed{\tau_1 = 0{,}62}
+\]
+
+\end{metodo}
+
+\begin{descricao}
+\textbf{Interpretação.} O indicador passou de $0{,}50$ para $0{,}62$ após a
+chamada explícita com nota $0{,}9$. Ele não saltou para $0{,}9$ porque o valor
+anterior ($0{,}5$) ainda pesa $70\%$. A média atenua a variação de uma nota;
+não determina se essa nota foi adequada nem mede competência calibrada.
+
+\textbf{O que isso NÃO significa:}
+\begin{itemize}[leftmargin=1.3em,itemsep=1pt]
+  \item Não é a probabilidade de o agente acertar na próxima tarefa.
+  \item Não mede qualidade científica nem mérito da entrega.
+  \item Não é uma recompensa automática da reflexão: é apenas uma atualização numérica no ledger.
+\end{itemize}
+\end{descricao}
+
+\begin{aviso}
+\textbf{Limites de validade.}
+\begin{enumerate}[leftmargin=1.3em,itemsep=1pt]
+  \item Os pesos $0{,}7$ e $0{,}3$ são definidos no código; mudar os pesos muda o resultado.
+  \item A API legada não limita a nota ao intervalo de 0 a 1; a entrada adequada precisa ser controlada pelo chamador.
+  \item A fórmula pertence à API explícita \cod{add_reflection}; o episódio automático R886 não promove o ledger por essa nota.
+  \item O Trust Engine operacional mantém seu próprio contrato de resultados e gates, separado dessa EMA.
+\end{enumerate}
+\end{aviso}
+
+% R901-PONTE-FECHO

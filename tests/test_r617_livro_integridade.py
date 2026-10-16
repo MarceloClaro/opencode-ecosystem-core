@@ -73,20 +73,30 @@ def test_ac2c_labels_latex_unicos():
 
 # ---------------------------------------------------------------- AC3
 def test_ac3_macros_invalidas():
-    """AC3: \\code{} não existe; \\text{} exige amsmath (ausente no preâmbulo)."""
+    """AC3/R907: macros textuais em fórmulas exigem sua dependência explícita."""
+    preamble = (LIVRO / "macros.tex").read_text(encoding="utf-8")
     for f in MODS:
         t = f.read_text(encoding="utf-8")
         assert "\\code{" not in t, f"{f.name}: use \\cod{{}}, não \\code{{}}"
-        assert "\\text{" not in t, f"{f.name}: use \\mathrm{{}} (não há amsmath)"
+        assert _math_dependencies_satisfied(t, preamble), (
+            f"{f.name}: \\text{{}} exige carregar amsmath no preâmbulo"
+        )
 
 
-def test_ac3b_preambulo_nao_carrega_amsmath():
-    """Justificativa do AC3: a suposição 'sem amsmath' é verificada, não presumida."""
-    main = (LIVRO / "main.tex").read_text(encoding="utf-8")
-    macros = (LIVRO / "macros.tex").read_text(encoding="utf-8")
-    assert "amsmath" not in main and "amsmath" not in macros, (
-        "amsmath passou a ser carregado: reavaliar a regra \\text{} da AC3"
-    )
+def _math_dependencies_satisfied(text, preamble):
+    active = re.sub(r"(?m)%.*$", "", preamble)
+    packages = re.findall(r"\\usepackage(?:\[[^\]]*\])?\{([^}]+)\}", active)
+    has_amsmath = any("amsmath" in value.split(",") for value in packages)
+    return "\\text{" not in text or has_amsmath
+
+
+def test_ac3b_dependencia_matematica_exige_carregamento_real():
+    """Um comentário ou nome parecido não satisfaz a dependência das ampliações."""
+    assert _math_dependencies_satisfied(r"\text{saídas}", r"\usepackage{amsmath}")
+    assert _math_dependencies_satisfied(r"x+y", "")
+    assert not _math_dependencies_satisfied(r"\text{saídas}", "")
+    assert not _math_dependencies_satisfied(r"\text{saídas}", "% \\usepackage{amsmath}")
+    assert not _math_dependencies_satisfied(r"\text{saídas}", r"\usepackage{notamsmath}")
 
 
 # ---------------------------------------------------------------- AC4
@@ -101,7 +111,7 @@ def test_ac4_sem_boilerplate_de_geracao():
 
 # ---------------------------------------------------------------- AC5
 def test_ac5_leitura_guinada_tem_blocos_do_metodo():
-    """AC5: seção didática incompleta quebra a promessa de qualidade A1."""
+    """AC5: seção didática incompleta quebra o contrato editorial de estrutura."""
     for f in MODS:
         t = f.read_text(encoding="utf-8")
         for m in re.finditer(r"\\section\[Leitura guiada\]\{([^}]*)\}", t):

@@ -1721,6 +1721,24 @@
         "task": "deny"
       }
     },
+    "book-orchestration-editor": {
+      "description": "Revisar a narrativa de orquestração, memória, ativação e atlas com fontes rastreáveis.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/book-orchestration-editor.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r901_livro_atualizacao_integral.py -q": "allow"
+        },
+        "edit": "allow",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
     "book-release": {
       "description": "Preparar artefatos do livro com verificação de fontes e compilação.",
       "mode": "subagent",
@@ -1733,6 +1751,24 @@
           "*": "deny",
           "python3 -m marceloclaro.cli doctor": "allow",
           "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "allow",
+        "webfetch": "deny",
+        "task": "deny"
+      }
+    },
+    "book-science-editor": {
+      "description": "Revisar qualidade, raciocínio, pesquisa e reprodução do livro com limites científicos explícitos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/book-science-editor.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r901_livro_atualizacao_integral.py -q": "allow"
         },
         "edit": "allow",
         "webfetch": "deny",

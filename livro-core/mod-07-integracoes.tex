@@ -4,6 +4,10 @@
 % ============================================================
 \chapter{Integrações, MCPs e Referências da Construção}
 
+% R901-PONTE-ABERTURA
+O capítulo científico identificou operações necessárias; falta compreender por quais interfaces elas são disponibilizadas. A mesma nota passa agora pelas fronteiras entre biblioteca, processo local, MCP e serviço hospedado.
+
+
 \roteirodidatico
 {Um sistema isolado não acessa automaticamente arquivos, serviços ou programas externos. Uma integração define a fronteira pela qual esses recursos podem ser solicitados.}
 {\emph{Cliente} inicia a comunicação; \emph{servidor} oferece operações; \emph{protocolo} define mensagens; \emph{credencial} autoriza acesso; \emph{executor externo} é um programa independente.}
@@ -11,8 +15,8 @@
 {Compatibilidade declarada não equivale a conexão testada. Avalie disponibilidade, permissões, tratamento de erros, exposição de dados e limites de serviços de terceiros.}
 {Qual chamada concreta atravessa a fronteira, que permissão permite a operação e qual registro demonstra seu resultado?}
 
-\casoguiado{consulta a um servidor de ferramentas}
-{Um cliente envia a um servidor compatível uma solicitação para listar recursos. Para compreendê-la, identifique o método anunciado, seus parâmetros, o transporte usado e o formato da resposta. Se o serviço estiver apenas no arquivo de configuração, ainda falta confirmar que iniciou e respondeu. A fronteira externa também exige avaliar autenticação, dados enviados e o comportamento quando a conexão falha.}
+\casoguiado{a nota científica atravessa uma interface}
+{O capítulo de ciência deixou uma nota com fonte identificada, método local e evidências ainda a reunir. Agora será necessário localizar o código que executa o método e, se houver uma consulta externa autorizada, conservar sua resposta. A primeira decisão é escolher a interface capaz de fornecer essa informação. A nota recebe a fonte do código e o recibo da chamada; a interpretação científica continua dependente do método e das premissas registrados no capítulo anterior.}
 
 \section{A camada de integração em perspectiva}
 
@@ -21,9 +25,10 @@
 \begin{descricao}
 A configuração declara \CoreMCPCount{} servidores MCP e integrações com executores externos
 (Gemini, Reasonix, Plandex, Goose, Haystack, MiroFish via proxy e NotebookLM via
-ponte) e dezenas de repositórios que inspiram padrões. A regra transversal é
-\emph{fail-closed}: se o serviço não está disponível ou não valida, o pedido falha
-com clareza — nunca degrada silenciosamente para ``sucesso''.
+ponte) e repositórios que inspiram padrões. A política pretendida é
+\emph{fail-closed}: uma dependência ausente ou uma resposta inválida deve produzir
+um estado explícito de falha. É preciso conferir esse comportamento na rota
+escolhida; a regra escrita, sozinha, não demonstra que toda integração a cumpra.
 \end{descricao}
 
 \clearpage
@@ -36,12 +41,12 @@ Retrato histórico da configuração, conservado para comparação; esta lista d
 entradas não é o inventário corrente e não foi reexecutada nesta revisão:\par
 \smallskip
 {\footnotesize
-\begin{tabularx}{\textwidth}{lY}
+\begin{tabularx}{\linewidth}{>{\hsize=.70\hsize\linewidth=\hsize}Y>{\hsize=1.30\hsize\linewidth=\hsize}Y}
 \toprule
 MCP & Papel \\
 \midrule
 \pth{litert-lm} & modelos on-device (Gemma 4 / Qwen3) por LiteRT-LM \\
-\pth{metacognitive-interconnect} & Blackboard, MetaBus, memória (Parte II) \\
+\pth{metacognitive-interconnect} & Blackboard, MetaBus, memória — Parte III — Memória, Metacognição e Interconexão (MCI) \\
 \pth{antigravity-bridge} & delegação ao Antigravity (Google DeepMind): browser,
 pesquisa, imagem, subagentes \\
 \pth{pypi-search} & busca e recomendação de pacotes Python no PyPI \\
@@ -58,7 +63,7 @@ Como um MCP se apoia no ciclo:
 \begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
   \item o servidor anuncia as ferramentas disponíveis e seus parâmetros;
   \item o orquestrador chama a ferramenta no contexto do tópico em curso;
-  \item a resposta entra como \emph{evidência} no ciclo SDD da Parte III;
+  \item a resposta entra como \emph{evidência} no ciclo SDD da Parte IV — Qualidade, Especificação e Rigor (SDD/TDD);
   \item nenhuma ferramenta substitui os gates de qualidade.
 \end{enumerate}
 \end{metodo}
@@ -83,7 +88,7 @@ Como um MCP se apoia no ciclo:
 \end{flowch}
 
 \begin{descricao}
-\textbf{Como funciona e por quê.} A interface encaminha argumentos à ferramenta; o servidor valida ou interpreta a operação e retorna uma resposta. Nesta ferramenta local, postar uma tarefa a leva ao MetaBus e ao Blackboard; acompanhar a conclusão requer outra leitura de estado.
+\textbf{Como funciona e por quê. Mecanismo.} As setas representam o envio de argumentos, a execução solicitada e a avaliação da resposta. Nesta ferramenta local, postar uma tarefa a leva ao MetaBus e ao Blackboard; acompanhar a conclusão requer outra leitura de estado.
 \textbf{Justificativa.} Separar resposta do protocolo e estado da tarefa impede tratar o aceite de uma chamada como conclusão do trabalho anunciado.
 \textbf{Limite.} Este é um esquema genérico, não a especificação completa do protocolo MCP. Servidor declarado, ferramenta descoberta e tarefa concluída são evidências diferentes.
 \end{descricao}
@@ -96,8 +101,8 @@ Como um MCP se apoia no ciclo:
 \begin{niveis}
 \textbf{Intuição:} tomadas padrão na parede: qualquer aparelho que siga o padrão
 conecta.\\
-\textbf{Implementação:} protocolo MCP (message-oriented) padroniza ferramentas entre CLI,
-skills e plugins.\\
+\textbf{Implementação:} o cliente negocia o protocolo, descobre as ferramentas
+oferecidas e envia argumentos segundo seus schemas.\\
 \textbf{Formalização:} \emph{protocolo agnóstico de ferramenta} permite acoplamento tardio
 (\textit{plugin architecture}) sem entrega de responsabilidade de qualidade.
 \end{niveis}
@@ -130,6 +135,98 @@ Habilitação na configuração não comprova processo iniciado, autenticação,
 \end{resultado}
 % END-R814-INVENTARIO
 
+\section{Da pergunta ao contrato: ferramenta, recurso e instrução}
+
+\begin{descricao}
+Uma interface útil começa por uma pergunta pequena. Para a nota científica,
+``qual função aceita o pacote de evidências?'' é mais preciso que ``compreenda
+todo o projeto''. O cliente é o programa que faz a solicitação; o servidor é o
+processo que oferece uma capacidade. O transporte leva as mensagens entre ambos.
+Essas três peças podem estar na mesma máquina ou em máquinas diferentes. A
+palavra MCP descreve o contrato de comunicação e não determina, por si só,
+onde o cálculo acontece ou quem tem acesso aos dados.
+\end{descricao}
+
+\begin{conceito}
+Uma \emph{ferramenta} recebe argumentos e solicita uma operação; um
+\emph{recurso} oferece conteúdo identificado, que o cliente pode ler; um
+\emph{prompt} oferece um modelo reutilizável de interação. São capacidades
+distintas e opcionais de uma interface MCP. Uma skill local orienta o agente
+por um documento; ela não se torna um prompt MCP apenas por existir.
+Descobrir ferramentas também não demonstra que o servidor ofereça recursos
+ou prompts. Neste percurso do Core, a conferência operacional é a chamada
+da ferramenta efetivamente anunciada e o exame da resposta.
+\end{conceito}
+
+\begin{metodo}
+O menor percurso começa por consultar o estado do adaptador. Em seguida,
+confere-se a operação permitida e o formato de entrada; só então o cliente
+envia o pedido. A resposta deve ser interpretada em dois níveis: o transporte
+pode ter concluído e, ainda assim, a ferramenta retornar erro, falta de
+autenticação ou trabalho pendente. Por isso, o recibo precisa conservar a
+identidade da operação, os argumentos pertinentes, a resposta e seu estado.
+A descoberta MCP em \pth{CodeContextProvider._mcp_call}, por exemplo,
+negocia o protocolo e lista ferramentas antes de realizar uma chamada.
+\end{metodo}
+\fontecore{integrations/code_context.py}{CodeContextProvider._mcp_call}
+
+\section{Contexto de código: localizar antes de modificar}
+
+\begin{descricao}
+A função procurada pela nota deve ser lida com sua origem. A R887 introduziu o
+adaptador de contexto de código sob
+\pth{MarceloClaroOrchestrator.code_context_action}. A CLI
+\pth{code-context} e a ferramenta \pth{ecosystem_code_context} passam por esse
+primário. O adaptador usa uma versão fixada do provedor \pth{context-link},
+com digest do pacote, e mantém índice e cache privados. A preparação com
+\pth{setup} é explícita e pode usar rede; consultar não instala nem atualiza
+o provedor silenciosamente.
+\end{descricao}
+
+\begin{metodo}
+O percurso separa cinco ações. \pth{status} informa estado e limites;
+\pth{setup} prepara a ferramenta; \pth{index} constrói uma geração;
+\pth{query} usa operações nativas permitidas; \pth{python_graph} escolhe
+explicitamente o backend Python do Core. O corpus reúne fontes rastreadas
+pelo Git e aprovadas pelos filtros. Testes, documentos, saídas, fontes grandes,
+symlinks e arquivos com certos marcadores de segredo são excluídos. Os limites
+inspecionados são 2.000 arquivos, 512 KiB por arquivo e 32 MiB no corpus.
+Um excesso impede promover uma geração parcial como se estivesse completa.
+O filtro de segredos é heurístico e não constitui auditoria de dados sensíveis.
+\end{metodo}
+\fontecore{integrations/code_context.py}{CodeContextProvider._source_files}
+
+\begin{resultado}
+As operações nativas aceitas pelo contrato são \pth{ping},
+\pth{semantic_search_symbols}, \pth{get_code_by_symbol} e
+\pth{get_file_skeleton}. Há uma diferença entre fazer parte dessa lista e
+ter uma chamada atual concluída. A última consulta real de grafo registrada
+nesta edição expirou após 30 segundos; esse recibo continua sendo falha por
+prazo. O texto do método pode ser lido diretamente nas fontes quando a consulta
+não conclui, registrando que o caminho utilizado foi essa leitura.
+\end{resultado}
+
+\begin{limite}
+As três operações nativas \pth{get_symbol_usages}, \pth{get_call_tree} e
+\pth{get_blast_radius} permanecem bloqueadas por contraprovas semânticas.
+Na R896, \pth{python_graph} oferece os mesmos tipos de pergunta por
+\pth{core_python_ast}, uma implementação própria para Python. Ela não corrige
+nem aciona o grafo nativo bloqueado. Relações resolvidas conservam arquivo,
+linha e hash; chamadas dinâmicas, importações ambíguas, falhas de parse e
+truncamento precisam aparecer como limites. Um mapa estático não comprova
+quais funções foram realmente executadas, nem ausência de ciclos em execução.
+\end{limite}
+\fontecore{integrations/code_context.py}{CodeContextProvider._python_graph}
+\fontecore{integrations/python_code_graph.py}{analyze_python_graph}
+
+\praticacore
+{Acrescentar à nota científica a origem do método local, sem converter análise estática em resultado experimental.}
+{A nota do capítulo anterior, a função \pth{verify_scientific_package} e a fonte \pth{research/scientific_release.py}.}
+{Consulte \pth{python3 -m marceloclaro.cli code-context status}. Para uma consulta autorizada ao backend Python, use \pth{code-context python_graph}, ferramenta \pth{get_call_tree} e argumento \pth{symbol_name} com o valor \pth{research/scientific_release.py::verify_scientific_package}. Conserve o retorno e leia a função na fonte.}
+{Confira o backend, o estado, arquivo, linha e hash das relações retornadas. Acrescente à nota uma frase que identifique o método e separe o mapa do registro de execução do experimento.}
+{Se ocorrer timeout, fonte alterada, erro de parse ou símbolo não resolvido, conserve esse estado. Leia a fonte diretamente e registre o caminho alternativo; não declare que o grafo concluiu.}
+{Que relação o mapa mostrou? Qual chamada dinâmica ou condição de ambiente ainda exigiria observação durante a execução?}
+
 \section{Servidores MCP nativos}
 
 \elemento{O Core como fornecedor de MCP}{\metainfo{Rota}{.opencode/mcp/}}
@@ -138,7 +235,7 @@ Habilitação na configuração não comprova processo iniciado, autenticação,
 O próprio Core mantém servidores MCP implementados no repositório:\par
 \smallskip
 {\footnotesize
-\begin{tabularx}{\textwidth}{lY}
+\begin{tabularx}{\linewidth}{>{\hsize=.70\hsize\linewidth=\hsize}Y>{\hsize=1.30\hsize\linewidth=\hsize}Y}
 \toprule
 Servidor & Papel \\
 \midrule
@@ -153,7 +250,7 @@ estáticos no GitHub Pages \\
 \begin{arquitetura}
 Esses servidores são os braços protocolados das capacidades nativas: o primeiro
 fala com o runtime local de modelos; o segundo, com o fluxo de publicação
-(checagem de build, 404 e peso do site — ver Parte VIII).
+(checagem de build, 404 e peso do site — ver o capítulo de infraestrutura).
 \end{arquitetura}
 
 \clearpage
@@ -165,7 +262,7 @@ fala com o runtime local de modelos; o segundo, com o fluxo de publicação
 Executores externos integrados por skill/composição:\par
 \smallskip
 {\footnotesize
-\begin{tabularx}{\textwidth}{lYY}
+\begin{tabularx}{\linewidth}{Y Y Y}
 \toprule
 Executor & Identidade & Autenticação \\
 \midrule
@@ -182,33 +279,89 @@ MiroFish & proxy HTTP para backend AGPL & serviço local \\
 
 \begin{aviso}
 Executores externos nunca se tornam ``verificados'' por existir integração: a
-política anti-overclaim (Parte III) vale por igual — o orquestrador continua dono
+política anti-overclaim (capítulo de qualidade) vale por igual — o orquestrador continua dono
 do ciclo SDD/TDD e prova local não é chancela externa.
 \end{aviso}
 
 \begin{limite}
 Integrações como a ponte do NotebookLM usam interfaces privadas não documentadas e
-Podem quais: a integração deve ser tratada como \emph{frágil} — e o fail-closed
-continua valendo.
+podem deixar de funcionar: a integração deve ser tratada como \emph{frágil};
+erros de sessão ou mudança de interface precisam permanecer visíveis.
 \end{limite}
 
 \clearpage
+\section{Wolfram: uma resposta hospedada e um kernel são rotas distintas}
+
+\begin{descricao}
+A nota pode precisar conferir uma expressão antes de descrever o experimento.
+O Core já possui motores locais SymPy e Z3 para operações delimitadas. Wolfram
+entra por outro percurso: \pth{scientific_plugin_action} solicita ao serviço
+de plugins uma operação permitida e recebe um ticket. O host autenticado
+executa a ferramenta correspondente e devolve uma resposta vinculada ao pedido.
+O identificador de ferramenta não é um comando para executar no terminal.
+\end{descricao}
+
+\begin{metodo}
+O contrato admite \pth{context}, \pth{evaluate} e \pth{query}. Na avaliação,
+\pth{code} contém a expressão e \pth{timeConstraint} é um inteiro de 1 a
+60 segundos. \pth{ScientificPluginService.request} grava o pedido com
+identificador e hash e retorna \pth{awaiting_host}. Esse estado diz que o
+cálculo ainda depende do host. A aceitação da resposta compara ticket,
+ferramenta e hash; conserva o payload e rejeita a repetição de um recibo.
+Erros e estados como falta de autenticação ou de direito de acesso permanecem
+falhas mesmo quando o transporte respondeu normalmente.
+\end{metodo}
+\fontecore{integrations/scientific_plugins.py}{ScientificPluginService.request}
+\fontecore{integrations/scientific_plugins.py}{ScientificPluginService.accept_host_response}
+
+\begin{resultado}
+O recibo \pth{docs/verification-wolfram-host-r895.json} registra a avaliação
+de uma lista com soma, integral e fatoração: \cod{2+3} resultou em 5;
+\cod{Integrate[Sin[x], x]} em \cod{-Cos[x]}; e \cod{Factor[x^2 - 1]}
+em \cod{(-1 + x)*(1 + x)}. O alcance é uma amostra hospedada concluída,
+com \pth{host_reported_execution=true},
+\pth{local_connector_execution=false} e \pth{external_validation=false}.
+Uma resposta simbólica ainda exige conferir domínio, premissas e adequação ao
+problema da nota. Ela não substitui o experimento nem o aceite científico.
+\end{resultado}
+
+\begin{limite}
+A importação das instruções Wolfram não instala um Engine. Na descoberta
+registrada, executáveis de kernel não foram encontrados no PATH WSL e
+\pth{wolframclient} não constava dos metadados desse ambiente Python; isso não
+exclui instalações em outros diretórios ou no Windows. O parecer
+\pth{docs/AVALIACAO_WOLFRAM_CORE_R895.md} propõe AgentTools e
+WolframClientForPython como opções futuras. Um adaptador local exigirá versão,
+licença, runtime e testes próprios. Wolfram Cloud e Wolfram|Alpha continuam
+serviços remotos; processo local e operação offline também exigem evidências
+diferentes. As versões e os requisitos do parecer pertencem à consulta datada
+ali, e precisam de nova conferência antes de uma instalação.
+\end{limite}
+
+\begin{descricao}
+Com isso, a nota passa a ter duas trilhas legíveis: o método local usado no
+experimento e, quando realizada, uma consulta hospedada usada como apoio.
+Registrar as trilhas separadamente permite repetir o experimento sem presumir
+que a conta externa estará disponível. O próximo capítulo mostrará como
+perfis e instruções podem organizar esse trabalho sem multiplicar coordenadores.
+\end{descricao}
+
 \section{Repositórios e inspirações da construção}
 
-\elemento{Atribuições verificadas na base do Core}{\metainfo{Fonte}{specs/} \hfill \metainfo{Regra}{inspiração sem cópia}}
+\elemento{Referências atribuídas na base do Core}{\metainfo{Fonte}{specs/} \hfill \metainfo{Regra}{origem e escopo explícitos}}
 
 \begin{descricao}
 Este manual registra, em formato ABNT-NBR 6023, os repositórios que a base do Core
 atribui como \emph{referência, inspiração ou integração}. A nota de governança é
-constante: com exceção dos integrados por composição declarada (ex.: Haystack),
-não há cópia de código — apenas padrões, contratos de dados e contratos de serviço
-adaptados ao ecossistema.
+constante: a atribuição de uma referência precisa identificar o que foi
+aproveitado, suas diferenças e a licença aplicável. Um nome na lista não
+demonstra incorporação de código, ausência de cópia ou execução integrada.
 \end{descricao}
 
 \begin{resultado}
 \smallskip
 {\footnotesize
-\begin{tabularx}{\textwidth}{lY}
+\begin{tabularx}{\linewidth}{>{\hsize=.70\hsize\linewidth=\hsize}Y>{\hsize=1.30\hsize\linewidth=\hsize}Y}
 \toprule
 Repositório & Papel na construção \\
 \midrule
@@ -238,7 +391,7 @@ github.com/lucas-cirilo/abnt2025-latex & template ABNT LaTeX (SPEC-916) \\
 \matrix[matrix of nodes,name=rfo,row sep=5mm,column sep=4mm,nodes={fn},ampersand replacement=\&]{
  |[fns]|repositório externo (fonte) \\[2mm]
  |[fns]|kit insumo: padrão/contrato/dado \\[2mm]
- |[fns]|adaptação ao Core (sem cópia) \\[2mm]
+ |[fns]|adaptação com origem e escopo \\[2mm]
  |[fns]|spec + testes SDD/TDD \\[2mm]
  |[fns]|integração ativa ou inspiração \\
 };
@@ -249,7 +402,7 @@ github.com/lucas-cirilo/abnt2025-latex & template ABNT LaTeX (SPEC-916) \\
 \end{flowch}
 
 \begin{descricao}
-\textbf{Como funciona e por quê.} As setas distinguem fonte de inspiração, análise, adaptação, especificação, testes e registro. A adaptação é uma decisão local cuja origem e diferenças devem ser documentadas; testes verificam o comportamento exigido pela spec.
+\textbf{Como funciona e por quê. Mecanismo.} As setas distinguem fonte de inspiração, análise, adaptação, especificação, testes e registro. A adaptação é uma decisão local cuja origem e diferenças devem ser documentadas; testes verificam o comportamento exigido pela spec.
 \textbf{Justificativa.} Registrar proveniência e diferenças permite conferir o que foi incorporado e o que permaneceu somente como proposta.
 \textbf{Limite.} Semelhança com um projeto externo não comprova equivalência, licença adequada, eficácia ou execução integrada. O registro documenta a mudança, não substitui essas verificações.
 \end{descricao}
@@ -273,31 +426,32 @@ licença antes de entrar no repositório.
 Resumo dos limites declarados:
 \begin{itemize}[leftmargin=1.3em,itemsep=1pt]
   \item MCP expõe ferramenta; não cria mérito científico;
-  \item executor externo é evidente da geração, não chancela de qualidade;
+  \item resposta de executor externo documenta uma operação e seu alcance;
   \item ponte com interfaces privadas pode quebrar sem aviso;
   \item simulação externa (MiroFish OASIS) depende de chaves e ambiente
         (LLM/Zep; camel-oasis exige Python $<$ 3.12) — limite transparente;
-  \item sem serviço disponível, tudo falha com clareza (fail-closed).
+  \item dependência ausente exige falha explícita ou alternativa identificada.
 \end{itemize}
 \end{limite}
 
 \section{Conclusão do módulo}
 
 \begin{resultado}
-A integração é a camada rápida do Core: alarga o alcance (ferramentas, modelos,
-serviços e referências) sem largar o rigor. Como o restante do manual repete, a
-pergunta-guia nunca é ``podemos chamar?'' e sim ``o que a chamada prova, e quem
-valida o que ela prova?''.
+A integração acrescenta ferramentas, modelos, serviços e fontes ao percurso.
+O registro da nota deve permitir reconstruir qual chamada ocorreu, onde foi
+processada e como sua resposta foi avaliada. Os exemplos seguintes mostram
+interfaces já presentes e limites que precisam acompanhar seus recibos.
 \end{resultado}
 
 
 \section{Resumo e exercícios}
 
 \begin{resultado}
-\textbf{O que você deve ter aprendido:} (1) 7 servidores MCP e 15 skills
-orquestráveis; (2) executores externos (Gemini, Goose, Plandex, Reasonix,
-Haystack, NotebookLM) têm política própria de invocação e credencial;
-(3) execução com chave exige instrução explícita do operador.
+\textbf{O que você deve ter aprendido:} a configuração declara
+\CoreMCPCount{} servidores MCP e \CoreCommandCount{} comandos; cada rota
+exige conferir dependências, permissões, destino e resposta. Consulta estática,
+instrução importada e cálculo hospedado têm alcances próprios. Uma execução
+autenticada deve permanecer dentro da finalidade autorizada pelo operador.
 \textbf{Exercício sugerido:} liste as ferramentas MCP deste capítulo e, para
 cada uma, escreva uma frase do que ela expõe e uma limitação declarada.
 \end{resultado}
@@ -367,6 +521,32 @@ esse caso permaneceu falha. Hopper e IDA opcionais não foram configurados por
 essa instalação. Examine \pth{docs/REA_GHIDRA.md} e
 \pth{outputs/core-r823/summary.json} antes de transferir o resultado para outro host.
 \end{limite}
+
+\begin{descricao}
+Para usar REA na preparação da nota, primeiro escolha o alvo e a pergunta.
+Analisar estaticamente uma aplicação pode ajudar a compreender seu mecanismo;
+isso não mede, por si só, o conforto de leitura de um PDF. O assistente de REA
+passa por \pth{MarceloClaroOrchestrator.rea_assistant_action}; o suporte a cada
+tipo de alvo deve ser conferido antes de pedir a análise. Uma observação sobre
+HTML, por exemplo, precisa ser identificada como observação daquela interface,
+sem se converter em prova de qualidade de um documento TeX ou PDF.
+\end{descricao}
+\fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator.rea_assistant_action}
+
+\begin{aviso}
+O ZIP REA fornecido foi inspecionado como referência didática. O recibo
+\pth{docs/verification-rea-user-zip.json} conserva sua identidade e o alcance da
+leitura: nenhum programa do pacote foi executado. A avaliação encontrou 30
+arquivos; os 19 que sobrepõem o Core diferem das fontes deste checkout. O módulo
+\pth{scientific/pipeline.py} do ZIP fixa hipóteses, notas e pareceres; suas
+marcas \pth{verified} derivam de rótulos. Esses valores são templates, sem
+experimento executado ou revisão por pares. O notebook não possui células com
+saídas executadas. Organização visual e exemplos podem orientar a exposição,
+mas a substituição do checkout apagaria interfaces já existentes. O hash do ZIP
+identifica bytes; não autentica suas alegações. Consulte
+\pth{docs/AVALIACAO_ZIP_REA_PTBR.md} para as contraprovas e a ausência de licença
+encontrada no pacote.
+\end{aviso}
 
 \clearpage
 \section{Navegador real: observar e agir com escopo explícito}
@@ -527,7 +707,7 @@ falha documentados para cada integração.
 \begin{itemize}[leftmargin=1.3em,itemsep=1pt]
   \item \textbf{Porta} (servidor MCP): superfície nomeada; o inventário corrente declara $n = \CoreMCPCount$.
   \item \textbf{Executor externo}: programa independente; os seis nomes citados são exemplos históricos, não um inventário exaustivo do ambiente corrente.
-  \item \textbf{Disponibilidade} ($s$): executores presentes $/$ executores declarados, numa máquina e num instante especificados.
+  \item \textbf{Presença e disponibilidade} ($s$): executores presentes $/$ executores declarados, numa máquina e num instante especificados.
   \item \textbf{Degradação controlada}: comportamento de uma integração quando a dependência falta; precisa ser conferido em cada caminho.
   \item \textbf{Skill orquestrável}: procedimento que encapsula a chamada e sua política de credencial.
 \end{itemize}
@@ -539,7 +719,7 @@ falha documentados para cada integração.
   \item Algumas integrações são opcionais para certas tarefas; outras podem ser necessárias ao caminho escolhido.
   \item Se uma dependência necessária estiver ausente, a tarefa pode falhar mesmo que o restante do Core continue ativo.
   \item Confira presença, versão e comportamento de erro antes da chamada; declare o limite e prossiga apenas quando houver uma alternativa válida.
-  \item A credencial é a fronteira seguinte: execução autenticada só ocorre com instrução explícita do operador.
+  \item A credencial é a fronteira seguinte: a autenticação não amplia a finalidade autorizada pelo operador.
 \end{enumerate}
 \end{metodo}
 
@@ -577,27 +757,149 @@ percentual? (2) Por que ``executar sem credencial com fallback silencioso'' seri
 violação do gate?
 \end{resultado}
 
+\clearpage
+
+\section{Mapa mental: escolher uma integração pela fronteira dos dados}
+\begin{flowch}[Mapa de integrações e fronteiras]{O centro coordena; os ramos se distinguem pelo local de execução e pela evidência necessária.}
+\node[fne,text width=3cm] (centro) {Primário e contrato\\da operação};
+\node[fn,text width=3.4cm,above left=9mm and 8mm of centro] (local) {Serviço local\\dados e processo locais};
+\node[fn,text width=3.4cm,above right=9mm and 8mm of centro] (mcp) {MCP configurado\\transporte e permissões};
+\node[fn,text width=3.4cm,below left=9mm and 8mm of centro] (rea) {REA isolado\\alvo, camada e recibo};
+\node[fn,text width=3.4cm,below right=9mm and 8mm of centro] (host) {Provedor hospedado\\pedido e resposta externos};
+\draw[seta] (centro)--(local);\draw[seta] (centro)--(mcp);\draw[seta] (centro)--(rea);\draw[seta] (centro)--(host);
+\end{flowch}
+\begin{descricao}
+\textbf{Como funciona e por quê.} As setas indicam os encaminhamentos descritos, sob suas condições. \textbf{Justificativa.} Escolha primeiro a fronteira permitida para os dados; depois confira transporte, autenticação e operação. Um processo MCP pode ser local e ainda assim chamar um serviço remoto. O mapa evita deduzir privacidade a partir do nome da ferramenta.
+\textbf{Limite.} Nem todo adaptador utiliza o mesmo serviço ou aceita os mesmos alvos. O ramo hospedado só pode ser chamado conforme a política da tarefa. O REA tem camadas e limites próprios; seu recibo não demonstra execução das outras integrações.
+\end{descricao}
+\fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator.scientific_plugin_action}
+
+
+\section[Apêndice Didático: Disponibilidade de executores externos]{Apêndice Didático: Disponibilidade de executores externos ($s$)}
+
+\elemento{Disponibilidade de executores externos}{\metainfo{ID}{DID-DISP} \hfill \metainfo{Fonte}{docs/guias-didaticos/formulas-livro-core-nussenzveig.md, seção 3}}
+
+\begin{descricao}
+A razão deste exemplo mede executores instalados, sob a hipótese de seis desejados e quatro presentes; não é uma medição atual de chamadas concluídas. Disponibilidade operacional exige uma sondagem de execução com escopo e período. O denominador deve ser positivo; para universo vazio, registre não aplicável.
+
+\textbf{O problema concreto.} Considere seis executores pretendidos em uma configuração hipotética. Em uma máquina do exemplo, quatro estão instalados. Qual é a fração de presença instalada?
+\end{descricao}
+
+\begin{definicao}
+\textbf{Símbolos.}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{>{\hsize=.55\hsize\linewidth=\hsize}Y>{\hsize=1.45\hsize\linewidth=\hsize}Y}
+Símbolo & Significado \\
+\midrule
+$d$ & Número de executores declarados na configuração \\
+$p$ & Número de executores com instalação identificada \\
+$s$ & Presença instalada (fração sobre o universo pretendido) \\
+\end{tabularx}
+\end{center}
+\end{definicao}
+
+\begin{metodo}
+\textbf{Dedução.}
+
+\[
+\boxed{s = \frac{p}{d}}
+\]
+
+Justificativa: proporção elementar. Contagem de itens em dois conjuntos finitos.
+
+\paragraph{Cálculo numérico.} Exemplo: $d = 6$ executores declarados, $p = 4$ instalados.
+
+\[
+s = \frac{4}{6} = \frac{2}{3} \approx 0{,}666\ldots \approx 0{,}67
+\]
+
+Faltam:
+
+\[
+d - p = 6 - 4 = 2 \text{ executores ausentes}
+\]
+\end{metodo}
+
+\begin{descricao}
+\textbf{Interpretação e limites.} $s \approx 0{,}67$ significa que cerca de dois terços do conjunto declarado estão presentes no ambiente. Isto não mede qualidade do Core, nem eficácia de integração, nem desempenho. É um inventário instantâneo de uma máquina específica.
+\end{descricao}
+
+\clearpage
+\section{Apêndice Didático: Tempo total de delegação negociada}
+
+\elemento{Tempo total de ciclo de delegação}{\metainfo{ID}{DID-TEMPO} \hfill \metainfo{Fonte}{docs/guias-didaticos/formulas-livro-core-nussenzveig.md, seção 6}}
+
+\begin{descricao}
+\textbf{O problema concreto.} Considere um protocolo hipotético de negociação com prazo para propostas. Como somar seus intervalos até o aceite? Este modelo ajuda a planejar medições, mas não descreve uma janela de coleta de lances implementada pelo Blackboard atual: a rota CFP do primário escolhe entre candidatos elegíveis pelo caminho de redução ou ranking de utilidade.
+\end{descricao}
+
+\begin{definicao}
+\textbf{Símbolos.}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{>{\hsize=.55\hsize\linewidth=\hsize}Y>{\hsize=1.45\hsize\linewidth=\hsize}Y}
+Símbolo & Significado \\
+\midrule
+$T_{\text{total}}$ & Tempo total do ciclo de delegação \\
+$T_{\text{anuncio}}$ & Tempo para publicar a tarefa no Blackboard \\
+$T_{\text{janela}}$ & Duração da janela de proposta \\
+$T_{\text{selecao}}$ & Tempo para avaliar candidatos e escolher o agente \\
+$T_{\text{execucao}}$ & Tempo de execução da tarefa pelo agente escolhido \\
+$T_{\text{validacao}}$ & Tempo de validação da entrega contra os critérios de aceitação \\
+\end{tabularx}
+\end{center}
+\end{definicao}
+
+\begin{metodo}
+\textbf{Dedução.} As etapas ocorrem em sequência (anúncio $\to$ janela $\to$ seleção $\to$ execução $\to$ validação). O tempo total de um processo sequencial é a soma dos tempos das etapas:
+
+\[
+\boxed{T_{\text{total}} = T_{\text{anuncio}} + T_{\text{janela}} + T_{\text{selecao}} + T_{\text{execucao}} + T_{\text{validacao}}}
+\]
+
+Justificativa: adição de intervalos de tempo disjuntos e sucessivos.
+
+\paragraph{Observação sobre paralelos.} No protocolo hipotético, propostas podem chegar em paralelo durante a janela, mas a janela obedece a um prazo definido ($T_{\text{janela}}$); não se somam os tempos de preparação de cada proposta.
+\end{metodo}
+
 % ATIVACAO-R613
 \section[Ativação e cálculo]{Ativação e cálculo — Integrações externas}
 \elemento{ativ-07i}{\metainfo{Ciclo}{R613} \hfill \metainfo{Módulo}{mod-07-integracoes.tex}}
 
 \begin{processo}
 GATILHO. ``executor externo'', ``MCP'', ``CLI''.
-ROTA. bridges tolerantes em \pth{integrations/*}; ausência do binário gera warn, não crash.
-FUNÇÃO. compor CLIs externas como executores orquestráveis e tolerantes; manter proveniência de dados.
+ROTA. adaptador específico em \pth{integrations/}, sob o primário; erro,
+dependência ausente ou prazo excedido conservam o estado da operação.
+FUNÇÃO. compor ferramentas externas e manter proveniência de pedidos e respostas.
 \end{processo}
 
 \begin{resultado}
-CÁLCULO. saúde da integração = executores disponíveis / executores declarados; cada bridge valida presença e versão antes do uso.
+CÁLCULO. uma fração de executores presentes descreve inventário. Para medir
+êxito operacional, defina chamadas e condições e conte as que concluíram nesse
+conjunto, conservando falhas e pendências no denominador apropriado.
 \end{resultado}
 
 \begin{descricao}
-JUSTIFICATIVA TEÓRICA. a delegação entre nós com anúncio, licitação e contrato é o mecanismo de composição que as bridges implementam para executores externos. O lastro teórico vem da citação que segue: recorte conferido em 29/09/2026, com a página de origem e tradução livre e fiel.
+JUSTIFICATIVA TEÓRICA. anúncio, seleção e contrato ajudam a pensar a delegação.
+A citação histórica seguinte oferece esse contexto; o percurso real de cada
+adaptador precisa ser conferido em seu código e recibo, pois uma chamada direta
+de ferramenta não implica negociação entre agentes.
 \end{descricao}
 
 \begin{aviso}
-LIMITE E ANTI-OVERCLAIM. resultado externo nunca é verificado sem validação do Core (R110). A verificação atesta a existência e a
-localização da fonte (R110), não o mérito da afirmação.
+LIMITE E ANTI-OVERCLAIM. conferir fonte e resposta não certifica o mérito de uma
+afirmação científica. Uma validação local precisa nomear seu critério e seu
+alcance; validação científica externa exige evidência independente.
 \end{aviso}
 
-\noindent\textit{Interpretação:} Uma bridge deve tratar a ferramenta externa como candidata a executar um contrato delimitado. A conta operacional separa etapas: $T_{total}=T_{anuncio}+T_{janela}+T_{selecao}+T_{execucao}+T_{validacao}$. Propostas podem chegar em paralelo; portanto, a duração da janela é determinada pelo prazo ou pela última proposta aceita, não pela soma dos tempos individuais. Registrar cada etapa permite localizar atrasos e deixa claro que uma execução rápida ainda depende da validação interna \citref{SMITH, R. G. The Contract Net Protocol: high-level communication and control in a distributed problem solver. \emph{IEEE Transactions on Computers}, v.~C-29, n.~12, p.~1104-1113, 1980}{10.1109/TC.1980.1675516}{p.~1104--1113 (resumo, p.~1104). é o padrão de delegação usado nas bridges: anunciar a tarefa, receber licitações e firmar contrato com o executor mais adequado — o que \pth{integrations/*} faz com gemini, goose, plandex e reasonix.}{Task distribution is affected by a negotiation process, a discussion carried on between nodes with tasks to be executed and nodes that may be able to execute those tasks}{A distribuição de tarefas é efetuada por um processo de negociação, uma discussão conduzida entre nós com tarefas a executar e nós que possam ser capazes de executar essas tarefas.}{SMITH, 1980, p.~1104}
+\noindent\textit{Interpretação:} Na delegação negociada, uma decomposição possível é
+$T_{total}=T_{anuncio}+T_{janela}+T_{selecao}+T_{execucao}+T_{validacao}$.
+Propostas podem chegar em paralelo; a janela obedece ao prazo definido, sem
+somar os tempos de cada candidato. Esse modelo histórico ajuda a distinguir
+coordenação e execução. Uma bridge que chama diretamente um programa pode
+implementar outro percurso, cuja duração precisa ser medida nas etapas reais
+\citref{SMITH, R. G. The Contract Net Protocol: high-level communication and control in a distributed problem solver. \emph{IEEE Transactions on Computers}, v.~C-29, n.~12, p.~1104-1113, 1980}{10.1109/TC.1980.1675516}{O protocolo fornece contexto histórico para anúncio, propostas e contratos de tarefa; não certifica o mecanismo nem a execução dos adaptadores atuais do Core.}{Task distribution is affected by a negotiation process, a discussion carried on between nodes with tasks to be executed and nodes that may be able to execute those tasks}{A distribuição de tarefas é efetuada por um processo de negociação, uma discussão conduzida entre nós com tarefas a executar e nós que possam ser capazes de executar essas tarefas.}{SMITH, 1980, p.~1104}
+
+% R901-PONTE-FECHO
+Conectar uma ferramenta não define quem pode usá-la nem comprova a capacidade de um perfil. O capítulo seguinte organiza agentes, instruções e políticas que permitem encaminhar essas operações com responsabilidade explícita.

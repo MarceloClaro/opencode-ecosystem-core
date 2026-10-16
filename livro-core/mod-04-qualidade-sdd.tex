@@ -4,6 +4,10 @@
 \thispagestyle{fancy}
 \chapter{Qualidade pela Raiz: SDD/TDD, Especificações e Evidência}
 
+% R901-PONTE-ABERTURA
+A memória mostra o que aconteceu; a especificação define o que deveria acontecer. Para a nota científica, essa diferença será convertida em critérios que possam recusar uma saída insuficiente.
+
+
 \roteirodidatico
 {Antes de alterar um programa, descreva como reconhecer que a mudança atende ao pedido. Essa descrição transforma uma expectativa vaga em critérios que podem ser examinados.}
 {\emph{SDD} organiza o trabalho a partir da especificação; \emph{TDD} usa testes no ciclo de desenvolvimento; \emph{critério de aceitação} define uma condição; \emph{teste} coleta evidência sobre comportamento.}
@@ -19,9 +23,10 @@ Este capítulo explica como o fluxo de trabalho do Core usa especificações e
 testes para decidir quando uma mudança pode ser considerada concluída.
 Você aprenderá: (1) o ciclo \textbf{SDD/TDD} do Core; (2) a estrutura de uma
 \pth{Specification} com critérios de aceitação e registros de execução; (3) as
-regras contra injeção no motor de especificações; (4) as contagens observadas
-neste checkout em 29/09/2026 (371 arquivos em \pth{specs/}, 285 da série R*,
-260 módulos \pth{test_r*} e 455 registros de evolução).
+regras contra injeção no motor de especificações; (4) a distinção entre
+inventário, evidência de execução e aceite. No caso condutor, o produto desta
+etapa é um conjunto de critérios para a nota científica, escrito antes de
+escolher o método de cálculo e de redigir a conclusão.
 \end{resultado}
 
 \section{O ciclo de especificação (Spec-Driven Development)}
@@ -45,7 +50,8 @@ O motor modela uma especificação como primeira classe: \pth{Specification}
 carrega \cod{spec_id}, \cod{title} e \cod{objective}, e recebe critérios de
 aceitação via \cod{add_criterion}. Cada critério é um
 \pth{AcceptanceCriterion} com \cod{criterion_id}, \cod{description} e uma
-função \cod{check()} — a prova programática de que o requisito foi atendido.
+função \cod{check()} — uma verificação programática do requisito nas condições
+definidas pelo critério.
 \end{descricao}
 
 \par\smallskip
@@ -57,13 +63,14 @@ de qualidade localizável e reutilizável por auditoria — e o manual, ao citar
 número, aponta para o ponto de prova, não para a lembrança. O
 \pth{CriterionRuntimeRecord} com \cod{__setattr__} defensivo é uma
 implementação concreta da exigência de proveniência detalhada \citref{WILKINSON, M. D. et al. The FAIR Guiding Principles for scientific data management and stewardship. \emph{Scientific Data}, v.~3, 160018, 2016}{10.1038/sdata.2016.18}{dá o lastro normativo à exigência do \pth{CriterionRuntimeRecord}: o rastro ``quando rodou / com qual saída'' é uma implementação concreta do princípio R1.2 (proveniência), e os princípios FAIR valem não só para dados, mas também para algoritmos, ferramentas e fluxos — como o fluxo de evidência do Core}{R1.2. (meta)data are associated with detailed provenance}{R1.2. (meta)dados são associados a proveniência detalhada.}{WILKINSON et al., 2016, p.~160018}.\begin{funcao}
-Duas garantias tornam a especificação \emph{executável} e blindada:
-\cod{requires_trusted_test_evidence()} decide se uma critério exige
-evidência vinda de testes confiáveis; e
-\cod{requires_criterion_runtime_records()} obriga o \emph{registro de
-execução} do critério (quando rodou, com qual saída), materializado em
-\pth{CriterionRuntimeRecord} — uma classe com \cod{__setattr__}
-defensivo que não deixa sobrescrever o rastro.
+Dois atributos explicitam o contrato de evidência:
+\cod{requires_trusted_test_evidence} indica se a especificação exige
+evidência de testes confiáveis; \cod{requires_criterion_runtime_records}
+indica se ela exige registros por critério. O \pth{CriterionRuntimeRecord}
+conserva dados da execução e tem proteção contra atribuição comum posterior.
+O verificador também confere a relação entre critério, alvo, resultado e
+contrato. Essas proteções reduzem adulterações previstas pelo modelo de
+ameaça; não constituem armazenamento inviolável nem auditoria externa.
 \end{funcao}
 
 \begin{processo}
@@ -129,20 +136,30 @@ sintaxes de shell no alvo de teste.
 \end{metodo}
 
 \begin{aviso}
-Um \pth{CriterionRuntimeRecord} com \cod{__setattr__} defensivo é prova
-\emph{de processo}, não de verdade externa. Teste verde significa “o sistema
-faz o que a spec pede”; não significa “o resultado é verdadeiro no mundo”.
+Um \pth{CriterionRuntimeRecord} defensivo conserva evidência de processo.
+Teste verde significa que as condições verificadas pelo teste foram atendidas
+naquela execução; o teste pode não representar integralmente o requisito.
+Ele não demonstra que o resultado aplicado seja verdadeiro no mundo.
 Rotular um resultado apenas por testes como “verificado” ou “Qualis A1” é
 \emph{overclaim} — o livro trata disso de novo no Módulo 6 (rigor e
 replicabilidade).
 \end{aviso}
 
+\praticacore
+{Escrever um critério da nota científica e conferir uma proteção antes de aceitar o cálculo.}
+{O caso condutor requer um pacote com flags de execução booleanas, artefatos preservados e revisão humana pendente. Use o contrato R891 e \pth{tests/test_r891_scientific_release.py}, no ambiente de testes do projeto.}
+{Relacione o critério ``flags textuais não podem simular aceite'' ao teste \cod{test_manifest_execution_flags_are_strict}. Leia suas entradas e resultados esperados; execute \pth{.venv/bin/python -m pytest tests/test_r891_scientific_release.py::test_manifest_execution_flags_are_strict -q} e conserve a saída com a versão do código.}
+{Confira quais casos foram coletados, o resultado de cada um e a saída final do processo. O teste deve observar a recusa prevista, sem confundir essa recusa esperada com falha da suíte. Esta prática verifica uma proteção do pacote; não executa uma nova pesquisa.}
+{Se o teste não for coletado, houver erro de dependência ou resultado divergente, registre a ocorrência e confira o seletor, o ambiente e o contrato. Não substitua o resultado por um recibo antigo nem altere o critério para produzir verde.}
+{Que conclusão o teste permite sobre flags e que conclusão ele não permite sobre a qualidade dos dados? Leve essa distinção ao capítulo de ciência, onde o pacote completo será examinado.}
+
 \section{Dimensão quantificada do patrimônio de especificação}
 
 \begin{resultado}
-Contagens verificadas em 29/09/2026 no checkout usado para esta edição:\par\smallskip
+\textbf{Retrato histórico de 29/09/2026}, preservado para estudar a evolução
+do inventário. Estes totais não representam a configuração atual:\par\smallskip
 {\footnotesize
-\begin{tabularx}{\textwidth}{lY}
+\begin{tabularx}{\linewidth}{>{\hsize=.70\hsize\linewidth=\hsize}Y>{\hsize=1.30\hsize\linewidth=\hsize}Y}
 \toprule
 Patrimônio & Quantidade verificada \\
 \midrule
@@ -165,8 +182,9 @@ Agentes derivados do catálogo & \textbf{216} em \pth{opencode.json} \\
 \begin{limite}
 O motor \emph{valida a forma} (frontmatter bem formado, seletor seguro,
 registro defensável), \emph{não o mérito científico} do resultado. Qualidade de
-fundo (população, método, inferência) fica com os scanners e com a avaliação
-metacognitiva — consulte Módulos 5 e 6.
+fundo (população, método e inferência) exige revisão científica apropriada.
+Scanners e avaliação metacognitiva fornecem sinais internos delimitados;
+consulte os capítulos de raciocínio e ciência.
 \end{limite}
 
 \begin{niveis}
@@ -174,10 +192,10 @@ metacognitiva — consulte Módulos 5 e 6.
 o bolo saiu do jeito pedido.\par\smallskip
 \textbf{Implementação:} \pth{Specification} + \pth{AcceptanceCriterion.check()} +
 \pth{CriterionRuntimeRecord}; pytest tem alvo canônico e saneado.\par\smallskip
-\textbf{Formalização:} SPEC $\to$ critérios executáveis $\to$ rastro inviolável é um
-\emph{traceability map} formal: cada claim do repositório tem um ponto de
-prova e um registro de execução — base para auditoria de demonstração e
-para replicação federada.
+\textbf{Formalização:} SPEC $\to$ critérios executáveis $\to$ registros de
+execução forma um mapa de rastreabilidade. A ligação precisa ser conferida
+para cada alegação: existência de spec não demonstra execução, e existência
+de registro não demonstra cobertura de todos os comportamentos.
 \end{niveis}
 
 \section{Resumo e exercícios}
@@ -221,12 +239,12 @@ teste precisa ser conferido para sabermos o que sua aprovação permite concluir
 \begin{definicao}
 \textbf{Grandezas e definições.}
 \begin{itemize}[leftmargin=1.3em,itemsep=1pt]
-  \item \textbf{Specificação} ($S$): promessa formal com critérios de aceitação. Total $S = 371$.
-  \item \textbf{Série de evolução}: $285$ arquivos da família \cod{SPEC-935-R}.
-  \item \textbf{Suíte de teste} ($T$): conjunto executável de verificações. Total $T = 260$.
-  \item \textbf{Ciclo} ($C$): registro de mudança; $C = 455$.
-  \item \textbf{Cobertura SDD} ($k$): fração de specs ligadas a teste, $k = $ (specs com teste) $/$ (specs totais).
-  \item \textbf{Gate fail-closed}: verde $+$ spec conferida $\Rightarrow$ encerra; caso contrário, devolve.
+  \item \textbf{Especificação} ($S$): documento de intenção e critérios; $S$ conta documentos no escopo escolhido.
+  \item \textbf{Teste}: caso executável, distinto do arquivo que pode conter muitos casos.
+  \item \textbf{Suíte}: seleção explícita de casos, com resultados e versão registrados.
+  \item \textbf{Ciclo}: registro de mudança; sua presença não demonstra aceite.
+  \item \textbf{Cobertura de vínculo} ($k$): specs com teste associado divididas pelas specs avaliadas; não mede cobertura de comportamento.
+  \item \textbf{Gate fail-closed}: o contrato aplicável define evidências exigidas; um elo obrigatório ausente impede o aceite desse percurso.
 \end{itemize}
 \end{definicao}
 
@@ -234,16 +252,17 @@ teste precisa ser conferido para sabermos o que sua aprovação permite concluir
 \textbf{Dedução passo a passo.} Por que registrar o critério antes de implementar
 a solução?
 \begin{enumerate}[leftmargin=1.4em,itemsep=2pt]
-  \item A spec fixa o critério de aceite \emph{antes} da solução --- impede ``mover a meta'' para caber no código pronto.
+  \item A spec registra o critério de aceite \emph{antes} da solução e torna detectável uma mudança posterior de objetivo.
   \item O teste verifica um ou mais aspectos desse critério. Sem teste, falta essa evidência executável; ainda assim, um teste não cobre automaticamente todos os comportamentos possíveis.
   \item O par spec+teste forma a tríade rastreável: intenção $\to$ comportamento $\to$ código.
-  \item O gate é fail-closed: na ausência de qualquer elo, a tarefa \emph{não} fecha.
+  \item No gate de entrega, confira o histórico RED, o GREEN e o contrato de evidência. Uma inspeção de critérios isolada tem escopo menor e não equivale ao ciclo de entrega.
 \end{enumerate}
 \end{metodo}
 
 \begin{resultado}
-\textbf{Exemplo resolvido.} Há $T=260$ arquivos \pth{tests/test_r*.py} e
-$S=371$ arquivos Markdown em \pth{specs/}. A razão de contagens é
+\textbf{Exemplo resolvido com fotografia histórica.} Em 29/09/2026 foram
+contados $T=260$ arquivos \pth{tests/test_r*.py} e $S=371$ arquivos Markdown
+em \pth{specs/}. A razão de contagens daquela fotografia é
 \[ q = \frac{T}{S} = \frac{260}{371} \approx 0{,}701 \quad (\approx 70\%). \]
 Esse quociente não é cobertura: um arquivo de teste pode verificar vários
 critérios, vários arquivos podem verificar o mesmo critério, e pode não haver
@@ -254,13 +273,14 @@ total por $S$. Separadamente, $285/371 \approx 0{,}768$, portanto cerca de
 \end{resultado}
 
 \begin{resultado}
-\textbf{Ordem de grandeza e verificação.} No mesmo checkout há 285 specs da
-série R e 260 arquivos \pth{tests/test_r*.py}; a razão simples é
+\textbf{Ordem de grandeza e verificação.} Na fotografia de 29/09/2026 havia
+285 specs da série R e 260 arquivos \pth{tests/test_r*.py}; a razão simples é
 $260/285 \approx 0{,}91$ arquivo de teste por spec. Ela não prova uma relação
 um a um: para isso, é necessário conferir os seletores e os critérios de cada
-spec. As contagens podem ser reproduzidas com \texttt{find\ specs\ -maxdepth\ 1\ -name\ 'SPEC-935-R*.md'} e \texttt{find\ tests\ -maxdepth\ 1\ -name\ 'test\_r*.py'}. O total de
-371 specs supera 216 agentes porque o diretório registra requisitos de várias
-partes do software e do processo, não apenas fichas de agentes.
+spec. Reexecute o inventário da edição para obter as contagens atuais e
+compare conjuntos de arquivos com o mesmo escopo. A configuração declara
+\CoreAgentCount{} perfis; esse denominador não deve ser usado para estimar
+cobertura de testes de requisitos que atravessam várias partes do software.
 \end{resultado}
 
 \begin{aviso}
@@ -272,9 +292,92 @@ execução pertence ao mesmo estado do código.
 \end{aviso}
 
 \begin{resultado}
-\textbf{Exercícios.} (1) Se 40 novas specs surgirem sem teste, qual será a nova $k$
-(limite superior)? (2) Explique por que Brooks (Módulo 11) diria que nenhuma spec é
-``bala de prata''.
+\textbf{Exercícios.} (1) Suponha 100 specs avaliadas, das quais 80 têm teste
+associado. Se outras 40 surgirem sem teste, calcule $k'=80/140$ e explique
+por que esse vínculo ainda não mede profundidade. (2) No critério da nota
+científica, identifique um caso que falta testar. (3) Explique por que a
+disciplina de especificação não resolve sozinha um requisito inadequado.
+\end{resultado}
+
+\clearpage
+\section{Apêndice Didático: Cobertura de specs e razão de contagens}
+
+\elemento{Razão de contagens specs/teste}{\metainfo{ID}{DID-QUOC} \hfill \metainfo{Fonte}{\pth{specs/} e \pth{tests/}, contagens com escopo declarado}}
+
+\begin{descricao}
+\textbf{O problema concreto.} Em 29/09/2026, o repositório tinha $T=260$ arquivos de teste (\pth{tests/test_r*.py}) e $S=371$ arquivos de especificação Markdown (\pth{specs/}). Qual é a razão entre essas duas contagens, e o que ela mede (e o que não mede)?
+\end{descricao}
+
+\begin{definicao}
+Nas proporções deste aprofundamento, o total do universo deve ser positivo. Se não houver itens no escopo, registre a medida como não aplicável; não calcule $0/0$.
+
+\textbf{Símbolos.}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{>{\hsize=.6\hsize\linewidth=\hsize}Y>{\hsize=1.2\hsize\linewidth=\hsize}Y>{\hsize=1.2\hsize\linewidth=\hsize}Y}
+Símbolo & Significado & Valor no exemplo \\
+\midrule
+$T$ & Número de arquivos de teste & $T = 260$ \\
+$S$ & Número de arquivos de especificação & $S = 371$ \\
+$q$ & Razão $T/S$ & $q \approx 0{,}701$ \\
+\end{tabularx}
+\end{center}
+\end{definicao}
+
+\begin{metodo}
+\textbf{Dedução de $q = T/S$.}
+
+\paragraph{Passo 1 — O que queremos comparar.}
+Queremos saber quantos arquivos de teste existem por arquivo de especificação. Isso é uma simples divisão de contagens: número de testes dividido por número de specs.
+
+\paragraph{Passo 2 — Divisão de contagens.}
+
+\[
+\boxed{q = \frac{T}{S} = \frac{260}{371} \approx 0{,}701 \approx 70{,}1\%}
+\]
+
+\paragraph{Passo 3 — Outras razões úteis.}
+Também podemos calcular a razão de specs da série R em relação ao total de specs:
+
+\[
+\frac{285}{371} \approx 0{,}768 \approx 76{,}8\%
+\]
+
+E a razão de arquivos de teste por spec da série R:
+
+\[
+\frac{260}{285} \approx 0{,}91
+\]
+
+\end{metodo}
+
+\begin{descricao}
+\textbf{Interpretação.} A razão $0{,}701$ significa que, naquela fotografia de 29/09/2026, havia cerca de 0,70 arquivo de teste por arquivo de especificação. Ou: cerca de 70\% de um teste por spec.
+
+\textbf{O que isso NÃO significa:}
+\begin{itemize}[leftmargin=1.3em,itemsep=1pt]
+  \item Não é cobertura de critérios: um arquivo de teste pode verificar vários critérios, e vários arquivos podem verificar o mesmo critério.
+  \item Não mede profundidade: um teste pode passar sem verificar o comportamento relevante.
+  \item Não prova relação um a um entre specs e testes: seria necessário conferir os seletores e critérios de cada spec.
+\end{itemize}
+\end{descricao}
+
+\begin{aviso}
+\textbf{Limites de validade.}
+\begin{enumerate}[leftmargin=1.3em,itemsep=1pt]
+  \item A razão compara quantidades de arquivos, não cobertura nem profundidade de teste.
+  \item Para medir cobertura real, seria preciso identificar quantas specs têm ao menos um teste correspondente e dividir pelo total de specs.
+  \item As contagens pertencem a uma fotografia datada (29/09/2026); reexecutar o inventário da edição pode gerar números diferentes.
+\end{enumerate}
+\end{aviso}
+
+\begin{resultado}
+\textbf{Exercícios de fixação.}
+\begin{enumerate}[leftmargin=1.3em,itemsep=2pt]
+  \item Suponha 100 specs avaliadas, das quais 80 têm teste associado. Se outras 40 surgirem sem teste, calcule $k'=80/140$ e explique por que esse vínculo ainda não mede profundidade.
+  \item No critério da nota científica, identifique um caso que falta testar.
+  \item Explique por que a disciplina de especificação não resolve sozinha um requisito inadequado.
+\end{enumerate}
 \end{resultado}
 
 % ATIVACAO-R613
@@ -288,7 +391,10 @@ FUNÇÃO. exigir especificação formal e testes antes da entrega; transformar a
 \end{processo}
 
 \begin{resultado}
-CÁLCULO. cobertura SDD = specs com teste / specs totais; ciclo RED--GREEN--REFACTOR = $1$ se testes verdes, senão $0$.
+CÁLCULO. cobertura de vínculo = specs com teste associado / specs avaliadas,
+para denominador positivo. RED--GREEN--REFACTOR é uma sequência de trabalho:
+falha comportamental pertinente, implementação que a resolve e revisão do
+código. Um resultado verde isolado não comprova as fases anteriores.
 \end{resultado}
 
 \begin{descricao}
@@ -301,3 +407,6 @@ localização da fonte (R110), não o mérito da afirmação.
 \end{aviso}
 
 \noindent\textit{Interpretação:} A distinção entre complexidade essencial e acidental impede atribuir à ferramenta um ganho que depende da compreensão do problema. Como modelo de raciocínio, escrevemos $C_{total}=C_{essencial}+C_{acidental}$: automação, padrões e testes podem reduzir retrabalho e inconsistências da parcela acidental, mas não eliminam requisitos ambíguos nem decisões de domínio. O ciclo especificação--teste melhora a disciplina de mudança; não promete remover o trabalho conceitual que a solução exige \citref{BROOKS, F. P. No silver bullet: essence and accidents of software engineering. \emph{Computer}, v.~20, n.~4, p.~10-19, 1987}{10.1109/MC.1987.1663532}{p.~10--19 (trecho inicial, p.~11). é o aviso contra otimismo de ferramenta única: o protocolo SDD/TDD do Core traduz a disciplina de passo a passo que Brooks recomenda — nenhum agente entrega ordem de magnitude por si só.}{There is no single development, in either technology or management technique, which by itself promises even one order-of-magnitude improvement within a decade in productivity, in reliability, in simplicity}{Não há um único desenvolvimento, seja em tecnologia ou técnica de gestão, que por si só prometa uma melhoria de uma ordem de magnitude em produtividade, confiabilidade e simplicidade dentro de uma década.}{BROOKS, 1987, p.~11}
+
+% R901-PONTE-FECHO
+O gate organiza a aceitação da entrega, mas precisa saber que operação está julgando. Ao entrar no raciocínio, passamos dos critérios gerais às premissas, aos métodos e aos limites de cada cálculo.

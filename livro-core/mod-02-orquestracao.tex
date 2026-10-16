@@ -5,6 +5,10 @@
 % ============================================================
 \chapter{Orquestração e suas Camadas}
 
+% R901-PONTE-ABERTURA
+O mapa anterior localizou os componentes, mas não explicou a escolha entre eles. Este capítulo acompanha a passagem do pedido de Ana para uma tarefa atribuída, incluindo os casos em que ainda não existe executor.
+
+
 \roteirodidatico
 {Se uma solicitação exige pesquisa, análise e revisão, alguém precisa dividir o trabalho e recompor os resultados. Essa coordenação é a função da orquestração.}
 {\emph{Roteamento} escolhe um caminho; \emph{capacidade} descreve tarefas que um agente pode tentar; \emph{pontuação} ordena candidatos; \emph{fallback} é a alternativa quando a rota preferida não serve.}
@@ -14,6 +18,35 @@
 
 \casoguiado{escolha entre dois perfis}
 {Considere dois perfis fictícios: um é descrito para localizar fontes e outro para resumir textos fornecidos. Um pedido que exige busca pode favorecer o primeiro; um pedido que já fornece os documentos pode favorecer o segundo. Essa decisão ilustra correspondência entre tarefa e descrição, não mede desempenho. Para avaliar a regra, registre entradas, candidatos, pontuações, decisão e resultado em vários casos rotulados previamente.}
+
+\begin{flowch}[Mapa mental da coordenação]{quatro perguntas em torno da tarefa; relações conceituais, sem cronologia automática}
+\node[fne,text width=2.8cm] (coordTarefa) at (0,0) {Nota científica\\Objetivo e contrato};
+\node[fns,text width=2.8cm] (coordPedido) at (0,2.0) {O que fazer?\\Pedido, dados e limites};
+\node[fn,text width=2.8cm] (coordAtribui) at (-4.3,0) {Quem deve fazer?\\Perfil e atribuição};
+\node[fn,text width=2.8cm] (coordExecuta) at (4.3,0) {Quem fez?\\Executor e evidência};
+\node[fn,text width=2.8cm] (coordAceita) at (-2.4,-2.0) {Pode ser aceito?\\Spec, testes e decisão};
+\node[fn,text width=2.8cm] (coordMemoria) at (2.4,-2.0) {O que conservar?\\Resultado, origem e lição};
+\draw[draw=steel,thick] (coordTarefa)--(coordPedido);
+\draw[draw=steel,thick] (coordTarefa)--(coordAtribui);
+\draw[draw=steel,thick] (coordTarefa)--(coordExecuta);
+\draw[draw=gold,thick] (coordTarefa)--(coordAceita);
+\draw[draw=steel,thick] (coordTarefa)--(coordMemoria);
+\end{flowch}
+\begin{descricao}
+\textbf{Como funciona e por quê.} Leia do centro para os ramos: cada linha liga
+uma pergunta à tarefa de Ana, sem representar uma chamada de programa. O ramo
+esquerdo identifica a responsabilidade atribuída; o direito exige saber qual
+executor produziu o resultado; o inferior esquerdo pergunta se a entrega
+satisfez o contrato; o inferior direito conserva o que poderá orientar outra
+tarefa. Uma resposta a uma dessas perguntas não responde às demais.
+\textbf{Justificativa.} Separar responsabilidade, execução, aceite e memória
+permite localizar a evidência que falta antes de tratar uma tarefa como concluída.
+\textbf{Limite.} Este mapa mental organiza a leitura. As operações concretas
+têm rotas e controles próprios, detalhados nas seções seguintes; a atribuição
+de um perfil ainda pode terminar em executor pendente.
+\end{descricao}
+\fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator.delegate}
+\fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator.report_completion}
 
 \section{Visão em camadas: como tudo interage}
 
@@ -26,17 +59,22 @@ que obrigue todo módulo a conversar apenas com o vizinho imediato. No código,
 algumas dependências atravessam camadas por interfaces, eventos ou memória
 compartilhada. Ao seguir um fluxo, confira cada caminho indicado na tabela e no
 repositório: o diagrama resume relações principais, não todas as chamadas possíveis.
+As oito camadas são uma organização editorial. O inventário estrutural em
+\pth{docs/architecture-r900/} classifica o snapshot \cod{f930e19} em 18 camadas,
+segundo critérios de extração próprios. Uma aresta desse inventário é uma
+importação declarada; as setas operacionais deste capítulo exigem chamadas ou
+eventos identificáveis. Os dois mapas respondem a perguntas diferentes.
 \end{descricao}
 
 \begin{resultado}
 \smallskip
 {\footnotesize
-\begin{tabularx}{\textwidth}{lcY}
+\begin{tabularx}{\linewidth}{l>{\hsize=.65\hsize\linewidth=\hsize}Y>{\hsize=1.35\hsize\linewidth=\hsize}Y}
 \toprule
 Camada & Nome & O que habita \\
 \midrule
 7 & Aplicações & skills, MASWOS, nano-orquestração, MiroFish, pesquisa, livros \\
-6 & Integrações & servidores MCP (7), executores externos (Gemini, Reasonix, Plandex, Goose, Haystack), Reversa \\
+6 & Integrações & \CoreMCPCount{} entradas MCP configuradas, contexto de código, plugins e executores externos \\
 5 & Evolução e Registro & \pth{evolution/cycles.py} (registro de ciclos e sua cadeia de estado), specs série R*, CORRIGENDUM \\
 4 & Qualidade e Rigor & SDD/TDD (\pth{trust/}), scanners, benchmarks \\
 3 & Roteamento e Orquestração & \pth{marceloclaro/} (orquestrador, attention router), circuitos de atenção (layer 3 do mapa) \\
@@ -132,9 +170,11 @@ aplicações e infraestrutura.
 \elemento{Etapa 1 — PERCEBE (percepção)}{\metainfo{ID}{O-1} \hfill \metainfo{Rota}{\pth{perceive(topic, limit)}}}
 
 \begin{descricao}
-O orquestrador \textbf{não parte do zero}: ele se inscreve em tópicos de entrada
-(\pth{mci_post_task} — chamadas por proposta de tarefa) e lê a memória global para
-entender o estado atual do ecossistema antes de decidir o que fazer.
+Para a nota científica do caso condutor, primeiro precisamos saber quais
+observações já existem e quais ainda precisam ser produzidas. A consulta
+\cod{perceive} devolve contexto recente, lições de um tópico e uma cópia do
+ledger. O primário também se inscreve em eventos como \cod{task.cfp};
+\cod{mci_post_task} é o nome de uma ferramenta MCP, e não desse tópico.
 \end{descricao}
 
 \begin{processo}
@@ -149,10 +189,11 @@ Detalhe do subfluxo (não é um passo único):
 
 \begin{arquitetura}
 \begin{itemize}[leftmargin=1.3em,itemsep=1pt]
-  \item Assinatura típica: \cod{delegate(description, required_capabilities)} — L211 do
+  \item API: \cod{MarceloClaroOrchestrator.perceive(topic, limit)} em
         \pth{marceloclaro/orchestrator.py}.
-  \item Consome: \pth{mci/mcp_server.py} (exposição).
-  \item Produz: contexto curado para a etapa seguinte.
+  \item Consome: memória canônica do MetaBus, sem executar um modelo.
+  \item Produz: dicionário de contexto; a preparação de \cod{delegate} usa
+        adicionalmente o controlador R886, descrito adiante.
 \end{itemize}
 \end{arquitetura}
 
@@ -166,7 +207,7 @@ Detalhe do subfluxo (não é um passo único):
 \draw[seta] (p1-1-1)--(p1-2-1);
 \draw[seta] (p1-2-1)--(p1-3-1);
 \draw[seta] (p1-3-1)--(p1-4-1);
-\node[fn,anchor=west,right=10mm of p1-2-1,font=\tiny]{origem: task.cfp / MetaBus};
+\node[fn,anchor=west,right=8mm of p1-2-1,font=\footnotesize]{consulta explícita ao MetaBus};
 \end{flowch}
 
 \begin{descricao}
@@ -181,61 +222,110 @@ Detalhe do subfluxo (não é um passo único):
 
 
 \begin{resultado}
-Saída da etapa: um contexto enxuto e \emph{classificado} que alimentará o filtro
-de atenção — nada de ``trazer o mundo inteiro'' para a delegação.
+Saída da consulta: contexto recente limitado, lições do tópico e ledger.
+Esse dicionário não é uma classificação de verdade nem prova de que todo
+campo foi submetido ao mesmo filtro de relevância.
 \end{resultado}
+
+\subsection{Preparar o briefing: memória útil sem transformar histórico em ordem}
+
+No caso condutor, a nota científica precisa reunir fontes e um experimento
+local. Uma observação antiga pode indicar que faltou o CSV; ela não autoriza
+inventar os dados nem substituir o critério atual. O briefing R886 faz essa
+separação antes da publicação: recupera registros relevantes, conserva suas
+origens e os apresenta como contexto histórico.
+
+\begin{flowch}[Briefing R886 antes da delegação]{consulta limitada; análise crítica local e contexto opcional de código}
+\matrix[matrix of nodes,name=brief901,row sep=3mm,nodes={fn},ampersand replacement=\&]{
+ |[fne]|Descrição da tarefa \\
+ |[fns]|Busca de até cinco registros relevantes \\
+ |[fns]|IDs, resumos e revisões não substituídas \\
+ |[fns]|Análise crítica heurística local \\
+ |[fns]|Contexto de código, se aplicável e pronto \\
+ |[fne]|Briefing limitado e task.post \\
+};
+\draw[seta] (brief901-1-1)--(brief901-2-1);
+\draw[seta] (brief901-2-1)--(brief901-3-1);
+\draw[seta] (brief901-3-1)--(brief901-4-1);
+\draw[seta] (brief901-4-1)--(brief901-5-1);
+\draw[seta] (brief901-5-1)--(brief901-6-1);
+\end{flowch}
+\begin{descricao}
+\textbf{Como funciona e por quê.} As setas acompanham a preparação do contexto
+antes da publicação. \cod{MetacognitiveLoop.prepare} recupera observações e
+identifica seus IDs; revisões substituídas não entram no briefing. O motor
+crítico fornece um roteiro heurístico local. Para capacidades de software,
+\cod{delegate} pode acrescentar contexto de código de uma consulta limitada.
+\textbf{Justificativa.} Conservar a origem permite conferir se a lição pertence
+à tarefa atual e evita elevar uma anotação histórica à condição de instrução.
+\textbf{Limite.} \cod{memory_is_instruction=false} e
+\cod{confidence_promoted=false} delimitam o uso: não há inferência LLM neste
+controlador, prova de verdade das fontes ou benefício de desempenho medido.
+\end{descricao}
+\fontecore{mci/metacognitive_loop.py}{MetacognitiveLoop.prepare}
+
+O contexto de código é opcional: um índice indisponível produz um aviso;
+a delegação prossegue com essa limitação declarada, sem instalar ou indexar
+durante a preparação. Busca, código e esqueleto podem ser consultados pelo
+provedor local validado. As três operações nativas de grafo continuam
+bloqueadas. A alternativa \cod{python_graph} usa explicitamente
+\cod{core_python_ast}; a última consulta ao corpus corrente registrada nesta
+edição atingiu o limite de 30 segundos e terminou em \cod{timeout}.
+Uma relação estática, quando retornada, precisa conservar arquivo, linha,
+hash e indicação de relações não resolvidas. Esses estados serão retomados
+no atlas e nas integrações.
 
 \elemento{Etapa 2 — DELEGA (delegação com atenção)}{\metainfo{ID}{O-2} \hfill \metainfo{Rota}{\pth{mci/blackboard.py}}}
 
 \begin{descricao}
-Com o contexto percebido, o orquestrador \emph{roteia} a tarefa: o circuit de
-atenção filtra os nós (agentes) mais relevantes e a delegação é publicada no
-blackboard para voluntários declararem as capacidades necessárias.
+Uma nota científica pode exigir busca, cálculo e revisão. Cada parte precisa
+de descrição e capacidades próprias. Na rota \cod{delegate}, o primário
+prepara o briefing e publica a tarefa antes de receber os candidatos do quadro.
+Seleção, atribuição e execução ficam registradas como estados distintos.
 \end{descricao}
 
 \begin{processo}
 \begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
-  \item Monta a descrição da tarefa, capacidades requeridas e contexto (dataclass
-         \pth{mci_post_task} — microtarefa).
-  \item Consulta o roteador de atenção (layer 3) para ranquear candidatos.
-  \item Publica no blackboard A2A (ferramenta MCP \pth{mci_post_task}).
-  \item Aplica gates de runtime: confiança mínima \pth{RUNTIME_MIN_TRUST=0.25} e
-        carga máxima \pth{RUNTIME_MAX_LOAD=1.0}.
-  \item Um agente voluntário aceita; o orquestrador registra a atribuição.
+  \item \cod{delegate} monta o briefing R886 e publica \cod{task.post} no MetaBus.
+  \item O Blackboard exige disponibilidade e todas as capacidades pedidas
+        (\emph{all\_of}); havendo candidatos, publica \cod{task.cfp}.
+  \item O primário aplica o gate comportamental Trust aos candidatos do CFP.
+  \item A camada de redução pode indicar um candidato elegível; caso contrário,
+        o \cod{AttentionRouter} ordena os restantes. Seleciona-se um agente.
+  \item O primário publica \cod{task.volunteer}; o quadro registra a atribuição
+        e publica \cod{task.assigned}. Um executor ainda precisa executar a tarefa.
 \end{enumerate}
 \end{processo}
 
 \begin{arquitetura}
 \begin{itemize}[leftmargin=1.3em,itemsep=1pt]
-  \item Chamada em \pth{marceloclaro/orchestrator.py} —
-        L222 do orquestrador.
-  \item Protocolo: blackboard A2A (\pth{SPEC-002}).
-  \item Filtro: \pth{AttentionRouter} compara a tarefa a cartões e capacidades disponíveis.
-  \item Estrutura: \pth{DelegationRecord} (dataclass de atribuição).
+  \item Entrada: \cod{MarceloClaroOrchestrator.delegate}; seleção: \cod{_on_cfp}.
+  \item Eventos: \cod{task.post}, \cod{task.cfp}, \cod{task.volunteer} e \cod{task.assigned}.
+  \item Estado: \cod{BlackboardTask}; \cod{_on_assigned} apenas registra a atribuição.
+  \item A rota de DAG usa \cod{dispatch_ready}, gates próprios e uma concessão
+        temporária; seus limites numéricos não devem ser transferidos ao CFP.
 \end{itemize}
 \end{arquitetura}
 
-\begin{flowch}[Subfluxo DELEGA]{filtro de atenção $\to$ blackboard $\to$ gates}
+\begin{flowch}[Subfluxo DELEGA]{eventos de seleção; atribuição ainda não é execução}
 \matrix[matrix of nodes,name=p2,row sep=5mm,column sep=4mm,nodes={fn},ampersand replacement=\&]{
- |[fns]|atenção: ranqueia candidatos \\[2mm]
- |[fns]|blackboard: mci\_post\_task \\[2mm]
- |[fde]|confiança $\ge$ 0.25 e carga $\le$ 1.0? \\[2mm]
- |[fns]|voluntário selecionado \\[2mm]
- |[fns]|atribuição registrada \\ \\
+ |[fns]|briefing e task.post \\[2mm]
+ |[fns]|Blackboard: all\_of e task.cfp \\[2mm]
+ |[fde]|Trust permite candidato? \\[2mm]
+ |[fns]|redução ou atenção: um escolhido \\[2mm]
+ |[fns]|task.volunteer e task.assigned \\ \\
 };
 \draw[seta] (p2-1-1)--(p2-2-1);
 \draw[seta] (p2-2-1)--(p2-3-1);
 \draw[seta] (p2-4-1)--(p2-5-1);
 \draw[seta] (p2-3-1)--(p2-4-1);
-\draw[seta,plumAccent,dashed] (p2-3-1.west) to[out=180,in=180,looseness=1.35]
-  node[left=2pt,fill=papel,inner sep=1pt,text=plumAccent,font=\scriptsize]{recusado}
-  (p2-1-1.west);
+\node[fn,anchor=west,right=7mm of p2-3-1,font=\footnotesize,text width=2.7cm]{sem candidato permitido: bloqueio};
 \end{flowch}
 
 \begin{descricao}
-\textbf{Como funciona e por quê.} A rota delegate enriquece o contexto e publica task.post; o Blackboard identifica agentes disponíveis com todas as capacidades requeridas e emite task.cfp. O voluntariado pode então produzir uma atribuição. No runtime de DAG, \pth{dispatch_ready} aplica gates e atenção antes de obter uma lease.
+\textbf{Como funciona e por quê.} As setas acompanham publicação, CFP, gate comportamental, escolha de um candidato e atribuição. Sem candidatos, a seleção não avança. A atribuição fica disponível para um executor; ela não inicia, por si só, inferência.
 \textbf{Justificativa.} Elegibilidade precisa preceder a escolha: uma pontuação alta não substitui uma capacidade obrigatória ou um executor disponível.
-\textbf{Limite.} O desenho aproxima duas rotas distintas. Limites de confiança e carga devem ser conferidos na API concreta; não constituem prova de precisão da resposta.
+\textbf{Limite.} Este desenho descreve o CFP do Blackboard. O runtime de DAG tem outro percurso. Nem o ranking nem uma atribuição demonstram conclusão ou qualidade científica.
 \end{descricao}
 \fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator.delegate}
 
@@ -244,54 +334,55 @@ blackboard para voluntários declararem as capacidades necessárias.
 
 
 \begin{limite}
-Os gates (\pth{RUNTIME_MAX_LOAD}) são \emph{heurísticas
-determinísticas} de sanidade — não substituem a verificação de qualidade da etapa
-seguinte.
+No runtime de DAG, \cod{dispatch_ready} aplica seus gates antes da concessão
+temporária. Esses controles pertencem àquela rota; no CFP aqui apresentado,
+a disponibilidade, o matching e o gate comportamental têm pontos próprios.
+Nenhum deles substitui a verificação da entrega.
 \end{limite}
 
 \clearpage
 \elemento{Etapa 3 — EXECUTA (execução com verificação fechada)}{\metainfo{ID}{O-3} \hfill \metainfo{Rota}{gate SDD/TDD no \pth{sdd/tdd_runner.py}}}
 
 \begin{descricao}
-O agente voluntário executa a microtarefa. Mas o orquestrador \emph{não aceita
-qualquer resultado}: exige a \emph{tríade silenciosa} — spec verificada
-(\pth{tdd_runner.run_spec_test()}).
+O executor que recebeu a tarefa devolve uma saída a \cod{report_completion}.
+Para um contrato de software, o primário executa o teste de entrega registrado
+na spec, associa a evidência ao histórico RED e só então chama o verificador.
+Não basta que o executor escreva ``testes aprovados'' em sua resposta.
 \end{descricao}
 
 \begin{metodo}
 O gate é \textbf{fail-closed}: se a spec não bate ou o teste não passa, a tarefa
-não é encerrada como concluída — volta para revisão (etapa 4).
+é registrada como falha. Uma nova tentativa exige uma decisão explícita e
+seus limites; o gate não cria um ciclo automático ilimitado de correções.
 \end{metodo}
 
 \begin{arquitetura}
 \begin{itemize}[leftmargin=1.3em,itemsep=1pt]
   \item Verificação: \pth{sdd/tdd_runner.py}.
-  \item Família de testes: \pth{tests/test_r*.py} (ex.: suítes R137/R211/R212,
-        39 testes verdes verificados em execução local).
-  \item Ponto de encerramento: \pth{marceloclaro/orchestrator.py} — L669 — decide
-        concluir ou devolver.
+  \item Evidência: teste de entrega da spec, histórico RED e resultado do verificador.
+  \item Ponto de decisão: \cod{MarceloClaroOrchestrator.report_completion}.
+  \item Modo estrito sem spec: \cod{blocked_no_spec}; o resultado é publicado
+        em \cod{task.complete} como falha, sem aprovação inventada.
 \end{itemize}
 \end{arquitetura}
 
 \begin{flowch}[Subfluxo EXECUTA]{tríade silenciosa com gate fail-closed}
 \matrix[matrix of nodes,name=p3,row sep=5mm,column sep=4mm,nodes={fn},ampersand replacement=\&]{
- |[fns]|agente entrega artefato \\[2mm]
- |[fns]|\nodep{spec_verifier.verify()} \\[2mm]
- |[fns]|\nodep{tdd_runner.run_spec_test()} \\[2mm]
+ |[fns]|report\_completion recebe artefato e spec \\[2mm]
+ |[fns]|run\_delivery\_test e histórico RED \\[2mm]
+ |[fns]|spec\_verifier.verify com evidência \\[2mm]
  |[fde]|verde + spec ok? \\[2mm]
- |[fns]|\nodep{encerrar (report_completion)} \\ \\
+ |[fns]|task.complete: completed ou failed \\ \\
 };
 \draw[seta] (p3-1-1)--(p3-2-1);
 \draw[seta] (p3-2-1)--(p3-3-1);
 \draw[seta] (p3-3-1)--(p3-4-1);
 \draw[seta] (p3-4-1)--(p3-5-1);
-\draw[seta,plumAccent,dashed] (p3-4-1.west) to[out=180,in=180,looseness=1.35]
-  node[left=2pt,fill=papel,inner sep=1pt,text=plumAccent,font=\scriptsize]{não: devolve}
-  (p3-2-1.west);
+\node[fn,anchor=west,right=7mm of p3-4-1,font=\footnotesize,text width=2.7cm]{não: registra falha e motivo};
 \end{flowch}
 
 \begin{descricao}
-\textbf{Como funciona e por quê.} As setas acompanham um artefato, sua especificação, a execução dos testes vinculados e a decisão de conclusão. A seta tracejada indica que evidência ausente ou reprovação deve interromper o avanço e motivar correção.
+\textbf{Como funciona e por quê.} As setas começam no recebimento da entrega: primeiro o runner obtém evidência confiável e histórico RED, depois o verificador avalia o contrato. A publicação final distingue sucesso de falha; evidência ausente mantém o aceite fechado.
 \textbf{Justificativa.} Vincular tarefa, critério, artefato e resultado de teste evita aceitar uma saída somente porque um agente declarou sucesso.
 \textbf{Limite.} Não há paralelismo de especialistas neste desenho. O gate é interno e depende do contrato da tarefa; teste verde não substitui revisão externa ou validação científica.
 \end{descricao}
@@ -306,7 +397,7 @@ Página em verde de teste local demonstra \emph{comportamento esperado no
 repositório} — não é certificação externa nem prova de mérito (anti-overclaim).
 \end{aviso}
 
-\elemento{Etapa 4 — REFLETE (reflexão e registro)}{\metainfo{ID}{O-4} \hfill \metainfo{Rota}{\pth{evolution/cycles.py}}}
+\elemento{Etapa 4 — REFLETE (observação contextual)}{\metainfo{ID}{O-4} \hfill \metainfo{Rota}{\pth{mci/metacognitive_loop.py}}}
 
 \begin{descricao}
 Fechado o ciclo da tarefa, o orquestrador \emph{reflete}: analisa o que aconteceu,
@@ -316,54 +407,55 @@ de evolução.
 
 \begin{processo}
 \begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
-  \item Sintetiza resultado e observações (Reflexion \pth{mci/reflexion.py}).
-  \item Decide: concluir? revisar? registrar ciclo?
-  \item Se relevante: \pth{evolution_registry.record(...)} (numeração R47+,
-total 459 registros no momento desta revisão).
-  \item Atualiza memória compartilhada (tópico \pth{meta_memory})
-        para que os próximos PERCEBE já cheguem ``educados''.
+  \item O Blackboard recebe \cod{task.complete}, libera o agente atribuído e
+        transmite resultado e estado SDD em \cod{metacognition.reflect_request}.
+  \item O middleware Reflexion chama \cod{MetacognitiveLoop.complete}.
+  \item O controlador registra resumo, falha observada, próxima ação e referências
+        declaradas, com avaliação heurística e \cod{confidence_promoted=false}.
+  \item A observação persistida pode ser recuperada na próxima tarefa.
+        Mudanças relevantes também exigem um ciclo de evolução, registrado
+        pelo responsável; esse registro não é efeito automático de toda conclusão.
 \end{enumerate}
 \end{processo}
 
 \begin{arquitetura}
 \begin{itemize}[leftmargin=1.3em,itemsep=1pt]
-  \item Reflexion middleware: \pth{mci/metacognitive_evaluator.py} (SPEC-003 no legado).
+  \item Middleware: \pth{mci/reflexion.py}; controlador: \pth{mci/metacognitive_loop.py}.
   \item Registro de evolução: \pth{evolution/cycles.py}.
-  \item Feedback: tópico \pth{reflections} + blackboard.
+  \item Feedback: \cod{metacognition.reflected} ou \cod{metacognition.failed}.
 \end{itemize}
 \end{arquitetura}
 
-\begin{flowch}[Subfluxo REFLETE]{aprendizado volta para a percepção}
+\begin{flowch}[Subfluxo REFLETE]{observação pós-gate e estado de persistência}
 \matrix[matrix of nodes,name=p4,row sep=5mm,column sep=4mm,nodes={fn},ampersand replacement=\&]{
- |[fns]|sintetiza reflexão \\[2mm]
- |[fde]|mudança relevante? \\[2mm]
- |[fns]|record(evolution) \\[2mm]
- |[fns]|publica no tópico reflexão \\[2mm]
- |[fns]|memória atualizada \\ \\
+ |[fns]|task.complete com resultado e estado SDD \\[2mm]
+ |[fns]|metacognition.\\ reflect\_request \\[2mm]
+ |[fns]|MetacognitiveLoop.\\ complete \\[2mm]
+ |[fde]|observação persistida? \\[2mm]
+ |[fns]|reflected ou failed com motivo \\ \\
 };
 \draw[seta] (p4-1-1)--(p4-2-1);
 \draw[seta] (p4-3-1)--(p4-4-1);
 \draw[seta] (p4-4-1)--(p4-5-1);
 \draw[seta] (p4-2-1)--(p4-3-1);
-\draw[seta,plumAccent,dashed] (p4-5-1.west) to[out=180,in=180,looseness=1.4]
-  node[left=2pt,fill=papel,inner sep=1pt,text=plumAccent,font=\scriptsize]{realimenta PERCEBE}
-  (p4-1-1.west);
 \end{flowch}
 
 \begin{descricao}
-\textbf{Como funciona e por quê.} O retorno da execução pode gerar uma reflexão registrada, lições e atualização da memória. Mudanças relevantes também exigem registro de evolução conforme a política do repositório. A seta de retorno indica disponibilidade desse contexto em consultas futuras.
-\textbf{Justificativa.} Persistir a reflexão torna examinável o que se aprendeu e de qual execução a lição veio, permitindo contestá-la depois.
+\textbf{Como funciona e por quê.} As setas levam o resultado pós-gate ao pedido de reflexão e à tentativa de persistência. O evento final distingue observação gravada de degradação. A consulta em uma tarefa futura é outra operação; não há seta de repetição automática neste percurso.
+\textbf{Justificativa.} Persistir a observação permite examinar seu conteúdo e
+a execução de origem, inclusive para contestar a próxima ação proposta.
 \textbf{Limite.} Reflexão e confiança são registros internos; não são probabilidades calibradas nem garantia de que a próxima tarefa terá resultado melhor.
 \end{descricao}
-\fontecore{mci/metabus.py}{MetacognitiveMemory.add_reflection}
+\fontecore{mci/metacognitive_loop.py}{MetacognitiveLoop.complete}
 
 
 \noindent\textit{Contexto bibliográfico geral, sem certificação desta rota.} \citref{NELSON, T. O.; NARENS, L. Metamemory: a theoretical framework and new findings. In: BOWER, G. H. (org.). \emph{The Psychology of Learning and Motivation}. San Diego: Academic Press, v.~26, p.~125-173, 1990}{10.1016/S0079-7421(08)60053-5}{Enquadramento teórico geral; a implementação desta rota é conferida na fonte primária local. Este artigo não certifica o funcionamento nem o desempenho do Core.}{This eventuated in the present theoretical framework that emphasizes the role of control and monitoring processes}{Isso resultou no presente arcabouço teórico que enfatiza o papel dos processos de controle e monitoramento.}{NELSON, 1990, p.~125--173}
 
 
 \begin{resultado}
-Efeito sistêmico: cada tarefa concluída deixa \emph{memória + registro}, então o
-próximo ciclo não refaz o mesmo trabalho — característica-chave do Core.
+Efeito observável: quando a persistência tem êxito, uma tarefa deixa contexto
+recuperável. Isso permite comparar uma nova situação com a anterior; evitar a
+repetição de um erro depende de recuperar, interpretar e usar a observação.
 \end{resultado}
 
 % ============================================================
@@ -448,7 +540,7 @@ memória.
 Superfícies expostas via MCP (\pth{mci/mcp_server.py}):\par
 \smallskip
 {\footnotesize
-\begin{tabularx}{\textwidth}{lY}
+\begin{tabularx}{\linewidth}{>{\hsize=.70\hsize\linewidth=\hsize}Y>{\hsize=1.30\hsize\linewidth=\hsize}Y}
 \toprule
 Ferramenta & Papel \\
 \midrule
@@ -468,8 +560,8 @@ Ferramenta & Papel \\
 };
 \draw[seta] (p6-1-1)--(p6-2-1);
 \draw[seta] (p6-2-1)--(p6-3-1);
-\draw[seta,bend right=55] (p6-3-1) to node[right,font=\tiny]{capacidades} (p6-2-2);
-\draw[seta,bend right=55] (p6-2-2) to node[left,font=\tiny]{memória global} (p6-1-1);
+\draw[seta,bend right=55] (p6-3-1) to node[right,font=\footnotesize]{capacidades} (p6-2-2);
+\draw[seta,bend right=55] (p6-2-2) to node[left,font=\footnotesize]{memória global} (p6-1-1);
 \end{flowch}
 
 \begin{descricao}
@@ -484,9 +576,9 @@ Ferramenta & Papel \\
 
 
 \begin{limite}
-A memória é \emph{compartilhada por design}, mas não é um cache público
-incontrolado: toda escrita passa por agentes registrados; leitura por tópico com
-limite — preservando rastreio (SPEC-001/002).
+As APIs de memória validam seus campos e registram uma origem declarada.
+Isso não equivale a conferir cada escrita contra o registro do Blackboard.
+Permissões do host, proveniência e revisão do conteúdo continuam necessárias.
 \end{limite}
 
 \clearpage
@@ -497,10 +589,11 @@ limite — preservando rastreio (SPEC-001/002).
 \begin{processo}
 \begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
   \item \emph{Entrada} chega (via CLI, MCP, skill ou tópico).
-  \item \textbf{PERCEBE} carrega contexto e memória (L211).
-  \item \textbf{DELEGA} roteia por atenção e publica no blackboard (L222).
+  \item \textbf{PERCEBE} consulta memória; \cod{delegate} prepara o briefing R886.
+  \item \textbf{DELEGA} publica a tarefa, recebe CFP e seleciona um candidato elegível.
   \item \textbf{EXECUTA} com tríade spec+teste; gate fail-closed.
-  \item \textbf{REFLETE} registra ciclo e memória (L669 + evolution).
+  \item \textbf{REFLETE} tenta persistir uma observação pós-gate; mudanças
+        relevantes exigem também o registro de evolução pertinente.
   \item \emph{Saída} entregue ao operador com rastro especificado.
 \end{enumerate}
 \end{processo}
@@ -531,18 +624,18 @@ limite — preservando rastreio (SPEC-001/002).
 
 
 \begin{resultado}
-De cada ciclo nasce um rastro mínimo: spec (se mudança), teste verde, ciclo
-registrado, memória atualizada. É esse rastro que permite auditoria e a
-auto-evolução medida em \pth{evolution/cycles.json}.
+A trilha de uma mudança deve reunir spec, evidência dos testes aplicáveis,
+resultado da entrega e registro de evolução. O estado da memória precisa ser
+conferido separadamente: uma falha de persistência não pode ser substituída por
+uma declaração de aprendizado.
 \end{resultado}
 
 \begin{niveis}
-\textbf{Intuição:} quatro passadas: entender, escolher, fazer com prova, aprender.\\
-\textbf{Implementação:} quatro métodos nomeados com gates e tópicos; cada etapa tem
-arquitetura própria.\\
-\textbf{Formalização:} laço Perceive–Delegate–Execute–Reflect com \emph{sancionamento
-metacognitivo}: a reflexão posterior modula a confiança da próxima delegação —
-fechando o ciclo em nível 2 do raciocínio.
+\textbf{Intuição:} entender o pedido, escolher um responsável, conferir a entrega e registrar o observado.\\
+\textbf{Implementação:} consultas, eventos, execução pelo responsável e
+verificação da entrega; cada rota tem entradas e estados próprios.\\
+\textbf{Formalização:} a observação pós-gate pode informar a próxima decisão.
+No ciclo R886, a avaliação heurística não promove o ledger por sua própria nota.
 \end{niveis}
 
 \begin{limite}
@@ -551,6 +644,31 @@ ausentes no catálogo ou na memória limitam qualquer etapa, e nenhum gate local
 validação externa.
 \end{limite}
 
+
+\section{Prática: observar a preparação sem presumir execução}
+
+Na raiz do checkout, com o ambiente de desenvolvimento preparado, o trecho
+seguinte consulta o primário. Ele não publica tarefa nem chama um modelo.
+\begin{verbatim}
+.venv/bin/python - <<'PY'
+from marceloclaro.orchestrator import MarceloClaroOrchestrator
+p = MarceloClaroOrchestrator(auto_load_agents=False)
+report = p.perceive(topic="science", limit=3)
+print(report)
+PY
+\end{verbatim}
+
+\praticacore
+{Distinguir contexto disponível, atribuição e execução no percurso da nota científica.}
+{Um checkout identificado por commit e a consulta \cod{perceive} acima.}
+{Execute o trecho e localize no código \cod{delegate}, \cod{_on_cfp} e
+\cod{_on_assigned}; anote o evento produzido por cada um.}
+{O retorno contém contexto recente, lições e ledger. Confirme que esse retorno
+não é um \cod{task_id} e não contém uma evidência de inferência.}
+{Se uma dependência impedir a inicialização, preserve o erro e confira o
+diagnóstico; se não houver lições, registre a ausência em vez de inventar contexto.}
+{Qual evidência adicional seria necessária para dizer que a revisão da nota
+foi atribuída, executada e aceita? Escreva uma evidência para cada estado.}
 
 \section{Resumo e exercícios}
 
@@ -644,12 +762,16 @@ conjunto a examinar, não como ganho de velocidade medido.
 
 \begin{processo}
 GATILHO. tarefa multi-passo publicada no Blackboard.
-ROTA. \pth{marceloclaro/orchestrator.py}; rota (b) inline ou (c) voluntariado.
-FUNÇÃO. coordenar E1--E7 sem executar; escolher o executante com maior escore de ativação.
+ROTA. \cod{delegate} publica \cod{task.post}; \cod{_on_cfp} seleciona um candidato
+e publica \cod{task.volunteer}. FUNÇÃO. preparar e atribuir uma tarefa;
+a execução precisa de um executor e de evidência própria.
 \end{processo}
 
 \begin{resultado}
-CÁLCULO. $A(a) = |K \cap C_a|/|K \cup C_a|$ (Jaccard ponderado entre tokens do gatilho e capacidades declaradas); tie-break por prioridade de categoria.
+CÁLCULO. Em um exemplo hipotético, de cinco cartões disponíveis, três atendem
+a todas as capacidades e dois passam pelo gate comportamental. A seleção
+compara esses dois e atribui a tarefa a um. Essas contagens ilustram filtragem;
+não medem precisão nem o número de modelos executados.
 \end{resultado}
 
 \begin{descricao}
@@ -662,3 +784,123 @@ localização da fonte (R110), não o mérito da afirmação.
 \end{aviso}
 
 \noindent\textit{Interpretação:} No protocolo de rede por contratos, o anúncio separa a descrição da tarefa da identidade do executor: solucionadores capazes avaliam o pedido e apresentam propostas, e o gerente compara essas propostas antes de delegar. Em termos de decisão, escolhe-se $i^*=\mathrm{arg\,min}_{i\in C}K_i$ entre os candidatos $C$ que satisfazem os requisitos, sendo $K_i$ o custo declarado; um candidato fora de $C$ não se torna elegível apenas por oferecer menor custo. Assim, o conjunto comparado e o critério de escolha ficam explícitos, sem confundir licitação com validação da entrega \citref{SMITH, R. G. The Contract Net Protocol: high-level communication and control in a distributed problem solver. \emph{IEEE Transactions on Computers}, v.~C-29, n.~12, p.~1104-1113, 1980}{10.1109/TC.1980.1675516}{p.~1104--1113 (resumo, p.~1104). é o fundamento do voluntariado por anúncio/leilão usado na ETAPA 3: nós com tarefas anunciam, nós capazes avaliam e licitam, e o manager escolhe o mais adequado — análogo ao casamento de capacidades do Blackboard.}{The contract net protocol has been developed to specify problem-solving communication and control for nodes in a distributed problem solver}{O protocolo da rede de contratos foi desenvolvido para especificar comunicação e controle de resolução de problemas para nós em um solucionador distribuído de problemas.}{SMITH, 1980, p.~1104}
+
+\clearpage
+\section[Apêndice Didático: Redução do conjunto de candidatos]{Apêndice Didático: Redução do conjunto de candidatos ($M/k$)}
+
+\elemento{Fator de redução de candidatos}{\metainfo{ID}{DID-MK} \hfill \metainfo{Fonte}{docs/guias-didaticos/formulas-livro-core-nussenzveig.md, seção 14}}
+
+\begin{descricao}
+\textbf{O problema concreto.} No roteamento do Blackboard, há $M$ candidatos disponíveis e apenas $k$ posições a serem examinadas com mais atenção. Qual é a fração de redução do conjunto a examinar?
+\end{descricao}
+
+\begin{definicao}
+\textbf{Símbolos.}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{>{\hsize=.55\hsize\linewidth=\hsize}Y>{\hsize=1.65\hsize\linewidth=\hsize}Y>{\hsize=.80\hsize\linewidth=\hsize}Y}
+Símbolo & Significado & Valor no exemplo \\
+\midrule
+$M$ & Número total de candidatos & $M = 40$ \\
+$k$ & Número de posições a examinar & $k = 5$ \\
+$M/k$ & Fator de redução hipotética & — \\
+\end{tabularx}
+\end{center}
+\end{definicao}
+
+\begin{metodo}
+\textbf{Dedução de $M/k$.}
+
+\paragraph{Passo 1 — O que queremos medir.}
+Queremos saber quantas vezes o conjunto total é maior do que o subconjunto selecionado para análise mais detalhada. Isso é uma simples divisão: total dividido pelo subconjunto.
+
+\paragraph{Passo 2 — Divisão de contagens.}
+
+\[
+\boxed{\frac{M}{k} = \frac{40}{5} = 8}
+\]
+
+Justificativa: proporção elementar. O resultado 8 significa que o conjunto total é 8 vezes maior do que o subconjunto selecionado.
+\end{metodo}
+
+\begin{descricao}
+\textbf{Interpretação e limites.} O quociente $M/k = 8$ trata da redução hipotética do conjunto a examinar, não como um ganho de velocidade medido. É uma conta didática para ilustrar filtragem, não uma medição de desempenho do sistema.
+\end{descricao}
+
+\clearpage
+\section[Apêndice Didático: Seleção por custo mínimo]{Apêndice Didático: Seleção por custo mínimo ($i^*=\mathrm{arg\,min}_{i\in C}K_i$)}
+
+\elemento{Seleção por custo mínimo no protocolo de contratos}{\metainfo{ID}{DID-ARGMIN} \hfill \metainfo{Fonte}{docs/guias-didaticos/formulas-livro-core-nussenzveig.md, seção 15}}
+
+\begin{descricao}
+\textbf{O problema concreto.} No protocolo de rede por contratos, o gerente compara propostas de candidatos e escolhe aquele com menor custo declarado entre os que satisfazem os requisitos. Como formalizar essa escolha?
+
+\textbf{Escopo do modelo.} A conta abaixo é uma simplificação didática
+inspirada no protocolo de contratos, não uma tradução de \cod{_on_cfp}.
+Na implementação corrente do Core, a redução pode indicar um elegível; caso
+contrário, a atenção ordena os candidatos. Essa rota não implementa uma janela
+de coleta de lances seguida deste mínimo de custos declarados.
+\end{descricao}
+
+\begin{definicao}
+\textbf{Símbolos.}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{>{\hsize=.55\hsize\linewidth=\hsize}Y>{\hsize=1.65\hsize\linewidth=\hsize}Y>{\hsize=.80\hsize\linewidth=\hsize}Y}
+Símbolo & Significado & Valor no exemplo \\
+\midrule
+$C$ & Conjunto de candidatos que satisfazem os requisitos & — \\
+$i$ & Um candidato qualquer & — \\
+$K_i$ & Custo declarado pelo candidato $i$ & — \\
+$i^*$ & Candidato escolhido (menor custo) & — \\
+$\mathrm{arg\,min}$ & Operação que retorna o índice que minimiza & — \\
+\end{tabularx}
+\end{center}
+\end{definicao}
+
+\begin{metodo}
+\textbf{Dedução de $i^*=\mathrm{arg\,min}_{i\in C}K_i$.}
+
+\paragraph{Passo 1 — O conjunto elegível.}
+Apenas candidatos que satisfazem todos os requisitos obrigatórios entram no conjunto $C$. Um candidato fora de $C$ não se torna elegível apenas por oferecer menor custo.
+
+\paragraph{Passo 2 — A operação de escolha.}
+Entre os candidatos em $C$, escolhe-se aquele cujo custo declarado $K_i$ é mínimo. A notação $\mathrm{arg\,min}$ retorna o índice $i$ que minimiza a função:
+
+\[
+\boxed{i^* = \mathrm{arg\,min}_{i\in C} K_i}
+\]
+
+Justificativa: essa fórmula expressa que a escolha é feita sobre o conjunto restrito de elegíveis, usando o custo declarado como critério de ordenação. Ela separa elegibilidade (pertencer a $C$) de seleção (menor custo dentro de $C$).
+
+\paragraph{Cálculo numérico exemplo.}
+Suponha 5 candidatos, dos quais 3 atendem a todos os requisitos obrigatórios,
+incluindo o gate comportamental ($C = \{c_1, c_2, c_3\}$). Os custos declarados são:
+
+\begin{center}
+\begin{tabularx}{\linewidth}{YYY}
+Candidato & Atende requisitos? & Custo $K_i$ \\
+\midrule
+$c_1$ & Sim & 10 \\
+$c_2$ & Sim & 7 \\
+$c_3$ & Sim & 12 \\
+\end{tabularx}
+\end{center}
+
+\[
+i^* = \mathrm{arg\,min}_{i\in\{c_1,c_2,c_3\}} K_i = c_2
+\]
+
+O candidato escolhido é $c_2$, com custo 7.
+\end{metodo}
+
+\begin{descricao}
+\textbf{Interpretação e limites.} Essa conta ilustra filtragem e seleção por
+custo mínimo no modelo hipotético. Não mede precisão nem o número de modelos
+executados, nem descreve o ranking real de \cod{_on_cfp}. Um candidato com
+menor custo declarado não é automaticamente o melhor entregador; a validação
+da entrega continua sendo obrigatória via gate SDD/TDD.
+\end{descricao}
+
+% R901-PONTE-FECHO
+Uma atribuição registra quem deve agir, não tudo o que foi observado antes ou depois dela. A memória completa essa descrição ao conservar contexto e resultados que poderão ser examinados numa nova decisão.

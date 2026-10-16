@@ -239,6 +239,25 @@ def render(entry) -> str:
     # a assinatura real de \citref em macros.tex (não a antiga forma de 5 campos).
     author_year = citacao.split(").", 1)[0].replace("(", ", ").strip()
     locator = f"{author_year}, {pagina}"
+    if file == 'mod-02-orquestracao.tex':
+        rota = 'Rota: briefing de memória, task.post, CFP por capacidades, seleção de um candidato e atribuição.'
+        calculo = 'Cálculo: a pontuação ordena os candidatos elegíveis da rota; não mede probabilidade de acerto nem implica execução paralela.'
+    elif file == 'mod-03-memoria-mci.tex':
+        funcao = 'Função: recuperar observações e registrar resultado, origem, falhas e próxima ação no ciclo R886.'
+        calculo = 'Conferência: no ciclo automático, confidence_before e confidence_after permanecem iguais; a observação não promove o ledger por sua própria nota.'
+    elif file == 'mod-04-qualidade-sdd.tex':
+        calculo = 'Conferência: RED e GREEN exigem execuções distintas e custódia vinculada; após refatoração, execute novamente os testes e gates. Verde isolado não comprova a trajetória TDD.'
+    elif file == 'mod-05-raciocinio.tex':
+        rota = 'Rota: interfaces restritas de raciocínio, com disponibilidade e limites declarados por engine.'
+        funcao = 'Função: separar solução simbólica, tradução SMT, cálculo e heurística; entrada não suportada não recebe prova fictícia.'
+        calculo = 'Conferência: compare a saída com as premissas e a operação realmente recebidas. Um circuito clássico fixo não interpreta uma pergunta em linguagem natural.'
+    citation = (f'\\citparafrase{{{citacao}}}{{{doi}}}'
+                f'{{Metacognição orienta a distinção entre monitoramento e atividade; a referência não certifica o mecanismo nem sua eficácia no Core.}}{{{locator}}}'
+                if doi == '10.1037/0003-066X.34.10.906' else
+                f'\\citref{{{citacao}}}{{{doi}}}{{{pagina}. {just_cit}}}{{{trecho}}}{{{traducao}}}{{{locator}}}')
+    citation_note = ('A relação é apresentada por paráfrase; o texto primário completo não foi recuperado nesta revisão.'
+                     if doi == '10.1037/0003-066X.34.10.906' else
+                     'O recorte e a tradução conservam o registro histórico de conferência de 29/09/2026; uma consulta nova exige data própria.')
     # Campos já chegam prontos para LaTeX (\\pth, \\emph, $...$, \\textrightarrow);
     # nenhum escape adicional é aplicado para preservar as macros intencionais.
     return f"""% ============================================================
@@ -262,9 +281,7 @@ CÁLCULO. {calculo}
 \\end{{resultado}}
 
 \\begin{{descricao}}
-JUSTIFICATIVA TEÓRICA. {justificativa} O lastro teórico vem da citação que
-segue: recorte conferido em 29/09/2026, com a página de origem e tradução livre
-e fiel.
+JUSTIFICATIVA TEÓRICA. {justificativa} {citation_note}
 \\end{{descricao}}
 
 \\begin{{aviso}}
@@ -275,7 +292,7 @@ localização da fonte (R110), não o mérito da afirmação.
 A citação que segue conecta a ativação e o cálculo deste módulo à literatura
 verificada na biblioteca do Módulo 11:
 
-\\citref{{{citacao}}}{{{doi}}}{{{pagina}. {just_cit}}}{{{trecho}}}{{{traducao}}}{{{locator}}}
+{citation}
 """
 
 

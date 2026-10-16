@@ -3,6 +3,10 @@
 % ============================================================
 \chapter{Instalação, Uso e Operação}
 
+% R901-PONTE-ABERTURA
+Conhecer a história não prepara sozinho uma máquina. Para a nota científica, começaremos pelo ambiente mínimo e pelas verificações necessárias às operações escolhidas.
+
+
 \roteirodidatico
 {Instalar significa preparar o ambiente para executar o programa. Um comando que termina sem erro é um primeiro sinal, mas ainda não demonstra que serviços, credenciais e modelos necessários estão disponíveis.}
 {\emph{Dependência} é um programa ou pacote exigido; \emph{ambiente virtual} isola pacotes Python; \emph{provedor} entrega inferência de modelo; \emph{diagnóstico} verifica condições locais.}
@@ -123,7 +127,7 @@ local.
 \textbf{Medições verificadas (R607, no host de teste):}\par
 \smallskip
 {\footnotesize
-\begin{tabularx}{\textwidth}{Xcc}
+\begin{tabularx}{\linewidth}{Xcc}
 \toprule
 Configuração & Tamanho do prompt & Tempo por turno \\
 \midrule
@@ -145,7 +149,7 @@ medição) — ele não deve ser citado como ganho.
          \pth{model: local/on-device}
   \item Importe os modelos afinados no Ollama antes de executar.
   \item Para a versão de nuvem/catálogo completo, use a configuração padrão
-         \pth{opencode.json} (216 agentes, 7 MCPs).
+         \pth{opencode.json} (\CoreAgentCount{} agentes e \CoreMCPCount{} MCPs configurados).
 \end{enumerate}
 \end{metodo}
 
@@ -181,7 +185,7 @@ capacidades). A invocação é tolerante: se a CLI não existe, avisa e segue.
 Invocáveis por skill própria (cada uma com seu grelhado de credenciais):\par
 \smallskip
 {\footnotesize
-\begin{tabularx}{\textwidth}{lYl}
+\begin{tabularx}{\linewidth}{Y Y Y}
 \toprule
 Executor & Spec & Credencial exigida \\
 \midrule
@@ -252,6 +256,27 @@ seu terminal e anote cada coluna do resultado — o que cada um verifica.
 %  execuções (marcador impede reescrita).
 % ============================================================
 
+
+\section{Da instalação à primeira observação confiável}
+
+Para o caso condutor, instalar tem um propósito delimitado: conseguir abrir as
+fontes e executar as verificações necessárias à tarefa. A presença de um modelo
+ou de um programa no PATH não demonstra que uma inferência ou análise funcionou.
+Comece pelo interpretador do ambiente do projeto e registre o modo do diagnóstico.
+Em seguida, escolha uma operação pequena e confira seu resultado próprio.
+
+\praticacore
+{Preparar o ambiente para a nota científica sem confundir instalação com execução.}
+{O checkout, seu ambiente Python e uma pasta local onde guardar a saída do diagnóstico.}
+{Na raiz, execute \cod{.venv/bin/python -m marceloclaro.cli doctor}. Leia os campos
+\cod{diagnostic_mode}, \cod{verification} e cada check antes de escolher uma ferramenta.}
+{O modo estrutural descreve configuração/importação/instalação conforme o check.
+Anote dependências e pendências da operação pretendida; a duração não mede qualidade.}
+{Use o motivo do check para corrigir a dependência correspondente. Não substitua
+um interpretador ausente por uma declaração de ambiente pronto.}
+{Que observação adicional distinguiria um executor instalado de uma inferência
+concluída? Leve essa diferença para o mapa de arquitetura.}
+
 \section[Leitura guiada]{Leitura guiada — Instalação e ambiente: preparar, executar e conferir}
 
 \elemento{Leitura guiada — Instalação e ambiente}{\metainfo{ID}{N-01c} \hfill \metainfo{Ciclo}{R614} \hfill \metainfo{Estilo}{calibrar antes de medir}}
@@ -288,7 +313,7 @@ saída possa ser reproduzida bit a bit.
 \end{metodo}
 
 \begin{resultado}
-\textbf{Exemplo resolvido.} Na execução usada para esta revisão, o campo
+\textbf{Exemplo resolvido.} Na execução histórica registrada neste exemplo, o campo
 \texttt{duration\_seconds} do diagnóstico reportou $3{,}39$ segundos. Se o mesmo
 comando fosse executado antes de $12$ tarefas, a divisão simples daria
 $3{,}39/12 \approx 0{,}28$ segundo de diagnóstico por tarefa. Esse cálculo só
@@ -309,7 +334,7 @@ reproduzir o inventário de checks, leia a seção \emph{checks} da saída do
 
 \begin{aviso}
 \textbf{Limite de validade.} O \pth{doctor} testa \emph{o ambiente}, não o
-\emph{mérito} das tarefas. Ambiente verde significa ``pronto para operar'', nunca
+\emph{mérito} das tarefas. Um diagnóstico estrutural aprovado não confirma prontidão de cada operação e não significa
 ``resultado verificado''.
 \end{aviso}
 
@@ -326,7 +351,7 @@ científico. (2) Por que toda referência deste livro exige ``data de acesso''
 \begin{processo}
 GATILHO. ``instalar'', ``ambiente mínimo'', ``doctor''.
 ROTA. linha de comando; gate: \texttt{python3\ -m\ marceloclaro.cli\ doctor} com checks\_failed = 0.
-FUNÇÃO. garantir ambiente reprodutível antes de qualquer ativação de agente ou skill.
+FUNÇÃO. inspecionar a estrutura do ambiente; a operação escolhida ainda exige sua própria sondagem.
 \end{processo}
 
 \begin{resultado}
@@ -343,3 +368,6 @@ localização da fonte (R110), não o mérito da afirmação.
 \end{aviso}
 
 \noindent\textit{Interpretação:} A instalação reproduzível depende de condições conjuntas: instruções executáveis, versões identificadas, entradas conhecidas e resultado observável. Como verificação didática, escrevemos $R=I\cdot V\cdot D\cdot S$, em que cada indicador vale $1$ quando a condição foi registrada e conferida, e $0$ caso contrário. Se uma versão não é fixada, por exemplo, $V=0$ e o produto é zero; isso não prova que o programa falhará, mas mostra que a execução ainda não pode ser repetida sob as mesmas premissas \citref{PENG, R. D. Reproducible research in computational science. \emph{Science}, v.~334, n.~6060, p.~1226-1227, 2011}{10.1126/science.1213847}{p.~1226--1227 (resumo, p.~1226). ancora o gate de instalação: reprodutibilidade é o padrão mínimo para julgar alegações quando a replicação integral não é possível — o que o doctor verifica antes de todo pipeline.}{Reproducibility has the potential to serve as a minimum standard for judging scientific claims when full independent replication of a study is not possible}{A reprodutibilidade tem o potencial de servir como padrão mínimo para julgar alegações científicas quando a replicação independente completa de um estudo não é possível.}{PENG, 2011, p.~1226}
+
+% R901-PONTE-FECHO
+Agora temos um ambiente identificado e sabemos quais dependências continuam pendentes. O mapa de arquitetura permitirá localizar essas condições no percurso entre pedido, operação e conferência.

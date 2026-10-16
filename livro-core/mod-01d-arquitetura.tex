@@ -4,6 +4,10 @@
 % ============================================================
 \chapter{Arquitetura de Ponta a Ponta}
 
+% R901-PONTE-ABERTURA
+O diagnóstico descreveu o ambiente; a arquitetura descreve responsabilidades e interfaces. Vamos acompanhar a nota científica entre elas, separando cada relação prevista da evidência de que foi percorrida.
+
+
 \roteirodidatico
 {Imagine um pedido que chega ao sistema, precisa de uma decisão, consulta uma ferramenta e retorna ao usuário. A arquitetura é o mapa que permite localizar cada responsabilidade nesse trajeto.}
 {\emph{Camada} agrupa responsabilidades; \emph{interface} define como partes trocam dados; \emph{configuração} descreve opções; \emph{runtime} é o conjunto de componentes efetivamente em execução.}
@@ -49,11 +53,35 @@ certa. Para isso, consulte o estado do ambiente e examine a evidência específi
 da tarefa.
 \end{aviso}
 
+
+\section{Mapa de arquitetura: seguir uma tarefa entre responsabilidades}
+\begin{flowch}[Mapa de arquitetura do percurso]{Caixas representam responsabilidades; setas contínuas mostram encaminhamento e tracejadas mostram apoio ou observação.}
+\node[fns,text width=3cm] (entrada) {Pessoa, CLI ou MCP};
+\node[fne,text width=3.4cm,right=8mm of entrada] (core) {MarceloClaro\\Orchestrator};
+\node[fns,text width=3cm,right=8mm of core] (saida) {Entrega com estado\\e evidências};
+\node[fn,text width=3cm,below=12mm of entrada] (tarefa) {Blackboard\\tarefa e atribuição};
+\node[fn,text width=3.4cm,below=12mm of core] (rota) {Rota elegível\\executor ou serviço};
+\node[fn,text width=3cm,below=12mm of saida] (gate) {Especificação\\testes e aceite};
+\node[fn,text width=3cm,below=12mm of tarefa] (mem) {MetaBus\\observações e origem};
+\node[fn,text width=3.4cm,below=12mm of rota] (integ) {Adaptadores\\local, MCP, REA};
+\node[fn,text width=3cm,below=12mm of gate] (audit) {Recibos e limites\\revisão humana};
+\draw[seta] (entrada)--(core);\draw[seta] (core)--(rota);\draw[seta] (rota)--(gate);\draw[seta] (gate)--(saida);
+\draw[seta,dashed] (core)--(tarefa);\draw[seta,dashed] (tarefa)--(mem);
+\draw[seta,dashed] (rota)--(integ);\draw[seta,dashed] (gate)--(audit);
+\draw[seta,dashed] (mem)--(integ);
+\end{flowch}
+\begin{descricao}
+\textbf{Como funciona e por quê.} As setas indicam os encaminhamentos descritos, sob suas condições. \textbf{Justificativa.} Comece no primário e siga o caminho da tarefa até a entrega. As três colunas permitem localizar coordenação, execução e aceite sem confundir suas responsabilidades. O ramo de memória conserva observações; o de adaptadores indica onde a execução depende de um provedor. A finalidade é ajudar o leitor a localizar uma falha antes de escolher o arquivo a examinar.
+\textbf{Limite.} Este é um mapa por responsabilidades. Não representa a ordem de todas as chamadas: comandos locais como o diagnóstico podem terminar sem delegação. A seta até um executor pressupõe que sua chamada foi autorizada e iniciada; configuração não comprova execução.
+\end{descricao}
+\fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator.delegate}
+
+
 \section{A primeira distinção: OpenCode, Core e comando local}
 
 \begin{resultado}
 {\footnotesize
-\begin{tabularx}{\textwidth}{lY}
+\begin{tabularx}{\linewidth}{>{\hsize=.70\hsize\linewidth=\hsize}Y>{\hsize=1.30\hsize\linewidth=\hsize}Y}
 \toprule
 Nome & O que significa neste manual \\
 \midrule
@@ -92,31 +120,31 @@ orienta a leitura; o código é quem determina o comportamento real.
 
 \begin{resultado}
 {\footnotesize
-\begin{tabularx}{\textwidth}{c l Y l}
+\begin{tabularx}{\linewidth}{c Y Y Y}
 \toprule
 Camada & Responsabilidade & Explicação em linguagem comum & Fontes principais \\
 \midrule
 0 & Fundação & Princípios de trabalho, dependências, configurações do ambiente e
-serviços locais opcionais. & arquivos de requisitos, \texttt{installer/},
-\texttt{integrations/} \\
+serviços locais opcionais. & arquivos de requisitos, \pth{installer/},
+\pth{integrations/} \\
 1 & Interfaces & Entradas pela CLI, configuração do hospedeiro e catálogo de
-agentes e skills. & \texttt{marceloclaro/cli.py}, \texttt{agents/},
-\texttt{skills/}, \texttt{opencode.json} \\
+agentes e skills. & \pth{marceloclaro/cli.py}, \pth{agents/},
+\pth{skills/}, \pth{opencode.json} \\
 2 & Memória e comunicação & Eventos, cartões, tarefas publicadas e memória
-compartilhada. & \texttt{mci/metabus.py}, \texttt{mci/blackboard.py} \\
+compartilhada. & \pth{mci/metabus.py}, \pth{mci/blackboard.py} \\
 3 & Roteamento e orquestração & Prepara o contexto, escolhe uma rota e acompanha
-o trabalho. & \texttt{marceloclaro/orchestrator.py},
-\texttt{transformer/attention.py} \\
+o trabalho. & \pth{marceloclaro/orchestrator.py},
+\pth{transformer/attention.py} \\
 4 & Qualidade e rigor & Compara entregas com especificações, critérios e testes
-associados. & \texttt{sdd/}, \texttt{tests/}, \texttt{trust/} \\
+associados. & \pth{sdd/}, \pth{tests/}, \pth{trust/} \\
 5 & Evolução e observação & Diagnostica o estado local e guarda registros de
-mudanças e execuções. & \texttt{marceloclaro/doctor.py},
-\texttt{evolution/}, \texttt{.mci\_state/} \\
+mudanças e execuções. & \pth{marceloclaro/doctor.py},
+\pth{evolution/}, \pth{.mci\_state/} \\
 6 & Integrações & Liga ferramentas locais, servidores MCP, provedores e programas
-externos. & \texttt{integrations/}, \texttt{opencode.json} \\
+externos. & \pth{integrations/}, \pth{opencode.json} \\
 7 & Aplicações & Combina capacidades em fluxos científicos, apresentações,
-raciocínio e outros usos. & \texttt{agentic\_science\_v2/},
-\texttt{illustrations/}, demais módulos \\
+raciocínio e outros usos. & \pth{agentic\_science\_v2/},
+\pth{illustrations/}, demais módulos \\
 \bottomrule
 \end{tabularx}}
 \end{resultado}
@@ -139,7 +167,7 @@ próxima geração; por isso, é importante saber qual arquivo é a fonte.
 
 \begin{resultado}
 {\footnotesize
-\begin{tabularx}{\textwidth}{l l Y}
+\begin{tabularx}{\linewidth}{Y Y Y}
 \toprule
 Elemento & Local típico & Para que serve \\
 \midrule
@@ -455,7 +483,7 @@ prontas.
 
 \begin{resultado}
 {\footnotesize
-\begin{tabularx}{\textwidth}{lY}
+\begin{tabularx}{\linewidth}{>{\hsize=.70\hsize\linewidth=\hsize}Y>{\hsize=1.30\hsize\linewidth=\hsize}Y}
 \toprule
 Tipo de recurso & Exemplo de responsabilidade \\
 \midrule
@@ -524,7 +552,7 @@ campos de auditoria não substituem uma avaliação externa independente.
 
 \begin{resultado}
 {\footnotesize
-\begin{tabularx}{\textwidth}{lY}
+\begin{tabularx}{\linewidth}{>{\hsize=.70\hsize\linewidth=\hsize}Y>{\hsize=1.30\hsize\linewidth=\hsize}Y}
 \toprule
 Pergunta operacional & Primeiro lugar a consultar \\
 \midrule
@@ -626,6 +654,98 @@ e que tipo de dependência cada um representa.
 
 
 % R814: leitura guiada substantiva; cenários hipotéticos rotulados.
+
+\section{A arquitetura atual no caso da nota científica}
+
+Depois de localizar as camadas, podemos seguir a mesma tarefa com mais precisão.
+Ana fornece uma fonte e uma pergunta; Bruno identifica quais operações podem ser
+locais e quais dependem de serviços; Carla pergunta por qual evidência cada etapa
+será aceita. O quadro abaixo aproxima esse trabalho de um laboratório. A analogia
+ajuda a lembrar as responsabilidades, mas as correspondências precisam continuar
+visíveis no código.
+
+\begin{flowch}[Do laboratório ao Core]{setas horizontais: correspondências de uma analogia}
+\matrix[matrix of nodes,name=lab,row sep=3mm,column sep=13mm,nodes={fn},ampersand replacement=\&]{
+ |[fns]|Coordenador do trabalho \& |[fn]|Primário MarceloClaro \\
+ |[fns]|Bancadas e especialistas \& |[fn]|Perfis e executores \\
+ |[fns]|Caderno de observações \& |[fn]|MetaBus e proveniência \\
+ |[fns]|Conferência antes de concluir \& |[fn]|Critérios e gates \\
+};
+\draw[seta] (lab-1-1)--(lab-1-2);
+\draw[seta] (lab-2-1)--(lab-2-2);
+\draw[seta] (lab-3-1)--(lab-3-2);
+\draw[seta] (lab-4-1)--(lab-4-2);
+\end{flowch}
+\begin{descricao}
+\textbf{Como funciona e por quê. Mecanismo.} Cada seta associa uma responsabilidade
+familiar a um componente do Core. Ela não indica chamada entre os quatro pares:
+o coordenador prepara o trabalho, um executor pode realizá-lo e os registros
+permitem conferir o resultado.
+\textbf{Justificativa.} Distinguir papéis evita que uma ficha de especialista
+seja interpretada como experimento executado ou que um caderno de observações
+seja confundido com um avaliador independente.
+\textbf{Limite.} O Core não se torna um laboratório validado por esta analogia.
+\end{descricao}
+\fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator}
+
+O primeiro percurso é o da \textbf{atribuição}. A R886 prepara um briefing de
+memória antes de publicar a tarefa. O Blackboard identifica capacidades e o
+primário seleciona um candidato elegível. Para perfis gerenciados, a R894 liga
+identidade, política, especificação, teste e hash dos bytes validados. Uma
+atribuição pendente ainda precisa ser consumida por um executor: a existência do
+cartão não realiza a análise solicitada. O capítulo seguinte acompanha esse
+percurso, incluindo o ramo em que ninguém pode assumir o trabalho.
+\fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator.delegate}
+\fontecore{agents/lifecycle.py}{AgentLifecycleService.validate}
+
+O segundo percurso é o da \textbf{ferramenta}. Um serviço pode realizar uma operação
+Python local, usar um provedor de contexto de código, preparar um ticket hospedado
+ou acionar uma inspeção REA confinada. Essas alternativas têm contratos próprios.
+O grafo \cod{core_python_ast}, por exemplo, resolve relações estáticas demonstráveis
+e conserva as ambiguidades; não desbloqueia as três operações nativas do provedor
+que falharam em contraprovas semânticas. A última consulta real sobre o checkout
+registrou timeout e não pode ser narrada como análise completa.
+\fontecore{integrations/code_context.py}{CodeContextProvider.run}
+\fontecore{integrations/python_code_graph.py}{analyze_python_graph}
+
+O terceiro percurso é o da \textbf{conferência}. O perfil científico R897 executa
+dez grupos enumerados e valida recibos da própria execução. O verificador R891
+reexecuta receitas reconhecidas do Core sobre os bytes preservados do pacote;
+não executa um programa arbitrário recebido junto dos dados. A observação resultante
+pode ser guardada na memória sem promover a confiança por uma nota autoatribuída.
+Isso liga qualidade, pesquisa e memória: a saída de uma etapa é a entrada da próxima,
+mas a força da conclusão continua limitada à evidência produzida.
+\fontecore{integrations/local_ci.py}{LocalCIService}
+\fontecore{research/scientific_release.py}{verify_scientific_package}
+
+\subsection{Mapa completo e mapa de leitura não têm o mesmo propósito}
+
+O atlas impresso seleciona os percursos que o leitor consegue acompanhar em uma
+página. O mapa estrutural completo do snapshot \cod{f930e19}, em
+\pth{docs/architecture-r900/}, conserva 691 módulos Python, 965 pares de dependências,
+1.083 imports declarados e 6.670 símbolos. Suas 18 camadas de classificação não
+são os oito agrupamentos editoriais deste livro. Uma aresta de importação não
+comprova uma chamada executada. O inventário foi extraído dos blobs Git; não
+inclui mudanças sem commit nem estado privado de modelos e índices.
+
+Para explorar o detalhe, abra o SVG de dependências; para editar relações,
+consulte o DOT ou o Mermaid integral; para conferir identidade e classificação,
+use o JSON. O livro permanece o guia das perguntas. Os arquivos extensos são o
+material de consulta que permite investigar uma delas sem reduzir todo o grafo
+a letras ilegíveis dentro de uma página A4.
+
+\praticacore
+{Transformar a nota científica em um percurso com responsabilidades distintas.}
+{Uma pergunta delimitada, uma fonte identificada e o mapa deste capítulo.}
+{Marque entrada, primário, ferramenta e gate; associe cada caixa a um arquivo e
+registre qual artefato deve sair dela. Não inicie um modelo para esta leitura.}
+{O esquema deve distinguir tarefa atribuída, operação executada e conclusão
+aceita. Uma seta sem fonte ou sem registro permanece hipótese do desenho.}
+{Se o código não contiver a relação, corrija o desenho; se faltar execução,
+conserve a relação como contrato e registre a evidência que seria necessária.}
+{Qual responsabilidade ficou sem dono? Essa é a pergunta com que entraremos
+na orquestração, e não um convite a adicionar agentes indiscriminadamente.}
+
 \section[Leitura guiada]{Leitura guiada — Arquitetura: seguir uma rota concreta}
 \elemento{Leitura guiada — R814-01d}{\metainfo{Ciclo}{R814}}
 \begin{descricao}
@@ -655,3 +775,6 @@ e que tipo de dependência cada um representa.
 \begin{resultado}
 \textbf{Exercícios.} Compare doctor com uma delegação pelo Blackboard. Identifique as entradas e saídas. Desenhe apenas as ligações que conseguiu localizar na implementação.
 \end{resultado}
+
+% R901-PONTE-FECHO
+Localizamos as partes e as fronteiras. A próxima questão é dinâmica: como uma solicitação ganha uma atribuição, por que um candidato é escolhido e em que ponto o trabalho pode parar?

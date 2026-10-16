@@ -4,6 +4,10 @@
 % ============================================================
 \chapter{Reprodução no Windows com WSL: Do Clique ao PDF}
 
+% R901-PONTE-ABERTURA
+O mapa teórico esclareceu o alcance das referências. Vamos agora realizar uma operação delimitada: recompilar o documento existente e conservar os registros necessários à conferência.
+
+
 \roteirodidatico
 {Você usa Windows, nunca abriu o terminal do Linux e recebeu um caminho estranho com wsl.localhost. Este capítulo pega sua mão: do clique no Explorer à recompilação do livro, cada comando copiável, cada saída esperada e cada erro comum com conserto.}
 {\emph{WSL} é o Linux dentro do Windows; \emph{Terminal} é o balcão de comandos; \emph{Clone} é trazer a casa para sua máquina; \emph{Doctor} é o check-up; \emph{PDF} é o livro recompilado por você.}
@@ -12,7 +16,7 @@
 {Qual passo travou você e que mensagem apareceu na tela?}
 
 \casoguiado{o caminho estranho de Ana}
-{Ana recebe \pth{\\\\wsl.localhost\\Ubuntu\\home\\marceloclaro\\opencode-ecosystem-core\\livro-core} e acha que é erro. Bruno explica: é o endereço da pasta do livro vista do Windows. Ana clica, vê os arquivos \pth{main.tex} e \pth{main.pdf}; Bruno abre o mesmo lugar pelo terminal e recompila. No fim, os dois olham o mesmo PDF: ela pelo clique, ele pelo comando. Reproduzir é provar que os dois caminhos chegam ao mesmo livro.}
+{Ana recebe \pth{\\\\wsl.localhost\\Ubuntu\\home\\marceloclaro\\opencode-ecosystem-core\\livro-core} e acha que é erro. Bruno explica: é o endereço da pasta do livro vista do Windows. Ana clica, vê os arquivos \pth{main.tex} e \pth{main.pdf}; Bruno abre o mesmo lugar pelo terminal e recompila. No fim, os dois olham o mesmo PDF: ela pelo clique, ele pelo comando. Os dois caminhos devem apontar para o mesmo arquivo; a reprodução ainda exige registrar fontes, ambiente, compilação e inspeção do resultado.}
 
 \section{Passo zero: abrir a pasta pelo Windows}
 
@@ -47,9 +51,9 @@ Esperado: o caminho termina em \texttt{opencode-ecosystem-core} e o arquivo \tex
 
 \begin{metodo}
 \begin{verbatim}
-python3 -m marceloclaro.cli doctor
+.venv/bin/python -m marceloclaro.cli doctor
 \end{verbatim}
-Esperado: cerca de 20 linhas de veredito: specs carregadas, registro de evolução íntegro, memória acessível. Amarelo para CLI externa ausente é normal: anote como dependência opcional, não como falha total. Erro comum: \texttt{No module named marceloclaro}. Conserto: você não está na raiz da casa; volte com \texttt{cd ~/opencode-ecosystem-core}.
+Esperado: um relatório JSON com modo, escopo, checks e estados. Nesta edição, o diagnóstico estrutural possui 22 checks; o número pode mudar. Confira cada resultado e o escopo \cod{installation_only}. Amarelo para CLI externa ausente é normal: anote como dependência opcional, não como falha total. Erro comum: \texttt{No module named marceloclaro}. Conserto: você não está na raiz da casa; volte com \texttt{cd ~/opencode-ecosystem-core}.
 \end{metodo}
 
 \elemento{Guarda de sanidade do LaTeX}{\metainfo{ID}{WSL-03} \hfill \metainfo{Rota}{\pth{livro-core/check.py}}}
@@ -66,10 +70,10 @@ Esperado literal: \texttt{ok: chaves, elemento, unicode e flowch limpos.} Qualqu
 
 \begin{metodo}
 \begin{verbatim}
-pdflatex main.tex
+latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
 ls -lh main.pdf
 \end{verbatim}
-Esperado: compilação sem linha iniciada por \texttt{!} e um \texttt{main.pdf} com data de agora e tamanho de alguns MB. Abra-o pelo Explorer no caminho do passo zero e confira o sumário: devem aparecer os capítulos novos (Projeto Pedagógico, Mapa das Teorias, Reprodução WSL, Atlas). Erro comum: \texttt{pdflatex: command not found}. Conserto: instale com \texttt{sudo apt update \&\& sudo apt install -y texlive-full} e repita. Erro comum 2: travar em fonte. Conserto: aguarde; primeira compilação é lenta.
+Esperado: compilação sem linha iniciada por \texttt{!} e um \texttt{main.pdf} com data de agora e tamanho de alguns MB. Abra-o pelo Explorer no caminho do passo zero e confira o sumário: devem aparecer os capítulos novos (Projeto Pedagógico, Mapa das Teorias, Reprodução WSL, Atlas). Erro comum: \texttt{pdflatex: command not found}. Conserto: instale com \texttt{sudo apt install latexmk texlive-latex-extra texlive-lang-portuguese texlive-fonts-recommended poppler-utils} e repita. Erro comum 2: travar em fonte. Conserto: aguarde; primeira compilação é lenta.
 \end{metodo}
 
 \begin{dicaleigo}
@@ -80,12 +84,12 @@ Em 30 segundos: você refez o livro. O PDF com data de hoje é sua fotografia: p
 Onde conferir: hash e data com \texttt{sha256sum main.pdf} e \texttt{git rev-parse HEAD} na raiz. Anote os dois ao lado da contagem de páginas. Fotografia datada é o padrão FAIR deste livro.
 \end{paratecnico}
 
-Cada entrega carrega proveniência para ser encontrada e reutilizada, segundo os princípios de dados justos \citref{WILKINSON, M. D. et al. The FAIR Guiding Principles for scientific data management and stewardship. Scientific Data, v.~3, 160018, 2016}{10.1038/sdata.2016.18}{Exige proveniência por observação em cada passo: comando, versão, hash.}{There is an urgent need to improve the infrastructure supporting the reuse of scholarly data}{Há necessidade urgente de melhorar a infraestrutura que sustenta a reutilização de dados acadêmicos.}{WILKINSON et al., 2016, 160018}.
+Cada entrega carrega proveniência para ser encontrada e reutilizada, segundo os princípios FAIR — encontrabilidade, acessibilidade, interoperabilidade e reutilização — \citref{WILKINSON, M. D. et al. The FAIR Guiding Principles for scientific data management and stewardship. Scientific Data, v.~3, 160018, 2016}{10.1038/sdata.2016.18}{Exige proveniência por observação em cada passo: comando, versão, hash.}{There is an urgent need to improve the infrastructure supporting the reuse of scholarly data}{Há necessidade urgente de melhorar a infraestrutura que sustenta a reutilização de dados acadêmicos.}{WILKINSON et al., 2016, 160018}.
 
 A exigência de acompanhar o ambiente junto ao texto vem da ciência reproduzível: sem ele, o artigo descreve intenção; com ele, outro percorre o caminho \citref{PENG, R. D. Reproducible research in computational science. Science, v.~334, n.~6060, p.~1226-1227, 2011}{10.1126/science.1213847}{Justifica tratar comandos e versões como parte do texto.}{Reproducible research is the idea that the ultimate product of academic research is the paper along with the full computational environment}{Pesquisa reproduzível é a ideia de que o produto final é o artigo junto com o ambiente computacional completo.}{PENG, 2011, p.~1226-1227}.
 
 \begin{aviso}
-Limite WSL. Esta planta foi testada neste checkout em 11/10/2026. Modelos locais, credenciais de provedores e pacotes do Ubuntu mudam com o tempo. Divergência de versão não é mentira do livro: é convite a registrar nova fotografia com data, hash e saída real.
+Limite WSL. Os recibos de 11/10/2026 pertencem à edição histórica. A compilação e a conferência desta atualização são registradas separadamente no manifesto R901. Modelos locais, credenciais de provedores e pacotes do Ubuntu mudam com o tempo. Divergência de versão não é mentira do livro: é convite a registrar nova fotografia com data, hash e saída real.
 \end{aviso}
 
 \begin{resultado}
@@ -114,3 +118,6 @@ Limite WSL. Esta planta foi testada neste checkout em 11/10/2026. Modelos locais
 \begin{resultado}
 \textbf{Exercícios.} Registre ambiente e hash; selecione uma página de figura e uma de referências; explique uma divergência observada; separe uma prova de instalação de uma prova de execução.
 \end{resultado}
+
+% R901-PONTE-FECHO
+A compilação oferece um primeiro resultado reproduzível, mas não encerra a avaliação do Core. O epílogo reunirá o percurso completo da nota científica e as perguntas que permanecem abertas.

@@ -4,6 +4,10 @@
 % ============================================================
 \chapter{N\'ivel 0 Universal: O Dicion\'ario da Casa}
 
+% R901-PONTE-ABERTURA
+A jornada apresentou várias palavras novas. Este glossário oferece uma entrada acessível para elas, sem exigir memorização: cada definição deve ganhar precisão quando o mecanismo correspondente aparecer.
+
+
 \roteirodidatico
 {Se alguma palavra deste livro travou sua leitura, venha para ca. Este capitulo traduz todos os termos dificeis para a linguagem da casa, com uma frase curta, uma comparacao e o lugar onde o tecnico confere.}
 {\emph{N\'ivel 0} e entender o bastante para usar sem se enganar; \emph{termo discriminado} e palavra com sentido proprio neste livro; \emph{familia} e grupo de agentes com trabalho parecido.}
@@ -69,7 +73,75 @@ Cada item tem frase curta, comparacao com a casa e, quando existe, a morada no c
 \end{descricao}
 
 \begin{descricao}
-\textbf{Agente:} ajudante com plaquinha do que tenta. Como plantonista com especialidade do dia. Mora em \pth{agents/catalog/}. \textbf{Orquestrador:} porteiro unico que distribui sem fazer o servico. Como sindico que escala. Mora em \pth{marceloclaro/orchestrator.py}. \textbf{Blackboard:} lousa onde todos veem quem faz o que. Como quadro de plantao. \textbf{MetaBus:} caderno de licoes aprendidas. Como livro de ocorrencias. Mora em \pth{mci/}. \textbf{Memoria episodica:} o que aconteceu. Como diario. \textbf{Memoria semantica:} licao tirada. Como regra da casa. \textbf{Spec:} combinado escrito antes. Como receita. Mora em \pth{specs/}. \textbf{Teste:} prova com gabarito. Como simulado. Mora em \pth{tests/}. \textbf{Gate:} fiscal que devolve sem nota. Como porteira de prova. \textbf{Fail-closed:} na duvida, reprova. Como porteira que nao abre sem cracha. \textbf{SDD:} nada sem combinado. Como obra sem projeto nao comeca. \textbf{TDD:} ciclo curto com teste. Como provar roupa a cada ajuste. \textbf{Escore:} nota de parecido. Como formato da chave. \textbf{Jaccard:} parecido sobre total. Como pecas iguais sobre pecas vistas. \textbf{Atencao:} peso para o parecido. Como ouvir mais quem sabe do assunto. \textbf{Roteamento:} escolher destino. Como mesa que encaminha guia. \textbf{Delegacao:} passar com dono anotado. Como escala assinada. \textbf{Voluntariado:} quem pode se oferece. Como plantao que aceita caso. \textbf{CFP:} anuncio de vaga. Como edital na lousa. \textbf{Lease:} posse temporaria. Como turno com horario. \textbf{Fallback:} plano B. Como estepe. \textbf{Carga:} ocupacao. Como fila de espera. \textbf{Confianca:} pontos de quem acerta. Como credito na cantina, interno e nao garantia. \textbf{Proveniencia:} quem fez, quando, com o que. Como nota fiscal. \textbf{Hash:} digital do arquivo. Como impressao digital. \textbf{Seed:} numero que fixa sorteio. Como senha do bingo. \textbf{Versao:} foto datada. Como edicao do jornal. \textbf{Commit:} ponto salvo. Como capitulo gravado. \textbf{CLI:} janela de comandos. Como balcao de digitacao. \textbf{MCP:} tomada padrao para ferramenta. Como tomada universal. \textbf{A2A:} conversa entre ajudantes. Como radio da equipe. \textbf{Skill:} receita pronta. Como modo de preparo. \textbf{Catalogo:} lista de ajudantes. Como lista de ramais. Mora em \pth{opencode.json}. \textbf{Executor externo:} vizinho que ajuda. Como Gemini e Reasonix chamados quando precisa. \textbf{Reversa:} engenharia de mapa antigo. Como reforma com planta velha. \textbf{Transformer:} maquina de dar peso. Como balanca de parecido. \textbf{Embedding:} numero que resume sentido. Como apelido numerico. \textbf{Softmax:} reparte cem por cento. Como dividir pizza por fome. \textbf{Poder:} chance de achar o que existe. Como faro bom. \textbf{Alfa:} tolerancia a alarme falso. Como cinco em cem. \textbf{PPV:} de cada achado, quanto presta. Como peixe bom na rede. \textbf{Vies:} torta na balanca. Como vento a favor de um lado. \textbf{Taxa-base:} quanto ja era comum. Como peixe que ja tinha no lago. \textbf{FAIR:} facil de achar, abrir, juntar e reusar. Como biblioteca arrumada. \textbf{Reproducao:} refazer e comparar. Como repetir receita. \textbf{Fotografia:} contagem datada. Como censo do predio. \textbf{Doctor:} check-up da casa. Como comando \pth{python3 -m marceloclaro.cli doctor}. \textbf{Ciclo de evolucao:} aprendizado gravado. Como ata numerada R47 em diante. \textbf{Corrigendum:} lista de exageros corrigidos. Como errata na porta. \textbf{Anti-overclaim:} sem selo sem prova externa. Como sem diploma sem escola. \textbf{Metacognicao:} pensar sobre o pensar. Como revisar a propria prova. \textbf{Reflexao:} resumo do que houve. Como relatorio de plantao. \textbf{Percebe:} olhar lousa e caderno antes. Como passar visita. \textbf{Delega:} encaminhar com criterio. Como distribuir guias. \textbf{Executa:} fazer com ferramenta. Como cozinhar com ingredientes. \textbf{Reflete:} guardar licao. Como atualizar livro de ocorrencias. \textbf{Camada:} andar da casa. Como do zero ao sete. \textbf{Interface:} porta de entrada. Como recepcao. \textbf{Infra:} luz, agua e chave. Como Ollama e credenciais. \textbf{Seguranca:} fechadura e cofre. Como permissao e segredo. \textbf{Benchmark:} corrida com cronometro. Como comparacao datada, nao titulo. \textbf{Qualis:} selo externo de revista. Como este livro nao da a ninguem sozinho. \textbf{Mind map:} desenho das ideias. Como arvore da materia. \textbf{Infografico:} cartaz que explica. Como painel do corredor. \textbf{NotebookLM:} caderno que responde com fonte. Como biblioteca que cita pagina.
+Leia uma entrada quando o termo aparecer no caso condutor e retorne ao capítulo que mostra seu uso. A analogia inicia a compreensão; a definição técnica delimita o que pode ser conferido.
+
+\begin{description}[style=nextline,leftmargin=1.3em,itemsep=5pt]
+\item[Agente.] ajudante com plaquinha do que tenta. Como plantonista com especialidade do dia. Mora em \pth{agents/catalog/}.
+\item[Orquestrador.] Componente que organiza o trabalho pelo Blackboard e pelo MetaBus. Pode chamar serviços locais e encaminhar executores; coordenar não demonstra execução de todos os especialistas.
+\item[Blackboard.] lousa onde todos veem quem faz o que. Como quadro de plantao.
+\item[MetaBus.] caderno de licoes aprendidas. Como livro de ocorrencias. Mora em \pth{mci/}.
+\item[Memória episódica.] o que aconteceu. Como diario.
+\item[Memória semântica.] licao tirada. Como regra da casa.
+\item[Spec.] combinado escrito antes. Como receita. Mora em \pth{specs/}.
+\item[Teste.] Verificação com entrada, procedimento e resultado esperado. Sua aprovação sustenta os casos observados, sem ser prova universal.
+\item[Gate.] fiscal que devolve sem nota. Como porteira de prova.
+\item[Fail-closed.] na duvida, reprova. Como porteira que nao abre sem cracha.
+\item[SDD.] nada sem combinado. Como obra sem projeto nao comeca.
+\item[TDD.] ciclo curto com teste. Como provar roupa a cada ajuste.
+\item[Escore.] nota de parecido. Como formato da chave.
+\item[Jaccard.] parecido sobre total. Como pecas iguais sobre pecas vistas.
+\item[Atenção.] peso para o parecido. Como ouvir mais quem sabe do assunto.
+\item[Roteamento.] escolher destino. Como mesa que encaminha guia.
+\item[Delegação.] passar com dono anotado. Como escala assinada.
+\item[Voluntariado.] quem pode se oferece. Como plantao que aceita caso.
+\item[CFP.] anuncio de vaga. Como edital na lousa.
+\item[Lease.] posse temporaria. Como turno com horario.
+\item[Fallback.] plano B. Como estepe.
+\item[Carga.] ocupacao. Como fila de espera.
+\item[Confiança.] Sinal interno usado em decisões de roteamento. Não é probabilidade calibrada; observações automáticas R886 não promovem o ledger pela própria nota.
+\item[Proveniência.] quem fez, quando, com o que. Como nota fiscal.
+\item[Hash.] digital do arquivo. Como impressao digital.
+\item[Seed.] Valor que inicializa um gerador pseudoaleatório. Ajuda a repetir um procedimento identificado, mas não fixa sozinho versões, hardware ou todas as operações.
+\item[Versão.] foto datada. Como edicao do jornal.
+\item[Commit.] ponto salvo. Como capitulo gravado.
+\item[CLI.] janela de comandos. Como balcao de digitacao.
+\item[MCP.] tomada padrao para ferramenta. Como tomada universal.
+\item[A2A.] Comunicação entre agentes. O Blackboard do Core implementa seu contrato interno; a simples presença do rótulo não demonstra interoperabilidade externa.
+\item[Skill.] receita pronta. Como modo de preparo.
+\item[Catálogo.] lista de ajudantes. Como lista de ramais. Mora em \pth{opencode.json}.
+\item[Executor externo.] vizinho que ajuda. Como Gemini e Reasonix chamados quando precisa.
+\item[Reversa.] engenharia de mapa antigo. Como reforma com planta velha.
+\item[Transformer.] Arquitetura neural de referência na literatura de atenção. O roteador do Core usa ideias de ponderação; sua configuração não o transforma em um Transformer treinado.
+\item[Embedding.] numero que resume sentido. Como apelido numerico.
+\item[Softmax.] reparte cem por cento. Como dividir pizza por fome.
+\item[Poder.] Probabilidade de rejeitar a hipótese nula sob uma alternativa e condições especificadas. Não representa precisão geral de um agente.
+\item[Alfa.] tolerancia a alarme falso. Como cinco em cem.
+\item[PPV.] Valor preditivo positivo de um modelo ou teste com pressupostos definidos. No exemplo estatístico do livro, depende de poder, alfa e chances prévias; não é probabilidade atribuída a um teste de software verde.
+\item[Viés.] torta na balanca. Como vento a favor de um lado.
+\item[Taxa-base.] quanto ja era comum. Como peixe que ja tinha no lago.
+\item[FAIR.] facil de achar, abrir, juntar e reusar. Como biblioteca arrumada.
+\item[Reprodução.] refazer e comparar. Como repetir receita.
+\item[Fotografia.] contagem datada. Como censo do predio.
+\item[Doctor.] check-up da casa. Como comando \pth{python3 -m marceloclaro.cli doctor}.
+\item[Ciclo de evolucao.] aprendizado gravado. Como ata numerada R47 em diante.
+\item[Corrigendum.] lista de exageros corrigidos. Como errata na porta.
+\item[Anti-overclaim.] sem selo sem prova externa. Como sem diploma sem escola.
+\item[Metacognição.] Monitoramento e controle da própria atividade, como conceito da literatura. No Core, designa mecanismos computacionais de contexto e observação, sem alegação de consciência.
+\item[Reflexão.] Registro interpretativo sobre uma execução ou observação. Pode estar incompleto ou errado e precisa conservar origem, revisão e limites.
+\item[Percebe.] olhar lousa e caderno antes. Como passar visita.
+\item[Delega.] encaminhar com criterio. Como distribuir guias.
+\item[Executa.] fazer com ferramenta. Como cozinhar com ingredientes.
+\item[Reflete.] guardar licao. Como atualizar livro de ocorrencias.
+\item[Camada.] andar da casa. Como do zero ao sete.
+\item[Interface.] porta de entrada. Como recepcao.
+\item[Infra.] luz, agua e chave. Como Ollama e credenciais.
+\item[Seguranca.] fechadura e cofre. Como permissao e segredo.
+\item[Benchmark.] corrida com cronometro. Como comparacao datada, nao titulo.
+\item[Qualis.] Classificação de periódicos em um sistema de avaliação. Uma rubrica interna ou nome de perfil não atribui essa classificação a um manuscrito.
+\item[Mind map.] desenho das ideias. Como arvore da materia.
+\item[Infografico.] cartaz que explica. Como painel do corredor.
+\item[NotebookLM.] Aplicação externa de organização e consulta a fontes. Uma síntese gerada precisa ser confrontada com os documentos; o livro não presume que todo áudio esteja atualizado.
+\end{description}
 \end{descricao}
 
 \section{Cinco fichas-modelo traduzidas para todos os tipos de caixa}
@@ -165,3 +237,6 @@ Limite do nivel 0. Frase curta ajuda a comecar; nao substitui spec, teste e gate
 \begin{resultado}
 \textbf{Exercícios.} Aplique os cinco olhares a uma ficha real. Indique qual campo exige execução e qual pode ser conferido por leitura. Escreva um limite que impediria o uso da saída em outra tarefa.
 \end{resultado}
+
+% R901-PONTE-FECHO
+O vocabulário permite formular perguntas mais claras. Podemos agora definir o que o Core é, quais problemas procura organizar e que limites devem acompanhar qualquer afirmação sobre ele.

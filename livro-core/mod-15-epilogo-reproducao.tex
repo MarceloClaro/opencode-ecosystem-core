@@ -4,15 +4,19 @@
 % ============================================================
 \chapter{Ep\'ilogo Operacional: Reproduza o Core em Doze Passos}
 
+% R901-PONTE-ABERTURA
+Chegamos ao ponto de reunir o que foi construído: pergunta, plano, atribuições, observações, critérios e artefatos. O encerramento da trilha principal consiste em conferir essas relações, e não em declarar o sistema completo.
+
+
 \roteirodidatico
-{Ana quer ter certeza de que o que leu continua valendo amanh\~a; Bruno quer provar que consegue reconstruir tudo em outra m\'aquina. Este ep\'ilogo \'e a planta que os dois executam juntos, cada passo com comando, sa\'ida esperada e modo de conferir.}
+{A nota científica já tem pergunta, fontes, cálculo e limites. Ana quer saber o que pode comunicar; Bruno quer deixar uma entrega que outra pessoa consiga examinar. O epílogo reúne os registros necessários para repetir o percurso e localizar divergências.}
 {\emph{Proveni\^encia} diz quem gerou, de que vers\~ao e com que comando; \emph{fotografia} \'e contagem datada do checkout; \emph{gate} \'e teste booleano que reprova na d\'uvida; \emph{hash} \'e impress\~ao digital do arquivo.}
-{Execute na ordem, anote a sa\'ida real ao lado da esperada e pare no primeiro desvio para diagnosticar antes de seguir.}
+{Identifique a versão e o ambiente, repita uma operação delimitada, compare sua saída e conserve o recibo com as pendências. Trate os doze passos como roteiro de conferência; nem todo projeto executará as mesmas integrações.}
 {Reproduzir prova que o caminho \'e percorr\'ivel, n\~ao que toda resposta do sistema \'e correta. N\'umero de teste verde n\~ao \'e medida de verdade geral.}
 {Que passo desta planta voc\^e consegue executar agora, com que evid\^encia, e qual depend\^encia externa ainda pode impedi-lo?}
 
 \casoguiado{Bruno reconstr\'oi, Ana confere}
-{Bruno clona o reposit\'orio, cria o ambiente virtual e roda o diagn\'ostico. Ana anota num caderno: quantos agentes o arquivo declara, quantas specs carregaram, quantos testes passaram. Quando o PDF recompila, os dois comparam o n\'umero de p\'aginas e o sum\'ario com a edi\c{c}\~ao que leram. Se algum n\'umero divergir, n\~ao concluem que o livro mentiu: concluem que o checkout mudou e registram a nova fotografia com data.}
+{Bruno identifica o checkout e revalida o pacote estatístico. Ana confronta a frase da nota com a análise e com as fontes: ``há associação agregada nesta amostra'' conserva o alcance do resultado; ``a espécie causa a diferença'' pediria outro desenho e outra evidência. Os dois anexam o recibo, registram a revisão humana pendente e verificam o PDF que será entregue. Se algo divergir, preservam a diferença e investigam sua origem antes de aceitar o percurso.}
 
 \section{Planta de doze passos com confer\^encia}
 
@@ -20,39 +24,113 @@ A planta trata o ambiente, o c\'odigo e os dados como parte do relato, n\~ao com
 
 Sem o ambiente, o artigo descreve inten\c{c}\~ao; com ele, outro pesquisador pode percorrer o mesmo caminho e comparar resultados \citref{PENG, R. D. Reproducible research in computational science. Science, v.~334, n.~6060, p.~1226-1227, 2011}{10.1126/science.1213847}{Exige que este epilogo entregue comandos e versoes como parte do texto cientifico, nao como anexo opcional.}{Reproducible research is the idea that the ultimate product of academic research is the paper along with the full computational environment}{Pesquisa reproduzivel e a ideia de que o produto final da pesquisa academica e o artigo junto com o ambiente computacional completo.}{PENG, 2011, p.~1226-1227}.
 
-Cada entrega desta planta carrega proveni\^encia para ser encontrada, acessada e reutilizada por pessoas e m\'aquinas, segundo os princ\'ipios de dados justos.
+Cada entrega desta planta conserva proveniência para que pessoas e máquinas
+possam localizar e reutilizar seus artefatos. FAIR designa encontrabilidade,
+acessibilidade, interoperabilidade e reutilização; não se traduz como
+``dados justos'' nem certifica a verdade dos dados.
 
 A infraestrutura de reutiliza\c{c}\~ao \'e a condi\c{c}\~ao para que a reprodu\c{c}\~ao de hoje sirva \`a auditoria de amanh\~a \citref{WILKINSON, M. D. et al. The FAIR Guiding Principles for scientific data management and stewardship. Scientific Data, v.~3, 160018, 2016}{10.1038/sdata.2016.18}{Fundamenta a exigencia de proveniencia por observacao em cada passo da planta: identificador, descricao e registro.}{There is an urgent need to improve the infrastructure supporting the reuse of scholarly data}{Ha uma necessidade urgente de melhorar a infraestrutura que sustenta a reutilizacao de dados academicos.}{WILKINSON et al., 2016, 160018}.
 
-\elemento{Planta em doze passos}{\metainfo{ID}{REP-12} \hfill \metainfo{Tempo}{cerca de uma tarde} \hfill \metainfo{Gate}{parar no primeiro desvio}}
+\elemento{Planta em doze passos}{\metainfo{ID}{REP-12} \hfill \metainfo{Escopo}{ambiente, operação e entrega} \hfill \metainfo{Gate}{conservar divergências}}
 
 \begin{descricao}
-Passos 1 a 4 preparam o terreno. Passo 1: clone ou atualize o reposit\'orio e anote o hash do commit. Passo 2: crie o ambiente virtual Python 3 e ative-o. Passo 3: instale com \pth{make install} e \pth{make setup}, depois \pth{make setup-dev} ou \pth{make setup-science} se precisar. Passo 4: rode \pth{python3 -m marceloclaro.cli doctor} e guarde as linhas de veredito. Esperado: specs formais carregadas, registro de evolu\c{c}\~ao \'integro, mem\'oria acess\'ivel. Se faltar CLI externa, o diagn\'ostico avisa em amarelo; anote como depend\^encia opcional ausente, n\~ao como falha total.
+\textbf{Passos 1 a 4: preparar o ambiente.} (1) Use uma cópia identificada do
+repositório e anote commit e alterações locais. (2) Prepare o ambiente Python
+compatível; o perfil científico documenta Python 3.12 e 3.14. (3) Instale as
+dependências de \pth{requirements-scientific-profile.txt} no ambiente do
+projeto e confira a consistência das dependências. (4) Rode
+\pth{python3 -m marceloclaro.cli doctor} e conserve seu escopo e resultado.
+Um diagnóstico estrutural saudável não comprova autenticação, saldo,
+inferência de provedores ou execução bem-sucedida da análise.
 \end{descricao}
 
 \begin{descricao}
-Passos 5 a 8 conferem o invent\'ario. Passo 5: conte agentes em \pth{opencode.json}, chave \pth{agent}; confira o total com o M\'odulo 10. Passo 6: conte arquivos \pth{specs/SPEC-935-R*.md} e compare com o n\'umero que o \pth{doctor} diz ter carregado; escopos distintos explicam diferen\c{c}as. Passo 7: conte arquivos e linhas em \pth{mci/} e anote como fotografia datada. Passo 8: rode a su\'ite m\'inima de testes do n\'ucleo e anote verdes e vermelhos. Nenhuma dessas contagens mede qualidade; todas medem presen\c{c}a naquela vers\~ao.
+\textbf{Passos 5 a 8: conferir configuração e testes.} (5) Reproduza o
+inventário por \pth{livro-core/gen_inventario.py} e compare a configuração
+com os apêndices; esta edição declara \CoreAgentCount{} perfis,
+\CoreMCPCount{} servidores MCP e \CoreCommandCount{} comandos.
+(6) Separe arquivos de spec, registros carregados e casos de teste.
+(7) Inicie a seleção científica com
+\pth{.venv/bin/python -m marceloclaro.cli ci-local iniciar --profile scientific}
+e guarde o ID retornado. (8) Consulte
+\cod{ci-local status --run-id ID_RETORNADO} pelo mesmo ponto de entrada
+até o estado final, preservando resumo, grupos e limitações. O estado
+\cod{running} não significa aprovação; um recibo histórico aprovado não
+demonstra compatibilidade com fontes alteradas.
 \end{descricao}
 
 \begin{descricao}
-Passos 9 a 12 fecham o ciclo. Passo 9: execute uma tarefa de brinquedo pelo Orquestrador e guarde Blackboard, escore e gate. Passo 10: confira cada DOI deste livro abrindo \pth{https://doi.org/} mais o sufixo; DOI que n\~ao resolve n\~ao entra na pr\'oxima edi\c{c}\~ao. Passo 11: recompile com \pth{pdflatex main.tex} dentro de \pth{livro-core/} e rode \pth{python3 check.py}; esperado \pth{ok} e \pth{main.pdf} regenerado. Passo 12: registre ciclo de evolu\c{c}\~ao e li\c{c}\~ao no MetaBus com data, hash e o que mudou. Sem passo 12, a reprodu\c{c}\~ao serviu s\'o a voc\^e; com ele, serve ao pr\'oximo leitor.
+\textbf{Passos 9 a 12: conferir a nota e a entrega.} (9) Revalide o pacote
+R663 por \cod{ciencia verificar --config verificar.json}; confira bytes,
+replay e persistência, como na prática do capítulo de ciência. (10) Confronte
+cada afirmação material com dados, desenho e passagem bibliográfica; um DOI
+resolvível identifica uma fonte, sem comprovar sua interpretação.
+(11) Em \pth{livro-core/}, execute \pth{python3 check.py} e
+\pth{latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex}; examine
+log, texto extraído e páginas renderizadas, além dos gates editoriais.
+(12) Registre a mudança pelo primário, com artefatos, hashes, critérios,
+resultados e pendências. O ciclo e a observação metacognitiva conservam
+contexto; não substituem os recibos de execução ou a revisão humana.
 \end{descricao}
 
 \begin{funcao}
 Transformar leitores em replicadores: cada passo deixa rastro que outro pode seguir, comparar e contestar, sem depender da m\'aquina do autor.
 \end{funcao}
 
+\begin{resultado}
+\textbf{O que a execução histórica demonstrou.} O recibo
+\cod{lci-53152ee1d24e4675b33b66c451a58d05}, no snapshot
+\cod{f930e19}, registrou 1.130 testes aprovados e zero falhas, erros ou
+skips em 15/10/2026. Trata-se do perfil científico enumerado em dez grupos,
+com prazo de 180 segundos por grupo e orçamento de 1.536 MiB de RSS
+observado para pytest e descendentes. Amostragem de memória não é isolamento
+instantâneo por cgroup. O recibo fica em
+\pth{.mci_state/local-ci/runs/lci-53152ee1d24e4675b33b66c451a58d05/record.json}.
+Essa execução não foi a suíte global, não criou um check no GitHub e não
+realizou validação científica externa. Fontes posteriores exigem sua própria
+conferência de compatibilidade e execução.
+\end{resultado}
+\fontecore{integrations/local_ci.py}{LocalCIService}
+
+\praticacore
+{Entregar a nota científica com um percurso reexecutável e pendências explícitas.}
+{Reúna o pacote R663, o recibo R891, fontes usadas na nota, identificação do checkout e ambiente. Escolha uma operação que possa repetir nesta máquina; a CI enumerada é uma conferência adicional com escopo próprio.}
+{Escreva os critérios antes de repetir a operação: quais bytes precisam coincidir, quais números admitem tolerância e qual resultado bloqueia a entrega. Revalide o pacote pelo primário, compare o recibo e examine o PDF correspondente. Monte um índice simples dos artefatos e dos resultados efetivos.}
+{Outra pessoa deve localizar entrada, método, versão, comando e resultado sem adivinhação. Confira se a interpretação da nota conserva associação, amostra e limites; confirme que a revisão humana e a validação externa não foram convertidas em aprovação pela existência de testes.}
+{Se faltar artefato, houver divergência ou a operação não puder executar, preserve o motivo e marque o item pendente. Um resultado antigo ou uma página apenas recompilada não preenche essa lacuna.}
+{Qual parte você repetiu e qual continua sendo uma declaração de origem ou uma interpretação? Essa distinção define o alcance da entrega e orienta o próximo leitor que a examinar.}
+
 \section{Quatro c\'alculos fechados para levar no bolso}
 
-Primeiro c\'alculo, risco de agregar sem gate. Com $N=216$ e $p=0{,}99$, $P=1-0{,}99^{216}\approx 0{,}886$. Variante com $p=0{,}999$: $\ln(0{,}999^{216})=216\ln 0{,}999\approx 216\times(-0{,}0010005)\approx -0{,}216$, logo $0{,}999^{216}\approx e^{-0{,}216}\approx 0{,}806$ e $P\approx 0{,}194$, cerca de 19 por cento. Melhorar cada pe\c{c}a de 99 para 99,9 por cento derruba o risco de 89 para 19 por cento, mas n\~ao o zera. A hip\'otese de independ\^encia segue fr\'agil: erros correlacionados quebram a f\'ormula para cima.
+Primeiro cálculo: \textbf{agregação hipotética sob independência}. Suponha
+$N=216$ saídas independentes, todas com probabilidade $p=0{,}99$ de acerto.
+Então $P(\hbox{ao menos um erro})=1-p^N\approx0{,}886$. Se, no mesmo
+modelo, $p=0{,}999$, obtemos $P\approx0{,}194$. Esses parâmetros não foram
+medidos no Core. Sem independência, a fórmula não se aplica e a direção da
+diferença não é determinada apenas pela palavra ``correlação''. Se todas
+as saídas compartilhassem exatamente o mesmo evento de erro de 1\%, a
+probabilidade de ao menos um erro seria 1\%, não 88,6\%. Definir a dependência
+é parte do modelo, não um ajuste automático para aumentar o risco.
 
 Segundo c\'alculo, aten\c{c}\~ao de brinquedo, j\'a resolvido na jornada: com $QK^{T}=[[4,0],[0,4]]$ e $d_{k}=4$, softmax d\'a $[0{,}88,0{,}12]$ e $[0{,}12,0{,}88]$. A li\c{c}\~ao permanece: peso concentra onde o escore destaca, e escore empatado divide.
 
-Terceiro c\'alculo, valor preditivo positivo. Com $R=0{,}1$, poder $0{,}8$ e $\alpha=0{,}05$, $\mathrm{PPV}\approx 0{,}615$. Com campo f\'acil $R=1$, $\mathrm{PPV}=0{,}8/(0{,}8+0{,}05)\approx 0{,}941$. O mesmo teste verde vale 62 por cento num campo e 94 por cento noutro. A taxa-base manda tanto quanto o teste.
+Terceiro cálculo: \textbf{valor preditivo positivo em um modelo estatístico
+hipotético, sem viés adicional}. Se $R$ representa as chances prévias de
+relação verdadeira e $1-\beta$ o poder, então
+\[ \mathrm{PPV}=\frac{(1-\beta)R}{(1-\beta)R+\alpha}. \]
+Para $R=0{,}1$, poder $0{,}8$ e $\alpha=0{,}05$,
+$\mathrm{PPV}=0{,}08/(0{,}08+0{,}05)\approx0{,}615$.
+Para $R=1$, mantendo os outros parâmetros,
+$\mathrm{PPV}=0{,}8/(0{,}8+0{,}05)\approx0{,}941$.
+O PPV responde ao alcance de um achado significativo sob esses pressupostos;
+não é a probabilidade de um teste de software verde estar correto.
 
 Essa depend\^encia da taxa-base e do vi\'es \'e a raz\~ao formal do anti-overclaim deste livro: sem relatar poder, vi\'es e campo, signific\^ancia n\~ao sustenta proclama\c{c}\~ao.
 
-Para muitos desenhos e campos, a alega\c{c}\~ao tem mais chance de ser falsa do que verdadeira, e \'e por isso que cada ficha termina com limites \citref{IOANNIDIS, J. P. A. Why most published research findings are false. PLoS Medicine, v.~2, n.~8, e124, 2005}{10.1371/journal.pmed.0020124}{Fecha os tres calculos com a formula do PPV: taxa-base, poder e vies decidem o que um teste verde permite concluir.}{Simulations show that for most study designs and settings, it is more likely for a research claim to be false than true}{Simulacoes mostram que, para a maioria dos desenhos e cenarios de estudo, e mais provavel que uma alegacao de pesquisa seja falsa do que verdadeira.}{IOANNIDIS, 2005, e124}.
+Os cenários modelados por Ioannidis motivam explicitar pressupostos e viés;
+não permitem atribuir falsidade provável a qualquer afirmação sem validação
+externa. Na nota científica, os limites decorrem do desenho e da evidência
+efetivamente disponíveis \citref{IOANNIDIS, J. P. A. Why most published research findings are false. PLoS Medicine, v.~2, n.~8, e124, 2005}{10.1371/journal.pmed.0020124}{Contextualiza o PPV como modelo condicionado a chances previas, poder, erro tipo I e vies; nao estima a probabilidade de um teste de software verde estar correto.}{Simulations show that for most study designs and settings, it is more likely for a research claim to be false than true}{Simulacoes mostram que, para a maioria dos desenhos e cenarios de estudo, e mais provavel que uma alegacao de pesquisa seja falsa do que verdadeira.}{IOANNIDIS, 2005, e124}.
 
 Quarto c\'alculo, invent\'ario reproduz\'ivel. Rode no raiz do reposit\'orio o trio: contagem de agentes por chave \pth{agent} em \pth{opencode.json}, contagem de \pth{specs/SPEC-935-R*.md} e contagem de arquivos em \pth{mci/}. Anote os tr\^es n\'umeros com data e hash do commit. Repita ap\'os cada \pth{git pull}. Se o \pth{doctor} disser 160 specs carregadas e a pasta tiver 321 arquivos, n\~ao h\'a contradi\c{c}\~ao: um conta registros reconhecidos, outro conta arquivos presentes. A disciplina de passos curtos e uniformes \'e o que torna essas contagens confi\'aveis como rotina.
 
@@ -63,7 +141,11 @@ Ciclos curtos intercalados com testes mant\^em o foco e permitem localizar a div
 Ana fecha o caderno e diz que agora sabe pedir sem ser enganada: com fonte, com limite e com direito a devolver. Bruno fecha o terminal e diz que agora sabe entregar sem enganar: com spec, com teste e com proveni\^encia. O narrador despede-se com a mesma frase que abriu o pr\'ologo: neste livro, hist\'oria alguma substitui arquivo, e arquivo algum dispensa verifica\c{c}\~ao. O pr\'oximo leitor que refizer os doze passos e recalcular os quatro c\'alculos ser\'a o pr\'oximo autor da pr\'oxima fotografia datada.
 
 \begin{aviso}
-Limite do ep\'ilogo. A planta foi testada neste checkout em 05/10/2026; depend\^encias externas, credenciais de provedores e modelos locais podem mudar o resultado em outra m\'aquina. Guardar sa\'idas reais ao lado das esperadas \'e parte da reprodu\c{c}\~ao, n\~ao ap\^endice.
+Limite do epílogo. Os recibos citados pertencem aos snapshots e operações
+identificados; não constituem execução integral destes doze passos nesta
+nova edição. Dependências, credenciais, modelos e hardware podem alterar
+resultados ou impedir a repetição. Registre saídas observadas ao lado das
+esperadas e conserve as pendências científicas e editoriais.
 \end{aviso}
 
 \section{Refer\^encias did\'aticas desta jornada com acesso em 05 out.~2026}
@@ -139,3 +221,112 @@ Limite do ep\'ilogo. A planta foi testada neste checkout em 05/10/2026; depend\^
 \begin{resultado}
 \textbf{Exercícios.} Defina um artefato cuja igualdade precisa ser exata e outro que admite variação. Escreva o critério antes da execução. Registre uma divergência sem substituí-la por uma aprovação.
 \end{resultado}
+
+\clearpage
+\section{Apêndice Didático: Softmax de atenção — como o peso se concentra}
+
+\elemento{Softmax no roteamento de atenção}{\metainfo{ID}{DID-SOFT} \hfill \metainfo{Fonte}{\pth{transformer/attention.py}, AttentionRouter e artigo de Vaswani et al. (2017)}}
+
+\begin{descricao}
+\textbf{O problema concreto.} Em uma ilustração da atenção do Transformer, dados escores $QK^T = [[4, 0], [0, 4]]$ e $d_k = 4$, qual é a distribuição de pesos de atenção normalizados que o softmax produz? Por que um escore mais alto recebe mais peso?
+\end{descricao}
+
+\begin{definicao}
+\textbf{Símbolos.}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{>{\hsize=.6\hsize\linewidth=\hsize}Y>{\hsize=1.2\hsize\linewidth=\hsize}Y>{\hsize=1.2\hsize\linewidth=\hsize}Y}
+Símbolo & Significado & Valor no exemplo \\
+\midrule
+$QK^T$ & Matriz de escores de atenção (produto interno entre consulta e chave) & $[[4, 0], [0, 4]]$ \\
+$d_k$ & Dimensão da chave (fator de escala) & $d_k = 4$ \\
+$\text{softmax}(x)_i$ & Peso de atenção para a posição $i$ & — \\
+$e^{x_i}$ & Exponencial do escore $x_i$ & — \\
+\end{tabularx}
+\end{center}
+\end{definicao}
+
+\begin{metodo}
+\textbf{Dedução do softmax de atenção.}
+
+\paragraph{Passo 1 — Fórmula do softmax com escala.}
+O softmax com escala (usado em atenção) é:
+
+\[
+\text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)_i = \frac{e^{(QK^T)_i / \sqrt{d_k}}}{\sum_j e^{(QK^T)_j / \sqrt{d_k}}}
+\]
+
+\paragraph{Passo 2 — Aplicação da escala.}
+Com $d_k = 4$, temos $\sqrt{d_k} = 2$. Dividindo cada escore de $QK^T$ por 2:
+
+\[
+\frac{QK^T}{\sqrt{d_k}} = \frac{[[4, 0], [0, 4]]}{2} = [[2, 0], [0, 2]]
+\]
+
+\paragraph{Passo 3 — Exponenciação de cada escore.}
+Calculamos $e^x$ para cada posição:
+
+\[
+e^2 \approx 7{,}389, \qquad e^0 = 1
+\]
+
+\paragraph{Passo 4 — Soma dos exponenciais (denominador).}
+Para cada linha, a soma é $e^2 + e^0 \approx 7{,}389 + 1 = 8{,}389$.
+
+\paragraph{Passo 5 — Divisão para obter os pesos.}
+Para a posição com escore 2 — primeira coluna da primeira linha e segunda coluna da segunda linha:
+
+\[
+\frac{e^2}{e^2 + e^0} \approx \frac{7{,}389}{8{,}389} \approx 0{,}88
+\]
+
+Para a posição com escore 0 — segunda coluna da primeira linha e primeira coluna da segunda linha:
+
+\[
+\frac{e^0}{e^2 + e^0} \approx \frac{1}{8{,}389} \approx 0{,}12
+\]
+
+\[
+\boxed{\text{softmax} \approx [[0{,}88, 0{,}12], [0{,}12, 0{,}88]]}
+\]
+
+\end{metodo}
+
+\begin{descricao}
+\textbf{Interpretação.} O peso se concentra onde o escore destaca: $88\%$ da atenção vai para a posição com escore 4 (escalado para 2), e apenas $12\%$ para a posição com escore 0. Se os dois escores de uma mesma linha fossem iguais, por exemplo $[2,2]$, os pesos dessa linha seriam $[0{,}5,0{,}5]$. Os elementos da diagonal pertencem a linhas diferentes e não constituem esse empate.
+
+\textbf{A lição permanece:} peso concentra onde o escore destaca, e escore empatado divide.
+
+\textbf{O que isso NÃO significa:}
+\begin{itemize}[leftmargin=1.3em,itemsep=1pt]
+  \item Não mede qualidade de resposta do agente.
+  \item Não é probabilidade de acerto da tarefa.
+  \item Ilustra a normalização dos pesos; a matriz Q/K/V não é o cálculo da rota atual do Core.
+\end{itemize}
+\end{descricao}
+
+\begin{aviso}
+\textbf{Limites de validade.}
+\begin{enumerate}[leftmargin=1.3em,itemsep=1pt]
+  \item Este é um exemplo matricial didático. No caminho de utilidade de \pth{AttentionRouter}, o código combina quatro critérios normalizados: $u_i=0{,}30s_i+0{,}35c_i+0{,}25t_i+0{,}10l_i$. Depois aplica softmax estável $w_i=\exp(u_i-m)/\sum_j\exp(u_j-m)$, com $m=\max_j u_j$. Não há produto $QK^T$ nem multiplicação por $V$ nessa rota.
+  \item O softmax é aplicado linha por linha (cada consulta distribui atenção sobre as chaves).
+  \item Escores muito diferentes fazem o softmax aproximar-se de um one-hot (uma posição recebe quase todo o peso).
+\end{enumerate}
+\end{aviso}
+
+
+\section{Diagrama: utilidade, peso e decisão são objetos diferentes}
+\begin{flowch}[Leitura visual do softmax da rota]{Exemplo numérico fixo, sem medir taxa de sucesso de agentes.}
+\node[fns,text width=3.4cm] (criterios) {Semântica, capacidade,\\confiança e carga};
+\node[fn,text width=3.4cm,right=7mm of criterios] (util) {Utilidades do exemplo\\$u_A=0{,}75$; $u_B=0{,}64$};
+\node[fn,text width=3.4cm,right=7mm of util] (pesos) {Softmax dos candidatos\\$w_A\approx0{,}527$; $w_B\approx0{,}473$};
+\draw[seta] (criterios)--(util);\draw[seta] (util)--(pesos);
+\end{flowch}
+\begin{descricao}
+\textbf{Como funciona e por quê.} As setas indicam os encaminhamentos descritos, sob suas condições. \textbf{Justificativa.} Os critérios alimentam a utilidade; o softmax normaliza utilidades do conjunto. Por exemplo, os vetores $(0{,}8;0{,}9;0{,}5;0{,}7)$ e $(0{,}6;0{,}7;0{,}5;0{,}9)$, na ordem dos critérios, produzem as utilidades mostradas com os pesos do código. Isso liga a conta à rota sem importar a matriz Q/K/V do exemplo anterior.
+\textbf{Limite.} O peso depende dos outros candidatos e não é probabilidade calibrada de acerto. A seleção e o aceite ainda dependem de elegibilidade, contexto, desempates e testes da entrega.
+\end{descricao}
+\fontecore{transformer/attention.py}{AttentionRouter.route}
+
+
+% R901-PONTE-FECHO

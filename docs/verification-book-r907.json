@@ -1,0 +1,272 @@
+{
+  "revision": "R901+R907",
+  "status": "concluido_com_verificacao_local",
+  "date": "2026-10-15",
+  "scope": "livro-core e perfis editoriais; revisao local de fonte e apresentacao",
+  "external_validation": false,
+  "learning_effectiveness_measured": false,
+  "preserved_author_expansions": [
+    "R903",
+    "R904",
+    "R905",
+    "R906"
+  ],
+  "source_tests": {
+    "passed": 92,
+    "failed": 0,
+    "log_sha256": "3caf646289fedd6795bbad5ed8c6b2f9e1fa69fc4c79679f009ad76d631b5114"
+  },
+  "historical_scientific_ci": {
+    "run_id": "lci-53152ee1d24e4675b33b66c451a58d05",
+    "code_snapshot": "f930e196d5990a22651cd650fb30da44dd69bd2e",
+    "passed": 1130,
+    "groups": 10,
+    "global_suite_executed": false,
+    "summary_sha256": "89f633f8a66091bb00ae633e56bd8c640588faa40b17f24cb584301ce8d4d477",
+    "scope_transfer_to_current_book": false
+  },
+  "rea": {
+    "complete_architecture_html": "rejected_above_1_MiB",
+    "derived_shell_html": "completed_static_inspection",
+    "projection_bytes": 33299,
+    "layout_audit_of_pdf": false,
+    "receipt_sha256": "37fd04cc4576815aec003f2cb885ae258796a0661339bbbdbaa17b2d437c6724"
+  },
+  "limitations": [
+    "Testes de estrutura nao medem fluidez ou aprendizagem.",
+    "A inspeção visual sera registrada por paginas; nao substitui revisao editorial externa.",
+    "Falha temporaria de acesso a DOI nao foi tratada como identificador invalido.",
+    "Audio e slides historicos nao foram regravados ou republicados nesta revisao."
+  ],
+  "library_models": [
+    {
+      "name": "Fine-Tuning de LLMs na Prática - fundo branco.pdf",
+      "sha256": "c2dd407a399c1a330e1a534cc8a25cca23ab410d381d73fd17022f4a3aabbbe2",
+      "bytes": 12664209,
+      "readable": true,
+      "pages": 97
+    },
+    {
+      "name": "Fine-Tuning de LLMs na Prática.pdf",
+      "sha256": "d57e541c0ecc532685eb986416e6c91f0655def1d36d13cc780b6d46223fce3d",
+      "bytes": 10502130,
+      "readable": true,
+      "pages": 63
+    },
+    {
+      "name": "MCP_Livro - Versão Final 2025-08-11 pdf.pdf",
+      "sha256": "1786c825b95fc8cb9273f0d90d499df54f01787ecf378c370d6828578a77fead",
+      "bytes": 36139500,
+      "readable": true,
+      "pages": 182
+    },
+    {
+      "name": "RAG Versão Final - branca.pdf",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "readable": false,
+      "pages": null
+    }
+  ],
+  "source_inventory_sha256": "227b228b4f1e1e045f39f1c4364097f14f6acb964bb3fa9d9519fd093280cd06",
+  "configured_inventory": {
+    "agents": 312,
+    "mcp_servers": 16,
+    "commands": 33,
+    "specs": 538,
+    "round_specs": 448,
+    "round_test_files": 423,
+    "references": 18,
+    "citation_calls": 76,
+    "condensed_cards": 13
+  },
+  "inventory_scope": "fotografia do workspace local; inclui specs locais ainda nao publicadas, nao e contagem funcional nem inventario de um clone limpo",
+  "agent_correlations": [
+    {
+      "profile": "scientific-review",
+      "task_id": "task-45959ae5",
+      "definition_validated": true,
+      "source_sha256": "a4570a2b1c34738c560964f0a47f6a2881816e9a0e2de7797b1dc9a10ffe3f61",
+      "execution_environment": "Codex subagent tool",
+      "core_assignment_is_execution_evidence": false
+    },
+    {
+      "profile": "book-orchestration-editor",
+      "task_id": "task-e31a178b",
+      "definition_validated": true,
+      "source_sha256": "1c2b2695e60b3886859ede193c426633e3a38ac10e51435b7146ec4c280dcde1",
+      "execution_environment": "Codex subagent tool",
+      "core_assignment_is_execution_evidence": false
+    }
+  ],
+  "pdf": {
+    "file": "livro-core/main.pdf",
+    "pages": 536,
+    "bytes": 6787769,
+    "sha256": "7d4c7d359650ef8ab4054b563737681de01794d3f5bf9fa84d819635aaaa6d6a",
+    "compile_exit_code": 0,
+    "compile_entry": "livro-core/main.tex",
+    "chapter_editor_compilation": "fragmento começa com chapter; compilador isolado do editor não carrega o preâmbulo nem os demais módulos; PDF completo compilado a partir de main.tex",
+    "all_pages_word_coordinates_checked": true,
+    "horizontal_tolerance_pt": 2,
+    "horizontal_violations": 0,
+    "off_page_words": 0,
+    "visual_review_status": "amostragem_inspecionada",
+    "rendered_pages": [
+      1,
+      13,
+      17,
+      25,
+      48,
+      73,
+      91,
+      112,
+      113,
+      119,
+      128,
+      138,
+      156,
+      175,
+      177,
+      203,
+      204,
+      205,
+      228,
+      247,
+      248,
+      263,
+      265,
+      267,
+      304,
+      305,
+      306,
+      307,
+      314,
+      315,
+      316,
+      331,
+      332,
+      338,
+      504,
+      536
+    ],
+    "visually_reviewed_physical_pages": [
+      1,
+      13,
+      17,
+      25,
+      48,
+      73,
+      91,
+      112,
+      113,
+      119,
+      128,
+      138,
+      156,
+      175,
+      177,
+      203,
+      204,
+      205,
+      228,
+      247,
+      248,
+      263,
+      265,
+      267,
+      273,
+      304,
+      305,
+      306,
+      307,
+      308,
+      314,
+      315,
+      316,
+      331,
+      332,
+      338,
+      504,
+      536
+    ],
+    "visual_review_method": "seis folhas de contato e leitura ampliada de memória, ativação e pranchas; sem cortes ou sobreposições materiais observados na amostra",
+    "final_log": {
+      "fatal_errors": false,
+      "unresolved_references": false,
+      "overfull_hbox_count": 0,
+      "overfull_vbox_pt": [
+        0.79533
+      ],
+      "ignored_glue_errors": 0,
+      "note": "resíduo vertical inferior a 1pt; sem palavras fora da página e sem perda de conteúdo observada na amostra"
+    },
+    "compiled_source_hashes": {
+      "livro-core/inventario-core.tex": "2d47a66d7bba45f94501659a013356e09393d7a0c971d884ff52c8f6f63054bc",
+      "livro-core/macros.tex": "f749a2104d2541a8dcf5ff8c262dad6cbce79707abdc12a37a23c39465eac826",
+      "livro-core/main.tex": "c2784b9862accbb97321e1b629a6fe1472aca4d1d49024e0bdb62d4c5267e941",
+      "livro-core/mod-00-capa.tex": "e94e6a7f277b689accf29cdee768b815310b26c467d2b0fd07e27fd48912661f",
+      "livro-core/mod-00a-enredo-prefacio.tex": "5bfdb1a73427171e59af81e1debd259199814de893501844d7631370d1008296",
+      "livro-core/mod-00b-jornada-leitor.tex": "a0a66ea4eaceda5dae383250e769ab5a31adcac5f2a8f510f4d76dd54fdc5e1f",
+      "livro-core/mod-00c-projeto-pedagogico.tex": "b89a864cd04fc96d61ecb435b2472b9a844451cf78d414609e9aad01235a9716",
+      "livro-core/mod-01-fundacoes.tex": "d179d7dc9719ba957a1337216571980b956bfcd3746da5a0b8a6c0e2fcb2a02a",
+      "livro-core/mod-01b-historia.tex": "c06a05474b2edc9592f558fe26142bb0e6b8edeaa12719ef4dfbadeab30c073e",
+      "livro-core/mod-01c-instalacao.tex": "f1ae7924f712c6a1a856caec84a6a81e1512d43bc4d4a4eaab03a50ac04d1338",
+      "livro-core/mod-01d-arquitetura.tex": "849d6f566fb0f4bf3b95fd82a041f75e1bb73886fc2dae7c6be091d0648374fa",
+      "livro-core/mod-02-orquestracao.tex": "74d379598835392e96ec98b4ed9b1f5f02798e309960be523d22108aac4d02ff",
+      "livro-core/mod-03-memoria-mci.tex": "90ac463c3cb4a52dac73a137da0cc923eb22963330871ebdfca6dcb6e0d7aac6",
+      "livro-core/mod-04-qualidade-sdd.tex": "f8c893120e1e932b595872dc52969748794d047e4d523eeaefb93ba2a50332d0",
+      "livro-core/mod-05-raciocinio.tex": "0fbbfe1464f79dd6c0646899e7f9bb43ce2412b847697c52d1c25eedec591945",
+      "livro-core/mod-06-ciencia.tex": "35eb6dff35457b717209454b7f451d362ab145b4cc2c8ea824e0112139ef667c",
+      "livro-core/mod-07-integracoes.tex": "02f09236e1d6efa5564662ab294daf4b3b52c61c915e1f37758716d779ac3768",
+      "livro-core/mod-08-ecossistema.tex": "566fb4caa35743c8ebee095c85a60773524881b44c17fd82def5b2d54df695fe",
+      "livro-core/mod-09-infra.tex": "bac57c83f1365b681f91cdd0721dd31e7fc6fb96632137e3eceb65df27fd9462",
+      "livro-core/mod-09a-comparada.tex": "5062bee75c980ef3a49cf46ed8a56374758e7b4fe502828f019be2e88916659a",
+      "livro-core/mod-10-catalogo.tex": "27c338ff79201e697d1ee733be7646fca450266747c9bfd485d02319a2032389",
+      "livro-core/mod-11-apendices.tex": "6596e52bb1e5074f46854ba920f5ab0eac73179641e3334f3982a9c951a58f0f",
+      "livro-core/mod-12-fichas-nucleo.tex": "2a559163452fa3b945d6dd95c18bc2e814c033eba8bf65c6f347d2e2c6d9b5f4",
+      "livro-core/mod-13-ativacao-agentes.tex": "710493adcf2486aaaf9200511c722661b30e408e7442831a35198597b7f13be5",
+      "livro-core/mod-14-lote-categorias.tex": "cadb7aaef017971286fc7de9cd09fdfc6027cd1a68ac0a551113096318f168f7",
+      "livro-core/mod-15-epilogo-reproducao.tex": "45c3e48d6e9336942f85b884a41b95b79a2bed8b0dfc58b40d69a6be04304411",
+      "livro-core/mod-16-mapas-fluxogramas.tex": "6999158e62ac6793ff7893c0b0211e2e8dddb573c715e70e5ad41f625c87681e",
+      "livro-core/mod-17-e1e7-para-leigos.tex": "9ea82ebf38456a41ef504abefaa33a0e26d094eb3eaba29443e16ecb703a0e31",
+      "livro-core/mod-18-nivel0-universal.tex": "8704259b1928baf7aca7d300bdd27e566c77197742cdb75eca250bc1b28a96be",
+      "livro-core/mod-19-podcast.tex": "1cc8b5a32ba63cb6c330eec871483da7838982394a5724bef1f21584d24c4dc1",
+      "livro-core/mod-20-podcast-modulos.tex": "a4eea3ee49c9f020a5d8b72a5ebcd8c69c0557f812f3103f08e61dbbe5606beb",
+      "livro-core/mod-21-mapa-teorias.tex": "8f738dda98cebd013607307afc275724d4c3bcaaf0ad832ef1a9b285cc347432",
+      "livro-core/mod-22-reproducao-wsl-leigo.tex": "620cf63ece37f399510d03af1ad97c6a8b28efd26e386f043a358148b7a7a75d",
+      "livro-core/mod-23-atlas-infograficos.tex": "fbc2a3bdd07d0a3bd0bf38a9d583b5fe452fdbd4d2013bea4ca5e381865e8bff",
+      "livro-core/mod-24-kit-mindmap-slides.tex": "b326cc7451412b183b975d6af05bcf0e7366a80039c61c5149d88c3759b8414a"
+    }
+  },
+  "figures": {
+    "flowch_diagrams": 57,
+    "guided_practices": 13,
+    "original_vector_reading_plates": 6,
+    "new_visuals_in_R907": 7,
+    "author_didactic_sections_preserved": 20
+  },
+  "red_evidence": {
+    "initial_failures": [
+      "tabelas textuais sem quebra na largura local",
+      "seção didática fora do gerador autoritativo"
+    ],
+    "local_log_sha256": "7a72305ff18db3320c33e0ab1e57517bcf5e2398e5ff090d1925a5216bcffc4c",
+    "scope": "regressões editoriais desta revisão; não reconstrói RED histórico de outros ciclos"
+  },
+  "release_tests": {
+    "passed": 149,
+    "failed": 0,
+    "scope": "92 testes editoriais e 57 de configuração/ciclo de perfis",
+    "log_sha256": "485db33ac6ada9bb394372742d991615e4da872b2b819d51745a3280943df018"
+  },
+  "doctor": {
+    "overall": "healthy",
+    "verification": "installation_only",
+    "checks_total": 22,
+    "checks_passed": 22,
+    "checks_failed": 0
+  },
+  "source_base_commit": "73725067cba6dfde1f091d492dc2676c6708768b",
+  "bibliography_scope": "18 blocos de referência; metadados e trechos primários foram conferidos em recortes identificados, sem alegação de releitura integral atual de todas as fontes; Flavell aparece por paráfrase com limite de acesso declarado"
+}

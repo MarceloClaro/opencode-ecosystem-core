@@ -4,6 +4,10 @@
 % ============================================================
 \chapter{Infraestrutura, Serviços e Publicação}
 
+% R901-PONTE-ABERTURA
+As escolhas arquiteturais só se tornam operações quando encontram um ambiente compatível. Este capítulo acompanha as condições materiais do mesmo caso, incluindo privacidade, limites e observabilidade.
+
+
 \roteirodidatico
 {Um programa depende do ambiente, dos serviços a que se conecta e de regras que controlam operações. Este capítulo mostra como reconhecer essas dependências na prática.}
 {\emph{Serviço} executa uma função acessível por interface; \emph{deploy} publica uma versão; \emph{sondagem} consulta um serviço; \emph{hook} intercepta um evento; \emph{perfil} seleciona dependências.}
@@ -11,19 +15,20 @@
 {Uma checagem de saúde confirma uma resposta limitada naquele instante. Ela não certifica segurança, disponibilidade futura, integridade de ponta a ponta ou qualidade do produto.}
 {Que parte da cadeia foi efetivamente exercitada e quais riscos ou condições ficaram fora da verificação?}
 
-\casoguiado{da instalação à publicação}
-{Uma compilação local bem-sucedida mostra que o documento foi produzido naquele ambiente. Uma publicação exige passos adicionais: enviar o artefato, aguardar o serviço e consultar a URL resultante. Uma resposta HTTP confirma uma condição de acesso naquele instante; não prova que todos os leitores verão a versão correta nem que a publicação continuará disponível. Registre artefato, destino, horário e resposta observada.}
+\casoguiado{reproduzir o pacote da nota científica}
+{A nota chega com fonte, método, recibos de ferramentas e uma revisão identificada. Falta conferir em qual ambiente seus testes foram executados e se os registros ainda correspondem aos arquivos entregues. O pacote reunirá versão das fontes, seleção de testes, resultado e limites. Caso a publicação faça parte do pedido, ela acrescentará destino e sondagem próprios; uma compilação ou um teste local, isoladamente, não demonstra acesso público ao artefato.}
 
 \elemento{Infraestrutura do Core}{\metainfo{ID}{I-00} \hfill
 \metainfo{Camada}{8 — Infraestrutura} \hfill
 \metainfo{Rota}{\pth{integrations/}, \pth{.opencode/}}}
 
 \begin{descricao}
-Os módulos anteriores descrevem o \emph{pensar} do Core: orquestração, memória,
-qualidade, raciocínio, ciência. Este descreve o \emph{operar} --- o que existe
-\emph{fora} do código do orquestrador e o faz funcionar no mundo real: o ambiente,
-os serviços que ficam de pé, as guardas que interrompem operações perigosas e a
-cadeia que leva um artefato do repositório até um site publicado.
+Os módulos anteriores ligaram problema, método, execução e revisão. A
+infraestrutura sustenta esse percurso com dependências, processos, limites e
+registros. Ela inclui código do próprio Core e serviços externos. Como uma
+bancada de laboratório, precisa permitir reconhecer o instrumento usado e as
+condições do ensaio: duas máquinas podem receber os mesmos arquivos e apresentar
+resultados diferentes se runtime, dependências ou serviços diferirem.
 \end{descricao}
 
 \begin{conceito}
@@ -39,18 +44,19 @@ A infraestrutura organiza-se em três camadas, da mais estável para a mais exte
 \end{conceito}
 
 \begin{funcao}
-Transformar ``funciona na minha máquina'' em ``funciona em qualquer máquina
-auditável'' --- a mesma regra do capítulo de instalação, agora aplicada a serviços
-e à publicação.
+Permitir que outra pessoa reconstrua as condições de uma execução, identifique
+as dependências que faltam e compare seu resultado com o recibo da nota.
+Reprodutibilidade é uma exigência a testar em outro ambiente; um manifesto
+local não demonstra, sozinho, funcionamento em qualquer máquina.
 \end{funcao}
 
 \begin{niveis}
 \textbf{Intuição:} a parte invisível que faz a peça acontecer --- tomada, motor e
 freio de mão.\\
-\textbf{Implementação:} venv por perfil, 7 servidores MCP, 4 hooks, 2 plugins e cadeia
-de deploy com sondagem HTTP real.\\
-\textbf{Formalização:} infraestrutura auditável, com proveniência por artefato e guardas
-que impõem política sem depender da disciplina do operador.
+\textbf{Implementação:} dependências por perfil, \CoreMCPCount{} servidores MCP
+declarados, guardas específicas e CI local com seleção fechada.\\
+\textbf{Formalização:} proveniência por artefato, limites por processo e critérios
+de aceite que distinguem execução histórica e compatibilidade com as fontes atuais.
 \end{niveis}
 
 \section{O ambiente: perfis e instalação reproduzível}
@@ -58,25 +64,31 @@ que impõem política sem depender da disciplina do operador.
 \begin{descricao}
 O \pth{Makefile} oferece perfis de dependência: \pth{make install} (ambiente
 virtual), \pth{make setup} (base), \pth{make setup-dev} (desenvolvimento) e
-\pth{make setup-science} (perfil científico). Perfis separados existem para que a
-dependência de uma tarefa científica não contamine o ambiente de operação --- o
-equivalente informacional de separar o reagente de teste do reagente em uso.
+\pth{make setup-science} (perfil científico). Esses alvos permitem que o
+operador selecione as dependências necessárias à tarefa. Um alvo de instalação
+seleciona pacotes; isolamento entre ambientes exige diretórios ou ambientes
+separados. Executar dois alvos no mesmo ambiente virtual não separa seus pacotes.
 \end{descricao}
 
 \begin{metodo}
-Ritual de entrada: (1) \pth{make install}; (2) \pth{make setup}; (3)
-\pth{python3 -m marceloclaro.cli doctor}; (4) só então operar. O \pth{doctor} é o
-exame de saúde do aparato: ambiente verde significa ``pronto para operar'', nunca
-``resultado verificado''.
+Na preparação inicial, siga os alvos de instalação descritos no capítulo
+correspondente. Antes do trabalho, use o Python do ambiente do Core para
+executar \pth{python3 -m marceloclaro.cli doctor} e leia cada detalhe.
+O estado saudável autoriza concluir apenas que as verificações daquele modo
+passaram. Compiladores, provedores autenticados e métodos científicos ainda
+precisam de seus ensaios quando necessários à tarefa.
 \end{metodo}
 
-\section{Serviços: os sete servidores MCP}
+\section{Serviços: da declaração à operação}
 
 \begin{resultado}
-Servidores MCP declarados em \pth{opencode.json} (chave \pth{mcp}):
+O inventário completo de \CoreMCPCount{} servidores declarados está no capítulo
+de integrações, a partir da chave \pth{mcp} de \pth{opencode.json}.
+Os exemplos seguintes ajudam a reconhecer papéis, sem repetir um inventário
+histórico de sete entradas como se fosse o total corrente:
 \par\smallskip
 {\footnotesize
-\begin{tabularx}{\textwidth}{lY}
+\begin{tabularx}{\linewidth}{>{\hsize=.70\hsize\linewidth=\hsize}Y>{\hsize=1.30\hsize\linewidth=\hsize}Y}
 \toprule
 Servidor & Papel \\
 \midrule
@@ -92,9 +104,11 @@ Servidor & Papel \\
 \end{resultado}
 
 \begin{metodo}
-Política de invocação: um servidor ausente \emph{não} derruba o Core. As skills
-que dependem de executor externo validam presença e versão antes do uso e degradam
-para um aviso explícito --- a invocação tolerante descrita no Módulo de Integrações.
+A verificação deve acompanhar a dependência real da tarefa. Um serviço opcional
+ausente pode permitir outra rota; se for obrigatório ao método da nota, sua
+ausência bloqueia esse percurso. Registre presença, versão, credencial quando
+exigida, pedido e resposta. Um processo iniciado ainda pode falhar durante a
+operação, por prazo, conta, memória ou entrada incompatível.
 \end{metodo}
 
 \begin{aviso}
@@ -108,12 +122,12 @@ estar sem credencial ou sem binário. A verificação antes do uso é obrigatór
 Hooks em \pth{.opencode/hooks/} e plugins em \pth{.opencode/plugins/}:
 \par\smallskip
 {\footnotesize
-\begin{tabularx}{\textwidth}{lY}
+\begin{tabularx}{\linewidth}{>{\hsize=.70\hsize\linewidth=\hsize}Y>{\hsize=1.30\hsize\linewidth=\hsize}Y}
 \toprule
 Componente & Função \\
 \midrule
-\pth{budget_guard.sh} & interrompe a operação quando o orçamento de tokens é excedido \\
-\pth{credential_guard.sh} & bloqueia operação sem credencial configurada \\
+\pth{budget_guard.sh} & limita tamanho da árvore e dos arquivos em MiB, sem contar tokens \\
+\pth{credential_guard.sh} & confere token GitHub parseável e configura identidade no repositório indicado \\
 \pth{js_smoke_dom.sh} (+ \cod{smoke_dom_stub.js}) & executa o JavaScript de renderização em Node antes de declarar deploy pronto \\
 \pth{deploy-guards.ts} (plugin) & guardas de deploy: peso, remoção (404) e integridade do feed \\
 \pth{litert-lm-provider.ts} (plugin) & registra o provedor LiteRT-LM no cliente \\
@@ -122,25 +136,138 @@ Componente & Função \\
 \end{resultado}
 
 \begin{conceito}
-Um hook é uma \textbf{política executada antes do ato}. Sua vantagem sobre a
-documentação é simples e mensurável: a documentação depende de o operador lembrar;
-o hook não depende.
+Um hook executa uma regra quando a aplicação o aciona no evento previsto.
+É preciso demonstrar que ele foi carregado e chamado: a presença de um script
+no diretório não protege caminhos que o contornem. A guarda de credenciais
+inspecionada não autentica a conta por requisição remota nem faz auditoria geral
+de vazamentos; a guarda de orçamento limita arquivos para publicação.
 \end{conceito}
+
+\section{CI local: reproduzir uma seleção explícita}
+
+\begin{descricao}
+Um pacote de evidências precisa dizer quais testes foram executados. Quando a
+execução hospedada no GitHub está indisponível, a R897 oferece CI na máquina do
+operador, sob \pth{MarceloClaroOrchestrator.local_ci_action}. A CLI
+\pth{ci-local} e a ferramenta \pth{ecosystem_local_ci} acessam o mesmo serviço.
+Ele inicia um supervisor efêmero, registra fontes e seleção e acompanha os
+processos da execução. Esse percurso não cria job ou check no GitHub; o estado
+remoto continua independente do resultado local.
+\end{descricao}
+
+\begin{flowch}[CI local e alcance do recibo]{setas representam etapas condicionadas de execução}
+\matrix[matrix of nodes,name=cil,row sep=5mm,column sep=4mm,nodes={fn},ampersand replacement=\&]{
+ |[fns]|primário recebe perfil científico \\[2mm]
+ |[fns]|exclusão: uma execução por vez \\[2mm]
+ |[fns]|snapshot e dez grupos delimitados \\[2mm]
+ |[fns]|processos, JUnit e fases registradas \\[2mm]
+ |[fns]|integridade e seleção conferidas \\[2mm]
+ |[fns]|recibo local e compatibilidade atual \\ \\
+};
+\draw[seta] (cil-1-1)--(cil-2-1);
+\draw[seta] (cil-2-1)--(cil-3-1);
+\draw[seta] (cil-3-1)--(cil-4-1);
+\draw[seta] (cil-4-1)--(cil-5-1);
+\draw[seta] (cil-5-1)--(cil-6-1);
+\end{flowch}
+
+\begin{descricao}
+\textbf{Como funciona e por quê. Mecanismo.} As setas representam etapas
+condicionadas: uma execução ocupada impede iniciar outra; o supervisor executa
+a seleção registrada; o serviço compara fases, JUnit, hashes e atualidade dos
+recibos antes de apresentar aprovação. Erro ou ausência de evidência bloqueia
+o aceite dessa execução.
+\textbf{Justificativa.} Código de saída zero e um arquivo antigo de resultado
+podem coexistir sem que os testes esperados tenham rodado. Conferir seleção e
+recibos novos liga a conclusão ao trabalho efetivamente observado.
+\textbf{Limite.} O recibo cobre o perfil enumerado no snapshot registrado.
+HMAC protege a integridade dos registros locais e não autentica avaliador
+externo nem converte o ensaio em validação científica independente.
+\end{descricao}
+\fontecore{integrations/local_ci.py}{LocalCIService._validate_output}
+
+\begin{metodo}
+A inicialização é assíncrona. Use
+\pth{python3 -m marceloclaro.cli ci-local iniciar --profile scientific} e
+conserve o \pth{run_id} retornado. Consulte \pth{ci-local status --run-id}
+com esse identificador; \pth{ci-local listar --limit 10} mostra o histórico.
+\pth{ci-local cancelar --run-id} pede o encerramento dos processos pertencentes
+à execução. Um pedido de cancelamento ainda depende da limpeza; o estado
+\pth{running} também não significa aprovação. A interface aceita apenas o
+perfil científico fechado: não recebe shell, comandos de plugins ou seleção
+arbitrária de testes.
+\end{metodo}
+\fontecore{integrations/local_ci.py}{LocalCIService.start}
+\fontecore{integrations/local_ci.py}{LocalCIService.cancel}
+
+\begin{resultado}
+A seleção atual possui dez grupos: proveniência e aceite; manuscritos;
+workflow e memória; integridade do raciocínio; contratos de entrega;
+agentes gerenciados e plugins; grafo Python; ciclo de vida da CI local;
+integridade dos recibos da CI; e seleção e atualidade da CI. A enumeração
+autoritativa está em \pth{scripts/validate_scientific_profile.py}, na constante
+\pth{PROFILE_GROUPS}. Cada grupo tem limite de 180 segundos e 1.536 MiB de
+RSS observado; variáveis das bibliotecas numéricas limitam threads. O
+supervisor observa os processos pertencentes à execução e aplica seus limites.
+Isso não constitui isolamento contra código malicioso executado pelo dono do
+host, nem certifica cargas de produção.
+\end{resultado}
+
+\begin{descricao}
+O histórico e a compatibilidade respondem a perguntas diferentes. Um ensaio
+pode ter passado com as fontes antigas e deixar de corresponder ao HEAD ou
+aos bytes atuais. \pth{recorded_status} conserva o resultado histórico;
+\pth{current_compatibility} indica se ele se aplica ao conjunto corrente.
+Os registros locais validados precisam acompanhar ambos. Os recibos R891--R893
+descrevem uma seleção anterior com cinco grupos e não devem ser apresentados
+como execução do perfil ampliado de dez grupos.
+\end{descricao}
+\fontecore{integrations/local_ci.py}{LocalCIService._view}
+
+\begin{resultado}
+\textbf{Resultado delimitado desta edição.} O perfil científico real vinculado
+ao snapshot \pth{f930e19} concluiu 1.130 testes aprovados, sem falhas, erros
+ou testes ignorados. O número descreve essa seleção local e esse recibo.
+Ele não representa a suíte global do Core, uma reprodução em outra máquina,
+qualidade de manuscrito, teste de escala ou validação científica externa.
+Mudanças posteriores exigem conferir compatibilidade antes de reutilizar o
+resultado no pacote da nota.
+\end{resultado}
+
+\praticacore
+{Ligar o pacote da nota a uma execução local identificada e a seu alcance.}
+{A nota revisada, seus arquivos e hashes e o ambiente preparado para o perfil científico.}
+{Com execução autorizada e ambiente livre, inicie \pth{ci-local iniciar --profile scientific}. Registre o identificador e acompanhe \pth{ci-local status --run-id} com esse valor até obter estado terminal; preserve o registro e os artefatos apontados pelo serviço.}
+{Confira seleção de dez grupos, fases reais, JUnit, contagens, limites, hashes, limpeza e \pth{current_compatibility}. Acrescente à nota o snapshot e uma frase que restrinja a aprovação ao perfil local executado.}
+{Se houver ocupação, falha, timeout, recibo ausente ou fontes alteradas, conserve o motivo. Resolva a causa antes de uma nova execução; um resumo antigo não deve ser reutilizado como saída nova.}
+{Quais métodos da nota entram na seleção? Que verificação do experimento e que avaliação científica ainda permanecem fora desse recibo?}
+
+\begin{limite}
+Um runner próprio do GitHub não comprova contorno de bloqueio da conta.
+Codeberg/Woodpecker é uma alternativa externa sujeita a requisitos próprios;
+nesta atualização não houve conta criada, espelhamento, runner registrado
+ou execução nessa plataforma. O caminho operacional demonstrado é o serviço
+local descrito aqui. Consulte
+\pth{docs/ORQUESTRACAO_AGENTES_PLUGINS_CI_R894_R897.md} para os limites e a
+distinção entre as alternativas avaliadas e a implementação executada.
+\end{limite}
 
 \section{Publicação com rastro: a cadeia de deploy}
 
 \begin{descricao}
-Publicar é a operação em que a maioria dos erros é \emph{invisível}: o comando
-``passa'' e o site está quebrado. Por isso a cadeia de deploy do Core não aceita
-``publicado'' como prova --- ela \emph{sonda}.
+O comando de publicação pode terminar antes de o conteúdo esperado ficar
+acessível. Por isso, quando a nota for publicada por um fluxo autorizado, o
+pacote precisa distinguir o envio do artefato, o estado do build e a resposta
+observada na URL. A sondagem acrescenta uma observação do destino naquele
+instante e deve conservar o marcador procurado e o status obtido.
 \end{descricao}
 
 \begin{metodo}
 \begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
   \item \textbf{Status do build} --- consulta à API do GitHub Pages
         (\pth{web_deploy_pages_status}).
-  \item \textbf{Sondagem} --- requisição \emph{GET} com \emph{Range} em cada URL,
-        buscando um marcador de conteúdo (\pth{web_deploy_probe_url}).
+  \item \textbf{Sondagem} --- requisição \emph{GET}, com \emph{Range} opcional,
+        buscando status e marcador de conteúdo (\pth{web_deploy_probe_url}).
   \item \textbf{Verificação de remoção} --- URLs retiradas devem responder 404
         (\pth{web_deploy_assert_gone}); qualquer status diferente de 404 é falha.
   \item \textbf{Orçamento de peso} --- limite de peso do diretório e de arquivo
@@ -152,12 +279,16 @@ Publicar é a operação em que a maioria dos erros é \emph{invisível}: o coma
 
 \begin{aviso}
 \textbf{Lição de infraestrutura (R580, reafirmada em R616).} A sondagem usa
-\emph{GET} com \cod{Range} e \emph{nunca} \cod{HEAD}: o GitHub Pages responde de
-modo inconsistente a \cod{HEAD} para arquivos binários, produzindo falso 404.
+\emph{GET} e não \cod{HEAD}. Essa escolha decorre dos falsos 404 históricos
+registrados no projeto ao sondar binários no GitHub Pages; não é uma afirmação
+de que toda requisição \cod{HEAD} terá esse comportamento. \cod{Range} pede
+um trecho, mas o servidor pode devolver o corpo integral. A implementação
+precisa ser lida antes de interpretar tamanho da resposta e custo de rede.
 Da mesma natureza é o smoke test de JavaScript com stub de DOM: \cod{node --check}
 valida sintaxe e \emph{não} executa o DOM, de modo que erros de renderização só
 aparecem em tempo de execução.
 \end{aviso}
+\fontecore{.opencode/mcp/web_deploy_server.py}{_probe_url}
 
 % ============================================================
 
@@ -173,15 +304,21 @@ aparecem em tempo de execução.
 \begin{processo}
 GATILHO. \pth{doctor}, serviços MCP, integrações de dados.
 ROTA. serviços determinísticos; gate: rastro e proveniência por operação.
-FUNÇÃO. executar serviços de suporte com rastro completo e disponibilidade mensurável.
+FUNÇÃO. executar operações de suporte e conservar o rastro definido para cada rota.
 \end{processo}
 
 \begin{resultado}
-CÁLCULO. disponibilidade = operações com rastro / operações totais; proveniência = metadados de origem/versão por artefato.
+CÁLCULO. cobertura de rastro = operações com registro pertinente / operações
+observadas. Disponibilidade operacional exige uma definição de sucesso,
+intervalo e população de chamadas; a simples existência de registros não a mede.
+Proveniência identifica origem, versão e transformação de cada artefato.
 \end{resultado}
 
 \begin{descricao}
-JUSTIFICATIVA TEÓRICA. a proveniência detalhada e o rastro por operação são o que torna a infraestrutura auditável. O lastro teórico vem da citação que segue: recorte conferido em 29/09/2026, com a página de origem e tradução livre e fiel.
+JUSTIFICATIVA TEÓRICA. proveniência e rastro permitem reconstruir o percurso
+quando os registros são íntegros e suficientes. Os princípios FAIR ajudam a
+organizar acesso e reutilização; o código e os recibos locais fundamentam as
+afirmações operacionais deste capítulo.
 \end{descricao}
 
 \begin{aviso}
@@ -203,9 +340,10 @@ próprio código --- serviços, guardas e publicação.
 \begin{definicao}
 \textbf{Grandezas e definições.}
 \begin{itemize}[leftmargin=1.3em,itemsep=1pt]
-  \item \textbf{Disponibilidade} ($d$): operações com rastro $/$ operações totais.
+  \item \textbf{Cobertura de rastro} ($c$): operações com registro pertinente $/$ operações observadas.
+  \item \textbf{Disponibilidade}: sucesso operacional numa seleção de chamadas e intervalo explicitados.
   \item \textbf{Proveniência} ($p$): metadados de origem e versão por artefato.
-  \item \textbf{Orçamento de peso} ($w$): limite de peso do diretório ($1\,000$ MB) e de arquivo ($25$ MB).
+  \item \textbf{Orçamento de peso} ($w$): limites configurados; as guardas inspecionadas usam MiB, com padrões de $1\,000$ por diretório e $25$ por arquivo.
   \item \textbf{Marcador de conteúdo} ($m$): trecho esperado na resposta HTTP, que distingue ``200 com a página'' de ``200 com a página de erro''.
 \end{itemize}
 \end{definicao}
@@ -214,33 +352,38 @@ próprio código --- serviços, guardas e publicação.
 \textbf{Dedução passo a passo.} Por que sondar em vez de acreditar no comando de
 publicação?
 \begin{enumerate}[leftmargin=1.4em,itemsep=2pt]
-  \item ``Publicado'' é uma afirmação do cliente; a prova é a resposta do servidor.
-  \item Um \cod{HEAD} devolve só cabeçalho e, no GitHub Pages, mente para binários --- falso 404.
-  \item Um \cod{GET} com \cod{Range} lê de fato o início do arquivo e custa cerca de 1 KB.
-  \item Comparar o corpo com o marcador $m$ separa página servida de página de erro.
+  \item ``Publicado'' informa uma etapa do cliente; a resposta do servidor acrescenta evidência de acesso naquele instante.
+  \item O fluxo usa \cod{GET} em razão dos falsos 404 históricos com \cod{HEAD}; conserva o status real, sem presumir sucesso.
+  \item \cod{Range} solicita os bytes iniciais, mas o servidor pode ignorá-lo; meça a transferência antes de afirmar economia.
+  \item Procurar o marcador $m$ ajuda a reconhecer o conteúdo. Um marcador isolado ainda não comprova integridade de todo o arquivo.
   \item A remoção de um artefato só está concluída quando a URL responde 404; status outro que 404 é falha por definição do gate.
 \end{enumerate}
 \end{metodo}
 
 \begin{resultado}
 \textbf{Exemplo resolvido (guarda de peso).} Considere um pacote de publicação com
-$68$ arquivos, $1\,240$ MB no total e um único arquivo de áudio de $1\,180$ MB:
+$68$ arquivos, $1\,240$ MiB no total e um único arquivo de áudio de $1\,180$ MiB:
 \begin{enumerate}[leftmargin=1.4em,itemsep=1pt]
-  \item Guarda de total: $1\,240 > 1\,000$ MB $\Rightarrow$ \textbf{denegado} (limite de diretório).
-  \item Guarda de arquivo: $1\,180 > 25$ MB $\Rightarrow$ \textbf{denegado} (limite de arquivo).
+  \item Guarda de total: $1\,240 > 1\,000$ MiB $\Rightarrow$ \textbf{denegado} (limite de diretório).
+  \item Guarda de arquivo: $1\,180 > 25$ MiB $\Rightarrow$ \textbf{denegado} (limite de arquivo).
   \item Correção: dividir ou reprocessar o áudio. A segunda falha é a mais dura, porque obriga a mudar a arquitetura do feed, e não apenas um parâmetro de build.
 \end{enumerate}
-\textbf{Ordem de grandeza:} as guardas atuam em duas escalas --- megabytes
-(site) e bytes (conteúdo) --- enquanto a sonda \cod{GET}+\cod{Range} custa
-$\approx 1$ KB por URL, cerca de mil vezes menos que um download integral.
+A correção precisa considerar o uso pretendido do pacote: reduzir, dividir
+ou escolher outro destino pode exigir autorização e um novo teste de acesso.
+O exemplo não informa o peso da nota real nem o custo da sondagem.
 \end{resultado}
 
 \begin{resultado}
-\textbf{Ordem de grandeza e verificação.} A publicação tem um orçamento explícito: o limite padrão é $1000$ MB por diretório e $25$ MB por arquivo, o que é da ordem de grandeza de um repositório de sites estáticos --- mas o orçamento é a \emph{folga}, não o consumo medido. Verificação: \cod{python3 -c "import pathlib; print(sum(f.stat().st_size for f in pathlib.Path('.').rglob('*') if f.is_file())/1e6)"} em MB. O ponto didático é a proporção: entre o orçamento e o consumo há uma razão de folga típica de $1{:}10$ a $1{:}100$, e é essa folga que permite publicar sem reescrever. Um sistema que consome mais de metade do orçamento deixa de ser publicável com segurança --- e o PDF do próprio livro, com suas centenas de páginas, é o exemplo do artefato que mais pesa e o menos se beneficia de ser comprimido.
+\textbf{Ordem de grandeza e verificação.} Meça a árvore exata destinada à
+publicação e registre a unidade. Um MiB corresponde a $2^{20}$ bytes, enquanto
+um MB decimal corresponde a $10^6$ bytes; confundi-los altera a comparação.
+Use os limites configurados para aquela guarda e conserve sua saída. O
+orçamento é um teto, e a folga é a diferença entre teto e consumo medido. Não
+há uma fração universal de ocupação que certifique publicação segura.
 \end{resultado}
 
 \begin{aviso}
-\textbf{Limite de validade.} Os valores de $1\,240$ MB e $1\,180$ MB são
+\textbf{Limite de validade.} Os valores de $1\,240$ MiB e $1\,180$ MiB são
 \emph{ilustrativos}. O gate verifica presença, marcador e peso; ele não verifica
 se o conteúdo publicado está \emph{correto} editorialmente.
 \end{aviso}
@@ -254,11 +397,165 @@ evidência extra um feed RSS precisaria para ser considerado íntegro?
 \section{Resumo e exercícios}
 
 \begin{resultado}
-\textbf{O que você deve ter aprendido:} (1) infraestrutura é o ``operar'', distinto
-do ``pensar''; (2) perfis de dependência separam ambientes; (3) 7 servidores MCP,
-4 hooks e 2 plugins formam a camada executável; (4) publicar exige sondagem
-(\cod{GET}+\cod{Range}), nunca \cod{HEAD}; (5) removido só está removido quando
-a URL responde 404. \textbf{Exercício sugerido:} rode o \pth{doctor}, anote as
-verificações e escolha uma delas para reproduzir manualmente (por exemplo, contar
-os agentes registrados no Blackboard).
+\textbf{O que você deve ter aprendido:} dependências, processos, limites e
+recibos sustentam a reprodução. O perfil científico de dez grupos produz um
+resultado local delimitado; a configuração de \CoreMCPCount{} MCPs descreve
+declarações. Hooks precisam ser chamados no evento previsto. Publicação e
+remoção exigem consultar o destino e interpretar sua resposta.
+\textbf{Exercício sugerido:} selecione um recibo local e separe resultado
+histórico, compatibilidade atual e condições ainda não exercitadas.
 \end{resultado}
+
+\clearpage
+
+\section{Fluxograma: conferir uma execução local sem ampliar seu alcance}
+\begin{flowch}[Cadeia de conferência da CI local]{Versão e escopo acompanham os resultados; o recibo conserva a execução observada.}
+\matrix[matrix of nodes,name=ci,row sep=9mm,column sep=6mm,nodes={fn,text width=3.5cm},ampersand replacement=\&]{
+ |[fns]|Perfil e versão \& Grupos executados \& Relatórios de teste \\
+ Decisão humana \& Limites e pendências \& Recibo autenticado \\
+};
+\draw[seta] (ci-1-1)--(ci-1-2);\draw[seta] (ci-1-2)--(ci-1-3);\draw[seta] (ci-1-3)--(ci-2-3);
+\draw[seta] (ci-2-3)--(ci-2-2);\draw[seta] (ci-2-2)--(ci-2-1);
+\end{flowch}
+\begin{descricao}
+\textbf{Como funciona e por quê.} As setas indicam os encaminhamentos descritos, sob suas condições. \textbf{Justificativa.} Cada caixa acrescenta uma condição à interpretação do resultado: quais testes, em qual versão e com qual registro. Carla só transfere uma contagem para a nota depois de conferir esses campos. O diagrama ajuda a explicar por que o total de aprovados precisa de denominador e escopo.
+\textbf{Limite.} A autenticação do recibo é uma verificação local de integridade e origem. Não equivale a validação externa, cobertura total do repositório ou execução científica de todos os exemplos.
+\end{descricao}
+\fontecore{integrations/local_ci.py}{LocalCIService.start}
+
+
+\section[Apêndice Didático: Cobertura de rastro]{Apêndice Didático: Cobertura de rastro ($c = n_p/n_r$)}
+
+\elemento{Cobertura de rastro operacional}{\metainfo{ID}{DID-CRASTRO} \hfill \metainfo{Fonte}{docs/guias-didaticos/formulas-livro-core-nussenzveig.md, seção 11}}
+
+\begin{descricao}
+\textbf{O problema concreto.} Um pacote de evidências precisa dizer quais testes foram executados. Como medir a fração de operações que possuem registro pertinente em relação ao total de operações observadas?
+\end{descricao}
+
+\begin{definicao}
+Nas proporções deste aprofundamento, o total do universo deve ser positivo. Se não houver itens no escopo, registre a medida como não aplicável; não calcule $0/0$.
+
+\textbf{Símbolos.}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{>{\hsize=.6\hsize\linewidth=\hsize}Y>{\hsize=1.2\hsize\linewidth=\hsize}Y>{\hsize=1.2\hsize\linewidth=\hsize}Y}
+Símbolo & Significado & Valor no exemplo \\
+\midrule
+$n_p$ & Número de operações com registro pertinente & — \\
+$n_r$ & Número total de operações observadas & — \\
+$c$ & Cobertura de rastro & — \\
+\end{tabularx}
+\end{center}
+\end{definicao}
+
+\begin{metodo}
+\textbf{Dedução de $c = n_p/n_r$.}
+
+\paragraph{Passo 1 — O que queremos medir.}
+Queremos saber qual fração das operações observadas possui um registro pertinente. Isso é uma simples divisão: operações com registro dividido pelo total de operações observadas.
+
+\paragraph{Passo 2 — Divisão de contagens.}
+
+\[
+\boxed{c = \frac{n_p}{n_r}}
+\]
+
+Justificativa: esta é a definição elementar de proporção: parte sobre todo. Não há cálculo diferencial nem integral; é aritmética de contagem.
+\end{metodo}
+
+\begin{descricao}
+\textbf{Interpretação e limites.} A cobertura de rastro documenta que operações tiveram registro, mas não mede a qualidade desse registro nem a correção do mundo externo. A simples existência de registros não mede disponibilidade operacional; para isso, exige-se uma definição de sucesso, intervalo e população de chamadas.
+\end{descricao}
+
+\clearpage
+\section{Apêndice Didático: Orçamento de peso para publicação}
+
+\elemento{Guarda de peso de diretório e arquivo}{\metainfo{ID}{DID-PESO} \hfill \metainfo{Fonte}{docs/guias-didaticos/formulas-livro-core-nussenzveig.md, seção 12}}
+
+\begin{descricao}
+\textbf{O problema concreto.} Um pacote de publicação contém 68 arquivos, 1.240 MiB no total, e um único arquivo de áudio de 1.180 MiB. Os limites configurados são: 1.000 MiB por diretório e 25 MiB por arquivo. O pacote passa na guarda de publicação?
+\end{descricao}
+
+\begin{definicao}
+\textbf{Símbolos.}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{>{\hsize=.6\hsize\linewidth=\hsize}Y>{\hsize=1.2\hsize\linewidth=\hsize}Y>{\hsize=1.2\hsize\linewidth=\hsize}Y}
+Símbolo & Significado & Valor no exemplo \\
+\midrule
+$W$ & Peso total do diretório & $W = 1.240$ MiB \\
+$W_{limite}$ & Limite de peso do diretório & $W_{limite} = 1.000$ MiB \\
+$w_a$ & Peso de um arquivo individual & $w_a = 1.180$ MiB \\
+$w_{limite}$ & Limite de peso por arquivo & $w_{limite} = 25$ MiB \\
+\end{tabularx}
+\end{center}
+\end{definicao}
+
+\begin{metodo}
+\textbf{Dedução e cálculo.}
+
+\paragraph{Passo 1 — Guarda de total.}
+Comparamos o peso total com o limite de diretório:
+
+\[
+1.240 > 1.000 \text{ MiB} \Rightarrow \text{\textbf{denegado}} \text{ (limite de diretório excedido)}
+\]
+
+\paragraph{Passo 2 — Guarda de arquivo.}
+Comparamos o peso do arquivo com o limite por arquivo:
+
+\[
+1.180 > 25 \text{ MiB} \Rightarrow \text{\textbf{denegado}} \text{ (limite de arquivo excedido)}
+\]
+
+\paragraph{Passo 3 — Correção.}
+O arquivo de áudio precisa ser dividido ou reprocessado. A segunda falha é mais grave porque obriga a mudar a arquitetura do feed, não apenas um parâmetro de build.
+\end{metodo}
+
+\begin{descricao}
+\textbf{Observação sobre unidades.} Um MiB corresponde a $2^{20}$ bytes, enquanto um MB decimal corresponde a $10^6$ bytes. Confundi-los altera a comparação. O orçamento é um teto, e a folga é a diferença entre teto e consumo medido. Não há uma fração universal de ocupação que certifique publicação segura.
+\end{descricao}
+
+\begin{aviso}
+\textbf{Limite de validade.} Os valores de $1.240$ MiB e $1.180$ MiB são ilustrativos. O gate verifica presença, marcador e peso; ele não verifica se o conteúdo publicado está correto editorialmente.
+\end{aviso}
+
+\clearpage
+\section[Apêndice Didático: FAIR como índice de completude]{Apêndice Didático: FAIR como índice de completude ($C_m = n_p/n_r$)}
+
+\elemento{Índice de completude FAIR}{\metainfo{ID}{DID-FAIR} \hfill \metainfo{Fonte}{docs/guias-didaticos/formulas-livro-core-nussenzveig.md, seção 13}}
+
+\begin{descricao}
+\textbf{O problema concreto.} Como medir, como diagnóstico interno (não como certificação FAIR), se um artefato atende aos campos obrigatórios de um esquema de proveniência?
+\end{descricao}
+
+\begin{definicao}
+\textbf{Símbolos.}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{>{\hsize=.6\hsize\linewidth=\hsize}Y>{\hsize=1.2\hsize\linewidth=\hsize}Y>{\hsize=1.2\hsize\linewidth=\hsize}Y}
+Símbolo & Significado & Valor no exemplo \\
+\midrule
+$n_p$ & Número de campos obrigatórios preenchidos & — \\
+$n_r$ & Número total de campos obrigatórios requeridos & — \\
+$C_m$ & Índice de completude do esquema & — \\
+\end{tabularx}
+\end{center}
+\end{definicao}
+
+\begin{metodo}
+\textbf{Dedução.}
+
+\[
+\boxed{C_m = \frac{n_p}{n_r}}
+\]
+
+Justificativa: proporção elementar. Se todos os campos obrigatórios estão preenchidos, $n_p = n_r$ e $C_m = 1$, indicando completude do esquema adotado.
+\end{metodo}
+
+\begin{descricao}
+\textbf{Interpretação e limites.} $C_m = 1$ indica completude do esquema adotado, não correção do conteúdo. A correção ainda depende da conferência da fonte e da validação do resultado. Este é um diagnóstico interno — não uma certificação FAIR.
+\end{descricao}
+
+% R901-PONTE-FECHO
+Com as dependências e fronteiras identificadas, podemos retomar o agente como unidade concreta de trabalho. A ativação seguinte liga definição, política e atribuição, preservando a diferença entre preparar e executar.

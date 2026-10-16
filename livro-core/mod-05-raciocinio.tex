@@ -4,6 +4,10 @@
 % ============================================================
 \chapter{Raciocínio e Modelos}
 
+% R901-PONTE-ABERTURA
+Depois de explicitar o aceite, podemos perguntar o que uma operação de raciocínio realmente faz. O objetivo é escolher um método compatível com a entrada, em vez de tomar o nome de uma engine como prova de capacidade.
+
+
 \roteirodidatico
 {Um resultado pode vir de uma regra programada, de um modelo estatístico ou de um serviço externo. Saber qual mecanismo participou ajuda a interpretar limites e evidências.}
 {\emph{Modelo} transforma entradas em saídas segundo parâmetros aprendidos; \emph{inferência} é o cálculo da saída; \emph{engine} é um componente que executa um método; \emph{provedor} hospeda ou disponibiliza o modelo.}
@@ -49,32 +53,37 @@ os componentes sejam chamados pelo orquestrador nem que cada um forneça prova
 formal. A classificação depende do método implementado e da tarefa: \par
 \smallskip
 {\footnotesize
-\begin{tabularx}{\textwidth}{YYl}
+\begin{tabularx}{\linewidth}{Y Y Y}
 \toprule
 Engine & Natureza & Exercício típico \\
 \midrule
-\cod{Z3Engine} & SMT/satisfatibilidade & provar que restrições são satisfazíveis \\
+\cod{Z3Engine} & SMT/satisfatibilidade & obter um modelo ou recusa para restrições formalizadas \\
 \cod{SymPyEngine} & álgebra simbólica & derivar e reescrever expressões \\
 \cod{KanrenEngine} & lógica relacional & responder por regras e fatos \\
-\cod{CriticalEngine} & pensamento crítico & avaliar pressupostos e validade \\
+\cod{CriticalEngine} & roteiro heurístico & organizar perguntas críticas e pressupostos \\
 \cod{BayesianEngine} & probabilidade & atualizar crenças à luz de evidência \\
-\cod{CausalEngine} & inferência causal & estimar efeito de intervenções \\
-\cod{TemporalEngine} & lógica temporal & raciocinar sobre ordem e prazos \\
+\cod{CausalEngine} & checklist heurístico & resumir critérios de Hill declarados pelo usuário \\
+\cod{TemporalEngine} & análise de eventos & ordenar eventos e verificar relações de tempo \\
 \cod{FuzzyReasoningEngine} & lógica difusa & graduar pertinência (termos linguísticos) \\
-\cod{ChainOfThoughtEngine} & cadeia de raciocínio & decompor passo a passo \\
-\cod{AnalogicalEngine} & analogia & transferir estrutura entre domínios \\
-\cod{CounterfactualEngine} & contrafatual & explorar ``e se houvesse...'' \\
-\cod{QuantumReasoningEngine} & formalização quântica & superpor hipóteses e amplitudes \\
-\cod{MultiReasoningEngine} & composição & encadear os módulos anteriores \\
+\cod{ChainOfThoughtEngine} & decomposição heurística & organizar passos textuais \\
+\cod{AnalogicalEngine} & analogia heurística & organizar correspondências declaradas \\
+\cod{CounterfactualEngine} & cenário textual & classificar antecedentes e alternativas \\
+\cod{QuantumReasoningEngine} & simulação clássica & executar circuitos Bell, GHZ e superposição predefinidos \\
+\cod{MultiReasoningEngine} & fachada & selecionar um dos 12 motores ou agregar saídas \\
 \bottomrule
 \end{tabularx}\par}
 \end{resultado}
 
 \begin{metodo}
-O \pth{MultiReasoningEngine} reúne as demais em um único dicionário de engines
-(\pth{reasoning/engines.py}) e permite composição: um problema clínico pode passar por
-Bayes (diagnóstico), Causal (exposição) e Counterfactual (e se o exame tivesse
-sido outro) em sequência governada.
+O \pth{MultiReasoningEngine} reúne 12 motores em um dicionário e oferece
+seleção explícita ou roteamento automático. No caso da nota científica,
+separe duas tarefas: simplificar uma expressão tem saída simbólica
+conferível; discutir se uma associação é causal exige desenho e evidência
+que a expressão não contém. O \cod{CausalEngine} conta critérios declarados,
+sem estimar intervenções a partir de dados. O \cod{CounterfactualEngine}
+organiza texto, sem resolver um modelo causal estrutural. O modo quântico
+simula circuitos predefinidos em computador clássico, não responde à pergunta
+textual e não usa hardware quântico.
 \end{metodo}
 
 \begin{flowch}[Exemplos de correspondência entre problema e método]{esquema conceitual; confirme as rotas implementadas}
@@ -116,7 +125,7 @@ sido outro) em sequência governada.
 \begin{niveis}
 \textbf{Intuição:} um canivete de raciocínio: não se abre lata com tesoura; cada
 problema pede sua ferramenta.\\
-\textbf{Implementação:} 13 classes de engines (+ compositor); módulos de apoio:
+\textbf{Implementação:} 12 motores e uma fachada; módulos de apoio:
 \pth{evaluator.py},
 \pth{reasoning/quantum.py}.\\
 \textbf{Formalização:} combina \emph{determinismo simbólico} com \emph{heurística
@@ -188,36 +197,37 @@ competição com modelos de fronteira.
 \begin{descricao}
 O Core encaminha tarefas a modelos por \textbf{tipo de tarefa}: o
 \pth{integrations/model_router.py} conhece os perfis \emph{coding}, \emph{reasoning},
-\emph{academic}, \emph{writing}, \emph{fast}, \emph{local} e \emph{math}, com
-\textit{fallback} transparente. Os provedores conhecidos pelo roteamento são
-\pth{litert-lm} e
-\pth{specs/SPEC-935-R435.md}.
+\emph{academic}, \emph{writing}, \emph{fast}, \emph{local} e \emph{math}.
+O catálogo de modelos e a seleção de rota são metadados de configuração;
+a execução precisa identificar o provedor efetivamente chamado, a versão
+do modelo, eventual \textit{fallback} e o resultado da chamada.
 \end{descricao}
 
 \begin{resultado}
-Tabela dos provedores e das famílias que representam:\par
+Exemplos de caminhos descritos nas integrações locais; o quadro não
+declara modelos instalados, autenticação ou disponibilidade corrente:\par
 \smallskip
 {\footnotesize
-\begin{tabularx}{\textwidth}{lY}
+\begin{tabularx}{\linewidth}{>{\hsize=.70\hsize\linewidth=\hsize}Y>{\hsize=1.30\hsize\linewidth=\hsize}Y}
 \toprule
-Provedor & Famílias típicas \\
+Integração & O que conferir antes de chamar \\
 \midrule
-\pth{litert-lm} & on-device: Gemma 4 (E2B/E4B/12B) e Qwen3 (0.6B) via LiteRT-LM \\
-\pth{colibri} & OLMoE (1B/7B), MoE local \\
-\pth{ollama} & modelos locais via Ollama (configuração R607) \\
-\pth{opencode-zen} & curados Zen: GPT, Claude, Gemini, DeepSeek R2 \\
-\pth{opencode-go} & Go: Kimi, DeepSeek, GLM, Qwen, MiMo \\
-\pth{openai} & legado consorciado de provider (ex.: gpt-4o em agentes literários) \\
+\pth{litert-lm} & IDs canônicos, artefato de modelo e runtime compatível \\
+\pth{colibri} & binário/serviço, modelo servido e contrato da chamada \\
+\pth{ollama} & daemon, modelo carregado e parâmetros do percurso local \\
+\pth{opencode-zen} & catálogo, autenticação e resposta efetiva do serviço \\
+\pth{opencode-go} & catálogo, plano e disponibilidade da conta \\
+\pth{openai} & modelo solicitado, credencial, limites e recibo da resposta \\
 \bottomrule
 \end{tabularx}\par}
 \end{resultado}
 
 \begin{arquitetura}
-Prioridade de roteamento local (PAIR, \pth{SPEC-935-R478}):
-\cod{("local", "pair", "ollama", "openai")}, com
-\cod{fallback_used=True} quando um provedor está ausente. O PAIR (``Personal-AI-Router'')
-é opt-in: sem \pth{PAIR_BASE_URL} o provedor permanece inativo e a rota degrada
-sem exceção.
+A integração PAIR é descrita em \pth{SPEC-935-R478}. Sua configuração e
+eventual fallback devem ser conferidos na rota concreta. Uma preferência
+de provedores é política de seleção, não recibo de inferência. No caso
+condutor, uma resposta gerada deve conservar o modelo e a rota usados;
+o cálculo estatístico prespecificado terá outro registro de execução.
 \end{arquitetura}
 
 \begin{flowch}[Roteamento com fallback]{provedores em cascata}
@@ -226,9 +236,9 @@ sem exceção.
  |[fns]|local pronto? \\[2mm]
  |[fns]|\nodep{usar local (LiteRT/Colibri/Ollama)} \\[2mm]
  |[fns]|senão: PAIR configurado? \\[2mm]
- |[fns]|usar PAIR (NVIDIA) \\[2mm]
+ |[fns]|selecionar PAIR \\[2mm]
  |[fns]|senão: API (zen/go/openai) \\[2mm]
- |[fns]|fallback\_used = True \\[2mm]
+ |[fns]|rota e fallback declarados \\[2mm]
 };
 \draw[seta] (mr-1-1)--(mr-2-1);
 \draw[seta] (mr-2-1)--(mr-3-1);
@@ -254,28 +264,27 @@ sem exceção.
 \elemento{Impactos da escolha de modelo}{\metainfo{ID}{R-09} \hfill \metainfo{Perfil}{SPEC-935-R607}}
 
 \begin{resultado}
-Quadro de impactos — distinguindo o que é \emph{medido} do que é \emph{depende do
-contexto}:\par
+Critérios para comparar percursos. As células indicam o que medir ou
+inspecionar; não são medições desta edição:\par
 \smallskip
 {\footnotesize
-\begin{tabularx}{\textwidth}{lYY}
+\begin{tabularx}{\linewidth}{Y Y Y}
 \toprule
 Dimensão & Local (LiteRT/Colibri/Ollama) & API (zen/go/openai) \\
 \midrule
-latência & menor por hop; sem rede & depende do provedor e da rede \\
-custo & sem custo por token & custo por token \\
-privacidade & dados permanecem na máquina & dados cruzam servidor \\
-soberania & independência de fornecedor & dependência contratual \\
-determinismo & repetível com seed & não garantido \\
-\textbf{uso energético} & consome CPU/GPU do operador & consumido pelo fornecedor \\
+latência & medir modelo, hardware, carga e chamadas auxiliares & medir serviço, rede e carga \\
+custo & contabilizar hardware, energia e manutenção & conferir cobrança, plano e consumo \\
+privacidade & inspecionar ferramentas, logs e tráfego do percurso & conferir transmissão, retenção e contrato \\
+dependências & conferir runtime, drivers e artefatos locais & conferir conta, serviço e disponibilidade \\
+repetibilidade & registrar versão, seed e operações não determinísticas & registrar parâmetros e política do provedor \\
+energia & medir consumo local no escopo definido & disponibilidade da medição depende do serviço \\
 \bottomrule
 \end{tabularx}\par}
 \end{resultado}
 
 \begin{metodo}
-\textbf{Ajustes verificados (R607):} em operação local, o perfil mínimo adotado
-adicionou \pth{num_ctx=24576}
-e \pth{specs/SPEC-935-R607.md}. Medições registradas na spec distinguem o
+\textbf{Exemplo histórico de ajuste (R607):} o perfil local mínimo adotou
+\pth{num_ctx=24576}. Os registros de \pth{specs/SPEC-935-R607.md} distinguem o
 perfil completo (mais contexto, 21.136 tokens em janela observada e tempos de
 6--18 min) do perfil mínimo (2.051--6.712 tokens e 1m32--5m01): se interpretam
 dentro do repositório e da máquina do operador — não como benchmark universal.
@@ -289,10 +298,10 @@ aos critérios de repetição (ver \pth{specs/SPEC-935-R607.md}).
 \end{aviso}
 
 \begin{limite}
-Modelos locais de menor porte (OLMoE 1B, Qwen3 0.6B) são adequados para
-\emph{assistência e composição}, não para raciocínio de fronteira. A escolha ``qual
-modelo para qual tarefa'' deve respeitar o tipo da tarefa (R-00) e o limite
-declarado do engine — modelo não substitui o gate SDD, e vice-versa.
+A adequação de um modelo a uma tarefa precisa de critério e avaliação no
+percurso usado. Porte, nome ou execução local não demonstram capacidade de
+raciocínio. O teste de uma expressão simbólica e a avaliação de um resumo
+científico exigem verificações diferentes; nenhum substitui o outro.
 \end{limite}
 
 \clearpage
@@ -304,10 +313,11 @@ declarado do engine — modelo não substitui o gate SDD, e vice-versa.
 Há ainda os \textbf{executores externos} orquestráveis como fornecedores de
 modelo/raciocínio: a CLI do \textbf{Gemini} (Google), o \textbf{Reasonix}
 (DeepSeek-Reasonix, MIT), o \textbf{Plandex} (MIT), o \textbf{Goose} (Apache-2.0) e
-o \textbf{Haystack} (Apache-2.0). Eles exigem autenticação própria
-(respectivamente \pth{DEEPSEEK_API_KEY}; os demais com seus
-fluxos) e seus resultados \emph{não passam a ser verificados por existir
-integração}.
+o \textbf{Haystack} (Apache-2.0). Dependências, autenticação e uso de modelos
+variam por integração: uma chave DeepSeek não autentica todos esses
+percursos, e recuperação local de documentos pode não chamar um modelo.
+Consulte o contrato e o diagnóstico de cada executor. A existência da
+integração não demonstra que ela tenha executado a tarefa.
 \end{descricao}
 
 \begin{aviso}
@@ -318,23 +328,33 @@ não é chancela de qualidade.
 
 \section{Conclusão do módulo}
 
+\praticacore
+{Resolver uma expressão auxiliar da nota científica sem confundir solução algébrica com resultado empírico.}
+{Considere a equação didática \cod{2*x+1=5}, sem dados observacionais. Use o primário \cod{MarceloClaroOrchestrator}, no ambiente do Core com SymPy disponível; a operação é uma prática proposta, não uma nova execução registrada nesta edição.}
+{Por uma sessão Python, importe \cod{MarceloClaroOrchestrator} de \pth{marceloclaro/orchestrator.py}, atribua a \cod{core} uma instância com \cod{auto_load_agents=False} e chame \cod{core.reason("Resolver equação auxiliar", engine="sympy", expression="2*x+1=5")}. Conserve o objeto retornado e a versão do código.}
+{Identifique o motor efetivamente usado, a conclusão, as etapas e o estado da observação metacognitiva. Com SymPy, a solução esperada é $x=2$; substitua-a na entrada: $2\times2+1=5$. O escore do motor é heurístico e não mede probabilidade de verdade da nota científica.}
+{Se a expressão for recusada ou SymPy estiver ausente, preserve a mensagem. O fallback aritmético não resolve equações com incógnita. Confira a entrada e a dependência; não apresente texto plausível de outro modelo como solução executada.}
+{A igualdade foi resolvida sob uma codificação explícita. Que evidência seria necessária para relacionar essa variável a uma medida real? Essa pergunta prepara a análise de dados do próximo capítulo.}
+
 \begin{resultado}
-O raciocínio do Core opera em três níveis: \emph{engines formais} (prova e lógica),
-\emph{pipeline semântico} (afinidade e atenção) e \emph{modelos} (geração e
-heurística), todos sob um roteador com fallback claro e documentos de impacto que
-separam observação local de afirmação universal.
+O capítulo distinguiu motores simbólicos, numéricos e heurísticos, pipeline
+de afinidade e atenção e modelos de geração. Cada percurso tem sua interface
+e seu critério de conferência. Na nota científica, a solução de uma expressão
+é um componente delimitado; fonte, dado, método estatístico e interpretação
+continuam exigindo registros próprios.
 \end{resultado}
 
 
 \section{Resumo e exercícios}
 
 \begin{resultado}
-\textbf{O que você deve ter aprendido:} (1) raciocínio como serviço separável
-(engines) e não amarra no chamador; (2) plano $\to$ execução $\to$ crítica
-(Reflexion, auto-correção); (3) otimização com orçamento explícito e
-anti-overclaim de velocidade.
-\textbf{Exercício sugerido:} desenhe o ciclo Reflexion de um agente que falha
-numa spec: o que ele lê, o que ele corrige e o que grava no MetaBus depois.
+\textbf{O que você deve ter aprendido:} (1) reconhecer a natureza de cada
+motor; (2) registrar entrada, seleção, saída e limite; (3) separar cálculo
+formal de interpretação empírica e métricas de desempenho.
+\textbf{Exercício sugerido:} substitua a solução da prática na equação.
+Depois descreva o que falharia se o símbolo representasse uma medida cuja
+unidade não foi declarada. Confira também se a observação metacognitiva
+foi persistida, sem tratá-la como calibração do escore.
 \end{resultado}
 
 % ============================================================
@@ -349,19 +369,20 @@ numa spec: o que ele lê, o que ele corrige e o que grava no MetaBus depois.
 \elemento{Leitura guiada — Raciocínio e modelos}{\metainfo{ID}{N-05} \hfill \metainfo{Ciclo}{R614} \hfill \metainfo{Estilo}{provar vs.\ gerar}}
 
 \begin{descricao}
-\textbf{O fenômeno.} Há duas maneiras de ``saber'' que o Core usa e que não devem
-ser confundidas. \emph{Provar} é decidir com garantia: dada a premissa, a conclusão
-é certa (motores formais). \emph{Gerar} é produzir a resposta mais plausível: útil,
-mas falível (modelos de linguagem). O bom projeto separa as duas e roteia cada
-tarefa para o instrumento certo --- usar um martelo para desparafusar é o pecado que
-este módulo evita.
+\textbf{O fenômeno.} Resolver uma equação, testar restrições e produzir um
+parágrafo são operações distintas. Uma derivação formal relaciona conclusão
+e premissas sob uma lógica e uma codificação; pode haver entrada recusada,
+dependência ausente ou limite de execução. Um modelo de linguagem gera texto,
+que precisa de conferência. Heurísticas organizam perguntas ou sinais sem
+fornecer a garantia de um solver. Escolher o instrumento exige reconhecer
+qual dessas saídas a tarefa pede.
 \end{descricao}
 
 \begin{definicao}
 \textbf{Grandezas e definições.}
 \begin{itemize}[leftmargin=1.3em,itemsep=1pt]
-  \item \textbf{Engine formal}: motor de prova/lógica; o catálogo reúne \textbf{13 engines}.
-  \item \textbf{Solvabilidade} ($\sigma$): fração de tarefas resolvidas com prova/modelo, $\sigma = $ (tarefas resolvidas) $/$ (tarefas totais).
+  \item \textbf{Motor}: implementação de um método; há 12 motores e uma fachada, com naturezas distintas.
+  \item \textbf{Fração resolvida} ($\sigma$): tarefas que atendem ao critério de solução divididas pelas tarefas avaliadas; não é uma propriedade universal de solvabilidade.
   \item \textbf{Speedup} ($A$): ganho por paralelismo, limitado pela Lei de Amdahl.
   \item \textbf{Fração sequencial} ($s$): parte do trabalho que \emph{não} paraleliza, $0 \le s \le 1$.
   \item \textbf{Fallback}: rota alternativa quando o instrumento principal não se aplica.
@@ -374,12 +395,14 @@ este módulo evita.
   \item Divida a tarefa: fração $1-s$ paralelizável, fração $s$ estritamente sequencial.
   \item Com $N$ executores, o tempo cai para $s + (1-s)/N$.
   \item Logo o ganho é \[ A(N) = \frac{1}{s + (1-s)/N}. \]
-  \item Quando $N \to \infty$, $A \to 1/s$: a parte sequencial \emph{manda}, mesmo com $N=13$ engines.
+  \item Para $s>0$, quando $N \to \infty$, $A \to 1/s$: a parte sequencial limita a aceleração ideal.
 \end{enumerate}
 \end{metodo}
 
 \begin{resultado}
-\textbf{Exemplo resolvido.} Seja $s = 0{,}2$ (20\% sequencial) e $N = 13$:
+\textbf{Exemplo resolvido e hipotético.} Seja $s = 0{,}2$ (20\% sequencial)
+e $N = 13$ executores equivalentes de uma carga fixa, sem relação com a
+contagem de motores heterogêneos do Core:
 \[ A(13) = \frac{1}{0{,}2 + \frac{0{,}8}{13}} = \frac{1}{0{,}2 + 0{,}0615}
         = \frac{1}{0{,}2615} \approx 3{,}8, \]
 enquanto o teto assintótico é $1/0{,}2 = 5$. \textbf{Ordem de grandeza:} mesmo com
@@ -388,7 +411,13 @@ engines, é a fração sequencial.
 \end{resultado}
 
 \begin{resultado}
-\textbf{Ordem de grandeza e verificação.} O roteador expõe $5$ motores de raciocínio (simbólico, algébrico, lógico, numérico e delegação externa), e o repositório integra $4$ executores externos, todos dependentes de credenciais. A ordem de grandeza que importa aqui é a assimetria de custo: um motor simbólico resolve uma equação em milissegundos, enquanto a mesma resposta por modelo de linguagem custa segundos e pode falhar em silêncio. Verificação: \cod{python3 -c "import json; print(len(json.load(open('opencode.json'))['agent']))"} confirma o tamanho do catálogo, mas o teste correto do raciocínio é o contraexemplo: uma prova que só passa com o modelo e falha com o solver é um palpite, não uma prova. É por isso que o critério de aceitação do capítulo exige o solver, e não o modelo.
+\textbf{Ordem de grandeza e verificação.} Abra o dicionário de
+\cod{MultiReasoningEngine} e confira os 12 identificadores; depois escolha
+um caso com entrada e conclusão conferíveis. Na prática deste capítulo,
+substituir $x=2$ na equação verifica a igualdade. Contar agentes em
+\pth{opencode.json} não testa esse comportamento. Se comparar desempenho,
+defina a mesma tarefa, critério de correção, ambiente e repetição para cada
+percurso; não deduza latência a partir do nome do método.
 \end{resultado}
 
 \begin{aviso}
@@ -413,7 +442,9 @@ FUNÇÃO. obter prova/modelo/solução por métodos formais e simbólicos; quant
 \end{processo}
 
 \begin{resultado}
-CÁLCULO. solvabilidade = tarefas com modelo/prova / tarefas totais; speedup teórico limitado pela fração sequencial (Lei de Amdahl).
+CÁLCULO. fração resolvida = tarefas que satisfazem o critério / tarefas
+avaliadas, com denominador positivo e casos enumerados. A aceleração de
+Amdahl é um modelo de carga fixa; não é calculada contando motores distintos.
 \end{resultado}
 
 \begin{descricao}
@@ -426,3 +457,103 @@ localização da fonte (R110), não o mérito da afirmação.
 \end{aviso}
 
 \noindent\textit{Interpretação e cálculo:} A Lei de Amdahl estima o limite da aceleração quando parte do trabalho permanece sequencial: $S(N)=1/((1-p)+p/N)$, em que $p$ é a fração paralelizável e $N$ o número de processadores. Num exemplo hipotético com $p=0{,}8$ e $N=4$, $S(4)=1/(0{,}2+0{,}2)=2{,}5$; quadruplicar os processadores não quadruplica a velocidade. Com $N=8$, $S(8)=1/(0{,}2+0{,}1)\approx3{,}33$. A conta supõe carga fixa e custos de comunicação nulos: é um teto idealizado, não uma previsão de desempenho do Core \citref{AMDAHL, G. M. Validity of the single processor approach to achieving large scale computing capabilities. In: \emph{AFIPS Conference Proceedings}. v.~30, p.~483-485, 1967}{10.1145/1465482.1465560}{p.~483--485 (recorte do texto integral, p.~484). é o limite fundamental da aceleração: esforço em paralelismo sem ganho sequencial é desperdiçado — princípio que o roteamento de motores aplica ao escolher o motor mais adequado em vez de paralelizar tudo.}{The effort expended on achieving high parallel processing rates is wasted unless it is accompanied by achievements in sequential processing rates of very nearly the same magnitude}{O esforço despendido para alcançar altas taxas de processamento paralelo é desperdiçado a menos que seja acompanhado por conquistas em taxas de processamento sequencial de magnitude muito próxima.}{AMDAHL, 1967, p.~484}
+
+\clearpage
+\section{Apêndice Didático: Lei de Amdahl — limite da aceleração por paralelismo}
+
+\elemento{Lei de Amdahl}{\metainfo{ID}{DID-AMD} \hfill \metainfo{Fonte}{Amdahl (1967), DOI 10.1145/1465482.1465560}}
+
+\begin{descricao}
+O teto $1/s$ exige $s>0$. No caso idealizado $s=0$, a fórmula dá $A(N)=N$; o denominador e o limite precisam ser interpretados separadamente.
+
+\textbf{O problema concreto.} Se parte de um trabalho pode ser feita em paralelo por $N$ executores e outra parte deve ser feita estritamente em sequência, quanto o trabalho acelera ao aumentar $N$? Quadruplicar o número de motores quadruplica a velocidade?
+\end{descricao}
+
+\begin{definicao}
+\textbf{Símbolos.}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{>{\hsize=.6\hsize\linewidth=\hsize}Y>{\hsize=1.2\hsize\linewidth=\hsize}Y>{\hsize=1.2\hsize\linewidth=\hsize}Y}
+Símbolo & Significado & Valor no exemplo \\
+\midrule
+$s$ & Fração sequencial (parte que NÃO paraleliza), $0 \le s \le 1$ & $s = 0{,}2$ \\
+$1-s$ & Fração paralelizável & $1 - 0{,}2 = 0{,}8$ \\
+$N$ & Número de executores equivalentes & $N = 13$ \\
+$A(N)$ & Speedup (ganho de aceleração) & $A(13) \approx 3{,}8$ \\
+\end{tabularx}
+\end{center}
+\end{definicao}
+
+\begin{metodo}
+\textbf{Dedução passo a passo da Lei de Amdahl.}
+
+\paragraph{Passo 1 — Divisão da tarefa.}
+Divida o trabalho total em duas partes: uma fração $1-s$ que pode ser paralelizada e uma fração $s$ que deve ser feita estritamente em sequência. A soma das duas é 1 (o trabalho inteiro).
+
+\paragraph{Passo 2 — Tempo com $N$ executores.}
+A parte paralelizável $(1-s)$ é dividida entre $N$ executores, levando tempo $(1-s)/N$. A parte sequencial $s$ continua levando tempo $s$, não importa quantos executores você tenha. O tempo total com $N$ executores é:
+
+\[
+T_N = s + \frac{1-s}{N}
+\]
+
+\paragraph{Passo 3 — Ganho (speedup).}
+O speedup é o tempo com 1 executor dividido pelo tempo com $N$ executores. Como com 1 executor o tempo é $T_1 = s + (1-s) = 1$, o ganho é:
+
+\[
+\boxed{A(N) = \frac{1}{s + (1-s)/N}}
+\]
+
+\paragraph{Passo 4 — Limite assintótico.}
+Quando $N \to \infty$, o termo $(1-s)/N \to 0$, então:
+
+\[
+A(N) \to \frac{1}{s}
+\]
+
+Isso significa que, não importa quantos motores você adicione, o ganho nunca ultrapassa $1/s$, porque a parte sequencial $s$ continua exigindo seu tempo.
+
+\paragraph{Passo 5 — Cálculo numérico.}
+Seja $s = 0{,}2$ (20\% sequencial) e $N = 13$:
+
+\[
+A(13) = \frac{1}{0{,}2 + \frac{0{,}8}{13}} = \frac{1}{0{,}2 + 0{,}0615} = \frac{1}{0{,}2615} \approx 3{,}8
+\]
+
+O teto assintótico é $1/0{,}2 = 5$.
+
+\[
+\boxed{A(13) \approx 3{,}8, \qquad \text{teto} = 5\times}
+\]
+
+\end{metodo}
+
+\begin{descricao}
+\textbf{Interpretação.} Mesmo com 13 executores, o ganho é de apenas $3{,}8\times$, não $13\times$. E mesmo com infinitos motores, o ganho nunca passa de $5\times$. O gargalo não é o número de engines, é a fração sequencial do trabalho.
+
+\textbf{O que isso NÃO significa:}
+\begin{itemize}[leftmargin=1.3em,itemsep=1pt]
+  \item Não é uma previsão de desempenho do Core: conta carga fixa e custos de comunicação nulos.
+  \item Não se calcula contando motores distintos do catálogo.
+  \item Na prática, coordenação e comunicação adicionam custo, reduzindo ainda mais o ganho real.
+\end{itemize}
+\end{descricao}
+
+\begin{aviso}
+\textbf{Limites de validade.}
+\begin{enumerate}[leftmargin=1.3em,itemsep=1pt]
+  \item Amdahl supõe fração sequencial constante e carga perfeita.
+  \item O número $3{,}8$ é ilustração do limite, não promessa de velocidade do Core.
+  \item Substituir $x=2$ em uma equação simbólica verifica a igualdade; contar agentes em \pth{opencode.json} não testa esse comportamento.
+\end{enumerate}
+\end{aviso}
+
+\begin{resultado}
+\textbf{Exercícios de fixação.}
+\begin{enumerate}[leftmargin=1.3em,itemsep=2pt]
+  \item Para $s=0{,}1$, qual o teto de aceleração?
+  \item Por que ``provar'' e ``gerar'' exigem roteiros diferentes no mesmo orquestrador?
+\end{enumerate}
+\end{resultado}
+
+% R901-PONTE-FECHO

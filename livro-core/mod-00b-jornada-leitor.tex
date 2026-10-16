@@ -4,6 +4,10 @@
 % ============================================================
 \chapter{Jornada do Leitor: Quatro Esta\c{c}\~oes}
 
+% R901-PONTE-ABERTURA
+Com o contrato de leitura estabelecido, podemos olhar o mesmo pedido por fora e por dentro. As quatro perspectivas deste capítulo serão retomadas sempre que uma explicação passar da cena ao mecanismo.
+
+
 \roteirodidatico
 {Voc\^e pode ler este livro em dois ritmos: Ana l\^e para usar bem; Bruno l\^e para reconstruir. As quatro esta\c{c}\~oes a seguir mostram o mesmo pedido visto de quatro dist\^ancias: o que a casa promete, quem executa, por que o desenho faz sentido e como refazer.}
 {\emph{Esta\c{c}\~ao Funcional} observa entradas e sa\'idas; \emph{Estrutural} abre o cap\^o e localiza arquivos; \emph{Te\'orica} apresenta o modelo que justifica a regra; \emph{Reprodu\c{c}\~ao} fixa comando, vers\~ao e confer\^encia.}
@@ -12,13 +16,13 @@
 {Para o pedido que voc\^e tem em mente, o que muda entre ver s\'o a resposta e conseguir refazer todo o caminho com outro computador?}
 
 \casoguiado{o pedido que atravessa as quatro esta\c{c}\~oes}
-{Ana pede: resuma este artigo em dez linhas sem inventar dados. Bruno registra o mesmo pedido como tarefa com crit\'erio: cada frase do resumo deve apontar para um trecho do original. Na esta\c{c}\~ao funcional, ambos conferem se o resumo veio com fontes. Na estrutural, Bruno localiza quem buscou, quem resumiu e quem verificou. Na te\'orica, os dois entendem por que gates existem. Na reprodu\c{c}\~ao, Bruno repete o diagn\'ostico e recompila o livro para provar que o ambiente sustenta o que o texto afirma.}
+{Ana pede: resuma este artigo em dez linhas sem inventar dados. Bruno registra o mesmo pedido como tarefa com crit\'erio: cada frase do resumo deve apontar para um trecho do original. Na esta\c{c}\~ao funcional, ambos conferem se o resumo veio com fontes. Na estrutural, Bruno localiza quem buscou, quem resumiu e quem verificou. Na te\'orica, os dois entendem por que gates existem. Na reprodu\c{c}\~ao, Bruno repete o diagn\'ostico e recompila o livro para conferir a gera\c{c}\~ao do documento, separadamente das afirma\c{c}\~oes sobre o runtime.}
 
 \section{Esta\c{c}\~ao Funcional: o contrato antes do mecanismo}
 
-Na esta\c{c}\~ao funcional, a \'unica pergunta \'e se o combinado foi cumprido. Entrada, crit\'erio e sa\'ida ficam vis\'iveis na mesma p\'agina. Ana aprende a exigir tr\^es itens: o texto pedido, a fonte de cada afirma\c{c}\~ao e a declara\c{c}\~ao do que n\~ao foi encontrado. Sem esses tr\^es, ela devolve. Bruno aprende a escrever o crit\'erio antes de chamar qualquer agente, em \pth{specs/SPEC-935-R*.md}, e a s\'o aceitar a entrega quando \pth{tests/test_r*.py} passa. Essa ordem, crit\'erio antes de execu\c{c}\~ao, \'e o SDD/TDD que o livro defender\'a com dados.
+Na esta\c{c}\~ao funcional, a \'unica pergunta \'e se o combinado foi cumprido. Entrada, crit\'erio e sa\'ida ficam vis\'iveis na mesma p\'agina. Ana aprende a exigir tr\^es itens: o texto pedido, a fonte de cada afirma\c{c}\~ao e a declara\c{c}\~ao do que n\~ao foi encontrado. Sem esses tr\^es, ela devolve. Bruno aprende a escrever o crit\'erio antes de chamar qualquer agente, em \pth{specs/SPEC-935-R*.md}, e a s\'o aceitar a entrega quando \pth{tests/test_r*.py} passa. Essa ordem, crit\'erio antes de execu\c{c}\~ao, \'e o contrato SDD/TDD que o livro examinar\'a no c\'odigo e em evid\^encias delimitadas.
 
-A defesa n\~ao \'e slogan \'agil. A disseca\c{c}\~ao do processo mostra que os ganhos associados ao TDD v\^em sobretudo da granularidade e da uniformidade dos passos, n\~ao apenas da ordem teste-primeiro.
+A defesa n\~ao \'e slogan \'agil. A disseca\c{c}\~ao do processo mostra que os resultados observados se associam \`a granularidade e \`a uniformidade dos passos no desenho estudado; isso n\~ao estabelece ganho causal neste Core.
 
 Passos curtos e regulares melhoram foco e fluxo, e \'e por isso que este livro exige fichas curtas, comandos curtos e verifica\c{c}\~oes frequentes em vez de grandes blocos sem confer\^encia \citref{FUCCI, D. et al. A dissection of the test-driven development process: does it really matter to test-first or to test-last? IEEE Transactions on Software Engineering, v.~43, n.~7, p.~597-614, 2017}{10.1109/TSE.2016.2616877}{Justifica o SDD/TDD deste livro como disciplina de passos curtos e uniformes, nao como ritual de ordem teste-primeiro.}{Test-driven development is a technique that repeats short coding cycles interleaved with testing}{Desenvolvimento orientado a testes e uma tecnica que repete ciclos curtos de codificacao intercalados com testes.}{FUCCI et al., 2017, p.~597-614}.
 
@@ -36,13 +40,13 @@ Todo pedido traz entrada leg\'ivel, crit\'erio escrito e forma de conferir. Se f
 
 Na esta\c{c}\~ao estrutural, Bruno abre o mapa de oito camadas e segue o pedido como quem segue um cano. Camada 1 recebe pela CLI e configura\c{c}\~ao. Camada 3 escolhe o agente por capacidades e escore. Camada 2 anota no Quadro e guarda no MetaBus. Camada 4 barra o que n\~ao passou no gate. Camada 6 chama ferramentas externas por MCP quando precisa. Cada passagem deixa rastro em arquivo ou log; onde n\~ao h\'a rastro, n\~ao h\'a afirma\c{c}\~ao neste livro.
 
-O cora\c{c}\~ao da escolha \'e uma pontua\c{c}\~ao de aten\c{c}\~ao. Por tr\'as do nome elegante h\'a uma opera\c{c}\~ao simples herdada dos Transformers: comparar pergunta e candidatos por produto escalar, suavizar por softmax e combinar valores.
+O roteador combina sinais de semântica, capacidades, confiança e carga em uma utilidade. O softmax transforma essas utilidades em pesos normalizados. A atenção do Transformer fornece uma analogia conceitual; o código desta rota não executa uma camada matricial Q/K/V.
 
 A arquitetura que introduziu esse mecanismo empilha aten\c{c}\~ao pura sem recorr\^encia nem convolu\c{c}\~ao, e \'e dela que o Core toma emprestada a ideia de rotear por relev\^ancia ponderada.
 
 O mecanismo original calcula aten\c{c}\~ao como softmax do produto de consultas por chaves escalado pela raiz da dimens\~ao, ponderando valores \citref{VASWANI, A. et al. Attention is all you need. Advances in Neural Information Processing Systems, v.~30, p.~5998-6008, 2017}{10.48550/arXiv.1706.03762}{Justifica o roteamento por atencao do Core como ponderacao por relevancia, nao como compreensao garantida.}{We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely}{Propomos uma nova arquitetura de rede simples, o Transformer, baseada apenas em mecanismos de atencao, dispensando totalmente recorrencia e convolucoes.}{VASWANI et al., 2017, p.~5998-6008}.
 
-Para que Ana tamb\'em entenda, o livro resolve um caso de brinquedo. Sejam duas consultas e duas chaves em dimens\~ao $d_{k}=4$, com $QK^{T} = [[4,0],[0,4]]$. Escala por $\sqrt{d_{k}}=2$: $[[2,0],[0,2]]$. Softmax por linha: linha 1 d\'a $[\exp(2)/(\exp(2)+\exp(0)), 1/(\exp(2)+1)] \approx [0{,}88, 0{,}12]$; linha 2 espelha $[0{,}12, 0{,}88]$. Multiplicar por $V=[[1,0],[0,1]]$ devolve quase a identidade ponderada. O exemplo mostra o essencial: escore alto concentra peso, escore empatado divide peso. No Core, trocar $Q$, $K$ e $V$ por embeddings de tarefa, agente e hist\'orico n\~ao muda a intui\c{c}\~ao: pontua\c{c}\~ao ordena, n\~ao certifica.
+Para que Ana tamb\'em entenda, o livro resolve um caso de brinquedo. Sejam duas consultas e duas chaves em dimens\~ao $d_{k}=4$, com $QK^{T} = [[4,0],[0,4]]$. Escala por $\sqrt{d_{k}}=2$: $[[2,0],[0,2]]$. Softmax por linha: linha 1 d\'a $[\exp(2)/(\exp(2)+\exp(0)), 1/(\exp(2)+1)] \approx [0{,}88, 0{,}12]$; linha 2 espelha $[0{,}12, 0{,}88]$. Multiplicar por $V=[[1,0],[0,1]]$ devolve quase a identidade ponderada. O exemplo mostra o essencial: escore alto concentra peso, escore empatado divide peso. No Core, a intuição de ponderar candidatos é preservada por outro cálculo: uma combinação de critérios seguida de softmax. A ordem resultante não certifica a resposta.
 
 \begin{aviso}
 Limite estrutural. O c\'alculo acima ilustra pondera\c{c}\~ao; n\~ao prova que o roteador do Core escolha bem. A qualidade da escolha depende de embeddings, pesos, desempates e fallbacks implementados, avaliados caso a caso com registros observ\'aveis.
@@ -60,7 +64,7 @@ O livro resolve o caso can\^onico. Seja $R$ a raz\~ao entre verdadeiros e falsos
 
 \[ \mathrm{PPV} = \frac{(1-\beta)R}{(1-\beta)R + \alpha}. \]
 
-Com campo dif\'icil $R=1{:}10=0{,}1$, poder $0{,}8$ e $\alpha=0{,}05$: numerador $0{,}8 \times 0{,}1 = 0{,}08$; denominador $0{,}08+0{,}05=0{,}13$; $\mathrm{PPV} \approx 0{,}615$, cerca de 62 por cento. Ou seja, mesmo com poder razo\'avel, tr\^es a cada oito achados significativos seriam falsos nesse campo. Se houver vi\'es $u$, o denominador cresce e o PPV cai mais. A moral para o Core \'e direta: teste verde sem considerar poder, vi\'es e taxa-base n\~ao \'e selo de verdade; \'e apenas passagem por um crit\'erio declarado.
+Com campo dif\'icil $R=1{:}10=0{,}1$, poder $0{,}8$ e $\alpha=0{,}05$: numerador $0{,}8 \times 0{,}1 = 0{,}08$; denominador $0{,}08+0{,}05=0{,}13$; $\mathrm{PPV} \approx 0{,}615$, cerca de 62 por cento. Ou seja, mesmo com poder razo\'avel, tr\^es a cada oito achados significativos seriam falsos nesse campo. Se houver vi\'es $u$, o denominador cresce e o PPV cai mais. A distin\c{c}\~ao para o Core \'e essencial: o PPV pertence ao modelo hipot\'etico de pesquisa. Um teste de software aprovado indica atendimento ao caso testado; n\~ao recebe uma probabilidade de verdade por esta f\'ormula.
 
 \section{Esta\c{c}\~ao Reprodu\c{c}\~ao: como refazer sem depender de ningu\'em}
 
@@ -111,3 +115,6 @@ Dar ao leigo um caminho seguro at\'e o uso com fontes e ao t\'ecnico um caminho 
 \begin{resultado}
 \textbf{Exercícios.} Descreva uma tarefa nas quatro perspectivas. Localize uma divergência entre figura e código. Proponha uma operação pequena que permita investigar essa divergência.
 \end{resultado}
+
+% R901-PONTE-FECHO
+As perspectivas já estão definidas; falta tornar o vocabulário familiar. O próximo capítulo funciona como uma pausa de orientação: consulte um termo, reconheça-o no caso e retorne ao percurso.

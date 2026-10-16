@@ -4,6 +4,10 @@
 % ============================================================
 \chapter{Projeto Pedagógico: Como Este Livro Ensina}
 
+% R901-PONTE-ABERTURA
+Já conhecemos a tarefa e as personagens. Agora explicitamos a organização do estudo, para que a complexidade técnica seja aprofundada gradualmente, sem abandonar a prática que lhe dá sentido.
+
+
 \roteirodidatico
 {Você abriu um livro de centenas de páginas sobre um ecossistema de IAs e quer saber por onde começar sem se perder. Este capítulo é o contrato: diz quem o livro imagina que você é, o que cada parte promete e como conferir se aprendeu.}
 {\emph{Ana} usa sem programar; \emph{Bruno} reconstrói com comandos; \emph{Trilha} é um caminho de leitura com início, meio e checkpoint; \emph{Checkpoint} é a pergunta que autoriza avançar.}
@@ -14,10 +18,52 @@
 \casoguiado{três leitores na mesma página}
 {Ana é professora e quer um resumo fiel com fonte. Bruno é desenvolvedor e quer repetir o pipeline em outra máquina. Carla é auditora e quer saber o que o livro não pode afirmar. Os três leem a mesma ficha, mas param em lugares diferentes: Ana para no exemplo e no limite; Bruno segue até o comando e o hash; Carla confere DOI, escopo da contagem e data da fotografia. Este livro foi reformulado para que os três usem a mesma página sem fingir ser um ao outro.}
 
-\section{O novo design: por que fundo claro e cor com sentido}
+\section{Uma pergunta atravessa o livro}
+
+Ana deseja preparar uma nota científica que possa ser lida e conferida por outra
+pessoa. Bruno a ajuda a organizar uma fonte identificada, uma pergunta delimitada
+e um experimento local pequeno. Carla revisa a correspondência entre afirmações
+e evidências. A tarefa é um cenário didático: as personagens não são participantes
+de um estudo nem substituem o pesquisador responsável.
+
+No início, os três só conseguem escrever o pedido. A arquitetura permite localizar
+os responsáveis; a orquestração transforma o pedido em atribuições; a memória
+conserva contexto e falhas; o gate distingue saída produzida de entrega aceita.
+O raciocínio explicita premissas e métodos; o capítulo científico reúne dados,
+receita e resultados. Integrações, perfis e infraestrutura explicam o que permite
+executar esse plano. A reprodução fecha o percurso, comparando o que era esperado
+com o que foi efetivamente observado.
+
+Essa continuidade é a organização do livro, não uma promessa de que qualquer
+comando percorra todas as etapas. Cada capítulo aprofunda uma dificuldade que o
+anterior deixou visível. A prática conserva um artefato — pedido, plano,
+atribuição, observação, teste ou pacote — que será retomado adiante.
+
+\begin{flowch}[Um mesmo caso, três profundidades]{setas: progressão de estudo, não chamadas do runtime}
+\matrix[matrix of nodes,name=apr,row sep=4mm,column sep=4mm,nodes={fn},ampersand replacement=\&]{
+ |[fns]|Compreender a cena \& |[fns]|Examinar o mecanismo \& |[fns]|Agir e conferir \\
+};
+\draw[seta] (apr-1-1)--(apr-1-2);
+\draw[seta] (apr-1-2)--(apr-1-3);
+\draw[seta,dashed,bend left=28] (apr-1-3.north) to node[above,font=\scriptsize]{a falha redefine a pergunta} (apr-1-1.north);
+\end{flowch}
+\begin{descricao}
+\textbf{Como funciona e por quê. Mecanismo.} As setas organizam a leitura: uma cena
+introduz o problema, o código esclarece o contrato e uma ação produz algo que
+pode ser conferido. O retorno tracejado é reflexão sobre o exercício.
+\textbf{Justificativa.} Usar o mesmo caso permite aprofundar conceitos sem exigir
+que o leitor aprenda um novo domínio a cada capítulo.
+\textbf{Limite.} É uma escolha editorial; não se mediu sua eficácia de ensino.
+\end{descricao}
+\fontecore{livro-core/macros.tex}{praticacore}
+
+\section{O projeto visual a serviço da leitura}
 
 \begin{dicaleigo}
-Em 30 segundos: fundo escuro cansa e gasta tinta. Fundo claro de papel imprime bem, fotocopia bem e deixa ler por horas. Cada cor agora tem um trabalho: azul guia o leigo, roxo marca orquestração, verde marca prova passada, amarelo pede atenção ao limite, vermelho barra sem critério.
+O fundo claro, o corpo de texto ampliado e o espaçamento entre linhas procuram
+favorecer a leitura contínua e a impressão. A cor orienta, mas não carrega sozinha
+o significado: os títulos identificam conceito, procedimento, resultado e limite.
+Uma caixa verde continua exigindo a leitura do seu escopo; não é um selo científico.
 \end{dicaleigo}
 
 \begin{paratecnico}
@@ -41,7 +87,12 @@ Fazer o olho achar rápido o que o cérebro precisa: promessa, prova e limite em
 \begin{descricao}
 \textbf{Trilha Ana (usar bem, 3 horas).} Leia: prefácio, este capítulo, jornada do leitor (mod-00b), dicionário Nível 0 (mod-18), E1 a E7 para leigos (mod-17), epílogo de 12 passos só observando. Pule código; exija de cada resposta: fonte, limite e direito de devolver. Checkpoint: você consegue pedir com critério escrito e devolver sem fonte.
 
-\textbf{Trilha Bruno (reconstruir, 1 tarde).} Faça a trilha Ana em 40 minutos e execute: instalação (mod-01c), arquitetura (mod-01d), orquestração (mod-02), epílogo capítulo 15 mais o novo capítulo WSL (mod-22). Anote saída real ao lado da esperada. Checkpoint: \pth{python3 -m marceloclaro.cli doctor} roda, \pth{pdflatex main.tex} recompila, \pth{python3 check.py} diz ok.
+\textbf{Trilha Bruno (reconstruir).} Depois da orientação inicial, acompanhe
+instalação, arquitetura, orquestração, memória e aceite. Conserve os artefatos do
+caso condutor e conclua com a reprodução WSL e o epílogo. Anote a saída observada
+ao lado da esperada. O tempo depende do ambiente e das dependências; a sequência
+não tem prazo garantido. O diagnóstico estrutural, os gates editoriais,
+\pth{latexmk -pdf main.tex} e a inspeção visual têm funções complementares.
 
 \textbf{Trilha Carla (auditar, 2 tardes).} Faça a trilha Bruno e leia: qualidade SDD (mod-04), mapa de teorias (mod-21), apêndices (mod-11). Para cada afirmação forte, pergunte: que arquivo prova existência, que comando prova disponibilidade, que teste prova comportamento. Checkpoint: você lista três afirmações que o livro deliberadamente não faz.
 \end{descricao}
@@ -61,6 +112,20 @@ A opção por exemplo guiado antes do formalismo segue a pesquisa sobre carga co
 Exemplos trabalhados reduzem essa busca e liberam capacidade para o esquema \citref{SWELLER, J. Cognitive load during problem solving: effects on learning. Cognitive Science, v.~12, n.~2, p.~257-285, 1988}{10.1016/0364-0213(88)90023-7}{Justifica abrir cada capítulo por cena e exemplo antes da formalização.}{Considerable evidence indicates that domain specific knowledge in the form of schemas is the primary factor distinguishing experts from novices in problem-solving skill}{Há evidência considerável de que o conhecimento específico de domínio, na forma de esquemas, é o principal fator que distingue especialistas de novatos.}{SWELLER, 1988, p.~257-285}.
 
 \section{Como saber se aprendeu: checkpoints e anti-overclaim}
+
+As obras técnicas legíveis da pasta \pth{biblioteca ai/} foram consultadas como
+modelos editoriais. O livro de MCP progride do problema de integração para um
+servidor simples, cliente, recursos, prompts e exercícios. O livro de fine-tuning
+parte de uma história, explicita escolhas e prepara ambiente e dados antes de um
+projeto prático. Esta edição adota a progressão problema--exemplo--mecanismo--ação,
+com conteúdo e evidências próprios do Core. Não transplanta os resultados desses
+projetos nem copia suas páginas. O PDF de RAG disponível estava vazio e não serviu
+como modelo.
+
+O catálogo extenso foi deslocado para a consulta final. A trilha principal deve
+ser lida como argumento contínuo; as fichas ajudam a localizar uma responsabilidade
+quando surge uma necessidade concreta. Os números dos módulos são identificadores
+de fonte, não a numeração sequencial dos capítulos desta edição.
 
 \begin{checkpoint}
 Você pode avançar se responde sem olhar: o que o Core promete neste capítulo, onde se confere (arquivo ou comando) e o que não se pode concluir. Se faltar um dos três, volte uma seção. Fiscal que reprova é o livro funcionando, não falha sua.
@@ -96,3 +161,6 @@ Limite do projeto pedagógico. Trilhas são proposta editorial, não experimento
 \begin{resultado}
 \textbf{Exercícios.} Escreva três critérios para seu objetivo; indique a evidência de cada um; identifique um critério que depende de execução e outro que exige revisão do conteúdo.
 \end{resultado}
+
+% R901-PONTE-FECHO
+As trilhas diferem na profundidade, mas compartilham a mesma pergunta: o que sustenta esta conclusão? A jornada seguinte usa essa pergunta para observar o caso por quatro perspectivas complementares.

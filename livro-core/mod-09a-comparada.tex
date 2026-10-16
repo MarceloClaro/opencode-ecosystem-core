@@ -5,6 +5,10 @@
 % ============================================================
 \chapter{O Problema que o Core Resolve e a Arquitetura Comparada}
 
+% R901-PONTE-ABERTURA
+O ecossistema apresentou as peças disponíveis. Compará-las exige critérios: que problema cada arranjo resolve, que custo introduz e que evidência seria necessária antes de trocar o percurso atual?
+
+
 \roteirodidatico
 {Comparar arquiteturas começa por formular o problema que se quer resolver. Sem pergunta comum e critérios explícitos, diferenças de vocabulário podem parecer diferenças de capacidade.}
 {\emph{Dimensão} é um aspecto comparado; \emph{critério} é a regra aplicada; \emph{alternativa} é outro sistema ou método; \emph{limite} indica o que a comparação não cobre.}
@@ -32,16 +36,16 @@ a prova e a honestidade de centenas de agentes.
 Decomposição do problema em seis subproblemas que a arquitetura cobre — e as sedes:\par
 \smallskip
 {\footnotesize
-\begin{tabularx}{\textwidth}{YY}
+\begin{tabularx}{\linewidth}{YY}
 \toprule
 Subproblema & Mecanismo-resposta \\
 \midrule
-coordenação de muitos agentes & orquestrador + Blackboard A2A (Parte II) \\
+coordenação de muitos agentes & orquestrador + Blackboard A2A (capítulo de orquestração) \\
 memória persistente do que já foi feito & MetaBus + registro de evolução \\
 prova de que ``ficou pronto'' & tríade spec $\to$ código $\to$ teste (SDD/TDD) \\
 honestidade das alegações & anti-overclaim + honest reviewer \\
 extensibilidade sem caos & catálogo regenerado + skills + MCP + hooks \\
-operação local/offline & modelo local prioritário + instalador (Parte IX) \\
+operação local/offline & provedor local configurável + instalador (capítulo de instalação) \\
 \bottomrule
 \end{tabularx}\par}
 \end{resultado}
@@ -82,7 +86,7 @@ governado por confiança e carga.
 Forças e fraquezas:\par
 \smallskip
 {\footnotesize
-\begin{tabularx}{\textwidth}{YY}
+\begin{tabularx}{\linewidth}{YY}
 \toprule
 Positivas (técnicas e práticas) & Negativas (técnicas e práticas) \\
 \midrule
@@ -124,7 +128,7 @@ fluxo publicar-assinar propaga aprendizado sem acoplamento.
 Comparativo:\par
 \smallskip
 {\footnotesize
-\begin{tabularx}{\textwidth}{YY}
+\begin{tabularx}{\linewidth}{YY}
 \toprule
 Positivas & Negativas \\
 \midrule
@@ -163,7 +167,7 @@ contagens ambíguas (fail-closed).
 Comparativo:\par
 \smallskip
 {\footnotesize
-\begin{tabularx}{\textwidth}{YY}
+\begin{tabularx}{\linewidth}{YY}
 \toprule
 Positivas & Negativas \\
 \midrule
@@ -204,7 +208,7 @@ sustenta.
 Comparativo:\par
 \smallskip
 {\footnotesize
-\begin{tabularx}{\textwidth}{YY}
+\begin{tabularx}{\linewidth}{YY}
 \toprule
 Positivas & Negativas \\
 \midrule
@@ -244,7 +248,7 @@ e consolidam em escore; a integridade do próprio código-fonte é verificada po
 Comparativo:\par
 \smallskip
 {\footnotesize
-\begin{tabularx}{\textwidth}{YY}
+\begin{tabularx}{\linewidth}{YY}
 \toprule
 Positivas & Negativas \\
 \midrule
@@ -282,7 +286,7 @@ externa, a classe \pth{verified} permanece bloqueada.
 Comparativo:\par
 \smallskip
 {\footnotesize
-\begin{tabularx}{\textwidth}{YY}
+\begin{tabularx}{\linewidth}{YY}
 \toprule
 Positivas & Negativas \\
 \midrule
@@ -318,7 +322,7 @@ operacionais (confiança mínima e carga máxima) decidem quem pode assumir o qu
 Comparativo:\par
 \smallskip
 {\footnotesize
-\begin{tabularx}{\textwidth}{YY}
+\begin{tabularx}{\linewidth}{YY}
 \toprule
 Positivas & Negativas \\
 \midrule
@@ -356,7 +360,7 @@ do que não deu certo é tão valiosa quanto a de acertos.
 Comparativo:\par
 \smallskip
 {\footnotesize
-\begin{tabularx}{\textwidth}{YY}
+\begin{tabularx}{\linewidth}{YY}
 \toprule
 Positivas & Negativas \\
 \midrule
@@ -392,7 +396,7 @@ com \pth{fallback_used=True} — sempre transparente.
 Comparativo:\par
 \smallskip
 {\footnotesize
-\begin{tabularx}{\textwidth}{YY}
+\begin{tabularx}{\linewidth}{YY}
 \toprule
 Positivas & Negativas \\
 \midrule
@@ -430,7 +434,7 @@ sem o custo ético-operacional de testar em humanos reais.
 Comparativo:\par
 \smallskip
 {\footnotesize
-\begin{tabularx}{\textwidth}{YY}
+\begin{tabularx}{\linewidth}{YY}
 \toprule
 Positivas & Negativas \\
 \midrule
@@ -468,7 +472,7 @@ incompatível. O MCP padroniza ferramentas entre CLI, skills, plugins e agentes:
 Comparativo:\par
 \smallskip
 {\footnotesize
-\begin{tabularx}{\textwidth}{YY}
+\begin{tabularx}{\linewidth}{YY}
 \toprule
 Positivas & Negativas \\
 \midrule
@@ -497,7 +501,7 @@ o overhead de tokens; aqui os 7 MCPs são fixos em configuração.
 Mapa resumido (leitura rápida):\par
 \smallskip
 {\footnotesize
-\begin{tabularx}{\textwidth}{Yl}
+\begin{tabularx}{\linewidth}{Yl}
 \toprule
 Elemento & Vantagem diferencial sobre alternativas do GitHub \\
 \midrule
@@ -610,6 +614,206 @@ vantagem demonstrada --- o mesmo princípio anti-overclaim aplicado à arquitetu
 que $b$ deixasse de ser zero naquele item. (2) Reescreva, em uma frase sem superlativo, a vantagem de desenho do Blackboard A2A.
 \end{resultado}
 
+\clearpage
+\section[Apêndice Didático: Cobertura comparativa externa]{Apêndice Didático: Cobertura comparativa externa ($b$)}
+
+\elemento{Cobertura comparativa externa}{\metainfo{ID}{DID-B} \hfill \metainfo{Fonte}{docs/guias-didaticos/formulas-livro-core-nussenzveig.md, seção 4}}
+
+\begin{descricao}
+\textbf{O problema concreto.} O capítulo compara 11 elementos do Core com alternativas externas. Quantos desses 11 elementos têm uma comparação externa medida (mesma tarefa, mesma métrica, mesma condição)?
+\end{descricao}
+
+\begin{definicao}
+Nas proporções deste aprofundamento, o total do universo deve ser positivo. Se não houver itens no escopo, registre a medida como não aplicável; não calcule $0/0$.
+
+\textbf{Símbolos.}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{>{\hsize=.55\hsize\linewidth=\hsize}Y>{\hsize=1.45\hsize\linewidth=\hsize}Y}
+Símbolo & Significado \\
+\midrule
+$e$ & Número total de elementos comparados \\
+$n$ & Número de elementos com comparação externa medida \\
+$b$ & Cobertura comparativa externa \\
+\end{tabularx}
+\end{center}
+\end{definicao}
+
+\begin{metodo}
+\textbf{Dedução.}
+
+\[
+\boxed{b = \frac{n}{e}}
+\]
+
+\paragraph{Cálculo numérico.} O livro declara que, nesta conferência, não há medição externa comparável documentada para nenhum dos 11 elementos:
+
+\[
+n = 0, \qquad e = 11
+\]
+
+\[
+b = \frac{0}{11} = 0 = 0\,\%
+\]
+
+Se houvesse medição em um único elemento:
+
+\[
+b = \frac{1}{11} \approx 0{,}0909 \approx 9{,}1\,\%
+\]
+\end{metodo}
+
+\begin{descricao}
+\textbf{Interpretação.} $b = 0\,\%$ indica ausência total de evidência comparativa medida neste inventário. Não prova que o Core é pior ou melhor que alternativas; prova apenas que não há comparação externa documentada aqui para sustentar afirmações de superioridade empírica.
+\end{descricao}
+
+\clearpage
+\section{Apêndice Didático: Valor Preditivo Positivo (PPV) — argumento de Ioannidis}
+
+\elemento{Valor Preditivo Positivo}{\metainfo{ID}{DID-PPV} \hfill \metainfo{Fonte}{docs/guias-didaticos/formulas-livro-core-nussenzveig.md, seção 5}}
+
+\begin{descricao}
+\textbf{O problema concreto.} Quando um estudo estatístico declara um resultado significativo (p-valor abaixo de $\alpha$), qual é a probabilidade de que esse resultado seja de fato verdadeiro (e não um falso positivo)?
+\end{descricao}
+
+\begin{definicao}
+\textbf{Símbolos.}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{>{\hsize=.6\hsize\linewidth=\hsize}Y>{\hsize=1.2\hsize\linewidth=\hsize}Y>{\hsize=1.2\hsize\linewidth=\hsize}Y}
+Símbolo & Significado & Valor no exemplo \\
+\midrule
+$R$ & Razão prévia entre hipóteses verdadeiras e falsas no campo & $R = 0{,}1$ (uma hipótese verdadeira para dez falsas) \\
+$\alpha$ & Taxa de falso positivo (nível de significância) & $\alpha = 0{,}05$ \\
+$\beta$ & Taxa de falso negativo & $\beta = 0{,}8$ (poder 0,2) ou $\beta = 0{,}2$ (poder 0,8) \\
+$1-\beta$ & Poder estatístico & 0,2 ou 0,8 \\
+$PPV$ & Valor preditivo positivo (probabilidade de que um achado significativo seja verdadeiro) & — \\
+\end{tabularx}
+\end{center}
+\end{definicao}
+
+\begin{metodo}
+\textbf{Dedução passo a passo da fórmula.}
+
+\paragraph{Passo 1 — Normalização.}
+Seja o número de hipóteses falsas igual a 1 unidade. Então, pela definição de $R$, o número de hipóteses verdadeiras é $R$. Total de hipóteses: $R + 1$.
+
+Por que normalizamos? Porque apenas a razão entre verdadeiras e falsas importa para o cálculo de probabilidades condicionais.
+
+\paragraph{Passo 2 — Verdadeiros positivos.}
+Entre as $R$ hipóteses verdadeiras, o teste detecta (declara significativas) uma fração igual ao poder estatístico $1-\beta$.
+
+\[
+\text{VP} = R \cdot (1-\beta)
+\]
+
+Justificativa: poder estatístico é definido como $P(\text{rejeitar } H_0 \mid H_0 \text{ falsa})$.
+
+\paragraph{Passo 3 — Falsos positivos.}
+Entre as 1 hipótese falsa (normalizada), o teste declara significativas uma fração igual ao nível de significância $\alpha$.
+
+\[
+\text{FP} = 1 \cdot \alpha = \alpha
+\]
+
+Justificativa: $\alpha$ é definido como $P(\text{rejeitar } H_0 \mid H_0 \text{ verdadeira})$.
+
+\paragraph{Passo 4 — Total de achados significativos.}
+Todo resultado declarado significativo é ou um verdadeiro positivo ou um falso positivo:
+
+\[
+\text{Total significativo} = \text{VP} + \text{FP} = R(1-\beta) + \alpha
+\]
+
+\paragraph{Passo 5 — Definição de PPV.}
+O valor preditivo positivo é a fração de verdadeiros positivos entre todos os resultados significativos:
+
+\[
+PPV = \frac{\text{VP}}{\text{VP} + \text{FP}} = \frac{R(1-\beta)}{R(1-\beta) + \alpha}
+\]
+
+\[
+\boxed{PPV = \frac{(1-\beta)R}{(1-\beta)R + \alpha}}
+\]
+
+\paragraph{Passo 6 — Forma algébrica equivalente.}
+Expandindo o numerador:
+
+\[
+(1-\beta)R = R - \beta R
+\]
+
+Portanto:
+
+\[
+\boxed{PPV = \frac{(1-\beta)R}{R - \beta R + \alpha}}
+\]
+
+\paragraph{Cálculos numéricos detalhados.} Fixamos $R = 0{,}1$ e $\alpha = 0{,}05$.
+
+\subparagraph{Caso A — Baixo poder estatístico: poder $= 0{,}2$, logo $\beta = 0{,}8$.}
+
+\[
+PPV = \frac{(1-0{,}8) \times 0{,}1}{0{,}1 - 0{,}8 \times 0{,}1 + 0{,}05}
+\]
+
+Numerador:
+
+\[
+(1-0{,}8) \times 0{,}1 = 0{,}2 \times 0{,}1 = 0{,}02
+\]
+
+Denominador:
+
+\[
+0{,}1 - 0{,}8 \times 0{,}1 + 0{,}05 = 0{,}1 - 0{,}08 + 0{,}05 = 0{,}02 + 0{,}05 = 0{,}07
+\]
+
+Dividindo:
+
+\[
+PPV = \frac{0{,}02}{0{,}07} = \frac{2}{7} \approx 0{,}2857\ldots \approx 0{,}286
+\]
+
+\[
+\boxed{PPV \approx 28{,}6\,\%}
+\]
+
+\subparagraph{Caso B — Alto poder estatístico: poder $= 0{,}8$, logo $\beta = 0{,}2$.}
+
+\[
+PPV = \frac{(1-0{,}2) \times 0{,}1}{0{,}1 - 0{,}2 \times 0{,}1 + 0{,}05}
+\]
+
+Numerador:
+
+\[
+(1-0{,}2) \times 0{,}1 = 0{,}8 \times 0{,}1 = 0{,}08
+\]
+
+Denominador:
+
+\[
+0{,}1 - 0{,}2 \times 0{,}1 + 0{,}05 = 0{,}1 - 0{,}02 + 0{,}05 = 0{,}08 + 0{,}05 = 0{,}13
+\]
+
+Dividindo:
+
+\[
+PPV = \frac{0{,}08}{0{,}13} = \frac{8}{13} \approx 0{,}61538\ldots \approx 0{,}615
+\]
+
+\[
+\boxed{PPV \approx 61{,}5\,\%}
+\]
+\end{metodo}
+
+\begin{descricao}
+\textbf{Interpretação e argumento.} Mesmo com nível de significância padrão ($\alpha = 0{,}05$), se a taxa-base de hipóteses verdadeiras é baixa ($R = 0{,}1$) e o poder é baixo (0,2), apenas cerca de 28,6\,\% dos achados significativos são verdadeiros. Com alto poder (0,8), sobe para 61,5\,\%, mas nunca chega a 100\,\%.
+
+Argumento: isto sustenta a postura de cautela do livro: achados publicados precisam de confirmação independente. Não se deve declarar superioridade empírica sem controle de viés de desenho e relato completo. A fórmula não diz que a maioria dos resultados é falsa em absoluto; diz que, sob certas condições de baixa pré-probabilidade e baixo poder, a maioria dos resultados significativos pode ser falsa.
+\end{descricao}
+
 % ATIVACAO-R613
 \section[Ativação e cálculo]{Ativação e cálculo — Comparação e benchmarking}
 \elemento{ativ-09a}{\metainfo{Ciclo}{R613} \hfill \metainfo{Módulo}{mod-09a-comparada.tex}}
@@ -634,3 +838,6 @@ localização da fonte (R110), não o mérito da afirmação.
 \end{aviso}
 
 \noindent\textit{Interpretação e cálculo ilustrativo:} O artigo mostra que a força de um resultado depende da probabilidade prévia, do poder estatístico e do limiar de falso positivo; não permite concluir que qualquer achado específico seja falso. No modelo sem viés, $PPV=((1-\beta)R)/(R-\beta R+\alpha)$. Supondo apenas para ilustração $R=0{,}1$ e $\alpha=0{,}05$, um poder de $0{,}2$ ($\beta=0{,}8$) dá $PPV=0{,}02/(0{,}1-0{,}08+0{,}05)\approx0{,}286$; com poder $0{,}8$ ($\beta=0{,}2$), $PPV=0{,}08/(0{,}1-0{,}02+0{,}05)\approx0{,}615$. São premissas didáticas, não estimativas do benchmark do livro. A consequência prática é separar triagem interna de confirmação independente \citref{IOANNIDIS, J. P. A. Why most published research findings are false. \emph{PLoS Medicine}, v.~2, n.~8, e124, 2005}{10.1371/journal.pmed.0020124}{p.~e124 (resumo, p.~e124). é a âncora do ceticismo estruturado do benchmarking: a maioria dos achados publicados é falsa; comparar sem controle de vieses de desenho e relato reproduz o mesmo problema.}{There is increasing concern that most current published research findings are false}{Há preocupação crescente de que a maioria dos resultados de pesquisa atualmente publicados seja falsa.}{IOANNIDIS, 2005, p.~e124}
+
+% R901-PONTE-FECHO
+A comparação esclarece escolhas; a infraestrutura determina suas condições práticas. Antes de ativar os perfis da nota científica, precisamos examinar recursos, fronteiras e modos de falha.

@@ -3,6 +3,10 @@
 % ============================================================
 \chapter{Visão Geral do Ecossistema}
 
+% R901-PONTE-ABERTURA
+Já podemos nomear as partes; precisamos estabelecer o problema que as conecta. A nota científica do caso condutor será o fio que liga essas definições aos mecanismos e às verificações posteriores.
+
+
 \roteirodidatico
 {Comece pela situação de uma tarefa que precisa de várias etapas: localizar a informação, decidir quem pode tratá-la e verificar a resposta. O Core organiza componentes para coordenar esse percurso.}
 {\emph{Agente} é um componente especializado; \emph{orquestrador} organiza tarefas; \emph{ferramenta} executa uma operação; \emph{evidência} é o registro observável que sustenta uma conclusão.}
@@ -20,9 +24,8 @@ Este capítulo apresenta o problema que o manual pretende esclarecer: como os
 componentes do OpenCode Ecosystem Core se coordenam para receber uma tarefa,
 escolher um caminho de execução e avaliar o resultado. O repositório contém um
 orquestrador, agentes especializados, mecanismos de comunicação e memória,
-especificações, verificadores e integrações. O capítulo seguinte apresenta
-essas partes em um mapa de responsabilidades e acompanha o caminho de uma
-solicitação. Contagens de agentes, servidores e registros são fotografias do
+especificações, verificadores e integrações. A história do projeto explica, a seguir, a origem dessas escolhas. Depois
+da preparação do ambiente, a Parte Arquitetura Integral — Como o Core se Organiza reúne as partes em um mapa de responsabilidades e acompanha o caminho de uma solicitação. Contagens de agentes, servidores e registros são fotografias do
 checkout; não medem, por si sós, qualidade ou eficácia.
 \end{descricao}
 
@@ -100,13 +103,13 @@ routing + blackboard A2A) $\to$ \textbf{EXECUTA} (SDD/TDD) $\to$ \textbf{REFLETE
 \end{conceito}
 
 \begin{flowch}[Ciclo de orquestração]{fonte: \pth{marceloclaro/orchestrator.py}}
-\matrix[matrix of nodes,name=o,row sep=5mm,column sep=5mm,nodes={fn},ampersand replacement=\&]{
+\matrix[matrix of nodes,name=o,row sep=5mm,column sep=4mm,nodes={fn,text width=3.1cm},ampersand replacement=\&]{
  |[fne]|PERCEBE \& |[fne]|DELEGA \& |[fne]|EXECUTA \& |[fne]|REFLETE \\
 };
 \draw[seta] (o-1-1)--(o-1-2);
 \draw[seta] (o-1-2)--(o-1-3);
 \draw[seta] (o-1-3)--(o-1-4);
-\draw[seta,bend right=40] (o-1-4) to node[below,font=\tiny]{feedback metacognitivo} (o-1-1);
+\draw[seta,bend right=40] (o-1-4) to node[below,font=\footnotesize]{observações para a próxima tarefa} (o-1-1);
 \end{flowch}
 
 \begin{descricao}
@@ -154,7 +157,7 @@ Inventário conferido em 29/09/2026 (fotografia deste checkout):\par
 \smallskip
 
 {\footnotesize
-\begin{tabular}{llr}
+\begin{tabularx}{\linewidth}{llr}
 \toprule
 Domínio & Escopo & Quantidade \\
 \midrule
@@ -165,7 +168,7 @@ Servidores MCP & \pth{opencode.json}, chave \pth{mcp} & 7 \\
 Nós / vetores & \pth{transformer/} & 455 / 830 \\
 Ciclos de evolução & \pth{evolution/cycles.json} & 455 \\
 Arquivos Markdown de especificação & \pth{specs/} & 371 (285 da série R*) \\
-\end{tabular}\par}
+\end{tabularx}\par}
 
 \textbf{Fonte histórica:} contagens dos arquivos e configurações indicados em cada linha.
 Esses números pertencem ao retrato de 29/09/2026; não foram reexecutados nesta
@@ -304,6 +307,195 @@ detectar e outro que permaneceria fora do seu escopo. (4) Explique a diferença
 entre não observar um erro num teste e demonstrar que o sistema não pode errar.
 \end{resultado}
 
+\clearpage
+\section[Apêndice Didático: Probabilidade de pelo menos uma saída errada entre saídas independentes]{Apêndice Didático: Probabilidade de pelo menos uma saída errada entre $N$ saídas independentes}
+
+\elemento{Probabilidade de erro em agregação de saídas}{\metainfo{ID}{DID-PROB} \hfill \metainfo{Fonte}{docs/guias-didaticos/formulas-livro-core-nussenzveig.md, seção 1}}
+
+\begin{descricao}
+\textbf{O problema concreto.} Imagine que um sistema produza 216 respostas (saídas). Cada resposta, considerada sozinha, tem 99\,\% de chance de estar correta. Um auditor quer saber: qual é a chance de que, entre essas 216 respostas, pelo menos uma esteja errada?
+
+Esta não é uma pergunta abstrata. É a pergunta que alguém faz ao examinar um lote grande de entregas: se cada uma é quase sempre certa, será que, reunindo tantas, não aparece pelo menos um erro? Queremos calcular exatamente essa certeza.
+\end{descricao}
+
+\begin{definicao}
+\textbf{Símbolos.} Antes de escrever qualquer fórmula, fixamos o que cada letra significa:
+
+\begin{center}
+\begin{tabularx}{\linewidth}{>{\hsize=.6\hsize\linewidth=\hsize}Y>{\hsize=1.2\hsize\linewidth=\hsize}Y>{\hsize=1.2\hsize\linewidth=\hsize}Y}
+Símbolo & Significado & Valor no exemplo \\
+\midrule
+$N$ & Número total de saídas & $N = 216$ \\
+$p$ & Probabilidade de uma única saída estar correta & $p = 0{,}99 = 99\,\%$ \\
+$1-p$ & Probabilidade de uma única saída estar errada & $1 - 0{,}99 = 0{,}01 = 1\,\%$ \\
+Independência & Hipótese de que o acerto ou erro de uma saída não influencia o acerto ou erro de nenhuma outra & Suposição do modelo \\
+\end{tabularx}
+\end{center}
+\end{definicao}
+
+\begin{metodo}
+\textbf{Dedução passo a passo.}
+
+\paragraph{Passo 1 — Probabilidade de que todas as $N$ saídas estejam corretas.}
+Se os eventos são independentes, a probabilidade de que todos ocorram ao mesmo tempo é o produto das probabilidades individuais. Este é o axioma de multiplicação para eventos independentes.
+
+Por que produto e não soma? Porque estamos exigindo que a saída 1 esteja correta \emph{e} a saída 2 esteja correta \emph{e} … \emph{e} a saída $N$ esteja correta. “E” na probabilidade, para eventos independentes, significa multiplicar.
+
+Como o fator $p$ se repete exatamente $N$ vezes:
+
+\[
+P(\text{todas corretas}) = p \times p \times \cdots \times p = p^N
+\]
+
+\paragraph{Passo 2 — O evento complementar.}
+O evento “pelo menos uma saída está errada” é o oposto exato de “todas as saídas estão corretas”. Em teoria dos conjuntos, se $A$ é o evento “todas corretas”, então o complemento $A^c$ é “existe pelo menos uma errada”.
+
+\paragraph{Passo 3 — Axioma da probabilidade total.}
+Para qualquer evento $A$ e seu complemento $A^c$:
+
+\[
+P(A) + P(A^c) = 1
+\]
+
+Por que? Porque todo resultado possível ou pertence a $A$ ou pertence a $A^c$, e a soma das probabilidades de todos os resultados possíveis é sempre 1 (unidade).
+
+\paragraph{Passo 4 — Isolamento da quantidade procurada.}
+Queremos $P(A^c)$. Rearranjando a igualdade do Passo 3:
+
+\[
+P(A^c) = 1 - P(A)
+\]
+
+Substituindo $P(A) = p^N$ do Passo 1:
+
+\[
+\boxed{P(\text{pelo menos uma errada}) = 1 - p^N}
+\]
+
+Justificativa: isolamento de incógnita por subtração elementar. Nenhum chutismo.
+\end{metodo}
+
+\begin{resultado}
+\textbf{Cálculo numérico detalhado com $N = 216$ e $p = 0{,}99$.}
+
+Queremos avaliar:
+
+\[
+P = 1 - (0{,}99)^{216}
+\]
+
+O número $(0{,}99)^{216}$ é muito próximo de zero. Calculá-lo diretamente é trabalhoso. Usamos logaritmos naturais, que transformam potências em produtos.
+
+\paragraph{Passo 5 — Aplicação do logaritmo natural.}
+Seja $x = (0{,}99)^{216}$. Tomando $\ln$ dos dois lados:
+
+\[
+\ln x = \ln\bigl((0{,}99)^{216}\bigr)
+\]
+
+Pela propriedade dos logaritmos, $\ln(a^b) = b \cdot \ln a$:
+
+\[
+\ln x = 216 \times \ln(0{,}99)
+\]
+
+Por que fazemos isso? Porque $(0{,}99)^{216}$ é um número difícil de calcular à mão, mas $216 \times \ln(0{,}99)$ é um produto simples.
+
+\paragraph{Passo 6 — Avaliação de $\ln(0{,}99)$.}
+O logaritmo natural de $0{,}99$ não é um número elementar. Usamos a série de Taylor de $\ln(1-u)$ em torno de $u = 0$:
+
+\[
+\ln(1-u) = -u - \frac{u^2}{2} - \frac{u^3}{3} - \cdots, \qquad |u| < 1
+\]
+
+Com $u = 0{,}01$ (porque $0{,}99 = 1 - 0{,}01$):
+
+\[
+\ln(0{,}99) = \ln(1 - 0{,}01) \approx -0{,}01 - \frac{(0{,}01)^2}{2} = -0{,}01 - 0{,}00005 = -0{,}01005
+\]
+
+Termos de ordem $(0{,}01)^3/3 \approx 0{,}000000333$ são desprezíveis para a precisão que buscamos.
+
+\paragraph{Passo 7 — Multiplicação por $N = 216$.}
+
+\[
+\ln x = 216 \times (-0{,}01005)
+\]
+
+Calculando:
+
+\[
+216 \times 0{,}01005 = 2{,}1708
+\]
+
+Portanto:
+
+\[
+\ln x \approx -2{,}1708 \approx -2{,}17
+\]
+
+\paragraph{Passo 8 — Retorno da escala logarítmica.}
+Se $\ln x = -2{,}1708$, então, por definição de logaritmo natural:
+
+\[
+x = e^{-2{,}1708}
+\]
+
+Calculando o exponencial:
+
+\[
+e^{-2{,}1708} \approx 0{,}1141
+\]
+
+Aproximando a três algarismos significativos:
+
+\[
+(0{,}99)^{216} \approx 0{,}114
+\]
+
+\paragraph{Passo 9 — Aplicação da fórmula final.}
+
+\[
+P = 1 - 0{,}114 = 0{,}886
+\]
+
+Expresso em porcentagem:
+
+\[
+\boxed{P \approx 0{,}886 \approx 88{,}6\,\%}
+\]
+\end{resultado}
+
+\begin{descricao}
+\textbf{Interpretação do resultado.} Há aproximadamente 88,6\,\% de chance de que, entre 216 saídas independentes cada uma com 99\,\% de probabilidade individual de acerto, pelo menos uma saída esteja errada.
+
+\textbf{O que isso NÃO significa:}
+\begin{itemize}[leftmargin=1.3em,itemsep=1pt]
+  \item Não significa que o sistema esteja “estragado”.
+  \item Não significa que cada resposta individual seja pouco confiável.
+  \item Não afirma que o Core combina ou agrega todas as respostas.
+\end{itemize}
+
+\textbf{O que significa:} quando se reúne um grande número de saídas, a chance de aparecer ao menos um erro cresce rapidamente, mesmo que cada saída individual seja muito confiável.
+\end{descricao}
+
+\begin{aviso}
+\textbf{Limites de validade.}
+\begin{enumerate}[leftmargin=1.3em,itemsep=1pt]
+  \item A fórmula não mede a taxa de erro real do repositório. $p = 0{,}99$ e a independência são suposições didáticas, não medições do Core.
+  \item Se os erros forem correlacionados (todas as saídas usam o mesmo modelo com o mesmo viés), a hipótese de independência colapsa e o resultado $1 - p^N$ deixa de valer.
+  \item O número 216 é usado apenas para ilustrar a fórmula; não significa que o Core faça essa agregação.
+\end{enumerate}
+\end{aviso}
+
+\begin{resultado}
+\textbf{Exercícios de fixação.}
+\begin{enumerate}[leftmargin=1.3em,itemsep=2pt]
+  \item Recalcule $P$ com $p = 0{,}999$ e $N = 216$. Explique por que o valor muda.
+  \item Se todas as saídas repetissem o mesmo erro, a hipótese de independência continuaria válida?
+\end{enumerate}
+\end{resultado}
+
 % ATIVACAO-R613
 \section[Ativação e cálculo]{Ativação e cálculo — Fundamentos}
 \elemento{ativ-01f}{\metainfo{Ciclo}{R613} \hfill \metainfo{Módulo}{mod-01-fundacoes.tex}}
@@ -331,3 +523,6 @@ demonstra, por si só, o mérito da afirmação.
 \end{aviso}
 
 \noindent\textit{Referência teórica:} Wooldridge e Jennings fundamentam a tríade de agentes \citref{WOOLDRIDGE, M.; JENNINGS, N. R. Intelligent agents: theory and practice. \emph{The Knowledge Engineering Review}, v.~10, n.~2, p.~115-152, 1995}{10.1017/S0269888900008122}{p.~115--152 (resumo, p.~115). é o lastro da tríade que define quando um gatilho é de fato uma ativação de agente: reatividade, proatividade e habilidade social são as propriedades que o pipeline E1--E7 converte em regras de roteamento.}{The concept of an agent has become important in both artificial intelligence and mainstream computer science}{O conceito de agente tornou-se importante tanto na inteligência artificial quanto na ciência da computação.}{WOOLDRIDGE; JENNINGS, 1995, p.~115}.\par
+
+% R901-PONTE-FECHO
+Essas fundações são critérios de leitura, não resultados de desempenho. Para entender por que o projeto acumulou componentes e correções, examinaremos seu histórico antes de preparar a execução local.

@@ -6,6 +6,10 @@
 % ============================================================
 
 \chapter{Ativação de Agentes e Subagentes}
+
+% R901-PONTE-ABERTURA
+Agora conhecemos o ambiente e as responsabilidades. A pergunta prática é como transformar um perfil descrito em uma atribuição identificada, com requisitos e limites preservados pelo primário.
+
 \label{mod13}
 
 \roteirodidatico
@@ -31,7 +35,7 @@ matemáticos, que são ilustrativos até serem avaliados com execuções observa
 \end{resultado}
 
 % ============================================================
-\section{Sistema geral de ativação — o pipeline de 7 etapas}
+\section{Sete perguntas para analisar uma ativação}
 % ============================================================
 
 \begin{processo}
@@ -67,15 +71,18 @@ assumir pesos, desempates ou comportamento para conjuntos vazios.
 \end{processo}
 
 \begin{processo}
-ETAPA 4 — GATE DE PERMISSÃO. Antes da execução, o card é validado pelo
-bootstraper (SPEC-935-R608: frontmatter tolerante, descrição não vazia,
-capacidades não vazias) e as permissões declaradas no card são aplicadas.
-Card ilegível não executa: erro visível, não silencioso (fail-closed).
+ETAPA 4 — CONTRATO E POLÍTICA. O ciclo R894 valida a definição, as referências
+SDD/TDD, as capacidades e a política de um perfil gerenciado. Os bytes validados
+devem coincidir com os usados no registro e na ativação. O bootstraper também
+verifica a carga do catálogo; isso não substitui a aplicação das permissões
+pelo host nem autoriza operações de ferramentas externas.
 \end{processo}
 
 \begin{processo}
-ETAPA 5 — EXECUÇÃO. O agente recebe o gatilho + contexto do MetaBus e executa
-na rota escolhida (inline, skill, MCP). Se o agente estiver marcado com
+ETAPA 5 — EXECUÇÃO. Um executor precisa receber a tarefa, o contexto e as
+instruções autorizadas e produzir uma saída. A ativação pelo Core prepara essa
+atribuição e pode retornar \cod{pending_executor}, com \cod{executed=false}.
+Se uma skill filha estiver marcada com
 política de invocação implícita proibida, o orquestrador lê o
 \pth{SKILL.md} correspondente e executa suas instruções no contexto atual,
 sem re-disparo de habilidade.
@@ -85,8 +92,8 @@ A distribuição da tarefa entre múltiplos especialistas voluntários — e nã
 execução por um único programa fixo — é o coração arquitetural do Core. A
 justificativa teórica vem da maturidade do campo de sistemas multiagente: a
 coordenação por delegação e o reuso de capacidades declaradas são os
-princípios que o roteiro de pesquisa do campo consolida, e é esse reuso que o
-Escore de Ativação mede \citref{JENNINGS, N. R.; SYCARA, K.; WOOLDRIDGE, M. A roadmap of agent research and development. \emph{Autonomous Agents and Multi-Agent Systems}, v.~1, n.~1, p.~7-38, 1998}{10.1023/A:1010090405266}{é a moldura em que o voluntariado por capacidades se apoia: o campo consolida que agentes autônomos são construídos em torno de capacidades reutilizáveis e interação estruturada — exatamente o que o casamento de capacidades e o MetaBus implementam}{It aims to identify key concepts and applications, and to indicate how they relate to one-another}{O objetivo é identificar conceitos-chave e aplicações e indicar como eles se relacionam entre si.}{JENNINGS, 1998, p.~7--38}.\begin{processo}
+princípios discutidos no roteiro de pesquisa do campo. Esse enquadramento
+teórico não mede a competência dos perfis locais \citref{JENNINGS, N. R.; SYCARA, K.; WOOLDRIDGE, M. A roadmap of agent research and development. \emph{Autonomous Agents and Multi-Agent Systems}, v.~1, n.~1, p.~7-38, 1998}{10.1023/A:1010090405266}{é a moldura em que o voluntariado por capacidades se apoia: o campo consolida que agentes autônomos são construídos em torno de capacidades reutilizáveis e interação estruturada — exatamente o que o casamento de capacidades e o MetaBus implementam}{It aims to identify key concepts and applications, and to indicate how they relate to one-another}{O objetivo é identificar conceitos-chave e aplicações e indicar como eles se relacionam entre si.}{JENNINGS, 1998, p.~7--38}.\begin{processo}
 ETAPA 6 — FEEDBACK. O resultado da execução volta ao orquestrador com o
 vínculo especificação-teste (gate SDD/TDD): se a tarefa alterou código ou
 manual, o ciclo de evolução é registrado com score e lições. O resultado não
@@ -107,35 +114,102 @@ A reprodução do catálogo permite conferir a transformação das fontes em fic
 Isso não implica reprodução automática da ativação ou das respostas: a execução
 precisa de evidências e condições próprias; quando a replicação integral é
 impossível, a reprodutibilidade serve como padrão mínimo de julgamento \citref{PENG, R. D. Reproducible research in computational science. \emph{Science}, v.~334, n.~6060, p.~1226-1227, 2011}{10.1126/science.1213847}{ancora a política de determinismo do pipeline de ativação e do gerador do manual: reprodutibilidade é o padrão mínimo para julgar alegações computacionais quando a replicação completa não é viável — princípio que o livro aplica ao próprio livro}{Reproducibility has the potential to serve as a minimum standard for judging scientific claims when full independent replication of a study is not possible}{A reprodutibilidade tem o potencial de servir como padrão mínimo para julgar alegações científicas quando a replicação independente completa de um estudo não é possível.}{PENG, 2011, p.~1226--1227}.\begin{arquitetura}
-FUNÇÕES ÚNICAS POR ETAPA. E1 gatilho: `parsea gatilho e publica tarefa` em
-\pth{mci/mcp_server.py} (mci\_post\_task). E2 roteamento: `decide caminho`
-em \pth{marceloclaro/orchestrator.py}. E3 casamento: `escore de ativação` em
-\pth{mci/blackboard.py} (matching de capacidades). E4 gate:
-`parse/card/permissão` em \pth{mci/agent_registry_bootstrap.py}. E5 execução:
-`executa skill/subagente` (rota MCP/inline). E6 feedback: `valida gate
-SDD/TDD`. E7 registro: `record()` em \pth{evolution/cycles.py}
-(round\_id único, R611).
+PONTOS DE CONFERÊNCIA. Entrada governada: \cod{agent_profile_action} no
+primário. Definição e política: \cod{AgentLifecycleService}. Publicação:
+\cod{delegate} e \cod{task.post}. Elegibilidade: Blackboard com \emph{all\_of};
+seleção: \cod{_on_cfp}, Trust e redução ou atenção. Atribuição:
+\cod{task.volunteer} e \cod{task.assigned}. Execução: executor identificado e
+recibo próprio. Entrega: \cod{report_completion}, teste confiável e verificador.
+Observação: \cod{MetacognitiveLoop.complete}; evolução, quando aplicável:
+\cod{evolution_registry.record}. Esses pontos podem pertencer a rotas distintas.
 \end{arquitetura}
 
 \begin{aviso}
-AVISO/ANTI-OVERCLAIM. O pipeline descreve COMO a ativação acontece; descrever
-o mecanismo não garante a qualidade do resultado. Um agente bem ativado pode
-produzir má resposta; a diferença é auditável pela trilha E1--E7, não por
-afirmação. (R110.)
+AVISO/ANTI-OVERCLAIM. As sete perguntas orientam a análise de um percurso.
+As respostas precisam apontar operações e evidências reais. Uma atribuição
+correta ainda pode produzir uma resposta inadequada; validação de perfil não
+é avaliação da competência do modelo ou validação externa do resultado.
 \end{aviso}
 
 % ============================================================
-\section{Ativação por categoria — lote por categoria}
+\section{O ciclo gerenciado: da definição ao executor pendente}
+
+Para revisar a nota científica, não basta criar uma ficha chamada ``revisor''.
+O primário precisa saber sua origem, seu escopo, suas permissões e o formato
+da resposta esperada. R894 conserva esse contrato no próprio catálogo e
+impede que um nome semelhante seja confundido com a identidade validada.
+
+\begin{flowch}[Ciclo de um perfil gerenciado R894]{fonte, política e identidade precedem a atribuição}
+\node[fne,text width=3.8cm] (profileEntrada) at (0,0) {Primário: reutilizar perfil\\ou solicitar criação};
+\node[fn,text width=3.8cm,fill=amberBg,draw=amber] (profileValida) at (0,-1.6) {Validar definição, spec,\\teste e permissões};
+\node[fns,text width=3.8cm] (profileFonte) at (0,-3.2) {Persistir fonte e identidade\\com SHA-256};
+\node[fns,text width=3.8cm] (profileRegistro) at (0,-4.8) {Registrar com capacidade\\exclusiva do perfil};
+\node[fn,text width=3.8cm,fill=amberBg,draw=amber] (profileConfere) at (0,-6.4) {Conferir hash, identidade\\e disponibilidade};
+\node[fne,text width=3.8cm] (profilePendente) at (0,-8.0) {Atribuir tarefa A2A\\\cod{pending_executor}};
+\node[fn,text width=2.7cm] (profileBloqueado) at (-4.6,-1.6) {Inválido: bloquear\\e informar o motivo};
+\node[fn,text width=2.7cm] (profileOcupado) at (4.6,-6.4) {Ocupado: \cod{busy}\\Conservar o estado};
+\node[fn,text width=3.8cm] (profileExecutor) at (0,-10.1) {Executor identificado\\produz saída e evidência};
+\draw[seta] (profileEntrada)--(profileValida);
+\draw[seta] (profileValida)--node[right,font=\footnotesize]{válido}(profileFonte);
+\draw[seta] (profileValida)--(profileBloqueado);
+\draw[seta] (profileFonte)--(profileRegistro);
+\draw[seta] (profileRegistro)--(profileConfere);
+\draw[seta] (profileConfere)--node[right,font=\footnotesize]{elegível}(profilePendente);
+\draw[seta] (profileConfere)--(profileOcupado);
+\draw[seta,dashed] (profilePendente)--node[right,text width=3.1cm,font=\footnotesize,align=left]{quando houver\\executor autorizado}(profileExecutor);
+\end{flowch}
+\begin{descricao}
+\textbf{Como funciona e por quê.} As setas contínuas separam validar, persistir,
+registrar e ativar; os ramos laterais conservam recusas e indisponibilidade.
+A seta tracejada depende de um executor autorizado, cuja ação precisa de
+evidência separada da atribuição. A criação publica um novo cartão sem
+sobrescrever outro e regenera a
+configuração; um perfil existente é reutilizado. Antes do registro e da
+ativação, o primário confere o hash e a identidade. A capacidade exclusiva
+impede apropriar-se da identidade de outro perfil. Um perfil ocupado conserva
+seu estado: registrá-lo novamente não pode torná-lo disponível.
+\textbf{Justificativa.} O contrato precisa acompanhar os mesmos bytes até a
+tarefa efetiva, para que o leitor possa atribuir instruções, permissões e
+resultado à definição correta.
+\textbf{Limite.} O fim da ativação ainda tem \cod{executed=false}; a etapa
+tracejada não é executada pela simples criação do perfil. Entregar e aceitar
+exigem saída, evidência própria e os gates da tarefa. O Core não intercepta automaticamente
+ferramentas de criação de agentes de aplicativos independentes.
+\end{descricao}
+\fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator.agent_profile_action}
+
+\begin{arquitetura}
+Um pedido de criação declara \cod{agent_id}, nome, descrição, capacidades,
+\cod{spec_file}, \cod{test_file} e prompt; \cod{allow_edit} é booleano.
+O serviço valida referências existentes dentro do repositório, sem symlinks,
+e exige saída com \cod{status}, \cod{findings}, \cod{evidence} e
+\cod{limitations}. O retorno identifica \cod{source_sha256},
+\cod{validation_scope} e a capacidade exclusiva \cod{profile_...}.
+Os 260 arquivos do baseline histórico preservam somente seus bytes anteriores;
+isso não declara que todos cumprem o novo contrato. Alterar seus bytes exige
+migração explícita, sem atualizar o baseline para contornar o gate.
+\end{arquitetura}
+
+O mesmo cuidado vale para plugins: uma instrução importada com hash não é
+uma chamada autenticada. A operação hospedada precisa de ticket permitido,
+host autenticado e resposta vinculada; uma política de invocação implícita
+desabilitada exige ler as instruções no contexto autorizado. As
+\CoreAgentCount{} entradas de agentes, \CoreMCPCount{} entradas MCP e
+\CoreCommandCount{} comandos são inventário configurado, e não contagem de
+execuções. A nota só poderá afirmar que uma fonte foi consultada ou um
+experimento foi realizado quando houver o recibo correspondente.
+
+\section{Ativação por categoria — famílias de aplicação}
 % ============================================================
 
 \begin{descricao}
-ORGANIZAÇÃO. As seções a seguir aplicam o pipeline de 7 etapas a CADA
-categoria do catálogo (mod-10). Para cada categoria: gatilho típico, rota
-dominante, função do agente, cálculo específico, justificativa teórica,
-impactos e limites e aviso. As categorias são as 12+ do gerador
-\pth{gen_mod10.py} — orquestração, acadêmica, pesquisa, auditoria, jurídica,
+ORGANIZAÇÃO. As seções a seguir agrupam famílias de uso para interpretar
+gatilhos, tarefas e limites. São exemplos de análise; os cálculos não são
+medições de desempenho e as rotas precisam ser confirmadas para cada perfil.
+O inventário exato pertence ao catálogo gerado por \pth{gen_mod10.py}.
+As famílias editoriais incluem orquestração, acadêmica, pesquisa, auditoria, jurídica,
 dados, inferência, engenharia, testes, literária e cura (paisagem; mapeia o
-card do agente-alvo e recomenda capacidades, sem substituir o pipeline E1--E7),
+card do agente-alvo e recomenda capacidades, sem substituir o ciclo gerenciado),
 integração, MIRA, MASWOS e utilidade.
 \end{descricao}
 
@@ -143,9 +217,10 @@ integração, MIRA, MASWOS e utilidade.
 \elemento{ativ-orquestracao}{\metainfo{Categoria}{orquestracao} \hfill \metainfo{Rota}{marceloclaro/orchestrator.py}}
 
 \begin{descricao}
-GATILHO. Qualquer pedido de múltiplos passos; rota (b) inline. FUNÇÃO:
-coordenar, não executar. CÁLCULO: também executa o E3 para escolher o
-subagente com maior escore $A(a)$; mantém a trilha E1--E7 como registro.
+GATILHO. Pedido que depende de etapas coordenadas. FUNÇÃO: manter contexto,
+dependências e evidências; a rota concreta pode chamar código local ou preparar
+uma atribuição. CÁLCULO DIDÁTICO: separar o número de candidatos do número de
+atribuições e do número de execuções concluídas evita somar estados diferentes.
 JUSTIFICATIVA: reatividade/proatividade/socialidade (Wooldridge; Jennings
 1995) + oportunismo blackboard (Nii 1986). LIMITE: o orquestrador depende da
 qualidade dos cards — daí os gates R608/R609 que verificam a leitura e a
@@ -205,8 +280,8 @@ emite parecer autônomo nem responde à diligência por conta própria.
 \elemento{ativ-dados}{\metainfo{Categoria}{data} \hfill \metainfo{Rota}{skills/engenharia de dados + FAIR}}
 
 \begin{descricao}
-GATILHO: ``datasets'', ``proveniência'', ``coleta''. FUNÇÃO: garantir que
-todo dado tenha origem, versão, papel analítico e restrição documentados.
+GATILHO: ``datasets'', ``proveniência'', ``coleta''. FUNÇÃO: conferir se
+cada dado tem origem, versão, papel analítico e restrição documentados.
 CÁLCULO: cobertura FAIR por dataset = proporção dos princípios F/A/I/R
 atendidos com evidência. JUSTIFICATIVA: proveniência detalhada (Wilkinson
 2016, R1.2). LIMITE: dados coletados de API pública podem quebrar sem aviso.
@@ -239,7 +314,7 @@ ambiente mínimo declarado; sem commitar sem autorização.
 
 \begin{descricao}
 GATILHO: ``teste'', ``regressão'', ``pytest''. FUNÇÃO: RED-verde do ciclo
-SDD/TDD e garantia de não-regressão (ex.: motor R608/R611).
+SDD/TDD e conferência de regressões delimitadas (ex.: motor R608/R611).
 CÁLCULO: cobertura de rotas = casos verdes / casos totais por família.
 JUSTIFICATIVA: reprodutibilidade (Peng 2011) e fail-closed (Ioannidis 2005).
 LIMITE: teste verde não generaliza para produção.
@@ -264,7 +339,8 @@ GATILHO: ``adicionar agente externo'', ``integrar nova coleção''. FUNÇÃO:
 inventariar pontos de entrada externos e recomendar formato/capabilities do
 card. CÁLCULO: paridade multilcoleção = cards próprios vs. manifests externos.
 JUSTIFICATIVA: proveniência (Wilkinson 2016). LIMITE: card gerado é
-candidato; ativação final exige o gate R608 (frontmatter válido).
+candidato; criação e ativação de novo perfil exigem o ciclo R894 pelo primário,
+além da validação de carga do catálogo.
 \end{descricao}
 
 \subsection{Integração (externos e MCP)}
@@ -273,8 +349,9 @@ candidato; ativação final exige o gate R608 (frontmatter válido).
 \begin{descricao}
 GATILHO: ``executor externo'', ``MCP'', ``orquestrar CLI''. FUNÇÃO: compor
 CLIs externas (gemini, goose, plandex, reasonix, haystack) como executores
-tolerantes — ausência do binário gera warn, nunca crash. CÁLCULO: saúde =
-executores disponíveis / executores declarados. JUSTIFICATIVA: reuso de
+tolerantes, com estados explícitos de indisponibilidade e falha. CÁLCULO
+DIDÁTICO: disponíveis / declarados mede disponibilidade no levantamento,
+sem comprovar autenticação ou inferência. JUSTIFICATIVA: reuso de
 capacidades (Jennings, Sycara, Wooldridge 1998). LIMITE: resultado externo
 nunca é ``verificado'' sem validação do Core.
 \end{descricao}
@@ -305,16 +382,16 @@ pontos totais ponderados. JUSTIFICATIVA: separação cobertura/mérito
 
 \begin{descricao}
 GATILHO: ``busque'', ``commite'', ``documente'', ``review''. FUNÇÃO:
-serviços de suporte determinísticos. CÁLCULO: cobertura por serviço =
+serviços de suporte com contratos próprios. CÁLCULO: cobertura por serviço =
 operações com rastro / operações totais. JUSTIFICATIVA: reprodutibilidade e
 rastro (Peng 2011; Wilkinson 2016). LIMITE: convenções do repo mandam
 (mensagem de commit, sem secret).
 \end{descricao}
 
 \begin{resultado}
-RESUMO DO LOTE. Todas as categorias do catálogo foram percorridas com a
-mesma chave de leitura (E1--E7 + função + cálculo + justificativa teórica +
-limite + aviso). As citações usam apenas os DOIs verificados e ativos da
+RESUMO DAS FAMÍLIAS. Os exemplos usam uma chave de leitura comum:
+gatilho, função, cálculo ilustrativo, justificativa e limite. O catálogo
+gerado conserva o inventário corrente. As citações usam os DOIs da
 biblioteca do Módulo 11; nenhuma alegação de ``superioridade'' foi feita
 (R110).
 \end{resultado}
@@ -324,44 +401,67 @@ biblioteca do Módulo 11; nenhuma alegação de ``superioridade'' foi feita
 % ============================================================
 
 \begin{metodo}
-EXEMPLO 1 — ORQUESTRAR EXPANSÃO. Gatilho: ``expanda o módulo X com citações''.
-E2 escolhe rota (b) orquestrador; E3 não se aplica a subagente nomeado; E4
-gate de card do orquestrador; E6 exige teste/spec para cada mudança; E7 grava
-ciclo com round\_id único (R611). O operador deve confirmar escopo antes de
-gerar conteúdo em massa (núcleo primeiro, lote por categoria, etc).
+EXEMPLO 1 — DELIMITAR UMA REVISÃO. Para ``confira as fontes da nota científica'',
+o primário define o escopo e reutiliza um perfil adequado, se existir.
+Verifica definição, hash e política antes de atribuir a tarefa. A resposta
+precisa distinguir metadados bibliográficos, conteúdo consultado e alegações
+que ainda não têm sustentação; a atribuição não supre essas evidências.
 \end{metodo}
 
 \begin{metodo}
-EXEMPLO 2 — ATIVAR AGENTE NOMEADO (``revisar com honest-critic''). E1 parsea
-o nome; E2 rota (b) inline; E4 permissão lida do card; E5 execução; E6 o
-resultado (parecer) alimenta o orquestrador; E7 registra se alterou manual.
-A invocação de skill-filha com invocação implícita proibida exige que o
+EXEMPLO 2 — ATIVAR PERFIL GERENCIADO. \cod{agentes validar} confere a definição;
+\cod{registrar} publica o cartão no quadro; \cod{ativar} prepara a tarefa
+com prompt, hash e contrato. O estado \cod{pending_executor} não é um parecer
+concluído. A invocação de skill-filha com invocação implícita proibida exige que o
 orquestrador leia o SKILL.md e execute no contexto — nunca re-disparo por
 nome.
 \end{metodo}
 
 \begin{metodo}
-EXEMPLO 3 — VOLUNTÁRIO (``preciso de um especialista em N''). E1 publica
-tarefa; E3 calcula $A(a)$ para todos os cards; E5 os k = melhores
-executam em paralelo; E6 combinados pelo orquestrador com nota de confiança do MetaBus;
-E7 ciclo. Sem voluntário com $A>0$, cai no fallback (d) e o orquestrador
-avisa o operador (transparência, não silêncio).
+EXEMPLO 3 — SELECIONAR PELO QUADRO. \cod{delegate} publica a tarefa;
+o quadro encontra candidatos disponíveis com todas as capacidades; o CFP
+chega ao primário. Trust e redução ou atenção levam à escolha de um candidato
+e ao voluntariado. Sem candidato elegível, o estado deve ser examinado;
+o código não inicia automaticamente os melhores em paralelo nem um executor
+genérico de fallback. Paralelismo exige outra organização explícita de tarefas.
 \end{metodo}
 
 \begin{resultado}
-APLICAÇÃO A TODOS OS MÓDULOS. Todo módulo do manual (1--13) que mencione um
-agente/subagente herda este pipeline único: a ``ativação'' nunca é ambígua
-entre módulos — é sempre E1--E7. Nos módulos 1--9 a referência é implícita;
-a partir daqui (12--13) a referência é explícita e auditável contra a
-biblioteca de DOIs verificados.
+APLICAÇÃO AO LIVRO. As sete perguntas servem como checklist editorial.
+Cada módulo deve apontar a rota implementada, o estado observado e sua fonte
+local. Uma referência teórica explica conceitos gerais; a existência de um
+DOI não comprova que um executor do Core realizou a tarefa.
 \end{resultado}
+
+\begin{verbatim}
+.venv/bin/python -m marceloclaro.cli agentes \
+  validar architecture-source-audit
+.venv/bin/python -m marceloclaro.cli agentes \
+  registrar architecture-source-audit
+.venv/bin/python -m marceloclaro.cli agentes \
+  ativar architecture-source-audit \
+  --task "Conferir o percurso da nota com fontes locais."
+\end{verbatim}
+
+\praticacore
+{Distinguir definição validada, registro e atribuição de uma execução concluída.}
+{O perfil existente \cod{architecture-source-audit} e uma tarefa delimitada
+de leitura sobre a nota científica; execute os comandos na raiz do checkout.}
+{Valide, registre e ative o perfil com os comandos acima, conservando os três retornos.}
+{Compare \cod{source_sha256}, \cod{registered}, \cod{task_id},
+\cod{assigned_to}, \cod{executed} e \cod{execution_status}. A ativação bem
+encaminhada ainda informa \cod{pending_executor}.}
+{Se houver \cod{busy}, aguarde a resolução da tarefa anterior; não recrie o
+cartão para apagar a ocupação. Hash ou identidade divergentes exigem diagnóstico.}
+{Qual retorno comprova apenas atribuição? Que recibo e critério faltam para
+afirmar que a auditoria terminou e que a entrega foi aceita?}
 
 % ----------------------------------------------------------------------
 %  N-13 — Leitura guiada do Módulo 13 (adicionada no ciclo R619)
 % ----------------------------------------------------------------------
-\section[Leitura guiada]{Leitura guiada — Módulo 13: ativar é percorrer sete etapas, não escolher um nome}
+\section[Leitura guiada]{Leitura guiada — Ativação: identificar o percurso e sua evidência}
 
-\elemento{Leitura guiada — Ativação de agentes}{\metainfo{ID}{N-13} \hfill \metainfo{Ciclo}{R619} \hfill \metainfo{Estilo}{ativar é percorrer sete etapas, não escolher um nome}}
+\elemento{Leitura guiada — Ativação de agentes}{\metainfo{ID}{N-13} \hfill \metainfo{Ciclo}{R619} \hfill \metainfo{Estilo}{da definição à evidência}}
 
 
 \begin{descricao}
@@ -378,7 +478,7 @@ as mesmas etapas.
 \textbf{Grandezas e definições.}\par
 (1) \emph{Gatilho}: pedido ou evento que pode iniciar a seleção de um caminho; não basta, por si só, para autorizar qualquer operação.\par
 (2) \emph{Etapa}: uma das $7$ posições do pipeline (gatilho, roteamento, casamento, gate, execução, feedback, registro).\par
-(3) \emph{Rota}: caminho de ativação; existem $4$ alternativas em ordem de preferência rígida.\par
+(3) \emph{Rota}: caminho concreto de ativação, definido pela interface e pelo contrato; não há uma ordem universal comprovada entre quatro alternativas.\par
 (4) \emph{Ciclo de voluntariado}: publicar no Blackboard, aguardar candidatos e ponderar --- o custo da rota que passa pelo quadro.\par
 (5) \emph{Voluntário}: agente cujas capacidades casam com o gatilho e se candidatam à tarefa postada.
 \end{definicao}
@@ -425,10 +525,13 @@ qualquer vantagem de desempenho como hipótese.
 
 \begin{aviso}
 \textbf{Exercícios.}\par
-(E1) Desenhe o caminho de uma tarefa que é ativada por um \emph{skill} (rota a) e identifique em qual etapa a especificação é rejeitada se o gatilho não disser o que deve ser feito.\par
-(E2) Simule: se $1$ em cada $2$ tarefas caísse na rota (c), qual seria o custo médio adicional por tarefa? E se o Blackboard nunca registrasse voluntários?\par
+(E1) Desenhe o caminho de uma skill com invocação implícita desabilitada e identifique quem lê suas instruções.\par
+(E2) No exemplo hipotético de custo, recalcule com $p=0{,}5$. Que estado se observa quando não há candidato elegível?\par
 (E3) Verifique se o seu repositório tem marcação duplicada \cod{ATIVACAO-R613} em algum módulo. Se tiver, o que isso diz sobre a idempotência do gerador?\par
-(E4) Liste as $4$ rotas e diga qual delas é acionada quando o usuário digita diretamente o nome de um agente. A ordem de preferência confirma sua resposta?
+(E4) Explique como hash, capacidade exclusiva e estado ocupado protegem a atribuição; indique o que esses controles não comprovam.
 \end{aviso}
 
-\noindent\textit{Interpretação:} No modelo Blackboard, fontes de conhecimento publicam contribuições em um espaço compartilhado, e um controlador decide qual contribuição altera o estado do problema. Isso separa três operações que uma chamada direta costuma esconder: tornar a tarefa observável, permitir que solucionadores capazes concorram e arbitrar a próxima ação. O exercício testa se o leitor identifica essas fronteiras; a resposta deve ser justificada pelo fluxo descrito no texto, e não apenas pela semelhança entre nomes de funções \citref{NII, H. P. Blackboard systems: the blackboard model of problem solving and the evolution of blackboard architectures. \emph{AI Magazine}, v.~7, n.~2, p.~38-53, 1986}{10.1609/aimag.v7i2.537}{p.~38-53 (p.~42-45, modelo do quadro e ciclo de voluntariado). é o lastro da rota (c): o Blackboard não é um espelho de mensagens, é uma área de trabalho comum onde solucionadores postam, competitorem e o controlador escolhe}{Opportunistic reasoning has the advantage that order of application of the knowledge sources is not predetermined, once it is decided which knowledge sources to activate, the order is determined dynamically}{O raciocínio oportunista tem a vantagem de que a ordem de aplicação das fontes de conhecimento não é pré-determinada; uma vez decidido quais fontes ativar, a ordem é determinada dinamicamente.}{NII, 1986, p.~42--45}
+\noindent\textit{Interpretação:} No modelo Blackboard, fontes de conhecimento publicam contribuições em um espaço compartilhado, e um controlador decide qual contribuição altera o estado do problema. Isso separa três operações que uma chamada direta costuma esconder: tornar a tarefa observável, permitir que solucionadores capazes concorram e arbitrar a próxima ação. O exercício testa se o leitor identifica essas fronteiras; a resposta deve ser justificada pelo fluxo descrito no texto, e não apenas pela semelhança entre nomes de funções \citref{NII, H. P. Blackboard systems: the blackboard model of problem solving and the evolution of blackboard architectures. \emph{AI Magazine}, v.~7, n.~2, p.~38-53, 1986}{10.1609/aimag.v7i2.537}{p.~38-53 (p.~42-45, modelo do quadro e ciclo de voluntariado). é o enquadramento teórico do quadro: o Blackboard não é um espelho de mensagens, é uma área de trabalho comum onde solucionadores postam, competem e o controlador escolhe}{Opportunistic reasoning has the advantage that order of application of the knowledge sources is not predetermined, once it is decided which knowledge sources to activate, the order is determined dynamically}{O raciocínio oportunista tem a vantagem de que a ordem de aplicação das fontes de conhecimento não é pré-determinada; uma vez decidido quais fontes ativar, a ordem é determinada dinamicamente.}{NII, 1986, p.~42--45}
+
+% R901-PONTE-FECHO
+O percurso de ativação já pode ser conferido por seus estados. O atlas a seguir reunirá esses mecanismos em mapas seletivos, para que o leitor possa reconstruir as relações sem perder o detalhe das fontes.

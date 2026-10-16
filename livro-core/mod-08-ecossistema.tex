@@ -4,6 +4,10 @@
 % ============================================================
 \chapter{Como o Ecossistema Trabalha: Agentes, Instruções e Verificações}
 
+% R901-PONTE-ABERTURA
+As integrações oferecem instrumentos, enquanto os perfis descrevem responsabilidades e procedimentos. Para evitar uma coleção de peças isoladas, examinaremos como essas declarações se ligam ao primário e à evidência de trabalho.
+
+
 \roteirodidatico
 {Para realizar uma tarefa, o operador pode combinar uma ficha de agente, instruções reutilizáveis e verificações automáticas. O capítulo explica a diferença entre essas peças.}
 {\emph{Agente} descreve uma configuração de trabalho; \emph{skill} reúne instruções para um procedimento; \emph{plugin} adiciona integração; \emph{hook} reage a um evento; \emph{teste} verifica uma condição.}
@@ -11,17 +15,16 @@
 {A contagem de registros descreve o catálogo; não mede ativação, execução bem-sucedida ou qualidade. Examine também versão, permissões, chamadas observáveis e resultados.}
 {O que o ambiente carregou nesta execução, qual componente foi acionado e que evidência mostra o efeito do hook ou da verificação?}
 
-\casoguiado{perfil, instrução e verificação}
-{Um perfil descreve um papel; uma skill pode orientar como revisar um manuscrito; um hook pode reagir a uma ação; um teste pode conferir uma regra específica. Esses itens não são sinônimos e nenhum deles, isoladamente, prova a qualidade da revisão. Para reconstruir a execução, registre o perfil carregado, a instrução usada, a ação observada e o critério aplicado à saída.}
+\casoguiado{distribuir o trabalho da nota científica}
+{A nota já distingue o método local das consultas de apoio e conserva a origem de cada resposta. Agora é preciso organizar uma revisão de seus arquivos: quem recebe a tarefa, quais instruções deve ler e qual saída permitirá avaliar o trabalho. Um perfil de agente descreve esse papel; uma skill orienta um procedimento; o executor realiza as ações. O recibo da tarefa reunirá identidade, instruções, arquivos examinados e limites para que o pacote possa seguir à reprodução.}
 
 \begin{descricao}
-\textbf{Descrição — o que faltava no livro.} Antes, o capítulo apresentava
-nomes como \emph{skill}, \emph{hook}, \emph{runtime}, \emph{MCP} e
-\emph{spec} sem explicar com clareza o que cada um significa nem como afeta o
-trabalho do operador. Também não separava com precisão um recurso documentado
-de um recurso configurado, disponível ou efetivamente testado. Esta revisão
-define esses termos, percorre o caminho da ficha até a execução, apresenta
-exemplos calculados e aponta limites encontrados no código.
+Organizar o trabalho começa por separar descrição e ação. Uma ficha oferece
+instruções, enquanto uma execução exige ferramentas disponíveis, uma tarefa e
+um executor. A analogia útil é a de uma equipe com atribuições escritas: o
+regulamento define quem pode receber um trabalho; o relatório demonstra o que
+foi realizado. No Core, essas peças são ligadas por registros e hashes, sob o
+mesmo primário MarceloClaro, para que uma mudança de ficha não passe despercebida.
 \end{descricao}
 
 \section{Configuração: das fichas ao aplicativo}
@@ -52,9 +55,10 @@ Em palavras simples: \pth{instructions} aponta para regras de trabalho;
 \pth{agent} lista perfis disponíveis; \pth{skills} aponta para instruções
 reutilizáveis; \pth{mcp} descreve conexões com servidores de ferramentas;
 \pth{command} define comandos nomeados; e \pth{permission} define o que cada
-rota pode fazer. O diagnóstico local de 29/09/2026 encontrou 216 entradas de
-agente na configuração e 7 conexões MCP declaradas. Uma entrada declarada não
-garante que o agente ou servidor esteja instalado ou pronto para uso.
+rota pode fazer. O inventário desta edição contém \CoreAgentCount{} entradas
+de agente, \CoreMCPCount{} conexões MCP e \CoreCommandCount{} comandos.
+Uma entrada declarada não garante que o perfil tenha executor disponível ou
+que o servidor tenha iniciado e respondido.
 \end{resultado}
 
 \begin{flowch}[Regeneração da configuração]{documentos $\to$ opencode.json}
@@ -75,7 +79,7 @@ garante que o agente ou servidor esteja instalado ou pronto para uso.
 \end{flowch}
 
 \begin{descricao}
-\textbf{Como funciona e por quê.} Os documentos do catálogo e as definições do gerador são entradas para \pth{build_config}, que produz agentes, ferramentas e comandos de opencode.json. As setas representam compilação da configuração; a comparação reproduzível identifica alterações ou divergências.
+\textbf{Como funciona e por quê. Mecanismo.} Os documentos do catálogo e as definições do gerador são entradas para \pth{build_config}, que produz agentes, ferramentas e comandos de opencode.json. As setas representam compilação da configuração; a comparação reproduzível identifica alterações ou divergências.
 \textbf{Justificativa.} Gerar novamente a partir das fontes reduz a chance de configurações editadas manualmente divergirem do catálogo.
 \textbf{Limite.} Configuração reproduzível demonstra essa transformação de arquivos. O hospedeiro ainda precisa carregá-la, e cada integração exige sua própria evidência operacional.
 \end{descricao}
@@ -86,12 +90,14 @@ garante que o agente ou servidor esteja instalado ou pronto para uso.
 
 
 \begin{metodo}
-Para atualizar um agente: (1) edite sua ficha Markdown no catálogo; Markdown é
-um formato de texto simples com títulos e listas; (2) execute
-\pth{python3 -m integrations.opencode_cli} para gerar novamente a configuração;
-(3) rode \pth{python3 -m marceloclaro.cli doctor} para verificar se as partes
-principais do ambiente respondem. O diagnóstico identifica condições locais;
-ele não testa automaticamente toda resposta produzida por um agente.
+Antes de criar ou alterar um perfil, execute o diagnóstico e consulte sua spec
+e seus testes. Perfis novos passam pela interface \pth{agentes criar} do
+primário, que valida e publica a ficha. Para uma alteração autorizada, preserve
+o contrato, valide novamente e regenere a configuração com
+\pth{python3 -m integrations.opencode_cli}. A existência de uma ficha histórica
+não autoriza editar seus bytes e conservar a isenção antiga: o baseline exige
+migração explícita. O diagnóstico posterior confere condições estruturais;
+a execução e o aceite da tarefa possuem provas próprias.
 \end{metodo}
 
 \clearpage
@@ -112,9 +118,9 @@ O compilador transforma fichas em entradas reconhecidas pelo OpenCode. O
 execução. Quando usa o Blackboard, publica uma tarefa no quadro compartilhado;
 agentes elegíveis podem se oferecer para realizá-la. Blackboard significa aqui
 um quadro de tarefas consultável pelos componentes, não uma lista de espera de
-pessoas. O diagnóstico de 29/09/2026 encontrou 216 entradas configuradas, mas
-esse número não prova que todas estejam instaladas, disponíveis ou capazes de
-concluir qualquer tarefa.
+pessoas. Os \CoreAgentCount{} perfis configurados representam um inventário
+de papéis. É necessário examinar o contrato e a execução de cada tarefa antes
+de afirmar disponibilidade ou competência demonstrada.
 \end{descricao}
 
 \begin{resultado}
@@ -127,12 +133,12 @@ do trabalho ainda precisa ser avaliada pela tarefa e por seus critérios.
 
 \begin{flowch}[Ciclo de vida do agente]{catálogo $\to$ registro $\to$ operação}
 \matrix[matrix of nodes,name=ag,row sep=5mm,column sep=4mm,nodes={fn},ampersand replacement=\&]{
- |[fns]|ficha no catálogo \\[2mm]
- |[fns]|compilador gera perfil para delegação \\[2mm]
- |[fns]|configuração (modo e instruções) \\[2mm]
- |[fns]|registro no quadro de tarefas \\[2mm]
- |[fns]|voluntariado e execução \\[2mm]
- |[fns]|reflexão e evolução \\ \\
+ |[fns]|perfil com spec, teste e contrato \\[2mm]
+ |[fns]|primário valida fonte e política \\[2mm]
+ |[fns]|registro conserva hash e identidade \\[2mm]
+ |[fns]|ativação atribui tarefa elegível \\[2mm]
+ |[fns]|executor produz saída e evidências \\[2mm]
+ |[fns]|gate avalia e memória registra \\ \\
 };
 \draw[seta] (ag-1-1)--(ag-2-1);
 \draw[seta] (ag-2-1)--(ag-3-1);
@@ -145,11 +151,11 @@ do trabalho ainda precisa ser avaliada pela tarefa e por seus critérios.
 \end{flowch}
 
 \begin{descricao}
-\textbf{Como funciona e por quê.} O catálogo descreve um perfil; o registro fornece um cartão ao quadro; uma tarefa elegível pode gerar atribuição e execução. A conclusão atualiza o estado. As setas mostram transições que precisam de evidências distintas.
-\textbf{Justificativa.} Estados separados tornam visível se o agente está somente documentado, registrado, selecionado ou concluído em uma tarefa específica.
-\textbf{Limite.} Não há ativação automática de todo o catálogo. Registro não garante executor autenticado, resposta correta ou execução em um provedor externo.
+\textbf{Como funciona e por quê. Mecanismo.} As setas representam transições condicionadas pelo primário. A fonte validada fornece o cartão; o registro confirma identidade e hash no Blackboard; a ativação encaminha uma tarefa com prompt e contrato. A seta até o executor depende de execução efetiva. O retorno tracejado indica uma revisão possível, que exige nova validação.
+\textbf{Justificativa.} Conservar a mesma definição entre validação, registro e atribuição evita que um perfil diferente execute sob uma identidade já aceita.
+\textbf{Limite.} A ativação retorna \pth{executed=false} e \pth{execution_status=pending_executor}. O diagrama descreve o contrato e não declara que todos os perfis tenham percorrido suas etapas.
 \end{descricao}
-\fontecore{mci/blackboard.py}{Blackboard}
+\fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator.agent_profile_action}
 
 
 \noindent\textit{Contexto bibliográfico geral, sem certificação desta rota.} \citref{WOOLDRIDGE, M.; JENNINGS, N. R. Intelligent agents: theory and practice. \emph{The Knowledge Engineering Review}, v.~10, n.~2, p.~115-152, 1995}{10.1017/S0269888900008122}{Enquadramento teórico geral; a implementação desta rota é conferida na fonte primária local. Este artigo não certifica o funcionamento nem o desempenho do Core.}{The concept of an agent has become important in both artificial intelligence and mainstream computer science}{O conceito de agente tornou-se importante tanto na inteligência artificial quanto na ciência da computação.}{WOOLDRIDGE; JENNINGS, 1995, p.~115--152}
@@ -164,6 +170,57 @@ cadastro de capacidades para que o roteador possa localizar candidatos; não é
 uma avaliação independente de competência.
 \end{niveis}
 
+\section{Perfis gerenciados: do contrato à atribuição}
+
+\begin{descricao}
+A R894 persistiu 35 perfis de trabalho e 20 perfis correspondentes aos plugins
+solicitados. Os nomes e aliases ficam em \pth{agents/session_profiles.json}.
+São conjuntos identificados naquela atualização, e não a contagem total do
+catálogo. Alguns nomes históricos vieram de tentativas de delegação; o registro
+não demonstra que todas tenham executado ou concluído trabalho anterior.
+A distinção permite reutilizar um papel existente sem fabricar seu histórico.
+\end{descricao}
+
+\begin{metodo}
+O serviço de ciclo de vida exige identidade, descrição, capacidades, origem,
+spec, teste e contrato de saída. As referências devem existir dentro do
+repositório e não podem escapar por symlinks. A capacidade exclusiva do perfil
+usa o prefixo reservado \pth{profile_}; outro perfil não pode apropriar-se
+dela. O serviço publica uma ficha nova de modo exclusivo, sem sobrescrever a
+anterior. O gerador e a carga do catálogo aplicam esse gate. A preservação dos
+260 arquivos históricos vincula-se aos bytes registrados no baseline, e não
+equivale a aceitar seu conteúdo sob o contrato gerenciado atual.
+\end{metodo}
+\fontecore{agents/lifecycle.py}{AgentLifecycleService.create}
+\fontecore{agents/lifecycle.py}{enforce_catalog_contract}
+
+\begin{descricao}
+Na ativação, o primário confere novamente o hash e publica o registro no
+MetaBus, que o Blackboard precisa reconhecer com identidade e capacidades
+corretas. A tarefa transporta o prompt, o hash da ficha e o contrato de saída.
+Um perfil ocupado permanece ocupado: novo registro não deve apagar esse estado.
+Uma atribuição a identidade diferente da solicitada é bloqueada. Essas regras
+protegem a correspondência entre tarefa e perfil; não medem a competência do
+modelo que receberá o trabalho.
+\end{descricao}
+
+\begin{limite}
+O contrato de saída pede \pth{status}, \pth{findings}, \pth{evidence} e
+\pth{limitations}. A evidência deve apontar arquivo, hash, linhas ou recibo
+pertinente. \pth{executed=false} com \pth{pending_executor} significa que a
+tarefa foi preparada. Ferramentas de aplicações externas não são interceptadas
+pelo Core: antes de uma delegação externa, o agente deve passar pelo primário
+e correlacionar a tarefa A2A ao trabalho efetivo.
+\end{limite}
+
+\praticacore
+{Preparar a revisão editorial da nota com um perfil existente e um contrato rastreável.}
+{A nota, suas fontes e recibos, a ficha \pth{agents/catalog/book-release.md} e um pedido delimitado de revisão.}
+{Execute \pth{python3 -m marceloclaro.cli agentes validar book-release}. Confira o contrato e use \pth{agentes registrar book-release}; depois, no fluxo autorizado, \pth{agentes ativar book-release --task} com o pedido de revisar a nota e citar arquivos e limites. Registre o identificador devolvido.}
+{Compare identidade, hash, contrato e tarefa atribuída. Marque a etapa como preparação enquanto houver \pth{pending_executor}; somente a saída efetiva pode documentar o trabalho de revisão.}
+{Se a definição mudou, o perfil está ocupado ou a identidade diverge, conserve o motivo e resolva a condição pelo primário. Não recrie um cartão para apagar ocupação nem marque a revisão como concluída.}
+{Que evidência distingue a atribuição recebida da revisão realmente entregue? O contrato permite a outra pessoa localizar as fontes examinadas?}
+
 \clearpage
 \section{Skills: instruções reutilizáveis}
 
@@ -176,7 +233,7 @@ por si só um modelo novo nem a garantia de que a tarefa será executada. Exempl
 de funções presentes neste repositório:\par
 \smallskip
 {\footnotesize
-\begin{tabularx}{\textwidth}{lY}
+\begin{tabularx}{\linewidth}{>{\hsize=.70\hsize\linewidth=\hsize}Y>{\hsize=1.30\hsize\linewidth=\hsize}Y}
 \toprule
 Skill & Papel \\
 \midrule
@@ -205,13 +262,17 @@ como seguir aquele procedimento. Algumas incluem também scripts ou código de
 apoio. A configuração pode exigir invocação explícita: isso significa que a
 skill só é usada quando o operador a pede ou quando o fluxo a seleciona de forma
 autorizada. Uma marca como \pth{disable-model-invocation: true} impede que o
-modelo a escolha por conta própria; o orquestrador ainda pode ler suas
-instruções conforme a política definida. Essa regra evita iniciar rotinas
-sensíveis sem que a rota prevista tenha sido escolhida.
+modelo a escolha por conta própria. O mesmo vale para
+\pth{policy.allow_implicit_invocation: false} em \pth{agents/openai.yaml}.
+No pipeline autorizado, o primário usa o dispatcher para localizar a skill e
+ler seu \pth{SKILL.md}, executando as instruções no contexto atual. Uma resposta
+\emph{CONTINUAR} ao próximo passo já sugerido é consentimento para esse handoff;
+não se exige repetir o nome da skill. A continuidade conserva finalidade e
+permissões, sem transformar o documento lido em execução comprovada.
 \end{arquitetura}
 
 \clearpage
-\section{Plugins}
+\section{Plugins: extensão do aplicativo e capacidades importadas}
 
 \elemento{Código que amplia o aplicativo OpenCode}{\metainfo{Fonte}{.opencode/plugins/}}
 
@@ -219,10 +280,10 @@ sensíveis sem que a rota prevista tenha sido escolhida.
 Um \emph{plugin} é um complemento de código carregado pelo aplicativo para
 acrescentar comportamento. Diferentemente de uma skill, que explica um
 procedimento, o plugin pode executar funções em resposta a chamadas do
-aplicativo. Os plugins encontrados neste projeto são:\par
+aplicativo. Dois exemplos de extensões locais são:\par
 \smallskip
 {\footnotesize
-\begin{tabularx}{\textwidth}{lY}
+\begin{tabularx}{\linewidth}{>{\hsize=.70\hsize\linewidth=\hsize}Y>{\hsize=1.30\hsize\linewidth=\hsize}Y}
 \toprule
 Plugin & Papel \\
 \midrule
@@ -241,6 +302,38 @@ caminho complementar. Portanto, plugin, provider e skill ocupam papéis
 diferentes: código de extensão, conexão com modelo e instruções de tarefa.
 \end{limite}
 
+\begin{descricao}
+Há outra camada que precisa de nome próprio: o registro canônico de plugins
+científicos em \pth{integrations/scientific_plugins.py}. A R895 incorporou
+instruções dos 20 plugins solicitados; o registro contém também cinco
+integrações preservadas. Esses 25 registros não devem ser confundidos com
+25 arquivos TypeScript carregados no OpenCode. A importação confere caminhos,
+versões e hashes das instruções, sem executar hooks dos pacotes ou copiar
+credenciais. Importação, autenticação, inferência e entrega são estados que
+precisam de recibos diferentes.
+\end{descricao}
+\fontecore{integrations/scientific_plugins.py}{ScientificPluginService.sync}
+
+\begin{metodo}
+O primário pode pedir a leitura de uma skill importada ou solicitar uma
+operação hospedada permitida. A primeira retorna instruções e sua política;
+a segunda gera ticket para o host autenticado. O retorno do host é comparado
+ao pedido antes de ser aceito e observado no MetaBus, sem promoção automática
+de confiança. O status geral mantém \pth{host_authentication=not_verified},
+porque não sonda a conta. Isso pode coexistir com um recibo pontual de operação
+bem-sucedida, como a amostra Wolfram do capítulo anterior.
+\end{metodo}
+\fontecore{integrations/scientific_plugins.py}{ScientificPluginService.status}
+\fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator.scientific_plugin_action}
+
+\begin{aviso}
+Catalogar SciGrant não inicia submissão de projeto; catalogar Sites, Pets ou
+um conector de mensagens não autoriza criar site, pet ou enviar mensagem.
+Os pacotes privados do host e suas credenciais não pertencem ao pacote público
+de evidências da nota. Conserve apenas o material permitido e suficiente para
+explicar a operação realizada e suas limitações.
+\end{aviso}
+
 \clearpage
 \section{Hooks: as guardas de segurança}
 
@@ -253,12 +346,12 @@ lembrar de seguir uma recomendação escrita. Guardas encontradas no diretório
 \pth{.opencode/hooks/}:\par
 \smallskip
 {\footnotesize
-\begin{tabularx}{\textwidth}{lY}
+\begin{tabularx}{\linewidth}{>{\hsize=.70\hsize\linewidth=\hsize}Y>{\hsize=1.30\hsize\linewidth=\hsize}Y}
 \toprule
 Hook & Função \\
 \midrule
-\pth{budget_guard.sh} & interrompe a rota quando o limite configurado de uso é excedido. \\
-\pth{credential_guard.sh} & procura credenciais, como chaves de acesso, antes que sejam expostas. \\
+\pth{budget_guard.sh} & limita o tamanho da árvore e dos arquivos de publicação, em MiB. \\
+\pth{credential_guard.sh} & confere token GitHub parseável e configura identidade no repositório indicado. \\
 \pth{js_smoke_dom.sh} & faz uma verificação rápida de JavaScript que manipula elementos de uma página. \\
 \bottomrule
 \end{tabularx}\par}
@@ -298,20 +391,22 @@ intenção; o teste executável verifica alguns desses critérios no código. Um
 contexto. Uma spec não é uma execução, e um ciclo não é prova de que todos os
 testes passaram.
 
-Na verificação local de 29/09/2026, o comando \pth{doctor} carregou 136
-especificações formais e leu 457 ciclos de evolução. O registro passou a conter
-458 ciclos após a anotação editorial R632 e 459 após esta revisão R633. O total de arquivos em
-\pth{specs/} pode incluir documentos históricos e materiais auxiliares; por
-isso, não deve ser confundido com o número de specs formais carregadas.
+O total de arquivos em \pth{specs/} pode incluir documentos históricos e
+materiais auxiliares; por isso, ele difere do número de specs formais que o
+diagnóstico consegue carregar. Da mesma forma, o registro de evolução conta
+mudanças anotadas. Para reproduzir a nota, use o recibo do diagnóstico desta
+execução e o snapshot correspondente, conservando o resultado por verificação.
 \end{resultado}
 
 \begin{funcao}
 O comando \pth{python3 -m marceloclaro.cli doctor} é um diagnóstico: verifica
 condições locais como leitura das specs, integridade do registro de evolução e
-disponibilidade de algumas integrações. No retrato de 29/09/2026, 18 das 20
-verificações passaram, duas emitiram avisos e nenhuma falhou. Um aviso indica
-algo ausente ou opcional que merece atenção; não equivale automaticamente a uma
-falha geral. Por exemplo, uma ferramenta externa pode não estar instalada.
+instalação de algumas integrações. O diagnóstico estrutural que antecedeu a
+edição R901 apresentou 22 verificações aprovadas e estado \pth{healthy}.
+Esse retrato não realizou inferência em todos os provedores. Um aviso indica
+uma condição que merece leitura; sua consequência depende da tarefa. Uma
+ferramenta opcional pode faltar sem impedir outro percurso, enquanto sua ausência
+bloqueia uma tarefa que dela dependa.
 
 \emph{Memória metacognitiva} significa registros que o sistema guarda sobre seu
 próprio trabalho anterior, como reflexões ou avaliações. O \pth{helpdesk} é uma
@@ -324,7 +419,7 @@ funções distintas: diagnóstico, orientação e navegação.
  |[fns]|doctor (diagnóstico local) \\[2mm]
  |[fns]|especificações e histórico de mudanças \\[2mm]
  |[fns]|memória de reflexões disponível \\[2mm]
- |[fns]|servidores de ferramentas e modelos acessíveis \\[2mm]
+ |[fns]|inventário de ferramentas e runtimes \\[2mm]
  |[fns]|ambiente saudável? \\[2mm]
  |[fns]|prosseguir trabalho \\ \\
 };
@@ -339,14 +434,14 @@ funções distintas: diagnóstico, orientação e navegação.
 \end{flowch}
 
 \begin{descricao}
-\textbf{Como funciona e por quê.} doctor reúne verificações estruturais da configuração, especificações, memória e componentes locais. Cada resultado conserva pass, warn ou fail e um detalhe. A opção --live habilita sondagens operacionais explícitas, que podem ter dependências e falhas próprias.
+\textbf{Como funciona e por quê. Mecanismo.} As setas organizam verificações estruturais da configuração, especificações, memória e componentes locais. Cada resultado conserva pass, warn ou fail e um detalhe. A opção --live habilita sondagens operacionais explícitas, que podem ter dependências e falhas próprias.
 \textbf{Justificativa.} Um inventário rápido permite localizar pré-requisitos ausentes antes do trabalho, mantendo operações externas fora do diagnóstico estrutural padrão.
 \textbf{Limite.} Um pass estrutural não observa inferência, disponibilidade de rede ou conclusão de prova nativa. Consulte o modo e o detalhe antes de dizer que uma integração funciona.
 \end{descricao}
 \fontecore{marceloclaro/doctor.py}{run_doctor}
 
 
-\noindent\textit{Contexto bibliográfico geral, sem certificação desta rota.} \citref{FLAVELL, J. H. Metacognition and cognitive monitoring: a new area of cognitive-developmental inquiry. \emph{American Psychologist}, v.~34, n.~10, p.~906-911, 1979}{10.1037/0003-066X.34.10.906}{Enquadramento teórico geral; a implementação desta rota é conferida na fonte primária local. Este artigo não certifica o funcionamento nem o desempenho do Core.}{Metacognition refers, among other things, to the active monitoring and consequent regulation and orchestration of these processes}{A metacognição inclui o monitoramento ativo e a regulação dos processos cognitivos.}{FLAVELL, 1979, p.~906--911}
+\noindent\textit{Contexto bibliográfico geral, sem certificação desta rota.} \citparafrase{FLAVELL, J. H. Metacognition and cognitive monitoring: a new area of cognitive-developmental inquiry. \emph{American Psychologist}, v.~34, n.~10, p.~906-911, 1979}{10.1037/0003-066X.34.10.906}{Referência conceitual sobre monitoramento e conhecimento metacognitivo. A associação ao Core é uma interpretação de arquitetura, não prova de consciência, aprendizagem ou eficácia. O acesso primário não foi recuperado nesta revisão; não se conserva uma transcrição literal incerta}{FLAVELL, 1979, p.~906--911}
 
 
 \section{Resumo e exercícios}
@@ -377,8 +472,8 @@ tarefa real.
 \elemento{Leitura guiada — Declaração não é execução}{\metainfo{ID}{N-08} \hfill \metainfo{Estilo}{inventário e evidência}}
 
 \begin{descricao}
-\textbf{O fenômeno: A pergunta}  Se a configuração lista 216 agentes, isso quer dizer que
-216 agentes estão prontos para trabalhar? Não necessariamente. O número conta
+\textbf{O fenômeno: A pergunta} Se a configuração lista \CoreAgentCount{}
+agentes, quantos concluíram uma tarefa? A contagem sozinha não responde. Ela conta
 entradas declaradas no arquivo de configuração. Para saber se um agente pode
 ser usado, é preciso verificar se sua ficha foi carregada, se as ferramentas
 necessárias existem e se a rota consegue executá-lo.
@@ -420,11 +515,12 @@ bons resultados.
 \end{metodo}
 
 \begin{resultado}
-\textbf{Exemplo resolvido: O que sabemos no retrato local}  Em 29/09/2026, o diagnóstico contou 216
-entradas de agentes na configuração. Esse retrato não fornece, por si só, o
-número de agentes que passaram por uma tarefa de avaliação. Não se deve chamar
-essa contagem de ``216 agentes testados'' ou ``216 agentes prontos'': são
-afirmações diferentes e exigem evidências diferentes.
+\textbf{Exemplo resolvido.} O perfil \pth{book-release} pode ter definição
+validada, hash conferido e uma tarefa atribuída com \pth{executed=false}.
+Nesse instante, sabemos que a preparação ocorreu; ainda faltam executor,
+arquivos examinados e saída avaliada. Se o relatório posterior apontar fontes e
+limites, a evidência passa a descrever aquela revisão, sem se estender aos
+demais \CoreAgentCount{} perfis configurados.
 \end{resultado}
 
 \begin{resultado}
@@ -498,7 +594,7 @@ implementada na classe econômica; não transforma essas unidades em dinheiro.
 
 Para a taxa, a prioridade normal custa 1 unidade quando não há congestionamento;
 prioridade alta aplica multiplicador 2, portanto custa 2 unidades nessa mesma
-condição. Dez tarefas abertas acrescentam 10\%: a taxa normal passa a
+condição. O código soma 10\% por bloco inteiro de dez tarefas abertas: $k=1+0{,}1\lfloor q/10\rfloor$, com $q\geq0$. Dez tarefas abertas produzem $k=1{,}10$: a taxa normal passa a
 $1\times1\times1{,}1=1{,}1$ unidade. O número de tarefas abertas e o nível de
 prioridade entram na fórmula descrita em \pth{economy/token_economy.py}.
 \end{resultado}
@@ -524,11 +620,11 @@ desconto ocorreu, confira a assinatura e o registro da tarefa. A divergência es
 
 \noindent\textit{Exemplo.} Se uma rota admite apenas cinco candidatos por limite de tempo e permissões, ela pode comparar os cinco que passaram pelos filtros obrigatórios. Não deve afirmar que examinou todos os perfis do catálogo. Se nenhum dos cinco satisfaz os critérios, a resposta apropriada é registrar a insuficiência ou pedir decisão humana, em vez de escolher uma opção incompatível.
 
+\clearpage
 \section[Glossário do capítulo]{Glossário para consultar durante a leitura}
 
-\begin{resultado}
 {\footnotesize
-\begin{tabularx}{\textwidth}{lY}
+\begin{tabularx}{\linewidth}{>{\hsize=.70\hsize\linewidth=\hsize}Y>{\hsize=1.30\hsize\linewidth=\hsize}Y}
 \toprule
 Termo & Significado neste capítulo \\
 \midrule
@@ -561,4 +657,87 @@ Teste & Execução de uma verificação que compara um resultado com uma condiç
 Token Economy & Contabilidade interna de unidades associadas às tarefas do sistema. \\
 \bottomrule
 \end{tabularx}}
-\end{resultado}
+
+\clearpage
+\section{Apêndice Didático: Token Economy — staking, slashing e taxa de prioridade}
+
+\elemento{Cálculo de unidades internas}{\metainfo{ID}{DID-TOKEN} \hfill \metainfo{Fonte}{\pth{economy/token_economy.py}, TokenEconomy e FeeMarket}}
+
+\begin{descricao}
+\textbf{O problema concreto.} O código declara saldo inicial de 100 unidades internas, caução mínima de 1 unidade, recompensa de 20\% em caso de sucesso e desconto de 50\% da caução em caso de falha. Se uma caução de 2 unidades for registrada, quanto o agente recebe de volta em caso de sucesso? E em caso de falha? Como a taxa de prioridade muda com o número de tarefas abertas?
+\end{descricao}
+
+\begin{definicao}
+\textbf{Símbolos.}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{>{\hsize=.6\hsize\linewidth=\hsize}Y>{\hsize=1.2\hsize\linewidth=\hsize}Y>{\hsize=1.2\hsize\linewidth=\hsize}Y}
+Símbolo & Significado & Valor no exemplo \\
+\midrule
+$C$ & Caução (valor apostado pelo agente) & $C = 2$ unidades \\
+$r$ & Taxa de recompensa em caso de sucesso & $r = 0{,}20 = 20\%$ \\
+$d$ & Desconto (slashing) em caso de falha & $d = 0{,}50 = 50\%$ \\
+$m$ & Multiplicador de prioridade alta & $m = 2$ \\
+$k$ & Fator de congestionamento do exemplo (dez tarefas abertas) & $k = 1{,}10 = +10\%$ \\
+\end{tabularx}
+\end{center}
+\end{definicao}
+
+\begin{metodo}
+\textbf{Dedução do retorno em caso de sucesso.}
+
+\paragraph{Passo 1 — Recompensa sobre a caução.}
+Se a recompensa é $20\%$ da caução, o valor da recompensa é:
+
+\[
+\text{Recompensa} = r \times C = 0{,}20 \times 2 = 0{,}4 \text{ unidades}
+\]
+
+\paragraph{Passo 2 — Retorno total em caso de sucesso.}
+O agente recebe de volta a caução mais a recompensa:
+
+\[
+\boxed{\text{Sucesso} = C + r \times C = 2 + 0{,}20 \times 2 = 2 + 0{,}4 = 2{,}4 \text{ unidades}}
+\]
+
+\paragraph{Passo 3 — Retorno em caso de falha (slashing).}
+Em caso de falha, $50\%$ da caução é descontado. O agente retém:
+
+\[
+\boxed{\text{Falha} = C \times (1 - d) = 2 \times (1 - 0{,}50) = 2 \times 0{,}5 = 1 \text{ unidade}}
+\]
+
+\paragraph{Passo 4 — Taxa de prioridade com congestionamento.}
+A taxa normal custa 1 unidade sem congestionamento. Prioridade alta aplica multiplicador 2, custando 2 unidades. O código soma 10\% por bloco inteiro de dez tarefas abertas: $k=1+0{,}1\lfloor q/10\rfloor$, com $q\geq0$. Dez tarefas abertas produzem $k=1{,}10$:
+
+\[
+\text{Taxa normal com congestionamento} = 1 \times 1 \times 1{,}10 = 1{,}1 \text{ unidade}
+\]
+
+\[
+\text{Taxa alta com congestionamento} = 1 \times 2 \times 1{,}10 = 2{,}2 \text{ unidades}
+\]
+
+\end{metodo}
+
+\begin{descricao}
+\textbf{Interpretação.} Essas regras organizam decisões internas do software: sucesso rende retorno sobre o valor apostado, falha aplica desconto proporcional (slashing), e a taxa de prioridade sobe com congestionamento e prioridade alta.
+
+\textbf{O que isso NÃO significa:}
+\begin{itemize}[leftmargin=1.3em,itemsep=1pt]
+  \item Essas unidades não são dinheiro real.
+  \item Não comprovam que a entrega seja verdadeira nem substituem revisão humana, testes adequados ou validação externa.
+  \item Para afirmar que um agente recebeu desconto ou prêmio, é necessário consultar a rota executada e o registro da tarefa correspondente.
+\end{itemize}
+\end{descricao}
+
+\begin{aviso}
+\textbf{Limites de validade.}
+\begin{enumerate}[leftmargin=1.3em,itemsep=1pt]
+  \item As regras estão implementadas em \pth{economy/token_economy.py}.
+  \item Uma divergência entre a assinatura da classe (\cod{stake}) e a chamada do orquestrador (\cod{amount=2.0}) pode impedir o registro da caução.
+  \item Antes de afirmar que um desconto ocorreu, confira a assinatura e o registro da tarefa.
+\end{enumerate}
+\end{aviso}
+
+% R901-PONTE-FECHO

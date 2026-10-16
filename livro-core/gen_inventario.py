@@ -54,9 +54,11 @@ def collect_inventory(root: Path) -> dict:
     bibliography = root / "livro-core/mod-11-apendices.tex"
     condensed = root / "livro-core/mod-14-lote-categorias.tex"
     local_paths = _cited_files(root, modules)
+    authoritative = {root / 'livro-core' / name for name in (
+        'main.tex', 'macros.tex', 'gen_mod10.py', 'gen_mod14_ativacao.py', 'gen_inventario.py')}
     sources = {str(path.relative_to(root)): {
         "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
-    } for path in sorted({config_path, *modules, *local_paths})}
+    } for path in sorted({config_path, *modules, *local_paths, *authoritative}) if path.is_file()}
     return {
         "counts": {
             "agents": len(config.get("agent", {})),

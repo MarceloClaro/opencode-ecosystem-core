@@ -12,6 +12,10 @@
 % ============================================================
 
 \chapter{Fichas Núcleo Expandidas}
+
+% R901-PONTE-ABERTURA
+O catálogo permite localizar um perfil; estas fichas aprofundam responsabilidades do núcleo. Consulte uma delas quando precisar explicar como uma parte participa do caso, sem repetir toda a sequência narrativa.
+
 \label{mod12}
 
 \roteirodidatico
@@ -36,13 +40,15 @@
 FUNÇÃO. O orquestrador \pth{marceloclaro} (`marceloclaro/orchestrator.py::
 MarceloClaroOrchestrator`) é o agente primário do Core: coordena os demais
 agentes via Blackboard (protocolo A2A) e via MetaBus (memória metacognitiva
-compartilhada). DESCRIÇÃO. Ele não executa o trabalho dos subagentes; ele
-compõe: lê a especificação da tarefa, publica no quadro, acompanha o
-voluntariado, combina respostas de múltiplas fontes de conhecimento e registra
-o ciclo de evolução ao final. LEITURA DE ELEMENTOS. Os elementos lidos ao
-acionar qualquer skill são: a spec ativa (`specs/SPEC-935-R*.md`), o card do
-agente (`agents/catalog/*.md`, agora 212 parseáveis — SPEC-935-R608/R609), o
-registro de evolução e a memória metacognitiva do MetaBus.
+compartilhada). DESCRIÇÃO. Ele prepara contexto, seleciona percursos, pode
+chamar ferramentas e coordena delegações; atribuir uma tarefa não demonstra
+que o executor a concluiu. No caso da nota científica, o primário chama a
+execução R663 e o verificador R891, conservando seus recibos.
+LEITURA DE ELEMENTOS. Cada percurso deve identificar sua spec, os perfis e
+contratos usados, o estado de tarefas e as observações metacognitivas. A
+configuração desta edição declara \CoreAgentCount{} perfis. O ciclo de vida
+R894 exige validação dos bytes e do contrato para perfis gerenciados; não
+confere competência científica ao modelo que os executa.
 \end{descricao}
 
 Como o orquestrador é responsável por compor ``fontes de conhecimento''
@@ -50,9 +56,9 @@ independentes num único fluxo (Blackboard com votação por capacidades),
 ele materializa em código o padrão que Nii documentou ao receber o modelo
 blackboard de resolução oportunista de problemas — o quadro não é um cache,
 é um \emph{espaço de solução} onde múltiplos especialistas contribuem por vez \citref{NII, H. P. Blackboard systems: the blackboard model of problem solving and the evolution of blackboard architectures. \emph{AI Magazine}, v.~7, n.~2, p.~38-53, 1986}{10.1609/aimag.v7i2.537}{é o lastro do `opportunistic reasoning' que o orquestrador implementa: o quadro do Blackboard agrega contribuições de fontes de conhecimento independentes e não sequenciais — princípio arquitetural que justifica o vocabulário `blackboard/knowledge source' usado em todo o Módulo 2}{Opportunistic reasoning has the advantage that order of application of the knowledge sources is not predetermined, once it is decided which knowledge sources to activate, the order is determined dynamically}{O raciocínio oportunista tem a vantagem de que a ordem de aplicação das fontes de conhecimento não é pré-determinada; uma vez decidido quais fontes ativar, a ordem é determinada dinamicamente.}{NII, 1986, p.~38--53}.\begin{conceito}
-PRINCÍPIOS E CONCEITOS. (a) \emph{Orquestração, não execução}: o objetivo
-final do Core é coordenar, e a qualidade é aferida em cadeia (orquestrador a
-um passo dos gates de qualidade). (b) \emph{Anti-overclaim}: resultado não é
+PRINCÍPIOS E CONCEITOS. (a) \emph{Coordenação e execução rastreáveis}:
+o primário conserva a responsabilidade pelo percurso e distingue seus
+estados. (b) \emph{Anti-overclaim}: resultado não é
 ``verificado'' sem validação externa explícita (R110). (c) \emph{SDD/TDD}:
 toda funcionalidade nasce de spec em `specs/SPEC-935-R*.md` e passa por teste
 em \cod{tests/test_r*.py}. (d) \emph{Memória metacognitiva}: lições, reflexões e
@@ -61,15 +67,17 @@ confiança são persistidas no MetaBus e alimentam decisões futuras.
 
 A decisão do orquestrador de persistir lições (e não apenas resultados) é uma
 prática de \emph{monitoramento cognitivo}: a memória metacognitiva registra o
-que foi aprendido, em que contexto e com qual confiança — exatamente o objeto
-que Flavell delimitou ao fundar o estudo da metacognição como conhecimento
-sobre os próprios processos cognitivos \citref{FLAVELL, J. H. Metacognition and cognitive monitoring: a new area of cognitive-developmental inquiry. \emph{American Psychologist}, v.~34, n.~10, p.~906-911, 1979}{10.1037/0003-066X.34.10.906}{embasa o que o MetaBus persiste como `reflexão/lição/confiança' do orquestrador: sem esse lastro conceitual, o termo `metacognição' nas fichas do Core seria reivindicação sem fundamento}{Metacognitive knowledge is one's stored knowledge or beliefs about oneself and others as cognitive agents, about tasks, about actions or strategies, and about how all these interact to affect the outcomes of any sort of intellectual enterprise}{Conhecimento metacognitivo é o conhecimento ou as crenças armazenadas de alguém sobre si mesmo e sobre os outros como agentes cognitivos, sobre tarefas, sobre ações ou estratégias e sobre como tudo isso interage para afetar os resultados de qualquer empreendimento intelectual.}{FLAVELL, 1979, p.~906--911}.\begin{metodo}
-MÉTODO. (1) Escopo inicial por spec; (2) publicação de tarefa no Blackboard;
-(3) voluntariado por capacidades declaradas no card; (4) execução do(s)
-subagente(s); (5) validação segundo a rubrica de qualidade (SDD/TDD);
-(6) registro de ciclo de evolução com score e lições. Cada etapa gera um
-rastro auditável no registro de evolução, com identificador de ciclo
-(ex.: R619), chaves de mudança e lições.
+que foi registrado como lição, em que contexto e com qual sinal de confiança.
+Essa organização usa como referência conceitual o estudo da metacognição;
+não demonstra que o software tenha processos cognitivos humanos. Flavell
+discute conhecimento
+sobre os próprios processos cognitivos \citparafrase{FLAVELL, J. H. Metacognition and cognitive monitoring: a new area of cognitive-developmental inquiry. \emph{American Psychologist}, v.~34, n.~10, p.~906-911, 1979}{10.1037/0003-066X.34.10.906}{Referência conceitual sobre monitoramento e conhecimento metacognitivo. A associação ao Core é uma interpretação de arquitetura, não prova de consciência, aprendizagem ou eficácia. O acesso primário não foi recuperado nesta revisão; não se conserva uma transcrição literal incerta}{FLAVELL, 1979, p.~906--911}.\begin{metodo}
+MÉTODO. (1) Escrever a entrada e os critérios; (2) selecionar a operação ou
+validar o perfil pelo primário; (3) atribuir a tarefa quando houver delegação;
+(4) obter saída e evidência do executor; (5) aplicar o gate correspondente;
+(6) conservar o recibo e registrar a mudança relevante no ciclo de evolução.
+Eventos de execução, memória e ciclos são artefatos diferentes: não se deve
+supor que cada etapa gere automaticamente um novo ciclo.
 \end{metodo}
 
 O rastro do orquestrador (``quando rodou, qual spec, qual ciclo gravado'') é
@@ -86,9 +94,9 @@ associados e o resultado de execução.
 \begin{limite}
 IMPACTOS E LIMITES. Impacto: arquitetura de coordenação reutilizável e
 rasteável (protocolo A2A + MetaBus). Limites: (a) o orquestrador não substitui
-a avaliação humana; (b) a qualidade da coordenação é uma função da qualidade
-dos cards — daí o gate do R608/R609 que zerou os cards descartados; (c) o
-``número de agentes'' (216) é contagem de registro e não medida de desempenho.
+a avaliação humana; (b) perfis válidos reduzem ambiguidades de identidade e
+contrato, mas não bastam para medir a qualidade da coordenação; (c) o número
+\CoreAgentCount{} é contagem de configuração, sem medida de desempenho.
 \end{limite}
 
 \begin{aviso}
@@ -108,11 +116,12 @@ especializados; inbound/outbound para integração externa.
 \end{arquitetura}
 
 \begin{processo}
-AMBIENTE MÍNIMO E COMANDOS PRINCIPAIS. Python 3.10+; pdflatex com `macros.tex`;
-dependências de testes em `tests/`. Comandos principais:
-\cod{python3 -m marceloclaro.cli doctor} (saúde), \cod{pytest tests/} (gate),
-\cod{python3 gen_mod10.py} (regenera o catálogo do livro),
-\cod{python3 check.py} (sanidade do manual).
+AMBIENTE E COMANDOS PRINCIPAIS. Use o ambiente compatível do projeto e
+suas dependências; o perfil científico está documentado para Python 3.12 e
+3.14. Na raiz: \cod{python3 -m marceloclaro.cli doctor} confere a estrutura;
+\cod{.venv/bin/python -m marceloclaro.cli ci-local iniciar --profile scientific}
+inicia a seleção científica enumerada. A reprodução do PDF exige também
+TeX Live, os pacotes do livro e inspeção visual após compilação.
 \end{processo}
 
 % ============================================================
@@ -123,9 +132,10 @@ dependências de testes em `tests/`. Comandos principais:
 \metainfo{Tipo}{infraestrutura} \hfill \metainfo{Rota}{mci/blackboard.py e mci/metabus.py}}
 
 \begin{descricao}
-FUNÇÃO. O par Blackboard + MetaBus dá memória compartilhada de curto e longo
-prazo: o quadro centraliza tarefas/voluntariado (estado vivo), e o MetaBus
-persiste o que o orquestrador decidiu lembrar (reflexão, lição, confiança).
+FUNÇÃO. O quadro centraliza tarefas e voluntariado; o MetaBus conserva
+observações, reflexões e conhecimento compartilhado. O índice de busca é
+uma projeção derivada, distinta da memória canônica. No caso condutor,
+guarda-se o recibo da análise sem promover confiança por autoavaliação.
 DESCRIÇÃO. O Blackboard expõe quatro ferramentas MCP públicas
 (\cod{mci_register_agent}, \cod{mci_post_task}, \cod{mci_get_memory},
 \cod{mci_get_blackboard_state}); o MetaBus é o Global Workspace da memória
@@ -151,9 +161,9 @@ Workspace, A2A, Agent Card, oportunismo.
 
 O registro de ``lição + confiança'' no MetaBus é a parte metacognitiva da
 memória: o que foi aprendido, em que contexto, com qual confiança. A prática
-casa exatamente com a definição fundadora de Flavell para monitoramento
-cognitivo: conhecimento sobre o próprio conhecimento, de si e dos outros como
-agentes cognitivos \citref{FLAVELL, J. H. Metacognition and cognitive monitoring: a new area of cognitive-developmental inquiry. \emph{American Psychologist}, v.~34, n.~10, p.~906-911, 1979}{10.1037/0003-066X.34.10.906}{define o que o MetaBus grava como conteúdo metacognitivo legítimo — conhecimento sobre si e sobre os outros como agentes cognitivos, sobre tarefas e estratégias —, delimitando a ambição da `memória metacognitiva' sem transformá-la em buzzword}{Metacognitive knowledge is one's stored knowledge or beliefs about oneself and others as cognitive agents, about tasks, about actions or strategies, and about how all these interact to affect the outcomes of any sort of intellectual enterprise}{Conhecimento metacognitivo é o conhecimento ou as crenças armazenadas de alguém sobre si mesmo e sobre os outros como agentes cognitivos, sobre tarefas, sobre ações ou estratégias e sobre como tudo isso interage para afetar os resultados de qualquer empreendimento intelectual.}{FLAVELL, 1979, p.~906--911}.\begin{metodo}
+usa a definição de Flavell como analogia de organização, cuja implementação
+deve ser conferida no código: conhecimento sobre o próprio conhecimento, de si e dos outros como
+agentes cognitivos \citparafrase{FLAVELL, J. H. Metacognition and cognitive monitoring: a new area of cognitive-developmental inquiry. \emph{American Psychologist}, v.~34, n.~10, p.~906-911, 1979}{10.1037/0003-066X.34.10.906}{Referência conceitual sobre monitoramento e conhecimento metacognitivo. A associação ao Core é uma interpretação de arquitetura, não prova de consciência, aprendizagem ou eficácia. O acesso primário não foi recuperado nesta revisão; não se conserva uma transcrição literal incerta}{FLAVELL, 1979, p.~906--911}.\begin{metodo}
 MÉTODO. (1) \cod{register_agent} valida o card (fence YAML, nome, descrição,
 capacidades); (2) \cod{post_task} publica tarefa e dispara voluntariado; (3)
 \cod{get_memory(topic, limit)} recupera por tópico lexical no MetaBus; (4)
@@ -175,11 +185,12 @@ para esse inventário e não demonstra sua taxa atual de registro.
 \end{resultado}
 
 \begin{limite}
-IMPACTOS E LIMITES. Impacto: quadro completo para o orquestrador consultar
+IMPACTOS E LIMITES. Impacto: quadro para o orquestrador consultar
 quem pode fazer o quê. Limites: (a) capacidade declarada é proxy de
 capacidade real — não há teste de execução no voluntariado; (b) a memória do
-MetaBus é lexical (tema), não semântica; (c) ``confiança'' registrada é
-auto-declarada e não reflete validação externa.
+MetaBus depende do método e dos campos efetivamente consultados; (c)
+confiança é um sinal interno, não calibração empírica. A R886 separa
+observação da promoção de confiança; recuperar um texto não comprova sua verdade.
 \end{limite}
 
 \begin{aviso}
@@ -193,8 +204,13 @@ evidência.
 ARQUITETURAS E ELEMENTOS TÉCNICOS. `mci/blackboard.py` (quadro + rotas),
 `mci/metabus.py` (memória compartilhada), \cod{mci/mcp_server.py} (superfície MCP),
 \cod{mci/agent_registry_bootstrap.py} (\cod{_locate_frontmatter} resistente a
-cabeçalho/BOM/comentário). Ambos são estados em processo (memória volátil) com
-persistência opcional em JSON.
+cabeçalho/BOM/comentário). O MetaBus carrega a memória JSON em
+\pth{MCI_STATE_DIR}, cujo padrão é \pth{.mci_state}, e usa gravação
+temporária seguida de substituição atômica. Esse mecanismo não oferece
+transações entre hosts ou coordenação de múltiplos escritores independentes.
+O índice Whoosh R893 preserva o índice entre processos e somente informa
+indexação após commit; conteúdo legado ausente não é reconstruído. Sua
+operação destrutiva \cod{clear()} exige uso exclusivo.
 \end{arquitetura}
 
 % ============================================================
@@ -209,9 +225,11 @@ FUNÇÃO. Garantir que toda funcionalidade nasça de uma especificação
 (`specs/SPEC-935-R*.md`) e não seja declarada concluída antes de testes
 (\cod{tests/test_r*.py}) verdes. DESCRIÇÃO. O spec engine lê, valida e indexa as
 especificações do diretório `specs/`; o gate de qualidade conecta o ciclo de
-evolução ao resultado dos testes. LEITURA DE ELEMENTOS. Lê `specs/*.md`
-(371 arquivos, 285 séries SPEC-935), `tests/*.py` (305 testes), e metadados
-de versão nos \cod{sdd/spec_engine.py}.
+evolução ao resultado dos testes. LEITURA DE ELEMENTOS. Lê documentos de
+\pth{specs/}, seletores de testes, contratos e metadados de evidência de
+\pth{sdd/spec_engine.py}. Arquivos Markdown, casos de teste e specs
+carregadas pelo diagnóstico têm unidades distintas e não devem compartilhar
+um denominador implícito.
 \end{descricao}
 
 O ciclo ``spec $\rightarrow$ teste $\rightarrow$ código $\rightarrow$ ciclo de evolução'' exige que cada artefato
@@ -233,16 +251,18 @@ testes RED em \cod{tests/test_r<id>*.py}; (3) implementar até verde; (4) rodar
 spec com status aprovado/bloqueado.
 \end{metodo}
 
-O gate ``teste verde como condição de aceitação'' é a tradução pragmática de
-um resultado empírico central da ciência: quando a validação é apenas interna
-e local, alegações ``verdadeiras'' são mais improváveis do que falsas. O
-SDD/TDD não elimina viés local, mas o expõe ao exigir que a alegação venha
-acompanhada de artefato reproduzível — antes de qualquer adjetivo de qualidade \citref{IOANNIDIS, J. P. A. Why most published research findings are false. \emph{PLoS Medicine}, v.~2, n.~8, e124, 2005}{10.1371/journal.pmed.0020124}{justifica o gate `teste verde antes de declarar concluído': validação exclusivamente interna torna alegações provavelmente falsas; o gate exige evidência executável e não aceita auto-declaração de qualidade}{Simulations show that for most study designs and settings, it is more likely for a research claim to be false than true}{Simulações mostram que, para a maioria dos desenhos e cenários de estudo, é mais provável que uma alegação de pesquisa seja falsa do que verdadeira.}{IOANNIDIS, 2005, p.~e124}.\begin{resultado}
-RESULTADO E CÁLCULO. Índice de gate = razão entre specs com status fechado
-(aprovado/bloqueado) e specs abertas em `specs/`: cataloga a saúde do ciclo.
-A contagem corrente é 285 specs de série SPEC-935 e 305 testes — a métrica de
-cobertura de gate é gate = testes\_verdes / specs\_com\_teste,
-onde teste sem spec é contabilizado como débito técnico.
+A exigência de teste antes do aceite é uma política de engenharia. A
+modelagem de Ioannidis ajuda a discutir outro problema: o valor preditivo
+de um achado significativo depende de chances prévias, poder, erro tipo I
+e viés. Ela não atribui uma probabilidade de falsidade a toda afirmação
+interna, nem transforma testes de software em testes de hipóteses empíricas
+\citref{IOANNIDIS, J. P. A. Why most published research findings are false. \emph{PLoS Medicine}, v.~2, n.~8, e124, 2005}{10.1371/journal.pmed.0020124}{Contextualiza os limites de inferência sob os cenários e pressupostos do modelo; não estima a taxa de erro do Core nem fundamenta seu gate de software.}{Simulations show that for most study designs and settings, it is more likely for a research claim to be false than true}{Simulações mostram que, para a maioria dos desenhos e cenários de estudo, é mais provável que uma alegação de pesquisa seja falsa do que verdadeira.}{IOANNIDIS, 2005, p.~e124}.
+\begin{resultado}
+RESULTADO E CÁLCULO. Para $n>0$ critérios enumerados, com $a$ atendidos,
+a cobertura de critérios é $a/n$. Informe separadamente falhas obrigatórias,
+specs avaliadas, casos de teste e arquivos: suas contagens não são
+intercambiáveis. Por exemplo, 8 de 10 critérios atendidos dão 80\% de
+cobertura, mas uma falha obrigatória ainda impede o aceite.
 \end{resultado}
 
 \begin{limite}
@@ -270,17 +290,18 @@ FUNÇÃO. Auditar entregas contra a rubrica de qualidade (MASWOS nos artigos cuj
 nota importe; SDD/TDD no código) e contra a política anti-overclaim. DESCRIÇÃO.
 O papel de auditor é separar o que é \emph{cobertura/processo} do que é
 \emph{mérito de qualidade}: existir ficha, teste e ciclo é cobertura; a
-validação externa é o único caminho para mérito. LEITURA DE ELEMENTOS. Lê
+avaliação científica externa exige evidência própria. LEITURA DE ELEMENTOS. Lê
 spec, testes, ciclo de evolução, referências bibliográficas (DOIs), e o
 `CORRIGENDUM.md` para comparar alegações históricas.
 \end{descricao}
 
-O auditor aplica a mesma desconfiança estatística que a literatura de
-integridade científica: alegações não verificadas externamente são
-prováveis de serem falsas. Por isso a auditoria do Core exige, para qualquer
-alegação de alto impacto, a validade do DOI da fonte e a correspondência
-citação-recorte-tradução — a mesma disciplina de verificação das fichas deste
-módulo \citref{IOANNIDIS, J. P. A. Why most published research findings are false. \emph{PLoS Medicine}, v.~2, n.~8, e124, 2005}{10.1371/journal.pmed.0020124}{é a base do gate \cod{no_verified_without_external} do avaliador metacognitivo: a auditoria trata toda alegação ``verificada'' sem validação externa como provavelmente falsa até prova em contrário}{Simulations show that for most study designs and settings, it is more likely for a research claim to be false than true}{Simulações mostram que, para a maioria dos desenhos e cenários de estudo, é mais provável que uma alegação de pesquisa seja falsa do que verdadeira.}{IOANNIDIS, 2005, p.~e124}.\begin{conceito}
+O auditor começa pela pergunta que o artefato consegue responder. Na nota
+científica, um DOI permite localizar a fonte; o confronto com a passagem
+permite examinar sua sustentação; o replay permite comparar um cálculo.
+A ausência de avaliação externa conserva essa avaliação como pendência,
+sem autorizar uma probabilidade genérica de falsidade. Nenhuma dessas
+conferências substitui as outras.
+\begin{conceito}
 PRINCÍPIOS E CONCEITOS. (a) \emph{Fail-closed}: na dúvida, bloqueia; (b)
 \emph{Prova executável}: alegação de código exige corrida; (c) \emph{Separação
 cobertura/mérito}: ter infraestrutura não é ter qualidade. CONCEITOS:
@@ -290,15 +311,17 @@ auditoria a um passo de distância, Honest Evaluation Engine (R142).
 \begin{metodo}
 MÉTODO. O auditor compara três camadas: (1) a alegação (texto do manual ou
 ficha), (2) a evidência (artefato, corrida, DOI resolvido), (3) a validação
-(quem confirmou e quando). Camada 3 ausente $\rightarrow$ status \cod{requer_escalonamento} ou
-`inconclusivo`, nunca `aprovado`.
+(quem confirmou, em qual escopo e quando). Se uma avaliação exigida pelo
+contrato estiver ausente, registre \cod{requer_escalonamento} ou
+\cod{inconclusivo}. Um aceite computacional local pode coexistir com
+revisão humana e validação externa pendentes.
 \end{metodo}
 
 \begin{resultado}
 RESULTADO E CÁLCULO. Resultado padrão: checklist item-a-item com status
 \cod{aprovado/bloqueado/inconclusivo/requer_escalonamento} e score interno de
-cobertura. CÁLCULO: para n critérios auditados com k não preenchidos, o score
-é $1 - k/n$; o mérito de qualidade é \textbf{não redutível} a esse score (anti-
+cobertura. CÁLCULO: para $n>0$ critérios auditados, com $k$ não atendidos,
+o score de cobertura é $1-k/n$; o mérito de qualidade é \textbf{não redutível} a esse score (anti-
 overclaim).
 \end{resultado}
 
@@ -329,28 +352,32 @@ ARQUITETURAS E ELEMENTOS TÉCNICOS. \cod{mci/metacognitive_evaluator.py}
 \begin{descricao}
 FUNÇÃO. Persistir, de forma auditável, cada mudança relevante do Core: objetivo,
 mudanças, score, lições e identificador de ciclo. DESCRIÇÃO. `EvolutionRegistry`
-gera a próxima rodada, grava em `evolution/cycles.json` (459 ciclos após esta revisão) e
-permite consulta posterior. LEITURA DE ELEMENTOS. Lê `specs/`, `tests/` e o
-pedido do usuário/subagente para compor o `objective`; lê o diff de mudanças
-para gerar as `changes`.
+gera a próxima rodada, grava em \pth{evolution/cycles.json} e permite
+consulta posterior. LEITURA DE ELEMENTOS. Quem chama \cod{record} fornece
+objetivo, mudanças, score e lições; o método não deduz sozinho o diff nem
+comprova que os testes citados tenham passado. A declaração precisa apontar
+os recibos efetivos da mudança.
 \end{descricao}
 
 O registro de evolução é onde a memória de curto prazo da sessão vira memória
 de longo prazo do ecossistema: cada R-id vira um marco encontrável. A curadoria
 (aqui chamada de ``memória metacognitiva'') depende desses marcos para decidir
 o que repetir, o que reverter e o que re-auditar — o mesmo gesto metacognitivo
-que Flavell descreve como reflexão sobre o próprio processo mental \citref{FLAVELL, J. H. Metacognition and cognitive monitoring: a new area of cognitive-developmental inquiry. \emph{American Psychologist}, v.~34, n.~10, p.~906-911, 1979}{10.1037/0003-066X.34.10.906}{fundamenta o gesto de `registrar lições' do ciclo de evolução: a memória do ecossistema não guarda só o artefato, guarda o aprendizado — conhecimento sobre o próprio processo de evolução}{Metacognitive knowledge is one's stored knowledge or beliefs about oneself and others as cognitive agents, about tasks, about actions or strategies, and about how all these interact to affect the outcomes of any sort of intellectual enterprise}{Conhecimento metacognitivo é o conhecimento ou as crenças armazenadas de alguém sobre si mesmo e sobre os outros como agentes cognitivos, sobre tarefas, sobre ações ou estratégias e sobre como tudo isso interage para afetar os resultados de qualquer empreendimento intelectual.}{FLAVELL, 1979, p.~906--911}.\begin{conceito}
+que Flavell descreve como reflexão sobre o próprio processo mental \citparafrase{FLAVELL, J. H. Metacognition and cognitive monitoring: a new area of cognitive-developmental inquiry. \emph{American Psychologist}, v.~34, n.~10, p.~906-911, 1979}{10.1037/0003-066X.34.10.906}{Referência conceitual sobre monitoramento e conhecimento metacognitivo. A associação ao Core é uma interpretação de arquitetura, não prova de consciência, aprendizagem ou eficácia. O acesso primário não foi recuperado nesta revisão; não se conserva uma transcrição literal incerta}{FLAVELL, 1979, p.~906--911}.\begin{conceito}
 PRINCÍPIOS E CONCEITOS. (a) \emph{Registrar antes de esquecer}: ciclo sem
 registro é mudança sem memória. (b) \emph{Score honesto}: o score reflete o
-gate de qualidade, com lições explícitas. (c) \emph{Imutabilidade leve}:
-ciclos não são reescritos; corrige-se adicionando novo ciclo.
+gate correspondente, quando houver esse vínculo documentado, com lições
+explícitas. (c) \emph{Conservação do histórico}: correções devem ser
+registradas sem apagar a versão anterior; o arquivo JSON, por si só, não é
+um armazenamento imutável autenticado externamente.
 \end{conceito}
 
 \begin{metodo}
-MÉTODO. Chamada `EvolutionRegistry.record(objective, changes, score, lessons,
-round\_id)`; em produção, `round\_id` é derivado da sequência de ciclos — com a
-ressalva documentada no ciclo R609 de que \cod{next_round_id()} precisa olhar
-também o diretório `specs/` para não colidir com R-ids de spec existentes.
+MÉTODO. \cod{EvolutionRegistry.record} recebe objetivo e mudanças, com
+score, lições e \cod{round_id} opcionais. Quando o ID não é fornecido,
+\cod{next_round_id()} considera ciclos e o diretório de specs; a correção
+R611 evita a colisão histórica observada em R607/R609. A geração do ID não
+constitui aceite da mudança registrada.
 \end{metodo}
 
 O ciclo R609 deste registro ilustra o propósito de proveniência: por quê, em
@@ -358,20 +385,19 @@ O ciclo R609 deste registro ilustra o propósito de proveniência: por quê, em
 (\cod{tests/test_r608*}). Sem esse rastro, a mudança seria mais uma linha de diff
 sem memória — o antídoto é exatamente a disciplina FAIR de associar cada
 artefato à sua proveniência \citref{WILKINSON, M. D. et al. The FAIR Guiding Principles for scientific data management and stewardship. \emph{Scientific Data}, v.~3, 160018, 2016}{10.1038/sdata.2016.18}{orienta a estrutura do registro de evolução: cada ciclo carrega a proveniência (objetivo, mudanças, score, lições, round\_id) que permite re-auditar o que foi feito e quando}{R1.2. (meta)data are associated with detailed provenance}{R1.2. (meta)dados são associados a proveniência detalhada.}{WILKINSON et al., 2016, p.~160018}.\begin{resultado}
-RESULTADO E CÁLCULO. Métrica de tração: tração = ciclos\_novos /
-dias, medida sobre `cycles.json`. Após registrar esta revisão: 459 ciclos
-registrados
-(último: R631, 2026-09-29). O cálculo serve
-ao termostato de evolução: zero ciclos novos com mudanças não registradas é
-alarme.
+RESULTADO E CÁLCULO. Frequência de registro = ciclos novos / dias,
+com período positivo e declarado. Na fotografia histórica de 29/09/2026,
+esta ficha registrava 459 ciclos, último R631. A contagem não mede esforço,
+competência ou qualidade; para saber o que ocorreu, confronte mudanças,
+fontes e recibos do ciclo escolhido.
 \end{resultado}
 
 \begin{limite}
-IMPACTOS E LIMITES. Impacto: histórico executável da evolução. Limites: (a)
+IMPACTOS E LIMITES. Impacto: histórico documental da evolução. Limites: (a)
 origem do registro é humana ou de subagente — pode conter viés de relato; (b)
 o score é auto-atribuído pelo ciclo e sujeito a auditoria posterior; (c)
-\cod{round_id} derivado apenas de `cycles/` pode colidir com `specs/` (ver ciclo
-R607/R609) — mitigação: \cod{round_id} explícito até correção da sequência.
+IDs e hashes facilitam o confronto de versões, mas não certificam a
+veracidade do relato nem a origem externa de uma avaliação.
 \end{limite}
 
 \begin{aviso}
@@ -391,21 +417,20 @@ mudança tem proveniência e pode ser auditada contra os testes.
 FUNÇÃO. Gerar, de forma determinística, o capítulo de catálogo do livro
 (`mod-10-catalogo.tex`) a partir do catálogo real de cards, e validar a
 sanidade do manual antes e depois da compilação. DESCRIÇÃO. \cod{gen_mod10.py}
-lê `agents/catalog/*.md` e `opencode.json`, emite as 216 fichas em 11
-categorias e aborta (`assert`) se o número de fichas emitidas divergir do
+lê \pth{agents/catalog/} e \pth{opencode.json}, reconcilia a identidade dos
+\CoreAgentCount{} perfis configurados e verifica se o total emitido diverge do
 esperado; `check.py` garante balanceamento de chaves, ambientes válidos,
 unicode/flowch e as linhas que abrem os elementos do manual. LEITURA DE ELEMENTOS. Fonte
 única: `agents/catalog/` + `opencode.json` — o manual nunca edita os cards à
 mão (proibido editar arquivo gerado).
 \end{descricao}
 
-A regeneração determinística a partir de fonte de verdade é a mesma exigência
-de reprodutibilidade que os princípios FAIR formalizam: o artefato final
-(livro) é a imagem reproduzível da fonte (catálogo). O determinismo do
-gerador — mesma entrada, mesmo `.tex`, mesma paginação modulo fixas tipográficas
-— torna auditável a correlação entre o catálogo e o documento publicado, e o
-`assert` impede que o livro ``esqueça'' fichas. Este módulo 12, porém, é
-curadoria manual que o gerador não deve sobrescrever.
+A regeneração a partir de fontes identificadas permite comparar o catálogo
+configurado e as fichas publicadas. O gerador e o inventário devem conservar
+identidade, contagens e hashes das fontes. Isso não torna o PDF uma cópia
+semanticamente completa do runtime: o catálogo descreve perfis, não suas
+execuções. A paginação depende também do compilador e do ambiente. Este
+apêndice é curadoria manual, distinta do catálogo gerado.
 
 \begin{conceito}
 PRINCÍPIOS E CONCEITOS. (a) \emph{Fonte única de verdade}: cards são a fonte;
@@ -416,29 +441,29 @@ gerado, guarda de compilação, catálogo como dado.
 \end{conceito}
 
 \begin{metodo}
-MÉTODO. (1) \cod{python3 gen_mod10.py} lê catálogo + opencode.json e reescreve
-`mod-10-catalogo.tex`; (2) `python3 check.py` valida antes da compilação; (3)
-`latexmk -pdf main.tex` compila 2 passagens; (4) o grep de `Overfull` aceita
-somente o par de 0.61pt do sumário; (5) `pdftotext` confere que marcos
-(DOIs) estão presentes no PDF.
+MÉTODO. (1) Regenerar catálogo e inventário pelas fontes autoritativas;
+(2) executar \cod{python3 check.py} e os gates editoriais aplicáveis;
+(3) compilar com \cod{latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex};
+(4) examinar erros, remissões e avisos de layout no log; (5) extrair texto
+e renderizar páginas representativas. A presença de um DOI extraído não
+prova legibilidade da nota nem sustentação da afirmação.
 \end{metodo}
 
-O limite de `Overfull hbox 0,61pt` é o orçamento tipográfico do livro:
-toda contribuição que exceda 0.61pt exige reforma da linha, não aceitação de
-aviso. Essa disciplina tipográfica é análoga ao orçamento de ``alegações'': o
-artefato só entra no livro se couber no espaço e no gate de prova — a mesma
-filosofia do Core aplicada ao próprio documento \citref{IOANNIDIS, J. P. A. Why most published research findings are false. \emph{PLoS Medicine}, v.~2, n.~8, e124, 2005}{10.1371/journal.pmed.0020124}{lastra a política editorial `sem overfull, sem alegação sem prova': um documento que publica marcos sem gate de verificação herda o perfil de alegações improváveis que a literatura descreve}{Simulations show that for most study designs and settings, it is more likely for a research claim to be false than true}{Simulações mostram que, para a maioria dos desenhos e cenários de estudo, é mais provável que uma alegação de pesquisa seja falsa do que verdadeira.}{IOANNIDIS, 2005, p.~e124}.\begin{resultado}
-	extbf{Compilação desta edição.} O arquivo 	exttt{main.pdf} foi gerado com
-249 páginas nesta compilação. A paginação é uma saída do compilador e muda
-quando o conteúdo muda; para conferir uma edição posterior, examine o PDF e o
-registro 	exttt{main.log}. A compilação local terminou sem erro fatal.
+\begin{resultado}
+\textbf{Conferência da edição.} O número de páginas, o resultado da
+compilação e os avisos materiais devem vir do PDF e do log desta entrega.
+Valores de uma compilação anterior não são metas a reproduzir. Um aviso
+\cod{Overfull} pede exame da página correspondente: conteúdo cortado,
+sobreposto ou ilegível precisa de correção. A verificação tipográfica tem
+critérios editoriais próprios e não mede mérito científico.
 \end{resultado}
 
 \begin{limite}
-IMPACTOS E LIMITES. Impacto: o livro é reproduzível da fonte — quem tiver o
-repo gera o mesmo manual. Limites: (a) paginação depende da versão do
-pdflatex/T1; (b) fichas curtas não curadas no módulo 12 não têm DOIs citados —
-curadoria em progresso por categoria (núcleo primeiro).
+IMPACTOS E LIMITES. Impacto: fontes editáveis e um procedimento de geração
+identificado permitem repetir a construção e comparar diferenças. Limites:
+ambiente TeX, versões de fontes e pacotes podem alterar a paginação;
+compilação e igualdade de arquivos não demonstram pertinência das citações
+nem completude da documentação de todas as APIs.
 \end{limite}
 
 \begin{aviso}
@@ -449,16 +474,18 @@ permanece obrigatória para qualquer alegação de mérito.
 \end{aviso}
 
 \begin{arquitetura}
-ARQUITETURAS E ELEMENTOS TÉCNICOS. Pipeline: `agents/catalog/` + `opencode.json`
-$\rightarrow$ \cod{gen_mod10.py} $\rightarrow$ `mod-10-catalogo.tex` $\rightarrow$ `main.tex` (14 módulos) $\rightarrow$ PDF; guards
-`check.py` e `Overfull<=0.61pt`; verificação `pdftotext`. Elementos técnicos:
+ARQUITETURAS E ELEMENTOS TÉCNICOS. Pipeline: \pth{agents/catalog/} e
+\pth{opencode.json} $\rightarrow$ \cod{gen_mod10.py} $\rightarrow$
+\pth{mod-10-catalogo.tex} $\rightarrow$ \pth{main.tex} $\rightarrow$ PDF.
+Gates: \pth{check.py}, testes editoriais, análise de log, extração de texto
+e inspeção de páginas renderizadas. Elementos técnicos:
 `citref` (nota de rodapé citação-tradução), `referencia` (quadro ouro) em
 `livro-core/macros.tex`, `elemento/metainfo`, tcolorbox por ambiente da
 `check.py:ENVS`.
 \end{arquitetura}
 
 \begin{processo}
-AMBIENTE MÍNIMO E COMANDOS PRINCIPAIS. Ambiente: Python 3.10+, TeX Live com
+AMBIENTE E COMANDOS PRINCIPAIS. Ambiente Python do projeto e TeX Live com
 `tcolorbox`, `tabularx`, `pdflatex` T1. Comandos principais:
 \cod{python3 gen_mod10.py} (regenera catálogo), \cod{python3 check.py} (guarda),
 \cod{latexmk -pdf main.tex} (compila), \cod{pdftotext main.pdf -} (audita marcos).
@@ -478,11 +505,11 @@ editores de catálogo (dados), QA de build (guards tipográficos).
 \elemento{Leitura guiada — Fichas núcleo}{\metainfo{ID}{N-12} \hfill \metainfo{Ciclo}{R619} \hfill \metainfo{Estilo}{a célula vazia denuncia o que não se sabe}}
 
 \begin{descricao}
-\textbf{O fenômeno.} Uma ficha de agente tem \textbf{13 dimensões} e cada dimensão
-pode estar preenchida ou vazia. Uma célula vazia não é um erro de formatação: é a
-marca de um \emph{fato que ninguém verificou}. Esta seção mostra por que a contagem
-de células preenchidas é uma métrica honesta de completude --- e por que ela não
-diz nada sobre a qualidade do que foi escrito.
+\textbf{O fenômeno.} O modelo de ficha deste apêndice propõe 13 dimensões.
+Uma dimensão ausente aponta uma lacuna documental: pode faltar informação,
+aplicabilidade ou evidência, e o motivo precisa ser declarado. Uma dimensão
+preenchida também pode estar errada. A contagem de preenchimento descreve
+forma, sem medir a qualidade ou a verificação de seu conteúdo.
 \end{descricao}
 
 \begin{definicao}
@@ -499,9 +526,9 @@ diz nada sobre a qualidade do que foi escrito.
 \textbf{Dedução passo a passo.} Como medir completude sem se enganar?
 \begin{enumerate}[leftmargin=1.4em,itemsep=2pt]
   \item O denominador é o total de células possíveis, $F \times d$ --- não o número de fichas.
-  \item Cada célula vazia conta como $k \Rightarrow 1$.
+  \item Conte uma unidade em $k$ por célula vazia, sem duplicá-la.
   \item $u = 1 - k/78$.
-  \item O leitor confere $13/13$ em cada ficha antes de aceitar o conteúdo como descrição completa.
+  \item Confira as 13 dimensões e registre lacunas ou itens não aplicáveis; depois confronte as afirmações preenchidas com suas evidências.
 \end{enumerate}
 \end{metodo}
 
@@ -514,13 +541,12 @@ células vazias numa ficha indicam \emph{ficha subescrita}; seis espalhadas indi
 \end{resultado}
 
 \begin{resultado}
-\textbf{Ordem de grandeza e verificação.} Uma completude de $92{,}3\%$ corresponde
-a 6 de 78 fichas incompletas: menos de um décimo do inventário. Corrigir as seis
-é trabalho de minutos, ao passo que a completude não é cobertura de \emph{testes}
-nem de \emph{capacidade} --- um cartão completamente preenchido pode descrever um
-agente inexistente. Ou seja: o mesmo $100\%$ de completude formal pode coexistir com
-cobertura de verificação arbitrária. \emph{Verifique você mesmo:} conte os campos
-vazios em \pth{agents/catalog/*.md} e compare com o $100\% - u$ calculado acima.
+\textbf{Ordem de grandeza e verificação.} No exemplo, $92{,}3\%$ corresponde
+a seis células vazias entre 78, em um conjunto de seis fichas. Não informa
+quantas fichas têm lacunas nem o tempo para resolvê-las. Confira as dimensões
+das fichas deste apêndice, registre a evidência de cada preenchimento e
+distinga campo ausente de alegação não sustentada. Os cartões de
+\pth{agents/catalog/} têm outro contrato e exigem seu próprio denominador.
 \end{resultado}
 
 \begin{aviso}
@@ -531,7 +557,8 @@ correto.
 \end{aviso}
 
 \begin{resultado}
-\textbf{Exercícios.} (1) Quantas células vazias dão $u = 0{,}90$? (2) Por que
+\textbf{Exercícios.} (1) Com 78 células e $k$ inteiro, é possível obter
+exatamente $u=0{,}90$? Compare $k=7$ e $k=8$ e declare o arredondamento. (2) Por que
 registrar a métrica de um \emph{manual sobre o próprio manual} é boa prática de
 auto-referência?
 \end{resultado}
@@ -551,7 +578,7 @@ CÁLCULO. cobertura de dimensões = dimensões preenchidas / 13; o leitor confer
 \end{resultado}
 
 \begin{descricao}
-JUSTIFICATIVA TEÓRICA. o monitoramento ativo da própria compreensão é o coração da metacognição aplicada ao estudo do manual. O lastro teórico vem da citação que segue: recorte conferido em 29/09/2026, com a página de origem e tradução livre e fiel.
+JUSTIFICATIVA TEÓRICA. o monitoramento ativo da própria compreensão é o coração da metacognição aplicada ao estudo do manual. A relação conceitual é apresentada na paráfrase a seguir; o texto primário completo não foi recuperado nesta revisão.
 \end{descricao}
 
 \begin{aviso}
@@ -559,4 +586,41 @@ LIMITE E ANTI-OVERCLAIM. ficha completa não equivale a validação externa do c
 localização da fonte (R110), não o mérito da afirmação.
 \end{aviso}
 
-\noindent\textit{Interpretação:} Monitoramento metacognitivo compara a compreensão atual com o objetivo de leitura e ajusta a estratégia quando surgem lacunas. Nas fichas, isso significa distinguir descrição, evidência e limite: se o leitor não consegue apontar qual trecho sustenta uma capacidade, a ficha precisa de revisão; se consegue, ainda deve verificar se a evidência cobre o uso proposto. A referência fundamenta o ciclo de monitoramento; a adequação é decidida a partir do material concreto de cada ficha \citref{FLAVELL, J. H. Metacognition and cognitive monitoring: a new area of cognitive-developmental inquiry. \emph{American Psychologist}, v.~34, n.~10, p.~906-911, 1979}{10.1037/0003-066X.34.10.906}{p.~906--911 (resumo, p.~906). é o lastro da leitura ativa das fichas: a metacognição como monitoramento ativo e regulação dos próprios processos cognitivos — o leitor monitora se entendeu cada dimensão da ficha antes de seguir.}{Metacognition refers, among other things, to the active monitoring and consequent regulation and orchestration of these processes}{A metacognição refere-se, entre outras coisas, ao monitoramento ativo e à consequente regulação e orquestração desses processos.}{FLAVELL, 1979, p.~906}
+\noindent\textit{Interpretação:} Monitoramento metacognitivo compara a compreensão atual com o objetivo de leitura e ajusta a estratégia quando surgem lacunas. Nas fichas, isso significa distinguir descrição, evidência e limite: se o leitor não consegue apontar qual trecho sustenta uma capacidade, a ficha precisa de revisão; se consegue, ainda deve verificar se a evidência cobre o uso proposto. A referência fundamenta o ciclo de monitoramento; a adequação é decidida a partir do material concreto de cada ficha \citparafrase{FLAVELL, J. H. Metacognition and cognitive monitoring: a new area of cognitive-developmental inquiry. \emph{American Psychologist}, v.~34, n.~10, p.~906-911, 1979}{10.1037/0003-066X.34.10.906}{Referência conceitual sobre monitoramento e conhecimento metacognitivo. A associação ao Core é uma interpretação de arquitetura, não prova de consciência, aprendizagem ou eficácia. O acesso primário não foi recuperado nesta revisão; não se conserva uma transcrição literal incerta}{FLAVELL, 1979, p.~906}
+
+\clearpage
+\section{Apêndice Didático: Cobertura de dimensões de ficha}
+
+\elemento{Cobertura de dimensões de ficha}{\metainfo{ID}{DID-DIM} \hfill \metainfo{Fonte}{docs/guias-didaticos/formulas-livro-core-nussenzveig.md, seção 9}}
+
+\begin{descricao}
+\textbf{O problema concreto.} Cada ficha do núcleo deve preencher 13 dimensões. Qual é a cobertura de uma ficha dada?
+\end{descricao}
+
+\begin{definicao}
+Nas proporções deste aprofundamento, o total do universo deve ser positivo. Se não houver itens no escopo, registre a medida como não aplicável; não calcule $0/0$.
+
+\textbf{Símbolos.}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{>{\hsize=.55\hsize\linewidth=\hsize}Y>{\hsize=1.45\hsize\linewidth=\hsize}Y}
+Símbolo & Significado \\
+\midrule
+$d_p$ & Número de dimensões preenchidas na ficha \\
+$d_t = 13$ & Número total de dimensões exigidas \\
+\end{tabularx}
+\end{center}
+\end{definicao}
+
+\begin{metodo}
+\textbf{Dedução.}
+
+\[
+\boxed{\text{cobertura} = \frac{d_p}{13}}
+\]
+
+Justificativa: proporção elementar; o denominador é fixo (13) por definição da estrutura da ficha. O leitor confere 13/13 antes de aceitar a ficha.
+\end{metodo}
+
+% R901-PONTE-FECHO
+As fichas do núcleo detalham relações transversais. As categorias seguintes ampliam a consulta para outros domínios, sempre com entrada, limite e conferência próprios.

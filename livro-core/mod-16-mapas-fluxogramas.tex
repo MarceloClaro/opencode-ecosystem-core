@@ -6,6 +6,10 @@
 % ============================================================
 \chapter{Atlas Visual: Cada Elemento em Um Mapa}
 
+% R901-PONTE-ABERTURA
+Depois de acompanhar cada mecanismo, podemos voltar ao todo com maior precisão. Estes mapas organizam relações e caminhos de falha; devem ser lidos com as distinções de estado aprendidas nos capítulos anteriores.
+
+
 \roteirodidatico
 {Ana se orienta por figuras; Bruno confere por setas. Este atlas traduz cada arquitetura do livro em um mapa de uma pagina: caixas sao lugares ou decisoes, setas sao caminhos ou devolucoes.}
 {\emph{Mapa} mostra territorios; \emph{fluxograma} mostra ordem; \emph{diagrama} mostra relacoes. \emph{Losango} e decisao; \emph{retangulo duplo} e ponto de partida ou chegada.}
@@ -21,7 +25,10 @@
 \elemento{Como ler cada mapa}{\metainfo{ID}{ATLAS-LEIT} \hfill \metainfo{Regra}{dedo antes do terminal}}
 
 \begin{descricao}
-Todo mapa deste capitulo usa as mesmas formas: retangulo simples e etapa, retangulo escuro e marco, losango e decisao com saida sim ou nao, seta cheia e fluxo, seta tracejada e retorno de aprendizado. A legenda vale para os dez mapas.
+Os mapas usam retângulo simples para etapa, retângulo escuro para marco e
+losango para decisão. A seta cheia representa a relação declarada na legenda;
+a tracejada, quando presente, indica retorno condicionado. Uma seta de
+importação, uma de evento e uma de sequência didática não têm o mesmo significado.
 \end{descricao}
 
 \begin{flowch}[M1 -- Mapa mestre das 8 camadas]{fonte: mod-02 e MAPA ECOSSISTEMA COMPLETO}
@@ -51,23 +58,39 @@ Todo mapa deste capitulo usa as mesmas formas: retangulo simples e etapa, retang
 \end{descricao}
 \fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator}
 
+As oito camadas de M1 orientam a leitura do livro. O inventário de
+\pth{docs/architecture-r900/} descreve o snapshot \cod{f930e19} em 18 camadas
+estruturais, com 691 módulos Python e 1.083 declarações de importação.
+Essas arestas representam dependências estáticas; não são um traço de execução.
+A classificação inclui grupos históricos, templates e vendor separados do
+código operacional. Para a nota científica, escolha o percurso pertinente,
+em vez de interpretar toda a arquitetura como uma única fila de etapas.
 
 
 
-\begin{flowch}[M2 -- Ciclo de orquestracao]{fonte: marceloclaro/orchestrator.py}
+\begin{flowch}[M2 -- Da tarefa ao retorno]{percurso possível; execução exige responsável próprio}
 \matrix[matrix of nodes,name=m2,row sep=5mm,column sep=4mm,nodes={fn},ampersand replacement=\&]{
- |[fne]|PERCEBE \& |[fne]|DELEGA \& |[fne]|EXECUTA \& |[fne]|REFLETE \\
+ |[fns]|Contexto e briefing R886 \\
+ |[fns]|Publicação e seleção \\
+ |[fns]|Atribuição a um candidato \\
+ |[fns]|Executor produz retorno \\
+ |[fne]|Gate e observação pós-entrega \\
 };
-\draw[seta] (m2-1-1)--(m2-1-2);
-\draw[seta] (m2-1-2)--(m2-1-3);
-\draw[seta] (m2-1-3)--(m2-1-4);
-\draw[seta,bend right=30] (m2-1-4) to node[below,font=\tiny]{retorno ao MetaBus} (m2-1-1);
+\draw[seta] (m2-1-1)--(m2-2-1);
+\draw[seta] (m2-2-1)--(m2-3-1);
+\draw[seta] (m2-3-1)--(m2-4-1);
+\draw[seta] (m2-4-1)--(m2-5-1);
 \end{flowch}
 
 \begin{descricao}
-\textbf{Como funciona e por quê.} A seta de volta representa a consulta de lições em uma nova tarefa; o esquema resume fases sem impor um loop sem fim.
+\textbf{Como funciona e por quê.} As setas separam preparar, selecionar, atribuir,
+executar e conferir. A transição da atribuição ao retorno depende de um executor;
+\cod{pending_executor} pode interromper o percurso nesse ponto. O gate e a
+observação registram o resultado recebido, inclusive a falha.
 \textbf{Justificativa.} Separar seleção, execução e avaliação permite localizar em qual etapa faltou informação ou evidência.
-\textbf{Limite.} É uma decomposição conceitual: comandos diretos e rotas de integração não precisam atravessar todos os quatro nós, e memória disponível não comprova melhoria de desempenho.
+\textbf{Limite.} O mapa resume responsabilidades. Comandos diretos podem ter
+trajetórias menores; a memória será consultada novamente em outra operação,
+sem repetição ilimitada ou melhoria garantida.
 \end{descricao}
 \fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator}
 
@@ -76,47 +99,60 @@ Todo mapa deste capitulo usa as mesmas formas: retangulo simples e etapa, retang
 
 \section{Coordenacao e memoria}
 
-\begin{flowch}[M3 -- Quadro Negro A2A]{fonte: protocolo Blackboard A2A}
+\begin{flowch}[M3 -- Seleção no quadro A2A]{publicação antes do CFP; um candidato por atribuição}
 \matrix[matrix of nodes,name=m3,row sep=4mm,column sep=4mm,nodes={fn},ampersand replacement=\&]{
- |[fn]|Tarefa com criterio \& |[fne]|Orquestrador \& |[fn]|Quadro Negro \\
- |[fn]|Agente busca \& |[fn]|Agente resume \& |[fn]|Agente revisa \\
+ |[fns]|Primário: task.post \\
+ |[fn]|Quadro: disponível e all\_of \\
+ |[fn]|task.cfp com candidatos \\
+ |[fn]|Trust; redução ou atenção \\
+ |[fn]|Um escolhido: task.volunteer \\
+ |[fne]|Quadro: task.assigned e busy \\
 };
-\draw[seta] (m3-1-1)--(m3-1-2);
-\draw[seta] (m3-1-2)--(m3-1-3);
-\draw[seta] (m3-1-3.south)--(m3-2-2.north);
-\draw[seta] (m3-2-1)--(m3-2-2);
-\draw[seta] (m3-2-2)--(m3-2-3);
+\draw[seta] (m3-1-1)--(m3-2-1);
+\draw[seta] (m3-2-1)--(m3-3-1);
+\draw[seta] (m3-3-1)--(m3-4-1);
+\draw[seta] (m3-4-1)--(m3-5-1);
+\draw[seta] (m3-5-1)--(m3-6-1);
 \end{flowch}
 
 \begin{descricao}
-\textbf{Como funciona e por quê.} As ligações entre tarefa, quadro e especialistas representam anúncio e interação. Não significam que busca, resumo e revisão sejam sempre despachados em paralelo.
+\textbf{Como funciona e por quê.} As setas acompanham eventos e decisões locais:
+o quadro anuncia candidatos disponíveis com todas as capacidades; o primário
+aplica Trust e escolhe um candidato por redução ou atenção. O voluntariado
+produz a atribuição e o estado ocupado, sem iniciar por si só um modelo.
 \textbf{Justificativa.} Separar anúncio, atribuição e conclusão permite rastrear quem assumiu uma tarefa e por que um anúncio sem resposta ainda não é execução.
 \textbf{Limite.} O fluxo é orientado a eventos, e não um percurso obrigatório por todos os agentes. Matching e confiança interna não atestam qualidade científica.
 \end{descricao}
-\fontecore{mci/blackboard.py}{Blackboard}
+\fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator._on_cfp}
 
 
 
 
-\begin{flowch}[M4 -- Memoria e MetaBus]{fonte: mci/}
+\begin{flowch}[M4 -- Observação e recuperação R886]{resultado pós-gate, origem e próxima consulta}
 \matrix[matrix of nodes,name=m4,row sep=3mm,column sep=4mm,nodes={fn},ampersand replacement=\&]{
- |[fns]|Execucao \& |[fn]|Episodica: o que aconteceu \\
- |[fns]|Reflexao \& |[fn]|Semantica: licao extraida \\
- |[fne]|Proxima tarefa \& |[fn]|MetaBus: contexto carregado \\
+ |[fns]|task.complete: resultado e estado SDD \\
+ |[fn]|reflect\_request e complete \\
+ |[fn]|Episódio: resumo, falha, próxima ação \\
+ |[fde]|Persistência teve êxito? \\
+ |[fne]|Outra tarefa: consulta aos IDs pertinentes \\
 };
-\draw[seta] (m4-1-1)--(m4-1-2);
-\draw[seta] (m4-1-2.south)--(m4-2-2.north);
-\draw[seta] (m4-2-1)--(m4-2-2);
-\draw[seta] (m4-2-2.south)--(m4-3-2.north);
-\draw[seta] (m4-3-1)--(m4-3-2);
+\draw[seta] (m4-1-1)--(m4-2-1);
+\draw[seta] (m4-2-1)--(m4-3-1);
+\draw[seta] (m4-3-1)--(m4-4-1);
+\draw[seta] (m4-4-1)--node[right,font=\tiny]{sim} (m4-5-1);
+\node[fn,right=7mm of m4-4-1,text width=2.5cm,font=\tiny]{não: metacognition.failed};
 \end{flowch}
 
 \begin{descricao}
-\textbf{Como funciona e por quê.} As setas distinguem evento de execução, reflexão, registro episódico, extração de lições e consulta de contexto na próxima tarefa.
-\textbf{Justificativa.} Persistir a reflexão torna examinável o que se aprendeu e de qual execução a lição veio, permitindo contestá-la depois.
+\textbf{Como funciona e por quê.} As setas levam o resultado pós-gate ao
+episódio tipado. A persistência com êxito torna esse registro consultável em
+outra tarefa; sua falha gera degradação. Revisões substituídas ficam fora do
+briefing. A avaliação heurística não promove a confiança por sua própria nota.
+\textbf{Justificativa.} Persistir a observação permite examinar seu conteúdo,
+o resultado de origem e a próxima ação proposta, sem supor melhoria de desempenho.
 \textbf{Limite.} Reflexão e confiança são registros internos; não são probabilidades calibradas nem garantia de que a próxima tarefa terá resultado melhor.
 \end{descricao}
-\fontecore{mci/metabus.py}{MetacognitiveMemory.add_reflection}
+\fontecore{mci/metacognitive_loop.py}{MetacognitiveLoop.complete}
 
 
 
@@ -125,23 +161,29 @@ Todo mapa deste capitulo usa as mesmas formas: retangulo simples e etapa, retang
 
 \begin{flowch}[M5 -- SDD e TDD com gate fechado]{fonte: sdd/spec\_engine.py e trust/}
 \matrix[matrix of nodes,name=m5,row sep=3mm,column sep=4mm,nodes={fn},ampersand replacement=\&]{
- |[fns]|SPEC escrita \& |[fn]|Teste RED que falha \\
- |[fn]|Codigo GREEN \& |[fde]|Gate passou \\
- |[fn]|Refactor \& |[fne]|Entrega aceita \\
+ |[fns]|Spec e teste RED válido \\
+ |[fn]|Código GREEN \\
+ |[fn]|Refatoração \\
+ |[fn]|Teste de entrega e histórico RED \\
+ |[fde]|Verificador aceita a evidência? \\
+ |[fne]|task.complete: sucesso ou falha \\
 };
-\draw[seta] (m5-1-1)--(m5-1-2);
-\draw[seta] (m5-1-2.south)--(m5-2-1.north);
-\draw[seta] (m5-2-1)--(m5-2-2);
-\draw[seta] (m5-2-2.south)--(m5-3-1.north);
-\draw[seta] (m5-3-1)--(m5-3-2);
+\draw[seta] (m5-1-1)--(m5-2-1);
+\draw[seta] (m5-2-1)--(m5-3-1);
+\draw[seta] (m5-3-1)--(m5-4-1);
+\draw[seta] (m5-4-1)--(m5-5-1);
+\draw[seta] (m5-5-1)--(m5-6-1);
 \end{flowch}
 
 \begin{descricao}
-\textbf{Como funciona e por quê.} O caminho RED, GREEN e refatoração representa execução de testes antes e depois da mudança. O gate deve avaliar a evidência vinculada ao contrato, inclusive após refatorar.
+\textbf{Como funciona e por quê.} As setas mantêm a verificação final depois
+da refatoração. Em \cod{report_completion}, o runner executa
+\cod{run_delivery_test} com histórico RED antes de \cod{verify}. Ausência de
+evidência ou reprovação produz falha no evento final; não há retry ilimitado.
 \textbf{Justificativa.} Critérios explícitos permitem que a verificação associe uma execução e um artefato ao requisito correspondente, em vez de confiar em uma declaração de conclusão.
 \textbf{Limite.} Prova, neste esquema, significa evidência do teste vinculado. Não implica demonstração matemática, prova de segurança universal ou validação externa.
 \end{descricao}
-\fontecore{sdd/spec_engine.py}{SpecVerifier.verify}
+\fontecore{marceloclaro/orchestrator.py}{MarceloClaroOrchestrator.report_completion}
 
 
 
@@ -150,7 +192,7 @@ Todo mapa deste capitulo usa as mesmas formas: retangulo simples e etapa, retang
 \matrix[matrix of nodes,name=m6,row sep=3mm,column sep=4mm,nodes={fn},ampersand replacement=\&]{
  |[fn]|Tarefa Q \& |[fn]|Agentes K \\
  |[fn]|Historico V \& |[fde]|Escore com desempate \\
- |[fns]|Escolha \& |[fn]|Fallback se falhar \\
+ |[fns]|Escolha \& |[fn]|Candidato ou bloqueio explícito \\
 };
 \draw[seta] (m6-1-1)--(m6-1-2);
 \draw[seta] (m6-1-2.south)--(m6-2-2.north);
@@ -241,13 +283,13 @@ Todo mapa deste capitulo usa as mesmas formas: retangulo simples e etapa, retang
 
 \begin{flowch}[M10 -- Ativacao E1 a E7]{fonte: mod-13 e mod-14}
 \matrix[matrix of nodes,name=m10,row sep=2.5mm,column sep=2.5mm,nodes={fn},ampersand replacement=\&]{
- |[fns]|E1 Gatilho com registro \\
- |[fn]|E2 Capacidade declarada \\
- |[fn]|E3 Roteamento por escore \\
- |[fn]|E4 Delegacao no Quadro \\
- |[fn]|E5 Execucao com ferramenta \\
- |[fde]|E6 Gate aprovou \\
- |[fne]|E7 Entrega com fonte \\
+ |[fns]|E1 Gatilho e escopo \\
+ |[fn]|E2 Rota identificada \\
+ |[fn]|E3 Capacidades requeridas \\
+ |[fn]|E4 Contrato e política \\
+ |[fn]|E5 Executor e recibo próprio \\
+ |[fde]|E6 Retorno e gate \\
+ |[fne]|E7 Registro pertinente \\
 };
 \draw[seta] (m10-1-1.south)--(m10-2-1.north);
 \draw[seta] (m10-2-1.south)--(m10-3-1.north);
@@ -264,17 +306,81 @@ Todo mapa deste capitulo usa as mesmas formas: retangulo simples e etapa, retang
 \end{descricao}
 \fontecore{livro-core/mod-13-ativacao-agentes.tex}{roteirodidatico}
 
+\section{Contexto de código: escolher o percurso e interpretar seus limites}
+
+Ao conferir o código que produziu o experimento da nota, Ana quer localizar
+uma função; Bruno quer saber quem a chama. Essas perguntas chegam à mesma
+fachada do primário, mas não têm o mesmo backend. O mapa seguinte impede que
+a disponibilidade da busca seja confundida com correção de todas as relações
+de chamada anunciadas pelo provedor.
+
+\begin{flowch}[M11 -- Duas rotas de contexto de código]{operação explícita; bloqueio nativo preservado}
+\matrix[matrix of nodes,name=m11,row sep=4mm,column sep=6mm,nodes={fn},ampersand replacement=\&]{
+ |[fne]|Primário recebe pedido \& |[fn]|Escolher operação \\
+ |[fns]|query: context-link fixado \& |[fns]|python\_graph: core\_python\_ast \\
+ |[fn]|Busca, código, skeleton e ping \& |[fn]|Chamadas, usos e impacto Python \\
+ |[fn]|Índice íntegro e fontes atuais \& |[fn]|Fontes, linhas, hashes e limites \\
+ |[fn]|Três consultas nativas de grafo bloqueadas \& |[fn]|Relações não resolvidas ou timeout explícitos \\
+};
+\draw[seta] (m11-1-1)--(m11-1-2);
+\draw[seta] (m11-1-2.south west)--(m11-2-1.north);
+\draw[seta] (m11-1-2.south)--(m11-2-2.north);
+\draw[seta] (m11-2-1)--(m11-3-1);
+\draw[seta] (m11-2-2)--(m11-3-2);
+\draw[seta] (m11-3-1)--(m11-4-1);
+\draw[seta] (m11-3-2)--(m11-4-2);
+\end{flowch}
+\begin{descricao}
+\textbf{Como funciona e por quê.} As setas representam a escolha explícita da
+operação e os requisitos de cada rota. À esquerda, as consultas permitidas
+usam o provedor fixado e exigem índice íntegro e atual. O aviso inferior
+conserva o bloqueio nativo de chamadas, usos e impacto. À direita,
+\cod{python_graph} usa AST próprio sem iniciar esse provedor nem exigir seu
+índice; as relações retornadas preservam proveniência e limites.
+\textbf{Justificativa.} Manter o backend identificado permite atribuir uma
+contraprova, uma relação ou um timeout à operação que os produziu.
+\textbf{Limite.} O grafo é estático e limitado a Python. A última consulta ao
+corpus corrente registrada nesta edição terminou em \cod{timeout} após o
+limite de 30 segundos; o mapa não transforma esse resultado em grafo completo.
+\end{descricao}
+\fontecore{integrations/code_context.py}{CodeContextProvider.run}
+
+\begin{verbatim}
+.venv/bin/python -m marceloclaro.cli code-context \
+  python_graph --tool get_call_tree --timeout 30 \
+  --arguments \
+  '{"symbol_name":"research/scientific_release.py::verify_scientific_package"}'
+\end{verbatim}
+
+\praticacore
+{Conferir o significado de uma seta de chamada usada para revisar o experimento local.}
+{O checkout identificado e a consulta AST acima; ela não executa o experimento.}
+{Execute a consulta pelo primário. Se houver relações retornadas, escolha uma
+e confronte arquivo, linha, hash e alvo com a fonte; se não houver, registre o estado.}
+{Confira \cod{backend}, \cod{status}, \cod{coverage_complete},
+\cod{unresolved} e limites presentes. Relação estática e chamada executada
+exigem evidências diferentes.}
+{Um \cod{timeout} conserva a falha observada; não autoriza trocar silenciosamente
+de provedor, reduzir o corpus e declarar cobertura total ou executar código da fonte.}
+{Qual observação permitiria confirmar uma chamada em execução? Que parte do
+mapa permanece apenas relação estática quando não existe esse registro?}
+
 
 
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.92\textwidth,height=0.78\textheight,keepaspectratio]{fig-infografico-core.png}
-\caption{Infogr\'afico do Core gerado no NotebookLM em pt-BR a partir da capa oficial: logotipo, paleta com RGB, 8 camadas, ciclo, m\'etricas e planta de 12 passos. Figura ilustrativa: microtextos podem conter trocas de letras do gerador; valem os n\'umeros do texto.}
+\caption{Infográfico histórico do Core produzido no NotebookLM a partir da capa
+oficial, conservado como ilustração do percurso didático. Seus microtextos e
+métricas não são o inventário desta edição; consulte os dados e mapas atuais
+do texto para qualquer afirmação operacional.}
 \end{figure}
 
 \begin{aviso}
-Limite do atlas. Os dez mapas cobrem arququetipos por camada e por processo; fichas individuais do catalogo herdam o mapa da sua camada. Mapa algum substitui abrir o arquivo e rodar o comando.
+Limite do atlas. Os mapas selecionam responsabilidades e percursos. Uma ficha
+individual precisa ser relacionada à sua API e ao seu contrato; pertencer a
+uma camada não demonstra que todas as setas se apliquem àquele perfil.
 \end{aviso}
 
 
@@ -308,3 +414,6 @@ Limite do atlas. Os dez mapas cobrem arququetipos por camada e por processo; fic
 \begin{resultado}
 \textbf{Exercícios.} Escolha uma seta de evento e uma de chamada. Indique como diferenciá-las na fonte. Mostre um caminho de falha que o mapa resume ou não apresenta.
 \end{resultado}
+
+% R901-PONTE-FECHO
+Os mapas técnicos mostram onde procurar evidência. A explicação E1–E7 retomará o mesmo percurso em linguagem cotidiana, preparando as pranchas visuais que ligam analogia e mecanismo.

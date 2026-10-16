@@ -5,15 +5,22 @@
 % ======================================================================
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage[brazil]{babel}
+\usepackage[brazilian]{babel}
 \usepackage{lmodern}
 % Corpo em serifada para leitura longa; titulos em sem-serifa.
 \renewcommand{\familydefault}{\rmdefault}
 \usepackage{microtype}
+\microtypesetup{protrusion=false}
 \usepackage{textcomp}
 \usepackage[table]{xcolor}
-\usepackage[a4paper,inner=2.65cm,outer=2.25cm,bottom=1.8cm,top=2.7cm,headheight=22pt,headsep=0.2cm,footskip=14pt]{geometry}
+\usepackage[a4paper,inner=2.65cm,outer=2.25cm,bottom=2.25cm,top=2.7cm,headheight=22pt,headsep=0.3cm,footskip=20pt]{geometry}
+\linespread{1.055}
+\setlength{\parskip}{3pt plus 1pt}
+\setlength{\parindent}{1.1em}
+\widowpenalty=8000
+\clubpenalty=8000
 \usepackage{booktabs,colortbl,tabularx,array,ragged2e,longtable,multirow}
+\usepackage{amsmath}
 \usepackage{enumitem}
 \usepackage{chngcntr}
 \usepackage{titlesec}
@@ -95,19 +102,19 @@
   {\normalfont\sffamily\bfseries\small\color{steel}}
   {\thesubsection.}{0.6em}{}
 
-\renewcommand\chaptername{Capitulo}
-\newcommand\chapterlabel{Capitulo}
-\newcommand\partcontent{Manual didatico do OpenCode Ecosystem Core: o que e, como funciona, como reproduzir}
+\renewcommand\chaptername{Capítulo}
+\newcommand\chapterlabel{Capítulo}
+\newcommand\partcontent{Do problema ao mecanismo; do mecanismo à prática e à reflexão.}
 
 % ----------------------------------------------------------------------
 %  CABECALHO E RODAPE — finos, claros, imprimiveis (sem faixas pesadas)
 % ----------------------------------------------------------------------
-\renewcommand{\chaptermark}[1]{\markboth{Capitulo \thechapter. #1}{}}
+\renewcommand{\chaptermark}[1]{\markboth{Capítulo \thechapter. #1}{}}
 \renewcommand{\sectionmark}[1]{\markright{#1}}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhfoffset[L]{2.25cm}
-\fancyhfoffset[R]{1.85cm}
+\fancyhfoffset[L]{0pt}
+\fancyhfoffset[R]{0pt}
 \fancyhead[L]{\raisebox{6pt}[0pt][0pt]{\parbox[b]{0.92\headwidth}{\raggedright\sffamily\bfseries\footnotesize\color{navy}\MakeUppercase{\rightmark}}}}
 \fancyhead[R]{}
 \fancyfoot[L]{\raisebox{-6pt}[0pt][0pt]{\parbox[b]{0.88\headwidth}{\raggedright\sffamily\footnotesize\color{textmuted}\leftmark}}}
@@ -155,14 +162,20 @@
 \newcommand{\citref}[6]{%
   \begingroup
   \def\@mpfn{footnote}\def\thempfn{\thefootnote}%
-  (#6)\footnote{\footnotesize\color{textmain}\textbf{Referencia bibliografica:} #1.%
+  (#6)\footnote{\footnotesize\color{textmain}\textbf{Referência bibliográfica:} #1.%
     \par\smallskip\textbf{DOI:} \href{https://doi.org/#2}{\texttt{#2}}.%
-    \par\smallskip\textbf{Relevancia a este contexto:} #3.%
-    \par\smallskip\textbf{Citacao direta (ABNT NBR 10520:2023):} ``{\itshape #4}''.%
-    \par\smallskip\textbf{Traducao livre (pt-BR):} ``#5''.}%
+    \par\smallskip\textbf{Relevância a este contexto:} #3.%
+    \par\smallskip\textbf{Citação direta (ABNT NBR 10520:2023):} ``{\itshape #4}''.%
+    \par\smallskip\textbf{Tradução livre (pt-BR):} ``#5''.}%
   \endgroup
 }
 \makeatother
+
+\newcommand{\citparafrase}[4]{%
+  (#4)\footnote{\textbf{Referência:} #1.\par
+  \textbf{DOI:} \href{https://doi.org/#2}{\path{#2}}.\par
+  \textbf{Uso e limite:} #3. Paráfrase; não se apresenta transcrição literal.}%
+}
 
 \counterwithout{footnote}{chapter}
 \renewcommand{\thefootnote}{\arabic{footnote}}
@@ -177,7 +190,7 @@
   {\color{gold}\hrule width .4\columnwidth height .6pt}%
   \kern2.6pt
 }
-\interfootnotelinepenalty=10000
+\interfootnotelinepenalty=5000
 \makeatother
 
 % ----------------------------------------------------------------------
@@ -187,19 +200,19 @@
   left=2.5mm,right=2.5mm,top=1.6mm,bottom=2mm,
   colback=white,colframe=steel,colbacktitle=steel,coltitle=white,
   borderline west={3pt}{0pt}{steel},
-  fonttitle=\bfseries\small\sffamily,title={Descricao — o que e}}
+  fonttitle=\bfseries\small\sffamily,title={Descrição — o que é}}
 
 \newtcolorbox{funcao}{enhanced,breakable,boxrule=0.6pt,arc=1.4mm,
   left=2.5mm,right=2.5mm,top=1.6mm,bottom=2mm,
   colback=blueBg,colframe=steel,colbacktitle=navy,coltitle=white,
   borderline west={3pt}{0pt}{navy},
-  fonttitle=\bfseries\small\sffamily,title={Funcao — para que serve}}
+  fonttitle=\bfseries\small\sffamily,title={Função — para que serve}}
 
 \newtcolorbox{definicao}{enhanced,breakable,boxrule=0.6pt,arc=1.4mm,
   left=2.5mm,right=2.5mm,top=1.6mm,bottom=2mm,
   colback=white,colframe=navy,colbacktitle=navy,coltitle=white,
   borderline west={3pt}{0pt}{navy},
-  fonttitle=\bfseries\small\sffamily,title={Definicao}}
+  fonttitle=\bfseries\small\sffamily,title={Definição}}
 
 \newtcolorbox{conceito}{enhanced,breakable,boxrule=0.6pt,arc=1.4mm,
   left=2.5mm,right=2.5mm,top=1.6mm,bottom=2mm,
@@ -211,43 +224,43 @@
   left=2.5mm,right=2.5mm,top=1.6mm,bottom=2mm,
   colback=white,colframe=teal,colbacktitle=teal,coltitle=white,
   borderline west={3pt}{0pt}{teal},
-  fonttitle=\bfseries\small\sffamily,title={Metodo — passo a passo}}
+  fonttitle=\bfseries\small\sffamily,title={Método — passo a passo}}
 
 \newtcolorbox{resultado}{enhanced,breakable,boxrule=0.6pt,arc=1.4mm,
   left=2.5mm,right=2.5mm,top=1.6mm,bottom=2mm,
   colback=greenBg,colframe=green,colbacktitle=green,coltitle=white,
   borderline west={3pt}{0pt}{green},
-  fonttitle=\bfseries\small\sffamily,title={Resultado e Calculo}}
+  fonttitle=\bfseries\small\sffamily,title={Resultado e cálculo}}
 
 \newtcolorbox{limite}{enhanced,breakable,boxrule=0.6pt,arc=1.4mm,
   left=2.5mm,right=2.5mm,top=1.6mm,bottom=2mm,
   colback=amberBg,colframe=amber,colbacktitle=amber,coltitle=white,
   borderline west={3pt}{0pt}{amber},
-  fonttitle=\bfseries\small\sffamily,title={Limite — o que nao concluir}}
+  fonttitle=\bfseries\small\sffamily,title={Limite — o que não concluir}}
 
 \newtcolorbox{arquitetura}{enhanced,breakable,boxrule=0.6pt,arc=1.4mm,
   left=2.5mm,right=2.5mm,top=1.6mm,bottom=2mm,
   colback=white,colframe=slate,colbacktitle=slate,coltitle=white,
   borderline west={3pt}{0pt}{slate},
-  fonttitle=\bfseries\small\sffamily,title={Arquitetura e Elementos Tecnicos}}
+  fonttitle=\bfseries\small\sffamily,title={Arquitetura e elementos técnicos}}
 
 \newtcolorbox{niveis}{enhanced,breakable,boxrule=0.6pt,arc=1.4mm,
   left=2.5mm,right=2.5mm,top=1.6mm,bottom=2mm,
   colback=blueBg,colframe=navy,colbacktitle=white,coltitle=navy,
   borderline west={3pt}{0pt}{steel},
-  fonttitle=\bfseries\small\sffamily,title={Leitura em 3 niveis — Intuicao, Implementacao, Formalizacao}}
+  fonttitle=\bfseries\small\sffamily,title={Leitura em três níveis — intuição, implementação, formalização}}
 
 \newcommand{\roteirodidatico}[5]{%
   \begin{tcolorbox}[enhanced,breakable,boxrule=0.7pt,arc=1.6mm,
     left=2.5mm,right=2.5mm,top=1.8mm,bottom=2.2mm,
     colback=blueBg,colframe=steel,colbacktitle=navy,coltitle=white,
     borderline west={4pt}{0pt}{steel},
-    fonttitle=\bfseries\small\sffamily,title={Roteiro de aprendizagem: do primeiro contato a analise avancada}]
+    fonttitle=\bfseries\small\sffamily,title={Roteiro de aprendizagem: do primeiro contato à análise avançada}]
     \color{textmain}\textbf{Ponto de partida.} #1\par\smallskip
-    \textbf{Vocabulario essencial.} #2\par\smallskip
-    \textbf{Percurso tecnico.} #3\par\smallskip
-    \textbf{Leitura avancada.} #4\par\smallskip
-    \textbf{Questao de verificacao.} #5
+    \textbf{Vocabulário essencial.} #2\par\smallskip
+    \textbf{Percurso técnico.} #3\par\smallskip
+    \textbf{Leitura avançada.} #4\par\smallskip
+    \textbf{Questão de verificação.} #5
   \end{tcolorbox}\par\smallskip
 }
 \newcommand{\casoguiado}[2]{%
@@ -258,6 +271,21 @@
     fonttitle=\bfseries\small\sffamily,title={Exemplo guiado — #1}]
     \color{textmain}#2
   \end{tcolorbox}\par\smallskip
+}
+
+% R901: prática ligada ao caso condutor, com resultado e reflexão observáveis.
+\newcommand{\praticacore}[6]{%
+  \begin{tcolorbox}[enhanced,breakable,boxrule=0.6pt,arc=1.6mm,
+    colback=white,colframe=teal,colbacktitle=white,coltitle=teal,
+    borderline west={3pt}{0pt}{teal},left=3mm,right=3mm,top=2mm,bottom=2mm,
+    fonttitle=\bfseries\normalsize\sffamily,title={Da compreensão à práxis}]
+    \textbf{Objetivo.} #1\par\smallskip
+    \textbf{Entrada.} #2\par\smallskip
+    \textbf{Ação.} #3\par\smallskip
+    \textbf{Conferência.} #4\par\smallskip
+    \textbf{Se falhar.} #5\par\smallskip
+    \textbf{Reflexão.} #6
+  \end{tcolorbox}\par\medskip
 }
 
 \newtcolorbox{aviso}{enhanced,breakable,boxrule=0.7pt,arc=1.4mm,
@@ -283,19 +311,19 @@
   left=2.5mm,right=2.5mm,top=1.6mm,bottom=2mm,
   colback=blueBg,colframe=steel,colbacktitle=steel,coltitle=white,
   borderline west={4pt}{0pt}{steel},
-  fonttitle=\bfseries\small\sffamily,title={Para leigos — em 30 segundos}}
+  fonttitle=\bfseries\small\sffamily,title={Primeira leitura — a ideia central}}
 
 \newtcolorbox{paratecnico}{enhanced,breakable,boxrule=0.6pt,arc=1.4mm,
   left=2.5mm,right=2.5mm,top=1.6mm,bottom=2mm,
   colback=white,colframe=slate,colbacktitle=slate,coltitle=white,
   borderline west={4pt}{0pt}{slate},
-  fonttitle=\bfseries\small\sffamily,title={Para tecnicos — onde conferir}}
+  fonttitle=\bfseries\small\sffamily,title={Leitura técnica — onde conferir}}
 
 \newtcolorbox{checkpoint}{enhanced,breakable,boxrule=0.7pt,arc=1.4mm,
   left=2.5mm,right=2.5mm,top=1.6mm,bottom=2mm,
   colback=greenBg,colframe=green,colbacktitle=green,coltitle=white,
   borderline west={4pt}{0pt}{green},
-  fonttitle=\bfseries\small\sffamily,title={Checkpoint — posso avancar?}}
+  fonttitle=\bfseries\small\sffamily,title={Conferência — posso avançar?}}
 
 \tcbset{coltext=textmain,fontupper=\color{textmain}}
 
@@ -304,15 +332,15 @@
 % ----------------------------------------------------------------------
 \tikzset{
   fn/.style={draw=slate,rounded corners=2pt,fill=white,align=center,text=textmain,
-             inner sep=3pt,minimum height=6mm,font=\scriptsize,text width=3.3cm},
+             inner sep=4pt,minimum height=7mm,font=\footnotesize,text width=3.3cm},
   fns/.style={draw=steel,rounded corners=2pt,fill=blueBg,align=center,text=navy,
-             inner sep=3pt,minimum height=6mm,font=\scriptsize\bfseries,
+             inner sep=4pt,minimum height=7mm,font=\footnotesize\bfseries,
              text width=3.3cm},
   fne/.style={draw=navy,rounded corners=9pt,fill=navy,align=center,
-             inner sep=3pt,minimum height=6mm,font=\scriptsize\bfseries,
+             inner sep=4pt,minimum height=7mm,font=\footnotesize\bfseries,
              text=white,text width=3.3cm},
   fde/.style={draw=amber,fill=amberBg,align=center,text=textmain,
-             inner sep=3pt,minimum height=6mm,font=\scriptsize,
+             inner sep=4pt,minimum height=7mm,font=\footnotesize,
              diamond,aspect=2.2,text width=3.3cm},
   seta/.style={-Stealth,draw=slate,thick},
 }
@@ -321,8 +349,8 @@
 \newenvironment{flowch}[2][Fluxograma]{%
   \par\smallskip
   \noindent\begin{minipage}{\linewidth}%
-  {\small\sffamily\bfseries\color{navy}#1}\hfill
-  {\scriptsize\color{textmuted}#2}\par\smallskip
+  {\small\sffamily\bfseries\color{navy}#1}\par\smallskip
+  {\footnotesize\color{textmuted}#2}\par\smallskip
   \begin{center}\begin{tikzpicture}[font=\scriptsize]
 }{%
   \end{tikzpicture}\end{center}\end{minipage}\par\smallskip}
@@ -337,12 +365,12 @@
 % ----------------------------------------------------------------------
 %  ROTULOS DE CODIGO / CAMINHOS
 % ----------------------------------------------------------------------
-\usepackage{url}
-\newcommand{\pth}[1]{{\urlstyle{tt}\small\path{#1}}}
-\newcommand{\fontecore}[2]{\par\smallskip\textbf{Fonte primaria local:}
+\usepackage{xurl}
+\newcommand{\pth}[1]{{\urlstyle{tt}\path{#1}}}
+\newcommand{\fontecore}[2]{\par\smallskip\textbf{Fonte primária local:}
   \pth{#1}.\par\nobreak
-  Identificador: \pth{#2}. Versao e hash no inventario desta edicao.\par}
-\newcommand{\cod}[1]{{\urlstyle{tt}\small\path{#1}}}
+  Identificador: \pth{#2}. Versão e hash no inventário desta edição.\par}
+\newcommand{\cod}[1]{{\urlstyle{tt}\path{#1}}}
 \emergencystretch=3em
 \setlength{\hbadness}{4000}
 

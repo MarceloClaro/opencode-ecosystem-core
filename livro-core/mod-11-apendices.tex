@@ -3,7 +3,11 @@
 %  Regra R110: DOI citado deve ser ativo e verificado externamente.
 % ======================================================================
 \thispagestyle{fancy}
-\chapter{Referências Auditadas e Metodologia de Citação}
+\chapter{Referências, Fontes e Critérios de Citação}
+
+% R901-PONTE-ABERTURA
+O livro termina voltando às suas fontes. Esta biblioteca não é um selo de autoridade: fornece elementos para que o leitor confronte conceitos, interpretações e limites que acompanharam o caso condutor.
+
 
 \roteirodidatico
 {Uma citação permite ao leitor localizar a fonte usada em uma afirmação. Para servir a esse propósito, a referência precisa estar completa e a fonte precisa sustentar o trecho associado.}
@@ -16,14 +20,24 @@
 {Diante de ``(SOBRENOME, ano, p. 12)'', localize a referência completa, abra a edição citada e confira a página. Se for uma paráfrase, compare a ideia e preserve suas qualificações; se for citação direta, confira cada palavra e o localizador. Um DOI pode levar ao artigo, mas não necessariamente à página citada ou ao texto integral.}
 
 \begin{resultado}
-Toda citação com DOI deste manual segue a regra \textbf{R110}/\textbf{anti-overclaim}
-(\emph{AGENTS.md}, item 4): nenhum DOI é citado ``de memória''. Antes de entrar
-no texto, a referência é \textbf{verificada por consulta externa} (webfetch do
-resumo/página do periódico ou do repositório da editora), o \textbf{trecho
-original} é copiado literalmente do documento e sua \textbf{tradução livre}
-para o português é rotulada como tal. Um DOI que não resolve em
-\pth{https://doi.org} ou cujo trecho não confere com a fonte \textbf{não entra}
-no livro. Verificação corrente: \textbf{29 de setembro de 2026}.
+O livro distingue três conferências bibliográficas: identidade do registro,
+acesso ao conteúdo e pertinência da passagem citada. Um DOI resolvível ajuda na
+primeira; não assegura as outras duas. Datas de consulta das edições anteriores
+permanecem históricas e não são renovadas por uma nova compilação.
+
+Na revisão R901, fontes primárias e metadados foram novamente consultados para
+os pontos alterados. Houve acessos indisponíveis ou bloqueados, que não significam
+DOI inexistente. Não se declara revalidação integral de todas as citações literais.
+Passagens atribuídas a Flavell sem suporte primário recuperado foram convertidas
+em paráfrases, sem conservar uma transcrição incerta. O manifesto da edição
+registra o escopo e os limites dessa conferência.
+
+A política editorial exige localizar o documento, verificar autor, edição e
+localizador e confrontar a interpretação com o texto. Se não houver suporte,
+retire a afirmação, restrinja seu alcance ou conserve a questão em aberto. Essa
+regra também vale para fontes locais: código demonstra implementação; um recibo
+identificado demonstra uma observação no seu escopo; nenhum deles certifica
+qualidade científica geral.
 
 \textbf{Referencial de normalização.} A norma de referências adotada é a
 \textbf{ABNT NBR 6023:2025} (Informação e documentação --- Referências:
@@ -43,11 +57,11 @@ e, quando há citação direta, o \textbf{trecho textual} e sua página.
 % BEGIN-R814-INVENTARIO
 \begin{resultado}
 \textbf{Inventário de fontes desta edição.} A configuração declara
-\textbf{255} agentes, \textbf{16} servidores MCP e
-\textbf{30} comandos. O repositório contém 514 specs,
-das quais 424 são da série R, e 393 arquivos
-\pth{test_r*.py}. A biblioteca contém 14 blocos de referência;
-as fontes dos módulos contêm 88 chamadas de \cod{\string\citref}
+\textbf{312} agentes, \textbf{16} servidores MCP e
+\textbf{33} comandos. O repositório contém 538 specs,
+das quais 448 são da série R, e 423 arquivos
+\pth{test_r*.py}. A biblioteca contém 18 blocos de referência;
+as fontes dos módulos contêm 76 chamadas de \cod{\string\citref}
 e 13 fichas condensadas de categoria.
 \textbf{Como reproduzir.} Execute \pth{python3 livro-core/gen_inventario.py};
 o arquivo \pth{livro-core/inventario-core.json} conserva os hashes SHA-256 das
@@ -65,7 +79,7 @@ cognitive-developmental inquiry. \emph{American Psychologist}, v.~34, n.~10,
 p.~906-911, 1979. DOI: \href{https://doi.org/10.1037/0003-066X.34.10.906}{10.1037/0003-066X.34.10.906}. Acesso em: 29 set. 2026.
 \textbf{Uso no manual:} Módulo 3 (definição de conhecimento metacognitivo
 persistido no MetaBus). \textbf{Status:} DOI ativo; resumo conferido na fonte
-original (Stanford/Sage, out.~1979).
+original na revisão histórica. Nesta revisão, o acesso primário não foi recuperado; as passagens usadas como definição foram tratadas como paráfrases, não transcrições literais.
 \end{referencia}
 
 \begin{referencia}
@@ -74,14 +88,14 @@ and the evolution of blackboard architectures. \emph{AI Magazine}, v.~7, n.~2,
 1986. DOI: \href{https://doi.org/10.1609/aimag.v7i2.537}{10.1609/aimag.v7i2.537}. Acesso em: 29 set. 2026.
 \textbf{Uso no manual:} Módulo 3 (proveniência do padrão blackboard/A2A e do
 vocabulário quadro--fonte de conhecimento). \textbf{Status:} DOI ativo; resumo
-conferido no AAIAI Magazine; relato do HEARSAY-II (1971--1976) confirmado.
+conferido no AI Magazine/AAAI; relato do HEARSAY-II (1971--1976) confirmado.
 \end{referencia}
 
 \begin{referencia}
 \textbf{IOANNIDIS, J. P. A.} Why most published research findings are false.
 \emph{PLoS Medicine}, v.~2, n.~8, e124, 2005. DOI:
 \href{https://doi.org/10.1371/journal.pmed.0020124}{10.1371/journal.pmed.0020124}. Acesso em: 29 set. 2026.
-\textbf{Uso no manual:} Módulos 3 e 6 (fundamento empírico do gate
+\textbf{Uso no manual:} Módulos 3 e 6 (modelagem estatística condicionada usada para discutir o gate
 \cod{no_verified_without_external} e da regra anti-overclaim).
 \textbf{Status:} DOI ativo; versão integral acessível em acesso aberto
 (PubMed Central PMC1182327); simulações e PPV conferidos no texto integral.
@@ -225,9 +239,10 @@ publicar como artigo de periódico.
         acesso) e a citação conforme a \textbf{NBR 10520:2023} no
         \textbf{sistema numérico}: a chamada remete à nota de rodapé, que traz
         a referência completa e, em citação direta, o trecho e a página.
-  \item \textbf{Atesto} — o DOI permanece na biblioteca apenas se ativo no
-        momento da verificação; DOIs que quebram entre edições são removidos
-        na próxima auditoria do manual.
+  \item \textbf{Estado de acesso} — registre a data e o resultado da consulta.
+        Falha de resolução exige triagem de metadados, nova tentativa e eventual
+        correção. Indisponibilidade temporária não demonstra DOI inválido; a
+        identificação bibliográfica conserva seu histórico e sua limitação.
 \end{enumerate}
 \end{metodo}
 
@@ -241,11 +256,11 @@ metacognitiva.
 \end{aviso}
 
 \begin{resultado}
-\textbf{Para citar este manual:} indicar a data de acesso a cada DOI
-(29/09/2026) e reproduzir o trecho traduzido com a marcação ``tradução livre
-do trecho original''. \textbf{Exercício:} escolha uma das catorze referências,
-reabra o DOI e confira o trecho citado na seção correspondente — a auditoria é
-o uso do livro.
+\textbf{Para citar ou conferir uma fonte:} registre a data em que você
+realmente a consultou. Preserve a identificação de tradução livre nas
+transcrições e de paráfrase nas sínteses. \textbf{Exercício:} escolha uma das
+\CoreReferenceCount{} referências, localize o original e confira o uso na seção
+correspondente. As datas históricas desta edição não substituem sua consulta.
 \end{resultado}
 
 % ============================================================
@@ -266,7 +281,7 @@ FUNÇÃO. manter apenas fontes verificadas, com recorte conferido, tradução fi
 \end{processo}
 
 \begin{resultado}
-CÁLCULO. taxa de ativação = DOIs ativos / DOIs da biblioteca; DOIs quebrados são removidos na próxima auditoria.
+CÁLCULO. taxa de ativação = DOIs ativos / DOIs da biblioteca; DOIs indisponíveis são encaminhados para triagem de metadados, nova tentativa e eventual correção; indisponibilidade temporária não demonstra identificador inválido na próxima auditoria.
 \end{resultado}
 
 \begin{descricao}
@@ -281,6 +296,50 @@ localização da fonte (R110), não o mérito da afirmação.
 \noindent\textit{Interpretação:} Uma referência verificável registra mais do que um endereço: identifica a fonte, o recorte efetivamente usado e a função que ela cumpre no argumento. No conjunto de referências do manual, pode-se contar registros com autor, ano, localizador e DOI e compará-los ao total de citações. Essa contagem mede cobertura dos campos editoriais; a leitura do trecho citado continua necessária para avaliar se a interpretação corresponde à fonte \citref{PAGE, M. J. et al. PRISMA 2020 explanation and elaboration: updated guidance and exemplars for reporting systematic reviews. \emph{BMJ}, v.~372, n160, 2021}{10.1136/bmj.n160}{p.~n160 (resumo, p.~n160). é o padrão de transparência da própria biblioteca: assim como revisões sistemáticas exigem relato completo, a biblioteca do manual exige que cada citação declare justificativa, recorte, tradução e página.}{reports of systematic reviews should be transparent and complete}{os relatos de revisões sistemáticas devem ser transparentes e completos.}{PAGE et al., 2021, p.~n160}% ----------------------------------------------------------------------
 %  N-11 — Leitura guiada do Módulo 11 (adicionada no ciclo R619)
 % ----------------------------------------------------------------------
+
+\begin{referencia}
+\textbf{SWELLER, J.} Cognitive load during problem solving: effects on learning.
+\emph{Cognitive Science}, v.~12, n.~2, p.~257--285, 1988.
+DOI: \href{https://doi.org/10.1016/0364-0213(88)90023-7}{10.1016/0364-0213(88)90023-7}.
+\textbf{Uso:} exemplos trabalhados e progressão da explicação.
+\textbf{Conferência R901:} título, DOI, páginas e resumo na página da editora,
+15 out. 2026. Essa fonte inspira o projeto pedagógico; não avalia a eficácia deste livro.
+\end{referencia}
+
+\begin{referencia}
+\textbf{FUCCI, D.; ERDOGMUS, H.; TURHAN, B.; OIVO, M.; JURISTO, N.}
+A dissection of the test-driven development process: does it really matter to
+test-first or to test-last? \emph{IEEE Transactions on Software Engineering},
+v.~43, n.~7, p.~597--614, 2017.
+DOI: \href{https://doi.org/10.1109/TSE.2016.2616877}{10.1109/TSE.2016.2616877}.
+\textbf{Uso:} granularidade e regularidade em ciclos de desenvolvimento.
+\textbf{Conferência R901:} metadados depositados no Crossref e resumo do preprint
+arXiv:1611.05994, 15 out. 2026. As associações observadas nesse estudo não demonstram
+que a mesma intervenção produza o mesmo efeito no Core.
+\end{referencia}
+
+\begin{referencia}
+\textbf{RAFIQUE, Y.; MISIC, V. B.} The effects of test-driven development on
+external quality and productivity: a meta-analysis. \emph{IEEE Transactions on
+Software Engineering}, v.~39, n.~6, p.~835--856, 2013.
+DOI: \href{https://doi.org/10.1109/TSE.2012.28}{10.1109/TSE.2012.28}.
+\textbf{Uso:} discussão dos limites de generalização de resultados sobre TDD.
+\textbf{Conferência R901:} metadados de título, autores, periódico e páginas
+no Crossref, 15 out. 2026. O portal IEEE exigiu verificação de acesso; essa
+consulta não renovou a conferência de todos os trechos do texto integral.
+\end{referencia}
+
+\begin{referencia}
+\textbf{VASWANI, A. et al.} Attention is all you need. In: \emph{Advances in Neural
+Information Processing Systems}, v.~30, 2017. Preprint:
+\href{https://doi.org/10.48550/arXiv.1706.03762}{10.48550/arXiv.1706.03762}.
+\textbf{Uso:} mecanismo de ponderação por atenção e distinção entre arquitetura
+neural treinada e roteador inspirado nesse conceito.
+\textbf{Conferência R901:} registro arXiv e página do evento NeurIPS, 15 out. 2026.
+O identificador arXiv é do preprint; versões podem diferir do artigo do evento.
+Nenhum resultado de tradução do artigo é atribuído ao Core.
+\end{referencia}
+
 \section[Leitura guiada]{Leitura guiada — Módulo 11: citar é tornar a afirmação auditável}
 \elemento{Referências: localizar, confrontar e interpretar}{\metainfo{ID}{N-11} \hfill \metainfo{Revisão}{R814}}
 \begin{descricao}
@@ -342,3 +401,40 @@ uma formulação mais limitada, preservando a conclusão que a fonte permite.
 \end{resultado}
 
 \noindent\textit{Critério de resposta:} Ao revisar uma afirmação metodológica, verifique se outra pessoa conseguiria refazer a operação com a descrição disponível: quais entradas, versões e parâmetros foram usados, qual procedimento foi executado e qual saída foi observada. Se algum campo não puder ser preenchido sem adivinhação, a alegação ainda não está suficientemente especificada para repetição independente. O exercício pede que a lacuna seja identificada, não que evidência ausente seja substituída por autoridade bibliográfica \citref{PENG, R. D. Reproducible research in computational science. \emph{Science}, v.~334, n.~6060, p.~1226-1227, 2011}{10.1126/science.1213847}{p.~1226-1226 (editorial). ancora o argumento de que o padrão de auditoria de uma afirmação é a reprodutibilidade, não a autoridade da fonte: a reexecução oferece um rastro que complementa a leitura crítica das fontes; não dispensa referências pertinentes nem validação independente}{Reproducibility has the potential to serve as a minimum standard for judging scientific claims when full independent replication of a study is not possible}{A reprodutibilidade tem o potencial de servir como padrão mínimo para julgar alegações científicas quando a replicação independente completa de um estudo não é possível.}{PENG, 2011, p.~1226}
+
+\clearpage
+\section{Apêndice Didático: Taxa de ativação de DOIs}
+
+\elemento{Taxa de ativação de DOIs}{\metainfo{ID}{DID-DOI} \hfill \metainfo{Fonte}{docs/guias-didaticos/formulas-livro-core-nussenzveig.md, seção 8}}
+
+\begin{descricao}
+\textbf{O problema concreto.} A biblioteca do manual contém referências com DOI. Qual é a fração de DOIs ativos (resolvíveis) em relação ao total de DOIs cadastrados?
+\end{descricao}
+
+\begin{definicao}
+Nas proporções deste aprofundamento, o total do universo deve ser positivo. Se não houver itens no escopo, registre a medida como não aplicável; não calcule $0/0$.
+
+\textbf{Símbolos.}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{>{\hsize=.55\hsize\linewidth=\hsize}Y>{\hsize=1.45\hsize\linewidth=\hsize}Y}
+Símbolo & Significado \\
+\midrule
+$D_t$ & Número total de DOIs na biblioteca \\
+$D_a$ & Número de DOIs ativos (resolvíveis) \\
+\end{tabularx}
+\end{center}
+\end{definicao}
+
+\begin{metodo}
+\textbf{Dedução.}
+
+\[
+\boxed{\text{taxa de ativação} = \frac{D_a}{D_t}}
+\]
+
+Justificativa: proporção elementar. DOIs indisponíveis são encaminhados para triagem de metadados, nova tentativa e eventual correção; indisponibilidade temporária não demonstra identificador inválido na próxima auditoria, mas isso é um procedimento operacional, não altera a definição da fração.
+\end{metodo}
+
+% R901-PONTE-FECHO
+Ao fechar o livro, o leitor não precisa levar uma lista de promessas, mas um modo de perguntar e conferir. Retome uma fonte, refaça uma operação delimitada e registre o que sua observação permite — e o que ainda não permite — concluir.

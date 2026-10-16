@@ -3,7 +3,7 @@
 %  Compilação única: pdflatex main.tex  (ou: latexmk -pdf main.tex)
 %  Módulos LaTeX: mod-01 ... mod-11 + apendices
 % ======================================================================
-\documentclass[10pt,a4paper,oneside,openany]{book}
+\documentclass[11pt,a4paper,oneside,openany]{book}
 
 \input{macros}
 \input{inventario-core}
@@ -24,8 +24,8 @@
 \frontmatter
 \input{mod-00-capa}
 \input{mod-00a-enredo-prefacio}
-\input{mod-00b-jornada-leitor}
 \input{mod-00c-projeto-pedagogico}
+\input{mod-00b-jornada-leitor}
 \input{mod-18-nivel0-universal}
 \input{mod-01-fundacoes}
 \input{mod-01b-historia}
@@ -64,15 +64,8 @@
 \part{Infraestrutura, Segurança e Limitações}
 \input{mod-09-infra}
 
-\part{Catálogo Completo — Agentes e Subagentes (gerado)}
-\input{mod-10-catalogo}
-
-\part{Fichas Núcleo Expandidas (curadoria com citações)}
-\input{mod-12-fichas-nucleo}
-
 \part{Ativação de Agentes e Subagentes}
 \input{mod-13-ativacao-agentes}
-\input{mod-14-lote-categorias}
 
 \part{Atlas Visual — Mapas por Elemento e Arquitetura}
 \input{mod-16-mapas-fluxogramas}
@@ -80,22 +73,23 @@
 \input{mod-23-atlas-infograficos}
 \input{mod-24-kit-mindmap-slides}
 
-\part{Podcast Para Leigos}
-\input{mod-19-podcast}
-\input{mod-20-podcast-modulos}
-
-\part{Mapa das Teorias — O Que Cada Artigo Justifica}
+\part{Da Explicação à Reprodução}
 \input{mod-21-mapa-teorias}
-
-\part{Reproducao no Windows com WSL — Do Clique ao PDF}
 \input{mod-22-reproducao-wsl-leigo}
-
-\part{Epílogo Operacional — Reprodução Guiada}
 \input{mod-15-epilogo-reproducao}
 
 % =========================== BACK MATTER ==============================
 \appendix
-\part{Apêndices e Índices}
+\part{Consulta — Catálogo, Fichas e Categorias}
+\input{mod-10-catalogo}
+\input{mod-12-fichas-nucleo}
+\input{mod-14-lote-categorias}
+
+\part{Material Complementar de Estudo}
+\input{mod-19-podcast}
+\input{mod-20-podcast-modulos}
+
+\part{Referências e Critérios de Citação}
 \input{mod-11-apendices}
 
 \end{document}

@@ -244,6 +244,39 @@ PT_TITLES = {
     "auxjuris_document_summarizer": "Especialista em síntese de documentos jurídicos",
 }
 
+PT_TITLES.update({
+    'ecosystem-review': 'Revisão do ecossistema', 'rea-runtime': 'Execução local do REA',
+    'rea-adapter': 'Adaptação do REA', 'runtime-regression': 'Regressão do runtime',
+    'command-regression': 'Regressão de comandos', 'book-release': 'Preparação e verificação do livro',
+    'github-gap-research': 'Pesquisa de lacunas no GitHub', 'blind-review-scanner': 'Revisão cega do scanner',
+    'blind-review-ledger': 'Revisão cega do registro', 'regression-remaining': 'Regressões pendentes',
+    'red-history-final-audit': 'Auditoria final do histórico RED', 'local-rea-site': 'Site local do REA',
+    'readiness-audit': 'Auditoria de prontidão', 'commit-scope-audit': 'Auditoria do escopo do commit',
+    'architecture-flows': 'Fluxos de arquitetura', 'architecture-inventory': 'Inventário de arquitetura',
+    'architecture-source-audit': 'Auditoria da arquitetura contra as fontes',
+    'readme-contract-audit': 'Auditoria dos contratos do README', 'readme-usage-audit': 'Auditoria do uso no README',
+    'readme-all-flows': 'Fluxogramas completos no README', 'r881-final-audit': 'Auditoria final R881',
+    'r886-review': 'Revisão R886', 'metacognition-audit': 'Auditoria de metacognição',
+    'evaluate-repositories': 'Avaliação de repositórios', 'codesight-source': 'Análise das fontes do Codesight',
+    'repos-rea-analysis': 'Análise de repositórios com REA', 'repos-science-analysis': 'Análise de repositórios científicos',
+    'rea-profile-audit': 'Auditoria do perfil REA', 'scientific-review': 'Revisão científica',
+    'scientific-profile': 'Perfil científico de verificação', 'whoosh-persistence': 'Persistência do índice Whoosh',
+    'r893-final-review': 'Revisão final R893', 'code-context-backend': 'Backend de contexto de código',
+    'mermaid-integral': 'Mapa Mermaid integral', 'mermaid-review': 'Revisão dos mapas Mermaid',
+})
+for _plugin_id, _product in {
+    'superpowers': 'Superpowers', 'scigrant': 'SciGrant', 'wolfram': 'Wolfram',
+    'anthropic-skills': 'Anthropic Skills', 'cowork-plugin-management': 'gestão de plugins Cowork',
+    'bio-research': 'pesquisa biológica', 'plugin-creator': 'criação de plugins', 'data': 'análise de dados',
+    'design': 'design', 'visualize': 'visualização', 'human-resources': 'recursos humanos',
+    'work-pets': 'Work Pets', 'enterprise-search': 'busca integrada',
+    'life-sciences-literature': 'literatura em ciências da vida', 'legal': 'apoio jurídico',
+    'productivity': 'produtividade', 'dr-alex-ramos': 'Dr. Alex Ramos',
+    'contas-escolares-airam-veras': 'Contas Escolares Airam Veras',
+    'medico-virtual-supremo': 'Médico Virtual Supremo', 'sites': 'Sites',
+}.items():
+    PT_TITLES['plugin-' + _plugin_id] = 'Integração de ' + _product
+
 PT_DESCRIPTIONS = {
     "library-empty-input-audit": "Audita a rejeição de consultas vazias ou sem conteúdo útil pela biblioteca local, sob coordenação central. Confere abstenção antes de acessar PDFs ou índices e contraprovas com consultas válidas. Usa interfaces e testes autorizados, com permissões de leitura; a ficha declara capacidade e não comprova execução do especialista.",
     "scientific-capabilities-audit": "Audita capacidades científicas e lacunas pelo orquestrador central. Verifica fontes, métodos, reprodução e revisão computacional, preservando o escopo da evidência e a necessidade de avaliação externa.",
@@ -422,6 +455,10 @@ def reconciliar(cards, runtime):
     cobertos por ALIASES para que o resultado nao dependa de heuristica.
     """
     pares = {}
+    runtime = tuple(sorted(runtime))
+    runtime_set = set(runtime)
+    normalized = {r: _slug(r) for r in runtime}
+    tokenized = {r: set(t for t in normalized[r].split('-') if len(t) > 2) for r in runtime}
     for nome in sorted(cards):
         if nome in runtime:
             pares[nome] = nome
@@ -429,16 +466,25 @@ def reconciliar(cards, runtime):
         if nome in ALIASES and ALIASES[nome] in runtime:
             pares[nome] = ALIASES[nome]
             continue
+        # O arquivo e agent_id são identidades canônicas, não similaridade
+        # editorial. Evita percorrer todos os pares para títulos traduzidos.
+        metadata = cards[nome]
+        canonical = [metadata.get('agent_id'), os.path.basename(metadata.get('_file', '')).removesuffix('.md')]
+        identity = next((candidate for candidate in canonical if candidate in runtime_set), None)
+        if identity is not None:
+            pares[nome] = identity
+            continue
         s = _slug(nome)
-        exato = [r for r in runtime if _slug(r) == s]
+        exato = [r for r in runtime if normalized[r] == s]
         if exato:
             pares[nome] = exato[0]
             continue
         melhor, score = None, 0.0
+        name_tokens = _tokens(nome)
         for r in runtime:
-            q = difflib.SequenceMatcher(None, s, _slug(r)).ratio()
-            inter = len(_tokens(nome) & _tokens(r))
-            uni = len(_tokens(nome) | _tokens(r))
+            q = difflib.SequenceMatcher(None, s, normalized[r]).ratio()
+            inter = len(name_tokens & tokenized[r])
+            uni = len(name_tokens | tokenized[r])
             j = inter / uni if uni else 0.0
             if max(q, j) > score:
                 melhor, score = r, max(q, j)
@@ -449,6 +495,119 @@ def reconciliar(cards, runtime):
 
 def nao_registrados(cards, runtime):
     return sorted(n for n in cards if n not in reconciliar(cards, runtime))
+
+
+def render_catalog_didactic(metrics):
+    """Conserva a ampliação didática do autor com contagens da geração."""
+    template = r"""\clearpage
+\section{Apêndice Didático: Cobertura documental do catálogo e reconciliação de aliases}
+
+\elemento{Cobertura de fichas do catálogo}{\metainfo{ID}{DID-CAT} \hfill \metainfo{Fonte}{\pth{gen_mod10.py}, reconciliação e contagens desta geração}}
+
+\begin{descricao}
+\textbf{O problema concreto.} A configuração declara $N = @N@$ agentes no \pth{opencode.json} e o catálogo tem $F = @F@$ fichas em \pth{agents/catalog/}. Uma contagem ingênua por igualdade textual encontra $@S@$ fichas sem correspondência exata. Isso significa que o catálogo está incompleto? Como reconciliar antes de somar?
+\end{descricao}
+
+\begin{definicao}
+\textbf{Símbolos.}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{YYY}
+Símbolo & Significado & Valor no exemplo \\
+\midrule
+$N$ & Agentes na configuração & $N = @N@$ \\
+$F$ & Fichas no catálogo & $F = @F@$ \\
+$S$ & Fichas sem correspondência exata (contagem ingênua) & $S = @S@$ \\
+\end{tabularx}
+\end{center}
+\end{definicao}
+
+\begin{metodo}
+\textbf{Dedução da reconciliação e da cobertura correta.}
+
+\paragraph{Passo 1 — Contagem ingênua (perigosa).}
+Comparar nomes texto a texto encontra $@S@$ fichas sem correspondência exata. Isso sugeriria cobertura de:
+
+\[
+\frac{@N@ - @S@}{@N@} = \frac{@EXACT@}{@N@} \approx @NAIVE_FRACTION@ \approx @NAIVE_PERCENT@\%
+\]
+
+Esse número é plausível, e por isso mesmo perigoso: pode levar à conclusão errada de que o catálogo está faltando agentes.
+
+\paragraph{Passo 2 — Reconciliação por slug e alias.}
+Dos $@S@$ casos sem correspondência exata:
+\begin{itemize}[leftmargin=1.3em,itemsep=1pt]
+  \item $@SLUG@$ se resolvem por identidade canônica de perfil ou de arquivo;
+  \item $@ALIAS@$ se resolvem por alias declarado (ex.: \emph{Synthetic University — Orquestrador Acadêmico Transversal} $\to$ \cod{university_synthetic}).
+\end{itemize}
+
+\paragraph{Passo 3 — Resíduo da reconciliação.}
+
+\[
+\text{Resíduo} = @S@ - @SLUG@ - @ALIAS@ = 0
+\]
+
+Não há fichas sem agente, e não há agentes sem ficha.
+
+\paragraph{Passo 4 — Cobertura documental correta.}
+
+\[
+\boxed{\text{Cobertura} = \frac{@N@}{@N@} = 1 = 100\%}
+\]
+
+\paragraph{Passo 5 — Concentração por categoria.}
+As duas maiores categorias ($@TOP1@$ e $@TOP2@$ fichas, de @CATS@ no total) somam:
+
+\[
+\frac{@TOP1@ + @TOP2@}{@N@} = \frac{@TOPSUM@}{@N@} \approx @TOP_FRACTION@ \approx @TOP_PERCENT@\%
+\]
+
+A média por categoria é:
+
+\[
+\frac{@N@}{@CATS@} \approx @MEAN@
+\]
+
+Essa média descreve mal a distribuição porque oculta a concentração em poucas categorias.
+
+\end{metodo}
+
+\begin{descricao}
+\textbf{Interpretação.} A cobertura de $100\%$ atesta que nome e documento batem, não que o agente funcione. Atestar comportamento é o gate de teste, descrito no Módulo 4. Um agente registrado e documentado pode ainda estar quebrado, jamais invocado ou sem permissão adequada.
+
+\textbf{O que isso NÃO significa:}
+\begin{itemize}[leftmargin=1.3em,itemsep=1pt]
+  \item $100\%$ de cobertura documental não significa que todos os agentes estejam funcionando.
+  \item Somar os dois acervos (configuração + catálogo) como se fossem disjuntos gera supercontagem devida a aliases contados em duplicidade.
+  \item A média por categoria ($@MEAN@$) mascara a desigualdade real da distribuição.
+\end{itemize}
+\end{descricao}
+
+\begin{aviso}
+\textbf{Limites de validade.}
+\begin{enumerate}[leftmargin=1.3em,itemsep=1pt]
+  \item Reconciliação é consistência declarativa, não evidência funcional.
+  \item Rode \cod{python3 gen_mod10.py} para verificar quantos elementos são emitidos; alterar o \pth{opencode.json} e reexecutar deve mover esse número na mesma medida.
+  \item O número de fichas por categoria pode mudar a cada geração; consulte a geração corrente.
+\end{enumerate}
+\end{aviso}
+
+\begin{resultado}
+\textbf{Exercícios de fixação.}
+\begin{enumerate}[leftmargin=1.3em,itemsep=2pt]
+  \item Acrescente um agente fictício ao \pth{opencode.json} sem card correspondente e calcule a cobertura resultante.
+  \item Em uma fixture isolada, altere nome, identidade e arquivo de um perfil no acervo de teste e observe a ausência de correspondência; um alias isolado pode ter outro caminho canônico.
+  \item Explique, em uma frase, por que \emph{inventário completo} e \emph{inventário correto} são propriedades diferentes.
+\end{enumerate}
+\end{resultado}
+
+"""
+    if metrics["N"] <= 0:
+        raise ValueError("O exemplo de proporção exige universo positivo")
+    values = dict(metrics)
+    values.setdefault('TOP_FRACTION', str(metrics['TOPSUM'] / metrics['N']).replace('.', '{,}'))
+    values.setdefault('NAIVE_FRACTION', str(metrics['EXACT'] / metrics['N']).replace('.', '{,}'))
+    return re.sub(r'@([A-Z_0-9]+)@', lambda match: str(values[match[1]]), template)
 
 
 def main():
@@ -466,7 +625,8 @@ def main():
         route = f["_file"].split("agents/catalog/")[-1]
         slug = os.path.basename(route).removesuffix(".md")
         source_detail = detalhes_ficha(f["_file"])
-        source_desc = source_detail or f.get("description", "")
+        source_desc = (f.get('description', '') if f.get('lifecycle') == 'managed-v1'
+                       else source_detail or f.get("description", ""))
         desc_pt = limpar_texto(PT_DESCRIPTIONS.get(slug, source_desc))
         # Descrições residuais em inglês sem tradução editorial explícita não
         # devem ser publicadas como se estivessem localizadas.
@@ -479,8 +639,9 @@ def main():
         palavras = tarefa.split()
         if len(palavras) > 24:
             tarefa = " ".join(palavras[:24]).rstrip(",;:") + "…"
-        app = (f"No Core, este perfil apoia tarefas relacionadas a {tarefa[0].lower() + tarefa[1:] if tarefa else 'a atividade indicada na ficha'}. "
-               "O orquestrador pode encaminhar-lhe o trabalho na etapa correspondente; a resposta retorna ao fluxo principal para integração e conferência de fontes, critérios e permissões. A ficha documenta a função, mas não comprova que o perfil tenha sido chamado ou executado a tarefa.")
+        app = (PT_APLICACAO.get(category, PT_APLICACAO['ferramental']) + ' '
+               'No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. '
+               'O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.')
         meta[name] = {
             "file": route,
             "slug": slug,
@@ -542,15 +703,16 @@ def main():
     fd.append("%  ARQUIVO GERADO — não editar à mão. Rode: python3 gen_mod10.py")
     fd.append("% ============================================================")
     fd.append(f"\\chapter{{Catálogo Completo — {n_fichas} Fichas de Agente "
-              f"({n_fichas} registradas no runtime)}}")
+              f"({n_fichas} declaradas na configuração)}}")
     fd.append("")
     fd.append("\\roteirodidatico")
     fd.append("{Este catálogo é um inventário de perfis descritos no projeto. Para encontrar um agente, comece pela categoria e leia a ficha como uma declaração de escopo e instruções.}")
-    fd.append("{\\emph{Ficha} é documentação; \\emph{slug} é o identificador usado na configuração; \\emph{runtime} é a sessão do aplicativo; \\emph{ativação} é uma chamada efetiva do perfil. Nas permissões, \\cod{allow} autoriza uma ação e \\cod{deny} a bloqueia, conforme a política carregada.}")
+    fd.append("{\\emph{Ficha} documenta um perfil; \\emph{slug} o identifica na configuração; \\emph{runtime} é a sessão em execução. Preparar uma atribuição, iniciar um executor e aceitar sua entrega são estados diferentes. A política do host governa as permissões efetivamente aplicadas.}")
     fd.append("{Escolha um perfil, compare seu nome humano ao identificador, leia as instruções e confira permissões e requisitos. Depois localize um registro que demonstre se houve chamada.}")
     fd.append("{A reconciliação entre fichas e configuração mede consistência declarativa. Não mede desempenho, adequação da resposta nem taxa de sucesso.}")
     fd.append("{O que a ficha permite concluir sobre o perfil e que observação adicional seria necessária para afirmar que ele executou bem uma tarefa?}")
     fd.append("")
+    fd.append("Este apêndice é uma obra de consulta: a leitura principal já acompanhou a tarefa até a reprodução. Volte a uma categoria quando precisar escolher um perfil, e retorne ao capítulo de ativação antes de lhe encaminhar trabalho.")
     fd.append("\\begin{resultado}")
     fd.append(f"O \\pth{{opencode.json}} registra \\textbf{{{n_agents}}} agentes "
               f"({n_prim} orquestrador, {n_sub} subagentes), e o acervo "
@@ -654,7 +816,7 @@ def main():
               f"$\\frac{{{exatos}}}{{{n_agents}}} \\approx {cob_ingenua_pct}\\%$ "
               f"— número plausível, e por isso mesmo perigoso.\\par")
     fd.append(f"(2) Reconciliação por slug: os ${naive_falta}$ casos se resolvem em "
-              f"${slug_hits}$ por equivalência direta de slug e em ${alias_hits}$ por "
+              f"${slug_hits}$ por identidade canônica de perfil ou de arquivo e em ${alias_hits}$ por "
               f"alias declarado (ex.: \\emph{{Synthetic University — Orquestrador "
               f"Acadêmico Transversal}} $\\to$ \\cod{{university_synthetic}}).\\par")
     fd.append(f"(3) Resíduo: ${naive_falta} - {slug_hits} - {alias_hits} = 0$ fichas "
@@ -692,19 +854,25 @@ def main():
     fd.append("\\begin{resultado}")
     fd.append("\\textbf{Exercícios.} (1) Acrescente um agente fictício ao "
               "\\pth{opencode.json} sem card correspondente e calcule a cobertura "
-              "resultante. (2) Remova o alias de \\emph{Synthetic University} no "
-              "gerador e observe o teste de reconciliação falhar. (3) Explique, em "
+              "resultante. (2) Em uma fixture isolada, altere o nome, o identificador e o arquivo de um perfil no "
+              "acervo de teste e observe a ausência de correspondência; um alias isolado pode ter outro caminho canônico. (3) Explique, em "
               "uma frase, por que \\emph{inventário completo} e "
               "\\emph{inventário correto} são propriedades diferentes.")
     fd.append("\\end{resultado}")
     fd.append("")
+    fd.append(render_catalog_didactic({
+        'N': n_agents, 'F': n_cards, 'S': naive_falta, 'EXACT': exatos,
+        'SLUG': slug_hits, 'ALIAS': alias_hits, 'TOP1': l1, 'TOP2': l2,
+        'TOPSUM': top2, 'CATS': n_cat, 'NAIVE_PERCENT': cob_ingenua_pct,
+        'TOP_PERCENT': pct_top2, 'MEAN': media_cat,
+    }))
     fd.append("\\section{Panorama por categoria}")
     fd.append("")
     fd.append("\\begin{resultado}")
     fd.append("Contagem por categoria (ordem decrescente de fichas):\\par")
     fd.append("\\smallskip")
     fd.append("{\\footnotesize")
-    fd.append("\\begin{tabularx}{\\textwidth}{lrX}")
+    fd.append("\\begin{tabularx}{\\linewidth}{lrX}")
     fd.append("\\toprule")
     fd.append("Categoria & Fichas & Exemplo de agentes \\\\")
     fd.append("\\midrule")
@@ -740,6 +908,7 @@ def main():
             )
             fd.append("")
             fd.append("\\begin{descricao}")
+            fd.append("\\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}")
             fd.append(esc(m["desc"]) or "A ficha de origem não traz uma descrição resumida; consulte o arquivo indicado nesta ficha.")
             fd.append("\\end{descricao}")
             fd.append("")
