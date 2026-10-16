@@ -38,7 +38,9 @@ def _cited_files(root: Path, modules: list[Path]) -> set[Path]:
             elif path.is_dir():
                 for directory, children, filenames in os.walk(path, followlinks=False, onerror=fail_walk):
                     current = Path(directory)
-                    children[:] = sorted(child for child in children if not (current / child).is_symlink())
+                    children[:] = sorted(child for child in children
+                                         if child not in {'.lake', '__pycache__', '.git'}
+                                         and not (current / child).is_symlink())
                     for filename in sorted(filenames):
                         candidate = current / filename
                         if _inside_workspace(candidate, root) and candidate.is_file():
@@ -56,6 +58,11 @@ def collect_inventory(root: Path) -> dict:
     local_paths = _cited_files(root, modules)
     authoritative = {root / 'livro-core' / name for name in (
         'main.tex', 'macros.tex', 'gen_mod10.py', 'gen_mod14_ativacao.py', 'gen_inventario.py')}
+    authoritative.update((root / 'livro-core/lean').glob('*.lean'))
+    authoritative.update(root / name for name in (
+        'livro-core/lean/lean-toolchain', 'livro-core/lean/lakefile.toml',
+        'livro-core/lean/lake-manifest.json', 'scripts/verify_book_lean.py',
+        'docs/VERIFICACAO_FORMAL_LIVRO_R908.md', 'docs/book-math-map-r908.json'))
     sources = {str(path.relative_to(root)): {
         "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
     } for path in sorted({config_path, *modules, *local_paths, *authoritative}) if path.is_file()}

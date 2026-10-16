@@ -3,9 +3,9 @@
     "agents": 312,
     "mcp_servers": 16,
     "commands": 33,
-    "specs": 538,
-    "round_specs": 448,
-    "round_test_files": 423,
+    "specs": 539,
+    "round_specs": 449,
+    "round_test_files": 424,
     "references": 18,
     "citation_calls": 76,
     "condensed_cards": 13
@@ -20,6 +20,12 @@
     },
     "agents/lifecycle.py": {
       "sha256": "80f1fca2c93e373ef8da8a45d69d3154e495fd36d6766de7dd60834edd92c083"
+    },
+    "docs/VERIFICACAO_FORMAL_LIVRO_R908.md": {
+      "sha256": "4a237e8087d0013bb413c07b86dbfea24fc13f9bc22112b3a68aeda6c4b229bd"
+    },
+    "docs/book-math-map-r908.json": {
+      "sha256": "d8a7ce46f2448a366bba6d3273f6dae0900183f0ebfe67a0ec4f384b480de55f"
     },
     "evolution/cycles.py": {
       "sha256": "dd7c6e7ee2b12b1029801df864e6d2190a942199d4e3923bf96c29e6df77ffb6"
@@ -61,13 +67,34 @@
       "sha256": "37c7863de83d899b1c18a42762e923ce1cebe462d4ac4c090634ecba4c2cf0fb"
     },
     "livro-core/gen_inventario.py": {
-      "sha256": "b074fd1fc9df5caf9ffe5ab6c9ab430675f086ddc7c59bd553ce859bb6f1e2ed"
+      "sha256": "820e853b85ed807af6816b521c8748c3f8687ea0b3f8b9197fa7950d988cba9a"
     },
     "livro-core/gen_mod10.py": {
       "sha256": "9b83d74ae3246495bfe476d9f96a0c7c54a07e2342f333c59211d91cea6c4c38"
     },
     "livro-core/gen_mod14_ativacao.py": {
       "sha256": "4a8c866f176c801ce98f91aadae2eab9df26783e57722de5e9c7b1decffb83dc"
+    },
+    "livro-core/lean/Algebra.lean": {
+      "sha256": "2278dd0f999c515a02783bf64cdb5c59f0e01a8342bea0775b026961bf62dfc5"
+    },
+    "livro-core/lean/Attention.lean": {
+      "sha256": "0af0f37825f71587b9c625d8aeb07b9f7ccaa6adf55826350acd069e5c033db5"
+    },
+    "livro-core/lean/Foundations.lean": {
+      "sha256": "1925abf3f03d3bbb7b4aa4ba791910916057d8a42917163222768a341859e754"
+    },
+    "livro-core/lean/Models.lean": {
+      "sha256": "1fb3368d76358d90f40da3703b3dfa97950db068a9964b6290ad9a4f7a25f470"
+    },
+    "livro-core/lean/lake-manifest.json": {
+      "sha256": "299b633ef39b37696183630392b7600c420d7eb65847e3d71f83cd3480511809"
+    },
+    "livro-core/lean/lakefile.toml": {
+      "sha256": "b9e0bab63a95a4308e346939ee5cea1699ff1ec035fe5611c9fec0104e218333"
+    },
+    "livro-core/lean/lean-toolchain": {
+      "sha256": "d5edba4e4b8faad9c1baeadb265716d20d03be4d1a2647dc5e35b0c0325bea7b"
     },
     "livro-core/macros.tex": {
       "sha256": "f749a2104d2541a8dcf5ff8c262dad6cbce79707abdc12a37a23c39465eac826"
@@ -100,34 +127,34 @@
       "sha256": "5bfdb1a73427171e59af81e1debd259199814de893501844d7631370d1008296"
     },
     "livro-core/mod-00b-jornada-leitor.tex": {
-      "sha256": "a0a66ea4eaceda5dae383250e769ab5a31adcac5f2a8f510f4d76dd54fdc5e1f"
+      "sha256": "ac8231d903989806eb60258af53ac967bf0ea0045d187c2e707e220e83ea0adb"
     },
     "livro-core/mod-00c-projeto-pedagogico.tex": {
       "sha256": "b89a864cd04fc96d61ecb435b2472b9a844451cf78d414609e9aad01235a9716"
     },
     "livro-core/mod-01-fundacoes.tex": {
-      "sha256": "d179d7dc9719ba957a1337216571980b956bfcd3746da5a0b8a6c0e2fcb2a02a"
+      "sha256": "9e252099bd268ab5d658d47d92d32d1b11a58ed17466762d5dd7f91ecde65ecd"
     },
     "livro-core/mod-01b-historia.tex": {
       "sha256": "c06a05474b2edc9592f558fe26142bb0e6b8edeaa12719ef4dfbadeab30c073e"
     },
     "livro-core/mod-01c-instalacao.tex": {
-      "sha256": "f1ae7924f712c6a1a856caec84a6a81e1512d43bc4d4a4eaab03a50ac04d1338"
+      "sha256": "51e4a0a054d087cd4b85ce9b53185754836f77fa29e6e36609dd6c31eed1472a"
     },
     "livro-core/mod-01d-arquitetura.tex": {
       "sha256": "849d6f566fb0f4bf3b95fd82a041f75e1bb73886fc2dae7c6be091d0648374fa"
     },
     "livro-core/mod-02-orquestracao.tex": {
-      "sha256": "74d379598835392e96ec98b4ed9b1f5f02798e309960be523d22108aac4d02ff"
+      "sha256": "f5c793ca85c977eb33a71924b88fce0b9aea4e216dc3223cd444e0ab8f34a511"
     },
     "livro-core/mod-03-memoria-mci.tex": {
-      "sha256": "90ac463c3cb4a52dac73a137da0cc923eb22963330871ebdfca6dcb6e0d7aac6"
+      "sha256": "0e29ad57a20cc322849497270060982adbf1feda544ce94437dde622f2793515"
     },
     "livro-core/mod-04-qualidade-sdd.tex": {
       "sha256": "f8c893120e1e932b595872dc52969748794d047e4d523eeaefb93ba2a50332d0"
     },
     "livro-core/mod-05-raciocinio.tex": {
-      "sha256": "0fbbfe1464f79dd6c0646899e7f9bb43ce2412b847697c52d1c25eedec591945"
+      "sha256": "984f4e990bc18b89ef12544a331479d0666fc73b127285ce5808437f719698c5"
     },
     "livro-core/mod-06-ciencia.tex": {
       "sha256": "35eb6dff35457b717209454b7f451d362ab145b4cc2c8ea824e0112139ef667c"
@@ -142,16 +169,16 @@
       "sha256": "bac57c83f1365b681f91cdd0721dd31e7fc6fb96632137e3eceb65df27fd9462"
     },
     "livro-core/mod-09a-comparada.tex": {
-      "sha256": "5062bee75c980ef3a49cf46ed8a56374758e7b4fe502828f019be2e88916659a"
+      "sha256": "eb6a3621759fe3e725f1372e946c8abc002abb14f9d5be339f21f97bf4e68d49"
     },
     "livro-core/mod-10-catalogo.tex": {
       "sha256": "27c338ff79201e697d1ee733be7646fca450266747c9bfd485d02319a2032389"
     },
     "livro-core/mod-11-apendices.tex": {
-      "sha256": "6596e52bb1e5074f46854ba920f5ab0eac73179641e3334f3982a9c951a58f0f"
+      "sha256": "6435c94c8f4fc0d195c01d77c715330888124a5f634c9d3b67be13a9970d6866"
     },
     "livro-core/mod-12-fichas-nucleo.tex": {
-      "sha256": "2a559163452fa3b945d6dd95c18bc2e814c033eba8bf65c6f347d2e2c6d9b5f4"
+      "sha256": "1ff89b19dce20f5eab8f4252afde7dd102e04ec41165f3166da33929e62493d7"
     },
     "livro-core/mod-13-ativacao-agentes.tex": {
       "sha256": "710493adcf2486aaaf9200511c722661b30e408e7442831a35198597b7f13be5"
@@ -160,7 +187,7 @@
       "sha256": "cadb7aaef017971286fc7de9cd09fdfc6027cd1a68ac0a551113096318f168f7"
     },
     "livro-core/mod-15-epilogo-reproducao.tex": {
-      "sha256": "45c3e48d6e9336942f85b884a41b95b79a2bed8b0dfc58b40d69a6be04304411"
+      "sha256": "726a0081a4419ffa76f4cdcc915e1d6b8d4cb95a3c30c8ba1b8a062e73eeaa70"
     },
     "livro-core/mod-16-mapas-fluxogramas.tex": {
       "sha256": "6999158e62ac6793ff7893c0b0211e2e8dddb573c715e70e5ad41f625c87681e"
@@ -224,6 +251,9 @@
     },
     "scripts/validate_scientific_profile.py": {
       "sha256": "f072e2f8bc2aa3143f0b34982c3ebfe12b50dbe5d697df2d4f017876cb4afb5b"
+    },
+    "scripts/verify_book_lean.py": {
+      "sha256": "2d7d7142071f4a7181f9c712c19696bc6e4b657dd07434cbc940f370d603a366"
     },
     "sdd/spec_engine.py": {
       "sha256": "91e205b31969cec0f75b568b544f58f7e9779662adf88a696db5981404e2a3f5"

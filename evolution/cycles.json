@@ -21364,6 +21364,32 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R908",
+      "objective": "Formalizar fórmulas e deduções do livro em Lean 4 com hipóteses e custódia explícitas",
+      "changes": [
+        "158 teoremas em quatro módulos Lean 4/Mathlib fixados, aceitos pelo compilador real com auditoria de axiomas",
+        "Matriz28 famílias:27 matemáticas/modelos,1 observacional fora da alegação de prova",
+        "Verificador sem fallback, controles falsos/mutação EMA, rejeição de auditoria duplicada e declaração omitida",
+        "Correções de arredondamento, independência conjunta, PPV, amortização e limites do livro;183 testes selecionados aprovados"
+      ],
+      "score": null,
+      "lessons": [
+        "A demonstração prova a proposição formal sob hipóteses, não a ocorrência de dados, a implementação Python ou segurança IEEE-754.",
+        "A custódia deve abranger TeX, matriz, procedimento, configuração e dependências; não promover confiança por autoria da prova."
+      ],
+      "timestamp": 1792116414.3566704,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ]
 }

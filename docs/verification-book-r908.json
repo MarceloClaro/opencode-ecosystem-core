@@ -1,0 +1,110 @@
+{
+  "revision": "R908",
+  "status": "concluido_no_escopo_matematico_local",
+  "date": "2026-10-16",
+  "external_validation": false,
+  "formal_theorems": 158,
+  "mathematical_model_families": 27,
+  "empirical_families_outside_proof_claim": 1,
+  "proof_receipt": "docs/verification-book-lean-r908.json",
+  "proof_receipt_sha256": "5ed64bce4ee0fe7b70c0dca8560c9d5c313e3b1149a0fdcb61429f68d8a6d570",
+  "source_tests": {
+    "passed": 183,
+    "failed": 0,
+    "scope": "R617-R620,R747,R754,R755,R814,R822,R894,R901,R907,R908",
+    "global_suite_executed": false,
+    "log_sha256": "f8da5787c28ce6cb845033efcc0b666a7b64f819422cbd0b91e0a5a755ee4ffe"
+  },
+  "doctor": {
+    "checks_passed": 22,
+    "checks_total": 22,
+    "verification": "installation_only",
+    "log_sha256": "3c8a5d5b1a2d7b4ac3007514142b9bcb5306170b8e8f87daf8cedf1b2bfc53b7"
+  },
+  "red_evidence": [
+    {
+      "log": "red.log",
+      "sha256": "032aca7508f62ac836df95b2df7c62d2867aaf322e493119869211aefbefcac2"
+    },
+    {
+      "log": "red-duplicate.log",
+      "sha256": "edd795fe8f6b2b6c4b0e1cc019f64fec17972ab5cf43999b3a79c5fc5fafc036"
+    },
+    {
+      "log": "red-inventory.log",
+      "sha256": "914faec8187d153b8a64f1ca6c8382f733ae399d573b61f13463124d38f1dead"
+    },
+    {
+      "log": "red-cache.log",
+      "sha256": "5f9308c3f7283698803d77b29b0a7c1217cc661983c5e6872a82306eaed1142c"
+    }
+  ],
+  "pdf": {
+    "file": "livro-core/main.pdf",
+    "sha256": "97617852df278101998f20b09d8cc4219d2097484f635f6b5575e78b4c7e24eb",
+    "bytes": 6802011,
+    "compile_exit_code": 0,
+    "compile_entry": "livro-core/main.tex",
+    "pages": 538,
+    "off_page_words": 0,
+    "horizontal_violations": 0,
+    "max_extension_pt": 0.274,
+    "horizontal_tolerance_pt": 2,
+    "cover_full_bleed_excluded_from_body_margins": true,
+    "rendered_and_inspected_pages": [
+      26,
+      27,
+      49,
+      50,
+      51,
+      69,
+      113,
+      123,
+      154,
+      155,
+      250,
+      333,
+      334,
+      335,
+      336,
+      503,
+      504
+    ],
+    "final_pixel_comparison": "13 paginas inalteradas em pixels;335 reinspecionada apos corrigir identificadores;27,250,504 inspecionadas na versao final",
+    "overfull_hbox_count": 0,
+    "residual_overfull_vbox_pt": 0.79533,
+    "editor_fragment_compiler": "mod07 nao e standalone: chapter sem preambulo; compilacao completa via main.tex bem-sucedida"
+  },
+  "inventory": {
+    "scope": "workspace local, inclui specs ainda nao publicadas; nao e cobertura funcional",
+    "sha256": "f0ef204e57acfd65acff5bdc835ddb7d0b3b2691d2cefb8bec8afc358c10fcb9"
+  },
+  "agent_correlations": [
+    {
+      "profile": "book-science-editor",
+      "task_id": "task-77e8941a",
+      "profile_sha256": "aa3fcdd8cc584bb2b307bb76fe59730293f5e3de8f959e1935c7ffdc4f6cb421",
+      "external_executor": "Codex collaboration subagent",
+      "core_assignment_is_execution_evidence": false
+    },
+    {
+      "profile": "book-orchestration-editor",
+      "task_id": "task-c232c3c7",
+      "profile_sha256": "1c2b2695e60b3886859ede193c426633e3a38ac10e51435b7146ec4c280dcde1",
+      "external_executor": "Codex collaboration subagent",
+      "core_assignment_is_execution_evidence": false
+    },
+    {
+      "profile": "scientific-review",
+      "task_id": "task-0ceac58c",
+      "profile_sha256": "a4570a2b1c34738c560964f0a47f6a2881816e9a0e2de7797b1dc9a10ffe3f61",
+      "external_executor": "Codex collaboration subagent",
+      "core_assignment_is_execution_evidence": false
+    }
+  ],
+  "limitations": [
+    "Provas de modelos e enunciados sob hipoteses; nao certificam dados, runtimePython ou IEEE754.",
+    "A correspondencia do texto com o formalismo permanece sujeita a revisao humana.",
+    "PDF com verificacao geometrica completa e amostragem visual, sem medir aprendizagem."
+  ]
+}

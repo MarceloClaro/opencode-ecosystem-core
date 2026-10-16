@@ -292,13 +292,14 @@ agente pensou}, não o que a comunidade científica confirmou. Declarar
 \end{aviso}
 
 \par\smallskip
-A regra anti-overclaim apóia-se em um dado empírico incômodo da literatura:
-para a maioria dos desenhos de estudo, uma alegação individual é
-\emph{mais provavelmente falsa do que verdadeira} — e a probabilidade de uma
-alegação ser verdadeira depende de poder estatístico, viés e da razão entre
-hipóteses verdadeiras e testadas em cada campo. Por isso o Core trata
-``verificado'' como termo de alto custo e exige validação externa explícita:
-não por ceticismo estético, mas por base de evidência \citref{IOANNIDIS, J. P. A. Why most published research findings are false. \emph{PLoS Medicine}, v.~2, n.~8, e124, 2005}{10.1371/journal.pmed.0020124}{justifica o gate \cod{no_verified_without_external} do avaliador metacognitivo: a literatura mostra que testes internos e viés local tornam a alegação ``verificada'' sem validação externa improvável de ser verdadeira; o avaliador é a tradução pragmática dessa cautela em \emph{fail-closed}}{Simulations show that for most study designs and settings, it is more likely for a research claim to be false than true}{Simulações mostram que, para a maioria dos desenhos e cenários de estudo, é mais provável que uma alegação de pesquisa seja falsa do que verdadeira.}{IOANNIDIS, 2005, p.~e124}.\begin{limite}
+A regra anti-overclaim é coerente com uma cautela metodológica discutida por
+Ioannidis: em um modelo condicionado ao poder, à razão prévia de hipóteses
+verdadeiras e ao viés, certos cenários produzem baixo valor preditivo positivo.
+Trata-se de uma dedução sob hipóteses, e não de uma taxa observada de erro do
+Core nem de uma probabilidade atribuível a cada alegação individual. A
+política local exige evidência compatível com o alcance declarado
+\citref{IOANNIDIS, J. P. A. Why most published research findings are false. \emph{PLoS Medicine}, v.~2, n.~8, e124, 2005}{10.1371/journal.pmed.0020124}{O modelo discute como poder, razão prévia e viés afetam o PPV; motiva cautela metodológica, sem medir a taxa de erro do Core.}{Simulations show that for most study designs and settings, it is more likely for a research claim to be false than true}{Simulações mostram que, para a maioria dos desenhos e cenários de estudo, é mais provável que uma alegação de pesquisa seja falsa do que verdadeira.}{IOANNIDIS, 2005, p.~e124}.
+\begin{limite}
 A memória metacognitiva é \emph{local ao Core} e \emph{revisível por lógica},
 não por peer review. Ela pode conter reflexões divergentes entre agentes; o
 valor está no \emph{embate documentado}, não no consenso. As APIs aqui descritas

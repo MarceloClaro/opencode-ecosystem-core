@@ -255,7 +255,7 @@ aplicam.
 \textbf{Dedução passo a passo.} Um cálculo simples ajuda a entender por que sistemas
 que reúnem muitas saídas precisam de critérios de validação. Suponha, apenas para
 este exemplo, que $N$ saídas sejam produzidas e que cada uma tenha probabilidade
-$p$ de estar correta. Assumimos também que os erros sejam independentes. A
+$p$ de estar correta. Assumimos também independência conjunta dos eventos de acerto; independência apenas aos pares não basta para justificar o produto de todos eles. Essa é uma hipótese didática, não uma propriedade medida dos agentes do Core. A
 probabilidade de uma saída estar correta é $p$; a probabilidade de todas as $N$
 saídas estarem corretas é, sob a hipótese de independência, o produto $p^N$. Logo,
 a probabilidade de haver ao menos uma saída incorreta é o evento complementar:
@@ -414,12 +414,20 @@ Com $u = 0{,}01$ (porque $0{,}99 = 1 - 0{,}01$):
 \ln(0{,}99) = \ln(1 - 0{,}01) \approx -0{,}01 - \frac{(0{,}01)^2}{2} = -0{,}01 - 0{,}00005 = -0{,}01005
 \]
 
-Termos de ordem $(0{,}01)^3/3 \approx 0{,}000000333$ são desprezíveis para a precisão que buscamos.
+O primeiro termo omitido tem módulo $(0{,}01)^3/3 \approx 0{,}000000333$.
+A estimativa rigorosa usada na verificação formal é
+\[
+\left|\ln(0{,}99)+0{,}01005\right|\leq\frac{1}{990000}.
+\]
+Ela limita o erro do truncamento, em vez de supor que os termos restantes
+sejam nulos. A potência exata satisfaz
+$0{,}88592<1-(0{,}99)^{216}<0{,}88593$; portanto, o valor final arredondado
+a três casas é $0{,}886$. Ver a seção~\ref{sec:lean-livro}.
 
 \paragraph{Passo 7 — Multiplicação por $N = 216$.}
 
 \[
-\ln x = 216 \times (-0{,}01005)
+\ln x \approx 216 \times (-0{,}01005)
 \]
 
 Calculando:
@@ -435,10 +443,10 @@ Portanto:
 \]
 
 \paragraph{Passo 8 — Retorno da escala logarítmica.}
-Se $\ln x = -2{,}1708$, então, por definição de logaritmo natural:
+Como $\ln x \approx -2{,}1708$, a identidade exata $x=\exp(\ln x)$ fornece a aproximação:
 
 \[
-x = e^{-2{,}1708}
+x \approx e^{-2{,}1708}
 \]
 
 Calculando o exponencial:
@@ -456,7 +464,7 @@ Aproximando a três algarismos significativos:
 \paragraph{Passo 9 — Aplicação da fórmula final.}
 
 \[
-P = 1 - 0{,}114 = 0{,}886
+P = 1-(0{,}99)^{216} \approx 1 - 0{,}114 = 0{,}886
 \]
 
 Expresso em porcentagem:

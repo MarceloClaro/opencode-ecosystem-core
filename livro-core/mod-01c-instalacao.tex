@@ -314,8 +314,8 @@ saída possa ser reproduzida bit a bit.
 
 \begin{resultado}
 \textbf{Exemplo resolvido.} Na execução histórica registrada neste exemplo, o campo
-\texttt{duration\_seconds} do diagnóstico reportou $3{,}39$ segundos. Se o mesmo
-comando fosse executado antes de $12$ tarefas, a divisão simples daria
+\texttt{duration\_seconds} do diagnóstico reportou $3{,}39$ segundos. Se uma única execução do
+diagnóstico fosse compartilhada por $12$ tarefas, a amortização simples daria
 $3{,}39/12 \approx 0{,}28$ segundo de diagnóstico por tarefa. Esse cálculo só
 distribui o tempo observado: não prova que todas as tarefas precisam de uma
 verificação nova nem que o tempo será igual em outra máquina. \emph{Confira no seu

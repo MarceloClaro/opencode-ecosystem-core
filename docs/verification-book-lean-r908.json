@@ -1,0 +1,1260 @@
+{
+  "status": "machine_checked",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "mathlib_revision": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "checked_at_utc": "2026-10-16T02:09:01.135391+00:00",
+  "allowed_foundational_axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "verification_scope": "declarações Lean e hipóteses explícitas; não valida dados empíricos nem IEEE-754",
+  "external_validation": false,
+  "files": {
+    "livro-core/lean/Algebra.lean": {
+      "status": "machine_checked",
+      "returncode": 0,
+      "seconds": 7.086,
+      "output": "'BookAlgebra.complement_from_product_model' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.complement_probability_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.independent_error_216_interval' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.independent_error_216_tight_interval' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.independent_error_216_high_accuracy_interval' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.logarithm_rounded_product' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.percent_unscale' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.coverage_fraction_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.weighted_coverage_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.critical_gate_rejects' depends on axioms: [propext]\n'BookAlgebra.critical_gate_acceptance_requires_critical' depends on axioms: [propext]\n'BookAlgebra.ppv_denominator_expansion' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.ppv_from_counts' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.ppv_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.ppv_low_power_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.ppv_high_power_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.ppv_low_power_interval' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.ppv_high_power_interval' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.ppv_equal_odds_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.prisma_conservation' depends on axioms: [propext, Quot.sound]\n'BookAlgebra.partition_cardinality' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.prisma_included_le_identified' depends on axioms: [propext, Quot.sound]\n'BookAlgebra.ema_70_30_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.ema_70_30_example' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.ema_moves_toward_score' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.ema_out_of_range_counterexample' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.amdahl_single_worker_time' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.amdahl_time_positive' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.amdahl_speedup_ceiling' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.amdahl_zero_sequential' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.amdahl_single_worker_speedup' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.amdahl_limit' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.amdahl_natural_executor_limit' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.amdahl_thirteen_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.amdahl_thirteen_interval' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.amdahl_four_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.amdahl_eight_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.staking_reward_formula' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.staking_reward_example' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.slashing_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.slashing_example' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.congestion_below_first_block' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.congestion_first_block' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.normal_fee_example' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.high_priority_fee_example' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.catalog_reconciliation' depends on axioms: [propext]\n'BookAlgebra.catalog_largest_categories' depends on axioms: [propext]\n'BookAlgebra.catalog_concentration_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.catalog_concentration_interval' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.catalog_mean_interval' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.historical_coverage_interval' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.fair_item_accounting' depends on axioms: [propext]\n'BookAlgebra.unit_coverage_complement_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAlgebra.expected_cost_example' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "<source-and-axiom-audit>"
+      ],
+      "axioms": {
+        "BookAlgebra.complement_from_product_model": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.complement_probability_bounds": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.independent_error_216_interval": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.independent_error_216_tight_interval": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.independent_error_216_high_accuracy_interval": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.logarithm_rounded_product": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.percent_unscale": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.coverage_fraction_bounds": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.weighted_coverage_bounds": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.critical_gate_rejects": [
+          "propext"
+        ],
+        "BookAlgebra.critical_gate_acceptance_requires_critical": [
+          "propext"
+        ],
+        "BookAlgebra.ppv_denominator_expansion": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.ppv_from_counts": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.ppv_bounds": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.ppv_low_power_exact": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.ppv_high_power_exact": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.ppv_low_power_interval": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.ppv_high_power_interval": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.ppv_equal_odds_exact": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.prisma_conservation": [
+          "propext",
+          "Quot.sound"
+        ],
+        "BookAlgebra.partition_cardinality": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.prisma_included_le_identified": [
+          "propext",
+          "Quot.sound"
+        ],
+        "BookAlgebra.ema_70_30_bounds": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.ema_70_30_example": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.ema_moves_toward_score": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.ema_out_of_range_counterexample": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.amdahl_single_worker_time": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.amdahl_time_positive": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.amdahl_speedup_ceiling": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.amdahl_zero_sequential": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.amdahl_single_worker_speedup": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.amdahl_limit": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.amdahl_natural_executor_limit": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.amdahl_thirteen_exact": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.amdahl_thirteen_interval": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.amdahl_four_exact": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.amdahl_eight_exact": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.staking_reward_formula": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.staking_reward_example": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.slashing_bounds": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.slashing_example": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.congestion_below_first_block": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.congestion_first_block": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.normal_fee_example": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.high_priority_fee_example": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.catalog_reconciliation": [
+          "propext"
+        ],
+        "BookAlgebra.catalog_largest_categories": [
+          "propext"
+        ],
+        "BookAlgebra.catalog_concentration_exact": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.catalog_concentration_interval": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.catalog_mean_interval": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.historical_coverage_interval": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.fair_item_accounting": [
+          "propext"
+        ],
+        "BookAlgebra.unit_coverage_complement_exact": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAlgebra.expected_cost_example": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      "sha256": "2278dd0f999c515a02783bf64cdb5c59f0e01a8342bea0775b026961bf62dfc5",
+      "theorems": [
+        "BookAlgebra.complement_from_product_model",
+        "BookAlgebra.complement_probability_bounds",
+        "BookAlgebra.independent_error_216_interval",
+        "BookAlgebra.independent_error_216_tight_interval",
+        "BookAlgebra.independent_error_216_high_accuracy_interval",
+        "BookAlgebra.logarithm_rounded_product",
+        "BookAlgebra.percent_unscale",
+        "BookAlgebra.coverage_fraction_bounds",
+        "BookAlgebra.weighted_coverage_bounds",
+        "BookAlgebra.critical_gate_rejects",
+        "BookAlgebra.critical_gate_acceptance_requires_critical",
+        "BookAlgebra.ppv_denominator_expansion",
+        "BookAlgebra.ppv_from_counts",
+        "BookAlgebra.ppv_bounds",
+        "BookAlgebra.ppv_low_power_exact",
+        "BookAlgebra.ppv_high_power_exact",
+        "BookAlgebra.ppv_low_power_interval",
+        "BookAlgebra.ppv_high_power_interval",
+        "BookAlgebra.ppv_equal_odds_exact",
+        "BookAlgebra.prisma_conservation",
+        "BookAlgebra.partition_cardinality",
+        "BookAlgebra.prisma_included_le_identified",
+        "BookAlgebra.ema_70_30_bounds",
+        "BookAlgebra.ema_70_30_example",
+        "BookAlgebra.ema_moves_toward_score",
+        "BookAlgebra.ema_out_of_range_counterexample",
+        "BookAlgebra.amdahl_single_worker_time",
+        "BookAlgebra.amdahl_time_positive",
+        "BookAlgebra.amdahl_speedup_ceiling",
+        "BookAlgebra.amdahl_zero_sequential",
+        "BookAlgebra.amdahl_single_worker_speedup",
+        "BookAlgebra.amdahl_limit",
+        "BookAlgebra.amdahl_natural_executor_limit",
+        "BookAlgebra.amdahl_thirteen_exact",
+        "BookAlgebra.amdahl_thirteen_interval",
+        "BookAlgebra.amdahl_four_exact",
+        "BookAlgebra.amdahl_eight_exact",
+        "BookAlgebra.staking_reward_formula",
+        "BookAlgebra.staking_reward_example",
+        "BookAlgebra.slashing_bounds",
+        "BookAlgebra.slashing_example",
+        "BookAlgebra.congestion_below_first_block",
+        "BookAlgebra.congestion_first_block",
+        "BookAlgebra.normal_fee_example",
+        "BookAlgebra.high_priority_fee_example",
+        "BookAlgebra.catalog_reconciliation",
+        "BookAlgebra.catalog_largest_categories",
+        "BookAlgebra.catalog_concentration_exact",
+        "BookAlgebra.catalog_concentration_interval",
+        "BookAlgebra.catalog_mean_interval",
+        "BookAlgebra.historical_coverage_interval",
+        "BookAlgebra.fair_item_accounting",
+        "BookAlgebra.unit_coverage_complement_exact",
+        "BookAlgebra.expected_cost_example"
+      ]
+    },
+    "livro-core/lean/Attention.lean": {
+      "status": "machine_checked",
+      "returncode": 0,
+      "seconds": 4.36,
+      "output": "'BookAttention.softmax_soma_um' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.combinacao_convexa_limitada' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.roteamento_guloso_otimo' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.softmax_invariante_max' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.softmax_mem_Ioo' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.combinacao_convexa_limitada_baixo' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.softmax_peso_total_singleton' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.peso_cresce_com_escore' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.topk_dominam_resto' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.temperatura_aguca_maximo' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.exp_apos_subtrair_majorante_le_um' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.head_weights_sum_one' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.utility_mem_unit' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.utility_example_075' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.utility_example_064' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.jaccard_mem_unit' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.jaccard_symmetric' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.jaccard_identical' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.jaccard_disjoint' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.jaccard_example_half' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.jaccard_example_third' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.jaccard_example_three_fifths' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.eligible_minimum_exists' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.excluded_cannot_be_chosen' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.contract_example_c2_minimizes' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.two_row_softmax_sum' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.two_row_reversed' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.two_row_tie' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.two_row_translation_invariant' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.exp_two_rational_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.softmax_2_0_rational_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.softmax_0_2_rational_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.exp_point11_rational_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.utility_softmax_reduction' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.utility_softmax_075_064_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.utility_softmax_064_075_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.softmax_same_pool_order' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.eligible_pool_membership' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.unavailable_not_eligible' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookAttention.missing_capability_not_eligible' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "<source-and-axiom-audit>"
+      ],
+      "axioms": {
+        "BookAttention.softmax_soma_um": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.combinacao_convexa_limitada": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.roteamento_guloso_otimo": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.softmax_invariante_max": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.softmax_mem_Ioo": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.combinacao_convexa_limitada_baixo": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.softmax_peso_total_singleton": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.peso_cresce_com_escore": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.topk_dominam_resto": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.temperatura_aguca_maximo": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.exp_apos_subtrair_majorante_le_um": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.head_weights_sum_one": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.utility_mem_unit": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.utility_example_075": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.utility_example_064": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.jaccard_mem_unit": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.jaccard_symmetric": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.jaccard_identical": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.jaccard_disjoint": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.jaccard_example_half": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.jaccard_example_third": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.jaccard_example_three_fifths": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.eligible_minimum_exists": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.excluded_cannot_be_chosen": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.contract_example_c2_minimizes": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.two_row_softmax_sum": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.two_row_reversed": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.two_row_tie": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.two_row_translation_invariant": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.exp_two_rational_bounds": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.softmax_2_0_rational_bounds": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.softmax_0_2_rational_bounds": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.exp_point11_rational_bounds": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.utility_softmax_reduction": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.utility_softmax_075_064_bounds": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.utility_softmax_064_075_bounds": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.softmax_same_pool_order": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.eligible_pool_membership": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.unavailable_not_eligible": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookAttention.missing_capability_not_eligible": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      "sha256": "0af0f37825f71587b9c625d8aeb07b9f7ccaa6adf55826350acd069e5c033db5",
+      "theorems": [
+        "BookAttention.softmax_soma_um",
+        "BookAttention.combinacao_convexa_limitada",
+        "BookAttention.roteamento_guloso_otimo",
+        "BookAttention.softmax_invariante_max",
+        "BookAttention.softmax_mem_Ioo",
+        "BookAttention.combinacao_convexa_limitada_baixo",
+        "BookAttention.softmax_peso_total_singleton",
+        "BookAttention.peso_cresce_com_escore",
+        "BookAttention.topk_dominam_resto",
+        "BookAttention.temperatura_aguca_maximo",
+        "BookAttention.exp_apos_subtrair_majorante_le_um",
+        "BookAttention.head_weights_sum_one",
+        "BookAttention.utility_mem_unit",
+        "BookAttention.utility_example_075",
+        "BookAttention.utility_example_064",
+        "BookAttention.jaccard_mem_unit",
+        "BookAttention.jaccard_symmetric",
+        "BookAttention.jaccard_identical",
+        "BookAttention.jaccard_disjoint",
+        "BookAttention.jaccard_example_half",
+        "BookAttention.jaccard_example_third",
+        "BookAttention.jaccard_example_three_fifths",
+        "BookAttention.eligible_minimum_exists",
+        "BookAttention.excluded_cannot_be_chosen",
+        "BookAttention.contract_example_c2_minimizes",
+        "BookAttention.two_row_softmax_sum",
+        "BookAttention.two_row_reversed",
+        "BookAttention.two_row_tie",
+        "BookAttention.two_row_translation_invariant",
+        "BookAttention.exp_two_rational_bounds",
+        "BookAttention.softmax_2_0_rational_bounds",
+        "BookAttention.softmax_0_2_rational_bounds",
+        "BookAttention.exp_point11_rational_bounds",
+        "BookAttention.utility_softmax_reduction",
+        "BookAttention.utility_softmax_075_064_bounds",
+        "BookAttention.utility_softmax_064_075_bounds",
+        "BookAttention.softmax_same_pool_order",
+        "BookAttention.eligible_pool_membership",
+        "BookAttention.unavailable_not_eligible",
+        "BookAttention.missing_capability_not_eligible"
+      ]
+    },
+    "livro-core/lean/Foundations.lean": {
+      "status": "machine_checked",
+      "returncode": 0,
+      "seconds": 7.256,
+      "output": "'BookFoundations.independent_equal_event_intersection' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.independent_error_probability' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.error_union_is_complement' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.log_099_hasSum' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.log_099_taylor_error' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.log_099_taylor_interval' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.logarithm_power_identity' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.exponential_logarithm_power_identity' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.exponential_probability_example' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.linear_equation_iff' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.difference_of_squares_factorization' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.simple_sum_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.sine_antiderivative' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.modus_ponens' does not depend on any axioms\n'BookFoundations.four_binary_indicators' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.four_binary_indicators_percent' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.five_consecutive_intervals' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.consecutive_duration_nonnegative' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.mebibyte_bytes' depends on axioms: [propext]\n'BookFoundations.megabyte_bytes' depends on axioms: [propext]\n'BookFoundations.mebibyte_megabyte_difference' depends on axioms: [propext]\n'BookFoundations.directory_weight_guard_rejects_example' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookFoundations.file_weight_guard_rejects_example' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "<source-and-axiom-audit>"
+      ],
+      "axioms": {
+        "BookFoundations.independent_equal_event_intersection": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookFoundations.independent_error_probability": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookFoundations.error_union_is_complement": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookFoundations.log_099_hasSum": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookFoundations.log_099_taylor_error": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookFoundations.log_099_taylor_interval": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookFoundations.logarithm_power_identity": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookFoundations.exponential_logarithm_power_identity": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookFoundations.exponential_probability_example": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookFoundations.linear_equation_iff": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookFoundations.difference_of_squares_factorization": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookFoundations.simple_sum_exact": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookFoundations.sine_antiderivative": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookFoundations.modus_ponens": [],
+        "BookFoundations.four_binary_indicators": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookFoundations.four_binary_indicators_percent": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookFoundations.five_consecutive_intervals": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookFoundations.consecutive_duration_nonnegative": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookFoundations.mebibyte_bytes": [
+          "propext"
+        ],
+        "BookFoundations.megabyte_bytes": [
+          "propext"
+        ],
+        "BookFoundations.mebibyte_megabyte_difference": [
+          "propext"
+        ],
+        "BookFoundations.directory_weight_guard_rejects_example": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookFoundations.file_weight_guard_rejects_example": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      "sha256": "1925abf3f03d3bbb7b4aa4ba791910916057d8a42917163222768a341859e754",
+      "theorems": [
+        "BookFoundations.independent_equal_event_intersection",
+        "BookFoundations.independent_error_probability",
+        "BookFoundations.error_union_is_complement",
+        "BookFoundations.log_099_hasSum",
+        "BookFoundations.log_099_taylor_error",
+        "BookFoundations.log_099_taylor_interval",
+        "BookFoundations.logarithm_power_identity",
+        "BookFoundations.exponential_logarithm_power_identity",
+        "BookFoundations.exponential_probability_example",
+        "BookFoundations.linear_equation_iff",
+        "BookFoundations.difference_of_squares_factorization",
+        "BookFoundations.simple_sum_exact",
+        "BookFoundations.sine_antiderivative",
+        "BookFoundations.modus_ponens",
+        "BookFoundations.four_binary_indicators",
+        "BookFoundations.four_binary_indicators_percent",
+        "BookFoundations.five_consecutive_intervals",
+        "BookFoundations.consecutive_duration_nonnegative",
+        "BookFoundations.mebibyte_bytes",
+        "BookFoundations.megabyte_bytes",
+        "BookFoundations.mebibyte_megabyte_difference",
+        "BookFoundations.directory_weight_guard_rejects_example",
+        "BookFoundations.file_weight_guard_rejects_example"
+      ]
+    },
+    "livro-core/lean/Models.lean": {
+      "status": "machine_checked",
+      "returncode": 0,
+      "seconds": 2.993,
+      "output": "'BookModels.reference_counts_sum' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.reference_counts_mean' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.equal_cardinality_not_equal_sets' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.cardinality_equality_insufficient' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.reduction_ratio_nonnegative_le_total' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.reduction_ratio_at_least_one' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.reduction_example_40_5' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.bernoulli_mass_normalized' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.bernoulli_mass_nonnegative' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.bernoulli_finite_cost_equals_product' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.bernoulli_product_expansion' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.bernoulli_example_02_2' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.bernoulli_exercise_05_2' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.bernoulli_cost_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.additive_cost_identity' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.additive_cost_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.reducing_accidental_reduces_total' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.discrepancy_reconstructs_observed' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.discrepancy_zero_iff' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.discrepancy_reversed' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.test_spec_ratio_260_371_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.test_spec_ratio_rounds_0701' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.series_spec_ratio_285_371_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.series_spec_ratio_rounds_0768' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.tests_per_series_spec_260_285_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.tests_per_series_spec_rounds_091' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.specs_per_cycle_371_455_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.specs_per_cycle_rounds_0815' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.cycles_per_day_455_69_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.cycles_per_day_rounds_66' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.amortized_diagnosis_339_12_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.amortized_diagnosis_rounds_028' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.four_sixths_equals_two_thirds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.four_sixths_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.one_eleventh_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.one_eleventh_rounds_0091' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.two_thirds_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.attention_dimension_sqrt_four' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.attention_dimension_scaled_four' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.ppv_eight_thirteenths_complement' depends on axioms: [propext, Classical.choice, Quot.sound]\n'BookModels.ppv_complement_percentage_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "<source-and-axiom-audit>"
+      ],
+      "axioms": {
+        "BookModels.reference_counts_sum": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.reference_counts_mean": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.equal_cardinality_not_equal_sets": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.cardinality_equality_insufficient": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.reduction_ratio_nonnegative_le_total": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.reduction_ratio_at_least_one": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.reduction_example_40_5": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.bernoulli_mass_normalized": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.bernoulli_mass_nonnegative": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.bernoulli_finite_cost_equals_product": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.bernoulli_product_expansion": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.bernoulli_example_02_2": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.bernoulli_exercise_05_2": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.bernoulli_cost_bounds": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.additive_cost_identity": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.additive_cost_lower_bound": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.reducing_accidental_reduces_total": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.discrepancy_reconstructs_observed": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.discrepancy_zero_iff": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.discrepancy_reversed": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.test_spec_ratio_260_371_bounds": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.test_spec_ratio_rounds_0701": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.series_spec_ratio_285_371_bounds": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.series_spec_ratio_rounds_0768": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.tests_per_series_spec_260_285_bounds": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.tests_per_series_spec_rounds_091": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.specs_per_cycle_371_455_bounds": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.specs_per_cycle_rounds_0815": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.cycles_per_day_455_69_bounds": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.cycles_per_day_rounds_66": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.amortized_diagnosis_339_12_exact": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.amortized_diagnosis_rounds_028": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.four_sixths_equals_two_thirds": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.four_sixths_bounds": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.one_eleventh_bounds": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.one_eleventh_rounds_0091": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.two_thirds_bounds": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.attention_dimension_sqrt_four": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.attention_dimension_scaled_four": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.ppv_eight_thirteenths_complement": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "BookModels.ppv_complement_percentage_bounds": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      "sha256": "1fb3368d76358d90f40da3703b3dfa97950db068a9964b6290ad9a4f7a25f470",
+      "theorems": [
+        "BookModels.reference_counts_sum",
+        "BookModels.reference_counts_mean",
+        "BookModels.equal_cardinality_not_equal_sets",
+        "BookModels.cardinality_equality_insufficient",
+        "BookModels.reduction_ratio_nonnegative_le_total",
+        "BookModels.reduction_ratio_at_least_one",
+        "BookModels.reduction_example_40_5",
+        "BookModels.bernoulli_mass_normalized",
+        "BookModels.bernoulli_mass_nonnegative",
+        "BookModels.bernoulli_finite_cost_equals_product",
+        "BookModels.bernoulli_product_expansion",
+        "BookModels.bernoulli_example_02_2",
+        "BookModels.bernoulli_exercise_05_2",
+        "BookModels.bernoulli_cost_bounds",
+        "BookModels.additive_cost_identity",
+        "BookModels.additive_cost_lower_bound",
+        "BookModels.reducing_accidental_reduces_total",
+        "BookModels.discrepancy_reconstructs_observed",
+        "BookModels.discrepancy_zero_iff",
+        "BookModels.discrepancy_reversed",
+        "BookModels.test_spec_ratio_260_371_bounds",
+        "BookModels.test_spec_ratio_rounds_0701",
+        "BookModels.series_spec_ratio_285_371_bounds",
+        "BookModels.series_spec_ratio_rounds_0768",
+        "BookModels.tests_per_series_spec_260_285_bounds",
+        "BookModels.tests_per_series_spec_rounds_091",
+        "BookModels.specs_per_cycle_371_455_bounds",
+        "BookModels.specs_per_cycle_rounds_0815",
+        "BookModels.cycles_per_day_455_69_bounds",
+        "BookModels.cycles_per_day_rounds_66",
+        "BookModels.amortized_diagnosis_339_12_exact",
+        "BookModels.amortized_diagnosis_rounds_028",
+        "BookModels.four_sixths_equals_two_thirds",
+        "BookModels.four_sixths_bounds",
+        "BookModels.one_eleventh_bounds",
+        "BookModels.one_eleventh_rounds_0091",
+        "BookModels.two_thirds_bounds",
+        "BookModels.attention_dimension_sqrt_four",
+        "BookModels.attention_dimension_scaled_four",
+        "BookModels.ppv_eight_thirteenths_complement",
+        "BookModels.ppv_complement_percentage_bounds"
+      ]
+    }
+  },
+  "context_files": {
+    "README.md": {
+      "sha256": "6cbe696b44366026ef1ea80c1779843bf31cdc26c5aa55c305420d87eca1f97f"
+    },
+    "docs/VERIFICACAO_FORMAL_LIVRO_R908.md": {
+      "sha256": "4a237e8087d0013bb413c07b86dbfea24fc13f9bc22112b3a68aeda6c4b229bd"
+    },
+    "docs/book-math-map-r908.json": {
+      "sha256": "d8a7ce46f2448a366bba6d3273f6dae0900183f0ebfe67a0ec4f384b480de55f"
+    },
+    "docs/superpowers/plans/2026-10-15-livro-lean4.md": {
+      "sha256": "daad7c86a0778b7a059da1b57acd54f274e9bb556dca0e3335d2d5bdc29a0062"
+    },
+    "livro-core/gen_inventario.py": {
+      "sha256": "820e853b85ed807af6816b521c8748c3f8687ea0b3f8b9197fa7950d988cba9a"
+    },
+    "livro-core/gen_mod10.py": {
+      "sha256": "9b83d74ae3246495bfe476d9f96a0c7c54a07e2342f333c59211d91cea6c4c38"
+    },
+    "livro-core/gen_mod14_ativacao.py": {
+      "sha256": "4a8c866f176c801ce98f91aadae2eab9df26783e57722de5e9c7b1decffb83dc"
+    },
+    "livro-core/inventario-core.tex": {
+      "sha256": "d6c8103a1a4aac84313550ae016258bc866f9de893b8e6368e073fca81bbd16a"
+    },
+    "livro-core/lean/lake-manifest.json": {
+      "sha256": "299b633ef39b37696183630392b7600c420d7eb65847e3d71f83cd3480511809"
+    },
+    "livro-core/lean/lakefile.toml": {
+      "sha256": "b9e0bab63a95a4308e346939ee5cea1699ff1ec035fe5611c9fec0104e218333"
+    },
+    "livro-core/lean/lean-toolchain": {
+      "sha256": "d5edba4e4b8faad9c1baeadb265716d20d03be4d1a2647dc5e35b0c0325bea7b"
+    },
+    "livro-core/macros.tex": {
+      "sha256": "f749a2104d2541a8dcf5ff8c262dad6cbce79707abdc12a37a23c39465eac826"
+    },
+    "livro-core/main.tex": {
+      "sha256": "c2784b9862accbb97321e1b629a6fe1472aca4d1d49024e0bdb62d4c5267e941"
+    },
+    "livro-core/mod-00-capa.tex": {
+      "sha256": "e94e6a7f277b689accf29cdee768b815310b26c467d2b0fd07e27fd48912661f"
+    },
+    "livro-core/mod-00a-enredo-prefacio.tex": {
+      "sha256": "5bfdb1a73427171e59af81e1debd259199814de893501844d7631370d1008296"
+    },
+    "livro-core/mod-00b-jornada-leitor.tex": {
+      "sha256": "ac8231d903989806eb60258af53ac967bf0ea0045d187c2e707e220e83ea0adb"
+    },
+    "livro-core/mod-00c-projeto-pedagogico.tex": {
+      "sha256": "b89a864cd04fc96d61ecb435b2472b9a844451cf78d414609e9aad01235a9716"
+    },
+    "livro-core/mod-01-fundacoes.tex": {
+      "sha256": "9e252099bd268ab5d658d47d92d32d1b11a58ed17466762d5dd7f91ecde65ecd"
+    },
+    "livro-core/mod-01b-historia.tex": {
+      "sha256": "c06a05474b2edc9592f558fe26142bb0e6b8edeaa12719ef4dfbadeab30c073e"
+    },
+    "livro-core/mod-01c-instalacao.tex": {
+      "sha256": "51e4a0a054d087cd4b85ce9b53185754836f77fa29e6e36609dd6c31eed1472a"
+    },
+    "livro-core/mod-01d-arquitetura.tex": {
+      "sha256": "849d6f566fb0f4bf3b95fd82a041f75e1bb73886fc2dae7c6be091d0648374fa"
+    },
+    "livro-core/mod-02-orquestracao.tex": {
+      "sha256": "f5c793ca85c977eb33a71924b88fce0b9aea4e216dc3223cd444e0ab8f34a511"
+    },
+    "livro-core/mod-03-memoria-mci.tex": {
+      "sha256": "0e29ad57a20cc322849497270060982adbf1feda544ce94437dde622f2793515"
+    },
+    "livro-core/mod-04-qualidade-sdd.tex": {
+      "sha256": "f8c893120e1e932b595872dc52969748794d047e4d523eeaefb93ba2a50332d0"
+    },
+    "livro-core/mod-05-raciocinio.tex": {
+      "sha256": "984f4e990bc18b89ef12544a331479d0666fc73b127285ce5808437f719698c5"
+    },
+    "livro-core/mod-06-ciencia.tex": {
+      "sha256": "35eb6dff35457b717209454b7f451d362ab145b4cc2c8ea824e0112139ef667c"
+    },
+    "livro-core/mod-07-integracoes.tex": {
+      "sha256": "02f09236e1d6efa5564662ab294daf4b3b52c61c915e1f37758716d779ac3768"
+    },
+    "livro-core/mod-08-ecossistema.tex": {
+      "sha256": "566fb4caa35743c8ebee095c85a60773524881b44c17fd82def5b2d54df695fe"
+    },
+    "livro-core/mod-09-infra.tex": {
+      "sha256": "bac57c83f1365b681f91cdd0721dd31e7fc6fb96632137e3eceb65df27fd9462"
+    },
+    "livro-core/mod-09a-comparada.tex": {
+      "sha256": "eb6a3621759fe3e725f1372e946c8abc002abb14f9d5be339f21f97bf4e68d49"
+    },
+    "livro-core/mod-10-catalogo.tex": {
+      "sha256": "27c338ff79201e697d1ee733be7646fca450266747c9bfd485d02319a2032389"
+    },
+    "livro-core/mod-11-apendices.tex": {
+      "sha256": "6435c94c8f4fc0d195c01d77c715330888124a5f634c9d3b67be13a9970d6866"
+    },
+    "livro-core/mod-12-fichas-nucleo.tex": {
+      "sha256": "1ff89b19dce20f5eab8f4252afde7dd102e04ec41165f3166da33929e62493d7"
+    },
+    "livro-core/mod-13-ativacao-agentes.tex": {
+      "sha256": "710493adcf2486aaaf9200511c722661b30e408e7442831a35198597b7f13be5"
+    },
+    "livro-core/mod-14-lote-categorias.tex": {
+      "sha256": "cadb7aaef017971286fc7de9cd09fdfc6027cd1a68ac0a551113096318f168f7"
+    },
+    "livro-core/mod-15-epilogo-reproducao.tex": {
+      "sha256": "726a0081a4419ffa76f4cdcc915e1d6b8d4cb95a3c30c8ba1b8a062e73eeaa70"
+    },
+    "livro-core/mod-16-mapas-fluxogramas.tex": {
+      "sha256": "6999158e62ac6793ff7893c0b0211e2e8dddb573c715e70e5ad41f625c87681e"
+    },
+    "livro-core/mod-17-e1e7-para-leigos.tex": {
+      "sha256": "9ea82ebf38456a41ef504abefaa33a0e26d094eb3eaba29443e16ecb703a0e31"
+    },
+    "livro-core/mod-18-nivel0-universal.tex": {
+      "sha256": "8704259b1928baf7aca7d300bdd27e566c77197742cdb75eca250bc1b28a96be"
+    },
+    "livro-core/mod-19-podcast.tex": {
+      "sha256": "1cc8b5a32ba63cb6c330eec871483da7838982394a5724bef1f21584d24c4dc1"
+    },
+    "livro-core/mod-20-podcast-modulos.tex": {
+      "sha256": "a4eea3ee49c9f020a5d8b72a5ebcd8c69c0557f812f3103f08e61dbbe5606beb"
+    },
+    "livro-core/mod-21-mapa-teorias.tex": {
+      "sha256": "8f738dda98cebd013607307afc275724d4c3bcaaf0ad832ef1a9b285cc347432"
+    },
+    "livro-core/mod-22-reproducao-wsl-leigo.tex": {
+      "sha256": "620cf63ece37f399510d03af1ad97c6a8b28efd26e386f043a358148b7a7a75d"
+    },
+    "livro-core/mod-23-atlas-infograficos.tex": {
+      "sha256": "fbc2a3bdd07d0a3bd0bf38a9d583b5fe452fdbd4d2013bea4ca5e381865e8bff"
+    },
+    "livro-core/mod-24-kit-mindmap-slides.tex": {
+      "sha256": "b326cc7451412b183b975d6af05bcf0e7366a80039c61c5149d88c3759b8414a"
+    },
+    "scripts/verify_book_lean.py": {
+      "sha256": "2d7d7142071f4a7181f9c712c19696bc6e4b657dd07434cbc940f370d603a366"
+    },
+    "specs/SPEC-935-R908-livro-provas-lean4.md": {
+      "sha256": "d0bda6fbdf16ea6db0428a161bd60eaa087fff53191e3990dace1b5066b29504"
+    },
+    "tests/test_r908_book_lean.py": {
+      "sha256": "e64d5739cf9f765a14473afed39733fb61a97e89edff3e42141c9e8b50802317"
+    }
+  },
+  "environment": {
+    "dependencies": {
+      "mathlib": {
+        "revision": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+        "tracked_worktree_clean": true
+      },
+      "plausible": {
+        "revision": "118aa17ee84656b8bd727fef7c458ee8c833385c",
+        "tracked_worktree_clean": true
+      },
+      "LeanSearchClient": {
+        "revision": "ddf04cf3949fa556442341e87d47f9f6e6074707",
+        "tracked_worktree_clean": true
+      },
+      "importGraph": {
+        "revision": "e928b72544873815af278d38681b31c0293588e3",
+        "tracked_worktree_clean": true
+      },
+      "proofwidgets": {
+        "revision": "106ff4fafc74ef4ac99d81dbf3ab399118f497a5",
+        "tracked_worktree_clean": true
+      },
+      "aesop": {
+        "revision": "355695d523e41d0554926416cba2a2b3544fbbc9",
+        "tracked_worktree_clean": true
+      },
+      "Qq": {
+        "revision": "6a489d9af5d0c47e5b259e2e8bcdfc1811b5a259",
+        "tracked_worktree_clean": true
+      },
+      "batteries": {
+        "revision": "f2effa3d803fda822b1f97b806c47cf2adfbcbc2",
+        "tracked_worktree_clean": true
+      },
+      "Cli": {
+        "revision": "e92c9f15fdfacc8536f31cfb3b7ad26c3c8cd204",
+        "tracked_worktree_clean": true
+      }
+    },
+    "lean_binary_sha256": "e8baaa71855a616dc351028f3ad2200051b0671f423a1696a100e809302d5550",
+    "project_config_sha256": {
+      "lean-toolchain": "d5edba4e4b8faad9c1baeadb265716d20d03be4d1a2647dc5e35b0c0325bea7b",
+      "lakefile.toml": "b9e0bab63a95a4308e346939ee5cea1699ff1ec035fe5611c9fec0104e218333",
+      "lake-manifest.json": "299b633ef39b37696183630392b7600c420d7eb65847e3d71f83cd3480511809"
+    }
+  },
+  "controls": {
+    "positive": {
+      "status": "machine_checked",
+      "returncode": 0,
+      "seconds": 7.78,
+      "output": "",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "<source-and-axiom-audit>"
+      ]
+    },
+    "false_equality": {
+      "status": "compiler_rejected",
+      "returncode": 1,
+      "seconds": 8.153,
+      "output": "/home/marceloclaro/opencode-ecosystem-core/livro-core/lean/book-r908-pgm45ece.lean:2:41: error: unsolved goals\n⊢ False\n",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "<source-and-axiom-audit>"
+      ]
+    },
+    "open_proof": {
+      "status": "rejected_source",
+      "returncode": null,
+      "errors": [
+        "termo não permitido: sorry"
+      ]
+    },
+    "invented_axiom": {
+      "status": "rejected_source",
+      "returncode": null,
+      "errors": [
+        "termo não permitido: axiom"
+      ]
+    },
+    "mutated_ema": {
+      "status": "compiler_rejected",
+      "returncode": 1,
+      "seconds": 7.474,
+      "output": "/home/marceloclaro/opencode-ecosystem-core/livro-core/lean/book-r908-n3t9uo85.lean:2:60: error: unsolved goals\n⊢ False\n",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "<source-and-axiom-audit>"
+      ]
+    }
+  },
+  "mapping": {
+    "families": 28,
+    "formal_model_families": 27,
+    "empirical_families_outside_proof_claim": 1
+  },
+  "theorem_count": 158
+}

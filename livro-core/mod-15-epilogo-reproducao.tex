@@ -329,4 +329,131 @@ Para a posição com escore 0 — segunda coluna da primeira linha e primeira co
 \fontecore{transformer/attention.py}{AttentionRouter.route}
 
 
+
+% BEGIN-R908-LEAN
+\section{Da conta à demonstração: verificação formal com Lean 4}
+\label{sec:lean-livro}
+
+A reprodução encontra aqui um complemento: conferir uma dedução exige mais
+que obter o mesmo decimal duas vezes. Ana começa pela pergunta que a fórmula
+responde; Bruno explicita o domínio e as hipóteses; Carla examina se a
+conclusão realmente decorre delas. O Lean 4 confere a demonstração escrita
+nesse modelo. A relação entre o modelo e o mundo continua exigindo evidência.
+
+\begin{definicao}
+\textbf{Quatro objetos distintos.} Uma identidade exata, como
+$A(13)=65/17$ no modelo de Amdahl com $s=1/5$, é uma proposição matemática.
+O decimal $3{,}8$ é um arredondamento dessa razão. A fração sequencial
+$s=1/5$ é uma hipótese didática até que exista uma medição apropriada.
+Um tempo registrado em log é uma observação: sua ocorrência não se demonstra
+substituindo o número em uma igualdade.
+\end{definicao}
+
+\begin{flowch}[Mapa da verificação formal]{Cada seta conserva o alcance do enunciado.}
+\node[fns,text width=3.5cm] (texto) {Enunciado no livro\\domínio e hipóteses};
+\node[fn,text width=3.5cm,right=7mm of texto] (prova) {Tradução em Lean\\prova e dependências};
+\node[fn,text width=3.5cm,right=7mm of prova] (recibo) {Compilação real\\recibo e hashes};
+\draw[seta] (texto)--(prova);\draw[seta] (prova)--(recibo);
+\end{flowch}
+\begin{descricao}
+\textbf{Como funciona e por quê.} O texto oferece a interpretação; o arquivo Lean fixa
+uma proposição precisa; o recibo identifica os bytes efetivamente conferidos.
+\textbf{Justificativa.} Uma prova aceita sem correspondência fiel com a fórmula resolveria outro
+problema. Por isso a matriz externa registra, para cada família, enunciados,
+hipóteses, fontes e limites. A função de verificação encadeia a compilação, a
+auditoria e a custódia descritas nas setas.
+\end{descricao}
+\fontecore{scripts/verify_book_lean.py}{verify}
+
+\begin{metodo}
+\textbf{Exemplo completo: risco complementar.} Seja $A_i$ o evento mensurável
+``a saída $i$ está correta'', em um espaço de probabilidade. Para $N$ eventos
+\emph{conjuntamente independentes}, todos com probabilidade $p$, a formalização
+demonstra
+\[
+ \mathrm{P}\!\left(\bigcap_{i=1}^{N}A_i\right)=p^N,
+ \qquad
+ \mathrm{P}\!\left(\bigcup_{i=1}^{N}A_i^c\right)=1-p^N.
+\]
+O arquivo de fundamentos demonstra a passagem da independência ao produto;
+o arquivo algébrico confere os intervalos numéricos. Para $p=99/100$ e
+$N=216$, obtém-se rigorosamente
+\[
+ 0{,}88592<1-(99/100)^{216}<0{,}88593.
+\]
+A conclusão $88{,}6\%$ é um arredondamento desse cenário. Ela não estima
+um erro do Core: dependências entre agentes, memória compartilhada e tarefas
+heterogêneas impedem assumir esse modelo sem investigação empírica.
+\end{metodo}
+
+\begin{resultado}
+\textbf{Exemplo de aproximação controlada.} A expansão de $\ln(1-u)$ é
+convergente para $|u|<1$. Para $u=1/100$, as provas conferem a série e o resto:
+\[
+ \left|\ln(99/100)+\frac{201}{20000}\right|\leq\frac{1}{990000}.
+\]
+Logo $\ln(0{,}99)\approx-0{,}01005$ tem um erro limitado; não é uma igualdade
+exata. De modo análogo, a série da exponencial fornece intervalos racionais
+para os pesos do exemplo de utilidade:
+$0{,}52747<w_A<0{,}52748$ e $0{,}47252<w_B<0{,}47253$.
+Os intervalos são demonstrados em números reais; não são apenas saídas
+decimais copiadas de uma calculadora.
+\end{resultado}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{p{2.6cm}YY}
+\toprule Módulo formal & Conteúdo & Hipóteses essenciais \\ \midrule
+\pth{Algebra.lean} & PPV, EMA, Amdahl, proporções, taxas e contabilidade & Denominadores válidos; faixas e partições declaradas. \\
+\pth{Attention.lean} & Utilidade, Jaccard, seleção e softmax & Conjuntos finitos; candidatos elegíveis; soma positiva; domínio real. \\
+\pth{Foundations.lean} & Probabilidade, logaritmo, cálculo, lógica, tempos e unidades & Mensurabilidade, independência conjunta e condições das identidades. \\
+\pth{Models.lean} & Modelos de custo, reconciliação e cálculos auxiliares & Definições explícitas; números didáticos ou históricos identificados. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{metodo}
+\textbf{Práxis: refazer o gate.} A pasta \pth{livro-core/lean/} conserva
+\pth{lean-toolchain}, configuração Lake e lockfile. Esta edição fixa
+Lean~4.34.1 e uma revisão específica da Mathlib. Depois de preparar as
+dependências descritas na documentação, execute na raiz do Core:
+\begin{verbatim}
+python3 scripts/verify_book_lean.py --project livro-core/lean
+\end{verbatim}
+O verificador compila as fontes e inspeciona as dependências de cada teorema
+no mesmo processo. Não há aprovação por análise sintática de reserva.
+Prova incompleta, axioma acrescentado, auditoria ausente ou repetida,
+versão divergente e dependência modificada impedem o aceite. Os controles
+incluem uma igualdade falsa e uma mutação do cálculo de EMA, que devem ser
+recusadas pelo compilador. O recibo também conserva hashes das fontes do
+livro, da matriz e do procedimento. Uma edição posterior exige reexecução.
+\end{metodo}
+
+\begin{aviso}
+\textbf{Alcance lógico e científico.} As demonstrações usam os fundamentos
+clássicos declarados no recibo: extensionalidade proposicional, escolha e
+quocientes. Nenhum axioma local foi introduzido para completar as provas.
+A verificação não certifica independência empírica, dados de experimentos,
+qualidade de fontes, calibração de confiança, identidade integral com o
+runtime Python nem segurança IEEE-754. Inventários, tempos e estatísticas
+observadas mantêm sua própria cadeia de evidência. Revisão científica
+externa continua sendo uma etapa distinta.
+\end{aviso}
+
+\begin{resultado}
+\textbf{Exercício em três níveis.} Ana explica por que o peso $w_A$ não é
+uma chance de acerto. Bruno identifica a hipótese que faltaria se os eventos
+fossem independentes apenas aos pares. Carla altera, em uma cópia, o resultado
+exato da EMA de $31/50$ para $32/50$ e confere a rejeição. Nenhuma dessas
+atividades dispensa a leitura das premissas.
+\end{resultado}
+
+\fontecore{livro-core/lean/Foundations.lean}{independent_error_probability}
+\fontecore{scripts/verify_book_lean.py}{verify}
+A matriz de hipóteses está em \pth{docs/VERIFICACAO_FORMAL_LIVRO_R908.md}.
+\par O índice estruturado está em \pth{docs/book-math-map-r908.json}.
+\par O recibo local está em \pth{docs/verification-book-lean-r908.json}.
+Ele identifica a execução e não substitui as hipóteses dos enunciados.
+% END-R908-LEAN
+
 % R901-PONTE-FECHO

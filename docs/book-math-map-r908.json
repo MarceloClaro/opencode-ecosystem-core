@@ -1,0 +1,469 @@
+{
+  "schema_version": 1,
+  "cycle": "R908",
+  "inventory_method": "Leitura dirigida independente dos32módulos e correspondência manual de28famílias; inspeção dos enunciados formais, não métrica de cobertura funcional.",
+  "scope": "27famílias matemáticas/modelos explícitos;1família de observações preservada fora da alegação de prova. Prova não valida dados nem runtimePython.",
+  "families": [
+    {
+      "id": "F01",
+      "title": "Probabilidade complementar e independência conjunta",
+      "kind": "formal_model",
+      "book_sources": [
+        "livro-core/mod-01-fundacoes.tex",
+        "livro-core/mod-15-epilogo-reproducao.tex"
+      ],
+      "theorems": [
+        "BookFoundations.independent_equal_event_intersection",
+        "BookFoundations.independent_error_probability",
+        "BookFoundations.error_union_is_complement",
+        "BookAlgebra.complement_probability_bounds"
+      ],
+      "hypotheses_and_limits": "Espaço de probabilidade; eventos mensuráveis conjuntamente independentes com mesma massa p. A independência não foi medida no Core."
+    },
+    {
+      "id": "F02",
+      "title": "Potências e arredondamento do risco",
+      "kind": "exact_and_interval",
+      "book_sources": [
+        "livro-core/mod-01-fundacoes.tex",
+        "livro-core/mod-15-epilogo-reproducao.tex"
+      ],
+      "theorems": [
+        "BookAlgebra.independent_error_216_tight_interval",
+        "BookAlgebra.independent_error_216_high_accuracy_interval"
+      ],
+      "hypotheses_and_limits": "Racionais99/100 e999/1000, N=216; exemplos didáticos, não taxa de erro observada."
+    },
+    {
+      "id": "F03",
+      "title": "Série do logaritmo, resto e retorno exponencial",
+      "kind": "exact_and_interval",
+      "book_sources": [
+        "livro-core/mod-01-fundacoes.tex"
+      ],
+      "theorems": [
+        "BookFoundations.log_099_hasSum",
+        "BookFoundations.log_099_taylor_error",
+        "BookFoundations.log_099_taylor_interval",
+        "BookFoundations.logarithm_power_identity",
+        "BookFoundations.exponential_probability_example"
+      ],
+      "hypotheses_and_limits": "|u|<1 na série; base positiva no retorno exp(log p); dois termos deixam erro≤1/990000."
+    },
+    {
+      "id": "F04",
+      "title": "PPV e contagem de verdadeiros/falsos positivos",
+      "kind": "formal_model",
+      "book_sources": [
+        "livro-core/mod-00b-jornada-leitor.tex",
+        "livro-core/mod-09a-comparada.tex",
+        "livro-core/mod-15-epilogo-reproducao.tex"
+      ],
+      "theorems": [
+        "BookAlgebra.ppv_from_counts",
+        "BookAlgebra.ppv_denominator_expansion",
+        "BookAlgebra.ppv_bounds",
+        "BookAlgebra.ppv_low_power_exact",
+        "BookAlgebra.ppv_high_power_exact",
+        "BookAlgebra.ppv_equal_odds_exact",
+        "BookModels.ppv_eight_thirteenths_complement",
+        "BookModels.ppv_complement_percentage_bounds"
+      ],
+      "hypotheses_and_limits": "Razão préviaR; taxaα e poder1-β válidos; denominador positivo. Modelo sem viés explícito, não probabilidade de acerto de software."
+    },
+    {
+      "id": "F05",
+      "title": "Proporções, percentuais e quocientes históricos",
+      "kind": "exact_and_interval",
+      "book_sources": [
+        "livro-core/mod-01-fundacoes.tex",
+        "livro-core/mod-01b-historia.tex",
+        "livro-core/mod-06-ciencia.tex",
+        "livro-core/mod-11-apendices.tex"
+      ],
+      "theorems": [
+        "BookAlgebra.percent_unscale",
+        "BookAlgebra.coverage_fraction_bounds",
+        "BookAlgebra.weighted_coverage_bounds",
+        "BookAlgebra.historical_coverage_interval",
+        "BookModels.test_spec_ratio_rounds_0701",
+        "BookModels.series_spec_ratio_rounds_0768",
+        "BookModels.tests_per_series_spec_rounds_091",
+        "BookModels.specs_per_cycle_rounds_0815",
+        "BookModels.cycles_per_day_rounds_66",
+        "BookModels.one_eleventh_rounds_0091",
+        "BookModels.two_thirds_bounds"
+      ],
+      "hypotheses_and_limits": "Denominador>0; intervalo[0,1] somente quando numerador≤denominador. Razões teste/spec não são cobertura funcional. Números históricos são entradas."
+    },
+    {
+      "id": "F06",
+      "title": "Gate crítico e conjunção de critérios",
+      "kind": "formal_model",
+      "book_sources": [
+        "livro-core/mod-06-ciencia.tex",
+        "livro-core/mod-14-lote-categorias.tex"
+      ],
+      "theorems": [
+        "BookAlgebra.critical_gate_rejects",
+        "BookAlgebra.critical_gate_acceptance_requires_critical"
+      ],
+      "hypotheses_and_limits": "Definição booleana de aceite condicionada ao critério crítico; não equivalência integral com o código de governança."
+    },
+    {
+      "id": "F07",
+      "title": "Reconciliação de catálogo e identidade de conjuntos",
+      "kind": "exact_and_interval",
+      "book_sources": [
+        "livro-core/mod-10-catalogo.tex",
+        "livro-core/mod-14-lote-categorias.tex"
+      ],
+      "theorems": [
+        "BookAlgebra.catalog_reconciliation",
+        "BookAlgebra.catalog_largest_categories",
+        "BookModels.equal_cardinality_not_equal_sets",
+        "BookModels.cardinality_equality_insufficient"
+      ],
+      "hypotheses_and_limits": "99+213=312 e81+18=99 conferem contagem. Conjuntos distintos podem ter a mesma cardinalidade; igualdade de IDs exige inspeção própria."
+    },
+    {
+      "id": "F08",
+      "title": "Média e concentração",
+      "kind": "exact_and_interval",
+      "book_sources": [
+        "livro-core/mod-10-catalogo.tex",
+        "livro-core/mod-11-apendices.tex"
+      ],
+      "theorems": [
+        "BookAlgebra.catalog_concentration_exact",
+        "BookAlgebra.catalog_concentration_interval",
+        "BookAlgebra.catalog_mean_interval",
+        "BookModels.reference_counts_sum",
+        "BookModels.reference_counts_mean"
+      ],
+      "hypotheses_and_limits": "Contagens dadas, total>0; média não descreve dispersão. Exemplo[1,1,1,9] tem média3."
+    },
+    {
+      "id": "F09",
+      "title": "Redução estrutural M/k",
+      "kind": "formal_model",
+      "book_sources": [
+        "livro-core/mod-02-orquestracao.tex"
+      ],
+      "theorems": [
+        "BookModels.reduction_ratio_nonnegative_le_total",
+        "BookModels.reduction_ratio_at_least_one",
+        "BookModels.reduction_example_40_5"
+      ],
+      "hypotheses_and_limits": "M≥0,k≥1 para0≤M/k≤M; M≥k para razão≥1.40/5=8 não é ganho medido em tokens/latência."
+    },
+    {
+      "id": "F10",
+      "title": "Seleção restrita e elegibilidade",
+      "kind": "formal_model",
+      "book_sources": [
+        "livro-core/mod-02-orquestracao.tex",
+        "livro-core/mod-13-ativacao-agentes.tex"
+      ],
+      "theorems": [
+        "BookAttention.eligible_minimum_exists",
+        "BookAttention.excluded_cannot_be_chosen",
+        "BookAttention.contract_example_c2_minimizes",
+        "BookAttention.eligible_pool_membership",
+        "BookAttention.unavailable_not_eligible",
+        "BookAttention.missing_capability_not_eligible"
+      ],
+      "hypotheses_and_limits": "Conjunto finito não vazio e custos reais; empate requer seletor. Disponibilidade e capacidades são condições formais, não inferência executada."
+    },
+    {
+      "id": "F11",
+      "title": "EMA e domínio da confiança",
+      "kind": "formal_model",
+      "book_sources": [
+        "livro-core/mod-03-memoria-mci.tex"
+      ],
+      "theorems": [
+        "BookAlgebra.ema_70_30_bounds",
+        "BookAlgebra.ema_70_30_example",
+        "BookAlgebra.ema_moves_toward_score",
+        "BookAlgebra.ema_out_of_range_counterexample"
+      ],
+      "hypotheses_and_limits": "Confiança e escore em[0,1] garantem faixa; escore fora da faixa pode romper limite. Não prova calibração ou validação do parâmetro na API."
+    },
+    {
+      "id": "F12",
+      "title": "Lei de Amdahl e limite assintótico",
+      "kind": "formal_model",
+      "book_sources": [
+        "livro-core/mod-05-raciocinio.tex"
+      ],
+      "theorems": [
+        "BookAlgebra.amdahl_time_positive",
+        "BookAlgebra.amdahl_speedup_ceiling",
+        "BookAlgebra.amdahl_limit",
+        "BookAlgebra.amdahl_natural_executor_limit",
+        "BookAlgebra.amdahl_thirteen_exact",
+        "BookAlgebra.amdahl_thirteen_interval",
+        "BookAlgebra.amdahl_four_exact",
+        "BookAlgebra.amdahl_eight_exact"
+      ],
+      "hypotheses_and_limits": "Modelo ideal de carga fixa:0<s≤1,N>0; limite n→∞ com s≠0. Não estima speedup de motores heterogêneos. Exato65/17, arredondado3,8."
+    },
+    {
+      "id": "F13",
+      "title": "Contabilidade PRISMA",
+      "kind": "formal_model",
+      "book_sources": [
+        "livro-core/mod-06-ciencia.tex"
+      ],
+      "theorems": [
+        "BookAlgebra.prisma_conservation",
+        "BookAlgebra.partition_cardinality",
+        "BookAlgebra.prisma_included_le_identified"
+      ],
+      "hypotheses_and_limits": "Partições disjuntas e sem perdas; registros/relatórios/estudos são unidades distintas. Aritmética não valida triagem bibliográfica."
+    },
+    {
+      "id": "F14",
+      "title": "Staking, slashing e taxa por blocos",
+      "kind": "formal_model",
+      "book_sources": [
+        "livro-core/mod-08-ecossistema.tex"
+      ],
+      "theorems": [
+        "BookAlgebra.staking_reward_formula",
+        "BookAlgebra.staking_reward_example",
+        "BookAlgebra.slashing_bounds",
+        "BookAlgebra.slashing_example",
+        "BookAlgebra.congestion_below_first_block",
+        "BookAlgebra.congestion_first_block",
+        "BookAlgebra.normal_fee_example",
+        "BookAlgebra.high_priority_fee_example"
+      ],
+      "hypotheses_and_limits": "Quantidades e percentuais nas faixas declaradas; divisão inteira em blocos de10. Regras contábeis locais, sem inferência de valor econômico."
+    },
+    {
+      "id": "F15",
+      "title": "Produto de quatro indicadores",
+      "kind": "formal_model",
+      "book_sources": [
+        "livro-core/mod-01c-instalacao.tex"
+      ],
+      "theorems": [
+        "BookFoundations.four_binary_indicators",
+        "BookFoundations.four_binary_indicators_percent"
+      ],
+      "hypotheses_and_limits": "Cada indicador deve pertencer a{0,1}. O produto vale1 se e somente se todos valem1; não inventa observações dos indicadores."
+    },
+    {
+      "id": "F16",
+      "title": "Tempos consecutivos e duração total",
+      "kind": "formal_model",
+      "book_sources": [
+        "livro-core/mod-07-integracoes.tex"
+      ],
+      "theorems": [
+        "BookFoundations.five_consecutive_intervals",
+        "BookFoundations.consecutive_duration_nonnegative"
+      ],
+      "hypotheses_and_limits": "Mesma unidade e timestamps consecutivos/ordenados; somar durações de ramos sobrepostos não mede tempo de parede."
+    },
+    {
+      "id": "F17",
+      "title": "Custo esperado de duas rotas",
+      "kind": "formal_model",
+      "book_sources": [
+        "livro-core/mod-13-ativacao-agentes.tex"
+      ],
+      "theorems": [
+        "BookModels.bernoulli_mass_normalized",
+        "BookModels.bernoulli_mass_nonnegative",
+        "BookModels.bernoulli_finite_cost_equals_product",
+        "BookModels.bernoulli_cost_bounds",
+        "BookModels.bernoulli_example_02_2",
+        "BookModels.bernoulli_exercise_05_2"
+      ],
+      "hypotheses_and_limits": "Distribuição finita de duas possibilidades,0≤p≤1, custo fixo c≥0 quando ativa, zero na outra. Não prova que a frequência real seja p."
+    },
+    {
+      "id": "F18",
+      "title": "Unidades de armazenamento e guardas",
+      "kind": "exact_and_interval",
+      "book_sources": [
+        "livro-core/mod-09-infra.tex"
+      ],
+      "theorems": [
+        "BookFoundations.mebibyte_bytes",
+        "BookFoundations.megabyte_bytes",
+        "BookFoundations.mebibyte_megabyte_difference",
+        "BookFoundations.directory_weight_guard_rejects_example",
+        "BookFoundations.file_weight_guard_rejects_example"
+      ],
+      "hypotheses_and_limits": "MiB=2^20bytes,MB=10^6bytes.1240>1000e1180>25 são comparações sobre valores informados, não uma leitura do disco."
+    },
+    {
+      "id": "F19",
+      "title": "Similaridade de Jaccard",
+      "kind": "formal_model",
+      "book_sources": [
+        "livro-core/mod-13-ativacao-agentes.tex",
+        "livro-core/mod-17-e1e7-para-leigos.tex"
+      ],
+      "theorems": [
+        "BookAttention.jaccard_mem_unit",
+        "BookAttention.jaccard_symmetric",
+        "BookAttention.jaccard_identical",
+        "BookAttention.jaccard_disjoint",
+        "BookAttention.jaccard_example_half",
+        "BookAttention.jaccard_example_third",
+        "BookAttention.jaccard_example_three_fifths"
+      ],
+      "hypotheses_and_limits": "Conjuntos finitos; união não vazia para quociente interpretável. Vazio exige convenção explícita; similaridade lexical não mede competência."
+    },
+    {
+      "id": "F20",
+      "title": "Softmax matricial e escala didática",
+      "kind": "exact_and_interval",
+      "book_sources": [
+        "livro-core/mod-00b-jornada-leitor.tex",
+        "livro-core/mod-15-epilogo-reproducao.tex"
+      ],
+      "theorems": [
+        "BookModels.attention_dimension_sqrt_four",
+        "BookModels.attention_dimension_scaled_four",
+        "BookAttention.two_row_softmax_sum",
+        "BookAttention.two_row_reversed",
+        "BookAttention.two_row_tie",
+        "BookAttention.exp_two_rational_bounds",
+        "BookAttention.softmax_2_0_rational_bounds",
+        "BookAttention.softmax_0_2_rational_bounds"
+      ],
+      "hypotheses_and_limits": "Normalização linha a linha em reais, escores dados[4,0]/sqrt4=[2,0]. Não afirma que o Core execute QKᵀV nessa rota."
+    },
+    {
+      "id": "F21",
+      "title": "Utilidade, normalização e ordenação",
+      "kind": "formal_model",
+      "book_sources": [
+        "livro-core/mod-15-epilogo-reproducao.tex",
+        "livro-core/mod-02-orquestracao.tex"
+      ],
+      "theorems": [
+        "BookAttention.head_weights_sum_one",
+        "BookAttention.utility_mem_unit",
+        "BookAttention.utility_example_075",
+        "BookAttention.utility_example_064",
+        "BookAttention.utility_softmax_075_064_bounds",
+        "BookAttention.utility_softmax_064_075_bounds",
+        "BookAttention.softmax_soma_um",
+        "BookAttention.softmax_invariante_max",
+        "BookAttention.softmax_mem_Ioo",
+        "BookAttention.softmax_peso_total_singleton",
+        "BookAttention.softmax_same_pool_order",
+        "BookAttention.peso_cresce_com_escore",
+        "BookAttention.temperatura_aguca_maximo",
+        "BookAttention.exp_apos_subtrair_majorante_le_um",
+        "BookAttention.roteamento_guloso_otimo",
+        "BookAttention.topk_dominam_resto",
+        "BookAttention.combinacao_convexa_limitada",
+        "BookAttention.combinacao_convexa_limitada_baixo"
+      ],
+      "hypotheses_and_limits": "Critérios em[0,1], pesos0,30/0,35/0,25/0,10; conjunto não vazio; temperaturas positivas. Calibração e segurança IEEE-754 não demonstradas."
+    },
+    {
+      "id": "F22",
+      "title": "Álgebra elementar",
+      "kind": "exact_and_interval",
+      "book_sources": [
+        "livro-core/mod-05-raciocinio.tex",
+        "livro-core/mod-07-integracoes.tex"
+      ],
+      "theorems": [
+        "BookFoundations.linear_equation_iff",
+        "BookFoundations.difference_of_squares_factorization",
+        "BookFoundations.simple_sum_exact"
+      ],
+      "hypotheses_and_limits": "Domínio real;2x+1=5↔x=2; x²−1=(x−1)(x+1);2+3=5. Não comprova disponibilidade de SymPy/Z3."
+    },
+    {
+      "id": "F23",
+      "title": "Primitiva do seno",
+      "kind": "formal_model",
+      "book_sources": [
+        "livro-core/mod-07-integracoes.tex"
+      ],
+      "theorems": [
+        "BookFoundations.sine_antiderivative"
+      ],
+      "hypotheses_and_limits": "Derivada de−cos(x)+C é sin(x), para reais x e constante C. Não prova execução de um integrador externo."
+    },
+    {
+      "id": "F24",
+      "title": "Modus ponens",
+      "kind": "formal_model",
+      "book_sources": [
+        "livro-core/mod-05-raciocinio.tex"
+      ],
+      "theorems": [
+        "BookFoundations.modus_ponens"
+      ],
+      "hypotheses_and_limits": "Das premissas P e P→Q segue Q. A verdade empírica de P e da implicação não é estabelecida pela regra."
+    },
+    {
+      "id": "F25",
+      "title": "Decomposição aditiva de custo",
+      "kind": "definition_model",
+      "book_sources": [
+        "livro-core/mod-04-qualidade-sdd.tex"
+      ],
+      "theorems": [
+        "BookModels.additive_cost_identity",
+        "BookModels.additive_cost_lower_bound",
+        "BookModels.reducing_accidental_reduces_total"
+      ],
+      "hypotheses_and_limits": "Ctotal=Cessencial+Cacidental é definição do modelo; mesma unidade. Não lei empírica universal sobre projetos."
+    },
+    {
+      "id": "F26",
+      "title": "Discrepância entre observado e esperado",
+      "kind": "definition_model",
+      "book_sources": [
+        "livro-core/mod-14-lote-categorias.tex"
+      ],
+      "theorems": [
+        "BookModels.discrepancy_reconstructs_observed",
+        "BookModels.discrepancy_zero_iff",
+        "BookModels.discrepancy_reversed"
+      ],
+      "hypotheses_and_limits": "D=O−E, grandezas comparáveis. D=0 não prova identidade de dados ou correção de previsão."
+    },
+    {
+      "id": "F27",
+      "title": "Observações científicas e de execução",
+      "kind": "empirical_not_formalized",
+      "book_sources": [
+        "livro-core/mod-06-ciencia.tex",
+        "livro-core/mod-09a-comparada.tex",
+        "livro-core/mod-07-integracoes.tex"
+      ],
+      "theorems": [],
+      "hypotheses_and_limits": "Pearson/Welch/Iris, duração, histórico de execução, contagens e hashes exigem dados/logs próprios. Não são promovidos a teorema por substituição numérica; adequação estatística e revisão externa não estão certificadas."
+    },
+    {
+      "id": "F28",
+      "title": "Completude de metadados e itens FAIR",
+      "kind": "formal_model",
+      "book_sources": [
+        "livro-core/mod-12-fichas-nucleo.tex",
+        "livro-core/mod-06-ciencia.tex"
+      ],
+      "theorems": [
+        "BookAlgebra.unit_coverage_complement_exact",
+        "BookAlgebra.fair_item_accounting",
+        "BookModels.four_sixths_equals_two_thirds",
+        "BookModels.four_sixths_bounds"
+      ],
+      "hypotheses_and_limits": "1−6/78=12/13; contagem2+2+2+2=8. Proporções de preenchimento não constituem conformidade FAIR nem mérito epistemológico."
+    }
+  ]
+}

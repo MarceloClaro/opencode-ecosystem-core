@@ -871,6 +871,8 @@ Entre os candidatos em $C$, escolhe-se aquele cujo custo declarado $K_i$ é mín
 \boxed{i^* = \mathrm{arg\,min}_{i\in C} K_i}
 \]
 
+A existência de um minimizador exige $C$ finito e não vazio, com custos reais. Havendo empate, $\mathrm{arg\,min}$ é um conjunto de índices; escolher um único $i^*$ exige uma regra de desempate declarada. Se $C$ estiver vazio, o procedimento deve registrar ausência de elegível.
+
 Justificativa: essa fórmula expressa que a escolha é feita sobre o conjunto restrito de elegíveis, usando o custo declarado como critério de ordenação. Ela separa elegibilidade (pertencer a $C$) de seleção (menor custo dentro de $C$).
 
 \paragraph{Cálculo numérico exemplo.}

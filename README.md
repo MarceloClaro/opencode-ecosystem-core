@@ -1602,6 +1602,8 @@ O [livro em LaTeX](livro-core/main.tex) acompanha um mesmo caso de estudo do pre
 
 A [revisão editorial R901/R907](docs/REVISAO_LIVRO_R907.md) e o [manifesto de verificação local](docs/verification-book-r907.json) separam inventário, teste, compilação e amostragem visual. Para gerar o PDF na pasta `livro-core`, atualize os geradores e o inventário e execute `latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex`. Os testes de estrutura e o PDF compilado não medem eficácia pedagógica nem substituem revisão externa.
 
+A [verificação formal R908](docs/VERIFICACAO_FORMAL_LIVRO_R908.md) acrescenta 158 teoremas aceitos pelo Lean 4.34.1, com Mathlib fixada, auditoria de axiomas e controles negativos. A [matriz de fórmulas](docs/book-math-map-r908.json) distingue 27 famílias matemáticas/modelos de uma família de observações empíricas. O [recibo da execução](docs/verification-book-lean-r908.json) identifica fontes e dependências; as provas não certificam dados experimentais, o runtime Python ou segurança IEEE-754.
+
 ### Integridade operacional
 
 O diagnóstico estrutural R868 registrou 22 checks aprovados, com alcance
