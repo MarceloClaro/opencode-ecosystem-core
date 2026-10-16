@@ -468,6 +468,28 @@ Justificativa: esta é a definição elementar de proporção: parte sobre todo.
 \end{descricao}
 
 \clearpage
+\begin{formalizacao}{F28}{A faixa da cobertura de rastro}
+\textbf{Enunciado.} Se $n_p$ das $n_r$ operações têm registro pertinente,
+com $n_r>0$ e $0\leq n_p\leq n_r$, então $0\leq n_p/n_r\leq1$.
+
+\textbf{Hipóteses.} Mesma população de operações no numerador e no
+denominador, contagem sem duplicatas e critério explícito para registro
+pertinente. Uma população vazia deve ser indicada como não aplicável.
+
+\textbf{Lemas e dedução.} A contagem da parte não ultrapassa a do todo.
+Como o todo é positivo, dividir $0\leq n_p\leq n_r$ por ele conserva a
+ordem e fornece $0\leq n_p/n_r\leq n_r/n_r=1$.
+
+\textbf{Lean 4.} \leanref{BookAlgebra.coverage_fraction_bounds}
+formaliza exatamente a desigualdade de parte sobre todo sob essas hipóteses.
+
+\textbf{Axiomas e alcance.} Consulte as dependências individuais e os
+fundamentos na seção~\ref{sec:fundamentos-lean}. A prova usa as contagens
+como entradas; não observa logs nem determina sua pertinência ou correção.
+\end{formalizacao}
+
+\clearpage
+
 \section{Apêndice Didático: Orçamento de peso para publicação}
 
 \elemento{Guarda de peso de diretório e arquivo}{\metainfo{ID}{DID-PESO} \hfill \metainfo{Fonte}{docs/guias-didaticos/formulas-livro-core-nussenzveig.md, seção 12}}
@@ -521,6 +543,35 @@ O arquivo de áudio precisa ser dividido ou reprocessado. A segunda falha é mai
 \end{aviso}
 
 \clearpage
+\begin{formalizacao}{F18}{Unidades e recusas da guarda de peso}
+\textbf{Enunciado.} Um MiB contém $2^{20}=1\,048\,576$ bytes; um MB,
+$10^6=1\,000\,000$ bytes. A diferença é $48\,576$ bytes. Nos valores do
+exemplo, $1\,240>1\,000$ e $1\,180>25$, de modo que ambos excedem os tetos.
+
+\textbf{Hipóteses.} Cada comparação usa a mesma unidade nos dois lados;
+as contagens e os tetos são os dados informados. A política recusa quando
+o consumo ultrapassa o teto. Esta conta não mede o diretório real.
+
+\textbf{Lemas e dedução.} A definição binária usa vinte fatores dois;
+a decimal, seis fatores dez. Avaliar as potências e subtrair suas
+contagens demonstra que as unidades não são intercambiáveis. Comparar
+os inteiros de consumo e teto demonstra os dois excessos; aplicar a
+política de recusa é uma etapa de contrato, não uma nova lei matemática.
+
+\textbf{Lean 4.} \leanref{BookFoundations.mebibyte_bytes},
+\leanref{BookFoundations.megabyte_bytes},
+\leanref{BookFoundations.mebibyte_megabyte_difference},
+\leanref{BookFoundations.directory_weight_guard_rejects_example} e
+\leanref{BookFoundations.file_weight_guard_rejects_example}.
+
+\textbf{Axiomas e alcance.} Fundamentos e dependências individuais na
+seção~\ref{sec:fundamentos-lean}. As provas conferem unidades e valores
+fornecidos; não executam a guarda, não leem o disco e não avaliam a
+qualidade editorial do pacote.
+\end{formalizacao}
+
+\clearpage
+
 \section[Apêndice Didático: FAIR como índice de completude]{Apêndice Didático: FAIR como índice de completude ($C_m = n_p/n_r$)}
 
 \elemento{Índice de completude FAIR}{\metainfo{ID}{DID-FAIR} \hfill \metainfo{Fonte}{docs/guias-didaticos/formulas-livro-core-nussenzveig.md, seção 13}}
@@ -556,6 +607,32 @@ Justificativa: proporção elementar. Se todos os campos obrigatórios estão pr
 \begin{descricao}
 \textbf{Interpretação e limites.} $C_m = 1$ indica completude do esquema adotado, não correção do conteúdo. A correção ainda depende da conferência da fonte e da validação do resultado. Este é um diagnóstico interno — não uma certificação FAIR.
 \end{descricao}
+
+\begin{formalizacao}{F28}{Completude do esquema de metadados}
+\textbf{Enunciado.} Para uma parte $n_p$ contada dentro de um total
+$n_r>0$, com $0\leq n_p\leq n_r$, a razão $n_p/n_r$ está em $[0,1]$.
+Aqui o universo é o dos campos do esquema de metadados; a conta de
+operações com rastro pertence ao universo distinto da seção anterior.
+
+\textbf{Hipóteses.} Parte e todo usam a mesma unidade de contagem;
+nenhum item é duplicado, o total é positivo e a parte não excede o total.
+São condições de aplicação, não conclusões da simples presença de logs.
+
+\textbf{Lemas e dedução.} A divisão por um número positivo preserva
+$0\leq n_p\leq n_r$, produzindo $0\leq n_p/n_r\leq1$. Quando a parte
+iguala o todo, dividir o total não nulo por si próprio dá um. Não se
+atribui valor a uma fração de universo vazio.
+
+\textbf{Lean 4.} \leanref{BookAlgebra.coverage_fraction_bounds}
+verifica os limites gerais. A contabilidade $2+2+2+2=8$ do exemplo de
+itens é \leanref{BookAlgebra.fair_item_accounting}; ela confere soma,
+não o atendimento substantivo aos princípios FAIR.
+
+\textbf{Axiomas e alcance.} Dependências exatas e fundamentos na
+seção~\ref{sec:fundamentos-lean}. A interpretação de ``preenchido'' ou
+``rastro pertinente'' exige conferência dos dados; razão igual a um não
+certifica correção, disponibilidade operacional ou conformidade FAIR.
+\end{formalizacao}
 
 % R901-PONTE-FECHO
 Com as dependências e fronteiras identificadas, podemos retomar o agente como unidade concreta de trabalho. A ativação seguinte liga definição, política e atribuição, preservando a diferença entre preparar e executar.

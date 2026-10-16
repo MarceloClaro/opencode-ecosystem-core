@@ -199,6 +199,65 @@ desabilitada exige ler as instruções no contexto autorizado. As
 execuções. A nota só poderá afirmar que uma fonte foi consultada ou um
 experimento foi realizado quando houver o recibo correspondente.
 
+\begin{formalizacao}{F10}{Elegibilidade antecede comparação de pontuação}
+\textbf{Enunciado.} No modelo restrito, pertencer ao conjunto elegível
+significa simultaneamente pertencer à lista de candidatos, estar disponível
+e conter todas as capacidades requeridas. Falta de disponibilidade ou de
+uma capacidade requerida exclui o candidato.
+
+\textbf{Hipóteses.} Conjuntos finitos de candidatos e capacidades, predicado
+de disponibilidade declarado e exigência de todas as capacidades do pedido.
+A seleção posterior por mínimo requer ainda conjunto elegível não vazio;
+seus custos devem ser reais, e empates exigem regra de escolha.
+
+\textbf{Lemas e dedução.} Expandir a definição de filtro transforma
+pertencimento em conjunção de requisitos. Se um candidato indisponível
+pertencesse ao filtro, a conjunção afirmaria sua disponibilidade e
+contradiria a hipótese. O mesmo argumento vale para capacidades faltantes.
+Só depois do filtro se aplica o lema de mínimo de conjunto finito não vazio;
+um escore alto não remove a contradição com requisito obrigatório.
+
+\textbf{Lean 4.} \leanref{BookAttention.eligible_pool_membership},
+\leanref{BookAttention.unavailable_not_eligible},
+\leanref{BookAttention.missing_capability_not_eligible},
+\leanref{BookAttention.eligible_minimum_exists} e
+\leanref{BookAttention.excluded_cannot_be_chosen}.
+
+\textbf{Axiomas e alcance.} Os fundamentos e as dependências de cada
+declaração estão na seção~\ref{sec:fundamentos-lean}. O modelo cobre
+apenas os requisitos nomeados; permissões, identidade, hash, ocupação e
+políticas de runtime conservam seus testes e evidências próprios.
+\end{formalizacao}
+
+\begin{formalizacao}{F19}{O alcance da comparação lexical de capacidades}
+\textbf{Enunciado.} Para conjuntos finitos $K,C$ de união não vazia,
+$J(K,C)=|K\cap C|/|K\cup C|$ está em $[0,1]$ e é simétrico.
+Conjuntos iguais não vazios têm razão um; conjuntos disjuntos, zero.
+
+\textbf{Hipóteses.} Tokenização e remoção de duplicatas definidas antes da
+comparação. O denominador é positivo quando a união não é vazia; comparar
+dois conjuntos vazios exige convenção explícita, não uma inferência de
+competência.
+
+\textbf{Lemas e dedução.} Todo elemento da interseção pertence à união;
+logo $0\leq|K\cap C|\leq|K\cup C|$. Dividir pela cardinalidade positiva
+da união dá os limites. A comutatividade de interseção e união dá a
+simetria. Igualdade de conjuntos reduz a razão a $n/n$ com $n>0$;
+disjunção torna o numerador zero.
+
+\textbf{Lean 4.} \leanref{BookAttention.jaccard_mem_unit},
+\leanref{BookAttention.jaccard_symmetric},
+\leanref{BookAttention.jaccard_identical},
+\leanref{BookAttention.jaccard_disjoint} e
+\leanref{BookAttention.jaccard_example_three_fifths} para o exemplo
+concreto de três termos comuns numa união de cinco.
+
+\textbf{Axiomas e alcance.} Dependências individuais na
+seção~\ref{sec:fundamentos-lean}. A divisão totalizada dos reais de Lean
+atribui zero a $0/0$; isso não resolve por si a convenção de similaridade
+de vazios. Afinidade lexical não prova capacidade nem qualidade da entrega.
+\end{formalizacao}
+
 \section{Ativação por categoria — famílias de aplicação}
 % ============================================================
 
@@ -239,6 +298,32 @@ cada etapa é $1 - k/n$ (k critérios abertos em n criteriosos da rubrica
 MASWOS). JUSTIFICATIVA: validação externa como única fonte de mérito
 (Ioannidis 2005; R110). LIMITE: não promete aprovação nem Qualis.
 \end{descricao}
+
+\begin{formalizacao}{F28}{Cobertura da rubrica de uma etapa}
+\textbf{Enunciado.} Se uma rubrica possui $n>0$ critérios e $k$ deles
+permanecem abertos, a fração atendida é $(n-k)/n=1-k/n$, entre zero e um
+quando $0\leq k\leq n$.
+
+\textbf{Hipóteses.} Universo fixo, critérios contados uma única vez e
+classificação de cada item documentada. Quantificar preenchimento não
+demonstra que o critério foi bem escolhido ou que a evidência é suficiente.
+
+\textbf{Lemas e dedução.} Subtrair as lacunas do total dá a parte atendida;
+a distributividade da divisão e $n/n=1$ dão o complemento. Aplicar a
+desigualdade de parte sobre todo dá a faixa unitária. No caso ilustrativo
+$k=6,n=78$, obtém-se exatamente $12/13$.
+
+\textbf{Lean 4.} \leanref{BookAlgebra.coverage_fraction_bounds}
+confere os limites gerais, e
+\leanref{BookAlgebra.unit_coverage_complement_exact} confere o caso
+numérico do complemento utilizado no livro. A faixa do complemento é
+formalizada diretamente em \leanref{BookModels.coverage_complement_bounds}.
+
+\textbf{Axiomas e alcance.} A seção~\ref{sec:fundamentos-lean} separa
+fundamentos de hipóteses e mostra dependências específicas. A razão não
+comprova aceite de periódico, reprodutibilidade experimental nem qualidade
+científica dos itens marcados como atendidos.
+\end{formalizacao}
 
 \subsection{Pesquisa (literatura/evidências)}
 \elemento{ativ-pesquisa}{\metainfo{Categoria}{research} \hfill \metainfo{Rota}{skills/pesquisador-universal}}
@@ -497,13 +582,41 @@ e seu executor estiverem identificados na implementação.
 
 \begin{resultado}
 \textbf{Exemplo resolvido: Exemplo hipotético}  Suponha que, em um conjunto de tarefas, a rota
-que usa o quadro seja escolhida em $p=0{,}2$ dos casos. Se ela acrescentar em
-média $c=2$ operações observáveis em relação à rota direta, o custo médio
+que usa o quadro seja escolhida em $p=0{,}2$ dos casos. Se ela acrescentar
+um custo fixo $c=2$ operações observáveis em relação à rota direta, o custo médio
 adicional estimado é $p\,c = 0{,}2\times2=0{,}4$ operação por tarefa. O cálculo
 ilustra como estimar custo; os valores são pressupostos didáticos, não medições
 do Core. Para estimar custo real, defina o que conta como operação, registre uma
 amostra de execuções e reporte distribuição e falhas, não apenas a média.
 \end{resultado}
+
+\begin{formalizacao}{F17}{Esperança de custo em duas rotas}
+\textbf{Enunciado.} Se o custo adicional é $c$ na rota ativa e zero na
+outra, com massas $p$ e $1-p$, seu custo esperado é
+$cp+0(1-p)=cp$. Com $p=1/5$ e $c=2$, resulta $2/5=0{,}4$; com $p=1/2$,
+resulta $1$.
+
+\textbf{Hipóteses.} Duas possibilidades exaustivas, $0\leq p\leq1$ e
+$c\geq0$ fixo, expresso na mesma unidade nas duas rotas. A frequência real
+não é dada pela prova. Um custo variável exigiria modelar sua distribuição
+ou sua esperança condicional, além deste caso constante.
+
+\textbf{Lemas e dedução.} As massas somam $p+(1-p)=1$ e são não negativas
+na faixa declarada. Expandir a soma finita nos dois casos fornece $cp$;
+a multiplicação por $0\leq p\leq1$ dá $0\leq cp\leq c$. Substituir os
+racionais verifica os dois exemplos sem inferir tempos reais de execução.
+
+\textbf{Lean 4.} Expandir as duas parcelas dá $cp+0(1-p)=cp$; no caso $p=1/5,c=2$, o produto vale $2/5$. Essas duas contas auxiliares são \leanref{BookModels.bernoulli_product_expansion}; \leanref{BookAlgebra.expected_cost_example}.  \leanref{BookModels.bernoulli_mass_normalized},
+\leanref{BookModels.bernoulli_mass_nonnegative},
+\leanref{BookModels.bernoulli_finite_cost_equals_product},
+\leanref{BookModels.bernoulli_cost_bounds},
+\leanref{BookModels.bernoulli_example_02_2} e
+\leanref{BookModels.bernoulli_exercise_05_2}.
+
+\textbf{Axiomas e alcance.} Fundamentos e dependências de cada declaração
+na seção~\ref{sec:fundamentos-lean}. São parâmetros didáticos, não uma
+medida do número de operações, custo monetário ou latência do Core.
+\end{formalizacao}
 
 \begin{resultado}
 \textbf{Ordem de grandeza e verificação: Verificação} A existência de uma etapa descrita no livro não demonstra

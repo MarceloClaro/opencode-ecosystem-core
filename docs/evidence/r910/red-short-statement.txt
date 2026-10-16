@@ -1,0 +1,64 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_____________ test_short_exact_statement_is_not_rejected_by_length _____________
+
+    def test_short_exact_statement_is_not_rejected_by_length():
+        mapping, texts, audit = _editorial_fixture()
+        texts['chapter.tex'] = texts['chapter.tex'].replace('A conclusão é uma identidade condicional.', '$2/6=1/3$.')
+>       assert validate_local_deductions(mapping, texts, audit)['local_blocks'] == 1
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r910_book_local_deductions.py:150:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+mapping = {'families': [{'id': 'F01', 'kind': 'formal_model', 'book_sources': ['chapter.tex'], 'theorems': ['Book.lemma']}]}
+texts = {'chapter.tex': '\n\\begin{formalizacao}{F01}{Complemento}\n\\textbf{Enunciado.} $2/6=1/3$.\n\\textbf{Hipóteses.} As m....\n\\textbf{Axiomas e alcance.} Consultar \\ref{sec:fundamentos-lean}; sem evidência empírica.\n\\end{formalizacao}\n'}
+audit = {'Book.lemma': ['propext']}
+
+    def validate_local_deductions(mapping: dict, texts: dict[str, str], audit: dict) -> dict:
+        """Recusa omissões/nomes não auditados; a correspondência matemática exige leitura."""
+        families = {f['id']: f for f in mapping['families']}
+        errors, seen, used = [], set(), set()
+        blocks = 0
+        for source, text in texts.items():
+            # Comentários não satisfazem o contrato de exposição visível.
+            visible = re.sub(r'(?<!\\)%[^\n]*', '', text)
+            parsed = list(BLOCK.finditer(visible))
+            if visible.count(r'\begin{formalizacao}') != len(parsed):
+                errors.append(f'Bloco local malformado: {source}')
+            for match in parsed:
+                fid, _, body = match.groups()
+                family = families.get(fid)
+                if family is None or family['kind'] == 'empirical_not_formalized':
+                    errors.append(f'Família inexistente ou empírica em bloco formal: {source}:{fid}')
+                    continue
+                if source not in family['book_sources']:
+                    errors.append(f'Ocorrência não inventariada: {source}:{fid}')
+                for field in FIELDS:
+                    label = r'\textbf{' + field + '.}'
+                    start = body.find(label)
+                    following = body[start+len(label):].split(r'\textbf{', 1)[0].strip()
+                    if start < 0 or len(following) < 15:
+                        errors.append(f'Campo ausente/vazio: {source}:{fid}:{field}')
+                names = set(REF.findall(body))
+                if not names or names - audit.keys():
+                    errors.append(f'Referência não auditada: {source}:{fid}:{sorted(names-audit.keys())}')
+                if not names.intersection(family['theorems']):
+                    errors.append(f'Bloco sem proposição da família: {source}:{fid}')
+                if r'\ref{sec:fundamentos-lean}' not in body:
+                    errors.append(f'Fundamentos lógicos sem remissão: {source}:{fid}')
+                blocks += 1
+                seen.add((fid, source))
+                used.update(names)
+        expected = {(f['id'], s) for f in families.values()
+                    if f['kind'] != 'empirical_not_formalized' for s in f['book_sources']}
+        for fid, source in sorted(expected - seen):
+            errors.append(f'Dedução local ausente: {source}:{fid}')
+        if errors:
+>           raise ValueError('\n'.join(errors))
+E           ValueError: Campo ausente/vazio: chapter.tex:F01:Enunciado
+
+scripts/book_local_deductions.py:55: ValueError
+=========================== short test summary info ============================
+FAILED tests/test_r910_book_local_deductions.py::test_short_exact_statement_is_not_rejected_by_length
+1 failed in 0.17s

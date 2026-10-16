@@ -323,6 +323,18 @@ ambiente:} rode \texttt{python3\ -m\ marceloclaro.cli\ doctor} e use o valor de
 \texttt{duration\_seconds} retornado naquela execução.
 \end{resultado}
 
+\begin{formalizacao}{F05}{Amortização de um diagnóstico compartilhado}
+\textbf{Enunciado.} Distribuir um custo de $3{,}39$ segundos igualmente por doze tarefas dá exatamente $113/400=0{,}2825$ segundo por tarefa, ou $0{,}28$ a duas casas.
+
+\textbf{Hipóteses.} Trata-se de uma única execução compartilhada, com duração informada de $339/100$ segundos e doze parcelas iguais. O número doze é positivo; não se somam aqui doze novas execuções.
+
+\textbf{Lemas e dedução.} A média de custo alocada é definida por $C/12$. Substituir $C=339/100$ e simplificar a fração produz $339/1200=113/400$. Como $0{,}275\leq0{,}2825<0{,}285$, o valor pertence à faixa que arredonda para $0{,}28$. A conta conserva o total: doze parcelas exatas recompõem os $3{,}39$ segundos; somar parcelas já arredondadas perde precisão.
+
+\textbf{Lean 4.} \leanref{BookModels.amortized_diagnosis_339_12_exact} confere a igualdade e \leanref{BookModels.amortized_diagnosis_rounds_028} confere a faixa de arredondamento.
+
+\textbf{Axiomas e alcance.} A seção~\ref{sec:fundamentos-lean} registra as dependências formais. A duração informada é uma observação histórica que o teorema não mede novamente. A alocação contábil não demonstra que compartilhar esse diagnóstico seja suficiente para todas as tarefas.
+\end{formalizacao}
+
 \begin{resultado}
 \textbf{Ordem de grandeza e verificação: Sequência de conferência} Para mudanças sujeitas ao fluxo SDD/TDD deste
 repositório, consulte o diagnóstico, a especificação aplicável, os testes e o
@@ -368,6 +380,18 @@ localização da fonte (R110), não o mérito da afirmação.
 \end{aviso}
 
 \noindent\textit{Interpretação:} A instalação reproduzível depende de condições conjuntas: instruções executáveis, versões identificadas, entradas conhecidas e resultado observável. Como verificação didática, escrevemos $R=I\cdot V\cdot D\cdot S$, em que cada indicador vale $1$ quando a condição foi registrada e conferida, e $0$ caso contrário. Se uma versão não é fixada, por exemplo, $V=0$ e o produto é zero; isso não prova que o programa falhará, mas mostra que a execução ainda não pode ser repetida sob as mesmas premissas \citref{PENG, R. D. Reproducible research in computational science. \emph{Science}, v.~334, n.~6060, p.~1226-1227, 2011}{10.1126/science.1213847}{p.~1226--1227 (resumo, p.~1226). ancora o gate de instalação: reprodutibilidade é o padrão mínimo para julgar alegações quando a replicação integral não é possível — o que o doctor verifica antes de todo pipeline.}{Reproducibility has the potential to serve as a minimum standard for judging scientific claims when full independent replication of a study is not possible}{A reprodutibilidade tem o potencial de servir como padrão mínimo para julgar alegações científicas quando a replicação independente completa de um estudo não é possível.}{PENG, 2011, p.~1226}
+
+\begin{formalizacao}{F15}{Produto de condições binárias}
+\textbf{Enunciado.} $R=I\,V\,D\,S$ vale um se, e somente se, os quatro indicadores valem um. Expresso na escala percentual, $100R=100$ tem a mesma condição.
+
+\textbf{Hipóteses.} Cada indicador pertence estritamente a $\{0,1\}$. Não se usa este argumento para notas graduais, valores desconhecidos ou medições não conferidas.
+
+\textbf{Lemas e dedução.} Se os quatro fatores valem um, a substituição dá $1\times1\times1\times1=1$. Na direção contrária, se algum fator binário não vale um, deve valer zero; pela propriedade absorvente da multiplicação, o produto passa a zero e não pode ser um. Logo o produto igual a um exige todos os fatores iguais a um. Multiplicar por cem apenas muda a escala, preservando a condição de conjunção.
+
+\textbf{Lean 4.} \leanref{BookFoundations.four_binary_indicators} verifica as duas implicações por análise dos casos binários; \leanref{BookFoundations.four_binary_indicators_percent} confere a escala percentual.
+
+\textbf{Axiomas e alcance.} Consulte as dependências na seção~\ref{sec:fundamentos-lean}. Os fatores são condições registradas segundo uma rubrica escolhida; a prova não certifica sua observação nem transforma o produto em garantia universal de reprodução.
+\end{formalizacao}
 
 % R901-PONTE-FECHO
 Agora temos um ambiente identificado e sabemos quais dependências continuam pendentes. O mapa de arquitetura permitirá localizar essas condições no percurso entre pedido, operação e conferência.

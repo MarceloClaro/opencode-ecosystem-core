@@ -268,6 +268,18 @@ do gate é tornar explícito o critério de aceitação e permitir que ele seja
 inspecionado, repetido e aperfeiçoado.
 \end{metodo}
 
+\begin{formalizacao}{F01}{Do acerto conjunto ao evento de erro}
+\textbf{Enunciado.} Para $N$ eventos de acerto conjuntamente independentes, todos com probabilidade $p$, a probabilidade de pelo menos um erro é $1-p^N$.
+
+\textbf{Hipóteses.} Trabalhamos em um espaço de probabilidade normalizado, com eventos mensuráveis, $N\in\mathbb N$ e $0\leq p\leq1$. Independência conjunta é exigida para toda subfamília finita; não decorre de observar apenas relações aos pares.
+
+\textbf{Lemas e dedução.} Escreva $A=\bigcap_{i=1}^N A_i$. A independência fornece $P(A)=\prod_i P(A_i)=p^N$. Pela lei de De Morgan, ``algum erro'' é $\bigcup_i A_i^c=A^c$. A aditividade sobre a partição disjunta $A\cup A^c=\Omega$ e a normalização $P(\Omega)=1$ implicam $P(A^c)=1-P(A)$; substituindo, resulta $1-p^N$. Como $0\leq p^N\leq1$, a expressão permanece em $[0,1]$.
+
+\textbf{Lean 4.} A cadeia usa \leanref{BookFoundations.independent_equal_event_intersection}, \leanref{BookFoundations.error_union_is_complement} e \leanref{BookFoundations.independent_error_probability}. A versão real está em \leanref{BookFoundations.independent_error_probability_real}; o limite algébrico está em \leanref{BookAlgebra.complement_probability_bounds}.
+
+\textbf{Axiomas e alcance.} A normalização e a aditividade caracterizam a estrutura probabilística assumida; independência e valor de $p$ são hipóteses do modelo. Nenhuma dessas condições empíricas é estabelecida pela prova. Os axiomas lógicos efetivos, por declaração, estão na seção~\ref{sec:fundamentos-lean}.
+\end{formalizacao}
+
 \begin{resultado}
 \textbf{Exemplo resolvido.} Para visualizar a dependência em $N$, considere um
 cenário hipotético no qual 216 saídas independentes sejam reunidas e cada uma tenha
@@ -282,6 +294,18 @@ ilustrar a fórmula; não significa que o Core faça essa agregação.
         pelo menos uma das 216 saídas estar errada, sob as hipóteses do exemplo.
 \end{enumerate}
 \end{resultado}
+
+\begin{formalizacao}{F02}{Da potência exata ao arredondamento do risco}
+\textbf{Enunciado.} No exemplo de $216$ saídas com $p=99/100$, o risco pertence ao intervalo aberto $(0{,}88592,0{,}88593)$ e arredonda para $0{,}886$ a três casas decimais.
+
+\textbf{Hipóteses.} Os números $99/100$ e $216$ são entradas exatas. Sua interpretação como risco depende das condições probabilísticas da formalização anterior; aqui verifica-se a conta racional.
+
+\textbf{Lemas e dedução.} A potência racional é avaliada exatamente, sem arredondar fatores intermediários. Comparar $1-(99/100)^{216}$ com os dois extremos racionais dá as cotas; ambas estão dentro da faixa que arredonda para $0{,}886$. A expansão logarítmica que será detalhada adiante explica um caminho manual de aproximação, mas não substitui a comparação racional final. Ao trocar a entrada para $999/1000$, a mesma operação dá um resultado estritamente entre $0{,}194$ e $0{,}195$.
+
+\textbf{Lean 4.} O intervalo mais amplo $0{,}885<1-(99/100)^{216}<0{,}887$ também é conferido diretamente por \leanref{BookAlgebra.independent_error_216_interval}.  \leanref{BookAlgebra.independent_error_216_tight_interval} confere o primeiro intervalo; \leanref{BookAlgebra.independent_error_216_high_accuracy_interval} confere o segundo.
+
+\textbf{Axiomas e alcance.} Consulte a seção~\ref{sec:fundamentos-lean} para as dependências das declarações. Os intervalos provam o valor destas expressões, não a probabilidade de acerto real de um agente nem a ausência de erros de ponto flutuante em outro programa.
+\end{formalizacao}
 
 \begin{resultado}
 \textbf{Ordem de grandeza e verificação: Verificação do inventário} Conte as entradas da chave \pth{agent} em
@@ -328,7 +352,7 @@ Símbolo & Significado & Valor no exemplo \\
 $N$ & Número total de saídas & $N = 216$ \\
 $p$ & Probabilidade de uma única saída estar correta & $p = 0{,}99 = 99\,\%$ \\
 $1-p$ & Probabilidade de uma única saída estar errada & $1 - 0{,}99 = 0{,}01 = 1\,\%$ \\
-Independência & Hipótese de que o acerto ou erro de uma saída não influencia o acerto ou erro de nenhuma outra & Suposição do modelo \\
+Independência & Independência conjunta: a probabilidade da interseção de qualquer subfamília finita de acertos é o produto de suas probabilidades; apenas independência aos pares não basta & Suposição do modelo \\
 \end{tabularx}
 \end{center}
 \end{definicao}
@@ -337,7 +361,7 @@ Independência & Hipótese de que o acerto ou erro de uma saída não influencia
 \textbf{Dedução passo a passo.}
 
 \paragraph{Passo 1 — Probabilidade de que todas as $N$ saídas estejam corretas.}
-Se os eventos são independentes, a probabilidade de que todos ocorram ao mesmo tempo é o produto das probabilidades individuais. Este é o axioma de multiplicação para eventos independentes.
+Se os eventos são independentes, a probabilidade de que todos ocorram ao mesmo tempo é o produto das probabilidades individuais. Essa é uma propriedade da independência conjunta, não um axioma adicional da probabilidade: a hipótese de independência fornece a fatoração para toda subfamília finita.
 
 Por que produto e não soma? Porque estamos exigindo que a saída 1 esteja correta \emph{e} a saída 2 esteja correta \emph{e} … \emph{e} a saída $N$ esteja correta. “E” na probabilidade, para eventos independentes, significa multiplicar.
 
@@ -350,14 +374,14 @@ P(\text{todas corretas}) = p \times p \times \cdots \times p = p^N
 \paragraph{Passo 2 — O evento complementar.}
 O evento “pelo menos uma saída está errada” é o oposto exato de “todas as saídas estão corretas”. Em teoria dos conjuntos, se $A$ é o evento “todas corretas”, então o complemento $A^c$ é “existe pelo menos uma errada”.
 
-\paragraph{Passo 3 — Axioma da probabilidade total.}
+\paragraph{Passo 3 — Propriedade derivada do complemento.}
 Para qualquer evento $A$ e seu complemento $A^c$:
 
 \[
 P(A) + P(A^c) = 1
 \]
 
-Por que? Porque todo resultado possível ou pertence a $A$ ou pertence a $A^c$, e a soma das probabilidades de todos os resultados possíveis é sempre 1 (unidade).
+A normalização do espaço de probabilidade estabelece $P(\Omega)=1$. Como $A\cap A^c=\varnothing$ e $A\cup A^c=\Omega$, a aditividade para eventos disjuntos dá $P(A)+P(A^c)=P(\Omega)=1$. A igualdade do complemento é, portanto, uma consequência desses fundamentos, e não um novo axioma nem a fórmula geral da probabilidade total.
 
 \paragraph{Passo 4 — Isolamento da quantidade procurada.}
 Queremos $P(A^c)$. Rearranjando a igualdade do Passo 3:
@@ -374,6 +398,18 @@ Substituindo $P(A) = p^N$ do Passo 1:
 
 Justificativa: isolamento de incógnita por subtração elementar. Nenhum chutismo.
 \end{metodo}
+
+\begin{formalizacao}{F01}{A cadeia de lemas na dedução detalhada}
+\textbf{Enunciado.} Os quatro passos anteriores são uma demonstração condicional da expressão $P(A^c)=1-p^N$, não quatro axiomas independentes.
+
+\textbf{Hipóteses.} $P$ é uma probabilidade normalizada; os eventos de acerto são mensuráveis e conjuntamente independentes, com mesma massa $p$.
+
+\textbf{Lemas e dedução.} O produto da interseção depende da independência; a identificação do erro depende de De Morgan; a igualdade $P(A)+P(A^c)=1$ depende de disjunção, aditividade e normalização. Por fim, a subtração em ambos os lados isola a probabilidade buscada. Sem independência, permanece a igualdade do complemento, mas não a substituição automática de $P(A)$ por $p^N$.
+
+\textbf{Lean 4.} \leanref{BookFoundations.independent_equal_event_intersection}, \leanref{BookFoundations.error_union_is_complement} e \leanref{BookFoundations.independent_error_probability_real} conferem a passagem probabilística. \leanref{BookAlgebra.complement_from_product_model} explicita separadamente o último passo algébrico a partir das igualdades dadas.
+
+\textbf{Axiomas e alcance.} A seção~\ref{sec:fundamentos-lean} separa dependências lógicas de hipóteses do modelo. A expressão ``propriedade derivada'' evita transformar a hipótese empírica de independência em axioma universal dos agentes.
+\end{formalizacao}
 
 \begin{resultado}
 \textbf{Cálculo numérico detalhado com $N = 216$ e $p = 0{,}99$.}
@@ -423,6 +459,18 @@ Ela limita o erro do truncamento, em vez de supor que os termos restantes
 sejam nulos. A potência exata satisfaz
 $0{,}88592<1-(0{,}99)^{216}<0{,}88593$; portanto, o valor final arredondado
 a três casas é $0{,}886$. Ver a seção~\ref{sec:lean-livro}.
+
+\begin{formalizacao}{F03}{Série convergente, resto e retorno à potência}
+\textbf{Enunciado.} Para $u=1/100$, dois termos aproximam $\log(1-u)$ por $-201/20000=-0{,}01005$, com erro de módulo no máximo $1/990000$; a identidade exponencial recupera exatamente a potência positiva antes de aproximar.
+
+\textbf{Hipóteses.} A série exige $|u|<1$. Neste exemplo $u=1/100>0$, $p=1-u=99/100>0$ e o expoente é o natural $216$.
+
+\textbf{Lemas e dedução.} A série convergente escreve $-\log(1-u)=\sum_{n\geq1}u^n/n$. Seus dois primeiros termos somam $u+u^2/2=201/20000$. Para $n\geq3$, $0\leq u^n/n\leq u^n$, e a cauda geométrica soma $u^3/(1-u)=1/990000$; isso limita o erro, sem supor que o primeiro termo omitido seja o resto inteiro. A identidade $\log(p^{216})=216\log p$ vem antes da aproximação. Multiplicar o valor truncado dá exatamente $216\times201/20000=2{,}1708$, enquanto $\exp(216\log p)=p^{216}$ continua sendo uma igualdade exata. Já $e^{-2{,}1708}$ é somente uma aproximação; as cotas da família F02 verificam a potência sem depender desse arredondamento.
+
+\textbf{Lean 4.} A convergência e o controle do resto estão em \leanref{BookFoundations.log_099_hasSum}, \leanref{BookFoundations.log_099_taylor_error} e \leanref{BookFoundations.log_099_taylor_interval}; a transformação usa \leanref{BookFoundations.logarithm_power_identity}, \leanref{BookAlgebra.logarithm_rounded_product} e \leanref{BookFoundations.exponential_probability_example}.
+
+\textbf{Axiomas e alcance.} São resultados da análise real sobre entradas exatas, com dependências registradas na seção~\ref{sec:fundamentos-lean}. A prova não certifica a biblioteca exponencial de uma máquina nem converte o truncamento decimal em igualdade.
+\end{formalizacao}
 
 \paragraph{Passo 7 — Multiplicação por $N = 216$.}
 
@@ -474,6 +522,18 @@ Expresso em porcentagem:
 \]
 \end{resultado}
 
+\begin{formalizacao}{F05}{Converter a razão em porcentagem sem mudar sua precisão}
+\textbf{Enunciado.} Escrever uma proporção $r$ em porcentagem corresponde a $100r\%$; não aumenta a informação dos algarismos conhecidos.
+
+\textbf{Hipóteses.} A quantidade é adimensional; para a leitura probabilística, $0\leq r\leq1$. Quando $r=a/t$, exige-se $t>0$ e $0\leq a\leq t$.
+
+\textbf{Lemas e dedução.} Como um por cento significa $1/100$, $(100r)/100=r$. Assim, o valor arredondado $0{,}886$ corresponde a $88{,}6\%$. Aplicando a escala ao intervalo exato da família F02, obtemos $88{,}592\%<100P\%<88{,}593\%$; por isso $88{,}6\%$ é uma apresentação arredondada. A faixa $[0,1]$ do quociente decorre de dividir $0\leq a\leq t$ pelo número positivo $t$.
+
+\textbf{Lean 4.} Como extensão, pesos $w,1-w$ com $w,x,y\in[0,1]$ conservam $wx+(1-w)y$ nessa faixa: cada termo é não negativo e a soma é no máximo $w+(1-w)=1$. O retrato histórico também satisfaz $0{,}42<35/83<0{,}43$, sem provar a coleta dessas contagens. As proposições são \leanref{BookAlgebra.weighted_coverage_bounds}; \leanref{BookAlgebra.historical_coverage_interval}.  \leanref{BookAlgebra.percent_unscale} confere a identidade da escala; \leanref{BookAlgebra.coverage_fraction_bounds} confere a faixa geral. Os extremos específicos do risco são os de \leanref{BookAlgebra.independent_error_216_tight_interval}.
+
+\textbf{Axiomas e alcance.} Dependências formais: seção~\ref{sec:fundamentos-lean}. Esta mudança de escala não torna uma hipótese empírica medida nem autoriza apresentar mais casas como maior certeza científica.
+\end{formalizacao}
+
 \begin{descricao}
 \textbf{Interpretação do resultado.} Há aproximadamente 88,6\,\% de chance de que, entre 216 saídas independentes cada uma com 99\,\% de probabilidade individual de acerto, pelo menos uma saída esteja errada.
 
@@ -491,7 +551,7 @@ Expresso em porcentagem:
 \textbf{Limites de validade.}
 \begin{enumerate}[leftmargin=1.3em,itemsep=1pt]
   \item A fórmula não mede a taxa de erro real do repositório. $p = 0{,}99$ e a independência são suposições didáticas, não medições do Core.
-  \item Se os erros forem correlacionados (todas as saídas usam o mesmo modelo com o mesmo viés), a hipótese de independência colapsa e o resultado $1 - p^N$ deixa de valer.
+  \item Se os erros forem correlacionados, a hipótese de independência conjunta pode falhar; nesse caso, esta dedução já não justifica $1-p^N$. Uma coincidência numérica continua possível, mas precisa de justificativa própria. Compartilhar um modelo ou um viés é um motivo para investigar dependência, não uma demonstração automática de sua intensidade.
   \item O número 216 é usado apenas para ilustrar a fórmula; não significa que o Core faça essa agregação.
 \end{enumerate}
 \end{aviso}

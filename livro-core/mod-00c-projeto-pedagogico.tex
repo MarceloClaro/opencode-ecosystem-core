@@ -152,6 +152,18 @@ Limite do projeto pedagógico. Trilhas são proposta editorial, não experimento
 \begin{resultado}
 \textbf{Exemplo resolvido.} Ana quer pedir um resumo com fonte. Seus três critérios são fonte identificável, correspondência com o trecho e limite escrito. Se encontra fonte e limite, mas não compara o trecho, registra dois de três critérios e conserva a comparação pendente.
 \end{resultado}
+\begin{formalizacao}{F05}{A proporção organiza a conferência}
+\textbf{Enunciado.} Se $0\leq c\leq n$ e $n>0$, então $0\leq c/n\leq1$.
+
+\textbf{Hipóteses.} $c$ conta critérios atendidos e $n$ todos os critérios no mesmo escopo; não se atribui valor a $0/0$.
+
+\textbf{Lemas e dedução.} Da não negatividade e do denominador positivo segue $c/n\geq0$. Dividir $c\leq n$ por $n$ dá $c/n\leq n/n=1$. Para dois de três critérios, o intervalo racional de $2/3$ é o mesmo do prólogo.
+
+\textbf{Lean 4.} \leanref{BookAlgebra.coverage_fraction_bounds}; \leanref{BookModels.two_thirds_bounds}.
+
+\textbf{Axiomas e alcance.} A estrutura formal não mede domínio profissional nem aprendizagem. As siglas junto aos nomes identificam as dependências lógicas auditadas; ver a seção~\ref{sec:fundamentos-lean}.
+\end{formalizacao}
+
 \begin{resultado}
 \textbf{Ordem de grandeza e verificação.} Um checkpoint curto pode conter três critérios. Confira cada um separadamente; não substitua a comparação ausente por uma nota média ou pelo tempo de leitura.
 \end{resultado}

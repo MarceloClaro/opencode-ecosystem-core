@@ -1,0 +1,16 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_______________ test_complete_count_ratio_requires_nonzero_total _______________
+
+    def test_complete_count_ratio_requires_nonzero_total():
+        from scripts.verify_book_lean import theorem_names
+>       assert 'BookModels.full_coverage_identity' in theorem_names((ROOT / 'livro-core/lean/Models.lean').read_text())
+E       AssertionError: assert 'BookModels.full_coverage_identity' in ['BookModels.reference_counts_sum', 'BookModels.reference_counts_mean', 'BookModels.equal_cardinality_not_equal_sets',...ality_insufficient', 'BookModels.reduction_ratio_nonnegative_le_total', 'BookModels.reduction_ratio_at_least_one', ...]
+E        +  where ['BookModels.reference_counts_sum', 'BookModels.reference_counts_mean', 'BookModels.equal_cardinality_not_equal_sets',...ality_insufficient', 'BookModels.reduction_ratio_nonnegative_le_total', 'BookModels.reduction_ratio_at_least_one', ...] = <function theorem_names at 0x785863be64b0>('/-\nR908 — modelos finitos e verificações aritméticas complementares do livro.\nO conteúdo formaliza definições explí...le\n  have hdiv1 : missing/total ≤ 1 := (div_le_one ht).mpr hmt\n  constructor <;> linarith\n\nend\n\nend BookModels\n')
+E        +    where '/-\nR908 — modelos finitos e verificações aritméticas complementares do livro.\nO conteúdo formaliza definições explí...le\n  have hdiv1 : missing/total ≤ 1 := (div_le_one ht).mpr hmt\n  constructor <;> linarith\n\nend\n\nend BookModels\n' = read_text()
+E        +      where read_text = (PosixPath('/home/marceloclaro/opencode-ecosystem-core') / 'livro-core/lean/Models.lean').read_text
+
+tests/test_r910_book_local_deductions.py:130: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_r910_book_local_deductions.py::test_complete_count_ratio_requires_nonzero_total
+1 failed in 0.22s

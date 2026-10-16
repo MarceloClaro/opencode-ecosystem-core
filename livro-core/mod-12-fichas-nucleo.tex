@@ -563,6 +563,33 @@ registrar a métrica de um \emph{manual sobre o próprio manual} é boa prática
 auto-referência?
 \end{resultado}
 
+\begin{formalizacao}{F28}{Da contagem de lacunas à completude}
+\textbf{Enunciado.} Se seis das 78 células do exemplo estão vazias, a
+fração preenchida é $1-6/78=12/13$. Mais geralmente, a proporção de
+preenchimento está em $[0,1]$ sob contagem coerente de parte e todo.
+
+\textbf{Hipóteses.} Seis fichas com 13 dimensões cada, total $N=78>0$;
+cada lacuna ocupa uma célula distinta e $0\leq k\leq N$. Não se confundem
+células com fichas nem campos não aplicáveis com conteúdo confirmado.
+
+\textbf{Lemas e dedução.} A multiplicação $6\times13$ fixa o universo.
+Restam $N-k=72$ células preenchidas, e
+$(N-k)/N=1-k/N$ pela distributividade da divisão. Cancelar o fator seis
+em $72/78$ dá $12/13$. A aproximação decimal não informa a distribuição
+das lacunas entre fichas.
+
+\textbf{Lean 4.} \leanref{BookAlgebra.unit_coverage_complement_exact}
+confere a igualdade exata; \leanref{BookAlgebra.coverage_fraction_bounds}
+confere a faixa da proporção quando suas hipóteses são fornecidas.
+\leanref{BookModels.coverage_complement_bounds} expressa diretamente
+os limites de $1-k/N$.
+
+\textbf{Axiomas e alcance.} A seção~\ref{sec:fundamentos-lean} contém
+as dependências individuais. O total e as lacunas são entradas deste
+exemplo; não se provam preenchimento real, qualidade das fichas ou mérito
+científico pela identidade numérica.
+\end{formalizacao}
+
 % ATIVACAO-R613
 \section[Ativação e cálculo]{Ativação e cálculo — Leitura das fichas}
 \elemento{ativ-12f}{\metainfo{Ciclo}{R613} \hfill \metainfo{Módulo}{mod-12-fichas-nucleo.tex}}
@@ -621,6 +648,28 @@ $d_t = 13$ & Número total de dimensões exigidas \\
 
 Justificativa: proporção elementar; o denominador é fixo (13) por definição da estrutura da ficha. O leitor confere 13/13 antes de aceitar a ficha.
 \end{metodo}
+
+\begin{formalizacao}{F28}{Aplicação a uma única ficha de 13 dimensões}
+\textbf{Enunciado.} Para $0\leq d_p\leq13$, a razão $d_p/13$ pertence a
+$[0,1]$; preencher as 13 dimensões fornece $13/13=1$.
+
+\textbf{Hipóteses.} O denominador fixo $13$ é positivo e cada dimensão
+conta no máximo uma vez. ``Preenchida'' obedece a um critério editorial
+previamente definido, sem alterar o universo depois da contagem.
+
+\textbf{Lemas e dedução.} Dividir a desigualdade
+$0\leq d_p\leq13$ por $13>0$ preserva os dois sinais; o limite superior
+vira $13/13=1$. É a mesma regra de parte sobre todo, agora aplicada à
+unidade ficha, sem somar métricas de universos diferentes.
+
+\textbf{Lean 4.} \leanref{BookAlgebra.coverage_fraction_bounds}
+fornece a proposição geral, instanciada aqui com total $13$; a igualdade
+do caso completo usa a regra de divisão de um número não nulo por si próprio.
+
+\textbf{Axiomas e alcance.} Fundamentos e dependências exatas na
+seção~\ref{sec:fundamentos-lean}. A prova não decide se uma dimensão foi
+preenchida adequadamente; essa decisão depende da fonte e da revisão.
+\end{formalizacao}
 
 % R901-PONTE-FECHO
 As fichas do núcleo detalham relações transversais. As categorias seguintes ampliam a consulta para outros domínios, sempre com entrada, limite e conferência próprios.

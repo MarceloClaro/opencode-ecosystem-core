@@ -308,6 +308,18 @@ criados em lote alteram a média. Para reproduzir a contagem, leia a chave
 examine as datas antes de interpretar qualquer taxa.
 \end{resultado}
 
+\begin{formalizacao}{F05}{O que as razões históricas demonstram}
+\textbf{Enunciado.} Nas contagens dadas, $285/371$ arredonda para $0{,}768$, $371/455$ para $0{,}815$ e $455/69$ para $6{,}6$ registros por dia.
+
+\textbf{Hipóteses.} Os denominadores $371$, $455$ e $69$ são positivos. As duas primeiras razões comparam contagens do retrato histórico; a terceira divide registros por duração em dias. Uma taxa por dia não é uma proporção limitada a um.
+
+\textbf{Lemas e dedução.} Defina cada razão antes de dividir. Comparações racionais exatas dão $0{,}7681<285/371<0{,}7682$, $0{,}8153<371/455<0{,}8154$ e $6{,}594<455/69<6{,}595$. Cada intervalo está inteiramente dentro da faixa do arredondamento declarado. Multiplicar as proporções por cem produz percentuais; não transforma a taxa temporal em percentual nem estabelece correspondência entre elementos dos conjuntos.
+
+\textbf{Lean 4.} As cotas são \leanref{BookModels.series_spec_ratio_285_371_bounds}, \leanref{BookModels.specs_per_cycle_371_455_bounds} e \leanref{BookModels.cycles_per_day_455_69_bounds}. As faixas de arredondamento são \leanref{BookModels.series_spec_ratio_rounds_0768}, \leanref{BookModels.specs_per_cycle_rounds_0815} e \leanref{BookModels.cycles_per_day_rounds_66}.
+
+\textbf{Axiomas e alcance.} As dependências lógicas estão na seção~\ref{sec:fundamentos-lean}. Datas e contagens são entradas históricas: a prova não reconta o repositório, não prova produtividade e não estabelece uma bijeção entre specs e ciclos.
+\end{formalizacao}
+
 \begin{aviso}
 \textbf{Limite de validade.} Contar specs \emph{não} prova que a spec foi
 executada: parte do acervo legado foi portada apenas em parte. A verificação

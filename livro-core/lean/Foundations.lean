@@ -34,6 +34,22 @@ theorem independent_error_probability {Ω : Type*} [MeasurableSpace Ω]
   rw [measure_compl (MeasurableSet.iInter hMeasurable) (measure_ne_top μ _),
     measure_univ, independent_equal_event_intersection μ n events p hIndependent hMass]
 
+/-- Ponte explícita de probabilidade em ENNReal para o valor real usado no livro. -/
+theorem independent_error_probability_real {Ω : Type*} [MeasurableSpace Ω]
+    (μ : Measure Ω) [IsProbabilityMeasure μ] (n : ℕ)
+    (events : Fin n → Set Ω) (p : ℝ≥0∞)
+    (hMeasurable : ∀ i, MeasurableSet (events i))
+    (hIndependent : iIndepSet events μ)
+    (hMass : ∀ i, μ (events i) = p) :
+    (μ ((⋂ i, events i)ᶜ)).toReal = 1 - p.toReal ^ n := by
+  have hProduct := independent_equal_event_intersection μ n events p hIndependent hMass
+  have hPower : p ^ n ≤ 1 := by
+    rw [← hProduct]
+    exact prob_le_one
+  rw [independent_error_probability μ n events p hMeasurable hIndependent hMass,
+    ENNReal.toReal_sub_of_le hPower (by norm_num), ENNReal.toReal_one,
+    ENNReal.toReal_pow]
+
 /-- A união dos erros individuais é o evento complementar a todos os acertos. -/
 theorem error_union_is_complement {Ω : Type*} {n : ℕ} (events : Fin n → Set Ω) :
     (⋃ i, (events i)ᶜ) = (⋂ i, events i)ᶜ := by

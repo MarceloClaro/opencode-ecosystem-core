@@ -53,6 +53,18 @@ Limite dos episodios. Audio gerado pode simplificar nomes e numeros; o numero qu
 \begin{resultado}
 \textbf{Exemplo resolvido.} Em um exemplo hipotético de dez vínculos previstos, oito arquivos existem e dois faltam. A cobertura de arquivos é $8/10=0{,}8$. Se só três foram ouvidos, a cobertura de escuta é $3/10$, uma medida diferente.
 \end{resultado}
+\begin{formalizacao}{F29}{Existência e escuta têm numeradores distintos}
+\textbf{Enunciado.} $8/10=4/5=0{,}8$ e $3/10=30/100=0{,}3$.
+
+\textbf{Hipóteses.} Contagens hipotéticas não negativas, universo finito declarado e denominadores estritamente positivos.
+
+\textbf{Lemas e dedução.} A primeira razão reduz-se cancelando dois; a segunda é escrita em centésimos multiplicando por dez. Cada numerador precisa corresponder à propriedade contada: existência de arquivo e escuta não são o mesmo evento.
+
+\textbf{Lean 4.} \leanref{BookModels.eight_tenths_exact}; \leanref{BookModels.three_tenths_exact}.
+
+\textbf{Axiomas e alcance.} Normalização aritmética direta por \pth{norm_num}; não há lema intermediário específico do livro. A conta não comprova a coleta, a existência dos arquivos nem a escuta. As siglas junto aos nomes identificam as dependências lógicas auditadas; ver a seção~\ref{sec:fundamentos-lean}.
+\end{formalizacao}
+
 
 \begin{resultado}
 \textbf{Ordem de grandeza e verificação.} Compare o índice com os arquivos e ouça amostras delimitadas antes de afirmar revisão. Se o capítulo mudar, identifique o episódio afetado e preserve o histórico da versão anterior.

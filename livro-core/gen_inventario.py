@@ -63,7 +63,9 @@ def collect_inventory(root: Path) -> dict:
         'livro-core/lean/lean-toolchain', 'livro-core/lean/lakefile.toml',
         'livro-core/lean/lake-manifest.json', 'scripts/verify_book_lean.py',
         'docs/VERIFICACAO_FORMAL_LIVRO_R908.md', 'docs/book-math-map-r908.json',
-        'docs/PREFACIO_ASSINATURA_COGNITIVA_R909.md', 'docs/preface-sources-r909.json'))
+        'docs/PREFACIO_ASSINATURA_COGNITIVA_R909.md', 'docs/preface-sources-r909.json',
+        'livro-core/gen_lean_axioms.py', 'livro-core/lean-axiomas.tex',
+        'scripts/book_local_deductions.py', 'docs/DEDUCOES_LOCAIS_LIVRO_R910.md'))
     sources = {str(path.relative_to(root)): {
         "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
     } for path in sorted({config_path, *modules, *local_paths, *authoritative}) if path.is_file()}

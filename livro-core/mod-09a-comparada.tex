@@ -592,6 +592,18 @@ está sustentada pela comparação documentada aqui. Uma medição comparável e
 elemento elevaria a fração para $1/11 \approx 0{,}091$, ou cerca de $9{,}1\%$.
 \end{resultado}
 
+\begin{formalizacao}{F29}{Razão nula em um inventário de onze elementos}
+\textbf{Enunciado.} Se nenhum dos onze elementos satisfaz o critério, a proporção é $0/11=0$.
+
+\textbf{Hipóteses.} O universo tem onze elementos distintos e o numerador informado é zero. O critério de comparação documentada foi definido; o número não resulta de uma prova sobre toda a literatura disponível.
+
+\textbf{Lemas e dedução.} Pela definição de proporção, divide-se o número de itens atendidos pelo total positivo. Zero dividido por um número não nulo é zero; multiplicar por cem mantém zero na escala percentual. O passo aritmético não demonstra a premissa de que nenhum artefato foi encontrado: isso depende da inspeção delimitada do inventário.
+
+\textbf{Lean 4.} \leanref{BookModels.zero_elevenths_exact} confere a divisão; \leanref{BookAlgebra.percent_unscale} confere a escala percentual.
+
+\textbf{Axiomas e alcance.} A seção~\ref{sec:fundamentos-lean} informa as dependências. A ausência documental é uma constatação do escopo consultado, não uma conclusão produzida pelo Lean nem prova de inexistência universal de comparações.
+\end{formalizacao}
+
 \begin{resultado}
 \textbf{Ordem de grandeza e verificação.} Uma cobertura comparativa de $0/11$
 ($b = 0\%$) não é ``quase suficiente'': é ausência total de evidência
@@ -600,7 +612,7 @@ comparativa. Mesmo que a base de 11 implementações fosse pequena para um
 ``não há evidência neste repositório de que X seja superior'' --- que é
 justamente o limite que o texto sustenta. \emph{Verifique você mesmo:} liste os 11
 sistemas citados no capítulo e, para cada um, procure no repositório um artefato de
-comparação; a ausência esperada em todos confirma o próprio exemplo.
+comparação; registre os artefatos encontrados e os limites da busca; um resultado diferente exige atualizar o numerador do exemplo.
 \end{resultado}
 
 \begin{aviso}
@@ -663,8 +675,20 @@ b = \frac{1}{11} \approx 0{,}0909 \approx 9{,}1\,\%
 \]
 \end{metodo}
 
+\begin{formalizacao}{F05}{O contrafactual de uma comparação documentada}
+\textbf{Enunciado.} Se exatamente um dos onze elementos tivesse uma comparação válida no escopo, a proporção seria $1/11\approx0{,}091$, ou $9{,}1\%$ a uma casa percentual.
+
+\textbf{Hipóteses.} O total onze é positivo e o numerador um é contrafactual; não se está afirmando que tal comparação foi executada.
+
+\textbf{Lemas e dedução.} A divisão define a razão; as cotas racionais $0{,}0909<1/11<0{,}0910$ justificam o arredondamento para $0{,}091$. Multiplicar por cem dá uma quantidade estritamente entre $9{,}09$ e $9{,}10$ na escala percentual, apresentada como $9{,}1\%$. Para o numerador efetivo informado como zero, continua valendo $0/11=0$, e não esse contrafactual.
+
+\textbf{Lean 4.} \leanref{BookModels.one_eleventh_bounds} e \leanref{BookModels.one_eleventh_rounds_0091} conferem as cotas e a faixa de arredondamento; \leanref{BookModels.zero_elevenths_exact} confere o contraste com a razão nula.
+
+\textbf{Axiomas e alcance.} Dependências formais: seção~\ref{sec:fundamentos-lean}. A correção da divisão não certifica pertinência, desenho ou resultado de uma comparação externa.
+\end{formalizacao}
+
 \begin{descricao}
-\textbf{Interpretação.} $b = 0\,\%$ indica ausência total de evidência comparativa medida neste inventário. Não prova que o Core é pior ou melhor que alternativas; prova apenas que não há comparação externa documentada aqui para sustentar afirmações de superioridade empírica.
+\textbf{Interpretação.} $b = 0\,\%$ indica ausência total de evidência comparativa medida neste inventário. Não prova que o Core é pior ou melhor que alternativas. O inventário consultado não apresentou comparação externa documentada que sustentasse superioridade empírica; a divisão não prova essa ausência, apenas expressa o numerador informado.
 \end{descricao}
 
 \clearpage
@@ -710,7 +734,7 @@ Entre as $R$ hipóteses verdadeiras, o teste detecta (declara significativas) um
 Justificativa: poder estatístico é definido como $P(\text{rejeitar } H_0 \mid H_0 \text{ falsa})$.
 
 \paragraph{Passo 3 — Falsos positivos.}
-Entre as 1 hipótese falsa (normalizada), o teste declara significativas uma fração igual ao nível de significância $\alpha$.
+Entre a massa normalizada de uma hipótese falsa, o teste declara significativas uma fração igual ao nível de significância $\alpha$.
 
 \[
 \text{FP} = 1 \cdot \alpha = \alpha
@@ -748,6 +772,22 @@ Portanto:
 \[
 \boxed{PPV = \frac{(1-\beta)R}{R - \beta R + \alpha}}
 \]
+
+\begin{formalizacao}{F04}{Das massas esperadas à fórmula de PPV}
+\textbf{Enunciado.} Sob o modelo sem viés explícito, a razão de verdadeiros positivos entre positivos é
+\[
+\mathrm{PPV}=\frac{(1-\beta)R}{(1-\beta)R+\alpha}
+=\frac{(1-\beta)R}{R-\beta R+\alpha}.
+\]
+
+\textbf{Hipóteses.} Há uma massa $T\geq0$ de hipóteses verdadeiras e $F>0$ de falsas, $R=T/F$, $0\leq\alpha,\beta\leq1$ e denominador $(1-\beta)T+\alpha F>0$. Contagens normalizadas podem ser não inteiras; são massas esperadas do modelo, não uma amostra já observada.
+
+\textbf{Lemas e dedução.} O poder dá $VP=(1-\beta)T$ e a taxa de falso positivo dá $FP=\alpha F$. Como os grupos são disjuntos, o total positivo é $VP+FP$. Dividir numerador e denominador de $VP/(VP+FP)$ por $F\ne0$ introduz $R=T/F$ e produz a primeira fórmula. A distributividade expande $(1-\beta)R=R-\beta R$ e dá a segunda. Finalmente, $VP,FP\geq0$ e $VP+FP>0$ implicam $0\leq\mathrm{PPV}\leq1$; se o total for zero, não há PPV condicional interpretável neste modelo.
+
+\textbf{Lean 4.} \leanref{BookAlgebra.ppv_from_counts} confere a mudança de normalização; \leanref{BookAlgebra.ppv_denominator_expansion} confere a distributividade e \leanref{BookAlgebra.ppv_bounds} confere o intervalo admissível.
+
+\textbf{Axiomas e alcance.} Consulte as dependências formais na seção~\ref{sec:fundamentos-lean}. A validade das taxas, do poder e da razão prévia é hipótese estatística; a prova não os estima a partir dos artigos nem atribui probabilidade de verdade a uma saída de software.
+\end{formalizacao}
 
 \paragraph{Cálculos numéricos detalhados.} Fixamos $R = 0{,}1$ e $\alpha = 0{,}05$.
 
@@ -808,8 +848,20 @@ PPV = \frac{0{,}08}{0{,}13} = \frac{8}{13} \approx 0{,}61538\ldots \approx 0{,}6
 \]
 \end{metodo}
 
+\begin{formalizacao}{F04}{Dois poderes, duas frações exatas}
+\textbf{Enunciado.} Com $R=1/10$ e $\alpha=1/20$, poder $1/5$ dá PPV $2/7$, e poder $4/5$ dá PPV $8/13$.
+
+\textbf{Hipóteses.} Valem o modelo sem viés e o denominador positivo. Os dois conjuntos de parâmetros são hipóteses didáticas, não estimativas de um campo medido neste livro.
+
+\textbf{Lemas e dedução.} No primeiro caso, $VP=(1/5)(1/10)=1/50$ e $VP+FP=1/50+1/20=7/100$; a divisão dá $2/7$. No segundo, $VP=(4/5)(1/10)=2/25$ e o total é $13/100$; a divisão dá $8/13$. As cotas $0{,}2857<2/7<0{,}2858$ e $0{,}61538<8/13<0{,}61539$ justificam $28{,}6\%$ e $61{,}5\%$ a uma casa percentual. No segundo cenário, a fração falsa complementar é exatamente $5/13$. Como $\alpha>0$ nestes casos, há falsos positivos e o PPV permanece estritamente abaixo de um.
+
+\textbf{Lean 4.} \leanref{BookAlgebra.ppv_low_power_exact}, \leanref{BookAlgebra.ppv_high_power_exact}, \leanref{BookAlgebra.ppv_low_power_interval} e \leanref{BookAlgebra.ppv_high_power_interval} conferem contas e intervalos; \leanref{BookModels.ppv_eight_thirteenths_complement} confere o complemento.
+
+\textbf{Axiomas e alcance.} Dependências por declaração: seção~\ref{sec:fundamentos-lean}. Estes valores verificam o comportamento do modelo sob parâmetros fixados; não são uma taxa observada de achados falsos e não demonstram que toda pesquisa possui esse PPV.
+\end{formalizacao}
+
 \begin{descricao}
-\textbf{Interpretação e argumento.} Mesmo com nível de significância padrão ($\alpha = 0{,}05$), se a taxa-base de hipóteses verdadeiras é baixa ($R = 0{,}1$) e o poder é baixo (0,2), apenas cerca de 28,6\,\% dos achados significativos são verdadeiros. Com alto poder (0,8), sobe para 61,5\,\%, mas nunca chega a 100\,\%.
+\textbf{Interpretação e argumento.} Mesmo com nível de significância padrão ($\alpha = 0{,}05$), se a taxa-base de hipóteses verdadeiras é baixa ($R = 0{,}1$) e o poder é baixo (0,2), apenas cerca de 28,6\,\% dos achados significativos são verdadeiros. Com alto poder (0,8), sobe para 61,5\,\%, permanecendo abaixo de 100\,\% nesses dois cenários de taxa de falso positivo positiva.
 
 Argumento: isto sustenta a postura de cautela do livro: achados publicados precisam de confirmação independente. Não se deve declarar superioridade empírica sem controle de viés de desenho e relato completo. A fórmula não diz que a maioria dos resultados é falsa em absoluto; diz que, sob certas condições de baixa pré-probabilidade e baixo poder, a maioria dos resultados significativos pode ser falsa.
 \end{descricao}

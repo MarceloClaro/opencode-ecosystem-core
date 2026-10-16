@@ -161,6 +161,18 @@ Elementos de reprodutibilidade:
 \end{itemize}
 \end{arquitetura}
 
+\begin{formalizacao}{F28}{Contar campos não certifica adesão aos princípios FAIR}
+\textbf{Enunciado.} Uma rubrica didática que selecione dois itens para cada uma das quatro dimensões FAIR terá $2+2+2+2=8$ itens. Se outra rubrica tiver seis campos e quatro preenchidos, a proporção será $4/6=2/3$.
+
+\textbf{Hipóteses.} Cada item pertence a um grupo de contagem sem duplicação; o total considerado é positivo. São exemplos explícitos de checklist, não uma lista universal de requisitos FAIR nem uma medição do pacote científico.
+
+\textbf{Lemas e dedução.} A união de quatro grupos disjuntos de dois elementos tem cardinalidade igual à soma, oito. Na segunda conta, dividir numerador e denominador por dois conserva a razão e produz $2/3$; a comparação racional dá $0{,}6666<4/6<0{,}6667$. Se um esquema de 78 campos tiver seis ausentes, a mesma regra de complemento da cobertura dá $(78-6)/78=1-6/78=12/13$. Cada cálculo depende do esquema escolhido, não da palavra FAIR.
+
+\textbf{Lean 4.} \leanref{BookAlgebra.fair_item_accounting} confere a soma; \leanref{BookModels.four_sixths_equals_two_thirds} e \leanref{BookModels.four_sixths_bounds} conferem razão e intervalo; \leanref{BookAlgebra.unit_coverage_complement_exact} confere o complemento do exemplo de metadados.
+
+\textbf{Axiomas e alcance.} As dependências formais estão na seção~\ref{sec:fundamentos-lean}. A prova não verifica se um campo está correto, acessível ou reutilizável, nem substitui avaliação substantiva dos princípios FAIR. As fichas do Módulo 12 retomam o cálculo de metadados no seu escopo próprio.
+\end{formalizacao}
+
 \begin{limite}
 Arquivos de laboratório e instruções de reprodução descrevem um percurso;
 sua repetição precisa de dados e ambiente compatíveis.
@@ -471,6 +483,18 @@ erraria. Este módulo introduz a distinção que separa ``muito trabalho feito''
 \end{enumerate}
 \end{metodo}
 
+\begin{formalizacao}{F06}{O requisito crítico tem precedência sobre a nota}
+\textbf{Enunciado.} Se o aceite exige uma condição de cobertura $c$ e um requisito crítico $q$, então o aceite é $c\land q$; $q$ falso reprova qualquer valor de $c$.
+
+\textbf{Hipóteses.} $c$ e $q$ são booleanos obtidos por critérios definidos. A conjunção é a política escolhida do gate, não uma consequência automática de uma nota numérica.
+
+\textbf{Lemas e dedução.} Examine os dois valores possíveis de $c$. Tanto verdadeiro e falso quanto falso e falso produzem falso. Logo a ausência crítica basta para rejeitar. Na direção necessária, se $c\land q$ é verdadeiro, $q$ deve ser verdadeiro, pois o caso $q$ falso já foi eliminado. A condição de cobertura pode mudar sem remover essa necessidade.
+
+\textbf{Lean 4.} \leanref{BookAlgebra.critical_gate_rejects} prova a rejeição, e \leanref{BookAlgebra.critical_gate_acceptance_requires_critical} prova a condição necessária para aceite.
+
+\textbf{Axiomas e alcance.} A seção~\ref{sec:fundamentos-lean} registra as dependências. Os teoremas verificam essa expressão booleana; não demonstram que uma evidência declarada crítica foi de fato coletada nem a equivalência integral com todas as rotas do gate Python.
+\end{formalizacao}
+
 \begin{resultado}
 \textbf{Exemplo resolvido e hipotético.} Uma rubrica de entrega exige um
 pacote de dados e 19 outros itens. O relatório cumpre $18$ de $20$ itens,
@@ -482,6 +506,18 @@ $\kappa=0{,}90$ e aceite interno. Os dois estados têm a mesma cobertura,
 mas diferem no requisito obrigatório. A regra é do exemplo, não um critério
 universal de qualidade científica nem uma reprodução literal do R891.
 \end{resultado}
+
+\begin{formalizacao}{F05}{Cobertura bruta e seu intervalo de validade}
+\textbf{Enunciado.} Se $0\leq a\leq t$ e $t>0$, a cobertura $\kappa=a/t$ pertence a $[0,1]$. No exemplo, $18/20=9/10=0{,}90$.
+
+\textbf{Hipóteses.} Os itens atendidos formam um subconjunto dos itens avaliados; não há repetição de contagem, e a unidade é a mesma. O total zero torna a medida não aplicável.
+
+\textbf{Lemas e dedução.} Dividir $0\leq a\leq t$ pelo número positivo $t$ preserva a ordem: $0\leq a/t\leq t/t=1$. Para a conta particular, cancelar o fator dois dá $18/20=9/10$, e a expressão percentual é $100\times9/10=90$. A aritmética é idêntica para os dois relatórios do exemplo; a diferença de aceite depende do booleano crítico da formalização F06.
+
+\textbf{Lean 4.} \leanref{BookAlgebra.coverage_fraction_bounds} confere a faixa e \leanref{BookAlgebra.percent_unscale} confere a escala. A conta particular está em \leanref{BookModels.eighteen_twentieths_exact}.
+
+\textbf{Axiomas e alcance.} Dependências formais: seção~\ref{sec:fundamentos-lean}. A proporção mede atendimento à rubrica dada. Não atribui $90\%$ de verdade, mérito ou probabilidade de publicação ao relatório.
+\end{formalizacao}
 
 \begin{resultado}
 \textbf{Ordem de grandeza e verificação: Como conferir a rubrica} O SRI é apresentado neste projeto numa escala
@@ -586,6 +622,18 @@ Justificativa: esta é uma regra de decisão externa imposta pela metodologia, n
 Mesmo com $\kappa = 0{,}90$, se o item faltante for crítico (pacote de dados obrigatório), o gate reprova.
 \end{resultado}
 
+\begin{formalizacao}{F06}{Duas condições distintas na dedução da checklist}
+\textbf{Enunciado.} A razão $\kappa=a/t$ e a exigência crítica são condições distintas; $\kappa=0{,}90$ não implica aceite se o requisito obrigatório falhou.
+
+\textbf{Hipóteses.} $0\leq a\leq t$, $t>0$, uma regra de cobertura definida e um requisito crítico representado por booleano. O exemplo fixa $a=18,t=20$.
+
+\textbf{Lemas e dedução.} A divisão por total positivo garante uma proporção admissível. Substituir os totais dá $18/20=9/10$. Separadamente, o gate calcula a conjunção entre a condição da cobertura e a condição crítica; a regra ``qualquer booleano e falso é falso'' estabelece a reprovação. Essa última conclusão não pode ser deduzida apenas de $a/t$, pois depende da política declarada.
+
+\textbf{Lean 4.} \leanref{BookAlgebra.coverage_fraction_bounds} dá o limite; \leanref{BookModels.eighteen_twentieths_exact} confere a instância e \leanref{BookAlgebra.critical_gate_rejects} confere a rejeição. A condição necessária inversa está em \leanref{BookAlgebra.critical_gate_acceptance_requires_critical}.
+
+\textbf{Axiomas e alcance.} As dependências por prova estão na seção~\ref{sec:fundamentos-lean}. A conjunção é uma regra metodológica assumida; demonstrar suas consequências não certifica a validade científica dos itens que a alimentam.
+\end{formalizacao}
+
 \begin{descricao}
 \textbf{Interpretação.} Cobrir 90\,\% de uma checklist não equivale a 90\,\% de mérito científico. Um único item crítico pode anular a cobertura alta. Isto separa cobertura (o que foi feito) de mérito (o que vale).
 \end{descricao}
@@ -660,6 +708,21 @@ Todo relatório avaliado é ou excluído após leitura integral ou incluído na 
 
 Justificativa: partição do conjunto avaliado em excluídos finais e incluídos finais.
 \end{metodo}
+
+\begin{formalizacao}{F13}{Conservação de contagens por partições sucessivas}
+\textbf{Enunciado.} No fluxo simplificado, as quatro igualdades de etapa implicam
+\[
+N_i=N_d+N_e+N_{nr}+N_x+N_{inc},\qquad N_{inc}\leq N_i.
+\]
+
+\textbf{Hipóteses.} As contagens são naturais, as classes de cada etapa são disjuntas e exaustivas e a correspondência de unidades entre etapas é a declarada no modelo. Não se identifica automaticamente registro com relatório ou estudo no PRISMA completo.
+
+\textbf{Lemas e dedução.} Para conjuntos finitos disjuntos, a cardinalidade da união é a soma das cardinalidades. Essa regra justifica cada igualdade de partição. Substitua $N_s=N_e+N_b$ em $N_i=N_d+N_s$; depois substitua $N_b=N_{nr}+N_f$ e $N_f=N_x+N_{inc}$. Associar as somas produz a igualdade global. Como as quatro parcelas de remoção são não negativas, a parcela incluída não pode exceder o total inicial.
+
+\textbf{Lean 4.} \leanref{BookAlgebra.partition_cardinality} confere o lema de partição; \leanref{BookAlgebra.prisma_conservation} confere a substituição das quatro igualdades e \leanref{BookAlgebra.prisma_included_le_identified} confere o limite da inclusão.
+
+\textbf{Axiomas e alcance.} Consulte a seção~\ref{sec:fundamentos-lean}. As igualdades de etapa são hipóteses de entrada na prova global: ela não demonstra que a triagem real foi correta, que não houve perda de registros ou que a revisão é completa.
+\end{formalizacao}
 
 \begin{descricao}
 \textbf{Interpretação.} Estas igualdades expõem lacunas de contagem: se os números não batem, algo foi perdido ou mal contabilizado. Porém, não certificam a qualidade metodológica nem a verdade dos estudos incluídos. São verificações de consistência interna do fluxo, não validação científica externa.

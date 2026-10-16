@@ -225,6 +225,18 @@ Limite do nivel 0. Frase curta ajuda a comecar; nao substitui spec, teste e gate
 \begin{resultado}
 \textbf{Exemplo resolvido.} Uma ficha hipotética informa quatro dos cinco campos. A completude documental é $4/5=0{,}8$. Preencher o quinto com uma frase genérica não melhora a evidência; o campo precisa descrever o limite específico da tarefa.
 \end{resultado}
+\begin{formalizacao}{F29}{Completude de quatro campos}
+\textbf{Enunciado.} $4/5=8/10=0{,}8$.
+
+\textbf{Hipóteses.} Contagens hipotéticas não negativas, universo finito declarado e denominadores estritamente positivos.
+
+\textbf{Lemas e dedução.} Multiplicar numerador e denominador por dois conserva a razão. A representação decimal de oito décimos é exata; não se trata de arredondamento.
+
+\textbf{Lean 4.} \leanref{BookModels.four_fifths_exact}.
+
+\textbf{Axiomas e alcance.} Normalização aritmética direta por \pth{norm_num}; não há lema intermediário específico do livro. A conta não comprova a coleta, a existência dos arquivos nem a escuta. As siglas junto aos nomes identificam as dependências lógicas auditadas; ver a seção~\ref{sec:fundamentos-lean}.
+\end{formalizacao}
+
 
 \begin{resultado}
 \textbf{Ordem de grandeza e verificação.} Abra o caminho citado, confira entradas e saídas e procure um teste ou registro correspondente. Para ferramentas externas, diferencie instalação, conexão, autenticação e tarefa concluída.

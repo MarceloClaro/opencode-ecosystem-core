@@ -3,9 +3,9 @@
     "agents": 312,
     "mcp_servers": 16,
     "commands": 33,
-    "specs": 540,
-    "round_specs": 450,
-    "round_test_files": 424,
+    "specs": 541,
+    "round_specs": 451,
+    "round_test_files": 425,
     "references": 28,
     "citation_calls": 76,
     "condensed_cards": 13
@@ -21,14 +21,17 @@
     "agents/lifecycle.py": {
       "sha256": "80f1fca2c93e373ef8da8a45d69d3154e495fd36d6766de7dd60834edd92c083"
     },
+    "docs/DEDUCOES_LOCAIS_LIVRO_R910.md": {
+      "sha256": "52ce62cea79af286a5fdcc040960d4b5a55a7c9bf2a671f552ea996486db8298"
+    },
     "docs/PREFACIO_ASSINATURA_COGNITIVA_R909.md": {
       "sha256": "481753af1a9b7f60e35f23bace79c7b0b07a22e335f7a438ef6a38d4638f3629"
     },
     "docs/VERIFICACAO_FORMAL_LIVRO_R908.md": {
-      "sha256": "4a7cd3d37e9f32428351e2df56c6e911b91980f243507cc212e394de4ce8ec28"
+      "sha256": "ad2c2c475a2c737a719800a1fdcbcc33606fdc554c5b55dbacd1e3fc451f7238"
     },
     "docs/book-math-map-r908.json": {
-      "sha256": "3d3b194df4622be6f10031114241f5f78f319aff3bca6177e41dcd15a96bb32b"
+      "sha256": "b80d097cb2911373952075dd94e327f57e87ad167b5e9fd0b6aee2a3df1ebb7c"
     },
     "docs/preface-sources-r909.json": {
       "sha256": "3b439734283f72fd0a7c4c8d1c67d72f5482aee240131b586dd44e720526f6a7"
@@ -73,25 +76,28 @@
       "sha256": "37c7863de83d899b1c18a42762e923ce1cebe462d4ac4c090634ecba4c2cf0fb"
     },
     "livro-core/gen_inventario.py": {
-      "sha256": "c07fedbd3bde8ea24347cbe17d72a295f07e38e1e0480e9c90f1026dd5555588"
+      "sha256": "c32af9598a604f955294f177d6135312c02f5f54a9e6c2a0020bd544b50174f3"
+    },
+    "livro-core/gen_lean_axioms.py": {
+      "sha256": "6a5a8600f86010b0978aef927fca3e903ef0110dcae47c160d2a86a2e164f35f"
     },
     "livro-core/gen_mod10.py": {
-      "sha256": "9b83d74ae3246495bfe476d9f96a0c7c54a07e2342f333c59211d91cea6c4c38"
+      "sha256": "58a53dbce9077af1c9d0ebd3da24ef2f648fe8bb5d353f6a6e7c11c0533c21fe"
     },
     "livro-core/gen_mod14_ativacao.py": {
       "sha256": "4a8c866f176c801ce98f91aadae2eab9df26783e57722de5e9c7b1decffb83dc"
     },
     "livro-core/lean/Algebra.lean": {
-      "sha256": "2278dd0f999c515a02783bf64cdb5c59f0e01a8342bea0775b026961bf62dfc5"
+      "sha256": "f19f0cf19b8dd15330437360ce138280fa9d0acf686ee02adb7776623807327c"
     },
     "livro-core/lean/Attention.lean": {
-      "sha256": "0af0f37825f71587b9c625d8aeb07b9f7ccaa6adf55826350acd069e5c033db5"
+      "sha256": "8261d911b3a4e962750e068946fdde9f3774a900ec0129cb80b0552a0ea9f8f0"
     },
     "livro-core/lean/Foundations.lean": {
-      "sha256": "1925abf3f03d3bbb7b4aa4ba791910916057d8a42917163222768a341859e754"
+      "sha256": "a3f23519692ce238f70a7afbfe05cf8badd2d80cb7bc8e7ecf80633bf453f34f"
     },
     "livro-core/lean/Models.lean": {
-      "sha256": "1fb3368d76358d90f40da3703b3dfa97950db068a9964b6290ad9a4f7a25f470"
+      "sha256": "d571b90a1dc815b4662c9440c8e1118f640b9e4d64d3188f56f45384b7e8621b"
     },
     "livro-core/lean/lake-manifest.json": {
       "sha256": "299b633ef39b37696183630392b7600c420d7eb65847e3d71f83cd3480511809"
@@ -102,11 +108,14 @@
     "livro-core/lean/lean-toolchain": {
       "sha256": "d5edba4e4b8faad9c1baeadb265716d20d03be4d1a2647dc5e35b0c0325bea7b"
     },
+    "livro-core/lean-axiomas.tex": {
+      "sha256": "c982aa92f0f6cdc88814488934457f662437ce7c936917e2edaf1dc2042a9fea"
+    },
     "livro-core/macros.tex": {
-      "sha256": "b07e44e11c5d60d915467c66a4177c0014d390aaa0e9955a866f2bdf5d426aac"
+      "sha256": "1e96e3fc0ae038102fab76a51e4a467687ba8776918712c427b136d3ca3bc31a"
     },
     "livro-core/main.tex": {
-      "sha256": "c2784b9862accbb97321e1b629a6fe1472aca4d1d49024e0bdb62d4c5267e941"
+      "sha256": "dc1771d89c6bc58159c34bac8432eb24397863275bfb4a2379fae045444641c0"
     },
     "livro-core/material-didatico/mindmap-livro-core.json": {
       "sha256": "2449d1719c33058edb9adcc7216d12ffa1cd23ab86039e596ea255620a195073"
@@ -130,88 +139,88 @@
       "sha256": "10c0a5bed7f4da4e0d766858dfa057af8e4e1f6f12fdf3536c2e0b90ce05b4b6"
     },
     "livro-core/mod-00a-enredo-prefacio.tex": {
-      "sha256": "3c2ea470a122db7472fff8f8c62d2f0f3a4715621e02e68866f3f17d9c8dcd60"
+      "sha256": "a1f3997abc81b222135fec430bae943e13b0c67a90857b10411ce53b287d552b"
     },
     "livro-core/mod-00b-jornada-leitor.tex": {
-      "sha256": "ac8231d903989806eb60258af53ac967bf0ea0045d187c2e707e220e83ea0adb"
+      "sha256": "701274b3c7bd1bab3224f3a3c1207493422161ed43a087b0a03134735f54c94b"
     },
     "livro-core/mod-00c-projeto-pedagogico.tex": {
-      "sha256": "b89a864cd04fc96d61ecb435b2472b9a844451cf78d414609e9aad01235a9716"
+      "sha256": "2d7f799c60dc7c9e2ab7969ad37014e673c9e229d4eab5545b28c9264c5d9b5c"
     },
     "livro-core/mod-01-fundacoes.tex": {
-      "sha256": "9e252099bd268ab5d658d47d92d32d1b11a58ed17466762d5dd7f91ecde65ecd"
+      "sha256": "6418cdfecd24c8b054342e7987e791b7521a4cd66e2d7ce3c43abc221c11b711"
     },
     "livro-core/mod-01b-historia.tex": {
-      "sha256": "c06a05474b2edc9592f558fe26142bb0e6b8edeaa12719ef4dfbadeab30c073e"
+      "sha256": "2e201624c0326f9ddc0c62252a85159d3680020bae5073e9d36f3d210392317b"
     },
     "livro-core/mod-01c-instalacao.tex": {
-      "sha256": "51e4a0a054d087cd4b85ce9b53185754836f77fa29e6e36609dd6c31eed1472a"
+      "sha256": "bdd946f9f105cf5ec58808a1ff539c3f794932cf2802fab038b6ea7f6c344007"
     },
     "livro-core/mod-01d-arquitetura.tex": {
       "sha256": "849d6f566fb0f4bf3b95fd82a041f75e1bb73886fc2dae7c6be091d0648374fa"
     },
     "livro-core/mod-02-orquestracao.tex": {
-      "sha256": "f5c793ca85c977eb33a71924b88fce0b9aea4e216dc3223cd444e0ab8f34a511"
+      "sha256": "87cb6dd48974969e43a6a41944e9de1839163d3badabc96b8e9245c268461050"
     },
     "livro-core/mod-03-memoria-mci.tex": {
-      "sha256": "0e29ad57a20cc322849497270060982adbf1feda544ce94437dde622f2793515"
+      "sha256": "728a81e6c9a6e50d13eb55ebb3737f8d08aef3eee78c0503b4e7f2ca562d3a90"
     },
     "livro-core/mod-04-qualidade-sdd.tex": {
-      "sha256": "f8c893120e1e932b595872dc52969748794d047e4d523eeaefb93ba2a50332d0"
+      "sha256": "f2b5a4c0d6d59fd490a54a432c2785e74cd43b4e8e989808f2fd4fe832d7ed3d"
     },
     "livro-core/mod-05-raciocinio.tex": {
-      "sha256": "984f4e990bc18b89ef12544a331479d0666fc73b127285ce5808437f719698c5"
+      "sha256": "9f77b4b5b198ba61fa1dae112890386e60d591378d89d9f55c2886ebe31c2996"
     },
     "livro-core/mod-06-ciencia.tex": {
-      "sha256": "35eb6dff35457b717209454b7f451d362ab145b4cc2c8ea824e0112139ef667c"
+      "sha256": "5b546e81deccde1a833949e8aab162cc9adac94e70b22de379bb6e0f0fb15138"
     },
     "livro-core/mod-07-integracoes.tex": {
-      "sha256": "02f09236e1d6efa5564662ab294daf4b3b52c61c915e1f37758716d779ac3768"
+      "sha256": "6151a754afad8f0972453c6c622ff0fed9dd7e42e17de0746339a1db38aed149"
     },
     "livro-core/mod-08-ecossistema.tex": {
-      "sha256": "566fb4caa35743c8ebee095c85a60773524881b44c17fd82def5b2d54df695fe"
+      "sha256": "523124b4d79809e4df4238df960153ac98bdd3edd519f679f607504741cddb44"
     },
     "livro-core/mod-09-infra.tex": {
-      "sha256": "bac57c83f1365b681f91cdd0721dd31e7fc6fb96632137e3eceb65df27fd9462"
+      "sha256": "87f1eeabb69a1676c33ff473e8ba0a0e2f9157c4b9fdc36acbac47fa6c7625d0"
     },
     "livro-core/mod-09a-comparada.tex": {
-      "sha256": "eb6a3621759fe3e725f1372e946c8abc002abb14f9d5be339f21f97bf4e68d49"
+      "sha256": "ad25847da9eb27027f58ae5fa28b8f1c9bca13e1ad21232109a8f6e3d5c08889"
     },
     "livro-core/mod-10-catalogo.tex": {
-      "sha256": "27c338ff79201e697d1ee733be7646fca450266747c9bfd485d02319a2032389"
+      "sha256": "b33ca02d07bb9626d79384dec45fc6195b57d1da5110656d0ced06891068e16d"
     },
     "livro-core/mod-11-apendices.tex": {
-      "sha256": "4c38938bb95b2f1f84f4562093048810c00da8ecd9dbcd630c0db6d099835de7"
+      "sha256": "8bded58402b23d04765d29d408dea5f0290dacafa88a6f7b7fe7d636cd0fef7c"
     },
     "livro-core/mod-12-fichas-nucleo.tex": {
-      "sha256": "1ff89b19dce20f5eab8f4252afde7dd102e04ec41165f3166da33929e62493d7"
+      "sha256": "384427f60a1b9bbc61188ff622522eeee25a22a34df44735d8e652c226d0b8cb"
     },
     "livro-core/mod-13-ativacao-agentes.tex": {
-      "sha256": "710493adcf2486aaaf9200511c722661b30e408e7442831a35198597b7f13be5"
+      "sha256": "9655fddfb131cda6fc42b673fe8ea6a1944cc6b5fc169d8fe8ce7652ef67c060"
     },
     "livro-core/mod-14-lote-categorias.tex": {
-      "sha256": "cadb7aaef017971286fc7de9cd09fdfc6027cd1a68ac0a551113096318f168f7"
+      "sha256": "b9f5c1d39fb86e5b135f25b91635f916bb7222b2a4a6ff98ade74dd40f1d4de0"
     },
     "livro-core/mod-15-epilogo-reproducao.tex": {
-      "sha256": "726a0081a4419ffa76f4cdcc915e1d6b8d4cb95a3c30c8ba1b8a062e73eeaa70"
+      "sha256": "3d61811eaff0c2dc2dd6a1490f0e3288aee7de99e5e59442d0919048b0e6e05d"
     },
     "livro-core/mod-16-mapas-fluxogramas.tex": {
       "sha256": "6999158e62ac6793ff7893c0b0211e2e8dddb573c715e70e5ad41f625c87681e"
     },
     "livro-core/mod-17-e1e7-para-leigos.tex": {
-      "sha256": "9ea82ebf38456a41ef504abefaa33a0e26d094eb3eaba29443e16ecb703a0e31"
+      "sha256": "e9f6a6f31a3c2cc2a821bc847c10060a68eb45b1f72ba02d529d8faf28e0c925"
     },
     "livro-core/mod-18-nivel0-universal.tex": {
-      "sha256": "8704259b1928baf7aca7d300bdd27e566c77197742cdb75eca250bc1b28a96be"
+      "sha256": "49274fabdf147d0ada6fcdf1d9c5fedef39a8c889e05af0d21678f5e724213f3"
     },
     "livro-core/mod-19-podcast.tex": {
-      "sha256": "1cc8b5a32ba63cb6c330eec871483da7838982394a5724bef1f21584d24c4dc1"
+      "sha256": "1c40c1d8bd9649447186f454fc4d696fdf226404e29b91a60aad6ae1a4c24d74"
     },
     "livro-core/mod-20-podcast-modulos.tex": {
-      "sha256": "a4eea3ee49c9f020a5d8b72a5ebcd8c69c0557f812f3103f08e61dbbe5606beb"
+      "sha256": "616aaba11cde79195f9916a4207d9e4a8ffab195d863da7d1e21fd537271f8fe"
     },
     "livro-core/mod-21-mapa-teorias.tex": {
-      "sha256": "8f738dda98cebd013607307afc275724d4c3bcaaf0ad832ef1a9b285cc347432"
+      "sha256": "2137652af1506a129b138d7fce3983529cd80056138f725f70194abe89490842"
     },
     "livro-core/mod-22-reproducao-wsl-leigo.tex": {
       "sha256": "620cf63ece37f399510d03af1ad97c6a8b28efd26e386f043a358148b7a7a75d"
@@ -255,11 +264,14 @@
     "scanners/pipeline.py": {
       "sha256": "43b3f727c1fa2629d845b4462bca2227f545e87e69c1c44dfad727d607c288a9"
     },
+    "scripts/book_local_deductions.py": {
+      "sha256": "f43461f3f7d91f7eb5b55a00690b2f150b465ebd23ce10b0241c75cfcebc0e14"
+    },
     "scripts/validate_scientific_profile.py": {
       "sha256": "f072e2f8bc2aa3143f0b34982c3ebfe12b50dbe5d697df2d4f017876cb4afb5b"
     },
     "scripts/verify_book_lean.py": {
-      "sha256": "2d7d7142071f4a7181f9c712c19696bc6e4b657dd07434cbc940f370d603a366"
+      "sha256": "864a0e6f4d8466cbfa813218194089089499256124b4205e2469a4d09d92f2d6"
     },
     "sdd/spec_engine.py": {
       "sha256": "91e205b31969cec0f75b568b544f58f7e9779662adf88a696db5981404e2a3f5"

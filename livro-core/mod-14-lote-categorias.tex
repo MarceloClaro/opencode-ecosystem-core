@@ -124,6 +124,18 @@ LIMITE. Resultado é contingente ao desenho declarado; não generaliza para
 população sem validação externa.
 \end{aviso}
 \noindent\textit{Interpretação:} O nível do conhecimento descreve o agente por suas metas, pelo que sabe e pelas ações que considera adequadas, em vez de reduzi-lo à sequência de instruções que executa. Para um objetivo $g$, a escolha pode ser representada por $a^*\in\mathrm{arg\,max}_{a\in A_f}U(a\mid g,b)$, em que $b$ é o estado de conhecimento e $A_f$ contém apenas ações permitidas e executáveis. A expressão explicita pressupostos; não afirma que o sistema conhece perfeitamente a utilidade nem elimina a verificação da ação escolhida \citref{NEWELL, A. The knowledge level. \emph{Artificial Intelligence}, v.~18, n.~1, p.~87-127, 1982}{10.1016/0004-3702(82)90012-1}{p.~87--127 (resumo, p.~87). é a justificativa do desenho do agente de inferência: acima do nível simbólico existe o nível do conhecimento, em que o agente age segundo o princípio da racionalidade — o que os agentes 20--28 materializam ao escolher ações de análise orientadas a objetivos}{there is another computer system level immediately above the symbol (or program) level and knowledge itself is the processing medium at this level and the principle of rationality plays a central role}{há outro nível de sistema de computador imediatamente acima do nível simbólico (ou de programa), e o próprio conhecimento é o meio de processamento nesse nível, e o princípio da racionalidade desempenha um papel central.}{NEWELL, 1982, p.~87} % ------------------------------------------------------------------
+\begin{formalizacao}{F10}{Escolha de utilidade máxima no conjunto factível}
+\textbf{Enunciado.} Se $A_f$ é finito e não vazio e $U:A_f\to\mathbb{R}$, existe $a^*\in A_f$ tal que $U(a)\leq U(a^*)$ para todo $a\in A_f$.
+
+\textbf{Hipóteses.} Factibilidade é definida antes da escolha. Finitude e existência de ao menos uma ação elegível são necessárias ao resultado aqui formalizado.
+
+\textbf{Lemas e dedução.} O lema \pth{Finset.exists_max_image} escolhe um elemento cujo valor é máximo na imagem finita. Isso justifica a existência do conjunto argmax; não dá unicidade nem critério de desempate. A expressão não demonstra que a utilidade represente adequadamente o objetivo.
+
+\textbf{Lean 4.} \leanref{BookAttention.eligible_maximum_exists}.
+
+\textbf{Axiomas e alcance.} Conhecimento e racionalidade são interpretações do modelo; a prova não atribui cognição humana ao agente. As siglas junto aos nomes identificam as dependências lógicas auditadas; ver a seção~\ref{sec:fundamentos-lean}.
+\end{formalizacao}
+
 \section{Engenharia (implementação e infra)}
 \elemento{ficha-engineering}{\metainfo{Categoria}{engineering} \hfill \metainfo{Ciclo}{R613}}
 \begin{descricao}
@@ -135,6 +147,18 @@ evidência executável antes do rótulo `concluído`.
 MÉTODO e CÁLCULO. Caminho E1--E7; gate = testes verdes e specs com teste
 (R610); ambiente declarado; sem commit sem autorização.
 \end{metodo}
+\begin{formalizacao}{F06}{A conjunção do gate não ignora um item crítico}
+\textbf{Enunciado.} Se o critério crítico é falso, $cobertura\land critico$ é falso; se a conjunção é verdadeira, o critério crítico é verdadeiro.
+
+\textbf{Hipóteses.} Critérios modelados por valores booleanos, com o significado e o procedimento de coleta declarados.
+
+\textbf{Lemas e dedução.} No primeiro caso substitui-se o fator crítico por falso e simplifica-se a conjunção. No segundo, analisam-se os quatro pares de valores: só verdadeiro/verdadeiro produz aceite. A tática de casos constrói a prova; não é um axioma adicional.
+
+\textbf{Lean 4.} \leanref{BookAlgebra.critical_gate_rejects}; \leanref{BookAlgebra.critical_gate_acceptance_requires_critical}.
+
+\textbf{Axiomas e alcance.} Esta é a regra lógica do gate; não uma prova integral do verificador operacional. As siglas junto aos nomes identificam as dependências lógicas auditadas; ver a seção~\ref{sec:fundamentos-lean}.
+\end{formalizacao}
+
 \begin{aviso}
 LIMITE. Disciplina de processo não elimina complexidade acidental; nenhuma
 ferramenta isolada promete ordem de magnitude.
@@ -156,6 +180,18 @@ com verde.
 LIMITE. Teste verde não generaliza para produção; cobre o que o teste declara.
 \end{aviso}
 \noindent\textit{Interpretação:} Um teste de regressão é reproduzível quando explicita entrada, ambiente, versão, comando e resultado esperado. Para um conjunto declarado de $n$ casos, a cobertura simples $C_t=n_{pass}/n$ informa quantos passaram naquela execução; não demonstra que os casos representam toda a produção. Por isso, cada teste precisa estar ligado a uma especificação e preservar a saída do processo: outra pessoa pode repetir o procedimento e reconhecer o limite do que foi verificado \citref{PENG, R. D. Reproducible research in computational science. \emph{Science}, v.~334, n.~6060, p.~1226-1227, 2011}{10.1126/science.1213847}{p.~1226--1227 (resumo, p.~1226). é a justificativa de cada suíte de regressão: testes são o padrão mínimo para julgar mudanças computacionais quando a replicação completa de uma edição não é viável — exatamente o papel dos testes de motor}{Reproducibility has the potential to serve as a minimum standard for judging scientific claims when full independent replication of a study is not possible}{A reprodutibilidade tem o potencial de servir como padrão mínimo para julgar alegações científicas quando a replicação independente completa de um estudo não é possível.}{PENG, 2011, p.~1226} % ------------------------------------------------------------------
+\begin{formalizacao}{F05}{Taxa de passagem de casos declarados}
+\textbf{Enunciado.} Para $0\leq n_{pass}\leq n$ e $n>0$, $0\leq C_t=n_{pass}/n\leq1$; se todos passam, $n/n=1$.
+
+\textbf{Hipóteses.} Mesmo universo de casos, contagens sem duplicação e total não nulo. A taxa não recebe interpretação de cobertura de todo o espaço de entradas.
+
+\textbf{Lemas e dedução.} Dividir por $n>0$ conserva a ordem e leva $n_{pass}\leq n$ a $C_t\leq1$. O caso completo usa o lema de cancelamento \pth{div_self}. A mesma regra aritmética pode representar presença de marcadores de voz, desde que numerador e denominador sejam redefinidos e não confundidos com valor estético.
+
+\textbf{Lean 4.} \leanref{BookAlgebra.coverage_fraction_bounds}; \leanref{BookModels.full_coverage_identity}.
+
+\textbf{Axiomas e alcance.} A prova confere uma razão; não garante que os testes sejam representativos nem que uma tradução seja equivalente. As siglas junto aos nomes identificam as dependências lógicas auditadas; ver a seção~\ref{sec:fundamentos-lean}.
+\end{formalizacao}
+
 \section{Literária (projeto Molambudos)}
 \elemento{ficha-literary}{\metainfo{Categoria}{literary} \hfill \metainfo{Ciclo}{R613}}
 \begin{descricao}
@@ -174,6 +210,18 @@ revisão ética contínua.
 \end{aviso}
 \noindent\textit{Interpretação:} Na leitura de materiais culturais, monitorar a compreensão ajuda a perceber quando uma tradução obscurece o sentido ou quando uma descrição introduz inferência sem apoio no texto. A revisão separa o que a fonte diz, a interpretação proposta e o que permanece incerto. Essa distinção orienta a revisão humana e evita confundir consistência estilística com confirmação histórica \citparafrase{FLAVELL, J. H. Metacognition and cognitive monitoring: a new area of cognitive-developmental inquiry. \emph{American Psychologist}, v.~34, n.~10, p.~906-911, 1979}{10.1037/0003-066X.34.10.906}{Referência conceitual sobre monitoramento e conhecimento metacognitivo. A associação ao Core é uma interpretação de arquitetura, não prova de consciência, aprendizagem ou eficácia. O acesso primário não foi recuperado nesta revisão; não se conserva uma transcrição literal incerta}{FLAVELL, 1979, p.~906} % ------------------------------------------------------------------
 \section{Cura da paisagem de agentes}
+\begin{formalizacao}{F28}{Completude de campos e complemento}
+\textbf{Enunciado.} Com $k$ campos ausentes entre $n$, $C=1-k/n$ pertence a $[0,1]$; com $a=n-k$ presentes, usa-se a razão $a/n$.
+
+\textbf{Hipóteses.} $n>0$, $0\leq k\leq n$, critérios sem sobreposição e contagens do mesmo escopo.
+
+\textbf{Lemas e dedução.} Dividir as desigualdades por $n>0$ coloca $k/n$ em $[0,1]$. Subtrair de um troca as extremidades e conserva a faixa. O lema formal demonstra essa propriedade; o registro de quais campos existem continua documental.
+
+\textbf{Lean 4.} \leanref{BookModels.coverage_complement_bounds}; \leanref{BookAlgebra.coverage_fraction_bounds}.
+
+\textbf{Axiomas e alcance.} Completude não implica validade do conteúdo nem competência do perfil. As siglas junto aos nomes identificam as dependências lógicas auditadas; ver a seção~\ref{sec:fundamentos-lean}.
+\end{formalizacao}
+
 \elemento{ficha-curation-agent}{\metainfo{Categoria}{curation-agent} \hfill \metainfo{Ciclo}{R613}}
 \begin{descricao}
 CONCEITO e FUNÇÃO. A ativação de curadoria inventaria agentes externos e
@@ -208,6 +256,18 @@ APIs não oficiais podem quebrar sem aviso.
 \end{aviso}
 \noindent\textit{Interpretação:} Uma bridge compatível com o Contract Net anuncia tarefa com requisitos verificáveis, recolhe propostas de executores elegíveis e registra o contrato aceito. Se $C$ é o conjunto dos executores que atendem aos requisitos, a seleção pode minimizar um custo declarado $K_i$ apenas dentro de $C$; preço ou latência baixos não compensam ausência de capacidade. Após a execução, o resultado passa por validação independente do ato de delegar, preservando a distinção entre contrato cumprido e resposta correta \citref{SMITH, R. G. The Contract Net Protocol: high-level communication and control in a distributed problem solver. \emph{IEEE Transactions on Computers}, v.~C-29, n.~12, p.~1104-1113, 1980}{10.1109/TC.1980.1675516}{p.~1104--1113 (resumo, p.~1104). é a justificativa das bridges: anunciar a tarefa, receber licitações e firmar contrato com o executor capaz — o mesmo padrão de gerência/contratante que \pth{integrations/*} implementa para os CLIs externos}{The contract net protocol has been developed to specify problem-solving communication and control for nodes in a distributed problem solver}{O protocolo da rede de contratos foi desenvolvido para especificar comunicação e controle de resolução de problemas para nós em um solucionador distribuído de problemas.}{SMITH, 1980, p.~1104} % ------------------------------------------------------------------
 \section{MIRA (apresentações)}
+\begin{formalizacao}{F07}{Registro e identidade não se deduzem de totais iguais}
+\textbf{Enunciado.} $|A|=|B|$ não implica $A=B$.
+
+\textbf{Hipóteses.} Conjuntos finitos de identificadores, com igualdade decidível; cada vínculo documental precisa de correspondência explícita.
+
+\textbf{Lemas e dedução.} Os conjuntos unitários $\{1\}$ e $\{2\}$ têm cardinalidade um e são diferentes. Instanciar a pretensa implicação universal nesse par produz contradição. Por isso a curadoria exige identidade/alias e não apenas o mesmo número de cartões parseáveis.
+
+\textbf{Lean 4.} \leanref{BookModels.equal_cardinality_not_equal_sets}; \leanref{BookModels.cardinality_equality_insufficient}.
+
+\textbf{Axiomas e alcance.} A prova é um contraexemplo à inferência de identidade; não lê o catálogo nem autentica os perfis. As siglas junto aos nomes identificam as dependências lógicas auditadas; ver a seção~\ref{sec:fundamentos-lean}.
+\end{formalizacao}
+
 \elemento{ficha-mira-agent}{\metainfo{Categoria}{mira-agent} \hfill \metainfo{Ciclo}{R613}}
 \begin{descricao}
 CONCEITO e FUNÇÃO. A ativação MIRA conduz o pipeline de apresentações
@@ -223,6 +283,18 @@ pela fração sequencial do pipeline (Lei de Amdahl aplicada a renderização).
 LIMITE. Estética não mede eficácia de comunicação; animação não é evidência.
 \end{aviso}
 \noindent\textit{Interpretação e cálculo:} Se, em uma estimativa hipotética, $80\%$ do trabalho de geração puder ser paralelizado e quatro trabalhadores forem usados, a Lei de Amdahl dá $S(4)=1/(0{,}2+0{,}8/4)=2{,}5$. Com oito trabalhadores, $S(8)=1/(0{,}2+0{,}8/8)\approx3{,}33$, antes de incluir comunicação e sincronização. Aumentar renderizadores reduz esse trecho do tempo, mas não acelera planejamento, revisão ou aprovação; os valores ilustram a conta e não medem este pipeline \citref{AMDAHL, G. M. Validity of the single processor approach to achieving large scale computing capabilities. In: \emph{AFIPS Conference Proceedings}. v.~30, p.~483-485, 1967}{10.1145/1465482.1465560}{p.~483--485 (recorte do texto integral, p.~484). é a justificativa do dimensionamento do pipeline de slides: acelerar apenas a renderização paralela, sem reduzir a fração sequencial (planejamento e validação), desperdiça esforço}{The effort expended on achieving high parallel processing rates is wasted unless it is accompanied by achievements in sequential processing rates of very nearly the same magnitude}{O esforço despendido para alcançar altas taxas de processamento paralelo é desperdiçado a menos que seja acompanhado por conquistas em taxas de processamento sequencial de magnitude muito próxima.}{AMDAHL, 1967, p.~484} % ------------------------------------------------------------------
+\begin{formalizacao}{F12}{Amdahl aplicado à apresentação}
+\textbf{Enunciado.} Para fração sequencial $s=1/5$, $S(4)=5/2$ e $S(8)=10/3\approx3{,}33$.
+
+\textbf{Hipóteses.} Carga fixa, parte sequencial inalterada, paralelização ideal e ausência de custos adicionais de coordenação. Os valores são hipóteses didáticas.
+
+\textbf{Lemas e dedução.} Com $S(n)=1/(s+(1-s)/n)$, substituir $s=1/5$ e $n=4$ dá denominador $2/5$; inverter dá $5/2$. Para $n=8$, o denominador é $3/10$ e a razão é $10/3$. A positividade dos denominadores justifica a interpretação de aceleração.
+
+\textbf{Lean 4.} \leanref{BookAlgebra.amdahl_time_positive}; \leanref{BookAlgebra.amdahl_four_exact}; \leanref{BookAlgebra.amdahl_eight_exact}.
+
+\textbf{Axiomas e alcance.} A conta racional não demonstra aceleração medida de renderizadores ou agentes. As siglas junto aos nomes identificam as dependências lógicas auditadas; ver a seção~\ref{sec:fundamentos-lean}.
+\end{formalizacao}
+
 \section{MASWOS (padrão nota 10)}
 \elemento{ficha-maswos-agent}{\metainfo{Categoria}{maswos-agent} \hfill \metainfo{Ciclo}{R613}}
 \begin{descricao}
@@ -257,6 +329,18 @@ LIMITE. Utilidade segue convenção, não cria política; revisão de serviço n
 auditoria de mérito.
 \end{aviso}
 \noindent\textit{Interpretação:} Monitorar operações exige comparar estado esperado e observado, registrar a discrepância e indicar a ação tomada. Pode-se representar o desvio por $\Delta_t=x_t^{obs}-x_t^{esp}$; a métrica só é interpretável se unidade, período e regra de alerta forem definidos antes da leitura. O rastro permite localizar uma falha e revisar o procedimento, mas não comprova por si só que a política aplicada era adequada ao objetivo \citparafrase{FLAVELL, J. H. Metacognition and cognitive monitoring: a new area of cognitive-developmental inquiry. \emph{American Psychologist}, v.~34, n.~10, p.~906-911, 1979}{10.1037/0003-066X.34.10.906}{Referência conceitual sobre monitoramento e conhecimento metacognitivo. A associação ao Core é uma interpretação de arquitetura, não prova de consciência, aprendizagem ou eficácia. O acesso primário não foi recuperado nesta revisão; não se conserva uma transcrição literal incerta}{FLAVELL, 1979, p.~906} \begin{resultado}
+\begin{formalizacao}{F26}{Discrepância assinada, sem inferência causal}
+\textbf{Enunciado.} Com $\Delta=x^{obs}-x^{esp}$, valem $\Delta+x^{esp}=x^{obs}$, $\Delta=0\iff x^{obs}=x^{esp}$ e a reversão troca o sinal.
+
+\textbf{Hipóteses.} Mesma unidade e mesmo período; valores reais de observado e esperado. A expectativa deve ter origem declarada.
+
+\textbf{Lemas e dedução.} A reconstrução cancela $-x^{esp}+x^{esp}$. A equivalência com zero é \pth{sub_eq_zero}; inverter os dois termos produz o oposto por identidade de anel. A prova usa a definição, não um modelo estatístico de previsão.
+
+\textbf{Lean 4.} \leanref{BookModels.discrepancy_reconstructs_observed}; \leanref{BookModels.discrepancy_zero_iff}; \leanref{BookModels.discrepancy_reversed}.
+
+\textbf{Axiomas e alcance.} Não identifica causa nem demonstra que o esperado era adequado. As siglas junto aos nomes identificam as dependências lógicas auditadas; ver a seção~\ref{sec:fundamentos-lean}.
+\end{formalizacao}
+
 FECHO DO LOTE. As 13 categorias remanescentes foram percorridas com o mesmo
 padrão (conceito e função; método e cálculo; limite e anti-overclaim; citação
 âncora com recorte, tradução e página). Junto com os Módulos 12-13, o leitor

@@ -572,4 +572,32 @@ não determina se essa nota foi adequada nem mede competência calibrada.
 \end{enumerate}
 \end{aviso}
 
+\begin{formalizacao}{F11}{A faixa e o deslocamento da média móvel}
+\textbf{Enunciado.} Com $\tau,s\in[0,1]$, a atualização
+$\tau'=\frac7{10}\tau+\frac3{10}s$ também pertence a $[0,1]$.
+Se $\tau\leq s$, então $\tau\leq\tau'\leq s$; o exemplo resulta em
+$\tau'=31/50=0{,}62$.
+
+\textbf{Hipóteses.} Entradas reais na faixa unitária e pesos fixos não
+negativos cuja soma é um. A relação $\tau\leq s$ é uma hipótese adicional
+apenas para a direção do deslocamento, não para a conservação da faixa.
+
+\textbf{Lemas e dedução.} Multiplicar $0\leq\tau,s\leq1$ pelos pesos e
+somar fornece os limites zero e um. Subtrair $\tau$ da atualização dá
+$\tau'-\tau=\frac3{10}(s-\tau)$; subtrair a atualização de $s$ dá
+$s-\tau'=\frac7{10}(s-\tau)$, ambos não negativos quando $\tau\leq s$.
+A substituição $\tau=1/2$, $s=9/10$ é exata. Sem a faixa, $\tau=1$ e
+$s=2$ produzem $1{,}3>1$, um contraexemplo à garantia incondicional.
+
+\textbf{Lean 4.} \leanref{BookAlgebra.ema_70_30_bounds},
+\leanref{BookAlgebra.ema_moves_toward_score},
+\leanref{BookAlgebra.ema_70_30_example} e
+\leanref{BookAlgebra.ema_out_of_range_counterexample}.
+
+\textbf{Axiomas e alcance.} Consulte a seção~\ref{sec:fundamentos-lean}
+para os fundamentos e as dependências específicas. A hipótese de faixa
+não é validada automaticamente pela API legada; a prova não transforma
+seu ledger em probabilidade calibrada, aprendizagem ou validação externa.
+\end{formalizacao}
+
 % R901-PONTE-FECHO

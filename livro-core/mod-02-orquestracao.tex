@@ -501,6 +501,80 @@ decisão concreta em vez de inferir o algoritmo pelo nome “atenção”.
 \end{descricao}
 \fontecore{transformer/attention.py}{AttentionRouter}
 
+\begin{formalizacao}{F21}{Da utilidade ponderada à ordenação}
+\textbf{Enunciado.} A combinação
+$U=0{,}30s+0{,}35c+0{,}25f+0{,}10\ell$ permanece em $[0,1]$
+se os quatro sinais estão nessa faixa. Num mesmo conjunto finito não vazio,
+a normalização exponencial conserva a ordem dos escores.
+
+\textbf{Hipóteses.} Trabalha-se nos reais com pesos não negativos que somam
+um e sinais na faixa unitária. Para
+$w_i=\exp(U_i/T)/\sum_j\exp(U_j/T)$ exige-se $T>0$;
+as afirmações de crescimento usam o mesmo conjunto de comparação.
+
+\textbf{Lemas e dedução.} Multiplicar cada desigualdade $0\leq x\leq1$
+pelo peso correspondente e somar dá $0\leq U\leq1$. A positividade de
+$\exp$ torna o denominador positivo; somar os numeradores produz a mesma
+soma do denominador e, portanto, $\sum_iw_i=1$. Como dividir por $T>0$ e
+aplicar a exponencial preservam a ordem, dividir pela mesma soma positiva
+preserva também a classificação. No conjunto com pelo menos dois membros,
+cada peso está estritamente entre zero e um; um único candidato recebe um.
+
+\textbf{Lean 4.} \leanref{BookAttention.head_weights_sum_one},
+\leanref{BookAttention.utility_mem_unit},
+\leanref{BookAttention.combinacao_convexa_limitada},
+\leanref{BookAttention.combinacao_convexa_limitada_baixo},
+\leanref{BookAttention.softmax_soma_um},
+\leanref{BookAttention.softmax_same_pool_order},
+\leanref{BookAttention.softmax_mem_Ioo} e
+\leanref{BookAttention.softmax_peso_total_singleton} identificam as etapas.
+As substituições didáticas $U=0{,}75$ e $U=0{,}64$ são verificadas por
+\leanref{BookAttention.utility_example_075} e
+\leanref{BookAttention.utility_example_064}.
+
+\textbf{Axiomas e alcance.} Os fundamentos e a explicação das dependências por
+declaração estão na seção~\ref{sec:fundamentos-lean}. O resultado é uma
+propriedade do modelo real: não mede calibração nem comprova execução do
+roteador Python. Os pesos descrevem prioridade relativa, não probabilidade
+de uma resposta estar correta.
+\end{formalizacao}
+
+\begin{formalizacao}{F21}{Translação, temperatura e escolha no modelo de atenção}
+\textbf{Enunciado.} Subtrair a mesma constante dos escores não altera os
+pesos; reduzir uma temperatura positiva aumenta o peso do máximo único.
+Uma lista já ordenada tem cada elemento do prefixo superior ou igual aos
+do restante, e uma utilidade real atinge seu máximo num conjunto finito
+não vazio.
+
+\textbf{Hipóteses.} A normalização usa um conjunto finito não vazio. O caso
+estrito da temperatura exige pelo menos dois candidatos, máximo único e
+$0<T_1<T_2$. O lema de prefixo exige a lista inteira em ordem decrescente;
+não demonstra que uma implementação efetivamente a ordenou.
+
+\textbf{Lemas e dedução.} A identidade
+$\exp(x-a)=\exp(x)/\exp(a)$ permite cancelar o mesmo fator positivo no
+numerador e denominador. Para o máximo $m$, reescrever cada termo relativo
+como $\exp((U_j-U_m)/T)$ mostra por que, quando $T$ diminui, os termos dos
+outros candidatos diminuem estritamente e o peso do máximo aumenta.
+A existência de máximo decorre da finitude e da não vacuidade, não da
+qualidade de um candidato. Na lista ordenada, a relação entre prefixo e
+sufixo decorre da hipótese de ordenação par a par.
+
+\textbf{Lean 4.} \leanref{BookAttention.softmax_invariante_max},
+\leanref{BookAttention.temperatura_aguca_maximo},
+\leanref{BookAttention.peso_cresce_com_escore},
+\leanref{BookAttention.roteamento_guloso_otimo} e
+\leanref{BookAttention.topk_dominam_resto}. O limite real
+$\exp(U_i-M)\leq1$, quando $U_i\leq M$, corresponde a
+\leanref{BookAttention.exp_apos_subtrair_majorante_le_um}.
+
+\textbf{Axiomas e alcance.} Consulte os fundamentos e as dependências
+individuais na seção~\ref{sec:fundamentos-lean}. A translação é uma
+identidade nos reais; não constitui prova de ausência de overflow,
+underflow ou erro de arredondamento IEEE-754. Escolher um máximo não
+certifica competência, segurança nem validade científica da entrega.
+\end{formalizacao}
+
 
 
 
@@ -828,6 +902,31 @@ Justificativa: proporção elementar. O resultado 8 significa que o conjunto tot
 \end{descricao}
 
 \clearpage
+\begin{formalizacao}{F09}{O que o quociente de candidatos demonstra}
+\textbf{Enunciado.} Para $M\geq0$ e $k\geq1$, vale $0\leq M/k\leq M$.
+Se ainda $M\geq k$, a razão é pelo menos um; no exemplo, $40/5=8$.
+
+\textbf{Hipóteses.} As contagens são representadas por reais não negativos,
+com $k\geq1$; para interpretar $k$ como subconjunto, exige-se $k\leq M$.
+O denominador é positivo. Uma seleção vazia não admite essa interpretação.
+
+\textbf{Lemas e dedução.} De $k\geq1$ segue $k>0$, autorizando dividir
+sem inverter desigualdades. A não negatividade de $M$ dá $M/k\geq0$;
+de $M\leq Mk$ segue $M/k\leq M$. De $k\leq M$ segue $1\leq M/k$.
+A igualdade numérica é aritmética exata, não uma estimativa estatística.
+
+\textbf{Lean 4.} \leanref{BookModels.reduction_ratio_nonnegative_le_total},
+\leanref{BookModels.reduction_ratio_at_least_one} e
+\leanref{BookModels.reduction_example_40_5}.
+
+\textbf{Axiomas e alcance.} Os fundamentos e as dependências de cada
+proposição constam da seção~\ref{sec:fundamentos-lean}. Nenhum passo
+converte redução de candidatos em ganho de tokens, latência ou precisão;
+isso exigiria medições próprias.
+\end{formalizacao}
+
+\clearpage
+
 \section[Apêndice Didático: Seleção por custo mínimo]{Apêndice Didático: Seleção por custo mínimo ($i^*=\mathrm{arg\,min}_{i\in C}K_i$)}
 
 \elemento{Seleção por custo mínimo no protocolo de contratos}{\metainfo{ID}{DID-ARGMIN} \hfill \metainfo{Fonte}{docs/guias-didaticos/formulas-livro-core-nussenzveig.md, seção 15}}
@@ -903,6 +1002,32 @@ executados, nem descreve o ranking real de \cod{_on_cfp}. Um candidato com
 menor custo declarado não é automaticamente o melhor entregador; a validação
 da entrega continua sendo obrigatória via gate SDD/TDD.
 \end{descricao}
+
+\begin{formalizacao}{F10}{Existência do mínimo e exclusão de inelegíveis}
+\textbf{Enunciado.} Num conjunto finito não vazio $C$, uma função real de
+custo tem pelo menos um minimizador pertencente a $C$. Se $e\notin C$, esse
+excluído não pode ser o escolhido de $C$; nos custos $10,7,12$, $c_2$ minimiza.
+
+\textbf{Hipóteses.} Finitude e não vacuidade de $C$, custos reais definidos
+para todos os seus membros e escolha restrita a $C$. A unicidade não é
+pressuposta: empates precisam de uma regra adicional. Um conjunto vazio
+significa ausência de candidato, não um mínimo fictício.
+
+\textbf{Lemas e dedução.} O lema de mínimo de uma imagem finita não vazia
+fornece $i\in C$ com $K_i\leq K_a$ para todo $a\in C$. Se esse $i$ fosse
+igual ao excluído $e$, obteríamos $e\in C$, contradizendo $e\notin C$.
+No exemplo, comparar $7\leq10$, $7\leq7$ e $7\leq12$ verifica a escolha.
+
+\textbf{Lean 4.} \leanref{BookAttention.eligible_minimum_exists} usa
+\cod{Finset.exists_min_image}; a separação do excluído está em
+\leanref{BookAttention.excluded_cannot_be_chosen}; o exemplo, em
+\leanref{BookAttention.contract_example_c2_minimizes}.
+
+\textbf{Axiomas e alcance.} A seção~\ref{sec:fundamentos-lean} discrimina
+fundamentos e dependências individuais. Trata-se do modelo hipotético por
+custo, não de uma prova de equivalência com \cod{_on_cfp} nem de execução
+ou qualidade de um agente.
+\end{formalizacao}
 
 % R901-PONTE-FECHO
 Uma atribuição registra quem deve agir, não tudo o que foi observado antes ou depois dela. A memória completa essa descrição ao conservar contexto e resultados que poderão ser examinados numa nova decisão.

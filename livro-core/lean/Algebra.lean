@@ -40,8 +40,8 @@ theorem independent_error_216_tight_interval :
 
 /-- Exercício com 99,9% individual: risco conjunto entre 19,4% e 19,5%. -/
 theorem independent_error_216_high_accuracy_interval :
-    (194 : ℝ) / 1000 < 1 - ((999 : ℝ) / 1000) ^ 216 ∧
-      1 - ((999 : ℝ) / 1000) ^ 216 < (195 : ℝ) / 1000 := by
+    (19435 : ℝ) / 100000 < 1 - ((999 : ℝ) / 1000) ^ 216 ∧
+      1 - ((999 : ℝ) / 1000) ^ 216 < (19436 : ℝ) / 100000 := by
   norm_num
 
 /-- A multiplicação decimal intermediária é exata; o logaritmo que a motivou é aproximado. -/

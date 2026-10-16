@@ -58,8 +58,8 @@ e, quando há citação direta, o \textbf{trecho textual} e sua página.
 \begin{resultado}
 \textbf{Inventário de fontes desta edição.} A configuração declara
 \textbf{312} agentes, \textbf{16} servidores MCP e
-\textbf{33} comandos. O repositório contém 540 specs,
-das quais 450 são da série R, e 424 arquivos
+\textbf{33} comandos. O repositório contém 541 specs,
+das quais 451 são da série R, e 425 arquivos
 \pth{test_r*.py}. A biblioteca contém 28 blocos de referência;
 as fontes dos módulos contêm 76 chamadas de \cod{\string\citref}
 e 13 fichas condensadas de categoria.
@@ -445,6 +445,18 @@ média não informa quantas fontes foram pouco usadas: por exemplo, em um conjun
 $12/4=3$, embora três referências apareçam uma vez. Para medir concentração
 é necessário obter as contagens individuais, não deduzi-las da média.
 \end{resultado}
+\begin{formalizacao}{F08}{A média não determina a distribuição}
+\textbf{Enunciado.} No exemplo, $1+1+1+9=12$ e a média é $12/4=3$.
+
+\textbf{Hipóteses.} Lista hipotética de quatro contagens, cada chamada atribuída a uma referência; não são os dados atuais da biblioteca.
+
+\textbf{Lemas e dedução.} A soma é normalizada exatamente e a definição de média divide pelo comprimento quatro. A fonte de nove chamadas concentra $9/12=3/4$ do total; a média três não informa que três fontes têm apenas uma chamada.
+
+\textbf{Lean 4.} \leanref{BookModels.reference_counts_sum}; \leanref{BookModels.reference_counts_mean}; \leanref{BookModels.reference_concentration_exact}.
+
+\textbf{Axiomas e alcance.} Essa aritmética não mede relevância, diversidade ou sustentação das afirmações. As siglas junto aos nomes identificam as dependências lógicas auditadas; ver a seção~\ref{sec:fundamentos-lean}.
+\end{formalizacao}
+
 \begin{resultado}
 \textbf{Ordem de grandeza e verificação.} Reexecute \pth{gen_inventario.py}
 e compare contagens e hashes com \pth{inventario-core.json}. O procedimento
@@ -505,6 +517,18 @@ $D_a$ & Número de DOIs ativos (resolvíveis) \\
 
 Justificativa: proporção elementar. DOIs indisponíveis são encaminhados para triagem de metadados, nova tentativa e eventual correção; indisponibilidade temporária não demonstra identificador inválido na próxima auditoria, mas isso é um procedimento operacional, não altera a definição da fração.
 \end{metodo}
+\begin{formalizacao}{F05}{Definição e domínio da taxa de resolução}
+\textbf{Enunciado.} Se $0\leq D_a\leq D_t$ e $D_t>0$, a taxa $D_a/D_t$ pertence a $[0,1]$.
+
+\textbf{Hipóteses.} Data, protocolo e respostas de resolução identificados; apenas identificadores do mesmo universo entram no numerador.
+
+\textbf{Lemas e dedução.} A razão é uma definição operacional. O limite inferior decorre de \pth{div_nonneg}; o superior de dividir $D_a\leq D_t$ por $D_t>0$. Multiplicar por cem muda a escala; dividir esse percentual por cem recupera a fração.
+
+\textbf{Lean 4.} \leanref{BookAlgebra.coverage_fraction_bounds}; \leanref{BookAlgebra.percent_unscale}.
+
+\textbf{Axiomas e alcance.} Não prova DOI ativo agora, pertinência da citação ou qualidade editorial. As siglas junto aos nomes identificam as dependências lógicas auditadas; ver a seção~\ref{sec:fundamentos-lean}.
+\end{formalizacao}
+
 
 % R901-PONTE-FECHO
 Ao fechar o livro, o leitor não precisa levar uma lista de promessas, mas um modo de perguntar e conferir. Retome uma fonte, refaça uma operação delimitada e registre o que sua observação permite — e o que ainda não permite — concluir.

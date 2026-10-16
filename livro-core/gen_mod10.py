@@ -842,6 +842,32 @@ def main():
               f"esse número na mesma medida.")
     fd.append("\\end{resultado}")
     fd.append("")
+    # R910: fonte autoritativa dos blocos locais do catálogo.
+    fd.append(r"""
+\begin{formalizacao}{F07}{Reconciliação exige vínculos além das contas}
+\textbf{Enunciado.} No retrato formalizado, $81+18=99$ e $99+213=312$; totais iguais, isoladamente, não implicam conjuntos iguais.
+
+\textbf{Hipóteses.} Contagens desse retrato e correspondência individual de identidades fornecidas pelo inventário. A prova aritmética usa essas constantes, não relê o catálogo.
+
+\textbf{Lemas e dedução.} Normalizar as somas elimina o resíduo numérico. O contraexemplo $\{1\}$ e $\{2\}$ mostra por que essa igualdade é insuficiente: é necessário conferir cada vínculo entre perfil e ficha. Se a configuração mudar, as constantes da prova precisam ser revistas.
+
+\textbf{Lean 4.} \leanref{BookAlgebra.catalog_reconciliation}; \leanref{BookModels.equal_cardinality_not_equal_sets}; \leanref{BookModels.cardinality_equality_insufficient}.
+
+\textbf{Axiomas e alcance.} Consistência documental e disponibilidade operacional exigem evidências distintas. As siglas junto aos nomes identificam as dependências lógicas auditadas; ver a seção~\ref{sec:fundamentos-lean}.
+\end{formalizacao}
+
+\begin{formalizacao}{F08}{Concentração e média do retrato formalizado}
+\textbf{Enunciado.} $128+58=186$, $186/312=31/52$ e $28{,}36<312/11<28{,}37$.
+
+\textbf{Hipóteses.} Onze categorias e 312 fichas do retrato auditado; totais não nulos e categorias contadas pelo mesmo critério.
+
+\textbf{Lemas e dedução.} As duas maiores categorias são somadas antes da divisão. Cancelar o fator seis reduz $186/312$ a $31/52$; os limites racionais controlam a aproximação. A média divide 312 por onze e não informa a distribuição das contagens.
+
+\textbf{Lean 4.} \leanref{BookAlgebra.catalog_largest_categories}; \leanref{BookAlgebra.catalog_concentration_exact}; \leanref{BookAlgebra.catalog_concentration_interval}; \leanref{BookAlgebra.catalog_mean_interval}.
+
+\textbf{Axiomas e alcance.} Teoremas sobre estas constantes não autenticam uma futura configuração nem a qualidade dos agentes. As siglas junto aos nomes identificam as dependências lógicas auditadas; ver a seção~\ref{sec:fundamentos-lean}.
+\end{formalizacao}
+""")
     fd.append("\\begin{aviso}")
     fd.append("\\textbf{Limite de validade.} Reconciliação é consistência "
               "declarativa, não evidência funcional: um agente registrado e "

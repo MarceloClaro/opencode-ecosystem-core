@@ -12,6 +12,9 @@ import Mathlib.Tactic.NormNum
 import Mathlib.Tactic.Linarith
 import Mathlib.Tactic.Positivity
 import Mathlib.Tactic.Ring
+import Mathlib.Data.Matrix.Mul
+import Mathlib.LinearAlgebra.Matrix.Notation
+import Mathlib.Tactic.FinCases
 
 namespace BookModels
 
@@ -189,11 +192,53 @@ theorem attention_dimension_scaled_four : (4 : ℝ) / Real.sqrt 4 = 2 := by
   rw [attention_dimension_sqrt_four]
   norm_num
 
+/-- Escalar a matriz de escores fornecida; Q e K não são inferidos dos dados. -/
+theorem attention_matrix_scale :
+    (1 / Real.sqrt (4 : ℝ)) • (!![4, 0; 0, 4] : Matrix (Fin 2) (Fin 2) ℝ) =
+      !![2, 0; 0, 2] := by
+  ext i j
+  fin_cases i <;> fin_cases j <;> norm_num [attention_dimension_sqrt_four]
+
+/-- Multiplicar os pesos pela identidade mantém os pesos, não os transforma em I. -/
+theorem attention_output_identity (weights : Matrix (Fin 2) (Fin 2) ℝ) :
+    weights * 1 = weights := by
+  exact Matrix.mul_one weights
+
+/-- Concentração das referências do exemplo, sem certificar sua pertinência. -/
+theorem reference_concentration_exact : (9/12 : ℝ) = 3/4 := by norm_num
+
 -- Complemento de um PPV do modelo hipotético (não risco empírico do Core).
 theorem ppv_eight_thirteenths_complement : (1 : ℝ) - 8/13 = 5/13 := by norm_num
 
 theorem ppv_complement_percentage_bounds :
     (384/10 : ℝ) < (1-8/13)*100 ∧ ((1-8/13)*100 : ℝ) < 385/10 := by norm_num
+
+
+/- R910: contas didáticas locais; os números são entradas, não observações provadas. -/
+theorem full_coverage_identity (total : ℝ) (ht : total ≠ 0) : total/total = 1 := by
+  exact div_self ht
+
+theorem eighteen_twentieths_exact : (18/20 : ℝ) = 9/10 := by norm_num
+
+theorem four_fifths_exact : (4/5 : ℝ) = 8/10 := by norm_num
+
+theorem two_sixths_exact : (2/6 : ℝ) = 1/3 := by norm_num
+
+theorem eight_tenths_exact : (8/10 : ℝ) = 4/5 := by norm_num
+
+theorem three_tenths_exact : (3/10 : ℝ) = 30/100 := by norm_num
+
+theorem three_fourths_exact : (3/4 : ℝ) = 75/100 := by norm_num
+
+theorem zero_elevenths_exact : (0/11 : ℝ) = 0 := by norm_num
+
+/-- O complemento de uma proporção fica na faixa unitária sob suas hipóteses. -/
+theorem coverage_complement_bounds (missing total : ℝ)
+    (hm : 0 ≤ missing) (ht : 0 < total) (hmt : missing ≤ total) :
+    0 ≤ 1 - missing/total ∧ 1 - missing/total ≤ 1 := by
+  have hdiv0 := div_nonneg hm ht.le
+  have hdiv1 : missing/total ≤ 1 := (div_le_one ht).mpr hmt
+  constructor <;> linarith
 
 end
 

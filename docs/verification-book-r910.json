@@ -1,0 +1,280 @@
+{
+  "revision": "R910",
+  "status": "concluido_no_escopo_editorial_e_matematico_local",
+  "checked_at_utc": "2026-10-16T07:09:56.160904+00:00",
+  "external_validation": false,
+  "human_review_recorded": false,
+  "learning_effectiveness_measured": false,
+  "editorial": {
+    "status": "editorial_links_checked",
+    "local_blocks": 75,
+    "family_source_pairs": 66,
+    "referenced_declarations": 172,
+    "scope": "Nomes, campos e ocorrências; não certifica a tradução semântica nem dados.",
+    "modules_with_local_deductions": 25,
+    "formal_model_families": 28,
+    "empirical_families_outside_proof_claim": 1,
+    "all_named_propositions_referenced": true,
+    "proof_vs_observation_separated": true
+  },
+  "formal_verification": {
+    "status": "machine_checked",
+    "theorems": 172,
+    "receipt": "docs/verification-book-lean-r908.json",
+    "receipt_sha256": "1aca04a588e129f0596dd86e09b6ee5739c7afed596cde21ea0506628de5ed52",
+    "fresh_context": true,
+    "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+    "mathlib_revision": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+    "module_counts": {
+      "livro-core/lean/Algebra.lean": 54,
+      "livro-core/lean/Attention.lean": 41,
+      "livro-core/lean/Foundations.lean": 24,
+      "livro-core/lean/Models.lean": 53
+    },
+    "controls": {
+      "positive": "machine_checked",
+      "false_equality": "compiler_rejected",
+      "open_proof": "rejected_source",
+      "invented_axiom": "rejected_source",
+      "mutated_ema": "compiler_rejected"
+    },
+    "axioms_by_declaration": true,
+    "allowed_foundations": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "local_axioms_introduced": false,
+    "axiom_annotations_reproducible": true
+  },
+  "tests": {
+    "passed": 129,
+    "failed": 0,
+    "scope": "R617-R620,R814,R901,R907,R908,R910",
+    "global_suite_executed": false,
+    "remote_ci_executed": false,
+    "log_sha256": "61c27c05096f68557e58d200a411e09f8034283e9919bda52db019eccd9787a3"
+  },
+  "doctor": {
+    "checks_passed": 22,
+    "checks_total": 22,
+    "verification": "installation_only",
+    "scope": "Saúde estrutural; não comprova inferência de agentes externos.",
+    "log_sha256": "3731e0db92c1c1b358e1b2e6771541315d572abe333f92e2b8b6e77bd0898d70"
+  },
+  "pdf": {
+    "file": "livro-core/main.pdf",
+    "sha256": "9c64ca4e1aea10b47de3c59e45505164022664a278fc3bedca9730801eca93c4",
+    "bytes": 7023037,
+    "pages": 581,
+    "compile_exit": 0,
+    "compile_log_sha256": "3ab90763c8a5e40dca836076b3a658f5077957b22c56750bad7c2340e3d0e8c3",
+    "undefined_references": false,
+    "overfull_hbox": 0,
+    "residual_overfull_vbox_pt": 0.79533,
+    "offpage_words": 0,
+    "horizontal_margin_violations_above_2pt": 0,
+    "maximum_horizontal_extension_pt": 0.2739,
+    "geometry_scope": "Coordenadas de palavras nas581páginas; capa excluída da regra de margem de corpo, cabeçalhos/rodapés tratados por faixa vertical.",
+    "visual_scope": "25páginas representativas emfolhas e7páginas técnicas individuais;27páginas únicas na união, não uma leitura visual das581.",
+    "visual_representative_pages": [
+      20,
+      32,
+      28,
+      53,
+      70,
+      80,
+      117,
+      144,
+      152,
+      159,
+      183,
+      212,
+      247,
+      292,
+      270,
+      376,
+      579,
+      542,
+      304,
+      550,
+      360,
+      332,
+      45,
+      564,
+      568
+    ],
+    "detailed_visual_pages": [
+      20,
+      32,
+      117,
+      144,
+      360,
+      369,
+      377
+    ],
+    "final_reinspected_pages": [
+      32,
+      117,
+      369
+    ],
+    "changed_rendered_pages_after_wording": [
+      32,
+      117,
+      369
+    ],
+    "unchanged_pixel_comparisons": 29,
+    "log_encoding": "Saída nativa8bits preservada como bytes; leitura de relatório tolerante ao encoding.",
+    "built_in_fragment_compiler": {
+      "status": "unsupported_fragment",
+      "reason": "O editor compila documento autônomo; mod07 depende de main.tex e macros.",
+      "actual_validation": "Projeto completo main.tex compilado com latexmk; editor original preservado."
+    }
+  },
+  "red_evidence": [
+    {
+      "file": "docs/evidence/r910/red-all-references.txt",
+      "sha256": "fa7e3d44cefb0d30e137dc14c25427d8e2f12ab5878368ab124d75105d3aac05",
+      "original_local_file": "outputs/core-r910/red-all-references.txt",
+      "original_sha256": "af4bcf8e5f277aeadf21e204c3c418ea580680185605b5eb53b2b6a158e55e37",
+      "normalization": "Somente espaços finais removidos; bytes originais preservados localmente e identificados pelo hash."
+    },
+    {
+      "file": "docs/evidence/r910/red-extra-proofs.txt",
+      "sha256": "b96c691261f729492ca63d973b999180f79d1d1426188d14854af03a135fb9e2",
+      "original_local_file": "outputs/core-r910/red-extra-proofs.txt",
+      "original_sha256": "b96c691261f729492ca63d973b999180f79d1d1426188d14854af03a135fb9e2",
+      "normalization": "Somente espaços finais removidos; bytes originais preservados localmente e identificados pelo hash."
+    },
+    {
+      "file": "docs/evidence/r910/red-identity.txt",
+      "sha256": "c34f7b9394a4b53d08f192c8b0c816abe5a2ca4bd44b486c7c143b2ac91feb61",
+      "original_local_file": "outputs/core-r910/red-identity.txt",
+      "original_sha256": "c34f7b9394a4b53d08f192c8b0c816abe5a2ca4bd44b486c7c143b2ac91feb61",
+      "normalization": "Somente espaços finais removidos; bytes originais preservados localmente e identificados pelo hash."
+    },
+    {
+      "file": "docs/evidence/r910/red-last-instances.txt",
+      "sha256": "88728a34ce5cdcd350b679c645b37af04acd31ff7502bb2ed088431a3c3adf45",
+      "original_local_file": "outputs/core-r910/red-last-instances.txt",
+      "original_sha256": "88728a34ce5cdcd350b679c645b37af04acd31ff7502bb2ed088431a3c3adf45",
+      "normalization": "Somente espaços finais removidos; bytes originais preservados localmente e identificados pelo hash."
+    },
+    {
+      "file": "docs/evidence/r910/red-local-deductions.txt",
+      "sha256": "000eb254be930affbfb9c1b10f64b84bde7f24215a229bd13b6a9deb1b88d86c",
+      "original_local_file": "outputs/core-r910/red-local-deductions.txt",
+      "original_sha256": "ee3253902b419538ac7f5a3ef83f5d82bad35127567c4d0fa57eee2afcb232cc",
+      "normalization": "Somente espaços finais removidos; bytes originais preservados localmente e identificados pelo hash."
+    },
+    {
+      "file": "docs/evidence/r910/red-matrix.txt",
+      "sha256": "50faa9424dc544cec074408ac7cec255737350ff8700e765a74a82ff1c1760dd",
+      "original_local_file": "outputs/core-r910/red-matrix.txt",
+      "original_sha256": "45b5d7164384c6cfc8e2b8de2491eb9c5b56da88f4f7e5c838e5b52d3a0cd70e",
+      "normalization": "Somente espaços finais removidos; bytes originais preservados localmente e identificados pelo hash."
+    },
+    {
+      "file": "docs/evidence/r910/red-risk-rounding.txt",
+      "sha256": "9e2adaab927de88487d6bd0c738d483ae314abe682d8f62290a134426c6fe58b",
+      "original_local_file": "outputs/core-r910/red-risk-rounding.txt",
+      "original_sha256": "9e2adaab927de88487d6bd0c738d483ae314abe682d8f62290a134426c6fe58b",
+      "normalization": "Somente espaços finais removidos; bytes originais preservados localmente e identificados pelo hash."
+    },
+    {
+      "file": "docs/evidence/r910/red-short-statement.txt",
+      "sha256": "8d9825dfd1a0581bab4292715d8c38c3ed1dbb1420cf35d23522384b9faaa14c",
+      "original_local_file": "outputs/core-r910/red-short-statement.txt",
+      "original_sha256": "ce9c4cb4f72563e5ee866186533b41b4340c001100a06cca1866e784d87e3655",
+      "normalization": "Somente espaços finais removidos; bytes originais preservados localmente e identificados pelo hash."
+    },
+    {
+      "file": "docs/evidence/r910/red-validator.txt",
+      "sha256": "99e2196500bc06d1f98183b117cba7a45771ffe66125ec7448fc3730aec58896",
+      "original_local_file": "outputs/core-r910/red-validator.txt",
+      "original_sha256": "99e2196500bc06d1f98183b117cba7a45771ffe66125ec7448fc3730aec58896",
+      "normalization": "Somente espaços finais removidos; bytes originais preservados localmente e identificados pelo hash."
+    }
+  ],
+  "cross_review": {
+    "method": "Leitura e revisão cruzada assistidas por IA, não parecer científico externo.",
+    "corrected_findings": [
+      "independência conjunta e complemento derivados, não axiomas novos",
+      "ponte explícita de ENNReal para real",
+      "normalização VP/F do PPV",
+      "intervalo softmax com precisão correspondente à prova",
+      "produto pela identidade mantém a matriz de pesos",
+      "comando print axioms exibido sem barra indevida"
+    ],
+    "reports": [
+      {
+        "file": "outputs/core-r910/review-initial.md",
+        "sha256": "6b08c30887ceb7f173fe24bb7927d6dea4013db7841aa30c00d5715b818b2647"
+      },
+      {
+        "file": "outputs/core-r910/review-final-partial.md",
+        "sha256": "d9ad3185155d08be850aa4266049c81bb88362ee4d9702d8c3c557a45f368eba"
+      },
+      {
+        "file": "outputs/core-r910/review-final-root.md",
+        "sha256": "f1759c5ebb86595b861009f9db8928200b35e98970fef3239316df1dd4df2b0f"
+      },
+      {
+        "file": "outputs/core-r910/visual-review.md",
+        "sha256": "7f04e05acd35654f9c345dab166a471006249780c5f13fa94e53aa2d40249ad4"
+      }
+    ]
+  },
+  "agent_correlations": [
+    {
+      "profile": "book-science-editor",
+      "task_id": "task-bffbf5c7",
+      "profile_sha256": "aa3fcdd8cc584bb2b307bb76fe59730293f5e3de8f959e1935c7ffdc4f6cb421",
+      "external_task": "/root/r910_science",
+      "external_executor": "Codex collaboration subagent",
+      "core_assignment_is_execution_evidence": false,
+      "confidence_promoted": false
+    },
+    {
+      "profile": "book-orchestration-editor",
+      "task_id": "task-2456a79f",
+      "profile_sha256": "1c2b2695e60b3886859ede193c426633e3a38ac10e51435b7146ec4c280dcde1",
+      "external_task": "/root/r910_orchestration",
+      "external_executor": "Codex collaboration subagent",
+      "core_assignment_is_execution_evidence": false,
+      "confidence_promoted": false
+    },
+    {
+      "profile": "scientific-review",
+      "task_id": "task-bc82a55c",
+      "profile_sha256": "a4570a2b1c34738c560964f0a47f6a2881816e9a0e2de7797b1dc9a10ffe3f61",
+      "external_task": "/root/r910_review",
+      "external_executor": "Codex collaboration subagent",
+      "core_assignment_is_execution_evidence": false,
+      "confidence_promoted": false
+    }
+  ],
+  "evolution": {
+    "cycle": "R910",
+    "legacy_without_external_audit": true,
+    "quality_score_assigned": false
+  },
+  "artifact_hashes": {
+    "livro-core/main.tex": "dc1771d89c6bc58159c34bac8432eb24397863275bfb4a2379fae045444641c0",
+    "livro-core/macros.tex": "1e96e3fc0ae038102fab76a51e4a467687ba8776918712c427b136d3ca3bc31a",
+    "livro-core/lean-axiomas.tex": "c982aa92f0f6cdc88814488934457f662437ce7c936917e2edaf1dc2042a9fea",
+    "livro-core/gen_lean_axioms.py": "6a5a8600f86010b0978aef927fca3e903ef0110dcae47c160d2a86a2e164f35f",
+    "livro-core/inventario-core.json": "a5699b99caafffb129384c0e156ab9c3e16facbc0693610f11c382273e7fec6f",
+    "docs/book-math-map-r908.json": "b80d097cb2911373952075dd94e327f57e87ad167b5e9fd0b6aee2a3df1ebb7c",
+    "docs/DEDUCOES_LOCAIS_LIVRO_R910.md": "52ce62cea79af286a5fdcc040960d4b5a55a7c9bf2a671f552ea996486db8298",
+    "scripts/book_local_deductions.py": "f43461f3f7d91f7eb5b55a00690b2f150b465ebd23ce10b0241c75cfcebc0e14",
+    "tests/test_r910_book_local_deductions.py": "3cf25f948e343b76066d1b71f1f9a74afbe71f8788925e912889947212b0dfb1",
+    "specs/SPEC-935-R910-deducoes-locais-livro-lean.md": "32859caf009a73be35180fe32f24b672b024efc189d0783a60e11bdd73814cde"
+  },
+  "limitations": [
+    "A matriz é inventário dirigido de famílias/ocorrências; não prova ausência absoluta de fórmulas omitidas.",
+    "Nomes/campos conferidos por parser não provam fidelidade semântica da prosa; revisão matemática continua examinável.",
+    "Dados, coletânea científica, runtimePython, calibração, aprendizagem, segurançaIEEE754 e a tese humanística não são certificados por estas provas.",
+    "Verificação e revisão locais assistidas porIA; decisão e revisão externas permanecem humanas."
+  ]
+}

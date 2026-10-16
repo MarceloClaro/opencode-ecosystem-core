@@ -1,0 +1,24 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+_______________ test_validator_implementation_exists_before_use ________________
+
+    def test_validator_implementation_exists_before_use():
+>       assert (ROOT / 'scripts/book_local_deductions.py').is_file()
+E       AssertionError: assert False
+E        +  where False = is_file()
+E        +    where is_file = (PosixPath('/home/marceloclaro/opencode-ecosystem-core') / 'scripts/book_local_deductions.py').is_file
+
+tests/test_r910_book_local_deductions.py:40: AssertionError
+____________________ test_axiom_annotations_have_generator _____________________
+
+    def test_axiom_annotations_have_generator():
+>       assert (ROOT / 'livro-core/gen_lean_axioms.py').is_file()
+E       AssertionError: assert False
+E        +  where False = is_file()
+E        +    where is_file = (PosixPath('/home/marceloclaro/opencode-ecosystem-core') / 'livro-core/gen_lean_axioms.py').is_file
+
+tests/test_r910_book_local_deductions.py:44: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_r910_book_local_deductions.py::test_validator_implementation_exists_before_use
+FAILED tests/test_r910_book_local_deductions.py::test_axiom_annotations_have_generator
+2 failed, 3 deselected in 0.30s

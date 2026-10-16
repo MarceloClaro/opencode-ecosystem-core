@@ -87,6 +87,37 @@ Para Ana: a casa compara as palavras do bilhete com as plaquinhas e da uma nota 
 Exemplo com conta. Pedido com palavras resuma, artigo, fonte: $K$ tem 3 itens. Ajudante A declara resuma, texto, fonte: intersecao 2, uniao 4, $A=2/4=0{,}50$. Ajudante B declara busca, artigo, fonte: intersecao 2, uniao 4, $A=0{,}50$. Empate tecnico: decide a prioridade de categoria. Se ninguem passa do minimo, a tarefa fica sem dono e isso e saida legitima, nao erro escondido.
 \end{resultado}
 
+\begin{formalizacao}{F19}{Refazer a conta de palavras em comum}
+\textbf{Enunciado.} Dois termos em comum numa união de quatro dão
+$J=2/4=1/2$; um termo em comum numa união de três dá $J=1/3$.
+Em geral, para união não vazia, a razão permanece entre zero e um.
+
+\textbf{Hipóteses.} Os elementos são palavras distintas depois de uma
+mesma regra de preparação. Os conjuntos são finitos e a união não é vazia.
+Trocar nomes de palavras por índices conserva a conta somente quando
+preserva quais elementos são iguais ou diferentes.
+
+\textbf{Lemas e dedução.} Primeiro forme a interseção sem repetir palavras;
+depois forme a união também sem repetições. A interseção está contida na
+união, por isso seu número de elementos não excede o denominador positivo.
+Dividir as contagens dá $2/4$ ou $1/3$; cancelar o fator dois no primeiro
+caso dá $1/2$. O empate resulta da igualdade das duas razões, não de
+igualdade de competência.
+
+\textbf{Lean 4.} \leanref{BookAttention.jaccard_example_half},
+\leanref{BookAttention.jaccard_example_third} e
+\leanref{BookAttention.jaccard_mem_unit}.
+Os exercícios de conjuntos iguais e disjuntos correspondem a
+\leanref{BookAttention.jaccard_identical} e
+\leanref{BookAttention.jaccard_disjoint}.
+
+\textbf{Axiomas e alcance.} A seção~\ref{sec:fundamentos-lean} mostra os
+fundamentos e as dependências individuais. Em linguagem cotidiana: a
+prova confere a divisão das palavras contadas, não a capacidade do
+ajudante. Para dois conjuntos vazios, declare uma convenção de comparação;
+não interprete automaticamente $0/0$ como uma afinidade válida.
+\end{formalizacao}
+
 \begin{limite}
 Nota ordena candidatos elegiveis; nao mede qualidade da entrega nem probabilidade de acerto. O fiscal E6 continua obrigatorio.
 \end{limite}

@@ -2,7 +2,7 @@
   "schema_version": 1,
   "cycle": "R908",
   "inventory_method": "Leitura dirigida independente dos32módulos e correspondência manual de28famílias; inspeção dos enunciados formais, não métrica de cobertura funcional.",
-  "scope": "27famílias matemáticas/modelos explícitos;1família de observações preservada fora da alegação de prova. Prova não valida dados nem runtimePython.",
+  "scope": "28 famílias matemáticas/modelos explícitos e uma família observacional fora da alegação formal; dependências e ocorrências locais auditadas separadamente. Prova não valida dados nem runtime Python.",
   "families": [
     {
       "id": "F01",
@@ -10,13 +10,15 @@
       "kind": "formal_model",
       "book_sources": [
         "livro-core/mod-01-fundacoes.tex",
-        "livro-core/mod-15-epilogo-reproducao.tex"
+        "livro-core/mod-15-epilogo-reproducao.tex",
+        "livro-core/mod-00a-enredo-prefacio.tex"
       ],
       "theorems": [
         "BookFoundations.independent_equal_event_intersection",
         "BookFoundations.independent_error_probability",
         "BookFoundations.error_union_is_complement",
-        "BookAlgebra.complement_probability_bounds"
+        "BookAlgebra.complement_probability_bounds",
+        "BookFoundations.independent_error_probability_real"
       ],
       "hypotheses_and_limits": "Espaço de probabilidade; eventos mensuráveis conjuntamente independentes com mesma massa p. A independência não foi medida no Core."
     },
@@ -26,7 +28,8 @@
       "kind": "exact_and_interval",
       "book_sources": [
         "livro-core/mod-01-fundacoes.tex",
-        "livro-core/mod-15-epilogo-reproducao.tex"
+        "livro-core/mod-15-epilogo-reproducao.tex",
+        "livro-core/mod-00a-enredo-prefacio.tex"
       ],
       "theorems": [
         "BookAlgebra.independent_error_216_tight_interval",
@@ -39,7 +42,9 @@
       "title": "Série do logaritmo, resto e retorno exponencial",
       "kind": "exact_and_interval",
       "book_sources": [
-        "livro-core/mod-01-fundacoes.tex"
+        "livro-core/mod-01-fundacoes.tex",
+        "livro-core/mod-00a-enredo-prefacio.tex",
+        "livro-core/mod-15-epilogo-reproducao.tex"
       ],
       "theorems": [
         "BookFoundations.log_099_hasSum",
@@ -79,7 +84,14 @@
         "livro-core/mod-01-fundacoes.tex",
         "livro-core/mod-01b-historia.tex",
         "livro-core/mod-06-ciencia.tex",
-        "livro-core/mod-11-apendices.tex"
+        "livro-core/mod-11-apendices.tex",
+        "livro-core/mod-00a-enredo-prefacio.tex",
+        "livro-core/mod-00c-projeto-pedagogico.tex",
+        "livro-core/mod-01c-instalacao.tex",
+        "livro-core/mod-04-qualidade-sdd.tex",
+        "livro-core/mod-09a-comparada.tex",
+        "livro-core/mod-15-epilogo-reproducao.tex",
+        "livro-core/mod-14-lote-categorias.tex"
       ],
       "theorems": [
         "BookAlgebra.percent_unscale",
@@ -92,7 +104,10 @@
         "BookModels.specs_per_cycle_rounds_0815",
         "BookModels.cycles_per_day_rounds_66",
         "BookModels.one_eleventh_rounds_0091",
-        "BookModels.two_thirds_bounds"
+        "BookModels.two_thirds_bounds",
+        "BookModels.amortized_diagnosis_339_12_exact",
+        "BookModels.amortized_diagnosis_rounds_028",
+        "BookModels.full_coverage_identity"
       ],
       "hypotheses_and_limits": "Denominador>0; intervalo[0,1] somente quando numerador≤denominador. Razões teste/spec não são cobertura funcional. Números históricos são entradas."
     },
@@ -139,7 +154,8 @@
         "BookAlgebra.catalog_concentration_interval",
         "BookAlgebra.catalog_mean_interval",
         "BookModels.reference_counts_sum",
-        "BookModels.reference_counts_mean"
+        "BookModels.reference_counts_mean",
+        "BookModels.reference_concentration_exact"
       ],
       "hypotheses_and_limits": "Contagens dadas, total>0; média não descreve dispersão. Exemplo[1,1,1,9] tem média3."
     },
@@ -163,7 +179,8 @@
       "kind": "formal_model",
       "book_sources": [
         "livro-core/mod-02-orquestracao.tex",
-        "livro-core/mod-13-ativacao-agentes.tex"
+        "livro-core/mod-13-ativacao-agentes.tex",
+        "livro-core/mod-14-lote-categorias.tex"
       ],
       "theorems": [
         "BookAttention.eligible_minimum_exists",
@@ -171,7 +188,8 @@
         "BookAttention.contract_example_c2_minimizes",
         "BookAttention.eligible_pool_membership",
         "BookAttention.unavailable_not_eligible",
-        "BookAttention.missing_capability_not_eligible"
+        "BookAttention.missing_capability_not_eligible",
+        "BookAttention.eligible_maximum_exists"
       ],
       "hypotheses_and_limits": "Conjunto finito não vazio e custos reais; empate requer seletor. Disponibilidade e capacidades são condições formais, não inferência executada."
     },
@@ -195,7 +213,8 @@
       "title": "Lei de Amdahl e limite assintótico",
       "kind": "formal_model",
       "book_sources": [
-        "livro-core/mod-05-raciocinio.tex"
+        "livro-core/mod-05-raciocinio.tex",
+        "livro-core/mod-14-lote-categorias.tex"
       ],
       "theorems": [
         "BookAlgebra.amdahl_time_positive",
@@ -336,9 +355,11 @@
         "BookAttention.two_row_tie",
         "BookAttention.exp_two_rational_bounds",
         "BookAttention.softmax_2_0_rational_bounds",
-        "BookAttention.softmax_0_2_rational_bounds"
+        "BookAttention.softmax_0_2_rational_bounds",
+        "BookModels.attention_matrix_scale",
+        "BookModels.attention_output_identity"
       ],
-      "hypotheses_and_limits": "Normalização linha a linha em reais, escores dados[4,0]/sqrt4=[2,0]. Não afirma que o Core execute QKᵀV nessa rota."
+      "hypotheses_and_limits": "Escores QKᵀ fornecidos como entrada e dk=4; escala da matriz2×2, softmax escalar por linha e multiplicação por V=I demonstrados. Não se formaliza o produto geral de Q e K nem a equivalência ao runtime Python."
     },
     {
       "id": "F21",
@@ -455,20 +476,50 @@
       "kind": "formal_model",
       "book_sources": [
         "livro-core/mod-12-fichas-nucleo.tex",
-        "livro-core/mod-06-ciencia.tex"
+        "livro-core/mod-06-ciencia.tex",
+        "livro-core/mod-07-integracoes.tex",
+        "livro-core/mod-09-infra.tex",
+        "livro-core/mod-13-ativacao-agentes.tex",
+        "livro-core/mod-14-lote-categorias.tex"
       ],
       "theorems": [
         "BookAlgebra.unit_coverage_complement_exact",
         "BookAlgebra.fair_item_accounting",
         "BookModels.four_sixths_equals_two_thirds",
-        "BookModels.four_sixths_bounds"
+        "BookModels.four_sixths_bounds",
+        "BookModels.coverage_complement_bounds",
+        "BookAlgebra.coverage_fraction_bounds"
       ],
       "hypotheses_and_limits": "1−6/78=12/13; contagem2+2+2+2=8. Proporções de preenchimento não constituem conformidade FAIR nem mérito epistemológico."
+    },
+    {
+      "id": "F29",
+      "title": "Frações dos exemplos didáticos complementares",
+      "kind": "exact_arithmetic",
+      "book_sources": [
+        "livro-core/mod-00b-jornada-leitor.tex",
+        "livro-core/mod-09a-comparada.tex",
+        "livro-core/mod-18-nivel0-universal.tex",
+        "livro-core/mod-19-podcast.tex",
+        "livro-core/mod-20-podcast-modulos.tex",
+        "livro-core/mod-08-ecossistema.tex"
+      ],
+      "theorems": [
+        "BookModels.four_fifths_exact",
+        "BookModels.two_sixths_exact",
+        "BookModels.eight_tenths_exact",
+        "BookModels.three_tenths_exact",
+        "BookModels.three_fourths_exact",
+        "BookModels.zero_elevenths_exact",
+        "BookModels.eighteen_twentieths_exact"
+      ],
+      "hypotheses_and_limits": "Denominadores naturais estritamente positivos e entradas didáticas explícitas. Provam-se as igualdades racionais, não aprendizagem, escuta real ou existência dos arquivos."
     }
   ],
   "non_mathematical_preface_scope": {
     "revision": "R909",
     "source": "livro-core/mod-00-capa.tex",
     "claim": "Assinatura cognitiva como interpretação situada de escolhas documentadas; a tese humanística não recebe demonstração Lean e não acrescenta família matemática."
-  }
+  },
+  "editorial_revision": "R910: matriz ampliada por auditoria de ocorrências; rastreabilidade textual não é medida de completude epistemológica."
 }

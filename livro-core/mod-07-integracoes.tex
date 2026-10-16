@@ -314,6 +314,8 @@ falhas mesmo quando o transporte respondeu normalmente.
 \fontecore{integrations/scientific_plugins.py}{ScientificPluginService.request}
 \fontecore{integrations/scientific_plugins.py}{ScientificPluginService.accept_host_response}
 
+% A dedução matemática é explicitada após a amostra, sem promover o recibo a teorema.
+
 \begin{resultado}
 O recibo \pth{docs/verification-wolfram-host-r895.json} registra a avaliação
 de uma lista com soma, integral e fatoração: \cod{2+3} resultou em 5;
@@ -324,6 +326,51 @@ com \pth{host_reported_execution=true},
 Uma resposta simbólica ainda exige conferir domínio, premissas e adequação ao
 problema da nota. Ela não substitui o experimento nem o aceite científico.
 \end{resultado}
+
+\begin{formalizacao}{F22}{Conferir soma e fatoração independentemente do serviço}
+\textbf{Enunciado.} Nos reais, $2+3=5$ e
+$x^2-1=(x-1)(x+1)$ para todo $x$.
+
+\textbf{Hipóteses.} A variável pertence aos reais e os símbolos denotam as
+operações usuais desse corpo. A igualdade algébrica não pressupõe acesso,
+autenticação ou execução de qualquer serviço externo.
+
+\textbf{Lemas e dedução.} A soma é normalização de numerais. Na fatoração,
+a distributividade dá $(x-1)(x+1)=x^2+x-x-1=x^2-1$; cancelar os termos
+lineares prova a identidade, em vez de aceitar apenas a saída textual do
+sistema simbólico.
+
+\textbf{Lean 4.} \leanref{BookFoundations.simple_sum_exact} e
+\leanref{BookFoundations.difference_of_squares_factorization}, por
+normalização numérica e polinomial, respectivamente.
+
+\textbf{Axiomas e alcance.} As dependências exatas constam da
+seção~\ref{sec:fundamentos-lean}. Esses enunciados não provam a ocorrência
+da chamada Wolfram: a ocorrência continua dependendo do recibo e de seus
+limites declarados na amostra acima.
+\end{formalizacao}
+
+\begin{formalizacao}{F23}{Verificar a integral pela derivada}
+\textbf{Enunciado.} Para reais $x$ e constante $C$, a derivada de
+$-\cos x+C$ é $\sin x$; portanto, essa função é uma primitiva do seno.
+
+\textbf{Hipóteses.} Domínio real, cosseno e seno reais usuais e $C$
+independente da variável de derivação. Uma integral definida exigiria ainda
+extremos e a aplicação de um teorema próprio.
+
+\textbf{Lemas e dedução.} Parte-se do lema da derivada do cosseno:
+$(\cos x)'=-\sin x$. A regra de derivação da negação troca o sinal,
+produzindo $\sin x$, e a derivada da constante acrescentada é zero.
+A conclusão é uma afirmação de derivabilidade em cada ponto real.
+
+\textbf{Lean 4.} \leanref{BookFoundations.sine_antiderivative} combina
+\cod{Real.hasDerivAt_cos} com as regras de negação e adição de constante.
+
+\textbf{Axiomas e alcance.} Fundamentos e dependências por declaração na
+seção~\ref{sec:fundamentos-lean}. A prova confere a relação matemática;
+não certifica a disponibilidade do integrador, a chamada hospedada nem
+qualquer experimento que use a expressão.
+\end{formalizacao}
 
 \begin{limite}
 A importação das instruções Wolfram não instala um Engine. Na descoberta
@@ -826,6 +873,32 @@ d - p = 6 - 4 = 2 \text{ executores ausentes}
 \end{descricao}
 
 \clearpage
+\begin{formalizacao}{F28}{Proporção de presença instalada}
+\textbf{Enunciado.} No exemplo, $4/6=2/3$ e há $6-4=2$ itens ausentes;
+a fração está entre $0{,}66$ e $0{,}67$, sendo aproximadamente $0{,}67$.
+
+\textbf{Hipóteses.} Universo finito de seis itens, quatro contados uma vez
+como presentes e critérios de presença constantes. O total é positivo e
+a parte não o ultrapassa. Universo vazio exige ``não aplicável''.
+
+\textbf{Lemas e dedução.} Cancelar o fator comum dois em numerador e
+denominador reduz $4/6$ a $2/3$. A multiplicação cruzada por denominadores
+positivos confere os limites decimais; subtrair parte de todo confere o
+complemento. O arredondamento não muda a contagem original.
+
+\textbf{Lean 4.} \leanref{BookModels.four_sixths_equals_two_thirds} e
+\leanref{BookModels.four_sixths_bounds} conferem a razão e seus limites;
+\leanref{BookAlgebra.coverage_fraction_bounds} fornece o limite unitário
+geral quando $0\leq p\leq d$ e $d>0$.
+
+\textbf{Axiomas e alcance.} A seção~\ref{sec:fundamentos-lean} apresenta
+as dependências individuais. Os números são dados do exemplo; a prova
+não detecta instalações nem converte presença em autenticação ou chamada
+bem-sucedida.
+\end{formalizacao}
+
+\clearpage
+
 \section{Apêndice Didático: Tempo total de delegação negociada}
 
 \elemento{Tempo total de ciclo de delegação}{\metainfo{ID}{DID-TEMPO} \hfill \metainfo{Fonte}{docs/guias-didaticos/formulas-livro-core-nussenzveig.md, seção 6}}
@@ -862,6 +935,31 @@ Justificativa: adição de intervalos de tempo disjuntos e sucessivos.
 
 \paragraph{Observação sobre paralelos.} No protocolo hipotético, propostas podem chegar em paralelo durante a janela, mas a janela obedece a um prazo definido ($T_{\text{janela}}$); não se somam os tempos de preparação de cada proposta.
 \end{metodo}
+
+\begin{formalizacao}{F16}{A soma telescópica dos intervalos}
+\textbf{Enunciado.} Para seis instantes reais consecutivos,
+$\sum_{i=0}^{4}(t_{i+1}-t_i)=t_5-t_0$; se estiverem ordenados, a duração
+total é não negativa.
+
+\textbf{Hipóteses.} Mesma unidade e mesma referência de relógio em todos
+os instantes; $t_0\leq t_1\leq\cdots\leq t_5$ para a não negatividade.
+A associação de cada intervalo a uma etapa é hipótese do modelo sequencial.
+
+\textbf{Lemas e dedução.} Ao expandir os cinco termos, cada instante
+intermediário aparece uma vez com sinal positivo e uma com sinal negativo.
+Restam apenas $t_5-t_0$. Encadear as cinco desigualdades dá $t_0\leq t_5$,
+portanto $t_5-t_0\geq0$; não é necessário supor iguais os tempos das etapas.
+
+\textbf{Lean 4.} \leanref{BookFoundations.five_consecutive_intervals}
+verifica o cancelamento algébrico;
+\leanref{BookFoundations.consecutive_duration_nonnegative} verifica o
+limite a partir da ordem dos instantes.
+
+\textbf{Axiomas e alcance.} Consulte os fundamentos e as dependências
+específicas na seção~\ref{sec:fundamentos-lean}. Timestamps são entradas,
+não observações produzidas pela prova. Ramos simultâneos e tempos somados
+de propostas paralelas não representam, por essa soma, o tempo de parede.
+\end{formalizacao}
 
 % ATIVACAO-R613
 \section[Ativação e cálculo]{Ativação e cálculo — Integrações externas}

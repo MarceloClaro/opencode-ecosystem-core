@@ -1,0 +1,14 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+________________ test_high_accuracy_risk_has_rounding_precision ________________
+
+    def test_high_accuracy_risk_has_rounding_precision():
+        text = (ROOT / 'livro-core/lean/Algebra.lean').read_text()
+        section = text.split('theorem independent_error_216_high_accuracy_interval', 1)[1].split('theorem ', 1)[0]
+>       assert '(19435 : ℝ) / 100000' in section
+E       AssertionError: assert '(19435 : ℝ) / 100000' in ' :\n    (194 : ℝ) / 1000 < 1 - ((999 : ℝ) / 1000) ^ 216 ∧\n      1 - ((999 : ℝ) / 1000) ^ 216 < (195 : ℝ) / 1000 := by\n  norm_num\n\n/-- A multiplicação decimal intermediária é exata; o logaritmo que a motivou é aproximado. -/\n'
+
+tests/test_r910_book_local_deductions.py:143: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_r910_book_local_deductions.py::test_high_accuracy_risk_has_rounding_precision
+1 failed in 0.16s

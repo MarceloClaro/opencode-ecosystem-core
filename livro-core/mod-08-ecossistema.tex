@@ -514,6 +514,31 @@ bons resultados.
 \end{enumerate}
 \end{metodo}
 
+\begin{formalizacao}{F29}{Cobertura de correspondência entre fichas e configuração}
+\textbf{Enunciado.} No exemplo de 18 correspondências num universo de
+20 fichas, $18/20=9/10=0{,}90$, ou $90\%$.
+
+\textbf{Hipóteses.} O catálogo hipotético contém exatamente 20 fichas
+comparadas; 18 possuem correspondência sob uma regra de identidade
+previamente definida, sem duplicatas. O denominador é positivo e a
+contagem da parte não ultrapassa o total.
+
+\textbf{Lemas e dedução.} Numerador e denominador têm fator comum dois;
+cancelá-lo transforma $18/20$ em $9/10$. A representação decimal de
+nove décimos é $0{,}9$; multiplicar a fração por cem expressa a mesma
+proporção como $90\%$. Isso distingue a conta exata da investigação que
+determina quais fichas realmente correspondem às entradas configuradas.
+
+\textbf{Lean 4.} \leanref{BookModels.eighteen_twentieths_exact}
+confere a igualdade exata. \leanref{BookAlgebra.coverage_fraction_bounds}
+fornece o limite unitário geral sob as hipóteses de parte e todo.
+
+\textbf{Axiomas e alcance.} Fundamentos e dependências individuais na
+seção~\ref{sec:fundamentos-lean}. O teorema usa as contagens informadas;
+não lê o catálogo, não identifica correspondências nem demonstra
+ativação, execução ou competência dos perfis.
+\end{formalizacao}
+
 \begin{resultado}
 \textbf{Exemplo resolvido.} O perfil \pth{book-release} pode ter definição
 validada, hash conferido e uma tarefa atribuída com \pth{executed=false}.
@@ -739,5 +764,38 @@ A taxa normal custa 1 unidade sem congestionamento. Prioridade alta aplica multi
   \item Antes de afirmar que um desconto ocorreu, confira a assinatura e o registro da tarefa.
 \end{enumerate}
 \end{aviso}
+
+\begin{formalizacao}{F14}{Retorno, desconto e taxa por blocos}
+\textbf{Enunciado.} O retorno de caução $b$ com recompensa $r$ é
+$b+rb=b(1+r)$. O remanescente após desconto $d$ é $b(1-d)$ e está entre
+zero e $b$ se $b\geq0$ e $0\leq d\leq1$. O fator de congestionamento é
+$1+\lfloor q/10\rfloor/10$ para $q$ natural.
+
+\textbf{Hipóteses.} Mesma unidade contábil; caução não negativa e desconto
+na faixa unitária. Na taxa, $q\in\mathbb N$ conta tarefas abertas e a
+divisão por dez é inteira antes da conversão para o racional. O exemplo
+usa $b=2$, $r=1/5$, $d=1/2$ e $q=10$.
+
+\textbf{Lemas e dedução.} A distributividade prova o retorno. De
+$0\leq1-d\leq1$ e $b\geq0$ resultam os limites do remanescente.
+Para $q<10$, o quociente inteiro é zero; para $10\leq q<20$, é um.
+Substituir os valores dá retorno $12/5=2{,}4$, remanescente $1$,
+fator $11/10$, taxa normal $11/10$ e taxa alta $11/5=2{,}2$.
+
+\textbf{Lean 4.} \leanref{BookAlgebra.staking_reward_formula},
+\leanref{BookAlgebra.staking_reward_example},
+\leanref{BookAlgebra.slashing_bounds},
+\leanref{BookAlgebra.slashing_example},
+\leanref{BookAlgebra.congestion_below_first_block},
+\leanref{BookAlgebra.congestion_first_block},
+\leanref{BookAlgebra.normal_fee_example} e
+\leanref{BookAlgebra.high_priority_fee_example}.
+
+\textbf{Axiomas e alcance.} A seção~\ref{sec:fundamentos-lean} publica
+as dependências particulares das provas. As identidades são regras
+contábeis do modelo; não demonstram valor de mercado, incentivos eficazes,
+transferência financeira nem aplicação correta dessas regras em cada
+transação de runtime.
+\end{formalizacao}
 
 % R901-PONTE-FECHO

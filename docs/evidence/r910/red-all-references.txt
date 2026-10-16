@@ -1,0 +1,24 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+______ test_every_named_book_proposition_is_referenced_in_the_exposition _______
+
+    def test_every_named_book_proposition_is_referenced_in_the_exposition():
+        from scripts.verify_book_lean import theorem_names
+        known = {n for p in (ROOT / 'livro-core/lean').glob('*.lean') for n in theorem_names(p.read_text())}
+        used = {n for p in (ROOT / 'livro-core').glob('mod-*.tex') for n in re.findall(r'\\leanref\{([\w.]+)\}', p.read_text())}
+>       assert known - used == set()
+E       AssertionError: assert {'BookAlgebra...variant', ...} == set()
+E
+E         Extra items in the left set:
+E         'BookAlgebra.historical_coverage_interval'
+E         'BookAlgebra.independent_error_216_interval'
+E         'BookAttention.two_row_translation_invariant'
+E         'BookAlgebra.weighted_coverage_bounds'
+E         'BookModels.bernoulli_product_expansion'...
+E
+E         ...Full output truncated (3 lines hidden), use '-vv' to show
+
+tests/test_r910_book_local_deductions.py:157: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_r910_book_local_deductions.py::test_every_named_book_proposition_is_referenced_in_the_exposition
+1 failed in 0.18s

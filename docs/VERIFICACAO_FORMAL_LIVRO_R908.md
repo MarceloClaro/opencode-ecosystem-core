@@ -272,3 +272,14 @@ acrescenta fórmula nem é apresentada como teorema Lean; sua fundamentação
 bibliográfica e seus limites estão em `docs/PREFACIO_ASSINATURA_COGNITIVA_R909.md`.
 A custódia é reexecutada para os novos bytes do livro, mantendo as 158 provas
 matemáticas no mesmo alcance.
+
+
+## Exposição local R910
+
+O inventário originalR908 de158declarações foi ampliado na revisãoR910. Consulte
+o recibo vivo para a contagem aceita atual, sem atribuir ao PDF histórico as fontes
+posteriores. Os capítulos agora ligam fórmulas a hipóteses, passos, lemas e nomes Lean;
+as dependências fundamentais aparecem por declaração, geradas de auditoria real.
+A matriz passou a28famílias matemáticas e uma observacional. O método e os limites
+estão em `docs/DEDUCOES_LOCAIS_LIVRO_R910.md`, e a edição atual em
+`docs/verification-book-r910.json`. A prova continua distinta de validade empírica.

@@ -109,7 +109,11 @@ def context_sources() -> list[Path]:
                    ROOT/'tests/test_r908_book_lean.py', ROOT/'docs/VERIFICACAO_FORMAL_LIVRO_R908.md',
                    ROOT/'docs/book-math-map-r908.json', ROOT/'README.md',
                    ROOT/'specs/SPEC-935-R908-livro-provas-lean4.md',
-                   ROOT/'docs/superpowers/plans/2026-10-15-livro-lean4.md'})
+                   ROOT/'docs/superpowers/plans/2026-10-15-livro-lean4.md',
+                   ROOT/'scripts/book_local_deductions.py', ROOT/'tests/test_r910_book_local_deductions.py',
+                   ROOT/'docs/DEDUCOES_LOCAIS_LIVRO_R910.md',
+                   ROOT/'specs/SPEC-935-R910-deducoes-locais-livro-lean.md',
+                   ROOT/'docs/superpowers/plans/2026-10-16-deducoes-locais-lean.md'})
 
 
 def validate_math_map(mapping: dict, known_names: set[str]) -> dict:

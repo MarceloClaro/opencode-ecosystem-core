@@ -20,7 +20,7 @@
 \widowpenalty=8000
 \clubpenalty=8000
 \usepackage{booktabs,colortbl,tabularx,array,ragged2e,longtable,multirow}
-\usepackage{amsmath}
+\usepackage{amsmath,amssymb}
 \usepackage{needspace}
 \usepackage{enumitem}
 \usepackage{chngcntr}
@@ -232,6 +232,14 @@
   colback=greenBg,colframe=green,colbacktitle=green,coltitle=white,
   borderline west={3pt}{0pt}{green},
   fonttitle=\bfseries\small\sffamily,title={Resultado e cálculo}}
+
+% R910: a exposição local aponta para declarações, nunca para um selo genérico.
+\newtcolorbox{formalizacao}[2]{enhanced,breakable,boxrule=0.6pt,arc=1.4mm,
+  left=2.5mm,right=2.5mm,top=1.6mm,bottom=2mm,
+  colback=blueBg,colframe=teal,colbacktitle=teal,coltitle=white,
+  fonttitle=\bfseries\small\sffamily,
+  title={\parbox[t]{\dimexpr\linewidth-2mm\relax}{Dedução local #1: #2}}}
+\newcommand{\leanref}[1]{{\footnotesize\path{#1}}\,{\scriptsize[\csname leanaxioms@#1\endcsname]}}
 
 \newtcolorbox{limite}{enhanced,breakable,boxrule=0.6pt,arc=1.4mm,
   left=2.5mm,right=2.5mm,top=1.6mm,bottom=2mm,

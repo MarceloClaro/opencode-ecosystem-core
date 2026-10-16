@@ -1,0 +1,15 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+____________ test_remaining_local_instances_have_named_propositions ____________
+
+    def test_remaining_local_instances_have_named_propositions():
+        from scripts.verify_book_lean import theorem_names
+        models = theorem_names((ROOT / 'livro-core/lean/Models.lean').read_text())
+        attention = theorem_names((ROOT / 'livro-core/lean/Attention.lean').read_text())
+>       assert 'BookModels.eighteen_twentieths_exact' in models
+E       AssertionError: assert 'BookModels.eighteen_twentieths_exact' in ['BookModels.reference_counts_sum', 'BookModels.reference_counts_mean', 'BookModels.equal_cardinality_not_equal_sets',...ality_insufficient', 'BookModels.reduction_ratio_nonnegative_le_total', 'BookModels.reduction_ratio_at_least_one', ...]
+
+tests/test_r910_book_local_deductions.py:124: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_r910_book_local_deductions.py::test_remaining_local_instances_have_named_propositions
+1 failed in 0.18s

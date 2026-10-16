@@ -106,11 +106,35 @@ Primeiro cálculo: \textbf{agregação hipotética sob independência}. Suponha
 $N=216$ saídas independentes, todas com probabilidade $p=0{,}99$ de acerto.
 Então $P(\hbox{ao menos um erro})=1-p^N\approx0{,}886$. Se, no mesmo
 modelo, $p=0{,}999$, obtemos $P\approx0{,}194$. Esses parâmetros não foram
-medidos no Core. Sem independência, a fórmula não se aplica e a direção da
+medidos no Core. Sem independência conjunta, a igualdade não fica justificada por essas premissas e a direção da
 diferença não é determinada apenas pela palavra ``correlação''. Se todas
 as saídas compartilhassem exatamente o mesmo evento de erro de 1\%, a
 probabilidade de ao menos um erro seria 1\%, não 88,6\%. Definir a dependência
 é parte do modelo, não um ajuste automático para aumentar o risco.
+\begin{formalizacao}{F01}{Produto, complemento e conversão para reais}
+\textbf{Enunciado.} Para eventos $A_i$ mensuráveis, conjuntamente independentes e de massa comum $p$, $P(\cup_i A_i^c)=1-p^N$.
+
+\textbf{Hipóteses.} Medida de probabilidade normalizada e família finita; na formalização inicial a medida tem valores em $\mathbb{R}_{\geq0}\cup\{\infty\}$.
+
+\textbf{Lemas e dedução.} O lema de interseção fornece $\mu(\cap_i A_i)=p^N$. De Morgan identifica o evento de erro. A lei do complemento usa a mensurabilidade e $\mu(\Omega)=1$. A medida da interseção é no máximo um; o $p$ real da fórmula é o \pth{toReal} da massa comum. Por isso a subtração e a potência podem ser convertidas por \pth{toReal} para a identidade real apresentada.
+
+\textbf{Lean 4.} \leanref{BookFoundations.independent_equal_event_intersection}; \leanref{BookFoundations.error_union_is_complement}; \leanref{BookFoundations.independent_error_probability}; \leanref{BookFoundations.independent_error_probability_real}.
+
+\textbf{Axiomas e alcance.} Nenhuma dessas hipóteses probabilísticas foi medida nos agentes do Core. As siglas junto aos nomes identificam as dependências lógicas auditadas; ver a seção~\ref{sec:fundamentos-lean}.
+\end{formalizacao}
+
+\begin{formalizacao}{F02}{Intervalos para os dois cenários}
+\textbf{Enunciado.} $0{,}88592<1-(99/100)^{216}<0{,}88593$ e $0{,}19435<1-(999/1000)^{216}<0{,}19436$.
+
+\textbf{Hipóteses.} Bases racionais exatas e expoente 216; interpretação de risco condicionada ao modelo anterior.
+
+\textbf{Lemas e dedução.} As duas potências e suas comparações com extremos racionais são decididas por normalização exata. Para o segundo cenário, o intervalo demonstrado justifica escrever aproximadamente $19{,}4\%$ com a precisão explicitada, mas não tratar $0{,}194$ como igualdade exata.
+
+\textbf{Lean 4.} \leanref{BookAlgebra.independent_error_216_tight_interval}; \leanref{BookAlgebra.independent_error_216_high_accuracy_interval}.
+
+\textbf{Axiomas e alcance.} Trata-se de aritmética sobre entradas hipotéticas, não observação de falhas. As siglas junto aos nomes identificam as dependências lógicas auditadas; ver a seção~\ref{sec:fundamentos-lean}.
+\end{formalizacao}
+
 
 Segundo c\'alculo, aten\c{c}\~ao de brinquedo, j\'a resolvido na jornada: com $QK^{T}=[[4,0],[0,4]]$ e $d_{k}=4$, softmax d\'a $[0{,}88,0{,}12]$ e $[0{,}12,0{,}88]$. A li\c{c}\~ao permanece: peso concentra onde o escore destaca, e escore empatado divide.
 
@@ -124,6 +148,18 @@ Para $R=1$, mantendo os outros parâmetros,
 $\mathrm{PPV}=0{,}8/(0{,}8+0{,}05)\approx0{,}941$.
 O PPV responde ao alcance de um achado significativo sob esses pressupostos;
 não é a probabilidade de um teste de software verde estar correto.
+\begin{formalizacao}{F04}{Das contagens condicionais ao PPV}
+\textbf{Enunciado.} Com $VP=(1-\beta)T$, $FP=\alpha F$ e $R=T/F$, obtém-se $VP/(VP+FP)=(1-\beta)R/((1-\beta)R+\alpha)$.
+
+\textbf{Hipóteses.} $F\ne0$, $0\leq\alpha\leq1$, $0\leq\beta\leq1$, denominador não nulo e, para a interpretação estatística, contagens não negativas e soma positiva; mesmo cenário de seleção e ausência do viés adicional declarado.
+
+\textbf{Lemas e dedução.} Dividir numerador e denominador por $F$ e substituir $T/F=R$ dá a expressão. Expandir $(1-\beta)R+\alpha$ não muda o denominador. Nos casos dados, normalizar os racionais produz $8/13$ e $16/17$; a fração pertence a $[0,1]$ sob as hipóteses de contagem.
+
+\textbf{Lean 4.} \leanref{BookAlgebra.ppv_from_counts}; \leanref{BookAlgebra.ppv_denominator_expansion}; \leanref{BookAlgebra.ppv_bounds}; \leanref{BookAlgebra.ppv_high_power_exact}; \leanref{BookAlgebra.ppv_equal_odds_exact}.
+
+\textbf{Axiomas e alcance.} Não é uma probabilidade calibrada de uma resposta individual nem a validação de um teste de software. As siglas junto aos nomes identificam as dependências lógicas auditadas; ver a seção~\ref{sec:fundamentos-lean}.
+\end{formalizacao}
+
 
 Essa depend\^encia da taxa-base e do vi\'es \'e a raz\~ao formal do anti-overclaim deste livro: sem relatar poder, vi\'es e campo, signific\^ancia n\~ao sustenta proclama\c{c}\~ao.
 
@@ -209,6 +245,18 @@ esperadas e conserve as pendências científicas e editoriais.
 \begin{resultado}
 \textbf{Exemplo resolvido.} Considere três artefatos de uma operação hipotética. Se dois hashes coincidem e um diverge, há igualdade de bytes em $2/3$ dos artefatos comparados. Não conclua que a reprodução está completa: investigue o terceiro e verifique se os dois primeiros são os artefatos corretos.
 \end{resultado}
+\begin{formalizacao}{F05}{Dois hashes entre três comparações}
+\textbf{Enunciado.} A fração $2/3$ pertence a $[0,1]$ e satisfaz $0{,}6666<2/3<0{,}6667$.
+
+\textbf{Hipóteses.} Três comparações de artefatos declarados e dois resultados iguais; sem comparar arquivos de outro escopo.
+
+\textbf{Lemas e dedução.} A definição de proporção divide dois por três. O denominador positivo preserva a ordem e as comparações racionais conferem a aproximação. A identidade de dois pares de bytes, porém, depende da execução efetiva dos hashes.
+
+\textbf{Lean 4.} \leanref{BookAlgebra.coverage_fraction_bounds}; \leanref{BookModels.two_thirds_bounds}.
+
+\textbf{Axiomas e alcance.} A conta não demonstra igualdade de bytes nem reprodução integral da operação. As siglas junto aos nomes identificam as dependências lógicas auditadas; ver a seção~\ref{sec:fundamentos-lean}.
+\end{formalizacao}
+
 
 \begin{resultado}
 \textbf{Ordem de grandeza e verificação.} Use o inventário gerado e os logs de testes e compilação. Confira também a aparência do PDF, porque igualdade de fontes ou compilação sem erro não demonstra que uma tabela esteja legível.
@@ -292,6 +340,18 @@ Para a posição com escore 0 — segunda coluna da primeira linha e primeira co
 
 \end{metodo}
 
+\begin{formalizacao}{F20}{Escala matricial, normalização por linha e identidade}
+\textbf{Enunciado.} Dada a matriz de escores $D=[[4,0],[0,4]]$, $D/\sqrt4=[[2,0],[0,2]]$. Em cada linha, os pesos somam um; para $[2,0]$, o maior fica entre $0{,}8807$ e $0{,}8809$. Se $V=I$, $WV=W$.
+
+\textbf{Hipóteses.} Matriz real $2\times2$ fornecida como entrada, dimensão quatro, exponenciais reais e denominador positivo. Não se inferem $Q$ e $K$ de registros do programa.
+
+\textbf{Lemas e dedução.} O lema da raiz dá $\sqrt4=2$; a igualdade matricial é conferida entrada a entrada. A positividade da exponencial permite dividir pela soma. Limites racionais de $\exp(2)$ controlam os quocientes; trocar a ordem dos escores troca os pesos, e escores iguais dão metades. O lema \pth{Matrix.mul_one} demonstra o último passo.
+
+\textbf{Lean 4.} \leanref{BookModels.attention_dimension_sqrt_four}; \leanref{BookModels.attention_matrix_scale}; \leanref{BookAttention.two_row_softmax_sum}; \leanref{BookAttention.softmax_2_0_rational_bounds}; \leanref{BookAttention.softmax_0_2_rational_bounds}; \leanref{BookAttention.two_row_tie}; \leanref{BookModels.attention_output_identity}.
+
+\textbf{Axiomas e alcance.} O produto geral $QK^T$ é uma hipótese de entrada neste exemplo. Não se demonstra equivalência com o algoritmo Python nem correção de ponto flutuante. As siglas junto aos nomes identificam as dependências lógicas auditadas; ver a seção~\ref{sec:fundamentos-lean}.
+\end{formalizacao}
+
 \begin{descricao}
 \textbf{Interpretação.} O peso se concentra onde o escore destaca: $88\%$ da atenção vai para a posição com escore 4 (escalado para 2), e apenas $12\%$ para a posição com escore 0. Se os dois escores de uma mesma linha fossem iguais, por exemplo $[2,2]$, os pesos dessa linha seriam $[0{,}5,0{,}5]$. Os elementos da diagonal pertencem a linhas diferentes e não constituem esse empate.
 
@@ -327,12 +387,60 @@ Para a posição com escore 0 — segunda coluna da primeira linha e primeira co
 \textbf{Limite.} O peso depende dos outros candidatos e não é probabilidade calibrada de acerto. A seleção e o aceite ainda dependem de elegibilidade, contexto, desempates e testes da entrega.
 \end{descricao}
 \fontecore{transformer/attention.py}{AttentionRouter.route}
+\begin{formalizacao}{F21}{Utilidade convexa, peso normalizado e escolha}
+\textbf{Enunciado.} Com critérios em $[0,1]$, $u_i=0{,}30s_i+0{,}35c_i+0{,}25t_i+0{,}10l_i$ fica em $[0,1]$. Os vetores indicados dão $u_A=0{,}75$, $u_B=0{,}64$, $0{,}52747<w_A<0{,}52748$ e $0{,}47252<w_B<0{,}47253$.
+
+\textbf{Hipóteses.} Pool finito não vazio e fixo ao comparar candidatos; critérios com a mesma escala; temperatura positiva quando usada. O exemplo usa temperatura um.
+
+\textbf{Lemas e dedução.} Os quatro coeficientes são não negativos e somam um; a aritmética linear limita a combinação. As substituições racionais dão as utilidades. A invariância por translação permite subtrair o máximo antes da exponenciação. Dividir pela soma positiva normaliza os pesos. A redução a $\exp(0{,}11)$ e seu intervalo racional justificam os decimais, sem confundir peso com probabilidade de acerto.
+
+\textbf{Lean 4.} A tradução escalar $(a,b)\mapsto(a-m,b-m)$ preserva a razão porque o fator positivo $\exp(-m)$ cancela no numerador e no denominador; o lema específico é \leanref{BookAttention.two_row_translation_invariant}.  \leanref{BookAttention.head_weights_sum_one}; \leanref{BookAttention.utility_mem_unit}; \leanref{BookAttention.utility_example_075}; \leanref{BookAttention.utility_example_064}; \leanref{BookAttention.utility_softmax_reduction}; \leanref{BookAttention.exp_point11_rational_bounds}; \leanref{BookAttention.utility_softmax_075_064_bounds}; \leanref{BookAttention.utility_softmax_064_075_bounds}; \leanref{BookAttention.softmax_invariante_max}; \leanref{BookAttention.softmax_same_pool_order}.
+
+\textbf{Axiomas e alcance.} Ordenação de escores não elimina restrições de elegibilidade nem demonstra qualidade científica. As siglas junto aos nomes identificam as dependências lógicas auditadas; ver a seção~\ref{sec:fundamentos-lean}.
+\end{formalizacao}
+
 
 
 
 % BEGIN-R908-LEAN
 \section{Da conta à demonstração: verificação formal com Lean 4}
 \label{sec:lean-livro}
+
+\subsection{Teorema, lema, hipótese e axioma: quatro papéis distintos}
+\label{sec:fundamentos-lean}
+\begin{definicao}
+Um \textbf{teorema} é um enunciado acompanhado de uma demonstração; um
+\textbf{lema} é um resultado demonstrado usado como apoio em outra prova.
+A diferença é de função expositiva: no Lean, declarar um resultado por
+\pth{theorem} ou \pth{lemma} não muda a exigência do kernel. Uma
+\textbf{hipótese} delimita uma implicação, como $0\leq p\leq1$ ou a independência
+conjunta de eventos. Ela não se torna um fato observado por aparecer na prova.
+Um \textbf{axioma fundamental} integra a base lógica usada pela demonstração.
+Normalização aritmética, simplificação, indução e resolução de desigualdades
+são procedimentos que constroem termos de prova; não acrescentam axiomas.
+\end{definicao}
+
+Cada nome formal nos quadros dos capítulos recebe a lista de dependências
+produzida por \texttt{\#print axioms} na compilação correspondente:
+\begin{itemize}[leftmargin=1.3em,itemsep=3pt]
+\item \textbf{P — \pth{propext}:} proposições logicamente equivalentes podem ser
+identificadas por igualdade; isso não afirma equivalência entre programas.
+\item \textbf{C — \pth{Classical.choice}:} escolha clássica de um elemento cuja
+existência está estabelecida. Não fornece, por si só, um algoritmo executável.
+\item \textbf{Q — \pth{Quot.sound}:} elementos relacionados representam a mesma
+classe de um quociente; é um fundamento usado, por exemplo, na construção dos reais.
+\item \textbf{nenhum:} a declaração não depende desses axiomas adicionais,
+como ocorre na regra de modus ponens. A teoria de tipos do Lean continua sendo
+sua base; ``nenhum'' não significa ausência de fundamentos lógicos.
+\end{itemize}
+
+As siglas são geradas de auditorias por declaração, e não copiadas de uma
+lista global. Por isso dois resultados do mesmo arquivo podem mostrar listas
+diferentes. Não há axioma local que assuma a conclusão, nem prova incompleta
+aceita. O recibo distingue esses fundamentos das hipóteses empíricas e permite
+consultar a dependência nominal completa. O título de um quadro não acrescenta
+nenhuma garantia além do enunciado e das condições que ele explicita.
+
 
 A reprodução encontra aqui um complemento: conferir uma dedução exige mais
 que obter o mesmo decimal duas vezes. Ana começa pela pergunta que a fórmula
@@ -399,6 +507,18 @@ $0{,}52747<w_A<0{,}52748$ e $0{,}47252<w_B<0{,}47253$.
 Os intervalos são demonstrados em números reais; não são apenas saídas
 decimais copiadas de uma calculadora.
 \end{resultado}
+\begin{formalizacao}{F03}{Série, resto e intervalo}
+\textbf{Enunciado.} $\ln(99/100)$ é aproximado por $-201/20000$ com erro absoluto de no máximo $1/990000$.
+
+\textbf{Hipóteses.} Série de $\ln(1-u)$ em $|u|<1$, especializada a $u=1/100$; valores reais exatos.
+
+\textbf{Lemas e dedução.} O lema de soma fixa a série convergente. O lema de resto, com dois termos, fornece o erro; \pth{abs_le} o converte em limites inferior e superior para o logaritmo. A identidade de potência do logaritmo e sua inversão exponencial permitem retornar à potência sem transformar o decimal em igualdade exata.
+
+\textbf{Lean 4.} \leanref{BookFoundations.log_099_hasSum}; \leanref{BookFoundations.log_099_taylor_error}; \leanref{BookFoundations.log_099_taylor_interval}; \leanref{BookFoundations.logarithm_power_identity}; \leanref{BookFoundations.exponential_logarithm_power_identity}.
+
+\textbf{Axiomas e alcance.} A aproximação tem controle matemático de erro; isso não certifica uma implementação de calculadora. As siglas junto aos nomes identificam as dependências lógicas auditadas; ver a seção~\ref{sec:fundamentos-lean}.
+\end{formalizacao}
+
 
 \begin{center}
 \small

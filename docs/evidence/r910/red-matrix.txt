@@ -1,0 +1,20 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_________ test_matrix_and_concentration_steps_are_not_unproved_labels __________
+
+    def test_matrix_and_concentration_steps_are_not_unproved_labels():
+        from scripts.verify_book_lean import theorem_names
+        names = set(theorem_names((ROOT / 'livro-core/lean/Models.lean').read_text()))
+>       assert {'BookModels.attention_output_identity', 'BookModels.attention_matrix_scale',
+                'BookModels.reference_concentration_exact'} <= names
+E       AssertionError: assert {'BookModels....ration_exact'} <= {'BookModels....rt_four', ...}
+E
+E         Extra items in the left set:
+E         'BookModels.attention_output_identity'
+E         'BookModels.attention_matrix_scale'
+E         'BookModels.reference_concentration_exact'
+
+tests/test_r910_book_local_deductions.py:136: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_r910_book_local_deductions.py::test_matrix_and_concentration_steps_are_not_unproved_labels
+1 failed in 0.19s

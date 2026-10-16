@@ -66,6 +66,47 @@ Bruno pergunta ent\~ao por que tanta desconfian\c{c}a com n\'umeros bonitos. O n
 \[ P(\mbox{ao menos um erro}) = 1 - p^{N}. \]
 
 Com $N=216$ e $p=0{,}99$, tem-se $\ln(0{,}99^{216}) = 216 \ln 0{,}99 \approx -2{,}17$, logo $0{,}99^{216} \approx 0{,}114$ e $P \approx 0{,}886$, cerca de 89 por cento. O n\'umero 216 foi escolhido como exemplo hipot\'etico e n\~ao representa o invent\'ario corrente; n\~ao afirma que o Core agregue 216 respostas nem mede sua taxa de erro. A li\c{c}\~ao te\'orica \'e geral: agregar muitas sa\'idas sem gate cobra pre\c{c}o probabil\'istico, e gate com crit\'erio expl\'icito existe para tornar esse pre\c{c}o inspecion\'avel.
+\noindent Os quadros de dedução separam enunciado, hipóteses e prova. Os nomes Lean
+trazem siglas de fundamentos lógicos: P, extensionalidade proposicional;
+C, escolha clássica; Q, quocientes; ``nenhum'', sem esses axiomas adicionais.
+A seção~\ref{sec:fundamentos-lean} explica o alcance de cada indicação.
+
+\begin{formalizacao}{F01}{Do conjunto de acertos ao evento de erro}
+\textbf{Enunciado.} Para uma família finita de eventos mensuráveis conjuntamente independentes, com probabilidade comum $p$, a probabilidade de algum erro é $1-p^N$.
+
+\textbf{Hipóteses.} Espaço de probabilidade normalizado; $N$ natural e todos os eventos da família independentes conjuntamente. O exemplo não estabelece essas condições no Core.
+
+\textbf{Lemas e dedução.} De Morgan identifica a união dos erros com o complemento da interseção dos acertos. A independência fornece o produto $p^N$; a aditividade entre um evento e seu complemento, cuja união tem massa um, fornece $1-p^N$. A ponte formal converte a medida não negativa estendida em um número real finito.
+
+\textbf{Lean 4.} \leanref{BookFoundations.error_union_is_complement}; \leanref{BookFoundations.independent_equal_event_intersection}; \leanref{BookFoundations.independent_error_probability_real}.
+
+\textbf{Axiomas e alcance.} Independência é uma hipótese do modelo, não um axioma fundamental do Lean. A conclusão é condicional; não estima a confiabilidade real do ecossistema. As siglas junto aos nomes identificam as dependências lógicas auditadas; ver a seção~\ref{sec:fundamentos-lean}.
+\end{formalizacao}
+
+\begin{formalizacao}{F02}{O que o decimal de risco aproxima}
+\textbf{Enunciado.} $0{,}88592<1-(99/100)^{216}<0{,}88593$; portanto, o arredondamento a três casas é $0{,}886$.
+
+\textbf{Hipóteses.} Base racional exata $99/100$, expoente natural $216$ e interpretação probabilística somente sob as condições do bloco anterior.
+
+\textbf{Lemas e dedução.} A potência racional é calculada exatamente; multiplicar desigualdades por denominadores positivos permite decidir ambos os limites. Os extremos estão no mesmo intervalo de arredondamento a três casas, sem substituir uma aproximação por igualdade.
+
+\textbf{Lean 4.} \leanref{BookAlgebra.independent_error_216_tight_interval}.
+
+\textbf{Axiomas e alcance.} A prova aritmética não afirma que 216 seja o número atual de agentes nem que eles errem independentemente. As siglas junto aos nomes identificam as dependências lógicas auditadas; ver a seção~\ref{sec:fundamentos-lean}.
+\end{formalizacao}
+
+\begin{formalizacao}{F03}{Logaritmo como caminho de aproximação controlada}
+\textbf{Enunciado.} $\exp(216\ln(99/100))=(99/100)^{216}$ e $|\ln(99/100)+201/20000|\leq1/990000$.
+
+\textbf{Hipóteses.} Cálculo real; base estritamente positiva; a série de $\ln(1-u)$ usa $|u|<1$, aqui $u=1/100$.
+
+\textbf{Lemas e dedução.} O lema de soma da série representa $-\ln(1-u)$ por $\sum_{n\geq0}u^{n+1}/(n+1)$. Reter dois termos dá $201/20000$; a cauda é limitada pelo resto demonstrado. A identidade do logaritmo da potência e a inversão pela exponencial recuperam a potência exata. O intervalo do bloco anterior, não o decimal intermediário, justifica o arredondamento final.
+
+\textbf{Lean 4.} \leanref{BookFoundations.log_099_hasSum}; \leanref{BookFoundations.log_099_taylor_error}; \leanref{BookFoundations.exponential_probability_example}.
+
+\textbf{Axiomas e alcance.} Os reais formais não são uma certificação do arredondamento em hardware. As siglas junto aos nomes identificam as dependências lógicas auditadas; ver a seção~\ref{sec:fundamentos-lean}.
+\end{formalizacao}
+
 
 \section{A planta para reconstruir: leitura de reprodu\c{c}\~ao}
 
@@ -98,6 +139,18 @@ Limite do pr\'ologo. A hist\'oria de Ana e Bruno \'e recurso did\'atico para ord
 \begin{resultado}
 \textbf{Exemplo resolvido.} Em um caso hipotético, o pedido pede três itens: fonte, síntese e limite. Uma entrega que traz dois atende $2/3$ dos itens desse contrato. A fração mede cobertura do pedido, não compreensão geral nem verdade da síntese.
 \end{resultado}
+\begin{formalizacao}{F05}{Dois critérios de três}
+\textbf{Enunciado.} Se dois dos três critérios são atendidos, a fração é $2/3$, entre $0{,}6666$ e $0{,}6667$.
+
+\textbf{Hipóteses.} Critérios previamente definidos, contagem sem duplicação e denominador positivo.
+
+\textbf{Lemas e dedução.} Divide-se a contagem de atendimentos pelo total. A regra de divisão por positivo conserva a ordem; a normalização racional compara $2/3$ com os dois extremos, sem alegar que os critérios tenham sido de fato atendidos.
+
+\textbf{Lean 4.} \leanref{BookAlgebra.coverage_fraction_bounds}; \leanref{BookModels.two_thirds_bounds}.
+
+\textbf{Axiomas e alcance.} A fração é cobertura de um contrato didático, não medida de compreensão. As siglas junto aos nomes identificam as dependências lógicas auditadas; ver a seção~\ref{sec:fundamentos-lean}.
+\end{formalizacao}
+
 
 \begin{resultado}
 \textbf{Ordem de grandeza e verificação.} Confira cada item separadamente. Para a fonte, abra o documento; para a síntese, compare-a com o conteúdo; para o limite, verifique se as condições de uso foram delimitadas. Não atribua o terceiro item apenas porque os dois primeiros parecem bons.

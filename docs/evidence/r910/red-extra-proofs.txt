@@ -1,0 +1,15 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_______ test_explicit_foundation_bridge_and_didactic_calculations_exist ________
+
+    def test_explicit_foundation_bridge_and_didactic_calculations_exist():
+        from scripts.verify_book_lean import theorem_names
+        foundation = set(theorem_names((ROOT / 'livro-core/lean/Foundations.lean').read_text()))
+        models = set(theorem_names((ROOT / 'livro-core/lean/Models.lean').read_text()))
+>       assert 'BookFoundations.independent_error_probability_real' in foundation
+E       AssertionError: assert 'BookFoundations.independent_error_probability_real' in {'BookFoundations.consecutive_duration_nonnegative', 'BookFoundations.difference_of_squares_factorization', 'BookFound...ement', 'BookFoundations.exponential_logarithm_power_identity', 'BookFoundations.exponential_probability_example', ...}
+
+tests/test_r910_book_local_deductions.py:32: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_r910_book_local_deductions.py::test_explicit_foundation_bridge_and_didactic_calculations_exist
+1 failed in 0.19s

@@ -283,6 +283,18 @@ compare conjuntos de arquivos com o mesmo escopo. A configuração declara
 cobertura de testes de requisitos que atravessam várias partes do software.
 \end{resultado}
 
+\begin{formalizacao}{F05}{Razões de arquivos e condições de arredondamento}
+\textbf{Enunciado.} Para os totais históricos, $260/371\approx0{,}701$, $285/371\approx0{,}768$ e $260/285\approx0{,}91$; as três razões comparam números de arquivos.
+
+\textbf{Hipóteses.} O escopo das contagens foi fixado e todos os denominadores são positivos. Para interpretar uma razão como cobertura de vínculo, seria necessário que o numerador contasse specs distintas com teste associado, o que estes totais não fazem.
+
+\textbf{Lemas e dedução.} Dividir $T$ por $S$ define a primeira razão. As comparações exatas produzem $0{,}7008<260/371<0{,}7009$, $0{,}7681<285/371<0{,}7682$ e $0{,}9122<260/285<0{,}9123$. As faixas justificam os arredondamentos, enquanto a interpretação permanece dependente da unidade contada. Multiplicar por cem muda a escala, sem criar um pareamento entre arquivos.
+
+\textbf{Lean 4.} As cotas são \leanref{BookModels.test_spec_ratio_260_371_bounds}, \leanref{BookModels.series_spec_ratio_285_371_bounds} e \leanref{BookModels.tests_per_series_spec_260_285_bounds}; os arredondamentos são \leanref{BookModels.test_spec_ratio_rounds_0701}, \leanref{BookModels.series_spec_ratio_rounds_0768} e \leanref{BookModels.tests_per_series_spec_rounds_091}.
+
+\textbf{Axiomas e alcance.} Dependências por declaração: seção~\ref{sec:fundamentos-lean}. Os teoremas conferem a divisão dos totais dados, não a cobertura funcional nem a qualidade de cada teste.
+\end{formalizacao}
+
 \begin{aviso}
 \textbf{Limite de validade.} Cobertura não é sinônimo de qualidade: um teste pode
 passar sem verificar o comportamento relevante. A razão $260/371$ compara
@@ -351,6 +363,18 @@ E a razão de arquivos de teste por spec da série R:
 
 \end{metodo}
 
+\begin{formalizacao}{F05}{Aplicação da mesma prova à dedução detalhada}
+\textbf{Enunciado.} As três divisões deste aprofundamento repetem as razões verificadas anteriormente, com precisão declarada.
+
+\textbf{Hipóteses.} $T=260$, $S=371$ e o subconjunto da série R tem $285$ arquivos; todos os denominadores são estritamente positivos.
+
+\textbf{Lemas e dedução.} Escolha primeiro a pergunta: testes por spec usa $260/371$; participação da série usa $285/371$; testes por spec da série usa $260/285$. As comparações racionais dos três intervalos, feitas antes de arredondar, dão respectivamente $0{,}701$, $0{,}768$ e $0{,}91$. Os dois primeiros podem ser escritos na escala percentual; a palavra ``cobertura'' ainda requer uma contagem de vínculos distinta.
+
+\textbf{Lean 4.} \leanref{BookModels.test_spec_ratio_rounds_0701}, \leanref{BookModels.series_spec_ratio_rounds_0768} e \leanref{BookModels.tests_per_series_spec_rounds_091} conferem exatamente as faixas de arredondamento usadas aqui; \leanref{BookAlgebra.percent_unscale} conserva a razão ao desfazer a escala.
+
+\textbf{Axiomas e alcance.} A seção~\ref{sec:fundamentos-lean} identifica as dependências. A aritmética não demonstra os vínculos que seriam necessários para medir cobertura de critérios.
+\end{formalizacao}
+
 \begin{descricao}
 \textbf{Interpretação.} A razão $0{,}701$ significa que, naquela fotografia de 29/09/2026, havia cerca de 0,70 arquivo de teste por arquivo de especificação. Ou: cerca de 70\% de um teste por spec.
 
@@ -407,6 +431,18 @@ localização da fonte (R110), não o mérito da afirmação.
 \end{aviso}
 
 \noindent\textit{Interpretação:} A distinção entre complexidade essencial e acidental impede atribuir à ferramenta um ganho que depende da compreensão do problema. Como modelo de raciocínio, escrevemos $C_{total}=C_{essencial}+C_{acidental}$: automação, padrões e testes podem reduzir retrabalho e inconsistências da parcela acidental, mas não eliminam requisitos ambíguos nem decisões de domínio. O ciclo especificação--teste melhora a disciplina de mudança; não promete remover o trabalho conceitual que a solução exige \citref{BROOKS, F. P. No silver bullet: essence and accidents of software engineering. \emph{Computer}, v.~20, n.~4, p.~10-19, 1987}{10.1109/MC.1987.1663532}{p.~10--19 (trecho inicial, p.~11). é o aviso contra otimismo de ferramenta única: o protocolo SDD/TDD do Core traduz a disciplina de passo a passo que Brooks recomenda — nenhum agente entrega ordem de magnitude por si só.}{There is no single development, in either technology or management technique, which by itself promises even one order-of-magnitude improvement within a decade in productivity, in reliability, in simplicity}{Não há um único desenvolvimento, seja em tecnologia ou técnica de gestão, que por si só prometa uma melhoria de uma ordem de magnitude em produtividade, confiabilidade e simplicidade dentro de uma década.}{BROOKS, 1987, p.~11}
+
+\begin{formalizacao}{F25}{O que decorre da decomposição aditiva de custo}
+\textbf{Enunciado.} No modelo $C_{total}=C_{essencial}+C_{acidental}$, custo acidental não negativo implica $C_{total}\geq C_{essencial}$. Reduzir a parcela acidental sem mudar a essencial não aumenta o total.
+
+\textbf{Hipóteses.} As parcelas são números reais na mesma unidade, e o total é definido por sua soma. A primeira desigualdade exige $C_{acidental}\geq0$; a comparação entre cenários exige $C'_{acidental}\leq C_{acidental}$ e a mesma parcela essencial.
+
+\textbf{Lemas e dedução.} Desdobrar a definição fornece a identidade aditiva. Somar $C_{essencial}$ aos dois lados de $0\leq C_{acidental}$ dá o limite inferior. Somar a mesma quantidade aos dois lados de $C'_{acidental}\leq C_{acidental}$ dá $C'_{total}\leq C_{total}$. Não se deduz dessas identidades quanto uma ferramenta efetivamente reduz.
+
+\textbf{Lean 4.} \leanref{BookModels.additive_cost_identity} explicita a definição; \leanref{BookModels.additive_cost_lower_bound} e \leanref{BookModels.reducing_accidental_reduces_total} conferem as duas consequências de ordem.
+
+\textbf{Axiomas e alcance.} Dependências formais: seção~\ref{sec:fundamentos-lean}. A decomposição é uma escolha de modelagem, não lei empírica universal nem medição da complexidade de um projeto.
+\end{formalizacao}
 
 % R901-PONTE-FECHO
 O gate organiza a aceitação da entrega, mas precisa saber que operação está julgando. Ao entrar no raciocínio, passamos dos critérios gerais às premissas, aos métodos e aos limites de cada cálculo.

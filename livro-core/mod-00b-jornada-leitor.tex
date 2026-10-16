@@ -46,7 +46,19 @@ A arquitetura que introduziu esse mecanismo empilha aten\c{c}\~ao pura sem recor
 
 O mecanismo original calcula aten\c{c}\~ao como softmax do produto de consultas por chaves escalado pela raiz da dimens\~ao, ponderando valores \citref{VASWANI, A. et al. Attention is all you need. Advances in Neural Information Processing Systems, v.~30, p.~5998-6008, 2017}{10.48550/arXiv.1706.03762}{Justifica o roteamento por atencao do Core como ponderacao por relevancia, nao como compreensao garantida.}{We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely}{Propomos uma nova arquitetura de rede simples, o Transformer, baseada apenas em mecanismos de atencao, dispensando totalmente recorrencia e convolucoes.}{VASWANI et al., 2017, p.~5998-6008}.
 
-Para que Ana tamb\'em entenda, o livro resolve um caso de brinquedo. Sejam duas consultas e duas chaves em dimens\~ao $d_{k}=4$, com $QK^{T} = [[4,0],[0,4]]$. Escala por $\sqrt{d_{k}}=2$: $[[2,0],[0,2]]$. Softmax por linha: linha 1 d\'a $[\exp(2)/(\exp(2)+\exp(0)), 1/(\exp(2)+1)] \approx [0{,}88, 0{,}12]$; linha 2 espelha $[0{,}12, 0{,}88]$. Multiplicar por $V=[[1,0],[0,1]]$ devolve quase a identidade ponderada. O exemplo mostra o essencial: escore alto concentra peso, escore empatado divide peso. No Core, a intuição de ponderar candidatos é preservada por outro cálculo: uma combinação de critérios seguida de softmax. A ordem resultante não certifica a resposta.
+Para que Ana tamb\'em entenda, o livro resolve um caso de brinquedo. Sejam duas consultas e duas chaves em dimens\~ao $d_{k}=4$, com $QK^{T} = [[4,0],[0,4]]$. Escala por $\sqrt{d_{k}}=2$: $[[2,0],[0,2]]$. Softmax por linha: linha 1 d\'a $[\exp(2)/(\exp(2)+\exp(0)), 1/(\exp(2)+1)] \approx [0{,}88, 0{,}12]$; linha 2 espelha $[0{,}12, 0{,}88]$. Multiplicar por $V=[[1,0],[0,1]]$ preserva a matriz de pesos, com maior peso na diagonal. O exemplo mostra o essencial: escore alto concentra peso, escore empatado divide peso. No Core, a intuição de ponderar candidatos é preservada por outro cálculo: uma combinação de critérios seguida de softmax. A ordem resultante não certifica a resposta.
+
+\begin{formalizacao}{F20}{Da escala aos dois pesos de atenção}
+\textbf{Enunciado.} Na linha de escores $[4,0]$ com $d_k=4$, a escala produz $[2,0]$; seus pesos somam um e são aproximadamente $[0{,}88,0{,}12]$.
+
+\textbf{Hipóteses.} Os escores são números reais dados, a normalização é feita por linha e a dimensão é positiva. A matriz $QK^T$ foi fornecida como entrada do exemplo, não calculada a partir de consultas e chaves observadas.
+
+\textbf{Lemas e dedução.} Primeiro, $\sqrt4=2$, logo $4/\sqrt4=2$ e $0/\sqrt4=0$. Como $e^x>0$, o denominador $e^2+e^0=e^2+1$ é positivo. A soma dos dois quocientes é $(e^2+1)/(e^2+1)=1$. A cota $7{,}389<e^2<7{,}3891$ permite multiplicar as desigualdades pelo denominador positivo e obter $0{,}8807<w_1<0{,}8809$. Por complemento, $0{,}1191<w_2<0{,}1193$. Inverter a ordem dos escores troca os pesos; empatá-los dá $1/2$ para cada um.
+
+\textbf{Lean 4.} As etapas escalares correspondem a \leanref{BookModels.attention_dimension_sqrt_four}, \leanref{BookModels.attention_dimension_scaled_four}, \leanref{BookAttention.exp_two_rational_bounds}, \leanref{BookAttention.two_row_softmax_sum}, \leanref{BookAttention.two_row_reversed}, \leanref{BookAttention.two_row_tie}, \leanref{BookAttention.softmax_2_0_rational_bounds} e \leanref{BookAttention.softmax_0_2_rational_bounds}.
+
+\textbf{Axiomas e alcance.} As dependências lógicas de cada declaração estão na seção~\ref{sec:fundamentos-lean}. Além dos pesos escalares, \leanref{BookModels.attention_matrix_scale} confere a escala da matriz dada e \leanref{BookModels.attention_output_identity} demonstra $WI=W$ para qualquer matriz real $2\times2$. Nenhuma dessas provas infere consultas e chaves a partir de dados nem demonstra equivalência ao runtime do Core.
+\end{formalizacao}
 
 \begin{aviso}
 Limite estrutural. O c\'alculo acima ilustra pondera\c{c}\~ao; n\~ao prova que o roteador do Core escolha bem. A qualidade da escolha depende de embeddings, pesos, desempates e fallbacks implementados, avaliados caso a caso com registros observ\'aveis.
@@ -65,6 +77,18 @@ O livro resolve o caso can\^onico. Seja $R$ a raz\~ao entre verdadeiros e falsos
 \[ \mathrm{PPV} = \frac{(1-\beta)R}{(1-\beta)R + \alpha}. \]
 
 Com campo dif\'icil $R=1{:}10=0{,}1$, poder $0{,}8$ e $\alpha=0{,}05$: numerador $0{,}8 \times 0{,}1 = 0{,}08$; denominador $0{,}08+0{,}05=0{,}13$; $\mathrm{PPV} \approx 0{,}615$, cerca de 62 por cento. Nesse modelo, a fra\c{c}\~ao esperada de achados falsos entre os positivos \`e $1-8/13=5/13\approx38{,}5\%$. O caso apresentado n\~ao inclui um par\^ametro de vi\'es: acrescent\'a-lo exige declarar outro modelo, pois pode afetar numerador e denominador. A distin\c{c}\~ao para o Core \'e essencial: o PPV pertence ao modelo hipot\'etico de pesquisa. Um teste de software aprovado indica atendimento ao caso testado; n\~ao recebe uma probabilidade de verdade por esta f\'ormula.
+
+\begin{formalizacao}{F04}{Por que o PPV é uma razão condicional}
+\textbf{Enunciado.} No modelo sem viés explícito, a fração esperada de verdadeiros positivos é $\mathrm{PPV}=(1-\beta)R/((1-\beta)R+\alpha)$; para as premissas acima, vale exatamente $8/13$.
+
+\textbf{Hipóteses.} Sejam $T\geq0$ e $F>0$ as quantidades ou massas de hipóteses verdadeiras e falsas, $R=T/F$, $0\leq\alpha,\beta\leq1$ e $(1-\beta)T+\alpha F>0$. Os parâmetros são supostos, não estimados pelos testes do Core.
+
+\textbf{Lemas e dedução.} O poder produz a massa $VP=(1-\beta)T$; a taxa de falso positivo produz $FP=\alpha F$. Como os dois grupos são disjuntos, a massa positiva total é $VP+FP$. Dividir numerador e denominador por $F\ne0$ transforma $VP/(VP+FP)$ na expressão em $R$. Substituindo $\beta=1/5$, $R=1/10$ e $\alpha=1/20$, obtemos, nas massas normalizadas por $F$, $VP/F=2/25$, $(VP+FP)/F=13/100$ e quociente $8/13$. A fração complementar é $1-8/13=5/13$, entre $38{,}4\%$ e $38{,}5\%$.
+
+\textbf{Lean 4.} \leanref{BookAlgebra.ppv_from_counts} confere a normalização; \leanref{BookAlgebra.ppv_bounds} demonstra o intervalo $[0,1]$; \leanref{BookAlgebra.ppv_high_power_exact} e \leanref{BookModels.ppv_eight_thirteenths_complement} conferem os valores exatos. A faixa percentual está em \leanref{BookModels.ppv_complement_percentage_bounds}.
+
+\textbf{Axiomas e alcance.} Consulte as dependências por declaração na seção~\ref{sec:fundamentos-lean}. Poder, taxa-base e ausência de viés explícito são hipóteses estatísticas do modelo, não axiomas lógicos nem fatos provados sobre esta pesquisa ou este software.
+\end{formalizacao}
 
 \section{Esta\c{c}\~ao Reprodu\c{c}\~ao: como refazer sem depender de ningu\'em}
 
@@ -103,6 +127,18 @@ Dar ao leigo um caminho seguro at\'e o uso com fontes e ao t\'ecnico um caminho 
 \begin{resultado}
 \textbf{Exemplo resolvido.} Suponha quatro perguntas de leitura e três respostas com fontes identificadas. A cobertura documental é $3/4=0{,}75$. A quarta permanece aberta: arredondar o número ou repetir uma resposta não resolve a lacuna.
 \end{resultado}
+
+\begin{formalizacao}{F29}{Três respostas documentadas em quatro perguntas}
+\textbf{Enunciado.} A proporção do exemplo é $3/4=0{,}75=75\%$.
+
+\textbf{Hipóteses.} Há quatro perguntas distintas no escopo e três delas têm resposta documentada; o total é positivo e cada pergunta conta uma vez.
+
+\textbf{Lemas e dedução.} Cobertura documental é definida como parte dividida pelo todo. Como $4\times0{,}75=3$, o quociente é $0{,}75$; multiplicá-lo por cem muda apenas a unidade de expressão, para $75\%$. De $0\leq3\leq4$ e $4>0$ segue que a razão pertence a $[0,1]$.
+
+\textbf{Lean 4.} \leanref{BookModels.three_fourths_exact} confere a conta; \leanref{BookAlgebra.coverage_fraction_bounds} confere o limite geral e \leanref{BookAlgebra.percent_unscale} confere a reversibilidade da escala percentual.
+
+\textbf{Axiomas e alcance.} As dependências formais estão na seção~\ref{sec:fundamentos-lean}. A prova aritmética não autentica a documentação das três respostas nem mede compreensão do leitor.
+\end{formalizacao}
 
 \begin{resultado}
 \textbf{Ordem de grandeza e verificação.} Reabra os caminhos citados e compare entradas, saídas e critérios. Uma operação reproduzida só confirma o comportamento observado sob aquelas versões e condições; uma figura não conta como execução.

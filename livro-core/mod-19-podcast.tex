@@ -59,6 +59,18 @@ Limite do audio. Em divergencia entre ouvido e impresso, vale o impresso com a f
 \begin{resultado}
 \textbf{Exemplo resolvido.} Suponha seis episódios planejados e dois revisados. A cobertura dessa revisão é $2/6=1/3$, não a taxa de acerto de todo o podcast. Os quatro restantes continuam pendentes desse procedimento.
 \end{resultado}
+\begin{formalizacao}{F29}{Revisão de episódios}
+\textbf{Enunciado.} $2/6=1/3$.
+
+\textbf{Hipóteses.} Contagens hipotéticas não negativas, universo finito declarado e denominadores estritamente positivos.
+
+\textbf{Lemas e dedução.} Fatorar $2/6=(2\cdot1)/(2\cdot3)$ permite cancelar o fator não nulo dois. A igualdade não diz que os outros quatro episódios foram revisados.
+
+\textbf{Lean 4.} \leanref{BookModels.two_sixths_exact}.
+
+\textbf{Axiomas e alcance.} Normalização aritmética direta por \pth{norm_num}; não há lema intermediário específico do livro. A conta não comprova a coleta, a existência dos arquivos nem a escuta. As siglas junto aos nomes identificam as dependências lógicas auditadas; ver a seção~\ref{sec:fundamentos-lean}.
+\end{formalizacao}
+
 
 \begin{resultado}
 \textbf{Ordem de grandeza e verificação.} Confira a existência e a versão dos arquivos e ouça os trechos alterados. Registre quais episódios foram revisados e quais critérios passaram; uma lista de arquivos não é inspeção de áudio.

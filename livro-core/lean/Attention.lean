@@ -237,6 +237,12 @@ theorem eligible_minimum_exists {α : Type*} [DecidableEq α] (C : Finset α)
     ∃ chosen ∈ C, ∀ a ∈ C, cost chosen ≤ cost a :=
   Finset.exists_min_image C cost hC
 
+/-- Um máximo de utilidade existe sob finitude e não-vazio; empates não são resolvidos. -/
+theorem eligible_maximum_exists {α : Type*} [DecidableEq α] (C : Finset α)
+    (utility : α → ℝ) (hC : C.Nonempty) :
+    ∃ chosen ∈ C, ∀ a ∈ C, utility a ≤ utility chosen :=
+  Finset.exists_max_image C utility hC
+
 theorem excluded_cannot_be_chosen {α : Type*} [DecidableEq α]
     (C : Finset α) (chosen excluded : α) (hc : chosen ∈ C) (he : excluded ∉ C) :
     chosen ≠ excluded := by

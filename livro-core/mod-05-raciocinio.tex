@@ -18,6 +18,18 @@ Depois de explicitar o aceite, podemos perguntar o que uma operação de racioc�
 \casoguiado{solver e premissas}
 {Suponha que as premissas sejam ``A implica B'' e ``A''. Um solver pode verificar que B decorre dessas premissas, dadas a codificação e a lógica escolhidas. Se a primeira premissa for falsa no caso real ou a tradução para a linguagem formal estiver errada, a derivação ainda pode ser válida e a conclusão aplicada continuar inadequada. A prova responde uma pergunta condicional: o que decorre das premissas?}
 
+\begin{formalizacao}{F24}{Modus ponens: consequência não é observação}
+\textbf{Enunciado.} Das premissas $P$ e $P\Rightarrow Q$, segue $Q$.
+
+\textbf{Hipóteses.} $P$ e $Q$ são proposições; há uma demonstração de $P$ e uma demonstração da implicação $P\to Q$. A aplicação ao mundo requer justificar ambas as premissas e sua tradução.
+
+\textbf{Lemas e dedução.} Uma prova de $P\to Q$ é uma regra que recebe uma prova de $P$ e devolve uma prova de $Q$. Aplicar a segunda premissa à primeira conclui $Q$ diretamente; não há lema numérico nem estimativa probabilística intermediária. A regra conserva a dependência da conclusão nas premissas, sem produzir evidência empírica nova.
+
+\textbf{Lean 4.} \leanref{BookFoundations.modus_ponens} contém essa aplicação explícita: a prova da implicação é aplicada à prova do antecedente.
+
+\textbf{Axiomas e alcance.} Consulte a dependência efetiva da declaração na seção~\ref{sec:fundamentos-lean}; não se presume que uma regra tão elementar use todos os axiomas disponíveis na biblioteca. A validade da regra não certifica as premissas de uma consulta real.
+\end{formalizacao}
+
 \section{A função do raciocínio no Core}
 
 \elemento{Por que raciocínio formal, e não só ``modelo grande''}{\metainfo{ID}{R-00} \hfill \metainfo{Rota}{reasoning/}}
@@ -336,6 +348,18 @@ não é chancela de qualidade.
 {Se a expressão for recusada ou SymPy estiver ausente, preserve a mensagem. O fallback aritmético não resolve equações com incógnita. Confira a entrada e a dependência; não apresente texto plausível de outro modelo como solução executada.}
 {A igualdade foi resolvida sob uma codificação explícita. Que evidência seria necessária para relacionar essa variável a uma medida real? Essa pergunta prepara a análise de dados do próximo capítulo.}
 
+\begin{formalizacao}{F22}{Resolver e conferir uma equação elementar}
+\textbf{Enunciado.} Para $x\in\mathbb R$, $2x+1=5$ se, e somente se, $x=2$.
+
+\textbf{Hipóteses.} A expressão é uma igualdade sobre números reais exatos; não há arredondamento, variável de unidade desconhecida ou dado empírico.
+
+\textbf{Lemas e dedução.} Subtrair $1$ de ambos os lados dá $2x=4$. Dividir por $2\ne0$ dá $x=2$. Na direção inversa, substituir $x=2$ dá $2\times2+1=5$. Assim se verificam existência e unicidade, não só um candidato. A mesma álgebra de anel permite expandir $(x-1)(x+1)=x^2+x-x-1=x^2-1$, uma identidade de fatoração distinta de uma equação a resolver.
+
+\textbf{Lean 4.} \leanref{BookFoundations.linear_equation_iff} confere as duas direções da equivalência; \leanref{BookFoundations.difference_of_squares_factorization} confere a identidade auxiliar e \leanref{BookFoundations.simple_sum_exact} confere o exemplo $2+3=5$.
+
+\textbf{Axiomas e alcance.} As dependências estão na seção~\ref{sec:fundamentos-lean}. As provas matemáticas são independentes da sondagem de SymPy, Z3 ou outro executor: não demonstram que a integração esteja instalada nem que tenha respondido à chamada proposta.
+\end{formalizacao}
+
 \begin{resultado}
 O capítulo distinguiu motores simbólicos, numéricos e heurísticos, pipeline
 de afinidade e atenção e modelos de geração. Cada percurso tem sua interface
@@ -399,6 +423,18 @@ qual dessas saídas a tarefa pede.
 \end{enumerate}
 \end{metodo}
 
+\begin{formalizacao}{F12}{Da partição da carga ao teto de Amdahl}
+\textbf{Enunciado.} No modelo ideal de carga fixa, $A(N)=1/(s+(1-s)/N)$ e, para $0<s\leq1$ e $N>0$, $A(N)\leq1/s$, com limite $1/s$ quando $N\to\infty$.
+
+\textbf{Hipóteses.} A carga de um executor está normalizada para um; $s$ é a fração sequencial constante; a parte restante se distribui perfeitamente entre executores equivalentes. Não há custo de comunicação ou coordenação.
+
+\textbf{Lemas e dedução.} O tempo paralelo é $(1-s)/N$ e o sequencial continua $s$; a soma define $T_N$. Com um executor, $T_1=s+(1-s)=1$. Dividir $T_1$ por $T_N>0$ dá o ganho. Como $(1-s)/N\geq0$, $T_N\geq s>0$; tomar recíprocos inverte a desigualdade e produz $A(N)\leq1/s$. No limite, $(1-s)/N\to0$ e a continuidade do recíproco em $s\ne0$ dá $A(N)\to1/s$. O caso $s=0$ exige tratamento separado e dá $A(N)=N$.
+
+\textbf{Lean 4.} Para um trabalhador, $s+(1-s)/1=1$, logo $S(1)=1$; a simplificação do denominador justifica \leanref{BookAlgebra.amdahl_single_worker_speedup}.  \leanref{BookAlgebra.amdahl_single_worker_time}, \leanref{BookAlgebra.amdahl_time_positive}, \leanref{BookAlgebra.amdahl_speedup_ceiling}, \leanref{BookAlgebra.amdahl_limit} e \leanref{BookAlgebra.amdahl_natural_executor_limit} conferem normalização, positividade, teto e limites. \leanref{BookAlgebra.amdahl_zero_sequential} confere o caso separado.
+
+\textbf{Axiomas e alcance.} Dependências formais: seção~\ref{sec:fundamentos-lean}. A hipótese de carga ideal não foi medida no Core; contar motores heterogêneos não fornece o número de executores equivalentes deste modelo.
+\end{formalizacao}
+
 \begin{resultado}
 \textbf{Exemplo resolvido e hipotético.} Seja $s = 0{,}2$ (20\% sequencial)
 e $N = 13$ executores equivalentes de uma carga fixa, sem relação com a
@@ -409,6 +445,18 @@ enquanto o teto assintótico é $1/0{,}2 = 5$. \textbf{Ordem de grandeza:} mesmo
 infinitos motores, o ganho nunca passa de $5\times$; o gargalo não é o número de
 engines, é a fração sequencial.
 \end{resultado}
+
+\begin{formalizacao}{F12}{Valor exato antes de arredondar a aceleração}
+\textbf{Enunciado.} Com $s=1/5$, os ganhos ideais são $A(13)=65/17$, $A(4)=5/2$ e $A(8)=10/3$; o teto é cinco.
+
+\textbf{Hipóteses.} Mantêm-se as condições do modelo anterior, com $N=13$, $4$ ou $8$. Os decimais $0{,}2$ e $0{,}8$ denotam aqui racionais exatos.
+
+\textbf{Lemas e dedução.} Para treze executores, o denominador é $1/5+(4/5)/13=13/65+4/65=17/65$, cujo recíproco é $65/17$. Comparação racional dá $3{,}82<65/17<3{,}83$, justificando $3{,}8$ a uma casa. Para quatro, o denominador é $1/5+1/5=2/5$; para oito, $1/5+1/10=3/10$. A troca de $N$ preserva o teto $1/(1/5)=5$, sob as mesmas premissas.
+
+\textbf{Lean 4.} \leanref{BookAlgebra.amdahl_thirteen_exact}, \leanref{BookAlgebra.amdahl_thirteen_interval}, \leanref{BookAlgebra.amdahl_four_exact} e \leanref{BookAlgebra.amdahl_eight_exact} conferem essas contas; \leanref{BookAlgebra.amdahl_speedup_ceiling} fornece o limite geral.
+
+\textbf{Axiomas e alcance.} As dependências estão na seção~\ref{sec:fundamentos-lean}. São valores do modelo, não tempos observados nem previsão de desempenho da orquestração.
+\end{formalizacao}
 
 \begin{resultado}
 \textbf{Ordem de grandeza e verificação.} Abra o dicionário de
@@ -527,6 +575,18 @@ O teto assintótico é $1/0{,}2 = 5$.
 \]
 
 \end{metodo}
+
+\begin{formalizacao}{F12}{Encadeamento da dedução detalhada de Amdahl}
+\textbf{Enunciado.} Os cinco passos do aprofundamento ligam uma definição de tempo ao ganho ideal e ao seu limite, com $A(13)=65/17\approx3{,}8$.
+
+\textbf{Hipóteses.} $0<s\leq1$, $N>0$, carga fixa normalizada, executores equivalentes e ausência de sobrecusto. O limite não usa $s=0$.
+
+\textbf{Lemas e dedução.} A normalização dá $T_1=1$; a soma das duas partes dá $T_N=s+(1-s)/N>0$; a definição de ganho dá $A=T_1/T_N$. A não negatividade da parcela paralelizável produz o teto por inversão de desigualdade positiva; a convergência da parcela para zero permite o limite. Na instância $s=1/5,N=13$, o denominador exato $17/65$ deve ser invertido antes de arredondar: substituir primeiro $0{,}0615$ já altera a expressão exata.
+
+\textbf{Lean 4.} \leanref{BookAlgebra.amdahl_time_positive} é o apoio para a divisão; \leanref{BookAlgebra.amdahl_speedup_ceiling} e \leanref{BookAlgebra.amdahl_natural_executor_limit} correspondem às conclusões gerais; \leanref{BookAlgebra.amdahl_thirteen_exact} e \leanref{BookAlgebra.amdahl_thirteen_interval} conferem a instância.
+
+\textbf{Axiomas e alcance.} As dependências reais de cada prova constam na seção~\ref{sec:fundamentos-lean}. A conta condicional não demonstra que a fração sequencial permaneça constante ao alterar o sistema.
+\end{formalizacao}
 
 \begin{descricao}
 \textbf{Interpretação.} Mesmo com 13 executores, o ganho é de apenas $3{,}8\times$, não $13\times$. E mesmo com infinitos motores, o ganho nunca passa de $5\times$. O gargalo não é o número de engines, é a fração sequencial do trabalho.

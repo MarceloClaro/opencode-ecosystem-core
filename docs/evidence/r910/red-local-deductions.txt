@@ -1,0 +1,43 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+_________________ test_each_formal_family_has_local_exposition _________________
+
+    def test_each_formal_family_has_local_exposition():
+        mapping = json.loads((ROOT / 'docs/book-math-map-r908.json').read_text())
+        missing = []
+        for f in mapping['families']:
+            if f['kind'] == 'empirical_not_formalized':
+                continue
+            for source in f['book_sources']:
+                text = (ROOT / source).read_text()
+                if not re.search(r'\\begin\{formalizacao\}\{' + f['id'] + r'\}', text):
+                    missing.append((f['id'], source))
+>       assert missing == [], f'Deduções ainda sem exposição local: {missing}'
+E       AssertionError: Deduções ainda sem exposição local: [('F01', 'livro-core/mod-01-fundacoes.tex'), ('F01', 'livro-core/mod-15-epilogo-reproducao.tex'), ('F02', 'livro-core/mod-01-fundacoes.tex'), ('F02', 'livro-core/mod-15-epilogo-reproducao.tex'), ('F03', 'livro-core/mod-01-fundacoes.tex'), ('F04', 'livro-core/mod-00b-jornada-leitor.tex'), ('F04', 'livro-core/mod-09a-comparada.tex'), ('F04', 'livro-core/mod-15-epilogo-reproducao.tex'), ('F05', 'livro-core/mod-01-fundacoes.tex'), ('F05', 'livro-core/mod-01b-historia.tex'), ('F05', 'livro-core/mod-06-ciencia.tex'), ('F05', 'livro-core/mod-11-apendices.tex'), ('F06', 'livro-core/mod-06-ciencia.tex'), ('F06', 'livro-core/mod-14-lote-categorias.tex'), ('F07', 'livro-core/mod-10-catalogo.tex'), ('F07', 'livro-core/mod-14-lote-categorias.tex'), ('F08', 'livro-core/mod-10-catalogo.tex'), ('F08', 'livro-core/mod-11-apendices.tex'), ('F09', 'livro-core/mod-02-orquestracao.tex'), ('F10', 'livro-core/mod-02-orquestracao.tex'), ('F10', 'livro-core/mod-13-ativacao-agentes.tex'), ('F11', 'livro-core/mod-03-memoria-mci.tex'), ('F12', 'livro-core/mod-05-raciocinio.tex'), ('F13', 'livro-core/mod-06-ciencia.tex'), ('F14', 'livro-core/mod-08-ecossistema.tex'), ('F15', 'livro-core/mod-01c-instalacao.tex'), ('F16', 'livro-core/mod-07-integracoes.tex'), ('F17', 'livro-core/mod-13-ativacao-agentes.tex'), ('F18', 'livro-core/mod-09-infra.tex'), ('F19', 'livro-core/mod-13-ativacao-agentes.tex'), ('F19', 'livro-core/mod-17-e1e7-para-leigos.tex'), ('F20', 'livro-core/mod-00b-jornada-leitor.tex'), ('F20', 'livro-core/mod-15-epilogo-reproducao.tex'), ('F21', 'livro-core/mod-15-epilogo-reproducao.tex'), ('F21', 'livro-core/mod-02-orquestracao.tex'), ('F22', 'livro-core/mod-05-raciocinio.tex'), ('F22', 'livro-core/mod-07-integracoes.tex'), ('F23', 'livro-core/mod-07-integracoes.tex'), ('F24', 'livro-core/mod-05-raciocinio.tex'), ('F25', 'livro-core/mod-04-qualidade-sdd.tex'), ('F26', 'livro-core/mod-14-lote-categorias.tex'), ('F28', 'livro-core/mod-12-fichas-nucleo.tex'), ('F28', 'livro-core/mod-06-ciencia.tex')]
+E       assert [('F01', 'liv...or.tex'), ...] == []
+E
+E         Left contains 43 more items, first extra item: ('F01', 'livro-core/mod-01-fundacoes.tex')
+E         Use -v to get more diff
+
+tests/test_r910_book_local_deductions.py:19: AssertionError
+_____________ test_derived_probability_rules_are_not_called_axioms _____________
+
+    def test_derived_probability_rules_are_not_called_axioms():
+        text = (ROOT / 'livro-core/mod-01-fundacoes.tex').read_text()
+>       assert 'axioma de multiplicação' not in text
+E       AssertionError: assert 'axioma de multiplicação' not in '% =========...ção local.\n'
+E
+E         'axioma de multiplicação' is contained here:
+E            Este é o axioma de multiplicação para eventos independentes.
+E         ?           +++++++++++++++++++++++
+E
+E           Por que produto e não soma? Porque estamos exigindo que a saída 1 esteja correta \emph{e} a saída 2 esteja correta \emph{e} … \emph{e} a saída $N$ esteja correta. “E” na probabilidade, para eventos independentes, significa multiplicar.
+E           ...
+E
+E         ...Full output truncated (193 lines hidden), use '-vv' to show
+
+tests/test_r910_book_local_deductions.py:24: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_r910_book_local_deductions.py::test_each_formal_family_has_local_exposition
+FAILED tests/test_r910_book_local_deductions.py::test_derived_probability_rules_are_not_called_axioms
+2 failed in 0.20s
