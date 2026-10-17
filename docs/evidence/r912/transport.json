@@ -1,0 +1,63 @@
+{
+  "launcher": {
+    "type": "stdio",
+    "command": "wsl.exe",
+    "args": [
+      "-d",
+      "Ubuntu",
+      "--cd",
+      "/home/marceloclaro/opencode-ecosystem-core",
+      "--exec",
+      "/home/marceloclaro/opencode-ecosystem-core/.venv/bin/python",
+      "-m",
+      "integrations.ecosystem_mcp"
+    ]
+  },
+  "host_conversation_tools_verified": false,
+  "retrieval_source_sha256": "1786c825b95fc8cb9273f0d90d499df54f01787ecf378c370d6828578a77fead",
+  "elapsed_seconds": 7.82,
+  "manifest_sha256": "64d60c7b2dfc72fb479e27387fd49f2c2e0d19fdae9990e29d2b020611a033fc",
+  "manifest_unchanged": true,
+  "retrieval_page": 3,
+  "catalog_offline": true,
+  "catalog_status": "ready",
+  "jsonrpc_frames_valid": true,
+  "status": "transport_verified",
+  "server_info": {
+    "name": "ecosystem-network",
+    "version": "1.28.1"
+  },
+  "tool_names": [
+    "ecosystem_agent_profile",
+    "ecosystem_artifact_handoff",
+    "ecosystem_browser",
+    "ecosystem_code_context",
+    "ecosystem_dataset_custom",
+    "ecosystem_dataset_download",
+    "ecosystem_gemini_notebook",
+    "ecosystem_integration_status",
+    "ecosystem_knowledge_plan",
+    "ecosystem_library_search",
+    "ecosystem_local_ci",
+    "ecosystem_rea",
+    "ecosystem_route",
+    "ecosystem_run",
+    "ecosystem_scientific_plugins",
+    "ecosystem_scientific_run",
+    "ecosystem_scientific_runtime",
+    "ecosystem_scientific_verify",
+    "ecosystem_skill_plan",
+    "ecosystem_status",
+    "ecosystem_text_spec",
+    "ecosystem_workflow",
+    "ecosystem_workflow_status"
+  ],
+  "manifest_path": "C:\\Users\\marce\\.codex\\plugins\\cache\\marceloclaro-core-local\\opencode-ecosystem-core\\1.0.1\\mcp.json",
+  "llm_inference_executed": false,
+  "retrieval_evidence_count": 1,
+  "catalog_uri": "ecosystem://books/catalog",
+  "protocol_version": "2025-11-25",
+  "tool_count": 23,
+  "catalog_book_count": 5,
+  "checked_at_utc": "2026-10-17T03:40:10.7500634Z"
+}

@@ -1,0 +1,42 @@
+{
+  "fixture_root": "\\\\wsl.localhost\\Ubuntu\\home\\marceloclaro\\opencode-ecosystem-core\\outputs\\core-r912\\audit-contracts\\65fe13f4ca4e40ffa5eca1c356ed7f90",
+  "status": "passed",
+  "scope": "PowerShell AST extraction and actual isolated function execution, no MCP or LLM",
+  "checked_at_utc": "2026-10-17T03:39:50.7073122Z",
+  "host_configuration_changed": false,
+  "function_only_executed": true,
+  "function_name": "Assert-CorePluginFiles",
+  "harness_note": "Initial provider-qualified path normalized to filesystem ProviderPath before contract invocation.",
+  "source_sha256": "2e7db79cf83b0c2425bd21e8ad086cf6c3f6fb7f211239b7e1c9bd8b5b641cd5",
+  "cases": [
+    {
+      "case": "matching_exact_files",
+      "accepted": true,
+      "expected": "accepted",
+      "passed": true
+    },
+    {
+      "case": "changed_hash",
+      "accepted": false,
+      "reason": "A fonte local difere deste pacote. Preserve a versão existente e prepare uma atualização explícita.",
+      "expected": "rejected",
+      "passed": true
+    },
+    {
+      "case": "unexpected_file",
+      "accepted": false,
+      "reason": "Arquivos inesperados ou ausentes no plugin; nada foi substituído.",
+      "expected": "rejected",
+      "passed": true
+    },
+    {
+      "case": "missing_file",
+      "accepted": false,
+      "reason": "Arquivos inesperados ou ausentes no plugin; nada foi substituído.",
+      "expected": "rejected",
+      "passed": true
+    }
+  ],
+  "source": "\\\\wsl.localhost\\Ubuntu\\home\\marceloclaro\\opencode-ecosystem-core\\scripts\\install_chatgpt_core_plugin.ps1",
+  "installer_executed": false
+}

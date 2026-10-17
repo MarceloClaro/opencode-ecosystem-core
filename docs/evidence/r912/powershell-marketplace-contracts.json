@@ -1,0 +1,65 @@
+{
+  "manifest_sha256": "64d60c7b2dfc72fb479e27387fd49f2c2e0d19fdae9990e29d2b020611a033fc",
+  "actual_source_exact_hashes": true,
+  "host_configuration_changed": false,
+  "actual_manifest_matches_probe": true,
+  "checked_at_utc": "2026-10-17T03:41:12.3120803Z",
+  "installer_executed": false,
+  "status": "passed",
+  "ast_guard_end_line": 58,
+  "ast_guard_start_line": 44,
+  "source_sha256": "2e7db79cf83b0c2425bd21e8ad086cf6c3f6fb7f211239b7e1c9bd8b5b641cd5",
+  "actual_cache_exact_hashes": true,
+  "actual_installed_version": "1.0.1",
+  "source": "\\\\wsl.localhost\\Ubuntu\\home\\marceloclaro\\opencode-ecosystem-core\\scripts\\install_chatgpt_core_plugin.ps1",
+  "marketplace_cases": [
+    {
+      "passed": true,
+      "fixture_unchanged": true,
+      "expected_acceptance": true,
+      "reason": "",
+      "accepted": true,
+      "case": "valid"
+    },
+    {
+      "passed": true,
+      "fixture_unchanged": true,
+      "expected_acceptance": false,
+      "reason": "Marketplace ocupado por outra configuração; nada foi substituído.",
+      "accepted": false,
+      "case": "duplicate_entry"
+    },
+    {
+      "passed": true,
+      "fixture_unchanged": true,
+      "expected_acceptance": false,
+      "reason": "A origem do marketplace não corresponde ao Core local; nada foi substituído.",
+      "accepted": false,
+      "case": "foreign_source"
+    },
+    {
+      "passed": true,
+      "fixture_unchanged": true,
+      "expected_acceptance": false,
+      "reason": "A origem do marketplace não corresponde ao Core local; nada foi substituído.",
+      "accepted": false,
+      "case": "foreign_path"
+    },
+    {
+      "passed": true,
+      "fixture_unchanged": true,
+      "expected_acceptance": false,
+      "reason": "Marketplace ocupado por outra configuração; nada foi substituído.",
+      "accepted": false,
+      "case": "foreign_marketplace_name"
+    },
+    {
+      "passed": true,
+      "fixture_unchanged": true,
+      "expected_acceptance": false,
+      "reason": "Marketplace ocupado por outra configuração; nada foi substituído.",
+      "accepted": false,
+      "case": "missing_plugin"
+    }
+  ]
+}

@@ -1,0 +1,264 @@
+EEEEEEEEEE                                                               [100%]
+==================================== ERRORS ====================================
+____ ERROR at setup of test_windows_launcher_preserves_argument_boundaries _____
+
+    @pytest.fixture
+    def provider():
+>       return importlib.import_module('integrations.chatgpt_plugin')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r912_chatgpt_plugin.py:12:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1406: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'integrations.chatgpt_plugin'
+import_ = <function _gcd_import at 0x7f4d84933e20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'integrations.chatgpt_plugin'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+___________ ERROR at setup of test_linux_launcher_uses_existing_core ___________
+
+    @pytest.fixture
+    def provider():
+>       return importlib.import_module('integrations.chatgpt_plugin')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r912_chatgpt_plugin.py:12:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1406: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'integrations.chatgpt_plugin'
+import_ = <function _gcd_import at 0x7f4d84933e20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'integrations.chatgpt_plugin'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+_ ERROR at setup of test_unknown_target_cannot_silently_create_remote_server[unknown] _
+
+    @pytest.fixture
+    def provider():
+>       return importlib.import_module('integrations.chatgpt_plugin')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r912_chatgpt_plugin.py:12:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1406: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'integrations.chatgpt_plugin'
+import_ = <function _gcd_import at 0x7f4d84933e20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'integrations.chatgpt_plugin'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+_ ERROR at setup of test_unknown_target_cannot_silently_create_remote_server[cloud] _
+
+    @pytest.fixture
+    def provider():
+>       return importlib.import_module('integrations.chatgpt_plugin')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r912_chatgpt_plugin.py:12:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1406: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'integrations.chatgpt_plugin'
+import_ = <function _gcd_import at 0x7f4d84933e20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'integrations.chatgpt_plugin'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+__________ ERROR at setup of test_missing_runtime_is_not_installation __________
+
+    @pytest.fixture
+    def provider():
+>       return importlib.import_module('integrations.chatgpt_plugin')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r912_chatgpt_plugin.py:12:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1406: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'integrations.chatgpt_plugin'
+import_ = <function _gcd_import at 0x7f4d84933e20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'integrations.chatgpt_plugin'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+______________ ERROR at setup of test_missing_server_is_rejected _______________
+
+    @pytest.fixture
+    def provider():
+>       return importlib.import_module('integrations.chatgpt_plugin')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r912_chatgpt_plugin.py:12:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1406: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'integrations.chatgpt_plugin'
+import_ = <function _gcd_import at 0x7f4d84933e20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'integrations.chatgpt_plugin'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+________ ERROR at setup of test_package_and_overlay_have_same_identity _________
+
+    @pytest.fixture
+    def provider():
+>       return importlib.import_module('integrations.chatgpt_plugin')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r912_chatgpt_plugin.py:12:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1406: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'integrations.chatgpt_plugin'
+import_ = <function _gcd_import at 0x7f4d84933e20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'integrations.chatgpt_plugin'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+___________ ERROR at setup of test_occupied_destination_is_preserved ___________
+
+    @pytest.fixture
+    def provider():
+>       return importlib.import_module('integrations.chatgpt_plugin')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r912_chatgpt_plugin.py:12:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1406: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'integrations.chatgpt_plugin'
+import_ = <function _gcd_import at 0x7f4d84933e20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'integrations.chatgpt_plugin'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+_ ERROR at setup of test_archive_contains_only_known_files_and_is_reproducible _
+
+    @pytest.fixture
+    def provider():
+>       return importlib.import_module('integrations.chatgpt_plugin')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r912_chatgpt_plugin.py:12:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1406: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'integrations.chatgpt_plugin'
+import_ = <function _gcd_import at 0x7f4d84933e20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'integrations.chatgpt_plugin'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+_______ ERROR at setup of test_archive_cannot_be_written_inside_package ________
+
+    @pytest.fixture
+    def provider():
+>       return importlib.import_module('integrations.chatgpt_plugin')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r912_chatgpt_plugin.py:12:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1406: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'integrations.chatgpt_plugin'
+import_ = <function _gcd_import at 0x7f4d84933e20>
+
+>   ???
+E   ModuleNotFoundError: No module named 'integrations.chatgpt_plugin'
+
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError
+=========================== short test summary info ============================
+ERROR tests/test_r912_chatgpt_plugin.py::test_windows_launcher_preserves_argument_boundaries
+ERROR tests/test_r912_chatgpt_plugin.py::test_linux_launcher_uses_existing_core
+ERROR tests/test_r912_chatgpt_plugin.py::test_unknown_target_cannot_silently_create_remote_server[unknown]
+ERROR tests/test_r912_chatgpt_plugin.py::test_unknown_target_cannot_silently_create_remote_server[cloud]
+ERROR tests/test_r912_chatgpt_plugin.py::test_missing_runtime_is_not_installation
+ERROR tests/test_r912_chatgpt_plugin.py::test_missing_server_is_rejected - Mo...
+ERROR tests/test_r912_chatgpt_plugin.py::test_package_and_overlay_have_same_identity
+ERROR tests/test_r912_chatgpt_plugin.py::test_occupied_destination_is_preserved
+ERROR tests/test_r912_chatgpt_plugin.py::test_archive_contains_only_known_files_and_is_reproducible
+ERROR tests/test_r912_chatgpt_plugin.py::test_archive_cannot_be_written_inside_package
+10 errors in 0.34s

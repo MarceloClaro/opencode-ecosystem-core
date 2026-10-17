@@ -1,0 +1,25 @@
+{
+  "status": "completed_external_tool_review",
+  "profile": "architecture-source-audit",
+  "profile_sha256": "63eb5c58a75e3e4260e1ba3067e5e617f1b890a5ca76163931c71f4ebe7c8226",
+  "a2a_task_id": "task-032ef9e9",
+  "external_task": "/root/r912_mcp_audit",
+  "findings": [],
+  "resolved_findings": [
+    "exclusive_zip_creation",
+    "exact_marketplace_source",
+    "explicit_spec_id",
+    "add_result_vs_list_inventory"
+  ],
+  "evidence": [
+    "docs/evidence/r912/powershell-file-contracts.json",
+    "docs/evidence/r912/powershell-marketplace-contracts.json"
+  ],
+  "limitations": [
+    "Revisão automatizada, sem decisão humana ou certificação externa.",
+    "Blackboard é local ao processo; atribuição inicial não é inferência nem comprova execução pelo runtime do Core.",
+    "Revisão executada pelas ferramentas externas e correlacionada à atribuição; sem promoção de confiança."
+  ],
+  "core_runtime_execution_claimed": false,
+  "external_validation": false
+}

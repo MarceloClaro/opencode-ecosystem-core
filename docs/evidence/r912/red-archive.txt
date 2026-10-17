@@ -1,0 +1,22 @@
+..........FFF                                                            [100%]
+=================================== FAILURES ===================================
+______________________ test_existing_archive_is_preserved ______________________
+tests/test_r912_chatgpt_plugin.py:103: in test_existing_archive_is_preserved
+    with pytest.raises(FileExistsError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE FileExistsError
+________________ test_archive_output_symlink_is_rejected[False] ________________
+tests/test_r912_chatgpt_plugin.py:115: in test_archive_output_symlink_is_rejected
+    with pytest.raises(ValueError, match='simbólico'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+________________ test_archive_output_symlink_is_rejected[True] _________________
+tests/test_r912_chatgpt_plugin.py:115: in test_archive_output_symlink_is_rejected
+    with pytest.raises(ValueError, match='simbólico'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+=========================== short test summary info ============================
+FAILED tests/test_r912_chatgpt_plugin.py::test_existing_archive_is_preserved
+FAILED tests/test_r912_chatgpt_plugin.py::test_archive_output_symlink_is_rejected[False]
+FAILED tests/test_r912_chatgpt_plugin.py::test_archive_output_symlink_is_rejected[True]
+3 failed, 10 passed in 0.50s

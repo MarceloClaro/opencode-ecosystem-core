@@ -21469,6 +21469,59 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R912",
+      "objective": "Instalar plugin local privado do Core no Work/Codex, preservando MarceloClaro e separando ativação da conversa.",
+      "changes": [
+        "Gerador Agent Plugins 1.0 e overlay local 1.0.1; launcher stdio reutiliza integrations.ecosystem_mcp.",
+        "Instalação oficial em marketplace pessoal; inventário instalado/habilitado e hashes dos cinco arquivos conferidos.",
+        "Sonda Windows real: 23 ferramentas e uma evidência bibliográfica; manifesto preservado por hash; sem inferência.",
+        "114 testes selecionados e 10 contratos PowerShell aprovados; falha de launcher invalida recibo anterior.",
+        "Doctor estrutural 22/22; documentação, spec e recibos com limites de privacidade/ativação."
+      ],
+      "score": null,
+      "lessons": [
+        "plugin add informa o caminho; plugin list confirma installed/enabled. Não inferir esses estados um do outro.",
+        "Instalação e transporte não significam disponibilidade nesta conversa; ativação local pelo aplicativo continua pendente.",
+        "Revisão automatizada e consulta bibliográfica não são inferência nem validação científica externa."
+      ],
+      "timestamp": 1792208621.797202,
+      "artifact_hashes": {
+        "integrations/chatgpt_plugin.py": "ffe9f58f3978a8b69d8c88812e313158b11b780f31cb10069d413cb1117f47db",
+        "scripts/install_chatgpt_core_plugin.ps1": "2e7db79cf83b0c2425bd21e8ad086cf6c3f6fb7f211239b7e1c9bd8b5b641cd5",
+        "scripts/probe_chatgpt_plugin.ps1": "ba073c22c78d5ce194f64f95936dd8df1be24f9fc622fc3d9b585192904495bc",
+        "specs/SPEC-935-R912-plugin-local-chatgpt.md": "dc1b9829b16be4e8f23403f3e67a98797d4bcc1a726ba24e85d0ba4b122251ca",
+        "tests/test_r912_chatgpt_plugin.py": "2e482472c8af857f48a2c47d4c5b6a7318a8bb7388d62164dbe2527b8a588cd1",
+        "docs/USAR_CORE_NO_CHATGPT.md": "e742118ca6f02ed5b4abd2f0c02c9b2b2acfb028d3b11ef99d3dbfc977b0aab1",
+        "docs/verification-chatgpt-plugin-r912.json": "fae521e86f3de9501bb5ed3f125c690644cacfb002e73abfd38e4fbccf062656",
+        "docs/evidence/r912/agent-review.json": "051d0ca3f58f1ed8ba194bb61757e6b22735324fd5f8e0cf42176855848c9c49",
+        "docs/evidence/r912/doctor.json": "51179cb80b21e21e0debd08b1cbada1e26d25afdad9aada0b1962ade9bdd4b98",
+        "docs/evidence/r912/green-archive.txt": "950020cf0ce20fe4288830dc12ad683c59dfeef69e7e63196e8c851aa1564915",
+        "docs/evidence/r912/host-inventory.json": "a8a3fdefdbba2a7494d5ba3719e6fd8b12c7bcc2deb31b6ebb32674e71a90c88",
+        "docs/evidence/r912/negative-transport.json": "2a0ef40b2b889ab5ded7473a3bcb263616b956f504a3ab662f89c32e53d01191",
+        "docs/evidence/r912/package-verification.json": "bd0ff615da0f3d38634c5cbd72d5b314254b9b0b29c4101f8d3da5340fa00181",
+        "docs/evidence/r912/powershell-file-contracts.json": "a5fb14d1e6d8a1ef89dd0e8d7ddfea437f817265b20feb6ecf6326419ba25f96",
+        "docs/evidence/r912/powershell-marketplace-contracts.json": "f8f88813bf14332e579015cf5188f7b0f2373ef11eb7ac664879d9b01f051463",
+        "docs/evidence/r912/red-archive.txt": "14c0c9f9795e1245008ee655ddaf6109a31aee7544aedc6eae3bcb8636e93452",
+        "docs/evidence/r912/red-initial.txt": "bb9715900a83168b51e9283a5966634dca89e185d1e62bb4d0eec581193bdc3e",
+        "docs/evidence/r912/tests-regression.txt": "fcb006d908f3aa70bf26bfdb2ffe10658b34eb900fac33646fb6cfc7aeb86f7a",
+        "docs/evidence/r912/transport.json": "d2fae29391dd13f8bbf6e50ae91de1b18285199db64f47541de4b350a7339a27"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "specs/SPEC-935-R912-plugin-local-chatgpt.md",
+        "tests/test_r912_chatgpt_plugin.py",
+        "docs/verification-chatgpt-plugin-r912.json",
+        "docs/evidence/r912/agent-review.json"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "abbf11db678304529cdfeff6f279f90b2f7cd458",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ]
 }
