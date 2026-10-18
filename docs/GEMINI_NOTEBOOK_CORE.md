@@ -10,12 +10,22 @@ usam a mesma validação e registram recibos no MetaBus.
 Instale `requirements.txt` e `requirements-notebook.txt` no ambiente do Core.
 A integração opcional requer Python 3.11 ou superior; o broker persistente
 implementado utiliza Linux/WSL.
-A dependência opcional fixa NotebookLM MCP CLI 0.11.6, FastMCP 3.2.3 e MCP
+A dependência opcional fixa NotebookLM MCP CLI 0.15.6, FastMCP 3.2.3 e MCP
 1.28.1. FastMCP 4.0.5 instalado anteriormente exigia MCP 2 e impedia o servidor
 de iniciar. Os executáveis são resolvidos também em `.venv/bin`, fora do PATH.
-Para preservar extensões do fork, instale sem atualizar dependências o checkout
-do commit `f212ed9a321351aadf7ff7271469d6d4663df7d3` indicado na spec R672.
-Um número de versão do PyPI sozinho não identifica esse commit.
+Desde R915, o runtime usa a distribuição 0.15.6 publicada no PyPI. O checkout
+`f212ed9a321351aadf7ff7271469d6d4663df7d3`, indicado na spec R672, permanece
+como referência histórica; reinstalá-lo por cima reintroduziria a versão antiga.
+Os recibos R672–R676 continuam descrevendo aquela execução. A atualização não
+afirma equivalência de bytes entre o fork e a distribuição publicada.
+
+Na instalação local, pacote, wrappers e skill anteriores foram preservados em
+`outputs/notebooklm-r915/rollback-0.11.6`, sem copiar credenciais. A cópia da
+skill do Core só é migrada quando os bytes existentes correspondem à origem
+anterior; alterações locais não são sobrescritas. Servidores MCP já abertos
+podem manter código antigo na memória: reabra o cliente para carregar a nova
+versão. O broker do Core distingue sessões por versão; jobs antigos não são
+declarados continuados em uma sessão nova.
 
 ## Entradas
 
@@ -48,11 +58,15 @@ da operação concreta, inclusive suboperações de batch/pipeline.
 Os especialistas `Gemini notebook audit`, `Gemini notebook upstream` e
 `Gemini notebook transport` estão em `agents/catalog`, com contratos A2A,
 permissões explícitas e métodos existentes da entrada MarceloClaro. O Core
-contém 238 agentes configurados após esse registro. Atribuir uma tarefa a um
+mantém a configuração atual em `opencode.json`. Atribuir uma tarefa a um
 perfil não comprova inferência desse agente.
 
-O inventário do commit revisado contém 49 ferramentas MCP em 15 grupos e
-155 callbacks CLI, incluindo callbacks de grupos e raiz. As ferramentas
+O inventário histórico do commit revisado contém 49 ferramentas MCP em 15
+grupos e 155 callbacks CLI, incluindo callbacks de grupos e raiz. Na sonda
+local da distribuição 0.15.6 foram descobertas 53 ferramentas e 165 callbacks.
+Os quatro nomes novos (`alias`, `chat_save_to_note`, `profile` e `report`)
+permanecem fora da política MCP do Core; descoberta não concede autorização.
+Os 49 nomes anteriores continuam sujeitos aos gates existentes. As ferramentas
 habilitadas são descobertas em execução; os filtros `NOTEBOOKLM_DISABLED_GROUPS`,
 `NOTEBOOKLM_DISABLED_TOOLS` e `NOTEBOOKLM_ENABLED_TOOLS` continuam aplicados.
 O catálogo e seu hash ficam em `.opencode/gemini-notebook/catalog.json`.

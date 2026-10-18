@@ -1,0 +1,82 @@
+{
+  "round_id": "R915",
+  "checked_at_utc": "2026-10-18T02:46:39.103262+00:00",
+  "package_version": "0.15.6",
+  "installed_RECORD_files_verified": 145,
+  "changed_distributions": {
+    "notebooklm-mcp-cli": {
+      "before": "0.11.6",
+      "after": "0.15.6"
+    },
+    "questionary": {
+      "before": null,
+      "after": "2.1.1"
+    },
+    "tomlkit": {
+      "before": null,
+      "after": "0.15.2"
+    }
+  },
+  "pip_check": {
+    "returncode": 0,
+    "stdout": "No broken requirements found."
+  },
+  "installation": [
+    {
+      "name": "notebooklm-mcp-cli",
+      "version": "0.15.6",
+      "sha256": "805e01c9dc613b7d3037aad93d324882385bc9f13cc80a4897a2ec4e6485ed5c"
+    },
+    {
+      "name": "questionary",
+      "version": "2.1.1",
+      "sha256": "a51af13f345f1cdea62347589fbb6df3b290306ab8930713bfae4d475a7d4a59"
+    },
+    {
+      "name": "tomlkit",
+      "version": "0.15.2",
+      "sha256": "05562412163a3037b94497385fb7f9204c637bc605af7a48199e41cf2272f437"
+    }
+  ],
+  "pytest": {
+    "passed": 353,
+    "warnings": 5,
+    "duration_seconds": 25.08,
+    "scope": "ten_selected_notebook_test_files",
+    "log_sha256": "ae17986301c6db078ff6be35b3dc057d2246b4512fd0aaeddf1c18b373173f63",
+    "raw_log_sha256": "d01e9a39d364f788f9e6a33b597a2be69d731c7eaceab67161f7f91127e2b10e",
+    "published_log_normalization": "LF line endings; trailing whitespace removed; raw log retained locally"
+  },
+  "doctor": {
+    "overall": "healthy",
+    "diagnostic_mode": "structural",
+    "verification": "installation_only",
+    "checks_total": 22,
+    "checks_passed": 22,
+    "checks_failed": 0
+  },
+  "runtime_evidence": "docs/evidence/r915/runtime.json",
+  "runtime_evidence_sha256": "fd57f0a08ba649f6248ece4e82560058f9c7553b4e6afa37502258adaad17da0",
+  "skill_migration": {
+    "from": "0.11.6",
+    "to": "0.15.6",
+    "source": "installed_distribution",
+    "previous_files_preserved_in_backup": true,
+    "local_edits_overwritten": false,
+    "changed_files": 8,
+    "sha256": {
+      "SKILL.md": "8f7735527a61240ddf1dd941ee4a4bf6324b81ff510eb2791e48957a0e8c1ae5",
+      "AGENTS_SECTION.md": "b879b531036f0573fe953ec389ed61cc2517c1a804858188d5642b7a8a2c6592",
+      "references/command_reference.md": "387e7e662f35fee4c73b8912ce358d21cef2f5097c7c09f454b3e14074c12b95",
+      "references/remote-mcp.md": "9d109d5e9c0698aaaf0b0194f72df84531de719cd46763e52195931c54f272c4",
+      "references/studio-prompt-examples.md": "e35cff77868c397cba5eb999f222f59f9427c0c23b628282622d87a84194e0cf",
+      "references/studio-prompting-guide.md": "78e8f6d879206746a2a1076f1aad38e918dd910f7dbae9eb11b76b0e67bfb821",
+      "references/troubleshooting.md": "a442e34bc81035f1e44f656768eb534a6e53d4782e3ce98d75f8488d91bb0468",
+      "references/workflows.md": "fd7457e0944cc1259f27daa27d956c51638f139e30dbe033afc9c3efaaa10a4f",
+      "LICENSE": "5a566db4393add7499d8ad8aa5fc393b67b929ac600f44964808d28aeee0b41a"
+    }
+  },
+  "remote_mutation_executed": false,
+  "external_validation": false,
+  "remote_ci_verified": false
+}

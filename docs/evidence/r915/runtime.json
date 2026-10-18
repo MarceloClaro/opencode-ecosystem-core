@@ -1,0 +1,64 @@
+{
+  "round_id": "R915",
+  "scope": "local_dependency_upgrade_and_read_only_probes",
+  "version_before": "0.11.6",
+  "version_after": "0.15.6",
+  "package_source": "https://pypi.org/project/notebooklm-mcp-cli/0.15.6/",
+  "release_notes": "https://github.com/jacob-bd/gemini-notebook-mcp-cli/releases/tag/v0.15.6",
+  "authentication": {
+    "status": "completed",
+    "process_executed": true,
+    "valid": true,
+    "stdout_sha256": "bf101fdb9d43ef9c41f646a6e0d8983b97f7a81e09c4b42348346b64e6912e92"
+  },
+  "notebook_list": {
+    "status": "completed",
+    "process_executed": true,
+    "notebook_count": 234,
+    "max_results": 1000,
+    "response_sha256": "f629af042975cd2f1fb255a658f47e0e821b945deb827778decbaf0ad823968f"
+  },
+  "catalog": {
+    "status": "completed",
+    "mcp_tool_count": 53,
+    "cli_entry_count": 165,
+    "catalog_sha256": "a13607afcba66b40389f526d32773f4663f0870ce62d5cbb966484a4f1746430"
+  },
+  "server_info": {
+    "status": "completed",
+    "process_executed": true,
+    "response_sha256": "313cd374c5cdeb731d79fecf2a71bf450387881d4496c829058d3f75dc3eb962",
+    "package_version_observed": "0.15.6"
+  },
+  "skill": {
+    "status": "prepared",
+    "files": 8,
+    "skill_sha256": "8f7735527a61240ddf1dd941ee4a4bf6324b81ff510eb2791e48957a0e8c1ae5",
+    "license": "MIT"
+  },
+  "newly_discovered_mcp_names_not_authorized": [
+    "alias",
+    "chat_save_to_note",
+    "profile",
+    "report"
+  ],
+  "auxiliary_review": {
+    "profile": "command-regression",
+    "task_id": "task-fc887c0b",
+    "profile_sha256": "3f6d047d43c58ca3ba4805538e98cba7da8e2423c5a3880f8b36f47122433d75",
+    "scope": "read_only_source_review",
+    "external_agent": "/root/notebook_update_review",
+    "execution_observed": true,
+    "a2a_completion_confirmed": false
+  },
+  "remote_mutation_executed": false,
+  "remote_generation_executed": false,
+  "authentication_storage_read_by_agent": false,
+  "external_scientific_validation": false,
+  "limits": [
+    "Os testes históricos R673 ainda exercitam o checkout retido; as sondas reais acima exercitam a distribuição instalada.",
+    "As quatro ferramentas MCP novas permanecem bloqueadas pela política atual do Core.",
+    "Processos MCP que já estavam abertos podem conservar código antigo até serem reiniciados; jobs voláteis não são migrados.",
+    "Login e inferência do Gemini CLI são separados desta atualização do NotebookLM."
+  ]
+}

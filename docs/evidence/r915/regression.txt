@@ -1,0 +1,16 @@
+........................................................................ [ 20%]
+........................................................................ [ 40%]
+........................................................................ [ 61%]
+........................................................................ [ 81%]
+.................................................................        [100%]
+=============================== warnings summary ===============================
+tests/test_r674_notebook_edge_cases.py::test_normal_cli_vector_is_forwarded_with_executable
+tests/test_r674_notebook_edge_cases.py::test_normal_cli_vector_is_forwarded_with_executable
+tests/test_r674_notebook_edge_cases.py::test_normal_cli_vector_is_forwarded_with_executable
+tests/test_r674_notebook_edge_cases.py::test_normal_cli_vector_is_forwarded_with_executable
+tests/test_r674_notebook_edge_cases.py::test_normal_cli_vector_is_forwarded_with_executable
+  /home/marceloclaro/opencode-ecosystem-core/.venv/lib/python3.14/site-packages/typer/core.py:305: DeprecationWarning: In Typer, only the parameter 'autocompletion' is supported. The support for 'shell_complete' is deprecated and will be removed in upcoming versions.
+    _typer_param_setup_autocompletion_compat(self, autocompletion=autocompletion)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+353 passed, 5 warnings in 25.08s

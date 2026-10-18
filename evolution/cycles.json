@@ -21586,6 +21586,42 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R915",
+      "objective": "Atualizar NotebookLM local para 0.15.6 e verificar a integração existente",
+      "changes": [
+        "Runtime PyPI 0.15.6; FastMCP 3.2.3 e MCP 1.28.1 preservados.",
+        "353 testes selecionados passaram; handshake real, login válido e 234 notebooks listados.",
+        "Skill migrada após conferir bytes anteriores; backup sem credenciais."
+      ],
+      "score": null,
+      "lessons": [
+        "Testes com PYTHONPATH do fork histórico não comprovam o pacote instalado; sondas reais foram separadas.",
+        "Novas ferramentas descobertas não recebem autorização implícita.",
+        "Gemini CLI e NotebookLM usam fluxos de autenticação independentes."
+      ],
+      "timestamp": 1792291599.1567574,
+      "artifact_hashes": {
+        "specs/SPEC-935-R915-atualizacao-notebooklm.md": "701126edc0b77c2a6ee9fc7731fc56ce1246f83db45c7bdac1d2b8b79a727d0a",
+        "docs/verification-notebooklm-update-r915.json": "dbff0b9c946fdd0fec521fec19f62b568fae2730296956ee0e1d571fc315f466",
+        "docs/evidence/r915/runtime.json": "fd57f0a08ba649f6248ece4e82560058f9c7553b4e6afa37502258adaad17da0",
+        "docs/evidence/r915/regression.txt": "ae17986301c6db078ff6be35b3dc057d2246b4512fd0aaeddf1c18b373173f63"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "specs/SPEC-935-R915-atualizacao-notebooklm.md",
+        "docs/verification-notebooklm-update-r915.json",
+        "docs/evidence/r915/runtime.json",
+        "docs/evidence/r915/regression.txt"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ]
 }

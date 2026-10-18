@@ -101,3 +101,25 @@ Os métodos OAuth foram identificados em texto estático do binário. A evidênc
 de login veio posteriormente da saída apresentada pelo operador, e não dessa
 análise estática. Ainda não foi observada uma inferência da conta nesta revisão.
 Veja também [integração Notebook no Core](GEMINI_NOTEBOOK_CORE.md).
+
+## Chat Gemini pelo terminal
+
+O Gemini CLI oficial também permite autenticar uma conta Google pelo navegador,
+sem cadastrar chave de API nesse modo. Na inspeção local, `gemini --version`
+reportou 0.61.0. Para abrir o cliente instalado:
+
+```powershell
+wsl.exe -d Ubuntu --cd /home/marceloclaro/opencode-ecosystem-core -- bash -lic "gemini"
+```
+
+Selecione **Sign in with Google**. Contas individuais normalmente não precisam
+de projeto Google Cloud, com exceções descritas na
+[documentação oficial](https://geminicli.com/docs/get-started/authentication/).
+Elegibilidade e limites dependem da conta. Esta inspeção confirmou a instalação;
+o operador apresentou posteriormente a confirmação de autorização Google.
+Uma resposta do Gemini CLI dessa conta ainda não foi observada nesta revisão.
+
+O login do Gemini CLI é independente do conector NotebookLM. Não importa
+conversas do site Gemini nem configura automaticamente um provedor no OpenCode.
+O adaptador `integrations/gemini_cli.py` permite execução externa pelo Core,
+mantendo a coordenação do MarceloClaro e a necessidade de verificar cada resposta.
