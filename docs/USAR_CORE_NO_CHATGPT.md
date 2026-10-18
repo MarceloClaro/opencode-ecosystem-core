@@ -97,3 +97,12 @@ como se fosse uma URL alcançável pelo serviço remoto.
 O manifesto local `docs/verification-chatgpt-plugin-r912.json` discrimina o que
 foi executado e o que depende da ativação na interface. A validação é local;
 nenhuma certificação externa de produção é alegada.
+
+## Leitura atual R916
+
+Nesta conversa, as ferramentas locais do Core e dos componentes estão expostas
+pelo host. Isso é distinto da instalação registrada em R912 e da conclusão de
+uma operação. Confira a versão do runtime e o resultado de cada chamada.
+Consulte [plugins locais](PLUGINS_LOCAIS_CORE.md), [estado atual](ESTADO_ATUAL_CORE_R916.md)
+e [autenticações independentes](AUTENTICACAO_CHATGPT_NOTEBOOKLM.md). O conteúdo
+da conversa não é importado automaticamente pelo OpenCode.

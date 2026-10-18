@@ -99,3 +99,14 @@ flowchart TB
   BB --> VIS
   VIS --> UI
   SITE -. "orienta operação; não executa análise" .-> LOCAL
+  MCP2["Plugins locais REA / MiroFish / Lean 4"] --> MC
+  MC --> LIFE["Lifecycle: validar perfil antes de atribuir"]
+  LIFE --> CAT
+  MC --> LOOP["MetacognitiveLoop: preparar e observar outcomes"]
+  LOOP --> BUS
+  MC --> NLM["NotebookLM: política por efeito e sessão privada"]
+  NLM --> GOOGLE["Serviço Google externo; não offline"]
+  MC --> CIL["CI local: perfil scientific enumerado"]
+  CIL --> CI
+  MC --> CODE["Contexto de código: busca e grafo Python estático"]
+  CODE --> RAG

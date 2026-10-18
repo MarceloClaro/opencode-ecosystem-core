@@ -33,8 +33,13 @@ flowchart TB
   SV --> ACCEPT{"Blackboard terminou completed?"}
   ACCEPT -->|"não"| REJECT["Conclusão recusada / success false"]
   ACCEPT -->|"sim"| RESULT["Resultado aceito no escopo declarado"]
-  CP --> T["Trust / economia / Reflexion / MetaBus"]
-  T --> MEM["Memória e outcomes persistidos"]
+  CP --> T["Trust.learn: resultado conforme gate"]
+  CP --> E["Economia: resolver stake e taxa"]
+  CP --> BB2["task.complete: Blackboard"]
+  BB2 --> REF["reflect_request: ReflexionEngine"]
+  REF --> META["MetacognitiveLoop.complete: episódio local"]
+  META --> MEM["MetaBus: observação e próxima ação"]
+  META -. "não calibrado; sem promoção por observação" .-> L["Trust e memória possuem contratos diferentes"]
   RESULT --> REPORT["Relatório: passos / executor / duração / limites"]
   REJECT --> REPORT
   BLOCK --> REPORT

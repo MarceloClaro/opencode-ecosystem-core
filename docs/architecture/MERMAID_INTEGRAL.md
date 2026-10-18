@@ -1,17 +1,14 @@
-# Arquitetura integral em Mermaid — R881
+# Arquitetura integral em Mermaid — R916
 
-A [fonte integral](dependencies.mmd) representa os mesmos **677 módulos Python**
-e **935 pares internos** do [SVG Graphviz](dependencies.svg). São **45 pacotes**,
-**18 camadas**, **1.051 declarações AST de importação** e **6.432 símbolos**.
-O [SVG renderizado pelo Mermaid](dependencies-mermaid.svg) oferece outra
-organização visual do mesmo grafo; as coordenadas e o estilo são diferentes.
+**707 módulos Python**, **995 pares internos**, **1118 declarações de importação**, **6751 símbolos**, **45 pacotes**, **18 camadas** e **21 fluxogramas**.
 
-A referência é o snapshot Git `6380cfa`, conservado no
-[inventário](architecture-inventory.json). Esta exportação não atualiza esse
-retrato para o HEAD atual. O inventário contém 9.672 arquivos rastreados e
-outras superfícies; o grafo de dependências tem escopo Python de produção.
-A inclusão de novas funcionalidades requer nova extração e nova conferência,
-sem reutilizar as contagens desta fotografia como se fossem atuais.
+Base Git `84ef0820a71f52756203854ea83d5a1211d8c254`; identidade das fontes locais `19e1b500a9d05bd7d2633a60b4c203f52ce8abc5697773afec55ee6386fce8f1`.
+
+A [fonte Mermaid](dependencies.mmd), o [SVG Graphviz](dependencies.svg) e o
+[SVG Mermaid](dependencies-mermaid.svg) representam os mesmos conjuntos de
+módulos e pares. Os layouts são diferentes. O [inventário](architecture-inventory.json)
+explicita produção rastreada local e metadados da base Git; o
+[guia R916](../ARQUITETURA_COMPLETA_CORE_R916.md) detalha exclusões e identidade.
 
 ## Como ler cada detalhe
 
@@ -31,111 +28,98 @@ sem reutilizar as contagens desta fotografia como se fossem atuais.
 Os símbolos estão integralmente preservados em comentários estruturados,
 sem criar milhares de nós extras que alterariam a granularidade do SVG
 original. O [manifesto de correspondência](mermaid-correspondence.json)
-conserva a origem Git, os IDs, os hashes dos módulos, todas as declarações por
+conserva a origem declarada, os IDs, os hashes dos módulos, todas as declarações por
 par e o hash da fonte Mermaid. Os testes comparam os conjuntos do JSON,
 do Mermaid e do SVG Graphviz, incluindo os módulos isolados.
 
+
+
+
 ## Escopo e limites
 
-O inventário distingue código de produção, testes, exemplos, documentação,
-história, domínio, fontes de terceiros e superfícies lexicais. Este grafo
-não transforma essas últimas categorias em dependências Python. Imports
-externos e dinâmicos constam no inventário em campos separados; a resolução
-estática não cobre todas as relações possíveis em execução. Pacotes presentes
-não comprovam instalação de dependências, autenticação, saldo, inferência,
-isolamento de rede, aceitação pelo gate ou validação externa.
+O grafo é Python de produção classificada. Testes, documentação, terceiros,
+história e superfícies lexicais continuam em categorias próprias. O AST não
+prova que imports sejam executáveis nem cobre toda reflexão/MCP em runtime.
+Os 21 [fluxos completos no README](../../README.md#fluxogramas-operacionais-completos)
+explicam caminhos e gates, sem promover desenho a evidência de execução.
 
-O desenho completo excede o limite padrão de **500 arestas** do renderer
-Mermaid consultado localmente; também excede o limite padrão de 50.000
-caracteres ao preservar os metadados. A configuração segura do GitHub não é
-controlada pelo documento. Portanto, disponibilizamos a fonte completa e o
-SVG renderizado localmente, sem prometer renderização integral no GitHub ou
-no Mermaid Live. Nenhum nó ou par foi removido para contornar esses limites.
-Os 13 fluxogramas menores estão integralmente no [README](../../README.md#fluxogramas-operacionais-completos).
+O grafo integral ultrapassa os limites padrão de 500 arestas e 50.000
+caracteres do renderer. A configuração do GitHub não é controlada pelo
+documento; não se promete renderização integral ali. Nenhum nó ou par foi
+removido para caber. Use o SVG e a [página offline](../architecture_map.html).
 
 ## Reprodução e edição
 
-Execute a partir da raiz do repositório:
-
 ```bash
-python3 scripts/build_mermaid_architecture.py \
+.venv/bin/python scripts/build_mermaid_architecture.py \
   --inventory docs/architecture/architecture-inventory.json \
   --output docs/architecture/dependencies.mmd \
   --correspondence docs/architecture/mermaid-correspondence.json
 
-python3 scripts/build_mermaid_architecture.py \
-  --inventory docs/architecture/architecture-inventory.json \
-  --output docs/architecture/dependencies.mmd \
-  --correspondence docs/architecture/mermaid-correspondence.json --check
-
-python3 scripts/sync_readme_flowcharts.py
-python3 scripts/sync_readme_flowcharts.py --check
-```
-
-Não edite os blocos gerados manualmente. Edite as fontes em `flows/*.mmd`
-e o catálogo `flows.json` para alterar os fluxos. Para o grafo estrutural,
-atualize o inventário por nova extração Git/AST e regenere os artefatos.
-Os checks comparam os bytes esperados e recusam divergências sem reescrever.
-O sincronizador preserva os bytes do README fora dos marcadores.
-
-A renderização requer Node.js e Chromium compatível. A primeira execução do
-comando abaixo pode baixar o renderer; a análise dos arquivos não usa LLM.
-Para uma reprodução sem rede, use as mesmas dependências previamente instaladas.
-
-```bash
 npx --yes --package @mermaid-js/mermaid-cli@12.0.0 mmdc \
   -c docs/architecture/mermaid-render-config.json \
   -i docs/architecture/dependencies.mmd \
   -o docs/architecture/dependencies-mermaid.svg \
   --size 1800 --no-font-embed
+
+.venv/bin/python scripts/sync_readme_flowcharts.py --refresh-sources
+.venv/bin/python scripts/render_architecture_page.py
+.venv/bin/python scripts/build_mermaid_architecture.py \
+  --inventory docs/architecture/architecture-inventory.json \
+  --output docs/architecture/dependencies.mmd \
+  --correspondence docs/architecture/mermaid-correspondence.json --check
+.venv/bin/python scripts/sync_readme_flowcharts.py --check
 ```
 
-A [configuração do host](mermaid-render-config.json) amplia os limites para
-5.000 arestas e 10 milhões de caracteres, com `securityLevel: strict` e
-rótulos SVG sem HTML. Esses parâmetros pertencem ao host confiável;
-diretivas na fonte do diagrama não substituem limites seguros. A máquina
-usada nesta revisão forneceu seu Chromium pelo argumento `-p` do CLI,
-sem registrar seu caminho particular no artefato público.
-O SVG é extenso: abra-o em uma aba própria e amplie a área de interesse.
-Para navegação com busca e zoom por módulo, use o [mapa offline](../architecture_map.html),
-que conserva a versão Graphviz equivalente e os 13 fluxogramas.
-A fonte e o manifesto são determinísticos para o mesmo inventário;
-o layout SVG depende das versões efetivas do renderer, engine e fontes.
+Para todos os fluxos, repita o comando `mmdc` para cada entrada de `flows.json`,
+com `-i` para sua fonte `.mmd` e `-o` para o `.svg` de mesmo nome. A primeira
+execução de `npx` pode baixar dependências. Para reprodução sem rede, invoque
+o renderer já instalado. Um Chromium próprio pode ser indicado por `-p`
+com configuração local fora dos artefatos públicos. A revisão usou browser
+headless em sequência, reutilizando o processo entre diagramas.
 
-## Camadas do retrato
+A configuração do host amplia o limite para 5.000 arestas e 10 milhões de
+caracteres, com `securityLevel: strict` e `htmlLabels: false`. Não afrouxar
+esses controles por diretivas do diagrama. Fonte e manifesto são determinísticos
+para o mesmo inventário; layout depende do renderer, engine, fontes e browser.
+
+Edite fontes `flows/*.mmd` e o catálogo para alterar fluxos; atualize o inventário
+para alterar o grafo. O sincronizador confere hash, linha e símbolo das fontes
+ancoradas, e preserva os bytes do README fora dos marcadores. O modo de extração
+e a ref-base devem ser os mesmos do [guia de reprodução](../ARQUITETURA_COMPLETA_CORE_R916.md#reprodução).
+
+## Camadas da coleta
 
 | Camada | Módulos | Símbolos AST |
 |---|---:|---:|
-| `agentes` | 9 | 60 |
+| `agentes` | 10 | 79 |
 | `diagnostico` | 31 | 477 |
 | `engenharia_reversa` | 10 | 69 |
 | `evolucao` | 10 | 77 |
-| `ferramentas` | 59 | 370 |
+| `ferramentas` | 66 | 439 |
 | `governanca` | 26 | 301 |
 | `infraestrutura` | 6 | 5 |
-| `integracoes` | 121 | 1360 |
+| `integracoes` | 130 | 1507 |
 | `interfaces` | 10 | 126 |
-| `memoria_e_evidencias` | 43 | 226 |
+| `memoria_e_evidencias` | 44 | 234 |
 | `modulos_adicionais` | 122 | 1092 |
-| `orquestracao` | 37 | 459 |
-| `pesquisa_e_rag` | 114 | 1141 |
+| `orquestracao` | 39 | 473 |
+| `pesquisa_e_rag` | 124 | 1196 |
 | `plugins` | 5 | 15 |
 | `protocolos` | 9 | 8 |
 | `publicacao` | 3 | 32 |
-| `raciocinio` | 16 | 146 |
-| `skills` | 46 | 468 |
+| `raciocinio` | 16 | 152 |
+| `skills` | 46 | 469 |
 
-## Pacotes do retrato
-
-A classificação segue o inventário, sem inferir capacidades pelo nome.
+## Pacotes da coleta
 
 | Pacote | Camadas | Módulos | Símbolos AST |
 |---|---|---:|---:|
 | `.opencode` | interfaces | 2 | 44 |
-| `academic` | pesquisa_e_rag | 31 | 214 |
+| `academic` | pesquisa_e_rag | 40 | 252 |
 | `agent_runners` | agentes | 3 | 44 |
 | `agentic_science_v2` | pesquisa_e_rag | 11 | 296 |
-| `agents` | agentes | 6 | 16 |
+| `agents` | agentes | 7 | 35 |
 | `economy` | governanca | 2 | 30 |
 | `evaluation` | modulos_adicionais | 2 | 7 |
 | `evolution` | evolucao | 10 | 77 |
@@ -144,11 +128,11 @@ A classificação segue o inventário, sem inferir capacidades pelo nome.
 | `hermes_bridge` | modulos_adicionais | 7 | 18 |
 | `hooks` | modulos_adicionais | 4 | 16 |
 | `infra_dados` | infraestrutura | 6 | 5 |
-| `integrations` | integracoes | 121 | 1360 |
+| `integrations` | integracoes | 130 | 1507 |
 | `landscape` | modulos_adicionais | 2 | 10 |
 | `legal` | modulos_adicionais | 13 | 158 |
-| `marceloclaro` | orquestracao | 28 | 369 |
-| `mci` | memoria_e_evidencias | 43 | 226 |
+| `marceloclaro` | orquestracao | 30 | 383 |
+| `mci` | memoria_e_evidencias | 44 | 234 |
 | `mirofish` | modulos_adicionais | 11 | 104 |
 | `model_lab` | modulos_adicionais | 4 | 12 |
 | `nano_orchestration` | orquestracao | 9 | 90 |
@@ -158,17 +142,17 @@ A classificação segue o inventário, sem inferir capacidades pelo nome.
 | `protocolos` | protocolos | 9 | 8 |
 | `publishing` | publicacao | 3 | 32 |
 | `rag` | pesquisa_e_rag | 7 | 134 |
-| `reasoning` | raciocinio | 16 | 146 |
-| `research` | pesquisa_e_rag | 46 | 374 |
+| `reasoning` | raciocinio | 16 | 152 |
+| `research` | pesquisa_e_rag | 47 | 391 |
 | `research_factory` | pesquisa_e_rag | 10 | 83 |
 | `reversa_feynman` | engenharia_reversa | 6 | 38 |
 | `reversa_universal` | engenharia_reversa | 4 | 31 |
 | `sandbox` | modulos_adicionais | 2 | 13 |
 | `scanners` | diagnostico | 31 | 477 |
 | `scientific_lab` | pesquisa_e_rag | 9 | 40 |
-| `scripts` | ferramentas | 59 | 370 |
+| `scripts` | ferramentas | 66 | 439 |
 | `sdd` | governanca | 5 | 102 |
-| `skills` | skills | 46 | 468 |
+| `skills` | skills | 46 | 469 |
 | `synthetic_university` | modulos_adicionais | 29 | 435 |
 | `tools` | modulos_adicionais | 1 | 1 |
 | `transformer` | modulos_adicionais | 8 | 107 |
@@ -177,8 +161,8 @@ A classificação segue o inventário, sem inferir capacidades pelo nome.
 | `webapp` | interfaces | 8 | 82 |
 | `workbench` | modulos_adicionais | 3 | 12 |
 
-## Verificações locais
+## Verificação e história
 
-A [evidência R881](verification-local-r881.json) registra os testes e a renderização
-desta exportação. Os recibos R879/R880 permanecem históricos. Nenhum desses
-resultados constitui validação externa ou execução integral do ecossistema.
+A [verificação R916](../verification-documentation-r916.json) registra testes,
+renders, links e inspeção visual. Os recibos R879/R881 permanecem históricos;
+não certificam os bytes atuais, a produção científica ou ausência de bugs.

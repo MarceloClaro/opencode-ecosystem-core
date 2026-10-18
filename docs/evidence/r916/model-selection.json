@@ -1,0 +1,214 @@
+{
+  "review": "R916",
+  "client_date": "2026-10-18",
+  "scope": "catalog_and_small_synthetic_probes",
+  "catalogs": {
+    "openai": [
+      "openai/gpt-4.1",
+      "openai/gpt-4o",
+      "openai/gpt-4o-mini",
+      "openai/gpt-5.3-codex-spark",
+      "openai/gpt-5.4",
+      "openai/gpt-5.4-fast",
+      "openai/gpt-5.4-mini",
+      "openai/gpt-5.4-mini-fast",
+      "openai/gpt-5.4-mini-flex",
+      "openai/gpt-5.5",
+      "openai/gpt-5.5-fast",
+      "openai/gpt-5.6-luna",
+      "openai/gpt-5.6-luna-fast",
+      "openai/gpt-5.6-sol",
+      "openai/gpt-5.6-sol-fast",
+      "openai/gpt-5.6-terra",
+      "openai/gpt-5.6-terra-fast",
+      "openai/gpt-6-astra",
+      "openai/gpt-6-astra-fast",
+      "openai/gpt-6-astra-ultrafast",
+      "openai/gpt-6-luna",
+      "openai/gpt-6-luna-fast",
+      "openai/gpt-6-sol",
+      "openai/gpt-6-sol-fast",
+      "openai/gpt-6.1-sol",
+      "openai/gpt-6.1-sol-fast",
+      "openai/gpt-6.1-sol-ultrafast",
+      "openai/o3",
+      "openai/o4-mini"
+    ],
+    "google": [
+      "google/deep-research-max-preview-04-2026",
+      "google/deep-research-preview-04-2026",
+      "google/gemini-2.5-computer-use-preview-10-2025",
+      "google/gemini-2.5-flash",
+      "google/gemini-2.5-flash-image",
+      "google/gemini-2.5-flash-lite",
+      "google/gemini-2.5-flash-preview-tts",
+      "google/gemini-2.5-pro",
+      "google/gemini-2.5-pro-preview-tts",
+      "google/gemini-3-flash-preview",
+      "google/gemini-3-pro-image",
+      "google/gemini-3-pro-image-preview",
+      "google/gemini-3.1-flash-image",
+      "google/gemini-3.1-flash-image-preview",
+      "google/gemini-3.1-flash-lite",
+      "google/gemini-3.1-flash-lite-image",
+      "google/gemini-3.1-flash-live-preview",
+      "google/gemini-3.1-flash-tts-preview",
+      "google/gemini-3.1-pro-preview",
+      "google/gemini-3.1-pro-preview-customtools",
+      "google/gemini-3.5-flash",
+      "google/gemini-3.5-flash-lite",
+      "google/gemini-3.5-live-translate-preview",
+      "google/gemini-3.6-flash",
+      "google/gemini-3.7-flash",
+      "google/gemini-3.8-flash",
+      "google/gemini-4-argon",
+      "google/gemini-embedding-001",
+      "google/gemini-embedding-2",
+      "google/gemini-flash-latest",
+      "google/gemini-flash-lite-latest",
+      "google/gemini-omni-flash-preview",
+      "google/gemma-4-26b-a4b-it",
+      "google/gemma-4-31b-it",
+      "google/lyria-3-clip-preview",
+      "google/lyria-3-pro-preview",
+      "google/veo-3.1-fast-generate-preview",
+      "google/veo-3.1-generate-preview",
+      "google/veo-3.1-lite-generate-preview"
+    ]
+  },
+  "catalog_is_not_entitlement": true,
+  "probes": [
+    {
+      "provider": "openai",
+      "requested_model": "gpt-6-luna",
+      "returncode": 0,
+      "duration_seconds": 8.541,
+      "stdout_sha256": "b6506ebd395f8ab8a71f940c1d935f627b0411dd703298502063b54e2892df85",
+      "synthetic_input_only": true,
+      "repository_context_sent": false,
+      "sample_count": 1,
+      "prompt_sha256": "c234be5cb9240de9022df62e4711a73ddc8161125e96a4fe90cbe327da9ca4cf",
+      "requested_variant": "low",
+      "accepted": false,
+      "reason": "Initial answer returned five cases for four inputs",
+      "tokens": [
+        {
+          "total": 1293,
+          "input": 1272,
+          "output": 21,
+          "reasoning": 0,
+          "cache": {
+            "write": 0,
+            "read": 0
+          }
+        }
+      ]
+    },
+    {
+      "requested_model": "gpt-6-luna",
+      "requested_variant": "medium",
+      "returncode": 0,
+      "duration_seconds": 10.347,
+      "checks": {
+        "gate": true,
+        "topological_order": true,
+        "evidence_scope": true
+      },
+      "accepted": true,
+      "tokens": [
+        {
+          "total": 1335,
+          "input": 1305,
+          "output": 30,
+          "reasoning": 0,
+          "cache": {
+            "write": 0,
+            "read": 0
+          }
+        }
+      ],
+      "tool_calls": 0,
+      "sample_count": 1,
+      "prompt_sha256": "404df083b22c2d7bc8445dcb25e76253bac4cc5cc98b58bf2c573ec137b35080",
+      "response_sha256": "58d0b17152edcfd90982897c8c1b196b86a2d36290bdaf532c60d72dad514911",
+      "scope": "one_synthetic_three_item_probe_not_quality_benchmark",
+      "variant_confirmed_by_server": false,
+      "token_metric_source": "OpenCode JSON events",
+      "response_model_identity_verified": false
+    },
+    {
+      "requested_model": "gpt-6.1-sol",
+      "requested_variant": "low",
+      "returncode": 0,
+      "duration_seconds": 10.781,
+      "checks": {
+        "gate": true,
+        "topological_order": true,
+        "evidence_scope": true
+      },
+      "accepted": true,
+      "tokens": [
+        {
+          "total": 1337,
+          "input": 1307,
+          "output": 30,
+          "reasoning": 0,
+          "cache": {
+            "write": 0,
+            "read": 0
+          }
+        }
+      ],
+      "tool_calls": 0,
+      "sample_count": 1,
+      "prompt_sha256": "404df083b22c2d7bc8445dcb25e76253bac4cc5cc98b58bf2c573ec137b35080",
+      "response_sha256": "58d0b17152edcfd90982897c8c1b196b86a2d36290bdaf532c60d72dad514911",
+      "scope": "one_synthetic_three_item_probe_not_quality_benchmark",
+      "variant_confirmed_by_server": false,
+      "token_metric_source": "OpenCode JSON events",
+      "response_model_identity_verified": false
+    },
+    {
+      "provider": "google",
+      "requested_model": "gemini-3.5-flash-lite",
+      "returncode": 55,
+      "duration_seconds": 6.676,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "synthetic_input_only": true,
+      "repository_context_sent": false,
+      "sample_count": 1,
+      "prompt_sha256": "c234be5cb9240de9022df62e4711a73ddc8161125e96a4fe90cbe327da9ca4cf",
+      "inference_executed": false,
+      "accepted": false,
+      "observed_reasons": [
+        "UNSUPPORTED_CLIENT for Gemini Code Assist for individuals",
+        "Untrusted temporary directory"
+      ],
+      "browser_authorization_does_not_prove_model_access": true
+    }
+  ],
+  "recommendation": {
+    "low_cost_candidate": "openai/gpt-6-luna",
+    "escalation_candidate": "openai/gpt-6.1-sol",
+    "google_candidate_pending_eligible_client": "gemini-3.5-flash-lite",
+    "default_changed": false,
+    "current_default": "ollama-local/llama3.2",
+    "measured_savings_percent": null,
+    "quality_superiority_established": false,
+    "rationale": "Lower published rates plus one accepted three-item synthetic probe; retain gates and escalation."
+  },
+  "sources": [
+    "https://developers.openai.com/api/docs/models/gpt-6-luna",
+    "https://learn.chatgpt.com/docs/pricing",
+    "https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.6",
+    "https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8",
+    "https://geminicli.com/docs/resources/quota-and-pricing/"
+  ],
+  "limits": [
+    "One tiny sample per requested configuration; no representative production benchmark.",
+    "Durations include CLI startup; token counts are client reports.",
+    "No conversion of API prices to subscription allowance; no API billing amount inferred.",
+    "No credentials copied or read by the agent; clients used existing private login.",
+    "Synthetic prompts only, without repository context; tool calls were not required."
+  ]
+}

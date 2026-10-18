@@ -12,7 +12,7 @@ Coordenação pelo primário **marceloclaro**, via Blackboard e MetaBus, com
 especificações, gates de entrega e rastreabilidade local.
 
 [Primeiros passos](#início-rápido-local) ·
-[Arquitetura completa R879](#arquitetura-completa-e-fluxogramas-atuais) ·
+[Arquitetura completa R916](#arquitetura-completa-e-fluxogramas-atuais) ·
 [Assistente REA](#engenharia-reversa-local-rea) ·
 [Prontidão e evidências](docs/PRONTIDAO_LOCAL_CORE_R868.md)
 
@@ -23,7 +23,7 @@ especificações, gates de entrega e rastreabilidade local.
 [![OpenCode](https://img.shields.io/badge/OpenCode%20CLI-native-0ea5e9?style=for-the-badge&logo=opencode&logoColor=white)](opencode.json)
 
 <!-- core-state:start -->
-**346 agentes** · **16 MCPs** · **34 comandos** · **22 checks**
+**312 agentes** · **16 MCPs** · **33 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 
@@ -34,12 +34,6 @@ A revisão publicada nesta etapa está na branch
 [`codex/core-prontidao-rea`](https://github.com/MarceloClaro/opencode-ecosystem-core/tree/codex/core-prontidao-rea).
 As contagens acima descrevem configuração; o estado de cada executor depende
 do ambiente e da operação solicitada.
-
-**Integrações locais R913–R914:** [REA, MiroFish Offline e Lean 4 no ChatGPT/Work](docs/USAR_REA_MIROFISH_LEAN4_NO_CHATGPT.md)
-e [rigor acadêmico adversarial, evidências e banca interativa](docs/academic-rigor/README.md).
-Para usar as conexões no terminal, consulte [ChatGPT e NotebookLM no Core](docs/AUTENTICACAO_CHATGPT_NOTEBOOKLM.md).
-Os especialistas passam pelo MarceloClaro. Regras locais e notas de treinamento
-não constituem validação científica externa.
 
 ---
 
@@ -62,12 +56,32 @@ não constituem validação científica externa.
   - [Diagrama Operacional Atual](#diagrama-operacional-atual)
   - [Fluxos multiárea do checkout atual](#fluxos-multiárea-do-checkout-atual)
 - [MIRA e apresentações](#apresentações-mira)
-- [Todos os 13 fluxogramas com legenda](#fluxogramas-operacionais-completos)
+- [Todos os fluxogramas com legenda](#fluxogramas-operacionais-completos)
 - [Limites de segurança e operação](#limites-de-segurança-e-operação)
 - [Validação, contribuição e release](#validação-contribuição-e-release)
 - [Documentação e licença](#documentação-e-licença)
 
 ---
+
+## Estado atual e orientação de leitura
+
+Revisão documental **R916, 18/10/2026**, baseada no checkout local. Comece pelo
+[manual](MANUAL.md), pelo [índice documental](docs/README.md) e pelo
+[estado e pendências](docs/ESTADO_ATUAL_CORE_R916.md). Os 312 agentes, 16 MCPs e
+33 comandos acima são configuração; não representam 312 inferências executadas.
+
+O NotebookLM foi atualizado para **0.15.6**: a sonda R915 observou autenticação
+válida, 234 notebooks e catálogo de 53 ferramentas/165 callbacks. Sua fachada
+mantém política por efeito, com quatro ferramentas novas ainda bloqueadas.
+Use o [guia NotebookLM](docs/GEMINI_NOTEBOOK_CORE.md).
+
+As conexões [ChatGPT, Gemini e NotebookLM](docs/AUTENTICACAO_CHATGPT_NOTEBOOKLM.md)
+usam logins independentes. Os [plugins locais](docs/PLUGINS_LOCAIS_CORE.md)
+reutilizam MarceloClaro para REA, MiroFish e Lean 4. Há limites atuais diferentes
+dos recibos históricos; a fachada acadêmica voltou a existir, mas o conjunto
+R914 permanece parcial, com perfis e outras superfícies removidos neste checkout.
+O [guia de modelos e tokens](docs/MODELOS_E_CUSTO_DE_TOKENS.md)
+compara candidatos e mede chamadas sintéticas, sem prometer economia em produção.
 
 ## Visão geral
 
@@ -82,7 +96,7 @@ As implementações recentes incluem o primário compartilhado entre as
 superfícies MCP, o transporte de prompts pela entrada padrão dos CLIs,
 workflows com checkpoints, custódia local RED/GREEN, visualização de memória,
 raciocínio por gramáticas restritas e o assistente REA com recibos por hash.
-O [guia de arquitetura R879](docs/ARQUITETURA_COMPLETA_CORE_R879.md) documenta
+O [guia de arquitetura atual](docs/ARQUITETURA_COMPLETA_CORE_R916.md) documenta
 as relações, os caminhos de falha e as fronteiras externas.
 
 Instalação, configuração, autenticação, inferência e análise aceita são estados
@@ -399,62 +413,51 @@ mérito científico ou escalabilidade multi-host.
 
 ## Arquitetura completa e fluxogramas atuais
 
-### Snapshot estrutural atualizado R894–R897
+### Atlas atual R916 — origem e legenda
 
-O inventário reproduzível mais recente foi gerado do snapshot Git
-[`f930e19`](docs/architecture-r900/README.md), que inclui R894–R897 e sucede
-R900. Ele contém 10.033 arquivos versionados, 691 módulos Python de produção,
-1.083 importações declaradas, 965 pares de dependências, 6.670 símbolos,
-45 pacotes e 18 camadas; o parser AST não registrou erros nesse snapshot.
-Templates, vendor e snapshots históricos aparecem no inventário com classes
-próprias. Esses números descrevem estrutura estática, não cobertura funcional,
-execução, segurança ou prontidão científica.
+O [atlas navegável](docs/architecture_map.html) e o
+[guia minucioso R916](docs/ARQUITETURA_COMPLETA_CORE_R916.md) usam a mesma coleta
+de fontes: produção rastreada e `opencode.json` lidos do diretório de trabalho,
+com base Git `84ef082`. Arquivos removidos são omitidos; arquivos privados,
+ignorados e não rastreados não são lidos. A identidade das fontes está em
+`worktree_sha256`, com manifesto, exclusões e alterações no JSON.
 
-| Artefato atualizado | Conteúdo |
+O índice das demais categorias conserva metadados do commit-base e identifica
+`content_source=git_base`; não é leitura atual de documentos ou dados de domínio.
+Essa separação evita incorporar recursivamente o atlas gerado à sua própria
+identidade. Fontes locais modificadas não recebem permalink do commit-base.
+
+[![Visão operacional do Core](docs/architecture/curated-overview.svg)](docs/ARQUITETURA_COMPLETA_CORE_R916.md)
+
+| Artefato atual | Uso |
 |---|---|
-| [Guia e legenda do mapa](docs/architecture-r900/README.md) | Snapshot, escopo, limites e comandos de reprodução |
-| [Visão por subsistema em SVG](docs/architecture-r900/overview.svg) | Interfaces, camadas e domínios do Core |
-| [Dependências completas em SVG](docs/architecture-r900/dependencies.svg) | Imports Python declarados entre módulos |
-| [Grafo em DOT](docs/architecture-r900/dependencies.dot) | Fonte editável do grafo de dependências |
-| [Mapa Mermaid integral](docs/architecture-r900/architecture-complete.mmd) | Módulos, símbolos, camadas, pacotes e relações extraídas |
-| [Inventário JSON](docs/architecture-r900/architecture-inventory.json) | Arquivos, hashes, declarações e classificações |
-| [Correspondência Mermaid](docs/architecture-r900/mermaid-correspondence.json) | Rastreio das relações serializadas para o Mermaid |
+| [Página offline](docs/architecture_map.html) | Busca por módulo/símbolo, filtros, zoom e todos os fluxos |
+| [Guia minucioso](docs/ARQUITETURA_COMPLETA_CORE_R916.md) | Camadas, decisões, limites e reprodução |
+| [Inventário JSON](docs/architecture/architecture-inventory.json) | Fontes, hashes, símbolos, imports e origem |
+| [Dependências SVG](docs/architecture/dependencies.svg) | Todos os módulos e pares internos do inventário |
+| [Fonte DOT](docs/architecture/dependencies.dot) | Grafo vetorial editável por Graphviz |
+| [Mermaid integral](docs/architecture/dependencies.mmd) | Mesmos módulos e pares, com metadados e legenda |
+| [SVG Mermaid](docs/architecture/dependencies-mermaid.svg) | Renderização local do Mermaid completo |
+| [Correspondência](docs/architecture/mermaid-correspondence.json) | IDs, hashes e declarações por par |
+| [Catálogo de fluxos](docs/architecture/flows.json) | Fontes curadas, âncoras e limitações de cada percurso |
+| [Verificação R916](docs/verification-documentation-r916.json) | Testes, renders, links e limites observados nesta revisão |
 
-Os fluxogramas operacionais anteriores continuam integralmente reproduzidos
-abaixo, com legenda e limites; os novos percursos de agentes, plugins, grafo
-Python e CI local estão no [guia R894–R897](docs/ORQUESTRACAO_AGENTES_PLUGINS_CI_R894_R897.md).
+Seta no grafo estrutural significa **importador → dependência Python declarada**.
+Seta em fluxograma segue seu rótulo de controle, dados ou composição; nenhuma
+delas comprova que o percurso foi executado. Módulos isolados não são omitidos.
+Os fluxos novos documentam plugins, NotebookLM, autenticações, metacognição,
+lifecycle, CI local, contexto de código e seleção econômica de modelos.
 
-[![Visão operacional do Core](docs/architecture/curated-overview.svg)](docs/ARQUITETURA_COMPLETA_CORE_R879.md)
-
-A edição **R879** descreve o snapshot de implementação `6380cfa`:
-**677 módulos Python próprios**, **935 pares de dependência**, **1.051
-importações internas declaradas**, **6.432 símbolos**, **9.672 arquivos
-classificados** e **13 fluxogramas com 78 âncoras de código**.
-
-| Artefato | Uso |
-|---|---|
-| [Mapa navegável](docs/architecture_map.html) | Busca por módulo/símbolo, zoom, fontes e visão por fluxo; abre localmente sem CDN |
-| [Guia minucioso](docs/ARQUITETURA_COMPLETA_CORE_R879.md) | Contratos, decisões, fronteiras e instruções de reprodução |
-| [Grafo completo SVG](docs/architecture/dependencies.svg) | Todos os módulos incluídos e seus pares internos; imagem vetorial para ampliar |
-| [Fonte DOT](docs/architecture/dependencies.dot) | Grafo editável por ferramentas Graphviz |
-| [Inventário JSON](docs/architecture/architecture-inventory.json) | Arquivos classificados, hashes, símbolos e imports |
-| [Catálogo dos fluxos](docs/architecture/flows.json) | Orquestração, workflows, SDD/TDD, REA, memória, RAG, raciocínio, diagnóstico, ciência e entrega |
-| [Recibo R879](docs/architecture/verification-local-r879.json) | Renderização, testes e navegação observados naquela edição |
-| [Revisão documental R880](docs/evidencias-readme-r880.json) | README atualizado e correção de nomenclatura MIRA na página do mapa |
-
-As arestas AST são dependências declaradas, não rastreamento de execução.
-Testes, templates, vendor, documentos e evidências históricas possuem categorias
-próprias. A extração usa blobs Git e não executa o código inventariado.
-
-Para abrir a página por HTTP local, opcionalmente:
+Para servir a página em loopback:
 
 ```bash
 .venv/bin/python -m http.server 8771 --bind 127.0.0.1 --directory docs
 ```
 
-Acesse `http://127.0.0.1:8771/architecture_map.html`. A página também funciona
-como arquivo local. Os [mapas R433–R438](docs/MAPA_ARQUITETURA_R433_R438.md)
-permanecem como registro histórico.
+Abra `http://127.0.0.1:8771/architecture_map.html`. A página também funciona
+como arquivo local, sem CDN. O guia explica a geração e os comandos `--check`.
+R879, R900, R911 e o [mapa R433–R438](docs/MAPA_ARQUITETURA_R433_R438.md)
+permanecem como retratos históricos, com fontes e contagens próprias.
 
 ### Mapa da Arquitetura Completa (v3.9.0)
 
@@ -500,7 +503,7 @@ flowchart TB
     Orq2 --> MetaBus2[MetaBus]
     Orq2 --> Blackboard2[Blackboard]
     Orq2 --> MCP2[16 MCPs configurados]
-    Orq2 --> Agents2[346 agentes configurados]
+    Orq2 --> Agents2[312 agentes configurados]
     Orq2 --> Mira2[mira-presenter]
     Mira2 --> Deck2[MiraDeckPipeline]
     Deck2 --> Engine2[MiraEngine]
@@ -651,8 +654,9 @@ flowchart LR
 Os fluxogramas abaixo são cópias integrais das mesmas fontes usadas no
 [mapa navegável](docs/architecture_map.html). A ordem, as descrições, as fontes
 e as limitações seguem o [catálogo de fluxos](docs/architecture/flows.json).
-A edição estrutural de referência é o snapshot `6380cfa`; estes desenhos
-não representam uma nova execução de todos os componentes.
+A edição e a origem das fontes estão declaradas no catálogo e no inventário.
+Fontes do checkout atual; base Git `84ef0820a71f52756203854ea83d5a1211d8c254`; identidade worktree `19e1b500a9d05bd7d2633a60b4c203f52ce8abc5697773afec55ee6386fce8f1`. 18 arquivos rastreados modificados e 52 removidos foram contabilizados; fontes não rastreadas não entram.
+Estes desenhos não representam uma nova execução de todos os componentes.
 
 ### Legenda e critérios de leitura
 
@@ -783,15 +787,26 @@ flowchart TB
   BB --> VIS
   VIS --> UI
   SITE -. "orienta operação; não executa análise" .-> LOCAL
+  MCP2["Plugins locais REA / MiroFish / Lean 4"] --> MC
+  MC --> LIFE["Lifecycle: validar perfil antes de atribuir"]
+  LIFE --> CAT
+  MC --> LOOP["MetacognitiveLoop: preparar e observar outcomes"]
+  LOOP --> BUS
+  MC --> NLM["NotebookLM: política por efeito e sessão privada"]
+  NLM --> GOOGLE["Serviço Google externo; não offline"]
+  MC --> CIL["CI local: perfil scientific enumerado"]
+  CIL --> CI
+  MC --> CODE["Contexto de código: busca e grafo Python estático"]
+  CODE --> RAG
 ```
 
 [Fonte Mermaid](docs/architecture/flows/01-panorama.mmd) · [Abrir SVG](docs/architecture/flows/01-panorama.svg)
 
 **Fontes de código:**
 
-- [marceloclaro/orchestrator.py:77](marceloclaro/orchestrator.py#L77) — `MarceloClaroOrchestrator`.
-- [integrations/ecosystem_mcp.py:264](integrations/ecosystem_mcp.py#L264) — `get_coordinator`.
-- [integrations/opencode_cli.py:378](integrations/opencode_cli.py#L378) — `build_config`.
+- `marceloclaro/orchestrator.py:78` (fonte local modificada; não é permalink da base) — `MarceloClaroOrchestrator`.
+- `integrations/ecosystem_mcp.py:320` (fonte local modificada; não é permalink da base) — `get_coordinator`.
+- `integrations/opencode_cli.py:399` (fonte local modificada; não é permalink da base) — `build_config`.
 
 **Limitações:**
 
@@ -837,8 +852,13 @@ flowchart TB
   SV --> ACCEPT{"Blackboard terminou completed?"}
   ACCEPT -->|"não"| REJECT["Conclusão recusada / success false"]
   ACCEPT -->|"sim"| RESULT["Resultado aceito no escopo declarado"]
-  CP --> T["Trust / economia / Reflexion / MetaBus"]
-  T --> MEM["Memória e outcomes persistidos"]
+  CP --> T["Trust.learn: resultado conforme gate"]
+  CP --> E["Economia: resolver stake e taxa"]
+  CP --> BB2["task.complete: Blackboard"]
+  BB2 --> REF["reflect_request: ReflexionEngine"]
+  REF --> META["MetacognitiveLoop.complete: episódio local"]
+  META --> MEM["MetaBus: observação e próxima ação"]
+  META -. "não calibrado; sem promoção por observação" .-> L["Trust e memória possuem contratos diferentes"]
   RESULT --> REPORT["Relatório: passos / executor / duração / limites"]
   REJECT --> REPORT
   BLOCK --> REPORT
@@ -848,12 +868,12 @@ flowchart TB
 
 **Fontes de código:**
 
-- [integrations/ecosystem_mcp.py:33](integrations/ecosystem_mcp.py#L33) — `get_library_orchestrator`.
-- [integrations/ecosystem_mcp.py:264](integrations/ecosystem_mcp.py#L264) — `get_coordinator`.
-- [marceloclaro/orchestrator.py:233](marceloclaro/orchestrator.py#L233) — `create_text_task_spec`.
-- [marceloclaro/autonomous.py:33](marceloclaro/autonomous.py#L33) — `AutonomousCoordinator`.
-- [integrations/harness_runtime.py:266](integrations/harness_runtime.py#L266) — `_run_cli`.
-- [marceloclaro/orchestrator.py:758](marceloclaro/orchestrator.py#L758) — `report_completion`.
+- `integrations/ecosystem_mcp.py:33` (fonte local modificada; não é permalink da base) — `get_library_orchestrator`.
+- `integrations/ecosystem_mcp.py:320` (fonte local modificada; não é permalink da base) — `get_coordinator`.
+- `marceloclaro/orchestrator.py:344` (fonte local modificada; não é permalink da base) — `MarceloClaroOrchestrator.create_text_task_spec`.
+- [marceloclaro/autonomous.py:33](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/marceloclaro/autonomous.py#L33) — `AutonomousCoordinator`.
+- [integrations/harness_runtime.py:266](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/integrations/harness_runtime.py#L266) — `HarnessRuntime._run_cli`.
+- `marceloclaro/orchestrator.py:870` (fonte local modificada; não é permalink da base) — `MarceloClaroOrchestrator.report_completion`.
 
 **Limitações:**
 
@@ -911,10 +931,10 @@ flowchart TB
 
 **Fontes de código:**
 
-- [marceloclaro/workflow.py:42](marceloclaro/workflow.py#L42) — `WorkflowCoordinator`.
-- [marceloclaro/workflow.py:84](marceloclaro/workflow.py#L84) — `_definition`.
-- [marceloclaro/workflow.py:237](marceloclaro/workflow.py#L237) — `_resume`.
-- [marceloclaro/workflow_store.py:17](marceloclaro/workflow_store.py#L17) — `WorkflowStore`.
+- [marceloclaro/workflow.py:42](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/marceloclaro/workflow.py#L42) — `WorkflowCoordinator`.
+- [marceloclaro/workflow.py:84](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/marceloclaro/workflow.py#L84) — `WorkflowCoordinator._definition`.
+- [marceloclaro/workflow.py:237](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/marceloclaro/workflow.py#L237) — `WorkflowCoordinator._resume`.
+- [marceloclaro/workflow_store.py:17](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/marceloclaro/workflow_store.py#L17) — `WorkflowStore`.
 
 **Limitações:**
 
@@ -961,12 +981,12 @@ flowchart TB
 
 **Fontes de código:**
 
-- [sdd/spec_engine.py:70](sdd/spec_engine.py#L70) — `Specification`.
-- [sdd/spec_engine.py:1308](sdd/spec_engine.py#L1308) — `SpecVerifier`.
-- [sdd/tdd_history.py:114](sdd/tdd_history.py#L114) — `TDDHistory`.
-- [sdd/tdd_history.py:490](sdd/tdd_history.py#L490) — `validate_pair`.
-- [sdd/tdd_runner.py:46](sdd/tdd_runner.py#L46) — `TDDRunner`.
-- [marceloclaro/orchestrator.py:248](marceloclaro/orchestrator.py#L248) — `sdd_preflight`.
+- [sdd/spec_engine.py:70](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/sdd/spec_engine.py#L70) — `Specification`.
+- [sdd/spec_engine.py:1308](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/sdd/spec_engine.py#L1308) — `SpecVerifier`.
+- [sdd/tdd_history.py:114](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/sdd/tdd_history.py#L114) — `TDDHistory`.
+- [sdd/tdd_history.py:490](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/sdd/tdd_history.py#L490) — `TDDHistory.validate_pair`.
+- [sdd/tdd_runner.py:46](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/sdd/tdd_runner.py#L46) — `TDDRunner`.
+- `marceloclaro/orchestrator.py:359` (fonte local modificada; não é permalink da base) — `MarceloClaroOrchestrator.sdd_preflight`.
 
 **Limitações:**
 
@@ -1024,17 +1044,17 @@ flowchart TB
 
 **Fontes de código:**
 
-- [integrations/rea_layers.py:445](integrations/rea_layers.py#L445) — `layers_status`.
-- [integrations/rea_layers.py:422](integrations/rea_layers.py#L422) — `probe_layer`.
-- [integrations/rea_layers.py:465](integrations/rea_layers.py#L465) — `engine_environment`.
-- [integrations/rea_bridge.py:40](integrations/rea_bridge.py#L40) — `ReaBridge`.
-- [marceloclaro/orchestrator.py:2065](marceloclaro/orchestrator.py#L2065) — `rea_action`.
-- [marceloclaro/rea_cli.py:7](marceloclaro/rea_cli.py#L7) — `run_rea_cli`.
-- [integrations/rea_bridge.py:174](integrations/rea_bridge.py#L174) — `_validate`.
-- [integrations/rea_bridge.py:108](integrations/rea_bridge.py#L108) — `status`.
-- [integrations/rea_bridge.py:50](integrations/rea_bridge.py#L50) — `_child_environment`.
-- [integrations/rea_bridge.py:479](integrations/rea_bridge.py#L479) — `action`.
-- [integrations/rea_layers.py:305](integrations/rea_layers.py#L305) — `layer_inspection`.
+- [integrations/rea_layers.py:445](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/integrations/rea_layers.py#L445) — `layers_status`.
+- [integrations/rea_layers.py:422](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/integrations/rea_layers.py#L422) — `probe_layer`.
+- [integrations/rea_layers.py:465](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/integrations/rea_layers.py#L465) — `engine_environment`.
+- [integrations/rea_bridge.py:40](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/integrations/rea_bridge.py#L40) — `ReaBridge`.
+- `marceloclaro/orchestrator.py:2311` (fonte local modificada; não é permalink da base) — `MarceloClaroOrchestrator.rea_action`.
+- [marceloclaro/rea_cli.py:7](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/marceloclaro/rea_cli.py#L7) — `run_rea_cli`.
+- [integrations/rea_bridge.py:174](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/integrations/rea_bridge.py#L174) — `ReaBridge._validate`.
+- [integrations/rea_bridge.py:108](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/integrations/rea_bridge.py#L108) — `ReaBridge.status`.
+- [integrations/rea_bridge.py:50](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/integrations/rea_bridge.py#L50) — `ReaBridge._child_environment`.
+- [integrations/rea_bridge.py:479](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/integrations/rea_bridge.py#L479) — `ReaBridge.action`.
+- [integrations/rea_layers.py:305](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/integrations/rea_layers.py#L305) — `layer_inspection`.
 
 **Limitações:**
 
@@ -1087,11 +1107,11 @@ flowchart TB
 
 **Fontes de código:**
 
-- [integrations/rea_assistant.py:625](integrations/rea_assistant.py#L625) — `LocalReaAssistant`.
-- [integrations/rea_assistant.py:42](integrations/rea_assistant.py#L42) — `run_isolated_worker`.
-- [integrations/rea_assistant.py:603](integrations/rea_assistant.py#L603) — `_snapshot_loopback`.
-- [integrations/rea_local_worker.py:40](integrations/rea_local_worker.py#L40) — `main`.
-- [integrations/rea_assistant.py:164](integrations/rea_assistant.py#L164) — `explain_report`.
+- [integrations/rea_assistant.py:625](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/integrations/rea_assistant.py#L625) — `LocalReaAssistant`.
+- [integrations/rea_assistant.py:42](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/integrations/rea_assistant.py#L42) — `run_isolated_worker`.
+- [integrations/rea_assistant.py:603](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/integrations/rea_assistant.py#L603) — `_snapshot_loopback`.
+- [integrations/rea_local_worker.py:40](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/integrations/rea_local_worker.py#L40) — `main`.
+- [integrations/rea_assistant.py:164](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/integrations/rea_assistant.py#L164) — `explain_report`.
 
 **Limitações:**
 
@@ -1139,11 +1159,11 @@ flowchart TB
 
 **Fontes de código:**
 
-- [integrations/rea_assistant.py:280](integrations/rea_assistant.py#L280) — `setup_local_agent`.
-- [integrations/rea_assistant.py:447](integrations/rea_assistant.py#L447) — `launch_local_agent`.
-- [integrations/rea_assistant.py:353](integrations/rea_assistant.py#L353) — `_run_agent_client`.
-- [integrations/rea_assistant.py:544](integrations/rea_assistant.py#L544) — `validate_agent_trace`.
-- [integrations/rea_assistant_mcp.py:17](integrations/rea_assistant_mcp.py#L17) — `create_mcp_server`.
+- [integrations/rea_assistant.py:280](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/integrations/rea_assistant.py#L280) — `setup_local_agent`.
+- [integrations/rea_assistant.py:447](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/integrations/rea_assistant.py#L447) — `launch_local_agent`.
+- [integrations/rea_assistant.py:353](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/integrations/rea_assistant.py#L353) — `_run_agent_client`.
+- [integrations/rea_assistant.py:544](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/integrations/rea_assistant.py#L544) — `validate_agent_trace`.
+- [integrations/rea_assistant_mcp.py:17](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/integrations/rea_assistant_mcp.py#L17) — `create_mcp_server`.
 
 **Limitações:**
 
@@ -1189,12 +1209,12 @@ flowchart TB
 
 **Fontes de código:**
 
-- [rag/enhanced_search_rag.py:761](rag/enhanced_search_rag.py#L761) — `UnifiedSearchRAG`.
-- [rag/enhanced_search_rag.py:312](rag/enhanced_search_rag.py#L312) — `EnhancedRAG`.
-- [rag/enhanced_search_rag.py:602](rag/enhanced_search_rag.py#L602) — `ReferenceAuditor`.
-- [mci/evidence_graph.py:22](mci/evidence_graph.py#L22) — `EvidenceGraph`.
-- [agentic_science_v2/evidence_graph.py:128](agentic_science_v2/evidence_graph.py#L128) — `EvidenceGraph`.
-- [agentic_science_v2/deep_research.py:468](agentic_science_v2/deep_research.py#L468) — `OrchestratorAgent`.
+- [rag/enhanced_search_rag.py:761](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/rag/enhanced_search_rag.py#L761) — `UnifiedSearchRAG`.
+- [rag/enhanced_search_rag.py:312](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/rag/enhanced_search_rag.py#L312) — `EnhancedRAG`.
+- [rag/enhanced_search_rag.py:602](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/rag/enhanced_search_rag.py#L602) — `ReferenceAuditor`.
+- [mci/evidence_graph.py:22](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/mci/evidence_graph.py#L22) — `EvidenceGraph`.
+- [agentic_science_v2/evidence_graph.py:128](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/agentic_science_v2/evidence_graph.py#L128) — `EvidenceGraph`.
+- [agentic_science_v2/deep_research.py:468](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/agentic_science_v2/deep_research.py#L468) — `OrchestratorAgent`.
 
 **Limitações:**
 
@@ -1234,11 +1254,11 @@ flowchart TB
 
 **Fontes de código:**
 
-- [marceloclaro/orchestrator.py:265](marceloclaro/orchestrator.py#L265) — `memory_network_query`.
-- [mci/metabus.py:51](mci/metabus.py#L51) — `MetacognitiveMemory`.
-- [webapp/memory_network_visualizer.py:161](webapp/memory_network_visualizer.py#L161) — `CoreMemoryNetworkSource`.
-- [webapp/memory_network_visualizer.py:365](webapp/memory_network_visualizer.py#L365) — `MemoryNetworkVisualizer`.
-- [webapp/memory_network_streamlit.py:17](webapp/memory_network_streamlit.py#L17) — `render_memory_network_streamlit`.
+- `marceloclaro/orchestrator.py:376` (fonte local modificada; não é permalink da base) — `MarceloClaroOrchestrator.memory_network_query`.
+- [mci/metabus.py:61](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/mci/metabus.py#L61) — `MetacognitiveMemory`.
+- [webapp/memory_network_visualizer.py:161](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/webapp/memory_network_visualizer.py#L161) — `CoreMemoryNetworkSource`.
+- [webapp/memory_network_visualizer.py:365](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/webapp/memory_network_visualizer.py#L365) — `MemoryNetworkVisualizer`.
+- [webapp/memory_network_streamlit.py:17](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/webapp/memory_network_streamlit.py#L17) — `render_memory_network_streamlit`.
 
 **Limitações:**
 
@@ -1279,18 +1299,23 @@ flowchart TB
   FALL --> REPORT
   HEUR --> REPORT
   REPORT -. "não promover conclusão parcial a prova" .-> BOUND["Sem eval de código Python; heurísticas não equivalem a SMT ou prova externa"]
+  ENTRY -->|"CLI lean4 legado"| LEG["Lean4ProofVerifier: pode retornar syntax_verified"]
+  ENTRY -->|"plugin Lean 4"| PLUG["LocalLeanVerifier: compilador isolado obrigatório"]
+  LEG -. "syntax_verified não é compilação" .-> BOUND
+  PLUG --> CHECK["machine_checked somente no contrato observado"]
+  CHECK --> REPORT
 ```
 
 [Fonte Mermaid](docs/architecture/flows/10-raciocinio.mmd) · [Abrir SVG](docs/architecture/flows/10-raciocinio.svg)
 
 **Fontes de código:**
 
-- [reasoning/reasoning_engines.py:7](reasoning/reasoning_engines.py#L7) — `route`.
-- [reasoning/z3_solver.py:41](reasoning/z3_solver.py#L41) — `check`.
-- [reasoning/engines.py:78](reasoning/engines.py#L78) — `_safe_build_z3_constraint`.
-- [reasoning/engines.py:332](reasoning/engines.py#L332) — `_safe_math_ast`.
-- [reasoning/engines.py:488](reasoning/engines.py#L488) — `SymPyEngine`.
-- [reasoning/engines.py:1446](reasoning/engines.py#L1446) — `MultiReasoningEngine`.
+- [reasoning/reasoning_engines.py:7](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/reasoning/reasoning_engines.py#L7) — `route`.
+- [reasoning/z3_solver.py:41](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/reasoning/z3_solver.py#L41) — `check`.
+- [reasoning/engines.py:83](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/reasoning/engines.py#L83) — `_safe_build_z3_constraint`.
+- [reasoning/engines.py:337](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/reasoning/engines.py#L337) — `_safe_math_ast`.
+- [reasoning/engines.py:493](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/reasoning/engines.py#L493) — `SymPyEngine`.
+- [reasoning/engines.py:1435](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/reasoning/engines.py#L1435) — `MultiReasoningEngine`.
 
 **Limitações:**
 
@@ -1343,15 +1368,15 @@ flowchart TB
 
 **Fontes de código:**
 
-- [marceloclaro/doctor.py:921](marceloclaro/doctor.py#L921) — `run_doctor`.
-- [scanners/pipeline.py:96](scanners/pipeline.py#L96) — `DiagnosticPipeline`.
-- [scanners/noological_scanner.py:495](scanners/noological_scanner.py#L495) — `NoologicalScanner`.
-- [integrations/harness_federation/artifact.py:406](integrations/harness_federation/artifact.py#L406) — `HarnessArtifact`.
-- [trust/trust_engine.py:540](trust/trust_engine.py#L540) — `TrustEngine`.
-- [economy/token_economy.py:184](economy/token_economy.py#L184) — `TokenEconomy`.
-- [evolution/cycles.py:84](evolution/cycles.py#L84) — `EvolutionRegistry`.
-- [scanners/diagnostic_pipeline.py:46](scanners/diagnostic_pipeline.py#L46) — `varrer`.
-- [scanners/diagnostic_pipeline.py:142](scanners/diagnostic_pipeline.py#L142) — `run`.
+- [marceloclaro/doctor.py:921](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/marceloclaro/doctor.py#L921) — `run_doctor`.
+- [scanners/pipeline.py:96](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/scanners/pipeline.py#L96) — `DiagnosticPipeline`.
+- [scanners/noological_scanner.py:495](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/scanners/noological_scanner.py#L495) — `NoologicalScanner`.
+- [integrations/harness_federation/artifact.py:406](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/integrations/harness_federation/artifact.py#L406) — `HarnessArtifact`.
+- [trust/trust_engine.py:540](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/trust/trust_engine.py#L540) — `TrustEngine`.
+- [economy/token_economy.py:184](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/economy/token_economy.py#L184) — `TokenEconomy`.
+- [evolution/cycles.py:84](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/evolution/cycles.py#L84) — `EvolutionRegistry`.
+- [scanners/diagnostic_pipeline.py:46](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/scanners/diagnostic_pipeline.py#L46) — `DiagnosticPipeline.varrer`.
+- [scanners/diagnostic_pipeline.py:142](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/scanners/diagnostic_pipeline.py#L142) — `run`.
 
 **Limitações:**
 
@@ -1376,10 +1401,17 @@ flowchart TB
   RUNTIME --> LIVE["LiveScientificRuntime: contrato / comando / audit proxy"]
   LIVE --> EXEC["Execução selecionada + recibo de resposta + artefatos"]
   EXEC --> CLASS["classify_execution: evidência executada vs saída incompleta"]
-  CLASS --> ELIG{"Dados e evidência elegíveis no escopo?"}
+  CLASS --> ELIG{"Processo rc0, geração auditada e artefato próprio?"}
   ELIG -->|"não"| BLOCK["blocked / abstenção / limitações preservadas"]
-  ELIG -->|"sim"| OBS["Observação de runtime e artefatos no escopo da execução"]
+  ELIG -->|"sim"| OBS["Evidência operacional; população sintética; scientific_claim_eligible false"]
   PRIMARY --> DISC["scientific_discovery_pipeline: EvoSci R101"]
+  PRIMARY --> RIGOR["academic_rigor_action: serviço acadêmico parcial"]
+  RIGOR --> RULES["local_checks: regras de estrutura, fontes e alegações"]
+  RIGOR --> MANAGED["managed_profiles: validar perfil e abrir tarefa A2A"]
+  MANAGED --> PENDING["Sem resultado de executor: awaiting_executor; sem inferência alegada"]
+  RULES --> RREPORT["Relatório e banca locais; aprovação científica false"]
+  RREPORT --> HUMAN
+  PENDING -. "cartões e CLI dedicada ausentes neste checkout" .-> BLOCK
   DISC --> DEEP["Deep Research R102: fontes / grafo / relatórios"]
   DEEP --> G102{"evidence_eligible e experiment_executed true?"}
   G102 -->|"não"| BLOCK
@@ -1406,20 +1438,27 @@ flowchart TB
 
 **Fontes de código:**
 
-- [marceloclaro/orchestrator.py:1904](marceloclaro/orchestrator.py#L1904) — `scientific_reproducible_run`.
-- [marceloclaro/orchestrator.py:2263](marceloclaro/orchestrator.py#L2263) — `scientific_discovery_pipeline`.
-- [integrations/live_scientific_runtime.py:189](integrations/live_scientific_runtime.py#L189) — `LiveScientificRuntime`.
-- [research/provenance_pipeline.py:260](research/provenance_pipeline.py#L260) — `ScientificProvenancePipeline`.
-- [agentic_science_v2/paper_composer.py:496](agentic_science_v2/paper_composer.py#L496) — `OrchestratorComposer`.
-- [mci/pipeline/scientific_governance_pipeline.py:15](mci/pipeline/scientific_governance_pipeline.py#L15) — `run_scientific_governance_pipeline`.
-- [marceloclaro/orchestrator.py:1926](marceloclaro/orchestrator.py#L1926) — `scientific_runtime_run`.
-- [research/statistical_methods.py:84](research/statistical_methods.py#L84) — `execute_analysis`.
+- `marceloclaro/orchestrator.py:2020` (fonte local modificada; não é permalink da base) — `MarceloClaroOrchestrator.scientific_reproducible_run`.
+- `marceloclaro/orchestrator.py:2505` (fonte local modificada; não é permalink da base) — `MarceloClaroOrchestrator.scientific_discovery_pipeline`.
+- `integrations/live_scientific_runtime.py:189` (fonte local modificada; não é permalink da base) — `LiveScientificRuntime`.
+- [research/provenance_pipeline.py:260](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/research/provenance_pipeline.py#L260) — `ScientificProvenancePipeline`.
+- [agentic_science_v2/paper_composer.py:496](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/agentic_science_v2/paper_composer.py#L496) — `OrchestratorComposer`.
+- [mci/pipeline/scientific_governance_pipeline.py:15](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/mci/pipeline/scientific_governance_pipeline.py#L15) — `run_scientific_governance_pipeline`.
+- `marceloclaro/orchestrator.py:2119` (fonte local modificada; não é permalink da base) — `MarceloClaroOrchestrator.scientific_runtime_run`.
+- [research/statistical_methods.py:84](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/research/statistical_methods.py#L84) — `execute_analysis`.
+- `academic/adversarial_research/service.py:40` (fonte local modificada; não é permalink da base) — `AdversarialResearchService`.
+- `academic/adversarial_research/board.py:11` (fonte local modificada; não é permalink da base) — `review_research`.
+- `academic/adversarial_research/banca.py:7` (fonte local modificada; não é permalink da base) — `BancaSessionStore`.
+- `marceloclaro/orchestrator.py:2084` (fonte local modificada; não é permalink da base) — `MarceloClaroOrchestrator.academic_rigor_action`.
 
 **Limitações:**
 
 - Deep Research sem evidência elegível bloqueia a descoberta estrita.
 - Governança de entradas reportadas não executa experimento sobre dados brutos.
 - Composição e revisão internas não constituem parecer editorial ou validação clínica.
+- Rigor acadêmico parcial: perfis e CLI dedicada removidos; local_checks não é inferência dos especialistas.
+- Spec ausente bloqueia G0; banca_rate chama método ausente.
+- O preflight acadêmico não tem chamador no pipeline amostrado.
 
 ### 13. Validação e entrega
 
@@ -1450,21 +1489,340 @@ flowchart TB
   PUSH --> REMOTE["CI remota: resultado próprio ainda precisa ser observado"]
   REMOTE --> STATUS["Relatório de entrega com escopo e limites"]
   RUN -. "suíte local aprovada não prova CI remota" .-> LIMIT["Testes, lint, análise real e validação externa são evidências distintas"]
+  SRC --> LOCALCI["CI local: perfil scientific fechado"]
+  LOCALCI --> RCPT["Grupos enumerados, JUnit, hashes e limites"]
+  RCPT --> GATE
+  LOCALCI -. "github_check_created false" .-> LIMIT
 ```
 
 [Fonte Mermaid](docs/architecture/flows/13-validacao-entrega.mmd) · [Abrir SVG](docs/architecture/flows/13-validacao-entrega.svg)
 
 **Fontes de código:**
 
-- [scripts/quality_report.py:65](scripts/quality_report.py#L65) — `load_junit_results`.
-- [scripts/quality_report.py:211](scripts/quality_report.py#L211) — `generate_report`.
-- [sdd/tdd_runner.py:554](sdd/tdd_runner.py#L554) — `run_pytest`.
-- [marceloclaro/doctor.py:921](marceloclaro/doctor.py#L921) — `run_doctor`.
+- [scripts/quality_report.py:65](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/scripts/quality_report.py#L65) — `load_junit_results`.
+- [scripts/quality_report.py:211](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/scripts/quality_report.py#L211) — `generate_report`.
+- [sdd/tdd_runner.py:554](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/sdd/tdd_runner.py#L554) — `run_pytest`.
+- [marceloclaro/doctor.py:921](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/marceloclaro/doctor.py#L921) — `run_doctor`.
 
 **Limitações:**
 
 - Suíte local, lint e CI remota são verificações distintas.
 - Diagrama representa o procedimento de entrega; resultado remoto deve ser observado separadamente.
+
+### 14. Plugins locais, Lean 4 e MiroFish
+
+Pacotes privados reutilizam o mesmo primário; status e execução possuem contratos distintos.
+
+```mermaid
+flowchart TB
+  HOST["Plugin privado no ChatGPT Work ou Codex"] --> MCP["component_mcp: duas ferramentas por componente"]
+  MCP --> VALID["Validar contrato e limites"]
+  VALID --> MC["MarceloClaro.local_component_action"]
+  MC --> KIND{"Componente"}
+  KIND -->|"REA"| REA["rea_action: inspeção estática e recibo"]
+  KIND -->|"MiroFish"| OASIS["scientific_runtime_run: endpoint loopback já ativo"]
+  OASIS --> GATE{"Processo rc0, geração e artefato próprios?"}
+  GATE -->|"não"| BLOCK["blocked; preservar timeout e falha"]
+  GATE -->|"sim"| RUN["completed operacional; cenário sintético"]
+  KIND -->|"Lean 4"| LEAN["Fonte delimitada; recusar admissões e execução"]
+  LEAN --> NS["bwrap: rede isolada; bibliotecas somente leitura; prlimit"]
+  NS --> COMPILER["Compilador real com prazo"]
+  COMPILER --> FORMAL{"Compilação e relatório exigidos passaram?"}
+  FORMAL -->|"não"| BLOCK
+  FORMAL -->|"sim"| PROOF["machine_checked no enunciado submetido"]
+  REA --> OBS["MetaBus: estados, hashes e limites"]
+  RUN --> OBS
+  PROOF --> OBS
+  OBS -. "não comprova pressupostos empíricos" .-> HUMAN["Interpretação e revisão humana"]
+```
+
+[Fonte Mermaid](docs/architecture/flows/14-plugins-locais.mmd) · [Abrir SVG](docs/architecture/flows/14-plugins-locais.svg)
+
+**Fontes de código:**
+
+- [integrations/component_mcp.py:11](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/integrations/component_mcp.py#L11) — `create_server`.
+- `integrations/component_actions.py:30` (fonte local modificada; não é permalink da base) — `dispatch_component`.
+- `integrations/local_lean.py:11` (fonte local modificada; não é permalink da base) — `LocalLeanVerifier`.
+- `marceloclaro/orchestrator.py:2109` (fonte local modificada; não é permalink da base) — `MarceloClaroOrchestrator.local_component_action`.
+
+**Limitações:**
+
+- MiroFish exige endpoint local previamente disponível; instalação não comprova inferência.
+- No checkout amostrado, LocalLeanVerifier relata axiomas somente do primeiro teorema e limita AS a 4 GiB.
+- O caminho CLI lean4 legado pode produzir syntax_verified; ele não equivale à compilação do plugin.
+- Conteúdo devolvido ao aplicativo de chat pode ser processado fora da máquina.
+
+### 15. NotebookLM coordenado e política R915
+
+CLI, MCP, catálogo e skill compartilham validação, política de efeitos e recibos pelo MarceloClaro.
+
+```mermaid
+flowchart TB
+  INPUT["/gemini-notebook ou ferramenta MCP central"] --> MC["MarceloClaro.gemini_notebook_action"]
+  MC --> VALID["Validar campos, limites e ausência de credenciais"]
+  VALID --> OP{"Operação"}
+  OP -->|"status"| STATUS["Versão e binários; login não verificado"]
+  OP -->|"catalog"| CAT["Descobrir schemas MCP e árvore CLI com hash"]
+  OP -->|"skill"| SKILL["Fonte e licença; preservar edições locais"]
+  OP -->|"mcp ou cli"| EFFECT["Classificar efeito e suboperações"]
+  EFFECT --> AUTH{"Autenticação privada?"}
+  AUTH -->|"sim"| PRIVATE["Bloquear; login no terminal do operador"]
+  AUTH -->|"não"| DRY{"dry_run?"}
+  DRY -->|"sim"| PREP["prepared; nenhuma operação remota"]
+  DRY -->|"não"| ALLOW{"Leitura ou efeito concreto autorizado?"}
+  ALLOW -->|"não"| BLOCK["blocked; preservar motivo"]
+  ALLOW -->|"sim"| LIVE["Schema atual; broker de sessão privada"]
+  LIVE --> GOOGLE["NotebookLM na infraestrutura Google"]
+  GOOGLE --> RESULT["completed / pending / partial / failed"]
+  RESULT --> ART["Downloads: raiz permitida, arquivo novo e SHA"]
+  ART --> OBS["MetaBus: estados e hashes; sem confiança promovida"]
+  CAT -. "descobrir não autoriza ferramenta nova" .-> BLOCK
+```
+
+[Fonte Mermaid](docs/architecture/flows/15-notebooklm.mmd) · [Abrir SVG](docs/architecture/flows/15-notebooklm.svg)
+
+**Fontes de código:**
+
+- [integrations/gemini_notebook.py:83](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/integrations/gemini_notebook.py#L83) — `GeminiNotebookService`.
+- [integrations/gemini_notebook_catalog.py:79](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/integrations/gemini_notebook_catalog.py#L79) — `classify_mcp_operation`.
+- [integrations/gemini_notebook_session.py:50](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/integrations/gemini_notebook_session.py#L50) — `_configuration`.
+- `marceloclaro/orchestrator.py:2195` (fonte local modificada; não é permalink da base) — `MarceloClaroOrchestrator.gemini_notebook_action`.
+
+**Limitações:**
+
+- Conector comunitário: não é API oficial de conta pessoal do Google.
+- A sonda R915 observou 0.15.6, 53 ferramentas, 165 callbacks e 234 notebooks; trata-se de execução datada.
+- alias, chat_save_to_note, profile e report continuam bloqueadas pela política MCP do Core.
+- Jobs voláteis permanecem vinculados à sessão original; nova sessão não comprova continuidade.
+
+### 16. Autenticações de ChatGPT, Gemini e NotebookLM
+
+Três clientes e sessões independentes; resposta observada e login são evidências diferentes.
+
+```mermaid
+flowchart TB
+  OP["Operador no terminal"] --> CHOICE{"Serviço"}
+  CHOICE -->|"ChatGPT no OpenCode"| OC["opencode auth login provider openai"]
+  OC --> OAUTH["Autorizar no navegador OpenAI; sessão privada"]
+  OAUTH --> MODEL["Selecionar modelo em /models"]
+  CHOICE -->|"Gemini Chat no terminal"| GEM["Gemini CLI: Sign in with Google"]
+  GEM --> TEST["Enviar solicitação curta"]
+  MODEL --> TEST
+  TEST --> RESPONSE{"Resposta concluída?"}
+  RESPONSE -->|"não"| BLOCK["Preservar falha, limite ou indisponibilidade"]
+  RESPONSE -->|"sim"| ACCESS["Acesso observado naquele momento"]
+  CHOICE -->|"Notebooks e fontes"| NLM["nlm login --wsl; conta Google"]
+  NLM --> CHECK["nlm login --check"]
+  CHECK --> CORE["Core: política por efeito em /gemini-notebook"]
+  CORE --> GOOGLE["Serviço Google; notebooks e fontes"]
+  OAUTH -. "não importa histórico web" .-> LIMIT["Sessões e cotas próprias"]
+  GEM -. "independente do NotebookLM" .-> LIMIT
+```
+
+[Fonte Mermaid](docs/architecture/flows/16-autenticacoes.mmd) · [Abrir SVG](docs/architecture/flows/16-autenticacoes.svg)
+
+**Fontes de código:**
+
+- [integrations/gemini_cli.py:69](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/integrations/gemini_cli.py#L69) — `gemini_run`.
+- [integrations/gemini_notebook.py:41](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/integrations/gemini_notebook.py#L41) — `validate_notebook_config`.
+- `integrations/opencode_cli.py:399` (fonte local modificada; não é permalink da base) — `build_config`.
+
+**Limitações:**
+
+- Nenhuma conversa web é automaticamente importada.
+- Login Gemini CLI não configura um provider Google no OpenCode.
+- Tarifas de API, créditos e franquia de assinatura não são intercambiáveis.
+
+### 17. Ciclo metacognitivo e memória de outcomes
+
+Recuperação de lições antes da tarefa e observação posterior, sem transformar heurística em validação externa.
+
+```mermaid
+flowchart TB
+  TASK["Solicitação ao MarceloClaro"] --> PREP["MetacognitiveLoop.prepare"]
+  PREP --> SEARCH["Recuperar lições; deduplicar e excluir substituídos"]
+  SEARCH --> BRIEF["Briefing: referências e limites locais"]
+  BRIEF --> A2A["delegate: contexto da tarefa Blackboard"]
+  A2A --> EXEC["Executor realiza o trabalho"]
+  EXEC --> GATE["report_completion: contrato e histórico quando aplicável"]
+  GATE --> BB["task.complete e atualização da tarefa"]
+  BB --> REF["ReflexionEngine: solicitação de reflexão"]
+  REF --> COMPLETE["MetacognitiveLoop.complete"]
+  COMPLETE --> EPISODE["Outcome, erro observado e próxima ação"]
+  EPISODE --> RECORD["record_observation: calibrated false"]
+  RECORD --> SEARCH
+  GATE --> TRUST["Trust.learn e economia conforme outcome"]
+  REASON["primário.reason"] --> PREP
+  REASON --> ENGINE["Motor solicitado e resultado tipado"]
+  ENGINE --> OBS["observe_reasoning"]
+  OBS --> RECORD
+  RECORD -. "confidence_promoted false nesta observação" .-> LIMIT["Não comprova verdade, causalidade ou revisão humana"]
+```
+
+[Fonte Mermaid](docs/architecture/flows/17-metacognicao.mmd) · [Abrir SVG](docs/architecture/flows/17-metacognicao.svg)
+
+**Fontes de código:**
+
+- [mci/metacognitive_loop.py:23](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/mci/metacognitive_loop.py#L23) — `MetacognitiveLoop`.
+- `marceloclaro/orchestrator.py:422` (fonte local modificada; não é permalink da base) — `MarceloClaroOrchestrator.delegate`.
+- `marceloclaro/orchestrator.py:870` (fonte local modificada; não é permalink da base) — `MarceloClaroOrchestrator.report_completion`.
+- [mci/reflexion.py:19](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/mci/reflexion.py#L19) — `ReflexionEngine`.
+
+**Limitações:**
+
+- Observações locais não são calibração probabilística nem revisão científica.
+- Trust.learn, resolução econômica e observações de memória são efeitos diferentes.
+- Memória recuperada é dado contextual, não uma nova autorização ou instrução.
+
+### 18. Lifecycle permanente de agentes e subagentes
+
+Definição validada, contrato, permissões e correlação da tarefa antes da execução efetiva.
+
+```mermaid
+flowchart TB
+  INPUT["CLI agentes ou ecosystem_agent_profile"] --> MC["MarceloClaro.agent_profile_action"]
+  MC --> CHECK["Capacidades, origem, spec/teste, saída e permissões"]
+  CHECK --> VALID{"Definição gerenciada válida?"}
+  VALID -->|"não"| LEGACY["Recusar criação ou preservar baseline histórico"]
+  VALID -->|"sim"| HASH["Conferir SHA antes do registro"]
+  HASH --> BUSY{"Definição em uso conflita?"}
+  BUSY -->|"sim"| BLOCK["blocked; preservar trabalho em andamento"]
+  BUSY -->|"não"| REG["Registrar cartão no Blackboard"]
+  REG --> ACTION{"Criar ou ativar?"}
+  ACTION -->|"criar"| CONFIG["Compilar configuração do OpenCode"]
+  ACTION -->|"ativar"| DELEGATE["delegate: capacidade exclusiva e contexto"]
+  DELEGATE --> ID["Correlacionar task_id, perfil e executor externo"]
+  ID --> WAIT["pending_executor até execução real"]
+  WAIT --> WORK["Trabalho e evidência observados"]
+  WORK --> GATE["Contrato e conclusão pelo primário"]
+  CONFIG --> MEM["MetaBus: observações e limites"]
+  GATE --> MEM
+```
+
+[Fonte Mermaid](docs/architecture/flows/18-lifecycle.mmd) · [Abrir SVG](docs/architecture/flows/18-lifecycle.svg)
+
+**Fontes de código:**
+
+- [agents/lifecycle.py:232](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/agents/lifecycle.py#L232) — `AgentLifecycleService`.
+- [agents/lifecycle.py:162](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/agents/lifecycle.py#L162) — `validate_managed_card`.
+- `marceloclaro/orchestrator.py:237` (fonte local modificada; não é permalink da base) — `MarceloClaroOrchestrator.agent_profile_action`.
+
+**Limitações:**
+
+- Registro e atribuição não comprovam inferência ou conclusão.
+- Definições históricas conservam baseline; alterações exigem migração explícita.
+- Ferramentas externas de subagentes não são interceptadas automaticamente pelo Core.
+
+### 19. CI local e validação delimitada
+
+Alternativa local ao bloqueio da CI remota, com seleção fechada e recibos próprios.
+
+```mermaid
+flowchart TB
+  INPUT["ci-local ou ecosystem_local_ci"] --> MC["MarceloClaro.local_ci_action"]
+  MC --> OP{"start / status / runs / cancel"}
+  OP -->|"start"| PROFILE["Somente perfil scientific enumerado"]
+  PROFILE --> LOCK["Lock de escritor único; identidade das fontes"]
+  LOCK --> RUN["Supervisor: grupos, prazo e memória delimitados"]
+  RUN --> JUNIT["JUnit, seleção, execução e hashes"]
+  JUNIT --> VERIFY{"Fontes estáveis e todos os grupos exigidos concluídos?"}
+  VERIFY -->|"não"| BLOCK["blocked ou cancelled; preservar erro"]
+  VERIFY -->|"sim"| PASS["passed no escopo selecionado"]
+  OP -->|"status ou runs"| READ["Ler recibos e conferir compatibilidade"]
+  OP -->|"cancel"| CANCEL["Cancelar e limpar processos observados"]
+  READ --> RESULT["Estado observado e limitações"]
+  CANCEL --> RESULT
+  PASS --> RESULT
+  BLOCK --> RESULT
+  RESULT --> META["Observação no MetaBus"]
+  RESULT -. "github_check_created false" .-> REMOTE["CI remota exige execução e evidência próprias"]
+```
+
+[Fonte Mermaid](docs/architecture/flows/19-ci-local.mmd) · [Abrir SVG](docs/architecture/flows/19-ci-local.svg)
+
+**Fontes de código:**
+
+- [integrations/local_ci.py:139](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/integrations/local_ci.py#L139) — `LocalCIService`.
+- [scripts/validate_scientific_profile.py:534](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/scripts/validate_scientific_profile.py#L534) — `main`.
+- `marceloclaro/orchestrator.py:330` (fonte local modificada; não é permalink da base) — `MarceloClaroOrchestrator.local_ci_action`.
+
+**Limitações:**
+
+- O perfil fechado não executa comandos, URLs ou testes arbitrários fornecidos pelo chamador.
+- Aprovação local não cria check GitHub nem comprova suíte global.
+- Conservar resultados anteriores como históricos quando as fontes mudarem.
+
+### 20. Seleção econômica de modelos e contexto
+
+Política recomendada para comparar custo por tarefa aceita; não é um roteador automático novo.
+
+```mermaid
+flowchart TB
+  TASK["Tarefa ao MarceloClaro"] --> CONTEXT["Recuperar só fontes, símbolos e trechos relevantes"]
+  CONTEXT --> TYPE{"Complexidade e risco"}
+  TYPE -->|"formatação ou extração delimitada"| SMALL["Candidato econômico: Luna ou Flash-Lite"]
+  TYPE -->|"código com dependências e decisões"| BALANCE["Modelo equilibrado; orçamento e limite de passos"]
+  TYPE -->|"revisão crítica ou falha persistente"| STRONG["Escalonar ao modelo capaz; preservar evidência"]
+  SMALL --> QUALITY{"Critério de qualidade foi atendido?"}
+  BALANCE --> QUALITY
+  STRONG --> QUALITY
+  QUALITY -->|"não"| REVIEW["Rever contexto ou escalonar; não repetir sem limite"]
+  REVIEW --> STRONG
+  QUALITY -->|"sim"| MEASURE["Registrar entrada, saída, cache, raciocínio e tentativas"]
+  MEASURE --> COST["Custo por tarefa aceita; assinatura e API separadas"]
+  COST --> COMPARE["Comparar amostra; recomendação permanece revisável"]
+```
+
+[Fonte Mermaid](docs/architecture/flows/20-economia-modelos.mmd) · [Abrir SVG](docs/architecture/flows/20-economia-modelos.svg)
+
+**Fontes de código:**
+
+- `integrations/opencode_cli.py:399` (fonte local modificada; não é permalink da base) — `build_config`.
+- [integrations/gemini_cli.py:69](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/integrations/gemini_cli.py#L69) — `gemini_run`.
+- [integrations/code_context.py:75](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/integrations/code_context.py#L75) — `CodeContextProvider`.
+
+**Limitações:**
+
+- Este é um fluxo de decisão operacional recomendado, não uma implementação automática adicional.
+- Modelos anunciados no catálogo não comprovam acesso por assinatura ou inferência.
+- Preços de API não estimam a franquia de assinatura. Medir tokens e qualidade nas mesmas tarefas.
+
+### 21. Contexto de código e consultas de grafo
+
+Busca e estrutura local reduzem leituras desnecessárias; ganhos precisam de medição comparável.
+
+```mermaid
+flowchart TB
+  INPUT["Pedido de contexto pelo MarceloClaro"] --> KIND{"Busca, símbolo ou grafo?"}
+  KIND --> INDEX["Índice local com manifesto e hashes"]
+  INDEX --> FRESH{"Índice corresponde às fontes?"}
+  FRESH -->|"não"| BLOCK["blocked ou reindexação explícita"]
+  FRESH -->|"sim"| QUERY["Consulta delimitada e trechos relevantes"]
+  KIND --> PY["python_graph: imports e relações estáticas Python"]
+  PY --> LIMIT["Não confundir relação lexical com execução"]
+  KIND --> NATIVE{"Operação nativa conhecida como falha?"}
+  NATIVE -->|"sim"| BLOCK
+  NATIVE -->|"não"| POLICY["Conferir contrato, limites e backend disponível"]
+  POLICY --> QUERY
+  QUERY --> CONTEXT["Contexto compacto com fonte e localizador"]
+  LIMIT --> CONTEXT
+  CONTEXT --> MODEL["Modelo selecionado com orçamento"]
+  MODEL --> MEASURE["Medir tokens, chamadas e qualidade da tarefa aceita"]
+```
+
+[Fonte Mermaid](docs/architecture/flows/21-contexto-codigo.mmd) · [Abrir SVG](docs/architecture/flows/21-contexto-codigo.svg)
+
+**Fontes de código:**
+
+- [integrations/code_context.py:75](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/integrations/code_context.py#L75) — `CodeContextProvider`.
+- [integrations/code_context.py:219](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/integrations/code_context.py#L219) — `CodeContextProvider._source_files`.
+- [integrations/code_context.py:647](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/84ef0820a71f52756203854ea83d5a1211d8c254/integrations/code_context.py#L647) — `CodeContextProvider._python_graph`.
+
+**Limitações:**
+
+- Grafo estático não comprova caminho executado ou ausência de bugs.
+- Três operações nativas conhecidas como incorretas continuam bloqueadas; python_graph tem contrato próprio.
+- Não foi medida nesta revisão uma porcentagem de redução de tokens.
 
 Para atualizar esta seção, execute na raiz
 `python3 scripts/sync_readme_flowcharts.py`. Para conferir sem escrever, use
@@ -1488,7 +1846,7 @@ Para atualizar esta seção, execute na raiz
 
 ## Validação, contribuição e release
 
-### Validação observada
+### Validações registradas e seus escopos
 
 Os resultados abaixo são fotografias de **execução local**, com escopos
 identificados. Eles não constituem **certificação externa** nem comprovam
@@ -1563,7 +1921,7 @@ Advisories** e **não abra issue pública** para vulnerabilidades.
 | [QUICKSTART.md](quickstart.md) | Iniciantes | Primeiros passos rápidos |
 | [MANUAL.md](MANUAL.md) | Todos | Uso completo da CLI, linguagem simples |
 | [ARCHITECTURE.md](ARCHITECTURE.md) | Desenvolvedores | Arquitetura técnica, camadas, fluxos |
-| [Arquitetura R879](docs/ARQUITETURA_COMPLETA_CORE_R879.md) | Operadores e desenvolvedores | Mapa completo, dependências, fluxogramas e fronteiras |
+| [Arquitetura R916](docs/ARQUITETURA_COMPLETA_CORE_R916.md) | Operadores e desenvolvedores | Mapa completo, dependências, fluxogramas e fronteiras |
 | [Prontidão local](docs/PRONTIDAO_LOCAL_CORE_R868.md) | Operadores | Resultados executados e limitações por operação |
 | [Assistente REA](docs/ASSISTENTE_REA_LOCAL.md) | Operadores | Setup, engines, inspeção, MCP e limites de isolamento |
 | [Rede de memória](docs/REDE_MEMORIA_CORE.md) | Operadores | Terminal, painel e origem dos dados visualizados |

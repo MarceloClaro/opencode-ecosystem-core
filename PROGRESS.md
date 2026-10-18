@@ -1,13 +1,13 @@
 # PROGRESS — Estado corrente e arquivo de checkpoints
 
-## Estado atual — orientação de 12/10/2026
+## Estado atual — orientação de 18/10/2026
 
 A retomada parte do checkout e da tarefa atual. O bloco abaixo deriva as
 contagens das fontes locais; o histórico R414 preservado ao final não representa
 o último estado operacional do Core.
 
 <!-- core-state:start -->
-**346 agentes** · **16 MCPs** · **34 comandos** · **22 checks**
+**312 agentes** · **16 MCPs** · **33 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 
@@ -22,6 +22,21 @@ e [o contrato de interrupção](specs/SPEC-935-R825-execution-cancellation.md)
 explicam integrações e limites específicos. Recibos datados em `outputs/` e
 `docs/evidence/` são evidências de execuções determinadas; uma suíte interrompida
 não comprova o aceite integral.
+
+## Revisão documental R916
+
+O README, os guias e o atlas convergem para a coleta de fontes locais R916,
+com origem e exclusões explícitas. A configuração atual contém 312 agentes,
+16 MCPs e 33 comandos; não confundir com a configuração histórica R914 de
+346/34. Os recibos anteriores continuam datados, sem promoção a prontidão atual.
+
+R915 atualizou NotebookLM para 0.15.6, com 353 testes selecionados aprovados e
+234 notebooks listados. R916 acrescenta auditoria de fontes e recomendações de
+modelos, preservando falhas das sondas. Consulte [estado atual](docs/ESTADO_ATUAL_CORE_R916.md),
+[atlas](docs/architecture_map.html) e [verificação R916](docs/verification-documentation-r916.json).
+A fachada acadêmica e o serviço foram encontrados novamente na leitura final;
+os 34 cartões e outras superfícies continuam removidos. R916 descreve essa
+condição parcial; não conclui a frente de implementação acadêmica concorrente.
 
 ## Como retomar
 

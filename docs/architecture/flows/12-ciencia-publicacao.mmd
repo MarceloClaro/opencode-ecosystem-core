@@ -10,10 +10,17 @@ flowchart TB
   RUNTIME --> LIVE["LiveScientificRuntime: contrato / comando / audit proxy"]
   LIVE --> EXEC["Execução selecionada + recibo de resposta + artefatos"]
   EXEC --> CLASS["classify_execution: evidência executada vs saída incompleta"]
-  CLASS --> ELIG{"Dados e evidência elegíveis no escopo?"}
+  CLASS --> ELIG{"Processo rc0, geração auditada e artefato próprio?"}
   ELIG -->|"não"| BLOCK["blocked / abstenção / limitações preservadas"]
-  ELIG -->|"sim"| OBS["Observação de runtime e artefatos no escopo da execução"]
+  ELIG -->|"sim"| OBS["Evidência operacional; população sintética; scientific_claim_eligible false"]
   PRIMARY --> DISC["scientific_discovery_pipeline: EvoSci R101"]
+  PRIMARY --> RIGOR["academic_rigor_action: serviço acadêmico parcial"]
+  RIGOR --> RULES["local_checks: regras de estrutura, fontes e alegações"]
+  RIGOR --> MANAGED["managed_profiles: validar perfil e abrir tarefa A2A"]
+  MANAGED --> PENDING["Sem resultado de executor: awaiting_executor; sem inferência alegada"]
+  RULES --> RREPORT["Relatório e banca locais; aprovação científica false"]
+  RREPORT --> HUMAN
+  PENDING -. "cartões e CLI dedicada ausentes neste checkout" .-> BLOCK
   DISC --> DEEP["Deep Research R102: fontes / grafo / relatórios"]
   DEEP --> G102{"evidence_eligible e experiment_executed true?"}
   G102 -->|"não"| BLOCK

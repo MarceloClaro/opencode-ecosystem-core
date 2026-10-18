@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "flows": [
     {
       "id": "panorama",
@@ -10,17 +10,23 @@
         {
           "path": "marceloclaro/orchestrator.py",
           "symbol": "MarceloClaroOrchestrator",
-          "line": 77
+          "line": 78,
+          "sha256": "db75f2fc685f8b64896da9eb58fc602bcaff4a426ab517f347e275ea23381ce5",
+          "origin": "worktree_tracked"
         },
         {
           "path": "integrations/ecosystem_mcp.py",
           "symbol": "get_coordinator",
-          "line": 264
+          "line": 320,
+          "sha256": "b96df198e959e9004f436d2716d00d5f19690f3261205b8ffa5d169d40bf0ca6",
+          "origin": "worktree_tracked"
         },
         {
           "path": "integrations/opencode_cli.py",
           "symbol": "build_config",
-          "line": 378
+          "line": 399,
+          "sha256": "f1eef169534badcdcea479156f0c38d6e03f55cb9dc8fe390e16327258be52e7",
+          "origin": "worktree_tracked"
         }
       ],
       "limitations": [
@@ -36,32 +42,44 @@
         {
           "path": "integrations/ecosystem_mcp.py",
           "symbol": "get_library_orchestrator",
-          "line": 33
+          "line": 33,
+          "sha256": "b96df198e959e9004f436d2716d00d5f19690f3261205b8ffa5d169d40bf0ca6",
+          "origin": "worktree_tracked"
         },
         {
           "path": "integrations/ecosystem_mcp.py",
           "symbol": "get_coordinator",
-          "line": 264
+          "line": 320,
+          "sha256": "b96df198e959e9004f436d2716d00d5f19690f3261205b8ffa5d169d40bf0ca6",
+          "origin": "worktree_tracked"
         },
         {
           "path": "marceloclaro/orchestrator.py",
-          "symbol": "create_text_task_spec",
-          "line": 233
+          "symbol": "MarceloClaroOrchestrator.create_text_task_spec",
+          "line": 344,
+          "sha256": "db75f2fc685f8b64896da9eb58fc602bcaff4a426ab517f347e275ea23381ce5",
+          "origin": "worktree_tracked"
         },
         {
           "path": "marceloclaro/autonomous.py",
           "symbol": "AutonomousCoordinator",
-          "line": 33
+          "line": 33,
+          "sha256": "417ca2b23f855c542012f05c24f806edad20479c7cf8bb9c5e0bd882d18d4e5a",
+          "origin": "worktree_tracked"
         },
         {
           "path": "integrations/harness_runtime.py",
-          "symbol": "_run_cli",
-          "line": 266
+          "symbol": "HarnessRuntime._run_cli",
+          "line": 266,
+          "sha256": "5945ab3ae40d0b37d5333706f523f96eb6b0d1611edc36acf3bbb2160c3aca98",
+          "origin": "worktree_tracked"
         },
         {
           "path": "marceloclaro/orchestrator.py",
-          "symbol": "report_completion",
-          "line": 758
+          "symbol": "MarceloClaroOrchestrator.report_completion",
+          "line": 870,
+          "sha256": "db75f2fc685f8b64896da9eb58fc602bcaff4a426ab517f347e275ea23381ce5",
+          "origin": "worktree_tracked"
         }
       ],
       "limitations": [
@@ -78,22 +96,30 @@
         {
           "path": "marceloclaro/workflow.py",
           "symbol": "WorkflowCoordinator",
-          "line": 42
+          "line": 42,
+          "sha256": "b869567d4ee75429608c5677cfcd0bb17f97457dee65a1ea4a67e5102e4fa5c0",
+          "origin": "worktree_tracked"
         },
         {
           "path": "marceloclaro/workflow.py",
-          "symbol": "_definition",
-          "line": 84
+          "symbol": "WorkflowCoordinator._definition",
+          "line": 84,
+          "sha256": "b869567d4ee75429608c5677cfcd0bb17f97457dee65a1ea4a67e5102e4fa5c0",
+          "origin": "worktree_tracked"
         },
         {
           "path": "marceloclaro/workflow.py",
-          "symbol": "_resume",
-          "line": 237
+          "symbol": "WorkflowCoordinator._resume",
+          "line": 237,
+          "sha256": "b869567d4ee75429608c5677cfcd0bb17f97457dee65a1ea4a67e5102e4fa5c0",
+          "origin": "worktree_tracked"
         },
         {
           "path": "marceloclaro/workflow_store.py",
           "symbol": "WorkflowStore",
-          "line": 17
+          "line": 17,
+          "sha256": "beaf2a8241ccef21b1f9537feec735cef87b1f19f1f2e4a5068ae50c63f8aff9",
+          "origin": "worktree_tracked"
         }
       ],
       "limitations": [
@@ -110,32 +136,44 @@
         {
           "path": "sdd/spec_engine.py",
           "symbol": "Specification",
-          "line": 70
+          "line": 70,
+          "sha256": "91e205b31969cec0f75b568b544f58f7e9779662adf88a696db5981404e2a3f5",
+          "origin": "worktree_tracked"
         },
         {
           "path": "sdd/spec_engine.py",
           "symbol": "SpecVerifier",
-          "line": 1308
+          "line": 1308,
+          "sha256": "91e205b31969cec0f75b568b544f58f7e9779662adf88a696db5981404e2a3f5",
+          "origin": "worktree_tracked"
         },
         {
           "path": "sdd/tdd_history.py",
           "symbol": "TDDHistory",
-          "line": 114
+          "line": 114,
+          "sha256": "193ccd75b85df9b28e3345351fc55dc114707801ef09efbdf5a34d78c74e22ca",
+          "origin": "worktree_tracked"
         },
         {
           "path": "sdd/tdd_history.py",
-          "symbol": "validate_pair",
-          "line": 490
+          "symbol": "TDDHistory.validate_pair",
+          "line": 490,
+          "sha256": "193ccd75b85df9b28e3345351fc55dc114707801ef09efbdf5a34d78c74e22ca",
+          "origin": "worktree_tracked"
         },
         {
           "path": "sdd/tdd_runner.py",
           "symbol": "TDDRunner",
-          "line": 46
+          "line": 46,
+          "sha256": "1eeb7d8b544c33871c98de1e85063387271ead9b96ae1efae0ab760c106610d5",
+          "origin": "worktree_tracked"
         },
         {
           "path": "marceloclaro/orchestrator.py",
-          "symbol": "sdd_preflight",
-          "line": 248
+          "symbol": "MarceloClaroOrchestrator.sdd_preflight",
+          "line": 359,
+          "sha256": "db75f2fc685f8b64896da9eb58fc602bcaff4a426ab517f347e275ea23381ce5",
+          "origin": "worktree_tracked"
         }
       ],
       "limitations": [
@@ -152,57 +190,79 @@
         {
           "path": "integrations/rea_layers.py",
           "symbol": "layers_status",
-          "line": 445
+          "line": 445,
+          "sha256": "6afdd99f714c618c34cd454d884a26062aea019a0032845965557339c16faa09",
+          "origin": "worktree_tracked"
         },
         {
           "path": "integrations/rea_layers.py",
           "symbol": "probe_layer",
-          "line": 422
+          "line": 422,
+          "sha256": "6afdd99f714c618c34cd454d884a26062aea019a0032845965557339c16faa09",
+          "origin": "worktree_tracked"
         },
         {
           "path": "integrations/rea_layers.py",
           "symbol": "engine_environment",
-          "line": 465
+          "line": 465,
+          "sha256": "6afdd99f714c618c34cd454d884a26062aea019a0032845965557339c16faa09",
+          "origin": "worktree_tracked"
         },
         {
           "path": "integrations/rea_bridge.py",
           "symbol": "ReaBridge",
-          "line": 40
+          "line": 40,
+          "sha256": "33a4105bbb178e8360001b290cd8f3c29247f8cdf2a5c2ac5142136bcc35cba7",
+          "origin": "worktree_tracked"
         },
         {
           "path": "marceloclaro/orchestrator.py",
-          "symbol": "rea_action",
-          "line": 2065
+          "symbol": "MarceloClaroOrchestrator.rea_action",
+          "line": 2311,
+          "sha256": "db75f2fc685f8b64896da9eb58fc602bcaff4a426ab517f347e275ea23381ce5",
+          "origin": "worktree_tracked"
         },
         {
           "path": "marceloclaro/rea_cli.py",
           "symbol": "run_rea_cli",
-          "line": 7
+          "line": 7,
+          "sha256": "f7549a2c3322a9a02b5b4fe0603677bcb601af42f6b6cc43f35ffd95b9e63774",
+          "origin": "worktree_tracked"
         },
         {
           "path": "integrations/rea_bridge.py",
-          "symbol": "_validate",
-          "line": 174
+          "symbol": "ReaBridge._validate",
+          "line": 174,
+          "sha256": "33a4105bbb178e8360001b290cd8f3c29247f8cdf2a5c2ac5142136bcc35cba7",
+          "origin": "worktree_tracked"
         },
         {
           "path": "integrations/rea_bridge.py",
-          "symbol": "status",
-          "line": 108
+          "symbol": "ReaBridge.status",
+          "line": 108,
+          "sha256": "33a4105bbb178e8360001b290cd8f3c29247f8cdf2a5c2ac5142136bcc35cba7",
+          "origin": "worktree_tracked"
         },
         {
           "path": "integrations/rea_bridge.py",
-          "symbol": "_child_environment",
-          "line": 50
+          "symbol": "ReaBridge._child_environment",
+          "line": 50,
+          "sha256": "33a4105bbb178e8360001b290cd8f3c29247f8cdf2a5c2ac5142136bcc35cba7",
+          "origin": "worktree_tracked"
         },
         {
           "path": "integrations/rea_bridge.py",
-          "symbol": "action",
-          "line": 479
+          "symbol": "ReaBridge.action",
+          "line": 479,
+          "sha256": "33a4105bbb178e8360001b290cd8f3c29247f8cdf2a5c2ac5142136bcc35cba7",
+          "origin": "worktree_tracked"
         },
         {
           "path": "integrations/rea_layers.py",
           "symbol": "layer_inspection",
-          "line": 305
+          "line": 305,
+          "sha256": "6afdd99f714c618c34cd454d884a26062aea019a0032845965557339c16faa09",
+          "origin": "worktree_tracked"
         }
       ],
       "limitations": [
@@ -222,27 +282,37 @@
         {
           "path": "integrations/rea_assistant.py",
           "symbol": "LocalReaAssistant",
-          "line": 625
+          "line": 625,
+          "sha256": "276f2f6039ca41f55ca93bef3dcc4af0bb09d5bbe997bc1c33c33c95ad88f6e5",
+          "origin": "worktree_tracked"
         },
         {
           "path": "integrations/rea_assistant.py",
           "symbol": "run_isolated_worker",
-          "line": 42
+          "line": 42,
+          "sha256": "276f2f6039ca41f55ca93bef3dcc4af0bb09d5bbe997bc1c33c33c95ad88f6e5",
+          "origin": "worktree_tracked"
         },
         {
           "path": "integrations/rea_assistant.py",
           "symbol": "_snapshot_loopback",
-          "line": 603
+          "line": 603,
+          "sha256": "276f2f6039ca41f55ca93bef3dcc4af0bb09d5bbe997bc1c33c33c95ad88f6e5",
+          "origin": "worktree_tracked"
         },
         {
           "path": "integrations/rea_local_worker.py",
           "symbol": "main",
-          "line": 40
+          "line": 40,
+          "sha256": "d9d53cabbbc8097cf7442ec58c3d712f4262058a21b07c8043196fa86c08fd40",
+          "origin": "worktree_tracked"
         },
         {
           "path": "integrations/rea_assistant.py",
           "symbol": "explain_report",
-          "line": 164
+          "line": 164,
+          "sha256": "276f2f6039ca41f55ca93bef3dcc4af0bb09d5bbe997bc1c33c33c95ad88f6e5",
+          "origin": "worktree_tracked"
         }
       ],
       "limitations": [
@@ -260,27 +330,37 @@
         {
           "path": "integrations/rea_assistant.py",
           "symbol": "setup_local_agent",
-          "line": 280
+          "line": 280,
+          "sha256": "276f2f6039ca41f55ca93bef3dcc4af0bb09d5bbe997bc1c33c33c95ad88f6e5",
+          "origin": "worktree_tracked"
         },
         {
           "path": "integrations/rea_assistant.py",
           "symbol": "launch_local_agent",
-          "line": 447
+          "line": 447,
+          "sha256": "276f2f6039ca41f55ca93bef3dcc4af0bb09d5bbe997bc1c33c33c95ad88f6e5",
+          "origin": "worktree_tracked"
         },
         {
           "path": "integrations/rea_assistant.py",
           "symbol": "_run_agent_client",
-          "line": 353
+          "line": 353,
+          "sha256": "276f2f6039ca41f55ca93bef3dcc4af0bb09d5bbe997bc1c33c33c95ad88f6e5",
+          "origin": "worktree_tracked"
         },
         {
           "path": "integrations/rea_assistant.py",
           "symbol": "validate_agent_trace",
-          "line": 544
+          "line": 544,
+          "sha256": "276f2f6039ca41f55ca93bef3dcc4af0bb09d5bbe997bc1c33c33c95ad88f6e5",
+          "origin": "worktree_tracked"
         },
         {
           "path": "integrations/rea_assistant_mcp.py",
           "symbol": "create_mcp_server",
-          "line": 17
+          "line": 17,
+          "sha256": "439416395a067a8f20c787f63340034fd601ec97054b70d93356a7ed7fb80748",
+          "origin": "worktree_tracked"
         }
       ],
       "limitations": [
@@ -298,32 +378,44 @@
         {
           "path": "rag/enhanced_search_rag.py",
           "symbol": "UnifiedSearchRAG",
-          "line": 761
+          "line": 761,
+          "sha256": "dfd3d035f333249ae94d64de2ec26832902bba90122dd4757577cf249568de5e",
+          "origin": "worktree_tracked"
         },
         {
           "path": "rag/enhanced_search_rag.py",
           "symbol": "EnhancedRAG",
-          "line": 312
+          "line": 312,
+          "sha256": "dfd3d035f333249ae94d64de2ec26832902bba90122dd4757577cf249568de5e",
+          "origin": "worktree_tracked"
         },
         {
           "path": "rag/enhanced_search_rag.py",
           "symbol": "ReferenceAuditor",
-          "line": 602
+          "line": 602,
+          "sha256": "dfd3d035f333249ae94d64de2ec26832902bba90122dd4757577cf249568de5e",
+          "origin": "worktree_tracked"
         },
         {
           "path": "mci/evidence_graph.py",
           "symbol": "EvidenceGraph",
-          "line": 22
+          "line": 22,
+          "sha256": "3adf7c684a45f03686367deacbab7a02d5a1b92900d1a4b526e158a665dc3dff",
+          "origin": "worktree_tracked"
         },
         {
           "path": "agentic_science_v2/evidence_graph.py",
           "symbol": "EvidenceGraph",
-          "line": 128
+          "line": 128,
+          "sha256": "dc2a38eb9281b71cfbaf203051393ddefc696d3c4419e6c7e33c6bd3fa021afd",
+          "origin": "worktree_tracked"
         },
         {
           "path": "agentic_science_v2/deep_research.py",
           "symbol": "OrchestratorAgent",
-          "line": 468
+          "line": 468,
+          "sha256": "700cfc8ddeef9087682ed5a3d3c7aa7fa9b4a6cb6bd91f5c39ef9d046346505f",
+          "origin": "worktree_tracked"
         }
       ],
       "limitations": [
@@ -339,28 +431,38 @@
       "sources": [
         {
           "path": "marceloclaro/orchestrator.py",
-          "symbol": "memory_network_query",
-          "line": 265
+          "symbol": "MarceloClaroOrchestrator.memory_network_query",
+          "line": 376,
+          "sha256": "db75f2fc685f8b64896da9eb58fc602bcaff4a426ab517f347e275ea23381ce5",
+          "origin": "worktree_tracked"
         },
         {
           "path": "mci/metabus.py",
           "symbol": "MetacognitiveMemory",
-          "line": 51
+          "line": 61,
+          "sha256": "2f70d0da69be020b7120034032c524a34170acf330ce2e07e842712968b14221",
+          "origin": "worktree_tracked"
         },
         {
           "path": "webapp/memory_network_visualizer.py",
           "symbol": "CoreMemoryNetworkSource",
-          "line": 161
+          "line": 161,
+          "sha256": "491d8fc93d0f208128c52d2c8e8f10bf0d039c3d40edfdfd92d499f58d9596b3",
+          "origin": "worktree_tracked"
         },
         {
           "path": "webapp/memory_network_visualizer.py",
           "symbol": "MemoryNetworkVisualizer",
-          "line": 365
+          "line": 365,
+          "sha256": "491d8fc93d0f208128c52d2c8e8f10bf0d039c3d40edfdfd92d499f58d9596b3",
+          "origin": "worktree_tracked"
         },
         {
           "path": "webapp/memory_network_streamlit.py",
           "symbol": "render_memory_network_streamlit",
-          "line": 17
+          "line": 17,
+          "sha256": "bc5a10b25bb87fdb94eab4d1d318cbca4ed06a25beac9112d5a154dac3f59794",
+          "origin": "worktree_tracked"
         }
       ],
       "limitations": [
@@ -377,32 +479,44 @@
         {
           "path": "reasoning/reasoning_engines.py",
           "symbol": "route",
-          "line": 7
+          "line": 7,
+          "sha256": "b45efe76c98bada52f6ab903c5d376f6be42e19716f4fa260e3a0c304a7eb121",
+          "origin": "worktree_tracked"
         },
         {
           "path": "reasoning/z3_solver.py",
           "symbol": "check",
-          "line": 41
+          "line": 41,
+          "sha256": "c448340ddbe110049f2e3f41e054d77a7d257cbb56e62c507ba48a491e7a376c",
+          "origin": "worktree_tracked"
         },
         {
           "path": "reasoning/engines.py",
           "symbol": "_safe_build_z3_constraint",
-          "line": 78
+          "line": 83,
+          "sha256": "575873e86148a0db2bbb4cd6c59682b404d6fb693b3b044b979851fdbdf40144",
+          "origin": "worktree_tracked"
         },
         {
           "path": "reasoning/engines.py",
           "symbol": "_safe_math_ast",
-          "line": 332
+          "line": 337,
+          "sha256": "575873e86148a0db2bbb4cd6c59682b404d6fb693b3b044b979851fdbdf40144",
+          "origin": "worktree_tracked"
         },
         {
           "path": "reasoning/engines.py",
           "symbol": "SymPyEngine",
-          "line": 488
+          "line": 493,
+          "sha256": "575873e86148a0db2bbb4cd6c59682b404d6fb693b3b044b979851fdbdf40144",
+          "origin": "worktree_tracked"
         },
         {
           "path": "reasoning/engines.py",
           "symbol": "MultiReasoningEngine",
-          "line": 1446
+          "line": 1435,
+          "sha256": "575873e86148a0db2bbb4cd6c59682b404d6fb693b3b044b979851fdbdf40144",
+          "origin": "worktree_tracked"
         }
       ],
       "limitations": [
@@ -419,47 +533,65 @@
         {
           "path": "marceloclaro/doctor.py",
           "symbol": "run_doctor",
-          "line": 921
+          "line": 921,
+          "sha256": "434462f5ef57badbfbad6db5bb4efa20eaa8b8dccd4f0587b5d4dafd7ea41545",
+          "origin": "worktree_tracked"
         },
         {
           "path": "scanners/pipeline.py",
           "symbol": "DiagnosticPipeline",
-          "line": 96
+          "line": 96,
+          "sha256": "43b3f727c1fa2629d845b4462bca2227f545e87e69c1c44dfad727d607c288a9",
+          "origin": "worktree_tracked"
         },
         {
           "path": "scanners/noological_scanner.py",
           "symbol": "NoologicalScanner",
-          "line": 495
+          "line": 495,
+          "sha256": "0059e9c26c9f04ef52c90a10be09f8681163830fed41827b59e09fba589159f5",
+          "origin": "worktree_tracked"
         },
         {
           "path": "integrations/harness_federation/artifact.py",
           "symbol": "HarnessArtifact",
-          "line": 406
+          "line": 406,
+          "sha256": "6225fcd1ebb9ed71b77bb942e14a2d533682d8d58ceb8975994be618ecb9724d",
+          "origin": "worktree_tracked"
         },
         {
           "path": "trust/trust_engine.py",
           "symbol": "TrustEngine",
-          "line": 540
+          "line": 540,
+          "sha256": "d551a19bc2bb0640d7115910cceea2dcdf63dae95ca09304f0dc1762b7b4a496",
+          "origin": "worktree_tracked"
         },
         {
           "path": "economy/token_economy.py",
           "symbol": "TokenEconomy",
-          "line": 184
+          "line": 184,
+          "sha256": "3d7aa8d7b5614360ce1ae95da7107af0aedfb2b7ecb2676e7632c934dae19f77",
+          "origin": "worktree_tracked"
         },
         {
           "path": "evolution/cycles.py",
           "symbol": "EvolutionRegistry",
-          "line": 84
+          "line": 84,
+          "sha256": "dd7c6e7ee2b12b1029801df864e6d2190a942199d4e3923bf96c29e6df77ffb6",
+          "origin": "worktree_tracked"
         },
         {
           "path": "scanners/diagnostic_pipeline.py",
-          "symbol": "varrer",
-          "line": 46
+          "symbol": "DiagnosticPipeline.varrer",
+          "line": 46,
+          "sha256": "f3d50d85bf403cf372c11dd67e6f103651a437244fb0d041cb1de7e5ddb7ca5e",
+          "origin": "worktree_tracked"
         },
         {
           "path": "scanners/diagnostic_pipeline.py",
           "symbol": "run",
-          "line": 142
+          "line": 142,
+          "sha256": "f3d50d85bf403cf372c11dd67e6f103651a437244fb0d041cb1de7e5ddb7ca5e",
+          "origin": "worktree_tracked"
         }
       ],
       "limitations": [
@@ -476,49 +608,96 @@
       "sources": [
         {
           "path": "marceloclaro/orchestrator.py",
-          "symbol": "scientific_reproducible_run",
-          "line": 1904
+          "symbol": "MarceloClaroOrchestrator.scientific_reproducible_run",
+          "line": 2020,
+          "sha256": "db75f2fc685f8b64896da9eb58fc602bcaff4a426ab517f347e275ea23381ce5",
+          "origin": "worktree_tracked"
         },
         {
           "path": "marceloclaro/orchestrator.py",
-          "symbol": "scientific_discovery_pipeline",
-          "line": 2263
+          "symbol": "MarceloClaroOrchestrator.scientific_discovery_pipeline",
+          "line": 2505,
+          "sha256": "db75f2fc685f8b64896da9eb58fc602bcaff4a426ab517f347e275ea23381ce5",
+          "origin": "worktree_tracked"
         },
         {
           "path": "integrations/live_scientific_runtime.py",
           "symbol": "LiveScientificRuntime",
-          "line": 189
+          "line": 189,
+          "sha256": "c0bbf5bcd65ec51fe0d9e50b62f170a761d69cdea71d1d7dbd9e50b76b775e85",
+          "origin": "worktree_tracked"
         },
         {
           "path": "research/provenance_pipeline.py",
           "symbol": "ScientificProvenancePipeline",
-          "line": 260
+          "line": 260,
+          "sha256": "40abe1c827eb8313e711eb5e4dc116fbbdf092371f137ef4217c8db5061b4bb6",
+          "origin": "worktree_tracked"
         },
         {
           "path": "agentic_science_v2/paper_composer.py",
           "symbol": "OrchestratorComposer",
-          "line": 496
+          "line": 496,
+          "sha256": "8717cc24f56a99087fea1f80d5eb2f5d72de0f22a2ee18affe5a5714b5e2fb4e",
+          "origin": "worktree_tracked"
         },
         {
           "path": "mci/pipeline/scientific_governance_pipeline.py",
           "symbol": "run_scientific_governance_pipeline",
-          "line": 15
+          "line": 15,
+          "sha256": "c97d1d36cb4f8964c6a9512bb0a21cdc3fc542a00d3649e8730b4618be430119",
+          "origin": "worktree_tracked"
         },
         {
           "path": "marceloclaro/orchestrator.py",
-          "symbol": "scientific_runtime_run",
-          "line": 1926
+          "symbol": "MarceloClaroOrchestrator.scientific_runtime_run",
+          "line": 2119,
+          "sha256": "db75f2fc685f8b64896da9eb58fc602bcaff4a426ab517f347e275ea23381ce5",
+          "origin": "worktree_tracked"
         },
         {
           "path": "research/statistical_methods.py",
           "symbol": "execute_analysis",
-          "line": 84
+          "line": 84,
+          "sha256": "1d365348d6215025d519a5da4d11cdfec24ae2e0e56266419aa9409bedc9f4b8",
+          "origin": "worktree_tracked"
+        },
+        {
+          "path": "academic/adversarial_research/service.py",
+          "symbol": "AdversarialResearchService",
+          "line": 40,
+          "sha256": "85f37812211eb8bf90e2991702c5f4424b1327542333c21bd142b9f6c02e50a0",
+          "origin": "worktree_tracked"
+        },
+        {
+          "path": "academic/adversarial_research/board.py",
+          "symbol": "review_research",
+          "line": 11,
+          "sha256": "d63486a04940b2d32e1116f01a146f8121fed5e5abe68412c89fa384c52a334c",
+          "origin": "worktree_tracked"
+        },
+        {
+          "path": "academic/adversarial_research/banca.py",
+          "symbol": "BancaSessionStore",
+          "line": 7,
+          "sha256": "0ab2dc6478dfe34723cc040a8c239d6575892738a63c8fd77231de6a8ba0e596",
+          "origin": "worktree_tracked"
+        },
+        {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.academic_rigor_action",
+          "line": 2084,
+          "sha256": "db75f2fc685f8b64896da9eb58fc602bcaff4a426ab517f347e275ea23381ce5",
+          "origin": "worktree_tracked"
         }
       ],
       "limitations": [
         "Deep Research sem evidência elegível bloqueia a descoberta estrita.",
         "Governança de entradas reportadas não executa experimento sobre dados brutos.",
-        "Composição e revisão internas não constituem parecer editorial ou validação clínica."
+        "Composição e revisão internas não constituem parecer editorial ou validação clínica.",
+        "Rigor acadêmico parcial: perfis e CLI dedicada removidos; local_checks não é inferência dos especialistas.",
+        "Spec ausente bloqueia G0; banca_rate chama método ausente.",
+        "O preflight acadêmico não tem chamador no pipeline amostrado."
       ]
     },
     {
@@ -530,28 +709,413 @@
         {
           "path": "scripts/quality_report.py",
           "symbol": "load_junit_results",
-          "line": 65
+          "line": 65,
+          "sha256": "c026de4ed06675b86366369fae430902da6568417131f2373bfb9342765d7920",
+          "origin": "worktree_tracked"
         },
         {
           "path": "scripts/quality_report.py",
           "symbol": "generate_report",
-          "line": 211
+          "line": 211,
+          "sha256": "c026de4ed06675b86366369fae430902da6568417131f2373bfb9342765d7920",
+          "origin": "worktree_tracked"
         },
         {
           "path": "sdd/tdd_runner.py",
           "symbol": "run_pytest",
-          "line": 554
+          "line": 554,
+          "sha256": "1eeb7d8b544c33871c98de1e85063387271ead9b96ae1efae0ab760c106610d5",
+          "origin": "worktree_tracked"
         },
         {
           "path": "marceloclaro/doctor.py",
           "symbol": "run_doctor",
-          "line": 921
+          "line": 921,
+          "sha256": "434462f5ef57badbfbad6db5bb4efa20eaa8b8dccd4f0587b5d4dafd7ea41545",
+          "origin": "worktree_tracked"
         }
       ],
       "limitations": [
         "Suíte local, lint e CI remota são verificações distintas.",
         "Diagrama representa o procedimento de entrega; resultado remoto deve ser observado separadamente."
       ]
+    },
+    {
+      "id": "plugins-locais",
+      "title": "Plugins locais, Lean 4 e MiroFish",
+      "description": "Pacotes privados reutilizam o mesmo primário; status e execução possuem contratos distintos.",
+      "file": "flows/14-plugins-locais.mmd",
+      "sources": [
+        {
+          "path": "integrations/component_mcp.py",
+          "symbol": "create_server",
+          "line": 11,
+          "sha256": "507a6b114f75f80e3aeceb41f213a9424dd6f7d0afd4aad514fc5c90971bdbf7",
+          "origin": "worktree_tracked"
+        },
+        {
+          "path": "integrations/component_actions.py",
+          "symbol": "dispatch_component",
+          "line": 30,
+          "sha256": "c434d4f5a5c2fbfd28d4ea7582428ef0e0b58bb2045fac2df9739af96c780e75",
+          "origin": "worktree_tracked"
+        },
+        {
+          "path": "integrations/local_lean.py",
+          "symbol": "LocalLeanVerifier",
+          "line": 11,
+          "sha256": "950e712c55d3dc468b81117d1ae663978aafdf7a80dae14b78cb12d2dcec6b41",
+          "origin": "worktree_tracked"
+        },
+        {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.local_component_action",
+          "line": 2109,
+          "sha256": "db75f2fc685f8b64896da9eb58fc602bcaff4a426ab517f347e275ea23381ce5",
+          "origin": "worktree_tracked"
+        }
+      ],
+      "limitations": [
+        "MiroFish exige endpoint local previamente disponível; instalação não comprova inferência.",
+        "No checkout amostrado, LocalLeanVerifier relata axiomas somente do primeiro teorema e limita AS a 4 GiB.",
+        "O caminho CLI lean4 legado pode produzir syntax_verified; ele não equivale à compilação do plugin.",
+        "Conteúdo devolvido ao aplicativo de chat pode ser processado fora da máquina."
+      ]
+    },
+    {
+      "id": "notebooklm",
+      "title": "NotebookLM coordenado e política R915",
+      "description": "CLI, MCP, catálogo e skill compartilham validação, política de efeitos e recibos pelo MarceloClaro.",
+      "file": "flows/15-notebooklm.mmd",
+      "sources": [
+        {
+          "path": "integrations/gemini_notebook.py",
+          "symbol": "GeminiNotebookService",
+          "line": 83,
+          "sha256": "72af1942f1943dc81751d8d07f7d68b7c39603cef490a1e009c1d36cb7be312a",
+          "origin": "worktree_tracked"
+        },
+        {
+          "path": "integrations/gemini_notebook_catalog.py",
+          "symbol": "classify_mcp_operation",
+          "line": 79,
+          "sha256": "878ff8777cb1f81422194d453a63e2ef48157e6887b8cc5984aaa0dfa01c56e2",
+          "origin": "worktree_tracked"
+        },
+        {
+          "path": "integrations/gemini_notebook_session.py",
+          "symbol": "_configuration",
+          "line": 50,
+          "sha256": "5e69924d012d160193250adbf288803ba1cdea5db9c8754304874e7e46a4fc41",
+          "origin": "worktree_tracked"
+        },
+        {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.gemini_notebook_action",
+          "line": 2195,
+          "sha256": "db75f2fc685f8b64896da9eb58fc602bcaff4a426ab517f347e275ea23381ce5",
+          "origin": "worktree_tracked"
+        }
+      ],
+      "limitations": [
+        "Conector comunitário: não é API oficial de conta pessoal do Google.",
+        "A sonda R915 observou 0.15.6, 53 ferramentas, 165 callbacks e 234 notebooks; trata-se de execução datada.",
+        "alias, chat_save_to_note, profile e report continuam bloqueadas pela política MCP do Core.",
+        "Jobs voláteis permanecem vinculados à sessão original; nova sessão não comprova continuidade."
+      ]
+    },
+    {
+      "id": "autenticacoes",
+      "title": "Autenticações de ChatGPT, Gemini e NotebookLM",
+      "description": "Três clientes e sessões independentes; resposta observada e login são evidências diferentes.",
+      "file": "flows/16-autenticacoes.mmd",
+      "sources": [
+        {
+          "path": "integrations/gemini_cli.py",
+          "symbol": "gemini_run",
+          "line": 69,
+          "sha256": "4cbcb61a87896106508122e470aad06035b35f1cb4202719f0c0698968a924e0",
+          "origin": "worktree_tracked"
+        },
+        {
+          "path": "integrations/gemini_notebook.py",
+          "symbol": "validate_notebook_config",
+          "line": 41,
+          "sha256": "72af1942f1943dc81751d8d07f7d68b7c39603cef490a1e009c1d36cb7be312a",
+          "origin": "worktree_tracked"
+        },
+        {
+          "path": "integrations/opencode_cli.py",
+          "symbol": "build_config",
+          "line": 399,
+          "sha256": "f1eef169534badcdcea479156f0c38d6e03f55cb9dc8fe390e16327258be52e7",
+          "origin": "worktree_tracked"
+        }
+      ],
+      "limitations": [
+        "Nenhuma conversa web é automaticamente importada.",
+        "Login Gemini CLI não configura um provider Google no OpenCode.",
+        "Tarifas de API, créditos e franquia de assinatura não são intercambiáveis."
+      ]
+    },
+    {
+      "id": "metacognicao",
+      "title": "Ciclo metacognitivo e memória de outcomes",
+      "description": "Recuperação de lições antes da tarefa e observação posterior, sem transformar heurística em validação externa.",
+      "file": "flows/17-metacognicao.mmd",
+      "sources": [
+        {
+          "path": "mci/metacognitive_loop.py",
+          "symbol": "MetacognitiveLoop",
+          "line": 23,
+          "sha256": "9a3e96651a4a1ee2ec7a372ae60cf0941395949e711f2a9569967ae5a077e020",
+          "origin": "worktree_tracked"
+        },
+        {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.delegate",
+          "line": 422,
+          "sha256": "db75f2fc685f8b64896da9eb58fc602bcaff4a426ab517f347e275ea23381ce5",
+          "origin": "worktree_tracked"
+        },
+        {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.report_completion",
+          "line": 870,
+          "sha256": "db75f2fc685f8b64896da9eb58fc602bcaff4a426ab517f347e275ea23381ce5",
+          "origin": "worktree_tracked"
+        },
+        {
+          "path": "mci/reflexion.py",
+          "symbol": "ReflexionEngine",
+          "line": 19,
+          "sha256": "12d0a08b16172b322bac61866413c0eb364eddb0ef72587e07ea0900ca799d2d",
+          "origin": "worktree_tracked"
+        }
+      ],
+      "limitations": [
+        "Observações locais não são calibração probabilística nem revisão científica.",
+        "Trust.learn, resolução econômica e observações de memória são efeitos diferentes.",
+        "Memória recuperada é dado contextual, não uma nova autorização ou instrução."
+      ]
+    },
+    {
+      "id": "lifecycle",
+      "title": "Lifecycle permanente de agentes e subagentes",
+      "description": "Definição validada, contrato, permissões e correlação da tarefa antes da execução efetiva.",
+      "file": "flows/18-lifecycle.mmd",
+      "sources": [
+        {
+          "path": "agents/lifecycle.py",
+          "symbol": "AgentLifecycleService",
+          "line": 232,
+          "sha256": "80f1fca2c93e373ef8da8a45d69d3154e495fd36d6766de7dd60834edd92c083",
+          "origin": "worktree_tracked"
+        },
+        {
+          "path": "agents/lifecycle.py",
+          "symbol": "validate_managed_card",
+          "line": 162,
+          "sha256": "80f1fca2c93e373ef8da8a45d69d3154e495fd36d6766de7dd60834edd92c083",
+          "origin": "worktree_tracked"
+        },
+        {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.agent_profile_action",
+          "line": 237,
+          "sha256": "db75f2fc685f8b64896da9eb58fc602bcaff4a426ab517f347e275ea23381ce5",
+          "origin": "worktree_tracked"
+        }
+      ],
+      "limitations": [
+        "Registro e atribuição não comprovam inferência ou conclusão.",
+        "Definições históricas conservam baseline; alterações exigem migração explícita.",
+        "Ferramentas externas de subagentes não são interceptadas automaticamente pelo Core."
+      ]
+    },
+    {
+      "id": "ci-local",
+      "title": "CI local e validação delimitada",
+      "description": "Alternativa local ao bloqueio da CI remota, com seleção fechada e recibos próprios.",
+      "file": "flows/19-ci-local.mmd",
+      "sources": [
+        {
+          "path": "integrations/local_ci.py",
+          "symbol": "LocalCIService",
+          "line": 139,
+          "sha256": "ac5462db94156edbdba9ebb37743acbb91206f3f08c5e2a8e78220c16ffb0b84",
+          "origin": "worktree_tracked"
+        },
+        {
+          "path": "scripts/validate_scientific_profile.py",
+          "symbol": "main",
+          "line": 534,
+          "sha256": "f072e2f8bc2aa3143f0b34982c3ebfe12b50dbe5d697df2d4f017876cb4afb5b",
+          "origin": "worktree_tracked"
+        },
+        {
+          "path": "marceloclaro/orchestrator.py",
+          "symbol": "MarceloClaroOrchestrator.local_ci_action",
+          "line": 330,
+          "sha256": "db75f2fc685f8b64896da9eb58fc602bcaff4a426ab517f347e275ea23381ce5",
+          "origin": "worktree_tracked"
+        }
+      ],
+      "limitations": [
+        "O perfil fechado não executa comandos, URLs ou testes arbitrários fornecidos pelo chamador.",
+        "Aprovação local não cria check GitHub nem comprova suíte global.",
+        "Conservar resultados anteriores como históricos quando as fontes mudarem."
+      ]
+    },
+    {
+      "id": "economia-modelos",
+      "title": "Seleção econômica de modelos e contexto",
+      "description": "Política recomendada para comparar custo por tarefa aceita; não é um roteador automático novo.",
+      "file": "flows/20-economia-modelos.mmd",
+      "sources": [
+        {
+          "path": "integrations/opencode_cli.py",
+          "symbol": "build_config",
+          "line": 399,
+          "sha256": "f1eef169534badcdcea479156f0c38d6e03f55cb9dc8fe390e16327258be52e7",
+          "origin": "worktree_tracked"
+        },
+        {
+          "path": "integrations/gemini_cli.py",
+          "symbol": "gemini_run",
+          "line": 69,
+          "sha256": "4cbcb61a87896106508122e470aad06035b35f1cb4202719f0c0698968a924e0",
+          "origin": "worktree_tracked"
+        },
+        {
+          "path": "integrations/code_context.py",
+          "symbol": "CodeContextProvider",
+          "line": 75,
+          "sha256": "1b656010be3dfb1aa6a7572f7f7199a1caef1de5905bc2ab42dfc88f1ad75b3c",
+          "origin": "worktree_tracked"
+        }
+      ],
+      "limitations": [
+        "Este é um fluxo de decisão operacional recomendado, não uma implementação automática adicional.",
+        "Modelos anunciados no catálogo não comprovam acesso por assinatura ou inferência.",
+        "Preços de API não estimam a franquia de assinatura. Medir tokens e qualidade nas mesmas tarefas."
+      ]
+    },
+    {
+      "id": "contexto-codigo",
+      "title": "Contexto de código e consultas de grafo",
+      "description": "Busca e estrutura local reduzem leituras desnecessárias; ganhos precisam de medição comparável.",
+      "file": "flows/21-contexto-codigo.mmd",
+      "sources": [
+        {
+          "path": "integrations/code_context.py",
+          "symbol": "CodeContextProvider",
+          "line": 75,
+          "sha256": "1b656010be3dfb1aa6a7572f7f7199a1caef1de5905bc2ab42dfc88f1ad75b3c",
+          "origin": "worktree_tracked"
+        },
+        {
+          "path": "integrations/code_context.py",
+          "symbol": "CodeContextProvider._source_files",
+          "line": 219,
+          "sha256": "1b656010be3dfb1aa6a7572f7f7199a1caef1de5905bc2ab42dfc88f1ad75b3c",
+          "origin": "worktree_tracked"
+        },
+        {
+          "path": "integrations/code_context.py",
+          "symbol": "CodeContextProvider._python_graph",
+          "line": 647,
+          "sha256": "1b656010be3dfb1aa6a7572f7f7199a1caef1de5905bc2ab42dfc88f1ad75b3c",
+          "origin": "worktree_tracked"
+        }
+      ],
+      "limitations": [
+        "Grafo estático não comprova caminho executado ou ausência de bugs.",
+        "Três operações nativas conhecidas como incorretas continuam bloqueadas; python_graph tem contrato próprio.",
+        "Não foi medida nesta revisão uma porcentagem de redução de tokens."
+      ]
     }
-  ]
+  ],
+  "source": {
+    "review": "R916",
+    "mode": "worktree",
+    "base_commit": "84ef0820a71f52756203854ea83d5a1211d8c254",
+    "worktree_sha256": "19e1b500a9d05bd7d2633a60b4c203f52ce8abc5697773afec55ee6386fce8f1",
+    "changed_paths": [
+      "academic/adversarial_research/banca.py",
+      "academic/adversarial_research/board.py",
+      "academic/adversarial_research/evidence.py",
+      "academic/adversarial_research/guards.py",
+      "academic/adversarial_research/router.py",
+      "academic/adversarial_research/service.py",
+      "integrations/component_actions.py",
+      "integrations/ecosystem_mcp.py",
+      "integrations/live_scientific_runtime.py",
+      "integrations/local_lean.py",
+      "integrations/opencode_cli.py",
+      "marceloclaro/cli.py",
+      "marceloclaro/orchestrator.py",
+      "mci/blackboard.py",
+      "opencode.json",
+      "scripts/build_architecture_maps.py",
+      "scripts/build_mermaid_architecture.py",
+      "scripts/sync_readme_flowcharts.py"
+    ],
+    "deleted_paths": [
+      "Nova pasta/ESCOLA  NOTA DEZ-RELAÇÃO DOS BENS ADQUIRIDOS-ANEXO 5.docx",
+      "Nova pasta/ESCOLA NOTA 10-CHECK LIST- ARTIGO 75 I, II LEI 141333-2021E LEI 15976-2025.doc",
+      "Nova pasta/ESCOLA NOTA 10-Comprovação da execução da ação de cooperação técnico-pedagógica (anexo 10).doc",
+      "Nova pasta/ESCOLA NOTA 10-EXECUÇÃO DA RECEITA E DESPESA-ANEXO 4.docx",
+      "Nova pasta/ESCOLA NOTA 10-MAPA COMPARATIVO DE PREÇOS-LEI 14133-2021-COMISSÃO DE CONTRATAÇÃO.doc",
+      "Nova pasta/ESCOLA NOTA 10-Ofício da Solicitação de Readequação do Plano de Aplicação dos Recursos Financeiros (anexo 8).doc",
+      "Nova pasta/ESCOLA NOTA 10-Ofício de utilização de Saldo de ações e aplicações financeiras (anexo 9).doc",
+      "Nova pasta/ESCOLA NOTA 10-PLANILHA DE PESQUISA DE PREÇOS-ANEXO 3.docx",
+      "Nova pasta/ESCOLA NOTA DEZ-RELAÇÃO DOS BENS ADQUIRIDOS(MODELO).doc",
+      "Nova pasta/ESCOLA NOTA DEZ-TERMO DE DOAÇÃO DOS BENS (MODELO) - ANEXO 7.doc",
+      "academic/adversarial_research/profiles.py",
+      "academic/adversarial_research/scoring.py",
+      "agents/catalog/research-adversarial-examiner.md",
+      "agents/catalog/research-banca-chair.md",
+      "agents/catalog/research-causal-inference-skeptic.md",
+      "agents/catalog/research-citation-integrity-auditor.md",
+      "agents/catalog/research-computational-claims-auditor.md",
+      "agents/catalog/research-concept-genealogist.md",
+      "agents/catalog/research-contingency-auditor.md",
+      "agents/catalog/research-corpus-auditor.md",
+      "agents/catalog/research-data-governance-auditor.md",
+      "agents/catalog/research-epistemic-extraction-watchdog.md",
+      "agents/catalog/research-evidence-ledger.md",
+      "agents/catalog/research-gap-verifier.md",
+      "agents/catalog/research-human-ethics-auditor.md",
+      "agents/catalog/research-indigenous-governance-auditor.md",
+      "agents/catalog/research-institutional-fit-auditor.md",
+      "agents/catalog/research-instrument-calibrator.md",
+      "agents/catalog/research-intake-auditor.md",
+      "agents/catalog/research-interdisciplinarity-auditor.md",
+      "agents/catalog/research-interrater-auditor.md",
+      "agents/catalog/research-model-variance-auditor.md",
+      "agents/catalog/research-negative-cases-auditor.md",
+      "agents/catalog/research-novelty-opponent.md",
+      "agents/catalog/research-operational-feasibility.md",
+      "agents/catalog/research-operationalization-auditor.md",
+      "agents/catalog/research-problem-decomposer.md",
+      "agents/catalog/research-remediation-planner.md",
+      "agents/catalog/research-reproducibility-auditor.md",
+      "agents/catalog/research-rival-hypotheses.md",
+      "agents/catalog/research-rubric-scoring-auditor.md",
+      "agents/catalog/research-sampling-auditor.md",
+      "agents/catalog/research-source-provenance-auditor.md",
+      "agents/catalog/research-timeline-auditor.md",
+      "agents/catalog/research-transferability-auditor.md",
+      "agents/catalog/research-triangulation-auditor.md",
+      "docs/USAR_REA_MIROFISH_LEAN4_NO_CHATGPT.md",
+      "docs/academic-rigor/README.md",
+      "docs/academic-rigor/SPEC-OCRE-ACADEMIC-RIGOR-v1-user.md",
+      "integrations/local_mirofish_model.py",
+      "marceloclaro/rigor_cli.py",
+      "specs/SPEC-935-R914-rigor-academico-adversarial.md"
+    ],
+    "excluded_paths": [],
+    "scope": "current_tracked_production_sources; non-source index metadata from base Git"
+  }
 }

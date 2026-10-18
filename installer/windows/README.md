@@ -176,7 +176,7 @@ contagens estruturais locais, não resultados de cobertura, testes ou validaçã
 externa.
 
 <!-- core-state:start -->
-**346 agentes** · **16 MCPs** · **34 comandos** · **22 checks**
+**312 agentes** · **16 MCPs** · **33 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](../../opencode.json) e do [diagnóstico estrutural](../../marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 
@@ -206,3 +206,12 @@ revise os artefatos, o log e o estado local antes do uso.
 ## Atalhos e remoção
 
 O wrapper tenta criar atalhos do Windows para OpenCode, Antigravity, Claude Code e a CLI do ecossistema. Verifique os caminhos criados antes de usá-los. Para remover componentes, use `Uninstall-OpenCodeEcosystem.ps1` apenas a partir do checkout local e leia a confirmação exigida para cada operação destrutiva.
+
+## Conexões e documentação atual
+
+A orientação operacional está no [índice documental](../../docs/README.md),
+no [estado R916](../../docs/ESTADO_ATUAL_CORE_R916.md) e no
+[guia de autenticação](../../docs/AUTENTICACAO_CHATGPT_NOTEBOOKLM.md).
+O pacote NotebookLM opcional está fixado em 0.15.6. Plugins locais possuem
+instalador próprio e não transferem credenciais ou conversas web. Linux/WSL é
+necessário para os percursos que exigem namespaces e broker Unix.

@@ -1,4 +1,4 @@
-// Visão de composição, curada no snapshot 6380cfa. Não é rastreamento dinâmico.
+// R916: composição curada contra fontes atuais; não é rastreamento dinâmico.
 digraph Core {
  graph [rankdir=TB,bgcolor="white",pad="0.35",nodesep="0.45",ranksep="0.55",splines=polyline];
  node [shape=box,style="rounded,filled",fillcolor="#e2f4f5",color="#389b9e",fontcolor="#102d3a",fontname="Arial",fontsize=17,margin="0.18,0.13"];
@@ -7,11 +7,15 @@ digraph Core {
  primario [label="PRIMÁRIO MARCELOCLARO\nMarceloClaroOrchestrator\nCompartilhado nas superfícies MCP",fillcolor="#c1e9e8",penwidth=2];
  execucao [label="COORDENAÇÃO E EXECUÇÃO\nBlackboard · AttentionRouter\nAutonomousCoordinator\nWorkflowCoordinator\nHarnessRuntime: stdin e prazo\nCancelamento supervisionado"];
  governanca [label="CONTRATOS E GOVERNANÇA\nSpecRegistry · SpecVerifier\nTDDRunner · TDDHistory\nCustódia RED/GREEN\nTrustEngine · economia"];
- conhecimento [label="CONTEXTO E CONHECIMENTO\nMetaBus · memória · RAG\nEvidenceGraph: modelos distintos\nGramáticas restritas"];
- rea [label="ENGENHARIA REVERSA\nBridge legado · 18 camadas declaradas\nLocalReaAssistant: worker NET/PID\nAgente local: MCP + recibo obrigatório",fillcolor="#fff1dd"];
+ conhecimento [label="CONTEXTO E CONHECIMENTO\nMetaBus · MetacognitiveLoop · RAG\nEvidenceGraph: modelos distintos\nContexto de código · gramáticas restritas"];
+ rea [label="ENGENHARIA REVERSA\nBridge · camadas declaradas\nLocalReaAssistant: worker NET/PID\nAgente local: MCP + recibo obrigatório",fillcolor="#fff1dd"];
  diagnostico [label="DIAGNÓSTICO E EVOLUÇÃO\nPipeline lexical / evolutivo\nPipeline de sincronismo de artefatos\nEvolutionRegistry · ciclos"];
  ciencia [label="DOMÍNIOS E ARTEFATOS\nCiência · pesquisa · publicação\nMIRA · livro · aplicações de domínio\nProveniência e avaliação por operação"];
  externo [label="FRONTEIRAS OPCIONAIS\nCLIs · modelos · engines externos\nAutenticação · licença\nExecução separadamente observada",fillcolor="#edf0f7",style="rounded,filled,dashed"];
+ plugins [label="PLUGINS LOCAIS\nREA · MiroFish · Lean 4\nMesmo primário e contratos delimitados"];
+ notebook [label="NOTEBOOKLM 0.15.6\nPolítica por efeito · sessão privada\nServiço Google externo; não offline"];
+ lifecycle [label="LIFECYCLE E CI LOCAL\nPerfil validado antes da atribuição\nCI scientific fechada · recibos locais"];
+ modelos [label="MODELOS E ECONOMIA\nOpenAI/ChatGPT · Gemini/Google\nContexto compacto · orçamento\nCusto por tarefa aceita"];
  entrada -> primario [label="pedido / integração"];
  primario -> execucao [label="coordenação"];
  primario -> governanca [label="contrato e aceite"];
@@ -19,6 +23,12 @@ digraph Core {
  primario -> rea [style=dashed,label="operação específica"];
  primario -> diagnostico [style=dashed,label="registro e diagnóstico"];
  primario -> ciencia [style=dashed,label="operações de domínio"];
+ entrada -> plugins [label="plugins privados"];
+ plugins -> primario [label="mesma coordenação"];
+ primario -> notebook [label="fachada central"];
+ primario -> lifecycle [label="contratos e seleção"];
+ execucao -> modelos [label="modelo explícito"];
+ notebook -> externo [style=dashed,label="rede e conta Google"];
  execucao -> externo [style=dashed,label="executor condicionado"];
  rea -> externo [style=dashed,label="provedor / modelo local"];
  {rank=same;execucao;governanca;conhecimento}

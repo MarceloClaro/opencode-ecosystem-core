@@ -1,3 +1,9 @@
+> **Documento histórico R879.** As contagens e verificações abaixo pertencem
+> ao retrato original. A edição corrente está no [guia R916](ARQUITETURA_COMPLETA_CORE_R916.md).
+> Os artefatos em `docs/architecture/` foram regenerados; consulte a revisão
+> Git 84ef082 para recuperar seus bytes anteriores. Não interpretar estes
+> recibos como validação das fontes locais atuais.
+
 # Arquitetura completa do OpenCode Ecosystem Core — R879
 
 Este documento acompanha o mapa navegável e os fluxogramas operacionais do Core. A referência de implementação é o commit `6380cfa`: o código rastreado nessa revisão, a configuração compilada e as fontes indicadas em cada fluxo. A documentação R879 amplia a representação da arquitetura; não constitui uma nova execução de todos os componentes nem certificação de completude funcional.

@@ -163,12 +163,14 @@ def test_current_snapshot_mermaid_json_svg_sets_are_identical(builder):
     snapshot = json.loads((ROOT / "docs/architecture/architecture-inventory.json").read_text())
     text = builder.render_mermaid(snapshot)
     nodes, edges = graph_sets(text)
-    assert len(nodes) == 677
-    assert len(edges) == 935
-    assert len(snapshot["edges"]) == 1051
+    assert len(nodes) == snapshot["counts"]["python_production_modules"]
+    assert len(edges) == snapshot["counts"]["unique_module_pairs"]
+    assert len(snapshot["edges"]) == snapshot["counts"]["declared_import_edges"]
     modules_metadata = comments(text, "%% module-metadata ")
-    assert sum(len(entry["symbols"]) for entry in modules_metadata) == 6432
-    assert text.count('subgraph pkg_') == 45
+    symbol_count = sum(len(entry["symbols"]) for entry in modules_metadata)
+    assert symbol_count == sum(len(module["symbols"]) for module in snapshot["modules"])
+    packages = {module["package"] for module in snapshot["modules"]}
+    assert text.count('subgraph pkg_') == len(packages)
     svg = ET.parse(ROOT / "docs/architecture/dependencies.svg").getroot()
     ns = {"svg": "http://www.w3.org/2000/svg"}
     svg_nodes = {node.attrib["id"] for node in svg.findall('.//svg:g[@class="node"]', ns)}
@@ -176,7 +178,9 @@ def test_current_snapshot_mermaid_json_svg_sets_are_identical(builder):
     assert nodes == svg_nodes == {module["id"] for module in snapshot["modules"]}
     assert edges == svg_edges == {(edge["source_id"], edge["target_id"]) for edge in snapshot["edges"]}
     manifest = builder.build_correspondence(snapshot, text)
-    assert manifest["counts"] == {"modules": 677, "module_pairs": 935, "ast_declarations": 1051, "symbols": 6432, "packages": 45, "layers": 18}
+    assert manifest["counts"] == {"modules": len(nodes), "module_pairs": len(edges),
+        "ast_declarations": len(snapshot["edges"]), "symbols": symbol_count,
+        "packages": len(packages), "layers": len({module['layer'] for module in snapshot['modules']})}
 
 
 def test_published_mermaid_manifest_and_rendered_svg_preserve_the_graph(builder):

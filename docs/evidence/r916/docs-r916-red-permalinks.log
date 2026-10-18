@@ -1,0 +1,204 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+______ test_worktree_source_links_never_misattribute_changed_bytes[True] _______
+
+tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-50/test_worktree_source_links_nev0')
+changed = True
+
+    @pytest.mark.parametrize('changed',[True,False])
+    def test_worktree_source_links_never_misattribute_changed_bytes(tmp_path,changed):
+        from scripts.sync_readme_flowcharts import render_block
+        folder=tmp_path/'docs/architecture/flows';folder.mkdir(parents=True)
+        (tmp_path/'source.py').write_text('def run():\n    return 1\n')
+        (folder/'one.mmd').write_text('flowchart LR\n  A --> B\n')
+        (folder/'one.svg').write_text('<svg/>')
+        entry={'id':'one','title':'Example','description':'Example','file':'flows/one.mmd',
+               'sources':[{'path':'source.py','line':1,'symbol':'run'}],'limitations':['Local']}
+        base='a'*40
+        catalog={'flows':[entry],'source':{'mode':'worktree','base_commit':base,
+            'worktree_sha256':'b'*64,'changed_paths':['source.py'] if changed else [],'deleted_paths':[]}}
+        (tmp_path/'docs/architecture/flows.json').write_text(json.dumps(catalog))
+>       block=render_block(tmp_path)
+              ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r916_documentation_atlas.py:187:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+root = PosixPath('/tmp/pytest-of-marceloclaro/pytest-50/test_worktree_source_links_nev0')
+
+    def render_block(root: Path) -> str:
+        catalog = json.loads(_inside(root, "docs/architecture/flows.json").read_text(encoding="utf-8"))
+        entries = catalog["flows"]
+        if not entries or len({entry["id"] for entry in entries}) != len(entries):
+            raise ValueError("Catálogo vazio ou com IDs duplicados.")
+        source = catalog.get("source", {})
+        source_notice = (f"Fontes do checkout atual; base Git `{source.get('base_commit')}`; "
+            f"identidade worktree `{source.get('worktree_sha256')}`. "
+            f"{len(source.get('changed_paths', []))} arquivos rastreados modificados e "
+            f"{len(source.get('deleted_paths', []))} removidos foram contabilizados; fontes não rastreadas não entram.") \
+            if source.get("mode") == "worktree" else "Fontes do snapshot Git declarado no catálogo."
+        lines = [START, "## Fluxogramas operacionais completos", "",
+            "Os fluxogramas abaixo são cópias integrais das mesmas fontes usadas no",
+            "[mapa navegável](docs/architecture_map.html). A ordem, as descrições, as fontes",
+            "e as limitações seguem o [catálogo de fluxos](docs/architecture/flows.json).",
+            "A edição e a origem das fontes estão declaradas no catálogo e no inventário.", source_notice,
+            "Estes desenhos não representam uma nova execução de todos os componentes.", "",
+            "### Legenda e critérios de leitura", "",
+            "| Elemento | Como interpretar |",
+            "|---|---|",
+            "| Retângulo | Componente, etapa, dado ou artefato indicado pelo rótulo. |",
+            "| Losango | Decisão ou condição; siga o texto de cada saída. |",
+            "| Grupo delimitado | Subsistema ou fronteira de responsabilidade. Não implica isolamento de rede. |",
+            "| Seta contínua | Direção de controle, dado ou composição conforme o título e o rótulo; não implica chamada direta entre todas as caixas. |",
+            "| Seta pontilhada | Caminho condicional, dependência opcional ou relação explicativa; leia o rótulo e os limites do fluxo. |",
+            "| Cores | Auxílio visual de agrupamento; nomes e rótulos conservam a informação sem depender da cor. |",
+            "| Fonte de código | Âncora de arquivo, símbolo e linha no retrato documentado; não é recibo de execução. |", "",
+            "Instalação, disponibilidade, autenticação, inferência concluída, entrega aceita",
+            "e validação externa são estados distintos. Evidências de uma operação local",
+            "valem apenas para seu escopo. Referências a agentes ou ferramentas opcionais",
+            "não garantem saldo, licença, credenciais, isolamento ou funcionamento atual.", "",
+            "No grafo estrutural integral, a seta tem significado mais restrito:",
+            "**módulo importador → dependência Python declarada**. Consulte a",
+            "[fonte Mermaid integral](docs/architecture/dependencies.mmd), o",
+            "[SVG equivalente](docs/architecture/dependencies-mermaid.svg) e o",
+            "[guia da legenda e reprodução](docs/architecture/MERMAID_INTEGRAL.md).", "",
+        ]
+        for number, entry in enumerate(entries, 1):
+            if PurePosixPath(entry["file"]).is_absolute():
+                raise ValueError("Fonte de fluxo deve usar caminho relativo.")
+            relative = "docs/architecture/" + entry["file"]
+            source = _inside(root, relative)
+            if source.suffix != ".mmd":
+                raise ValueError("Fonte de fluxo deve ser Mermaid (.mmd).")
+            svg_relative = str(PurePosixPath(relative).with_suffix(".svg"))
+            _inside(root, svg_relative)
+            code = source.read_text(encoding="utf-8")
+            if "```" in code or not code.endswith("\n"):
+                raise ValueError("Fonte deve terminar com newline e não conter cercas Markdown.")
+            lines.extend([f"### {number:02d}. {entry['title']}", "", entry["description"], "",
+                          "```mermaid", code + "```", "",
+                          f"[Fonte Mermaid]({relative}) · [Abrir SVG]({svg_relative})", "", "**Fontes de código:**", ""])
+            for item in entry["sources"]:
+                source_path = _inside(root, item["path"])
+                if type(item["line"]) is not int or item["line"] < 1:
+                    raise ValueError("Linha de origem inválida.")
+                data = source_path.read_bytes()
+                text = data.decode("utf-8-sig")
+                if item["line"] > len(text.splitlines()):
+                    raise ValueError(f"Âncora além do arquivo: {item['path']}")
+                if item.get("sha256") and hashlib.sha256(data).hexdigest() != item["sha256"]:
+                    raise ValueError(f"Âncora com fonte modificada: {item['path']}")
+                if source_path.suffix == ".py" and item.get("symbol"):
+                    name = item["symbol"].split(".")[-1]
+                    if not any(isinstance(node, (ast.ClassDef, ast.FunctionDef, ast.AsyncFunctionDef))
+                               and node.name == name and node.lineno == item["line"]
+                               for node in ast.walk(ast.parse(text))):
+                        raise ValueError(f"Âncora não corresponde ao símbolo: {item['path']}:{item['line']}")
+>               if source.get("mode") == "worktree" and item["path"] in source.get("changed_paths", []):
+                   ^^^^^^^^^^
+E               AttributeError: 'PosixPath' object has no attribute 'get'
+
+scripts/sync_readme_flowcharts.py:192: AttributeError
+______ test_worktree_source_links_never_misattribute_changed_bytes[False] ______
+
+tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-50/test_worktree_source_links_nev1')
+changed = False
+
+    @pytest.mark.parametrize('changed',[True,False])
+    def test_worktree_source_links_never_misattribute_changed_bytes(tmp_path,changed):
+        from scripts.sync_readme_flowcharts import render_block
+        folder=tmp_path/'docs/architecture/flows';folder.mkdir(parents=True)
+        (tmp_path/'source.py').write_text('def run():\n    return 1\n')
+        (folder/'one.mmd').write_text('flowchart LR\n  A --> B\n')
+        (folder/'one.svg').write_text('<svg/>')
+        entry={'id':'one','title':'Example','description':'Example','file':'flows/one.mmd',
+               'sources':[{'path':'source.py','line':1,'symbol':'run'}],'limitations':['Local']}
+        base='a'*40
+        catalog={'flows':[entry],'source':{'mode':'worktree','base_commit':base,
+            'worktree_sha256':'b'*64,'changed_paths':['source.py'] if changed else [],'deleted_paths':[]}}
+        (tmp_path/'docs/architecture/flows.json').write_text(json.dumps(catalog))
+>       block=render_block(tmp_path)
+              ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_r916_documentation_atlas.py:187:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+root = PosixPath('/tmp/pytest-of-marceloclaro/pytest-50/test_worktree_source_links_nev1')
+
+    def render_block(root: Path) -> str:
+        catalog = json.loads(_inside(root, "docs/architecture/flows.json").read_text(encoding="utf-8"))
+        entries = catalog["flows"]
+        if not entries or len({entry["id"] for entry in entries}) != len(entries):
+            raise ValueError("Catálogo vazio ou com IDs duplicados.")
+        source = catalog.get("source", {})
+        source_notice = (f"Fontes do checkout atual; base Git `{source.get('base_commit')}`; "
+            f"identidade worktree `{source.get('worktree_sha256')}`. "
+            f"{len(source.get('changed_paths', []))} arquivos rastreados modificados e "
+            f"{len(source.get('deleted_paths', []))} removidos foram contabilizados; fontes não rastreadas não entram.") \
+            if source.get("mode") == "worktree" else "Fontes do snapshot Git declarado no catálogo."
+        lines = [START, "## Fluxogramas operacionais completos", "",
+            "Os fluxogramas abaixo são cópias integrais das mesmas fontes usadas no",
+            "[mapa navegável](docs/architecture_map.html). A ordem, as descrições, as fontes",
+            "e as limitações seguem o [catálogo de fluxos](docs/architecture/flows.json).",
+            "A edição e a origem das fontes estão declaradas no catálogo e no inventário.", source_notice,
+            "Estes desenhos não representam uma nova execução de todos os componentes.", "",
+            "### Legenda e critérios de leitura", "",
+            "| Elemento | Como interpretar |",
+            "|---|---|",
+            "| Retângulo | Componente, etapa, dado ou artefato indicado pelo rótulo. |",
+            "| Losango | Decisão ou condição; siga o texto de cada saída. |",
+            "| Grupo delimitado | Subsistema ou fronteira de responsabilidade. Não implica isolamento de rede. |",
+            "| Seta contínua | Direção de controle, dado ou composição conforme o título e o rótulo; não implica chamada direta entre todas as caixas. |",
+            "| Seta pontilhada | Caminho condicional, dependência opcional ou relação explicativa; leia o rótulo e os limites do fluxo. |",
+            "| Cores | Auxílio visual de agrupamento; nomes e rótulos conservam a informação sem depender da cor. |",
+            "| Fonte de código | Âncora de arquivo, símbolo e linha no retrato documentado; não é recibo de execução. |", "",
+            "Instalação, disponibilidade, autenticação, inferência concluída, entrega aceita",
+            "e validação externa são estados distintos. Evidências de uma operação local",
+            "valem apenas para seu escopo. Referências a agentes ou ferramentas opcionais",
+            "não garantem saldo, licença, credenciais, isolamento ou funcionamento atual.", "",
+            "No grafo estrutural integral, a seta tem significado mais restrito:",
+            "**módulo importador → dependência Python declarada**. Consulte a",
+            "[fonte Mermaid integral](docs/architecture/dependencies.mmd), o",
+            "[SVG equivalente](docs/architecture/dependencies-mermaid.svg) e o",
+            "[guia da legenda e reprodução](docs/architecture/MERMAID_INTEGRAL.md).", "",
+        ]
+        for number, entry in enumerate(entries, 1):
+            if PurePosixPath(entry["file"]).is_absolute():
+                raise ValueError("Fonte de fluxo deve usar caminho relativo.")
+            relative = "docs/architecture/" + entry["file"]
+            source = _inside(root, relative)
+            if source.suffix != ".mmd":
+                raise ValueError("Fonte de fluxo deve ser Mermaid (.mmd).")
+            svg_relative = str(PurePosixPath(relative).with_suffix(".svg"))
+            _inside(root, svg_relative)
+            code = source.read_text(encoding="utf-8")
+            if "```" in code or not code.endswith("\n"):
+                raise ValueError("Fonte deve terminar com newline e não conter cercas Markdown.")
+            lines.extend([f"### {number:02d}. {entry['title']}", "", entry["description"], "",
+                          "```mermaid", code + "```", "",
+                          f"[Fonte Mermaid]({relative}) · [Abrir SVG]({svg_relative})", "", "**Fontes de código:**", ""])
+            for item in entry["sources"]:
+                source_path = _inside(root, item["path"])
+                if type(item["line"]) is not int or item["line"] < 1:
+                    raise ValueError("Linha de origem inválida.")
+                data = source_path.read_bytes()
+                text = data.decode("utf-8-sig")
+                if item["line"] > len(text.splitlines()):
+                    raise ValueError(f"Âncora além do arquivo: {item['path']}")
+                if item.get("sha256") and hashlib.sha256(data).hexdigest() != item["sha256"]:
+                    raise ValueError(f"Âncora com fonte modificada: {item['path']}")
+                if source_path.suffix == ".py" and item.get("symbol"):
+                    name = item["symbol"].split(".")[-1]
+                    if not any(isinstance(node, (ast.ClassDef, ast.FunctionDef, ast.AsyncFunctionDef))
+                               and node.name == name and node.lineno == item["line"]
+                               for node in ast.walk(ast.parse(text))):
+                        raise ValueError(f"Âncora não corresponde ao símbolo: {item['path']}:{item['line']}")
+>               if source.get("mode") == "worktree" and item["path"] in source.get("changed_paths", []):
+                   ^^^^^^^^^^
+E               AttributeError: 'PosixPath' object has no attribute 'get'
+
+scripts/sync_readme_flowcharts.py:192: AttributeError
+=========================== short test summary info ============================
+FAILED tests/test_r916_documentation_atlas.py::test_worktree_source_links_never_misattribute_changed_bytes[True]
+FAILED tests/test_r916_documentation_atlas.py::test_worktree_source_links_never_misattribute_changed_bytes[False]
+2 failed, 12 deselected in 0.71s

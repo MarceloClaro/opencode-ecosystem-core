@@ -9,9 +9,8 @@ instalação local, consulte [installer/README.md](installer/README.md).
 
 ## Estado estrutural
 
-Na configuração consultada em **2026-09-26**, `doctor` relacionava **20 checks**,
-e `opencode.json` continha **7 MCPs** e **215 agentes**. Execute os
-comandos abaixo no seu checkout para confirmar o estado presente:
+As contagens atuais estão no bloco gerado abaixo. A referência local R916
+foi conferida em 18/10/2026. Para repetir a conferência:
 
 ```bash
 python3 -m marceloclaro.cli doctor
@@ -23,7 +22,7 @@ Não use esta contagem como indicador de cobertura, qualidade ou validação
 externa.
 
 <!-- core-state:start -->
-**346 agentes** · **16 MCPs** · **34 comandos** · **22 checks**
+**312 agentes** · **16 MCPs** · **33 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 
@@ -63,6 +62,29 @@ herda os logins do navegador pessoal e conserva evidência da execução.
 Para execução externa de Hermes/MiroFish, download de datasets e plugins,
 consulte o [guia das integrações científicas](docs/INTEGRACOES_CIENTIFICAS_R667_R671.md).
 No OpenCode, use `/runtime-cientifico`, `/datasets` e `/plugins-cientificos`.
+
+## Conexões, plugins e modelos
+
+- [ChatGPT/OpenAI, Gemini/Google e NotebookLM](docs/AUTENTICACAO_CHATGPT_NOTEBOOKLM.md)
+  usam autenticações distintas. Login não comprova inferência, cota ou
+  autorização de uma operação específica.
+- [NotebookLM 0.15.6](docs/GEMINI_NOTEBOOK_CORE.md): `/gemini-notebook` mantém
+  a coordenação e os gates; o conector é comunitário e o serviço roda no Google.
+- [Plugins locais](docs/PLUGINS_LOCAIS_CORE.md): REA, MiroFish e Lean 4 usam o
+  mesmo primário; consulte os limites do código atual antes de reutilizar recibos.
+- [Modelos e tokens](docs/MODELOS_E_CUSTO_DE_TOKENS.md): selecione por custo de
+  tarefa aceita; assinatura, créditos e API têm métricas diferentes.
+- [Atlas atual](docs/architecture_map.html) e [guia técnico](docs/ARQUITETURA_COMPLETA_CORE_R916.md)
+  relacionam as interfaces, os fluxos e as fontes amostradas.
+
+## Registrar e ativar agentes
+
+Antes de criar um agente ou subagente de trabalho, use a entrada `agentes` da
+CLI ou `ecosystem_agent_profile` pelo MarceloClaro. Reutilize um perfil quando
+seu escopo já estiver coberto. Validação exige capacidades, origem, spec/teste,
+permissões e contrato de saída; somente depois registre/ative o perfil e
+correlacione o identificador A2A ao executor real. `pending_executor` é espera,
+não execução. Consulte a [governança de agentes](AGENTS.md).
 
 ## Como começar
 
@@ -203,7 +225,7 @@ Consulte os formatos, os livros usados e a evidência em
 ## Usar Gemini Notebook na orquestração
 
 No OpenCode, use `/gemini-notebook tarefa`. O orquestrador consulta o catálogo
-oficial instalado e coordena CLI, MCP e leitura da skill. Para inspecionar
+do conector comunitário instalado e coordena CLI, MCP e leitura da skill. Para inspecionar
 esse catálogo pela CLI:
 
 ```bash

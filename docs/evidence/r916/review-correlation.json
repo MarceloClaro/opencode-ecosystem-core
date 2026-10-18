@@ -1,0 +1,28 @@
+{
+  "scope": "read_only_source_sampling_not_external_validation",
+  "results": [
+    {
+      "profile": "architecture-inventory",
+      "external_agent": "/root/docs_inventory_r916",
+      "a2a_task": "task-f4fc5e27",
+      "status": "read_only_review_completed",
+      "source_reverified_by_primary": true
+    },
+    {
+      "profile": "architecture-flows",
+      "external_agent": "/root/docs_flows_r916",
+      "a2a_task": "task-86d899e8",
+      "status": "read_only_review_completed",
+      "followup_current_academic_source_read": true,
+      "source_reverified_by_primary": true
+    },
+    {
+      "profile": "readme-contract-audit",
+      "external_agent": "/root/docs_readme_r916",
+      "a2a_task": "task-28b6d04a",
+      "status": "usage_limit_before_completion",
+      "review_complete": false
+    }
+  ],
+  "assignment_is_not_inference_or_a2a_completion": true
+}

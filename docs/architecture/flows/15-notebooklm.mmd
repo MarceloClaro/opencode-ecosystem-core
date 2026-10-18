@@ -1,0 +1,20 @@
+flowchart TB
+  INPUT["/gemini-notebook ou ferramenta MCP central"] --> MC["MarceloClaro.gemini_notebook_action"]
+  MC --> VALID["Validar campos, limites e ausência de credenciais"]
+  VALID --> OP{"Operação"}
+  OP -->|"status"| STATUS["Versão e binários; login não verificado"]
+  OP -->|"catalog"| CAT["Descobrir schemas MCP e árvore CLI com hash"]
+  OP -->|"skill"| SKILL["Fonte e licença; preservar edições locais"]
+  OP -->|"mcp ou cli"| EFFECT["Classificar efeito e suboperações"]
+  EFFECT --> AUTH{"Autenticação privada?"}
+  AUTH -->|"sim"| PRIVATE["Bloquear; login no terminal do operador"]
+  AUTH -->|"não"| DRY{"dry_run?"}
+  DRY -->|"sim"| PREP["prepared; nenhuma operação remota"]
+  DRY -->|"não"| ALLOW{"Leitura ou efeito concreto autorizado?"}
+  ALLOW -->|"não"| BLOCK["blocked; preservar motivo"]
+  ALLOW -->|"sim"| LIVE["Schema atual; broker de sessão privada"]
+  LIVE --> GOOGLE["NotebookLM na infraestrutura Google"]
+  GOOGLE --> RESULT["completed / pending / partial / failed"]
+  RESULT --> ART["Downloads: raiz permitida, arquivo novo e SHA"]
+  ART --> OBS["MetaBus: estados e hashes; sem confiança promovida"]
+  CAT -. "descobrir não autoriza ferramenta nova" .-> BLOCK

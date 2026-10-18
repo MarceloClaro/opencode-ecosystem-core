@@ -10,7 +10,7 @@ Este arquivo é lido automaticamente pelo Claude Code sempre que ele opera neste
 Um ecossistema de orquestração multiagente (`marceloclaro/orchestrator.py::MarceloClaroOrchestrator`) que integra: MCI (MetaBus/Blackboard/Reflexion — memória metacognitiva compartilhada), Trust Engine, Token Economy, um pipeline científico agentivo (EvoSci → Deep Research → Peer Review → Revision → Paper Composer), SDD/TDD, Loop Engineering, LLM Reduction Layer, DataKnowledgeHub e o catálogo de agentes especializados.
 
 <!-- core-state:start -->
-**346 agentes** · **16 MCPs** · **34 comandos** · **22 checks**
+**312 agentes** · **16 MCPs** · **33 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 
@@ -43,10 +43,31 @@ python3 -m pytest tests/ -q
 2. Este projeto segue disciplina SDD/TDD real: toda mudança de peso ganha uma especificação em `specs/SPEC-935-R*.md` **antes** da implementação, e testes em `tests/test_r*.py` **antes** de considerar a tarefa concluída.
 3. Nunca declare algo "superhuman", "verificado" ou "Qualis A1" sem validação externa explícita — ver `mci/metacognitive_evaluator.py::classify_metacognitive_tier()` (política já codificada) e `CORRIGENDUM.md` (histórico de alegações da própria documentação já corrigidas).
 
+## Agentes, fontes e documentação atuais
+
+Antes de criar subagentes, valide e persista o perfil por
+`MarceloClaroOrchestrator.agent_profile_action` / `ecosystem_agent_profile`,
+registre/ative pelo mesmo primário e correlacione o identificador A2A ao trabalho
+externo efetivo. Não delegue diretamente para contornar o lifecycle. Perfis
+ocupados e definições históricas exigem preservar o contrato existente.
+
+Use [o índice documental](docs/README.md), [o atlas R916](docs/architecture_map.html)
+e [o estado corrente](docs/ESTADO_ATUAL_CORE_R916.md). Não restaurar R914 ou
+componentes removidos apenas porque aparecem no último commit ou em recibos.
+O atlas diferencia fontes locais modificadas da base Git. Para diagramas,
+edite o catálogo/fontes e regenere; não editar manualmente blocos derivados.
+
+NotebookLM está fixado em 0.15.6; não reinstalar o checkout histórico 0.11.6.
+Leia [autenticações](docs/AUTENTICACAO_CHATGPT_NOTEBOOKLM.md),
+[plugins](docs/PLUGINS_LOCAIS_CORE.md) e [modelos/tokens](docs/MODELOS_E_CUSTO_DE_TOKENS.md).
+Não alterar credenciais ou provedor padrão em uma revisão documental.
+
 ## Depois de mudanças relevantes
 
-1. Registre um ciclo de evolução: `evolution_registry.record(...)` (ver `evolution/cycles.py`) — **cuidado**: `EvolutionRegistry.save()` reescreve `evolution/cycles.json` inteiro; se o arquivo tiver entradas com campos legados não modelados no dataclass `EvolutionCycle`, prefira anexar manualmente via `json.load`/`json.dump` para não perder conteúdo (ver histórico do R108 no CHANGELOG/evolution/evo-21).
-2. Rode a suíte completa antes de commitar: `python3 -m pytest tests/ -q`.
+1. Registre um ciclo por `evolution_registry.record(...)` (ver `evolution/cycles.py`). Preserve antes uma cópia do registro; `save()` reescreve o JSON. Compare todos os ciclos anteriores e campos legados após a gravação. Se houver perda, restaure a cópia e registre o ciclo em estado isolado para uma mesclagem explícita que preserve os dados originais. Não substitua o histórico por um registro vazio nem trate uma anotação manual como auditoria externa.
+2. Execute os testes e gates pertinentes à alteração. Só declare a suíte
+   completa aprovada quando ela tiver sido efetivamente executada e concluída;
+   testes selecionados e CI local/remota possuem escopos próprios.
 3. Ao commitar, restrinja o `git commit` aos arquivos do ciclo atual (pathspec explícito) — este repositório costuma ter trabalho não relacionado pendente de outras frentes; não misture.
 
 ## Retomada de trabalho (checkpoints) — R129

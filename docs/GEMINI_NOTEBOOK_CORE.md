@@ -45,8 +45,8 @@ instrução ao agente primário, que chama essa ferramenta central.
 | status | Caminhos e versão instalados; não comprova login | nenhuma |
 | catalog | Handshake, schemas MCP e árvore CLI atual | timeout_seconds opcional |
 | skill | Preservar e ler skill/referências oficiais no contexto | nenhuma |
-| mcp | Executar ferramenta descoberta no servidor oficial | tool, arguments |
-| cli | Executar comando oficial sem shell | argv iniciado por nlm |
+| mcp | Executar ferramenta descoberta no servidor do conector upstream | tool, arguments |
+| cli | Executar comando do conector sem shell | argv iniciado por nlm |
 
 MCP/CLI aceitam `timeout_seconds` entre 1 e 300, `dry_run` e `confirm`
 booleanos. O preflight valida o contrato e prepara a operação; seu resultado
@@ -89,12 +89,12 @@ confiança científica por um retorno operacional.
 
 ## Autenticação, perfis e Enterprise
 
-Login interativo e importação manual de cookies ficam no programa oficial,
+Login interativo e importação manual de cookies ficam no programa upstream,
 fora da captura compartilhada. `nlm login --check` pode ser encaminhado para
 verificação. O MCP usa o perfil ativo upstream; comandos CLI de perfil são
 explícitos e não são chamados como probes. O Core não lê arquivos de cookies.
 
-O ambiente configurado é herdado pelo processo oficial. Enterprise permanece
+O ambiente configurado é herdado pelo processo do conector. Enterprise permanece
 experimental, com os hosts Google autorizados pelo upstream e
 `NOTEBOOKLM_PROJECT_ID`/`NOTEBOOKLM_LOCATION` configurados pelo operador.
 Uma conexão padrão não comprova funcionamento de uma conta Enterprise.

@@ -1,0 +1,183 @@
+{
+  "scope": "offline_browser_ui_not_runtime_execution",
+  "errors": [],
+  "network_requests": [],
+  "flows": [
+    {
+      "id": "panorama",
+      "title": "Panorama completo por camadas",
+      "svg": true,
+      "text": 8285,
+      "limits": true
+    },
+    {
+      "id": "orquestracao",
+      "title": "Orquestração primária e execução CLI",
+      "svg": true,
+      "text": 7957,
+      "limits": true
+    },
+    {
+      "id": "workflow",
+      "title": "Workflow DAG e retomada",
+      "svg": true,
+      "text": 7614,
+      "limits": true
+    },
+    {
+      "id": "sdd-tdd",
+      "title": "SDD e histórico RED–GREEN",
+      "svg": true,
+      "text": 7224,
+      "limits": true
+    },
+    {
+      "id": "rea-provedores",
+      "title": "REA e camadas de provedores",
+      "svg": true,
+      "text": 8938,
+      "limits": true
+    },
+    {
+      "id": "rea-local",
+      "title": "REA local direto e evidência",
+      "svg": true,
+      "text": 7469,
+      "limits": true
+    },
+    {
+      "id": "rea-agente",
+      "title": "REA com agente local e gate de recibos",
+      "svg": true,
+      "text": 7580,
+      "limits": true
+    },
+    {
+      "id": "conhecimento",
+      "title": "Conhecimento, RAG e grafos de evidência",
+      "svg": true,
+      "text": 7914,
+      "limits": true
+    },
+    {
+      "id": "memoria",
+      "title": "Rede de memória observável",
+      "svg": true,
+      "text": 7946,
+      "limits": true
+    },
+    {
+      "id": "raciocinio",
+      "title": "Raciocínio restrito e fallbacks",
+      "svg": true,
+      "text": 7486,
+      "limits": true
+    },
+    {
+      "id": "diagnostico",
+      "title": "Diagnóstico, confiança, federação e evolução",
+      "svg": true,
+      "text": 8967,
+      "limits": true
+    },
+    {
+      "id": "ciencia",
+      "title": "Ciência, proveniência e publicação",
+      "svg": true,
+      "text": 8923,
+      "limits": true
+    },
+    {
+      "id": "entrega",
+      "title": "Validação e entrega",
+      "svg": true,
+      "text": 7832,
+      "limits": true
+    },
+    {
+      "id": "plugins-locais",
+      "title": "Plugins locais, Lean 4 e MiroFish",
+      "svg": true,
+      "text": 7208,
+      "limits": true
+    },
+    {
+      "id": "notebooklm",
+      "title": "NotebookLM coordenado e política R915",
+      "svg": true,
+      "text": 6945,
+      "limits": true
+    },
+    {
+      "id": "autenticacoes",
+      "title": "Autenticações de ChatGPT, Gemini e NotebookLM",
+      "svg": true,
+      "text": 6987,
+      "limits": true
+    },
+    {
+      "id": "metacognicao",
+      "title": "Ciclo metacognitivo e memória de outcomes",
+      "svg": true,
+      "text": 6996,
+      "limits": true
+    },
+    {
+      "id": "lifecycle",
+      "title": "Lifecycle permanente de agentes e subagentes",
+      "svg": true,
+      "text": 6737,
+      "limits": true
+    },
+    {
+      "id": "ci-local",
+      "title": "CI local e validação delimitada",
+      "svg": true,
+      "text": 6640,
+      "limits": true
+    },
+    {
+      "id": "economia-modelos",
+      "title": "Seleção econômica de modelos e contexto",
+      "svg": true,
+      "text": 7244,
+      "limits": true
+    },
+    {
+      "id": "contexto-codigo",
+      "title": "Contexto de código e consultas de grafo",
+      "svg": true,
+      "text": 7099,
+      "limits": true
+    }
+  ],
+  "checks": {
+    "initial_svg": "0.00 0.00 2702.00 729.00",
+    "counts": [
+      "707",
+      "1.118",
+      "10.222",
+      "21"
+    ],
+    "graph_nodes": 707,
+    "graph_edges": 995,
+    "symbol_search": [
+      "marceloclaro.orchestrator"
+    ],
+    "changed_source_has_no_base_link": true,
+    "zoom_changed": true,
+    "mobile": {
+      "viewport": 390,
+      "scroll": 390,
+      "diagram": 364
+    }
+  },
+  "screenshots": [
+    "overview-desktop.png",
+    "plugins-locais.png",
+    "notebooklm.png",
+    "module-detail.png",
+    "mobile.png"
+  ],
+  "passed": true
+}

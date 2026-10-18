@@ -1,0 +1,112 @@
+FFFFFF.F                                                                 [100%]
+=================================== FAILURES ===================================
+__________ test_worktree_samples_current_sources_and_removed_modules ___________
+
+builder = <module 'r916_maps' from '/home/marceloclaro/opencode-ecosystem-core/scripts/build_architecture_maps.py'>
+repo = PosixPath('/tmp/pytest-of-marceloclaro/pytest-45/test_worktree_samples_current_0')
+
+    def test_worktree_samples_current_sources_and_removed_modules(builder,repo):
+        index=(repo/'.git/index').read_bytes()
+        (repo/'pkg/core.py').write_text('def changed():\n    return 7\n')
+        (repo/'pkg/helper.py').unlink()
+>       result=builder.build_snapshot(repo,source='worktree')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: build_snapshot() got an unexpected keyword argument 'source'
+
+tests/test_r916_documentation_atlas.py:37: TypeError
+_________________ test_untracked_sources_never_read_or_counted _________________
+
+builder = <module 'r916_maps' from '/home/marceloclaro/opencode-ecosystem-core/scripts/build_architecture_maps.py'>
+repo = PosixPath('/tmp/pytest-of-marceloclaro/pytest-45/test_untracked_sources_never_r0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7adc100055b0>
+
+    def test_untracked_sources_never_read_or_counted(builder,repo,monkeypatch):
+        secret=repo/'private.py';secret.write_text('NEVER_READ_PRIVATE')
+        original=Path.read_bytes
+        def guarded(path):
+            assert path!=secret,'Untracked source was read'
+            return original(path)
+        monkeypatch.setattr(Path,'read_bytes',guarded)
+>       result=builder.build_snapshot(repo,source='worktree')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: build_snapshot() got an unexpected keyword argument 'source'
+
+tests/test_r916_documentation_atlas.py:56: TypeError
+__________ test_current_symlink_and_parent_symlink_are_never_followed __________
+
+builder = <module 'r916_maps' from '/home/marceloclaro/opencode-ecosystem-core/scripts/build_architecture_maps.py'>
+repo = PosixPath('/tmp/pytest-of-marceloclaro/pytest-45/test_current_symlink_and_paren0')
+tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-45/test_current_symlink_and_paren0')
+
+    def test_current_symlink_and_parent_symlink_are_never_followed(builder,repo,tmp_path):
+        outside=tmp_path.parent/(tmp_path.name+'-external')
+        outside.mkdir();(outside/'core.py').write_text('SECRET_OUTSIDE')
+        (repo/'pkg/core.py').unlink();(repo/'pkg/core.py').symlink_to(outside/'core.py')
+>       result=builder.build_snapshot(repo,source='worktree')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: build_snapshot() got an unexpected keyword argument 'source'
+
+tests/test_r916_documentation_atlas.py:65: TypeError
+___________ test_generated_docs_do_not_make_source_identity_circular ___________
+
+builder = <module 'r916_maps' from '/home/marceloclaro/opencode-ecosystem-core/scripts/build_architecture_maps.py'>
+repo = PosixPath('/tmp/pytest-of-marceloclaro/pytest-45/test_generated_docs_do_not_mak0')
+
+    def test_generated_docs_do_not_make_source_identity_circular(builder,repo):
+>       first=builder.build_snapshot(repo,source='worktree')
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: build_snapshot() got an unexpected keyword argument 'source'
+
+tests/test_r916_documentation_atlas.py:76: TypeError
+_______ test_configuration_uses_current_names_without_exporting_secrets ________
+
+builder = <module 'r916_maps' from '/home/marceloclaro/opencode-ecosystem-core/scripts/build_architecture_maps.py'>
+repo = PosixPath('/tmp/pytest-of-marceloclaro/pytest-45/test_configuration_uses_curren0')
+
+    def test_configuration_uses_current_names_without_exporting_secrets(builder,repo):
+        (repo/'opencode.json').write_text(json.dumps({'agent':{'current':{'prompt':'PRIVATE_PROMPT'}},
+           'mcp':{'new':{'env':{'API_KEY':'PRIVATE_KEY'}}},'command':{},'provider':{'apiKey':'PRIVATE_PROVIDER'}}))
+>       result=builder.build_snapshot(repo,source='worktree')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: build_snapshot() got an unexpected keyword argument 'source'
+
+tests/test_r916_documentation_atlas.py:87: TypeError
+_____________ test_concurrent_source_change_invalidates_collection _____________
+
+builder = <module 'r916_maps' from '/home/marceloclaro/opencode-ecosystem-core/scripts/build_architecture_maps.py'>
+repo = PosixPath('/tmp/pytest-of-marceloclaro/pytest-45/test_concurrent_source_change_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7adc0fdde750>
+
+    def test_concurrent_source_change_invalidates_collection(builder,repo,monkeypatch):
+        original=builder._parse_python
+        def mutate(snapshot,texts):
+            original(snapshot,texts)
+            (repo/'pkg/helper.py').write_text('value=999\n')
+        monkeypatch.setattr(builder,'_parse_python',mutate)
+        with pytest.raises(ValueError,match='Fonte alterada'):
+>           builder.build_snapshot(repo,source='worktree')
+E           TypeError: build_snapshot() got an unexpected keyword argument 'source'
+
+tests/test_r916_documentation_atlas.py:100: TypeError
+_______________ test_worktree_cli_check_detects_source_tampering _______________
+
+builder = <module 'r916_maps' from '/home/marceloclaro/opencode-ecosystem-core/scripts/build_architecture_maps.py'>
+repo = PosixPath('/tmp/pytest-of-marceloclaro/pytest-45/test_worktree_cli_check_detect0')
+tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-45/test_worktree_cli_check_detect0')
+
+    def test_worktree_cli_check_detects_source_tampering(builder,repo,tmp_path):
+        output=tmp_path/'maps'
+>       builder.write_artifacts(builder.build_snapshot(repo,source='worktree'),output,render=False)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: build_snapshot() got an unexpected keyword argument 'source'
+
+tests/test_r916_documentation_atlas.py:111: TypeError
+=========================== short test summary info ============================
+FAILED tests/test_r916_documentation_atlas.py::test_worktree_samples_current_sources_and_removed_modules
+FAILED tests/test_r916_documentation_atlas.py::test_untracked_sources_never_read_or_counted
+FAILED tests/test_r916_documentation_atlas.py::test_current_symlink_and_parent_symlink_are_never_followed
+FAILED tests/test_r916_documentation_atlas.py::test_generated_docs_do_not_make_source_identity_circular
+FAILED tests/test_r916_documentation_atlas.py::test_configuration_uses_current_names_without_exporting_secrets
+FAILED tests/test_r916_documentation_atlas.py::test_concurrent_source_change_invalidates_collection
+FAILED tests/test_r916_documentation_atlas.py::test_worktree_cli_check_detects_source_tampering
+7 failed, 1 passed in 0.71s

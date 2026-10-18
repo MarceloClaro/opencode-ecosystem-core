@@ -1,0 +1,50 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+_____________ test_readme_sync_rejects_wrong_source_anchor[2-run] ______________
+
+tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-47/test_readme_sync_rejects_wrong0')
+line = 2, symbol = 'run'
+
+    @pytest.mark.parametrize('line,symbol',[(2,'run'),(1,'missing')])
+    def test_readme_sync_rejects_wrong_source_anchor(tmp_path,line,symbol):
+        from scripts.sync_readme_flowcharts import synchronize
+        folder=tmp_path/'docs/architecture/flows';folder.mkdir(parents=True)
+        (tmp_path/'source.py').write_text('def run():\n    return 1\n')
+        (folder/'one.mmd').write_text('flowchart LR\n  A --> B\n')
+        (folder/'one.svg').write_text('<svg/>')
+        entry={'id':'one','title':'Example','description':'Example','file':'flows/one.mmd',
+               'sources':[{'path':'source.py','line':line,'symbol':symbol}],'limitations':['Local']}
+        (tmp_path/'docs/architecture/flows.json').write_text(json.dumps({'flows':[entry]}))
+        readme=tmp_path/'README.md';readme.write_text('# Example\n\n## Limites de segurança e operação\n')
+        original=readme.read_bytes()
+>       with pytest.raises(ValueError,match='Âncora'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_r916_documentation_atlas.py:130: Failed
+___________ test_readme_sync_rejects_wrong_source_anchor[1-missing] ____________
+
+tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-47/test_readme_sync_rejects_wrong1')
+line = 1, symbol = 'missing'
+
+    @pytest.mark.parametrize('line,symbol',[(2,'run'),(1,'missing')])
+    def test_readme_sync_rejects_wrong_source_anchor(tmp_path,line,symbol):
+        from scripts.sync_readme_flowcharts import synchronize
+        folder=tmp_path/'docs/architecture/flows';folder.mkdir(parents=True)
+        (tmp_path/'source.py').write_text('def run():\n    return 1\n')
+        (folder/'one.mmd').write_text('flowchart LR\n  A --> B\n')
+        (folder/'one.svg').write_text('<svg/>')
+        entry={'id':'one','title':'Example','description':'Example','file':'flows/one.mmd',
+               'sources':[{'path':'source.py','line':line,'symbol':symbol}],'limitations':['Local']}
+        (tmp_path/'docs/architecture/flows.json').write_text(json.dumps({'flows':[entry]}))
+        readme=tmp_path/'README.md';readme.write_text('# Example\n\n## Limites de segurança e operação\n')
+        original=readme.read_bytes()
+>       with pytest.raises(ValueError,match='Âncora'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_r916_documentation_atlas.py:130: Failed
+=========================== short test summary info ============================
+FAILED tests/test_r916_documentation_atlas.py::test_readme_sync_rejects_wrong_source_anchor[2-run]
+FAILED tests/test_r916_documentation_atlas.py::test_readme_sync_rejects_wrong_source_anchor[1-missing]
+2 failed, 8 deselected in 0.29s

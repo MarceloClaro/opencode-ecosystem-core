@@ -10,12 +10,13 @@ orquestração multi‑agente para pesquisa científica, automação e metacogni
 
 - Python 3.10+
 - Git
-- Linux, macOS ou WSL2 (Windows 10/11)
+- Linux ou WSL2 para os percursos locais isolados e o broker NotebookLM; outros hosts exigem verificação própria
+- Python 3.11+ para o conector NotebookLM opcional
 
 ## 2. Clonar e preparar
 
 ```bash
-git clone https://github.com/MarceloClaro/opencode-ecosystem-core.git
+git clone --branch codex/core-prontidao-rea https://github.com/MarceloClaro/opencode-ecosystem-core.git
 cd opencode-ecosystem-core
 python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
@@ -66,3 +67,13 @@ O helpdesk lê o diagnóstico e sugere próximos passos.
   computacional**, não decisor; **não substitui revisão humana**.
 - Instalação **sem pipe de rede**: versão imutável + commit Git + SHA-256
   conferível (ver "Instalação segura e procedência" no README).
+## 7. Conectar os serviços e entender os limites
+
+Use o [guia de autenticação](docs/AUTENTICACAO_CHATGPT_NOTEBOOKLM.md) para
+ChatGPT, Gemini e NotebookLM. Para este último, instale
+`requirements-notebook.txt` na mesma `.venv` e faça login no terminal privado.
+Não reinstale o checkout histórico 0.11.6 sobre a pinagem 0.15.6.
+
+Explore o [atlas offline](docs/architecture_map.html) e confira o
+[estado atual](docs/ESTADO_ATUAL_CORE_R916.md). Instalação e doctor verde não
+comprovam todas as integrações ou prontidão de produção científica.

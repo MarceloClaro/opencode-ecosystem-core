@@ -18,7 +18,7 @@ def read_blob(ref, path):
 def test_fluxos_correspondem_a_ancoras_reais_do_snapshot():
     inventory = json.loads((MAPS / "architecture-inventory.json").read_text())
     flows = json.loads((MAPS / "flows.json").read_text())["flows"]
-    assert len({f["id"] for f in flows}) == 13
+    assert len({f["id"] for f in flows}) == len(flows) >= 13
     parsed = {}
     for flow in flows:
         assert (MAPS / flow["file"]).is_file()
@@ -27,7 +27,13 @@ def test_fluxos_correspondem_a_ancoras_reais_do_snapshot():
             path = source["path"]
             assert not path.startswith((".mci_state/", ".opencode/rea/", "outputs/"))
             if path not in parsed:
-                text = read_blob(inventory["git"]["commit"], path)
+                if inventory["git"].get("source") == "worktree":
+                    import hashlib
+                    raw = (ROOT / path).read_bytes()
+                    assert hashlib.sha256(raw).hexdigest() == source["sha256"]
+                    text = raw.decode("utf-8-sig")
+                else:
+                    text = read_blob(inventory["git"]["commit"], path)
                 tree = ast.parse(text) if path.endswith(".py") else None
                 parsed[path] = (text, tree)
             text, tree = parsed[path]

@@ -22,3 +22,7 @@ flowchart TB
   PUSH --> REMOTE["CI remota: resultado próprio ainda precisa ser observado"]
   REMOTE --> STATUS["Relatório de entrega com escopo e limites"]
   RUN -. "suíte local aprovada não prova CI remota" .-> LIMIT["Testes, lint, análise real e validação externa são evidências distintas"]
+  SRC --> LOCALCI["CI local: perfil scientific fechado"]
+  LOCALCI --> RCPT["Grupos enumerados, JUnit, hashes e limites"]
+  RCPT --> GATE
+  LOCALCI -. "github_check_created false" .-> LIMIT

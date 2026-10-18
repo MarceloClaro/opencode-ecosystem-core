@@ -21622,6 +21622,44 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R916",
+      "objective": "Atualizar documentação e atlas contra as fontes locais; avaliar modelos econômicos sem promover instalação a inferência.",
+      "changes": [
+        "Modo worktree com manifesto, exclusões e detecção de deriva, preservando extração Git.",
+        "Atlas integral: 707 módulos, 995 pares, 1118 imports e 6751 símbolos; 21 fluxos e 109 âncoras.",
+        "README, manuais, onboarding, plugins, autenticações e guias de arquitetura/modelos atualizados.",
+        "76 testes selecionados aprovados, renders reais e navegação offline inspecionada.",
+        "Sondas Luna/Sol com critérios; falha inicial Luna e UNSUPPORTED_CLIENT Google preservados."
+      ],
+      "score": null,
+      "lessons": [
+        "Imports declarados e cobertura documental não certificam execução ou qualidade científica.",
+        "Uma resposta concluída pode falhar no conteúdo; custo deve ser medido por tarefa aceita.",
+        "Alterações funcionais concorrentes, CI remota e validação externa permanecem fora do aceite documental."
+      ],
+      "timestamp": 1792308853.0501928,
+      "artifact_hashes": {
+        "README.md": "5ea8f1ca5e6f67350f5e5a26e8fd9258d03c136b45be5a15d60f673214269920",
+        "docs/architecture/architecture-inventory.json": "7463f57b1086c7657ff062e00499b4703409bd87ddbe647d3daf6bcd02a07713",
+        "specs/SPEC-935-R916-documentacao-atlas-modelos.md": "ca5788b245d87315f1a791f88b6ea5a2f7782f5ee3659e382cbc6d6816f94629",
+        "docs/evidence/r916/model-selection.json": "57e5c1fd50e32e9d82aeed0ea2e713a6d6475400f34f46266f09dc485fd1582c"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "specs/SPEC-935-R916-documentacao-atlas-modelos.md",
+        "tests/test_r916_documentation_atlas.py",
+        "docs/verification-documentation-r916.json",
+        "docs/evidence/r916/model-selection.json"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "84ef0820a71f52756203854ea83d5a1211d8c254",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ]
 }

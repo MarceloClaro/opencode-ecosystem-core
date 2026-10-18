@@ -69,6 +69,13 @@ def render_mermaid(snapshot: dict) -> str:
     layers = sorted({module["layer"] for module in modules})
     layer_index = {layer: index for index, layer in enumerate(layers)}
     counts = _counts(modules, pairs)
+    git = snapshot.get("git", {})
+    if git.get("source") == "worktree":
+        source_label = (f"Origem worktree {git.get('worktree_sha256', '')[:12]} · "
+            f"base {git.get('commit', '')[:12]} · {len(git.get('changed_paths', []))} modificados · "
+            f"{len(git.get('deleted_paths', []))} removidos omitidos")
+    else:
+        source_label = f"Origem commit Git {git.get('commit', '')[:12]}"
     lines = [
         "%% R881 — inventário estrutural integral; sem inferência de execução.",
         "%% snapshot " + _json(snapshot["git"]),
@@ -105,7 +112,7 @@ def render_mermaid(snapshot: dict) -> str:
         f'    leg_simbolos["{counts["symbols"]} símbolos nos comentários JSON; classes/funções nos rótulos"]',
         '    leg_limites["Import estático não comprova chamada, autenticação, inferência ou qualidade"]',
         '    leg_escopo["Escopo Python de produção; vendor, história, testes e superfícies lexicais fora deste grafo"]',
-        '    leg_fonte["Fonte: architecture-inventory.json; IDs e hashes preservados nos metadados"]',
+        f'    leg_fonte["{_label(source_label)}; hashes completos em architecture-inventory.json"]',
     ])
     for layer in layers:
         index = layer_index[layer]

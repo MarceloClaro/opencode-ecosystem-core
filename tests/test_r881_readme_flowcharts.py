@@ -54,10 +54,10 @@ def sample_root(tmp_path: Path) -> Path:
     return tmp_path
 
 
-def test_catalogo_real_todos_13_integralmente_publicados_no_readme():
+def test_catalogo_atual_integralmente_publicado_no_readme():
     """Omitir um fluxo, uma aresta ou metadado do catálogo rompe o contrato."""
     catalog = json.loads((ROOT / "docs/architecture/flows.json").read_text(encoding="utf-8"))
-    assert len(catalog["flows"]) == 13
+    assert len(catalog["flows"]) >= 13
     result = run_sync(ROOT, "--check")
     assert result.returncode == 0, result.stdout + result.stderr
     text = (ROOT / "README.md").read_text(encoding="utf-8")
@@ -67,7 +67,7 @@ def test_catalogo_real_todos_13_integralmente_publicados_no_readme():
         entry["title"] for entry in catalog["flows"]
     ]
     diagrams = re.findall(r"```mermaid\n(.*?)```", block, re.DOTALL)
-    assert len(diagrams) == 13
+    assert len(diagrams) == len(catalog["flows"])
     assert diagrams == [
         (ROOT / "docs/architecture" / entry["file"]).read_text(encoding="utf-8")
         for entry in catalog["flows"]
@@ -78,7 +78,14 @@ def test_catalogo_real_todos_13_integralmente_publicados_no_readme():
         assert f"(docs/architecture/{entry['file']})" in section
         assert f"(docs/architecture/{Path(entry['file']).with_suffix('.svg').as_posix()})" in section
         for source in entry["sources"]:
-            assert f"({source['path']}#L{source['line']})" in section
+            origin = catalog.get("source", {})
+            if origin.get("mode") == "worktree" and source["path"] in origin.get("changed_paths", []):
+                assert f"`{source['path']}:{source['line']}` (fonte local modificada; não é permalink da base)" in section
+                assert f"/blob/{origin['base_commit']}/{source['path']}#L{source['line']}" not in section
+            elif origin.get("mode") == "worktree":
+                assert f"/blob/{origin['base_commit']}/{source['path']}#L{source['line']}" in section
+            else:
+                assert f"({source['path']}#L{source['line']})" in section
             assert f"`{source['symbol']}`" in section
         for limitation in entry["limitations"]:
             assert f"- {limitation}" in section

@@ -8,17 +8,11 @@ alegações históricas, consulte [CORRIGENDUM.md](CORRIGENDUM.md).
 > configurações específicas; não constituem certificação externa de segurança,
 > qualidade ou adequação para um domínio de uso.
 
-As extensões R913–R914 acrescentam fachadas MCP para REA, MiroFish e Lean 4 e
-`academic/adversarial_research`, subordinado ao primário. Consulte o
-[fluxo de rigor acadêmico](docs/academic-rigor/README.md) para contratos, sete
-núcleos, banca e limites. Blackboard/MetaBus e SpecVerifier são reaproveitados.
-
 ## Configuração estrutural
 
-Em **2026-09-26**, o diagnóstico local listava **20 checks**. A configuração
-`opencode.json` declarava **7 MCPs** e **215 agentes**. As fontes autoritativas
-para uma nova conferência são o comando `python3 -m marceloclaro.cli doctor` e
-as chaves `mcp` e `agent` de `opencode.json`:
+A revisão R916 usa a configuração local atual e a coleta de fontes documentada
+no atlas. Os comandos abaixo repetem a conferência, sem interpretar inventário
+como prontidão funcional:
 
 ```bash
 python3 -m marceloclaro.cli doctor
@@ -26,7 +20,7 @@ python3 -c "import json; c=json.load(open('opencode.json', encoding='utf-8')); p
 ```
 
 <!-- core-state:start -->
-**346 agentes** · **16 MCPs** · **34 comandos** · **22 checks**
+**312 agentes** · **16 MCPs** · **33 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 
@@ -34,36 +28,43 @@ Para conferir estes blocos, execute na raiz `.venv/bin/python scripts/reconcile_
 <!-- core-state:end -->
 
 A configuração inclui `ecosystem-network` e `polymath-labs-mcp`.
-A contagem de 2026-09-26 acima é um registro histórico.
+As contagens de edições anteriores permanecem em seus recibos históricos.
 
 Specs, ciclos, testes e cobertura mudam com o checkout. Consulte,
 respectivamente, `specs/`, `evolution/cycles.json`, `tests/` e a configuração
 de CI em vez de tratar números de documentos antigos como estado atual.
 
-## Mapa completo atual e fluxogramas — R879
+## Atlas atual R916 e fluxos conectados
 
-A [página navegável da arquitetura](docs/architecture_map.html) reúne a visão
-operacional, o grafo completo de dependências e um inventário pesquisável de
-arquivos e símbolos. Funciona offline, sem CDN. O
-[guia minucioso](docs/ARQUITETURA_COMPLETA_CORE_R879.md) explica os 13 fluxos e
-suas fontes; [JSON](docs/architecture/architecture-inventory.json),
-[DOT](docs/architecture/dependencies.dot) e
-[SVG completo](docs/architecture/dependencies.svg) permitem reprodução e exportação.
+A [página offline](docs/architecture_map.html) e o
+[guia minucioso R916](docs/ARQUITETURA_COMPLETA_CORE_R916.md) reúnem o grafo
+estrutural integral, as camadas, símbolos, origens e todos os fluxogramas do
+[catálogo](docs/architecture/flows.json), também publicados por inteiro no README.
 
-O snapshot `6380cfaff4aac0dd940d42011826bb21126e5635` inclui o Core consolidado
-até R869: primário compartilhado, transporte real de prompts CLI, workflows,
-recebimento e custódia RED/GREEN, análise REA direta e por agente, isolamento e
-cancelamento, memória/grafos, raciocínio restrito, diagnósticos e publicação.
-O inventário registra 677 módulos Python próprios em 45 pacotes, 6.432 símbolos,
-1.051 declarações de importação internas que formam 935 pares de módulos,
-oito superfícies TypeScript/JavaScript/Lean e 9.672 arquivos classificados.
-Módulos isolados são incluídos. Templates, testes, evidências históricas,
-artefatos de domínio e vendor possuem categorias próprias.
+O grafo atual amostra fontes de produção rastreadas e `opencode.json` do
+diretório de trabalho. `git.commit` identifica a base 84ef082; `worktree_sha256`
+identifica os bytes analisados. Removidos são omitidos, symlinks/submódulos não
+são seguidos, não rastreados e privados ficam fora. O índice não produtivo usa
+metadados da base Git, identificados por `content_source=git_base`.
 
-Essas contagens descrevem fontes daquele commit; não comprovam execução,
-qualidade, cobertura funcional ou validação externa. Conexões dinâmicas,
-imports externos e integrações opcionais são explicitamente delimitados.
-O [mapa R433–R438](docs/MAPA_ARQUITETURA_R433_R438.md) permanece histórico.
+Essa distinção é necessária porque o checkout contém remoções e modificações
+posteriores ao último commit. A fachada acadêmica e o serviço estão presentes
+novamente, mas R914 permanece parcial: os 34 cartões antigos, a CLI dedicada,
+`profiles.py`, `scoring.py` e a spec anterior estão removidos. Regras locais,
+atribuição A2A e inferência do especialista têm estados próprios.
+[Estado e pendências](docs/ESTADO_ATUAL_CORE_R916.md).
+
+| Vista | Fonte e significado |
+|---|---|
+| [JSON](docs/architecture/architecture-inventory.json) | Manifesto, hashes, AST, classes, funções, imports e exclusões |
+| [DOT/SVG](docs/architecture/dependencies.svg) | Todos os módulos, inclusive isolados; pares de imports declarados |
+| [Mermaid](docs/architecture/dependencies.mmd) | Mesmos IDs, módulos e pares, sem corte para caber no GitHub |
+| [Manifesto Mermaid](docs/architecture/mermaid-correspondence.json) | Correspondência entre formatos e declarações AST |
+| [Fluxos curados](docs/architecture/flows.json) | Controle/composição com fontes, decisões, falhas e limites |
+
+Cada fluxo preserva as fronteiras de licença, conta, rede, execução e revisão
+humana. O extrator estático não prova conexão funcional, prontidão ou segurança.
+R879, R900 e R911 permanecem históricos, sem reescrever suas evidências.
 
 ## Visão das camadas
 

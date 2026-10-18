@@ -12,6 +12,7 @@ import argparse
 import ast
 import hashlib
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -203,18 +204,74 @@ def _parse_python(snapshot: dict, texts: dict[str, str]) -> None:
         snapshot[field].sort(key=lambda item: (item["path"], item["line"] or 0))
 
 
-def build_snapshot(root: Path | str, ref: str = "HEAD") -> dict:
+def _worktree_record(root: Path, path: str):
+    """Lê só fonte rastreada, sem seguir links de arquivo ou de diretório."""
+    destination = root / path
+    if any(parent.is_symlink() for parent in destination.parents if parent != root):
+        return None, None
+    if destination.is_symlink():
+        return "120000", os.readlink(destination).encode("utf-8", errors="surrogateescape")
+    if not destination.is_file():
+        return None, None
+    before = destination.stat()
+    data = destination.read_bytes()
+    after = destination.stat()
+    if (before.st_mtime_ns, before.st_size, before.st_ino) != (after.st_mtime_ns, after.st_size, after.st_ino):
+        raise ValueError(f"Fonte alterada durante a coleta: {path}")
+    return "100755" if before.st_mode & 0o111 else "100644", data
+
+
+def _worktree_records(root: Path, commit: str, provenance: dict):
+    for path, mode, kind, oid, data in _blob_records(root, commit):
+        destination = root / path
+        if not destination.exists() and not destination.is_symlink():
+            provenance["deleted_paths"].append(path)
+            continue
+        sample = kind == "blob" and (classify(path) == "production" or path == "opencode.json")
+        if sample:
+            current_mode, current = _worktree_record(root, path)
+            if current is None:
+                provenance["excluded_paths"].append(path)
+                continue
+            digest = hashlib.sha256(current).hexdigest()
+            provenance["source_manifest"].append({"path": path, "sha256": digest, "mode": current_mode})
+            if current != data or current_mode != mode:
+                provenance["changed_paths"].append(path)
+            yield path, current_mode, kind, oid, current
+        else:
+            # O índice documental usa os blobs-base, evitando que o atlas se
+            # incorpore recursivamente à própria identidade de fontes.
+            yield path, mode, kind, oid, data
+
+
+def _check_worktree(root: Path, provenance: dict):
+    for record in provenance["source_manifest"]:
+        mode, data = _worktree_record(root, record["path"])
+        if data is None or mode != record["mode"] or hashlib.sha256(data).hexdigest() != record["sha256"]:
+            raise ValueError(f"Fonte alterada durante a coleta: {record['path']}")
+    for path in provenance["deleted_paths"]:
+        if (root / path).exists() or (root / path).is_symlink():
+            raise ValueError(f"Fonte alterada durante a coleta: {path}")
+
+
+def build_snapshot(root: Path | str, ref: str = "HEAD", *, source: str = "git") -> dict:
     root = Path(root).resolve()
+    if source not in {"git", "worktree"}:
+        raise ValueError("Origem deve ser git ou worktree")
     if not ref or ref.startswith("-"):
         raise ValueError("O ref Git deve ser explícito e não pode ser uma opção.")
     commit = _git(root, "rev-parse", "--verify", f"{ref}^{{commit}}").decode("ascii").strip()
     tree = _git(root, "rev-parse", f"{commit}^{{tree}}").decode("ascii").strip()
     snapshot = {"schema_version": "r879.v1", "git": {"requested_ref": ref, "commit": commit, "tree": tree}, "files": [], "modules": [], "edges": [], "external_imports": [], "dynamic_imports": [], "parse_errors": [], "surfaces": [], "configurations": []}
+    provenance = {"source_manifest": [], "changed_paths": [], "deleted_paths": [], "excluded_paths": []}
+    records = _worktree_records(root, commit, provenance) if source == "worktree" else _blob_records(root, commit)
     texts = {}
-    for path, mode, kind, oid, data in _blob_records(root, commit):
+    for path, mode, kind, oid, data in records:
         classification = classify(path)
         language = LANGUAGES.get(PurePosixPath(path).suffix.lower())
         entry = {"path": path, "git_blob": oid, "git_mode": mode, "git_type": kind, "sha256": hashlib.sha256(data).hexdigest() if data is not None else None, "size": len(data) if data is not None else None, "classification": classification, "language": language}
+        if source == "worktree":
+            entry["content_source"] = "worktree" if kind == "blob" and (classification == "production" or path == "opencode.json") else "git_base"
         snapshot["files"].append(entry)
         if data is None or mode == "120000":
             continue  # Nunca segue symlinks nem submódulos para o filesystem.
@@ -241,8 +298,17 @@ def build_snapshot(root: Path | str, ref: str = "HEAD") -> dict:
             except (ValueError, TypeError, AttributeError) as exc:
                 snapshot["parse_errors"].append({"path": path, "line": None, "message": type(exc).__name__})
     _parse_python(snapshot, texts)
+    if source == "worktree":
+        _check_worktree(root, provenance)
+        snapshot["schema_version"] = "r916.v1"
+        identity = json.dumps(provenance, sort_keys=True, separators=(",", ":")).encode()
+        snapshot["git"].update(source="worktree", worktree_sha256=hashlib.sha256(identity).hexdigest(), **provenance)
     snapshot["counts"] = {"tracked_files": len(snapshot["files"]), "python_production_modules": len(snapshot["modules"]), "non_python_surfaces": len(snapshot["surfaces"]), "declared_import_edges": len(snapshot["edges"]), "unique_module_pairs": len({(item["source"], item["target"]) for item in snapshot["edges"]}), "classifications": dict(sorted(Counter(item["classification"] for item in snapshot["files"]).items())), "parse_errors": len(snapshot["parse_errors"]), "external_imports": len(snapshot["external_imports"]), "dynamic_imports": len(snapshot["dynamic_imports"])}
     snapshot["limitations"] = ["Snapshot de arquivos versionados no commit indicado; arquivos privados, ignorados e mudanças não commitadas não são lidos.", "Imports AST declarados não comprovam chamadas, execução, prontidão, qualidade ou validação externa.", "Produção é uma classificação por caminho/extensão; o índice preserva todas as demais categorias separadamente.", "Imports externos ou não encontrados não distinguem biblioteca padrão, dependência opcional e import inválido.", "Imports dinâmicos são registrados, sem serem promovidos a arestas executadas.", "Declarações TS/JS/Lean são extração lexical, não parser semântico; podem conter falsos positivos de comentários/strings e omitir formas não suportadas.", "Relações CLI/MCP, gates e fluxos documentados exigem mapas operacionais separados; não são inferidos do grafo AST.", "Submódulos e symlinks permanecem no índice; seus destinos nunca são seguidos.", "Hashes SHA-256 são de blobs locais; não representam assinatura, auditoria externa ou taxa de cobertura."]
+    if source == "worktree":
+        snapshot["limitations"][0] = "Fontes de produção rastreadas e opencode.json lidos do checkout; não rastreados, privados e ignorados não são incluídos. Removidos são omitidos."
+        snapshot["limitations"].append("Nas outras categorias, content_source=git_base preserva metadados do commit-base; não é uma nova leitura dos bytes documentais ou de domínio. Isso evita circularidade do atlas gerado.")
+        snapshot["limitations"].append("git.commit identifica somente a base; worktree_sha256 identifica as fontes amostradas. Fontes modificadas localmente não recebem permalink dessa base.")
     return snapshot
 
 
@@ -251,8 +317,19 @@ def _quote(value: str) -> str:
     return json.dumps(value, ensure_ascii=True)
 
 
+def _source_label(snapshot: dict) -> str:
+    git = snapshot.get("git", {})
+    if git.get("source") == "worktree":
+        return (f"Fontes worktree {git.get('worktree_sha256', '')[:12]} · "
+                f"base {git.get('commit', '')[:12]} · "
+                f"{len(git.get('changed_paths', []))} modificados · "
+                f"{len(git.get('deleted_paths', []))} removidos omitidos; imports declarados, não execução")
+    return f"Snapshot Git {git.get('commit', '')[:12]} · imports declarados, não execução"
+
+
 def _dot(snapshot: dict, overview: bool) -> str:
-    lines = ["digraph architecture {", '  graph [overlap=false, splines=false, remincross=false, nslimit=3, nslimit1=1, mclimit=0.1, outputorder=edgesfirst, bgcolor="#f8fafc", fontname="Helvetica", label="Imports declarados no snapshot Git — não rastreamento de execução"];', '  node [shape=box, style="rounded,filled", fillcolor="#e0f2fe", color="#0284c7", fontname="Helvetica", fontsize=9];', '  edge [color="#94a3b8", arrowsize=0.45];']
+    graph_label = _quote(_source_label(snapshot))
+    lines = ["digraph architecture {", f'  graph [overlap=false, splines=false, remincross=false, nslimit=3, nslimit1=1, mclimit=0.1, outputorder=edgesfirst, bgcolor="#f8fafc", fontname="Helvetica", label={graph_label}];', '  node [shape=box, style="rounded,filled", fillcolor="#e0f2fe", color="#0284c7", fontname="Helvetica", fontsize=9];', '  edge [color="#94a3b8", arrowsize=0.45];']
     if overview:
         packages = Counter(item["package"] for item in snapshot["modules"])
         for package, count in sorted(packages.items()):
@@ -299,10 +376,11 @@ def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument("--ref", default="HEAD")
+    parser.add_argument("--source", choices=("git", "worktree"), default="git")
     parser.add_argument("--output", type=Path, default=Path("docs/architecture"))
     parser.add_argument("--check", action="store_true", help="Compara JSON/DOT determinísticos existentes, sem reescrevê-los.")
     args = parser.parse_args(argv)
-    snapshot = build_snapshot(args.root, args.ref)
+    snapshot = build_snapshot(args.root, args.ref, source=args.source)
     if args.check:
         expected = {"architecture-inventory.json": json.dumps(snapshot, indent=2, ensure_ascii=True, sort_keys=True) + "\n", "overview.dot": _dot(snapshot, True), "dependencies.dot": _dot(snapshot, False)}
         differences = [name for name, content in expected.items() if not (args.output / name).exists() or (args.output / name).read_text(encoding="utf-8") != content]

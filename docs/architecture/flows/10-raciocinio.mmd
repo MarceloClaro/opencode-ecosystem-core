@@ -27,3 +27,8 @@ flowchart TB
   FALL --> REPORT
   HEUR --> REPORT
   REPORT -. "não promover conclusão parcial a prova" .-> BOUND["Sem eval de código Python; heurísticas não equivalem a SMT ou prova externa"]
+  ENTRY -->|"CLI lean4 legado"| LEG["Lean4ProofVerifier: pode retornar syntax_verified"]
+  ENTRY -->|"plugin Lean 4"| PLUG["LocalLeanVerifier: compilador isolado obrigatório"]
+  LEG -. "syntax_verified não é compilação" .-> BOUND
+  PLUG --> CHECK["machine_checked somente no contrato observado"]
+  CHECK --> REPORT

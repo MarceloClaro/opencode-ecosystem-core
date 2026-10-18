@@ -123,3 +123,20 @@ O login do Gemini CLI é independente do conector NotebookLM. Não importa
 conversas do site Gemini nem configura automaticamente um provedor no OpenCode.
 O adaptador `integrations/gemini_cli.py` permite execução externa pelo Core,
 mantendo a coordenação do MarceloClaro e a necessidade de verificar cada resposta.
+
+## Atualização de verificação R916 — 18/10/2026
+
+Foram observadas respostas dos modelos solicitados GPT-6 Luna e GPT-6.1 Sol
+pelo cliente OpenCode, em sondas sintéticas isoladas e com critérios explícitos.
+Isso confirma somente essas chamadas naquele momento. O primeiro ensaio de
+Luna falhou no conteúdo, embora o processo tenha concluído.
+
+O Gemini CLI 0.61.0 recusou a solicitação da conta com UNSUPPORTED_CLIENT
+e indicou migração para Antigravity. Também relatou diretório temporário não
+confiável. A autorização Google apresentada anteriormente não comprova
+elegibilidade deste cliente para inferência. Antigravity não foi autenticado
+ou testado por esta revisão, e nenhum token foi reutilizado para contornar o gate.
+
+Consulte [modelos e custo de tokens](MODELOS_E_CUSTO_DE_TOKENS.md) e o
+[recibo das quatro sondas](evidence/r916/model-selection.json). As afirmações
+acima, datadas de 17/10, conservam o alcance histórico da inspeção inicial.
