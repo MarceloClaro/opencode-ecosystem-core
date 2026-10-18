@@ -1,0 +1,122 @@
+{
+  "round_id": "R914",
+  "checked_at_utc": "2026-10-18T02:18:59.314210+00:00",
+  "source_specification_sha256": "4639ff390b630fb42548f5ce83da59fab44bdc5cd2cb3ae634c03a0a2d3ae854",
+  "scope": "local_rule_checks_and_typed_contracts",
+  "profiles_validated": 34,
+  "pilot": {
+    "profiles": 8,
+    "tasks_completed": 8,
+    "execution_complete": true,
+    "remaining_stakes": []
+  },
+  "selected_full_review_tasks": 27,
+  "execution_complete": true,
+  "banca": {
+    "synthetic_response": true,
+    "question_count": 1,
+    "reply_count": 1,
+    "turn_kind_after_answer": "replica",
+    "scientifically_approved": false
+  },
+  "formal_software_gate": {
+    "executed": true,
+    "passed": true,
+    "summary": "45 passed in 5.06s",
+    "error": null,
+    "tdd_history_receipt_id": "tdd-ce36d5b6142542fba6eb5022761fb899",
+    "verification": {
+      "spec_id": "SPEC-935-R914",
+      "verified": true,
+      "status": "green",
+      "spec_status": "green",
+      "criteria_results": [
+        {
+          "criterion_id": "R914-AC1",
+          "description": "Casos científicos positivos/negativos preservam evidências, contradições e bloqueios proporcionais.",
+          "passed": true
+        },
+        {
+          "criterion_id": "R914-AC2",
+          "description": "Perfis validados executam contratos pelo primário, com A2A/MetaBus e sem autoelevação de confiança.",
+          "passed": true
+        },
+        {
+          "criterion_id": "R914-AC3",
+          "description": "Banca exige respostas efetivas, rubrica documentada e controle de versão do artefato e da rubrica.",
+          "passed": true
+        },
+        {
+          "criterion_id": "R914-AC4",
+          "description": "CLI/MCP compartilham a fachada, e nenhuma saída local representa aprovação científica externa.",
+          "passed": true
+        }
+      ],
+      "passed_count": 4,
+      "total_count": 4,
+      "runtime_evidence_required": true,
+      "runtime_evidence_valid": true,
+      "evidence_contract_mode": "legacy",
+      "evidence_contract_valid": false,
+      "evidence_contract_error": null,
+      "evidence_contract_sha256": null,
+      "criterion_runtime_records_required": false,
+      "red_history_required": true,
+      "red_history_valid": true,
+      "red_history": {
+        "verified": true,
+        "reason_codes": [],
+        "reasons": [],
+        "red_receipt_id": "tdd-aafec402d4454183addc51586db5eb91",
+        "green_receipt_id": "tdd-ce36d5b6142542fba6eb5022761fb899",
+        "verification": "local_executed_history",
+        "externally_validated": false
+      },
+      "verification_scope": "software_delivery_gate",
+      "trusted_test_evidence": {
+        "spec_id": "SPEC-935-R914",
+        "test_file": "tests/test_r914_academic_rigor.py",
+        "executed": true,
+        "passed": true,
+        "returncode": 0,
+        "summary": "45 passed in 5.06s",
+        "error": null,
+        "scope": "local_runtime",
+        "external_validation": false,
+        "tdd_history_receipt_id": "tdd-ce36d5b6142542fba6eb5022761fb899",
+        "contract_sha256": null,
+        "criterion_records": []
+      }
+    }
+  },
+  "pytest": {
+    "passed": 188,
+    "failed": 0,
+    "duration_seconds": 13.77,
+    "scope": "nine_selected_test_files",
+    "log_sha256": "d3914b4e65bb08ee672c30c69a904ee378ba70f7651bc5bce4e5028675e9ee9a"
+  },
+  "doctor": {
+    "overall": "healthy",
+    "checks_total": 22,
+    "checks_passed": 22,
+    "checks_failed": 0,
+    "verification": "installation_only",
+    "diagnostic_mode": "structural"
+  },
+  "mcp_fresh_process_tool_count": 24,
+  "configuration": {
+    "agents": 346,
+    "mcps": 16,
+    "commands": 34
+  },
+  "llm_inference_of_specialists_executed": false,
+  "human_calibration_executed": false,
+  "external_scientific_validation": false,
+  "limits": [
+    "Regras avaliam somente alegações e contexto explicitamente submetidos.",
+    "O piloto e o parecer usaram a especificação real recebida; a resposta da banca foi sintética de teste.",
+    "Equivalência a banca, falsos positivos/negativos e validação humana não foram medidos.",
+    "A sonda MCP fresca não atualiza automaticamente as ferramentas da conversa já aberta."
+  ]
+}

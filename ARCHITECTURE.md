@@ -8,6 +8,11 @@ alegações históricas, consulte [CORRIGENDUM.md](CORRIGENDUM.md).
 > configurações específicas; não constituem certificação externa de segurança,
 > qualidade ou adequação para um domínio de uso.
 
+As extensões R913–R914 acrescentam fachadas MCP para REA, MiroFish e Lean 4 e
+`academic/adversarial_research`, subordinado ao primário. Consulte o
+[fluxo de rigor acadêmico](docs/academic-rigor/README.md) para contratos, sete
+núcleos, banca e limites. Blackboard/MetaBus e SpecVerifier são reaproveitados.
+
 ## Configuração estrutural
 
 Em **2026-09-26**, o diagnóstico local listava **20 checks**. A configuração
@@ -21,7 +26,7 @@ python3 -c "import json; c=json.load(open('opencode.json', encoding='utf-8')); p
 ```
 
 <!-- core-state:start -->
-**312 agentes** · **16 MCPs** · **33 comandos** · **22 checks**
+**346 agentes** · **16 MCPs** · **34 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 

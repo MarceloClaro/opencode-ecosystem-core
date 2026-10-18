@@ -1,0 +1,274 @@
+{
+  "review_id": "review-cecbe34a53de521f4fd9fbd8ba060983",
+  "review_status": "needs_revision",
+  "reviewed_artifact_hash": "4639ff390b630fb42548f5ce83da59fab44bdc5cd2cb3ae634c03a0a2d3ae854",
+  "report_sha256": "5419f521311c1df06065d35b9fa62c3537829c2f8269cf527e81363316ed2532",
+  "execution_complete": true,
+  "execution_scope": "local_rule_checks",
+  "llm_inference_executed": false,
+  "scientifically_approved": false,
+  "external_validation": false,
+  "human_review_required": true,
+  "gates": [
+    {
+      "gate": "G0",
+      "passed": true,
+      "status": "local_contract_satisfied",
+      "scope": "local_preflight_not_scientific_approval"
+    },
+    {
+      "gate": "G1",
+      "passed": true,
+      "status": "local_contract_satisfied",
+      "scope": "local_preflight_not_scientific_approval"
+    },
+    {
+      "gate": "G2",
+      "passed": true,
+      "status": "local_contract_satisfied",
+      "scope": "local_preflight_not_scientific_approval"
+    },
+    {
+      "gate": "G3",
+      "passed": true,
+      "status": "local_contract_satisfied",
+      "scope": "local_preflight_not_scientific_approval"
+    },
+    {
+      "gate": "G4",
+      "passed": true,
+      "status": "local_contract_satisfied",
+      "scope": "local_preflight_not_scientific_approval"
+    },
+    {
+      "gate": "G5",
+      "passed": true,
+      "status": "local_contract_satisfied",
+      "scope": "local_preflight_not_scientific_approval"
+    },
+    {
+      "gate": "G6",
+      "passed": false,
+      "status": "pending_human_review",
+      "scope": "local_preflight_not_scientific_approval"
+    }
+  ],
+  "tasks": [
+    {
+      "agent_id": "research-intake-auditor",
+      "task_id": "task-019d80c5",
+      "profile_sha256": "007c5cb5d890495c3cf7052313151cc7b98ca6529aba27a56545536a6c18aef4",
+      "status": "completed",
+      "contract_verified": true,
+      "confidence_promoted": false
+    },
+    {
+      "agent_id": "research-problem-decomposer",
+      "task_id": "task-131cedfd",
+      "profile_sha256": "cfda5dfdc790288b5176f0995d4a52b82058a719bc0b86e54db8a7d906a50d47",
+      "status": "completed",
+      "contract_verified": true,
+      "confidence_promoted": false
+    },
+    {
+      "agent_id": "research-evidence-ledger",
+      "task_id": "task-a31a86ff",
+      "profile_sha256": "d43159f928fb23548808728a822b1ac46ba7d3e356db0a29857ee07fab9c40b4",
+      "status": "completed",
+      "contract_verified": true,
+      "confidence_promoted": false
+    },
+    {
+      "agent_id": "research-banca-chair",
+      "task_id": "task-1a4f32df",
+      "profile_sha256": "30eecdb231e37f59afc441108ba4e441bb1be154e6973a818b42a83f573ba8b1",
+      "status": "completed",
+      "contract_verified": true,
+      "confidence_promoted": false
+    },
+    {
+      "agent_id": "research-gap-verifier",
+      "task_id": "task-7e8dd877",
+      "profile_sha256": "187f2f871bb0d7ca221fd0d5c9b30b0288754090c7c44166a083693457a68f41",
+      "status": "completed",
+      "contract_verified": true,
+      "confidence_promoted": false
+    },
+    {
+      "agent_id": "research-novelty-opponent",
+      "task_id": "task-1080061f",
+      "profile_sha256": "bcabf6ac0968a6888dea56ca8ddaa8723bc430fca6d9ac07998a6c706a92a46f",
+      "status": "completed",
+      "contract_verified": true,
+      "confidence_promoted": false
+    },
+    {
+      "agent_id": "research-concept-genealogist",
+      "task_id": "task-d2bcf043",
+      "profile_sha256": "843a1cbd9996f2a612399a54eecc9aa88f1d392484e932f969922ecd34e039eb",
+      "status": "completed",
+      "contract_verified": true,
+      "confidence_promoted": false
+    },
+    {
+      "agent_id": "research-operationalization-auditor",
+      "task_id": "task-67759a9e",
+      "profile_sha256": "4a1c14d29e9cb3e8ed2f3cbbc5464d4d521a840066d577070b3d0d473472e40e",
+      "status": "completed",
+      "contract_verified": true,
+      "confidence_promoted": false
+    },
+    {
+      "agent_id": "research-rival-hypotheses",
+      "task_id": "task-c0dd6851",
+      "profile_sha256": "e6175117f07c40d6d11e0b28f0f14493f84727088f8d00c98b4063908db3cf87",
+      "status": "completed",
+      "contract_verified": true,
+      "confidence_promoted": false
+    },
+    {
+      "agent_id": "research-sampling-auditor",
+      "task_id": "task-2f7cd0a0",
+      "profile_sha256": "a1469cb805379dece87afea1c744606e2fdbbcb5c76975b7d6168e0fd8a00477",
+      "status": "completed",
+      "contract_verified": true,
+      "confidence_promoted": false
+    },
+    {
+      "agent_id": "research-corpus-auditor",
+      "task_id": "task-6546b9b1",
+      "profile_sha256": "7abcb96da6e82a83658db1b4a08035184da3eaf1470603870b40399d4bc78c08",
+      "status": "completed",
+      "contract_verified": true,
+      "confidence_promoted": false
+    },
+    {
+      "agent_id": "research-model-variance-auditor",
+      "task_id": "task-45cc78e4",
+      "profile_sha256": "9ac8c6fb56de4415b169de5fecf94e3cbf3758166a98a82f05617a438a92d47c",
+      "status": "completed",
+      "contract_verified": true,
+      "confidence_promoted": false
+    },
+    {
+      "agent_id": "research-causal-inference-skeptic",
+      "task_id": "task-12232c17",
+      "profile_sha256": "e7fd3726120b72be6e09b89a308b82e8c9bfe14b4a32176c157c81e0ad10e85b",
+      "status": "completed",
+      "contract_verified": true,
+      "confidence_promoted": false
+    },
+    {
+      "agent_id": "research-transferability-auditor",
+      "task_id": "task-0ad1738e",
+      "profile_sha256": "3e74bd3ffba15a301a7996d2c94bf1cbffe67e217bd05f2c278f14ce7e75283f",
+      "status": "completed",
+      "contract_verified": true,
+      "confidence_promoted": false
+    },
+    {
+      "agent_id": "research-human-ethics-auditor",
+      "task_id": "task-3d9f0f38",
+      "profile_sha256": "990b3efe66c7df9933c15ddd474f42414c1ecdbaa11ba444b2ef79b5db35a3a4",
+      "status": "completed",
+      "contract_verified": true,
+      "confidence_promoted": false
+    },
+    {
+      "agent_id": "research-source-provenance-auditor",
+      "task_id": "task-a1dd5ee4",
+      "profile_sha256": "88dd9bd2ab9b4d7f0e2b9a31e6522fcbb7b53d61e5a5e415b2bb050c592e6260",
+      "status": "completed",
+      "contract_verified": true,
+      "confidence_promoted": false
+    },
+    {
+      "agent_id": "research-citation-integrity-auditor",
+      "task_id": "task-1af4f8c7",
+      "profile_sha256": "969eae5d5151176e2d0c978d76e8db55daa59f9085ec56506339692a1f46ef5f",
+      "status": "completed",
+      "contract_verified": true,
+      "confidence_promoted": false
+    },
+    {
+      "agent_id": "research-computational-claims-auditor",
+      "task_id": "task-6a59a1fb",
+      "profile_sha256": "7a1d801bbaffb9140e08ad837462771cd6772e45787536f8d289cddc60616704",
+      "status": "completed",
+      "contract_verified": true,
+      "confidence_promoted": false
+    },
+    {
+      "agent_id": "research-reproducibility-auditor",
+      "task_id": "task-6c773437",
+      "profile_sha256": "b3f3e6d659f2c3b4c382caf065688f3fbf1ddcbabbdac3003966fcf02a77a0cb",
+      "status": "completed",
+      "contract_verified": true,
+      "confidence_promoted": false
+    },
+    {
+      "agent_id": "research-negative-cases-auditor",
+      "task_id": "task-548c8ef9",
+      "profile_sha256": "2762c0dbe18757a9b71548fd3e090c9f9fa016c3c778a572772cd716b2792dc4",
+      "status": "completed",
+      "contract_verified": true,
+      "confidence_promoted": false
+    },
+    {
+      "agent_id": "research-timeline-auditor",
+      "task_id": "task-f816b370",
+      "profile_sha256": "fb314a333cd4e775d1b2ded172cb555ec29f85958063cc29032518affb160ec5",
+      "status": "completed",
+      "contract_verified": true,
+      "confidence_promoted": false
+    },
+    {
+      "agent_id": "research-operational-feasibility",
+      "task_id": "task-fa2330f4",
+      "profile_sha256": "920d9bc348dd84145da5d8c75ef9def63cc829503f05fcc56137816c976d988a",
+      "status": "completed",
+      "contract_verified": true,
+      "confidence_promoted": false
+    },
+    {
+      "agent_id": "research-contingency-auditor",
+      "task_id": "task-5eac86cd",
+      "profile_sha256": "9f67264c5ea8d4ea7e7a13c7ea3c0a19d32638f83e6f24e010092156b1edb808",
+      "status": "completed",
+      "contract_verified": true,
+      "confidence_promoted": false
+    },
+    {
+      "agent_id": "research-institutional-fit-auditor",
+      "task_id": "task-ef78ce11",
+      "profile_sha256": "02daff824b52cbe73f5d5140712b2616b323f78f47ba9072880479f921046303",
+      "status": "completed",
+      "contract_verified": true,
+      "confidence_promoted": false
+    },
+    {
+      "agent_id": "research-adversarial-examiner",
+      "task_id": "task-f8f94878",
+      "profile_sha256": "7ef57636b4753c8a7c665f94950547368954cf907b9efd7e763e06fbae3b2cff",
+      "status": "completed",
+      "contract_verified": true,
+      "confidence_promoted": false
+    },
+    {
+      "agent_id": "research-rubric-scoring-auditor",
+      "task_id": "task-f27097e8",
+      "profile_sha256": "4218eb4e3859b28bc3533876a47cac99f55397acf9af0293649b4944aeb98384",
+      "status": "completed",
+      "contract_verified": true,
+      "confidence_promoted": false
+    },
+    {
+      "agent_id": "research-remediation-planner",
+      "task_id": "task-8f3d6a25",
+      "profile_sha256": "72e53dbb48a214c4711521eed14fb74ee166d1a50959cc3010eab216a95ef78c",
+      "status": "completed",
+      "contract_verified": true,
+      "confidence_promoted": false
+    }
+  ]
+}

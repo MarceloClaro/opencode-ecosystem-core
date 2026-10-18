@@ -739,6 +739,18 @@ def build_config() -> Dict[str, Any]:
                 "description": "Contexto estrutural local de código e proveniência (R887)",
                 "agent": "marceloclaro",
             },
+            "rigor": {
+                "template": (
+                    "Conduza pelo primário a auditoria adversarial solicitada: $ARGUMENTS. "
+                    "Use ecosystem-network.ecosystem_research_rigor: status e plan antes de review. "
+                    "Exija artefato local, alegações explícitas, fontes/localizadores e contexto. "
+                    "No modo banca mostre uma pergunta por vez e aguarde resposta com turn_id. "
+                    "Registre objeções, evidências ausentes e limites. Regras locais e notas "
+                    "de treinamento não representam revisão humana ou aprovação científica."
+                ),
+                "description": "Auditoria adversarial e banca interativa com evidências (R914)",
+                "agent": "marceloclaro",
+            },
             "biblioteca": {
                 "template": (
                     "Consulte os livros técnicos locais sobre: $ARGUMENTS. "

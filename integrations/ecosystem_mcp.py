@@ -66,6 +66,22 @@ async def ecosystem_agent_profile(config: dict[str, Any]) -> dict[str, Any]:
 
 
 @mcp.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=False, openWorldHint=False))
+async def ecosystem_research_rigor(config: dict[str, Any]) -> dict[str, Any]:
+    """Auditoria adversarial e banca persistente pelo MarceloClaro (R914).
+
+    operation: status/inventory/plan/review/report/banca_start/banca_question/
+    banca_answer/banca_report/banca_rate/banca_cancel/configure. review exige
+    project com artifact_path, claims explícitas, fontes e contexto. banca_answer
+    exige turn_id da pergunta recebida. Notas são declaradas de treinamento,
+    vinculadas a rubrica documental e respostas observadas. Regras locais não
+    equivalem a parecer de banca, validação externa ou autorização ética.
+    """
+    from academic.adversarial_research.service import validate_rigor_config
+    config=validate_rigor_config(config)
+    return await run_cancellable(_knowledge_operation, "academic_rigor_action", {"config":config})
+
+
+@mcp.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=False, openWorldHint=False))
 async def ecosystem_local_ci(config: dict[str, Any]) -> dict[str, Any]:
     """Inicia/consulta/lista/cancela o perfil científico local fechado.
 

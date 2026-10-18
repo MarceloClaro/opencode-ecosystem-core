@@ -1,0 +1,241 @@
+{
+  "round_id": "R913",
+  "checked_at_utc": "2026-10-18T02:18:59.314210+00:00",
+  "scope": "local_installation_stdio_and_scoped_operations",
+  "plugins": [
+    {
+      "component": "rea",
+      "plugin_id": "opencode-rea@marceloclaro-core-local",
+      "version": "1.0.0",
+      "source_and_cache_match": true,
+      "package_sha256": "a5632f61b592fa26f37c7454e862800bd55b48e2453603f3010dc9da853b4c7d",
+      "files": {
+        "plugin.json": "f09b213204c27cf628954a2efeb64694e3119a1792b61611cb018801c9dcee8d",
+        "mcp.json": "366614986fa869ecf7733c1ab29ad6c3c756e9962c185d9c63c1c18966e62c8b",
+        ".mcp.json": "d8a9a16763df6de04f97172b742a62d726f1a09c08557e4c303ac90aad857c77",
+        ".codex-plugin/plugin.json": "6ac377d41ad4d9c23d21e545f01cae496f7f1cec65085e1dd7b6799ec6e051b7",
+        "skills/core-orchestrator/SKILL.md": "4880cb65351ca33c3227d45562670cbc615a8259a42d5e60f9886b5678f9434b"
+      }
+    },
+    {
+      "component": "mirofish",
+      "plugin_id": "opencode-mirofish-offline@marceloclaro-core-local",
+      "version": "1.0.0",
+      "source_and_cache_match": true,
+      "package_sha256": "b4f02adf947e2c794caf18d33d81393665d766824acd9d72701bec5fe48101e6",
+      "files": {
+        "plugin.json": "0578dd9dbaaced8d5ae4f59fcc882f1f2082950a2e71135f749b43932ec27006",
+        "mcp.json": "92d9b06b0df3cca04eb19d2fb1689e75d125715d5b93ad5dcc6c3b32c924fb0e",
+        ".mcp.json": "7d83344896f1cc42b0f31854497183b9cb78f949c649e25abbd21d8b529df422",
+        ".codex-plugin/plugin.json": "e4665cf0d1063e042932738ca7082a880abbaa16281359faa8057cf8fe3329da",
+        "skills/core-orchestrator/SKILL.md": "eb2fbf5d1639c1a0fb086c1d8618c0f6349e99c9eac9ee519726b78333ffdafb"
+      }
+    },
+    {
+      "component": "lean4",
+      "plugin_id": "opencode-lean4@marceloclaro-core-local",
+      "version": "1.0.0",
+      "source_and_cache_match": true,
+      "package_sha256": "ccc9a8c6c1e6d8a8beb8962d2de450e5c8992998f8245e4da8116faeec3b4eb2",
+      "files": {
+        "plugin.json": "dc481158c26b2e4c93507e84ca6b21a07ba9e2a7743076d539f47cc63036e749",
+        "mcp.json": "ec5851da43e1defbc5d3172d4b3efcd5cde56cec249ce6fa033fa425a3b1696c",
+        ".mcp.json": "90a8e78e40f1241605c02b942e9ea37c35892168e30e34355133dd197ca52a41",
+        ".codex-plugin/plugin.json": "440c1135455f071e841afc5255e159fe3e40d5f146a6117981fde87bf2a413b5",
+        "skills/core-orchestrator/SKILL.md": "faa8daaeb3bde5a9b2873bfd489a4c072a5542d4df1e329717d02fb8060e18cf"
+      }
+    }
+  ],
+  "installed_and_enabled": true,
+  "doctor": {
+    "overall": "healthy",
+    "checks_total": 22,
+    "checks_passed": 22,
+    "checks_failed": 0,
+    "verification": "installation_only",
+    "diagnostic_mode": "structural"
+  },
+  "pytest": {
+    "passed": 188,
+    "failed": 0,
+    "duration_seconds": 13.77,
+    "scope": "nine_selected_test_files",
+    "log_sha256": "d3914b4e65bb08ee672c30c69a904ee378ba70f7651bc5bce4e5028675e9ee9a"
+  },
+  "formal_software_gate": {
+    "executed": true,
+    "passed": true,
+    "summary": "23 passed in 5.47s",
+    "error": null,
+    "tdd_history_receipt_id": "tdd-782889d22eb24e3e8f9d1cefe02b7368",
+    "verification": {
+      "spec_id": "SPEC-935-R913",
+      "verified": true,
+      "status": "green",
+      "spec_status": "green",
+      "criteria_results": [
+        {
+          "criterion_id": "R913-AC1",
+          "description": "Pacotes, catálogos MCP e contratos fechados são validados pela suíte vinculada.",
+          "passed": true
+        },
+        {
+          "criterion_id": "R913-AC2",
+          "description": "Lean compila provas válidas, rejeita falsas/incompletas e relata axiomas de todas as declarações submetidas.",
+          "passed": true
+        },
+        {
+          "criterion_id": "R913-AC3",
+          "description": "Transporte local evita proxy/redirecionamento externo e declara timeout sem inventar sucesso.",
+          "passed": true
+        }
+      ],
+      "passed_count": 3,
+      "total_count": 3,
+      "runtime_evidence_required": true,
+      "runtime_evidence_valid": true,
+      "evidence_contract_mode": "legacy",
+      "evidence_contract_valid": false,
+      "evidence_contract_error": null,
+      "evidence_contract_sha256": null,
+      "criterion_runtime_records_required": false,
+      "red_history_required": true,
+      "red_history_valid": true,
+      "red_history": {
+        "verified": true,
+        "reason_codes": [],
+        "reasons": [],
+        "red_receipt_id": "tdd-f0eabe221d49413b9731b29b3ef1b579",
+        "green_receipt_id": "tdd-782889d22eb24e3e8f9d1cefe02b7368",
+        "verification": "local_executed_history",
+        "externally_validated": false
+      },
+      "verification_scope": "software_delivery_gate",
+      "trusted_test_evidence": {
+        "spec_id": "SPEC-935-R913",
+        "test_file": "tests/test_r913_component_plugins.py",
+        "executed": true,
+        "passed": true,
+        "returncode": 0,
+        "summary": "23 passed in 5.47s",
+        "error": null,
+        "scope": "local_runtime",
+        "external_validation": false,
+        "tdd_history_receipt_id": "tdd-782889d22eb24e3e8f9d1cefe02b7368",
+        "contract_sha256": null,
+        "criterion_records": []
+      }
+    }
+  },
+  "rea": {
+    "status": "completed",
+    "success": true,
+    "verification": "mcp_execution",
+    "provenance": {
+      "repository": "https://github.com/MarceloClaro/rea",
+      "commit": "4daea941bfeeb426886f2d048aed7f3cb2dbf97b",
+      "version": "6.4.0",
+      "runtime": {
+        "source_dir": "/home/marceloclaro/.local/share/opencode-core/rea",
+        "node": "/usr/bin/node",
+        "launcher": "/home/marceloclaro/.local/share/opencode-core/rea/scripts/rea.mjs"
+      },
+      "response_sha256": "17092b9d05241d841ce2f5c9dd88d82d9c1c7d44058efd2b12b9f53a60e8e2f4"
+    },
+    "evidence_artifact": null
+  },
+  "lean4": {
+    "transport_status": "transport_and_operation_verified",
+    "valid": {
+      "status": "machine_checked",
+      "is_valid": true,
+      "compiler_executed": true,
+      "theorem_names": [
+        "plugin_first",
+        "plugin_second"
+      ],
+      "axiom_reports": [
+        {
+          "theorem_name": "plugin_first",
+          "report": "'plugin_first' does not depend on any axioms"
+        },
+        {
+          "theorem_name": "plugin_second",
+          "report": "'plugin_second' does not depend on any axioms"
+        }
+      ],
+      "source_sha256": "f0da4bee5f031daf46643f158ed7b006c47989879c991dd54bd1d4c82241a286",
+      "output_sha256": "8e52699bec008bc9d0cde16e67309c9ae1357d0fa70ff95e6bf08352e6648fd5",
+      "network_isolated": true
+    },
+    "false_proof": {
+      "status": "compiler_rejected",
+      "is_valid": false,
+      "compiler_executed": true
+    },
+    "incomplete": {
+      "status": "source_rejected",
+      "is_valid": false,
+      "compiler_executed": false
+    }
+  },
+  "mirofish": {
+    "previous_completed_native_probe": {
+      "status": "completed",
+      "external_process_executed": true,
+      "inference_executed": true,
+      "runtime_artifact_observed": true,
+      "process_returncode": 0,
+      "timeout": false,
+      "duration_seconds": 144.31,
+      "model_calls": 2,
+      "population": "synthetic_profiles",
+      "provenance": {
+        "repo": "/home/marceloclaro/projetos/MiroFish-Offline-AGPL",
+        "python": "/home/marceloclaro/projetos/MiroFish-Offline-AGPL/.venv-externo/bin/python",
+        "entry": "/home/marceloclaro/projetos/MiroFish-Offline-AGPL/backend/scripts/run_twitter_simulation.py",
+        "origin": "https://github.com/MarceloClaro/MiroFish-Offline",
+        "commit": "313fe642853ff9fff05e3ecae2e439886c2d29f4",
+        "entry_sha256": "fbd9a18829ceed012f7e89b41e010f52f2c9d636d655b468458ee1276f0ba295",
+        "checkout_modified": true
+      },
+      "local_model_lifecycle": null
+    },
+    "latest_managed_probe": {
+      "status": "blocked",
+      "external_process_executed": true,
+      "inference_executed": false,
+      "runtime_artifact_observed": false,
+      "process_returncode": -1,
+      "timeout": true,
+      "duration_seconds": 304.021,
+      "model_calls": 0,
+      "population": "synthetic_profiles",
+      "provenance": {
+        "repo": "/home/marceloclaro/projetos/MiroFish-Offline-AGPL",
+        "python": "/home/marceloclaro/projetos/MiroFish-Offline-AGPL/.venv-externo/bin/python",
+        "entry": "/home/marceloclaro/projetos/MiroFish-Offline-AGPL/backend/scripts/run_twitter_simulation.py",
+        "origin": "https://github.com/MarceloClaro/MiroFish-Offline",
+        "commit": "313fe642853ff9fff05e3ecae2e439886c2d29f4",
+        "entry_sha256": "fbd9a18829ceed012f7e89b41e010f52f2c9d636d655b468458ee1276f0ba295",
+        "checkout_modified": true
+      },
+      "local_model_lifecycle": {
+        "started_for_this_run": true,
+        "stopped_after_run": true,
+        "model": "core-mirofish-local",
+        "base_url": "http://127.0.0.1:11436/v1",
+        "pid": 18752
+      }
+    },
+    "nominal_under_load_confirmed": false
+  },
+  "external_scientific_validation": false,
+  "remote_ci_verified": false,
+  "current_conversation_component_tools_verified": false,
+  "limits": [
+    "MiroFish teve execução anterior concluída; a última sonda sob demanda excedeu o prazo e permanece bloqueada.",
+    "Controles locais de transporte não equivalem a isolamento de rede de todo o OASIS externo.",
+    "Lean verifica somente as declarações formais submetidas, sem validar pressupostos empíricos."
+  ]
+}

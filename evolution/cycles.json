@@ -21522,6 +21522,70 @@
       "origin_commit": "abbf11db678304529cdfeff6f279f90b2f7cd458",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R913",
+      "objective": "Plugins locais REA, MiroFish Offline e Lean 4, com evidências e limites de execução",
+      "changes": [
+        "docs/verification-component-plugins-r913.json",
+        "docs/evidence/r913/formal-gate.json",
+        "188 testes selecionados passaram; diagnóstico estrutural 22/22."
+      ],
+      "score": null,
+      "lessons": [
+        "Histórico RED/GREEN foi executado e validado; não se fabricou cronologia anterior.",
+        "Contrato de software não equivale a aprovação científica externa.",
+        "A última sonda MiroFish sob demanda excedeu o prazo, sem promover o sucesso anterior a disponibilidade sob carga."
+      ],
+      "timestamp": 1792289939.5722806,
+      "artifact_hashes": {
+        "docs/verification-component-plugins-r913.json": "bd07a0d5f7ea16d91de12038fd46e33ab49c0972f9812a04c86c8f72e71685e4"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "docs/verification-component-plugins-r913.json",
+        "docs/evidence/r913/formal-gate.json",
+        "docs/evidence/r913/red-receipt.json"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R914",
+      "objective": "Rigor acadêmico adversarial: perfis, contratos A2A, banca persistente e gates de evidência",
+      "changes": [
+        "docs/verification-academic-rigor-r914.json",
+        "docs/evidence/r914/formal-gate.json",
+        "188 testes selecionados passaram; diagnóstico estrutural 22/22."
+      ],
+      "score": null,
+      "lessons": [
+        "Histórico RED/GREEN foi executado e validado; não se fabricou cronologia anterior.",
+        "Contrato de software não equivale a aprovação científica externa.",
+        "34 perfis registrados; 8 no piloto e 27 selecionados no parecer local. Não houve inferência LLM dos especialistas nem calibração humana."
+      ],
+      "timestamp": 1792289939.6347497,
+      "artifact_hashes": {
+        "docs/verification-academic-rigor-r914.json": "917efdf54053821794be395b404f54de5507219d32112be2271b9c252d53bced"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "docs/verification-academic-rigor-r914.json",
+        "docs/evidence/r914/formal-gate.json",
+        "docs/evidence/r914/red-receipt.json"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ]
 }

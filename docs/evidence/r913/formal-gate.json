@@ -1,0 +1,65 @@
+{
+  "executed": true,
+  "passed": true,
+  "summary": "23 passed in 5.47s",
+  "error": null,
+  "tdd_history_receipt_id": "tdd-782889d22eb24e3e8f9d1cefe02b7368",
+  "verification": {
+    "spec_id": "SPEC-935-R913",
+    "verified": true,
+    "status": "green",
+    "spec_status": "green",
+    "criteria_results": [
+      {
+        "criterion_id": "R913-AC1",
+        "description": "Pacotes, catálogos MCP e contratos fechados são validados pela suíte vinculada.",
+        "passed": true
+      },
+      {
+        "criterion_id": "R913-AC2",
+        "description": "Lean compila provas válidas, rejeita falsas/incompletas e relata axiomas de todas as declarações submetidas.",
+        "passed": true
+      },
+      {
+        "criterion_id": "R913-AC3",
+        "description": "Transporte local evita proxy/redirecionamento externo e declara timeout sem inventar sucesso.",
+        "passed": true
+      }
+    ],
+    "passed_count": 3,
+    "total_count": 3,
+    "runtime_evidence_required": true,
+    "runtime_evidence_valid": true,
+    "evidence_contract_mode": "legacy",
+    "evidence_contract_valid": false,
+    "evidence_contract_error": null,
+    "evidence_contract_sha256": null,
+    "criterion_runtime_records_required": false,
+    "red_history_required": true,
+    "red_history_valid": true,
+    "red_history": {
+      "verified": true,
+      "reason_codes": [],
+      "reasons": [],
+      "red_receipt_id": "tdd-f0eabe221d49413b9731b29b3ef1b579",
+      "green_receipt_id": "tdd-782889d22eb24e3e8f9d1cefe02b7368",
+      "verification": "local_executed_history",
+      "externally_validated": false
+    },
+    "verification_scope": "software_delivery_gate",
+    "trusted_test_evidence": {
+      "spec_id": "SPEC-935-R913",
+      "test_file": "tests/test_r913_component_plugins.py",
+      "executed": true,
+      "passed": true,
+      "returncode": 0,
+      "summary": "23 passed in 5.47s",
+      "error": null,
+      "scope": "local_runtime",
+      "external_validation": false,
+      "tdd_history_receipt_id": "tdd-782889d22eb24e3e8f9d1cefe02b7368",
+      "contract_sha256": null,
+      "criterion_records": []
+    }
+  }
+}

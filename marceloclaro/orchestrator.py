@@ -2050,6 +2050,10 @@ class MarceloClaroOrchestrator:
         report["metacognition"] = {
             **self._record_knowledge_outcome("science.reproducible", config["question"], observation),
             "confidence_promoted": False, "externally_validated": False}
+        article=report.get('artifacts',{}).get('article',{}).get('path')
+        from pathlib import Path
+        report['academic_rigor']=self._academic_preflight(Path(article).read_text() if article and Path(article).is_file() else '',config['question'])
+        report['scientific_release_allowed']=False
         return report
 
     def scientific_verify_package(self, **config: Any) -> Dict[str, Any]:
@@ -2079,6 +2083,35 @@ class MarceloClaroOrchestrator:
             report["report_sha256"] = hashlib.sha256(_json(report).encode()).hexdigest()
             report["metacognition"] = {"persisted": False, "status": "degraded",
                 "error_type": type(exc).__name__, "confidence_promoted": False}
+        return report
+
+    def academic_rigor_action(self, config: Dict[str, Any]) -> Dict[str, Any]:
+        """R914: auditoria e banca locais; sem aprovação científica automática."""
+        from academic.adversarial_research.service import AdversarialResearchService
+        service=getattr(self,'_academic_rigor',None)
+        if service is None:
+            service=AdversarialResearchService(self)
+            self._academic_rigor=service
+        return service.action(config)
+
+    def _academic_preflight(self,content: str,topic: str) -> Dict[str, Any]:
+        from academic.adversarial_research.service import AdversarialResearchService
+        try:
+            service=getattr(self,'_academic_rigor',None) or AdversarialResearchService(self)
+            self._academic_rigor=service
+            return service.preflight_text(content,topic)
+        except Exception as exc:
+            return {'status':'blocked','reason':'academic_preflight_failed','error_type':type(exc).__name__,
+                    'scientifically_approved':False,'human_review_required':True}
+
+    def local_component_action(self, component: str, config: Dict[str, Any]) -> Dict[str, Any]:
+        """R913: plugins especializados usam o primário e contratos locais fechados."""
+        from integrations.component_actions import dispatch_component
+        report = dispatch_component(self, component, config)
+        if "metacognition" not in report:
+            report["metacognition"] = self._record_knowledge_outcome(
+                "local.component", component, {key: report.get(key) for key in
+                 ("status", "is_valid", "compiler_executed", "inference_executed", "source_sha256")})
         return report
 
     def scientific_runtime_run(self, **config: Any) -> Dict[str, Any]:
@@ -2406,6 +2439,8 @@ class MarceloClaroOrchestrator:
              "score_kind": "internal_heuristic", "externally_validated": False,
              "confidence_promoted": False},
         )
+        summary['academic_rigor']=self._academic_preflight(getattr(run,'final_manuscript',None) or manuscript,topic)
+        summary['scientific_release_allowed']=False
         return summary
 
     def academic_pipeline_with_rigorous_board(
@@ -2462,6 +2497,8 @@ class MarceloClaroOrchestrator:
             pass
 
         summary["lessons_considered"] = len(awareness.get("lessons", []))
+        summary['academic_rigor']=self._academic_preflight(getattr(run,'final_manuscript',None) or manuscript,topic)
+        summary['scientific_release_allowed']=False
         return summary
 
     # ------------------------------------------------------------------
@@ -2840,6 +2877,8 @@ class MarceloClaroOrchestrator:
                 result["draft_only"] = True
             if manuscript_rigor_gate is not None:
                 result["manuscript_rigor_gate"] = manuscript_rigor_gate
+            result['academic_rigor']=self._academic_preflight(r105_manuscript,seed_domain)
+            result['scientific_release_allowed']=False
             return result
 
         except Exception as exc:
@@ -3436,6 +3475,8 @@ class MarceloClaroOrchestrator:
         )
         manifest = production.build(content)
         generated = [f for f, info in manifest["formats"].items() if info]
+        manifest['academic_rigor']=self._academic_preflight(content,title)
+        manifest['scientific_release_allowed']=False
         metabus.memory.add_reflection(
             agent_id=self.id,
             task_context=f"produção científica: {title[:80]} (template {template})",
@@ -3509,6 +3550,9 @@ class MarceloClaroOrchestrator:
             score=min(1.0, resumo["fichamentos"] / max(1, max_papers)),
         )
         manifest["folder"] = str(hub.folder)
+        import json
+        manifest['academic_rigor']=self._academic_preflight(json.dumps(manifest,ensure_ascii=False),topic)
+        manifest['scientific_release_allowed']=False
         return manifest
 
     # ==================================================================

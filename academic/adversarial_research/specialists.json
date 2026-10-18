@@ -1,0 +1,274 @@
+[
+  {
+    "number": "A01",
+    "agent_id": "research-intake-auditor",
+    "responsibility": "Identificar documentos, objetivos, restrições, lacunas de contexto e tipos de evidência disponíveis",
+    "required_evidence": "Evidência rastreável para: Identificar documentos, objetivos, restrições, lacunas de contexto e tipos de evidência disponíveis",
+    "limitations": "Verificação local delimitada; não equivale a parecer humano ou validação científica externa.",
+    "test_case": "test_blackboard_metabus_evidence_trace"
+  },
+  {
+    "number": "A02",
+    "agent_id": "research-problem-decomposer",
+    "responsibility": "Decompor o problema em perguntas verificáveis e dependências científicas",
+    "required_evidence": "Evidência rastreável para: Decompor o problema em perguntas verificáveis e dependências científicas",
+    "limitations": "Verificação local delimitada; não equivale a parecer humano ou validação científica externa.",
+    "test_case": "test_critical_claim_without_evidence_is_blocked"
+  },
+  {
+    "number": "A03",
+    "agent_id": "research-evidence-ledger",
+    "responsibility": "Registrar alegações, fontes, localizadores, status de verificação e decisões",
+    "required_evidence": "Evidência rastreável para: Registrar alegações, fontes, localizadores, status de verificação e decisões",
+    "limitations": "Verificação local delimitada; não equivale a parecer humano ou validação científica externa.",
+    "test_case": "test_unverified_citation_not_promoted_to_verified"
+  },
+  {
+    "number": "A04",
+    "agent_id": "research-banca-chair",
+    "responsibility": "Coordenar especialistas e consolidar objeções sem substituir o orquestrador primário",
+    "required_evidence": "Evidência rastreável para: Coordenar especialistas e consolidar objeções sem substituir o orquestrador primário",
+    "limitations": "Verificação local delimitada; não equivale a parecer humano ou validação científica externa.",
+    "test_case": "test_existing_rigorous_board_backward_compatibility"
+  },
+  {
+    "number": "A05",
+    "agent_id": "research-gap-verifier",
+    "responsibility": "Identificar lacunas e exigir sustentação bibliográfica",
+    "required_evidence": "Evidência rastreável para: Identificar lacunas e exigir sustentação bibliográfica",
+    "limitations": "Verificação local delimitada; não equivale a parecer humano ou validação científica externa.",
+    "test_case": "test_novelty_requires_literature_support"
+  },
+  {
+    "number": "A06",
+    "agent_id": "research-novelty-opponent",
+    "responsibility": "Contestar alegações de originalidade e distinguir novidade teórica, metodológica e empírica",
+    "required_evidence": "Evidência rastreável para: Contestar alegações de originalidade e distinguir novidade teórica, metodológica e empírica",
+    "limitations": "Verificação local delimitada; não equivale a parecer humano ou validação científica externa.",
+    "test_case": "test_novelty_requires_literature_support"
+  },
+  {
+    "number": "A07",
+    "agent_id": "research-concept-genealogist",
+    "responsibility": "Analisar origem, significado, pressupostos e limites dos conceitos",
+    "required_evidence": "Evidência rastreável para: Analisar origem, significado, pressupostos e limites dos conceitos",
+    "limitations": "Verificação local delimitada; não equivale a parecer humano ou validação científica externa.",
+    "test_case": "test_operationalization_rejects_category_error"
+  },
+  {
+    "number": "A08",
+    "agent_id": "research-operationalization-auditor",
+    "responsibility": "Converter construtos teóricos em indicadores observáveis, verificando erros categoriais",
+    "required_evidence": "Evidência rastreável para: Converter construtos teóricos em indicadores observáveis, verificando erros categoriais",
+    "limitations": "Verificação local delimitada; não equivale a parecer humano ou validação científica externa.",
+    "test_case": "test_operationalization_rejects_category_error"
+  },
+  {
+    "number": "A09",
+    "agent_id": "research-rival-hypotheses",
+    "responsibility": "Propor explicações alternativas e buscar condições capazes de contrariar hipóteses",
+    "required_evidence": "Evidência rastreável para: Propor explicações alternativas e buscar condições capazes de contrariar hipóteses",
+    "limitations": "Verificação local delimitada; não equivale a parecer humano ou validação científica externa.",
+    "test_case": "test_negative_evidence_not_suppressed"
+  },
+  {
+    "number": "A10",
+    "agent_id": "research-sampling-auditor",
+    "responsibility": "Examinar amostragem, seleção, tamanho, suficiência informacional e vieses",
+    "required_evidence": "Evidência rastreável para: Examinar amostragem, seleção, tamanho, suficiência informacional e vieses",
+    "limitations": "Verificação local delimitada; não equivale a parecer humano ou validação científica externa.",
+    "test_case": "test_corpus_count_distinguishes_independence"
+  },
+  {
+    "number": "A11",
+    "agent_id": "research-corpus-auditor",
+    "responsibility": "Conferir unidades, contagens, dependências e critérios de composição de corpus",
+    "required_evidence": "Evidência rastreável para: Conferir unidades, contagens, dependências e critérios de composição de corpus",
+    "limitations": "Verificação local delimitada; não equivale a parecer humano ou validação científica externa.",
+    "test_case": "test_corpus_count_distinguishes_independence"
+  },
+  {
+    "number": "A12",
+    "agent_id": "research-model-variance-auditor",
+    "responsibility": "Examinar variabilidade de IA, versões, parâmetros, repetições e condições de execução",
+    "required_evidence": "Evidência rastreável para: Examinar variabilidade de IA, versões, parâmetros, repetições e condições de execução",
+    "limitations": "Verificação local delimitada; não equivale a parecer humano ou validação científica externa.",
+    "test_case": "test_llm_cosine_similarity_not_translation_accuracy"
+  },
+  {
+    "number": "A13",
+    "agent_id": "research-causal-inference-skeptic",
+    "responsibility": "Identificar inferências causais indevidas, confundidores e efeito de teste",
+    "required_evidence": "Evidência rastreável para: Identificar inferências causais indevidas, confundidores e efeito de teste",
+    "limitations": "Verificação local delimitada; não equivale a parecer humano ou validação científica externa.",
+    "test_case": "test_causal_auditor_rejects_uncontrolled_effect_claim"
+  },
+  {
+    "number": "A14",
+    "agent_id": "research-instrument-calibrator",
+    "responsibility": "Avaliar rubricas, instrumentos, comparabilidade, piloto e consistência",
+    "required_evidence": "Evidência rastreável para: Avaliar rubricas, instrumentos, comparabilidade, piloto e consistência",
+    "limitations": "Verificação local delimitada; não equivale a parecer humano ou validação científica externa.",
+    "test_case": "test_operationalization_rejects_category_error"
+  },
+  {
+    "number": "A15",
+    "agent_id": "research-triangulation-auditor",
+    "responsibility": "Analisar convergências, divergências e limitações entre fontes e métodos",
+    "required_evidence": "Evidência rastreável para: Analisar convergências, divergências e limitações entre fontes e métodos",
+    "limitations": "Verificação local delimitada; não equivale a parecer humano ou validação científica externa.",
+    "test_case": "test_negative_evidence_not_suppressed"
+  },
+  {
+    "number": "A16",
+    "agent_id": "research-interrater-auditor",
+    "responsibility": "Examinar revisão independente, desacordos e consistência de classificação",
+    "required_evidence": "Evidência rastreável para: Examinar revisão independente, desacordos e consistência de classificação",
+    "limitations": "Verificação local delimitada; não equivale a parecer humano ou validação científica externa.",
+    "test_case": "test_scoring_marks_unobserved_competence"
+  },
+  {
+    "number": "A17",
+    "agent_id": "research-transferability-auditor",
+    "responsibility": "Distinguir generalização estatística, analítica, transferibilidade e extrapolações indevidas",
+    "required_evidence": "Evidência rastreável para: Distinguir generalização estatística, analítica, transferibilidade e extrapolações indevidas",
+    "limitations": "Verificação local delimitada; não equivale a parecer humano ou validação científica externa.",
+    "test_case": "test_causal_auditor_rejects_uncontrolled_effect_claim"
+  },
+  {
+    "number": "A18",
+    "agent_id": "research-human-ethics-auditor",
+    "responsibility": "Verificar consentimento, recrutamento, relações hierárquicas e avaliação ética aplicável",
+    "required_evidence": "Evidência rastreável para: Verificar consentimento, recrutamento, relações hierárquicas e avaliação ética aplicável",
+    "limitations": "Verificação local delimitada; não equivale a parecer humano ou validação científica externa.",
+    "test_case": "test_indigenous_governance_requires_contextual_review"
+  },
+  {
+    "number": "A19",
+    "agent_id": "research-indigenous-governance-auditor",
+    "responsibility": "Examinar autoridade comunitária, protocolos próprios, conhecimentos coletivos e autorizações pertinentes",
+    "required_evidence": "Evidência rastreável para: Examinar autoridade comunitária, protocolos próprios, conhecimentos coletivos e autorizações pertinentes",
+    "limitations": "Verificação local delimitada; não equivale a parecer humano ou validação científica externa.",
+    "test_case": "test_indigenous_governance_requires_contextual_review"
+  },
+  {
+    "number": "A20",
+    "agent_id": "research-data-governance-auditor",
+    "responsibility": "Examinar confidencialidade, minimização, retenção, acesso, LGPD e segurança",
+    "required_evidence": "Evidência rastreável para: Examinar confidencialidade, minimização, retenção, acesso, LGPD e segurança",
+    "limitations": "Verificação local delimitada; não equivale a parecer humano ou validação científica externa.",
+    "test_case": "test_indigenous_governance_requires_contextual_review"
+  },
+  {
+    "number": "A21",
+    "agent_id": "research-epistemic-extraction-watchdog",
+    "responsibility": "Identificar riscos de apropriação de conhecimentos, silenciamento e representação indevida",
+    "required_evidence": "Evidência rastreável para: Identificar riscos de apropriação de conhecimentos, silenciamento e representação indevida",
+    "limitations": "Verificação local delimitada; não equivale a parecer humano ou validação científica externa.",
+    "test_case": "test_operationalization_rejects_category_error"
+  },
+  {
+    "number": "A22",
+    "agent_id": "research-source-provenance-auditor",
+    "responsibility": "Verificar origem, autenticidade, rastreabilidade e pertinência de evidências",
+    "required_evidence": "Evidência rastreável para: Verificar origem, autenticidade, rastreabilidade e pertinência de evidências",
+    "limitations": "Verificação local delimitada; não equivale a parecer humano ou validação científica externa.",
+    "test_case": "test_unverified_citation_not_promoted_to_verified"
+  },
+  {
+    "number": "A23",
+    "agent_id": "research-citation-integrity-auditor",
+    "responsibility": "Detectar referências não verificadas, citações inadequadas e extrapolação de fontes",
+    "required_evidence": "Evidência rastreável para: Detectar referências não verificadas, citações inadequadas e extrapolação de fontes",
+    "limitations": "Verificação local delimitada; não equivale a parecer humano ou validação científica externa.",
+    "test_case": "test_unverified_citation_not_promoted_to_verified"
+  },
+  {
+    "number": "A24",
+    "agent_id": "research-computational-claims-auditor",
+    "responsibility": "Auditar alegações envolvendo IA, embeddings, métricas, código e estatísticas",
+    "required_evidence": "Evidência rastreável para: Auditar alegações envolvendo IA, embeddings, métricas, código e estatísticas",
+    "limitations": "Verificação local delimitada; não equivale a parecer humano ou validação científica externa.",
+    "test_case": "test_llm_cosine_similarity_not_translation_accuracy"
+  },
+  {
+    "number": "A25",
+    "agent_id": "research-reproducibility-auditor",
+    "responsibility": "Exigir protocolos, versões, parâmetros, dados e procedimentos de reprodução pertinentes",
+    "required_evidence": "Evidência rastreável para: Exigir protocolos, versões, parâmetros, dados e procedimentos de reprodução pertinentes",
+    "limitations": "Verificação local delimitada; não equivale a parecer humano ou validação científica externa.",
+    "test_case": "test_sdd_green_without_fabricated_external_validation"
+  },
+  {
+    "number": "A26",
+    "agent_id": "research-negative-cases-auditor",
+    "responsibility": "Buscar casos contraditórios, resultados nulos e evidências desfavoráveis às hipóteses",
+    "required_evidence": "Evidência rastreável para: Buscar casos contraditórios, resultados nulos e evidências desfavoráveis às hipóteses",
+    "limitations": "Verificação local delimitada; não equivale a parecer humano ou validação científica externa.",
+    "test_case": "test_negative_evidence_not_suppressed"
+  },
+  {
+    "number": "A27",
+    "agent_id": "research-timeline-auditor",
+    "responsibility": "Examinar cronograma, precedências, caminho crítico e entregas",
+    "required_evidence": "Evidência rastreável para: Examinar cronograma, precedências, caminho crítico e entregas",
+    "limitations": "Verificação local delimitada; não equivale a parecer humano ou validação científica externa.",
+    "test_case": "test_budget_timeout_and_cancellation"
+  },
+  {
+    "number": "A28",
+    "agent_id": "research-operational-feasibility",
+    "responsibility": "Analisar disponibilidade, custos, infraestrutura e acesso ao campo",
+    "required_evidence": "Evidência rastreável para: Analisar disponibilidade, custos, infraestrutura e acesso ao campo",
+    "limitations": "Verificação local delimitada; não equivale a parecer humano ou validação científica externa.",
+    "test_case": "test_budget_timeout_and_cancellation"
+  },
+  {
+    "number": "A29",
+    "agent_id": "research-contingency-auditor",
+    "responsibility": "Construir cenários de atraso, indisponibilidade e revisão metodológica",
+    "required_evidence": "Evidência rastreável para: Construir cenários de atraso, indisponibilidade e revisão metodológica",
+    "limitations": "Verificação local delimitada; não equivale a parecer humano ou validação científica externa.",
+    "test_case": "test_budget_timeout_and_cancellation"
+  },
+  {
+    "number": "A30",
+    "agent_id": "research-institutional-fit-auditor",
+    "responsibility": "Confrontar projeto com edital, linha de pesquisa, programa e missão institucional",
+    "required_evidence": "Evidência rastreável para: Confrontar projeto com edital, linha de pesquisa, programa e missão institucional",
+    "limitations": "Verificação local delimitada; não equivale a parecer humano ou validação científica externa.",
+    "test_case": "test_blackboard_metabus_evidence_trace"
+  },
+  {
+    "number": "A31",
+    "agent_id": "research-interdisciplinarity-auditor",
+    "responsibility": "Verificar integração efetiva de disciplinas, e não apenas justaposição de referências",
+    "required_evidence": "Evidência rastreável para: Verificar integração efetiva de disciplinas, e não apenas justaposição de referências",
+    "limitations": "Verificação local delimitada; não equivale a parecer humano ou validação científica externa.",
+    "test_case": "test_operationalization_rejects_category_error"
+  },
+  {
+    "number": "A32",
+    "agent_id": "research-adversarial-examiner",
+    "responsibility": "Formular perguntas difíceis e réplicas vinculadas a fragilidades específicas",
+    "required_evidence": "Evidência rastreável para: Formular perguntas difíceis e réplicas vinculadas a fragilidades específicas",
+    "limitations": "Verificação local delimitada; não equivale a parecer humano ou validação científica externa.",
+    "test_case": "test_examiner_waits_for_candidate_answer"
+  },
+  {
+    "number": "A33",
+    "agent_id": "research-rubric-scoring-auditor",
+    "responsibility": "Aplicar rubricas declaradas, justificar pontuações e registrar ausência de observação",
+    "required_evidence": "Evidência rastreável para: Aplicar rubricas declaradas, justificar pontuações e registrar ausência de observação",
+    "limitations": "Verificação local delimitada; não equivale a parecer humano ou validação científica externa.",
+    "test_case": "test_scoring_marks_unobserved_competence"
+  },
+  {
+    "number": "A34",
+    "agent_id": "research-remediation-planner",
+    "responsibility": "Propor revisões proporcionais aos problemas detectados e encaminhar reavaliação",
+    "required_evidence": "Evidência rastreável para: Propor revisões proporcionais aos problemas detectados e encaminhar reavaliação",
+    "limitations": "Verificação local delimitada; não equivale a parecer humano ou validação científica externa.",
+    "test_case": "test_critical_claim_without_evidence_is_blocked"
+  }
+]

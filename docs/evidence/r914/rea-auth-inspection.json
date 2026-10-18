@@ -1,0 +1,168 @@
+{
+  "scope": "static_installed_code_inspection_no_login_or_credentials",
+  "records": {
+    "r914_rea_notebook_auth": {
+      "operation": "analyze",
+      "status": "failed",
+      "tool": "analyze_javascript_application",
+      "success": false,
+      "provenance": {
+        "repository": "https://github.com/MarceloClaro/rea",
+        "commit": "4daea941bfeeb426886f2d048aed7f3cb2dbf97b",
+        "version": "6.4.0",
+        "runtime": {
+          "source_dir": "/home/marceloclaro/.local/share/opencode-core/rea",
+          "node": "/usr/bin/node",
+          "launcher": "/home/marceloclaro/.local/share/opencode-core/rea/scripts/rea.mjs"
+        },
+        "response_sha256": "457926db27dfc85c96d8340af6f0cc898f9feaa91dd8dbf739ff7290ab9bda27"
+      },
+      "evidence_artifact": {
+        "path": "/home/marceloclaro/opencode-ecosystem-core/.opencode/rea/evidence/457926db27dfc85c96d8340af6f0cc898f9feaa91dd8dbf739ff7290ab9bda27.json",
+        "sha256": "457926db27dfc85c96d8340af6f0cc898f9feaa91dd8dbf739ff7290ab9bda27",
+        "bytes": 837,
+        "complete": true
+      },
+      "session_or_error_summary": {
+        "error": {
+          "code": "unsupported_target",
+          "category": "unsupported_target",
+          "message": "Unsupported target for analyze_javascript_application at /home/marceloclaro/opencode-ecosystem-core/.venv/lib/python3.14/site-packages/notebooklm_tools/services/auth.py: JavaScript application analysis accepts only a directory or an .asar file",
+          "retryable": false,
+          "remediation": {
+            "action": "Select an extracted application directory, an app bundle, or an .asar file such as Contents/Resources/app.asar."
+          },
+          "details": {
+            "operation": "analyze_javascript_application",
+            "path": "/home/marceloclaro/opencode-ecosystem-core/.venv/lib/python3.14/site-packages/notebooklm_tools/services/auth.py",
+            "reason": "JavaScript application analysis accepts only a directory or an .asar file"
+          }
+        }
+      }
+    },
+    "r914_rea_opencode_package": {
+      "operation": "analyze",
+      "status": "completed",
+      "tool": "analyze_javascript_application",
+      "success": true,
+      "provenance": {
+        "repository": "https://github.com/MarceloClaro/rea",
+        "commit": "4daea941bfeeb426886f2d048aed7f3cb2dbf97b",
+        "version": "6.4.0",
+        "runtime": {
+          "source_dir": "/home/marceloclaro/.local/share/opencode-core/rea",
+          "node": "/usr/bin/node",
+          "launcher": "/home/marceloclaro/.local/share/opencode-core/rea/scripts/rea.mjs"
+        },
+        "response_sha256": "f15c529c4a3abc45168ebe633256f877c789f31396c3b611f4d30002332426c8"
+      },
+      "evidence": {
+        "evidence_id": "ev_c3dc40172653e56c5361e9cc695d43d6d95ddec0bbe9ecbcf50a06fdb23fc4ee",
+        "operation": "analyze_javascript_application",
+        "confidence": "derived",
+        "authority": "shipped-artifact",
+        "provider": {
+          "id": "rea-javascript-application",
+          "name": "REA JavaScript application analyzer",
+          "version": "1"
+        },
+        "subject": {
+          "name": "opencode-ai",
+          "digest": {
+            "sha256": "ebf077e22aca104c4b784a46e1c7ab6ba3643659a01b974c8437316aa076b287"
+          },
+          "format": "directory",
+          "architecture": null,
+          "local_path": "/home/marceloclaro/.npm-global/lib/node_modules/opencode-ai"
+        },
+        "procedure": null,
+        "limitations": [
+          "CommonJS and ESM binding relationships were recovered from inert syntax and resolved only within the inventoried artifact container.",
+          "JavaScript and HTML were parsed as inert text; bundle bootstrap code was never executed.",
+          "Static imports, entrypoints, workers, endpoints, and storage relationships do not prove runtime execution.",
+          "Static paths and relationships may remain unresolved when expressions are dynamic or obfuscated.",
+          "Webpack/Rspack factories were recovered from AST literals; REA did not invoke push handlers or bundle bootstrap code."
+        ],
+        "input_path": "/home/marceloclaro/.npm-global/lib/node_modules/opencode-ai",
+        "root_artifact_sha256": "ebf077e22aca104c4b784a46e1c7ab6ba3643659a01b974c8437316aa076b287",
+        "statistics": {
+          "relevant_files": 4,
+          "nested_asar_containers": 0,
+          "text_bytes_read": 6606,
+          "invalid_utf8_files": 0,
+          "parsed_javascript_files": 1,
+          "visited_ast_nodes": 839,
+          "findings": 12,
+          "modules": 0,
+          "parse_failures": 0
+        },
+        "artifact_graph": {
+          "nodes": 21,
+          "edges": 20,
+          "coverage": {
+            "status": "complete",
+            "truncated": false,
+            "omitted_count": 0,
+            "limits": []
+          }
+        },
+        "semantic_graph": {
+          "nodes": 516,
+          "relations": 486,
+          "unknowns": 154,
+          "coverage": {
+            "status": "unknown",
+            "truncated": false,
+            "omitted_nodes": 0,
+            "omitted_relations": 0,
+            "limits": [],
+            "families": [
+              {
+                "fields": 5
+              },
+              {
+                "fields": 5
+              },
+              {
+                "fields": 5
+              },
+              {
+                "fields": 5
+              },
+              {
+                "fields": 5
+              },
+              {
+                "fields": 5
+              },
+              {
+                "fields": 5
+              },
+              {
+                "fields": 5
+              },
+              {
+                "fields": 5
+              },
+              {
+                "fields": 5
+              },
+              {
+                "fields": 5
+              },
+              {
+                "fields": 5
+              }
+            ]
+          }
+        }
+      },
+      "evidence_artifact": {
+        "path": "/home/marceloclaro/opencode-ecosystem-core/.opencode/rea/evidence/f15c529c4a3abc45168ebe633256f877c789f31396c3b611f4d30002332426c8.json",
+        "sha256": "f15c529c4a3abc45168ebe633256f877c789f31396c3b611f4d30002332426c8",
+        "bytes": 1888844,
+        "complete": true
+      }
+    }
+  }
+}

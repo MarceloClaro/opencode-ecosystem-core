@@ -467,6 +467,10 @@ def main() -> int:
 
             return run_library_cli(sys.argv[2:])
 
+        if cmd == "rigor":
+            from marceloclaro.rigor_cli import run_rigor_cli
+            return run_rigor_cli(sys.argv[2:])
+
         if cmd == "fine-dados":
             from marceloclaro.library_cli import run_finetuning_cli
 

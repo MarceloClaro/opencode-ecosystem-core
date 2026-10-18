@@ -23,7 +23,7 @@ especificações, gates de entrega e rastreabilidade local.
 [![OpenCode](https://img.shields.io/badge/OpenCode%20CLI-native-0ea5e9?style=for-the-badge&logo=opencode&logoColor=white)](opencode.json)
 
 <!-- core-state:start -->
-**312 agentes** · **16 MCPs** · **33 comandos** · **22 checks**
+**346 agentes** · **16 MCPs** · **34 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 
@@ -34,6 +34,12 @@ A revisão publicada nesta etapa está na branch
 [`codex/core-prontidao-rea`](https://github.com/MarceloClaro/opencode-ecosystem-core/tree/codex/core-prontidao-rea).
 As contagens acima descrevem configuração; o estado de cada executor depende
 do ambiente e da operação solicitada.
+
+**Integrações locais R913–R914:** [REA, MiroFish Offline e Lean 4 no ChatGPT/Work](docs/USAR_REA_MIROFISH_LEAN4_NO_CHATGPT.md)
+e [rigor acadêmico adversarial, evidências e banca interativa](docs/academic-rigor/README.md).
+Para usar as conexões no terminal, consulte [ChatGPT e NotebookLM no Core](docs/AUTENTICACAO_CHATGPT_NOTEBOOKLM.md).
+Os especialistas passam pelo MarceloClaro. Regras locais e notas de treinamento
+não constituem validação científica externa.
 
 ---
 
@@ -494,7 +500,7 @@ flowchart TB
     Orq2 --> MetaBus2[MetaBus]
     Orq2 --> Blackboard2[Blackboard]
     Orq2 --> MCP2[16 MCPs configurados]
-    Orq2 --> Agents2[312 agentes configurados]
+    Orq2 --> Agents2[346 agentes configurados]
     Orq2 --> Mira2[mira-presenter]
     Mira2 --> Deck2[MiraDeckPipeline]
     Deck2 --> Engine2[MiraEngine]
