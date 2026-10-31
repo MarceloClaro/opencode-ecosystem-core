@@ -10,8 +10,8 @@ flowchart TB
   EXP --> EVID["Evidências recuperadas com referência e pontuação"]
   EVID --> ANSWER["answer_grounded: contexto e citações"]
   ANSWER --> SUFF{"Suporte suficiente?"}
-  SUFF -->|"não"| ABSTAIN["Abstenção declarada / ausência de suporte"]
-  SUFF -->|"sim"| RESULT["Resposta vinculada às evidências recuperadas"]
+  SUFF -->|não| ABSTAIN["Abstenção declarada / ausência de suporte"]
+  SUFF -->|sim| RESULT["Resposta vinculada às evidências recuperadas"]
   EVID --> AUDIT["ReferenceAuditor: DOI / ano / duplicatas / completude"]
   AUDIT --> BIB["Referências ABNT / BibTeX conforme metadados disponíveis"]
   PLAN --> DEEP["Deep Research: OrchestratorAgent / BFRS / DFRS"]
@@ -22,6 +22,6 @@ flowchart TB
   REPL --> CONF["Confiança consolidada local com proveniência"]
   RESULT --> OBS["MetaBus: contexto / lições / observações"]
   ABSTAIN --> OBS
-  SEARCH -. "quando selecionados, acessam fontes externas" .-> REMOTE["Busca científica/web: fronteira distinta do modo REA isolado"]
-  SCI -. "grafo de conhecimento não comprova experimento" .-> LIMIT["Elegibilidade científica e validação funcional são gates separados"]
-  CONF -. "não é probabilidade externa calibrada" .-> LIMIT
+  SEARCH -.->|quando selecionados, acessam fontes externas| REMOTE["Busca científica/web: fronteira distinta do modo REA isolado"]
+  SCI -.->|grafo de conhecimento não comprova experimento| LIMIT["Elegibilidade científica e validação funcional são gates separados"]
+  CONF -.->|não é probabilidade externa calibrada| LIMIT

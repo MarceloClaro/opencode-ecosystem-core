@@ -16,4 +16,4 @@ flowchart TB
   REASON --> ENGINE["Motor solicitado e resultado tipado"]
   ENGINE --> OBS["observe_reasoning"]
   OBS --> RECORD
-  RECORD -. "confidence_promoted false nesta observação" .-> LIMIT["Não comprova verdade, causalidade ou revisão humana"]
+  RECORD -.->|confidence_promoted false nesta observação| LIMIT["Não comprova verdade, causalidade ou revisão humana"]

@@ -877,7 +877,7 @@ flowchart TB
   MC --> REA
   MC --> LOCAL
   MC --> BROW
-  OC -. "configuração opcional" .-> MODEL
+  OC -.->|configuração opcional| MODEL
   MC --> SPEC
   SPEC --> HIST
   SPEC --> RUN
@@ -897,13 +897,13 @@ flowchart TB
   RESEARCH --> EG
   RESEARCH --> SCI
   RESEARCH --> PUB
-  RAG -. "resultados de recuperação" .-> SCI
+  RAG -.->|resultados de recuperação| SCI
   BUS --> VIS
   EG --> VIS
   SCI --> VIS
   BB --> VIS
   VIS --> UI
-  SITE -. "orienta operação; não executa análise" .-> LOCAL
+  SITE -.->|orienta operação; não executa análise| LOCAL
   MCP2["Plugins locais REA / MiroFish / Lean 4"] --> MC
   MC --> LIFE["Lifecycle: validar perfil antes de atribuir"]
   LIFE --> CAT
@@ -945,11 +945,11 @@ flowchart TB
   AC --> ROUTE["route: inventário federado + status do executor"]
   ROUTE --> AT["AttentionRouter: ranking com gates de elegibilidade"]
   AT --> READY{"Executor elegível e instruções válidas?"}
-  READY -->|"não"| BLOCK["blocked: sem execução aceita"]
-  READY -->|"sim"| PREF
+  READY -->|não| BLOCK["blocked: sem execução aceita"]
+  READY -->|sim| PREF
   PREF --> OK{"Preflight aceito?"}
-  OK -->|"não"| BLOCK
-  OK -->|"sim"| D["primário.delegate: task.cfp + contexto + spec_id"]
+  OK -->|não| BLOCK
+  OK -->|sim| D["primário.delegate: task.cfp + contexto + spec_id"]
   D --> BB["Blackboard: agentes elegíveis / voluntariado / seleção"]
   BB --> ASSIGN["task.assigned / agente / stake"]
   ASSIGN --> EX["Construir instruções + contexto + memória"]
@@ -958,24 +958,24 @@ flowchart TB
   PROC --> WAIT["communicate: saída / prazo / cancelamento"]
   WAIT --> PARSE["Parsear eventos CLI e exigir saída real"]
   PARSE --> GOOD{"Execução concluída com saída válida?"}
-  GOOD -->|"não"| CLASS["Classificar falha: conta / timeout / indisponibilidade"]
+  GOOD -->|não| CLASS["Classificar falha: conta / timeout / indisponibilidade"]
   CLASS --> FALL{"Executor alternativo elegível e orçamento?"}
-  FALL -->|"sim"| HR
-  FALL -->|"não"| FAIL["failed / blocked / exhausted"]
-  GOOD -->|"sim"| PIPE["TransformerPipeline: avaliações e revisão limitada"]
+  FALL -->|sim| HR
+  FALL -->|não| FAIL["failed / blocked / exhausted"]
+  GOOD -->|sim| PIPE["TransformerPipeline: avaliações e revisão limitada"]
   PIPE --> CP["report_completion: gate autoritativo do primário"]
   FAIL --> CP
   CP --> SV["SpecVerifier + TDD se entrega de software"]
   SV --> ACCEPT{"Blackboard terminou completed?"}
-  ACCEPT -->|"não"| REJECT["Conclusão recusada / success false"]
-  ACCEPT -->|"sim"| RESULT["Resultado aceito no escopo declarado"]
+  ACCEPT -->|não| REJECT["Conclusão recusada / success false"]
+  ACCEPT -->|sim| RESULT["Resultado aceito no escopo declarado"]
   CP --> T["Trust.learn: resultado conforme gate"]
   CP --> E["Economia: resolver stake e taxa"]
   CP --> BB2["task.complete: Blackboard"]
   BB2 --> REF["reflect_request: ReflexionEngine"]
   REF --> META["MetacognitiveLoop.complete: episódio local"]
   META --> MEM["MetaBus: observação e próxima ação"]
-  META -. "não calibrado; sem promoção por observação" .-> L["Trust e memória possuem contratos diferentes"]
+  META -.->|não calibrado; sem promoção por observação| L["Trust e memória possuem contratos diferentes"]
   RESULT --> REPORT["Relatório: passos / executor / duração / limites"]
   REJECT --> REPORT
   BLOCK --> REPORT
@@ -1005,41 +1005,41 @@ Definição normalizada, checkpoint durável, orçamento global e repetição ex
 flowchart TB
   IN["ecosystem_workflow: nodes / budgets / id / resume"] --> DEF["_definition: normalizar nós e dependências"]
   DEF --> V{"IDs únicos / dependências existentes / DAG sem ciclo?"}
-  V -->|"não"| BAD["Recusar definição"]
-  V -->|"sim"| HASH["Ordem topológica determinística + input_hash"]
+  V -->|não| BAD["Recusar definição"]
+  V -->|sim| HASH["Ordem topológica determinística + input_hash"]
   HASH --> CLAIM["WorkflowStore.claim: posse exclusiva"]
   CLAIM --> RESUME{"resume?"}
-  RESUME -->|"não"| NEW["create_record: queued / steps zero"]
-  RESUME -->|"sim"| LOAD["load checkpoint existente"]
+  RESUME -->|não| NEW["create_record: queued / steps zero"]
+  RESUME -->|sim| LOAD["load checkpoint existente"]
   LOAD --> MATCH{"Mesma definição / hash / orçamento válido?"}
-  MATCH -->|"não"| BAD
-  MATCH -->|"sim"| CHECK["Validar schema e evidência dos nós completed"]
+  MATCH -->|não| BAD
+  MATCH -->|sim| CHECK["Validar schema e evidência dos nós completed"]
   CHECK --> REC["running interrompido vira failed / execution_uncertain"]
   REC --> RETRY{"Falha e retry_failed explícito?"}
-  RETRY -->|"sim"| QUEUE["Guardar history e recolocar etapa em queued"]
-  RETRY -->|"não"| KEEP["Preservar falha; completed é reutilizado"]
+  RETRY -->|sim| QUEUE["Guardar history e recolocar etapa em queued"]
+  RETRY -->|não| KEEP["Preservar falha; completed é reutilizado"]
   NEW --> LOOP["Percorrer ordem topológica sequencialmente"]
   QUEUE --> LOOP
   KEEP --> LOOP
   LOOP --> REMAIN{"Há etapa na ordem a percorrer?"}
-  REMAIN -->|"sim"| DONE{"Etapa já concluída?"}
-  DONE -->|"sim"| NEXT["Próxima etapa"]
-  DONE -->|"não"| DEP{"Dependências completed?"}
-  DEP -->|"não"| B["blocked_by: dependências sem aceite"]
-  DEP -->|"sim"| BUDGET{"Tempo e passos globais restantes?"}
-  BUDGET -->|"não"| E["exhausted"]
-  BUDGET -->|"sim"| RES["Reservar passos e salvar running ANTES do executor"]
+  REMAIN -->|sim| DONE{"Etapa já concluída?"}
+  DONE -->|sim| NEXT["Próxima etapa"]
+  DONE -->|não| DEP{"Dependências completed?"}
+  DEP -->|não| B["blocked_by: dependências sem aceite"]
+  DEP -->|sim| BUDGET{"Tempo e passos globais restantes?"}
+  BUDGET -->|não| E["exhausted"]
+  BUDGET -->|sim| RES["Reservar passos e salvar running ANTES do executor"]
   RES --> CTX["Acrescentar saídas aceitas das dependências ao contexto"]
   CTX --> AC["AutonomousCoordinator.run: spec da etapa / primário"]
   AC --> R{"completed / success true / steps positivos / prazo?"}
-  R -->|"sim"| C["Salvar completed + resultado + consumo"]
-  R -->|"não"| F["Salvar failed / blocked / exhausted; incerteza explícita"]
+  R -->|sim| C["Salvar completed + resultado + consumo"]
+  R -->|não| F["Salvar failed / blocked / exhausted; incerteza explícita"]
   C --> NEXT
   F --> NEXT
   B --> NEXT
   E --> NEXT
   NEXT --> LOOP
-  REMAIN -->|"não"| END["_overall: sucesso somente se todos completed"]
+  REMAIN -->|não| END["_overall: sucesso somente se todos completed"]
   END --> STORE["Checkpoint durável: save / publicação atômica"]
   STORE --> STATUS["ecosystem_workflow_status: leitura sem execução"]
 ```
@@ -1067,31 +1067,31 @@ flowchart TB
   SPEC["SPEC-935-R...: frontmatter / objetivo / critérios / testes"] --> REG["SpecRegistry.load_formal_specs"]
   REG --> CONTRACT["Validar test_file / selectors / evidence_contract"]
   CONTRACT --> KIND{"Software com teste ou evidência confiável exigida?"}
-  KIND -->|"não"| TEXT["criteria_only: checagem textual heurística"]
-  KIND -->|"sim"| RED["TDDHistory.run phase red: pytest REAL no baseline"]
+  KIND -->|não| TEXT["criteria_only: checagem textual heurística"]
+  KIND -->|sim| RED["TDDHistory.run phase red: pytest REAL no baseline"]
   RED --> CONTEXT["Contexto: spec + config + árvore de testes + fontes"]
   CONTEXT --> ANALYSE["Analisar JUnit / falha funcional / ausência de erro de setup"]
   ANALYSE --> ROK{"RED elegível com falha funcional?"}
-  ROK -->|"não"| NO["Recibo rejeitado; não fabricar RED histórico"]
-  ROK -->|"sim"| SIGN["Recibo HMAC + hash de fontes + encadeamento do ledger"]
+  ROK -->|não| NO["Recibo rejeitado; não fabricar RED histórico"]
+  ROK -->|sim| SIGN["Recibo HMAC + hash de fontes + encadeamento do ledger"]
   SIGN --> PREF["sdd_preflight: recibo RED e escopo compatíveis"]
   PREF --> CODE["Implementação / execução autorizada"]
   CODE --> GREEN["TDDHistory.run phase green: pytest no código atual"]
   GREEN --> PAIR["validate_pair: RED anterior / HMAC / contrato / mesmos testes"]
   PAIR --> POK{"Par autenticado e GREEN aprovado?"}
-  POK -->|"não"| NO
-  POK -->|"sim"| TDD["TDDRunner.run_delivery_test"]
+  POK -->|não| NO
+  POK -->|sim| TDD["TDDRunner.run_delivery_test"]
   TDD --> TARGETS["Executar targets canônicos registrados por critério"]
   TARGETS --> RECORD["CriterionRuntimeRecord + TrustedTestEvidence"]
   RECORD --> VERIFY["SpecVerifier.verify: consumir evidência de runtime"]
   TEXT --> VERIFY
   VERIFY --> SUCCESS{"Todos critérios e gates satisfeitos no escopo?"}
-  SUCCESS -->|"não"| REJ["report_completion: recusa / status falha / reflexão"]
-  SUCCESS -->|"sim"| ACC["report_completion: aceite local da entrega"]
+  SUCCESS -->|não| REJ["report_completion: recusa / status falha / reflexão"]
+  SUCCESS -->|sim| ACC["report_completion: aceite local da entrega"]
   ACC --> BB["task.complete: Blackboard + Trust + economia"]
   REJ --> BB
   BB --> MEM["MetaBus: observação e trilha de decisão"]
-  ACC -. "não equivale a validação externa" .-> LIMIT["Limite: provas e qualidade editorial exigem evidências próprias"]
+  ACC -.->|não equivale a validação externa| LIMIT["Limite: provas e qualidade editorial exigem evidências próprias"]
 ```
 
 [Fonte Mermaid](docs/architecture/flows/04-sdd-tdd.mmd) · [Abrir SVG](docs/architecture/flows/04-sdd-tdd.svg)
@@ -1118,31 +1118,31 @@ Registro informativo das 18 camadas, sondas estruturais e percursos efetivamente
 flowchart TB
   IN["CLI / ecosystem_rea / primário.rea_action"] --> VAL["ReaBridge._validate: operação / prazo / campos permitidos"]
   VAL --> OP{"Operação validada?"}
-  OP -->|"status"| STATUS["ReaBridge.status: arquivos / dependências / configuração Ghidra"]
+  OP -->|status| STATUS["ReaBridge.status: arquivos / dependências / configuração Ghidra"]
   STATUS --> STRUCT["installation_only: sem handshake nem análise"]
-  OP -->|"layers"| LAYERS["layers_status: registro canônico e probe_layer por camada"]
+  OP -->|layers| LAYERS["layers_status: registro canônico e probe_layer por camada"]
   LAYERS --> READY["Sonda estrutural de ambiente / paths / comandos; sem análise"]
-  LAYERS -. "registro informativo: 18 camadas" .-> DECL["LAYERS / SURFACES: ferramentas declaradas pelo REA"]
-  DECL -. "grupos declarados; não operações Core" .-> DJS["javascript / apple / managed_dotnet / pe_resources / evm / artifact"]
-  DECL -. "grupos declarados; não operações Core" .-> DN["native_ghidra / native_ida / native_hopper / native_offline_elf / native_core_crash"]
-  DECL -. "grupos declarados; não operações Core" .-> DA["android_jadx / android_apktool / android_adb / jeb"]
-  DECL -. "grupos declarados; não operações Core" .-> DO["firmware / browser / reference"]
-  OP -->|"layer"| INS["layer_inspection: contrato estático por caminho"]
+  LAYERS -.->|registro informativo: 18 camadas| DECL["LAYERS / SURFACES: ferramentas declaradas pelo REA"]
+  DECL -.->|grupos declarados; não operações Core| DJS["javascript / apple / managed_dotnet / pe_resources / evm / artifact"]
+  DECL -.->|grupos declarados; não operações Core| DN["native_ghidra / native_ida / native_hopper / native_offline_elf / native_core_crash"]
+  DECL -.->|grupos declarados; não operações Core| DA["android_jadx / android_apktool / android_adb / jeb"]
+  DECL -.->|grupos declarados; não operações Core| DO["firmware / browser / reference"]
+  OP -->|layer| INS["layer_inspection: contrato estático por caminho"]
   INS --> SUPPORTED{"inspection definido e não nulo?"}
-  SUPPORTED -->|"não"| REJECT["Recusar camada sem inspeção estática por caminho"]
-  SUPPORTED -->|"sim"| STATIC["javascript / apple / android_jadx / android_apktool / firmware / native_offline_elf / native_core_crash / managed_dotnet / pe_resources / evm / artifact"]
+  SUPPORTED -->|não| REJECT["Recusar camada sem inspeção estática por caminho"]
+  SUPPORTED -->|sim| STATIC["javascript / apple / android_jadx / android_apktool / firmware / native_offline_elf / native_core_crash / managed_dotnet / pe_resources / evm / artifact"]
   STATIC --> TARGET["Validar path local; ferramenta / path_field / fixed; encoding EVM"]
   TARGET --> PROBE["probe_layer selecionada: prontidão adicionada à proveniência"]
-  OP -->|"analyze"| JS["JavaScript: caminho local para analyze_javascript_application"]
-  OP -->|"analyze_binary"| GH["Arquivo até 128 MiB / procedure / digest; Ghidra obrigatório"]
+  OP -->|analyze| JS["JavaScript: caminho local para analyze_javascript_application"]
+  OP -->|analyze_binary| GH["Arquivo até 128 MiB / procedure / digest; Ghidra obrigatório"]
   GH --> GENV["_child_environment native_required: Ghidra + JDK executáveis"]
   GENV --> PROVIDER["REA_ANALYSIS_PROVIDER ghidra"]
   PROBE --> INST["ReaBridge.status: runtime Node REA disponível?"]
   JS --> INST
   PROVIDER --> INST
   INST --> AVAILABLE{"Instalação disponível?"}
-  AVAILABLE -->|"não"| ERROR["Indisponibilidade / falha / timeout explícitos"]
-  AVAILABLE -->|"sim"| ENV["_child_environment: defaults + engine_environment; allowlist no modo local"]
+  AVAILABLE -->|não| ERROR["Indisponibilidade / falha / timeout explícitos"]
+  AVAILABLE -->|sim| ENV["_child_environment: defaults + engine_environment; allowlist no modo local"]
   ENV --> IPC["_exchange: Node REA / stdio MCP / prazo / cancelamento"]
   IPC --> HAND["Handshake / ferramenta e schema do percurso selecionado"]
   HAND --> EVID["Resposta estruturada: Evidence da operação executada"]
@@ -1150,11 +1150,11 @@ flowchart TB
   CHECK --> RESULT["Resultado Core: success ou tool_failure + proveniência"]
   RESULT --> OBS["Primário: record_observation sem incremento de confiança"]
   IPC --> ERROR
-  OP -->|"catalog / session"| INFO["Runtime disponível: _exchange para catálogo/sessão, sem análise de alvo"]
+  OP -->|catalog / session| INFO["Runtime disponível: _exchange para catálogo/sessão, sem análise de alvo"]
   INFO --> RESPONSE["Resposta informativa da operação solicitada"]
-  DECL -. "inspection nulo: configuração e runtime próprios" .-> OTHER["native_ghidra / native_ida / native_hopper / android_adb / browser / jeb / reference"]
-  OTHER -. "ferramentas externas condicionais; não via layer Core" .-> EXTERNAL["Runtime MCP REA próprio / licenças / dispositivos / serviço local"]
-  OTHER -. "somente native_ghidra: percurso separado analyze_binary" .-> GH
+  DECL -.->|inspection nulo: configuração e runtime próprios| OTHER["native_ghidra / native_ida / native_hopper / android_adb / browser / jeb / reference"]
+  OTHER -.->|ferramentas externas condicionais; não via layer Core| EXTERNAL["Runtime MCP REA próprio / licenças / dispositivos / serviço local"]
+  OTHER -.->|somente native_ghidra: percurso separado analyze_binary| GH
 ```
 
 [Fonte Mermaid](docs/architecture/flows/05-rea-provedores.mmd) · [Abrir SVG](docs/architecture/flows/05-rea-provedores.svg)
@@ -1189,35 +1189,35 @@ Inspeção estática com rede/PID privados, digest antes/depois, recibo por hash
 flowchart TB
   IN["rea inspect / MCP core_rea_inspect"] --> LOCAL["Primário.rea_assistant_action / LocalReaAssistant.action"]
   LOCAL --> PATH{"Arquivo local ou URL literal loopback?"}
-  PATH -->|"loopback"| HTTP["GET limitado: HTTP 200 / sem redirect / máximo 1 MiB"]
+  PATH -->|loopback| HTTP["GET limitado: HTTP 200 / sem redirect / máximo 1 MiB"]
   HTTP --> SNAP["Snapshot HTML por hash; sem scripts ou recursos externos"]
-  PATH -->|"arquivo"| RES["Resolver caminho existente / tipo auto ou explícito"]
+  PATH -->|arquivo| RES["Resolver caminho existente / tipo auto ou explícito"]
   SNAP --> RES
   RES --> PARAM["Validar kind / timeout finito de até 180 s / procedure"]
   PARAM --> ISO{"Linux/WSL e unshare disponíveis?"}
-  ISO -->|"não"| BLOCK["Bloquear: sem alternativa fora do isolamento"]
-  ISO -->|"sim"| NS["unshare user + network + PID / kill-child / mount-proc"]
+  ISO -->|não| BLOCK["Bloquear: sem alternativa fora do isolamento"]
+  ISO -->|sim| NS["unshare user + network + PID / kill-child / mount-proc"]
   NS --> WORKER["rea_local_worker: PID 1 / rede privada / apenas lo"]
   WORKER --> DIGEST["Digest independente ANTES da inspeção"]
   DIGEST --> TYPE{"Tipo de alvo"}
-  TYPE -->|"HTML"| PARSER["LocalHTML: título / elementos / referências declaradas"]
-  TYPE -->|"JavaScript"| PREP["Arquivo avulso: cópia temporária; ASAR/diretório próprios"]
-  TYPE -->|"native / dotnet / plist / Android / firmware / ELF"| PROVIDER["Primário mínimo → ReaBridge → ferramenta de provedor"]
+  TYPE -->|HTML| PARSER["LocalHTML: título / elementos / referências declaradas"]
+  TYPE -->|JavaScript| PREP["Arquivo avulso: cópia temporária; ASAR/diretório próprios"]
+  TYPE -->|native / dotnet / plist / Android / firmware / ELF| PROVIDER["Primário mínimo → ReaBridge → ferramenta de provedor"]
   PREP --> PROVIDER
   PROVIDER --> CHECK["Exigir Evidence identificada / comparar digest declarado"]
   PARSER --> AFTER["Digest independente DEPOIS da inspeção"]
   CHECK --> AFTER
   AFTER --> SAME{"Alvo inalterado?"}
-  SAME -->|"não"| REJ["Recusar resultado"]
-  SAME -->|"sim"| REPORT["Achados estáticos + evidência + privacy + limitações"]
+  SAME -->|não| REJ["Recusar resultado"]
+  SAME -->|sim| REPORT["Achados estáticos + evidência + privacy + limitações"]
   REPORT --> PRIV{"Namespace privado / interfaces apenas lo / sem rota externa?"}
-  PRIV -->|"não"| REJ
-  PRIV -->|"sim"| CAS["Serializar JSON / SHA-256 / recibo em diretório privado"]
+  PRIV -->|não| REJ
+  PRIV -->|sim| CAS["Serializar JSON / SHA-256 / recibo em diretório privado"]
   CAS --> EXPLAIN["rea explain: contenção de caminho / tamanho / hash"]
   EXPLAIN --> OUT["Explicação clara derivada do recibo"]
   WORKER --> TIME["Timeout ou cancelamento: encerrar grupo e descendentes"]
   TIME --> BLOCK
-  OUT -. "limite da garantia" .-> LIMIT["Worker isolado; cliente MCP e endpoint local devem ser confiáveis"]
+  OUT -.->|limite da garantia| LIMIT["Worker isolado; cliente MCP e endpoint local devem ser confiáveis"]
 ```
 
 [Fonte Mermaid](docs/architecture/flows/06-rea-local.mmd) · [Abrir SVG](docs/architecture/flows/06-rea-local.svg)
@@ -1247,12 +1247,12 @@ flowchart TB
   PROFILE --> RUN["rea agent: cliente fora do projeto / HOME e XDG próprios"]
   RUN --> DEBUG["OpenCode debug config: ler configuração efetiva"]
   DEBUG --> VALID{"Modelo / prompt / MCP / permissões / limites correspondem?"}
-  VALID -->|"não"| STOP["Bloquear antes da conversa"]
-  VALID -->|"sim"| CHECK{"check_only?"}
-  CHECK -->|"sim"| STRUCT["resolved_configuration_only / sem inferência"]
-  CHECK -->|"não"| PROMPT{"Prompt finito fornecido?"}
-  PROMPT -->|"não"| TUI["TUI interativa: client_exit_only"]
-  PROMPT -->|"sim"| NS["Cliente: namespace PID/user; rede do host para modelo loopback"]
+  VALID -->|não| STOP["Bloquear antes da conversa"]
+  VALID -->|sim| CHECK{"check_only?"}
+  CHECK -->|sim| STRUCT["resolved_configuration_only / sem inferência"]
+  CHECK -->|não| PROMPT{"Prompt finito fornecido?"}
+  PROMPT -->|não| TUI["TUI interativa: client_exit_only"]
+  PROMPT -->|sim| NS["Cliente: namespace PID/user; rede do host para modelo loopback"]
   NS --> CLIENT["OpenCode run: eventos JSONL / prazo global"]
   CLIENT --> MODEL["Modelo local: decisão de chamada de ferramenta"]
   MODEL --> MCP["rea_assistant_mcp: primário mínimo único por servidor"]
@@ -1261,15 +1261,15 @@ flowchart TB
   RECEIPT --> TRACE["Evento tool_use: ferramenta esperada / completed / success true"]
   TRACE --> GATE["validate_agent_trace: reler recibo por core explain"]
   GATE --> OK{"Hash / caminho / digest / privacy / operação válidos?"}
-  OK -->|"sim"| OUT["executed_tool_and_local_receipt: explicação determinística"]
-  OK -->|"não"| STATUS{"Somente prontidão válida executada?"}
-  STATUS -->|"sim"| READY["executed_readiness_tool_only / alvo não analisado"]
-  STATUS -->|"não"| BAD["blocked_unverified_agent_output: texto livre não publicado"]
+  OK -->|sim| OUT["executed_tool_and_local_receipt: explicação determinística"]
+  OK -->|não| STATUS{"Somente prontidão válida executada?"}
+  STATUS -->|sim| READY["executed_readiness_tool_only / alvo não analisado"]
+  STATUS -->|não| BAD["blocked_unverified_agent_output: texto livre não publicado"]
   CLIENT --> CANCEL["Timeout / interrupção: namespace e descendentes encerrados"]
   CANCEL --> STOP
-  MODEL -. "texto livre nunca é evidência de inspeção" .-> BAD
-  TUI -. "não atesta análise nem inferência" .-> LIMIT["Cliente interativo: examinar recibos próprios"]
-  OUT -. "não prova qualidade do modelo" .-> LIMIT
+  MODEL -.->|texto livre nunca é evidência de inspeção| BAD
+  TUI -.->|não atesta análise nem inferência| LIMIT["Cliente interativo: examinar recibos próprios"]
+  OUT -.->|não prova qualidade do modelo| LIMIT
 ```
 
 [Fonte Mermaid](docs/architecture/flows/07-rea-agente.mmd) · [Abrir SVG](docs/architecture/flows/07-rea-agente.svg)
@@ -1305,8 +1305,8 @@ flowchart TB
   EXP --> EVID["Evidências recuperadas com referência e pontuação"]
   EVID --> ANSWER["answer_grounded: contexto e citações"]
   ANSWER --> SUFF{"Suporte suficiente?"}
-  SUFF -->|"não"| ABSTAIN["Abstenção declarada / ausência de suporte"]
-  SUFF -->|"sim"| RESULT["Resposta vinculada às evidências recuperadas"]
+  SUFF -->|não| ABSTAIN["Abstenção declarada / ausência de suporte"]
+  SUFF -->|sim| RESULT["Resposta vinculada às evidências recuperadas"]
   EVID --> AUDIT["ReferenceAuditor: DOI / ano / duplicatas / completude"]
   AUDIT --> BIB["Referências ABNT / BibTeX conforme metadados disponíveis"]
   PLAN --> DEEP["Deep Research: OrchestratorAgent / BFRS / DFRS"]
@@ -1317,9 +1317,9 @@ flowchart TB
   REPL --> CONF["Confiança consolidada local com proveniência"]
   RESULT --> OBS["MetaBus: contexto / lições / observações"]
   ABSTAIN --> OBS
-  SEARCH -. "quando selecionados, acessam fontes externas" .-> REMOTE["Busca científica/web: fronteira distinta do modo REA isolado"]
-  SCI -. "grafo de conhecimento não comprova experimento" .-> LIMIT["Elegibilidade científica e validação funcional são gates separados"]
-  CONF -. "não é probabilidade externa calibrada" .-> LIMIT
+  SEARCH -.->|quando selecionados, acessam fontes externas| REMOTE["Busca científica/web: fronteira distinta do modo REA isolado"]
+  SCI -.->|grafo de conhecimento não comprova experimento| LIMIT["Elegibilidade científica e validação funcional são gates separados"]
+  CONF -.->|não é probabilidade externa calibrada| LIMIT
 ```
 
 [Fonte Mermaid](docs/architecture/flows/08-conhecimento-rag.mmd) · [Abrir SVG](docs/architecture/flows/08-conhecimento-rag.svg)
@@ -1362,9 +1362,9 @@ flowchart TB
   ACT --> STREAM["render_memory_network_streamlit: nós e detalhes"]
   STREAM --> UI["Streamlit: atualização e exploração visual"]
   ASCII --> CLI["python -m webapp.memory_network_visualizer"]
-  SIM["MemoryNetworkSimulator: dados demonstrativos"] -. "modo separado e identificado" .-> GRAPH
-  EVENTS -. "inference_executed false / calibrated false" .-> LIMIT["Animação representa eventos e dados, não pesos neurais internos"]
-  REG -. "available não comprova inferência" .-> LIMIT
+  SIM["MemoryNetworkSimulator: dados demonstrativos"] -.->|modo separado e identificado| GRAPH
+  EVENTS -.->|inference_executed false / calibrated false| LIMIT["Animação representa eventos e dados, não pesos neurais internos"]
+  REG -.->|available não comprova inferência| LIMIT
 ```
 
 [Fonte Mermaid](docs/architecture/flows/09-memoria-observavel.mmd) · [Abrir SVG](docs/architecture/flows/09-memoria-observavel.svg)
@@ -1389,19 +1389,19 @@ AST permitida, tradução SMT integral, cálculo simbólico da entrada e falha s
 ```mermaid
 flowchart TB
   IN["Expressão matemática ou consulta explícita"] --> ENTRY{"Rota escolhida"}
-  ENTRY -->|"reasoning_engines.route"| PARSE["AST parse mode eval: apenas classificação estrutural"]
-  ENTRY -->|"primário.reason"| MULTI["MultiReasoningEngine: auto ou engine declarado"]
+  ENTRY -->|reasoning_engines.route| PARSE["AST parse mode eval: apenas classificação estrutural"]
+  ENTRY -->|primário.reason| MULTI["MultiReasoningEngine: auto ou engine declarado"]
   PARSE --> VALID{"Entrada válida e dentro dos limites?"}
-  VALID -->|"não"| FALL["fallback / available false / not_evaluated"]
-  VALID -->|"sim"| BOOL{"Comparação ou operação booleana?"}
-  BOOL -->|"sim"| Z["z3_solver.check: validar atribuições numéricas finitas"]
+  VALID -->|não| FALL["fallback / available false / not_evaluated"]
+  VALID -->|sim| BOOL{"Comparação ou operação booleana?"}
+  BOOL -->|sim| Z["z3_solver.check: validar atribuições numéricas finitas"]
   Z --> SMT["_safe_build_z3_constraint: traduzir fórmula integral"]
   SMT --> LIMIT["Domínio de símbolos inteiros / solver timeout 5 s / rlimit"]
   LIMIT --> SOLVER["Z3 Solver.check"]
   SOLVER --> VERDICT{"sat ou unsat concluído?"}
-  VERDICT -->|"sim"| SAT["local_smt_execution + fórmula codificada"]
-  VERDICT -->|"não"| FALL
-  BOOL -->|"não"| MATH["SymPyEngine: _safe_math_ast / _build_sympy_math"]
+  VERDICT -->|sim| SAT["local_smt_execution + fórmula codificada"]
+  VERDICT -->|não| FALL
+  BOOL -->|não| MATH["SymPyEngine: _safe_math_ast / _build_sympy_math"]
   MATH --> WHITELIST["Gramática permitida / chamadas permitidas / limites numéricos"]
   WHITELIST --> COMPUTE["Computar expressão real da entrada e exigir resultado definido"]
   COMPUTE --> OUT["local_symbolic_execution / resultado / passos"]
@@ -1415,10 +1415,10 @@ flowchart TB
   OUT --> REPORT
   FALL --> REPORT
   HEUR --> REPORT
-  REPORT -. "não promover conclusão parcial a prova" .-> BOUND["Sem eval de código Python; heurísticas não equivalem a SMT ou prova externa"]
-  ENTRY -->|"CLI lean4 legado"| LEG["Lean4ProofVerifier: pode retornar syntax_verified"]
-  ENTRY -->|"plugin Lean 4"| PLUG["LocalLeanVerifier: compilador isolado obrigatório"]
-  LEG -. "syntax_verified não é compilação" .-> BOUND
+  REPORT -.->|não promover conclusão parcial a prova| BOUND["Sem eval de código Python; heurísticas não equivalem a SMT ou prova externa"]
+  ENTRY -->|CLI lean4 legado| LEG["Lean4ProofVerifier: pode retornar syntax_verified"]
+  ENTRY -->|plugin Lean 4| PLUG["LocalLeanVerifier: compilador isolado obrigatório"]
+  LEG -.->|syntax_verified não é compilação| BOUND
   PLUG --> CHECK["machine_checked somente no contrato observado"]
   CHECK --> REPORT
 ```
@@ -1450,8 +1450,8 @@ flowchart TB
   IN --> DP["scanners.pipeline.DiagnosticPipeline.run: cobertura lexical"]
   FACADE["scanners.diagnostic_pipeline.run: fachada de compatibilidade"] --> DP
   DP --> MODE{"corpus_mode"}
-  MODE -->|"autodiscovery"| SELF["Corpus enriquecido com nomes e conteúdo do próprio Core"]
-  MODE -->|"retained"| RET["Corpus externo retido / corpus_id / hash esperado obrigatório"]
+  MODE -->|autodiscovery| SELF["Corpus enriquecido com nomes e conteúdo do próprio Core"]
+  MODE -->|retained| RET["Corpus externo retido / corpus_id / hash esperado obrigatório"]
   SELF --> NOO["NoologicalScanner: categorias canônicas sem dupla contagem"]
   RET --> NOO
   NOO --> COV["Cobertura lexical e camadas: presentes / ausentes / density"]
@@ -1473,12 +1473,12 @@ flowchart TB
   TEST --> EVO["EvolutionRegistry.record / record_audited quando elegível"]
   EVO --> LEDGER["cycles.json: round derivado do ledger / prefixo preservado"]
   LEDGER --> CHAIN["verify_state_chain / custódia / Merkle / histórico"]
-  SELF -. "mede autodescoberta" .-> BOUND["Cobertura lexical não mede completude funcional, qualidade epistêmica ou validação externa"]
-  RET -. "mede cobertura sobre entrada retida" .-> BOUND
+  SELF -.->|mede autodescoberta| BOUND["Cobertura lexical não mede completude funcional, qualidade epistêmica ou validação externa"]
+  RET -.->|mede cobertura sobre entrada retida| BOUND
   PLANART["Plano explícito: arquivos / regex / nomes / cobertura esperada"] --> HERM["scanners.diagnostic_pipeline.DiagnosticPipeline.varrer"]
   HERM --> CHECKART["Auditar sincronia de artefatos: stdlib / sem rede, subprocesso ou LLM"]
   CHECKART --> ARTOUT["gaps / passaram / falharam / candidato_a_inspecao"]
-  ARTOUT -. "exige_validacao_externa true; não substitui compilação ou testes" .-> BOUND
+  ARTOUT -.->|exige_validacao_externa true; não substitui compilação ou testes| BOUND
 ```
 
 [Fonte Mermaid](docs/architecture/flows/11-diagnostico-governanca.mmd) · [Abrir SVG](docs/architecture/flows/11-diagnostico-governanca.svg)
@@ -1519,8 +1519,8 @@ flowchart TB
   LIVE --> EXEC["Execução selecionada + recibo de resposta + artefatos"]
   EXEC --> CLASS["classify_execution: evidência executada vs saída incompleta"]
   CLASS --> ELIG{"Processo rc0, geração auditada e artefato próprio?"}
-  ELIG -->|"não"| BLOCK["blocked / abstenção / limitações preservadas"]
-  ELIG -->|"sim"| OBS["Evidência operacional; população sintética; scientific_claim_eligible false"]
+  ELIG -->|não| BLOCK["blocked / abstenção / limitações preservadas"]
+  ELIG -->|sim| OBS["Evidência operacional; população sintética; scientific_claim_eligible false"]
   PRIMARY --> DISC["scientific_discovery_pipeline: EvoSci R101"]
   PRIMARY --> RIGOR["academic_rigor_action: serviço acadêmico parcial"]
   RIGOR --> RULES["local_checks: regras de estrutura, fontes e alegações"]
@@ -1528,27 +1528,27 @@ flowchart TB
   MANAGED --> PENDING["Sem resultado de executor: awaiting_executor; sem inferência alegada"]
   RULES --> RREPORT["Relatório e banca locais; aprovação científica false"]
   RREPORT --> HUMAN
-  PENDING -. "cartões e CLI dedicada ausentes neste checkout" .-> BLOCK
+  PENDING -.->|cartões e CLI dedicada ausentes neste checkout| BLOCK
   DISC --> DEEP["Deep Research R102: fontes / grafo / relatórios"]
   DEEP --> G102{"evidence_eligible e experiment_executed true?"}
-  G102 -->|"não"| BLOCK
-  G102 -->|"sim"| REVIEW["R103 OrchestratorReviewer: revisão interna"]
+  G102 -->|não| BLOCK
+  G102 -->|sim| REVIEW["R103 OrchestratorReviewer: revisão interna"]
   REVIEW --> G103{"export_gate_passed e strict_gates?"}
-  G103 -->|"reprovado no modo estrito"| BLOCK
-  G103 -->|"passagem permitida"| REV["R104d: contrato de revisão / integridade / rollback"]
+  G103 -->|reprovado no modo estrito| BLOCK
+  G103 -->|passagem permitida| REV["R104d: contrato de revisão / integridade / rollback"]
   REV --> COMPOSE["R105 compose_paper: estrutura / seções / citações"]
   ANALYSIS --> MAN["research.manuscript: gates / TeX / DOCX / produção"]
-  OBS -. "evidência de runtime, sem equiparar a análise estatística" .-> MAN
+  OBS -.->|evidência de runtime, sem equiparar a análise estatística| MAN
   SNAP --> MAN
   COMPOSE --> CONSIST["CrossConsistencyVerifier + auditoria de movimentos científicos"]
   CONSIST --> MAN
   MAN --> HUMAN["Revisão humana: autoria / declarações / adequação editorial"]
   HUMAN --> EXPORT["Pacote local de publicação / site / material didático"]
-  EXPORT -. "somente mediante configuração e autorização próprias" .-> PUB["Depósito ou publicação externa"]
+  EXPORT -.->|somente mediante configuração e autorização próprias| PUB["Depósito ou publicação externa"]
   PRIMARY --> GOV["Governança OQS → MCI → VSEE → EGS"]
   GOV --> INPUTS["reported_inputs_and_executor_output: não executa experimento bruto"]
-  INPUTS -. "evidence_eligible false / external_validation false" .-> BLOCK
-  REVIEW -. "revisão interna não substitui parecer externo" .-> LIMIT["Sem certificação editorial, clínica ou científica implícita"]
+  INPUTS -.->|evidence_eligible false / external_validation false| BLOCK
+  REVIEW -.->|revisão interna não substitui parecer externo| LIMIT["Sem certificação editorial, clínica ou científica implícita"]
 ```
 
 [Fonte Mermaid](docs/architecture/flows/12-ciencia-publicacao.mmd) · [Abrir SVG](docs/architecture/flows/12-ciencia-publicacao.svg)
@@ -1598,18 +1598,18 @@ flowchart TB
   NODE --> GATE
   DOC --> GATE
   CHECK --> GATE
-  GATE -->|"não"| FIX["Reproduzir falha / corrigir com spec / repetir escopo afetado"]
+  GATE -->|não| FIX["Reproduzir falha / corrigir com spec / repetir escopo afetado"]
   FIX --> RUN
-  GATE -->|"sim"| MANIFEST["Manifesto explícito: excluir segredos, dados privados e trabalho concorrente"]
+  GATE -->|sim| MANIFEST["Manifesto explícito: excluir segredos, dados privados e trabalho concorrente"]
   MANIFEST --> COMMIT["Commit local identificável"]
   COMMIT --> PUSH["Push autorizado da branch ao GitHub"]
   PUSH --> REMOTE["CI remota: resultado próprio ainda precisa ser observado"]
   REMOTE --> STATUS["Relatório de entrega com escopo e limites"]
-  RUN -. "suíte local aprovada não prova CI remota" .-> LIMIT["Testes, lint, análise real e validação externa são evidências distintas"]
+  RUN -.->|suíte local aprovada não prova CI remota| LIMIT["Testes, lint, análise real e validação externa são evidências distintas"]
   SRC --> LOCALCI["CI local: perfil scientific fechado"]
   LOCALCI --> RCPT["Grupos enumerados, JUnit, hashes e limites"]
   RCPT --> GATE
-  LOCALCI -. "github_check_created false" .-> LIMIT
+  LOCALCI -.->|github_check_created false| LIMIT
 ```
 
 [Fonte Mermaid](docs/architecture/flows/13-validacao-entrega.mmd) · [Abrir SVG](docs/architecture/flows/13-validacao-entrega.svg)
@@ -1636,21 +1636,21 @@ flowchart TB
   MCP --> VALID["Validar contrato e limites"]
   VALID --> MC["MarceloClaro.local_component_action"]
   MC --> KIND{"Componente"}
-  KIND -->|"REA"| REA["rea_action: inspeção estática e recibo"]
-  KIND -->|"MiroFish"| OASIS["scientific_runtime_run: endpoint loopback já ativo"]
+  KIND -->|REA| REA["rea_action: inspeção estática e recibo"]
+  KIND -->|MiroFish| OASIS["scientific_runtime_run: endpoint loopback já ativo"]
   OASIS --> GATE{"Processo rc0, geração e artefato próprios?"}
-  GATE -->|"não"| BLOCK["blocked; preservar timeout e falha"]
-  GATE -->|"sim"| RUN["completed operacional; cenário sintético"]
-  KIND -->|"Lean 4"| LEAN["Fonte delimitada; recusar admissões e execução"]
+  GATE -->|não| BLOCK["blocked; preservar timeout e falha"]
+  GATE -->|sim| RUN["completed operacional; cenário sintético"]
+  KIND -->|Lean 4| LEAN["Fonte delimitada; recusar admissões e execução"]
   LEAN --> NS["bwrap: rede isolada; bibliotecas somente leitura; prlimit"]
   NS --> COMPILER["Compilador real com prazo"]
   COMPILER --> FORMAL{"Compilação e relatório exigidos passaram?"}
-  FORMAL -->|"não"| BLOCK
-  FORMAL -->|"sim"| PROOF["machine_checked no enunciado submetido"]
+  FORMAL -->|não| BLOCK
+  FORMAL -->|sim| PROOF["machine_checked no enunciado submetido"]
   REA --> OBS["MetaBus: estados, hashes e limites"]
   RUN --> OBS
   PROOF --> OBS
-  OBS -. "não comprova pressupostos empíricos" .-> HUMAN["Interpretação e revisão humana"]
+  OBS -.->|não comprova pressupostos empíricos| HUMAN["Interpretação e revisão humana"]
 ```
 
 [Fonte Mermaid](docs/architecture/flows/14-plugins-locais.mmd) · [Abrir SVG](docs/architecture/flows/14-plugins-locais.svg)
@@ -1678,22 +1678,22 @@ flowchart TB
   INPUT["/gemini-notebook ou ferramenta MCP central"] --> MC["MarceloClaro.gemini_notebook_action"]
   MC --> VALID["Validar campos, limites e ausência de credenciais"]
   VALID --> OP{"Operação"}
-  OP -->|"status"| STATUS["Versão e binários; login não verificado"]
-  OP -->|"catalog"| CAT["Descobrir schemas MCP e árvore CLI com hash"]
-  OP -->|"skill"| SKILL["Fonte e licença; preservar edições locais"]
-  OP -->|"mcp ou cli"| EFFECT["Classificar efeito e suboperações"]
+  OP -->|status| STATUS["Versão e binários; login não verificado"]
+  OP -->|catalog| CAT["Descobrir schemas MCP e árvore CLI com hash"]
+  OP -->|skill| SKILL["Fonte e licença; preservar edições locais"]
+  OP -->|mcp ou cli| EFFECT["Classificar efeito e suboperações"]
   EFFECT --> AUTH{"Autenticação privada?"}
-  AUTH -->|"sim"| PRIVATE["Bloquear; login no terminal do operador"]
-  AUTH -->|"não"| DRY{"dry_run?"}
-  DRY -->|"sim"| PREP["prepared; nenhuma operação remota"]
-  DRY -->|"não"| ALLOW{"Leitura ou efeito concreto autorizado?"}
-  ALLOW -->|"não"| BLOCK["blocked; preservar motivo"]
-  ALLOW -->|"sim"| LIVE["Schema atual; broker de sessão privada"]
+  AUTH -->|sim| PRIVATE["Bloquear; login no terminal do operador"]
+  AUTH -->|não| DRY{"dry_run?"}
+  DRY -->|sim| PREP["prepared; nenhuma operação remota"]
+  DRY -->|não| ALLOW{"Leitura ou efeito concreto autorizado?"}
+  ALLOW -->|não| BLOCK["blocked; preservar motivo"]
+  ALLOW -->|sim| LIVE["Schema atual; broker de sessão privada"]
   LIVE --> GOOGLE["NotebookLM na infraestrutura Google"]
   GOOGLE --> RESULT["completed / pending / partial / failed"]
   RESULT --> ART["Downloads: raiz permitida, arquivo novo e SHA"]
   ART --> OBS["MetaBus: estados e hashes; sem confiança promovida"]
-  CAT -. "descobrir não autoriza ferramenta nova" .-> BLOCK
+  CAT -.->|descobrir não autoriza ferramenta nova| BLOCK
 ```
 
 [Fonte Mermaid](docs/architecture/flows/15-notebooklm.mmd) · [Abrir SVG](docs/architecture/flows/15-notebooklm.svg)
@@ -1719,21 +1719,21 @@ Três clientes e sessões independentes; resposta observada e login são evidên
 ```mermaid
 flowchart TB
   OP["Operador no terminal"] --> CHOICE{"Serviço"}
-  CHOICE -->|"ChatGPT no OpenCode"| OC["opencode auth login provider openai"]
+  CHOICE -->|ChatGPT no OpenCode| OC["opencode auth login provider openai"]
   OC --> OAUTH["Autorizar no navegador OpenAI; sessão privada"]
   OAUTH --> MODEL["Selecionar modelo em /models"]
-  CHOICE -->|"Gemini Chat no terminal"| GEM["Gemini CLI: Sign in with Google"]
+  CHOICE -->|Gemini Chat no terminal| GEM["Gemini CLI: Sign in with Google"]
   GEM --> TEST["Enviar solicitação curta"]
   MODEL --> TEST
   TEST --> RESPONSE{"Resposta concluída?"}
-  RESPONSE -->|"não"| BLOCK["Preservar falha, limite ou indisponibilidade"]
-  RESPONSE -->|"sim"| ACCESS["Acesso observado naquele momento"]
-  CHOICE -->|"Notebooks e fontes"| NLM["nlm login --wsl; conta Google"]
+  RESPONSE -->|não| BLOCK["Preservar falha, limite ou indisponibilidade"]
+  RESPONSE -->|sim| ACCESS["Acesso observado naquele momento"]
+  CHOICE -->|Notebooks e fontes| NLM["nlm login --wsl; conta Google"]
   NLM --> CHECK["nlm login --check"]
   CHECK --> CORE["Core: política por efeito em /gemini-notebook"]
   CORE --> GOOGLE["Serviço Google; notebooks e fontes"]
-  OAUTH -. "não importa histórico web" .-> LIMIT["Sessões e cotas próprias"]
-  GEM -. "independente do NotebookLM" .-> LIMIT
+  OAUTH -.->|não importa histórico web| LIMIT["Sessões e cotas próprias"]
+  GEM -.->|independente do NotebookLM| LIMIT
 ```
 
 [Fonte Mermaid](docs/architecture/flows/16-autenticacoes.mmd) · [Abrir SVG](docs/architecture/flows/16-autenticacoes.svg)
@@ -1773,7 +1773,7 @@ flowchart TB
   REASON --> ENGINE["Motor solicitado e resultado tipado"]
   ENGINE --> OBS["observe_reasoning"]
   OBS --> RECORD
-  RECORD -. "confidence_promoted false nesta observação" .-> LIMIT["Não comprova verdade, causalidade ou revisão humana"]
+  RECORD -.->|confidence_promoted false nesta observação| LIMIT["Não comprova verdade, causalidade ou revisão humana"]
 ```
 
 [Fonte Mermaid](docs/architecture/flows/17-metacognicao.mmd) · [Abrir SVG](docs/architecture/flows/17-metacognicao.svg)
@@ -1800,14 +1800,14 @@ flowchart TB
   INPUT["CLI agentes ou ecosystem_agent_profile"] --> MC["MarceloClaro.agent_profile_action"]
   MC --> CHECK["Capacidades, origem, spec/teste, saída e permissões"]
   CHECK --> VALID{"Definição gerenciada válida?"}
-  VALID -->|"não"| LEGACY["Recusar criação ou preservar baseline histórico"]
-  VALID -->|"sim"| HASH["Conferir SHA antes do registro"]
+  VALID -->|não| LEGACY["Recusar criação ou preservar baseline histórico"]
+  VALID -->|sim| HASH["Conferir SHA antes do registro"]
   HASH --> BUSY{"Definição em uso conflita?"}
-  BUSY -->|"sim"| BLOCK["blocked; preservar trabalho em andamento"]
-  BUSY -->|"não"| REG["Registrar cartão no Blackboard"]
+  BUSY -->|sim| BLOCK["blocked; preservar trabalho em andamento"]
+  BUSY -->|não| REG["Registrar cartão no Blackboard"]
   REG --> ACTION{"Criar ou ativar?"}
-  ACTION -->|"criar"| CONFIG["Compilar configuração do OpenCode"]
-  ACTION -->|"ativar"| DELEGATE["delegate: capacidade exclusiva e contexto"]
+  ACTION -->|criar| CONFIG["Compilar configuração do OpenCode"]
+  ACTION -->|ativar| DELEGATE["delegate: capacidade exclusiva e contexto"]
   DELEGATE --> ID["Correlacionar task_id, perfil e executor externo"]
   ID --> WAIT["pending_executor até execução real"]
   WAIT --> WORK["Trabalho e evidência observados"]
@@ -1838,21 +1838,21 @@ Alternativa local ao bloqueio da CI remota, com seleção fechada e recibos pró
 flowchart TB
   INPUT["ci-local ou ecosystem_local_ci"] --> MC["MarceloClaro.local_ci_action"]
   MC --> OP{"start / status / runs / cancel"}
-  OP -->|"start"| PROFILE["Somente perfil scientific enumerado"]
+  OP -->|start| PROFILE["Somente perfil scientific enumerado"]
   PROFILE --> LOCK["Lock de escritor único; identidade das fontes"]
   LOCK --> RUN["Supervisor: grupos, prazo e memória delimitados"]
   RUN --> JUNIT["JUnit, seleção, execução e hashes"]
   JUNIT --> VERIFY{"Fontes estáveis e todos os grupos exigidos concluídos?"}
-  VERIFY -->|"não"| BLOCK["blocked ou cancelled; preservar erro"]
-  VERIFY -->|"sim"| PASS["passed no escopo selecionado"]
-  OP -->|"status ou runs"| READ["Ler recibos e conferir compatibilidade"]
-  OP -->|"cancel"| CANCEL["Cancelar e limpar processos observados"]
+  VERIFY -->|não| BLOCK["blocked ou cancelled; preservar erro"]
+  VERIFY -->|sim| PASS["passed no escopo selecionado"]
+  OP -->|status ou runs| READ["Ler recibos e conferir compatibilidade"]
+  OP -->|cancel| CANCEL["Cancelar e limpar processos observados"]
   READ --> RESULT["Estado observado e limitações"]
   CANCEL --> RESULT
   PASS --> RESULT
   BLOCK --> RESULT
   RESULT --> META["Observação no MetaBus"]
-  RESULT -. "github_check_created false" .-> REMOTE["CI remota exige execução e evidência próprias"]
+  RESULT -.->|github_check_created false| REMOTE["CI remota exige execução e evidência próprias"]
 ```
 
 [Fonte Mermaid](docs/architecture/flows/19-ci-local.mmd) · [Abrir SVG](docs/architecture/flows/19-ci-local.svg)
@@ -1877,23 +1877,23 @@ Política recomendada para comparar custo por tarefa aceita; não é um roteador
 flowchart TB
   TASK["Tarefa ao MarceloClaro"] --> CONTEXT["Recuperar fontes e trechos relevantes"]
   CONTEXT --> TYPE{"Complexidade, risco e dados permitidos"}
-  TYPE -->|"baixo risco, tarefa delimitada"| ECONOMIC["API candidates: gpt-6-luna / gemini-3.5-flash-lite"]
-  TYPE -->|"código ou análise em várias etapas"| BALANCED["gemini-3.8-flash / modelo equilibrado"]
-  TYPE -->|"alto risco, crítica ou falha persistente"| STRONG["Escalonar com aprovação explícita"]
-  CONFIG["opencode.json: padrão ollama-local/llama3.2 permanece"] -. "sem troca silenciosa" .-> TASK
+  TYPE -->|baixo risco, tarefa delimitada| ECONOMIC["API candidates: gpt-6-luna / gemini-3.5-flash-lite"]
+  TYPE -->|código ou análise em várias etapas| BALANCED["gemini-3.8-flash / modelo equilibrado"]
+  TYPE -->|alto risco, crítica ou falha persistente| STRONG["Escalonar com aprovação explícita"]
+  CONFIG["opencode.json: padrão ollama-local/llama3.2 permanece"] -.->|sem troca silenciosa| TASK
   ROUTER["ModelRouter: tipo, autenticação e preferências"] --> CANDIDATE["Validar ID no catálogo e provider selecionado"]
   ECONOMIC --> CANDIDATE
   BALANCED --> CANDIDATE
   STRONG --> CANDIDATE
   CANDIDATE --> AVAILABLE{"Endpoint/modelo disponível e permitido?"}
-  AVAILABLE -->|"não"| BLOCK["Explicitar bloqueio/quota; não mudar provider automaticamente"]
-  AVAILABLE -->|"sim"| QUALITY{"Mesmo critério de qualidade atendido?"}
-  QUALITY -->|"não"| REVIEW["Rever contexto ou escalar dentro do orçamento"]
+  AVAILABLE -->|não| BLOCK["Explicitar bloqueio/quota; não mudar provider automaticamente"]
+  AVAILABLE -->|sim| QUALITY{"Mesmo critério de qualidade atendido?"}
+  QUALITY -->|não| REVIEW["Rever contexto ou escalar dentro do orçamento"]
   REVIEW --> STRONG
-  QUALITY -->|"sim"| MEASURE["Guardar tokens, cache, latência, retries e aceite"]
+  QUALITY -->|sim| MEASURE["Guardar tokens, cache, latência, retries e aceite"]
   MEASURE --> COST["API paga, assinatura e franquia em contas separadas"]
   COST --> COMPARE["Custo/tarefa aceita; comparar amostras pareadas"]
-  BLOCK -. "HTTP 429/Retry-After: respeitar pausa, limite e operador" .-> CONTROL["Sem retry infinito; sem fallback oculto"]
+  BLOCK -.->|HTTP 429/Retry-After: respeitar pausa, limite e operador| CONTROL["Sem retry infinito; sem fallback oculto"]
   COMPARE --> CONTROL
 ```
 
@@ -1921,13 +1921,13 @@ flowchart TB
   INPUT["Pedido de contexto pelo MarceloClaro"] --> KIND{"Busca, símbolo ou grafo?"}
   KIND --> INDEX["Índice local com manifesto e hashes"]
   INDEX --> FRESH{"Índice corresponde às fontes?"}
-  FRESH -->|"não"| BLOCK["blocked ou reindexação explícita"]
-  FRESH -->|"sim"| QUERY["Consulta delimitada e trechos relevantes"]
+  FRESH -->|não| BLOCK["blocked ou reindexação explícita"]
+  FRESH -->|sim| QUERY["Consulta delimitada e trechos relevantes"]
   KIND --> PY["python_graph: imports e relações estáticas Python"]
   PY --> LIMIT["Não confundir relação lexical com execução"]
   KIND --> NATIVE{"Operação nativa conhecida como falha?"}
-  NATIVE -->|"sim"| BLOCK
-  NATIVE -->|"não"| POLICY["Conferir contrato, limites e backend disponível"]
+  NATIVE -->|sim| BLOCK
+  NATIVE -->|não| POLICY["Conferir contrato, limites e backend disponível"]
   POLICY --> QUERY
   QUERY --> CONTEXT["Contexto compacto com fonte e localizador"]
   LIMIT --> CONTEXT
@@ -1957,23 +1957,23 @@ Num_ctx ativo via Ollama /api/show, preflight aproximado, erros tipados e uso ex
 flowchart TB
   INPUT["Tarefa explícita ao SDK local"] --> MODEL["Modelo/provider escolhido pelo operador"]
   MODEL --> WINDOW{"Janela de contexto conhecida?"}
-  WINDOW -->|"sim"| PREFLIGHT["Estimar mensagens + ferramentas + margem"]
-  WINDOW -->|"não"| SEND
+  WINDOW -->|sim| PREFLIGHT["Estimar mensagens + ferramentas + margem"]
+  WINDOW -->|não| SEND
   PREFLIGHT --> FIT{"Entrada + saída reservada cabe?"}
-  FIT -->|"não"| BLOCK["context_budget_exceeded; não enviar POST"]
-  FIT -->|"sim"| SEND["POST ao endpoint selecionado"]
+  FIT -->|não| BLOCK["context_budget_exceeded; não enviar POST"]
+  FIT -->|sim| SEND["POST ao endpoint selecionado"]
   SEND --> RESPONSE{"Resposta do provider"}
-  RESPONSE -->|"contexto excedido"| CONTEXT["Código e remediação; sem truncar conteúdo"]
-  RESPONSE -->|"429/quota"| QUOTA["Preservar Retry-After; sem retry/fallback automático"]
-  RESPONSE -->|"401/403/404/5xx/timeout"| ERROR["Erro tipado; provider/modelo identificados"]
-  RESPONSE -->|"2xx"| USAGE["Uso informado pelo provider ou estimativa marcada"]
+  RESPONSE -->|contexto excedido| CONTEXT["Código e remediação; sem truncar conteúdo"]
+  RESPONSE -->|429/quota| QUOTA["Preservar Retry-After; sem retry/fallback automático"]
+  RESPONSE -->|401/403/404/5xx/timeout| ERROR["Erro tipado; provider/modelo identificados"]
+  RESPONSE -->|2xx| USAGE["Uso informado pelo provider ou estimativa marcada"]
   USAGE --> QUALITY["Analisar qualidade/aceite fora do contador de tokens"]
   BLOCK --> RECEIPT["query_id, fonte de contexto e limite"]
   CONTEXT --> RECEIPT
   QUOTA --> RECEIPT
   ERROR --> RECEIPT
   QUALITY --> RECEIPT
-  RECEIPT -. "sem custo por assinatura inferido" .-> LIMIT["SDK local não altera o modelo padrão do OpenCode"]
+  RECEIPT -.->|sem custo por assinatura inferido| LIMIT["SDK local não altera o modelo padrão do OpenCode"]
 ```
 
 [Fonte Mermaid](docs/architecture/flows/22-ollama-contexto-erros.mmd) · [Abrir SVG](docs/architecture/flows/22-ollama-contexto-erros.svg)

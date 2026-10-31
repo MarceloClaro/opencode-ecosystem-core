@@ -4,8 +4,8 @@ flowchart TB
   IN --> DP["scanners.pipeline.DiagnosticPipeline.run: cobertura lexical"]
   FACADE["scanners.diagnostic_pipeline.run: fachada de compatibilidade"] --> DP
   DP --> MODE{"corpus_mode"}
-  MODE -->|"autodiscovery"| SELF["Corpus enriquecido com nomes e conteúdo do próprio Core"]
-  MODE -->|"retained"| RET["Corpus externo retido / corpus_id / hash esperado obrigatório"]
+  MODE -->|autodiscovery| SELF["Corpus enriquecido com nomes e conteúdo do próprio Core"]
+  MODE -->|retained| RET["Corpus externo retido / corpus_id / hash esperado obrigatório"]
   SELF --> NOO["NoologicalScanner: categorias canônicas sem dupla contagem"]
   RET --> NOO
   NOO --> COV["Cobertura lexical e camadas: presentes / ausentes / density"]
@@ -27,9 +27,9 @@ flowchart TB
   TEST --> EVO["EvolutionRegistry.record / record_audited quando elegível"]
   EVO --> LEDGER["cycles.json: round derivado do ledger / prefixo preservado"]
   LEDGER --> CHAIN["verify_state_chain / custódia / Merkle / histórico"]
-  SELF -. "mede autodescoberta" .-> BOUND["Cobertura lexical não mede completude funcional, qualidade epistêmica ou validação externa"]
-  RET -. "mede cobertura sobre entrada retida" .-> BOUND
+  SELF -.->|mede autodescoberta| BOUND["Cobertura lexical não mede completude funcional, qualidade epistêmica ou validação externa"]
+  RET -.->|mede cobertura sobre entrada retida| BOUND
   PLANART["Plano explícito: arquivos / regex / nomes / cobertura esperada"] --> HERM["scanners.diagnostic_pipeline.DiagnosticPipeline.varrer"]
   HERM --> CHECKART["Auditar sincronia de artefatos: stdlib / sem rede, subprocesso ou LLM"]
   CHECKART --> ARTOUT["gaps / passaram / falharam / candidato_a_inspecao"]
-  ARTOUT -. "exige_validacao_externa true; não substitui compilação ou testes" .-> BOUND
+  ARTOUT -.->|exige_validacao_externa true; não substitui compilação ou testes| BOUND

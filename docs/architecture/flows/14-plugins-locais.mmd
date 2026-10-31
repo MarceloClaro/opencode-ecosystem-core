@@ -3,18 +3,18 @@ flowchart TB
   MCP --> VALID["Validar contrato e limites"]
   VALID --> MC["MarceloClaro.local_component_action"]
   MC --> KIND{"Componente"}
-  KIND -->|"REA"| REA["rea_action: inspeção estática e recibo"]
-  KIND -->|"MiroFish"| OASIS["scientific_runtime_run: endpoint loopback já ativo"]
+  KIND -->|REA| REA["rea_action: inspeção estática e recibo"]
+  KIND -->|MiroFish| OASIS["scientific_runtime_run: endpoint loopback já ativo"]
   OASIS --> GATE{"Processo rc0, geração e artefato próprios?"}
-  GATE -->|"não"| BLOCK["blocked; preservar timeout e falha"]
-  GATE -->|"sim"| RUN["completed operacional; cenário sintético"]
-  KIND -->|"Lean 4"| LEAN["Fonte delimitada; recusar admissões e execução"]
+  GATE -->|não| BLOCK["blocked; preservar timeout e falha"]
+  GATE -->|sim| RUN["completed operacional; cenário sintético"]
+  KIND -->|Lean 4| LEAN["Fonte delimitada; recusar admissões e execução"]
   LEAN --> NS["bwrap: rede isolada; bibliotecas somente leitura; prlimit"]
   NS --> COMPILER["Compilador real com prazo"]
   COMPILER --> FORMAL{"Compilação e relatório exigidos passaram?"}
-  FORMAL -->|"não"| BLOCK
-  FORMAL -->|"sim"| PROOF["machine_checked no enunciado submetido"]
+  FORMAL -->|não| BLOCK
+  FORMAL -->|sim| PROOF["machine_checked no enunciado submetido"]
   REA --> OBS["MetaBus: estados, hashes e limites"]
   RUN --> OBS
   PROOF --> OBS
-  OBS -. "não comprova pressupostos empíricos" .-> HUMAN["Interpretação e revisão humana"]
+  OBS -.->|não comprova pressupostos empíricos| HUMAN["Interpretação e revisão humana"]

@@ -17,6 +17,6 @@ flowchart TB
   ACT --> STREAM["render_memory_network_streamlit: nós e detalhes"]
   STREAM --> UI["Streamlit: atualização e exploração visual"]
   ASCII --> CLI["python -m webapp.memory_network_visualizer"]
-  SIM["MemoryNetworkSimulator: dados demonstrativos"] -. "modo separado e identificado" .-> GRAPH
-  EVENTS -. "inference_executed false / calibrated false" .-> LIMIT["Animação representa eventos e dados, não pesos neurais internos"]
-  REG -. "available não comprova inferência" .-> LIMIT
+  SIM["MemoryNetworkSimulator: dados demonstrativos"] -.->|modo separado e identificado| GRAPH
+  EVENTS -.->|inference_executed false / calibrated false| LIMIT["Animação representa eventos e dados, não pesos neurais internos"]
+  REG -.->|available não comprova inferência| LIMIT

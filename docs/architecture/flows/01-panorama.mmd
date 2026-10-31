@@ -72,7 +72,7 @@ flowchart TB
   MC --> REA
   MC --> LOCAL
   MC --> BROW
-  OC -. "configuração opcional" .-> MODEL
+  OC -.->|configuração opcional| MODEL
   MC --> SPEC
   SPEC --> HIST
   SPEC --> RUN
@@ -92,13 +92,13 @@ flowchart TB
   RESEARCH --> EG
   RESEARCH --> SCI
   RESEARCH --> PUB
-  RAG -. "resultados de recuperação" .-> SCI
+  RAG -.->|resultados de recuperação| SCI
   BUS --> VIS
   EG --> VIS
   SCI --> VIS
   BB --> VIS
   VIS --> UI
-  SITE -. "orienta operação; não executa análise" .-> LOCAL
+  SITE -.->|orienta operação; não executa análise| LOCAL
   MCP2["Plugins locais REA / MiroFish / Lean 4"] --> MC
   MC --> LIFE["Lifecycle: validar perfil antes de atribuir"]
   LIFE --> CAT

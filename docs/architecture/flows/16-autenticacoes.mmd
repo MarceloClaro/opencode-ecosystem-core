@@ -1,17 +1,17 @@
 flowchart TB
   OP["Operador no terminal"] --> CHOICE{"Serviço"}
-  CHOICE -->|"ChatGPT no OpenCode"| OC["opencode auth login provider openai"]
+  CHOICE -->|ChatGPT no OpenCode| OC["opencode auth login provider openai"]
   OC --> OAUTH["Autorizar no navegador OpenAI; sessão privada"]
   OAUTH --> MODEL["Selecionar modelo em /models"]
-  CHOICE -->|"Gemini Chat no terminal"| GEM["Gemini CLI: Sign in with Google"]
+  CHOICE -->|Gemini Chat no terminal| GEM["Gemini CLI: Sign in with Google"]
   GEM --> TEST["Enviar solicitação curta"]
   MODEL --> TEST
   TEST --> RESPONSE{"Resposta concluída?"}
-  RESPONSE -->|"não"| BLOCK["Preservar falha, limite ou indisponibilidade"]
-  RESPONSE -->|"sim"| ACCESS["Acesso observado naquele momento"]
-  CHOICE -->|"Notebooks e fontes"| NLM["nlm login --wsl; conta Google"]
+  RESPONSE -->|não| BLOCK["Preservar falha, limite ou indisponibilidade"]
+  RESPONSE -->|sim| ACCESS["Acesso observado naquele momento"]
+  CHOICE -->|Notebooks e fontes| NLM["nlm login --wsl; conta Google"]
   NLM --> CHECK["nlm login --check"]
   CHECK --> CORE["Core: política por efeito em /gemini-notebook"]
   CORE --> GOOGLE["Serviço Google; notebooks e fontes"]
-  OAUTH -. "não importa histórico web" .-> LIMIT["Sessões e cotas próprias"]
-  GEM -. "independente do NotebookLM" .-> LIMIT
+  OAUTH -.->|não importa histórico web| LIMIT["Sessões e cotas próprias"]
+  GEM -.->|independente do NotebookLM| LIMIT

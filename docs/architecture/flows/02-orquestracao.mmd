@@ -9,11 +9,11 @@ flowchart TB
   AC --> ROUTE["route: inventário federado + status do executor"]
   ROUTE --> AT["AttentionRouter: ranking com gates de elegibilidade"]
   AT --> READY{"Executor elegível e instruções válidas?"}
-  READY -->|"não"| BLOCK["blocked: sem execução aceita"]
-  READY -->|"sim"| PREF
+  READY -->|não| BLOCK["blocked: sem execução aceita"]
+  READY -->|sim| PREF
   PREF --> OK{"Preflight aceito?"}
-  OK -->|"não"| BLOCK
-  OK -->|"sim"| D["primário.delegate: task.cfp + contexto + spec_id"]
+  OK -->|não| BLOCK
+  OK -->|sim| D["primário.delegate: task.cfp + contexto + spec_id"]
   D --> BB["Blackboard: agentes elegíveis / voluntariado / seleção"]
   BB --> ASSIGN["task.assigned / agente / stake"]
   ASSIGN --> EX["Construir instruções + contexto + memória"]
@@ -22,24 +22,24 @@ flowchart TB
   PROC --> WAIT["communicate: saída / prazo / cancelamento"]
   WAIT --> PARSE["Parsear eventos CLI e exigir saída real"]
   PARSE --> GOOD{"Execução concluída com saída válida?"}
-  GOOD -->|"não"| CLASS["Classificar falha: conta / timeout / indisponibilidade"]
+  GOOD -->|não| CLASS["Classificar falha: conta / timeout / indisponibilidade"]
   CLASS --> FALL{"Executor alternativo elegível e orçamento?"}
-  FALL -->|"sim"| HR
-  FALL -->|"não"| FAIL["failed / blocked / exhausted"]
-  GOOD -->|"sim"| PIPE["TransformerPipeline: avaliações e revisão limitada"]
+  FALL -->|sim| HR
+  FALL -->|não| FAIL["failed / blocked / exhausted"]
+  GOOD -->|sim| PIPE["TransformerPipeline: avaliações e revisão limitada"]
   PIPE --> CP["report_completion: gate autoritativo do primário"]
   FAIL --> CP
   CP --> SV["SpecVerifier + TDD se entrega de software"]
   SV --> ACCEPT{"Blackboard terminou completed?"}
-  ACCEPT -->|"não"| REJECT["Conclusão recusada / success false"]
-  ACCEPT -->|"sim"| RESULT["Resultado aceito no escopo declarado"]
+  ACCEPT -->|não| REJECT["Conclusão recusada / success false"]
+  ACCEPT -->|sim| RESULT["Resultado aceito no escopo declarado"]
   CP --> T["Trust.learn: resultado conforme gate"]
   CP --> E["Economia: resolver stake e taxa"]
   CP --> BB2["task.complete: Blackboard"]
   BB2 --> REF["reflect_request: ReflexionEngine"]
   REF --> META["MetacognitiveLoop.complete: episódio local"]
   META --> MEM["MetaBus: observação e próxima ação"]
-  META -. "não calibrado; sem promoção por observação" .-> L["Trust e memória possuem contratos diferentes"]
+  META -.->|não calibrado; sem promoção por observação| L["Trust e memória possuem contratos diferentes"]
   RESULT --> REPORT["Relatório: passos / executor / duração / limites"]
   REJECT --> REPORT
   BLOCK --> REPORT
