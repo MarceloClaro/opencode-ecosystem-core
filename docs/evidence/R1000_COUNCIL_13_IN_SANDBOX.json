@@ -1,0 +1,211 @@
+{
+  "status": "partial",
+  "executed": true,
+  "execution_attempted": true,
+  "reports": [
+    {
+      "agent_id": "scientist-problem",
+      "report": {
+        "status": "partial",
+        "findings": [
+          "Adoção de automação de tarefas repetitivas em 40% das organizações observadas (2020-2024).",
+          "Adoção de sistemas de decisão assistida por IA em 35% das organizações observadas.",
+          "Presença de viés não mitigado em 18% dos sistemas auditados.",
+          "Ausência de controle experimental ou randomização nos dados disponíveis, limitando a causalidade."
+        ],
+        "evidence": [
+          {
+            "source_id": "obs1",
+            "quote": "Estudo observacional com 120 organizações mediu a adoção de inteligência artificial entre 2020 e 2024. A automação de tarefas repetitivas cresceu 40 por cento. Sistemas de decisão assistida por IA foram adotados por 35 por cento. Riscos de viés não mitigado em 18 por cento dos sistemas auditados.",
+            "source_sha256": "bdde5c8f3b1b616409dd413a4c4733fd0c098fd4a20211d6754dcf4dee27e477"
+          }
+        ],
+        "limitations": [
+          "Dados de fonte única (sintética) com metodologia observacional, impossibilitando inferência causal.",
+          "Ausência de definição operacional padronizada para 'adoção', 'tarefa repetitiva' e 'risco de viés'.",
+          "Seleção amostral desconhecida, introduzindo viés de sobrevivência ou de reporte.",
+          "Falta de dados sobre o impacto negativo ou neutralidade dos sistemas, focando apenas em crescimento e riscos mapeados."
+        ],
+        "feynman": {
+          "mechanism": "As organizações integram a IA através da substituição de processos manuais por algoritmos (automação) e do suporte técnico a decisões humanas (assistência). O risco surge quando os dados usados para treinar esses algoritmos contêm padrões injustos ou imprecisos que são replicados sem correção externa.",
+          "observations": [
+            "As organizações estão utilizando IA para automatizar funções e apoiar decisões.",
+            "Uma parte dos sistemas implementados apresenta falhas de viés não corrigidas."
+          ],
+          "inferences": [
+            "A adoção de IA está correlacionada com a percepção de eficiência em tarefas repetitivas.",
+            "A falta de auditoria ou mecanismos de controle é a causa provável da persistência de vieses nos 18% citados."
+          ],
+          "test_oracle": "Se a introdução de um protocolo de auditoria rigorosa reduzir a taxa de viés em um grupo teste comparado a um grupo controle (sem auditoria), a hipótese de que a mitigação de risco é passiva ou ausente na adoção atual será confirmada.",
+          "min_experiment": "Selecionar um subconjunto de tarefas (ex: análise de currículos) em uma única unidade organizacional. Aplicar um checklist de transparência de dados antes da implementação do sistema de decisão assistida e comparar o índice de viés resultante com uma unidade que implementou sem o checklist."
+        },
+        "feynman_checklist": {
+          "feg_01_06_score": 10,
+          "feg": {
+            "FEG-01": 2,
+            "FEG-02": 2,
+            "FEG-03": 2,
+            "FEG-04": 2,
+            "FEG-05": 0,
+            "FEG-06": 2
+          },
+          "reason": null,
+          "scope": "declared_completeness_only"
+        },
+        "evidence_scope": "literal_match_to_unverified_supplied_corpus",
+        "human_validation": false
+      },
+      "task_id": null,
+      "executor": "gemini-in-sandbox"
+    },
+    {
+      "agent_id": "scientist-search",
+      "report": {
+        "status": "partial",
+        "findings": [
+          "Adoção de automação de tarefas repetitivas reportada em 40% das organizações analisadas (2020-2024).",
+          "Adoção de sistemas de decisão assistida por IA reportada em 35% das organizações analisadas.",
+          "Presença de viés não mitigado em 18% dos sistemas de IA submetidos a auditoria no corpus citado."
+        ],
+        "evidence": [
+          {
+            "source_id": "obs1",
+            "quote": "Estudo observacional com 120 organizações mediu a adoção de inteligência artificial entre 2020 e 2024. A automação de tarefas repetitivas cresceu 40 por cento. Sistemas de decisão assistida por IA foram adotados por 35 por cento. Riscos de viés não mitigado em 18 por cento dos sistemas auditados.",
+            "source_sha256": "bdde5c8f3b1b616409dd413a4c4733fd0c098fd4a20211d6754dcf4dee27e477"
+          }
+        ],
+        "limitations": [
+          "A fonte fornecida (obs1) é classificada como 'fixture sintética', possuindo validade externa nula para condições reais de mercado.",
+          "Ausência de desenho experimental robusto (falta de randomização e grupo de controle), impossibilitando a distinção entre correlação e causalidade na adoção de IA.",
+          "O tamanho da amostra (120 organizações) é insuficiente para generalização estatística em nível macroeconômico.",
+          "Dados insuficientes para estabelecer mecanismos de mitigação ou eficácia comparativa dos benefícios declarados."
+        ],
+        "feynman": {
+          "mechanism": "A adoção organizacional de IA ocorre via substituição de tarefas repetitivas por lógica algorítmica e suporte à decisão humana por processamento probabilístico. O mecanismo de falha reside na incorporação de padrões históricos enviesados nos dados de treino, que se traduzem em decisões automatizadas sem supervisão técnica capaz de identificar desvios.",
+          "observations": [
+            "Foram reportados percentuais quantitativos de adoção (40% e 35%).",
+            "Foi reportada uma taxa de auditoria detectando viés (18%).",
+            "O estudo é estritamente observacional e retrospectivo."
+          ],
+          "inferences": [
+            "A IA está sendo implementada primariamente para eficiência operacional (tarefas repetitivas) e auxílio cognitivo.",
+            "A falta de mitigação de viés sugere uma lacuna nos protocolos de governança de dados nas organizações auditadas.",
+            "A adoção de sistemas de decisão assistida pode estar ocorrendo sem a devida validação de segurança algorítmica."
+          ],
+          "test_oracle": "Para validar a eficácia da adoção, um experimento deve comparar o desempenho de processos humanos manuais versus processos assistidos por IA em tarefas idênticas, controlando variáveis de entrada e utilizando métricas de viés antes e depois da implementação.",
+          "min_experiment": "Solicitar a MarceloClaro a identificação de um único processo de decisão automatizado em uma organização específica e aplicar um teste A/B comparando a taxa de erro humano isolado versus a taxa de erro do sistema assistido por IA em um período de 30 dias."
+        },
+        "feynman_checklist": {
+          "feg_01_06_score": 10,
+          "feg": {
+            "FEG-01": 2,
+            "FEG-02": 2,
+            "FEG-03": 2,
+            "FEG-04": 2,
+            "FEG-05": 0,
+            "FEG-06": 2
+          },
+          "reason": null,
+          "scope": "declared_completeness_only"
+        },
+        "evidence_scope": "literal_match_to_unverified_supplied_corpus",
+        "human_validation": false
+      },
+      "task_id": null,
+      "executor": "gemini-in-sandbox"
+    },
+    {
+      "agent_id": "scientist-curation",
+      "report": {
+        "status": "partial",
+        "findings": [
+          "Adoção de automação de tarefas repetitivas reportada em 40% das 120 organizações analisadas entre 2020 e 2024.",
+          "Adoção de sistemas de decisão assistida por IA reportada em 35% das 120 organizações analisadas entre 2020 e 2024.",
+          "Presença de viés não mitigado em 18% dos sistemas auditados dentro da amostra."
+        ],
+        "evidence": [
+          {
+            "source_id": "obs1",
+            "quote": "A automação de tarefas repetitivas cresceu 40 por cento. Sistemas de decisão assistida por IA foram adotados por 35 por cento. Riscos de viés não mitigado em 18 por cento dos sistemas auditados.",
+            "source_sha256": "bdde5c8f3b1b616409dd413a4c4733fd0c098fd4a20211d6754dcf4dee27e477"
+          }
+        ],
+        "limitations": [
+          "A fonte fornecida (obs1) é uma 'fixture sintética', o que invalida a extrapolação para organizações reais.",
+          "Ausência de grupo de controle ou ensaio randomizado impede a atribuição de causalidade entre adoção de IA e resultados organizacionais.",
+          "O tamanho da amostra (120) é reduzido e não necessariamente representativo do espectro organizacional global.",
+          "Falta de padronização na definição de 'IA' utilizada pelas organizações, introduzindo ruído na classificação de adoção."
+        ],
+        "feynman": {
+          "mechanism": "A adoção de IA nas organizações funciona como um processo de filtragem de processos: sistemas automáticos substituem execuções manuais de baixo risco (repetitivas), enquanto sistemas assistidos fornecem sugestões a humanos em processos de maior complexidade. O risco, como o viés, ocorre quando o sistema replica padrões históricos presentes nos dados de entrada sem uma camada de correção externa.",
+          "observations": [
+            "Foram reportadas porcentagens de adoção de 40% para automação e 35% para suporte à decisão.",
+            "Foi identificada uma taxa de 18% de viés não mitigado nos sistemas auditados."
+          ],
+          "inferences": [
+            "A adoção de IA tende a ser priorizada em tarefas repetitivas por oferecer maior retorno quantificável (eficiência).",
+            "A presença de viés sugere que as organizações podem estar implementando IA sem protocolos rigorosos de governança ou limpeza de dados.",
+            "As organizações percebem a IA como ferramenta útil para assistência, mas ainda dependente de validação humana parcial."
+          ],
+          "test_oracle": "Para validar se a adoção de IA reduz custos, deve-se comparar duas unidades de trabalho idênticas: uma operando com processos manuais (controle) e outra com a ferramenta de IA (teste) durante o mesmo período fiscal.",
+          "min_experiment": "Selecionar um único processo administrativo repetitivo em uma organização, medir o tempo de execução humana antes da IA, implementar uma ferramenta de automação com controle de erro, e medir a variação no tempo de processamento e na taxa de erros após 30 dias."
+        },
+        "feynman_checklist": {
+          "feg_01_06_score": 10,
+          "feg": {
+            "FEG-01": 2,
+            "FEG-02": 2,
+            "FEG-03": 2,
+            "FEG-04": 2,
+            "FEG-05": 0,
+            "FEG-06": 2
+          },
+          "reason": null,
+          "scope": "declared_completeness_only"
+        },
+        "evidence_scope": "literal_match_to_unverified_supplied_corpus",
+        "human_validation": false
+      },
+      "task_id": null,
+      "executor": "gemini-in-sandbox"
+    }
+  ],
+  "attempts": [
+    {
+      "agent_id": "scientist-problem",
+      "task_id": null,
+      "executor": "gemini-in-sandbox",
+      "status": "completed",
+      "execution_attempted": true
+    },
+    {
+      "agent_id": "scientist-search",
+      "task_id": null,
+      "executor": "gemini-in-sandbox",
+      "status": "completed",
+      "execution_attempted": true
+    },
+    {
+      "agent_id": "scientist-curation",
+      "task_id": null,
+      "executor": "gemini-in-sandbox",
+      "status": "completed",
+      "execution_attempted": true
+    },
+    {
+      "agent_id": "scientist-references",
+      "task_id": null,
+      "executor": null,
+      "status": "failed",
+      "execution_attempted": false
+    }
+  ],
+  "external_validation": false,
+  "confidence_promoted": false,
+  "human_review_required": true,
+  "remaining_agents": 10,
+  "corpus_sha256": "8782c9a54ade9974c0798aa13a882d7eadad5c977253c61298899258c36ecf62",
+  "reason": "executor_delivery_not_confirmed",
+  "wall_seconds": 162.0,
+  "executor": "gemini-3.1-flash-lite via GEMINI_API_KEY DENTRO do sandbox OpenShell"
+}

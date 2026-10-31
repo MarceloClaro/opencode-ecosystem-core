@@ -1,0 +1,32 @@
+{
+  "schema": "openshell-directed-capture-v1",
+  "generated_at": "2026-10-31T15:53:11.337010+00:00",
+  "telemetry_endpoint_identified": "https://events.telemetry.data.nvidia.com/v1.1/events/json (OPENSHELL_TELEMETRY_ENDPOINT)",
+  "otlp_endpoint": "OPENSHELL_OTLP_ENDPOINT (não definido; OTLP gRPC 4317 / HTTP 4318)",
+  "capture": "90s eth0, filtro not port 22 (SSH da sessão)",
+  "observations": [
+    {
+      "id": "telemetry_dns",
+      "observed": "none",
+      "detail": "nenhuma consulta DNS para telemetry.data.nvidia.com"
+    },
+    {
+      "id": "telemetry_tcp",
+      "observed": "none",
+      "detail": "nenhum TCP para o endpoint de telemetria ou portas OTLP 4317/4318"
+    },
+    {
+      "id": "egress_sandbox",
+      "observed": "no_syn",
+      "detail": "tentativa de egress para 1.1.1.1:443 produziu zero pacotes em eth0"
+    }
+  ],
+  "other_traffic": "14 pacotes: mDNS 224.0.0.251 e Cloudflare 104.16.8.34 (fetch do operador), nenhum do gateway",
+  "external_validation": false,
+  "confidence_promoted": false,
+  "human_review_required": true,
+  "limitations": [
+    "Janela de 90s ainda é 'não observado no período', não ausência permanente.",
+    "O endpoint de telemetria foi identificado por strings no binário; a confirmação definitiva de ausência exigiria captura contínua 24h."
+  ]
+}

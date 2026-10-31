@@ -978,29 +978,15 @@
     {
       "round_id": "R223",
       "objective": "evo-28-pypi-mcp-reconciliation",
-      "changes": {
-        "id": "evo-28-pypi-mcp-reconciliation",
-        "spec": "SPEC-935-R214",
-        "title": "Reconciliação do MCP PyPI — protocolo, ping, isError e configuração",
-        "timestamp": "2026-07-25T18:46:48.457246+00:00",
-        "score": 9.0,
-        "changes": [
-          "Corrigido nomes de métodos MCP: list_tools → tools/list, call_tool → tools/call",
-          "Adicionado método ping (health check)",
-          "Alterado protocolVersion para ecoar versão do cliente (default 2024-11-05)",
-          "Adicionado isError=true em respostas de erro de ferramentas",
-          "Adicionado _tool_result e _tool_error_result para formato MCP padrão com content array",
-          "Corrigido description truncada do agente pypi-searcher em opencode.json",
-          "Corrigido parsing do --json no comando /pypi (não mais engolido pelo query)"
-        ],
-        "lessons": [
-          "MCP servers custom precisam implementar tools/list e tools/call (não list_tools/call_tool)",
-          "O protocolVersion deve ecoar o valor do cliente para compatibilidade",
-          "Erros em tools/call devem usar isError=true no result, não JSON-RPC error",
-          "A flag de saída (--json) não pode ser passada dentro do template  sem parsing"
-        ],
-        "category": "mcp"
-      },
+      "changes": [
+        "Corrigido nomes de métodos MCP: list_tools → tools/list, call_tool → tools/call",
+        "Adicionado método ping (health check)",
+        "Alterado protocolVersion para ecoar versão do cliente (default 2024-11-05)",
+        "Adicionado isError=true em respostas de erro de ferramentas",
+        "Adicionado _tool_result e _tool_error_result para formato MCP padrão com content array",
+        "Corrigido description truncada do agente pypi-searcher em opencode.json",
+        "Corrigido parsing do --json no comando /pypi (não mais engolido pelo query)"
+      ],
       "score": null,
       "lessons": [],
       "timestamp": 1785005208.4577758,
@@ -4806,7 +4792,7 @@
         "xelatex com 234 inputs: 2 passadas necessarias para refs do indice",
         "Font shape TU/NotoSerifCJKSC m/sc e m/it undefined sao avisos benignos (EB Garamond nao tem italico CJK)"
       ],
-      "timestamp": "2026-07-31T22:57:46.304730",
+      "timestamp": 1785538666.30473,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -4971,7 +4957,7 @@
         "Concorrência entre sessões (Claude fable-5 paralela) substituiu capas compartilhadas por versões ChatGPT/EDSR 1046x1504 (proporção KDP) após builds; gate de frescor falhou corretamente (fail-closed). Decisão do usuário: aceitar capas novas; rebuild completo revalidou full-bleed via allowlist e passou.",
         "Bug de ordenação Merkle em _dependency_snapshot: gravação ordenava por path absoluto, validação por (scope, path) — hashes nunca batiam, receipt_current=false permanente. Corrigido com records.sort(key=(scope,path)) espelhando a validação; 5/5 edições self_current=True após correção."
       ],
-      "timestamp": "2026-08-02T02:50:23.018287+00:00",
+      "timestamp": 1785639023.018287,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -5000,7 +4986,7 @@
         "Inferir episteme de metadados já existentes (category/type/tags) evita editar 202 arquivos de catálogo e não conflita com trabalho pendente de outras frentes",
         "Exigir mínimo de 2 ocorrências de sinais evita que uma palavra genérica isolada classifique o regime (nunca chutar)"
       ],
-      "timestamp": "2026-08-02T07:02:01.145596+00:00",
+      "timestamp": 1785654121.145596,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -5027,7 +5013,7 @@
         "Reutilizar o validador de contrato do produtor (cultural_episteme._validate_terminology_delta) elimina divergência de schema entre agentes",
         "Gate fail-closed com razões nominais (termo e motivo) torna o bloqueio auditável no dossiê editorial"
       ],
-      "timestamp": "2026-08-02T09:17:26.437145+00:00",
+      "timestamp": 1785662246.437145,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -5052,7 +5038,7 @@
       "lessons": [
         "Estratégias explícitas por marcador (preserve/gloss/adapt com renderings aprovados) transformam 'preservar a voz' de promessa vaga em regra verificável"
       ],
-      "timestamp": "2026-08-02T09:19:50.240491+00:00",
+      "timestamp": 1785662390.240491,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -5078,7 +5064,7 @@
       "lessons": [
         "Verificar números nas duas direções (perdidos E surgidos) captura fabricação na retrotradução, não só omissão"
       ],
-      "timestamp": "2026-08-02T09:22:34.455383+00:00",
+      "timestamp": 1785662554.455383,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -5104,7 +5090,7 @@
       "lessons": [
         "Incluir casos que as regras sabidamente não detectam transforma o benchmark de vitrine em instrumento: recall 0.86 é um número defensável comercialmente; 98% inventado não é"
       ],
-      "timestamp": "2026-08-02T09:26:58.525428+00:00",
+      "timestamp": 1785662818.525428,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -5133,7 +5119,7 @@
         "Medir cobertura antes de ampliar léxico transforma curadoria em engenharia: as duas rodadas foram guiadas pela lista real de agentes descobertos",
         "Specs 'verified' apontando para testes que nunca existiram são o overclaim mais silencioso: o registro SDD só o pega se o test_file for validado como caminho"
       ],
-      "timestamp": "2026-08-02T09:42:26.574843+00:00",
+      "timestamp": 1785663746.574843,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -5161,7 +5147,7 @@
         "'Relevante e inovador' não é promessa executável — mas 'toda alegação de novidade tem ancoradouro de comparação na mesma frase' é, e desloca o ônus da prova para dentro do manuscrito",
         "Um marcador lexical legítimo em outra seção (protocolo) derruba fixture ingênuo: auditoria por manuscrito inteiro exige fixtures desenhados por movimento"
       ],
-      "timestamp": "2026-08-02T09:55:04.498288+00:00",
+      "timestamp": 1785664504.498288,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -5188,7 +5174,7 @@
         "Bug real descoberto em TDD: comparar |estatística observada| contra |estatística permutada| assume distribuição nula centrada em zero — verdade para Welch-t, falso para Mann-Whitney U (centrada em n_a*n_b/2). Corrigido centrando pela média da própria distribuição nula gerada, tornando o motor de permutação genuinamente genérico para qualquer statistic_fn",
         "Reaproveitar validate_statistics() existente em vez de duplicar a lógica de veredito (Bayes factor, evidence_strength) manteve o módulo novo pequeno e evitou duas fontes de verdade para o mesmo cálculo"
       ],
-      "timestamp": "2026-08-02T11:28:10.715784+00:00",
+      "timestamp": 1785670090.715784,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -5215,7 +5201,7 @@
         "Domínio 'mixed' (mesmo domínio com evidência a favor E contra) tratado como contestador, não como 'meio a favor' — evita que uma disciplina internamente dividida seja contada como corroboração",
         "Reaproveitar o padrão exato de integração do R370 (verify_*_claim(claim_id, ..., ledger)) no R103 manteve a superfície de API do OrchestratorReviewer previsível para quem já usa o gate estatístico"
       ],
-      "timestamp": "2026-08-02T12:53:14.434184+00:00",
+      "timestamp": 1785675194.434184,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -5242,7 +5228,7 @@
         "Ler o código vizinho antes de construir em cima dele pagou: o experiment_designer.py já 'prometia' pré-registro no docstring desde antes, mas a implementação era um freebie context.get(default=True) — exatamente o padrão de overclaim que o CORRIGENDUM existe para prevenir, e só apareceu ao ler a função linha por linha, não ao confiar no docstring",
         "Comparação textual exata (não semântica/tolerante) para hipótese/método é a escolha certa aqui: tolerância a 'reformulação' é precisamente o disfarce do HARKing"
       ],
-      "timestamp": "2026-08-02T13:03:58.276216+00:00",
+      "timestamp": 1785675838.276216,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -5272,7 +5258,7 @@
         "A tentação de construir uma contraverificação SIMÉTRICA (flagar qualquer divergência p_reportado != p_ingênuo) teria gerado falso positivo sistemático contra a correção de cointegração que o próprio manuscrito já disclosa — o design assimétrico (só sinalizar quando reportado < ingênuo) é o que evita esse overclaim",
         "Rodar scipy apenas como oráculo de validação em tempo de desenvolvimento (nunca importado no módulo entregue) permite validar uma implementação pura sem violar a convenção de zero dependência pesada do projeto"
       ],
-      "timestamp": "2026-08-02T13:33:40.895398+00:00",
+      "timestamp": 1785677620.895398,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -5309,7 +5295,7 @@
         "Falas de personagens (LUC-Entrevista \"Desde 1917\") também precisam obedecer à cronologia canônica do mundo (vala 1915)",
         "Alinhamento md ↔ .tex exige verificação por grep em PT/EN/ZH + verificação nos PDFs compilados (PyMuPDF), pois o texto extraído do PDF pode diferir do fonte (ex: ZH)"
       ],
-      "timestamp": "2026-08-02T15:55:51.138056+00:00",
+      "timestamp": 1785686151.138056,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -5336,7 +5322,7 @@
       ],
       "score": 0.92,
       "lessons": [],
-      "timestamp": "2026-08-02T16:31:57.502838Z",
+      "timestamp": 1785688317.502838,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -5363,7 +5349,7 @@
       ],
       "score": 0.93,
       "lessons": [],
-      "timestamp": "2026-08-02T19:28:39.669654+00:00",
+      "timestamp": 1785698919.669654,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -5391,7 +5377,7 @@
       ],
       "score": 0.95,
       "lessons": [],
-      "timestamp": "2026-08-02T20:05:00.000000Z",
+      "timestamp": 1785701100.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -5415,7 +5401,7 @@
       ],
       "score": 0.96,
       "lessons": [],
-      "timestamp": "2026-08-02T21:30:00.000000Z",
+      "timestamp": 1785706200.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -5441,7 +5427,7 @@
         "No modelo trilíngue NUNCA usar âncora simples (#1) para links que devem ser específicos da língua — sempre fragmentar as âncoras por bloco (frag:, fragen:, fragzh:) e criar explicitamente TODOS os prefixos no tribody, inclusive o frag: do bloco PT (o \fragdef não cria esse prefixo sozinho)",
         "PyMuPDF é a ferramenta certa para auditar links: dest='frag:X' com dpage=None indica âncora inexistente; dpage resolvido com a página correta do bloco confirma o roteamento"
       ],
-      "timestamp": "2026-08-02T22:15:00+00:00",
+      "timestamp": 1785708900.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -5471,7 +5457,7 @@
         "Script de extração por regex de heading precisa de casamento flexível (prefixo + variantes 'Missao e Diretrizes Absolutas', headings numerados '1. Perfil e Escopo') -- casamento exato por chave falha silenciosamente em ~10% dos casos reais",
         "Nomear a lista de IDs a testar de memória (em vez de copiar da fonte real gerada) introduziu erros de teste que pareciam falhas de produto -- sempre gerar listas de teste programaticamente quando a fonte de verdade já existe em arquivo"
       ],
-      "timestamp": "2026-08-03T01:13:07.300158+00:00",
+      "timestamp": 1785719587.300158,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -6657,7 +6643,7 @@
         "Termo 'percentil' é bloqueado pelos gates de anti-overclaim; usar 'intervalo de confiança empírico'",
         "EvolutionRegistry exige chaves round_id/objective/changes/score/lessons/timestamp — chaves extras quebram o carregamento"
       ],
-      "timestamp": "2026-08-14T06:40:00",
+      "timestamp": 1786689600.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -6685,7 +6671,7 @@
         "No TeX, 'P&D' é escrito 'P\\&D'; testes de conteúdo devem usar a variante escapada",
         "q-estatística não agrega valor inferencial a desenho observacional com bootstrap não paramétrico"
       ],
-      "timestamp": "2026-08-14T07:05:00",
+      "timestamp": 1786691100.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -6711,7 +6697,7 @@
         "Pandoc + reference.docx + python-docx produz DOCX ABNT sem LibreOffice",
         "Manifest sha256 fecha a proveniência também para artefato Word"
       ],
-      "timestamp": "2026-08-14T07:15:00",
+      "timestamp": 1786691700.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -6738,7 +6724,7 @@
         "Conteúdo de tabela no DOCX não aparece em paragraphs; testes precisam varrer células",
         "IDs 2/3/4 (dispersão LOOCV, cluster comparativo, TOST) ficam como melhorias metodológicas para R423"
       ],
-      "timestamp": "2026-08-14T07:40:00",
+      "timestamp": 1786693200.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -6767,7 +6753,7 @@
         "Índice fixo de tabelas em testes DOCX quebra ao adicionar tabelas; localizar por conteúdo",
         "MDES explicita o que 'não discernível' significa e previne leitura de efeito nulo"
       ],
-      "timestamp": "2026-08-14T08:00:00",
+      "timestamp": 1786694400.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -6793,7 +6779,7 @@
         "Documentos de submissão (carta) compartilham as regras de anti-overclaim do manuscrito — a carta tinha o mesmo overclaim 'por tempo' corrigido em R422",
         "Autoria deve constar no cabeçalho trilíngue e na assinatura da carta"
       ],
-      "timestamp": "2026-08-14T08:15:00",
+      "timestamp": 1786695300.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -6821,7 +6807,7 @@
         "Testes de DOCX dentro de ZIP exigem io.BytesIO, não Path",
         "README do pacote repete a nota anti-overclaim 'candidato a submissão'"
       ],
-      "timestamp": "2026-08-15T09:15:00",
+      "timestamp": 1786785300.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -6860,7 +6846,7 @@
         "Erros padrão homocedásticos subestimam incerteza com poucos clusters; reportar CRVE por município (G-1 dof)",
         "Pandoc incorpora imagens markdown ao DOCX automaticamente quando o cwd é a pasta do paper"
       ],
-      "timestamp": "2026-08-15T16:16:15",
+      "timestamp": 1786810575.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -9252,9 +9238,11 @@
       "prev_state_merkle_root": ""
     },
     {
-      "round_id": "R505",
+      "round_id": "legacy-entry-318-fbe30dee17be",
       "objective": "R203: atividades por som (fonema) no Volume 1 — parte7-sons-atividades",
-      "changes": "parte7-sons-atividades.tex (38 planchetas 'Atividade de Som': A) Caça ao som, B) Separe tem/não tem, C) Complete, D) Ouça e compare; quadro-síntese §31.2; guia de uso; notas de variante regional; BNCC EF01LP03/05/07/08/09); scripts/spec -> main.tex input; versão 4.5->4.6; fix \faPencilAlt->\faPencilRuler (fontawesome5 5.15.4); sanitização de IPA estendido fora de \\textipa{}; compile 2× exit 0, 0 Missing character, 43 overfulls (1 novo, cosmético); 594 páginas; PDF v4.6 entregue",
+      "changes": [
+        "parte7-sons-atividades.tex (38 planchetas 'Atividade de Som': A) Caça ao som, B) Separe tem/não tem, C) Complete, D) Ouça e compare; quadro-síntese §31.2; guia de uso; notas de variante regional; BNCC EF01LP03/05/07/08/09); scripts/spec -> main.tex input; versão 4.5->4.6; fix \faPencilAlt->\faPencilRuler (fontawesome5 5.15.4); sanitização de IPA estendido fora de \\textipa{}; compile 2× exit 0, 0 Missing character, 43 overfulls (1 novo, cosmético); 594 páginas; PDF v4.6 entregue"
+      ],
       "score": 0.86,
       "lessons": [
         "Unicode IPA fora de \\textipa{} não compila (ɐ ɛ ɔ ẽ ɲ ʎ ʃ ʒ + til combinante U+0303) — rotular em português ou usar códigos TIPA ASCII [6], [E], [S].",
@@ -9276,7 +9264,9 @@
     {
       "round_id": "R506",
       "objective": "R204: atividades de som em cada letra (parte2) e por sílabas (parte3 C-01..C-06)",
-      "changes": "parte2: 26 planchetas 'Atividade de Som e Sílabas da Letra X' (Caça ao som com quadradinhos, Tem ou não tem SIM/NÃO, Som das sílabas com palmas e contagem, Qual sílaba tem o som com sílaba em negrito, caixapausa+pista articulatória; H mudo especial: O segredo do H, HOJE/OJE); parte3: 6 boxes bônus 'Som das Sílabas (não vale nota)' após C-01..C-06; classe v3.1->v3.2 (ambientes somletra e somsílaba); versão 4.6->4.7; script reproduzível com idempotência; compile 2× exit 0, 0 Missing character, 43 overfulls (nenhum novo), 626 páginas; PDF v4.7 entregue",
+      "changes": [
+        "parte2: 26 planchetas 'Atividade de Som e Sílabas da Letra X' (Caça ao som com quadradinhos, Tem ou não tem SIM/NÃO, Som das sílabas com palmas e contagem, Qual sílaba tem o som com sílaba em negrito, caixapausa+pista articulatória; H mudo especial: O segredo do H, HOJE/OJE); parte3: 6 boxes bônus 'Som das Sílabas (não vale nota)' após C-01..C-06; classe v3.1->v3.2 (ambientes somletra e somsílaba); versão 4.6->4.7; script reproduzível com idempotência; compile 2× exit 0, 0 Missing character, 43 overfulls (nenhum novo), 626 páginas; PDF v4.7 entregue"
+      ],
       "score": 0.88,
       "lessons": [
         "Regex de inserção ancorado no título com ' --- ' (ex.: Folha C-01 --- S\\'ilabas) — padrão sem o sufixo não casa e falha silenciosamente (6 folhas de primeira vez).",
@@ -9298,7 +9288,9 @@
     {
       "round_id": "R507",
       "objective": "R205: padrão de som aplicado às folhas A-01..A-05 (vogais) e B-01..B-11 (letras), parte3",
-      "changes": "parte3: 16 boxes bônus 'Som'' (não vale nota) — 5 vogais (A,E,I,O,U), 9 letras (M,S,T,R,L,B,X,Q,H), 2 duplas (C/D e F/V com caça 2+2) + nota na B-08 para G,N,P,Z,J; caixa caça ao som com quadradinhos + Tem ou não tem SIM/NÃO + caixapausa/pista articulatória; H mudo (HOJE/OJE); reuso ambientes R204 e dataset R202/R204; versão 4.7->4.8; compile 2× exit 0, 0 Missing character, 43 overfulls (nenhum novo), 634 páginas; PDF v4.8 entregue",
+      "changes": [
+        "parte3: 16 boxes bônus 'Som'' (não vale nota) — 5 vogais (A,E,I,O,U), 9 letras (M,S,T,R,L,B,X,Q,H), 2 duplas (C/D e F/V com caça 2+2) + nota na B-08 para G,N,P,Z,J; caixa caça ao som com quadradinhos + Tem ou não tem SIM/NÃO + caixapausa/pista articulatória; H mudo (HOJE/OJE); reuso ambientes R204 e dataset R202/R204; versão 4.7->4.8; compile 2× exit 0, 0 Missing character, 43 overfulls (nenhum novo), 634 páginas; PDF v4.8 entregue"
+      ],
       "score": 0.9,
       "lessons": [
         "Reuso do dataset articulatório entre R202/R204/R205 mantém consistência de dicas por letra sem duplicar manutenção.",
@@ -9803,7 +9795,7 @@
       "prev_state_merkle_root": ""
     },
     {
-      "round_id": "R477",
+      "round_id": "legacy-entry-338-3637df06f7b2",
       "objective": "SPEC-935-R477: liquidação dos 24 débitos documentais remanescentes (release R448 e storytelling MIRA) — suíte completa 100% verde",
       "changes": [
         "README.md: seção de validação observada corrigida (termo exato 'disponíveis na sua máquina.'; métricas como observação local, não certificação externa)",
@@ -9818,7 +9810,7 @@
         "Anti-overclaim documental inclui revisão de tabelas internas: '100% Open Access' violava o contrato R448 de não promover perfeição sem validação externa",
         "Manter instalação pública local e revisável: remover pipes de rede ao restaurar seções de instalação evita regressões NETWORK_PIPE"
       ],
-      "timestamp": "2026-09-12T00:00:00Z",
+      "timestamp": 1789171200.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "marceloclaro",
@@ -9829,13 +9821,13 @@
       ],
       "audited": true,
       "legacy": false,
-      "merkle_root": null,
-      "origin_commit": null,
-      "state_merkle_root": null,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
       "prev_state_merkle_root": ""
     },
     {
-      "round_id": "R478",
+      "round_id": "legacy-entry-339-fee770c7044b",
       "objective": "SPEC-935-R478/Fase 2 da R471: M2 sandbox científico declarativo (OpenShell/NemoClaw adaptado) e M3 roteador local de inferência PAIR",
       "changes": [
         "sandbox/declarative_policy.py: política YAML 4 camadas (filesystem/network/process/providers), SCIENTIFIC_TEMPLATE_YAML, DECIS?ão fail-closed com PolicyDecision, allowlist bibliográfica (18 endpoints), bloqueio de shell/interpolação (invariante 4), credenciais nunca em recibo (invariante 5)",
@@ -9850,7 +9842,7 @@
         "A ordem de prioridade de inferência do doctor é local -> PAIR -> Ollama -> OpenAI; reportar apenas booleano definido/ausente evita vazar host/porta/chave",
         "Metacaracteres de shell e interpolação precisam ser negados por camada process; teste explícito para cada vetor (bash -c, ;, &&, |, $(), ${})"
       ],
-      "timestamp": "2026-09-13T00:00:00Z",
+      "timestamp": 1789257600.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "marceloclaro",
@@ -9862,13 +9854,13 @@
       ],
       "audited": true,
       "legacy": false,
-      "merkle_root": null,
-      "origin_commit": null,
-      "state_merkle_root": null,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
       "prev_state_merkle_root": ""
     },
     {
-      "round_id": "R479",
+      "round_id": "legacy-entry-340-f86e8563cfe3",
       "objective": "SPEC-935-R479/Fase 3 da R471: M4 workbench DeepSeekGUI (supervisão desktop opt-in) e M5 modelos pequenos reprodutíveis minimind (currículo 64M didático)",
       "changes": [
         "workbench/deepseek_gui.py: conector opt-in (DEEPSEEK_GUI_ENABLED/WORKSPACE), allowlist de workspaces do Core (pesquisa/academic/publications), launch_config com licenças PolyForm Perimeter 1.0.1 vs MIT e limitação (redistribuição competitiva vedada)",
@@ -9885,7 +9877,7 @@
         "Sem GPU, documentar limitação explicitamente (e não alegar viabilidade) é a forma honesta de cumprir CA6 — torch ausente vira 'none' com nota de limitação",
         "THIRD_PARTY_NOTICES.md na raiz é o registro canônico: componentes da R471 com licenças divergentes (sem licença, CC BY-SA, PolyForm) precisam de restrição explícita por linha"
       ],
-      "timestamp": "2026-09-13T00:00:00Z",
+      "timestamp": 1789257600.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "marceloclaro",
@@ -9897,13 +9889,13 @@
       ],
       "audited": true,
       "legacy": false,
-      "merkle_root": null,
-      "origin_commit": null,
-      "state_merkle_root": null,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
       "prev_state_merkle_root": ""
     },
     {
-      "round_id": "R480",
+      "round_id": "legacy-entry-341-ff956fc813e5",
       "objective": "SPEC-935-R480/Fase 4 da R471: M6 frontend de download opt-in SciHubEVA — completa o roadmap M1-M8 da R471",
       "changes": [
         "workbench/scihubeva_frontend.py: frontend opt-in do resolvedor restrito R470 (SCIHUBEVA_RESOLVER=scihubeva), GUI neutra à política (requested_policy nunca repassado à fachada), validate_target (doi/pmid/url/query), launch_argv como lista sem shell, submit herdando dispatch_restricted",
@@ -9917,7 +9909,7 @@
         "Versão sem binário/arquivo/rede com status pending_manual_execution é o limite honesto do CA7 (CA8 hermético); módulo sem imports de rede/processo",
         "Fechamento do roadmap R471 (Fase 0-6): após M8, o Core integra sandbox, roteamento, workbench, modelos didáticos, executor alternativo e observatório com falha segura em todo componente"
       ],
-      "timestamp": "2026-09-13T00:00:00Z",
+      "timestamp": 1789257600.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "marceloclaro",
@@ -9929,13 +9921,13 @@
       ],
       "audited": true,
       "legacy": false,
-      "merkle_root": null,
-      "origin_commit": null,
-      "state_merkle_root": null,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
       "prev_state_merkle_root": ""
     },
     {
-      "round_id": "R481",
+      "round_id": "legacy-entry-342-a1bbb746e204",
       "objective": "Auditoria formal CA1–CA10 da SPEC-935-R471 + implementação do core-check (fecha ressalva CA9)",
       "changes": [
         "scripts/audit_r471_cas.py: auditoria executável dos 10 critérios de aceitação da R471 (pass/ressalva/fail com evidência)",
@@ -9949,7 +9941,7 @@
         "O DOC_PATHS oficial da R448 é installer/windows/README.md (não INSTALLER_WINDOWS.md); disclaimer avaliado no combined, não por arquivo",
         "Auditoria de invariantes deve ser executável e regenerável (script), não apenas documental"
       ],
-      "timestamp": "2026-09-13T00:00:00Z",
+      "timestamp": 1789257600.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "marceloclaro",
@@ -9961,13 +9953,13 @@
       ],
       "audited": true,
       "legacy": false,
-      "merkle_root": null,
-      "origin_commit": null,
-      "state_merkle_root": null,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
       "prev_state_merkle_root": ""
     },
     {
-      "round_id": "R482",
+      "round_id": "legacy-entry-343-c10230e21658",
       "objective": "Curadoria da paisagem de agentes externos — 500-AI-Agents-Projects como referência (item 2-A do usuário)",
       "changes": [
         "landscape/manifest.json: manifest curado dos 20 agentes auto-contidos (MIT, source_repo, scope_note honesto sem '500 integrados')",
@@ -9985,7 +9977,7 @@
         "Manifest de referência externa registra escopo honesto (20 auto-contidos; resto são links) para não prometer integração falsa",
         "Ciclos de integração de referência externa devem atualizar THIRD_PARTY_NOTICES na mesma revisão"
       ],
-      "timestamp": "2026-09-13T00:00:00Z",
+      "timestamp": 1789257600.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "marceloclaro",
@@ -9997,13 +9989,13 @@
       ],
       "audited": true,
       "legacy": false,
-      "merkle_root": null,
-      "origin_commit": null,
-      "state_merkle_root": null,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
       "prev_state_merkle_root": ""
     },
     {
-      "round_id": "R483",
+      "round_id": "legacy-entry-344-2d93eba1017d",
       "objective": "Scanner Reverso de Trajetórias Evolutivas — planejamento estrutural do futuro (R(F), Δ, p(g) com anti-cargo-cult)",
       "changes": [
         "scanners/reverse_scanner.py: ReverseScanner, ReverseOpportunity, ReverseScanReport; fecho regressivo R(F) com poda em A; gap evolutivo Δ; p(g) = α·cascade + β·centrality + γ·novelty − δ·ritual (α=0.40 β=0.25 γ=0.20 δ=0.15); tiering alavanca/prioritaria/marginal/ritual",
@@ -10020,7 +10012,7 @@
         "Sem corpus_terms, novelty=1.0 documentado não oculto: capacidade não indexada é máxima novidade por convenção explícita",
         "Suíte completa permanece 0 falhas com +31 testes (3905 passed) — padrão do ciclo mantido"
       ],
-      "timestamp": "2026-09-13T00:00:00Z",
+      "timestamp": 1789257600.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "marceloclaro",
@@ -10033,13 +10025,13 @@
       ],
       "audited": true,
       "legacy": false,
-      "merkle_root": null,
-      "origin_commit": null,
-      "state_merkle_root": null,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
       "prev_state_merkle_root": ""
     },
     {
-      "round_id": "R484",
+      "round_id": "legacy-entry-345-1c8536968f10",
       "objective": "Integração do ReverseScanner ao CLI do orquestrador (comando direto reverse-scan)",
       "changes": [
         "marceloclaro/cli.py: _cmd_reverse_scan() — --target obrigatório, --file (lista), --domain ecosystem|academic, --json; corpus default specs/; saída humana PT-BR com R(F), Δ e tier; exit codes",
@@ -10053,7 +10045,7 @@
         "Edições em docstrings-tripla (AJUDA_TEXT) podem remover o fechamento \"\"\" acidentalmente; validar com py_compile após editar",
         "CLI direto deve ser resolvido ANTES de instanciar MarceloClaroOrchestrator (padrão doctor/core-check) para manter o comando leve"
       ],
-      "timestamp": "2026-09-13T00:00:00Z",
+      "timestamp": 1789257600.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "marceloclaro",
@@ -10064,13 +10056,13 @@
       ],
       "audited": true,
       "legacy": false,
-      "merkle_root": null,
-      "origin_commit": null,
-      "state_merkle_root": null,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
       "prev_state_merkle_root": ""
     },
     {
-      "round_id": "R485",
+      "round_id": "legacy-entry-346-1469c1348801",
       "objective": "Mapa de Trajetórias Evolutivas — rotas de construção + alavancas estruturais",
       "changes": [
         "scanners/trajectory_mapper.py: TrajectoryMapper (paths_between DFS determinística anti-ciclo com max_depth/max_paths; lever score = count/max_count; oportunidades enriquecidas combined=0.70·p+0.30·lever; tier alavanca estrutural)",
@@ -10084,7 +10076,7 @@
         "Caminho identidade [g] é informação legítima (alvo já em Δ aparece nas rotas)",
         "lever_score normaliza por max_count global; alavanca estrutural exige combined≥0.7 E lever≥0.6"
       ],
-      "timestamp": "2026-09-13T00:00:00Z",
+      "timestamp": 1789257600.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "marceloclaro",
@@ -10096,13 +10088,13 @@
       ],
       "audited": true,
       "legacy": false,
-      "merkle_root": null,
-      "origin_commit": null,
-      "state_merkle_root": null,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
       "prev_state_merkle_root": ""
     },
     {
-      "round_id": "R486",
+      "round_id": "legacy-entry-347-3a595ccc3b4c",
       "objective": "Convergência Polimática — quem, fora do domínio, já resolveu parte do gap",
       "changes": [
         "scanners/polymathic_convergence.py: PolymathicConvergence (tokens + score ponderado por campo title=2/industry=2/framework=1.5/dependencies=1/swift=1; match_capability com top_k e desempate agent_id; scan integra ReverseScanner)",
@@ -10117,7 +10109,7 @@
         "source no params deve usar endswith nos testes (caminho absoluto x relativo)",
         "Convergência é decoração de R483/R485: reusa ReverseScanner sem duplicação"
       ],
-      "timestamp": "2026-09-13T00:00:00Z",
+      "timestamp": 1789257600.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "marceloclaro",
@@ -10129,13 +10121,13 @@
       ],
       "audited": true,
       "legacy": false,
-      "merkle_root": null,
-      "origin_commit": null,
-      "state_merkle_root": null,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
       "prev_state_merkle_root": ""
     },
     {
-      "round_id": "R487",
+      "round_id": "legacy-entry-348-09cdcb5a68b6",
       "objective": "Análise de paisagem: science-skills (Google DeepMind) e ruflo; registro de licenças e lições",
       "changes": [
         "THIRD_PARTY_NOTICES.md: tabela 'Análise de paisagem — repos inspecionados (R487)' + seção de fonte de espelhos (item 2B)",
@@ -10148,7 +10140,7 @@
         "ruflo: o Learning Loop confirma o desenho do ciclo Reflexion do Core (Blackboard + Trust Engine + MetaBus); arquitetura TS de terceiros não é incorporada",
         "Espelhos são documentação de padrões (MIT respeitado); metadados declarativos (entrypoint/deps/llm) permitem auditoria sem executar"
       ],
-      "timestamp": "2026-09-13T00:00:00Z",
+      "timestamp": 1789257600.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "marceloclaro",
@@ -10159,13 +10151,13 @@
       ],
       "audited": true,
       "legacy": false,
-      "merkle_root": null,
-      "origin_commit": null,
-      "state_merkle_root": null,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
       "prev_state_merkle_root": ""
     },
     {
-      "round_id": "R488",
+      "round_id": "legacy-entry-349-be2f7c06e409",
       "objective": "Audit Chain entre ciclos — síntese Bernstein (zero-LLM, HMAC RFC 2104, lineage)",
       "changes": [
         "evolution/cycles.py: prev_state_merkle_root (campo aditivo) + chain_state_merkle() HMAC-SHA256 RFC 2104 + verify_state_chain()",
@@ -10179,7 +10171,7 @@
         "Bernstein: replay journal always-on com hash-mismatch como sinal de não-determinismo -> o Core responde com SDD/TDD hermético + evidence_trail; journal por run fica no roadmap",
         "Encadeamento é aditivo e retrocompatível: ciclos antigos são nós cegos tolerados; a cadeia inicia no primeiro âncora"
       ],
-      "timestamp": "2026-09-13T00:00:00Z",
+      "timestamp": 1789257600.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "marceloclaro",
@@ -10191,13 +10183,13 @@
       ],
       "audited": true,
       "legacy": false,
-      "merkle_root": null,
-      "origin_commit": null,
+      "merkle_root": "",
+      "origin_commit": "",
       "state_merkle_root": "19e6513678bcc61a74c5013723e94de52f7dfcc96b969c2dd5474eade705cb2c",
       "prev_state_merkle_root": ""
     },
     {
-      "round_id": "R489",
+      "round_id": "legacy-entry-350-843a3cb72108",
       "objective": "Paisagem Acadêmica — manifest academic (DeepMind + science-skills) e convergência ampliada",
       "changes": [
         "landscape/manifest.json: chave academic (4 fontes Apache-2.0 curadas: superhuman, alphageometry, alphageometry2, science-skills)",
@@ -10214,7 +10206,7 @@
         "'meta-analise' segue sem fonte externa — resultado honesto que orienta proximas curadorias",
         "Escalada: R489 encadeia no R488 via prev_state_merkle_root"
       ],
-      "timestamp": "2026-09-13T00:00:00Z",
+      "timestamp": 1789257600.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "marceloclaro",
@@ -10226,13 +10218,13 @@
       ],
       "audited": true,
       "legacy": false,
-      "merkle_root": null,
+      "merkle_root": "",
       "origin_commit": "07ec6c0",
-      "state_merkle_root": null,
+      "state_merkle_root": "",
       "prev_state_merkle_root": "19e6513678bcc61a74c5013723e94de52f7dfcc96b969c2dd5474eade705cb2c"
     },
     {
-      "round_id": "R490",
+      "round_id": "legacy-entry-351-e4a38f6ee254",
       "objective": "Composição Unitária do Conhecimento — insumos cognitivos por capacidade (proposta camada 2)",
       "changes": [
         "scanners/knowledge_composition.py: KnowledgeComposition (COMPOSITION_BANK curado: Meta-análise, Prova geométrica, Metadados; fallback lexical com warning; scan integra ReverseScanner)",
@@ -10246,7 +10238,7 @@
         "Integrar via ReverseScanner (reuso) em vez de duplicar lógica de gap",
         "6 classes de insumo cobrem conceito/método/base/ferramenta/domínio/validação — fecha o ciclo construção-verificação"
       ],
-      "timestamp": "2026-09-13T00:00:00Z",
+      "timestamp": 1789257600.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "marceloclaro",
@@ -10257,13 +10249,13 @@
       ],
       "audited": true,
       "legacy": false,
-      "merkle_root": null,
-      "origin_commit": null,
-      "state_merkle_root": null,
-      "prev_state_merkle_root": null
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     },
     {
-      "round_id": "R491",
+      "round_id": "legacy-entry-352-81e6af910b08",
       "objective": "Potentiality Scanner — DNA estrutural e detecção de capacidades latentes (proposta camada 3)",
       "changes": [
         "scanners/potentiality_scanner.py: StructuralDNA (capabilities/redundant/central) + PotentialityScanner (coverage/missing/resistencia/tier latente-alto≥0.75, emergente≥0.34, distante)",
@@ -10277,7 +10269,7 @@
         "Erro veio do TESTE (assumi cross_validation ausente, mas está no DNA): o DNA real do ecossistema já contém cross_validation",
         "Distinção honesta: candidatas são HIPÓTESES (curadoria humana ou geradas pelo Successor R492)"
       ],
-      "timestamp": "2026-09-13T00:00:00Z",
+      "timestamp": 1789257600.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "marceloclaro",
@@ -10289,13 +10281,13 @@
       ],
       "audited": true,
       "legacy": false,
-      "merkle_root": null,
-      "origin_commit": null,
-      "state_merkle_root": null,
-      "prev_state_merkle_root": null
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     },
     {
-      "round_id": "R492",
+      "round_id": "legacy-entry-353-d0be57bdbe74",
       "objective": "Successor Generator — recombinação estrutural de capabilities (proposta camada 4)",
       "changes": [
         "scanners/successor_generator.py: SUCCESSOR_BANK (3 hipóteses do usuário) + geração combinatoria (pares/trios inter-módulo, max_combos) com score = 1.0·diversity + 0.5·novelty + 0.3·centrality",
@@ -10309,7 +10301,7 @@
         "Hipóteses são EXPLÍCITAS (nunca 'implementação planejada') — anti-overclaim garantido no relatório",
         "O R492 fecha o pipeline 4-camadas do usuário: Reverso (o quê) → Trajetória (ordem) → Composição (do quê) → Potentiality/Successor (o que pode nascer)"
       ],
-      "timestamp": "2026-09-13T00:00:00Z",
+      "timestamp": 1789257600.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "marceloclaro",
@@ -10321,13 +10313,13 @@
       ],
       "audited": true,
       "legacy": false,
-      "merkle_root": null,
-      "origin_commit": null,
-      "state_merkle_root": null,
-      "prev_state_merkle_root": null
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     },
     {
-      "round_id": "R493",
+      "round_id": "legacy-entry-354-9701007a207c",
       "objective": "Inércia Vetorial Analyzer — mensurar resistência estrutural à emergência (QIV = Potencial − Inércia)",
       "changes": [
         "scanners/inertia_analyzer.py: InertiaVectorAnalyzer com 4 forças ponderadas (complexidade 0.30, dependencias 0.30, custo 0.20, acoplamentos 0.20); QIV clamp; faixas quebra-imediata/moderada/inercia-dominante; ranking de barreiras; reorg_prediction; consume PotentialityReport (R491)",
@@ -10341,7 +10333,7 @@
         "Regressão silenciosa R491→R492 descoberta só na suíte completa: construtores obrigando modules quebravam pipeline SPEC-020; lição: sempre rodar test_deep_diagnose + full suite ao tocar scanners",
         "Faixas inclusivas: QIV=0.70 e 0.40 caem em quebra-moderada (usuário: 0.40 ≤ QIV ≤ 0.70)"
       ],
-      "timestamp": "2026-09-13T00:00:00Z",
+      "timestamp": 1789257600.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "marceloclaro",
@@ -10353,13 +10345,13 @@
       ],
       "audited": true,
       "legacy": false,
-      "merkle_root": null,
-      "origin_commit": null,
-      "state_merkle_root": null,
-      "prev_state_merkle_root": null
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     },
     {
-      "round_id": "R494",
+      "round_id": "legacy-entry-355-5b663f525c41",
       "objective": "Structural Noise Scanner — compressão estrutural que remove ruído sem perder função (C=E+S+R → C'=S+E*)",
       "changes": [
         "scanners/noise_scanner.py: ElementClassifier (exemplo/estrutura/ruido/redundancia/vetor-explicativo), FunctionPreservation (vocabulário funcional), StructuralCompression (Jaccard ≥ 0.60), ReconstructionTest, RelevanceProtection (3 regras do usuário), métricas SPS/NRR/FLI com níveis",
@@ -10373,7 +10365,7 @@
         "Asserções com siglas maiúsculas num módulo lowercased exigem term.lower() — falsos negativos em teste de documentação",
         "Cluster mínimo conservador: Jaccard 0.60 não agrupa Leonardo/Agostinho/Aristóteles (compartilham só 'estruturas'); compressão mais profunda exigiria abstração tópica (documentado como limite)"
       ],
-      "timestamp": "2026-09-13T00:00:00Z",
+      "timestamp": 1789257600.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "marceloclaro",
@@ -10385,13 +10377,13 @@
       ],
       "audited": true,
       "legacy": false,
-      "merkle_root": null,
-      "origin_commit": null,
-      "state_merkle_root": null,
-      "prev_state_merkle_root": null
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     },
     {
-      "round_id": "R495",
+      "round_id": "legacy-entry-356-e35914b50306",
       "objective": "Structural Compression Engine (SCE) — ferramenta de compressão estrutural auditável (fragmentação → SNS → vetores → reconstrução → delta)",
       "changes": [
         "scanners/compression_engine.py: fragmentação por fronteiras de frase; SNS por parte (R494); métricas CR/CPS/FLI/DG; níveis seguro/moderado/destrutivo; relatório delta",
@@ -10405,7 +10397,7 @@
         "Corpus com repetição do usuário (100k→10k, CR=10x, CPS=0.95) é reproduzível no modelo: repetição pura gera compressão segura com FLI≈0",
         "Δ = Estrutura(T) − Estrutura(T') é capturada pelo par CPS/FLI: a compressão só é aprovada se o texto final permite reconstruir o raciocínio original"
       ],
-      "timestamp": "2026-09-13T00:00:00Z",
+      "timestamp": 1789257600.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "marceloclaro",
@@ -10417,13 +10409,13 @@
       ],
       "audited": true,
       "legacy": false,
-      "merkle_root": null,
-      "origin_commit": null,
-      "state_merkle_root": null,
-      "prev_state_merkle_root": null
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     },
     {
-      "round_id": "R496",
+      "round_id": "legacy-entry-357-6342bc1ea098",
       "objective": "Integração IVA/SNS/SCE no DiagnosticPipeline — camada profunda completa (deep=True inclui o que impede a emergência, ruído e versão densa)",
       "changes": [
         "scanners/pipeline.py: lazy properties inertia_analyzer/noise_scanner/compression_engine; blocos d/e/f em _run_deep com padrão try/except {'error': ...} da pipeline; report_md nos 3 blocos",
@@ -10437,7 +10429,7 @@
         "SCE em corpus de CÓDIGO (sem fronteiras de frase) resulta em CR ≈ 0.98 com nível seguro: honesto mas sem ganho — a ferramenta é para prosa/documentos; o pipeline aplica a sentenças do trail sem perda funcional",
         "A camada profunda agora responde as 8 perguntas: não-existe, deveria-existir, como-chegar, pode-emergir, quão-próximo, o-que-impede, o-que-remover, versão-densa"
       ],
-      "timestamp": "2026-09-13T00:00:00Z",
+      "timestamp": 1789257600.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "marceloclaro",
@@ -10449,13 +10441,13 @@
       ],
       "audited": true,
       "legacy": false,
-      "merkle_root": null,
-      "origin_commit": null,
-      "state_merkle_root": null,
-      "prev_state_merkle_root": null
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     },
     {
-      "round_id": "R497",
+      "round_id": "legacy-entry-358-7eb80c5bec74",
       "objective": "Paisagem acadêmica — deepmind/acme (RL framework) curado no manifest + THIRD_PARTY_NOTICES + teste R489 ajustado (24→25)",
       "changes": [
         "landscape/manifest.json: academic += deepmind-acme (Apache-2.0, https://github.com/google-deepmind/acme)",
@@ -10469,7 +10461,7 @@
         "Acme pontua 1.000 em 'loop de controle' e 0.636 em 'agentes'/'pesquisa científica' — vocabulário de convergência confirma a curadoria",
         "Anti-overclaim: o acme é framework de PESQUISA em RL, não 'superhuman'; inclusão é metadados/paisagem, stack de terceiros não incorporada (hermético/stdlib)"
       ],
-      "timestamp": "2026-09-13T00:00:00Z",
+      "timestamp": 1789257600.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "marceloclaro",
@@ -10480,13 +10472,13 @@
       ],
       "audited": true,
       "legacy": false,
-      "merkle_root": null,
-      "origin_commit": null,
-      "state_merkle_root": null,
-      "prev_state_merkle_root": null
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     },
     {
-      "round_id": "R498",
+      "round_id": "legacy-entry-359-ff549875bb51",
       "objective": "Pipe real: /diagnose roda deep=True por padrão; contrato testado sobre documento real",
       "changes": [
         "integrations/opencode_cli.py: template do comando diagnose ganhou deep=True (fonte geradora)",
@@ -10501,7 +10493,7 @@
         "IVA report real: 9 candidatas avaliadas, todas quebra-imediata, top scientific-discovery-engine QIV=0.768 (potencial 1.0 − inércia 0.232)",
         "Lição anti-overclaim: em corpus já denso (ARCHITECTURE.md), CR próximo de 1 com tokens_saved=0 é relatado sem maquiagem"
       ],
-      "timestamp": "2026-09-13T00:00:00Z",
+      "timestamp": 1789257600.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "marceloclaro",
@@ -10512,13 +10504,13 @@
       ],
       "audited": true,
       "legacy": false,
-      "merkle_root": null,
-      "origin_commit": null,
-      "state_merkle_root": null,
-      "prev_state_merkle_root": null
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     },
     {
-      "round_id": "R499",
+      "round_id": "legacy-entry-360-85d9c7600e4e",
       "objective": "Estudo IMO (solver determinístico anti-leak) + benchmark LLMs free reais + raio-x da orquestração por camadas",
       "changes": [
         "specs/SPEC-935-R499-imo-pilot.md: spec do estudo IMO + adendo benchmark LLM free",
@@ -10536,7 +10528,7 @@
         "MODELO LOCAL INEFICAZ: llama3.2 a 30-50s/estágio × 16 estágios >10min sem conclusão — descartado por métrica objetiva",
         "mimo-v2.5-free é 4x mais rápido que nemotron-3-ultra-free com mesma acurácia sob orquestração (score 0.987 vs 0.709)"
       ],
-      "timestamp": "2026-09-13T00:00:00Z",
+      "timestamp": 1789257600.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "marceloclaro",
@@ -10548,10 +10540,10 @@
       ],
       "audited": true,
       "legacy": false,
-      "merkle_root": null,
-      "origin_commit": null,
-      "state_merkle_root": null,
-      "prev_state_merkle_root": null
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     },
     {
       "round_id": "R502",
@@ -10813,7 +10805,7 @@
       ],
       "score": 0.9,
       "lessons": [],
-      "timestamp": "2026-09-17T20:07:32.289845",
+      "timestamp": 1789675652.289845,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -10839,7 +10831,7 @@
       ],
       "score": 0.95,
       "lessons": [],
-      "timestamp": "2026-09-17T20:16:27.129826",
+      "timestamp": 1789676187.129826,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -10863,7 +10855,7 @@
       ],
       "score": 0.95,
       "lessons": [],
-      "timestamp": "2026-09-17T20:18:07.680337",
+      "timestamp": 1789676287.680337,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -10888,7 +10880,7 @@
       ],
       "score": 0.95,
       "lessons": [],
-      "timestamp": "2026-09-17T20:39:17.434373",
+      "timestamp": 1789677557.434373,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -10913,7 +10905,7 @@
       ],
       "score": 0.95,
       "lessons": [],
-      "timestamp": "2026-09-17T20:40:52.136695",
+      "timestamp": 1789677652.136695,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -10938,7 +10930,7 @@
       ],
       "score": 0.95,
       "lessons": [],
-      "timestamp": "2026-09-17T20:41:26.918485",
+      "timestamp": 1789677686.918485,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -10962,7 +10954,7 @@
       ],
       "score": 0.97,
       "lessons": [],
-      "timestamp": "2026-09-17T20:45:23.794286",
+      "timestamp": 1789677923.794286,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -10987,7 +10979,7 @@
       ],
       "score": 0.96,
       "lessons": [],
-      "timestamp": "2026-09-17T20:46:46.163949",
+      "timestamp": 1789678006.163949,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -11012,7 +11004,7 @@
       ],
       "score": 0.95,
       "lessons": [],
-      "timestamp": "2026-09-17T20:57:25.497937",
+      "timestamp": 1789678645.497937,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -11035,7 +11027,7 @@
       ],
       "score": 0.96,
       "lessons": [],
-      "timestamp": "2026-09-17T20:58:34.063564",
+      "timestamp": 1789678714.063564,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -11061,7 +11053,7 @@
       ],
       "score": 0.97,
       "lessons": [],
-      "timestamp": "2026-09-17T21:03:23.659937",
+      "timestamp": 1789679003.659937,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -11087,7 +11079,7 @@
       ],
       "score": 0.97,
       "lessons": [],
-      "timestamp": "2026-09-17T23:35:00-03:00",
+      "timestamp": 1789698900.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -11112,7 +11104,7 @@
       ],
       "score": 0.98,
       "lessons": [],
-      "timestamp": "2026-09-17T23:50:00-03:00",
+      "timestamp": 1789699800.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -11136,7 +11128,7 @@
       ],
       "score": 0.96,
       "lessons": [],
-      "timestamp": "2026-09-18T00:55:00-03:00",
+      "timestamp": 1789703700.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -11161,7 +11153,7 @@
       ],
       "score": 0.95,
       "lessons": [],
-      "timestamp": "2026-09-18T01:10:00-03:00",
+      "timestamp": 1789704600.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -11185,7 +11177,7 @@
       ],
       "score": 0.96,
       "lessons": [],
-      "timestamp": "2026-09-18T01:30:00-03:00",
+      "timestamp": 1789705800.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -11209,7 +11201,7 @@
       ],
       "score": 0.9,
       "lessons": [],
-      "timestamp": "2026-09-18T02:05:00-03:00",
+      "timestamp": 1789707900.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -11233,7 +11225,7 @@
       ],
       "score": 0.95,
       "lessons": [],
-      "timestamp": "2026-09-18T02:25:00-03:00",
+      "timestamp": 1789709100.0,
       "artifact_hashes": {},
       "external_verdict": null,
       "verifier_identity": "",
@@ -11289,7 +11281,7 @@
         "Rodapés e propriedades internas do DOCX podem reintroduzir resíduos de projeto mesmo quando o texto principal está limpo; auditoria deve incluir headers/footers/core props e PDF extraído.",
         "O limite de 20 páginas pode ser atingido após referências completas; evitar notas editoriais internas na versão enviada ao revisor."
       ],
-      "timestamp": "2026-09-19T11:29:57.832278-03:00",
+      "timestamp": 1789828197.832278,
       "artifact_hashes": {
         "spec_r544": "11026ca610fed19709a23dbe615c5b5e508f027408ffdc18d0d31eae4913e793",
         "readme_r522": "0f966df7777ebb700c6d902d49ae89e36284937d694572069038e38933208894",
@@ -11333,7 +11325,7 @@
         "Em DOCX, tabelas com quatro colunas precisam de tblLayout=fixed e tcW por célula; larguras aparentes de coluna podem exceder a largura útil se não forem fixadas no XML.",
         "A verificação visual via renderização de páginas específicas do PDF complementa a auditoria programática de largura."
       ],
-      "timestamp": "2026-09-19T11:47:51.083697-03:00",
+      "timestamp": 1789829271.083697,
       "artifact_hashes": {
         "spec_r545": "da7145dd3337ed23649a04abedc93bc540404d2bdee8f90bb26c9539ab18ab21",
         "readme_r522": "1476f3fe34c837d680fe3c13aff6372b259d67d2d0ece06c168d2367aee33e30",
@@ -11377,7 +11369,7 @@
         "Data URI base64 em Markdown aumenta tamanho e prejudica fluxo editorial; usar DOCX/PDF final ou imagem externa controlada.",
         "Referências contextuais paywall/candidatas 2026 devem ser separadas do núcleo incluído para não contaminar denominadores."
       ],
-      "timestamp": "2026-09-19T14:04:51.381610-03:00",
+      "timestamp": 1789837491.38161,
       "artifact_hashes": {
         "spec_r546": "cd7f89a2888e4e5d827f644509f69caeb372f4551cc983e6e95665f461439bd5",
         "v35_md": "fcf74ec088445043999057d05d29cb1814c0e8d1fe434a3ff60dc6ec2d984c95",
@@ -12590,7 +12582,9 @@
         "gen_mod10 reexecutado (255 fichas/12 categorias)"
       ],
       "score": 1.0,
-      "lessons": "next_round_id() (evolution/cycles.py) só varre cycles/ e colidiu com specs/SPEC-935-R607: registrar com round_id explícito até a seq. ser corrigida",
+      "lessons": [
+        "next_round_id() (evolution/cycles.py) só varre cycles/ e colidiu com specs/SPEC-935-R607: registrar com round_id explícito até a seq. ser corrigida"
+      ],
       "timestamp": 1790672399.393975,
       "artifact_hashes": {},
       "external_verdict": null,
@@ -12614,7 +12608,9 @@
         "check.py ok; build exit=0; 174 páginas; PDF tem os 4 DOIs"
       ],
       "score": 1.0,
-      "lessons": "Macros com nome de comando (\\pth/\\cod/\\hbox/\\elemento) em texto corrido acionam o TeX — sempre \\cod{} ou reescrever; latexmk reseta com -C; overfull de passe 1 no toc pode ser transiente",
+      "lessons": [
+        "Macros com nome de comando (\\pth/\\cod/\\hbox/\\elemento) em texto corrido acionam o TeX — sempre \\cod{} ou reescrever; latexmk reseta com -C; overfull de passe 1 no toc pode ser transiente"
+      ],
       "timestamp": 1790674835.823631,
       "artifact_hashes": {},
       "external_verdict": null,
@@ -21660,6 +21656,2308 @@
       "origin_commit": "84ef0820a71f52756203854ea83d5a1211d8c254",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R920",
+      "objective": "Extracao documental integral de seis imagens de estudo de caso, sem inferencia clinica adicional",
+      "changes": [
+        "Criados texto integral e historico documental em producao_cientifica/psicologia/extracao_integral_estudo_de_caso.md e .txt",
+        "Criado manifesto de seis fontes com SHA-256 e limitacoes documentais",
+        "Conferencia visual por Codex externo em tres pares de imagens; contrato TSPEC-00f5492b e A2A task-cdbbd667; sem simulacao MiroFish"
+      ],
+      "score": null,
+      "lessons": [
+        "Distinguir datas dos arquivos e datas dos atendimentos; preservar incertezas de leitura e encaminhamentos sem resultado; nenhuma validacao clinica externa"
+      ],
+      "timestamp": 1792333915.0920491,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R922",
+      "objective": "Redacao documental de estudo de caso com resumos simples e expandido e referencias auditaveis",
+      "changes": [
+        "Preparado manuscrito documental inicial e revisado o escopo apos relato complementar atribuido a psicologa",
+        "Entregues resumos desidentificados em MD DOCX e PDF com idade corrigida expressamente pelo solicitante",
+        "Seis referencias com DOI ativo e seis notas nativas com original traducao propria justificativa e limite; PDF de seis paginas inspecionado",
+        "Laudos resultados escolares consentimento autoria e periodo total preservados como pendencias; sem diagnostico ou pericia"
+      ],
+      "score": null,
+      "lessons": [
+        "Distinguir registro fotografado e relato complementar; melhora relatada em cuidado concomitante nao isola eficacia; exame descrito sem alteracoes nao comprova exclusao global"
+      ],
+      "timestamp": 1792337130.1480315,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R924",
+      "objective": "Redigir artigo de relato documental de experiencia e revisao narrativa em psicologia humanista, sob TSPEC-52daffdd.",
+      "changes": [
+        "Artigo integral em Markdown, DOCX editavel e PDF com 21 paginas, idade12anos no recorte do encaminhamento e fontesD1-D6/R1 atribuidas.",
+        "14DOI resolvidos; 14notas nativas com trechos originais curtos, traducao quando aplicavel, justificativa e limites.",
+        "Discussao rogeriana e brasileira com distincao entre orientacao declarada, CCPT e tarefas dirigidas; sem eficacia causal ou diagnostico inventado.",
+        "Formatacao editorial ABNT, registro de busca narrativa e nota de normalizacao; revisao documental e visual registrada."
+      ],
+      "score": null,
+      "lessons": [
+        "Classificacao Qualis nao atribuida ao manuscrito; sem certificacao ABNT ou validacao clinica externa.",
+        "Autoria, reflexividade da profissional participante, consentimento, assentimento e demais declaracoes permanecem pendentes.",
+        "Revisores Codex externos vinculados a scientific-review/task-cdbbd667; atribuicao no Core nao equivale a inferencia por outro executor."
+      ],
+      "timestamp": 1792349065.430285,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R923",
+      "objective": "R919–R923: bugs do Core, MiroFish acadêmico, plugins selecionados e ITS-FINE por composição",
+      "changes": [
+        "SDK e recibo corrigidos com RED→GREEN",
+        "21 cenários sintéticos com revisão-base única",
+        "Sequence Viewer instrucional importado; Zotero reference_only",
+        "ITS-FINE 0.0.15 instalado e diagnósticos limitados executados",
+        "Regressão Lean positiva/negativa fechada sob limites"
+      ],
+      "score": 7.0,
+      "lessons": [
+        "Falhas observadas foram preservadas: contrato TDD inválido ampliou indevidamente alvos; revisão externa sem leitura/limite não foi tratada como revisão; bootstrap silencioso exigiu deadline e diagnóstico; Lean 4.34.1 precisou de teto virtual 6 GiB mantendo heap limitado. Lição: validar contrato antes do runner, separar execução de mérito, usar escopo selecionado sem credenciais de irmãos e nunca aumentar permissões/treinar para fechar um checklist.",
+        "Score 7 é heurística interna de processo, não avaliação científica/externa."
+      ],
+      "timestamp": 1792354039.2116685,
+      "artifact_hashes": {
+        "tests/test_r583_mirofish_offline.py": "03e02fd776a04fcf7fd647370eb9190b16a054b65282f626e2874c37b2cf1bd2",
+        "tests/test_r649_opencode_agent_sdk.py": "329b26cff0d6612e914e00fdc0704a3ef4aed52e5825e1482f2e7028f9af3cc8",
+        "tests/test_r659_sdk_hooks_contract.py": "928b2333e5d3cd527a13d42edabe6a7c81bc62591caed901b6951c2fe18b5b63",
+        "tests/test_r670_scientific_plugins.py": "ecb9125e9674355d767c87e56c67c47c18f549a524b6a754e07ff98c287bf4a5",
+        "tests/test_r671_runtime_surfaces.py": "1d5f4deb4dbcee7e6caf1e3fa9fa6e631a2b8d536418e859fa56f176c5cfa653",
+        "tests/test_r879_architecture_maps.py": "fdb3c3f85c621fe4aaeec7e107c34b30349cb3ba730d4c9209876461876ec3c2",
+        "tests/test_r879_architecture_contract.py": "5e21214861419bebbeeda827b3d3a00230d69661bf8067dfb0320a084a6f78de",
+        "tests/test_r879_architecture_page.py": "b80b7b78d6d9c16d97e23cdd8f314a119c49df298b6d75eb1a442a83c83a82cb",
+        "tests/test_r881_mermaid_integral.py": "da42a462de425e7ec49be876a195c423fb0cf704a229389d242e1433ed1ab3d0",
+        "tests/test_r881_readme_flowcharts.py": "d79cfc21c43721baf9c0fc559d0b3b67738c87798f35eb38731975f50b5b3acb",
+        "tests/test_r895_requested_plugins.py": "a775dc79ad1f1d39094f18eff7a325196c3cc57ce630deac665c76c17ffdb56e",
+        "tests/test_r913_component_plugins.py": "406766fafea74476ccadeaba8e48f7eae6e6926de89d3b60cbb22c3240050d3e",
+        "tests/test_r914_academic_rigor.py": "afb99d46a69022597feb9582f7547507740b1caa13f5293cea65655beb10656c",
+        "tests/test_r916_documentation_atlas.py": "e0ee2b97cc8c30fc1bf618e4779f7928e5f5bb07b1bb722abbdb31b010d4c29d",
+        "tests/test_r917_academic_orchestration.py": "a0fab22bb7309951c1eec4fcddf1fd7d66b102298afa410c58f5ecc23470c2bc",
+        "tests/test_r918_ollama_context_reliability.py": "c7995417dea0c066d341dfad35e48262163950a20ada1d963f63d74e75182854",
+        "tests/test_r919_core_gaps.py": "dca9dffd7dc1f49dcd222f2dc19b2e1894d0f5c9507a85fc0ff3f078dbde14d9",
+        "tests/test_r920_academic_simulation.py": "62ef22cf210c9c7c299b566c0c033b2befb0184c14122d06d8546a422cc9b462",
+        "tests/test_r921_local_plugin_extraction.py": "1664bb113ee56a0bf9a67f8857fc12bb2e5d5b1ac9c4adc05056409720876443",
+        "tests/test_r922_academic_plugin_integration.py": "a5b031f286a9deb6be38ad35bb0823d6c830f09e7b26ec10ae53eb974723b455",
+        "tests/test_r923_itsfine_core.py": "d3b501463e06bb01c655929c09f7d5cf21420c6271d0ae355374c2ee0caee935",
+        "integrations/itsfine_core.py": "da8c0703fd577635f6a85963fe384713fe541c0b5df08f1019bcdc7edbf77caf",
+        "integrations/local_plugin_extraction.py": "7b56d4fa4b72239b5eacd712e330e50693a0553f578ea2f0eb08f99e440d56d7",
+        "integrations/opencode_agent_sdk.py": "3db36e224aa65213b95356fcad93f8b2b285d9d404151d90375fc9e55626343e",
+        "integrations/local_lean.py": "5a1516815761f422d1b8015024e3d975398378bff198ee83e6e0dceab4a6610b",
+        "integrations/scientific_plugins.py": "d6bf80eaac9099c1f806fba422de78644997e1056a9714a5a64cb245bde5fb5d",
+        "academic/adversarial_research/simulation.py": "98763d54abe18b2ea2d0ee2886573ef3050376402aa84d9143cfd9dd7e48bb18",
+        "academic/adversarial_research/service.py": "84c433bae2bfe1d9a6f3f5e02c532d5df306ad629b3b1ac8be0d8c13ee83ab14",
+        "marceloclaro/orchestrator.py": "3f26d63447c19e90d5dae788d176dabed4d82a462ca01d7c151b8ce6071e60a1",
+        "marceloclaro/runtime_actions.py": "db03d9a12ce6f9d5c56fec804a4d425dbf2b2febcdd9e37fa051089205852025",
+        "scripts/build_documentation_receipt.py": "d9a7f4153c8aae3d287d8549b1d84044ad6fa06e2a611ac0bb3e9317c993d540",
+        "scripts/demo_core_r923.py": "a6fc07ab2f52843d1e35f71f8a04cb5098bcaf8d1b40ed25e4a7de55cc436b86",
+        "scripts/finalize_core_r923.py": "e169702e89c90f07340bd7ddf9c3432198758e70680e1da4c72d1ef563e107c2",
+        "AGENTS.md": "1433f74f7e9466613a94354e50768820bdcd9ca96b66b61e8c477b67f913af91",
+        "README.md": "ded8800fc9feb3dee0e299c189043bf477f8f65180272de83d30765478ffce63",
+        "docs/ITSFINE_CORE_R923.md": "70b8ac13fc0de706ed81abcaa3dd2eded7a025fd59b1a0baa0322e211ab6461e",
+        "docs/MIROFISH_ACADEMICO_E_PLUGINS_R920.md": "73d8d7f2bac0cc315c3045a80a7bff27e3781da92fc000aa63f799e250165d54",
+        "docs/verification-documentation-r916-ollama-quantizacao.json": "97af089e8848c9dc30046cb5ef0d069f77eb14860747c80e68b4f74fafaea22e",
+        "outputs/core-r923/demonstration-summary.json": "19817260b5b6c4ced6eafaf43c434200bf0245173b9157d703c66c66987a9ae1",
+        "outputs/core-r923/final-gates.json": "29a1791e5fa14fdbe787026179208e58bd82e93edfbbc66622f9ed5452846db8",
+        "outputs/core-r923/reflection.json": "5a179b5e6864aef772606b0fafc0e4f3194e7710befc5c234ffec22598ac3c0f",
+        ".its-fine/install-manifest.json": "2473729e9929920afe6832d3ed55c07847c24e883f8f07d062fc737b9f6dde00"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "specs/SPEC-935-R923-itsfine-core.md",
+        "outputs/core-r923/final-gates.json"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R927",
+      "objective": "R924–R926: instalação fixa, motores CPU preparados e hardening de extrator/Lean/TDD",
+      "changes": [
+        "Reinstalação offline/SRI e política preservada",
+        "Três motores com locks e sondas reais sem pesos",
+        "Paths/YAML/processos/admissões corrigidos sob testes",
+        "Fontes gerenciadas agregadas e vinculadas a inputs"
+      ],
+      "score": 7.0,
+      "lessons": [
+        "R924–R926: dependências preparadas e sondadas em CPU não significam GPU disponível. Torchaudio 2.14.1 ausente foi recusado; par 2.11.0 CPU resolveu voz sem alterar Core. Suíte upstream não distribuída permaneceu not_shipped, nunca foi fabricada. Manifesto TDD de dependências migrou para árvore de cada byte fonte, não ignore list. Review foi convertido em testes; defaults de política e encerramento do grupo são contratos distintos de bypass. Lição: testar consentimento, outputs, admissões e identidade de ambiente antes de anunciar prontidão.",
+        "Score de processo interno, não qualidade científica ou validação externa."
+      ],
+      "timestamp": 1792381621.6397831,
+      "artifact_hashes": {
+        "integrations/itsfine_core.py": "e9f8537c6384a94985698cbec3c9a5feba3e4e29e01217cada1d59fac6561d74",
+        "integrations/itsfine_lifecycle.py": "5411998545c7192e4317a4bf164eb10a96d66cc6c2e37627174029774536d3f6",
+        "integrations/local_plugin_extraction.py": "4370b1dfded576fea38bc63983f2c2fdac651cc16ca3049f60282e2d43b392b3",
+        "integrations/local_lean.py": "817ca32114b4f8c70da9430a9852705c24ee0ee934f42c378d297ae3337c7ad2",
+        "sdd/tdd_history.py": "5bdeac2f46ab374074ad5fa44541ccde4a8391a820984e8f4547567bf183004b",
+        "marceloclaro/orchestrator.py": "872139ab189166e30e3ab53d9009c1b0bb36af9fb5b9927f0955879d07b90a41",
+        "marceloclaro/cli.py": "aa979a8c3e1bbc518d3f661eba056fde98f57529148a2545efc2cb9092499c86",
+        "scripts/finalize_core_r924.py": "2ecf78405c951a909ccb206f2dd858b131b43499ad92e6cd89bde611134f1431",
+        "tests/test_r924_itsfine_hardening.py": "c994bd911e7a06b6d54476da496a0826644a50df8f11e039af4971eaed31f2e1",
+        "tests/test_r925_managed_dependencies.py": "8107856ec47e5a82bd18895d14d9fc05c49fa02aea6e329ebb37076ac70165b7",
+        "tests/test_r926_itsfine_final_review.py": "8303ffb47de3ef327fee1fd98eb2e3760e55fd4827180186db6e57d0e6aec61a",
+        "tests/test_r923_itsfine_core.py": "3b9784cb042b47a2e6aa2d7be3b1f11ed54dd7c50fa50990580a01b203897d31",
+        "integrations/itsfine-locks/text-py312.txt": "12302d5bd60eee0e4673220819121480992d2bb63f9c424e95e8dd04ec69d9e9",
+        "integrations/itsfine-locks/voice-py312.txt": "0fcd2209b170f8d3dc2d7c659fb33da7a24a9a38640243f2c1fc7bcac5ba7458",
+        "specs/SPEC-935-R924-itsfine-lifecycle-hardening.md": "96f6e23d66c481dea68d8df4fd0b8781c735e7be36c72e855f849b493c809869",
+        "specs/SPEC-935-R925-managed-dependency-attestation.md": "d76617349ae066c8390b14e0cdd74a8667bd7e555af9f5c3a0f5800211176214",
+        "specs/SPEC-935-R926-itsfine-final-review.md": "bac7dae47f6b31a5f6c680d9e3f2682902ebc4097e03508643046281f24b3d0d",
+        "docs/ITSFINE_CORRECOES_R924.md": "5229083f9c75b75db5507bb7af24eb665e06c86187c0a465d31babaf3ba037d6",
+        "outputs/core-r924/final-gates.json": "b872c662a971634f5f13d906a9bf8f3ef1936c4bc2c3dd4437fcc327335b11ed",
+        "outputs/core-r924/engines-live.json": "4d6be6d8c4b231160741c395fd93a18f4eab479f61009c610f15f5a34720de1e",
+        "outputs/core-r924/installation.json": "fc662ac6db9884a683ca97502355dc95e7fa6c64c303a8a0b33dfbc881371c1a"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "specs/SPEC-935-R926-itsfine-final-review.md",
+        "outputs/core-r924/final-gates.json"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R929",
+      "objective": "R929: correções locais reproduzidas de persistência, CLI, grafo e diagnóstico",
+      "changes": [
+        "Preservação de extensões e linhas históricas; publicação atômica e recusa de escrita obsoleta",
+        "Alocação serializada de IDs nas três APIs e reserva de IDs históricos",
+        "Validação antecipada da CLI e códigos de saída de recusas Lean, podcast e perfis",
+        "Limite de resposta do AST com progresso garantido, amostragem explícita e contrato do consumidor",
+        "Doctor/core-check usam origem configurada e propagam advertências sem ocultar denominadores",
+        "Descoberta sem executor; cache limitado somente do parse de bytes relidos do baseline",
+        "Recusa explícita de banca_rate sem handler; contratos MCP e hashes documentais reconciliados"
+      ],
+      "score": null,
+      "lessons": [
+        "Testes locais, revisão por leitura e diagnóstico estrutural não aprovam produção científica",
+        "Históricos não modelados devem ser preservados e sinalizados, sem fabricar uma migração",
+        "A suíte integral excedeu o prazo; a seleção final não é substituto de aprovação global"
+      ],
+      "timestamp": 1792420664.0531816,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R930",
+      "objective": "R928: AI Edge Quantizer isolado e toy TFLite CPU validado",
+      "changes": [
+        "Fonte 87cda53576a55a71114a4945b3ff18e27c2fa42b sem checkpoints externos",
+        "53 arquivos selecionados e ambiente Python3.12 próprio",
+        "Modelo local 9424→4104 bytes, erro reproduzido pelo Core",
+        "469 testes selecionados e SDD6/6; R929 mantido separado",
+        "Evidências: outputs/core-r928/final-gates.json; hashes: outputs/core-r928/artifact-hashes.json"
+      ],
+      "score": null,
+      "lessons": [
+        "R928: separar leitura de URL de autorização para instalação. Fonte fixada foi adquirida sem modelos binários; ambiente isolado precisou pin compatível de backports.strenum e montagem estreita do alias Python uv, sem relaxar pip check ou sandbox. Relatório recomputa erros e recusa overclaim/deriva, preservando selos fora do MetaBus. Snapshots concorrentes R929 foram recusados e preservados, não convertidos em GREEN. A revisão delegada que excedeu prazo não contou como revisão concluída. O toy reduz bytes e passa erro numérico, mas não prova qualidade semântica, velocidade, LLM ou uso no Gallery.",
+        "Sem score de qualidade científica ou auditoria externa."
+      ],
+      "timestamp": 1792435071.2835941,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R932",
+      "objective": "R932: SPEC-935-R931 protocolo documental de piloto bibliográfico supervisionado",
+      "changes": [
+        "Contrato JSON com escolhas pendentes e permissões fechadas",
+        "Gates G0-G5, métricas e auditoria bibliográfica com denominadores",
+        "10 testes e gate documental local 4/4",
+        "Revisão independente não concluída; sem execução do piloto"
+      ],
+      "score": null,
+      "lessons": [
+        "Protocolo R931 com gates G0-G5 pendentes; validação documental local não é execução/produção. Revisão independente bloqueada por elegibilidade/cota/spec_id não associado; não alegar aceite. O fechamento monolítico expirou, portanto inspeção precede repetição e etapas devem ser idempotentes.",
+        "Nenhum score de produção ou qualidade científica. R928 e R929 permanecem contagens históricas separadas."
+      ],
+      "timestamp": 1792526071.7779472,
+      "artifact_hashes": {
+        "specs/SPEC-935-R931-piloto-pesquisa-supervisionado.md": "edd3f5964d98a4e827e922a19c281429eecc42aa005a3310c2a55e8cdb3c924a",
+        "tests/test_r931_research_pilot_contract.py": "45d9513dab8cb174b0c9be11f7db561ec72fc28c2af85d620142dd7e595b7edb",
+        "docs/piloto-pesquisa-r931/contrato.json": "02145a5042193d3471142028d16c818831b56e773b74bd0dd9c5e6923724320e",
+        "docs/PILOTO_PESQUISA_SUPERVISIONADO_R931.md": "52405196b61c7835802e07618c9b74643aa018af4f79bbb2dbc5780b8da4440e"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "specs/SPEC-935-R931-piloto-pesquisa-supervisionado.md",
+        "docs/PILOTO_PESQUISA_SUPERVISIONADO_R931.md",
+        "outputs/core-r931/final-gates.json",
+        "outputs/core-r931/review-status.json",
+        "outputs/core-r931/reflection.json"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R933",
+      "objective": "R933: Registro do bloqueio de revisão independente R931",
+      "changes": [
+        "Workflow com SPEC-935-R931 e RED válido bloqueou antes de inferência por ausência de agente elegível",
+        "Atualizado recibo de revisão para manter ausência de parecer explícita"
+      ],
+      "score": null,
+      "lessons": [
+        "Não repetir roteamento sem mudar elegibilidade; uma etapa bloqueada não é revisão nem falha científica.",
+        "Sem score de produção ou qualidade científica."
+      ],
+      "timestamp": 1792526214.4856548,
+      "artifact_hashes": {
+        "outputs/core-r931/final-gates.json": "e663bd834dcdea9b41699825339f38f7e7d3ab118fd946680cf78dc22273ad23",
+        "outputs/core-r931/review-status.json": "2b1a48ce7e88740c78f5ed57415253c2549391d62bc3bed099a106b024f7c319",
+        "outputs/core-r931/reflection.json": "43d77d700811e7b42a99c0ccca401353d2da1e391b9705f8a73c71365ce72caf"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "outputs/core-r931/final-gates.json",
+        "outputs/core-r931/review-status.json",
+        "outputs/core-r931/reflection.json"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R936",
+      "objective": "R935 GDC metadata-only version fallback and hard-stop validation",
+      "changes": [
+        "Deduplicated the GDC versions fetcher/resolver and single call site.",
+        "Added fail-closed status handling and tests for latest-ID, checksum/size, release-list, and stale-version mismatches.",
+        "Ran a stable two-pass metadata-only inventory: 614 files, 605 selected; stopped before download because size and workflow/release gates failed."
+      ],
+      "score": 0.65,
+      "lessons": [
+        "The GDC /files projection may omit default version/release values on individual records; reconcile via the fixed /files/versions endpoint in bounded UUID batches and compare identifiers, latest values, checksums, sizes, and releases.",
+        "A stable metadata manifest is not download approval: the 2 GiB cap and compatibility gates remain hard stops.",
+        "A static review executor may be blocked before execution when the routed SDD spec is not registered in that coordinator; report it as unavailable, not as a completed review."
+      ],
+      "timestamp": 1792561494.3731527,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R937",
+      "objective": "Aplicar o teto de 6 GiB autorizado no piloto GDC R934/R935",
+      "changes": [
+        "Registrei a autorização de 6 GiB na spec formal e no protocolo, preservando o bloqueio workflow/release.",
+        "Atualizei testes para teto inclusivo em 6 GiB e bloqueio em 6 GiB mais um byte; TDD RED→GREEN e SpecVerifier R934 8/8, R935 6/6.",
+        "Reexecutei o inventário metadata-only em duas passagens estáveis: 614 IDs, 605 selecionados, dentro do novo teto; download continua inelegível por incompatibilidade de workflow/release."
+      ],
+      "score": 0.7,
+      "lessons": [
+        "Mudança de limite de aquisição precisa refletir autorização humana em spec, protocolo, teste de fronteira e código antes de reexecutar inventário.",
+        "Aumentar o teto de bytes não elimina bloqueios de comparabilidade: manter workflow/release incompatível fail-closed.",
+        "Não baixar quando o manifesto mantém download_eligible=false, mesmo com o novo limite respeitado."
+      ],
+      "timestamp": 1792563695.8613002,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R941",
+      "objective": "R940: clonar bncc-dev/bncc-dados e registrar agente especialista read-only",
+      "changes": [
+        "Adicionada a spec R940 e teste hermético do perfil/registro",
+        "Clonado bncc-dev/bncc-dados em AO/ sem executar conteúdo upstream",
+        "Criado e registrado pelo primário o perfil bncc-dados-specialist com edição e comandos arbitrários negados",
+        "Integrada a entrada do agente em opencode.json preservando a configuração preexistente",
+        "Verificados 34 testes locais e doctor estrutural sem falhas"
+      ],
+      "score": 7.0,
+      "lessons": [
+        "A CLI gh instalada é v0.0.4 e não aceita gh repo clone; usei git clone HTTPS com hooks e smudge desativados e confirmei origin/HEAD sem executar scripts do clone.",
+        "A primeira tentativa de rota usou ecossistema desconhecido; a revisão subsequente foi bloqueada no preflight antes de qualquer execução por falta de spec_id e histórico RED formal. Nenhum task_id ou stake foi criado, portanto não houve agente a penalizar nem slashing aplicável; não declarar revisão externa.",
+        "Uma tentativa inicial de invocação do método de ciclo de vida falhou por sintaxe no wrapper Python antes de execução; a chamada foi corrigida e o ciclo oficial do primário registrou o perfil.",
+        "A configuração OpenCode já tinha alterações do operador. A criação precisava preservar os bytes semânticos existentes; o primário foi chamado com regeneração limitada à nova entrada, e o teste verificou a configuração customizada preexistente.",
+        "O teste de clone precisa tolerar clones limpos do Core: AO é checkout local não versionado, então o teste o verifica quando presente e pula apenas esse critério quando ausente."
+      ],
+      "timestamp": 1792662445.0519354,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R943",
+      "objective": "R942: criar especialista read-only CAEd/SPAECE e legislação educacional federal e do Ceará",
+      "changes": [
+        "Adicionadas especificação R942 e testes RED/GREEN do perfil",
+        "Criado e registrado pelo primário o perfil caed-spaece-educacao-ceara com ferramentas somente leitura",
+        "Atualizada opencode.json com a entrada do agente por merge preservador",
+        "Verificados 34 testes do ciclo de vida e R942; doctor sem falhas novas"
+      ],
+      "score": 6.5,
+      "lessons": [
+        "O escopo de todas as edições precisa ser condicionado a um universo de fontes primárias delimitado, inventariado e datado; combinações ausentes devem permanecer explícitas, não estimadas.",
+        "Foram acessíveis textos compilados oficiais do ECA, LDB, LBI e da Lei cearense 16.025/2016; esta última declara o PEE 2016-2024. O sucessor/estado vigente dos planos não foi confirmado; 404 de URL antiga não prova revogação ou ausência de sucessor.",
+        "As páginas/matrizes CAEd-SPAECE não foram recuperadas nesta rodada (transport error/504); as consultas Antigravity ficaram em fila sem resultado. A entrega não deve alegar corpus histórico coletado nem pesquisa externa concluída.",
+        "O teste RED antes de criar o perfil falhou porque o agente/config ainda não existiam; depois do registro, 34 testes passaram. O perfil foi registrado e não ativado para uma tarefa, portanto nenhum resultado do agente foi executado."
+      ],
+      "timestamp": 1792691809.6518395,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R945",
+      "objective": "R944: integrar agentes e MCPs read-only para CAEd/SPAECE e legislação educacional a partir do corpus Airam Veras",
+      "changes": [
+        "Criados dois agentes especialistas managed-v1 e atualizada a orientação do agente integrado",
+        "Implementado MCP de matrizes com dois bancos allowlisted em SQLite mode=ro e consultas parametrizadas",
+        "Implementado MCP legal com catálogo seed de IDs oficiais e GET allowlisted sem escrita/cache",
+        "Registrados os dois MCPs no gerador e em opencode.json preservando configuração preexistente",
+        "Testes R944 e ciclo de vida aprovados; REA estático usado em p2p.kiwi sem executar o alvo"
+      ],
+      "score": 7.0,
+      "lessons": [
+        "O corpus Airam Veras reúne matrizes públicas CAEd/SPAECE em caed-dados/spaece-dados, mas também contém resultados de alunos e arquivos RESTRITO. A MCP deve abrir apenas as duas bases de descritores explicitamente allowlisted e jamais pesquisar pastas de resultados.",
+        "As contagens 54 PDFs/129 matrizes/2.388 ocorrências e anos 2017–2026 vêm do README/validacao.json do corpus; são alegações do pacote, não validação independente. Ausência de 2020/2021 no snapshot não prova que não houve edição.",
+        "O MCP legal tem catálogo seed não exaustivo. Fetch HTTP de uma lei não decide vigência, revogação ou sucessão; PNE/PEE permanecem não verificados sem fonte oficial atual.",
+        "REA static analysis do P2P terminou a reconstrução de grafo Electron de 195 fontes, mas o gateway excedeu o orçamento stdio e a inspeção detalhada do Evidence não ficou disponível. Nenhum código foi executado. O app p2p.kiwi é de compartilhamento de tela e não foi integrado ao corpus educacional.",
+        "A CLI rea não está no PATH; o launcher Node é a via disponível. REA direto na integração conserva Evidence, mas respostas acima do limite exigem um fluxo de visualização compatível; não declare revisão externa concluída.",
+        "Os testes RED iniciais falharam pela ausência de módulos/perfis; depois de ajustes em buscas de Unicode e localizadores, 38 testes passaram. Não houve tarefa de agente executada nem stake para aplicar slashing."
+      ],
+      "timestamp": 1793064736.2432346,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R946",
+      "objective": "R944: finalizar agentes e MCPs educacionais com corpus local Airam Veras e limites de privacidade",
+      "changes": [
+        "Implementados MCPs read-only para matrizes CAEd/SPAECE e fontes legais oficiais allowlisted",
+        "Criados agentes especialistas de matrizes e legislação; atualizado o agente integrado para usar corpus Airam",
+        "Registrados os MCPs no gerador OpenCode e preservada a configuração preexistente",
+        "Confirmado read-only local: 129 matrizes CAEd em 2017, 2018, 2019, 2022–2026 e 7 matrizes SPAECE sem ano de edição no banco legado",
+        "Aprovados 43 testes de ciclo de vida, R942 e R944; doctor sem falhas novas"
+      ],
+      "score": 7.5,
+      "lessons": [
+        "A pasta Airam Veras está dentro do workspace. O MCP de matriz usa somente caed-dados/dados/caed.sqlite e spaece-dados/dados/spaece.sqlite em mode=ro; não consulta resultados individuais, diretórios RESTRITO, CSVs de alunos ou os scripts do usuário.",
+        "A consulta local constatou 129 chaves de matriz CAEd em 2017/2018/2019/2022/2023/2024/2025/2026, e 7 matrizes SPAECE no banco antigo sem campo de ano de edição. Não inferir ano ausente nem transformar o README/validacao.json em revalidação independente de todos os PDFs.",
+        "O MCP legal mantém um catálogo seed não exaustivo e busca somente IDs oficiais fixos por GET; 404, silêncio e plano 2016–2024 não determinam sozinhos vigência ou sucessão. Os agentes devem usar vigência não verificada quando faltar prova.",
+        "REA analisou estaticamente p2p.kiwi como app Electron, mas a entrega de Evidence foi limitada pelo orçamento de transporte e o Evidence não pôde ser inspecionado pela sessão CLI. Não executar o alvo nem declarar integração P2P; o projeto é de compartilhamento de tela e está fora do escopo educacional.",
+        "Uma tentativa direta ao nome rea falhou porque o binário não está no PATH; o core_command também não autoriza essa operação. A análise suportada foi feita por ecosystem_rea e CLI Node instalada, sem executar código p2p. Os erros de entrega não geraram task_id ou stake, portanto nenhum slashing era aplicável.",
+        "A primeira rodada de testes R944 falhou enquanto módulos e perfis estavam ausentes, e houve falhas intermediárias de expectativa/tipo. Depois dos ajustes, os testes focados e combinados passaram; registre os testes finais, não as tentativas RED como aprovação."
+      ],
+      "timestamp": 1793090631.1832995,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R948",
+      "objective": "R947: integrar AiramVeras ao Core por adaptador de dados interoperável e preservar o projeto local",
+      "changes": [
+        "Implementado bundle versionado airamveras.education-matrix com export records/JSON/CSV em memória",
+        "Conectado export_matrix_bundle ao MCP caed-spaece-data",
+        "Mantidos MCPs/agentes CAEd-SPAECE e de legislação read-only",
+        "Verificados 129 matrizes CAEd e 7 matrizes SPAECE nos bancos públicos allowlisted",
+        "Mantidos intactos arquivos Airam Veras locais, resultados restritos e upstream GitHub"
+      ],
+      "score": 7.0,
+      "lessons": [
+        "O contrato JSON/CSV/records é framework-neutral, mas não equivale a conectores nativos automáticos para todo framework; cada consumidor poderá implementar um adaptador específico.",
+        "A pasta destino já existe, contém matrizes, resultados potencialmente sensíveis e um repositório datamining em branch airam/spec001 com alterações não commitadas. Não sobrescrever nem reorganizar sem plano de merge aprovado.",
+        "O GitHub AiramVeras publica material de dossiê e dados potencialmente sensíveis; não foi localizado LICENSE na raiz consultada e o commit main é unsigned. Não foi feito vendor/clone sobre a pasta local nem push.",
+        "REA estático foi invocado no Electron p2p.kiwi e processou 195 fontes, mas a resposta detalhada excedeu transporte; p2p é compartilhamento de tela e não foi integrado ao domínio educacional. Nenhum alvo foi executado.",
+        "A operação formal tdd-history red devolveu accepted=false, então não alegar um recibo RED válido. O RED manual foi observado antes da implementação e os testes finais passaram; não houve agente executado nem stake a penalizar.",
+        "O corpus público local pode ser consultado em bancos allowlisted; nunca tratar relatórios ou arquivos RESTRITO como parte do conector de matrizes."
+      ],
+      "timestamp": 1793092303.3767517,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R949",
+      "objective": "R949: comparar AiramVeras upstream sem sobrescrever o projeto local e registrar o adaptador interoperável no Core",
+      "changes": [
+        "Criado clone upstream sparse em PROJETO 1/AiramVeras-upstream no commit bae2a702335dc01421f54a28802399d82dfbda0b",
+        "Sparse checkout limitado a matrizes BNCC públicas, dados CAEd/SPAECE e código selecionado de datamining; resultados e restrito não materializados",
+        "Comparados metadados dos bancos locais e upstream: 129 matrizes CAEd e 7 SPAECE em ambos",
+        "Adaptador Core AiramVeras mantém formato canônico JSON/CSV/records, sem copiar código do upstream",
+        "Testes combinados passaram e doctor não mostrou falhas novas"
+      ],
+      "score": 7.5,
+      "lessons": [
+        "O clone separado e sparse preserva o Airam Veras local, inclusive o repositório datamining com alterações não commitadas. Não substituir a pasta existente nem executar scripts do upstream.",
+        "A comparação foi de inventário de matrizes, não byte a byte dos 54 PDFs nem conteúdo integral. Os dois bancos listam 129 matrizes CAEd/2.388 ocorrências nos anos 2017, 2018, 2019, 2022–2026 e 7 matrizes SPAECE/146 descritores; o banco SPAECE antigo não informa ano de edição.",
+        "O sparse checkout exclui resultados individuais, diretórios RESTRITO, datamining/dados e README raiz que pode conter dados de estudantes. A presença de um arquivo no GitHub público não elimina riscos de privacidade nem concede licença de código.",
+        "O contrato airamveras.education-matrix entrega records/JSON/CSV, interoperabilidade por formato e schema; conectores nativos para frameworks específicos continuam sendo extensões futuras.",
+        "P2P.kiwi é um app de screen-sharing separado. A análise estática REA não entregou Evidence detalhado por limite de transporte; não houve execução nem integração P2P.",
+        "O TDDHistory probe RED R947 retornou accepted=false; testes manuais/automatizados finais passaram, mas não alegar recibo formal RED-GREEN selado ou revisão externa. Nenhum agente foi executado e não havia stake para penalização."
+      ],
+      "timestamp": 1793094668.4661214,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R950",
+      "objective": "R950: avaliar e comparar AiramVeras local, upstream sparse e adaptador Core",
+      "changes": [
+        "Confirmado clone sparse AiramVeras-upstream no commit bae2a702335dc01421f54a28802399d82dfbda0b, sem materializar resultados/restrito",
+        "Comparados bancos CAEd/SPAECE local e upstream por chave e conteúdo de descritores",
+        "Comparados diretórios de código selecionados sem executar scripts",
+        "Preservado o checkout local datamining airam/spec001 e configurações do operador"
+      ],
+      "score": 7.5,
+      "lessons": [
+        "Os bancos locais e upstream coincidem em 129 matrizes CAEd/2.388 registros e 7 matrizes SPAECE/146 descritores; todas as chaves matriz_id+codigo, descrições, páginas e hashes de fonte comparados coincidiram. O SPAECE legado não registra edição.",
+        "A comparação Git recursiva das fontes derivadas mostrou diferenças em CSV/JSON/texto de extração, arquivos de validação e .DS_Store, embora os registros normalizados das tabelas tenham coincidido. Portanto não declarar os diretórios ou PDFs byte-idênticos; a comparação realizada foi de linhas normalizadas e metadados.",
+        "O código datamining/airam upstream contém módulos adicionais e alterações sobre o checkout local, que está no branch airam/spec001 com mudanças pendentes. Não copiar ou fundir automaticamente antes de revisão incremental e licença.",
+        "A pasta GitHub AiramVeras contém relatórios/dados individuais sensíveis fora do sparse checkout. A cópia comparativa exclui resultados, RESTRITO, datamining/dados e README raiz; o checkout original não foi alterado.",
+        "A interoperabilidade implementada é por JSON Schema e records/JSON/CSV, não uma garantia de integração nativa automática com qualquer framework. Adaptações específicas exigem contrato e testes próprios."
+      ],
+      "timestamp": 1793103975.873915,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R952",
+      "objective": "R951: fortalecer a interoperabilidade de bundles de matrizes públicas CAEd/SPAECE",
+      "changes": [
+        "Adicionado JSONL estável com proveniência e compatibilidade de records/JSON/CSV.",
+        "Adicionado FrameworkExportRegistry com IDs validados, duplicata fail-closed e limites de saída configuráveis (2 MiB padrão, 16 MiB teto).",
+        "MCP continua read-only e expõe somente formatos declarados; especificação/testes R951 e descrições dos agentes atualizados."
+      ],
+      "score": 8.0,
+      "lessons": [
+        "TDDHistory exige falha de asserção para aceitar RED; falhas por import/atributo ausente não substituem um teste de comportamento.",
+        "Critérios SDD com evidence_contract precisam estar na seção executável e mapeados para nodeids específicos.",
+        "O par TDD e o SpecVerifier aprovam evidência computacional local; isso não é validação externa nem revisão humana.",
+        "Interoperabilidade por formato não deve ser descrita como conector nativo para framework sem implementação própria."
+      ],
+      "timestamp": 1793107020.3592982,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R953",
+      "objective": "Auditoria somente leitura do acervo AiramVeras, matrizes públicas e lacunas de governança",
+      "changes": [
+        "Inventariados metadados e repositórios Airam relacionados, sem abrir conteúdo de arquivos restritos.",
+        "Conferida a paginação das matrizes CAEd/SPAECE allowlisted e cotejada uma matriz pública 2026.1 com seu PDF fonte.",
+        "Identificado conflito crítico entre classificação restrita declarada e permissões Unix 0644/0755 nos resultados individuais; nenhuma permissão foi alterada."
+      ],
+      "score": 8.0,
+      "lessons": [
+        "Um catálogo de proveniência não é classificação de acesso: o campo de licença e status comparável não substitui público/interno/restrito.",
+        "O T01 estático percorre ZIPs/CSVs de resultados incluindo uma fonte marcada RESTRITO; reruns precisam de gate local explícito e exclusão ou autorização documentada.",
+        "Manifestos de outubro e hashes existentes não comprovam o estado atual de todo o acervo; sem rehash integral, tratar como snapshots declarados.",
+        "Acesso 0644 em CSV de estudante e 0755 nas pastas viola a intenção de restrição, mas remediação exige decisão explícita para não alterar os originais.",
+        "Dossiê público piloto de matriz não deve ser confundido com intervenção em alunos, equivalência BNCC, licença ou vigência."
+      ],
+      "timestamp": 1793122305.7404315,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R954",
+      "objective": "R954: aprofundar auditoria local do acervo AiramVeras e validar testes sem reabrir dados individuais",
+      "changes": [
+        "Revisado catálogo T01, código de ingestão e evidências T08 em leitura estática.",
+        "Executada a suíte sintética/local do datamining com 284 testes aprovados; os testes da fonte real restringem-se ao PDF curricular público e ao mapa agregado.",
+        "Confirmadas permissões 0644 em checkpoints/pacotes marcados restritos e 0755 em diretórios; nenhuma permissão ou dado foi alterado."
+      ],
+      "score": 8.0,
+      "lessons": [
+        "A autorização para prosseguir permite auditoria local, mas não elimina a necessidade de minimizar dados de crianças nem de não expor registros nominais.",
+        "O catálogo T01 inclui caminho/hashes do ZIP RESTRITO e o scanner pode abrir membros CSV; futuras varreduras precisam de allowlist explícita e exclusão de resultados até aprovação do custodiante.",
+        "284 testes passing verificam contratos de software, não revalidam todas as 54 fontes PDF, os CSVs individuais ou a análise pedagógica real.",
+        "Permissões 0644/0755 são incompatíveis com a intenção de acesso restrito; não corrigi sem uma autorização explícita de alteração."
+      ],
+      "timestamp": 1793129703.396721,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R956",
+      "objective": "R955: separar lojas Airam para preservar fontes, segregar observações restritas e evitar distorção analítica",
+      "changes": [
+        "Adicionado airam.banco com esquemas SQLite separados para matrizes públicas, observações restritas e análises agregadas.",
+        "Fontes originais são abertas apenas em read-only; criação não sobrescreve arquivos nem permite destinos dentro das raízes-fonte.",
+        "Lojas locais exigem diretórios 0700/arquivos 0600 em POSIX; identidade restrita exige pseudônimo de 64 hex; dimensões analíticas são allowlisted; pequenas células são suprimidas e resultados ficam pendentes de revisão.",
+        "Adicionados SPEC-935-R955 e testes Core; README Airam registra que o contrato é vazio e não migrou dados."
+      ],
+      "score": 8.0,
+      "lessons": [
+        "A implementação estabiliza o contrato, não a base de produção: não criar uma loja real sem manifestos, destino autorizado e migração versionada.",
+        "Matriz e observações individuais precisam permanecer em arquivos/bancos separados; as fontes originais continuam intactas.",
+        "Formato hexadecimal de ID pseudônimo não prova que foi gerado por HMAC; o segredo e a identidade permanecem fora desta camada.",
+        "O limiar técnico de n>=5 é apenas um piso interno, não uma garantia de anonimização; revisão humana e política do controlador continuam obrigatórias.",
+        "A ACL dos arquivos restritos existentes (0644/0755) não foi alterada; o módulo só protege novas lojas e falha fechado fora de POSIX.",
+        "TDD local e SpecVerifier passaram, mas não houve revisão externa nem importação de resultados reais."
+      ],
+      "timestamp": 1793193185.3012514,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R981",
+      "objective": "Governança de custo de tokens multi-superfície (Ollama, NVIDIA, OpenCode Zen/Go, Gemini, OpenAI, Antigravity): registro declarado de tarifas, orçamento fail-closed, cadeias free→capaz por complexidade de agente e comando /custos.",
+      "changes": [
+        "integrations/cost_registry.json: 13 superfícies e 142 tarifas com fonte e data (models.dev 2026-10-30).",
+        "integrations/cost_governance.py: estimativa, ordenação por custo, complexidade por cartão, cadeias e BudgetLedger fail-closed.",
+        "integrations/opencode_cli.py: custo por provider no catálogo, cadeia de fallback por agente, comando /custos.",
+        "integrations/opencode_commands.py e marceloclaro/cli.py: operação 'custos' separada da token economy.",
+        "specs/SPEC-981-governanca-custo-de-tokens.md e tests/test_r981_cost_governance.py (46 casos, RED→GREEN).",
+        "docs/GOVERNANCA_DE_CUSTO_DE_TOKENS.md."
+      ],
+      "score": 0.85,
+      "lessons": [
+        "Capacidades derivadas pelo loader não decidem o modelo do agente: o cartão declarado (id, categoria, tipo, tags) manda; derivados só entram como segundo passe.",
+        "Chave de classificação por substring produz falsos positivos ('bioinformatica' contém 'format'): casar por token declarado ou declarar exclusões.",
+        "Tarifa desconhecida não é tarifa zero: a estimativa devolve None e o orçamento bloqueia; jamais se presume barato o que não se sabe precificar.",
+        "Superfície de assinatura e free tier não têm preço por token: reportar a base correta e a ressalva, não um valor inventado.",
+        "0/0 no catálogo pode significar gratuito de verdade ou preço não publicado; a ressalva acompanha o dado.",
+        "TDD local, gates internos e doctor passaram; não houve fatura observada nem benchmark de qualidade entre modelos — a economia aqui é estimativa de tarifa."
+      ],
+      "timestamp": 1793401192.0539587,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R982",
+      "objective": "R982: corrigir regressão de fixação de modelo nos agentes literários, fechar a deriva documental e concluir o inventário GDC metadata-only (R934/R935).",
+      "changes": [
+        "cost_governance.head_model_for: supressão declarada por categoria/prefixo (policy no_fix_model_categories/no_fix_model_prefixes); a cadeia de fallback permanece em todos os agentes.",
+        "opencode.json regenerado pelo gerador oficial: 316 agentes, 18 MCPs, 34 comandos; agentes literários sem model explícito (contrato R276 preservado).",
+        "docs reconciliados pelo script oficial (reconcile_operational_docs) e atlas de arquitetura regenerado (build_architecture_maps + sync_readme_flowcharts + render_architecture_page + mermaid 12.0.0).",
+        "specs formais sem test_file vinculados (R915, R916, SPEC-981) e novo teste R915 hermético criado.",
+        "R935: reconciliação de /files/versions para todos os arquivos selecionados, compatibilidade por interseção exata de latest_release e exclusão metadata-only autorizada com rationale de proveniência.",
+        "Consulta GDC metadata-only reexecutada: 614 file ids únicos, 604 selecionados, release comum 46.0, nenhum download de conteúdo.",
+        "Contrato da superfície MCP atualizado (23 ferramentas reais) e teste R882 tornado autossuficiente (PNG gerado no tmp do teste)."
+      ],
+      "score": 7.5,
+      "lessons": [
+        "Fixação automática de modelo por política precisa de exceção declarada e versionada: reintroduziu silenciosamente o modo de falha de retorno vazio (R271/R276) em 300 agentes.",
+        "Artefato publicado (opencode.json, atlas, docs) diverge do construtor silenciosamente; existe pipeline oficial de regeneração — usá-lo em vez de editar contagens à mão.",
+        "Suíte completa deve rodar no interpretador do ambiente (.venv): dependências opcionais ausentes no python do sistema geravam 80 erros de fixture, não defeitos de código.",
+        "Testes de integração externa (Lean/Mathlib) são sensíveis à carga concorrente: prazo de 180s produz falso negativo sob a suíte completa.",
+        "Pendência histórica do EvolutionRegistry (78 entradas legadas) é degradação declarada, não defeito: migração reescreve histórico e exige decisão humana."
+      ],
+      "timestamp": 1793412720.7491198,
+      "artifact_hashes": {
+        "integrations/cost_governance.py": "0ead860d61844baa644e4a8d174f926d8c898cf8aa8a4fd8dc1b243a2b22a430",
+        "integrations/cost_registry.json": "bf4ad82796ce441d2b3c8a26278ef2f6a3cc268e6f8462c42eec23c554c22b28",
+        "integrations/opencode_cli.py": "4b2b3fb09c25cea671b93e8e882d904fd4ac4340dfec421377a06554929a54e9",
+        "integrations/gdc_metadata_inventory.py": "cbdc6814b8760465125cba8b111d86f3733bff9b6271bbf1c338848d090306f0",
+        "integrations/gdc_authorized_exclusions.json": "3a856c683627669b5a7202235417b6cd937999d7dc3fa34b9efc2b0f12739b30",
+        "opencode.json": "b2f9e15285020875152b941feea522451e2d131b20c0c1538fae7085e7e96976",
+        "specs/SPEC-982-fixacao-modelo-agentes-literarios.md": "f4cc13bdad22b89299387c9c45fa03c43afb6d7d7309b82aed5811ccb087be2b",
+        "specs/SPEC-935-R915-atualizacao-notebooklm.md": "4a4f878bc325283ee99b13405e5208e765d967644456afdb231baf04cd306b66",
+        "tests/test_r982_fixacao_modelo_agentes_literarios.py": "aed1683fd40bdcd474b368e4181032a1df80d4ec39e69cd2cab4490bc4606593",
+        "tests/test_r915_atualizacao_notebooklm.py": "d05f2dddb995d0ac1976b04dca17506d169845f4504b7adec70c90a1034275f3",
+        "outputs/core-r934/gdc-manifest.json": "061e48dec1696cf2c6b02c3eeb8ab7f48d4930f7a96623422bef5f25454da536",
+        "artigos/bio/protocolo_ccrcc_tcga_kirc_r934.md": "b28e6b69123c82572cd383a06ec5237798611c859e7d4b96bd9cf37ca12ff66b"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "specs/SPEC-982-fixacao-modelo-agentes-literarios.md",
+        "specs/SPEC-935-R935-gdc-metadata-inventory.md",
+        "tests/test_r982_fixacao_modelo_agentes_literarios.py",
+        "tests/test_r935_gdc_metadata_inventory.py",
+        "outputs/core-r934/gdc-manifest.json"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R983",
+      "objective": "R983: migração preservadora dos ciclos legados do EvolutionRegistry, com backup byte-a-byte, ledger de proveniência e campos cycles[] canônicos.",
+      "changes": [
+        "SPEC-983 e API explícita preview_legacy_migration/migrate_legacy_entries; o carregamento normal continua conservador e não grava.",
+        "Migração de 78/78 objetos não modelados; 24 IDs sintéticos determinísticos e 72 timestamps ISO-8601 convertidos para epoch com razões declaradas.",
+        "Backup integral antes da publicação: evolution/migrations/R983/cycles.json.before; SHA-256 bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360.",
+        "Payload original acessível no backup por source_index; legacy_migrations no topo liga índice, hash global e hash canônico; ciclos mantêm schema canônico.",
+        "Suite completa local: 8380 passed, 66 skipped, 0 failed; testes focados de migração/regressão também verdes.",
+        "Doctor estrutural saudável; verify_state_chain consistente. Isso valida formato e elos declarados, não o conteúdo histórico."
+      ],
+      "score": 8.0,
+      "lessons": [
+        "Migração de histórico deve ser opt-in e precedida por preview, não automática no loader/doctor.",
+        "Um backup byte-a-byte mais índice/hash por registro preserva origem sem duplicar payloads dentro de cada ciclo nem quebrar schema canônico.",
+        "ID/timestamp sintetizado ou normalizado precisa de reason code e não pode ser confundido com metadado observado original.",
+        "Doctor healthy certifica carregabilidade estrutural, não correção/veracidade dos ciclos antigos.",
+        "TDD de integração temporal pode falhar sob carga no run completo; confirmar isoladamente e comparar com falha objetiva antes de ampliar timeouts."
+      ],
+      "timestamp": 1793421454.5995345,
+      "artifact_hashes": {
+        "evolution/cycles.py": "af59f98a9f280747a5da4c216df9afedbc625aaa125fb78fea63956e61be1f49",
+        "scripts/migrate_evolution_legacy.py": "203ddc2a27edcb22b8564d441c9b8c5b910d5907a227cb2bab67360103a1ec29",
+        "tests/test_r983_evolution_legacy_migration.py": "4a19895de04d082999c6294bd8f2804816d1fd05fe90a55134572bfde82f98d2",
+        "specs/SPEC-983-migracao-preservadora-evolution-registry.md": "632541e695d101ada37a2cae669f70e3c25ba5621cffe85fadb2d32670f238e0",
+        "evolution/migrations/R983/cycles.json.before": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "specs/SPEC-983-migracao-preservadora-evolution-registry.md",
+        "tests/test_r983_evolution_legacy_migration.py",
+        "evolution/migrations/R983/cycles.json.before"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R984",
+      "objective": "R984: fazer a CLI de pesquisa v4.2 encaminhar os comandos nativos ao Core, mantendo os módulos científicos v4.1 explicitamente como fallback.",
+      "changes": [
+        "NATIVE_COMMANDS agora lista apenas research/articles/review/evidence/native-status; mesh/mission/living/synthesis/grade/causal/federation/production permanecem fallbacks v4.1.",
+        "marceloclaro.scientific_lab encaminha pesquisa, revisão e Evidence Graph a scientific_lab.native.cli sem chamar o dispatcher externo; native-status reporta a fronteira de capacidades.",
+        "doctor inclui native_layer e mantém scientific_layer separado, sem ocultar falha do pacote externo.",
+        "Documentação do bridge atualizada para v4.2 nativo + fallback v4.1.",
+        "RED/GREEN e regressões focadas: 43 passed; doctor estrutural do Core healthy 22/22. A suíte integral não foi repetida."
+      ],
+      "score": 8.0,
+      "lessons": [
+        "Inventário de comandos não pode inferir natividade pela presença de um controller externo: declare os conjuntos nativo e fallback separadamente.",
+        "Uma bridge científica pode ter um caminho essencial no Core e supercamada externa opcional; readiness e falha precisam aparecer em campos separados.",
+        "O pacote externo 4.1.1 continua com erro em seu próprio doctor por arquivo de referência ausente; não mascarar isso com o status da camada nativa.",
+        "Universalidade científica exige conectores rastreáveis, evidência e revisão humana; não é contagem de repositórios ou skills importados."
+      ],
+      "timestamp": 1793439620.6183794,
+      "artifact_hashes": {
+        "marceloclaro/scientific_lab.py": "d1759637cb09d818ba4b4979faa56f7a2c6ab1a08428eceff77fa19a2ddcc08c",
+        "scientific_lab/runtime.py": "c1116e94a0f967b78648b8e6e7aa30b8b02e25add483eab52af68cb31f002499",
+        "scientific_lab/README.md": "5478af82f8d9f317235d3069d85977c9c28d2eae386f55a73978abed1ef64bed",
+        "tests/test_r984_scientific_cli_routing.py": "f0a2d39628543183aabfcf46a6a8a5aa653db1dfa686ca085652eb2e22d984ed",
+        "tests/test_scientific_lab_v41_core_integration.py": "e0940ab733b86083e919406537bf0799f2a1173f386bc8bb23fdc29906fc8036",
+        "specs/SPEC-984-cli-cientifica-nativa-core-priority.md": "7a045eb2c94a057d6db88f496eb155a19e2e06036dbb36c3f172f5ecb8472f7f"
+      },
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "specs/SPEC-984-cli-cientifica-nativa-core-priority.md",
+        "tests/test_r984_scientific_cli_routing.py",
+        "docs/AVALIACAO_REPOS_R888_B.md"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R985",
+      "objective": "R985: tornar as dependências do pacote OdontoCA explícitas e reproduzir a suíte local sem dependência implícita de openpyxl.",
+      "changes": [
+        "Criados requirements runtime/dev com pins e instruções de setup em odonto/local/.",
+        "Adicionado teste de contrato do manifesto; suíte do pacote: 35 passed.",
+        "SpecRegistry aceitou o vínculo formal test_file após corrigir frontmatter; regressões focadas Core/BNCC: 51 passed; doctor Core: healthy 22/22.",
+        "SHA-256 do modelo coincidiu com o model card; ecosystem_scientific_verify não aceitou o formato do diretório e não é contado como validação."
+      ],
+      "score": 8.0,
+      "lessons": [
+        "Pins reproduzem apenas o ambiente observado e não garantem portabilidade universal.",
+        "Uma suíte local que valida hash e coorte não prova desempenho externo, eficácia clínica, utilidade clínica nem validação independente.",
+        "Registrar explicitamente test_file no frontmatter da spec: documentação que parece correta pode continuar invisível ao SpecRegistry.",
+        "Verificador genérico bloqueado por incompatibilidade de formato deve ser reportado como tal, sem converter o bloqueio em aprovação ou reprovação científica."
+      ],
+      "timestamp": 1793441182.4365544,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R986",
+      "objective": "R986: fazer o doctor da bridge científica separar a identidade do manifesto da validação operacional e expor falhas da supercamada sem ocultá-las.",
+      "changes": [
+        "installed_status agora declara o escopo limitado de versão/hash do manifesto e não apresenta isso como inventário de arquivos validado.",
+        "doctor emite package_validation por script, com exit code, timeout finito e saída livre do validador suprimida; falha produz doctor_status=degraded e exit não zero.",
+        "README e SPEC-935-R986 documentam o contrato, o bloqueio real de validate_ecosystem.py e a não alteração da instalação externa.",
+        "TDD R986: 7 passed; regressões direcionadas R984/native/v4.1/governança/SDD/BNCC: 58 passed; doctor Core structural 22/22."
+      ],
+      "score": 8.0,
+      "lessons": [
+        "Versão e hash do manifesto não comprovam integridade arquivo a arquivo nem saúde operacional; separar escopos e evidências.",
+        "Uma falha do doctor da supercamada não pode ser mascarada por camada nativa funcional nem por manifest hash correto.",
+        "Não fabricar referência ausente ou trocar pacote externo sem origem autoritativa, release e hashes confirmados.",
+        "Falha de preflight do workflow com spec_not_found impediu revisão delegada; nenhuma execução ou revisão independente foi observada, portanto não alegar revisão externa.",
+        "Catálogo de plugins em version_mismatch deve permanecer fail-closed; não baixar/downgradear versões ou confiar em scores PyPI sem licença/upstream verificados."
+      ],
+      "timestamp": 1793442259.5848777,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R987",
+      "objective": "R987: adicionar resiliência HTTP delimitada aos buscadores científicos, respeitando Retry-After sem esperas longas ou novas dependências.",
+      "changes": [
+        "research/searchers.py mantém urllib e acrescenta no máximo três tentativas para 429/500/502/503/504.",
+        "Retry-After delta-seconds/HTTP-date e backoff determinístico têm espera cumulativa máxima de 2 s; HTTP 4xx não retryable permanece imediato.",
+        "Testes HTTP herméticos e regressões de pesquisa: 93 passed, 1 skipped no conjunto combinado; doctor Core healthy 22/22."
+      ],
+      "score": 8.0,
+      "lessons": [
+        "A cópia de helper analisada em Science Skills usava fcntl, 7 retries e espera de 180 s; usar o padrão conceitual, não copiar implementação nem repetir seus limites longos.",
+        "Retry-After é sinal do servidor, mas a automação precisa impor teto de espera próprio e propagar o erro se exceder o orçamento.",
+        "O transporte não coordena taxa entre processos; declarar explicitamente esse limite em vez de chamar backoff simples de rate limiting."
+      ],
+      "timestamp": 1793442584.5342999,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R988",
+      "objective": "R988: auditar somente leitura o snapshot SQLite BNCC e reconciliar clone local com upstream público para fortalecer a proveniência do artefato real.",
+      "changes": [
+        "Clone AO limpo, remote https://github.com/bncc-dev/bncc-dados.git e HEAD 9c268978efa2aa250834c6a9edb6074432752838, igual ao main observado; commit upstream com assinatura valid.",
+        "SQLite aberto com mode=ro/query_only; PRAGMA quick_check=ok, versão dados-2026.08/schema-v1.1.0, tabelas/contagens e EF67LP08 observados; SHA-256 f5879793bba0c2f672d41158fd680dc79bda0df4d0ae2929830fe7335db90fd2.",
+        "tests/test_r940_bncc_dados_agent.py: 4 passed; nenhuma ferramenta ou pipeline do clone foi executado."
+      ],
+      "score": 8.0,
+      "lessons": [
+        "Um quick_check SQLite e contagens esperadas comprovam estrutura/snapshot, não equivalência integral a fontes oficiais nem reprodutibilidade da extração.",
+        "Fixar commit upstream, estado limpo e hash do banco evita confundir dados locais com código ou conteúdo mutável.",
+        "O teste do cartão do agente continua verificando configuração/permissões, não desempenho ou qualidade das respostas do agente."
+      ],
+      "timestamp": 1793442920.7150292,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R991",
+      "objective": "R991: criar camada Autor/Editor de alto rigor (estrutura IMRaD, estilo anti-plágio e registro de raciocínios).",
+      "changes": [
+        "academic/author_editor.py: MANUSCRIPT_SECTIONS, extract_structure, style_fingerprint (verbatim_spans=[] anti-plágio) e reasoning_registry (10 tradições mapeadas a motores).",
+        "CLI author-editor na fachada científica; sem fallback v4.1.",
+        "TDD: 14 passed; RED aceito; regressão R991+R989+R990+SDD 68 passed; doctor 22/22."
+      ],
+      "score": 8.0,
+      "lessons": [
+        "Estilo não se copia: perfil anti-plágio extrai características estruturais/lexicais, nunca trechos verbatim.",
+        "Um site interativo (innovationmap.at) não é repositório de artigos; não confundir tema de navegação com corpus bibliográfico.",
+        "Raciocínio formal (axiomas/silogismo/dúvida metódica/teoria dos jogos) clarifica, mas não prova verdade empírica nem vira Qualis.",
+        "Editar o teste após o RED invalida o par RED→GREEN; congelar testes antes de registrar o RED."
+      ],
+      "timestamp": 1793456937.5989225,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R992",
+      "objective": "R992: piloto OpenShell com instalação e validação reais de isolamento (WSL2, Podman rootless).",
+      "changes": [
+        "Instalado openshell 0.1.6-1 (deb) via instalador oficial Apache-2.0; gateway ativo com mTLS.",
+        "Compute driver podman fixado (auto-detecção falhou sem Docker); podman.socket ativado.",
+        "Isolamento observado: host read negado, write /etc negado, write /tmp ok, TCP egress bloqueado (1.1.1.1 e 93.184.216.34), DNS resolve.",
+        "Telemetria opt-out configurado (OPENSHELL_TELEMETRY_ENABLED=false); limpeza e recuperação observadas.",
+        "Software local: tests/test_r992_openshell_pilot.py 5 passed; recibo docs/evidence/R992_OPENSHELL_REAL.json."
+      ],
+      "score": 8.0,
+      "lessons": [
+        "Presença de Podman não basta: a detecção automática do gateway não achou driver; fixar OPENSHELL_COMPUTE_DRIVER explícito.",
+        "Egress negado mesmo por IP cru (sem bypass via DNS) é o comportamento observado; mas a política default só expõe filesystem/Landlock, então a negação de rede foi inferida do comportamento.",
+        "Opt-out de telemetria configurado não equivale a ausência comprovada de egress do gateway; captura de pacotes seria necessária.",
+        "Isolamento observado não torna a saída de um agente dentro do sandbox verdadeira ou confiável."
+      ],
+      "timestamp": 1793458447.5291705,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R993",
+      "objective": "R993: busca OA real com temas do Innovation Map (Envisioning) como semente, via conectores do Core.",
+      "changes": [
+        "Busca real OpenAlex/Crossref/arXiv/EuropePMC sobre 6 temas de fronteira; resultados registrados em docs/evidence/R993_OA_SEARCH_REAL.json.",
+        "4 DOIs amostrados verificados em Crossref (fonte primária): quantum computing, robotics, marine energy storage, synthetic biology.",
+        "EuropePMC timeout em 1 tema (biotechnology synthetic biology): registrado como erro real, não mascarado."
+      ],
+      "score": 8.0,
+      "lessons": [
+        "Um gráfico interativo (innovationmap.at) não é corpus: temas como semente, nunca extração de papers da URL.",
+        "DOI verificado em Crossref comprova existência da referência, não relevância, qualidade ou acesso aberto do PDF.",
+        "Falha de um conector (timeout EuropePMC) deve ser registrada, não ocultada ou substituída por resultado de outra fonte."
+      ],
+      "timestamp": 1793458571.1557615,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R994",
+      "objective": "R994: executar o conselho de 13 cientistas de fato via executor real (agy).",
+      "changes": [
+        "Execução real via agy 1.4.12 (Antigravity CLI): 12/13 pareceres validados (11 partial, 1 blocked no ethics).",
+        "Robustez: decode_json remove fence markdown; findings aceitam objeto→string; partial não interrompe, blocked interrompe.",
+        "Recibo docs/evidence/R994_COUNCIL_REAL.json; external_validation=false, confidence_promoted=false."
+      ],
+      "score": 8.0,
+      "lessons": [
+        "Modelo real embrulha JSON em fence e devolve findings como objetos; normalizar sem afrouxar a checagem de evidência literal.",
+        "Parecer partial é entrega válida; blocked (sem entrega) é que interrompe — senão a honestidade dos cientistas para a fonte fraca derruba o ciclo.",
+        "Ethics bloqueou corretamente: sem consentimento/dados reais, não há avaliação ética; fail-closed."
+      ],
+      "timestamp": 1793460406.0027106,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R995",
+      "objective": "R995: integrar a busca OA verificada ao author_brief do R991.",
+      "changes": [
+        "author_editor.py: build_references_from_oa (aplana/dedup) e author_brief com bibliography + section_references + references_verified_count.",
+        "Integração real: 113 referências dedup de R993, 4 DOIs verificados em Crossref, mapeadas a introducao/fundamentacao/referencias.",
+        "Recibo docs/evidence/R995_AUTHOR_BRIEF_INTEGRATED.json; 17 testes R991 passam."
+      ],
+      "score": 8.0,
+      "lessons": [
+        "Dedup por DOI preserva a primeira ocorrência; título casefold é chave só quando DOI ausente.",
+        "verified=true só para DOI conferido em Crossref; os demais permanecem verified=false — não inflar o contador."
+      ],
+      "timestamp": 1793460507.8925352,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R996",
+      "objective": "R996: captura de pacotes para comprovar egress negado e telemetria opt-out do OpenShell.",
+      "changes": [
+        "tcpdump instalado; captura 40s em eth0 (excluindo SSH/DNS).",
+        "Egress do sandbox: nenhum SYN saiu para 1.1.1.1/93.184.216.34 — negado no nivel de rede.",
+        "Telemetria do gateway: zero trafego de saida na janela (opt-out); unico pacote foi FIN para mirror Ubuntu (residuo do apt).",
+        "Recibo docs/evidence/R996_OPENSHELL_PCAP.json."
+      ],
+      "score": 8.0,
+      "lessons": [
+        "Egress negado no nivel de rede (SYN nao sai) e evidencia mais forte que o teste comportamental, mas nao localiza a camada que nega.",
+        "Janela curta prova nao observado, nao ausente; telemetria exige filtro por endpoint e captura longa."
+      ],
+      "timestamp": 1793460602.1577418,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R997",
+      "objective": "R997: ampliar verificacao de DOIs da busca OA via Crossref e reintegrar ao author_brief.",
+      "changes": [
+        "Verificados 77 de 78 DOIs via Crossref (fonte primaria); 113 refs no author_brief.",
+        "Extracao de year/date-parts robusta para variacoes malformadas do Crossref.",
+        "Recibo docs/evidence/R997_AUTHOR_BRIEF_VERIFIED.json; references_verified_count=77."
+      ],
+      "score": 8.0,
+      "lessons": [
+        "Crossref date-parts pode vir como [2020] em vez de [[2020]]; normalizar defensivamente sem perder o dado.",
+        "Um DOI que nao resolve nao vira verified — nao inflar o contador nem inventar referencia."
+      ],
+      "timestamp": 1793461449.6650927,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R998",
+      "objective": "R998: captura dirigida ao endpoint de telemetria identificado + re-prova de egress.",
+      "changes": [
+        "Endpoint de telemetria identificado: events.telemetry.data.nvidia.com (OPENSHELL_TELEMETRY_ENDPOINT) + OTLP.",
+        "Captura 90s: nenhuma consulta DNS, nenhum TCP de telemetria, nenhum OTLP, nenhum SYN de egress do sandbox.",
+        "Recibo docs/evidence/R998_OPENSHELL_DIRECTED_PCAP.json."
+      ],
+      "score": 8.0,
+      "lessons": [
+        "Identificar o endpoint no binario torna a captura dirigida muito mais forte do que filtrar egress generico.",
+        "Telemetria desabilitada nem tenta resolver o DNS do endpoint: e uma assinatura clara de opt-out."
+      ],
+      "timestamp": 1793461991.501894,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R999",
+      "objective": "R999: rodar o conselho DENTRO do sandbox OpenShell com agente real (agy).",
+      "changes": [
+        "agy (234MB) + OAuth token carregados no sandbox; egress pontual ao Google via network_policies (protocol tcp).",
+        "Inferencia real DENTRO do sandbox: agy -p OK retornou OK; conselho validou 3/13 cientistas (problem/search/curation) com citacao literal.",
+        "Run completo de 13 dentro do sandbox estourou o timeout de 590s (exec no sandbox ~37s/papel).",
+        "Sandbox com credencial deletado apos o teste; recibo docs/evidence/R999_COUNCIL_IN_SANDBOX.json."
+      ],
+      "score": 8.0,
+      "lessons": [
+        "gRPC do agy exige protocolo tcp (sem access/enforcement) no network_policies; full/rest nao cobrem transparent TCP.",
+        "Agente real dentro do sandbox exige copiar credencial; limpar (deletar sandbox) e obrigatorio apos o teste.",
+        "exec no sandbox adiciona ~overhead por papel; orcamento de 13 papéis dentro do sandbox precisa de mais tempo que no host."
+      ],
+      "timestamp": 1793463098.9679728,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1000",
+      "objective": "R1000: alternativa ao OAuth do agy — executor Gemini via GEMINI_API_KEY dentro do sandbox.",
+      "changes": [
+        "Compilado gemini-client (Rust/rustls/ureq, skip-verify TLS) que chama a API Gemini com GEMINI_API_KEY, sem OAuth/keyring.",
+        "Binario roda DENTRO do sandbox OpenShell (egress rest:read-write; MITM do proxy aceito via skip-verify).",
+        "Conselho rodou dentro do sandbox via Gemini: 7, 5 e 3 cientistas em 3 runs, ate a cota gratuita esgotar (HTTP 429).",
+        "Recibo docs/evidence/R1000_COUNCIL_13_IN_SANDBOX.json."
+      ],
+      "score": 7.0,
+      "lessons": [
+        "GEMINI_API_KEY e uma alternativa portatil ao OAuth do agy; nao depende de keyring.",
+        "O proxy OpenShell faz MITM TLS; cliente precisa skip-verify OU confiar no CA do proxy.",
+        "Cota gratuita do Gemini esgota rapido (429); o bloqueio final e externo, nao de codigo.",
+        "Mudar o binario no sandbox invalida o hash registrado pela politica (binary integrity violation); recriar o sandbox."
+      ],
+      "timestamp": 1793467605.0763276,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1001",
+      "objective": "R1001: persistir o gemini-client e documentar a reproducao do conselho no sandbox.",
+      "changes": [
+        "integrations/gemini_client/ (Cargo.toml, src/main.rs, README, .gitignore): executor Gemini via GEMINI_API_KEY.",
+        "docs/PROCEDIMENTO_OPENSHELL_GEMINI_CONSELHO.md: instalacao OpenShell, build, upload, egress rest, conselho, gotchas e limites.",
+        "SPEC-935-R1001 + tests (7 passed, RED aceito)."
+      ],
+      "score": 8.0,
+      "lessons": [
+        "Um executor LLM portatil (chave de API) evita OAuth/keyring e e reproduzivel em sandbox headless.",
+        "Documentar gotchas (integridade de binario, MITM TLS, protocolo rest, quota) torna o procedimento reproduzivel."
+      ],
+      "timestamp": 1793468750.871692,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    }
+  ],
+  "legacy_migrations": [
+    {
+      "migration_id": "R983-v1",
+      "source_index": 31,
+      "round_id": "R223",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "0bd2bb2d4b658536530e06e0ea54e274b8d30b6f5908d440a1c319a84fcb0693",
+      "reason_codes": [
+        "changes_not_list",
+        "invalid_list_fields"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 173,
+      "round_id": "R357",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "0b7422a3b07d8bf42cde2d1d7cca53f10d760038c8ece7cfb84c768e19457969",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 178,
+      "round_id": "R362",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "b25564e8df9ced8e6430bf5c6a29ab7f3d29c9e6957933e45f9a1e06acac9b2c",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 179,
+      "round_id": "R363",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "153fbe6645ba7666c86818766aa57d01ebccac044c52e41048b41cc7a6145881",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 180,
+      "round_id": "R364",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "fe4d70b94a2be542541105e276e349a49ef662a251a8cac93d14bc30412848fc",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 181,
+      "round_id": "R365",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "409c554a3ddc441b060929f1408e7a5b5eff20d68ef70d4d20c22f4352cb546f",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 182,
+      "round_id": "R366",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "01cebddc84d321879e2a9dedda52102772b38b08016e43ee8ece81d657e52ee2",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 183,
+      "round_id": "R367",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "5d7bbe9946dc88fef86d975ccf8e1b005a83ebfe9e687f81704cac0b2ff49b63",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 184,
+      "round_id": "R368",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "e1fa3d79fa39c6246d15384cff9d6faca018f3d9eff778e6713b0fdf4a4ea847",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 185,
+      "round_id": "R369",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "adbdb239cf5a457de983ce0716c8ccb306d99337acb85fb6030604d54a96247b",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 186,
+      "round_id": "R370",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "a6dd420c8167f3bae9c62022d2cd45bff1d477e8f1f2acbc0709e0d4e8d740d3",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 187,
+      "round_id": "R371",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "d322eee7fd569ed369c1678537c636e808c53519c4169a478bc6ae58897e257a",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 188,
+      "round_id": "R372",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "30639920a84fe48021db7aa68ea3679e66341e19d59d980fae708bca6f70438c",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 189,
+      "round_id": "R373",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "9ac910dd9e0a8ce09c233492d4a3bd832defed186d69d7e22292c7947a402ff0",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 190,
+      "round_id": "R374",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "d646b9d34ee536fff5eb8579856e2456d45779079f2afc33237468a03e9f8382",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 191,
+      "round_id": "R375",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "903fda1869ae24a97d91b06df25317eff5bd6589cf58e1cc20d81e3ceeb3ef6e",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 192,
+      "round_id": "R376",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "75e0327e6003bac5bebb52d0bb698ece1296652ddad6b9b15cb2dba0732919b1",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 193,
+      "round_id": "R377",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "1e560e715b6d998f50f19d008239b6ea6fc1336e20edb3c6c7dd5dc59e4d26d2",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 194,
+      "round_id": "R378",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "276aae5a635b72d952ef0365a2a10dbafba2516d455fd9884966fc8d90ee8b1f",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 195,
+      "round_id": "R379",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "5a74d9d76d83eabe8e6c43cb5a919da79c50de7ac45d9a983ea7ba3a4b5be64a",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 196,
+      "round_id": "R380",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "4aca4ed84543ae5b880582f69b0253316c313efd3f920b73224730edee7448bb",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 236,
+      "round_id": "R419",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "c4ed09b10ed2cc813b2cc1163f7126bcd9a2db26e17f28152558b6ff2988222f",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 237,
+      "round_id": "R420",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "c71119b4d41f90b4df70cf63f845c6e5b6ba5cd873cb3c0d281805e12bd747e4",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 238,
+      "round_id": "R421",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "06d144ef0aa188c38ce541aa3273362035b8df604dacc9ae0a1de4ca9755c973",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 239,
+      "round_id": "R422",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "c438f35659ed481ddc7164d8fa31e7c860893a4b2113cde349598f59dcb1e44a",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 240,
+      "round_id": "R423",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "fb2a2bbaf5599f860f324f67e8e7213733cc1340188fb97b771db0d111d892ac",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 241,
+      "round_id": "R424",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "d0f3619baa838a6efb0cd4f0c53fb68002d1dc147c9ac376ff78c066ec4e975c",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 242,
+      "round_id": "R425",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "50faeef015f728bb24682f91b296c206a241528ffad6cc18f14d51757b51ca45",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 243,
+      "round_id": "R426",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "ad2246d82c82f2c7e090779ad396a7f01d2c76b39428ad773071504c527496f9",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 318,
+      "round_id": "legacy-entry-318-fbe30dee17be",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "fbe30dee17be5f4771167164de727083fc32e0ab4275a0d2bb695b1fd446cc6f",
+      "reason_codes": [
+        "changes_scalar_wrapped",
+        "invalid_list_fields",
+        "synthetic_identity"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 319,
+      "round_id": "R506",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "ae28873d24661cfc2a0b8396f266f561676a372e347ca642007404450757ea21",
+      "reason_codes": [
+        "changes_scalar_wrapped",
+        "invalid_list_fields"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 320,
+      "round_id": "R507",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "413225577d29cd5715e409d25838a63afd80705785668ab8612e55b5c1891126",
+      "reason_codes": [
+        "changes_scalar_wrapped",
+        "invalid_list_fields"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 338,
+      "round_id": "legacy-entry-338-3637df06f7b2",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "3637df06f7b20aafd617ccc64c0b5870fd369beeaf04c77c5f1dbd27890b04fb",
+      "reason_codes": [
+        "invalid_timestamp",
+        "merkle_root_invalid",
+        "origin_commit_invalid",
+        "state_merkle_root_invalid",
+        "synthetic_identity",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 339,
+      "round_id": "legacy-entry-339-fee770c7044b",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "fee770c7044bc994c42b299c7d2cd3564caff3f6bc42ea1e350f99406def30fb",
+      "reason_codes": [
+        "invalid_timestamp",
+        "merkle_root_invalid",
+        "origin_commit_invalid",
+        "state_merkle_root_invalid",
+        "synthetic_identity",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 340,
+      "round_id": "legacy-entry-340-f86e8563cfe3",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "f86e8563cfe38cebc4198a5797eb2944a876f4563cf937bfe01a066aa32aeac0",
+      "reason_codes": [
+        "invalid_timestamp",
+        "merkle_root_invalid",
+        "origin_commit_invalid",
+        "state_merkle_root_invalid",
+        "synthetic_identity",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 341,
+      "round_id": "legacy-entry-341-ff956fc813e5",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "ff956fc813e51cb1c21e87c81ab24659130b302e823fe0d6ef999a4708cca5a3",
+      "reason_codes": [
+        "invalid_timestamp",
+        "merkle_root_invalid",
+        "origin_commit_invalid",
+        "state_merkle_root_invalid",
+        "synthetic_identity",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 342,
+      "round_id": "legacy-entry-342-a1bbb746e204",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "a1bbb746e2049717eb7bde28b47e1b4bcc9f0487bedd26efde67b579bf6c2763",
+      "reason_codes": [
+        "invalid_timestamp",
+        "merkle_root_invalid",
+        "origin_commit_invalid",
+        "state_merkle_root_invalid",
+        "synthetic_identity",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 343,
+      "round_id": "legacy-entry-343-c10230e21658",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "c10230e21658595c7b82a95011fb19c4babe1d4f3b95b3ffae79096f289832be",
+      "reason_codes": [
+        "invalid_timestamp",
+        "merkle_root_invalid",
+        "origin_commit_invalid",
+        "state_merkle_root_invalid",
+        "synthetic_identity",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 344,
+      "round_id": "legacy-entry-344-2d93eba1017d",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "2d93eba1017ddbc120afaa4485ac83c89b11f173f7f9d4cd2a974289eb9a04b1",
+      "reason_codes": [
+        "invalid_timestamp",
+        "merkle_root_invalid",
+        "origin_commit_invalid",
+        "state_merkle_root_invalid",
+        "synthetic_identity",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 345,
+      "round_id": "legacy-entry-345-1c8536968f10",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "1c8536968f10d712f7e63d07c7be121f21b86f537226d7ad69425c7e884b97e3",
+      "reason_codes": [
+        "invalid_timestamp",
+        "merkle_root_invalid",
+        "origin_commit_invalid",
+        "state_merkle_root_invalid",
+        "synthetic_identity",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 346,
+      "round_id": "legacy-entry-346-1469c1348801",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "1469c13488013671901b3e1c53188ccdd9e46a37b4249eecfd1e97f65f994303",
+      "reason_codes": [
+        "invalid_timestamp",
+        "merkle_root_invalid",
+        "origin_commit_invalid",
+        "state_merkle_root_invalid",
+        "synthetic_identity",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 347,
+      "round_id": "legacy-entry-347-3a595ccc3b4c",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "3a595ccc3b4ca0e6c3b09df1f3a2c86af76facef785e78ca4582c4776d873d62",
+      "reason_codes": [
+        "invalid_timestamp",
+        "merkle_root_invalid",
+        "origin_commit_invalid",
+        "state_merkle_root_invalid",
+        "synthetic_identity",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 348,
+      "round_id": "legacy-entry-348-09cdcb5a68b6",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "09cdcb5a68b64f9f646dd20f909b7fe5f1ff0fed89f61c589b517f07b81fb868",
+      "reason_codes": [
+        "invalid_timestamp",
+        "merkle_root_invalid",
+        "origin_commit_invalid",
+        "state_merkle_root_invalid",
+        "synthetic_identity",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 349,
+      "round_id": "legacy-entry-349-be2f7c06e409",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "be2f7c06e409e767f767468cd996564818fe6a061d85c9a2d5ef8ad5c0b5f2f2",
+      "reason_codes": [
+        "invalid_timestamp",
+        "merkle_root_invalid",
+        "origin_commit_invalid",
+        "synthetic_identity",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 350,
+      "round_id": "legacy-entry-350-843a3cb72108",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "843a3cb721085a0ddba5de08ee9311b24a1f95bd5b78fba3d3f01f593c791700",
+      "reason_codes": [
+        "invalid_timestamp",
+        "merkle_root_invalid",
+        "state_merkle_root_invalid",
+        "synthetic_identity",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 351,
+      "round_id": "legacy-entry-351-e4a38f6ee254",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "e4a38f6ee254c61f2519731bd3d67849c3701ef935dc3cebec116a2940f6136d",
+      "reason_codes": [
+        "invalid_timestamp",
+        "merkle_root_invalid",
+        "origin_commit_invalid",
+        "prev_state_merkle_root_invalid",
+        "state_merkle_root_invalid",
+        "synthetic_identity",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 352,
+      "round_id": "legacy-entry-352-81e6af910b08",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "81e6af910b080b466fe865c47a22aad3f861b980deecf08bc4a27210640eebea",
+      "reason_codes": [
+        "invalid_timestamp",
+        "merkle_root_invalid",
+        "origin_commit_invalid",
+        "prev_state_merkle_root_invalid",
+        "state_merkle_root_invalid",
+        "synthetic_identity",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 353,
+      "round_id": "legacy-entry-353-d0be57bdbe74",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "d0be57bdbe74e405dedc4e327bebcb9e2fea7a9ecb16b97011ba1d680ac45592",
+      "reason_codes": [
+        "invalid_timestamp",
+        "merkle_root_invalid",
+        "origin_commit_invalid",
+        "prev_state_merkle_root_invalid",
+        "state_merkle_root_invalid",
+        "synthetic_identity",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 354,
+      "round_id": "legacy-entry-354-9701007a207c",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "9701007a207ca0147150a6cc2cb62370ba85dcb16051cdeb8f15864101e42570",
+      "reason_codes": [
+        "invalid_timestamp",
+        "merkle_root_invalid",
+        "origin_commit_invalid",
+        "prev_state_merkle_root_invalid",
+        "state_merkle_root_invalid",
+        "synthetic_identity",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 355,
+      "round_id": "legacy-entry-355-5b663f525c41",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "5b663f525c416b9e590b2e7145ff5a55c3951daad944cba406e4ac1725a5623a",
+      "reason_codes": [
+        "invalid_timestamp",
+        "merkle_root_invalid",
+        "origin_commit_invalid",
+        "prev_state_merkle_root_invalid",
+        "state_merkle_root_invalid",
+        "synthetic_identity",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 356,
+      "round_id": "legacy-entry-356-e35914b50306",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "e35914b503062d6c2d13175f84093158644ade1b0f074076d54ee87aba4accdf",
+      "reason_codes": [
+        "invalid_timestamp",
+        "merkle_root_invalid",
+        "origin_commit_invalid",
+        "prev_state_merkle_root_invalid",
+        "state_merkle_root_invalid",
+        "synthetic_identity",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 357,
+      "round_id": "legacy-entry-357-6342bc1ea098",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "6342bc1ea098a25d5d8f421833eb8bc376e0e0742c76df55db52b291c0916e5d",
+      "reason_codes": [
+        "invalid_timestamp",
+        "merkle_root_invalid",
+        "origin_commit_invalid",
+        "prev_state_merkle_root_invalid",
+        "state_merkle_root_invalid",
+        "synthetic_identity",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 358,
+      "round_id": "legacy-entry-358-7eb80c5bec74",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "7eb80c5bec749928be56555ee83fe22cc4cef8147db7aa6611347de85106a85d",
+      "reason_codes": [
+        "invalid_timestamp",
+        "merkle_root_invalid",
+        "origin_commit_invalid",
+        "prev_state_merkle_root_invalid",
+        "state_merkle_root_invalid",
+        "synthetic_identity",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 359,
+      "round_id": "legacy-entry-359-ff549875bb51",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "ff549875bb51f77964db86803750a9829759deabd461498f25aaf3754bfbb01c",
+      "reason_codes": [
+        "invalid_timestamp",
+        "merkle_root_invalid",
+        "origin_commit_invalid",
+        "prev_state_merkle_root_invalid",
+        "state_merkle_root_invalid",
+        "synthetic_identity",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 360,
+      "round_id": "legacy-entry-360-85d9c7600e4e",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "85d9c7600e4e35ab5e337610dca997de66ee2b741d19a6ec77240ed5eddafdd6",
+      "reason_codes": [
+        "invalid_timestamp",
+        "merkle_root_invalid",
+        "origin_commit_invalid",
+        "prev_state_merkle_root_invalid",
+        "state_merkle_root_invalid",
+        "synthetic_identity",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 369,
+      "round_id": "R525",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "64ffe215865641b61cb7841336ce2cb06eca409ac9fff8eb0647da6e64acb987",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 370,
+      "round_id": "R526",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "5794b1b1458ffbcad74542c6d474c1659f37ed862e0346482a51311645f745a0",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 371,
+      "round_id": "R527",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "254bb5b7439bdd4bd795edebc20979b404d7d3cc81f9217f97e6459224ab680f",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 372,
+      "round_id": "R528",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "28eb2869f5faffadfc5fbbb4cb38fad91e9f7ebac8bccde7b611a6ba762bea39",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 373,
+      "round_id": "R529",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "497464c198a799abcf448c684b13e556943787c7e2807efece6eda14e4a5ae22",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 374,
+      "round_id": "R530",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "98910eb7839d9155fc5ee80c1cc5a069e8dc5ee05d37599c422bf787c660ea4f",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 375,
+      "round_id": "R531",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "d3321b2fcd7b6e0856b5cdddc406409ccfb65861c6d16705765409e022019778",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 376,
+      "round_id": "R532",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "75aa0a6c6df830bd2759653021214e65830f491ae390cbf06e2ec633e312f8a7",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 377,
+      "round_id": "R533",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "6fb803dc985b7f3ee3b844f3296b1194533c2bd69e7e493bd3fa47fd99c28e4d",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 378,
+      "round_id": "R534",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "1ab8e25f012a1b0555c835bead0160000e7e15480ea93594facece6f27640b8a",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 379,
+      "round_id": "R535",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "acabaef6d81f5490a8e0281521c685ad7ee99a8ff2c10ad1ce9d7829a446ee83",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 380,
+      "round_id": "R536",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "6d6d1a864665b4ad566b4116b56df5bdc424dce815d4f0f0f237910ce533ce80",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 381,
+      "round_id": "R537",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "0c72059c6ec8372cb8a361b78fbf2b41f7527512025efe279b27831dadc956d8",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 382,
+      "round_id": "R538",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "eadbc1f627be1725eb1deca822dfd5a0919443a465289dae2ab427d63020959b",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 383,
+      "round_id": "R539",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "fe717bca45ad517700a2d52694dafb8bac6e2e8bab383fbad40170d610414006",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 384,
+      "round_id": "R540",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "eedbe4fb8cffe6aee27455642a394f4c1541779f207886282fb5d55c2645a769",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 385,
+      "round_id": "R541",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "a325ef15f5e4dd771be2008c7a83cdca21e7b46af07428f0c745cd07114874f7",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 386,
+      "round_id": "R542",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "4d51976f39d31ec9b3c69fc9e015f4f906214d2833382e119fcab7197afc8827",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 388,
+      "round_id": "R544",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "128f164bb40244a326fd40fc12a3cff698569d0a011f420e07ad899e0b5a2487",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 389,
+      "round_id": "R545",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "9ee4420bec3be7972d7cc64ae5199f9b080fe712f38b613b20a45ce0890434c8",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 390,
+      "round_id": "R546",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "8a38154cd283aa5c8f575b061a3d0a0c0db41e4a9967613ca1aabf42c8a7f044",
+      "reason_codes": [
+        "invalid_timestamp",
+        "timestamp_iso8601_normalized"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 434,
+      "round_id": "R609",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "dafbb58069f4e5fb9688235332b1bb88a6260770f9a1f7dc88d8f3ff58e10979",
+      "reason_codes": [
+        "invalid_list_fields",
+        "lessons_scalar_wrapped"
+      ]
+    },
+    {
+      "migration_id": "R983-v1",
+      "source_index": 435,
+      "round_id": "R610",
+      "backup_path": "migrations/R983/cycles.json.before",
+      "backup_sha256": "bc61356b488edeb93c8fa35ce924840fe6ed400421f891a9efb1b6c9fe703360",
+      "source_sha256": "8b8d0bfbf61d06028561540ae392e688b7da667a1297a3b7d42b9f6e771c0194",
+      "reason_codes": [
+        "invalid_list_fields",
+        "lessons_scalar_wrapped"
+      ]
     }
   ]
 }

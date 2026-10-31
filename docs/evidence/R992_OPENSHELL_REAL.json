@@ -1,0 +1,71 @@
+{
+  "schema": "openshell-pilot-v1",
+  "phase": "real_pilot",
+  "observations": [
+    {
+      "id": "install",
+      "observed": "installed",
+      "detail": "openshell 0.1.6-1 (deb) via installer oficial; sha256 installer 04c1a437d4a4fc11930d75a336fc4f52bf0c95251e8469c306e407e203769ae7"
+    },
+    {
+      "id": "gateway",
+      "observed": "running",
+      "detail": "gateway openshell-gateway ativo; driver OPENSHELL_COMPUTE_DRIVER=podman (rootless 5.7.0); mTLS auth"
+    },
+    {
+      "id": "egress_tcp_ip",
+      "observed": "blocked",
+      "detail": "TCP 1.1.1.1:443 e 93.184.216.34:443 bloqueados (egress deny default, sem bypass via IP)"
+    },
+    {
+      "id": "egress_dns",
+      "observed": "resolved",
+      "detail": "getent hosts example.com resolveu; DNS ok, TCP egress negado"
+    },
+    {
+      "id": "filesystem_read_host",
+      "observed": "denied",
+      "detail": "leitura de caminho do host fora da política negada (Landlock)"
+    },
+    {
+      "id": "filesystem_write_readonly",
+      "observed": "denied",
+      "detail": "escrita em /etc (read-only) negada"
+    },
+    {
+      "id": "filesystem_write_tmp",
+      "observed": "allowed",
+      "detail": "escrita em /tmp (read_write) permitida"
+    },
+    {
+      "id": "telemetry_optout",
+      "observed": "configured",
+      "detail": "OPENSHELL_TELEMETRY_ENABLED=false no drop-in; honorabilidade real exige captura de pacotes (não realizada)"
+    },
+    {
+      "id": "cleanup",
+      "observed": "ok",
+      "detail": "delete aceito; podman ps -a sem containers residuais"
+    },
+    {
+      "id": "recovery",
+      "observed": "ok",
+      "detail": "sandbox recriado e executou RECOVERY_OK"
+    }
+  ],
+  "artifact_hashes": {},
+  "sandbox_executed": true,
+  "isolation_verified": false,
+  "external_validation": false,
+  "confidence_promoted": false,
+  "human_review_required": true,
+  "openshell_version": "openshell 0.1.6",
+  "generated_at": "2026-10-31T14:53:51.856728+00:00",
+  "compute_driver": "podman",
+  "limitations": [
+    "WSL2 é experimental conforme README do OpenShell.",
+    "DNS resolve, mas o egress TCP foi bloqueado; a política de rede negada foi inferida do comportamento, não de um payload de rede explícito na política default.",
+    "Opt-out de telemetria está configurado no gateway; não fiz captura de pacotes para provar ausência de egress do próprio gateway.",
+    "Sandbox aprovado não torna a saída de um agente dentro dele verdadeira ou confiável."
+  ]
+}

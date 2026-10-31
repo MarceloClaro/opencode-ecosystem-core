@@ -37,11 +37,17 @@ CONTROLLERS = {
     "production": "productionctl.py",
 }
 
-# Comandos nativos de primeira classe da camada científica (SPEC-935-R475),
-# resolvidos localmente no Core sem depender da supercamada externa:
-# o contrato de teste test_scientific_lab_v42_native.py exige no mínimo
-# {"research","articles","review","evidence"}.
-NATIVE_COMMANDS = frozenset(CONTROLLERS) | {"evidence", "native_status"}
+# Comandos efetivamente implementados em scientific_lab/native. Os restantes
+# em CONTROLLERS são fallback da supercamada v4.1 e não devem ser anunciados
+# como nativos (SPEC-984).
+NATIVE_COMMANDS = frozenset({"research", "articles", "review", "evidence", "native-status"})
+NATIVE_CONTROLLERS = {
+    "research": "scientific_lab.native.research",
+    "articles": "scientific_lab.native.research",
+    "review": "scientific_lab.native.review",
+    "evidence": "scientific_lab.native.evidence",
+}
+EXTERNAL_FALLBACK_COMMANDS = frozenset(CONTROLLERS) - NATIVE_COMMANDS
 
 
 def native_status() -> dict:
@@ -50,7 +56,8 @@ def native_status() -> dict:
         "mode": "native",
         "version": "4.2.0-core.1",
         "commands": sorted(NATIVE_COMMANDS),
-        "controllers": {k: v for k, v in CONTROLLERS.items()},
+        "controllers": dict(NATIVE_CONTROLLERS),
+        "external_fallback_commands": sorted(EXTERNAL_FALLBACK_COMMANDS),
         "superlayer_discovered": discover() is not None,
         "experience": "execucao nativa no Core; supercamada externa opcional",
     }
@@ -123,6 +130,9 @@ def installed_status(home: Path | None = None) -> dict:
             "home": None,
             "version": None,
             "verified_release": False,
+            "manifest_identity_verified": False,
+            "verification_scope": "not_applicable",
+            "file_inventory_validated": False,
             "message": "Instale a supercamada v4.1.1 ou defina PESQUISADOR_UNIVERSAL_HOME.",
         }
     try:
@@ -133,6 +143,9 @@ def installed_status(home: Path | None = None) -> dict:
             "home": str(path),
             "version": None,
             "verified_release": False,
+            "manifest_identity_verified": False,
+            "verification_scope": "version_and_package_manifest_hash_only",
+            "file_inventory_validated": False,
             "error": str(exc),
         }
     version = version_data.get("version")
@@ -147,6 +160,9 @@ def installed_status(home: Path | None = None) -> dict:
         "expected_package_manifest_sha256": EXPECTED_PACKAGE_MANIFEST_SHA256,
         "expected_skill_archive_sha256": EXPECTED_SKILL_ARCHIVE_SHA256,
         "verified_release": verified,
+        "manifest_identity_verified": verified,
+        "verification_scope": "version_and_package_manifest_hash_only",
+        "file_inventory_validated": False,
     }
 
 

@@ -1,0 +1,1206 @@
+{
+  "status": "planned",
+  "topic": "Panorama de tecnologias de fronteira: inteligência artificial, computação quântica, robótica e biotecnologia",
+  "search": "pending",
+  "sections": [
+    {
+      "key": "titulo",
+      "role": "identificar o estudo de forma específica e informativa",
+      "planned_moves": [
+        "delimitar o objeto",
+        "antecipar o recorte"
+      ]
+    },
+    {
+      "key": "resumo",
+      "role": "sintetizar objetivo, método, resultado e conclusão",
+      "planned_moves": [
+        "estrutura IMRaD condensada",
+        "palavras-chave"
+      ]
+    },
+    {
+      "key": "introducao",
+      "role": "contextualizar o problema, a lacuna e a justificativa",
+      "planned_moves": [
+        "problema",
+        "lacuna",
+        "justificativa",
+        "objetivo anunciado"
+      ]
+    },
+    {
+      "key": "objetivos",
+      "role": "declarar objetivo geral e objetivos específicos mensuráveis",
+      "planned_moves": [
+        "objetivo geral",
+        "objetivos específicos",
+        "hipóteses quando aplicável"
+      ]
+    },
+    {
+      "key": "fundamentacao_teorica",
+      "role": "ancorar construtos em teorias e conceitos citados",
+      "planned_moves": [
+        "definição de construtos",
+        "diálogo com a literatura",
+        "marco teórico"
+      ]
+    },
+    {
+      "key": "metodologia",
+      "role": "descrever desenho, amostra, instrumentos e análise de forma reproduzível",
+      "planned_moves": [
+        "desenho",
+        "participantes/amostra",
+        "instrumentos",
+        "procedimentos",
+        "análise"
+      ]
+    },
+    {
+      "key": "resultados",
+      "role": "reportar achados com precisão e neutralidade interpretativa",
+      "planned_moves": [
+        "descrição dos dados",
+        "medidas observadas",
+        "ausência de interpretação indevida"
+      ]
+    },
+    {
+      "key": "discussao",
+      "role": "interpretar achados em diálogo com a literatura, limites e contribuição",
+      "planned_moves": [
+        "confronto com a teoria",
+        "limites",
+        "contribuição",
+        "implicações"
+      ]
+    },
+    {
+      "key": "conclusao",
+      "role": "responder à pergunta central e aos objetivos sem introduzir novidade",
+      "planned_moves": [
+        "síntese",
+        "resposta ao objetivo",
+        "trabalhos futuros"
+      ]
+    },
+    {
+      "key": "referencias",
+      "role": "listar fontes citadas com identificadores persistentes auditáveis",
+      "planned_moves": [
+        "norma citacional",
+        "DOI/identificador",
+        "correspondência citação↔referência"
+      ]
+    }
+  ],
+  "reasoning_plan": [
+    {
+      "framework": "axiomatico",
+      "engine": "z3/sympy",
+      "why": "priorizar clareza e refutação, não validar conclusão por método."
+    },
+    {
+      "framework": "aristotelico",
+      "engine": "critical/z3",
+      "why": "priorizar clareza e refutação, não validar conclusão por método."
+    },
+    {
+      "framework": "cartesiano",
+      "engine": "critical/chain_of_thought",
+      "why": "priorizar clareza e refutação, não validar conclusão por método."
+    },
+    {
+      "framework": "peirceano",
+      "engine": "arche_rlt/critical",
+      "why": "priorizar clareza e refutação, não validar conclusão por método."
+    },
+    {
+      "framework": "popperiano",
+      "engine": "critical",
+      "why": "priorizar clareza e refutação, não validar conclusão por método."
+    },
+    {
+      "framework": "game_theory",
+      "engine": "game_theory_local/simulated_reviews_v2",
+      "why": "priorizar clareza e refutação, não validar conclusão por método."
+    },
+    {
+      "framework": "bayesiano",
+      "engine": "bayesian",
+      "why": "priorizar clareza e refutação, não validar conclusão por método."
+    },
+    {
+      "framework": "causal",
+      "engine": "causal",
+      "why": "priorizar clareza e refutação, não validar conclusão por método."
+    },
+    {
+      "framework": "dialetico",
+      "engine": "dialectical/critical",
+      "why": "priorizar clareza e refutação, não validar conclusão por método."
+    },
+    {
+      "framework": "fuzzy",
+      "engine": "fuzzy",
+      "why": "priorizar clareza e refutação, não validar conclusão por método."
+    }
+  ],
+  "style_plan": {
+    "register": "formal",
+    "person": "impersonal_preferred",
+    "hedging": "proporcional à força da alegação",
+    "citations": "identificadores persistentes auditáveis",
+    "paragraph": "tópico frasal + evidência + análise + conexão"
+  },
+  "anti_plagiarism": {
+    "verbatim_copy": false,
+    "style_transfer": "structural_features_only",
+    "citation_of_sources": true,
+    "paraphrase_with_citation": true
+  },
+  "references": [],
+  "bibliography": [
+    {
+      "doi": "10.1007/978-3-662-09438-9",
+      "title": "Principles of Artificial Intelligence",
+      "year": 1982,
+      "source": "openalex",
+      "verified": false
+    },
+    {
+      "doi": "10.1017/cbo9780511794797",
+      "title": "Artificial Intelligence",
+      "year": 2010,
+      "source": "openalex",
+      "verified": false
+    },
+    {
+      "doi": "10.1177/0008125619864925",
+      "title": "A Brief History of Artificial Intelligence: On the Past, Present, and Future of Artificial Intelligence",
+      "year": 2019,
+      "source": "openalex",
+      "verified": false
+    },
+    {
+      "doi": "10.1201/9780203491294",
+      "title": "Bayesian Artificial Intelligence",
+      "year": 2003,
+      "source": "openalex",
+      "verified": false
+    },
+    {
+      "doi": "10.1631/fitee.1700813",
+      "title": "Artificial intelligence and statistics",
+      "year": 2018,
+      "source": "openalex",
+      "verified": false
+    },
+    {
+      "doi": "10.1093/hesc/9780198557364.003.0001",
+      "title": "Artificial intelligence",
+      "year": 1993,
+      "source": "crossref",
+      "verified": false
+    },
+    {
+      "doi": "10.3403/30483942u",
+      "title": "Artificial Intelligence. Artificial Intelligence Conformity Assessment",
+      "year": null,
+      "source": "crossref",
+      "verified": false
+    },
+    {
+      "doi": "10.3403/30483942",
+      "title": "Artificial Intelligence. Artificial Intelligence Conformity Assessment",
+      "year": null,
+      "source": "crossref",
+      "verified": false
+    },
+    {
+      "doi": "10.1016/0004-3702(87)90098-1",
+      "title": "Artificial intelligence abstracts",
+      "year": 1987,
+      "source": "crossref",
+      "verified": false
+    },
+    {
+      "doi": "10.1016/0004-3702(86)90034-2",
+      "title": "Artificial intelligence",
+      "year": 1986,
+      "source": "crossref",
+      "verified": false
+    },
+    {
+      "doi": null,
+      "title": "The Artificial Scientist: Logicist, Emergentist, and Universalist Approaches to Artificial General Intelligence",
+      "year": 2021,
+      "source": "arxiv",
+      "verified": false
+    },
+    {
+      "doi": null,
+      "title": "Compression, The Fermi Paradox and Artificial Super-Intelligence",
+      "year": 2021,
+      "source": "arxiv",
+      "verified": false
+    },
+    {
+      "doi": null,
+      "title": "Creative Problem Solving in Artificially Intelligent Agents: A Survey and Framework",
+      "year": 2022,
+      "source": "arxiv",
+      "verified": false
+    },
+    {
+      "doi": null,
+      "title": "A Review on Explainable Artificial Intelligence for Healthcare: Why, How, and When?",
+      "year": 2023,
+      "source": "arxiv",
+      "verified": false
+    },
+    {
+      "doi": null,
+      "title": "Artificial Intelligence Framework for Simulating Clinical Decision-Making: A Markov Decision Process Approach",
+      "year": 2013,
+      "source": "arxiv",
+      "verified": false
+    },
+    {
+      "doi": "10.1177/10731911261496704",
+      "title": "Artificial Intelligence in Autism Assessment: A Conceptual Framework for Multimodal Artificial Intelligence Integration.",
+      "year": 2026,
+      "source": "europepmc",
+      "verified": false
+    },
+    {
+      "doi": "10.1016/j.landig.2026.101056",
+      "title": "Foundation artificial intelligence models for health recognition by use of face photographs (FAHR-Face): a model development and validation study.",
+      "year": 2027,
+      "source": "europepmc",
+      "verified": false
+    },
+    {
+      "doi": null,
+      "title": "Artificial intelligence in acne vulgaris patients",
+      "year": null,
+      "source": "europepmc",
+      "verified": false
+    },
+    {
+      "doi": null,
+      "title": "What Artificial Intelligence Cannot Do",
+      "year": null,
+      "source": "europepmc",
+      "verified": false
+    },
+    {
+      "doi": "10.1093/postmj/qgag143",
+      "title": "Will humanity survive artificial intelligence?",
+      "year": 2026,
+      "source": "europepmc",
+      "verified": false
+    },
+    {
+      "doi": "10.1088/0034-4885/61/2/002",
+      "title": "Quantum computing",
+      "year": 1998,
+      "source": "openalex",
+      "verified": true
+    },
+    {
+      "doi": null,
+      "title": "Quantum Chemistry in the Age of Quantum Computing",
+      "year": null,
+      "source": "openalex",
+      "verified": false
+    },
+    {
+      "doi": "10.1201/9781420012293",
+      "title": "Quantum Computing",
+      "year": 2008,
+      "source": "openalex",
+      "verified": false
+    },
+    {
+      "doi": "10.1021/acs.chemrev.8b00803",
+      "title": "Quantum Chemistry in the Age of Quantum Computing",
+      "year": 2019,
+      "source": "openalex",
+      "verified": false
+    },
+    {
+      "doi": "10.1093/oso/9780198570004.001.0001",
+      "title": "An Introduction to Quantum Computing",
+      "year": 2006,
+      "source": "openalex",
+      "verified": false
+    },
+    {
+      "doi": "10.1093/oso/9780198854227.003.0015",
+      "title": "Quantum Computing I",
+      "year": 2020,
+      "source": "crossref",
+      "verified": false
+    },
+    {
+      "doi": "10.1093/oso/9780198854227.003.0016",
+      "title": "Quantum Computing II",
+      "year": 2020,
+      "source": "crossref",
+      "verified": false
+    },
+    {
+      "doi": "10.58647/rexpo.25000079.v1",
+      "title": "Quantum Computing for Network Medicine-Based Epistatic Disease Mechanism Mining - Ready for Quantum Computing?",
+      "year": 2025,
+      "source": "crossref",
+      "verified": false
+    },
+    {
+      "doi": "10.1002/9781394185542.ch3",
+      "title": "Distributed Quantum Computing – Classical and Quantum",
+      "year": 2023,
+      "source": "crossref",
+      "verified": false
+    },
+    {
+      "doi": "10.1002/9781394185542.ch4",
+      "title": "Distributed Quantum Computing – Distributed Control of Quantum Gates",
+      "year": 2023,
+      "source": "crossref",
+      "verified": false
+    },
+    {
+      "doi": null,
+      "title": "Tierkreis: A Dataflow Framework for Hybrid Quantum-Classical Computing",
+      "year": 2022,
+      "source": "arxiv",
+      "verified": false
+    },
+    {
+      "doi": null,
+      "title": "Quantum Computing: Vision and Challenges",
+      "year": 2024,
+      "source": "arxiv",
+      "verified": false
+    },
+    {
+      "doi": null,
+      "title": "Entangling Disciplines: Causality, Entropy and Time-Travel Paradoxes on a Quantum Computer",
+      "year": 2025,
+      "source": "arxiv",
+      "verified": false
+    },
+    {
+      "doi": null,
+      "title": "Unifying communication paradigms in measurement-based delegated quantum computing",
+      "year": 2025,
+      "source": "arxiv",
+      "verified": false
+    },
+    {
+      "doi": null,
+      "title": "Arbitrary Ground State Observables from Quantum Computed Moments",
+      "year": 2023,
+      "source": "arxiv",
+      "verified": false
+    },
+    {
+      "doi": "10.1038/s41583-026-01083-9",
+      "title": "Quantum computing for neuroscience: opportunities beyond classical limits.",
+      "year": 2026,
+      "source": "europepmc",
+      "verified": false
+    },
+    {
+      "doi": "10.1038/s41587-026-03233-x",
+      "title": "Quantum computing in transition.",
+      "year": 2026,
+      "source": "europepmc",
+      "verified": false
+    },
+    {
+      "doi": "10.1002/mp.70688",
+      "title": "A quantum computing approach to beam angle optimization.",
+      "year": 2026,
+      "source": "europepmc",
+      "verified": false
+    },
+    {
+      "doi": "10.20944/preprints202610.0493.v1",
+      "title": "How to Address the Threat Quantum Computing Poses to Cybersecurity",
+      "year": 2026,
+      "source": "europepmc",
+      "verified": false
+    },
+    {
+      "doi": null,
+      "title": "Quantum Computing for Polymeric Composites: Principles, Methods, Applications, and Future Perspectives",
+      "year": 2026,
+      "source": "europepmc",
+      "verified": false
+    },
+    {
+      "doi": null,
+      "title": "ROBOTICS AND AUTONOMOUS SYSTEMS",
+      "year": 2013,
+      "source": "openalex",
+      "verified": false
+    },
+    {
+      "doi": "10.1016/0921-8890(88)90002-4",
+      "title": "Robotics and autonomous systems",
+      "year": 1988,
+      "source": "openalex",
+      "verified": true
+    },
+    {
+      "doi": "10.1016/j.procs.2021.07.041",
+      "title": "Federated Learning in Robotic and Autonomous Systems",
+      "year": 2021,
+      "source": "openalex",
+      "verified": false
+    },
+    {
+      "doi": "10.1038/s41467-022-31150-5",
+      "title": "Meeting sustainable development goals via robotics and autonomous systems",
+      "year": 2022,
+      "source": "openalex",
+      "verified": false
+    },
+    {
+      "doi": "10.35248/2090-4908.21.s3.e001",
+      "title": "Robotics and Autonomous Systems",
+      "year": 2021,
+      "source": "openalex",
+      "verified": false
+    },
+    {
+      "doi": "10.1016/s0921-8890(98)90007-0",
+      "title": "Biomimetic Robotics Special Issue of Robotics and Autonomous Systems",
+      "year": 1998,
+      "source": "crossref",
+      "verified": false
+    },
+    {
+      "doi": "10.1016/j.robot.2019.103282",
+      "title": "Introducing article numbering to Robotics and Autonomous Systems",
+      "year": 2019,
+      "source": "crossref",
+      "verified": false
+    },
+    {
+      "doi": "10.1016/s0921-8890(99)00095-0",
+      "title": "Distributed Autonomous Robotic Systems",
+      "year": 1999,
+      "source": "crossref",
+      "verified": false
+    },
+    {
+      "doi": "10.1016/0921-8890(88)90029-2",
+      "title": "Autonomous systems environments",
+      "year": 1988,
+      "source": "crossref",
+      "verified": false
+    },
+    {
+      "doi": null,
+      "title": "Real-Time Deep Learning Approach to Visual Servo Control and Grasp Detection for Autonomous Robotic Manipulation",
+      "year": 2020,
+      "source": "arxiv",
+      "verified": false
+    },
+    {
+      "doi": null,
+      "title": "Fault-Tolerant Multi-Robot Coordination with Limited Sensing within Confined Environments",
+      "year": 2025,
+      "source": "arxiv",
+      "verified": false
+    },
+    {
+      "doi": null,
+      "title": "Optimal Algorithm Allocation for Robotic Network Cloud Systems",
+      "year": 2021,
+      "source": "arxiv",
+      "verified": false
+    },
+    {
+      "doi": null,
+      "title": "Vision-based Goal-Reaching Control for Mobile Robots Using a Hierarchical Learning Framework",
+      "year": 2026,
+      "source": "arxiv",
+      "verified": false
+    },
+    {
+      "doi": null,
+      "title": "Knowledge Triggering, Extraction and Storage via Human-Robot Verbal Interaction",
+      "year": 2021,
+      "source": "arxiv",
+      "verified": false
+    },
+    {
+      "doi": "10.3389/frobt.2022.949214",
+      "title": "Editorial: Safety in Collaborative Robotics and Autonomous Systems.",
+      "year": 2022,
+      "source": "europepmc",
+      "verified": false
+    },
+    {
+      "doi": "10.20944/preprints202310.0930.v1",
+      "title": "Revolutionizing Space Exploration and Colonization: A Deep Dive Into How Recent Developments in Robotics and Autonomous Systems Are Changing the Game",
+      "year": 2023,
+      "source": "europepmc",
+      "verified": false
+    },
+    {
+      "doi": "10.1016/j.tifs.2020.10.028",
+      "title": "A review of robotics and autonomous systems in the food industry: From the supply chains perspective",
+      "year": 2020,
+      "source": "europepmc",
+      "verified": false
+    },
+    {
+      "doi": "10.1038/s41559-020-01358-z",
+      "title": "A global horizon scan of the future impacts of robotics and autonomous systems on urban ecosystems.",
+      "year": 2021,
+      "source": "europepmc",
+      "verified": false
+    },
+    {
+      "doi": "10.1007/s12038-021-00204-z",
+      "title": "Connecting primitive phase separation to biotechnology, synthetic biology, and engineering",
+      "year": 2021,
+      "source": "openalex",
+      "verified": true
+    },
+    {
+      "doi": "10.1162/leon_r_00996",
+      "title": "META-Life: Biotechnologies, Synthetic Biology, Alife and the Arts",
+      "year": 2015,
+      "source": "openalex",
+      "verified": false
+    },
+    {
+      "doi": "10.1021/acsestwater.6c00613",
+      "title": "Role of Biotechnology, Synthetic Biology, and Nanotechnology in Innovative Water Quality",
+      "year": 2026,
+      "source": "openalex",
+      "verified": false
+    },
+    {
+      "doi": "10.55056/ceur-ws.org/vol-1000/icteri-2013-p-002-002-inv-1.pdf",
+      "title": "The Knowledge-Based Bio-Economy and the \"Green Triple-Helix\" of Biotechnology, Synthetic Biology and ICT",
+      "year": 2013,
+      "source": "openalex",
+      "verified": false
+    },
+    {
+      "doi": "10.1007/978-3-319-03998-5_1",
+      "title": "Biotechnology, Synthetic Biology, and ICT Define the Emerging Knowledge-Based Bio-Economy",
+      "year": 2013,
+      "source": "openalex",
+      "verified": false
+    },
+    {
+      "doi": "10.1093/hesc/9780198822813.003.0006",
+      "title": "Application of Synthetic Biology to Biotechnology",
+      "year": 2020,
+      "source": "crossref",
+      "verified": false
+    },
+    {
+      "doi": "10.1016/j.nbt.2014.05.1633",
+      "title": "Synthetic biology for synthetic chemistry",
+      "year": 2014,
+      "source": "crossref",
+      "verified": false
+    },
+    {
+      "doi": "10.1016/j.synbio.2016.10.002",
+      "title": "Synthetic biology in China, UK and US",
+      "year": 2016,
+      "source": "crossref",
+      "verified": false
+    },
+    {
+      "doi": "10.1016/j.synbio.2024.03.016",
+      "title": "Environment and synthetic biology",
+      "year": 2024,
+      "source": "crossref",
+      "verified": false
+    },
+    {
+      "doi": "10.1093/actrade/9780198833871.003.0008",
+      "title": "8. Biotechnology and synthetic biology",
+      "year": 2021,
+      "source": "crossref",
+      "verified": false
+    },
+    {
+      "doi": null,
+      "title": "Functional Synthetic Biology",
+      "year": 2022,
+      "source": "arxiv",
+      "verified": false
+    },
+    {
+      "doi": null,
+      "title": "Synthetic Biology in Leishmaniasis: Design,simulation and validation of constructed Genetic circuit",
+      "year": 2013,
+      "source": "arxiv",
+      "verified": false
+    },
+    {
+      "doi": null,
+      "title": "Bayesian uncertainty analysis for complex systems biology models: emulation, global parameter searches and evaluation of gene functions",
+      "year": 2016,
+      "source": "arxiv",
+      "verified": false
+    },
+    {
+      "doi": null,
+      "title": "Accomplishments in Genome-Scale In Silico Modeling for Industrial and Medical Biotechnology",
+      "year": 2009,
+      "source": "arxiv",
+      "verified": false
+    },
+    {
+      "doi": null,
+      "title": "From Physics to Biology by Extending Criticality and Symmetry Breakings",
+      "year": 2011,
+      "source": "arxiv",
+      "verified": false
+    },
+    {
+      "doi": "10.1002/er.4444",
+      "title": "A review of marine renewable energy storage",
+      "year": 2019,
+      "source": "openalex",
+      "verified": true
+    },
+    {
+      "doi": "10.1177/0957650917731181",
+      "title": "Renewable energy storage in geological formations",
+      "year": 2017,
+      "source": "openalex",
+      "verified": false
+    },
+    {
+      "doi": "10.1002/ente.201500322",
+      "title": "Methanol for Renewable Energy Storage and Utilization",
+      "year": 2016,
+      "source": "openalex",
+      "verified": false
+    },
+    {
+      "doi": "10.1021/acsenergylett.6b00666",
+      "title": "Inorganic Porous Films for Renewable Energy Storage",
+      "year": 2017,
+      "source": "openalex",
+      "verified": false
+    },
+    {
+      "doi": "10.31142/ijtsrd22924",
+      "title": "Renewable Energy Storage",
+      "year": 2019,
+      "source": "openalex",
+      "verified": false
+    },
+    {
+      "doi": "10.1615/978-1-56700-525-7.89",
+      "title": "Chapter 2. Renewable Energy Generation and Storage",
+      "year": 2022,
+      "source": "crossref",
+      "verified": false
+    },
+    {
+      "doi": "10.1615/978-1-56700-525-7.76",
+      "title": "Chapter 1. Renewable Energy Storage: Too Many Options, Not Enough Time?",
+      "year": 2022,
+      "source": "crossref",
+      "verified": false
+    },
+    {
+      "doi": "10.1017/9781009295734.012",
+      "title": "Storage of Renewable Energy",
+      "year": 2024,
+      "source": "crossref",
+      "verified": false
+    },
+    {
+      "doi": "10.1016/j.est.2024.113688",
+      "title": "Renewable-storage sizing approaches for centralized and distributed renewable energy—A state-of-the-art review",
+      "year": 2024,
+      "source": "crossref",
+      "verified": false
+    },
+    {
+      "doi": "10.1201/9781003516132-2",
+      "title": "Renewable Energy Technologies and Energy Storage Systems",
+      "year": 2026,
+      "source": "crossref",
+      "verified": false
+    },
+    {
+      "doi": null,
+      "title": "Techno-economic analysis of renewable energy generation at the South Pole",
+      "year": 2023,
+      "source": "arxiv",
+      "verified": false
+    },
+    {
+      "doi": null,
+      "title": "Privacy-Preserving Distributed Control for a Networked Battery Energy Storage System",
+      "year": 2025,
+      "source": "arxiv",
+      "verified": false
+    },
+    {
+      "doi": null,
+      "title": "Integrating Power Electronics-based Energy Storages to Power Systems: A Review on Dynamic Modeling, Analysis, and Future Challenges",
+      "year": 2026,
+      "source": "arxiv",
+      "verified": false
+    },
+    {
+      "doi": null,
+      "title": "Intelligent Home Energy Management System for Distributed Renewable Generators, Dispatchable Residential Loads and Distributed Energy Storage Devices",
+      "year": 2017,
+      "source": "arxiv",
+      "verified": false
+    },
+    {
+      "doi": null,
+      "title": "Privacy-Preserving Energy Storage Sharing with Blockchain and Secure Multi-Party Computation",
+      "year": 2021,
+      "source": "arxiv",
+      "verified": false
+    },
+    {
+      "doi": "10.14293/pr2199.003682.v2",
+      "title": "Multifunctional Nanomaterials for High-Performance Renewable Energy Storage and Conversion Devices",
+      "year": 2026,
+      "source": "europepmc",
+      "verified": false
+    },
+    {
+      "doi": "10.14293/pr2199.003682.v1",
+      "title": "Multifunctional Nanomaterials for High-Performance Renewable Energy Storage and Conversion Devices",
+      "year": 2026,
+      "source": "europepmc",
+      "verified": false
+    },
+    {
+      "doi": "10.1016/j.biotechadv.2026.108927",
+      "title": "Intermittent electro-anaerobic digestion: A flexible alternative solution for renewable energy storage.",
+      "year": 2026,
+      "source": "europepmc",
+      "verified": false
+    },
+    {
+      "doi": "10.20944/preprints202607.0350.v1",
+      "title": "Energy Analysis of an ICE and Electrolyzer-Based Poly-Generative System with Renewable Energy Storage Supporting the Green Mobility and Building Loads",
+      "year": 2026,
+      "source": "europepmc",
+      "verified": false
+    },
+    {
+      "doi": "10.21203/rs.3.rs-9615096/v1",
+      "title": "Comparative Performance and Optimization of Lead-Acid, Nickel-Metal Hydride, and LiFePO4 Batteries for Renewable Energy Storage Applications",
+      "year": 2026,
+      "source": "europepmc",
+      "verified": false
+    },
+    {
+      "doi": "10.1002/9783527692903.ch6",
+      "title": "Properties of Nanotechnology Materials",
+      "year": 2018,
+      "source": "openalex",
+      "verified": false
+    },
+    {
+      "doi": "10.1109/isse.2008.5276551",
+      "title": "Nanotechnology materials for electronics reliability",
+      "year": 2008,
+      "source": "openalex",
+      "verified": false
+    },
+    {
+      "doi": "10.71097/ijsat.v16.i1.1352",
+      "title": "The Role of Nanotechnology Materials in Education: Applications and Benefits",
+      "year": 2025,
+      "source": "openalex",
+      "verified": false
+    },
+    {
+      "doi": "10.2497/jjspm.54.168",
+      "title": "Nanotechnology Materials for Environment Protection",
+      "year": 2007,
+      "source": "openalex",
+      "verified": false
+    },
+    {
+      "doi": "10.1002/admt.201800486",
+      "title": "Rolled‐up Nanotechnology: Materials Issue and Geometry Capability",
+      "year": 2018,
+      "source": "openalex",
+      "verified": false
+    },
+    {
+      "doi": "10.17303/jnsm.2013.e101",
+      "title": "Smart Materials from Nanotechnology for Global Challenges",
+      "year": 2014,
+      "source": "crossref",
+      "verified": false
+    },
+    {
+      "doi": "10.35841/nanotechnology",
+      "title": "Materials Science and Nanotechnology",
+      "year": null,
+      "source": "crossref",
+      "verified": false
+    },
+    {
+      "doi": "10.15744/2348-9812.1.e102",
+      "title": "Materials Science and Nanotechnology",
+      "year": 2013,
+      "source": "crossref",
+      "verified": false
+    },
+    {
+      "doi": "10.35841/nanotechnology.1.1.1-2",
+      "title": "Nanotechnology: revolutionizing our way of thinking physics and materials.",
+      "year": 2017,
+      "source": "crossref",
+      "verified": false
+    },
+    {
+      "doi": "10.15744/2348-9812.1.e101",
+      "title": "Welcome to Journal of Materials Science and Nanotechnology",
+      "year": 2013,
+      "source": "crossref",
+      "verified": false
+    },
+    {
+      "doi": null,
+      "title": "DNA Nanotechnology Meets Nanophotonics",
+      "year": 2021,
+      "source": "arxiv",
+      "verified": false
+    },
+    {
+      "doi": null,
+      "title": "Innovations in Nanotechnology: A Comprehensive Review of Applications Beyond Space Exploration",
+      "year": 2025,
+      "source": "arxiv",
+      "verified": false
+    },
+    {
+      "doi": null,
+      "title": "The Nanotechnology R(evolution)",
+      "year": 2006,
+      "source": "arxiv",
+      "verified": false
+    },
+    {
+      "doi": null,
+      "title": "Graphene Nanotechnology for the Next Generation Nonvolatile Memory",
+      "year": 2013,
+      "source": "arxiv",
+      "verified": false
+    },
+    {
+      "doi": null,
+      "title": "Societal and ethical interactions with nanotechnology (\"SEIN\") -- an introduction",
+      "year": 2005,
+      "source": "arxiv",
+      "verified": false
+    },
+    {
+      "doi": "10.1002/chem.71807",
+      "title": "Central sp&lt;sup&gt;3&lt;/sup&gt;-C Substitution Directs Supramolecular Assembly and Molecular Properties of Tris-HBC Nanographenes.",
+      "year": 2026,
+      "source": "europepmc",
+      "verified": false
+    },
+    {
+      "doi": "10.1039/d6cc03219b",
+      "title": "Structural programming of inorganic materials using DNA frameworks.",
+      "year": 2026,
+      "source": "europepmc",
+      "verified": false
+    },
+    {
+      "doi": "10.1186/s40580-026-00583-9",
+      "title": "Safe and sustainable by design (SSbD) for nanotechnology: scientific foundations, global policy perspectives, and industrial practice.",
+      "year": 2026,
+      "source": "europepmc",
+      "verified": false
+    },
+    {
+      "doi": "10.2147/nsa.s641862",
+      "title": "Transforming Nanomaterials Development with Artificial Intelligence Techniques.",
+      "year": 2026,
+      "source": "europepmc",
+      "verified": false
+    },
+    {
+      "doi": "10.3390/jfmk11040416",
+      "title": "Applications of Nanotechnology in Athletic and Exercise Performance: A Scoping Review.",
+      "year": 2026,
+      "source": "europepmc",
+      "verified": false
+    }
+  ],
+  "references_verified_count": 4,
+  "section_references": {
+    "introducao": [
+      0
+    ],
+    "fundamentacao_teorica": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111,
+      112
+    ],
+    "referencias": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111,
+      112
+    ]
+  },
+  "scientific_acceptance": false,
+  "human_review_required": true,
+  "external_validation": false,
+  "confidence_promoted": false,
+  "oa_search_source": "docs/evidence/R993_OA_SEARCH_REAL.json",
+  "oa_search_sha256": "25607eed231a93b6c305c00b236b1be9e39c90281b089afd88bb5c0f15461df2",
+  "crossref_verified_dois": [
+    "10.1002/er.4444",
+    "10.1007/s12038-021-00204-z",
+    "10.1016/0921-8890(88)90002-4",
+    "10.1088/0034-4885/61/2/002"
+  ]
+}

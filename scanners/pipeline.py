@@ -1054,6 +1054,10 @@ class SuperRigorPipeline:
         return {
             "excellence_score": exs,
             "passed": passed,
+            "score_kind": "lexical_heuristic_composite",
+            "authority": self.scientific_scanner.authority(),
+            "human_review_required": True,
+            "external_validation": False,
             "scientific_rigor": scientific,
             "diagnostic_summary": {
                 "noological_coverage_pct": noological_cov,

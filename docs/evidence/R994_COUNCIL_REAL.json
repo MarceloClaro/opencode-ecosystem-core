@@ -1,0 +1,1007 @@
+{
+  "status": "partial",
+  "executed": true,
+  "execution_attempted": true,
+  "reports": [
+    {
+      "agent_id": "scientist-problem",
+      "report": {
+        "status": "partial",
+        "findings": [
+          "Pergunta delimitada: Em organizações avaliadas longitudinalmente (2020–2024), como se operacionaliza a adoção de IA em dois subtipos funcionais (automação de tarefas repetitivas vs. decisão assistida por IA) e qual a associação empírica observada entre essa adoção, indicadores mensuráveis de benefício operacional e a incidência de riscos auditáveis (como viés não mitigado)?",
+          "Construtos operacionais definidos: (1) Adoção de IA: proporção ou variação temporal de implantação dividida em automação de rotinas repetitivas e suporte à decisão; (2) Benefício organizacional: construto ainda subespecificado na evidência atual, frequentemente confundido com o próprio crescimento da automação (+40%); (3) Risco de IA: presença verificável por auditoria de falhas técnicas ou algorítmicas, exemplificada pela taxa de viés não mitigado (18% dos sistemas auditados).",
+          "Hipótese principal (H1 - Acoplamento adoção-benefício-risco): A expansão da adoção de IA em processos organizacionais aumenta a eficiência operacional em tarefas repetitivas, mas introduz riscos proporcionais de viés quando aplicada a sistemas de decisão assistida sem governança prévia.",
+          "Hipóteses rivais (H0 / H2): (H0 - Confundimento secular/seleção): O crescimento de 40% na automação decorre de tendências gerais de digitalização pós-2020 e autosseleção de organizações maduras, sem efeito líquido atribuível especificamente à IA; (H2 - Viés de detecção na auditoria): A taxa de 18% de viés não mitigado reflete a intensidade desigual de auditoria entre organizações, e não a prevalência real do risco nos sistemas implantados.",
+          "Critérios de refutação: H1 é refutada se, em comparação controlada ou pareada com organizações que adotaram automação convencional (não baseada em IA), não houver diferença estatisticamente discernível em ganho de produtividade, ou se a taxa de viés não mitigado for independente do tipo de sistema (automação simples vs. decisão assistida) e da presença de controles de governança."
+        ],
+        "evidence": [
+          {
+            "source_id": "obs1",
+            "quote": "Estudo observacional com 120 organizações mediu a adoção de inteligência artificial entre 2020 e 2024.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          },
+          {
+            "source_id": "obs1",
+            "quote": "A automação de tarefas repetitivas cresceu 40 por cento. Sistemas de decisão assistida por IA foram adotados por 35 por cento das organizações.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          },
+          {
+            "source_id": "obs1",
+            "quote": "Riscos de viés não mitigado foram identificados em 18 por cento dos sistemas auditados. Não houve ensaio randomizado nem grupo de controle.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          }
+        ],
+        "limitations": [
+          "Fonte única e declarada como fixture sintética ('obs1'), impedindo generalização empírica para o domínio real sem busca adicional de literatura primária pelo orquestrador MarceloClaro.",
+          "Ausência de grupo de controle e de randomização no estudo observacional relatado, inviabilizando atribuição causal entre a adoção de IA e os desfechos citados.",
+          "Subespecificação do construto 'benefício': o texto reporta crescimento de uso (+40% em automação de tarefas repetitivas), mas não fornece métrica independente de benefício líquido (ex.: redução de erro, tempo ou custo ajustado por falhas).",
+          "Denominador incompleto para o risco: os 18% de viés não mitigado referem-se apenas aos 'sistemas auditados', sem informar a fração total de sistemas submetidos à auditoria nem o critério de seleção para auditar.",
+          "Necessidade obrigatória de revisão humana sobre a delimitação dos construtos antes de avançar para síntese ou decisão."
+        ],
+        "feynman": {
+          "mechanism": "Organizações substituem regras manuais ou software tradicional por modelos estatísticos que aprendem padrões a partir de dados históricos. Quando aplicados a tarefas repetitivas, esses modelos executam classificações ou extrações em lote; quando aplicados à decisão assistida, sugerem escolhas para operadores humanos. Se os dados históricos contiverem distorções sistemáticas ou se o modelo operar fora das condições em que foi calibrado sem checagem de erros, ele repete e escala essas distorções em produção (viés não mitigado).",
+          "observations": [
+            "Em uma amostra observacional de 120 organizações acompanhadas entre 2020 e 2024, o indicador de automação de tarefas repetitivas aumentou 40%.",
+            "Na mesma amostra, 35% das organizações adotaram sistemas de decisão assistida por IA.",
+            "Entre os sistemas que passaram por auditoria, 18% apresentaram riscos de viés não mitigado.",
+            "O levantamento não incluiu grupo de controle nem alocação randomizada."
+          ],
+          "inferences": [
+            "Crescimento de adoção (+40% em automação e 35% em decisão assistida) não equivale, por si só, a benefício organizacional comprovado, pois uso não mede ganho líquido de desempenho.",
+            "A taxa de 18% de viés pode subestimar ou superestimar o risco real caso a decisão de auditar um sistema dependa de suspeita prévia de falha ou da maturidade da organização.",
+            "Sem comparação com organizações ou setores não expostos (ou expostos apenas à automação determinística sem IA), não é possível separar o efeito da IA de tendências externas do período 2020–2024."
+          ],
+          "test_oracle": "O desenho será considerado validado para teste empírico se permitir distinguir falsificavelmente entre: (a) ganho real de eficiência líquida vs. mero aumento de volume automatizado, e (b) incidência basal de viés em sistemas auditados sistematicamente vs. auditoria por conveniência; se a diferença de desempenho entre processos com IA e processos-controle sem IA for nula ou negativa após descontar retrabalho por viés, a hipótese de benefício líquido é rejeitada.",
+          "min_experiment": "Solicitar ao orquestrador primário (MarceloClaro) dados ou estudos primários que permitam um desenho quase-experimental mínimo: selecionar um subconjunto pareado de processos organizacionais (com e sem adoção de decisão assistida por IA entre 2020 e 2024), auditar 100% dos sistemas de ambos os grupos com o mesmo protocolo padronizado de detecção de viés e medir uma variável de resultado operacional independente da taxa de uso (ex.: taxa de erro pós-decisão ou tempo líquido de resolução incluindo correções). Requer revisão humana."
+        },
+        "feynman_checklist": {
+          "feg_01_06_score": 10,
+          "feg": {
+            "FEG-01": 2,
+            "FEG-02": 2,
+            "FEG-03": 2,
+            "FEG-04": 2,
+            "FEG-05": 0,
+            "FEG-06": 2
+          },
+          "reason": null,
+          "scope": "declared_completeness_only"
+        },
+        "evidence_scope": "literal_match_to_unverified_supplied_corpus",
+        "human_validation": false
+      },
+      "task_id": null,
+      "executor": "antigravity"
+    },
+    {
+      "agent_id": "scientist-search",
+      "report": {
+        "status": "partial",
+        "findings": [
+          "Pergunta e objetivo interpretativo: Quais strings de busca reproduzíveis e critérios de elegibilidade permitem recuperar evidências empíricas primárias sobre adoção organizacional de IA (automação de tarefas vs. suporte à decisão), benefícios operacionais e riscos de viés algorítmico, superando a limitação da fonte única sintética?",
+          "Hipótese de cobertura documental: Consultas booleanas estruturadas por blocos (População/Contexto Organizacional AND Modalidade de IA AND Desfechos de Benefício/Risco AND Desenho Metodológico) recuperarão estudos empíricos longitudinais, quase-experimentais e auditorias técnicas, permitindo contrastar os números da fixture ('obs1') com literatura primária real.",
+          "Desenho da estratégia de busca (solicitação formal ao orquestrador primário MarceloClaro, sem execução direta de rede): (1) Consulta Q1 (Adoção e Benefícios Operacionais): (\"artificial intelligence\" OR \"machine learning\" OR \"algorithmic decision\" OR \"task automation\") AND (\"organizational adoption\" OR \"enterprise adoption\" OR \"firm-level\" OR \"workplace\") AND (\"productivity\" OR \"efficiency\" OR \"repetitive tasks\" OR \"decision support\") AND (\"longitudinal\" OR \"panel data\" OR \"quasi-experimental\" OR \"randomized\"); (2) Consulta Q2 (Riscos, Viés e Auditoria): (\"artificial intelligence\" OR \"algorithmic systems\") AND (\"organization*\" OR \"enterprise*\" OR \"deployment\") AND (\"algorithmic bias\" OR \"unmitigated bias\" OR \"fairness audit\" OR \"system audit\" OR \"risk management\") AND (\"empirical\" OR \"audit study\" OR \"observational\"); (3) Bases-alvo recomendadas ao primário: Scopus, Web of Science, IEEE Xplore, ACM Digital Library e SSRN/NBER (recorte inicial 2020–2024 para alinhamento com 'obs1', expandido para 2018–2026 para controle de tendências prévias).",
+          "Análise da evidência disponível: O único registro fornecido ('obs1') reporta métricas agregadas (crescimento de 40% em automação, 35% de adoção em decisão assistida e 18% de sistemas auditados com viés não mitigado), porém declara proveniência de 'fixture sintética' e ausência de grupo de controle ou ensaio randomizado.",
+          "Lacunas críticas de busca identificadas: (L1) Ausência de fontes empíricas reais (com DOI/metadados verificáveis e recibo do primário); (L2) Indefinição do denominador na taxa de viés de 18% em 'obs1' (proporção sobre os 35% de sistemas de decisão, sobre o total de sistemas ou sobre a subamostra efetivamente auditada?); (L3) Ausência de estratificação setorial, porte das 120 organizações e métricas de erro/variância; (L4) Falta de contrafactual (organizações não adotantes ou pré-adoção) para isolar benefícios líquidos de choques macroeconômicos entre 2020 e 2024.",
+          "Refutação e preservação de conflitos: Nenhuma inferência causal ou validação empírica de domínio pode ser sustentada apenas com 'obs1'. Nenhuma consulta externa foi realizada por este agente; toda busca depende de execução e recibo pelo orquestrador primário MarceloClaro. Requer-se revisão humana para aprovação do protocolo de busca e validação da triagem."
+        ],
+        "evidence": [
+          {
+            "source_id": "obs1",
+            "quote": "Estudo observacional com 120 organizações mediu a adoção de inteligência artificial entre 2020 e 2024.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          },
+          {
+            "source_id": "obs1",
+            "quote": "A automação de tarefas repetitivas cresceu 40 por cento. Sistemas de decisão assistida por IA foram adotados por 35 por cento das organizações.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          },
+          {
+            "source_id": "obs1",
+            "quote": "Riscos de viés não mitigado foram identificados em 18 por cento dos sistemas auditados. Não houve ensaio randomizado nem grupo de controle.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          }
+        ],
+        "limitations": [
+          "Nenhuma busca externa foi executada diretamente por este agente devido às restrições de escopo e segurança; não há recibos de busca do orquestrador primário MarceloClaro até o momento.",
+          "O corpus atual restringe-se a uma única fonte ('obs1') explicitamente rotulada como 'fixture sintética para execução real do conselho', o que impede qualquer generalização empírica.",
+          "A fonte 'obs1' não possui grupo de controle, ensaio randomizado, intervalo de confiança, definição de amostragem das 120 organizações nem especificação do protocolo de auditoria que detectou 18% de viés não mitigado.",
+          "Necessidade obrigatória de revisão humana sobre as strings de busca propostas antes do disparo pelo primário e sobre a interpretação de eventuais resultados."
+        ],
+        "feynman": {
+          "mechanism": "Mapear a adoção de IA em organizações funciona como fazer o censo de duas ferramentas distintas dentro de empresas: uma que repete ações mecânicas (automação) e outra que sugere escolhas a gestores (decisão assistida). Se olharmos apenas para um resumo sintético sem grupo de comparação e sem saber como os sistemas foram inspecionados, não sabemos se as mudanças vieram das ferramentas ou do próprio período (2020–2024), nem se os problemas encontrados (viés) ocorrem em todas as empresas ou apenas nas que decidiram auditar seus sistemas. Por isso, formulamos perguntas de busca padronizadas para que o sistema principal recolha estudos reais que meçam empresas antes e depois da adoção e comparem com empresas semelhantes que não adotaram.",
+          "observations": [
+            "O registro 'obs1' está identificado com a proveniência 'fixture sintética para execução real do conselho'.",
+            "O texto de 'obs1' menciona 120 organizações observadas entre 2020 e 2024, crescimento de 40% na automação de tarefas repetitivas e adoção de 35% em sistemas de decisão assistida por IA.",
+            "O texto de 'obs1' relata identificação de riscos de viés não mitigado em 18% dos sistemas auditados.",
+            "O texto de 'obs1' declara explicitamente que 'Não houve ensaio randomizado nem grupo de controle'.",
+            "Não existem recibos de buscas externas realizadas pelo orquestrador primário no contexto atual."
+          ],
+          "inferences": [
+            "Os valores de 40%, 35% e 18% em 'obs1' funcionam apenas como parâmetros de teste estrutural do conselho e não representam evidência empírica do mundo real.",
+            "Mesmo que 'obs1' fosse um estudo empírico real, a ausência de grupo de controle e o viés de seleção na subamostra de 'sistemas auditados' impediriam atribuir causalidade aos benefícios ou estimar a prevalência real de viés no total das 120 organizações.",
+            "A execução das consultas booleanas Q1 e Q2 pelo primário MarceloClaro é condição necessária para desbloquear a transição de evidência sintética para evidência empírica verificável."
+          ],
+          "test_oracle": "A estratégia de busca será considerada validada se, após executada pelo orquestrador primário MarceloClaro com geração de recibos verificáveis, retornar pelo menos 3 estudos empíricos primógicos independentes (2020–2026) que reportem: (a) tamanho amostral e setor organizacional, (b) métricas separadas para automação de rotinas e suporte à decisão, (c) grupo de comparação ou controle longitudinal, e (d) critério explícito de auditoria de viés com numerador e denominador definidos. Caso retorne zero estudos com esses critérios ou apenas literatura opinativa, a hipótese de cobertura direta é refutada e os termos booleanos devem ser recalibrados.",
+          "min_experiment": "Solicitar ao orquestrador primário MarceloClaro a execução de um teste piloto (busca restrita) usando as consultas Q1 e Q2 em uma única base indexada aberta (ex.: Semantic Scholar ou Crossref/OpenAlex) para o período 2020–2024, recolhendo os 10 primeiros registros com recibo de busca e verificando na triagem de resumos quantos contêm dados primários de nível organizacional com denominador explícito de auditoria de risco."
+        },
+        "feynman_checklist": {
+          "feg_01_06_score": 10,
+          "feg": {
+            "FEG-01": 2,
+            "FEG-02": 2,
+            "FEG-03": 2,
+            "FEG-04": 2,
+            "FEG-05": 0,
+            "FEG-06": 2
+          },
+          "reason": null,
+          "scope": "declared_completeness_only"
+        },
+        "evidence_scope": "literal_match_to_unverified_supplied_corpus",
+        "human_validation": false
+      },
+      "task_id": null,
+      "executor": "antigravity"
+    },
+    {
+      "agent_id": "scientist-curation",
+      "report": {
+        "status": "partial",
+        "findings": [
+          "Pergunta e objetivo interpretativo: Quais registros do corpus fornecido atendem aos critérios formais de inclusão/exclusão sem incorrer em duplicidade ou viés de confirmação (exclusão por discordância de hipótese)?",
+          "Hipótese de triagem: O corpus atual permite retenção formal de registros pertinentes à população (organizações), exposição (adoção de IA) e desfechos (benefícios operacionais e riscos de viés), independentemente da direção dos resultados ou da presença de achados negativos/limitantes.",
+          "Desenho da conferência de elegibilidade: (1) Verificação de duplicatas por identificador ('id'), proveniência e sobreposição textual; (2) Aplicação de critérios de inclusão (contexto organizacional, métricas de adoção/benefício/risco de IA); (3) Aplicação de critérios de exclusão estritamente metodológicos/escopo, vedando exclusão por resultados contrários ou negativos; (4) Registro explícito dos motivos de decisão.",
+          "Conferência de duplicatas: Foi examinado 1 registro único ('obs1'). Nenhuma duplicata intra-corpus foi detectada (0 duplicatas removidas).",
+          "Decisão de inclusão ('obs1'): INCLUÍDO para extração descritiva com ressalva de proveniência. Motivos: (a) Contém população organizacional (120 organizações, 2020–2024); (b) Reporta indicadores de adoção/benefício operacional (crescimento de 40% na automação de tarefas repetitivas; 35% de adoção em decisão assistida); (c) Reporta indicador de risco (viés não mitigado em 18% dos sistemas auditados).",
+          "Preservação contra viés de seleção e resultados negativos: O registro 'obs1' não foi excluído apesar de declarar ausência de ensaio randomizado e de grupo de controle, nem por reportar risco adverso (18% de viés não mitigado). A ausência de desenho experimental e a natureza de fixture sintética são preservadas como metadados de limitação metodológica para as fases subsequentes, e não como motivo de descarte silencioso.",
+          "Refutação de suficiência amostral: A triagem refuta a completude da base de evidências, pois o conjunto elegível resume-se a uma única fixture sintética ('obs1'), sem registros empíricos externos retornados pelo orquestrador primário MarceloClaro até o momento."
+        ],
+        "evidence": [
+          {
+            "source_id": "obs1",
+            "quote": "Estudo observacional com 120 organizações mediu a adoção de inteligência artificial entre 2020 e 2024.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          },
+          {
+            "source_id": "obs1",
+            "quote": "A automação de tarefas repetitivas cresceu 40 por cento. Sistemas de decisão assistida por IA foram adotados por 35 por cento das organizações.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          },
+          {
+            "source_id": "obs1",
+            "quote": "Riscos de viés não mitigado foram identificados em 18 por cento dos sistemas auditados. Não houve ensaio randomizado nem grupo de controle.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          }
+        ],
+        "limitations": [
+          "O corpus fornecido contém apenas um único registro ('obs1') com proveniência explicitamente declarada como 'fixture sintética para execução real do conselho', impedindo síntese empírica do mundo real.",
+          "Não há estudos primários externos adicionais nem recibos de busca executados pelo orquestrador MarceloClaro para testar colisão de duplicatas entre múltiplas bases ou avaliar heterogeneidade entre estudos discordantes.",
+          "O único registro incluído ('obs1') possui desenho puramente observacional sem grupo de controle ou randomização, limitando qualquer inferência causal nas etapas posteriores.",
+          "Requer-se revisão humana do protocolo de triagem e solicitação ao orquestrador primário MarceloClaro para execução das buscas bibliográficas e fornecimento de registros empíricos reais."
+        ],
+        "feynman": {
+          "mechanism": "A triagem de evidências funciona como um filtro cego à direção do resultado: primeiro removem-se cópias exatas ou sobrepostas do mesmo estudo para não contar o mesmo dado duas vezes; depois verifica-se apenas se o documento trata do tema investigado (organizações usando IA e medindo efeitos ou problemas). Se um documento mostra que a IA causou problemas (como viés) ou que o estudo não teve grupo de controle, ele passa pelo filtro com um rótulo de alerta, em vez de ser jogado fora, evitando que a análise final enxergue apenas o que confirma uma ideia prévia.",
+          "observations": [
+            "O corpus recebido contém exatamente 1 item com id 'obs1' e proveniência 'fixture sintética para execução real do conselho'.",
+            "O texto de 'obs1' relata 120 organizações entre 2020 e 2024, crescimento de 40% em automação de tarefas repetitivas, 35% de adoção de decisão assistida por IA e 18% de sistemas auditados com risco de viés não mitigado.",
+            "O texto de 'obs1' declara explicitamente que não houve ensaio randomizado nem grupo de controle.",
+            "Não existem outros itens no corpus para comparação de duplicidade ou conflito entre fontes distintas."
+          ],
+          "inferences": [
+            "O item 'obs1' cumpre os critérios temáticos mínimos de inclusão para a pergunta sobre adoção, benefícios funcionais e riscos de IA em organizações, mas deve ser classificado internamente como evidência sintética de teste (não empírica real) e observacional não controlada.",
+            "O status da fase deve permanecer 'partial' porque a triagem de um único item sintético não constitui cobertura bibliográfica suficiente sem novas buscas conduzidas pelo orquestrador primário MarceloClaro."
+          ],
+          "test_oracle": "A matriz de triagem será considerada íntegra e livre de viés de seleção se: (1) 100% dos registros do corpus tiverem decisão explícita (incluído, excluído ou duplicata) acompanhada de motivo formal; (2) zero registros forem excluídos por reportarem riscos elevados, efeitos nulos ou resultados contrários à adoção; e (3) dois avaliadores independentes (ou revisão humana) aplicarem as mesmas regras a um lote de registros alcançando concordância determinística nos motivos de inclusão/exclusão.",
+          "min_experiment": "Solicitar ao orquestrador primário MarceloClaro a injeção de um lote de controle contendo 4 registros: 1 cópia exata de 'obs1' com ID diferente (para testar detecção de duplicata por conteúdo), 1 estudo fora de escopo sem relação com organizações (para testar exclusão por escopo), 1 estudo organizacional reportando falha líquida/prejuízo da IA e 1 estudo organizacional reportando benefício líquido. Executar a regra de triagem e verificar se a duplicata e o fora de escopo são barrados e se ambos os estudos organizacionais (com resultado positivo e negativo) são retidos com seus respectivos metadados."
+        },
+        "feynman_checklist": {
+          "feg_01_06_score": 10,
+          "feg": {
+            "FEG-01": 2,
+            "FEG-02": 2,
+            "FEG-03": 2,
+            "FEG-04": 2,
+            "FEG-05": 0,
+            "FEG-06": 2
+          },
+          "reason": null,
+          "scope": "declared_completeness_only"
+        },
+        "evidence_scope": "literal_match_to_unverified_supplied_corpus",
+        "human_validation": false
+      },
+      "task_id": null,
+      "executor": "antigravity"
+    },
+    {
+      "agent_id": "scientist-references",
+      "report": {
+        "status": "partial",
+        "findings": [
+          "Pergunta e objetivo interpretativo: Os registros retidos no corpus possuem identificadores persistentes verificáveis (ex.: DOI), recortes textuais literais íntegros e função citacional rastreável para sustentar afirmações sobre adoção, benefícios e riscos de IA em organizações?",
+          "Hipótese de auditoria citacional: O registro único 'obs1' fornece recortes literais para quantidades descritivas internas, mas carece de identificador bibliográfico persistente (DOI) e de recibo de resolução externa, restringindo sua função citacional a teste de fluxo (fixture sintética) e impedindo seu uso como evidência empírica primária do mundo real.",
+          "Desenho de verificação: Inspeção direta do identificador ('id'), metadado de origem ('provenance') e pareamento exato de substrings ('quote') do registro 'obs1' contra as alegações de adoção, variação de automação, risco de viés e ausência de controle experimental.",
+          "Análise dos recortes e função das citações: (1) Recorte de escopo/amostra ('Estudo observacional com 120 organizações mediu a adoção de inteligência artificial entre 2020 e 2024.') cumpre função de caracterização metodológica descritiva; (2) Recortes de adoção/benefício operacional ('A automação de tarefas repetitivas cresceu 40 por cento.' e 'Sistemas de decisão assistida por IA foram adotados por 35 por cento das organizações.') cumprem função de quantificação descritiva de implantação; (3) Recorte de risco ('Riscos de viés não mitigado foram identificados em 18 por cento dos sistemas auditados.') cumpre função de relato de incidência de falha em auditoria; (4) Recorte de restrição de desenho ('Não houve ensaio randomizado nem grupo de controle.') cumpre função de qualificação negativa de causalidade.",
+          "Refutação de suficiência documental: Refuta-se o uso de 'obs1' como citação científica válida para o domínio real, pois o identificador 'obs1' é local/arbitrário, não possui DOI nem metadados de publicação, e sua proveniência declara explicitamente tratar-se de 'fixture sintética para execução real do conselho'.",
+          "Solicitação formal ao primário (MarceloClaro): Solicita-se ao orquestrador primário a execução das buscas bibliográficas pendentes e a resolução de DOIs com emissão de recibos verificáveis para substituir ou complementar a fixture sintética por literatura empírica primária real."
+        ],
+        "evidence": [
+          {
+            "source_id": "obs1",
+            "quote": "Estudo observacional com 120 organizações mediu a adoção de inteligência artificial entre 2020 e 2024.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          },
+          {
+            "source_id": "obs1",
+            "quote": "A automação de tarefas repetitivas cresceu 40 por cento.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          },
+          {
+            "source_id": "obs1",
+            "quote": "Sistemas de decisão assistida por IA foram adotados por 35 por cento das organizações.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          },
+          {
+            "source_id": "obs1",
+            "quote": "Riscos de viés não mitigado foram identificados em 18 por cento dos sistemas auditados.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          },
+          {
+            "source_id": "obs1",
+            "quote": "Não houve ensaio randomizado nem grupo de controle.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          }
+        ],
+        "limitations": [
+          "Ausência total de DOI, PMID, arXiv ID ou recibo de resolução bibliográfica no único registro disponível ('obs1').",
+          "Proveniência declarada como 'fixture sintética para execução real do conselho', o que invalida qualquer extrapolação empírica sobre adoção, benefícios ou riscos reais de IA em organizações.",
+          "O recorte 'A automação de tarefas repetitivas cresceu 40 por cento' documenta expansão de uso, mas não mede diretamente ganho líquido de produtividade, eficiência financeira ou benefício causal, dada a ausência de grupo de controle.",
+          "Impossibilidade de consultar bases externas ou resolver identificadores diretamente por restrição estrita de escopo e segurança; dependência integral de recibos fornecidos pelo orquestrador primário MarceloClaro.",
+          "Requer revisão humana para validar se os critérios de mapeamento entre recorte textual e função citacional atendem ao rigor exigido antes de eventual síntese final."
+        ],
+        "feynman": {
+          "mechanism": "A verificação de citações funciona como uma conferência de notas fiscais contra um livro-caixa: primeiro, confirma-se se o código do documento existe num registro público independente (como um DOI resolvido com recibo); segundo, confere-se palavra por palavra se o trecho copiado existe exatamente no texto original; terceiro, classifica-se o que aquele trecho realmente sustenta (por exemplo, se apenas descreve uma contagem observada ou se testa uma causa). Se o documento declara ser apenas um exemplo simulado sem registro público, as frases podem ser copiadas sem erro de digitação, mas funcionam apenas como teste de encanamento do sistema, nunca como prova sobre o mundo real.",
+          "observations": [
+            "O corpus fornecido contém exatamente um item com 'id' igual a 'obs1'.",
+            "O campo 'provenance' de 'obs1' contém a string literal 'fixture sintética para execução real do conselho'.",
+            "Não há campo 'doi', 'url' ou recibo criptográfico/bibliográfico anexado a 'obs1'.",
+            "As cinco frases extraídas em 'evidence' são substrings exatas do campo 'text' de 'obs1'.",
+            "O texto de 'obs1' afirma explicitamente: 'Não houve ensaio randomizado nem grupo de controle.'"
+          ],
+          "inferences": [
+            "Como 'obs1' é uma fixture sintética sem DOI ou recibo de resolução, qualquer citação a 'obs1' tem função meramente operacional (teste do pipeline do conselho R989) e zero peso de evidência empírica externa.",
+            "Mesmo dentro do cenário simulado por 'obs1', o crescimento de 40% em automação e a adoção de 35% em decisão assistida representam medidas de implantação (adoção) e não comprovação causal de benefício organizacional, devido à ausência de grupo de controle.",
+            "O status da fase deve permanecer 'partial' até que o orquestrador MarceloClaro forneça fontes primárias reais com DOIs resolvidos e respectivos recibos."
+          ],
+          "test_oracle": "Para cada item em 'evidence', a propriedade 'quote' deve ser substring exata (comparação byte a byte) do campo 'text' do respectivo 'source_id' no corpus fornecido, e nenhuma afirmação de validade empírica externa deve ser emitida enquanto o metadado de DOI/recibo estiver ausente ou marcado como sintético.",
+          "min_experiment": "Solicitar ao orquestrador primário MarceloClaro a resolução de pelo menos 3 DOIs de estudos observacionais ou experimentais reais sobre adoção organizacional de IA (2020–2024) e verificar se: (a) o recibo de resolução retorna metadados válidos de publicação, e (b) os recortes literais extraídos preservam correspondência exata de substring e separação explícita entre taxa de adoção, benefício medido e risco auditado."
+        },
+        "feynman_checklist": {
+          "feg_01_06_score": 10,
+          "feg": {
+            "FEG-01": 2,
+            "FEG-02": 2,
+            "FEG-03": 2,
+            "FEG-04": 2,
+            "FEG-05": 0,
+            "FEG-06": 2
+          },
+          "reason": null,
+          "scope": "declared_completeness_only"
+        },
+        "evidence_scope": "literal_match_to_unverified_supplied_corpus",
+        "human_validation": false
+      },
+      "task_id": null,
+      "executor": "antigravity"
+    },
+    {
+      "agent_id": "scientist-methodology",
+      "report": {
+        "status": "partial",
+        "findings": [
+          "Pergunta e hipótese metodológica: O desenho empírico, o paradigma de investigação, o plano amostral e os instrumentos descritos no corpus ('obs1') possuem validade interna, validade de construto e validade externa suficientes para caracterizar a adoção organizacional de inteligência artificial, seus benefícios e seus riscos? Hipótese nula de adequação metodológica: o desenho observacional sem controle e sem especificação psicométrica/instrumentada não sustenta inferência causal de benefícios ou estimativa não enviesada de prevalência de riscos.",
+          "Confronto de desenho e paradigma: O registro 'obs1' emprega um paradigma quantitativo puramente observacional longitudinal descritivo (2020–2024) sem alocação experimental nem contrafactual ('Não houve ensaio randomizado nem grupo de controle.'). Enquanto esse desenho permite descrever tendências brutas de implantação no grupo observado, ele é estruturalmente incapaz de isolar o benefício líquido da adoção de IA frente a fatores de confusão seculares (ex.: choque de digitalização pós-2020, mudanças macroeconômicas ou maturação de TI preexistente).",
+          "Confronto de amostragem: Embora a amostra reporte '120 organizações', o texto omite completamente o enquadramento populacional (porte, setor, região geográfica), o método de recrutamento (probabilístico vs. conveniência/autosseleção) e a taxa de atrito entre 2020 e 2024. Além disso, a taxa de '18 por cento dos sistemas auditados' com viés não mitigado incide sobre um subconjunto ('sistemas auditados') cujo denominador e critério de seleção para auditoria não são revelados, introduzindo risco severo de viés de seleção e de detecção.",
+          "Confronto de instrumentos e mensuração: Não há definição dos instrumentos de coleta ou protocolos de auditoria utilizados para medir 'automação de tarefas repetitivas' (crescimento de 40%), 'decisão assistida por IA' (35% de adoção) ou 'viés não mitigado' (18%). Sem especificação operacional do instrumento (ex.: métricas de log de sistema vs. questionário autorreportado por gestores; limiares matemáticos de paridade demográfica ou igualdade de probabilidades na auditoria de viés), há ameaça direta à validade de construto e à reprodutibilidade.",
+          "Refutação de suficiência e solicitação ao primário: Rejeita-se qualquer interpretação de '40 por cento' de crescimento em automação como benefício organizacional comprovado (produtividade, qualidade ou eficiência), pois o dado mede apenas expansão de uso/implantação e não desfecho de desempenho. Solicita-se ao orquestrador primário MarceloClaro a busca de estudos primários reais com protocolos amostrais e instrumentos declarados, bem como revisão humana crítica deste parecer."
+        ],
+        "evidence": [
+          {
+            "source_id": "obs1",
+            "quote": "Estudo observacional com 120 organizações mediu a adoção de inteligência artificial entre 2020 e 2024.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          },
+          {
+            "source_id": "obs1",
+            "quote": "A automação de tarefas repetitivas cresceu 40 por cento. Sistemas de decisão assistida por IA foram adotados por 35 por cento das organizações.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          },
+          {
+            "source_id": "obs1",
+            "quote": "Riscos de viés não mitigado foram identificados em 18 por cento dos sistemas auditados.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          },
+          {
+            "source_id": "obs1",
+            "quote": "Não houve ensaio randomizado nem grupo de controle.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          }
+        ],
+        "limitations": [
+          "O corpus restringe-se a uma única fonte ('obs1') cuja proveniência é explicitamente uma 'fixture sintética para execução real do conselho', impedindo qualquer generalização empírica para organizações reais.",
+          "Ausência de grupo de controle, randomização ou estratégia quase-experimental (ex.: diferenças em diferenças ou pareamento por escore de propensão), inviabilizando atribuir benefícios causais à adoção de IA.",
+          "Omissão total da estratégia de amostragem das 120 organizações e do critério de seleção dos 'sistemas auditados', expondo as estimativas a viés de seleção, sobrevivência e vigilância diferencial.",
+          "Inexistência de descrição dos instrumentos de mensuração e dos limiares operacionais de auditoria de viés, impossibilitando aferir confiabilidade e validade de construto.",
+          "Necessidade obrigatória de revisão humana e de buscas bibliográficas externas conduzidas pelo orquestrador primário MarceloClaro para obtenção de evidências empíricas primárias verificáveis."
+        ],
+        "feynman": {
+          "mechanism": "Medir como uma tecnologia afeta organizações sem um grupo de comparação e sem calibrar o instrumento de medida equivale a medir a velocidade de barcos apenas olhando para os que decidiram ligar o motor a favor da correnteza: não sabemos quanto do avanço veio do motor (a IA) e quanto veio da correnteza do rio (mudanças gerais no mercado entre 2020 e 2024). Além disso, contar defeitos apenas nos barcos que passaram por vistoria ('sistemas auditados') sem saber quantos barcos navegaram sem vistoria impede saber o risco real da frota inteira.",
+          "observations": [
+            "O registro 'obs1' declara tratar-se de estudo observacional com 120 organizações acompanhadas entre 2020 e 2024.",
+            "O registro reporta crescimento de 40 por cento na automação de tarefas repetitivas e adoção de sistemas de decisão assistida por IA em 35 por cento das organizações.",
+            "O registro reporta identificação de riscos de viés não mitigado em 18 por cento dos sistemas auditados.",
+            "O registro declara explicitamente que não houve ensaio randomizado nem grupo de controle e possui proveniência de fixture sintética."
+          ],
+          "inferences": [
+            "O crescimento de 40 por cento na automação de tarefas repetitivas reflete expansão de uso ou presença tecnológica, mas não demonstra benefício líquido organizacional, pois o desenho não mede impacto comparativo sobre desempenho nem desconta tendências temporais externas.",
+            "A proporção de 18 por cento de viés não mitigado nos sistemas auditados não pode ser extrapolada como prevalência de risco no universo das 120 organizações sem conhecer a fração de sistemas submetidos à auditoria e o protocolo de teste utilizado.",
+            "A ausência de especificação do plano amostral e dos instrumentos de coleta torna as métricas reportadas vulneráveis a viés de autorrelato e viés de seleção."
+          ],
+          "test_oracle": "Um desenho metodologicamente válido para responder à pergunta deve apresentar: (1) protocolo de amostragem com população-alvo, critérios de elegibilidade e taxa de não resposta documentados; (2) definição operacional e instrumento validado para medir adoção, benefício (desfecho organizacional objetivo) e risco (protocolo padronizado de auditoria de viés aplicado a 100% da amostra ou a subamostra aleatória); e (3) comparador contrafactual (ensaio controlado randomizado em cluster, escalonamento stepped-wedge ou desenho quase-experimental longitudinal com grupo de controle pareado).",
+          "min_experiment": "Solicitar ao orquestrador MarceloClaro a extração ou coleta de uma matriz mínima de auditoria metodológica sobre um conjunto de N organizações (com grupo adotante e grupo controle não adotante pareado por setor e porte entre t0 e t1), aplicando um instrumento único pré-registrado de desempenho operacional e um teste padronizado de disparidade algorítmica em todos os sistemas implantados; se a diferença entre grupos desaparecer após controle de tendência temporal ou se a taxa de viés mudar significativamente entre auditoria censitária e auditoria seletiva, confirma-se a insuficiência do desenho observacional não controlado."
+        },
+        "feynman_checklist": {
+          "feg_01_06_score": 10,
+          "feg": {
+            "FEG-01": 2,
+            "FEG-02": 2,
+            "FEG-03": 2,
+            "FEG-04": 2,
+            "FEG-05": 0,
+            "FEG-06": 2
+          },
+          "reason": null,
+          "scope": "declared_completeness_only"
+        },
+        "evidence_scope": "literal_match_to_unverified_supplied_corpus",
+        "human_validation": false
+      },
+      "task_id": null,
+      "executor": "antigravity"
+    },
+    {
+      "agent_id": "scientist-statistics",
+      "report": {
+        "status": "partial",
+        "findings": [
+          "Pergunta e hipótese analítico-estatística: As estimativas quantitativas reportadas no corpus ('obs1') para caracterizar a adoção de IA, seus benefícios operacionais e seus riscos satisfazem os pressupostos estatísticos de estimação intervalar, controle de dados faltantes (atrito longitudinal 2020–2024), especificação de denominadores e correção para multiplicidade? Hipótese: Os números descritivos reportados em 'obs1' (40%, 35% e 18%) carecem de medidas de dispersão, intervalos de incerteza e denominadores explícitos por subgrupo, inviabilizando inferência estatística e comparação de tamanhos de efeito sem recálculo indevido.",
+          "Auditoria de tamanhos de efeito e ambiguidade de escala: O crescimento reportado de '40 por cento' na automação de tarefas repetitivas entre 2020 e 2024 não especifica se a variação é relativa (razão sobre a linha de base de 2020) ou absoluta (diferença em pontos percentuais), nem reporta a proporção basal em 2020. Sem a linha de base e a variância intra-organizacional, o tamanho de efeito padronizado é indeterminado.",
+          "Auditoria de denominadores e unidade de análise: Enquanto a adoção de sistemas de decisão assistida por IA (35%) utiliza as organizações (N = 120) como unidade de análise aparente, a taxa de '18 por cento dos sistemas auditados' com viés não mitigado muda a unidade de análise de 'organizações' para 'sistemas auditados' sem informar o número total de sistemas avaliados nem o agrupamento (clustering) de múltiplos sistemas dentro da mesma organização, violando o pressuposto de independência das observações.",
+          "Auditoria de intervalos, precisão e dados faltantes: Nenhuma das três estimativas percentuais (40%, 35%, 18%) vem acompanhada de intervalo de confiança, erro-padrão ou distribuição amostral. Adicionalmente, por tratar-se de acompanhamento longitudinal entre 2020 e 2024 em 120 organizações sem menção a perdas de seguimento, há omissão crítica sobre a taxa de dados faltantes (missingness/attrition) e sobre o mecanismo de ausência (MCAR, MAR ou MNAR).",
+          "Auditoria de multiplicidade e ausência de contrafactual: O reporte simultâneo de múltiplos desfechos (crescimento de automação, taxa de adoção de decisão assistida e prevalência de viés) sem protocolo pré-especificado ou ajuste para comparações múltiplas eleva o risco de descobertas fortuitas ou relato seletivo (outcome reporting bias). A inexistência explícita de ensaio randomizado e grupo de controle impede separar tendência secular (2020–2024) de efeito atribuível à tecnologia."
+        ],
+        "evidence": [
+          {
+            "source_id": "obs1",
+            "quote": "Estudo observacional com 120 organizações mediu a adoção de inteligência artificial entre 2020 e 2024.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          },
+          {
+            "source_id": "obs1",
+            "quote": "A automação de tarefas repetitivas cresceu 40 por cento.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          },
+          {
+            "source_id": "obs1",
+            "quote": "Sistemas de decisão assistida por IA foram adotados por 35 por cento das organizações.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          },
+          {
+            "source_id": "obs1",
+            "quote": "Riscos de viés não mitigado foram identificados em 18 por cento dos sistemas auditados.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          },
+          {
+            "source_id": "obs1",
+            "quote": "Não houve ensaio randomizado nem grupo de controle.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          }
+        ],
+        "limitations": [
+          "O corpus resume-se a uma única fonte ('obs1') declarada como 'fixture sintética para execução real do conselho', sem dados empíricos primários reais.",
+          "Proibição estrita de recalcular números inventados ou imputar denominadores e intervalos de confiança não fornecidos na fonte original.",
+          "Ausência completa de contagens brutas (numeradores e denominadores exatos para sistemas auditados e para a linha de base de 2020), medidas de variância, intervalos de confiança e matriz de dados faltantes entre 2020 e 2024.",
+          "Desenho estritamente observacional sem grupo de controle, impossibilitando a estimação de tamanhos de efeito causais para benefícios ou riscos.",
+          "Requer-se revisão humana e solicitação ao orquestrador primário MarceloClaro para busca de estudos primários que reportem tabelas de contingência completas, intervalos de confiança, análise de atrito longitudinal e controle de confusão."
+        ],
+        "feynman": {
+          "mechanism": "Um percentual isolado funciona como uma fotografia sem escala: dizer que algo 'cresceu 40%' não informa se passou de 5% para 7% (aumento relativo de 40%) ou de 10% para 50% (aumento absoluto de 40 pontos percentuais). Além disso, quando se medem 120 organizações ao longo de quatro anos (2020 a 2024), empresas que deixam de responder ou mudam de ramo criam buracos nos dados (dados faltantes) que distorcem a média final. Da mesma forma, medir viés em '18% dos sistemas auditados' sem dizer quantos sistemas pertencem a cada organização mistura unidades diferentes (empresas versus programas de computador), pois uma única empresa com dezenas de sistemas defeituosos pode inflar o percentual total sem que o problema seja generalizado.",
+          "observations": [
+            "O registro 'obs1' declara uma amostra de 120 organizações acompanhadas entre 2020 e 2024.",
+            "O registro 'obs1' reporta crescimento de 40 por cento na automação de tarefas repetitivas.",
+            "O registro 'obs1' reporta adoção de sistemas de decisão assistida por IA em 35 por cento das organizações.",
+            "O registro 'obs1' reporta riscos de viés não mitigado em 18 por cento dos sistemas auditados.",
+            "O registro 'obs1' declara explicitamente que não houve ensaio randomizado nem grupo de controle e que sua proveniência é uma fixture sintética."
+          ],
+          "inferences": [
+            "Os três percentuais reportados (40%, 35%, 18%) são estatisticamente insuficientes para meta-análise ou síntese quantitativa robusta porque omitiram numeradores, denominadores específicos, linha de base de 2020 e intervalos de confiança.",
+            "A mudança de unidade amostral de 'organizações' (N = 120) para 'sistemas auditados' (N desconhecido) introduz dependência estrutural (efeito de cluster) não corrigida.",
+            "A ausência de relato sobre perdas de acompanhamento entre 2020 e 2024 oculta potencial viés de sobrevivência ou atrito seletivo."
+          ],
+          "test_oracle": "Um conjunto de dados analiticamente auditável passa no teste se, e somente se, para cada estimativa reportada existirem: (1) numerador e denominador inteiros explícitos em cada onda temporal (2020 e 2024); (2) especificação inequívoca de variação absoluta versus relativa; (3) intervalo de confiança ou erro-padrão ajustado para agrupamento (organização vs. sistema); e (4) contabilização exata de observações faltantes (atrito) no período.",
+          "min_experiment": "Solicitar ao orquestrador MarceloClaro a extração estruturada, em ao menos dois estudos observacionais ou experimentais primários reais, de uma tabela 2x2 longitudinal contendo: contagem bruta de organizações em 2020 e 2024, número de perdas de seguimento, número total de sistemas auditados por organização e intervalos de confiança de 95% para taxas de adoção e de falhas/viés, verificando se a precisão estatística se mantém após ajuste por agrupamento."
+        },
+        "feynman_checklist": {
+          "feg_01_06_score": 10,
+          "feg": {
+            "FEG-01": 2,
+            "FEG-02": 2,
+            "FEG-03": 2,
+            "FEG-04": 2,
+            "FEG-05": 0,
+            "FEG-06": 2
+          },
+          "reason": null,
+          "scope": "declared_completeness_only"
+        },
+        "evidence_scope": "literal_match_to_unverified_supplied_corpus",
+        "human_validation": false
+      },
+      "task_id": null,
+      "executor": "antigravity"
+    },
+    {
+      "agent_id": "scientist-qualitative",
+      "report": {
+        "status": "partial",
+        "findings": [
+          "Pergunta e objetivo interpretativo: De que modo o corpus disponível ('obs1') sustenta interpretações sobre a adoção organizacional de inteligência artificial, seus benefícios e seus riscos, preservando a coerência com o paradigma observacional-descritivo sem impor indevidamente critérios de ensaios experimentais (como randomização), mas exigindo densidade descritiva, reflexividade e mapeamento de casos negativos?",
+          "Desenho da análise interpretativa e de corpus: Auditoria qualitativa e epistemológica do registro 'obs1' e dos pareceres precedentes, verificando (a) adequação das inferências aos limites do texto-fonte, (b) presença de posicionamento reflexivo sobre quem definiu e auditou as categorias de 'automação', 'decisão assistida' e 'viés não mitigado', e (c) documentação explícita de casos negativos, desistências ou falhas de adoção.",
+          "Conferência de corpus e adequação paradigmática: A ausência de ensaio randomizado ou grupo de controle em 'obs1' não invalida, por si só, um estudo cujo paradigma seja descritivo, observacional ou interpretativo em organizações reais; contudo, mesmo sob critérios próprios de pesquisa observacional e organizacional, o registro 'obs1' é insuficiente por tratar-se de fixture sintética desprovida de contexto setorial, porte organizacional e definição interpretativa das práticas sociotécnicas.",
+          "Auditoria de interpretação (benefícios vs. adoção bruta): O texto de 'obs1' relata crescimento de 40% na automação de tarefas repetitivas e adoção de 35% em sistemas de decisão assistida, mas não contém qualquer evidência direta de 'benefícios' (como ganho líquido de qualidade, bem-estar laboral, redução de erros ou retorno operacional). Tratar taxas de implantação ou de crescimento de automação como sinônimo automático de benefício organizacional constitui salto interpretativo não autorizado pelos dados.",
+          "Auditoria de reflexividade: O corpus omite completamente as condições de produção do conhecimento — não informa quais critérios normativos ou técnicos definiram 'viés não mitigado', quem conduziu a auditoria dos sistemas, qual a relação dos pesquisadores com as 120 organizações nem se a seleção dos sistemas auditados sofreu viés de conveniência ou de transparência organizacional.",
+          "Análise de casos negativos e assimetrias ocultas: O corpus permite identificar complementarmente que 65% das organizações não adotaram sistemas de decisão assistida por IA e que 82% dos sistemas auditados não tiveram riscos de viés não mitigado reportados; entretanto, não há caracterização substantiva dos casos negativos (organizações que rejeitaram, abandonaram ou falharam ao implantar IA, ou sistemas que geraram efeitos adversos fora do escopo estreito de 'viés auditado').",
+          "Refutação e preservação de conflitos: Refuta-se qualquer síntese que conclua eficácia positiva da IA a partir de 'obs1', bem como qualquer descarte sumário de estudos organizacionais apenas por não serem ensaios clínicos randomizados. O conflito central reside entre a amplitude da pergunta (que exige caracterizar benefícios e riscos reais) e a natureza estritamente sintética e telegráfica do único registro disponível.",
+          "Próximo teste e solicitação ao primário: Solicita-se ao orquestrador primário MarceloClaro a recuperação de estudos empíricos primários (observacionais longitudinais, estudos de caso comparativos ou etnografias organizacionais documentadas) que incluam descrição densa do contexto, declaração de reflexividade dos autores/auditores e análise explícita de casos negativos (abandono ou falha de adoção de IA), submetendo o resultado à revisão humana."
+        ],
+        "evidence": [
+          {
+            "source_id": "obs1",
+            "quote": "Estudo observacional com 120 organizações mediu a adoção de inteligência artificial entre 2020 e 2024.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          },
+          {
+            "source_id": "obs1",
+            "quote": "A automação de tarefas repetitivas cresceu 40 por cento. Sistemas de decisão assistida por IA foram adotados por 35 por cento das organizações.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          },
+          {
+            "source_id": "obs1",
+            "quote": "Riscos de viés não mitigado foram identificados em 18 por cento dos sistemas auditados.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          },
+          {
+            "source_id": "obs1",
+            "quote": "Não houve ensaio randomizado nem grupo de controle.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          }
+        ],
+        "limitations": [
+          "O corpus fornecido restringe-se a uma única fonte ('obs1') cuja proveniência é declarada como 'fixture sintética para execução real do conselho', impedindo inferências substantivas sobre organizações reais.",
+          "Ausência total de dados empíricos sobre 'benefícios' no registro 'obs1': há apenas métricas de difusão/adoção (40% de crescimento em automação repetitiva; 35% de adoção em decisão assistida) e uma métrica de risco (18% de viés não mitigado).",
+          "Ausência de metadados de reflexividade em 'obs1': não há registro de quem auditou os sistemas, sob qual protocolo de governança, nem qual fração das 120 organizações teve seus sistemas efetivamente auditados.",
+          "Omissão de casos negativos qualitativos ou quantitativos detalhados (ex.: taxas de abandono de projetos de IA, resistência organizacional, custos de manutenção ou falhas operacionais em tarefas não repetitivas).",
+          "Necessidade de revisão humana e de busca bibliográfica externa conduzida pelo orquestrador primário MarceloClaro para suprir literatura empírica verificável."
+        ],
+        "feynman": {
+          "mechanism": "Conferir a interpretação de um corpus sem impor um único molde experimental funciona como inspecionar o diário de bordo de 120 fábricas: não precisamos exigir que metade das fábricas tenha sido sorteada em laboratório para saber o que aconteceu lá dentro, mas precisamos separar o ato de 'instalar uma máquina nova' (adoção) da prova de que 'a fábrica melhorou' (benefício). Além disso, é indispensável perguntar quem escreveu o relatório de falhas (reflexividade) e o que aconteceu nas fábricas que decidiram não usar a máquina ou que a desligaram depois (casos negativos).",
+          "observations": [
+            "O registro 'obs1' tem proveniência declarada como 'fixture sintética para execução real do conselho'.",
+            "O texto de 'obs1' afirma que um estudo observacional acompanhou 120 organizações entre 2020 e 2024.",
+            "O texto de 'obs1' reporta crescimento de 40 por cento na automação de tarefas repetitivas e adoção de sistemas de decisão assistida por IA por 35 por cento das organizações.",
+            "O texto de 'obs1' reporta que riscos de viés não mitigado foram identificados em 18 por cento dos sistemas auditados.",
+            "O texto de 'obs1' declara explicitamente que não houve ensaio randomizado nem grupo de controle.",
+            "O texto de 'obs1' não menciona nenhuma medida direta de benefício organizacional, nem descreve quem realizou a auditoria ou o que ocorreu nos 65 por cento de organizações que não adotaram decisão assistida."
+          ],
+          "inferences": [
+            "A pergunta sobre 'benefícios' permanece empiricamente sem resposta no corpus atual, pois crescimento de automação (40%) e presença de ferramenta (35%) medem uso/difusão, e não resultado benéfico comprovado.",
+            "A falta de randomização não desqualifica o paradigma observacional para mapear adoção e riscos, mas a falta de transparência sobre como os 'sistemas auditados' foram escolhidos e avaliados compromete a interpretação dos 18% de viés não mitigado.",
+            "Sem o estudo dos casos negativos (por que 65% não adotaram decisão assistida ou se houve projetos fracassados), qualquer narrativa sobre a adoção organizacional de IA fica sujeita a viés de sobrevivência e de seleção.",
+            "O status da análise deve ser 'partial', exigindo busca de literatura primária real pelo orquestrador e revisão humana."
+          ],
+          "test_oracle": "Um corpus e sua respectiva análise interpretativa serão considerados aprovados quando: (1) cada afirmação de benefício ou risco estiver ancorada em desfechos observados e não apenas na presença da tecnologia; (2) os critérios e a autoria das auditorias de risco estiverem declarados (reflexividade); e (3) os casos de não adoção, rejeição ou falha (casos negativos) estiverem documentados e contrastados com os casos de adoção, respeitando o paradigma metodológico de cada estudo primário.",
+          "min_experiment": "Solicitar ao orquestrador MarceloClaro a extração estruturada de um par contrastante de estudos organizacionais reais (ou registros longitudinais completos com casos positivos e negativos de adoção de IA) e verificar, em tabela de auditoria cega, se as conclusões dos autores separam estritamente métricas de implantação ('quantos usam') de métricas de impacto ('quais benefícios e danos ocorreram'), registrando explicitamente os motivos de não adoção ou abandono nas organizações negativas."
+        },
+        "feynman_checklist": {
+          "feg_01_06_score": 10,
+          "feg": {
+            "FEG-01": 2,
+            "FEG-02": 2,
+            "FEG-03": 2,
+            "FEG-04": 2,
+            "FEG-05": 0,
+            "FEG-06": 2
+          },
+          "reason": null,
+          "scope": "declared_completeness_only"
+        },
+        "evidence_scope": "literal_match_to_unverified_supplied_corpus",
+        "human_validation": false
+      },
+      "task_id": null,
+      "executor": "antigravity"
+    },
+    {
+      "agent_id": "scientist-reproduction",
+      "report": {
+        "status": "partial",
+        "findings": [
+          "Pergunta e hipótese computacional (Fase: challenge): Os artefatos referenciados no corpus ('obs1') possuem dados brutos tabulares, scripts de processamento, especificações de ambiente computacional, hashes criptográficos e registros de execução suficientes para reproduzir deterministicamente as porcentagens reportadas (40%, 35% e 18%)? Hipótese de auditoria: o registro 'obs1' contém apenas agregados textuais declarativos de uma fixture sintética, sem artefatos computacionais verificáveis.",
+          "Desenho da conferência computacional: Inspeção estática (sem execução de código externo ou acesso de rede) do registro 'obs1' e dos pareceres precedentes para verificar a presença de: (1) hashes de integridade (ex.: SHA-256) das tabelas das 120 organizações (2020–2024); (2) scripts ou pipelines de agregação; (3) manifesto de ambiente (versões de interpretadores, bibliotecas e sementes pseudoaleatórias); e (4) logs ou recibos de execução da auditoria de viés.",
+          "Análise de dados e código: O registro 'obs1' reporta quatro valores numéricos ('120 organizações', 'cresceu 40 por cento', '35 por cento das organizações', '18 por cento dos sistemas auditados'), mas não fornece o dataset subjacente nem o código de cálculo. Sem a matriz de dados brutos e as fórmulas de agregação implementadas em código, é computacionalmente impossível verificar se 'cresceu 40 por cento' resulta de variação relativa ou de diferença absoluta em pontos percentuais, ou qual é o denominador exato de 'sistemas auditados'.",
+          "Análise de ambiente, hashes e registros de execução: Há ausência total de hashes criptográficos de dados/código, especificações de ambiente de execução e logs de auditoria computacional para os 'sistemas de decisão assistida por IA' e para a detecção de 'viés não mitigado'. A proveniência declarada ('fixture sintética para execução real do conselho') confirma que o artefato é um insumo de teste de fluxo, não um pacote de reprodutibilidade empírica.",
+          "Refutação e conflitos preservados: Refuta-se qualquer tentativa de tratar os percentuais de 'obs1' como saídas computacionalmente reproduzidas ou auditadas. Converge-se com os pareceres metodológico e estatístico quanto à opacidade de denominadores e escalas, adicionando o bloqueio de reprodutibilidade computacional (ausência de dados brutos, código, hashes e logs). Solicita-se ao orquestrador primário MarceloClaro a busca de pacotes de replicação (repositórios com dados, código e hashes verificáveis) e revisão humana."
+        ],
+        "evidence": [
+          {
+            "source_id": "obs1",
+            "quote": "Estudo observacional com 120 organizações mediu a adoção de inteligência artificial entre 2020 e 2024.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          },
+          {
+            "source_id": "obs1",
+            "quote": "A automação de tarefas repetitivas cresceu 40 por cento. Sistemas de decisão assistida por IA foram adotados por 35 por cento das organizações.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          },
+          {
+            "source_id": "obs1",
+            "quote": "Riscos de viés não mitigado foram identificados em 18 por cento dos sistemas auditados. Não houve ensaio randomizado nem grupo de controle.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          }
+        ],
+        "limitations": [
+          "O único registro disponível ('obs1') é explicitamente uma 'fixture sintética para execução real do conselho', desprovida de arquivos de dados brutos, scripts de análise, manifesto de ambiente, hashes criptográficos (SHA-256) e logs de execução.",
+          "Restrição estrita de escopo e segurança: este agente não executa código fornecido pelo corpus, não edita arquivos, não acessa rede diretamente e depende exclusivamente do orquestrador primário MarceloClaro para recuperação de artefatos e recibos de verificação.",
+          "Impossibilidade de verificar a exatidão aritmética e a integridade de pipeline das taxas de 40%, 35% e 18% sem os denominadores brutos e os registros de auditoria dos sistemas avaliados; requer-se revisão humana."
+        ],
+        "feynman": {
+          "mechanism": "Conferir a reprodutibilidade computacional de um estudo funciona como auditar o balanço de um caixa: não basta ler um resumo dizendo que as vendas subiram 40% ou que 18% das notas tinham erro. Para saber se os números são reais e exatos, é preciso ter a planilha com os registros das 120 organizações, a fórmula exata que somou cada coluna, uma impressão digital eletrônica (hash) que garanta que a planilha não foi alterada e o registro de quando o programa rodou. Aqui temos apenas o resumo em texto sintético, sem planilha, sem fórmula e sem impressão digital.",
+          "observations": [
+            "O registro 'obs1' tem proveniência declarada como 'fixture sintética para execução real do conselho'.",
+            "O texto de 'obs1' declara 120 organizações entre 2020 e 2024, crescimento de 40% na automação de tarefas repetitivas, adoção de decisão assistida por IA em 35% das organizações e riscos de viés não mitigado em 18% dos sistemas auditados.",
+            "O texto de 'obs1' declara que não houve ensaio randomizado nem grupo de controle.",
+            "Não há no corpus nenhum arquivo de dados tabulares, script de código, especificação de ambiente, hash criptográfico ou log de execução anexado a 'obs1'."
+          ],
+          "inferences": [
+            "As estatísticas descritivas de 'obs1' (40%, 35%, 18%) não possuem rastreabilidade computacional nem reprodutibilidade verificável no estado atual do corpus.",
+            "A ausência do número absoluto de sistemas auditados e das contagens de linha de base (2020 vs. 2024) impede reconstruir aritmeticamente as proporções reportadas mesmo por inspeção estática.",
+            "Qualquer síntese sobre benefícios e riscos baseada apenas em 'obs1' permanece bloqueada quanto à verificação de integridade de dados e código até que o primário MarceloClaro forneça artefatos primários com hashes e metadados de execução."
+          ],
+          "test_oracle": "O artefato de auditoria passa na conferência computacional se e somente se: (1) o arquivo de dados brutos (N=120 organizações, 2020–2024) e a tabela de sistemas auditados possuírem hashes SHA-256 idênticos aos registrados no manifesto de proveniência; (2) a inspeção das fórmulas de agregação e o recibo de execução determinística (fornecido pelo orquestrador primário em ambiente isolado) reproduzirem exatamente as proporções de 40%, 35% e 18% sem discrepância de arredondamento ou perda de registros; caso contrário, a reprodutibilidade computacional é refutada.",
+          "min_experiment": "Solicitar ao orquestrador primário MarceloClaro um pacote mínimo de reprodutibilidade (ou fixture estendida para teste de contrato) contendo: (a) tabela estática anonimizada com 120 linhas (organizações) contendo indicadores binários/contagens de automação em 2020 e 2024, adoção de decisão assistida e contagem de sistemas auditados com e sem viés; (b) manifesto com hashes SHA-256 dessa tabela e do script de agregação; e (c) log de saída da execução controlada, permitindo conferir estaticamente a correspondência exata entre os dados de entrada e os percentuais reportados."
+        },
+        "feynman_checklist": {
+          "feg_01_06_score": 10,
+          "feg": {
+            "FEG-01": 2,
+            "FEG-02": 2,
+            "FEG-03": 2,
+            "FEG-04": 2,
+            "FEG-05": 0,
+            "FEG-06": 2
+          },
+          "reason": null,
+          "scope": "declared_completeness_only"
+        },
+        "evidence_scope": "literal_match_to_unverified_supplied_corpus",
+        "human_validation": false
+      },
+      "task_id": null,
+      "executor": "antigravity"
+    },
+    {
+      "agent_id": "scientist-feynman",
+      "report": {
+        "status": "partial",
+        "findings": [
+          "Pergunta e hipótese interpretativa (Fase: challenge — Explicação de Mecanismo e Teste de Compreensão): As afirmações sobre adoção organizacional de IA, seus benefícios e riscos na fonte disponível ('obs1') descrevem uma cadeia causal verificável ou limitam-se a contagens descritivas desconectadas de mecanismo? Hipótese: O registro 'obs1' relata frequências de implantação e de falhas ('40 por cento', '35 por cento', '18 por cento'), mas omite o mecanismo causal subjacente, confundindo a presença da ferramenta (adoção de automação) com benefício organizacional líquido e deixando uma lacuna mecânica entre o uso da tecnologia e a manifestação de viés.",
+          "Desenho da auditoria Feynman: Decomposição das declarações do corpus em (1) observações brutas estritas (o que foi efetivamente contado no texto), (2) inferências não demonstradas (o que se supõe que ocorreu devido à IA), (3) explicação mecânica em linguagem direta sem jargão circular, (4) localização de lacunas estruturais e (5) formulação de uma pergunta de transferência e de um menor experimento capaz de falsear o ganho atribuído à IA.",
+          "Análise e localização de lacunas mecânicas: (Lacuna 1 — Adoção vs. Benefício) O texto afirma que 'A automação de tarefas repetitivas cresceu 40 por cento', mas não mede tempo economizado, taxa de retrabalho, custo operacional ou qualidade do produto; assumir que automatizar tarefas repetitivas equivale a um benefício organizacional é um salto lógico não comprovado pelos dados. (Lacuna 2 — Denominador e Mecanismo do Risco) O texto registra que 'Riscos de viés não mitigado foram identificados em 18 por cento dos sistemas auditados', mas não esclarece quantos sistemas do total foram auditados, se o viés se concentra nos sistemas de decisão assistida ('35 por cento das organizações') ou na automação repetitiva, nem por qual engrenagem o erro é produzido (ex.: dados históricos enviesados, regras de corte inadequadas ou aceitação acrítica pelo operador humano).",
+          "Refutação de compreensão aparente (fluência vs. mecanismo): Repetir que 'a adoção cresceu e trouxe riscos de viés' é apenas fluência verbal circular. Sem grupo de controle e sem medição de desempenho antes e depois, o aumento de 40% na automação e a adoção por 35% das organizações podem refletir apenas substituição de software legado ou pressão de mercado, sem melhoria real de decisão.",
+          "Pergunta de transferência (teste de compreensão do mecanismo para revisão e deliberação): Se uma organização do conjunto avaliado substituir um fluxo manual por um 'sistema de decisão assistida por IA' (como ocorreu em 35% das organizações), mas os dados históricos que alimentam esse sistema contiverem distorções passadas e não houver grupo de controle para comparação, como distinguir se uma mudança na velocidade de resposta representa um benefício operacional real ou apenas a aceleração em larga escala de um viés não mitigado (presente em 18% dos sistemas auditados)?",
+          "Próximo passo e solicitação ao orquestrador: Solicita-se ao agente primário MarceloClaro a busca de estudos empíricos primários que meçam separadamente a implantação da tecnologia e os desfechos de desempenho/erro com grupo de controle, além de revisão humana sobre o desenho experimental mínimo proposto."
+        ],
+        "evidence": [
+          {
+            "source_id": "obs1",
+            "quote": "Estudo observacional com 120 organizações mediu a adoção de inteligência artificial entre 2020 e 2024.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          },
+          {
+            "source_id": "obs1",
+            "quote": "A automação de tarefas repetitivas cresceu 40 por cento.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          },
+          {
+            "source_id": "obs1",
+            "quote": "Sistemas de decisão assistida por IA foram adotados por 35 por cento das organizações.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          },
+          {
+            "source_id": "obs1",
+            "quote": "Riscos de viés não mitigado foram identificados em 18 por cento dos sistemas auditados.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          },
+          {
+            "source_id": "obs1",
+            "quote": "Não houve ensaio randomizado nem grupo de controle.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          }
+        ],
+        "limitations": [
+          "O corpus fornecido contém exclusivamente um único registro ('obs1') cuja proveniência é declarada como 'fixture sintética para execução real do conselho', impedindo qualquer conclusão empírica sobre organizações reais.",
+          "O estudo reportado em 'obs1' não possui grupo de controle nem ensaio randomizado ('Não houve ensaio randomizado nem grupo de controle'), impossibilitando isolar o efeito da IA de fatores externos entre 2020 e 2024.",
+          "Não há dados sobre benefícios reais (produtividade, redução de erros ou retorno financeiro); o texto informa apenas o crescimento da automação ('40 por cento') e a taxa de adoção ('35 por cento'), tratando adoção como se fosse benefício.",
+          "A métrica de risco ('18 por cento dos sistemas auditados') não informa o critério de seleção para auditoria nem a proporção de sistemas que deixaram de ser auditados nas 120 organizações.",
+          "Ausência de validação humana e de literatura primária externa; nenhuma ação de rede ou execução de script foi realizada devido às restrições estritas de segurança e escopo."
+        ],
+        "feynman": {
+          "mechanism": "Em termos simples e sem jargão: uma organização funciona executando dois tipos de trabalho — tarefas mecânicas repetitivas (copiar dados, preencher formulários) e tomadas de decisão (aprovar um cadastro, priorizar um atendimento). Introduzir inteligência artificial significa colocar programas de computador para executar a parte mecânica sozinhos ou para sugerir escolhas aos funcionários humanos. O benefício só acontece de fato se esse programa fizer o trabalho mais rápido ou com menos erros do que o processo antigo. O risco de viés acontece porque o programa aprende copiando exemplos do passado: se as decisões antigas da empresa tinham distorções injustas e ninguém trava ou corrige isso no código, o programa passa a repetir e acelerar o mesmo erro automaticamente sob a aparência de um cálculo neutro. Contudo, os dados disponíveis mostram apenas que mais empresas instalaram esses programas e que quase um quinto dos programas checados tinha esse defeito de fabricação, sem mostrar se o trabalho final melhorou ou piorou.",
+          "observations": [
+            "Foram acompanhadas 120 organizações no período de 2020 a 2024 em um estudo observacional.",
+            "O indicador de automação de tarefas repetitivas registrou aumento de 40 por cento nesse período.",
+            "35 por cento das 120 organizações passaram a utilizar sistemas de decisão assistida por IA.",
+            "Em 18 por cento dos sistemas que passaram por auditoria, foram encontrados riscos de viés sem mitigação.",
+            "Não existiu grupo de controle nem sorteio (ensaio randomizado) entre as organizações."
+          ],
+          "inferences": [
+            "Inferir que o crescimento de 40 por cento na automação gerou ganho de eficiência, redução de custos ou benefício líquido para as organizações (não observado no texto).",
+            "Inferir que a adoção de sistemas de decisão assistida por 35 por cento das organizações melhorou a qualidade das decisões tomadas (não observado no texto).",
+            "Inferir que os 82 por cento restantes dos sistemas auditados (ou os sistemas não auditados) são seguros, justos ou livres de falhas operacionais.",
+            "Inferir relação de causa e efeito direta entre a passagem do tempo (2020–2024) ou a instalação de IA e qualquer mudança de desempenho organizacional, dado que não houve grupo de controle."
+          ],
+          "test_oracle": "Se a introdução de automação de tarefas repetitivas ou de decisão assistida por IA produz benefício operacional real sem amplificar riscos, então o grupo com IA deve apresentar redução mensurável no tempo de execução e na taxa de retrabalho em comparação ao grupo de controle sem IA, mantendo a taxa de disparidade/viés nas decisões igual ou inferior à linha de base humana auditada sob cegamento; caso o tempo caia mas a taxa de erro ou de viés suba (ou não difira do controle), a hipótese de benefício líquido é refutada.",
+          "min_experiment": "Selecionar uma única tarefa organizacional padronizada (ex.: triagem de solicitações internas) em uma amostra de equipes equivalentes e dividi-las aleatoriamente durante 4 semanas em dois grupos: Grupo A (processo padrão sem IA, servindo como controle) e Grupo B (uso de automação/decisão assistida por IA). Auditar 100% de uma amostra sorteada de saídas de ambos os grupos por avaliadores humanos cegos quanto à origem (IA vs. humano), medindo três variáveis concretas: (1) tempo líquido gasto até a conclusão, (2) proporção de decisões que exigiram correção posterior (retrabalho) e (3) frequência de decisões enviesadas contra subgrupos específicos."
+        },
+        "feynman_checklist": {
+          "feg_01_06_score": 10,
+          "feg": {
+            "FEG-01": 2,
+            "FEG-02": 2,
+            "FEG-03": 2,
+            "FEG-04": 2,
+            "FEG-05": 0,
+            "FEG-06": 2
+          },
+          "reason": null,
+          "scope": "declared_completeness_only"
+        },
+        "evidence_scope": "literal_match_to_unverified_supplied_corpus",
+        "human_validation": false
+      },
+      "task_id": null,
+      "executor": "antigravity"
+    },
+    {
+      "agent_id": "scientist-falsification",
+      "report": {
+        "status": "partial",
+        "findings": [
+          "Pergunta e hipótese de refutação (Fase: challenge): As variações reportadas no registro 'obs1' (crescimento de 40% em automação de tarefas repetitivas, 35% de adoção de decisão assistida e 18% de viés não mitigado) admitem explicações alternativas não causais, contraexemplos estruturais e resultados negativos omitidos que invalidam interpretações diretas de benefício líquido ou eficácia da inteligência artificial?",
+          "Desenho da análise de contraexemplos e explicações alternativas: Confronto lógico-metodológico das proposições extraíveis de 'obs1' contra quatro classes de refutação: (1) confundimento temporal e macroeconômico (2020–2024), (2) viés de sobrevivência e seleção de auditoria, (3) reclassificação semântica (efeito de rotulagem) e (4) ausência de resultados de benefício real (resultado nulo/negativo para eficácia).",
+          "Explicação alternativa 1 (Confundimento secular e choque da pandemia 2020–2024): O crescimento de 40% na automação de tarefas repetitivas entre 2020 e 2024 coincide com a transição global para trabalho remoto e digitalização forçada. Sem grupo de controle ou isolamento de variáveis, o aumento pode refletir automação determinística tradicional (scripts, RPA clássico, regras de negócio) rebatizada como IA, e não ganho atribuível a modelos de aprendizado de máquina.",
+          "Explicação alternativa 2 (Viés de detecção e seleção nos sistemas auditados): A identificação de riscos de viés não mitigado em 18% dos 'sistemas auditados' não mede a prevalência real de viés nas 120 organizações. Organizações com governança mais madura auditam mais seus sistemas (aumentando a detecção aparente), enquanto organizações sem auditoria não entram no denominador ou geram falsos negativos por omissão de inspeção.",
+          "Resultado negativo estrutural e contraexemplo de benefício: O texto de 'obs1' não reporta nenhuma métrica de benefício organizacional (ex.: produtividade, redução de custos, qualidade decisória ou satisfação). A mera adoção (35% em decisão assistida) ou aumento de automação (40%) não constitui benefício; pelo contrário, a presença de 18% de viés não mitigado sem comprovação de ganho operacional configura um cenário onde o risco documentado coexiste com benefício empírico nulo (não demonstrado).",
+          "Preservação de dissenso fundamentado: Registra-se dissenso formal contra qualquer síntese que trate 'automação de tarefas repetitivas' ou 'adoção de decisão assistida' como sinônimos de benefício organizacional. Solicita-se ao orquestrador primário MarceloClaro a busca de estudos primários que reportem falhas de implantação, abandono de projetos de IA, degradação de desempenho decisório e custos de retrabalho, submetendo o conflito interpretativo à revisão humana."
+        ],
+        "evidence": [
+          {
+            "source_id": "obs1",
+            "quote": "Estudo observacional com 120 organizações mediu a adoção de inteligência artificial entre 2020 e 2024.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          },
+          {
+            "source_id": "obs1",
+            "quote": "A automação de tarefas repetitivas cresceu 40 por cento.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          },
+          {
+            "source_id": "obs1",
+            "quote": "Sistemas de decisão assistida por IA foram adotados por 35 por cento das organizações.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          },
+          {
+            "source_id": "obs1",
+            "quote": "Riscos de viés não mitigado foram identificados em 18 por cento dos sistemas auditados.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          },
+          {
+            "source_id": "obs1",
+            "quote": "Não houve ensaio randomizado nem grupo de controle.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          }
+        ],
+        "limitations": [
+          "O corpus fornecido restringe-se a uma única fonte ('obs1') cuja proveniência é explicitamente declarada como 'fixture sintética para execução real do conselho', impedindo qualquer refutação empírica sobre dados do mundo real.",
+          "Inexistência total de dados sobre benefícios organizacionais em 'obs1': o registro quantifica apenas taxas de adoção/crescimento operacional e frequência de risco em auditoria, deixando a dimensão de benefícios completamente sem suporte empírico.",
+          "Omissão do denominador de sistemas auditados em 'obs1', tornando impossível determinar se os 18% de sistemas com viés não mitigado referem-se à totalidade dos sistemas implantados nas 120 organizações ou a uma subamostra enviesada.",
+          "Ausência de buscas externas executadas pelo orquestrador primário MarceloClaro para recuperar literatura com resultados negativos, falhas de adoção e grupos de comparação, exigindo manutenção do status 'partial' e revisão humana obrigatória."
+        ],
+        "feynman": {
+          "mechanism": "Contar quantas empresas passaram a usar uma ferramenta ou automatizaram tarefas entre 2020 e 2024 não prova que a ferramenta gerou benefício, nem que a mudança foi causada pela inteligência artificial. Se uma empresa troca planilhas manuais por um programa simples de regras na mesma época em que anuncia usar IA, a automação sobe no relatório sem que a IA seja a causa. Além disso, medir problemas apenas nos sistemas que passaram por auditoria esconde os defeitos dos sistemas que ninguém inspecionou. Assim, o aumento de uso pode ser apenas mudança de rótulo ou pressão externa da época, e o benefício real permanece desconhecido enquanto o risco já aparece nos poucos sistemas verificados.",
+          "observations": [
+            "O registro 'obs1' declara um estudo observacional com 120 organizações entre 2020 e 2024.",
+            "O registro 'obs1' reporta crescimento de 40 por cento na automação de tarefas repetitivas.",
+            "O registro 'obs1' reporta adoção de sistemas de decisão assistida por IA em 35 por cento das organizações.",
+            "O registro 'obs1' reporta riscos de viés não mitigado em 18 por cento dos sistemas auditados.",
+            "O registro 'obs1' declara explicitamente que não houve ensaio randomizado nem grupo de controle."
+          ],
+          "inferences": [
+            "Inferência de explicação alternativa (confundimento): O crescimento de 40% na automação pode decorrer de tendências gerais de digitalização entre 2020 e 2024 ou de software convencional rotulado como IA, pois não há grupo de controle para isolar o efeito específico da IA.",
+            "Inferência de resultado negativo (ausência de benefício provado): Como nenhuma métrica de resultado (produtividade, erro, custo) foi medida, a adoção de 35% e o crescimento de 40% em automação não sustentam a existência de benefícios organizacionais.",
+            "Inferência de viés de seleção na auditoria: A taxa de 18% de viés não mitigado aplica-se somente ao subconjunto auditado, podendo subestimar o risco real caso organizações menos rigorosas não auditem seus sistemas."
+          ],
+          "test_oracle": "Se o aumento de automação e os supostos ganhos decorrem especificamente da adoção de IA (e não de tendência temporal ou reclassificação de software convencional), então organizações ou setores internos que implantaram IA devem apresentar variação de produtividade líquida e taxa de erro estatisticamente distintas daquelas que adotaram apenas automação determinística sem IA no mesmo período (2020–2024); caso contrário, se ambos os grupos apresentarem crescimento similar de automação ou se a auditoria cega na totalidade dos sistemas revelar taxa de viés superior a 18% acompanhada de ganho operacional nulo ou negativo, prevalece a explicação alternativa de confundimento e ausência de benefício.",
+          "min_experiment": "Solicitar ao orquestrador MarceloClaro dados tabulares (ou estudos primários equivalentes) que comparem, em um mesmo intervalo temporal, dois grupos pareados de unidades organizacionais: (Grupo A) implantação de sistemas de decisão assistida por IA e (Grupo B) implantação de automação baseada em regras fixas sem IA, aplicando auditoria padronizada de viés e medição de retrabalho em 100% dos sistemas de ambos os grupos antes e depois da implantação."
+        },
+        "feynman_checklist": {
+          "feg_01_06_score": 10,
+          "feg": {
+            "FEG-01": 2,
+            "FEG-02": 2,
+            "FEG-03": 2,
+            "FEG-04": 2,
+            "FEG-05": 0,
+            "FEG-06": 2
+          },
+          "reason": null,
+          "scope": "declared_completeness_only"
+        },
+        "evidence_scope": "literal_match_to_unverified_supplied_corpus",
+        "human_validation": false
+      },
+      "task_id": null,
+      "executor": "antigravity"
+    },
+    {
+      "agent_id": "scientist-game-theory",
+      "report": {
+        "status": "partial",
+        "findings": [
+          "Pergunta e hipótese de utilidades, custos e cenários (Fase: challenge): Quais dimensões de benefício (utilidade), custo e risco organizacional estão efetivamente medidas no corpus ('obs1') e qual próxima investigação minimiza o arrependimento máximo (minimax regret) diante das incertezas estruturais identificadas? Hipótese: O registro 'obs1' reporta taxas de adoção e incidência de falha técnica, mas omite completamente métricas de benefício líquido, custos de implantação/mitigação e severidade de danos, tornando a priorização da próxima investigação dependente da resolução da incerteza causal e da mensuração de impacto de viés.",
+          "Explicitação de utilidades, custos e cenários (sem aplicação de utilidades clínicas ao domínio organizacional): (1) Utilidades potenciais (não medidas em 'obs1'): ganho de tempo ou redução de erro operacional via automação de tarefas repetitivas e melhoria na qualidade decisória via sistemas de decisão assistida; (2) Custos operacionais e de governança (não medidos em 'obs1'): custo financeiro e humano de infraestrutura, integração, treinamento, auditoria e retrabalho por falhas ou decisões enviesadas; (3) Cenários de estado da natureza: Cenário S1 (Adoção Benéfica Controlada: o ganho operacional supera os custos de implantação e o viés é residual/baixo impacto), Cenário S2 (Ilusão de Eficiência / Confundimento: o crescimento de 40% em automação reflete apenas substituição nominal sem ganho líquido de produtividade, gerando custo afundado), Cenário S3 (Passivo Organizacional Severo: os 18% de sistemas auditados com viés não mitigado e a fração não auditada dos 35% de sistemas de decisão assistida produzem danos jurídicos, reputacionais ou operacionais que superam qualquer ganho de eficiência).",
+          "Análise e refutação de premissas de benefício implícito: O corpus ('obs1') descreve que 'A automação de tarefas repetitivas cresceu 40 por cento' e que 'Sistemas de decisão assistida por IA foram adotados por 35 por cento das organizações'. Tratar tais percentuais de adoção como 'benefícios' constitui erro categorial (confundir insumo/implantação com desfecho de utilidade). Além disso, a ausência de grupo de controle ('Não houve ensaio randomizado nem grupo de controle') e a falta de denominador explícito para os 'sistemas auditados' impedem calcular o valor esperado ou a perda esperada da adoção.",
+          "Aplicação de minimax regret exclusivamente para priorizar a próxima investigação: Considerando as opções de investigação imediata — Ação I1 (investigar/auditar a severidade do dano e a taxa base de viés nos sistemas de decisão assistida e não auditados), Ação I2 (medir ganho líquido de eficiência das tarefas repetitivas automatizadas com grupo de comparação) e Ação I3 (expandir amostra descritiva sem alterar o desenho observacional) —, o maior arrependimento potencial (regret máximo) ocorre sob o Cenário S3 caso se escolha I2 ou I3, pois falhas e vieses não mitigados em decisões assistidas ('18 por cento dos sistemas auditados') podem gerar perdas organizacionais assimétricas e irreversíveis enquanto se mede apenas volume de adoção. A priorização por minimax regret seleciona uma investigação combinada de auditoria de risco/viés com controle de confundimento (I1 + I2 em desenho controlado) antes de qualquer recomendação de expansão.",
+          "Solicitação ao orquestrador e revisão humana: Solicita-se ao orquestrador primário MarceloClaro a busca de estudos empíricos reais (com identificadores persistentes, grupos de controle e métricas explícitas de custo/benefício e impacto de viés organizacional). Requer-se revisão humana obrigatória antes de qualquer uso decisório destes cenários."
+        ],
+        "evidence": [
+          {
+            "source_id": "obs1",
+            "quote": "Estudo observacional com 120 organizações mediu a adoção de inteligência artificial entre 2020 e 2024.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          },
+          {
+            "source_id": "obs1",
+            "quote": "A automação de tarefas repetitivas cresceu 40 por cento. Sistemas de decisão assistida por IA foram adotados por 35 por cento das organizações.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          },
+          {
+            "source_id": "obs1",
+            "quote": "Riscos de viés não mitigado foram identificados em 18 por cento dos sistemas auditados. Não houve ensaio randomizado nem grupo de controle.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          }
+        ],
+        "limitations": [
+          "O único registro disponível ('obs1') possui proveniência explicitamente declarada como 'fixture sintética para execução real do conselho', impedindo qualquer estimativa empírica real de utilidades, custos ou probabilidades de cenários.",
+          "O texto de 'obs1' não reporta nenhuma métrica direta de benefício (ex.: variação de produtividade, economia de recursos, redução de erros) nem de custo (ex.: gasto de implantação, manutenção ou passivo por viés), limitando-se a taxas de adoção e de incidência de risco.",
+          "Há ambiguidade estrutural sobre o denominador de '18 por cento dos sistemas auditados' (não se sabe quantos sistemas foram auditados em relação ao total de sistemas implantados nas 120 organizações).",
+          "O critério minimax regret é utilizado estritamente como heurística formal para ordenar a prioridade da próxima coleta de dados, não constituindo prova empírica, validação de verdade nem substituto para revisão humana."
+        ],
+        "feynman": {
+          "mechanism": "Adotar uma ferramenta em uma organização não equivale a obter benefício: quando uma organização implanta automação ou decisão assistida por IA, ela troca um processo antigo por um novo que exige gastos de instalação e fiscalização. Se a ferramenta automatiza uma tarefa, ela pode economizar tempo (utilidade), mas se ela ajuda a tomar decisões com um defeito sistemático não corrigido (viés não mitigado), ela multiplica erros em escala (custo/dano). Quando não sabemos a frequência exata nem o tamanho do estrago desse defeito, priorizar a próxima investigação pelo critério de 'menor arrependimento máximo' (minimax regret) significa investigar primeiro a dúvida que, se ignorada no pior cenário plausível, causaria o maior erro de diagnóstico — neste caso, descobrir quantos sistemas nunca foram fiscalizados e qual o dano real dos sistemas com viés em comparação a organizações sem a ferramenta.",
+          "observations": [
+            "O registro 'obs1' é declarado como 'fixture sintética para execução real do conselho'.",
+            "O texto relata observação de 120 organizações entre 2020 e 2024.",
+            "O texto relata crescimento de 40 por cento na automação de tarefas repetitivas.",
+            "O texto relata adoção de sistemas de decisão assistida por IA em 35 por cento das organizações.",
+            "O texto relata identificação de riscos de viés não mitigado em 18 por cento dos sistemas auditados.",
+            "O texto declara explicitamente que não houve ensaio randomizado nem grupo de controle."
+          ],
+          "inferences": [
+            "As métricas de '40 por cento' e '35 por cento' medem presença ou expansão de uso tecnológico, mas não demonstram benefício líquido organizacional.",
+            "A ausência de informação sobre a proporção de sistemas auditados em relação ao total implantado cria incerteza severa sobre a prevalência oculta de viés não mitigado.",
+            "Sem grupo de controle e sem medição de custos operacionais, qualquer atribuição de ganho líquido à adoção de IA em 'obs1' é infundada.",
+            "Sob minimax regret, a coleta de dados sobre a cobertura de auditoria, a severidade das perdas por viés e o contrafactual sem IA deve preceder novas medições puramente descritivas de adoção."
+          ],
+          "test_oracle": "Se o dataset completo subjacente ao estudo for inspecionado ou replicado em organizações reais com grupo de controle, a hipótese de benefício líquido da adoção será refutada caso (a) a variação líquida de desempenho operacional (descontados os custos de implantação, manutenção e correção de erros) nas unidades que adotaram IA não supere estatisticamente a variação das unidades de controle, ou (b) o custo/dano decorrente dos sistemas com viés não mitigado (nos 18% auditados e nos sistemas previamente não auditados) iguale ou supere os ganhos obtidos com a automação de tarefas repetitivas.",
+          "min_experiment": "Em uma amostra estratificada das 120 organizações (ou em novo estudo empírico real solicitado ao primário MarceloClaro), selecionar pares pareados de setores organizacionais (com adoção de IA vs. controle sem adoção) durante um ciclo operacional fixo e medir três variáveis obrigatórias: (1) a fração exata de sistemas de IA submetidos à auditoria sobre o total implantado, (2) a diferença líquida de tempo/custo por tarefa concluída sem erro, e (3) a frequência e o custo de reversão de decisões enviesadas."
+        },
+        "feynman_checklist": {
+          "feg_01_06_score": 10,
+          "feg": {
+            "FEG-01": 2,
+            "FEG-02": 2,
+            "FEG-03": 2,
+            "FEG-04": 2,
+            "FEG-05": 0,
+            "FEG-06": 2
+          },
+          "reason": null,
+          "scope": "declared_completeness_only"
+        },
+        "evidence_scope": "literal_match_to_unverified_supplied_corpus",
+        "human_validation": false
+      },
+      "task_id": null,
+      "executor": "antigravity"
+    },
+    {
+      "agent_id": "scientist-ethics",
+      "report": {
+        "status": "blocked",
+        "findings": [
+          "Pergunta e objetivo interpretativo (Fase: audit — Ética, Conformidade, Privacidade e Origem): Os dados e pareceres fornecidos sobre adoção organizacional de IA ('obs1') possuem documentação verificável de consentimento informado/institucional, licenças de uso e redistribuição, garantias de privacidade/anonimização, declarações de conflitos de interesse (COI) e origem empírica legítima para autorizar seu encaminhamento como evidência científica?",
+          "Hipótese de conformidade e governança: O registro 'obs1' carece de metadados e recibos comprobatórios de governança ética, licenciamento e origem empírica real, exigindo o bloqueio formal de qualquer encaminhamento para síntese conclusiva ou publicação externa até que fontes primárias auditáveis e autorizações cabíveis sejam obtidas pelo orquestrador primário MarceloClaro.",
+          "Desenho da auditoria de conformidade: Inspeção documental estática e verificação de proveniência do registro único 'obs1' e dos 11 pareceres precedentes contra cinco eixos mandatórios: (1) Origem e autenticidade empírica, (2) Consentimento e aprovação ética institucional, (3) Licenciamento e direitos de propriedade intelectual/uso de dados, (4) Privacidade, proteção de dados e confidencialidade organizacional, e (5) Declaração de conflitos de interesse e financiamento.",
+          "Evidência e análise de origem (Proveniência): O registro 'obs1' declara explicitamente em seu metadado de proveniência tratar-se de 'fixture sintética para execução real do conselho'. Embora não haja risco de violação real de dados pessoais ou segredo industrial no artefato sintético em si, sua origem não empírica proíbe estritamente que seja encaminhado ou relatado como estudo observacional do mundo real sobre 120 organizações.",
+          "Análise de consentimento, privacidade e proteção de dados: Caso 'obs1' representasse uma coleta real em '120 organizações' incluindo 'sistemas auditados' onde 'Riscos de viés não mitigado foram identificados em 18 por cento', seriam obrigatórios: (a) termos de consentimento organizacional e autorização para auditoria interna de sistemas algorítmicos, (b) protocolo de anonimização/pseudonimização das 120 entidades e dos indivíduos afetados pelas decisões assistidas por IA, e (c) aprovação ou isenção formal por comitê de ética em pesquisa (CEP/IRB) ou órgão de governança de dados. Nenhum desses registros consta no corpus.",
+          "Análise de licenças e conflitos de interesse (COI): O registro 'obs1' não apresenta licença aberta ou proprietária (ex.: CC-BY, MIT, termos de uso de base de dados), autoria, filiação institucional, fonte de financiamento ou declaração de conflitos de interesse (especialmente crítica em auditorias de viés de IA, onde fornecedores ou consultorias podem atuar simultaneamente como desenvolvedores e auditores).",
+          "Refutação da suficiência para encaminhamento: Refuta-se qualquer tentativa de aprovar o corpus atual pelo fato de 'não conter dados pessoais identificáveis (PII) expostos'. A ausência de PII decorre de o texto ser um resumo sintético de quatro frases sem lastro documental, e não de um processo auditável de desidentificação e governança. Portanto, o encaminhamento para conclusão empírica ou publicação permanece bloqueado por falta de origem válida, licenciamento e metadados éticos.",
+          "Decisão de bloqueio e solicitação ao primário: Bloqueia-se o encaminhamento de afirmações factuais de domínio a partir de 'obs1'. Solicita-se ao orquestrador primário MarceloClaro: (1) busca de estudos primários reais com DOI/identificadores persistentes, licenças explícitas, declarações de COI e aprovação ética/consentimento; e (2) revisão humana obrigatória antes de qualquer liberação ou síntese final."
+        ],
+        "evidence": [
+          {
+            "source_id": "obs1",
+            "quote": "Estudo observacional com 120 organizações mediu a adoção de inteligência artificial entre 2020 e 2024.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          },
+          {
+            "source_id": "obs1",
+            "quote": "A automação de tarefas repetitivas cresceu 40 por cento. Sistemas de decisão assistida por IA foram adotados por 35 por cento das organizações.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          },
+          {
+            "source_id": "obs1",
+            "quote": "Riscos de viés não mitigado foram identificados em 18 por cento dos sistemas auditados. Não houve ensaio randomizado nem grupo de controle.",
+            "source_sha256": "ae61e5f06aade95122f10c408c2c1a216a225b3e99c0623dbf54ce348b5cf7c6"
+          }
+        ],
+        "limitations": [
+          "O único registro disponível no corpus ('obs1') possui proveniência explicitamente declarada como 'fixture sintética para execução real do conselho', impedindo qualquer validação de origem empírica real.",
+          "Ausência total de metadados de licenciamento (direitos de uso, redistribuição ou derivação), autoria, financiamento e declarações de conflito de interesse (COI).",
+          "Ausência de documentação sobre consentimento institucional das organizações citadas, protocolos de anonimização/privacidade e termos de autorização para a realização das auditorias de viés mencionadas.",
+          "Impossibilidade de verificar conformidade regulatória ou ética sem acesso a fontes primárias reais; nenhuma busca externa ou acesso de rede foi executado diretamente por este agente, respeitando os limites operacionais do conselho."
+        ],
+        "feynman": {
+          "mechanism": "Auditar a origem, as licenças, a privacidade e os conflitos de um conjunto de dados funciona como a inspeção sanitária e documental da matéria-prima antes de cozinhar: não basta que o rótulo diga '120 organizações avaliadas'; é preciso verificar de onde os dados vieram (origem), se quem forneceu as informações autorizou seu uso (consentimento), se dados sensíveis de pessoas ou empresas estão protegidos (privacidade), sob quais regras legais o material pode ser reutilizado (licença) e se quem mediu os resultados tinha interesse financeiro no desfecho (conflito de interesse). Quando a única fonte disponível declara ser apenas um exemplo artificial de teste ('fixture sintética') e não traz licenças nem autorizações, o mecanismo de segurança trava o processo (bloqueio) para impedir que um texto de teste seja repassado adiante como se fosse uma descoberta científica real.",
+          "observations": [
+            "O campo 'provenance' do registro 'obs1' declara literalmente: 'fixture sintética para execução real do conselho'.",
+            "O texto de 'obs1' menciona '120 organizações' e 'sistemas auditados' entre 2020 e 2024, reportando percentuais de 40%, 35% e 18%.",
+            "Não existem no registro 'obs1' campos ou menções a autores, instituições, licenças de uso, aprovação ética, termos de consentimento, protocolo de anonimização ou declaração de conflitos de interesse.",
+            "Os 11 pareceres anteriores convergem na identificação de que 'obs1' é uma fonte única e sintética, desprovida de identificadores bibliográficos (DOI) e de dados brutos."
+          ],
+          "inferences": [
+            "Como 'obs1' é uma fixture sintética de teste operacional, qualquer encaminhamento de seus números (40%, 35%, 18%) como evidência factual sobre o mercado ou organizações reais configuraria fabricação ou deturpação de proveniência.",
+            "Mesmo que um estudo real futuro apresente texto semelhante ao de 'obs1', a menção a 'sistemas auditados' em organizações exige comprovação de autorização legal/contratual para auditoria, protocolo de confidencialidade/anonimização e declaração de independência dos auditores (ausência de COI).",
+            "O fluxo deve permanecer no estado 'blocked' para fins de conclusão empírica ou publicação externa até que o orquestrador MarceloClaro forneça fontes reais com cadeia de custódia, licença e conformidade ética verificáveis, acompanhadas de revisão humana."
+          ],
+          "test_oracle": "Um registro do corpus só receberá aprovação de encaminhamento nesta fase de auditoria se, e somente se, apresentar simultaneamente: (1) proveniência empírica real ligada a identificador persistente verificável (ex.: DOI/repositório oficial), (2) licença explícita que permita leitura e síntese, (3) declaração explícita de conflito de interesse e financiamento dos autores, e (4) declaração de conformidade ética/consentimento e proteção de privacidade das organizações e indivíduos pesquisados; caso qualquer um desses 4 itens esteja ausente ou a proveniência seja sintética, o oráculo retorna 'blocked'.",
+          "min_experiment": "Solicitar ao orquestrador primário MarceloClaro a recuperação de 3 artigos empíricos reais sobre adoção organizacional de IA e aplicar um protocolo de extração binária (presente/ausente) para os 4 campos de governança (DOI/origem, licença, declaração de COI, aprovação ética/privacidade), bloqueando automaticamente qualquer artigo que falhe em pelo menos um critério antes da etapa de síntese."
+        },
+        "feynman_checklist": {
+          "feg_01_06_score": 10,
+          "feg": {
+            "FEG-01": 2,
+            "FEG-02": 2,
+            "FEG-03": 2,
+            "FEG-04": 2,
+            "FEG-05": 0,
+            "FEG-06": 2
+          },
+          "reason": null,
+          "scope": "declared_completeness_only"
+        },
+        "evidence_scope": "literal_match_to_unverified_supplied_corpus",
+        "human_validation": false
+      },
+      "task_id": null,
+      "executor": "antigravity"
+    }
+  ],
+  "attempts": [
+    {
+      "agent_id": "scientist-problem",
+      "task_id": null,
+      "executor": "antigravity",
+      "status": "completed",
+      "execution_attempted": true
+    },
+    {
+      "agent_id": "scientist-search",
+      "task_id": null,
+      "executor": "antigravity",
+      "status": "completed",
+      "execution_attempted": true
+    },
+    {
+      "agent_id": "scientist-curation",
+      "task_id": null,
+      "executor": "antigravity",
+      "status": "completed",
+      "execution_attempted": true
+    },
+    {
+      "agent_id": "scientist-references",
+      "task_id": null,
+      "executor": "antigravity",
+      "status": "completed",
+      "execution_attempted": true
+    },
+    {
+      "agent_id": "scientist-methodology",
+      "task_id": null,
+      "executor": "antigravity",
+      "status": "completed",
+      "execution_attempted": true
+    },
+    {
+      "agent_id": "scientist-statistics",
+      "task_id": null,
+      "executor": "antigravity",
+      "status": "completed",
+      "execution_attempted": true
+    },
+    {
+      "agent_id": "scientist-qualitative",
+      "task_id": null,
+      "executor": "antigravity",
+      "status": "completed",
+      "execution_attempted": true
+    },
+    {
+      "agent_id": "scientist-reproduction",
+      "task_id": null,
+      "executor": "antigravity",
+      "status": "completed",
+      "execution_attempted": true
+    },
+    {
+      "agent_id": "scientist-feynman",
+      "task_id": null,
+      "executor": "antigravity",
+      "status": "completed",
+      "execution_attempted": true
+    },
+    {
+      "agent_id": "scientist-falsification",
+      "task_id": null,
+      "executor": "antigravity",
+      "status": "completed",
+      "execution_attempted": true
+    },
+    {
+      "agent_id": "scientist-game-theory",
+      "task_id": null,
+      "executor": "antigravity",
+      "status": "completed",
+      "execution_attempted": true
+    },
+    {
+      "agent_id": "scientist-ethics",
+      "task_id": null,
+      "executor": "antigravity",
+      "status": "completed",
+      "execution_attempted": true
+    }
+  ],
+  "external_validation": false,
+  "confidence_promoted": false,
+  "human_review_required": true,
+  "remaining_agents": 1,
+  "corpus_sha256": "67d11eb99de05a281eda201567709c76f01e8de89636372f5ac4f4c50a076c23",
+  "reason": "stage_blocked_no_deliverable",
+  "wall_seconds": 460.3,
+  "executor": "antigravity (agy 1.4.12, inferência real)"
+}

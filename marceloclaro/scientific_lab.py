@@ -9,20 +9,36 @@ from __future__ import annotations
 
 import json
 import os
+import subprocess
 import sys
 from pathlib import Path
 
 from scientific_lab import restricted_resolver
-from scientific_lab.runtime import core_compatibility, dispatch, installed_status
+from scientific_lab.runtime import (
+    NATIVE_COMMANDS,
+    core_compatibility,
+    dispatch,
+    installed_status,
+    native_status,
+)
 
-HELP = """Pesquisador Universal v4.1 — bridge do OpenCode Ecosystem Core
+VALIDATOR_TIMEOUT_SECONDS = 60
+PACKAGE_VALIDATORS = ("validate_contracts.py", "validate_ecosystem.py")
+
+HELP = """Pesquisador Universal v4.2 — camada nativa + fallback v4.1
 
 Comandos:
   status       mostra discovery, versão e verificação do release instalado
   core-check   verifica componentes estruturais do Core hospedeiro
   doctor       exige Core compatível + release científico v4.1 verificado
-  research/articles, mesh, mission, review, living, synthesis, grade,
-  causal, federation, production
+  native-status mostra a camada científica nativa v4.2 e seus fallbacks
+  council      list|plan|run: 13 cientistas; run exige corpus e --confirm
+  scanner-evolve compara candidatos em corpus separado, sem promoção automática
+  author-editor structure|style|brief: autor/editor de alto rigor (IMRaD + estilo anti-plágio + raciocínio)
+  openshell    preflight|plan: piloto de sandbox; instalação/validação reais à parte
+  research/articles, review, evidence: executados pela camada nativa do Core
+  mesh, mission, living, synthesis, grade, causal, federation, production:
+               fallback opcional da supercamada v4.1 instalada
 
 Subcomando opt-in (R470, desabilitado por omissão):
   restricted --help   explica os gates de autorização (sem rede, sem execução)
@@ -97,12 +113,56 @@ def _repo_root() -> Path:
     return Path(__file__).resolve().parents[1]
 
 
-def _run_validation(home: Path) -> int:
-    import subprocess
-    codes = []
-    for name in ("validate_contracts.py", "validate_ecosystem.py"):
-        codes.append(subprocess.call([sys.executable, str(home / "scripts" / name)]))
-    return 0 if all(code == 0 for code in codes) else max(codes)
+def _run_validation(home: Path) -> dict:
+    """Executa validadores locais com timeout e devolve somente metadados seguros."""
+    results = []
+    for name in PACKAGE_VALIDATORS:
+        script = home / "scripts" / name
+        if not script.is_file():
+            results.append({
+                "name": name,
+                "exit_code": 127,
+                "status": "failed",
+                "error_type": "FileNotFoundError",
+            })
+            continue
+        try:
+            completed = subprocess.run(
+                [sys.executable, str(script)],
+                stdin=subprocess.DEVNULL,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                timeout=VALIDATOR_TIMEOUT_SECONDS,
+                check=False,
+            )
+            exit_code = int(completed.returncode)
+            results.append({
+                "name": name,
+                "exit_code": exit_code,
+                "status": "passed" if exit_code == 0 else "failed",
+            })
+        except subprocess.TimeoutExpired:
+            results.append({
+                "name": name,
+                "exit_code": 124,
+                "status": "timeout",
+                "error_type": "TimeoutExpired",
+            })
+        except OSError as exc:
+            results.append({
+                "name": name,
+                "exit_code": 127,
+                "status": "failed",
+                "error_type": type(exc).__name__,
+            })
+    all_passed = len(results) == len(PACKAGE_VALIDATORS) and all(
+        item["status"] == "passed" for item in results
+    )
+    return {
+        "status": "passed" if all_passed else "failed",
+        "executed": True,
+        "validators": results,
+    }
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -111,8 +171,28 @@ def main(argv: list[str] | None = None) -> int:
         print(HELP)
         return 0
     cmd, rest = args[0], args[1:]
+    if cmd in {"council", "scanner-evolve", "author-editor", "openshell"}:
+        try:
+            if cmd == "council":
+                from scientific_lab.council import main as council_main
+                return council_main(rest)
+            if cmd == "scanner-evolve":
+                from scanners.scientific_evolution import main as evolution_main
+                return evolution_main(rest)
+            if cmd == "openshell":
+                from integrations.openshell_pilot import main as openshell_main
+                return openshell_main(rest)
+            from academic.author_editor import main as author_main
+            return author_main(rest)
+        except (ValueError, ImportError) as exc:
+            print(json.dumps({"status": "blocked", "error_type": type(exc).__name__,
+                              "executed": False, "external_validation": False}, ensure_ascii=False))
+            return 2
     if cmd == "status":
         print(json.dumps(installed_status(), ensure_ascii=False, indent=2))
+        return 0
+    if cmd == "native-status":
+        print(json.dumps(native_status(), ensure_ascii=False, indent=2))
         return 0
     if cmd == "core-check":
         report = core_compatibility(_repo_root())
@@ -121,15 +201,33 @@ def main(argv: list[str] | None = None) -> int:
     if cmd == "doctor":
         core = core_compatibility(_repo_root())
         status = installed_status()
-        result = {"core": core, "scientific_layer": status}
-        print(json.dumps(result, ensure_ascii=False, indent=2))
+        result = {
+            "core": core,
+            "native_layer": native_status(),
+            "scientific_layer": status,
+            "doctor_status": "blocked",
+            "package_validation": {
+                "status": "not_run",
+                "executed": False,
+                "validators": [],
+            },
+        }
         if not core["compatible"]:
+            print(json.dumps(result, ensure_ascii=False, indent=2))
             return 3
         if not status.get("verified_release"):
+            print(json.dumps(result, ensure_ascii=False, indent=2))
             return 5 if status["status"] != "not_installed" else 4
-        return _run_validation(Path(status["home"]))
+        validation = _run_validation(Path(status["home"]))
+        result["package_validation"] = validation
+        result["doctor_status"] = "healthy" if validation["status"] == "passed" else "degraded"
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        return 0 if validation["status"] == "passed" else 1
     if cmd == "restricted":
         return _handle_restricted(rest)
+    if cmd in NATIVE_COMMANDS:
+        from scientific_lab.native.cli import dispatch as native_dispatch
+        return native_dispatch(cmd, rest)
     return dispatch(cmd, rest)
 
 

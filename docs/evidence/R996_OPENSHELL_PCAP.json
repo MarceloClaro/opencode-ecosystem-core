@@ -1,0 +1,37 @@
+{
+  "schema": "openshell-packet-capture-v1",
+  "generated_at": "2026-10-31T15:29:54.296096+00:00",
+  "method": "tcpdump -i eth0 (40s), filtro tcp e não port 22/53",
+  "interface": "eth0",
+  "capture_window_seconds": 40,
+  "observations": [
+    {
+      "id": "egress_1111",
+      "observed": "blocked_no_syn",
+      "detail": "sandbox tentou 1.1.1.1:443; nenhum pacote SYN saiu em eth0"
+    },
+    {
+      "id": "egress_93184",
+      "observed": "blocked_no_syn",
+      "detail": "sandbox tentou 93.184.216.34:443; nenhum pacote SYN saiu em eth0"
+    },
+    {
+      "id": "telemetry_gateway",
+      "observed": "none_in_window",
+      "detail": "zero tráfego de saída do gateway em 40s (opt-out OPENSHELL_TELEMETRY_ENABLED=false)"
+    },
+    {
+      "id": "other_outbound",
+      "observed": "1_fin",
+      "detail": "único pacote: FIN para 91.189.92.24:80 (mirror Ubuntu/Canonical, resíduo do apt-get install tcpdump)"
+    }
+  ],
+  "external_validation": false,
+  "confidence_promoted": false,
+  "human_review_required": true,
+  "limitations": [
+    "Janela de 40s não prova ausência permanente de telemetria; é 'não observado no período'.",
+    "Não identifiquei o endpoint de telemetria no binário para filtrar especificamente; usei filtro de egress geral.",
+    "Egress do sandbox é negado antes de chegar ao eth0 (SYN não sai), o que corrobora a política de rede, não a localiza."
+  ]
+}

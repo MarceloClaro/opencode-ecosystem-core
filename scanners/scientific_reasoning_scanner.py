@@ -7,6 +7,7 @@ qualidade científica, testabilidade real, risco de viés ou validade clínica.
 from __future__ import annotations
 
 import re
+import hashlib
 import unicodedata
 from bisect import bisect_left, bisect_right
 from typing import Any, Dict
@@ -69,6 +70,9 @@ class _TextContext:
 class ScientificReasoningScanner:
     """Detecta conceitos e gatilhos textuais para orientar revisão humana."""
 
+    MAX_TEXT_CHARS = 1_000_000
+    MAX_FINDINGS = 200
+
     FALSIFIABILITY_GROUPS = {
         "hypothesis": ("hipótese", "hipóteses", "hypothesis", "hypotheses"),
         "condition": ("se", "caso", "quando", "dado que", "if", "when", "provided that"),
@@ -126,6 +130,8 @@ class ScientificReasoningScanner:
     def _normalize(text: str) -> str:
         if not isinstance(text, str):
             raise ValueError("O texto deve ser uma string.")
+        if len(text) > ScientificReasoningScanner.MAX_TEXT_CHARS:
+            raise ValueError("O texto excede o limite de caracteres.")
         folded = unicodedata.normalize("NFKD", text.casefold())
         folded = "".join(char for char in folded if not unicodedata.combining(char))
         return folded.translate(str.maketrans({"–": "-", "—": "-", "−": "-", "‑": "-"}))
@@ -175,6 +181,43 @@ class ScientificReasoningScanner:
                 negated.append(concept)
         return affirmative, negated
 
+    @staticmethod
+    def authority() -> dict:
+        return {"scope": "lexical_triage_only", "scientific_certification": False,
+                "publication_allowed": False, "confidence_promotion_allowed": False,
+                "can_request_review": True, "policy_changes_allowed": False}
+
+    def _triage(self, original: str, normalized: str, context: _TextContext, informative: bool) -> dict:
+        # Aspas simples não são delimitadores: apóstrofos de EN/PT não são citações.
+        quoted = list(re.finditer(r'"[^"\n]*"|“[^”\n]*”|«[^»\n]*»', normalized))
+        quote_starts = [q.start() for q in quoted]
+        findings = []
+        total = asserted = 0
+        for index, pattern in enumerate(self._FALLACY_PATTERNS):
+            for match in re.finditer(pattern, normalized):
+                quote_index = bisect_right(quote_starts, match.start()) - 1
+                in_quote = quote_index >= 0 and match.end() <= quoted[quote_index].end()
+                kind = ("quoted" if in_quote else "heading" if context.is_heading(match)
+                        else "negated" if self._negated(normalized, match, check_suffix=False, context=context)
+                        else "asserted")
+                total += 1
+                asserted += kind == "asserted"
+                if len(findings) < self.MAX_FINDINGS:
+                    findings.append({"category": ("proof", "correlation", "absolute", "obviousness")[index],
+                                     "context": kind, "start": match.start(), "end": match.end(),
+                                     "match": match.group(), "offset_basis": "normalized_text",
+                                     "action": "review_claim" if kind == "asserted" else "review_context"})
+        findings.sort(key=lambda item: item["start"])
+        status = ("review_required" if asserted else "review_context" if total
+                  else "screened_no_trigger" if informative else "abstained")
+        return {"version": "R990", "status": status, "findings": findings,
+                "findings_total": total, "asserted_trigger_count": asserted,
+                "truncated": total > self.MAX_FINDINGS,
+                "input_sha256": hashlib.sha256(original.encode("utf-8")).hexdigest(),
+                "normalized_sha256": hashlib.sha256(normalized.encode("utf-8")).hexdigest(),
+                "quote_detection": "single_line_double_quotes_heuristic",
+                "human_review_required": True}
+
     def scan_text(self, text: str) -> Dict[str, Any]:
         """Retorna cobertura lexical normalizada, gatilhos e limites explícitos."""
         normalized = self._normalize(text)
@@ -217,6 +260,8 @@ class ScientificReasoningScanner:
             "matched_concepts": {"falsifiability": falsifiability, "methodology": methodology},
             "negated_concepts": {"falsifiability": false_negated, "methodology": method_negated},
             "limitations": list(self.LIMITATIONS),
+            "authority": self.authority(),
+            "triage": self._triage(text, normalized, context, bool(falsifiability or methodology)),
         }
 
     def evaluate_hypothesis(self, hypothesis: str) -> Dict[str, Any]:

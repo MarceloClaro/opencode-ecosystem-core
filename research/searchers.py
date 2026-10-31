@@ -19,11 +19,16 @@ falha de rede, retornando lista vazia com o erro registrado.
 Inspiração: scihub-cli e paper-download-mcp (Oxidane-bot).
 """
 
+import datetime
+import email.utils
 import json
 import logging
+import math
 import os
 import shutil
 import subprocess
+import time
+import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -34,6 +39,10 @@ logger = logging.getLogger("research.searchers")
 
 USER_AGENT = "opencode-ecosystem-core/1.0 (research subsystem; mailto:contact@example.org)"
 DEFAULT_TIMEOUT = 20
+RETRYABLE_HTTP_STATUSES = frozenset({429, 500, 502, 503, 504})
+MAX_HTTP_ATTEMPTS = 3
+MAX_RETRY_WAIT_SECONDS = 2.0
+RETRY_BACKOFF_BASE_SECONDS = 0.25
 
 
 @dataclass
@@ -64,11 +73,54 @@ class PaperRecord:
         return asdict(self)
 
 
+def _retry_after_seconds(headers: Any) -> Optional[float]:
+    """Parse RFC 9110 Retry-After delta-seconds or HTTP-date, without trusting it."""
+    if headers is None or not hasattr(headers, "get"):
+        return None
+    value = headers.get("Retry-After")
+    if not isinstance(value, str) or not value.strip():
+        return None
+    value = value.strip()
+    try:
+        delay = float(value)
+    except ValueError:
+        try:
+            retry_at = email.utils.parsedate_to_datetime(value)
+            if retry_at.tzinfo is None:
+                retry_at = retry_at.replace(tzinfo=datetime.timezone.utc)
+            delay = (retry_at - datetime.datetime.now(datetime.timezone.utc)).total_seconds()
+        except (TypeError, ValueError, OverflowError):
+            return None
+    if not math.isfinite(delay):
+        return None
+    return max(0.0, delay)
+
+
 def _http_get(url: str, headers: Optional[Dict[str, str]] = None,
               timeout: int = DEFAULT_TIMEOUT) -> str:
     req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, **(headers or {})})
-    with urllib.request.urlopen(req, timeout=timeout) as resp:
-        return resp.read().decode("utf-8", errors="replace")
+    waited = 0.0
+    for attempt in range(1, MAX_HTTP_ATTEMPTS + 1):
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                return resp.read().decode("utf-8", errors="replace")
+        except urllib.error.HTTPError as exc:
+            if exc.code not in RETRYABLE_HTTP_STATUSES or attempt >= MAX_HTTP_ATTEMPTS:
+                raise
+            server_delay = _retry_after_seconds(exc.headers)
+            backoff = min(
+                RETRY_BACKOFF_BASE_SECONDS * (2 ** (attempt - 1)),
+                MAX_RETRY_WAIT_SECONDS,
+            )
+            delay = backoff if server_delay is None else server_delay
+            remaining = MAX_RETRY_WAIT_SECONDS - waited
+            if delay > remaining:
+                raise
+            exc.close()
+            if delay > 0:
+                time.sleep(delay)
+                waited += delay
+    raise RuntimeError("HTTP retry loop exhausted without response or HTTP error")
 
 
 def _http_get_json(url: str, headers: Optional[Dict[str, str]] = None,
