@@ -39,6 +39,13 @@ def test_skip_verify_tls_is_present_and_scoped():
     assert "MITM" in src and "sandbox" in src
 
 
+def test_error_path_redacts_api_key_from_url():
+    src = _read(CRATE / "src/main.rs")
+    # O erro do ureq inclui a URL com ?key=...; o código deve redigir a chave.
+    assert "REDACTED" in src
+    assert "replace(&key" in src
+
+
 def test_no_credentials_leaked_in_cargo_or_readme():
     cargo = _read(CRATE / "Cargo.toml")
     readme = _read(CRATE / "README.md")

@@ -42,7 +42,15 @@ fn main() {
     let url = format!("https://generativelanguage.googleapis.com/v1beta/models/{}:generateContent?key={}", model, key);
     let body = serde_json::json!({"contents":[{"parts":[{"text": prompt}]}]}).to_string();
     let resp = agent.post(&url).set("Content-Type", "application/json").send_string(&body);
-    let text = match resp { Ok(r) => r.into_string().unwrap_or_default(), Err(e) => { eprintln!("GEMINI_ERROR:{}", e); std::process::exit(1); } };
+    let text = match resp {
+        Ok(r) => r.into_string().unwrap_or_default(),
+        Err(e) => {
+            // A URL do erro contém ?key=<GEMINI_API_KEY>; redigir para não vazar a chave.
+            let message = format!("{}", e).replace(&key, "REDACTED");
+            eprintln!("GEMINI_ERROR:{}", message);
+            std::process::exit(1);
+        }
+    };
     let v: serde_json::Value = match serde_json::from_str(&text) { Ok(v) => v, Err(_) => { eprintln!("GEMINI_NONJSON:{}", &text[..text.len().min(200)]); std::process::exit(2); } };
     if let Some(t) = v["candidates"][0]["content"]["parts"][0]["text"].as_str() { print!("{}", t); }
     else if let Some(m) = v["error"]["message"].as_str() { eprintln!("GEMINI_API_ERROR:{}", m); std::process::exit(3); }
