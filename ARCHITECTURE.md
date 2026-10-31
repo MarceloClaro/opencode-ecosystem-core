@@ -20,7 +20,7 @@ python3 -c "import json; c=json.load(open('opencode.json', encoding='utf-8')); p
 ```
 
 <!-- core-state:start -->
-**312 agentes** · **16 MCPs** · **33 comandos** · **22 checks**
+**329 agentes** · **18 MCPs** · **34 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 
@@ -119,19 +119,21 @@ As entradas abaixo são derivadas das chaves `mcp` de `opencode.json`:
 1. `antigravity-bridge`;
 2. `artigo-academico-mcp`;
 3. `arxiv-mcp`;
-4. `colibri-mcp`;
-5. `ecosystem-network`;
-6. `fetch`;
-7. `filesystem`;
-8. `latexmk-mcp`;
-9. `litert-lm`;
-10. `metacognitive-interconnect`;
-11. `polymath-labs-mcp`;
-12. `pypi-search`;
-13. `rea`;
-14. `scanners-mcp`;
-15. `sequential-thinking`;
-16. `web-deploy-mcp`;
+4. `caed-spaece-data`;
+5. `colibri-mcp`;
+6. `ecosystem-network`;
+7. `educacao-legislacao`;
+8. `fetch`;
+9. `filesystem`;
+10. `latexmk-mcp`;
+11. `litert-lm`;
+12. `metacognitive-interconnect`;
+13. `polymath-labs-mcp`;
+14. `pypi-search`;
+15. `rea`;
+16. `scanners-mcp`;
+17. `sequential-thinking`;
+18. `web-deploy-mcp`;
 <!-- core-mcp:end -->
 
 O MCP `ecosystem-network` conecta o `MarceloClaroOrchestrator`, o roteamento
@@ -182,6 +184,7 @@ Esse fluxo descreve mecanismos de software, não mérito externo do resultado.
 | Scientific RAG | `rag/scientific.py`, `rag/evolved.py`, `rag/enhanced_search_rag.py` |
 | Universidade Sintética | `synthetic_university/core.py`, `combinatorial_engine.py`, `evolutionary_memory.py`, `mcp_server.py`, `api_gateway.py` |
 | Runtime local | `integrations/litert_lm.py`, `litert_lm_provider.py`, `litert_lm_supervisor.py`, `integrations/colibri_provider.py` |
+| Conselho científico, autoria e sandbox | `scientific_lab/council.py` (13 cientistas), `academic/author_editor.py` (IMRaD/estilo/raciocínios), `scanners/scientific_evolution.py` (calibração dev/holdout), `integrations/openshell_pilot.py` (sandbox), `integrations/gemini_client/` (executor Gemini portátil) |
 | Integridade e quality gates | `installer/`, `benchmarks/merkle_integrity_guard.py`, `scripts/quality_report.py`, `benchmarks/scientific_reasoning/` |
 
 ## SDD e TDD
@@ -266,3 +269,23 @@ recibos separados; nenhum deles promove automaticamente confiança científica.
 
 O [parecer Wolfram](docs/AVALIACAO_WOLFRAM_CORE_R895.md) explica o encaixe no
 contrato de plugins existente e as condições de uma futura engine local.
+
+## Frente científica R985–R1001
+
+- **Conselho R989** (`scientific_lab/council.py`): 13 perfis `scientist-*` no
+  catálogo, sob MarceloClaro; orquestração sequencial com uma tentativa por
+  papel, contrato de saída `status/findings/evidence/limitations/feynman` e
+  validação de citação literal. `partial` não interrompe; `blocked` interrompe.
+- **Autor/Editor R991** (`academic/author_editor.py`): `MANUSCRIPT_SECTIONS`
+  (IMRaD expandido), `style_fingerprint` anti-plágio e `reasoning_registry`
+  mapeando tradições aos motores de `reasoning/`.
+- **Scanner evolutivo R990** (`scanners/scientific_evolution.py`): avaliação
+  dev/holdout de candidatos fixos, sem código arbitrário nem autopromoção.
+- **Piloto OpenShell R992** (`integrations/openshell_pilot.py`): preflight e
+  plano de ensaios; a validação real de isolamento e a captura de pacotes estão
+  em `docs/evidence/` e no [procedimento](docs/PROCEDIMENTO_OPENSHELL_GEMINI_CONSELHO.md).
+- **Executor Gemini R1001** (`integrations/gemini_client/`): cliente Rust que
+  chama a API Gemini com `GEMINI_API_KEY`, executável dentro do sandbox sem OAuth.
+
+As fronteiras permanecem: instalação/inventário, execução observada e validação
+externa são estados distintos; nenhuma pontuação interna vira Qualis/aceite.

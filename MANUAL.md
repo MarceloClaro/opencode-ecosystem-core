@@ -22,7 +22,7 @@ Não use esta contagem como indicador de cobertura, qualidade ou validação
 externa.
 
 <!-- core-state:start -->
-**312 agentes** · **16 MCPs** · **33 comandos** · **22 checks**
+**329 agentes** · **18 MCPs** · **34 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 
@@ -169,6 +169,33 @@ python3 -m marceloclaro.cli network route "revisar o projeto" --ecosystem claude
 `apm` aceita os subcomandos `init`, `install`, `compile`, `audit`, `pack` e
 `list`. Para ver o resumo nativo de uso, execute
 `python3 -m marceloclaro.cli ajuda`.
+
+## Camada científica, conselho e sandbox
+
+A fachada científica usa `python3 -m marceloclaro.scientific_lab`:
+
+```bash
+python3 -m marceloclaro.scientific_lab status
+python3 -m marceloclaro.scientific_lab doctor
+python3 -m marceloclaro.scientific_lab native-status
+python3 -m marceloclaro.scientific_lab council list
+python3 -m marceloclaro.scientific_lab council plan --question "pergunta"
+python3 -m marceloclaro.scientific_lab author-editor brief --topic "tema"
+python3 -m marceloclaro.scientific_lab scanner-evolve --corpus-json '[...]'
+python3 -m marceloclaro.scientific_lab openshell preflight
+```
+
+| Comando | O que faz | Limite |
+|---|---|---|
+| `council list/plan/run` | Conselho de 13 cientistas (busca, revisão, análise, validação, auditoria). | `run` exige corpus, `--confirm` e executor real; votos não produzem verdade. |
+| `author-editor structure/style/brief` | Estrutura IMRaD, perfil de estilo anti-plágio e plano de raciocínios. | Pontuação não vira Qualis/aceite; revisão humana obrigatória. |
+| `scanner-evolve` | Compara candidatos de triagem em corpus dev/holdout. | Recomenda sem autopromover; corpus não é validação externa. |
+| `openshell preflight/plan` | Inventário do sandbox OpenShell e plano de ensaios de isolamento. | Inventário não comprova isolamento; execução real é à parte. |
+
+`council run` e `author-editor` enviam texto ao executor configurado (custo da
+conta do serviço); a busca externa e a validação científica continuam distintas.
+Consulte [conselho e scanners](docs/CONSELHO_CIENTIFICO_E_SCANNERS_R989_R990.md)
+e o [procedimento OpenShell/Gemini](docs/PROCEDIMENTO_OPENSHELL_GEMINI_CONSELHO.md).
 
 ## Fluxos usuais
 

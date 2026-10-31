@@ -7,7 +7,7 @@ contagens das fontes locais; o histórico R414 preservado ao final não represen
 o último estado operacional do Core.
 
 <!-- core-state:start -->
-**312 agentes** · **16 MCPs** · **33 comandos** · **22 checks**
+**329 agentes** · **18 MCPs** · **34 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 
@@ -26,9 +26,10 @@ não comprova o aceite integral.
 ## Revisão documental R916
 
 O README, os guias e o atlas convergem para a coleta de fontes locais R916,
-com origem e exclusões explícitas. A configuração atual contém 312 agentes,
-16 MCPs e 33 comandos; não confundir com a configuração histórica R914 de
-346/34. Os recibos anteriores continuam datados, sem promoção a prontidão atual.
+com origem e exclusões explícitas. A configuração atual contém 316 agentes,
+18 MCPs e 34 comandos (recontagem e regeneração do artefato no ciclo R982);
+não confundir com a configuração histórica R914 de 346/34. Os recibos
+anteriores continuam datados, sem promoção a prontidão atual.
 
 R915 atualizou NotebookLM para 0.15.6, com 353 testes selecionados aprovados e
 234 notebooks listados. R916 acrescenta auditoria de fontes e recomendações de
