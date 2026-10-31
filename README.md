@@ -72,7 +72,10 @@ do ambiente e da operação solicitada.
 
 ## Estado atual e orientação de leitura
 
-Revisão documental **R916, 18/10/2026**, baseada no checkout local. Comece pelo
+Revisão documental **R916, 18/10/2026**, baseada no checkout local; a frente
+**R985–R1001** (conselho de 13 cientistas, autor/editor de alto rigor, scanner
+evolutivo, piloto OpenShell e executor Gemini) foi incorporada depois — veja
+[Capacidades principais](#capacidades-principais). Comece pelo
 [manual](MANUAL.md), pelo [índice documental](docs/README.md) e pelo
 [estado e pendências](docs/ESTADO_ATUAL_CORE_R916.md). Os 329 agentes, 18 MCPs e
 34 comandos acima são configuração (recontagem e artefato regenerado no ciclo
