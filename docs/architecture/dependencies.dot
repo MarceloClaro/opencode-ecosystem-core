@@ -1,5 +1,5 @@
 digraph architecture {
-  graph [overlap=false, splines=false, remincross=false, nslimit=3, nslimit1=1, mclimit=0.1, outputorder=edgesfirst, bgcolor="#f8fafc", fontname="Helvetica", label="Fontes worktree 19e1b500a9d0 \u00b7 base 84ef0820a71f \u00b7 18 modificados \u00b7 52 removidos omitidos; imports declarados, n\u00e3o execu\u00e7\u00e3o"];
+  graph [overlap=false, splines=false, remincross=false, nslimit=3, nslimit1=1, mclimit=0.1, outputorder=edgesfirst, bgcolor="#f8fafc", fontname="Helvetica", label="Fontes worktree c1fd01c08741 \u00b7 base 6cd83574bce8 \u00b7 28 modificados \u00b7 52 removidos omitidos; imports declarados, n\u00e3o execu\u00e7\u00e3o"];
   node [shape=box, style="rounded,filled", fillcolor="#e0f2fe", color="#0284c7", fontname="Helvetica", fontsize=9];
   edge [color="#94a3b8", arrowsize=0.45];
   n_77e60d3866078e4b9657 [id="n_77e60d3866078e4b9657", label=".opencode.mcp.litert_lm_server", tooltip=".opencode/mcp/litert_lm_server.py"];
@@ -14,6 +14,7 @@ digraph architecture {
   n_9bb9c1150b64945756ee [id="n_9bb9c1150b64945756ee", label="academic.adversarial_research.registry", tooltip="academic/adversarial_research/registry.py"];
   n_fd86bc4f89985a38171c [id="n_fd86bc4f89985a38171c", label="academic.adversarial_research.router", tooltip="academic/adversarial_research/router.py"];
   n_5346c0f21873dc676255 [id="n_5346c0f21873dc676255", label="academic.adversarial_research.service", tooltip="academic/adversarial_research/service.py"];
+  n_2ee9baccfbdba20c7853 [id="n_2ee9baccfbdba20c7853", label="academic.author_editor", tooltip="academic/author_editor.py"];
   n_64122f95eab0ad7a71c4 [id="n_64122f95eab0ad7a71c4", label="academic.auto_score_qualis", tooltip="academic/auto_score_qualis.py"];
   n_9b710da47187a25848e1 [id="n_9b710da47187a25848e1", label="academic.maswos", tooltip="academic/maswos.py"];
   n_827815eb458dc9a28e1e [id="n_827815eb458dc9a28e1e", label="academic.maswos_llm_delegate", tooltip="academic/maswos_llm_delegate.py"];
@@ -210,6 +211,7 @@ digraph architecture {
   n_7d3ae4748d3b81da4efa [id="n_7d3ae4748d3b81da4efa", label="integrations.opencode_commands", tooltip="integrations/opencode_commands.py"];
   n_a0261c0fb7c6d41f34e0 [id="n_a0261c0fb7c6d41f34e0", label="integrations.opencode_go", tooltip="integrations/opencode_go.py"];
   n_68c14e6b196209bb153a [id="n_68c14e6b196209bb153a", label="integrations.opencode_zen", tooltip="integrations/opencode_zen.py"];
+  n_36e64bb2c6794206f2f5 [id="n_36e64bb2c6794206f2f5", label="integrations.openshell_pilot", tooltip="integrations/openshell_pilot.py"];
   n_fe6df9704331ce2a184f [id="n_fe6df9704331ce2a184f", label="integrations.plandex_cli", tooltip="integrations/plandex_cli.py"];
   n_db1967ac9774c7ce5d6c [id="n_db1967ac9774c7ce5d6c", label="integrations.polymath_aquisicao", tooltip="integrations/polymath_aquisicao.py"];
   n_7c49f2289708b41960d8 [id="n_7c49f2289708b41960d8", label="integrations.polymath_dossie", tooltip="integrations/polymath_dossie.py"];
@@ -515,12 +517,14 @@ digraph architecture {
   n_08463ccd7a16a577af23 [id="n_08463ccd7a16a577af23", label="scanners.reversa_scanner", tooltip="scanners/reversa_scanner.py"];
   n_15c28f9c24c98247f7dd [id="n_15c28f9c24c98247f7dd", label="scanners.reverse_scanner", tooltip="scanners/reverse_scanner.py"];
   n_8ba99717692d1ef52b2f [id="n_8ba99717692d1ef52b2f", label="scanners.scanners_mcp_server", tooltip="scanners/scanners_mcp_server.py"];
+  n_bc8b3b352e2ecd29f4de [id="n_bc8b3b352e2ecd29f4de", label="scanners.scientific_evolution", tooltip="scanners/scientific_evolution.py"];
   n_2a4a7fb7d5e0fc878cfb [id="n_2a4a7fb7d5e0fc878cfb", label="scanners.scientific_reasoning_scanner", tooltip="scanners/scientific_reasoning_scanner.py"];
   n_6ba820f33d23f5288d76 [id="n_6ba820f33d23f5288d76", label="scanners.social_impact_scanner", tooltip="scanners/social_impact_scanner.py"];
   n_0ae99428f333abab2658 [id="n_0ae99428f333abab2658", label="scanners.successor_generator", tooltip="scanners/successor_generator.py"];
   n_43d56083196d95858825 [id="n_43d56083196d95858825", label="scanners.teleological_scanner", tooltip="scanners/teleological_scanner.py"];
   n_d1df5ad9bb9215d951d2 [id="n_d1df5ad9bb9215d951d2", label="scanners.trajectory_mapper", tooltip="scanners/trajectory_mapper.py"];
   n_239dda1799180fb66c33 [id="n_239dda1799180fb66c33", label="scientific_lab", tooltip="scientific_lab/__init__.py"];
+  n_0ff40db3b71ea53da9f9 [id="n_0ff40db3b71ea53da9f9", label="scientific_lab.council", tooltip="scientific_lab/council.py"];
   n_5c819b282895eeb6e62b [id="n_5c819b282895eeb6e62b", label="scientific_lab.native", tooltip="scientific_lab/native/__init__.py"];
   n_bd078a592e4b652e4ae0 [id="n_bd078a592e4b652e4ae0", label="scientific_lab.native.cli", tooltip="scientific_lab/native/cli.py"];
   n_b0896b2a2c6c9c785985 [id="n_b0896b2a2c6c9c785985", label="scientific_lab.native.common", tooltip="scientific_lab/native/common.py"];
@@ -739,6 +743,7 @@ digraph architecture {
   n_05e6552ccdd82d30b4a3 -> n_2124f340407ce4cce4fd;
   n_05e6552ccdd82d30b4a3 -> n_244d8dfc1dd2358df9ce;
   n_05e6552ccdd82d30b4a3 -> n_75cc58155a2172de7006;
+  n_05e6552ccdd82d30b4a3 -> n_81f6e359a89038e05c01;
   n_05e6552ccdd82d30b4a3 -> n_b00285256499dc9a07ad;
   n_06f8cc0149f0a1fc3a75 -> n_9b710da47187a25848e1;
   n_08463ccd7a16a577af23 -> n_3c6f1375a3d3d2bed837;
@@ -781,6 +786,10 @@ digraph architecture {
   n_0f0ba5dcb4eb810c4842 -> n_2124f340407ce4cce4fd;
   n_0f1ffd50dbc05b7df1eb -> n_412d24b15c6a7d4cc1c3;
   n_0f1ffd50dbc05b7df1eb -> n_f06d54442f8d97973e77;
+  n_0ff40db3b71ea53da9f9 -> n_0ef6bf6feacf686c0e7d;
+  n_0ff40db3b71ea53da9f9 -> n_1fd21d0ce5610a2d84d1;
+  n_0ff40db3b71ea53da9f9 -> n_83cded5da1464abf70d3;
+  n_0ff40db3b71ea53da9f9 -> n_d0d3f10d87673fcd2c5d;
   n_101c32a103ff17eeb83c -> n_10ad7a49b2bbf1d726d5;
   n_101c32a103ff17eeb83c -> n_1ab5d40692ec54803340;
   n_101c32a103ff17eeb83c -> n_aac3e61b5f8cea2cfbf2;
@@ -870,6 +879,7 @@ digraph architecture {
   n_1fd21d0ce5610a2d84d1 -> n_7413341efb6b8f16cbbb;
   n_1fd21d0ce5610a2d84d1 -> n_75cc58155a2172de7006;
   n_1fd21d0ce5610a2d84d1 -> n_75fe68a1f485456896a4;
+  n_1fd21d0ce5610a2d84d1 -> n_81f6e359a89038e05c01;
   n_1fd21d0ce5610a2d84d1 -> n_81fcae61416ff4144c1e;
   n_1fd21d0ce5610a2d84d1 -> n_87f27df839958a6e1047;
   n_1fd21d0ce5610a2d84d1 -> n_8996f8053d10bf4c395b;
@@ -929,6 +939,7 @@ digraph architecture {
   n_22ec4e23140a01e22dfb -> n_8a2befba7e45dd8b3333;
   n_22ec4e23140a01e22dfb -> n_cf34304665c38b721aff;
   n_241a9d6ebddbc0bd5b4e -> n_f1f6b14ad88a09923db7;
+  n_244d8dfc1dd2358df9ce -> n_81f6e359a89038e05c01;
   n_244d8dfc1dd2358df9ce -> n_826b4ca62c42601b199c;
   n_244d8dfc1dd2358df9ce -> n_8cca4d7c99eda98a59c1;
   n_269ea1573ba824003b8a -> n_a065c4635f680c24f4eb;
@@ -954,6 +965,7 @@ digraph architecture {
   n_2e5edd89e12ee9188aed -> n_49d167a69bbdcdef51a2;
   n_2e5edd89e12ee9188aed -> n_63356973ba8955f0abfd;
   n_2e5edd89e12ee9188aed -> n_75fe68a1f485456896a4;
+  n_2e5edd89e12ee9188aed -> n_81f6e359a89038e05c01;
   n_2e5edd89e12ee9188aed -> n_87cce991d433cc1bbe77;
   n_2e5edd89e12ee9188aed -> n_9034a9b2816937b96b27;
   n_2e5edd89e12ee9188aed -> n_ab15f98562e4a7d64602;
@@ -962,6 +974,7 @@ digraph architecture {
   n_2e5edd89e12ee9188aed -> n_cd2486b484d477a603d2;
   n_2e5edd89e12ee9188aed -> n_e066d850656fdbdc9640;
   n_2e5edd89e12ee9188aed -> n_e54783d9dffa9f278ba6;
+  n_2ee9baccfbdba20c7853 -> n_0ff40db3b71ea53da9f9;
   n_30e66ca772b42abd0377 -> n_88958a884f8db20d05df;
   n_30e66ca772b42abd0377 -> n_be25e696baab253a6e68;
   n_30e66ca772b42abd0377 -> n_e720ca15c3f73778a65a;
@@ -1047,6 +1060,7 @@ digraph architecture {
   n_5346c0f21873dc676255 -> n_02f0bc6eefa5e6660775;
   n_5346c0f21873dc676255 -> n_1fd21d0ce5610a2d84d1;
   n_5346c0f21873dc676255 -> n_4d978cf9b198ea5a0a5e;
+  n_5346c0f21873dc676255 -> n_5cb6abb9c3290c8af85b;
   n_5346c0f21873dc676255 -> n_7f4dbe832f57a3ed7198;
   n_5346c0f21873dc676255 -> n_8a2befba7e45dd8b3333;
   n_5346c0f21873dc676255 -> n_9bb9c1150b64945756ee;
@@ -1185,6 +1199,7 @@ digraph architecture {
   n_7cd81562c78e7a07b080 -> n_1d90cad42bc6d1883f28;
   n_7d3ae4748d3b81da4efa -> n_1fd21d0ce5610a2d84d1;
   n_7d3ae4748d3b81da4efa -> n_7ad9ded1fee5306af2f5;
+  n_7d3ae4748d3b81da4efa -> n_81f6e359a89038e05c01;
   n_7d3ae4748d3b81da4efa -> n_8a2befba7e45dd8b3333;
   n_7d3ae4748d3b81da4efa -> n_a519d0aed01873c9592f;
   n_7d3ae4748d3b81da4efa -> n_cab6c4f8ead110f99b88;
@@ -1391,9 +1406,14 @@ digraph architecture {
   n_b5ff6e30eea3d2f99fad -> n_d71a335cd0d1a4afdb48;
   n_b63c336d38c30adcc870 -> n_2538f0432174dafa4e7c;
   n_b63c336d38c30adcc870 -> n_408f5e1e2604fffc161d;
+  n_b6a68ee1517138ce4d2e -> n_0ff40db3b71ea53da9f9;
   n_b6a68ee1517138ce4d2e -> n_1596ba745603faabd510;
   n_b6a68ee1517138ce4d2e -> n_239dda1799180fb66c33;
   n_b6a68ee1517138ce4d2e -> n_2594d511fd9d7709ad81;
+  n_b6a68ee1517138ce4d2e -> n_2ee9baccfbdba20c7853;
+  n_b6a68ee1517138ce4d2e -> n_36e64bb2c6794206f2f5;
+  n_b6a68ee1517138ce4d2e -> n_bc8b3b352e2ecd29f4de;
+  n_b6a68ee1517138ce4d2e -> n_bd078a592e4b652e4ae0;
   n_b6cd9cf86e498de6e05f -> n_3e3ab67fd08027283cbd;
   n_b843d78405fc1ea193ce -> n_8dbe07e823d3b3eab4e0;
   n_b8ca192b33e4592fbc82 -> n_643d99342983caa639ce;
@@ -1435,6 +1455,8 @@ digraph architecture {
   n_bc36efc4e5251cd3ac68 -> n_c42873877e2b38ca6519;
   n_bc36efc4e5251cd3ac68 -> n_d640e21595110b49958b;
   n_bc36efc4e5251cd3ac68 -> n_fc78f78bc33529a85914;
+  n_bc8b3b352e2ecd29f4de -> n_0ff40db3b71ea53da9f9;
+  n_bc8b3b352e2ecd29f4de -> n_2a4a7fb7d5e0fc878cfb;
   n_bd078a592e4b652e4ae0 -> n_19e51074a03cfcc2ff6c;
   n_bd078a592e4b652e4ae0 -> n_1e277f329de5841b9b3b;
   n_bd078a592e4b652e4ae0 -> n_5c819b282895eeb6e62b;
@@ -1525,6 +1547,7 @@ digraph architecture {
   n_d12802ec59aaf7a9173f -> n_2c36ad5b1848424f4eeb;
   n_d12802ec59aaf7a9173f -> n_73fe7092b927d3ff4f94;
   n_d12802ec59aaf7a9173f -> n_7d3ae4748d3b81da4efa;
+  n_d12802ec59aaf7a9173f -> n_81f6e359a89038e05c01;
   n_d14e14ee6c6afade1d6e -> n_87f27df839958a6e1047;
   n_d15491f4882571385f54 -> n_028c80fc11467523baa8;
   n_d15491f4882571385f54 -> n_701541dab79fe9670269;

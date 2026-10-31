@@ -204,6 +204,45 @@ CLI: `python3 -m marceloclaro.scientific_lab council|author-editor|scanner-evolv
 Ver [procedimento de reprodução](docs/PROCEDIMENTO_OPENSHELL_GEMINI_CONSELHO.md)
 e [conselho e scanners](docs/CONSELHO_CIENTIFICO_E_SCANNERS_R989_R990.md).
 
+### Scanners e diagnóstico multidimensional
+
+O diagnóstico (`/diagnose` e a ferramenta MCP `super_rigor_audit`) combina
+scanners de dimensões distintas sobre o mesmo corpus. Cada scanner é uma
+**triagem heurística**; nenhum atribui qualidade científica, validade clínica ou
+aceite editorial.
+
+| Scanner | Função |
+|---|---|
+| **Noológico** | Cobertura epistemológica — dimensões do conhecimento presentes/ausentes |
+| **Teleológico** | Lacunas entre metas do ecossistema e capacidades reais dos agentes |
+| **Evolutivo** | Roadmap evolutivo — rotas de melhoria e trajetórias M1–M5 |
+| **Potencialidade** | Capacidades latentes, gaps de inovação e DNA do ecossistema |
+| **Impacto social** | SROI, Teoria da Mudança, ODS e B-Impact Score |
+| **Impacto jurídico** | Prontidão jurídica e ganho metacognitivo (SPEC-924) |
+| **Científico** | Triagem lexical PT/EN de falsificabilidade, metodologia e falácias |
+| **Literário (8 visões)** | Narrativa, personagem, estilo, símbolos, teoria, leitor, ética e inovação |
+| **Pesquisa literária (4)** | Bibliografia, corpus comparativo, teoria e rigor internacional |
+| **Engenharia reversa** | Código legado → conhecimento e contratos extraídos |
+| **Ruído e compressão** | Redundância (SPS/NRR) e densidade (CR/CPS) do corpus |
+| **Evolução calibrada (R990)** | Compara candidatos em corpus dev/holdout separados |
+
+**Vantagens:**
+
+1. **Multidimensional** — um único comando cobre cinco ou mais dimensões do
+   ecossistema, sem depender de um heurístico único.
+2. **Rastreável** — o scanner científico expõe offsets do texto normalizado,
+   contexto (afirmado/negado/citado/título) e hash da entrada; audita-se o
+   achado, não apenas o score.
+3. **Anti-overclaim** — toda saída declara `score_kind`, `scientific_quality_assessed=false`
+   e limitações; uma nota lexical alta não vira Qualis nem aceite.
+4. **Calibração honesta** — a evolução (R990) só recomenda um candidato com
+   ganho em desenvolvimento **e** sem regressão de falsos positivos/negativos no
+   holdout; nunca autopromove nem aceita código arbitrário.
+
+Uso: `python3 -m scanners.cli diagnose CAMINHO` ou `scanner-evolve --corpus-json`.
+Ver [scanners](scanners/cli.py), [triagem científica](scanners/scientific_reasoning_scanner.py)
+e [evolução](scanners/scientific_evolution.py).
+
 ### Inovações e paralelo com ferramentas similares
 
 As frentes R985–R1001 acrescentam diferenciais de **desenho** ao Core. A
@@ -733,7 +772,7 @@ Os fluxogramas abaixo são cópias integrais das mesmas fontes usadas no
 [mapa navegável](docs/architecture_map.html). A ordem, as descrições, as fontes
 e as limitações seguem o [catálogo de fluxos](docs/architecture/flows.json).
 A edição e a origem das fontes estão declaradas no catálogo e no inventário.
-Fontes do checkout atual; base Git `d02817ca460ee6411761a8a3f0b82d17dafd2740`; identidade worktree `6ba1d410fec7b2763bb761366c2fd2a72b436e1e9c314fac362b1de0eff3be42`. 29 arquivos rastreados modificados e 52 removidos foram contabilizados; fontes não rastreadas não entram.
+Fontes do checkout atual; base Git `6cd83574bce806ba2cb4ea9b0a889fb6337281e9`; identidade worktree `c1fd01c08741cf6028170a9fb981e246b2c49f6be6061a8db909edbcb01d4b28`. 28 arquivos rastreados modificados e 52 removidos foram contabilizados; fontes não rastreadas não entram.
 Estes desenhos não representam uma nova execução de todos os componentes.
 
 ### Legenda e critérios de leitura
@@ -949,7 +988,7 @@ flowchart TB
 - `integrations/ecosystem_mcp.py:33` (fonte local modificada; não é permalink da base) — `get_library_orchestrator`.
 - `integrations/ecosystem_mcp.py:320` (fonte local modificada; não é permalink da base) — `get_coordinator`.
 - `marceloclaro/orchestrator.py:344` (fonte local modificada; não é permalink da base) — `MarceloClaroOrchestrator.create_text_task_spec`.
-- [marceloclaro/autonomous.py:33](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/marceloclaro/autonomous.py#L33) — `AutonomousCoordinator`.
+- [marceloclaro/autonomous.py:33](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/marceloclaro/autonomous.py#L33) — `AutonomousCoordinator`.
 - `integrations/harness_runtime.py:273` (fonte local modificada; não é permalink da base) — `HarnessRuntime._run_cli`.
 - `marceloclaro/orchestrator.py:870` (fonte local modificada; não é permalink da base) — `MarceloClaroOrchestrator.report_completion`.
 
@@ -1009,10 +1048,10 @@ flowchart TB
 
 **Fontes de código:**
 
-- [marceloclaro/workflow.py:42](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/marceloclaro/workflow.py#L42) — `WorkflowCoordinator`.
-- [marceloclaro/workflow.py:84](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/marceloclaro/workflow.py#L84) — `WorkflowCoordinator._definition`.
-- [marceloclaro/workflow.py:237](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/marceloclaro/workflow.py#L237) — `WorkflowCoordinator._resume`.
-- [marceloclaro/workflow_store.py:17](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/marceloclaro/workflow_store.py#L17) — `WorkflowStore`.
+- [marceloclaro/workflow.py:42](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/marceloclaro/workflow.py#L42) — `WorkflowCoordinator`.
+- [marceloclaro/workflow.py:84](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/marceloclaro/workflow.py#L84) — `WorkflowCoordinator._definition`.
+- [marceloclaro/workflow.py:237](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/marceloclaro/workflow.py#L237) — `WorkflowCoordinator._resume`.
+- [marceloclaro/workflow_store.py:17](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/marceloclaro/workflow_store.py#L17) — `WorkflowStore`.
 
 **Limitações:**
 
@@ -1059,11 +1098,11 @@ flowchart TB
 
 **Fontes de código:**
 
-- [sdd/spec_engine.py:70](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/sdd/spec_engine.py#L70) — `Specification`.
-- [sdd/spec_engine.py:1308](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/sdd/spec_engine.py#L1308) — `SpecVerifier`.
+- [sdd/spec_engine.py:70](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/sdd/spec_engine.py#L70) — `Specification`.
+- [sdd/spec_engine.py:1308](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/sdd/spec_engine.py#L1308) — `SpecVerifier`.
 - `sdd/tdd_history.py:114` (fonte local modificada; não é permalink da base) — `TDDHistory`.
 - `sdd/tdd_history.py:569` (fonte local modificada; não é permalink da base) — `TDDHistory.validate_pair`.
-- [sdd/tdd_runner.py:46](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/sdd/tdd_runner.py#L46) — `TDDRunner`.
+- [sdd/tdd_runner.py:46](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/sdd/tdd_runner.py#L46) — `TDDRunner`.
 - `marceloclaro/orchestrator.py:359` (fonte local modificada; não é permalink da base) — `MarceloClaroOrchestrator.sdd_preflight`.
 
 **Limitações:**
@@ -1122,17 +1161,17 @@ flowchart TB
 
 **Fontes de código:**
 
-- [integrations/rea_layers.py:445](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/integrations/rea_layers.py#L445) — `layers_status`.
-- [integrations/rea_layers.py:422](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/integrations/rea_layers.py#L422) — `probe_layer`.
-- [integrations/rea_layers.py:465](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/integrations/rea_layers.py#L465) — `engine_environment`.
-- [integrations/rea_bridge.py:40](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/integrations/rea_bridge.py#L40) — `ReaBridge`.
+- [integrations/rea_layers.py:445](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/integrations/rea_layers.py#L445) — `layers_status`.
+- [integrations/rea_layers.py:422](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/integrations/rea_layers.py#L422) — `probe_layer`.
+- [integrations/rea_layers.py:465](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/integrations/rea_layers.py#L465) — `engine_environment`.
+- [integrations/rea_bridge.py:40](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/integrations/rea_bridge.py#L40) — `ReaBridge`.
 - `marceloclaro/orchestrator.py:2362` (fonte local modificada; não é permalink da base) — `MarceloClaroOrchestrator.rea_action`.
-- [marceloclaro/rea_cli.py:7](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/marceloclaro/rea_cli.py#L7) — `run_rea_cli`.
-- [integrations/rea_bridge.py:174](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/integrations/rea_bridge.py#L174) — `ReaBridge._validate`.
-- [integrations/rea_bridge.py:108](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/integrations/rea_bridge.py#L108) — `ReaBridge.status`.
-- [integrations/rea_bridge.py:50](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/integrations/rea_bridge.py#L50) — `ReaBridge._child_environment`.
-- [integrations/rea_bridge.py:479](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/integrations/rea_bridge.py#L479) — `ReaBridge.action`.
-- [integrations/rea_layers.py:305](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/integrations/rea_layers.py#L305) — `layer_inspection`.
+- [marceloclaro/rea_cli.py:7](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/marceloclaro/rea_cli.py#L7) — `run_rea_cli`.
+- [integrations/rea_bridge.py:174](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/integrations/rea_bridge.py#L174) — `ReaBridge._validate`.
+- [integrations/rea_bridge.py:108](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/integrations/rea_bridge.py#L108) — `ReaBridge.status`.
+- [integrations/rea_bridge.py:50](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/integrations/rea_bridge.py#L50) — `ReaBridge._child_environment`.
+- [integrations/rea_bridge.py:479](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/integrations/rea_bridge.py#L479) — `ReaBridge.action`.
+- [integrations/rea_layers.py:305](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/integrations/rea_layers.py#L305) — `layer_inspection`.
 
 **Limitações:**
 
@@ -1185,11 +1224,11 @@ flowchart TB
 
 **Fontes de código:**
 
-- [integrations/rea_assistant.py:625](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/integrations/rea_assistant.py#L625) — `LocalReaAssistant`.
-- [integrations/rea_assistant.py:42](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/integrations/rea_assistant.py#L42) — `run_isolated_worker`.
-- [integrations/rea_assistant.py:603](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/integrations/rea_assistant.py#L603) — `_snapshot_loopback`.
-- [integrations/rea_local_worker.py:40](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/integrations/rea_local_worker.py#L40) — `main`.
-- [integrations/rea_assistant.py:164](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/integrations/rea_assistant.py#L164) — `explain_report`.
+- [integrations/rea_assistant.py:625](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/integrations/rea_assistant.py#L625) — `LocalReaAssistant`.
+- [integrations/rea_assistant.py:42](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/integrations/rea_assistant.py#L42) — `run_isolated_worker`.
+- [integrations/rea_assistant.py:603](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/integrations/rea_assistant.py#L603) — `_snapshot_loopback`.
+- [integrations/rea_local_worker.py:40](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/integrations/rea_local_worker.py#L40) — `main`.
+- [integrations/rea_assistant.py:164](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/integrations/rea_assistant.py#L164) — `explain_report`.
 
 **Limitações:**
 
@@ -1237,11 +1276,11 @@ flowchart TB
 
 **Fontes de código:**
 
-- [integrations/rea_assistant.py:280](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/integrations/rea_assistant.py#L280) — `setup_local_agent`.
-- [integrations/rea_assistant.py:447](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/integrations/rea_assistant.py#L447) — `launch_local_agent`.
-- [integrations/rea_assistant.py:353](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/integrations/rea_assistant.py#L353) — `_run_agent_client`.
-- [integrations/rea_assistant.py:544](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/integrations/rea_assistant.py#L544) — `validate_agent_trace`.
-- [integrations/rea_assistant_mcp.py:17](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/integrations/rea_assistant_mcp.py#L17) — `create_mcp_server`.
+- [integrations/rea_assistant.py:280](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/integrations/rea_assistant.py#L280) — `setup_local_agent`.
+- [integrations/rea_assistant.py:447](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/integrations/rea_assistant.py#L447) — `launch_local_agent`.
+- [integrations/rea_assistant.py:353](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/integrations/rea_assistant.py#L353) — `_run_agent_client`.
+- [integrations/rea_assistant.py:544](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/integrations/rea_assistant.py#L544) — `validate_agent_trace`.
+- [integrations/rea_assistant_mcp.py:17](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/integrations/rea_assistant_mcp.py#L17) — `create_mcp_server`.
 
 **Limitações:**
 
@@ -1287,12 +1326,12 @@ flowchart TB
 
 **Fontes de código:**
 
-- [rag/enhanced_search_rag.py:761](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/rag/enhanced_search_rag.py#L761) — `UnifiedSearchRAG`.
-- [rag/enhanced_search_rag.py:312](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/rag/enhanced_search_rag.py#L312) — `EnhancedRAG`.
-- [rag/enhanced_search_rag.py:602](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/rag/enhanced_search_rag.py#L602) — `ReferenceAuditor`.
-- [mci/evidence_graph.py:22](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/mci/evidence_graph.py#L22) — `EvidenceGraph`.
-- [agentic_science_v2/evidence_graph.py:128](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/agentic_science_v2/evidence_graph.py#L128) — `EvidenceGraph`.
-- [agentic_science_v2/deep_research.py:468](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/agentic_science_v2/deep_research.py#L468) — `OrchestratorAgent`.
+- [rag/enhanced_search_rag.py:761](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/rag/enhanced_search_rag.py#L761) — `UnifiedSearchRAG`.
+- [rag/enhanced_search_rag.py:312](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/rag/enhanced_search_rag.py#L312) — `EnhancedRAG`.
+- [rag/enhanced_search_rag.py:602](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/rag/enhanced_search_rag.py#L602) — `ReferenceAuditor`.
+- [mci/evidence_graph.py:22](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/mci/evidence_graph.py#L22) — `EvidenceGraph`.
+- [agentic_science_v2/evidence_graph.py:128](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/agentic_science_v2/evidence_graph.py#L128) — `EvidenceGraph`.
+- [agentic_science_v2/deep_research.py:468](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/agentic_science_v2/deep_research.py#L468) — `OrchestratorAgent`.
 
 **Limitações:**
 
@@ -1333,10 +1372,10 @@ flowchart TB
 **Fontes de código:**
 
 - `marceloclaro/orchestrator.py:376` (fonte local modificada; não é permalink da base) — `MarceloClaroOrchestrator.memory_network_query`.
-- [mci/metabus.py:61](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/mci/metabus.py#L61) — `MetacognitiveMemory`.
-- [webapp/memory_network_visualizer.py:161](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/webapp/memory_network_visualizer.py#L161) — `CoreMemoryNetworkSource`.
-- [webapp/memory_network_visualizer.py:365](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/webapp/memory_network_visualizer.py#L365) — `MemoryNetworkVisualizer`.
-- [webapp/memory_network_streamlit.py:17](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/webapp/memory_network_streamlit.py#L17) — `render_memory_network_streamlit`.
+- [mci/metabus.py:61](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/mci/metabus.py#L61) — `MetacognitiveMemory`.
+- [webapp/memory_network_visualizer.py:161](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/webapp/memory_network_visualizer.py#L161) — `CoreMemoryNetworkSource`.
+- [webapp/memory_network_visualizer.py:365](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/webapp/memory_network_visualizer.py#L365) — `MemoryNetworkVisualizer`.
+- [webapp/memory_network_streamlit.py:17](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/webapp/memory_network_streamlit.py#L17) — `render_memory_network_streamlit`.
 
 **Limitações:**
 
@@ -1388,12 +1427,12 @@ flowchart TB
 
 **Fontes de código:**
 
-- [reasoning/reasoning_engines.py:7](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/reasoning/reasoning_engines.py#L7) — `route`.
-- [reasoning/z3_solver.py:41](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/reasoning/z3_solver.py#L41) — `check`.
-- [reasoning/engines.py:83](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/reasoning/engines.py#L83) — `_safe_build_z3_constraint`.
-- [reasoning/engines.py:337](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/reasoning/engines.py#L337) — `_safe_math_ast`.
-- [reasoning/engines.py:493](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/reasoning/engines.py#L493) — `SymPyEngine`.
-- [reasoning/engines.py:1435](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/reasoning/engines.py#L1435) — `MultiReasoningEngine`.
+- [reasoning/reasoning_engines.py:7](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/reasoning/reasoning_engines.py#L7) — `route`.
+- [reasoning/z3_solver.py:41](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/reasoning/z3_solver.py#L41) — `check`.
+- [reasoning/engines.py:83](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/reasoning/engines.py#L83) — `_safe_build_z3_constraint`.
+- [reasoning/engines.py:337](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/reasoning/engines.py#L337) — `_safe_math_ast`.
+- [reasoning/engines.py:493](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/reasoning/engines.py#L493) — `SymPyEngine`.
+- [reasoning/engines.py:1435](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/reasoning/engines.py#L1435) — `MultiReasoningEngine`.
 
 **Limitações:**
 
@@ -1447,14 +1486,14 @@ flowchart TB
 **Fontes de código:**
 
 - `marceloclaro/doctor.py:928` (fonte local modificada; não é permalink da base) — `run_doctor`.
-- [scanners/pipeline.py:96](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/scanners/pipeline.py#L96) — `DiagnosticPipeline`.
-- [scanners/noological_scanner.py:495](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/scanners/noological_scanner.py#L495) — `NoologicalScanner`.
-- [integrations/harness_federation/artifact.py:406](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/integrations/harness_federation/artifact.py#L406) — `HarnessArtifact`.
-- [trust/trust_engine.py:540](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/trust/trust_engine.py#L540) — `TrustEngine`.
-- [economy/token_economy.py:184](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/economy/token_economy.py#L184) — `TokenEconomy`.
+- [scanners/pipeline.py:96](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/scanners/pipeline.py#L96) — `DiagnosticPipeline`.
+- [scanners/noological_scanner.py:495](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/scanners/noological_scanner.py#L495) — `NoologicalScanner`.
+- [integrations/harness_federation/artifact.py:406](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/integrations/harness_federation/artifact.py#L406) — `HarnessArtifact`.
+- [trust/trust_engine.py:540](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/trust/trust_engine.py#L540) — `TrustEngine`.
+- [economy/token_economy.py:184](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/economy/token_economy.py#L184) — `TokenEconomy`.
 - `evolution/cycles.py:101` (fonte local modificada; não é permalink da base) — `EvolutionRegistry`.
-- [scanners/diagnostic_pipeline.py:46](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/scanners/diagnostic_pipeline.py#L46) — `DiagnosticPipeline.varrer`.
-- [scanners/diagnostic_pipeline.py:142](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/scanners/diagnostic_pipeline.py#L142) — `run`.
+- [scanners/diagnostic_pipeline.py:46](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/scanners/diagnostic_pipeline.py#L46) — `DiagnosticPipeline.varrer`.
+- [scanners/diagnostic_pipeline.py:142](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/scanners/diagnostic_pipeline.py#L142) — `run`.
 
 **Limitações:**
 
@@ -1519,11 +1558,11 @@ flowchart TB
 - `marceloclaro/orchestrator.py:2020` (fonte local modificada; não é permalink da base) — `MarceloClaroOrchestrator.scientific_reproducible_run`.
 - `marceloclaro/orchestrator.py:2556` (fonte local modificada; não é permalink da base) — `MarceloClaroOrchestrator.scientific_discovery_pipeline`.
 - `integrations/live_scientific_runtime.py:189` (fonte local modificada; não é permalink da base) — `LiveScientificRuntime`.
-- [research/provenance_pipeline.py:260](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/research/provenance_pipeline.py#L260) — `ScientificProvenancePipeline`.
-- [agentic_science_v2/paper_composer.py:496](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/agentic_science_v2/paper_composer.py#L496) — `OrchestratorComposer`.
-- [mci/pipeline/scientific_governance_pipeline.py:15](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/mci/pipeline/scientific_governance_pipeline.py#L15) — `run_scientific_governance_pipeline`.
+- [research/provenance_pipeline.py:260](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/research/provenance_pipeline.py#L260) — `ScientificProvenancePipeline`.
+- [agentic_science_v2/paper_composer.py:496](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/agentic_science_v2/paper_composer.py#L496) — `OrchestratorComposer`.
+- [mci/pipeline/scientific_governance_pipeline.py:15](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/mci/pipeline/scientific_governance_pipeline.py#L15) — `run_scientific_governance_pipeline`.
 - `marceloclaro/orchestrator.py:2119` (fonte local modificada; não é permalink da base) — `MarceloClaroOrchestrator.scientific_runtime_run`.
-- [research/statistical_methods.py:84](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/research/statistical_methods.py#L84) — `execute_analysis`.
+- [research/statistical_methods.py:84](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/research/statistical_methods.py#L84) — `execute_analysis`.
 - `academic/adversarial_research/service.py:47` (fonte local modificada; não é permalink da base) — `AdversarialResearchService`.
 - `academic/adversarial_research/board.py:11` (fonte local modificada; não é permalink da base) — `review_research`.
 - `academic/adversarial_research/banca.py:7` (fonte local modificada; não é permalink da base) — `BancaSessionStore`.
@@ -1577,9 +1616,9 @@ flowchart TB
 
 **Fontes de código:**
 
-- [scripts/quality_report.py:65](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/scripts/quality_report.py#L65) — `load_junit_results`.
-- [scripts/quality_report.py:211](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/scripts/quality_report.py#L211) — `generate_report`.
-- [sdd/tdd_runner.py:554](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/sdd/tdd_runner.py#L554) — `run_pytest`.
+- [scripts/quality_report.py:65](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/scripts/quality_report.py#L65) — `load_junit_results`.
+- [scripts/quality_report.py:211](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/scripts/quality_report.py#L211) — `generate_report`.
+- [sdd/tdd_runner.py:554](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/sdd/tdd_runner.py#L554) — `run_pytest`.
 - `marceloclaro/doctor.py:928` (fonte local modificada; não é permalink da base) — `run_doctor`.
 
 **Limitações:**
@@ -1618,7 +1657,7 @@ flowchart TB
 
 **Fontes de código:**
 
-- [integrations/component_mcp.py:11](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/integrations/component_mcp.py#L11) — `create_server`.
+- [integrations/component_mcp.py:11](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/integrations/component_mcp.py#L11) — `create_server`.
 - `integrations/component_actions.py:30` (fonte local modificada; não é permalink da base) — `dispatch_component`.
 - `integrations/local_lean.py:11` (fonte local modificada; não é permalink da base) — `LocalLeanVerifier`.
 - `marceloclaro/orchestrator.py:2109` (fonte local modificada; não é permalink da base) — `MarceloClaroOrchestrator.local_component_action`.
@@ -1661,9 +1700,9 @@ flowchart TB
 
 **Fontes de código:**
 
-- [integrations/gemini_notebook.py:83](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/integrations/gemini_notebook.py#L83) — `GeminiNotebookService`.
-- [integrations/gemini_notebook_catalog.py:79](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/integrations/gemini_notebook_catalog.py#L79) — `classify_mcp_operation`.
-- [integrations/gemini_notebook_session.py:50](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/integrations/gemini_notebook_session.py#L50) — `_configuration`.
+- [integrations/gemini_notebook.py:83](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/integrations/gemini_notebook.py#L83) — `GeminiNotebookService`.
+- [integrations/gemini_notebook_catalog.py:79](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/integrations/gemini_notebook_catalog.py#L79) — `classify_mcp_operation`.
+- [integrations/gemini_notebook_session.py:50](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/integrations/gemini_notebook_session.py#L50) — `_configuration`.
 - `marceloclaro/orchestrator.py:2244` (fonte local modificada; não é permalink da base) — `MarceloClaroOrchestrator.gemini_notebook_action`.
 
 **Limitações:**
@@ -1701,8 +1740,8 @@ flowchart TB
 
 **Fontes de código:**
 
-- [integrations/gemini_cli.py:69](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/integrations/gemini_cli.py#L69) — `gemini_run`.
-- [integrations/gemini_notebook.py:41](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/integrations/gemini_notebook.py#L41) — `validate_notebook_config`.
+- [integrations/gemini_cli.py:69](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/integrations/gemini_cli.py#L69) — `gemini_run`.
+- [integrations/gemini_notebook.py:41](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/integrations/gemini_notebook.py#L41) — `validate_notebook_config`.
 - `integrations/opencode_cli.py:526` (fonte local modificada; não é permalink da base) — `build_config`.
 
 **Limitações:**
@@ -1741,10 +1780,10 @@ flowchart TB
 
 **Fontes de código:**
 
-- [mci/metacognitive_loop.py:23](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/mci/metacognitive_loop.py#L23) — `MetacognitiveLoop`.
+- [mci/metacognitive_loop.py:23](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/mci/metacognitive_loop.py#L23) — `MetacognitiveLoop`.
 - `marceloclaro/orchestrator.py:422` (fonte local modificada; não é permalink da base) — `MarceloClaroOrchestrator.delegate`.
 - `marceloclaro/orchestrator.py:870` (fonte local modificada; não é permalink da base) — `MarceloClaroOrchestrator.report_completion`.
-- [mci/reflexion.py:19](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/mci/reflexion.py#L19) — `ReflexionEngine`.
+- [mci/reflexion.py:19](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/mci/reflexion.py#L19) — `ReflexionEngine`.
 
 **Limitações:**
 
@@ -1820,8 +1859,8 @@ flowchart TB
 
 **Fontes de código:**
 
-- [integrations/local_ci.py:139](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/integrations/local_ci.py#L139) — `LocalCIService`.
-- [scripts/validate_scientific_profile.py:534](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/scripts/validate_scientific_profile.py#L534) — `main`.
+- [integrations/local_ci.py:139](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/integrations/local_ci.py#L139) — `LocalCIService`.
+- [scripts/validate_scientific_profile.py:534](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/scripts/validate_scientific_profile.py#L534) — `main`.
 - `marceloclaro/orchestrator.py:330` (fonte local modificada; não é permalink da base) — `MarceloClaroOrchestrator.local_ci_action`.
 
 **Limitações:**
@@ -1862,9 +1901,9 @@ flowchart TB
 
 **Fontes de código:**
 
-- [integrations/model_router.py:448](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/integrations/model_router.py#L448) — `ModelRouter.route`.
-- [integrations/model_router.py:591](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/integrations/model_router.py#L591) — `ModelRouter.route_free`.
-- [integrations/free_model_catalog.py:115](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/integrations/free_model_catalog.py#L115) — `best_free_model`.
+- [integrations/model_router.py:448](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/integrations/model_router.py#L448) — `ModelRouter.route`.
+- [integrations/model_router.py:591](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/integrations/model_router.py#L591) — `ModelRouter.route_free`.
+- [integrations/free_model_catalog.py:115](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/integrations/free_model_catalog.py#L115) — `best_free_model`.
 - `integrations/opencode_cli.py:526` (fonte local modificada; não é permalink da base) — `build_config`.
 
 **Limitações:**
@@ -1900,9 +1939,9 @@ flowchart TB
 
 **Fontes de código:**
 
-- [integrations/code_context.py:75](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/integrations/code_context.py#L75) — `CodeContextProvider`.
-- [integrations/code_context.py:219](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/integrations/code_context.py#L219) — `CodeContextProvider._source_files`.
-- [integrations/code_context.py:647](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/d02817ca460ee6411761a8a3f0b82d17dafd2740/integrations/code_context.py#L647) — `CodeContextProvider._python_graph`.
+- [integrations/code_context.py:75](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/integrations/code_context.py#L75) — `CodeContextProvider`.
+- [integrations/code_context.py:219](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/integrations/code_context.py#L219) — `CodeContextProvider._source_files`.
+- [integrations/code_context.py:647](https://github.com/MarceloClaro/opencode-ecosystem-core/blob/6cd83574bce806ba2cb4ea9b0a889fb6337281e9/integrations/code_context.py#L647) — `CodeContextProvider._python_graph`.
 
 **Limitações:**
 
