@@ -74,9 +74,9 @@ do ambiente e da operação solicitada.
 
 Revisão documental **R916, 18/10/2026**, baseada no checkout local. Comece pelo
 [manual](MANUAL.md), pelo [índice documental](docs/README.md) e pelo
-[estado e pendências](docs/ESTADO_ATUAL_CORE_R916.md). Os 316 agentes, 18 MCPs e
+[estado e pendências](docs/ESTADO_ATUAL_CORE_R916.md). Os 329 agentes, 18 MCPs e
 34 comandos acima são configuração (recontagem e artefato regenerado no ciclo
-R982); não representam 316 inferências executadas.
+R982); não representam 329 inferências executadas.
 
 O NotebookLM foi atualizado para **0.15.6**: a sonda R915 observou autenticação
 válida, 234 notebooks e catálogo de 53 ferramentas/165 callbacks. Sua fachada
@@ -200,6 +200,45 @@ avaliado como referência didática e não substituiu o Core.
 CLI: `python3 -m marceloclaro.scientific_lab council|author-editor|scanner-evolve|openshell ...`.
 Ver [procedimento de reprodução](docs/PROCEDIMENTO_OPENSHELL_GEMINI_CONSELHO.md)
 e [conselho e scanners](docs/CONSELHO_CIENTIFICO_E_SCANNERS_R989_R990.md).
+
+### Inovações e paralelo com ferramentas similares
+
+As frentes R985–R1001 acrescentam diferenciais de **desenho** ao Core. A
+comparação abaixo é de princípios de arquitetura, **não um benchmark de
+superioridade**: cada ferramenta é adequada a contextos próprios, e nenhuma
+pontuação interna substitui validação externa ou revisão humana.
+
+**O que o Core acrescenta:**
+
+1. **Conselho de 13 cientistas com evidência fail-closed** — cada parecer valida
+   citação literal contra a fonte e exige mecanismo, observações e inferências
+   separadas (Feynman); voto, nota ou payoff não produzem verdade.
+2. **Anti-plágio por construção** — o perfil de estilo extrai *características*
+   (registro, hedging, conectivos, densidade de citação, razão tipo-token),
+   nunca trechos verbatim.
+3. **Raciocínio registrado e mapeado** — axiomático, aristotélico, cartesiano,
+   peirceano, popperiano, teoria dos jogos, bayesiano, causal, dialético e
+   difuso, ancorados nos motores de `reasoning/`.
+4. **Sandbox real validado** — OpenShell com isolamento observado (Landlock +
+   egress negado) e captura de pacotes (telemetria opt-out, zero SYN de egress).
+5. **Executor portátil** — `gemini-client` chama a API Gemini com chave de API,
+   sem OAuth/keyring, executável dentro do sandbox.
+6. **Anti-overclaim** — separação explícita entre instalação, execução observada
+   e validação externa em toda saída.
+
+**Paralelo com similares:**
+
+| Ferramenta similar | Abordagem | Diferencial observado do Core | Limite honesto |
+|---|---|---|---|
+| Antigravity CLI (`agy`) | Agente com OAuth de conta | Executor por chave de API, sem keyring | Cota gratuita esgota (HTTP 429) |
+| CrewAI / AutoGen | Orquestração multi-agente genérica | Conselho com evidência e citação literal | Não é benchmark de qualidade |
+| ASReview | Triagem ativa p/ revisão sistemática | Conselho completo (busca→auditoria) + Feynman + teoria dos jogos | Revisão humana obrigatória |
+| Deep Research (OpenAI/Gemini) | Pesquisa de agente único | 13 papéis auditáveis com contratos SDD/TDD | Proveniência ≠ validação externa |
+| LangGraph | Grafos de agentes | Blackboard A2A + MetaBus + EvolutionRegistry | Atenção inspirada, não treinada |
+
+Os recibos de execução real (host e sandbox) estão em `docs/evidence/`; o
+procedimento de reprodução em
+[OpenShell/Gemini](docs/PROCEDIMENTO_OPENSHELL_GEMINI_CONSELHO.md).
 
 ---
 
