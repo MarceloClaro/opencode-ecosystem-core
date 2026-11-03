@@ -1,0 +1,464 @@
+{
+  "schema_version": 1,
+  "round": "R1048",
+  "observed_utc": "2026-11-03T23:38:42.588942+00:00",
+  "method": "GitHub REST API v3, busca por repositórios e leitura de README/LICENSE; nenhum clone, instalação ou execução de código de terceiro.",
+  "queries": [
+    "topic:claude-skills",
+    "topic:claude-code-skills",
+    "\"claude skills\" video",
+    "\"claude skills\" scientific",
+    "\"claude skills\" academic research",
+    "\"scientific reasoning\" skill claude",
+    "\"hypothesis generation\" claude skill",
+    "\"peer review\" claude skill",
+    "\"video editing\" claude skill ffmpeg",
+    "remotion skills agent",
+    "awesome claude skills"
+  ],
+  "count": 20,
+  "candidates": [
+    {
+      "repo": "anthropics/skills",
+      "url": "https://github.com/anthropics/skills",
+      "domain": "oficial / programação",
+      "stars": 187102,
+      "license_api": null,
+      "license_readme": "mixed: muitos Apache-2.0; skills de documentos source-available",
+      "license_status": "mixed",
+      "relevant": [
+        "skill-creator",
+        "mcp-builder",
+        "webapp-testing",
+        "docx/pdf/pptx/xlsx"
+      ],
+      "why": "Padrões oficiais de SKILL.md, criação de skills, MCP e teste de web apps.",
+      "fit": "alto para infraestrutura de skills; não é biblioteca acadêmica ou de vídeo.",
+      "risk": "Licença por skill; skills de documentos não são open source.",
+      "recommendation": "adopt_pattern"
+    },
+    {
+      "repo": "obra/superpowers",
+      "url": "https://github.com/obra/superpowers",
+      "domain": "programação avançada",
+      "stars": 311845,
+      "license_api": "MIT",
+      "license_readme": "MIT",
+      "license_status": "open",
+      "relevant": [
+        "test-driven-development",
+        "systematic-debugging",
+        "writing-plans",
+        "executing-plans",
+        "subagent-driven-development",
+        "verification-before-completion"
+      ],
+      "why": "Metodologia completa de SDLC com skills compostas; suporta OpenCode explicitamente.",
+      "fit": "muito alto: alinha SDD/TDD, planos, revisão e subagentes.",
+      "risk": "Muitas skills e hooks; instalação automática pode alterar fluxo.",
+      "recommendation": "selective"
+    },
+    {
+      "repo": "remotion-dev/skills",
+      "url": "https://github.com/remotion-dev/skills",
+      "domain": "vídeo / motion",
+      "stars": 6258,
+      "license_api": null,
+      "license_readme": "sem LICENSE no repositório; Remotion License aplica-se ao Remotion",
+      "license_status": "no_explicit_license",
+      "relevant": [
+        "remotion-best-practices",
+        "remotion-create",
+        "remotion-markup",
+        "remotion-render",
+        "remotion-captions",
+        "remotion-maps",
+        "remotion-license"
+      ],
+      "why": "Skills oficiais do Remotion para composição, render, legendas e mapas.",
+      "fit": "alto para o backend Remotion já instalado.",
+      "risk": "Licença Remotion não é OSI; não copiar texto sem verificação.",
+      "recommendation": "adopt_pattern"
+    },
+    {
+      "repo": "K-Dense-AI/scientific-agent-skills",
+      "url": "https://github.com/K-Dense-AI/scientific-agent-skills",
+      "domain": "pesquisa acadêmica / ciência",
+      "stars": 55971,
+      "license_api": "MIT",
+      "license_readme": "MIT",
+      "license_status": "open",
+      "relevant": [
+        "literature-review",
+        "citation-management",
+        "hypothesis-generation",
+        "experimental-design",
+        "statistical-analysis",
+        "statistical-power",
+        "peer-review",
+        "exploratory-data-analysis",
+        "consciousness-council"
+      ],
+      "why": "177 skills científicas, 100+ bases; cobre literatura, hipótese, delineamento, estatística e revisão.",
+      "fit": "alto seletivamente; não convém importar as 177.",
+      "risk": "Dependências e APIs por skill; risco de contexto e supply chain.",
+      "recommendation": "selective"
+    },
+    {
+      "repo": "K-Dense-AI/claude-skills-mcp",
+      "url": "https://github.com/K-Dense-AI/claude-skills-mcp",
+      "domain": "catálogo científico / MCP",
+      "stars": 411,
+      "license_api": "Apache-2.0",
+      "license_readme": "Apache-2.0",
+      "license_status": "open",
+      "relevant": [
+        "busca vetorial de skills",
+        "recuperação de SKILL.md"
+      ],
+      "why": "MCP para descobrir skills científicas sob demanda.",
+      "fit": "médio: reduz contexto, mas exige embeddings e avaliação.",
+      "risk": "Serviço/modelo adicional; não é necessário para o núcleo.",
+      "recommendation": "evaluate_later"
+    },
+    {
+      "repo": "chgagne/claude-skills-research",
+      "url": "https://github.com/chgagne/claude-skills-research",
+      "domain": "acadêmico / raciocínio científico",
+      "stars": 5,
+      "license_api": "MIT",
+      "license_readme": "MIT",
+      "license_status": "open",
+      "relevant": [
+        "reviewing-paper-sources",
+        "verifying-bibliography",
+        "surveying-literature",
+        "comparing-papers",
+        "explaining-derivations",
+        "verifying-proofs",
+        "proofreading-paper-writing"
+      ],
+      "why": "Skills pequenas, sem dependências, com foco em evidência, citações e provas; alta densidade.",
+      "fit": "muito alto: complementa o conselho científico e o pipeline ABNT.",
+      "risk": "Poucos stars; validar evals e escopo antes de adotar.",
+      "recommendation": "selective"
+    },
+    {
+      "repo": "Nero1688/claude-academic-skills",
+      "url": "https://github.com/Nero1688/claude-academic-skills",
+      "domain": "acadêmico / ciências sociais",
+      "stars": 13,
+      "license_api": "MIT",
+      "license_readme": "README declara mixed e uso não comercial acadêmico",
+      "license_status": "conflict",
+      "relevant": [
+        "causal-inference-architect",
+        "research-method-selector",
+        "thesis-consistency-audit",
+        "citation-verifier",
+        "q1-journal-reviewer",
+        "reproducibility-architect"
+      ],
+      "why": "38 skills para pesquisa quantitativa/qualitativa e submissão.",
+      "fit": "alto em conteúdo, mas bloqueado por inconsistência de licença.",
+      "risk": "API MIT vs README mixed/non-commercial; não integrar sem revisão.",
+      "recommendation": "hold_license"
+    },
+    {
+      "repo": "wanshuiyin/Auto-claude-code-research-in-sleep",
+      "url": "https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep",
+      "domain": "pesquisa autônoma / ML",
+      "stars": 18580,
+      "license_api": "MIT",
+      "license_readme": "MIT",
+      "license_status": "open",
+      "relevant": [
+        "idea discovery",
+        "cross-model review",
+        "experiment automation",
+        "paper review/writing"
+      ],
+      "why": "Metodologia de pesquisa autônoma com revisão cruzada e artefatos.",
+      "fit": "médio-alto para descoberta e revisão; execução de experimentos exige budget/safety.",
+      "risk": "Loops autônomos, custo e risco de executar experimentos.",
+      "recommendation": "evaluate_later"
+    },
+    {
+      "repo": "panjose/Co-Scientist",
+      "url": "https://github.com/panjose/Co-Scientist",
+      "domain": "raciocínio científico",
+      "stars": 6,
+      "license_api": "Apache-2.0",
+      "license_readme": "Apache-2.0",
+      "license_status": "open",
+      "relevant": [
+        "hypothesis-generation",
+        "review",
+        "ranking",
+        "evolution",
+        "synthesis"
+      ],
+      "why": "Fluxo file-first auditável para hipóteses, revisão, ranking e evolução.",
+      "fit": "alto para o conselho científico, com validação de artefatos.",
+      "risk": "Projeto pequeno; requer Python/embeddings e validação independente.",
+      "recommendation": "evaluate_later"
+    },
+    {
+      "repo": "AlexWortega/ai-peer-review-skill",
+      "url": "https://github.com/AlexWortega/ai-peer-review-skill",
+      "domain": "revisão por pares",
+      "stars": 73,
+      "license_api": "MIT",
+      "license_readme": "MIT",
+      "license_status": "open",
+      "relevant": [
+        "multi-reviewer",
+        "meta-review",
+        "concerns CSV"
+      ],
+      "why": "Revisão multiagente com revisores independentes e meta-review.",
+      "fit": "médio: complementa o blind peer review, mas usa uma única família de modelo.",
+      "risk": "Diversidade real limitada; não é decisão de aceite.",
+      "recommendation": "selective"
+    },
+    {
+      "repo": "sno-ai/sno-station-skills",
+      "url": "https://github.com/sno-ai/sno-station-skills",
+      "domain": "programação / revisão",
+      "stars": 861,
+      "license_api": "Apache-2.0",
+      "license_readme": "Apache-2.0",
+      "license_status": "open",
+      "relevant": [
+        "peer-review",
+        "less-is-more",
+        "handoff",
+        "project brief"
+      ],
+      "why": "37 skills de equipe, revisão cruzada e handoff.",
+      "fit": "médio; parte depende do runtime Sno Station e login.",
+      "risk": "Instalador curl|bash e programas externos; não executar automaticamente.",
+      "recommendation": "reference_only"
+    },
+    {
+      "repo": "wshobson/agents",
+      "url": "https://github.com/wshobson/agents",
+      "domain": "programação avançada",
+      "stars": 42157,
+      "license_api": "MIT",
+      "license_readme": "MIT",
+      "license_status": "open",
+      "relevant": [
+        "202 agents",
+        "185 skills",
+        "105 commands",
+        "python-development",
+        "code-refactoring",
+        "security-scanning",
+        "comprehensive-review"
+      ],
+      "why": "Catálogo multi-harness com rota OpenCode e muitos agentes de engenharia.",
+      "fit": "alto para descoberta e seleção; não para instalação em massa.",
+      "risk": "Qualidade heterogênea; revisar cada skill e permissões.",
+      "recommendation": "selective"
+    },
+    {
+      "repo": "Vincentwei1021/video-shotcraft",
+      "url": "https://github.com/Vincentwei1021/video-shotcraft",
+      "domain": "vídeo / motion",
+      "stars": 16523,
+      "license_api": "Apache-2.0",
+      "license_readme": "Apache-2.0",
+      "license_status": "open",
+      "relevant": [
+        "124 shot cards",
+        "150 motion previews",
+        "beat sync",
+        "sound design",
+        "Remotion",
+        "QA de frames"
+      ],
+      "why": "Biblioteca de receitas de planos e motion para promos; workflow completo.",
+      "fit": "alto para vídeos de produto; pesado para o piloto atual.",
+      "risk": "Depende de Remotion e assets; checar NOTICE e licença de assets.",
+      "recommendation": "selective"
+    },
+    {
+      "repo": "iart-ai/motion-skills",
+      "url": "https://github.com/iart-ai/motion-skills",
+      "domain": "vídeo / motion",
+      "stars": 1185,
+      "license_api": "MIT",
+      "license_readme": "MIT",
+      "license_status": "open",
+      "relevant": [
+        "kinetic typography",
+        "data animation",
+        "explainer",
+        "lower thirds",
+        "b-roll",
+        "Manim",
+        "WebGL"
+      ],
+      "why": "56 skills em 19 packs, com foco em motion, dados e explainers.",
+      "fit": "alto para data storytelling e animação didática.",
+      "risk": "Packs separados; instalar só o necessário; Remotion/WebGL.",
+      "recommendation": "selective"
+    },
+    {
+      "repo": "haidrrrry/claude-remotion-skill",
+      "url": "https://github.com/haidrrrry/claude-remotion-skill",
+      "domain": "vídeo / motion",
+      "stars": 805,
+      "license_api": "MIT",
+      "license_readme": "MIT",
+      "license_status": "open",
+      "relevant": [
+        "Remotion",
+        "B-roll",
+        "captions",
+        "sound design",
+        "render-inspect loop"
+      ],
+      "why": "Skill direta para motion graphics com loop de render e inspeção.",
+      "fit": "alto para o editor Remotion; mais simples que video-shotcraft.",
+      "risk": "Remotion License; revisão visual obrigatória.",
+      "recommendation": "selective"
+    },
+    {
+      "repo": "win4r/video-director",
+      "url": "https://github.com/win4r/video-director",
+      "domain": "vídeo / QA",
+      "stars": 299,
+      "license_api": "MIT",
+      "license_readme": "MIT",
+      "license_status": "open",
+      "relevant": [
+        "check_timeline.py",
+        "qa_video.py",
+        "gated workflow",
+        "contact sheets",
+        "loudness/silence checks"
+      ],
+      "why": "Método de direção com gates e QA mensurável, sem biblioteca de shots.",
+      "fit": "muito alto para o Core: ensina a verificar, não só gerar.",
+      "risk": "Feito para Opus 5.5; scripts exigem ffmpeg/Python.",
+      "recommendation": "selective"
+    },
+    {
+      "repo": "0xsline/OpenChatCut",
+      "url": "https://github.com/0xsline/OpenChatCut",
+      "domain": "editor de vídeo",
+      "stars": 2890,
+      "license_api": "AGPL-3.0",
+      "license_readme": "AGPL-3.0",
+      "license_status": "copyleft",
+      "relevant": [
+        "timeline multfaixa",
+        "MCP",
+        "Remotion",
+        "editor conversacional"
+      ],
+      "why": "Referência de UI/timeline e integração MCP.",
+      "fit": "referência arquitetural; copiar código contamina licença.",
+      "risk": "AGPL-3.0; revisão jurídica obrigatória.",
+      "recommendation": "reference_only"
+    },
+    {
+      "repo": "calesthio/OpenMontage",
+      "url": "https://github.com/calesthio/OpenMontage",
+      "domain": "produção de vídeo",
+      "stars": 75968,
+      "license_api": "AGPL-3.0",
+      "license_readme": "AGPL-3.0",
+      "license_status": "copyleft",
+      "relevant": [
+        "12 pipelines",
+        "100+ tools",
+        "700+ skill files"
+      ],
+      "why": "Referência ampla de pipelines e skills de produção.",
+      "fit": "referência; muito pesado para embutir.",
+      "risk": "AGPL-3.0 e superfície enorme.",
+      "recommendation": "reference_only"
+    },
+    {
+      "repo": "KalarisLabs/research-agent-skills",
+      "url": "https://github.com/KalarisLabs/research-agent-skills",
+      "domain": "pesquisa acadêmica",
+      "stars": 96,
+      "license_api": null,
+      "license_readme": "README declara MIT; API não reconhece licença",
+      "license_status": "conflict",
+      "relevant": [
+        "280+ skills",
+        "literature",
+        "hypotheses",
+        "peer review"
+      ],
+      "why": "Catálogo amplo de pesquisa.",
+      "fit": "potencial, mas bloqueado por inconsistência.",
+      "risk": "Licença incerta e volume alto; não adotar agora.",
+      "recommendation": "hold_license"
+    },
+    {
+      "repo": "aiwithremy/claude-skills-llm-council",
+      "url": "https://github.com/aiwithremy/claude-skills-llm-council",
+      "domain": "decisão / revisão",
+      "stars": 2904,
+      "license_api": null,
+      "license_readme": "sem licença explícita",
+      "license_status": "no_explicit_license",
+      "relevant": [
+        "conselho de 5 conselheiros",
+        "peer review"
+      ],
+      "why": "Padrão de conselho para decisões.",
+      "fit": "baixo: o Core já tem conselho científico.",
+      "risk": "Sem licença; não copiar.",
+      "recommendation": "hold_license"
+    }
+  ],
+  "priority": [
+    {
+      "repo": "obra/superpowers",
+      "reason": "Metodologia SDLC/TDD mais alinhada ao Core; MIT."
+    },
+    {
+      "repo": "chgagne/claude-skills-research",
+      "reason": "Academic evidence, bibliography and proofs; MIT, sem dependências."
+    },
+    {
+      "repo": "K-Dense-AI/scientific-agent-skills",
+      "reason": "Selecionar literatura, hipótese, delineamento, estatística e peer review; MIT."
+    },
+    {
+      "repo": "iart-ai/motion-skills",
+      "reason": "Motion/data storytelling seletivo; MIT."
+    },
+    {
+      "repo": "win4r/video-director",
+      "reason": "QA de timeline/render mensurável; MIT."
+    },
+    {
+      "repo": "Vincentwei1021/video-shotcraft",
+      "reason": "Receitas de planos e motion; Apache-2.0; Remotion."
+    },
+    {
+      "repo": "wshobson/agents",
+      "reason": "Catálogo de engenharia para seleção; MIT."
+    }
+  ],
+  "do_not_integrate": [
+    "OpenChatCut e OpenMontage (AGPL-3.0) sem decisão jurídica",
+    "Nero1688 e KalarisLabs enquanto houver conflito de licença",
+    "repositórios sem licença explícita",
+    "skills que executam curl|bash, hooks ou instalação automática"
+  ],
+  "limits": [
+    "Estrelas e README não são auditoria de segurança ou qualidade.",
+    "Licença de API pode divergir do README; prevalece o LICENSE do repositório, com revisão jurídica.",
+    "Nenhum candidato foi instalado ou executado nesta rodada.",
+    "Adoção exige avaliação própria, pin de commit e receita de reversão."
+  ]
+}

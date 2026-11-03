@@ -265,6 +265,16 @@ source.mp4 → ASR/roteiro → XTTS (referência 6 s) → patch do slide
            → FFmpeg (overlay + legendas) → ASR large-v3 + loudness → manifesto
 ```
 
+**Pesquisa de skills Claude (R1048):** foram triados **20 repositórios** no
+GitHub nas frentes de vídeo/efeitos, pesquisa acadêmica, raciocínio científico
+e programação avançada. Prioridades: `obra/superpowers` (MIT, método TDD),
+`chgagne/claude-skills-research` (MIT, revisão de fontes/provas),
+`K-Dense-AI/scientific-agent-skills` (MIT, seleção científica),
+`iart-ai/motion-skills` e `win4r/video-director` (MIT, motion/QA) e
+`wshobson/agents` (MIT, catálogo de engenharia). Nenhum foi instalado; os
+bloqueios por licença e o protocolo de adoção estão em
+[`reports/r1048-claude-skills-github/`](reports/r1048-claude-skills-github/README.md).
+
 **ASR e tradução:** o `faster-whisper-small` produziu texto turco sem sentido
 em parte do corpus; `large-v3` foi baixado e concluiu o lote das 107 partes (1.854 segmentos, 7.773 palavras), ainda sem revisão nativa.
 Traduzir ASR ruim gera fluência sobre erro — o TTS em lote não foi iniciado.
