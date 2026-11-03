@@ -73,8 +73,8 @@ dominante foi decodificação, escala, overlay e máscara, não o encoder. O nú
 
 ## Verificação visual
 
-Foram extraídos contatos de 4 frames e um recorte do cartão. A inspeção humana
-do orquestrador observou:
+Foram extraídos contatos de 4 frames e um recorte do cartão. A inspeção visual
+desta sessão (modelo com entrada de imagem) observou:
 
 - o cartão menor preserva o rosto da apresentadora;
 - o raio de canto é visível e não recorta o conteúdo central;
