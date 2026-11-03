@@ -51,6 +51,20 @@ Eles contêm o caminho absoluto
   O catálogo de referência está em `reports/r1043/toolchain.json` e
   `docs/VIDEO_EDITOR_TOOLCHAIN_R1043.md`.
 
+## Backup pesado (fora do Git)
+
+O Git não recebe mídia, modelos nem a biblioteca local. Para copiar esses
+artefatos para um disco externo:
+
+```bash
+./installer/oneclick/backup-heavy.sh /mnt/backup/opencode --dry-run
+./installer/oneclick/backup-heavy.sh /mnt/backup/opencode
+```
+
+O script cria `opencode-heavy-<UTC>.tar.zst`, exclui `node_modules` e grava o
+SHA-256 ao lado. Ele não apaga nem move os originais. Verifique o espaço livre:
+o conteúdo atual é de aproximadamente 17 GB antes da compressão.
+
 ## Segurança e limites
 
 - Sem `sudo` automático; sem `curl | bash` automático; sem tokens em arquivo.

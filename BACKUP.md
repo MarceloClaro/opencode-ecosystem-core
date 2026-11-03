@@ -25,7 +25,9 @@ biblioteca local e repositórios aninhados ficam fora do Git de propósito.
 | `~/.cache/opencode-pilot/` | — | venvs, modelos XTTS/Whisper/M2M/Nemotron |
 
 O manifesto de tamanhos está em
-`reports/r1045/backup-manifest.json`.
+`reports/r1045/backup-manifest.json`. Para copiar a mídia para um disco
+externo, use `./installer/oneclick/backup-heavy.sh /destino`; o script não
+move nem apaga os originais.
 
 ## Restaurar
 
