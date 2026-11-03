@@ -1,0 +1,93 @@
+{
+  "spec": "SPEC-935-R1046",
+  "retrieved_utc": "2026-11-03T22:02:03.975272+00:00",
+  "search_url": "https://api.github.com/search/repositories?q=video+editor+multitrack&sort=stars&per_page=5",
+  "search_observed_http_status": 200,
+  "websearch_status": "HTTP 402; primary GitHub API used",
+  "repositories": [
+    {
+      "repository": "FFmpeg/FFmpeg",
+      "url": "https://github.com/FFmpeg/FFmpeg",
+      "api_url": "https://api.github.com/repos/FFmpeg/FFmpeg",
+      "http_status": 200,
+      "response_sha256": "c3b19042c02c4b9c49e10d93716850f01538d6a4acbc4b977607c93a5f7fa5f0",
+      "license_spdx": "NOASSERTION",
+      "archived": false,
+      "default_branch": "master",
+      "updated_at": "2026-11-03T21:47:52Z",
+      "description": "Mirror of https://git.ffmpeg.org/ffmpeg.git",
+      "code_downloaded_or_executed": false
+    },
+    {
+      "repository": "mltframework/mlt",
+      "url": "https://github.com/mltframework/mlt",
+      "api_url": "https://api.github.com/repos/mltframework/mlt",
+      "http_status": 200,
+      "response_sha256": "6329c003ebbb099fd8e0845a08fe824eb692224a98bcab169546e16d43ef75bb",
+      "license_spdx": "LGPL-2.1",
+      "archived": false,
+      "default_branch": "master",
+      "updated_at": "2026-11-03T21:06:28Z",
+      "description": "MLT Multimedia Framework",
+      "code_downloaded_or_executed": false
+    },
+    {
+      "repository": "OpenShot/libopenshot",
+      "url": "https://github.com/OpenShot/libopenshot",
+      "api_url": "https://api.github.com/repos/OpenShot/libopenshot",
+      "http_status": 200,
+      "response_sha256": "077d99dc6db46a8ebdbb5c5e0909c48168dea8016a6536a3344320c1f485eee9",
+      "license_spdx": "LGPL-3.0",
+      "archived": false,
+      "default_branch": "develop",
+      "updated_at": "2026-11-02T08:27:34Z",
+      "description": "OpenShot Video Library (libopenshot) is a free, open-source project dedicated to delivering high quality video editing, animation, and playback solutions to the world. API currently supports C++, Python, and Ruby.",
+      "code_downloaded_or_executed": false
+    },
+    {
+      "repository": "AcademySoftwareFoundation/OpenTimelineIO",
+      "url": "https://github.com/AcademySoftwareFoundation/OpenTimelineIO",
+      "api_url": "https://api.github.com/repos/AcademySoftwareFoundation/OpenTimelineIO",
+      "http_status": 200,
+      "response_sha256": "3d80e310a0e48dd216f2f71fb52f6a6de6694a82027dce569196a10e9cc3ecce",
+      "license_spdx": "Apache-2.0",
+      "archived": false,
+      "default_branch": "main",
+      "updated_at": "2026-11-03T10:13:27Z",
+      "description": "Open Source API and interchange format for editorial timeline information.",
+      "code_downloaded_or_executed": false
+    },
+    {
+      "repository": "mltframework/shotcut",
+      "url": "https://github.com/mltframework/shotcut",
+      "api_url": "https://api.github.com/repos/mltframework/shotcut",
+      "http_status": 200,
+      "response_sha256": "8c9c926905b6fd49725b5af404ba0dfb4dff1a8d61e2e2e86228ea1c01ee6527",
+      "license_spdx": "GPL-3.0",
+      "archived": false,
+      "default_branch": "master",
+      "updated_at": "2026-11-03T21:06:19Z",
+      "description": "cross-platform (Qt), open-source (GPLv3) video editor",
+      "code_downloaded_or_executed": false
+    },
+    {
+      "repository": "KDE/kdenlive",
+      "url": "https://github.com/KDE/kdenlive",
+      "api_url": "https://api.github.com/repos/KDE/kdenlive",
+      "http_status": 200,
+      "response_sha256": "a0dd841c604fde0c2a7cc62a17a6bb45c1fa5326aa4c32e0e42e68665006b019",
+      "license_spdx": "GPL-3.0",
+      "archived": false,
+      "default_branch": "master",
+      "updated_at": "2026-11-03T16:52:26Z",
+      "description": "Free and open source video editor, based on MLT Framework and KDE Frameworks",
+      "code_downloaded_or_executed": false
+    }
+  ],
+  "decision": "Reuse installed FFmpeg CLI, implement own planner; other repositories are references/candidates only",
+  "limits": [
+    "license metadata is triage, not legal advice",
+    "No third-party clone/build/install",
+    "No Premiere/DaVinci parity claim"
+  ]
+}

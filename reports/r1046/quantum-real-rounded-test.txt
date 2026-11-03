@@ -1,0 +1,12 @@
+F
+=================================== FAILURES ===================================
+______________________ test_quantum_multitrack_real_media ______________________
+tests/test_r1046_quantum_real.py:97: in test_quantum_multitrack_real_media
+    assert corner > 120 and center < 90, (corner, center)
+E   AssertionError: (73.62, 90.1075)
+E   assert (73.62 > 120)
+=========================== short test summary info ============================
+FAILED tests/test_r1046_quantum_real.py::test_quantum_multitrack_real_media
+1 failed in 32.34s
+Command exited with non-zero status 1
+elapsed=32.89 maxrss_kb=240172

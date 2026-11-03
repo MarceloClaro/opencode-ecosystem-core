@@ -72,11 +72,11 @@ do ambiente e da operação solicitada.
 
 ## Estado atual e orientação de leitura
 
-Revisão documental **R1045, 03/11/2026**, baseada no checkout local. As frentes
+Revisão documental **R1046, 03/11/2026**, baseada no checkout local. As frentes
 **R985–R1001** (conselho de 13 cientistas, autor/editor de alto rigor, scanner
-evolutivo, piloto OpenShell e executor Gemini) e **R1035–R1045** (editor de
-vídeo universal, dublagem, diarização, Remotion e catálogo de ferramentas)
-foram incorporadas depois — veja
+evolutivo, piloto OpenShell e executor Gemini) e **R1035–R1046** (editor de
+vídeo universal, dublagem, diarização, Remotion, catálogo de ferramentas,
+multifaixa, transições e cor) foram incorporadas depois — veja
 [Capacidades principais](#capacidades-principais). Comece pelo
 [manual](MANUAL.md), pelo [índice documental](docs/README.md), pelo
 [estado atual R1045](docs/ESTADO_ATUAL_CORE_R1045.md) e pelo
@@ -192,9 +192,9 @@ avaliado como referência didática e não substituiu o Core.
 | Apresentações | MIRA, slides e artefatos visuais | Conformidade interna não avalia mérito científico |
 | Domínios jurídico e clínico | Integrações e contratos específicos | Apoio computacional com revisão humana; sem validação geral de uso |
 | Governança e evolução | TrustEngine, economia de tokens, federação e EvolutionRegistry | Registrar um ciclo não equivale a auditá-lo externamente |
-| Vídeo e dublagem | `video_editor`, `dubbing_batch`, diarização Nemotron, XTTS e Remotion | Capacidade implementada ≠ mídia aprovada; ver limites abaixo |
+| Vídeo e dublagem | `video_editor`, multifaixa/transições/cor R1046, diarização Nemotron, XTTS e Remotion | Capacidade implementada ≠ mídia aprovada; ver limites abaixo |
 
-### Editor de vídeo universal, dublagem e animação (R1035–R1045)
+### Editor de vídeo universal, dublagem e animação (R1035–R1046)
 
 O núcleo `integrations.video_editor` trata vídeo como **projeto e timeline**:
 fontes com hash, fps racional, clipes frame-exatos, faixas de vídeo/áudio/legenda,
@@ -204,8 +204,15 @@ obrigatórios; outros motores entram por plugin (`register_backend`).
 
 **Operações implementadas:** `trim`, `concat`, `scale`, `pad`, `crop`,
 `extract_audio`, `replace_audio`, `mix_audio`, `subtitles` (burn/soft),
-`remotion` e `probe`. **Ainda não implementadas:** transições, keyframes,
-color grading, composição multi-faixa de vídeo e normalização automática de VFR.
+`multitrack`, `transition`, `color_grade`, `remotion` e `probe`. A R1046
+adicionou composição multifaixa (posição, tamanho, opacidade, raio de canto,
+áudio explícito e lacunas), transições `xfade`/`acrossfade`, cor SDR paramétrica
+com `eq`/`colorbalance`, conformidade explícita de fps e preset x264. **Ainda
+não implementadas:** UI NLE, keyframes animáveis, multicam, tracking, nodes,
+LUT/ACES/HDR, composição 3D, legendas animadas nativas, lip sync e normalização
+automática de VFR. Isso **não é paridade** com Premiere/DaVinci; a pesquisa de
+projetos como MLT, libopenshot e OpenTimelineIO está registrada em
+`reports/r1046/github-research.json`.
 
 **MCPs locais:** `editor-local` expõe `editor_open`, `editor_list_projects`,
 `editor_plan`, `editor_render` e `editor_status`; `dubbing-local` expõe o lote de
@@ -233,7 +240,8 @@ bundle/navegador, **não** render ou qualidade visual. Render exige
 `./install.sh --apply --yes` instala apenas npm/pip/uv/venv. `sudo`, `apt` e
 scripts oficiais `curl | bash` são impressos para revisão, nunca executados
 automaticamente. Ver [instalador](installer/ONECLICK.md), [pipeline de
-dublagem](docs/DUBBING_PIPELINE_R1041_R1045.md), [editor universal](docs/EDITOR_VIDEO_UNIVERSAL_R1042.md)
+dublagem](docs/DUBBING_PIPELINE_R1041_R1045.md), [editor universal](docs/EDITOR_VIDEO_UNIVERSAL_R1042.md),
+[evidência real R1026](reports/r1046/QUANTUM-REAL-EVIDENCE.md)
 e [catálogo de ferramentas](docs/VIDEO_EDITOR_TOOLCHAIN_R1043.md).
 
 **Limites:** o catálogo de 46 ferramentas/modelos não instala nem executa nada;

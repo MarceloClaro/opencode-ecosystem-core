@@ -1,0 +1,397 @@
+FF...............FFFFFF......FF.F.FFFFFFF..F......................       [100%]
+=================================== FAILURES ===================================
+__________ test_multitrack_plan_frames_z_order_audio_and_no_mutation ___________
+tests/test_r1046_video_editor_advanced.py:40: in test_multitrack_plan_frames_z_order_audio_and_no_mutation
+    result = plan(p, 'multitrack')
+             ^^^^^^^^^^^^^^^^^^^^^
+tests/test_r1046_video_editor_advanced.py:33: in plan
+    return ve.plan(p, operation, {'output': str(Path(p['root']) / 'out.mp4'), **params})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:558: in plan
+    result = planner(clean, normalized)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:528: in planner
+    return getattr(video_editor_advanced, operation)(project, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:252: in multitrack
+    inputs, index, conform_warnings = _sources(p, videos + audios)
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:127: in _sources
+    'source_fps': [rate.numerator, rate.denominator],
+                   ^^^^^^^^^^^^^^
+E   AttributeError: 'tuple' object has no attribute 'numerator'
+_______________ test_transition_frame_arithmetic_and_color_plan ________________
+tests/test_r1046_video_editor_advanced.py:53: in test_transition_frame_arithmetic_and_color_plan
+    result = plan(p, 'transition', clip_ids=['c1', 'c2'], duration_frames=10, effect='fade')
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_r1046_video_editor_advanced.py:33: in plan
+    return ve.plan(p, operation, {'output': str(Path(p['root']) / 'out.mp4'), **params})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:558: in plan
+    result = planner(clean, normalized)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:528: in planner
+    return getattr(video_editor_advanced, operation)(project, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:297: in transition
+    inputs, indices, conform_warnings = _sources(p, clips)
+                                        ^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:127: in _sources
+    'source_fps': [rate.numerator, rate.denominator],
+                   ^^^^^^^^^^^^^^
+E   AttributeError: 'tuple' object has no attribute 'numerator'
+______________________ test_invalid_transform[transform0] ______________________
+tests/test_r1046_video_editor_advanced.py:88: in test_invalid_transform
+    plan(p, 'multitrack')
+tests/test_r1046_video_editor_advanced.py:33: in plan
+    return ve.plan(p, operation, {'output': str(Path(p['root']) / 'out.mp4'), **params})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:558: in plan
+    result = planner(clean, normalized)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:528: in planner
+    return getattr(video_editor_advanced, operation)(project, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:252: in multitrack
+    inputs, index, conform_warnings = _sources(p, videos + audios)
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:127: in _sources
+    'source_fps': [rate.numerator, rate.denominator],
+                   ^^^^^^^^^^^^^^
+E   AttributeError: 'tuple' object has no attribute 'numerator'
+______________________ test_invalid_transform[transform1] ______________________
+tests/test_r1046_video_editor_advanced.py:88: in test_invalid_transform
+    plan(p, 'multitrack')
+tests/test_r1046_video_editor_advanced.py:33: in plan
+    return ve.plan(p, operation, {'output': str(Path(p['root']) / 'out.mp4'), **params})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:558: in plan
+    result = planner(clean, normalized)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:528: in planner
+    return getattr(video_editor_advanced, operation)(project, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:252: in multitrack
+    inputs, index, conform_warnings = _sources(p, videos + audios)
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:127: in _sources
+    'source_fps': [rate.numerator, rate.denominator],
+                   ^^^^^^^^^^^^^^
+E   AttributeError: 'tuple' object has no attribute 'numerator'
+______________________ test_invalid_transform[transform2] ______________________
+tests/test_r1046_video_editor_advanced.py:88: in test_invalid_transform
+    plan(p, 'multitrack')
+tests/test_r1046_video_editor_advanced.py:33: in plan
+    return ve.plan(p, operation, {'output': str(Path(p['root']) / 'out.mp4'), **params})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:558: in plan
+    result = planner(clean, normalized)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:528: in planner
+    return getattr(video_editor_advanced, operation)(project, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:252: in multitrack
+    inputs, index, conform_warnings = _sources(p, videos + audios)
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:127: in _sources
+    'source_fps': [rate.numerator, rate.denominator],
+                   ^^^^^^^^^^^^^^
+E   AttributeError: 'tuple' object has no attribute 'numerator'
+______________________ test_invalid_transform[transform3] ______________________
+tests/test_r1046_video_editor_advanced.py:88: in test_invalid_transform
+    plan(p, 'multitrack')
+tests/test_r1046_video_editor_advanced.py:33: in plan
+    return ve.plan(p, operation, {'output': str(Path(p['root']) / 'out.mp4'), **params})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:558: in plan
+    result = planner(clean, normalized)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:528: in planner
+    return getattr(video_editor_advanced, operation)(project, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:252: in multitrack
+    inputs, index, conform_warnings = _sources(p, videos + audios)
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:127: in _sources
+    'source_fps': [rate.numerator, rate.denominator],
+                   ^^^^^^^^^^^^^^
+E   AttributeError: 'tuple' object has no attribute 'numerator'
+______________________ test_invalid_transform[transform4] ______________________
+tests/test_r1046_video_editor_advanced.py:88: in test_invalid_transform
+    plan(p, 'multitrack')
+tests/test_r1046_video_editor_advanced.py:33: in plan
+    return ve.plan(p, operation, {'output': str(Path(p['root']) / 'out.mp4'), **params})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:558: in plan
+    result = planner(clean, normalized)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:528: in planner
+    return getattr(video_editor_advanced, operation)(project, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:252: in multitrack
+    inputs, index, conform_warnings = _sources(p, videos + audios)
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:127: in _sources
+    'source_fps': [rate.numerator, rate.denominator],
+                   ^^^^^^^^^^^^^^
+E   AttributeError: 'tuple' object has no attribute 'numerator'
+______________________ test_invalid_transform[transform5] ______________________
+tests/test_r1046_video_editor_advanced.py:88: in test_invalid_transform
+    plan(p, 'multitrack')
+tests/test_r1046_video_editor_advanced.py:33: in plan
+    return ve.plan(p, operation, {'output': str(Path(p['root']) / 'out.mp4'), **params})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:558: in plan
+    result = planner(clean, normalized)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:528: in planner
+    return getattr(video_editor_advanced, operation)(project, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:252: in multitrack
+    inputs, index, conform_warnings = _sources(p, videos + audios)
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:127: in _sources
+    'source_fps': [rate.numerator, rate.denominator],
+                   ^^^^^^^^^^^^^^
+E   AttributeError: 'tuple' object has no attribute 'numerator'
+____________ test_mixed_fps_is_explicitly_conformed_and_rounded_up _____________
+tests/test_r1046_video_editor_advanced.py:109: in test_mixed_fps_is_explicitly_conformed_and_rounded_up
+    result = plan(p, 'multitrack')
+             ^^^^^^^^^^^^^^^^^^^^^
+tests/test_r1046_video_editor_advanced.py:33: in plan
+    return ve.plan(p, operation, {'output': str(Path(p['root']) / 'out.mp4'), **params})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:558: in plan
+    result = planner(clean, normalized)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:528: in planner
+    return getattr(video_editor_advanced, operation)(project, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:252: in multitrack
+    inputs, index, conform_warnings = _sources(p, videos + audios)
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:127: in _sources
+    'source_fps': [rate.numerator, rate.denominator],
+                   ^^^^^^^^^^^^^^
+E   AttributeError: 'tuple' object has no attribute 'numerator'
+______________ test_plan_and_source_integrity_block_even_dry_run _______________
+tests/test_r1046_video_editor_advanced.py:120: in test_plan_and_source_integrity_block_even_dry_run
+    result = plan(p, 'multitrack')
+             ^^^^^^^^^^^^^^^^^^^^^
+tests/test_r1046_video_editor_advanced.py:33: in plan
+    return ve.plan(p, operation, {'output': str(Path(p['root']) / 'out.mp4'), **params})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:558: in plan
+    result = planner(clean, normalized)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:528: in planner
+    return getattr(video_editor_advanced, operation)(project, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:252: in multitrack
+    inputs, index, conform_warnings = _sources(p, videos + audios)
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:127: in _sources
+    'source_fps': [rate.numerator, rate.denominator],
+                   ^^^^^^^^^^^^^^
+E   AttributeError: 'tuple' object has no attribute 'numerator'
+___________________ test_fps_rational_and_silent_transition ____________________
+tests/test_r1046_video_editor_advanced.py:142: in test_fps_rational_and_silent_transition
+    result = plan(p, 'transition', clip_ids=['c1', 'c2'], duration_frames=10)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_r1046_video_editor_advanced.py:33: in plan
+    return ve.plan(p, operation, {'output': str(Path(p['root']) / 'out.mp4'), **params})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:558: in plan
+    result = planner(clean, normalized)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:528: in planner
+    return getattr(video_editor_advanced, operation)(project, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:297: in transition
+    inputs, indices, conform_warnings = _sources(p, clips)
+                                        ^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:127: in _sources
+    'source_fps': [rate.numerator, rate.denominator],
+                   ^^^^^^^^^^^^^^
+E   AttributeError: 'tuple' object has no attribute 'numerator'
+__________ test_real_overlay_boundaries_z_order_audio_delay_and_cache __________
+tests/test_r1046_video_editor_render.py:81: in test_real_overlay_boundaries_z_order_audio_delay_and_cache
+    plan, result = do_render(p, 'multitrack')
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_r1046_video_editor_render.py:50: in do_render
+    plan = ve.plan(p, op, {'output': str(Path(p['root']) / output), **params})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:558: in plan
+    result = planner(clean, normalized)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:528: in planner
+    return getattr(video_editor_advanced, operation)(project, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:252: in multitrack
+    inputs, index, conform_warnings = _sources(p, videos + audios)
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:127: in _sources
+    'source_fps': [rate.numerator, rate.denominator],
+                   ^^^^^^^^^^^^^^
+E   AttributeError: 'tuple' object has no attribute 'numerator'
+_________________________ test_real_transitions[fade] __________________________
+tests/test_r1046_video_editor_render.py:101: in test_real_transitions
+    plan, result = do_render(p, 'transition', clip_ids=['c1','c2'], duration_frames=10, effect=effect)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_r1046_video_editor_render.py:50: in do_render
+    plan = ve.plan(p, op, {'output': str(Path(p['root']) / output), **params})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:558: in plan
+    result = planner(clean, normalized)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:528: in planner
+    return getattr(video_editor_advanced, operation)(project, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:297: in transition
+    inputs, indices, conform_warnings = _sources(p, clips)
+                                        ^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:127: in _sources
+    'source_fps': [rate.numerator, rate.denominator],
+                   ^^^^^^^^^^^^^^
+E   AttributeError: 'tuple' object has no attribute 'numerator'
+_______________________ test_real_transitions[wipeleft] ________________________
+tests/test_r1046_video_editor_render.py:101: in test_real_transitions
+    plan, result = do_render(p, 'transition', clip_ids=['c1','c2'], duration_frames=10, effect=effect)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_r1046_video_editor_render.py:50: in do_render
+    plan = ve.plan(p, op, {'output': str(Path(p['root']) / output), **params})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:558: in plan
+    result = planner(clean, normalized)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:528: in planner
+    return getattr(video_editor_advanced, operation)(project, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:297: in transition
+    inputs, indices, conform_warnings = _sources(p, clips)
+                                        ^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:127: in _sources
+    'source_fps': [rate.numerator, rate.denominator],
+                   ^^^^^^^^^^^^^^
+E   AttributeError: 'tuple' object has no attribute 'numerator'
+_______________________ test_real_transitions[slideleft] _______________________
+tests/test_r1046_video_editor_render.py:101: in test_real_transitions
+    plan, result = do_render(p, 'transition', clip_ids=['c1','c2'], duration_frames=10, effect=effect)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_r1046_video_editor_render.py:50: in do_render
+    plan = ve.plan(p, op, {'output': str(Path(p['root']) / output), **params})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:558: in plan
+    result = planner(clean, normalized)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:528: in planner
+    return getattr(video_editor_advanced, operation)(project, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:297: in transition
+    inputs, indices, conform_warnings = _sources(p, clips)
+                                        ^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:127: in _sources
+    'source_fps': [rate.numerator, rate.denominator],
+                   ^^^^^^^^^^^^^^
+E   AttributeError: 'tuple' object has no attribute 'numerator'
+_______________________ test_real_transitions[dissolve] ________________________
+tests/test_r1046_video_editor_render.py:101: in test_real_transitions
+    plan, result = do_render(p, 'transition', clip_ids=['c1','c2'], duration_frames=10, effect=effect)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_r1046_video_editor_render.py:50: in do_render
+    plan = ve.plan(p, op, {'output': str(Path(p['root']) / output), **params})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:558: in plan
+    result = planner(clean, normalized)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:528: in planner
+    return getattr(video_editor_advanced, operation)(project, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:297: in transition
+    inputs, indices, conform_warnings = _sources(p, clips)
+                                        ^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:127: in _sources
+    'source_fps': [rate.numerator, rate.denominator],
+                   ^^^^^^^^^^^^^^
+E   AttributeError: 'tuple' object has no attribute 'numerator'
+__________________ test_real_color_brightness_and_saturation ___________________
+tests/test_r1046_video_editor_render.py:113: in test_real_color_brightness_and_saturation
+    _, result = do_render(p, 'color_grade', clip_id='c1', color={'brightness': .2})
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_r1046_video_editor_render.py:50: in do_render
+    plan = ve.plan(p, op, {'output': str(Path(p['root']) / output), **params})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:558: in plan
+    result = planner(clean, normalized)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:528: in planner
+    return getattr(video_editor_advanced, operation)(project, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:316: in color_grade
+    inputs, indices, conform_warnings = _sources(p, [c])
+                                        ^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:127: in _sources
+    'source_fps': [rate.numerator, rate.denominator],
+                   ^^^^^^^^^^^^^^
+E   AttributeError: 'tuple' object has no attribute 'numerator'
+__________________ test_real_rational_rate_and_silent_sources __________________
+tests/test_r1046_video_editor_render.py:127: in test_real_rational_rate_and_silent_sources
+    plan, result = do_render(p, 'transition', clip_ids=['c1','c2'], duration_frames=15)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_r1046_video_editor_render.py:50: in do_render
+    plan = ve.plan(p, op, {'output': str(Path(p['root']) / output), **params})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:558: in plan
+    result = planner(clean, normalized)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:528: in planner
+    return getattr(video_editor_advanced, operation)(project, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:297: in transition
+    inputs, indices, conform_warnings = _sources(p, clips)
+                                        ^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:127: in _sources
+    'source_fps': [rate.numerator, rate.denominator],
+                   ^^^^^^^^^^^^^^
+E   AttributeError: 'tuple' object has no attribute 'numerator'
+____________ test_advanced_probe_uses_protocol_and_demux_allowlist _____________
+tests/test_r1046_video_editor_integrity.py:31: in test_advanced_probe_uses_protocol_and_demux_allowlist
+    p = project(tmp_path); result = plan(p, 'multitrack'); calls=[]
+                                    ^^^^^^^^^^^^^^^^^^^^^
+tests/test_r1046_video_editor_advanced.py:33: in plan
+    return ve.plan(p, operation, {'output': str(Path(p['root']) / 'out.mp4'), **params})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:558: in plan
+    result = planner(clean, normalized)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:528: in planner
+    return getattr(video_editor_advanced, operation)(project, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:252: in multitrack
+    inputs, index, conform_warnings = _sources(p, videos + audios)
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor_advanced.py:127: in _sources
+    'source_fps': [rate.numerator, rate.denominator],
+                   ^^^^^^^^^^^^^^
+E   AttributeError: 'tuple' object has no attribute 'numerator'
+=========================== short test summary info ============================
+FAILED tests/test_r1046_video_editor_advanced.py::test_multitrack_plan_frames_z_order_audio_and_no_mutation
+FAILED tests/test_r1046_video_editor_advanced.py::test_transition_frame_arithmetic_and_color_plan
+FAILED tests/test_r1046_video_editor_advanced.py::test_invalid_transform[transform0]
+FAILED tests/test_r1046_video_editor_advanced.py::test_invalid_transform[transform1]
+FAILED tests/test_r1046_video_editor_advanced.py::test_invalid_transform[transform2]
+FAILED tests/test_r1046_video_editor_advanced.py::test_invalid_transform[transform3]
+FAILED tests/test_r1046_video_editor_advanced.py::test_invalid_transform[transform4]
+FAILED tests/test_r1046_video_editor_advanced.py::test_invalid_transform[transform5]
+FAILED tests/test_r1046_video_editor_advanced.py::test_mixed_fps_is_explicitly_conformed_and_rounded_up
+FAILED tests/test_r1046_video_editor_advanced.py::test_plan_and_source_integrity_block_even_dry_run
+FAILED tests/test_r1046_video_editor_advanced.py::test_fps_rational_and_silent_transition
+FAILED tests/test_r1046_video_editor_render.py::test_real_overlay_boundaries_z_order_audio_delay_and_cache
+FAILED tests/test_r1046_video_editor_render.py::test_real_transitions[fade]
+FAILED tests/test_r1046_video_editor_render.py::test_real_transitions[wipeleft]
+FAILED tests/test_r1046_video_editor_render.py::test_real_transitions[slideleft]
+FAILED tests/test_r1046_video_editor_render.py::test_real_transitions[dissolve]
+FAILED tests/test_r1046_video_editor_render.py::test_real_color_brightness_and_saturation
+FAILED tests/test_r1046_video_editor_render.py::test_real_rational_rate_and_silent_sources
+FAILED tests/test_r1046_video_editor_integrity.py::test_advanced_probe_uses_protocol_and_demux_allowlist
+19 failed, 47 passed in 8.09s

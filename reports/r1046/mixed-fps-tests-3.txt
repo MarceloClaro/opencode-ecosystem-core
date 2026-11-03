@@ -1,0 +1,9 @@
+.............................F....................................       [100%]
+=================================== FAILURES ===================================
+____________ test_mixed_fps_is_explicitly_conformed_and_rounded_up _____________
+tests/test_r1046_video_editor_advanced.py:111: in test_mixed_fps_is_explicitly_conformed_and_rounded_up
+    assert result['expected_frames'] == 42
+E   assert 75 == 42
+=========================== short test summary info ============================
+FAILED tests/test_r1046_video_editor_advanced.py::test_mixed_fps_is_explicitly_conformed_and_rounded_up
+1 failed, 65 passed in 11.96s

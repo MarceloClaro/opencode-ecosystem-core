@@ -1,0 +1,123 @@
+FFFFFFFFFF....................FFFF                                       [100%]
+=================================== FAILURES ===================================
+__________ test_multitrack_plan_frames_z_order_audio_and_no_mutation ___________
+tests/test_r1046_video_editor_advanced.py:40: in test_multitrack_plan_frames_z_order_audio_and_no_mutation
+    result = plan(p, 'multitrack')
+             ^^^^^^^^^^^^^^^^^^^^^
+tests/test_r1046_video_editor_advanced.py:33: in plan
+    return ve.plan(p, operation, {'output': str(Path(p['root']) / 'out.mp4'), **params})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:511: in plan
+    raise ValueError(f'unknown operation: {operation}')
+E   ValueError: unknown operation: multitrack
+_______________ test_transition_frame_arithmetic_and_color_plan ________________
+tests/test_r1046_video_editor_advanced.py:53: in test_transition_frame_arithmetic_and_color_plan
+    result = plan(p, 'transition', clip_ids=['c1', 'c2'], duration_frames=10, effect='fade')
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_r1046_video_editor_advanced.py:33: in plan
+    return ve.plan(p, operation, {'output': str(Path(p['root']) / 'out.mp4'), **params})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:511: in plan
+    raise ValueError(f'unknown operation: {operation}')
+E   ValueError: unknown operation: transition
+_________________ test_invalid_effect[fade;movie=/etc/passwd] __________________
+tests/test_r1046_video_editor_advanced.py:64: in test_invalid_effect
+    with pytest.raises(ValueError, match='effect'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'effect'
+E     Actual message: 'unknown operation: transition'
+_________________________ test_invalid_effect[custom] __________________________
+tests/test_r1046_video_editor_advanced.py:64: in test_invalid_effect
+    with pytest.raises(ValueError, match='effect'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'effect'
+E     Actual message: 'unknown operation: transition'
+_________________________ test_invalid_effect[unknown] _________________________
+tests/test_r1046_video_editor_advanced.py:64: in test_invalid_effect
+    with pytest.raises(ValueError, match='effect'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'effect'
+E     Actual message: 'unknown operation: transition'
+_______________________ test_invalid_overlap_duration[0] _______________________
+tests/test_r1046_video_editor_advanced.py:70: in test_invalid_overlap_duration
+    with pytest.raises(ValueError, match='duration'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'duration'
+E     Actual message: 'unknown operation: transition'
+______________________ test_invalid_overlap_duration[-1] _______________________
+tests/test_r1046_video_editor_advanced.py:70: in test_invalid_overlap_duration
+    with pytest.raises(ValueError, match='duration'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'duration'
+E     Actual message: 'unknown operation: transition'
+______________________ test_invalid_overlap_duration[50] _______________________
+tests/test_r1046_video_editor_advanced.py:70: in test_invalid_overlap_duration
+    with pytest.raises(ValueError, match='duration'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'duration'
+E     Actual message: 'unknown operation: transition'
+_____________________ test_invalid_overlap_duration[True] ______________________
+tests/test_r1046_video_editor_advanced.py:70: in test_invalid_overlap_duration
+    with pytest.raises(ValueError, match='duration'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'duration'
+E     Actual message: 'unknown operation: transition'
+______________________ test_invalid_overlap_duration[2.5] ______________________
+tests/test_r1046_video_editor_advanced.py:70: in test_invalid_overlap_duration
+    with pytest.raises(ValueError, match='duration'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'duration'
+E     Actual message: 'unknown operation: transition'
+______________ test_plan_and_source_integrity_block_even_dry_run _______________
+tests/test_r1046_video_editor_advanced.py:109: in test_plan_and_source_integrity_block_even_dry_run
+    result = plan(p, 'multitrack')
+             ^^^^^^^^^^^^^^^^^^^^^
+tests/test_r1046_video_editor_advanced.py:33: in plan
+    return ve.plan(p, operation, {'output': str(Path(p['root']) / 'out.mp4'), **params})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:511: in plan
+    raise ValueError(f'unknown operation: {operation}')
+E   ValueError: unknown operation: multitrack
+_____________ test_silent_source_project_opt_in_and_unknown_params _____________
+tests/test_r1046_video_editor_advanced.py:121: in test_silent_source_project_opt_in_and_unknown_params
+    p = ve.project_from_probe('silent', info, allow_silent=True)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: project_from_probe() got an unexpected keyword argument 'allow_silent'
+___________________ test_fps_rational_and_silent_transition ____________________
+tests/test_r1046_video_editor_advanced.py:131: in test_fps_rational_and_silent_transition
+    result = plan(p, 'transition', clip_ids=['c1', 'c2'], duration_frames=10)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_r1046_video_editor_advanced.py:33: in plan
+    return ve.plan(p, operation, {'output': str(Path(p['root']) / 'out.mp4'), **params})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+integrations/video_editor.py:511: in plan
+    raise ValueError(f'unknown operation: {operation}')
+E   ValueError: unknown operation: transition
+_______________ test_quality_scope_never_autoapproves_semantics ________________
+tests/test_r1046_video_editor_advanced.py:137: in test_quality_scope_never_autoapproves_semantics
+    from integrations.video_editor_advanced import quality_scope
+E   ModuleNotFoundError: No module named 'integrations.video_editor_advanced'
+=========================== short test summary info ============================
+FAILED tests/test_r1046_video_editor_advanced.py::test_multitrack_plan_frames_z_order_audio_and_no_mutation
+FAILED tests/test_r1046_video_editor_advanced.py::test_transition_frame_arithmetic_and_color_plan
+FAILED tests/test_r1046_video_editor_advanced.py::test_invalid_effect[fade;movie=/etc/passwd]
+FAILED tests/test_r1046_video_editor_advanced.py::test_invalid_effect[custom]
+FAILED tests/test_r1046_video_editor_advanced.py::test_invalid_effect[unknown]
+FAILED tests/test_r1046_video_editor_advanced.py::test_invalid_overlap_duration[0]
+FAILED tests/test_r1046_video_editor_advanced.py::test_invalid_overlap_duration[-1]
+FAILED tests/test_r1046_video_editor_advanced.py::test_invalid_overlap_duration[50]
+FAILED tests/test_r1046_video_editor_advanced.py::test_invalid_overlap_duration[True]
+FAILED tests/test_r1046_video_editor_advanced.py::test_invalid_overlap_duration[2.5]
+FAILED tests/test_r1046_video_editor_advanced.py::test_plan_and_source_integrity_block_even_dry_run
+FAILED tests/test_r1046_video_editor_advanced.py::test_silent_source_project_opt_in_and_unknown_params
+FAILED tests/test_r1046_video_editor_advanced.py::test_fps_rational_and_silent_transition
+FAILED tests/test_r1046_video_editor_advanced.py::test_quality_scope_never_autoapproves_semantics
+14 failed, 20 passed in 2.12s

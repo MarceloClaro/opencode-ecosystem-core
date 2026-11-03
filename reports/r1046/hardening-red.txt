@@ -1,0 +1,32 @@
+FFFFF                                                                    [100%]
+=================================== FAILURES ===================================
+_____________________ test_track_options_cannot_be_ignored _____________________
+tests/test_r1046_video_editor_integrity.py:15: in test_track_options_cannot_be_ignored
+    with pytest.raises(ValueError, match='track'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+_____________ test_short_audio_is_not_hidden_by_container_duration _____________
+tests/test_r1046_video_editor_integrity.py:25: in test_short_audio_is_not_hidden_by_container_duration
+    with pytest.raises(ValueError, match='audio|contract'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+____________ test_advanced_probe_uses_protocol_and_demux_allowlist _____________
+tests/test_r1046_video_editor_integrity.py:38: in test_advanced_probe_uses_protocol_and_demux_allowlist
+    assert calls and '-protocol_whitelist' in calls[0] and '-format_whitelist' in calls[0]
+E   AssertionError: assert ([['ffprobe', '-v', 'error', '-show_streams', '-show_format', '-of', ...]] and '-protocol_whitelist' in ['ffprobe', '-v', 'error', '-show_streams', '-show_format', '-of', ...])
+___________________ test_orphan_receipt_blocks_before_render ___________________
+tests/test_r1046_video_editor_integrity.py:51: in test_orphan_receipt_blocks_before_render
+    assert not calls and not (tmp_path/'out.mp4').exists()
+E   AssertionError: assert (not [['ffmpeg', '-nostdin', '-v', 'error', '-i', '/tmp/pytest-of-marceloclaro/pytest-8/test_orphan_receipt_blocks_bef0/red.mp4', ...]])
+__________________ test_promotion_uses_exclusive_destination ___________________
+tests/test_r1046_video_editor_integrity.py:66: in test_promotion_uses_exclusive_destination
+    with pytest.raises(FileExistsError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE FileExistsError
+=========================== short test summary info ============================
+FAILED tests/test_r1046_video_editor_integrity.py::test_track_options_cannot_be_ignored
+FAILED tests/test_r1046_video_editor_integrity.py::test_short_audio_is_not_hidden_by_container_duration
+FAILED tests/test_r1046_video_editor_integrity.py::test_advanced_probe_uses_protocol_and_demux_allowlist
+FAILED tests/test_r1046_video_editor_integrity.py::test_orphan_receipt_blocks_before_render
+FAILED tests/test_r1046_video_editor_integrity.py::test_promotion_uses_exclusive_destination
+5 failed in 0.34s

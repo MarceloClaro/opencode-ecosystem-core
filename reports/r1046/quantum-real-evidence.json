@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "round": "R1046",
+  "observed_utc": "2026-11-03T22:36:47.394077+00:00",
+  "source": {
+    "path": "pilots/r1026-quantum/source.mp4",
+    "sha256": "10da024a9da037483ddcaa6821701c66495f03750399be196e6b0b2d37bcb674",
+    "width": 1920,
+    "height": 1080,
+    "fps": "30000/1001",
+    "frames": 600,
+    "duration_seconds": 20.02,
+    "audio": "aac 48 kHz stereo"
+  },
+  "overlay": {
+    "path": "pilots/r1026-quantum/presenter-middle-card.mp4",
+    "sha256": "e27067a6c0b8b5800b67c131c82138d64ce8e98ae7273ef8f5c20c07df180ac9",
+    "width": 560,
+    "height": 700,
+    "fps": "30/1",
+    "frames": 600,
+    "has_audio": false
+  },
+  "outputs": [
+    {
+      "file": "quantum-multitrack.mp4",
+      "bytes": 4241272,
+      "sha256": "9eef79e5d2935c438487a080cb82f0b164cdb045b08ba5025db79ad53cdd83d5",
+      "frames": 600,
+      "duration_seconds": 20.02,
+      "fps": "30000/1001",
+      "audio": {
+        "index": 1,
+        "codec": "aac",
+        "sample_rate": 48000,
+        "channels": 2,
+        "duration_seconds": 20.02
+      },
+      "technical_checks_passed": true,
+      "audiovisual_approved": false,
+      "translation_accuracy_verified": false,
+      "scientific_validity_verified": false
+    },
+    {
+      "file": "quantum-multitrack-v2.mp4",
+      "bytes": 4136556,
+      "sha256": "658ee372f0f32570e6193642abb04f9a293dec3a47b61dd6c7dbf11da92aa1bb",
+      "frames": 600,
+      "duration_seconds": 20.02,
+      "fps": "30000/1001",
+      "audio": {
+        "index": 1,
+        "codec": "aac",
+        "sample_rate": 48000,
+        "channels": 2,
+        "duration_seconds": 20.02
+      },
+      "technical_checks_passed": true,
+      "audiovisual_approved": false,
+      "translation_accuracy_verified": false,
+      "scientific_validity_verified": false
+    },
+    {
+      "file": "quantum-multitrack-v3.mp4",
+      "bytes": 4248930,
+      "sha256": "adc97df33d9625af574195d4cb982b3943e360940ae0f57e68336b71dc66f178",
+      "frames": 600,
+      "duration_seconds": 20.02,
+      "fps": "30000/1001",
+      "audio": {
+        "index": 1,
+        "codec": "aac",
+        "sample_rate": 48000,
+        "channels": 2,
+        "duration_seconds": 20.02
+      },
+      "technical_checks_passed": true,
+      "audiovisual_approved": false,
+      "translation_accuracy_verified": false,
+      "scientific_validity_verified": false
+    },
+    {
+      "file": "quantum-transition.mp4",
+      "bytes": 4092272,
+      "sha256": "b8b753661757e6d305c974890619d03c36ae90db221de6776eb755a29b50adb5",
+      "frames": 570,
+      "duration_seconds": 19.019,
+      "fps": "30000/1001",
+      "audio": {
+        "index": 1,
+        "codec": "aac",
+        "sample_rate": 48000,
+        "channels": 2,
+        "duration_seconds": 19.019
+      },
+      "technical_checks_passed": true,
+      "audiovisual_approved": false,
+      "translation_accuracy_verified": false,
+      "scientific_validity_verified": false
+    }
+  ],
+  "timings_seconds": {
+    "multitrack_medium_overlap_face": 119.19,
+    "multitrack_veryfast": 112.57,
+    "multitrack_medium_rounded": 158.02,
+    "transition_veryfast": 86.43,
+    "optional_acceptance_640x360_veryfast": 32.8
+  },
+  "visual_review": {
+    "method": "contact sheets extracted from rendered outputs and inspected",
+    "first_composition": "card at x=1420,y=490 covered the presenter face; rejected as composition",
+    "second_composition": "card moved to x=1560,y=640; face preserved",
+    "third_composition": "300x376 card, opacity 0.95, corner_radius 24; rounded mask verified visually",
+    "transition": "frame at overlap shows expected ghosting; no missing frames",
+    "approval": "audiovisual_approved remains false"
+  },
+  "commands": [
+    "python3 -m integrations.video_editor plan <project> multitrack <params> --out <plan>",
+    "python3 -m integrations.video_editor render <plan>",
+    "R1046_REAL_MEDIA=1 python3 -m pytest -q tests/test_r1046_quantum_real.py"
+  ],
+  "limits": [
+    "CPU SDR 8-bit; no HDR/ACES/LUT",
+    "no UI NLE, keyframes, multicam, tracking or lip sync",
+    "pixel/luma checks do not prove aesthetic, linguistic or scientific quality",
+    "outputs kept under /tmp and excluded from Git; originals untouched"
+  ],
+  "github_research": {
+    "spec": "SPEC-935-R1046",
+    "retrieved_utc": "2026-11-03T22:02:03.975272+00:00",
+    "search_url": "https://api.github.com/search/repositories?q=video+editor+multitrack&sort=stars&per_page=5",
+    "search_observed_http_status": 200,
+    "websearch_status": "HTTP 402; primary GitHub API used",
+    "repositories": [
+      {
+        "repository": "FFmpeg/FFmpeg",
+        "url": "https://github.com/FFmpeg/FFmpeg",
+        "api_url": "https://api.github.com/repos/FFmpeg/FFmpeg",
+        "http_status": 200,
+        "response_sha256": "c3b19042c02c4b9c49e10d93716850f01538d6a4acbc4b977607c93a5f7fa5f0",
+        "license_spdx": "NOASSERTION",
+        "archived": false,
+        "default_branch": "master",
+        "updated_at": "2026-11-03T21:47:52Z",
+        "description": "Mirror of https://git.ffmpeg.org/ffmpeg.git",
+        "code_downloaded_or_executed": false
+      },
+      {
+        "repository": "mltframework/mlt",
+        "url": "https://github.com/mltframework/mlt",
+        "api_url": "https://api.github.com/repos/mltframework/mlt",
+        "http_status": 200,
+        "response_sha256": "6329c003ebbb099fd8e0845a08fe824eb692224a98bcab169546e16d43ef75bb",
+        "license_spdx": "LGPL-2.1",
+        "archived": false,
+        "default_branch": "master",
+        "updated_at": "2026-11-03T21:06:28Z",
+        "description": "MLT Multimedia Framework",
+        "code_downloaded_or_executed": false
+      },
+      {
+        "repository": "OpenShot/libopenshot",
+        "url": "https://github.com/OpenShot/libopenshot",
+        "api_url": "https://api.github.com/repos/OpenShot/libopenshot",
+        "http_status": 200,
+        "response_sha256": "077d99dc6db46a8ebdbb5c5e0909c48168dea8016a6536a3344320c1f485eee9",
+        "license_spdx": "LGPL-3.0",
+        "archived": false,
+        "default_branch": "develop",
+        "updated_at": "2026-11-02T08:27:34Z",
+        "description": "OpenShot Video Library (libopenshot) is a free, open-source project dedicated to delivering high quality video editing, animation, and playback solutions to the world. API currently supports C++, Python, and Ruby.",
+        "code_downloaded_or_executed": false
+      },
+      {
+        "repository": "AcademySoftwareFoundation/OpenTimelineIO",
+        "url": "https://github.com/AcademySoftwareFoundation/OpenTimelineIO",
+        "api_url": "https://api.github.com/repos/AcademySoftwareFoundation/OpenTimelineIO",
+        "http_status": 200,
+        "response_sha256": "3d80e310a0e48dd216f2f71fb52f6a6de6694a82027dce569196a10e9cc3ecce",
+        "license_spdx": "Apache-2.0",
+        "archived": false,
+        "default_branch": "main",
+        "updated_at": "2026-11-03T10:13:27Z",
+        "description": "Open Source API and interchange format for editorial timeline information.",
+        "code_downloaded_or_executed": false
+      },
+      {
+        "repository": "mltframework/shotcut",
+        "url": "https://github.com/mltframework/shotcut",
+        "api_url": "https://api.github.com/repos/mltframework/shotcut",
+        "http_status": 200,
+        "response_sha256": "8c9c926905b6fd49725b5af404ba0dfb4dff1a8d61e2e2e86228ea1c01ee6527",
+        "license_spdx": "GPL-3.0",
+        "archived": false,
+        "default_branch": "master",
+        "updated_at": "2026-11-03T21:06:19Z",
+        "description": "cross-platform (Qt), open-source (GPLv3) video editor",
+        "code_downloaded_or_executed": false
+      },
+      {
+        "repository": "KDE/kdenlive",
+        "url": "https://github.com/KDE/kdenlive",
+        "api_url": "https://api.github.com/repos/KDE/kdenlive",
+        "http_status": 200,
+        "response_sha256": "a0dd841c604fde0c2a7cc62a17a6bb45c1fa5326aa4c32e0e42e68665006b019",
+        "license_spdx": "GPL-3.0",
+        "archived": false,
+        "default_branch": "master",
+        "updated_at": "2026-11-03T16:52:26Z",
+        "description": "Free and open source video editor, based on MLT Framework and KDE Frameworks",
+        "code_downloaded_or_executed": false
+      }
+    ],
+    "decision": "Reuse installed FFmpeg CLI, implement own planner; other repositories are references/candidates only",
+    "limits": [
+      "license metadata is triage, not legal advice",
+      "No third-party clone/build/install",
+      "No Premiere/DaVinci parity claim"
+    ]
+  },
+  "tests": {
+    "full_regression_passed": 299,
+    "optional_real_passed": 1,
+    "skipped_when_opt_in_absent": 1,
+    "node_remotion_cases": 11,
+    "doctor": "healthy 22/22",
+    "command": "python3 -m pytest -q ... tests/test_r1046_*.py"
+  }
+}

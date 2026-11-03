@@ -19,6 +19,9 @@ coletada** e **entrega aprovada**; nenhuma das três é equivalente.
 | `integrations.video_diarization_nemotron` | diarização local não gated | 107 partes |
 | `integrations.video_speaker_cluster` | clusters globais + referências provisórias | parcial 54/107 |
 | `integrations.video_toolchain` | catálogo de 46 ferramentas/modelos | implementado |
+| `multitrack` | Compositor FFmpeg | camadas, transformação, opacidade, áudio explícito |
+| `transition` | xfade/acrossfade | 10 efeitos allowlisted; corte por frames |
+| `color_grade` | eq/colorbalance | brilho, contraste, saturação, gamma e balanço RGB |
 | `video-editor-universal` | skill de direção, 10 modelos, 16 comandos | disponível |
 
 ## Fluxo por parte

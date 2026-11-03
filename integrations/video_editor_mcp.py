@@ -64,16 +64,28 @@ def create_server(root=None):
         if not isinstance(project_id, str) or not ID.fullmatch(project_id):
             raise ValueError('invalid project_id')
         path = confined(f'editor-projects/{project_id}.json', must_exist=True)
-        return video_editor.load_project(path.read_text())
+        project = video_editor.load_project(path.read_text())
+        project['root'] = str(root)
+        for source in project['sources'].values():
+            raw = Path(source['path'])
+            if raw.is_absolute():
+                try:
+                    raw = raw.relative_to(root)
+                except ValueError as exc:
+                    raise ValueError('project source outside MCP root') from exc
+            source['path'] = str(confined(str(raw), must_exist=True))
+        return project
 
     @server.tool(annotations=write)
-    def editor_open(media_path: str, project_id: str) -> dict:
+    def editor_open(media_path: str, project_id: str, allow_silent: bool = False) -> dict:
         """Abre um vídeo local e grava o projeto; não edita, não renderiza."""
         if not ID.fullmatch(project_id):
             raise ValueError('invalid project_id')
         media = confined(media_path, must_exist=True)
-        info = video_editor.probe_media(media)
-        project = video_editor.project_from_probe(media_path, info, project_id=project_id)
+        info = (video_editor.probe_media(media, allow_silent=True) if allow_silent
+                else video_editor.probe_media(media))
+        project = video_editor.project_from_probe(media_path, info, project_id=project_id,
+                                                  allow_silent=allow_silent)
         project['root'] = str(root)
         text = video_editor.dumps_project(project)
         target = confined(f'editor-projects/{project_id}.json')

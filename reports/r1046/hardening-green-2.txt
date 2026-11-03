@@ -1,0 +1,94 @@
+.......................................FFFFFF....................        [100%]
+=================================== FAILURES ===================================
+__________ test_real_overlay_boundaries_z_order_audio_delay_and_cache __________
+tests/test_r1046_video_editor_render.py:79: in test_real_overlay_boundaries_z_order_audio_delay_and_cache
+    p = fixture_project(tmp_path)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_r1046_video_editor_render.py:36: in fixture_project
+    run([*args, '-y', str(path)])
+tests/test_r1046_video_editor_render.py:20: in run
+    assert p.returncode == 0, p.stderr.decode(errors='replace')[-1600:]
+E   AssertionError: Option vf (alias for -filter:v (apply filters to video streams)) cannot be applied to input url sine=frequency=440:sample_rate=48000:duration=3 -- you are trying to apply an input option to an output file or vice versa. Move this option before the file it belongs to.
+E     Error parsing options for input file sine=frequency=440:sample_rate=48000:duration=3.
+E     Error opening input files: Invalid argument
+E     
+E   assert 234 == 0
+E    +  where 234 = CompletedProcess(args=['ffmpeg', '-nostdin', '-v', 'error', '-f', 'lavfi', '-i', 'color=c=red:s=64x48:r=25/1:d=3', '-v...ptions for input file sine=frequency=440:sample_rate=48000:duration=3.\nError opening input files: Invalid argument\n').returncode
+_________________________ test_real_transitions[fade] __________________________
+tests/test_r1046_video_editor_render.py:98: in test_real_transitions
+    p = fixture_project(tmp_path)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_r1046_video_editor_render.py:36: in fixture_project
+    run([*args, '-y', str(path)])
+tests/test_r1046_video_editor_render.py:20: in run
+    assert p.returncode == 0, p.stderr.decode(errors='replace')[-1600:]
+E   AssertionError: Option vf (alias for -filter:v (apply filters to video streams)) cannot be applied to input url sine=frequency=440:sample_rate=48000:duration=3 -- you are trying to apply an input option to an output file or vice versa. Move this option before the file it belongs to.
+E     Error parsing options for input file sine=frequency=440:sample_rate=48000:duration=3.
+E     Error opening input files: Invalid argument
+E     
+E   assert 234 == 0
+E    +  where 234 = CompletedProcess(args=['ffmpeg', '-nostdin', '-v', 'error', '-f', 'lavfi', '-i', 'color=c=red:s=64x48:r=25/1:d=3', '-v...ptions for input file sine=frequency=440:sample_rate=48000:duration=3.\nError opening input files: Invalid argument\n').returncode
+_______________________ test_real_transitions[wipeleft] ________________________
+tests/test_r1046_video_editor_render.py:98: in test_real_transitions
+    p = fixture_project(tmp_path)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_r1046_video_editor_render.py:36: in fixture_project
+    run([*args, '-y', str(path)])
+tests/test_r1046_video_editor_render.py:20: in run
+    assert p.returncode == 0, p.stderr.decode(errors='replace')[-1600:]
+E   AssertionError: Option vf (alias for -filter:v (apply filters to video streams)) cannot be applied to input url sine=frequency=440:sample_rate=48000:duration=3 -- you are trying to apply an input option to an output file or vice versa. Move this option before the file it belongs to.
+E     Error parsing options for input file sine=frequency=440:sample_rate=48000:duration=3.
+E     Error opening input files: Invalid argument
+E     
+E   assert 234 == 0
+E    +  where 234 = CompletedProcess(args=['ffmpeg', '-nostdin', '-v', 'error', '-f', 'lavfi', '-i', 'color=c=red:s=64x48:r=25/1:d=3', '-v...ptions for input file sine=frequency=440:sample_rate=48000:duration=3.\nError opening input files: Invalid argument\n').returncode
+_______________________ test_real_transitions[slideleft] _______________________
+tests/test_r1046_video_editor_render.py:98: in test_real_transitions
+    p = fixture_project(tmp_path)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_r1046_video_editor_render.py:36: in fixture_project
+    run([*args, '-y', str(path)])
+tests/test_r1046_video_editor_render.py:20: in run
+    assert p.returncode == 0, p.stderr.decode(errors='replace')[-1600:]
+E   AssertionError: Option vf (alias for -filter:v (apply filters to video streams)) cannot be applied to input url sine=frequency=440:sample_rate=48000:duration=3 -- you are trying to apply an input option to an output file or vice versa. Move this option before the file it belongs to.
+E     Error parsing options for input file sine=frequency=440:sample_rate=48000:duration=3.
+E     Error opening input files: Invalid argument
+E     
+E   assert 234 == 0
+E    +  where 234 = CompletedProcess(args=['ffmpeg', '-nostdin', '-v', 'error', '-f', 'lavfi', '-i', 'color=c=red:s=64x48:r=25/1:d=3', '-v...ptions for input file sine=frequency=440:sample_rate=48000:duration=3.\nError opening input files: Invalid argument\n').returncode
+_______________________ test_real_transitions[dissolve] ________________________
+tests/test_r1046_video_editor_render.py:98: in test_real_transitions
+    p = fixture_project(tmp_path)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_r1046_video_editor_render.py:36: in fixture_project
+    run([*args, '-y', str(path)])
+tests/test_r1046_video_editor_render.py:20: in run
+    assert p.returncode == 0, p.stderr.decode(errors='replace')[-1600:]
+E   AssertionError: Option vf (alias for -filter:v (apply filters to video streams)) cannot be applied to input url sine=frequency=440:sample_rate=48000:duration=3 -- you are trying to apply an input option to an output file or vice versa. Move this option before the file it belongs to.
+E     Error parsing options for input file sine=frequency=440:sample_rate=48000:duration=3.
+E     Error opening input files: Invalid argument
+E     
+E   assert 234 == 0
+E    +  where 234 = CompletedProcess(args=['ffmpeg', '-nostdin', '-v', 'error', '-f', 'lavfi', '-i', 'color=c=red:s=64x48:r=25/1:d=3', '-v...ptions for input file sine=frequency=440:sample_rate=48000:duration=3.\nError opening input files: Invalid argument\n').returncode
+__________________ test_real_color_brightness_and_saturation ___________________
+tests/test_r1046_video_editor_render.py:111: in test_real_color_brightness_and_saturation
+    p = fixture_project(tmp_path)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_r1046_video_editor_render.py:36: in fixture_project
+    run([*args, '-y', str(path)])
+tests/test_r1046_video_editor_render.py:20: in run
+    assert p.returncode == 0, p.stderr.decode(errors='replace')[-1600:]
+E   AssertionError: Option vf (alias for -filter:v (apply filters to video streams)) cannot be applied to input url sine=frequency=440:sample_rate=48000:duration=3 -- you are trying to apply an input option to an output file or vice versa. Move this option before the file it belongs to.
+E     Error parsing options for input file sine=frequency=440:sample_rate=48000:duration=3.
+E     Error opening input files: Invalid argument
+E     
+E   assert 234 == 0
+E    +  where 234 = CompletedProcess(args=['ffmpeg', '-nostdin', '-v', 'error', '-f', 'lavfi', '-i', 'color=c=red:s=64x48:r=25/1:d=3', '-v...ptions for input file sine=frequency=440:sample_rate=48000:duration=3.\nError opening input files: Invalid argument\n').returncode
+=========================== short test summary info ============================
+FAILED tests/test_r1046_video_editor_render.py::test_real_overlay_boundaries_z_order_audio_delay_and_cache
+FAILED tests/test_r1046_video_editor_render.py::test_real_transitions[fade]
+FAILED tests/test_r1046_video_editor_render.py::test_real_transitions[wipeleft]
+FAILED tests/test_r1046_video_editor_render.py::test_real_transitions[slideleft]
+FAILED tests/test_r1046_video_editor_render.py::test_real_transitions[dissolve]
+FAILED tests/test_r1046_video_editor_render.py::test_real_color_brightness_and_saturation
+6 failed, 59 passed in 2.50s

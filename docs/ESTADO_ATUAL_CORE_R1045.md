@@ -14,15 +14,19 @@ disponibilidade de provedores.
 | Skills em `.opencode/skills` | 41 |
 | Checks do `doctor` | 22/22 |
 | Testes R1033–R1045 + instalador | **245** |
+| Testes R1033–R1046 + instalador | **299** + 1 opcional (render real R1026; 54 novos) |
 | Specs formais | 291 |
 
 O `doctor` está **healthy** em modo estrutural; isso não autentica CLIs,
 modelos ou serviços externos.
 
-## Entregas R1035–R1045
+## Entregas R1035–R1046
 
 - **Editor universal** (`video_editor`, `video_editor_mcp`): timeline,
   FFmpeg, Remotion, legendas, áudio, render com recibo e retomada.
+- **Composição avançada R1046** (`video_editor_advanced`): multifaixa,
+  transições e cor SDR paramétrica, com hash de fontes e recibo técnico separado
+  de aprovação audiovisual/tradução/ciência.
 - **Dublagem** (`dubbing_batch`, `dubbing_evidence`, `dubbing_synth`,
   `dubbing_xtts`): preparação, OCR, cache e TTS por linha.
 - **Diarização** (`video_diarization`, `video_diarization_nemotron`): Silero
@@ -66,6 +70,11 @@ O piloto P0006 continua **reprovado para montagem**; ver
    OAuth. Nada foi publicado.
 5. **Remotion**: CLI instalado e `compositions` verificado; render não foi
    executado nem aprovado.
+6. **Multifaixa/transições/cor (R1046)**: implementados e testados em CPU com
+   FFmpeg; conformidade de fps, presets e raio de canto; não há UI NLE, LUT/HDR,
+   keyframes, multicam ou aprovação perceptual. Render técnico não valida
+   tradução nem validade científica. Aceite real em R1026: 600 frames,
+   30000/1001, áudio 48 kHz; ver `reports/r1046/QUANTUM-REAL-EVIDENCE.md`.
 
 ## Como reproduzir o diagnóstico
 

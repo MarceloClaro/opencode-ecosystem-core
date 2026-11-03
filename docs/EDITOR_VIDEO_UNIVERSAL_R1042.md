@@ -9,19 +9,26 @@ FFmpeg, Remotion e adaptadores explícitos.
 
 | Operação | Backend | Estado |
 |---|---|---|
-| `probe` | ffprobe | implementado |
+| `probe` | ffprobe | implementado; `--allow-silent` explícito para mídia sem áudio |
 | `trim` | FFmpeg | corte frame-exato, reencode |
 | `concat` | FFmpeg | cortes duros, frame a frame |
 | `scale`, `pad`, `crop` | FFmpeg | dimensões pares e validação de enquadramento |
 | `extract_audio`, `replace_audio`, `mix_audio` | FFmpeg | WAV/AAC, sem ducking automático |
 | `subtitles` | FFmpeg | burn-in ou faixa `mov_text` |
+| `multitrack` | FFmpeg | camadas, posição/tamanho/opacidade/raio de canto, áudio explícito, lacunas preto/silêncio |
+| `transition` | FFmpeg | `xfade` + `acrossfade`, efeitos allowlisted, sobreposição em frames |
+| `color_grade` | FFmpeg | `eq` + `colorbalance`, SDR paramétrico, sem LUT/HDR |
 | `remotion` | Remotion CLI | composição React, com licença e aprovação |
 | `dub` | adaptador | bloqueia sem adaptador; não inventa voz |
 
-Ainda **não** implementados: transições, keyframes, color grading, composição
-multi-faixa de vídeo, legendas animadas nativas, normalização de VFR, lip sync
-e correção automática de enquadramento. O modelo de timeline já prevê faixas e
-clipes; novas operações entram por plugin.
+`multitrack`, `transition` e `color_grade` foram implementados na R1046. Ainda
+**não** implementados: UI NLE, keyframes animáveis, multicam, tracking
+automático de objeto, nodes de composição, LUT/ACES/HDR, VFR automático, efeitos
+3D, legendas animadas nativas, lip sync e correção automática de enquadramento.
+
+A correção de cor é **paramétrica e não calibrada**: não há LUT, perfil de
+câmera, gestão de cor ou comparação perceptual com Premiere/DaVinci. Os testes
+de pixels comprovam apenas que os parâmetros alteraram a fixture.
 
 ## Modelo de projeto
 
@@ -140,12 +147,31 @@ das duas declarações e o comando passa pela política de licença.
 ## Limites atuais
 
 - FFmpeg cobre os formatos que a instalação local decodifica; não há garantia
-  universal de codecs/containers.
-- VFR é **sinalizado**, não convertido automaticamente.
-- O modelo de timeline tem faixas, mas a composição multi-faixa de vídeo ainda
-  não foi implementada; `concat` é corte duro.
-- Não há aprovação perceptual automática: frames e loudness não provam
-  inteligibilidade, emoção, lip sync ou qualidade editorial.
+  universal de codecs/containers. As operações avançadas restringem a entrada
+  a containers locais allowlisted e exigem CFR. Fonte com taxa diferente da
+  timeline é conformada por `fps` e arredondada para cima, com aviso; VFR não é
+  aceito.
+- VFR é **detectado e recusado** pelas operações avançadas; não é convertido
+  automaticamente.
+- A composição multifaixa existe para overlays limitados ao quadro e áudio
+  explícito. Há raio de canto por máscara alfa; não há máscaras arbitrárias,
+  keyframes animáveis, blend modes, nodes, multicam, tracking, LUT, ACES/HDR
+  ou UI NLE.
+- Preset x264 é allowlisted e registrado; `medium` é o padrão. Preset rápido
+  serve a prévia, não garante qualidade final.
+- Transições são as allowlisted pelo FFmpeg e recusam duração maior ou igual
+  aos clipes; velocidade diferente de 1 bloqueia.
+- A cor é SDR paramétrica (`eq`/`colorbalance`), não um fluxo calibrado com
+  perfil de câmera, LUT ou gestão de cor.
+- Não há aprovação perceptual automática: frames, pixels e loudness não provam
+  inteligibilidade, emoção, lip sync, tradução correta, validade científica ou
+  qualidade editorial. O recibo mantém esses campos em `false`.
 - Remotion License e direitos de mídia/fontes/marcas são responsabilidade do
   operador; o Core não dá parecer jurídico.
 - CPU é o alvo; GPU não é presumida.
+- **Evidência R1046:** sete testes de render sintético verificam limites de
+  overlay, ordem de camadas, atraso de áudio, quatro transições, brilho,
+  dessaturação, taxa 30000/1001 e silêncio. Um aceite opcional com o vídeo real
+  R1026 (`source.mp4`, 1920×1080, 30000/1001, cartão 30 fps) gerou 600 frames
+  com áudio e máscara de canto. Esses testes comprovam predicados técnicos, não
+  equivalência funcional, estética, tradutória ou científica.

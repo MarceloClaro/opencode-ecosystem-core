@@ -15,6 +15,7 @@ import os
 from pathlib import Path
 import re
 import subprocess
+import tempfile
 
 VERSION = 'R1042-1'
 HEX = re.compile(r'[0-9a-f]{64}')
@@ -58,6 +59,34 @@ def fps_value(rational):
     return rational[0] / rational[1]
 
 
+def source_fps(project, source):
+    """Taxa da fonte; ausência só é aceita como a taxa da timeline."""
+    value = source.get('fps')
+    if value is None:
+        return tuple(project['fps'])
+    if not isinstance(value, (list, tuple)) or len(value) != 2:
+        raise ValueError('source fps rational required')
+    num, den = value
+    if type(num) is not int or type(den) is not int:
+        raise ValueError('source fps must be integer rational')
+    return parse_rational(f'{num}/{den}')
+
+
+def timeline_frames(project, source, first, last):
+    """Converte frames da fonte em frames da timeline, arredondando para cima.
+
+    O arredondamento para cima evita encurtar o último frame quando a taxa da
+    fonte difere da timeline (ex.: 30 fps em 30000/1001). A conformidade é
+    registrada pelo planejador; não é uma conversão silenciosa de VFR.
+    """
+    src_num, src_den = source_fps(project, source)
+    out_num, out_den = project['fps']
+    value = (last - first) * src_den * out_num
+    divisor = src_num * out_den
+    return -(-value // divisor)
+
+
+
 def _even(value, label):
     if type(value) is not int or value <= 0 or value % 2:
         raise ValueError(f'{label} must be a positive even integer')
@@ -78,13 +107,15 @@ def _confined(root, relative):
     return target
 
 
-def project_from_probe(source, probe, project_id='project'):
+def project_from_probe(source, probe, project_id='project', *, allow_silent=False):
     video = probe.get('video')
     audio = probe.get('audio')
     if not isinstance(video, dict):
         raise ValueError('video stream required')
-    if not isinstance(audio, dict):
+    if not isinstance(audio, dict) and not allow_silent:
         raise ValueError('audio stream required')
+    has_audio = isinstance(audio, dict)
+    audio = audio if has_audio else {'sample_rate': 48000, 'channels': 2}
     fps = parse_rational(video.get('fps'))
     width, height = int(video['width']), int(video['height'])
     rotation = int(video.get('rotation', 0) or 0) % 360
@@ -96,7 +127,8 @@ def project_from_probe(source, probe, project_id='project'):
     record = {'path': probe.get('path', source), 'sha256': probe.get('sha256'),
               'frames': frames, 'duration_seconds': probe.get('duration_seconds'),
               'fps': list(fps), 'width': width, 'height': height,
-              'variable_frame_rate': bool(video.get('variable_frame_rate', False))}
+              'variable_frame_rate': bool(video.get('variable_frame_rate', False)),
+              'has_audio': has_audio}
     return {
         'schema_version': 1, 'version': VERSION, 'project_id': project_id,
         'root': '.', 'fps': list(fps), 'width': width, 'height': height,
@@ -111,6 +143,7 @@ def project_from_probe(source, probe, project_id='project'):
 def validate_project(project, *, strict=False):
     if not isinstance(project, dict) or project.get('schema_version') != 1:
         raise ValueError('project schema required')
+    project = copy.deepcopy(project)
     if project.get('version') != VERSION:
         raise ValueError('project version mismatch')
     fps = project.get('fps')
@@ -166,12 +199,13 @@ def validate_project(project, *, strict=False):
             if type(c.get('start_frame')) is not int or c['start_frame'] < 0:
                 raise ValueError(f'{cid}: invalid timeline start')
             speed = c.get('speed', 1.0)
-            if isinstance(speed, bool) or not isinstance(speed, (int, float)) or speed <= 0:
+            if (isinstance(speed, bool) or not isinstance(speed, (int, float))
+                    or not math.isfinite(speed) or speed <= 0):
                 raise ValueError(f'{cid}: invalid speed')
             volume = c.get('volume', 1.0)
             if isinstance(volume, bool) or not isinstance(volume, (int, float)) or not 0 <= volume <= 2:
                 raise ValueError(f'{cid}: invalid volume')
-            c['_duration'] = math.ceil((out - inn) / speed)
+            c['_duration'] = math.ceil(timeline_frames(project, src, inn, out) / speed)
             clips.setdefault(tid, []).append(c)
     for tid, rows in clips.items():
         ordered = sorted(rows, key=lambda c: c['start_frame'])
@@ -488,6 +522,13 @@ def _dub_missing(project, params):
     raise ValueError('dubbing adapter not registered; refusing to invent a voice')
 
 
+def _advanced_planner(operation):
+    def planner(project, params):
+        from integrations import video_editor_advanced
+        return getattr(video_editor_advanced, operation)(project, params)
+    return planner
+
+
 BUILTINS = {'trim': (_validate_base, _trim), 'concat': (_validate_base, _concat),
             'scale': (_validate_base, _scale), 'pad': (_validate_base, _pad),
             'crop': (_validate_base, _crop), 'extract_audio': (_validate_base, _extract_audio),
@@ -496,6 +537,9 @@ BUILTINS = {'trim': (_validate_base, _trim), 'concat': (_validate_base, _concat)
             'subtitles': (_validate_base, _subtitles),
             'remotion': (_validate_base, _remotion), 'dub': (_validate_base, _dub_missing)}
 OPERATIONS = dict(BUILTINS)
+for _operation in ('multitrack', 'transition', 'color_grade'):
+    BUILTINS[_operation] = (_validate_base, _advanced_planner(_operation))
+    OPERATIONS[_operation] = BUILTINS[_operation]
 
 
 def register_operation(name, validate, planner):
@@ -522,13 +566,14 @@ def plan(project, operation, params):
     return result
 
 
-def probe_media(path, runner=None):
+def probe_media(path, runner=None, *, allow_silent=False):
     runner = runner or subprocess.run
     p = Path(path)
     if p.is_symlink() or not p.is_file():
         raise ValueError('regular media file required')
     proc = runner(['ffprobe', '-v', 'error', '-show_streams', '-show_format',
-                   '-of', 'json', str(p)], capture_output=True, text=True, timeout=120)
+                   '-count_frames', '-of', 'json', str(p)],
+                  capture_output=True, text=True, timeout=120)
     if getattr(proc, 'returncode', 0) != 0:
         raise ValueError('ffprobe failed')
     data = json.loads(proc.stdout or '{}')
@@ -538,7 +583,7 @@ def probe_media(path, runner=None):
     audio = next((s for s in streams if s.get('codec_type') == 'audio'), None)
     if video is None:
         raise ValueError('video stream required')
-    if audio is None:
+    if audio is None and not allow_silent:
         raise ValueError('audio stream required')
     rotation = 0
     for side in video.get('side_data_list', []) or []:
@@ -553,8 +598,10 @@ def probe_media(path, runner=None):
     vfr = avg not in ('0/0', r) and r not in ('0/0', avg)
     duration = float(data.get('format', {}).get('duration') or 0)
     nb = video.get('nb_frames')
+    streams_duration = float(video.get('duration') or duration)
     frames = int(nb) if isinstance(nb, str) and nb.isdigit() else (
-        int(round(duration * fps_value(fps))) if duration > 0 else 0)
+        int(video['nb_read_frames']) if str(video.get('nb_read_frames', '')).isdigit() else (
+            int(round(streams_duration * fps_value(fps))) if streams_duration > 0 else 0))
     if frames <= 0:
         raise ValueError('video frame count could not be determined')
     width, height = int(video.get('width', 0)), int(video.get('height', 0))
@@ -562,11 +609,14 @@ def probe_media(path, runner=None):
             'format_name': data.get('format', {}).get('format_name'),
             'video': {'index': video.get('index'), 'codec': video.get('codec_name'),
                       'width': width, 'height': height, 'fps': f'{fps[0]}/{fps[1]}',
-                      'r_fps': r, 'frames': frames, 'rotation': rotation,
-                      'variable_frame_rate': vfr, 'pix_fmt': video.get('pix_fmt')},
+                       'r_fps': r, 'frames': frames, 'rotation': rotation,
+                       'duration_seconds': float(video['duration']) if video.get('duration') else None,
+                       'variable_frame_rate': vfr, 'pix_fmt': video.get('pix_fmt')},
             'audio': {'index': audio.get('index'), 'codec': audio.get('codec_name'),
                       'sample_rate': int(audio.get('sample_rate') or 0),
-                      'channels': int(audio.get('channels') or 0)}}
+                       'channels': int(audio.get('channels') or 0),
+                       'duration_seconds': float(audio['duration']) if audio.get('duration') else None}
+                      if audio else None}
 
 
 def _ffmpeg_preflight(plan):
@@ -625,6 +675,11 @@ def render(plan, runner=None, probe_fn=None, dry_run=False):
     if preflight is None:
         raise ValueError(f'unsupported render backend: {backend}')
     preflight(plan)
+    advanced = plan.get('operation') in ('multitrack', 'transition', 'color_grade')
+    if advanced:
+        from integrations import video_editor_advanced
+        video_editor_advanced.preflight(plan, inspect_media=not dry_run)
+        probe_fn = lambda path: video_editor_advanced.verify_output(path, plan['advanced_contract'])
     if dry_run:
         return {'status': 'dry_run', 'backend': backend, 'args': plan['args'],
                 'output': plan['output']}
@@ -639,11 +694,13 @@ def render(plan, runner=None, probe_fn=None, dry_run=False):
         if receipt.get('output_sha256') != file_hash(output):
             raise ValueError('output integrity mismatch')
         return {'status': 'cached', 'output': str(output),
-                'sha256': receipt['output_sha256'], 'receipt': str(receipt_path)}
+                 'sha256': receipt['output_sha256'], 'receipt': str(receipt_path)}
+    if receipt_path.exists():
+        raise FileExistsError('orphan receipt requires reconciliation: ' + str(receipt_path))
     output.parent.mkdir(parents=True, exist_ok=True)
-    temp = output.with_name(f'.{output.name}.tmp-{digest(plan)[:12]}{output.suffix}')
-    if temp.exists():
-        temp.unlink()
+    fd, name = tempfile.mkstemp(prefix=f'.{output.name}.tmp-', suffix=output.suffix, dir=output.parent)
+    os.close(fd)
+    temp = Path(name)
     args = [str(temp) if a == '{output}' else a for a in plan['args']]
     try:
         proc = runner(args, capture_output=True, text=True, timeout=3600)
@@ -662,9 +719,15 @@ def render(plan, runner=None, probe_fn=None, dry_run=False):
             if type(actual) is not int or abs(actual - expected) > plan.get('frame_tolerance', 0):
                 raise ValueError(f'frame count mismatch: expected {expected}, got {actual}')
         sha = file_hash(temp)
+        if advanced:
+            video_editor_advanced.preflight(plan, inspect_media=False)
+        if receipt_path.exists():
+            raise FileExistsError(receipt_path)
         if output.exists():
             raise FileExistsError(output)
-        os.replace(temp, output)
+        # Same-directory hard link is atomic and fails if another writer won.
+        # Do not fall back to replace(), which could destroy that writer's file.
+        os.link(temp, output)
     finally:
         if temp.exists():
             temp.unlink()
@@ -677,8 +740,10 @@ def render(plan, runner=None, probe_fn=None, dry_run=False):
                'expected_frames': plan.get('expected_frames'),
                'frame_tolerance': plan.get('frame_tolerance', 0),
                'probe': probe_summary, 'audiovisual_approved': False,
-               'limitations': ['technical render only; content, voice and lip sync '
-                               'remain unapproved']}
+                'limitations': ['technical render only; content, voice and lip sync '
+                                'remain unapproved']}
+    if advanced:
+        receipt.update(info['technical_checks'])
     with receipt_path.open('x', encoding='utf-8') as stream:
         stream.write(json.dumps(receipt, ensure_ascii=False, indent=2) + '\n')
     return {'status': 'rendered', 'output': str(output), 'sha256': sha,
@@ -703,6 +768,7 @@ def main(argv=None):
     p = sub.add_parser('probe')
     p.add_argument('source')
     p.add_argument('--out', required=True)
+    p.add_argument('--allow-silent', action='store_true')
     p = sub.add_parser('plan')
     p.add_argument('project')
     p.add_argument('operation')
@@ -713,7 +779,7 @@ def main(argv=None):
     p.add_argument('--dry-run', action='store_true')
     args = parser.parse_args(argv)
     if args.command == 'probe':
-        info = probe_media(args.source)
+        info = probe_media(args.source, allow_silent=args.allow_silent)
         Path(args.out).write_text(json.dumps(info, ensure_ascii=False, indent=2) + '\n')
         print(json.dumps({'status': 'probed', 'out': args.out,
                           'frames': info['video']['frames']}))

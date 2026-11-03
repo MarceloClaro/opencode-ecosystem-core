@@ -244,13 +244,22 @@ melhora sobre números informados; não executa modelos. A CLI está em
 Os contratos, limites e provas locais estão em
 [docs/BIBLIOTECA_AI_R657.md](docs/BIBLIOTECA_AI_R657.md).
 
-## Vídeo, dublagem e animação R1035–R1045
+## Vídeo, dublagem e animação R1035–R1046
 
 O editor universal vive em `integrations/video_editor.py`: projeto com fontes
 hashadas, fps racional, clipes frame-exatos, faixas e operações declarativas.
 FFmpeg é o backend padrão; Remotion é um backend de composição com licença e
 aprovação de render; `register_backend` permite outros motores. O MCP
 `editor-local` expõe projeto/plano/render sem shell arbitrário.
+
+A R1046 acrescenta, em `video_editor_advanced.py`, composição multifaixa com
+posição/tamanho/opacidade/raio de canto, áudio explícito e lacunas
+preto/silêncio; conformidade de fps com arredondamento explícito; transições
+`xfade`/`acrossfade`; preset x264 allowlisted; e cor SDR paramétrica com
+`eq`/`colorbalance`. O plano é revalidado por digest e hash de fontes; probes
+restringem protocolos/formatos. Isso não é paridade com Premiere/DaVinci: não
+há UI NLE, keyframes, LUT/ACES/HDR, tracking, multicam ou aprovação estética
+automática.
 
 A dublagem é uma cadeia separada: `dubbing_batch` prepara as partes,
 `dubbing_evidence` coleta OCR, `video_diarization_nemotron` identifica locutores,

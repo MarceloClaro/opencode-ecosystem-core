@@ -1,6 +1,6 @@
 # PROGRESS — Estado corrente e arquivo de checkpoints
 
-## Estado atual — orientação de 18/10/2026
+## Estado atual — orientação de 03/11/2026
 
 A retomada parte do checkout e da tarefa atual. O bloco abaixo deriva as
 contagens das fontes locais; o histórico R414 preservado ao final não representa
@@ -23,7 +23,7 @@ explicam integrações e limites específicos. Recibos datados em `outputs/` e
 `docs/evidence/` são evidências de execuções determinadas; uma suíte interrompida
 não comprova o aceite integral.
 
-## Checkpoint R1045 — vídeo, dublagem e instalação
+## Checkpoint R1046 — vídeo, dublagem e instalação
 
 - Editor universal (`video_editor`, `video_editor_mcp`): FFmpeg + Remotion +
   plugins, render com recibo e aprovação.
@@ -32,10 +32,15 @@ não comprova o aceite integral.
 - Catálogo de 46 ferramentas/modelos; skill `video-editor-universal`.
 - Instalador `./install.sh --check|--apply --yes`.
 - **245 testes** R1033–R1045 + instalador passando; `doctor` 22/22 estrutural.
+- **R1046** amplia o editor com multifaixa, transições, cor, conformidade de fps,
+  presets e raio de canto; **299 testes** locais + 1 opcional passam, incluindo
+  7 renders FFmpeg sintéticos e 1 render real de 1080p. Sem aprovação perceptual
+  ou científica; ver `reports/r1046/QUANTUM-REAL-EVIDENCE.md`.
 - Nenhuma publicação; upload bloqueado por direitos/credenciais.
 
 Ver [estado R1045](docs/ESTADO_ATUAL_CORE_R1045.md),
-[pipeline](docs/DUBBING_PIPELINE_R1041_R1045.md) e
+[pipeline](docs/DUBBING_PIPELINE_R1041_R1045.md),
+[evidência real R1026](reports/r1046/QUANTUM-REAL-EVIDENCE.md) e
 [instalador](installer/ONECLICK.md).
 
 ## Revisão documental R916
