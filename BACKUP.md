@@ -56,5 +56,5 @@ identificam os arquivos.
 
 O backup preserva a **infraestrutura** de vídeo/dublagem, não uma dublagem
 final. No momento do snapshot: 107 partes preparadas, 106 com OCR, 107
-diarizadas, ASR large-v3 em execução, TTS 0, mix 0, montagem 0 e publicação 0.
+diarizadas, ASR large-v3 concluído (1.854 segmentos), TTS 0, mix 0, montagem 0 e publicação 0.
 Ver `pilots/r1035-02XpQTA-_XE/STATUS.md`.

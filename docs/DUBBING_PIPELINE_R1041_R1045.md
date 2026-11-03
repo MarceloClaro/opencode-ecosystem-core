@@ -42,7 +42,7 @@ coletada** e **entrega aprovada**; nenhuma das três é equivalente.
 | Evidência OCR | 106 partes; 1.997 frames; 0 erros |
 | Diarização | 107 partes; 1.943 unidades; 1.650 segmentos |
 | Unidades bloqueadas | 129 (6,6%) |
-| ASR large-v3 | lote em execução; P0002 ≈113 s |
+| ASR large-v3 | concluído; 107 partes, 1.854 segmentos, 7.773 palavras |
 | Clustering global | 54/107 embeddings |
 | Tradução | 6 partes antigas descartadas por ASR ruim |
 | TTS | 0 linhas |

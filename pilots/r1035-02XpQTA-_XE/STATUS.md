@@ -93,8 +93,7 @@ textual melhor (OCR das legendas inglesas em vários frames ou ASR maior) e
 revisar uma amostra.
 
 O `faster-whisper-large-v3` foi baixado e testado na P0002: texto bem melhor
-que o small, 7 segmentos em 113 s (≈1,5× tempo real). O lote das 107 partes
-está rodando em tmux (`dub-asr`) e é retomável; estimativa ~3,3 h só de ASR.
+que o small, 7 segmentos em 113 s (≈1,5× tempo real). O lote das 107 partes foi concluído: **1.854 segmentos e 7.773 palavras** em `.dubbing-asr-large/`; ainda sem revisão nativa.
 Depois dele ainda faltam atualização das unidades, tradução, clustering,
 TTS, stems/mix, render e montagem. Nenhuma montagem final ou publicação;
 o pedido atual é explicitamente **não publicar**.

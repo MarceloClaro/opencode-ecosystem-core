@@ -53,7 +53,7 @@ P0002 (75 s):
     aproxima do OCR “not the child's eyes… but his stomach”.
 - Estimativa para as 107 partes: **~3,3 h** só de ASR large, em CPU.
 
-O lote `dub-asr` está rodando em tmux e é retomável por parte. Mesmo assim,
+O lote `dub-asr` foi concluído: 107 partes, 1.854 segmentos e 7.773 palavras, ainda sem revisão nativa. Mesmo assim,
 large-v3 não elimina a necessidade de revisão: ele melhora a matéria-prima,
 não a aprova.
 

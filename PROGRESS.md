@@ -28,7 +28,7 @@ não comprova o aceite integral.
 - Editor universal (`video_editor`, `video_editor_mcp`): FFmpeg + Remotion +
   plugins, render com recibo e aprovação.
 - Dublagem: 107 partes preparadas, 106 com OCR, 107 diarizadas; 1.943 unidades.
-- ASR large-v3 em lote; tradução/TTS/mix/montagem ainda não concluídos.
+- ASR large-v3 concluído (107 partes, 1.854 segmentos); tradução/TTS/mix/montagem ainda não concluídos.
 - Catálogo de 46 ferramentas/modelos; skill `video-editor-universal`.
 - Instalador `./install.sh --check|--apply --yes`.
 - **245 testes** R1033–R1045 + instalador passando; `doctor` 22/22 estrutural.

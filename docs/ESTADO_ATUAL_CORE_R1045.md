@@ -44,7 +44,7 @@ modelos ou serviços externos.
 | Diarização | 107 partes; 1.943 unidades; 1.650 segmentos |
 | Unidades bloqueadas | 129 (6,6%) |
 | Embeddings de locutor | 54/107 |
-| ASR large-v3 | lote em execução em tmux |
+| ASR large-v3 | 107 partes; 1.854 segmentos; 7.773 palavras; aguarda revisão |
 | Tradução | 6 partes antigas descartadas |
 | TTS | 0 |
 | Mix/render | 0 |

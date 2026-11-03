@@ -220,7 +220,7 @@ R1041 encontrou 14 divergências lexicais e 4 overruns. O lote tem 107 partes e
 partes diarizadas; **nenhuma** foi dublada/montada como entrega final.
 
 **ASR e tradução:** o `faster-whisper-small` produziu texto turco sem sentido
-em parte do corpus; `large-v3` foi baixado e está sendo executado em lote.
+em parte do corpus; `large-v3` foi baixado e concluiu o lote das 107 partes (1.854 segmentos, 7.773 palavras), ainda sem revisão nativa.
 Traduzir ASR ruim gera fluência sobre erro — o TTS em lote não foi iniciado.
 O gate exige fonte revisada, locutor/referência e duração estrita.
 
