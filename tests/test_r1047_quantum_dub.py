@@ -68,7 +68,10 @@ def test_manifest_contract_when_output_exists():
     assert claims['translation_human_reviewed'] is False
     assert claims['scientific_validity_verified'] is False
     assert claims['published'] is False
-    assert claims['lip_sync_resynchronized'] is False
+    assert isinstance(claims['lip_sync_resynchronized'], bool)
+    if not claims['lip_sync_resynchronized']:
+        assert any('NÃO foi re-sincronizada' in item
+                   for item in manifest['limitations'])
     assert manifest['subtitle']['cps_max'] <= 17
     video = Path(manifest['video']['path'])
     if not video.is_file():

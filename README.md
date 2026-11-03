@@ -72,11 +72,11 @@ do ambiente e da operação solicitada.
 
 ## Estado atual e orientação de leitura
 
-Revisão documental **R1046, 03/11/2026**, baseada no checkout local. As frentes
+Revisão documental **R1047, 03/11/2026**, baseada no checkout local. As frentes
 **R985–R1001** (conselho de 13 cientistas, autor/editor de alto rigor, scanner
-evolutivo, piloto OpenShell e executor Gemini) e **R1035–R1046** (editor de
+evolutivo, piloto OpenShell e executor Gemini) e **R1035–R1047** (editor de
 vídeo universal, dublagem, diarização, Remotion, catálogo de ferramentas,
-multifaixa, transições e cor) foram incorporadas depois — veja
+multifaixa, transições, cor, voz clonada e lip sync) foram incorporadas depois — veja
 [Capacidades principais](#capacidades-principais). Comece pelo
 [manual](MANUAL.md), pelo [índice documental](docs/README.md), pelo
 [estado atual R1045](docs/ESTADO_ATUAL_CORE_R1045.md) e pelo
@@ -230,9 +230,40 @@ partes diarizadas; **nenhuma** foi dublada/montada como entrega final.
 sintética clonada por XTTS em CPU (`speed 1.0`), roteiro PT-BR mais explicativo,
 slide traduzido, SRT/ASS e **sem cartão**. O ASR large-v3 reconheceu o roteiro
 com **WER lexical de 2,17%**; loudness final **−16,10 LUFS**, true peak
-**−2,16 dBTP**. O vídeo base tem lip sync anterior e a nova locução **não** foi
-re-sincronizada; revisão humana, naturalidade e direitos continuam pendentes.
+**−2,16 dBTP**. A nova locução foi re-sincronizada com Wav2Lip em CPU; revisão
+visual humana, naturalidade e direitos continuam pendentes.
 Ver [evidência R1047](reports/r1047/QUANTUM-DUB-EVIDENCE.md).
+
+### Evolução do piloto R1026 (R1026–R1047)
+
+![Evolução do piloto R1026: original, slide PT-BR, teste com cartão e versão final sem cartão](docs/images/r1047-evolution.jpg)
+
+| Etapa | Transformação | Evidência |
+|---|---|---|
+| 1. Original | vídeo Qiskit em inglês, 1920×1080, 29,97 fps, slide original | `source.mp4` |
+| 2. Slide + dublagem anterior | slide em PT-BR, legendas e voz XTTS anterior; sem cartão | `pilot-16x9-lipsync-pt.mp4` |
+| 3. Teste de composição R1046 | cartão PiP com raio de canto, opacidade e áudio explícito; o cartão cobria parte da cena | `r1046-editor-preview/quantum-multitrack-v3-preview.mp4` |
+| 4. R1047 | novo roteiro em 4 blocos, voz clonada em ritmo natural, novo slide, SRT/ASS, **cartão removido** e lip sync refeito | `r1047-dub/out/quantum-ptbr-r1047.mp4` |
+
+A imagem é um contato de quatro frames e ilustra a **transformação técnica**:
+tradução do slide, evolução da composição, remoção do cartão e dublagem. Ela
+não é benchmark de qualidade, não prova naturalidade da voz e não substitui
+revisão humana. O ASR large-v3 mediu **2,17% de WER lexical**; loudness
+**−16,10 LUFS** e true peak **−2,16 dBTP**. Os MP4/WAV ficam em
+`pilots/r1026-quantum/r1047-dub/out/` e são ignorados pelo Git; o script e o
+manifesto permitem reproduzir o fluxo, e a imagem acima é o recorte versionado.
+
+**O que essa transformação demonstra no Core:** ingestão de mídia real com hash,
+roteiro e tradução, TTS local com referência de voz, composição FFmpeg sem
+cartão, legenda SRT/ASS, mixagem com loudness alvo e verificação ASR. O fluxo
+termina em manifesto com hashes e flags; não publica, não autentica a licença e
+não substitui revisão humana. A re-sincronização labial foi executada com Wav2Lip em CPU; a revisão
+visual humana continua pendente.
+
+```text
+source.mp4 → ASR/roteiro → XTTS (referência 6 s) → patch do slide
+           → FFmpeg (overlay + legendas) → ASR large-v3 + loudness → manifesto
+```
 
 **ASR e tradução:** o `faster-whisper-small` produziu texto turco sem sentido
 em parte do corpus; `large-v3` foi baixado e concluiu o lote das 107 partes (1.854 segmentos, 7.773 palavras), ainda sem revisão nativa.

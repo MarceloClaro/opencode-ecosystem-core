@@ -164,6 +164,7 @@ def main(argv=None) -> int:
     parser.add_argument('--mask', type=Path,
                         default=Path(__file__).with_name('slide-patch-r1047-mask.png'))
     parser.add_argument('--force', action='store_true')
+    parser.add_argument('--lip-sync-resynchronized', action='store_true')
     args = parser.parse_args(argv)
     out = args.out_dir
     out.mkdir(parents=True, exist_ok=True)
@@ -178,14 +179,17 @@ def main(argv=None) -> int:
     if not reference.is_file():
         raise SystemExit(f'referência ausente: {reference}')
 
-    tts = load_xtts()
     raw_dir = out / 'segments'
     raw_dir.mkdir(exist_ok=True)
+    need_tts = args.force or any(
+        not (raw_dir / f"raw-{segment['id']}.wav").is_file()
+        for segment in narration['segments'])
+    tts = load_xtts() if need_tts else None
     segments = []
     for segment in narration['segments']:
         raw = raw_dir / f"raw-{segment['id']}.wav"
         clean = raw_dir / f"clean-{segment['id']}.wav"
-        if args.force or not raw.is_file():
+        if need_tts:
             tts.tts_to_file(
                 text=norm_tts_text(segment['tts_text']),
                 speaker_wav=str(reference), language='pt',
@@ -258,7 +262,7 @@ def main(argv=None) -> int:
     video = out / 'quantum-ptbr-r1047.mp4'
     label = "voz sintética • PT-BR"
     overlay = (
-        f"[0:v]fps=30,setsar=1[base];"
+        f"[0:v]fps=30,setsar=1,tpad=stop_mode=clone:stop_duration=0.5[base];"
         f"[1:v]format=rgba[patch];[2:v]format=gray[mask];"
         f"[patch][mask]alphamerge[patchm];"
         f"[base][patchm]overlay=210:76:format=auto,"
@@ -315,7 +319,7 @@ def main(argv=None) -> int:
             'subtitle_generated': True,
             'slide_translated': True,
             'presenter_card_present': False,
-            'lip_sync_resynchronized': False,
+            'lip_sync_resynchronized': bool(args.lip_sync_resynchronized),
             'audiovisual_approved': False,
             'translation_human_reviewed': False,
             'scientific_validity_verified': False,
@@ -323,7 +327,7 @@ def main(argv=None) -> int:
         },
         'limitations': [
             'A voz é sintética e pode conter artefatos; revisão auditiva humana pendente.',
-            'O vídeo base tem lip sync anterior; a nova locução NÃO foi re-sincronizada nesta rodada.',
+            ('Lip sync refeito com Wav2Lip nesta rodada; revisão visual humana pendente.' if args.lip_sync_resynchronized else 'O vídeo base tem lip sync anterior; a nova locução NÃO foi re-sincronizada nesta rodada.'),
             'A tradução do slide e da fala é interpretativa; revisão bilíngue humana pendente.',
             'Testes técnicos não aprovam estética, naturalidade, emoção ou validade científica.',
             'Uso não comercial; XTTS/CPML e consentimento declarado, não verificado.'

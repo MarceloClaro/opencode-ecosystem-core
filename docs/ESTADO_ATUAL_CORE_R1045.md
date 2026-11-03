@@ -29,7 +29,7 @@ modelos ou serviços externos.
   de aprovação audiovisual/tradução/ciência.
 - **Dublagem R1047** (`pilots/r1026-quantum/r1047-dub`): XTTS local `speed 1.0`,
   4 blocos PT-BR, slide traduzido, SRT/ASS, sem cartão; WER ASR 2,17% e
-  −16,10 LUFS. Lip sync anterior não re-sincronizado; revisão humana pendente.
+  −16,10 LUFS. Lip sync refeito com Wav2Lip; revisão visual humana pendente.
 - **Dublagem** (`dubbing_batch`, `dubbing_evidence`, `dubbing_synth`,
   `dubbing_xtts`): preparação, OCR, cache e TTS por linha.
 - **Diarização** (`video_diarization`, `video_diarization_nemotron`): Silero

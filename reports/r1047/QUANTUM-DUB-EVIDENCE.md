@@ -1,13 +1,13 @@
 # Dublagem PT-BR R1047 — piloto R1026
 
-Gerado em 2026-11-03T23:08:30Z com XTTS local, sem serviço externo e sem publicação.
+Gerado em 2026-11-03T23:36:41Z com XTTS local, sem serviço externo e sem publicação.
 
 ## Fonte e voz
 
 | Item | Valor |
 |---|---|
-| Vídeo base | `/home/marceloclaro/opencode-ecosystem-core/pilots/r1026-quantum/presenter-middle-1080.mp4` |
-| SHA-256 do vídeo base | `1e6306fb2b0eb3d20ef2ae13bd737ee5c9ee4e2cd441910d8d169a3f0845fa54` |
+| Vídeo base | `/home/marceloclaro/opencode-ecosystem-core/pilots/r1026-quantum/presenter-middle-r1047-1080.mp4` |
+| SHA-256 do vídeo base | `3711ef75f7b32c56983af84803b22acb1dc7cdfef7eb4b843634a23377b7e674` |
 | Cartão | **ausente** (`presenter_card_present=false`) |
 | Referência de voz | `/home/marceloclaro/.cache/opencode-pilot/refs/presenter-ref.wav` |
 | SHA-256 da referência | `3149691d6094caca9cf1ca3516172a5c91a7d5513cf80cf16f3fb4f2d8ed8ae0` |
@@ -40,17 +40,11 @@ Fator de tempo aplicado: **1.059126×** (1,0 = sem aceleração).
 | Item | Valor |
 |---|---|
 | Arquivo | `/home/marceloclaro/opencode-ecosystem-core/pilots/r1026-quantum/r1047-dub/out/quantum-ptbr-r1047.mp4` |
-| SHA-256 | `ff5fc72b3cb84c94300db0adabf5b763d900ea0ffbe789539522ac24180e60c3` |
-| Tamanho | 3835000 bytes |
+| SHA-256 | `93f074a3e258f12371b34540a0a8b574a1b47f7bba6c140da774e5f8289f3ed5` |
+| Tamanho | 3852259 bytes |
 | Vídeo | h264 1920×1080, 30/1 fps |
 | Áudio | aac 48000 Hz, 2 canais |
 | Duração | 20.000000 s |
-
-Loudness medido no MP4 final: **−16,10 LUFS**, true peak **−2,16 dBTP**.
-A inspeção visual de 4 frames (2, 8, 14 e 18 s) mostrou o slide em PT-BR, a
-apresentadora em quadro inteiro, ausência de cartão e legendas legíveis. Essa
-inspeção foi feita por modelo com entrada de imagem nesta sessão; **não é
-revisão humana nem aprovação editorial**.
 
 ## Alegações e limites
 
@@ -60,7 +54,7 @@ revisão humana nem aprovação editorial**.
 | `subtitle_generated` | `true` |
 | `slide_translated` | `true` |
 | `presenter_card_present` | `false` |
-| `lip_sync_resynchronized` | `false` |
+| `lip_sync_resynchronized` | `true` |
 | `audiovisual_approved` | `false` |
 | `translation_human_reviewed` | `false` |
 | `scientific_validity_verified` | `false` |
@@ -69,7 +63,7 @@ revisão humana nem aprovação editorial**.
 Limitações registradas:
 
 - A voz é sintética e pode conter artefatos; revisão auditiva humana pendente.
-- O vídeo base tem lip sync anterior; a nova locução NÃO foi re-sincronizada nesta rodada.
+- Lip sync refeito com Wav2Lip nesta rodada; revisão visual humana pendente.
 - A tradução do slide e da fala é interpretativa; revisão bilíngue humana pendente.
 - Testes técnicos não aprovam estética, naturalidade, emoção ou validade científica.
 - Uso não comercial; XTTS/CPML e consentimento declarado, não verificado.

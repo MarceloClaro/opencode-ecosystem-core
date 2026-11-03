@@ -39,8 +39,8 @@ aplica o patch `slide-patch-r1047.png`, a locução clonada
 
 O roteiro novo explica a mudança em quatro blocos: acesso a 100+ qubits,
 saída dos menores, limite da simulação clássica e alcance dos chips maiores.
-O vídeo base tem lip sync anterior; **a nova locução não foi re-sincronizada**
-nesta rodada. A aprovação audiovisual, a revisão bilíngue e a publicação
+A nova locução foi re-sincronizada com Wav2Lip em CPU; a revisão
+visual humana continua pendente. A aprovação audiovisual, a revisão bilíngue e a publicação
 continuam pendentes. Evidência: `reports/r1047/QUANTUM-DUB-EVIDENCE.md`.
 
 ### Versão didática com voz (principal)

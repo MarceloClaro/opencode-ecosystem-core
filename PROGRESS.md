@@ -38,7 +38,7 @@ não comprova o aceite integral.
   ou científica; ver `reports/r1046/QUANTUM-REAL-EVIDENCE.md`.
 - **R1047** gera dublagem PT-BR do piloto R1026 com XTTS `speed 1.0`, slide
   traduzido, SRT/ASS e sem cartão; WER ASR **2,17%**, **−16,10 LUFS** e 600
-  frames. O lip sync anterior não foi re-sincronizado; revisão humana pendente.
+  frames. Lip sync refeito com Wav2Lip em CPU; revisão visual humana pendente.
   Ver `reports/r1047/QUANTUM-DUB-EVIDENCE.md`.
 - **303 testes** locais + 1 opcional passam; `doctor` 22/22.
 - Nenhuma publicação; upload bloqueado por direitos/credenciais.

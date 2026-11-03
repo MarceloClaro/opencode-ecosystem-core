@@ -71,8 +71,9 @@ rejeitada pelo gate de 17 CPS, não por tempo.
    `audiovisual_approved=false`, `translation_human_reviewed=false`,
    `scientific_validity_verified=false`, `published=false`.
 8. Se a nova locução não for re-sincronizada com Wav2Lip, o manifesto declara
-   `lip_sync_resynchronized=false`. Não reutilizar o lip sync antigo como se
-   fosse do novo texto.
+   `lip_sync_resynchronized=false`; se for re-sincronizada, declara `true` e
+   mantém a revisão visual humana pendente. Não reutilizar o lip sync antigo
+   como se fosse do novo texto.
 9. Nenhum arquivo original é sobrescrito; saídas novas usam nomes `r1047`.
 
 ## Testes
