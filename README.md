@@ -226,6 +226,14 @@ R1041 encontrou 14 divergências lexicais e 4 overruns. O lote tem 107 partes e
 1.943 unidades preparadas, 106 partes com evidência OCR (1.997 frames) e 107
 partes diarizadas; **nenhuma** foi dublada/montada como entrega final.
 
+**Dublagem R1026 (R1047):** o piloto ganhou uma versão de 20 s com voz
+sintética clonada por XTTS em CPU (`speed 1.0`), roteiro PT-BR mais explicativo,
+slide traduzido, SRT/ASS e **sem cartão**. O ASR large-v3 reconheceu o roteiro
+com **WER lexical de 2,17%**; loudness final **−16,10 LUFS**, true peak
+**−2,16 dBTP**. O vídeo base tem lip sync anterior e a nova locução **não** foi
+re-sincronizada; revisão humana, naturalidade e direitos continuam pendentes.
+Ver [evidência R1047](reports/r1047/QUANTUM-DUB-EVIDENCE.md).
+
 **ASR e tradução:** o `faster-whisper-small` produziu texto turco sem sentido
 em parte do corpus; `large-v3` foi baixado e concluiu o lote das 107 partes (1.854 segmentos, 7.773 palavras), ainda sem revisão nativa.
 Traduzir ASR ruim gera fluência sobre erro — o TTS em lote não foi iniciado.

@@ -63,6 +63,14 @@ coletada** e **entrega aprovada**; nenhuma das três é equivalente.
 - **Publicação**: exige direito de distribuição e credenciais; ver
   `reports/r1045/UPLOAD-BLOCKERS.md`.
 
+## Piloto R1026 (R1047)
+
+Além do lote de 107 partes, o piloto R1026 recebeu uma dublagem PT-BR de 20 s
+com XTTS local `speed 1.0`, slide traduzido, SRT/ASS e sem cartão. ASR
+large-v3: WER lexical 2,17%; loudness −16,10 LUFS; true peak −2,16 dBTP.
+O vídeo base tem lip sync anterior; a nova locução **não** foi re-sincronizada.
+Ver `reports/r1047/QUANTUM-DUB-EVIDENCE.md`.
+
 ## Comandos
 
 ```bash

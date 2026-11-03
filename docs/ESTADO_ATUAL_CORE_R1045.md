@@ -14,19 +14,22 @@ disponibilidade de provedores.
 | Skills em `.opencode/skills` | 41 |
 | Checks do `doctor` | 22/22 |
 | Testes R1033–R1045 + instalador | **245** |
-| Testes R1033–R1046 + instalador | **299** + 1 opcional (render real R1026; 54 novos) |
+| Testes R1033–R1046 + instalador | **303** + 1 opcional (render real R1026; 58 novos) |
 | Specs formais | 291 |
 
 O `doctor` está **healthy** em modo estrutural; isso não autentica CLIs,
 modelos ou serviços externos.
 
-## Entregas R1035–R1046
+## Entregas R1035–R1047
 
 - **Editor universal** (`video_editor`, `video_editor_mcp`): timeline,
   FFmpeg, Remotion, legendas, áudio, render com recibo e retomada.
 - **Composição avançada R1046** (`video_editor_advanced`): multifaixa,
   transições e cor SDR paramétrica, com hash de fontes e recibo técnico separado
   de aprovação audiovisual/tradução/ciência.
+- **Dublagem R1047** (`pilots/r1026-quantum/r1047-dub`): XTTS local `speed 1.0`,
+  4 blocos PT-BR, slide traduzido, SRT/ASS, sem cartão; WER ASR 2,17% e
+  −16,10 LUFS. Lip sync anterior não re-sincronizado; revisão humana pendente.
 - **Dublagem** (`dubbing_batch`, `dubbing_evidence`, `dubbing_synth`,
   `dubbing_xtts`): preparação, OCR, cache e TTS por linha.
 - **Diarização** (`video_diarization`, `video_diarization_nemotron`): Silero

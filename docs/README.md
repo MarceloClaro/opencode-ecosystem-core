@@ -14,6 +14,7 @@ execuções anteriores. Arquivos de evidência não são certificados de prontid
 | Editar vídeo e animar | [Editor universal R1042](EDITOR_VIDEO_UNIVERSAL_R1042.md), [Remotion auditável](../.opencode/skills/remotion-auditavel/SKILL.md) |
 | Dublar, legendar e diarizar | [Pipeline R1041–R1045](DUBBING_PIPELINE_R1041_R1045.md), [status do piloto](../pilots/r1035-02XpQTA-_XE/STATUS.md) |
 | Ver evidência de vídeo real R1026 | [Aceitação R1046](../reports/r1046/QUANTUM-REAL-EVIDENCE.md), [pesquisa GitHub](../reports/r1046/github-research.json) |
+| Dublar o piloto R1026 em PT-BR | [R1047](../pilots/r1026-quantum/r1047-dub/README.md), [evidência](../reports/r1047/QUANTUM-DUB-EVIDENCE.md) |
 | Escolher ferramentas/modelos de vídeo | [Catálogo R1043](VIDEO_EDITOR_TOOLCHAIN_R1043.md), [toolchain.json](../reports/r1043/toolchain.json) |
 | ChatGPT, Gemini e NotebookLM | [Autenticação](AUTENTICACAO_CHATGPT_NOTEBOOKLM.md), [NotebookLM](GEMINI_NOTEBOOK_CORE.md) |
 | Reduzir custo de modelos/contexto | [Governança de custo de tokens](GOVERNANCA_DE_CUSTO_DE_TOKENS.md), [Modelos e tokens](MODELOS_E_CUSTO_DE_TOKENS.md) |

@@ -20,6 +20,29 @@
 
 ## Entrega final
 
+## Dublagem PT-BR R1047 — versão sem cartão
+
+A versão R1047 parte de `presenter-middle-1080.mp4` (full frame, sem cartão),
+aplica o patch `slide-patch-r1047.png`, a locução clonada
+`dub-r1047.pt-BR.wav` e as legendas `captions-r1047.pt-BR.srt/.ass`.
+
+| Item | Valor |
+|---|---|
+| Vídeo | `r1047-dub/out/quantum-ptbr-r1047.mp4` |
+| SHA-256 | `ff5fc72b3cb84c94300db0adabf5b763d900ea0ffbe789539522ac24180e60c3` |
+| Formato | 1920×1080, 30 fps, 600 frames, 20,00 s, H.264/AAC 48 kHz |
+| Voz | XTTS v2 local, `speed 1.0`, referência `presenter-ref.wav` |
+| ASR | large-v3, WER lexical **2,17%**, idioma `pt` (prob. 1,0) |
+| Loudness | **−16,10 LUFS**, true peak **−2,16 dBTP** |
+| Legenda | SRT + ASS, CPS máximo **16,77** |
+| Cartão | **ausente** |
+
+O roteiro novo explica a mudança em quatro blocos: acesso a 100+ qubits,
+saída dos menores, limite da simulação clássica e alcance dos chips maiores.
+O vídeo base tem lip sync anterior; **a nova locução não foi re-sincronizada**
+nesta rodada. A aprovação audiovisual, a revisão bilíngue e a publicação
+continuam pendentes. Evidência: `reports/r1047/QUANTUM-DUB-EVIDENCE.md`.
+
 ### Versão didática com voz (principal)
 
 | Arquivo | Formato | Duração | Tamanho | SHA-256 |

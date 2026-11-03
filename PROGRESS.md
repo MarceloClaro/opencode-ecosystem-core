@@ -36,6 +36,11 @@ não comprova o aceite integral.
   presets e raio de canto; **299 testes** locais + 1 opcional passam, incluindo
   7 renders FFmpeg sintéticos e 1 render real de 1080p. Sem aprovação perceptual
   ou científica; ver `reports/r1046/QUANTUM-REAL-EVIDENCE.md`.
+- **R1047** gera dublagem PT-BR do piloto R1026 com XTTS `speed 1.0`, slide
+  traduzido, SRT/ASS e sem cartão; WER ASR **2,17%**, **−16,10 LUFS** e 600
+  frames. O lip sync anterior não foi re-sincronizado; revisão humana pendente.
+  Ver `reports/r1047/QUANTUM-DUB-EVIDENCE.md`.
+- **303 testes** locais + 1 opcional passam; `doctor` 22/22.
 - Nenhuma publicação; upload bloqueado por direitos/credenciais.
 
 Ver [estado R1045](docs/ESTADO_ATUAL_CORE_R1045.md),
