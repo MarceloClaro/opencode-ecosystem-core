@@ -7,7 +7,7 @@ contagens das fontes locais; o histórico R414 preservado ao final não represen
 o último estado operacional do Core.
 
 <!-- core-state:start -->
-**329 agentes** · **18 MCPs** · **34 comandos** · **22 checks**
+**333 agentes** · **29 MCPs** · **35 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 
@@ -22,6 +22,21 @@ e [o contrato de interrupção](specs/SPEC-935-R825-execution-cancellation.md)
 explicam integrações e limites específicos. Recibos datados em `outputs/` e
 `docs/evidence/` são evidências de execuções determinadas; uma suíte interrompida
 não comprova o aceite integral.
+
+## Checkpoint R1045 — vídeo, dublagem e instalação
+
+- Editor universal (`video_editor`, `video_editor_mcp`): FFmpeg + Remotion +
+  plugins, render com recibo e aprovação.
+- Dublagem: 107 partes preparadas, 106 com OCR, 107 diarizadas; 1.943 unidades.
+- ASR large-v3 em lote; tradução/TTS/mix/montagem ainda não concluídos.
+- Catálogo de 46 ferramentas/modelos; skill `video-editor-universal`.
+- Instalador `./install.sh --check|--apply --yes`.
+- **245 testes** R1033–R1045 + instalador passando; `doctor` 22/22 estrutural.
+- Nenhuma publicação; upload bloqueado por direitos/credenciais.
+
+Ver [estado R1045](docs/ESTADO_ATUAL_CORE_R1045.md),
+[pipeline](docs/DUBBING_PIPELINE_R1041_R1045.md) e
+[instalador](installer/ONECLICK.md).
 
 ## Revisão documental R916
 

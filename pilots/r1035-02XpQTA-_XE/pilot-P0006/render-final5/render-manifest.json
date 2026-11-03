@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "part_id": "02XpQTA-_XE-P0006",
+  "status": "draft_rendered_pending_human_review",
+  "lipsync": false,
+  "method": "cleaned Demucs music stem + processed PT-BR dialogue + sidechain ducking",
+  "voice_gate": {
+    "status": "voice_assignment_valid_pending_native_and_audiovisual_review",
+    "registry_sha256": "d49c9ba6a8ff71d822e1dd49b6ed1c05fecfad1dd7ea7afac3205a87b594ec90",
+    "mapping_sha256": "bdfab40650c39a640867a5e51ed31ae5423af473be5636f336f9180050220b1c",
+    "characters": [
+      "char_cagla",
+      "char_male_a",
+      "char_mother",
+      "char_ruya"
+    ]
+  },
+  "stems": {
+    "music_clean": {
+      "path": "pilot-P0006/stems/music-clean.wav",
+      "sha256": "e7a446d90f20010561a148498a6028bbbddc1433a3b8dc8c26dfec5d8299bb0a"
+    },
+    "vocals_original": {
+      "path": "pilot-P0006/stems/vocals.wav",
+      "sha256": "664f82823652c268cf1042d81270709cbb48303fa8c8b5e5af755ff137fc8390"
+    },
+    "dialogue_raw": {
+      "path": "pilot-P0006/render-final5/dialogue-24k.wav",
+      "peak_before_gain": 28261,
+      "gain": 1.0,
+      "duration_seconds": 74.44,
+      "sha256": "7f64b1cef96038fbd93e01339161a6ca41107417873db00c2ccc62df6b617588"
+    },
+    "dialogue_processed": {
+      "path": "pilot-P0006/render-final5/dialogue-processed.wav",
+      "sha256": "547f9e74640acf94c16297ba9474a2610009a7de4d7b22c9e48a42b0d06300e2",
+      "probe": {
+        "duration": 74.44,
+        "video": null,
+        "audio": {
+          "codec": "pcm_s16le",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      }
+    },
+    "mix": {
+      "path": "pilot-P0006/render-final5/mix-48k.wav",
+      "sha256": "6da6e8da302e5d70520de4d05fe1639e3888b84b5a6e740b226444fb8a48a70e",
+      "probe": {
+        "duration": 74.44,
+        "video": null,
+        "audio": {
+          "codec": "pcm_s16le",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      },
+      "loudness": {
+        "integrated_lufs": -16.4,
+        "true_peak_dbfs": null
+      }
+    }
+  },
+  "outputs": {
+    "P0006-ptbr-final-soft.mp4": {
+      "sha256": "c6063ff75d2dfd534e238201c9726d659f5ee94d1b7342e8b8dbb9182fd7d906",
+      "bytes": 28722237,
+      "probe": {
+        "duration": 74.536016,
+        "video": {
+          "codec": "h264",
+          "width": 1280,
+          "height": 720,
+          "fps": "25/1",
+          "frames": 1861
+        },
+        "audio": {
+          "codec": "aac",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      },
+      "loudness": {
+        "integrated_lufs": -16.4,
+        "true_peak_dbfs": null
+      },
+      "states": {
+        "technical_qa": "pending",
+        "audiovisual_review": "pending",
+        "approval": "pending"
+      }
+    },
+    "P0006-ptbr-final-bar.mp4": {
+      "sha256": "9ca251949e1089f8041509e140bbc9ec539212299e8c9a25dbd187f4d69e0945",
+      "bytes": 15879074,
+      "probe": {
+        "duration": 74.44,
+        "video": {
+          "codec": "h264",
+          "width": 1280,
+          "height": 720,
+          "fps": "25/1",
+          "frames": 1861
+        },
+        "audio": {
+          "codec": "aac",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      },
+      "loudness": {
+        "integrated_lufs": -16.4,
+        "true_peak_dbfs": null
+      },
+      "states": {
+        "technical_qa": "pending",
+        "audiovisual_review": "pending",
+        "approval": "pending"
+      }
+    }
+  },
+  "limitations": [
+    "Demucs separation is an estimate; residual bleed may remain",
+    "EQ/denoise reduce stridency but cannot restore separation damage",
+    "turn grouping and grammar review are drafts; native review pending",
+    "no lip sync and no audiovisual approval",
+    "soft variant still shows original burned-in English subtitles",
+    "bar variant covers lower 180 px and burns PT-BR subtitles"
+  ]
+}

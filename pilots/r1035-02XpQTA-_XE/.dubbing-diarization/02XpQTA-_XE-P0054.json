@@ -1,0 +1,216 @@
+{
+  "schema_version": 1,
+  "version": "R1044-1",
+  "part_id": "02XpQTA-_XE-P0054",
+  "model": "nvidia/Nemotron-3-Diarization",
+  "source_sha256": "71478cbe0cb40c339ef18c3a80c787e46e97e11f55e365bd03298c2ed8cdd89b",
+  "key": "2a07c92dec7ebc8107335d68b8ceb55be33d02f0a7755d407dda68063e0eb960",
+  "segments": [
+    {
+      "Start": 0.58,
+      "End": 0.86,
+      "Speaker": 0
+    },
+    {
+      "Start": 2.03,
+      "End": 2.41,
+      "Speaker": 0
+    },
+    {
+      "Start": 32.64,
+      "End": 32.84,
+      "Speaker": 0
+    },
+    {
+      "Start": 32.96,
+      "End": 33.0,
+      "Speaker": 0
+    },
+    {
+      "Start": 33.04,
+      "End": 33.05,
+      "Speaker": 0
+    },
+    {
+      "Start": 33.12,
+      "End": 33.25,
+      "Speaker": 0
+    },
+    {
+      "Start": 38.36,
+      "End": 41.06,
+      "Speaker": 1
+    },
+    {
+      "Start": 49.6,
+      "End": 50.6,
+      "Speaker": 1
+    },
+    {
+      "Start": 50.84,
+      "End": 52.72,
+      "Speaker": 2
+    },
+    {
+      "Start": 52.69,
+      "End": 53.66,
+      "Speaker": 0
+    },
+    {
+      "Start": 54.24,
+      "End": 56.03,
+      "Speaker": 1
+    },
+    {
+      "Start": 61.92,
+      "End": 62.3,
+      "Speaker": 0
+    },
+    {
+      "Start": 62.71,
+      "End": 63.2,
+      "Speaker": 1
+    },
+    {
+      "Start": 63.43,
+      "End": 63.78,
+      "Speaker": 0
+    },
+    {
+      "Start": 66.73,
+      "End": 69.99,
+      "Speaker": 3
+    },
+    {
+      "Start": 70.23,
+      "End": 70.24,
+      "Speaker": 3
+    }
+  ],
+  "units": [
+    {
+      "id": "U01054",
+      "speaker": 1,
+      "coverage": 0.551282,
+      "margin": 0.551282,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U01055",
+      "speaker": 1,
+      "coverage": 1.0,
+      "margin": 1.0,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U01056",
+      "speaker": null,
+      "coverage": 0.0,
+      "margin": 0.0,
+      "blocked": true,
+      "reason": "no_overlap",
+      "verified": false
+    },
+    {
+      "id": "U01057",
+      "speaker": 1,
+      "coverage": 0.897727,
+      "margin": 0.897727,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U01058",
+      "speaker": 2,
+      "coverage": 0.855769,
+      "margin": 0.855769,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U01059",
+      "speaker": 2,
+      "coverage": 1.0,
+      "margin": 1.0,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U01060",
+      "speaker": 2,
+      "coverage": 0.916667,
+      "margin": 0.583333,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U01061",
+      "speaker": 0,
+      "coverage": 1.0,
+      "margin": 1.0,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U01062",
+      "speaker": 1,
+      "coverage": 0.87931,
+      "margin": 0.87931,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U01063",
+      "speaker": 0,
+      "coverage": 0.288462,
+      "margin": 0.288462,
+      "blocked": true,
+      "reason": "low_coverage",
+      "verified": false
+    },
+    {
+      "id": "U01064",
+      "speaker": 1,
+      "coverage": 0.666667,
+      "margin": 0.666667,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U01065",
+      "speaker": 1,
+      "coverage": 1.0,
+      "margin": 1.0,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U01066",
+      "speaker": null,
+      "coverage": 0.0,
+      "margin": 0.0,
+      "blocked": true,
+      "reason": "no_overlap",
+      "verified": false
+    }
+  ],
+  "status": "diarized_pending_review",
+  "verified": false,
+  "limitations": [
+    "speaker indices are local to this part",
+    "identity is not inferred from speaker index",
+    "overlap/ambiguity blocks TTS assignment"
+  ]
+}

@@ -1,0 +1,11 @@
+# Perfil CPU independente do Python do Core; resolvido para hashes antes de usar.
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.14.1+cpu
+transformers==5.20.1
+peft>=0.18,<1
+datasets>=4.3,<6
+accelerate>=1.12,<2
+safetensors>=0.4
+pymupdf>=1.24
+numpy>=1.24,<3
+jsonschema>=4,<5

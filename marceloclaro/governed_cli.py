@@ -69,4 +69,7 @@ def run_governed_cli(kind, argv, orchestrator_factory):
         print(json.dumps({"status": "blocked", "reason": str(exc), "executed": False}, ensure_ascii=False))
         return 1
     print(json.dumps(result, ensure_ascii=False, indent=2))
+    if (kind == "agentes" and config["operation"] in {"create", "register", "activate"}
+            and result.get("status") == "legacy_preserved"):
+        return 1
     return 1 if result.get("status") in {"blocked", "busy", "failed", "error", "invalid_request"} else 0

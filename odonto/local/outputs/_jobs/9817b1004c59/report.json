@@ -1,0 +1,85 @@
+{
+  "claim_level": "comparacao_empirica",
+  "n_rows": 2504,
+  "n_groups": 2504,
+  "events": 1050,
+  "baseline_prevalence": 0.4193290734824281,
+  "target": "Y",
+  "group": null,
+  "n_folds": 5,
+  "seed": 0,
+  "models": {
+    "logreg": {
+      "auroc": 1.0,
+      "auprc": 1.0,
+      "brier": 0.0002352366580585751,
+      "sensitivity": 1.0,
+      "specificity": 1.0,
+      "n": 2504,
+      "events": 1050,
+      "prevalence": 0.4193290734824281,
+      "threshold": 0.5,
+      "baseline": 0.4193290734824281,
+      "flag": "OK"
+    },
+    "histgb": {
+      "auroc": 1.0,
+      "auprc": 1.0,
+      "brier": 2.0436630177260156e-12,
+      "sensitivity": 1.0,
+      "specificity": 1.0,
+      "n": 2504,
+      "events": 1050,
+      "prevalence": 0.4193290734824281,
+      "threshold": 0.5,
+      "baseline": 0.4193290734824281,
+      "flag": "OK"
+    },
+    "rf": {
+      "auroc": 1.0,
+      "auprc": 1.0,
+      "brier": 0.17868709772534908,
+      "sensitivity": 0.5552380952380952,
+      "specificity": 1.0,
+      "n": 2504,
+      "events": 1050,
+      "prevalence": 0.4193290734824281,
+      "threshold": 0.5,
+      "baseline": 0.4193290734824281,
+      "flag": "OK"
+    },
+    "ensemble": {
+      "auroc": 1.0,
+      "auprc": 1.0,
+      "brier": 0.020939818732384523,
+      "sensitivity": 1.0,
+      "specificity": 1.0,
+      "n": 2504,
+      "events": 1050,
+      "prevalence": 0.4193290734824281,
+      "threshold": 0.5,
+      "baseline": 0.4193290734824281,
+      "flag": "OK",
+      "threshold_opt": 0.7882402078549443,
+      "sensitivity_opt": 1.0,
+      "specificity_opt": 1.0,
+      "ci95": {
+        "auroc": {
+          "lo": 0.9999999999999999,
+          "hi": 1.0,
+          "point": 1.0
+        },
+        "auprc": {
+          "lo": 0.9999999999999999,
+          "hi": 1.0,
+          "point": 1.0
+        },
+        "brier": {
+          "lo": 0.020609768444872667,
+          "hi": 0.021269980682352325,
+          "point": 0.02095050814103736
+        }
+      }
+    }
+  }
+}

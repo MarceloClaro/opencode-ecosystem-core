@@ -1,0 +1,58 @@
+FFFFFFFFFFFFFFFFFF                                                       [100%]
+=================================== FAILURES ===================================
+E   ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+E   ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+E   ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+E   ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+E   ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+E   ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+E   ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+E   ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+E   ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+E   ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+E   ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+E   ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+E   ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+E   ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+E   ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+E   ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+E   ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+E   ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError: No module named 'integrations.dubbing_batch'
+=========================== short test summary info ============================
+FAILED tests/test_r1041_dubbing_batch.py::test_ownership_exclusive_and_crossing_flag
+FAILED tests/test_r1041_dubbing_batch.py::test_no_asr_never_means_silent_approved
+FAILED tests/test_r1041_dubbing_batch.py::test_reject_invalid_plan[gap] - Mod...
+FAILED tests/test_r1041_dubbing_batch.py::test_reject_invalid_plan[duplicate]
+FAILED tests/test_r1041_dubbing_batch.py::test_reject_invalid_plan[traversal]
+FAILED tests/test_r1041_dubbing_batch.py::test_reject_invalid_plan[nan] - Mod...
+FAILED tests/test_r1041_dubbing_batch.py::test_old_false_accepts_are_blocked[Inacredit\xe1vel.-Inacredit\xe1vel, ponto.]
+FAILED tests/test_r1041_dubbing_batch.py::test_old_false_accepts_are_blocked[N\xe3o fa\xe7a isso.-N\xe3o fa\xe7a isso, puto.]
+FAILED tests/test_r1041_dubbing_batch.py::test_old_false_accepts_are_blocked[N\xe3o se estresse tanto, fique calma.-N\xe3o se estresse tanto.]
+FAILED tests/test_r1041_dubbing_batch.py::test_old_false_accepts_are_blocked[A gente se diverte.-A gente se divertiu.]
+FAILED tests/test_r1041_dubbing_batch.py::test_old_false_accepts_are_blocked[Alaz?-Alas!]
+FAILED tests/test_r1041_dubbing_batch.py::test_old_false_accepts_are_blocked[Bem.-]
+FAILED tests/test_r1041_dubbing_batch.py::test_exact_asr_is_not_perceptual_approval
+FAILED tests/test_r1041_dubbing_batch.py::test_duration_has_no_editorial_tolerance
+FAILED tests/test_r1041_dubbing_batch.py::test_missing_review_blocks_tts_and_assembly
+FAILED tests/test_r1041_dubbing_batch.py::test_cache_key_changes_with_text_reference_and_version
+FAILED tests/test_r1041_dubbing_batch.py::test_prepare_resume_and_tamper - Mo...
+FAILED tests/test_r1041_dubbing_batch.py::test_path_escape_and_symlink_rejected
+18 failed in 0.47s

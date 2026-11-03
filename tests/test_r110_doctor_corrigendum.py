@@ -76,7 +76,17 @@ class TestRunDoctor:
         from marceloclaro.doctor import run_doctor
         report = run_doctor()
         evo_check = next(c for c in report["checks"] if c["name"] == "evolution_registry")
-        assert evo_check["status"] == "pass"
+        from evolution.cycles import EvolutionRegistry
+        registry = EvolutionRegistry()
+        with open(registry.state_path, encoding="utf-8") as stream:
+            raw = json.load(stream)
+        # Legados retidos não são modelos válidos nem perda silenciosa. A
+        # advertência só é aceita com igualdade integral da fotografia bruta.
+        assert registry._raw_document == raw
+        expected = "warn" if len(registry.cycles) < len(raw["cycles"]) else "pass"
+        assert evo_check["status"] == expected
+        if expected == "warn":
+            assert "não modelada" in evo_check["detail"]
 
 
 # ── 2. Checks individuais (cenarios controlados) ─────────────────────
@@ -101,7 +111,7 @@ class TestIndividualChecks:
         monkeypatch.setattr(doctor_mod, "REPO_ROOT", str(tmp_path))
 
         class RegistryThatLostOneCycle:
-            def __init__(self):
+            def __init__(self, state_path=None):
                 self.cycles = [object()]  # deveria ter 2, carregou so 1
 
         monkeypatch.setattr(cycles_mod, "EvolutionRegistry", RegistryThatLostOneCycle)

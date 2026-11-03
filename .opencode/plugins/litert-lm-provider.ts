@@ -1,25 +1,34 @@
 /**
- * LiteRT-LM Provider Plugin for OpenCode
- * ========================================
- * Registers "litert-lm" as a native LLM provider via the plugin hook `provider`.
+ * LiteRT-LM Provider Plugin for OpenCode V2 (SPEC-935-R210 / SPEC-935-R1004)
+ * =========================================================================
+ * Registra o provider "litert-lm" (OpenAI-compatível, on-device) e dispara o
+ * bootstrap do supervisor local.
  *
- * Makes `opencode run --model "litert-lm/litert-community/gemma-4-E2B-it-litert-lm" ...`
- * work by telling OpenCode that "litert-lm" is a valid provider prefix and declaring
- * which models are available under it.
+ * API V2: o host exige `export default { id, setup }` e registra providers por
+ * `ctx.provider.transform`. O mapa `provider` da V1 nunca é executado pela V2.
+ *
+ * O registro é IDEMPOTENTE: se `opencode.json` já declarar `provider.litert-lm`
+ * (com modelos), o transform apenas garante `activation: "enabled"` e não
+ * duplica provider nem modelos.
+ *
+ * Modelos obtidos do servidor real via GET /v1/models (2026-07-22, porta 9379).
+ * Modelos >2B podem levar >60s na primeira inferência (carregamento sob demanda).
  *
  * @packageDocumentation
  * @module litert-lm-provider
  */
 
-import type { Plugin } from "@opencode-ai/plugin";
+import { Model, Plugin, Provider } from "@opencode/plugin";
 import { spawn } from "node:child_process";
 import { join } from "node:path";
 
 const SUPERVISOR_RELATIVE_PATH = "integrations/litert_lm_supervisor.py";
+const PROVIDER_ID = "litert-lm";
+const BASE_URL = "http://localhost:9379/v1";
+const MODEL_LIMIT = { context: 20480, output: 2048 };
 
 /** Solicita o bootstrap canônico sem aguardar cold start ou readiness. */
-function requestLiteRTBootstrap(worktree: string, directory: string): void {
-  const workspace = worktree || directory;
+function requestLiteRTBootstrap(workspace: string): void {
   const supervisorPath = join(workspace, SUPERVISOR_RELATIVE_PATH);
   try {
     const request = spawn(
@@ -39,125 +48,61 @@ function requestLiteRTBootstrap(worktree: string, directory: string): void {
 }
 
 /**
- * LiteRT-LM Provider Plugin
- *
- * Hooks into OpenCode's provider system to register the "litert-lm" provider
- * with its supported on-device GGUF models (Gemma 4, Gemma 3, Llama 4, Phi-4, Qwen 2.5).
- *
- * The connection details (baseURL, apiKey) come from opencode.json:
- * ```json
- * {
- *   "provider": {
- *     "litert-lm": {
- *       "options": {
- *         "apiKey": "sk-no-key-required",
- *         "baseURL": "http://localhost:9379/v1"
- *       }
- *     }
- *   }
- * }
- * ```
- *
- * The provider is OpenAI-compatible, so OpenCode routes requests to
- * `{baseURL}/chat/completions` using the `@ai-sdk/openai-compatible` adapter.
+ * Modelos disponíveis (validação empírica):
+ *   gemma-4-E4B (4B expert), gemma-4-12B (12B),
+ *   gemma-4-E2B (2B expert — responde), Qwen3-0.6B (0.6b).
  */
-export const LiteRTProvider: Plugin = async ({ directory, worktree }) => {
-  requestLiteRTBootstrap(worktree, directory);
+const MODEL_NAMES: ReadonlyArray<readonly [string, string]> = [
+  ["litert-community/gemma-4-E4B-it-litert-lm", "Gemma 4 4B Expert (LiteRT-LM on-device)"],
+  ["litert-community/gemma-4-12B-it-litert-lm", "Gemma 4 12B (LiteRT-LM on-device)"],
+  ["litert-community/gemma-4-E2B-it-litert-lm", "Gemma 4 2B Expert (LiteRT-LM on-device)"],
+  ["litert-community/Qwen3-0.6B", "Qwen3 0.6B (LiteRT-LM on-device)"],
+];
+
+function defineModel(id: string, name: string): Model.Info {
   return {
-    provider: {
-      id: "litert-lm",
-
-      /**
-       * Declares all models available under the litert-lm provider.
-       *
-       * The `provider` parameter contains the merged provider configuration
-       * from opencode.json (including options.baseURL and options.apiKey).
-       *
-       * @param provider - Provider configuration from opencode.json
-       * @param ctx - Context with optional auth info
-       * @returns Record of model ID → Model definition
-       */
-      /**
-       * Model definitions obtidas do servidor real via GET /v1/models.
-       * Atualizado em 2026-07-22 conforme servidor rodando em :9379.
-       *
-       * Modelos disponíveis (validação empírica):
-       *   ✅ litert-community/gemma-4-E4B-it-litert-lm  (4B expert)
-       *   ✅ litert-community/gemma-4-12B-it-litert-lm  (12B)
-       *   ✅ litert-community/gemma-4-E2B-it-litert-lm  (2B expert — testado: responde "FUNCIONOU")
-       *   ✅ litert-community/Qwen3-0.6B                (0.6B)
-       *
-       * Nota: modelos >2B podem levar >60s para primeira inferência
-       * (carregamento sob demanda do LiteRT Runtime).
-       */
-      models: async (_provider, _ctx) => ({
-        "litert-community/gemma-4-E4B-it-litert-lm": {
-          id: "litert-community/gemma-4-E4B-it-litert-lm",
-          providerID: "litert-lm",
-          api: { id: "litert-lm", url: "", npm: "@ai-sdk/openai-compatible" },
-          name: "Gemma 4 4B Expert (LiteRT-LM on-device)",
-          capabilities: {
-            temperature: true, reasoning: false, attachment: false, toolcall: false,
-            input: { text: true, audio: false, image: false, video: false, pdf: false },
-            output: { text: true, audio: false, image: false, video: false, pdf: false },
-            interleaved: false,
-          },
-          cost: { input: 0, output: 0, cache: { read: 0, write: 0 } },
-          limit: { context: 20480, output: 2048 },
-          status: "active", options: {}, headers: {}, release_date: "",
-        },
-
-        "litert-community/gemma-4-12B-it-litert-lm": {
-          id: "litert-community/gemma-4-12B-it-litert-lm",
-          providerID: "litert-lm",
-          api: { id: "litert-lm", url: "", npm: "@ai-sdk/openai-compatible" },
-          name: "Gemma 4 12B (LiteRT-LM on-device)",
-          capabilities: {
-            temperature: true, reasoning: false, attachment: false, toolcall: false,
-            input: { text: true, audio: false, image: false, video: false, pdf: false },
-            output: { text: true, audio: false, image: false, video: false, pdf: false },
-            interleaved: false,
-          },
-          cost: { input: 0, output: 0, cache: { read: 0, write: 0 } },
-          limit: { context: 20480, output: 2048 },
-          status: "active", options: {}, headers: {}, release_date: "",
-        },
-
-        "litert-community/gemma-4-E2B-it-litert-lm": {
-          id: "litert-community/gemma-4-E2B-it-litert-lm",
-          providerID: "litert-lm",
-          api: { id: "litert-lm", url: "", npm: "@ai-sdk/openai-compatible" },
-          name: "Gemma 4 2B Expert (LiteRT-LM on-device)",
-          capabilities: {
-            temperature: true, reasoning: false, attachment: false, toolcall: false,
-            input: { text: true, audio: false, image: false, video: false, pdf: false },
-            output: { text: true, audio: false, image: false, video: false, pdf: false },
-            interleaved: false,
-          },
-          cost: { input: 0, output: 0, cache: { read: 0, write: 0 } },
-          limit: { context: 20480, output: 2048 },
-          status: "active", options: {}, headers: {}, release_date: "",
-        },
-
-        "litert-community/Qwen3-0.6B": {
-          id: "litert-community/Qwen3-0.6B",
-          providerID: "litert-lm",
-          api: { id: "litert-lm", url: "", npm: "@ai-sdk/openai-compatible" },
-          name: "Qwen3 0.6B (LiteRT-LM on-device)",
-          capabilities: {
-            temperature: true, reasoning: false, attachment: false, toolcall: false,
-            input: { text: true, audio: false, image: false, video: false, pdf: false },
-            output: { text: true, audio: false, image: false, video: false, pdf: false },
-            interleaved: false,
-          },
-          cost: { input: 0, output: 0, cache: { read: 0, write: 0 } },
-          limit: { context: 20480, output: 2048 },
-          status: "active", options: {}, headers: {}, release_date: "",
-        },
-      }),
-    },
+    ...Model.Info.default(PROVIDER_ID as Provider.ID, id as Model.ID),
+    name,
+    capabilities: { tools: false, input: ["text"], output: ["text"] },
+    limit: { context: MODEL_LIMIT.context, output: MODEL_LIMIT.output },
+    cost: [],
+    status: "active",
+    enabled: true,
   };
-};
+}
 
-// Default export also supported (OpenCode auto-discovers both)
-export default LiteRTProvider;
+const MODELS: Model.Info[] = MODEL_NAMES.map(([id, name]) => defineModel(id, name));
+
+export default Plugin.define({
+  id: "litert-lm",
+  async setup(ctx) {
+    const workspace = ctx.location.project.canonical ?? ctx.location.directory;
+    requestLiteRTBootstrap(workspace);
+
+    await ctx.provider.transform((editor) => {
+      const record = editor.get(PROVIDER_ID);
+
+      if (!record) {
+        editor.add({
+          info: {
+            ...Provider.Info.empty(PROVIDER_ID as Provider.ID),
+            name: "LiteRT-LM (on-device)",
+            activation: "enabled",
+            package: "@opencode/ai/providers/openai-compatible",
+            settings: { baseURL: BASE_URL, apiKey: "sk-no-key-required" },
+          },
+          models: MODELS,
+        });
+        return;
+      }
+
+      // Provider já declarado em opencode.json: não duplicar inventário.
+      if (record.models.size === 0) {
+        editor.models.set(PROVIDER_ID, MODELS);
+      }
+      editor.update(PROVIDER_ID, (provider) => {
+        provider.activation = "enabled";
+      });
+    });
+  },
+});

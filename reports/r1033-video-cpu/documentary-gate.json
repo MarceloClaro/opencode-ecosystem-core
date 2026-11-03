@@ -1,0 +1,197 @@
+{
+  "spec": {
+    "spec_id": "SPEC-935-R1033",
+    "verified": true,
+    "status": "criteria_passed",
+    "spec_status": "red",
+    "criteria_results": [
+      {
+        "criterion_id": "fontes",
+        "description": "recibos remotos presentes e hashes correspondentes.",
+        "passed": true
+      },
+      {
+        "criterion_id": "licencas",
+        "description": "cada candidato separa código, modelo e benchmark não realizado.",
+        "passed": true
+      },
+      {
+        "criterion_id": "escopo",
+        "description": "não execução audiovisual, playlist parcial e consentimento pendente.",
+        "passed": true
+      },
+      {
+        "criterion_id": "estrategia",
+        "description": "etapas essenciais e revisão humana explícitas no texto.",
+        "passed": true
+      },
+      {
+        "criterion_id": "inventario",
+        "description": "referências resolvíveis e materiais locais inalterados.",
+        "passed": true
+      },
+      {
+        "criterion_id": "revisao",
+        "description": "achados da revisão textual reconciliados, sem transformar compatibilidade presumida em runtime aprovado.",
+        "passed": true
+      }
+    ],
+    "passed_count": 6,
+    "total_count": 6,
+    "runtime_evidence_required": true,
+    "runtime_evidence_valid": true,
+    "evidence_contract_mode": "criterion-runtime-v1",
+    "evidence_contract_valid": true,
+    "evidence_contract_error": null,
+    "evidence_contract_sha256": "419097fac208963bf0ae344f2c3cb523e95cf339e2d4b6122860adb73326da2d",
+    "criterion_runtime_records_required": true,
+    "red_history_required": false,
+    "red_history_valid": false,
+    "red_history": {
+      "verified": false,
+      "reason_codes": [
+        "red_history_missing"
+      ]
+    },
+    "verification_scope": "criteria_only",
+    "trusted_test_evidence": {
+      "spec_id": "SPEC-935-R1033",
+      "test_file": "tests/test_r1033_video_cpu_research.py",
+      "executed": true,
+      "passed": true,
+      "returncode": 0,
+      "summary": "6/6 nodeid(s) de critério aprovados.",
+      "error": null,
+      "scope": "local_runtime",
+      "external_validation": false,
+      "tdd_history_receipt_id": null,
+      "contract_sha256": "419097fac208963bf0ae344f2c3cb523e95cf339e2d4b6122860adb73326da2d",
+      "criterion_records": [
+        {
+          "spec_id": "SPEC-935-R1033",
+          "test_file": "tests/test_r1033_video_cpu_research.py",
+          "criterion_id": "fontes",
+          "test_target": "tests/test_r1033_video_cpu_research.py::test_sources_have_saved_receipts_and_hashes",
+          "executed": true,
+          "passed": true,
+          "returncode": 0,
+          "summary": "1 passed in 0.18s",
+          "error": null,
+          "passed_count": 1,
+          "failed_count": 0,
+          "skipped_count": 0,
+          "xfailed_count": 0,
+          "xpassed_count": 0,
+          "error_count": 0,
+          "collected_count": 1,
+          "contract_sha256": "419097fac208963bf0ae344f2c3cb523e95cf339e2d4b6122860adb73326da2d"
+        },
+        {
+          "spec_id": "SPEC-935-R1033",
+          "test_file": "tests/test_r1033_video_cpu_research.py",
+          "criterion_id": "licencas",
+          "test_target": "tests/test_r1033_video_cpu_research.py::test_candidate_limits_and_separate_licenses",
+          "executed": true,
+          "passed": true,
+          "returncode": 0,
+          "summary": "1 passed in 0.16s",
+          "error": null,
+          "passed_count": 1,
+          "failed_count": 0,
+          "skipped_count": 0,
+          "xfailed_count": 0,
+          "xpassed_count": 0,
+          "error_count": 0,
+          "collected_count": 1,
+          "contract_sha256": "419097fac208963bf0ae344f2c3cb523e95cf339e2d4b6122860adb73326da2d"
+        },
+        {
+          "spec_id": "SPEC-935-R1033",
+          "test_file": "tests/test_r1033_video_cpu_research.py",
+          "criterion_id": "escopo",
+          "test_target": "tests/test_r1033_video_cpu_research.py::test_scope_and_playlist_uncertainties",
+          "executed": true,
+          "passed": true,
+          "returncode": 0,
+          "summary": "1 passed in 0.16s",
+          "error": null,
+          "passed_count": 1,
+          "failed_count": 0,
+          "skipped_count": 0,
+          "xfailed_count": 0,
+          "xpassed_count": 0,
+          "error_count": 0,
+          "collected_count": 1,
+          "contract_sha256": "419097fac208963bf0ae344f2c3cb523e95cf339e2d4b6122860adb73326da2d"
+        },
+        {
+          "spec_id": "SPEC-935-R1033",
+          "test_file": "tests/test_r1033_video_cpu_research.py",
+          "criterion_id": "estrategia",
+          "test_target": "tests/test_r1033_video_cpu_research.py::test_strategy_addresses_required_pipeline_and_human_gate",
+          "executed": true,
+          "passed": true,
+          "returncode": 0,
+          "summary": "1 passed in 0.16s",
+          "error": null,
+          "passed_count": 1,
+          "failed_count": 0,
+          "skipped_count": 0,
+          "xfailed_count": 0,
+          "xpassed_count": 0,
+          "error_count": 0,
+          "collected_count": 1,
+          "contract_sha256": "419097fac208963bf0ae344f2c3cb523e95cf339e2d4b6122860adb73326da2d"
+        },
+        {
+          "spec_id": "SPEC-935-R1033",
+          "test_file": "tests/test_r1033_video_cpu_research.py",
+          "criterion_id": "inventario",
+          "test_target": "tests/test_r1033_video_cpu_research.py::test_candidate_sources_exist_and_local_files_unchanged",
+          "executed": true,
+          "passed": true,
+          "returncode": 0,
+          "summary": "1 passed in 0.21s",
+          "error": null,
+          "passed_count": 1,
+          "failed_count": 0,
+          "skipped_count": 0,
+          "xfailed_count": 0,
+          "xpassed_count": 0,
+          "error_count": 0,
+          "collected_count": 1,
+          "contract_sha256": "419097fac208963bf0ae344f2c3cb523e95cf339e2d4b6122860adb73326da2d"
+        },
+        {
+          "spec_id": "SPEC-935-R1033",
+          "test_file": "tests/test_r1033_video_cpu_research.py",
+          "criterion_id": "revisao",
+          "test_target": "tests/test_r1033_video_cpu_research.py::test_review_findings_are_reconciled_without_runtime_claims",
+          "executed": true,
+          "passed": true,
+          "returncode": 0,
+          "summary": "1 passed in 0.16s",
+          "error": null,
+          "passed_count": 1,
+          "failed_count": 0,
+          "skipped_count": 0,
+          "xfailed_count": 0,
+          "xpassed_count": 0,
+          "error_count": 0,
+          "collected_count": 1,
+          "contract_sha256": "419097fac208963bf0ae344f2c3cb523e95cf339e2d4b6122860adb73326da2d"
+        }
+      ]
+    }
+  },
+  "behavioral": {
+    "action_id": "r1033.documentary_research",
+    "allowed": true,
+    "trust_score": 0.5,
+    "threshold": 0.3,
+    "reason": "Trust 50% moderate. Allowed (threshold=30%) [SHADOW MODE: limited trust]",
+    "risk_level": "moderate"
+  },
+  "software_delivery_gate_passed": false,
+  "scope": "criteria_only; strict TDD history timeout is not bypassed or claimed passed"
+}

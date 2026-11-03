@@ -1,0 +1,58 @@
+FFFFFFFFF                                                                [100%]
+=================================== FAILURES ===================================
+E   AssertionError: ingestão local ainda ausente
+    assert False
+     +  where False = is_file()
+     +    where is_file = PosixPath('/home/marceloclaro/opencode-ecosystem-core/integrations/video_local_ingest.py').is_file
+/home/marceloclaro/opencode-ecosystem-core/tests/test_r1036_video_local_ingest.py:17: AssertionError: ingestão local ainda ausente
+E   AssertionError: ingestão local ainda ausente
+    assert False
+     +  where False = is_file()
+     +    where is_file = PosixPath('/home/marceloclaro/opencode-ecosystem-core/integrations/video_local_ingest.py').is_file
+/home/marceloclaro/opencode-ecosystem-core/tests/test_r1036_video_local_ingest.py:17: AssertionError: ingestão local ainda ausente
+E   AssertionError: ingestão local ainda ausente
+    assert False
+     +  where False = is_file()
+     +    where is_file = PosixPath('/home/marceloclaro/opencode-ecosystem-core/integrations/video_local_ingest.py').is_file
+/home/marceloclaro/opencode-ecosystem-core/tests/test_r1036_video_local_ingest.py:17: AssertionError: ingestão local ainda ausente
+E   AssertionError: ingestão local ainda ausente
+    assert False
+     +  where False = is_file()
+     +    where is_file = PosixPath('/home/marceloclaro/opencode-ecosystem-core/integrations/video_local_ingest.py').is_file
+/home/marceloclaro/opencode-ecosystem-core/tests/test_r1036_video_local_ingest.py:17: AssertionError: ingestão local ainda ausente
+E   AssertionError: ingestão local ainda ausente
+    assert False
+     +  where False = is_file()
+     +    where is_file = PosixPath('/home/marceloclaro/opencode-ecosystem-core/integrations/video_local_ingest.py').is_file
+/home/marceloclaro/opencode-ecosystem-core/tests/test_r1036_video_local_ingest.py:17: AssertionError: ingestão local ainda ausente
+E   AssertionError: ingestão local ainda ausente
+    assert False
+     +  where False = is_file()
+     +    where is_file = PosixPath('/home/marceloclaro/opencode-ecosystem-core/integrations/video_local_ingest.py').is_file
+/home/marceloclaro/opencode-ecosystem-core/tests/test_r1036_video_local_ingest.py:17: AssertionError: ingestão local ainda ausente
+E   AssertionError: ingestão local ainda ausente
+    assert False
+     +  where False = is_file()
+     +    where is_file = PosixPath('/home/marceloclaro/opencode-ecosystem-core/integrations/video_local_ingest.py').is_file
+/home/marceloclaro/opencode-ecosystem-core/tests/test_r1036_video_local_ingest.py:17: AssertionError: ingestão local ainda ausente
+E   AssertionError: ingestão local ainda ausente
+    assert False
+     +  where False = is_file()
+     +    where is_file = PosixPath('/home/marceloclaro/opencode-ecosystem-core/integrations/video_local_ingest.py').is_file
+/home/marceloclaro/opencode-ecosystem-core/tests/test_r1036_video_local_ingest.py:17: AssertionError: ingestão local ainda ausente
+E   AssertionError: ingestão local ainda ausente
+    assert False
+     +  where False = is_file()
+     +    where is_file = PosixPath('/home/marceloclaro/opencode-ecosystem-core/integrations/video_local_ingest.py').is_file
+/home/marceloclaro/opencode-ecosystem-core/tests/test_r1036_video_local_ingest.py:17: AssertionError: ingestão local ainda ausente
+=========================== short test summary info ============================
+FAILED tests/test_r1036_video_local_ingest.py::test_probe_cfr_fixture - Asser...
+FAILED tests/test_r1036_video_local_ingest.py::test_probe_counts_when_container_omits_frames
+FAILED tests/test_r1036_video_local_ingest.py::test_probe_rejects_missing_and_nonmedia
+FAILED tests/test_r1036_video_local_ingest.py::test_plan_from_inspection - As...
+FAILED tests/test_r1036_video_local_ingest.py::test_vfr_or_unverified_is_blocked
+FAILED tests/test_r1036_video_local_ingest.py::test_extract_parts_exact_and_manifest
+FAILED tests/test_r1036_video_local_ingest.py::test_extract_single_part - Ass...
+FAILED tests/test_r1036_video_local_ingest.py::test_extract_rejects_changed_source_and_bad_plan
+FAILED tests/test_r1036_video_local_ingest.py::test_verify_manifest_detects_modified_artifact
+9 failed in 0.57s

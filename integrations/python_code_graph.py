@@ -114,8 +114,9 @@ class _Declarations(ast.NodeVisitor):
             expressions += list(node.bases) + [keyword.value for keyword in node.keywords]
         else:
             expressions += list(node.args.defaults) + [item for item in node.args.kw_defaults if item is not None]
-            expressions += [arg.annotation for arg in (*node.args.posonlyargs, *node.args.args, *node.args.kwonlyargs)
-                            if arg.annotation is not None]
+            expressions += [arg.annotation for arg in (*node.args.posonlyargs, *node.args.args,
+                            *node.args.kwonlyargs, node.args.vararg, node.args.kwarg)
+                            if arg is not None and arg.annotation is not None]
             if node.returns is not None:
                 expressions.append(node.returns)
         self.unit["declaration_expressions"][id(node)] = expressions
@@ -485,7 +486,7 @@ class _Graph:
                     if selector in {symbol["name"], symbol["qualified_name"],
                                     symbol["module"] + "." + symbol["qualified_name"]}]
         if len(rows) > 1:
-            return rows[:20], "ambiguous_symbol"
+            return rows, "ambiguous_symbol"
         return rows, "completed" if rows else "symbol_not_found"
 
     def query(self, tool, arguments):
@@ -509,10 +510,16 @@ class _Graph:
         if not self.units:
             base["status"] = ("syntax_error_target" if self.parse_errors else
                               "unsupported_language" if base["coverage"]["non_python_files"] else "empty_python_corpus")
+            self._bound(base)
             return base
         rows, status = self.select(selector)
         if status != "completed":
-            base.update(status=status, candidates=rows)
+            base.update(status=status, candidates=rows[:20], candidate_count=len(rows))
+            if len(rows) > 20:
+                base["truncation_reasons"].append("candidate_sample_limit")
+                base["truncated"] = True
+            self._bound(base)
+            base["candidate_sample_count"] = len(base.get("candidates", []))
             return base
         root = rows[0]["symbol_id"]
         selected, facts, cycles, inspected = {root}, [], [], set()
@@ -591,15 +598,21 @@ class _Graph:
     def _bound(base):
         # Every removed endpoint also removes its edges/usages: a truncated
         # presentation must not invent a complete or dangling graph.
-        while len(json.dumps(base, ensure_ascii=True).encode()) > MAX_RESPONSE_BYTES:
+        # Reserve room for the final coverage/sample counters added by query().
+        budget = MAX_RESPONSE_BYTES - 1024
+        if len(json.dumps(base, ensure_ascii=True).encode()) > budget:
+            base.update(truncated=True, coverage_complete=False)
+        while len(json.dumps(base, ensure_ascii=True).encode()) > budget:
             base["truncation_reasons"] = list(set(base["truncation_reasons"]) | {"response_byte_limit"})
+            before = len(json.dumps(base, ensure_ascii=True).encode())
             if len(base["unresolved"]) > 10:
                 base["unresolved"] = base["unresolved"][:len(base["unresolved"]) // 2]
             elif len(base["symbols"]) > 1:
                 base["symbols"] = base["symbols"][:max(1, len(base["symbols"]) // 2)]
             else:
-                for key in ("edges", "usages", "unresolved", "cycles"):
-                    base[key] = base[key][:len(base[key]) // 2]
+                for key in ("edges", "usages", "unresolved", "cycles", "parse_errors", "candidates", "limitations"):
+                    if key in base:
+                        base[key] = base[key][:len(base[key]) // 2]
             ids = {row["symbol_id"] for row in base["symbols"]}
             base["edges"] = [row for row in base["edges"] if row["source_id"] in ids and row["target_id"] in ids]
             base["usages"] = [row for row in base["usages"] if row["source_id"] in ids and row["target_id"] in ids]
@@ -608,6 +621,16 @@ class _Graph:
             if "affected_symbol_ids" in base:
                 base["affected_symbol_ids"] = sorted(ids - {base["target_symbol_id"]})
                 base["affected_count"] = len(base["affected_symbol_ids"])
+            if len(json.dumps(base, ensure_ascii=True).encode()) >= before:
+                # A single symbol or immutable metadata can itself exceed the
+                # budget. Return an explicit refusal instead of looping forever.
+                keep = {key: base[key] for key in ("backend", "schema_version", "static_only", "tool", "scope", "limits", "coverage", "parse_error_count", "unresolved_scope_count", "candidate_count") if key in base}
+                base.clear()
+                base.update(keep, ok=False, status="response_too_large", coverage_complete=False,
+                            symbols=[], edges=[], usages=[], cycles=[], unresolved=[], parse_errors=[],
+                            limitations=["Resposta excede o orçamento; grafo omitido, sem alegação de completude."],
+                            truncated=True, truncation_reasons=["response_byte_limit"], depth_limited=False)
+                break
         base["truncation_reasons"] = sorted(set(base["truncation_reasons"]))
 
 

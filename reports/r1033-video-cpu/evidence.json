@@ -1,0 +1,1098 @@
+{
+  "spec_id": "SPEC-935-R1033",
+  "scope": "documentary_research_only",
+  "actions": {
+    "installed": false,
+    "downloaded_playlist_media": false,
+    "cloned_new_voices": false,
+    "rendered": false,
+    "published": false
+  },
+  "hardware": {
+    "cpu": "Intel Core i5-1035G1",
+    "physical_cores": 4,
+    "logical_cpus": 8,
+    "wsl_memory_gib_rounded": 11,
+    "gpu_queried_or_used": false
+  },
+  "playlist": {
+    "id": "PL2dcm-6042EC788TGxgH3qWF7MjpoJIv9",
+    "title": "Wild Heart / Yabani, 1080p, English subtitles.",
+    "announced_entries": 153,
+    "enumerated_entries": 100,
+    "complete_inventory": false,
+    "total_duration_seconds": null,
+    "speaker_count": null,
+    "speaker_consent": "not_provided_for_playlist",
+    "rights_verified": false,
+    "source_ids": [
+      "playlist-page"
+    ]
+  },
+  "sources": [
+    {
+      "id": "manim-repo",
+      "url": "https://api.github.com/repos/ManimCommunity/manim",
+      "retrieved_at": "2026-11-02T17:32:01.433917+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/manim-repo.json",
+      "bytes": 6572,
+      "sha256": "064b7ec3f4ad20aa7d09a994fd807618b0eade67ade4582cee71ad2b6683c4be"
+    },
+    {
+      "id": "manim-readme-meta",
+      "url": "https://api.github.com/repos/ManimCommunity/manim/readme",
+      "retrieved_at": "2026-11-02T17:32:01.927783+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/manim-readme-meta.json",
+      "bytes": 12328,
+      "sha256": "3b9907f142647ca0d4074fd9d0115e22f595739d9cd42b35ac377f7ccff59436"
+    },
+    {
+      "id": "manim-readme",
+      "url": "https://raw.githubusercontent.com/ManimCommunity/manim/main/README.md",
+      "retrieved_at": "2026-11-02T17:32:02.184993+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/manim-readme.md",
+      "bytes": 8378,
+      "sha256": "41cac8aeb33a726c1b0a70d10233ee06d9cd73c6df0bace8145637d75c5fc283"
+    },
+    {
+      "id": "remotion-repo",
+      "url": "https://api.github.com/repos/remotion-dev/remotion",
+      "retrieved_at": "2026-11-02T17:32:01.453364+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/remotion-repo.json",
+      "bytes": 6488,
+      "sha256": "acb1100d0ceb177ab4e08a46e56a8d9bd819b86bccae36bd674285c0a44b2954"
+    },
+    {
+      "id": "remotion-readme-meta",
+      "url": "https://api.github.com/repos/remotion-dev/remotion/readme",
+      "retrieved_at": "2026-11-02T17:32:58.784955+00:00",
+      "http_status": 200,
+      "final_url": "https://api.github.com/repos/remotion-dev/remotion/readme",
+      "file": "sources/remotion-readme-meta.json",
+      "bytes": 7155,
+      "sha256": "96e999dd7168d80a9120f03e1e5b46568b8252ac030eecd2369d9f16740cb407"
+    },
+    {
+      "id": "faster-whisper-repo",
+      "url": "https://api.github.com/repos/SYSTRAN/faster-whisper",
+      "retrieved_at": "2026-11-02T17:32:01.436284+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/faster-whisper-repo.json",
+      "bytes": 6479,
+      "sha256": "3b1f4493dfdbb56f1c0faac1f3e8bcc74f28d733ef1d077455ea814af31fbabf"
+    },
+    {
+      "id": "faster-whisper-readme-meta",
+      "url": "https://api.github.com/repos/SYSTRAN/faster-whisper/readme",
+      "retrieved_at": "2026-11-02T17:32:01.954929+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/faster-whisper-readme-meta.json",
+      "bytes": 21817,
+      "sha256": "0327aa43f8f986f5a259bb68036a4c221c256a18dfa9d97e838bb5daa000f66d"
+    },
+    {
+      "id": "faster-whisper-readme",
+      "url": "https://raw.githubusercontent.com/SYSTRAN/faster-whisper/master/README.md",
+      "retrieved_at": "2026-11-02T17:32:02.231787+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/faster-whisper-readme.md",
+      "bytes": 15249,
+      "sha256": "43efe4a6eb9046d5ba4dcdcf2abcc27ad9e021f3edfc00bd6eb4913a9abe065b"
+    },
+    {
+      "id": "whisper-cpp-repo",
+      "url": "https://api.github.com/repos/ggml-org/whisper.cpp",
+      "retrieved_at": "2026-11-02T17:32:01.459319+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/whisper-cpp-repo.json",
+      "bytes": 6341,
+      "sha256": "e7fc944fb30d55dc6ad428f4a6e1b6961bb54dfc43b12d4db6c2a500ec81ac09"
+    },
+    {
+      "id": "whisper-cpp-readme-meta",
+      "url": "https://api.github.com/repos/ggml-org/whisper.cpp/readme",
+      "retrieved_at": "2026-11-02T17:32:02.006830+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/whisper-cpp-readme-meta.json",
+      "bytes": 57267,
+      "sha256": "a1bcd32db606f7de89af7f4b5c2c9d1073b1747ab4b88be30559e8c172c2e68f"
+    },
+    {
+      "id": "whisper-cpp-readme",
+      "url": "https://raw.githubusercontent.com/ggml-org/whisper.cpp/master/README.md",
+      "retrieved_at": "2026-11-02T17:32:02.277309+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/whisper-cpp-readme.md",
+      "bytes": 40988,
+      "sha256": "43451813ec96b5ea286c6d676f467bdffb053224c110c257ce3d67d911e774e7"
+    },
+    {
+      "id": "pyannote-repo",
+      "url": "https://api.github.com/repos/pyannote/pyannote-audio",
+      "retrieved_at": "2026-11-02T17:32:02.644072+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/pyannote-repo.json",
+      "bytes": 6831,
+      "sha256": "e2bc7bdfeec424ae0dfc9e235a15a92f822364e3445df18af3f9f3f46df7ac7d"
+    },
+    {
+      "id": "pyannote-readme-meta",
+      "url": "https://api.github.com/repos/pyannote/pyannote-audio/readme",
+      "retrieved_at": "2026-11-02T17:32:03.121862+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/pyannote-readme-meta.json",
+      "bytes": 18578,
+      "sha256": "54198ae6a76e3f0691791e878f49cbe1c43a687968320c7bbc50a4e943c048b3"
+    },
+    {
+      "id": "pyannote-readme",
+      "url": "https://raw.githubusercontent.com/pyannote/pyannote-audio/main/README.md",
+      "retrieved_at": "2026-11-02T17:32:03.375889+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/pyannote-readme.md",
+      "bytes": 12898,
+      "sha256": "558718cfb4b044f9329320b362f6a70687cf9c3519a970778da2c483bbc11c4d"
+    },
+    {
+      "id": "whisperx-repo",
+      "url": "https://api.github.com/repos/m-bain/whisperX",
+      "retrieved_at": "2026-11-02T17:32:02.691758+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/whisperx-repo.json",
+      "bytes": 5200,
+      "sha256": "0afa954b57a5c4f993501220eb6f7c6d2bd89eecfe49488534116236518953c2"
+    },
+    {
+      "id": "whisperx-readme-meta",
+      "url": "https://api.github.com/repos/m-bain/whisperX/readme",
+      "retrieved_at": "2026-11-02T17:32:03.177973+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/whisperx-readme-meta.json",
+      "bytes": 23494,
+      "sha256": "09e63a7efc493da95fe8c93abafb788d9cb347b41217f7e32cc006c28c748b82"
+    },
+    {
+      "id": "whisperx-readme",
+      "url": "https://raw.githubusercontent.com/m-bain/whisperX/main/README.md",
+      "retrieved_at": "2026-11-02T17:32:03.432134+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/whisperx-readme.md",
+      "bytes": 16507,
+      "sha256": "98ebee691ebee0ca5bdd9257dad72e1e74a9c216ff3adb7fa68d5164007a84ea"
+    },
+    {
+      "id": "stable-ts-repo",
+      "url": "https://api.github.com/repos/jianfch/stable-ts",
+      "retrieved_at": "2026-11-02T17:32:02.712819+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/stable-ts-repo.json",
+      "bytes": 5163,
+      "sha256": "0edcb22b9049508209d505e89ceba77bb00fdafc50535427040ea714a0a8d674"
+    },
+    {
+      "id": "stable-ts-readme-meta",
+      "url": "https://api.github.com/repos/jianfch/stable-ts/readme",
+      "retrieved_at": "2026-11-02T17:32:03.307987+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/stable-ts-readme-meta.json",
+      "bytes": 150453,
+      "sha256": "f24aac78b5c6f931b50f61d88e1f1da31637e5c165d6e3490e54908e3608884c"
+    },
+    {
+      "id": "stable-ts-readme",
+      "url": "https://raw.githubusercontent.com/jianfch/stable-ts/main/README.md",
+      "retrieved_at": "2026-11-02T17:32:03.651275+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/stable-ts-readme.md",
+      "bytes": 108644,
+      "sha256": "18daa39d22a5f3d4978eb6c3aa28e3aec35fac670b592289dbb7c84d230b7f90"
+    },
+    {
+      "id": "coqui-repo",
+      "url": "https://api.github.com/repos/coqui-ai/TTS",
+      "retrieved_at": "2026-11-02T17:32:03.892605+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/coqui-repo.json",
+      "bytes": 6318,
+      "sha256": "1c686f8fdf2b1ac816ac70b63804ce69587f9fd7739a76fc98f38b79864b0f1c"
+    },
+    {
+      "id": "coqui-readme-meta",
+      "url": "https://api.github.com/repos/coqui-ai/TTS/readme",
+      "retrieved_at": "2026-11-02T17:32:04.391222+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/coqui-readme-meta.json",
+      "bytes": 24738,
+      "sha256": "a5d175320711fdfda28f81c9a3e8ee9ddd0739b6424904c43deecadd70f75593"
+    },
+    {
+      "id": "coqui-readme",
+      "url": "https://raw.githubusercontent.com/coqui-ai/TTS/dev/README.md",
+      "retrieved_at": "2026-11-02T17:32:04.665736+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/coqui-readme.md",
+      "bytes": 17429,
+      "sha256": "3be56d1fa633aa71947b8f52788ac85a3603f0ad52abad4fe6710d60a5aa8314"
+    },
+    {
+      "id": "chatterbox-repo",
+      "url": "https://api.github.com/repos/resemble-ai/chatterbox",
+      "retrieved_at": "2026-11-02T17:32:03.929722+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/chatterbox-repo.json",
+      "bytes": 6487,
+      "sha256": "04ba72d257db002f53bae8566aadef172a86da689964db4fede05632c8c75540"
+    },
+    {
+      "id": "openvoice-repo",
+      "url": "https://api.github.com/repos/myshell-ai/OpenVoice",
+      "retrieved_at": "2026-11-02T17:32:04.173760+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/openvoice-repo.json",
+      "bytes": 6422,
+      "sha256": "386f1fbf74d1a66750a6b5177eb814ee573680ddcc8e6ad8fc7587df31e9673b"
+    },
+    {
+      "id": "openvoice-readme-meta",
+      "url": "https://api.github.com/repos/myshell-ai/OpenVoice/readme",
+      "retrieved_at": "2026-11-02T17:32:04.640123+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/openvoice-readme-meta.json",
+      "bytes": 5082,
+      "sha256": "d49eaf0ff22fe2fbe4501b235f4c33773aaca17017087955ef4c9b8d9effe3fa"
+    },
+    {
+      "id": "openvoice-readme",
+      "url": "https://raw.githubusercontent.com/myshell-ai/OpenVoice/main/README.md",
+      "retrieved_at": "2026-11-02T17:32:04.906120+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/openvoice-readme.md",
+      "bytes": 3120,
+      "sha256": "3c6f5d24798763ebb9ca5fea8a1cbd21b935a140300ba531138b5518cd297dfc"
+    },
+    {
+      "id": "piper-repo",
+      "url": "https://api.github.com/repos/OHF-Voice/piper1-gpl",
+      "retrieved_at": "2026-11-02T17:32:05.148768+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/piper-repo.json",
+      "bytes": 6314,
+      "sha256": "7adf06877451028273a4ed961e0f138c2866ec9029bdeea617753206a6e18c40"
+    },
+    {
+      "id": "piper-readme-meta",
+      "url": "https://api.github.com/repos/OHF-Voice/piper1-gpl/readme",
+      "retrieved_at": "2026-11-02T17:32:05.561139+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/piper-readme-meta.json",
+      "bytes": 4714,
+      "sha256": "c8ce88c1806c88eb51c8ffb2663cf3e8b9906299318afe1d66501b7d38b252f9"
+    },
+    {
+      "id": "piper-readme",
+      "url": "https://raw.githubusercontent.com/OHF-Voice/piper1-gpl/main/README.md",
+      "retrieved_at": "2026-11-02T17:32:05.819756+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/piper-readme.md",
+      "bytes": 2853,
+      "sha256": "a73f576020071a1d58701a40026a451385ef4dad4c9ba0a2499544d988d06e84"
+    },
+    {
+      "id": "videolingo-repo",
+      "url": "https://api.github.com/repos/Huanshere/VideoLingo",
+      "retrieved_at": "2026-11-02T17:32:05.770360+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/videolingo-repo.json",
+      "bytes": 5609,
+      "sha256": "c2d54da823009d7b67e6fb65585933dd5938fac4400d856bfc231d39f93e6a07"
+    },
+    {
+      "id": "videolingo-readme-meta",
+      "url": "https://api.github.com/repos/Huanshere/VideoLingo/readme",
+      "retrieved_at": "2026-11-02T17:32:06.238075+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/videolingo-readme-meta.json",
+      "bytes": 12162,
+      "sha256": "f2eb0ab5841e59d66f54a00f94d654de865aa7d3a460624be3247694e03285ec"
+    },
+    {
+      "id": "videolingo-readme",
+      "url": "https://raw.githubusercontent.com/Huanshere/VideoLingo/main/README.md",
+      "retrieved_at": "2026-11-02T17:32:06.489302+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/videolingo-readme.md",
+      "bytes": 8258,
+      "sha256": "25a4ce2cbcfeee88a34eb72125b6514e07e8fbdfcdfd6f877cb77f4066a38383"
+    },
+    {
+      "id": "sonitranslate-repo",
+      "url": "https://api.github.com/repos/R3gm/SoniTranslate",
+      "retrieved_at": "2026-11-02T17:32:06.275873+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/sonitranslate-repo.json",
+      "bytes": 5403,
+      "sha256": "d4612b0b85b497dff03fd9248a6ebb40b6f73d5c337e21ded68b30e60ec569e0"
+    },
+    {
+      "id": "sonitranslate-readme-meta",
+      "url": "https://api.github.com/repos/R3gm/SoniTranslate/readme",
+      "retrieved_at": "2026-11-02T17:32:06.828270+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/sonitranslate-readme-meta.json",
+      "bytes": 26537,
+      "sha256": "e3f191af66f0b61943d2e1660b739a14a26e39a16c927bcae24323e32338a0df"
+    },
+    {
+      "id": "sonitranslate-readme",
+      "url": "https://raw.githubusercontent.com/R3gm/SoniTranslate/main/README.md",
+      "retrieved_at": "2026-11-02T17:32:07.118083+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/sonitranslate-readme.md",
+      "bytes": 18702,
+      "sha256": "0f221b84899ff8a0f10e20474ca88f880487672ee614b398388a2a448ed53b2b"
+    },
+    {
+      "id": "musetalk-repo",
+      "url": "https://api.github.com/repos/TMElyralab/MuseTalk",
+      "retrieved_at": "2026-11-02T17:32:06.926153+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/musetalk-repo.json",
+      "bytes": 6296,
+      "sha256": "7474c236f9e33c59f8b6d7eda9cf25a31c7efad955a925a9a77014e035cc70aa"
+    },
+    {
+      "id": "musetalk-readme-meta",
+      "url": "https://api.github.com/repos/TMElyralab/MuseTalk/readme",
+      "retrieved_at": "2026-11-02T17:32:07.399301+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/musetalk-readme-meta.json",
+      "bytes": 32216,
+      "sha256": "fa97c68db8976f83a58170bdacf7d46db2ef76fceefea28661e7685bed198cd3"
+    },
+    {
+      "id": "musetalk-readme",
+      "url": "https://raw.githubusercontent.com/TMElyralab/MuseTalk/main/README.md",
+      "retrieved_at": "2026-11-02T17:32:07.647310+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/musetalk-readme.md",
+      "bytes": 22817,
+      "sha256": "63587c38fa53bd3292654a71aa6978628db02dd02cc93153030f3d0dca7721bf"
+    },
+    {
+      "id": "latentsync-repo",
+      "url": "https://api.github.com/repos/bytedance/LatentSync",
+      "retrieved_at": "2026-11-02T17:32:07.582367+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/latentsync-repo.json",
+      "bytes": 6439,
+      "sha256": "e3716c3297bc5addcd72046948273b18733763814457be6fce48600cfae3dc5f"
+    },
+    {
+      "id": "latentsync-readme-meta",
+      "url": "https://api.github.com/repos/bytedance/LatentSync/readme",
+      "retrieved_at": "2026-11-02T17:32:08.102945+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/latentsync-readme-meta.json",
+      "bytes": 14863,
+      "sha256": "99d5fb62fdadb92f72f6dc3feef7fdb342fe5d2ffd12ca48dc4f5ef45ccc8999"
+    },
+    {
+      "id": "latentsync-readme",
+      "url": "https://raw.githubusercontent.com/bytedance/LatentSync/main/README.md",
+      "retrieved_at": "2026-11-02T17:32:08.348885+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/latentsync-readme.md",
+      "bytes": 10216,
+      "sha256": "f4efe6ac062511b5de6ff65db110aa3d755fef662277c3bb4dd16dbfa02362b1"
+    },
+    {
+      "id": "audio-separator-repo",
+      "url": "https://api.github.com/repos/nomadkaraoke/python-audio-separator",
+      "retrieved_at": "2026-11-02T17:32:08.098579+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/audio-separator-repo.json",
+      "bytes": 7119,
+      "sha256": "2ea79a2da5bfd028e1a50cb5b450a5330b17cf0de74dabb0d57983f9bedfcf7d"
+    },
+    {
+      "id": "audio-separator-readme-meta",
+      "url": "https://api.github.com/repos/nomadkaraoke/python-audio-separator/readme",
+      "retrieved_at": "2026-11-02T17:32:08.673685+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/audio-separator-readme-meta.json",
+      "bytes": 72566,
+      "sha256": "0681b8d54308e0592d6fbbd7ca0219c8b2ae702329c23063e4aa007c5a9f089b"
+    },
+    {
+      "id": "audio-separator-readme",
+      "url": "https://raw.githubusercontent.com/nomadkaraoke/python-audio-separator/main/README.md",
+      "retrieved_at": "2026-11-02T17:32:08.936380+00:00",
+      "acquisition_note": "Recovered from completed save before collector interruption; timestamp from file mtime, no second request.",
+      "file": "sources/audio-separator-readme.md",
+      "bytes": 52022,
+      "sha256": "130940c409235e5f4c3f7749133289de2d19202c93d63b800c94c3fefbdae922"
+    },
+    {
+      "id": "xtts-model",
+      "url": "https://huggingface.co/coqui/XTTS-v2/raw/main/README.md",
+      "retrieved_at": "2026-11-02T17:33:34.652568+00:00",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/coqui/XTTS-v2/raw/main/README.md",
+      "file": "sources/xtts-model.txt",
+      "bytes": 4263,
+      "sha256": "1cfa85b3293f685b3a6537f8da3d94820fd111270e553589073885dea3facfb7"
+    },
+    {
+      "id": "chatterbox-model",
+      "url": "https://huggingface.co/ResembleAI/chatterbox/raw/main/README.md",
+      "retrieved_at": "2026-11-02T17:33:35.150504+00:00",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/ResembleAI/chatterbox/raw/main/README.md",
+      "file": "sources/chatterbox-model.txt",
+      "bytes": 10081,
+      "sha256": "6ac86d5ec7e85a9cf6566a34c6aae60ac1d50a6fceccade4c2aa57cfa6f590b4"
+    },
+    {
+      "id": "ffmpeg-filters",
+      "url": "https://ffmpeg.org/ffmpeg-filters.html",
+      "retrieved_at": "2026-11-02T17:33:35.372909+00:00",
+      "http_status": 200,
+      "final_url": "https://ffmpeg.org/ffmpeg-filters.html",
+      "file": "sources/ffmpeg-filters.txt",
+      "bytes": 1749816,
+      "sha256": "32b15e8dbb36117bb42fc71f99e157e894f0cd8243a3a8230335fc330b720ebc"
+    },
+    {
+      "id": "ffmpeg-legal",
+      "url": "https://ffmpeg.org/legal.html",
+      "retrieved_at": "2026-11-02T17:33:46.813047+00:00",
+      "http_status": 200,
+      "final_url": "https://ffmpeg.org/legal.html",
+      "file": "sources/ffmpeg-legal.txt",
+      "bytes": 10686,
+      "sha256": "cd51dc25f9e3200b1e3953aee036f499ed51f01f7ba30563873186cb3f870eda"
+    },
+    {
+      "id": "remotion-license",
+      "url": "https://raw.githubusercontent.com/remotion-dev/remotion/main/LICENSE.md",
+      "retrieved_at": "2026-11-02T17:33:54.576003+00:00",
+      "http_status": 200,
+      "final_url": "https://raw.githubusercontent.com/remotion-dev/remotion/main/LICENSE.md",
+      "file": "sources/remotion-license.txt",
+      "bytes": 2823,
+      "sha256": "bd65083b940f61904f6ef298aade918a7cad72a3e35bc406e36fab365844b673"
+    },
+    {
+      "id": "playlist-page",
+      "url": "https://www.youtube.com/playlist?list=PL2dcm-6042EC788TGxgH3qWF7MjpoJIv9",
+      "retrieved_at": "2026-11-02T17:33:54.831224+00:00",
+      "http_status": 200,
+      "final_url": "https://www.youtube.com/playlist?list=PL2dcm-6042EC788TGxgH3qWF7MjpoJIv9",
+      "file": "sources/playlist-page.txt",
+      "bytes": 2112128,
+      "sha256": "88d826d680c32b5f32ea94f337ea87938493444a8de355d2a31172c5125ea0c4"
+    },
+    {
+      "id": "chatterbox-readme-direct",
+      "url": "https://raw.githubusercontent.com/resemble-ai/chatterbox/master/README.md",
+      "retrieved_at": "2026-11-02T17:35:22.914498+00:00",
+      "http_status": 200,
+      "final_url": "https://raw.githubusercontent.com/resemble-ai/chatterbox/master/README.md",
+      "file": "sources/chatterbox-readme-direct.txt",
+      "bytes": 15301,
+      "sha256": "fd9315cc529c65d46ddd21ded05ba3372b6f6f39242bd015f770145bf5e0448f"
+    },
+    {
+      "id": "chatterbox-mtl-source",
+      "url": "https://raw.githubusercontent.com/resemble-ai/chatterbox/master/src/chatterbox/mtl_tts.py",
+      "retrieved_at": "2026-11-02T17:35:23.182861+00:00",
+      "http_status": 200,
+      "final_url": "https://raw.githubusercontent.com/resemble-ai/chatterbox/master/src/chatterbox/mtl_tts.py",
+      "file": "sources/chatterbox-mtl-source.txt",
+      "bytes": 11721,
+      "sha256": "936759044e54cffe8c68b91b32e01da0bc032a1e084f769f0403080d86ad153c"
+    },
+    {
+      "id": "chatterbox-ptbr-model",
+      "url": "https://huggingface.co/ResembleAI/Chatterbox-Multilingual-pt-br/raw/main/README.md",
+      "retrieved_at": "2026-11-02T17:35:23.419910+00:00",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/ResembleAI/Chatterbox-Multilingual-pt-br/raw/main/README.md",
+      "file": "sources/chatterbox-ptbr-model.txt",
+      "bytes": 2221,
+      "sha256": "f6d683ac8f9c96f660f20c51ac59cca1f72ffb118fd5823b894fb2ed63ec43ad"
+    },
+    {
+      "id": "remotion-transitions",
+      "url": "https://www.remotion.dev/docs/transitions/transitionseries",
+      "retrieved_at": "2026-11-02T17:35:23.637699+00:00",
+      "http_status": 200,
+      "final_url": "https://www.remotion.dev/docs/transitions/transitionseries",
+      "file": "sources/remotion-transitions.txt",
+      "bytes": 177148,
+      "sha256": "9e91ced2b8f39fa0a2a712a7bab8b7ce47131dcd5b37210e617df902ddd5ad4d"
+    },
+    {
+      "id": "xtts-license",
+      "url": "https://huggingface.co/coqui/XTTS-v2/raw/main/LICENSE.txt",
+      "retrieved_at": "2026-11-02T17:35:28.153043+00:00",
+      "http_status": 200,
+      "final_url": "https://huggingface.co/coqui/XTTS-v2/raw/main/LICENSE.txt",
+      "file": "sources/xtts-license.txt",
+      "bytes": 4014,
+      "sha256": "190f6d7c19b8984f91b97712b94ce92d2b2e640fc677dacab966e955ece9d043"
+    },
+    {
+      "id": "whisper-model-license",
+      "url": "https://raw.githubusercontent.com/openai/whisper/main/LICENSE",
+      "retrieved_at": "2026-11-02T17:35:28.378473+00:00",
+      "http_status": 200,
+      "final_url": "https://raw.githubusercontent.com/openai/whisper/main/LICENSE",
+      "file": "sources/whisper-model-license.txt",
+      "bytes": 1063,
+      "sha256": "b5d65a59060e68c4ff940e1eddfa6f94b2d68fdf58ed7f4dd57721c997e35e9d"
+    },
+    {
+      "id": "piper-voices",
+      "url": "https://raw.githubusercontent.com/OHF-Voice/piper1-gpl/main/docs/VOICES.md",
+      "retrieved_at": "2026-11-02T17:35:28.620593+00:00",
+      "http_status": 200,
+      "final_url": "https://raw.githubusercontent.com/OHF-Voice/piper1-gpl/main/docs/VOICES.md",
+      "file": "sources/piper-voices.txt",
+      "bytes": 2870,
+      "sha256": "cc724e58206cfaa94e2894544b9a1aca89ea45c85b36df1645a1719b029fdb55"
+    },
+    {
+      "id": "whisperx-alignment-source",
+      "url": "https://raw.githubusercontent.com/m-bain/whisperX/main/whisperx/alignment.py",
+      "retrieved_at": "2026-11-02T17:35:28.883556+00:00",
+      "http_status": 200,
+      "final_url": "https://raw.githubusercontent.com/m-bain/whisperX/main/whisperx/alignment.py",
+      "file": "sources/whisperx-alignment-source.txt",
+      "bytes": 26926,
+      "sha256": "df1e565ebe9e039c9c32f2fafff427ee1b7107bdb45699f0fe636163a62957f2"
+    },
+    {
+      "id": "pyvideotrans-official-repo",
+      "url": "https://api.github.com/repos/jianchang512/pyvideotrans",
+      "retrieved_at": "2026-11-02T17:35:29.121244+00:00",
+      "http_status": 200,
+      "final_url": "https://api.github.com/repos/jianchang512/pyvideotrans",
+      "file": "sources/pyvideotrans-official-repo.json",
+      "bytes": 5729,
+      "sha256": "7e9773f893d97ed4f391e933ad92bbcf44292ef29ece527874b234b95eaae117"
+    },
+    {
+      "id": "pyvideotrans-official-readme-meta",
+      "url": "https://api.github.com/repos/jianchang512/pyvideotrans/readme",
+      "retrieved_at": "2026-11-02T17:35:29.564173+00:00",
+      "http_status": 200,
+      "final_url": "https://api.github.com/repos/jianchang512/pyvideotrans/readme",
+      "file": "sources/pyvideotrans-official-readme-meta.json",
+      "bytes": 13975,
+      "sha256": "86fc177662a226bd3b8b2e1209c478bf869de83fcb89899dd582256d4a1418eb"
+    },
+    {
+      "id": "pyvideotrans-official-readme",
+      "url": "https://raw.githubusercontent.com/jianchang512/pyvideotrans/main/README.md",
+      "retrieved_at": "2026-11-02T17:35:30.050946+00:00",
+      "http_status": 200,
+      "final_url": "https://raw.githubusercontent.com/jianchang512/pyvideotrans/main/README.md",
+      "file": "sources/pyvideotrans-official-readme.md",
+      "bytes": 9549,
+      "sha256": "15ca562bce8c92e047eea9401d39a5dfa6317841862e275118f0cfa58c15325b"
+    },
+    {
+      "id": "argos-repo",
+      "url": "https://api.github.com/repos/argosopentech/argos-translate",
+      "retrieved_at": "2026-11-02T17:38:37.965323+00:00",
+      "http_status": 200,
+      "final_url": "https://api.github.com/repos/argosopentech/argos-translate",
+      "file": "sources/argos-repo.json",
+      "bytes": 5902,
+      "sha256": "9e078cca219385e775ed8bad2d1ab8acf94342039021bd26306a92063391ee14"
+    }
+  ],
+  "candidates": [
+    {
+      "name": "Manim Community",
+      "source_ids": [
+        "manim-repo",
+        "manim-readme"
+      ],
+      "code_license": "MIT",
+      "model_license": "not_applicable",
+      "cpu_status": "Cairo software renderer; no benchmark in this machine",
+      "decision": "recommend_2d_pilot",
+      "benchmark_executed_this_round": false
+    },
+    {
+      "name": "Remotion",
+      "source_ids": [
+        "remotion-repo",
+        "remotion-license",
+        "remotion-transitions"
+      ],
+      "code_license": "Remotion License; eligibility and version must be checked",
+      "model_license": "not_applicable",
+      "cpu_status": "software rendering possible for 2D; no new render",
+      "decision": "reuse_existing_project_with_approval",
+      "benchmark_executed_this_round": false
+    },
+    {
+      "name": "FFmpeg",
+      "source_ids": [
+        "ffmpeg-filters",
+        "ffmpeg-legal"
+      ],
+      "code_license": "LGPL/GPL depending on build and enabled components",
+      "model_license": "not_applicable",
+      "cpu_status": "CPU filters and software encoding; no new render",
+      "decision": "recommend_assembly",
+      "benchmark_executed_this_round": false
+    },
+    {
+      "name": "faster-whisper",
+      "source_ids": [
+        "faster-whisper-repo",
+        "faster-whisper-readme",
+        "whisper-model-license"
+      ],
+      "code_license": "MIT",
+      "model_license": "official OpenAI Whisper MIT; third-party conversions require separate audit",
+      "cpu_status": "CPU int8 documented",
+      "decision": "benchmark_small_multilingual",
+      "benchmark_executed_this_round": false
+    },
+    {
+      "name": "whisper.cpp",
+      "source_ids": [
+        "whisper-cpp-repo",
+        "whisper-cpp-readme",
+        "whisper-model-license"
+      ],
+      "code_license": "MIT",
+      "model_license": "official OpenAI Whisper MIT; specific converted artifact pending",
+      "cpu_status": "CPU-only and quantization documented",
+      "decision": "benchmark_as_alternative",
+      "benchmark_executed_this_round": false
+    },
+    {
+      "name": "pyannote.audio",
+      "source_ids": [
+        "pyannote-repo",
+        "pyannote-readme",
+        "whisperx-readme"
+      ],
+      "code_license": "MIT",
+      "model_license": "Community-1 card returned 401; WhisperX mentions CC-BY-4.0 but direct terms/acceptance pending",
+      "cpu_status": "local inference configurable; CPU performance unmeasured",
+      "decision": "conditional_hf_acceptance_and_pilot",
+      "benchmark_executed_this_round": false
+    },
+    {
+      "name": "WhisperX",
+      "source_ids": [
+        "whisperx-repo",
+        "whisperx-readme",
+        "whisperx-alignment-source"
+      ],
+      "code_license": "BSD-2-Clause in observed repository metadata",
+      "model_license": "ASR, alignment and diarization model licenses separate; selection pending",
+      "cpu_status": "--device cpu --compute_type int8 documented",
+      "decision": "alignment_and_diarization_pilot",
+      "benchmark_executed_this_round": false
+    },
+    {
+      "name": "Chatterbox PT-BR",
+      "source_ids": [
+        "chatterbox-repo",
+        "chatterbox-readme-direct",
+        "chatterbox-ptbr-model",
+        "chatterbox-mtl-source"
+      ],
+      "code_license": "MIT",
+      "model_license": "MIT declared by PT-BR model card; companion assets and exact versions pending",
+      "cpu_status": "CPU path in generic loader; PT-BR t3_pt_br.safetensors and s3gen_v3.pt differ from loader s3gen.pt/ve.pt requirements; compatibility unproven",
+      "decision": "compare_only_after_correct_v3_loader_smoke_and_individual_consent",
+      "benchmark_executed_this_round": false
+    },
+    {
+      "name": "XTTS v2",
+      "source_ids": [
+        "coqui-repo",
+        "xtts-model",
+        "xtts-license"
+      ],
+      "code_license": "MPL-2.0",
+      "model_license": "Coqui Public Model License; non-commercial restrictions",
+      "cpu_status": "historical CPU usage only; no new multivoice benchmark",
+      "decision": "noncommercial_baseline_subject_to_rights",
+      "benchmark_executed_this_round": false
+    },
+    {
+      "name": "Piper",
+      "source_ids": [
+        "piper-repo",
+        "piper-readme",
+        "piper-voices"
+      ],
+      "code_license": "GPL-3.0",
+      "model_license": "per-voice MODEL_CARD; no individual voice approved here",
+      "cpu_status": "local ONNX synthesis; no measured speed",
+      "decision": "licensed_synthetic_voice_fallback_not_cloning",
+      "benchmark_executed_this_round": false
+    },
+    {
+      "name": "audio-separator",
+      "source_ids": [
+        "audio-separator-repo",
+        "audio-separator-readme"
+      ],
+      "code_license": "MIT",
+      "model_license": "model-specific; no checkpoint selected",
+      "cpu_status": "CPU mode documented; quality and processing cost unknown",
+      "decision": "fallback_if_no_music_effects_stem",
+      "benchmark_executed_this_round": false
+    },
+    {
+      "name": "SoniTranslate",
+      "source_ids": [
+        "sonitranslate-repo",
+        "sonitranslate-readme"
+      ],
+      "code_license": "Apache-2.0",
+      "model_license": "each TTS/diarization/conversion model has separate terms",
+      "cpu_status": "--cpu_mode documented, no end-to-end test",
+      "decision": "integrated_pipeline_reference",
+      "benchmark_executed_this_round": false
+    },
+    {
+      "name": "pyVideoTrans",
+      "source_ids": [
+        "pyvideotrans-official-repo",
+        "pyvideotrans-official-readme"
+      ],
+      "code_license": "GPL-3.0; provider terms remain separate",
+      "model_license": "local and remote backends have separate terms",
+      "cpu_status": "CPU-dependent backend selection; no smoke test",
+      "decision": "optional_interface_no_remote_services_without_permission",
+      "benchmark_executed_this_round": false
+    },
+    {
+      "name": "VideoLingo",
+      "source_ids": [
+        "videolingo-repo",
+        "videolingo-readme"
+      ],
+      "code_license": "Apache-2.0",
+      "model_license": "models and external providers separate",
+      "cpu_status": "Linux documented path GPU-oriented; CPU-only pipeline not demonstrated here",
+      "decision": "not_first_choice_for_this_cpu",
+      "benchmark_executed_this_round": false
+    },
+    {
+      "name": "OpenVoice V2",
+      "source_ids": [
+        "openvoice-repo",
+        "openvoice-readme"
+      ],
+      "code_license": "MIT",
+      "model_license": "V1/V2 declared MIT; Portuguese base voice would need separate license",
+      "cpu_status": "CPU path not benchmarked; no native Portuguese in six-language list",
+      "decision": "not_standalone_ptbr_solution",
+      "benchmark_executed_this_round": false
+    },
+    {
+      "name": "MuseTalk",
+      "source_ids": [
+        "musetalk-repo",
+        "musetalk-readme"
+      ],
+      "code_license": "GitHub NOASSERTION; exact terms must be audited",
+      "model_license": "checkpoints/dependencies require separate review",
+      "cpu_status": "GPU demonstrations do not prove CPU feasibility",
+      "decision": "defer_cpu_lipsync",
+      "benchmark_executed_this_round": false
+    },
+    {
+      "name": "LatentSync",
+      "source_ids": [
+        "latentsync-repo",
+        "latentsync-readme"
+      ],
+      "code_license": "Apache-2.0",
+      "model_license": "weights and dependencies require separate review",
+      "cpu_status": "GPU-oriented; no CPU benchmark",
+      "decision": "defer_cpu_lipsync",
+      "benchmark_executed_this_round": false
+    },
+    {
+      "name": "stable-ts",
+      "source_ids": [
+        "stable-ts-repo",
+        "stable-ts-readme"
+      ],
+      "code_license": "MIT",
+      "model_license": "selected ASR model license separate",
+      "cpu_status": "CPU options depend on backend; repository archived in observed metadata",
+      "decision": "not_new_primary_dependency",
+      "benchmark_executed_this_round": false
+    },
+    {
+      "name": "Argos Translate",
+      "source_ids": [
+        "argos-repo"
+      ],
+      "code_license": "MIT declared in repository metadata",
+      "model_license": "specific language package license pending",
+      "cpu_status": "offline translation candidate; full README retrieval failed and language pair unverified",
+      "decision": "partial_evidence_not_recommended_for_drama_without_validation",
+      "benchmark_executed_this_round": false
+    }
+  ],
+  "local_inventory": [
+    {
+      "path": "biblioteca ai/INSTALACAO (1).md",
+      "bytes": 3034,
+      "sha256": "109a93054fdc5f5c12977793a8d3e222fa5a46577704f0c85adc65248895dd26"
+    },
+    {
+      "path": "biblioteca ai/ficha-de-direcao.md",
+      "bytes": 940,
+      "sha256": "a1e58239597f2a9d959cda5f99e521534e6b8b2d44715aa39d39e8aa123b97fc"
+    },
+    {
+      "path": "biblioteca ai/checklist-da-amostra (1).md",
+      "bytes": 1262,
+      "sha256": "d7f4f1354f67619c0428afcb8d1a9dcdf52c63c196407687796ea03c54e90c30"
+    },
+    {
+      "path": "biblioteca ai/mapa-de-cenas.csv",
+      "bytes": 102,
+      "sha256": "21d79694c729f9c1dc62a4599c2c9337350d0fe47c3fb719240d51d2af84018d"
+    },
+    {
+      "path": "biblioteca ai/matriz-de-variacoes.csv",
+      "bytes": 335,
+      "sha256": "51771a2dcc89dbae60ce713264f80e040a82dafb22fc4513fefe8c952d699204"
+    },
+    {
+      "path": "biblioteca ai/skills (1).zip",
+      "bytes": 38211,
+      "sha256": "37d60aeea1ef6c93709b7446f15e91bc0c8d7ebac71c22f2e2a3d1179c897a50"
+    },
+    {
+      "path": "biblioteca ai/skills (2).zip",
+      "bytes": 38211,
+      "sha256": "37d60aeea1ef6c93709b7446f15e91bc0c8d7ebac71c22f2e2a3d1179c897a50"
+    },
+    {
+      "path": "biblioteca ai/download-livro-digital-cofre-da-edicao-com-ia.pdf",
+      "bytes": 4715292,
+      "sha256": "59c280f6587134d1dbf02b0f93cd061d3d60b2127cbdae8c1d8a179ffb6ea270"
+    },
+    {
+      "path": "biblioteca ai/livro-digital-caixa-preta-da-edicao182438063.pdf",
+      "bytes": 6021296,
+      "sha256": "61b7eb38173b0863e56170f70f9905d7f87e94ad1f67d07521cdfd0a986dea8e"
+    }
+  ],
+  "zip_skills": [
+    {
+      "archive": "skills (1).zip",
+      "entry": "skills/cp-apresentador-em-cena/SKILL.md",
+      "sha256": "bd1abc2b0a302450e57f22f50cdf875ba406d3b8ae20fa13dd3f9269246e98ea",
+      "installed_skill": ".claude/skills/cp-apresentador-em-cena/SKILL.md",
+      "identical": false
+    },
+    {
+      "archive": "skills (1).zip",
+      "entry": "skills/cp-direcao-de-edicao/SKILL.md",
+      "sha256": "5faa07c3eb060c96ce8ccfa432c180ce359a9d58e651e1c424b5c93154c39f95",
+      "installed_skill": ".claude/skills/cp-direcao-de-edicao/SKILL.md",
+      "identical": false
+    },
+    {
+      "archive": "skills (1).zip",
+      "entry": "skills/cp-estilo-por-referencia/SKILL.md",
+      "sha256": "f856f8f4063cb261d8b9b121535d93887c5a55c94ce0333cec95918fc2b65e33",
+      "installed_skill": ".claude/skills/cp-estilo-por-referencia/SKILL.md",
+      "identical": false
+    },
+    {
+      "archive": "skills (1).zip",
+      "entry": "skills/cp-extratora-de-referencia/SKILL.md",
+      "sha256": "d22c337e883f3dcf2f87ca8dc13ac3d3e3b0a19b99514dc8f808f90c8ee788cc",
+      "installed_skill": ".claude/skills/cp-extratora-de-referencia/SKILL.md",
+      "identical": false
+    },
+    {
+      "archive": "skills (1).zip",
+      "entry": "skills/cp-lettering-com-hierarquia/SKILL.md",
+      "sha256": "a82d4883a350e3e97179ededa07da8bb2832f00200868ee00ff1358d7e6411aa",
+      "installed_skill": ".claude/skills/cp-lettering-com-hierarquia/SKILL.md",
+      "identical": false
+    },
+    {
+      "archive": "skills (1).zip",
+      "entry": "skills/cp-motion-explicativo/SKILL.md",
+      "sha256": "4dc7637d2674d6d5af4650b2a3ed6b4ccacb21561d0d45c9973f54fa940d8184",
+      "installed_skill": ".claude/skills/cp-motion-explicativo/SKILL.md",
+      "identical": false
+    },
+    {
+      "archive": "skills (1).zip",
+      "entry": "skills/cp-variacoes-controladas/SKILL.md",
+      "sha256": "f8bf111c0630b39ab47bad9415195728d77139e6ac5946264896190ba4a1e72e",
+      "installed_skill": ".claude/skills/cp-variacoes-controladas/SKILL.md",
+      "identical": false
+    },
+    {
+      "archive": "skills (2).zip",
+      "entry": "skills/cp-apresentador-em-cena/SKILL.md",
+      "sha256": "bd1abc2b0a302450e57f22f50cdf875ba406d3b8ae20fa13dd3f9269246e98ea",
+      "installed_skill": ".claude/skills/cp-apresentador-em-cena/SKILL.md",
+      "identical": false
+    },
+    {
+      "archive": "skills (2).zip",
+      "entry": "skills/cp-direcao-de-edicao/SKILL.md",
+      "sha256": "5faa07c3eb060c96ce8ccfa432c180ce359a9d58e651e1c424b5c93154c39f95",
+      "installed_skill": ".claude/skills/cp-direcao-de-edicao/SKILL.md",
+      "identical": false
+    },
+    {
+      "archive": "skills (2).zip",
+      "entry": "skills/cp-estilo-por-referencia/SKILL.md",
+      "sha256": "f856f8f4063cb261d8b9b121535d93887c5a55c94ce0333cec95918fc2b65e33",
+      "installed_skill": ".claude/skills/cp-estilo-por-referencia/SKILL.md",
+      "identical": false
+    },
+    {
+      "archive": "skills (2).zip",
+      "entry": "skills/cp-extratora-de-referencia/SKILL.md",
+      "sha256": "d22c337e883f3dcf2f87ca8dc13ac3d3e3b0a19b99514dc8f808f90c8ee788cc",
+      "installed_skill": ".claude/skills/cp-extratora-de-referencia/SKILL.md",
+      "identical": false
+    },
+    {
+      "archive": "skills (2).zip",
+      "entry": "skills/cp-lettering-com-hierarquia/SKILL.md",
+      "sha256": "a82d4883a350e3e97179ededa07da8bb2832f00200868ee00ff1358d7e6411aa",
+      "installed_skill": ".claude/skills/cp-lettering-com-hierarquia/SKILL.md",
+      "identical": false
+    },
+    {
+      "archive": "skills (2).zip",
+      "entry": "skills/cp-motion-explicativo/SKILL.md",
+      "sha256": "4dc7637d2674d6d5af4650b2a3ed6b4ccacb21561d0d45c9973f54fa940d8184",
+      "installed_skill": ".claude/skills/cp-motion-explicativo/SKILL.md",
+      "identical": false
+    },
+    {
+      "archive": "skills (2).zip",
+      "entry": "skills/cp-variacoes-controladas/SKILL.md",
+      "sha256": "f8bf111c0630b39ab47bad9415195728d77139e6ac5946264896190ba4a1e72e",
+      "installed_skill": ".claude/skills/cp-variacoes-controladas/SKILL.md",
+      "identical": false
+    }
+  ],
+  "failures": [
+    {
+      "stage": "source_request",
+      "id": "remotion-readme",
+      "url": "https://raw.githubusercontent.com/remotion-dev/remotion/main/README.md",
+      "retrieved_at": "2026-11-02T17:32:59.578385+00:00",
+      "error": "The read operation timed out"
+    },
+    {
+      "stage": "source_request",
+      "id": "chatterbox-readme-meta",
+      "url": "https://api.github.com/repos/resemble-ai/chatterbox/readme",
+      "retrieved_at": "2026-11-02T17:32:58.863637+00:00",
+      "error": "Remote end closed connection without response"
+    },
+    {
+      "stage": "source_request",
+      "id": "pyvideotrans-repo",
+      "url": "https://api.github.com/repos/pyvideotrans/pyvideotrans",
+      "retrieved_at": "2026-11-02T17:32:58.879136+00:00",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "stage": "source_request",
+      "id": "pyannote-model",
+      "url": "https://huggingface.co/pyannote/speaker-diarization-community-1/raw/main/README.md",
+      "retrieved_at": "2026-11-02T17:33:34.901754+00:00",
+      "error": "HTTP Error 401: Unauthorized"
+    },
+    {
+      "stage": "source_request",
+      "id": "argos-readme-meta",
+      "url": "https://api.github.com/repos/argosopentech/argos-translate/readme",
+      "retrieved_at": "2026-11-02T17:38:38.501303+00:00",
+      "error": "Remote end closed connection without response"
+    },
+    {
+      "stage": "websearch",
+      "error": "HTTP 402; used direct official sources; no bypass"
+    },
+    {
+      "stage": "collector_first_run",
+      "error": "RemoteDisconnected escaped catch; recovered already saved bytes with explicit mtime provenance; added HTTPException handler"
+    },
+    {
+      "stage": "path_search",
+      "error": "mcp directory absent; found actual integration in integrations/ecosystem_mcp.py"
+    },
+    {
+      "stage": "external_workflow",
+      "workflow_id": "r1033-video-cpu-research",
+      "error": "spec_id_required at preflight, zero inference steps; not resumed"
+    },
+    {
+      "stage": "native_review_researcher",
+      "session_id": "ses_e62a98124ffeiygzWacPNlJIpT",
+      "error": "active OpenCode Go subscription required; no review produced"
+    },
+    {
+      "stage": "native_review_code_reviewer",
+      "session_id": "ses_e62a81801ffeLSqOsIH8WThmYn",
+      "error": "active OpenCode Go subscription required; no review produced"
+    },
+    {
+      "stage": "strict_tdd_history",
+      "run_id": "tdd-dabee2c010744c0987b8d76c003f94dd",
+      "error": "180s shell timeout; only spec/test snapshots found, no pytest raw.log or accepted receipt. Plain pytest RED then GREEN captured separately; not retried"
+    }
+  ],
+  "review": {
+    "independent_status": "textual_readonly_completed",
+    "task_id": "task-1ed85850",
+    "text_spec_id": "TSPEC-094f2d73",
+    "executor": "antigravity",
+    "duration_seconds": 124.75087544298731,
+    "human_audiovisual_review": "not_performed",
+    "quality_certified": false,
+    "summary": "review-summary.md"
+  },
+  "historical_lipsync": {
+    "source_log": "/home/marceloclaro/.cache/opencode-pilot/lipsync-cards/middle-whole/run.log",
+    "source_lines": [
+      1,
+      112,
+      113
+    ],
+    "audio_seconds": 20,
+    "inference_wall_seconds": 1413,
+    "rtf": 70.65,
+    "linear_extrapolation_45_minutes_hours": 52.987500000000004,
+    "is_new_benchmark": false,
+    "forecast_guaranteed": false
+  }
+}

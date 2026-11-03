@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Educacional AiramVeras - Diretoria Escolar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-slate-100 font-sans antialiased">
+
+    <!-- Tela de Login -->
+    <div id="login-view" class="min-h-screen flex items-center justify-center p-4">
+        <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border border-slate-200">
+            <div class="text-center mb-6">
+                <div class="bg-indigo-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3 text-2xl font-bold shadow-md">
+                    <i class="fa-solid fa-brain"></i>
+                </div>
+                <h1 class="text-2xl font-bold text-slate-800">AiramVeras Core</h1>
+                <p class="text-sm text-slate-500">Gestão Pedagógica, PEI/PAEE & Jurídica com LLM</p>
+            </div>
+            
+            <form id="login-form" onsubmit="handleLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">CPF do Gestor</label>
+                    <input type="text" id="cpf" value="77903790544" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Senha</label>
+                    <input type="password" id="senha" value="123456" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                </div>
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 rounded-lg transition shadow-md">
+                    Entrar no Sistema AiramVeras
+                </button>
+            </form>
+            <div class="mt-4 text-center text-xs text-slate-400">
+                Credenciais padrão pré-carregadas.
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Principal -->
+    <div id="app-view" class="hidden min-h-screen flex flex-col">
+        <header class="bg-indigo-900 text-white shadow-md px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-network-wired text-2xl text-indigo-300"></i>
+                <div>
+                    <h2 class="font-bold text-lg" id="escola-nome">EEFM Prof. Simulado</h2>
+                    <span class="text-xs text-indigo-200" id="usuario-nome">Diretor(a) / AiramVeras</span>
+                </div>
+            </div>
+            <button onclick="handleLogout()" class="bg-indigo-800 hover:bg-indigo-700 px-4 py-2 rounded-lg text-sm transition">
+                <i class="fa-solid fa-right-from-bracket mr-2"></i>Sair
+            </button>
+        </header>
+
+        <!-- Navegação por Módulos -->
+        <div class="bg-white border-b px-6 py-3 flex space-x-3 overflow-x-auto shadow-sm">
+            <button onclick="switchTab('dashboard')" class="tab-btn px-3 py-2 rounded-lg font-medium text-sm bg-indigo-50 text-indigo-700 transition"><i class="fa-solid fa-chart-pie mr-2"></i>Dashboard</button>
+            <button onclick="switchTab('turmas')" class="tab-btn px-3 py-2 rounded-lg font-medium text-sm text-slate-600 hover:bg-slate-100 transition"><i class="fa-solid fa-chalkboard-user mr-2"></i>Turmas</button>
+            <button onclick="switchTab('pei')" class="tab-btn px-3 py-2 rounded-lg font-medium text-sm text-slate-600 hover:bg-slate-100 transition"><i class="fa-solid fa-user-gear mr-2"></i>PEI & PAEE</button>
+            <button onclick="switchTab('aulas')" class="tab-btn px-3 py-2 rounded-lg font-medium text-sm text-slate-600 hover:bg-slate-100 transition"><i class="fa-solid fa-book-open mr-2"></i>Planos BNCC</button>
+            <button onclick="switchTab('juridico')" class="tab-btn px-3 py-2 rounded-lg font-medium text-sm text-slate-600 hover:bg-slate-100 transition"><i class="fa-solid fa-scale-balanced mr-2"></i>Jurídico & Contas</button>
+            <button onclick="switchTab('frequencia')" class="tab-btn px-3 py-2 rounded-lg font-medium text-sm text-slate-600 hover:bg-slate-100 transition"><i class="fa-solid fa-calendar-check mr-2"></i>Frequência</button>
+            <button onclick="switchTab('notas')" class="tab-btn px-3 py-2 rounded-lg font-medium text-sm text-slate-600 hover:bg-slate-100 transition"><i class="fa-solid fa-star-half-stroke mr-2"></i>Notas</button>
+            <button onclick="switchTab('relatorios')" class="tab-btn px-3 py-2 rounded-lg font-medium text-sm text-slate-600 hover:bg-slate-100 transition"><i class="fa-solid fa-file-lines mr-2"></i>Relatórios</button>
+        </div>
+
+        <main class="flex-1 p-6 max-w-7xl mx-auto w-full">
+            
+            <!-- Módulo Dashboard -->
+            <section id="tab-dashboard" class="tab-content space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <p class="text-sm font-medium text-slate-500">Total de Alunos</p>
+                        <h3 class="text-3xl font-bold text-slate-800 mt-2" id="kpi-alunos">--</h3>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <p class="text-sm font-medium text-slate-500">Turmas Ativas</p>
+                        <h3 class="text-3xl font-bold text-slate-800 mt-2" id="kpi-turmas">--</h3>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <p class="text-sm font-medium text-slate-500">Média Geral da Escola</p>
+                        <h3 class="text-3xl font-bold text-emerald-600 mt-2" id="kpi-media">--</h3>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <p class="text-sm font-medium text-slate-500">Frequência Média</p>
+                        <h3 class="text-3xl font-bold text-indigo-600 mt-2" id="kpi-freq">--</h3>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-slate-800 mb-4"><i class="fa-solid fa-triangle-exclamation text-amber-500 mr-2"></i>Alerta de Alunos em Risco</h3>
+                    <div id="alertas-container" class="overflow-x-auto">
+                        <p class="text-slate-500 text-sm">Carregando alertas...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Módulo Turmas -->
+            <section id="tab-turmas" class="tab-content hidden space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-slate-800 mb-4">Turmas Registradas</h3>
+                    <div id="turmas-container" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
+                </div>
+            </section>
+
+            <!-- Módulo PEI & PAEE -->
+            <section id="tab-pei" class="tab-content hidden space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-lg font-bold text-slate-800 mb-4"><i class="fa-solid fa-user-gear text-indigo-600 mr-2"></i>Gerador PEI (Inclusão)</h3>
+                        <form onsubmit="gerarPEI(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">ID do Aluno</label>
+                                <input type="number" id="pei-aluno" value="101" required class="w-full px-4 py-2 border rounded-lg">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Necessidade Educacional Especial</label>
+                                <input type="text" id="pei-nec" value="Transtorno do Espectro Autista (TEA)" required class="w-full px-4 py-2 border rounded-lg">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Adaptações Curriculares</label>
+                                <textarea id="pei-adap" rows="3" class="w-full px-4 py-2 border rounded-lg">Atividades visuais, tempo estendido em avaliações e mediador.</textarea>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Objetivos Trimestrais</label>
+                                <input type="text" id="pei-obj" value="Desenvolver autonomia na leitura e socialização." required class="w-full px-4 py-2 border rounded-lg">
+                            </div>
+                            <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-medium transition">Gerar & Salvar PEI</button>
+                        </form>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-lg font-bold text-slate-800 mb-4"><i class="fa-solid fa-hands-holding-child text-indigo-600 mr-2"></i>PAEE (Atendimento Especializado)</h3>
+                        <form onsubmit="gerarPAEE(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">ID do Aluno</label>
+                                <input type="number" id="paee-aluno" value="101" required class="w-full px-4 py-2 border rounded-lg">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Recursos de Tecnologia Assistiva</label>
+                                <textarea id="paee-tec" rows="3" class="w-full px-4 py-2 border rounded-lg">Software leitor de tela e teclado adaptado.</textarea>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Atendimento no Contra-Turno</label>
+                                <input type="text" id="paee-turno" value="Segundas e Quartas das 14h às 16h" required class="w-full px-4 py-2 border rounded-lg">
+                            </div>
+                            <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-medium transition">Gerar & Salvar PAEE</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Módulo Planos de Aula BNCC -->
+            <section id="tab-aulas" class="tab-content hidden space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 max-w-2xl">
+                    <h3 class="text-lg font-bold text-slate-800 mb-4"><i class="fa-solid fa-book-open text-indigo-600 mr-2"></i>Gerador de Planos de Aula (BNCC com LLM)</h3>
+                    <form onsubmit="gerarPlanoAula(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Disciplina</label>
+                            <input type="text" id=" aula-disc" value="Matemática" required class="w-full px-4 py-2 border rounded-lg">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Tema da Aula</label>
+                            <input type="text" id="aula-tema" value="Funções Afins e Aplicações Práticas" required class="w-full px-4 py-2 border rounded-lg">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Habilidade BNCC</label>
+                            <input type="text" id="aula-bncc" value="EM13MAT401 - Investigar problemas envolvendo funções..." required class="w-full px-4 py-2 border rounded-lg">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Metodologia</label>
+                            <textarea id="aula-met" rows="3" class="w-full px-4 py-2 border rounded-lg">Metodologia ativa baseada em resolução de problemas do cotidiano.</textarea>
+                        </div>
+                        <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-medium transition">Gerar Plano de Aula BNCC</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Módulo Jurídico & Contas -->
+            <section id="tab-juridico" class="tab-content hidden space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 max-w-2xl">
+                    <h3 class="text-lg font-bold text-slate-800 mb-4"><i class="fa-solid fa-scale-balanced text-indigo-600 mr-2"></i>Gestão Jurídica & Prestação de Contas (AiramVeras)</h3>
+                    <form onsubmit="gerarJuridico(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Tipo de Documento</label>
+                            <select id="jur-tipo" class="w-full px-4 py-2 border rounded-lg">
+                                <option value="Parecer Pedagógico">Parecer Pedagógico</option>
+                                <option value="Termo de Adaptação Curricular">Termo de Adaptação Curricular</option>
+                                <option value="Prestação de Contas (Nota Dez)">Prestação de Contas (Nota Dez / FECOP)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Descrição e Fundamentação</label>
+                            <textarea id="jur-desc" rows="4" class="w-full px-4 py-2 border rounded-lg">Emitir parecer fundamentado na LDB e diretrizes estaduais para regularização de vida escolar e transparência financeira.</textarea>
+                        </div>
+                        <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-medium transition">Emitir Documento Oficial</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Módulo Frequência -->
+            <section id="tab-frequencia" class="tab-content hidden space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 max-w-xl">
+                    <h3 class="text-lg font-bold text-slate-800 mb-4">Registro Diário de Frequência</h3>
+                    <form onsubmit="registrarFrequencia(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">ID do Aluno</label>
+                            <input type="number" id="freq-aluno-id" value="102" required class="w-full px-4 py-2 border rounded-lg">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Data</label>
+                            <input type="date" id="freq-data" required class="w-full px-4 py-2 border rounded-lg">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Status</label>
+                            <select id="freq-status" class="w-full px-4 py-2 border rounded-lg">
+                                <option value="true">Presente</option>
+                                <option value="false">Ausente / Falta</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-medium transition">Salvar Frequência</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Módulo Notas -->
+            <section id="tab-notas" class="tab-content hidden space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 max-w-xl">
+                    <h3 class="text-lg font-bold text-slate-800 mb-4">Lançamento de Notas</h3>
+                    <form onsubmit="lancarNota(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">ID do Aluno</label>
+                            <input type="number" id="nota-aluno-id" value="101" required class="w-full px-4 py-2 border rounded-lg">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Disciplina</label>
+                            <input type="text" id="nota-disciplina" value="Matemática" required class="w-full px-4 py-2 border rounded-lg">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Nota (0 a 10)</label>
+                            <input type="number" step="0.1" max="10" min="0" id="nota-valor" value="8.5" required class="w-full px-4 py-2 border rounded-lg">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Unidade / Período</label>
+                            <input type="text" id="nota-unidade" value="1º Trimestre" required class="w-full px-4 py-2 border rounded-lg">
+                        </div>
+                        <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-medium transition">Lançar Nota</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Módulo Relatórios -->
+            <section id="tab-relatorios" class="tab-content hidden space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-slate-800 mb-4">Relatório Consolidado AiramVeras</h3>
+                    <div id="relatorios-content" class="space-y-3 text-slate-700">
+                        <p>Carregando relatórios...</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = typeof window !== 'undefined' && window.localStorage ? localStorage.getItem('token') : null;
+            if (token) {
+                showApp();
+            }
+        });
+
+        async function handleLogin(e) {
+            e.preventDefault();
+            const cpf = document.getElementById('cpf').value;
+            const senha = document.getElementById('senha').value;
+
+            try {
+                const res = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({cpf, senha})
+                });
+                const data = await res.json();
+                if (res.ok) {
+                    if (typeof window !== 'undefined' && window.localStorage) {
+                        localStorage.setItem('token', data.access_token);
+                        localStorage.setItem('usuario', data.usuario);
+                        localStorage.setItem('escola', data.escola);
+                    }
+                    showApp();
+                } else {
+                    alert(data.detail || 'Erro no login');
+                }
+            } catch (err) {
+                alert('Erro de conexão com o servidor.');
+            }
+        }
+
+        function showApp() {
+            document.getElementById('login-view').classList.add('hidden');
+            document.getElementById('app-view').classList.remove('hidden');
+            const usuario = (typeof window !== 'undefined' && window.localStorage) ? localStorage.getItem('usuario') : 'Gestor';
+            const escola = (typeof window !== 'undefined' && window.localStorage) ? localStorage.getItem('escola') : 'Escola';
+            document.getElementById('usuario-nome').innerText = usuario || 'Gestor';
+            document.getElementById('escola-nome').innerText = escola || 'AiramVeras Core';
+            loadDashboard();
+            loadTurmas();
+            loadRelatorios();
+        }
+
+        function handleLogout() {
+            if (typeof window !== 'undefined' && window.localStorage) {
+                localStorage.clear();
+            }
+            location.reload();
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-indigo-50', 'text-indigo-700');
+                btn.classList.add('text-slate-600', 'hover:bg-slate-100');
+            });
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('bg-indigo-50', 'text-indigo-700');
+                event.currentTarget.classList.remove('text-slate-600', 'hover:bg-slate-100');
+            }
+        }
+
+        async function loadDashboard() {
+            try {
+                const res = await fetch('/api/dashboard');
+                const data = await res.json();
+                document.getElementById('kpi-alunos').innerText = data.total_alunos;
+                document.getElementById('kpi-turmas').innerText = data.total_turmas;
+                document.getElementById('kpi-media').innerText = data.media_geral;
+                document.getElementById('kpi-freq').innerText = data.frequencia_geral + '%';
+
+                const container = document.getElementById('alertas-container');
+                if (data.alertas.length === 0) {
+                    container.innerHTML = '<p class="text-slate-500 text-sm">Nenhum alerta crítico.</p>';
+                } else {
+                    let html = '<table class="w-full text-left border-collapse text-sm"><thead><tr class="border-b bg-slate-50"><th class="p-2">Aluno</th><th class="p-2">Frequência</th><th class="p-2">Média</th><th class="p-2">Status</th></tr></thead><tbody>';
+                    data.alertas.forEach(a => {
+                        html += `<tr class="border-b"><td class="p-2 font-medium">${a.nome}</td><td class="p-2">${a.frequencia}%</td><td class="p-2">${a.media}</td><td class="p-2 text-red-600 font-semibold">${a.status}</td></tr>`;
+                    });
+                    html += '</tbody></table>';
+                    container.innerHTML = html;
+                }
+            } catch(e) {}
+        }
+
+        async function loadTurmas() {
+            try {
+                const res = await fetch('/api/turmas');
+                const turmas = await res.json();
+                const container = document.getElementById('turmas-container');
+                container.innerHTML = '';
+                turmas.forEach(t => {
+                    container.innerHTML += `
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                            <h4 class="font-bold text-slate-800">${t.nome}</h4>
+                            <p class="text-sm text-slate-500 mt-1">Turno: ${t.turno}</p>
+                            <p class="text-sm text-slate-500">Alunos: ${t.alunos_count}</p>
+                            <p class="text-sm font-semibold text-indigo-600 mt-2">Frequência: ${t.frequencia_media}%</p>
+                        </div>
+                    `;
+                });
+            } catch(e) {}
+        }
+
+        async function gerarPEI(e) {
+            e.preventDefault();
+            const aluno_id = parseInt(document.getElementById('pei-aluno').value);
+            const necessidade = document.getElementById('pei-nec').value;
+            const adaptacoes_curriculares = document.getElementById('pei-adap').value;
+            const objetivos_trimestrais = document.getElementById('pei-obj').value;
+
+            const res = await fetch('/api/airam/pei', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({aluno_id, necessidade, adaptacoes_curriculares, objetivos_trimestrais})
+            });
+            const json = await res.json();
+            alert(json.mensagem);
+        }
+
+        async function gerarPAEE(e) {
+            e.preventDefault();
+            const aluno_id = parseInt(document.getElementById('paee-aluno').value);
+            const recursos_tecnologia_assistiva = document.getElementById('paee-tec').value;
+            const atendimento_contra_turno = document.getElementById('paee-turno').value;
+
+            const res = await fetch('/api/airam/paee', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({aluno_id, recursos_tecnologia_assistiva, atendimento_contra_turno})
+            });
+            const json = await res.json();
+            alert(json.mensagem);
+        }
+
+        async function gerarPlanoAula(e) {
+            e.preventDefault();
+            const disciplina = document.getElementById(' aula-disc') ? document.getElementById(' aula-disc').value : 'Matemática';
+            const tema = document.getElementById('aula-tema').value;
+            const habilidade_bncc = document.getElementById('aula-bncc').value;
+            const metodologia = document.getElementById('aula-met').value;
+
+            const res = await fetch('/api/airam/plano-aula', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({disciplina, tema, habilidade_bncc, metodologia})
+            });
+            const json = await res.json();
+            alert(json.mensagem);
+        }
+
+        async function gerarJuridico(e) {
+            e.preventDefault();
+            const tipo = document.getElementById('jur-tipo').value;
+            const descricao = document.getElementById('jur-desc').value;
+
+            const res = await fetch('/api/airam/juridico', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({tipo, descricao})
+            });
+            const json = await res.json();
+            alert(json.mensagem);
+        }
+
+        async function registrarFrequencia(e) {
+            e.preventDefault();
+            const aluno_id = parseInt(document.getElementById('freq-aluno-id').value);
+            const data = document.getElementById('freq-data').value;
+            const presente = document.getElementById('freq-status').value === 'true';
+
+            const res = await fetch('/api/frequencia', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({aluno_id, data, presente})
+            });
+            const json = await res.json();
+            alert(json.mensagem);
+        }
+
+        async function lancarNota(e) {
+            e.preventDefault();
+            const aluno_id = parseInt(document.getElementById('nota-aluno-id').value);
+            const disciplina = document.getElementById('nota-disciplina').value;
+            const nota = parseFloat(document.getElementById('nota-valor').value);
+            const unidade = document.getElementById('nota-unidade').value;
+
+            const res = await fetch('/api/notas', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({aluno_id, disciplina, nota, unidade})
+            });
+            const json = await res.json();
+            alert(json.mensagem);
+            loadDashboard();
+        }
+
+        async function loadRelatorios() {
+            try {
+                const res = await fetch('/api/relatorios');
+                const data = await res.json();
+                document.getElementById('relatorios-content').innerHTML = `
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-indigo-50 p-4 rounded-lg">
+                            <span class="text-xs text-indigo-600 font-bold uppercase">Total Avaliados</span>
+                            <h4 class="text-2xl font-bold text-indigo-900 mt-1">${data.total_avaliados}</h4>
+                        </div>
+                        <div class="bg-emerald-50 p-4 rounded-lg">
+                            <span class="text-xs text-emerald-600 font-bold uppercase">Aprovados Estimados</span>
+                            <h4 class="text-2xl font-bold text-emerald-900 mt-1">${data.aprovados_estimados}</h4>
+                        </div>
+                        <div class="bg-amber-50 p-4 rounded-lg">
+                            <span class="text-xs text-amber-600 font-bold uppercase">Taxa Aprovação</span>
+                            <h4 class="text-2xl font-bold text-amber-900 mt-1">${data.taxa_aprovacao_projetada}</h4>
+                        </div>
+                    </div>
+                `;
+            } catch(e) {}
+        }
+    </script>
+</body>
+</html>

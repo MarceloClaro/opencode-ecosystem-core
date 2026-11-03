@@ -22,17 +22,11 @@ from integrations.harness_health import HarnessHealthStore
 from integrations.execution_control import ExecutionCancelled, is_cancelled
 
 
-class HarnessRuntime:
-    """Inventaria instalações e executa tarefas de texto com evidência da CLI."""
+class CLIPathResolver:
+    """Descobre executáveis sem construir executor ou persistir estado.
 
-    _CLI_NAMES = {"claude": "claude", "antigravity": "agy", "codex": "codex", "opencode": "opencode"}
-    _ALIASES = {"claude_code": "claude", "claude-code": "claude", "antigravity_cli": "antigravity"}
-    _PLACEHOLDERS = {"pending", "queued", "formatted", "placeholder", "simulated", "resposta simulada", "pronto_para_delegacao"}
-
-    def __init__(self, repo_root: str | Path | None = None):
-        self.repo_root = Path(repo_root or Path(__file__).resolve().parent.parent).resolve()
-        health_path = os.environ.get("HARNESS_HEALTH_PATH") or self.repo_root / ".mci_state" / "harness_health.sqlite3"
-        self.health_store = HarnessHealthStore(health_path)
+    Cada chamada observa o ambiente e os arquivos atuais, sem cache de caminhos.
+    """
 
     @staticmethod
     def _is_executable(path: Path) -> bool:
@@ -84,6 +78,19 @@ class HarnessRuntime:
     def resolve_cli_path(self, name: str) -> str | None:
         """Resolver compartilhado com diagnóstico, sem iniciar executores."""
         return self._resolve_cli(name)
+
+
+class HarnessRuntime(CLIPathResolver):
+    """Inventaria instalações e executa tarefas de texto com evidência da CLI."""
+
+    _CLI_NAMES = {"claude": "claude", "antigravity": "agy", "codex": "codex", "opencode": "opencode"}
+    _ALIASES = {"claude_code": "claude", "claude-code": "claude", "antigravity_cli": "antigravity"}
+    _PLACEHOLDERS = {"pending", "queued", "formatted", "placeholder", "simulated", "resposta simulada", "pronto_para_delegacao"}
+
+    def __init__(self, repo_root: str | Path | None = None):
+        self.repo_root = Path(repo_root or Path(__file__).resolve().parent.parent).resolve()
+        health_path = os.environ.get("HARNESS_HEALTH_PATH") or self.repo_root / ".mci_state" / "harness_health.sqlite3"
+        self.health_store = HarnessHealthStore(health_path)
 
     def status(self) -> dict[str, Any]:
         """Disponível indica instalação utilizável, sem afirmar login/LLM validado."""

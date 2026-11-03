@@ -65,12 +65,24 @@ def validate_action(kind, config):
     operation = out.get("operation")
     schemas = {
         "status": set(), "sync": {"cache_root", "plugin_ids"},
+        "inventory_local": {"cache_root", "plugin_ids"},
+        "extract_selected": {"cache_root", "plugin_ids"},
         "skill": {"plugin_id", "skill_name"}, "request": {"plugin_id", "action", "arguments", "intent"},
         "result": {"request_id"}, "response": {"request_id", "host_tool", "request_sha256", "result", "reported_by"},
         "local": {"plugin_id", "action", "arguments"},
     }
     if operation not in schemas or set(out) - schemas[operation] - {"operation"}:
         raise ValueError("Operação/campos de plugins desconhecidos")
+    if operation in {"inventory_local", "extract_selected"}:
+        from integrations.local_plugin_extraction import _absolute, _selection
+
+        if set(out) != {"operation", "cache_root", "plugin_ids"}:
+            raise ValueError("Cache e seleção explícitos obrigatórios")
+        cache = out["cache_root"]
+        if not isinstance(cache, str) or not 1 <= len(cache) <= 2000:
+            raise ValueError("Cache inválido")
+        _absolute(cache)
+        _selection(out["plugin_ids"], PLUGINS)
     if operation in {"skill", "request", "local"} and out.get("plugin_id") not in PLUGINS:
         raise ValueError("Plugin desconhecido")
     if operation == "skill":

@@ -29,6 +29,10 @@ import os
 import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+from pathlib import Path
+
+_REPO_ROOT = Path(__file__).resolve().parents[1]
+
 from mci.metabus import metabus
 from mci.metacognitive_loop import MetacognitiveLoop
 from mci.blackboard import blackboard
@@ -1551,6 +1555,88 @@ class MarceloClaroOrchestrator:
         """Lê página identificada por hash; não aceita caminhos do cliente."""
         return self.book_library.read_page(book_id, page)
 
+    # ------------------------------------------------------------------
+    # CATÁLOGO QUÂNTICO E FACHADA DE CONHECIMENTO (SPEC-935-R1002)
+    # ------------------------------------------------------------------
+    @property
+    def quantum_catalog(self):
+        """Catálogo quântico local; leitura não importa nem executa modelos."""
+        if getattr(self, "_quantum_catalog", None) is None:
+            from research.quantum_catalog import QuantumCatalog
+
+            self._quantum_catalog = QuantumCatalog()
+        return self._quantum_catalog
+
+    def quantum_catalog_action(self, config: Dict[str, Any]) -> Dict[str, Any]:
+        """Roteia consulta/escrita explícita ao catálogo quântico do primário."""
+        if not isinstance(config, dict):
+            raise ValueError("config deve ser um objeto")
+        op = config.get("operation")
+        if op == "import":
+            return self.quantum_catalog.import_source()
+        if op in ("panel", "painel"):
+            return self.quantum_catalog.export_panel()
+        return self.quantum_catalog.execute(config)
+
+    def knowledge_sources_action(self, config: Dict[str, Any]) -> Dict[str, Any]:
+        """Fachada comum de consulta; adaptadores fechados, somente leitura."""
+        if not isinstance(config, dict):
+            raise ValueError("config deve ser um objeto")
+        op = config.get("operation")
+        if op == "sources":
+            if set(config) != {"operation"}:
+                raise ValueError("campo nao esperado")
+            return {
+                "status": "ok",
+                "sources": [
+                    {"source_id": "quantum_catalog", "kind": "sqlite_catalog", "read_only": True},
+                    {"source_id": "books", "kind": "sqlite_index", "read_only": True},
+                ],
+                "external_validation": False,
+            }
+        if op == "search":
+            if set(config) != {"operation", "source_id", "query", "limit"}:
+                raise ValueError("campo nao esperado")
+            source_id = config.get("source_id")
+            query = config.get("query")
+            limit = config.get("limit")
+            if source_id == "quantum_catalog":
+                result = self.quantum_catalog_action(
+                    {"operation": "search", "query": query, "limit": limit})
+            elif source_id == "books":
+                raw = self.library_query(query, top_k=(limit if isinstance(limit, int) else 5))
+                result = self._normalize_books_result(raw)
+            else:
+                raise ValueError("fonte desconhecida")
+            return {"status": "ok", "source_id": source_id, "result": result}
+        raise ValueError("operacao nao permitida")
+
+    @staticmethod
+    def _normalize_books_result(raw: Dict[str, Any]) -> Dict[str, Any]:
+        """Normaliza a saída da biblioteca para o contrato comum da fachada."""
+        evidence = raw.get("evidence") or []
+        results = []
+        for item in evidence:
+            results.append({
+                "title": item.get("title"),
+                "source": item.get("source") or item.get("file"),
+                "page": item.get("page"),
+                "source_sha256": item.get("source_sha256") or item.get("book_id"),
+                "page_sha256": item.get("page_sha256"),
+                "text": item.get("text"),
+                "citation": item.get("citation"),
+                "uri": item.get("uri"),
+            })
+        return {
+            "status": raw.get("status", "ok"),
+            "abstained": bool(raw.get("abstained", False)),
+            "total_matches": len(results),
+            "results": results,
+            "searched_fields": ["title", "text"],
+            "reason": raw.get("reason"),
+            "source_kind": raw.get("source_kind"),
+        }
+
     def finetuning_prepare_data(self, records: List[Dict[str, Any]],
                                seed: int = 42) -> Dict[str, Any]:
         """Valida e separa dados por grupo antes de qualquer treinamento."""
@@ -1890,6 +1976,54 @@ class MarceloClaroOrchestrator:
         return registry.emitter(dry_run=dry_run).emit_all(artifacts, require_license=require_license)
 
     # ------------------------------------------------------------------
+    # FEDERAÇÃO UNIVERSAL DE PLUGINS, MCPs E AGENTES (R1012)
+    # ------------------------------------------------------------------
+    def federation_sync(self, *, repo_root: Optional[str] = None,
+                        home: Optional[str] = None, write: bool = False) -> Dict[str, Any]:
+        """
+        Coleta plugins, MCPs e agentes de Claude, ChatGPT, Antigravity e GitHub.
+
+        A coleta é passiva: não instala, não habilita e não executa. Por padrão
+        também não grava — quem persiste é o operador via CLI ``federacao sync``.
+        """
+
+        from integrations.federation_sync.store import sync as _sync
+
+        root = Path(repo_root or _REPO_ROOT)
+        return _sync(root, home=Path(home) if home else None, write=write)
+
+    def federation_status(self, *, repo_root: Optional[str] = None) -> Dict[str, Any]:
+        from integrations.federation_sync.store import status as _status
+
+        return _status(Path(repo_root or _REPO_ROOT))
+
+    def federation_route(
+        self,
+        description: str,
+        required_capabilities: Optional[List[str]] = None,
+        *,
+        top_k: int = 5,
+        include_non_admitted: bool = False,
+        repo_root: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        """
+        Roteia a tarefa para artefatos federados usando a quinta cabeça de atenção.
+
+        Só entram por padrão itens ``admitted``. O relatório traz a decomposição
+        do score e a proveniência; ele não afirma que o artefato funcione.
+        """
+
+        from integrations.federation_sync.route import route as _route
+
+        return _route(
+            Path(repo_root or _REPO_ROOT),
+            description,
+            list(required_capabilities or []),
+            top_k=top_k,
+            include_non_admitted=include_non_admitted,
+        )
+
+    # ------------------------------------------------------------------
     # CAMADA SDD/TDD (Specification-Driven + Test-Driven Development)
     # ------------------------------------------------------------------
     def delegate_with_spec(self, description: str,
@@ -2050,10 +2184,6 @@ class MarceloClaroOrchestrator:
         report["metacognition"] = {
             **self._record_knowledge_outcome("science.reproducible", config["question"], observation),
             "confidence_promoted": False, "externally_validated": False}
-        article=report.get('artifacts',{}).get('article',{}).get('path')
-        from pathlib import Path
-        report['academic_rigor']=self._academic_preflight(Path(article).read_text() if article and Path(article).is_file() else '',config['question'])
-        report['scientific_release_allowed']=False
         return report
 
     def scientific_verify_package(self, **config: Any) -> Dict[str, Any]:
@@ -2086,23 +2216,29 @@ class MarceloClaroOrchestrator:
         return report
 
     def academic_rigor_action(self, config: Dict[str, Any]) -> Dict[str, Any]:
-        """R914: auditoria e banca locais; sem aprovação científica automática."""
+        """R914/R916: fachada acadêmica única, subordinada a este orquestrador."""
         from academic.adversarial_research.service import AdversarialResearchService
-        service=getattr(self,'_academic_rigor',None)
+        service = getattr(self, "_academic_rigor", None)
         if service is None:
-            service=AdversarialResearchService(self)
-            self._academic_rigor=service
+            service = self._academic_rigor = AdversarialResearchService(self)
         return service.action(config)
 
-    def _academic_preflight(self,content: str,topic: str) -> Dict[str, Any]:
+    def run_academic_adversarial_review(self, project: Dict[str, Any], **limits: Any) -> Dict[str, Any]:
+        """Executa verificações locais e retorna pendências sem simular inferência de agentes."""
+        return self.academic_rigor_action({"operation": "review", "project": project, **limits})
+
+    def _academic_preflight(self, content: str, topic: str) -> Dict[str, Any]:
+        """Preflight de manuscrito: exige intake explícito das alegações científicas."""
         from academic.adversarial_research.service import AdversarialResearchService
         try:
-            service=getattr(self,'_academic_rigor',None) or AdversarialResearchService(self)
-            self._academic_rigor=service
-            return service.preflight_text(content,topic)
-        except Exception as exc:
-            return {'status':'blocked','reason':'academic_preflight_failed','error_type':type(exc).__name__,
-                    'scientifically_approved':False,'human_review_required':True}
+            service = getattr(self, "_academic_rigor", None)
+            if service is None:
+                service = self._academic_rigor = AdversarialResearchService(self)
+            return service.preflight_text(content, topic)
+        except (OSError, RuntimeError, ValueError, TypeError) as exc:
+            return {"status": "blocked", "reason": "academic_preflight_failed",
+                    "error_type": type(exc).__name__, "scientifically_approved": False,
+                    "human_review_required": True}
 
     def local_component_action(self, component: str, config: Dict[str, Any]) -> Dict[str, Any]:
         """R913: plugins especializados usam o primário e contratos locais fechados."""
@@ -2157,6 +2293,43 @@ class MarceloClaroOrchestrator:
                                    "confidence_promoted": False}
         return report
 
+    def ai_edge_quantizer_action(self, config: Dict[str, Any]) -> Dict[str, Any]:
+        """R928: fonte/ambiente e ensaio TFLite sintético, sem modelo externo."""
+        from pathlib import Path
+        from integrations.ai_edge_quantizer_core import EdgeQuantizerCore, validate_config
+        config = validate_config(config)
+        operation = config.pop('operation')
+        service = EdgeQuantizerCore(Path(__file__).resolve().parents[1])
+        report = getattr(service, operation)(**config)
+        observation = {key: report.get(key) for key in ('status','commit','plan_sha256','report_sha256',
+            'source_ready','environment_ready','synthetic_inference_executed','training_executed',
+            'external_checkpoint_downloaded','externally_validated')}
+        receipt = self._record_knowledge_outcome('core.ai_edge_quantizer',operation,observation)
+        # Metadados operacionais ficam no MetaBus, fora de planos, recibos e
+        # relatórios já selados. Não invalidar o hash devolvido ao consumidor.
+        if not any(key in report for key in ('plan_sha256','receipt_sha256','report_sha256')):
+            report['metacognition'] = {**receipt,'confidence_promoted':False,'externally_validated':False}
+        return report
+
+    def itsfine_action(self, config: Dict[str, Any]) -> Dict[str, Any]:
+        """R923: diagnóstico/planejamento ITS-FINE; nunca treina ou altera política."""
+        from pathlib import Path
+        from integrations.itsfine_core import ItsFineCore, validate_config
+        config = validate_config(config)
+        operation = config.pop('operation')
+        service = ItsFineCore(Path(__file__).resolve().parents[1])
+        result = service.run_safe(**config) if operation == 'run' else getattr(service, operation)(**config)
+        observation = {key: result.get(key) for key in ('status', 'version', 'integrity_ok',
+            'plan_sha256', 'steps_executed', 'processes_executed', 'training_executed',
+            'inference_executed', 'policy_modified', 'externally_validated')}
+        receipt = self._record_knowledge_outcome('core.itsfine', operation, observation)
+        # O plano já está selado: metadados operacionais ficam no MetaBus, fora
+        # dele, para que o mesmo plano seja aceito pela operação run.
+        if operation not in {'plan','install_plan','engine_plan'}:
+            result['metacognition'] = {**receipt, 'confidence_promoted': False,
+                                      'externally_validated': False}
+        return result
+
     def scientific_plugin_action(self, operation: str, **config: Any) -> Dict[str, Any]:
         import os
         from pathlib import Path
@@ -2167,7 +2340,13 @@ class MarceloClaroOrchestrator:
         service = ScientificPluginService(Path(__file__).resolve().parents[1])
         if operation == "status":
             return service.status()
-        if operation == "sync":
+        if operation == "inventory_local":
+            from integrations.local_plugin_extraction import inventory_selected_plugins
+
+            report = inventory_selected_plugins(**config)
+        elif operation == "extract_selected":
+            report = service.extract_selected(**config)
+        elif operation == "sync":
             default_cache = "/mnt/c/Users/marce/.codex/plugins/cache" if os.name != "nt" else str(Path.home() / ".codex/plugins/cache")
             report = service.sync(cache_root=config.pop("cache_root", os.environ.get("OPENCODE_PLUGIN_CACHE", default_cache)), **config)
         elif operation == "skill":
@@ -2186,6 +2365,12 @@ class MarceloClaroOrchestrator:
                        "executed": report.get("executed", False),
                        "host_reported_execution": report.get("host_reported_execution", False),
                        "externally_validated": False}
+        if operation in {"inventory_local", "extract_selected"}:
+            observation.update(
+                scope=report["scope"], plugin_ids=config["plugin_ids"],
+                permission_projection={p["id"]: p["permission_projection"]
+                                       for p in report.get("evidence", report["plugins"])},
+            )
         report["metacognition"] = {**self._record_knowledge_outcome("science.plugin", str(observation["plugin_id"] or "selected_plugins"), observation),
                                    "confidence_promoted": False}
         return report
@@ -2260,6 +2445,8 @@ class MarceloClaroOrchestrator:
         if provider is None:
             provider = self._code_context_provider = CodeContextProvider()
         report = provider.run(config)
+        if report.get("status") == "invalid_request":
+            return report
         if config.get("operation") == "status":
             return report
         if config.get("operation") == "query" and report.get("success") is True and config.get("tool") != "ping":
@@ -2439,8 +2626,6 @@ class MarceloClaroOrchestrator:
              "score_kind": "internal_heuristic", "externally_validated": False,
              "confidence_promoted": False},
         )
-        summary['academic_rigor']=self._academic_preflight(getattr(run,'final_manuscript',None) or manuscript,topic)
-        summary['scientific_release_allowed']=False
         return summary
 
     def academic_pipeline_with_rigorous_board(
@@ -2497,8 +2682,6 @@ class MarceloClaroOrchestrator:
             pass
 
         summary["lessons_considered"] = len(awareness.get("lessons", []))
-        summary['academic_rigor']=self._academic_preflight(getattr(run,'final_manuscript',None) or manuscript,topic)
-        summary['scientific_release_allowed']=False
         return summary
 
     # ------------------------------------------------------------------
@@ -2877,8 +3060,6 @@ class MarceloClaroOrchestrator:
                 result["draft_only"] = True
             if manuscript_rigor_gate is not None:
                 result["manuscript_rigor_gate"] = manuscript_rigor_gate
-            result['academic_rigor']=self._academic_preflight(r105_manuscript,seed_domain)
-            result['scientific_release_allowed']=False
             return result
 
         except Exception as exc:
@@ -3475,8 +3656,6 @@ class MarceloClaroOrchestrator:
         )
         manifest = production.build(content)
         generated = [f for f, info in manifest["formats"].items() if info]
-        manifest['academic_rigor']=self._academic_preflight(content,title)
-        manifest['scientific_release_allowed']=False
         metabus.memory.add_reflection(
             agent_id=self.id,
             task_context=f"produção científica: {title[:80]} (template {template})",
@@ -3550,9 +3729,6 @@ class MarceloClaroOrchestrator:
             score=min(1.0, resumo["fichamentos"] / max(1, max_papers)),
         )
         manifest["folder"] = str(hub.folder)
-        import json
-        manifest['academic_rigor']=self._academic_preflight(json.dumps(manifest,ensure_ascii=False),topic)
-        manifest['scientific_release_allowed']=False
         return manifest
 
     # ==================================================================

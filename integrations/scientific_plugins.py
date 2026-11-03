@@ -43,6 +43,8 @@ PLUGINS = {
     "contas-escolares-airam-veras": ("Contas Escolares Airam Veras", "created-by-me-remote/contas-escolares-airam-veras", "1.1.0"),
     "medico-virtual-supremo": ("Médico Virtual Supremo", "created-by-me-remote/gpt-6ceee9ff15bc7f1a4007d43b810f1876", "0.4.0"),
     "sites": ("Sites", "openai-curated-remote/sites", "1.0.2-remix-a.1"),
+    "zotero": ("Zotero", "openai-curated-remote/zotero", "0.1.2"),
+    "sequence-viewer": ("Sequence Viewer", "openai-curated-remote/sequence-viewer", "0.1.52"),
 }
 # Seleção solicitada, não outro registro: os cinco perfis legados adicionais
 # continuam no mesmo PLUGINS e na mesma registry.json.
@@ -210,7 +212,12 @@ def validate_plugin_request(plugin_id, operation, arguments, intent=None):
 
 class ScientificPluginService:
     def __init__(self, repo_root: str | Path):
-        self.root = Path(repo_root).resolve()
+        from integrations.local_plugin_extraction import _destination_path
+
+        lexical = Path(repo_root)
+        self._lexical_root = lexical if lexical.is_absolute() else Path.cwd() / lexical
+        # R922: não apagar a evidência de link/traversal com resolve() antes do gate.
+        self.root = _destination_path(self._lexical_root).resolve()
         self.storage = self.root / ".opencode/scientific-plugins"
 
     def _path(self, *parts):
@@ -351,6 +358,18 @@ class ScientificPluginService:
         self._write(self._path("registry.json"), registry, manifest=True)
         return {"status": "completed", "plugins": result, "executed": False,
                 "credentials_copied": False}
+
+    def extract_eligible(self, *, cache_root: str | Path, plugin_ids: list[str]) -> dict[str, Any]:
+        """R921: extração seletiva licenciada, sem sync bulk ou execução de plugins."""
+        from integrations.local_plugin_extraction import _extract_eligible
+
+        return _extract_eligible(self, cache_root=cache_root, plugin_ids=plugin_ids)
+
+    def extract_selected(self, *, cache_root: str | Path, plugin_ids: list[str]) -> dict[str, Any]:
+        """R922: raízes pinned explícitas e projeção de dados só em DrvFS observado."""
+        from integrations.local_plugin_extraction import _extract_eligible
+
+        return _extract_eligible(self, cache_root=cache_root, plugin_ids=plugin_ids, selected_scope=True)
 
     def skill(self, plugin_id, skill_name):
         _slug(plugin_id)

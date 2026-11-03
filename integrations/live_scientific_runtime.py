@@ -24,16 +24,6 @@ import urllib.request
 from urllib.parse import urlsplit
 
 
-class _RejectModelRedirect(urllib.request.HTTPRedirectHandler):
-    def redirect_request(self, req, fp, code, msg, headers, newurl):
-        raise urllib.error.URLError("Redirecionamento do modelo local recusado")
-
-
-def local_model_opener():
-    """Transporte direto: proxies de ambiente e redirecionamentos não são usados."""
-    return urllib.request.build_opener(urllib.request.ProxyHandler({}), _RejectModelRedirect())
-
-
 DEFAULTS = {
     "hermes": "/home/marceloclaro/projetos/hermes-agent-r667",
     "mirofish": "/home/marceloclaro/projetos/MiroFish-Offline-AGPL",
@@ -151,7 +141,7 @@ class _AuditProxy:
                     request = json.dumps(data, ensure_ascii=False, allow_nan=False).encode()
                     req = urllib.request.Request(base + "/chat/completions", data=request,
                                                  headers={"Content-Type": "application/json", "Authorization": "Bearer local-runtime"})
-                    with local_model_opener().open(req, timeout=timeout) as upstream:
+                    with urllib.request.urlopen(req, timeout=timeout) as upstream:
                         response = upstream.read(1024 * 1024 + 1)
                         if len(response) > 1024 * 1024:
                             raise ValueError("resposta fora do limite")
@@ -238,8 +228,7 @@ class LiveScientificRuntime:
                     "--run-budget", str(max(1, config["timeout_seconds"] - 3)), "--ignore-rules", "--in", str(output)]
         else:
             env.update({"LLM_API_KEY": "local-runtime", "LLM_BASE_URL": proxy_url, "LLM_MODEL_NAME": config["model"],
-                        "OPENAI_API_BASE_URL": proxy_url,
-                        "HF_HUB_OFFLINE": "1", "TRANSFORMERS_OFFLINE": "1"})
+                        "OPENAI_API_BASE_URL": proxy_url})
             scenario = {"simulation_id": "r667_local_probe", "simulation_requirement": config["prompt"], "llm_model": config["model"],
                         "time_config": {"total_simulation_hours": 1, "minutes_per_round": 60, "agents_per_hour_min": 2,
                                         "agents_per_hour_max": 2, "off_peak_activity_multiplier": 1},
@@ -280,7 +269,7 @@ class LiveScientificRuntime:
         try:
             runtime = self._resolve(config)
             # A presença deve ser confirmada pelo servidor, antes da execução externa.
-            with local_model_opener().open(config["base_url"] + "/models", timeout=10) as response:
+            with urllib.request.urlopen(config["base_url"] + "/models", timeout=10) as response:
                 raw = response.read(1024 * 1024 + 1)
             if len(raw) > 1024 * 1024:
                 raise ValueError("Inventário de modelos excede limite.")

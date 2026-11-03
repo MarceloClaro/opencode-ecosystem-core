@@ -127,7 +127,7 @@ def _check_evolution_registry() -> DoctorCheck:
     cycles.json — este check existe porque um bug real (R108) fazia
     ``EvolutionRegistry._load()`` zerar o histórico inteiro em silêncio
     quando uma única entrada tinha uma chave desconhecida."""
-    cycles_path = os.path.join(REPO_ROOT, "evolution", "cycles.json")
+    cycles_path = os.environ.get("EVOLUTION_STATE_PATH") or os.path.join(REPO_ROOT, "evolution", "cycles.json")
     if not os.path.exists(cycles_path):
         return DoctorCheck("evolution_registry", "warn", "evolution/cycles.json não encontrado.")
     try:
@@ -136,10 +136,17 @@ def _check_evolution_registry() -> DoctorCheck:
         raw_count = len(raw.get("cycles", []))
 
         from evolution.cycles import EvolutionRegistry
-        registry = EvolutionRegistry()
+        registry = EvolutionRegistry(state_path=cycles_path)
         loaded_count = len(registry.cycles)
 
         if loaded_count < raw_count:
+            if getattr(registry, "_raw_document", None) == raw:
+                return DoctorCheck(
+                    "evolution_registry", "warn",
+                    f"{loaded_count}/{raw_count} ciclos modelados; "
+                    f"{raw_count - loaded_count} entrada(s) não modelada(s) preservada(s) integralmente. "
+                    "Revisão/migração histórica pendente; preservação não valida seu conteúdo.",
+                )
             return DoctorCheck(
                 "evolution_registry", "fail",
                 f"Perda silenciosa de histórico: {raw_count} ciclos no arquivo, "
@@ -260,22 +267,22 @@ def _resolve_external_cli(name: str) -> Optional[str]:
     A pasta do Python atual cobre ferramentas instaladas na venv do projeto.
     Nenhuma CLI é executada e a detecção não confirma autenticação/inferência.
     """
-    from integrations.harness_runtime import HarnessRuntime
+    from integrations.harness_runtime import CLIPathResolver
 
-    runtime = HarnessRuntime(REPO_ROOT)
-    found = runtime.resolve_cli_path(name)
+    resolver = CLIPathResolver()
+    found = resolver.resolve_cli_path(name)
     override_name = "ANTIGRAVITY_BIN" if name == "agy" else f"{name.upper()}_BIN"
     if found or os.environ.get(override_name):
         # Um override inválido permanece explícito; não substituir a escolha.
         return found
     candidate = Path(sys.executable).parent / (f"{name}.exe" if os.name == "nt" else name)
-    if runtime._is_executable(candidate):
+    if resolver._is_executable(candidate):
         return str(candidate)
     # A instalação do projeto permanece disponível quando doctor é iniciado
     # pelo Python do sistema, sem depender de ativação prévia da venv.
     project_bin = Path(REPO_ROOT) / ".venv" / ("Scripts" if os.name == "nt" else "bin")
     candidate = project_bin / (f"{name}.exe" if os.name == "nt" else name)
-    return str(candidate) if runtime._is_executable(candidate) else None
+    return str(candidate) if resolver._is_executable(candidate) else None
 
 
 def _npm_global_version(bin_name: str, package: str) -> Optional[str]:

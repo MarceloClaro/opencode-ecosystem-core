@@ -1,0 +1,18 @@
+{
+  "phase": "baseline",
+  "command": [
+    "-m",
+    "pytest",
+    "-q",
+    "--maxfail=20",
+    "--tb=short",
+    "--junitxml=/home/marceloclaro/opencode-ecosystem-core/outputs/core-audit-r929/baseline.xml"
+  ],
+  "returncode": 124,
+  "duration_seconds": 900.151,
+  "timed_out": true,
+  "external_tests_opt_in": false,
+  "evolution_state_isolated": true,
+  "mci_state_isolated_by_conftest": true,
+  "whole_suite_completed": false
+}

@@ -66,22 +66,6 @@ async def ecosystem_agent_profile(config: dict[str, Any]) -> dict[str, Any]:
 
 
 @mcp.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=False, openWorldHint=False))
-async def ecosystem_research_rigor(config: dict[str, Any]) -> dict[str, Any]:
-    """Auditoria adversarial e banca persistente pelo MarceloClaro (R914).
-
-    operation: status/inventory/plan/review/report/banca_start/banca_question/
-    banca_answer/banca_report/banca_rate/banca_cancel/configure. review exige
-    project com artifact_path, claims explícitas, fontes e contexto. banca_answer
-    exige turn_id da pergunta recebida. Notas são declaradas de treinamento,
-    vinculadas a rubrica documental e respostas observadas. Regras locais não
-    equivalem a parecer de banca, validação externa ou autorização ética.
-    """
-    from academic.adversarial_research.service import validate_rigor_config
-    config=validate_rigor_config(config)
-    return await run_cancellable(_knowledge_operation, "academic_rigor_action", {"config":config})
-
-
-@mcp.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=False, openWorldHint=False))
 async def ecosystem_local_ci(config: dict[str, Any]) -> dict[str, Any]:
     """Inicia/consulta/lista/cancela o perfil científico local fechado.
 
@@ -304,6 +288,50 @@ async def ecosystem_library_page(book_id: str, page: str) -> str:
         lambda: get_library_orchestrator().library_page(book_id, int(page))
     )
     return json.dumps(result, ensure_ascii=False)
+
+
+@mcp.tool(annotations=ToolAnnotations(readOnlyHint=True, destructiveHint=False, openWorldHint=False))
+async def ecosystem_quantum_catalog(config: dict[str, Any]) -> dict[str, Any]:
+    """Consulta local do catálogo quântico: status, list, search, get ou history.
+
+    Somente leitura: painel e importação são operações explícitas da CLI e
+    não são expostas aqui. TRL, licença e atividade são alegações da fonte,
+    não fatos verificados. Nenhum repositório ou URL é executado.
+    """
+    if not isinstance(config, dict):
+        raise ValueError("config deve ser um objeto")
+    op = config.get("operation")
+    if op not in {"status", "list", "search", "get", "history"}:
+        raise ValueError("MCP quantum-catalog aceita apenas status, list, search, get, history.")
+    return await asyncio.to_thread(
+        lambda: get_library_orchestrator().quantum_catalog_action(config)
+    )
+
+
+@mcp.resource("ecosystem://quantum/catalog", name="Catálogo quântico local",
+              description="Inventário e limitações do catálogo quântico; somente leitura.",
+              mime_type="application/json")
+async def ecosystem_quantum_catalog_inventory() -> str:
+    result = await asyncio.to_thread(
+        lambda: get_library_orchestrator().quantum_catalog_action({"operation": "status"})
+    )
+    return json.dumps(result, ensure_ascii=False)
+
+
+@mcp.tool(annotations=ToolAnnotations(readOnlyHint=True, destructiveHint=False, openWorldHint=False))
+async def ecosystem_knowledge_query(config: dict[str, Any]) -> dict[str, Any]:
+    """Fachada comum de consulta às fontes de conhecimento locais do Core.
+
+    Operações: sources (listar adaptadores) e search (source_id, query, limit).
+    Somente leitura; nenhuma importação, indexação ou SQL arbitrário.
+    """
+    if not isinstance(config, dict):
+        raise ValueError("config deve ser um objeto")
+    if config.get("operation") not in {"sources", "search"}:
+        raise ValueError("MCP knowledge-query aceita apenas sources e search.")
+    return await asyncio.to_thread(
+        lambda: get_library_orchestrator().knowledge_sources_action(config)
+    )
 
 
 @mcp.prompt(name="ecosystem_book_review",

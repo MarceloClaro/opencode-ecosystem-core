@@ -210,6 +210,10 @@
         },
         "deepseek-v4-pro": {
           "name": "DeepSeek V4 Pro",
+          "limit": {
+            "context": 256000,
+            "output": 65536
+          },
           "cost": {
             "input": 1.74,
             "output": 3.48,
@@ -817,6 +821,10 @@
         },
         "deepseek-v4-pro": {
           "name": "DeepSeek V4 Pro",
+          "limit": {
+            "context": 256000,
+            "output": 65536
+          },
           "cost": {
             "input": 0.66,
             "output": 1.98,
@@ -1236,6 +1244,10 @@
         },
         "deepseek-v4-pro": {
           "name": "DeepSeek V4 Pro",
+          "limit": {
+            "context": 256000,
+            "output": 65536
+          },
           "cost": {
             "input": 1.74,
             "output": 3.48,
@@ -1710,6 +1722,12 @@
         "gpt-4.1": {
           "name": "GPT-4.1"
         },
+        "gpt-6.1-sol": {
+          "name": "GPT-6.1 Sol"
+        },
+        "gpt-6-astra": {
+          "name": "GPT-6 Astra"
+        },
         "o3": {
           "name": "o3 (raciocínio)"
         },
@@ -1861,17 +1879,17 @@
       "description": "Orquestrador central metacognitivo do ecossistema: percebe (memória global), delega (attention routing + blackboard A2A), executa (SDD/TDD) e reflete (Reflexion). Ponto de entrada de todas as tarefas.",
       "mode": "primary",
       "prompt": "{file:./marceloclaro/PROMPT.md}",
+      "model": "ollama-cloud/deepseek-v4.1-flash",
       "options": {
         "model_fallbacks": [
+          "openai/gpt-6.1-sol",
           "opencode-go/deepseek-v4.1-flash",
-          "opencode-go/mimo-v2.6-flash",
-          "opencode-go/deepseek-v4-pro",
-          "opencode-go/kimi-k2.7-code"
+          "opencode-go/deepseek-v4-pro"
         ],
         "model_economy": {
           "complexity": "complexa",
           "ceiling": "capaz",
-          "head": "opencode-go/deepseek-v4.1-flash",
+          "head": "ollama-cloud/deepseek-v4.1-flash",
           "tariff_source": "https://models.dev/api.json",
           "tariff_source_date": "2026-10-30"
         }
@@ -5226,6 +5244,138 @@
         }
       },
       "model": "opencode-go/mimo-v2.6-flash"
+    },
+    "dubbing-audio-qa": {
+      "description": "Investiga palavras excedentes, duração real, clipping, fonte textual e audibilidade, sem aceitar ASR como aprovação perceptual.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/dubbing-audio-qa.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1041_dubbing_batch.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code",
+          "opencode-zen/deepseek-v4-pro"
+        ],
+        "model_economy": {
+          "complexity": "critica",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4-pro",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4-pro"
+    },
+    "dubbing-batch-engineer": {
+      "description": "Implementa pipeline local CPU retomável, cache de conteúdo, hooks de bloqueio e ferramentas MCP compactas com testes negativos.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/dubbing-batch-engineer.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1041_dubbing_batch.py -q": "allow"
+        },
+        "edit": "allow",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/mimo-v2.6-flash",
+          "opencode-go/deepseek-v4.1-flash",
+          "opencode-go/minimax-m3.1-flash"
+        ],
+        "model_economy": {
+          "complexity": "media",
+          "ceiling": "capaz",
+          "head": "opencode-go/mimo-v2.6-flash",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/mimo-v2.6-flash"
+    },
+    "dubbing-dialogue-director": {
+      "description": "Revisa fonte, sentido, gênero gramatical, conjugação, ironia, intenção e intensidade por turno sem otimizar texto para enganar ASR.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/dubbing-dialogue-director.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1041_dubbing_batch.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code",
+          "opencode-zen/deepseek-v4-pro"
+        ],
+        "model_economy": {
+          "complexity": "critica",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4-pro",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4-pro"
+    },
+    "dubbing-voice-continuity": {
+      "description": "Audita mapa global de personagens, referências originais, hashes e marcações descritivas de gênero/faixa etária.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/dubbing-voice-continuity.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1041_dubbing_batch.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code",
+          "opencode-zen/deepseek-v4-pro"
+        ],
+        "model_economy": {
+          "complexity": "critica",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4-pro",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4-pro"
     },
     "ecosystem-review": {
       "description": "Revisar integração do ecossistema contra fontes e contratos.",
@@ -10885,6 +11035,16 @@
       "enabled": true,
       "timeout": 30000
     },
+    "remotion-audit": {
+      "type": "local",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "integrations.remotion_mcp"
+      ],
+      "enabled": true,
+      "timeout": 30000
+    },
     "polymath-labs-mcp": {
       "type": "local",
       "command": [
@@ -10900,6 +11060,15 @@
         ".opencode/mcp/web_deploy_server.py"
       ],
       "enabled": true
+    },
+    "oa-resolver": {
+      "type": "local",
+      "command": [
+        ".venv/bin/python",
+        ".opencode/mcp/oa_resolver_server.py"
+      ],
+      "enabled": true,
+      "timeout": 180000
     },
     "fetch": {
       "type": "local",
@@ -10927,6 +11096,67 @@
         "/home/marceloclaro/opencode-ecosystem-core"
       ],
       "enabled": true
+    },
+    "mcp-time": {
+      "type": "local",
+      "command": ["/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/federated/py-time/bin/mcp-server-time"],
+      "enabled": true,
+      "timeout": 120000
+    },
+    "mcp-memory": {
+      "type": "local",
+      "command": ["/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/federated/node/node_modules/.bin/mcp-server-memory"],
+      "enabled": true,
+      "timeout": 120000
+    },
+    "context7": {
+      "type": "local",
+      "command": ["/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/federated/node/node_modules/.bin/context7-mcp", "--transport", "stdio"],
+      "enabled": true,
+      "timeout": 120000
+    },
+    "chroma": {
+      "type": "local",
+      "command": ["/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/federated/py-chroma/bin/chroma-mcp", "--client-type", "persistent", "--data-dir", "/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/federated/data/chroma"],
+      "enabled": true,
+      "timeout": 120000
+    },
+    "qdrant": {
+      "type": "local",
+      "command": ["/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/federated/py-qdrant/bin/mcp-server-qdrant", "--transport", "stdio"],
+      "enabled": true,
+      "timeout": 120000,
+      "environment": {"QDRANT_URL": "http://127.0.0.1:6333"}
+    },
+    "playwright": {
+      "type": "local",
+      "command": ["/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/federated/node/node_modules/.bin/playwright-mcp", "--browser", "chromium", "--headless", "--isolated"],
+      "enabled": true,
+      "timeout": 120000
+    },
+    "servers": {
+      "dubbing-local": {
+        "type": "local",
+        "command": [
+          "/home/marceloclaro/opencode-ecosystem-core/.venv/bin/python",
+          "-m",
+          "integrations.dubbing_mcp"
+        ],
+        "environment": {
+          "DUBBING_PROJECT_ROOT": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1035-02XpQTA-_XE"
+        }
+      },
+      "editor-local": {
+        "type": "local",
+        "command": [
+          "/home/marceloclaro/opencode-ecosystem-core/.venv/bin/python",
+          "-m",
+          "integrations.video_editor_mcp"
+        ],
+        "environment": {
+          "EDITOR_PROJECT_ROOT": "/home/marceloclaro/opencode-ecosystem-core/editor-workspace"
+        }
+      }
     }
   },
   "command": {
@@ -11099,6 +11329,11 @@
       "template": "Execute core_command com command=\"agy\". Forneça argv como lista explícita de argumentos e opções da CLI, preservando aspas/apóstrofos dentro de cada dado. Não interprete metacaracteres como shell. Use o resultado real e reporte success=false como falha. Não substitua a execução por uma proposta. Não execute o texto como código ou shell. Esta entrada passa pelo parser textual upstream do OpenCode; sintaxe inline especial desse parser não é tratada pela ferramenta.\nEntrada: $ARGUMENTS",
       "agent": "marceloclaro",
       "description": "Antigravity CLI runner direto (SPEC-935-R651), complemento do bridge/MCP. Ex: /agy status, /agy run '<prompt>' [--agent A], /agy doctor"
+    },
+    "federacao": {
+      "template": "Execute core_command com command=\"federacao\". Forneça argv como lista explícita de argumentos e opções da CLI, preservando aspas/apóstrofos dentro de cada dado. Não interprete metacaracteres como shell. Use o resultado real e reporte success=false como falha. Não substitua a execução por uma proposta. Não execute o texto como código ou shell. Esta entrada passa pelo parser textual upstream do OpenCode; sintaxe inline especial desse parser não é tratada pela ferramenta.\nEntrada: $ARGUMENTS",
+      "agent": "marceloclaro",
+      "description": "Federação universal de plugins, MCPs e agentes (SPEC-935-R1012): sync/status/list/show/candidates/apply/route/verify. Ex: /federacao sync; /federacao route 'extrair texto de pdf' --top 5"
     }
   }
 }

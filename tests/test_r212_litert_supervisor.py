@@ -693,9 +693,10 @@ def test_plugin_preserva_provider_hook_e_solicita_bootstrap_nao_bloqueante():
 
     # Act: identifica contrato existente e marcadores executáveis do bootstrap.
     has_plugin_contract = bool(
-        re.search(r'import\s+type\s*\{[^}]*\bPlugin\b[^}]*\}\s+from\s+["\']@opencode-ai/plugin["\']', code)
-        and re.search(r"export\s+const\s+LiteRTProvider\s*:\s*Plugin", code)
-        and re.search(r"\bprovider\s*:", code)
+        re.search(r'from\s+["\']@opencode/plugin["\']', code)
+        and re.search(r"export\s+default\s+Plugin\.define\s*\(", code)
+        and re.search(r'id\s*:\s*["\']litert-lm["\']', code)
+        and re.search(r"ctx\.provider\.transform\s*\(", code)
     )
     supervisor_reference = (
         "integrations.litert_lm_supervisor" in code

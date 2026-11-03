@@ -1,8 +1,8 @@
 # Arquitetura integral em Mermaid — R916
 
-**707 módulos Python**, **995 pares internos**, **1118 declarações de importação**, **6751 símbolos**, **45 pacotes**, **18 camadas** e **21 fluxogramas**.
+**707 módulos Python**, **1000 pares internos**, **1131 declarações de importação**, **6779 símbolos**, **45 pacotes**, **18 camadas** e **22 fluxogramas**.
 
-Base Git `84ef0820a71f52756203854ea83d5a1211d8c254`; identidade das fontes locais `19e1b500a9d05bd7d2633a60b4c203f52ce8abc5697773afec55ee6386fce8f1`.
+Base Git `d02817ca460ee6411761a8a3f0b82d17dafd2740`; identidade das fontes locais `d53ac4511f757431da55589db0e6a0fcde2daebdb2b20303611d45882b7ab6b5`.
 
 A [fonte Mermaid](dependencies.mmd), o [SVG Graphviz](dependencies.svg) e o
 [SVG Mermaid](dependencies-mermaid.svg) representam os mesmos conjuntos de
@@ -40,7 +40,7 @@ do Mermaid e do SVG Graphviz, incluindo os módulos isolados.
 O grafo é Python de produção classificada. Testes, documentação, terceiros,
 história e superfícies lexicais continuam em categorias próprias. O AST não
 prova que imports sejam executáveis nem cobre toda reflexão/MCP em runtime.
-Os 21 [fluxos completos no README](../../README.md#fluxogramas-operacionais-completos)
+Os 22 [fluxos completos no README](../../README.md#fluxogramas-operacionais-completos)
 explicam caminhos e gates, sem promover desenho a evidência de execução.
 
 O grafo integral ultrapassa os limites padrão de 500 arestas e 50.000
@@ -92,19 +92,19 @@ e a ref-base devem ser os mesmos do [guia de reprodução](../ARQUITETURA_COMPLE
 
 | Camada | Módulos | Símbolos AST |
 |---|---:|---:|
-| `agentes` | 10 | 79 |
+| `agentes` | 10 | 80 |
 | `diagnostico` | 31 | 477 |
 | `engenharia_reversa` | 10 | 69 |
-| `evolucao` | 10 | 77 |
+| `evolucao` | 10 | 84 |
 | `ferramentas` | 66 | 439 |
-| `governanca` | 26 | 301 |
+| `governanca` | 26 | 304 |
 | `infraestrutura` | 6 | 5 |
-| `integracoes` | 130 | 1507 |
+| `integracoes` | 130 | 1516 |
 | `interfaces` | 10 | 126 |
 | `memoria_e_evidencias` | 44 | 234 |
 | `modulos_adicionais` | 122 | 1092 |
-| `orquestracao` | 39 | 473 |
-| `pesquisa_e_rag` | 124 | 1196 |
+| `orquestracao` | 39 | 476 |
+| `pesquisa_e_rag` | 124 | 1201 |
 | `plugins` | 5 | 15 |
 | `protocolos` | 9 | 8 |
 | `publicacao` | 3 | 32 |
@@ -116,22 +116,22 @@ e a ref-base devem ser os mesmos do [guia de reprodução](../ARQUITETURA_COMPLE
 | Pacote | Camadas | Módulos | Símbolos AST |
 |---|---|---:|---:|
 | `.opencode` | interfaces | 2 | 44 |
-| `academic` | pesquisa_e_rag | 40 | 252 |
+| `academic` | pesquisa_e_rag | 40 | 257 |
 | `agent_runners` | agentes | 3 | 44 |
 | `agentic_science_v2` | pesquisa_e_rag | 11 | 296 |
-| `agents` | agentes | 7 | 35 |
+| `agents` | agentes | 7 | 36 |
 | `economy` | governanca | 2 | 30 |
 | `evaluation` | modulos_adicionais | 2 | 7 |
-| `evolution` | evolucao | 10 | 77 |
+| `evolution` | evolucao | 10 | 84 |
 | `gametheory` | governanca | 4 | 94 |
 | `governanca` | governanca | 6 | 5 |
 | `hermes_bridge` | modulos_adicionais | 7 | 18 |
 | `hooks` | modulos_adicionais | 4 | 16 |
 | `infra_dados` | infraestrutura | 6 | 5 |
-| `integrations` | integracoes | 130 | 1507 |
+| `integrations` | integracoes | 130 | 1516 |
 | `landscape` | modulos_adicionais | 2 | 10 |
 | `legal` | modulos_adicionais | 13 | 158 |
-| `marceloclaro` | orquestracao | 30 | 383 |
+| `marceloclaro` | orquestracao | 30 | 386 |
 | `mci` | memoria_e_evidencias | 44 | 234 |
 | `mirofish` | modulos_adicionais | 11 | 104 |
 | `model_lab` | modulos_adicionais | 4 | 12 |
@@ -151,7 +151,7 @@ e a ref-base devem ser os mesmos do [guia de reprodução](../ARQUITETURA_COMPLE
 | `scanners` | diagnostico | 31 | 477 |
 | `scientific_lab` | pesquisa_e_rag | 9 | 40 |
 | `scripts` | ferramentas | 66 | 439 |
-| `sdd` | governanca | 5 | 102 |
+| `sdd` | governanca | 5 | 105 |
 | `skills` | skills | 46 | 469 |
 | `synthetic_university` | modulos_adicionais | 29 | 435 |
 | `tools` | modulos_adicionais | 1 | 1 |

@@ -1,0 +1,10 @@
+......FF..                                                               [100%]
+=================================== FAILURES ===================================
+E   TypeError: extract_parts() got an unexpected keyword argument 'threads'
+/home/marceloclaro/opencode-ecosystem-core/tests/test_r1036_video_local_ingest.py:119: TypeError: extract_parts() got an unexpected keyword argument 'threads'
+E   TypeError: extract_parts() got an unexpected keyword argument 'threads'
+/home/marceloclaro/opencode-ecosystem-core/tests/test_r1036_video_local_ingest.py:128: TypeError: extract_parts() got an unexpected keyword argument 'threads'
+=========================== short test summary info ============================
+FAILED tests/test_r1036_video_local_ingest.py::test_extract_single_part - Typ...
+FAILED tests/test_r1036_video_local_ingest.py::test_extract_rejects_bad_threads
+2 failed, 8 passed in 9.35s

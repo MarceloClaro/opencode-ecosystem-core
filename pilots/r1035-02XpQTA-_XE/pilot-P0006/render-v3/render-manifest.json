@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "part_id": "02XpQTA-_XE-P0006",
+  "status": "draft_rendered_pending_human_review",
+  "lipsync": false,
+  "source_separation": "center_channel_cancellation_heuristic",
+  "dialogue": {
+    "peak_before_gain": 28520,
+    "gain": 1.0,
+    "duration_seconds": 74.44,
+    "sha256": "69746486cee53def3cc6744aa97aa11e3fba23f9930d29714978bcf1cb148fe9"
+  },
+  "outputs": {
+    "P0006-ptbr-soft.mp4": {
+      "sha256": "70df858c589645025d670be46d65f36c0d61455b7ddcd5974e9a628ae3cbce76",
+      "bytes": 28706527,
+      "probe": {
+        "duration": 74.6,
+        "video": {
+          "codec": "h264",
+          "width": 1280,
+          "height": 720,
+          "fps": "25/1",
+          "frames": 1861
+        },
+        "audio": {
+          "codec": "aac",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      },
+      "loudness": {
+        "integrated_lufs": -16.1,
+        "true_peak_dbfs": null
+      },
+      "states": {
+        "technical_qa": "pending",
+        "audiovisual_review": "pending",
+        "approval": "pending"
+      }
+    },
+    "P0006-ptbr-bar.mp4": {
+      "sha256": "da6efeee1a264f44d1ec60d4e71d6319024595dad8905e90cd97842f034c8099",
+      "bytes": 15847251,
+      "probe": {
+        "duration": 74.44,
+        "video": {
+          "codec": "h264",
+          "width": 1280,
+          "height": 720,
+          "fps": "25/1",
+          "frames": 1861
+        },
+        "audio": {
+          "codec": "aac",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      },
+      "loudness": {
+        "integrated_lufs": -16.1,
+        "true_peak_dbfs": null
+      },
+      "states": {
+        "technical_qa": "pending",
+        "audiovisual_review": "pending",
+        "approval": "pending"
+      }
+    }
+  },
+  "limitations": [
+    "center cancellation reduces but does not remove original dialogue",
+    "dubbed timing is fitted; overlap may occur in rapid lines",
+    "no lip sync and no native-speaker review",
+    "soft variant still shows original burned-in English subtitles",
+    "bar variant covers the lower 140 px and burns PT-BR subtitles"
+  ]
+}

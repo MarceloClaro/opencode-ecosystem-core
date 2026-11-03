@@ -1,0 +1,16 @@
+FFFF                                                                     [100%]
+=================================== FAILURES ===================================
+E   ModuleNotFoundError: No module named 'integrations.dubbing_evidence'
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError: No module named 'integrations.dubbing_evidence'
+E   ModuleNotFoundError: No module named 'integrations.dubbing_evidence'
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError: No module named 'integrations.dubbing_evidence'
+E   ModuleNotFoundError: No module named 'integrations.dubbing_evidence'
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError: No module named 'integrations.dubbing_evidence'
+E   ModuleNotFoundError: No module named 'integrations.dubbing_evidence'
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError: No module named 'integrations.dubbing_evidence'
+=========================== short test summary info ============================
+FAILED tests/test_r1041_dubbing_evidence.py::test_samples_exclusive_and_bounded
+FAILED tests/test_r1041_dubbing_evidence.py::test_no_asr_gets_sparse_evidence_not_approval
+FAILED tests/test_r1041_dubbing_evidence.py::test_evidence_resume_and_corrupt_cache
+FAILED tests/test_r1041_dubbing_evidence.py::test_extract_count_mismatch_blocks
+4 failed in 0.21s

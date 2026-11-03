@@ -212,6 +212,9 @@ as complete while required questions remain open.
   [references/runtime-observation.md](references/runtime-observation.md)
 - Evidence paging, comparisons, residual unknowns, and verification:
   [references/evidence-workflows.md](references/evidence-workflows.md)
+- Search for an existing open implementation before reconstructing, with
+  license and untrusted-code limits:
+  [references/search-before-reconstruction.md](references/search-before-reconstruction.md)
 
 ## Finish the task
 

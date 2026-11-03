@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import ast
 import json
+import os
 import pathlib
 import re
 import sys
@@ -87,11 +88,13 @@ def _check_specs_loading():
 
 
 def _check_evolution_registry():
-    p = ROOT / "evolution" / "cycles.json"
+    p = pathlib.Path(os.environ.get("EVOLUTION_STATE_PATH") or ROOT / "evolution" / "cycles.json")
     try:
         data = json.loads(p.read_text(encoding="utf-8"))
-        cycles = data.get("cycles", [])
-        return len(cycles) > 0, f"{len(cycles)} ciclos registrados"
+        if not isinstance(data, dict) or not isinstance(data.get("cycles"), list):
+            return False, "cycles.json exige objeto com lista cycles"
+        cycles = data["cycles"]
+        return len(cycles) > 0, f"{len(cycles)} registros brutos; validade dos modelos avaliada pelo doctor"
     except Exception as exc:
         return False, f"cycles.json inválido: {exc}"
 
@@ -180,8 +183,10 @@ def run_core_check(verbose: bool = True) -> dict:
     checks: list = []
 
     doctor, passed, failed = _check_doctor()
-    status = "pass" if failed == 0 else "fail"
-    detail = f"doctor {passed}/{passed + (failed if failed >= 0 else 0)} (failed={failed})"
+    warned = doctor.get("checks_warned", 0)
+    status = "fail" if failed != 0 else "warn" if warned else "pass"
+    total = doctor.get("checks_total", passed + max(failed, 0) + warned)
+    detail = f"doctor {passed}/{total} (failed={failed}, warned={warned})"
     if failed < 0:
         detail = "doctor indisponível"
     _check(checks, "doctor", status, detail)

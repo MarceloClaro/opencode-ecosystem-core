@@ -40,9 +40,9 @@ def test_structural_missing_cli_never_queries_package(monkeypatch):
 
 
 def test_project_venv_cli_is_found_outside_active_interpreter(monkeypatch, tmp_path):
-    from integrations.harness_runtime import HarnessRuntime
+    from integrations.harness_runtime import CLIPathResolver
     monkeypatch.setattr(doctor, "REPO_ROOT", str(tmp_path))
-    monkeypatch.setattr(HarnessRuntime, "resolve_cli_path", lambda self, name: None)
+    monkeypatch.setattr(CLIPathResolver, "resolve_cli_path", lambda self, name: None)
     monkeypatch.delenv("NLM_BIN", raising=False)
     monkeypatch.setattr(doctor.sys, "executable", str(tmp_path / "other/bin/python"))
     binary = tmp_path / ".venv" / "bin" / "nlm"
@@ -55,9 +55,9 @@ def test_project_venv_cli_is_found_outside_active_interpreter(monkeypatch, tmp_p
 
 
 def test_project_venv_nonexecutable_is_not_installation(monkeypatch, tmp_path):
-    from integrations.harness_runtime import HarnessRuntime
+    from integrations.harness_runtime import CLIPathResolver
     monkeypatch.setattr(doctor, "REPO_ROOT", str(tmp_path))
-    monkeypatch.setattr(HarnessRuntime, "resolve_cli_path", lambda self, name: None)
+    monkeypatch.setattr(CLIPathResolver, "resolve_cli_path", lambda self, name: None)
     monkeypatch.delenv("NLM_BIN", raising=False)
     monkeypatch.setattr(doctor.sys, "executable", str(tmp_path / "other/bin/python"))
     binary = tmp_path / ".venv" / "bin" / "nlm"

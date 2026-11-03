@@ -22,7 +22,7 @@ Não use esta contagem como indicador de cobertura, qualidade ou validação
 externa.
 
 <!-- core-state:start -->
-**329 agentes** · **18 MCPs** · **34 comandos** · **22 checks**
+**329 agentes** · **25 MCPs** · **35 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 
@@ -147,6 +147,10 @@ python3 -m marceloclaro.cli shortcuts
 python3 -m marceloclaro.cli clinical "queixa" --mode professional_cds
 python3 -m marceloclaro.cli network status
 python3 -m marceloclaro.cli network route "revisar o projeto" --ecosystem claude
+python3 -m marceloclaro.cli quantum-catalog status
+python3 -m marceloclaro.cli quantum-catalog buscar "variational" --limit 5
+python3 -m marceloclaro.cli conhecimento fontes
+python3 -m marceloclaro.cli conhecimento buscar "cirq" --fonte quantum_catalog --limite 5
 ```
 
 | Comando canônico | Aliases tratados pelo CLI | Observação |
@@ -165,10 +169,44 @@ python3 -m marceloclaro.cli network route "revisar o projeto" --ecosystem claude
 | `autoformalize` | `formalize`, `crossval` | Recebe enunciado informal. |
 | `shortcuts` | `atalhos` | Solicita a criação de atalhos pela rotina local. |
 | `clinical` | `medico`, `anamnese` | Demonstra uma rotina de apoio; não substitui profissional habilitado. |
+| `quantum-catalog` | — | Catálogo quântico local (SQLite, somente leitura na consulta). |
+| `conhecimento` | — | Fachada comum de consulta às fontes de conhecimento locais. |
 
 `apm` aceita os subcomandos `init`, `install`, `compile`, `audit`, `pack` e
 `list`. Para ver o resumo nativo de uso, execute
 `python3 -m marceloclaro.cli ajuda`.
+
+### Catálogo quântico e fachada de conhecimento
+
+O catálogo quântico é uma fonte local de consulta, derivada do JSON histórico
+`outputs/pesquisa-inovacao-enfoque/quantica-repositorios.json` e materializada
+em SQLite (`data/quantum_catalog/catalog.sqlite3`, gitignored). A importação é
+explícita e idempotente; a consulta nunca importa, não executa repositórios nem
+abre URLs.
+
+```bash
+python3 -m marceloclaro.cli quantum-catalog importar        # importa (uma vez)
+python3 -m marceloclaro.cli quantum-catalog status          # inventário + hash da fonte
+python3 -m marceloclaro.cli quantum-catalog listar --historico
+python3 -m marceloclaro.cli quantum-catalog buscar "ruído" --category "Quantum simulators"
+python3 -m marceloclaro.cli quantum-catalog ver org/cirq    # detalhe com proveniência
+python3 -m marceloclaro.cli quantum-catalog historico       # snapshots importados
+python3 -m marceloclaro.cli quantum-catalog painel          # exporta index_quantica.html
+```
+
+`conhecimento` consulta a fachada comum (`quantum_catalog` e `books`):
+
+```bash
+python3 -m marceloclaro.cli conhecimento fontes
+python3 -m marceloclaro.cli conhecimento buscar "cirq" --fonte quantum_catalog --limite 5
+```
+
+No OpenCode, as mesmas operações de leitura estão em
+`ecosystem_quantum_catalog` (status/list/search/get/history) e
+`ecosystem_knowledge_query` (sources/search). Escritas (`importar`, `painel`)
+são apenas da CLI. **TRL, licença, atividade e relevância são alegações da
+fonte, não fatos verificados**; a busca é literal por tokens normalizados (sem
+interpretar operadores). Consulte a [especificação R1002](specs/SPEC-935-R1002-quantum-catalog-source.md).
 
 ## Camada científica, conselho e sandbox
 

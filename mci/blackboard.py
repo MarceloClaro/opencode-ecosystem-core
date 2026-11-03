@@ -206,12 +206,6 @@ class Blackboard:
             
             if agent_id in self.registry:
                 self.registry[agent_id].status = "available"
-
-            # R914: o primário pode registrar uma checagem estrutural sem
-            # convertê-la em recompensa de confiança científica do próprio auditor.
-            if payload.get("learning_scope") == "contract_only" and event.get("source") == "marceloclaro":
-                logger.info("Tarefa %s concluída no escopo de contrato, sem reflexão de confiança", task_id)
-                return
                 
             # Dispara reflexão metacognitiva
             metabus.publish("metacognition.reflect_request", {

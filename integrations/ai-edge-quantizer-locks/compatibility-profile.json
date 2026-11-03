@@ -1,0 +1,23 @@
+{
+  "repo": "MarceloClaro/ai-edge-quantizer",
+  "commit": "87cda53576a55a71114a4945b3ff18e27c2fa42b",
+  "python": "3.12",
+  "initial_profile": {
+    "tf-nightly": "2.23.0.dev20261018",
+    "ai-edge-litert-nightly": "2.4.0.dev20261018",
+    "result": "dependency_check_failed",
+    "reason": "resolved backports-strenum 1.3.1 requires Python <3.11"
+  },
+  "candidate_profile": {
+    "tf-nightly": "2.23.0.dev20261018",
+    "ai-edge-litert-nightly": "2.4.0.dev20261018",
+    "backports.strenum": "1.2.8",
+    "numpy": "2.2.6",
+    "status": "validated_on_synthetic_cpu_smoke_only",
+    "validation_report": ".ai-edge-quantizer/runs/synthetic-int8/manifest.json",
+    "validation_scope": "32x64 fixed model, 16 synthetic inputs; not LLM/task quality"
+  },
+  "source_modified": false,
+  "intermediate_profile": "ai-edge-litert 1.4.0 also resolved incompatible backports-strenum 1.3.1; not accepted",
+  "latest_fallback": false
+}

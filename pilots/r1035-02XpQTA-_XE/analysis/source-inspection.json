@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "path": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1035-02XpQTA-_XE/source/02XpQTA-_XE.mp4",
+  "sha256": "d76a36a4ae90d68720d17c179ce6f7ac5676bf1d251d3e12e935b32a880358cb",
+  "bytes": 820637317,
+  "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+  "duration_seconds": 7920.64,
+  "container_duration_seconds": 7920.69805,
+  "video_duration_seconds": 7920.64,
+  "frame_count": 198016,
+  "frame_count_basis": "container_nb_frames",
+  "fps": "25/1",
+  "avg_frame_rate": "25/1",
+  "r_frame_rate": "25/1",
+  "width": 1280,
+  "height": 720,
+  "video_codec": "h264",
+  "pixel_format": "yuv420p",
+  "has_audio": true,
+  "audio_codec": "aac",
+  "sample_rate": 44100,
+  "channels": 2,
+  "audio_duration_seconds": 7920.69805,
+  "audio_start_time": 0.0,
+  "timing_mode": "cfr_compatible",
+  "timing_basis": "probe_declared_cfr",
+  "cfr_checks": {
+    "avg_equals_r": true,
+    "derived_duration_seconds": 7920.64,
+    "video_duration_seconds": 7920.64,
+    "duration_delta_seconds": 0.0,
+    "tolerance_seconds": 0.1
+  },
+  "stream_signature": {
+    "container": "mov,mp4,m4a,3gp,3g2,mj2",
+    "video_codec": "h264",
+    "width": 1280,
+    "height": 720,
+    "pixel_format": "yuv420p",
+    "audio_codec": "aac",
+    "sample_rate": 44100,
+    "channels": 2
+  },
+  "decode_clean": true,
+  "limitations": [
+    "probe-level CFR compatibility only; full packet timestamp audit not performed",
+    "frame count basis is recorded; decoded count is authoritative",
+    "decode clean means ffprobe reported no error, not perceptual quality"
+  ]
+}

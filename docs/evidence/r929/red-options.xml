@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="7" skipped="0" tests="7" time="11.280" timestamp="2026-10-19T07:06:48.471863-03:00" hostname="OPENCODE"><testcase classname="tests.test_r929_core_regressions" name="test_registry_accepts_pathlike_state_path" time="0.009"><failure message="TypeError: unsupported operand type(s) for +: 'PosixPath' and 'str'">tests/test_r929_core_regressions.py:80: in test_registry_accepts_pathlike_state_path
+    registry.record('pathlike',[],round_id='R1')
+evolution/cycles.py:284: in record
+    return self._append_cycle(cycle)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+evolution/cycles.py:250: in _append_cycle
+    self.save()
+evolution/cycles.py:225: in save
+    with self._locked_file():
+         ^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.14/contextlib.py:141: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+evolution/cycles.py:182: in _locked_file
+    with open(self.state_path + ".lock", "a+b") as lock:
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: unsupported operand type(s) for +: 'PosixPath' and 'str'</failure></testcase><testcase classname="tests.test_r929_core_regressions" name="test_malformed_effectful_options_are_rejected_before_primary[argv0]" time="9.448"><failure message="Failed: invalid options initialized primary">tests/test_r929_core_regressions.py:94: in test_malformed_effectful_options_are_rejected_before_primary
+    assert cli.main()==2
+           ^^^^^^^^^^
+marceloclaro/cli.py:517: in main
+    orchestrator = MarceloClaroOrchestrator()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_r929_core_regressions.py:91: in forbidden
+    def forbidden(*args,**kwargs):pytest.fail('invalid options initialized primary')
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: invalid options initialized primary</failure></testcase><testcase classname="tests.test_r929_core_regressions" name="test_malformed_effectful_options_are_rejected_before_primary[argv1]" time="0.007"><failure message="Failed: invalid options initialized primary">tests/test_r929_core_regressions.py:94: in test_malformed_effectful_options_are_rejected_before_primary
+    assert cli.main()==2
+           ^^^^^^^^^^
+marceloclaro/cli.py:517: in main
+    orchestrator = MarceloClaroOrchestrator()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_r929_core_regressions.py:91: in forbidden
+    def forbidden(*args,**kwargs):pytest.fail('invalid options initialized primary')
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: invalid options initialized primary</failure></testcase><testcase classname="tests.test_r929_core_regressions" name="test_malformed_effectful_options_are_rejected_before_primary[argv2]" time="0.005"><failure message="Failed: invalid options initialized primary">tests/test_r929_core_regressions.py:94: in test_malformed_effectful_options_are_rejected_before_primary
+    assert cli.main()==2
+           ^^^^^^^^^^
+marceloclaro/cli.py:517: in main
+    orchestrator = MarceloClaroOrchestrator()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_r929_core_regressions.py:91: in forbidden
+    def forbidden(*args,**kwargs):pytest.fail('invalid options initialized primary')
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: invalid options initialized primary</failure></testcase><testcase classname="tests.test_r929_core_regressions" name="test_malformed_effectful_options_are_rejected_before_primary[argv3]" time="0.005"><failure message="Failed: invalid options initialized primary">tests/test_r929_core_regressions.py:94: in test_malformed_effectful_options_are_rejected_before_primary
+    assert cli.main()==2
+           ^^^^^^^^^^
+marceloclaro/cli.py:517: in main
+    orchestrator = MarceloClaroOrchestrator()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_r929_core_regressions.py:91: in forbidden
+    def forbidden(*args,**kwargs):pytest.fail('invalid options initialized primary')
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: invalid options initialized primary</failure></testcase><testcase classname="tests.test_r929_core_regressions" name="test_malformed_effectful_options_are_rejected_before_primary[argv4]" time="0.006"><failure message="Failed: invalid options initialized primary">tests/test_r929_core_regressions.py:94: in test_malformed_effectful_options_are_rejected_before_primary
+    assert cli.main()==2
+           ^^^^^^^^^^
+marceloclaro/cli.py:517: in main
+    orchestrator = MarceloClaroOrchestrator()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_r929_core_regressions.py:91: in forbidden
+    def forbidden(*args,**kwargs):pytest.fail('invalid options initialized primary')
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: invalid options initialized primary</failure></testcase><testcase classname="tests.test_r929_core_regressions" name="test_malformed_effectful_options_are_rejected_before_primary[argv5]" time="0.005"><failure message="Failed: invalid options initialized primary">tests/test_r929_core_regressions.py:94: in test_malformed_effectful_options_are_rejected_before_primary
+    assert cli.main()==2
+           ^^^^^^^^^^
+marceloclaro/cli.py:517: in main
+    orchestrator = MarceloClaroOrchestrator()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_r929_core_regressions.py:91: in forbidden
+    def forbidden(*args,**kwargs):pytest.fail('invalid options initialized primary')
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: invalid options initialized primary</failure></testcase></testsuite></testsuites>

@@ -187,9 +187,46 @@ gerar_fichamento_pdf.py
 .claude/settings.local.json
 .opencode/rea/evidence/
 
+# ITS-FINE é instalação local (upstream), ambientes e dados privados.
+# Adaptadores/locks/testes originais em integrations/ e tests/ continuam versionáveis.
+.its-fine/
+_itsfine_runs/
+.agents/skills/fine-*/
+# Fonte e ambiente do quantizador são aquisição local fixada, não modelos do repo.
+.ai-edge-quantizer/
+
 # --- Docker ---
 .docker/
 docker-compose.override.yml
+
+# --- Backups locais e mídia pesada (R1045) ---
+# O Git guarda código, docs, specs e recibos leves; mídia/modelos ficam fora.
+pilots/**/source/
+pilots/**/parts-final/
+pilots/**/parts-extracted/
+pilots/**/throughput-test/
+pilots/**/pilot-P0006/stems/
+pilots/**/pilot-P0006/ocr-multiframe/
+pilots/**/*.mp4
+pilots/**/*.wav
+pilots/**/*.m4a
+pilots/**/*.flac
+pilots/**/*.mkv
+pilots/**/*.webm
+pilots/**/*.png
+pilots/**/*.jpg
+pilots/**/*.jpeg
+pilots/**/*.pgm
+!pilots/**/pilot-P0006/references-clean/*.wav
+!pilots/**/pilot-P0006/references/*.wav
+editor-workspace/media/
+editor-workspace/renders/
+editor-workspace/editor-projects/
+editor-workspace/editor-plans/
+editor-workspace/editor-approvals/
+editor-workspace/remotion-smoke/node_modules/
+biblioteca ai/
+Panoramica_AI_OdontoCA_2_0_SDD_TDD_CASE117/
 mci_test_state_*/
 
 # Pacote de submissão (artefato regenerável)
@@ -383,3 +420,22 @@ manuscrito_porescrito799_R522/PACOTE_DEPOSITO_OSF_ZENODO_R522_v49/SENSIVEL_NAO_D
 /.opencode/scientific-plugins/packages/
 /.opencode/scientific-plugins/registry.json
 /.opencode/scientific-plugins/responses/
+
+# R1012/R1013: saídas regeneráveis da federação universal.
+# Manifests permanecem versionados; patch MCP é staging, nunca config vivo.
+/federation/registry.json
+/federation/mcp_candidates.json
+/federation/mcp_patch.json
+/federation/report.md
+/federation/audit.jsonl
+/federation/backups/
+
+# R1014: runtime MCP federado instalado localmente (reinstalável por `federacao install --execute`).
+/.opencode/mcp/federated/
+/federation/probes/
+
+# --- Repositórios aninhados e mídia de trabalho ---
+AO/
+opencode-ecosystem-core/
+pilots/**/temp/
+*.avi

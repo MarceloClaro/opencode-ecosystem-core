@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Aplicar instalação do OpenCode Ecosystem Core
+Comment=Instala pacotes npm/pip/uv após confirmação digitada
+Exec=bash -lc 'cd /home/marceloclaro/opencode-ecosystem-core && ./install.sh --check; echo; read -r -p "Digite APLICAR para instalar: " x; if [ "$x" = APLICAR ]; then ./install.sh --apply --yes; else echo "Cancelado."; fi; read -n1 -r -p "Enter para fechar"'
+Path=/home/marceloclaro/opencode-ecosystem-core
+Terminal=true
+Icon=system-software-install
+Categories=Development;

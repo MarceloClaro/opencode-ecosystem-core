@@ -22,6 +22,7 @@ import json
 import os
 import re
 import sys
+from pathlib import Path
 from collections.abc import Mapping
 from typing import Any, Dict
 
@@ -62,6 +63,19 @@ def _mcp_launcher(name: str) -> str:
     """Resolve instalações do usuário fora do PATH sem executar a ferramenta."""
     from integrations.harness_runtime import HarnessRuntime
     return HarnessRuntime(ROOT).resolve_cli_path(name) or name
+
+
+def _federation_activated_mcp() -> Dict[str, Dict[str, Any]]:
+    """
+    R1015: filtra entradas ativas pelo gate de instalação + probe + smoke.
+
+    O arquivo de ativação não é uma fonte confiável por si só: recibos antigos
+    ou inválidos são excluídos até novo probe/smoke. Sem o arquivo, preserva
+    a configuração histórica.
+    """
+
+    from integrations.federation_sync.runtime import activated_servers
+    return activated_servers(Path(ROOT))
 
 
 def _strip_leading_html_comment(content: str) -> str:
@@ -353,6 +367,23 @@ def _catalog_agents() -> Dict[str, Any]:
         frontmatter = _frontmatter_scalars(source_file, content=content)
         if frontmatter.get("model"):
             agent["model"] = str(frontmatter["model"])
+        opcoes = _economy_options(
+            slug,
+            {
+                "id": slug,
+                "category": d.get("category"),
+                "type": d.get("type"),
+                "tags": frontmatter.get("tags"),
+                "capabilities": d.get("capabilities"),
+                "skills": d.get("skills"),
+            },
+            frontmatter.get("model"),
+        )
+        if opcoes:
+            cabeca = opcoes.pop("_head_model", None)
+            agent["options"] = opcoes
+            if cabeca and not agent.get("model"):
+                agent["model"] = cabeca
         agents[slug] = agent
     return agents
 
@@ -370,7 +401,9 @@ def _essential_agents() -> Dict[str, Any]:
             raw = source.read_bytes()
             enforce_catalog_contract(source, raw)
             agent_id = os.path.splitext(name)[0]
-            agents[agent_id] = {
+            frontmatter = _frontmatter_scalars(os.path.join(agents_dir, name))
+            declared_model = frontmatter.get("model")
+            entry = {
                 "description": f"Agente essencial do Core com protocolo SDD/TDD: {agent_id}",
                 "mode": "subagent",
                 "prompt": "{file:./agents/" + name + "}",
@@ -382,11 +415,29 @@ def _essential_agents() -> Dict[str, Any]:
                     content=raw.decode("utf-8"),
                 ),
             }
+            if declared_model:
+                entry["model"] = str(declared_model)
+            opcoes = _economy_options(
+                agent_id,
+                {
+                    "id": agent_id,
+                    "category": frontmatter.get("category"),
+                    "type": frontmatter.get("type"),
+                    "tags": frontmatter.get("tags"),
+                },
+                declared_model,
+            )
+            if opcoes:
+                cabeca = opcoes.pop("_head_model", None)
+                entry["options"] = opcoes
+                if cabeca and not entry.get("model"):
+                    entry["model"] = cabeca
+            agents[agent_id] = entry
     return agents
 
 
 def _load_opencode_models() -> Dict[str, Any]:
-    """Carrega os 71 modelos OpenCode (free + paid) registrados via catálogo."""
+    """Carrega os modelos OpenCode registrados via catálogo (ids e nomes)."""
     models_path = os.path.join(ROOT, "integrations", "opencode_provider_models.json")
     try:
         with open(models_path, "r", encoding="utf-8") as f:
@@ -396,6 +447,107 @@ def _load_opencode_models() -> Dict[str, Any]:
         return {}
 
 
+def _pretty_model_name(model_id: str) -> str:
+    """Nome de exibição legível a partir do id (sem inventar marca)."""
+    return " ".join(parte.capitalize() for parte in model_id.replace("_", "-").split("-") if parte)
+
+
+def _provider_models(provider_id: str) -> Dict[str, Any]:
+    """Modelos de um provider, com a tarifa declarada de cada um.
+
+    O catálogo-base (``opencode_provider_models.json``) traz ids e nomes. A
+    governança de custo (SPEC-981) sobrepõe a tarifa **por provider**:
+    o mesmo id pode custar 0,15/0,60 no Go e 0,30/1,20 no Zen, e um id
+    inexistente no provider não pode ser anunciado como se o servisse.
+    """
+    models = dict(_load_opencode_models())
+    try:
+        from integrations import cost_governance
+
+        surface_id = cost_governance.PROVIDER_SURFACE.get(provider_id)
+        if not surface_id:
+            return models
+        registro = cost_governance.load_registry()
+    except Exception:  # pragma: no cover - governança ausente não impede o config
+        return models
+
+    prefixo = f"{surface_id}::"
+    for chave, tarifa in registro["tariffs"].items():
+        if not chave.startswith(prefixo):
+            continue
+        model_id = chave[len(prefixo):]
+        entry = models.setdefault(model_id, {"name": _pretty_model_name(model_id)})
+        custo: Dict[str, Any] = {
+            "input": float(tarifa.get("input") or 0.0),
+            "output": float(tarifa.get("output") or 0.0),
+        }
+        if tarifa.get("cache_read") is not None:
+            custo["cache_read"] = float(tarifa["cache_read"])
+        if tarifa.get("cache_write") is not None:
+            custo["cache_write"] = float(tarifa["cache_write"])
+        entry["cost"] = custo
+    return models
+
+
+def _economy_options(
+    slug: str,
+    meta: Dict[str, Any],
+    declared_model: Optional[str] = None,
+    *,
+    fixar_model: bool = True,
+) -> Dict[str, Any]:
+    """Opções de economia do agente: cadeia de fallback + complexidade.
+
+    A cadeia é **declarada** em ``options.model_fallbacks`` (campo livre do
+    schema do OpenCode) e a complexidade em ``options.model_economy``. O
+    modelo da cabeça só é fixado quando a política autoriza e o cartão não
+    declara um modelo próprio.
+    """
+    try:
+        from integrations import cost_governance
+
+        registro = cost_governance.load_registry()
+        politica = registro.get("policy", {}) or {}
+        complexidade = cost_governance.complexity_for_agent(meta)
+        cadeia = cost_governance.agent_chain(complexidade)
+    except Exception:  # pragma: no cover - governança ausente não impede o config
+        return {}
+
+    opcoes: Dict[str, Any] = {
+        "model_fallbacks": cadeia,
+        "model_economy": {
+            "complexity": complexidade,
+            "ceiling": (registro.get("policy", {}) or {}).get("ceiling"),
+            "head": cadeia[0] if cadeia else None,
+            "tariff_source": (registro.get("provenance", {}).get("primary", {}) or {}).get("url"),
+            "tariff_source_date": (registro.get("provenance", {}).get("primary", {}) or {}).get(
+                "consulted"
+            ),
+        },
+    }
+    if (
+        fixar_model
+        and not declared_model
+        and cadeia
+    ):
+        cabeca = cost_governance.head_model_for(meta, cadeia, politica)
+        if cabeca:
+            opcoes["_head_model"] = cabeca
+    return opcoes
+
+
+
+# Decisão do operador (R1019): o agente primário usa Ollama Cloud e mantém
+# OpenAI/OpenCode Go como alternativas declaradas. O modelo global e os demais
+# agentes não são alterados.
+PRIMARY_MODEL = "ollama-cloud/deepseek-v4.1-flash"
+PRIMARY_MODEL_FALLBACKS = (
+    "openai/gpt-6.1-sol",
+    "opencode-go/deepseek-v4.1-flash",
+    "opencode-go/deepseek-v4-pro",
+)
+
+
 def build_config() -> Dict[str, Any]:
     """Monta o opencode.json completo do ecossistema."""
     agents = _essential_agents()
@@ -403,17 +555,26 @@ def build_config() -> Dict[str, Any]:
     # O orquestrador primário prevalece sobre eventuais homônimos do catálogo
     agents.pop("marceloclaro", None)
     # Agente especial da skill LiteRT/nano; não pertence ao catálogo legado.
+    nano_economia = _economy_options(
+        "nano-orchestrator",
+        {"id": "nano-orchestrator", "category": "orchestration",
+         "type": "specialist", "tags": ["manuscript", "orchestration", "writing"]},
+    )
+    nano_cabeca = nano_economia.pop("_head_model", None)
     agents["nano-orchestrator"] = {
         "description": "Agente especializado em nano-orquestração de manuscritos (30-500 laudas) com LiteRT-LM, pipeline 7 fases SPEC-935-R53, SDD+TDD estrito. Use para manuscritos grandes, teses, livros técnicos.",
         "mode": "subagent",
         "prompt": "{file:./.opencode/agents/nano-orchestrator.md}",
         "temperature": 0.7,
+        "options": nano_economia,
         "permission": _agent_permissions(
             os.path.join(ROOT, ".opencode", "agents", "nano-orchestrator.md")
         ),
     }
+    if nano_cabeca:
+        agents["nano-orchestrator"]["model"] = nano_cabeca
 
-    return {
+    config = {
         "$schema": "https://opencode.ai/config.json",
         "instructions": ["AGENTS.md"],
         "default_agent": "marceloclaro",
@@ -426,21 +587,21 @@ def build_config() -> Dict[str, Any]:
                     "apiKey": "{env:OPENCODE_API_KEY}",
                     "baseURL": "https://opencode.ai/zen/v1"
                 },
-                "models": _load_opencode_models()
+                "models": _provider_models("opencode")
             },
             "opencode-go": {
                 "options": {
                     "apiKey": "{env:OPENCODE_API_KEY}",
                     "baseURL": "https://opencode.ai/zen/go/v1"
                 },
-                "models": _load_opencode_models()
+                "models": _provider_models("opencode-go")
             },
             "opencode-zen": {
                 "options": {
                     "apiKey": "{env:OPENCODE_ZEN_API_KEY}",
                     "baseURL": "https://opencode.ai/zen/v1"
                 },
-                "models": _load_opencode_models()
+                "models": _provider_models("opencode-zen")
             },
             "openai": {
                 "options": {
@@ -451,6 +612,8 @@ def build_config() -> Dict[str, Any]:
                     "gpt-4o": {"name": "GPT-4o"},
                     "gpt-4o-mini": {"name": "GPT-4o Mini (rápido)"},
                     "gpt-4.1": {"name": "GPT-4.1"},
+                    "gpt-6.1-sol": {"name": "GPT-6.1 Sol"},
+                    "gpt-6-astra": {"name": "GPT-6 Astra"},
                     "o3": {"name": "o3 (raciocínio)"},
                     "o4-mini": {"name": "o4-mini (raciocínio rápido)"}
                 }
@@ -554,6 +717,18 @@ def build_config() -> Dict[str, Any]:
                 ),
                 "mode": "primary",
                 "prompt": "{file:./marceloclaro/PROMPT.md}",
+                # R1019: decisão explícita do operador para o primário.
+                "model": PRIMARY_MODEL,
+                "options": {
+                    "model_fallbacks": list(PRIMARY_MODEL_FALLBACKS),
+                    "model_economy": {
+                        "complexity": "complexa",
+                        "ceiling": "capaz",
+                        "head": PRIMARY_MODEL,
+                        "tariff_source": "https://models.dev/api.json",
+                        "tariff_source_date": "2026-10-30",
+                    },
+                },
                 # Catálogo REA completo excede o contexto dos modelos locais.
                 # A ferramenta ecosystem_rea entrega recibos e Evidence em arquivo.
                 "tools": {"rea_*": False, "core_command": True},
@@ -623,6 +798,26 @@ def build_config() -> Dict[str, Any]:
                 "command": [".venv/bin/python", "integrations/artigo_academico_mcp.py"],
                 "enabled": True,
             },
+            # R944: matrizes CAEd/SPAECE locais e fontes legais oficiais allowlisted.
+            "caed-spaece-data": {
+                "type": "local",
+                "command": [".venv/bin/python", "-m", "integrations.caed_spaece_mcp"],
+                "enabled": True,
+                "timeout": 30000,
+            },
+            "educacao-legislacao": {
+                "type": "local",
+                "command": [".venv/bin/python", "-m", "integrations.educacao_legislacao_mcp"],
+                "enabled": True,
+                "timeout": 30000,
+            },
+            # R1025: auditoria local de projetos Remotion, sem render ou rede.
+            "remotion-audit": {
+                "type": "local",
+                "command": [".venv/bin/python", "-m", "integrations.remotion_mcp"],
+                "enabled": True,
+                "timeout": 30000,
+            },
             "polymath-labs-mcp": {
                 "type": "local",
                 "command": [".venv/bin/python", "integrations/polymath_labs_mcp.py"],
@@ -632,6 +827,13 @@ def build_config() -> Dict[str, Any]:
                 "type": "local",
                 "command": [".venv/bin/python", ".opencode/mcp/web_deploy_server.py"],
                 "enabled": True,
+            },
+            # SPEC-935-R1010: pipeline OA auditado (resolve/download/RAG), sem Sci-Hub.
+            "oa-resolver": {
+                "type": "local",
+                "command": [".venv/bin/python", ".opencode/mcp/oa_resolver_server.py"],
+                "enabled": True,
+                "timeout": 180000,
             },
             # SPEC-935-R652: servidores MCP de referência (modelcontextprotocol,
             # sem auth, provados ao vivo via stdio em 2026-10-04). filesystem
@@ -739,18 +941,6 @@ def build_config() -> Dict[str, Any]:
                 "description": "Contexto estrutural local de código e proveniência (R887)",
                 "agent": "marceloclaro",
             },
-            "rigor": {
-                "template": (
-                    "Conduza pelo primário a auditoria adversarial solicitada: $ARGUMENTS. "
-                    "Use ecosystem-network.ecosystem_research_rigor: status e plan antes de review. "
-                    "Exija artefato local, alegações explícitas, fontes/localizadores e contexto. "
-                    "No modo banca mostre uma pergunta por vez e aguarde resposta com turn_id. "
-                    "Registre objeções, evidências ausentes e limites. Regras locais e notas "
-                    "de treinamento não representam revisão humana ou aprovação científica."
-                ),
-                "description": "Auditoria adversarial e banca interativa com evidências (R914)",
-                "agent": "marceloclaro",
-            },
             "biblioteca": {
                 "template": (
                     "Consulte os livros técnicos locais sobre: $ARGUMENTS. "
@@ -805,6 +995,15 @@ def build_config() -> Dict[str, Any]:
                 "template": _core_command_template("economy"),
                 "agent": "marceloclaro",
                 "description": "Relatório da economia de tokens (staking, slashing, fees)",
+            },
+            "custos": {
+                "template": _core_command_template("custos"),
+                "agent": "marceloclaro",
+                "description": (
+                    "Governança de custo de tokens por superfície (Ollama, NVIDIA, OpenCode, "
+                    "Gemini, OpenAI, Antigravity): tarifas declaradas, cadeias free→capaz, "
+                    "gasto estimado e tetos. Separado da token economy (stakes)."
+                ),
             },
             "models": {
                 "template": _core_command_template("models"),
@@ -885,9 +1084,19 @@ def build_config() -> Dict[str, Any]:
                 "template": _core_command_template("agy"),
                 "agent": "marceloclaro",
                 "description": "Antigravity CLI runner direto (SPEC-935-R651), complemento do bridge/MCP. Ex: /agy status, /agy run '<prompt>' [--agent A], /agy doctor"
+            },
+            "federacao": {
+                "template": _core_command_template("federacao"),
+                "agent": "marceloclaro",
+                "description": "Federação universal de plugins, MCPs e agentes (SPEC-935-R1012): sync/status/list/show/candidates/apply/route/verify. Ex: /federacao sync; /federacao route 'extrair texto de pdf' --top 5"
             }
         },
     }
+
+    # R1014: só entra no config o servidor federado que passou pelo probe.
+    for name, entry in _federation_activated_mcp().items():
+        config["mcp"].setdefault(name, entry)
+    return config
 
 
 def write_config(path: str = CONFIG_PATH) -> Dict[str, Any]:

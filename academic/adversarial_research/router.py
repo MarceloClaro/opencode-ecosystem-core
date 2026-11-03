@@ -8,5 +8,4 @@ def route(project):
     if c.get('indigenous_knowledge') is True: numbers|={'A19','A21'}
     if c.get('personal_data') is True: numbers.add('A20')
     if kind=='mixed' or len(c.get('disciplines',[]))>1: numbers.add('A31')
-    order=['A01','A02','A03','A04']+sorted(numbers-{'A01','A02','A03','A04','A32','A33','A34'})+['A32','A33','A34']
-    return [BY_NUMBER[n] for n in order]
+    return [BY_NUMBER[n] for n in sorted(numbers)]

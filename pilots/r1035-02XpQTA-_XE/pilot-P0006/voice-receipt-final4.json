@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "part_id": "02XpQTA-_XE-P0006",
+  "registry_sha256": "d49c9ba6a8ff71d822e1dd49b6ed1c05fecfad1dd7ea7afac3205a87b594ec90",
+  "mapping_sha256": "bdfab40650c39a640867a5e51ed31ae5423af473be5636f336f9180050220b1c",
+  "dialogue_sha256": "2abbba4e66b4b2a3738d0a3db02fd3ce5e28cbe7ad78b2d47fcf8a5699dd8fa3",
+  "characters": {
+    "char_male_a": {
+      "reference": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1035-02XpQTA-_XE/pilot-P0006/references-clean/char_male_a.wav",
+      "reference_sha256": "0ac82734171700464a84c61486229efcd0e7cebd2e33ac9734c83dd9acbbe6bc",
+      "unit_ids": [
+        "T001",
+        "T003A",
+        "T003B",
+        "T005"
+      ]
+    },
+    "char_cagla": {
+      "reference": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1035-02XpQTA-_XE/pilot-P0006/references-clean/char_cagla-compact.wav",
+      "reference_sha256": "58213f205e3fcac9c83e5864066bf2b6837b0f48d4b13ab813734861bb2d692b",
+      "unit_ids": [
+        "T002",
+        "T004",
+        "T006",
+        "T008",
+        "T010",
+        "T012",
+        "T014",
+        "T016",
+        "T018",
+        "T020",
+        "T022"
+      ]
+    },
+    "char_ruya": {
+      "reference": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1035-02XpQTA-_XE/pilot-P0006/references-clean/char_ruya.wav",
+      "reference_sha256": "1e09ae9a55ea8985eb6fca8965e515a1a4bb51d1550337cab94704c77506b683",
+      "unit_ids": [
+        "T007",
+        "T009",
+        "T011",
+        "T013",
+        "T015"
+      ]
+    },
+    "char_mother": {
+      "reference": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1035-02XpQTA-_XE/pilot-P0006/references-clean/char_mother.wav",
+      "reference_sha256": "957ef8aa8330cc776a99a03fbc0f14c5383a27e8322020a8fa7621b02c9555ea",
+      "unit_ids": [
+        "T017A",
+        "T017B",
+        "T019",
+        "T021A",
+        "T021B"
+      ]
+    }
+  },
+  "one_voice_per_character": true,
+  "status": "voice_assignment_valid_pending_native_and_audiovisual_review",
+  "limitations": [
+    "consistency of reference voice, not real-world identity",
+    "speaker labels and display hints require human review",
+    "no synthesis, audiovisual approval or lip sync in this gate"
+  ]
+}

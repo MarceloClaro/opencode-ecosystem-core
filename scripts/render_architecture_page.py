@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import html
 import json
 import re
@@ -43,7 +44,10 @@ def checked_svg(text):
 
 
 def render_page(inventory, overview_svg, dependencies_svg, flows):
-    template = (ROOT / "docs/architecture/viewer-template.html").read_text()
+    template = (ROOT / "docs/architecture/viewer-template.html").read_text(encoding="utf-8")
+    template_sha256 = hashlib.sha256(template.encode("utf-8")).hexdigest()
+    if "__VIEWER_TEMPLATE_SHA256__" not in template:
+        raise ValueError("Hash placeholder do template de visualização ausente")
     options, templates, metadata = [], [], []
     for flow in flows:
         identifier = flow["id"]
@@ -55,7 +59,8 @@ def render_page(inventory, overview_svg, dependencies_svg, flows):
     replacements = {"__SNAPSHOT_JSON__": inert_json(inventory), "__FLOWS_JSON__": inert_json(metadata),
                     "__OVERVIEW_SVG__": checked_svg(overview_svg),
                     "__DEPENDENCIES_SVG__": checked_svg(dependencies_svg),
-                    "__FLOW_OPTIONS__": "\n".join(options), "__FLOW_TEMPLATES__": "\n".join(templates)}
+                    "__FLOW_OPTIONS__": "\n".join(options), "__FLOW_TEMPLATES__": "\n".join(templates),
+                    "__VIEWER_TEMPLATE_SHA256__": template_sha256}
     for marker, value in replacements.items():
         template = template.replace(marker, value)
     return template

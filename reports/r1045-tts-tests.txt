@@ -1,0 +1,10 @@
+.F.                                                                      [100%]
+=================================== FAILURES ===================================
+_____________ test_blocked_or_untranslated_is_skipped_not_guessed ______________
+tests/test_r1045_tts_batch.py:41: in test_blocked_or_untranslated_is_skipped_not_guessed
+    with pytest.raises(ValueError, match='translation'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+=========================== short test summary info ============================
+FAILED tests/test_r1045_tts_batch.py::test_blocked_or_untranslated_is_skipped_not_guessed
+1 failed, 2 passed in 0.55s

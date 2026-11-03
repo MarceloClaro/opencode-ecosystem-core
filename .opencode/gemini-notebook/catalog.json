@@ -1,17 +1,56 @@
 {
   "upstream": "https://github.com/MarceloClaro/gemini-notebook-mcp-cli",
-  "package_version": "0.11.6",
+  "package_version": "0.15.6",
   "mcp": {
     "name": "gemini-notebook-mcp",
     "version": "3.2.3",
     "protocol_version": "2025-03-26",
     "tools": [
       {
-        "name": "refresh_auth",
-        "description": "Reload auth tokens from disk or run headless re-authentication.\n\nCall this after running `nlm login` to pick up new tokens,\nor to attempt automatic re-authentication if Chrome profile has saved login.\n\nReturns status indicating if tokens were refreshed successfully.",
+        "name": "alias",
+        "description": "Manage aliases: short names that stand in for notebook IDs.\n\nOnce an alias exists, any tool's notebook_id can be the alias. Aliases are shared\nacross all profiles.\n\nArgs:\n    action: list (default) | get | set | delete\n    name: Alias name (get/set/delete).\n    value: The real ID the alias points to (set).\n    alias_type: Optional label, e.g. \"notebook\" (set).",
         "inputSchema": {
           "additionalProperties": false,
-          "properties": {},
+          "properties": {
+            "action": {
+              "default": "list",
+              "type": "string"
+            },
+            "name": {
+              "default": "",
+              "type": "string"
+            },
+            "value": {
+              "default": "",
+              "type": "string"
+            },
+            "alias_type": {
+              "default": "unknown",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "annotations": {}
+      },
+      {
+        "name": "refresh_auth",
+        "description": "Reload auth for the requested profile without switching the active account.\n\nCall this after running `nlm login` to pick up new tokens,\nor attempt headless recovery with the profile's saved browser.\nAn explicit profile does not switch the MCP server's active account.\n\nReturns status indicating if tokens were refreshed successfully.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "profile": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            }
+          },
           "type": "object"
         },
         "annotations": {}
@@ -382,6 +421,35 @@
         "annotations": {}
       },
       {
+        "name": "chat_save_to_note",
+        "description": "Save a chat (or one turn of it) as a Note in the notebook.\n\nArgs:\n    notebook_id: Notebook ID or title alias\n    conversation_id: Conversation ID (see chat_list)\n    turn: 1-indexed turn to save; 0 (default) saves the whole chat\n    title: Optional note title",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "notebook_id": {
+              "type": "string"
+            },
+            "conversation_id": {
+              "type": "string"
+            },
+            "turn": {
+              "default": 0,
+              "type": "integer"
+            },
+            "title": {
+              "default": "",
+              "type": "string"
+            }
+          },
+          "required": [
+            "notebook_id",
+            "conversation_id"
+          ],
+          "type": "object"
+        },
+        "annotations": {}
+      },
+      {
         "name": "collection_list",
         "description": "List all native collections.",
         "inputSchema": {
@@ -530,7 +598,7 @@
       },
       {
         "name": "download_artifact",
-        "description": "Download any NotebookLM artifact to a file.\n\nUnified download tool replacing 9 separate download tools.\nSupports all artifact types: audio, video, report, mind_map, slide_deck,\ninfographic, data_table, file, quiz, flashcards.\n\nArgs:\n    notebook_id: Notebook UUID\n    artifact_type: Type of artifact to download:\n        - audio: Audio Overview (MP4/MP3)\n        - video: Video Overview (MP4)\n        - report: Report (Markdown)\n        - mind_map: Mind Map (JSON)\n        - slide_deck: Slide Deck (PDF or PPTX)\n        - infographic: Infographic (PNG)\n        - data_table: Data Table (CSV)\n        - data_table_xlsx: Data Table Excel export (XLSX)\n        - file: Generic Studio file export\n        - quiz: Quiz (json|markdown|html)\n        - flashcards: Flashcards (json|markdown|html)\n    output_path: Where to save the file, relative to the download\n        directory (e.g. \"podcast.m4a\" or \"My Notebook/report.md\").\n        Downloads are confined to that directory; a path outside it is\n        refused. It defaults to ~/Downloads/gemini-notebook and the\n        operator can move it with NOTEBOOKLM_DOWNLOAD_DIR. The saved\n        absolute path comes back in the result.\n    artifact_id: Optional specific artifact ID (uses latest if not provided)\n    output_format: For quiz/flashcards only: json|markdown|html (default: json)\n    slide_deck_format: For slide_deck only: pdf (default) or pptx\n    wait: Poll while the artifact download is still propagating\n    wait_timeout: Maximum seconds to wait when ``wait`` is enabled\n    poll_interval: Seconds between readiness checks\n\nReturns:\n    dict with status and saved file path\n\nExample:\n    download_artifact(notebook_id=\"abc123\", artifact_type=\"audio\", output_path=\"podcast.m4a\")\n    download_artifact(notebook_id=\"abc123\", artifact_type=\"quiz\", output_path=\"quiz.html\", output_format=\"html\")\n    download_artifact(notebook_id=\"abc123\", artifact_type=\"slide_deck\", output_path=\"slides.pptx\", slide_deck_format=\"pptx\")",
+        "description": "Download any NotebookLM artifact to a file.\n\nUnified download tool replacing 9 separate download tools.\nSupports all artifact types: audio, video, report, mind_map, slide_deck,\ninfographic, data_table, file, quiz, flashcards.\n\nArgs:\n    notebook_id: Notebook UUID\n    artifact_type: Type of artifact to download:\n        - audio: Audio Overview (MP4/MP3)\n        - video: Video Overview (MP4)\n        - report: Report (Markdown)\n        - mind_map: Mind Map (JSON)\n        - slide_deck: Slide Deck (PDF or PPTX)\n        - infographic: Infographic (PNG)\n        - data_table: Data Table (CSV)\n        - data_table_xlsx: Data Table Excel export (XLSX)\n        - file: Generic Studio file export\n        - quiz: Quiz (json|markdown|html)\n        - flashcards: Flashcards (json|markdown|html)\n    output_path: Where to save the file, relative to the download\n        directory (e.g. \"podcast.m4a\" or \"My Notebook/report.md\").\n        Downloads are confined to that directory; a path outside it is\n        refused. It defaults to ~/Downloads/gemini-notebook and the\n        operator can move it with NOTEBOOKLM_DOWNLOAD_DIR. The saved\n        absolute path comes back in the result.\n    artifact_id: Optional specific artifact ID (uses latest if not provided)\n    output_format: For quiz/flashcards only: json|markdown|html (default: json)\n    slide_deck_format: For slide_deck only: pdf (default) or pptx\n    wait: Poll while the artifact download is still propagating\n    wait_timeout: Service polling budget when ``wait`` is enabled; internal\n        CDN retries and the file transfer can extend total wall time\n    poll_interval: Seconds between readiness checks\n\nReturns:\n    dict with status and saved file path\n\nExample:\n    download_artifact(notebook_id=\"abc123\", artifact_type=\"audio\", output_path=\"podcast.m4a\")\n    download_artifact(notebook_id=\"abc123\", artifact_type=\"quiz\", output_path=\"quiz.html\", output_format=\"html\")\n    download_artifact(notebook_id=\"abc123\", artifact_type=\"slide_deck\", output_path=\"slides.pptx\", slide_deck_format=\"pptx\")",
         "inputSchema": {
           "additionalProperties": false,
           "properties": {
@@ -935,7 +1003,7 @@
       },
       {
         "name": "pipeline",
-        "description": "Manage and execute multi-step notebook pipelines.\n\nActions:\n- run: Execute a pipeline on a notebook\n- list: List all available pipelines (builtin and user-defined)\n\nArgs:\n    action: Operation to perform (run, list)\n    notebook_id: Target notebook UUID (required for action=run)\n    pipeline_name: Pipeline name (required for action=run, e.g. \"ingest-and-podcast\")\n    input_url: URL variable for pipelines that need it (replaces $INPUT_URL)",
+        "description": "Manage and execute multi-step notebook pipelines.\n\nActions:\n- run: Execute a pipeline on a notebook\n- list: List all available pipelines (builtin and user-defined)\n- create: Save a user-defined pipeline (pipeline_name + steps; each step is\n  {\"action\": <tool name>, \"params\": {...}})\n\nArgs:\n    action: Operation to perform (run, list, create)\n    notebook_id: Target notebook UUID (required for action=run)\n    pipeline_name: Pipeline name (required for action=run, e.g. \"ingest-and-podcast\")\n    input_url: URL variable for pipelines that need it (replaces $INPUT_URL)\n    description: Pipeline description (for action=create)\n    steps: Step definitions (required for action=create)",
         "inputSchema": {
           "additionalProperties": false,
           "properties": {
@@ -967,11 +1035,53 @@
             "input_url": {
               "default": "",
               "type": "string"
+            },
+            "description": {
+              "default": "",
+              "type": "string"
+            },
+            "steps": {
+              "anyOf": [
+                {
+                  "items": {
+                    "additionalProperties": true,
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
             }
           },
           "required": [
             "action"
           ],
+          "type": "object"
+        },
+        "annotations": {}
+      },
+      {
+        "name": "profile",
+        "description": "List saved Google accounts (profiles) and choose which one to use.\n\nArgs:\n    action: list (default) | status | switch\n        - list: every saved profile with email, storage mode, and which is active\n        - status: storage details for `name` (or the active profile); metadata only\n        - switch: use profile `name` for every later tool call until this MCP server\n          restarts. In apps that share one server across chats (e.g. Claude Desktop),\n          other open chats switch too.\n    name: Profile name for status / switch.\n    make_default: Only with action=\"switch\". False (default) leaves the saved default\n        alone. True ALSO makes it the saved default for the CLI and every future\n        session - only when the user explicitly asks to change their default account.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "action": {
+              "default": "list",
+              "type": "string"
+            },
+            "name": {
+              "default": "",
+              "type": "string"
+            },
+            "make_default": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
           "type": "object"
         },
         "annotations": {}
@@ -1126,7 +1236,7 @@
       },
       {
         "name": "server_info",
-        "description": "Get version, auth status, and conservative MCP capability visibility.\n\nAI assistants: If update_available is True, inform the user that a new\nversion is available and suggest updating with the provided command.\n\nauth_status is the result of an AuthHealthChecker probe. The checker\nruns a multi-probe strategy (homepage fetch + API fallback) with\n30-second TTL caching and mtime-based bypass on auth-file changes.\nThe reported value may therefore be up to 30 seconds old, and an\nexternal `nlm login` is picked up within one check cycle without\nwaiting for the TTL to expire.\n\nauth_status meanings:\n- \"configured\"     — homepage (or API fallback) check passed; credentials\n                     are good. Cached credentials may be reported as\n                     configured for up to 30 seconds.\n- \"not_configured\" — no credentials are stored (first-time setup).\n- \"stale\"          — credentials are known-bad (expired or past the\n                     7-day heuristic). Operations will fail; ask the\n                     user to run `nlm login` to refresh.\n- \"unverified\"     — the check could not be completed (network error,\n                     timeout, non-200 response). Cached credentials may\n                     still work for actual API calls, so do not assume\n                     the user needs to re-auth.\n- \"error\"          — unexpected exception inside the check itself.\n\nReturns:\n    dict with version info:\n    - version: Current installed version\n    - latest_version: Latest version on PyPI (or None if check failed)\n    - update_available: True if a newer version is available\n    - auth_status: configured | stale | unverified | not_configured | error\n    - update_command: Command to run to update\n    - mcp_capabilities: Built-in tool groups visible in this server process\n    - provider_capabilities: Explicitly unprobed provider/account capabilities",
+        "description": "Get version, auth status, and conservative MCP capability visibility.\n\nAI assistants: If update_available is True, inform the user that a new\nversion is available and suggest updating with the provided command.\n\nauth_status is the result of an AuthHealthChecker probe. The checker\nruns a multi-probe strategy (homepage fetch + API fallback) with\n30-second TTL caching and mtime-based bypass on auth-file changes.\nThe reported value may therefore be up to 30 seconds old, and an\nexternal `nlm login` is picked up within one check cycle without\nwaiting for the TTL to expire.\n\nauth_status meanings:\n- \"configured\"     — homepage (or API fallback) check passed; credentials\n                     are good. Cached credentials may be reported as\n                     configured for up to 30 seconds.\n- \"not_configured\" — no credentials are stored (first-time setup).\n- \"stale\"          — credentials are known-bad (expired or past the\n                     7-day heuristic). Operations will fail; ask the\n                     user to run `nlm login` to refresh.\n- \"unverified\"     — the check could not be completed (network error,\n                     timeout, non-200 response). Cached credentials may\n                     still work for actual API calls, so do not assume\n                     the user needs to re-auth.\n- \"error\"          — unexpected exception inside the check itself.\n\nReturns:\n    dict with version info:\n    - version: Current installed version\n    - latest_version: Latest version on PyPI (or None if check failed)\n    - update_available: True if a newer version is available\n    - auth_status: configured | stale | unverified | not_configured | error\n    - storage_warning: Short warning if conflict/pending op exists (or None)\n    - update_command: Command to run to update\n    - mcp_capabilities: Built-in tool groups visible in this server process\n    - provider_capabilities: Explicitly unprobed provider/account capabilities\n- active_profile: Which saved account is in use and why (session switch or saved default)\n- profiles: Saved accounts with email, storage mode (plain/protected) and any storage\n  problems. Metadata only; never opens the OS keystore.",
         "inputSchema": {
           "additionalProperties": false,
           "properties": {},
@@ -1389,7 +1499,7 @@
       },
       {
         "name": "source_list_drive",
-        "description": "List sources with types and Drive freshness status.\n\nUse before source_sync_drive to identify stale sources.\n\nArgs:\n    notebook_id: Notebook UUID\n    skip_freshness: If True, skip per-source freshness checks for faster listing",
+        "description": "List sources with types and Drive freshness status.\n\nUse before source_sync_drive to identify stale sources.\nReturned Drive sources include ``can_sync`` to identify files eligible\nfor a manual Drive sync attempt. An individual sync attempt may still fail.\n\nArgs:\n    notebook_id: Notebook UUID\n    skip_freshness: If True, skip per-source freshness checks for faster listing",
         "inputSchema": {
           "additionalProperties": false,
           "properties": {
@@ -1555,7 +1665,7 @@
       },
       {
         "name": "studio_create",
-        "description": "Create any NotebookLM studio artifact. Unified creation tool.\n\nSupports: audio, video, infographic, slide_deck, report, flashcards, quiz, data_table, mind_map\n\nArgs:\n    notebook_id: Notebook UUID\n    artifact_type: Type of artifact to create:\n        - audio: Audio Overview (podcast)\n        - video: Video Overview\n        - infographic: Visual infographic\n        - slide_deck: Presentation slides (PDF)\n        - report: Text report (Briefing Doc, Study Guide, etc.)\n        - flashcards: Study flashcards\n        - quiz: Multiple choice quiz\n        - data_table: Structured data table\n        - mind_map: Visual mind map\n    source_ids: Source IDs to use (default: all sources)\n    confirm: Must be True after user approval\n\n    Type-specific options:\n    - audio: audio_format (deep_dive|brief|critique|debate), audio_length (short|default|long)\n    - video: video_format (explainer|brief|cinematic|short), visual_style (auto_select|custom|classic|whiteboard|kawaii|anime|watercolor|retro_print|heritage|paper_craft; not for cinematic/short), video_style_prompt\n    - infographic: orientation (landscape|portrait|square), detail_level (concise|standard|detailed), infographic_style (auto_select|sketch_note|professional|bento_grid|editorial|instructional|bricks|clay|anime|kawaii|scientific)\n    - slide_deck: slide_format (detailed_deck|presenter_slides), slide_length (short|default)\n    - report: report_format (Briefing Doc|Study Guide|Blog Post|Create Your Own), custom_prompt\n    - flashcards: difficulty (easy|medium|hard)\n    - quiz: question_count (int), difficulty (easy|medium|hard)\n    - data_table: description (required)\n    - mind_map: title\n\n    Common options:\n    - language: BCP-47 code (en, es, fr, de, ja). Defaults to NOTEBOOKLM_HL env var or 'en'\n    - focus_prompt: Optional focus text\n\nExample:\n    studio_create(notebook_id=\"abc\", artifact_type=\"audio\", confirm=True)\n    studio_create(notebook_id=\"abc\", artifact_type=\"quiz\", question_count=5, confirm=True)",
+        "description": "Create any NotebookLM studio artifact. Unified creation tool.\n\nSupports: audio, video, infographic, slide_deck, report, flashcards, quiz, data_table, mind_map\n\nArgs:\n    notebook_id: Notebook UUID\n    artifact_type: Type of artifact to create:\n        - audio: Audio Overview (podcast)\n        - video: Video Overview\n        - infographic: Visual infographic\n        - slide_deck: Presentation slides (PDF)\n        - report: Text report (Briefing Doc, Study Guide, etc.)\n        - flashcards: Study flashcards\n        - quiz: Multiple choice quiz\n        - data_table: Structured data table\n        - mind_map: Visual mind map\n    source_ids: Source IDs to use (default: all sources)\n    confirm: Must be True after user approval\n\n    Type-specific options:\n    - audio: audio_format (deep_dive|brief|critique|debate), audio_length (short|default|long)\n    - video: video_format (explainer|brief|cinematic|short), visual_style (auto_select|custom|classic|whiteboard|kawaii|anime|watercolor|retro_print|heritage|paper_craft; not for cinematic/short), video_style_prompt\n    - infographic: orientation (landscape|portrait|square), detail_level (concise|standard|detailed), infographic_style (auto_select|sketch_note|professional|bento_grid|editorial|instructional|bricks|clay|anime|kawaii|scientific)\n    - slide_deck: slide_format (detailed_deck|presenter_slides), slide_length (short|default)\n    - report: report_format (Briefing Doc|Study Guide|Blog Post|Create Your Own|Interactive), custom_prompt\n      - Interactive reports additionally take report_template (learning_overview) and embed\n        studio elements (audio, video, slide deck, infographic, flashcards, quiz, mind map).\n        Read the report and generate those elements with report(action=get|elements|generate).\n    - flashcards: difficulty (easy|medium|hard)\n    - quiz: question_count (int), difficulty (easy|medium|hard)\n    - data_table: description (required)\n    - mind_map: title\n\n    Common options:\n    - language: BCP-47 code (en, es, fr, de, ja). Defaults to NOTEBOOKLM_HL env var or 'en'\n    - focus_prompt: Optional focus text\n\nExample:\n    studio_create(notebook_id=\"abc\", artifact_type=\"audio\", confirm=True)\n    studio_create(notebook_id=\"abc\", artifact_type=\"quiz\", question_count=5, confirm=True)",
         "inputSchema": {
           "additionalProperties": false,
           "properties": {
@@ -1630,6 +1740,10 @@
               "default": "Briefing Doc",
               "type": "string"
             },
+            "report_template": {
+              "default": "learning_overview",
+              "type": "string"
+            },
             "custom_prompt": {
               "default": "",
               "type": "string"
@@ -1669,7 +1783,7 @@
       },
       {
         "name": "studio_status",
-        "description": "Check studio content generation status and get URLs, or rename an artifact.\n\nArgs:\n    notebook_id: Notebook UUID\n    action: Action to perform:\n        - status (default): List all artifacts with their status and URLs\n        - rename: Rename an artifact (requires artifact_id and new_title)\n        - list_types: List all supported artifact types with their options\n    artifact_id: For status, return only this artifact. Required for action=\"rename\".\n    new_title: Required for action=\"rename\" - the new title for the artifact\n    include_details: Include prompts, source IDs, report content, and media details\n    limit: Maximum artifacts to return for status (1-100, default 20)\n    offset: Number of artifacts to skip for status pagination\n\nReturns:\n    Dictionary with status and results.\n    For action=\"status\":\n        - status: \"success\"\n        - artifacts: Lean page of artifacts, each containing:\n            - artifact_id: UUID\n            - title: Artifact title\n            - type: audio, video, report, etc.\n            - status: completed, in_progress, failed\n            - created_at: Creation timestamp\n            - error_reason: Failure guidance when status is failed\n          With include_details=True, artifacts also include prompts, source IDs,\n          report content, media URLs, and other rich fields.\n        - summary: Counts of total, completed, in_progress\n        - pagination: returned, offset, limit, and has_more",
+        "description": "Check studio content generation status and get URLs, or rename an artifact.\n\nArgs:\n    notebook_id: Notebook UUID\n    action: Action to perform:\n        - status (default): List all artifacts with their status and URLs\n        - rename: Rename an artifact (requires artifact_id and new_title)\n        - list_types: List all supported artifact types with their options\n    artifact_id: For status, return only this artifact. Required for action=\"rename\".\n    new_title: Required for action=\"rename\" - the new title for the artifact\n    include_details: Include prompts, source IDs, report content, and media details\n    limit: Maximum artifacts to return for status (1-100, default 20)\n    offset: Number of artifacts to skip for status pagination\n\nReturns:\n    Dictionary with status and results.\n    For action=\"status\":\n        - status: \"success\"\n        - artifacts: Lean page of artifacts, each containing:\n            - artifact_id: UUID\n            - title: Artifact title\n            - type: audio, video, report, etc.\n            - status: queued, in_progress, completed, failed\n            - created_at: Creation timestamp\n            - error_reason: Failure guidance when status is failed\n          With include_details=True, artifacts also include prompts, source IDs,\n          report content, media URLs, and other rich fields.\n        - summary: Counts of total, completed, in_progress, queued\n        - pagination: returned, offset, limit, and has_more",
         "inputSchema": {
           "additionalProperties": false,
           "properties": {
@@ -1717,6 +1831,79 @@
           },
           "required": [
             "notebook_id"
+          ],
+          "type": "object"
+        },
+        "annotations": {}
+      },
+      {
+        "name": "report",
+        "description": "Work with an interactive report's embedded elements. Unified report tool.\n\nCreate the report itself with studio_create(artifact_type=\"report\",\nreport_format=\"Interactive\"). Then:\n\nArgs:\n    notebook_id: Notebook UUID\n    artifact_id: Interactive report artifact UUID\n    action: Operation to perform:\n        - get: report markdown, prompt, language, source_ids, parse_status\n          and every element\n        - elements: list elements; each has element_id, type (audio|video|\n          slide_deck|infographic|flashcards|quiz|mind_map|unsupported),\n          element_status, description (card recommendation), section\n          ({heading, text} it sits in, or null) and settings (allowed values\n          + defaults). Optional wait_for / timeout / include_content.\n        - generate: validate or run a plan of 1-20 elements (see plan)\n    wait_for: (elements) element ids to wait on, list or comma-separated;\n        returns when all are completed/failed/suggested/missing or timeout\n    timeout: (elements) max seconds to wait (default 600); timed_out=true is\n        not an error\n    include_content: (elements) inline content of completed quiz/flashcards/\n        mind map for review. Review is against the plan and section, not the\n        original sources.\n    plan: (generate) list of {\"element_id\", \"steering_prompt\"?, \"settings\"?}.\n        Omit steering_prompt to use the element's saved prompt or card\n        description. settings use names from action=\"elements\". Sources and\n        language come from the report.\n    language: (generate) BCP-47 override (default: the report's language)\n    confirm: (generate) without it the plan is only validated and returned\n        with generations_to_start for the user's approval; with confirm=True\n        every item is started. One item's failure does not stop others; a\n        quota/auth failure stops the rest (stopped_reason). outcome per item:\n        started | failed | unknown (kickoff response lost; NOT re-sent) |\n        not_started. Never set confirm=True unless the user approved this\n        exact plan or explicitly delegated choosing AND generating.\n\nExample:\n    report(notebook_id=\"nb\", artifact_id=\"rep\", action=\"elements\")\n    report(notebook_id=\"nb\", artifact_id=\"rep\", action=\"generate\",\n           plan=[{\"element_id\": \"el-1\", \"settings\": {\"difficulty\": \"hard\"}}])\n    report(notebook_id=\"nb\", artifact_id=\"rep\", action=\"elements\",\n           wait_for=[\"el-1\"], include_content=True)",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "notebook_id": {
+              "type": "string"
+            },
+            "artifact_id": {
+              "type": "string"
+            },
+            "action": {
+              "type": "string"
+            },
+            "wait_for": {
+              "anyOf": [
+                {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "string"
+                }
+              ],
+              "default": ""
+            },
+            "timeout": {
+              "default": 600,
+              "type": "integer"
+            },
+            "include_content": {
+              "default": false,
+              "type": "boolean"
+            },
+            "plan": {
+              "anyOf": [
+                {
+                  "items": {
+                    "additionalProperties": true,
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "language": {
+              "default": "",
+              "type": "string"
+            },
+            "confirm": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "notebook_id",
+            "artifact_id",
+            "action"
           ],
           "type": "object"
         },
@@ -1819,10 +2006,10 @@
     "process_executed": true,
     "transport": "mcp_stdio",
     "remote_inference_executed": false,
-    "session_id": "b0b8c28481574073b6b00fffd8dd92b0",
+    "session_id": "d5b5a647715f4c14baa93cc65ef60b27",
     "retention_idle_seconds": 3600.0,
     "persistent_session": true,
-    "session_fingerprint": "0733584855ac9c016001c18572c95e638ec8752b300b0e521bebd5e90efeb4ef"
+    "session_fingerprint": "941ee5169e56ac3307269739d9b7246766b309ac36848dead7223cb37501e915"
   },
   "cli": [
     {
@@ -2161,6 +2348,25 @@
           "max": null,
           "default": false,
           "help": "Launch Windows Chrome from WSL (fixes terminal corruption on WSL2)"
+        },
+        {
+          "name": "storage",
+          "opts": [
+            "--storage"
+          ],
+          "secondary_opts": [],
+          "type": "STRING",
+          "type_name": "StringParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": false,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": null,
+          "help": "Where to keep the saved login for a NEW profile: 'protected' (OS keystore, recommended) or 'file'. Skips the question."
         }
       ],
       "callback": "login_callback",
@@ -2326,7 +2532,7 @@
         "auth",
         "refresh"
       ],
-      "help": "Refresh a session non-interactively so Google reissues its cookies.\n\nRuns a headless-browser pass against the saved Chrome profile, which makes\nGoogle reissue the short-lived cookies (``*PSIDTS``) that keep a session\nalive. Unlike ``nlm login``, this needs no user interaction, so schedulers\n(cron/launchd) can keep an unattended session alive without an interactive\nre-login. Exits non-zero if the refresh fails, so scripts can react.",
+      "help": "Refresh NotebookLM authentication without an interactive sign-in.\n\nDefault mode uses the managed headless browser and can renew PSIDTS cookies.\n--http-only never launches a browser: it refreshes eligible cookies and\nCSRF/session tokens, then requires an authenticated RPC before saving.\nBrowserless refresh cannot revive a fully expired Google login.",
       "params": [
         {
           "name": "profile",
@@ -2347,9 +2553,339 @@
           "max": null,
           "default": null,
           "help": "Profile to refresh (default: the configured default profile)."
+        },
+        {
+          "name": "http_only",
+          "opts": [
+            "--http-only"
+          ],
+          "secondary_opts": [],
+          "type": "BOOL",
+          "type_name": "BoolParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": true,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": false,
+          "help": "Refresh cookies and page tokens over HTTP, without launching a browser."
         }
       ],
       "callback": "auth_refresh",
+      "group": false,
+      "invoke_without_command": false,
+      "children": []
+    },
+    {
+      "path": [
+        "auth",
+        "storage",
+        "status"
+      ],
+      "help": "Show current credential storage mode for a profile.",
+      "params": [
+        {
+          "name": "profile",
+          "opts": [
+            "--profile",
+            "-p"
+          ],
+          "secondary_opts": [],
+          "type": "STRING",
+          "type_name": "StringParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": false,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": null,
+          "help": "Profile to check (default: configured default profile)"
+        },
+        {
+          "name": "json_output",
+          "opts": [
+            "--json",
+            "-j"
+          ],
+          "secondary_opts": [],
+          "type": "BOOL",
+          "type_name": "BoolParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": true,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": false,
+          "help": "Output as JSON"
+        }
+      ],
+      "callback": "storage_status",
+      "group": false,
+      "invoke_without_command": false,
+      "children": []
+    },
+    {
+      "path": [
+        "auth",
+        "storage",
+        "set"
+      ],
+      "help": "Set credential storage mode for one or more profiles.\n\nIn a terminal with several saved logins and no --profile, shows a picker.",
+      "params": [
+        {
+          "name": "mode",
+          "opts": [
+            "mode"
+          ],
+          "secondary_opts": [],
+          "type": "STRING",
+          "type_name": "StringParamType",
+          "required": true,
+          "nargs": 1,
+          "is_flag": false,
+          "multiple": false,
+          "argument": true,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": null,
+          "help": "Storage mode: 'file' or 'protected'"
+        },
+        {
+          "name": "profile",
+          "opts": [
+            "--profile",
+            "-p"
+          ],
+          "secondary_opts": [],
+          "type": "STRING",
+          "type_name": "StringParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": false,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": null,
+          "help": "Profile to set (default: pick from a list in a terminal, else the default profile)"
+        },
+        {
+          "name": "all_profiles",
+          "opts": [
+            "--all"
+          ],
+          "secondary_opts": [],
+          "type": "BOOL",
+          "type_name": "BoolParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": true,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": false,
+          "help": "Apply to every saved profile not already in this mode"
+        },
+        {
+          "name": "json_output",
+          "opts": [
+            "--json",
+            "-j"
+          ],
+          "secondary_opts": [],
+          "type": "BOOL",
+          "type_name": "BoolParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": true,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": false,
+          "help": "Output as JSON"
+        }
+      ],
+      "callback": "storage_set",
+      "group": false,
+      "invoke_without_command": false,
+      "children": []
+    },
+    {
+      "path": [
+        "auth",
+        "storage",
+        "resolve"
+      ],
+      "help": "Resolve a credential storage conflict, clear stuck markers, or discard inaccessible credentials.",
+      "params": [
+        {
+          "name": "choice",
+          "opts": [
+            "choice"
+          ],
+          "secondary_opts": [],
+          "type": "STRING",
+          "type_name": "StringParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": false,
+          "multiple": false,
+          "argument": true,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": null,
+          "help": "Storage mode to resolve to: 'file' or 'protected'"
+        },
+        {
+          "name": "profile",
+          "opts": [
+            "--profile",
+            "-p"
+          ],
+          "secondary_opts": [],
+          "type": "STRING",
+          "type_name": "StringParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": false,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": null,
+          "help": "Profile to resolve (default: configured default profile)"
+        },
+        {
+          "name": "discard_inaccessible",
+          "opts": [
+            "--discard-inaccessible"
+          ],
+          "secondary_opts": [],
+          "type": "BOOL",
+          "type_name": "BoolParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": true,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": false,
+          "help": "Discard inaccessible ciphertext and reset to file mode without exporting"
+        },
+        {
+          "name": "clear_marker",
+          "opts": [
+            "--clear-marker"
+          ],
+          "secondary_opts": [],
+          "type": "BOOL",
+          "type_name": "BoolParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": true,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": false,
+          "help": "Clear a stuck or corrupt operation marker"
+        },
+        {
+          "name": "yes",
+          "opts": [
+            "--yes",
+            "-y"
+          ],
+          "secondary_opts": [],
+          "type": "BOOL",
+          "type_name": "BoolParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": true,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": false,
+          "help": "Confirm action without interactive prompt"
+        },
+        {
+          "name": "json_output",
+          "opts": [
+            "--json",
+            "-j"
+          ],
+          "secondary_opts": [],
+          "type": "BOOL",
+          "type_name": "BoolParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": true,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": false,
+          "help": "Output as JSON"
+        }
+      ],
+      "callback": "storage_resolve",
+      "group": false,
+      "invoke_without_command": false,
+      "children": []
+    },
+    {
+      "path": [
+        "auth",
+        "storage",
+        "relocate"
+      ],
+      "help": "Relocate installation identity after moving the storage directory.",
+      "params": [
+        {
+          "name": "json_output",
+          "opts": [
+            "--json",
+            "-j"
+          ],
+          "secondary_opts": [],
+          "type": "BOOL",
+          "type_name": "BoolParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": true,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": false,
+          "help": "Output as JSON"
+        }
+      ],
+      "callback": "storage_relocate",
       "group": false,
       "invoke_without_command": false,
       "children": []
@@ -8749,6 +9285,54 @@
     },
     {
       "path": [
+        "skill",
+        "package"
+      ],
+      "help": "Create nlm-skill.zip to upload to Claude Desktop or claude.ai.\n\nChat and Cowork in Claude Desktop (and claude.ai) only use skills uploaded\nthrough Customize > Skills > Add.\n\nExamples:\n    nlm skill package\n    nlm skill package --output ~/Desktop",
+      "params": [
+        {
+          "name": "output",
+          "opts": [
+            "--output",
+            "-o"
+          ],
+          "secondary_opts": [],
+          "type": "<typer.models.TyperPath object at 0x709567f5d160>",
+          "type_name": "TyperPath",
+          "required": false,
+          "nargs": 1,
+          "is_flag": false,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": null,
+          "help": "Folder to save nlm-skill.zip in (default: ~/Downloads)"
+        }
+      ],
+      "callback": "package",
+      "group": false,
+      "invoke_without_command": false,
+      "children": []
+    },
+    {
+      "path": [
+        "setup"
+      ],
+      "help": "Configure MCP server for AI tools",
+      "params": [],
+      "callback": "setup_callback",
+      "group": true,
+      "invoke_without_command": true,
+      "children": [
+        "add",
+        "list",
+        "remove"
+      ]
+    },
+    {
+      "path": [
         "setup",
         "add"
       ],
@@ -8791,6 +9375,25 @@
           "max": null,
           "default": null,
           "help": "Claude Desktop profile: regular, 3p, or both"
+        },
+        {
+          "name": "scope",
+          "opts": [
+            "--scope"
+          ],
+          "secondary_opts": [],
+          "type": "STRING",
+          "type_name": "StringParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": false,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": null,
+          "help": "GitHub Copilot scope: user or project"
         }
       ],
       "callback": "setup_add",
@@ -8842,6 +9445,25 @@
           "max": null,
           "default": null,
           "help": "Claude Desktop profile: regular, 3p, or both"
+        },
+        {
+          "name": "scope",
+          "opts": [
+            "--scope"
+          ],
+          "secondary_opts": [],
+          "type": "STRING",
+          "type_name": "StringParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": false,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": null,
+          "help": "GitHub Copilot scope: user or project"
         }
       ],
       "callback": "setup_remove",
@@ -10047,7 +10669,27 @@
           "min": null,
           "max": null,
           "default": "Briefing Doc",
-          "help": "Format: 'Briefing Doc', 'Study Guide', 'Blog Post', 'Create Your Own'"
+          "help": "Format: 'Briefing Doc', 'Study Guide', 'Blog Post', 'Create Your Own', 'Interactive'"
+        },
+        {
+          "name": "template",
+          "opts": [
+            "--template",
+            "-t"
+          ],
+          "secondary_opts": [],
+          "type": "STRING",
+          "type_name": "StringParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": false,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": "learning_overview",
+          "help": "Interactive report template (only used with --format Interactive)"
         },
         {
           "name": "prompt",
@@ -10169,6 +10811,623 @@
         }
       ],
       "callback": "create_report",
+      "group": false,
+      "invoke_without_command": false,
+      "children": []
+    },
+    {
+      "path": [
+        "report",
+        "get"
+      ],
+      "help": "Read an interactive report (markdown content + metadata).",
+      "params": [
+        {
+          "name": "notebook_id",
+          "opts": [
+            "notebook_id"
+          ],
+          "secondary_opts": [],
+          "type": "STRING",
+          "type_name": "StringParamType",
+          "required": true,
+          "nargs": 1,
+          "is_flag": false,
+          "multiple": false,
+          "argument": true,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": null,
+          "help": "Notebook ID"
+        },
+        {
+          "name": "artifact_id",
+          "opts": [
+            "artifact_id"
+          ],
+          "secondary_opts": [],
+          "type": "STRING",
+          "type_name": "StringParamType",
+          "required": true,
+          "nargs": 1,
+          "is_flag": false,
+          "multiple": false,
+          "argument": true,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": null,
+          "help": "Interactive report artifact ID"
+        },
+        {
+          "name": "output",
+          "opts": [
+            "--output",
+            "-o"
+          ],
+          "secondary_opts": [],
+          "type": "STRING",
+          "type_name": "StringParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": false,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": null,
+          "help": "Write the markdown to a file instead of stdout"
+        },
+        {
+          "name": "json_output",
+          "opts": [
+            "--json",
+            "-j"
+          ],
+          "secondary_opts": [],
+          "type": "BOOL",
+          "type_name": "BoolParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": true,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": false,
+          "help": "Output as JSON"
+        },
+        {
+          "name": "profile",
+          "opts": [
+            "--profile",
+            "-p"
+          ],
+          "secondary_opts": [],
+          "type": "STRING",
+          "type_name": "StringParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": false,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": null,
+          "help": "Profile to use"
+        }
+      ],
+      "callback": "get_report",
+      "group": false,
+      "invoke_without_command": false,
+      "children": []
+    },
+    {
+      "path": [
+        "report",
+        "elements"
+      ],
+      "help": "List the embedded elements of an interactive report.",
+      "params": [
+        {
+          "name": "notebook_id",
+          "opts": [
+            "notebook_id"
+          ],
+          "secondary_opts": [],
+          "type": "STRING",
+          "type_name": "StringParamType",
+          "required": true,
+          "nargs": 1,
+          "is_flag": false,
+          "multiple": false,
+          "argument": true,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": null,
+          "help": "Notebook ID"
+        },
+        {
+          "name": "artifact_id",
+          "opts": [
+            "artifact_id"
+          ],
+          "secondary_opts": [],
+          "type": "STRING",
+          "type_name": "StringParamType",
+          "required": true,
+          "nargs": 1,
+          "is_flag": false,
+          "multiple": false,
+          "argument": true,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": null,
+          "help": "Interactive report artifact ID"
+        },
+        {
+          "name": "wait",
+          "opts": [
+            "--wait"
+          ],
+          "secondary_opts": [],
+          "type": "STRING",
+          "type_name": "StringParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": false,
+          "multiple": true,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": null,
+          "help": "Element id to wait on (repeatable)"
+        },
+        {
+          "name": "timeout",
+          "opts": [
+            "--timeout"
+          ],
+          "secondary_opts": [],
+          "type": "INT",
+          "type_name": "IntParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": false,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": 600,
+          "help": "Max seconds to wait"
+        },
+        {
+          "name": "content",
+          "opts": [
+            "--content"
+          ],
+          "secondary_opts": [],
+          "type": "BOOL",
+          "type_name": "BoolParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": true,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": false,
+          "help": "Include quiz/flashcards/mind map content"
+        },
+        {
+          "name": "json_output",
+          "opts": [
+            "--json",
+            "-j"
+          ],
+          "secondary_opts": [],
+          "type": "BOOL",
+          "type_name": "BoolParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": true,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": false,
+          "help": "Output as JSON"
+        },
+        {
+          "name": "profile",
+          "opts": [
+            "--profile",
+            "-p"
+          ],
+          "secondary_opts": [],
+          "type": "STRING",
+          "type_name": "StringParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": false,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": null,
+          "help": "Profile to use"
+        }
+      ],
+      "callback": "list_elements",
+      "group": false,
+      "invoke_without_command": false,
+      "children": []
+    },
+    {
+      "path": [
+        "report",
+        "element",
+        "create"
+      ],
+      "help": "Generate one embedded element of an interactive report.",
+      "params": [
+        {
+          "name": "notebook_id",
+          "opts": [
+            "notebook_id"
+          ],
+          "secondary_opts": [],
+          "type": "STRING",
+          "type_name": "StringParamType",
+          "required": true,
+          "nargs": 1,
+          "is_flag": false,
+          "multiple": false,
+          "argument": true,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": null,
+          "help": "Notebook ID"
+        },
+        {
+          "name": "artifact_id",
+          "opts": [
+            "artifact_id"
+          ],
+          "secondary_opts": [],
+          "type": "STRING",
+          "type_name": "StringParamType",
+          "required": true,
+          "nargs": 1,
+          "is_flag": false,
+          "multiple": false,
+          "argument": true,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": null,
+          "help": "Interactive report artifact ID"
+        },
+        {
+          "name": "element_id",
+          "opts": [
+            "--id"
+          ],
+          "secondary_opts": [],
+          "type": "STRING",
+          "type_name": "StringParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": false,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": null,
+          "help": "Element ID (from 'nlm report elements')"
+        },
+        {
+          "name": "element_type",
+          "opts": [
+            "--type",
+            "-t"
+          ],
+          "secondary_opts": [],
+          "type": "STRING",
+          "type_name": "StringParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": false,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": null,
+          "help": "Element type selector: audio, video, mind_map, quiz, flashcards, slide_deck, infographic"
+        },
+        {
+          "name": "prompt",
+          "opts": [
+            "--prompt"
+          ],
+          "secondary_opts": [],
+          "type": "STRING",
+          "type_name": "StringParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": false,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": null,
+          "help": "Custom steering prompt (default: the element card's description)"
+        },
+        {
+          "name": "language",
+          "opts": [
+            "--language"
+          ],
+          "secondary_opts": [],
+          "type": "STRING",
+          "type_name": "StringParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": false,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": "",
+          "help": "BCP-47 language code (default: the report's language)"
+        },
+        {
+          "name": "setting",
+          "opts": [
+            "--setting"
+          ],
+          "secondary_opts": [],
+          "type": "STRING",
+          "type_name": "StringParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": false,
+          "multiple": true,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": null,
+          "help": "Element setting name=value (repeatable); see 'nlm report elements --json'"
+        },
+        {
+          "name": "confirm",
+          "opts": [
+            "--confirm",
+            "-y"
+          ],
+          "secondary_opts": [],
+          "type": "BOOL",
+          "type_name": "BoolParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": true,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": false,
+          "help": "Skip confirmation"
+        },
+        {
+          "name": "json_output",
+          "opts": [
+            "--json",
+            "-j"
+          ],
+          "secondary_opts": [],
+          "type": "BOOL",
+          "type_name": "BoolParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": true,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": false,
+          "help": "Output as JSON"
+        },
+        {
+          "name": "profile",
+          "opts": [
+            "--profile",
+            "-p"
+          ],
+          "secondary_opts": [],
+          "type": "STRING",
+          "type_name": "StringParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": false,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": null,
+          "help": "Profile to use"
+        }
+      ],
+      "callback": "create_element",
+      "group": false,
+      "invoke_without_command": false,
+      "children": []
+    },
+    {
+      "path": [
+        "report",
+        "element",
+        "create-batch"
+      ],
+      "help": "Generate several report elements from one plan file (validated first).",
+      "params": [
+        {
+          "name": "notebook_id",
+          "opts": [
+            "notebook_id"
+          ],
+          "secondary_opts": [],
+          "type": "STRING",
+          "type_name": "StringParamType",
+          "required": true,
+          "nargs": 1,
+          "is_flag": false,
+          "multiple": false,
+          "argument": true,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": null,
+          "help": "Notebook ID"
+        },
+        {
+          "name": "artifact_id",
+          "opts": [
+            "artifact_id"
+          ],
+          "secondary_opts": [],
+          "type": "STRING",
+          "type_name": "StringParamType",
+          "required": true,
+          "nargs": 1,
+          "is_flag": false,
+          "multiple": false,
+          "argument": true,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": null,
+          "help": "Interactive report artifact ID"
+        },
+        {
+          "name": "plan",
+          "opts": [
+            "--plan"
+          ],
+          "secondary_opts": [],
+          "type": "<typer.models.TyperPath object at 0x709567fff9d0>",
+          "type_name": "TyperPath",
+          "required": true,
+          "nargs": 1,
+          "is_flag": false,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": null,
+          "help": "JSON file: [{\"element_id\", \"steering_prompt\"?, \"settings\"?}]"
+        },
+        {
+          "name": "language",
+          "opts": [
+            "--language"
+          ],
+          "secondary_opts": [],
+          "type": "STRING",
+          "type_name": "StringParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": false,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": "",
+          "help": "BCP-47 code (default: the report's language)"
+        },
+        {
+          "name": "confirm",
+          "opts": [
+            "--confirm",
+            "-y"
+          ],
+          "secondary_opts": [],
+          "type": "BOOL",
+          "type_name": "BoolParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": true,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": false,
+          "help": "Skip confirmation"
+        },
+        {
+          "name": "json_output",
+          "opts": [
+            "--json",
+            "-j"
+          ],
+          "secondary_opts": [],
+          "type": "BOOL",
+          "type_name": "BoolParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": true,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": false,
+          "help": "Output as JSON"
+        },
+        {
+          "name": "profile",
+          "opts": [
+            "--profile",
+            "-p"
+          ],
+          "secondary_opts": [],
+          "type": "STRING",
+          "type_name": "StringParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": false,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": null,
+          "help": "Profile to use"
+        }
+      ],
+      "callback": "create_elements_batch",
       "group": false,
       "invoke_without_command": false,
       "children": []
@@ -12063,7 +13322,27 @@
           "min": null,
           "max": null,
           "default": null,
-          "help": "Format: 'Briefing Doc', 'Study Guide', 'Blog Post', 'Create Your Own'"
+          "help": "Format: 'Briefing Doc', 'Study Guide', 'Blog Post', 'Create Your Own', 'Interactive'"
+        },
+        {
+          "name": "template",
+          "opts": [
+            "--template",
+            "-t"
+          ],
+          "secondary_opts": [],
+          "type": "STRING",
+          "type_name": "StringParamType",
+          "required": false,
+          "nargs": 1,
+          "is_flag": false,
+          "multiple": false,
+          "argument": false,
+          "choices": null,
+          "min": null,
+          "max": null,
+          "default": null,
+          "help": "Interactive report template (only used with --format Interactive)"
         },
         {
           "name": "prompt",

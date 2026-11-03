@@ -58,6 +58,8 @@ _ERROR_MARKERS = (
 
 
 _PROMPT_TOOLS = {
+    "agentes-core": "ecosystem_agent_profile",
+    "ci-local": "ecosystem_local_ci",
     "code-context": "ecosystem_code_context",
     "rea": "ecosystem_rea",
     "gemini-notebook": "ecosystem_gemini_notebook",

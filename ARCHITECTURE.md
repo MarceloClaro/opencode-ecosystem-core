@@ -20,7 +20,7 @@ python3 -c "import json; c=json.load(open('opencode.json', encoding='utf-8')); p
 ```
 
 <!-- core-state:start -->
-**329 agentes** · **18 MCPs** · **34 comandos** · **22 checks**
+**329 agentes** · **25 MCPs** · **35 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 
@@ -120,20 +120,27 @@ As entradas abaixo são derivadas das chaves `mcp` de `opencode.json`:
 2. `artigo-academico-mcp`;
 3. `arxiv-mcp`;
 4. `caed-spaece-data`;
-5. `colibri-mcp`;
-6. `ecosystem-network`;
-7. `educacao-legislacao`;
-8. `fetch`;
-9. `filesystem`;
-10. `latexmk-mcp`;
-11. `litert-lm`;
-12. `metacognitive-interconnect`;
-13. `polymath-labs-mcp`;
-14. `pypi-search`;
-15. `rea`;
-16. `scanners-mcp`;
-17. `sequential-thinking`;
-18. `web-deploy-mcp`;
+5. `chroma`;
+6. `colibri-mcp`;
+7. `context7`;
+8. `ecosystem-network`;
+9. `educacao-legislacao`;
+10. `fetch`;
+11. `filesystem`;
+12. `latexmk-mcp`;
+13. `litert-lm`;
+14. `mcp-memory`;
+15. `mcp-time`;
+16. `metacognitive-interconnect`;
+17. `oa-resolver`;
+18. `playwright`;
+19. `polymath-labs-mcp`;
+20. `pypi-search`;
+21. `qdrant`;
+22. `rea`;
+23. `scanners-mcp`;
+24. `sequential-thinking`;
+25. `web-deploy-mcp`;
 <!-- core-mcp:end -->
 
 O MCP `ecosystem-network` conecta o `MarceloClaroOrchestrator`, o roteamento
@@ -236,6 +243,25 @@ melhora sobre números informados; não executa modelos. A CLI está em
 
 Os contratos, limites e provas locais estão em
 [docs/BIBLIOTECA_AI_R657.md](docs/BIBLIOTECA_AI_R657.md).
+
+## Vídeo, dublagem e animação R1035–R1045
+
+O editor universal vive em `integrations/video_editor.py`: projeto com fontes
+hashadas, fps racional, clipes frame-exatos, faixas e operações declarativas.
+FFmpeg é o backend padrão; Remotion é um backend de composição com licença e
+aprovação de render; `register_backend` permite outros motores. O MCP
+`editor-local` expõe projeto/plano/render sem shell arbitrário.
+
+A dublagem é uma cadeia separada: `dubbing_batch` prepara as partes,
+`dubbing_evidence` coleta OCR, `video_diarization_nemotron` identifica locutores,
+`video_speaker_cluster` agrupa e extrai referências, `dubbing_translate_batch`
+traduz, e `dubbing_xtts`/`dubbing_synth` sintetizam com cache e limite estrito.
+Cada etapa tem recibo e pode bloquear; nenhuma etapa autoriza publicação.
+
+Ver [pipeline](docs/DUBBING_PIPELINE_R1041_R1045.md),
+[editor](docs/EDITOR_VIDEO_UNIVERSAL_R1042.md),
+[catálogo](docs/VIDEO_EDITOR_TOOLCHAIN_R1043.md) e
+[estado atual](docs/ESTADO_ATUAL_CORE_R1045.md).
 
 ## Integridade e procedência
 

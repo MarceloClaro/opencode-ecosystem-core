@@ -8,6 +8,7 @@ roda **sem** dependências pesadas — simulando o container mínimo.
 
 from __future__ import annotations
 
+import base64
 import importlib.util
 import shutil
 import subprocess
@@ -20,7 +21,18 @@ import pytest
 
 REPRO = Path(__file__).resolve().parents[1] / "outputs" / "core-r853-rx" / "repro"
 BACKEND = REPRO / "backend"
-IMG = "/tmp/opencode/rx-test-pano.png"
+# PNG mínimo gerado pelo próprio teste: o contrato exercita o endpoint
+# `/predict`, não um arquivo externo pré-existente. Nenhuma imagem do
+# operador é lida e nada é gravado fora do diretório temporário do teste.
+_PNG_1X1 = base64.b64decode(
+    "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
+)
+
+
+def _make_image(directory: Path) -> Path:
+    path = Path(directory) / "rx-test-pano.png"
+    path.write_bytes(_PNG_1X1)
+    return path
 
 
 def _load_serve():
@@ -131,9 +143,10 @@ def test_arquivos_de_deploy_nao_ignorados_pelo_git():
 
 
 # ---------------------------------------------------------------- container mínimo
-def test_stub_engine_sem_deps_pesadas():
+def test_stub_engine_sem_deps_pesadas(tmp_path):
     """O container mínimo (sem torch/cv2/numpy) serve stub + admin + predict."""
     db = Path(tempfile.mkdtemp()) / "t.db"
+    IMG = _make_image(tmp_path)
     code = textwrap.dedent(
         f'''
         import sys, importlib.abc, os

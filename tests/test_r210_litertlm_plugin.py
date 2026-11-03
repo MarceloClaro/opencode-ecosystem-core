@@ -66,40 +66,45 @@ class TestR210PluginSyntax(unittest.TestCase):
     """RED 2: O plugin deve ser TypeScript válido."""
 
     def test_plugin_exports_provider(self):
-        """O arquivo deve exportar LiteRTProvider ou default com hook provider."""
+        """O arquivo deve exportar uma definição V2 com setup."""
         if not PLUGIN_PATH.exists():
             self.skipTest("Plugin ainda não existe")
         content = PLUGIN_PATH.read_text(encoding="utf-8")
-        # Verifica se há um export com nome contendo "LiteRT" ou "litert"
         has_export = bool(
-            re.search(r"export\s+(const|function|default)\s+\w*[Ll]ite\w*", content)
+            re.search(r"export\s+default\s+Plugin\.define\s*\(", content)
+            or re.search(r"export\s+(const|function|default)\s+\w*[Ll]ite\w*", content)
         )
         self.assertTrue(
             has_export,
-            "Plugin deve exportar uma função chamada LiteRTProvider ou similar.\n"
+            "Plugin deve exportar Plugin.define(...) (API V2) ou um provider nomeado.\n"
             f"Conteúdo atual: {content[:200]}",
         )
 
     def test_plugin_imports_plugin_type(self):
-        """O plugin deve importar de @opencode-ai/plugin."""
+        """O plugin deve importar do SDK V2 (@opencode/plugin)."""
         if not PLUGIN_PATH.exists():
             self.skipTest("Plugin ainda não existe")
         content = PLUGIN_PATH.read_text(encoding="utf-8")
         self.assertIn(
+            "@opencode/plugin",
+            content,
+            "Plugin deve importar de '@opencode/plugin' (API V2)",
+        )
+        self.assertNotIn(
             "@opencode-ai/plugin",
             content,
-            "Plugin deve importar tipos de '@opencode-ai/plugin'",
+            "O SDK V1 não é executado pelo OpenCode V2",
         )
 
     def test_plugin_has_provider_hook(self):
-        """O hook provider deve estar presente no objeto retornado."""
+        """O provider deve ser registrado por ctx.provider.transform."""
         if not PLUGIN_PATH.exists():
             self.skipTest("Plugin ainda não existe")
         content = PLUGIN_PATH.read_text(encoding="utf-8")
         self.assertIn(
-            "provider:",
+            "ctx.provider.transform",
             content,
-            "O plugin deve retornar um objeto com a chave 'provider'",
+            "O plugin deve registrar o provider via ctx.provider.transform",
         )
         self.assertIn(
             'id: "litert-lm"',
@@ -270,7 +275,7 @@ class TestR210PluginLoadable(unittest.TestCase):
             "name": "test-litert-plugin",
             "private": True,
             "dependencies": {
-                "@opencode-ai/plugin": "latest",
+                "@opencode/plugin": "2.2.5",
             },
         }
         pkg_path = tmpdir / "package.json"
@@ -292,12 +297,14 @@ class TestR210PluginLoadable(unittest.TestCase):
             plugin_dest.write_text(PLUGIN_PATH.read_text(encoding="utf-8"))
             self._make_temp_package_json(tmp)
 
-            # Tenta compilar com bun
+            # `--external`: valida sintaxe/tipos do arquivo sem exigir a árvore
+            # de dependências no diretório temporário.
+            outdir = tmp / "out"
             result = subprocess.run(
-                ["bun", "build", str(plugin_dest)],
+                ["bun", "build", str(plugin_dest), "--external", "@opencode/plugin", "--outdir", str(outdir)],
                 capture_output=True,
                 text=True,
-                timeout=30,
+                timeout=60,
                 cwd=tmp,
             )
             if result.returncode != 0:

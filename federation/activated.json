@@ -1,0 +1,161 @@
+{
+  "schema": "federation-activated-mcp/v2",
+  "updated_at": "2026-11-02T00:26:24Z",
+  "servers": {
+    "mcp-time": {
+      "type": "local",
+      "command": [
+        "/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/federated/py-time/bin/mcp-server-time"
+      ],
+      "enabled": true,
+      "timeout": 120000
+    },
+    "mcp-memory": {
+      "type": "local",
+      "command": [
+        "/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/federated/node/node_modules/.bin/mcp-server-memory"
+      ],
+      "enabled": true,
+      "timeout": 120000
+    },
+    "context7": {
+      "type": "local",
+      "command": [
+        "/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/federated/node/node_modules/.bin/context7-mcp",
+        "--transport",
+        "stdio"
+      ],
+      "enabled": true,
+      "timeout": 120000
+    },
+    "chroma": {
+      "type": "local",
+      "command": [
+        "/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/federated/py-chroma/bin/chroma-mcp",
+        "--client-type",
+        "persistent",
+        "--data-dir",
+        "/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/federated/data/chroma"
+      ],
+      "enabled": true,
+      "timeout": 120000
+    },
+    "qdrant": {
+      "type": "local",
+      "command": [
+        "/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/federated/py-qdrant/bin/mcp-server-qdrant",
+        "--transport",
+        "stdio"
+      ],
+      "enabled": true,
+      "timeout": 120000,
+      "environment": {
+        "QDRANT_URL": "http://127.0.0.1:6333"
+      }
+    },
+    "playwright": {
+      "type": "local",
+      "command": [
+        "/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/federated/node/node_modules/.bin/playwright-mcp",
+        "--browser",
+        "chromium",
+        "--headless",
+        "--isolated"
+      ],
+      "enabled": true,
+      "timeout": 120000
+    }
+  },
+  "provenance": {
+    "mcp-time": {
+      "item_id": "github:mcp:mcp-time",
+      "package": "mcp-server-time",
+      "version": "2026.10.28",
+      "license": "MIT",
+      "source": "https://pypi.org/project/mcp-server-time/",
+      "tools_count": 2,
+      "protocol_version": "2024-11-05",
+      "probed_at": "2026-11-01T18:13:29Z",
+      "binary_sha256": "995cbd1d05b9b23d94ef5ceab98175bd7ed0112fb27ac8951c07a0f371da90b1",
+      "manifest_sha256": "b76e50ca61260167950db4585b32a0cd567f9bf8c724e8de566813bc888d1229",
+      "limits": []
+    },
+    "mcp-memory": {
+      "item_id": "github:mcp:mcp-memory",
+      "package": "@modelcontextprotocol/server-memory",
+      "version": "2.0.1",
+      "license": "MIT",
+      "source": "https://github.com/modelcontextprotocol/servers",
+      "tools_count": 9,
+      "protocol_version": "2024-11-05",
+      "probed_at": "2026-11-01T18:13:32Z",
+      "binary_sha256": "779ae2294db562c14dfc347555f6ff5fa0bce87e00377c401ccb2df642928450",
+      "manifest_sha256": "541290abb03bb020da0895535a641cb604e5454b1f5b599e02c40c02cb01f94c",
+      "limits": [
+        "Grafo de conhecimento em memória do processo; persistência exige MEMORY_FILE_PATH."
+      ]
+    },
+    "context7": {
+      "item_id": "github:mcp:context7",
+      "package": "@upstash/context7-mcp",
+      "version": "4.4.4",
+      "license": "MIT",
+      "source": "https://github.com/upstash/context7",
+      "tools_count": 2,
+      "protocol_version": "2024-11-05",
+      "probed_at": "2026-11-01T18:13:40Z",
+      "binary_sha256": "05aa837e6586447e02fcd97a13f992e4f625efa8498371610a82cea6d235eccc",
+      "manifest_sha256": "3b07c651e858c9c164a7a55d497d143f4f69c17060bbb20f11980b7e341f0644",
+      "limits": [
+        "Sem CONTEXT7_API_KEY a cota anônima é limitada; a chave é do operador."
+      ]
+    },
+    "chroma": {
+      "item_id": "github:mcp:chroma",
+      "package": "chroma-mcp",
+      "version": "0.2.6",
+      "license": "Apache-2.0",
+      "source": "https://pypi.org/project/chroma-mcp/",
+      "tools_count": 13,
+      "protocol_version": "2024-11-05",
+      "probed_at": "2026-11-01T23:32:20Z",
+      "binary_sha256": "6adb26644bc9ce642cc364cbf0b578bd9ca39a18545fdcc1055b3f54692b5732",
+      "manifest_sha256": "40b1e99a17855cad23d00a7a3cf2881a24b8f16131db145f8c252dd5235ec801",
+      "limits": [
+        "Cliente persistente local; dados ficam em .opencode/mcp/federated/data/chroma."
+      ]
+    },
+    "qdrant": {
+      "item_id": "github:mcp:qdrant",
+      "package": "mcp-server-qdrant",
+      "version": "0.8.1",
+      "license": "Apache-2.0",
+      "source": "https://pypi.org/project/mcp-server-qdrant/",
+      "tools_count": 2,
+      "protocol_version": "2024-11-05",
+      "probed_at": "2026-11-02T00:26:11Z",
+      "binary_sha256": "af037aefdaed9b795dd553c5379d6848a126825179562ba371a5072ac9155ce0",
+      "manifest_sha256": "d2141e88437089af22ad6a76debf16d121c6d97f814c486f5af12aa61eeee6f4",
+      "limits": [
+        "Servidor Qdrant local em 127.0.0.1:6333, container rootless `qdrant-core`; requer o container ativo. A primeira inicialização baixa o modelo FastEmbed do Hugging Face; o handshake não prova geração de embeddings."
+      ]
+    },
+    "playwright": {
+      "item_id": "github:mcp:playwright",
+      "package": "@playwright/mcp",
+      "version": "0.0.84",
+      "license": "Apache-2.0",
+      "source": "https://github.com/microsoft/playwright-mcp",
+      "tools_count": 25,
+      "protocol_version": "2024-11-05",
+      "probed_at": "2026-11-01T18:14:02Z",
+      "binary_sha256": "70dab09ab9a5bc1943fb78e2655f00af7349f9931073833919f19c5d7d786ad6",
+      "manifest_sha256": "d060ffefae5e5e4ecff63f3b75d462ae352a24791d42055308955429f6d896d8",
+      "limits": [
+        "Navegador headless com perfil isolado em memória (--isolated); este pacote exige Chrome for Testing compatível; instalar explicitamente com 'playwright-mcp install-browser chrome-for-testing'."
+      ]
+    }
+  },
+  "digest": "958882d7086d1aa8f8042429ec988f44ea98e2d1f8080a2dfcc81c8477c1a829",
+  "rule": "Probe e smoke recentes, vinculados à instalação, são necessários; saúde contínua não é garantida."
+}

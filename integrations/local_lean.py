@@ -41,11 +41,11 @@ class LocalLeanVerifier:
         validate_component_request('lean4',{'operation':'verify','code':code,'use_mathlib':use_mathlib,'timeout_seconds':timeout_seconds})
         base={'is_valid':False,'compiler_executed':False,'source_sha256':hashlib.sha256(code.encode()).hexdigest(),'externally_validated':False}
         # Interface para provas, não um console Lean de IO/metaprogramação.
-        forbidden=r'\b(sorry|admit|axiom|unsafe|elab|macro|syntax|initialize|run_tac|run_elab|implemented_by|extern)\b|#\s*(eval|exit|run)|\bIO\s*\.'
-        theorem_names=list(dict.fromkeys(re.findall(r'\b(?:theorem|lemma)\s+([A-Za-z][A-Za-z0-9_]*)(?=[\s:({\[])',code)))
-        if re.search(forbidden,code) or not theorem_names:
+        forbidden=r'\b(sorry|sorryAx|admit|axiom|unsafe|elab|macro|syntax|initialize|run_tac|run_elab|implemented_by|extern)\b|#\s*(eval|exit|run)|\bIO\s*\.'
+        theorem=re.search(r'\b(?:theorem|lemma)\s+([A-Za-z][A-Za-z0-9_]*)\s',code)
+        declarations=re.findall(r'\b(?:theorem|lemma)\s+',code)
+        if re.search(forbidden,code) or not theorem or len(declarations)!=1:
             return {**base,'status':'source_rejected','reason':'Fonte fora da interface de provas: declaração incompleta, admissão, axioma ou comando de execução/metaprogramação.'}
-        compiler_attempted=False
         try:
             prefix=self._runtime()
             argv=self._namespace(prefix)
@@ -64,18 +64,31 @@ class LocalLeanVerifier:
                 argv+=['--setenv','LEAN_PATH',':'.join(paths)]
             with tempfile.TemporaryDirectory(prefix='core-lean-') as temp:
                 work=Path(temp); source=work/'Proof.lean'
-                source.write_text(code+'\n'+''.join('#print axioms '+name+'\n' for name in theorem_names),encoding='utf-8')
+                source.write_text(code+'\n#print axioms '+theorem[1]+'\n',encoding='utf-8')
                 argv+=['--ro-bind',str(source),'/tmp/Proof.lean','/opt/lean/bin/lean','-j','1','-M','2048','/tmp/Proof.lean']
-                command=['/usr/bin/prlimit',f'--cpu={int(timeout_seconds)+1}','--as=17179869184','--fsize=2097152','--nofile=256','--',*argv]
+                # R923: Lean 4.34.1 não conseguiu criar thread sob 4 GiB de
+                # espaço virtual neste host. 6 GiB passaram na prova positiva;
+                # heap (-M2048), CPU, arquivos e isolamento continuam limitados.
+                command=['/usr/bin/prlimit',f'--cpu={int(timeout_seconds)+1}','--as=6442450944','--fsize=2097152','--nofile=256','--',*argv]
                 with (work/'compiler.log').open('w+b') as log:
-                    compiler_attempted=True
                     process=subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,timeout=timeout_seconds,env={'PATH':'/usr/bin:/bin','LANG':'C.UTF-8'})
                     log.seek(0); output=log.read(2097152).decode('utf-8',errors='replace')
-                reports=[{'theorem_name':name,'report':line} for name in theorem_names for line in output.splitlines() if line.startswith("'"+name+"'") and 'axioms' in line]
-                axioms=all(any(r['theorem_name']==name for r in reports) for name in theorem_names)
-                valid=process.returncode==0 and axioms and 'uses \'sorry\'' not in output
-                return {**base,'status':'machine_checked' if valid else 'compiler_rejected','is_valid':valid,'compiler_executed':True,'exit_code':process.returncode,'network_isolated':True,'theorem_name':theorem_names[0],'theorem_names':theorem_names,'axiom_reports':reports,'output_log':output,'output_sha256':hashlib.sha256(output.encode()).hexdigest(),'compiler':str(prefix/'bin/lean'),'use_mathlib':use_mathlib}
-        except subprocess.TimeoutExpired as exc:
-            return {**base,'status':'timeout' if compiler_attempted else 'unavailable','compiler_executed':compiler_attempted,'reason':str(exc)}
+                # Um processo Lean com exit=0 pode ter usado sorryAx. Só a
+                # presença da palavra axioms não constitui evidência aceitável.
+                reports=[line.strip() for line in output.splitlines() if line.startswith("'"+theorem[1]+"'")]
+                no_axioms="'"+theorem[1]+"' does not depend on any axioms" in reports
+                names=[]; reported=no_axioms
+                for line in reports:
+                    match=re.fullmatch(re.escape("'"+theorem[1]+"'")+r' depends on axioms: \[([^\]]*)\]',line)
+                    if match:
+                        names=[name.strip() for name in match[1].split(',') if name.strip()]
+                        reported=True
+                allowed={'propext','Classical.choice','Quot.sound'}
+                rejected_axioms=sorted(set(names)-allowed)
+                valid=(process.returncode==0 and reported and not rejected_axioms
+                       and not re.search(r'\bsorryAx\b|uses [\'\"]sorry[\'\"]',output))
+                resource=bool(process.returncode and re.search(r'failed to create thread|out of memory|cannot allocate memory|memory exhausted',output,re.I))
+                status='machine_checked' if valid else 'resource_exhausted' if resource else 'compiler_rejected'
+                return {**base,'status':status,'is_valid':valid,'compiler_executed':True,'exit_code':process.returncode,'network_isolated':True,'theorem_name':theorem[1],'axioms':names,'rejected_axioms':rejected_axioms,'resource_failure':resource,'output_log':output,'output_sha256':hashlib.sha256(output.encode()).hexdigest(),'compiler':str(prefix/'bin/lean'),'use_mathlib':use_mathlib}
         except (OSError,ValueError,RuntimeError,subprocess.SubprocessError) as exc:
             return {**base,'status':'unavailable','reason':str(exc)}

@@ -1,11 +1,11 @@
 {
   "counts": {
-    "agents": 312,
-    "mcp_servers": 16,
-    "commands": 33,
-    "specs": 542,
-    "round_specs": 452,
-    "round_test_files": 426,
+    "agents": 316,
+    "mcp_servers": 18,
+    "commands": 34,
+    "specs": 572,
+    "round_specs": 479,
+    "round_test_files": 456,
     "references": 28,
     "citation_calls": 76,
     "condensed_cards": 13
@@ -19,7 +19,7 @@
       "sha256": "6095f593fce60b7a2c7ea5d647a0e6e51542a4acd098d86a3ef69cd4fc90553b"
     },
     "agents/lifecycle.py": {
-      "sha256": "80f1fca2c93e373ef8da8a45d69d3154e495fd36d6766de7dd60834edd92c083"
+      "sha256": "95ff22b196cf9ac2e89a82c5f6a7e479f378669c5ff2893e691a8f4efce6f0d2"
     },
     "docs/ARQUITETURAS_LIVRO_R911.md": {
       "sha256": "08aff347184a3b1462fe208b6fa3f024100858cf58525b327e65720a8d5bfa16"
@@ -46,7 +46,7 @@
       "sha256": "b5d525a3aae7d25e2b9673370e01bedf7a65bb89b71258f39e525b10bd69b419"
     },
     "evolution/cycles.py": {
-      "sha256": "dd7c6e7ee2b12b1029801df864e6d2190a942199d4e3923bf96c29e6df77ffb6"
+      "sha256": "fc06a183e275c5d68021dfc85f05e39bde6cabdf635555cc194d9ec99cc97163"
     },
     "integrations/browser_bridge.py": {
       "sha256": "7932856dc7a0bc713bb72201c2e336917b4fa77dfc2193600469edb0952d5499"
@@ -64,7 +64,7 @@
       "sha256": "44e050d58228cee1032d325da1d8ce2338b309bbe79b142ae5bb05573a44d942"
     },
     "integrations/harness_runtime.py": {
-      "sha256": "5945ab3ae40d0b37d5333706f523f96eb6b0d1611edc36acf3bbb2160c3aca98"
+      "sha256": "0418d046c965d86e663fb2a4ee2f6dbdf2863463c6ee6127c91268828aa38e69"
     },
     "integrations/local_ci.py": {
       "sha256": "ac5462db94156edbdba9ebb37743acbb91206f3f08c5e2a8e78220c16ffb0b84"
@@ -73,16 +73,16 @@
       "sha256": "b07147da394fbadd7e832737410dfdcd8d3c14a914b14982c8a298660d897da5"
     },
     "integrations/opencode_cli.py": {
-      "sha256": "f1eef169534badcdcea479156f0c38d6e03f55cb9dc8fe390e16327258be52e7"
+      "sha256": "4b2b3fb09c25cea671b93e8e882d904fd4ac4340dfec421377a06554929a54e9"
     },
     "integrations/python_code_graph.py": {
-      "sha256": "a00d6747695ae8736edb3066c291632c5003c04914a0049f397a81b29ac55c74"
+      "sha256": "9733596d87997f001050d4ab80a4f0dcfb08b74eb46e904d70e98c1120045bae"
     },
     "integrations/rea_bridge.py": {
       "sha256": "33a4105bbb178e8360001b290cd8f3c29247f8cdf2a5c2ac5142136bcc35cba7"
     },
     "integrations/scientific_plugins.py": {
-      "sha256": "37c7863de83d899b1c18a42762e923ce1cebe462d4ac4c090634ecba4c2cf0fb"
+      "sha256": "d6bf80eaac9099c1f806fba422de78644997e1056a9714a5a64cb245bde5fb5d"
     },
     "livro-core/atlas/AR01-flow.tex": {
       "sha256": "c6a15aefe2fc3c86e506907e9fd5fc15cf63e9ec2ad66b9ebaae92b422891f30"
@@ -364,7 +364,7 @@
       "sha256": "63837104853ee3696e2117f994195a228f4f4389217099e78e95142f68e0e265"
     },
     "livro-core/mod-07-integracoes.tex": {
-      "sha256": "ceb4169034d45efca17c4f64a8bd1b62067b083bd7e984d1d22889ce5db231e7"
+      "sha256": "0b43b672cf101bb31b93eed6c756cb966bb4976b3fd9047d00bae54923cb04d0"
     },
     "livro-core/mod-08-ecossistema.tex": {
       "sha256": "282a76af8577bea443b9cdd7139f454c501ec68d303ff67b496380212ca9474f"
@@ -376,10 +376,10 @@
       "sha256": "5cd209a108c9d101481e49d67b205b1864419ac8c3a5a4e6d76cddf1f7bc8d64"
     },
     "livro-core/mod-10-catalogo.tex": {
-      "sha256": "b33ca02d07bb9626d79384dec45fc6195b57d1da5110656d0ced06891068e16d"
+      "sha256": "462d48a20fa2c1d4ac3341f8f1891e8fdd2faaad953a67571d89808c21e47c0a"
     },
     "livro-core/mod-11-apendices.tex": {
-      "sha256": "7c263ceae4a3b9144bf0a73bf8fe022245a511b1c732057ab77fc418b8b61962"
+      "sha256": "ed4c49f15a61d3ce6f8b5dac6818f844a43f43f7bfabc7a82d3289faa5aa69e0"
     },
     "livro-core/mod-12-fichas-nucleo.tex": {
       "sha256": "384427f60a1b9bbc61188ff622522eeee25a22a34df44735d8e652c226d0b8cb"
@@ -388,7 +388,7 @@
       "sha256": "59017a1812ab1b5748300afeeb11402c08249e92436651c217ee95a0d8ead137"
     },
     "livro-core/mod-14-lote-categorias.tex": {
-      "sha256": "b9f5c1d39fb86e5b135f25b91635f916bb7222b2a4a6ff98ade74dd40f1d4de0"
+      "sha256": "72f09c9c6e62c9e1b2eca96ee49563543fdc492fd1bcfee1177a916b83cb418b"
     },
     "livro-core/mod-15-epilogo-reproducao.tex": {
       "sha256": "66472412e6b0b74827a6923f219a6c60a53c8d4440d3805977f5fc887cb3b720"
@@ -421,10 +421,10 @@
       "sha256": "9ca12609e682ce25d7c68ce4b21894aad816ed5186cc2adc9925cc2d88ad481e"
     },
     "marceloclaro/doctor.py": {
-      "sha256": "434462f5ef57badbfbad6db5bb4efa20eaa8b8dccd4f0587b5d4dafd7ea41545"
+      "sha256": "280dd9ed4d3d7d3f7d184be157adee06e013a5285a819812f00c6be67579ca94"
     },
     "marceloclaro/orchestrator.py": {
-      "sha256": "d3981f751bf66d53d1ab04abc77c64c2360c35379640530a70c2e2439fedebfe"
+      "sha256": "69602df5516fda3a3688317bc727910d133d7f45cdda616f22a67c8074874eff"
     },
     "marceloclaro/workflow.py": {
       "sha256": "b869567d4ee75429608c5677cfcd0bb17f97457dee65a1ea4a67e5102e4fa5c0"
@@ -445,7 +445,7 @@
       "sha256": "6a50719b29d161561a4668c87e668dd0db2b3285fdf9d2efb01ec6203bb3f03b"
     },
     "opencode.json": {
-      "sha256": "35123cbb2b1431ed0f29f3fc1c9d8ea21cad93af90a175f93b302461636f334b"
+      "sha256": "b2f9e15285020875152b941feea522451e2d131b20c0c1538fae7085e7e96976"
     },
     "research/scientific_release.py": {
       "sha256": "6af6761280b9386a586c954a84a7971c24bdd1530b3c3c666be449b097618e7f"

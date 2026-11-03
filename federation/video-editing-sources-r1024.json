@@ -1,0 +1,482 @@
+{
+  "schema_version": "r1024.v1",
+  "collected_at": "2026-11-02T02:00:00+00:00",
+  "sources": [
+    {
+      "repo": "AcademySoftwareFoundation/OpenTimelineIO",
+      "canonical_repo": "AcademySoftwareFoundation/OpenTimelineIO",
+      "description": "API e formato de intercâmbio para linha de tempo editorial.",
+      "commit": "80c5ff30938e4adffe9c94f419b1055856cee9f5",
+      "default_branch": "main",
+      "inspection_status": "inspected",
+      "audit_scope": "Metadados e documentos listados; nenhum clone, build ou execução.",
+      "license_declared": "Apache-2.0",
+      "license_basis": "LICENSE.txt e metadados GitHub",
+      "license_scope": "Biblioteca e formato; não cobre mídia, plugins ou conteúdo editorial de terceiros.",
+      "contribution": "Modelo de linha de tempo com trilhas, clipes e intervalos informa o schema do plano e a checagem de sobreposição.",
+      "limitations": [
+        "Não instalado nem executado.",
+        "Não foi usado o formato OTIO; o Core define schema próprio.",
+        "Não há conversão nem importação de EDL nesta entrega."
+      ],
+      "documents": [
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/AcademySoftwareFoundation/OpenTimelineIO/80c5ff30938e4adffe9c94f419b1055856cee9f5/README.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:19:26.117650+00:00",
+          "bytes": 9396,
+          "sha256": "fc636466b740c636d6ceb488e00d2b5a95f8fdb5c46de142b2a227fda928aeca"
+        },
+        {
+          "path": "LICENSE.txt",
+          "url": "https://raw.githubusercontent.com/AcademySoftwareFoundation/OpenTimelineIO/80c5ff30938e4adffe9c94f419b1055856cee9f5/LICENSE.txt",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:19:26.383490+00:00",
+          "bytes": 11357,
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+        },
+        {
+          "path": "pyproject.toml",
+          "url": "https://raw.githubusercontent.com/AcademySoftwareFoundation/OpenTimelineIO/80c5ff30938e4adffe9c94f419b1055856cee9f5/pyproject.toml",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:19:26.639909+00:00",
+          "bytes": 224,
+          "sha256": "653877400a5ccc46ae37b3ddb36607d861beeefff90ba1a06bf003c6c4255dc0"
+        }
+      ],
+      "installed": false,
+      "executed": false,
+      "decision": "reference_only"
+    },
+    {
+      "repo": "WyattBlue/auto-editor",
+      "canonical_repo": "WyattBlue/auto-editor",
+      "description": "Edição automática por análise de áudio, com foco em remover silêncio.",
+      "commit": "56a78662f434e12ec891b2a5e965312a00e16524",
+      "default_branch": "master",
+      "inspection_status": "inspected",
+      "audit_scope": "Metadados e documentos listados; nenhum clone, build ou execução.",
+      "license_declared": "Unlicense",
+      "license_basis": "LICENSE (Unlicense/public domain) e metadados GitHub",
+      "license_scope": "Código do projeto; mídia processada mantém direitos próprios.",
+      "contribution": "O primeiro passe de silêncio e a noção de margem informam o aviso de lacuna e a separação entre corte e acabamento.",
+      "limitations": [
+        "Não instalado nem executado.",
+        "O Core não detecta silêncio nem corta automaticamente.",
+        "Licença Unlicense não cobre a mídia do usuário."
+      ],
+      "documents": [
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/WyattBlue/auto-editor/56a78662f434e12ec891b2a5e965312a00e16524/README.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:19:26.153623+00:00",
+          "bytes": 4468,
+          "sha256": "5a487e77917fd08eaa07523cbb7c2450691462a3527e181064eff24c9672bfb3"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/WyattBlue/auto-editor/56a78662f434e12ec891b2a5e965312a00e16524/LICENSE",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:19:26.444151+00:00",
+          "bytes": 1210,
+          "sha256": "ca2abdf695884c77ea4b4a5b64ca7b732d9d9dbade4eebc1c2e76c53e9e3bc83"
+        }
+      ],
+      "installed": false,
+      "executed": false,
+      "decision": "reference_only"
+    },
+    {
+      "repo": "Breakthrough/PySceneDetect",
+      "canonical_repo": "Breakthrough/PySceneDetect",
+      "description": "Detecção de cortes e transições de cena com Python/OpenCV.",
+      "commit": "c5ce29c73751e77139e838bd9ce9ab66a8e71a23",
+      "default_branch": "main",
+      "inspection_status": "inspected",
+      "audit_scope": "Metadados e documentos listados; nenhum clone, build ou execução.",
+      "license_declared": "BSD-3-Clause",
+      "license_basis": "LICENSE e metadados GitHub",
+      "license_scope": "Biblioteca e CLI; não cobre os vídeos analisados.",
+      "contribution": "A ideia de limite de cena por frame informa a futura checagem de cortes; nesta rodada só o plano é validado.",
+      "limitations": [
+        "Não instalado nem executado.",
+        "Nenhuma detecção de cena foi rodada.",
+        "Limiar e algoritmo não foram calibrados."
+      ],
+      "documents": [
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/Breakthrough/PySceneDetect/c5ce29c73751e77139e838bd9ce9ab66a8e71a23/README.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:19:26.134749+00:00",
+          "bytes": 7770,
+          "sha256": "ff45f6f05b01cfd5e6e796e494e5fb5ee83741925da7b6485d4a18c53b755ba7"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/Breakthrough/PySceneDetect/c5ce29c73751e77139e838bd9ce9ab66a8e71a23/LICENSE",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:19:26.409318+00:00",
+          "bytes": 1505,
+          "sha256": "e855ca89e457a7d0b6b7c92ad475d1120a9a5b5bf4e5048c706b1b3889fbc349"
+        },
+        {
+          "path": "pyproject.toml",
+          "url": "https://raw.githubusercontent.com/Breakthrough/PySceneDetect/c5ce29c73751e77139e838bd9ce9ab66a8e71a23/pyproject.toml",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:19:26.680428+00:00",
+          "bytes": 5661,
+          "sha256": "f7c8c2475c307bf64ac1f2fe5aad7b6a48332dbe7e504bf74c8a63f2239a0270"
+        }
+      ],
+      "installed": false,
+      "executed": false,
+      "decision": "reference_only"
+    },
+    {
+      "repo": "m-bain/whisperX",
+      "canonical_repo": "m-bain/whisperX",
+      "description": "ASR com timestamps por palavra e diarização.",
+      "commit": "5d3678b8535698a2826a5db9eb3e4105aef85dd9",
+      "default_branch": "main",
+      "inspection_status": "inspected",
+      "audit_scope": "Metadados e documentos listados; nenhum clone, build ou execução.",
+      "license_declared": "BSD-2-Clause",
+      "license_basis": "LICENSE e metadados GitHub",
+      "license_scope": "Código; modelos e áudio mantêm termos próprios.",
+      "contribution": "Timestamps por palavra informam o cálculo de CPS e a exigência de localizador para legenda.",
+      "limitations": [
+        "Não instalado nem executado.",
+        "Nenhum modelo de ASR foi baixado.",
+        "Timestamp de modelo não prova sincronização com a fala real."
+      ],
+      "documents": [
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/m-bain/whisperX/5d3678b8535698a2826a5db9eb3e4105aef85dd9/README.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:19:26.043943+00:00",
+          "bytes": 16507,
+          "sha256": "98ebee691ebee0ca5bdd9257dad72e1e74a9c216ff3adb7fa68d5164007a84ea"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/m-bain/whisperX/5d3678b8535698a2826a5db9eb3e4105aef85dd9/LICENSE",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:19:26.289462+00:00",
+          "bytes": 1297,
+          "sha256": "cddc25bce26226b4a04ed12839d9006b7a4403da9020ef6428ef7282a6567441"
+        },
+        {
+          "path": "pyproject.toml",
+          "url": "https://raw.githubusercontent.com/m-bain/whisperX/5d3678b8535698a2826a5db9eb3e4105aef85dd9/pyproject.toml",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:19:26.544566+00:00",
+          "bytes": 2717,
+          "sha256": "35516a23c3a01c230eeff2a95192bf3db6365171c4875468d6d8a4e35544d061"
+        }
+      ],
+      "installed": false,
+      "executed": false,
+      "decision": "reference_only"
+    },
+    {
+      "repo": "jianfch/stable-ts",
+      "canonical_repo": "jianfch/stable-ts",
+      "description": "Estabilização de timestamps para Whisper.",
+      "commit": "e312072cc024ae9fceb25b057d7d18524873a02b",
+      "default_branch": "main",
+      "inspection_status": "inspected",
+      "audit_scope": "Metadados e documentos listados; nenhum clone, build ou execução.",
+      "license_declared": "MIT",
+      "license_basis": "LICENSE e metadados GitHub",
+      "license_scope": "Biblioteca; modelos e áudio mantêm termos próprios.",
+      "contribution": "A estabilização de timestamps reforça que legenda precisa de medição, não de estimativa visual.",
+      "limitations": [
+        "Desenvolvimento declarado pausado pelo próprio projeto.",
+        "Não instalado nem executado.",
+        "Nenhum timestamp foi gerado ou comparado."
+      ],
+      "documents": [
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/jianfch/stable-ts/e312072cc024ae9fceb25b057d7d18524873a02b/README.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:19:28.143562+00:00",
+          "bytes": 108644,
+          "sha256": "18daa39d22a5f3d4978eb6c3aa28e3aec35fac670b592289dbb7c84d230b7f90"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/jianfch/stable-ts/e312072cc024ae9fceb25b057d7d18524873a02b/LICENSE",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:19:28.444175+00:00",
+          "bytes": 1061,
+          "sha256": "69ac6d54d38598c96443b5314597568bb8fa21726c46168fcec98764de33dc23"
+        }
+      ],
+      "installed": false,
+      "executed": false,
+      "decision": "reference_only"
+    },
+    {
+      "repo": "smacke/ffsubsync",
+      "canonical_repo": "smacke/ffsubsync",
+      "description": "Sincronização automática de legendas com vídeo.",
+      "commit": "de310ac6944b8260431a48ee741e7063cec49b0f",
+      "default_branch": "master",
+      "inspection_status": "inspected",
+      "audit_scope": "Metadados e documentos listados; nenhum clone, build ou execução.",
+      "license_declared": "MIT",
+      "license_basis": "LICENSE e metadados GitHub",
+      "license_scope": "Código; legendas e vídeos mantêm direitos próprios.",
+      "contribution": "O fluxo de sincronização informa a distinção entre legenda planejada e legenda verificada contra áudio.",
+      "limitations": [
+        "Não instalado nem executado.",
+        "O Core não sincroniza legenda nesta entrega.",
+        "Sincronização automática pode errar e exige conferência humana."
+      ],
+      "documents": [
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/smacke/ffsubsync/de310ac6944b8260431a48ee741e7063cec49b0f/README.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:19:28.191734+00:00",
+          "bytes": 18659,
+          "sha256": "765821149ef9da69996cfaf5bbc04e434b65c568343f75e3f3483aaf4c52eef7"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/smacke/ffsubsync/de310ac6944b8260431a48ee741e7063cec49b0f/LICENSE",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:19:28.468503+00:00",
+          "bytes": 1053,
+          "sha256": "0e88d911334a28c0b187f92f418670c8f16fba833da64965c900ea55d4fd25ae"
+        },
+        {
+          "path": "pyproject.toml",
+          "url": "https://raw.githubusercontent.com/smacke/ffsubsync/de310ac6944b8260431a48ee741e7063cec49b0f/pyproject.toml",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:19:28.735506+00:00",
+          "bytes": 230,
+          "sha256": "441fa3e647233717c7e70b48dcbb9868cebb6fc482a16a6bd1a33b8f542692d1"
+        }
+      ],
+      "installed": false,
+      "executed": false,
+      "decision": "reference_only"
+    },
+    {
+      "repo": "Netflix/vmaf",
+      "canonical_repo": "Netflix/vmaf",
+      "description": "Avaliação perceptual de qualidade de vídeo por fusão de métricas.",
+      "commit": "4611e47a7330cd342498dcc130e1008efbeab6e4",
+      "default_branch": "master",
+      "inspection_status": "inspected",
+      "audit_scope": "Metadados e documentos listados; nenhum clone, build ou execução.",
+      "license_declared": "BSD-2-Clause-Patent",
+      "license_basis": "LICENSE (BSD+Patent) do repositório; API GitHub retorna NOASSERTION",
+      "license_scope": "Biblioteca e modelos; não cobre o vídeo avaliado.",
+      "contribution": "A métrica perceptual lembra que metadados de render não provam qualidade visual; o Core declara isso explicitamente.",
+      "limitations": [
+        "Não instalado nem executado.",
+        "Nenhum VMAF foi calculado.",
+        "Qualidade visual permanece não verificada."
+      ],
+      "documents": [
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/Netflix/vmaf/4611e47a7330cd342498dcc130e1008efbeab6e4/README.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:19:28.473692+00:00",
+          "bytes": 6595,
+          "sha256": "8715aef04da031857bee5f7d395c970131abf8750542918ea40d55707d6bd649"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/Netflix/vmaf/4611e47a7330cd342498dcc130e1008efbeab6e4/LICENSE",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:19:28.737207+00:00",
+          "bytes": 2833,
+          "sha256": "a6fdb51d02b9dfe198e55534bb8047fe6d756eda117f4ff83de98f92c1952710"
+        }
+      ],
+      "installed": false,
+      "executed": false,
+      "decision": "reference_only"
+    },
+    {
+      "repo": "FFmpeg/FFmpeg",
+      "canonical_repo": "FFmpeg/FFmpeg",
+      "description": "Conjunto de bibliotecas e ferramentas para processar mídia.",
+      "commit": "e19fadf1de1000b9affb79ad0dfff36449705e26",
+      "default_branch": "master",
+      "inspection_status": "inspected",
+      "audit_scope": "Metadados e documentos listados; nenhum clone, build ou execução.",
+      "license_declared": "LGPL-2.1-or-later (GPL-2.0-or-later opcional)",
+      "license_basis": "LICENSE.md e COPYING.LGPLv2.1 do commit fixado",
+      "license_scope": "Bibliotecas e ferramentas; partes GPL só com --enable-gpl; mídia do usuário não é licenciada pelo projeto.",
+      "contribution": "Os campos de ffprobe (duração, dimensões, fps, codecs, contêiner) definem o relatório de render aceito pelo verificador.",
+      "limitations": [
+        "Árvore do repositório não foi listada por exceder o limite de 400 KB; foram lidos LICENSE.md, COPYING.LGPLv2.1 e README.md.",
+        "Não instalado nem executado; ffprobe não foi chamado.",
+        "O relatório é produzido pelo usuário, não pelo Core."
+      ],
+      "documents": [
+        {
+          "path": "LICENSE.md",
+          "url": "https://raw.githubusercontent.com/FFmpeg/FFmpeg/e19fadf1de1000b9affb79ad0dfff36449705e26/LICENSE.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:19:45.352711+00:00",
+          "bytes": 4352,
+          "sha256": "e6dc72d5665a1ebd6dcc841de59278dad4ca77ecc47b03f1064a55c3e9ea8bb8"
+        },
+        {
+          "path": "COPYING.LGPLv2.1",
+          "url": "https://raw.githubusercontent.com/FFmpeg/FFmpeg/e19fadf1de1000b9affb79ad0dfff36449705e26/COPYING.LGPLv2.1",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:19:45.620924+00:00",
+          "bytes": 26517,
+          "sha256": "246041b6ecf9bc32d718a62c57877c78b5eb397b6467e74ed7ae2626ab189c30"
+        },
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/FFmpeg/FFmpeg/e19fadf1de1000b9affb79ad0dfff36449705e26/README.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:19:45.871712+00:00",
+          "bytes": 2026,
+          "sha256": "86474c8f0806772f831a9c7a4982fd2398507372c577d229b76f60bbb3e7dead"
+        }
+      ],
+      "installed": false,
+      "executed": false,
+      "decision": "reference_only"
+    },
+    {
+      "repo": "remotion-dev/remotion",
+      "canonical_repo": "remotion-dev/remotion",
+      "description": "Criação de vídeos programaticamente com React.",
+      "commit": "1e55bdc62fb2a9e828060b9728a767f27816f762",
+      "default_branch": "main",
+      "inspection_status": "inspected",
+      "audit_scope": "Metadados e documentos listados; nenhum clone, build ou execução.",
+      "license_declared": "Remotion License (não OSI; licença comercial para empresas acima do limite)",
+      "license_basis": "LICENSE.md do commit fixado",
+      "license_scope": "Uso gratuito para indivíduos, organizações sem fins lucrativos e empresas com até 3 funcionários; empresa maior exige licença comercial. Não é MIT.",
+      "contribution": "O guia do plugin Remotion já adotado na R1023 reforça prévia antes de render e render só por pedido explícito; a licença impede tratar Remotion como open source irrestrito.",
+      "limitations": [
+        "Não instalado nem executado.",
+        "A licença não é OSI e pode exigir pagamento; não foi feita análise jurídica.",
+        "O plugin codex-plugin é MIT, mas o produto Remotion tem outra licença."
+      ],
+      "documents": [
+        {
+          "path": "LICENSE.md",
+          "url": "https://raw.githubusercontent.com/remotion-dev/remotion/1e55bdc62fb2a9e828060b9728a767f27816f762/LICENSE.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:19:47.280888+00:00",
+          "bytes": 2823,
+          "sha256": "bd65083b940f61904f6ef298aade918a7cad72a3e35bc406e36fab365844b673"
+        },
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/remotion-dev/remotion/1e55bdc62fb2a9e828060b9728a767f27816f762/README.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:19:47.526408+00:00",
+          "bytes": 4618,
+          "sha256": "4c6717ce4a4f556300edf18cb8c64965786754649889353599b3435810268e58"
+        }
+      ],
+      "installed": false,
+      "executed": false,
+      "decision": "reference_only"
+    },
+    {
+      "repo": "OpenCut-app/OpenCut",
+      "canonical_repo": "OpenCut-app/OpenCut",
+      "description": "Editor de vídeo open source para web, desktop e móvel.",
+      "commit": "e668010778568641babef2cc40be4703ae6916d6",
+      "default_branch": "main",
+      "inspection_status": "inspected",
+      "audit_scope": "Metadados e documentos listados; nenhum clone, build ou execução.",
+      "license_declared": "MIT",
+      "license_basis": "LICENSE do commit fixado",
+      "license_scope": "Código do editor; mídia e plugins de terceiros mantêm termos próprios.",
+      "contribution": "A organização por linha de tempo e o anúncio de API/headless informam a separação entre plano, execução e verificação.",
+      "limitations": [
+        "Projeto em reescrita; funcionalidades anunciadas podem não existir.",
+        "Não instalado nem executado.",
+        "Nenhuma interface foi copiada."
+      ],
+      "documents": [
+        {
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/OpenCut-app/OpenCut/e668010778568641babef2cc40be4703ae6916d6/LICENSE",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:19:48.521621+00:00",
+          "bytes": 1060,
+          "sha256": "05ab02fd3151198e3c0a698a3b7abfa6149c7bec26230f47c80c4dc5b6dc263f"
+        },
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/OpenCut-app/OpenCut/e668010778568641babef2cc40be4703ae6916d6/README.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:19:48.774345+00:00",
+          "bytes": 2661,
+          "sha256": "95ccfeb63ebca77afdde080e2923b5f29b680db6b42a9be8b9098ea7ba25c050"
+        }
+      ],
+      "installed": false,
+      "executed": false,
+      "decision": "reference_only"
+    },
+    {
+      "repo": "diffusionstudio/core",
+      "canonical_repo": "diffusionstudio/core",
+      "description": "Motor de vídeo em TypeScript para linha de tempo no navegador.",
+      "commit": "4e784a7136b3b08e7b9b0c69504085897bf18647",
+      "default_branch": "main",
+      "inspection_status": "inspected",
+      "audit_scope": "Metadados e documentos listados; nenhum clone, build ou execução.",
+      "license_declared": "MPL-2.0",
+      "license_basis": "LICENSE do commit fixado",
+      "license_scope": "Código sob MPL-2.0; mídia e dependências mantêm termos próprios.",
+      "contribution": "A separação entre reprodução interativa e render de alta fidelidade informa a distinção entre prévia e entrega final.",
+      "limitations": [
+        "Não instalado nem executado.",
+        "MPL-2.0 exige cuidados em modificação de arquivos cobertos; nada foi copiado.",
+        "Não há render no navegador nesta entrega."
+      ],
+      "documents": [
+        {
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/diffusionstudio/core/4e784a7136b3b08e7b9b0c69504085897bf18647/LICENSE",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:19:49.726514+00:00",
+          "bytes": 16726,
+          "sha256": "3f3d9e0024b1921b067d6f7f88deb4a60cbe7a78e76c64e3f1d7fc3b779b9d04"
+        },
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/diffusionstudio/core/4e784a7136b3b08e7b9b0c69504085897bf18647/README.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:19:50.040259+00:00",
+          "bytes": 5966,
+          "sha256": "014a66081bcb8a9ba7891de6d623d4ad8082fe3ff77d39276f1bc24a5d18f2ef"
+        }
+      ],
+      "installed": false,
+      "executed": false,
+      "decision": "reference_only"
+    }
+  ],
+  "notes": [
+    "Commits fixados por repositório; cada documento tem URL, status, data, bytes e SHA-256.",
+    "Licença do código não cobre mídia, modelos, marcas ou conteúdo de terceiros.",
+    "Nenhum projeto foi clonado, instalado ou executado.",
+    "O verificador do Core valida plano e metadados; não calcula VMAF, não detecta cena, não transcreve e não sincroniza legenda.",
+    "Registro não é parecer jurídico nem prova de funcionamento."
+  ]
+}

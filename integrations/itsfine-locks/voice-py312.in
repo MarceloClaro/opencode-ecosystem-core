@@ -1,0 +1,18 @@
+# Família de voz fixa transformers; nunca compartilhar o ambiente de texto.
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.11.0+cpu
+torchaudio==2.11.0+cpu
+transformers==4.57.3
+accelerate==1.12.0
+peft==0.18.0
+safetensors>=0.4
+librosa>=0.10
+soundfile>=0.12
+einops>=0.8
+sox>=1.5
+onnxruntime>=1.18
+jiwer>=3,<5
+faster-whisper>=1.1,<2
+av>=11
+jsonschema>=4,<5
+qwen-tts==0.1.1

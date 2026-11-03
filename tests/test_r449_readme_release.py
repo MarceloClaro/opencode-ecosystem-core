@@ -10,6 +10,13 @@ ROOT = Path(__file__).resolve().parent.parent
 README = (ROOT / "README.md").read_text(encoding="utf-8")
 
 
+def _installation_section(document):
+    match = re.search(r"^## Instalação segura e procedência\s*$([\s\S]*?)(?=^## |\Z)",
+                      document, flags=re.MULTILINE)
+    assert match, "Seção de instalação ausente"
+    return match.group(1)
+
+
 def test_readme_has_complete_operational_entrypoint() -> None:
     required_sections = {
         "## Visão geral",
@@ -41,10 +48,20 @@ def test_readme_documents_installation_without_fabricated_integrity_data() -> No
 
     assert "curl | bash" not in README
     assert "curl | sh" not in README
-    assert not re.search(r"\b[a-fA-F0-9]{64}\b", README)
+    # R929: hashes de evidências do checkout não são checksums de instaladores.
+    # Manter a vedação no escopo original sem apagar procedência documental.
+    assert not re.search(r"\b[a-fA-F0-9]{64}\b", _installation_section(README))
     assert 'git describe --tags --exact-match HEAD' in README
     assert "sha256sum -c" in README
     assert "shasum -a 256 -c" in README
+
+
+def test_installer_checksum_guard_is_scoped_and_still_detects_literal_hashes():
+    digest = "a" * 64
+    safe = "## Instalação segura e procedência\nUse o hash publicado.\n## Evidência local\n" + digest
+    assert not re.search(r"\b[a-fA-F0-9]{64}\b", _installation_section(safe))
+    unsafe = safe.replace("Use o hash publicado.", digest)
+    assert re.search(r"\b[a-fA-F0-9]{64}\b", _installation_section(unsafe))
 
 
 def test_readme_links_to_canonical_guides_and_policies() -> None:

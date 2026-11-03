@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "version": "R1044-1",
+  "part_id": "02XpQTA-_XE-P0102",
+  "model": "nvidia/Nemotron-3-Diarization",
+  "source_sha256": "eaf1305c521166acad01c312711ae59b87e16e8d8224394a21441f6e859f9917",
+  "key": "c9f17a413d679732370761b7be44e65a8f2c042776a017e6c90a77979100054c",
+  "segments": [
+    {
+      "Start": 7.6,
+      "End": 7.67,
+      "Speaker": 0
+    },
+    {
+      "Start": 7.68,
+      "End": 8.71,
+      "Speaker": 0
+    },
+    {
+      "Start": 8.72,
+      "End": 8.78,
+      "Speaker": 0
+    },
+    {
+      "Start": 18.28,
+      "End": 18.79,
+      "Speaker": 0
+    },
+    {
+      "Start": 20.22,
+      "End": 20.88,
+      "Speaker": 0
+    },
+    {
+      "Start": 22.21,
+      "End": 23.21,
+      "Speaker": 0
+    },
+    {
+      "Start": 23.88,
+      "End": 24.9,
+      "Speaker": 0
+    },
+    {
+      "Start": 31.28,
+      "End": 32.06,
+      "Speaker": 0
+    },
+    {
+      "Start": 32.08,
+      "End": 32.09,
+      "Speaker": 0
+    },
+    {
+      "Start": 56.95,
+      "End": 56.96,
+      "Speaker": 0
+    },
+    {
+      "Start": 56.97,
+      "End": 56.98,
+      "Speaker": 0
+    },
+    {
+      "Start": 57.04,
+      "End": 57.06,
+      "Speaker": 0
+    },
+    {
+      "Start": 63.71,
+      "End": 64.49,
+      "Speaker": 0
+    }
+  ],
+  "units": [],
+  "status": "diarized_pending_review",
+  "verified": false,
+  "limitations": [
+    "speaker indices are local to this part",
+    "identity is not inferred from speaker index",
+    "overlap/ambiguity blocks TTS assignment"
+  ]
+}

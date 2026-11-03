@@ -53,6 +53,10 @@ def refresh_source_anchors(root: Path) -> dict:
     folder = root / "docs/architecture"
     if folder.is_symlink() or not folder.is_dir() or not folder.resolve(strict=True).is_relative_to(root):
         raise ValueError("Diretório de arquitetura fora da raiz ou inválido")
+    inventory_candidate = root / "docs/architecture/architecture-inventory.json"
+    catalog_candidate = root / "docs/architecture/flows.json"
+    if inventory_candidate.is_symlink() or catalog_candidate.is_symlink():
+        raise ValueError("Inventário e catálogo de fluxos não podem ser symlinks")
     inventory_path = _inside(root, "docs/architecture/architecture-inventory.json")
     catalog_path = _inside(root, "docs/architecture/flows.json")
     inventory = json.loads(inventory_path.read_text(encoding="utf-8"))

@@ -266,13 +266,91 @@ class TDDHistory:
             "test_hashes": files,
         }
 
+    def _managed_dependency_root(self, environment):
+        """R926: exceção nominal somente para os dois ambientes Core identificados."""
+        groups = {self.root / '.its-fine/venv': ('core_itsfine_environment_v1','text'),
+                  self.root / '.its-fine/venvs/hf-tts': ('core_itsfine_environment_v1','voice'),
+                  self.root / '.ai-edge-quantizer/venv': ('core_edge_quantizer_environment_v1','edge-quantizer')}
+        if environment not in groups:
+            return None
+        marker, config = environment / 'core-environment.json', environment / 'pyvenv.cfg'
+        if not marker.is_file() or not config.is_file():
+            return None
+        self._contained(self.root, marker.relative_to(self.root).as_posix())
+        self._contained(self.root, config.relative_to(self.root).as_posix())
+        if marker.stat().st_size > 65536 or config.stat().st_size > 65536:
+            raise ValueError('managed_dependency_metadata_limit')
+        data = _read_json(marker)
+        if (not isinstance(data, dict) or data.get('kind') != groups[environment][0]
+                or data.get('root') != str(self.root) or data.get('group') != groups[environment][1]):
+            return None
+        if not re.search(r'(?m)^version(?:_info)?\s*=\s*3\.12(?:\.|\s|$)', config.read_text(encoding='utf-8')):
+            return None
+        return environment
+
+    def _managed_dependency_environment(self, directory):
+        for environment in (self.root / '.its-fine/venv', self.root / '.its-fine/venvs/hf-tts', self.root / '.ai-edge-quantizer/venv'):
+            if Path(directory) == environment / 'lib/python3.12/site-packages':
+                return self._managed_dependency_root(environment)
+        return None
+
+    def _dependency_source_tree(self, path, environment):
+        digest = hashlib.sha256()
+        count = total = 0
+        for directory, dirs, names in os.walk(path, followlinks=False):
+            for name in dirs:
+                if (Path(directory) / name).is_symlink():
+                    raise ValueError('source_symlink_not_attested')
+            dirs[:] = sorted(name for name in dirs if name not in _SKIP_DIRS)
+            for name in sorted(names):
+                if Path(name).suffix not in _SOURCE_SUFFIXES and name not in _CONFIG_NAMES:
+                    continue
+                source = Path(directory) / name
+                if source.is_symlink() or not source.is_file():
+                    raise ValueError('source_symlink_not_attested')
+                total += source.stat().st_size
+                count += 1
+                if count > 100000 or total > 1024 * 1024 * 1024:
+                    raise ValueError('dependency_source_manifest_limit')
+                digest.update(_json_bytes({'path': source.relative_to(path).as_posix(),
+                                          'sha256': _sha_file(source)}) + b'\n')
+        candidates = [environment / 'core-environment.json', environment / 'pyvenv.cfg',
+            self.root / '.its-fine/install-manifest.json', self.root / '.its-fine/policy.json']
+        candidates.extend(self.root / f'integrations/itsfine-locks/{group}-py312.txt'
+                          for group in ('text', 'voice'))
+        candidates.extend(self.root / f'.its-fine/core/engines/{engine}.json'
+                          for engine in ('hf-peft', 'hf-encoder', 'hf-tts'))
+        candidates.extend(self.root / relative for relative in (
+            '.ai-edge-quantizer/source-manifest.json','.ai-edge-quantizer/environment.json',
+            'integrations/ai-edge-quantizer-locks/py312.txt'))
+        inputs = {}
+        for candidate in candidates:
+            if not candidate.exists() and not candidate.is_symlink():
+                continue
+            relative = candidate.relative_to(self.root).as_posix()
+            path = self._contained(self.root, relative)
+            if not path.is_file():
+                raise ValueError('invalid_dependency_input')
+            inputs[relative] = _sha_file(path)
+        return {'sha256': digest.hexdigest(), 'source_files': count,
+                'source_bytes': total, 'inputs': inputs}
+
     def _sources(self):
         files = {}
+        dependencies = {}
         for directory, dirs, names in os.walk(self.root, followlinks=False):
+            environment = self._managed_dependency_environment(directory)
+            if environment is not None:
+                path = Path(directory)
+                dependencies[path.relative_to(self.root).as_posix()] = self._dependency_source_tree(path, environment)
+                dirs[:] = []
+                continue
             dirs[:] = sorted(
                 name
                 for name in dirs
-                if name not in _SKIP_DIRS
+                if (name not in _SKIP_DIRS or
+                    name == 'venv' and Path(directory) in {self.root / '.its-fine', self.root / '.ai-edge-quantizer'}
+                    and self._managed_dependency_root(Path(directory) / name) is not None)
                 and not (Path(directory) / name)
                 .resolve()
                 .is_relative_to(self.state_dir)
@@ -298,7 +376,8 @@ class TDDHistory:
             git_head = revision.stdout.strip() if revision.returncode == 0 else None
         except (OSError, subprocess.TimeoutExpired):
             git_head = None
-        return {"git_head": git_head, "files": files}
+        return {"git_head": git_head, "files": files,
+                **({'dependency_trees': dependencies} if dependencies else {})}
 
     def _signature(self, digest):
         return hmac.new(self._key, digest.encode("ascii"), hashlib.sha256).hexdigest()

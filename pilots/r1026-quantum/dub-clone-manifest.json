@@ -1,0 +1,100 @@
+{
+  "schema_version": "r1026.clone.v1",
+  "engine": "XTTS v2 (coqui-tts 0.28.0) em CPU",
+  "license": "Coqui Public Model License (CPML), uso não comercial",
+  "reference": "presenter-ref.wav, 6,0 s, 24 kHz mono",
+  "consent": "operador declarou consentimento escrito da voz; não verificado pelo Core",
+  "language": "pt-BR",
+  "segments": [
+    {
+      "id": 1,
+      "start": 0.0,
+      "end": 5.06,
+      "raw_seconds": 8.257,
+      "atempo": 1.6318,
+      "text": "A IBM tornou disponíveis processadores quânticos de mais de 100 qubits."
+    },
+    {
+      "id": 2,
+      "start": 5.86,
+      "end": 12.02,
+      "raw_seconds": 6.401,
+      "atempo": 1.0391,
+      "text": "Processadores menores foram desativados para dar lugar aos maiores."
+    },
+    {
+      "id": 3,
+      "start": 12.84,
+      "end": 19.56,
+      "raw_seconds": 5.43,
+      "atempo": 1.0,
+      "text": "Alguns números de qubits ainda podem ser simulados classicamente."
+    }
+  ],
+  "loudness_lufs": -16.3,
+  "lip_sync": false,
+  "lip_sync_attempt": "Wav2Lip CPU em teste de 5 s; não produziu AVI após 1h11; interrompido",
+  "lip_sync_requirement": "GPU NVIDIA; MuseTalk/LatentSync ou Wav2Lip com CUDA",
+  "files": {
+    "pilot-16x9-dub-clone.mp4": {
+      "bytes": 4585690,
+      "sha256": "e9245f9dc9ef8ed8a6abf3186233a429782de1e95bee3aa439561c54064be876",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 1920,
+            "height": 1080,
+            "r_frame_rate": "30/1"
+          },
+          {
+            "codec_name": "aac",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 2,
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "duration": "20.000000",
+          "size": "4585690"
+        }
+      }
+    },
+    "pilot-9x16-dub-clone.mp4": {
+      "bytes": 2544347,
+      "sha256": "79e13067d06ff7329a7b611d2b2b6a878830264b2a733d116ddb7fc7b7ab3191",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 1080,
+            "height": 1920,
+            "r_frame_rate": "30/1"
+          },
+          {
+            "codec_name": "aac",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 2,
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "duration": "20.000000",
+          "size": "2544347"
+        }
+      }
+    },
+    "dub-pt-BR-clone.wav": {
+      "bytes": 3840078,
+      "sha256": "22ec02a8518781a8ac0c15b17dd68008ae7891677217cce7e348fca7bcc888bd"
+    }
+  }
+}

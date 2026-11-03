@@ -1,0 +1,14 @@
+{
+  "schema": "federation-chatgpt-sources/v1",
+  "notes": "Conectores hospedados do ChatGPT. Não são instaláveis no runtime local: existem como referência de capacidade, com autenticação obrigatória e licença proprietária. O Core não os habilita nem os executa.",
+  "connectors": [
+    {"name": "chatgpt-github", "vendor": "OpenAI/GitHub", "description": "Leitura de repositórios, issues e pull requests do GitHub.", "category": "desenvolvimento", "url": "https://chatgpt.com/apps", "notes": "Conector hospedado; requer OAuth do operador."},
+    {"name": "chatgpt-google-drive", "vendor": "Google", "description": "Busca e leitura de arquivos do Google Drive.", "category": "documentos", "url": "https://chatgpt.com/apps", "notes": "Conector hospedado; dados permanecem no provedor."},
+    {"name": "chatgpt-gmail", "vendor": "Google", "description": "Leitura e rascunho de e-mail no Gmail.", "category": "comunicacao", "url": "https://chatgpt.com/apps", "notes": "Conector hospedado; requer autorização explícita."},
+    {"name": "chatgpt-google-calendar", "vendor": "Google", "description": "Consulta e criação de eventos de calendário.", "category": "produtividade", "url": "https://chatgpt.com/apps", "notes": "Conector hospedado; escrita exige confirmação humana."},
+    {"name": "chatgpt-slack", "vendor": "Salesforce", "description": "Leitura de canais e mensagens do Slack.", "category": "comunicacao", "url": "https://chatgpt.com/apps", "notes": "Conector hospedado; escopo por workspace."},
+    {"name": "chatgpt-notion", "vendor": "Notion", "description": "Busca e leitura de páginas do Notion.", "category": "documentos", "url": "https://chatgpt.com/apps", "notes": "Conector hospedado; permissões herdadas do workspace."},
+    {"name": "chatgpt-sharepoint", "vendor": "Microsoft", "description": "Leitura de documentos do SharePoint.", "category": "documentos", "url": "https://chatgpt.com/apps", "notes": "Conector hospedado; sujeito à política do tenant."},
+    {"name": "chatgpt-figma", "vendor": "Figma", "description": "Leitura de arquivos e componentes de design.", "category": "design", "url": "https://chatgpt.com/apps", "notes": "Conector hospedado; requer autorização por arquivo."}
+  ]
+}

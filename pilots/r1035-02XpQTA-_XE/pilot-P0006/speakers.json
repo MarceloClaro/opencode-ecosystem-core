@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "part_id": "02XpQTA-_XE-P0006",
+  "voice_cloning_authorized_by_user": true,
+  "documents_verified": false,
+  "identity_verified": false,
+  "speakers": {
+    "spk1": {
+      "role_hint": "homem na cena A",
+      "reference": "pilot-P0006/references-clean/char_male_a.wav",
+      "sha256": "0ac82734171700464a84c61486229efcd0e7cebd2e33ac9734c83dd9acbbe6bc",
+      "duration_seconds": 10.64,
+      "source_units": [
+        "U0001",
+        "U0003",
+        "U0004",
+        "U0006"
+      ],
+      "limitations": [
+        "original reference contained club music; cleaned version used",
+        "identity not verified; consent is user-declared"
+      ],
+      "reference_original": "pilot-P0006/references/spk1.wav",
+      "reference_original_sha256": "598935d04b6fe0d807fbac5226d111620552c4c2aeac6312aac97f70d739d9ca",
+      "clean_filter": "highpass=100,lowpass=6500,afftdn=nf=-20,loudnorm=I=-20",
+      "reference_before_demucs": "pilot-P0006/references/spk1-clean.wav",
+      "reference_before_demucs_sha256": "9a02703bbdde5c1296cc618a138925f0981c4f2211028f8bd34043b5dadac4e5",
+      "cleanup": "Demucs vocals stem + loudnorm"
+    },
+    "spk2": {
+      "role_hint": "Çağla (inferido)",
+      "reference": "pilot-P0006/references-clean/char_cagla-compact.wav",
+      "sha256": "58213f205e3fcac9c83e5864066bf2b6837b0f48d4b13ab813734861bb2d692b",
+      "duration_seconds": 7.78,
+      "source_units": [
+        "U0002",
+        "U0005",
+        "U0007",
+        "U0009",
+        "U0011",
+        "U0013",
+        "U0015",
+        "U0017",
+        "U0021",
+        "U0023",
+        "U0026"
+      ],
+      "limitations": [
+        "reference may contain original music/effects",
+        "identity not verified; consent is user-declared"
+      ],
+      "reference_before_demucs": "pilot-P0006/references/spk2.wav",
+      "reference_before_demucs_sha256": "443e219710d87b5024f22bff0291e11ba0c3f83b1f32d143e0f5a6bbd0877781",
+      "cleanup": "Demucs compact reference used for all Cagla lines"
+    },
+    "spk3": {
+      "role_hint": "Rüya (inferido)",
+      "reference": "pilot-P0006/references-clean/char_ruya.wav",
+      "sha256": "1e09ae9a55ea8985eb6fca8965e515a1a4bb51d1550337cab94704c77506b683",
+      "duration_seconds": 4.42,
+      "source_units": [
+        "U0008",
+        "U0010",
+        "U0012",
+        "U0014",
+        "U0016"
+      ],
+      "limitations": [
+        "compact reference used to avoid long pauses in short TTS lines",
+        "identity not verified; consent is user-declared"
+      ],
+      "reference_original": "pilot-P0006/references/spk3.wav",
+      "reference_original_sha256": "6cbf3896070eca1eb462ba4a82d6d63ae1d33335eb86798941c89155654381b0",
+      "clean_filter": "compact concatenation without 0.15s gaps",
+      "reference_before_demucs": "pilot-P0006/references/spk3-compact.wav",
+      "reference_before_demucs_sha256": "2cc4d22db5b51d855591fdbfcc8e4b28c61b4bb6f44e0978e5367762bc009bb5",
+      "cleanup": "Demucs vocals stem + loudnorm"
+    },
+    "spk4": {
+      "role_hint": "mãe ao telefone (inferida)",
+      "reference": "pilot-P0006/references-clean/char_mother.wav",
+      "sha256": "957ef8aa8330cc776a99a03fbc0f14c5383a27e8322020a8fa7621b02c9555ea",
+      "duration_seconds": 7.08,
+      "source_units": [
+        "U0018",
+        "U0019",
+        "U0020",
+        "U0024",
+        "U0025"
+      ],
+      "limitations": [
+        "reference may contain original music/effects",
+        "identity not verified; consent is user-declared"
+      ],
+      "reference_before_demucs": "pilot-P0006/references/spk4.wav",
+      "reference_before_demucs_sha256": "f86e022ad4793f64df55b9b9b0ee8e0c87ffc7eb8594e83138a66e74b11eb23d",
+      "cleanup": "Demucs vocals stem + loudnorm"
+    }
+  },
+  "limitations": [
+    "speaker labels are heuristic, not biometric identification",
+    "reference clips come from the mixed source and may include music/effects",
+    "XTTS v2 is CPML non-commercial; no publication or commercial use assumed"
+  ]
+}

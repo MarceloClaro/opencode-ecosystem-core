@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="3" time="9.219" timestamp="2026-10-19T07:00:36.250333-03:00" hostname="OPENCODE"><testcase classname="tests.test_r929_core_regressions" name="test_invalid_code_context_is_structured_and_never_written_as_observation[None]" time="7.474"><failure message="AttributeError: 'NoneType' object has no attribute 'get'">tests/test_r929_core_regressions.py:119: in test_invalid_code_context_is_structured_and_never_written_as_observation
+    report=primary.code_context_action(config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+marceloclaro/orchestrator.py:2312: in code_context_action
+    if config.get("operation") == "status":
+       ^^^^^^^^^^
+E   AttributeError: 'NoneType' object has no attribute 'get'</failure></testcase><testcase classname="tests.test_r929_core_regressions" name="test_invalid_code_context_is_structured_and_never_written_as_observation[config1]" time="0.004"><failure message="AttributeError: 'list' object has no attribute 'get'">tests/test_r929_core_regressions.py:119: in test_invalid_code_context_is_structured_and_never_written_as_observation
+    report=primary.code_context_action(config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+marceloclaro/orchestrator.py:2312: in code_context_action
+    if config.get("operation") == "status":
+       ^^^^^^^^^^
+E   AttributeError: 'list' object has no attribute 'get'</failure></testcase><testcase classname="tests.test_r929_core_regressions" name="test_invalid_code_context_is_structured_and_never_written_as_observation[config2]" time="0.004"><failure message="AttributeError: 'NoneType' object has no attribute 'get'">tests/test_r929_core_regressions.py:119: in test_invalid_code_context_is_structured_and_never_written_as_observation
+    report=primary.code_context_action(config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+marceloclaro/orchestrator.py:2328: in code_context_action
+    str(config.get("arguments", {}).get("query", config.get("tool", config.get("operation"))))[:500], observation)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'NoneType' object has no attribute 'get'</failure></testcase></testsuite></testsuites>

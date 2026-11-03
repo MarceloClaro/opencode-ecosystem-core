@@ -29,6 +29,8 @@ class FakeCoordinator:
 def test_mcp_lists_real_network_tools():
     from integrations.ecosystem_mcp import mcp
     names = {tool.name for tool in asyncio.run(mcp.list_tools())}
+    # Superfície real do MCP `ecosystem-network`. O conjunto é conferido por
+    # igualdade: ferramenta nova exige atualização explícita deste contrato.
     assert names == {"ecosystem_status", "ecosystem_route", "ecosystem_run",
                      "ecosystem_workflow", "ecosystem_workflow_status",
                       "ecosystem_library_search", "ecosystem_integration_status",
@@ -36,7 +38,11 @@ def test_mcp_lists_real_network_tools():
                       "ecosystem_knowledge_plan", "ecosystem_scientific_run",
                       "ecosystem_scientific_runtime", "ecosystem_dataset_download",
                       "ecosystem_dataset_custom", "ecosystem_scientific_plugins",
-                      "ecosystem_gemini_notebook", "ecosystem_rea", "ecosystem_browser", "ecosystem_text_spec"}
+                      "ecosystem_gemini_notebook", "ecosystem_rea", "ecosystem_browser",
+                      "ecosystem_text_spec", "ecosystem_agent_profile",
+                      "ecosystem_code_context", "ecosystem_local_ci",
+                       "ecosystem_scientific_verify", "ecosystem_quantum_catalog",
+                       "ecosystem_knowledge_query"}
 
 
 def test_mcp_preserves_blocked_result_and_bounds(monkeypatch):

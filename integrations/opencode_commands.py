@@ -29,9 +29,10 @@ MODULE_COMMANDS = {
     "opencode-sdk": ("integrations.opencode_agent_sdk", ()),
     "kaggle": ("integrations.kaggle_cli", ()),
     "agy": ("integrations.antigravity_cli", ()),
+    "federacao": ("integrations.federation_sync.cli", ()),
 }
 COMMAND_NAMES = (
-    "diagnose", "maswos", "reason", "economy", "models", "route", "sdd", "tdd", "pypi",
+    "diagnose", "maswos", "reason", "economy", "custos", "models", "route", "sdd", "tdd", "pypi",
     *MODULE_COMMANDS,
 )
 
@@ -50,7 +51,7 @@ def _admit(payload: Any) -> tuple[str, str, list[str]]:
         raise ValueError("argv deve ser uma lista explícita de textos sem NUL.")
     if name not in MODULE_COMMANDS and argv:
         raise ValueError("Esta operação recebe arguments, não opções de processo.")
-    if name in {"economy", "models", "sdd"} and arguments.strip():
+    if name in {"economy", "models", "sdd", "custos"} and arguments.strip():
         raise ValueError("Esta operação não recebe argumentos.")
     if name in MODULE_COMMANDS and arguments.strip() and "argv" not in payload:
         raise ValueError("CLIs requerem argv explícito; o texto não será interpretado por shell.")
@@ -102,6 +103,14 @@ def execute_request(payload: Any) -> dict[str, Any]:
     elif name == "economy":
         from economy import token_economy
         result = token_economy.report()
+    elif name == "custos":
+        from integrations.cost_governance import report as cost_report
+        result = cost_report()
+        limitations.append(
+            "Custo monetário ESTIMADO a partir de tarifas declaradas por catálogo consultado; "
+            "não é cobrança observada em conta. Superfícies de assinatura e free tier não têm "
+            "preço por token. A token economy ('economy') mede stakes, não dinheiro."
+        )
     elif name == "models":
         from integrations.model_router import model_router
         result = model_router.list_all_models()

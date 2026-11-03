@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "source_id": "02XpQTA-_XE",
+  "consent_declared": true,
+  "documents_verified": false,
+  "assignment_policy": {
+    "one_voice_per_character": true,
+    "new_character_requires_review": true,
+    "unmapped_speaker_blocks_tts": true,
+    "same_character_reuses_reference": true
+  },
+  "characters": {
+    "char_male_a": {
+      "display_hint": "homem da cena do clube; nome não verificado",
+      "reference": "pilot-P0006/references-clean/char_male_a.wav",
+      "sha256": "0ac82734171700464a84c61486229efcd0e7cebd2e33ac9734c83dd9acbbe6bc",
+      "consent_declared": true,
+      "engine": "XTTS v2 CPU",
+      "identity_verified": false,
+      "voice_status": "cloned_from_demucs_vocals",
+      "source_units": [
+        "U0001",
+        "U0003",
+        "U0004",
+        "U0006"
+      ],
+      "limitations": [
+        "original reference contained club music; cleaned version used",
+        "identity not verified; consent is user-declared"
+      ],
+      "reference_before_demucs": "pilot-P0006/references/spk1-clean.wav",
+      "reference_before_demucs_sha256": "9a02703bbdde5c1296cc618a138925f0981c4f2211028f8bd34043b5dadac4e5",
+      "cleanup": "Demucs vocals stem + loudnorm"
+    },
+    "char_cagla": {
+      "display_hint": "Çağla (inferido pelo diálogo; não verificado)",
+      "reference": "pilot-P0006/references-clean/char_cagla-compact.wav",
+      "sha256": "58213f205e3fcac9c83e5864066bf2b6837b0f48d4b13ab813734861bb2d692b",
+      "consent_declared": true,
+      "engine": "XTTS v2 CPU",
+      "identity_verified": false,
+      "voice_status": "cloned_from_demucs_vocals_compact",
+      "source_units": [
+        "U0002",
+        "U0005",
+        "U0007",
+        "U0009",
+        "U0011",
+        "U0013",
+        "U0015",
+        "U0017",
+        "U0021"
+      ],
+      "limitations": [
+        "reference may contain original music/effects",
+        "identity not verified; consent is user-declared"
+      ],
+      "reference_before_demucs": "pilot-P0006/references/spk2.wav",
+      "reference_before_demucs_sha256": "443e219710d87b5024f22bff0291e11ba0c3f83b1f32d143e0f5a6bbd0877781",
+      "cleanup": "Demucs vocals stem + loudnorm",
+      "notes": "All Cagla lines regenerated with the compact clean Demucs reference; stable reference retired."
+    },
+    "char_ruya": {
+      "display_hint": "Rüya (inferido pelo diálogo; não verificado)",
+      "reference": "pilot-P0006/references-clean/char_ruya.wav",
+      "sha256": "1e09ae9a55ea8985eb6fca8965e515a1a4bb51d1550337cab94704c77506b683",
+      "consent_declared": true,
+      "engine": "XTTS v2 CPU",
+      "identity_verified": false,
+      "voice_status": "cloned_from_demucs_vocals",
+      "source_units": [
+        "U0008",
+        "U0010",
+        "U0012",
+        "U0014",
+        "U0016"
+      ],
+      "limitations": [
+        "reference may contain original music/effects",
+        "identity not verified; consent is user-declared"
+      ],
+      "notes": "compact reference; original had long gaps",
+      "reference_before_demucs": "pilot-P0006/references/spk3-compact.wav",
+      "reference_before_demucs_sha256": "2cc4d22db5b51d855591fdbfcc8e4b28c61b4bb6f44e0978e5367762bc009bb5",
+      "cleanup": "Demucs vocals stem + loudnorm"
+    },
+    "char_mother": {
+      "display_hint": "mãe ao telefone (inferida; não verificada)",
+      "reference": "pilot-P0006/references-clean/char_mother.wav",
+      "sha256": "957ef8aa8330cc776a99a03fbc0f14c5383a27e8322020a8fa7621b02c9555ea",
+      "consent_declared": true,
+      "engine": "XTTS v2 CPU",
+      "identity_verified": false,
+      "voice_status": "cloned_from_demucs_vocals",
+      "source_units": [
+        "U0018",
+        "U0019",
+        "U0020",
+        "U0022",
+        "U0024",
+        "U0025"
+      ],
+      "limitations": [
+        "reference may contain original music/effects",
+        "identity not verified; consent is user-declared"
+      ],
+      "reference_before_demucs": "pilot-P0006/references/spk4.wav",
+      "reference_before_demucs_sha256": "f86e022ad4793f64df55b9b9b0ee8e0c87ffc7eb8594e83138a66e74b11eb23d",
+      "cleanup": "Demucs vocals stem + loudnorm"
+    }
+  },
+  "notes": [
+    "same character always resolves to the same reference/hash",
+    "two different characters must not share a reference",
+    "new or unmapped speakers block TTS until reviewed",
+    "display hints are not verified identities"
+  ]
+}

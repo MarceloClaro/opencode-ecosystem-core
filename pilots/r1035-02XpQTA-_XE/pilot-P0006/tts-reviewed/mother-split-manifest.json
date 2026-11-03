@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "part_id": "02XpQTA-_XE-P0006",
+  "fixes": [
+    {
+      "id": "T017A",
+      "character_id": "char_mother",
+      "text": "Alô, Çağla? Por que não atende?",
+      "reference": "pilot-P0006/references-clean/char_mother.wav",
+      "reference_sha256": "957ef8aa8330cc776a99a03fbc0f14c5383a27e8322020a8fa7621b02c9555ea",
+      "available_seconds": 2.92,
+      "final_seconds": 2.688,
+      "atempo": 1.0,
+      "overrun": false,
+      "artifact": "pilot-P0006/tts-reviewed/T017A.wav",
+      "sha256": "9d009e8c33f9fed1729068f8983452ae20400605611b863285ed73ffc274203f"
+    },
+    {
+      "id": "T017B",
+      "character_id": "char_mother",
+      "text": "Horas ligando, quase enlouqueci.",
+      "reference": "pilot-P0006/references-clean/char_mother.wav",
+      "reference_sha256": "957ef8aa8330cc776a99a03fbc0f14c5383a27e8322020a8fa7621b02c9555ea",
+      "available_seconds": 2.38,
+      "final_seconds": 2.216,
+      "atempo": 1.0,
+      "overrun": false,
+      "artifact": "pilot-P0006/tts-reviewed/T017B.wav",
+      "sha256": "d0edb97da56d5bc9dfe7147a4d4d0eb556e6325e5e96cb2330faba8b7b464b42"
+    }
+  ],
+  "limitations": [
+    "mother phone turn split into two lines for fit",
+    "same clean mother reference",
+    "no approval"
+  ]
+}

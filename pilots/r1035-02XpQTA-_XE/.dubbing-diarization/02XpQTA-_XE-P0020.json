@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "version": "R1044-1",
+  "part_id": "02XpQTA-_XE-P0020",
+  "model": "nvidia/Nemotron-3-Diarization",
+  "source_sha256": "fbf0373150cba11b42ce822151de5b095cfe924351227f03c836832318b0ea43",
+  "key": "524279c0af8378af6d925f04dbf24397b981d8fd8bb2e3387d47cd1c71a1105e",
+  "segments": [],
+  "units": [
+    {
+      "id": "U00239",
+      "speaker": null,
+      "coverage": 0.0,
+      "margin": 0.0,
+      "blocked": true,
+      "reason": "no_overlap",
+      "verified": false
+    }
+  ],
+  "status": "diarized_pending_review",
+  "verified": false,
+  "limitations": [
+    "speaker indices are local to this part",
+    "identity is not inferred from speaker index",
+    "overlap/ambiguity blocks TTS assignment"
+  ]
+}

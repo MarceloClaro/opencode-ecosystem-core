@@ -1,0 +1,85 @@
+{
+  "claim_level": "comparacao_empirica",
+  "n_rows": 996,
+  "n_groups": 81,
+  "events": 83,
+  "baseline_prevalence": 0.08333333333333333,
+  "target": "caries_onset",
+  "group": "HostID",
+  "n_folds": 5,
+  "seed": 0,
+  "models": {
+    "logreg": {
+      "auroc": 0.8141173676084403,
+      "auprc": 0.244541054367794,
+      "brier": 0.0814686140294616,
+      "sensitivity": 0.0,
+      "specificity": 1.0,
+      "n": 996,
+      "events": 83,
+      "prevalence": 0.08333333333333333,
+      "threshold": 0.5,
+      "baseline": 0.08333333333333333,
+      "flag": "OK"
+    },
+    "histgb": {
+      "auroc": 0.7884506261629212,
+      "auprc": 0.20617219902178877,
+      "brier": 0.08643625238346261,
+      "sensitivity": 0.10843373493975904,
+      "specificity": 0.9627601314348302,
+      "n": 996,
+      "events": 83,
+      "prevalence": 0.08333333333333333,
+      "threshold": 0.5,
+      "baseline": 0.08333333333333333,
+      "flag": "OK"
+    },
+    "rf": {
+      "auroc": 0.8192111270932579,
+      "auprc": 0.26147781475997467,
+      "brier": 0.0691823740730746,
+      "sensitivity": 0.0,
+      "specificity": 1.0,
+      "n": 996,
+      "events": 83,
+      "prevalence": 0.08333333333333333,
+      "threshold": 0.5,
+      "baseline": 0.08333333333333333,
+      "flag": "OK"
+    },
+    "ensemble": {
+      "auroc": 0.8049195687459586,
+      "auprc": 0.22513127403220645,
+      "brier": 0.07312761637857591,
+      "sensitivity": 0.0,
+      "specificity": 1.0,
+      "n": 996,
+      "events": 83,
+      "prevalence": 0.08333333333333333,
+      "threshold": 0.5,
+      "baseline": 0.08333333333333333,
+      "flag": "OK",
+      "threshold_opt": 0.02821452154512635,
+      "sensitivity_opt": 0.9397590361445783,
+      "specificity_opt": 0.6078860898138007,
+      "ci95": {
+        "auroc": {
+          "lo": 0.7673368223889729,
+          "hi": 0.8374595690732757,
+          "point": 0.8038399744324971
+        },
+        "auprc": {
+          "lo": 0.1673947223260124,
+          "hi": 0.30729122219563976,
+          "point": 0.22914899290586288
+        },
+        "brier": {
+          "lo": 0.0598602246450972,
+          "hi": 0.08633364924887346,
+          "point": 0.07362367386697985
+        }
+      }
+    }
+  }
+}

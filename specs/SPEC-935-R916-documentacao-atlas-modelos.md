@@ -2,7 +2,8 @@
 spec_id: SPEC-935-R916
 title: Documentação operacional, atlas atual e seleção econômica de modelos
 version: 1.0.0
-status: implemented
+status: draft
+test_file: tests/test_r916_documentation_atlas.py
 ---
 
 # SPEC-935-R916 — documentação e atlas do Core
@@ -50,19 +51,30 @@ imports declarados, sem provar ligação funcional ou execução.
    suas evidências permanecem históricas. Não promover o R914 parcial nem os
    recibos Lean anteriores a prontidão das fontes atuais.
 5. Executar verificações de regeneração, testes relevantes, links locais e
-   renderização real. Inspecionar a página e diagramas representativos; registrar
-   falhas e limites. Não é revisão científica externa ou garantia de produção.
+    renderização real. Inspecionar a página e diagramas representativos; registrar
+    falhas e limites. Não é revisão científica externa ou garantia de produção.
+
+6. O guia de modelos declara os IDs efetivamente presentes no catálogo do checkout,
+   distingue o modelo da sessão de `opencode.json`, tarifas de API de assinatura,
+   tiers/cotas e preço por tarefa aceita. GPT-6 Luna e Gemini Flash são candidatos,
+   não ganhadores de benchmark. Não troca `default_agent` nem `model` em silêncio.
+7. O fluxo de contexto local documenta Ollama, janelas declaradas versus runtime,
+   custos de retry e a diferença entre tokens medidos pelo provider e estimativas.
+   429/quota não dispara fallback oculto.
+8. DOT, Mermaid, README e visualizador exibem a origem do desenho: commit-base,
+    identidade SHA do worktree, contagem de modificados/removidos e limites de
+    permalinks. Âncoras de fonte são atualizadas apenas a partir do manifesto
+    worktree revalidado; removidos, symlinks e não rastreados não entram.
+   O HTML gerado inclui o SHA-256 do template que realmente o produziu.
+9. A pesquisa de quantização no GitHub fixa commit, licença do código e função;
+    distingue runtime, conversão/quantização e treinamento/exportação. Não clona,
+    instala, baixa weights, executa benchmark nem promove compatibilidade a qualidade.
 
 ## Evidência de implementação
 
-76 testes selecionados aprovados; 21 fluxogramas e grafo integral renderizados,
-109 âncoras conferidas, navegação offline em desktop e tela estreita. O gerador
-preserva modo Git e oferece origem worktree, manifesto e recusa de deriva.
-O sincronizador oferece `--refresh-sources` vinculado ao manifesto e diferencia
-links de fontes locais de permalinks da base. Uma falha de sombreamento de
-variável nesse percurso foi reproduzida em RED e corrigida em GREEN.
-
-Sondas sintéticas de Luna e Sol foram aceitas no ensaio comum; a falha inicial
-de Luna e a recusa de cliente Gemini foram preservadas. Não se mediu economia
-em produção nem se alterou o modelo padrão. Consulte
-`docs/verification-documentation-r916.json` e `docs/evidence/r916/`.
+Recebidos anteriormente: recibos históricos da versão 21 fluxogramas/76 testes.
+Eles não atestam a revisão atual. A execução GREEN desta extensão, renderizações
+dos 22 fluxos, âncoras/worktree SHA, testes de regressão e verificação de
+renderização permanecem pendentes até serem executados e reconciliados com os
+artefatos atuais. Não foi alterado o modelo padrão; não foi executado benchmark
+de qualidade, quantização, clone ou download de pesos.

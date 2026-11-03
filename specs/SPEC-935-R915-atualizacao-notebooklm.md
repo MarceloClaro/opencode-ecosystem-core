@@ -3,6 +3,7 @@ spec_id: SPEC-935-R915
 title: Atualização local do conector NotebookLM para 0.15.6
 version: 1.0.0
 status: implemented
+test_file: tests/test_r915_atualizacao_notebooklm.py
 ---
 
 # SPEC-935-R915 — atualização do NotebookLM

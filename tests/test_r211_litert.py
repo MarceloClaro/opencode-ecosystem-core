@@ -36,9 +36,30 @@ def _plugin_published_models(source: str) -> dict[str, dict[str, object]]:
     """Extrai a projeção pública dos modelos sem executar TypeScript.
 
     O plugin é deliberadamente tratado como fonte textual: o teste não depende
-    de Bun, Node, compilador TypeScript ou rede. As chaves com oito espaços são
-    as entradas de modelo do objeto retornado pelo hook ``models``.
+    de Bun, Node, compilador TypeScript ou rede.
+
+    Formato V2 (SPEC-935-R1004): os IDs estão em pares ``["id", "Nome"]`` de
+    ``MODEL_NAMES`` e o limite é compartilhado por ``MODEL_LIMIT``. O formato
+    V1 (mapa literal com oito espaços) segue aceito como fallback.
     """
+
+    pairs = re.findall(r'\[\s*"(?P<model>[^"]+)"\s*,\s*"[^"]*"\s*\]', source)
+    if pairs:
+        limit = re.search(
+            r"const\s+MODEL_LIMIT\s*=\s*\{\s*context:\s*(\d+)\s*,\s*output:\s*(\d+)\s*\}",
+            source,
+        )
+        assert limit, "O plugin V2 não declarou MODEL_LIMIT"
+        return {
+            model: {
+                "id": model,
+                "limit": {
+                    "context": int(limit.group(1)),
+                    "output": int(limit.group(2)),
+                },
+            }
+            for model in pairs
+        }
 
     model_matches = list(
         re.finditer(

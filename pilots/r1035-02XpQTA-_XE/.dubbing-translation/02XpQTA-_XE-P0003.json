@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "version": "R1045-translate-1",
+  "part_id": "02XpQTA-_XE-P0003",
+  "source_sha256": "ae0dca85af268375676ebbf3340161a7124a724a13cabd62d3f4e1d01fa27e03",
+  "source_language": "tr",
+  "target_language": "pt",
+  "model": {
+    "name": "facebook/m2m100_418M",
+    "local_dir": "/home/marceloclaro/.cache/opencode-pilot/models/m2m100-418m",
+    "license": "MIT",
+    "device": "cpu",
+    "cpu_threads": 4,
+    "network": false
+  },
+  "status": "machine_translation_pending_review",
+  "translation_verified": false,
+  "units": [
+    {
+      "id": "U00011",
+      "source_text": "Gel bir tane.",
+      "start_part": 0.8000000000000114,
+      "end_part": 1.259999999999991,
+      "translated_text": "Venha um."
+    },
+    {
+      "id": "U00012",
+      "source_text": "Bu gördüğünüz çocukların büyümeyi başarmış hâli.",
+      "start_part": 29.370000000000005,
+      "end_part": 31.670000000000016,
+      "translated_text": "As crianças que você vê cresceram."
+    },
+    {
+      "id": "U00013",
+      "source_text": "Adımı kendim seçti.",
+      "start_part": 39.5,
+      "end_part": 40.620000000000005,
+      "translated_text": "Eu escolhi meu nome."
+    },
+    {
+      "id": "U00014",
+      "source_text": "Adım olmadan önce...",
+      "start_part": 47.890000000000015,
+      "end_part": 49.72999999999999,
+      "translated_text": "Antes de um passo..."
+    },
+    {
+      "id": "U00015",
+      "source_text": "Landımı.",
+      "start_part": 49.72999999999999,
+      "end_part": 50.349999999999994,
+      "translated_text": "O meu país."
+    },
+    {
+      "id": "U00016",
+      "source_text": "Adı olmayan sokaktaki bir içti.",
+      "start_part": 54.91,
+      "end_part": 56.629999999999995,
+      "translated_text": "Beba em uma rua sem nome."
+    },
+    {
+      "id": "U00017",
+      "source_text": "Yaman'ı hiç olmaya tercih etti.",
+      "start_part": 57.31,
+      "end_part": 59.78999999999999,
+      "translated_text": "O Iêmen preferia ser."
+    },
+    {
+      "id": "U00018",
+      "source_text": "Mecburu kalmadıkça...",
+      "start_part": 71.69,
+      "end_part": 72.97,
+      "translated_text": "Até que não for obrigado..."
+    },
+    {
+      "id": "U00019",
+      "source_text": "Kimseye bulaşma.",
+      "start_part": 72.97,
+      "end_part": 73.72999999999999,
+      "translated_text": "Não infecte ninguém."
+    },
+    {
+      "id": "U00020",
+      "source_text": "Kimseye konuşma.",
+      "start_part": 74.65,
+      "end_part": 75.77000000000001,
+      "translated_text": "Não fale com ninguém."
+    }
+  ],
+  "limitations": [
+    "machine translation; names, idioms, gender and humor may be wrong",
+    "no native-speaker review"
+  ]
+}

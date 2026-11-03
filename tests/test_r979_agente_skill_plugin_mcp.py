@@ -78,20 +78,54 @@ http.request = http.get = https.request = https.get = forbiddenNetwork;
 for (const name of ['writeFile', 'writeFileSync', 'appendFile', 'appendFileSync', 'mkdir', 'mkdirSync']) fs[name] = forbiddenWrite;
 for (const name of ['writeFile', 'appendFile', 'mkdir']) fs.promises[name] = forbiddenWrite;
 syncBuiltinESMExports();
+function validate(schema, value) {
+  if (value === null || typeof value !== 'object' || Array.isArray(value)) return false;
+  const props = schema.properties || {};
+  const required = schema.required || [];
+  for (const key of Object.keys(value)) if (!Object.hasOwn(props, key)) return false;
+  for (const key of required) if (!Object.hasOwn(value, key)) return false;
+  for (const [key, spec] of Object.entries(props)) {
+    if (!Object.hasOwn(value, key)) continue;
+    const v = value[key];
+    if (spec.type === 'string') {
+      if (typeof v !== 'string') return false;
+      if (spec.minLength !== undefined && v.length < spec.minLength) return false;
+      if (spec.maxLength !== undefined && v.length > spec.maxLength) return false;
+      if (spec.pattern !== undefined && !new RegExp(spec.pattern).test(v)) return false;
+    }
+  }
+  return true;
+}
 try {
-  const {default: factory} = await import(process.argv[1]);
-  const {tool} = await import(process.argv[2]);
-  const hooks = await factory({});
-  const operation = hooks.tool['acesso-aberto-auditoria'];
+  const mod = await import(process.argv[1]);
+  const definition = mod.default;
+  const registered = [];
+  await definition.setup({
+    tool: {
+      transform: async (callback) => {
+        callback({
+          list: () => registered.slice(),
+          get: () => undefined,
+          namespace: () => {},
+          add: (tool) => registered.push(tool),
+          update: () => {},
+          remove: () => {},
+        });
+        return {dispose: async () => {}};
+      },
+    },
+  });
+  const operation = registered.find((tool) => tool.name === 'acesso-aberto-auditoria');
+  if (!operation) throw new Error('tool acesso-aberto-auditoria não registrada');
   if (process.argv[3] === 'json-schema') {
-    const schema = tool.schema.toJSONSchema(tool.schema.object(operation.args).strict());
-    console.log(JSON.stringify({ok: true, schema, networkCalls, fileWrites}));
+    console.log(JSON.stringify({ok: true, schema: operation.input, networkCalls, fileWrites}));
   } else if (process.argv[3] === 'schema') {
-    const parsed = tool.schema.object(operation.args).strict().safeParse(payload);
-    console.log(JSON.stringify({ok: parsed.success, parsed: parsed.success ? parsed.data : null, networkCalls, fileWrites}));
+    const ok = validate(operation.input, payload);
+    console.log(JSON.stringify({ok, parsed: ok ? payload : null, networkCalls, fileWrites}));
   } else {
     const result = await operation.execute(payload, {});
-    console.log(JSON.stringify({ok: true, result_type: typeof result, output: typeof result === 'string' ? JSON.parse(result) : result, networkCalls, fileWrites}));
+    const content = typeof result === 'string' ? result : result?.content;
+    console.log(JSON.stringify({ok: true, result_type: typeof content, output: typeof content === 'string' ? JSON.parse(content) : result, networkCalls, fileWrites}));
   }
 } catch (error) {
   console.log(JSON.stringify({ok: false, error: String(error), networkCalls, fileWrites}));

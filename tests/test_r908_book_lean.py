@@ -111,10 +111,13 @@ def test_real_kernel_rejects_mutated_ema_calculation():
     source = ('import Mathlib\nnamespace Mutation\n'
               'theorem ema : (7/10 : ℚ)*(1/2)+(3/10)*(9/10)=31/50 := by norm_num\n'
               'end Mutation\n')
-    green = module.run_lean(source, project, audit_names=['Mutation.ema'])
+    # O teste verifica a semântica do kernel (prova aceita / mutação rejeitada),
+    # não a velocidade da compilação. O prazo maior evita que a carga
+    # concorrente da suíte completa transforme latência em falso negativo.
+    green = module.run_lean(source, project, audit_names=['Mutation.ema'], timeout=900)
     assert green['status'] == 'machine_checked', green
     red = module.run_lean(source.replace('=31/50', '=32/50'), project,
-                          audit_names=['Mutation.ema'])
+                          audit_names=['Mutation.ema'], timeout=900)
     assert red['status'] == 'compiler_rejected', red
 
 

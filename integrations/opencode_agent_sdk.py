@@ -20,8 +20,11 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import time
+import uuid
 import urllib.error
+import urllib.parse
 import urllib.request
 from copy import deepcopy
 from typing import Any, Callable, Dict, Iterator, List, Optional
@@ -31,12 +34,26 @@ MAX_TURNS = 100
 
 PROVIDERS = (
     {"id": "litert-lm", "base_url": "http://localhost:9379/v1",
-     "default_model": "litert-community/gemma-4-E2B-it-litert-lm"},
+     "default_model": "litert-community/gemma-4-E2B-it-litert-lm",
+     "context_window": 20480},
     {"id": "ollama", "base_url": "http://localhost:11434/v1",
-     "default_model": "gemma4:e2b-tuned"},
+     "default_model": "gemma4:e2b-tuned", "context_window": 24576},
     {"id": "colibri", "base_url": "http://localhost:8090/v1",
      "default_model": "olmoe-1b-7b"},
 )
+
+# Limites declarados pelo catálogo do Core; não são sondagem do Modelfile ativo.
+MODEL_CONTEXT_WINDOWS = {
+    "gemma4:e2b-tuned": 24576,
+    "gemma4:e4b-tuned": 24576,
+    "llama3.2": 32768,
+    "litert-community/gemma-4-E2B-it-litert-lm": 20480,
+    "litert-community/gemma-4-E4B-it-litert-lm": 20480,
+    "litert-community/gemma-4-12B-it-litert-lm": 20480,
+}
+MAX_CONTEXT_WINDOW = 2_000_000
+MAX_OUTPUT_TOKENS = 65_536
+MAX_CONTEXT_SAFETY_TOKENS = 8_192
 
 _NO_KEY = "sk-no-key-required"
 _TOOLS: Dict[str, Dict[str, Any]] = {}
@@ -99,6 +116,9 @@ def build_options(
     permission_mode: Optional[str] = None,
     hooks: Optional[Dict[str, List[Any]]] = None,
     timeout: int = 120,
+    context_window: Optional[int] = None,
+    max_output_tokens: Optional[int] = None,
+    context_safety_tokens: int = 256,
 ) -> Dict[str, Any]:
     """Monta options no vocabulário do AgentOptions (puro, sem rede)."""
     if not isinstance(prompt, str) or not prompt.strip():
@@ -107,6 +127,14 @@ def build_options(
         raise ValueError(f"max_turns deve ser inteiro entre 1 e {MAX_TURNS}.")
     if type(timeout) is not int or not 1 <= timeout <= 3600:
         raise ValueError("timeout deve ser inteiro entre 1 e 3600 segundos.")
+    if context_window is not None and (type(context_window) is not int or
+                                       not 256 <= context_window <= MAX_CONTEXT_WINDOW):
+        raise ValueError(f"context_window deve ser inteiro entre 256 e {MAX_CONTEXT_WINDOW}.")
+    if max_output_tokens is not None and (type(max_output_tokens) is not int or
+                                           not 1 <= max_output_tokens <= MAX_OUTPUT_TOKENS):
+        raise ValueError(f"max_output_tokens deve ser inteiro entre 1 e {MAX_OUTPUT_TOKENS}.")
+    if type(context_safety_tokens) is not int or not 0 <= context_safety_tokens <= MAX_CONTEXT_SAFETY_TOKENS:
+        raise ValueError(f"context_safety_tokens deve ser inteiro entre 0 e {MAX_CONTEXT_SAFETY_TOKENS}.")
     for key, names in (("allowed_tools", allowed_tools), ("disallowed_tools", disallowed_tools)):
         if names is not None and (not isinstance(names, list) or any(
                 not isinstance(name, str) or not name for name in names)):
@@ -122,6 +150,8 @@ def build_options(
         "allowed_tools": list(allowed_tools or []),
         "disallowed_tools": list(disallowed_tools or []),
         "max_turns": max_turns, "model": model, "base_url": base_url,
+        "context_window": context_window, "max_output_tokens": max_output_tokens,
+        "context_safety_tokens": context_safety_tokens,
         "permission_mode": permission_mode or "default",
         "hooks": hooks or {}, "timeout": timeout,
     }
@@ -157,24 +187,162 @@ def _http_json(method: str, url: str, payload: Optional[dict] = None,
         return None
 
 
+def _estimate_tokens(text: str) -> int:
+    """Estimativa deliberadamente conservadora por bytes; não substitui tokenizer."""
+    raw = text.encode("utf-8", errors="replace")
+    return max(1, (len(raw) + 2) // 3) if raw else 0
+
+
+def _classify_http_error(status: int, message: str) -> str:
+    detail = message.lower()
+    if status == 413 or any(marker in detail for marker in (
+            "context length", "context_length", "too many tokens", "prompt is too long",
+            "context window", "context exceeded", "maximum context", "input is too long",
+            "input length", "num_ctx", "exceeds the model's maximum")):
+        return "context_window_exceeded"
+    if status == 429:
+        if any(marker in detail for marker in ("quota", "resource_exhausted", "billing", "token_count")):
+            return "quota_exceeded"
+        return "rate_limited"
+    if status in {401, 403}:
+        return "authentication_failed"
+    if status == 404:
+        return "model_or_endpoint_not_found"
+    if status in {408, 504}:
+        return "request_timeout"
+    if status >= 500:
+        return "provider_unavailable"
+    return "provider_rejected_request"
+
+
+def _retry_after(headers, message: str = "") -> Optional[Any]:
+    value = headers.get("Retry-After") if headers is not None else None
+    if value is not None:
+        try:
+            number = float(value)
+            return int(number) if number.is_integer() else number
+        except (TypeError, ValueError):
+            # HTTP also permits an HTTP-date. Preserve it rather than inventing a delay.
+            return str(value)[:80]
+    match = re.search(r"retry\s+(?:after|in)\s+([0-9]+(?:\.[0-9]+)?)\s*(?:s|sec|seconds?)\b",
+                      message, re.IGNORECASE)
+    return float(match.group(1)) if match else None
+
+
+def _http_json_detailed(method: str, url: str, payload: Optional[dict], timeout: int):
+    """HTTP JSON with typed operational failure; never returns raw prompts in errors."""
+    deadline = time.monotonic() + timeout
+    data = json.dumps(payload, ensure_ascii=False).encode() if payload is not None else None
+    request = urllib.request.Request(url, data=data, method=method,
+        headers={"Content-Type": "application/json"})
+    try:
+        with urllib.request.urlopen(request, timeout=timeout) as response:
+            if not hasattr(response, "read1"):
+                body = response.read()
+            else:
+                chunks = []
+                while True:
+                    remaining = deadline - time.monotonic()
+                    if remaining <= 0:
+                        raise TimeoutError("prazo total HTTP excedido")
+                    sock = getattr(getattr(getattr(response, "fp", None), "raw", None), "_sock", None)
+                    if sock is not None:
+                        sock.settimeout(remaining)
+                    chunk = response.read1(65536)
+                    if not chunk:
+                        body = b"".join(chunks)
+                        break
+                    chunks.append(chunk)
+            try:
+                decoded = json.loads(body)
+            except (UnicodeError, json.JSONDecodeError):
+                return {"ok": False, "code": "invalid_provider_response",
+                    "message": "O endpoint retornou uma resposta que não é JSON válido.",
+                    "http_status": getattr(response, "status", None)}
+            return {"ok": True, "data": decoded, "http_status": getattr(response, "status", 200)}
+    except urllib.error.HTTPError as exc:
+        try:
+            raw = exc.read(4096)
+            decoded = json.loads(raw) if raw else {}
+        except (OSError, UnicodeError, json.JSONDecodeError):
+            decoded = {}
+        error_value = decoded.get("error", {}) if isinstance(decoded, dict) else {}
+        provider_message = (error_value.get("message", "") if isinstance(error_value, dict)
+                            else error_value if isinstance(error_value, str) else "")
+        if not provider_message and isinstance(decoded, dict) and isinstance(decoded.get("message"), str):
+            provider_message = decoded["message"]
+        if not isinstance(provider_message, str):
+            provider_message = ""
+        code = _classify_http_error(exc.code, provider_message)
+        messages = {
+            "context_window_exceeded": "O contexto excede o limite reportado pelo provedor. Reduza/estruture a entrada ou configure uma janela maior explicitamente; nenhum texto foi truncado.",
+            "quota_exceeded": "Quota do provedor excedida. Aguarde Retry-After ou verifique tier/billing; não houve retry nem troca automática de modelo.",
+            "rate_limited": "O provedor aplicou rate limit. Aguarde Retry-After; não houve retry automático.",
+            "authentication_failed": "Autenticação recusada pelo endpoint local/provider.",
+            "model_or_endpoint_not_found": "Modelo ou endpoint não encontrado no provider selecionado.",
+            "request_timeout": "Prazo da requisição excedido; a chamada não foi repetida.",
+            "provider_unavailable": "O provider reportou indisponibilidade; a chamada não foi repetida.",
+            "provider_rejected_request": "O provider recusou a solicitação; confira o schema e os limites informados.",
+        }
+        return {"ok": False, "code": code, "message": messages[code],
+            "http_status": exc.code, "retry_after_seconds": _retry_after(exc.headers, provider_message)}
+    except (TimeoutError, urllib.error.URLError, OSError) as exc:
+        timeout_error = isinstance(exc, TimeoutError) or isinstance(getattr(exc, "reason", None), TimeoutError)
+        return {"ok": False, "code": "request_timeout" if timeout_error else "provider_unavailable",
+            "message": "O provider local não respondeu dentro do prazo." if timeout_error else
+                "Não foi possível conectar ao provider local configurado.", "http_status": None}
+    except Exception as exc:
+        return {"ok": False, "code": "transport_error",
+            "message": f"Falha de transporte ({type(exc).__name__}); conteúdo do pedido omitido.",
+            "http_status": None}
+
+
+def _probe_ollama_context(base_url: str, model: str, timeout: int = 5) -> dict:
+    """Consulta `/api/show` apenas em Ollama loopback; não executa inferência."""
+    parsed = urllib.parse.urlsplit(base_url)
+    if parsed.hostname not in {"localhost", "127.0.0.1", "::1"}:
+        return {"ok": False, "code": "context_probe_not_local"}
+    origin = f"{parsed.scheme or 'http'}://{parsed.netloc}"
+    response = _http_json_detailed("POST", origin + "/api/show",
+        {"model": model, "verbose": False}, min(timeout, 10))
+    if not response.get("ok"):
+        return {"ok": False, "code": response.get("code", "context_probe_failed"),
+                "http_status": response.get("http_status"),
+                "retry_after_seconds": response.get("retry_after_seconds")}
+    data = response.get("data")
+    modelfile = data.get("modelfile", "") if isinstance(data, dict) else ""
+    if not isinstance(modelfile, str):
+        modelfile = ""
+    match = re.search(r"(?im)^\s*PARAMETER\s+num_ctx\s+(\d+)\s*$", modelfile)
+    if match:
+        return {"ok": True, "context_window": int(match.group(1)),
+                "source": "ollama_api_show_modelfile_num_ctx"}
+    # Ollama's Modelfile reference documents num_ctx default=2048. This value
+    # is an API/Modelfile default, not a separate hardware/runtime measurement.
+    return {"ok": True, "context_window": 2048,
+            "source": "ollama_api_show_documented_default_num_ctx"}
+
+
 def provider_healthy(base_url: str, timeout: int = 5) -> bool:
     """True se `{base}/models` responde (sondagem leve, sem inferência)."""
     got = _http_json("GET", base_url.rstrip("/") + "/models", timeout=timeout)
     return isinstance(got, dict) and isinstance(got.get("data"), list)
 
 
-def detect_provider(timeout: int = 5) -> Optional[Dict[str, str]]:
+def detect_provider(timeout: int = 5) -> Optional[Dict[str, Any]]:
     """Primeiro provedor saudável: env > LiteRT-LM > Ollama > Colibri."""
     env_base = os.environ.get("OPENCODE_SDK_BASE_URL")
     if env_base:
         if provider_healthy(env_base, timeout):
             return {"id": "env", "base_url": env_base,
-                    "model": os.environ.get("OPENCODE_SDK_MODEL", "")}
+                    "model": os.environ.get("OPENCODE_SDK_MODEL", ""),
+                    "context_window": None}
         return None
     for prov in PROVIDERS:
         if provider_healthy(prov["base_url"], timeout):
-            return {"id": prov["id"], "base_url": prov["base_url"],
-                    "model": prov["default_model"]}
+                return {"id": prov["id"], "base_url": prov["base_url"],
+                        "model": prov["default_model"],
+                        "context_window": prov.get("context_window")}
     return None
 
 
@@ -225,23 +393,53 @@ def _hooks_deny(hooks: Dict[str, List[Any]], tool_name: str,
     return None if verdict["allow"] else verdict["reason"]
 
 
+def _valid_tool_calls(calls: Any) -> bool:
+    """Valida a estrutura inteira antes de publicar sucesso ou executar tools."""
+    return isinstance(calls, list) and all(
+        isinstance(call, dict) and call.get("type") == "function" and
+        isinstance(call.get("id"), str) and bool(call["id"]) and
+        isinstance(call.get("function"), dict) and
+        isinstance(call["function"].get("name"), str) and
+        bool(call["function"]["name"]) and
+        isinstance(call["function"].get("arguments"), str)
+        for call in calls
+    ) and len({call["id"] for call in calls}) == len(calls)
+
+
 def chat_once(messages: List[dict], model: str, base_url: str,
               tools: Optional[List[dict]] = None,
-              timeout: int = 120) -> Dict[str, Any]:
+              timeout: int = 120,
+              max_output_tokens: Optional[int] = None) -> Dict[str, Any]:
     """Uma chamada `/chat/completions`; dict normalizado (nunca lança)."""
     payload: Dict[str, Any] = {"model": model, "messages": messages}
+    if max_output_tokens is not None:
+        payload["max_tokens"] = max_output_tokens
     if tools:
         payload["tools"] = tools
         payload["tool_choice"] = "auto"
-    got = _http_json("POST", base_url.rstrip("/") + "/chat/completions",
-                     payload, timeout)
-    try:
-        msg = got["choices"][0]["message"]  # type: ignore[index]
-        return {"ok": True, "content": msg.get("content") or "",
-                "tool_calls": msg.get("tool_calls") or []}
-    except (TypeError, KeyError, IndexError):
-        return {"ok": False, "error": "resposta inválida do provedor",
+    response = _http_json_detailed("POST", base_url.rstrip("/") + "/chat/completions",
+                                   payload, timeout)
+    if not response.get("ok"):
+        return {"ok": False, **{key: response.get(key) for key in
+            ("code", "message", "http_status", "retry_after_seconds")}}
+    got = response.get("data")
+    choices = got.get("choices") if isinstance(got, dict) else None
+    first = choices[0] if isinstance(choices, list) and choices else None
+    msg = first.get("message") if isinstance(first, dict) else None
+    content = msg.get("content") if isinstance(msg, dict) else None
+    calls = msg.get("tool_calls") if isinstance(msg, dict) else None
+    # null é permitido para mensagens assistant de tool calling; outros tipos
+    # falsy (por exemplo {}) não podem ser normalizados silenciosamente para [].
+    calls = [] if calls is None else calls
+    if (not isinstance(msg, dict) or
+            (content is not None and not isinstance(content, str)) or
+            not _valid_tool_calls(calls)):
+        return {"ok": False, "code": "invalid_provider_response",
+                "error": "O provedor retornou choices/message/content/tool_calls inválidos.",
                 "content": "", "tool_calls": []}
+    return {"ok": True, "content": content or "", "tool_calls": calls,
+            "usage": got.get("usage"),
+            "actual_model": got.get("model") if isinstance(got.get("model"), str) else None}
 
 
 def query(prompt: str, options: Optional[Dict[str, Any]] = None
@@ -255,12 +453,16 @@ def query(prompt: str, options: Optional[Dict[str, Any]] = None
             max_turns=raw.get("max_turns", 3), model=raw.get("model"),
             base_url=raw.get("base_url"), permission_mode=raw.get("permission_mode"),
             hooks=raw.get("hooks"), timeout=raw.get("timeout", 120),
+            context_window=raw.get("context_window"),
+            max_output_tokens=raw.get("max_output_tokens"),
+            context_safety_tokens=raw.get("context_safety_tokens", 256),
         )
     except (ValueError, TypeError) as exc:
         yield {"type": "error", "error": str(exc)}
         return
     hooks = opts["hooks"]
-    context = {"prompt": opts["prompt"], "model": opts["model"], "base_url": opts["base_url"]}
+    context = {"query_id": "query-" + uuid.uuid4().hex,
+        "prompt": opts["prompt"], "model": opts["model"], "base_url": opts["base_url"]}
     finish = "cancelled"
     try:
         start = _event_hooks(hooks, "SessionStart", context=context)
@@ -299,6 +501,42 @@ def _query_loop(opts: Dict[str, Any], context: Dict[str, Any]) -> Iterator[Dict[
     if not model:
         yield {"type": "error", "error": "modelo não definido para o provedor"}
         return "error"
+    provider_id = (detected or {}).get("id")
+    if provider_id is None:
+        provider_id = next((provider["id"] for provider in PROVIDERS
+                            if provider["base_url"] == base_url), "explicit_endpoint")
+    # A origem da configuração (inclusive env) não muda o tipo do endpoint.
+    parsed_endpoint = urllib.parse.urlsplit(str(base_url))
+    if parsed_endpoint.hostname in {"localhost", "127.0.0.1", "::1"} and parsed_endpoint.port == 11434:
+        provider_id = "ollama"
+    context_window = opts.get("context_window")
+    context_source = "explicit_option_unverified" if context_window is not None else None
+    if provider_id == "ollama":
+        probe = _probe_ollama_context(str(base_url), str(model), timeout=opts["timeout"])
+        if not probe.get("ok"):
+            if context_window is None:
+                yield {"type": "error", "code": "ollama_context_probe_failed",
+                    "error": "Não foi possível confirmar o num_ctx ativo do Ollama via /api/show; confira o modelo/daemon ou passe uma janela explícita.",
+                    "probe_code": probe.get("code"), "http_status": probe.get("http_status"),
+                    "retry_after_seconds": probe.get("retry_after_seconds"),
+                    "model": model, "provider": provider_id, "request_sent": False,
+                    "context_window_verified": False,"query_id": context.get("query_id")}
+                return "error"
+            context_source = "operator_declared_unverified_after_probe_failure"
+        else:
+            runtime_context = probe["context_window"]
+            if context_window is not None:
+                context_window = min(context_window, runtime_context)
+                context_source = "min_operator_cap_and_" + probe["source"]
+            else:
+                context_window = runtime_context
+                context_source = probe["source"]
+    elif context_window is None and detected and detected.get("context_window"):
+        context_window = detected["context_window"]
+        context_source = "provider_default_declared"
+    elif context_window is None and model in MODEL_CONTEXT_WINDOWS:
+        context_window = MODEL_CONTEXT_WINDOWS[model]
+        context_source = "model_catalog_declared"
     disallowed = set(opts.get("disallowed_tools") or [])
     allowed = [name for name in dict.fromkeys(opts.get("allowed_tools") or [])
                if name not in disallowed]
@@ -313,27 +551,67 @@ def _query_loop(opts: Dict[str, Any], context: Dict[str, Any]) -> Iterator[Dict[
     tools = _openai_tools(allowed)
 
     for turn in range(max_turns):
-        answer = chat_once(messages, str(model), str(base_url), tools or None, timeout)
-        if not answer.get("ok"):
-            yield {"type": "error", "error": str(answer.get("error"))}
+        estimated_input = _estimate_tokens(json.dumps(
+            {"messages": messages, "tools": tools or []}, ensure_ascii=False, default=str))
+        reserved_output = opts["max_output_tokens"] or 0
+        budget = estimated_input + reserved_output + opts["context_safety_tokens"]
+        if context_window is not None and budget > context_window:
+            yield {"type": "error", "code": "context_budget_exceeded",
+                "error": "A estimativa conservadora excede a janela de contexto declarada. Reduza/estruture a entrada ou configure uma janela maior explicitamente; nenhum conteúdo foi truncado.",
+                "estimated_input_tokens": estimated_input, "reserved_output_tokens": reserved_output,
+                "safety_tokens": opts["context_safety_tokens"], "context_window": context_window,
+                "context_window_source": context_source, "request_sent": False,
+                "context_window_verified": bool(context_source and "ollama_api_show" in context_source),
+                "query_id": context.get("query_id")}
             return "error"
+        output_options = ({"max_output_tokens": opts["max_output_tokens"]}
+                          if opts["max_output_tokens"] is not None else {})
+        answer = chat_once(messages, str(model), str(base_url), tools or None, timeout,
+                           **output_options)
+        if not answer.get("ok"):
+            yield {"type": "error", "code": answer.get("code", "provider_error"),
+                "error": str(answer.get("message") or answer.get("error") or "Falha do provider"),
+                "http_status": answer.get("http_status"),
+                "retry_after_seconds": answer.get("retry_after_seconds"),
+                "model": model, "provider": provider_id, "request_sent": True,
+                "query_id": context.get("query_id")}
+            return "error"
+        calls = answer.get("tool_calls")
+        calls = [] if calls is None else calls
+        content = answer.get("content")
+        if (not _valid_tool_calls(calls) or
+                (content is not None and not isinstance(content, str))):
+            yield {"type": "error", "code": "invalid_provider_response",
+                   "error": "Mensagem ou tool_calls inválidos do provedor"}
+            return "error"
+        usage = answer.get("usage")
+        exact_usage = (isinstance(usage, dict)
+            and type(usage.get("prompt_tokens")) is int and usage["prompt_tokens"] >= 0
+            and type(usage.get("completion_tokens")) is int and usage["completion_tokens"] >= 0)
+        if exact_usage:
+            input_tokens = usage["prompt_tokens"]
+            output_tokens = usage["completion_tokens"]
+            count_source = "provider"
+        else:
+            input_tokens = estimated_input
+            assistant_output = {"content": answer.get("content", ""),
+                                "tool_calls": answer.get("tool_calls", [])}
+            output_tokens = _estimate_tokens(json.dumps(assistant_output, ensure_ascii=False, default=str))
+            count_source = "estimated_utf8_bytes_div_3"
+        yield {"type": "usage", "provider": provider_id,
+            "model": answer.get("actual_model") or model, "request_index": turn + 1,
+            "query_id": context.get("query_id"),
+            "input_tokens": input_tokens, "output_tokens": output_tokens,
+            "total_tokens": input_tokens + output_tokens,
+            "token_count_source": count_source, "token_counts_exact": exact_usage,
+            "context_window": context_window, "context_window_source": context_source,
+            "context_window_verified": bool(context_source and "ollama_api_show" in context_source),
+            "estimated_input_tokens_for_preflight": estimated_input,
+            "context_safety_tokens": opts["context_safety_tokens"]}
         if answer.get("content"):
             yield {"type": "text", "text": answer["content"]}
-        calls = answer.get("tool_calls") or []
         if not calls:
             return "stop"
-        if not isinstance(calls, list) or any(
-                not isinstance(call, dict) or call.get("type") != "function" or
-                not isinstance(call.get("id"), str) or not call["id"] or
-                not isinstance(call.get("function"), dict) or
-                not isinstance(call["function"].get("name"), str) or
-                not isinstance(call["function"].get("arguments"), str)
-                for call in calls):
-            yield {"type": "error", "error": "tool_calls inválidos do provedor"}
-            return "error"
-        if len({call["id"] for call in calls}) != len(calls):
-            yield {"type": "error", "error": "tool_calls com IDs duplicados"}
-            return "error"
         messages.append({"role": "assistant", "content": answer.get("content") or None,
                          "tool_calls": calls})
         for call in calls:
@@ -375,7 +653,7 @@ def _query_loop(opts: Dict[str, Any], context: Dict[str, Any]) -> Iterator[Dict[
                 output = {"error": f"erro na tool: {exc}"}
                 tool_failed = True
             messages.append({"role": "tool", "tool_call_id": call["id"],
-                             "content": json.dumps(output, ensure_ascii=False, default=str)[:4000]})
+                             "content": json.dumps(output, ensure_ascii=False, default=str)})
             post = _event_hooks(hooks, "PostToolUse", name, args,
                                 {**tool_context, "output": output, "is_error": tool_failed})
             # O pós-hook antecede yield: close() do consumidor não o omite
@@ -395,7 +673,7 @@ def doctor_check() -> Dict[str, str]:
         return {
             "name": "opencode-agent-sdk",
             "status": "pass",
-            "detail": f"Endpoint /models acessível via {prov['id']} ({prov.get('model')}); inferência não testada. SPEC-935-R649.",
+            "detail": f"Endpoint /models acessível via {prov['id']} ({prov.get('model')}); contexto é declaração do catálogo e inferência não foi testada. SPEC-935-R649/R918.",
         }
     return {
         "name": "opencode-agent-sdk",
@@ -415,6 +693,8 @@ def install_instructions() -> str:
         "Uso no Core:\n"
         "  /opencode-sdk status\n"
         "  /opencode-sdk query --prompt '...' [--model M] [--max-turns 3]\n"
+        "       [--context-window N] [--max-output-tokens N]\n"
+        "O preflight usa estimativa de caracteres, não tokenizer; não trunca nem troca provider automaticamente.\n"
         "Override: OPENCODE_SDK_BASE_URL (+ OPENCODE_SDK_MODEL); custo do endpoint não avaliado."
     )
 
@@ -424,7 +704,9 @@ def _format_status() -> str:
     return json.dumps(
         {"especificacao": SPEC_ID, "custo": "padrão local; override não avaliado",
          "provedor": prov, "licenca": "livre (Core)",
-         "transporte": "HTTP OpenAI-compativel (stdlib)"},
+         "transporte": "HTTP OpenAI-compativel (stdlib)",
+         "context_window": (prov or {}).get("context_window"),
+         "context_window_scope": "declared_catalog_not_runtime_probe"},
         ensure_ascii=False, indent=2,
     )
 
@@ -435,7 +717,8 @@ def main(argv: Optional[List[str]] = None) -> int:
     if not argv or argv[0] in {"--help", "-h", "help"}:
         print(
             "Uso: python3 -m integrations.opencode_agent_sdk <status|doctor|install|query|tools> [args...]\n"
-            "  query --prompt '...' [--model M] [--base-url U] [--max-turns N] [--system S]"
+            "  query --prompt '...' [--model M] [--base-url U] [--max-turns N] [--system S] "
+            "[--context-window N] [--max-output-tokens N]"
         )
         return 0
     command, *rest = argv
@@ -462,6 +745,9 @@ def main(argv: Optional[List[str]] = None) -> int:
         parser.add_argument("--base-url")
         parser.add_argument("--max-turns", type=int, default=3)
         parser.add_argument("--system")
+        parser.add_argument("--context-window", type=int)
+        parser.add_argument("--max-output-tokens", type=int)
+        parser.add_argument("--context-safety-tokens", type=int, default=256)
         try:
             parsed = parser.parse_args(rest)
         except SystemExit as exc:
@@ -469,7 +755,10 @@ def main(argv: Optional[List[str]] = None) -> int:
         try:
             opts = build_options(parsed.prompt, system_prompt=parsed.system,
                                  max_turns=parsed.max_turns,
-                                 model=parsed.model, base_url=parsed.base_url)
+                                 model=parsed.model, base_url=parsed.base_url,
+                                 context_window=parsed.context_window,
+                                 max_output_tokens=parsed.max_output_tokens,
+                                 context_safety_tokens=parsed.context_safety_tokens)
         except ValueError as exc:
             print(str(exc))
             return 2

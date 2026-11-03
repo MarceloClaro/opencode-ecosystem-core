@@ -1,0 +1,474 @@
+{
+  "schema_version": 1,
+  "version": "R1044-1",
+  "part_id": "02XpQTA-_XE-P0042",
+  "model": "nvidia/Nemotron-3-Diarization",
+  "source_sha256": "ad1e3548caaa9a3ded453cb3bfcb9b244f2e245a9c46fe0939602cfc4d7d2223",
+  "key": "0402a849765dfcbc3717aa5594f01ca14088e9da003cc8ed8d9bc8eb403938c2",
+  "segments": [
+    {
+      "Start": 0.28,
+      "End": 0.84,
+      "Speaker": 0
+    },
+    {
+      "Start": 1.23,
+      "End": 2.88,
+      "Speaker": 1
+    },
+    {
+      "Start": 2.38,
+      "End": 2.85,
+      "Speaker": 2
+    },
+    {
+      "Start": 3.17,
+      "End": 4.01,
+      "Speaker": 0
+    },
+    {
+      "Start": 6.28,
+      "End": 9.13,
+      "Speaker": 1
+    },
+    {
+      "Start": 9.58,
+      "End": 10.55,
+      "Speaker": 2
+    },
+    {
+      "Start": 10.93,
+      "End": 11.51,
+      "Speaker": 3
+    },
+    {
+      "Start": 11.58,
+      "End": 12.15,
+      "Speaker": 2
+    },
+    {
+      "Start": 11.69,
+      "End": 13.64,
+      "Speaker": 0
+    },
+    {
+      "Start": 13.97,
+      "End": 14.65,
+      "Speaker": 3
+    },
+    {
+      "Start": 14.83,
+      "End": 17.41,
+      "Speaker": 0
+    },
+    {
+      "Start": 19.8,
+      "End": 19.81,
+      "Speaker": 0
+    },
+    {
+      "Start": 20.43,
+      "End": 21.19,
+      "Speaker": 3
+    },
+    {
+      "Start": 20.51,
+      "End": 20.77,
+      "Speaker": 0
+    },
+    {
+      "Start": 21.2,
+      "End": 21.25,
+      "Speaker": 3
+    },
+    {
+      "Start": 21.28,
+      "End": 21.29,
+      "Speaker": 3
+    },
+    {
+      "Start": 21.66,
+      "End": 24.09,
+      "Speaker": 1
+    },
+    {
+      "Start": 34.32,
+      "End": 35.96,
+      "Speaker": 2
+    },
+    {
+      "Start": 36.88,
+      "End": 38.88,
+      "Speaker": 2
+    },
+    {
+      "Start": 45.99,
+      "End": 47.48,
+      "Speaker": 2
+    },
+    {
+      "Start": 48.53,
+      "End": 49.69,
+      "Speaker": 2
+    },
+    {
+      "Start": 50.3,
+      "End": 62.7,
+      "Speaker": 1
+    },
+    {
+      "Start": 62.19,
+      "End": 62.95,
+      "Speaker": 2
+    },
+    {
+      "Start": 63.17,
+      "End": 64.74,
+      "Speaker": 3
+    },
+    {
+      "Start": 64.88,
+      "End": 67.24,
+      "Speaker": 1
+    },
+    {
+      "Start": 67.88,
+      "End": 68.52,
+      "Speaker": 2
+    },
+    {
+      "Start": 69.0,
+      "End": 69.87,
+      "Speaker": 2
+    },
+    {
+      "Start": 70.34,
+      "End": 70.72,
+      "Speaker": 3
+    }
+  ],
+  "units": [
+    {
+      "id": "U00772",
+      "speaker": 1,
+      "coverage": 0.655844,
+      "margin": 0.564935,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U00773",
+      "speaker": 1,
+      "coverage": 1.0,
+      "margin": 0.25,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U00774",
+      "speaker": 0,
+      "coverage": 0.808824,
+      "margin": 0.808824,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U00775",
+      "speaker": 1,
+      "coverage": 0.386667,
+      "margin": 0.386667,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U00776",
+      "speaker": 1,
+      "coverage": 1.0,
+      "margin": 1.0,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U00777",
+      "speaker": 2,
+      "coverage": 0.790698,
+      "margin": 0.790698,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U00778",
+      "speaker": 3,
+      "coverage": 0.659091,
+      "margin": 0.659091,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U00779",
+      "speaker": 2,
+      "coverage": 0.6875,
+      "margin": 0.34375,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U00780",
+      "speaker": 0,
+      "coverage": 1.0,
+      "margin": 0.6375,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U00781",
+      "speaker": 0,
+      "coverage": 1.0,
+      "margin": 1.0,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U00782",
+      "speaker": 3,
+      "coverage": 0.725806,
+      "margin": 0.725806,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U00783",
+      "speaker": 0,
+      "coverage": 0.90678,
+      "margin": 0.90678,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U00784",
+      "speaker": 0,
+      "coverage": 1.0,
+      "margin": 1.0,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U00785",
+      "speaker": null,
+      "coverage": 0.0,
+      "margin": 0.0,
+      "blocked": true,
+      "reason": "no_overlap",
+      "verified": false
+    },
+    {
+      "id": "U00786",
+      "speaker": 3,
+      "coverage": 0.735849,
+      "margin": 0.490566,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U00787",
+      "speaker": 1,
+      "coverage": 0.905983,
+      "margin": 0.905983,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U00788",
+      "speaker": 1,
+      "coverage": 0.021552,
+      "margin": 0.021552,
+      "blocked": true,
+      "reason": "low_coverage",
+      "verified": false
+    },
+    {
+      "id": "U00789",
+      "speaker": 2,
+      "coverage": 0.891892,
+      "margin": 0.891892,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U00790",
+      "speaker": 2,
+      "coverage": 0.774648,
+      "margin": 0.774648,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U00791",
+      "speaker": 2,
+      "coverage": 1.0,
+      "margin": 1.0,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U00792",
+      "speaker": 2,
+      "coverage": 0.87037,
+      "margin": 0.87037,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U00793",
+      "speaker": 2,
+      "coverage": 0.653226,
+      "margin": 0.653226,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U00794",
+      "speaker": 1,
+      "coverage": 0.897436,
+      "margin": 0.897436,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U00795",
+      "speaker": 1,
+      "coverage": 1.0,
+      "margin": 1.0,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U00796",
+      "speaker": 1,
+      "coverage": 1.0,
+      "margin": 1.0,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U00797",
+      "speaker": 1,
+      "coverage": 1.0,
+      "margin": 1.0,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U00798",
+      "speaker": 1,
+      "coverage": 1.0,
+      "margin": 1.0,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U00799",
+      "speaker": 1,
+      "coverage": 1.0,
+      "margin": 1.0,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U00800",
+      "speaker": 2,
+      "coverage": 0.95,
+      "margin": 0.05,
+      "blocked": true,
+      "reason": "ambiguous",
+      "verified": false
+    },
+    {
+      "id": "U00801",
+      "speaker": 3,
+      "coverage": 0.895062,
+      "margin": 0.895062,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U00802",
+      "speaker": 1,
+      "coverage": 0.941176,
+      "margin": 0.941176,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U00803",
+      "speaker": 1,
+      "coverage": 1.0,
+      "margin": 1.0,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U00804",
+      "speaker": 2,
+      "coverage": 0.6,
+      "margin": 0.6,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U00805",
+      "speaker": 2,
+      "coverage": 0.864865,
+      "margin": 0.864865,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U00806",
+      "speaker": 3,
+      "coverage": 0.466667,
+      "margin": 0.466667,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    }
+  ],
+  "status": "diarized_pending_review",
+  "verified": false,
+  "limitations": [
+    "speaker indices are local to this part",
+    "identity is not inferred from speaker index",
+    "overlap/ambiguity blocks TTS assignment"
+  ]
+}

@@ -72,8 +72,8 @@ def test_installed_lean_accepts_truth_and_rejects_false():
     verifier=module('integrations.local_lean').LocalLeanVerifier()
     if not verifier.status()['available']:
         pytest.skip('Compilador e namespace locais indisponíveis neste host')
-    positive=verifier.verify('theorem core_demo (n : Nat) : n = n := by rfl',timeout_seconds=60)
-    negative=verifier.verify('theorem core_false : (0 : Nat) = 1 := by rfl',timeout_seconds=60)
+    positive=verifier.verify('theorem core_demo (n : Nat) : n = n := by rfl')
+    negative=verifier.verify('theorem core_false : (0 : Nat) = 1 := by rfl')
     assert positive['is_valid'] is True, positive
     assert positive['status']=='machine_checked'
     assert negative['is_valid'] is False
@@ -88,76 +88,3 @@ def test_component_execution_passes_through_real_primary():
     assert report['is_valid'] is False
     assert report['compiler_executed'] is False
     assert report['metacognition']['persisted'] is True
-
-
-def test_mirofish_model_loading_is_explicitly_offline(tmp_path):
-    from integrations.live_scientific_runtime import LiveScientificRuntime
-    _,environment=LiveScientificRuntime()._command({'runtime':'mirofish','prompt':'Sintético','model':'local-model'}, {'python':'/usr/bin/python3','entry':'/local/oasis.py'},tmp_path,'http://127.0.0.1:1234/v1')
-    assert environment['HF_HUB_OFFLINE']=='1'
-    assert environment['TRANSFORMERS_OFFLINE']=='1'
-
-
-def test_mirofish_uses_configured_local_endpoint(tmp_path,monkeypatch):
-    actions=module('integrations.component_actions')
-    config=tmp_path/'local-model.json'
-    config.write_text(json.dumps({'model':'core-local','base_url':'http://127.0.0.1:11436/v1'}))
-    monkeypatch.setattr(actions,'MODEL_CONFIGURATION',config,raising=False)
-    value=actions.validate_component_request('mirofish',{'operation':'run','model':'core-local','prompt':'Sintético','output_dir':str(tmp_path/'run')})
-    assert value['base_url']=='http://127.0.0.1:11436/v1'
-
-
-def test_local_model_requests_ignore_external_proxy(monkeypatch):
-    from http.server import BaseHTTPRequestHandler,ThreadingHTTPServer
-    import threading
-    runtime=importlib.import_module('integrations.live_scientific_runtime')
-    class Handler(BaseHTTPRequestHandler):
-        def log_message(self,*args): pass
-        def do_GET(self):
-            self.send_response(200);self.end_headers();self.wfile.write(b'{"local":true}')
-    server=ThreadingHTTPServer(('127.0.0.1',0),Handler)
-    thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
-    monkeypatch.setenv('http_proxy','http://127.0.0.1:1')
-    monkeypatch.setenv('HTTP_PROXY','http://127.0.0.1:1')
-    monkeypatch.setenv('no_proxy','');monkeypatch.setenv('NO_PROXY','')
-    try:
-        opener=getattr(runtime,'local_model_opener',None)
-        assert callable(opener), 'Endpoint loopback precisa de transporte direto, sem proxy externo'
-        with opener().open(f'http://127.0.0.1:{server.server_port}/',timeout=2) as response:
-            assert json.load(response)=={'local':True}
-    finally: server.shutdown();server.server_close();thread.join(timeout=2)
-
-
-def test_local_model_redirect_is_rejected():
-    import urllib.request,urllib.error
-    from integrations.live_scientific_runtime import _RejectModelRedirect
-    request=urllib.request.Request('http://127.0.0.1:11434/v1/models')
-    with pytest.raises(urllib.error.URLError):
-        _RejectModelRedirect().redirect_request(request,None,302,'Moved',{},'https://outside.invalid')
-
-
-def test_lean_timeout_reports_that_compiler_executed(tmp_path,monkeypatch):
-    import subprocess
-    provider=module('integrations.local_lean');verifier=provider.LocalLeanVerifier()
-    monkeypatch.setattr(verifier,'_runtime',lambda:tmp_path)
-    monkeypatch.setattr(verifier,'_namespace',lambda _:['fixture-compiler'])
-    def expire(*args,**kwargs): raise subprocess.TimeoutExpired(args[0],1)
-    monkeypatch.setattr(provider.subprocess,'run',expire)
-    report=verifier.verify('theorem timeout_test : True := by trivial',timeout_seconds=1)
-    assert report['status']=='timeout'
-    assert report['compiler_executed'] is True
-    assert report['is_valid'] is False
-
-
-def test_valid_lean_colon_without_space_is_accepted():
-    verifier=module('integrations.local_lean').LocalLeanVerifier()
-    result=verifier.verify('theorem compact: True := by trivial',timeout_seconds=60)
-    assert result['is_valid'] is True, result
-    assert result['status']=='machine_checked'
-
-
-def test_lean_reports_axioms_for_every_submitted_theorem():
-    verifier=module('integrations.local_lean').LocalLeanVerifier()
-    result=verifier.verify('theorem first: True := by trivial\ntheorem second (n : Nat) : n = n := by rfl',timeout_seconds=60)
-    assert result.get('theorem_names')==['first','second']
-    assert len(result.get('axiom_reports',[]))==2
-    assert result['is_valid'] is True

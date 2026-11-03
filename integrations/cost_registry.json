@@ -1,0 +1,1333 @@
+{
+ "declared_at": "2026-10-30",
+ "policy": {
+  "apply_head_model": true,
+  "ceiling": "capaz",
+  "no_fix_model_categories": ["literary"],
+  "no_fix_model_prefixes": ["literary-"],
+  "notes": [
+   "apply_head_model=false mantem o modelo global e so publica a cadeia nos agentes.",
+   "A cadeia e declarada; a fixacao do modelo da cabeca e reversivel por este campo.",
+   "Agentes com 'model' declarado no cartao permanecem autoritativos.",
+   "O agente primario (marceloclaro) nao recebe fixacao de modelo: conserva o padrao global.",
+   "no_fix_model_categories/no_fix_model_prefixes suprimem apenas a fixacao da cabeca; a cadeia de fallback continua declarada em options.model_fallbacks.",
+   "A categoria e o prefixo 'literary' ficam sem fixacao por causa do contrato SPEC-935-R276: 'model' explicito nesses agentes reproduz o retorno vazio de task_result (R271/R277)."
+  ]
+ },
+ "provenance": {
+  "caveats": [
+   "Tarifa de API nao e preco de assinatura, credito ou seat.",
+   "0/0 significa 'custo publicado zero'; pode ser gratuito de verdade ou preco nao publicado.",
+   "Tributacao por cache, tiers de contexto e escrevimento de cache variam por provider e estao declarados apenas quando a fonte os publica.",
+   "Nenhum valor aqui e cobranca observada em conta."
+  ],
+  "primary": {
+   "consulted": "2026-10-30",
+   "kind": "catalogo publico agregador de tarifas por provider",
+   "url": "https://models.dev/api.json"
+  },
+  "secondary": {
+   "note": "Usada para confronto. Divergencias: deepseek-v4-pro aparece como 1,32/3,96/0,044 na tabela do operador e 1,74/3,48/0,145 no catalogo consultado; a linha 'chave' (0,24 sem saida) e ambigua e nao foi usada.",
+   "source": "tabela de tarifas enviada pelo operador (OpenCode Zen/Go), 2026-10-30"
+  }
+ },
+ "surfaces": {
+  "anthropic-api": {
+   "auth_env": "ANTHROPIC_API_KEY",
+   "base_url": "https://api.anthropic.com",
+   "billable": true,
+   "kind": "metered_api",
+   "label": "Anthropic API (api.anthropic.com)",
+   "notes": [
+    "Superfície declarada para governança; não habilitada no opencode.json.",
+    "No Core, os modelos Claude são consumidos via OpenCode Zen/Go ou pela CLI Claude (assinatura)."
+   ],
+   "provider": "anthropic"
+  },
+  "antigravity": {
+   "billable": false,
+   "kind": "subscription",
+   "label": "Antigravity CLI (Google DeepMind)",
+   "notes": [
+    "Superficie por assinatura/cota, sem tarifa por token publicada.",
+    "Ultima execuacao observada: timeout; Claude recusado por limite de saldo."
+   ],
+   "provider": null
+  },
+  "gemini-api": {
+   "auth_env": "GEMINI_API_KEY",
+   "base_url": "https://generativelanguage.googleapis.com",
+   "billable": true,
+   "kind": "metered_api",
+   "label": "Gemini API (Google AI)",
+   "notes": [
+    "A camada gratuita existe mas tem cota propria e politica de dados propria."
+   ],
+   "provider": "google"
+  },
+  "gemini-cli": {
+   "billable": false,
+   "kind": "free_tier",
+   "label": "Gemini CLI (OAuth / Gemini CLI)",
+   "notes": [
+    "Autenticacao por OAuth; o consumo e por cota do plano, nao por token publicado.",
+    "Cliente 0.61.0 recusou a conta individual com UNSUPPORTED_CLIENT (R916)."
+   ],
+   "provider": null
+  },
+  "local-colibri": {
+   "billable": false,
+   "kind": "local_compute",
+   "label": "Colibri OLMoE (localhost:8090)",
+   "notes": [
+    "Custo de token zero.",
+    "Faixa curta: usar para triagem, nao para entrega."
+   ],
+   "provider": null
+  },
+  "local-litert-lm": {
+   "billable": false,
+   "kind": "local_compute",
+   "label": "LiteRT-LM on-device (localhost:9379, NVIDIA AI Edge)",
+   "notes": [
+    "Custo de token zero.",
+    "Janela declarada 20480 tokens (contrato R211)."
+   ],
+   "provider": null
+  },
+  "local-ollama": {
+   "billable": false,
+   "kind": "local_compute",
+   "label": "Ollama local (localhost:11434)",
+   "notes": [
+    "Custo de token zero: a maquina do operador paga energia/VRAM, nao o provedor.",
+    "A janela real vem do Modelfile (num_ctx), nao do cliente."
+   ],
+   "provider": null
+  },
+  "moonshot-api": {
+   "auth_env": "MOONSHOT_API_KEY",
+   "base_url": "https://api.moonshot.ai/v1",
+   "billable": true,
+   "kind": "metered_api",
+   "label": "Moonshot AI API (api.moonshot.ai)",
+   "notes": [
+    "Superfície declarada; no Core, Kimi é consumido via OpenCode Zen/Go.",
+    "A tabela CN publica tarifas distintas para os mesmos ids."
+   ],
+   "provider": "moonshotai"
+  },
+  "nvidia-nim": {
+   "auth_env": "NVIDIA_API_KEY",
+   "base_url": "https://integrate.api.nvidia.com/v1",
+   "billable": true,
+   "kind": "metered_api",
+   "label": "NVIDIA NIM (integrate.api.nvidia.com)",
+   "notes": [
+    "models.dev publica 0/0 para 19 modelos deste provider: o snapshot nao distingue 'gratuito' de 'sem preco publicado'. Tratar como tarifa declarada e conferir a cobranca real da conta.",
+    "A superficie nao esta habilitada no opencode.json: exige provider block explicito."
+   ],
+   "provider": "nvidia"
+  },
+  "openai-api": {
+   "auth_env": "OPENAI_API_KEY",
+   "base_url": "https://api.openai.com/v1",
+   "billable": true,
+   "kind": "metered_api",
+   "label": "OpenAI API (api.openai.com)",
+   "notes": [
+    "Precos de API nao sao creditos de assinatura: a mesma conta tem dois medidores."
+   ],
+   "provider": "openai"
+  },
+  "openai-codex": {
+   "billable": false,
+   "kind": "subscription",
+   "label": "OpenAI Codex CLI (creditos de assinatura)",
+   "notes": [
+    "Custe por credito de assinatura, nao por token: a tarifa API nao descreve esta superficie.",
+    "Installacao detectada; autenticacao e inferencia nao verificadas."
+   ],
+   "provider": null
+  },
+  "opencode-go": {
+   "auth_env": "OPENCODE_API_KEY",
+   "base_url": "https://opencode.ai/zen/go/v1",
+   "billable": true,
+   "kind": "metered_api",
+   "label": "OpenCode Go (opencode.ai/zen/go/v1)",
+   "notes": [
+    "Tarifa mais baixa que o Zen para o mesmo id (mimo-v2.6-flash: 0,14/0,28 contra 0,30/1,20 no deepseek-v4.1-flash)."
+   ],
+   "provider": "opencode-go"
+  },
+  "opencode-zen": {
+   "auth_env": "OPENCODE_ZEN_API_KEY",
+   "base_url": "https://opencode.ai/zen/v1",
+   "billable": true,
+   "kind": "metered_api",
+   "label": "OpenCode Zen (opencode.ai/zen/v1)",
+   "notes": [
+    "46 modelos com 0/0 publicado (faixa free).",
+    "Trilha de plano (Go) tem tarifa diferente para o mesmo id."
+   ],
+   "provider": "opencode"
+  }
+ },
+ "tariffs": {
+  "anthropic-api::claude-fable-5-1": {
+   "cache_read": 0.25,
+   "cache_write": 12.5,
+   "input": 10.0,
+   "output": 50.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "anthropic-api::claude-haiku-4-5": {
+   "cache_read": 0.1,
+   "cache_write": 1.25,
+   "input": 1.0,
+   "output": 5.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "anthropic-api::claude-haiku-5-5": {
+   "cache_read": 0.01,
+   "cache_write": 0.125,
+   "input": 0.1,
+   "output": 0.5,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "anthropic-api::claude-opus-4-8": {
+   "cache_read": 0.5,
+   "cache_write": 6.25,
+   "input": 5.0,
+   "output": 25.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "anthropic-api::claude-opus-5": {
+   "cache_read": 0.5,
+   "cache_write": 6.25,
+   "input": 5.0,
+   "output": 25.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "anthropic-api::claude-sonnet-4-6": {
+   "cache_read": 0.3,
+   "cache_write": 3.75,
+   "input": 3.0,
+   "output": 15.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "anthropic-api::claude-sonnet-5": {
+   "cache_read": 0.2,
+   "cache_write": 2.5,
+   "input": 2.0,
+   "output": 10.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "gemini-api::gemini-2.5-flash": {
+   "cache_read": 0.03,
+   "input": 0.3,
+   "output": 2.5,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "gemini-api::gemini-2.5-pro": {
+   "cache_read": 0.125,
+   "input": 1.25,
+   "output": 10.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "gemini-api::gemini-3-flash-preview": {
+   "cache_read": 0.05,
+   "input": 0.5,
+   "output": 3.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "gemini-api::gemini-3.1-pro-preview": {
+   "cache_read": 0.2,
+   "input": 2.0,
+   "output": 12.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "gemini-api::gemini-3.5-flash": {
+   "cache_read": 0.15,
+   "input": 1.5,
+   "output": 9.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "gemini-api::gemini-3.5-flash-lite": {
+   "cache_read": 0.03,
+   "input": 0.3,
+   "output": 2.5,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "gemini-api::gemini-3.7-flash": {
+   "cache_read": 0.075,
+   "input": 0.75,
+   "output": 3.75,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "gemini-api::gemini-3.8-flash": {
+   "cache_read": 0.075,
+   "input": 0.75,
+   "output": 3.75,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "gemini-api::gemini-4-argon": {
+   "cache_read": 0.1,
+   "input": 2.0,
+   "output": 10.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "gemini-api::lyria-3-clip-preview": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "gemini-api::lyria-3-pro-preview": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "moonshot-api::kimi-k2.6": {
+   "cache_read": 0.16,
+   "input": 0.95,
+   "output": 4.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "moonshot-api::kimi-k2.7-code": {
+   "cache_read": 0.19,
+   "input": 0.95,
+   "output": 4.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "moonshot-api::kimi-k3": {
+   "cache_read": 0.3,
+   "cache_write": 3.0,
+   "input": 3.0,
+   "output": 15.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "nvidia-nim::black-forest-labs/flux.1-dev": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "nvidia-nim::deepseek-ai/deepseek-v4.1-flash": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "nvidia-nim::google/gemma-3-12b-it": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "nvidia-nim::google/gemma-3-4b-it": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "nvidia-nim::google/gemma-4-31b-it": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "nvidia-nim::meta/llama-3.2-11b-vision-instruct": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "nvidia-nim::meta/llama-3.2-90b-vision-instruct": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "nvidia-nim::minimaxai/minimax-m3.1-flash": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "nvidia-nim::mistralai/mistral-medium-3-instruct": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "nvidia-nim::moonshotai/kimi-k2.6": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "nvidia-nim::moonshotai/kimi-k3": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "nvidia-nim::nvidia/llama-3.1-nemotron-70b-instruct": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "nvidia-nim::nvidia/llama-3.1-nemotron-ultra-253b-v1": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "nvidia-nim::nvidia/nemotron-3-nano-omni-30b-a3b-reasoning": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "nvidia-nim::nvidia/nemotron-3-ultra-550b-a55b": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "nvidia-nim::nvidia/nemotron-3.5-lightning-30b-a3b": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "nvidia-nim::nvidia/nemotron-3.5-super-vl-120b-a12b": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "nvidia-nim::openai/gpt-oss-20b": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "nvidia-nim::z-ai/glm-5.3": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "nvidia-nim::z-ai/glm-5.3-flash": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "openai-api::gpt-4.1": {
+   "cache_read": 0.5,
+   "input": 2.0,
+   "output": 8.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "openai-api::gpt-4o": {
+   "cache_read": 1.25,
+   "input": 2.5,
+   "output": 10.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "openai-api::gpt-4o-mini": {
+   "cache_read": 0.075,
+   "input": 0.15,
+   "output": 0.6,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "openai-api::gpt-5": {
+   "cache_read": 0.125,
+   "input": 1.25,
+   "output": 10.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "openai-api::gpt-5-mini": {
+   "cache_read": 0.025,
+   "input": 0.25,
+   "output": 2.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "openai-api::gpt-5-nano": {
+   "cache_read": 0.005,
+   "input": 0.05,
+   "output": 0.4,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "openai-api::gpt-5.4-nano": {
+   "cache_read": 0.02,
+   "input": 0.2,
+   "output": 1.25,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "openai-api::gpt-5.5": {
+   "cache_read": 0.5,
+   "input": 5.0,
+   "output": 30.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "openai-api::gpt-6-astra": {
+   "cache_read": 0.2,
+   "cache_write": 2.5,
+   "input": 2.0,
+   "output": 10.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "openai-api::gpt-6-luna": {
+   "cache_read": 0.01,
+   "cache_write": 0.125,
+   "input": 0.1,
+   "output": 0.5,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "openai-api::gpt-6-sol": {
+   "cache_read": 0.2,
+   "cache_write": 2.5,
+   "input": 2.0,
+   "output": 10.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "openai-api::gpt-6.1-sol": {
+   "cache_read": 0.1,
+   "cache_write": 2.5,
+   "input": 2.0,
+   "output": 10.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "openai-api::o3": {
+   "cache_read": 0.5,
+   "input": 2.0,
+   "output": 8.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "openai-api::o4-mini": {
+   "cache_read": 0.275,
+   "input": 1.1,
+   "output": 4.4,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-go::beam-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-go::cat-jam-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-go::deepseek-v4-pro": {
+   "cache_read": 0.022,
+   "input": 0.66,
+   "output": 1.98,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-go::deepseek-v4.1-flash": {
+   "cache_read": 0.003,
+   "input": 0.15,
+   "output": 0.6,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-go::gemini-3.5-flash-lite": {
+   "cache_read": 0.03,
+   "input": 0.3,
+   "output": 2.5,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-go::glm-5.3": {
+   "cache_read": 0.26,
+   "input": 1.4,
+   "output": 4.4,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-go::glm-5.3-flash": {
+   "cache_read": 0.03,
+   "input": 0.15,
+   "output": 0.5,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-go::iceman-contributor-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-go::kimi-k2.6": {
+   "cache_read": 0.16,
+   "input": 0.95,
+   "output": 4.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-go::kimi-k2.7-code": {
+   "cache_read": 0.19,
+   "input": 0.95,
+   "output": 4.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-go::kimi-k3": {
+   "cache_read": 0.3,
+   "cache_write": 3.0,
+   "input": 3.0,
+   "output": 15.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-go::longcat-2.5-preview-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-go::mimo-v2.5": {
+   "cache_read": 0.0028,
+   "input": 0.14,
+   "output": 0.28,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-go::mimo-v2.5-pro": {
+   "cache_read": 0.003625,
+   "input": 0.435,
+   "output": 0.87,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-go::mimo-v2.6-flash": {
+   "cache_read": 0.0028,
+   "input": 0.14,
+   "output": 0.28,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-go::mimo-v2.6-pro": {
+   "cache_read": 0.003625,
+   "input": 0.435,
+   "output": 0.87,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-go::minimax-m2.7": {
+   "cache_read": 0.06,
+   "input": 0.3,
+   "output": 1.2,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-go::minimax-m3": {
+   "cache_read": 0.06,
+   "input": 0.3,
+   "output": 1.2,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-go::minimax-m3.1-flash": {
+   "cache_read": 0.015,
+   "input": 0.15,
+   "output": 0.6,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-go::minimax-m3.1-flash-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-go::qwen3.7-plus": {
+   "cache_read": 0.03,
+   "input": 0.3,
+   "output": 1.2,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-go::step-5-preview-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::beam-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::big-pickle": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::cat-jam-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::claude-haiku-4-5": {
+   "cache_read": 0.1,
+   "cache_write": 1.25,
+   "input": 1.0,
+   "output": 5.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::claude-opus-5": {
+   "cache_read": 0.5,
+   "cache_write": 6.25,
+   "input": 5.0,
+   "output": 25.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::claude-sonnet-4-6": {
+   "cache_read": 0.3,
+   "cache_write": 3.75,
+   "input": 3.0,
+   "output": 15.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::deepseek-v4-flash": {
+   "cache_read": 0.028,
+   "input": 0.14,
+   "output": 0.28,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::deepseek-v4-flash-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::deepseek-v4-pro": {
+   "cache_read": 0.145,
+   "input": 1.74,
+   "output": 3.48,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::deepseek-v4.1-flash": {
+   "cache_read": 0.006,
+   "input": 0.3,
+   "output": 1.2,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::deepseek-v4.1-flash-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::exo-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::fledge-alpha-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::flint-40b-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::gemini-3.5-flash-lite": {
+   "cache_read": 0.03,
+   "input": 0.3,
+   "output": 2.5,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::gemini-3.8-flash": {
+   "cache_read": 0.075,
+   "input": 0.75,
+   "output": 3.75,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::glm-5-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::glm-5.2": {
+   "cache_read": 0.26,
+   "input": 1.4,
+   "output": 4.4,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::glm-5.3": {
+   "cache_read": 0.26,
+   "input": 1.4,
+   "output": 4.4,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::glm-5.3-flash": {
+   "cache_read": 0.03,
+   "input": 0.15,
+   "output": 0.5,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::glm-5.3-flash-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::gpt-5": {
+   "cache_read": 0.107,
+   "input": 1.07,
+   "output": 8.5,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::gpt-5-nano": {
+   "cache_read": 0.005,
+   "input": 0.05,
+   "output": 0.4,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::gpt-5.5": {
+   "cache_read": 0.5,
+   "input": 5.0,
+   "output": 30.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::grok-code": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::hy3-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::hy3-preview-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::kimi-k2.5": {
+   "cache_read": 0.19,
+   "input": 0.95,
+   "output": 4.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::kimi-k2.5-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::kimi-k2.6": {
+   "cache_read": 0.16,
+   "input": 0.95,
+   "output": 4.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::kimi-k2.7-code": {
+   "cache_read": 0.19,
+   "input": 0.95,
+   "output": 4.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::kimi-k3": {
+   "cache_read": 0.3,
+   "cache_write": 3.0,
+   "input": 3.0,
+   "output": 15.0,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::laguna-s-2.1-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::ling-2.6-flash-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::ling-3.0-flash-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::ling-3.0-tiny-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::ll-alpha-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::longcat-2.0-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::longcat-2.5-preview-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::mimo-v2-omni-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::mimo-v2-pro-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::mimo-v2.5-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::mimo-v2.6-flash-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::minimax-m2.1-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::minimax-m2.5": {
+   "cache_read": 0.06,
+   "input": 0.3,
+   "output": 1.2,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::minimax-m2.5-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::minimax-m2.7": {
+   "cache_read": 0.06,
+   "input": 0.3,
+   "output": 1.2,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::minimax-m3": {
+   "cache_read": 0.06,
+   "input": 0.3,
+   "output": 1.2,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::minimax-m3.1-flash-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::muse-spark-1.2": {
+   "cache_read": 0.15,
+   "input": 1.25,
+   "output": 4.25,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::muse-spark-1.2-contributor-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::muse-spark-1.3": {
+   "cache_read": 0.15,
+   "input": 1.25,
+   "output": 4.25,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::muse-spark-1.3-contributor-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::nemotron-3-super-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::nemotron-3-ultra-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::nemotron-3.5-lightning-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::nemotron-3.5-super-vl-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::north-mini-code-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::qwen3.6-plus": {
+   "cache_read": 0.03,
+   "input": 0.3,
+   "output": 1.2,
+   "published": "metered",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::qwen3.6-plus-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::ring-2.6-1t-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::space-bunny-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::step-5-preview-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::trinity-large-preview-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  },
+  "opencode-zen::x-preview-f-free": {
+   "cache_read": 0.0,
+   "input": 0.0,
+   "output": 0.0,
+   "published": "free",
+   "source": "https://models.dev/api.json",
+   "source_date": "2026-10-30"
+  }
+ },
+ "version": "1.0.0"
+}

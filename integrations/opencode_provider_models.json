@@ -135,7 +135,11 @@
     "name": "Muse Spark 1.2"
   },
   "deepseek-v4-pro": {
-    "name": "DeepSeek V4 Pro"
+    "name": "DeepSeek V4 Pro",
+    "limit": {
+      "context": 256000,
+      "output": 65536
+    }
   },
   "deepseek-v4-flash": {
     "name": "DeepSeek V4 Flash"

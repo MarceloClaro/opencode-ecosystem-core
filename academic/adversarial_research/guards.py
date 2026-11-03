@@ -7,11 +7,6 @@ def check_specialist(role,project,manifest):
     number=role['number']; context=project['context']; claims=project['claims']
     output=[]; all_ids=[x['claim_id'] for x in claims]
     source_map={x['source_id']:x for x in manifest}
-    def contextual_evidence(key):
-        value=context.get(key)
-        if key.endswith('_source_refs'):
-            return isinstance(value,list) and bool(value) and all(isinstance(ref,str) and source_map.get(ref,{}).get('integrity_checked') is True for ref in value)
-        return bool(value)
     def add(code,question,rationale,evidence,severity='major',claim=None):
         targets=[claim['claim_id']] if claim else all_ids
         refs=list(claim['source_refs']) if claim else list(source_map)
@@ -20,13 +15,13 @@ def check_specialist(role,project,manifest):
              'Detecção local sobre documentos/metadados fornecidos; confirmação semântica e parecer especializado permanecem necessários.',refs,role['agent_id'],code)
         output.append(asdict(item))
     def missing(key,label,evidence,severity='major'):
-        if not contextual_evidence(key): add('missing_'+key,'Como sustentar '+label+'?', 'A documentação pertinente não foi identificada no intake.',evidence,severity)
+        if not context.get(key): add('missing_'+key,'Como sustentar '+label+'?', 'A documentação pertinente não foi identificada no intake.',evidence,severity)
     for claim in claims:
         a=claim['attributes']
         supported=bool(claim['source_refs']) and all(source_map.get(r,{}).get('integrity_checked') is True for r in claim['source_refs'])
         if number=='A03' and not supported and claim['evidence_status'] not in {'proposed','hypothetical'}:
             add('claim_without_evidence','Qual evidência recuperada sustenta esta alegação?','Uma alegação relatada não pode ser apresentada como comprovação sem suporte rastreável.','Fonte recuperada, localizador e relação explícita entre fonte e alegação.','critical',claim)
-        if number=='A05' and a.get('claims_novelty') is True and not contextual_evidence('literature_source_refs'):
+        if number=='A05' and a.get('claims_novelty') is True and not context.get('literature_source_refs'):
             add('novelty_without_literature','Qual lacuna subsiste diante da literatura recuperada?','A originalidade exige contraste com trabalhos pertinentes; ausência de recuperação não comprova ausência de estudos.','Busca documentada, fontes recuperadas, limites e comparação de contribuições.','critical',claim)
         if number=='A06' and a.get('novelty_basis')=='new_territory':
             add('territory_not_novelty','O que é novo além do território ou público?','Mudança de território, isoladamente, não estabelece inovação teórica, metodológica ou empírica.','Contraste bibliográfico e contribuição delimitada.','major',claim)
@@ -64,8 +59,8 @@ def check_specialist(role,project,manifest):
     if number=='A15': missing('triangulation_plan','a relação entre fontes e métodos','Convergências, divergências e justificativa da estratégia escolhida.','advisory')
     if number=='A16': missing('independent_review','a revisão independente quando pertinente','Procedimentos, desacordos e limites da classificação.','advisory')
     if number=='A18' and context.get('humans') is not False:
-        if not contextual_evidence('ethics_source_refs'): add('human_ethics_pending','Que avaliação ética, consentimento ou justificativa de inaplicabilidade está documentada?','O contexto de participação humana e suas exigências não foi esclarecido por documento rastreável.','Contexto, documentos pertinentes e avaliação institucional/humana aplicável.','critical' if context.get('humans') is True else 'major')
-    if number=='A19' and context.get('indigenous_knowledge') is True and (context.get('community_authorization') is not True or not contextual_evidence('community_source_refs')):
+        if not context.get('ethics_source_refs'): add('human_ethics_pending','Que avaliação ética, consentimento ou justificativa de inaplicabilidade está documentada?','O contexto de participação humana e suas exigências não foi esclarecido por documento rastreável.','Contexto, documentos pertinentes e avaliação institucional/humana aplicável.','critical' if context.get('humans') is True else 'major')
+    if number=='A19' and context.get('indigenous_knowledge') is True and not context.get('community_authorization'):
         add('community_governance_pending','Como a autoridade comunitária e os protocolos próprios foram respeitados?','O sistema não pode autorizar uso de conhecimento coletivo ou culturalmente sensível.','Documentação contextual, participação comunitária pertinente e revisão humana especializada.','critical')
     if number=='A20' and context.get('personal_data') is True: missing('data_governance','a proteção de dados pessoais','Minimização, finalidade, acesso, retenção e avaliação competente aplicável.')
     if number=='A21': missing('interpretive_authority','a autoridade interpretativa e a prevenção de extração epistêmica','Participação e governança pertinentes, incluindo divergências e limites da representação.','advisory')

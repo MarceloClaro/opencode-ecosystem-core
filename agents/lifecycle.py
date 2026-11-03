@@ -9,6 +9,7 @@ import stat
 import tempfile
 import uuid
 from contextlib import ExitStack
+from functools import lru_cache
 from pathlib import Path
 
 import yaml
@@ -213,6 +214,12 @@ def validate_managed_card(root, path, raw):
             "unique_capability": unique, "external_validation": False}
 
 
+@lru_cache(maxsize=8)
+def _parse_baseline_files(content):
+    """Reutiliza o parse, nunca a leitura ou uma decisão sobre um cartão."""
+    return json.loads(content)["files"]
+
+
 def enforce_catalog_contract(path, raw, *, repo_root=None):
     """Baseline só conserva os bytes históricos; arquivos novos exigem contrato."""
     root = Path(repo_root).resolve() if repo_root is not None else ROOT
@@ -222,7 +229,12 @@ def enforce_catalog_contract(path, raw, *, repo_root=None):
     relative = str(path.relative_to(root))
     _safe_file(root, relative)
     baseline = root / "agents/lifecycle_baseline.json"
-    files = json.loads(baseline.read_text())["files"] if baseline.is_file() else {}
+    if baseline.is_file():
+        content = baseline.read_text()
+        files = (_parse_baseline_files(content) if len(content) <= 256 * 1024
+                 else json.loads(content)["files"])
+    else:
+        files = {}
     if files.get(relative) == hashlib.sha256(raw).hexdigest():
         return {"mode": "legacy_baseline", "definition_validated": False,
                 "legacy_preserved": True, "source_sha256": files[relative]}

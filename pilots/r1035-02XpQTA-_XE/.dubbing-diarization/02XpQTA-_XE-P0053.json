@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "version": "R1044-1",
+  "part_id": "02XpQTA-_XE-P0053",
+  "model": "nvidia/Nemotron-3-Diarization",
+  "source_sha256": "9dc34a1118cb5dba865ff336706c342e44daed8aefe0c4acc602d231a91487f7",
+  "key": "f74650d111617388b4af7bf7856e8b9216bb324762fbff6ab679acb9ad35a349",
+  "segments": [
+    {
+      "Start": 11.61,
+      "End": 13.39,
+      "Speaker": 0
+    },
+    {
+      "Start": 16.93,
+      "End": 19.57,
+      "Speaker": 0
+    },
+    {
+      "Start": 24.63,
+      "End": 26.52,
+      "Speaker": 0
+    },
+    {
+      "Start": 28.47,
+      "End": 30.02,
+      "Speaker": 0
+    },
+    {
+      "Start": 71.56,
+      "End": 72.13,
+      "Speaker": 1
+    },
+    {
+      "Start": 72.32,
+      "End": 73.53,
+      "Speaker": 0
+    },
+    {
+      "Start": 73.23,
+      "End": 76.48,
+      "Speaker": 1
+    },
+    {
+      "Start": 76.45,
+      "End": 76.62,
+      "Speaker": 0
+    }
+  ],
+  "units": [
+    {
+      "id": "U01046",
+      "speaker": 0,
+      "coverage": 0.892045,
+      "margin": 0.892045,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U01047",
+      "speaker": 0,
+      "coverage": 0.427184,
+      "margin": 0.427184,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U01048",
+      "speaker": 0,
+      "coverage": 0.921348,
+      "margin": 0.921348,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U01049",
+      "speaker": 0,
+      "coverage": 0.901316,
+      "margin": 0.901316,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U01050",
+      "speaker": 1,
+      "coverage": 0.76,
+      "margin": 0.76,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U01051",
+      "speaker": 0,
+      "coverage": 0.846154,
+      "margin": 0.846154,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U01052",
+      "speaker": 1,
+      "coverage": 1.0,
+      "margin": 1.0,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U01053",
+      "speaker": 1,
+      "coverage": 1.0,
+      "margin": 1.0,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    }
+  ],
+  "status": "diarized_pending_review",
+  "verified": false,
+  "limitations": [
+    "speaker indices are local to this part",
+    "identity is not inferred from speaker index",
+    "overlap/ambiguity blocks TTS assignment"
+  ]
+}

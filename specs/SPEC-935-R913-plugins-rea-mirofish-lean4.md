@@ -1,18 +1,4 @@
----
-spec_id: SPEC-935-R913
-title: Plugins locais REA, MiroFish Offline e Lean 4
-component: integrations.component_mcp
-status: implemented
-test_file: tests/test_r913_component_plugins.py
----
-
 # SPEC-935-R913 — REA, MiroFish Offline e Lean 4 como plugins locais
-
-## Critérios de aceitação executáveis
-
-- `R913-AC1` — Pacotes, catálogos MCP e contratos fechados são validados pela suíte vinculada.
-- `R913-AC2` — Lean compila provas válidas, rejeita falsas/incompletas e relata axiomas de todas as declarações submetidas.
-- `R913-AC3` — Transporte local evita proxy/redirecionamento externo e declara timeout sem inventar sucesso.
 
 ## Escopo autorizado
 

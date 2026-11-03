@@ -1,0 +1,118 @@
+{
+  "schema": "federation-github-sources/v1",
+  "notes": "Manifesto curado e versionado. Nenhum clone, build ou execução ocorre na coleta. SPDX vazio significa licença não verificada offline e rebaixa o item para degraded; nunca é preenchido por suposição. Comandos são declaração de origem, não prova de funcionamento.",
+  "repositories": [
+    {
+      "repo": "modelcontextprotocol/servers",
+      "license": "MIT",
+      "description": "Servidores MCP de referência mantidos pela Model Context Protocol.",
+      "kind": "mcp",
+      "installable": true,
+      "servers": [
+        {"name": "mcp-filesystem", "command": "npx", "args": ["-y", "@modelcontextprotocol/server-filesystem"], "installable": false, "notes": "Exige caminho de workspace como argumento; não registrar sem revisão."},
+        {"name": "mcp-git", "command": "uvx", "args": ["mcp-server-git"], "installable": false, "notes": "Exige --repository; escopo de repositório é decisão do operador."},
+        {"name": "mcp-fetch", "command": "uvx", "args": ["mcp-server-fetch"], "installable": false, "notes": "Já registrado no Core como fetch; candidato duplicado é ignorado no apply."},
+        {"name": "mcp-memory", "command": "npx", "args": ["-y", "@modelcontextprotocol/server-memory"], "installable": true},
+        {"name": "mcp-sequential-thinking", "command": "npx", "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"], "installable": false, "notes": "Já registrado no Core como sequential-thinking."},
+        {"name": "mcp-time", "command": "uvx", "args": ["mcp-server-time"], "installable": true},
+        {"name": "mcp-everything", "command": "npx", "args": ["-y", "@modelcontextprotocol/server-everything"], "installable": true, "notes": "Servidor de demonstração; não usar em produção."}
+      ]
+    },
+    {
+      "repo": "upstash/context7",
+      "license": "MIT",
+      "description": "Documentação atualizada de bibliotecas para o agente, via MCP.",
+      "kind": "mcp",
+      "installable": true,
+      "servers": [{"name": "context7", "command": "npx", "args": ["-y", "@upstash/context7-mcp"], "installable": true}]
+    },
+    {
+      "repo": "microsoft/playwright-mcp",
+      "license": "Apache-2.0",
+      "description": "Automação de navegador baseada em acessibilidade para agentes.",
+      "kind": "mcp",
+      "installable": true,
+      "servers": [{"name": "playwright", "command": "npx", "args": ["-y", "@playwright/mcp@latest"], "installable": true}]
+    },
+    {
+      "repo": "oraios/serena",
+      "license": "MIT",
+      "description": "Assistente de código com recuperação semântica e edição por símbolos.",
+      "kind": "mcp",
+      "installable": false,
+      "servers": [{"name": "serena", "command": "uvx", "args": ["--from", "git+https://github.com/oraios/serena", "serena-mcp-server"], "installable": false, "notes": "Instalação via git exige rede e revisão de commit; mantido como metadado."}]
+    },
+    {
+      "repo": "github/github-mcp-server",
+      "license": "MIT",
+      "description": "Servidor MCP oficial do GitHub.",
+      "kind": "mcp",
+      "installable": false,
+      "servers": [{"name": "github-mcp", "command": "docker", "args": ["run", "-i", "--rm", "-e", "GITHUB_PERSONAL_ACCESS_TOKEN", "ghcr.io/github/github-mcp-server"], "installable": false, "auth_required": true, "notes": "Exige token do operador; quarentena por autenticação."}]
+    },
+    {
+      "repo": "sooperset/mcp-atlassian",
+      "license": "MIT",
+      "description": "Integração MCP com Jira e Confluence.",
+      "kind": "mcp",
+      "installable": false,
+      "servers": [{"name": "mcp-atlassian", "command": "uvx", "args": ["mcp-atlassian"], "installable": false, "auth_required": true}]
+    },
+    {
+      "repo": "supabase-community/supabase-mcp",
+      "license": "Apache-2.0",
+      "description": "Servidor MCP para projetos Supabase, com controles de segurança.",
+      "kind": "mcp",
+      "installable": false,
+      "servers": [{"name": "supabase", "command": "npx", "args": ["-y", "@supabase/mcp-server-supabase"], "installable": false, "auth_required": true}]
+    },
+    {
+      "repo": "chroma-core/chroma-mcp",
+      "license": "Apache-2.0",
+      "description": "Servidor MCP para bancos vetoriais Chroma.",
+      "kind": "mcp",
+      "installable": true,
+      "servers": [{"name": "chroma", "command": "uvx", "args": ["chroma-mcp"], "installable": true}]
+    },
+    {
+      "repo": "qdrant/mcp-server-qdrant",
+      "license": "Apache-2.0",
+      "description": "Servidor MCP para o banco vetorial Qdrant.",
+      "kind": "mcp",
+      "installable": true,
+      "servers": [{"name": "qdrant", "command": "uvx", "args": ["mcp-server-qdrant"], "installable": true}]
+    },
+    {
+      "repo": "zilliztech/mcp-server-milvus",
+      "license": "Apache-2.0",
+      "description": "Servidor MCP para Milvus/Zilliz.",
+      "kind": "mcp",
+      "installable": false,
+      "servers": [{"name": "milvus", "command": "uvx", "args": ["mcp-server-milvus"], "installable": false, "auth_required": true, "notes": "Configuração de URI/token varia por implantação."}]
+    },
+    {
+      "repo": "executeautomation/mcp-playwright",
+      "license": "MIT",
+      "description": "Alternativa de automação de navegador via MCP.",
+      "kind": "mcp",
+      "installable": true,
+      "servers": [{"name": "executeautomation-playwright", "command": "npx", "args": ["-y", "@executeautomation/playwright-mcp-server"], "installable": true}]
+    },
+    {
+      "repo": "hashicorp/terraform-mcp-server",
+      "license": "",
+      "description": "Servidor MCP para Terraform.",
+      "kind": "mcp",
+      "installable": false,
+      "servers": [{"name": "terraform", "command": "docker", "args": ["run", "-i", "--rm", "hashicorp/terraform-mcp-server"], "installable": false, "notes": "SPDX não verificado offline; item permanece degraded."}]
+    },
+    {
+      "repo": "getsentry/sentry-mcp",
+      "license": "",
+      "description": "Servidor MCP para o Sentry.",
+      "kind": "mcp",
+      "installable": false,
+      "servers": [{"name": "sentry", "command": "npx", "args": ["-y", "@sentry/mcp-server"], "installable": false, "auth_required": true, "notes": "SPDX não verificado offline; item permanece degraded."}]
+    }
+  ]
+}

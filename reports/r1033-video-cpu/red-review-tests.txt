@@ -1,0 +1,12 @@
+.....F                                                                   [100%]
+=================================== FAILURES ===================================
+__________ test_review_findings_are_reconciled_without_runtime_claims __________
+tests/test_r1033_video_cpu_research.py:65: in test_review_findings_are_reconciled_without_runtime_claims
+    assert data["review"]["independent_status"] == "textual_readonly_completed"
+E   AssertionError: assert 'unavailable' == 'textual_readonly_completed'
+E     
+E     - textual_readonly_completed
+E     + unavailable
+=========================== short test summary info ============================
+FAILED tests/test_r1033_video_cpu_research.py::test_review_findings_are_reconciled_without_runtime_claims
+1 failed, 5 passed in 0.26s

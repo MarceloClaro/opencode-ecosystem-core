@@ -18,6 +18,7 @@ Uso:
 SAÍDA OBRIGATÓRIA: PORTUGUÊS BRASILEIRO FORMAL
 """
 
+import argparse
 import os
 import sys
 import json
@@ -77,6 +78,7 @@ Comandos diretos:
     python3 -m marceloclaro.cli pesquisa "tema" [--max-papers N] [--platforms a,b] [--no-download]
     python3 -m marceloclaro.cli pesquisa-full "tema" [--question '...'] [--per-source N] [--max-pdfs N]
     python3 -m marceloclaro.cli apresentacao <pasta>
+    python3 -m marceloclaro.cli conteudo-offline plan catalogo.json --select categoria:tier
     python3 -m marceloclaro.cli reverse-scan --target "metodos.Meta-análise" [--file A.md] [--domain ecosystem|academic] [--json]
 """
 
@@ -89,22 +91,68 @@ def _parse_pesquisa_flags(args):
     index = 0
     while index < len(args):
         arg = args[index]
-        if arg == "--max-papers" and index + 1 < len(args):
+        if arg == "--max-papers":
+            if index + 1 >= len(args):
+                raise ValueError("--max-papers exige um inteiro positivo.")
             max_papers = int(args[index + 1])
+            if max_papers < 1:
+                raise ValueError("--max-papers exige um inteiro positivo.")
             index += 2
-        elif arg == "--platforms" and index + 1 < len(args):
+        elif arg == "--platforms":
+            if index + 1 >= len(args) or args[index + 1].startswith("--"):
+                raise ValueError("--platforms exige uma lista não vazia.")
             platforms = [
                 platform.strip()
                 for platform in args[index + 1].split(",")
                 if platform.strip()
             ]
+            if not platforms:
+                raise ValueError("--platforms exige uma lista não vazia.")
             index += 2
         elif arg == "--no-download":
             download = False
             index += 1
         else:
-            index += 1
+            raise ValueError(f"Argumento de pesquisa desconhecido: {arg}")
     return {"max_papers": max_papers, "platforms": platforms, "download": download}
+
+
+def _parse_effectful_options(cmd, argv):
+    """Valida opções antes de construir executores ou alcançar serviços."""
+    import argparse
+    parser = argparse.ArgumentParser(prog="marceloclaro " + cmd, add_help=False, exit_on_error=False)
+    if cmd in {"pesquisa-full", "research-full"}:
+        parser.add_argument("--question")
+        parser.add_argument("--objective")
+        parser.add_argument("--per-source", type=int, default=10)
+        parser.add_argument("--max-pdfs", type=int, default=20)
+    elif cmd in {"podcast", "audio"}:
+        for flag, dest in (("--title", "title"), ("--language", "language"), ("--length", "length"), ("--format", "fmt")):
+            parser.add_argument(flag, dest=dest, default=argparse.SUPPRESS)
+    elif cmd in {"amplify", "amplificar", "dsh"}:
+        parser.add_argument("--model", default="ox-alpha-free")
+        parser.add_argument("--type", dest="task_type", default="general")
+        parser.add_argument("--iterations", type=int, default=2)
+    else:
+        parser.add_argument("--budget", type=int, default=3)
+        parser.add_argument("--domain", default="general")
+    try:
+        namespace, unknown = parser.parse_known_args(argv)
+    except argparse.ArgumentError as exc:
+        raise ValueError(str(exc)) from exc
+    if unknown:
+        raise ValueError("Argumentos desconhecidos: " + " ".join(unknown))
+    options = vars(namespace)
+    for key in ("per_source", "iterations"):
+        if key in options and options[key] < 1:
+            raise ValueError(f"{key} deve ser positivo")
+    if "max_pdfs" in options and options["max_pdfs"] < 0:
+        raise ValueError("max_pdfs não pode ser negativo")
+    if "budget" in options and not 1 <= options["budget"] <= 5:
+        raise ValueError("budget deve estar entre 1 e 5")
+    if any(isinstance(value, str) and not value.strip() for value in options.values()):
+        raise ValueError("Opções textuais não podem ser vazias")
+    return options
 
 
 def _cmd_reverse_scan(argv):
@@ -350,10 +398,137 @@ def _cmd_network(argv):
     return 1 if report.get("success") is False or report.get("status") in {"blocked", "failed", "exhausted"} else 0
 
 
+class _ArgParser(argparse.ArgumentParser):
+    def error(self, message: str) -> None:
+        raise ValueError(message)
+
+
+def _emit_cli(value: dict) -> None:
+    print(json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False))
+
+
+def _cmd_quantum_catalog(argv):
+    import argparse
+
+    parser = _ArgParser(prog="quantum-catalog")
+    sub = parser.add_subparsers(dest="operation", required=True)
+    sub.add_parser("status")
+    sub.add_parser("historico")
+    sub.add_parser("importar")
+    sub.add_parser("painel")
+    lst = sub.add_parser("listar")
+    lst.add_argument("--kind", choices=["repository", "organization"])
+    lst.add_argument("--limit", type=int)
+    lst.add_argument("--offset", type=int)
+    lst.add_argument("--historico", action="store_true")
+    search = sub.add_parser("buscar")
+    search.add_argument("query")
+    search.add_argument("--kind", choices=["repository", "organization"])
+    search.add_argument("--limit", type=int)
+    search.add_argument("--offset", type=int)
+    search.add_argument("--stack")
+    search.add_argument("--category")
+    search.add_argument("--historico", action="store_true")
+    ver = sub.add_parser("ver")
+    ver.add_argument("identifier")
+    try:
+        args = parser.parse_args(argv)
+    except ValueError as exc:
+        _emit_cli({"status": "invalid", "error": str(exc)})
+        return 2
+    orch = MarceloClaroOrchestrator(auto_load_agents=False)
+    try:
+        if args.operation == "importar":
+            result = orch.quantum_catalog_action({"operation": "import"})
+            _emit_cli(result)
+            return 0 if result.get("status") in {"imported", "unchanged"} else 2
+        if args.operation == "painel":
+            result = orch.quantum_catalog_action({"operation": "painel"})
+            _emit_cli(result)
+            return 0 if result.get("status") == "ok" else 2
+        if args.operation == "status":
+            config = {"operation": "status"}
+        elif args.operation == "historico":
+            config = {"operation": "history"}
+        elif args.operation == "listar":
+            config = {"operation": "list"}
+            if args.kind:
+                config["kind"] = args.kind
+            if args.limit is not None:
+                config["limit"] = args.limit
+            if args.offset is not None:
+                config["offset"] = args.offset
+            if args.historico:
+                config["include_historical"] = True
+        elif args.operation == "buscar":
+            config = {"operation": "search", "query": args.query}
+            if args.kind:
+                config["kind"] = args.kind
+            if args.limit is not None:
+                config["limit"] = args.limit
+            if args.offset is not None:
+                config["offset"] = args.offset
+            if args.stack:
+                config["stack"] = args.stack
+            if args.category:
+                config["category"] = args.category
+            if args.historico:
+                config["include_historical"] = True
+        else:
+            config = {"operation": "get", "identifier": args.identifier}
+        result = orch.quantum_catalog_action(config)
+        _emit_cli(result)
+        return 0
+    except ValueError as exc:
+        _emit_cli({"status": "invalid", "error": str(exc)})
+        return 2
+
+
+def _cmd_conhecimento(argv):
+    parser = _ArgParser(prog="conhecimento")
+    sub = parser.add_subparsers(dest="operation", required=True)
+    sources = sub.add_parser("fontes")
+    search = sub.add_parser("buscar")
+    search.add_argument("query")
+    search.add_argument("--fonte", default="quantum_catalog")
+    search.add_argument("--limite", type=int)
+    try:
+        args = parser.parse_args(argv)
+    except ValueError as exc:
+        _emit_cli({"status": "invalid", "error": str(exc)})
+        return 2
+    orch = MarceloClaroOrchestrator(auto_load_agents=False)
+    try:
+        if args.operation == "fontes":
+            config = {"operation": "sources"}
+        else:
+            config = {"operation": "search", "source_id": args.fonte, "query": args.query}
+            if args.limite is not None:
+                config["limit"] = args.limite
+        result = orch.knowledge_sources_action(config)
+        _emit_cli(result)
+        return 0
+    except ValueError as exc:
+        _emit_cli({"status": "invalid", "error": str(exc)})
+        return 2
+
+
 def main() -> int:
     # Modo comando direto
     if len(sys.argv) > 1:
         cmd = sys.argv[1]
+        if cmd == "edge-quantizer":
+            from integrations.ai_edge_quantizer_core import main as edge_quantizer_main
+            return edge_quantizer_main(sys.argv[2:])
+        if cmd == "itsfine":
+            from integrations.itsfine_core import main as itsfine_main
+            return itsfine_main(sys.argv[2:])
+        if cmd in ("conteudo-offline", "offline-content"):
+            from integrations.offline_content import main as offline_content_main
+            return offline_content_main(sys.argv[2:])
+        if cmd in ("federacao", "federation"):
+            from integrations.federation_sync.cli import run as federation_run
+            return federation_run(sys.argv[2:])
         if cmd == "doctor":
             import argparse
             from marceloclaro import doctor as doctor_module
@@ -467,21 +642,68 @@ def main() -> int:
 
             return run_library_cli(sys.argv[2:])
 
-        if cmd == "rigor":
-            from marceloclaro.rigor_cli import run_rigor_cli
-            return run_rigor_cli(sys.argv[2:])
-
         if cmd == "fine-dados":
             from marceloclaro.library_cli import run_finetuning_cli
 
             return run_finetuning_cli(sys.argv[2:])
 
+        if cmd == "quantum-catalog":
+            return _cmd_quantum_catalog(sys.argv[2:])
+
+        if cmd == "conhecimento":
+            return _cmd_conhecimento(sys.argv[2:])
+
         if cmd == "harness":
             return _cmd_harness(sys.argv[2:])
 
-        if cmd in ("network", "rede"):
+        if cmd == "network" or cmd == "rede":
             return _cmd_network(sys.argv[2:])
 
+        if cmd == "custos":
+            # Governança de custo monetário estimado. Não instancia o
+            # orquestrador: a leitura é do registro de tarifas, não do estado
+            # do Blackboard.
+            from integrations.cost_governance import report as cost_report
+
+            print(json.dumps(cost_report(), indent=2, ensure_ascii=False))
+            return 0
+
+        known_commands = {
+            "status", "agents", "helpdesk", "custos", "ajuda", "help", "-h", "--help",
+            "pesquisa", "research", "pesquisa-full", "research-full",
+            "apresentacao", "present", "mira", "podcast", "audio",
+            "amplify", "amplificar", "dsh", "aletheia", "prove", "decompor",
+            "deepthink", "think", "alphaproof", "prover", "erdos", "conjecture",
+            "hirzebruch", "lean4", "lean", "egraph", "saturate", "egg",
+            "geometry", "alphageometry", "wu", "autoformalize", "formalize",
+            "crossval", "shortcuts", "atalhos", "clinical", "medico", "anamnese",
+        }
+        if cmd not in known_commands:
+            print(f"Comando desconhecido: {cmd}. Use 'ajuda'.", file=sys.stderr)
+            print("Use 'ajuda' para consultar os comandos, incluindo 'apresentacao'.")
+            return 2
+        if (cmd in {"pesquisa", "research", "pesquisa-full", "research-full", "podcast", "audio",
+                    "amplify", "amplificar", "dsh", "deepthink", "think"} and len(sys.argv) < 3):
+            print(f'Uso: python3 -m marceloclaro.cli {cmd} "<tema, pasta ou tarefa>" [opções]')
+            raise SystemExit(1)
+        research_flags = None
+        service_options = None
+        if cmd in {"pesquisa", "research"}:
+            try:
+                if len(sys.argv) < 3 or not sys.argv[2].strip() or sys.argv[2].startswith("--"):
+                    raise ValueError("Pesquisa exige um tema.")
+                research_flags = _parse_pesquisa_flags(sys.argv[3:])
+            except ValueError as exc:
+                print(f"Argumentos inválidos: {exc}", file=sys.stderr)
+                return 2
+        if cmd in {"pesquisa-full", "research-full", "podcast", "audio", "amplify", "amplificar", "dsh", "deepthink", "think"}:
+            try:
+                if len(sys.argv) < 3 or not sys.argv[2].strip() or sys.argv[2].startswith("--"):
+                    raise ValueError("Comando exige tema, pasta ou tarefa.")
+                service_options = _parse_effectful_options(cmd, sys.argv[3:])
+            except ValueError as exc:
+                print(f"Argumentos inválidos: {exc}", file=sys.stderr)
+                return 2
         orchestrator = MarceloClaroOrchestrator()
         if cmd == "status":
             print(json.dumps(orchestrator.status(), indent=2, ensure_ascii=False))
@@ -499,8 +721,7 @@ def main() -> int:
                 )
                 raise SystemExit(1)
             topic = sys.argv[2]
-            flags = _parse_pesquisa_flags(sys.argv[3:])
-            print(json.dumps(orchestrator.research(topic, **flags), indent=2, ensure_ascii=False))
+            print(json.dumps(orchestrator.research(topic, **research_flags), indent=2, ensure_ascii=False))
         elif cmd in ("pesquisa-full", "research-full"):
             if len(sys.argv) < 3:
                 print(
@@ -509,30 +730,9 @@ def main() -> int:
                 )
                 raise SystemExit(1)
             topic = sys.argv[2]
-            question = None
-            objective = None
-            per_source = 10
-            max_pdfs = 20
-            idx = 3
-            while idx < len(sys.argv):
-                if sys.argv[idx] == "--question" and idx + 1 < len(sys.argv):
-                    question = sys.argv[idx + 1]
-                    idx += 2
-                elif sys.argv[idx] == "--objective" and idx + 1 < len(sys.argv):
-                    objective = sys.argv[idx + 1]
-                    idx += 2
-                elif sys.argv[idx] == "--per-source" and idx + 1 < len(sys.argv):
-                    per_source = int(sys.argv[idx + 1])
-                    idx += 2
-                elif sys.argv[idx] == "--max-pdfs" and idx + 1 < len(sys.argv):
-                    max_pdfs = int(sys.argv[idx + 1])
-                    idx += 2
-                else:
-                    idx += 1
             from research.orchestrate import run_full_research
             result = run_full_research(
-                topic=topic, question=question, objective=objective,
-                per_source=per_source, max_pdfs=max_pdfs,
+                topic=topic, **service_options,
             )
             print(json.dumps(result, indent=2, ensure_ascii=False))
         elif cmd in ("apresentacao", "present", "mira"):
@@ -552,54 +752,21 @@ def main() -> int:
                 print("Gera um podcast (áudio m4a) do manuscrito.md da pasta via "
                       "Gemini Notebook (nlm). Fase 1 SPEC-972: uso explícito do operador.")
                 raise SystemExit(1)
-            kwargs: dict[str, object] = {}
-            idx = 3
-            while idx < len(sys.argv):
-                if sys.argv[idx] == "--title" and idx + 1 < len(sys.argv):
-                    kwargs["title"] = sys.argv[idx + 1]
-                    idx += 2
-                elif sys.argv[idx] == "--language" and idx + 1 < len(sys.argv):
-                    kwargs["language"] = sys.argv[idx + 1]
-                    idx += 2
-                elif sys.argv[idx] == "--length" and idx + 1 < len(sys.argv):
-                    kwargs["length"] = sys.argv[idx + 1]
-                    idx += 2
-                elif sys.argv[idx] == "--format" and idx + 1 < len(sys.argv):
-                    kwargs["fmt"] = sys.argv[idx + 1]
-                    idx += 2
-                else:
-                    idx += 1
+            podcast_result = orchestrator.podcast(sys.argv[2], **service_options)
             print(json.dumps(
-                orchestrator.podcast(sys.argv[2], **kwargs),
+                podcast_result,
                 indent=2,
                 ensure_ascii=False,
             ))
+            return 1 if podcast_result.get("ok") is False or podcast_result.get("error") else 0
         elif cmd in ("amplify", "amplificar", "dsh"):
             if len(sys.argv) < 3:
                 print('Uso: python3 -m marceloclaro.cli amplify "<prompt>" [--model ox-alpha-free] [--type general|coding|reasoning|academic] [--iterations N]')
                 raise SystemExit(1)
             prompt = sys.argv[2]
-            model = "ox-alpha-free"
-            task_type = "general"
-            iterations = 2
-            idx = 3
-            while idx < len(sys.argv):
-                if sys.argv[idx] == "--model" and idx + 1 < len(sys.argv):
-                    model = sys.argv[idx + 1]
-                    idx += 2
-                elif sys.argv[idx] == "--type" and idx + 1 < len(sys.argv):
-                    task_type = sys.argv[idx + 1]
-                    idx += 2
-                elif sys.argv[idx] == "--iterations" and idx + 1 < len(sys.argv):
-                    iterations = int(sys.argv[idx + 1])
-                    idx += 2
-                else:
-                    idx += 1
             res = orchestrator.amplify_free_model_response(
                 prompt=prompt,
-                model=model,
-                task_type=task_type,
-                iterations=iterations,
+                **service_options,
                 use_rag=True,
             )
             print(json.dumps(res, indent=2, ensure_ascii=False))
@@ -618,19 +785,7 @@ def main() -> int:
                 print('Uso: python3 -m marceloclaro.cli deepthink "<problema>" [--budget 1-5] [--domain general|math|physics]')
                 raise SystemExit(1)
             problem = sys.argv[2]
-            budget = 3
-            domain = "general"
-            idx = 3
-            while idx < len(sys.argv):
-                if sys.argv[idx] == "--budget" and idx + 1 < len(sys.argv):
-                    budget = int(sys.argv[idx + 1])
-                    idx += 2
-                elif sys.argv[idx] == "--domain" and idx + 1 < len(sys.argv):
-                    domain = sys.argv[idx + 1]
-                    idx += 2
-                else:
-                    idx += 1
-            think_res = orchestrator.deep_think(problem, domain=domain, compute_budget=budget)
+            think_res = orchestrator.deep_think(problem, domain=service_options["domain"], compute_budget=service_options["budget"])
             print(json.dumps(think_res, indent=2, ensure_ascii=False))
         elif cmd in ("alphaproof", "prover"):
             if len(sys.argv) < 3:
@@ -660,6 +815,7 @@ def main() -> int:
                 code = raw_input
             lean_res = orchestrator.lean4_verify_code(code)
             print(json.dumps(lean_res, indent=2, ensure_ascii=False))
+            return 0 if lean_res.get("is_valid") is True and lean_res.get("status") == "machine_checked" else 1
         elif cmd in ("egraph", "saturate", "egg"):
             if len(sys.argv) < 3:
                 print('Uso: python3 -m marceloclaro.cli egraph "<expressao_s_expr>" (ex: "(+ (* x 1) 0)")')
@@ -696,7 +852,7 @@ def main() -> int:
             print(json.dumps(clinical_res, indent=2, ensure_ascii=False))
         else:
             print(f"Comando desconhecido: {cmd}.")
-            print("Use 'doctor', 'apm', 'amplify', 'aletheia', 'deepthink', 'alphaproof', 'erdos', 'lean4', 'egraph', 'geometry', 'autoformalize', 'clinical', 'shortcuts', 'imobench', 'status', 'agents', 'helpdesk', 'pesquisa', 'pesquisa-full' ou 'apresentacao'.")
+            print("Use 'doctor', 'apm', 'amplify', 'aletheia', 'deepthink', 'alphaproof', 'erdos', 'lean4', 'egraph', 'geometry', 'autoformalize', 'clinical', 'shortcuts', 'imobench', 'status', 'agents', 'helpdesk', 'pesquisa', 'pesquisa-full', 'apresentacao' ou 'conteudo-offline'.")
         return 0
 
     # Modo interativo

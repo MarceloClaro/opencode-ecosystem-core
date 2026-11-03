@@ -2,7 +2,7 @@
 %  MÓDULO 10 — Catálogo Completo de Agentes e Subagentes
 %  ARQUIVO GERADO — não editar à mão. Rode: python3 gen_mod10.py
 % ============================================================
-\chapter{Catálogo Completo — 312 Fichas de Agente (312 declaradas na configuração)}
+\chapter{Catálogo Completo — 329 Fichas de Agente (329 declaradas na configuração)}
 
 \roteirodidatico
 {Este catálogo é um inventário de perfis descritos no projeto. Para encontrar um agente, comece pela categoria e leia a ficha como uma declaração de escopo e instruções.}
@@ -13,11 +13,11 @@
 
 Este apêndice é uma obra de consulta: a leitura principal já acompanhou a tarefa até a reprodução. Volte a uma categoria quando precisar escolher um perfil, e retorne ao capítulo de ativação antes de lhe encaminhar trabalho.
 \begin{resultado}
-O \pth{opencode.json} registra \textbf{312} agentes (1 orquestrador, 311 subagentes), e o acervo \pth{agents/catalog/} traz \textbf{312} fichas. Cada agente tem exatamente uma ficha e cada ficha um agente: a cobertura documental é \textbf{1:1} (0 fichas sem registro, 0 agentes sem ficha). As 312 fichas abaixo são geradas deterministicamente por \pth{gen_mod10.py} e agrupam-se por categoria.
+O \pth{opencode.json} registra \textbf{329} agentes (1 orquestrador, 328 subagentes), e o acervo \pth{agents/catalog/} traz \textbf{329} fichas. Cada agente tem exatamente uma ficha e cada ficha um agente: a cobertura documental é \textbf{1:1} (0 fichas sem registro, 0 agentes sem ficha). As 329 fichas abaixo são geradas deterministicamente por \pth{gen_mod10.py} e agrupam-se por categoria.
 \end{resultado}
 
 \begin{aviso}
-\textbf{Convenção de nomes (verificada em 29/09/2026, SPEC-935-R618).} O \pth{frontmatter} de cada card usa o \emph{nome humano} (ex.: \emph{Cloud SQL PostgreSQL Specialist}), enquanto \pth{opencode.json} registra o \emph{slug} em kebab-case (ex.: \cod{cloud-sql-postgres-specialist}). Uma versão anterior deste capítulo comparava os dois textos literalmente e reportava trinta e nove fichas como não registradas — falso positivo de convenção, não lacuna de runtime: reconciliadas pelo slug e por alias declarado, todas as 312 fichas estão registradas. Ficha documentada ainda $\neq$ agente testado: registrar não prova que o agente funcione.
+\textbf{Convenção de nomes (verificada em 29/09/2026, SPEC-935-R618).} O \pth{frontmatter} de cada card usa o \emph{nome humano} (ex.: \emph{Cloud SQL PostgreSQL Specialist}), enquanto \pth{opencode.json} registra o \emph{slug} em kebab-case (ex.: \cod{cloud-sql-postgres-specialist}). Uma versão anterior deste capítulo comparava os dois textos literalmente e reportava trinta e nove fichas como não registradas — falso positivo de convenção, não lacuna de runtime: reconciliadas pelo slug e por alias declarado, todas as 329 fichas estão registradas. Ficha documentada ainda $\neq$ agente testado: registrar não prova que o agente funcione.
 \end{aviso}
 
 \begin{processo}
@@ -29,7 +29,7 @@ FUNCAO. transformar o catalogo enumerativo em um teste de consistencia executave
 \section[Leitura guiada]{Leitura guiada — Módulo 10: o catálogo como teste de consistência}
 
 \begin{descricao}
-\textbf{O fenômeno.} Um capítulo que enumera 312 agentes produz a impressão de catálogo fiel. Mas a enumeração é a forma mais fácil de mascarar um erro de reconciliação: se o procedimento de contagem compara o nome humano do card com o slug do runtime, a lista parece cheia de agentes faltantes que não faltam. Foi exatamente o que aconteceu: o capítulo afirmava não estarem registradas fichas que estavam todas registradas, apenas sob outra convenção de nome.
+\textbf{O fenômeno.} Um capítulo que enumera 329 agentes produz a impressão de catálogo fiel. Mas a enumeração é a forma mais fácil de mascarar um erro de reconciliação: se o procedimento de contagem compara o nome humano do card com o slug do runtime, a lista parece cheia de agentes faltantes que não faltam. Foi exatamente o que aconteceu: o capítulo afirmava não estarem registradas fichas que estavam todas registradas, apenas sob outra convenção de nome.
 \end{descricao}
 
 \begin{definicao}
@@ -51,16 +51,16 @@ FUNCAO. transformar o catalogo enumerativo em um teste de consistencia executave
 \end{metodo}
 
 \begin{resultado}
-\textbf{Exemplo resolvido.} Estado da configuração consultada nesta geração, com $N = 312$ agentes no \pth{opencode.json} e $F = 312$ fichas em \pth{agents/catalog/}.\par
-(1) Contagem ingênua por igualdade textual: $99$ fichas sem correspondência exata, o que sugeriria cobertura de $\frac{213}{312} \approx 68\%$ — número plausível, e por isso mesmo perigoso.\par
-(2) Reconciliação por slug: os $99$ casos se resolvem em $81$ por identidade canônica de perfil ou de arquivo e em $18$ por alias declarado (ex.: \emph{Synthetic University — Orquestrador Acadêmico Transversal} $\to$ \cod{university_synthetic}).\par
-(3) Resíduo: $99 - 81 - 18 = 0$ fichas sem agente; e $0$ agentes sem ficha.\par
-(4) Cobertura documental correta: $\frac{312}{312} = 1 = 100\%$.\par
+\textbf{Exemplo resolvido.} Estado da configuração consultada nesta geração, com $N = 329$ agentes no \pth{opencode.json} e $F = 329$ fichas em \pth{agents/catalog/}.\par
+(1) Contagem ingênua por igualdade textual: $116$ fichas sem correspondência exata, o que sugeriria cobertura de $\frac{213}{329} \approx 65\%$ — número plausível, e por isso mesmo perigoso.\par
+(2) Reconciliação por slug: os $116$ casos se resolvem em $98$ por identidade canônica de perfil ou de arquivo e em $18$ por alias declarado (ex.: \emph{Synthetic University — Orquestrador Acadêmico Transversal} $\to$ \cod{university_synthetic}).\par
+(3) Resíduo: $116 - 98 - 18 = 0$ fichas sem agente; e $0$ agentes sem ficha.\par
+(4) Cobertura documental correta: $\frac{329}{329} = 1 = 100\%$.\par
 (5) Leitura correta do número verdadeiro: uma versão anterior somava os dois acervos como se fossem disjuntos e obtinha um total maior que o número real de agentes — supercontagem devida a aliases contados em duplicidade.
 \end{resultado}
 
 \begin{resultado}
-\textbf{Ordem de grandeza e verificação.} A cobertura de $100\%$ é exata e, ainda assim, diz pouco: as duas maiores categorias ($128$ e $58$ fichas, de 11 no total) somam $\frac{186}{312} \approx 59,6\%$, de modo que a média por categoria ($312/11 \approx 28,4$) descreve mal a distribuição — o mesmo mecanismo de concentração que oculta o desequilíbrio no Módulo 8. \emph{Verifique você mesmo:} rode \cod{python3 gen_mod10.py} e confira quantos elementos são emitidos; alterar o \pth{opencode.json} e reexecutar deve mover esse número na mesma medida.
+\textbf{Ordem de grandeza e verificação.} A cobertura de $100\%$ é exata e, ainda assim, diz pouco: as duas maiores categorias ($128$ e $75$ fichas, de 11 no total) somam $\frac{203}{329} \approx 61,7\%$, de modo que a média por categoria ($329/11 \approx 29,9$) descreve mal a distribuição — o mesmo mecanismo de concentração que oculta o desequilíbrio no Módulo 8. \emph{Verifique você mesmo:} rode \cod{python3 gen_mod10.py} e confira quantos elementos são emitidos; alterar o \pth{opencode.json} e reexecutar deve mover esse número na mesma medida.
 \end{resultado}
 
 
@@ -102,7 +102,7 @@ FUNCAO. transformar o catalogo enumerativo em um teste de consistencia executave
 \elemento{Cobertura de fichas do catálogo}{\metainfo{ID}{DID-CAT} \hfill \metainfo{Fonte}{\pth{gen_mod10.py}, reconciliação e contagens desta geração}}
 
 \begin{descricao}
-\textbf{O problema concreto.} A configuração declara $N = 312$ agentes no \pth{opencode.json} e o catálogo tem $F = 312$ fichas em \pth{agents/catalog/}. Uma contagem ingênua por igualdade textual encontra $99$ fichas sem correspondência exata. Isso significa que o catálogo está incompleto? Como reconciliar antes de somar?
+\textbf{O problema concreto.} A configuração declara $N = 329$ agentes no \pth{opencode.json} e o catálogo tem $F = 329$ fichas em \pth{agents/catalog/}. Uma contagem ingênua por igualdade textual encontra $116$ fichas sem correspondência exata. Isso significa que o catálogo está incompleto? Como reconciliar antes de somar?
 \end{descricao}
 
 \begin{definicao}
@@ -112,9 +112,9 @@ FUNCAO. transformar o catalogo enumerativo em um teste de consistencia executave
 \begin{tabularx}{\linewidth}{YYY}
 Símbolo & Significado & Valor no exemplo \\
 \midrule
-$N$ & Agentes na configuração & $N = 312$ \\
-$F$ & Fichas no catálogo & $F = 312$ \\
-$S$ & Fichas sem correspondência exata (contagem ingênua) & $S = 99$ \\
+$N$ & Agentes na configuração & $N = 329$ \\
+$F$ & Fichas no catálogo & $F = 329$ \\
+$S$ & Fichas sem correspondência exata (contagem ingênua) & $S = 116$ \\
 \end{tabularx}
 \end{center}
 \end{definicao}
@@ -123,25 +123,25 @@ $S$ & Fichas sem correspondência exata (contagem ingênua) & $S = 99$ \\
 \textbf{Dedução da reconciliação e da cobertura correta.}
 
 \paragraph{Passo 1 — Contagem ingênua (perigosa).}
-Comparar nomes texto a texto encontra $99$ fichas sem correspondência exata. Isso sugeriria cobertura de:
+Comparar nomes texto a texto encontra $116$ fichas sem correspondência exata. Isso sugeriria cobertura de:
 
 \[
-\frac{312 - 99}{312} = \frac{213}{312} \approx 0{,}6826923076923077 \approx 68\%
+\frac{329 - 116}{329} = \frac{213}{329} \approx 0{,}6474164133738601 \approx 65\%
 \]
 
 Esse número é plausível, e por isso mesmo perigoso: pode levar à conclusão errada de que o catálogo está faltando agentes.
 
 \paragraph{Passo 2 — Reconciliação por slug e alias.}
-Dos $99$ casos sem correspondência exata:
+Dos $116$ casos sem correspondência exata:
 \begin{itemize}[leftmargin=1.3em,itemsep=1pt]
-  \item $81$ se resolvem por identidade canônica de perfil ou de arquivo;
+  \item $98$ se resolvem por identidade canônica de perfil ou de arquivo;
   \item $18$ se resolvem por alias declarado (ex.: \emph{Synthetic University — Orquestrador Acadêmico Transversal} $\to$ \cod{university_synthetic}).
 \end{itemize}
 
 \paragraph{Passo 3 — Resíduo da reconciliação.}
 
 \[
-\text{Resíduo} = 99 - 81 - 18 = 0
+\text{Resíduo} = 116 - 98 - 18 = 0
 \]
 
 Não há fichas sem agente, e não há agentes sem ficha.
@@ -149,20 +149,20 @@ Não há fichas sem agente, e não há agentes sem ficha.
 \paragraph{Passo 4 — Cobertura documental correta.}
 
 \[
-\boxed{\text{Cobertura} = \frac{312}{312} = 1 = 100\%}
+\boxed{\text{Cobertura} = \frac{329}{329} = 1 = 100\%}
 \]
 
 \paragraph{Passo 5 — Concentração por categoria.}
-As duas maiores categorias ($128$ e $58$ fichas, de 11 no total) somam:
+As duas maiores categorias ($128$ e $75$ fichas, de 11 no total) somam:
 
 \[
-\frac{128 + 58}{312} = \frac{186}{312} \approx 0{,}5961538461538461 \approx 59,6\%
+\frac{128 + 75}{329} = \frac{203}{329} \approx 0{,}6170212765957447 \approx 61,7\%
 \]
 
 A média por categoria é:
 
 \[
-\frac{312}{11} \approx 28,4
+\frac{329}{11} \approx 29,9
 \]
 
 Essa média descreve mal a distribuição porque oculta a concentração em poucas categorias.
@@ -176,7 +176,7 @@ Essa média descreve mal a distribuição porque oculta a concentração em pouc
 \begin{itemize}[leftmargin=1.3em,itemsep=1pt]
   \item $100\%$ de cobertura documental não significa que todos os agentes estejam funcionando.
   \item Somar os dois acervos (configuração + catálogo) como se fossem disjuntos gera supercontagem devida a aliases contados em duplicidade.
-  \item A média por categoria ($28,4$) mascara a desigualdade real da distribuição.
+  \item A média por categoria ($29,9$) mascara a desigualdade real da distribuição.
 \end{itemize}
 \end{descricao}
 
@@ -210,8 +210,8 @@ Contagem por categoria (ordem decrescente de fichas):\par
 Categoria & Fichas & Exemplo de agentes \\
 \midrule
 Ferramentas e apoio transversal & 128 & Gestor de decisões arquiteturais, Moderador de fórum e debates multiagente, Pipeline de extração e análise de documentos \\
+Auditoria e qualidade & 75 & Integração de Anthropic Skills, Fluxos de arquitetura, Inventário de arquitetura \\
 Produção acadêmica & 58 & 00 editor chefe phd, 01 agente diagnostico escopo, 02 agente busca curadoria \\
-Auditoria e qualidade & 58 & Integração de Anthropic Skills, Fluxos de arquitetura, Inventário de arquitetura \\
 Engenharia & 29 & Abnt latex modular, Preparação e verificação do livro, Backend de contexto de código \\
 Pesquisa e evidências & 14 & Auditoria reprodutibilidade, Bibtex crossref auditor, Inferencia causal did iv rdd \\
 Escrita e tradução & 13 & Author voice guardian, Back translation verifier, Cultural episteme agente \\
@@ -1371,7 +1371,7 @@ Trilha de pesquisa: pode apoiar busca ou síntese de evidências; registre fonte
 \end{arquitetura}
 
 \clearpage
-\section{Categoria: Auditoria e qualidade (58 perfis)}
+\section{Categoria: Auditoria e qualidade (75 perfis)}
 
 \begin{descricao}
 Reúne perfis de inspeção e revisão. Seus achados podem informar verificações de qualidade e rigor, mas a existência de um auditor não equivale a aprovação independente (Módulos 4 e 6).
@@ -1527,6 +1527,201 @@ Trilha de auditoria: pode localizar problemas segundo os critérios descritos; a
 \textbf{Modo de execução declarado:} subagente · \textbf{Permissões:} read: allow; glob: allow; grep: allow; bash: \{'*': 'deny', 'python3 -m pytest tests/test\_r669\_requested\_agents.py -q': 'allow', 'python3 -m pytest tests/test\_r657\_book\_mcp.py -q': 'allow'\}; edit: deny; webfetch: deny; task: deny
 \end{arquitetura}
 
+\elemento{Cientista 01 — Problema e hipóteses (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Cientista 01 — Problema e hipóteses} \hfill \metainfo{Ficha}{scientist-problem.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Delimitar pergunta, construtos, hipóteses rivais e critérios de refutação.
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Cientista 02 — Busca científica (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Cientista 02 — Busca científica} \hfill \metainfo{Ficha}{scientist-search.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Formular consultas reproduzíveis e lacunas de busca; não alegar consulta
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Cientista 03 — Curadoria e triagem (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Cientista 03 — Curadoria e triagem} \hfill \metainfo{Ficha}{scientist-curation.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Conferir inclusão, exclusão, duplicatas e motivos; não excluir estudos
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Cientista 04 — Auditoria bibliográfica (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Cientista 04 — Auditoria bibliográfica} \hfill \metainfo{Ficha}{scientist-references.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Conferir identificadores, recortes e função das citações; pedir resolução
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Cientista 05 — Desenho metodológico (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Cientista 05 — Desenho metodológico} \hfill \metainfo{Ficha}{scientist-methodology.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Confrontar desenho, paradigma, amostragem e instrumentos com a pergunta
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Cientista 06 — Estatística e incerteza (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Cientista 06 — Estatística e incerteza} \hfill \metainfo{Ficha}{scientist-statistics.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Auditar pressupostos, tamanhos de efeito, intervalos, dados faltantes
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Cientista 07 — Análise qualitativa (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Cientista 07 — Análise qualitativa} \hfill \metainfo{Ficha}{scientist-qualitative.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Conferir corpus, interpretação, reflexividade e casos negativos sem impor
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Cientista 08 — Reprodução computacional (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Cientista 08 — Reprodução computacional} \hfill \metainfo{Ficha}{scientist-reproduction.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Conferir dados, código, ambiente, hashes e registros de execução; não
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Cientista 09 — Explicação Feynman (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Cientista 09 — Explicação Feynman} \hfill \metainfo{Ficha}{scientist-feynman.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Explicar mecanismo em linguagem clara, localizar lacunas e propor pergunta
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Cientista 10 — Refutação adversarial (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Cientista 10 — Refutação adversarial} \hfill \metainfo{Ficha}{scientist-falsification.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Buscar contraexemplos, explicações alternativas e resultados negativos;
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Cientista 11 — Decisão e teoria dos jogos (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Cientista 11 — Decisão e teoria dos jogos} \hfill \metainfo{Ficha}{scientist-game-theory.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Explicitar utilidades, custos e cenários; usar minimax regret apenas
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Cientista 12 — Ética e proveniência (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Cientista 12 — Ética e proveniência} \hfill \metainfo{Ficha}{scientist-ethics.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Auditar consentimento, licenças, privacidade, conflitos e origem; bloquear
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Cientista 13 — Auditoria e síntese final (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Cientista 13 — Auditoria e síntese final} \hfill \metainfo{Ficha}{scientist-audit.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Confrontar todos os pareceres, registrar conflitos não resolvidos e encaminhar
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
 \elemento{Análise das fontes do Codesight (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Codesight Source} \hfill \metainfo{Ficha}{codesight-source.md}}
 
 \begin{descricao}
@@ -1652,6 +1847,66 @@ Trilha de auditoria: pode localizar problemas segundo os critérios descritos; a
 \begin{descricao}
 \textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
 Coordenar capacidades de Enterprise Search sob o MarceloClaro com proveniência
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Especialista CAEd/SPAECE e Legislação Educacional do Ceará (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Especialista CAEd/SPAECE e Legislação Educacional do Ceará} \hfill \metainfo{Ficha}{caed-spaece-educacao-ceara.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Inventariar matrizes públicas CAEd/SPAECE em todas as edições disponíveis
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Especialista em BNCC Dados (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Especialista em BNCC Dados} \hfill \metainfo{Ficha}{bncc-dados-specialist.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Analisar em modo somente leitura os dados, schemas, proveniência e documentação
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Especialista em Legislação Educacional Federal e do Ceará (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Especialista em Legislação Educacional Federal e do Ceará} \hfill \metainfo{Ficha}{educacao-legislacao-ceara-specialist.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Rastrear textos e alterações de normas de educação, ECA, inclusão, PNE
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Especialista em Matrizes CAEd/SPAECE (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Especialista em Matrizes CAEd/SPAECE} \hfill \metainfo{Ficha}{caed-spaece-matrix-specialist.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Inventariar e consultar matrizes CAEd/SPAECE e Avalie.CE do corpus local,
 \end{descricao}
 
 \begin{funcao}

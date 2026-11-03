@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "version": "R1044-1",
+  "part_id": "02XpQTA-_XE-P0100",
+  "model": "nvidia/Nemotron-3-Diarization",
+  "source_sha256": "517f205e3b5648294833163eaf018a3b2e6ad1883aae589e65aa0dd4db8e2c2d",
+  "key": "c0e3f97dab4b40d3d660dc3639f9816ce279fff815df64ed3aaf986b73ceb0fc",
+  "segments": [
+    {
+      "Start": 36.97,
+      "End": 37.99,
+      "Speaker": 0
+    },
+    {
+      "Start": 41.44,
+      "End": 42.89,
+      "Speaker": 0
+    },
+    {
+      "Start": 44.11,
+      "End": 44.41,
+      "Speaker": 0
+    },
+    {
+      "Start": 54.77,
+      "End": 56.11,
+      "Speaker": 1
+    }
+  ],
+  "units": [
+    {
+      "id": "U01938",
+      "speaker": 0,
+      "coverage": 1.0,
+      "margin": 1.0,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U01939",
+      "speaker": 0,
+      "coverage": 0.66,
+      "margin": 0.66,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U01940",
+      "speaker": 0,
+      "coverage": 1.0,
+      "margin": 1.0,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U01941",
+      "speaker": null,
+      "coverage": 0.0,
+      "margin": 0.0,
+      "blocked": true,
+      "reason": "no_overlap",
+      "verified": false
+    }
+  ],
+  "status": "diarized_pending_review",
+  "verified": false,
+  "limitations": [
+    "speaker indices are local to this part",
+    "identity is not inferred from speaker index",
+    "overlap/ambiguity blocks TTS assignment"
+  ]
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.620" timestamp="2026-10-19T07:04:19.465844-03:00" hostname="OPENCODE"><testcase classname="tests.test_r929_core_regressions" name="test_nonfinite_history_is_refused_without_overwrite" time="0.013"><failure message="Failed: DID NOT RAISE any of (ValueError, RuntimeError)">tests/test_r929_core_regressions.py:72: in test_nonfinite_history_is_refused_without_overwrite
+    with pytest.raises((ValueError,RuntimeError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE any of (ValueError, RuntimeError)</failure></testcase></testsuite></testsuites>

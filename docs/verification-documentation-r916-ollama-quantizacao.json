@@ -1,0 +1,441 @@
+{
+  "artifacts": {
+    "README.md": {
+      "bytes": 130617,
+      "sha256": "a930635b1bbf2218630451dd7b475895bc9910d1f673b201474f7306c4a6b729"
+    },
+    "docs/ARQUITETURA_COMPLETA_CORE_R916.md": {
+      "bytes": 16735,
+      "sha256": "5d8e31c497552611f863648384bbe3087d556a4140de5cf21007e9e016ea109f"
+    },
+    "docs/ESTADO_ATUAL_CORE_R916.md": {
+      "bytes": 6533,
+      "sha256": "9c12c94ed043050a4b42f98f6d2a7fadf4f3d22fd83f7b6d3f406ffa6c4c5bb8"
+    },
+    "docs/architecture/MODELOS_E_ECONOMIA_DE_TOKENS_R916.md": {
+      "bytes": 9669,
+      "sha256": "4023e924b88e0f569940bdcac7b7d480c5fe34704f9cb8b2ca6a65e191175de4"
+    },
+    "docs/architecture/QUANTIZACAO_LOCAL_GITHUB_R916.md": {
+      "bytes": 7567,
+      "sha256": "6ae6789267d14cb3a81e583d0b026721d6d91021255fa80f584396cfca6092c3"
+    },
+    "docs/architecture/architecture-inventory.json": {
+      "bytes": 8994920,
+      "sha256": "8d16f32501bcb051a4f83af4dcf8470a0197fa12e592797f643bfe141b81afe9"
+    },
+    "docs/architecture/curated-overview.svg": {
+      "bytes": 22466,
+      "sha256": "0bc0e0941983c592b49885b3fecc47914ca80047daf38707bda64b4db2757204"
+    },
+    "docs/architecture/dependencies-mermaid.svg": {
+      "bytes": 2271565,
+      "sha256": "11a8dd4e85b6259c86a252ba7142a7ec69c7c5b603e1a2cb535256262783cd80"
+    },
+    "docs/architecture/dependencies.mmd": {
+      "bytes": 2454084,
+      "sha256": "76d728ec8abb88121676e6fa7d2cc57f38b10a6d7f2fc64fc2460bd589e55c4a"
+    },
+    "docs/architecture/dependencies.svg": {
+      "bytes": 994396,
+      "sha256": "cc1dbc594159f05549ca7d995323be09486698389fc1c73c0dd74eb76d2c3797"
+    },
+    "docs/architecture/flows.json": {
+      "bytes": 48935,
+      "sha256": "677e72fc516918cb8507af683be842e319d039953c05fdc173cedc809920afb5"
+    },
+    "docs/architecture/flows/01-panorama.mmd": {
+      "bytes": 3886,
+      "sha256": "a131171c4c7e95534238f69aaf0bb8c939825e3c7f0274b39a6e295f5df3a22a"
+    },
+    "docs/architecture/flows/01-panorama.svg": {
+      "bytes": 109673,
+      "sha256": "d9e82a854becf86532543ae165e99c55bee10bf613c7382d5c0811ff16c6018e"
+    },
+    "docs/architecture/flows/02-orquestracao.mmd": {
+      "bytes": 2520,
+      "sha256": "fca207c4f2853c70fe5e8b99ba8360386a3fc73ca88827fee83e3b37c14e8c9a"
+    },
+    "docs/architecture/flows/02-orquestracao.svg": {
+      "bytes": 77654,
+      "sha256": "508e3d8f6a7189628b3fca687188db88914301caf33e4a8acddfa569186f3da5"
+    },
+    "docs/architecture/flows/03-workflow-dag.mmd": {
+      "bytes": 2068,
+      "sha256": "b05977d545b7de24b96c8243a55e606d4dbaa5f26f948258bc899faaa8b142a8"
+    },
+    "docs/architecture/flows/03-workflow-dag.svg": {
+      "bytes": 78958,
+      "sha256": "6294581a37b9f3315837c730df5c07ab3247c4bdf681d1ed45de75931e9e5a3c"
+    },
+    "docs/architecture/flows/04-sdd-tdd.mmd": {
+      "bytes": 1893,
+      "sha256": "f30ae99066baffe7e719bdb955cd5557d7509d848b057dc561e87d538087ebba"
+    },
+    "docs/architecture/flows/04-sdd-tdd.svg": {
+      "bytes": 54562,
+      "sha256": "06a4b0f70dcf21313e7f37abc33a703f40cbb2701586a245e2b3fc63bbc7c0d4"
+    },
+    "docs/architecture/flows/05-rea-provedores.mmd": {
+      "bytes": 3359,
+      "sha256": "5f149863d07e32401572d41d0a30086d726457a7f289295de55402cd8b434e23"
+    },
+    "docs/architecture/flows/05-rea-provedores.svg": {
+      "bytes": 82127,
+      "sha256": "49f6ae8c18f1e58057b37f142d3c1769447fdc05c38e982dd49e1eb25ccdca0c"
+    },
+    "docs/architecture/flows/06-rea-local.mmd": {
+      "bytes": 2052,
+      "sha256": "f64391e6f070fd4aeeb4375a2351ea66671239fbba47a500b6e54e83e9bddd2e"
+    },
+    "docs/architecture/flows/06-rea-local.svg": {
+      "bytes": 62021,
+      "sha256": "f87b0d82504a60e49baf1f390f1d946237038f83c6c977ffbc9c727506fd377b"
+    },
+    "docs/architecture/flows/07-rea-agente.mmd": {
+      "bytes": 2049,
+      "sha256": "9695787734dbc84fd15a7c8a55cf66a0d56c10e09b1f7b6c90b89bea32d0d5b6"
+    },
+    "docs/architecture/flows/07-rea-agente.svg": {
+      "bytes": 64335,
+      "sha256": "49cf6b0f6664b53d03148aecaf0e3edc7afe22105c660d667eee518534a21fb5"
+    },
+    "docs/architecture/flows/08-conhecimento-rag.mmd": {
+      "bytes": 1850,
+      "sha256": "b6d478484fbf90e1e174754b0997f1a75d051343846768de26e1256e4aeb6f58"
+    },
+    "docs/architecture/flows/08-conhecimento-rag.svg": {
+      "bytes": 48776,
+      "sha256": "fd437f888e30a5b54a1165cac84db9f9518e9bb2cde272d2c2ae7c1715dfbac0"
+    },
+    "docs/architecture/flows/09-memoria-observavel.mmd": {
+      "bytes": 1603,
+      "sha256": "d8277393ea44679f9afecb889c406723c0459fe8c40364b1e45bbdd575418d98"
+    },
+    "docs/architecture/flows/09-memoria-observavel.svg": {
+      "bytes": 42426,
+      "sha256": "f4987924c81cd0e9d5113eeb47377490ce4b9d6995a4c0eaa14cd5f4e3ad519e"
+    },
+    "docs/architecture/flows/10-raciocinio.mmd": {
+      "bytes": 2047,
+      "sha256": "a52c85b1012c269c12cd1de867fc0bc7e146be7261765cf6554afe1df6cfe318"
+    },
+    "docs/architecture/flows/10-raciocinio.svg": {
+      "bytes": 68522,
+      "sha256": "05c8da3d87b998b238c300e791cde7985fbb15829464cd98935c8458bf96bcc7"
+    },
+    "docs/architecture/flows/11-diagnostico-governanca.mmd": {
+      "bytes": 2587,
+      "sha256": "b1191de7207d815804a8733c2aa103138cb6459edfa0565e91a6c5033b6c06f7"
+    },
+    "docs/architecture/flows/11-diagnostico-governanca.svg": {
+      "bytes": 60023,
+      "sha256": "53915a9db9243c1c6ffb7ecfa69ff32e291e35621771f85c441c69db0acbe9c0"
+    },
+    "docs/architecture/flows/12-ciencia-publicacao.mmd": {
+      "bytes": 3118,
+      "sha256": "829bfb0c2728f8e889c3ba4c538c9cb72a5356475306980d0a3ce85a170b74ce"
+    },
+    "docs/architecture/flows/12-ciencia-publicacao.svg": {
+      "bytes": 74266,
+      "sha256": "95db04f09f9589170c58b3561a9dadddb0cac4e9fa21b040d73a634ba9198149"
+    },
+    "docs/architecture/flows/13-validacao-entrega.mmd": {
+      "bytes": 1679,
+      "sha256": "29a96da731327441b0292feae12dd710e56b28e60c035e4d19c917d2f084682c"
+    },
+    "docs/architecture/flows/13-validacao-entrega.svg": {
+      "bytes": 49332,
+      "sha256": "4d872e7c2e3686127843b79c75fd7d00f3883b8505ff93b1d7f299cb49cc43a5"
+    },
+    "docs/architecture/flows/14-plugins-locais.mmd": {
+      "bytes": 1124,
+      "sha256": "83a0417e20f0d6133c84624a02f6b076957855d51b96d17f0bfe01eebee37694"
+    },
+    "docs/architecture/flows/14-plugins-locais.svg": {
+      "bytes": 38914,
+      "sha256": "f9aad92a1ae19529d6efaf8ff32df26e5d9e2679fdf7e144c975585e51fcaeb8"
+    },
+    "docs/architecture/flows/15-notebooklm.mmd": {
+      "bytes": 1186,
+      "sha256": "d6956b6d79e1eb30b43829b3894469e8894e50f6d0484014f72832157d81bc4f"
+    },
+    "docs/architecture/flows/15-notebooklm.svg": {
+      "bytes": 42731,
+      "sha256": "616a37987d1fa05e6dbd6598e969b320ed74973bc1131b73b2ba41138037e047"
+    },
+    "docs/architecture/flows/16-autenticacoes.mmd": {
+      "bytes": 931,
+      "sha256": "052725f98ca383e6deb8c3be0331ae530fb0ddd123377c2baad6a21603f9f5ae"
+    },
+    "docs/architecture/flows/16-autenticacoes.svg": {
+      "bytes": 36285,
+      "sha256": "c750e07858d529712fe4dd96ee443035fa044f7511f8d9f83c58bca0a85fc0e6"
+    },
+    "docs/architecture/flows/17-metacognicao.mmd": {
+      "bytes": 1062,
+      "sha256": "456a5348c47deb900ebd2fab34207958501361a8f7f260ba8643a397436f1547"
+    },
+    "docs/architecture/flows/17-metacognicao.svg": {
+      "bytes": 31608,
+      "sha256": "c05ea57f2e41368145416d1c7a4708650b0bbe18025a4fe8f016eb7dbfb7e2a3"
+    },
+    "docs/architecture/flows/18-lifecycle.mmd": {
+      "bytes": 1016,
+      "sha256": "09169c4fd46e87661e101e161dfb8bd823eb6bdcebe15110e0de1a95c191055a"
+    },
+    "docs/architecture/flows/18-lifecycle.svg": {
+      "bytes": 34282,
+      "sha256": "d0c747fad7d2c851b36d2de3f2a598794e9e0b29b45da4a26e9ce43779c7e9de"
+    },
+    "docs/architecture/flows/19-ci-local.mmd": {
+      "bytes": 990,
+      "sha256": "4dda0aecf20b2d9df65629995ce9f0fa867f659f90f2231346b482c4da099fe3"
+    },
+    "docs/architecture/flows/19-ci-local.svg": {
+      "bytes": 35990,
+      "sha256": "0bd8301fba0375ef8e8ecfd646d3fd51b0d3611aaa7d4ca01f683fb01a188a6d"
+    },
+    "docs/architecture/flows/20-economia-modelos.mmd": {
+      "bytes": 1466,
+      "sha256": "5e4fa5583c5976f397a3910ac2df07edb40ac2058284e85e9791a4ef62303d9b"
+    },
+    "docs/architecture/flows/20-economia-modelos.svg": {
+      "bytes": 46036,
+      "sha256": "9d97991d1b309ab537dd0b76e25cf8693f5719b3d8b16fa1c5f7f14b57d24124"
+    },
+    "docs/architecture/flows/21-contexto-codigo.mmd": {
+      "bytes": 874,
+      "sha256": "61c4c013d62028724cde540170a75a59ef6bc3401a1246e0108328a14caabdf2"
+    },
+    "docs/architecture/flows/21-contexto-codigo.svg": {
+      "bytes": 30584,
+      "sha256": "bd47fe83f1d04a6f799744890412bace5f2b9c975f83fd3c6b335de9267d7c6b"
+    },
+    "docs/architecture/flows/22-ollama-contexto-erros.mmd": {
+      "bytes": 1156,
+      "sha256": "9e5a1f7dd8a923ea6769b09b90b90d32c4dbd16ed657a4190960c49f6ec5e129"
+    },
+    "docs/architecture/flows/22-ollama-contexto-erros.svg": {
+      "bytes": 40491,
+      "sha256": "5c09ed377f91efdfdbca9651fdbb7939c9ec01b3bd83d6cacb9e4023897b18f2"
+    },
+    "docs/architecture/mermaid-correspondence.json": {
+      "bytes": 817838,
+      "sha256": "57ac9701d5b111e0fee11841d1f98ac2b8648ab9cd88935727bcf96ca91852bf"
+    },
+    "docs/architecture/overview.dot": {
+      "bytes": 10691,
+      "sha256": "126a12d6705932bdf56fc13e10d5e721e499348ae1b5d0521c0a83fe796eabf7"
+    },
+    "docs/architecture/overview.svg": {
+      "bytes": 92016,
+      "sha256": "ae5868c544c044d26a24688a81629cdb15ecfef4e12397f3d35b7ad8a54e79b4"
+    },
+    "docs/architecture/viewer-template.html": {
+      "bytes": 18783,
+      "sha256": "17e550391c01332e95aaff006a740b8e2adcd27b5d72df273cb165e900b2667e"
+    },
+    "docs/architecture_map.html": {
+      "bytes": 9032889,
+      "sha256": "a874e4bb64c5392d21439e1281881e8a33284a8abf9034ecd703ba1b8d0bf261"
+    }
+  },
+  "counts": {
+    "classifications": {
+      "configuration": 18,
+      "documentation": 1617,
+      "domain_artifact": 1010,
+      "evidence_output": 73,
+      "example": 53,
+      "historical_snapshot": 2655,
+      "production": 744,
+      "repository_asset": 430,
+      "template": 2399,
+      "test": 534,
+      "vendor": 782
+    },
+    "declared_import_edges": 1153,
+    "dynamic_imports": 7,
+    "external_imports": 4169,
+    "flows": 22,
+    "non_python_surfaces": 8,
+    "parse_errors": 0,
+    "python_production_modules": 711,
+    "source_anchors": 115,
+    "tracked_files": 10315,
+    "unique_module_pairs": 1014
+  },
+  "externally_validated": false,
+  "limitations": [
+    "Hashes de SVG existentes não comprovam renderização nesta rodada.",
+    "Não comprova testes, inferência, qualidade de modelos ou validação externa.",
+    "Inventário cobre fontes rastreadas; não incorpora fontes não rastreadas.",
+    "Recibos históricos e seus resultados não foram promovidos a atuais."
+  ],
+  "model_default_changed": false,
+  "render_manifest": [
+    {
+      "id": "panorama",
+      "source_path": "docs/architecture/flows/01-panorama.mmd",
+      "source_sha256": "a131171c4c7e95534238f69aaf0bb8c939825e3c7f0274b39a6e295f5df3a22a",
+      "svg_path": "docs/architecture/flows/01-panorama.svg",
+      "svg_sha256": "d9e82a854becf86532543ae165e99c55bee10bf613c7382d5c0811ff16c6018e"
+    },
+    {
+      "id": "orquestracao",
+      "source_path": "docs/architecture/flows/02-orquestracao.mmd",
+      "source_sha256": "fca207c4f2853c70fe5e8b99ba8360386a3fc73ca88827fee83e3b37c14e8c9a",
+      "svg_path": "docs/architecture/flows/02-orquestracao.svg",
+      "svg_sha256": "508e3d8f6a7189628b3fca687188db88914301caf33e4a8acddfa569186f3da5"
+    },
+    {
+      "id": "workflow",
+      "source_path": "docs/architecture/flows/03-workflow-dag.mmd",
+      "source_sha256": "b05977d545b7de24b96c8243a55e606d4dbaa5f26f948258bc899faaa8b142a8",
+      "svg_path": "docs/architecture/flows/03-workflow-dag.svg",
+      "svg_sha256": "6294581a37b9f3315837c730df5c07ab3247c4bdf681d1ed45de75931e9e5a3c"
+    },
+    {
+      "id": "sdd-tdd",
+      "source_path": "docs/architecture/flows/04-sdd-tdd.mmd",
+      "source_sha256": "f30ae99066baffe7e719bdb955cd5557d7509d848b057dc561e87d538087ebba",
+      "svg_path": "docs/architecture/flows/04-sdd-tdd.svg",
+      "svg_sha256": "06a4b0f70dcf21313e7f37abc33a703f40cbb2701586a245e2b3fc63bbc7c0d4"
+    },
+    {
+      "id": "rea-provedores",
+      "source_path": "docs/architecture/flows/05-rea-provedores.mmd",
+      "source_sha256": "5f149863d07e32401572d41d0a30086d726457a7f289295de55402cd8b434e23",
+      "svg_path": "docs/architecture/flows/05-rea-provedores.svg",
+      "svg_sha256": "49f6ae8c18f1e58057b37f142d3c1769447fdc05c38e982dd49e1eb25ccdca0c"
+    },
+    {
+      "id": "rea-local",
+      "source_path": "docs/architecture/flows/06-rea-local.mmd",
+      "source_sha256": "f64391e6f070fd4aeeb4375a2351ea66671239fbba47a500b6e54e83e9bddd2e",
+      "svg_path": "docs/architecture/flows/06-rea-local.svg",
+      "svg_sha256": "f87b0d82504a60e49baf1f390f1d946237038f83c6c977ffbc9c727506fd377b"
+    },
+    {
+      "id": "rea-agente",
+      "source_path": "docs/architecture/flows/07-rea-agente.mmd",
+      "source_sha256": "9695787734dbc84fd15a7c8a55cf66a0d56c10e09b1f7b6c90b89bea32d0d5b6",
+      "svg_path": "docs/architecture/flows/07-rea-agente.svg",
+      "svg_sha256": "49cf6b0f6664b53d03148aecaf0e3edc7afe22105c660d667eee518534a21fb5"
+    },
+    {
+      "id": "conhecimento",
+      "source_path": "docs/architecture/flows/08-conhecimento-rag.mmd",
+      "source_sha256": "b6d478484fbf90e1e174754b0997f1a75d051343846768de26e1256e4aeb6f58",
+      "svg_path": "docs/architecture/flows/08-conhecimento-rag.svg",
+      "svg_sha256": "fd437f888e30a5b54a1165cac84db9f9518e9bb2cde272d2c2ae7c1715dfbac0"
+    },
+    {
+      "id": "memoria",
+      "source_path": "docs/architecture/flows/09-memoria-observavel.mmd",
+      "source_sha256": "d8277393ea44679f9afecb889c406723c0459fe8c40364b1e45bbdd575418d98",
+      "svg_path": "docs/architecture/flows/09-memoria-observavel.svg",
+      "svg_sha256": "f4987924c81cd0e9d5113eeb47377490ce4b9d6995a4c0eaa14cd5f4e3ad519e"
+    },
+    {
+      "id": "raciocinio",
+      "source_path": "docs/architecture/flows/10-raciocinio.mmd",
+      "source_sha256": "a52c85b1012c269c12cd1de867fc0bc7e146be7261765cf6554afe1df6cfe318",
+      "svg_path": "docs/architecture/flows/10-raciocinio.svg",
+      "svg_sha256": "05c8da3d87b998b238c300e791cde7985fbb15829464cd98935c8458bf96bcc7"
+    },
+    {
+      "id": "diagnostico",
+      "source_path": "docs/architecture/flows/11-diagnostico-governanca.mmd",
+      "source_sha256": "b1191de7207d815804a8733c2aa103138cb6459edfa0565e91a6c5033b6c06f7",
+      "svg_path": "docs/architecture/flows/11-diagnostico-governanca.svg",
+      "svg_sha256": "53915a9db9243c1c6ffb7ecfa69ff32e291e35621771f85c441c69db0acbe9c0"
+    },
+    {
+      "id": "ciencia",
+      "source_path": "docs/architecture/flows/12-ciencia-publicacao.mmd",
+      "source_sha256": "829bfb0c2728f8e889c3ba4c538c9cb72a5356475306980d0a3ce85a170b74ce",
+      "svg_path": "docs/architecture/flows/12-ciencia-publicacao.svg",
+      "svg_sha256": "95db04f09f9589170c58b3561a9dadddb0cac4e9fa21b040d73a634ba9198149"
+    },
+    {
+      "id": "entrega",
+      "source_path": "docs/architecture/flows/13-validacao-entrega.mmd",
+      "source_sha256": "29a96da731327441b0292feae12dd710e56b28e60c035e4d19c917d2f084682c",
+      "svg_path": "docs/architecture/flows/13-validacao-entrega.svg",
+      "svg_sha256": "4d872e7c2e3686127843b79c75fd7d00f3883b8505ff93b1d7f299cb49cc43a5"
+    },
+    {
+      "id": "plugins-locais",
+      "source_path": "docs/architecture/flows/14-plugins-locais.mmd",
+      "source_sha256": "83a0417e20f0d6133c84624a02f6b076957855d51b96d17f0bfe01eebee37694",
+      "svg_path": "docs/architecture/flows/14-plugins-locais.svg",
+      "svg_sha256": "f9aad92a1ae19529d6efaf8ff32df26e5d9e2679fdf7e144c975585e51fcaeb8"
+    },
+    {
+      "id": "notebooklm",
+      "source_path": "docs/architecture/flows/15-notebooklm.mmd",
+      "source_sha256": "d6956b6d79e1eb30b43829b3894469e8894e50f6d0484014f72832157d81bc4f",
+      "svg_path": "docs/architecture/flows/15-notebooklm.svg",
+      "svg_sha256": "616a37987d1fa05e6dbd6598e969b320ed74973bc1131b73b2ba41138037e047"
+    },
+    {
+      "id": "autenticacoes",
+      "source_path": "docs/architecture/flows/16-autenticacoes.mmd",
+      "source_sha256": "052725f98ca383e6deb8c3be0331ae530fb0ddd123377c2baad6a21603f9f5ae",
+      "svg_path": "docs/architecture/flows/16-autenticacoes.svg",
+      "svg_sha256": "c750e07858d529712fe4dd96ee443035fa044f7511f8d9f83c58bca0a85fc0e6"
+    },
+    {
+      "id": "metacognicao",
+      "source_path": "docs/architecture/flows/17-metacognicao.mmd",
+      "source_sha256": "456a5348c47deb900ebd2fab34207958501361a8f7f260ba8643a397436f1547",
+      "svg_path": "docs/architecture/flows/17-metacognicao.svg",
+      "svg_sha256": "c05ea57f2e41368145416d1c7a4708650b0bbe18025a4fe8f016eb7dbfb7e2a3"
+    },
+    {
+      "id": "lifecycle",
+      "source_path": "docs/architecture/flows/18-lifecycle.mmd",
+      "source_sha256": "09169c4fd46e87661e101e161dfb8bd823eb6bdcebe15110e0de1a95c191055a",
+      "svg_path": "docs/architecture/flows/18-lifecycle.svg",
+      "svg_sha256": "d0c747fad7d2c851b36d2de3f2a598794e9e0b29b45da4a26e9ce43779c7e9de"
+    },
+    {
+      "id": "ci-local",
+      "source_path": "docs/architecture/flows/19-ci-local.mmd",
+      "source_sha256": "4dda0aecf20b2d9df65629995ce9f0fa867f659f90f2231346b482c4da099fe3",
+      "svg_path": "docs/architecture/flows/19-ci-local.svg",
+      "svg_sha256": "0bd8301fba0375ef8e8ecfd646d3fd51b0d3611aaa7d4ca01f683fb01a188a6d"
+    },
+    {
+      "id": "economia-modelos",
+      "source_path": "docs/architecture/flows/20-economia-modelos.mmd",
+      "source_sha256": "5e4fa5583c5976f397a3910ac2df07edb40ac2058284e85e9791a4ef62303d9b",
+      "svg_path": "docs/architecture/flows/20-economia-modelos.svg",
+      "svg_sha256": "9d97991d1b309ab537dd0b76e25cf8693f5719b3d8b16fa1c5f7f14b57d24124"
+    },
+    {
+      "id": "contexto-codigo",
+      "source_path": "docs/architecture/flows/21-contexto-codigo.mmd",
+      "source_sha256": "61c4c013d62028724cde540170a75a59ef6bc3401a1246e0108328a14caabdf2",
+      "svg_path": "docs/architecture/flows/21-contexto-codigo.svg",
+      "svg_sha256": "bd47fe83f1d04a6f799744890412bace5f2b9c975f83fd3c6b335de9267d7c6b"
+    },
+    {
+      "id": "ollama-contexto-erros",
+      "source_path": "docs/architecture/flows/22-ollama-contexto-erros.mmd",
+      "source_sha256": "9e5a1f7dd8a923ea6769b09b90b90d32c4dbd16ed657a4190960c49f6ec5e129",
+      "svg_path": "docs/architecture/flows/22-ollama-contexto-erros.svg",
+      "svg_sha256": "5c09ed377f91efdfdbca9651fdbb7939c9ec01b3bd83d6cacb9e4023897b18f2"
+    }
+  ],
+  "review": "R916/R918/R919",
+  "schema": "documentation-artifact-receipt-v1",
+  "source": {
+    "commit": "b7f5683f84609a5e957a56af4ca090c905f5ab80",
+    "source": "worktree",
+    "worktree_sha256": "1a170ef08b78071c65b55ee5cc0bb4821d77622b8326d018835dbf4a27d6ec7a"
+  },
+  "verification_scope": "current_artifact_hashes_not_runtime_or_render_execution"
+}

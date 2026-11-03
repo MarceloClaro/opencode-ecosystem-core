@@ -1,0 +1,244 @@
+{
+  "spec_id": "SPEC-935-R931",
+  "schema_version": 1,
+  "status": "protocol_with_pending_inputs",
+  "validation_scope": "document_contract_only",
+  "pilot_executed": false,
+  "production_ready": false,
+  "production_release_approved": false,
+  "externally_validated": false,
+  "scientific_results_generated": false,
+  "automatic_authorization": false,
+  "production_requires_separate_release_contract": true,
+  "pending_inputs": {
+    "research_question": {"value": null, "status": "pending_human_decision"},
+    "corpus": {"value": null, "status": "pending_human_decision"},
+    "operator": {"value": null, "status": "pending_human_decision"},
+    "reviewer": {"value": null, "status": "pending_human_decision"},
+    "provider": {"value": null, "status": "pending_human_decision"},
+    "external_services": {"value": null, "status": "pending_human_decision"},
+    "runtime_budget_seconds": {"value": null, "status": "pending_human_decision"},
+    "cost_budget_brl": {"value": null, "status": "pending_human_decision"},
+    "retention_days": {"value": null, "status": "pending_human_decision"},
+    "publication_destination": {"value": null, "status": "pending_human_decision"},
+    "human_approval": {"value": null, "status": "pending_human_decision"}
+  },
+  "permissions": {
+    "current_stage": "planning_and_local_contract_checks",
+    "policy_modified": false,
+    "authorized_effects": {
+      "source_lookup": false,
+      "pdf_download": false,
+      "model_download": false,
+      "training": false,
+      "deployment": false,
+      "personal_data_access": false,
+      "policy_change": false
+    }
+  },
+  "pilot_limits": {
+    "status": "proposed_not_frozen",
+    "max_operators": 1,
+    "max_concurrent_jobs": 1,
+    "max_included_references": 20,
+    "runtime_budget_seconds": null,
+    "cost_budget_brl": null,
+    "external_call_budget": null,
+    "capacity_measured": false,
+    "enforcement_implemented_by_this_delivery": false
+  },
+  "metrics": [
+    {
+      "id": "reference_metadata_coverage",
+      "status": "proposed_not_frozen",
+      "unit": "fraction",
+      "population": "Referências incluídas no corpus aprovado e não vazio",
+      "numerator": "Referências incluídas com metadados conferidos em fonte primária",
+      "denominator": "Todas as referências incluídas",
+      "proposed_target": 1.0,
+      "measurement": null,
+      "sample_size": null,
+      "empty_population_passes": false,
+      "reviewer_required": true
+    },
+    {
+      "id": "claim_traceability",
+      "status": "proposed_not_frozen",
+      "unit": "fraction",
+      "population": "Alegações centrais do relatório, inventariadas por revisor humano",
+      "numerator": "Alegações centrais com suporte localizado e aceite humano",
+      "denominator": "Todas as alegações centrais inventariadas, incluindo as pendentes",
+      "proposed_target": 1.0,
+      "measurement": null,
+      "sample_size": null,
+      "empty_population_passes": false,
+      "reviewer_required": true
+    },
+    {
+      "id": "unsupported_claims",
+      "status": "proposed_not_frozen",
+      "unit": "count",
+      "population": "Alegações centrais inventariadas em relatório não vazio",
+      "proposed_target": 0,
+      "measurement": null,
+      "sample_size": null,
+      "empty_population_passes": false,
+      "reviewer_required": true
+    },
+    {
+      "id": "screening_documentation",
+      "status": "proposed_not_frozen",
+      "unit": "fraction",
+      "population": "Todos os registros candidatos recuperados nas buscas autorizadas",
+      "numerator": "Candidatos com decisão, motivo, origem e responsável registrados",
+      "denominator": "Todos os candidatos recuperados, inclusive excluídos e duvidosos",
+      "proposed_target": 1.0,
+      "measurement": null,
+      "sample_size": null,
+      "empty_population_passes": false,
+      "reviewer_required": true
+    },
+    {
+      "id": "latency_p95",
+      "status": "proposed_not_frozen",
+      "unit": "seconds",
+      "population": "Tarefas do workload congelado; relatar N, duração, falhas e timeouts separadamente",
+      "proposed_target": null,
+      "measurement": null,
+      "sample_size": null,
+      "empty_population_passes": false,
+      "reviewer_required": true
+    },
+    {
+      "id": "peak_memory",
+      "status": "proposed_not_frozen",
+      "unit": "bytes",
+      "population": "Árvore de processos do workload congelado no host especificado",
+      "proposed_target": null,
+      "measurement": null,
+      "sample_size": null,
+      "empty_population_passes": false,
+      "reviewer_required": true
+    },
+    {
+      "id": "total_cost",
+      "status": "proposed_not_frozen",
+      "unit": "BRL",
+      "population": "Todas as chamadas/tentativas do piloto, inclusive falhas, com tarifas e data declaradas",
+      "proposed_target": null,
+      "measurement": null,
+      "sample_size": null,
+      "empty_population_passes": false,
+      "reviewer_required": true
+    }
+  ],
+  "bibliographic_records": [],
+  "bibliographic_audit": {
+    "required_fields": [
+      "identifier", "primary_metadata_url", "verified_at", "metadata_status",
+      "license_or_access_basis", "text_access_level", "claim_id", "source_locator",
+      "support_status", "limitations", "screening_decision", "screening_reason",
+      "human_reviewer", "review_status"
+    ],
+    "unverified_reference_label": "[NÃO VERIFICADA]",
+    "metadata_implies_claim_support": false,
+    "abstract_implies_full_text_read": false,
+    "automatic_scientific_approval": false,
+    "forbidden_acquisition": ["sci-hub", "paywall_bypass", "unlicensed_redistribution"]
+  },
+  "gates": [
+    {
+      "id": "G0",
+      "name": "Congelar escopo e autorização",
+      "depends_on": [],
+      "status": "pending",
+      "owner_role": "Operador e responsável humano pela pesquisa",
+      "acceptance": "Preencher escolhas, aprovar pergunta/corpus/provedor, limites de chamadas/tempo/custo/retenção e métricas antes da execução; vincular aceite ao hash do contrato congelado. Custo zero exige aprovação explícita, não é inferido de null.",
+      "required_artifacts": ["contrato_congelado_com_sha256", "autorizacao_humana_vinculada_ao_hash", "plano_de_busca_e_baseline"],
+      "evidence": [], "human_accepted": false, "accepted_by": null
+    },
+    {
+      "id": "G1",
+      "name": "Admitir corpus e regras bibliográficas",
+      "depends_on": ["G0"],
+      "status": "pending",
+      "owner_role": "Curador e responsável por direitos/dados",
+      "acceptance": "Corpus não vazio com identificadores, origem, direitos de acesso, critérios e trilha de triagem; somente dados públicos ou expressamente licenciados, sem dados pessoais no piloto. Registrar evidências contrárias e exclusões, sem inventar consenso.",
+      "required_artifacts": ["manifesto_do_corpus", "registro_de_busca_e_triagem", "verificacao_de_direitos_e_privacidade"],
+      "evidence": [], "human_accepted": false, "accepted_by": null
+    },
+    {
+      "id": "G2",
+      "name": "Avaliar suporte e qualidade de tarefa",
+      "depends_on": ["G1"],
+      "status": "pending",
+      "owner_role": "Revisor humano distinto do autor da síntese",
+      "acceptance": "Executar o workload autorizado e a baseline manual, auditar todos os registros/alegações e aplicar limiares congelados a denominadores explícitos não vazios. Revisor não é o mesmo modelo que gerou a síntese; não ajustar limiar após observar resultados sem novo protocolo.",
+      "required_artifacts": ["matriz_referencia_alegacao_recorte", "avaliacao_humana_e_baseline", "metricas_e_falhas_com_denominadores"],
+      "evidence": [], "human_accepted": false, "accepted_by": null
+    },
+    {
+      "id": "G3",
+      "name": "Exercitar segurança e recuperação",
+      "depends_on": ["G2"],
+      "status": "pending",
+      "owner_role": "Responsável técnico e revisor de segurança",
+      "acceptance": "Exercitar acesso autenticado no caminho real escolhido, cancelamento, queda de worker, restauração por hashes, retomada sem duplicação e logs sem segredos; não confundir flags/documentos com enforcement implantado.",
+      "required_artifacts": ["relatorio_de_controles_reais", "recibos_de_falha_cancelamento_e_retomada", "recibo_de_backup_e_restauracao"],
+      "evidence": [], "human_accepted": false, "accepted_by": null
+    },
+    {
+      "id": "G4",
+      "name": "Medir operação no limite do piloto",
+      "depends_on": ["G3"],
+      "status": "pending",
+      "owner_role": "Responsável pela operação",
+      "acceptance": "Medir workload congelado com uma tarefa por vez, reportando latência, memória, tempo total, custos e falhas. Sem SLA ou throughput prometido a partir do toy; janela, N, tratamento de timeout e método de percentil definidos antes do ensaio.",
+      "required_artifacts": ["workload_e_host_fixados", "medicoes_operacionais_brutas", "comparacao_com_limites_congelados"],
+      "evidence": [], "human_accepted": false, "accepted_by": null
+    },
+    {
+      "id": "G5",
+      "name": "Decisão humana sobre continuidade restrita",
+      "depends_on": ["G4"],
+      "status": "pending",
+      "owner_role": "Responsáveis humano, técnico e de pesquisa",
+      "acceptance": "Examinar evidências, desvios, revisão e riscos residuais. Aceitar ou recusar somente a continuidade no escopo do piloto. Publicação, aumento de escala ou produção exigem contrato de release separado; aceite não é validade científica externa.",
+      "required_artifacts": ["pacote_de_evidencias_com_hashes", "registro_de_riscos_e_desvios", "decisao_humana_escopada"],
+      "evidence": [], "human_accepted": false, "accepted_by": null
+    }
+  ],
+  "operations": {
+    "status": "planned_not_exercised",
+    "end_to_end_controls_verified": false,
+    "stop_triggers": ["budget_exceeded", "unlicensed_access", "secret_or_personal_data", "unverified_central_claim", "artifact_hash_mismatch", "cleanup_uncertain"],
+    "required_drills": ["cancel_and_close_processes", "worker_crash_without_false_success", "backup_restore_hashes", "resume_without_duplicate_outputs", "authenticated_access_and_audit_logs"]
+  },
+  "historical_evidence": {
+    "R928": {
+      "path": "outputs/core-r928/final-gates.json",
+      "scope": "historical_selected_tests",
+      "tests_passed": 469,
+      "current_tree_revalidated": false,
+      "production_approval": false,
+      "limitations": "Modelo sintético e aceite computacional local; não prova tarefa real, SLA, LLM, Android ou validade científica."
+    },
+    "R929": {
+      "path": "docs/evidence/r929/receipt.json",
+      "scope": "historical_selected_tests",
+      "tests_passed": 643,
+      "current_tree_revalidated": false,
+      "production_approval": false,
+      "limitations": "Seleção separada; suíte integral não concluída e ramo Windows nativo da trava não exercitado."
+    }
+  },
+  "test_counts_additive": false,
+  "limitations": {
+    "unmodeled_history_entries": 78,
+    "itsfine_upstream_tests": "not_shipped",
+    "gpu_training": "unavailable_in_last_observation_not_required_for_cpu_pilot",
+    "full_suite_acceptance": false,
+    "history_migration_authorized": false,
+    "new_runtime_enforcement_delivered": false
+  }
+}

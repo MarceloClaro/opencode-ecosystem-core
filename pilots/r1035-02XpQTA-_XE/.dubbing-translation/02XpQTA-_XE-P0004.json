@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "version": "R1045-translate-1",
+  "part_id": "02XpQTA-_XE-P0004",
+  "source_sha256": "c9cbfb039d410ab6a1b62c331258354fb4f489397ccfa7c1ec1e050392486178",
+  "source_language": "tr",
+  "target_language": "pt",
+  "model": {
+    "name": "facebook/m2m100_418M",
+    "local_dir": "/home/marceloclaro/.cache/opencode-pilot/models/m2m100-418m",
+    "license": "MIT",
+    "device": "cpu",
+    "cpu_threads": 4,
+    "network": false
+  },
+  "status": "machine_translation_pending_review",
+  "translation_verified": false,
+  "units": [
+    {
+      "id": "U00021",
+      "source_text": "Mecburu kalmadıkça kimsede konuşmamızı istemez zaten.",
+      "start_part": 1.4499999999999886,
+      "end_part": 4.22999999999999,
+      "translated_text": "Não queremos falar com ninguém, a menos que seja obrigado."
+    },
+    {
+      "id": "U00022",
+      "source_text": "Sessizce yok olup gitmemizi beklerler gördükleri yerde.",
+      "start_part": 6.349999999999994,
+      "end_part": 9.189999999999998,
+      "translated_text": "Eles estão em silêncio esperando para ir onde eles vêem."
+    },
+    {
+      "id": "U00023",
+      "source_text": "Bizi yok saymayı seçerler.",
+      "start_part": 9.689999999999998,
+      "end_part": 10.930000000000007,
+      "translated_text": "Eles escolheram contar-nos."
+    },
+    {
+      "id": "U00024",
+      "source_text": "Ama illa ki...",
+      "start_part": 14.259999999999991,
+      "end_part": 16.099999999999994,
+      "translated_text": "Mas mal que..."
+    },
+    {
+      "id": "U00025",
+      "source_text": "Var olduğumuzu kabullenmek zorunda kalacakları anlar da gelecektir.",
+      "start_part": 16.099999999999994,
+      "end_part": 20.0,
+      "translated_text": "E eles vão ter que aceitar que nós existemos."
+    },
+    {
+      "id": "U00026",
+      "source_text": "Yolunuzdan söz edeceğiz.",
+      "start_part": 20.079999999999984,
+      "end_part": 38.56,
+      "translated_text": "Vamos falar do seu caminho."
+    }
+  ],
+  "limitations": [
+    "machine translation; names, idioms, gender and humor may be wrong",
+    "no native-speaker review"
+  ]
+}

@@ -1,0 +1,16 @@
+FFFF                                                                     [100%]
+=================================== FAILURES ===================================
+E   ModuleNotFoundError: No module named 'integrations.dubbing_mcp'
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError: No module named 'integrations.dubbing_mcp'
+E   ModuleNotFoundError: No module named 'integrations.dubbing_mcp'
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError: No module named 'integrations.dubbing_mcp'
+E   ModuleNotFoundError: No module named 'integrations.dubbing_mcp'
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError: No module named 'integrations.dubbing_mcp'
+E   ModuleNotFoundError: No module named 'integrations.dubbing_mcp'
+<frozen importlib._bootstrap>:1335: ModuleNotFoundError: No module named 'integrations.dubbing_mcp'
+=========================== short test summary info ============================
+FAILED tests/test_r1041_dubbing_mcp.py::test_catalog_small_and_annotations - ...
+FAILED tests/test_r1041_dubbing_mcp.py::test_missing_operator_root_fails_closed
+FAILED tests/test_r1041_dubbing_mcp.py::test_bounded_call_and_reject_traversal
+FAILED tests/test_r1041_dubbing_mcp.py::test_stdio_roundtrip - ModuleNotFound...
+4 failed in 0.24s

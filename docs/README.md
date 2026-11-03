@@ -6,13 +6,16 @@ execuções anteriores. Arquivos de evidência não são certificados de prontid
 
 | Necessidade | Documento atual |
 |---|---|
-| Instalar e executar pela primeira vez | [Quickstart](../quickstart.md), [instalador](../installer/README.md) |
+| Instalar e executar pela primeira vez | [Quickstart](../quickstart.md), [instalador](../installer/README.md), [one-click](../installer/ONECLICK.md) |
 | Comandos, exemplos e estados | [Manual](../MANUAL.md) |
 | Entender o sistema conectado | [Arquitetura técnica](../ARCHITECTURE.md), [guia R916](ARQUITETURA_COMPLETA_CORE_R916.md) |
 | Explorar o mapa completo | [Atlas offline](architecture_map.html), [Mermaid integral](architecture/dependencies.mmd) |
-| Conferir mudanças e pendências | [Estado atual R916](ESTADO_ATUAL_CORE_R916.md), [PROGRESS](../PROGRESS.md) |
+| Conferir mudanças e pendências | [Estado atual R1045](ESTADO_ATUAL_CORE_R1045.md), [R916 histórico](ESTADO_ATUAL_CORE_R916.md), [PROGRESS](../PROGRESS.md) |
+| Editar vídeo e animar | [Editor universal R1042](EDITOR_VIDEO_UNIVERSAL_R1042.md), [Remotion auditável](../.opencode/skills/remotion-auditavel/SKILL.md) |
+| Dublar, legendar e diarizar | [Pipeline R1041–R1045](DUBBING_PIPELINE_R1041_R1045.md), [status do piloto](../pilots/r1035-02XpQTA-_XE/STATUS.md) |
+| Escolher ferramentas/modelos de vídeo | [Catálogo R1043](VIDEO_EDITOR_TOOLCHAIN_R1043.md), [toolchain.json](../reports/r1043/toolchain.json) |
 | ChatGPT, Gemini e NotebookLM | [Autenticação](AUTENTICACAO_CHATGPT_NOTEBOOKLM.md), [NotebookLM](GEMINI_NOTEBOOK_CORE.md) |
-| Reduzir custo de modelos/contexto | [Modelos e tokens](MODELOS_E_CUSTO_DE_TOKENS.md) |
+| Reduzir custo de modelos/contexto | [Governança de custo de tokens](GOVERNANCA_DE_CUSTO_DE_TOKENS.md), [Modelos e tokens](MODELOS_E_CUSTO_DE_TOKENS.md) |
 | Usar plugins privados | [Plugins locais](PLUGINS_LOCAIS_CORE.md), [Core no ChatGPT](USAR_CORE_NO_CHATGPT.md) |
 | Engenharia reversa | [REA](REA.md), [assistente local](ASSISTENTE_REA_LOCAL.md) |
 | Agentes, plugins, grafo e CI | [Guia R894–R897](ORQUESTRACAO_AGENTES_PLUGINS_CI_R894_R897.md) |

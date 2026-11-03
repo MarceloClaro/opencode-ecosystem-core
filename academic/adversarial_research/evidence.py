@@ -1,5 +1,5 @@
 """Integridade física e contratos de entrada; sem verificação semântica inventada."""
-import copy,hashlib,json,re,math
+import copy,hashlib,json,re
 from pathlib import Path
 from dataclasses import asdict
 from .contracts import ResearchClaim
@@ -47,14 +47,10 @@ def intake(project):
     for item in p['objectives']: text(item,'objective')
     if p.get('study_type') not in {'bibliographic','qualitative','quantitative','experimental','before_after','mixed','computational','protocol'}: raise ValueError('Desenho não suportado')
     artifact=read_artifact(p.get('artifact_path'))
-    if not artifact['text'].strip(): raise ValueError('Artefato sem texto extraível; forneça transcrição/documento acessível')
     context=p.setdefault('context',{})
     if not isinstance(context,dict): raise ValueError('Contexto inválido')
-    for key in ('humans','indigenous_knowledge','personal_data','control_group','uses_ai','community_authorization'):
+    for key in ('humans','indigenous_knowledge','personal_data','control_group'):
         if key in context and context[key] is not None and type(context[key]) is not bool: raise ValueError(key+' precisa ser booleano ou null')
-    if 'disciplines' in context and (not isinstance(context['disciplines'],list) or not all(isinstance(x,str) for x in context['disciplines'])): raise ValueError('disciplines deve ser lista de textos')
-    for key in ('planned_responses','observed_responses','independent_units'):
-        if context.get(key) is not None and (type(context[key]) is not int or context[key]<0): raise ValueError(key+' deve ser inteiro não negativo ou null')
     manifests=[]; source_ids=set()
     sources=p.setdefault('sources',[])
     if not isinstance(sources,list) or len(sources)>300: raise ValueError('Fontes inválidas')
@@ -64,7 +60,7 @@ def intake(project):
         if sid in source_ids: raise ValueError('Fonte duplicada')
         source_ids.add(sid)
         locator=source.get('locator'); valid_locator=isinstance(locator,str) and bool(locator.strip()) and len(locator)<=1000
-        entry={'source_id':sid,'locator':locator,'locator_status':'declared_not_semantically_verified','integrity_checked':False,'verification_scope':'local_artifact_integrity_only','declared_verification':source.get('verification','not_checked')}
+        entry={'source_id':sid,'locator':locator,'integrity_checked':False,'verification_scope':'local_artifact_integrity_only','declared_verification':source.get('verification','not_checked')}
         if source.get('path'):
             try:
                 item=read_artifact(source['path'])
@@ -89,13 +85,9 @@ def intake(project):
         if set(claim['source_refs'])-source_ids: raise ValueError('Referência a fonte inexistente')
         attrs=claim.get('attributes',{})
         if not isinstance(attrs,dict): raise ValueError('Atributos inválidos')
-        for key in ('claims_novelty','epistemic_injustice_from_factual_error_alone','causal_claim','population_generalization','public_source_implies_unrestricted_use','linguistic_reconstruction_from_metric','timeline_implies_professional_release','conceptual_affinity_implies_empirical_international'):
-            if key in attrs and type(attrs[key]) is not bool: raise ValueError(key+' deve ser booleano')
-        if attrs.get('independent_observations') is not None and (type(attrs['independent_observations']) is not int or attrs['independent_observations']<0): raise ValueError('independent_observations deve ser inteiro não negativo')
-        if 'value' in attrs and (type(attrs['value']) not in (int,float) or not math.isfinite(attrs['value'])): raise ValueError('Valor numérico inválido')
         status='reported' if declared=='verified' else declared
         limits=list(claim['limitations'])
         if declared=='verified': limits.append('Verificação semântica não foi reproduzida; integridade local não comprova a alegação.')
-        normalized.append(asdict(ResearchClaim(cid,statement,kind,list(claim['source_refs']),status,limits,[],attrs,declared)))
+        normalized.append(asdict(ResearchClaim(cid,statement,kind,list(claim['source_refs']),status,limits,list(claim['reviewer_agent_ids']),attrs,declared)))
     p['claims']=normalized
     return p,artifact,manifests

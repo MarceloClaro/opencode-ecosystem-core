@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Instalar OpenCode Ecosystem Core (diagnóstico)
+Comment=Verifica bibliotecas e CLIs sem alterar o sistema
+Exec=bash -lc 'cd /home/marceloclaro/opencode-ecosystem-core && ./install.sh --check; echo; read -n1 -r -p "Enter para fechar"'
+Path=/home/marceloclaro/opencode-ecosystem-core
+Terminal=true
+Icon=utilities-terminal
+Categories=Development;

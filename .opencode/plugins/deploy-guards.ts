@@ -2,24 +2,31 @@
  * deploy-guards.ts — Plugin de guards do ecossistema (P0.2/P0.3/P0.4)
  * =====================================================================
  * Conecta os scripts de guarda de `.opencode/hooks/` ao ciclo de vida do
- * OpenCode, com gate FAIL-CLOSED:
+ * OpenCode, com gate FAIL-CLOSED.
  *
- *  - tool.execute.before em `edit`/`write` de `.html` → js_smoke_dom
+ * API V2 (SPEC-935-R1004): o host exige `export default { id, setup }` e
+ * registra hooks por domínio — `ctx.tool.hook("execute.before", …)`. O mapa
+ * `"tool.execute.before"` da V1 nunca é executado pela V2, o que deixava o
+ * gate silenciosamente inerte.
+ *
+ *  - `edit`/`write` de `.html` → js_smoke_dom
  *    (stub de DOM em Node; bloqueia a classe de bug R580: 'num' vs '.num').
- *  - tool.execute.before em `bash` contendo `git push`/`git commit` no
- *    repo do site → credential_guard + budget_guard.
+ *  - `shell` (ou `bash` na V1) com `git push`/`git commit` no repo do site
+ *    → credential_guard + budget_guard.
  *
- * Correção R900: o gate de smoke agora valida o CONTEÚDO PROSPECTIVO (o que
- * será gravado), não o arquivo em disco. Antes disso, um `write` de `.html`
- * novo sempre era negado (ENOENT: o arquivo ainda não existia) e um `edit` era
- * validado contra a versão ANTIGA (o hook roda antes de aplicar a edição).
+ * Nomes de campo: a V2 usa `path`; a V1 usava `filePath`. O guard aceita os
+ * dois — usar apenas um deles tornaria o gate inerte sob o outro runtime.
+ *
+ * Correção R900: o gate de smoke valida o CONTEÚDO PROSPECTIVO (o que será
+ * gravado), não o arquivo em disco. Um `write` de `.html` novo não pode ser
+ * negado por ENOENT e um `edit` não pode validar a versão ANTIGA.
  *
  * Segredos: os scripts nunca imprimem o token; plugin só espelha o stdout.
  *
  * @packageDocumentation
  * @module deploy-guards
  */
-import type { Plugin } from "@opencode-ai/plugin";
+import { Plugin } from "@opencode/plugin";
 import { execFileSync } from "node:child_process";
 import * as fs from "node:fs";
 import * as os from "node:os";
@@ -44,6 +51,12 @@ function runHook(script: string, args: string[]): { ok: boolean; out: string } {
   }
 }
 
+/** Caminho do alvo: `path` (V2) ou `filePath` (V1). */
+function argumentPath(args: Record<string, unknown>): string | undefined {
+  const candidate = args.path ?? args.filePath;
+  return typeof candidate === "string" ? candidate : undefined;
+}
+
 /**
  * Reconstrói o conteúdo que a tool está prestes a gravar.
  * - `write`: usa `args.content`.
@@ -55,7 +68,7 @@ function prospectiveContent(tool: string, args: Record<string, unknown>): string
     return typeof args.content === "string" ? args.content : null;
   }
   // edit
-  const fp = args.filePath;
+  const fp = argumentPath(args);
   const oldString = args.oldString;
   const newString = args.newString;
   if (typeof fp !== "string" || typeof oldString !== "string" || typeof newString !== "string") {
@@ -96,18 +109,19 @@ function smokeGate(content: string, label: string): void {
   }
 }
 
-export default (async () => {
-  return {
-    "tool.execute.before": async (input: any, output: any) => {
+export default Plugin.define({
+  id: "deploy-guards",
+  async setup(ctx) {
+    await ctx.tool.hook("execute.before", (event) => {
       try {
-        const tool = input?.tool as string | undefined;
-        const args = output?.args as Record<string, unknown> | undefined;
-        if (!tool || !args) return;
+        const tool = event.tool;
+        const args = (event.input ?? {}) as Record<string, unknown>;
+        if (!tool) return;
 
         // --- gate js-smoke para edição de HTML ----------------------------
-        if ((tool === "edit" || tool === "write") && typeof args.filePath === "string") {
-          const fp = args.filePath;
-          if (fp.endsWith(".html") || fp.endsWith(".htm")) {
+        if (tool === "edit" || tool === "write") {
+          const fp = argumentPath(args);
+          if (fp && (fp.endsWith(".html") || fp.endsWith(".htm"))) {
             const content = prospectiveContent(tool, args);
             if (content === null) {
               // Conteúdo prospectivo não determinável: não há o que validar.
@@ -119,8 +133,15 @@ export default (async () => {
           }
         }
 
+        // --- lacuna conhecida: `patch` grava múltiplos arquivos ------------
+        // O conteúdo não é reconstruível sem interpretar o patch; auditar em
+        // vez de negar, para não introduzir falso fail-closed.
+        if (tool === "patch" && typeof args.patchText === "string" && /\.html?\b/.test(args.patchText)) {
+          console.log("[deploy-guards] js-smoke SKIPPED (tool patch com .html): valide manualmente");
+        }
+
         // --- gate credential + budget para push/commit do site -------------
-        if (tool === "bash" && typeof args.command === "string") {
+        if ((tool === "shell" || tool === "bash") && typeof args.command === "string") {
           const cmd = args.command;
           if (/git (push|commit)/.test(cmd) && cmd.includes("molambudos-podcast")) {
             const cred = runHook("credential_guard.sh", [SITE_REPO_DIR]);
@@ -140,6 +161,6 @@ export default (async () => {
         // fail-closed: propaga o erro para abortar a tool
         throw err;
       }
-    },
-  };
-}) satisfies Plugin;
+    });
+  },
+});

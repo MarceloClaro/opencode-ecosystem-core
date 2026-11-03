@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "part_id": "02XpQTA-_XE-P0006",
+  "source_stem": "pilot-P0006/stems/vocals.wav",
+  "characters": {
+    "char_male_a": {
+      "path": "pilot-P0006/references-clean/char_male_a.wav",
+      "sha256": "0ac82734171700464a84c61486229efcd0e7cebd2e33ac9734c83dd9acbbe6bc",
+      "duration_seconds": 10.64,
+      "source": "Demucs htdemucs vocals stem",
+      "source_units": [
+        "U0001",
+        "U0003",
+        "U0004",
+        "U0006"
+      ],
+      "normalization": "loudnorm I=-20 TP=-2 LRA=7"
+    },
+    "char_cagla": {
+      "path": "pilot-P0006/references-clean/char_cagla.wav",
+      "sha256": "1e52b1833322fe765bf062dc50a9ea8cf12b31e1a1dc0e05838d996adb4aa908",
+      "duration_seconds": 13.48,
+      "source": "Demucs htdemucs vocals stem",
+      "source_units": [
+        "U0002",
+        "U0005",
+        "U0007",
+        "U0009",
+        "U0011",
+        "U0013",
+        "U0015",
+        "U0017",
+        "U0021"
+      ],
+      "normalization": "loudnorm I=-20 TP=-2 LRA=7"
+    },
+    "char_ruya": {
+      "path": "pilot-P0006/references-clean/char_ruya.wav",
+      "sha256": "1e09ae9a55ea8985eb6fca8965e515a1a4bb51d1550337cab94704c77506b683",
+      "duration_seconds": 4.42,
+      "source": "Demucs htdemucs vocals stem",
+      "source_units": [
+        "U0008",
+        "U0010",
+        "U0012",
+        "U0014",
+        "U0016"
+      ],
+      "normalization": "loudnorm I=-20 TP=-2 LRA=7"
+    },
+    "char_mother": {
+      "path": "pilot-P0006/references-clean/char_mother.wav",
+      "sha256": "957ef8aa8330cc776a99a03fbc0f14c5383a27e8322020a8fa7621b02c9555ea",
+      "duration_seconds": 7.08,
+      "source": "Demucs htdemucs vocals stem",
+      "source_units": [
+        "U0018",
+        "U0019",
+        "U0020",
+        "U0022",
+        "U0024",
+        "U0025"
+      ],
+      "normalization": "loudnorm I=-20 TP=-2 LRA=7"
+    }
+  },
+  "limitations": [
+    "Demucs separation is an estimate; bleed may remain",
+    "reference identity is not verified",
+    "phone-filtered voice of the mother may remain narrowband"
+  ]
+}

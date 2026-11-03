@@ -9,9 +9,13 @@ from integrations import opencode_agent_sdk as sdk
 
 
 @pytest.fixture(autouse=True)
-def registry():
+def registry(monkeypatch):
     previous = dict(sdk._TOOLS)
     sdk._TOOLS.clear()
+    # R918 acrescentou a sondagem de contexto: testes de hooks não dependem
+    # de daemon/modelo real e não devem executar HTTP nem inferência.
+    monkeypatch.setattr(sdk, '_probe_ollama_context', lambda *_a, **_k: {
+        'ok': True, 'context_window': 8192, 'source': 'test_ollama_context'})
     yield
     sdk._TOOLS.clear()
     sdk._TOOLS.update(previous)
@@ -206,6 +210,7 @@ def test_close_runs_post_and_session_end(monkeypatch):
         "SessionEnd": [lambda n, a, c: lifecycle.append(c["finish"])],
     })
     generator = sdk.query("ecoar", options)
+    assert next(generator)["type"] == "usage"
     assert next(generator)["type"] == "tool_use"
     generator.close()
     assert lifecycle == ["PostToolUse", "cancelled"]

@@ -62,7 +62,8 @@ def test_core_compatibility_current_layout():
 
 def test_bridge_help_returns_zero(capsys):
     assert bridge.main(["--help"]) == 0
-    assert "Pesquisador Universal v4.1" in capsys.readouterr().out
+    help_text = capsys.readouterr().out
+    assert "v4.2" in help_text and "fallback v4.1" in help_text
 
 
 def test_dispatch_refuses_unverified_skill(tmp_path):

@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "project": {
+    "id": "quantum-remotion",
+    "title": "Piloto Qiskit Remotion",
+    "fps": 30,
+    "width": 1920,
+    "height": 1080,
+    "sample_rate": 48000
+  },
+  "sources": [
+    {
+      "id": "qiskit",
+      "path": "public/source.mp4",
+      "duration_frames": 600,
+      "width": 1920,
+      "height": 1080,
+      "rights": "authorized"
+    }
+  ],
+  "video": [
+    {
+      "id": "v1",
+      "source": "qiskit",
+      "in_frame": 0,
+      "out_frame": 240,
+      "timeline_start": 0
+    }
+  ],
+  "audio": [
+    {
+      "id": "a1",
+      "source": "qiskit",
+      "in_frame": 0,
+      "out_frame": 240,
+      "timeline_start": 0
+    }
+  ],
+  "captions": [],
+  "output": {
+    "path": "out/remotion-pilot.mp4",
+    "container": "mp4",
+    "video_codec": "h264",
+    "audio_codec": "aac",
+    "loudness_lufs": -16
+  }
+}

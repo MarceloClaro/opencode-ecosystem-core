@@ -1,0 +1,213 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-11-03",
+  "policy": {
+    "default_mode": "check",
+    "apply_requires_yes": true,
+    "sudo": "never_run_automatically",
+    "curl_pipe_shell": "never_run_automatically",
+    "secrets": "never_embedded"
+  },
+  "groups": {
+    "base": "Python, Node, FFmpeg, Tesseract e dependências do Core",
+    "core-cli": "CLIs principais do ecossistema",
+    "media": "Vídeo, áudio, transcrição e animação",
+    "science": "Kaggle, Colab, MiniZinc e dados",
+    "optional": "Executores externos e utilitários"
+  },
+  "entries": [
+    {
+      "id": "python3",
+      "group": "base",
+      "check": ["python3", "--version"],
+      "install": {"kind": "apt", "package": "python3 python3-venv python3-pip"},
+      "license": "PSF-2.0",
+      "auth": false,
+      "notes": "Interpretador do Core."
+    },
+    {
+      "id": "node",
+      "group": "base",
+      "check": ["node", "--version"],
+      "install": {"kind": "apt", "package": "nodejs npm"},
+      "license": "MIT",
+      "auth": false,
+      "notes": "Node 20+ é recomendado para OpenCode/Remotion."
+    },
+    {
+      "id": "ffmpeg",
+      "group": "base",
+      "check": ["ffmpeg", "-version"],
+      "install": {"kind": "apt", "package": "ffmpeg"},
+      "license": "LGPL/GPL conforme build",
+      "auth": false,
+      "notes": "Backend do editor e da dublagem."
+    },
+    {
+      "id": "tesseract",
+      "group": "base",
+      "check": ["tesseract", "--version"],
+      "install": {"kind": "apt", "package": "tesseract-ocr tesseract-ocr-eng"},
+      "license": "Apache-2.0",
+      "auth": false,
+      "notes": "OCR de legendas."
+    },
+    {
+      "id": "uv",
+      "group": "base",
+      "check": ["uv", "--version"],
+      "install": {"kind": "pip", "package": "uv"},
+      "license": "Apache-2.0/MIT",
+      "auth": false,
+      "notes": "Instalador de ferramentas Python."
+    },
+    {
+      "id": "core-venv",
+      "group": "base",
+      "check": [".venv/bin/python", "-c", "import sys; print(sys.version.split()[0])"],
+      "install": {"kind": "requirements", "requirements": "requirements.txt"},
+      "license": "conforme dependências",
+      "auth": false,
+      "notes": "Cria .venv e instala requirements.txt; não usa sudo."
+    },
+    {
+      "id": "opencode",
+      "group": "core-cli",
+      "check": ["opencode", "--version"],
+      "install": {"kind": "npm", "package": "@opencode/cli"},
+      "license": "MIT",
+      "auth": false,
+      "notes": "CLI do host; configuração em opencode.json."
+    },
+    {
+      "id": "claude",
+      "group": "core-cli",
+      "check": ["claude", "--version"],
+      "install": {"kind": "npm", "package": "@anthropic-ai/claude-code"},
+      "license": "Anthropic Commercial Terms",
+      "auth": true,
+      "notes": "Login/conta Anthropic é do operador."
+    },
+    {
+      "id": "gemini",
+      "group": "core-cli",
+      "check": ["gemini", "--version"],
+      "install": {"kind": "npm", "package": "@google/gemini-cli"},
+      "license": "Apache-2.0",
+      "auth": true,
+      "notes": "GEMINI_API_KEY ou Vertex AI; nunca embutir chave."
+    },
+    {
+      "id": "reasonix",
+      "group": "optional",
+      "check": ["reasonix", "--version"],
+      "install": {"kind": "npm", "package": "reasonix"},
+      "license": "MIT",
+      "auth": true,
+      "notes": "DeepSeek API key é do operador."
+    },
+    {
+      "id": "codex",
+      "group": "optional",
+      "check": ["codex", "--version"],
+      "install": {"kind": "npm", "package": "@openai/codex"},
+      "license": "OpenAI Terms",
+      "auth": true,
+      "notes": "A CLI observada neste host é interop Windows; não presumir execução Linux."
+    },
+    {
+      "id": "agy",
+      "group": "optional",
+      "check": ["agy", "--version"],
+      "install": {"kind": "manual", "command": "curl -fsSL https://antigravity.google/cli/install.sh -o /tmp/antigravity-install.sh && sha256sum /tmp/antigravity-install.sh && bash /tmp/antigravity-install.sh"},
+      "license": "Google Antigravity Terms",
+      "auth": true,
+      "notes": "Instalação oficial via script; o one-click não executa pipe-to-shell automaticamente."
+    },
+    {
+      "id": "goose",
+      "group": "optional",
+      "check": ["goose", "--version"],
+      "install": {"kind": "manual", "command": "Consulte https://goose-docs.ai/docs/getting-started/installation; baixe, confira o hash e execute o script local."},
+      "license": "Apache-2.0",
+      "auth": true,
+      "notes": "Provider/conta é do operador."
+    },
+    {
+      "id": "plandex",
+      "group": "optional",
+      "check": ["plandex", "version"],
+      "install": {"kind": "manual", "command": "Consulte https://github.com/plandex-ai/plandex#install; baixe, confira o hash e execute o script local."},
+      "license": "MIT",
+      "auth": true,
+      "notes": "Cloud encerrado; usar local/BYO key."
+    },
+    {
+      "id": "ollama",
+      "group": "media",
+      "check": ["ollama", "--version"],
+      "install": {"kind": "manual", "command": "Consulte https://ollama.com/download; instale o binário oficial e valide a versão."},
+      "license": "MIT",
+      "auth": false,
+      "notes": "Modelos ocupam disco; não baixar sem escolha."
+    },
+    {
+      "id": "remotion",
+      "group": "media",
+      "check": ["./node_modules/.bin/remotion", "--version"],
+      "ok_if": "@remotion/cli",
+      "timeout": 20,
+      "cwd": "editor-workspace/remotion-smoke",
+      "install": {"kind": "manual", "command": "cd editor-workspace/remotion-smoke && npm install --ignore-scripts"},
+      "license": "Remotion License (custom)",
+      "auth": false,
+      "notes": "Exige aceite de host e aprovação de render; ver reports/r1043/remotion-install-receipt.json."
+    },
+    {
+      "id": "colab",
+      "group": "science",
+      "check": ["colab", "--help"],
+      "ok_if": "Usage: colab",
+      "install": {"kind": "uv", "package": "google-colab-cli"},
+      "license": "Apache-2.0",
+      "auth": true,
+      "notes": "Consome compute units; login do operador."
+    },
+    {
+      "id": "kaggle",
+      "group": "science",
+      "check": ["kaggle", "--version"],
+      "install": {"kind": "pip", "package": "kaggle"},
+      "license": "Apache-2.0",
+      "auth": true,
+      "notes": "Requer kaggle.json do operador."
+    },
+    {
+      "id": "nlm",
+      "group": "science",
+      "check": ["nlm", "--version"],
+      "install": {"kind": "uv", "package": "notebooklm-mcp-cli"},
+      "license": "MIT",
+      "auth": true,
+      "notes": "Login/cookies do Gemini Notebook são do operador."
+    },
+    {
+      "id": "minizinc",
+      "group": "science",
+      "check": ["minizinc", "--version"],
+      "install": {"kind": "apt", "package": "minizinc"},
+      "license": "MPL-2.0",
+      "auth": false,
+      "notes": "Solver local; Python mcp é separado."
+    },
+    {
+      "id": "minizinc-python",
+      "group": "science",
+      "check": [".venv/bin/python", "-c", "import minizinc; print(minizinc.__version__)"],
+      "install": {"kind": "venv-pip", "package": "mcp pydantic minizinc"},
+      "license": "MIT/Apache-2.0",
+      "auth": false,
+      "notes": "Ponte MCP local."
+    }
+  ]
+}

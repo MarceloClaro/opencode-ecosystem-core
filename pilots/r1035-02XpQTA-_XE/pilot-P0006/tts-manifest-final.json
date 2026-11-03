@@ -1,0 +1,511 @@
+{
+  "schema_version": 1,
+  "part_id": "02XpQTA-_XE-P0006",
+  "engine": "XTTS v2 CPU; Demucs-clean refs for male/ruya/mother; stable ref for cagla",
+  "voice_gate": {
+    "status": "voice_assignment_valid_pending_native_and_audiovisual_review",
+    "registry_sha256": "bbfc959dead573e652463fb845e09b9091c362f7366265371a15aea4e649ad9f",
+    "mapping_sha256": "bdfab40650c39a640867a5e51ed31ae5423af473be5636f336f9180050220b1c",
+    "characters": [
+      "char_cagla",
+      "char_male_a",
+      "char_mother",
+      "char_ruya"
+    ]
+  },
+  "status": "tts_generated_pending_audiovisual_review",
+  "identity_verified": false,
+  "turns": [
+    {
+      "id": "T001",
+      "character_id": "char_male_a",
+      "speaker": "spk1",
+      "unit_ids": [
+        "U0001"
+      ],
+      "text": "Inacreditável.",
+      "reference": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1035-02XpQTA-_XE/pilot-P0006/references-clean/char_male_a.wav",
+      "reference_sha256": "0ac82734171700464a84c61486229efcd0e7cebd2e33ac9734c83dd9acbbe6bc",
+      "available_seconds": 7.89,
+      "slot_seconds": 0.92,
+      "start_part": 0.44,
+      "end_part": 1.36,
+      "final_seconds": 2.057,
+      "artifact": "pilot-P0006/tts-v3/T001.wav",
+      "sha256": "2c997826e329b65ba53036931ac45fbde04473e471cd3fa2c764fb271d3c2319",
+      "atempo": 1.0,
+      "overrun": false,
+      "registry_sha256": "bbfc959dead573e652463fb845e09b9091c362f7366265371a15aea4e649ad9f"
+    },
+    {
+      "id": "T002",
+      "character_id": "char_cagla",
+      "speaker": "spk2",
+      "unit_ids": [
+        "U0002"
+      ],
+      "text": "Não faça isso.",
+      "reference": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1035-02XpQTA-_XE/pilot-P0006/references/spk2.wav",
+      "reference_sha256": "443e219710d87b5024f22bff0291e11ba0c3f83b1f32d143e0f5a6bbd0877781",
+      "available_seconds": 2.16,
+      "slot_seconds": 1.18,
+      "start_part": 8.33,
+      "end_part": 9.51,
+      "final_seconds": 1.738,
+      "artifact": "pilot-P0006/tts-v2/U0002.wav",
+      "sha256": "e5580ccd32812c3cfb15289cd4daaf3fe98ecc5288fb789099c9b2e6e277b41d",
+      "atempo": 1.0,
+      "overrun": false,
+      "registry_sha256": "bbfc959dead573e652463fb845e09b9091c362f7366265371a15aea4e649ad9f"
+    },
+    {
+      "id": "T003A",
+      "character_id": "char_male_a",
+      "speaker": "spk1",
+      "unit_ids": [
+        "U0003"
+      ],
+      "text": "Não se estresse tanto, calma.",
+      "reference": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1035-02XpQTA-_XE/pilot-P0006/references-clean/char_male_a.wav",
+      "reference_sha256": "0ac82734171700464a84c61486229efcd0e7cebd2e33ac9734c83dd9acbbe6bc",
+      "available_seconds": 3.02,
+      "slot_seconds": 2.34,
+      "start_part": 10.49,
+      "end_part": 12.83,
+      "final_seconds": 2.118,
+      "artifact": "pilot-P0006/tts-final/T003A.wav",
+      "sha256": "f6f67f65b26e69d3b810804b07de38f7e3d0018a51bb8b320305e7ee771044e2",
+      "atempo": 1.0,
+      "overrun": false,
+      "registry_sha256": "bbfc959dead573e652463fb845e09b9091c362f7366265371a15aea4e649ad9f"
+    },
+    {
+      "id": "T003B",
+      "character_id": "char_male_a",
+      "speaker": "spk1",
+      "unit_ids": [
+        "U0004"
+      ],
+      "text": "Aprenda a se divertir; se não der, ao menos demonstre.",
+      "reference": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1035-02XpQTA-_XE/pilot-P0006/references-clean/char_male_a.wav",
+      "reference_sha256": "0ac82734171700464a84c61486229efcd0e7cebd2e33ac9734c83dd9acbbe6bc",
+      "available_seconds": 5.58,
+      "slot_seconds": 3.9,
+      "start_part": 13.51,
+      "end_part": 17.41,
+      "final_seconds": 4.825,
+      "artifact": "pilot-P0006/tts-final/T003B.wav",
+      "sha256": "c9cf8bd9785dd2ee5f71c4a6f0693e57df21915b4b368cf508135f756f83edca",
+      "atempo": 1.0,
+      "overrun": false,
+      "registry_sha256": "bbfc959dead573e652463fb845e09b9091c362f7366265371a15aea4e649ad9f"
+    },
+    {
+      "id": "T004",
+      "character_id": "char_cagla",
+      "speaker": "spk2",
+      "unit_ids": [
+        "U0005"
+      ],
+      "text": "Você está me machucando.",
+      "reference": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1035-02XpQTA-_XE/pilot-P0006/references/spk2.wav",
+      "reference_sha256": "443e219710d87b5024f22bff0291e11ba0c3f83b1f32d143e0f5a6bbd0877781",
+      "available_seconds": 2.34,
+      "slot_seconds": 1.28,
+      "start_part": 19.09,
+      "end_part": 20.37,
+      "final_seconds": 2.408,
+      "artifact": "pilot-P0006/tts-v2/U0005.wav",
+      "sha256": "e8278d811c1448e2d1ac77b574b2cd770aa8c029b1f6a2fce89b22235183194a",
+      "atempo": 1.364592,
+      "overrun": false,
+      "registry_sha256": "bbfc959dead573e652463fb845e09b9091c362f7366265371a15aea4e649ad9f"
+    },
+    {
+      "id": "T005",
+      "character_id": "char_male_a",
+      "speaker": "spk1",
+      "unit_ids": [
+        "U0006"
+      ],
+      "text": "Çağla, vá se tratar. Você é insuportável.",
+      "reference": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1035-02XpQTA-_XE/pilot-P0006/references-clean/char_male_a.wav",
+      "reference_sha256": "0ac82734171700464a84c61486229efcd0e7cebd2e33ac9734c83dd9acbbe6bc",
+      "available_seconds": 9.99,
+      "slot_seconds": 3.12,
+      "start_part": 21.43,
+      "end_part": 24.55,
+      "final_seconds": 3.548,
+      "artifact": "pilot-P0006/tts-v3/T005.wav",
+      "sha256": "e1fb618fe0dfff2e1632b1f5bf45d89010442581135c2574f7c6a47cab80f398",
+      "atempo": 1.0,
+      "overrun": false,
+      "registry_sha256": "bbfc959dead573e652463fb845e09b9091c362f7366265371a15aea4e649ad9f"
+    },
+    {
+      "id": "T006",
+      "character_id": "char_cagla",
+      "speaker": "spk2",
+      "unit_ids": [
+        "U0007"
+      ],
+      "text": "Rüya, como você está?",
+      "reference": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1035-02XpQTA-_XE/pilot-P0006/references/spk2.wav",
+      "reference_sha256": "443e219710d87b5024f22bff0291e11ba0c3f83b1f32d143e0f5a6bbd0877781",
+      "available_seconds": 1.96,
+      "slot_seconds": 1.66,
+      "start_part": 31.42,
+      "end_part": 33.08,
+      "final_seconds": 1.767,
+      "artifact": "pilot-P0006/tts-v2/U0007.wav",
+      "sha256": "906acc75a3b4227852b389fe6c934378972f8a8b05ff56831146e8334967ad15",
+      "atempo": 1.0,
+      "overrun": false,
+      "registry_sha256": "bbfc959dead573e652463fb845e09b9091c362f7366265371a15aea4e649ad9f"
+    },
+    {
+      "id": "T007",
+      "character_id": "char_ruya",
+      "speaker": "spk3",
+      "unit_ids": [
+        "U0008"
+      ],
+      "text": "Bem, e você?",
+      "reference": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1035-02XpQTA-_XE/pilot-P0006/references-clean/char_ruya.wav",
+      "reference_sha256": "1e09ae9a55ea8985eb6fca8965e515a1a4bb51d1550337cab94704c77506b683",
+      "available_seconds": 1.0,
+      "slot_seconds": 0.86,
+      "start_part": 33.38,
+      "end_part": 34.24,
+      "final_seconds": 1.096,
+      "artifact": "pilot-P0006/tts-v3/T007.wav",
+      "sha256": "6e460066bf100ce5fe3a0172cda73a46eba1ec8ebef05ba54aa3a80479925574",
+      "atempo": 1.0,
+      "overrun": false,
+      "registry_sha256": "bbfc959dead573e652463fb845e09b9091c362f7366265371a15aea4e649ad9f"
+    },
+    {
+      "id": "T008",
+      "character_id": "char_cagla",
+      "speaker": "spk2",
+      "unit_ids": [
+        "U0009"
+      ],
+      "text": "Bem. E aí?",
+      "reference": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1035-02XpQTA-_XE/pilot-P0006/references/spk2.wav",
+      "reference_sha256": "443e219710d87b5024f22bff0291e11ba0c3f83b1f32d143e0f5a6bbd0877781",
+      "available_seconds": 1.08,
+      "slot_seconds": 0.84,
+      "start_part": 34.38,
+      "end_part": 35.22,
+      "final_seconds": 1.096,
+      "artifact": "pilot-P0006/tts-v2/U0009.wav",
+      "sha256": "342dfdcd1530c274513223539fc3e099d4b31b88e37ce9d4d9480ada8b5177b0",
+      "atempo": 1.0,
+      "overrun": false,
+      "registry_sha256": "bbfc959dead573e652463fb845e09b9091c362f7366265371a15aea4e649ad9f"
+    },
+    {
+      "id": "T009",
+      "character_id": "char_ruya",
+      "speaker": "spk3",
+      "unit_ids": [
+        "U0010"
+      ],
+      "text": "Está indo bem.",
+      "reference": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1035-02XpQTA-_XE/pilot-P0006/references-clean/char_ruya.wav",
+      "reference_sha256": "1e09ae9a55ea8985eb6fca8965e515a1a4bb51d1550337cab94704c77506b683",
+      "available_seconds": 1.6,
+      "slot_seconds": 1.08,
+      "start_part": 35.46,
+      "end_part": 36.54,
+      "final_seconds": 0.838,
+      "artifact": "pilot-P0006/tts-v3/T009.wav",
+      "sha256": "4d80ec0d530e5afbb3acf585ebf925381ed1474bfb7ec38e1ef5650fd6bfc9f0",
+      "atempo": 1.0,
+      "overrun": false,
+      "registry_sha256": "bbfc959dead573e652463fb845e09b9091c362f7366265371a15aea4e649ad9f"
+    },
+    {
+      "id": "T010",
+      "character_id": "char_cagla",
+      "speaker": "spk2",
+      "unit_ids": [
+        "U0011"
+      ],
+      "text": "E você?",
+      "reference": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1035-02XpQTA-_XE/pilot-P0006/references/spk2.wav",
+      "reference_sha256": "443e219710d87b5024f22bff0291e11ba0c3f83b1f32d143e0f5a6bbd0877781",
+      "available_seconds": 0.78,
+      "slot_seconds": 0.64,
+      "start_part": 37.06,
+      "end_part": 37.7,
+      "final_seconds": 0.836,
+      "artifact": "pilot-P0006/tts-v2/U0011.wav",
+      "sha256": "ca78320eb703c0b2ac41c775f683fac01276fae9531b8298edd0a772fd98fa42",
+      "atempo": 1.328816,
+      "overrun": false,
+      "registry_sha256": "bbfc959dead573e652463fb845e09b9091c362f7366265371a15aea4e649ad9f"
+    },
+    {
+      "id": "T011",
+      "character_id": "char_ruya",
+      "speaker": "spk3",
+      "unit_ids": [
+        "U0012"
+      ],
+      "text": "O mesmo.",
+      "reference": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1035-02XpQTA-_XE/pilot-P0006/references-clean/char_ruya.wav",
+      "reference_sha256": "1e09ae9a55ea8985eb6fca8965e515a1a4bb51d1550337cab94704c77506b683",
+      "available_seconds": 1.26,
+      "slot_seconds": 0.56,
+      "start_part": 37.84,
+      "end_part": 38.4,
+      "final_seconds": 1.722,
+      "artifact": "pilot-P0006/tts-v3/T011.wav",
+      "sha256": "d679eeed7117601b30a359bd9d8f668b299eb46ca8feabed8bd6c4c587d81ed4",
+      "atempo": 1.15,
+      "overrun": true,
+      "registry_sha256": "bbfc959dead573e652463fb845e09b9091c362f7366265371a15aea4e649ad9f"
+    },
+    {
+      "id": "T012",
+      "character_id": "char_cagla",
+      "speaker": "spk2",
+      "unit_ids": [
+        "U0013"
+      ],
+      "text": "Rüya, vamos embora.",
+      "reference": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1035-02XpQTA-_XE/pilot-P0006/references/spk2.wav",
+      "reference_sha256": "443e219710d87b5024f22bff0291e11ba0c3f83b1f32d143e0f5a6bbd0877781",
+      "available_seconds": 3.12,
+      "slot_seconds": 1.9,
+      "start_part": 39.1,
+      "end_part": 41.0,
+      "final_seconds": 1.528,
+      "artifact": "pilot-P0006/tts-v2/U0013.wav",
+      "sha256": "0a1244365e63100825e0399f286d31da85ff22697f83bb73b2f83b891ce13f4a",
+      "atempo": 1.0,
+      "overrun": false,
+      "registry_sha256": "bbfc959dead573e652463fb845e09b9091c362f7366265371a15aea4e649ad9f"
+    },
+    {
+      "id": "T013",
+      "character_id": "char_ruya",
+      "speaker": "spk3",
+      "unit_ids": [
+        "U0014"
+      ],
+      "text": "Por quê?",
+      "reference": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1035-02XpQTA-_XE/pilot-P0006/references-clean/char_ruya.wav",
+      "reference_sha256": "1e09ae9a55ea8985eb6fca8965e515a1a4bb51d1550337cab94704c77506b683",
+      "available_seconds": 1.02,
+      "slot_seconds": 0.88,
+      "start_part": 42.22,
+      "end_part": 43.1,
+      "final_seconds": 0.775,
+      "artifact": "pilot-P0006/tts-v3/T013.wav",
+      "sha256": "d27c607d72251a51d028a4fb7168047b7b462f07f7710a459c049434a1d143c3",
+      "atempo": 1.0,
+      "overrun": false,
+      "registry_sha256": "bbfc959dead573e652463fb845e09b9091c362f7366265371a15aea4e649ad9f"
+    },
+    {
+      "id": "T014",
+      "character_id": "char_cagla",
+      "speaker": "spk2",
+      "unit_ids": [
+        "U0015"
+      ],
+      "text": "Por quê? Por quê? Por quê?",
+      "reference": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1035-02XpQTA-_XE/pilot-P0006/references/spk2.wav",
+      "reference_sha256": "443e219710d87b5024f22bff0291e11ba0c3f83b1f32d143e0f5a6bbd0877781",
+      "available_seconds": 2.28,
+      "slot_seconds": 1.54,
+      "start_part": 43.24,
+      "end_part": 44.78,
+      "final_seconds": 2.345,
+      "artifact": "pilot-P0006/tts-v2/U0015.wav",
+      "sha256": "985a3dbb7085eae46677e1dccc86ccf419d3d9f33ad7b032a16b25c82ff82c29",
+      "atempo": 1.176591,
+      "overrun": false,
+      "registry_sha256": "bbfc959dead573e652463fb845e09b9091c362f7366265371a15aea4e649ad9f"
+    },
+    {
+      "id": "T015",
+      "character_id": "char_ruya",
+      "speaker": "spk3",
+      "unit_ids": [
+        "U0016"
+      ],
+      "text": "Estou entediada. Vamos.",
+      "reference": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1035-02XpQTA-_XE/pilot-P0006/references-clean/char_ruya.wav",
+      "reference_sha256": "1e09ae9a55ea8985eb6fca8965e515a1a4bb51d1550337cab94704c77506b683",
+      "available_seconds": 3.98,
+      "slot_seconds": 0.96,
+      "start_part": 45.52,
+      "end_part": 46.48,
+      "final_seconds": 3.207,
+      "artifact": "pilot-P0006/tts-v3/T015.wav",
+      "sha256": "227b650434d8e2dcde1ba9c12b2e9f816e9f40ad4c60cbe9ed531dfa792b8a89",
+      "atempo": 1.0,
+      "overrun": false,
+      "registry_sha256": "bbfc959dead573e652463fb845e09b9091c362f7366265371a15aea4e649ad9f"
+    },
+    {
+      "id": "T016",
+      "character_id": "char_cagla",
+      "speaker": "spk2",
+      "unit_ids": [
+        "U0017"
+      ],
+      "text": "Também cansei de você, amiga.",
+      "reference": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1035-02XpQTA-_XE/pilot-P0006/references/spk2.wav",
+      "reference_sha256": "443e219710d87b5024f22bff0291e11ba0c3f83b1f32d143e0f5a6bbd0877781",
+      "available_seconds": 7.15,
+      "slot_seconds": 1.76,
+      "start_part": 49.5,
+      "end_part": 51.26,
+      "final_seconds": 2.959,
+      "artifact": "pilot-P0006/tts-v2/U0017.wav",
+      "sha256": "6055ff11df70989312dade902ad837523615a4b6536e353e223771fb4cf9ea11",
+      "atempo": 1.0,
+      "overrun": false,
+      "registry_sha256": "bbfc959dead573e652463fb845e09b9091c362f7366265371a15aea4e649ad9f"
+    },
+    {
+      "id": "T017",
+      "character_id": "char_mother",
+      "speaker": "spk4",
+      "unit_ids": [
+        "U0018",
+        "U0019",
+        "U0020"
+      ],
+      "text": "Alô, Çağla. Por que não atende? Ligo há horas, quase enlouqueci.",
+      "reference": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1035-02XpQTA-_XE/pilot-P0006/references-clean/char_mother.wav",
+      "reference_sha256": "957ef8aa8330cc776a99a03fbc0f14c5383a27e8322020a8fa7621b02c9555ea",
+      "available_seconds": 5.3,
+      "slot_seconds": 4.52,
+      "start_part": 56.65,
+      "end_part": 61.17,
+      "final_seconds": 5.354,
+      "artifact": "pilot-P0006/tts-v3/T017.wav",
+      "sha256": "d69d9993bb707fdc371d3550af22836660699bc477990b9b56d5213a4fd088be",
+      "atempo": 1.13148,
+      "overrun": false,
+      "registry_sha256": "bbfc959dead573e652463fb845e09b9091c362f7366265371a15aea4e649ad9f"
+    },
+    {
+      "id": "T018",
+      "character_id": "char_cagla",
+      "speaker": "spk2",
+      "unit_ids": [
+        "U0021"
+      ],
+      "text": "Nada, mãe. Está tudo bem.",
+      "reference": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1035-02XpQTA-_XE/pilot-P0006/references/spk2.wav",
+      "reference_sha256": "443e219710d87b5024f22bff0291e11ba0c3f83b1f32d143e0f5a6bbd0877781",
+      "available_seconds": 2.22,
+      "slot_seconds": 1.72,
+      "start_part": 61.95,
+      "end_part": 63.67,
+      "final_seconds": 2.045,
+      "artifact": "pilot-P0006/tts-v2/U0021.wav",
+      "sha256": "3d30ad89782631fb298a1902d4e0edd0773331c01405d070d74b72c8913cdd01",
+      "atempo": 1.0,
+      "overrun": false,
+      "registry_sha256": "bbfc959dead573e652463fb845e09b9091c362f7366265371a15aea4e649ad9f"
+    },
+    {
+      "id": "T019",
+      "character_id": "char_mother",
+      "speaker": "spk4",
+      "unit_ids": [
+        "U0022"
+      ],
+      "text": "Alaz?",
+      "reference": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1035-02XpQTA-_XE/pilot-P0006/references-clean/char_mother.wav",
+      "reference_sha256": "957ef8aa8330cc776a99a03fbc0f14c5383a27e8322020a8fa7621b02c9555ea",
+      "available_seconds": 1.12,
+      "slot_seconds": 0.28,
+      "start_part": 64.17,
+      "end_part": 64.45,
+      "final_seconds": 0.673,
+      "artifact": "pilot-P0006/tts-v3/T019.wav",
+      "sha256": "5537a2bc131047f32852708d971936137f1028d4786de6c55caed663ddb5bc5a",
+      "atempo": 1.0,
+      "overrun": false,
+      "registry_sha256": "bbfc959dead573e652463fb845e09b9091c362f7366265371a15aea4e649ad9f"
+    },
+    {
+      "id": "T020",
+      "character_id": "char_cagla",
+      "speaker": "spk2",
+      "unit_ids": [
+        "U0023"
+      ],
+      "text": "Alaz está bem. De bom humor.",
+      "reference": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1035-02XpQTA-_XE/pilot-P0006/references/spk2.wav",
+      "reference_sha256": "443e219710d87b5024f22bff0291e11ba0c3f83b1f32d143e0f5a6bbd0877781",
+      "available_seconds": 2.92,
+      "slot_seconds": 1.96,
+      "start_part": 65.29,
+      "end_part": 67.25,
+      "final_seconds": 2.827,
+      "artifact": "pilot-P0006/tts-v2/U0023.wav",
+      "sha256": "b533dc9a79951b47143cb24db37deb09a77c2e385419e54a9b119c204cf1b44c",
+      "atempo": 1.0,
+      "overrun": false,
+      "registry_sha256": "bbfc959dead573e652463fb845e09b9091c362f7366265371a15aea4e649ad9f"
+    },
+    {
+      "id": "T021",
+      "character_id": "char_mother",
+      "speaker": "spk4",
+      "unit_ids": [
+        "U0024",
+        "U0025"
+      ],
+      "text": "Sua voz está estranha. Algo errado?",
+      "reference": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1035-02XpQTA-_XE/pilot-P0006/references-clean/char_mother.wav",
+      "reference_sha256": "957ef8aa8330cc776a99a03fbc0f14c5383a27e8322020a8fa7621b02c9555ea",
+      "available_seconds": 2.92,
+      "slot_seconds": 2.36,
+      "start_part": 68.21,
+      "end_part": 70.57,
+      "final_seconds": 2.993,
+      "artifact": "pilot-P0006/tts-v3/T021.wav",
+      "sha256": "9e2be7a8a8cd5898d639e2ab9bbe0fe3974b9678503a7c4e92867d105a545a7a",
+      "atempo": 1.0,
+      "overrun": false,
+      "registry_sha256": "bbfc959dead573e652463fb845e09b9091c362f7366265371a15aea4e649ad9f"
+    },
+    {
+      "id": "T022",
+      "character_id": "char_cagla",
+      "speaker": "spk2",
+      "unit_ids": [
+        "U0026"
+      ],
+      "text": "Mãe, nada. Só estamos nos divertindo.",
+      "reference": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1035-02XpQTA-_XE/pilot-P0006/references/spk2.wav",
+      "reference_sha256": "443e219710d87b5024f22bff0291e11ba0c3f83b1f32d143e0f5a6bbd0877781",
+      "available_seconds": 3.31,
+      "slot_seconds": 2.66,
+      "start_part": 71.13,
+      "end_part": 73.79,
+      "final_seconds": 3.365,
+      "artifact": "pilot-P0006/tts-v2/U0026.wav",
+      "sha256": "61284fa9aea3917b957386a9077fe29e2c8a1374841921fa61bdf604ddce1e54",
+      "atempo": 1.357651,
+      "overrun": false,
+      "registry_sha256": "bbfc959dead573e652463fb845e09b9091c362f7366265371a15aea4e649ad9f"
+    }
+  ],
+  "limitations": [
+    "one reference per character",
+    "cagla uses the stable original reference; clean Demucs ref was unstable",
+    "no native-speaker, lip sync or audiovisual approval"
+  ]
+}

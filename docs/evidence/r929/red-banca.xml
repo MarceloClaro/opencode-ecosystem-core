@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.851" timestamp="2026-10-19T07:12:08.588618-03:00" hostname="OPENCODE"><testcase classname="tests.test_r929_core_regressions" name="test_unimplemented_banca_rating_is_an_explicit_contract_refusal" time="0.040"><failure message="AttributeError: 'types.SimpleNamespace' object has no attribute 'rate'">tests/test_r929_core_regressions.py:205: in test_unimplemented_banca_rating_is_an_explicit_contract_refusal
+    service.action(config)
+academic/adversarial_research/service.py:314: in action
+    if op=='banca_rate': return self.sessions.rate(sid,config['criterion_id'],config['score'],config['answer_turn_ids'],config['justification'],config['reviewer_id'])
+                                ^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'types.SimpleNamespace' object has no attribute 'rate'</failure></testcase></testsuite></testsuites>

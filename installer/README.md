@@ -6,6 +6,20 @@ Este guia deliberadamente não oferece comandos que encaminhem conteúdo de rede
 > diferentes dos esperados. Ela não constitui certificação externa nem garantia
 > de segurança, funcionamento ou adequação.
 
+## Atalho one-click (conveniência)
+
+Para um inventário e instalação de bibliotecas/CLIs sem editar comandos:
+
+```bash
+./install.sh --check
+./install.sh --apply --yes
+```
+
+O padrão não altera nada; `--apply` exige `--yes` e só executa npm/pip/uv/venv.
+`sudo`, `apt` e scripts oficiais `curl | bash` são impressos para revisão.
+Detalhes e limites: [ONECLICK.md](ONECLICK.md). O fluxo fail-closed com hashes
+abaixo continua sendo o caminho para instalação verificada por procedência.
+
 ## Dados de procedência obrigatórios
 
 Antes da instalação, obtenha de um manifesto de versão revisado e independente do canal de download os dados a seguir.
@@ -80,7 +94,7 @@ Esses números devem ser reavaliados no checkout instalado e não representam
 resultado de testes, cobertura ou validação externa.
 
 <!-- core-state:start -->
-**329 agentes** · **18 MCPs** · **34 comandos** · **22 checks**
+**333 agentes** · **29 MCPs** · **35 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](../opencode.json) e do [diagnóstico estrutural](../marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 

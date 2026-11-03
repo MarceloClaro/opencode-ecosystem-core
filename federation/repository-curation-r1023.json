@@ -1,0 +1,689 @@
+{
+  "schema_version": "r1023.v1",
+  "collected_at": "2026-11-02T01:05:00+00:00",
+  "repositories": [
+    {
+      "repo": "remotion-dev/codex-plugin",
+      "canonical_repo": "remotion-dev/codex-plugin",
+      "description": "Remotion OpenAI Codex Plugin",
+      "commit": "d65ee2b49d83dd9259f101cf1ebeecd036ef904c",
+      "default_branch": "main",
+      "inspection_status": "inspected",
+      "audit_scope": "Metadados GitHub e documentos listados; nenhum clone, build ou execução.",
+      "license_api": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit",
+        "node_id": "MDc6TGljZW5zZTEz"
+      },
+      "installed": false,
+      "executed": false,
+      "documents": [
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/remotion-dev/codex-plugin/d65ee2b49d83dd9259f101cf1ebeecd036ef904c/README.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T00:58:37.345065+00:00",
+          "bytes": 90,
+          "sha256": "88765cd4acc951d3ad219cec80a37fa3e76c4867110839c5a1f98a3da303ff86"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/remotion-dev/codex-plugin/d65ee2b49d83dd9259f101cf1ebeecd036ef904c/LICENSE",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T00:58:37.679787+00:00",
+          "bytes": 1065,
+          "sha256": "1df205bece1fe707f818658a104844aba9a783e43f716642f5bf1286c18263c0"
+        },
+        {
+          "path": "skills/remotion-best-practices/SKILL.md",
+          "url": "https://raw.githubusercontent.com/remotion-dev/codex-plugin/d65ee2b49d83dd9259f101cf1ebeecd036ef904c/skills/remotion-best-practices/SKILL.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:04:41.121679+00:00",
+          "bytes": 4572,
+          "sha256": "c2faf27377d49ab3aab2c063b0fb3076a0691fe2cbf14719a9fa06dba90d3a29"
+        },
+        {
+          "path": "skills/remotion-best-practices/remotion-captions/REFERENCE.md",
+          "url": "https://raw.githubusercontent.com/remotion-dev/codex-plugin/d65ee2b49d83dd9259f101cf1ebeecd036ef904c/skills/remotion-best-practices/remotion-captions/REFERENCE.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:04:41.153441+00:00",
+          "bytes": 1152,
+          "sha256": "108fc39c3bd31dd4635d3ea674af7e4a1ce7c626c25363a04b9d23a10a58b262"
+        }
+      ],
+      "decision": "reference_only",
+      "license_declared": "MIT",
+      "license_basis": "LICENSE do repositório, no commit fixado",
+      "license_scope": "Código e textos da skill Remotion; mídia, marca e serviços Remotion não são licenciados por este repositório.",
+      "reason": "O guia oficial da skill Remotion mostra que a prévia interativa deve preceder a renderização e que renderizar exige pedido explícito; isso reforça a salvaguarda dos fluxos cp-* sem instalar Remotion.",
+      "limitations": [
+        "A skill não foi instalada nem executada; comandos npx não foram rodados.",
+        "A licença MIT cobre o plugin, não o produto Remotion nem modelos/pacotes de terceiros.",
+        "Não há prova de que o Studio abre neste host."
+      ],
+      "core_paths": [
+        "docs/CURADORIA_REPOS_R1023.md",
+        ".claude/skills/cp-direcao-de-edicao/references/curadoria-r1023.md"
+      ]
+    },
+    {
+      "repo": "remotion-dev/chromium",
+      "canonical_repo": "remotion-dev/chromium",
+      "description": "The official GitHub mirror of the Chromium source",
+      "commit": "d6809fb4549c9496e05af7559c448349c6c36ff1",
+      "default_branch": "main",
+      "inspection_status": "inspected",
+      "audit_scope": "Metadados GitHub e documentos listados; nenhum clone, build ou execução.",
+      "license_api": {
+        "key": "bsd-3-clause",
+        "name": "BSD 3-Clause \"New\" or \"Revised\" License",
+        "spdx_id": "BSD-3-Clause",
+        "url": "https://api.github.com/licenses/bsd-3-clause",
+        "node_id": "MDc6TGljZW5zZTU="
+      },
+      "installed": false,
+      "executed": false,
+      "documents": [
+        {
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/remotion-dev/chromium/d6809fb4549c9496e05af7559c448349c6c36ff1/LICENSE",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T00:59:49.802623+00:00",
+          "bytes": 1536,
+          "sha256": "368cca1106be99d39ecd32a38d8305585d802a475effb66380b91ffc9bcf709b"
+        },
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/remotion-dev/chromium/d6809fb4549c9496e05af7559c448349c6c36ff1/README.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T00:59:50.108333+00:00",
+          "bytes": 969,
+          "sha256": "688b066ecaa8dff767466cafd66f59e484b71f3d4d341ba6c8212bb28c4305e6"
+        }
+      ],
+      "decision": "deferred",
+      "license_declared": "BSD-3-Clause",
+      "license_basis": "LICENSE e LICENSE.chromium_os na raiz; metadados GitHub confirmam BSD-3-Clause",
+      "license_scope": "Espelho do código Chromium; componentes de terceiros mantêm termos próprios.",
+      "reason": "É espelho do Chromium, com árvore imensa e finalidade de navegador; o Core já possui Playwright/Chromium instalados. Nenhuma necessidade concreta justifica clone, build ou redistribuição nesta rodada.",
+      "limitations": [
+        "Somente raiz e LICENSE/README foram lidos; árvore recursiva excedeu 2 MB e não foi auditada.",
+        "Não é um plugin Remotion e não será instalado.",
+        "Compilar Chromium não foi avaliado e não deve ser presumido."
+      ],
+      "core_paths": [
+        "docs/CURADORIA_REPOS_R1023.md"
+      ]
+    },
+    {
+      "repo": "deepseek-ai/dsh-superagent-prototype",
+      "canonical_repo": "deepseek-ai/dsh-superagent-prototype",
+      "description": "Towards a More Autonomous Agent System",
+      "commit": "6337fc823ce20251c8de8085948165c81aaa701e",
+      "default_branch": "main",
+      "inspection_status": "inspected",
+      "audit_scope": "Metadados GitHub e documentos listados; nenhum clone, build ou execução.",
+      "license_api": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit",
+        "node_id": "MDc6TGljZW5zZTEz"
+      },
+      "installed": false,
+      "executed": false,
+      "documents": [
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/deepseek-ai/dsh-superagent-prototype/6337fc823ce20251c8de8085948165c81aaa701e/README.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T00:58:37.716584+00:00",
+          "bytes": 2571,
+          "sha256": "737997cf5b7d4129f12ed5485ebbdd5e9d2ce3859a82ded6ac535d222327b713"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/deepseek-ai/dsh-superagent-prototype/6337fc823ce20251c8de8085948165c81aaa701e/LICENSE",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T00:58:37.967098+00:00",
+          "bytes": 1078,
+          "sha256": "6d66f91815b720e18cfb2b3552043a0359236aec9a1a6917787900546f6ce550"
+        },
+        {
+          "path": "package.json",
+          "url": "https://raw.githubusercontent.com/deepseek-ai/dsh-superagent-prototype/6337fc823ce20251c8de8085948165c81aaa701e/package.json",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T00:58:38.266139+00:00",
+          "bytes": 4693,
+          "sha256": "f5170d812137dd370c568decb481e19f4da9a3d1fd7bad341a0f07942020a559"
+        },
+        {
+          "path": "docs/002-authorization.md",
+          "url": "https://raw.githubusercontent.com/deepseek-ai/dsh-superagent-prototype/6337fc823ce20251c8de8085948165c81aaa701e/docs/002-authorization.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:04:41.125703+00:00",
+          "bytes": 13372,
+          "sha256": "85f559708ac7faef89f88fcad30a405ca62a582a15764a7293686071e609dea0"
+        },
+        {
+          "path": "docs/003-execution.md",
+          "url": "https://raw.githubusercontent.com/deepseek-ai/dsh-superagent-prototype/6337fc823ce20251c8de8085948165c81aaa701e/docs/003-execution.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:04:41.091944+00:00",
+          "bytes": 17389,
+          "sha256": "049aa22a717f75b9dec4cd6969356db6f736c127de4501c3ce1f6d846217f6eb"
+        }
+      ],
+      "decision": "reference_only",
+      "license_declared": "MIT",
+      "license_basis": "LICENSE e package.json; metadados GitHub confirmam MIT",
+      "license_scope": "Código e documentos do protótipo de pesquisa; não é produto oficial DeepSeek.",
+      "reason": "Os documentos 002/003 explicitam mandato, admissão, retry, revalidação antes de retomar e separação entre entregar mensagem e conceder autoridade. O Core já separa execução incerta de retomada; a referência documenta a mesma fronteira.",
+      "limitations": [
+        "Protótipo declarado como research code, não produção.",
+        "Não foi instalado nem executado; dependências dsh/alpha não foram avaliadas.",
+        "A leitura cobre apenas README, 002 e 003; o código TypeScript não foi auditado."
+      ],
+      "core_paths": [
+        "docs/CURADORIA_REPOS_R1023.md",
+        "marceloclaro/workflow.py"
+      ]
+    },
+    {
+      "repo": "cclank/lanshu-openai-media-api",
+      "canonical_repo": "cclank/lanshu-openai-media-api",
+      "description": "OpenAI text and image generation, speech transcription, and usage records for agents. Portable skill and Python CLI with documentation in seven languages.",
+      "commit": "aef139995cdc8d6518520540414ab4d133623830",
+      "default_branch": "codex/project-bootstrap",
+      "inspection_status": "inspected",
+      "audit_scope": "Metadados GitHub e documentos listados; nenhum clone, build ou execução.",
+      "license_api": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit",
+        "node_id": "MDc6TGljZW5zZTEz"
+      },
+      "installed": false,
+      "executed": false,
+      "documents": [
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/cclank/lanshu-openai-media-api/aef139995cdc8d6518520540414ab4d133623830/README.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T00:58:37.120000+00:00",
+          "bytes": 13284,
+          "sha256": "49cbf31b0a83152e70b431848444904468c675f299ee7e2eeec1c8c1b6230ead"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/cclank/lanshu-openai-media-api/aef139995cdc8d6518520540414ab4d133623830/LICENSE",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T00:58:37.603815+00:00",
+          "bytes": 1063,
+          "sha256": "5adc7a7add785902cb0cbbe2ed9fb70aa2e3c8adcecced8c990fd4517e113bf6"
+        },
+        {
+          "path": "references/api-notes.md",
+          "url": "https://raw.githubusercontent.com/cclank/lanshu-openai-media-api/aef139995cdc8d6518520540414ab4d133623830/references/api-notes.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:04:41.350464+00:00",
+          "bytes": 5162,
+          "sha256": "d1b1c49ef9b9b5e7a6bec5f0ffefc4806d9500be3c60d3492aba32f7d840b3e8"
+        }
+      ],
+      "decision": "reference_only",
+      "license_declared": "MIT",
+      "license_basis": "LICENSE e README; metadados GitHub confirmam MIT",
+      "license_scope": "CLI e skill; a API OpenAI, preços e modelos pertencem ao provedor e não são licenciados aqui.",
+      "reason": "As notas de API registram que requisição paga não deve ser repetida automaticamente, que store:false não equivale a retenção zero e que registro vazio não prova cobrança zero. São limites úteis para a governança de custos já existente.",
+      "limitations": [
+        "Nenhuma chamada OpenAI foi feita; preços e modelos do documento têm data de 2026-10-29 e não foram reconfirmados.",
+        "O CLI não foi instalado nem executado.",
+        "Metadados de uso não provam valor cobrado."
+      ],
+      "core_paths": [
+        "docs/CURADORIA_REPOS_R1023.md",
+        "integrations/cost_governance.py"
+      ]
+    },
+    {
+      "repo": "Crosstalk-Solutions/project-nomad",
+      "canonical_repo": "Crosstalk-Solutions/project-nomad",
+      "description": "Project NOMAD is an offline-first knowledge and education server. Wikipedia, thousands of books, courses, maps, and optional local AI, all running on hardware you own with no internet required.",
+      "commit": "54ee30a44902e5c252b477f8685c26ec3064ab72",
+      "default_branch": "main",
+      "inspection_status": "inspected",
+      "audit_scope": "Metadados GitHub e documentos listados; nenhum clone, build ou execução.",
+      "license_api": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0",
+        "spdx_id": "Apache-2.0",
+        "url": "https://api.github.com/licenses/apache-2.0",
+        "node_id": "MDc6TGljZW5zZTI="
+      },
+      "installed": false,
+      "executed": false,
+      "documents": [
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/Crosstalk-Solutions/project-nomad/54ee30a44902e5c252b477f8685c26ec3064ab72/README.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T00:58:40.944493+00:00",
+          "bytes": 15205,
+          "sha256": "bc52e05e19828eb23dcb50759a5adfa8a56eaa9411922c25dff25a9de97a63de"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/Crosstalk-Solutions/project-nomad/54ee30a44902e5c252b477f8685c26ec3064ab72/LICENSE",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T00:58:41.326592+00:00",
+          "bytes": 10779,
+          "sha256": "e4f125622d3c03c2ebd7caf0eb9f0e9a10029349f75b7e342699cb1a0c212aee"
+        },
+        {
+          "path": "package.json",
+          "url": "https://raw.githubusercontent.com/Crosstalk-Solutions/project-nomad/54ee30a44902e5c252b477f8685c26ec3064ab72/package.json",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T00:58:41.692579+00:00",
+          "bytes": 305,
+          "sha256": "892ef57d8e6e50d0eff596cda8f58d16cfddd4a98c5a46dfe1d4348d8b9c0ca2"
+        },
+        {
+          "path": "collections/wikipedia.json",
+          "url": "https://raw.githubusercontent.com/Crosstalk-Solutions/project-nomad/54ee30a44902e5c252b477f8685c26ec3064ab72/collections/wikipedia.json",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:04:42.199119+00:00",
+          "bytes": 1739,
+          "sha256": "59ba8120f3c27b3563e9a68994998dd60e52091b43d62a8fca560e55f6ca2a0d"
+        }
+      ],
+      "decision": "already_adapted",
+      "license_declared": "Apache-2.0",
+      "license_basis": "LICENSE e package.json; metadados GitHub confirmam Apache-2.0",
+      "license_scope": "Servidor e código; coleções offline (Wikipedia/ZIM, livros, cursos, mapas, IA) mantêm licenças próprias.",
+      "reason": "O modelo categoria/tier/recurso já foi adaptado na R1022 como catálogo e planejador somente leitura; não há nova contribuição que justifique segunda implementação.",
+      "limitations": [
+        "Nenhum dado, container ou serviço NOMAD foi importado ou executado.",
+        "A R1022 não prova disponibilidade remota, licença suficiente ou hash dos arquivos.",
+        "Projeto não foi instalado."
+      ],
+      "core_paths": [
+        "integrations/offline_content.py",
+        "specs/SPEC-935-R1022-offline-content-catalog.md"
+      ]
+    },
+    {
+      "repo": "asoutelino-svg/awesome-reverse-engineered",
+      "canonical_repo": "asoutelino-svg/awesome-reverse-engineered",
+      "description": "Don't reverse engineer it twice. 12,000+ open-source tools built by reverse engineering closed apps, APIs, devices, protocols, file formats, games and AI tools. Search site + agent skill, refreshed nightly.",
+      "commit": "6d0bead98da46f0f064770be28588610ceff681f",
+      "default_branch": "main",
+      "inspection_status": "inspected",
+      "audit_scope": "Metadados GitHub e documentos listados; nenhum clone, build ou execução.",
+      "license_api": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit",
+        "node_id": "MDc6TGljZW5zZTEz"
+      },
+      "installed": false,
+      "executed": false,
+      "documents": [
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/asoutelino-svg/awesome-reverse-engineered/6d0bead98da46f0f064770be28588610ceff681f/README.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T00:58:42.130596+00:00",
+          "bytes": 21440,
+          "sha256": "0d73d451c89dacdf99d5091f3eb3a0fc0824ca80d5df30fa049dcd64d4159269"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/asoutelino-svg/awesome-reverse-engineered/6d0bead98da46f0f064770be28588610ceff681f/LICENSE",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T00:58:42.400509+00:00",
+          "bytes": 1065,
+          "sha256": "e249e59dd9c62c832854d823c600d650899c66acecd8c78807e79aafa72358ac"
+        },
+        {
+          "path": "LICENSE-DATA",
+          "url": "https://raw.githubusercontent.com/asoutelino-svg/awesome-reverse-engineered/6d0bead98da46f0f064770be28588610ceff681f/LICENSE-DATA",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:04:41.396278+00:00",
+          "bytes": 7048,
+          "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499"
+        },
+        {
+          "path": "plugin/skills/find-reverse-engineered/SKILL.md",
+          "url": "https://raw.githubusercontent.com/asoutelino-svg/awesome-reverse-engineered/6d0bead98da46f0f064770be28588610ceff681f/plugin/skills/find-reverse-engineered/SKILL.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:04:41.400294+00:00",
+          "bytes": 4017,
+          "sha256": "17e52c8cf74e78ed75061190ec7680da04d01e4b7f264a1d25a979e28328e411"
+        }
+      ],
+      "decision": "reference_only",
+      "license_declared": "MIT + CC0-1.0",
+      "license_basis": "LICENSE (MIT) e LICENSE-DATA (CC0 1.0)",
+      "license_scope": "Índice de dados em CC0; cada projeto listado conserva a própria licença, que pode estar ausente.",
+      "reason": "A regra \"procurar antes de reconstruir\" e a exigência de conferir API oficial, conta própria e licença evitam retrabalho e uso indevido. O aviso de que campo vazio significa todos os direitos reservados é útil ao REA.",
+      "limitations": [
+        "É fork de alexgaoth/awesome-reverse-engineered; foi lido o conteúdo do commit do fork.",
+        "Não foi executado re_index.py nem clonado nenhum projeto listado.",
+        "Contagens, estrelas e atividade são declarações da fonte, não verificação ao vivo."
+      ],
+      "core_paths": [
+        "docs/CURADORIA_REPOS_R1023.md",
+        ".opencode/skills/reverse-engineer-anything/references/search-before-reconstruction.md"
+      ]
+    },
+    {
+      "repo": "asoutelino-svg/book-finder",
+      "canonical_repo": "asoutelino-svg/book-finder",
+      "description": "Ferramenta de linha de comando em Python para localizar e baixar livros em PDF a partir de acervos legítimos e de acesso aberto (Internet Archive e Open Library). Usa similaridade textual para matching preciso e checagem automática de integridade dos arquivos baixados",
+      "commit": "940386e33a28a4a77e6c3c3663c4c025d301c33f",
+      "default_branch": "main",
+      "inspection_status": "inspected",
+      "audit_scope": "Metadados GitHub e documentos listados; nenhum clone, build ou execução.",
+      "license_api": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit",
+        "node_id": "MDc6TGljZW5zZTEz"
+      },
+      "installed": false,
+      "executed": false,
+      "documents": [
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/asoutelino-svg/book-finder/940386e33a28a4a77e6c3c3663c4c025d301c33f/README.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T00:58:41.705833+00:00",
+          "bytes": 7357,
+          "sha256": "ef302681418d8f51c489505f684c18e825eb37084eeffa5e4208dfa30f74e3e2"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/asoutelino-svg/book-finder/940386e33a28a4a77e6c3c3663c4c025d301c33f/LICENSE",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T00:58:42.021634+00:00",
+          "bytes": 1072,
+          "sha256": "968005c8d77042822f33bd64c596277a36871f286c39301c6f2e340b92416546"
+        },
+        {
+          "path": "ia_client.py",
+          "url": "https://raw.githubusercontent.com/asoutelino-svg/book-finder/940386e33a28a4a77e6c3c3663c4c025d301c33f/ia_client.py",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:04:41.658956+00:00",
+          "bytes": 3375,
+          "sha256": "77258d6e15847475a022292262b8b6b41035a09a5ea0a0653943a486f676e369"
+        },
+        {
+          "path": "downloader.py",
+          "url": "https://raw.githubusercontent.com/asoutelino-svg/book-finder/940386e33a28a4a77e6c3c3663c4c025d301c33f/downloader.py",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:04:41.655414+00:00",
+          "bytes": 5224,
+          "sha256": "77dc9e28e98e59806dd4a6df307b22edb3e6e9ab7a33657c59336e868fbc96e6"
+        }
+      ],
+      "decision": "reference_only",
+      "license_declared": "MIT",
+      "license_basis": "LICENSE; metadados GitHub confirmam MIT",
+      "license_scope": "Código; livros obtidos do Internet Archive/Open Library mantêm direitos e condições de empréstimo próprios.",
+      "reason": "O padrão de casar metadados antes de baixar e conferir integridade do PDF é útil, mas o Core já tem pipeline de PDF e biblioteca. A referência registra o limite: integridade não prova edição nem direito.",
+      "limitations": [
+        "É fork de joaorbarros/book-finder.",
+        "Não foi instalado; requests/pypdf e downloads não foram executados.",
+        "O código baixa arquivos e não foi incorporado ao Core por esse motivo."
+      ],
+      "core_paths": [
+        "docs/CURADORIA_REPOS_R1023.md",
+        "research/pdf_pipeline.py"
+      ]
+    },
+    {
+      "repo": "asoutelino-svg/book-to-skill",
+      "canonical_repo": "asoutelino-svg/book-to-skill",
+      "description": "Turn any technical book PDF into a Claude Code skill — ready to study, reference, and use while you work.",
+      "commit": "7540eefbe74933f5fc84c86becac52486b347778",
+      "default_branch": "master",
+      "inspection_status": "inspected",
+      "audit_scope": "Metadados GitHub e documentos listados; nenhum clone, build ou execução.",
+      "license_api": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit",
+        "node_id": "MDc6TGljZW5zZTEz"
+      },
+      "installed": false,
+      "executed": false,
+      "documents": [
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/asoutelino-svg/book-to-skill/7540eefbe74933f5fc84c86becac52486b347778/README.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T00:58:42.827981+00:00",
+          "bytes": 15379,
+          "sha256": "43c403269fed5a7032e5fa429607a2e326019945b41a64588f38396dc3343402"
+        },
+        {
+          "path": "LICENSE.md",
+          "url": "https://raw.githubusercontent.com/asoutelino-svg/book-to-skill/7540eefbe74933f5fc84c86becac52486b347778/LICENSE.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T00:58:43.086179+00:00",
+          "bytes": 1068,
+          "sha256": "be9b04bccfb4bdab63de13663307c229c0aa5ca69b692e9c351ff7053da9faca"
+        },
+        {
+          "path": "SKILL.md",
+          "url": "https://raw.githubusercontent.com/asoutelino-svg/book-to-skill/7540eefbe74933f5fc84c86becac52486b347778/SKILL.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:04:41.452021+00:00",
+          "bytes": 55009,
+          "sha256": "6a3d7ce3d3689020cd4089f8cad9c0a9f8237abfaf896ff20677031dac4592b1"
+        },
+        {
+          "path": "SECURITY-NOTICE.md",
+          "url": "https://raw.githubusercontent.com/asoutelino-svg/book-to-skill/7540eefbe74933f5fc84c86becac52486b347778/SECURITY-NOTICE.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:04:41.623578+00:00",
+          "bytes": 1842,
+          "sha256": "d339cb435471f46e19f65a6e9d0d175b133f166c04b5e2bcd7e4b3356aac0022"
+        }
+      ],
+      "decision": "original_adaptation",
+      "license_declared": "MIT",
+      "license_basis": "LICENSE.md; metadados GitHub confirmam MIT",
+      "license_scope": "Conversor e skill; os livros convertidos não são licenciados pelo repositório.",
+      "reason": "O fluxo livro→skill foi reimplementado como instrução original do Core, com direitos, localizador, hash e limites explícitos. Não foi copiado código nem o texto da skill.",
+      "limitations": [
+        "É fork de virgiliojr94/book-to-skill; existe aviso oficial de re-upload malicioso em outro repositório, não neste.",
+        "Não foi instalado nem executado; extract.py, Docling e dependências não foram usados.",
+        "A promessa de \"zero alucinação\" do README não foi aceita como fato e não é repetida.",
+        "O Core não gera capítulos automaticamente nesta entrega."
+      ],
+      "core_paths": [
+        ".opencode/skills/livro-para-skill/SKILL.md",
+        "integrations/source_skill_contracts.py"
+      ]
+    },
+    {
+      "repo": "asoutelino-svg/llm-legislativo",
+      "canonical_repo": "asoutelino-svg/llm-legislativo",
+      "description": "Corpus legislativo brasileiro em larga escala e modelo Transformer causal treinado do zero em PyTorch puro.",
+      "commit": "6951114da14782ae1433a19f2c4bd1d2442f0ccb",
+      "default_branch": "main",
+      "inspection_status": "inspected",
+      "audit_scope": "Metadados GitHub e documentos listados; nenhum clone, build ou execução.",
+      "license_api": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit",
+        "node_id": "MDc6TGljZW5zZTEz"
+      },
+      "installed": false,
+      "executed": false,
+      "documents": [
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/asoutelino-svg/llm-legislativo/6951114da14782ae1433a19f2c4bd1d2442f0ccb/README.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T00:58:44.714506+00:00",
+          "bytes": 15735,
+          "sha256": "8ee5919f8cac52f9ad65644c743819ea27c529c41924baae53ab0c7f6a422715"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/asoutelino-svg/llm-legislativo/6951114da14782ae1433a19f2c4bd1d2442f0ccb/LICENSE",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T00:58:44.980206+00:00",
+          "bytes": 1074,
+          "sha256": "682ddcbdb59d26a19fe0e5a086da4e321de24df8d8619261d826ae5ccba11104"
+        },
+        {
+          "path": "docs/CONTRATOS_DADOS.md",
+          "url": "https://raw.githubusercontent.com/asoutelino-svg/llm-legislativo/6951114da14782ae1433a19f2c4bd1d2442f0ccb/docs/CONTRATOS_DADOS.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:04:41.735800+00:00",
+          "bytes": 46954,
+          "sha256": "557f07e19a4e7237000b5364703ce4342d5c9e84c211ac53b7e691505a589e16"
+        }
+      ],
+      "decision": "reference_only",
+      "license_declared": "MIT",
+      "license_basis": "LICENSE; metadados GitHub confirmam MIT",
+      "license_scope": "Código do pipeline; textos oficiais, datasets e modelo no Hugging Face têm termos próprios.",
+      "reason": "Os contratos de dados exigem snapshot, URL final, hash, tentativa de fetch, distinção entre proposição e documento e vedação de fundir IDs por igualdade numérica. Isso informa o registro da skill legislativa sem importar o corpus.",
+      "limitations": [
+        "É fork de BaruqueRodrigues/llm-legislativo.",
+        "Nenhum dataset, peso ou script R/Python foi baixado ou executado.",
+        "Cobertura de +360 GiB e métricas do README são declarações da fonte."
+      ],
+      "core_paths": [
+        "docs/CURADORIA_REPOS_R1023.md",
+        "specs/SPEC-935-R1023-curadoria-repos-skills-opencode.md"
+      ]
+    },
+    {
+      "repo": "asoutelino-svg/ciencia-de-dados-cibele-russo",
+      "canonical_repo": "asoutelino-svg/ciencia-de-dados-cibele-russo",
+      "description": "Trilhas de estudo de Ciência de Dados derivadas das aulas da Profa. Cibele Russo (ICMC/USP)",
+      "commit": "b33050541580ccac0a359286c2097e6e810fea8f",
+      "default_branch": "main",
+      "inspection_status": "inspected",
+      "audit_scope": "Metadados GitHub e documentos listados; nenhum clone, build ou execução.",
+      "license_api": {
+        "key": "other",
+        "name": "Other",
+        "spdx_id": "NOASSERTION",
+        "url": null,
+        "node_id": "MDc6TGljZW5zZTA="
+      },
+      "installed": false,
+      "executed": false,
+      "documents": [
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/asoutelino-svg/ciencia-de-dados-cibele-russo/b33050541580ccac0a359286c2097e6e810fea8f/README.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T00:58:43.985993+00:00",
+          "bytes": 6630,
+          "sha256": "d03d706d2baff62d3bc5e53d93d734ba6dc3fc273332cd26ba5eddd5d7cc9be7"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/asoutelino-svg/ciencia-de-dados-cibele-russo/b33050541580ccac0a359286c2097e6e810fea8f/LICENSE",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T00:58:44.259148+00:00",
+          "bytes": 21405,
+          "sha256": "dda69057088c03be9e60f838e6255af5d6cc5d50918df3aae8b2fc97e7ddbf8b"
+        }
+      ],
+      "decision": "reference_only",
+      "license_declared": "CC-BY-NC-SA-4.0",
+      "license_basis": "LICENSE declara material derivado em CC BY-NC-SA 4.0, com vídeos originais excluídos",
+      "license_scope": "Apenas o material derivado de estudo; os vídeos e aulas originais pertencem à autora e não são licenciados pelo repositório.",
+      "reason": "O material é derivado de aulas com cláusula não comercial e atribuição; não é adequado para incorporação aberta ao Core. Serve como referência de estrutura de trilhas, sem cópia.",
+      "limitations": [
+        "É fork de alexander-stack1/ciencia-de-dados-cibele-russo.",
+        "Metadados GitHub retornam NOASSERTION; a licença foi lida no arquivo LICENSE do commit.",
+        "Nenhum slide, PDF ou vídeo foi baixado; uso comercial exigiria análise própria."
+      ],
+      "core_paths": [
+        "docs/CURADORIA_REPOS_R1023.md"
+      ]
+    },
+    {
+      "repo": "asoutelino-svg/leis_brasileiras",
+      "canonical_repo": "asoutelino-svg/leis_brasileiras",
+      "description": "Todas as leis do Brasil",
+      "commit": "15eb09b618ff08a38c4dfee06a91bd139d093f5d",
+      "default_branch": "main",
+      "inspection_status": "inspected",
+      "audit_scope": "Metadados GitHub e documentos listados; nenhum clone, build ou execução.",
+      "license_api": {
+        "key": "other",
+        "name": "Other",
+        "spdx_id": "NOASSERTION",
+        "url": null,
+        "node_id": "MDc6TGljZW5zZTA="
+      },
+      "installed": false,
+      "executed": false,
+      "documents": [
+        {
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/asoutelino-svg/leis_brasileiras/15eb09b618ff08a38c4dfee06a91bd139d093f5d/LICENSE",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T00:59:50.896613+00:00",
+          "bytes": 1305,
+          "sha256": "e71449c818e669b01200bbd28679a9ae048ab7cae466a41e1a697c5ac8206d8f"
+        },
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/asoutelino-svg/leis_brasileiras/15eb09b618ff08a38c4dfee06a91bd139d093f5d/README.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T00:59:52.617117+00:00",
+          "bytes": 19116,
+          "sha256": "c6de25bbe0b804cc8b73c7bbb4f843f782a97cbaf2437acba7e577f001af4cd4"
+        },
+        {
+          "path": "COBERTURA.md",
+          "url": "https://raw.githubusercontent.com/asoutelino-svg/leis_brasileiras/15eb09b618ff08a38c4dfee06a91bd139d093f5d/COBERTURA.md",
+          "http_status": 200,
+          "retrieved_at": "2026-11-02T01:04:42.198304+00:00",
+          "bytes": 2702,
+          "sha256": "15ed152a82cb542b0102c4dc91345ea37bc0aea42fd47e5d5362897f96e90566"
+        }
+      ],
+      "decision": "reference_only",
+      "license_declared": "MIT (scripts) + textos oficiais",
+      "license_basis": "LICENSE declara MIT para scripts e cita art. 8º, I, da Lei 9.610/98 para atos oficiais",
+      "license_scope": "A licença cobre o código em scripts/; textos oficiais não são objeto de proteção autoral segundo a fonte. Conversões e OCR não são certificados.",
+      "reason": "O acervo em Markdown e os relatórios de cobertura mostram lacunas, OCR e conversões automáticas; isso reforça que a skill deve exigir fonte oficial, data e versão, sem tratar o fork como publicação oficial.",
+      "limitations": [
+        "É fork de desdobroprod-eng/leis_brasileiras; árvore recursiva excedeu 2 MB, só a raiz foi listada.",
+        "Nenhum texto legal do acervo foi copiado para o Core.",
+        "O README alerta que as conversões não substituem o Diário Oficial e que há OCR."
+      ],
+      "core_paths": [
+        ".opencode/skills/legislacao-brasileira-auditavel/SKILL.md",
+        "integrations/educacao_legislacao_mcp.py"
+      ]
+    }
+  ],
+  "notes": [
+    "Commit fixado por repositório; cada documento tem URL, status, data, bytes e SHA-256.",
+    "Licença do código não licencia corpus, dados, modelos, marcas ou links transitivos.",
+    "Nenhum repositório foi clonado, instalado ou executado.",
+    "As decisões descrevem contribuição textual; registro não é prova de execução nem parecer jurídico."
+  ]
+}

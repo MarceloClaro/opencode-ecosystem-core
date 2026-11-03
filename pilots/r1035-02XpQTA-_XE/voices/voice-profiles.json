@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "source_registry_sha256": "d49c9ba6a8ff71d822e1dd49b6ed1c05fecfad1dd7ea7afac3205a87b594ec90",
+  "prosody_policy": {
+    "crianca": {
+      "tempo": 1.05,
+      "pitch": 1.03,
+      "note": "somente se a referência original for de criança; nunca fabricar idade"
+    },
+    "adulto": {
+      "tempo": 1.0,
+      "pitch": 1.0
+    },
+    "idoso": {
+      "tempo": 0.97,
+      "pitch": 0.99,
+      "note": "ajuste leve; não substitui timbre etário da referência"
+    }
+  },
+  "gender_policy": "marcação descritiva; o timbre vem da referência clonada, sem pitch artificial de gênero",
+  "characters": {
+    "char_male_a": {
+      "gender": "masculino",
+      "age_group": "adulto",
+      "age_hint": "adulto jovem",
+      "profile_id": "adult_male_01",
+      "clone_status": "cloned_reference_cleaned_tested",
+      "evidence": "aparência e diálogo; identidade não verificada",
+      "reference_sha256": "0ac82734171700464a84c61486229efcd0e7cebd2e33ac9734c83dd9acbbe6bc",
+      "reference": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1035-02XpQTA-_XE/pilot-P0006/references-clean/char_male_a.wav",
+      "clone_engine": "XTTS v2 CPU",
+      "listening_review": "pending"
+    },
+    "char_cagla": {
+      "gender": "feminino",
+      "age_group": "adulto",
+      "age_hint": "adulto jovem",
+      "profile_id": "adult_female_01",
+      "clone_status": "cloned_from_demucs_vocals_compact",
+      "evidence": "aparência e diálogo; identidade não verificada",
+      "reference_sha256": "58213f205e3fcac9c83e5864066bf2b6837b0f48d4b13ab813734861bb2d692b",
+      "reference": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1035-02XpQTA-_XE/pilot-P0006/references-clean/char_cagla-compact.wav",
+      "clone_engine": "XTTS v2 CPU",
+      "listening_review": "pending"
+    },
+    "char_ruya": {
+      "gender": "feminino",
+      "age_group": "adulto",
+      "age_hint": "adulto jovem",
+      "profile_id": "adult_female_02",
+      "clone_status": "cloned_from_demucs_vocals",
+      "evidence": "aparência e diálogo; identidade não verificada",
+      "reference_sha256": "1e09ae9a55ea8985eb6fca8965e515a1a4bb51d1550337cab94704c77506b683",
+      "reference": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1035-02XpQTA-_XE/pilot-P0006/references-clean/char_ruya.wav",
+      "clone_engine": "XTTS v2 CPU",
+      "listening_review": "pending"
+    },
+    "char_mother": {
+      "gender": "feminino",
+      "age_group": "adulto",
+      "age_hint": "meia-idade",
+      "profile_id": "adult_female_03",
+      "clone_status": "cloned_from_demucs_vocals",
+      "evidence": "aparência e diálogo; idade não verificada",
+      "reference_sha256": "957ef8aa8330cc776a99a03fbc0f14c5383a27e8322020a8fa7621b02c9555ea",
+      "reference": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1035-02XpQTA-_XE/pilot-P0006/references-clean/char_mother.wav",
+      "clone_engine": "XTTS v2 CPU",
+      "listening_review": "pending"
+    }
+  },
+  "limitations": [
+    "gênero/idade são marcações declaradas, não biometria",
+    "nenhuma criança ou idoso foi identificado neste piloto",
+    "revisão humana de voz/idade pendente"
+  ]
+}

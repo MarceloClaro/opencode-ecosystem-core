@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "status": "installed_and_compositions_listed",
+  "project": "/home/marceloclaro/opencode-ecosystem-core/editor-workspace/remotion-smoke",
+  "cli_version": "4.0.540",
+  "license_ack_file": "/home/marceloclaro/.config/opencode/remotion-license-ack.json",
+  "install_command": "npm install --ignore-scripts --no-audit --no-fund",
+  "package_count": 244,
+  "browser_executable": "/home/marceloclaro/.cache/ms-playwright/chromium-1252/chrome-linux64/chrome",
+  "composition": {
+    "id": "Smoke",
+    "fps": 25,
+    "width": 1280,
+    "height": 720,
+    "durationInFrames": 50,
+    "duration_seconds": 2.0
+  },
+  "verified": [
+    "remotion --version",
+    "remotion compositions src/index.ts"
+  ],
+  "not_verified": [
+    "render",
+    "still",
+    "bundle",
+    "visual quality",
+    "audio sync"
+  ],
+  "hashes": {
+    "package.json": "9e25b68e68434dd8d20e1c84442e67f039e031467c9fceaf3dbfecbc60bd348b",
+    "package-lock.json": "b930fa1d60cd2009402f1cc1d2d471bc6492238f91ddf5405bfa0914b9ff2259",
+    "src/Root.tsx": "e6efc0e22b1e5de55541077709269806115a204a55850c2976e6ac07a3322ad4",
+    "src/Smoke.tsx": "86a49dac4b4ba312d1d6d5927da2440e3fcb5222dd9d5df66b78149e40d98ece"
+  },
+  "limitations": [
+    "compositions listing proves bundle/browser startup, not render or visual approval",
+    "Remotion License is custom; render requires separate REMOTION_RENDER_APPROVED=1"
+  ]
+}

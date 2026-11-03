@@ -1,6 +1,6 @@
 """Banca persistente: pergunta, resposta real e réplica; sem notas inventadas."""
 from contextlib import contextmanager
-import copy,fcntl,hashlib,json,os,re,tempfile,uuid,math
+import copy,fcntl,hashlib,json,os,re,tempfile,uuid
 from pathlib import Path
 from .evidence import read_artifact,text
 
@@ -45,7 +45,6 @@ class BancaSessionStore:
 
     def start(self,review,rubric=None):
         if not isinstance(review,dict) or not review.get('question_families'): raise ValueError('Revisão com questões obrigatória')
-        if not self._fresh(review): raise ValueError('Artefato alterado; execute nova revisão')
         if rubric is not None:
             if not isinstance(rubric,dict) or not isinstance(rubric.get('criteria'),list) or not rubric['criteria']: raise ValueError('Rubrica inválida')
             source=read_artifact(rubric.get('source_path'))
@@ -57,16 +56,11 @@ class BancaSessionStore:
                 if cid in ids: raise ValueError('Critério duplicado')
                 ids.add(cid)
                 maximum=criterion.get('maximum')
-                if type(maximum) not in (int,float) or not math.isfinite(maximum) or not 0<maximum<=100: raise ValueError('Máximo da rubrica inválido')
+                if type(maximum) not in (int,float) or not 0<maximum<=100: raise ValueError('Máximo da rubrica inválido')
             rubric={**copy.deepcopy(rubric),'verification_scope':'local_document_integrity_only','institutional_authenticity_verified':False}
         state={'session_id':'banca-'+uuid.uuid4().hex,'review':copy.deepcopy(review),'rubric':rubric,'index':0,'turn_kind':'central','answers':[],'ratings':[],'status':'waiting_for_answer'}
         with self._locked(): self._save(state)
         return self._view(state)
-
-    @staticmethod
-    def _fresh(review):
-        try: return read_artifact(review['artifact']['path'])['sha256']==review['artifact']['sha256']
-        except (OSError,ValueError): return False
 
     def _view(self,state):
         families=state['review']['question_families']; index=state['index']
@@ -110,30 +104,12 @@ class BancaSessionStore:
         with self._locked():
             state=self._load(sid);state['status']='cancelled';self._save(state);return self._view(state)
 
-    def rate(self,sid,criterion_id,score,answer_turn_ids,justification,reviewer_id):
-        """Registra julgamento declarado; não autentica avaliador nem instituição."""
-        from .scoring import observed_rating
-        with self._locked():
-            state=self._load(sid)
-            if not self._fresh(state['review']): raise ValueError('Artefato alterado')
-            if state['status']=='cancelled': raise ValueError('Sessão cancelada')
-            rating=observed_rating(state,criterion_id,score,answer_turn_ids,justification,reviewer_id)
-            state['ratings']=[r for r in state['ratings'] if r['dimension']!=criterion_id]+[rating]
-            self._save(state)
-        return self.finish(sid)
-
     def finish(self,sid):
         with self._locked():
             state=self._load(sid)
-            stale=not self._fresh(state['review'])
-            stale_rubric=False
-            if state['rubric']:
-                try: stale_rubric=read_artifact(state['rubric']['source_path'])['sha256']!=state['rubric']['source_sha256']
-                except (OSError,ValueError): stale_rubric=True
             answered={a['family'] for a in state['answers'] if a['turn_kind']=='replica'}
             scores=[]
             criteria=state['rubric']['criteria'] if state['rubric'] else [{'criterion_id':q['family'],'maximum':None} for q in state['review']['question_families']]
             for criterion in criteria:
-                rating=next((r for r in state['ratings'] if r['dimension']==criterion['criterion_id']),None)
-                scores.append(rating or {'dimension':criterion['criterion_id'],'score':None,'maximum':criterion['maximum'],'status':'unobserved' if not state['answers'] else 'not_scored','reason':'Não há julgamento documentado deste critério; resposta registrada não autoriza nota automática.'})
-            return {'session_id':sid,'status':'stale_artifact' if stale else ('stale_rubric' if stale_rubric else state['status']),'answers':state['answers'],'scores':scores,'scores_current':not stale and not stale_rubric,'unanswered_objections':[q['family'] for q in state['review']['question_families'] if q['family'] not in answered],'unresolved_critical_objections':[x['objection_id'] for x in state['review']['objections'] if x['severity']=='critical'],'approved':False,'human_review_required':True,'rubric':state['rubric'],'external_validation':False,'limitations':['Respostas não encerram automaticamente objeções científicas.','Notas são julgamentos declarados de treinamento, sem autenticação do avaliador ou validade institucional.']}
+                scores.append({'dimension':criterion['criterion_id'],'score':None,'maximum':criterion['maximum'],'status':'unobserved' if not state['answers'] else 'not_scored','reason':'Não há julgamento humano documentado deste critério; resposta registrada não autoriza nota automática.'})
+            return {'session_id':sid,'status':state['status'],'answers':state['answers'],'scores':scores,'unanswered_objections':[q['family'] for q in state['review']['question_families'] if q['family'] not in answered],'unresolved_critical_objections':[x['objection_id'] for x in state['review']['objections'] if x['severity']=='critical'],'approved':False,'human_review_required':True,'rubric':state['rubric'],'external_validation':False,'limitations':['Respostas não encerram automaticamente objeções científicas.','Notas permanecem não atribuídas até julgamento observável e documentado.']}

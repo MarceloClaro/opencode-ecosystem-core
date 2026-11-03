@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "declared_by": "operator",
+  "scope": "primary_cohort_only",
+  "protocol": "SPEC-935-R935",
+  "note": "Exclusoes autorizadas de arquivo unico, por decisao explicita do operador, com base declarada. A exclusao remove o arquivo do conjunto primario (bytes e contagem) sem apagar os metadados nem o rationale do manifesto. Nenhuma outra divergencia de workflow_version pode ser excluida automaticamente.",
+  "authorizations": [
+    {
+      "file_id": "2b0106c5-7e32-423b-957f-06c9f2e7751b",
+      "authorized_on": "2026-10-21",
+      "decision_basis": "workflow_version",
+      "expected_workflow_version": "5a02c12930eb23436322a7494047b907b97570c5",
+      "basis": "workflow_version divergente do conjunto primario (STAR - Counts). Decisao metadata-only, anterior a examinar expressao ou desfecho; nao declara o arquivo invalido."
+    }
+  ]
+}

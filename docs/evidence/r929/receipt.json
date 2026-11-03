@@ -1,0 +1,164 @@
+{
+  "cycle": "R929",
+  "generated_at_utc": "2026-10-19T14:37:50.137319+00:00",
+  "verification": "local_execution",
+  "external_scientific_validation": false,
+  "complete_ecosystem_validation": false,
+  "production_release_approved": false,
+  "commit_created": false,
+  "base_commit": "d02817ca460ee6411761a8a3f0b82d17dafd2740",
+  "branch": "codex/core-prontidao-rea",
+  "python_version": "3.14.4",
+  "final_selection": {
+    "tests": 643,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 643,
+    "sources_unchanged_during_run": true
+  },
+  "doctor": {
+    "overall": "degraded",
+    "checks_total": 22,
+    "checks_passed": 21,
+    "checks_warned": 1,
+    "checks_failed": 0,
+    "duration_seconds": 2.98,
+    "verification": "installation_only"
+  },
+  "history_preservation": {
+    "before_rows": 763,
+    "after_rows": 764,
+    "previous_entries_and_order_equal": true,
+    "previous_root_metadata_equal": true,
+    "before_file_sha256": "9dc72bca0e94532fc393e49e360ec191fba565185b299f1b9de91d8e1b5b6c84",
+    "after_file_sha256": "9a4df6d63a0a3ad2164a16cde1dcc32658da35290d5ca9ed5f644bf59e7acc2c",
+    "audited": false,
+    "score": null
+  },
+  "whole_suite_attempts": [
+    {
+      "phase": "baseline",
+      "command": [
+        "-m",
+        "pytest",
+        "-q",
+        "--maxfail=20",
+        "--tb=short",
+        "--junitxml=/home/marceloclaro/opencode-ecosystem-core/outputs/core-audit-r929/baseline.xml"
+      ],
+      "returncode": 124,
+      "duration_seconds": 900.151,
+      "timed_out": true,
+      "external_tests_opt_in": false,
+      "evolution_state_isolated": true,
+      "mci_state_isolated_by_conftest": true,
+      "whole_suite_completed": false
+    },
+    {
+      "phase": "final",
+      "command": [
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "r929_suite_plugin",
+        "--maxfail=20",
+        "--tb=short",
+        "--junitxml=/home/marceloclaro/opencode-ecosystem-core/outputs/core-audit-r929/final.xml"
+      ],
+      "returncode": 124,
+      "duration_seconds": 900.269,
+      "timed_out": true,
+      "external_tests_opt_in": false,
+      "evolution_state_isolated": true,
+      "mci_state_isolated_by_conftest": true,
+      "whole_suite_completed": false
+    }
+  ],
+  "failures_observed_in_inflight_whole_suite": [
+    "tests/test_r110_doctor_corrigendum.py::TestRunDoctor::test_real_evolution_registry_has_no_silent_loss",
+    "tests/test_r125_mira_cli_integration.py::TestHelpTexts::test_unknown_command_hint_mentions_apresentacao",
+    "tests/test_r394_opencode_cli_commands_real_execution.py::test_command_executes_without_hidden_python_error[agentes-core]",
+    "tests/test_r394_opencode_cli_commands_real_execution.py::test_command_executes_without_hidden_python_error[ci-local]",
+    "tests/test_r443_opencode_alphaproof_deepthink.py::TestOpenCodeAlphaProofDeepThinkR443::test_doctor_check_16_deepthink_alphaproof",
+    "tests/test_r444_lean4_egraph_saturation.py::TestLean4EGraphSaturationR444::test_doctor_check_17_lean4_egraph",
+    "tests/test_r445_alphageometry_autoformalization.py::TestAlphaGeometryAutoformalizationR445::test_doctor_check_geometry",
+    "tests/test_r449_readme_release.py::test_readme_documents_installation_without_fabricated_integrity_data",
+    "tests/test_r481_core_check.py::test_core_check_happy_path_structure"
+  ],
+  "whole_suite_note": "Processos iniciados antes dos últimos ajustes; não representam o candidato final. Ambos excederam900s, sem JUnit final.",
+  "red_note": "red.xml inicial contém3falhas de fixture em test_invalid_code_context; não são contraprovas válidas. A fixture foi corrigida e red-context.xml reproduz3AttributeError reais antes da correção.",
+  "timing_note": "O limite R110 de5s foi mantido. Houve falhas sob carga; a reexecução isolada e a seleção final estão registradas. Não é garantia de latência em toda máquina/carga.",
+  "review": [
+    {
+      "profile": "command-regression",
+      "task_id": "task-bd8d4bd5",
+      "scope": "CLI, diagnóstico, core-check, resolver, cache e contratos de teste",
+      "status": "accepted_scoped_read_only"
+    },
+    {
+      "profile": "blind-review-ledger",
+      "task_id": "task-ac674c98",
+      "scope": "Persistência, alocação e compatibilidade do histórico",
+      "status": "accepted_scoped_read_only"
+    },
+    {
+      "profile": "code-context-backend",
+      "task_id": "task-ad1ca2fb",
+      "scope": "AST, orçamento de resposta, amostragem e recusa no provedor",
+      "status": "accepted_scoped_read_only"
+    }
+  ],
+  "review_note": "Perfis validados/ativados pelo primário; revisões nesta conversa por leitura. Não comprova inferência dos executores Core nem conclusão das tarefas A2A no processo MCP.",
+  "limits": [
+    "78entradas históricas preservadas mas não modeladas; migração humana pendente",
+    "Suíte completa e validação científica externa pendentes",
+    "Ramo nativo Windows da trava não executado",
+    "Nenhuma execução completa de mutmut nesta rodada",
+    "Três operações upstream de grafo continuam bloqueadas",
+    "Alterações locais coexistem com trabalho anterior/concomitante; sem commit misto",
+    "Processos Python/MCP já iniciados precisam recarregar fontes para utilizar as correções"
+  ],
+  "source_sha256": {
+    "evolution/cycles.py": "fc06a183e275c5d68021dfc85f05e39bde6cabdf635555cc194d9ec99cc97163",
+    "agents/lifecycle.py": "95ff22b196cf9ac2e89a82c5f6a7e479f378669c5ff2893e691a8f4efce6f0d2",
+    "integrations/harness_runtime.py": "0418d046c965d86e663fb2a4ee2f6dbdf2863463c6ee6127c91268828aa38e69",
+    "integrations/python_code_graph.py": "9733596d87997f001050d4ab80a4f0dcfb08b74eb46e904d70e98c1120045bae",
+    "marceloclaro/cli.py": "cdcba6a8c18e2ea728a9134e9487310d6cb2e1b1d7c6e3033312f3ea65b2860b",
+    "marceloclaro/doctor.py": "280dd9ed4d3d7d3f7d184be157adee06e013a5285a819812f00c6be67579ca94",
+    "marceloclaro/core_check.py": "905d4fb0ed6140c202764c71f2adfb5323c93aa5b7dbdd02b5852451cbbda86d",
+    "marceloclaro/governed_cli.py": "f4d52aeb784f0cb6a009fdd722597bc4f8bef53fb646fc7675aa428bd3de5ef3",
+    "marceloclaro/orchestrator.py": "69602df5516fda3a3688317bc727910d133d7f45cdda616f22a67c8074874eff",
+    "academic/adversarial_research/service.py": "181cce3e74e5de94f494599c87e42c0ab80d50c23dc47ec74740c8779ff46b57",
+    "tests/test_r929_core_regressions.py": "87d76809d226d382dd2355f9aadca55714d59601a3b02182c60181acc4f0b1a1",
+    "tests/test_r110_doctor_corrigendum.py": "3a6b2102121c3adf29673b86660543419af500aad1ac73faddb486c9366bb6b4",
+    "tests/test_r394_opencode_cli_commands_real_execution.py": "63adbd0b46bfbd229cb199c58f4fb44fe79638270768e3e2e7c254948db67602",
+    "tests/test_r449_readme_release.py": "ef5641f5a144a11c5e07183697187930ca2c629818bc291004b88f3ded6ec430",
+    "tests/test_r817_runtime_installation.py": "9635a668aade0a131293c48a0d4822be569f42c80a27a578f02e4372ffd967a6",
+    "specs/SPEC-935-R929-correcoes-core-regressoes.md": "35b3d725bce90b69859584d58414a53243d78513678f6f33770ab3d137299991"
+  },
+  "evidence_sha256": {
+    "red.xml": "3b01709507b1a4e76edc9c51830479fb29591d339cba3b623b7388f742e1f1f6",
+    "red-context.xml": "0df99ea09c6088172074a848a6fc04994610d563442da1ae8e7c249ea3155d61",
+    "red-nonfinite.xml": "016f61dd45e5de7c01865bd57efeeb266f2a12aa0e6df6adbf06eb8d740ce5f6",
+    "red-options.xml": "2f554f5c63ea7220245c44be991de6fa4662e5dcf71cfa4b21d4f1be066bbac2",
+    "red-banca.xml": "71b43539e09a8ae105ae922d8e7b4f742acd24c9597b4e915f35807cccbe1280",
+    "red-review.xml": "cc5a8d95a4cd17c413fd4c63e94b77f4db7a73af16cc9144af2f130daa56b87b",
+    "red-boundary.xml": "906f7e226aafddce337dad13c208883da985037fe4e02861da5f8c991c648a8a",
+    "red-doctor.xml": "258410e811a240dc344552ced329559f0caae95ca81180bfe7625c2295299d71",
+    "red-doctor-preservation.xml": "808848991eb99d385162eeec0edb3836883ec1c09dfb2461b53a0f28796ea5d2",
+    "red-resolver.xml": "bc0d02e449a99a01e8db7eb23d9900725e1161301c16c5dd411f79a230515171",
+    "red-catalog-parse.xml": "d28589e47b4deccd38ccdfdfebf09903900a42ce02d5ea0c4f8b097f0a2ae29d",
+    "red-core-check.xml": "48d2c85831eb27d8f6be032a5a97ce8bc52e536ffd02bfa3d3af6652b57e8dca",
+    "red-help-compat.xml": "0c99fdd2b04d6cd933eeef003b3060322636d094dd14b99d47f97b0e453d7352",
+    "verified.xml": "394c5a212ee024deb528735b12300774961570a9f5a073ce2f0c14013fd72cea",
+    "verified.json": "30457e4b51d0119a0a95a46be0b9dba9b85633984e06167c14fd8f5c884ef2fc",
+    "doctor-performance.xml": "46c065a534d9b63df0f100b85aa26884c414ee7598ca83b68f7eb511f65283d2",
+    "readme-contract.xml": "8cb0be531e1410505fca61454ee77c6d621d99331c451afbc701251590b75c2d",
+    "baseline.json": "eb85a3c0bb6a06cc7fe54fb5b4a0fce8a176eb89824f65789fec9f70fd536b05",
+    "final.json": "ea2807190fb64701138859c200651677c3479e546032e0c90abf965ecf1201cd",
+    "final.log": "ff71103bc0314cea93f681557199422e480053859849b70a92fe0cb3d9122f34",
+    "doctor.json": "09f2b8de2999c7473f750da31198877240ccfac1ea99739a2c4a6bdfd2e17a81"
+  }
+}

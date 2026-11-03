@@ -1,0 +1,20 @@
+{
+  "phase": "final",
+  "command": [
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "r929_suite_plugin",
+    "--maxfail=20",
+    "--tb=short",
+    "--junitxml=/home/marceloclaro/opencode-ecosystem-core/outputs/core-audit-r929/final.xml"
+  ],
+  "returncode": 124,
+  "duration_seconds": 900.269,
+  "timed_out": true,
+  "external_tests_opt_in": false,
+  "evolution_state_isolated": true,
+  "mci_state_isolated_by_conftest": true,
+  "whole_suite_completed": false
+}

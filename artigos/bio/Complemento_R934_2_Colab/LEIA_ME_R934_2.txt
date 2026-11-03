@@ -1,0 +1,11 @@
+TCGA-KIRC R934.2 — Continuação do Colab executado em 21/10/2026
+
+1. Faça o upload do notebook R934.2 no Google Colab.
+2. Execute Ambiente de execução > Executar tudo. CONSULTAR_GDC_METADATA=True envia somente consultas GET de metadados ao GDC.
+3. EXECUTAR_DOWNLOADS=False; o notebook NUNCA baixa arquivos RNA-seq.
+4. Inspecione reports/P1_metadata_summary_PUBLIC.json. Guarde apenas logs agregados na comunicação pública.
+5. Se ocorrer BLOCKED_API_OR_SCHEMA ou BLOCKED_MANIFEST, preserve o bloqueio e avalie os detalhes.
+6. P0-P4 continuam RED até parecer metodológico, fontes biológicas e controles estatísticos validados.
+7. Os testes offline não certificam acesso real do Colab ao GDC e não reproduzem nenhum resultado clínico.
+
+O notebook original do Google Drive não foi modificado.

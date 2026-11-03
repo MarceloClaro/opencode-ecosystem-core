@@ -1,0 +1,1160 @@
+{
+  "schema_version": "r1026.v2",
+  "source_url": "https://youtu.be/sVRpKhCfKRI",
+  "source_channel": "Qiskit",
+  "segment": "00:02:00-00:02:20",
+  "authorization": "operador declarou autorização da Qiskit; não verificada independentemente",
+  "remotion_license_scope": "pessoa física (uso gratuito conforme resumo)",
+  "asr": {
+    "engine": "faster-whisper 1.2.1",
+    "model": "small",
+    "compute": "int8/cpu",
+    "language": "en",
+    "duration_seconds": 20.011
+  },
+  "captions": {
+    "language": "pt-BR",
+    "method": "tradução humana assistida a partir da transcrição EN; não é transcrição verbatim",
+    "blocks": 3,
+    "cps_max": 14.8
+  },
+  "style": {
+    "primary": "20 s, legenda pt-BR, 16:9 e 9:16",
+    "first_version": "8 s, título/lower-third, 16:9 e 9:16",
+    "remotion": "8 s, composição QuantumPilot"
+  },
+  "files": {
+    "captions-16x9.ass": {
+      "bytes": 943,
+      "sha256": "a28446060fbe10418b1d128a2f057ef46e1cf719138c6db48d91b81a5a2ad33a"
+    },
+    "captions-9x16.ass": {
+      "bytes": 942,
+      "sha256": "900da48118e69798f63cb288ff09c691b2f094b8dec492e4cd113b95ccdc401e"
+    },
+    "captions.pt-BR.srt": {
+      "bytes": 307,
+      "sha256": "bc68790e1632ecf8b8c62997bea0c752e40aa0d5dbc23eedd8d6a5552dbb830e"
+    },
+    "pilot-16x9-standard.mp4": {
+      "bytes": 4700214,
+      "sha256": "3a8a12d4b43e509693f9655e731c34293f33e49e42c9164eacb3c2f9de249e84",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 1920,
+            "height": 1080,
+            "r_frame_rate": "30/1"
+          },
+          {
+            "codec_name": "aac",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 2,
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "duration": "20.000000",
+          "size": "4700214"
+        }
+      }
+    },
+    "pilot-16x9.mp4": {
+      "bytes": 1840566,
+      "sha256": "462a7aee89d1dec8921078da8e945c1fcf86c4a3f41fa15b1b4bb9e18535249a",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 1920,
+            "height": 1080,
+            "r_frame_rate": "30/1"
+          },
+          {
+            "codec_name": "aac",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 2,
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "duration": "8.000000",
+          "size": "1840566"
+        }
+      }
+    },
+    "pilot-9x16-standard.mp4": {
+      "bytes": 2658871,
+      "sha256": "5ba3e683fee6afee29fe6bb3132e53b5ec4b0144545ef51420aed3dd35439c2d",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 1080,
+            "height": 1920,
+            "r_frame_rate": "30/1"
+          },
+          {
+            "codec_name": "aac",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 2,
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "duration": "20.000000",
+          "size": "2658871"
+        }
+      }
+    },
+    "pilot-9x16.mp4": {
+      "bytes": 1091774,
+      "sha256": "9a84fa72a4f2071852eb6455bbb80fecb70c31f6fa9d877fa18e5e8b7d405bbd",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 1080,
+            "height": 1920,
+            "r_frame_rate": "30/1"
+          },
+          {
+            "codec_name": "aac",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 2,
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "duration": "8.000000",
+          "size": "1091774"
+        }
+      }
+    },
+    "plan-16x9-standard.json": {
+      "bytes": 1355,
+      "sha256": "18e6edaf69b0dad235fcef842a19e67ef3cbb5dbd659dc70e7129b3aeca6bd19"
+    },
+    "plan-16x9.json": {
+      "bytes": 848,
+      "sha256": "945f446795177b8c7d40af9592deddd2acb164cd0772a0bb8797e0738565b611"
+    },
+    "plan-remotion.json": {
+      "bytes": 855,
+      "sha256": "916b14d8d439c61d9662e57a7490072e42a9ead136207d6cd2c79145d2b76b57"
+    },
+    "remotion-pilot.mp4": {
+      "bytes": 1837666,
+      "sha256": "f2059a742a2f89b9b6597ef61aeb34892a12320207db9471bac2893c523614f5",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 1920,
+            "height": 1080,
+            "r_frame_rate": "30/1"
+          },
+          {
+            "codec_name": "aac",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 2,
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "duration": "8.000000",
+          "size": "1837666"
+        }
+      }
+    },
+    "report-16x9-standard.json": {
+      "bytes": 175,
+      "sha256": "2685b201ed1a123428cf94090ba6d48848cc385e52ebfe7a8fa13d3915dbfcb3"
+    },
+    "source.mp4": {
+      "bytes": 2894071,
+      "sha256": "10da024a9da037483ddcaa6821701c66495f03750399be196e6b0b2d37bcb674",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 1920,
+            "height": 1080,
+            "r_frame_rate": "30000/1001"
+          },
+          {
+            "codec_name": "aac",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 2,
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "duration": "20.053000",
+          "size": "2894071"
+        }
+      }
+    },
+    "transcript-en.json": {
+      "bytes": 6464,
+      "sha256": "cce75c942cf2c7e428c4f4697eb3f17a4fb27321d8316ff7a48ce52c232bbf33"
+    },
+    "render.sh": {
+      "bytes": 2585,
+      "sha256": "b86deaf17092187aaeb45248ebb87118673e5997d6b15db1bd132162528331e5"
+    },
+    "README.md": {
+      "bytes": 13651,
+      "sha256": "d5bb55383c451c5b2a197e54c90287a4ae1549a49e1eda7105cbb4ec05dc73b0"
+    },
+    "consent-and-licenses.md": {
+      "bytes": 1575,
+      "sha256": "f7aad52b54ca583e9ded1e8937797e6b63c19c03e93d9ec5284e809df61c391c"
+    },
+    "dub-clone-manifest.json": {
+      "bytes": 2803,
+      "sha256": "d511c00d336af49d4a0d4f80b71e21099be70528e7d8b74585c0733adf5f9fe6"
+    },
+    "dub-manifest.json": {
+      "bytes": 2568,
+      "sha256": "d2052d1af7bb3609ba9cebc6c404ba165417e2ab71ac723b49e8d5c57feac58d"
+    },
+    "dub-pt-BR-clone.wav": {
+      "bytes": 3840078,
+      "sha256": "22ec02a8518781a8ac0c15b17dd68008ae7891677217cce7e348fca7bcc888bd"
+    },
+    "dub-pt-BR.wav": {
+      "bytes": 3840078,
+      "sha256": "9316fa8401d8c7f1d9a6162232117ea1e343d3974fdbfa470bc706476d54614a"
+    },
+    "pilot-16x9-dub-clone.mp4": {
+      "bytes": 4585690,
+      "sha256": "e9245f9dc9ef8ed8a6abf3186233a429782de1e95bee3aa439561c54064be876",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 1920,
+            "height": 1080,
+            "r_frame_rate": "30/1"
+          },
+          {
+            "codec_name": "aac",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 2,
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "duration": "20.000000",
+          "size": "4585690"
+        }
+      }
+    },
+    "pilot-16x9-dub.mp4": {
+      "bytes": 4491596,
+      "sha256": "b1d7f03474bbd84e5bc48a6dd5af63bfa1f676cd0b747197301a1ba6a619a77c",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 1920,
+            "height": 1080,
+            "r_frame_rate": "30/1"
+          },
+          {
+            "codec_name": "aac",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 2,
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "duration": "20.000000",
+          "size": "4491596"
+        }
+      }
+    },
+    "pilot-9x16-dub-clone.mp4": {
+      "bytes": 2544347,
+      "sha256": "79e13067d06ff7329a7b611d2b2b6a878830264b2a733d116ddb7fc7b7ab3191",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 1080,
+            "height": 1920,
+            "r_frame_rate": "30/1"
+          },
+          {
+            "codec_name": "aac",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 2,
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "duration": "20.000000",
+          "size": "2544347"
+        }
+      }
+    },
+    "pilot-9x16-dub.mp4": {
+      "bytes": 2450253,
+      "sha256": "c45543a170bc96a715500c919d0c6423ae6895af10eadcc7c7d7a4f052552b4f",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 1080,
+            "height": 1920,
+            "r_frame_rate": "30/1"
+          },
+          {
+            "codec_name": "aac",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 2,
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "duration": "20.000000",
+          "size": "2450253"
+        }
+      }
+    },
+    "render-lipsync-gpu.sh": {
+      "bytes": 1179,
+      "sha256": "6112d725b9b92eef99797eea776c57a8f3ffa11342c6a8411ba17ee146c103bb"
+    },
+    "STUDIO.md": {
+      "bytes": 4475,
+      "sha256": "fbd4643c1158a985acafa69224ecf63af93672408a31630af08801ef895dde33"
+    },
+    "render-lipsync-cpu.sh": {
+      "bytes": 7195,
+      "sha256": "acdd0213274406962afd338083cc248e7b547882edb4d2c7626dc38ce813c230"
+    },
+    "QC.md": {
+      "bytes": 2368,
+      "sha256": "7cbc5bcd777b4ae7b4dd2162fe2ddc541d254d7f0703d232f8e8b63ce7935825"
+    },
+    "remotion-template/README.md": {
+      "bytes": 818,
+      "sha256": "16701b813960eee4ed2b3dc36cbd7c7f80ffbf2e9ffd16cf567dcbda354e2152"
+    },
+    "remotion-template/package.json": {
+      "bytes": 1242,
+      "sha256": "3fd88b5dd9c2699d99c52ebd1ca3e47be73dabf7e1aef1e1b6b7b7e8cec10229"
+    },
+    "remotion-template/remotion.config.ts": {
+      "bytes": 117,
+      "sha256": "38e9e6394e32f151e454efdeb84da8bcc616da7550bc8ef52e1721a001745394"
+    },
+    "remotion-template/src/IntroOutro.tsx": {
+      "bytes": 3185,
+      "sha256": "ad48885517a6755de7fe1652a3e880b3bcef13db7c7d2ee2067c4ff2e43dc7a4"
+    },
+    "remotion-template/src/Root.tsx": {
+      "bytes": 4020,
+      "sha256": "285ee4ded0a4ed19427a2d8920a4996790cefaea7a0e07ed64d32c24445ecd96"
+    },
+    "remotion-template/src/index.ts": {
+      "bytes": 109,
+      "sha256": "957e481dd33a29b4a55ae0e95dbf763b7e48c37c427ca4bd1275faf34bc07a74"
+    },
+    "remotion-template/tsconfig.json": {
+      "bytes": 276,
+      "sha256": "38a7d415778cf36ceda1643bf6bfd3d2ef8bcce6454f15864adb658b67aea952"
+    },
+    "render-studio.sh": {
+      "bytes": 1158,
+      "sha256": "7a45e0dfc00557c1a9b7af7b510dc11e83a28783355616f13deee1bb5c00ef93"
+    },
+    "pilot-16x9-lipsync-pt.mp4": {
+      "bytes": 3641864,
+      "sha256": "bb4b58796843cf7f0e85fef7926222f396b3717b37362eac510b0b424b43a860"
+    },
+    "pilot-9x16-lipsync-pt.mp4": {
+      "bytes": 2303675,
+      "sha256": "5e0084f2fe802e7db9a1e5ef36bda03e2e51a21d6477a992fb1b02b458554312"
+    },
+    "slide-patch.png": {
+      "bytes": 48740,
+      "sha256": "a2115508f9977d6824a25e6fea0112f09d2a1e17286072a72e5ddfa31fbb5191"
+    },
+    "slide-patch-mask.png": {
+      "bytes": 4763,
+      "sha256": "0db0e74e3cc9b30b823a66071caf02e8eaa8f8978beb0d8efb054b0491c2e60e"
+    },
+    "plan-lipsync-pt.json": {
+      "bytes": 1364,
+      "sha256": "49937d95817978fe838f87f4af4edadf3477bde58974e93d3ca75be0af6c8ca7"
+    },
+    "report-lipsync-pt.json": {
+      "bytes": 176,
+      "sha256": "4122cac474c80b73a1ac9bd09421f7b776684701229a490f6a094ae18bdfb38e"
+    },
+    "pilot-16x9-lipsync-anim.mp4": {
+      "bytes": 4244160,
+      "sha256": "5d626de1d2ae8382013c1574446ad5f1344de27f4dcd77cafa09af79ac0f47d9"
+    },
+    "pilot-9x16-lipsync-anim.mp4": {
+      "bytes": 2632296,
+      "sha256": "81e7a7d9d92f20baec7a111455fea8cd25c555d5c3a576962e214f41a3b1b24f"
+    },
+    "slide-sequence.mp4": {
+      "bytes": 694503,
+      "sha256": "efaba93b564ed131d094e176a26f0d1ed44aeb0199f1a3679d7eb84ddf430a30"
+    },
+    "plan-lipsync-anim.json": {
+      "bytes": 1375,
+      "sha256": "aa7ad977193d72f8c6e950f62cbd197a60a31404c244be6f4f250c589890ee03"
+    },
+    "report-lipsync-anim.json": {
+      "bytes": 176,
+      "sha256": "4122cac474c80b73a1ac9bd09421f7b776684701229a490f6a094ae18bdfb38e"
+    },
+    "plan-lipsync-anim-validate.json": {
+      "bytes": 2443,
+      "sha256": "348738887deff1f59aefc68995cb46bb5ce54ab29a95e9f8d5e300b1683ad339"
+    },
+    "plan-lipsync-anim-verify.json": {
+      "bytes": 346,
+      "sha256": "60588448589979e10741284c77cdc078ca19131be9629ffe3bab2b85dfc6373b"
+    },
+    "anim-16x9-2.png": {
+      "bytes": 740284,
+      "sha256": "f6e9f97a3b7e32d4d75e23d3cd8a2d344eaa3608d5f738888227d5129f51c281"
+    },
+    "anim-16x9-8.png": {
+      "bytes": 742173,
+      "sha256": "c2907c3577a6a2084c5e4e5e6f23c9c31e8a4033e9f49cbebab27a50206b1276"
+    },
+    "anim-16x9-15.png": {
+      "bytes": 781530,
+      "sha256": "3ab8e631fef9ace0d3460a11fc3eca953e6fabc62f289679368729601681c9cc"
+    },
+    "anim-9x16-2.png": {
+      "bytes": 465125,
+      "sha256": "84e5717120f6a0be216481177a1a39a8b7d4a0d0c6ac11cdb1d3f94f396b5f55"
+    },
+    "anim-9x16-8.png": {
+      "bytes": 468841,
+      "sha256": "523ddd3b4ae66375e35c21fd77a572b2de77940eaa9ed9172ec450a70865955f"
+    },
+    "anim-9x16-15.png": {
+      "bytes": 484347,
+      "sha256": "79a79279d50dbea248e9710dad95e8c332b1808e1107e182fd51bbabfecee66e"
+    },
+    "apply-slide-anim.sh": {
+      "bytes": 3370,
+      "sha256": "2ca9b6e5a69b64224c6cf2ca663e06abd8d5d830a938e10c115cc66460a16a6d"
+    },
+    "SLIDE_PT.md": {
+      "bytes": 3110,
+      "sha256": "dc6a0e08c2a75113184b94b6617cbcfe0c2af4ae528f5eb162d7dcfa214faaf3"
+    },
+    "remotion-template/src/SlideSequence.tsx": {
+      "bytes": 11888,
+      "sha256": "95aa62b643518ba55642adf1cae55909511454664ecc0ae0b9808d5c3323c415"
+    },
+    "pilot-16x9-didatico-voz.mp4": {
+      "bytes": 5823543,
+      "sha256": "50caf1e8001a8ca0b4be16ed6e5b70dc24eb759cdd98cdb43ccc07c7361f4682"
+    },
+    "pilot-9x16-didatico-voz.mp4": {
+      "bytes": 4466106,
+      "sha256": "9b3969dde280f9e795a9dab4dab2dee074c2d0754147443708d1145e7bae3739"
+    },
+    "didactic-intro-16.mp4": {
+      "bytes": 2049556,
+      "sha256": "cc94ea874620557df965aebfcb3f265336f90446a51d23ba07ef497e1dec7eda"
+    },
+    "didactic-intro-9.mp4": {
+      "bytes": 1541531,
+      "sha256": "2cb0a474a43e38247e3a1e058153954e36da4c6200788ede804d8380da895ef8"
+    },
+    "didactic-outro-16.mp4": {
+      "bytes": 1470766,
+      "sha256": "e8b211798ffdf740875b9a317362b25306852553bb9bc9d0cb91690845203f42"
+    },
+    "didactic-outro-9.mp4": {
+      "bytes": 1107690,
+      "sha256": "54180eb3c5962971c54283c246600baea967095ebf293816fdfb83c8a70a33d4"
+    },
+    "intro-narracao.wav": {
+      "bytes": 2669134,
+      "sha256": "bff9327891267453864994418ae67bf3ae3233ddbda6e87410150bc0985d597d"
+    },
+    "outro-narracao.wav": {
+      "bytes": 1800398,
+      "sha256": "aba912ad83fb0200945c3e11a5bf2671153f9ac2c40066d43788ab0e418a946d"
+    },
+    "concat-didatico.sh": {
+      "bytes": 1785,
+      "sha256": "fae5fc82e1f06e5b999640fdbc9500b0200430567654f6da43a982e591256fe1"
+    },
+    "apply-slide-didatico.sh": {
+      "bytes": 3390,
+      "sha256": "a801c84ea70d2d12ed0cf19f5b83969001810379e8df93c064ff0bb7e2f0792b"
+    },
+    "captions-16x9-destaque.ass": {
+      "bytes": 1009,
+      "sha256": "a09a31401bb0c92c8e48e367b3c555b7b7328c4ac4a291e7d19beccf2c517303"
+    },
+    "captions-9x16-destaque.ass": {
+      "bytes": 1008,
+      "sha256": "0c3a10c217651f92cdedf79f621c0233af21c5df13baa416d702cec529307aaf"
+    },
+    "remotion-template/src/DidacticIntroOutro.tsx": {
+      "bytes": 15409,
+      "sha256": "f1a2fd2caafbd46681885f0ced108c94c0738c254c8ed56ab55e187d36a1af7e"
+    },
+    "remotion-template/public/intro-clone.wav": {
+      "bytes": 2669134,
+      "sha256": "bff9327891267453864994418ae67bf3ae3233ddbda6e87410150bc0985d597d"
+    },
+    "remotion-template/public/outro-clone.wav": {
+      "bytes": 1800398,
+      "sha256": "aba912ad83fb0200945c3e11a5bf2671153f9ac2c40066d43788ab0e418a946d"
+    },
+    "DISCOVERIES.md": {
+      "bytes": 11615,
+      "sha256": "c3c0ad298a46d70ff616609a2f7aea200ed5b38831892d0c00fbc02ef57d083d"
+    },
+    "presenter-card.png": {
+      "bytes": 160176,
+      "sha256": "14fcd935f4e11e1fcb8e4ce992a5c72fdb62e346292dcac03c5eda396b878959"
+    },
+    "presenter-cutout.png": {
+      "bytes": 244639,
+      "sha256": "bc6e5c0ee2026a1321f82d3ef8c28c0289b28fad12e436f2028e1be2bf875197"
+    },
+    "make-presenter-cutout.py": {
+      "bytes": 2955,
+      "sha256": "e42f6b98ef68e959aca2e050692fc57bce4b4247f41eadb3ccde43496928de9f"
+    },
+    "remotion-template/public/presenter-cutout.png": {
+      "bytes": 244639,
+      "sha256": "bc6e5c0ee2026a1321f82d3ef8c28c0289b28fad12e436f2028e1be2bf875197"
+    },
+    "final-16x9-8.png": {
+      "bytes": 608423,
+      "sha256": "33d857f61157774b69815bfa30b28ab947659c64b05603c3d2e602a06e80e544"
+    },
+    "final-9x16-8.png": {
+      "bytes": 476881,
+      "sha256": "391d93de894b2eae88979c03014bde1b9db4c7485b0f946b847954d6f233007c"
+    },
+    "final-16x9-40.png": {
+      "bytes": 560162,
+      "sha256": "303cb46615cf6df7932eee3f5b5f34333c6d9328456466cb18334526af08f4b1"
+    },
+    "final-9x16-40.png": {
+      "bytes": 426875,
+      "sha256": "1eadcfc03359d4e051a261bc3342a0521c6a5f6dd98abf067404ed2da43ba863"
+    },
+    "final-16x9-5.png": {
+      "bytes": 606750,
+      "sha256": "10e1926043339b8a2b5b1835c0169f20890138aa2d0b6e55c55c1f6f10b7916f"
+    },
+    "final-9x16-5.png": {
+      "bytes": 472868,
+      "sha256": "ff158171ce2ce3a5629702db257b555ebcc7cf76e8d7700abed4c2093965b5ec"
+    },
+    "presenter-intro-1080.mp4": {
+      "bytes": 2510810,
+      "sha256": "117ef6752583419f6b488b70094aa48e6a21abbacc66db68bba48757fb0c500b"
+    },
+    "presenter-outro-1080.mp4": {
+      "bytes": 1870286,
+      "sha256": "89047bb71bf516a9c3560de6fe57f0a4173d3afa47b298309e5d2b3626768d59"
+    },
+    "presenter-intro-card.mp4": {
+      "bytes": 1042053,
+      "sha256": "5a77f1ae7057c15e61df0aff69700ba7f6107e5a480f6280a13911c3636b6c66"
+    },
+    "presenter-outro-card.mp4": {
+      "bytes": 743954,
+      "sha256": "a03c94b90d943dd6d1bbf17acd0534c1c3616fd3b2d18a316499045fd137ebf9"
+    },
+    "remotion-template/public/presenter-intro-card.mp4": {
+      "bytes": 1042053,
+      "sha256": "5a77f1ae7057c15e61df0aff69700ba7f6107e5a480f6280a13911c3636b6c66"
+    },
+    "remotion-template/public/presenter-outro-card.mp4": {
+      "bytes": 743954,
+      "sha256": "a03c94b90d943dd6d1bbf17acd0534c1c3616fd3b2d18a316499045fd137ebf9"
+    },
+    "card-bg-560x700.png": {
+      "bytes": 150775,
+      "sha256": "a38dc6726307553cb7023dbc6d103f8ee310ef49c1da19bffb6457f75fa53bff"
+    },
+    "render-presenter-card-lipsync.sh": {
+      "bytes": 5441,
+      "sha256": "b3d7f3f10334d69c0684902072419edadfb7b73f267d664410fad7cbab70566e"
+    },
+    "compose-presenter-card.py": {
+      "bytes": 7296,
+      "sha256": "99e33c660a90f3f23dc7339ece455ae4e769ca09eddbdbb4c9fd427ba16ebb78"
+    },
+    "hashes-r1031.txt": {
+      "bytes": 821,
+      "sha256": "ac9b9373f233269f9b38320f18b57691a524d6125a7ed06cb5f40f7f5995c71b"
+    },
+    "intro-card4-7.png": {
+      "bytes": 150941,
+      "sha256": "6d5b0c56228468ecfedcccc9d6193829daf31cd476706f5c9d285e1df65363b8"
+    },
+    "outro-card-5.png": {
+      "bytes": 153139,
+      "sha256": "d4be9e1765a5d464d5a7391fcce4f6ca22a4f528a66cf40ed0b6e9c295475c7a"
+    },
+    "matte-closeup-preview.png": {
+      "bytes": 266295,
+      "sha256": "261babacb07c1da63a74b7d48927ab8f3c543d6f6c10015118ec0d3f5f330ff1"
+    },
+    "r1031-16x9-12.png": {
+      "bytes": 582208,
+      "sha256": "e088c300f40ca741df59e2feff84f7280bf6ea38e199c3d43e4b5ddee93cfeb6"
+    },
+    "r1031-16x9-14.5.png": {
+      "bytes": 674545,
+      "sha256": "06fc2fcf7bbd7df4953d33b316d428531a1647514624bd1da79604aede7fe1e3"
+    },
+    "r1031-16x9-2.png": {
+      "bytes": 525485,
+      "sha256": "cefd5dabcce3ab9b08935d16948df460f66e9f7caedeb07726a6f7ec56a3533d"
+    },
+    "r1031-16x9-20.png": {
+      "bytes": 626043,
+      "sha256": "62296dd8da2fa2859ccf46fc6034e5726fa64f01a72b860b96bc5c7a9a2a9cd0"
+    },
+    "r1031-16x9-30.png": {
+      "bytes": 779809,
+      "sha256": "2f735575a658c9678d0f0506c07a3aea54eff6f98b36d50527172545858cd26b"
+    },
+    "r1031-16x9-35.png": {
+      "bytes": 456828,
+      "sha256": "f447dbba7393af4f40acf47f40f8ae46aee0552f9fbf102a2b09f9f83c7a3ec4"
+    },
+    "r1031-16x9-40.png": {
+      "bytes": 509123,
+      "sha256": "dd687a650a569425669c2fcc81eca7fa96c1bcd251e11f0ea6acfe37d8eefd3a"
+    },
+    "r1031-16x9-43.png": {
+      "bytes": 540078,
+      "sha256": "bb45f12bd100bb1ed63c9faa3c99ebc25ec0e644262007dd924d656dc3f59241"
+    },
+    "r1031-16x9-7.png": {
+      "bytes": 546817,
+      "sha256": "ef6abf6f55db76d30d4ae771728645f9589290902f4b82ed0d60a2d581e825c4"
+    },
+    "r1031-9x16-12.png": {
+      "bytes": 473675,
+      "sha256": "89cb023a897b2178a74071beb54cf312dce490ae34c2b05bfe70db384f603b57"
+    },
+    "r1031-9x16-14.5.png": {
+      "bytes": 437956,
+      "sha256": "340c2eff5dc7e65732dc92ffbb334bc12a8f80178f63a25498b2164025b92011"
+    },
+    "r1031-9x16-2.png": {
+      "bytes": 436500,
+      "sha256": "425a5b9ba88ae44c40942a4d3aa93aaef2a2362444bc8526d34d97da8b8a06cb"
+    },
+    "r1031-9x16-20.png": {
+      "bytes": 383470,
+      "sha256": "96e59b54d5f339aaa290240bf019e27e4aeba8534ab5093638109f511edc5579"
+    },
+    "r1031-9x16-30.png": {
+      "bytes": 494867,
+      "sha256": "adba3d8a5f7902ce3641ba261fbcc6e1057f8b5e0a0f3e7bba5e1c04cbe55995"
+    },
+    "r1031-9x16-35.png": {
+      "bytes": 372887,
+      "sha256": "ecb8248d7024abe0261aaab21966667be0e8ba2bac12958353a3d717dabbdfe6"
+    },
+    "r1031-9x16-40.png": {
+      "bytes": 410731,
+      "sha256": "77592ab4cc4296d3605d6062231b40a09bfdd0b13c232164a7097b84fa2d31d6"
+    },
+    "r1031-9x16-43.png": {
+      "bytes": 426418,
+      "sha256": "170161d10836a8de9c2fb6ea26b7aedc8dfb4d435d6b0b7c6c8ed33c9d8b4ba6"
+    },
+    "r1031-9x16-7.png": {
+      "bytes": 454262,
+      "sha256": "6f5ac880b0211fe0411e09b67c9a583238245bf42e69046f21093c2650dc27c7"
+    },
+    "lipsync-intro16-7.png": {
+      "bytes": 533500,
+      "sha256": "1a7d077bf13d3a3d7249e87216368222a0c56764c2ad561e04bc2119f901a37c"
+    },
+    "lipsync-intro9-7.png": {
+      "bytes": 435859,
+      "sha256": "6ffefb47f6065591dc1393e53a53ba85d67a4399a7cbc1568987e36e80f832f3"
+    },
+    "lipsync-outro16-5.png": {
+      "bytes": 484866,
+      "sha256": "a1197efd7271e5b703ca7ea765bd29e9dc4492cdc292f03b2950bcbff976dd4d"
+    },
+    "lipsync-outro9-5.png": {
+      "bytes": 385536,
+      "sha256": "339a6fb4c7706d99da448b1ca0e9bf5385ff935b8c95f75d6bfe1ff344074357"
+    },
+    "presenter-middle-card.mp4": {
+      "bytes": 1460068,
+      "sha256": "e27067a6c0b8b5800b67c131c82138d64ce8e98ae7273ef8f5c20c07df180ac9"
+    },
+    "didactic-middle-16.mp4": {
+      "bytes": 3245457,
+      "sha256": "d17c2a7b3e478ab2fd35a0dd7d090b80643f12980db3d4707bc7cea4d4793b0f"
+    },
+    "didactic-middle-9.mp4": {
+      "bytes": 2742081,
+      "sha256": "9e0723864de963a068992ceaf51484c36e22c844acd96ad66998fea969b2d8a1"
+    },
+    "render-presenter-card-whole.sh": {
+      "bytes": 3836,
+      "sha256": "8f468cbf367b807115c9d565cf16cba417821c18f5891fd470dc0ceca78a21c5"
+    },
+    "loudness-r1032.txt": {
+      "bytes": 3104,
+      "sha256": "33144ceb0946845cd3a81fd7e195e8a9de382dd0ad39ada1d6cb0b25fe6d61dd"
+    },
+    "r1032-16x9-0.5.png": {
+      "bytes": 498616,
+      "sha256": "07dc336f04aa85e7c0c400abc1daafb13105abb8d2b76faae78ef37db97b9142"
+    },
+    "r1032-16x9-12.png": {
+      "bytes": 578436,
+      "sha256": "73159f3a463cb63db03ab5e5efdbe49e6ab17815266e892d30bea5da32ade76e"
+    },
+    "r1032-16x9-14.5.png": {
+      "bytes": 386146,
+      "sha256": "a5f47e279455cc52f30dfb671220d088dfab254f991dc8554a4cf673b5042f65"
+    },
+    "r1032-16x9-20.png": {
+      "bytes": 423173,
+      "sha256": "4924af07c33def9803503191087d81f617f118ddd280e88500e31a9c8f257b1b"
+    },
+    "r1032-16x9-30.png": {
+      "bytes": 535254,
+      "sha256": "d43301b055525a87ae1b8443a5f8f7980fce51f8fd24ec98969ce289966eb220"
+    },
+    "r1032-16x9-35.png": {
+      "bytes": 454575,
+      "sha256": "d19f5d29cb06d87739ea6b1c7b0b3f04ac7818cf4f048a3d519f06c4a42e9180"
+    },
+    "r1032-16x9-40.png": {
+      "bytes": 507033,
+      "sha256": "c2e970f7b9680cded6ccc96b1b347d17738267472bbb4a720f65daf701c94970"
+    },
+    "r1032-16x9-43.png": {
+      "bytes": 513051,
+      "sha256": "cc17e5abdb0f3ad77c3f2cbf2fadcc419675fa9be48d322b02af9c4ba49e9f6b"
+    },
+    "r1032-16x9-7.png": {
+      "bytes": 544378,
+      "sha256": "d0053759feb9e7133bfffe579b7639eaeaab7ea3282811024592924fe9da6212"
+    },
+    "r1032-9x16-0.5.png": {
+      "bytes": 409471,
+      "sha256": "1672a8fb3b0e6efcb37c4c69177fdb9e84ad574cb7ab6d926e2cd1a4c33467b5"
+    },
+    "r1032-9x16-12.png": {
+      "bytes": 459445,
+      "sha256": "b63f93cbe96c1beecd31cf21f761a543a38f34262a4aba1b6954142211f2d591"
+    },
+    "r1032-9x16-14.5.png": {
+      "bytes": 399753,
+      "sha256": "24615e45deb4d91b5426d1d86819ca1f77ddf5f8f55e003a20031a92d831c15c"
+    },
+    "r1032-9x16-20.png": {
+      "bytes": 428669,
+      "sha256": "37dc6e9109ba3ecb263db14433b937a68008cc36a0b5b43a57e1c9b5a1c3eaee"
+    },
+    "r1032-9x16-30.png": {
+      "bytes": 541588,
+      "sha256": "03c5714394a21bcd84b093adb2f022da804f51a0935535efb3147e1f309bad10"
+    },
+    "r1032-9x16-35.png": {
+      "bytes": 371490,
+      "sha256": "ffa6e82a4d117b6b62285005d085cbb2b29193372476013b473c153f12e83a15"
+    },
+    "r1032-9x16-40.png": {
+      "bytes": 392683,
+      "sha256": "8fa98869786815eabf8ead7e9e9001893fcb597629acebaf3a593c792c80fdf1"
+    },
+    "r1032-9x16-43.png": {
+      "bytes": 415339,
+      "sha256": "0453a37972e1fad1bf1b24f19a2fbfc8b6046fffa59a6eae7a871696fd187913"
+    },
+    "r1032-9x16-7.png": {
+      "bytes": 446616,
+      "sha256": "13840720c9c236bf64e4366882264a83e56a72d6ff3497e12c0664e75482303d"
+    },
+    "slide-sequence-dark.mp4": {
+      "bytes": 652903,
+      "sha256": "75b87f1700ca5f933d3e1ac534e07f18bce007085d1879997b4b14d24f279dc5"
+    },
+    "remotion-template/src/DidacticMiddle.tsx": {
+      "bytes": 6864,
+      "sha256": "d5af636ac17037762ae156665c5ce6d02eab19cdda1209f22344a5c778d89c9f"
+    },
+    "remotion-template/src/DarkSlideSequence.tsx": {
+      "bytes": 12691,
+      "sha256": "07b791d9763d02e4e6192f25258a229eae00d3240e6c5cbe8b73fa597d58b810"
+    },
+    "remotion-template/public/slide-sequence-dark.mp4": {
+      "bytes": 652903,
+      "sha256": "75b87f1700ca5f933d3e1ac534e07f18bce007085d1879997b4b14d24f279dc5"
+    },
+    "remotion-template/public/presenter-middle-card.mp4": {
+      "bytes": 1460068,
+      "sha256": "e27067a6c0b8b5800b67c131c82138d64ce8e98ae7273ef8f5c20c07df180ac9"
+    },
+    "remotion-template/public/middle-clone.wav": {
+      "bytes": 3840078,
+      "sha256": "22ec02a8518781a8ac0c15b17dd68008ae7891677217cce7e348fca7bcc888bd"
+    }
+  },
+  "verification": {
+    "plan_16x9_standard": "valid",
+    "plan_digest": "2773a7ac33dd411e63a9d8a388bdea636db87fa9caa7aac456e2aa8e83985ef0",
+    "render_metadata": "matched",
+    "loudness_lufs": -16.33,
+    "visual_quality_verified": false
+  },
+  "limitations": [
+    "legenda é tradução, não verbatim",
+    "sem dublagem",
+    "sem revisão humana",
+    "não publicado",
+    "9:16 não é representado pelo schema R1024 (composição com fundo desfocado)"
+  ],
+  "guard_gap": "npm run <script> contorna a checagem lexical; heredoc com literal de instalação gera falso positivo",
+  "voice_clone": {
+    "engine": "XTTS v2 em CPU",
+    "license": "CPML não comercial",
+    "consent": "declarado pelo operador; não verificado",
+    "files": [
+      "pilot-16x9-dub-clone.mp4",
+      "pilot-9x16-dub-clone.mp4",
+      "dub-pt-BR-clone.wav"
+    ]
+  },
+  "lip_sync": {
+    "status": "completed",
+    "method": "Wav2Lip 640x360 em 4 blocos; boca sobreposta ao original 1080p só na região do rosto",
+    "slide_pt": true,
+    "outputs": [
+      "pilot-16x9-lipsync-pt.mp4",
+      "pilot-9x16-lipsync-pt.mp4",
+      "pilot-16x9-lipsync-anim.mp4",
+      "pilot-9x16-lipsync-anim.mp4",
+      "pilot-16x9-didatico-voz.mp4",
+      "pilot-9x16-didatico-voz.mp4"
+    ],
+    "visual_quality_verified": false
+  },
+  "cpu_lipsync": {
+    "script": "render-lipsync-cpu.sh",
+    "scale": "640x360",
+    "chunk_seconds": 5,
+    "threads": 2,
+    "max_rss_mb": 4500,
+    "status": "completed",
+    "chunks": 4,
+    "outputs": [
+      "pilot-16x9-lipsync-pt.mp4",
+      "pilot-9x16-lipsync-pt.mp4"
+    ]
+  },
+  "studio": {
+    "architecture": "STUDIO.md",
+    "qc": "QC.md",
+    "variants": "render-studio.sh",
+    "template": "remotion-template/"
+  },
+  "slide_pt": {
+    "patch": "slide-patch.png",
+    "mask": "slide-patch-mask.png",
+    "position": [
+      210,
+      76
+    ],
+    "doc": "SLIDE_PT.md"
+  },
+  "final_verification": {
+    "plan": "plan-lipsync-pt.json",
+    "digest": "464956fa46bbbab1997b4815c41c39631144e9f9467f1165327face758cc5b0b",
+    "render_metadata": "matched",
+    "loudness_lufs": -16.5,
+    "visual_quality_verified": false,
+    "animated": {
+      "plan": "plan-lipsync-anim.json",
+      "digest": "7812ddf33bf88773a4bee9515482d04a9db2342db9185bd0f4ac5c6ea46dd22e",
+      "render_metadata": "matched",
+      "loudness_lufs": -16.5,
+      "visual_quality_verified": false
+    },
+    "didactic": {
+      "duration_seconds": 44.1,
+      "loudness_lufs": -16.29,
+      "audio_checked_at_seconds": [
+        3,
+        20,
+        37
+      ],
+      "visual_quality_verified": false,
+      "metadata_verified": true,
+      "hashes": {
+        "pilot-16x9-didatico-voz.mp4": "50caf1e8001a8ca0b4be16ed6e5b70dc24eb759cdd98cdb43ccc07c7361f4682",
+        "pilot-9x16-didatico-voz.mp4": "9b3969dde280f9e795a9dab4dab2dee074c2d0754147443708d1145e7bae3739"
+      },
+      "presenter_cards": {
+        "asset_sha256": "bc6e5c0ee2026a1321f82d3ef8c28c0289b28fad12e436f2028e1be2bf875197",
+        "frame_checks": [
+          "final-16x9-5.png",
+          "final-9x16-5.png",
+          "final-16x9-8.png",
+          "final-9x16-8.png",
+          "final-16x9-40.png",
+          "final-9x16-40.png"
+        ],
+        "visual_quality_verified": false
+      },
+      "talking_presenter": {
+        "intro_card": "presenter-intro-card.mp4",
+        "outro_card": "presenter-outro-card.mp4",
+        "frame_checks": [
+          "r1031-16x9-7.png",
+          "r1031-9x16-7.png",
+          "r1031-16x9-40.png",
+          "r1031-9x16-40.png"
+        ],
+        "human_listening_verified": false,
+        "visual_quality_verified": false
+      },
+      "middle": {
+        "video_16x9": "didactic-middle-16.mp4",
+        "video_9x16": "didactic-middle-9.mp4",
+        "slide": "slide-sequence-dark.mp4",
+        "presenter_card": "presenter-middle-card.mp4",
+        "old_middle_used": false
+      },
+      "frame_checks": [
+        "r1032-16x9-0.5.png",
+        "r1032-16x9-7.png",
+        "r1032-16x9-20.png",
+        "r1032-16x9-30.png",
+        "r1032-16x9-40.png",
+        "r1032-9x16-0.5.png",
+        "r1032-9x16-7.png",
+        "r1032-9x16-20.png",
+        "r1032-9x16-30.png",
+        "r1032-9x16-40.png"
+      ]
+    }
+  },
+  "animated_slides": {
+    "composition": "Remotion SlideSequence",
+    "canvas": "934x864 (escalado para 935x864)",
+    "fps": 30,
+    "duration_seconds": 20,
+    "scenes": 3,
+    "timing": [
+      {
+        "scene": 1,
+        "from": 0.0,
+        "to": 5.47,
+        "theme": "contexto: 100+ qubits"
+      },
+      {
+        "scene": 2,
+        "from": 5.67,
+        "to": 12.23,
+        "theme": "mudança: Eagle/Heron"
+      },
+      {
+        "scene": 3,
+        "from": 12.63,
+        "to": 20.0,
+        "theme": "por quê: simulação clássica"
+      }
+    ],
+    "file": "slide-sequence.mp4",
+    "outputs": [
+      "pilot-16x9-lipsync-anim.mp4",
+      "pilot-9x16-lipsync-anim.mp4"
+    ],
+    "static_fallback": {
+      "file": "slide-patch.png",
+      "apply": "apply-slide.sh"
+    },
+    "implementation": "remotion-template/ (SlideSequence), apply-slide-anim.sh",
+    "verification": {
+      "plan": "plan-lipsync-anim.json",
+      "digest": "7812ddf33bf88773a4bee9515482d04a9db2342db9185bd0f4ac5c6ea46dd22e",
+      "render_metadata": "matched",
+      "loudness_lufs": -16.5,
+      "visual_quality_verified": false
+    }
+  },
+  "didactic_narration": {
+    "engine": "XTTS v2 em CPU",
+    "voice": "clone da apresentadora; consentimento declarado, não verificado",
+    "license": "CPML, uso não comercial",
+    "intro": {
+      "text": "Neste vídeo: por que a IBM oferece processadores de mais de 100 qubits e por que os menores saíram de linha. E o limite da simulação.",
+      "audio_seconds": 13.901,
+      "video_seconds": 14.187,
+      "file": "didactic-intro-16.mp4"
+    },
+    "outro": {
+      "text": "Em resumo: 100+ qubits disponíveis; chips menores desativados; e a simulação clássica ainda é um limite.",
+      "audio_seconds": 9.377,
+      "video_seconds": 9.813,
+      "file": "didactic-outro-16.mp4"
+    },
+    "final_16x9": "pilot-16x9-didatico-voz.mp4",
+    "final_9x16": "pilot-9x16-didatico-voz.mp4",
+    "duration_seconds": 44.1,
+    "loudness_lufs": -16.29,
+    "visual_quality_verified": false,
+    "hashes": {
+      "pilot-16x9-didatico-voz.mp4": "50caf1e8001a8ca0b4be16ed6e5b70dc24eb759cdd98cdb43ccc07c7361f4682",
+      "pilot-9x16-didatico-voz.mp4": "9b3969dde280f9e795a9dab4dab2dee074c2d0754147443708d1145e7bae3739"
+    },
+    "presenter_cards": {
+      "asset": "presenter-cutout.png",
+      "sha256": "bc6e5c0ee2026a1321f82d3ef8c28c0289b28fad12e436f2028e1be2bf875197",
+      "source_frame_seconds": 5.4,
+      "crop": "560x800+1180+130",
+      "matte": "limiar de luminosidade + fechamento + erosão + descontaminação",
+      "layout_16x9": "retrato à direita; roadmap à esquerda",
+      "layout_9x16": "retrato no topo direito; linha do tempo vertical",
+      "zoom": "1.015 -> 1.08",
+      "label": "APRESENTADORA / VOZ SINTÉTICA",
+      "visual_quality_verified": false
+    },
+    "talking_presenter": {
+      "enabled": true,
+      "engine": "Wav2Lip wav2lip_gan.pth em CPU; blocos de 5 s; 640x360; watchdog 4,5 GB",
+      "intro": {
+        "audio_seconds": 13.901,
+        "video_1080": "presenter-intro-1080.mp4",
+        "card": "presenter-intro-card.mp4",
+        "card_seconds": 14.187,
+        "card_size": "560x700"
+      },
+      "outro": {
+        "audio_seconds": 9.377,
+        "video_1080": "presenter-outro-1080.mp4",
+        "card": "presenter-outro-card.mp4",
+        "card_seconds": 9.813,
+        "card_size": "560x700"
+      },
+      "matte": "suave V*(1-S), recorte 560x700, fade inferior de 20 px",
+      "audio": "narração mantida em <Audio>; vídeo do cartão mudo",
+      "lip_sync_checked_by_frames": true,
+      "human_listening_verified": false,
+      "visual_quality_verified": false,
+      "continuous_pass": true,
+      "old_middle_used_in_final": false,
+      "middle": {
+        "audio_seconds": 20.0,
+        "presenter_card": "presenter-middle-card.mp4",
+        "slide": "slide-sequence-dark.mp4",
+        "video_16x9": "didactic-middle-16.mp4",
+        "video_9x16": "didactic-middle-9.mp4"
+      }
+    }
+  },
+  "core_specialization": {
+    "skill": ".opencode/skills/video-didatico-tecnico",
+    "spec": "specs/SPEC-935-R1029-video-didatico-tecnico.md",
+    "tests": "tests/test_r1029_video_didatico_skill.py",
+    "discoveries": "pilots/r1026-quantum/DISCOVERIES.md",
+    "test_status": "8 passed R1029; 8 passed R1030; 6 passed R1031; 5 passed R1032",
+    "notes": "skill de documentação; não executa LLM/vídeo; consentimento de voz declarado, não verificado",
+    "r1030": {
+      "spec": "specs/SPEC-935-R1030-apresentadora-cartoes-didaticos.md",
+      "spec_sha256": "e8c89fce3671f9550900124a070e0297392f7e54fd8b6b4a53712ba4ef1b65b0",
+      "test": "tests/test_r1030_presenter_cards.py",
+      "test_sha256": "ccd5feb07fceca626062a52827de61f2960ba12605aa9670f55d36a544127888",
+      "discoveries": "pilots/r1026-quantum/DISCOVERIES.md#15-16",
+      "status": "verified locally: 8 passed",
+      "visual_quality_verified": false
+    },
+    "r1031": {
+      "spec": "specs/SPEC-935-R1031-apresentadora-falando-cartoes.md",
+      "spec_sha256": "fcdce913bd9213e01e412bdd820a5eea93ed6c4565edd6a3d008d09f7512ba8a",
+      "test": "tests/test_r1031_talking_presenter_cards.py",
+      "test_sha256": "da5fd9977771298cba628315a2b8e82033904959f8853f47dedfd419d8de184e",
+      "discoveries": "pilots/r1026-quantum/DISCOVERIES.md#19-21",
+      "status": "verified locally",
+      "visual_quality_verified": false
+    },
+    "r1032": {
+      "spec": "specs/SPEC-935-R1032-cenario-unico.md",
+      "spec_sha256": "222b5aa90262b2b2d97310b77595bb8d775653d32d25754f721f587b5ea1121b",
+      "test": "tests/test_r1032_single_scenario.py",
+      "test_sha256": "abef5f1df452fb9eecef7141103533e95c09c563f680f8c0c06e2a42dfddfe2f",
+      "discoveries": "pilots/r1026-quantum/DISCOVERIES.md#19-21",
+      "status": "verified locally",
+      "visual_quality_verified": false
+    }
+  },
+  "legacy": {
+    "old_middle_files": [
+      "pilot-16x9-didatico-base.mp4",
+      "pilot-9x16-didatico-base.mp4"
+    ],
+    "used_in_final": false,
+    "note": "histórico; o concat usa didactic-middle-16/9.mp4"
+  }
+}

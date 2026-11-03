@@ -7,14 +7,14 @@ seus gates. Nenhum dos dois comprova que todos os caminhos foram executados.
 
 ## Origem, abrangência e formatos
 
-Base Git `84ef0820a71f52756203854ea83d5a1211d8c254`; identidade das fontes locais `19e1b500a9d05bd7d2633a60b4c203f52ce8abc5697773afec55ee6386fce8f1`.
+Base Git `d02817ca460ee6411761a8a3f0b82d17dafd2740`; identidade das fontes locais `d53ac4511f757431da55589db0e6a0fcde2daebdb2b20303611d45882b7ab6b5`.
 
-**707 módulos Python**, **995 pares internos**, **1118 declarações de importação**, **6751 símbolos**, **45 pacotes**, **18 camadas** e **21 fluxogramas**.
+**707 módulos Python**, **1000 pares internos**, **1131 declarações de importação**, **6779 símbolos**, **45 pacotes**, **18 camadas** e **22 fluxogramas**.
 
-O inventário inclui 10222 arquivos rastreados presentes e
+O inventário inclui 10267 arquivos rastreados presentes e
 8 superfícies não Python. Há 0 erros
 de AST na extração, 6 imports dinâmicos e
-4115 registros de imports externos. Parsing sem erro não
+4119 registros de imports externos. Parsing sem erro não
 comprova importação executável ou instalação das dependências.
 
 | Artefato | Como usar |
@@ -96,11 +96,18 @@ não é chamado automaticamente, e a rota `banca_rate` aponta a um método ausen
 O [estado atual](ESTADO_ATUAL_CORE_R916.md) separa esses defeitos das evidências
 operacionais; o atlas não os corrige ou promove à prontidão científica.
 
-**Modelos e contexto.** O fluxo 20 descreve uma recomendação, não um novo
-roteador instalado. Luna é candidato econômico com testes; Sol é candidato
-para escalonamento. Google permanece condicionado à elegibilidade do cliente.
-Tarifa de API, créditos e assinatura são comparações distintas. A fonte local
-continua com padrão `ollama-local/llama3.2`. [Medições e fontes](MODELOS_E_CUSTO_DE_TOKENS.md).
+**Modelos e contexto.** O fluxo 20 orienta comparação por custo/tarefa aceita;
+não muda o padrão. O modelo da sessão `openai/gpt-6-luna` aparece na documentação
+de API, mas não no catálogo local `opencode.json` observado (que lista GPT-6 Astra
+e GPT-5.6 Luna). Gemini Flash e suas cotas também dependem do provider/conta.
+O default local permanece `ollama-local/llama3.2`. A inspeção read-only
+`ollama show --modelfile llama3.2` não encontrou `PARAMETER num_ctx`, enquanto
+Ollama documenta default 2048; portanto a janela 32768 declarada pelo cliente
+não prova janela ativa do daemon. SDK R918 detecta num_ctx por `/api/show` e
+recusa estimativas excedidas sem truncar; não intercepta o OpenCode interno.
+Consulte [modelos e custo](architecture/MODELOS_E_ECONOMIA_DE_TOKENS_R916.md),
+[quantização no GitHub](architecture/QUANTIZACAO_LOCAL_GITHUB_R916.md) e
+[recibos da revisão](verification-documentation-r916-ollama-quantizacao.json).
 
 **CI.** O perfil local científico é fechado e verificável por recibos. Ele não
 cria check GitHub ou substitui a revisão externa. O problema de cobrança da CI
@@ -131,6 +138,7 @@ remota é separado de testes locais aprovados.
 | 19 | [CI local e validação delimitada](architecture/flows/19-ci-local.mmd) | Alternativa local ao bloqueio da CI remota, com seleção fechada e recibos próprios. |
 | 20 | [Seleção econômica de modelos e contexto](architecture/flows/20-economia-modelos.mmd) | Política recomendada para comparar custo por tarefa aceita; não é um roteador automático novo. |
 | 21 | [Contexto de código e consultas de grafo](architecture/flows/21-contexto-codigo.mmd) | Busca e estrutura local reduzem leituras desnecessárias; ganhos precisam de medição comparável. |
+| 22 | [Contexto e erros de Ollama local](architecture/flows/22-ollama-contexto-erros.mmd) | Num_ctx observado, preflight estimado, erro quota/contexto e uso com origem declarada; sem truncamento/retry/fallback automático. |
 
 Cada fonte possui um SVG correspondente. O catálogo conserva âncoras de código
 com caminho, símbolo, linha e SHA-256. Os testes exigem correspondência real;
@@ -161,19 +169,19 @@ Métodos e funções assíncronas entram nos símbolos, conservando nomes qualif
 
 | Camada | Módulos | Símbolos AST |
 |---|---:|---:|
-| `agentes` | 10 | 79 |
+| `agentes` | 10 | 80 |
 | `diagnostico` | 31 | 477 |
 | `engenharia_reversa` | 10 | 69 |
-| `evolucao` | 10 | 77 |
+| `evolucao` | 10 | 84 |
 | `ferramentas` | 66 | 439 |
-| `governanca` | 26 | 301 |
+| `governanca` | 26 | 304 |
 | `infraestrutura` | 6 | 5 |
-| `integracoes` | 130 | 1507 |
+| `integracoes` | 130 | 1516 |
 | `interfaces` | 10 | 126 |
 | `memoria_e_evidencias` | 44 | 234 |
 | `modulos_adicionais` | 122 | 1092 |
-| `orquestracao` | 39 | 473 |
-| `pesquisa_e_rag` | 124 | 1196 |
+| `orquestracao` | 39 | 476 |
+| `pesquisa_e_rag` | 124 | 1201 |
 | `plugins` | 5 | 15 |
 | `protocolos` | 9 | 8 |
 | `publicacao` | 3 | 32 |
@@ -189,7 +197,7 @@ outro estado, faça um snapshot autorizado das fontes antes de alterá-las.
 
 ```bash
 .venv/bin/python scripts/build_architecture_maps.py --source worktree \
-  --ref 84ef0820a71f52756203854ea83d5a1211d8c254 --output docs/architecture
+  --ref HEAD --output docs/architecture
 .venv/bin/python scripts/build_mermaid_architecture.py \
   --inventory docs/architecture/architecture-inventory.json \
   --output docs/architecture/dependencies.mmd \

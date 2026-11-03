@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "version": "R1044-1",
+  "part_id": "02XpQTA-_XE-P0095",
+  "model": "nvidia/Nemotron-3-Diarization",
+  "source_sha256": "c57f3802afeebc58e9c491896838ea56c47787f8d77a6b44eb769335fc25df23",
+  "key": "07067efef0af07bb4e20a3fb93fb5baf5ac3c71a391327a57970750e7d9efb3f",
+  "segments": [
+    {
+      "Start": 25.69,
+      "End": 27.03,
+      "Speaker": 0
+    },
+    {
+      "Start": 28.29,
+      "End": 30.8,
+      "Speaker": 1
+    },
+    {
+      "Start": 34.12,
+      "End": 36.95,
+      "Speaker": 1
+    },
+    {
+      "Start": 53.12,
+      "End": 54.21,
+      "Speaker": 2
+    }
+  ],
+  "units": [
+    {
+      "id": "U01872",
+      "speaker": 0,
+      "coverage": 0.809859,
+      "margin": 0.809859,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U01873",
+      "speaker": 1,
+      "coverage": 0.191176,
+      "margin": 0.191176,
+      "blocked": true,
+      "reason": "low_coverage",
+      "verified": false
+    },
+    {
+      "id": "U01874",
+      "speaker": 1,
+      "coverage": 1.0,
+      "margin": 1.0,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U01875",
+      "speaker": 1,
+      "coverage": 0.878378,
+      "margin": 0.878378,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U01876",
+      "speaker": 1,
+      "coverage": 1.0,
+      "margin": 1.0,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    },
+    {
+      "id": "U01877",
+      "speaker": 2,
+      "coverage": 0.673469,
+      "margin": 0.673469,
+      "blocked": false,
+      "reason": "assigned",
+      "verified": false
+    }
+  ],
+  "status": "diarized_pending_review",
+  "verified": false,
+  "limitations": [
+    "speaker indices are local to this part",
+    "identity is not inferred from speaker index",
+    "overlap/ambiguity blocks TTS assignment"
+  ]
+}

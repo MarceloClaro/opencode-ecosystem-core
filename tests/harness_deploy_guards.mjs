@@ -1,10 +1,10 @@
 /**
- * Harness de verificação do plugin deploy-guards.ts (SPEC-935-R900).
+ * Harness de verificação do plugin deploy-guards.ts (SPEC-935-R900 / SPEC-935-R1004).
  *
- * Importa o plugin REAL (caminho via env PLUGIN_PATH) e invoca a função de
- * hook `tool.execute.before` com payloads simulados, provando que a
- * validação usa o CONTEÚDO PROSPECTIVO (a versão que será gravada) e não o
- * arquivo em disco nem o caminho.
+ * Importa o plugin REAL (caminho via env PLUGIN_PATH) e invoca o hook
+ * `execute.before` registrado via `ctx.tool.hook` — o contrato da API V2.
+ * Prova que a validação usa o CONTEÚDO PROSPECTIVO (a versão que será gravada)
+ * e não o arquivo em disco nem o caminho.
  *
  * Execução: PLUGIN_PATH=... node --experimental-strip-types harness_deploy_guards.mjs
  * Exige Node >= 22.6 (type stripping nativo).
@@ -17,8 +17,27 @@ const TMP = "/tmp/opencode/harness";
 import * as fs from "node:fs";
 
 const mod = await import(PLUGIN);
-const plugin = await mod.default(); // export default é uma factory async
-const before = plugin["tool.execute.before"];
+const definition = mod.default;
+
+if (typeof definition !== "object" || definition === null || typeof definition.setup !== "function") {
+  throw new Error(`plugin não exporta definição V2 {id, setup}: ${typeof definition}`);
+}
+
+let before = null;
+const registered = [];
+await definition.setup({
+  tool: {
+    hook: async (name, callback) => {
+      registered.push(name);
+      if (name === "execute.before") before = callback;
+      return { dispose: async () => {} };
+    },
+  },
+});
+
+if (typeof before !== "function") {
+  throw new Error(`hook execute.before não registrado (hooks: ${registered.join(", ")})`);
+}
 
 const CLEAN = `<!doctype html><html><body><div class="card num">x</div>
 <script>var el=document.querySelector('.num');el.textContent='ok';</script>
@@ -34,7 +53,7 @@ let pass = 0, fail = 0;
 async function probe(label, input, output, expectDenied) {
   let denied = false, msg = "";
   try {
-    await before(input, output);
+    await before({ tool: input.tool, input: output.args });
   } catch (err) {
     denied = true;
     msg = String(err?.message || err);
@@ -55,7 +74,7 @@ try { fs.unlinkSync(NEW); } catch {}
 await probe(
   "write novo .html, JS limpo  (antes negava ENOENT)",
   { tool: "write" },
-  { args: { filePath: NEW, content: CLEAN } },
+  { args: { path: NEW, content: CLEAN } },
   false
 );
 
@@ -63,7 +82,7 @@ await probe(
 await probe(
   "write novo .html, bug R580 (querySelector('num'))",
   { tool: "write" },
-  { args: { filePath: NEW, content: BUGGY } },
+  { args: { path: NEW, content: BUGGY } },
   true
 );
 
@@ -74,7 +93,7 @@ fs.writeFileSync(alvo, BUGGY, "utf8");
 await probe(
   "edit que corrige arquivo em disco (disco=buggy -> prospectivo=clean)",
   { tool: "edit" },
-  { args: { filePath: alvo, oldString: "querySelector('num')", newString: "querySelector('.num')" } },
+  { args: { path: alvo, oldString: "querySelector('num')", newString: "querySelector('.num')" } },
   false
 );
 
@@ -82,7 +101,7 @@ await probe(
 await probe(
   "edit que introduz bug R580 (disco=clean -> prospectivo=buggy)",
   { tool: "edit" },
-  { args: { filePath: alvo, oldString: "querySelector('.num')", newString: "querySelector('num')" } },
+  { args: { path: alvo, oldString: "querySelector('.num')", newString: "querySelector('num')" } },
   true
 );
 
@@ -90,7 +109,7 @@ await probe(
 await probe(
   "write sem 'content' (conteúdo indeterminável -> não nega)",
   { tool: "write" },
-  { args: { filePath: NEW } },
+  { args: { path: NEW } },
   false
 );
 
