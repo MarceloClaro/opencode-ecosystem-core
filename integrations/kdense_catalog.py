@@ -121,26 +121,31 @@ def main(argv=None) -> int:
     p.add_argument("name")
     p.add_argument("--full", action="store_true")
     args = parser.parse_args(argv)
-    catalog = load_catalog(args.catalog)
-    if args.command == "stats":
-        print(json.dumps(stats(catalog), ensure_ascii=False, indent=2))
-    elif args.command == "categories":
-        counts = category_counts(catalog)
-        print(json.dumps(counts, ensure_ascii=False, indent=2) if args.json else
-              "\n".join(f"{name}: {count}" for name, count in counts.items()))
-    elif args.command == "search":
-        rows = search(catalog, args.query, category=args.category, limit=args.limit)
-        print(json.dumps([{k: row[k] for k in
-                           ("skill", "category", "description", "risk_flags", "score")}
-                          for row in rows], ensure_ascii=False, indent=2))
-    else:
-        row = get_skill(catalog, args.name)
-        print(json.dumps({k: row[k] for k in
-                          ("skill", "category", "description", "source_url",
-                           "source_commit", "risk_flags", "status")},
+    try:
+        catalog = load_catalog(args.catalog)
+        if args.command == "stats":
+            print(json.dumps(stats(catalog), ensure_ascii=False, indent=2))
+        elif args.command == "categories":
+            counts = category_counts(catalog)
+            print(json.dumps(counts, ensure_ascii=False, indent=2) if args.json else
+                  "\n".join(f"{name}: {count}" for name, count in counts.items()))
+        elif args.command == "search":
+            rows = search(catalog, args.query, category=args.category, limit=args.limit)
+            print(json.dumps([{k: row[k] for k in
+                               ("skill", "category", "description", "risk_flags", "score")}
+                              for row in rows], ensure_ascii=False, indent=2))
+        else:
+            row = get_skill(catalog, args.name)
+            print(json.dumps({k: row[k] for k in
+                              ("skill", "category", "description", "source_url",
+                               "source_commit", "risk_flags", "status")},
+                             ensure_ascii=False, indent=2))
+            text = row["text"] if args.full else row["text"][:12000]
+            print("\n" + text)
+    except (ValueError, OSError) as exc:
+        print(json.dumps({"status": "rejected", "error": str(exc)},
                          ensure_ascii=False, indent=2))
-        text = row["text"] if args.full else row["text"][:12000]
-        print("\n" + text)
+        return 2
     return 0
 
 
