@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "round": "R1049",
+  "observed_utc": "2026-11-03T23:44:26.807747+00:00",
+  "method": "GitHub API; commit SHA pinned; no clone or execution",
+  "sources": [
+    {
+      "repo": "anthropics/skills",
+      "url": "https://github.com/anthropics/skills",
+      "license": "no-explicit-license",
+      "commit": "ca45fc496a3436251f191354091d557da31c15b5",
+      "commit_date": "2026-10-28T19:20:38Z",
+      "default_branch": "main",
+      "stars": 187104,
+      "use": "reference/adaptation",
+      "code_copied": false
+    },
+    {
+      "repo": "obra/superpowers",
+      "url": "https://github.com/obra/superpowers",
+      "license": "MIT",
+      "commit": "22f0b463e7a5e579904dd6211a520321035526f7",
+      "commit_date": "2026-11-03T22:17:07Z",
+      "default_branch": "main",
+      "stars": 311848,
+      "use": "reference/adaptation",
+      "code_copied": false
+    },
+    {
+      "repo": "chgagne/claude-skills-research",
+      "url": "https://github.com/chgagne/claude-skills-research",
+      "license": "MIT",
+      "commit": "3f50d620d3d5a8d5c97aa1cdd5d5b04ca1c2a92b",
+      "commit_date": "2026-11-01T07:14:55Z",
+      "default_branch": "main",
+      "stars": 5,
+      "use": "reference/adaptation",
+      "code_copied": false
+    },
+    {
+      "repo": "K-Dense-AI/scientific-agent-skills",
+      "url": "https://github.com/K-Dense-AI/scientific-agent-skills",
+      "license": "MIT",
+      "commit": "a25cf9ec00e2745d03f8704acf6f6919694ccd9a",
+      "commit_date": "2026-11-02T09:23:26Z",
+      "default_branch": "main",
+      "stars": 55972,
+      "use": "8 protocols + 177 catalog; 168 instruction texts mirrored, 9 license-hold",
+      "code_copied": false
+    },
+    {
+      "repo": "K-Dense-AI/claude-skills-mcp",
+      "url": "https://github.com/K-Dense-AI/claude-skills-mcp",
+      "license": "Apache-2.0",
+      "commit": "72a7b502237cb3e697d3944be1b778498eed2d87",
+      "commit_date": "2026-07-20T17:58:53Z",
+      "default_branch": "main",
+      "stars": 411,
+      "use": "reference/adaptation",
+      "code_copied": false
+    },
+    {
+      "repo": "iart-ai/motion-skills",
+      "url": "https://github.com/iart-ai/motion-skills",
+      "license": "MIT",
+      "commit": "238dfc55aac123d4649be39adfe58c43193ca349",
+      "commit_date": "2026-10-25T14:18:32Z",
+      "default_branch": "master",
+      "stars": 1185,
+      "use": "reference/adaptation",
+      "code_copied": false
+    },
+    {
+      "repo": "win4r/video-director",
+      "url": "https://github.com/win4r/video-director",
+      "license": "MIT",
+      "commit": "4747e5c153509ef7f8f7fd1a0aad6acfda36280d",
+      "commit_date": "2026-10-30T06:04:07Z",
+      "default_branch": "main",
+      "stars": 299,
+      "use": "reference/adaptation",
+      "code_copied": false
+    },
+    {
+      "repo": "Vincentwei1021/video-shotcraft",
+      "url": "https://github.com/Vincentwei1021/video-shotcraft",
+      "license": "Apache-2.0",
+      "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+      "commit_date": "2026-10-29T16:17:26Z",
+      "default_branch": "main",
+      "stars": 16524,
+      "use": "reference/adaptation",
+      "code_copied": false
+    },
+    {
+      "repo": "wshobson/agents",
+      "url": "https://github.com/wshobson/agents",
+      "license": "MIT",
+      "commit": "7e2fb559cf4b824b27f1fec49fe88f7511066d26",
+      "commit_date": "2026-10-30T23:34:46Z",
+      "default_branch": "main",
+      "stars": 42158,
+      "use": "reference/adaptation",
+      "code_copied": false
+    },
+    {
+      "repo": "panjose/Co-Scientist",
+      "url": "https://github.com/panjose/Co-Scientist",
+      "license": "Apache-2.0",
+      "commit": "31240805f7bcb3652765a008dd2eae36a638e398",
+      "commit_date": "2026-06-11T13:46:42Z",
+      "default_branch": "main",
+      "stars": 6,
+      "use": "reference/adaptation",
+      "code_copied": false
+    },
+    {
+      "repo": "wanshuiyin/Auto-claude-code-research-in-sleep",
+      "url": "https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep",
+      "license": "MIT",
+      "commit": "f76ec8d6b77792e2242cca049e08d0cbb7d54e19",
+      "commit_date": "2026-11-03T16:40:15Z",
+      "default_branch": "main",
+      "stars": 18580,
+      "use": "reference/adaptation",
+      "code_copied": false
+    },
+    {
+      "repo": "remotion-dev/skills",
+      "url": "https://github.com/remotion-dev/skills",
+      "license": "no-explicit-license",
+      "commit": "c7cb2fdcacd134fb2ccb9b7a44f9ffa44e467271",
+      "commit_date": "2026-11-02T08:50:21Z",
+      "default_branch": "main",
+      "stars": 6259,
+      "use": "reference/adaptation",
+      "code_copied": false
+    }
+  ],
+  "limits": [
+    "License metadata is triage, not legal advice.",
+    "No third-party code was copied or executed.",
+    "Stars are dynamic and not a quality audit."
+  ],
+  "mirror_policy": {
+    "instruction_text_mirrored": "168 permissive skills (MIT/BSD/Apache/CC-BY/Biopython) with attribution",
+    "license_hold": "9 skills (GPL, non-commercial, proprietary or unknown) metadata-only",
+    "scripts_assets_dependencies_copied": false,
+    "autoload": false
+  }
+}

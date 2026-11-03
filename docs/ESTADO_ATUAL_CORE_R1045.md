@@ -11,22 +11,26 @@ disponibilidade de provedores.
 | Agentes em `opencode.json` | 333 |
 | Servidores MCP (diretos + `mcp.servers`) | 29 |
 | Comandos | 35 |
-| Skills em `.opencode/skills` | 41 |
+| Skills em `.opencode/skills` | 49 |
 | Checks do `doctor` | 22/22 |
 | Testes R1033–R1045 + instalador | **245** |
-| Testes R1033–R1046 + instalador | **303** + 1 opcional (render real R1026; 58 novos) |
+| Testes R1033–R1049 + instalador | **330** + 1 opcional (render real R1026; 85 novos) |
 | Specs formais | 291 |
 
 O `doctor` está **healthy** em modo estrutural; isso não autentica CLIs,
 modelos ou serviços externos.
 
-## Entregas R1035–R1047
+## Entregas R1035–R1049
 
 - **Editor universal** (`video_editor`, `video_editor_mcp`): timeline,
   FFmpeg, Remotion, legendas, áudio, render com recibo e retomada.
 - **Composição avançada R1046** (`video_editor_advanced`): multifaixa,
   transições e cor SDR paramétrica, com hash de fontes e recibo técnico separado
   de aprovação audiovisual/tradução/ciência.
+- **Skills seletivas R1049**: oito skills locais (Superpowers SDD/TDD, chgagne,
+  K-Dense com 8 protocolos + catálogo de 177, motion com 5, QA de vídeo, 10 receitas shotcraft,
+  10 papéis de engenharia e laboratório de pesquisa isolado). Fontes pinadas e
+  nenhum código de terceiro copiado.
 - **Dublagem R1047** (`pilots/r1026-quantum/r1047-dub`): XTTS local `speed 1.0`,
   4 blocos PT-BR, slide traduzido, SRT/ASS, sem cartão; WER ASR 2,17% e
   −16,10 LUFS. Lip sync refeito com Wav2Lip; revisão visual humana pendente.

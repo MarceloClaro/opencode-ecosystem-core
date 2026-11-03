@@ -72,11 +72,11 @@ do ambiente e da operação solicitada.
 
 ## Estado atual e orientação de leitura
 
-Revisão documental **R1047, 03/11/2026**, baseada no checkout local. As frentes
+Revisão documental **R1049, 03/11/2026**, baseada no checkout local. As frentes
 **R985–R1001** (conselho de 13 cientistas, autor/editor de alto rigor, scanner
-evolutivo, piloto OpenShell e executor Gemini) e **R1035–R1047** (editor de
+evolutivo, piloto OpenShell e executor Gemini) e **R1035–R1049** (editor de
 vídeo universal, dublagem, diarização, Remotion, catálogo de ferramentas,
-multifaixa, transições, cor, voz clonada e lip sync) foram incorporadas depois — veja
+multifaixa, transições, cor, voz clonada, lip sync e skills seletivas) foram incorporadas depois — veja
 [Capacidades principais](#capacidades-principais). Comece pelo
 [manual](MANUAL.md), pelo [índice documental](docs/README.md), pelo
 [estado atual R1045](docs/ESTADO_ATUAL_CORE_R1045.md) e pelo
@@ -274,6 +274,14 @@ e programação avançada. Prioridades: `obra/superpowers` (MIT, método TDD),
 `wshobson/agents` (MIT, catálogo de engenharia). Nenhum foi instalado; os
 bloqueios por licença e o protocolo de adoção estão em
 [`reports/r1048-claude-skills-github/`](reports/r1048-claude-skills-github/README.md).
+
+**Adoção seletiva de skills (R1049):** oito skills locais foram criadas a partir
+da triagem R1048: `superpowers-sdd-tdd`, `rigor-academico-chgagne`,
+`kdense-ciencia-seletiva` (8 protocolos + catálogo de 177 skills), `motion-design-seletivo` (5),
+`video-director-qa`, `video-shotcraft-selecao` (10 receitas),
+`agentes-engenharia-selecao` (10 papéis) e `laboratorio-pesquisa-isolado`.
+Nenhum código de terceiro foi copiado ou executado; instruções permissivas foram espelhadas com atribuição e as restritas ficaram em license_hold. Fontes e commits estão em
+`reports/r1049/sources.json`. Ver [evidência R1049](reports/r1049/README.md).
 
 **ASR e tradução:** o `faster-whisper-small` produziu texto turco sem sentido
 em parte do corpus; `large-v3` foi baixado e concluiu o lote das 107 partes (1.854 segmentos, 7.773 palavras), ainda sem revisão nativa.

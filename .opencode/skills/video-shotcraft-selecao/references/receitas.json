@@ -1,0 +1,18 @@
+{
+  "source": "https://github.com/Vincentwei1021/video-shotcraft",
+  "commit": "1266a3ec4831289c4d893d42dd5102723658039a",
+  "license": "Apache-2.0",
+  "selection_note": "10 padrões originais do Core; não são os 124 cartões do repositório.",
+  "recipes": [
+    {"id": "R01", "name": "Revelação de produto", "use_when": "produto físico ou interface principal", "motion": "entrada com escala e luz; foco no objeto", "risk": "superexposição e promessa visual irreal", "qa": "frame inicial, pico e final; produto legível", "source": "https://github.com/Vincentwei1021/video-shotcraft"},
+    {"id": "R02", "name": "Empilhamento de recursos", "use_when": "três recursos verificáveis", "motion": "cartões entram em sequência e ancoram", "risk": "excesso de texto e ritmo", "qa": "tempo de leitura e hierarquia", "source": "https://github.com/Vincentwei1021/video-shotcraft"},
+    {"id": "R03", "name": "Antes e depois", "use_when": "transformação demonstrável", "motion": "divisão ou wipe com mesma escala", "risk": "manipular imagens ou esconder diferença", "qa": "mesmo enquadramento e fonte", "source": "https://github.com/Vincentwei1021/video-shotcraft"},
+    {"id": "R04", "name": "Prova por dado", "use_when": "número com unidade e fonte", "motion": "contagem curta e eixo estável", "risk": "escala enganosa e 3D gratuito", "qa": "valor final, unidade e fonte", "source": "https://github.com/Vincentwei1021/video-shotcraft"},
+    {"id": "R05", "name": "Fluxo em etapas", "use_when": "processo de 3 a 5 passos", "motion": "linha de tempo com foco sequencial", "risk": "complexidade e texto pequeno", "qa": "cada etapa legível e na ordem", "source": "https://github.com/Vincentwei1021/video-shotcraft"},
+    {"id": "R06", "name": "Depoimento em cartão", "use_when": "fala curta e autorizada", "motion": "recorte com moldura e legenda", "risk": "cortar rosto ou inventar citação", "qa": "áudio, legenda e enquadramento", "source": "https://github.com/Vincentwei1021/video-shotcraft"},
+    {"id": "R07", "name": "Logo lockup", "use_when": "fechamento de marca", "motion": "construção tipográfica e respiro", "risk": "distorcer marca ou usar fonte não licenciada", "qa": "vetor, margem e duração", "source": "https://github.com/Vincentwei1021/video-shotcraft"},
+    {"id": "R08", "name": "Comparação lado a lado", "use_when": "duas opções reais", "motion": "split com rótulos fixos", "risk": "comparação injusta", "qa": "mesma métrica, escala e período", "source": "https://github.com/Vincentwei1021/video-shotcraft"},
+    {"id": "R09", "name": "CTA final", "use_when": "uma ação confirmada", "motion": "texto entra depois da demonstração", "risk": "promessa ou oferta não confirmada", "qa": "texto, contraste e permanência", "source": "https://github.com/Vincentwei1021/video-shotcraft"},
+    {"id": "R10", "name": "Gancho vertical", "use_when": "abertura 9:16", "motion": "primeiro frame com sujeito e tensão", "risk": "cortar informação e safe area", "qa": "primeiro frame no celular e legenda", "source": "https://github.com/Vincentwei1021/video-shotcraft"}
+  ]
+}

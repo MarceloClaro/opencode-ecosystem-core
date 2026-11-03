@@ -1,0 +1,18 @@
+{
+  "source": "https://github.com/wshobson/agents",
+  "commit": "7e2fb559cf4b824b27f1fec49fe88f7511066d26",
+  "license": "MIT",
+  "selection_note": "10 papéis originais do Core, inspirados no catálogo; não são cópias dos agentes.",
+  "agents": [
+    {"id": "code-reviewer", "role": "Revisão de código", "use_when": "diff com risco de regressão", "license": "MIT", "source": "https://github.com/wshobson/agents"},
+    {"id": "test-engineer", "role": "Testes e cobertura", "use_when": "contrato sem teste ou regressão", "license": "MIT", "source": "https://github.com/wshobson/agents"},
+    {"id": "debugger", "role": "Diagnóstico sistemático", "use_when": "falha reproduzível ou intermitente", "license": "MIT", "source": "https://github.com/wshobson/agents"},
+    {"id": "security-auditor", "role": "Segurança e permissões", "use_when": "nova superfície de execução", "license": "MIT", "source": "https://github.com/wshobson/agents"},
+    {"id": "performance-engineer", "role": "Desempenho e memória", "use_when": "meta de latência ou orçamento", "license": "MIT", "source": "https://github.com/wshobson/agents"},
+    {"id": "refactoring-specialist", "role": "Refatoração segura", "use_when": "dívida técnica com testes verdes", "license": "MIT", "source": "https://github.com/wshobson/agents"},
+    {"id": "api-designer", "role": "Contratos de API", "use_when": "interface pública ou integração", "license": "MIT", "source": "https://github.com/wshobson/agents"},
+    {"id": "data-engineer", "role": "Pipeline e proveniência", "use_when": "dados, schema ou reprocessamento", "license": "MIT", "source": "https://github.com/wshobson/agents"},
+    {"id": "devops-engineer", "role": "Build e deploy", "use_when": "ambiente ou automação reproduzível", "license": "MIT", "source": "https://github.com/wshobson/agents"},
+    {"id": "docs-writer", "role": "Documentação técnica", "use_when": "mudança de contrato ou operação", "license": "MIT", "source": "https://github.com/wshobson/agents"}
+  ]
+}

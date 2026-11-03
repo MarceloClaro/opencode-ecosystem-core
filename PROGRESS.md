@@ -40,7 +40,11 @@ não comprova o aceite integral.
   traduzido, SRT/ASS e sem cartão; WER ASR **2,17%**, **−16,10 LUFS** e 600
   frames. Lip sync refeito com Wav2Lip em CPU; revisão visual humana pendente.
   Ver `reports/r1047/QUANTUM-DUB-EVIDENCE.md`.
-- **303 testes** locais + 1 opcional passam; `doctor` 22/22.
+- **330 testes** locais + 1 opcional passam; `doctor` 22/22.
+- **R1049** adotou 8 skills seletivas: Superpowers SDD/TDD, chgagne, K-Dense
+  com 8 protocolos + catálogo de 177, motion com 5, QA de vídeo, 10 receitas shotcraft, 10 papéis
+  de engenharia e laboratório de pesquisa isolado. Nenhum código de terceiro
+  copiado; fontes em `reports/r1049/sources.json`.
 - **R1048** triou 20 repositórios Claude com skills de vídeo, academia, ciência
   e programação; priorizou `superpowers`, `chgagne`, `K-Dense` seletivo,
   `motion-skills`/`video-director` e `wshobson/agents`; nada foi instalado.
