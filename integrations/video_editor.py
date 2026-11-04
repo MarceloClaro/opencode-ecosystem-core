@@ -711,6 +711,10 @@ def render(plan, runner=None, probe_fn=None, dry_run=False):
             raise ValueError('render produced no output')
         if plan.get('media_type') == 'audio':
             info = probe_audio(temp)
+        elif backend == 'remotion' and probe_fn is probe_media:
+            # Composições visuais Remotion podem não ter áudio; o render é
+            # validado por frames e streams de vídeo, sem inventar áudio.
+            info = probe_media(temp, allow_silent=True)
         else:
             info = probe_fn(temp)
         expected = plan.get('expected_frames')

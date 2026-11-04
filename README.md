@@ -254,6 +254,30 @@ revisão humana. O ASR large-v3 mediu **2,17% de WER lexical**; loudness
 `pilots/r1026-quantum/r1047-dub/out/` e são ignorados pelo Git; o script e o
 manifesto permitem reproduzir o fluxo, e a imagem acima é o recorte versionado.
 
+### Slide dinâmico e didático (R1047)
+
+![Três cenas do slide dinâmico: acesso ampliado, mudança de chips e limite da simulação](docs/images/r1047-dynamic-slide.jpg)
+
+O slide estático foi substituído por uma composição Remotion de **600 frames
+(20 s, 30 fps)**, com três cenas sincronizadas à narração: acesso a 100+ qubits,
+saída dos chips menores e limite da simulação clássica. O render usa o backend
+auditável `video_editor`, com `license_ack` e `render_approved`, e é composto
+sobre o vídeo com lip sync, mantendo áudio, ASS e ausência de cartão.
+
+| Item | Valor |
+|---|---|
+| Composição | `editor-workspace/remotion-smoke/src/r1047-slide/R1047Slide.tsx` |
+| Slide renderizado | `editor-workspace/remotion-smoke/r1047-slide-v2.mp4` |
+| Vídeo final | `pilots/r1026-quantum/r1047-dub/out/quantum-ptbr-r1047-dynamic-slide.mp4` |
+| SHA-256 | `d4c8a34dc07b9ab0bd77315086f45ec3ef9f2f451421e293895e7491c9f0fc1d` |
+| Formato | 1920×1080, 30 fps, 600 frames, 20,00 s, AAC 48 kHz |
+| Loudness | **−16,10 LUFS**; true peak **−2,16 dBTP** |
+| QC | frames, fps, loudness, silêncio e pretos: **pass** |
+
+O slide estático (`quantum-ptbr-r1047.mp4`) permanece como fallback. O movimento
+é didático, não prova retenção ou estética; a Remotion License e a revisão humana
+continuam aplicáveis. Evidência: [R1050](reports/r1050/DYNAMIC-SLIDE.md).
+
 **O que essa transformação demonstra no Core:** ingestão de mídia real com hash,
 roteiro e tradução, TTS local com referência de voz, composição FFmpeg sem
 cartão, legenda SRT/ASS, mixagem com loudness alvo e verificação ASR. O fluxo
