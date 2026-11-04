@@ -20,7 +20,7 @@ python3 -c "import json; c=json.load(open('opencode.json', encoding='utf-8')); p
 ```
 
 <!-- core-state:start -->
-**329 agentes** · **25 MCPs** · **35 comandos** · **22 checks**
+**333 agentes** · **27 MCPs** · **35 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 
@@ -138,9 +138,11 @@ As entradas abaixo são derivadas das chaves `mcp` de `opencode.json`:
 20. `pypi-search`;
 21. `qdrant`;
 22. `rea`;
-23. `scanners-mcp`;
-24. `sequential-thinking`;
-25. `web-deploy-mcp`;
+23. `remotion-audit`;
+24. `scanners-mcp`;
+25. `sequential-thinking`;
+26. `servers`;
+27. `web-deploy-mcp`;
 <!-- core-mcp:end -->
 
 O MCP `ecosystem-network` conecta o `MarceloClaroOrchestrator`, o roteamento

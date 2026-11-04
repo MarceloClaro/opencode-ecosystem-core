@@ -2,7 +2,9 @@
 
 **Agentic Peer Review with Rubric Engine, Review Ledger, and Graph-Anchored Auditing**
 
-Parte do OpenCode Ecosystem Core (R103 — Agentic Peer Review).
+Parte do OpenCode Ecosystem Core
+
+[Core](../../README.md) · [Documentação](../../docs/README.md) · [Pipeline científico R1054](../../docs/SCIENTIFIC_RESEARCH_PIPELINE_R1054.md) (R103 — Agentic Peer Review).
 
 ## Instalação
 

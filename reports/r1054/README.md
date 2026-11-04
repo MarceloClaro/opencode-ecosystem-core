@@ -1,5 +1,7 @@
 # R1054 — automação assistida, periódico real e validação com meta-análise
 
+<img src="../../docs/images/research-pipeline-r1054.svg" alt="Pipeline científico R1051–R1054" width="100%">
+
 Data: 2026-11-04. Frente autorizada: extração automática de efeitos, decisão
 automática de risco de viés/GRADE, regras de periódico real, submissão
 automática, validação externa/aceite/publicação e avaliação com dados reais de

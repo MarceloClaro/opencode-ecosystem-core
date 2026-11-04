@@ -1,5 +1,25 @@
 # Instalação local — OpenCode Ecosystem Core
 
+**Instalação segura, procedência verificável e nenhum `curl | bash` silencioso.**
+
+[🏠 README principal](../README.md) ·
+[🚀 Comece em 5 minutos](../README.md#comece-em-5-minutos) ·
+[📘 Manual](../MANUAL.md) ·
+[📚 Documentação](../docs/README.md) ·
+[🪟 Windows](windows/README.md)
+
+## Escolha o caminho
+
+| Objetivo | Comando | Efeito |
+|---|---|---|
+| Diagnosticar sem alterar nada | `./install.sh --check` | inventário e lacunas |
+| Instalar dependências seguras | `./install.sh --apply --yes` | npm/pip/uv/venv |
+| Instalação verificada por hash | seções abaixo | checkout + SHA-256 |
+| Windows | [guia Windows](windows/README.md) | caminho dedicado |
+
+O padrão é **fail-closed**: `--apply` exige `--yes`; `sudo`, `apt` e scripts
+oficiais `curl | bash` são apenas impressos para revisão do operador.
+
 Este guia deliberadamente não oferece comandos que encaminhem conteúdo de rede diretamente para um interpretador. Obtenha o material por canal confiável, revise-o e execute apenas arquivos locais de uma revisão identificada.
 
 > A conferência de versão, commit e SHA-256 reduz o risco de executar bytes
@@ -94,7 +114,7 @@ Esses números devem ser reavaliados no checkout instalado e não representam
 resultado de testes, cobertura ou validação externa.
 
 <!-- core-state:start -->
-**333 agentes** · **29 MCPs** · **35 comandos** · **22 checks**
+**333 agentes** · **27 MCPs** · **35 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](../opencode.json) e do [diagnóstico estrutural](../marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 

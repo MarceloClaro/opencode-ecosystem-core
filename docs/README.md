@@ -1,51 +1,160 @@
 # Documentação do OpenCode Ecosystem Core
 
-Comece pelo [README principal](../README.md) e pelo [manual](../MANUAL.md).
-Esta organização separa orientação atual, contratos específicos e registros de
-execuções anteriores. Arquivos de evidência não são certificados de prontidão.
+<img src="images/research-pipeline-r1054.svg" alt="Pipeline científico R1051–R1054" width="100%">
 
-| Necessidade | Documento atual |
+<sub>Versão animada: <a href="images/research-pipeline-r1054.gif">GIF do pipeline</a> · gerado por <a href="../scripts/generate_readme_gif.py"><code>scripts/generate_readme_gif.py</code></a>.</sub>
+
+**Pesquisa, agentes e evidência — com um mapa para cada tipo de leitor.**
+
+O README principal é a porta de entrada executiva. Este índice organiza a
+documentação por **trilha**, **domínio** e **nível de evidência**, para que você
+não precise adivinhar onde está a verdade, a especificação ou o limite.
+
+[🏠 README principal](../README.md) ·
+[📘 Manual](../MANUAL.md) ·
+[🏗️ Arquitetura](../ARCHITECTURE.md) ·
+[🔬 Pipeline científico](SCIENTIFIC_RESEARCH_PIPELINE_R1054.md) ·
+[🧪 Evidência R1054](../reports/r1054/README.md) ·
+[📈 PROGRESS](../PROGRESS.md)
+
+---
+
+## Escolha sua trilha
+
+| Você quer… | Comece por… | Depois veja… |
+|---|---|---|
+| Instalar e rodar o Core | [README § Comece em 5 minutos](../README.md#comece-em-5-minutos) | [Instalador](../installer/README.md), [Manual](../MANUAL.md) |
+| Entender a arquitetura | [ARCHITECTURE.md](../ARCHITECTURE.md) | [Guia R916](ARQUITETURA_COMPLETA_CORE_R916.md), [Atlas](architecture_map.html) |
+| Pesquisar um tema e chegar a um artigo | [Pipeline R1054](SCIENTIFIC_RESEARCH_PIPELINE_R1054.md) | [Spec R1054](../specs/SPEC-1054-automacao-assistida-validacao-real.md), [Relatório](../reports/r1054/README.md) |
+| Auditar claims e evidências | [R1054](../reports/r1054/README.md) | [Gate metacognitivo](../mci/metacognitive_gate.py), [CORRIGENDUM](../CORRIGENDUM.md) |
+| Editar vídeo e dublar | [Editor universal](EDITOR_VIDEO_UNIVERSAL_R1042.md) | [Pipeline de dublagem](DUBBING_PIPELINE_R1041_R1045.md), [R1047](../reports/r1047/QUANTUM-DUB-EVIDENCE.md) |
+| Construir agentes e plugins | [AGENTS.md](../AGENTS.md) | [CLAUDE.md](../CLAUDE.md), [Catálogo](../agents/catalog) |
+| Fazer engenharia reversa | [REA](REA.md) | [Assistente local](ASSISTENTE_REA_LOCAL.md) |
+| Contribuir com segurança | [Instalador](../installer/README.md) | [CLAUDE.md](../CLAUDE.md), [PROGRESS](../PROGRESS.md) |
+
+## Comece aqui
+
+| Ordem | Documento | Por quê |
+|---|---|---|
+| 1 | [README principal](../README.md) | visão, capacidades, limites e quickstart |
+| 2 | [MANUAL.md](../MANUAL.md) | comandos, exemplos e estados |
+| 3 | [ARCHITECTURE.md](../ARCHITECTURE.md) | componentes, fluxos e fronteiras |
+| 4 | [PROGRESS.md](../PROGRESS.md) | ciclos, checkpoints e estado corrente |
+| 5 | [CORRIGENDUM.md](../CORRIGENDUM.md) | alegações históricas corrigidas |
+
+## Pesquisa científica R1051–R1054
+
+| Ciclo | Documento | O que cobre |
+|---|---|---|
+| R1051 | [Pipeline R1051](SCIENTIFIC_RESEARCH_PIPELINE_R1051.md) | tema → contrato → busca → evidência → auditoria → manuscrito |
+| R1052 | [Pipeline R1052](SCIENTIFIC_RESEARCH_PIPELINE_R1052.md) | texto integral, triagem humana, integridade, `refresh` |
+| R1053 | [Pipeline R1053](SCIENTIFIC_RESEARCH_PIPELINE_R1053.md) | meta-análise, GRADE, LaTeX/DOCX/PDF, submissão |
+| R1054 | [Pipeline R1054](SCIENTIFIC_RESEARCH_PIPELINE_R1054.md) | extração assistida, PLOS ONE, gate de publicação, BCG |
+| — | [Relatório R1054](../reports/r1054/README.md) | benchmark BCG, limites e evidências |
+| — | [Spec R1054](../specs/SPEC-1054-automacao-assistida-validacao-real.md) | contrato, critérios e RED/GREEN |
+
+## Mapa por domínio
+
+### Orquestração, agentes e governança
+
+| Necessidade | Documento |
 |---|---|
-| Instalar e executar pela primeira vez | [Quickstart](../quickstart.md), [instalador](../installer/README.md), [one-click](../installer/ONECLICK.md) |
-| Comandos, exemplos e estados | [Manual](../MANUAL.md) |
-| Entender o sistema conectado | [Arquitetura técnica](../ARCHITECTURE.md), [guia R916](ARQUITETURA_COMPLETA_CORE_R916.md) |
-| Explorar o mapa completo | [Atlas offline](architecture_map.html), [Mermaid integral](architecture/dependencies.mmd) |
-| Conferir mudanças e pendências | [Estado atual R1045](ESTADO_ATUAL_CORE_R1045.md), [R916 histórico](ESTADO_ATUAL_CORE_R916.md), [PROGRESS](../PROGRESS.md) |
-| Editar vídeo e animar | [Editor universal R1042](EDITOR_VIDEO_UNIVERSAL_R1042.md), [Remotion auditável](../.opencode/skills/remotion-auditavel/SKILL.md) |
-| Dublar, legendar e diarizar | [Pipeline R1041–R1045](DUBBING_PIPELINE_R1041_R1045.md), [status do piloto](../pilots/r1035-02XpQTA-_XE/STATUS.md) |
-| Ver evidência de vídeo real R1026 | [Aceitação R1046](../reports/r1046/QUANTUM-REAL-EVIDENCE.md), [pesquisa GitHub](../reports/r1046/github-research.json) |
-| Dublar o piloto R1026 em PT-BR | [R1047](../pilots/r1026-quantum/r1047-dub/README.md), [evidência](../reports/r1047/QUANTUM-DUB-EVIDENCE.md) |
-| Pesquisar skills Claude para vídeo, ciência e código | [Catálogo R1048](../reports/r1048-claude-skills-github/README.md), [JSON](../reports/r1048-claude-skills-github/candidates.json) |
-| Adotar skills seletivas no Core | [Evidência R1049](../reports/r1049/README.md), [fontes pinadas](../reports/r1049/sources.json) |
-| Consultar as 177 skills K-Dense | [Catálogo por categoria](../reports/r1049/kdense-177.md), [CLI](../integrations/kdense_catalog.py) |
-| Ver as 9 adaptações originais | [Skill](../.opencode/skills/kdense-adaptacoes-originais/SKILL.md) |
-| Auditar a macro-rede e o gate metacognitivo | [R1050](../reports/r1050/README.md), [grafo](../reports/r1050/macro-network.json) |
-| Pesquisar do tema ao artigo para validação | [Pipeline R1051](SCIENTIFIC_RESEARCH_PIPELINE_R1051.md) |
-| Ler texto integral com aprovação humana | [Pipeline R1052](SCIENTIFIC_RESEARCH_PIPELINE_R1052.md), [benchmark real](../reports/r1052/real-benchmark.json) |
-| Sintetizar quantitativamente e preparar submissão | [Pipeline R1053](SCIENTIFIC_RESEARCH_PIPELINE_R1053.md), [exemplo](../reports/r1053/example-result.json) |
-| Automatizar extração, periódico e validação real | [Pipeline R1054](SCIENTIFIC_RESEARCH_PIPELINE_R1054.md), [benchmark BCG](../reports/r1054/real-meta-benchmark.json) |
-| Ver o slide dinâmico R1047 | [Evidência](../reports/r1050/CARD-STAGE.md), [composição](../editor-workspace/remotion-smoke/src/r1047-slide/R1047Stage.tsx) |
-| Ver a evolução completa dos vídeos | [README § Evolução R1026](../README.md), [imagem](../docs/images/r1047-video-evolution-full.jpg) |
-| Escolher ferramentas/modelos de vídeo | [Catálogo R1043](VIDEO_EDITOR_TOOLCHAIN_R1043.md), [toolchain.json](../reports/r1043/toolchain.json) |
-| ChatGPT, Gemini e NotebookLM | [Autenticação](AUTENTICACAO_CHATGPT_NOTEBOOKLM.md), [NotebookLM](GEMINI_NOTEBOOK_CORE.md) |
-| Reduzir custo de modelos/contexto | [Governança de custo de tokens](GOVERNANCA_DE_CUSTO_DE_TOKENS.md), [Modelos e tokens](MODELOS_E_CUSTO_DE_TOKENS.md) |
-| Usar plugins privados | [Plugins locais](PLUGINS_LOCAIS_CORE.md), [Core no ChatGPT](USAR_CORE_NO_CHATGPT.md) |
-| Engenharia reversa | [REA](REA.md), [assistente local](ASSISTENTE_REA_LOCAL.md) |
 | Agentes, plugins, grafo e CI | [Guia R894–R897](ORQUESTRACAO_AGENTES_PLUGINS_CI_R894_R897.md) |
-| Fluxos retomáveis | [Workflows](WORKFLOWS_R644.md) |
-| Navegação controlada | [Navegador](NAVEGADOR_REAL.md) |
+| Criar/registrar agentes | [AGENTS.md](../AGENTS.md), [CLAUDE.md](../CLAUDE.md) |
+| Workflows retomáveis | [Workflows](WORKFLOWS_R644.md) |
+| Memória e metacognição | [Ciclo metacognitivo](../README.md#ciclo-metacognitivo-integrado), [MCI](../mci/) |
+| Governança de custo de tokens | [Custo de tokens](GOVERNANCA_DE_CUSTO_DE_TOKENS.md), [Modelos e tokens](MODELOS_E_CUSTO_DE_TOKENS.md) |
+| Federação e prontidão | [Prontidão R868](PRONTIDAO_LOCAL_CORE_R868.md), [Federação](../federation/activation.md) |
+
+### Pesquisa, ciência e evidência
+
+| Necessidade | Documento |
+|---|---|
+| Pipeline científico ponta a ponta | [R1054](SCIENTIFIC_RESEARCH_PIPELINE_R1054.md) |
+| Scientific Lab nativo | [SCIENTIFIC_LAB_V42.md](SCIENTIFIC_LAB_V42.md) |
+| Catálogo K-Dense (177 skills) | [Relatório R1049](../reports/r1049/kdense-177.md) |
+| 9 adaptações originais | [Skill](../.opencode/skills/kdense-adaptacoes-originais/SKILL.md) |
+| Laboratório isolado | [research_lab](../research_lab/README.md) |
+| Integrações científicas | [R667–R671](INTEGRACOES_CIENTIFICAS_R667_R671.md) |
 | Biblioteca e busca | [Biblioteca R657](BIBLIOTECA_AI_R657.md) |
-| Ciência, runtimes e datasets | [Integrações R667–R671](INTEGRACOES_CIENTIFICAS_R667_R671.md) |
-| Corrigir alegações históricas | [CORRIGENDUM](../CORRIGENDUM.md) |
-| Contribuir com agentes | [AGENTS](../AGENTS.md), [CLAUDE](../CLAUDE.md) |
+| Publicação e proveniência | [Fluxo 12](architecture/flows/12-ciencia-publicacao.svg), [CORRIGENDUM](../CORRIGENDUM.md) |
+
+### Vídeo, dublagem e motion
+
+| Necessidade | Documento |
+|---|---|
+| Editor universal | [R1042](EDITOR_VIDEO_UNIVERSAL_R1042.md) |
+| Multifaixa, transições e cor | [R1046](../reports/r1046/QUANTUM-REAL-EVIDENCE.md) |
+| Pipeline de dublagem | [R1041–R1045](DUBBING_PIPELINE_R1041_R1045.md) |
+| Evidência R1047 | [Quantum dub](../reports/r1047/QUANTUM-DUB-EVIDENCE.md) |
+| Slide/palco com cartão | [R1050](../reports/r1050/CARD-STAGE.md) |
+| Remotion auditável | [Skill](../.opencode/skills/remotion-auditavel/SKILL.md), [Composição](../editor-workspace/remotion-smoke/src/r1047-slide/R1047Stage.tsx) |
+| Catálogo de ferramentas | [R1043](VIDEO_EDITOR_TOOLCHAIN_R1043.md), [toolchain](../reports/r1043/toolchain.json) |
+
+### Engenharia reversa, memória e conhecimento
+
+| Necessidade | Documento |
+|---|---|
+| REA | [REA](REA.md), [Assistente local](ASSISTENTE_REA_LOCAL.md) |
+| Navegador controlado | [Navegador](NAVEGADOR_REAL.md) |
+| Memória no terminal | [README § Memória](../README.md#memória-no-terminal-e-painel) |
+| Atlas e fluxogramas | [Atlas](architecture_map.html), [Mermaid](architecture/dependencies.mmd) |
+| Contexto de código | [README § Contexto](../README.md#contexto-de-código-e-consultas-de-grafo) |
+
+### Integrações, autenticação e plugins
+
+| Necessidade | Documento |
+|---|---|
+| ChatGPT, Gemini e NotebookLM | [Autenticação](AUTENTICACAO_CHATGPT_NOTEBOOKLM.md), [NotebookLM](GEMINI_NOTEBOOK_CORE.md) |
+| Plugins locais | [Plugins](PLUGINS_LOCAIS_CORE.md), [Core no ChatGPT](USAR_CORE_NO_CHATGPT.md) |
+| MCP e federação | [ARCHITECTURE.md](../ARCHITECTURE.md), [opencode.json](../opencode.json) |
+| Instalação e procedência | [Instalador](../installer/README.md), [One-click](../installer/ONECLICK.md) |
+
+## Trilha de evidências
+
+| Nível | O que significa | Onde ver |
+|---|---|---|
+| **L0 — implementado** | código e contrato existem | `scientific_lab/`, `integrations/`, `marceloclaro/` |
+| **L1 — testado** | testes herméticos passam | `tests/`, [regressão R1054](../reports/r1054/final-regression.txt) |
+| **L2 — renderizado** | mídia/PDF/DOCX com recibo | [R1047](../reports/r1047/QUANTUM-DUB-EVIDENCE.md), [R1053](../reports/r1053/README.md) |
+| **L3 — benchmarkado** | replicação em dados públicos | [BCG R1054](../reports/r1054/real-meta-benchmark.json) |
+| **L4 — validação externa** | artefato independente verificado | gate R1054; não emitido |
+| **L5 — aceite/publicação** | decisão do periódico | não emitido |
+
+**Regra:** um nível não promove o outro. Hash confirma bytes, não verdade.
+Teste não é validação externa. Render não é aprovação estética. Aceite não é
+publicação.
 
 ## Como ler as evidências
 
-`specs/` declara requisitos; `tests/` contém verificações; `docs/evidence/`
-preserva recibos públicos delimitados; `outputs/` pode conter dados locais e
-resultados privados. Hash confirma identidade de bytes, não a verdade da
-conclusão. Não copiar sessões, cookies, chaves ou fontes privadas para o Git.
+- `specs/` declara requisitos e critérios de aceitação.
+- `tests/` contém verificações executáveis.
+- `reports/` preserva benchmarks, recibos e limites datados.
+- `docs/evidence/` preserva evidências delimitadas.
+- `outputs/` pode conter dados locais e resultados privados.
+- `docs/architecture/` contém mapas e fluxogramas; são projeções, não execução.
+- `CORRIGENDUM.md` registra alegações históricas corrigidas.
+
+Não copie sessões, cookies, chaves, dados sensíveis ou fontes privadas para o
+Git. Um artefato versionado não é certificado de prontidão.
+
+## Atlas e fluxogramas
+
+- [Atlas offline](architecture_map.html)
+- [Mapa curado](architecture/curated-overview.svg)
+- [Dependências Mermaid](architecture/dependencies.mmd)
+- [Fluxo 01 — panorama](architecture/flows/01-panorama.svg)
+- [Fluxo 12 — ciência e publicação](architecture/flows/12-ciencia-publicacao.svg)
+- [Fluxo 22 — Ollama e contexto](architecture/flows/22-ollama-contexto-erros.svg)
+- [README § Arquitetura completa](../README.md#arquitetura-completa-e-fluxogramas-atuais)
+
+## Documentos históricos
 
 Os atlas R433–R438, R879, R900 e R911 permanecem como retratos históricos. O
-livro possui processo editorial e atlas próprios; atualizar estes mapas não
+livro tem processo editorial e atlas próprios; atualizar estes mapas não
 recompila nem revalida automaticamente o livro ou seus teoremas.
+
+---
+
+**Contribuição:** [AGENTS.md](../AGENTS.md) · [CLAUDE.md](../CLAUDE.md) ·
+[Instalador](../installer/README.md) · [PROGRESS.md](../PROGRESS.md)

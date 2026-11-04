@@ -2,7 +2,9 @@
 
 **Bio-Inspired Multi-Agent Evolutionary Science Framework**
 
-Parte do OpenCode Ecosystem Core (R101 — Agentic Science V2).
+Parte do OpenCode Ecosystem Core
+
+[Core](../../README.md) · [Documentação](../../docs/README.md) · [Pipeline científico R1054](../../docs/SCIENTIFIC_RESEARCH_PIPELINE_R1054.md) (R101 — Agentic Science V2).
 
 ## Instalação
 

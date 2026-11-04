@@ -2,7 +2,9 @@
 
 **DeepEvidence-Style Hierarchical Deep Research with Evidence Graphs**
 
-Parte do OpenCode Ecosystem Core (R102 — Deep Research Agent).
+Parte do OpenCode Ecosystem Core
+
+[Core](../../README.md) · [Documentação](../../docs/README.md) · [Pipeline científico R1054](../../docs/SCIENTIFIC_RESEARCH_PIPELINE_R1054.md) (R102 — Deep Research Agent).
 
 ## Instalação
 

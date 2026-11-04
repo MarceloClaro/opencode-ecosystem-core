@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-label="OpenCode Ecosystem Core">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#08070f"/>
+      <stop offset="0.55" stop-color="#120d24"/>
+      <stop offset="1" stop-color="#1b1233"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#a78bfa"/>
+      <stop offset="1" stop-color="#a3e635"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.2" cy="0.1" r="0.8">
+      <stop offset="0" stop-color="#7c3aed" stop-opacity="0.42"/>
+      <stop offset="1" stop-color="#7c3aed" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse">
+      <path d="M 44 0 L 0 0 0 44" fill="none" stroke="#a78bfa" stroke-opacity="0.10" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="420" fill="url(#bg)"/>
+  <rect width="1200" height="420" fill="url(#glow)"/>
+  <rect width="1200" height="420" fill="url(#grid)"/>
+  <circle cx="1080" cy="80" r="180" fill="#a3e635" opacity="0.055"/>
+  <circle cx="120" cy="360" r="220" fill="#a78bfa" opacity="0.06"/>
+  <text x="72" y="78" fill="#a3e635" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="700" letter-spacing="3">OPENCODE ECOSYSTEM CORE</text>
+  <text x="72" y="158" fill="#f7f5ff" font-family="DejaVu Sans, Arial, sans-serif" font-size="54" font-weight="800">Pesquisa, agentes e evidência</text>
+  <text x="72" y="208" fill="#d8d1eb" font-family="DejaVu Sans, Arial, sans-serif" font-size="24">em um único core auditável.</text>
+  <text x="72" y="250" fill="#b9b1ce" font-family="DejaVu Sans, Arial, sans-serif" font-size="17">Do tema ao artigo com validação humana — sem inventar citações, dados ou aceite.</text>
+  <g font-family="DejaVu Sans, Arial, sans-serif">
+    <rect x="72" y="286" width="164" height="40" rx="20" fill="#171126" stroke="#a78bfa" stroke-opacity="0.45"/>
+    <text x="154" y="311" text-anchor="middle" fill="#f7f5ff" font-size="14" font-weight="700">333 agentes</text>
+    <rect x="248" y="286" width="150" height="40" rx="20" fill="#171126" stroke="#a78bfa" stroke-opacity="0.45"/>
+    <text x="323" y="311" text-anchor="middle" fill="#f7f5ff" font-size="14" font-weight="700">27 MCPs</text>
+    <rect x="410" y="286" width="178" height="40" rx="20" fill="#171126" stroke="#a3e635" stroke-opacity="0.55"/>
+    <text x="499" y="311" text-anchor="middle" fill="#f7f5ff" font-size="14" font-weight="700">410 testes</text>
+    <rect x="600" y="286" width="188" height="40" rx="20" fill="#171126" stroke="#a3e635" stroke-opacity="0.55"/>
+    <text x="694" y="311" text-anchor="middle" fill="#f7f5ff" font-size="14" font-weight="700">doctor 22/22</text>
+  </g>
+  <g font-family="DejaVu Sans, Arial, sans-serif" font-size="12" font-weight="700">
+    <rect x="72" y="352" width="92" height="30" rx="15" fill="#0f0b1a" stroke="#a78bfa" stroke-opacity="0.55"/>
+    <text x="118" y="372" text-anchor="middle" fill="#c4b5fd">tema</text>
+    <rect x="174" y="352" width="104" height="30" rx="15" fill="#0f0b1a" stroke="#a78bfa" stroke-opacity="0.55"/>
+    <text x="226" y="372" text-anchor="middle" fill="#c4b5fd">contrato</text>
+    <rect x="288" y="352" width="92" height="30" rx="15" fill="#0f0b1a" stroke="#a78bfa" stroke-opacity="0.55"/>
+    <text x="334" y="372" text-anchor="middle" fill="#c4b5fd">busca</text>
+    <rect x="390" y="352" width="92" height="30" rx="15" fill="#0f0b1a" stroke="#a78bfa" stroke-opacity="0.55"/>
+    <text x="436" y="372" text-anchor="middle" fill="#c4b5fd">triagem</text>
+    <rect x="492" y="352" width="122" height="30" rx="15" fill="#0f0b1a" stroke="#a3e635" stroke-opacity="0.55"/>
+    <text x="553" y="372" text-anchor="middle" fill="#d9f99d">texto integral</text>
+    <rect x="624" y="352" width="112" height="30" rx="15" fill="#0f0b1a" stroke="#a3e635" stroke-opacity="0.55"/>
+    <text x="680" y="372" text-anchor="middle" fill="#d9f99d">integridade</text>
+    <rect x="746" y="352" width="118" height="30" rx="15" fill="#0f0b1a" stroke="#a3e635" stroke-opacity="0.55"/>
+    <text x="805" y="372" text-anchor="middle" fill="#d9f99d">meta-análise</text>
+    <rect x="874" y="352" width="114" height="30" rx="15" fill="#0f0b1a" stroke="#a3e635" stroke-opacity="0.55"/>
+    <text x="931" y="372" text-anchor="middle" fill="#d9f99d">manuscrito</text>
+    <rect x="998" y="352" width="104" height="30" rx="15" fill="#0f0b1a" stroke="#a3e635" stroke-opacity="0.55"/>
+    <text x="1050" y="372" text-anchor="middle" fill="#d9f99d">gate</text>
+  </g>
+</svg>

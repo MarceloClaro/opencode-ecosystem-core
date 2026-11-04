@@ -1,199 +1,346 @@
 <div align="center">
 
-<a href="https://github.com/MarceloClaro">
-  <img src="https://avatars.githubusercontent.com/u/58664974?s=400&u=b58dbf2c479bff1f942355f0ce28106f0b81ecae&v=4" width="120" height="120" style="border-radius: 50%; border: 3px solid #1565c0; box-shadow: 0 4px 18px rgba(21,101,192,0.25);" alt="Marcelo Claro Laranjeira"/>
-</a>
+<img src="docs/images/readme-hero.svg" alt="OpenCode Ecosystem Core — pesquisa, agentes e evidência" width="100%">
 
-# 🧠 OpenCode Ecosystem Core
+# OpenCode Ecosystem Core
 
-### Agentes, memória, engenharia reversa e pesquisa com contratos de evidência
+**Pesquisa, agentes e evidência em um único core auditável.**
 
-Coordenação pelo primário **marceloclaro**, via Blackboard e MetaBus, com
-especificações, gates de entrega e rastreabilidade local.
+[![Stars](https://img.shields.io/github/stars/MarceloClaro/opencode-ecosystem-core?style=for-the-badge&logo=github&color=181717)](https://github.com/MarceloClaro/opencode-ecosystem-core)
+[![License](https://img.shields.io/badge/license-MIT-22c55e?style=for-the-badge&logo=opensourceinitiative)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.10%2B-3b82f6?style=for-the-badge&logo=python)](https://www.python.org/)
+[![Tests](https://img.shields.io/badge/tests-410%20passed-brightgreen?style=for-the-badge&logo=pytest)](reports/r1054/final-regression.txt)
+[![Doctor](https://img.shields.io/badge/doctor-22%2F22-16a34a?style=for-the-badge)](marceloclaro/doctor.py)
+[![MCP](https://img.shields.io/badge/MCP-27%20servers-8b5cf6?style=for-the-badge)](opencode.json)
+[![Agents](https://img.shields.io/badge/agents-333-7c3aed?style=for-the-badge)](agents/catalog)
+[![Evidence](https://img.shields.io/badge/evidence--first-f59e0b?style=for-the-badge)](reports/r1054/README.md)
 
-[Primeiros passos](#início-rápido-local) ·
-[Arquitetura completa R916](#arquitetura-completa-e-fluxogramas-atuais) ·
-[Assistente REA](#engenharia-reversa-local-rea) ·
-[Prontidão e evidências](docs/PRONTIDAO_LOCAL_CORE_R868.md) ·
-[MiroFish acadêmico e plugins](docs/MIROFISH_ACADEMICO_E_PLUGINS_R920.md) ·
-[ITS-FINE no Core e auditoria REA](docs/ITSFINE_CORE_R923.md)
+[Comece em 5 minutos](#comece-em-5-minutos) ·
+[Documentação](docs/README.md) ·
+[Pipeline científico](docs/SCIENTIFIC_RESEARCH_PIPELINE_R1054.md) ·
+[Evidência](reports/r1054/README.md) ·
+[Manual](MANUAL.md) ·
+[Arquitetura](ARCHITECTURE.md)
 
-[Correções ITS-FINE: instalador fixo, motores e validações R924–R926](docs/ITSFINE_CORRECOES_R924.md)
+**Mapa rápido:** [Visão geral](#visão-geral) · [Pipeline](#pesquisador-científico-r1051-r1054) · [Capacidades](#capacidades-principais) · [Arquitetura](#arquitetura-em-60-segundos) · [Quickstart](#comece-em-5-minutos) · [Evidência](#trilha-de-evidências) · [Documentação](#documentação) · [Roadmap](#roadmap)
 
-[AI Edge Quantizer: ensaio CPU R928](docs/AI_EDGE_QUANTIZER_R928.md) ·
-[Gallery, OpenManus e LQC: análise de compatibilidade](docs/REPOS_COMPLEMENTARES_GALLERY_OPENMANUS_LQC.md)
+<sub>Social preview: <a href="docs/images/social-preview.png">1280×640</a> · Maintained by <a href="https://github.com/MarceloClaro">Marcelo Claro Laranjeira</a></sub>
 
-[![GitHub Stars](https://img.shields.io/github/stars/MarceloClaro/opencode-ecosystem-core?style=for-the-badge&logo=github&logoColor=white&color=181717)](https://github.com/MarceloClaro/opencode-ecosystem-core)
-[![License MIT](https://img.shields.io/badge/Licen%C3%A7a-MIT-22c55e?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](LICENSE)
-[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3b82f6?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![MCP Servers](https://img.shields.io/badge/MCP%20Servers-configurados-8b5cf6?style=for-the-badge&logo=mcp&logoColor=white)](ARCHITECTURE.md)
-[![OpenCode](https://img.shields.io/badge/OpenCode%20CLI-native-0ea5e9?style=for-the-badge&logo=opencode&logoColor=white)](opencode.json)
+</div>
 
 <!-- core-state:start -->
-**329 agentes** · **25 MCPs** · **35 comandos** · **22 checks**
+**333 agentes** · **27 MCPs** · **35 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 
 Para conferir estes blocos, execute na raiz `.venv/bin/python scripts/reconcile_operational_docs.py --check`; para sincronizá-los, execute o mesmo comando sem `--check`.
 <!-- core-state:end -->
 
-A revisão publicada nesta etapa está na branch
-[`codex/core-prontidao-rea`](https://github.com/MarceloClaro/opencode-ecosystem-core/tree/codex/core-prontidao-rea).
-As contagens acima descrevem configuração; o estado de cada executor depende
-do ambiente e da operação solicitada.
+> **Regra de ouro:** nenhuma entrega sem spec, teste e evidência. Nenhum resultado vira verdade, aceite editorial ou publicação por votação, score, render ou opinião de modelo.
 
 ---
-
-</div>
-
-## 📑 Índice
-
-- [Visão geral](#visão-geral)
-- [Agentes, plugins e verificação local](#agentes-plugins-e-verificação-local)
-- [Capacidades principais](#capacidades-principais)
-- [Início rápido local](#início-rápido-local)
-- [Instalação segura e procedência](#instalação-segura-e-procedência)
-- [Uso básico](#uso-básico)
-- [Engenharia reversa local REA](#engenharia-reversa-local-rea)
-- [Memória no terminal e painel](#memória-no-terminal-e-painel)
-- [Ciclo metacognitivo integrado](#ciclo-metacognitivo-integrado)
-- [Arquitetura completa e fluxogramas atuais](#arquitetura-completa-e-fluxogramas-atuais)
-- [Arquitetura resumida](#arquitetura-resumida)
-  - [Mapa da Arquitetura Completa (v3.9.0)](#mapa-da-arquitetura-completa-v390)
-  - [Diagrama Operacional Atual](#diagrama-operacional-atual)
-  - [Fluxos multiárea do checkout atual](#fluxos-multiárea-do-checkout-atual)
-- [MIRA e apresentações](#apresentações-mira)
-- [Todos os fluxogramas com legenda](#fluxogramas-operacionais-completos)
-- [Limites de segurança e operação](#limites-de-segurança-e-operação)
-- [Validação, contribuição e release](#validação-contribuição-e-release)
-- [Documentação e licença](#documentação-e-licença)
-
----
-
-## Estado atual e orientação de leitura
-
-Revisão documental **R1050, 03/11/2026**, baseada no checkout local. As frentes
-**R985–R1001** (conselho de 13 cientistas, autor/editor de alto rigor, scanner
-evolutivo, piloto OpenShell e executor Gemini) e **R1035–R1050** (editor de
-vídeo universal, dublagem, diarização, Remotion, catálogo de ferramentas,
-multifaixa, transições, cor, voz clonada, lip sync, skills seletivas e
-macro-rede metacognitiva) foram incorporadas depois — veja
-[Capacidades principais](#capacidades-principais). Comece pelo
-[manual](MANUAL.md), pelo [índice documental](docs/README.md), pelo
-[estado atual R1045](docs/ESTADO_ATUAL_CORE_R1045.md) e pelo
-[pipeline de dublagem](docs/DUBBING_PIPELINE_R1041_R1045.md). Os **333
-agentes, 29 MCPs e 35 comandos** acima são configuração (recontagem local);
-não representam 333 inferências executadas.
-
-**Perfil MCP federado (R1015):** seis servidores têm recibos recentes de
-`probe` + `smoke` ligados à versão, ao comando e aos hashes locais.
-`mcp-everything` (demonstração) e `executeautomation-playwright` (alternativo)
-continuam instalados, mas fora do config padrão; podem ser reativados com
-`federacao probe --ids N`, `federacao smoke --ids N` e
-`federacao activate --ids N`, seguidos de regeneração, **desde que o smoke
-real passe**. Recibos expiram em
-24 h; o [diagnóstico da federação](federation/activation.md) não substitui
-teste de disponibilidade no momento de uso. A R1015 também retificou recibos
-R1014 que confundiam `isError: true` com sucesso.
-
-O NotebookLM foi atualizado para **0.15.6**: a sonda R915 observou autenticação
-válida, 234 notebooks e catálogo de 53 ferramentas/165 callbacks. Sua fachada
-mantém política por efeito, com quatro ferramentas novas ainda bloqueadas.
-Use o [guia NotebookLM](docs/GEMINI_NOTEBOOK_CORE.md).
-
-As conexões [ChatGPT, Gemini e NotebookLM](docs/AUTENTICACAO_CHATGPT_NOTEBOOKLM.md)
-usam logins independentes. Os [plugins locais](docs/PLUGINS_LOCAIS_CORE.md)
-reutilizam MarceloClaro para REA, MiroFish e Lean 4. Há limites atuais diferentes
-dos recibos históricos; a fachada acadêmica voltou a existir, mas o conjunto
-R914 permanece parcial, com perfis e outras superfícies removidos neste checkout.
-O [guia de modelos e tokens](docs/MODELOS_E_CUSTO_DE_TOKENS.md)
-compara candidatos e mede chamadas sintéticas, sem prometer economia em produção.
 
 ## Visão geral
 
-O **OpenCode Ecosystem Core** reúne interfaces CLI, OpenCode, MCP e Streamlit
-para coordenação de agentes, consulta de memória, pesquisa e inspeção de
-artefatos. O primário `marceloclaro` publica tarefas no **Blackboard (A2A)**,
-compartilha contexto pelo **MetaBus** e aplica contratos de entrega **SDD/TDD**.
-O roteamento usa componentes inspirados em atenção, com orçamento, prazo,
-cancelamento e estado persistido dos executores.
+O **OpenCode Ecosystem Core** é um monorepo de orquestração, pesquisa e produção
+de artefatos com uma regra incomum: **a evidência vem antes da narrativa**. Ele
+conecta agentes, memória metacognitiva, busca científica, texto integral,
+meta-análise, engenharia reversa, vídeo e MCP sob contratos SDD/TDD, gates de
+entrega e recibos com hash.
 
-As implementações recentes incluem o primário compartilhado entre as
-superfícies MCP, o transporte de prompts pela entrada padrão dos CLIs,
-workflows com checkpoints, custódia local RED/GREEN, visualização de memória,
-raciocínio por gramáticas restritas e o assistente REA com recibos por hash.
-O [guia de arquitetura atual](docs/ARQUITETURA_COMPLETA_CORE_R916.md) documenta
-as relações, os caminhos de falha e as fronteiras externas.
+O primário **marceloclaro** publica tarefas no **Blackboard (A2A)**, compartilha
+contexto no **MetaBus** e aplica o ciclo
 
-Instalação, configuração, autenticação, inferência e análise aceita são estados
-distintos. O [relatório de prontidão](docs/PRONTIDAO_LOCAL_CORE_R868.md) registra
-os caminhos demonstrados: inspeção REA direta controlada e uma tarefa textual
-coordenada pelo Codex. A análise REA autônoma conduzida pelo LLM local permanece
-sem entrega aceita nas tentativas registradas. A revisão humana continua
-necessária para conclusões científicas, editoriais e de domínio.
-
-A biblioteca local, o Gemini Notebook e os plugins científicos têm seus próprios
-contratos: [biblioteca R657](docs/BIBLIOTECA_AI_R657.md),
-[Gemini Notebook](docs/GEMINI_NOTEBOOK_CORE.md) e
-[integrações científicas](docs/INTEGRACOES_CIENTIFICAS_R667_R671.md).
-O [navegador coordenado](docs/NAVEGADOR_REAL.md) utiliza ações explícitas e
-origens permitidas; cliques e preenchimentos podem produzir efeitos no site.
-
-Regra de entrega: especificar antes de implementar, executar os testes
-registrados e conservar a evidência e os limites do resultado.
-
-## Agentes, plugins e verificação local
-
-A atualização [R894–R897](docs/ORQUESTRACAO_AGENTES_PLUGINS_CI_R894_R897.md)
-incorpora **35 perfis de trabalho desta tarefa e 20 perfis de plugins** ao catálogo
-orquestrado por MarceloClaro. Novos perfis passam por definição, política,
-especificação, testes e hash antes do registro. Ativação preparada e execução
-concluída continuam sendo estados distintos.
-
-```mermaid
-flowchart LR
-    U894[CLI e MCP] --> P894[MarceloClaro primário]
-    P894 --> A894[Perfis validados e catálogo persistente]
-    A894 --> B894[Blackboard: identidade e capacidade exclusiva]
-    B894 --> E894[Executor e gate SDD/TDD]
-    P894 --> G894[Grafo estático Python com proveniência]
-    P894 --> I894[Plugins: instruções locais e tickets do host]
-    P894 --> C894[CI local com perfil científico enumerado]
-    E894 --> M894[MetaBus e evidências delimitadas]
-    G894 --> M894
-    I894 --> M894
-    C894 --> M894
+```text
+Perceber → Especificar → Delegar → Executar → Verificar → Refletir
 ```
 
-Os comandos `agentes` e `ci-local` possuem entradas CLI e MCP. O backend
-`python_graph` fornece três consultas estáticas para Python; as operações
-nativas de grafo conhecidas como incorretas continuam bloqueadas. A CI local
-executa sem depender da cobrança GitHub, preserva recibos e não cria checks
-remotos. Consulte o guia para escopo, limites e comandos completos.
+com orçamento, prazo, cancelamento e estado persistido. A pergunta central do
+projeto não é “quantos agentes existem?”, mas **“o que foi executado, com qual
+fonte, qual hash e qual limite?”**.
 
-[WolframResearch pode contribuir](docs/AVALIACAO_WOLFRAM_CORE_R895.md) com
-AgentTools, cliente Python e notebooks. Uma
-[amostra hospedada real](docs/verification-wolfram-host-r895.json) calculou soma,
-integral e fatoração pelo contrato existente. Runtime/licença locais requerem
-verificação própria. O [ZIP REA fornecido](docs/AVALIACAO_ZIP_REA_PTBR.md) foi
-avaliado como referência didática e não substituiu o Core.
+### O que este core faz
+
+- **Pesquisa científica ponta a ponta** — tema, contrato de recuperação, busca,
+  triagem, texto integral, integridade, meta-análise, risco de viés, GRADE,
+  manuscrito e pacote de submissão.
+- **Orquestração governada** — 333 perfis de agente, Blackboard, MetaBus,
+  Trust Engine, EvolutionRegistry e gates de evidência.
+- **Engenharia reversa local (REA)** — inspeção controlada, camadas de provedores
+  e recibos por hash.
+- **Vídeo e dublagem** — editor multifaixa, FFmpeg, Remotion, XTTS, ASR,
+  diarização, legendas e QC técnico.
+- **MCP e ferramentas locais** — 27 servidores configurados, federação, probes e
+  smoke tests delimitados.
+
+## Por que este projeto é diferente
+
+| Pilar | Prática concreta |
+|---|---|
+| **Contrato antes do código** | Toda funcionalidade nasce de uma spec com critérios de aceitação; o histórico RED/GREEN é preservado. |
+| **Evidência antes da narrativa** | Manifestos, hashes, recibos e artefatos rastreáveis; um teste não vira “verdade científica”. |
+| **Humano no loop** | Triagem, texto integral, GRADE, aceite editorial e publicação exigem decisão humana explícita. |
+| **Anti-overclaim** | Nenhum voto, score, payoff, render ou modelo promove um claim a verdade. |
+| **Falha explícita** | Busca indisponível vira `blocked`; ausência de dado vira lacuna; ausência de backend vira `blocked`, não simulação. |
+
+## Escolha sua trilha
+
+| Você quer… | Comece por… | Primeiro comando |
+|---|---|---|
+| Pesquisar um tema e chegar a um artigo | [Pipeline R1051–R1054](docs/SCIENTIFIC_RESEARCH_PIPELINE_R1054.md) | `research project --theme ... --dry-run` |
+| Auditar evidência e claims | [R1054](reports/r1054/README.md), [gate metacognitivo](mci/metacognitive_gate.py) | `research benchmark-meta ...` |
+| Construir ou registrar agentes | [AGENTS.md](AGENTS.md), [catálogo](agents/catalog) | `agentes list` |
+| Editar vídeo, dublar e legendar | [Editor universal](docs/EDITOR_VIDEO_UNIVERSAL_R1042.md) | `video_editor --help` |
+| Fazer engenharia reversa local | [REA](docs/REA.md) | `rea status` |
+| Entender a arquitetura completa | [ARCHITECTURE.md](ARCHITECTURE.md), [mapa R916](docs/ARQUITETURA_COMPLETA_CORE_R916.md) | leitura guiada |
+| Contribuir com segurança | [Instalador](installer/README.md), [CLAUDE.md](CLAUDE.md) | `./install.sh --check` |
+
+## Pesquisador científico R1051-R1054
+
+<img src="docs/images/research-pipeline-r1054.gif" alt="Pipeline científico R1051–R1054: tema, contrato, busca, triagem, texto integral, integridade, meta-análise, RoB/GRADE, manuscrito e submissão" width="100%">
+
+<sub>GIF 1000×520 · 8 s · 15 fps · gerado por <a href="scripts/generate_readme_gif.py"><code>scripts/generate_readme_gif.py</code></a>. Versão estática: <a href="docs/images/research-pipeline-r1054.svg">SVG</a>.</sub>
+
+Quatro ciclos transformaram comandos isolados em um fluxo **file-first** com
+estados, hashes e validação humana:
+
+| Ciclo | Entrega | Estado |
+|---|---|---|
+| **R1051** | tema → contrato de recuperação → busca → deduplicação → triagem assistida → evidência literal → gate → auditoria → manuscrito IMRaD | ✅ |
+| **R1052** | texto integral com página/parágrafo, aprovação humana, leitura de `review.screen`, retratações/correções no Crossref, `refresh` sem refazer busca | ✅ |
+| **R1053** | meta-análise fixa/aleatória, Q/I²/tau², intervalo de predição, risco de viés, GRADE, LaTeX/DOCX/PDF, checklist e declarações | ✅ |
+| **R1054** | extração automática como `automated_draft`, RoB/GRADE assistidos, perfil PLOS ONE, submissão fail-closed, gate de publicação e validação BCG | ✅ |
+
+### Validação real com meta-análise publicada
+
+O módulo quantitativo foi comparado ao dataset público **BCG** (13 ensaios;
+Colditz et al. 1994), usando REML contra uma reanálise pública REML:
+
+| Métrica | Core | Referência | Diferença |
+|---|---|---|---|
+| k | 13 | 13 | 0 |
+| OR | **0,474649896** | 0,474649913 | 1,7e-8 |
+| tau² | **0,337772471** | 0,337772045 | 4,3e-7 |
+| Q | **163,164915** | 163,164915 | 1,1e-13 |
+| I² padrão | **92,6455%** | 92,6455% | 0 |
+| I² publicado | 92,6455% | 92,0727% | 0,5728 p.p. |
+
+O I² publicado na fonte não é exatamente `(Q-df)/Q`; a discrepância está
+registrada, não escondida. Evidência:
+[`reports/r1054/real-meta-benchmark.json`](reports/r1054/real-meta-benchmark.json).
+
+### Comandos que resumem o fluxo
+
+```bash
+# 1. Planejar sem rede
+.venv/bin/python -m marceloclaro.scientific_lab research project \
+  --theme "saúde mental em estudantes universitários" \
+  --out projects/demo-r1054 --dry-run
+
+# 2. Validar o módulo quantitativo contra o dataset BCG
+.venv/bin/python -m marceloclaro.scientific_lab research benchmark-meta \
+  --data reports/r1054/bcg.csv \
+  --reference reports/r1054/reference.json
+
+# 3. Gerar pacote de submissão com perfil PLOS ONE
+.venv/bin/python -m marceloclaro.scientific_lab research submission \
+  --out projects/demo-r1054 --journal-profile plos-one
+
+# 4. Conferir o gate de publicação (não publica)
+.venv/bin/python -m marceloclaro.scientific_lab research publication-gate \
+  --out projects/demo-r1054
+```
+
+> **O que “completo” significa aqui:** o fluxo vai do tema ao pacote de
+> submissão. Ele **não** declara aceite, publicação ou validação externa sem
+> artefato institucional verificável.
 
 ## Capacidades principais
 
-| Área | Implementação e caminho de uso | Condição ou limite |
+| Área | Estado | O que existe | Limite honesto |
+|---|---|---|---|
+| Orquestração | ✅ implementado/testado | `MarceloClaroOrchestrator`, Blackboard, MetaBus, workflows DAG, cancelamento | CLI instalada não comprova autenticação ou execução |
+| Agentes | ✅ 333 perfis | catálogo, registro, especificação, trust e evolução | registro/atribuição ≠ inferência concluída |
+| Pesquisa científica | ✅ R1051–R1054 | busca, texto integral, triagem humana, integridade, meta-análise, manuscrito, submissão | extração/RoB/GRADE assistivos; revisão humana obrigatória |
+| SDD/TDD | ✅ | SpecRegistry, SpecVerifier, TDDRunner, RED/GREEN | critério textual ≠ verdade científica |
+| REA | 🟡 com limites | inspeção local, camadas de provedores, recibos | formato, engine, licença e isolamento precisam ser conferidos |
+| Vídeo e dublagem | ✅ R1046–R1047 | multifaixa, transições, cor, XTTS, ASR, diarização, legendas, QC | render/QC técnico ≠ aprovação estética ou editorial |
+| MCP | 🟡 27 configurados | federação, probes, smoke, recibos | configuração ≠ disponibilidade no momento de uso |
+| Governança | ✅ | gate metacognitivo, TrustEngine, slashing, EvolutionRegistry | `externally_supported` não é verdade absoluta |
+| Publicação | 🧭 gate | validação externa, aceite, autorização | nenhum upload/publicação automática |
+
+**Legenda:** ✅ implementado e testado; 🟡 implementado com limites; 🧪 experimental; 📋 apenas especificado.
+
+## Arquitetura em 60 segundos
+
+```mermaid
+flowchart TB
+    U["CLI · OpenCode · MCP · Streamlit"] --> O["MarceloClaro Orchestrator"]
+    O --> B["Blackboard A2A"]
+    O --> M["MetaBus / MCI"]
+    O --> S["SpecRegistry · SDD/TDD"]
+    O --> R["Research Lab R1051–R1054"]
+    O --> V["Video Editor R1046–R1047"]
+    O --> E["REA"]
+    B --> A["333 agent profiles"]
+    M --> G["Trust · Evolution · Evidence"]
+    S --> Gate["Evidence Gate"]
+    R --> Gate
+    V --> Gate
+    E --> Gate
+```
+
+<details>
+<summary><strong>Ver o mapa completo da arquitetura (SVG)</strong></summary>
+
+<br>
+<img src="docs/architecture/curated-overview.svg" alt="Mapa curado da arquitetura do Core" width="100%">
+
+</details>
+
+A arquitetura completa, os caminhos de falha e os 22 fluxogramas estão em
+[ARCHITECTURE.md](ARCHITECTURE.md) e no
+[guia R916](docs/ARQUITETURA_COMPLETA_CORE_R916.md). O mapa acima é uma
+projeção; uma aresta não é execução.
+
+## Comece em 5 minutos
+
+```bash
+# 1. Clonar
+git clone https://github.com/MarceloClaro/opencode-ecosystem-core.git
+cd opencode-ecosystem-core
+
+# 2. Diagnosticar sem alterar nada
+./install.sh --check
+
+# 3. Instalar dependências seguras (npm/pip/uv/venv)
+./install.sh --apply --yes
+
+# 4. Conferir a saúde estrutural
+.venv/bin/python -m marceloclaro.cli doctor
+```
+
+Saída esperada do `doctor`: **22/22 checks estruturais**. Isso não prova
+autenticação, inferência ou validação externa.
+
+Primeiro projeto de pesquisa, sem rede:
+
+```bash
+.venv/bin/python -m marceloclaro.scientific_lab research project \
+  --theme "saúde mental em estudantes universitários" \
+  --out projects/demo-r1054 \
+  --dry-run
+```
+
+## Trilha de evidências
+
+| Nível | Significado | Exemplo |
 |---|---|---|
-| Orquestração | `MarceloClaroOrchestrator`, Blackboard, MetaBus e `ecosystem-network` | CLI instalada não comprova autenticação ou execução |
-| Workflows | DAG com dependências, checkpoints e retomada | Execução sequencial; repetição de etapas falhas é explícita |
-| SDD/TDD | SpecRegistry, SpecVerifier, TDDRunner e histórico RED/GREEN autenticado | Critérios textuais e entrega de software possuem contratos distintos |
-| REA | Inspeção direta, explicação por recibo, camadas e MCP local | Formato, engine, licença e isolamento precisam ser conferidos |
-| Memória observável | Terminal animado e aba **Rede de memória** | Projeta registros existentes; não mostra a atenção interna do LLM |
-| Conhecimento e RAG | Busca científica, recuperação, referências e EvidenceGraph | Cobertura lexical e grafo não comprovam qualidade da resposta |
-| Raciocínio | Gramáticas restritas, SymPy, Z3 e integrações formais opcionais | Entrada recusada ou engine indisponível gera resultado tipado ou fallback |
-| Pesquisa e ciência | Fábrica de pesquisa, pipeline acadêmico e análise reproduzível | Proveniência, reexecução e revisão externa são verificações distintas |
-| Apresentações | MIRA, slides e artefatos visuais | Conformidade interna não avalia mérito científico |
-| Domínios jurídico e clínico | Integrações e contratos específicos | Apoio computacional com revisão humana; sem validação geral de uso |
-| Governança e evolução | TrustEngine, economia de tokens, federação e EvolutionRegistry | Registrar um ciclo não equivale a auditá-lo externamente |
-| Vídeo e dublagem | `video_editor`, multifaixa/transições/cor R1046, diarização Nemotron, XTTS e Remotion | Capacidade implementada ≠ mídia aprovada; ver limites abaixo |
+| **L0 — implementado** | código e contrato existem | módulos `scientific_lab/*` |
+| **L1 — testado** | testes herméticos passam | 410 passed, 1 skipped na regressão R1033–R1054 |
+| **L2 — renderizado** | vídeo/PDF/DOCX gerados com recibo | R1047, pacote R1053 |
+| **L3 — benchmarkado** | replicação numérica em dados públicos | BCG REML, R1054 |
+| **L4 — validação externa** | artefato independente verificado | gate R1054; **não emitido** |
+| **L5 — aceite/publicação** | decisão do periódico | **não emitido** |
+
+Essa escada é o antídoto contra o overclaim: **um nível não promove o outro**.
+Um render não é aprovação estética; um teste não é verdade científica; um gate
+não é aceite editorial.
+
+## Documentação
+
+| Documento | Para quê |
+|---|---|
+| [README](README.md) | esta visão geral |
+| [MANUAL.md](MANUAL.md) | comandos, exemplos e estados |
+| [ARCHITECTURE.md](ARCHITECTURE.md) | arquitetura técnica e fluxos |
+| [docs/README.md](docs/README.md) | índice documental por trilha |
+| [Pipeline R1054](docs/SCIENTIFIC_RESEARCH_PIPELINE_R1054.md) | pesquisador científico ponta a ponta |
+| [Spec R1054](specs/SPEC-1054-automacao-assistida-validacao-real.md) | contrato e critérios de aceitação |
+| [Relatório R1054](reports/r1054/README.md) | benchmark BCG e limites |
+| [AGENTS.md](AGENTS.md) | criação e registro de agentes |
+| [CLAUDE.md](CLAUDE.md) | operação no Claude Code |
+| [Instalador](installer/README.md) | instalação segura e procedência |
+| [PROGRESS.md](PROGRESS.md) | estado, ciclos e checkpoints |
+| [CORRIGENDUM.md](CORRIGENDUM.md) | alegações históricas corrigidas |
+| [CITATION.cff](CITATION.cff) | citação do software |
+| [scripts/generate_readme_gif.py](scripts/generate_readme_gif.py) | gera o GIF do pipeline |
+
+## Roadmap
+
+| Ciclo | Estado | Foco |
+|---|---|---|
+| R1051 | ✅ | tema → protocolo → busca → evidência → auditoria → manuscrito |
+| R1052 | ✅ | texto integral, triagem humana, integridade, `refresh` |
+| R1053 | ✅ | meta-análise, GRADE, LaTeX/DOCX/PDF, submissão |
+| R1054 | ✅ | extração assistida, PLOS ONE, gate de publicação, benchmark BCG |
+| R1055 | 🧭 | backend real de submissão, perfis de periódicos brasileiros, UI, extração de tabelas, validação externa assistida |
+
+O roadmap é uma direção, não uma promessa de data. Cada ciclo só é marcado
+✅ quando tem spec, testes e evidência versionada.
+
+## Por que dar uma estrela
+
+Se este projeto economiza seu tempo, uma estrela ajuda outros pesquisadores e
+engenheiros a encontrarem um core que **não confunde automação com autoridade**:
+
+- ⭐ **Star** se você quer um exemplo sério de SDD/TDD aplicado a agentes,
+  ciência e mídia.
+- 👁️ **Watch** para acompanhar os ciclos R1051 → R1054 e o próximo.
+- 🐛 **Issue** com um caso de uso, uma fonte ou um limite que precisa ser
+  testado.
+- 🔬 **Contribute** com um teste, uma spec ou uma correção — especialmente se
+  ela reduzir uma alegação.
+
+[![Star](https://img.shields.io/github/stars/MarceloClaro/opencode-ecosystem-core?style=social)](https://github.com/MarceloClaro/opencode-ecosystem-core)
+
+## Como contribuir
+
+| Contribuição | Caminho |
+|---|---|
+| Abrir um caso de uso ou uma lacuna | [Issue](https://github.com/MarceloClaro/opencode-ecosystem-core/issues) com fonte, comando e resultado observado |
+| Adicionar uma spec ou um teste | [specs/](specs/), [tests/](tests/), [AGENTS.md](AGENTS.md) |
+| Corrigir uma alegação | [CORRIGENDUM.md](CORRIGENDUM.md), [docs/README.md](docs/README.md) |
+| Adicionar um perfil de periódico | [journal_profiles.py](scientific_lab/journal_profiles.py), [Spec R1054](specs/SPEC-1054-automacao-assistida-validacao-real.md) |
+| Melhorar a documentação | [docs/README.md](docs/README.md), [MANUAL.md](MANUAL.md) |
+
+Regras: não envie dados sensíveis, credenciais ou fontes privadas; não declare
+aceite/publicação sem artefato; prefira uma correção que **reduza** uma alegação.
+
+## O que este projeto não é
+
+- Não é AGI, consciência ou um “cientista autônomo”.
+- Não é paridade com Premiere, DaVinci, Zotero, Rayyan ou RevMan.
+- Não substitui revisão humana, bibliotecário, estatístico ou comitê de ética.
+- Não transforma teste, render, score ou voto em verdade/aceite/publicação.
+- Não publica, submete ou emite aceite sem backend, credencial e artefato
+  institucional verificável.
+- Não usa dados clínicos, sensíveis ou proprietários sem gate específico.
+
+## Licença e citação
+
+MIT — ver [LICENSE](LICENSE). O código de terceiros mantém suas próprias
+licenças; nenhum código restrito é relicenciado por este repositório.
+
+```bibtex
+@software{opencode_ecosystem_core_2026,
+  author  = {Laranjeira, Marcelo Claro},
+  title   = {OpenCode Ecosystem Core},
+  year    = {2026},
+  url     = {https://github.com/MarceloClaro/opencode-ecosystem-core},
+  note    = {Evidence-first orchestration, scientific research and media pipeline}
+}
+```
+
+---
+
+## 🧭 Deep dive
+
+As seções abaixo preservam o detalhamento técnico histórico: editor de vídeo,
+dublagem, evolução do piloto R1026, matriz detalhada, conselho científico,
+scanners, arquitetura completa e os 22 fluxogramas. Elas são leitura de
+engenharia, não resumo executivo. O topo desta página é a porta de entrada; o
+restante é o laboratório.
 
 ### Editor de vídeo universal, dublagem e animação (R1035–R1046)
 
@@ -256,7 +403,7 @@ exatamente às palavras novas. Os MP4/WAV ficam em
 `pilots/r1026-quantum/r1047-dub/out/` e são ignorados pelo Git; scripts,
 composições e recibos permitem reproduzir o fluxo.
 
-### O que o Core pode fazer
+### Matriz detalhada de mídia e ciência
 
 | Capacidade | Estado observado | Limite honesto |
 |---|---|---|
@@ -508,7 +655,7 @@ procedimento de reprodução em
 
 ---
 
-## Início rápido local
+## Início rápido detalhado
 
 Para obter a revisão publicada nesta etapa, selecione a branch explicitamente.
 Python é necessário para o Core; a CI declara versões 3.10–3.14 e a verificação
@@ -843,8 +990,8 @@ flowchart TB
     Orq2 --> TDDRunner2[TDDRunner]
     Orq2 --> MetaBus2[MetaBus]
     Orq2 --> Blackboard2[Blackboard]
-    Orq2 --> MCP2[25 MCPs configurados]
-    Orq2 --> Agents2[329 agentes configurados]
+    Orq2 --> MCP2[27 MCPs configurados]
+    Orq2 --> Agents2[333 agentes configurados]
     Orq2 --> Mira2[mira-presenter]
     Mira2 --> Deck2[MiraDeckPipeline]
     Deck2 --> Engine2[MiraEngine]
