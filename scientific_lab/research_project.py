@@ -18,12 +18,14 @@ from pathlib import Path
 from typing import Any, Callable, Iterable
 
 from mci.metacognitive_gate import aggregate
+from scientific_lab import fulltext, integrity, screening
 from scientific_lab.native import evidence as native_evidence
 from scientific_lab.native import research as native_research
 from scientific_lab.native import review as native_review
 from scientific_lab.native.common import dump, load, now, sha256_file, slug, uid
 
 PIPELINE_VERSION = "R1051"
+PIPELINE_REVISION = "R1052"
 SCHEMA_VERSION = "1.0"
 
 DEFAULT_SOURCES = (
@@ -210,12 +212,12 @@ def normalize_sources(sources: Iterable[str] | str | None) -> list[str]:
 
 
 def normalize_budget(budget: dict | None, *, limit: int, per_platform: int,
-                     timeout_seconds: int = 90) -> dict:
+                     timeout_seconds: int = 90, max_downloads: int = 0) -> dict:
     base = {
         "max_queries": 1,
         "max_records": _positive_int(limit, "limit", 1, 200),
         "per_platform": _positive_int(per_platform, "per_platform", 1, 50),
-        "max_downloads": 0,
+        "max_downloads": _positive_int(max_downloads, "max_downloads", 0, 20),
         "timeout_seconds": _positive_int(
             timeout_seconds, "timeout_seconds", 1, 600,
         ),
@@ -678,11 +680,9 @@ def _write_search_error(out: Path, exc: Exception, query: str,
     return error
 
 
-def _screen(out: Path, manifest_path: Path, project_id: str, protocol_id: str,
-            theme: str, question: str, records: list[dict]) -> dict:
-    ingest = native_review.ingest(out, manifest_path)
-    studies = [load(path) for path in
-               sorted((out / "01_sources/systematic_review/studies").glob("*.json"))]
+def _screening_payload(out: Path, project_id: str, protocol_id: str,
+                       theme: str, question: str, records: list[dict],
+                       studies: list[dict]) -> dict:
     by_article = {item["article_id"]: item for item in records}
     theme_terms = set(_tokenize(theme + " " + question))
     triage_studies = []
@@ -740,16 +740,47 @@ def _screen(out: Path, manifest_path: Path, project_id: str, protocol_id: str,
             "Nenhuma decisão de inclusão ou exclusão foi tomada pelo pipeline.",
         ],
     }
+    summary = screening.summarize(studies, screening.load_decisions(out))
+    triage = screening.merge_into_triage(triage, summary)
+    triage["summary"]["human_included"] = summary["summary"]["included"]
+    triage["summary"]["human_pending"] = summary["summary"]["pending"]
+    triage["human_verified"] = summary["human_verified"]
     dump(out / "02_screening/triage.json", triage)
+    screening.write_summary(out, summary)
     prisma_path = native_review.prisma(
-        out, protocol_id, human_verified=False,
+        out, protocol_id, human_verified=summary["human_verified"],
     )
+    dump(out / "02_screening/prisma-audit.json", {
+        "schema_version": SCHEMA_VERSION,
+        "prisma_path": str(prisma_path),
+        "screening_summary": summary["summary"],
+        "screening_status": summary["status"],
+        "human_verified": summary["human_verified"],
+        "reviewers": summary["reviewers"],
+        "pending": summary["summary"]["pending"],
+        "conflicts": summary["summary"]["conflicts"],
+        "policy": "pending_is_not_included",
+        "truth_claim": False,
+        "human_review_required": True,
+    })
     return {
-        "ingest": ingest,
         "studies": studies,
         "triage": triage,
+        "summary": summary,
         "prisma_path": prisma_path,
     }
+
+
+def _screen(out: Path, manifest_path: Path, project_id: str, protocol_id: str,
+            theme: str, question: str, records: list[dict]) -> dict:
+    ingest = native_review.ingest(out, manifest_path)
+    studies = [load(path) for path in
+               sorted((out / "01_sources/systematic_review/studies").glob("*.json"))]
+    payload = _screening_payload(
+        out, project_id, protocol_id, theme, question, records, studies,
+    )
+    payload["ingest"] = ingest
+    return payload
 
 
 def _load_corpus(path: Path) -> dict:
@@ -810,13 +841,35 @@ def _corpus_to_gate(corpus: dict) -> tuple[list[dict], list[dict]]:
 
 
 def _collect_evidence(out: Path, project_id: str, studies: list[dict],
-                      records: list[dict], corpus: dict | None) -> dict:
+                      records: list[dict], corpus: dict | None,
+                      *, base_claims: list[dict] | None = None,
+                      base_cards: list[dict] | None = None,
+                      base_gaps: list[dict] | None = None,
+                      extra_claims: list[dict] | None = None) -> dict:
     by_article = {item["article_id"]: item for item in records}
-    metadata_claims = []
-    cards = []
-    gaps = []
+    metadata_claims = [] if base_claims is None else []
+    cards = list(base_cards or [])
+    gaps = list(base_gaps or [])
+    gap_keys = {
+        (gap.get("study_id"), gap.get("reason"))
+        for gap in gaps
+    }
     for study in studies:
+        if study.get("integrity_status") in {"retracted", "retracted_notice"}:
+            key = (study.get("study_id"), "retracted_study")
+            if key not in gap_keys:
+                gaps.append({
+                    "study_id": study.get("study_id"),
+                    "article_id": (study.get("source_records") or [None])[0],
+                    "reason": "retracted_study",
+                    "detail": "Estudo retratado; excluído da síntese e dos claims.",
+                })
+                gap_keys.add(key)
+    iter_studies = studies if base_claims is None else []
+    for study in iter_studies:
         article_id = (study.get("source_records") or [None])[0]
+        if study.get("integrity_status") in {"retracted", "retracted_notice"}:
+            continue
         record = by_article.get(article_id)
         if record is None:
             gaps.append({
@@ -897,6 +950,7 @@ def _collect_evidence(out: Path, project_id: str, studies: list[dict],
             "locator": f"abstract:{article_id}",
             "scope": "indexed_abstract_only",
             "verification_status": "candidate",
+            "integrity_status": study.get("integrity_status", "unchecked"),
             "full_text_read": False,
             "human_review_required": True,
         })
@@ -904,7 +958,7 @@ def _collect_evidence(out: Path, project_id: str, studies: list[dict],
     corpus_gate_claims: list[dict] = []
     corpus_index: list[dict] = []
     council = None
-    if corpus is not None:
+    if base_claims is None and corpus is not None:
         corpus_gate_claims, corpus_index = _corpus_to_gate(corpus)
         council = corpus["council"]
         dump(out / "03_evidence/council-claims.json", council)
@@ -917,7 +971,15 @@ def _collect_evidence(out: Path, project_id: str, studies: list[dict],
             "human_review_required": True,
         })
 
-    claims = metadata_claims + corpus_gate_claims
+    if base_claims is None:
+        claims = metadata_claims + corpus_gate_claims
+    else:
+        claims = list(base_claims)
+    extra_claims = list(extra_claims or [])
+    merged = {item["id"]: item for item in claims}
+    for item in extra_claims:
+        merged[item["id"]] = item
+    claims = list(merged.values())
     ids = [item["id"] for item in claims]
     if len(ids) != len(set(ids)):
         raise ValueError("identificadores de claim duplicados")
@@ -929,6 +991,7 @@ def _collect_evidence(out: Path, project_id: str, studies: list[dict],
         "counts": {
             "metadata_claims": len(metadata_claims),
             "corpus_claims": len(corpus_gate_claims),
+            "fulltext_claims": len(extra_claims),
             "total": len(claims),
         },
         "policy": "literal_evidence_only",
@@ -978,6 +1041,260 @@ def _collect_evidence(out: Path, project_id: str, studies: list[dict],
         "corpus_index": corpus_index,
         "council": council,
         "metadata_claims": metadata_claims,
+        "fulltext_claims": [
+            claim for claim in claims if "-FT-" in claim.get("id", "")
+        ],
+    }
+
+
+def _run_downloads(out: Path, records: list[dict], *, enabled: bool,
+                   max_downloads: int, downloader_factory: Callable | None) -> dict:
+    if not enabled:
+        result = {
+            "schema_version": SCHEMA_VERSION,
+            "status": "not_requested",
+            "downloaded": 0,
+            "receipts": [],
+            "paths": [],
+            "limitations": ["Download de PDF não solicitado."],
+        }
+        dump(out / "01_sources/downloads.json", result)
+        return result
+    if not records:
+        result = {
+            "schema_version": SCHEMA_VERSION,
+            "status": "not_applicable",
+            "downloaded": 0,
+            "receipts": [],
+            "paths": [],
+            "limitations": ["Sem registros para download."],
+        }
+        dump(out / "01_sources/downloads.json", result)
+        return result
+    from research.downloader import PaperDownloader
+    from research.searchers import PaperRecord
+
+    objects = [
+        PaperRecord(
+            title=record.get("title") or "",
+            authors=record.get("authors") or [],
+            year=record.get("year"),
+            doi=record.get("doi"),
+            arxiv_id=record.get("arxiv_id"),
+            url=record.get("record_url") or record.get("url"),
+            pdf_url=record.get("pdf_url"),
+            abstract=record.get("abstract") or "",
+            venue=record.get("venue") or "",
+            source=record.get("source") or "",
+            citations=record.get("cited_by_count"),
+            extra={},
+        )
+        for record in records[:max_downloads]
+    ]
+    try:
+        downloader = (
+            downloader_factory(str(out / "01_sources/pdfs"))
+            if downloader_factory is not None
+            else PaperDownloader(str(out / "01_sources/pdfs"))
+        )
+        results = downloader.download(objects)
+    except Exception as exc:
+        result = {
+            "schema_version": SCHEMA_VERSION,
+            "status": "blocked",
+            "downloaded": 0,
+            "receipts": [],
+            "paths": [],
+            "error_type": type(exc).__name__,
+            "error": _safe_error(exc),
+            "limitations": ["O download falhou; nenhum PDF foi inventado."],
+        }
+        dump(out / "01_sources/downloads.json", result)
+        return result
+    receipts = []
+    for record, download in zip(records, results):
+        extra = dict(getattr(download, "extra", {}) or {})
+        ok = bool(getattr(download, "ok", False))
+        receipts.append({
+            "article_id": record.get("article_id"),
+            "title": record.get("title"),
+            "doi": record.get("doi"),
+            "ok": ok,
+            "path": getattr(download, "pdf_path", None),
+            "sha256": extra.get("sha256"),
+            "rights_basis": extra.get("rights_basis", "not_verified_open"),
+            "license": extra.get("license"),
+            "content_type": extra.get("content_type"),
+            "error": getattr(download, "error", None),
+            "status": (
+                "downloaded" if ok
+                else "not_open" if extra.get("rights_basis") == "not_verified_open"
+                else "failed"
+            ),
+            "limitations": list(extra.get("limitations", [])),
+        })
+    result = {
+        "schema_version": SCHEMA_VERSION,
+        "status": "completed",
+        "requested": len(objects),
+        "downloaded": sum(item["ok"] for item in receipts),
+        "receipts": receipts,
+        "paths": [item["path"] for item in receipts if item["ok"] and item["path"]],
+        "policy": "open_science_only_no_paywall_bypass",
+        "truth_claim": False,
+        "external_validation": False,
+        "human_review_required": True,
+        "limitations": [
+            "Somente rotas abertas verificáveis são aceitas; o downloader não contorna paywall.",
+            "Um download bem-sucedido não prova licença, versão publicada ou qualidade.",
+        ],
+    }
+    dump(out / "01_sources/downloads.json", result)
+    return result
+
+
+def _merge_fulltext_indices(indices: list[dict]) -> dict:
+    entries_by_key: dict[str, dict] = {}
+    for index in indices:
+        for entry in index["entries"]:
+            key = entry.get("sha256") or entry.get("path")
+            entries_by_key[key] = entry
+    entries = list(entries_by_key.values())
+    return {
+        "schema_version": SCHEMA_VERSION,
+        "root": "; ".join(index["root"] for index in indices),
+        "entries": entries,
+        "count": len(entries),
+        "with_text": sum(entry["text_chars"] >= 200 for entry in entries),
+        "limitations": [
+            limitation
+            for index in indices
+            for limitation in index.get("limitations", [])
+        ],
+    }
+
+
+def _run_integrity(out: Path, studies: list[dict], *, enabled: bool,
+                   checker: Callable | None, max_checks: int) -> dict:
+    if not enabled:
+        result = {
+            "schema_version": SCHEMA_VERSION,
+            "mode": "not_requested",
+            "checks": [],
+            "summary": {"not_requested": len(studies)},
+            "checked": 0,
+            "policy": "absence_of_update_is_not_proof_of_integrity",
+            "truth_claim": False,
+            "external_validation": False,
+            "human_review_required": True,
+            "limitations": ["Verificação de integridade não solicitada."],
+        }
+        integrity.write_checks(out, result)
+        return result
+    if not studies:
+        result = {
+            "schema_version": SCHEMA_VERSION,
+            "mode": "not_applicable",
+            "checks": [],
+            "summary": {"not_applicable": 0},
+            "checked": 0,
+            "policy": "absence_of_update_is_not_proof_of_integrity",
+            "truth_claim": False,
+            "external_validation": False,
+            "human_review_required": True,
+            "limitations": ["Sem estudos para verificar."],
+        }
+        integrity.write_checks(out, result)
+        return result
+    result = integrity.check_many(
+        studies, checker=checker, max_checks=max_checks,
+    )
+    result["mode"] = "executed"
+    integrity.write_checks(out, result)
+    integrity.apply_to_studies(out, result)
+    return result
+
+
+def _run_fulltext(out: Path, project_id: str, studies: list[dict],
+                  records: list[dict], *, directories: list[Path] | None,
+                  approval_path: str | Path | None,
+                  theme: str, question: str) -> dict:
+    if approval_path is not None and not directories:
+        raise ValueError("--fulltext-approval exige --fulltext-dir")
+    if not directories:
+        result = {
+            "status": "not_requested",
+            "index": None,
+            "matches": None,
+            "candidates": {"candidates": [], "count": 0},
+            "approval": None,
+            "claims": [],
+        }
+        dump(out / "03_evidence/fulltext-summary.json", {
+            "schema_version": SCHEMA_VERSION,
+            "status": "not_requested",
+            "files_indexed": 0,
+            "candidates": 0,
+            "approved": 0,
+            "full_text_retained": False,
+            "truth_claim": False,
+            "external_validation": False,
+            "human_review_required": True,
+            "limitations": ["Nenhum diretório de texto integral foi fornecido."],
+        })
+        return result
+    indices = []
+    limitations = []
+    for directory in directories:
+        try:
+            indices.append(fulltext.index_fulltexts(directory))
+        except ValueError as exc:
+            limitations.append(f"{directory}: {exc}")
+    if not indices:
+        raise ValueError(
+            "nenhum diretório de texto integral produziu índice: "
+            + "; ".join(limitations)
+        )
+    index = _merge_fulltext_indices(indices)
+    index["limitations"] = list(index.get("limitations", [])) + limitations
+    fulltext.write_index(out, index)
+    matches = fulltext.match_entries(index, studies, records)
+    candidates = fulltext.extract_candidates(
+        index, matches, studies, records,
+        max_excerpts=5,
+        keywords=_tokenize(theme + " " + question),
+    )
+    fulltext.write_candidates(out, candidates)
+    template = fulltext.approval_template(project_id, candidates["candidates"])
+    fulltext.write_approval_template(out, template)
+    approval_result = None
+    claims: list[dict] = []
+    if approval_path is not None:
+        approval = fulltext.validate_approval(
+            approval_path,
+            [candidate["claim_id"] for candidate in candidates["candidates"]],
+        )
+        dump(out / "07_validation/fulltext-approval.json", {
+            **approval,
+            "source_path": str(approval_path),
+            "applied_at": now(),
+        })
+        approval_result = fulltext.apply_approval(
+            out, project_id, index, candidates["candidates"], approval, studies,
+        )
+        claims = fulltext.fulltext_claims(
+            candidates["candidates"], approval["approved_claim_ids"], studies,
+        )
+    fulltext.write_fulltext_summary(
+        out, index, matches, candidates, approval_result,
+    )
+    return {
+        "status": "completed",
+        "index": index,
+        "matches": matches,
+        "candidates": candidates,
+        "approval": approval_result,
+        "claims": claims,
     }
 
 
@@ -1073,6 +1390,13 @@ def _render_manuscript(ctx: dict) -> str:
     gaps = evidence.get("gaps", [])
     corpus_index = evidence.get("corpus_index", [])
     council = evidence.get("council")
+    downloads = ctx.get("downloads") or {}
+    download_count = downloads.get("downloaded", 0)
+    fulltext = ctx.get("fulltext") or {}
+    integrity = ctx.get("integrity") or {}
+    fulltext_claims = evidence.get("fulltext_claims") or []
+    fulltext_candidates = (fulltext.get("candidates") or {}).get("candidates", [])
+    integrity_checks = integrity.get("checks") or []
     theme = contract["theme"]
     question = contract["question"]
     question_status = contract["question_status"]
@@ -1080,8 +1404,15 @@ def _render_manuscript(ctx: dict) -> str:
     unique_count = len(studies)
     with_abstract = sum(bool(item.get("abstract")) for item in records)
     claim_count = len(claims)
-    metadata_claim_count = len(evidence.get("metadata_claims", []))
-    corpus_claim_count = len(evidence.get("corpus_gate_claims", []))
+    fulltext_claim_count = sum("-FT-" in claim.get("id", "") for claim in claims)
+    metadata_claim_count = sum(
+        claim.get("id", "").startswith("CLAIM-ART-")
+        and "-FT-" not in claim.get("id", "")
+        for claim in claims
+    )
+    corpus_claim_count = max(
+        0, claim_count - fulltext_claim_count - metadata_claim_count,
+    )
 
     lines: list[str] = []
     lines.append(
@@ -1091,15 +1422,25 @@ def _render_manuscript(ctx: dict) -> str:
     lines.append("")
     lines.append(
         f"**Projeto:** `{ctx['project_id']}` · **Protocolo:** "
-        f"`{protocol.get('protocol_id')}` · **Pipeline:** R1051 · "
+        f"`{protocol.get('protocol_id')}` · **Pipeline:** R1051/R1052 · "
         f"**Gerado em:** {ctx['generated_at']}"
     )
     lines.append("")
+    if fulltext_claims:
+        scope = (
+            "Houve leitura de arquivos de texto integral fornecidos e aprovação "
+            "humana explícita para os recortes marcados como `verified`; não "
+            "houve validação externa."
+        )
+    else:
+        scope = (
+            "Não houve leitura do texto integral, triagem humana independente "
+            "ou validação externa."
+        )
     lines.append(
         "> **Status:** rascunho para validação humana. Não é artigo aceito, "
-        "publicado ou avaliado por pares. As afirmações se limitam aos registros "
-        "e resumos indexados recuperados. Não houve leitura do texto integral, "
-        "triagem humana independente ou validação externa."
+        "publicado ou avaliado por pares. As afirmações se limitam aos registros, "
+        f"resumos indexados e recortes aprovados. {scope}"
     )
     lines.append("")
     lines.append("## Resumo")
@@ -1130,13 +1471,21 @@ def _render_manuscript(ctx: dict) -> str:
         )
     lines.append(f"**Métodos.** {methods_result}")
     lines.append("")
-    if claim_count or corpus_claim_count:
+    if claim_count or corpus_claim_count or fulltext_claims:
         lines.append(
             f"**Resultados.** Foram produzidos {metadata_claim_count} claim(s) a "
-            f"partir de resumos indexados e {corpus_claim_count} claim(s) a partir "
-            "de corpus fornecido pelo operador. O gate metacognitivo não promoveu "
-            "nenhum claim a verdade e não houve validação externa."
+            f"partir de resumos indexados, {corpus_claim_count} claim(s) a partir "
+            f"de corpus fornecido e {len(fulltext_claims)} claim(s) a partir de "
+            "texto integral aprovado por humano. O gate metacognitivo não "
+            "promoveu nenhum claim a verdade e não houve validação externa."
         )
+        if integrity_checks:
+            lines.append("")
+            lines.append(
+                "**Integridade.** Foram consultados "
+                f"{len(integrity_checks)} estudo(s) no Crossref; o resultado é "
+                "observacional e não certifica integridade."
+            )
     else:
         lines.append(
             "**Resultados.** Nenhum claim com evidência literal foi produzido. "
@@ -1169,11 +1518,21 @@ def _render_manuscript(ctx: dict) -> str:
             "um pesquisador antes de orientar a triagem e a extração."
         )
         lines.append("")
+    if fulltext_claims:
+        analysis_unit = (
+            "A unidade de análise inclui o registro bibliográfico, o resumo "
+            "indexado e os recortes de texto integral aprovados por humano; "
+            "os demais recortes permanecem candidatos."
+        )
+    else:
+        analysis_unit = (
+            "A unidade de análise é o registro bibliográfico e o resumo "
+            "indexado, não o texto integral."
+        )
     lines.append(
         "O objetivo não é responder à pergunta com dados primários, mas "
         "verificar o que os registros recuperados permitem afirmar com "
-        "proveniência. A unidade de análise é o registro bibliográfico e o "
-        "resumo indexado, não o texto integral."
+        f"proveniência. {analysis_unit}"
     )
     lines.append("")
     lines.append(
@@ -1186,11 +1545,20 @@ def _render_manuscript(ctx: dict) -> str:
     lines.append("")
     lines.append("### 2.1 Delineamento")
     lines.append("")
+    if fulltext_claims:
+        design_note = (
+            "não houve protocolo aprovado, triagem independente por dois "
+            "revisores, avaliação de risco de viés ou síntese quantitativa; "
+            "houve leitura de arquivos de texto integral aprovados por humano."
+        )
+    else:
+        design_note = (
+            "não houve protocolo aprovado, triagem independente, leitura de "
+            "texto integral, avaliação de risco de viés ou síntese quantitativa."
+        )
     lines.append(
         "Foi gerado um protocolo de escopo e um mapa de evidências. O desenho "
-        "não é uma revisão sistemática completa: não houve protocolo aprovado, "
-        "triagem independente, leitura de texto integral, avaliação de risco de "
-        "viés ou síntese quantitativa."
+        f"não é uma revisão sistemática completa: {design_note}"
     )
     lines.append("")
     lines.append("### 2.2 Contrato de recuperação")
@@ -1240,6 +1608,11 @@ def _render_manuscript(ctx: dict) -> str:
             "`01_sources/source-records.json`; os campos originalmente "
             "retornados pelas APIs não são reproduzidos integralmente."
         )
+        if download_count:
+            lines.append(
+                f"Foram baixados {download_count} PDF(s) por rotas abertas "
+                "verificadas; nenhum paywall foi contornado."
+            )
     lines.append("")
     lines.append("### 2.4 Elegibilidade e triagem")
     lines.append("")
@@ -1260,6 +1633,34 @@ def _render_manuscript(ctx: dict) -> str:
         "validação externa é `candidate`; nenhum claim é tratado como verdade."
     )
     lines.append("")
+    lines.append("### 2.6 Texto integral e integridade")
+    lines.append("")
+    if fulltext_candidates:
+        lines.append(
+            f"Foram indexados arquivos locais de texto integral e propostos "
+            f"{len(fulltext_candidates)} recorte(s). Apenas recortes aprovados "
+            "explicitamente por um revisor humano recebem status `verified`; os "
+            "demais permanecem `candidate` ou `rejected`. A aprovação é contra o "
+            "arquivo fornecido, não contra a versão publicada."
+        )
+    else:
+        lines.append(
+            "Nenhum diretório de texto integral foi processado nesta execução. "
+            "A evidência permanece em nível de resumo indexado."
+        )
+    lines.append("")
+    if integrity_checks:
+        lines.append(
+            "A integridade foi consultada no Crossref para os estudos com DOI, "
+            "dentro de um orçamento explícito. O resultado é observacional: "
+            "`no_update_found` não é atestado de integridade."
+        )
+    else:
+        lines.append(
+            "A verificação de retratações/correções não foi executada nesta "
+            "rodada; o checklist humano continua obrigatório."
+        )
+    lines.append("")
     lines.append("## 3. Resultados")
     lines.append("")
     lines.append("### 3.1 Fluxo de recuperação")
@@ -1273,6 +1674,7 @@ def _render_manuscript(ctx: dict) -> str:
     lines.append(f"| Estudos únicos | {unique_count} |")
     lines.append(f"| Registros com resumo indexado | {with_abstract} |")
     lines.append(f"| Claims com evidência literal | {claim_count} |")
+    lines.append(f"| Claims de texto integral | {fulltext_claim_count} |")
     lines.append(f"| Claims do corpus fornecido | {corpus_claim_count} |")
     lines.append(f"| Lacunas registradas | {len(gaps)} |")
     lines.append("")
@@ -1328,13 +1730,18 @@ def _render_manuscript(ctx: dict) -> str:
         lines.append("")
     lines.append("### 3.4 Evidências em nível de resumo")
     lines.append("")
+    card_scope = (
+        "escopo: resumo indexado; ver recortes de texto integral aprovados."
+        if fulltext_claims else
+        "escopo: resumo indexado; texto integral não lido."
+    )
     if cards:
         for card in cards:
             lines.append(
                 f"**{card['claim_id']}** — *{card['title']}* "
                 f"({card.get('year') or 'ano não informado'}), "
                 f"fonte `{card.get('source')}`. Status: `candidate`; "
-                "escopo: resumo indexado; texto integral não lido."
+                f"{card_scope}"
             )
             lines.append("")
             lines.append(f"> “{card['quote']}”")
@@ -1350,8 +1757,61 @@ def _render_manuscript(ctx: dict) -> str:
                 f"({len(gaps)} ocorrência(s))."
             )
         lines.append("")
+    fulltext = ctx.get("fulltext") or {}
+    integrity = ctx.get("integrity") or {}
+    fulltext_candidates = (fulltext.get("candidates") or {}).get("candidates", [])
+    fulltext_claims = evidence.get("fulltext_claims") or []
+    fulltext_approval = fulltext.get("approval") or {}
+    approved_ids = set(fulltext_approval.get("approved_claim_ids") or [])
+    rejected_ids = set(fulltext_approval.get("rejected_claim_ids") or [])
+    integrity_checks = integrity.get("checks") or []
+    section = 5
+    if fulltext_candidates:
+        lines.append(f"### 3.{section} Evidências em texto integral")
+        lines.append("")
+        lines.append(
+            "Os recortes abaixo foram extraídos de arquivos locais e só recebem "
+            "status `verified` quando um revisor humano aprova explicitamente o "
+            "claim no arquivo de aprovação. A aprovação confirma o recorte "
+            "contra o arquivo fornecido, não contra a versão publicada."
+        )
+        lines.append("")
+        lines.append("| Claim | Estudo | Local | Status | Recorte |")
+        lines.append("|---|---|---|---|---|")
+        for candidate in fulltext_candidates:
+            claim_id = candidate["claim_id"]
+            if claim_id in approved_ids:
+                status = "verified"
+            elif claim_id in rejected_ids:
+                status = "rejected"
+            else:
+                status = "candidate"
+            quote = (candidate.get("quote") or "").replace("|", "/")
+            if len(quote) > 140:
+                quote = quote[:137] + "..."
+            title = (candidate.get("title") or "não informado").replace("|", "/")
+            lines.append(
+                f"| {claim_id} | {title} | {candidate.get('locator')} | "
+                f"`{status}` | {quote} |"
+            )
+        lines.append("")
+        if fulltext_approval:
+            lines.append(
+                f"Aprovação humana: revisor `{fulltext_approval.get('reviewer')}`, "
+                f"decisão `{fulltext_approval.get('decision')}`, "
+                f"{fulltext_approval.get('counts', {}).get('verified', 0)} "
+                "recorte(s) verificado(s)."
+            )
+            lines.append("")
+        else:
+            lines.append(
+                "Nenhuma aprovação humana foi anexada; todos os recortes "
+                "permanecem `candidate`."
+            )
+            lines.append("")
+        section += 1
     if council is not None:
-        lines.append("### 3.5 Claims do corpus fornecido")
+        lines.append(f"### 3.{section} Claims do corpus fornecido")
         lines.append("")
         lines.append(
             "Os claims abaixo foram validados literalmente contra o corpus "
@@ -1375,7 +1835,29 @@ def _render_manuscript(ctx: dict) -> str:
             "os critérios para `supported`; ele não é uma aprovação."
         )
         lines.append("")
-    lines.append("### 3.6 Lacunas" if council is not None else "### 3.5 Lacunas")
+        section += 1
+    if integrity_checks:
+        lines.append(f"### 3.{section} Integridade de literatura")
+        lines.append("")
+        lines.append(
+            "A consulta ao Crossref é observacional: `no_update_found` não é "
+            "atestado de integridade e `unchecked` não é ausência de risco."
+        )
+        lines.append("")
+        lines.append("| Estudo | DOI | Status | Atualizações |")
+        lines.append("|---|---|---|---|")
+        for check in integrity_checks:
+            updates = "; ".join(
+                str(item.get("relation") or item.get("id") or "")
+                for item in (check.get("updates") or [])[:3]
+            ) or "não informado"
+            lines.append(
+                f"| {check.get('study_id')} | {check.get('doi') or 'não informado'} | "
+                f"`{check.get('status')}` | {updates.replace('|', '/')} |"
+            )
+        lines.append("")
+        section += 1
+    lines.append(f"### 3.{section} Lacunas")
     lines.append("")
     if gaps:
         for gap in gaps:
@@ -1407,26 +1889,49 @@ def _render_manuscript(ctx: dict) -> str:
             "saturação."
         )
         lines.append("")
+    if fulltext_claims:
+        interpretation_note = (
+            "A interpretação substantiva exige triagem por dois revisores, "
+            "conferência dos recortes aprovados, verificação de retratações e "
+            "correções e avaliação do risco de viés."
+        )
+    else:
+        interpretation_note = (
+            "A interpretação substantiva exige triagem por dois revisores, "
+            "leitura do texto integral, verificação de retratações e correções "
+            "e avaliação do risco de viés."
+        )
     lines.append(
-        "A interpretação substantiva exige triagem por dois revisores, leitura "
-        "do texto integral, verificação de retratações e correções e avaliação "
-        "do risco de viés. Até lá, o manuscrito é um mapa de evidências, não uma "
-        "resposta conclusiva."
+        f"{interpretation_note} Até lá, o manuscrito é um mapa de evidências, "
+        "não uma resposta conclusiva."
     )
     lines.append("")
     lines.append("## 5. Limitações")
     lines.append("")
     limitations = [
         "A busca depende de rede, disponibilidade e limites dos provedores; a ausência de resultados não prova ausência de literatura.",
-        "Os claims de metadados são em nível de resumo indexado; não houve leitura do texto integral.",
+        (
+            "Os claims de texto integral foram verificados contra o arquivo "
+            "fornecido, não contra a versão publicada; os claims de metadados "
+            "permanecem em nível de resumo indexado."
+            if fulltext_claims else
+            "Os claims de metadados são em nível de resumo indexado; não houve "
+            "leitura do texto integral."
+        ),
         "A triagem é lexical e assistida; não substitui dois revisores humanos independentes.",
+        "A verificação de retratações/correções depende do Crossref e pode ser incompleta; ausência de atualização não é atestado de integridade.",
         "Não houve validação externa, avaliação por pares, aceite editorial ou publicação.",
         "Não houve teste estatístico, meta-análise, modelagem causal ou análise de risco de viés.",
         "Metadados podem estar incompletos, desatualizados ou conter erros de indexação.",
         "A cobertura é limitada pelas bases escolhidas, pelo idioma e pelo limite por plataforma.",
-        "Trechos de resumos são mantidos no idioma original; tradução e interpretação exigem revisão humana.",
+        "Trechos de resumos e de texto integral são mantidos no idioma original; tradução e interpretação exigem revisão humana.",
         "O corpus fornecido, quando usado, é validado contra si mesmo, não contra a versão publicada.",
-        "Nenhum PDF foi baixado e nenhuma credencial foi usada pelo pipeline.",
+        (
+            f"{download_count} PDF(s) foram baixados apenas por rotas abertas "
+            "verificadas; nenhum paywall foi contornado."
+            if download_count else
+            "Nenhum PDF foi baixado pelo pipeline e nenhuma credencial foi usada."
+        ),
     ]
     if search.get("status") == "blocked":
         limitations.insert(0, "A busca falhou nesta execução; o pacote não contém resultados externos.")
@@ -1509,7 +2014,7 @@ def _render_validation(ctx: dict) -> str:
         f"# Validação humana — {theme}",
         "",
         f"**Projeto:** `{project_id}` · **Protocolo:** `{protocol_id}` · "
-        f"**Pipeline:** R1051",
+        f"**Pipeline:** R1051/R1052",
         "",
         "> **Estado:** `pending_human`. Nenhum item abaixo foi executado pelo "
         "pipeline. O manuscrito é um rascunho e não deve ser submetido, "
@@ -1533,8 +2038,11 @@ def _render_validation(ctx: dict) -> str:
         "| Verificar cobertura e datas das bases | pending_human | bibliotecário ou pesquisador | consulta e data de acesso conferidas |",
         "| Triagem por dois revisores independentes | pending_human | dois revisores | decisões `include`/`exclude` com justificativa |",
         "| Obter textos integrais por via legal | pending_human | pesquisador | arquivos com licença e hash |",
+        "| Conferir licença dos PDFs baixados | pending_human | bibliotecário | `rights_basis` e licença conferidos |",
         "| Conferir cada citação no texto integral | pending_human | revisor | recorte literal e localizador |",
+        "| Aprovar recortes de texto integral | pending_human | revisor | `fulltext-approval` com revisor, data e confirmação |",
         "| Verificar retratações e correções | pending_human | revisor | consulta a Retraction Watch/Crossref |",
+        "| Confirmar que só há `verified` com aprovação humana | pending_human | auditor | confronto entre annotations e approval |",
         "| Avaliar risco de viés | pending_human | revisor metodológico | instrumento e julgamento registrados |",
         "| Revisar análise e limites inferenciais | pending_human | estatístico ou metodólogo | parecer com pressupostos e incerteza |",
         "| Verificar ética, consentimento e conflitos | pending_human | comitê ou pesquisador | declaração e aprovação aplicável |",
@@ -1644,9 +2152,12 @@ def _render_readme(ctx: dict) -> str:
         "| `00_contract/retrieval-contract.json` | contrato de recuperação |",
         "| `00_contract/systematic-review-protocol.json` | protocolo em rascunho |",
         "| `01_sources/source-records.json` | registros normalizados |",
+        "| `01_sources/downloads.json` | downloads OA e recusas |",
         "| `02_screening/triage.json` | triagem lexical assistida |",
         "| `03_evidence/claims.json` | claims e evidências literais |",
         "| `03_evidence/claim-gate.json` | gate metacognitivo |",
+        "| `03_evidence/fulltext-candidates.json` | recortes de texto integral para aprovação |",
+        "| `03_evidence/integrity-checks.json` | retratações/correções consultadas |",
         "| `04_analysis/descriptive.json` | análise descritiva |",
         "| `05_audit/audit-report.json` | auditoria determinística |",
         "| `06_manuscript/manuscript.md` | manuscrito IMRaD |",
@@ -1708,6 +2219,20 @@ def audit_project(out: str | Path) -> dict:
     manifest = _maybe_load(out / "08_manifest/project-manifest.json") or {}
     corpus_doc = _maybe_load(out / "03_evidence/corpus-sources.json") or {}
     corpus_sources = corpus_doc.get("sources") or []
+    downloads = _maybe_load(out / "01_sources/downloads.json") or {}
+    fulltext_candidates_doc = _maybe_load(
+        out / "03_evidence/fulltext-candidates.json"
+    ) or {}
+    fulltext_candidates = fulltext_candidates_doc.get("candidates") or []
+    approval_doc = _maybe_load(
+        out / "07_validation/fulltext-approval.json"
+    ) or {}
+    screening_summary = _maybe_load(
+        out / "02_screening/screening-summary.json"
+    ) or {}
+    integrity_doc = _maybe_load(
+        out / "03_evidence/integrity-checks.json"
+    ) or {}
     search_error = (out / "01_sources/search-error.json").exists()
     search_plan = (out / "01_sources/search-plan.json").exists()
     search_manifests = list((out / "01_sources/metadata").glob("search-*.json"))
@@ -1742,10 +2267,13 @@ def audit_project(out: str | Path) -> dict:
         f"question_status={question_status}",
     ))
     if search_error:
-        search_status = "partial" if corpus_sources else "fail"
+        has_alternative = bool(corpus_sources) or bool(
+            approval_doc.get("approved_claim_ids")
+        )
+        search_status = "partial" if has_alternative else "fail"
         search_detail = (
-            "busca falhou, mas há corpus fornecido"
-            if corpus_sources else "busca falhou sem corpus alternativo"
+            "busca falhou, mas há corpus/texto integral aprovado"
+            if has_alternative else "busca falhou sem fonte alternativa"
         )
     elif search_manifests:
         search_status = "pass"
@@ -1794,6 +2322,118 @@ def audit_project(out: str | Path) -> dict:
         screening_status = "not_applicable"
         screening_detail = "sem triagem"
     checks.append(_check("human_screening_pending", screening_status, screening_detail))
+
+    if screening_summary:
+        summary_counts = screening_summary.get("summary") or {}
+        screening_policy_ok = (
+            screening_summary.get("policy") == "decision_is_human_only"
+            and screening_summary.get("truth_claim") is False
+        )
+        checks.append(_check(
+            "screening_pending_not_included",
+            "pass" if screening_policy_ok else "fail",
+            (
+                f"pending={summary_counts.get('pending', 0)}; "
+                f"included={summary_counts.get('included', 0)}; "
+                f"status={screening_summary.get('status')}"
+            ),
+        ))
+    else:
+        checks.append(_check(
+            "screening_pending_not_included", "not_applicable",
+            "sem resumo de triagem",
+        ))
+
+    if downloads:
+        download_status = downloads.get("status")
+        if download_status in {"not_requested", "not_applicable"}:
+            checks.append(_check(
+                "downloads_open_access", "not_applicable",
+                f"downloads={download_status}",
+            ))
+        elif download_status == "blocked":
+            checks.append(_check(
+                "downloads_open_access", "fail",
+                "download bloqueado",
+            ))
+        else:
+            allowed_rights = {
+                "open_access", "repository", "preprint",
+                "public_domain", "user_authorized",
+            }
+            bad = [
+                receipt for receipt in downloads.get("receipts", [])
+                if receipt.get("ok") and (
+                    receipt.get("rights_basis") not in allowed_rights
+                    or not re.fullmatch(
+                        r"[a-f0-9]{64}", receipt.get("sha256") or "",
+                    )
+                )
+            ]
+            checks.append(_check(
+                "downloads_open_access",
+                "pass" if not bad else "fail",
+                f"{downloads.get('downloaded', 0)} download(s); {len(bad)} inválido(s)",
+            ))
+    else:
+        checks.append(_check(
+            "downloads_open_access", "not_applicable", "sem registro de download",
+        ))
+
+    if fulltext_candidates:
+        bad_candidates = [
+            candidate for candidate in fulltext_candidates
+            if not re.fullmatch(r"[a-f0-9]{64}", candidate.get("source_sha256") or "")
+            or not re.fullmatch(r"[a-f0-9]{64}", candidate.get("quote_sha256") or "")
+            or not candidate.get("locator")
+            or not candidate.get("source_file")
+        ]
+        checks.append(_check(
+            "fulltext_candidates_hashed",
+            "pass" if not bad_candidates else "fail",
+            f"{len(fulltext_candidates)} candidato(s); {len(bad_candidates)} sem hash/local",
+        ))
+    else:
+        checks.append(_check(
+            "fulltext_candidates_hashed", "not_applicable",
+            "sem candidatos de texto integral",
+        ))
+
+    fulltext_claims = [
+        claim for claim in claims if "-FT-" in claim.get("id", "")
+    ]
+    if fulltext_claims:
+        approval_ok = (
+            approval_doc.get("human_confirmation") is True
+            and bool(approval_doc.get("approved_claim_ids"))
+            and len(approval_doc.get("approved_claim_ids", [])) == len(fulltext_claims)
+        )
+        checks.append(_check(
+            "fulltext_verified_requires_human",
+            "pass" if approval_ok else "fail",
+            f"{len(fulltext_claims)} claim(s) de texto integral; aprovação={bool(approval_doc)}",
+        ))
+    else:
+        checks.append(_check(
+            "fulltext_verified_requires_human", "not_applicable",
+            "sem claims de texto integral",
+        ))
+
+    if integrity_doc:
+        integrity_ok = (
+            integrity_doc.get("policy") == "absence_of_update_is_not_proof_of_integrity"
+            and integrity_doc.get("truth_claim") is False
+        )
+        checks.append(_check(
+            "integrity_observational",
+            "pass" if integrity_ok else "fail",
+            f"mode={integrity_doc.get('mode')}; checked={integrity_doc.get('checked', 0)}",
+        ))
+    else:
+        checks.append(_check(
+            "integrity_observational", "not_applicable",
+            "sem verificação de integridade",
+        ))
 
     if claims:
         evidence_status = "pass" if all(item.get("evidence") for item in claims) else "fail"
@@ -1883,11 +2523,19 @@ def audit_project(out: str | Path) -> dict:
             "records": len(source_records.get("records") or []),
             "studies": len(study_paths),
             "claims": len(claims),
+            "fulltext_candidates": len(fulltext_candidates),
+            "fulltext_claims": len(fulltext_claims),
+            "integrity_checks": len(integrity_doc.get("checks", [])),
+            "retracted": sum(
+                check.get("status") in {"retracted", "retracted_notice"}
+                for check in integrity_doc.get("checks", [])
+            ),
+            "downloads": downloads.get("downloaded", 0),
             "gaps": len((_maybe_load(out / "03_evidence/gaps.json") or {}).get("gaps", [])),
         },
         "descriptive_status": descriptive.get("status"),
         "publication": "not_performed",
-        "pdf_downloads": 0,
+        "pdf_downloads": downloads.get("downloaded", 0),
         "credentials_used": False,
         "truth_claim": False,
         "external_validation": False,
@@ -1974,6 +2622,7 @@ def _build_manifest(out: Path, ctx: dict, audit: dict) -> dict:
         "schema_version": SCHEMA_VERSION,
         "project_id": ctx["project_id"],
         "pipeline_version": PIPELINE_VERSION,
+        "pipeline_revision": PIPELINE_REVISION,
         "theme": ctx["contract"]["theme"],
         "question": ctx["contract"]["question"],
         "question_status": ctx["contract"]["question_status"],
@@ -2005,7 +2654,7 @@ def _build_manifest(out: Path, ctx: dict, audit: dict) -> dict:
             "no_fabrication": True,
             "untrusted_api_data": True,
             "publication": "not_performed",
-            "pdf_downloads": 0,
+            "pdf_downloads": (ctx.get("downloads") or {}).get("downloaded", 0),
             "credentials_used": False,
         },
         "limitations": [
@@ -2035,11 +2684,25 @@ def run(
     timeout_seconds: int = 90,
     searcher_factory: Callable | None = None,
     corpus_path: str | Path | None = None,
+    fulltext_dir: str | Path | None = None,
+    fulltext_approval: str | Path | None = None,
+    allow_open_access: bool = False,
+    max_downloads: int = 5,
+    downloader_factory: Callable | None = None,
+    check_integrity: bool = False,
+    integrity_checker: Callable | None = None,
+    max_integrity_checks: int = 20,
     budget: dict | None = None,
 ) -> dict:
     theme = normalize_theme(theme)
     out = Path(out).expanduser().resolve()
     corpus = _load_corpus(Path(corpus_path)) if corpus_path is not None else None
+    if fulltext_approval is not None and fulltext_dir is None:
+        raise ValueError("fulltext_approval exige fulltext_dir")
+    if fulltext_dir is not None and not Path(fulltext_dir).expanduser().exists():
+        raise ValueError(f"diretório de texto integral não encontrado: {fulltext_dir}")
+    if fulltext_approval is not None and not Path(fulltext_approval).expanduser().exists():
+        raise ValueError(f"aprovação de texto integral não encontrada: {fulltext_approval}")
     _prepare_output(out)
     if question is None or not str(question).strip():
         question = derive_question(theme)
@@ -2051,6 +2714,7 @@ def run(
     normalized_budget = normalize_budget(
         budget, limit=limit, per_platform=per_platform,
         timeout_seconds=timeout_seconds,
+        max_downloads=max_downloads if allow_open_access else 0,
     )
     project_id = uid("RP", 8)
     generated_at = now()
@@ -2066,6 +2730,9 @@ def run(
         "sources": selected_sources,
         "mode": "dry_run" if dry_run else "executed",
         "corpus_requested": corpus_path is not None,
+        "fulltext_requested": fulltext_dir is not None,
+        "open_access_requested": bool(allow_open_access),
+        "integrity_requested": bool(check_integrity),
         "created_at": generated_at,
         "budget": normalized_budget,
         "truth_claim": False,
@@ -2130,6 +2797,23 @@ def run(
                 "error": error,
             }
 
+    download_result = _run_downloads(
+        out,
+        search["records"],
+        enabled=bool(allow_open_access),
+        max_downloads=normalized_budget["max_downloads"],
+        downloader_factory=downloader_factory,
+    )
+    fulltext_dirs: list[Path] = []
+    if fulltext_dir is not None:
+        fulltext_dirs.append(Path(fulltext_dir).expanduser())
+    if download_result.get("downloaded"):
+        fulltext_dirs.append(out / "01_sources/pdfs")
+    deduped_dirs = []
+    for directory in fulltext_dirs:
+        if directory not in deduped_dirs and directory.exists():
+            deduped_dirs.append(directory)
+
     if search["status"] in {"completed", "completed_empty"}:
         try:
             screening = _screen(
@@ -2141,9 +2825,16 @@ def run(
                 question,
                 search["records"],
             )
-            screening_status = (
-                "completed_assisted" if screening["studies"] else "completed_empty"
-            )
+            summary = screening.get("summary") or {}
+            if screening["studies"]:
+                if summary.get("status") == "human_verified":
+                    screening_status = "completed_human_verified"
+                elif summary.get("status") == "human_partial":
+                    screening_status = "completed_with_pending_human"
+                else:
+                    screening_status = "completed_assisted"
+            else:
+                screening_status = "completed_empty"
         except Exception as exc:
             screening = {
                 "studies": [],
@@ -2168,12 +2859,36 @@ def run(
         }
         screening_status = "planned" if dry_run else "blocked"
 
+    integrity_result = _run_integrity(
+        out,
+        screening["studies"],
+        enabled=bool(check_integrity),
+        checker=integrity_checker,
+        max_checks=max_integrity_checks,
+    )
+    if check_integrity and screening["studies"]:
+        screening["studies"] = [
+            load(path) for path in sorted(
+                (out / "01_sources/systematic_review/studies").glob("*.json")
+            )
+        ]
+    fulltext_result = _run_fulltext(
+        out,
+        project_id,
+        screening["studies"],
+        search["records"],
+        directories=deduped_dirs,
+        approval_path=fulltext_approval,
+        theme=theme,
+        question=question,
+    )
     evidence = _collect_evidence(
         out,
         project_id,
         screening["studies"],
         search["records"],
         corpus,
+        extra_claims=fulltext_result["claims"],
     )
     analysis = _descriptive_analysis(
         out, project_id, search["records"], screening["studies"], evidence,
@@ -2194,6 +2909,16 @@ def run(
             for claim in evidence["gate"].get("claims", [])
         ),
         "corpus_claims": len(evidence["corpus_gate_claims"]),
+        "downloads": download_result.get("downloaded", 0),
+        "fulltext_candidates": fulltext_result["candidates"].get("count", 0),
+        "fulltext_verified": (fulltext_result.get("approval") or {}).get(
+            "counts", {}
+        ).get("verified", 0),
+        "integrity_checked": integrity_result.get("checked", 0),
+        "retracted_studies": sum(
+            study.get("integrity_status") in {"retracted", "retracted_notice"}
+            for study in screening["studies"]
+        ),
         "references": len(_unique_records({
             "search": search, "screening": screening,
         })) + len(evidence["corpus_index"]),
@@ -2209,6 +2934,9 @@ def run(
         "search": search,
         "screening": screening,
         "evidence": evidence,
+        "downloads": download_result,
+        "integrity": integrity_result,
+        "fulltext": fulltext_result,
         "analysis": analysis,
         "stages": stages,
         "counts": counts,
@@ -2227,14 +2955,30 @@ def run(
     dump(out / "05_audit/audit-report.json", audit)
 
     if evidence["claims"]:
-        evidence_status = "completed_candidate"
+        evidence_status = (
+            "completed_with_fulltext"
+            if counts["fulltext_verified"] else "completed_candidate"
+        )
     elif dry_run and not evidence["corpus_gate_claims"]:
         evidence_status = "not_applicable"
     else:
         evidence_status = "blocked"
+    if fulltext_result["status"] == "not_requested":
+        fulltext_stage = "not_requested"
+    elif fulltext_result.get("approval"):
+        fulltext_stage = "completed_human_approved"
+    else:
+        fulltext_stage = "completed_pending_human"
+    integrity_stage = (
+        "completed" if integrity_result.get("mode") == "executed"
+        else integrity_result.get("mode", "not_requested")
+    )
     stages.update({
         "search": search["status"],
+        "downloads": download_result.get("status", "not_requested"),
         "screening": screening_status,
+        "integrity": integrity_stage,
+        "fulltext": fulltext_stage,
         "evidence": evidence_status,
         "analysis": analysis["status"],
         "audit": audit["status"],
@@ -2243,7 +2987,11 @@ def run(
     })
     if dry_run and not evidence["claims"]:
         overall = "planned"
-    elif search["status"] == "blocked" and not evidence["corpus_gate_claims"]:
+    elif (
+        search["status"] == "blocked"
+        and not evidence["corpus_gate_claims"]
+        and not counts["fulltext_verified"]
+    ):
         overall = "blocked"
     elif audit["status"] == "fail":
         overall = "blocked"
@@ -2282,5 +3030,333 @@ def run(
             "Claims de metadados são em nível de resumo indexado.",
             "A triagem automática é assistida e não substitui revisão humana.",
             "A busca pode ser incompleta e depende de rede e limites dos provedores.",
+        ],
+    }
+
+
+def _screening_stage(summary: dict, studies: list[dict]) -> str:
+    if not studies:
+        return "completed_empty"
+    status = summary.get("status")
+    if status == "human_verified":
+        return "completed_human_verified"
+    if status == "human_partial":
+        return "completed_with_pending_human"
+    return "completed_assisted"
+
+
+def refresh_project(
+    out: str | Path,
+    *,
+    fulltext_dir: str | Path | None = None,
+    fulltext_approval: str | Path | None = None,
+    allow_open_access: bool = False,
+    max_downloads: int = 5,
+    downloader_factory: Callable | None = None,
+    check_integrity: bool = False,
+    integrity_checker: Callable | None = None,
+    max_integrity_checks: int = 20,
+) -> dict:
+    """Reaplica triagem humana, texto integral e integridade a um projeto existente.
+
+    Não repete a busca e não recria estudos. Preserva decisões humanas,
+    claims e cartões existentes; adiciona ou substitui apenas as evidências
+    de texto integral aprovadas nesta rodada.
+    """
+    out = Path(out).expanduser().resolve()
+    manifest = _maybe_load(out / "08_manifest/project-manifest.json") or {}
+    if not manifest:
+        raise ValueError("projeto não encontrado: manifesto ausente")
+    intake = _maybe_load(out / "00_contract/intake.json") or {}
+    contract = _maybe_load(out / "00_contract/retrieval-contract.json") or {}
+    protocol = _maybe_load(out / "00_contract/systematic-review-protocol.json") or {}
+    source_records = _maybe_load(out / "01_sources/source-records.json") or {}
+    if not intake or not contract or not protocol:
+        raise ValueError("projeto sem intake, contrato ou protocolo")
+    if fulltext_approval is not None and fulltext_dir is None:
+        raise ValueError("fulltext_approval exige fulltext_dir")
+    if fulltext_dir is not None and not Path(fulltext_dir).expanduser().exists():
+        raise ValueError(f"diretório de texto integral não encontrado: {fulltext_dir}")
+    if fulltext_approval is not None and not Path(fulltext_approval).expanduser().exists():
+        raise ValueError(f"aprovação de texto integral não encontrada: {fulltext_approval}")
+
+    project_id = intake.get("project_id") or manifest.get("project_id")
+    protocol_id = protocol.get("protocol_id")
+    theme = contract.get("theme") or manifest.get("theme")
+    question = contract.get("question") or manifest.get("question")
+    records = source_records.get("records") or []
+    studies = [
+        load(path) for path in sorted(
+            (out / "01_sources/systematic_review/studies").glob("*.json")
+        )
+    ]
+    search = {
+        "status": "completed" if records else "completed_empty",
+        "query": source_records.get("query") or question,
+        "records": records,
+        "manifest": (
+            {"created_at": source_records.get("created_at")}
+            if source_records.get("created_at") else None
+        ),
+        "manifest_path": None,
+        "error": None,
+    }
+    screening_payload = _screening_payload(
+        out, project_id, protocol_id, theme, question, records, studies,
+    )
+    screening_payload["ingest"] = _maybe_load(
+        out / "09_provenance/systematic_review/ingest-summary.json"
+    ) or {}
+    screening_status = _screening_stage(
+        screening_payload.get("summary") or {}, screening_payload["studies"],
+    )
+
+    existing_downloads = _maybe_load(out / "01_sources/downloads.json") or {}
+    if allow_open_access:
+        download_result = _run_downloads(
+            out,
+            records,
+            enabled=True,
+            max_downloads=max_downloads,
+            downloader_factory=downloader_factory,
+        )
+    else:
+        download_result = existing_downloads or {
+            "status": "not_requested",
+            "downloaded": 0,
+            "receipts": [],
+            "paths": [],
+            "limitations": ["Download não solicitado nesta atualização."],
+        }
+
+    if check_integrity:
+        integrity_result = _run_integrity(
+            out,
+            screening_payload["studies"],
+            enabled=True,
+            checker=integrity_checker,
+            max_checks=max_integrity_checks,
+        )
+        screening_payload["studies"] = [
+            load(path) for path in sorted(
+                (out / "01_sources/systematic_review/studies").glob("*.json")
+            )
+        ]
+    else:
+        integrity_result = _maybe_load(
+            out / "03_evidence/integrity-checks.json"
+        ) or {
+            "schema_version": SCHEMA_VERSION,
+            "mode": "not_requested",
+            "checks": [],
+            "summary": {"not_requested": len(screening_payload["studies"])},
+            "checked": 0,
+            "policy": "absence_of_update_is_not_proof_of_integrity",
+            "truth_claim": False,
+            "external_validation": False,
+            "human_review_required": True,
+            "limitations": ["Verificação de integridade não solicitada."],
+        }
+
+    fulltext_dirs: list[Path] = []
+    if fulltext_dir is not None:
+        fulltext_dirs.append(Path(fulltext_dir).expanduser())
+    pdf_dir = out / "01_sources/pdfs"
+    if pdf_dir.exists() and any(pdf_dir.glob("*.pdf")):
+        fulltext_dirs.append(pdf_dir)
+    deduped_dirs = []
+    for directory in fulltext_dirs:
+        if directory not in deduped_dirs and directory.exists():
+            deduped_dirs.append(directory)
+
+    existing_summary = _maybe_load(out / "03_evidence/fulltext-summary.json") or {}
+    if deduped_dirs:
+        fulltext_result = _run_fulltext(
+            out,
+            project_id,
+            screening_payload["studies"],
+            records,
+            directories=deduped_dirs,
+            approval_path=fulltext_approval,
+            theme=theme,
+            question=question,
+        )
+    else:
+        fulltext_result = {
+            "status": existing_summary.get("status", "not_requested"),
+            "index": _maybe_load(out / "03_evidence/fulltext-index.json"),
+            "matches": {
+                "matches": [],
+                "count": existing_summary.get("matches", 0),
+                "ambiguous": existing_summary.get("ambiguous_matches", 0),
+            },
+            "candidates": _maybe_load(
+                out / "03_evidence/fulltext-candidates.json"
+            ) or {"candidates": [], "count": 0},
+            "approval": existing_summary.get("approval"),
+            "claims": [],
+        }
+
+    existing_claims_doc = _maybe_load(out / "03_evidence/claims.json") or {}
+    existing_claims = existing_claims_doc.get("claims") or []
+    existing_cards_doc = _maybe_load(out / "03_evidence/evidence-cards.json") or {}
+    existing_cards = existing_cards_doc.get("cards") or []
+    existing_gaps_doc = _maybe_load(out / "03_evidence/gaps.json") or {}
+    existing_gaps = existing_gaps_doc.get("gaps") or []
+    retracted_ids = {
+        (study.get("source_records") or [None])[0]
+        for study in screening_payload["studies"]
+        if study.get("integrity_status") in {"retracted", "retracted_notice"}
+    }
+    filtered_claims = [
+        claim for claim in existing_claims
+        if not any(
+            evidence.get("source_id") in retracted_ids
+            for evidence in claim.get("evidence", [])
+        )
+    ]
+    filtered_cards = [
+        card for card in existing_cards
+        if card.get("article_id") not in retracted_ids
+    ]
+    if existing_claims:
+        base_claims = filtered_claims
+        base_cards = filtered_cards
+        base_gaps = existing_gaps
+    else:
+        base_claims = None
+        base_cards = None
+        base_gaps = None
+
+    evidence = _collect_evidence(
+        out,
+        project_id,
+        screening_payload["studies"],
+        records,
+        None,
+        base_claims=base_claims,
+        base_cards=base_cards,
+        base_gaps=base_gaps,
+        extra_claims=fulltext_result["claims"],
+    )
+    analysis = _descriptive_analysis(
+        out, project_id, records, screening_payload["studies"], evidence,
+    )
+    counts = {
+        "records_retrieved": len(records),
+        "unique_studies": len(screening_payload["studies"]),
+        "duplicates_removed": int(
+            screening_payload.get("ingest", {}).get("duplicates_removed", 0)
+        ),
+        "with_abstract": sum(bool(item.get("abstract")) for item in records),
+        "claims": len(evidence["claims"]),
+        "blocked_claims": sum(
+            claim.get("status") == "blocked"
+            for claim in evidence["gate"].get("claims", [])
+        ),
+        "corpus_claims": len(evidence["corpus_gate_claims"]),
+        "downloads": download_result.get("downloaded", 0),
+        "fulltext_candidates": fulltext_result["candidates"].get("count", 0),
+        "fulltext_verified": (fulltext_result.get("approval") or {}).get(
+            "counts", {}
+        ).get("verified", 0),
+        "integrity_checked": integrity_result.get("checked", 0),
+        "retracted_studies": sum(
+            study.get("integrity_status") in {"retracted", "retracted_notice"}
+            for study in screening_payload["studies"]
+        ),
+        "references": len(_unique_records({
+            "search": search, "screening": screening_payload,
+        })) + len(evidence["corpus_index"]),
+        "gaps": len(evidence["gaps"]),
+    }
+    stages: dict[str, str] = {
+        "intake": "completed",
+        "protocol": "completed",
+        "search": search["status"],
+        "downloads": download_result.get("status", "not_requested"),
+        "screening": screening_status,
+        "integrity": (
+            "completed" if integrity_result.get("mode") == "executed"
+            else integrity_result.get("mode", "not_requested")
+        ),
+        "fulltext": (
+            "not_requested" if fulltext_result["status"] == "not_requested"
+            else "completed_human_approved" if fulltext_result.get("approval")
+            else "completed_pending_human"
+        ),
+        "refresh": "completed",
+    }
+    ctx = {
+        "project_id": project_id,
+        "generated_at": now(),
+        "mode": "refresh",
+        "contract": contract,
+        "protocol": protocol,
+        "search": search,
+        "screening": screening_payload,
+        "evidence": evidence,
+        "downloads": download_result,
+        "integrity": integrity_result,
+        "fulltext": fulltext_result,
+        "analysis": analysis,
+        "stages": stages,
+        "counts": counts,
+        "status": "in_progress",
+    }
+    manuscript_path = out / "06_manuscript/manuscript.md"
+    manuscript_path.parent.mkdir(parents=True, exist_ok=True)
+    manuscript_path.write_text(_render_manuscript(ctx), encoding="utf-8")
+    dump(out / "06_manuscript/references.json", _render_references(ctx))
+    validation_path = out / "07_validation/VALIDATION.md"
+    validation_path.parent.mkdir(parents=True, exist_ok=True)
+    validation_path.write_text(_render_validation(ctx), encoding="utf-8")
+    audit = audit_project(out)
+    dump(out / "05_audit/audit-report.json", audit)
+    if evidence["claims"]:
+        evidence_status = (
+            "completed_with_fulltext"
+            if counts["fulltext_verified"] else "completed_candidate"
+        )
+    else:
+        evidence_status = "blocked"
+    stages.update({
+        "evidence": evidence_status,
+        "analysis": analysis["status"],
+        "audit": audit["status"],
+        "manuscript": "completed_draft",
+        "validation": "pending_human",
+    })
+    if audit["status"] == "fail":
+        overall = "blocked"
+    elif not evidence["claims"]:
+        overall = "partial"
+    else:
+        overall = "completed_pending_external_validation"
+    ctx["status"] = overall
+    (out / "README.md").write_text(_render_readme(ctx), encoding="utf-8")
+    _build_manifest(out, ctx, audit)
+    integrity_report = verify_manifest(out)
+    if integrity_report["status"] != "pass":
+        overall = "blocked"
+        stages["manifest"] = "blocked"
+    else:
+        stages["manifest"] = "pass"
+    return {
+        "project_id": project_id,
+        "out": str(out),
+        "status": overall,
+        "stages": stages,
+        "counts": counts,
+        "audit_status": audit["status"],
+        "manifest": str(out / "08_manifest/project-manifest.json"),
+        "manifest_integrity": integrity_report["status"],
+        "truth_claim": False,
+        "external_validation": False,
+        "human_review_required": True,
+        "limitations": [
+            "Atualização sem nova busca: o conjunto recuperado permanece o original.",
+            "A triagem humana só é reconhecida se estiver registrada por review.screen.",
+            "Texto integral aprovado não é validação externa nem prova de verdade.",
         ],
     }

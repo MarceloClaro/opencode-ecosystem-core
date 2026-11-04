@@ -48,10 +48,16 @@ python -m marceloclaro.scientific_lab research project \
 ```
 
 O pacote fica file-first e inclui `08_manifest/project-manifest.json` com
-hashes. O pipeline não baixa PDFs, não usa credenciais e não publica. Claims de
-metadados são em nível de resumo indexado; o corpus opcional é validado
-literalmente contra o texto fornecido. Ver
+hashes. O pipeline não usa credenciais e não publica. Claims de metadados são em
+nível de resumo indexado; o corpus opcional é validado literalmente contra o
+texto fornecido. Ver
 [`SCIENTIFIC_RESEARCH_PIPELINE_R1051.md`](SCIENTIFIC_RESEARCH_PIPELINE_R1051.md).
+
+O R1052 acrescenta texto integral local, aprovação humana explícita, leitura das
+decisões de `review.screen`, verificação de retratações/correções no Crossref,
+download opcional apenas por rota aberta e `research refresh` sem refazer a
+busca. Ver
+[`SCIENTIFIC_RESEARCH_PIPELINE_R1052.md`](SCIENTIFIC_RESEARCH_PIPELINE_R1052.md).
 
 ## Limite da v4.2
 

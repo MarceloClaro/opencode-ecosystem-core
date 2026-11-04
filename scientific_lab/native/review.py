@@ -4,10 +4,23 @@ import re
 from pathlib import Path
 from .common import dump, load, now, uid
 
-def _key(row: dict) -> str:
+def _doi_key(row: dict) -> str | None:
     doi = (row.get("doi") or "").strip().lower()
-    if doi: return "doi:" + re.sub(r'^https?://(dx\.)?doi\.org/', '', doi)
-    return "title:" + re.sub(r'\W+', '', (row.get("title") or "").casefold())[:180]
+    if not doi:
+        return None
+    return "doi:" + re.sub(r'^https?://(dx\.)?doi\.org/', '', doi)
+
+
+def _title_key(row: dict) -> str | None:
+    title = re.sub(r'\W+', '', (row.get("title") or "").casefold())[:180]
+    if len(title) < 20:
+        return None
+    year = str(row.get("year") or "").strip()
+    return f"title:{title}|year:{year}" if year else f"title:{title}"
+
+
+def _key(row: dict) -> str:
+    return _doi_key(row) or _title_key(row) or "title:curto"
 
 def init_protocol(workspace: Path, project_id: str, title: str, question: str,
                   *, sources=None, approved_by: str | None = None, human: bool = False) -> Path:
@@ -27,12 +40,18 @@ def init_protocol(workspace: Path, project_id: str, title: str, question: str,
     path=workspace/"00_contract/systematic-review-protocol.json"; dump(path,obj); return path
 
 def ingest(workspace: Path, manifest_path: Path) -> dict:
-    manifest=load(manifest_path); rows=manifest.get("results",[]); seen={}; dup=0; outdir=workspace/"01_sources/systematic_review/studies"
+    manifest=load(manifest_path); rows=manifest.get("results",[]); seen_doi=set(); seen_title=set(); dup=0; outdir=workspace/"01_sources/systematic_review/studies"
     created=[]
     for row in rows:
-        key=_key(row)
-        if not key or key in seen: dup += 1; continue
-        seen[key]=True
+        doi_key=_doi_key(row)
+        title_key=_title_key(row)
+        if (doi_key and doi_key in seen_doi) or (title_key and title_key in seen_title):
+            dup += 1
+            continue
+        if doi_key:
+            seen_doi.add(doi_key)
+        if title_key:
+            seen_title.add(title_key)
         sid="STUDY-"+uid("",8).strip('-').upper()
         rec={
             "schema_version":"1.0","study_id":sid,"canonical_title":row.get("title") or "",

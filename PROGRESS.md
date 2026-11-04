@@ -40,7 +40,7 @@ não comprova o aceite integral.
   traduzido, SRT/ASS e sem cartão; WER ASR **2,17%**, **−16,10 LUFS** e 600
   frames. Lip sync refeito com Wav2Lip em CPU; revisão visual humana pendente.
   Ver `reports/r1047/QUANTUM-DUB-EVIDENCE.md`.
-- **360 testes** locais + 1 opcional passam; `doctor` 22/22.
+- **376 testes** locais + 1 opcional passam; `doctor` 22/22.
 - **R1050** criou macro-rede read-only (576 nós/768 arestas), gate metacognitivo
   de claims, ledger de claims do conselho e 9 adaptações originais para as
   licenças restritas. Nenhum projeto AGI foi instalado.
@@ -51,6 +51,14 @@ não comprova o aceite integral.
   credencial, validação externa ou publicação. Ver
   [`docs/SCIENTIFIC_RESEARCH_PIPELINE_R1051.md`](docs/SCIENTIFIC_RESEARCH_PIPELINE_R1051.md)
   e [`reports/r1051/README.md`](reports/r1051/README.md).
+- **R1052** conectou texto integral local com citação por página/parágrafo,
+  aprovação humana explícita, leitura das decisões de `review.screen`, consulta
+  de retratações/correções no Crossref, download opcional apenas por rota aberta
+  e `research refresh` sem refazer a busca. O benchmark real de 3 fontes
+  recuperou 9 registros, deduplicou 1 e verificou 3 integridades; auditoria
+  `pass_with_pending_human`, manifesto íntegro. Ver
+  [`docs/SCIENTIFIC_RESEARCH_PIPELINE_R1052.md`](docs/SCIENTIFIC_RESEARCH_PIPELINE_R1052.md)
+  e [`reports/r1052/README.md`](reports/r1052/README.md).
 - **R1049** adotou 9 skills seletivas: Superpowers SDD/TDD, chgagne, K-Dense
   com 8 protocolos + catálogo de 177 + 9 adaptações originais, motion com 5, QA de vídeo, 10 receitas shotcraft, 10 papéis
   de engenharia e laboratório de pesquisa isolado. Nenhum código de terceiro

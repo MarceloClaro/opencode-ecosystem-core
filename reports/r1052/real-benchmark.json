@@ -1,0 +1,164 @@
+{
+  "schema_version": "1.0",
+  "benchmark_id": "R1052-REAL-01",
+  "executed_at": "2026-11-04T01:51:52.017496Z",
+  "query": "What is the evidence for an open access citation advantage?",
+  "sources": [
+    "openalex",
+    "crossref",
+    "europepmc"
+  ],
+  "limits": {
+    "limit": 9,
+    "per_platform": 3,
+    "timeout_seconds": 90,
+    "max_integrity_checks": 3
+  },
+  "elapsed_seconds": 5.86,
+  "project_status": "completed_pending_external_validation",
+  "counts": {
+    "records_retrieved": 9,
+    "unique_studies": 8,
+    "duplicates_removed": 1,
+    "with_abstract": 5,
+    "claims": 4,
+    "blocked_claims": 0,
+    "corpus_claims": 0,
+    "downloads": 0,
+    "fulltext_candidates": 0,
+    "fulltext_verified": 0,
+    "integrity_checked": 3,
+    "retracted_studies": 0,
+    "references": 8,
+    "gaps": 4
+  },
+  "source_counts": {
+    "openalex": 3,
+    "crossref": 3,
+    "europepmc": 3
+  },
+  "records": [
+    {
+      "article_id": "ART-0001",
+      "source": "openalex",
+      "doi": "10.1371/journal.pbio.0040157",
+      "year": 2006,
+      "has_abstract": true,
+      "oa_candidate": true,
+      "title": "Citation Advantage of Open Access Articles"
+    },
+    {
+      "article_id": "ART-0002",
+      "source": "openalex",
+      "doi": "10.1371/journal.pone.0253129",
+      "year": 2021,
+      "has_abstract": true,
+      "oa_candidate": true,
+      "title": "Is the open access citation advantage real? A systematic review of the citation of open access and subscription-based articles"
+    },
+    {
+      "article_id": "ART-0003",
+      "source": "openalex",
+      "doi": "10.6017/ital.v37i3.10604",
+      "year": 2018,
+      "has_abstract": true,
+      "oa_candidate": true,
+      "title": "The Open Access Citation Advantage: Does It Exist and What Does It Mean for Libraries?"
+    },
+    {
+      "article_id": "ART-0004",
+      "source": "europepmc",
+      "doi": "10.1038/s41539-026-00449-z",
+      "year": 2026,
+      "has_abstract": false,
+      "oa_candidate": true,
+      "title": "Fostering cultural change in research through innovative knowledge sharing, evaluation, and community engagement strategies."
+    },
+    {
+      "article_id": "ART-0005",
+      "source": "europepmc",
+      "doi": "10.3389/frma.2026.1894451",
+      "year": 2026,
+      "has_abstract": false,
+      "oa_candidate": true,
+      "title": "Journal quartiles and article-level citation performance: a single-institution case study in academic dentistry."
+    },
+    {
+      "article_id": "ART-0006",
+      "source": "europepmc",
+      "doi": null,
+      "year": null,
+      "has_abstract": false,
+      "oa_candidate": true,
+      "title": "The 42 problem in AI-assisted research"
+    },
+    {
+      "article_id": "ART-0007",
+      "source": "crossref",
+      "doi": "10.63485/m0r7y-kf65",
+      "year": 2008,
+      "has_abstract": true,
+      "oa_candidate": false,
+      "title": "Evidence for the OA citation advantage, and inconclusive evidence against"
+    },
+    {
+      "article_id": "ART-0008",
+      "source": "crossref",
+      "doi": "10.14293/s2199-1006.1.sor-edu.clpdpzb.v1",
+      "year": 2017,
+      "has_abstract": false,
+      "oa_candidate": false,
+      "title": "The Open Access Citation Advantage"
+    },
+    {
+      "article_id": "ART-0009",
+      "source": "crossref",
+      "doi": "10.63485/gq9f5-7vv28",
+      "year": 2008,
+      "has_abstract": true,
+      "oa_candidate": false,
+      "title": "Evidence for the OA citation advantage, and inconclusive evidence against"
+    }
+  ],
+  "screening": {
+    "studies": 8,
+    "human_verified": false,
+    "summary": {
+      "total": 8,
+      "candidate": 6,
+      "uncertain": 2,
+      "human_included": 0,
+      "human_pending": 8
+    }
+  },
+  "integrity": {
+    "summary": {
+      "unchecked": 5,
+      "no_update_found": 2,
+      "update": 1
+    },
+    "checked": 3,
+    "policy": "absence_of_update_is_not_proof_of_integrity"
+  },
+  "downloads": {
+    "status": "not_requested",
+    "downloaded": 0,
+    "policy": null
+  },
+  "audit_status": "pass_with_pending_human",
+  "manifest_status": "completed_pending_external_validation",
+  "manifest_integrity": {
+    "status": "pass",
+    "checked": 37,
+    "algorithm": "sha256"
+  },
+  "truth_claim": false,
+  "external_validation": false,
+  "human_review_required": true,
+  "limitations": [
+    "Benchmark operacional de uma consulta; não mede precisão/recall sem gold standard.",
+    "Sem triagem humana, texto integral, download de PDF ou validação externa.",
+    "Cobertura limitada a três bases e três registros por base.",
+    "Metadados podem conter erros, duplicatas por versão e campos ausentes."
+  ]
+}

@@ -23702,6 +23702,38 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1052",
+      "objective": "Conectar texto integral, triagem humana, integridade de literatura e benchmark real ao pesquisador científico do Core",
+      "changes": [
+        "scientific_lab/fulltext.py: indexação de PDF/MD/TXT, casamento por DOI/título, recortes por página/parágrafo, aprovação humana e annotations idempotentes",
+        "scientific_lab/integrity.py: consulta Crossref para retratações/correções/atualizações com verificador injetável",
+        "scientific_lab/screening.py: leitura de review.screen, conflitos, pendências e PRISMA",
+        "scientific_lab/research_project.py: --fulltext-dir, --fulltext-approval, --allow-open-access, --check-integrity, refresh_project e auditoria ampliada",
+        "scientific_lab/native/review.py: deduplicação por título normalizado além do DOI",
+        "tests/test_r1052_fulltext.py, test_r1052_integrity.py, test_r1052_screening.py, test_r1052_refresh.py",
+        "reports/r1052/real-benchmark.json e README com benchmark operacional de 3 fontes"
+      ],
+      "score": 0.92,
+      "lessons": [
+        "Benchmark real encontrou duplicata de mesmo título com DOIs diferentes; deduplicar apenas por DOI é insuficiente.",
+        "Aprovação humana precisa de arquivo próprio com revisor, data e confirmação; o pipeline não pode simular essa decisão.",
+        "Refresh deve preservar decisões e claims, e substituir annotations de texto integral de forma idempotente.",
+        "no_update_found do Crossref não é atestado de integridade; estudo retratado deve sair dos claims.",
+        "Benchmark operacional mede encanamento, latência e falhas; não mede precisão/recall sem gold standard."
+      ],
+      "timestamp": 1793757393.5541782,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [

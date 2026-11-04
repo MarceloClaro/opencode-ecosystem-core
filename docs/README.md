@@ -21,6 +21,7 @@ execuções anteriores. Arquivos de evidência não são certificados de prontid
 | Ver as 9 adaptações originais | [Skill](../.opencode/skills/kdense-adaptacoes-originais/SKILL.md) |
 | Auditar a macro-rede e o gate metacognitivo | [R1050](../reports/r1050/README.md), [grafo](../reports/r1050/macro-network.json) |
 | Pesquisar do tema ao artigo para validação | [Pipeline R1051](SCIENTIFIC_RESEARCH_PIPELINE_R1051.md) |
+| Ler texto integral com aprovação humana | [Pipeline R1052](SCIENTIFIC_RESEARCH_PIPELINE_R1052.md), [benchmark real](../reports/r1052/real-benchmark.json) |
 | Ver o slide dinâmico R1047 | [Evidência](../reports/r1050/CARD-STAGE.md), [composição](../editor-workspace/remotion-smoke/src/r1047-slide/R1047Stage.tsx) |
 | Ver a evolução completa dos vídeos | [README § Evolução R1026](../README.md), [imagem](../docs/images/r1047-video-evolution-full.jpg) |
 | Escolher ferramentas/modelos de vídeo | [Catálogo R1043](VIDEO_EDITOR_TOOLCHAIN_R1043.md), [toolchain.json](../reports/r1043/toolchain.json) |

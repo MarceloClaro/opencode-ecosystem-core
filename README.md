@@ -268,9 +268,9 @@ composições e recibos permitem reproduzir o fluxo.
 | Legendas | SRT e ASS, burn-in ou faixa soft | timing e leitura exigem revisão; ASR não é escuta |
 | QC técnico | frames decodificados, fps, duração, loudness, true peak, silêncio, pretos e contato | não aprova conteúdo, voz, lip sync ou tradução |
 | Pesquisa acadêmica | pipeline ABNT, revisão de fontes, bibliografia, provas e conselho de 13 | não substitui bibliotecário, estatístico ou revisão por pares |
-| Pesquisador ponta a ponta (R1051) | tema → contrato de recuperação → busca → triagem assistida → evidência literal → gate → auditoria → manuscrito + checklist | não lê texto integral, não baixa PDF e não substitui revisão humana |
+| Pesquisador ponta a ponta (R1051–R1052) | tema → contrato → busca → triagem humana → texto integral → integridade → gate → auditoria → manuscrito + checklist | texto integral exige aprovação humana; não faz meta-análise/GRADE; não substitui revisão |
 | Ciência | 8 protocolos K-Dense, catálogo de 177 skills, 9 adaptações originais e laboratório com budget | 177 skills não são 177 validações; nada é executado sem gate |
-| Programação | SDD/TDD, 360 testes, agentes, skills e Macro-rede de 576 nós/768 arestas | grafo é projeção read-only; aresta não é execução |
+| Programação | SDD/TDD, **376 testes**, agentes, skills e Macro-rede de 576 nós/768 arestas | grafo é projeção read-only; aresta não é execução |
 | Governança | gate metacognitivo, citações literais, contradições e validação externa | `externally_supported` não é verdade absoluta; voto/nota/payoff não decide |
 | Publicação | nenhum upload ou agendamento nesta rodada | exige direitos, credenciais e autorização explícita |
 
@@ -342,16 +342,23 @@ confiança, voto, nota ou payoff virem verdade; o conselho ganhou
 contradições. Ver [evidência R1050](reports/r1050/README.md) e
 [macro-rede](reports/r1050/macro-network.json).
 
-**Pesquisador ponta a ponta (R1051):** `research project` recebe um tema e
-produz um pacote file-first com intake, contrato de recuperação, protocolo,
-busca, deduplicação, triagem lexical assistida, evidências literais em nível de
-resumo, gate metacognitivo, análise descritiva, auditoria, manuscrito IMRaD e
-checklist de validação humana. O manifesto registra hashes e estados; nada é
-publicado, nenhum PDF é baixado e nenhuma credencial é usada. A pergunta pode
-ser explícita ou provisória, sempre marcada para confirmação. Claims de
-metadados permanecem `candidate`; o corpus opcional é validado literalmente
-contra o texto fornecido. Ver
-[`docs/SCIENTIFIC_RESEARCH_PIPELINE_R1051.md`](docs/SCIENTIFIC_RESEARCH_PIPELINE_R1051.md).
+**Pesquisador ponta a ponta (R1051–R1052):** `research project` recebe um tema
+e produz um pacote file-first com intake, contrato de recuperação, protocolo,
+busca, deduplicação, triagem, evidências literais, gate metacognitivo, análise
+descritiva, auditoria, manuscrito IMRaD e checklist de validação humana. O
+manifesto registra hashes e estados; nada é publicado e nenhuma credencial é
+usada. A pergunta pode ser explícita ou provisória, sempre marcada para
+confirmação.
+
+O R1052 acrescenta texto integral local com citação por página/parágrafo,
+aprovação humana explícita, leitura das decisões de `review.screen`, verificação
+de retratações/correções no Crossref, download opcional apenas por rota aberta
+e `research refresh` sem refazer a busca. Claims de texto integral só ficam
+`verified` com `source_file` e aprovação humana; os demais permanecem
+`candidate`. O benchmark real de 3 fontes recuperou 9 registros, deduplicou 1 e
+verificou 3 integridades, sem retratação. Ver
+[`docs/SCIENTIFIC_RESEARCH_PIPELINE_R1052.md`](docs/SCIENTIFIC_RESEARCH_PIPELINE_R1052.md)
+e [`reports/r1052/README.md`](reports/r1052/README.md).
 
 **ASR e tradução:** o `faster-whisper-small` produziu texto turco sem sentido
 em parte do corpus; `large-v3` foi baixado e concluiu o lote das 107 partes (1.854 segmentos, 7.773 palavras), ainda sem revisão nativa.

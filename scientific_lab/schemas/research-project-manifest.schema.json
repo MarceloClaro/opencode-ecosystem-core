@@ -18,7 +18,7 @@
     "question_status": {"enum": ["explicit", "provisional_from_theme"]},
     "created_at": {"type": "string", "format": "date-time"},
     "updated_at": {"type": "string", "format": "date-time"},
-    "mode": {"enum": ["dry_run", "executed"]},
+    "mode": {"enum": ["dry_run", "executed", "refresh"]},
     "status": {
       "enum": [
         "planned", "in_progress", "blocked", "partial",
@@ -54,6 +54,11 @@
         "claims": {"type": "integer", "minimum": 0},
         "blocked_claims": {"type": "integer", "minimum": 0},
         "corpus_claims": {"type": "integer", "minimum": 0},
+        "fulltext_candidates": {"type": "integer", "minimum": 0},
+        "fulltext_verified": {"type": "integer", "minimum": 0},
+        "integrity_checked": {"type": "integer", "minimum": 0},
+        "retracted_studies": {"type": "integer", "minimum": 0},
+        "downloads": {"type": "integer", "minimum": 0},
         "references": {"type": "integer", "minimum": 0},
         "gaps": {"type": "integer", "minimum": 0}
       },
@@ -106,7 +111,7 @@
         "no_fabrication": {"const": true},
         "untrusted_api_data": {"const": true},
         "publication": {"const": "not_performed"},
-        "pdf_downloads": {"const": 0},
+        "pdf_downloads": {"type": "integer", "minimum": 0},
         "credentials_used": {"const": false}
       },
       "additionalProperties": false

@@ -5,6 +5,10 @@ contrato de recuperação, protocolo em rascunho, busca, deduplicação, triagem
 assistida, evidências literais, análise descritiva, auditoria, manuscrito IMRaD
 e checklist de validação humana.
 
+> **Evolução:** o R1052 acrescenta texto integral, triagem humana, integridade
+> via Crossref e `research refresh`. Ver
+> [`SCIENTIFIC_RESEARCH_PIPELINE_R1052.md`](SCIENTIFIC_RESEARCH_PIPELINE_R1052.md).
+
 Ele não publica, não baixa PDFs, não usa credenciais e não declara o artigo como
 aceito, publicado, Qualis A1 ou validado externamente.
 
