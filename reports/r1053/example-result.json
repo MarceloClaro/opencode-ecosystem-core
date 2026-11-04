@@ -1,0 +1,237 @@
+{
+  "schema_version": "1.0",
+  "analysis_id": "QUANT-230d737d4f5b",
+  "project_id": "RP-EXAMPLE-R1053",
+  "generated_at": "2026-11-04T02:11:14.467252Z",
+  "status": "completed",
+  "protocol": {
+    "reviewer": "Exemplo sintético",
+    "declared_at": "2026-11-04T12:00:00Z",
+    "effect_measure": "SMD",
+    "model": "random",
+    "confidence_level": 0.95,
+    "min_studies": 3,
+    "max_i2_for_pooling": 75.0,
+    "human_confirmation": true,
+    "heterogeneity_policy": "report_only"
+  },
+  "k": 3,
+  "studies": [
+    {
+      "study_id": "S1",
+      "label": "S1",
+      "effect_size": 0.0,
+      "standard_error": 0.1,
+      "design": "RCT",
+      "outcome": "desfecho",
+      "timepoint": null,
+      "subgroup": null,
+      "risk_of_bias": {
+        "overall": "low",
+        "domains": {
+          "randomization": "low",
+          "missing": "low"
+        }
+      }
+    },
+    {
+      "study_id": "S2",
+      "label": "S2",
+      "effect_size": 0.8,
+      "standard_error": 0.1,
+      "design": "RCT",
+      "outcome": "desfecho",
+      "timepoint": null,
+      "subgroup": null,
+      "risk_of_bias": {
+        "overall": "high",
+        "domains": {
+          "randomization": "high",
+          "missing": "low"
+        }
+      }
+    },
+    {
+      "study_id": "S3",
+      "label": "S3",
+      "effect_size": 0.4,
+      "standard_error": 0.1,
+      "design": "RCT",
+      "outcome": "desfecho",
+      "timepoint": null,
+      "subgroup": null,
+      "risk_of_bias": {
+        "overall": "some_concerns",
+        "domains": {
+          "randomization": "some_concerns",
+          "missing": "low"
+        }
+      }
+    }
+  ],
+  "fixed": {
+    "model": "fixed",
+    "k": 3,
+    "weights": [
+      {
+        "study_id": "S1",
+        "weight": 100.0
+      },
+      {
+        "study_id": "S2",
+        "weight": 100.0
+      },
+      {
+        "study_id": "S3",
+        "weight": 100.0
+      }
+    ],
+    "pooled_effect": 0.4000000000000001,
+    "standard_error": 0.05773502691896258,
+    "ci_low": 0.28684142659238293,
+    "ci_high": 0.5131585734076173,
+    "z": 6.92820323027551,
+    "confidence_level": 0.95
+  },
+  "random": {
+    "model": "random",
+    "method": "DerSimonian-Laird",
+    "k": 3,
+    "tau2": 0.15000000000000005,
+    "weights": [
+      {
+        "study_id": "S1",
+        "weight": 6.25
+      },
+      {
+        "study_id": "S2",
+        "weight": 6.25
+      },
+      {
+        "study_id": "S3",
+        "weight": 6.25
+      }
+    ],
+    "pooled_effect": 0.4,
+    "standard_error": 0.23094010767585035,
+    "ci_low": -0.052634293630468676,
+    "ci_high": 0.8526342936304687,
+    "z": 1.732050807568877,
+    "confidence_level": 0.95
+  },
+  "primary_model": "random",
+  "primary_result": {
+    "model": "random",
+    "method": "DerSimonian-Laird",
+    "k": 3,
+    "tau2": 0.15000000000000005,
+    "weights": [
+      {
+        "study_id": "S1",
+        "weight": 6.25
+      },
+      {
+        "study_id": "S2",
+        "weight": 6.25
+      },
+      {
+        "study_id": "S3",
+        "weight": 6.25
+      }
+    ],
+    "pooled_effect": 0.4,
+    "standard_error": 0.23094010767585035,
+    "ci_low": -0.052634293630468676,
+    "ci_high": 0.8526342936304687,
+    "z": 1.732050807568877,
+    "confidence_level": 0.95
+  },
+  "heterogeneity": {
+    "q": 32.0,
+    "df": 2,
+    "p_value": 1.1253517471925916e-07,
+    "p_value_method": "scipy",
+    "i2_percent": 93.75,
+    "h2": 16.0,
+    "tau2": 0.15000000000000005,
+    "interpretation": "heterogeneidade substancial"
+  },
+  "prediction_interval": {
+    "status": "computed",
+    "low": -5.32945273593677,
+    "high": 6.129452735936771,
+    "standard_error": 0.45092497528228953,
+    "t_value": 12.706,
+    "t_method": "t_table",
+    "df": 1,
+    "confidence_level": 0.95
+  },
+  "risk_of_bias": {
+    "overall_counts": {
+      "low": 1,
+      "high": 1,
+      "some_concerns": 1
+    },
+    "domain_counts": {
+      "randomization": {
+        "low": 1,
+        "high": 1,
+        "some_concerns": 1
+      },
+      "missing": {
+        "low": 3
+      }
+    },
+    "studies_with_high_risk": 1,
+    "policy": "human_judgment_only_no_automatic_score",
+    "truth_claim": false
+  },
+  "grade": {
+    "status": "assessed",
+    "outcome": "desfecho",
+    "starting_level": "high",
+    "downgrades": 2,
+    "final_level": "low",
+    "domains": {
+      "risk_of_bias": {
+        "judgment": "serious",
+        "reason": "um estudo com alto risco"
+      },
+      "inconsistency": {
+        "judgment": "serious",
+        "reason": "I² acima de 75%"
+      },
+      "indirectness": {
+        "judgment": "not_serious",
+        "reason": "população similar"
+      },
+      "imprecision": {
+        "judgment": "not_serious",
+        "reason": "intervalo informativo"
+      },
+      "publication_bias": {
+        "judgment": "not_serious",
+        "reason": "busca ampla"
+      }
+    },
+    "reviewer": "Exemplo sintético",
+    "declared_at": "2026-11-04T12:00:00Z",
+    "policy": "human_judgment_only_no_automatic_certainty",
+    "truth_claim": false,
+    "human_review_required": true
+  },
+  "caution": [
+    "I² acima do limite declarado para pooling; interprete com cautela.",
+    "Há estudo(s) com risco de viés alto."
+  ],
+  "pooling_warning": true,
+  "truth_claim": false,
+  "external_validation": false,
+  "human_review_required": true,
+  "limitations": [
+    "A meta-análise usa apenas os efeitos e erros declarados pelo operador.",
+    "Não houve extração automática de PDFs nem imputação de dados faltantes.",
+    "Risco de viés e GRADE são julgamentos humanos registrados, não notas automáticas.",
+    "O resultado não é verdade científica nem validação externa."
+  ]
+}

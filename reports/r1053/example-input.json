@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "project_id": "RP-EXAMPLE-R1053",
+  "protocol": {
+    "reviewer": "Exemplo sintético",
+    "declared_at": "2026-11-04T12:00:00Z",
+    "effect_measure": "SMD",
+    "model": "random",
+    "confidence_level": 0.95,
+    "min_studies": 3,
+    "max_i2_for_pooling": 75,
+    "human_confirmation": true
+  },
+  "studies": [
+    {
+      "study_id": "S1",
+      "label": "S1",
+      "effect_size": 0.0,
+      "standard_error": 0.1,
+      "design": "RCT",
+      "outcome": "desfecho",
+      "risk_of_bias": {
+        "overall": "low",
+        "domains": {
+          "randomization": "low",
+          "missing": "low"
+        }
+      }
+    },
+    {
+      "study_id": "S2",
+      "label": "S2",
+      "effect_size": 0.8,
+      "standard_error": 0.1,
+      "design": "RCT",
+      "outcome": "desfecho",
+      "risk_of_bias": {
+        "overall": "high",
+        "domains": {
+          "randomization": "high",
+          "missing": "low"
+        }
+      }
+    },
+    {
+      "study_id": "S3",
+      "label": "S3",
+      "effect_size": 0.4,
+      "standard_error": 0.1,
+      "design": "RCT",
+      "outcome": "desfecho",
+      "risk_of_bias": {
+        "overall": "some_concerns",
+        "domains": {
+          "randomization": "some_concerns",
+          "missing": "low"
+        }
+      }
+    }
+  ],
+  "grade": {
+    "human_confirmation": true,
+    "reviewer": "Exemplo sintético",
+    "declared_at": "2026-11-04T12:00:00Z",
+    "starting_level": "high",
+    "outcome": "desfecho",
+    "domains": {
+      "risk_of_bias": {
+        "judgment": "serious",
+        "reason": "um estudo com alto risco"
+      },
+      "inconsistency": {
+        "judgment": "serious",
+        "reason": "I² acima de 75%"
+      },
+      "indirectness": {
+        "judgment": "not_serious",
+        "reason": "população similar"
+      },
+      "imprecision": {
+        "judgment": "not_serious",
+        "reason": "intervalo informativo"
+      },
+      "publication_bias": {
+        "judgment": "not_serious",
+        "reason": "busca ampla"
+      }
+    }
+  }
+}

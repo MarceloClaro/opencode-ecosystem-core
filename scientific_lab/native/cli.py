@@ -9,18 +9,24 @@ def _research(argv):
         p=sub.add_parser(name); p.add_argument('query'); p.add_argument('--workspace',type=Path,default=Path.cwd()); p.add_argument('--limit',type=int,default=30); p.add_argument('--per-platform',type=int,default=5); p.add_argument('--platforms'); p.add_argument('--max-downloads',type=int,default=10)
     project=sub.add_parser('project')
     project.add_argument('--theme',required=True); project.add_argument('--out',type=Path,required=True); project.add_argument('--question'); project.add_argument('--sources'); project.add_argument('--limit',type=int,default=30); project.add_argument('--per-platform',type=int,default=5); project.add_argument('--timeout',type=int,default=90); project.add_argument('--dry-run',action='store_true'); project.add_argument('--corpus',type=Path)
-    project.add_argument('--fulltext-dir',type=Path); project.add_argument('--fulltext-approval',type=Path); project.add_argument('--allow-open-access',action='store_true'); project.add_argument('--max-downloads',type=int,default=5); project.add_argument('--check-integrity',action='store_true'); project.add_argument('--max-integrity-checks',type=int,default=20)
+    project.add_argument('--fulltext-dir',type=Path); project.add_argument('--fulltext-approval',type=Path); project.add_argument('--allow-open-access',action='store_true'); project.add_argument('--max-downloads',type=int,default=5); project.add_argument('--check-integrity',action='store_true'); project.add_argument('--max-integrity-checks',type=int,default=20); project.add_argument('--quantitative-data',type=Path); project.add_argument('--submission',action='store_true'); project.add_argument('--journal'); project.add_argument('--figures-dir',type=Path); project.add_argument('--tables-dir',type=Path)
     refresh=sub.add_parser('refresh')
-    refresh.add_argument('--out',type=Path,required=True); refresh.add_argument('--fulltext-dir',type=Path); refresh.add_argument('--fulltext-approval',type=Path); refresh.add_argument('--allow-open-access',action='store_true'); refresh.add_argument('--max-downloads',type=int,default=5); refresh.add_argument('--check-integrity',action='store_true'); refresh.add_argument('--max-integrity-checks',type=int,default=20)
+    refresh.add_argument('--out',type=Path,required=True); refresh.add_argument('--fulltext-dir',type=Path); refresh.add_argument('--fulltext-approval',type=Path); refresh.add_argument('--allow-open-access',action='store_true'); refresh.add_argument('--max-downloads',type=int,default=5); refresh.add_argument('--check-integrity',action='store_true'); refresh.add_argument('--max-integrity-checks',type=int,default=20); refresh.add_argument('--quantitative-data',type=Path); refresh.add_argument('--submission',action='store_true'); refresh.add_argument('--journal'); refresh.add_argument('--figures-dir',type=Path); refresh.add_argument('--tables-dir',type=Path)
+    submission_cmd=sub.add_parser('submission')
+    submission_cmd.add_argument('--out',type=Path,required=True); submission_cmd.add_argument('--journal'); submission_cmd.add_argument('--figures-dir',type=Path); submission_cmd.add_argument('--tables-dir',type=Path)
     a=ap.parse_args(argv)
     if a.sub=='project':
         from scientific_lab import research_project
         selected=[x.strip() for x in a.sources.split(',') if x.strip()] if a.sources else None
-        result=research_project.run(a.theme,a.out,question=a.question,sources=selected,dry_run=a.dry_run,limit=a.limit,per_platform=a.per_platform,timeout_seconds=a.timeout,corpus_path=a.corpus,fulltext_dir=a.fulltext_dir,fulltext_approval=a.fulltext_approval,allow_open_access=a.allow_open_access,max_downloads=a.max_downloads,check_integrity=a.check_integrity,max_integrity_checks=a.max_integrity_checks)
+        result=research_project.run(a.theme,a.out,question=a.question,sources=selected,dry_run=a.dry_run,limit=a.limit,per_platform=a.per_platform,timeout_seconds=a.timeout,corpus_path=a.corpus,fulltext_dir=a.fulltext_dir,fulltext_approval=a.fulltext_approval,allow_open_access=a.allow_open_access,max_downloads=a.max_downloads,check_integrity=a.check_integrity,max_integrity_checks=a.max_integrity_checks,quantitative_data=a.quantitative_data,submission_package=a.submission,journal=a.journal,figures_dir=a.figures_dir,tables_dir=a.tables_dir)
         print(json.dumps(result,ensure_ascii=False,indent=2)); return 0 if result['status']!='blocked' else 4
     if a.sub=='refresh':
         from scientific_lab import research_project
-        result=research_project.refresh_project(a.out,fulltext_dir=a.fulltext_dir,fulltext_approval=a.fulltext_approval,allow_open_access=a.allow_open_access,max_downloads=a.max_downloads,check_integrity=a.check_integrity,max_integrity_checks=a.max_integrity_checks)
+        result=research_project.refresh_project(a.out,fulltext_dir=a.fulltext_dir,fulltext_approval=a.fulltext_approval,allow_open_access=a.allow_open_access,max_downloads=a.max_downloads,check_integrity=a.check_integrity,max_integrity_checks=a.max_integrity_checks,quantitative_data=a.quantitative_data,submission_package=a.submission,journal=a.journal,figures_dir=a.figures_dir,tables_dir=a.tables_dir)
+        print(json.dumps(result,ensure_ascii=False,indent=2)); return 0 if result['status']!='blocked' else 4
+    if a.sub=='submission':
+        from scientific_lab import research_project
+        result=research_project.refresh_project(a.out,submission_package=True,journal=a.journal,figures_dir=a.figures_dir,tables_dir=a.tables_dir)
         print(json.dumps(result,ensure_ascii=False,indent=2)); return 0 if result['status']!='blocked' else 4
     platforms=[x.strip() for x in a.platforms.split(',') if x.strip()] if a.platforms else None
     if a.sub=='search':

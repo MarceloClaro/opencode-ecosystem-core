@@ -23734,6 +23734,37 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1053",
+      "objective": "Implementar síntese quantitativa human-gated e pacote de submissão no pesquisador científico do Core",
+      "changes": [
+        "scientific_lab/quantitative.py: meta-análise fixa/aleatória, Q, I², tau², intervalo de predição, risco de viés e GRADE",
+        "scientific_lab/submission.py: Markdown/LaTeX/DOCX/PDF, .bib, template ABNT genérico, checklist e declarações",
+        "scientific_lab/research_project.py: integração de quantitative_data e submission_package no run e refresh, auditoria e manifesto",
+        "scientific_lab/native/cli.py: flags --quantitative-data, --submission, --journal, --figures-dir, --tables-dir e comando submission",
+        "tests/test_r1053_quantitative.py e test_r1053_submission.py",
+        "reports/r1053/README.md, example-input.json, example-result.json e final-regression.txt"
+      ],
+      "score": 0.93,
+      "lessons": [
+        "Meta-análise não pode extrair efeitos de PDFs nem decidir risco de viés; precisa de protocolo e dados declarados.",
+        "GRADE é rebaixamento por julgamento humano, não nota automática.",
+        "Template ABNT genérico não é certificado de conformidade; checklist e declarações continuam pending_human.",
+        "Pandoc exige array/calc e tightlist no template para compilar tabelas e listas; o teste de integração gerou PDF.",
+        "Um pacote de submissão pode ser construído sem declarar aceite, publicação ou validação externa."
+      ],
+      "timestamp": 1793758584.791432,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [

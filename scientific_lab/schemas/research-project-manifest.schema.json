@@ -58,6 +58,14 @@
         "fulltext_verified": {"type": "integer", "minimum": 0},
         "integrity_checked": {"type": "integer", "minimum": 0},
         "retracted_studies": {"type": "integer", "minimum": 0},
+        "quantitative_studies": {"type": "integer", "minimum": 0},
+        "quantitative_pooled": {"type": "integer", "minimum": 0, "maximum": 1},
+        "quantitative_high_risk": {"type": "integer", "minimum": 0},
+        "quantitative_grade_level": {
+          "type": ["string", "null"],
+          "enum": ["high", "moderate", "low", "very_low", null]
+        },
+        "submission_files": {"type": "integer", "minimum": 0},
         "downloads": {"type": "integer", "minimum": 0},
         "references": {"type": "integer", "minimum": 0},
         "gaps": {"type": "integer", "minimum": 0}

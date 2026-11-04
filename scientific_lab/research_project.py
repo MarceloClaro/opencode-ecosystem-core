@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import re
 import signal
 from collections import Counter
@@ -18,7 +19,7 @@ from pathlib import Path
 from typing import Any, Callable, Iterable
 
 from mci.metacognitive_gate import aggregate
-from scientific_lab import fulltext, integrity, screening
+from scientific_lab import fulltext, integrity, quantitative, screening, submission
 from scientific_lab.native import evidence as native_evidence
 from scientific_lab.native import research as native_research
 from scientific_lab.native import review as native_review
@@ -147,6 +148,7 @@ PROJECT_DIRS = (
     "07_artifacts",
     "08_manifest",
     "09_provenance",
+    "10_submission",
 )
 
 CONTRACT_REQUIRED = (
@@ -1298,6 +1300,12 @@ def _run_fulltext(out: Path, project_id: str, studies: list[dict],
     }
 
 
+def _run_quantitative(out: Path, data_path: str | Path | None) -> dict | None:
+    if data_path is None:
+        return _maybe_load(out / "04_analysis/quantitative-synthesis.json")
+    return quantitative.run(data_path, out)
+
+
 def _descriptive_analysis(out: Path, project_id: str, records: list[dict],
                           studies: list[dict], evidence: dict) -> dict:
     with_abstract = [item for item in records if item.get("abstract")]
@@ -1394,6 +1402,7 @@ def _render_manuscript(ctx: dict) -> str:
     download_count = downloads.get("downloaded", 0)
     fulltext = ctx.get("fulltext") or {}
     integrity = ctx.get("integrity") or {}
+    quantitative = ctx.get("quantitative") or {}
     fulltext_claims = evidence.get("fulltext_claims") or []
     fulltext_candidates = (fulltext.get("candidates") or {}).get("candidates", [])
     integrity_checks = integrity.get("checks") or []
@@ -1661,6 +1670,24 @@ def _render_manuscript(ctx: dict) -> str:
             "rodada; o checklist humano continua obrigatório."
         )
     lines.append("")
+    lines.append("### 2.7 Síntese quantitativa")
+    lines.append("")
+    if quantitative:
+        protocol = quantitative.get("protocol") or {}
+        lines.append(
+            "A síntese quantitativa usou apenas efeitos e erros declarados pelo "
+            f"operador, sob protocolo humano (`{protocol.get('effect_measure')}`, "
+            f"modelo `{protocol.get('model')}`, revisor "
+            f"`{protocol.get('reviewer')}`). Não houve extração automática de "
+            "PDFs, imputação de dados faltantes ou decisão automática de risco "
+            "de viés/GRADE."
+        )
+    else:
+        lines.append(
+            "A síntese quantitativa não foi executada. Nenhum efeito foi "
+            "extraído automaticamente de PDFs ou inferido a partir de resumos."
+        )
+    lines.append("")
     lines.append("## 3. Resultados")
     lines.append("")
     lines.append("### 3.1 Fluxo de recuperação")
@@ -1676,6 +1703,9 @@ def _render_manuscript(ctx: dict) -> str:
     lines.append(f"| Claims com evidência literal | {claim_count} |")
     lines.append(f"| Claims de texto integral | {fulltext_claim_count} |")
     lines.append(f"| Claims do corpus fornecido | {corpus_claim_count} |")
+    lines.append(
+        f"| Estudos na síntese quantitativa | {quantitative.get('k', 0)} |"
+    )
     lines.append(f"| Lacunas registradas | {len(gaps)} |")
     lines.append("")
     if records:
@@ -1857,6 +1887,53 @@ def _render_manuscript(ctx: dict) -> str:
             )
         lines.append("")
         section += 1
+    if quantitative:
+        primary = quantitative.get("primary_result") or {}
+        hetero = quantitative.get("heterogeneity") or {}
+        prediction = quantitative.get("prediction_interval") or {}
+        risk = quantitative.get("risk_of_bias") or {}
+        grade = quantitative.get("grade") or {}
+        lines.append(f"### 3.{section} Síntese quantitativa")
+        lines.append("")
+        lines.append(
+            "Resultados calculados exclusivamente a partir dos efeitos e erros "
+            "declarados; a interpretação continua humana."
+        )
+        lines.append("")
+        lines.append("| Métrica | Resultado |")
+        lines.append("|---|---|")
+        lines.append(f"| Estudos | {quantitative.get('k')} |")
+        lines.append(f"| Modelo primário | `{quantitative.get('primary_model')}` |")
+        lines.append(
+            f"| Efeito combinado | {primary.get('pooled_effect'):.3f} "
+            f"(IC {primary.get('confidence_level', 0.95):.2f}: "
+            f"{primary.get('ci_low'):.3f} a {primary.get('ci_high'):.3f}) |"
+        )
+        lines.append(f"| Q (df) | {hetero.get('q'):.3f} ({hetero.get('df')}) |")
+        lines.append(f"| I² | {hetero.get('i2_percent'):.1f}% |")
+        lines.append(f"| tau² | {hetero.get('tau2'):.4f} |")
+        if prediction.get("status") == "computed":
+            lines.append(
+                f"| Intervalo de predição | {prediction.get('low'):.3f} a "
+                f"{prediction.get('high'):.3f} |"
+            )
+        else:
+            lines.append(
+                f"| Intervalo de predição | não calculado: "
+                f"{prediction.get('reason')} |"
+            )
+        lines.append(
+            f"| Risco de viés alto | {risk.get('studies_with_high_risk', 0)} estudo(s) |"
+        )
+        lines.append(
+            f"| GRADE | `{grade.get('final_level') or 'não avaliado'}` |"
+        )
+        lines.append("")
+        if quantitative.get("caution"):
+            for caution in quantitative["caution"]:
+                lines.append(f"- Atenção: {caution}")
+            lines.append("")
+        section += 1
     lines.append(f"### 3.{section} Lacunas")
     lines.append("")
     if gaps:
@@ -1921,7 +1998,13 @@ def _render_manuscript(ctx: dict) -> str:
         "A triagem é lexical e assistida; não substitui dois revisores humanos independentes.",
         "A verificação de retratações/correções depende do Crossref e pode ser incompleta; ausência de atualização não é atestado de integridade.",
         "Não houve validação externa, avaliação por pares, aceite editorial ou publicação.",
-        "Não houve teste estatístico, meta-análise, modelagem causal ou análise de risco de viés.",
+        (
+            "A síntese quantitativa usa apenas efeitos e erros declarados pelo "
+            "operador; não houve extração automática nem imputação."
+            if quantitative else
+            "Não houve teste estatístico, meta-análise, modelagem causal ou análise de risco de viés."
+        ),
+        "Risco de viés e GRADE são julgamentos humanos registrados, não notas automáticas.",
         "Metadados podem estar incompletos, desatualizados ou conter erros de indexação.",
         "A cobertura é limitada pelas bases escolhidas, pelo idioma e pelo limite por plataforma.",
         "Trechos de resumos e de texto integral são mantidos no idioma original; tradução e interpretação exigem revisão humana.",
@@ -2045,6 +2128,8 @@ def _render_validation(ctx: dict) -> str:
         "| Confirmar que só há `verified` com aprovação humana | pending_human | auditor | confronto entre annotations e approval |",
         "| Avaliar risco de viés | pending_human | revisor metodológico | instrumento e julgamento registrados |",
         "| Revisar análise e limites inferenciais | pending_human | estatístico ou metodólogo | parecer com pressupostos e incerteza |",
+        "| Conferir efeitos, erros-padrão e modelo meta-analítico | pending_human | estatístico | planilha de extração e código |",
+        "| Validar risco de viés e GRADE | pending_human | revisor metodológico | julgamentos por domínio e razões |",
         "| Verificar ética, consentimento e conflitos | pending_human | comitê ou pesquisador | declaração e aprovação aplicável |",
         "| Adequar ao periódico-alvo | pending_human | autor | norma, extensão e referências conferidas |",
         "| Confirmar ausência de overclaim | pending_human | revisor independente | leitura crítica do manuscrito |",
@@ -2163,6 +2248,7 @@ def _render_readme(ctx: dict) -> str:
         "| `06_manuscript/manuscript.md` | manuscrito IMRaD |",
         "| `07_validation/VALIDATION.md` | checklist humano |",
         "| `08_manifest/project-manifest.json` | hashes e estados |",
+        "| `10_submission/` | pacote de submissão, quando solicitado |",
         "",
         "## Como continuar",
         "",
@@ -2232,6 +2318,12 @@ def audit_project(out: str | Path) -> dict:
     ) or {}
     integrity_doc = _maybe_load(
         out / "03_evidence/integrity-checks.json"
+    ) or {}
+    quantitative_doc = _maybe_load(
+        out / "04_analysis/quantitative-synthesis.json"
+    ) or {}
+    submission_doc = _maybe_load(
+        out / "10_submission/submission-manifest.json"
     ) or {}
     search_error = (out / "01_sources/search-error.json").exists()
     search_plan = (out / "01_sources/search-plan.json").exists()
@@ -2435,6 +2527,64 @@ def audit_project(out: str | Path) -> dict:
             "sem verificação de integridade",
         ))
 
+    if quantitative_doc:
+        protocol = quantitative_doc.get("protocol") or {}
+        primary = quantitative_doc.get("primary_result") or {}
+        hetero = quantitative_doc.get("heterogeneity") or {}
+        pooled = primary.get("pooled_effect")
+        i2 = hetero.get("i2_percent")
+        quantitative_ok = (
+            protocol.get("human_confirmation") is True
+            and quantitative_doc.get("k", 0) >= protocol.get("min_studies", 2)
+            and quantitative_doc.get("truth_claim") is False
+            and isinstance(pooled, (int, float))
+            and math.isfinite(float(pooled))
+            and isinstance(i2, (int, float))
+            and 0 <= float(i2) <= 100
+        )
+        checks.append(_check(
+            "quantitative_protocol",
+            "pass" if quantitative_ok else "fail",
+            f"k={quantitative_doc.get('k')}; pooled={pooled}; I2={i2}",
+        ))
+        grade = quantitative_doc.get("grade") or {}
+        grade_ok = (
+            grade.get("status") == "assessed"
+            and bool(grade.get("reviewer"))
+            and bool(grade.get("declared_at"))
+        )
+        checks.append(_check(
+            "quantitative_grade_human",
+            "pass" if grade_ok else "not_applicable",
+            f"grade={grade.get('final_level') or 'não avaliado'}",
+        ))
+    else:
+        checks.append(_check(
+            "quantitative_protocol", "not_applicable",
+            "sem síntese quantitativa",
+        ))
+        checks.append(_check(
+            "quantitative_grade_human", "not_applicable",
+            "sem síntese quantitativa",
+        ))
+
+    if submission_doc:
+        submission_ok = (
+            submission_doc.get("human_review_required") is True
+            and submission_doc.get("truth_claim") is False
+            and submission_doc.get("status") in {"completed", "partial"}
+        )
+        checks.append(_check(
+            "submission_package",
+            "pass" if submission_ok else "fail",
+            f"status={submission_doc.get('status')}; files={len(submission_doc.get('files', []))}",
+        ))
+    else:
+        checks.append(_check(
+            "submission_package", "not_applicable",
+            "pacote de submissão não solicitado",
+        ))
+
     if claims:
         evidence_status = "pass" if all(item.get("evidence") for item in claims) else "fail"
         evidence_detail = (
@@ -2531,6 +2681,11 @@ def audit_project(out: str | Path) -> dict:
                 for check in integrity_doc.get("checks", [])
             ),
             "downloads": downloads.get("downloaded", 0),
+            "quantitative_studies": quantitative_doc.get("k", 0),
+            "quantitative_grade": (
+                (quantitative_doc.get("grade") or {}).get("final_level")
+            ),
+            "submission_files": len(submission_doc.get("files", [])),
             "gaps": len((_maybe_load(out / "03_evidence/gaps.json") or {}).get("gaps", [])),
         },
         "descriptive_status": descriptive.get("status"),
@@ -2692,6 +2847,11 @@ def run(
     check_integrity: bool = False,
     integrity_checker: Callable | None = None,
     max_integrity_checks: int = 20,
+    quantitative_data: str | Path | None = None,
+    submission_package: bool = False,
+    journal: str | None = None,
+    figures_dir: str | Path | None = None,
+    tables_dir: str | Path | None = None,
     budget: dict | None = None,
 ) -> dict:
     theme = normalize_theme(theme)
@@ -2893,6 +3053,7 @@ def run(
     analysis = _descriptive_analysis(
         out, project_id, search["records"], screening["studies"], evidence,
     )
+    quantitative_result = _run_quantitative(out, quantitative_data)
 
     counts = {
         "records_retrieved": len(search["records"]),
@@ -2919,6 +3080,16 @@ def run(
             study.get("integrity_status") in {"retracted", "retracted_notice"}
             for study in screening["studies"]
         ),
+        "quantitative_studies": (quantitative_result or {}).get("k", 0),
+        "quantitative_pooled": 1 if quantitative_result else 0,
+        "quantitative_high_risk": (
+            (quantitative_result or {}).get("risk_of_bias", {})
+            .get("studies_with_high_risk", 0)
+        ),
+        "quantitative_grade_level": (
+            ((quantitative_result or {}).get("grade") or {}).get("final_level")
+        ),
+        "submission_files": 0,
         "references": len(_unique_records({
             "search": search, "screening": screening,
         })) + len(evidence["corpus_index"]),
@@ -2937,6 +3108,7 @@ def run(
         "downloads": download_result,
         "integrity": integrity_result,
         "fulltext": fulltext_result,
+        "quantitative": quantitative_result,
         "analysis": analysis,
         "stages": stages,
         "counts": counts,
@@ -2951,6 +3123,17 @@ def run(
     validation_path.parent.mkdir(parents=True, exist_ok=True)
     validation_path.write_text(_render_validation(ctx), encoding="utf-8")
 
+    submission_result = None
+    if submission_package:
+        submission_result = submission.build(
+            out,
+            journal=journal,
+            figures_dir=figures_dir,
+            tables_dir=tables_dir,
+        )
+    ctx["submission"] = submission_result
+    if submission_result:
+        counts["submission_files"] = submission_result.get("files", 0)
     audit = audit_project(out)
     dump(out / "05_audit/audit-report.json", audit)
 
@@ -2979,6 +3162,8 @@ def run(
         "screening": screening_status,
         "integrity": integrity_stage,
         "fulltext": fulltext_stage,
+        "quantitative": "completed" if quantitative_result else "not_requested",
+        "submission": "completed" if submission_result else "not_requested",
         "evidence": evidence_status,
         "analysis": analysis["status"],
         "audit": audit["status"],
@@ -3056,6 +3241,11 @@ def refresh_project(
     check_integrity: bool = False,
     integrity_checker: Callable | None = None,
     max_integrity_checks: int = 20,
+    quantitative_data: str | Path | None = None,
+    submission_package: bool = False,
+    journal: str | None = None,
+    figures_dir: str | Path | None = None,
+    tables_dir: str | Path | None = None,
 ) -> dict:
     """Reaplica triagem humana, texto integral e integridade a um projeto existente.
 
@@ -3242,6 +3432,7 @@ def refresh_project(
     analysis = _descriptive_analysis(
         out, project_id, records, screening_payload["studies"], evidence,
     )
+    quantitative_result = _run_quantitative(out, quantitative_data)
     counts = {
         "records_retrieved": len(records),
         "unique_studies": len(screening_payload["studies"]),
@@ -3265,6 +3456,16 @@ def refresh_project(
             study.get("integrity_status") in {"retracted", "retracted_notice"}
             for study in screening_payload["studies"]
         ),
+        "quantitative_studies": (quantitative_result or {}).get("k", 0),
+        "quantitative_pooled": 1 if quantitative_result else 0,
+        "quantitative_high_risk": (
+            (quantitative_result or {}).get("risk_of_bias", {})
+            .get("studies_with_high_risk", 0)
+        ),
+        "quantitative_grade_level": (
+            ((quantitative_result or {}).get("grade") or {}).get("final_level")
+        ),
+        "submission_files": 0,
         "references": len(_unique_records({
             "search": search, "screening": screening_payload,
         })) + len(evidence["corpus_index"]),
@@ -3285,6 +3486,8 @@ def refresh_project(
             else "completed_human_approved" if fulltext_result.get("approval")
             else "completed_pending_human"
         ),
+        "quantitative": "completed" if quantitative_result else "not_requested",
+        "submission": "not_requested",
         "refresh": "completed",
     }
     ctx = {
@@ -3299,6 +3502,7 @@ def refresh_project(
         "downloads": download_result,
         "integrity": integrity_result,
         "fulltext": fulltext_result,
+        "quantitative": quantitative_result,
         "analysis": analysis,
         "stages": stages,
         "counts": counts,
@@ -3311,6 +3515,18 @@ def refresh_project(
     validation_path = out / "07_validation/VALIDATION.md"
     validation_path.parent.mkdir(parents=True, exist_ok=True)
     validation_path.write_text(_render_validation(ctx), encoding="utf-8")
+    submission_result = None
+    if submission_package:
+        submission_result = submission.build(
+            out,
+            journal=journal,
+            figures_dir=figures_dir,
+            tables_dir=tables_dir,
+        )
+    ctx["submission"] = submission_result
+    if submission_result:
+        counts["submission_files"] = submission_result.get("files", 0)
+    stages["submission"] = "completed" if submission_result else "not_requested"
     audit = audit_project(out)
     dump(out / "05_audit/audit-report.json", audit)
     if evidence["claims"]:
