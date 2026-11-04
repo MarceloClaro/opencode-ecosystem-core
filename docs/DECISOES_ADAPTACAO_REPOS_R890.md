@@ -43,6 +43,14 @@ O relatório conserva configuração, contagens por seed, métricas e digest can
 
 O retorno do primário preserva a evidência tipada. A observação persistida guarda somente natureza de execução, backend, configuração e digest, sem despejar histogramas na memória nem promover trust pela execução da própria simulação. O caminho direto de experimento e o caminho do motor mantêm essa distinção.
 
+<!-- svg-presentation:diagram-96fc8cf3f7a01e0f -->
+<img src="architecture/animated/diagram-96fc8cf3f7a01e0f.svg" alt="O que R890 mudou no código existente — diagrama estático" width="100%">
+
+<sub>[GIF](architecture/animated/diagram-96fc8cf3f7a01e0f.gif) · [PNG](architecture/animated/diagram-96fc8cf3f7a01e0f.png) · [Fonte Mermaid](architecture/animated/diagram-96fc8cf3f7a01e0f.mmd)</sub>
+
+<details>
+<summary>Fonte Mermaid (auditoria)</summary>
+
 ```mermaid
 flowchart TD
     U[Solicitação local] --> O[MarceloClaroOrchestrator]
@@ -60,6 +68,8 @@ flowchart TD
     L -.-> D[Revisão de fonte separada na curadoria]
     F -->|primário registra resumo e referência| B
 ```
+
+</details>
 
 O diagrama representa contratos de execução e registro; não adiciona coordenação autônoma, inferência de voz ou um backend quântico externo. A observação no MetaBus conserva o tipo de evidência; descoberta estática e simulação não se tornam validação externa.
 

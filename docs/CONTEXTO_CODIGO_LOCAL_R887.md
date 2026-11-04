@@ -4,6 +4,14 @@ O primário MarceloClaro consulta um provedor context-link isolado. O retorno
 entra no mesmo briefing metacognitivo entregue ao executor pelo Blackboard;
 as observações ficam no MetaBus. Não há um segundo coordenador ou outra memória.
 
+<!-- svg-presentation:diagram-a240de7a75b447de -->
+<img src="architecture/animated/diagram-a240de7a75b447de.svg" alt="Contexto de código local — R887 — diagrama estático" width="100%">
+
+<sub>[GIF](architecture/animated/diagram-a240de7a75b447de.gif) · [PNG](architecture/animated/diagram-a240de7a75b447de.png) · [Fonte Mermaid](architecture/animated/diagram-a240de7a75b447de.mmd)</sub>
+
+<details>
+<summary>Fonte Mermaid (auditoria)</summary>
+
 ```mermaid
 flowchart TD
   Operador[Operador: setup/index explícitos] --> CLI[CLI do Core]
@@ -30,6 +38,8 @@ flowchart TD
   Gate --> Reflexao[Reflexão contextual R886]
   Reflexao --> MetaBus
 ```
+
+</details>
 
 ## Configuração e uso
 

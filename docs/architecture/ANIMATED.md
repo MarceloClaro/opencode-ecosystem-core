@@ -1,15 +1,16 @@
-# Atlas animado de arquitetura e fluxos — R1056
+# Atlas animado de arquitetura e fluxos — R1056–R1057
 
 Todos os diagramas do escopo têm GIF, PNG, SVG e Mermaid editável.
-A animação destaca relações existentes como **guia de leitura**, não
-como telemetria, execução observada ou sequência temporal comprovada.
+A animação percorre as arestas na ordem topológica do desenho e destaca
+os nós sem arestas em sequência. É **guia de leitura**, não telemetria,
+execução observada ou garantia de que o caminho ocorra.
 
 **Acessibilidade:** a visualização padrão é estática. Abra o GIF apenas
 quando desejar movimento; ele executa um ciclo de 8 s, sem repetição
 infinita. Para repetir, recarregue o arquivo. Amplie o SVG para ler grafos densos.
 
 [README](../../README.md) · [Arquitetura](../../ARCHITECTURE.md) ·
-[Manifesto e hashes](animated/manifest.json) · [Reprodução](../../reports/r1056/README.md)
+[Manifesto e hashes](animated/manifest.json) · [Reprodução](../../reports/r1057/README.md)
 
 ## Cobertura
 
@@ -25,16 +26,16 @@ infinita. Para repetir, recarregue o arquivo. Amplie o SVG para ler grafos denso
 | 08. Como funciona a apresentação MIRA | [GIF](animated/diagram-0fc0fb3f7256d5ba.gif) | [PNG](animated/diagram-0fc0fb3f7256d5ba.png) · [SVG](animated/diagram-0fc0fb3f7256d5ba.svg) | [Mermaid](animated/diagram-0fc0fb3f7256d5ba.mmd) |
 | 09. Ciclo de Vida SDD / TDD | [GIF](animated/diagram-ae341a88b5319133.gif) | [PNG](animated/diagram-ae341a88b5319133.png) · [SVG](animated/diagram-ae341a88b5319133.svg) | [Mermaid](animated/diagram-ae341a88b5319133.mmd) |
 | 10. Panorama completo por camadas | [GIF](animated/diagram-a131171c4c7e9553.gif) | [PNG](animated/diagram-a131171c4c7e9553.png) · [SVG](animated/diagram-a131171c4c7e9553.svg) | [Mermaid](animated/diagram-a131171c4c7e9553.mmd) |
-| 11. Orquestração primária e execução CLI | [GIF](animated/diagram-740458b3fd23f403.gif) | [PNG](animated/diagram-740458b3fd23f403.png) · [SVG](animated/diagram-740458b3fd23f403.svg) | [Mermaid](animated/diagram-740458b3fd23f403.mmd) |
+| 11. Orquestração primária e execução CLI | [GIF](animated/diagram-fca207c4f2853c70.gif) | [PNG](animated/diagram-fca207c4f2853c70.png) · [SVG](animated/diagram-fca207c4f2853c70.svg) | [Mermaid](animated/diagram-fca207c4f2853c70.mmd) |
 | 12. Workflow DAG e retomada | [GIF](animated/diagram-b05977d545b7de24.gif) | [PNG](animated/diagram-b05977d545b7de24.png) · [SVG](animated/diagram-b05977d545b7de24.svg) | [Mermaid](animated/diagram-b05977d545b7de24.mmd) |
 | 13. SDD e histórico RED–GREEN | [GIF](animated/diagram-f30ae99066baffe7.gif) | [PNG](animated/diagram-f30ae99066baffe7.png) · [SVG](animated/diagram-f30ae99066baffe7.svg) | [Mermaid](animated/diagram-f30ae99066baffe7.mmd) |
-| 14. REA e camadas de provedores | [GIF](animated/diagram-8a73f62c86a7bfc4.gif) | [PNG](animated/diagram-8a73f62c86a7bfc4.png) · [SVG](animated/diagram-8a73f62c86a7bfc4.svg) | [Mermaid](animated/diagram-8a73f62c86a7bfc4.mmd) |
+| 14. REA e camadas de provedores | [GIF](animated/diagram-5f149863d07e3240.gif) | [PNG](animated/diagram-5f149863d07e3240.png) · [SVG](animated/diagram-5f149863d07e3240.svg) | [Mermaid](animated/diagram-5f149863d07e3240.mmd) |
 | 15. REA local direto e evidência | [GIF](animated/diagram-f64391e6f070fd4a.gif) | [PNG](animated/diagram-f64391e6f070fd4a.png) · [SVG](animated/diagram-f64391e6f070fd4a.svg) | [Mermaid](animated/diagram-f64391e6f070fd4a.mmd) |
 | 16. REA com agente local e gate de recibos | [GIF](animated/diagram-9695787734dbc84f.gif) | [PNG](animated/diagram-9695787734dbc84f.png) · [SVG](animated/diagram-9695787734dbc84f.svg) | [Mermaid](animated/diagram-9695787734dbc84f.mmd) |
 | 17. Conhecimento, RAG e grafos de evidência | [GIF](animated/diagram-b6d478484fbf90e1.gif) | [PNG](animated/diagram-b6d478484fbf90e1.png) · [SVG](animated/diagram-b6d478484fbf90e1.svg) | [Mermaid](animated/diagram-b6d478484fbf90e1.mmd) |
 | 18. Rede de memória observável | [GIF](animated/diagram-d8277393ea44679f.gif) | [PNG](animated/diagram-d8277393ea44679f.png) · [SVG](animated/diagram-d8277393ea44679f.svg) | [Mermaid](animated/diagram-d8277393ea44679f.mmd) |
 | 19. Raciocínio restrito e fallbacks | [GIF](animated/diagram-a52c85b1012c269c.gif) | [PNG](animated/diagram-a52c85b1012c269c.png) · [SVG](animated/diagram-a52c85b1012c269c.svg) | [Mermaid](animated/diagram-a52c85b1012c269c.mmd) |
-| 20. Diagnóstico, confiança, federação e evolução | [GIF](animated/diagram-3558275afca46564.gif) | [PNG](animated/diagram-3558275afca46564.png) · [SVG](animated/diagram-3558275afca46564.svg) | [Mermaid](animated/diagram-3558275afca46564.mmd) |
+| 20. Diagnóstico, confiança, federação e evolução | [GIF](animated/diagram-b1191de7207d8158.gif) | [PNG](animated/diagram-b1191de7207d8158.png) · [SVG](animated/diagram-b1191de7207d8158.svg) | [Mermaid](animated/diagram-b1191de7207d8158.mmd) |
 | 21. Ciência, proveniência e publicação | [GIF](animated/diagram-829bfb0c2728f8e8.gif) | [PNG](animated/diagram-829bfb0c2728f8e8.png) · [SVG](animated/diagram-829bfb0c2728f8e8.svg) | [Mermaid](animated/diagram-829bfb0c2728f8e8.mmd) |
 | 22. Validação e entrega | [GIF](animated/diagram-29a96da731327441.gif) | [PNG](animated/diagram-29a96da731327441.png) · [SVG](animated/diagram-29a96da731327441.svg) | [Mermaid](animated/diagram-29a96da731327441.mmd) |
 | 23. Plugins locais, Lean 4 e MiroFish | [GIF](animated/diagram-83a0417e20f0d613.gif) | [PNG](animated/diagram-83a0417e20f0d613.png) · [SVG](animated/diagram-83a0417e20f0d613.svg) | [Mermaid](animated/diagram-83a0417e20f0d613.mmd) |
@@ -60,10 +61,7 @@ infinita. Para repetir, recarregue o arquivo. Amplie o SVG para ler grafos denso
 | 43. CI independente da cobrança GitHub | [GIF](animated/diagram-9a0642ee46b2aafb.gif) | [PNG](animated/diagram-9a0642ee46b2aafb.png) · [SVG](animated/diagram-9a0642ee46b2aafb.svg) | [Mermaid](animated/diagram-9a0642ee46b2aafb.mmd) |
 | 44. Resultado entregue | [GIF](animated/diagram-88e2b4838b9045f6.gif) | [PNG](animated/diagram-88e2b4838b9045f6.png) · [SVG](animated/diagram-88e2b4838b9045f6.svg) | [Mermaid](animated/diagram-88e2b4838b9045f6.mmd) |
 | 45. Coordenação em etapas e retomada | [GIF](animated/diagram-57fc3d7d66f7c94b.gif) | [PNG](animated/diagram-57fc3d7d66f7c94b.png) · [SVG](animated/diagram-57fc3d7d66f7c94b.svg) | [Mermaid](animated/diagram-57fc3d7d66f7c94b.mmd) |
-| 46. Orquestração primária e execução CLI | [GIF](animated/diagram-fca207c4f2853c70.gif) | [PNG](animated/diagram-fca207c4f2853c70.png) · [SVG](animated/diagram-fca207c4f2853c70.svg) | [Mermaid](animated/diagram-fca207c4f2853c70.mmd) |
-| 47. REA e camadas de provedores | [GIF](animated/diagram-5f149863d07e3240.gif) | [PNG](animated/diagram-5f149863d07e3240.png) · [SVG](animated/diagram-5f149863d07e3240.svg) | [Mermaid](animated/diagram-5f149863d07e3240.mmd) |
-| 48. Diagnóstico, confiança, federação e evolução | [GIF](animated/diagram-b1191de7207d8158.gif) | [PNG](animated/diagram-b1191de7207d8158.png) · [SVG](animated/diagram-b1191de7207d8158.svg) | [Mermaid](animated/diagram-b1191de7207d8158.mmd) |
-| 49. Inventário integral — síntese por camadas | [GIF](animated/diagram-5252748b2be4fc04.gif) | [PNG](animated/diagram-5252748b2be4fc04.png) · [SVG](animated/diagram-5252748b2be4fc04.svg) | [Mermaid](animated/diagram-5252748b2be4fc04.mmd) |
+| 46. Inventário integral — síntese por camadas | [GIF](animated/diagram-5252748b2be4fc04.gif) | [PNG](animated/diagram-5252748b2be4fc04.png) · [SVG](animated/diagram-5252748b2be4fc04.svg) | [Mermaid](animated/diagram-5252748b2be4fc04.mmd) |
 
 ## Prévias estáticas e origens
 
@@ -149,11 +147,11 @@ Origens: [README.md](../../README.md) (bloco 7); [docs/architecture/flows/01-pan
 
 ### Orquestração primária e execução CLI
 
-<a href="animated/diagram-740458b3fd23f403.gif"><img src="animated/diagram-740458b3fd23f403.png" alt="Orquestração primária e execução CLI — prévia estática; abrir GIF é opcional" width="100%" loading="lazy"></a>
+<a href="animated/diagram-fca207c4f2853c70.gif"><img src="animated/diagram-fca207c4f2853c70.png" alt="Orquestração primária e execução CLI — prévia estática; abrir GIF é opcional" width="100%" loading="lazy"></a>
 
-[Abrir animação](animated/diagram-740458b3fd23f403.gif) · [SVG ampliável](animated/diagram-740458b3fd23f403.svg) · [Mermaid](animated/diagram-740458b3fd23f403.mmd)
+[Abrir animação](animated/diagram-fca207c4f2853c70.gif) · [SVG ampliável](animated/diagram-fca207c4f2853c70.svg) · [Mermaid](animated/diagram-fca207c4f2853c70.mmd)
 
-Origens: [README.md](../../README.md) (bloco 8).
+Origens: [README.md](../../README.md) (bloco 8); [docs/architecture/flows/02-orquestracao.mmd](../../docs/architecture/flows/02-orquestracao.mmd).
 
 ### Workflow DAG e retomada
 
@@ -173,11 +171,11 @@ Origens: [README.md](../../README.md) (bloco 10); [docs/architecture/flows/04-sd
 
 ### REA e camadas de provedores
 
-<a href="animated/diagram-8a73f62c86a7bfc4.gif"><img src="animated/diagram-8a73f62c86a7bfc4.png" alt="REA e camadas de provedores — prévia estática; abrir GIF é opcional" width="100%" loading="lazy"></a>
+<a href="animated/diagram-5f149863d07e3240.gif"><img src="animated/diagram-5f149863d07e3240.png" alt="REA e camadas de provedores — prévia estática; abrir GIF é opcional" width="100%" loading="lazy"></a>
 
-[Abrir animação](animated/diagram-8a73f62c86a7bfc4.gif) · [SVG ampliável](animated/diagram-8a73f62c86a7bfc4.svg) · [Mermaid](animated/diagram-8a73f62c86a7bfc4.mmd)
+[Abrir animação](animated/diagram-5f149863d07e3240.gif) · [SVG ampliável](animated/diagram-5f149863d07e3240.svg) · [Mermaid](animated/diagram-5f149863d07e3240.mmd)
 
-Origens: [README.md](../../README.md) (bloco 11).
+Origens: [README.md](../../README.md) (bloco 11); [docs/architecture/flows/05-rea-provedores.mmd](../../docs/architecture/flows/05-rea-provedores.mmd).
 
 ### REA local direto e evidência
 
@@ -221,11 +219,11 @@ Origens: [README.md](../../README.md) (bloco 16); [docs/architecture/flows/10-ra
 
 ### Diagnóstico, confiança, federação e evolução
 
-<a href="animated/diagram-3558275afca46564.gif"><img src="animated/diagram-3558275afca46564.png" alt="Diagnóstico, confiança, federação e evolução — prévia estática; abrir GIF é opcional" width="100%" loading="lazy"></a>
+<a href="animated/diagram-b1191de7207d8158.gif"><img src="animated/diagram-b1191de7207d8158.png" alt="Diagnóstico, confiança, federação e evolução — prévia estática; abrir GIF é opcional" width="100%" loading="lazy"></a>
 
-[Abrir animação](animated/diagram-3558275afca46564.gif) · [SVG ampliável](animated/diagram-3558275afca46564.svg) · [Mermaid](animated/diagram-3558275afca46564.mmd)
+[Abrir animação](animated/diagram-b1191de7207d8158.gif) · [SVG ampliável](animated/diagram-b1191de7207d8158.svg) · [Mermaid](animated/diagram-b1191de7207d8158.mmd)
 
-Origens: [README.md](../../README.md) (bloco 17).
+Origens: [README.md](../../README.md) (bloco 17); [docs/architecture/flows/11-diagnostico-governanca.mmd](../../docs/architecture/flows/11-diagnostico-governanca.mmd).
 
 ### Ciência, proveniência e publicação
 
@@ -427,30 +425,6 @@ Origens: [docs/REVISAO_ECOSSISTEMA_R808.md](../../docs/REVISAO_ECOSSISTEMA_R808.
 
 Origens: [docs/WORKFLOWS_R644.md](../../docs/WORKFLOWS_R644.md) (bloco 1).
 
-### Orquestração primária e execução CLI
-
-<a href="animated/diagram-fca207c4f2853c70.gif"><img src="animated/diagram-fca207c4f2853c70.png" alt="Orquestração primária e execução CLI — prévia estática; abrir GIF é opcional" width="100%" loading="lazy"></a>
-
-[Abrir animação](animated/diagram-fca207c4f2853c70.gif) · [SVG ampliável](animated/diagram-fca207c4f2853c70.svg) · [Mermaid](animated/diagram-fca207c4f2853c70.mmd)
-
-Origens: [docs/architecture/flows/02-orquestracao.mmd](../../docs/architecture/flows/02-orquestracao.mmd).
-
-### REA e camadas de provedores
-
-<a href="animated/diagram-5f149863d07e3240.gif"><img src="animated/diagram-5f149863d07e3240.png" alt="REA e camadas de provedores — prévia estática; abrir GIF é opcional" width="100%" loading="lazy"></a>
-
-[Abrir animação](animated/diagram-5f149863d07e3240.gif) · [SVG ampliável](animated/diagram-5f149863d07e3240.svg) · [Mermaid](animated/diagram-5f149863d07e3240.mmd)
-
-Origens: [docs/architecture/flows/05-rea-provedores.mmd](../../docs/architecture/flows/05-rea-provedores.mmd).
-
-### Diagnóstico, confiança, federação e evolução
-
-<a href="animated/diagram-b1191de7207d8158.gif"><img src="animated/diagram-b1191de7207d8158.png" alt="Diagnóstico, confiança, federação e evolução — prévia estática; abrir GIF é opcional" width="100%" loading="lazy"></a>
-
-[Abrir animação](animated/diagram-b1191de7207d8158.gif) · [SVG ampliável](animated/diagram-b1191de7207d8158.svg) · [Mermaid](animated/diagram-b1191de7207d8158.mmd)
-
-Origens: [docs/architecture/flows/11-diagnostico-governanca.mmd](../../docs/architecture/flows/11-diagnostico-governanca.mmd).
-
 ### Inventário integral — síntese por camadas
 
 <a href="animated/diagram-5252748b2be4fc04.gif"><img src="animated/diagram-5252748b2be4fc04.png" alt="Inventário integral — síntese por camadas — prévia estática; abrir GIF é opcional" width="100%" loading="lazy"></a>
@@ -465,5 +439,5 @@ Escopo: Markdown rastreado na raiz e em `docs/`, mais os 22 fluxos
 do catálogo. Fontes duplicadas compartilham bytes e mídia. Históricos
 continuam históricos: animação não atualiza a auditoria R916 nem R808.
 O grafo integral recebe uma **síntese por camadas**, sem suas arestas;
-[707 módulos e relações originais](dependencies.svg) permanecem disponíveis.
+[711 módulos e relações originais](dependencies.svg) permanecem disponíveis.
 Specs, relatórios, fornecedores e livros não são reescritos por esta rodada.

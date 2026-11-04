@@ -1,5 +1,9 @@
 # R1056 — Atlas animado, documentação e vídeo R1055
 
+> **R1057:** a apresentação passou a usar SVG primário e o GIF passou a pulsar
+> todas as arestas na ordem topológica. Este relatório preserva o estado R1056;
+> números, hashes e limites correntes estão em `reports/r1057/README.md`.
+
 - **Status:** verificação local concluída; revisão humana e publicação externa pendentes
 - **Data:** 2026-11-04
 - **Spec:** `specs/SPEC-935-R1056-arquitetura-animada.md`

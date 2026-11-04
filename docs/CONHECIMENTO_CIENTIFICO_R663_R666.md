@@ -3,6 +3,14 @@
 O orquestrador MarceloClaro coordena as novas camadas pela CLI, pelo MCP
 `ecosystem-network` e pelo comando `/ciencia` do OpenCode.
 
+<!-- svg-presentation:diagram-2a9d97dea7a3cd7c -->
+<img src="architecture/animated/diagram-2a9d97dea7a3cd7c.svg" alt="Evolução do conhecimento e pesquisa reproduzível — diagrama estático" width="100%">
+
+<sub>[GIF](architecture/animated/diagram-2a9d97dea7a3cd7c.gif) · [PNG](architecture/animated/diagram-2a9d97dea7a3cd7c.png) · [Fonte Mermaid](architecture/animated/diagram-2a9d97dea7a3cd7c.mmd)</sub>
+
+<details>
+<summary>Fonte Mermaid (auditoria)</summary>
+
 ```mermaid
 flowchart LR
   A[Capacidades e evidências] --> B[DNA estrutural]
@@ -15,6 +23,8 @@ flowchart LR
   H --> I[Artigo, código, RAG e manifesto]
   I --> J[Observação no MetaBus]
 ```
+
+</details>
 
 ## O que mudou
 

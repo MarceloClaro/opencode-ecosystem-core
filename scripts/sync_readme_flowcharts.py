@@ -5,9 +5,11 @@ from __future__ import annotations
 import argparse
 import ast
 import hashlib
+import html
 import json
 import os
 from pathlib import Path, PurePosixPath
+import subprocess
 import sys
 import tempfile
 from urllib.parse import quote
@@ -125,17 +127,90 @@ def refresh_source_anchors(root: Path) -> dict:
             "deleted_paths": len(git.get("deleted_paths", []))}
 
 
+def refresh_current_sources(root: Path) -> dict:
+    """Recalcula âncoras a partir do checkout atual, sem inventário histórico.
+
+    O modo `current` declara explicitamente que os hashes são do worktree, não
+    de um permalink. Arquivos não rastreados, symlinks e símbolos ambíguos são
+    recusados; a escrita é atômica.
+    """
+    root = Path(root).resolve(strict=True)
+    folder = root / "docs/architecture"
+    if folder.is_symlink() or not folder.is_dir() or not folder.resolve(strict=True).is_relative_to(root):
+        raise ValueError("Diretório de arquitetura fora da raiz ou inválido")
+    catalog_path = _inside(root, "docs/architecture/flows.json")
+    catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
+    updated = 0
+    for flow in catalog.get("flows", []):
+        for source in flow.get("sources", []):
+            relative = source.get("path")
+            path = _inside(root, relative)
+            if path.is_symlink() or any(part.is_symlink() for part in path.parents if part != root):
+                raise ValueError(f"Symlink recusado como âncora: {relative}")
+            tracked = subprocess.run(
+                ["git", "-C", str(root), "ls-files", "--error-unmatch", "--", relative],
+                capture_output=True, text=True, check=False)
+            if tracked.returncode:
+                raise ValueError(f"Fonte não rastreada: {relative}")
+            data = path.read_bytes()
+            if path.suffix == ".py" and source.get("symbol"):
+                text = data.decode("utf-8-sig")
+                candidates = _ast_anchors(ast.parse(text, filename=relative))
+                exact = [line for name, line in candidates if name == source["symbol"]]
+                matches = exact or [line for name, line in candidates
+                                    if name.rsplit(".", 1)[-1] == source["symbol"].rsplit(".", 1)[-1]]
+                if len(matches) != 1:
+                    raise ValueError(f"Âncora ausente ou ambígua: {relative}:{source['symbol']}")
+                source["line"] = matches[0]
+            elif type(source.get("line")) is not int or source["line"] < 1:
+                raise ValueError(f"Linha da âncora inválida: {relative}")
+            source["sha256"] = hashlib.sha256(data).hexdigest()
+            source["origin"] = "worktree_tracked"
+            updated += 1
+    head = subprocess.check_output(["git", "-C", str(root), "rev-parse", "HEAD"], text=True).strip()
+    catalog["source"] = {
+        "review": "R1057",
+        "mode": "current",
+        "base_commit": head,
+        "scope": "current tracked worktree sources; hashes and lines recomputed; no execution claim",
+    }
+    payload = json.dumps(catalog, ensure_ascii=False, indent=2) + "\n"
+    descriptor, temporary = tempfile.mkstemp(dir=folder, prefix=".flows-", suffix=".tmp")
+    try:
+        os.chmod(temporary, catalog_path.stat().st_mode & 0o777)
+        with os.fdopen(descriptor, "w", encoding="utf-8") as stream:
+            stream.write(payload)
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary, catalog_path)
+    finally:
+        Path(temporary).unlink(missing_ok=True)
+    return {"updated_anchors": updated, "base_commit": head, "mode": "current"}
+
+
 def render_block(root: Path) -> str:
     catalog = json.loads(_inside(root, "docs/architecture/flows.json").read_text(encoding="utf-8"))
     entries = catalog["flows"]
     if not entries or len({entry["id"] for entry in entries}) != len(entries):
         raise ValueError("Catálogo vazio ou com IDs duplicados.")
     catalog_source = catalog.get("source", {})
-    source_notice = (f"Fontes do checkout atual; base Git `{catalog_source.get('base_commit')}`; "
-        f"identidade worktree `{catalog_source.get('worktree_sha256')}`. "
-        f"{len(catalog_source.get('changed_paths', []))} arquivos rastreados modificados e "
-        f"{len(catalog_source.get('deleted_paths', []))} removidos foram contabilizados; fontes não rastreadas não entram.") \
-        if catalog_source.get("mode") == "worktree" else "Fontes do snapshot Git declarado no catálogo."
+    if catalog_source.get("mode") == "worktree":
+        source_notice = (f"Fontes do checkout atual; base Git `{catalog_source.get('base_commit')}`; "
+            f"identidade worktree `{catalog_source.get('worktree_sha256')}`. "
+            f"{len(catalog_source.get('changed_paths', []))} arquivos rastreados modificados e "
+            f"{len(catalog_source.get('deleted_paths', []))} removidos foram contabilizados; fontes não rastreadas não entram.")
+    elif catalog_source.get("mode") == "current":
+        source_notice = (f"Fontes rastreadas do checkout atual; base Git `{catalog_source.get('base_commit')}`. "
+            "Hashes e linhas foram recalculados no R1057; a apresentação é SVG e a fonte Mermaid fica em auditoria.")
+    else:
+        source_notice = "Fontes do snapshot Git declarado no catálogo."
+    manifest_path = root / "docs/architecture/animated/manifest.json"
+    gif_by_flow = {}
+    if manifest_path.is_file():
+        for row in json.loads(manifest_path.read_text(encoding="utf-8")).get("diagrams", []):
+            for origin in row.get("origins", []):
+                if origin.get("flow_id"):
+                    gif_by_flow[origin["flow_id"]] = row["id"]
     lines = [START, "## Fluxogramas operacionais completos", "",
         "Os fluxogramas abaixo são cópias integrais das mesmas fontes usadas no",
         "[mapa navegável](docs/architecture_map.html). A ordem, as descrições, as fontes",
@@ -174,9 +249,18 @@ def render_block(root: Path) -> str:
         code = source.read_text(encoding="utf-8")
         if "```" in code or not code.endswith("\n"):
             raise ValueError("Fonte deve terminar com newline e não conter cercas Markdown.")
+        title = html.escape(entry["title"], quote=True)
+        gif_link = ""
+        if entry["id"] in gif_by_flow:
+            gif_relative = f"docs/architecture/animated/{gif_by_flow[entry['id']]}.gif"
+            _inside(root, gif_relative)
+            gif_link = f" · [GIF animado]({gif_relative})"
         lines.extend([f"### {number:02d}. {entry['title']}", "", entry["description"], "",
-                      "```mermaid", code + "```", "",
-                      f"[Fonte Mermaid]({relative}) · [Abrir SVG]({svg_relative})", "", "**Fontes de código:**", ""])
+                      f'<img src="{svg_relative}" alt="{title} — diagrama estático" width="100%">', "",
+                      f"[Abrir SVG]({svg_relative}) · [Fonte Mermaid]({relative}){gif_link}", "",
+                      "<details>", "<summary>Fonte Mermaid (auditoria)</summary>", "",
+                      "```mermaid", code + "```", "", "</details>", "",
+                      "**Fontes de código:**", ""])
         for item in entry["sources"]:
             source_path = _inside(root, item["path"])
             if type(item["line"]) is not int or item["line"] < 1:
@@ -241,12 +325,22 @@ def main(argv=None) -> int:
     parser.add_argument("--check", action="store_true")
     parser.add_argument("--refresh-sources", action="store_true",
                         help="Atualiza âncoras a partir do inventário worktree e do manifesto SHA-256.")
+    parser.add_argument("--refresh-current", action="store_true",
+                        help="Recalcula hashes e linhas a partir do checkout atual, sem inventário histórico.")
     args = parser.parse_args(argv)
     try:
-        if args.refresh_sources and args.check:
-            raise ValueError("--refresh-sources não pode ser combinado com --check")
-        refresh = refresh_source_anchors(args.root.resolve(strict=True)) if args.refresh_sources else None
-        equal = synchronize(args.root.resolve(strict=True), args.readme, check=args.check)
+        if (args.refresh_sources or args.refresh_current) and args.check:
+            raise ValueError("Refresh de fontes não pode ser combinado com --check")
+        if args.refresh_sources and args.refresh_current:
+            raise ValueError("Escolha apenas um modo de refresh")
+        root = args.root.resolve(strict=True)
+        if args.refresh_current:
+            refresh = refresh_current_sources(root)
+        elif args.refresh_sources:
+            refresh = refresh_source_anchors(root)
+        else:
+            refresh = None
+        equal = synchronize(root, args.readme, check=args.check)
     except (OSError, ValueError, KeyError, TypeError) as error:
         print(f"Erro de sincronização: {error}", file=sys.stderr)
         return 2

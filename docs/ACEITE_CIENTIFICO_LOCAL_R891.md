@@ -12,6 +12,14 @@ referências, artigo Markdown e manifesto. Antes de devolver uma nova entrega
 como concluída, o primário chama o mesmo verificador R891 disponível na CLI e
 no MCP. Uma revalidação posterior pode conferir novamente o pacote entregue.
 
+<!-- svg-presentation:diagram-1372cc41a353c17e -->
+<img src="architecture/animated/diagram-1372cc41a353c17e.svg" alt="O que foi integrado — diagrama estático" width="100%">
+
+<sub>[GIF](architecture/animated/diagram-1372cc41a353c17e.gif) · [PNG](architecture/animated/diagram-1372cc41a353c17e.png) · [Fonte Mermaid](architecture/animated/diagram-1372cc41a353c17e.mmd)</sub>
+
+<details>
+<summary>Fonte Mermaid (auditoria)</summary>
+
 ```mermaid
 flowchart TD
     U[CLI ciencia ou MCP ecosystem-network] --> O[MarceloClaroOrchestrator]
@@ -30,6 +38,8 @@ flowchart TD
     L --> M
     L --> R[Revisão humana científica e editorial pendente]
 ```
+
+</details>
 
 O pacote recebido nunca fornece o código a executar durante a verificação.
 Mesmo que contenha `reproduce.py`, o verificador usa uma cópia privada do

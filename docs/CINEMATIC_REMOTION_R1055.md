@@ -14,14 +14,13 @@ do projeto.
 [QC/hashes](../reports/r1055/README.md) ·
 [Versão animada do diagrama](architecture/ANIMATED.md).
 
+<!-- svg-presentation:diagram-a5f718c8b3d6d219 -->
+<img src="architecture/animated/diagram-a5f718c8b3d6d219.svg" alt="Pipeline audiovisual R1055 — diagrama estático" width="100%">
+
+<sub>[GIF](architecture/animated/diagram-a5f718c8b3d6d219.gif) · [PNG](architecture/animated/diagram-a5f718c8b3d6d219.png) · [Fonte Mermaid](architecture/animated/diagram-a5f718c8b3d6d219.mmd)</sub>
+
 <details>
-<summary>Reproduzir o pipeline R1055 em GIF (um ciclo)</summary>
-
-![Fluxo documental R1055; não é execução ao vivo](architecture/animated/diagram-a5f718c8b3d6d219.gif)
-
-</details>
-
-[Versão sem movimento](architecture/animated/diagram-a5f718c8b3d6d219.png).
+<summary>Fonte Mermaid (auditoria)</summary>
 
 ```mermaid
 flowchart TB
@@ -39,6 +38,8 @@ flowchart TB
   F --> Q["video_qa.py · frames, áudio e pretos"]
   Q --> H["Revisão humana · não publica automaticamente"]
 ```
+
+</details>
 
 O diagrama documenta a composição do piloto, não uma execução nova. Os MP4
 locais duram 109,73 s; código e recibos estão no commit `c800112d`.

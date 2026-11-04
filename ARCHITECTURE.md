@@ -36,11 +36,12 @@ de CI em vez de tratar números de documentos antigos como estado atual.
 
 ## Atlas atual R916 e fluxos conectados
 
-**Edição visual R1056:** [galeria GIF/PNG/SVG](docs/architecture/ANIMATED.md),
+**Edição visual R1056–R1057:** [galeria SVG/GIF/PNG](docs/architecture/ANIMATED.md),
 [manifesto](docs/architecture/animated/manifest.json) e
 [reprodução](reports/r1056/README.md). Os 22 fluxos e os demais Mermaid
-publicados permanecem editáveis. O destaque animado é guia de leitura de
-relações declaradas, não tráfego, telemetria ou ordem comprovada de execução.
+publicados permanecem editáveis. O SVG é a visualização primária; a fonte
+Mermaid fica em auditoria. O GIF pulsa as arestas na ordem topológica do desenho,
+que é guia de leitura, não tráfego, telemetria ou ordem comprovada de execução.
 
 **Recorte temporal:** o inventário abaixo é o retrato R916, não uma nova
 extração do checkout R1056. As expansões científicas R1051–R1054 e o piloto de
@@ -83,6 +84,14 @@ R879, R900 e R911 permanecem históricos, sem reescrever suas evidências.
 
 ## Visão das camadas
 
+<!-- svg-presentation:diagram-0a347110aad90186 -->
+<img src="docs/architecture/animated/diagram-0a347110aad90186.svg" alt="Visão das camadas — diagrama estático" width="100%">
+
+<sub>[GIF](docs/architecture/animated/diagram-0a347110aad90186.gif) · [PNG](docs/architecture/animated/diagram-0a347110aad90186.png) · [Fonte Mermaid](docs/architecture/animated/diagram-0a347110aad90186.mmd)</sub>
+
+<details>
+<summary>Fonte Mermaid (auditoria)</summary>
+
 ```mermaid
 graph TD
     Usuario[Usuário ou automação] --> CLI[marceloclaro CLI]
@@ -94,10 +103,20 @@ graph TD
     Orquestrador --> MIRA[mira-presenter]
 ```
 
+</details>
+
 ## Diagrama operacional atual
 
 O diagrama abaixo resume o runtime observável sem tentar listar todos os
 arquivos, classes auxiliares ou serviços opcionais do ecossistema.
+
+<!-- svg-presentation:diagram-4c75ee83141913a3 -->
+<img src="docs/architecture/animated/diagram-4c75ee83141913a3.svg" alt="Diagrama operacional atual — diagrama estático" width="100%">
+
+<sub>[GIF](docs/architecture/animated/diagram-4c75ee83141913a3.gif) · [PNG](docs/architecture/animated/diagram-4c75ee83141913a3.png) · [Fonte Mermaid](docs/architecture/animated/diagram-4c75ee83141913a3.mmd)</sub>
+
+<details>
+<summary>Fonte Mermaid (auditoria)</summary>
 
 ```mermaid
 flowchart TB
@@ -115,6 +134,8 @@ flowchart TB
     Mira2 --> Deck2[MiraDeckPipeline]
     Deck2 --> Engine2[MiraEngine]
 ```
+
+</details>
 
 | Camada | Responsabilidade | Referências principais |
 |---|---|---|

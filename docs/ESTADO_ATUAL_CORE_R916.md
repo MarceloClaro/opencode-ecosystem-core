@@ -10,7 +10,7 @@ parecer científico externo ou autorização para operações concretas.
 |---|---|
 | Configuração OpenCode | 312 agentes, 16 MCPs e 33 comandos; padrão `ollama-local/llama3.2` |
 | Doctor após R929 | 21 checks estruturais aprovados, 1 advertência e 0 falhas; `degraded`, `installation_only`. Advertência: 78 entradas históricas preservadas e não modeladas, sem migração inferida |
-| Atlas | 707 módulos Python, 1000 pares e 22 fluxogramas; imports declarados, sem rastreamento de execução |
+| Atlas | 711 módulos Python, 1014 pares e 22 fluxogramas; imports declarados, sem rastreamento de execução |
 | NotebookLM | R915: 0.15.6, 53 ferramentas MCP, 165 callbacks CLI, 234 notebooks na sonda datada; 353 testes selecionados aprovados naquela revisão |
 | Modelos OpenAI | Sondas sintéticas Luna e Sol aceitas no ensaio comum; primeiro ensaio Luna rejeitado por conteúdo |
 | Gemini | CLI 0.61.0 instalado e autorização relatada pelo operador; sonda recusada por `UNSUPPORTED_CLIENT`, sem inferência observada |
@@ -70,7 +70,7 @@ padrão ou credencial foi alterado nesta revisão.
 
 ## Origem e leitura do atlas
 
-Base Git `d02817ca460ee6411761a8a3f0b82d17dafd2740`; identidade das fontes locais `d53ac4511f757431da55589db0e6a0fcde2daebdb2b20303611d45882b7ab6b5`.
+Base Git `b7f5683f84609a5e957a56af4ca090c905f5ab80`; identidade das fontes locais `1a170ef08b78071c65b55ee5cc0bb4821d77622b8326d018835dbf4a27d6ec7a`.
 
 O manifesto registra 28 fontes modificadas e
 52 caminhos removidos da base; o inventário contém

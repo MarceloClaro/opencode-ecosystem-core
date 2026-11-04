@@ -13,6 +13,14 @@ aplicações JavaScript por `ecosystem_rea`, `/rea` e pela CLI. O servidor REA
 completo permanece registrado. A sessão real anunciou **170 ferramentas e
 6 prompts**; isso não implica disponibilidade dos providers nativos.
 
+<!-- svg-presentation:diagram-88e2b4838b9045f6 -->
+<img src="architecture/animated/diagram-88e2b4838b9045f6.svg" alt="Resultado entregue — diagrama estático" width="100%">
+
+<sub>[GIF](architecture/animated/diagram-88e2b4838b9045f6.gif) · [PNG](architecture/animated/diagram-88e2b4838b9045f6.png) · [Fonte Mermaid](architecture/animated/diagram-88e2b4838b9045f6.mmd)</sub>
+
+<details>
+<summary>Fonte Mermaid (auditoria)</summary>
+
 ```mermaid
 flowchart LR
     A[OpenCode: /rea] --> B[ecosystem_rea]
@@ -23,6 +31,8 @@ flowchart LR
     B --> G[Evidence integral: arquivo e SHA-256]
     B --> H[Resumo para contexto finito]
 ```
+
+</details>
 
 O adaptador não executa JavaScript do alvo. Falhas de protocolo, prazo,
 `isError`, erros estruturados e identidades de sessão ausentes não concluem

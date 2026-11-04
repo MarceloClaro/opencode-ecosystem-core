@@ -33,6 +33,14 @@ Fonte: [autenticação oficial OpenAI](https://learn.chatgpt.com/docs/auth).
 O suporte específico do OpenCode foi observado na instalação local, não
 certificado pela documentação da OpenAI.
 
+<!-- svg-presentation:diagram-81a3f5bb1dc6f17f -->
+<img src="architecture/animated/diagram-81a3f5bb1dc6f17f.svg" alt="ChatGPT pelo OpenCode — diagrama estático" width="100%">
+
+<sub>[GIF](architecture/animated/diagram-81a3f5bb1dc6f17f.gif) · [PNG](architecture/animated/diagram-81a3f5bb1dc6f17f.png) · [Fonte Mermaid](architecture/animated/diagram-81a3f5bb1dc6f17f.mmd)</sub>
+
+<details>
+<summary>Fonte Mermaid (auditoria)</summary>
+
 ```mermaid
 flowchart LR
     U[Operador] --> O[OpenCode no WSL]
@@ -45,6 +53,8 @@ flowchart LR
     S --> N
     N --> D[Notebooks e fontes no serviço Google]
 ```
+
+</details>
 
 Os ramos representam autenticações diferentes. O ramo Google fornece pesquisa
 com fontes; não transforma NotebookLM em provedor padrão dos modelos OpenAI.

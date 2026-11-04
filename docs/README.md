@@ -24,7 +24,7 @@ não precise adivinhar onde está a verdade, a especificação ou o limite.
 
 | Você quer… | Comece por… | Depois veja… |
 |---|---|---|
-| Instalar e rodar o Core | [README § Comece em 5 minutos](../README.md#comece-em-5-minutos) | [Instalador](../installer/README.md), [Manual](../MANUAL.md) |
+| Instalar e rodar o Core | [README § Início rápido local](../README.md#início-rápido-local) | [Instalador](../installer/README.md), [Manual](../MANUAL.md) |
 | Entender a arquitetura | [ARCHITECTURE.md](../ARCHITECTURE.md) | [Guia R916](ARQUITETURA_COMPLETA_CORE_R916.md), [Atlas](architecture_map.html) |
 | Pesquisar um tema e chegar a um artigo | [Pipeline R1054](SCIENTIFIC_RESEARCH_PIPELINE_R1054.md) | [Spec R1054](../specs/SPEC-1054-automacao-assistida-validacao-real.md), [Relatório](../reports/r1054/README.md) |
 | Auditar claims e evidências | [R1054](../reports/r1054/README.md) | [Gate metacognitivo](../mci/metacognitive_gate.py), [CORRIGENDUM](../CORRIGENDUM.md) |
@@ -91,7 +91,7 @@ não precise adivinhar onde está a verdade, a especificação ou o limite.
 | Slide/palco com cartão | [R1050](../reports/r1050/CARD-STAGE.md) |
 | Qubit 16:9 e vertical nativo | [Piloto R1055](../pilots/r1055-qubit/README.md), [QC e hashes](../reports/r1055/README.md) |
 | Câmera, mapa e narração por batida | [R1055](CINEMATIC_REMOTION_R1055.md), [roteiro](../pilots/r1055-qubit/SCRIPT.md), [créditos](../pilots/r1055-qubit/REFERENCES.md) |
-| GIFs de arquitetura e fluxos | [Galeria R1056](architecture/ANIMATED.md), [geração e testes](../reports/r1056/README.md) |
+| GIFs de arquitetura e fluxos | [Galeria R1056–R1057](architecture/ANIMATED.md), [geração e testes](../reports/r1057/README.md) |
 | Remotion auditável | [Skill](../.opencode/skills/remotion-auditavel/SKILL.md), [Composição](../editor-workspace/remotion-smoke/src/r1047-slide/R1047Stage.tsx) |
 | Catálogo de ferramentas | [R1043](VIDEO_EDITOR_TOOLCHAIN_R1043.md), [toolchain](../reports/r1043/toolchain.json) |
 
@@ -149,6 +149,14 @@ GitHub; ele fica disponível como [raw para renderização local](https://raw.gi
 Para uma visão que o GitHub renderiza, use o bloco abaixo ou o
 [SVG curado](architecture/curated-overview.svg).
 
+<!-- svg-presentation:diagram-e19b5e3314e41476 -->
+<img src="architecture/animated/diagram-e19b5e3314e41476.svg" alt="Arquitetura em 60 segundos — diagrama estático" width="100%">
+
+<sub>[GIF](architecture/animated/diagram-e19b5e3314e41476.gif) · [PNG](architecture/animated/diagram-e19b5e3314e41476.png) · [Fonte Mermaid](architecture/animated/diagram-e19b5e3314e41476.mmd)</sub>
+
+<details>
+<summary>Fonte Mermaid (auditoria)</summary>
+
 ```mermaid
 flowchart TB
     U["CLI / OpenCode / MCP / Streamlit"] --> O["MarceloClaro Orchestrator"]
@@ -166,6 +174,8 @@ flowchart TB
     E --> Gate
 ```
 
+</details>
+
 > **Regra:** diagramas grandes são evidência de inventário, não prova de
 > execução. O SVG e a página offline são as fontes de leitura; o `.mmd` integral
 > é matéria-prima para renderização local.
@@ -174,7 +184,8 @@ flowchart TB
 
 - [Todos os diagramas do escopo em GIF/PNG/SVG/Mermaid](architecture/ANIMATED.md)
 - [Manifesto de cobertura e hashes](architecture/animated/manifest.json)
-- [Reprodução local e limites R1056](../reports/r1056/README.md)
+- [Reprodução local e limites R1057](../reports/r1057/README.md)
+- SVG é a visualização primária; a fonte Mermaid fica em `<details>` de auditoria.
 - [Atlas offline](architecture_map.html)
 - [Mapa curado](architecture/curated-overview.svg)
 - [Dependências Mermaid — raw 2,4 MB](https://raw.githubusercontent.com/MarceloClaro/opencode-ecosystem-core/main/docs/architecture/dependencies.mmd)

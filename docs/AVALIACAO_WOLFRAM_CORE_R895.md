@@ -162,6 +162,14 @@ serviços de dados precisam permanecer identificados por operação.
 
 ## 4. Fluxo recomendado dentro da arquitetura existente
 
+<!-- svg-presentation:diagram-bf3f77a82c45ea0f -->
+<img src="architecture/animated/diagram-bf3f77a82c45ea0f.svg" alt="Fluxo recomendado dentro da arquitetura existente — diagrama estático" width="100%">
+
+<sub>[GIF](architecture/animated/diagram-bf3f77a82c45ea0f.gif) · [PNG](architecture/animated/diagram-bf3f77a82c45ea0f.png) · [Fonte Mermaid](architecture/animated/diagram-bf3f77a82c45ea0f.mmd)</sub>
+
+<details>
+<summary>Fonte Mermaid (auditoria)</summary>
+
 ```mermaid
 flowchart TD
     U[Usuário ou agente autorizado] --> P[MarceloClaroOrchestrator]
@@ -182,6 +190,8 @@ flowchart TD
     C -->|não| A[Explicação ao usuário com alcance explícito]
     S --> A
 ```
+
+</details>
 
 Setas contínuas mostram o encaixe nas interfaces presentes; setas tracejadas
 marcam uma implementação local proposta. O desenho não declara que todas as

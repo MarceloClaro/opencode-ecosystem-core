@@ -28,6 +28,7 @@ RENDERER = 'scripts/render_mermaid_animation.cjs'
 FENCE = re.compile(r'^```mermaid[^\S\n]*\n(.*?)^```[^\S\n]*$', re.M | re.S)
 W, H, FRAMES, STEP_MS = 1280, 800, 80, 100
 OUT_W, OUT_H = 1080, 675
+PULSE_FRAMES = 10
 BG, INK, MUTED, ACCENT = '#0b1220', '#edf5ff', '#b4c8de', '#5eead4'
 BG_RGB = (11, 18, 32)
 FONT = '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'
@@ -126,6 +127,73 @@ def _interpolate(a: dict, b: dict, t: float) -> dict:
     return {k: a[k] + (b[k] - a[k]) * t for k in ('left', 'top', 'width', 'height')}
 
 
+def node_sequence(geometry: dict) -> list[str]:
+    """Ordem de leitura estável para diagramas sem arestas."""
+    seen, labels = set(), []
+    for node in geometry.get('nodes', []):
+        label = node.get('label', '')
+        if label and label not in seen:
+            seen.add(label)
+            labels.append(label)
+    return sorted(labels, key=lambda label: (
+        next(n.get('y', 0) for n in geometry['nodes'] if n.get('label') == label),
+        next(n.get('x', 0) for n in geometry['nodes'] if n.get('label') == label),
+        label))
+
+
+def process_order(geometry: dict) -> list[dict]:
+    """Arestas em ordem topológica; ciclos são quebrados por posição.
+
+    O resultado é uma ordem de leitura declarada, não uma execução observada.
+    """
+    import heapq
+
+    nodes = {}
+    for node in geometry.get('nodes', []):
+        label = node.get('label', '')
+        if label and label not in nodes:
+            nodes[label] = (float(node.get('y', 0)), float(node.get('x', 0)), label)
+    incoming = {label: set() for label in nodes}
+    outgoing = {label: set() for label in nodes}
+    edges = [edge for edge in geometry.get('edges', []) if len(edge.get('points', [])) > 1]
+    for index, edge in enumerate(edges):
+        edge['_index'] = index
+        source, target = edge.get('from_label', ''), edge.get('to_label', '')
+        if source in nodes and target in nodes:
+            incoming[target].add(edge['id'])
+            outgoing[source].add(edge['id'])
+    available = [(nodes[label][0], nodes[label][1], label) for label in nodes if not incoming[label]]
+    heapq.heapify(available)
+    order, placed = [], set()
+    while len(order) < len(nodes):
+        while available and available[0][2] in placed:
+            heapq.heappop(available)
+        if not available:
+            # Ciclo: escolhe o nó restante de menor posição e continua.
+            remaining = [(nodes[label][0], nodes[label][1], label) for label in nodes if label not in placed]
+            heapq.heapify(remaining)
+            _, _, label = heapq.heappop(remaining)
+        else:
+            _, _, label = heapq.heappop(available)
+        if label in placed:
+            continue
+        placed.add(label)
+        order.append(label)
+        for edge_id in list(outgoing[label]):
+            edge = next(item for item in edges if item['id'] == edge_id)
+            target = edge.get('to_label', '')
+            incoming[target].discard(edge_id)
+            if target not in placed and not incoming[target]:
+                heapq.heappush(available, (nodes[target][0], nodes[target][1], target))
+    position = {label: index for index, label in enumerate(order)}
+    unknown = len(order) + 1
+    return sorted(edges, key=lambda edge: (
+        max(position.get(edge.get('from_label'), unknown), position.get(edge.get('to_label'), unknown)),
+        position.get(edge.get('from_label'), unknown),
+        position.get(edge.get('to_label'), unknown),
+        edge.get('_index', 0)))
+
+
 def discover(root: Path, paths: list[str] | None = None, *, catalog: bool = True) -> list[dict]:
     """Identidade pelo código integral; títulos não alteram deduplicação."""
     found: dict[str, dict] = {}
@@ -215,100 +283,129 @@ def _crop_view(image: Image.Image, geometry: dict, window: dict) -> Image.Image:
     return canvas
 
 
-def _highlight(draw: ImageDraw.ImageDraw, edge: dict, geometry: dict, window: dict, alpha: float):
-    if alpha <= 0:
-        return
+def _project(point, window: dict) -> tuple[float, float]:
+    x = (point[0] - window['left']) / window['width'] * PANEL_W + PANEL_LEFT
+    y = (point[1] - window['top']) / window['height'] * PANEL_H + PANEL_TOP
+    return (x, y)
 
-    def project(point):
-        x = (point[0] - window['left']) / window['width'] * PANEL_W + PANEL_LEFT
-        y = (point[1] - window['top']) / window['height'] * PANEL_H + PANEL_TOP
-        return (x, y)
 
-    points = [project(p) for p in edge['points']]
-    color = tuple(round(a * alpha + b * (1 - alpha)) for a, b in zip((94, 234, 212), (26, 46, 64)))
-    draw.line(points, fill=color, width=max(2, round(3 * min(1.5, alpha))))
-    head = points[len(points) // 2]
-    radius = 5 + 2 * alpha
-    draw.ellipse((head[0] - radius, head[1] - radius, head[0] + radius, head[1] + radius),
-                 fill=tuple(round(a * alpha + b * (1 - alpha)) for a, b in zip((94, 234, 212), BG_RGB)),
-                 outline=INK)
+def _point_at(points: list, phase: float) -> tuple[float, float]:
+    phase = min(1.0, max(0.0, phase))
+    position = phase * (len(points) - 1)
+    index = min(len(points) - 1, int(position))
+    if index >= len(points) - 1:
+        return tuple(points[-1])
+    fraction = position - index
+    a, b = points[index], points[index + 1]
+    return (a[0] + (b[0] - a[0]) * fraction,
+            a[1] + (b[1] - a[1]) * fraction)
+
+
+def _pulse_overlay(geometry: dict, window: dict, order: list[dict], frame: int,
+                   stagger: float) -> tuple[Image.Image, dict | None]:
+    overlay = Image.new('RGBA', (W, H), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(overlay)
+    active = None
+    for index, edge in enumerate(order):
+        start = index * stagger
+        phase = (frame - start) / PULSE_FRAMES
+        if not 0 <= phase <= 1:
+            continue
+        active = edge
+        points = [_project(point, window) for point in edge['points']]
+        head = _point_at(points, phase)
+        trail_phase = [max(0.0, phase - step) for step in (0.0, 0.03, 0.06)]
+        trail_points = [_point_at(points, value) for value in trail_phase]
+        for back in range(len(trail_points) - 1):
+            alpha = int(70 * (1 - back / len(trail_points)))
+            draw.line([trail_points[back], trail_points[back + 1]],
+                      fill=(94, 234, 212, alpha), width=max(2, 3 - back))
+        radius = 6
+        draw.ellipse((head[0] - radius, head[1] - radius, head[0] + radius, head[1] + radius),
+                     fill=(94, 234, 212, 30))
+        draw.ellipse((head[0] - 3.5, head[1] - 3.5, head[0] + 3.5, head[1] + 3.5),
+                     fill=(94, 234, 212, 235), outline=(237, 245, 255, 255))
+    return overlay, active
+
+
+def _node_overlay(geometry: dict, window: dict, sequence: list[str], frame: int) -> tuple[Image.Image, str | None]:
+    overlay = Image.new('RGBA', (W, H), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(overlay)
+    if not sequence:
+        return overlay, None
+    slot = min(len(sequence) - 1, int(frame / FRAMES * len(sequence)))
+    label = sequence[slot]
+    node = next((item for item in geometry.get('nodes', []) if item.get('label') == label), None)
+    if node is None:
+        return overlay, None
+    phase = (frame / FRAMES * len(sequence)) % 1
+    strength = 1 - abs(phase - 0.5) * 2
+    half_w = min(260.0, max(90.0, geometry['width'] / 3.2)) / 2
+    half_h = min(90.0, max(36.0, geometry['height'] / 12)) / 2
+    left, top = _project((node['x'] - half_w, node['y'] - half_h), window)
+    right, bottom = _project((node['x'] + half_w, node['y'] + half_h), window)
+    draw.rounded_rectangle((left, top, right, bottom), radius=14,
+                           fill=(94, 234, 212, int(20 + 35 * strength)),
+                           outline=(94, 234, 212, int(150 + 80 * strength)), width=3)
+    return overlay, label
 
 
 def animate(item: dict, folder: Path) -> dict:
-    """Câmera percorre arestas reais do desenho; não inventa execução."""
+    """Pulso percorre todas as arestas na ordem topológica; não inventa execução."""
     stem = folder / item['id']
     geom = json.loads(stem.with_suffix('.geometry.json').read_text())
     with Image.open(stem.with_suffix('.render.png')) as im:
         image = im.convert('RGB')
     edges = [e for e in geom.get('edges', []) if len(e['points']) > 1]
-    nodes = geom.get('nodes', [])
-    # Quatro batidas distribuídas; a câmera enquadra o nó de destino da aresta.
-    beats = [edges[round(i * (len(edges) - 1) / 3)] for i in range(4)] if len(edges) >= 4 else edges[:]
-    by_label = {node['label']: node for node in nodes}
+    order = process_order(geom)
+    sequence = node_sequence(geom)
+    count = len(order)
+    stagger = (FRAMES - PULSE_FRAMES) / max(1, count - 1) if count else 0
     overview = camera_window(geom, [], aspect=PANEL_W / PANEL_H)
-    windows = []
-    for edge in beats:
-        target = by_label.get(edge.get('to_label'))
-        source = by_label.get(edge.get('from_label'))
-        if target:
-            center = (target['x'], target['y'])
-            if source:
-                center = (center[0] * 0.82 + source['x'] * 0.18,
-                          center[1] * 0.82 + source['y'] * 0.18)
-        else:
-            center = tuple(edge['points'][-1])
-        windows.append(camera_center(geom, center, aspect=PANEL_W / PANEL_H,
-                                     zoom=min(2.8, max(1.35, geom['width'] / 760))))
-    # Linha do tempo: visão completa, quatro batidas e retorno. Sem movimento eterno.
-    def state(frame: int):
-        if not beats:
-            t = frame / (FRAMES - 1)
-            breath = _interpolate(overview, {**overview, 'width': overview['width'] * 0.965,
-                                             'height': overview['height'] * 0.965,
-                                             'left': overview['left'] + overview['width'] * 0.0175,
-                                             'top': overview['top'] + overview['height'] * 0.0175}, t * 0.35)
-            return breath, None, 0.0
-        if frame < 8:
-            return overview, None, 0.0
-        if frame >= 64:
-            if frame >= 70:
-                return overview, None, 0.0
-            return _interpolate(windows[-1], overview, (frame - 64) / 6), beats[-1], max(0.0, 1 - (frame - 64) / 6)
-        slot = (frame - 8) // 14
-        local = (frame - 8) % 14
-        if slot >= len(beats):
-            return overview, None, 0.0
-        if local < 6:
-            previous = overview if slot == 0 else windows[slot - 1]
-            window = _interpolate(previous, windows[slot], local / 6)
-            return window, beats[slot], local / 6
-        return windows[slot], beats[slot], 1.0
+    peak = 1.0
+
+    def camera(frame: int) -> dict:
+        t = frame / (FRAMES - 1)
+        zoom = 1 + (peak - 1) * math.sin(math.pi * t)
+        width, height = overview['width'] / zoom, overview['height'] / zoom
+        return {'left': overview['left'] + (overview['width'] - width) / 2,
+                'top': overview['top'] + (overview['height'] - height) / 2,
+                'width': width, 'height': height, 'zoom': zoom}
 
     frames = []
     for frame in range(FRAMES):
-        window, edge, alpha = state(frame)
-        window['zoom'] = geom['width'] / window['width']
+        window = camera(frame)
         out = Image.new('RGB', (W, H), BG)
         out.paste(_crop_view(image, geom, window), (PANEL_LEFT, PANEL_TOP))
         d = ImageDraw.Draw(out)
         d.text((44, 24), 'OPENCODE CORE   /   ATLAS ANIMADO', font=_font(15, True), fill=ACCENT)
         title = _wrap(d, item['title'], 1192, _font(27, True), lines=2)
         d.multiline_text((44, 53), title, font=_font(27, True), fill=INK, spacing=2)
-        if edge is not None:
-            _highlight(d, edge, geom, window, alpha)
+        active = None
+        if count:
+            overlay, active = _pulse_overlay(geom, window, order, frame, stagger)
+            out = Image.alpha_composite(out.convert('RGBA'), overlay).convert('RGB')
+        else:
+            overlay, active = _node_overlay(geom, window, sequence, frame)
+            out = Image.alpha_composite(out.convert('RGBA'), overlay).convert('RGB')
+        d = ImageDraw.Draw(out)
         d.line((44, 640, 1236, 640), fill='#29405b', width=1)
-        if edge is not None:
-            beat = beats.index(edge) + 1
-            d.text((44, 660), f'CÂMERA NA RELAÇÃO  {beat}/{len(beats)}  · zoom {window["zoom"]:.1f}×',
+        if count:
+            index = min(count - 1, max(0, int(frame / max(stagger, 1e-6))))
+            current = order[index]
+            caption = current.get('label', '').strip()
+            pair = (current.get('from_label', '') + '  →  ' + current.get('to_label', '')).strip(' →')
+            d.text((44, 660), f'PULSO NA ORDEM DO PROCESSO  {index + 1}/{count}',
                    font=_font(14, True), fill=ACCENT)
-            caption = edge.get('label', '').strip()
-            pair = (edge.get('from_label', '') + '  →  ' + edge.get('to_label', '')).strip(' →')
-            if not pair:
-                pair = 'Aresta declarada no diagrama · consulte os rótulos no SVG'
             text = pair + ('  [' + caption + ']' if caption else '')
+        elif sequence:
+            slot = min(len(sequence) - 1, int(frame / FRAMES * len(sequence)))
+            d.text((44, 660), f'NÓS EM SEQUÊNCIA  {slot + 1}/{len(sequence)}',
+                   font=_font(14, True), fill=ACCENT)
+            text = f'{sequence[slot]} · destaque de leitura; não é execução.'
         else:
             d.text((44, 660), 'VISÃO COMPLETA  ·  fonte preservada', font=_font(14, True), fill=ACCENT)
-            text = f"{len(nodes)} nós visuais · {len(edges)} arestas · GIF de 8 s, um ciclo. Abra o SVG para ampliar."
+            text = f"{len(geom.get('nodes', []))} nós visuais · GIF de 8 s, um ciclo. Abra o SVG para ampliar."
         d.multiline_text((44, 690), _wrap(d, text, 1192, _font(19), lines=2), font=_font(19), fill=INK, spacing=4)
         d.rectangle((44, 741, 44 + (W - 88) * frame / (FRAMES - 1), 744), fill=ACCENT)
         d.text((44, 757), 'Guia de leitura · não representa execução real · fonte e SVG completos na galeria',
@@ -325,8 +422,8 @@ def animate(item: dict, folder: Path) -> dict:
     stats = inspect_gif(path)
     if stats['duration_ms'] != FRAMES * STEP_MS:
         raise ValueError('Duração codificada diverge do plano')
-    stats['zoom_min'] = round(min(w['zoom'] for w in windows), 3) if windows else 1.0
-    stats['zoom_max'] = round(max(w['zoom'] for w in windows), 3) if windows else 1.0
+    stats['pulse_edges'] = count
+    stats['pulse_span_frames'] = round(PULSE_FRAMES + max(0, count - 1) * stagger, 2)
     return stats
 
 
@@ -336,15 +433,16 @@ def _artifact(root, path):
 
 
 def gallery(items: list[dict]) -> str:
-    lines = ['# Atlas animado de arquitetura e fluxos — R1056', '',
+    lines = ['# Atlas animado de arquitetura e fluxos — R1056–R1057', '',
              'Todos os diagramas do escopo têm GIF, PNG, SVG e Mermaid editável.',
-             'A animação destaca relações existentes como **guia de leitura**, não',
-             'como telemetria, execução observada ou sequência temporal comprovada.', '',
+             'A animação percorre as arestas na ordem topológica do desenho e destaca',
+             'os nós sem arestas em sequência. É **guia de leitura**, não telemetria,',
+             'execução observada ou garantia de que o caminho ocorra.', '',
              '**Acessibilidade:** a visualização padrão é estática. Abra o GIF apenas',
              'quando desejar movimento; ele executa um ciclo de 8 s, sem repetição',
              'infinita. Para repetir, recarregue o arquivo. Amplie o SVG para ler grafos densos.', '',
              '[README](../../README.md) · [Arquitetura](../../ARCHITECTURE.md) ·',
-             '[Manifesto e hashes](animated/manifest.json) · [Reprodução](../../reports/r1056/README.md)', '',
+             '[Manifesto e hashes](animated/manifest.json) · [Reprodução](../../reports/r1057/README.md)', '',
              '## Cobertura', '',
              '| Vista | Animação | Sem movimento | Fonte |', '|---|---|---|---|']
     for i, item in enumerate(items, 1):
@@ -364,7 +462,7 @@ def gallery(items: list[dict]) -> str:
               'do catálogo. Fontes duplicadas compartilham bytes e mídia. Históricos',
               'continuam históricos: animação não atualiza a auditoria R916 nem R808.',
               'O grafo integral recebe uma **síntese por camadas**, sem suas arestas;',
-              '[707 módulos e relações originais](dependencies.svg) permanecem disponíveis.',
+              '[711 módulos e relações originais](dependencies.svg) permanecem disponíveis.',
               'Specs, relatórios, fornecedores e livros não são reescritos por esta rodada.', '']
     return '\n'.join(lines)
 
@@ -409,6 +507,8 @@ def _row(root: Path, item: dict, folder: Path) -> dict:
     row['gif'] = stats
     row['camera'] = {'zoom_min': item.get('zoom_min', 1.0),
                      'zoom_max': item.get('zoom_max', 1.0)}
+    row['pulse'] = {'edges': item.get('pulse_edges'),
+                    'span_frames': item.get('pulse_span_frames')}
     row['artifacts'] = {ext: _artifact(root, folder / (item['id'] + '.' + ext))
                         for ext in ['mmd', 'svg', 'png', 'gif']}
     return row
@@ -425,7 +525,8 @@ def _prune(folder: Path, items: list[dict]) -> None:
 
 
 def _write_manifest(root: Path, items: list[dict], output: list[dict]) -> dict:
-    manifest = {'version': 1, 'spec': 'SPEC-935-R1056', 'animation': 'reading_guide_not_execution',
+    manifest = {'version': 2, 'spec': 'SPEC-935-R1057',
+                'animation': 'process_pulse_reading_guide_not_execution',
                 'generator': _artifact(root, root / 'scripts/animate_architecture.py'),
                 'renderer': _artifact(root, root / RENDERER),
                 'pillow_version': pillow_version,
@@ -455,6 +556,7 @@ def build(root: Path, *, only: str | None = None):
     for item in selected:
         stats = animate(item, folder)
         item['zoom_min'], item['zoom_max'] = stats.get('zoom_min', 1.0), stats.get('zoom_max', 1.0)
+        item['pulse_edges'], item['pulse_span_frames'] = stats.get('pulse_edges'), stats.get('pulse_span_frames')
         row = _row(root, item, folder)
         output.append(row)
         print(json.dumps({'rendered': item['id'], 'bytes': row['artifacts']['gif']['bytes']}), flush=True)
@@ -479,6 +581,14 @@ def manifest_only(root: Path):
                 'zoom_max': row.get('gif', {}).get('zoom_max', 1.0)}
     for item in items:
         item.update(old_camera.get(item['id'], {}))
+        geometry_path = folder / (item['id'] + '.geometry.json')
+        if geometry_path.is_file():
+            geom = json.loads(geometry_path.read_text(encoding='utf-8'))
+            count = len(process_order(geom))
+            item['pulse_edges'] = count
+            item['pulse_span_frames'] = round(
+                PULSE_FRAMES + max(0, count - 1) * ((FRAMES - PULSE_FRAMES) / max(1, count - 1)), 2
+            ) if count else 0
     _prune(folder, items)
     output = [_row(root, item, folder) for item in items]
     print(json.dumps(_write_manifest(root, items, output), ensure_ascii=False))
@@ -493,6 +603,7 @@ def reanimate(root: Path):
     for item in items:
         stats = animate(item, folder)
         item['zoom_min'], item['zoom_max'] = stats.get('zoom_min', 1.0), stats.get('zoom_max', 1.0)
+        item['pulse_edges'], item['pulse_span_frames'] = stats.get('pulse_edges'), stats.get('pulse_span_frames')
         output.append(_row(root, item, folder))
         print(json.dumps({'reanimated': item['id'], 'bytes': output[-1]['artifacts']['gif']['bytes']}), flush=True)
     _prune(folder, items)

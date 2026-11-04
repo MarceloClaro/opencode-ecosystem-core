@@ -67,15 +67,20 @@ No OpenCode, use `/runtime-cientifico`, `/datasets` e `/plugins-cientificos`.
 
 ### Mapas animados e vídeo didático
 
-- Consulte a [galeria R1056](docs/architecture/ANIMATED.md): cada diagrama tem
-  GIF opcional, PNG sem movimento, SVG ampliável e fonte Mermaid. O GIF
-  executa um ciclo de 8 s; movimento não representa execução real.
+- Consulte a [galeria R1056–R1057](docs/architecture/ANIMATED.md): cada diagrama
+  tem SVG como visual primário, PNG sem movimento, GIF opcional e fonte Mermaid.
+  O GIF executa um ciclo de 8 s e pulsa as arestas na ordem topológica do desenho;
+  movimento não representa execução real.
 - `python3 scripts/animate_architecture.py --check` confere cobertura e hashes
   sem escrever arquivos nem abrir navegador.
 - `python3 scripts/animate_architecture.py --inventory` lista as fontes.
+- `python3 scripts/svgify_markdown.py --check` confere se cada bloco Mermaid
+  visível foi substituído por SVG e se a fonte auditável continua presente.
+- `python3 scripts/sync_readme_flowcharts.py --refresh-current` recalcula
+  hashes e linhas do catálogo a partir do checkout atual.
 - Para gerar, use `python3 scripts/animate_architecture.py` com Mermaid,
   Puppeteer, Chromium e Pillow **já instalados**. Nenhum pacote é instalado
-  pelo exportador. [Ambiente e limites](reports/r1056/README.md).
+  pelo exportador. [Ambiente e limites](reports/r1057/README.md).
 - O [piloto R1055](pilots/r1055-qubit/README.md) tem arquivos MP4 locais em
   `pilots/r1055-qubit/out/`, não disponíveis num clone Git novo. Consulte
   [QC/hashes](reports/r1055/README.md) antes de revisar ou distribuir.
