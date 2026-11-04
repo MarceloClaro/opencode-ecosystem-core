@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/research-project-manifest.schema.json",
+  "title": "ResearchProjectManifest R1051",
+  "type": "object",
+  "required": [
+    "schema_version", "project_id", "pipeline_version", "theme", "question",
+    "question_status", "created_at", "updated_at", "mode", "status",
+    "budget", "stages", "counts", "audit", "artifacts", "integrity",
+    "policy", "limitations"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "project_id": {"type": "string", "pattern": "^RP-[a-f0-9]{8}$"},
+    "pipeline_version": {"const": "R1051"},
+    "theme": {"type": "string", "minLength": 3},
+    "question": {"type": "string", "minLength": 5},
+    "question_status": {"enum": ["explicit", "provisional_from_theme"]},
+    "created_at": {"type": "string", "format": "date-time"},
+    "updated_at": {"type": "string", "format": "date-time"},
+    "mode": {"enum": ["dry_run", "executed"]},
+    "status": {
+      "enum": [
+        "planned", "in_progress", "blocked", "partial",
+        "completed_pending_external_validation"
+      ]
+    },
+    "corpus_used": {"type": "boolean"},
+    "budget": {"type": "object"},
+    "stages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "status"],
+        "properties": {
+          "id": {"type": "string"},
+          "status": {"type": "string"}
+        },
+        "additionalProperties": true
+      }
+    },
+    "counts": {
+      "type": "object",
+      "required": [
+        "records_retrieved", "unique_studies", "duplicates_removed",
+        "with_abstract", "claims", "blocked_claims", "corpus_claims",
+        "references", "gaps"
+      ],
+      "properties": {
+        "records_retrieved": {"type": "integer", "minimum": 0},
+        "unique_studies": {"type": "integer", "minimum": 0},
+        "duplicates_removed": {"type": "integer", "minimum": 0},
+        "with_abstract": {"type": "integer", "minimum": 0},
+        "claims": {"type": "integer", "minimum": 0},
+        "blocked_claims": {"type": "integer", "minimum": 0},
+        "corpus_claims": {"type": "integer", "minimum": 0},
+        "references": {"type": "integer", "minimum": 0},
+        "gaps": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "audit": {
+      "type": "object",
+      "required": ["status", "path"],
+      "properties": {
+        "status": {"type": "string"},
+        "path": {"const": "05_audit/audit-report.json"}
+      },
+      "additionalProperties": true
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "sha256", "bytes"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "bytes": {"type": "integer", "minimum": 0}
+        },
+        "additionalProperties": false
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "required": ["status", "checked", "algorithm"],
+      "properties": {
+        "status": {"enum": ["pass", "fail"]},
+        "checked": {"type": "integer", "minimum": 0},
+        "algorithm": {"const": "sha256"},
+        "failures": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": true
+    },
+    "policy": {
+      "type": "object",
+      "required": [
+        "truth_claim", "external_validation", "human_review_required",
+        "no_fabrication", "untrusted_api_data", "publication",
+        "pdf_downloads", "credentials_used"
+      ],
+      "properties": {
+        "truth_claim": {"const": false},
+        "external_validation": {"const": false},
+        "human_review_required": {"const": true},
+        "no_fabrication": {"const": true},
+        "untrusted_api_data": {"const": true},
+        "publication": {"const": "not_performed"},
+        "pdf_downloads": {"const": 0},
+        "credentials_used": {"const": false}
+      },
+      "additionalProperties": false
+    },
+    "limitations": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}

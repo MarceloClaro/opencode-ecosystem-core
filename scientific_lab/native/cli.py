@@ -7,7 +7,15 @@ def _research(argv):
     ap=argparse.ArgumentParser(prog='scientific_lab research'); sub=ap.add_subparsers(dest='sub',required=True)
     for name in ('search','harvest'):
         p=sub.add_parser(name); p.add_argument('query'); p.add_argument('--workspace',type=Path,default=Path.cwd()); p.add_argument('--limit',type=int,default=30); p.add_argument('--per-platform',type=int,default=5); p.add_argument('--platforms'); p.add_argument('--max-downloads',type=int,default=10)
-    a=ap.parse_args(argv); platforms=[x.strip() for x in a.platforms.split(',') if x.strip()] if a.platforms else None
+    project=sub.add_parser('project')
+    project.add_argument('--theme',required=True); project.add_argument('--out',type=Path,required=True); project.add_argument('--question'); project.add_argument('--sources'); project.add_argument('--limit',type=int,default=30); project.add_argument('--per-platform',type=int,default=5); project.add_argument('--timeout',type=int,default=90); project.add_argument('--dry-run',action='store_true'); project.add_argument('--corpus',type=Path)
+    a=ap.parse_args(argv)
+    if a.sub=='project':
+        from scientific_lab import research_project
+        selected=[x.strip() for x in a.sources.split(',') if x.strip()] if a.sources else None
+        result=research_project.run(a.theme,a.out,question=a.question,sources=selected,dry_run=a.dry_run,limit=a.limit,per_platform=a.per_platform,timeout_seconds=a.timeout,corpus_path=a.corpus)
+        print(json.dumps(result,ensure_ascii=False,indent=2)); return 0 if result['status']!='blocked' else 4
+    platforms=[x.strip() for x in a.platforms.split(',') if x.strip()] if a.platforms else None
     if a.sub=='search':
         path,_,manifest=research.search(a.query,a.workspace,limit=a.limit,per_platform=a.per_platform,platforms=platforms); print(json.dumps({'manifest':str(path),'results':len(manifest['results'])},ensure_ascii=False,indent=2)); return 0
     print(json.dumps(research.harvest(a.query,a.workspace,limit=a.limit,per_platform=a.per_platform,max_downloads=a.max_downloads,platforms=platforms),ensure_ascii=False,indent=2)); return 0

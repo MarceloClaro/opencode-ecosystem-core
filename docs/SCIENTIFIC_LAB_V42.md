@@ -36,6 +36,23 @@ python -m marceloclaro.scientific_lab review prisma --protocol-id SRP-PRJ-001 --
 
 `verified` exige arquivo-fonte hashado e decisão humana; mineração/automação só deve criar candidatos. O grafo mantém `candidate_edges_are_not_evidence_until_verified`.
 
+## Pesquisador ponta a ponta (R1051)
+
+O subcomando `research project` encadeia tema, contrato de recuperação,
+protocolo, busca, deduplicação, triagem assistida, evidências literais, gate
+metacognitivo, análise descritiva, auditoria, manuscrito e checklist humano.
+
+```bash
+python -m marceloclaro.scientific_lab research project \
+  --theme "tema" --out projects/tema-r1051 --dry-run
+```
+
+O pacote fica file-first e inclui `08_manifest/project-manifest.json` com
+hashes. O pipeline não baixa PDFs, não usa credenciais e não publica. Claims de
+metadados são em nível de resumo indexado; o corpus opcional é validado
+literalmente contra o texto fornecido. Ver
+[`SCIENTIFIC_RESEARCH_PIPELINE_R1051.md`](SCIENTIFIC_RESEARCH_PIPELINE_R1051.md).
+
 ## Limite da v4.2
 
 Não alegamos que todos os 88 contratos da v4.1 foram internalizados. O objetivo desta release é remover a dependência externa do caminho essencial e manter os módulos avançados em fallback verificável até migração posterior.

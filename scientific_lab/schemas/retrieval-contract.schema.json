@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/retrieval-contract.schema.json",
+  "title": "Scientific Retrieval Contract R1051",
+  "type": "object",
+  "required": [
+    "schema_version", "contract_id", "theme", "question", "question_status",
+    "intent", "target_entity", "accepted_identifiers", "databases", "filters",
+    "expected_fields", "pagination", "budget", "provenance",
+    "untrusted_data_policy", "missing_constraints", "clarification_required",
+    "status"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "contract_id": {"type": "string", "pattern": "^RRC-[a-f0-9]{8,16}$"},
+    "pipeline_version": {"const": "R1051"},
+    "theme": {"type": "string", "minLength": 3},
+    "question": {"type": "string", "minLength": 5},
+    "question_status": {"enum": ["explicit", "provisional_from_theme"]},
+    "intent": {"enum": ["targeted_lookup", "exhaustive_retrieval"]},
+    "target_entity": {"type": "string", "minLength": 3},
+    "accepted_identifiers": {
+      "type": "array", "minItems": 1, "items": {"type": "string"}
+    },
+    "databases": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "endpoint", "access", "role", "rate_limit"],
+        "properties": {
+          "name": {"type": "string", "minLength": 1},
+          "endpoint": {"type": "string", "minLength": 1},
+          "access": {"type": "string", "minLength": 1},
+          "role": {"type": "string", "minLength": 1},
+          "rate_limit": {"type": "string", "minLength": 1},
+          "auth_status_reported": {"const": false}
+        },
+        "additionalProperties": true
+      }
+    },
+    "filters": {
+      "type": "object",
+      "required": ["server_side", "local"],
+      "properties": {
+        "server_side": {"type": "array", "items": {"type": "string"}},
+        "local": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": true
+    },
+    "expected_fields": {
+      "type": "array", "minItems": 1, "items": {"type": "string"}
+    },
+    "pagination": {
+      "type": "object",
+      "required": [
+        "strategy", "per_platform_limit", "max_records",
+        "count_reconciliation_required", "exhaustive", "completeness_claim"
+      ],
+      "properties": {
+        "strategy": {"type": "string", "minLength": 1},
+        "per_platform_limit": {"type": "integer", "minimum": 1},
+        "max_records": {"type": "integer", "minimum": 1},
+        "count_reconciliation_required": {"const": true},
+        "exhaustive": {"const": false},
+        "completeness_claim": {"const": false}
+      },
+      "additionalProperties": true
+    },
+    "budget": {
+      "type": "object",
+      "required": [
+        "max_queries", "max_records", "per_platform", "max_downloads",
+        "timeout_seconds"
+      ],
+      "properties": {
+        "max_queries": {"type": "integer", "minimum": 1},
+        "max_records": {"type": "integer", "minimum": 1},
+        "per_platform": {"type": "integer", "minimum": 1},
+        "max_downloads": {"const": 0},
+        "timeout_seconds": {"type": "integer", "minimum": 1}
+      },
+      "additionalProperties": false
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["access_date", "log_path", "hash_algorithm"],
+      "properties": {
+        "access_date": {"type": "string", "format": "date-time"},
+        "log_path": {"type": "string", "minLength": 1},
+        "hash_algorithm": {"const": "sha256"},
+        "raw_payload_retention": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "untrusted_data_policy": {"type": "string", "minLength": 40},
+    "constraints": {"type": "object"},
+    "missing_constraints": {
+      "type": "array", "items": {"type": "string"}
+    },
+    "clarification_required": {"type": "boolean"},
+    "human_approval": {"type": ["object", "null"]},
+    "status": {"const": "draft"},
+    "limitations": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}

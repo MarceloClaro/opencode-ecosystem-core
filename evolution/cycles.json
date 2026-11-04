@@ -23673,6 +23673,35 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1051",
+      "objective": "Criar o pesquisador científico ponta a ponta: tema, contrato de recuperação, busca, triagem assistida, evidência literal, gate, auditoria e manuscrito para validação humana",
+      "changes": [
+        "scientific_lab/research_project.py: pipeline file-first com dry-run, busca injetável, corpus literal, auditoria e manifesto",
+        "scientific_lab/native/cli.py: subcomando research project com --theme, --out, --question, --sources, --limit, --per-platform, --dry-run e --corpus",
+        "scientific_lab/schemas/research-project-manifest.schema.json e retrieval-contract.schema.json",
+        "tests/test_r1051_research_project.py: 12 testes herméticos de contrato, deduplicação, falha, corpus, overclaim e integridade",
+        "docs/SCIENTIFIC_RESEARCH_PIPELINE_R1051.md e atualização de README, PROGRESS e SCIENTIFIC_LAB_V42"
+      ],
+      "score": 0.9,
+      "lessons": [
+        "Um pipeline de pesquisa deve distinguir ausência de resultado de resultado negativo; a falha de busca vira estado blocked, não texto inventado.",
+        "Claims de metadados são em nível de resumo indexado; o status máximo sem validação externa é candidate.",
+        "Triagem lexical é apenas candidata: nenhuma decisão humana pode ser simulada por heurística.",
+        "A skill database-lookup é referência de contrato (MIT), não código executado pelo Core."
+      ],
+      "timestamp": 1793754718.3030646,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [

@@ -40,10 +40,17 @@ não comprova o aceite integral.
   traduzido, SRT/ASS e sem cartão; WER ASR **2,17%**, **−16,10 LUFS** e 600
   frames. Lip sync refeito com Wav2Lip em CPU; revisão visual humana pendente.
   Ver `reports/r1047/QUANTUM-DUB-EVIDENCE.md`.
-- **347 testes** locais + 1 opcional passam; `doctor` 22/22.
+- **360 testes** locais + 1 opcional passam; `doctor` 22/22.
 - **R1050** criou macro-rede read-only (576 nós/768 arestas), gate metacognitivo
   de claims, ledger de claims do conselho e 9 adaptações originais para as
   licenças restritas. Nenhum projeto AGI foi instalado.
+- **R1051** criou o pesquisador ponta a ponta `research project`: tema →
+  contrato de recuperação → busca → deduplicação → triagem lexical assistida →
+  evidência literal em resumo/corpus → gate → análise descritiva → auditoria →
+  manuscrito IMRaD → checklist humano. Manifesto com hashes; sem PDF,
+  credencial, validação externa ou publicação. Ver
+  [`docs/SCIENTIFIC_RESEARCH_PIPELINE_R1051.md`](docs/SCIENTIFIC_RESEARCH_PIPELINE_R1051.md)
+  e [`reports/r1051/README.md`](reports/r1051/README.md).
 - **R1049** adotou 9 skills seletivas: Superpowers SDD/TDD, chgagne, K-Dense
   com 8 protocolos + catálogo de 177 + 9 adaptações originais, motion com 5, QA de vídeo, 10 receitas shotcraft, 10 papéis
   de engenharia e laboratório de pesquisa isolado. Nenhum código de terceiro
