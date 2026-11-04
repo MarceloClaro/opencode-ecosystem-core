@@ -9,7 +9,7 @@
 [![Stars](https://img.shields.io/github/stars/MarceloClaro/opencode-ecosystem-core?style=for-the-badge&logo=github&color=181717)](https://github.com/MarceloClaro/opencode-ecosystem-core)
 [![License](https://img.shields.io/badge/license-MIT-22c55e?style=for-the-badge&logo=opensourceinitiative)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.10%2B-3b82f6?style=for-the-badge&logo=python)](https://www.python.org/)
-[![Tests](https://img.shields.io/badge/tests-410%20passed-brightgreen?style=for-the-badge&logo=pytest)](reports/r1054/final-regression.txt)
+[![Tests](https://img.shields.io/badge/tests-local%20suite-3b82f6?style=for-the-badge&logo=pytest)](tests/)
 [![Doctor](https://img.shields.io/badge/doctor-22%2F22-16a34a?style=for-the-badge)](marceloclaro/doctor.py)
 [![MCP](https://img.shields.io/badge/MCP-27%20servers-8b5cf6?style=for-the-badge)](opencode.json)
 [![Agents](https://img.shields.io/badge/agents-333-7c3aed?style=for-the-badge)](agents/catalog)
@@ -18,6 +18,7 @@
 [Comece em 5 minutos](#comece-em-5-minutos) ·
 [Documentação](docs/README.md) ·
 [Pipeline científico](docs/SCIENTIFIC_RESEARCH_PIPELINE_R1054.md) ·
+[Atlas animado](docs/architecture/ANIMATED.md) ·
 [Evidência](reports/r1054/README.md) ·
 [Manual](MANUAL.md) ·
 [Arquitetura](ARCHITECTURE.md)
@@ -68,8 +69,8 @@ fonte, qual hash e qual limite?”**.
   Trust Engine, EvolutionRegistry e gates de evidência.
 - **Engenharia reversa local (REA)** — inspeção controlada, camadas de provedores
   e recibos por hash.
-- **Vídeo e dublagem** — editor multifaixa, FFmpeg, Remotion, XTTS, ASR,
-  diarização, legendas e QC técnico.
+- **Vídeo e dublagem** — editor multifaixa, FFmpeg, Remotion, XTTS/Edge TTS,
+  ASR, legendas, câmera por frames, mapa narrativo e QC técnico (piloto R1055).
 - **MCP e ferramentas locais** — 27 servidores configurados, federação, probes e
   smoke tests delimitados.
 
@@ -164,7 +165,7 @@ registrada, não escondida. Evidência:
 | Pesquisa científica | ✅ R1051–R1054 | busca, texto integral, triagem humana, integridade, meta-análise, manuscrito, submissão | extração/RoB/GRADE assistivos; revisão humana obrigatória |
 | SDD/TDD | ✅ | SpecRegistry, SpecVerifier, TDDRunner, RED/GREEN | critério textual ≠ verdade científica |
 | REA | 🟡 com limites | inspeção local, camadas de provedores, recibos | formato, engine, licença e isolamento precisam ser conferidos |
-| Vídeo e dublagem | ✅ R1046–R1047 | multifaixa, transições, cor, XTTS, ASR, diarização, legendas, QC | render/QC técnico ≠ aprovação estética ou editorial |
+| Vídeo e dublagem | ✅ R1046–R1055 | multifaixa, TTS, ASR, legendas, mapa e câmera; piloto 16:9/9:16 nativo | render/QC técnico ≠ aprovação estética, naturalidade ou rigor científico |
 | MCP | 🟡 27 configurados | federação, probes, smoke, recibos | configuração ≠ disponibilidade no momento de uso |
 | Governança | ✅ | gate metacognitivo, TrustEngine, slashing, EvolutionRegistry | `externally_supported` não é verdade absoluta |
 | Publicação | 🧭 gate | validação externa, aceite, autorização | nenhum upload/publicação automática |
@@ -173,6 +174,21 @@ registrada, não escondida. Evidência:
 
 ## Arquitetura em 60 segundos
 
+[**Ver todos os mapas e fluxos em GIF**](docs/architecture/ANIMATED.md) ·
+[Fontes, hashes e reprodução](reports/r1056/README.md).
+As animações orientam a leitura; não simulam uma execução comprovada do Core.
+PNG/SVG sem movimento acompanham cada GIF, inclusive os 22 fluxos do catálogo.
+
+<details>
+<summary>Reproduzir a arquitetura em GIF (8 segundos, um ciclo)</summary>
+
+![Arquitetura do Core: relações de composição, não execução real](docs/architecture/animated/diagram-e19b5e3314e41476.gif)
+
+</details>
+
+[Ver sem movimento](docs/architecture/animated/diagram-e19b5e3314e41476.png) ·
+[Ampliar SVG](docs/architecture/animated/diagram-e19b5e3314e41476.svg).
+
 ```mermaid
 flowchart TB
     U["CLI / OpenCode / MCP / Streamlit"] --> O["MarceloClaro Orchestrator"]
@@ -180,7 +196,7 @@ flowchart TB
     O --> M["MetaBus / MCI"]
     O --> S["SpecRegistry / SDD-TDD"]
     O --> R["Research Lab R1051-R1054"]
-    O --> V["Video Editor R1046-R1047"]
+    O --> V["Vídeo / câmera / mapa R1055"]
     O --> E["REA"]
     B --> A["333 agent profiles"]
     M --> G["Trust / Evolution / Evidence"]
@@ -202,6 +218,25 @@ A arquitetura completa, os caminhos de falha e os 22 fluxogramas estão em
 [ARCHITECTURE.md](ARCHITECTURE.md) e no
 [guia R916](docs/ARQUITETURA_COMPLETA_CORE_R916.md). O mapa acima é uma
 projeção; uma aresta não é execução.
+
+## Vídeo didático R1055 — qubit
+
+O piloto **“O que é um qubit?”** tem sete cenas, voz sintética PT-BR Francisca
+(sem clonagem), mapa Natural Earth e câmera sincronizada às batidas do roteiro.
+As versões horizontal e vertical nativa têm 109,73 s, 3292 frames a 30 fps e
+passaram no QC técnico registrado: −14,49 LUFS e −4,42 dBTP.
+
+| Versão local | Resolução | Arquivo em `pilots/r1055-qubit/out/` |
+|---|---|---|
+| Horizontal | 1920×1080 | `r1055-qubit-16x9.mp4` |
+| Vertical nativa | 1080×1920 | `r1055-qubit-9x16.mp4` |
+
+**Os MP4 não estão no Git** e não foram publicados. Código e documentação estão
+no commit `c800112d`. [Roteiro](pilots/r1055-qubit/SCRIPT.md),
+[referências e créditos](pilots/r1055-qubit/REFERENCES.md),
+[câmera e pipeline](docs/CINEMATIC_REMOTION_R1055.md) e
+[recibos/QC/hashes](reports/r1055/README.md) permitem conferir o escopo.
+ASR, pitch e QC não substituem revisão humana da voz, da física e da edição.
 
 ## Comece em 5 minutos
 
@@ -258,6 +293,9 @@ não é aceite editorial.
 | [Pipeline R1054](docs/SCIENTIFIC_RESEARCH_PIPELINE_R1054.md) | pesquisador científico ponta a ponta |
 | [Spec R1054](specs/SPEC-1054-automacao-assistida-validacao-real.md) | contrato e critérios de aceitação |
 | [Relatório R1054](reports/r1054/README.md) | benchmark BCG e limites |
+| [Piloto R1055](pilots/r1055-qubit/README.md) | vídeo de qubit, fontes, código e limites |
+| [Atlas animado R1056](docs/architecture/ANIMATED.md) | GIF/PNG/SVG e Mermaid de todos os diagramas do escopo |
+| [Reprodução R1056](reports/r1056/README.md) | exportador local, cobertura, testes e hashes |
 | [AGENTS.md](AGENTS.md) | criação e registro de agentes |
 | [CLAUDE.md](CLAUDE.md) | operação no Claude Code |
 | [Instalador](installer/README.md) | instalação segura e procedência |
@@ -274,7 +312,9 @@ não é aceite editorial.
 | R1052 | ✅ | texto integral, triagem humana, integridade, `refresh` |
 | R1053 | ✅ | meta-análise, GRADE, LaTeX/DOCX/PDF, submissão |
 | R1054 | ✅ | extração assistida, PLOS ONE, gate de publicação, benchmark BCG |
-| R1055 | 🧭 | backend real de submissão, perfis de periódicos brasileiros, UI, extração de tabelas, validação externa assistida |
+| R1055 | ✅ técnico; revisão humana pendente | vídeo didático de qubit, câmera, mapa e versões 16:9/9:16 |
+| R1056 | ✅ documental; não valida runtime | atlas animado, fontes preservadas, manifesto e testes |
+| Próximos ciclos | 🧭 | backend real de submissão, perfis brasileiros, UI, tabelas e validação externa assistida |
 
 O roadmap é uma direção, não uma promessa de data. Cada ciclo só é marcado
 ✅ quando tem spec, testes e evidência versionada.
@@ -1281,7 +1321,7 @@ flowchart TB
   SCI --> VIS
   BB --> VIS
   VIS --> UI
-  SITE -.->|orienta operação,  não executa análise| LOCAL
+  SITE -.->|orienta operação; não executa análise| LOCAL
   MCP2["Plugins locais REA / MiroFish / Lean 4"] --> MC
   MC --> LIFE["Lifecycle: validar perfil antes de atribuir"]
   LIFE --> CAT

@@ -1,0 +1,72 @@
+{
+  "spec": "SPEC-935-R1056",
+  "external_validation": false,
+  "independent_review_completed": false,
+  "orchestration": [
+    {
+      "id": "r1056-architecture-gif-review",
+      "status": "blocked",
+      "reason": "spec_id_required",
+      "inference_completed": false
+    },
+    {
+      "agent": "mermaid-review",
+      "status": "unavailable",
+      "reason": "OpenCode Go subscription required",
+      "inference_completed": false
+    },
+    {
+      "agent": "code-reviewer",
+      "status": "unavailable",
+      "reason": "OpenCode Go subscription required",
+      "inference_completed": false
+    }
+  ],
+  "baseline_failures": [
+    {
+      "test": "test_r881_readme_flowcharts.py::test_catalogo_atual_integralmente_publicado_no_readme",
+      "reason": "catalogo R916 aponta hash antigo de marceloclaro/orchestrator.py"
+    },
+    {
+      "test": "test_r881_mermaid_integral.py::test_published_mermaid_manifest_and_rendered_svg_preserve_the_graph",
+      "reason": "exportacao integral existente diverge da exportacao canonica"
+    }
+  ],
+  "policy": "Não reescrever snapshots R916 nem alegar regressão global verde. Testes focais e contraprovas são reportados separadamente. Falha de delegação não é parecer de revisão.",
+  "stake": {
+    "assessed": false,
+    "amount": null,
+    "reason": "Economia de stake não foi consultada nesta rodada; nenhuma penalidade foi aplicada por inferência."
+  },
+  "focused_tests": {
+    "command": "python3 -m pytest tests/test_r1056_animated_architecture.py tests/test_r1055_qubit_video.py -q",
+    "result": "21 passed",
+    "evidence": "reports/r1056/focused-tests.txt"
+  },
+  "baseline": {
+    "command": "python3 -m pytest tests/test_r881_readme_flowcharts.py tests/test_r881_mermaid_integral.py tests/test_r1055_qubit_video.py -q",
+    "result": "2 failed, 37 passed",
+    "evidence": "reports/r1056/baseline-regression.txt"
+  },
+  "media_budget": {
+    "limit_bytes": 60000000,
+    "final_bytes": 58030108,
+    "attempts": [
+      {
+        "output": "1280x800",
+        "bytes": 71110000,
+        "status": "over"
+      },
+      {
+        "output": "1120x700",
+        "bytes": 63120000,
+        "status": "over"
+      },
+      {
+        "output": "1080x675",
+        "bytes": 58030108,
+        "status": "pass"
+      }
+    ]
+  }
+}

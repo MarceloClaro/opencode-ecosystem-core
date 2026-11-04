@@ -458,3 +458,9 @@ editor-workspace/remotion-smoke/r1047-stage-render*.json
 
 # R1055: cache de TTS por batida (regenerável; WAVs já são ignorados)
 pilots/r1055-qubit/audio/beats-*/
+
+# R1056: raster intermediário; PNG final, SVG, GIF e manifesto são versionados
+docs/architecture/animated/*.render.png
+
+# R1056: geometria intermediária de câmera; regenerável, não é entrega
+docs/architecture/animated/*.geometry.json

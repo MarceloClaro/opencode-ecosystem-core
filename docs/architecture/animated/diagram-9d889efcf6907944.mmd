@@ -1,0 +1,9 @@
+flowchart TB
+    ACAD[Pipeline acadêmico agentivo] --> PROVA[Prova, formalização e raciocínio]
+    PROVA --> JUR[Jurídico]
+    JUR --> CLIN[Clínico]
+    CLIN --> RAG[Scientific RAG]
+    RAG --> UNIV[Universidade Sintética]
+    UNIV --> RT[LiteRT-LM e Colibri / OLMoE]
+    RT --> INT[MerkleIntegrityGuard]
+    INT --> QR[quality_report.py]

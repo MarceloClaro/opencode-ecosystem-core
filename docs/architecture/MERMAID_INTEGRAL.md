@@ -1,5 +1,10 @@
 # Arquitetura integral em Mermaid — R916
 
+> [Atlas animado R1056](ANIMATED.md): 22 fluxos e vistas publicadas, com fonte
+> editável e alternativa sem movimento. Para este grafo integral, o GIF é
+> **somente uma síntese por camadas**; os módulos e as arestas continuam nos
+> artefatos originais abaixo. Não é uma nova auditoria do código.
+
 **707 módulos Python**, **1000 pares internos**, **1131 declarações de importação**, **6779 símbolos**, **45 pacotes**, **18 camadas** e **22 fluxogramas**.
 
 Base Git `d02817ca460ee6411761a8a3f0b82d17dafd2740`; identidade das fontes locais `d53ac4511f757431da55589db0e6a0fcde2daebdb2b20303611d45882b7ab6b5`.

@@ -13,6 +13,7 @@ não precise adivinhar onde está a verdade, a especificação ou o limite.
 [🏠 README principal](../README.md) ·
 [📘 Manual](../MANUAL.md) ·
 [🏗️ Arquitetura](../ARCHITECTURE.md) ·
+[🎞️ Atlas animado](architecture/ANIMATED.md) ·
 [🔬 Pipeline científico](SCIENTIFIC_RESEARCH_PIPELINE_R1054.md) ·
 [🧪 Evidência R1054](../reports/r1054/README.md) ·
 [📈 PROGRESS](../PROGRESS.md)
@@ -88,6 +89,9 @@ não precise adivinhar onde está a verdade, a especificação ou o limite.
 | Pipeline de dublagem | [R1041–R1045](DUBBING_PIPELINE_R1041_R1045.md) |
 | Evidência R1047 | [Quantum dub](../reports/r1047/QUANTUM-DUB-EVIDENCE.md) |
 | Slide/palco com cartão | [R1050](../reports/r1050/CARD-STAGE.md) |
+| Qubit 16:9 e vertical nativo | [Piloto R1055](../pilots/r1055-qubit/README.md), [QC e hashes](../reports/r1055/README.md) |
+| Câmera, mapa e narração por batida | [R1055](CINEMATIC_REMOTION_R1055.md), [roteiro](../pilots/r1055-qubit/SCRIPT.md), [créditos](../pilots/r1055-qubit/REFERENCES.md) |
+| GIFs de arquitetura e fluxos | [Galeria R1056](architecture/ANIMATED.md), [geração e testes](../reports/r1056/README.md) |
 | Remotion auditável | [Skill](../.opencode/skills/remotion-auditavel/SKILL.md), [Composição](../editor-workspace/remotion-smoke/src/r1047-slide/R1047Stage.tsx) |
 | Catálogo de ferramentas | [R1043](VIDEO_EDITOR_TOOLCHAIN_R1043.md), [toolchain](../reports/r1043/toolchain.json) |
 
@@ -152,7 +156,7 @@ flowchart TB
     O --> M["MetaBus / MCI"]
     O --> S["SpecRegistry / SDD-TDD"]
     O --> R["Research Lab R1051-R1054"]
-    O --> V["Video Editor R1046-R1047"]
+    O --> V["Vídeo / câmera / mapa R1055"]
     O --> E["REA"]
     B --> A["333 agent profiles"]
     M --> G["Trust / Evolution / Evidence"]
@@ -168,6 +172,9 @@ flowchart TB
 
 ## Atlas e fluxogramas
 
+- [Todos os diagramas do escopo em GIF/PNG/SVG/Mermaid](architecture/ANIMATED.md)
+- [Manifesto de cobertura e hashes](architecture/animated/manifest.json)
+- [Reprodução local e limites R1056](../reports/r1056/README.md)
 - [Atlas offline](architecture_map.html)
 - [Mapa curado](architecture/curated-overview.svg)
 - [Dependências Mermaid — raw 2,4 MB](https://raw.githubusercontent.com/MarceloClaro/opencode-ecosystem-core/main/docs/architecture/dependencies.mmd)
@@ -177,6 +184,10 @@ flowchart TB
 - [README § Arquitetura completa](../README.md#arquitetura-completa-e-fluxogramas-atuais)
 
 ## Documentos históricos
+
+A R1056 anima os diagramas publicados; não transforma o inventário R916 em
+uma auditoria atual do runtime. A síntese por camadas não substitui o grafo
+integral. As prévias da galeria são estáticas para evitar movimento compulsório.
 
 Os atlas R433–R438, R879, R900 e R911 permanecem como retratos históricos. O
 livro tem processo editorial e atlas próprios; atualizar estes mapas não

@@ -36,6 +36,17 @@ de CI em vez de tratar números de documentos antigos como estado atual.
 
 ## Atlas atual R916 e fluxos conectados
 
+**Edição visual R1056:** [galeria GIF/PNG/SVG](docs/architecture/ANIMATED.md),
+[manifesto](docs/architecture/animated/manifest.json) e
+[reprodução](reports/r1056/README.md). Os 22 fluxos e os demais Mermaid
+publicados permanecem editáveis. O destaque animado é guia de leitura de
+relações declaradas, não tráfego, telemetria ou ordem comprovada de execução.
+
+**Recorte temporal:** o inventário abaixo é o retrato R916, não uma nova
+extração do checkout R1056. As expansões científicas R1051–R1054 e o piloto de
+vídeo R1055 são documentados separadamente. Não promover hashes históricos
+a prova do código corrente.
+
 A [página offline](docs/architecture_map.html) e o
 [guia minucioso R916](docs/ARQUITETURA_COMPLETA_CORE_R916.md) reúnem o grafo
 estrutural integral, as camadas, símbolos, origens e todos os fluxogramas do
@@ -114,6 +125,16 @@ flowchart TB
 | Integrações | Servidores MCP e definição de agentes. | `opencode.json`, `integrations/` |
 | Apresentação | Geração de deck a partir de pasta de produção. | `illustrations/mira_deck.py` |
 | Integridade | Cálculo local de raiz de arquivos selecionados. | `benchmarks/merkle_integrity_guard.py` |
+
+### Pipeline audiovisual R1055
+
+O [pipeline do piloto](docs/CINEMATIC_REMOTION_R1055.md#pipeline-audiovisual-r1055)
+liga roteiro/TTS, timeline, assets locais, composições 16:9 e 9:16,
+`integrations.video_editor`, mux FFmpeg e `scripts/video_qa.py`.
+`cinematic.tsx` é uma camada CSS/SVG compartilhada dentro do piloto, não um
+motor 3D nem um plugin instalado globalmente. Câmera e estado visual usam
+frames; a esfera de Bloch é uma projeção 2D estilizada. Os recibos de render
+não equivalem à aprovação da explicação física ou da naturalidade da voz.
 
 ## Servidores MCP Interoperáveis
 

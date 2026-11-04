@@ -1,0 +1,16 @@
+flowchart TB
+  INPUT["Pedido de contexto pelo MarceloClaro"] --> KIND{"Busca, símbolo ou grafo?"}
+  KIND --> INDEX["Índice local com manifesto e hashes"]
+  INDEX --> FRESH{"Índice corresponde às fontes?"}
+  FRESH -->|não| BLOCK["blocked ou reindexação explícita"]
+  FRESH -->|sim| QUERY["Consulta delimitada e trechos relevantes"]
+  KIND --> PY["python_graph: imports e relações estáticas Python"]
+  PY --> LIMIT["Não confundir relação lexical com execução"]
+  KIND --> NATIVE{"Operação nativa conhecida como falha?"}
+  NATIVE -->|sim| BLOCK
+  NATIVE -->|não| POLICY["Conferir contrato, limites e backend disponível"]
+  POLICY --> QUERY
+  QUERY --> CONTEXT["Contexto compacto com fonte e localizador"]
+  LIMIT --> CONTEXT
+  CONTEXT --> MODEL["Modelo selecionado com orçamento"]
+  MODEL --> MEASURE["Medir tokens, chamadas e qualidade da tarefa aceita"]

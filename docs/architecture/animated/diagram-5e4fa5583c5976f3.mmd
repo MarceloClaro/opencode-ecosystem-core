@@ -1,0 +1,21 @@
+flowchart TB
+  TASK["Tarefa ao MarceloClaro"] --> CONTEXT["Recuperar fontes e trechos relevantes"]
+  CONTEXT --> TYPE{"Complexidade, risco e dados permitidos"}
+  TYPE -->|baixo risco, tarefa delimitada| ECONOMIC["API candidates: gpt-6-luna / gemini-3.5-flash-lite"]
+  TYPE -->|código ou análise em várias etapas| BALANCED["gemini-3.8-flash / modelo equilibrado"]
+  TYPE -->|alto risco, crítica ou falha persistente| STRONG["Escalonar com aprovação explícita"]
+  CONFIG["opencode.json: padrão ollama-local/llama3.2 permanece"] -.->|sem troca silenciosa| TASK
+  ROUTER["ModelRouter: tipo, autenticação e preferências"] --> CANDIDATE["Validar ID no catálogo e provider selecionado"]
+  ECONOMIC --> CANDIDATE
+  BALANCED --> CANDIDATE
+  STRONG --> CANDIDATE
+  CANDIDATE --> AVAILABLE{"Endpoint/modelo disponível e permitido?"}
+  AVAILABLE -->|não| BLOCK["Explicitar bloqueio/quota; não mudar provider automaticamente"]
+  AVAILABLE -->|sim| QUALITY{"Mesmo critério de qualidade atendido?"}
+  QUALITY -->|não| REVIEW["Rever contexto ou escalar dentro do orçamento"]
+  REVIEW --> STRONG
+  QUALITY -->|sim| MEASURE["Guardar tokens, cache, latência, retries e aceite"]
+  MEASURE --> COST["API paga, assinatura e franquia em contas separadas"]
+  COST --> COMPARE["Custo/tarefa aceita; comparar amostras pareadas"]
+  BLOCK -.->|HTTP 429/Retry-After: respeitar pausa, limite e operador| CONTROL["Sem retry infinito; sem fallback oculto"]
+  COMPARE --> CONTROL

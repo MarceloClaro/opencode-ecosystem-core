@@ -1,0 +1,8 @@
+graph TD
+    Usuario[Usuário ou automação] --> CLI[marceloclaro CLI]
+    CLI --> Orquestrador[MarceloClaroOrchestrator]
+    Orquestrador --> SDD[SpecRegistry e SpecVerifier]
+    Orquestrador --> MCI[MetaBus e Blackboard]
+    Orquestrador --> MCP[MCPs configurados]
+    Orquestrador --> Agentes[Agentes configurados]
+    Orquestrador --> MIRA[mira-presenter]

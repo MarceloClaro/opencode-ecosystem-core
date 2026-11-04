@@ -1,6 +1,6 @@
 # PROGRESS — Estado corrente e arquivo de checkpoints
 
-## Estado atual — orientação de 03/11/2026
+## Estado atual — orientação de 04/11/2026
 
 A retomada parte do checkout e da tarefa atual. O bloco abaixo deriva as
 contagens das fontes locais; o histórico R414 preservado ao final não representa
@@ -22,6 +22,17 @@ e [o contrato de interrupção](specs/SPEC-935-R825-execution-cancellation.md)
 explicam integrações e limites específicos. Recibos datados em `outputs/` e
 `docs/evidence/` são evidências de execuções determinadas; uma suíte interrompida
 não comprova o aceite integral.
+
+## Checkpoint R1055–R1056 — vídeo e documentação animada
+
+- **R1055**, commit `c800112d`: vídeo de qubit 16:9 e 9:16 nativo, 109,73 s,
+  voz Francisca sem clonagem, mapa Natural Earth e câmera por frames.
+  [QC/hashes](reports/r1055/README.md); MP4 local/ignorado no Git; revisão
+  humana da voz, física e edição pendente. Sem publicação.
+- **R1056**: [atlas animado](docs/architecture/ANIMATED.md) dos Mermaid de raiz
+  e `docs/`, incluindo os 22 fluxos do catálogo. Fontes históricas preservadas,
+  GIFs opcionais de um ciclo, PNG/SVG acessíveis, manifesto e verificação local.
+  [Relatório](reports/r1056/README.md); não é reauditoria do runtime R916.
 
 ## Checkpoint R1046 — vídeo, dublagem e instalação
 

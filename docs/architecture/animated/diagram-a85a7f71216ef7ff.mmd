@@ -1,0 +1,18 @@
+graph TD
+  actor_user_cli[Usuário / CLI] --> orchestrator_py[marceloclaro/orchestrator.py]
+  orchestrator_py --> spec_engine_py[sdd/spec_engine.py]
+  orchestrator_py --> tdd_runner_py[sdd/tdd_runner.py]
+  orchestrator_py --> metabus_py[mci/metabus.py]
+  orchestrator_py --> blackboard_py[mci/blackboard.py]
+  orchestrator_py --> trust_engine_py[trust/trust_engine.py]
+  orchestrator_py --> token_economy_py[economy/token_economy.py]
+  orchestrator_py --> metaeval_py[mci/metacognitive_evaluator.py]
+  orchestrator_py --> rag_py[rag/scientific.py]
+  orchestrator_py --> sgp_py[mci/pipeline/scientific_governance_pipeline.py]
+  sgp_py --> oqs_init_py[mci/oqs/__init__.py]
+  sgp_py --> orchestration_py[mci/orchestration.py]
+  sgp_py --> vsee_router_py[mci/vsee/router.py]
+  sgp_py --> egs_init_py[mci/egs/__init__.py]
+  orchestration_py --> evidence_graph_py[mci/evidence_graph.py]
+  metabus_py --> metaeval_py
+  rag_py --> superhuman_suite_py[benchmarks/scientific_reasoning/superhuman_suite.py]

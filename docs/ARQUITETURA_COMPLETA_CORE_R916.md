@@ -1,5 +1,9 @@
 # Arquitetura completa do Core — R916
 
+> **Apresentação R1056:** [todos os fluxos em GIF/PNG/SVG](architecture/ANIMATED.md).
+> A animação complementa este retrato histórico; não recalcula seus módulos,
+> fontes ou hashes. [Manifesto](architecture/animated/manifest.json).
+
 Este atlas parte das fontes e percorre interfaces, coordenação, execução,
 conhecimento e entrega. Os diagramas estruturais e operacionais se completam:
 um import mostra dependência declarada; um fluxo curado explica um caminho e

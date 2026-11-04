@@ -1,0 +1,16 @@
+flowchart TD
+    U[CLI ciencia ou MCP ecosystem-network] --> O[MarceloClaroOrchestrator]
+    O -->|executar| P[ScientificProvenancePipeline R663]
+    P --> S[Snapshots de CSV e referências identificadas]
+    S --> A[Método estatístico prespecificado do Core]
+    A --> B[Artigo, análise, código e manifesto]
+    B --> V[Verificador R891]
+    O -->|verificar pacote existente| V
+    V --> H[Schema, tipos, caminhos, bytes e hashes]
+    H --> W[Python isolado: método confiável do Core]
+    W --> C{Replay concordante e pacote íntegro?}
+    C -->|não| F[Bloqueado com motivo e recibo]
+    C -->|sim| L[Aceite computacional local]
+    F --> M[MetaBus: observação, sem prêmio de confiança]
+    L --> M
+    L --> R[Revisão humana científica e editorial pendente]

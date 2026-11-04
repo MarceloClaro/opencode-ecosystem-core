@@ -1,0 +1,24 @@
+flowchart TD
+  Operador[Operador: setup/index explícitos] --> CLI[CLI do Core]
+  CLI --> Primario[MarceloClaroOrchestrator]
+  Agente[Agente de programação] --> MCP[ecosystem-network: ecosystem_code_context]
+  MCP --> Primario
+  Primario --> Provedor[CodeContextProvider]
+  Git[Fontes de produção rastreadas no Git] --> Filtro[Filtro e hashes por arquivo]
+  Filtro --> Corpus[Cópia privada somente leitura]
+  Provedor --> Sandbox[Namespace sem rede e filesystem mínimo]
+  Corpus --> Sandbox
+  Sandbox --> ContextLink[context-link v1.1.0]
+  ContextLink --> DB[Índice privado: escrita permitida]
+  DB --> Auditoria[Auditoria: arquivos, hashes, schema e identidades]
+  Auditoria -->|Completo e smoke correto|Contrato[Consulta permitida / limite / proveniência]
+  Auditoria -->|Parcial ou inválido|Candidato[Candidato privado: consultas bloqueadas]
+  Candidato -->|Nova indexação explícita, com orçamento|Sandbox
+  Contrato --> Primario
+  Primario --> MetaBus[Observação: sem promover confiança]
+  Primario --> Briefing[Briefing limitado: código é dado não confiável]
+  Briefing --> Blackboard[Blackboard]
+  Blackboard --> Executor[Executor selecionado]
+  Executor --> Gate[Gate SDD/TDD existente]
+  Gate --> Reflexao[Reflexão contextual R886]
+  Reflexao --> MetaBus

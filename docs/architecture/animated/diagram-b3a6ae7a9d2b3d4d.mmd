@@ -1,0 +1,12 @@
+flowchart LR
+  P[Primário] --> S[ScientificPluginService]
+  CACHE[Cache local instalado] --> HASH[Manifesto de caminhos e hashes]
+  HASH --> PKG[Pacotes locais por versão]
+  PKG --> S
+  S --> I[Instruções: dispatcher e política de invocação]
+  S --> T[Ticket de operação hospedada permitida]
+  T --> H[Host autenticado]
+  H --> EXT[Conector externo]
+  EXT --> REC[Recibo vinculado ao ticket]
+  REC --> S
+  S --> MEM[MetaBus: observação sem promoção de confiança]

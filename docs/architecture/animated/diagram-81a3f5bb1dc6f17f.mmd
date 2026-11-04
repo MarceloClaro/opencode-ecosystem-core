@@ -1,0 +1,10 @@
+flowchart LR
+    U[Operador] --> O[OpenCode no WSL]
+    O --> A[Login OpenAI no navegador]
+    A --> C[Modelos disponíveis na assinatura ChatGPT]
+    O --> P[Primário MarceloClaro]
+    P --> N[Conector NotebookLM já instalado]
+    U --> G[Login Google no navegador Windows]
+    G --> S[Sessão privada do conector]
+    S --> N
+    N --> D[Notebooks e fontes no serviço Google]

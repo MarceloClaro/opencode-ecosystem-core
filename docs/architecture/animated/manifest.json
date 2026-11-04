@@ -1,0 +1,2358 @@
+{
+  "version": 1,
+  "spec": "SPEC-935-R1056",
+  "animation": "reading_guide_not_execution",
+  "generator": {
+    "path": "scripts/animate_architecture.py",
+    "bytes": 25968,
+    "sha256": "1b99d54c8a63fb99db8db71793f4ef77d01b2f76b956c7d9c3bd99f40e3f10fb"
+  },
+  "renderer": {
+    "path": "scripts/render_mermaid_animation.cjs",
+    "bytes": 6528,
+    "sha256": "fb1296231a885e2b19bce91e9a4e8eb9a33695879155af4f4d1f5d895b86bb0f"
+  },
+  "pillow_version": "12.3.0",
+  "font": {
+    "name": "DejaVuSans",
+    "sha256": "b4c632e3cdf9acc7f28758fb5a323c8524d7fc6660d46904d9b6cbe2809c419c"
+  },
+  "diagrams": [
+    {
+      "id": "diagram-0a347110aad90186",
+      "title": "Visão das camadas",
+      "source_sha256": "0a347110aad9018635ea51bd0de08cd195cca6eb63d87ea91d3079428739bbb4",
+      "origins": [
+        {
+          "path": "ARCHITECTURE.md",
+          "block": 1
+        }
+      ],
+      "zoom_min": 1.543,
+      "zoom_max": 1.543,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 1.543,
+        "zoom_max": 1.543
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-0a347110aad90186.mmd",
+          "bytes": 361,
+          "sha256": "0a347110aad9018635ea51bd0de08cd195cca6eb63d87ea91d3079428739bbb4"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-0a347110aad90186.svg",
+          "bytes": 21978,
+          "sha256": "8119906057b0c3dec602d487ac4d5ee53bc7b23cb4ceca603f7b0cf32b5dbec0"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-0a347110aad90186.png",
+          "bytes": 129198,
+          "sha256": "a83bd73ac1d33825bc227da431b13494720a73506c1dbb242831d4bed6a727db"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-0a347110aad90186.gif",
+          "bytes": 1116678,
+          "sha256": "8a60b5c0b48e1404ff6ff3e3771cda7947d96ca594b301dc93eeb0cc0d50b41e"
+        }
+      }
+    },
+    {
+      "id": "diagram-4c75ee83141913a3",
+      "title": "Diagrama operacional atual",
+      "source_sha256": "4c75ee83141913a308113da464e556e272798af23e4c802cc398015e30256c39",
+      "origins": [
+        {
+          "path": "ARCHITECTURE.md",
+          "block": 2
+        }
+      ],
+      "zoom_min": 2.472,
+      "zoom_max": 2.472,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 2.472,
+        "zoom_max": 2.472
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-4c75ee83141913a3.mmd",
+          "bytes": 531,
+          "sha256": "4c75ee83141913a308113da464e556e272798af23e4c802cc398015e30256c39"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-4c75ee83141913a3.svg",
+          "bytes": 29901,
+          "sha256": "708ab06b7b93a50c393c90e7edcc4d23933b79b87aba99bb4a86e274c4a78c87"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-4c75ee83141913a3.png",
+          "bytes": 118118,
+          "sha256": "83a79911b7c0165351624ca2a71780cd3ccff6949823f784fbfb6186264d84e6"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-4c75ee83141913a3.gif",
+          "bytes": 939169,
+          "sha256": "e572b3b8c5e6540b7365cce81ac5eaab95c8cd518a9ab8de325ce1dc6de6725d"
+        }
+      }
+    },
+    {
+      "id": "diagram-a85a7f71216ef7ff",
+      "title": "Diagrama de Alto Nível",
+      "source_sha256": "a85a7f71216ef7ff7d619b0ce71d2080ded9cf57b7e4d7e392e7b4d7d257ec71",
+      "origins": [
+        {
+          "path": "MAPA_ECOSSISTEMA_COMPLETO_2026-07-06.md",
+          "block": 1
+        }
+      ],
+      "zoom_min": 2.8,
+      "zoom_max": 2.8,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 2.8,
+        "zoom_max": 2.8
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-a85a7f71216ef7ff.mmd",
+          "bytes": 996,
+          "sha256": "a85a7f71216ef7ff7d619b0ce71d2080ded9cf57b7e4d7e392e7b4d7d257ec71"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-a85a7f71216ef7ff.svg",
+          "bytes": 38127,
+          "sha256": "fb184f35aa9a096dbce0125d5996485b9861952f393015f9dae95883268d2068"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-a85a7f71216ef7ff.png",
+          "bytes": 117048,
+          "sha256": "99d11f230b76d2e92b075ca4b8961c5050a647fd4f80d0061b511c12d2189f03"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-a85a7f71216ef7ff.gif",
+          "bytes": 1129020,
+          "sha256": "f3d9894fe097192be591a16ee0b2601df232275f5056251417403788746cda4b"
+        }
+      }
+    },
+    {
+      "id": "diagram-e19b5e3314e41476",
+      "title": "Arquitetura em 60 segundos",
+      "source_sha256": "e19b5e3314e414766970676bcf006bf521ca4aada6bd25f379e07cca39490d0c",
+      "origins": [
+        {
+          "path": "README.md",
+          "block": 1
+        },
+        {
+          "path": "docs/README.md",
+          "block": 1
+        }
+      ],
+      "zoom_min": 1.818,
+      "zoom_max": 1.818,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 1.818,
+        "zoom_max": 1.818
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-e19b5e3314e41476.mmd",
+          "bytes": 446,
+          "sha256": "e19b5e3314e414766970676bcf006bf521ca4aada6bd25f379e07cca39490d0c"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-e19b5e3314e41476.svg",
+          "bytes": 31091,
+          "sha256": "87061bdb99404c8caae66142aa4631d86c2e86c163038ee43c74c0478c005e42"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-e19b5e3314e41476.png",
+          "bytes": 144752,
+          "sha256": "71a623e837bbdd4476b987f281df55bf0db9003e893f0a2475b5ba20ac1d58d0"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-e19b5e3314e41476.gif",
+          "bytes": 1329226,
+          "sha256": "ea758d2268dd7a83009ddc54304544979f9e701e5eee280b2f62483dce0a1871"
+        }
+      }
+    },
+    {
+      "id": "diagram-c2a59e1bc061653c",
+      "title": "Mapa da Arquitetura Completa (v3.9.0)",
+      "source_sha256": "c2a59e1bc061653c4ca9e2214360cf111bd3c06e3839129a09c2736e046a39af",
+      "origins": [
+        {
+          "path": "README.md",
+          "block": 2
+        }
+      ],
+      "zoom_min": 1.35,
+      "zoom_max": 1.35,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 1.35,
+        "zoom_max": 1.35
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-c2a59e1bc061653c.mmd",
+          "bytes": 434,
+          "sha256": "c2a59e1bc061653c4ca9e2214360cf111bd3c06e3839129a09c2736e046a39af"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-c2a59e1bc061653c.svg",
+          "bytes": 20205,
+          "sha256": "0339fb473259dbfb08011072c8e6b118cd359763b6a4d6e069e514babb1bf9fb"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-c2a59e1bc061653c.png",
+          "bytes": 147217,
+          "sha256": "4c24edc5995f6185a7344b30cc6c4a0e881291a5e8630fef1bafdfda9a734151"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-c2a59e1bc061653c.gif",
+          "bytes": 1077622,
+          "sha256": "56606509d84ff9dbbb1302c82240a13af319ba83692bd653ea1fc9da4c9d3194"
+        }
+      }
+    },
+    {
+      "id": "diagram-8e1e0ff7aba73edb",
+      "title": "Diagrama Operacional Atual",
+      "source_sha256": "8e1e0ff7aba73edb3d7c3c421e3af3ef70d6197153e48dd2a11bd7994cce523b",
+      "origins": [
+        {
+          "path": "README.md",
+          "block": 3
+        }
+      ],
+      "zoom_min": 2.41,
+      "zoom_max": 2.41,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 2.41,
+        "zoom_max": 2.41
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-8e1e0ff7aba73edb.mmd",
+          "bytes": 538,
+          "sha256": "8e1e0ff7aba73edb3d7c3c421e3af3ef70d6197153e48dd2a11bd7994cce523b"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-8e1e0ff7aba73edb.svg",
+          "bytes": 30190,
+          "sha256": "ae18720b91b98d422cca10c30bcd2f8f6e2e85ef7e407dd5c193e56c7405530e"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-8e1e0ff7aba73edb.png",
+          "bytes": 121475,
+          "sha256": "adcaaac0640effeac35dd3f83811ff3609005bdf361ea2df821d8906b61c9c04"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-8e1e0ff7aba73edb.gif",
+          "bytes": 985426,
+          "sha256": "3e3a65fb2527fbd83f317111b8c9e8b4819740d8ccb8b9aecbfc5d227142a9f4"
+        }
+      }
+    },
+    {
+      "id": "diagram-9d889efcf6907944",
+      "title": "Fluxos multiárea do checkout atual",
+      "source_sha256": "9d889efcf69079443492a66d0d846fff620a50d3c13eee74759de5c588ad07fc",
+      "origins": [
+        {
+          "path": "README.md",
+          "block": 4
+        }
+      ],
+      "zoom_min": 1.35,
+      "zoom_max": 1.35,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 1.35,
+        "zoom_max": 1.35
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-9d889efcf6907944.mmd",
+          "bytes": 346,
+          "sha256": "9d889efcf69079443492a66d0d846fff620a50d3c13eee74759de5c588ad07fc"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-9d889efcf6907944.svg",
+          "bytes": 21904,
+          "sha256": "e11ac65e8a79c8987a03c7e5cec2022836e8eb37aa959aa9387e6f6780e46796"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-9d889efcf6907944.png",
+          "bytes": 105169,
+          "sha256": "6e516be1c5f89c0055171d69fce2160c44ac19f68c3ba63bde6b9a921e9d9947"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-9d889efcf6907944.gif",
+          "bytes": 1100118,
+          "sha256": "3d22140cf06725587c017f4c6a3670351f0e9207e29f92c9d19f86ff75e90668"
+        }
+      }
+    },
+    {
+      "id": "diagram-0fc0fb3f7256d5ba",
+      "title": "Como funciona a apresentação MIRA",
+      "source_sha256": "0fc0fb3f7256d5ba0770911a7848273e86209fc1cc63070c850baea580adf713",
+      "origins": [
+        {
+          "path": "README.md",
+          "block": 5
+        }
+      ],
+      "zoom_min": 7.788,
+      "zoom_max": 7.788,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 7.788,
+        "zoom_max": 7.788
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-0fc0fb3f7256d5ba.mmd",
+          "bytes": 125,
+          "sha256": "0fc0fb3f7256d5ba0770911a7848273e86209fc1cc63070c850baea580adf713"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-0fc0fb3f7256d5ba.svg",
+          "bytes": 16381,
+          "sha256": "8ed073432c041ce48eeb2e942c32ee35f7724b71885fe49ccde70dad4d7cb2f0"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-0fc0fb3f7256d5ba.png",
+          "bytes": 93795,
+          "sha256": "6d9c02a20517b494e40563cc858b9584f8b620354c7db99482fdea644ca66e38"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-0fc0fb3f7256d5ba.gif",
+          "bytes": 987017,
+          "sha256": "5b489e6320e5c21210b43163d8fb53810e62821c8bb68e376a327ffce4c35eee"
+        }
+      }
+    },
+    {
+      "id": "diagram-ae341a88b5319133",
+      "title": "Ciclo de Vida SDD / TDD",
+      "source_sha256": "ae341a88b53191336c70793a77f24f68513c87e67cdd80a9422e9e176dd54335",
+      "origins": [
+        {
+          "path": "README.md",
+          "block": 6
+        }
+      ],
+      "zoom_min": 4.806,
+      "zoom_max": 4.806,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 4.806,
+        "zoom_max": 4.806
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-ae341a88b5319133.mmd",
+          "bytes": 201,
+          "sha256": "ae341a88b53191336c70793a77f24f68513c87e67cdd80a9422e9e176dd54335"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-ae341a88b5319133.svg",
+          "bytes": 19816,
+          "sha256": "2ecb645788b6a26df7657ee5f45d0afb1f56a557f01af8558d8fdf13d9f4404f"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-ae341a88b5319133.png",
+          "bytes": 101612,
+          "sha256": "69193f4ee185aa0523e0b4e1a032ba1e363cb84ae43c3a99eee3633dd02f0845"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-ae341a88b5319133.gif",
+          "bytes": 1008467,
+          "sha256": "aac530ca4c9705de06e3ea44c8cdf44f7bce23cdffc63174f967f16dee8d2e24"
+        }
+      }
+    },
+    {
+      "id": "diagram-a131171c4c7e9553",
+      "title": "Panorama completo por camadas",
+      "source_sha256": "a131171c4c7e95534238f69aaf0bb8c939825e3c7f0274b39a6e295f5df3a22a",
+      "origins": [
+        {
+          "path": "README.md",
+          "block": 7
+        },
+        {
+          "path": "docs/architecture/flows/01-panorama.mmd",
+          "flow_id": "panorama"
+        }
+      ],
+      "zoom_min": 2.8,
+      "zoom_max": 2.8,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 2.8,
+        "zoom_max": 2.8
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-a131171c4c7e9553.mmd",
+          "bytes": 3886,
+          "sha256": "a131171c4c7e95534238f69aaf0bb8c939825e3c7f0274b39a6e295f5df3a22a"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-a131171c4c7e9553.svg",
+          "bytes": 152466,
+          "sha256": "17ed8bb4bcb0b20b09427c662a63ceeace00bfa311c4acc40f59d8400135d281"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-a131171c4c7e9553.png",
+          "bytes": 148441,
+          "sha256": "94b68e59dae157d3ec8111b8386ad698e6522ec5e9406a44bf8ae18544fa8db1"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-a131171c4c7e9553.gif",
+          "bytes": 1435285,
+          "sha256": "f98bfff0e4fd1197fe24b2806c767bfe43499ef47c8d492c6047b6244dae432f"
+        }
+      }
+    },
+    {
+      "id": "diagram-740458b3fd23f403",
+      "title": "Orquestração primária e execução CLI",
+      "source_sha256": "740458b3fd23f403522565e1f911baf3365691404bdd9f05de7d88fd0480beb9",
+      "origins": [
+        {
+          "path": "README.md",
+          "block": 8
+        }
+      ],
+      "zoom_min": 2.034,
+      "zoom_max": 2.034,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 2.034,
+        "zoom_max": 2.034
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-740458b3fd23f403.mmd",
+          "bytes": 2521,
+          "sha256": "740458b3fd23f403522565e1f911baf3365691404bdd9f05de7d88fd0480beb9"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-740458b3fd23f403.svg",
+          "bytes": 99646,
+          "sha256": "9405a0f6affb49a0808568bd65b2f233ee30d61e9a7d2f61deefab11f8aa123e"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-740458b3fd23f403.png",
+          "bytes": 101258,
+          "sha256": "147bc9c31d6ffe110a3cdba024205b4643ae2fbb30b06b17bef37006d4817fe5"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-740458b3fd23f403.gif",
+          "bytes": 1063620,
+          "sha256": "389f2480a611eef1ee936ef66c87e8a1e160e099a789e8deb80e0f69e846824b"
+        }
+      }
+    },
+    {
+      "id": "diagram-b05977d545b7de24",
+      "title": "Workflow DAG e retomada",
+      "source_sha256": "b05977d545b7de24b96c8243a55e606d4dbaa5f26f948258bc899faaa8b142a8",
+      "origins": [
+        {
+          "path": "README.md",
+          "block": 9
+        },
+        {
+          "path": "docs/architecture/flows/03-workflow-dag.mmd",
+          "flow_id": "workflow"
+        }
+      ],
+      "zoom_min": 1.35,
+      "zoom_max": 1.35,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 1.35,
+        "zoom_max": 1.35
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-b05977d545b7de24.mmd",
+          "bytes": 2068,
+          "sha256": "b05977d545b7de24b96c8243a55e606d4dbaa5f26f948258bc899faaa8b142a8"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-b05977d545b7de24.svg",
+          "bytes": 94973,
+          "sha256": "17391a4ff76567bbd4ec954cb23bc0d7855643cf8d4ccd87a415ededad7528db"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-b05977d545b7de24.png",
+          "bytes": 90541,
+          "sha256": "69052e374e31324fb4e60bfb84fbe5b8b4c91efe85c1e4bdae146222deff8d1c"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-b05977d545b7de24.gif",
+          "bytes": 941178,
+          "sha256": "ae9e34a25ba80c36b50d13e6016b741d3a4c6cc2aafb3ca6540fd4b2fabf98b2"
+        }
+      }
+    },
+    {
+      "id": "diagram-f30ae99066baffe7",
+      "title": "SDD e histórico RED–GREEN",
+      "source_sha256": "f30ae99066baffe7e719bdb955cd5557d7509d848b057dc561e87d538087ebba",
+      "origins": [
+        {
+          "path": "README.md",
+          "block": 10
+        },
+        {
+          "path": "docs/architecture/flows/04-sdd-tdd.mmd",
+          "flow_id": "sdd-tdd"
+        }
+      ],
+      "zoom_min": 1.35,
+      "zoom_max": 1.35,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 1.35,
+        "zoom_max": 1.35
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-f30ae99066baffe7.mmd",
+          "bytes": 1893,
+          "sha256": "f30ae99066baffe7e719bdb955cd5557d7509d848b057dc561e87d538087ebba"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-f30ae99066baffe7.svg",
+          "bytes": 71435,
+          "sha256": "2b44e67bed3f84601aa7e14dfd9c8f8a246fc135d63f5c32ad46b0db3bbcd17f"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-f30ae99066baffe7.png",
+          "bytes": 93931,
+          "sha256": "292d0e691d569faf13ab79f9b4ec2c9f265a9a54692c60f785ffdc846145653b"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-f30ae99066baffe7.gif",
+          "bytes": 1107405,
+          "sha256": "26f28b2773d3024c3095de8cfc23951c2d3c97443a96355c5a9b9aeed5ac2f59"
+        }
+      }
+    },
+    {
+      "id": "diagram-8a73f62c86a7bfc4",
+      "title": "REA e camadas de provedores",
+      "source_sha256": "8a73f62c86a7bfc4eac466d7f4d8128064023b9dec9060f1298001fc0100e70a",
+      "origins": [
+        {
+          "path": "README.md",
+          "block": 11
+        }
+      ],
+      "zoom_min": 2.8,
+      "zoom_max": 2.8,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 2.8,
+        "zoom_max": 2.8
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-8a73f62c86a7bfc4.mmd",
+          "bytes": 3364,
+          "sha256": "8a73f62c86a7bfc4eac466d7f4d8128064023b9dec9060f1298001fc0100e70a"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-8a73f62c86a7bfc4.svg",
+          "bytes": 111404,
+          "sha256": "a66927df79aaee798d7c72df89409c40973fb6ad905ee42bb7170b308fef392f"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-8a73f62c86a7bfc4.png",
+          "bytes": 114344,
+          "sha256": "d7df033fda90ff5a4040a298862b0a8df27df3ee02d953ce4b7615304684977e"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-8a73f62c86a7bfc4.gif",
+          "bytes": 1184885,
+          "sha256": "86297cde9e0f8ceb21d727e0605d77edbd8ef0038303cea8288be4bdac220c3f"
+        }
+      }
+    },
+    {
+      "id": "diagram-f64391e6f070fd4a",
+      "title": "REA local direto e evidência",
+      "source_sha256": "f64391e6f070fd4aeeb4375a2351ea66671239fbba47a500b6e54e83e9bddd2e",
+      "origins": [
+        {
+          "path": "README.md",
+          "block": 12
+        },
+        {
+          "path": "docs/architecture/flows/06-rea-local.mmd",
+          "flow_id": "rea-local"
+        }
+      ],
+      "zoom_min": 1.35,
+      "zoom_max": 1.35,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 1.35,
+        "zoom_max": 1.35
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-f64391e6f070fd4a.mmd",
+          "bytes": 2052,
+          "sha256": "f64391e6f070fd4aeeb4375a2351ea66671239fbba47a500b6e54e83e9bddd2e"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-f64391e6f070fd4a.svg",
+          "bytes": 80832,
+          "sha256": "05c7e70f500eee23c04fef5606c5ce6ac62d259b8cf422ba16b973f5f8c0b12e"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-f64391e6f070fd4a.png",
+          "bytes": 92339,
+          "sha256": "af3cefadd5f17addfd092ba95560a9b8b71af73fd82b59899d4163aae2ea92ef"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-f64391e6f070fd4a.gif",
+          "bytes": 1141897,
+          "sha256": "d8b9ed3356a2aab9ba9ea23e05a0b7a464c1c639e079a4a0a1e5b4d0a45a7292"
+        }
+      }
+    },
+    {
+      "id": "diagram-9695787734dbc84f",
+      "title": "REA com agente local e gate de recibos",
+      "source_sha256": "9695787734dbc84fd15a7c8a55cf66a0d56c10e09b1f7b6c90b89bea32d0d5b6",
+      "origins": [
+        {
+          "path": "README.md",
+          "block": 13
+        },
+        {
+          "path": "docs/architecture/flows/07-rea-agente.mmd",
+          "flow_id": "rea-agente"
+        }
+      ],
+      "zoom_min": 1.603,
+      "zoom_max": 1.603,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 1.603,
+        "zoom_max": 1.603
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-9695787734dbc84f.mmd",
+          "bytes": 2049,
+          "sha256": "9695787734dbc84fd15a7c8a55cf66a0d56c10e09b1f7b6c90b89bea32d0d5b6"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-9695787734dbc84f.svg",
+          "bytes": 82468,
+          "sha256": "59f35416d638676050b7e826a5ed3f8bfbe22ff98a12a4d4490e5604b0d2e5f8"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-9695787734dbc84f.png",
+          "bytes": 103465,
+          "sha256": "5878a72ef512d15475f1da696642a9d84a8817433f4ec5b003ba7a6979c8af35"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-9695787734dbc84f.gif",
+          "bytes": 1005590,
+          "sha256": "626600e09f8e1f1ba7de9b7b96af433ad695b6d2d1c1326a6ed2ab315c37437c"
+        }
+      }
+    },
+    {
+      "id": "diagram-b6d478484fbf90e1",
+      "title": "Conhecimento, RAG e grafos de evidência",
+      "source_sha256": "b6d478484fbf90e1e174754b0997f1a75d051343846768de26e1256e4aeb6f58",
+      "origins": [
+        {
+          "path": "README.md",
+          "block": 14
+        },
+        {
+          "path": "docs/architecture/flows/08-conhecimento-rag.mmd",
+          "flow_id": "conhecimento"
+        }
+      ],
+      "zoom_min": 2.144,
+      "zoom_max": 2.144,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 2.144,
+        "zoom_max": 2.144
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-b6d478484fbf90e1.mmd",
+          "bytes": 1850,
+          "sha256": "b6d478484fbf90e1e174754b0997f1a75d051343846768de26e1256e4aeb6f58"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-b6d478484fbf90e1.svg",
+          "bytes": 66980,
+          "sha256": "5f5c8c9d029861773a19a4fe2298d2ccfd756355d530e5172833154790946ca7"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-b6d478484fbf90e1.png",
+          "bytes": 151099,
+          "sha256": "f97ed8563533c4464d30244dc8315f68243e399773c5c107129644cc7023af07"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-b6d478484fbf90e1.gif",
+          "bytes": 1583739,
+          "sha256": "2eb6951e3f61437187373c089942818321c43adefea47f5f2a93618184808878"
+        }
+      }
+    },
+    {
+      "id": "diagram-d8277393ea44679f",
+      "title": "Rede de memória observável",
+      "source_sha256": "d8277393ea44679f9afecb889c406723c0459fe8c40364b1e45bbdd575418d98",
+      "origins": [
+        {
+          "path": "README.md",
+          "block": 15
+        },
+        {
+          "path": "docs/architecture/flows/09-memoria-observavel.mmd",
+          "flow_id": "memoria"
+        }
+      ],
+      "zoom_min": 2.118,
+      "zoom_max": 2.118,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 2.118,
+        "zoom_max": 2.118
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-d8277393ea44679f.mmd",
+          "bytes": 1603,
+          "sha256": "d8277393ea44679f9afecb889c406723c0459fe8c40364b1e45bbdd575418d98"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-d8277393ea44679f.svg",
+          "bytes": 56044,
+          "sha256": "5f18ac1003a4976f5f2eeb356ff68a1400f373857e1df1e54e2927f7a3e4158b"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-d8277393ea44679f.png",
+          "bytes": 137176,
+          "sha256": "2e79a4228c4aecdba2bf240febec24a84eeec96e674a4812ea6d097d1f204d95"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-d8277393ea44679f.gif",
+          "bytes": 1368393,
+          "sha256": "ef492aa3abef145ab438914d3801cac199c07b9df3e5a56a1d19574f916d5f51"
+        }
+      }
+    },
+    {
+      "id": "diagram-a52c85b1012c269c",
+      "title": "Raciocínio restrito e fallbacks",
+      "source_sha256": "a52c85b1012c269c12cd1de867fc0bc7e146be7261765cf6554afe1df6cfe318",
+      "origins": [
+        {
+          "path": "README.md",
+          "block": 16
+        },
+        {
+          "path": "docs/architecture/flows/10-raciocinio.mmd",
+          "flow_id": "raciocinio"
+        }
+      ],
+      "zoom_min": 1.983,
+      "zoom_max": 1.983,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 1.983,
+        "zoom_max": 1.983
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-a52c85b1012c269c.mmd",
+          "bytes": 2047,
+          "sha256": "a52c85b1012c269c12cd1de867fc0bc7e146be7261765cf6554afe1df6cfe318"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-a52c85b1012c269c.svg",
+          "bytes": 83938,
+          "sha256": "07d1fed3d1286bd6fd97341207d33a86a0ccb6f8a011dd3159f1430166b366bf"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-a52c85b1012c269c.png",
+          "bytes": 109438,
+          "sha256": "3c9f9a20b86fc7b6421d452b0ffbfaa9a2450ba3f5ccd81874d644791cc229d9"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-a52c85b1012c269c.gif",
+          "bytes": 1160209,
+          "sha256": "96b798f8c40acfb889d0c7136b707c8ae596e930e4919e56db312bb0130924e4"
+        }
+      }
+    },
+    {
+      "id": "diagram-3558275afca46564",
+      "title": "Diagnóstico, confiança, federação e evolução",
+      "source_sha256": "3558275afca46564ba50bb45b08d90c91a0d1b6597c8bd27b1e6d6ec27545b13",
+      "origins": [
+        {
+          "path": "README.md",
+          "block": 17
+        }
+      ],
+      "zoom_min": 2.635,
+      "zoom_max": 2.635,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 2.635,
+        "zoom_max": 2.635
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-3558275afca46564.mmd",
+          "bytes": 2588,
+          "sha256": "3558275afca46564ba50bb45b08d90c91a0d1b6597c8bd27b1e6d6ec27545b13"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-3558275afca46564.svg",
+          "bytes": 83070,
+          "sha256": "412b40fcac2ea04e16b417d233d09b8d4adc301dc165b6f0951f7f71541a721e"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-3558275afca46564.png",
+          "bytes": 156177,
+          "sha256": "d451229fb7a16d8ab60893dadd4759b96b299e48cb095428d68ae9cc90cd230f"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-3558275afca46564.gif",
+          "bytes": 1607708,
+          "sha256": "98bd1e1d8a59afe87f558e4a52da959bc3aad06092eddfeac782f37cd94f7a64"
+        }
+      }
+    },
+    {
+      "id": "diagram-829bfb0c2728f8e8",
+      "title": "Ciência, proveniência e publicação",
+      "source_sha256": "829bfb0c2728f8e889c3ba4c538c9cb72a5356475306980d0a3ce85a170b74ce",
+      "origins": [
+        {
+          "path": "README.md",
+          "block": 18
+        },
+        {
+          "path": "docs/architecture/flows/12-ciencia-publicacao.mmd",
+          "flow_id": "ciencia"
+        }
+      ],
+      "zoom_min": 2.8,
+      "zoom_max": 2.8,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 2.8,
+        "zoom_max": 2.8
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-829bfb0c2728f8e8.mmd",
+          "bytes": 3118,
+          "sha256": "829bfb0c2728f8e889c3ba4c538c9cb72a5356475306980d0a3ce85a170b74ce"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-829bfb0c2728f8e8.svg",
+          "bytes": 101734,
+          "sha256": "ae976208477f02829d3d7bac0cca57010b1825b4d9035ed578c86838d98d4ddc"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-829bfb0c2728f8e8.png",
+          "bytes": 138088,
+          "sha256": "0da1f5c7760233b081170d83868ba941b05bbcbe8c30ec81e32e0f3cfa699985"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-829bfb0c2728f8e8.gif",
+          "bytes": 1399474,
+          "sha256": "ea7e91d6056abf2ac77614c6f0455494fe72d4780986f064ad0761b530a11552"
+        }
+      }
+    },
+    {
+      "id": "diagram-29a96da731327441",
+      "title": "Validação e entrega",
+      "source_sha256": "29a96da731327441b0292feae12dd710e56b28e60c035e4d19c917d2f084682c",
+      "origins": [
+        {
+          "path": "README.md",
+          "block": 19
+        },
+        {
+          "path": "docs/architecture/flows/13-validacao-entrega.mmd",
+          "flow_id": "entrega"
+        }
+      ],
+      "zoom_min": 2.135,
+      "zoom_max": 2.135,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 2.135,
+        "zoom_max": 2.135
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-29a96da731327441.mmd",
+          "bytes": 1679,
+          "sha256": "29a96da731327441b0292feae12dd710e56b28e60c035e4d19c917d2f084682c"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-29a96da731327441.svg",
+          "bytes": 66080,
+          "sha256": "296df2abd484b453a1ce7194685767d4f78c9720a538db5190ac27170e286301"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-29a96da731327441.png",
+          "bytes": 126778,
+          "sha256": "fb3b4fc22fdb308d788c5ee2987a485af716201af6ec3e23b90c90696ac81e7a"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-29a96da731327441.gif",
+          "bytes": 1351246,
+          "sha256": "fd42fd66d38dd9a4479edfa0aea66c5f95bcc0de5ccbfd62a7813716a8c48d2c"
+        }
+      }
+    },
+    {
+      "id": "diagram-83a0417e20f0d613",
+      "title": "Plugins locais, Lean 4 e MiroFish",
+      "source_sha256": "83a0417e20f0d6133c84624a02f6b076957855d51b96d17f0bfe01eebee37694",
+      "origins": [
+        {
+          "path": "README.md",
+          "block": 20
+        },
+        {
+          "path": "docs/architecture/flows/14-plugins-locais.mmd",
+          "flow_id": "plugins-locais"
+        }
+      ],
+      "zoom_min": 1.35,
+      "zoom_max": 1.35,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 1.35,
+        "zoom_max": 1.35
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-83a0417e20f0d613.mmd",
+          "bytes": 1124,
+          "sha256": "83a0417e20f0d6133c84624a02f6b076957855d51b96d17f0bfe01eebee37694"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-83a0417e20f0d613.svg",
+          "bytes": 49107,
+          "sha256": "84f7baebf86e4fc67117420220c3a49d7754dafe2dd08be4d513b496959ba72a"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-83a0417e20f0d613.png",
+          "bytes": 111309,
+          "sha256": "2c6eed675ac93b5a0ca668b257b7a5bd9014fdb410e67bceea7ea00775c34e9b"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-83a0417e20f0d613.gif",
+          "bytes": 1037737,
+          "sha256": "e9e3f4597553d067d475601d71c9827588e3ea156e6425060b67a0cbadde79be"
+        }
+      }
+    },
+    {
+      "id": "diagram-d6956b6d79e1eb30",
+      "title": "NotebookLM coordenado e política R915",
+      "source_sha256": "d6956b6d79e1eb30b43829b3894469e8894e50f6d0484014f72832157d81bc4f",
+      "origins": [
+        {
+          "path": "README.md",
+          "block": 21
+        },
+        {
+          "path": "docs/architecture/flows/15-notebooklm.mmd",
+          "flow_id": "notebooklm"
+        }
+      ],
+      "zoom_min": 1.838,
+      "zoom_max": 1.838,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 1.838,
+        "zoom_max": 1.838
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-d6956b6d79e1eb30.mmd",
+          "bytes": 1186,
+          "sha256": "d6956b6d79e1eb30b43829b3894469e8894e50f6d0484014f72832157d81bc4f"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-d6956b6d79e1eb30.svg",
+          "bytes": 54445,
+          "sha256": "4cdb40e529127060eac114a3fa0ec09b2fbd572eddae162dea1f14e54fe4957a"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-d6956b6d79e1eb30.png",
+          "bytes": 109558,
+          "sha256": "e3d91fa7dfcbdce887be690613026a7cbcd738aac34df4b0fd89393a3fe2a24a"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-d6956b6d79e1eb30.gif",
+          "bytes": 749593,
+          "sha256": "842dfd3592dabfda96f198d02dcefc7e27a82b0ef03e116a430a9fb7a4e75db2"
+        }
+      }
+    },
+    {
+      "id": "diagram-052725f98ca383e6",
+      "title": "Autenticações de ChatGPT, Gemini e NotebookLM",
+      "source_sha256": "052725f98ca383e6deb8c3be0331ae530fb0ddd123377c2baad6a21603f9f5ae",
+      "origins": [
+        {
+          "path": "README.md",
+          "block": 22
+        },
+        {
+          "path": "docs/architecture/flows/16-autenticacoes.mmd",
+          "flow_id": "autenticacoes"
+        }
+      ],
+      "zoom_min": 1.367,
+      "zoom_max": 1.367,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 1.367,
+        "zoom_max": 1.367
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-052725f98ca383e6.mmd",
+          "bytes": 931,
+          "sha256": "052725f98ca383e6deb8c3be0331ae530fb0ddd123377c2baad6a21603f9f5ae"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-052725f98ca383e6.svg",
+          "bytes": 43425,
+          "sha256": "9c9c78bf84f6dc797911d95af215df69cd2de99d05e2aacedf50f424c20a9ba0"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-052725f98ca383e6.png",
+          "bytes": 139859,
+          "sha256": "37898b252d59434f5a473982474546af9aae087b5ea8575e529115b1ad80bbc0"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-052725f98ca383e6.gif",
+          "bytes": 1451482,
+          "sha256": "269b16fea859681b4959fe3cfea0bc257a2e0e6dbeca2eb5b507aca1b1a0ed42"
+        }
+      }
+    },
+    {
+      "id": "diagram-456a5348c47deb90",
+      "title": "Ciclo metacognitivo e memória de outcomes",
+      "source_sha256": "456a5348c47deb900ebd2fab34207958501361a8f7f260ba8643a397436f1547",
+      "origins": [
+        {
+          "path": "README.md",
+          "block": 23
+        },
+        {
+          "path": "docs/architecture/flows/17-metacognicao.mmd",
+          "flow_id": "metacognicao"
+        }
+      ],
+      "zoom_min": 1.35,
+      "zoom_max": 1.35,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 1.35,
+        "zoom_max": 1.35
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-456a5348c47deb90.mmd",
+          "bytes": 1062,
+          "sha256": "456a5348c47deb900ebd2fab34207958501361a8f7f260ba8643a397436f1547"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-456a5348c47deb90.svg",
+          "bytes": 42942,
+          "sha256": "9957b6b7757ccc19347359935b6acab2907a1e0ea13f871653d0f675b0c9d64b"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-456a5348c47deb90.png",
+          "bytes": 121091,
+          "sha256": "8e916b51b50cc363be92dfa17e489796afe2856a442aa661afa280c3eb1d96da"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-456a5348c47deb90.gif",
+          "bytes": 1175716,
+          "sha256": "bcd603a191c87a6441f738f59e39132813ba66354a9e3d99e3b05bd25352cab8"
+        }
+      }
+    },
+    {
+      "id": "diagram-09169c4fd46e8766",
+      "title": "Lifecycle permanente de agentes e subagentes",
+      "source_sha256": "09169c4fd46e87661e101e161dfb8bd823eb6bdcebe15110e0de1a95c191055a",
+      "origins": [
+        {
+          "path": "README.md",
+          "block": 24
+        },
+        {
+          "path": "docs/architecture/flows/18-lifecycle.mmd",
+          "flow_id": "lifecycle"
+        }
+      ],
+      "zoom_min": 1.35,
+      "zoom_max": 1.35,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 1.35,
+        "zoom_max": 1.35
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-09169c4fd46e8766.mmd",
+          "bytes": 1016,
+          "sha256": "09169c4fd46e87661e101e161dfb8bd823eb6bdcebe15110e0de1a95c191055a"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-09169c4fd46e8766.svg",
+          "bytes": 44792,
+          "sha256": "0b5f242f45794a959b4abda895b27bfeeafdcb52f3b635b350dc7e8da3e0e255"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-09169c4fd46e8766.png",
+          "bytes": 106212,
+          "sha256": "c225064f85f802fcac0793a5cc99b73d96937106b5443de5f87e0fbd220004d9"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-09169c4fd46e8766.gif",
+          "bytes": 968985,
+          "sha256": "0cfd929cf61079d410c4b8d8a429e0b077cd0cbb84e282d4388bdeb9abb61688"
+        }
+      }
+    },
+    {
+      "id": "diagram-4dda0aecf20b2d9d",
+      "title": "CI local e validação delimitada",
+      "source_sha256": "4dda0aecf20b2d9df65629995ce9f0fa867f659f90f2231346b482c4da099fe3",
+      "origins": [
+        {
+          "path": "README.md",
+          "block": 25
+        },
+        {
+          "path": "docs/architecture/flows/19-ci-local.mmd",
+          "flow_id": "ci-local"
+        }
+      ],
+      "zoom_min": 1.35,
+      "zoom_max": 1.35,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 1.35,
+        "zoom_max": 1.35
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-4dda0aecf20b2d9d.mmd",
+          "bytes": 990,
+          "sha256": "4dda0aecf20b2d9df65629995ce9f0fa867f659f90f2231346b482c4da099fe3"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-4dda0aecf20b2d9d.svg",
+          "bytes": 45891,
+          "sha256": "aabafbe64c2a6e5839d8f64938423fa25385d784ab95461a69ff4de34c5f4ffc"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-4dda0aecf20b2d9d.png",
+          "bytes": 106927,
+          "sha256": "7d9a43d7b28b92ec663b85d6594f2c383e2ff97a51032a6a867fe9dd9b1898bc"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-4dda0aecf20b2d9d.gif",
+          "bytes": 973913,
+          "sha256": "871c98c46aa4879dc882684608f9686cfe8bea411d2c4cedc68e0fc33d546c5b"
+        }
+      }
+    },
+    {
+      "id": "diagram-5e4fa5583c5976f3",
+      "title": "Seleção econômica de modelos e contexto",
+      "source_sha256": "5e4fa5583c5976f397a3910ac2df07edb40ac2058284e85e9791a4ef62303d9b",
+      "origins": [
+        {
+          "path": "README.md",
+          "block": 26
+        },
+        {
+          "path": "docs/architecture/flows/20-economia-modelos.mmd",
+          "flow_id": "economia-modelos"
+        }
+      ],
+      "zoom_min": 1.35,
+      "zoom_max": 1.35,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 1.35,
+        "zoom_max": 1.35
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-5e4fa5583c5976f3.mmd",
+          "bytes": 1466,
+          "sha256": "5e4fa5583c5976f397a3910ac2df07edb40ac2058284e85e9791a4ef62303d9b"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-5e4fa5583c5976f3.svg",
+          "bytes": 56692,
+          "sha256": "92b4062031afac32cd697fb99a10033f2d5a54804bff808b6f0936c2d593a493"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-5e4fa5583c5976f3.png",
+          "bytes": 114164,
+          "sha256": "f8e06fb4bbbf9a279de765f7777bcace1d1ec933da3cc37e6c1ea328c9299d2f"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-5e4fa5583c5976f3.gif",
+          "bytes": 1134313,
+          "sha256": "85f51999a98a9f333f149387c5ed35c0e6d306ea7d0db429242b375de22c9979"
+        }
+      }
+    },
+    {
+      "id": "diagram-61c4c013d6202872",
+      "title": "Contexto de código e consultas de grafo",
+      "source_sha256": "61c4c013d62028724cde540170a75a59ef6bc3401a1246e0108328a14caabdf2",
+      "origins": [
+        {
+          "path": "README.md",
+          "block": 27
+        },
+        {
+          "path": "docs/architecture/flows/21-contexto-codigo.mmd",
+          "flow_id": "contexto-codigo"
+        }
+      ],
+      "zoom_min": 1.35,
+      "zoom_max": 1.35,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 1.35,
+        "zoom_max": 1.35
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-61c4c013d6202872.mmd",
+          "bytes": 874,
+          "sha256": "61c4c013d62028724cde540170a75a59ef6bc3401a1246e0108328a14caabdf2"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-61c4c013d6202872.svg",
+          "bytes": 41345,
+          "sha256": "6e62a36b083a151f7fcaae8baf8232c72c59b369f0747be1e0a2eac4dd580e1f"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-61c4c013d6202872.png",
+          "bytes": 116093,
+          "sha256": "514fe36151bf792b667582252aa8798e0473b74cc4e87c4f38c1e67cba267eb7"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-61c4c013d6202872.gif",
+          "bytes": 974184,
+          "sha256": "be16f649171d886de6958e8eec435dd96a6d4c750aa87375049d813d67a56373"
+        }
+      }
+    },
+    {
+      "id": "diagram-9e5a1f7dd8a923ea",
+      "title": "Contexto, erros e telemetria de Ollama local",
+      "source_sha256": "9e5a1f7dd8a923ea6769b09b90b90d32c4dbd16ed657a4190960c49f6ec5e129",
+      "origins": [
+        {
+          "path": "README.md",
+          "block": 28
+        },
+        {
+          "path": "docs/architecture/flows/22-ollama-contexto-erros.mmd",
+          "flow_id": "ollama-contexto-erros"
+        }
+      ],
+      "zoom_min": 1.425,
+      "zoom_max": 1.425,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 1.425,
+        "zoom_max": 1.425
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-9e5a1f7dd8a923ea.mmd",
+          "bytes": 1156,
+          "sha256": "9e5a1f7dd8a923ea6769b09b90b90d32c4dbd16ed657a4190960c49f6ec5e129"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-9e5a1f7dd8a923ea.svg",
+          "bytes": 50609,
+          "sha256": "ad3f61ac97680c05dccb9679d6ffea75be57fea11e2c8c21453d0bd669722961"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-9e5a1f7dd8a923ea.png",
+          "bytes": 110960,
+          "sha256": "6b0558e1fa0f9f0994fde27ae85786f61529c7eb315469395afb11ac46769729"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-9e5a1f7dd8a923ea.gif",
+          "bytes": 972825,
+          "sha256": "9de5154022fbb516d6c3be03431a0b4030890ed2077c4ed5ca2eb6556e31259c"
+        }
+      }
+    },
+    {
+      "id": "diagram-f7dff79343b1ad37",
+      "title": "Contribuindo",
+      "source_sha256": "f7dff79343b1ad3798260ba28d758280f826a44b2938438cd2084415329cdb0a",
+      "origins": [
+        {
+          "path": "README.md",
+          "block": 29
+        }
+      ],
+      "zoom_min": 10.74,
+      "zoom_max": 10.74,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 10.74,
+        "zoom_max": 10.74
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-f7dff79343b1ad37.mmd",
+          "bytes": 241,
+          "sha256": "f7dff79343b1ad3798260ba28d758280f826a44b2938438cd2084415329cdb0a"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-f7dff79343b1ad37.svg",
+          "bytes": 19094,
+          "sha256": "24063dd6b7d6ab377df699fd9a63b08597442693879c6c8526918f8f05940f53"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-f7dff79343b1ad37.png",
+          "bytes": 84595,
+          "sha256": "364976ee2038b4d88096558794e0c3a143316809d5e6ed3bd7c409cd204a276c"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-f7dff79343b1ad37.gif",
+          "bytes": 1073214,
+          "sha256": "2740bd150e6fe5bba6f9f23eaf7e8867bc4660f2e43b4a7f3ffd59d35b34c182"
+        }
+      }
+    },
+    {
+      "id": "diagram-1372cc41a353c17e",
+      "title": "O que foi integrado",
+      "source_sha256": "1372cc41a353c17e82649b775329b40bfb33844cc145b957d6bd3d9ed7c007a4",
+      "origins": [
+        {
+          "path": "docs/ACEITE_CIENTIFICO_LOCAL_R891.md",
+          "block": 1
+        }
+      ],
+      "zoom_min": 1.35,
+      "zoom_max": 1.35,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 1.35,
+        "zoom_max": 1.35
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-1372cc41a353c17e.mmd",
+          "bytes": 773,
+          "sha256": "1372cc41a353c17e82649b775329b40bfb33844cc145b957d6bd3d9ed7c007a4"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-1372cc41a353c17e.svg",
+          "bytes": 39050,
+          "sha256": "98d2aaeb926af16e8e376393a876eae1c081626be70b70e8c1b5b1984c0cbd1b"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-1372cc41a353c17e.png",
+          "bytes": 102503,
+          "sha256": "26a3682a87610d266f2171a8e996067f3a29d8e678a7d5241a45d93714e811ba"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-1372cc41a353c17e.gif",
+          "bytes": 1084665,
+          "sha256": "6b18ea387a2b8ab872c1255305d76ebe3d35ae7f26a339aa4d10a27fdc6ff492"
+        }
+      }
+    },
+    {
+      "id": "diagram-81a3f5bb1dc6f17f",
+      "title": "ChatGPT pelo OpenCode",
+      "source_sha256": "81a3f5bb1dc6f17f68d90c7fa8ababb52f4c222b70dfc9b1f6e715cafc002e0d",
+      "origins": [
+        {
+          "path": "docs/AUTENTICACAO_CHATGPT_NOTEBOOKLM.md",
+          "block": 1
+        }
+      ],
+      "zoom_min": 1.934,
+      "zoom_max": 1.934,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 1.934,
+        "zoom_max": 1.934
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-81a3f5bb1dc6f17f.mmd",
+          "bytes": 381,
+          "sha256": "81a3f5bb1dc6f17f68d90c7fa8ababb52f4c222b70dfc9b1f6e715cafc002e0d"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-81a3f5bb1dc6f17f.svg",
+          "bytes": 25589,
+          "sha256": "ff6287c330ff09dd342988cfa9ca8194827097fe0ee7c264d84b667cccb6afa4"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-81a3f5bb1dc6f17f.png",
+          "bytes": 153459,
+          "sha256": "143a5aafbe11980d194be708d8584e5f6ccaea49f702b5fdd751d4dc1d4a2200"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-81a3f5bb1dc6f17f.gif",
+          "bytes": 1638681,
+          "sha256": "54cd5aac08bb936636ded6344c6cdee90f48f05c1fa80df9ff09b842f92a136c"
+        }
+      }
+    },
+    {
+      "id": "diagram-bf3f77a82c45ea0f",
+      "title": "Fluxo recomendado dentro da arquitetura existente",
+      "source_sha256": "bf3f77a82c45ea0f3f1d10bbe8416f9542b5d1b892db24197a41e6aa15c5c780",
+      "origins": [
+        {
+          "path": "docs/AVALIACAO_WOLFRAM_CORE_R895.md",
+          "block": 1
+        }
+      ],
+      "zoom_min": 1.35,
+      "zoom_max": 1.35,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 1.35,
+        "zoom_max": 1.35
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-bf3f77a82c45ea0f.mmd",
+          "bytes": 921,
+          "sha256": "bf3f77a82c45ea0f3f1d10bbe8416f9542b5d1b892db24197a41e6aa15c5c780"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-bf3f77a82c45ea0f.svg",
+          "bytes": 46105,
+          "sha256": "edf8f552174e96a3becce7882a965423281323d9938b11ba2e6b16f49185ec45"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-bf3f77a82c45ea0f.png",
+          "bytes": 123887,
+          "sha256": "333d43f284c353b584d7a0c32a78fb49fedc0340dc37ae600c8e3f73a6500f99"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-bf3f77a82c45ea0f.gif",
+          "bytes": 1174610,
+          "sha256": "78d4cc6a1327840a3854e49176443612d5a4bc4a90cf145cbd472caf00bc06e7"
+        }
+      }
+    },
+    {
+      "id": "diagram-a5f718c8b3d6d219",
+      "title": "Pipeline audiovisual R1055",
+      "source_sha256": "a5f718c8b3d6d2191a693c2ed16900bcbce361f8bccf868afda61114a0d4d830",
+      "origins": [
+        {
+          "path": "docs/CINEMATIC_REMOTION_R1055.md",
+          "block": 1
+        }
+      ],
+      "zoom_min": 1.35,
+      "zoom_max": 1.35,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 1.35,
+        "zoom_max": 1.35
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-a5f718c8b3d6d219.mmd",
+          "bytes": 608,
+          "sha256": "a5f718c8b3d6d2191a693c2ed16900bcbce361f8bccf868afda61114a0d4d830"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-a5f718c8b3d6d219.svg",
+          "bytes": 35833,
+          "sha256": "3cdd4533c7a30f15339335544f2234b5942d10fd4ca700e532d025e7af970d92"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-a5f718c8b3d6d219.png",
+          "bytes": 111686,
+          "sha256": "b6a7572d5ed3bfa5a80ce4c9896131837cfbb26edb4b4f90a7d590caae64b660"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-a5f718c8b3d6d219.gif",
+          "bytes": 987921,
+          "sha256": "1bf49ba7c9101d2032ecfadffae42510fe9a56470b0253123a4340fda9116472"
+        }
+      }
+    },
+    {
+      "id": "diagram-2a9d97dea7a3cd7c",
+      "title": "Evolução do conhecimento e pesquisa reproduzível",
+      "source_sha256": "2a9d97dea7a3cd7c2ec6c2d2a44119304cb75e56871d3b70e4d74d901c39cbc7",
+      "origins": [
+        {
+          "path": "docs/CONHECIMENTO_CIENTIFICO_R663_R666.md",
+          "block": 1
+        }
+      ],
+      "zoom_min": 12.759,
+      "zoom_max": 12.759,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 12.759,
+        "zoom_max": 12.759
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-2a9d97dea7a3cd7c.mmd",
+          "bytes": 380,
+          "sha256": "2a9d97dea7a3cd7c2ec6c2d2a44119304cb75e56871d3b70e4d74d901c39cbc7"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-2a9d97dea7a3cd7c.svg",
+          "bytes": 24124,
+          "sha256": "db1ff5b7f447dd81bf7b7a4183c2ddf0af21178591bb9c6f07c4c6213ce1b82c"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-2a9d97dea7a3cd7c.png",
+          "bytes": 109943,
+          "sha256": "e866eb51c01e4a6148153596373bb821265f7133850ff6cdf8fac64182ca4108"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-2a9d97dea7a3cd7c.gif",
+          "bytes": 1397297,
+          "sha256": "4435888bc3f8615155a0bcc03781a764819b8f3c516e8a1e0b759a77a7a8530f"
+        }
+      }
+    },
+    {
+      "id": "diagram-a240de7a75b447de",
+      "title": "Contexto de código local — R887",
+      "source_sha256": "a240de7a75b447de1c711c291e0ba4b281bc3e0e30bd34ab6143caec26a1ccd9",
+      "origins": [
+        {
+          "path": "docs/CONTEXTO_CODIGO_LOCAL_R887.md",
+          "block": 1
+        }
+      ],
+      "zoom_min": 1.35,
+      "zoom_max": 1.35,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 1.35,
+        "zoom_max": 1.35
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-a240de7a75b447de.mmd",
+          "bytes": 1284,
+          "sha256": "a240de7a75b447de1c711c291e0ba4b281bc3e0e30bd34ab6143caec26a1ccd9"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-a240de7a75b447de.svg",
+          "bytes": 53505,
+          "sha256": "b5147dc0bcd2a7eb1e39eb798b246f794f2d0b59f214cd17d4697a68ada3db4e"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-a240de7a75b447de.png",
+          "bytes": 161538,
+          "sha256": "02aab2684b082cf1c4cfdc5d426b1a748cc8cc595b9b14f8948d0a0ef80fe30a"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-a240de7a75b447de.gif",
+          "bytes": 1536439,
+          "sha256": "cdde83919e6cd45dc0f8b425f722f12cb3fbe4ea0fcdc61419a15f3e28d5ae77"
+        }
+      }
+    },
+    {
+      "id": "diagram-96fc8cf3f7a01e0f",
+      "title": "O que R890 mudou no código existente",
+      "source_sha256": "96fc8cf3f7a01e0ff0bfd8ed39154796b759e0fb5a5ed4e49825e94c7eda79fd",
+      "origins": [
+        {
+          "path": "docs/DECISOES_ADAPTACAO_REPOS_R890.md",
+          "block": 1
+        }
+      ],
+      "zoom_min": 1.35,
+      "zoom_max": 1.35,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 1.35,
+        "zoom_max": 1.35
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-96fc8cf3f7a01e0f.mmd",
+          "bytes": 726,
+          "sha256": "96fc8cf3f7a01e0ff0bfd8ed39154796b759e0fb5a5ed4e49825e94c7eda79fd"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-96fc8cf3f7a01e0f.svg",
+          "bytes": 37445,
+          "sha256": "3542070ecc5581f7dd403fe783c4136a3d264f2912308ba34cfd700223923dc2"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-96fc8cf3f7a01e0f.png",
+          "bytes": 136877,
+          "sha256": "788d8676e2dff94557771d4e8302ae66cdf53c81a9643b0409879cb2d6aba9f9"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-96fc8cf3f7a01e0f.gif",
+          "bytes": 1347451,
+          "sha256": "03be9ae9e1f8200798fa8950bae889464ae2a7c125c6f6e841b6f115b424149c"
+        }
+      }
+    },
+    {
+      "id": "diagram-a74ec60eff3c99a2",
+      "title": "Ciclo metacognitivo integrado — R886",
+      "source_sha256": "a74ec60eff3c99a2bf43bd0fe8db96503a58625cda6a26e3be0e28828e994b5e",
+      "origins": [
+        {
+          "path": "docs/METACOGNICA_INTEGRADA_R886.md",
+          "block": 1
+        }
+      ],
+      "zoom_min": 1.35,
+      "zoom_max": 1.35,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 1.35,
+        "zoom_max": 1.35
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-a74ec60eff3c99a2.mmd",
+          "bytes": 851,
+          "sha256": "a74ec60eff3c99a2bf43bd0fe8db96503a58625cda6a26e3be0e28828e994b5e"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-a74ec60eff3c99a2.svg",
+          "bytes": 36340,
+          "sha256": "2629fd51fe5d843eca80c1cfc7d9ec4fdd97d36542d54311cf765c005fe73d1c"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-a74ec60eff3c99a2.png",
+          "bytes": 121995,
+          "sha256": "0d0376b30e57897ae7ee551d8ca2d298da09c226c80576d484f0d1e60f5bd786"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-a74ec60eff3c99a2.gif",
+          "bytes": 1160330,
+          "sha256": "725212935953490c20c7a2f0abc7602d3e4aafefcec63b32763361f2bf066b0e"
+        }
+      }
+    },
+    {
+      "id": "diagram-899949e238720352",
+      "title": "Registro e ativação pelo primário",
+      "source_sha256": "899949e238720352d7493bf9da28f220ada00a6b2c3f3e2c66e09b7496a0e885",
+      "origins": [
+        {
+          "path": "docs/ORQUESTRACAO_AGENTES_PLUGINS_CI_R894_R897.md",
+          "block": 1
+        }
+      ],
+      "zoom_min": 1.35,
+      "zoom_max": 1.35,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 1.35,
+        "zoom_max": 1.35
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-899949e238720352.mmd",
+          "bytes": 873,
+          "sha256": "899949e238720352d7493bf9da28f220ada00a6b2c3f3e2c66e09b7496a0e885"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-899949e238720352.svg",
+          "bytes": 50670,
+          "sha256": "5afde4838946b06e18ab7de6a1760effea0dafb4f1096703b0641513faa348e7"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-899949e238720352.png",
+          "bytes": 107701,
+          "sha256": "e755b5cd3fc2a590eb287b6ede3c28440da54d0fa7abf1b41d4d8055d17939aa"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-899949e238720352.gif",
+          "bytes": 1071257,
+          "sha256": "88324664a24e9d771e531f182b6765790e64379ae1dff7a714aef2474811f7a2"
+        }
+      }
+    },
+    {
+      "id": "diagram-b3a6ae7a9d2b3d4d",
+      "title": "Vinte plugins, um registro de capacidades",
+      "source_sha256": "b3a6ae7a9d2b3d4d557ef3649c4d2810332f7c510a1558d1521e18e77f6a9abe",
+      "origins": [
+        {
+          "path": "docs/ORQUESTRACAO_AGENTES_PLUGINS_CI_R894_R897.md",
+          "block": 2
+        }
+      ],
+      "zoom_min": 2.769,
+      "zoom_max": 2.769,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 2.769,
+        "zoom_max": 2.769
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-b3a6ae7a9d2b3d4d.mmd",
+          "bytes": 477,
+          "sha256": "b3a6ae7a9d2b3d4d557ef3649c4d2810332f7c510a1558d1521e18e77f6a9abe"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-b3a6ae7a9d2b3d4d.svg",
+          "bytes": 29623,
+          "sha256": "6ee6d3804adc30a6ba4fc7317f75cdababd6b85fbc9a8fd2dcbaedb655b036e2"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-b3a6ae7a9d2b3d4d.png",
+          "bytes": 127358,
+          "sha256": "196128dfefff177dd178c404485d211eb31d020a7824281a424ee71a62cdb47f"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-b3a6ae7a9d2b3d4d.gif",
+          "bytes": 1247529,
+          "sha256": "bc01e6881bb662313cd1bd17c00f53b68337a68aa615d6d885aa22e3b8f07b8e"
+        }
+      }
+    },
+    {
+      "id": "diagram-9a0642ee46b2aafb",
+      "title": "CI independente da cobrança GitHub",
+      "source_sha256": "9a0642ee46b2aafbc6bc4dc0a441cb55c13f8464b94f04d98de4a46cb38db87c",
+      "origins": [
+        {
+          "path": "docs/ORQUESTRACAO_AGENTES_PLUGINS_CI_R894_R897.md",
+          "block": 3
+        }
+      ],
+      "zoom_min": 1.35,
+      "zoom_max": 1.35,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 1.35,
+        "zoom_max": 1.35
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-9a0642ee46b2aafb.mmd",
+          "bytes": 735,
+          "sha256": "9a0642ee46b2aafbc6bc4dc0a441cb55c13f8464b94f04d98de4a46cb38db87c"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-9a0642ee46b2aafb.svg",
+          "bytes": 38379,
+          "sha256": "5cb739347f0e7e109454c5ba8bdb9d0e841ef07908f3a5200cf952f79eeb2ba6"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-9a0642ee46b2aafb.png",
+          "bytes": 107120,
+          "sha256": "6bce99f0a50bbc877d1daaf2c4f4f933f917b99042305176a3a2778d3ce098a0"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-9a0642ee46b2aafb.gif",
+          "bytes": 1021530,
+          "sha256": "bc15cdf771ea70f5db775a79dc2a708111e9045c20530956f496ddf167788b11"
+        }
+      }
+    },
+    {
+      "id": "diagram-88e2b4838b9045f6",
+      "title": "Resultado entregue",
+      "source_sha256": "88e2b4838b9045f6653b440fef1c3e597516dc334b23586deb11c6beb0f3bef8",
+      "origins": [
+        {
+          "path": "docs/REVISAO_ECOSSISTEMA_R808.md",
+          "block": 1
+        }
+      ],
+      "zoom_min": 1.52,
+      "zoom_max": 1.52,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 1.52,
+        "zoom_max": 1.52
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-88e2b4838b9045f6.mmd",
+          "bytes": 293,
+          "sha256": "88e2b4838b9045f6653b440fef1c3e597516dc334b23586deb11c6beb0f3bef8"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-88e2b4838b9045f6.svg",
+          "bytes": 22089,
+          "sha256": "abb3790b81604e43b5aa1a4f21eadb4b92e4c3b100a9ef3737f2a8019b700450"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-88e2b4838b9045f6.png",
+          "bytes": 136491,
+          "sha256": "54880c71df6c3cf5418a75fa0b6ddc3fda30ec2546a6cf5341235e4accf6ed99"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-88e2b4838b9045f6.gif",
+          "bytes": 1145830,
+          "sha256": "83c7d44ebf3915574f025db56aad1a8ba8e92c9ccdf9bbd41a7aef70fed2fc56"
+        }
+      }
+    },
+    {
+      "id": "diagram-57fc3d7d66f7c94b",
+      "title": "Coordenação em etapas e retomada",
+      "source_sha256": "57fc3d7d66f7c94b419f2820b9d7e26b1e1e1ceb7e0c9fc3edc142fa770bff10",
+      "origins": [
+        {
+          "path": "docs/WORKFLOWS_R644.md",
+          "block": 1
+        }
+      ],
+      "zoom_min": 5.477,
+      "zoom_max": 5.477,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 5.477,
+        "zoom_max": 5.477
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-57fc3d7d66f7c94b.mmd",
+          "bytes": 305,
+          "sha256": "57fc3d7d66f7c94b419f2820b9d7e26b1e1e1ceb7e0c9fc3edc142fa770bff10"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-57fc3d7d66f7c94b.svg",
+          "bytes": 20436,
+          "sha256": "90858f97a9e99624bd5fba57f27e5da10d7424f92c95316c68d7948f8e9de30a"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-57fc3d7d66f7c94b.png",
+          "bytes": 111115,
+          "sha256": "c895649ef8dd6b8c8a8494fecca8d9ad1a5c773b49666e1b535fb4f2c60db6e2"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-57fc3d7d66f7c94b.gif",
+          "bytes": 1232687,
+          "sha256": "9504f73b8bf2b7ab9bd198b2fb68aebef96ddff9564613f7bb19bee05ff5df2c"
+        }
+      }
+    },
+    {
+      "id": "diagram-fca207c4f2853c70",
+      "title": "Orquestração primária e execução CLI",
+      "source_sha256": "fca207c4f2853c70fe5e8b99ba8360386a3fc73ca88827fee83e3b37c14e8c9a",
+      "origins": [
+        {
+          "path": "docs/architecture/flows/02-orquestracao.mmd",
+          "flow_id": "orquestracao"
+        }
+      ],
+      "zoom_min": 2.034,
+      "zoom_max": 2.034,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 2.034,
+        "zoom_max": 2.034
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-fca207c4f2853c70.mmd",
+          "bytes": 2520,
+          "sha256": "fca207c4f2853c70fe5e8b99ba8360386a3fc73ca88827fee83e3b37c14e8c9a"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-fca207c4f2853c70.svg",
+          "bytes": 99644,
+          "sha256": "c6f813e5faf77ac85c9a0deefe85213240c9f60d11411ff82b01251aebc1a737"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-fca207c4f2853c70.png",
+          "bytes": 99242,
+          "sha256": "41691bb8f64b7f337453e920cc5f8a907d02cd5fe2ef55a464644a1a49395651"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-fca207c4f2853c70.gif",
+          "bytes": 1055233,
+          "sha256": "98221f66eede0f605d5acb38f3661b79d94b898d39031d084c2e8964270d308b"
+        }
+      }
+    },
+    {
+      "id": "diagram-5f149863d07e3240",
+      "title": "REA e camadas de provedores",
+      "source_sha256": "5f149863d07e32401572d41d0a30086d726457a7f289295de55402cd8b434e23",
+      "origins": [
+        {
+          "path": "docs/architecture/flows/05-rea-provedores.mmd",
+          "flow_id": "rea-provedores"
+        }
+      ],
+      "zoom_min": 2.8,
+      "zoom_max": 2.8,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 2.8,
+        "zoom_max": 2.8
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-5f149863d07e3240.mmd",
+          "bytes": 3359,
+          "sha256": "5f149863d07e32401572d41d0a30086d726457a7f289295de55402cd8b434e23"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-5f149863d07e3240.svg",
+          "bytes": 111404,
+          "sha256": "5a585cadbf951c70bf2d3a261d093d8966d4e7cff1c04baa51558945cea889fe"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-5f149863d07e3240.png",
+          "bytes": 112764,
+          "sha256": "fdadef6ad313d53d3ae2676609226fdd29131ee46f8cab6c8122195b3a524183"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-5f149863d07e3240.gif",
+          "bytes": 1163250,
+          "sha256": "efc9e43121cc5400abf48e6afc2aebe06d2a2147519b7dfaa220517ec4e0ae1e"
+        }
+      }
+    },
+    {
+      "id": "diagram-b1191de7207d8158",
+      "title": "Diagnóstico, confiança, federação e evolução",
+      "source_sha256": "b1191de7207d815804a8733c2aa103138cb6459edfa0565e91a6c5033b6c06f7",
+      "origins": [
+        {
+          "path": "docs/architecture/flows/11-diagnostico-governanca.mmd",
+          "flow_id": "diagnostico"
+        }
+      ],
+      "zoom_min": 2.635,
+      "zoom_max": 2.635,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 2.635,
+        "zoom_max": 2.635
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-b1191de7207d8158.mmd",
+          "bytes": 2587,
+          "sha256": "b1191de7207d815804a8733c2aa103138cb6459edfa0565e91a6c5033b6c06f7"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-b1191de7207d8158.svg",
+          "bytes": 83070,
+          "sha256": "2b1a464e130d7b3b1a8169385be8ea2981aa5a5faa20487b932214942e37eda7"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-b1191de7207d8158.png",
+          "bytes": 155437,
+          "sha256": "4ad2e536d93a8feae639676d5b38b1c60832fb1e3e23578c7be0984a362f1746"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-b1191de7207d8158.gif",
+          "bytes": 1604847,
+          "sha256": "036b6510037f5ea5947e493064e2adb4e138aca61a840035b4698dc35f0eb33d"
+        }
+      }
+    },
+    {
+      "id": "diagram-5252748b2be4fc04",
+      "title": "Inventário integral — síntese por camadas",
+      "source_sha256": "5252748b2be4fc04ff9c3fc1ad655a5869f0428533cf26ce7a782d1dbdfe848b",
+      "origins": [
+        {
+          "path": "docs/architecture/architecture-inventory.json",
+          "kind": "layer_summary",
+          "sha256": "8d16f32501bcb051a4f83af4dcf8470a0197fa12e592797f643bfe141b81afe9",
+          "full_source": "docs/architecture/dependencies.mmd"
+        }
+      ],
+      "zoom_min": 1.0,
+      "zoom_max": 1.0,
+      "gif": {
+        "width": 1080,
+        "height": 675,
+        "frames": 80,
+        "infinite_loop": false,
+        "duration_ms": 8000
+      },
+      "camera": {
+        "zoom_min": 1.0,
+        "zoom_max": 1.0
+      },
+      "artifacts": {
+        "mmd": {
+          "path": "docs/architecture/animated/diagram-5252748b2be4fc04.mmd",
+          "bytes": 769,
+          "sha256": "5252748b2be4fc04ff9c3fc1ad655a5869f0428533cf26ce7a782d1dbdfe848b"
+        },
+        "svg": {
+          "path": "docs/architecture/animated/diagram-5252748b2be4fc04.svg",
+          "bytes": 26056,
+          "sha256": "8fbabab149175e4f136cb12f3e304efd23544ae4ee73ecd06ac171d96bb70f64"
+        },
+        "png": {
+          "path": "docs/architecture/animated/diagram-5252748b2be4fc04.png",
+          "bytes": 241025,
+          "sha256": "f8b586e8e017bc0762c5fa6354500184e88f6d759c9c6740b9b426442c6296e6"
+        },
+        "gif": {
+          "path": "docs/architecture/animated/diagram-5252748b2be4fc04.gif",
+          "bytes": 1625217,
+          "sha256": "59d56c9542620c416a6861623f46f1a5ee6841663628b863f253560925a7b275"
+        }
+      }
+    }
+  ]
+}

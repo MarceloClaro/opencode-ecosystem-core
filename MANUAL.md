@@ -65,6 +65,21 @@ No OpenCode, use `/runtime-cientifico`, `/datasets` e `/plugins-cientificos`.
 
 ## Conexões, plugins e modelos
 
+### Mapas animados e vídeo didático
+
+- Consulte a [galeria R1056](docs/architecture/ANIMATED.md): cada diagrama tem
+  GIF opcional, PNG sem movimento, SVG ampliável e fonte Mermaid. O GIF
+  executa um ciclo de 8 s; movimento não representa execução real.
+- `python3 scripts/animate_architecture.py --check` confere cobertura e hashes
+  sem escrever arquivos nem abrir navegador.
+- `python3 scripts/animate_architecture.py --inventory` lista as fontes.
+- Para gerar, use `python3 scripts/animate_architecture.py` com Mermaid,
+  Puppeteer, Chromium e Pillow **já instalados**. Nenhum pacote é instalado
+  pelo exportador. [Ambiente e limites](reports/r1056/README.md).
+- O [piloto R1055](pilots/r1055-qubit/README.md) tem arquivos MP4 locais em
+  `pilots/r1055-qubit/out/`, não disponíveis num clone Git novo. Consulte
+  [QC/hashes](reports/r1055/README.md) antes de revisar ou distribuir.
+
 - [ChatGPT/OpenAI, Gemini/Google e NotebookLM](docs/AUTENTICACAO_CHATGPT_NOTEBOOKLM.md)
   usam autenticações distintas. Login não comprova inferência, cota ou
   autorização de uma operação específica.

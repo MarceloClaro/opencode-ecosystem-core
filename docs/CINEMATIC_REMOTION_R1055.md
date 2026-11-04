@@ -6,11 +6,49 @@ integrar o Core. A implementação é **original** e não copia código de
 terceiros; os padrões de ofício foram estudados e reescritos para a linguagem
 do projeto.
 
+## Pipeline audiovisual R1055
+
+[Piloto](../pilots/r1055-qubit/README.md) ·
+[Roteiro](../pilots/r1055-qubit/SCRIPT.md) ·
+[Referências](../pilots/r1055-qubit/REFERENCES.md) ·
+[QC/hashes](../reports/r1055/README.md) ·
+[Versão animada do diagrama](architecture/ANIMATED.md).
+
+<details>
+<summary>Reproduzir o pipeline R1055 em GIF (um ciclo)</summary>
+
+![Fluxo documental R1055; não é execução ao vivo](architecture/animated/diagram-a5f718c8b3d6d219.gif)
+
+</details>
+
+[Versão sem movimento](architecture/animated/diagram-a5f718c8b3d6d219.png).
+
+```mermaid
+flowchart TB
+  R["Roteiro em sete cenas"] --> T["Edge TTS Francisca · sem clonagem"]
+  T --> A["Narração WAV + timeline + SRT"]
+  A --> B["build_remotion_timeline.py"]
+  B --> C["Composições Remotion 16:9 e 9:16"]
+  M["Natural Earth + foto + QR locais"] --> C
+  K["cinematic.tsx · câmera CSS/SVG por frame"] --> C
+  C --> G{"Licença e render aprovados?"}
+  G -->|não| X["Bloquear render"]
+  G -->|sim| V["video_editor · plano e recibo"]
+  V --> F["FFmpeg · mux e loudnorm"]
+  A --> F
+  F --> Q["video_qa.py · frames, áudio e pretos"]
+  Q --> H["Revisão humana · não publica automaticamente"]
+```
+
+O diagrama documenta a composição do piloto, não uma execução nova. Os MP4
+locais duram 109,73 s; código e recibos estão no commit `c800112d`.
+O QC não comprova precisão científica, inteligibilidade ou qualidade estética.
+
 ## 1. O que foi pesquisado
 
 | Fonte | Licença | O que foi aproveitado | O que não foi usado |
 |---|---|---|---|
-| [Remotion Docs](https://www.remotion.dev/docs/) | núcleo MIT; renderer com licença própria | `interpolate`, `spring`, `Easing`, `useCurrentFrame`, `staticFile` | Nenhum plugin novo |
+| [Remotion Docs](https://www.remotion.dev/docs/) | Remotion License; conferir termos por versão/uso | `interpolate`, `spring`, `Easing`, `useCurrentFrame`, `staticFile` | Nenhum plugin novo |
 | [Claude Remotion Skill](https://github.com/haidrrrry/claude-remotion-skill) | MIT | Ken Burns, parallax, entradas com 2–3 propriedades, stagger, respiração, regra “render → inspecionar → corrigir” | Não foi instalado como skill; nenhum código copiado |
 | [Motion Canvas](https://github.com/motion-canvas/motion-canvas) | MIT | Ideia de câmera como nó de cena e interpolação com easing | Não integrado (stack diferente) |
 | [Manim Community](https://github.com/ManimCommunity/manim) | MIT | Câmera 3D, zoom e composição matemática | Não integrado (Python/Scene) |
@@ -49,19 +87,21 @@ Arquivo:
 
 - `index`: índice da cena em `SCENES`; a câmera usa `startFrame`/`endFrame`.
 - `zoomFrom`/`zoomTo`: zoom base com `Easing.inOut(Easing.cubic)`.
-- `focusAt`: frame global em que o push-in atinge o pico; use o início da
-  legenda que nomeia o conceito.
+- `focusAt`: referência global da batida; a transição começa 12 frames antes
+  e atinge o pico 20 frames depois. Não é alinhamento palavra a palavra.
 - `focusZoom`: zoom no pico; o valor decai para 45% do push até o fim.
 - `panX`/`panY`: deslocamento suave em px.
 - `shakeAt`/`shakeAmount`: shake com decaimento exponencial (7 frames).
 - `breathe`: oscilação vertical de ±1,1 px, sempre ativa, para evitar rigidez.
 
-`TravelingPulse` desenha pacotes que percorrem uma linha; é usado no feixe de
-correlação do emaranhamento.
+`TravelingPulse` é um helper disponível. O feixe do piloto é implementado
+separadamente por `CorrelationBeam` em `QubitExplainer.tsx`. Seu movimento é
+ilustrativo: emaranhamento não transmite sinais entre os qubits.
 
 ### Regras de segurança visual
 
-1. O zoom máximo nos painéis de 1920 px mantém **≥25 px** de margem.
+1. Margens precisam ser inspecionadas em cada composição; não há teste
+   geométrico automatizado que garanta 25 px em todos os frames.
 2. O zoom incide sobre o conteúdo da cena, **nunca** sobre a legenda global;
    a legenda fica fora do `SceneCamera`.
 3. O pico do zoom é ancorado no início da legenda, não em um percentual

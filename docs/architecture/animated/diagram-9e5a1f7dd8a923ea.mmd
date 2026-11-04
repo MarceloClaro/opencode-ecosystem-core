@@ -1,0 +1,20 @@
+flowchart TB
+  INPUT["Tarefa explícita ao SDK local"] --> MODEL["Modelo/provider escolhido pelo operador"]
+  MODEL --> WINDOW{"Janela de contexto conhecida?"}
+  WINDOW -->|sim| PREFLIGHT["Estimar mensagens + ferramentas + margem"]
+  WINDOW -->|não| SEND
+  PREFLIGHT --> FIT{"Entrada + saída reservada cabe?"}
+  FIT -->|não| BLOCK["context_budget_exceeded; não enviar POST"]
+  FIT -->|sim| SEND["POST ao endpoint selecionado"]
+  SEND --> RESPONSE{"Resposta do provider"}
+  RESPONSE -->|contexto excedido| CONTEXT["Código e remediação; sem truncar conteúdo"]
+  RESPONSE -->|429/quota| QUOTA["Preservar Retry-After; sem retry/fallback automático"]
+  RESPONSE -->|401/403/404/5xx/timeout| ERROR["Erro tipado; provider/modelo identificados"]
+  RESPONSE -->|2xx| USAGE["Uso informado pelo provider ou estimativa marcada"]
+  USAGE --> QUALITY["Analisar qualidade/aceite fora do contador de tokens"]
+  BLOCK --> RECEIPT["query_id, fonte de contexto e limite"]
+  CONTEXT --> RECEIPT
+  QUOTA --> RECEIPT
+  ERROR --> RECEIPT
+  QUALITY --> RECEIPT
+  RECEIPT -.->|sem custo por assinatura inferido| LIMIT["SDK local não altera o modelo padrão do OpenCode"]
