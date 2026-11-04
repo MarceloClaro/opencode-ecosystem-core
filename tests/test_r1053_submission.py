@@ -79,6 +79,23 @@ def test_build_copies_figures_and_tables(tmp_path):
     assert any(item["copied"] for item in manifest["tables"])
 
 
+def test_build_with_real_journal_profile_writes_compliance(tmp_path):
+    out = make_project(tmp_path)
+    result = submission.build(
+        out, journal_profile_id="plos-one", compile_pdf=False,
+    )
+    sub = out / "10_submission"
+    compliance = json.loads((sub / "journal-compliance.json").read_text(encoding="utf-8"))
+    assert compliance["journal_id"] == "plos-one"
+    assert compliance["status"] == "blocked"
+    checklist = json.loads((sub / "journal-checklist.json").read_text(encoding="utf-8"))
+    assert checklist["journal_id"] == "plos-one"
+    manifest = json.loads((sub / "submission-manifest.json").read_text(encoding="utf-8"))
+    assert manifest["journal_profile_id"] == "plos-one"
+    assert manifest["journal_compliance"] == "blocked"
+    assert result["truth_claim"] is False
+
+
 def test_build_requires_manuscript(tmp_path):
     with pytest.raises(ValueError):
         submission.build(tmp_path, compile_pdf=False)

@@ -25,6 +25,7 @@ from scientific_lab.native.common import dump, now, uid
 SCHEMA_VERSION = "1.0"
 EFFECT_MEASURES = {"SMD", "MD", "OR", "RR", "HR", "COR", "RD"}
 MODELS = {"fixed", "random"}
+RANDOM_METHODS = {"DL", "REML"}
 ROB_LEVELS = {"low", "some_concerns", "high", "not_assessed"}
 GRADE_LEVELS = {"high", "moderate", "low", "very_low"}
 GRADE_JUDGMENTS = {"not_serious", "serious", "very_serious", "not_assessed"}
@@ -100,6 +101,9 @@ def _protocol(data: dict) -> dict:
     model = protocol.get("model")
     if model not in MODELS:
         raise ValueError("model deve ser fixed ou random")
+    random_method = protocol.get("random_effects_method", "DL")
+    if random_method not in RANDOM_METHODS:
+        raise ValueError("random_effects_method deve ser DL ou REML")
     confidence = _confidence_level(protocol)
     min_studies = protocol.get("min_studies", 2)
     if isinstance(min_studies, bool) or not isinstance(min_studies, int) or min_studies < 2:
@@ -113,6 +117,7 @@ def _protocol(data: dict) -> dict:
         "declared_at": declared_at,
         "effect_measure": effect_measure,
         "model": model,
+        "random_effects_method": random_method,
         "confidence_level": confidence,
         "min_studies": min_studies,
         "max_i2_for_pooling": max_i2,
@@ -161,7 +166,7 @@ def _studies(data: dict, protocol: dict) -> list[dict]:
         se = _finite(study.get("standard_error"), f"standard_error:{study_id}")
         if se <= 0:
             raise ValueError(f"standard_error deve ser > 0: {study_id}")
-        checked.append({
+        checked_study = {
             "study_id": study_id,
             "label": study.get("label") or study_id,
             "effect_size": effect,
@@ -171,7 +176,10 @@ def _studies(data: dict, protocol: dict) -> list[dict]:
             "timepoint": study.get("timepoint"),
             "subgroup": study.get("subgroup"),
             "risk_of_bias": _risk_of_bias(study),
-        })
+        }
+        if isinstance(study.get("extraction"), dict):
+            checked_study["extraction"] = study["extraction"]
+        checked.append(checked_study)
     return checked
 
 
@@ -199,7 +207,7 @@ def _fixed(studies: list[dict], level: float) -> dict:
     }
 
 
-def _random(studies: list[dict], fixed: dict, level: float) -> dict:
+def _dl_tau2(studies: list[dict], fixed: dict) -> float:
     weights = [1.0 / (study["standard_error"] ** 2) for study in studies]
     total = sum(weights)
     q = sum(
@@ -208,7 +216,48 @@ def _random(studies: list[dict], fixed: dict, level: float) -> dict:
     )
     df = len(studies) - 1
     c = total - sum(weight ** 2 for weight in weights) / total
-    tau2 = max(0.0, (q - df) / c) if c > 0 else 0.0
+    return max(0.0, (q - df) / c) if c > 0 else 0.0
+
+
+def _reml_tau2(studies: list[dict]) -> tuple[float, str]:
+    try:
+        from scipy.optimize import minimize_scalar  # type: ignore
+    except Exception:
+        return _dl_tau2(studies, _fixed(studies, 0.95)), "DL_fallback"
+    variances = [study["standard_error"] ** 2 for study in studies]
+    effects = [study["effect_size"] for study in studies]
+
+    def negative_reml(tau2: float) -> float:
+        weights = [1.0 / (variance + tau2) for variance in variances]
+        total = sum(weights)
+        pooled = sum(
+            weight * effect for weight, effect in zip(weights, effects)
+        ) / total
+        return 0.5 * (
+            sum(math.log(variance + tau2) for variance in variances)
+            + math.log(total)
+            + sum(
+                weight * (effect - pooled) ** 2
+                for weight, effect in zip(weights, effects)
+            )
+        )
+
+    upper = max(1.0, 10.0 * max(variances))
+    try:
+        result = minimize_scalar(
+            negative_reml, bounds=(0.0, upper), method="bounded",
+        )
+        return max(0.0, float(result.x)), "REML"
+    except Exception:
+        return _dl_tau2(studies, _fixed(studies, 0.95)), "DL_fallback"
+
+
+def _random(studies: list[dict], fixed: dict, level: float,
+            method: str = "DL") -> dict:
+    if method == "REML":
+        tau2, method_label = _reml_tau2(studies)
+    else:
+        tau2, method_label = _dl_tau2(studies, fixed), "DL"
     random_weights = [
         1.0 / (study["standard_error"] ** 2 + tau2) for study in studies
     ]
@@ -221,7 +270,7 @@ def _random(studies: list[dict], fixed: dict, level: float) -> dict:
     z = z_value(level)
     return {
         "model": "random",
-        "method": "DerSimonian-Laird",
+        "method": method_label,
         "k": len(studies),
         "tau2": tau2,
         "weights": [
@@ -361,6 +410,8 @@ def _grade(data: dict) -> dict:
         "domains": checked,
         "reviewer": reviewer,
         "declared_at": declared_at,
+        "automated": grade.get("automated", False),
+        "authoritative": False,
         "policy": "human_judgment_only_no_automatic_certainty",
         "truth_claim": False,
         "human_review_required": True,
@@ -374,7 +425,9 @@ def analyze(data: dict) -> dict:
     studies = _studies(data, protocol)
     level = protocol["confidence_level"]
     fixed = _fixed(studies, level)
-    random = _random(studies, fixed, level)
+    random = _random(
+        studies, fixed, level, protocol["random_effects_method"],
+    )
     heterogeneity = _heterogeneity(studies, fixed, random)
     prediction = _prediction_interval(random, len(studies), level)
     risk = _risk_summary(studies)
@@ -389,6 +442,20 @@ def analyze(data: dict) -> dict:
         caution.append("Há estudo(s) com risco de viés alto.")
     if grade["status"] != "assessed":
         caution.append("GRADE não foi avaliado por humano.")
+    automated = protocol.get("automated_extraction") is True
+    limitations = [
+        "A meta-análise usa apenas os efeitos e erros declarados pelo operador.",
+        "Não houve extração automática de PDFs nem imputação de dados faltantes.",
+        "Risco de viés e GRADE são julgamentos humanos registrados, não notas automáticas.",
+        "O resultado não é verdade científica nem validação externa.",
+    ]
+    if automated:
+        limitations[0] = (
+            "Efeitos extraídos automaticamente por regex; revisão humana obrigatória."
+        )
+        limitations[1] = (
+            "A extração automática não foi validada por dois revisores independentes."
+        )
     return {
         "schema_version": SCHEMA_VERSION,
         "analysis_id": uid("QUANT", 12),
@@ -408,15 +475,12 @@ def analyze(data: dict) -> dict:
         "grade": grade,
         "caution": caution,
         "pooling_warning": bool(caution),
+        "automated_extraction": automated,
+        "extraction_origin": "automated" if automated else "declared",
         "truth_claim": False,
         "external_validation": False,
         "human_review_required": True,
-        "limitations": [
-            "A meta-análise usa apenas os efeitos e erros declarados pelo operador.",
-            "Não houve extração automática de PDFs nem imputação de dados faltantes.",
-            "Risco de viés e GRADE são julgamentos humanos registrados, não notas automáticas.",
-            "O resultado não é verdade científica nem validação externa.",
-        ],
+        "limitations": limitations,
     }
 
 

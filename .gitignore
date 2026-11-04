@@ -126,6 +126,8 @@ templates/projects/*/ml_pipeline/outputs/
 
 # --- CSV datasets gerados ---
 *.csv
+# Exceto o dataset público de validação R1054 (BCG), versionado para reprodutibilidade.
+!reports/r1054/bcg.csv
 
 # --- Runtime / checkpoints / patches ---
 checkpoints/

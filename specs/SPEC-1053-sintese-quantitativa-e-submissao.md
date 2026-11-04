@@ -144,8 +144,8 @@ GREEN: `tests/test_r1053_quantitative.py` e
 
 ## Evidência de execução
 
-- Testes R1053: **12 passed**.
-- R1051+R1052+R1053: **41 passed**.
+- Testes R1053: **13 passed** (inclui o teste de perfil real adicionado no R1054).
+- R1051+R1052+R1053: **42 passed**.
 - Regressão focada R1033–R1053: **388 passed, 1 skipped**.
 - `doctor`: **healthy 22/22**.
 - Guard Remotion: **11 casos, ok**.

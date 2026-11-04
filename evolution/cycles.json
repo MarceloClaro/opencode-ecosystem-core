@@ -23765,6 +23765,39 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1054",
+      "objective": "Implementar extração automática de efeitos, RoB/GRADE assistidos, perfil PLOS ONE, submissão fail-closed, gate de publicação e validação real com meta-análise publicada",
+      "changes": [
+        "scientific_lab/effect_extraction.py: candidatos de efeito com IC/SE/p, rascunho automatizado e confirmação humana",
+        "scientific_lab/rob_grade_auto.py: sugestões de risco de viés e GRADE com authoritative=false",
+        "scientific_lab/journal_profiles.py: perfil PLOS ONE com fonte, data e checagem objetiva",
+        "scientific_lab/submission_portal.py: preflight e submissão fail-closed com backend injetado",
+        "scientific_lab/external_validation.py: gate de validação externa, aceite e autorização",
+        "scientific_lab/real_benchmark.py e reports/r1054: validação BCG REML contra referência pública",
+        "scientific_lab/native/cli.py: benchmark-meta, extract-effects, auto-rob-grade, publication-gate e submit",
+        "testes R1054 e documentação do ciclo"
+      ],
+      "score": 0.94,
+      "lessons": [
+        "Automação de extração, RoB e GRADE deve ser marcada como assistiva e não autoritativa.",
+        "Submissão real exige backend/credenciais; sem isso o gate deve bloquear, não simular.",
+        "Aceite editorial e validação externa são artefatos institucionais verificáveis, não saídas de software.",
+        "O benchmark BCG REML replicou OR/tau²/Q da referência; o I² publicado difere 0,5728 p.p. e a discrepância foi registrada.",
+        "Perfil de periódico deve citar fonte e data e separar falha objetiva de pendência humana."
+      ],
+      "timestamp": 1793759598.05132,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [

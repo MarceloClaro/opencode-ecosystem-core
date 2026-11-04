@@ -64,6 +64,12 @@ predição, risco de viés e GRADE human-gated, além do pacote de submissão
 Markdown/LaTeX/DOCX com checklist e declarações. Ver
 [`SCIENTIFIC_RESEARCH_PIPELINE_R1053.md`](SCIENTIFIC_RESEARCH_PIPELINE_R1053.md).
 
+O R1054 acrescenta extração automática de efeitos como rascunho auditável,
+sugestões automáticas de RoB/GRADE, perfil PLOS ONE, submissão fail-closed,
+gate de validação externa/aceite e validação numérica BCG contra referência
+REML pública. Ver
+[`SCIENTIFIC_RESEARCH_PIPELINE_R1054.md`](SCIENTIFIC_RESEARCH_PIPELINE_R1054.md).
+
 ## Limite da v4.2
 
 Não alegamos que todos os 88 contratos da v4.1 foram internalizados. O objetivo desta release é remover a dependência externa do caminho essencial e manter os módulos avançados em fallback verificável até migração posterior.

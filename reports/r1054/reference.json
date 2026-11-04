@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "dataset": "dat.bcg (metafor) / Colditz et al. 1994",
+  "description": "13 ensaios de vacina BCG; tpos/tneg = eventos/não eventos no tratamento; cpos/cneg = eventos/não eventos no controle.",
+  "reference_method": "REML",
+  "reference": {
+    "k": 13,
+    "pooled_log_or": -0.7451777718370632,
+    "pooled_or": 0.4746499130523234,
+    "ci_low": 0.3296295647244906,
+    "ci_high": 0.6834718850200259,
+    "tau2": 0.3377720450772514,
+    "q": 163.16491518079985,
+    "df": 12,
+    "published_i2": 92.07269155181164,
+    "standard_i2_from_q": 92.64547774458556
+  },
+  "tolerances": {
+    "pooled_log_or": 0.00001,
+    "pooled_or": 0.00001,
+    "ci": 0.00001,
+    "tau2": 0.00001,
+    "q": 0.000001,
+    "i2_standard": 0.00001,
+    "i2_published": 1.0
+  },
+  "source_urls": [
+    "https://raw.githubusercontent.com/peter-yassa/Meta-Analysis-BCG-Vaccination-TB-Prevention/main/data/dat_bcg.csv",
+    "https://raw.githubusercontent.com/akashbhardwajuog/bayesian-meta-analysis-r-stan/main/outputs/tables/bcg_frequentist_random_effects_results.csv",
+    "https://raw.githubusercontent.com/akashbhardwajuog/bayesian-meta-analysis-r-stan/main/outputs/tables/bcg_heterogeneity_summary.csv"
+  ],
+  "notes": [
+    "A referência é uma reanálise pública REML, não uma reprodução do artigo de 1994.",
+    "O I² publicado na fonte (92.0727%) não é exatamente (Q-df)/Q com Q=163.1649 e df=12; a fórmula padrão resulta em 92.6455%.",
+    "A comparação usa tolerâncias numéricas e registra a discrepância do I² publicado."
+  ],
+  "truth_claim": false,
+  "external_validation": false,
+  "human_review_required": true
+}

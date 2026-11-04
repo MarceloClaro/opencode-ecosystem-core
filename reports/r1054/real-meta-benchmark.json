@@ -1,0 +1,138 @@
+{
+  "schema_version": "1.0",
+  "benchmark_id": "R1054-BCG",
+  "generated_at": "2026-11-04T02:28:58.301815Z",
+  "status": "pass",
+  "dataset": "dat.bcg (metafor) / Colditz et al. 1994",
+  "csv_sha256": "892192ea82a30c6ae3aadd1f825661390637daf80fda45dd91d6d84cbe438c32",
+  "reference_method": "REML",
+  "observed": {
+    "k": 13,
+    "pooled_log_or": -0.7451778071882895,
+    "pooled_or": 0.47464989627286724,
+    "ci_low": 0.32962949182711904,
+    "ci_high": 0.6834719878462905,
+    "tau2": 0.3377724708778314,
+    "q": 163.16491518079974,
+    "df": 12,
+    "i2_standard": 92.64547774458556,
+    "random_method": "REML"
+  },
+  "reference": {
+    "k": 13,
+    "pooled_log_or": -0.7451777718370632,
+    "pooled_or": 0.4746499130523234,
+    "ci_low": 0.3296295647244906,
+    "ci_high": 0.6834718850200259,
+    "tau2": 0.3377720450772514,
+    "q": 163.16491518079985,
+    "df": 12,
+    "published_i2": 92.07269155181164,
+    "standard_i2_from_q": 92.64547774458556
+  },
+  "checks": [
+    {
+      "id": "k",
+      "status": "pass",
+      "observed": 13,
+      "reference": 13,
+      "difference": 0.0,
+      "tolerance": 0
+    },
+    {
+      "id": "pooled_log_or",
+      "status": "pass",
+      "observed": -0.7451778071882895,
+      "reference": -0.7451777718370632,
+      "difference": 3.535122627962295e-08,
+      "tolerance": 1e-05
+    },
+    {
+      "id": "pooled_or",
+      "status": "pass",
+      "observed": 0.47464989627286724,
+      "reference": 0.4746499130523234,
+      "difference": 1.6779456157856032e-08,
+      "tolerance": 1e-05
+    },
+    {
+      "id": "ci_low",
+      "status": "pass",
+      "observed": 0.32962949182711904,
+      "reference": 0.3296295647244906,
+      "difference": 7.289737158355791e-08,
+      "tolerance": 1e-05
+    },
+    {
+      "id": "ci_high",
+      "status": "pass",
+      "observed": 0.6834719878462905,
+      "reference": 0.6834718850200259,
+      "difference": 1.0282626461410871e-07,
+      "tolerance": 1e-05
+    },
+    {
+      "id": "tau2",
+      "status": "pass",
+      "observed": 0.3377724708778314,
+      "reference": 0.3377720450772514,
+      "difference": 4.2580058001728815e-07,
+      "tolerance": 1e-05
+    },
+    {
+      "id": "q",
+      "status": "pass",
+      "observed": 163.16491518079974,
+      "reference": 163.16491518079985,
+      "difference": 1.1368683772161603e-13,
+      "tolerance": 1e-06
+    },
+    {
+      "id": "i2_standard",
+      "status": "pass",
+      "observed": 92.64547774458556,
+      "reference": 92.64547774458556,
+      "difference": 0.0,
+      "tolerance": 1e-05
+    },
+    {
+      "id": "i2_published",
+      "status": "pass",
+      "observed": 92.64547774458556,
+      "reference": 92.07269155181164,
+      "difference": 0.5727861927739184,
+      "tolerance": 1.0
+    },
+    {
+      "id": "random_method",
+      "status": "pass",
+      "observed": "REML",
+      "reference": "REML"
+    }
+  ],
+  "differences": {
+    "pooled_or": 1.6779456157856032e-08,
+    "tau2": 4.2580058001728815e-07,
+    "q": 1.1368683772161603e-13,
+    "i2_published": 0.5727861927739184
+  },
+  "source_urls": [
+    "https://raw.githubusercontent.com/peter-yassa/Meta-Analysis-BCG-Vaccination-TB-Prevention/main/data/dat_bcg.csv",
+    "https://raw.githubusercontent.com/akashbhardwajuog/bayesian-meta-analysis-r-stan/main/outputs/tables/bcg_frequentist_random_effects_results.csv",
+    "https://raw.githubusercontent.com/akashbhardwajuog/bayesian-meta-analysis-r-stan/main/outputs/tables/bcg_heterogeneity_summary.csv"
+  ],
+  "notes": [
+    "A referência é uma reanálise pública REML, não uma reprodução do artigo de 1994.",
+    "O I² publicado na fonte (92.0727%) não é exatamente (Q-df)/Q com Q=163.1649 e df=12; a fórmula padrão resulta em 92.6455%.",
+    "A comparação usa tolerâncias numéricas e registra a discrepância do I² publicado."
+  ],
+  "truth_claim": false,
+  "external_validation": false,
+  "human_review_required": true,
+  "limitations": [
+    "Validação numérica de um dataset público, não validação clínica.",
+    "A referência é uma reanálise REML pública, não o texto original de 1994.",
+    "O I² publicado difere ligeiramente da fórmula (Q-df)/Q; a discrepância é registrada.",
+    "O benchmark não testa extração de PDF, risco de viés ou GRADE."
+  ]
+}

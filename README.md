@@ -268,9 +268,9 @@ composições e recibos permitem reproduzir o fluxo.
 | Legendas | SRT e ASS, burn-in ou faixa soft | timing e leitura exigem revisão; ASR não é escuta |
 | QC técnico | frames decodificados, fps, duração, loudness, true peak, silêncio, pretos e contato | não aprova conteúdo, voz, lip sync ou tradução |
 | Pesquisa acadêmica | pipeline ABNT, revisão de fontes, bibliografia, provas e conselho de 13 | não substitui bibliotecário, estatístico ou revisão por pares |
-| Pesquisador ponta a ponta (R1051–R1053) | tema → contrato → busca → triagem humana → texto integral → integridade → meta-análise/GRADE → manuscrito → submissão | texto integral, efeitos, risco de viés e GRADE exigem insumo humano; não substitui revisão |
+| Pesquisador ponta a ponta (R1051–R1054) | tema → contrato → busca → triagem humana → texto integral → integridade → meta-análise/GRADE → manuscrito → submissão → gate de publicação | extração/RoB/GRADE são assistivos; submissão e aceite exigem backend/artefatos humanos |
 | Ciência | 8 protocolos K-Dense, catálogo de 177 skills, 9 adaptações originais e laboratório com budget | 177 skills não são 177 validações; nada é executado sem gate |
-| Programação | SDD/TDD, **388 testes**, agentes, skills e Macro-rede de 576 nós/768 arestas | grafo é projeção read-only; aresta não é execução |
+| Programação | SDD/TDD, **410 testes**, agentes, skills e Macro-rede de 576 nós/768 arestas | grafo é projeção read-only; aresta não é execução |
 | Governança | gate metacognitivo, citações literais, contradições e validação externa | `externally_supported` não é verdade absoluta; voto/nota/payoff não decide |
 | Publicação | nenhum upload ou agendamento nesta rodada | exige direitos, credenciais e autorização explícita |
 
@@ -342,7 +342,7 @@ confiança, voto, nota ou payoff virem verdade; o conselho ganhou
 contradições. Ver [evidência R1050](reports/r1050/README.md) e
 [macro-rede](reports/r1050/macro-network.json).
 
-**Pesquisador ponta a ponta (R1051–R1053):** `research project` recebe um tema
+**Pesquisador ponta a ponta (R1051–R1054):** `research project` recebe um tema
 e produz um pacote file-first com intake, contrato de recuperação, protocolo,
 busca, deduplicação, triagem, evidências literais, gate metacognitivo, análise
 descritiva, auditoria, manuscrito IMRaD e checklist de validação humana. O
@@ -369,6 +369,16 @@ efeito combinado 0,400, I² 93,75% e GRADE `low`; nenhum dado real de
 meta-análise foi usado. Ver
 [`docs/SCIENTIFIC_RESEARCH_PIPELINE_R1053.md`](docs/SCIENTIFIC_RESEARCH_PIPELINE_R1053.md)
 e [`reports/r1053/README.md`](reports/r1053/README.md).
+
+O R1054 acrescenta extração automática de efeitos como `automated_draft`,
+sugestões automáticas de risco de viés/GRADE com `authoritative=false`, perfil
+real do PLOS ONE, submissão fail-closed com backend explícito, gate de validação
+externa/aceite e validação numérica BCG contra referência REML pública. O
+benchmark BCG replicou OR 0,47465, tau² 0,33777 e Q 163,1649; o I² publicado
+difere 0,5728 p.p. da fórmula e a discrepância está registrada. Nenhuma
+submissão, aceite ou publicação real foi executada. Ver
+[`docs/SCIENTIFIC_RESEARCH_PIPELINE_R1054.md`](docs/SCIENTIFIC_RESEARCH_PIPELINE_R1054.md)
+e [`reports/r1054/README.md`](reports/r1054/README.md).
 
 **ASR e tradução:** o `faster-whisper-small` produziu texto turco sem sentido
 em parte do corpus; `large-v3` foi baixado e concluiu o lote das 107 partes (1.854 segmentos, 7.773 palavras), ainda sem revisão nativa.

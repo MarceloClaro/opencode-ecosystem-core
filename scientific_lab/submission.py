@@ -16,6 +16,7 @@ import subprocess
 from pathlib import Path
 from typing import Iterable
 
+from scientific_lab import journal_profiles
 from scientific_lab.native.common import dump, load, now, sha256_file
 
 SCHEMA_VERSION = "1.0"
@@ -276,6 +277,7 @@ def build(
     out: str | Path,
     *,
     journal: str | None = None,
+    journal_profile_id: str | None = None,
     figures_dir: str | Path | None = None,
     tables_dir: str | Path | None = None,
     compile_pdf: bool = True,
@@ -288,11 +290,26 @@ def build(
     sub.mkdir(parents=True, exist_ok=True)
     shutil.copy2(manuscript, sub / "manuscript.md")
 
+    profile = (
+        journal_profiles.load_profile(journal_profile_id)
+        if journal_profile_id else None
+    )
+    if profile is not None:
+        journal = profile["name"]
+    compliance = (
+        journal_profiles.validate_manuscript(manuscript, profile)
+        if profile is not None else None
+    )
+    if compliance is not None:
+        dump(sub / "journal-compliance.json", compliance)
+        checklist = journal_profiles.checklist(profile, compliance)
+    else:
+        checklist = journal_checklist(journal)
+    dump(sub / "journal-checklist.json", checklist)
+
     references_path = out / "06_manuscript/references.json"
     references = load(references_path) if references_path.exists() else {"records": []}
     (sub / "references.bib").write_text(build_bib(references), encoding="utf-8")
-    checklist = journal_checklist(journal)
-    dump(sub / "journal-checklist.json", checklist)
     decl = declarations()
     dump(sub / "declarations.json", decl)
     (sub / "declarations.md").write_text(
@@ -372,11 +389,14 @@ def build(
         f"| LaTeX | `{latex_status['status']}` |",
         f"| DOCX | `{docx_status['status']}` |",
         f"| PDF | `{pdf_status['status']}` |",
+        f"| Perfil | `{journal_profile_id or 'genérico'}` |",
+        f"| Conformidade | `{compliance['status'] if compliance else 'não avaliada'}` |",
         f"| Checklist | `{checklist['status']}` |",
         f"| Declarações | `{decl['status']}` |",
         "",
         "O template ABNT é genérico e não certifica conformidade com norma ou",
         "periódico. O checklist e as declarações exigem preenchimento humano.",
+        "Um perfil real transcreve regras públicas, mas não garante aceite.",
         "",
     ])
     (sub / "README.md").write_text(readme, encoding="utf-8")
@@ -386,6 +406,8 @@ def build(
         "schema_version": SCHEMA_VERSION,
         "generated_at": now(),
         "journal": journal or "não informado",
+        "journal_profile_id": journal_profile_id,
+        "journal_compliance": compliance["status"] if compliance else None,
         "status": (
             "partial" if pdf_status["status"] == "failed"
             else "completed" if latex_status["status"] == "generated"

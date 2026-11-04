@@ -2850,6 +2850,7 @@ def run(
     quantitative_data: str | Path | None = None,
     submission_package: bool = False,
     journal: str | None = None,
+    journal_profile_id: str | None = None,
     figures_dir: str | Path | None = None,
     tables_dir: str | Path | None = None,
     budget: dict | None = None,
@@ -3128,6 +3129,7 @@ def run(
         submission_result = submission.build(
             out,
             journal=journal,
+            journal_profile_id=journal_profile_id,
             figures_dir=figures_dir,
             tables_dir=tables_dir,
         )
@@ -3244,6 +3246,7 @@ def refresh_project(
     quantitative_data: str | Path | None = None,
     submission_package: bool = False,
     journal: str | None = None,
+    journal_profile_id: str | None = None,
     figures_dir: str | Path | None = None,
     tables_dir: str | Path | None = None,
 ) -> dict:
@@ -3520,6 +3523,7 @@ def refresh_project(
         submission_result = submission.build(
             out,
             journal=journal,
+            journal_profile_id=journal_profile_id,
             figures_dir=figures_dir,
             tables_dir=tables_dir,
         )
