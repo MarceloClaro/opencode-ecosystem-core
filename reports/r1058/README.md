@@ -11,7 +11,7 @@
 
 | Arquivo | Formato | Duração | Frames | Tamanho | SHA-256 |
 |---|---|---|---|---|---|
-| `pilots/r1058-airam-veras/out/airam-plano-acao.mp4` | 1440×810, 30 fps | 458,30 s | 13.749 | 54.790.014 | `2cb164917a791d739f692b1b303dd0d684119dde15cd570812102b48dcf094be` |
+| `pilots/r1058-airam-veras/out/airam-plano-acao.mp4` | 1440×810, 30 fps | 458,30 s | 13.749 | 52.397.060 | `91762270ac4693fee4f5238b96c7b7ca45c7c7be78f8180ab2bf925adba387cf` |
 
 Áudio: narração institucional Edge TTS `pt-BR-FranciscaNeural` e agradecimento
 final com voz clonada XTTS do próprio autor, autorizada, em uma frase curta;
