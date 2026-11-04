@@ -259,7 +259,8 @@ manifesto permitem reproduzir o fluxo, e a imagem acima é o recorte versionado.
 ![Três cenas do slide dinâmico: acesso ampliado, mudança de chips e limite da simulação](docs/images/r1047-dynamic-slide.jpg)
 
 O slide estático foi substituído por uma composição Remotion de **600 frames
-(20 s, 30 fps)**, com três cenas sincronizadas à narração: acesso a 100+ qubits,
+(20 s, 30 fps)**, com **cenário escuro**, título **“Do acesso ao limite”** e uma
+trilha de três etapas. As cenas acompanham a narração: acesso a 100+ qubits,
 saída dos chips menores e limite da simulação clássica. O render usa o backend
 auditável `video_editor`, com `license_ack` e `render_approved`, e é composto
 sobre o vídeo com lip sync, mantendo áudio, ASS e ausência de cartão.
@@ -267,16 +268,16 @@ sobre o vídeo com lip sync, mantendo áudio, ASS e ausência de cartão.
 | Item | Valor |
 |---|---|
 | Composição | `editor-workspace/remotion-smoke/src/r1047-slide/R1047Slide.tsx` |
-| Slide renderizado | `editor-workspace/remotion-smoke/r1047-slide-v2.mp4` |
-| Vídeo final | `pilots/r1026-quantum/r1047-dub/out/quantum-ptbr-r1047-dynamic-slide.mp4` |
-| SHA-256 | `d4c8a34dc07b9ab0bd77315086f45ec3ef9f2f451421e293895e7491c9f0fc1d` |
+| Slide renderizado | `editor-workspace/remotion-smoke/r1047-slide-v3.mp4` |
+| Vídeo final | `pilots/r1026-quantum/r1047-dub/out/quantum-ptbr-r1047-dynamic-slide-dark.mp4` |
+| SHA-256 | `ba30b8407901f3f5fd8a6f6d5bc4d891590f47f8aed2376751939e09a0d23223` |
 | Formato | 1920×1080, 30 fps, 600 frames, 20,00 s, AAC 48 kHz |
 | Loudness | **−16,10 LUFS**; true peak **−2,16 dBTP** |
 | QC | frames, fps, loudness, silêncio e pretos: **pass** |
 
-O slide estático (`quantum-ptbr-r1047.mp4`) permanece como fallback. O movimento
-é didático, não prova retenção ou estética; a Remotion License e a revisão humana
-continuam aplicáveis. Evidência: [R1050](reports/r1050/DYNAMIC-SLIDE.md).
+O slide estático (`quantum-ptbr-r1047.mp4`) e a versão clara dinâmica permanecem
+como fallback. O movimento é didático, não prova retenção ou estética; a Remotion
+License e a revisão humana continuam aplicáveis. Evidência: [R1050](reports/r1050/DYNAMIC-SLIDE.md).
 
 **O que essa transformação demonstra no Core:** ingestão de mídia real com hash,
 roteiro e tradução, TTS local com referência de voz, composição FFmpeg sem
