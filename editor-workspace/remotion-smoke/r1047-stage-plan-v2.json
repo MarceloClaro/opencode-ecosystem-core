@@ -1,0 +1,55 @@
+{
+  "operation": "remotion",
+  "backend": "remotion",
+  "inputs": [
+    {
+      "path": "package.json",
+      "sha256": "9e25b68e68434dd8d20e1c84442e67f039e031467c9fceaf3dbfecbc60bd348b"
+    },
+    {
+      "path": "src/r1047-slide/EntryStage.tsx",
+      "sha256": "9974b0a4e7d0aa5eb5b2b1a3affad0da05c4bdc3b28debeafbbee2273fd02ace"
+    }
+  ],
+  "output": "/home/marceloclaro/opencode-ecosystem-core/editor-workspace/remotion-smoke/r1047-stage-v2.mp4",
+  "args": [
+    "npx",
+    "--no-install",
+    "remotion",
+    "render",
+    "src/r1047-slide/EntryStage.tsx",
+    "R1047Stage",
+    "{output}",
+    "--props",
+    "{}"
+  ],
+  "expected_frames": 600,
+  "frame_tolerance": 0,
+  "license_ack": true,
+  "render_approved": true,
+  "remotion": {
+    "project_path": "/home/marceloclaro/opencode-ecosystem-core/editor-workspace/remotion-smoke",
+    "composition_id": "R1047Stage",
+    "entry_point": "src/r1047-slide/EntryStage.tsx",
+    "license": {
+      "files": [],
+      "remotion_license_detected": false
+    },
+    "compositions": [
+      "R1047Slide",
+      "R1047Stage",
+      "Smoke"
+    ]
+  },
+  "warnings": [
+    "Remotion License applies; visual quality not verified",
+    "file_skipped_oversized",
+    "license_file_missing"
+  ],
+  "limitations": [
+    "scanner uses regex and does not compile TypeScript",
+    "props schema is not validated against the composition",
+    "render approval is a human decision, not quality approval"
+  ],
+  "plan_sha256": "a8fe8afc79d928805137f99642316d6061bda71fcefabf136ff2157cd8ec6b5e"
+}

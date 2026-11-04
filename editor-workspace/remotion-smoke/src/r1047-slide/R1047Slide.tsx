@@ -3,6 +3,7 @@ import {
   AbsoluteFill,
   Easing,
   interpolate,
+  spring,
   useCurrentFrame,
 } from 'remotion';
 
@@ -18,14 +19,14 @@ const BORDER = 'rgba(167, 139, 250, 0.34)';
 
 const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 
+const SPRING = {damping: 15.35, stiffness: 115, mass: 1};
+
 const fadeUp = (frame: number, start: number, duration = 20) => {
-  const progress = interpolate(frame, [start, start + duration], [0, 1], {
-    ...clamp,
-    easing: Easing.out(Easing.cubic),
-  });
+  const raw = spring({frame: Math.max(0, frame - start), fps: 30, config: SPRING});
+  const progress = Math.min(1, Math.max(0, raw));
   return {
     opacity: progress,
-    transform: `translateY(${(1 - progress) * 20}px)`,
+    transform: `translateY(${(1 - progress) * 20}px) scale(${0.98 + progress * 0.02})`,
   };
 };
 
@@ -49,7 +50,7 @@ const SceneBadge = ({label}: {label: string}) => (
   </div>
 );
 
-const Step = ({
+export const Step = ({
   index,
   label,
   active,
@@ -134,7 +135,17 @@ const Card = ({
   </div>
 );
 
-const ChipGrid = ({count, color}: {count: number; color: string}) => (
+const ChipGrid = ({
+  count,
+  color,
+  frame,
+  start,
+}: {
+  count: number;
+  color: string;
+  frame: number;
+  start: number;
+}) => (
   <div
     style={{
       display: 'grid',
@@ -143,22 +154,32 @@ const ChipGrid = ({count, color}: {count: number; color: string}) => (
       marginTop: 18,
     }}
   >
-    {Array.from({length: count}).map((_, index) => (
-      <div
-        key={index}
-        style={{
-          width: 14,
-          height: 14,
-          borderRadius: 3,
-          border: `1px solid ${color}`,
-          background: 'rgba(139, 92, 246, 0.18)',
-        }}
-      />
-    ))}
+    {Array.from({length: count}).map((_, index) => {
+      const raw = spring({
+        frame: Math.max(0, frame - start - index * 0.55),
+        fps: 30,
+        config: {damping: 16, stiffness: 140, mass: 0.8},
+      });
+      const reveal = Math.min(1, Math.max(0, raw));
+      return (
+        <div
+          key={index}
+          style={{
+            width: 14,
+            height: 14,
+            borderRadius: 3,
+            border: `1px solid ${color}`,
+            background: 'rgba(139, 92, 246, 0.18)',
+            opacity: reveal,
+            transform: `scale(${0.55 + reveal * 0.45})`,
+          }}
+        />
+      );
+    })}
   </div>
 );
 
-const SceneOne = ({frame}: {frame: number}) => {
+export const SceneOne = ({frame}: {frame: number}) => {
   const count = Math.min(100, Math.max(0, Math.round(
     interpolate(frame, [10, 105], [0, 100], clamp),
   )));
@@ -175,7 +196,16 @@ const SceneOne = ({frame}: {frame: number}) => {
       </div>
       <div style={{display: 'flex', gap: 18, marginTop: 24}}>
         <div style={{...fadeUp(frame, 20), flex: 1.15}}>
-          <div style={{fontSize: 104, lineHeight: 1, fontWeight: 900, color: LIME}}>
+          <div
+            style={{
+              fontSize: 104,
+              lineHeight: 1,
+              fontWeight: 900,
+              color: LIME,
+              transform: `scale(${count >= 100 ? 1 + 0.025 * Math.sin((frame - 105) * 0.25) : 1})`,
+              transformOrigin: 'left center',
+            }}
+          >
             {count}+
           </div>
           <div style={{fontSize: 19, color: MUTED, marginTop: 2}}>qubits disponíveis</div>
@@ -202,7 +232,7 @@ const SceneOne = ({frame}: {frame: number}) => {
   );
 };
 
-const SceneTwo = ({frame}: {frame: number}) => {
+export const SceneTwo = ({frame}: {frame: number}) => {
   const fadeSmall = interpolate(frame, [160, 220], [1, 0.42], clamp);
   return (
     <div style={{paddingTop: 8}}>
@@ -218,12 +248,12 @@ const SceneTwo = ({frame}: {frame: number}) => {
       <div style={{display: 'flex', gap: 16, marginTop: 24}}>
         <div style={{...fadeUp(frame, 18), flex: 1, opacity: fadeSmall}}>
           <Card title="Antes" subtitle="chips menores" accent="#9CA3AF">
-            <ChipGrid count={28} color="#9CA3AF" />
+            <ChipGrid count={28} color="#9CA3AF" frame={frame} start={18} />
           </Card>
         </div>
         <div style={{...fadeUp(frame, 34), flex: 1}}>
           <Card title="Agora" subtitle="100+ qubits" accent={LIME}>
-            <ChipGrid count={77} color={ACCENT} />
+            <ChipGrid count={77} color={ACCENT} frame={frame} start={34} />
           </Card>
         </div>
       </div>
@@ -239,7 +269,7 @@ const SceneTwo = ({frame}: {frame: number}) => {
   );
 };
 
-const SceneThree = ({frame}: {frame: number}) => (
+export const SceneThree = ({frame}: {frame: number}) => (
   <div style={{paddingTop: 8}}>
     <div style={{...fadeUp(frame, 0), color: LIME, fontSize: 14, fontWeight: 900, letterSpacing: 1.4}}>
       ATO 03 · LIMITE

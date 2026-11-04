@@ -254,41 +254,49 @@ revisão humana. O ASR large-v3 mediu **2,17% de WER lexical**; loudness
 `pilots/r1026-quantum/r1047-dub/out/` e são ignorados pelo Git; o script e o
 manifesto permitem reproduzir o fluxo, e a imagem acima é o recorte versionado.
 
-### Slide dinâmico e didático (R1047)
+### Palco completo com cartão da apresentadora (R1047)
 
-![Três cenas do slide dinâmico: acesso ampliado, mudança de chips e limite da simulação](docs/images/r1047-dynamic-slide.jpg)
+![Três atos do palco escuro com cartão da apresentadora: acesso, mudança e limite](docs/images/r1047-card-stage.jpg)
 
-O slide estático foi substituído por uma composição Remotion de **600 frames
-(20 s, 30 fps)**, com **cenário escuro**, título **“Do acesso ao limite”** e uma
-trilha de três etapas. As cenas acompanham a narração: acesso a 100+ qubits,
-saída dos chips menores e limite da simulação clássica. O render usa o backend
-auditável `video_editor`, com `license_ack` e `render_approved`, e é composto
-sobre o vídeo com lip sync, mantendo áudio, ASS e ausência de cartão.
+O cenário original foi substituído por um **palco escuro em 1920×1080**, com
+título **“Do acesso ao limite”**, trilha Acesso → Mudança → Limite, conteúdo
+didático à esquerda e a apresentadora em um **cartão** à direita. O cartão tem
+borda cônica animada, leve paralaxe e rótulo “APRESENTADORA • VOZ SINTÉTICA”.
+O fundo usa gradientes, grade, grão e vinheta; as transições têm spring,
+cascata de chips e crossfade com blur.
 
 | Item | Valor |
 |---|---|
-| Composição | `editor-workspace/remotion-smoke/src/r1047-slide/R1047Slide.tsx` |
-| Slide renderizado | `editor-workspace/remotion-smoke/r1047-slide-v3.mp4` |
-| Vídeo final | `pilots/r1026-quantum/r1047-dub/out/quantum-ptbr-r1047-dynamic-slide-dark.mp4` |
-| SHA-256 | `ba30b8407901f3f5fd8a6f6d5bc4d891590f47f8aed2376751939e09a0d23223` |
+| Composição | `editor-workspace/remotion-smoke/src/r1047-slide/R1047Stage.tsx` |
+| Palco renderizado | `editor-workspace/remotion-smoke/r1047-stage-v2.mp4` |
+| Vídeo final | `pilots/r1026-quantum/r1047-dub/out/quantum-ptbr-r1047-card-scene.mp4` |
+| SHA-256 | `7765afc04f2ee5354296d341c313a2f7c997fb1b5b03921c9a5538637bbef581` |
 | Formato | 1920×1080, 30 fps, 600 frames, 20,00 s, AAC 48 kHz |
 | Loudness | **−16,10 LUFS**; true peak **−2,16 dBTP** |
 | QC | frames, fps, loudness, silêncio e pretos: **pass** |
 
-O slide estático (`quantum-ptbr-r1047.mp4`) e a versão clara dinâmica permanecem
-como fallback. O movimento é didático, não prova retenção ou estética; a Remotion
-License e a revisão humana continuam aplicáveis. Evidência: [R1050](reports/r1050/DYNAMIC-SLIDE.md).
+O cartão usa `presenter-middle-card.mp4`, cujo lip sync é anterior à nova
+locução; a boca pode não corresponder exatamente às palavras novas. O slide
+estático e as versões dinâmicas anteriores permanecem como fallback. Evidência:
+[R1050](reports/r1050/CARD-STAGE.md).
+
+**Efeitos pesquisados e aplicados:** springs calibrados, cascata de chips, borda
+cônica, paralaxe/tilt, grão determinístico, vinheta, crossfade com blur,
+tipografia cinética e contador. Referências: documentação Remotion
+(`motion-blur`, `noise`, `transitions`), `IskakovDamir/apple-motion`,
+`lifeprompt-team/remotion-scenes` e `vshukla7/remotion-captions-themes`. Nenhum
+código foi copiado.
 
 **O que essa transformação demonstra no Core:** ingestão de mídia real com hash,
-roteiro e tradução, TTS local com referência de voz, composição FFmpeg sem
-cartão, legenda SRT/ASS, mixagem com loudness alvo e verificação ASR. O fluxo
+roteiro e tradução, TTS local com referência de voz, composição FFmpeg com cenário e
+cartão opcionais, legenda SRT/ASS, mixagem com loudness alvo e verificação ASR. O fluxo
 termina em manifesto com hashes e flags; não publica, não autentica a licença e
 não substitui revisão humana. A re-sincronização labial foi executada com Wav2Lip em CPU; a revisão
 visual humana continua pendente.
 
 ```text
-source.mp4 → ASR/roteiro → XTTS (referência 6 s) → patch do slide
-           → FFmpeg (overlay + legendas) → ASR large-v3 + loudness → manifesto
+source.mp4 → ASR/roteiro → XTTS (referência 6 s) → palco Remotion + cartão
+           → FFmpeg (áudio + legendas) → ASR large-v3 + loudness → manifesto
 ```
 
 **Pesquisa de skills Claude (R1048):** foram triados **20 repositórios** no
