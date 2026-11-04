@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "status": "rendered_pending_review",
+  "backend": "remotion",
+  "media_type": "video",
+  "plan_sha256": "ebd35da113d53c54004401a8d7967ae38b32068d442779cec83d75e2534f6222",
+  "output": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1055-qubit/out/qubit-vertical-visual-camera-9.mp4",
+  "output_sha256": "cd4d631fef6a4fc54c517c34666c0b287eb6b5ec938cce6787f38c62f9959e7a",
+  "bytes": 19980728,
+  "expected_frames": 3292,
+  "frame_tolerance": 0,
+  "probe": {
+    "duration_seconds": 109.733333,
+    "video": {
+      "index": 0,
+      "codec": "h264",
+      "width": 1080,
+      "height": 1920,
+      "fps": "30/1",
+      "r_fps": "30/1",
+      "frames": 3292,
+      "rotation": 0,
+      "duration_seconds": 109.733333,
+      "variable_frame_rate": false,
+      "pix_fmt": "yuv420p"
+    },
+    "audio": null
+  },
+  "audiovisual_approved": false,
+  "limitations": [
+    "technical render only; content, voice and lip sync remain unapproved"
+  ]
+}
