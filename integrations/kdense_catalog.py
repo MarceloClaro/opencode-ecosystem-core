@@ -75,16 +75,27 @@ def get_skill(catalog: dict, name: str) -> dict:
     item = next((row for row in catalog["skills"] if row["skill"] == name), None)
     if item is None:
         raise ValueError(f"skill não catalogada: {name}")
-    if not item.get("mirrored") or not item.get("local_skill_md"):
-        raise ValueError(f"skill em license_hold; consulte a fonte: {item.get('source_url')}")
-    relative = Path(item["local_skill_md"])
-    if relative.is_absolute() or ".." in relative.parts:
-        raise ValueError("caminho local inválido")
-    target = (CATALOG_PATH.parent / relative).resolve()
-    root = CATALOG_PATH.parent.resolve()
-    if not target.is_relative_to(root) or not target.is_file():
-        raise ValueError("SKILL.md local ausente ou fora da raiz")
-    return {**item, "path": str(target), "text": target.read_text(encoding="utf-8")}
+    if item.get("mirrored") and item.get("local_skill_md"):
+        relative = Path(item["local_skill_md"])
+        if relative.is_absolute() or ".." in relative.parts:
+            raise ValueError("caminho local inválido")
+        target = (CATALOG_PATH.parent / relative).resolve()
+        root = CATALOG_PATH.parent.resolve()
+        if not target.is_relative_to(root) or not target.is_file():
+            raise ValueError("SKILL.md local ausente ou fora da raiz")
+        return {**item, "path": str(target), "adapter": False,
+                "text": target.read_text(encoding="utf-8")}
+    adapter = item.get("original_adapter_md")
+    if not adapter:
+        raise ValueError(f"skill em license_hold sem adaptação: {item.get('source_url')}")
+    relative = Path(adapter)
+    target = (ROOT / relative).resolve()
+    if relative.is_absolute() or ".." in relative.parts or not target.is_relative_to(ROOT.resolve()):
+        raise ValueError("caminho de adaptação inválido")
+    if not target.is_file():
+        raise ValueError("adaptação original ausente")
+    return {**item, "path": str(target), "adapter": True,
+            "text": target.read_text(encoding="utf-8")}
 
 
 def stats(catalog: dict) -> dict:
@@ -98,6 +109,7 @@ def stats(catalog: dict) -> dict:
         "risk_flags": dict(sorted(flags.items())),
         "permissive_count": sum(1 for x in catalog["skills"] if x.get("license_class") == "permissive"),
         "license_hold_count": sum(1 for x in catalog["skills"] if x.get("license_class") == "hold"),
+        "original_adapter_count": sum(1 for x in catalog["skills"] if x.get("original_adapter_md")),
         "instruction_only": sum(1 for x in catalog["skills"] if x.get("instruction_only")),
         "scripts_vendored": sum(1 for x in catalog["skills"] if x.get("scripts_vendored")),
         "autoload": sum(1 for x in catalog["skills"] if x.get("autoload")),

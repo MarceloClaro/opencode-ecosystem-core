@@ -11,24 +11,28 @@ disponibilidade de provedores.
 | Agentes em `opencode.json` | 333 |
 | Servidores MCP (diretos + `mcp.servers`) | 29 |
 | Comandos | 35 |
-| Skills em `.opencode/skills` | 49 |
+| Skills em `.opencode/skills` | 50 |
 | Checks do `doctor` | 22/22 |
 | Testes R1033–R1045 + instalador | **245** |
-| Testes R1033–R1049 + instalador | **330** + 1 opcional (render real R1026; 85 novos) |
+| Testes R1033–R1050 + instalador | **347** + 1 opcional (render real R1026; 102 novos) |
 | Specs formais | 291 |
 
 O `doctor` está **healthy** em modo estrutural; isso não autentica CLIs,
 modelos ou serviços externos.
 
-## Entregas R1035–R1049
+## Entregas R1035–R1050
 
 - **Editor universal** (`video_editor`, `video_editor_mcp`): timeline,
   FFmpeg, Remotion, legendas, áudio, render com recibo e retomada.
 - **Composição avançada R1046** (`video_editor_advanced`): multifaixa,
   transições e cor SDR paramétrica, com hash de fontes e recibo técnico separado
   de aprovação audiovisual/tradução/ciência.
+- **Metacognição e macro-rede R1050**: gate de claims com evidência literal,
+  calibração, contradições e validação externa; ledger de claims no conselho;
+  grafo read-only com 576 nós/768 arestas; 9 adaptações originais para as
+  licenças restritas.
 - **Skills seletivas R1049**: oito skills locais (Superpowers SDD/TDD, chgagne,
-  K-Dense com 8 protocolos + catálogo de 177, motion com 5, QA de vídeo, 10 receitas shotcraft,
+  K-Dense com 8 protocolos + catálogo de 177 + 9 adaptações originais, motion com 5, QA de vídeo, 10 receitas shotcraft,
   10 papéis de engenharia e laboratório de pesquisa isolado). Fontes pinadas e
   nenhum código de terceiro copiado.
 - **Dublagem R1047** (`pilots/r1026-quantum/r1047-dub`): XTTS local `speed 1.0`,

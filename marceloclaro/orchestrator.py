@@ -423,6 +423,36 @@ class MarceloClaroOrchestrator:
     # ------------------------------------------------------------------
     # 2. DELEGAÇÃO VIA BLACKBOARD
     # ------------------------------------------------------------------
+    def macro_network_snapshot(self) -> Dict[str, Any]:
+        """Projeta a macro-rede read-only de agentes, skills, evidência e gates.
+
+        O grafo é uma leitura dos arquivos locais; aresta não é execução nem
+        inferência. Nenhuma rede, LLM ou alteração de configuração é feita.
+        """
+        from mci.macro_network import MacroNetwork
+        return MacroNetwork().snapshot()
+
+    def metacognitive_claim_gate(self, claim: Dict[str, Any], *,
+                                 external_validation: Optional[Dict[str, Any]] = None,
+                                 calibration: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        """Aplica o gate R1050 e registra a observação sem promover confiança.
+
+        Status `externally_supported` não é verdade absoluta. Voto, nota e payoff
+        não participam da decisão; o gate só olha evidência literal, falseabilidade,
+        contradições, calibração e validação externa declarada.
+        """
+        from mci.metacognitive_gate import evaluate_claim
+        result = evaluate_claim(claim, external_validation=external_validation,
+                                calibration=calibration)
+        observation = dict(result)
+        observation.pop("claims", None)
+        observation["claim_text_sha256"] = __import__("hashlib").sha256(
+            str(claim.get("text", "")).encode("utf-8")).hexdigest()
+        observation_id = metabus.memory.record_observation(
+            self.id, "metacognitive.claim_gate", observation)
+        return {**result, "observation_id": observation_id,
+                "confidence_promoted": False}
+
     def delegate(self, description: str, required_capabilities: Optional[List[str]] = None,
                  context: Optional[Dict[str, Any]] = None) -> str:
         """Posta uma tarefa no Blackboard e retorna o task_id."""

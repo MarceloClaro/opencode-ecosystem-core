@@ -19,6 +19,7 @@ NEW_SKILLS = {
     "video-shotcraft-selecao": "Apache-2.0",
     "agentes-engenharia-selecao": "MIT",
     "laboratorio-pesquisa-isolado": "MIT",
+    "kdense-adaptacoes-originais": "MIT",
 }
 
 

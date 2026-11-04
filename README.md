@@ -72,11 +72,12 @@ do ambiente e da operação solicitada.
 
 ## Estado atual e orientação de leitura
 
-Revisão documental **R1049, 03/11/2026**, baseada no checkout local. As frentes
+Revisão documental **R1050, 03/11/2026**, baseada no checkout local. As frentes
 **R985–R1001** (conselho de 13 cientistas, autor/editor de alto rigor, scanner
-evolutivo, piloto OpenShell e executor Gemini) e **R1035–R1049** (editor de
+evolutivo, piloto OpenShell e executor Gemini) e **R1035–R1050** (editor de
 vídeo universal, dublagem, diarização, Remotion, catálogo de ferramentas,
-multifaixa, transições, cor, voz clonada, lip sync e skills seletivas) foram incorporadas depois — veja
+multifaixa, transições, cor, voz clonada, lip sync, skills seletivas e
+macro-rede metacognitiva) foram incorporadas depois — veja
 [Capacidades principais](#capacidades-principais). Comece pelo
 [manual](MANUAL.md), pelo [índice documental](docs/README.md), pelo
 [estado atual R1045](docs/ESTADO_ATUAL_CORE_R1045.md) e pelo
@@ -277,11 +278,19 @@ bloqueios por licença e o protocolo de adoção estão em
 
 **Adoção seletiva de skills (R1049):** oito skills locais foram criadas a partir
 da triagem R1048: `superpowers-sdd-tdd`, `rigor-academico-chgagne`,
-`kdense-ciencia-seletiva` (8 protocolos + catálogo de 177 skills), `motion-design-seletivo` (5),
+`kdense-ciencia-seletiva` (8 protocolos + catálogo de 177) e `kdense-adaptacoes-originais` (9 adaptações), `motion-design-seletivo` (5),
 `video-director-qa`, `video-shotcraft-selecao` (10 receitas),
 `agentes-engenharia-selecao` (10 papéis) e `laboratorio-pesquisa-isolado`.
-Nenhum código de terceiro foi copiado ou executado; instruções permissivas foram espelhadas com atribuição e as restritas ficaram em license_hold. Fontes e commits estão em
+Nenhum código de terceiro foi copiado ou executado; instruções permissivas foram espelhadas com atribuição e as restritas receberam adaptações originais. Fontes e commits estão em
 `reports/r1049/sources.json`. Ver [evidência R1049](reports/r1049/README.md).
+
+**Macro-rede e gate metacognitivo (R1050):** `mci/macro_network.py` projeta
+**576 nós e 768 arestas** read-only — orquestrador, 333 agentes, 50 skills, 177
+skills K-Dense, 11 categorias e 4 gates. `mci/metacognitive_gate.py` impede que
+confiança, voto, nota ou payoff virem verdade; o conselho ganhou
+`validate_claims` com evidência literal, falseabilidade, mecanismo e
+contradições. Ver [evidência R1050](reports/r1050/README.md) e
+[macro-rede](reports/r1050/macro-network.json).
 
 **ASR e tradução:** o `faster-whisper-small` produziu texto turco sem sentido
 em parte do corpus; `large-v3` foi baixado e concluiu o lote das 107 partes (1.854 segmentos, 7.773 palavras), ainda sem revisão nativa.

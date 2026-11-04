@@ -18,9 +18,10 @@ auto-carregado pelo OpenCode.
 | Infraestrutura de IA científica | 10 |
 | Clínica e saúde | 7 |
 
-**168** instruções permissivas foram espelhadas; **9** ficaram em
-`license_hold` (GPL, não comercial, proprietária ou desconhecida) e só têm
-metadados/fonte. Nenhum script, asset ou dependência foi copiado ou executado.
+**168** instruções permissivas foram espelhadas; **9** restritas (GPL, não
+comercial, proprietária ou desconhecida) receberam adaptações originais em
+`.opencode/skills/kdense-adaptacoes-originais/`. Nenhum script, asset ou
+dependência foi copiado ou executado.
 
 ## Comandos
 

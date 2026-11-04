@@ -30,7 +30,8 @@ instalada.
 Além disso, o catálogo completo tem **177 skills em 11 categorias**, com fonte e
 commit pinados. **168** instruções permissivas foram espelhadas em
 `external/kdense-scientific-agent-skills/`; **9** restritas (GPL, não comercial,
-proprietária ou desconhecida) ficam em `license_hold`, sem cópia local. O
+proprietária ou desconhecida) receberam **adaptações originais** em
+`.opencode/skills/kdense-adaptacoes-originais/`, sem cópia do texto restrito. O
 catálogo é sob demanda e não é auto-carregado. Ver
 [`kdense-177.md`](kdense-177.md).
 
@@ -87,7 +88,7 @@ Recibo: [`qa-smoke.json`](qa-smoke.json); contato: [`qa-contact.png`](qa-contact
 - `tests/test_r1049_video_qa.py`: QC real com vídeo sintético e falha por frames.
 - `tests/test_r1049_research_lab.py`: budget, manifesto, dry-run e revisão.
 
-Resultado local: **27 testes R1049 passando**. Regressão completa: **330 passed,
+Resultado local: **28 testes R1049 passando**. Regressão completa: **331 passed,
 1 skipped**; `doctor` 22/22; guard Remotion 11 casos.
 
 ## Limites

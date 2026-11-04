@@ -45,6 +45,9 @@ def test_every_entry_is_instruction_only_and_local():
             assert row["mirrored"] is False
             assert row["local_skill_md"] is None
             assert "license_hold" in row["status"]
+            adapter = (ROOT / row["original_adapter_md"]).resolve()
+            assert adapter.is_file() and adapter.is_relative_to(ROOT)
+            assert adapter.stat().st_size > 0
 
 
 def test_no_scripts_assets_or_binaries_are_mirrored():
@@ -73,6 +76,10 @@ def test_get_skill_is_confined_and_returns_text():
     assert row["category"] == "literatura-citacao-editorial"
     assert "Literature Review" in row["text"]
     assert row["path"].endswith("literature-review/SKILL.md")
+    adapter = kdense_catalog.get_skill(data, "cobrapy")
+    assert adapter["adapter"] is True
+    assert adapter["mirrored"] is False
+    assert "Modelos metabólicos" in adapter["text"]
     for bad in ("../etc/passwd", "/etc/passwd", "Literature Review", ""):
         with pytest.raises(ValueError):
             kdense_catalog.get_skill(data, bad)
@@ -84,6 +91,7 @@ def test_stats_and_cli():
     assert summary["count"] == 177
     assert summary["permissive_count"] == 168
     assert summary["license_hold_count"] == 9
+    assert summary["original_adapter_count"] == 9
     assert summary["scripts_vendored"] == 0
     assert summary["autoload"] == 0
     assert summary["risk_flags"]["dual-use-review"] >= 1

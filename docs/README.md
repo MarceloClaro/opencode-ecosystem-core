@@ -18,6 +18,8 @@ execuções anteriores. Arquivos de evidência não são certificados de prontid
 | Pesquisar skills Claude para vídeo, ciência e código | [Catálogo R1048](../reports/r1048-claude-skills-github/README.md), [JSON](../reports/r1048-claude-skills-github/candidates.json) |
 | Adotar skills seletivas no Core | [Evidência R1049](../reports/r1049/README.md), [fontes pinadas](../reports/r1049/sources.json) |
 | Consultar as 177 skills K-Dense | [Catálogo por categoria](../reports/r1049/kdense-177.md), [CLI](../integrations/kdense_catalog.py) |
+| Ver as 9 adaptações originais | [Skill](../.opencode/skills/kdense-adaptacoes-originais/SKILL.md) |
+| Auditar a macro-rede e o gate metacognitivo | [R1050](../reports/r1050/README.md), [grafo](../reports/r1050/macro-network.json) |
 | Escolher ferramentas/modelos de vídeo | [Catálogo R1043](VIDEO_EDITOR_TOOLCHAIN_R1043.md), [toolchain.json](../reports/r1043/toolchain.json) |
 | ChatGPT, Gemini e NotebookLM | [Autenticação](AUTENTICACAO_CHATGPT_NOTEBOOKLM.md), [NotebookLM](GEMINI_NOTEBOOK_CORE.md) |
 | Reduzir custo de modelos/contexto | [Governança de custo de tokens](GOVERNANCA_DE_CUSTO_DE_TOKENS.md), [Modelos e tokens](MODELOS_E_CUSTO_DE_TOKENS.md) |

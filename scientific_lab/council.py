@@ -171,7 +171,81 @@ def _normalize_findings(values, required=False):
     return normalized
 
 
-def validate_report(report, sources):
+def validate_claims(claims, sources):
+    """Ledger de claims do conselho; status nunca é verdade por votação.
+
+    Cada claim exige evidência literal, falseabilidade e mecanismo quando for
+    inferência/hipótese. `supported` com uma única fonte vira `partial`.
+    """
+    sources = _sources(sources)
+    if not isinstance(claims, list) or not 1 <= len(claims) <= 20:
+        raise ValueError("Forneça de 1 a 20 claims")
+    by_id = {s["id"]: s["text"] for s in sources}
+    checked = []
+    ids = set()
+    for item in claims:
+        required = {"id", "text", "confidence", "evidence", "inference_level",
+                    "falsifier", "mechanism", "contradictions", "status"}
+        if not isinstance(item, dict) or set(item) != required:
+            raise ValueError("Claim deve conter id, text, confidence, evidence, inference_level, falsifier, mechanism, contradictions e status")
+        cid = _text(item["id"], 100)
+        if not _ID.fullmatch(cid) or cid in ids:
+            raise ValueError("ID de claim inválido ou duplicado")
+        ids.add(cid)
+        _text(item["text"], 4000)
+        if type(item["confidence"]) not in (int, float) or not 0 <= item["confidence"] <= 1:
+            raise ValueError("Confiança do claim deve estar em [0,1]")
+        if item["inference_level"] not in {"observation", "inference", "hypothesis"}:
+            raise ValueError("inference_level inválido")
+        if item["status"] not in {"supported", "partial", "blocked"}:
+            raise ValueError("status de claim inválido")
+        if not isinstance(item["falsifier"], str) or not item["falsifier"].strip():
+            raise ValueError("Claim sem falseabilidade")
+        if not isinstance(item["mechanism"], str) or len(item["mechanism"].strip()) < 20:
+            raise ValueError("Claim sem mecanismo declarado")
+        if not isinstance(item["contradictions"], list) or any(not isinstance(x, str) for x in item["contradictions"]):
+            raise ValueError("Contradições do claim inválidas")
+        evidence = item["evidence"]
+        if not isinstance(evidence, list) or len(evidence) > 20:
+            raise ValueError("Evidência do claim inválida")
+        checked_evidence = []
+        for ev in evidence:
+            if not isinstance(ev, dict) or set(ev) != {"source_id", "quote"}:
+                raise ValueError("Evidência do claim deve conter source_id e quote")
+            sid, quote = ev["source_id"], _text(ev["quote"], 2000)
+            if sid not in by_id or quote not in by_id[sid]:
+                raise ValueError("Recorte do claim não corresponde à fonte")
+            checked_evidence.append({"source_id": sid, "quote": quote,
+                                     "source_sha256": hashlib.sha256(by_id[sid].encode()).hexdigest()})
+        sources_used = {e["source_id"] for e in checked_evidence}
+        reasons = []
+        status = item["status"]
+        if status == "supported" and not checked_evidence:
+            raise ValueError("Claim supported sem evidência literal")
+        if status == "supported" and len(sources_used) < 2:
+            status = "partial"; reasons.append("supported_requires_two_independent_sources")
+        if item["confidence"] >= 0.8 and len(sources_used) < 2:
+            status = "partial"; reasons.append("high_confidence_requires_two_sources")
+        if item["contradictions"]:
+            status = "partial"; reasons.append("unresolved_contradictions")
+        if item["inference_level"] in {"inference", "hypothesis"} and len(item["mechanism"].strip()) < 20:
+            status = "partial"; reasons.append("inference_without_mechanism")
+        if not checked_evidence:
+            status = "blocked"; reasons.append("no_literal_evidence")
+        checked.append({"id": cid, "text": item["text"], "status": status,
+                        "confidence": float(item["confidence"]),
+                        "evidence": checked_evidence, "reasons": reasons,
+                        "inference_level": item["inference_level"],
+                        "truth_claim": False})
+    statuses = {c["status"] for c in checked}
+    overall = ("blocked" if "blocked" in statuses else
+               "partial" if "partial" in statuses else "candidate")
+    return {"status": overall, "claims": checked, "truth_claim": False,
+            "policy": "vote_score_payoff_never_truth", "external_validation": False,
+            "human_review_required": True}
+
+
+def validate_report(report, sources, claims=None):
     sources = _sources(sources)
     if not isinstance(report, dict) or set(report) != {"status", "findings", "evidence", "limitations", "feynman"}:
         raise ValueError("Contrato do parecer incompleto")
@@ -199,11 +273,14 @@ def validate_report(report, sources):
     from reversa_feynman.feynman_gates import FeynmanGates
     checklist = FeynmanGates().score({**feynman, "evidence": checked,
                                     "observed_inferred_separated": True, "need_demonstrated": False})
-    return {"status": report["status"], "findings": findings, "evidence": checked,
-            "limitations": limitations, "feynman": feynman,
-            "feynman_checklist": {**checklist, "scope": "declared_completeness_only"},
-            "evidence_scope": "literal_match_to_unverified_supplied_corpus",
-            "human_validation": False}
+    result = {"status": report["status"], "findings": findings, "evidence": checked,
+              "limitations": limitations, "feynman": feynman,
+              "feynman_checklist": {**checklist, "scope": "declared_completeness_only"},
+              "evidence_scope": "literal_match_to_unverified_supplied_corpus",
+              "human_validation": False}
+    if claims is not None:
+        result["claim_gate"] = validate_claims(claims, sources)
+    return result
 
 
 def run_council(question, sources, *, confirm=False, timeout=120, max_agents=13, coordinator=None, primary=None, executor=None):
