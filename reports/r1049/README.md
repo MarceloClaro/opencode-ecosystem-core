@@ -17,7 +17,7 @@ As fontes foram fixadas por commit em [`sources.json`](sources.json).
 | Catálogo | `agentes-engenharia-selecao` | **10 papéis** em JSON |
 | Pesquisa | `laboratorio-pesquisa-isolado` | `research_lab/` file-first com budget |
 
-Total: **8 skills novas** em `.opencode/skills`, sem scripts de terceiros dentro
+Total: **9 skills novas** em `.opencode/skills`, sem scripts de terceiros dentro
 das skills.
 
 ## K-Dense: catálogo completo + 8 protocolos

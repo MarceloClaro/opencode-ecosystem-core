@@ -21,6 +21,7 @@ execuções anteriores. Arquivos de evidência não são certificados de prontid
 | Ver as 9 adaptações originais | [Skill](../.opencode/skills/kdense-adaptacoes-originais/SKILL.md) |
 | Auditar a macro-rede e o gate metacognitivo | [R1050](../reports/r1050/README.md), [grafo](../reports/r1050/macro-network.json) |
 | Ver o slide dinâmico R1047 | [Evidência](../reports/r1050/CARD-STAGE.md), [composição](../editor-workspace/remotion-smoke/src/r1047-slide/R1047Stage.tsx) |
+| Ver a evolução completa dos vídeos | [README § Evolução R1026](../README.md), [imagem](../docs/images/r1047-video-evolution-full.jpg) |
 | Escolher ferramentas/modelos de vídeo | [Catálogo R1043](VIDEO_EDITOR_TOOLCHAIN_R1043.md), [toolchain.json](../reports/r1043/toolchain.json) |
 | ChatGPT, Gemini e NotebookLM | [Autenticação](AUTENTICACAO_CHATGPT_NOTEBOOKLM.md), [NotebookLM](GEMINI_NOTEBOOK_CORE.md) |
 | Reduzir custo de modelos/contexto | [Governança de custo de tokens](GOVERNANCA_DE_CUSTO_DE_TOKENS.md), [Modelos e tokens](MODELOS_E_CUSTO_DE_TOKENS.md) |

@@ -31,7 +31,7 @@ modelos ou serviços externos.
   calibração, contradições e validação externa; ledger de claims no conselho;
   grafo read-only com 576 nós/768 arestas; 9 adaptações originais para as
   licenças restritas.
-- **Skills seletivas R1049**: oito skills locais (Superpowers SDD/TDD, chgagne,
+- **Skills seletivas R1049**: nove skills locais (Superpowers SDD/TDD, chgagne,
   K-Dense com 8 protocolos + catálogo de 177 + 9 adaptações originais, motion com 5, QA de vídeo, 10 receitas shotcraft,
   10 papéis de engenharia e laboratório de pesquisa isolado). Fontes pinadas e
   nenhum código de terceiro copiado.

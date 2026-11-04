@@ -44,7 +44,7 @@ não comprova o aceite integral.
 - **R1050** criou macro-rede read-only (576 nós/768 arestas), gate metacognitivo
   de claims, ledger de claims do conselho e 9 adaptações originais para as
   licenças restritas. Nenhum projeto AGI foi instalado.
-- **R1049** adotou 8 skills seletivas: Superpowers SDD/TDD, chgagne, K-Dense
+- **R1049** adotou 9 skills seletivas: Superpowers SDD/TDD, chgagne, K-Dense
   com 8 protocolos + catálogo de 177 + 9 adaptações originais, motion com 5, QA de vídeo, 10 receitas shotcraft, 10 papéis
   de engenharia e laboratório de pesquisa isolado. Nenhum código de terceiro
   copiado; fontes em `reports/r1049/sources.json`.

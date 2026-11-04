@@ -235,24 +235,47 @@ com **WER lexical de 2,17%**; loudness final **−16,10 LUFS**, true peak
 visual humana, naturalidade e direitos continuam pendentes.
 Ver [evidência R1047](reports/r1047/QUANTUM-DUB-EVIDENCE.md).
 
-### Evolução do piloto R1026 (R1026–R1047)
+### Evolução dos vídeos R1026 (R1026–R1047)
 
-![Evolução do piloto R1026: original, slide PT-BR, teste com cartão e versão final sem cartão](docs/images/r1047-evolution.jpg)
+![Seis estágios: original, slide PT com dublagem anterior, teste R1046 com cartão, versão estática com lip sync, slide escuro dinâmico e palco final com cartão](docs/images/r1047-video-evolution-full.jpg)
 
 | Etapa | Transformação | Evidência |
 |---|---|---|
-| 1. Original | vídeo Qiskit em inglês, 1920×1080, 29,97 fps, slide original | `source.mp4` |
-| 2. Slide + dublagem anterior | slide em PT-BR, legendas e voz XTTS anterior; sem cartão | `pilot-16x9-lipsync-pt.mp4` |
-| 3. Teste de composição R1046 | cartão PiP com raio de canto, opacidade e áudio explícito; o cartão cobria parte da cena | `r1046-editor-preview/quantum-multitrack-v3-preview.mp4` |
-| 4. R1047 | novo roteiro em 4 blocos, voz clonada em ritmo natural, novo slide, SRT/ASS, **cartão removido** e lip sync refeito | `r1047-dub/out/quantum-ptbr-r1047.mp4` |
+| 1. Original | vídeo Qiskit em inglês, 1920×1080, 29,97 fps, slide original, sem cartão | `source.mp4` |
+| 2. Slide + dublagem anterior | slide em PT-BR, legenda e voz XTTS anterior; sem cartão | `pilot-16x9-lipsync-pt.mp4` |
+| 3. Teste R1046 | composição multifaixa com cartão PiP, raio de canto e áudio explícito; teste de editor, não entrega final | `r1046-editor-preview/quantum-multitrack-v3-preview.mp4` |
+| 4. R1047 estático | novo roteiro em 4 blocos, XTTS `speed 1.0`, slide PT, SRT/ASS, **sem cartão** e lip sync refeito | `r1047-dub/out/quantum-ptbr-r1047.mp4` — `93f074a3…9f3ed5` |
+| 5. Slide escuro dinâmico | cenário escuro, título “Do acesso ao limite”, três atos e motion Remotion; apresentadora em quadro inteiro | `r1047-dub/out/quantum-ptbr-r1047-dynamic-slide-dark.mp4` — `ba30b840…d23223` |
+| 6. Palco com cartão | cenário totalmente novo, título, roadmap, conteúdo à esquerda e apresentadora em cartão à direita | `r1047-dub/out/quantum-ptbr-r1047-card-scene.mp4` — `7765afc0…7bbef581` |
 
-A imagem é um contato de quatro frames e ilustra a **transformação técnica**:
-tradução do slide, evolução da composição, remoção do cartão e dublagem. Ela
-não é benchmark de qualidade, não prova naturalidade da voz e não substitui
-revisão humana. O ASR large-v3 mediu **2,17% de WER lexical**; loudness
-**−16,10 LUFS** e true peak **−2,16 dBTP**. Os MP4/WAV ficam em
-`pilots/r1026-quantum/r1047-dub/out/` e são ignorados pelo Git; o script e o
-manifesto permitem reproduzir o fluxo, e a imagem acima é o recorte versionado.
+As imagens são contatos de frames e registram a **transformação técnica**, não
+um benchmark de qualidade. O áudio R1047 tem **2,17% de WER lexical** no ASR
+large-v3, **−16,10 LUFS** e true peak **−2,16 dBTP**. O cartão do estágio 6 usa
+um vídeo de lip sync anterior à nova locução; a boca pode não corresponder
+exatamente às palavras novas. Os MP4/WAV ficam em
+`pilots/r1026-quantum/r1047-dub/out/` e são ignorados pelo Git; scripts,
+composições e recibos permitem reproduzir o fluxo.
+
+### O que o Core pode fazer
+
+| Capacidade | Estado observado | Limite honesto |
+|---|---|---|
+| Ingestão de mídia | probe, hash, fps racional, frames, áudio, timeline JSON | codecs/containers variam; VFR é recusado nas operações avançadas |
+| Edição | corte frame-exato, concatenação, escala, crop, pad, áudio e legendas | não é UI NLE; sem keyframes, multicam ou tracking |
+| Composição | multifaixa, overlays, opacidade, raio de canto, transições e cor SDR | sem LUT/ACES/HDR, nodes, 3D ou composição multi-faixa completa de vídeo |
+| Voz e dublagem | XTTS local por referência, ASR large-v3, mix e loudness | revisão humana de naturalidade, emoção e tradução continua necessária |
+| Slide e motion | Remotion 4.0.540, springs, cascata, borda cônica, grão, vinheta e crossfade | Remotion License; motion não prova retenção ou estética |
+| Legendas | SRT e ASS, burn-in ou faixa soft | timing e leitura exigem revisão; ASR não é escuta |
+| QC técnico | frames decodificados, fps, duração, loudness, true peak, silêncio, pretos e contato | não aprova conteúdo, voz, lip sync ou tradução |
+| Pesquisa acadêmica | pipeline ABNT, revisão de fontes, bibliografia, provas e conselho de 13 | não substitui bibliotecário, estatístico ou revisão por pares |
+| Ciência | 8 protocolos K-Dense, catálogo de 177 skills, 9 adaptações originais e laboratório com budget | 177 skills não são 177 validações; nada é executado sem gate |
+| Programação | SDD/TDD, 347 testes, agentes, skills e Macro-rede de 576 nós/768 arestas | grafo é projeção read-only; aresta não é execução |
+| Governança | gate metacognitivo, citações literais, contradições e validação externa | `externally_supported` não é verdade absoluta; voto/nota/payoff não decide |
+| Publicação | nenhum upload ou agendamento nesta rodada | exige direitos, credenciais e autorização explícita |
+
+**O que ele não é:** não é AGI, não tem paridade com Premiere/DaVinci, não
+substitui revisão humana e não transforma teste técnico em aprovação científica
+ou editorial.
 
 ### Palco completo com cartão da apresentadora (R1047)
 
@@ -287,13 +310,6 @@ tipografia cinética e contador. Referências: documentação Remotion
 `lifeprompt-team/remotion-scenes` e `vshukla7/remotion-captions-themes`. Nenhum
 código foi copiado.
 
-**O que essa transformação demonstra no Core:** ingestão de mídia real com hash,
-roteiro e tradução, TTS local com referência de voz, composição FFmpeg com cenário e
-cartão opcionais, legenda SRT/ASS, mixagem com loudness alvo e verificação ASR. O fluxo
-termina em manifesto com hashes e flags; não publica, não autentica a licença e
-não substitui revisão humana. A re-sincronização labial foi executada com Wav2Lip em CPU; a revisão
-visual humana continua pendente.
-
 ```text
 source.mp4 → ASR/roteiro → XTTS (referência 6 s) → palco Remotion + cartão
            → FFmpeg (áudio + legendas) → ASR large-v3 + loudness → manifesto
@@ -309,7 +325,7 @@ e programação avançada. Prioridades: `obra/superpowers` (MIT, método TDD),
 bloqueios por licença e o protocolo de adoção estão em
 [`reports/r1048-claude-skills-github/`](reports/r1048-claude-skills-github/README.md).
 
-**Adoção seletiva de skills (R1049):** oito skills locais foram criadas a partir
+**Adoção seletiva de skills (R1049):** nove skills locais foram criadas a partir
 da triagem R1048: `superpowers-sdd-tdd`, `rigor-academico-chgagne`,
 `kdense-ciencia-seletiva` (8 protocolos + catálogo de 177) e `kdense-adaptacoes-originais` (9 adaptações), `motion-design-seletivo` (5),
 `video-director-qa`, `video-shotcraft-selecao` (10 receitas),
