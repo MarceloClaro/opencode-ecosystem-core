@@ -40,9 +40,12 @@ O snapshot Git `759d25325c0c4d1fbc84cadf8e0652627ed96253` foi extraído sem exec
 O livro inclui o mapa mental dos 18 temas, um diagrama das fronteiras dos processos e caminhos direto/delegado, um fluxo de uso e conferência e a matriz integral entre as 18 camadas estáticas. O grafo individual de 693 módulos, inclusive isolados, acompanha o livro em SVG ampliável, DOT e Mermaid em `docs/architecture-r911/`; não se reduz esse grafo a caracteres ilegíveis numa folha A4.
 
 - [SVG completo](architecture-r911/dependencies.svg)
-- [Mermaid completo](architecture-r911/dependencies.mmd)
+- [Mermaid completo — raw 2,3 MB](https://raw.githubusercontent.com/MarceloClaro/opencode-ecosystem-core/main/docs/architecture-r911/dependencies.mmd)
 - [Inventário do snapshot](architecture-r911/architecture-inventory.json)
 - [Correspondência e contagens](architecture-r911/mermaid-correspondence.json)
+
+> O Mermaid R911 tem **2,3 MB** e excede o limite do GitHub. O link é raw para
+> renderização local; use o SVG completo para leitura imediata.
 
 As fontes autoritativas são `livro-core/atlas/data-orchestration.json`, `data-science.json` e `livro-core/gen_architecture_atlas.py`. O manifesto `architectures.json` contém fonte por componente, por aresta e por fluxo, além de hashes dos 57 arquivos Python referenciados. A presença AST verifica localização dos símbolos; a pertinência semântica depende da leitura das fontes, não é provada pelo parser.
 

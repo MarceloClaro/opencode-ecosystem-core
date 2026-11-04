@@ -4,9 +4,13 @@
 
 Base Git `d02817ca460ee6411761a8a3f0b82d17dafd2740`; identidade das fontes locais `d53ac4511f757431da55589db0e6a0fcde2daebdb2b20303611d45882b7ab6b5`.
 
-A [fonte Mermaid](dependencies.mmd), o [SVG Graphviz](dependencies.svg) e o
+A [fonte Mermaid — raw 2,4 MB](https://raw.githubusercontent.com/MarceloClaro/opencode-ecosystem-core/main/docs/architecture/dependencies.mmd), o [SVG Graphviz](dependencies.svg) e o
 [SVG Mermaid](dependencies-mermaid.svg) representam os mesmos conjuntos de
-módulos e pares. Os layouts são diferentes. O [inventário](architecture-inventory.json)
+módulos e pares. Os layouts são diferentes.
+
+> **GitHub:** o arquivo integral tem 2,4 MB e excede o limite do renderizador
+> Mermaid. Não espere vê-lo renderizado na interface; use o SVG, a página
+> offline ou baixe o raw e renderize localmente com `mermaid-render-config.json`. O [inventário](architecture-inventory.json)
 explicita produção rastreada local e metadados da base Git; o
 [guia R916](../ARQUITETURA_COMPLETA_CORE_R916.md) detalha exclusões e identidade.
 

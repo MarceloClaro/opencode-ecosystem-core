@@ -58,9 +58,13 @@ atribuição A2A e inferência do especialista têm estados próprios.
 |---|---|
 | [JSON](docs/architecture/architecture-inventory.json) | Manifesto, hashes, AST, classes, funções, imports e exclusões |
 | [DOT/SVG](docs/architecture/dependencies.svg) | Todos os módulos, inclusive isolados; pares de imports declarados |
-| [Mermaid](docs/architecture/dependencies.mmd) | Mesmos IDs, módulos e pares, sem corte para caber no GitHub |
+| [Mermaid integral — raw 2,4 MB](https://raw.githubusercontent.com/MarceloClaro/opencode-ecosystem-core/main/docs/architecture/dependencies.mmd) | Mesmos IDs, módulos e pares, sem corte para caber no GitHub |
 | [Manifesto Mermaid](docs/architecture/mermaid-correspondence.json) | Correspondência entre formatos e declarações AST |
 | [Fluxos curados](docs/architecture/flows.json) | Controle/composição com fontes, decisões, falhas e limites |
+
+> O Mermaid integral tem **2,4 MB** e excede o limite do renderizador do GitHub.
+> O link acima abre o arquivo **raw** para renderização local; para leitura
+> imediata, use o SVG Graphviz, o SVG Mermaid ou a página offline.
 
 Cada fluxo preserva as fronteiras de licença, conta, rede, execução e revisão
 humana. O extrator estático não prova conexão funcional, prontidão ou segurança.

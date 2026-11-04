@@ -22,13 +22,17 @@ comprova importação executável ou instalação das dependências.
 | [Página offline](architecture_map.html) | Busca por módulos, filtro de camada, zoom e todos os fluxos |
 | [Visão operacional](architecture/curated-overview.svg) | Interfaces e fronteiras principais; composição explicada |
 | [Grafo integral SVG](architecture/dependencies.svg) | Todos os módulos Python, inclusive isolados, e pares internos |
-| [Grafo integral Mermaid](architecture/dependencies.mmd) | Mesmos IDs, módulos, pares e metadados, sem truncar para o GitHub |
+| [Grafo integral Mermaid — raw 2,4 MB](https://raw.githubusercontent.com/MarceloClaro/opencode-ecosystem-core/main/docs/architecture/dependencies.mmd) | Mesmos IDs, módulos, pares e metadados, sem truncar para o GitHub |
 | [Render Mermaid](architecture/dependencies-mermaid.svg) | Layout alternativo do mesmo grafo |
 | [Por pacote](architecture/overview.svg) | Agrupamento das dependências entre pacotes |
 | [Inventário JSON](architecture/architecture-inventory.json) | Hashes, símbolos qualificados, linhas, imports e classificação |
 | [Manifesto Mermaid](architecture/mermaid-correspondence.json) | Correspondência independente entre os formatos |
 | [Catálogo dos fluxos](architecture/flows.json) | Fontes ancoradas, legendas e limites de cada fluxo |
 | [README completo](../README.md#fluxogramas-operacionais-completos) | Todos os fluxogramas Mermaid no documento principal |
+
+> O Mermaid integral tem **2,4 MB** e excede o limite do renderizador do GitHub.
+> O link abre o arquivo **raw** para renderização local; use o SVG Graphviz, o
+> SVG Mermaid ou a página offline para leitura imediata.
 
 ### Identidade das fontes
 

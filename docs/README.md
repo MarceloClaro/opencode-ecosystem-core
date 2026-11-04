@@ -98,7 +98,7 @@ não precise adivinhar onde está a verdade, a especificação ou o limite.
 | REA | [REA](REA.md), [Assistente local](ASSISTENTE_REA_LOCAL.md) |
 | Navegador controlado | [Navegador](NAVEGADOR_REAL.md) |
 | Memória no terminal | [README § Memória](../README.md#memória-no-terminal-e-painel) |
-| Atlas e fluxogramas | [Atlas](architecture_map.html), [Mermaid](architecture/dependencies.mmd) |
+| Atlas e fluxogramas | [Atlas](architecture_map.html), [Mermaid integral — raw 2,4 MB](https://raw.githubusercontent.com/MarceloClaro/opencode-ecosystem-core/main/docs/architecture/dependencies.mmd) |
 | Contexto de código | [README § Contexto](../README.md#contexto-de-código-e-consultas-de-grafo) |
 
 ### Integrações, autenticação e plugins
@@ -138,11 +138,39 @@ publicação.
 Não copie sessões, cookies, chaves, dados sensíveis ou fontes privadas para o
 Git. Um artefato versionado não é certificado de prontidão.
 
+## Visão renderizável no GitHub
+
+O grafo integral tem **2,4 MB** e excede o limite do renderizador Mermaid do
+GitHub; ele fica disponível como [raw para renderização local](https://raw.githubusercontent.com/MarceloClaro/opencode-ecosystem-core/main/docs/architecture/dependencies.mmd).
+Para uma visão que o GitHub renderiza, use o bloco abaixo ou o
+[SVG curado](architecture/curated-overview.svg).
+
+```mermaid
+flowchart TB
+    U["CLI / OpenCode / MCP / Streamlit"] --> O["MarceloClaro Orchestrator"]
+    O --> B["Blackboard A2A"]
+    O --> M["MetaBus / MCI"]
+    O --> S["SpecRegistry / SDD-TDD"]
+    O --> R["Research Lab R1051-R1054"]
+    O --> V["Video Editor R1046-R1047"]
+    O --> E["REA"]
+    B --> A["333 agent profiles"]
+    M --> G["Trust / Evolution / Evidence"]
+    S --> Gate["Evidence Gate"]
+    R --> Gate
+    V --> Gate
+    E --> Gate
+```
+
+> **Regra:** diagramas grandes são evidência de inventário, não prova de
+> execução. O SVG e a página offline são as fontes de leitura; o `.mmd` integral
+> é matéria-prima para renderização local.
+
 ## Atlas e fluxogramas
 
 - [Atlas offline](architecture_map.html)
 - [Mapa curado](architecture/curated-overview.svg)
-- [Dependências Mermaid](architecture/dependencies.mmd)
+- [Dependências Mermaid — raw 2,4 MB](https://raw.githubusercontent.com/MarceloClaro/opencode-ecosystem-core/main/docs/architecture/dependencies.mmd)
 - [Fluxo 01 — panorama](architecture/flows/01-panorama.svg)
 - [Fluxo 12 — ciência e publicação](architecture/flows/12-ciencia-publicacao.svg)
 - [Fluxo 22 — Ollama e contexto](architecture/flows/22-ollama-contexto-erros.svg)

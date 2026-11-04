@@ -175,15 +175,15 @@ registrada, não escondida. Evidência:
 
 ```mermaid
 flowchart TB
-    U["CLI · OpenCode · MCP · Streamlit"] --> O["MarceloClaro Orchestrator"]
+    U["CLI / OpenCode / MCP / Streamlit"] --> O["MarceloClaro Orchestrator"]
     O --> B["Blackboard A2A"]
     O --> M["MetaBus / MCI"]
-    O --> S["SpecRegistry · SDD/TDD"]
-    O --> R["Research Lab R1051–R1054"]
-    O --> V["Video Editor R1046–R1047"]
+    O --> S["SpecRegistry / SDD-TDD"]
+    O --> R["Research Lab R1051-R1054"]
+    O --> V["Video Editor R1046-R1047"]
     O --> E["REA"]
     B --> A["333 agent profiles"]
-    M --> G["Trust · Evolution · Evidence"]
+    M --> G["Trust / Evolution / Evidence"]
     S --> Gate["Evidence Gate"]
     R --> Gate
     V --> Gate
@@ -921,7 +921,7 @@ identidade. Fontes locais modificadas não recebem permalink do commit-base.
 | [Inventário JSON](docs/architecture/architecture-inventory.json) | Fontes, hashes, símbolos, imports e origem |
 | [Dependências SVG](docs/architecture/dependencies.svg) | Todos os módulos e pares internos do inventário |
 | [Fonte DOT](docs/architecture/dependencies.dot) | Grafo vetorial editável por Graphviz |
-| [Mermaid integral](docs/architecture/dependencies.mmd) | Mesmos módulos e pares, com metadados e legenda |
+| [Mermaid integral — raw 2,4 MB](https://raw.githubusercontent.com/MarceloClaro/opencode-ecosystem-core/main/docs/architecture/dependencies.mmd) | Mesmos módulos e pares, com metadados e legenda |
 | [SVG Mermaid](docs/architecture/dependencies-mermaid.svg) | Renderização local do Mermaid completo |
 | [Correspondência](docs/architecture/mermaid-correspondence.json) | IDs, hashes e declarações por par |
 | [Catálogo de fluxos](docs/architecture/flows.json) | Fontes curadas, âncoras e limitações de cada percurso |
@@ -1146,6 +1146,13 @@ A edição e a origem das fontes estão declaradas no catálogo e no inventário
 Fontes do checkout atual; base Git `b7f5683f84609a5e957a56af4ca090c905f5ab80`; identidade worktree `1a170ef08b78071c65b55ee5cc0bb4821d77622b8326d018835dbf4a27d6ec7a`. 32 arquivos rastreados modificados e 52 removidos foram contabilizados; fontes não rastreadas não entram.
 Estes desenhos não representam uma nova execução de todos os componentes.
 
+> **Renderização no GitHub:** os blocos abaixo são curados e pequenos. Se um
+> bloco específico não renderizar no seu navegador, use o SVG correspondente em
+> [`docs/architecture/flows/`](docs/architecture/flows/) ou a
+> [página offline](docs/architecture_map.html). O grafo integral de **2,4 MB**
+> não é um bloco do README: ele fica em
+> [raw para renderização local](https://raw.githubusercontent.com/MarceloClaro/opencode-ecosystem-core/main/docs/architecture/dependencies.mmd).
+
 ### Legenda e critérios de leitura
 
 | Elemento | Como interpretar |
@@ -1165,7 +1172,7 @@ não garantem saldo, licença, credenciais, isolamento ou funcionamento atual.
 
 No grafo estrutural integral, a seta tem significado mais restrito:
 **módulo importador → dependência Python declarada**. Consulte a
-[fonte Mermaid integral](docs/architecture/dependencies.mmd), o
+[fonte Mermaid integral — raw 2,4 MB](https://raw.githubusercontent.com/MarceloClaro/opencode-ecosystem-core/main/docs/architecture/dependencies.mmd), o
 [SVG equivalente](docs/architecture/dependencies-mermaid.svg) e o
 [guia da legenda e reprodução](docs/architecture/MERMAID_INTEGRAL.md).
 
@@ -1274,7 +1281,7 @@ flowchart TB
   SCI --> VIS
   BB --> VIS
   VIS --> UI
-  SITE -.->|orienta operação; não executa análise| LOCAL
+  SITE -.->|orienta operação,  não executa análise| LOCAL
   MCP2["Plugins locais REA / MiroFish / Lean 4"] --> MC
   MC --> LIFE["Lifecycle: validar perfil antes de atribuir"]
   LIFE --> CAT
@@ -1346,7 +1353,7 @@ flowchart TB
   BB2 --> REF["reflect_request: ReflexionEngine"]
   REF --> META["MetacognitiveLoop.complete: episódio local"]
   META --> MEM["MetaBus: observação e próxima ação"]
-  META -.->|não calibrado; sem promoção por observação| L["Trust e memória possuem contratos diferentes"]
+  META -.->|não calibrado,  sem promoção por observação| L["Trust e memória possuem contratos diferentes"]
   RESULT --> REPORT["Relatório: passos / executor / duração / limites"]
   REJECT --> REPORT
   BLOCK --> REPORT
@@ -1494,10 +1501,10 @@ flowchart TB
   OP -->|layers| LAYERS["layers_status: registro canônico e probe_layer por camada"]
   LAYERS --> READY["Sonda estrutural de ambiente / paths / comandos; sem análise"]
   LAYERS -.->|registro informativo: 18 camadas| DECL["LAYERS / SURFACES: ferramentas declaradas pelo REA"]
-  DECL -.->|grupos declarados; não operações Core| DJS["javascript / apple / managed_dotnet / pe_resources / evm / artifact"]
-  DECL -.->|grupos declarados; não operações Core| DN["native_ghidra / native_ida / native_hopper / native_offline_elf / native_core_crash"]
-  DECL -.->|grupos declarados; não operações Core| DA["android_jadx / android_apktool / android_adb / jeb"]
-  DECL -.->|grupos declarados; não operações Core| DO["firmware / browser / reference"]
+  DECL -.->|grupos declarados,  não operações Core| DJS["javascript / apple / managed_dotnet / pe_resources / evm / artifact"]
+  DECL -.->|grupos declarados,  não operações Core| DN["native_ghidra / native_ida / native_hopper / native_offline_elf / native_core_crash"]
+  DECL -.->|grupos declarados,  não operações Core| DA["android_jadx / android_apktool / android_adb / jeb"]
+  DECL -.->|grupos declarados,  não operações Core| DO["firmware / browser / reference"]
   OP -->|layer| INS["layer_inspection: contrato estático por caminho"]
   INS --> SUPPORTED{"inspection definido e não nulo?"}
   SUPPORTED -->|não| REJECT["Recusar camada sem inspeção estática por caminho"]
@@ -1524,7 +1531,7 @@ flowchart TB
   OP -->|catalog / session| INFO["Runtime disponível: _exchange para catálogo/sessão, sem análise de alvo"]
   INFO --> RESPONSE["Resposta informativa da operação solicitada"]
   DECL -.->|inspection nulo: configuração e runtime próprios| OTHER["native_ghidra / native_ida / native_hopper / android_adb / browser / jeb / reference"]
-  OTHER -.->|ferramentas externas condicionais; não via layer Core| EXTERNAL["Runtime MCP REA próprio / licenças / dispositivos / serviço local"]
+  OTHER -.->|ferramentas externas condicionais,  não via layer Core| EXTERNAL["Runtime MCP REA próprio / licenças / dispositivos / serviço local"]
   OTHER -.->|somente native_ghidra: percurso separado analyze_binary| GH
 ```
 
@@ -1849,7 +1856,7 @@ flowchart TB
   PLANART["Plano explícito: arquivos / regex / nomes / cobertura esperada"] --> HERM["scanners.diagnostic_pipeline.DiagnosticPipeline.varrer"]
   HERM --> CHECKART["Auditar sincronia de artefatos: stdlib / sem rede, subprocesso ou LLM"]
   CHECKART --> ARTOUT["gaps / passaram / falharam / candidato_a_inspecao"]
-  ARTOUT -.->|exige_validacao_externa true; não substitui compilação ou testes| BOUND
+  ARTOUT -.->|exige_validacao_externa true,  não substitui compilação ou testes| BOUND
 ```
 
 [Fonte Mermaid](docs/architecture/flows/11-diagnostico-governanca.mmd) · [Abrir SVG](docs/architecture/flows/11-diagnostico-governanca.svg)
@@ -2506,7 +2513,7 @@ O [livro em LaTeX](livro-core/main.tex) acompanha um mesmo caso de estudo do pre
 
 A [revisão editorial R901/R907](docs/REVISAO_LIVRO_R907.md) e o [manifesto de verificação local](docs/verification-book-r907.json) separam inventário, teste, compilação e amostragem visual. Para gerar o PDF na pasta `livro-core`, atualize os geradores e o inventário e execute `latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex`. Os testes de estrutura e o PDF compilado não medem eficácia pedagógica nem substituem revisão externa.
 
-O [atlas R911](docs/ARQUITETURAS_LIVRO_R911.md) acrescenta 54 pranchas locais para 18 temas (mapa mental, estrutura e fluxo), um mapa mental geral, um diagrama das instâncias, um fluxo de uso e uma matriz entre camadas. O [SVG integral ampliável](docs/architecture-r911/dependencies.svg) e o [Mermaid correspondente](docs/architecture-r911/dependencies.mmd) preservam os 693 módulos Python e 965 pares de importação do snapshot indicado, inclusive isolados. São relações estáticas e percursos documentados, sem alegação de execução universal.
+O [atlas R911](docs/ARQUITETURAS_LIVRO_R911.md) acrescenta 54 pranchas locais para 18 temas (mapa mental, estrutura e fluxo), um mapa mental geral, um diagrama das instâncias, um fluxo de uso e uma matriz entre camadas. O [SVG integral ampliável](docs/architecture-r911/dependencies.svg) e o [Mermaid correspondente — raw 2,3 MB](https://raw.githubusercontent.com/MarceloClaro/opencode-ecosystem-core/main/docs/architecture-r911/dependencies.mmd) preservam os 693 módulos Python e 965 pares de importação do snapshot indicado, inclusive isolados. São relações estáticas e percursos documentados, sem alegação de execução universal.
 
 A [verificação formal R908](docs/VERIFICACAO_FORMAL_LIVRO_R908.md), ampliada na [revisão R910](docs/DEDUCOES_LOCAIS_LIVRO_R910.md), liga as deduções dos capítulos a enunciados, hipóteses, lemas e dependências lógicas aceitos pelo Lean 4.34.1, com Mathlib fixada. A [matriz de fórmulas](docs/book-math-map-r908.json) distingue 28 famílias matemáticas/modelos de uma família observacional. O [recibo da execução](docs/verification-book-lean-r908.json) identifica as declarações, fontes e controles negativos; as provas não certificam dados experimentais, runtime Python nem segurança IEEE-754. O [manifesto editorial R910](docs/verification-book-r910.json) registra a edição e os gates físicos.
 
