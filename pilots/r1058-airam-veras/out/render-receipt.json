@@ -1,0 +1,23 @@
+{
+  "status": "rendered_and_muxed",
+  "output": "pilots/r1058-airam-veras/out/airam-plano-acao.mp4",
+  "sha256": "2cb164917a791d739f692b1b303dd0d684119dde15cd570812102b48dcf094be",
+  "bytes": 54790014,
+  "duration_seconds": 458.3,
+  "frames": 13749,
+  "width": 1440,
+  "height": 810,
+  "fps": "30/1",
+  "video_sha256": "066307dcfc222d114d82fedb498bccb3b96b759390fbbe406fd6e5074740abb1",
+  "narration_sha256": "eb218ef4b13432c81bc5aa9875575cfaff24bcb536e8c27d7b1b105abd6fa034",
+  "renderer": "Remotion 4.0.540 direct CLI",
+  "command": "REMOTION_RENDER_APPROVED=1 node node_modules/@remotion/cli/remotion-cli.js render src/r1058-airam/EntryAiram.tsx AiramVerasVideo out/airam-visual-1440.mp4 --scale=0.75 --concurrency=6 --crf=18",
+  "render_seconds": 2375.12,
+  "max_rss_kb": 558072,
+  "mux": "ffmpeg h264 copy + AAC 192k 48kHz stereo loudnorm I=-14:TP=-1.5:LRA=11",
+  "external_validation": false,
+  "published": false,
+  "voice": "Edge FranciscaNeural institutional; XTTS cloned author final sentence only",
+  "map_caveat": "OSM address says Ipase; local indication Maratoan",
+  "student_names_used": false
+}

@@ -1,0 +1,40 @@
+{
+  "spec": "SPEC-935-R1058",
+  "external_validation": false,
+  "published": false,
+  "student_names_used": false,
+  "voice_clone": "author_final_sentence_only",
+  "voice_clone_limit": "XTTS v2 CPU ~20x realtime; full narration would take hours. Institutional body remains Edge TTS.",
+  "map_caveat": "OpenStreetMap address for the school returns Ipase; video uses Maratoan per local indication. Marker uses OSM equipment coordinates.",
+  "qc": {
+    "status": "pass",
+    "loudness": {
+      "ok": true,
+      "target": -14.0,
+      "tolerance": 1.0,
+      "actual": -14.64
+    },
+    "true_peak": {
+      "ok": true,
+      "max": -1.5,
+      "actual": -4.14
+    },
+    "silence": {
+      "ok": true,
+      "max_allowed": 4.0,
+      "longest": 1.481
+    },
+    "black": {
+      "ok": true,
+      "max_allowed": 0.2,
+      "longest": 0.0
+    },
+    "frames": {
+      "ok": true,
+      "expected": 13749,
+      "actual": 13749
+    }
+  },
+  "known_limit": "H01–H20 are CAEd file markers, not official SPAECE descriptors without a mapping dictionary.",
+  "full_suite": "Not executed in full; focused documentation/video tests and QC were run."
+}

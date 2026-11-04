@@ -240,6 +240,25 @@ no commit `c800112d`. [Roteiro](pilots/r1055-qubit/SCRIPT.md),
 [recibos/QC/hashes](reports/r1055/README.md) permitem conferir o escopo.
 ASR, pitch e QC não substituem revisão humana da voz, da física e da edição.
 
+## Vídeo R1058 — plano de ação Airam Veras
+
+> Pronúncia institucional: **“Véras”**; a grafia na tela permanece “Veras”.
+
+O vídeo **“Plano de ação SPAECE 2026 — 5º A e B”** apresenta, em 7min38s, o
+diagnóstico agregado, as habilidades prioritárias, o cronograma de intervenções
+das professoras, exemplos de Língua Portuguesa e Matemática, o porquê de cada
+questão, as metas e o monitoramento da Escola de Cidadania Airam Veras,
+Crateús/CE. Inclui a logo da escola, mapa animado Ceará → Crateús → Maratoan
+com ponto pulsante e narração sintética PT-BR sem clonagem.
+
+Arquivo local: `pilots/r1058-airam-veras/out/airam-plano-acao.mp4` (1440×810,
+30 fps, 13.749 frames). **Não está no Git e não foi publicado.**
+[Piloto](pilots/r1058-airam-veras/README.md) ·
+[roteiro e porquês](pilots/r1058-airam-veras/SCRIPT.md) ·
+[referências e mapa](pilots/r1058-airam-veras/REFERENCES.md) ·
+[QC e limites](reports/r1058/README.md). Dados agregados; sem nomes ou ranking
+de estudantes. Linha de base de 11/08/2026, não resultado de novembro.
+
 ## Início rápido local
 
 ```bash
@@ -296,6 +315,7 @@ não é aceite editorial.
 | [Spec R1054](specs/SPEC-1054-automacao-assistida-validacao-real.md) | contrato e critérios de aceitação |
 | [Relatório R1054](reports/r1054/README.md) | benchmark BCG e limites |
 | [Piloto R1055](pilots/r1055-qubit/README.md) | vídeo de qubit, fontes, código e limites |
+| [Vídeo R1058](pilots/r1058-airam-veras/README.md) | plano de ação Airam Veras, mapa, cronograma e exemplos |
 | [Atlas animado R1056](docs/architecture/ANIMATED.md) | GIF/PNG/SVG e Mermaid de todos os diagramas do escopo |
 | [Reprodução R1056](reports/r1056/README.md) | exportador local, cobertura, testes e hashes |
 | [AGENTS.md](AGENTS.md) | criação e registro de agentes |

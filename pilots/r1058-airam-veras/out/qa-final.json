@@ -1,0 +1,393 @@
+{
+  "schema_version": 1,
+  "status": "pass",
+  "probe": {
+    "path": "pilots/r1058-airam-veras/out/airam-plano-acao-final.mp4",
+    "format": {
+      "filename": "pilots/r1058-airam-veras/out/airam-plano-acao-final.mp4",
+      "nb_streams": 2,
+      "nb_programs": 0,
+      "nb_stream_groups": 0,
+      "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+      "format_long_name": "QuickTime / MOV",
+      "start_time": "0.000000",
+      "duration": "458.300000",
+      "size": "54790014",
+      "bit_rate": "956404",
+      "probe_score": 100,
+      "tags": {
+        "major_brand": "isom",
+        "minor_version": "512",
+        "compatible_brands": "isomiso2avc1mp41",
+        "title": "Plano de ação SPAECE 2026 — Airam Véras (5º A e B)",
+        "artist": "Escola de Cidadania Airam Veras",
+        "encoder": "Lavf62.3.100",
+        "comment": "Vídeo institucional; dados agregados; sem exposição de estudantes."
+      }
+    },
+    "video": {
+      "codec": "h264",
+      "width": 1440,
+      "height": 810,
+      "fps": "30/1",
+      "frames": 13749,
+      "pix_fmt": "yuv420p"
+    },
+    "audio": {
+      "codec": "aac",
+      "sample_rate": 48000,
+      "channels": 2,
+      "duration_seconds": 458.3
+    }
+  },
+  "checks": {
+    "frame_count": {
+      "ok": true,
+      "expected": 13749,
+      "actual": 13749
+    },
+    "fps": {
+      "ok": true,
+      "expected": "30/1",
+      "actual": "30/1"
+    },
+    "loudness": {
+      "ok": true,
+      "target": -14.0,
+      "tolerance": 1.0,
+      "actual": -14.64
+    },
+    "true_peak": {
+      "ok": true,
+      "max": -1.5,
+      "actual": -4.14
+    },
+    "silence": {
+      "ok": true,
+      "max_allowed": 4.0,
+      "longest": 1.481
+    },
+    "black": {
+      "ok": true,
+      "max_allowed": 0.2,
+      "longest": 0.0
+    },
+    "contact_sheet": {
+      "ok": true,
+      "path": "pilots/r1058-airam-veras/out/contact-final.png"
+    }
+  },
+  "observations": {
+    "silences": [
+      {
+        "start": 3.393812,
+        "end": 4.643292,
+        "seconds": 1.249
+      },
+      {
+        "start": 8.929146,
+        "end": 10.173604,
+        "seconds": 1.244
+      },
+      {
+        "start": 13.179625,
+        "end": 14.581979,
+        "seconds": 1.402
+      },
+      {
+        "start": 18.01625,
+        "end": 19.268792,
+        "seconds": 1.253
+      },
+      {
+        "start": 23.580063,
+        "end": 25.031,
+        "seconds": 1.451
+      },
+      {
+        "start": 29.38825,
+        "end": 30.61875,
+        "seconds": 1.23
+      },
+      {
+        "start": 36.975708,
+        "end": 38.23,
+        "seconds": 1.254
+      },
+      {
+        "start": 44.343021,
+        "end": 45.621521,
+        "seconds": 1.279
+      },
+      {
+        "start": 52.21325,
+        "end": 53.668771,
+        "seconds": 1.456
+      },
+      {
+        "start": 61.187542,
+        "end": 62.432771,
+        "seconds": 1.245
+      },
+      {
+        "start": 69.218729,
+        "end": 70.487583,
+        "seconds": 1.269
+      },
+      {
+        "start": 76.71925,
+        "end": 77.98675,
+        "seconds": 1.267
+      },
+      {
+        "start": 84.429854,
+        "end": 85.67725,
+        "seconds": 1.247
+      },
+      {
+        "start": 94.857375,
+        "end": 96.138604,
+        "seconds": 1.281
+      },
+      {
+        "start": 103.938208,
+        "end": 105.219042,
+        "seconds": 1.281
+      },
+      {
+        "start": 112.271354,
+        "end": 113.72925,
+        "seconds": 1.458
+      },
+      {
+        "start": 120.978375,
+        "end": 122.241521,
+        "seconds": 1.263
+      },
+      {
+        "start": 132.096896,
+        "end": 133.565667,
+        "seconds": 1.469
+      },
+      {
+        "start": 140.485938,
+        "end": 141.738687,
+        "seconds": 1.253
+      },
+      {
+        "start": 144.747687,
+        "end": 146.004333,
+        "seconds": 1.257
+      },
+      {
+        "start": 152.453604,
+        "end": 153.909604,
+        "seconds": 1.456
+      },
+      {
+        "start": 160.125417,
+        "end": 161.376979,
+        "seconds": 1.252
+      },
+      {
+        "start": 163.744604,
+        "end": 165.021104,
+        "seconds": 1.276
+      },
+      {
+        "start": 172.147604,
+        "end": 173.620958,
+        "seconds": 1.473
+      },
+      {
+        "start": 180.252062,
+        "end": 181.515854,
+        "seconds": 1.264
+      },
+      {
+        "start": 184.643875,
+        "end": 185.919396,
+        "seconds": 1.276
+      },
+      {
+        "start": 192.847646,
+        "end": 194.328583,
+        "seconds": 1.481
+      },
+      {
+        "start": 203.1655,
+        "end": 204.444979,
+        "seconds": 1.279
+      },
+      {
+        "start": 208.015667,
+        "end": 209.241958,
+        "seconds": 1.226
+      },
+      {
+        "start": 215.844771,
+        "end": 217.316521,
+        "seconds": 1.472
+      },
+      {
+        "start": 222.587208,
+        "end": 223.834854,
+        "seconds": 1.248
+      },
+      {
+        "start": 226.540396,
+        "end": 227.820604,
+        "seconds": 1.28
+      },
+      {
+        "start": 234.185604,
+        "end": 235.661021,
+        "seconds": 1.475
+      },
+      {
+        "start": 241.173667,
+        "end": 242.448479,
+        "seconds": 1.275
+      },
+      {
+        "start": 246.33925,
+        "end": 247.612313,
+        "seconds": 1.273
+      },
+      {
+        "start": 254.107646,
+        "end": 255.585625,
+        "seconds": 1.478
+      },
+      {
+        "start": 261.458458,
+        "end": 262.721417,
+        "seconds": 1.263
+      },
+      {
+        "start": 272.484333,
+        "end": 273.924708,
+        "seconds": 1.44
+      },
+      {
+        "start": 281.500375,
+        "end": 282.746208,
+        "seconds": 1.246
+      },
+      {
+        "start": 291.751229,
+        "end": 293.043104,
+        "seconds": 1.292
+      },
+      {
+        "start": 307.067292,
+        "end": 308.534333,
+        "seconds": 1.467
+      },
+      {
+        "start": 317.002167,
+        "end": 318.268396,
+        "seconds": 1.266
+      },
+      {
+        "start": 324.809604,
+        "end": 326.098604,
+        "seconds": 1.289
+      },
+      {
+        "start": 337.989104,
+        "end": 339.434333,
+        "seconds": 1.445
+      },
+      {
+        "start": 346.009792,
+        "end": 347.268167,
+        "seconds": 1.258
+      },
+      {
+        "start": 351.953708,
+        "end": 353.226708,
+        "seconds": 1.273
+      },
+      {
+        "start": 364.069833,
+        "end": 365.527208,
+        "seconds": 1.457
+      },
+      {
+        "start": 372.3655,
+        "end": 373.625792,
+        "seconds": 1.26
+      },
+      {
+        "start": 380.279063,
+        "end": 381.548104,
+        "seconds": 1.269
+      },
+      {
+        "start": 394.796708,
+        "end": 396.257521,
+        "seconds": 1.461
+      },
+      {
+        "start": 403.921979,
+        "end": 405.165167,
+        "seconds": 1.243
+      },
+      {
+        "start": 413.570146,
+        "end": 414.839729,
+        "seconds": 1.27
+      },
+      {
+        "start": 427.744042,
+        "end": 429.209104,
+        "seconds": 1.465
+      },
+      {
+        "start": 435.304146,
+        "end": 436.549792,
+        "seconds": 1.246
+      },
+      {
+        "start": 446.816854,
+        "end": 448.136,
+        "seconds": 1.319
+      },
+      {
+        "start": 449.820646,
+        "end": 450.966333,
+        "seconds": 1.146
+      },
+      {
+        "start": 455.972896,
+        "end": 456.781625,
+        "seconds": 0.809
+      },
+      {
+        "start": 457.220021,
+        "end": 458.306667,
+        "seconds": 1.087
+      }
+    ],
+    "black_intervals": [],
+    "loudness": {
+      "input_i": "-14.64",
+      "input_tp": "-4.14",
+      "input_lra": "3.20",
+      "input_thresh": "-24.91",
+      "output_i": "-16.02",
+      "output_tp": "-5.44",
+      "output_lra": "3.10",
+      "output_thresh": "-26.26",
+      "normalization_type": "dynamic",
+      "target_offset": "0.02",
+      "available": true
+    }
+  },
+  "limitations": [
+    "QC técnico; não prova estética, inteligibilidade, emoção, lip sync ou tradução.",
+    "Contato de frames é amostra; não substitui revisão humana.",
+    "Silêncio e preto podem ser intencionais; o limite é contratual."
+  ]
+}

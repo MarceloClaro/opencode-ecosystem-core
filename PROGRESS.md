@@ -34,6 +34,13 @@ não comprova o aceite integral.
   GIFs opcionais de um ciclo, PNG/SVG acessíveis, manifesto e verificação local.
   [Relatório](reports/r1056/README.md); não é reauditoria do runtime R916.
 
+## Checkpoint R1058 — vídeo institucional Airam Veras
+
+- Vídeo de **7min38s**, 19 cenas, 5º A/B, LP e Matemática; mapa mundo→Crateús→Maratoan, diagnóstico, cronograma com prova em **01/12/2026**, rotina semanal fixa, 11 habilidades com exemplos e agradecimento com foto/QR.
+- Voz institucional Edge TTS; agradecimento final com clonagem XTTS autorizada do próprio autor, aplicada em uma frase curta por limite de CPU.
+- Nada publicado; MP4 e áudio permanecem locais. Ver `pilots/r1058-airam-veras/` e `reports/r1058/`.
+- Dados agregados; sem nomes ou ranking de estudantes; H01–H20 não são descritores oficiais.
+
 ## Checkpoint R1046 — vídeo, dublagem e instalação
 
 - Editor universal (`video_editor`, `video_editor_mcp`): FFmpeg + Remotion +
