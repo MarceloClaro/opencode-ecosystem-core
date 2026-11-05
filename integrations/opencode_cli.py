@@ -832,6 +832,17 @@ def build_config() -> Dict[str, Any]:
                 "enabled": True,
                 "timeout": 60000,
             },
+            # R1065: dados científicos locais, somente leitura, no venv científico.
+            "scientific-data": {
+                "type": "local",
+                "command": [
+                    os.path.expanduser("~/.cache/opencode-pilot/venvs/scientific/bin/python"),
+                    "-m",
+                    "integrations.scientific_data.mcp_server",
+                ],
+                "enabled": True,
+                "timeout": 180000,
+            },
             "polymath-labs-mcp": {
                 "type": "local",
                 "command": [".venv/bin/python", "integrations/polymath_labs_mcp.py"],

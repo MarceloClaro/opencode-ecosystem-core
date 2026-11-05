@@ -9856,6 +9856,39 @@
       },
       "model": "opencode-go/deepseek-v4-pro"
     },
+    "scientific-data-analyst": {
+      "description": "Inspeciona metadados e prévias limitadas de dados científicos locais pelo MCP scientific-data, em modo somente leitura, com raízes allowlisted e sem declarar validade científica.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/scientific-data-analyst.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1065_scientific_data.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code",
+          "opencode-zen/deepseek-v4-pro"
+        ],
+        "model_economy": {
+          "complexity": "critica",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4-pro",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4-pro"
+    },
     "scientific-profile": {
       "description": "Manter perfil científico enumerado, orçamentos e recibos novos.",
       "mode": "subagent",
@@ -11130,6 +11163,16 @@
       ],
       "enabled": true,
       "timeout": 60000
+    },
+    "scientific-data": {
+      "type": "local",
+      "command": [
+        "/home/marceloclaro/.cache/opencode-pilot/venvs/scientific/bin/python",
+        "-m",
+        "integrations.scientific_data.mcp_server"
+      ],
+      "enabled": true,
+      "timeout": 180000
     },
     "polymath-labs-mcp": {
       "type": "local",
