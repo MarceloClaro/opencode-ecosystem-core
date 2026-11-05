@@ -25,13 +25,14 @@ copiado.
 | Versão | Estado |
 |---|---|
 | `Molambudos_VictoriaRegia` | 435 pp, 160×230 mm, PT/EN/ZH, capa, ISBN; PDF canônico `3378f438` |
-| `Molambudos_v2` | quarentena editorial; 57 pp, 7 degraus, conteúdo único |
-| `Molambudos_v2_Diario` | quarentena editorial; 49 pp, Partes I–II ilustradas, conteúdo único |
-| `template antigo` | quarentena; 4 capítulos incompletos; objeto do parecer antigo |
+| `Molambudos_v2` | excluído definitivamente em 2026-11-05; 57 pp, 7 degraus, conteúdo único |
+| `Molambudos_v2_Diario` | excluído definitivamente em 2026-11-05; 49 pp, Partes I–II ilustradas |
+| `template antigo` | excluído definitivamente em 2026-11-05; 4 capítulos incompletos |
 
 O `book.json` aponta para a edição KDP PT-BR. A escolha da edição canônica é
 editorial e pertence ao autor. O PDF antigo `77aabe2e` foi substituído pelo
-build corrigido `3378f438` e preservado em quarentena. Release local:
+build corrigido `3378f438` e excluído na limpeza autorizada; o hash permanece
+em `reports/r1073/`. Release local:
 `literatura/molambudos/release/2026-11-05/`.
 
 ## 3. QA técnico do KDP

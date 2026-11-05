@@ -1,19 +1,20 @@
-# R1073 — Revisão final, release e quarentena do Molambudos
+# R1073 — Revisão final, release e exclusão definitiva
 
 **Data:** 2026-11-05  
-**Status:** executado; exclusão definitiva da quarentena pendente de revisão.
+**Status:** executado; quarentena excluída definitivamente por decisão explícita
+do autor em 2026-11-05.
 
 ## Resultado
 
 - PDF canônico promovido ao build corrigido `3378f438d1124432…` (435 pp).
-- PDF antigo `77aabe2e4e055d7f…` preservado em quarentena.
-- `15` itens e `2895` arquivos
-  em quarentena reversível (`511.9 MB`).
-- `13` artefatos de teste/auxiliares apagados.
-- Release local em `literatura/molambudos/release/2026-11-05/`.
-- Nenhuma edição literária com conteúdo único foi apagada.
+- PDF antigo `77aabe2e4e055d7f…` excluído com a quarentena; hash preservado.
+- `15` itens, `2895` arquivos e
+  `511.9 MB` excluídos definitivamente.
+- `13` artefatos de teste/auxiliares apagados antes da exclusão.
+- Release local preservado em `literatura/molambudos/release/2026-11-05/`.
+- Nenhum texto literário canônico foi reescrito.
 
-## Itens principais
+## Itens excluídos
 
 | Categoria | Item | Arquivos | Tamanho |
 |---|---|---:|---:|
@@ -33,19 +34,26 @@
 | `rascunho` | `rascunho-molambudos_minha_versao.md.bak` | 1 | 0.05 MB |
 | `template_superado` | `molambudos-template-antigo` | 11 | 3.50 MB |
 
-## Arquivos
+## Preservado
 
-- `manifest_quarentena.json` — resumo versionado com hashes de árvore.
+- PDF canônico PT-BR 435 pp e traduções EN/ZH/TRI.
+- Capas completas, `metadata.json` e `SHA256SUMS.txt` do release.
+- Podcast completo (26 episódios + piloto R550).
+- Auditorias, parecer editorial, fontes `.tex`, fragmentos canônicos e figuras.
+- Manifesto completo e hash por arquivo em `reports/r1073/`.
+
+## Registros
+
+- `DELETION.md` — autorização, escopo e natureza irreversível.
+- `manifest_quarentena.json` — resumo com `state: deleted`.
+- `manifest_completo_exclusao.json` — manifesto completo anterior à exclusão.
+- `files_excluidos.jsonl` — hash de cada um dos 2.895 arquivos.
 - `RELEASE_NOTE.md` — nota do pacote de release.
-- `REVISAO_FINAL.md` — parecer editorial completo e decisão de acervo.
+- `REVISAO_FINAL.md` — parecer editorial completo.
 - `specs/SPEC-935-R1073-molambudos-release.md` — requisitos e critérios.
 - `tests/test_r1073_molambudos_release.py` — gate de integridade.
 
-O manifesto completo, com hash por arquivo, está em
-`literatura/molambudos/_descarte/2026-11-05/manifest.json` e
-`files.jsonl` (conteúdo gitignored).
-
 ## Limite
 
-A quarentena não foi apagada. A decisão de exclusão permanente de `v2` e do
-`Diário` é editorial e exige confirmação do autor.
+A exclusão é irreversível. Os hashes provam o que existia e foi removido; não
+provam mérito literário, aprovação editorial ou validação externa.

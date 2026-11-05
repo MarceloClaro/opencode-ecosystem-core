@@ -1,8 +1,9 @@
 # R1072 — Hub dos projetos literários
 
 **Status:** Molambudos concluído em release local; edições alternativas e
-builds antigos em quarentena reversível. `literatura/` e `projetos/` são
-gitignored, então o conteúdo das obras permanece fora do versionamento.
+builds antigos excluídos definitivamente em 2026-11-05, por decisão do autor.
+`literatura/` e `projetos/` são gitignored, então o conteúdo das obras permanece
+fora do versionamento.
 **Objetivo:** organizar Molambudos — livro, podcast e auditorias — e os demais
 projetos literários em uma única entrada para revisão, build e QA.
 
@@ -20,7 +21,7 @@ literatura/
 │   ├── capas               -> frente e contracapa corrigidas
 │   ├── scripts/ specs/     -> links para fontes versionadas
 │   ├── release/2026-11-05  -> PDFs PT/EN/ZH/TRI, capas, metadados e checksums
-│   ├── _descarte/2026-11-05 -> quarentena reversível (v2, Diário, builds, backups)
+│   ├── v2, Diário, template -> excluídos em 2026-11-05; hashes em reports/r1073
 │   └── README.md           -> mapa do projeto
 ├── livros/
 │   ├── livro-opencode-*    -> fonte + compilado
@@ -48,20 +49,23 @@ symlink de compatibilidade.
 | `livro-volume2` | Volume 2 — Gêmeos Digitais Periodontais: O Framework SUS-Twin | 184 | `templates/projects/livro-volume2/dark.pdf` |
 | `livro-gemeos-odontologia` | Gêmeos Digitais Periodontais: O Framework SUS-Twin | 180 | `templates/projects/livro-gemeos-odontologia/dark.pdf` |
 
-As demais entradas são versões alternativas, templates ou contexto acadêmico.
-A escolha da edição canônica é editorial e pertence ao autor.
+As demais entradas são templates, contexto acadêmico ou registros históricos de
+edições excluídas. A escolha da edição canônica é editorial e pertence ao autor.
 
-### Release e quarentena
+### Release e exclusões
 
 - `literatura/molambudos/release/2026-11-05/` — pacote local com PDFs PT/EN/ZH/TRI,
   capas completas, `metadata.json`, `SHA256SUMS.txt` e `RELEASE_NOTE.md`.
-- `literatura/molambudos/_descarte/2026-11-05/` — quarentena reversível de
-  `Molambudos_v2`, `Molambudos_v2_Diario`, `_archive` do VictoriaRegia, layouts
-  antigos, backups canônicos, rascunhos e template de 25 pp.
-- Manifesto completo: `_descarte/2026-11-05/manifest.json` e `files.jsonl`
-  (hash por arquivo). Resumo versionado: `reports/r1073/manifest_quarentena.json`.
-- Parecer editorial: `literatura/molambudos/REVISAO_FINAL.md`.
-- Nenhuma edição literária com conteúdo único foi apagada permanentemente.
+- `Molambudos_v2`, `Molambudos_v2_Diario`, `_archive` do VictoriaRegia, layouts
+  antigos, build, backups canônicos, rascunhos e template de 25 pp foram
+  **excluídos definitivamente** em 2026-11-05, por decisão explícita do autor.
+- Registro completo: `reports/r1073/DELETION.md`,
+  `manifest_completo_exclusao.json` e `files_excluidos.jsonl` (hash por arquivo).
+- Resumo versionado: `reports/r1073/manifest_quarentena.json` (`state: deleted`).
+- Parecer editorial: `literatura/molambudos/REVISAO_FINAL.md` e
+  `reports/r1073/REVISAO_FINAL.md`.
+- A exclusão é irreversível; o release e o PDF canônico não dependem dos itens
+  excluídos.
 
 ### Podcast
 
@@ -115,7 +119,7 @@ Ordem mínima por obra:
   `3378f438d1124432b1b67fdf29161363e28276bb4a754c2a070bf5b054d56f4b`
   (435 pp, metadados completos, 15 fontes embutidas).
 - PDF antigo `77aabe2e4e055d7f53fbef17dd3857e561f50f556a94f92da0d3ff039f4ea66f`
-  preservado em `_descarte/2026-11-05/victoria-regia/pdf_antigo/`.
+  excluído definitivamente; hash preservado em `reports/r1073/`.
 - Auditoria: `reports/r1071/README.md`, `reports/r1073/README.md` e
   `BOOK_STUDIO_AUDIT.md` local.
 - Revisão editorial e decisão de acervo: `REVISAO_FINAL.md`.
@@ -129,13 +133,15 @@ Ordem mínima por obra:
 
 ## 6. Catálogo
 
-`reports/r1072/catalogo.json` contém 46 obras com:
+`reports/r1072/catalogo.json` contém 46 registros (43 ativos + 3 excluídos)
+com:
 
 - `id`, `title`, `category`, `scope`, `canonical`, `status`;
 - `source`, `compiled`, `pdf`, `pdf_pages`, `pdf_page_size`;
 - `pdf_sha256`, `pdf_bytes`;
 - `links` (symlinks do hub);
-- `archived` (quarentena editorial, quando aplicável);
+- `archived` (fora do acervo ativo);
+- `deleted` (exclusão definitiva autorizada, quando aplicável);
 - `audit`, `notes`.
 
 Categorias: `livro`, `podcast`, `template`, `academico`, `template-academico`.
@@ -148,5 +154,5 @@ Escopos: `literario`, `academico`.
 - QA técnico não avalia voz, ritmo, ética ou mérito literário.
 - Nenhuma publicação, envio à KDP ou validação externa.
 - O conteúdo literário não é versionado.
-- A quarentena é reversível; a exclusão definitiva de `v2`, do `Diário` e dos
-  backups depende de decisão editorial explícita e revisão do manifesto.
+- A exclusão foi definitiva e autorizada; os hashes permanecem em
+  `reports/r1073/`. Não há restauração dos itens excluídos.

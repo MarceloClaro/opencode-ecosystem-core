@@ -62,33 +62,29 @@ WORKS = [
         'pdf': 'literatura/molambudos/Molambudos_VictoriaRegia/main_kdp_pt_160x230mm.pdf',
         'links': [('molambudos/victoria-regia', 'literatura/molambudos/Molambudos_VictoriaRegia')],
         'audit': 'reports/r1073',
-        'notes': 'Build corrigido 3378f438 promovido em 2026-11-05; PDF antigo 77aabe2e em quarentena; revisão em REVISAO_FINAL.md.',
+        'notes': 'Build corrigido 3378f438 promovido em 2026-11-05; PDF antigo 77aabe2e excluído; revisão em REVISAO_FINAL.md.',
     },
     {
         'id': 'molambudos-v2',
         'title': 'Molambudos v2.0 — O Prontuário 1.263 (esboço)',
         'category': 'livro', 'scope': 'literario', 'canonical': False,
-        'status': 'quarentena editorial; 57 pp; 6×9 in; 112 testes',
-        'source': 'literatura/molambudos/_descarte/2026-11-05/edicoes_alternativas/Molambudos_v2',
-        'compiled': 'literatura/molambudos/_descarte/2026-11-05/edicoes_alternativas/Molambudos_v2',
-        'pdf': 'literatura/molambudos/_descarte/2026-11-05/edicoes_alternativas/Molambudos_v2/Molambudos_O-Prontuario-1263_v2.0-esboco_2026-07-13.pdf',
-        'links': [('molambudos/v2', 'literatura/molambudos/_descarte/2026-11-05/edicoes_alternativas/Molambudos_v2')],
-        'audit': 'literatura/molambudos/_descarte/2026-11-05/edicoes_alternativas/Molambudos_v2/misc/avaliacao_honesta_v2.0.md',
-        'notes': 'Sete degraus lineares; conteúdo único, não é cópia literal da canônica; quarentena reversível.',
-        'archived': True,
+        'status': 'excluído definitivamente em 2026-11-05; 57 pp; 6×9 in; 112 testes',
+        'source': None, 'compiled': None, 'pdf': None,
+        'links': [],
+        'audit': 'reports/r1073',
+        'notes': 'Conteúdo único excluído por decisão do autor; manifesto e hashes em reports/r1073.',
+        'archived': True, 'deleted': True,
     },
     {
         'id': 'molambudos-diario',
         'title': 'Molambudos — Diário 1.260 v2 (Partes I–II)',
         'category': 'livro', 'scope': 'literario', 'canonical': False,
-        'status': 'quarentena editorial; 49 pp; 6×9 in; versão ilustrada',
-        'source': 'literatura/molambudos/_descarte/2026-11-05/edicoes_alternativas/Molambudos_v2_Diario',
-        'compiled': 'literatura/molambudos/_descarte/2026-11-05/edicoes_alternativas/Molambudos_v2_Diario',
-        'pdf': 'literatura/molambudos/_descarte/2026-11-05/edicoes_alternativas/Molambudos_v2_Diario/Molambudos_Diario-1260_v2-visceral_PartesI-II-ilustrada_2026-07-13.pdf',
-        'links': [('molambudos/diario', 'literatura/molambudos/_descarte/2026-11-05/edicoes_alternativas/Molambudos_v2_Diario')],
-        'audit': None,
-        'notes': 'Edição visual linear (Partes I–II), com Piranesi e capas próprias; conteúdo único; quarentena reversível.',
-        'archived': True,
+        'status': 'excluído definitivamente em 2026-11-05; 49 pp; 6×9 in; versão ilustrada',
+        'source': None, 'compiled': None, 'pdf': None,
+        'links': [],
+        'audit': 'reports/r1073',
+        'notes': 'Edição visual linear (Partes I–II) excluída por decisão do autor; manifesto e hashes em reports/r1073.',
+        'archived': True, 'deleted': True,
     },
     {
         'id': 'molambudos-podcast',
@@ -106,14 +102,12 @@ WORKS = [
         'id': 'molambudos-template-antigo',
         'title': 'Molambudos — template LaTeX antigo (4 capítulos)',
         'category': 'template', 'scope': 'literario', 'canonical': False,
-        'status': 'quarentena; 25 pp; A4; template incompleto',
-        'source': 'literatura/molambudos/_descarte/2026-11-05/template_antigo/molambudos-antigo',
-        'compiled': 'literatura/molambudos/_descarte/2026-11-05/template_antigo/molambudos-antigo',
-        'pdf': 'literatura/molambudos/_descarte/2026-11-05/template_antigo/molambudos-antigo/main.pdf',
-        'links': [('molambudos/template-antigo', 'literatura/molambudos/_descarte/2026-11-05/template_antigo/molambudos-antigo')],
-        'audit': 'literatura/molambudos/auditorias/revisao-2026-07.md',
-        'notes': 'Objeto do parecer antigo; NÃO representa a edição VictoriaRegia; quarentena reversível.',
-        'archived': True,
+        'status': 'excluído definitivamente em 2026-11-05; 25 pp; template incompleto',
+        'source': None, 'compiled': None, 'pdf': None,
+        'links': [],
+        'audit': 'reports/r1073',
+        'notes': 'Template superado excluído por decisão do autor; manifesto e hashes em reports/r1073.',
+        'archived': True, 'deleted': True,
     },
     {
         'id': 'livro-opencode',
@@ -364,8 +358,8 @@ python3 -m marceloclaro.book_studio build . --engine latex --timeout 300
 ## Release
 
 - `release/2026-11-05/` — PDFs PT/EN/ZH/TRI, capas completas, `metadata.json`, `SHA256SUMS.txt` e `RELEASE_NOTE.md`.
-- Edições alternativas e builds antigos em `_descarte/2026-11-05/` — quarentena reversível com manifesto e hash por arquivo.
-- Revisão editorial e decisão de acervo: `molambudos/REVISAO_FINAL.md`.
+- Edições alternativas, builds antigos e backups foram excluídos definitivamente em 2026-11-05; manifesto e hash por arquivo em `reports/r1073/`.
+- Revisão editorial e decisão de acervo: `molambudos/REVISAO_FINAL.md` e `reports/r1073/REVISAO_FINAL.md`.
 
 ## Templates literários
 
@@ -382,8 +376,8 @@ python3 -m marceloclaro.book_studio build . --engine latex --timeout 300
 ## Auditoria
 
 - Molambudos: `reports/r1071/README.md`, `reports/r1073/README.md` e `molambudos/victoria-regia/BOOK_STUDIO_AUDIT.md`.
-- Revisão final e decisão de acervo: `molambudos/REVISAO_FINAL.md`.
-- Manifesto de quarentena: `reports/r1073/manifest_quarentena.json`.
+- Revisão final e decisão de acervo: `molambudos/REVISAO_FINAL.md` e `reports/r1073/REVISAO_FINAL.md`.
+- Registro de exclusão definitiva: `reports/r1073/DELETION.md` e `reports/r1073/manifest_quarentena.json`.
 - O parecer antigo `literatura/molambudos/auditorias/revisao-2026-07.md` descreve a versão de 4 capítulos; não usar para a edição VictoriaRegia.
 - Checklist mínimo por obra: metadados, trim, fontes embutidas, TOC/bookmarks, duplicações, aspas/dashes, capa/lombada, EPUB e KDP preflight.
 

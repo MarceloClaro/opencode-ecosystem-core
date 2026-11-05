@@ -1,4 +1,4 @@
-"""R1073: gate da revisão final, release e quarentena do Molambudos."""
+"""R1073: gate da revisão final, release e exclusão definitiva do Molambudos."""
 from __future__ import annotations
 
 import hashlib
@@ -10,6 +10,8 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 REPORT = ROOT / "reports/r1073"
 MANIFEST = REPORT / "manifest_quarentena.json"
+FULL_MANIFEST = REPORT / "manifest_completo_exclusao.json"
+FILES = REPORT / "files_excluidos.jsonl"
 CATALOG = ROOT / "reports/r1072/catalogo.json"
 BOOK = ROOT / "literatura/molambudos"
 RELEASE = BOOK / "release/2026-11-05"
@@ -30,23 +32,28 @@ def sha256(path: Path) -> str:
     return h.hexdigest()
 
 
-def test_manifest_schema_and_totals():
+def test_manifest_records_deleted_state():
     data = load(MANIFEST)
     assert data["schema_version"] == 1
-    assert data["quarantine_root"] == "literatura/molambudos/_descarte/2026-11-05"
+    assert data["state"] == "deleted"
+    assert data["deletion"]["status"] == "deleted"
+    assert data["deletion"]["files"] == data["totals"]["files"] == 2895
+    assert data["deletion"]["bytes"] == data["totals"]["bytes"] == 511_882_663
     assert data["canonical"]["sha256"] == CANONICAL_SHA
     assert data["canonical"]["pages"] == 435
     assert data["canonical"]["trim"] == "160x230mm"
     assert data["promotion"]["old_sha256"] == OLD_SHA
     assert data["promotion"]["new_sha256"] == CANONICAL_SHA
-    totals = data["totals"]
-    assert totals["items"] == len(data["items"]) >= 10
-    assert totals["files"] >= 2800
-    assert totals["bytes"] >= 500_000_000
-    assert totals["deleted_items"] >= 8
+
+    full = load(FULL_MANIFEST)
+    assert full["canonical"]["sha256"] == CANONICAL_SHA
+    assert full["totals"]["files"] == 2895
+    assert full["totals"]["bytes"] == 511_882_663
+    lines = sum(1 for _ in FILES.open(encoding="utf-8"))
+    assert lines == 2895
 
 
-def test_manifest_items_are_reversible_and_hashed():
+def test_manifest_items_have_hashes_and_reasons():
     data = load(MANIFEST)
     categories = {item["category"] for item in data["items"]}
     assert {
@@ -68,7 +75,7 @@ def test_manifest_items_are_reversible_and_hashed():
         assert item["kind"] in {"file", "dir"}
 
 
-def test_catalog_marks_alternates_as_quarantine():
+def test_catalog_marks_alternates_as_deleted():
     data = load(CATALOG)
     by_id = {work["id"]: work for work in data["works"]}
     assert data["count"] == len(data["works"]) == 46
@@ -80,24 +87,36 @@ def test_catalog_marks_alternates_as_quarantine():
 
     for work_id in ("molambudos-v2", "molambudos-diario", "molambudos-template-antigo"):
         work = by_id[work_id]
+        assert work.get("deleted") is True
         assert work.get("archived") is True
-        assert "quarentena" in work["status"].lower()
-        assert "_descarte/2026-11-05" in work["pdf"]
+        assert work.get("pdf") is None
+        assert work.get("source") is None
+        assert "excluído" in work["status"].lower()
 
 
-def test_versioned_release_note_and_report():
+def test_versioned_records_document_deletion():
     note = (REPORT / "RELEASE_NOTE.md").read_text(encoding="utf-8")
     readme = (REPORT / "README.md").read_text(encoding="utf-8")
-    assert "não é upload" in note.lower()
-    assert CANONICAL_SHA in note
-    assert "quarentena" in readme.lower()
-    assert "molambudos-v2" in readme
+    deletion = (REPORT / "DELETION.md").read_text(encoding="utf-8")
     review = (REPORT / "REVISAO_FINAL.md").read_text(encoding="utf-8")
+
+    assert "exclu" in note.lower()
+    assert "definitivamente" in note.lower()
+    assert CANONICAL_SHA in note
+    assert "EPUB" in note
+
+    assert "exclusão definitiva" in readme.lower()
+    assert "2.895" in readme
+
+    assert "irreversível" in deletion.lower()
+    assert "2.895" in deletion
+    assert "511.882.663" in deletion
+
     assert CANONICAL_SHA in review
-    assert "quarentena" in review.lower()
+    assert "exclusão definitiva" in review.lower()
 
 
-def test_local_release_and_quarantine_if_present():
+def test_local_release_after_deletion_if_present():
     if not BOOK.is_dir():
         pytest.skip("conteúdo literário gitignored não está presente")
 
@@ -105,28 +124,16 @@ def test_local_release_and_quarantine_if_present():
     assert (BOOK / "Molambudos_VictoriaRegia/main_kdp_pt_160x230mm.pdf").is_file()
     assert sha256(BOOK / "Molambudos_VictoriaRegia/main_kdp_pt_160x230mm.pdf") == CANONICAL_SHA
 
+    assert not QUARANTINE.exists()
     assert not (BOOK / "Molambudos_v2").exists()
     assert not (BOOK / "Molambudos_v2_Diario").exists()
     assert not (BOOK / "Molambudos_VictoriaRegia/_archive").exists()
     assert not (BOOK / "Molambudos_VictoriaRegia/build").exists()
 
-    assert (QUARANTINE / "manifest.json").is_file()
-    assert (QUARANTINE / "files.jsonl").is_file()
-    local = load(QUARANTINE / "manifest.json")
-    assert local["canonical"]["sha256"] == CANONICAL_SHA
-    for item in local["items"]:
-        assert (ROOT / item["quarantine_path"]).exists(), item["quarantine_path"]
-    lines = sum(1 for _ in (QUARANTINE / "files.jsonl").open(encoding="utf-8"))
-    assert lines == local["totals"]["files"]
-
-    # Alternates preserved, not deleted
-    assert (QUARANTINE / "edicoes_alternativas/Molambudos_v2").is_dir()
-    assert (QUARANTINE / "edicoes_alternativas/Molambudos_v2_Diario").is_dir()
-    assert (QUARANTINE / "template_antigo/molambudos-antigo/main.pdf").is_file()
-    assert (
-        QUARANTINE
-        / "victoria-regia/pdf_antigo/main_kdp_pt_160x230mm_OLD_77aabe2e.pdf"
-    ).is_file()
+    assert (REPORT / "DELETION.md").is_file()
+    assert FULL_MANIFEST.is_file()
+    assert FILES.is_file()
+    assert sum(1 for _ in FILES.open(encoding="utf-8")) == 2895
 
     sums = (RELEASE / "SHA256SUMS.txt").read_text(encoding="utf-8").splitlines()
     assert len(sums) >= 8

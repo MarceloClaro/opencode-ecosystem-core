@@ -23,13 +23,16 @@ substitui o preflight oficial.**
 
 ## Não incluído
 
-- EPUB corrente (o único EPUB é v1.5, em quarentena).
+- EPUB corrente: o único EPUB existente (v1.5) foi excluído na limpeza de
+  2026-11-05; não há EPUB corrente.
 - PDF tagged / acessibilidade digital.
 - Certificado de preflight KDP, PDF/X, sangria ou código de barras.
 - Validação externa, banca, leitura beta ou parecer profissional independente.
 
 ## Edições alternativas
 
-`Molambudos_v2` e `Molambudos_v2_Diario` estão em quarentena reversível em
-`literatura/molambudos/_descarte/2026-11-05/`. Não são cópias literais da
-canônica e não foram apagadas.
+`Molambudos_v2`, `Molambudos_v2_Diario`, o arquivo histórico, os builds antigos e
+o template de 25 pp foram **excluídos definitivamente** em 2026-11-05, por
+decisão explícita do autor. O release não depende deles. O registro de hashes
+está em `reports/r1073/DELETION.md`, `manifest_completo_exclusao.json` e
+`files_excluidos.jsonl`.

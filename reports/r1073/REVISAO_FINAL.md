@@ -61,9 +61,10 @@ Isso não significa que sejam obras sem relação: elas compartilham universo,
 personagens, motivos e material histórico. Significa que **não são subconjuntos
 literais nem cópias truncadas** da canônica. São reescritas/edições alternativas.
 
-Consequência prática: tratá-las como “versão inferior” e apagá-las seria uma
-decisão editorial, não uma limpeza técnica. Por isso elas vão para quarentena
-reversível, com hash e manifesto, e não para exclusão permanente automática.
+Consequência prática: tratá-las como “versão inferior” exigia decisão editorial,
+não limpeza técnica. Elas foram colocadas em quarentena com hash e manifesto e,
+após revisão do manifesto, excluídas definitivamente por decisão explícita do
+autor em 2026-11-05. O registro de hashes permanece em `reports/r1073/`.
 
 ## 4. Achado técnico sobre o PDF canônico
 
@@ -83,9 +84,11 @@ O PDF reconstruído e corrigido estava em
 - 15 fontes, todas embutidas;
 - texto corrigido (“Registro de Eletroconvulsoterapia”).
 
-**Decisão:** promover o PDF reconstruído ao caminho canônico e mover o PDF
-antigo para a quarentena. Essa é a única alteração de conteúdo do arquivo
-canônico nesta rodada; nenhum texto literário foi reescrito.
+**Decisão:** promover o PDF reconstruído ao caminho canônico, mover o PDF
+antigo para a quarentena e, após a revisão do manifesto, excluí-lo
+definitivamente; o hash permanece registrado em `reports/r1073/`. Essa é a única
+alteração de conteúdo do arquivo canônico nesta rodada; nenhum texto literário
+foi reescrito.
 
 ## 5. Parecer literário
 
@@ -148,15 +151,17 @@ edição alternativa documentada, não fundi-la.
 
 É a versão com melhor **onboarding** e a mais adequada a uma futura edição
 ilustrada. Não substitui a canônica porque cobre apenas Parte I–II e não tem o
-arco completo, o aparato de publicação nem as traduções. Recomenda-se preservar
-como edição ilustrada em quarentena e, se houver decisão editorial, completar
-Partes III–IV em projeto próprio.
+arco completo, o aparato de publicação nem as traduções. Ela foi preservada em
+quarentena e, depois, excluída definitivamente na limpeza autorizada de
+2026-11-05. O hash e o inventário permanecem em `reports/r1073/`; uma futura
+edição ilustrada exigiria reconstruir o material visual.
 
 ### 5.5 Template antigo
 
 `literatura/templates/molambudos-antigo` tem 4 capítulos e 25 pp. É o objeto do
 parecer antigo `auditorias/revisao-2026-07.md`, que **não** descreve a edição
-VictoriaRegia. Está superado e vai para quarentena.
+VictoriaRegia. Está superado e foi excluído definitivamente em 2026-11-05, com
+hash registrado em `reports/r1073/`.
 
 ## 6. Decisão de acervo
 
@@ -170,10 +175,13 @@ VictoriaRegia. Está superado e vai para quarentena.
   material analítico.
 - `README.md`, `REVISAO_FINAL.md` e `release/2026-11-05/`.
 
-### Quarentena reversível
+### Exclusão definitiva autorizada
 
-- `Molambudos_v2/` e `Molambudos_v2_Diario/` — conteúdo único; não apagar sem
-  decisão editorial explícita.
+Os itens abaixo foram excluídos em 2026-11-05, por decisão explícita do autor,
+após revisão do manifesto:
+
+- `Molambudos_v2/` e `Molambudos_v2_Diario/` — edições alternativas com conteúdo
+  único; hashes preservados.
 - `Molambudos_VictoriaRegia/_archive/` — builds antigos, backups, capas antigas,
   EPUB v1.5.
 - layouts não-KDP (`main.pdf`, `main_en.pdf`, `main_zh.pdf`, `main_tri.pdf`,
@@ -183,6 +191,8 @@ VictoriaRegia. Está superado e vai para quarentena.
 - rascunhos da raiz (`molambudos.md`, `molambudos-1.txt`, `.bak`).
 - template antigo de 25 pp.
 
+O manifesto completo e o hash de cada arquivo permanecem em `reports/r1073/`.
+
 ### Exclusão imediata
 
 - artefatos de teste (`test.pdf`, `test_err.pdf`, `.aux`, `.log`, `.toc`,
@@ -190,8 +200,9 @@ VictoriaRegia. Está superado e vai para quarentena.
 - diretórios vazios `anexos/` e `output/`;
 - `.aux` de `capitulos/`.
 
-Nenhuma edição literária com conteúdo único será apagada permanentemente nesta
-rodada. A exclusão definitiva da quarentena depende de revisão do manifesto.
+As edições alternativas foram excluídas por decisão explícita do autor. O
+manifesto preserva os hashes e o inventário do que existia; não há restauração
+dos arquivos excluídos.
 
 ## 7. Release
 
@@ -210,5 +221,7 @@ não substitui o preflight oficial.
 - Nenhuma validação externa, banca, leitura beta ou certificação profissional.
 - Nenhuma declaração de qualidade literária objetiva, nota ou prêmio.
 - Nenhuma publicação, envio à KDP ou distribuição.
-- Nenhum texto literário foi reescrito; apenas o PDF canônico foi promovido ao
-  build corrigido e o acervo foi organizado.
+- Nenhum texto literário canônico foi reescrito; apenas o PDF canônico foi
+  promovido ao build corrigido e o acervo foi organizado. As edições
+  alternativas foram excluídas por decisão do autor, com registro de hashes em
+  `reports/r1073/`.
