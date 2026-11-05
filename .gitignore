@@ -481,3 +481,10 @@ pilots/r1059-roraima/out/*.log
 
 # R1059: exceção explícita para a timeline da referência
 !pilots/r1059-roraima/reference/mapa-de-cenas.csv
+
+# R1064: OpenMontage externo (AGPL) e artefatos de produção
+external/OpenMontage/
+external/litellm-env/
+.env.litellm
+.env.litellm.*
+!.env.litellm.example
