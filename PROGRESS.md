@@ -34,6 +34,13 @@ não comprova o aceite integral.
   GIFs opcionais de um ciclo, PNG/SVG acessíveis, manifesto e verificação local.
   [Relatório](reports/r1056/README.md); não é reauditoria do runtime R916.
 
+## Checkpoint R1059 — piloto de vídeo por referência
+
+- Prévia vertical de **10 s, 720×1280, 30 fps**, com mapa EOX/Natural Earth, ilustração vetorial no **Motion Canvas 3.17.2** e composição no **Remotion 4.0.540**.
+- 300 PNG RGBA exportados e efetivamente consumidos na composição; QC aprovado (−14,47 LUFS, true peak −4,51 dBTP, 0 s de preto); 27 testes locais.
+- Referência analisada por amostragem de 2 fps; cobertura declarada parcial. Marca, voz, textos e assets da referência não foram reutilizados.
+- Nada publicado; MP4, frames e áudio permanecem locais. Ver `pilots/r1059-roraima/` e `specs/SPEC-935-R1059-agentes-video-referencia.md`.
+
 ## Checkpoint R1058 — vídeo institucional Airam Veras
 
 - Vídeo de **7min38s**, 19 cenas, 5º A/B, LP e Matemática; mapa mundo→Crateús→Maratoan, diagnóstico, cronograma com prova em **01/12/2026**, rotina semanal fixa, 11 habilidades com exemplos e agradecimento com foto/QR.

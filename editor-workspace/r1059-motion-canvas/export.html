@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>R1059 • Exportação local autorizada</title></head>
+<body style="background:#091c27;color:#fff;font:18px sans-serif;padding:30px">
+<h1>R1059 • Motion Canvas</h1><p>Prévia autorizada: 300 frames RGBA, 720×1280, 30 fps.</p>
+<pre id="status">Carregando projeto…</pre>
+<script type="module">
+import project from './src/project.ts?project';
+import {Renderer, Vector2} from '@motion-canvas/core';
+const renderer = new Renderer(project);
+let started = false;
+window.r1059Ready = true;
+window.r1059Result = null;
+document.querySelector('#status').textContent = 'Pronto; exportação ainda não iniciada.';
+window.startPilot = async () => {
+  if (started) throw new Error('Exportação já solicitada nesta página; não duplicar.');
+  started = true;
+  let result = null;
+  renderer.onFinished.subscribe(value => { result = value; });
+  await renderer.render({
+    ...project.meta.getFullRenderingSettings(), name: 'r1059-tepui-v1',
+    size: new Vector2(720, 1280), fps: 30, range: [0, 299 / 30],
+    resolutionScale: 1, background: null,
+    exporter: {name: '@motion-canvas/core/image-sequence', options: {
+      fileType: 'image/png', quality: 100, groupByScene: false,
+    }},
+  });
+  window.r1059Result = {result, engine: 'Motion Canvas 3.17.2', expectedFrames: 300};
+  document.querySelector('#status').textContent = JSON.stringify(window.r1059Result);
+  return window.r1059Result;
+};
+</script></body></html>

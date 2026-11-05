@@ -468,3 +468,16 @@ docs/architecture/animated/*.geometry.json
 # R1058: cache TTS por batida (regenerável; WAV/MP4 já são ignorados)
 pilots/r1058-airam-veras/audio/beats/
 pilots/r1058-airam-veras/voice-ref/
+
+# R1059 — mídia regenerável e sessão de navegador
+.playwright-mcp/
+editor-workspace/r1059-motion-canvas/node_modules/
+editor-workspace/r1059-motion-canvas/output/
+editor-workspace/remotion-smoke/public/r1059-tepui/
+editor-workspace/remotion-smoke/public/r1059-narration.wav
+pilots/r1059-roraima/out/*.mp4
+pilots/r1059-roraima/out/*.png
+pilots/r1059-roraima/out/*.log
+
+# R1059: exceção explícita para a timeline da referência
+!pilots/r1059-roraima/reference/mapa-de-cenas.csv
