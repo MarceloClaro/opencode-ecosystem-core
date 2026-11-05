@@ -11,6 +11,7 @@ consentimento explícito; a execução real continua sob o orquestrador.
 from __future__ import annotations
 
 import argparse
+import copy
 import hashlib
 import json
 import os
@@ -24,6 +25,8 @@ from typing import Any, Dict, Iterable, List
 
 ROOT = Path(__file__).resolve().parents[1]
 CACHE = Path.home() / ".cache" / "opencode-pilot" / "external-skills"
+STATUS_TTL_SECONDS = 15.0
+_STATUS_CACHE: dict[str, tuple[float, dict]] = {}
 REA_CANDIDATES = (
     Path.home() / ".local/share/opencode-core/rea-6.8.0/scripts/rea.mjs",
     Path.home() / ".local/share/opencode-core/rea/scripts/rea.mjs",
@@ -85,6 +88,42 @@ def load_registry() -> Dict[str, ExternalSkill]:
             notes="Diagramas HTML interativos; doctor e render são os entrypoints seguros.",
         ),
         ExternalSkill(
+            skill_id="imagegen",
+            path=_expand("~/.agents/skills/imagegen"),
+            license="Core-native",
+            license_file="",
+            kind="image-generation",
+            entrypoint="scripts/image_gen.py",
+            dependencies=("python3",),
+            requires_consent=True,
+            keywords=("imagem", "geracao", "gerar", "imagegen", "ilustracao", "comic", "personagem"),
+            safe_argv=("python3", str(_expand("~/.agents/skills/imagegen") / "scripts/image_gen.py"), "--help"),
+            notes="Gera imagem via endpoint OpenAI-compatible; consome conta e exige OPENAI_API_KEY.",
+        ),
+        ExternalSkill(
+            skill_id="code-video-visual-qa",
+            path=_expand(ROOT / ".opencode/skills/code-video-visual-qa"),
+            license="Core-native",
+            license_file="",
+            kind="video-qa",
+            entrypoint="SKILL.md",
+            dependencies=("python3", "ffmpeg", "ffprobe"),
+            keywords=("qa", "legendas", "silencio", "loudness", "quadros", "qualidade", "revisao"),
+            safe_argv=("python3", str(ROOT / "integrations/video_qa.py"), "--help"),
+            notes="QA técnico de MP4: metadados, black frames, silêncio, loudness e frames.",
+        ),
+        ExternalSkill(
+            skill_id="hyperframes",
+            path=_expand("~/.agents/skills/hyperframes"),
+            license="Apache-2.0",
+            license_file="",
+            kind="video-skill",
+            entrypoint="SKILL.md",
+            dependencies=("node", "ffmpeg"),
+            keywords=("video", "hyperframes", "render", "animacao", "motion", "html"),
+            notes="Skill oficial HyperFrames; usar hyperframes-cli para scaffold e render.",
+        ),
+        ExternalSkill(
             skill_id="image-story-video-wizard",
             path=_expand("~/.agents/skills/image-story-video-wizard"),
             license="MIT",
@@ -103,7 +142,7 @@ def load_registry() -> Dict[str, ExternalSkill]:
             dependencies=("node", "ffmpeg", "ffprobe"),
             requires_consent=True,
             prerequisites=("hyperframes", "media-use", "code-video-visual-qa", "imagegen"),
-            keywords=("video", "narracao", "tts", "legendas", "hyperframes"),
+            keywords=("video", "narracao", "tts", "legendas", "hyperframes", "hyper", "frames"),
             readiness_argv=("bash", "scripts/setup_local_cliproxyapi.sh", "ready"),
             notes="Exige skills /hyperframes, /media-use, /code-video-visual-qa, /imagegen e proxy local.",
         ),
@@ -218,14 +257,32 @@ def _readiness(entry: ExternalSkill) -> Dict[str, Any] | None:
             "returncode": result.returncode}
 
 
+def _registry_fingerprint(registry: Dict[str, ExternalSkill]) -> str:
+    payload = {key: entry.to_dict() for key, entry in sorted(registry.items())}
+    return hashlib.sha256(
+        json.dumps(payload, sort_keys=True, ensure_ascii=False).encode("utf-8")
+    ).hexdigest()
+
+
 def status(skill_id: str | None = None,
-           registry: Dict[str, ExternalSkill] | None = None) -> Dict[str, Any]:
-    """Checagem somente leitura de caminho, licença, entrypoint e dependências."""
+           registry: Dict[str, ExternalSkill] | None = None,
+           *, refresh: bool = False) -> Dict[str, Any]:
+    """Checagem somente leitura de caminho, licença, entrypoint e dependências.
+
+    O resultado é cacheado por 15 s para evitar repetir git/subprocessos no
+    caminho de cada passo do Centro de Produção. ``refresh=True`` força nova
+    leitura (por exemplo, após iniciar o proxy local).
+    """
     registry = registry or load_registry()
     if skill_id is not None:
         if skill_id not in registry:
             raise ValueError(f"skill externa desconhecida: {skill_id}")
         registry = {skill_id: registry[skill_id]}
+    cache_key = _registry_fingerprint(registry)
+    if not refresh:
+        cached = _STATUS_CACHE.get(cache_key)
+        if cached is not None and time.monotonic() - cached[0] < STATUS_TTL_SECONDS:
+            return copy.deepcopy(cached[1])
     rows = []
     for key, entry in sorted(registry.items()):
         missing: List[str] = []
@@ -233,7 +290,7 @@ def status(skill_id: str | None = None,
             missing.append("path_missing")
         if not (entry.path / entry.entrypoint).exists():
             missing.append("entrypoint_missing")
-        if not (entry.path / entry.license_file).is_file():
+        if entry.license_file and not (entry.path / entry.license_file).is_file():
             missing.append("license_missing")
         missing.extend(f"dependency_missing:{name}" for name in entry.dependencies
                        if not _dependency_available(name))
@@ -251,8 +308,10 @@ def status(skill_id: str | None = None,
             "commit": _commit(entry.path),
             "consent_required": entry.requires_consent,
         })
-    return {"status": "completed", "count": len(rows), "adapters": rows,
-            "read_only": True, "executed": False}
+    payload = {"status": "completed", "count": len(rows), "adapters": rows,
+               "read_only": True, "executed": False}
+    _STATUS_CACHE[cache_key] = (time.monotonic(), copy.deepcopy(payload))
+    return payload
 
 
 def _find(skill_id: str, registry: Dict[str, ExternalSkill]) -> ExternalSkill:
@@ -293,6 +352,21 @@ def plan(skill_id: str, task: str, *, consent: bool = False,
         argv = ["node", str(base / "bin/archify.mjs"), "doctor"]
         handoff = ("Carregar ~/.agents/skills/archify/SKILL.md e executar a tarefa "
                    f"com o renderer Archify; tarefa: {task[:500]}")
+    elif skill_id == "imagegen":
+        mode = "skill"
+        argv = ["python3", str(base / "scripts/image_gen.py"), "--help"]
+        handoff = ("Carregar a skill imagegen e gerar a imagem com OPENAI_API_KEY/"
+                   f"OPENAI_BASE_URL já configurados; tarefa: {task[:500]}")
+    elif skill_id == "code-video-visual-qa":
+        mode = "cli"
+        argv = ["python3", str(ROOT / "integrations/video_qa.py"), "probe", "<video>"]
+        handoff = ("Rodar python3 integrations/video_qa.py probe no MP4 final e "
+                   f"inspecionar os frames; tarefa: {task[:500]}")
+    elif skill_id == "hyperframes":
+        mode = "skill"
+        argv = []
+        handoff = ("Carregar a skill hyperframes e o hyperframes-cli; criar projeto "
+                   f"com scaffold, validar e renderizar; tarefa: {task[:500]}")
     elif skill_id == "image-story-video-wizard":
         mode = "skill"
         argv = ["python3", str(base / "scripts/project_state.py"), "--help"]

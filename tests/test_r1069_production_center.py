@@ -2,17 +2,19 @@
 from __future__ import annotations
 
 import asyncio
+from pathlib import Path
 import sys
 
 import pytest
 
 from integrations.external_skills import ExternalSkill, plan, probe, status
-from marceloclaro.production_center import ProductionCenter
+from marceloclaro.production_center import ProductionCenter, ProductionStore
 from transformer.executive import ExecutiveAttention
 
 
 def fake_registry(tmp_path, *, requires_consent: bool = False,
-                  safe_argv: tuple[str, ...] = ()):
+                  safe_argv: tuple[str, ...] = (),
+                  readiness_argv: tuple[str, ...] = ()):
     path = tmp_path / "fake-skill"
     path.mkdir()
     (path / "SKILL.md").write_text("---\nname: fake\n---\n", encoding="utf-8")
@@ -22,7 +24,7 @@ def fake_registry(tmp_path, *, requires_consent: bool = False,
         skill_id="fake", path=path, license="MIT",
         kind="state-machine-skill", entrypoint="run.py",
         dependencies=(), requires_consent=requires_consent,
-        safe_argv=safe_argv,
+        safe_argv=safe_argv, readiness_argv=readiness_argv,
     )
     return {"fake": entry}
 
@@ -137,6 +139,93 @@ def test_probe_without_rea_sources_is_unsupported(tmp_path):
     result = probe("fake", registry=registry)
     assert result["status"] == "unsupported"
     assert result["executed"] is False
+
+
+def test_routing_prefers_relevant_consent_adapter(tmp_path):
+    def entry(name, keywords, requires_consent):
+        path = tmp_path / name
+        path.mkdir()
+        (path / "SKILL.md").write_text("---\nname: " + name + "\n---\n")
+        (path / "LICENSE").write_text("MIT\n")
+        (path / "run.py").write_text("print(1)\n")
+        return ExternalSkill(skill_id=name, path=path, license="MIT",
+                             kind="state-machine-skill", entrypoint="run.py",
+                             dependencies=(), requires_consent=requires_consent,
+                             keywords=keywords)
+
+    registry = {
+        "gated": entry("gated", ("imagem", "gerar"), True),
+        "free": entry("free", ("imagem",), False),
+    }
+    center = ProductionCenter(registry=registry)
+    state = center._new_state("gerar uma imagem", risk_level="low",
+                              budget=8.0, consent=False)
+    center.step(state)  # specify
+    selected = center._select_adapter(state)
+    assert selected["action_id"] == "execute:gated"
+    assert selected["requires_consent"] is True
+
+
+def test_persistence_and_resume(tmp_path):
+    store = ProductionStore(tmp_path / "productions")
+    center = ProductionCenter(registry=fake_registry(tmp_path), store=store)
+    first = center.run("documentar o fluxo", max_steps=2, persist=True)
+    assert first["status"] == "active"
+    assert first["persisted"] is True
+    assert Path(first["state_path"]).is_file()
+    production_id = first["production_id"]
+
+    resumed = center.resume(production_id, persist=True)
+    assert resumed["status"] == "completed"
+    assert resumed["production_id"] == production_id
+    assert len(resumed["history"]) == 6
+    assert [row["action"] for row in resumed["history"]] == [
+        "specify", "route", "execute:fake", "verify", "reflect", "deliver",
+    ]
+    assert store.list()[0]["production_id"] == production_id
+
+
+def test_store_rejects_path_traversal(tmp_path):
+    store = ProductionStore(tmp_path / "productions")
+    with pytest.raises(ValueError):
+        store.load("../escape")
+    with pytest.raises(ValueError):
+        store.load("prod-invalid")
+
+
+def test_status_cache_avoids_repeated_readiness(monkeypatch, tmp_path):
+    import integrations.external_skills as external
+
+    registry = fake_registry(
+        tmp_path, readiness_argv=(sys.executable, "-c", "print('ready')"))
+    calls = []
+    real_readiness = external._readiness
+
+    def counted(entry):
+        calls.append(entry.skill_id)
+        return real_readiness(entry)
+
+    external._STATUS_CACHE.clear()
+    monkeypatch.setattr(external, "_readiness", counted)
+    first = external.status(registry=registry)
+    second = external.status(registry=registry)
+    assert first["adapters"][0]["ready"] is True
+    assert second["adapters"][0]["ready"] is True
+    assert len(calls) == 1
+    external.status(registry=registry, refresh=True)
+    assert len(calls) == 2
+
+
+def test_registry_includes_new_adapters():
+    from integrations.external_skills import load_registry
+
+    registry = load_registry()
+    assert {"imagegen", "code-video-visual-qa", "hyperframes"} <= set(registry)
+    assert plan("imagegen", "gerar uma imagem")["status"] == "consent_required"
+    planned = plan("imagegen", "gerar uma imagem", consent=True)
+    assert planned["status"] == "planned" and planned["safe_argv"]
+    assert plan("code-video-visual-qa", "revisar MP4")["status"] == "planned"
+    assert plan("hyperframes", "renderizar um vídeo")["status"] == "planned"
 
 
 def test_mcp_production_routes_to_primary(monkeypatch):

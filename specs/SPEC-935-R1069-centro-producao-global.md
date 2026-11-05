@@ -10,7 +10,7 @@ passo de uma produção e de adaptar skills externas sem copiar código de terce
 | Componente | Papel |
 |---|---|
 | `transformer/executive.py` | `ExecutiveAttention`: oito cabeças determinísticas (objetivo, estágio, evidência, risco, confiança, orçamento, progresso e tags), gates rígidos e softmax auditável. |
-| `marceloclaro/production_center.py` | `ProductionCenter`: estágios `intake → spec → route → execute → verify → reflect → deliver → complete`; orçamento, consentimento, evidência, histórico e recibo. |
+| `marceloclaro/production_center.py` | `ProductionCenter` + `ProductionStore`: estágios `intake → spec → route → execute → verify → reflect → deliver → complete`; orçamento, consentimento, evidência, histórico, recibo, persistência e retomada. |
 | `integrations/external_skills.py` | Registro de adaptadores externos: licença, caminho, entrypoint, dependências, `status`, `plan`, `probe` REA limitado e `safe_argv`. |
 | `integrations/video_qa.py` | QA técnico de vídeo com ffprobe/ffmpeg: metadados, black frames, silêncio, loudness e frames. |
 | `.opencode/skills/code-video-visual-qa/SKILL.md` | Adaptação Core-native que substitui a dependência homônima do hbg. |
@@ -56,6 +56,9 @@ O centro devolve `awaiting_consent` em vez de inventar autorização.
 | Adaptador | Licença | Estado |
 |---|---|---|
 | `archify` | Apache-2.0 | pronto; instalado em `~/.agents/skills/archify` |
+| `imagegen` | Core-native | pronto; cliente OpenAI-compatible, com consentimento por projeto |
+| `code-video-visual-qa` | Core-native | pronto; QA técnico com ffprobe/ffmpeg |
+| `hyperframes` | Apache-2.0 | pronto; skill oficial instalada |
 | `image-story-video-wizard` | MIT | pronto; instalado e carregado |
 | `opus-video-skills` | MIT | pronto; Chromium do cache Playwright encontrado |
 | `kdense-scientific-agent-skills` | MIT | pronto; catálogo espelhado |
@@ -77,12 +80,19 @@ para o diretório externo e prepara um handoff auditável.
 - `allow_safe_checks` executa apenas o `safe_argv` read-only declarado pelo
   adaptador (ex.: `archify doctor`, `project_state.py --help`, `hbg ready`);
   render, OAuth, coletor e workspace-write continuam bloqueados.
+- Diagnóstico externo com cache TTL de 15 s: evita repetir git e subprocessos
+  de prontidão a cada passo do Centro; `refresh=True` força nova leitura.
+- `ProductionStore` grava estado atômico em
+  `~/.local/share/opencode-core/productions/` (0700/0600), com `list` e
+  `resume`; o histórico não é recriado.
 
 ## 6. Aceitação
 
 1. Atenção executiva ranqueia ações e aplica gates de consentimento/orçamento.
 2. Centro completa o ciclo com adaptador elegível.
-3. Centro para em `awaiting_consent` quando o adaptador exige autorização.
+3. Centro para em `awaiting_consent` quando o adaptador exige autorização e
+   prefere pedir consentimento ao adaptador mais aderente, em vez de trocá-lo
+   silenciosamente por outro.
 4. Orçamento limita passos e custo.
 5. Registro externo distingue pronto/bloqueado e não executa terceiros.
 6. `probe` REA é limitado, grava evidência e devolve hash.
@@ -93,16 +103,21 @@ para o diretório externo e prepara um handoff auditável.
 9. `imagegen` gera uma imagem e um lote por endpoint OpenAI-compatible local,
    rejeita path traversal, exige chave de ambiente e aceita `http` apenas em
    loopback.
-10. MCP `ecosystem_production` roteia para o primário.
-11. Testes verdes.
+10. MCP `ecosystem_production` roteia para o primário e aceita `list`/`resume`.
+11. Produção persistida pode ser listada e retomada sem recriar o histórico.
+12. Cache de status evita repetir prontidão/git dentro do TTL.
+13. Testes verdes.
 
-**Resultado:** **107 passed** em R1069, R640, Transformer, atenção, autonomia,
+**Resultado:** **112 passed** em R1069, R640, Transformer, atenção, autonomia,
 metacognição, QA de vídeo e imagegen. Execução real do centro com
-`hbg-life-simulation`: `specify → route → execute:hbg → verify → reflect →
-deliver`, `readiness=ready` no safe check e `confidence_promoted=false`.
-`imagegen` gerou um PNG 1536×1024 (2,2 MB) em 22,3 s com `gpt-image-2` pelo
-CLIProxyAPI local autenticado; a primeira tentativa falhou com 502 porque o
-proxy tinha 0 auth entries.
+`hbg-life-simulation`: `specify → route → consent:hbg → execute:hbg → verify →
+reflect → deliver`, `readiness=ready` no safe check e
+`confidence_promoted=false`; a produção persistida foi listada e retomada sem
+recriar o histórico. `imagegen` gerou um PNG 1536×1024 (2,2 MB) em 22,3 s com
+`gpt-image-2` pelo CLIProxyAPI local autenticado; a primeira tentativa falhou
+com 502 porque o proxy tinha 0 auth entries. O REA analisou `media-use` em
+escopo reduzido (75 nós, 18 limitações) e confirmou que ele deve permanecer
+externo, não como adaptador padrão.
 
 ## 7. Limites
 

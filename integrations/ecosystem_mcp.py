@@ -146,12 +146,13 @@ async def ecosystem_rea(config: dict[str, Any]) -> dict[str, Any]:
 
 @mcp.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=False, openWorldHint=False))
 async def ecosystem_production(config: dict[str, Any]) -> dict[str, Any]:
-    """Centro de Produção Global: status, plan ou run com atenção executiva.
+    """Centro de Produção Global: status, list, plan, run ou resume.
 
-    config: operation (status/plan/run), goal, risk_level, budget, consent e
-    max_steps. `run` executa apenas o ciclo de planejamento/gates; não chama
-    OAuth, render, coletor ou código de terceiro. Nenhuma autoavaliação promove
-    confiança ou validação externa.
+    config: operation, goal, risk_level, budget, consent, max_steps,
+    production_id, persist e safe_checks. `run` executa apenas o ciclo de
+    planejamento/gates; `safe_checks` roda somente argv read-only declarado.
+    Não chama OAuth, render, coletor ou código de terceiro. Nenhuma
+    autoavaliação promove confiança ou validação externa.
     """
     if not isinstance(config, dict):
         raise ValueError("config do Centro de Produção deve ser objeto")

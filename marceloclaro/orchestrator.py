@@ -2549,22 +2549,37 @@ class MarceloClaroOrchestrator:
     def production_center_action(self, config: Dict[str, Any]) -> Dict[str, Any]:
         """Coordena o Centro de Produção Global com atenção executiva.
 
-        Operações: ``status``, ``plan`` e ``run``. ``run`` executa apenas o
-        ciclo de planejamento/gates; código de terceiro continua exigindo
-        autorização externa. Nenhuma autoavaliação promove confiança.
+        Operações: ``status``, ``list``, ``plan``, ``run`` e ``resume``.
+        ``run`` executa apenas o ciclo de planejamento/gates; código de
+        terceiro continua exigindo autorização externa. Nenhuma autoavaliação
+        promove confiança.
         """
         from marceloclaro.production_center import ProductionCenter
         if not isinstance(config, dict):
             raise ValueError("configuração do Centro de Produção deve ser objeto")
-        allowed = {"operation", "goal", "risk_level", "budget", "consent", "max_steps"}
+        allowed = {"operation", "goal", "risk_level", "budget", "consent",
+                   "max_steps", "production_id", "persist", "safe_checks"}
         if set(config) - allowed:
             raise ValueError("campos desconhecidos no Centro de Produção")
         operation = config.get("operation")
-        if operation not in {"status", "plan", "run"}:
-            raise ValueError("operação deve ser status, plan ou run")
+        if operation not in {"status", "list", "plan", "run", "resume"}:
+            raise ValueError("operação deve ser status, list, plan, run ou resume")
         center = ProductionCenter(bus=metabus, max_steps=config.get("max_steps", 8))
         if operation == "status":
             report = center.status()
+        elif operation == "list":
+            report = {"status": "completed", "productions": center.list()}
+        elif operation == "resume":
+            production_id = config.get("production_id")
+            if not isinstance(production_id, str) or not production_id.strip():
+                raise ValueError("production_id é obrigatório para resume")
+            report = center.resume(
+                production_id.strip(),
+                consent=True if config.get("consent") is True else None,
+                budget=config.get("budget"),
+                allow_safe_checks=config.get("safe_checks") is True,
+                max_steps=config.get("max_steps"),
+            )
         else:
             goal = config.get("goal")
             if not isinstance(goal, str) or not goal.strip():
@@ -2578,7 +2593,9 @@ class MarceloClaroOrchestrator:
             else:
                 report = center.run(goal, risk_level=risk_level, budget=budget,
                                     consent=consent,
-                                    max_steps=config.get("max_steps", 8))
+                                    max_steps=config.get("max_steps", 8),
+                                    allow_safe_checks=config.get("safe_checks") is True,
+                                    persist=config.get("persist") is True)
         observation = {
             "status": report.get("status"),
             "method": "production:" + operation,

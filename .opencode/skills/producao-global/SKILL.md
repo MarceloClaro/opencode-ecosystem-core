@@ -29,8 +29,10 @@ orçamento, progresso e tags — e devolve um recibo auditável.
 |---|---|
 | `/producao status` | Mostra estágios, pesos das cabeças e adaptadores externos |
 | `/producao adapters` | Lista adaptadores, licenças, dependências e bloqueios |
+| `/producao list` | Lista produções persistidas, sem carregar o payload inteiro |
 | `/producao plan '<objetivo>' [--risk low\|medium\|high] [--budget N] [--consent]` | Dry-run: ranqueia ações sem executar |
-| `/producao run '<objetivo>' [--risk ...] [--budget N] [--consent] [--safe-checks]` | Ciclo de planejamento/gates; `--safe-checks` roda só checagens read-only declaradas |
+| `/producao run '<objetivo>' [--risk ...] [--budget N] [--consent] [--safe-checks] [--persist]` | Ciclo de planejamento/gates; `--safe-checks` roda só checagens read-only declaradas; `--persist` grava para retomada |
+| `/producao resume <production_id> [--consent] [--safe-checks] [--budget N]` | Retoma uma produção persistida sem recriar o histórico |
 | `/producao probe <adapter>` | Análise REA em escopo reduzido, com evidência em cache |
 
 ## Uso programático
@@ -79,6 +81,8 @@ core.production_center_action({"operation": "plan", "goal": "produzir um artigo"
   dependência homônima do hbg.
 - `imagegen` — cliente OpenAI-compatible `generate`/`generate-batch`; usa
   apenas `OPENAI_API_KEY`/`OPENAI_BASE_URL` e exige loopback ou HTTPS.
+- `hyperframes` — skill oficial Apache-2.0 para autoria/render HTML; use o
+  `hyperframes-cli` para scaffold, validação e render.
 - `opus-video-skills` — p5.js/three.js; MIT; requer Chrome.
 - `reel-video` — CLI/review board; MIT; `codex` pronto, falta `grok`.
 - `distilly` — perfis de pessoa; MIT; exige consentimento e privacidade.
