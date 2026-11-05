@@ -37,6 +37,7 @@
 
 - `manifest_quarentena.json` — resumo versionado com hashes de árvore.
 - `RELEASE_NOTE.md` — nota do pacote de release.
+- `REVISAO_FINAL.md` — parecer editorial completo e decisão de acervo.
 - `specs/SPEC-935-R1073-molambudos-release.md` — requisitos e critérios.
 - `tests/test_r1073_molambudos_release.py` — gate de integridade.
 

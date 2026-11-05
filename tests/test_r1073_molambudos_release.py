@@ -92,6 +92,9 @@ def test_versioned_release_note_and_report():
     assert CANONICAL_SHA in note
     assert "quarentena" in readme.lower()
     assert "molambudos-v2" in readme
+    review = (REPORT / "REVISAO_FINAL.md").read_text(encoding="utf-8")
+    assert CANONICAL_SHA in review
+    assert "quarentena" in review.lower()
 
 
 def test_local_release_and_quarantine_if_present():
