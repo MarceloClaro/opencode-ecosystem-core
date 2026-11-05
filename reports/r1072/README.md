@@ -1,8 +1,8 @@
 # R1072 — Hub dos projetos literários
 
-**Status:** projetos literários movidos fisicamente para `literatura/`; caminhos
-antigos preservados por symlinks de compatibilidade. `literatura/` e `projetos/`
-são gitignored, então o conteúdo das obras permanece fora do versionamento.
+**Status:** Molambudos concluído em release local; edições alternativas e
+builds antigos em quarentena reversível. `literatura/` e `projetos/` são
+gitignored, então o conteúdo das obras permanece fora do versionamento.
 **Objetivo:** organizar Molambudos — livro, podcast e auditorias — e os demais
 projetos literários em uma única entrada para revisão, build e QA.
 
@@ -15,19 +15,19 @@ literatura/
 ├── CHECKLIST_AUDITORIA.md
 ├── molambudos/
 │   ├── victoria-regia      -> edição KDP PT-BR, 435 pp
-│   ├── v2                  -> esboço de 57 pp
-│   ├── diario              -> Diário de 49 pp
 │   ├── podcast/producao    -> 26 episódios + piloto R550, pacotes, slides, feed e deploy
 │   ├── auditorias          -> revisão, banca, cultural-episteme, Book Studio
 │   ├── capas               -> frente e contracapa corrigidas
 │   ├── scripts/ specs/     -> links para fontes versionadas
+│   ├── release/2026-11-05  -> PDFs PT/EN/ZH/TRI, capas, metadados e checksums
+│   ├── _descarte/2026-11-05 -> quarentena reversível (v2, Diário, builds, backups)
 │   └── README.md           -> mapa do projeto
 ├── livros/
 │   ├── livro-opencode-*    -> fonte + compilado
 │   ├── livro-volume2-*     -> fonte + compilado
 │   ├── livro-gemeos-*      -> fonte + compilado
 │   └── ia-odontologia-*    -> fonte + template
-├── templates/              -> Victoria Regia, Template Livros, Molambudos antigo e templates
+├── templates/              -> Victoria Regia, Template Livros e templates
 ├── academicos/             -> contexto acadêmico, fora do escopo literário
 └── templates-academicos/   -> templates 12–30, contexto
 ```
@@ -50,6 +50,18 @@ symlink de compatibilidade.
 
 As demais entradas são versões alternativas, templates ou contexto acadêmico.
 A escolha da edição canônica é editorial e pertence ao autor.
+
+### Release e quarentena
+
+- `literatura/molambudos/release/2026-11-05/` — pacote local com PDFs PT/EN/ZH/TRI,
+  capas completas, `metadata.json`, `SHA256SUMS.txt` e `RELEASE_NOTE.md`.
+- `literatura/molambudos/_descarte/2026-11-05/` — quarentena reversível de
+  `Molambudos_v2`, `Molambudos_v2_Diario`, `_archive` do VictoriaRegia, layouts
+  antigos, backups canônicos, rascunhos e template de 25 pp.
+- Manifesto completo: `_descarte/2026-11-05/manifest.json` e `files.jsonl`
+  (hash por arquivo). Resumo versionado: `reports/r1073/manifest_quarentena.json`.
+- Parecer editorial: `literatura/molambudos/REVISAO_FINAL.md`.
+- Nenhuma edição literária com conteúdo único foi apagada permanentemente.
 
 ### Podcast
 
@@ -99,13 +111,21 @@ Ordem mínima por obra:
 
 - Edição canônica: `molambudos/victoria-regia` (435 pp, 160×230 mm).
 - Book Studio: `book.json`, `engine=latex`, `source=main_kdp_pt_160x230mm.tex`.
-- Auditoria: `reports/r1071/README.md` e `BOOK_STUDIO_AUDIT.md` local.
+- PDF canônico promovido em 2026-11-05: SHA-256
+  `3378f438d1124432b1b67fdf29161363e28276bb4a754c2a070bf5b054d56f4b`
+  (435 pp, metadados completos, 15 fontes embutidas).
+- PDF antigo `77aabe2e4e055d7f53fbef17dd3857e561f50f556a94f92da0d3ff039f4ea66f`
+  preservado em `_descarte/2026-11-05/victoria-regia/pdf_antigo/`.
+- Auditoria: `reports/r1071/README.md`, `reports/r1073/README.md` e
+  `BOOK_STUDIO_AUDIT.md` local.
+- Revisão editorial e decisão de acervo: `REVISAO_FINAL.md`.
 - O parecer antigo `REVISAO_MOLAMBUDOS.md` descreve a versão incompleta de 4
   capítulos; não vale para a edição VictoriaRegia.
 - `lombada.pdf` isolado é de outro projeto (capa dura); a capa completa atual
   calcula 1,021 in de lombada para 435 pp.
 - O podcast está em `literatura/molambudos/podcast/producao/`; `research/producao_real`
   é mantido como symlink de compatibilidade.
+- Release local: `literatura/molambudos/release/2026-11-05/`.
 
 ## 6. Catálogo
 
@@ -115,6 +135,7 @@ Ordem mínima por obra:
 - `source`, `compiled`, `pdf`, `pdf_pages`, `pdf_page_size`;
 - `pdf_sha256`, `pdf_bytes`;
 - `links` (symlinks do hub);
+- `archived` (quarentena editorial, quando aplicável);
 - `audit`, `notes`.
 
 Categorias: `livro`, `podcast`, `template`, `academico`, `template-academico`.
@@ -127,3 +148,5 @@ Escopos: `literario`, `academico`.
 - QA técnico não avalia voz, ritmo, ética ou mérito literário.
 - Nenhuma publicação, envio à KDP ou validação externa.
 - O conteúdo literário não é versionado.
+- A quarentena é reversível; a exclusão definitiva de `v2`, do `Diário` e dos
+  backups depende de decisão editorial explícita e revisão do manifesto.

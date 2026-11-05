@@ -1,0 +1,275 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-11-05T22:20:29.291915+00:00",
+  "policy": "Quarentena reversível com hash; nenhuma edição com conteúdo único foi apagada permanentemente.",
+  "quarantine_root": "literatura/molambudos/_descarte/2026-11-05",
+  "canonical": {
+    "path": "literatura/molambudos/Molambudos_VictoriaRegia/main_kdp_pt_160x230mm.pdf",
+    "sha256": "3378f438d1124432b1b67fdf29161363e28276bb4a754c2a070bf5b054d56f4b",
+    "pages": 435,
+    "trim": "160x230mm"
+  },
+  "promotion": {
+    "path": "literatura/molambudos/Molambudos_VictoriaRegia/main_kdp_pt_160x230mm.pdf",
+    "old_sha256": "77aabe2e4e055d7f53fbef17dd3857e561f50f556a94f92da0d3ff039f4ea66f",
+    "new_sha256": "3378f438d1124432b1b67fdf29161363e28276bb4a754c2a070bf5b054d56f4b",
+    "old_quarantine_path": "literatura/molambudos/_descarte/2026-11-05/victoria-regia/pdf_antigo/main_kdp_pt_160x230mm_OLD_77aabe2e.pdf",
+    "pages": 435,
+    "trim": "160x230mm",
+    "reason": "PDF do caminho canônico estava sem metadados e com texto antigo; build corrigido promovido."
+  },
+  "items": [
+    {
+      "id": "molambudos-v2",
+      "category": "edicao_alternativa",
+      "original_path": "literatura/molambudos/Molambudos_v2",
+      "quarantine_path": "literatura/molambudos/_descarte/2026-11-05/edicoes_alternativas/Molambudos_v2",
+      "kind": "dir",
+      "files": 90,
+      "bytes": 2496131,
+      "tree_sha256": "c9d4295082fe57978acec6ebd0aa7e8b91216b8f281f7d5d428617ab76ef2f77",
+      "reason": "Edição experimental de 57 pp e 7 degraus; 9.265 palavras; 112 testes; não é cópia literal da canônica. Conteúdo único preservado."
+    },
+    {
+      "id": "molambudos-diario",
+      "category": "edicao_alternativa",
+      "original_path": "literatura/molambudos/Molambudos_v2_Diario",
+      "quarantine_path": "literatura/molambudos/_descarte/2026-11-05/edicoes_alternativas/Molambudos_v2_Diario",
+      "kind": "dir",
+      "files": 88,
+      "bytes": 87444705,
+      "tree_sha256": "807187fd0cfc744889502a1b019d621a06338547f78ef0e91458065cfa14bcd2",
+      "reason": "Edição ilustrada linear de 49 pp (Partes I–II), com gravuras de Piranesi e capas próprias; conteúdo visual único preservado."
+    },
+    {
+      "id": "victoria-regia-archive",
+      "category": "arquivo_historico",
+      "original_path": "literatura/molambudos/Molambudos_VictoriaRegia/_archive",
+      "quarantine_path": "literatura/molambudos/_descarte/2026-11-05/victoria-regia/_archive",
+      "kind": "dir",
+      "files": 2604,
+      "bytes": 318602985,
+      "tree_sha256": "20a96e2b0ef205b6c038b1f563f31bbdd746cf68ba92724bd24f2aa498c02285",
+      "reason": "Builds antigos, backups editoriais, capas antigas e EPUB v1.5; preservação histórica, não é edição corrente."
+    },
+    {
+      "id": "layout-main",
+      "category": "pdf_superado",
+      "original_path": "literatura/molambudos/Molambudos_VictoriaRegia/main.pdf",
+      "quarantine_path": "literatura/molambudos/_descarte/2026-11-05/victoria-regia/layouts_antigos/main.pdf",
+      "kind": "file",
+      "files": 1,
+      "bytes": 13514829,
+      "tree_sha256": "e1c2ca060ed113fc07a05d96807a49ae2c3440c4e2c272f1d7ee8cbb738e0a34",
+      "reason": "Layout não-KDP ou miolo anterior; substituído pelas edições KDP 160×230 mm."
+    },
+    {
+      "id": "layout-main_en",
+      "category": "pdf_superado",
+      "original_path": "literatura/molambudos/Molambudos_VictoriaRegia/main_en.pdf",
+      "quarantine_path": "literatura/molambudos/_descarte/2026-11-05/victoria-regia/layouts_antigos/main_en.pdf",
+      "kind": "file",
+      "files": 1,
+      "bytes": 13504962,
+      "tree_sha256": "ee44866478518be794feb72e42daffed005711ff9835b75bb6a37c944a0469e4",
+      "reason": "Layout não-KDP ou miolo anterior; substituído pelas edições KDP 160×230 mm."
+    },
+    {
+      "id": "layout-main_zh",
+      "category": "pdf_superado",
+      "original_path": "literatura/molambudos/Molambudos_VictoriaRegia/main_zh.pdf",
+      "quarantine_path": "literatura/molambudos/_descarte/2026-11-05/victoria-regia/layouts_antigos/main_zh.pdf",
+      "kind": "file",
+      "files": 1,
+      "bytes": 14798556,
+      "tree_sha256": "4f60080270e325a3df1343a2ee7afbd5f4c498902d1aacae0d1c227e0cbddb60",
+      "reason": "Layout não-KDP ou miolo anterior; substituído pelas edições KDP 160×230 mm."
+    },
+    {
+      "id": "layout-main_tri",
+      "category": "pdf_superado",
+      "original_path": "literatura/molambudos/Molambudos_VictoriaRegia/main_tri.pdf",
+      "quarantine_path": "literatura/molambudos/_descarte/2026-11-05/victoria-regia/layouts_antigos/main_tri.pdf",
+      "kind": "file",
+      "files": 1,
+      "bytes": 16049844,
+      "tree_sha256": "c49f9da29092017e798545fc2987e1cd99e0c979842ee5a4cdb69c5ecab52bc0",
+      "reason": "Layout não-KDP ou miolo anterior; substituído pelas edições KDP 160×230 mm."
+    },
+    {
+      "id": "layout-miolo_kdp_160x230mm",
+      "category": "pdf_superado",
+      "original_path": "literatura/molambudos/Molambudos_VictoriaRegia/miolo_kdp_160x230mm.pdf",
+      "quarantine_path": "literatura/molambudos/_descarte/2026-11-05/victoria-regia/layouts_antigos/miolo_kdp_160x230mm.pdf",
+      "kind": "file",
+      "files": 1,
+      "bytes": 13933505,
+      "tree_sha256": "e95562c09dfe3e21f4d2c065877e98469b05e30ab9fb5dad410b5107c07cdb8a",
+      "reason": "Layout não-KDP ou miolo anterior; substituído pelas edições KDP 160×230 mm."
+    },
+    {
+      "id": "victoria-regia-build",
+      "category": "build_antigo",
+      "original_path": "literatura/molambudos/Molambudos_VictoriaRegia/build",
+      "quarantine_path": "literatura/molambudos/_descarte/2026-11-05/victoria-regia/build",
+      "kind": "dir",
+      "files": 8,
+      "bytes": 27243802,
+      "tree_sha256": "05648be72f2e7a56aafa1322d74eeb4b2db6461c99ca390d2c6600b01e02a0c9",
+      "reason": "Diretório de build anterior; PDF corrigido já promovido ao caminho canônico. Conteúdo regenerável."
+    },
+    {
+      "id": "canon-backup-r398",
+      "category": "backup_editorial",
+      "original_path": "literatura/molambudos/_canon_backup_R398",
+      "quarantine_path": "literatura/molambudos/_descarte/2026-11-05/backups_canon/_canon_backup_R398",
+      "kind": "dir",
+      "files": 84,
+      "bytes": 467155,
+      "tree_sha256": "7e791a82c270dd37ef5988003a27f5c9370fcb2c846025af0f57e0f0aff251a5",
+      "reason": "Snapshot de fragmentos canônicos anterior; preservado para proveniência, não é fonte corrente."
+    },
+    {
+      "id": "archive-canon-r407",
+      "category": "backup_editorial",
+      "original_path": "literatura/molambudos/_archive_canon_R407",
+      "quarantine_path": "literatura/molambudos/_descarte/2026-11-05/backups_canon/_archive_canon_R407",
+      "kind": "dir",
+      "files": 2,
+      "bytes": 7279,
+      "tree_sha256": "3345d294416c4015c6a7cea3f40a66d8ffcd81fd1ef416197e02c884f5408ab0",
+      "reason": "Dois fragmentos canônicos arquivados (DOC-07, MEM-27); preservados para proveniência."
+    },
+    {
+      "id": "rascunho-molambudos.md",
+      "category": "rascunho",
+      "original_path": "literatura/molambudos/molambudos.md",
+      "quarantine_path": "literatura/molambudos/_descarte/2026-11-05/rascunhos/molambudos.md",
+      "kind": "file",
+      "files": 1,
+      "bytes": 262151,
+      "tree_sha256": "353512000a9589d246284900bcc83056e4ca0c8b1bd8967947a57ad7d8b19088",
+      "reason": "Rascunho/ficha crítica anterior; preservado para proveniência editorial."
+    },
+    {
+      "id": "rascunho-molambudos-1.txt",
+      "category": "rascunho",
+      "original_path": "literatura/molambudos/molambudos-1.txt",
+      "quarantine_path": "literatura/molambudos/_descarte/2026-11-05/rascunhos/molambudos-1.txt",
+      "kind": "file",
+      "files": 1,
+      "bytes": 14669,
+      "tree_sha256": "875e41f9b86b746cdadf039ca34cf8b44c405f82892d2c0e54aabc20d66fb225",
+      "reason": "Rascunho/ficha crítica anterior; preservado para proveniência editorial."
+    },
+    {
+      "id": "rascunho-molambudos_minha_versao.md.bak",
+      "category": "rascunho",
+      "original_path": "literatura/molambudos/molambudos_minha_versao.md.bak",
+      "quarantine_path": "literatura/molambudos/_descarte/2026-11-05/rascunhos/molambudos_minha_versao.md.bak",
+      "kind": "file",
+      "files": 1,
+      "bytes": 45716,
+      "tree_sha256": "25c2a1027d7a7bbb1eecb410eb393d30717cef1ec65921acb04af63905137715",
+      "reason": "Rascunho/ficha crítica anterior; preservado para proveniência editorial."
+    },
+    {
+      "id": "molambudos-template-antigo",
+      "category": "template_superado",
+      "original_path": "literatura/templates/molambudos-antigo",
+      "quarantine_path": "literatura/molambudos/_descarte/2026-11-05/template_antigo/molambudos-antigo",
+      "kind": "dir",
+      "files": 11,
+      "bytes": 3496374,
+      "tree_sha256": "79ada45ee774e5e15f55010c04d298e7ed55b5ca0d0aadb4faee4f0c682c4bc8",
+      "reason": "Template de 25 pp e 4 capítulos; objeto do parecer antigo, não descreve a edição VictoriaRegia."
+    }
+  ],
+  "deleted": [
+    {
+      "path": "literatura/molambudos/test.pdf",
+      "bytes": 96403,
+      "sha256": "f4d3c32486540a32068f8a99cd16b9c6a332a91ec406f3ff7fe5f221e28d4a13",
+      "reason": "Artefato de teste LaTeX; regenerável e sem valor editorial."
+    },
+    {
+      "path": "literatura/molambudos/test_err.pdf",
+      "bytes": 63080,
+      "sha256": "eccbedd48cdb2dc26c98c620c0f40ad45581584a5885cd4556672adb2f5cc05d",
+      "reason": "Artefato de teste LaTeX; regenerável e sem valor editorial."
+    },
+    {
+      "path": "literatura/molambudos/test.aux",
+      "bytes": 172,
+      "sha256": "e98db02fe94c182ee8fe0183778d9f97448109be83bb85b109c5210c09a5c52f",
+      "reason": "Artefato de teste LaTeX; regenerável e sem valor editorial."
+    },
+    {
+      "path": "literatura/molambudos/test.log",
+      "bytes": 8937,
+      "sha256": "779545c269a21af6d5f3fbefda57bcdcc708cd864bc17f4797304070c2769785",
+      "reason": "Artefato de teste LaTeX; regenerável e sem valor editorial."
+    },
+    {
+      "path": "literatura/molambudos/test_err.aux",
+      "bytes": 172,
+      "sha256": "e98db02fe94c182ee8fe0183778d9f97448109be83bb85b109c5210c09a5c52f",
+      "reason": "Artefato de teste LaTeX; regenerável e sem valor editorial."
+    },
+    {
+      "path": "literatura/molambudos/test_err.log",
+      "bytes": 8734,
+      "sha256": "2b128401b3d97faddbde83aebcf8a3ced65c0b50048f8495c9490e5436ecc572",
+      "reason": "Artefato de teste LaTeX; regenerável e sem valor editorial."
+    },
+    {
+      "path": "literatura/molambudos/test_err.out",
+      "bytes": 587,
+      "sha256": "28d0b1f38e0e185fadce68878a5d13a2573c10560ca773539aba9aaffe96e109",
+      "reason": "Artefato de teste LaTeX; regenerável e sem valor editorial."
+    },
+    {
+      "path": "literatura/molambudos/test_err.toc",
+      "bytes": 275,
+      "sha256": "e15e2722eec0ccda485c0fe9ce5d8d27f646173ce3d1fd69dec600da39531c09",
+      "reason": "Artefato de teste LaTeX; regenerável e sem valor editorial."
+    },
+    {
+      "path": "literatura/molambudos/capitulos/capitulo_02_exame_externo_interno.aux",
+      "bytes": 1134,
+      "sha256": "663cd210dadae8f0d258a6845cd151266c2c9250342cf102ae922eb9ff0c42f5",
+      "reason": "Arquivo auxiliar LaTeX; regenerável."
+    },
+    {
+      "path": "literatura/molambudos/capitulos/capitulo_03_achados_contaminacao.aux",
+      "bytes": 1147,
+      "sha256": "a0ddcb37a04927be39ed68d06968a67b0f9daa26d9e585b1e23541224807a429",
+      "reason": "Arquivo auxiliar LaTeX; regenerável."
+    },
+    {
+      "path": "literatura/molambudos/capitulos/capitulo_04_obra_completa.aux",
+      "bytes": 1124,
+      "sha256": "143e596c170b5623421f17d688cd1c10587eee4479e741bb0aa8af52dfa6189b",
+      "reason": "Arquivo auxiliar LaTeX; regenerável."
+    },
+    {
+      "path": "literatura/molambudos/anexos",
+      "bytes": 0,
+      "sha256": null,
+      "reason": "Diretório vazio."
+    },
+    {
+      "path": "literatura/molambudos/output",
+      "bytes": 0,
+      "sha256": null,
+      "reason": "Diretório vazio."
+    }
+  ],
+  "totals": {
+    "items": 15,
+    "files": 2895,
+    "bytes": 511882663,
+    "deleted_items": 13,
+    "deleted_bytes": 181765
+  }
+}
