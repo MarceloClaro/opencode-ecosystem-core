@@ -23880,6 +23880,35 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1062",
+      "objective": "R1061 — storage-operator: inventário, upload verificado e purge por manifesto",
+      "changes": [
+        "Manifesto SHA-256 por arquivo, allowlist de raiz e exclusão de segredos/.tmp.driveupload/.gdoc/desktop.ini.",
+        "Upload rclone com --checksum/--files-from, verificação remota e purge por unlink com hash reconferido.",
+        "Aprovação HMAC de uso único vinculada ao hash do manifesto; MCP com 7 ferramentas e perfil storage-operator.",
+        "Piloto real: 18 arquivos/13,5 MB enviados ao Drive, verificados; 20 arquivos/34,6 MB apagados; 15 testes.",
+        "C: permaneceu ~98%: Downloads não é o gargalo; próximo passo é inventário dos grandes consumidores."
+      ],
+      "score": 7.8,
+      "lessons": [
+        "Upload verificado e purge por manifesto funcionam, mas o ganho de espaço depende de escolher a raiz correta.",
+        "Pastas de sincronização (.tmp.driveupload), atalhos .gdoc e desktop.ini não devem entrar em manifesto de upload/purge.",
+        "A saída de rclone config create pode expor token; redigir e orientar revogação se o log for compartilhado.",
+        "Exclusão permanente exige manifesto + verificação remota + aprovação vinculada; não usar glob ou diretório."
+      ],
+      "timestamp": 1793846443.3458464,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [

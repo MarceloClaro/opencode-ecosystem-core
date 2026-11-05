@@ -818,6 +818,13 @@ def build_config() -> Dict[str, Any]:
                 "enabled": True,
                 "timeout": 30000,
             },
+            # R1061: storage-operator com manifesto, checksum e purge verificado.
+            "storage-operator": {
+                "type": "local",
+                "command": [".venv/bin/python", "-m", "integrations.storage_operator.mcp_server"],
+                "enabled": True,
+                "timeout": 120000,
+            },
             # R1060: desktop operado por allowlist e aprovação; seis tools, sem clipboard.
             "desktop-operator": {
                 "type": "local",

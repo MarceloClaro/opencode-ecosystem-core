@@ -10500,6 +10500,39 @@
       },
       "model": "opencode-go/deepseek-v4.1-flash"
     },
+    "storage-operator": {
+      "description": "Inventaria raízes allowlisted, envia ao Drive com manifesto e checksum, verifica o remoto e só então apaga arquivos do manifesto com aprovação humana.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/storage-operator.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1061_storage_operator.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code",
+          "opencode-zen/deepseek-v4-pro"
+        ],
+        "model_economy": {
+          "complexity": "critica",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4-pro",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4-pro"
+    },
     "story-mapper": {
       "description": "Agente especializado story-mapper",
       "mode": "subagent",
@@ -11078,6 +11111,26 @@
       "enabled": true,
       "timeout": 30000
     },
+    "storage-operator": {
+      "type": "local",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "integrations.storage_operator.mcp_server"
+      ],
+      "enabled": true,
+      "timeout": 120000
+    },
+    "desktop-operator": {
+      "type": "local",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "integrations.desktop_operator.mcp_server"
+      ],
+      "enabled": true,
+      "timeout": 60000
+    },
     "polymath-labs-mcp": {
       "type": "local",
       "command": [
@@ -11130,50 +11183,66 @@
       ],
       "enabled": true
     },
-    "desktop-operator": {
-      "type": "local",
-      "command": [
-        ".venv/bin/python",
-        "-m",
-        "integrations.desktop_operator.mcp_server"
-      ],
-      "enabled": true,
-      "timeout": 60000
-    },
     "mcp-time": {
       "type": "local",
-      "command": ["/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/federated/py-time/bin/mcp-server-time"],
+      "command": [
+        "/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/federated/py-time/bin/mcp-server-time"
+      ],
       "enabled": true,
       "timeout": 120000
     },
     "mcp-memory": {
       "type": "local",
-      "command": ["/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/federated/node/node_modules/.bin/mcp-server-memory"],
+      "command": [
+        "/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/federated/node/node_modules/.bin/mcp-server-memory"
+      ],
       "enabled": true,
       "timeout": 120000
     },
     "context7": {
       "type": "local",
-      "command": ["/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/federated/node/node_modules/.bin/context7-mcp", "--transport", "stdio"],
+      "command": [
+        "/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/federated/node/node_modules/.bin/context7-mcp",
+        "--transport",
+        "stdio"
+      ],
       "enabled": true,
       "timeout": 120000
     },
     "chroma": {
       "type": "local",
-      "command": ["/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/federated/py-chroma/bin/chroma-mcp", "--client-type", "persistent", "--data-dir", "/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/federated/data/chroma"],
+      "command": [
+        "/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/federated/py-chroma/bin/chroma-mcp",
+        "--client-type",
+        "persistent",
+        "--data-dir",
+        "/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/federated/data/chroma"
+      ],
       "enabled": true,
       "timeout": 120000
     },
     "qdrant": {
       "type": "local",
-      "command": ["/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/federated/py-qdrant/bin/mcp-server-qdrant", "--transport", "stdio"],
+      "command": [
+        "/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/federated/py-qdrant/bin/mcp-server-qdrant",
+        "--transport",
+        "stdio"
+      ],
       "enabled": true,
       "timeout": 120000,
-      "environment": {"QDRANT_URL": "http://127.0.0.1:6333"}
+      "environment": {
+        "QDRANT_URL": "http://127.0.0.1:6333"
+      }
     },
     "playwright": {
       "type": "local",
-      "command": ["/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/federated/node/node_modules/.bin/playwright-mcp", "--browser", "chromium", "--headless", "--isolated"],
+      "command": [
+        "/home/marceloclaro/opencode-ecosystem-core/.opencode/mcp/federated/node/node_modules/.bin/playwright-mcp",
+        "--browser",
+        "chromium",
+        "--headless",
+        "--isolated"
+      ],
       "enabled": true,
       "timeout": 120000
     },

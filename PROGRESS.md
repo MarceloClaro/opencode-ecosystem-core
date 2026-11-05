@@ -34,6 +34,14 @@ não comprova o aceite integral.
   GIFs opcionais de um ciclo, PNG/SVG acessíveis, manifesto e verificação local.
   [Relatório](reports/r1056/README.md); não é reauditoria do runtime R916.
 
+## Checkpoint R1061 — storage-operator e Drive
+
+- **15 testes** para manifesto, allowlist, aprovação e purge; MCP com 7 ferramentas e perfil `storage-operator`.
+- Upload real de **18 arquivos (13,5 MB)** para `gdrive:Downloads_2026-11-04_23-22-00`, verificado por `rclone check --checksum`.
+- Purge de **20 arquivos (34,6 MB)**: 18 enviados + 2 `.crdownload`; `.tmp.driveupload`, `.gdoc` e `desktop.ini` preservados.
+- `C:` continua ~98% cheio: Downloads não era o gargalo. Próximo passo é inventariar os grandes consumidores do `C:` somente leitura.
+- Manifesto com nomes pessoais não versionado; token fora do repositório; nada publicado.
+
 ## Checkpoint R1060 — desktop-operator com política
 
 - MCP local com **seis ferramentas** (`status`, `list_apps`, `snapshot`, `wait`, `click`, `type`), allowlist fechada por padrão, aprovação humana de uso único e redação; nada de clipboard, screenshot, launch ou mouse.
