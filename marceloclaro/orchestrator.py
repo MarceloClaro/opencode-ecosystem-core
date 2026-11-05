@@ -2546,6 +2546,56 @@ class MarceloClaroOrchestrator:
         }
         return report
 
+    def production_center_action(self, config: Dict[str, Any]) -> Dict[str, Any]:
+        """Coordena o Centro de Produção Global com atenção executiva.
+
+        Operações: ``status``, ``plan`` e ``run``. ``run`` executa apenas o
+        ciclo de planejamento/gates; código de terceiro continua exigindo
+        autorização externa. Nenhuma autoavaliação promove confiança.
+        """
+        from marceloclaro.production_center import ProductionCenter
+        if not isinstance(config, dict):
+            raise ValueError("configuração do Centro de Produção deve ser objeto")
+        allowed = {"operation", "goal", "risk_level", "budget", "consent", "max_steps"}
+        if set(config) - allowed:
+            raise ValueError("campos desconhecidos no Centro de Produção")
+        operation = config.get("operation")
+        if operation not in {"status", "plan", "run"}:
+            raise ValueError("operação deve ser status, plan ou run")
+        center = ProductionCenter(bus=metabus, max_steps=config.get("max_steps", 8))
+        if operation == "status":
+            report = center.status()
+        else:
+            goal = config.get("goal")
+            if not isinstance(goal, str) or not goal.strip():
+                raise ValueError("goal é obrigatório para plan/run")
+            risk_level = config.get("risk_level", "low")
+            budget = config.get("budget", 8.0)
+            consent = config.get("consent") is True
+            if operation == "plan":
+                report = center.plan(goal, risk_level=risk_level, budget=budget,
+                                     consent=consent)
+            else:
+                report = center.run(goal, risk_level=risk_level, budget=budget,
+                                    consent=consent,
+                                    max_steps=config.get("max_steps", 8))
+        observation = {
+            "status": report.get("status"),
+            "method": "production:" + operation,
+            "stage": report.get("stage"),
+            "selected_adapter": report.get("selected_adapter"),
+            "confidence_promoted": False,
+            "externally_validated": False,
+        }
+        report["metacognition"] = {
+            **self._record_knowledge_outcome(
+                "ecosystem.production", operation + ":" + str(config.get("goal", ""))[:500],
+                observation),
+            "confidence_promoted": False,
+            "externally_validated": False,
+        }
+        return report
+
     def diagnose(self, corpus: str, domain: str = "",
                  goals: Optional[List[Dict[str, Any]]] = None,
                  deep: bool = False,

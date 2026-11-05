@@ -39,7 +39,7 @@ Nenhuma publicação ou validação externa.
   - o pipeline é chinês e usa GSAP via CDN no build da composição.
 - Nenhum render foi executado. A skill não está pronta para uso no Core hoje.
 
-## 3. image-story-video-wizard — avaliado, pronto para instalação externa
+## 3. image-story-video-wizard — instalado externamente
 
 - Clone isolado:
   `~/.cache/opencode-pilot/external-evals/image-story-video-wizard`.
@@ -52,7 +52,9 @@ Nenhuma publicação ou validação externa.
 - Natureza: máquina de estados de 16 fases; não executa imagem, TTS ou render
   sozinha. Depende de Codex/WorkBuddy, Doubao Seed-TTS, geração de imagem e
   HyperFrames nas etapas externas.
-- Decisão: candidato a instalação externa; não foi instalado nesta rodada.
+- Decisão: **instalado externamente** em
+  `~/.agents/skills/image-story-video-wizard` e carregado pelo OpenCode; o
+  carregamento foi validado pela skill tool.
 
 ## 4. distilly — avaliado, gate de consentimento
 
@@ -91,7 +93,7 @@ Nenhuma publicação ou validação externa.
 | Item | Decisão |
 |---|---|
 | Archify | **Instalado externamente e pronto**; usar via skill `archify`. |
-| image-story-video-wizard | **Pronto para instalação externa**; não instalado. |
+| image-story-video-wizard | **Instalado externamente** em `~/.agents/skills/`; carregamento validado. |
 | hbg-life-simulation | **Bloqueado** por skills ausentes, Chrome e proxy de imagem. |
 | distilly | **Não integrar**; exige gate de consentimento/privacidade. |
 | opus-video-skills | **Externo**; depende de Chrome. |
@@ -110,8 +112,8 @@ Nenhuma publicação ou validação externa.
 
 ## 9. Próximo passo
 
-1. Se autorizado, instalar `image-story-video-wizard` em
-   `~/.agents/skills/image-story-video-wizard` e validar o carregamento.
+1. `image-story-video-wizard` já está instalado em
+   `~/.agents/skills/image-story-video-wizard` e carregado.
 2. Para `hbg-life-simulation`, decidir se as skills `/hyperframes`,
    `/media-use`, `/code-video-visual-qa` e `/imagegen` serão instaladas e se o
    proxy local será configurado com consentimento.
