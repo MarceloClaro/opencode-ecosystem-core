@@ -119,8 +119,8 @@ foi reescrito.
   melhor a entrada, mas está incompleta.
 - **Galerada humana.** Persistem underfull vbox e 50 underfull hbox; é preciso
   revisar viúvas, órfãs, aberturas de página e ilustrações em resolução integral.
-- **Acessibilidade digital.** O PDF não é tagged. Falta EPUB corrente; o único
-  EPUB existente é v1.5, no arquivo.
+- **Acessibilidade digital.** O PDF não é tagged. A rodada R1074 gerou um EPUB
+  de leitura (84 fragmentos), mas ele não passou por EPUBCheck; não há PDF/UA.
 - **Preflight KDP.** Capa, sangria, código de barras, ISBN e página final ainda
   exigem conferência no preflight oficial. O Book Studio não certifica PDF/X.
 

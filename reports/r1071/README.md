@@ -121,10 +121,12 @@ tests/test_metacognitive_superhuman.py
 1. **Galerada humana**: underfull boxes, viúvas/órfãs, aberturas e imagens.
 2. **Edição de voz**: revalidar DOC/CONT no texto atual de 84 fragmentos.
 3. **Saturação de motivos**: decisão editorial, não automática.
-4. **EPUB corrente**: a edição VictoriaRegia não tem EPUB atual; o arquivo no
-   `_archive` é v1.5. Gerar um novo exige fonte única e validação.
-5. **PDF tagged/acessibilidade**: ausente; relevante para edição digital.
-6. **KDP preflight**: capa, barcode, bleed, ISBN e página final.
+4. **EPUB**: R1074 gerou EPUB de leitura a partir dos 84 fragmentos; falta
+   EPUBCheck e revisão humana. O antigo EPUB v1.5 foi excluído.
+5. **PDF tagged/acessibilidade**: ausente; tentativa R1074 bloqueada pelo
+   toolchain (`luaotfload`/`tagpdf`).
+6. **KDP preflight**: R1074 mediu; capa em FAIL (163 DPI e área de barras).
+   Ver `reports/r1074/README.md`.
 
 ## 9. Limites
 
