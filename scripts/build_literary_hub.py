@@ -358,8 +358,11 @@ python3 -m marceloclaro.book_studio build . --engine latex --timeout 300
 ## Release
 
 - `release/2026-11-05/` — PDFs PT/EN/ZH/TRI, capas completas, `metadata.json`, `SHA256SUMS.txt` e `RELEASE_NOTE.md`.
+- `release/2026-11-05/epub/` — EPUB de leitura validado localmente (84 fragmentos, 5 partes, 0 links quebrados); fonte e manifesto incluídos.
+- `release/2026-11-05/preflight/` — preflight KDP local com **status FAIL**: capa a ~163 DPI, reserva de barras 2,15×0,95 in e posição incorreta para LTR. Não enviar à KDP sem corrigir.
 - Edições alternativas, builds antigos e backups foram excluídos definitivamente em 2026-11-05; manifesto e hash por arquivo em `reports/r1073/`.
 - Revisão editorial e decisão de acervo: `molambudos/REVISAO_FINAL.md` e `reports/r1073/REVISAO_FINAL.md`.
+- EPUB e preflight: `reports/r1074/README.md`.
 
 ## Templates literários
 
@@ -375,9 +378,10 @@ python3 -m marceloclaro.book_studio build . --engine latex --timeout 300
 
 ## Auditoria
 
-- Molambudos: `reports/r1071/README.md`, `reports/r1073/README.md` e `molambudos/victoria-regia/BOOK_STUDIO_AUDIT.md`.
+- Molambudos: `reports/r1071/README.md`, `reports/r1073/README.md`, `reports/r1074/README.md` e `molambudos/victoria-regia/BOOK_STUDIO_AUDIT.md`.
 - Revisão final e decisão de acervo: `molambudos/REVISAO_FINAL.md` e `reports/r1073/REVISAO_FINAL.md`.
 - Registro de exclusão definitiva: `reports/r1073/DELETION.md` e `reports/r1073/manifest_quarentena.json`.
+- EPUB e preflight KDP: `reports/r1074/README.md`, `epub_manifest.json` e `preflight_kdp.json`.
 - O parecer antigo `literatura/molambudos/auditorias/revisao-2026-07.md` descreve a versão de 4 capítulos; não usar para a edição VictoriaRegia.
 - Checklist mínimo por obra: metadados, trim, fontes embutidas, TOC/bookmarks, duplicações, aspas/dashes, capa/lombada, EPUB e KDP preflight.
 

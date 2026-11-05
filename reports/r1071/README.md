@@ -35,6 +35,10 @@ build corrigido `3378f438` e excluído na limpeza autorizada; o hash permanece
 em `reports/r1073/`. Release local:
 `literatura/molambudos/release/2026-11-05/`.
 
+Atualização R1074: EPUB de leitura validado localmente; preflight KDP com
+**status FAIL** (capa a ~163 DPI, reserva de barras 2,15×0,95 in e posição
+inferior esquerda). Não enviar à KDP sem corrigir. Ver `reports/r1074/README.md`.
+
 ## 3. QA técnico do KDP
 
 - 435 páginas; 453,543 × 651,968 pts = **160 × 230 mm**.

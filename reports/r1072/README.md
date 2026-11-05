@@ -67,6 +67,18 @@ edições excluídas. A escolha da edição canônica é editorial e pertence ao
 - A exclusão é irreversível; o release e o PDF canônico não dependem dos itens
   excluídos.
 
+### EPUB e preflight KDP
+
+- `literatura/molambudos/release/2026-11-05/epub/Molambudos_PT.epub` — 84
+  fragmentos, 5 partes, 105 links no TOC (0 quebrados), 7 imagens, 54.663
+  palavras (96,9% da canônica). Validação estrutural local; sem EPUBCheck.
+- `literatura/molambudos/release/2026-11-05/preflight/preflight_kdp.json` —
+  **status FAIL**: capa a ~163 DPI, reserva de barras 2,15×0,95 in e posição
+  inferior esquerda (LTR pede direita). Não enviar à KDP sem corrigir.
+- Relatório e evidências: `reports/r1074/README.md`.
+- PDF tagged: bloqueado pelo toolchain (`luaotfload` ausente; `tagpdf` aborta na
+  mudança de versão PDF). Nenhum PDF/UA foi produzido.
+
 ### Podcast
 
 `Molambudos — Podcast (26 episódios + pacote editorial)`:

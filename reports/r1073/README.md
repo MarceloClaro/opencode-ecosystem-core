@@ -57,3 +57,13 @@ do autor em 2026-11-05.
 
 A exclusão é irreversível. Os hashes provam o que existia e foi removido; não
 provam mérito literário, aprovação editorial ou validação externa.
+
+## Atualização R1074
+
+- EPUB de leitura gerado da canônica e validado localmente (84 fragmentos, 5
+  partes, 0 links quebrados). Ver `reports/r1074/README.md`.
+- Preflight KDP local com **status FAIL**: capa a ~163 DPI, reserva de barras
+  2,15×0,95 in e posição inferior esquerda. Não enviar à KDP sem corrigir.
+- PDF tagged bloqueado pelo toolchain; nenhum PDF/UA produzido.
+- Release atualizado em `literatura/molambudos/release/2026-11-05/` com EPUB e
+  preflight.

@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-11-05T22:45:00Z",
+  "status": "blocked",
+  "attempts": [
+    {
+      "engine": "lualatex",
+      "packages": ["accessibility", "tagpdf"],
+      "error": "module 'luaotfload-main' not found; Font TU/lmr/m/n/10 not loadable; fatal error, no output PDF",
+      "evidence": "reports/r1074/evidence/tagged_lualatex.log"
+    },
+    {
+      "engine": "pdflatex",
+      "packages": ["accessibility", "tagpdf"],
+      "error": "Package tagpdf Error: The PDF version has changed after the loading of tagpdf from 2.0 to 2.6; fatal error, no output PDF",
+      "evidence": "reports/r1074/evidence/tagged_pdflatex.log"
+    }
+  ],
+  "conclusion": "Nenhum PDF tagged foi produzido nesta rodada. O EPUB é a entrega de acessibilidade digital. PDF/UA exige corrigir o TeX Live (luaotfload) ou usar pipeline dedicado de tagging.",
+  "next_steps": [
+    "Corrigir a instalação do LuaLaTeX/luaotfload e testar tagpdf em documento mínimo.",
+    "Ou usar pipeline dedicado de PDF/UA (tagpdf + verificação veraPDF) em projeto separado.",
+    "Não declarar conformidade PDF/UA sem verificação externa."
+  ],
+  "limits": [
+    "O PDF canônico permanece Tagged: no.",
+    "Nenhuma declaração de conformidade PDF/UA ou WCAG foi feita."
+  ]
+}
