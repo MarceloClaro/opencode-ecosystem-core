@@ -33,7 +33,10 @@ licença, commit (quando houver), gates e limitações.
 A cabeça `tags` normaliza acentos e evita o falso positivo lexical: para
 `produzir um vídeo de animação com p5`, o centro seleciona
 `opus-video-skills`; para `produzir um diagrama da arquitetura do Core`,
-seleciona `archify`.
+seleciona `archify`; para `criar uma história em imagens com narração`,
+seleciona `image-story-video-wizard`. Com `--safe-checks`, o `archify doctor`
+e o `project_state.py --help` executam e retornam `returncode=0`; render, OAuth
+e coletor seguem bloqueados.
 
 ## 3. Evidência REA
 
