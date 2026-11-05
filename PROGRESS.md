@@ -34,6 +34,14 @@ não comprova o aceite integral.
   GIFs opcionais de um ciclo, PNG/SVG acessíveis, manifesto e verificação local.
   [Relatório](reports/r1056/README.md); não é reauditoria do runtime R916.
 
+## Checkpoint R1063 — assistente acessível (fundação)
+
+- Ponte **UI Automation do Windows** (list/snapshot/read/focused/invoke) com allowlist, confirmação e redação; testada em Notepad/Explorer.
+- **Voz** WSLg: microfone `RDPSource`, ASR faster-whisper local e TTS Edge em `RDPSink`; comandos “Core, …” com confirmação falada.
+- **Memória** Fernet de 24 h para eventos/transcrições; `routine` captura janela + voz sem pixels/áudio bruto.
+- 11 testes; `routine --once` executado; **24 h reais, replay autônomo e gravação de tela não homologados**.
+- Nada publicado; sem validação externa.
+
 ## Checkpoint R1061 — storage-operator e Drive
 
 - **15 testes** para manifesto, allowlist, aprovação e purge; MCP com 7 ferramentas e perfil `storage-operator`.
