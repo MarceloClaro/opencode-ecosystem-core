@@ -75,6 +75,8 @@ rodada. Ver `reports/r1074/tagged_pdf_status.json`.
    A maior arte ativa é 1046×1504 px; não há fonte em 300 DPI no projeto.
    Os painéis maiores estavam no `_archive` excluído em 2026-11-05. Se existir
    cópia externa, usá-la; caso contrário, a capa precisa ser recriada.
+   Um candidato parcial com a arte limpa e a reserva correta foi gerado em
+   `Molambudos_VictoriaRegia/kdp_candidate/`; ele ainda falha a 137 DPI.
 2. Remover o código/ISBN fictício de `contracapa.png`.
 3. Mover a reserva para o canto inferior direito da contracapa, com
    **2,0×1,2 in**, a 0,25 in das bordas de corte.

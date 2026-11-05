@@ -115,6 +115,19 @@ def test_local_epub_and_release_if_present():
     assert sha256(canonical) == CANONICAL_SHA
 
 
+def test_candidate_cover_improves_barcode_but_fails_resolution():
+    data = load(REPORT / "preflight_kdp_candidate.json")
+    assert data["status"] == "fail"
+    assert data["summary"]["fail"] == 1
+    checks = {check["id"]: check for check in data["checks"]}
+    assert checks["barcode_area_size"]["status"] == "pass"
+    assert checks["barcode_position"]["status"] == "pass"
+    assert checks["barcode_fake_art"]["status"] == "pass"
+    assert checks["cover_resolution"]["status"] == "fail"
+    assert data["source_dimensions"] == [2000, 1405]
+    assert len(data["candidate_sha256"]) == 64
+
+
 def test_release_note_discloses_not_kdp_ready():
     if not RELEASE.is_dir():
         pytest.skip("conteúdo literário gitignored não está presente")

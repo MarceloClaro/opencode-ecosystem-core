@@ -2,7 +2,8 @@
 
 **Data:** 2026-11-05  
 **Status:** EPUB concluído e validado localmente; impressão **não KDP-ready**;
-PDF tagged **bloqueado pelo toolchain**.
+candidato parcial de capa reduz as falhas de 3 para 1 (resolução); PDF tagged
+**bloqueado pelo toolchain**.
 
 ## 1. EPUB
 
@@ -83,7 +84,29 @@ Evidências: `reports/r1074/evidence/tagged_lualatex.log` e
 O EPUB é a entrega de acessibilidade digital desta rodada. Um PDF/UA exige
 corrigir o TeX Live (`luaotfload`) ou usar um pipeline dedicado de tagging.
 
-## 4. Caminho de correção
+## 4. Candidato de capa (parcial)
+
+A arte fornecida em `literatura/molambudos/capas/Sem nome (3012 x 4425 px) (37 x 26 cm).png`
+é o spread completo limpo (sem o código fictício), mas o arquivo real tem
+**2000×1405 px**, não 3012×4425 — cerca de **137 DPI** no spread.
+
+Foi gerado um candidato sem tocar na capa canônica:
+
+- `literatura/molambudos/Molambudos_VictoriaRegia/kdp_candidate/capa_candidata.pdf`
+- SHA-256: `5f8df3b537ea8d0b…`
+- Página 13,8706×9,3051 in; imagem 1905×1277 (137 DPI).
+- Reserva de barras **2,0×1,2 in** no canto inferior direito da contracapa,
+  0,25 in do corte e da lombada.
+- Código/ISBN fictício removido (a arte de origem é limpa).
+
+Resultado: `preflight_kdp_candidate.json` — **6 passes, 1 falha**. A única falha
+restante é a resolução (137 DPI < 300 DPI). O candidato **não substitui** a capa
+canônica e não é KDP-ready.
+
+Se o original real de 3012×4425 px (ou o arquivo de ~12,4 MB) existir, ele deve
+ser usado para recompilar o candidato em 300 DPI.
+
+## 5. Caminho de correção
 
 1. Reexportar capa e contracapa a 300 DPI (ou vetor).
    A maior arte ativa é 1046×1504 px; não há fonte em 300 DPI no projeto.
@@ -97,7 +120,7 @@ corrigir o TeX Live (`luaotfload`) ou usar um pipeline dedicado de tagging.
 6. Para o miolo: garantir sangria nas páginas 1/435 ou inserir a arte dentro da
    área segura; substituir ícones de 105 DPI por fontes maiores/vetoriais.
 
-## 5. Limites
+## 6. Limites
 
 - Preflight local; não substitui o previewer oficial da KDP.
 - Nenhuma publicação, upload ou distribuição.

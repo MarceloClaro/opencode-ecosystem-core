@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-11-05T23:03:45.957419+00:00",
+  "status": "fail",
+  "candidate": "literatura/molambudos/Molambudos_VictoriaRegia/kdp_candidate/capa_candidata.pdf",
+  "candidate_sha256": "5f8df3b537ea8d0bfda915dee49b1dcf90c345d90bd792e762ec62d9a26aeeb9",
+  "source": "literatura/molambudos/capas/Sem nome (3012 x 4425 px) (37 x 26 cm).png",
+  "source_dimensions": [
+    2000,
+    1405
+  ],
+  "checks": [
+    {
+      "id": "cover_size",
+      "status": "pass",
+      "detail": "13.8706 x 9.3051 in",
+      "evidence": {
+        "page_size": "998.684 x 669.967 pts"
+      }
+    },
+    {
+      "id": "cover_fonts",
+      "status": "pass",
+      "detail": "2 fontes; todas embutidas",
+      "evidence": [
+        {
+          "name": "LTQDEO+CMSSBX10",
+          "embedded": true
+        },
+        {
+          "name": "XGDAYX+CMSS8",
+          "embedded": true
+        }
+      ]
+    },
+    {
+      "id": "cover_isbn",
+      "status": "pass",
+      "detail": "ISBN 9798189170492 presente",
+      "evidence": {
+        "found": true
+      }
+    },
+    {
+      "id": "barcode_area_size",
+      "status": "pass",
+      "detail": "2.0 x 1.2 in",
+      "evidence": {
+        "reserve_in": [
+          2.0,
+          1.2
+        ]
+      }
+    },
+    {
+      "id": "barcode_position",
+      "status": "pass",
+      "detail": "canto inferior direito da contracapa; 0.25 in do corte e da lombada",
+      "evidence": {
+        "position": "lower-right",
+        "x_in": 4.174,
+        "y_in": 0.375
+      }
+    },
+    {
+      "id": "barcode_fake_art",
+      "status": "pass",
+      "detail": "arte de origem limpa; sem código/ISBN fictício",
+      "evidence": {
+        "source_clean": true
+      }
+    },
+    {
+      "id": "cover_resolution",
+      "status": "fail",
+      "detail": "imagem 1905x1277 no spread = 137 DPI; mínimo KDP 300 DPI",
+      "evidence": {
+        "images": [
+          {
+            "width": 1905,
+            "height": 1277,
+            "xppi": 137,
+            "yppi": 137
+          }
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "pass": 6,
+    "warn": 0,
+    "fail": 1
+  },
+  "note": "Candidato corrige área de barras (2,0x1,2 no canto inferior direito) e remove o código fictício. A resolução de 137 DPI ainda falha; o original 3012x4425 não está no arquivo fornecido (2000x1405).",
+  "limits": [
+    "Não substitui a capa canônica.",
+    "Não é KDP-ready enquanto a arte não tiver 300 DPI.",
+    "Preflight local; confirmar no previewer KDP."
+  ]
+}
