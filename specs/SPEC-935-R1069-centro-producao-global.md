@@ -24,14 +24,15 @@ passo de uma produção e de adaptar skills externas sem copiar código de terce
 
 Pesos convexos:
 
-- `goal` 0,15 — alinhamento semântico entre ação e objetivo;
+- `goal` 0,10 — alinhamento semântico entre ação e objetivo;
 - `stage` 0,20 — ação pertence ao estágio atual;
 - `evidence` 0,15 — ganho de evidência;
-- `risk` 0,15 — segurança e reversibilidade;
+- `risk` 0,15 — segurança e reversibilidade; o risco do adaptador cai de
+  0,65 para 0,30 quando o consentimento já foi dado;
 - `confidence` 0,10 — confiança histórica declarada;
 - `budget` 0,05 — custo relativo ao orçamento;
 - `progress` 0,10 — capacidade de avançar a produção;
-- `tags` 0,10 — casamento de palavras-chave do adaptador com o objetivo,
+- `tags` 0,15 — casamento de palavras-chave do adaptador com o objetivo,
   normalizado sem acentos.
 
 Gates rígidos: indisponibilidade, consentimento ausente, orçamento excedido,
@@ -58,7 +59,7 @@ O centro devolve `awaiting_consent` em vez de inventar autorização.
 | `image-story-video-wizard` | MIT | pronto; instalado e carregado |
 | `opus-video-skills` | MIT | pronto; Chromium do cache Playwright encontrado |
 | `kdense-scientific-agent-skills` | MIT | pronto; catálogo espelhado |
-| `hbg-life-simulation` | MIT | bloqueado apenas pelo proxy local (`readiness: not-configured`); `hyperframes`, `media-use`, `code-video-visual-qa` e `imagegen` presentes |
+| `hbg-life-simulation` | MIT | **pronto**: `hyperframes`, `media-use`, `code-video-visual-qa` e `imagegen` presentes; CLIProxyAPI autenticado e `readiness: ready` |
 | `reel-video` | MIT | bloqueado: `grok` e `codex` ausentes |
 | `distilly` | MIT | gate de consentimento/privacidade |
 
@@ -96,9 +97,12 @@ para o diretório externo e prepara um handoff auditável.
 11. Testes verdes.
 
 **Resultado:** **107 passed** em R1069, R640, Transformer, atenção, autonomia,
-metacognição, QA de vídeo e imagegen. Execução real do centro: `specify → route
-→ execute:archify → verify → reflect → deliver`, com `archify doctor` via safe
-check, `confidence_promoted=false` e `external_validation=false`.
+metacognição, QA de vídeo e imagegen. Execução real do centro com
+`hbg-life-simulation`: `specify → route → execute:hbg → verify → reflect →
+deliver`, `readiness=ready` no safe check e `confidence_promoted=false`.
+`imagegen` gerou um PNG 1536×1024 (2,2 MB) em 22,3 s com `gpt-image-2` pelo
+CLIProxyAPI local autenticado; a primeira tentativa falhou com 502 porque o
+proxy tinha 0 auth entries.
 
 ## 7. Limites
 

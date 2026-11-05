@@ -72,9 +72,9 @@ core.production_center_action({"operation": "plan", "goal": "produzir um artigo"
 
 - `archify` — diagramas HTML interativos; Apache-2.0; instalado.
 - `image-story-video-wizard` — máquina de estados de 16 fases; MIT; instalado.
-- `hbg-life-simulation` — pipeline HyperFrames/TTS/legendas/QA; MIT; bloqueado
-  apenas por `imagegen` e proxy local; `hyperframes`, `media-use` e
-  `code-video-visual-qa` estão presentes.
+- `hbg-life-simulation` — pipeline HyperFrames/TTS/legendas/QA; MIT; pronto,
+  com `hyperframes`, `media-use`, `code-video-visual-qa`, `imagegen` e
+  CLIProxyAPI local autenticado.
 - `code-video-visual-qa` — QA Core-native com ffprobe/ffmpeg; substitui a
   dependência homônima do hbg.
 - `imagegen` — cliente OpenAI-compatible `generate`/`generate-batch`; usa

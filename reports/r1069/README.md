@@ -36,9 +36,16 @@ A cabeça `tags` normaliza acentos e evita o falso positivo lexical: para
 `produzir um vídeo de animação com p5`, o centro seleciona
 `opus-video-skills`; para `produzir um diagrama da arquitetura do Core`,
 seleciona `archify`; para `criar uma história em imagens com narração`,
-seleciona `image-story-video-wizard`. Com `--safe-checks`, o `archify doctor`
-e o `project_state.py --help` executam e retornam `returncode=0`; render, OAuth
-e coletor seguem bloqueados.
+seleciona `image-story-video-wizard`; para
+`produzir um vídeo HyperFrames com TTS e legendas`, seleciona
+`hbg-life-simulation`. Com `--safe-checks`, o `archify doctor`,
+o `project_state.py --help` e o `hbg ready` executam e retornam
+`returncode=0`; render, OAuth e coletor seguem bloqueados.
+
+Com o proxy autenticado, o `imagegen` gerou um PNG 1536×1024 (2,2 MB) em 22,3 s
+com `gpt-image-2`. O primeiro teste falhou com `502 unknown provider` porque o
+proxy ainda tinha `0 auth entries`; o `ready` do CLIProxyAPI só confirma HTTP
+200, não autenticação ou entitlement.
 
 ## 3. Evidência REA
 
@@ -64,9 +71,9 @@ evidência. Isso é um limite do transporte, não uma falha silenciosa.
 | `image-story-video-wizard` | MIT; 9 testes; estado `VALID` | Instalado em `~/.agents/skills/image-story-video-wizard` e carregado. |
 | `opus-video-skills` | MIT; Chromium Playwright encontrado; ffmpeg presente | Pronto; nenhuma instalação extra de Chrome necessária. |
 | `kdense-scientific-agent-skills` | MIT; 177 SKILL.md | Já integrado; commit local = HEAD. |
-| `hbg-life-simulation` | MIT; 10 `.mjs` válidos; estilo 1920×1080 | Bloqueado apenas pelo proxy local (`readiness: not-configured`); `hyperframes`, `media-use`, `code-video-visual-qa` e `imagegen` presentes. |
+| `hbg-life-simulation` | MIT; 10 `.mjs` válidos; estilo 1920×1080 | **Pronto**: `hyperframes`, `media-use`, `code-video-visual-qa` e `imagegen` presentes; CLIProxyAPI autenticado e `readiness: ready`. |
 | `code-video-visual-qa` | implementação Core-native | QA técnico com `ffprobe`/`ffmpeg`; frames, black frames, silêncio e loudness | Criado como adaptação original, sem copiar o hbg. |
-| `imagegen` | implementação Core-native | Cliente OpenAI-compatible `generate`/`generate-batch` | Instalado em `~/.agents/skills/imagegen` e linkado em `~/.codex/skills/.system/imagegen`. |
+| `imagegen` | implementação Core-native | Cliente OpenAI-compatible `generate`/`generate-batch` | Instalado em `~/.agents/skills/imagegen` e linkado em `~/.codex/skills/.system/imagegen`; teste real gerou PNG 1536×1024 (2,2 MB) em 22,3 s com `gpt-image-2`. |
 | `reel-video` | MIT; CLI/review board | Bloqueado: `grok` e `codex` ausentes; decisão adiada. |
 | `distilly` | MIT; 40 testes rápidos | Gate de consentimento/privacidade; nenhum perfil criado. |
 | OpenDesign / Paperclip | Apache-2.0 / MIT | Mantidos fora do Core. |
@@ -84,8 +91,12 @@ Decisão:
   `skills/imagegen/`, com `generate`/`generate-batch`; o caminho
   `~/.codex/skills/.system/imagegen` aponta para ele.
 - CLIProxyAPI 7.2.119 foi instalado com SHA-256 registrado, permissões 700/600
-  e bind localhost-only. O device flow do Codex foi iniciado e aguarda o
-  operador concluir o login; o proxy ainda não foi iniciado.
+  e bind localhost-only. O OAuth do Codex CLI foi concluído e o OAuth do
+  próprio proxy também; o proxy está rodando, com 1 auth entry e 11 modelos
+  (incluindo `gpt-image-2`).
+- O primeiro teste de imagem falhou com `502 unknown provider` porque o proxy
+  tinha `0 auth entries`; depois do OAuth do proxy, o `imagegen` gerou um PNG
+  1536×1024 (2,2 MB) em 22,3 s.
 - O pipeline é chinês e usa GSAP via CDN.
 - `media-use` recebeu alerta Socket/Snyk no instalador; permanece externo e
   não foi executado.
@@ -143,7 +154,7 @@ tests/test_r1069_imagegen.py
 1. Reiniciar/reconectar o OpenCode para carregar `ecosystem_production` e a
    skill `producao-global`.
 2. Usar `/producao plan` e `--safe-checks` antes de qualquer produção externa.
-3. Para o `hbg`, concluir o device flow do Codex já iniciado; depois rodar
-   `start`, `smoke-test` e um teste único de imagem pelo `imagegen`.
+3. O `hbg` está pronto para um projeto real; o próximo teste é um projeto
+   pequeno de imagem-story ou HyperFrames com revisão humana.
 4. Para o `reel-video`, decidir se `grok`/`codex` serão instalados e
-   autenticados.
+   autenticados; o `codex` CLI já está logado, mas o `grok` continua ausente.

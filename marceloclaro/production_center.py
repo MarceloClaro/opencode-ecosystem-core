@@ -128,7 +128,8 @@ class ProductionCenter:
                                 f"({adapter.get('kind', 'unknown')}): {keywords}; "
                                 f"{adapter.get('notes', '')}"),
                 "stage": "execute",
-                "risk": 0.65 if requires else 0.25,
+                "risk": (0.65 if requires and not state.consent
+                         else 0.30 if requires else 0.25),
                 "cost": 1.0,
                 "evidence_gain": 0.75,
                 "confidence": 0.6,

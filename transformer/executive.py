@@ -22,14 +22,14 @@ from .embedder import TaskEmbedder, _tokenize
 HEAD_NAMES = ("goal", "stage", "evidence", "risk", "confidence", "budget",
               "progress", "tags")
 HEAD_WEIGHTS = {
-    "goal": 0.15,
+    "goal": 0.10,
     "stage": 0.20,
     "evidence": 0.15,
     "risk": 0.15,
     "confidence": 0.10,
     "budget": 0.05,
     "progress": 0.10,
-    "tags": 0.10,
+    "tags": 0.15,
 }
 DEFAULT_PROGRESS = {
     "specify": 0.6, "route": 0.5, "execute": 0.8, "verify": 0.7,
