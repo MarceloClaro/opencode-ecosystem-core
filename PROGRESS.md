@@ -34,6 +34,13 @@ não comprova o aceite integral.
   GIFs opcionais de um ciclo, PNG/SVG acessíveis, manifesto e verificação local.
   [Relatório](reports/r1056/README.md); não é reauditoria do runtime R916.
 
+## Checkpoint R1060 — desktop-operator com política
+
+- MCP local com **seis ferramentas** (`status`, `list_apps`, `snapshot`, `wait`, `click`, `type`), allowlist fechada por padrão, aprovação humana de uso único e redação; nada de clipboard, screenshot, launch ou mouse.
+- **40 testes** com binário falso; perfil `desktop-operator` registrado no catálogo; `opencode.json` atualizado sem remover os demais MCPs.
+- Piloto real: `status` ok; `list-apps`/`snapshot` bloqueados por **bug upstream #435** (`native_window_unproven`) em Ubuntu 26.04/Wayland. Nenhum clique real foi executado; nenhuma aprovação consumida.
+- Nada publicado; binário fixado em `1.1.0` no cache isolado. Ver `pilots/r1060-desktop-operator/` e `reports/r1060/`.
+
 ## Checkpoint R1059 — piloto de vídeo por referência
 
 - Prévia vertical de **10 s, 720×1280, 30 fps**, com mapa EOX/Natural Earth, ilustração vetorial no **Motion Canvas 3.17.2** e composição no **Remotion 4.0.540**.

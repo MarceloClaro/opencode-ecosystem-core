@@ -818,6 +818,13 @@ def build_config() -> Dict[str, Any]:
                 "enabled": True,
                 "timeout": 30000,
             },
+            # R1060: desktop operado por allowlist e aprovação; seis tools, sem clipboard.
+            "desktop-operator": {
+                "type": "local",
+                "command": [".venv/bin/python", "-m", "integrations.desktop_operator.mcp_server"],
+                "enabled": True,
+                "timeout": 60000,
+            },
             "polymath-labs-mcp": {
                 "type": "local",
                 "command": [".venv/bin/python", "integrations/polymath_labs_mcp.py"],
@@ -1092,6 +1099,19 @@ def build_config() -> Dict[str, Any]:
             }
         },
     }
+
+    # R1060: preserva MCPs existentes que não são gerados aqui (federados,
+    # experimentais ou locais do operador) para que regenerar não os remova.
+    if os.path.isfile(CONFIG_PATH):
+        try:
+            with open(CONFIG_PATH, "r", encoding="utf-8") as stream:
+                current = json.load(stream)
+        except (OSError, json.JSONDecodeError):
+            current = {}
+        if isinstance(current, dict):
+            for name, entry in (current.get("mcp") or {}).items():
+                if isinstance(entry, dict):
+                    config["mcp"].setdefault(name, entry)
 
     # R1014: só entra no config o servidor federado que passou pelo probe.
     for name, entry in _federation_activated_mcp().items():

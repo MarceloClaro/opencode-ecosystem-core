@@ -92,6 +92,7 @@ não precise adivinhar onde está a verdade, a especificação ou o limite.
 | Qubit 16:9 e vertical nativo | [Piloto R1055](../pilots/r1055-qubit/README.md), [QC e hashes](../reports/r1055/README.md) |
 | Plano de ação Airam Veras | [Vídeo R1058](../pilots/r1058-airam-veras/README.md), [roteiro](../pilots/r1058-airam-veras/SCRIPT.md), [QC](../reports/r1058/README.md) |
 | Piloto Monte Roraima | [Vídeo R1059](../pilots/r1059-roraima/README.md), [receita visual](../pilots/r1059-roraima/reference/receita-visual.json), [recibo](../pilots/r1059-roraima/out/render-receipt.json) |
+| Desktop operator | [R1060](../pilots/r1060-desktop-operator/README.md), [receipt](../pilots/r1060-desktop-operator/install-receipt.json), [spec](../specs/SPEC-935-R1060-desktop-operator.md) |
 | Câmera, mapa e narração por batida | [R1055](CINEMATIC_REMOTION_R1055.md), [roteiro](../pilots/r1055-qubit/SCRIPT.md), [créditos](../pilots/r1055-qubit/REFERENCES.md) |
 | GIFs de arquitetura e fluxos | [Galeria R1056–R1057](architecture/ANIMATED.md), [geração e testes](../reports/r1057/README.md) |
 | Remotion auditável | [Skill](../.opencode/skills/remotion-auditavel/SKILL.md), [Composição](../editor-workspace/remotion-smoke/src/r1047-slide/R1047Stage.tsx) |

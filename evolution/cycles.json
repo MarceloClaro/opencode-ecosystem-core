@@ -23851,6 +23851,35 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1061",
+      "objective": "R1060 — desktop-operator com allowlist, aprovação humana e MCP curado",
+      "changes": [
+        "Wrapper local com seis comandos permitidos e negação padrão de clipboard/screenshot/launch/mouse/headed/force/trace.",
+        "Aprovação HMAC de uso único vinculada a comando+app+ref+hash do texto; CLI approve exige --confirm.",
+        "MCP com seis ferramentas e perfil desktop-operator registrado; opencode.json atualizado sem remover MCPs existentes.",
+        "41 testes locais com binário falso; redação, truncamento, allowlist e ambiente reduzido cobertos.",
+        "Piloto real: status ok; list-apps/snapshot bloqueados por bug upstream #435 (native_window_unproven)."
+      ],
+      "score": 7.5,
+      "lessons": [
+        "Status saudável do adapter não prova inventário nem snapshot; testar o caminho completo antes de habilitar ações.",
+        "Allowlist vazia, aprovação de uso único e texto por stdin reduzem a superfície, mas não substituem sandbox.",
+        "Regenerar opencode.json pode remover MCPs federados inativos; preservar entradas existentes e revisar o diff.",
+        "Bug upstream conhecido deve bloquear a promoção da capacidade, não ser mascarado por testes com binário falso."
+      ],
+      "timestamp": 1793843530.0941746,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
