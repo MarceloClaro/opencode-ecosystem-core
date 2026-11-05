@@ -21,7 +21,7 @@ def _parser() -> argparse.ArgumentParser:
     win = sub.add_parser("windows")
     win_sub = win.add_subparsers(dest="windows_command", required=True)
     win_sub.add_parser("list")
-    for name in ("snapshot", "read", "focus", "focused"):
+    for name in ("snapshot", "read", "read-text", "focus", "focused"):
         item = win_sub.add_parser(name)
         if name != "focused":
             item.add_argument("--window", required=True)
@@ -96,11 +96,9 @@ def voice_loop(seconds: int = 5, once: bool = False) -> int:
             return _emit({"ok": True, "stopped": True, "text": text})
         try:
             if intent == "read":
-                focused = windows_uia.focused()
-                window = focused["data"]["window"]
-                data = windows_uia.read(window)
-                names = [item.get("name", "") for item in data.get("data", []) if item.get("name")][:8]
-                _speak_safe("Na janela " + window + ": " + "; ".join(names))
+                data = windows_uia.read_text_focused()
+                text = (data.get("data") or {}).get("text", "")
+                _speak_safe(text[:600] or "Não encontrei texto na janela.")
             elif intent == "click":
                 target = command.get("target", "")
                 _speak_safe(f"Confirma clicar em {target}? Diga sim.")
@@ -189,6 +187,8 @@ def main(argv: list[str] | None = None) -> int:
                 return _emit(windows_uia.snapshot(args.window, config))
             if args.windows_command == "read":
                 return _emit(windows_uia.read(args.window, config))
+            if args.windows_command == "read-text":
+                return _emit(windows_uia.read_text(args.window, config))
             if args.windows_command == "focus":
                 return _emit(windows_uia.focus(args.window, config))
             if args.windows_command == "focused":

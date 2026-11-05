@@ -1,6 +1,6 @@
 param(
   [Parameter(Mandatory=$true)]
-  [ValidateSet('list-windows','snapshot','invoke','set-value','focus','read','focused','set-focused','invoke-focused')]
+  [ValidateSet('list-windows','snapshot','invoke','set-value','focus','read','read-text','focused','set-focused','invoke-focused')]
   [string]$Command,
   [string]$Window = '',
   [string]$Name = '',
@@ -132,6 +132,25 @@ try {
     'snapshot' {
       $win = Find-Window $Window
       Out-Json ([ordered]@{ ok = $true; command = $Command; data = (Walk $win 0) })
+    }
+    'read-text' {
+      $win = Find-Window $Window
+      $all = $win.FindAll([System.Windows.Automation.TreeScope]::Descendants,
+        [System.Windows.Automation.Condition]::TrueCondition)
+      foreach ($element in $all) {
+        $pattern = $null
+        if ($element.TryGetCurrentPattern([System.Windows.Automation.TextPattern]::Pattern, [ref]$pattern)) {
+          $text = $pattern.DocumentRange.GetText(-1)
+          if ($text) {
+            if ($text.Length -gt 20000) { $text = $text.Substring(0, 20000) }
+            Out-Json ([ordered]@{ ok = $true; command = $Command; data = [ordered]@{
+                  window = $win.Current.Name; text = $text; chars = $text.Length
+                } })
+            exit 0
+          }
+        }
+      }
+      throw 'NO_TEXT_PATTERN'
     }
     'read' {
       $win = Find-Window $Window

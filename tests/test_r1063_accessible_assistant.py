@@ -13,19 +13,20 @@ def test_window_allowlist_and_denylist():
     config = windows_uia.load_config()
     assert windows_uia.window_allowed(config, "push_repo.ps1 - Bloco de notas")
     assert not windows_uia.window_allowed(config, "OC | Implement skill")
+    assert windows_uia.window_readable(config, "OC | Implement skill")
     assert not windows_uia.window_allowed(config, "Banco do Brasil")
 
 
 def test_unallowed_window_is_denied_before_powershell(monkeypatch):
     monkeypatch.setattr(windows_uia, "_powershell", lambda command, config, **kwargs: {
-        "ok": True, "data": [{"name": "OC | Implement skill"}]})
+        "ok": True, "data": [{"name": "Banco do Brasil"}]})
     with pytest.raises(windows_uia.UIAError) as exc:
-        windows_uia.snapshot("OC | Implement skill")
+        windows_uia.snapshot("Banco do Brasil")
     assert exc.value.code == "WINDOW_NOT_ALLOWED"
 
 
 def test_click_requires_confirmation(monkeypatch):
-    monkeypatch.setattr(windows_uia, "_resolve_window", lambda config, window: window)
+    monkeypatch.setattr(windows_uia, "_resolve_window", lambda config, window, write=True: window)
     with pytest.raises(windows_uia.UIAError) as exc:
         windows_uia.invoke("Bloco de notas", "Salvar", confirmed=False)
     assert exc.value.code == "CONFIRMATION_REQUIRED"
@@ -41,7 +42,7 @@ def test_uia_output_is_redacted(monkeypatch):
             "data": [{"name": "sk-1234567890abcdefghij", "type": "ControlType.Text"}],
         })
 
-    monkeypatch.setattr(windows_uia, "_resolve_window", lambda config, window: window)
+    monkeypatch.setattr(windows_uia, "_resolve_window", lambda config, window, write=True: window)
     monkeypatch.setattr(windows_uia.subprocess, "run", lambda *a, **k: Result())
     result = windows_uia.read("Bloco de notas")
     assert "sk-1234567890abcdefghij" not in json.dumps(result)
@@ -104,3 +105,10 @@ def test_has_speech_on_silence(tmp_path):
         stream.setframerate(16000)
         stream.writeframes(np.zeros(16000, dtype=np.int16).tobytes())
     assert voice.has_speech(path) is False
+
+
+def test_terminal_is_read_only_not_writable(monkeypatch):
+    config = windows_uia.load_config()
+    assert windows_uia.window_readable(config, "OC | Implement skill")
+    assert not windows_uia.window_allowed(config, "OC | Implement skill")
+    assert windows_uia.window_allowed(config, "Bloco de notas")

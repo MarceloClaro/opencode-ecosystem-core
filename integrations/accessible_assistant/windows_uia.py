@@ -44,6 +44,17 @@ def window_allowed(config: dict, window: str) -> bool:
     return any(pattern.casefold() in name for pattern in config.get("allowed_windows", []))
 
 
+def window_readable(config: dict, window: str) -> bool:
+    name = (window or "").casefold()
+    if not name:
+        return False
+    if any(pattern.casefold() in name for pattern in config.get("denied_windows", [])):
+        return False
+    if window_allowed(config, window):
+        return True
+    return any(pattern.casefold() in name for pattern in config.get("read_only_windows", []))
+
+
 def _powershell(command: str, config: dict, *, window: str = "", name: str = "",
                 value: str = "", max_depth: int | None = None) -> dict:
     argv = ["powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass",
@@ -86,10 +97,11 @@ def list_windows(config: dict | None = None) -> dict:
     if result.get("ok") and isinstance(result.get("data"), list):
         for item in result["data"]:
             item["allowed"] = window_allowed(config, item.get("name", ""))
+            item["read_only"] = window_readable(config, item.get("name", "")) and not item["allowed"]
     return result
 
 
-def _resolve_window(config: dict, window: str) -> str:
+def _resolve_window(config: dict, window: str, *, write: bool = True) -> str:
     result = _powershell("list-windows", config)
     names = [item.get("name", "") for item in result.get("data", []) if item.get("name")]
     matches = [name for name in names if window.casefold() in name.casefold()]
@@ -98,22 +110,38 @@ def _resolve_window(config: dict, window: str) -> str:
     if len(matches) > 1:
         raise UIAError("AMBIGUOUS_WINDOW", "mais de uma janela corresponde")
     full = matches[0]
-    if not window_allowed(config, full):
+    allowed = window_allowed(config, full) if write else window_readable(config, full)
+    if not allowed:
         raise UIAError("WINDOW_NOT_ALLOWED", "janela fora da allowlist")
     return full
 
 
 def snapshot(window: str, config: dict | None = None) -> dict:
     config = config or load_config()
-    window = _resolve_window(config, window)
+    window = _resolve_window(config, window, write=False)
     return _powershell("snapshot", config, window=window,
                        max_depth=min(int(config.get("max_depth", 6)), 6))
 
 
 def read(window: str, config: dict | None = None) -> dict:
     config = config or load_config()
-    window = _resolve_window(config, window)
+    window = _resolve_window(config, window, write=False)
     return _powershell("read", config, window=window)
+
+
+def read_text(window: str, config: dict | None = None) -> dict:
+    config = config or load_config()
+    window = _resolve_window(config, window, write=False)
+    return _powershell("read-text", config, window=window)
+
+
+def read_text_focused(config: dict | None = None) -> dict:
+    config = config or load_config()
+    result = _powershell("focused", config)
+    window = (result.get("data") or {}).get("window", "")
+    if not window_readable(config, window):
+        raise UIAError("WINDOW_NOT_ALLOWED", "janela em foco fora da leitura permitida")
+    return read_text(window, config)
 
 
 def focus(window: str, config: dict | None = None) -> dict:

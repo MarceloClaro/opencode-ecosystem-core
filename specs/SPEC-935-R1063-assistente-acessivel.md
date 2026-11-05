@@ -36,7 +36,7 @@ apps Windows. O Core permanece no WSL e chama a ponte por argv, sem shell.
 
 | Componente | Função |
 |---|---|
-| `windows_uia_bridge.ps1` | listar janelas, snapshot/read, invoke, set-value, foco |
+| `windows_uia_bridge.ps1` | listar janelas, snapshot/read/read-text, invoke, set-value, foco |
 | `windows_uia.py` | allowlist, confirmação, redação e limite |
 | `voice.py` | gravar, transcrever, sintetizar e tocar |
 | `dialog.py` | parser de comandos e confirmação |
@@ -86,7 +86,9 @@ Sem confirmação (“sim”), nenhuma ação é executada.
 
 ## 8. Estado atual
 
-- Ponte UIA Windows: **funciona** (list/snapshot/read/focused/invoke).
+- Ponte UIA Windows: **funciona** (list/snapshot/read/read-text/focused/invoke).
+- Terminal OpenCode: **somente leitura**; `read-text` devolveu 7.224 caracteres.
+  `click`/`type` no terminal retornam `WINDOW_NOT_ALLOWED`.
 - Redação: **funciona** (`sk-…` em aba do Notepad foi redigido).
 - Voz: microfone grava (`RDPSource`), ASR local disponível, TTS Edge toca.
 - Memória 24 h: implementada e testada com TTL.
@@ -99,6 +101,8 @@ Sem confirmação (“sim”), nenhuma ação é executada.
 
 - UIA do Windows não cobre todos os apps; alguns expõem árvore mínima.
 - `set-value` substitui o conteúdo do campo; não é digitação incremental.
+- O terminal é somente leitura; não há injeção de teclado. Executar comandos
+  nele exigiria um modo guardado, com revisão, allowlist e confirmação.
 - Microfone depende da permissão do Windows e do dispositivo padrão.
 - Voz sintética Edge envia texto ao serviço da Microsoft; para uso offline,
   trocar por Piper local.
