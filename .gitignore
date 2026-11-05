@@ -488,3 +488,34 @@ external/litellm-env/
 .env.litellm
 .env.litellm.*
 !.env.litellm.example
+
+# R1071: produção de vídeo — segmentos e build são regeneráveis
+artigos/**/video_banca/segments/
+artigos/**/video_banca/build/
+
+# R1071: intermediários de build do TCC (fontes .md/.tex e entregáveis ficam)
+artigos/**/_TCC_COMPLETO.md
+artigos/**/_corpo_wrapped.md
+artigos/**/_pretextual_com_sumario.md
+artigos/**/tcc_wrapper.pdf
+artigos/**/tcc_wrapper.aux
+artigos/**/tcc_wrapper.log
+artigos/**/tcc_wrapper.out
+artigos/**/tcc_wrapper.toc
+
+# R1071: cache ASR de dublagem (regenerável)
+**/.dubbing-asr-large/
+
+# R1071: entregáveis versionados de propósito (PDF e CSV são ignorados por padrão)
+!artigos/TCC_MARCELO_AUTISMO_AH_SD/TCC_MARCELO_AUTISMO_AH_SD.pdf
+!artigos/TCC_MARCELO_AUTISMO_AH_SD/TCC_MARCELO_AUTISMO_AH_SD.docx
+!artigos/TCC_MARCELO_AUTISMO_AH_SD/dados/*.csv
+!artigos/ARTIGO_MARIA_SOCORRO_TEA/01_ARTIGO_CORRIGIDO_ABNT.pdf
+!artigos/ARTIGO_MARIA_SOCORRO_TEA/02_ARTIGO_QUALIS_A1.pdf
+!artigos/ARTIGO_MARIA_SOCORRO_TEA/dados/*.csv
+
+# R1071: sumário é gerado pelo build a partir do .toc
+artigos/**/SUMARIO.md
+
+# R1071: pacotes de distribuição locais
+release/
