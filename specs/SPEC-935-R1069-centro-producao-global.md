@@ -11,7 +11,9 @@ passo de uma produção e de adaptar skills externas sem copiar código de terce
 |---|---|
 | `transformer/executive.py` | `ExecutiveAttention`: oito cabeças determinísticas (objetivo, estágio, evidência, risco, confiança, orçamento, progresso e tags), gates rígidos e softmax auditável. |
 | `marceloclaro/production_center.py` | `ProductionCenter`: estágios `intake → spec → route → execute → verify → reflect → deliver → complete`; orçamento, consentimento, evidência, histórico e recibo. |
-| `integrations/external_skills.py` | Registro de adaptadores externos: licença, caminho, entrypoint, dependências, `status`, `plan` e `probe` REA limitado. |
+| `integrations/external_skills.py` | Registro de adaptadores externos: licença, caminho, entrypoint, dependências, `status`, `plan`, `probe` REA limitado e `safe_argv`. |
+| `integrations/video_qa.py` | QA técnico de vídeo com ffprobe/ffmpeg: metadados, black frames, silêncio, loudness e frames. |
+| `.opencode/skills/code-video-visual-qa/SKILL.md` | Adaptação Core-native que substitui a dependência homônima do hbg. |
 | `MarceloClaroOrchestrator.production_center_action` | Operações `status`, `plan` e `run`, com observação metacognitiva sem promoção de confiança. |
 | MCP `ecosystem_production` | Expõe o centro pela rede coordenada. |
 | Skill `producao-global` | Interface de comandos e política de gates. |
@@ -54,7 +56,7 @@ O centro devolve `awaiting_consent` em vez de inventar autorização.
 | `image-story-video-wizard` | MIT | pronto; instalado e carregado |
 | `opus-video-skills` | MIT | pronto; Chromium do cache Playwright encontrado |
 | `kdense-scientific-agent-skills` | MIT | pronto; catálogo espelhado |
-| `hbg-life-simulation` | MIT | bloqueado: faltam `/imagegen`, `/code-video-visual-qa`; proxy local não configurado |
+| `hbg-life-simulation` | MIT | bloqueado: `hyperframes`, `media-use` e `code-video-visual-qa` presentes; falta `imagegen` e proxy local |
 | `reel-video` | MIT | bloqueado: `grok` e `codex` ausentes |
 | `distilly` | MIT | gate de consentimento/privacidade |
 
@@ -83,13 +85,15 @@ para o diretório externo e prepara um handoff auditável.
 6. `probe` REA é limitado, grava evidência e devolve hash.
 7. `allow_safe_checks` executa somente `safe_argv` read-only e registra o
    resultado; sem `safe_argv`, nada é executado.
-8. MCP `ecosystem_production` roteia para o primário.
-9. Testes verdes.
+8. `code-video-visual-qa` detecta black frames, silêncio, loudness e extrai
+   frames de um MP4 local sem executar o alvo.
+9. MCP `ecosystem_production` roteia para o primário.
+10. Testes verdes.
 
-**Resultado:** **99 passed** em R1069, R640, Transformer, atenção, autonomia e
-metacognição. Execução real do centro: `specify → route → execute:archify →
-verify → reflect → deliver`, com `archify doctor` via safe check,
-`confidence_promoted=false` e `external_validation=false`.
+**Resultado:** **102 passed** em R1069, R640, Transformer, atenção, autonomia,
+metacognição e QA de vídeo. Execução real do centro: `specify → route →
+execute:archify → verify → reflect → deliver`, com `archify doctor` via safe
+check, `confidence_promoted=false` e `external_validation=false`.
 
 ## 7. Limites
 

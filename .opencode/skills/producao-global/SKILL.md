@@ -73,7 +73,10 @@ core.production_center_action({"operation": "plan", "goal": "produzir um artigo"
 - `archify` — diagramas HTML interativos; Apache-2.0; instalado.
 - `image-story-video-wizard` — máquina de estados de 16 fases; MIT; instalado.
 - `hbg-life-simulation` — pipeline HyperFrames/TTS/legendas/QA; MIT; bloqueado
-  por dependências e proxy local.
+  apenas por `imagegen` e proxy local; `hyperframes`, `media-use` e
+  `code-video-visual-qa` estão presentes.
+- `code-video-visual-qa` — QA Core-native com ffprobe/ffmpeg; substitui a
+  dependência homônima do hbg.
 - `opus-video-skills` — p5.js/three.js; MIT; requer Chrome.
 - `reel-video` — CLI/review board; MIT; requer Grok/Codex.
 - `distilly` — perfis de pessoa; MIT; exige consentimento e privacidade.

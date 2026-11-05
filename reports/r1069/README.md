@@ -10,7 +10,9 @@ renderizado, nenhuma conta foi autenticada e nada foi publicado.
 |---|---|
 | `transformer/executive.py` | Atenção executiva com oito cabeças: objetivo, estágio, evidência, risco, confiança, orçamento, progresso e tags. |
 | `marceloclaro/production_center.py` | Centro de Produção Global com estágios, orçamento, consentimento, evidência e recibo. |
-| `integrations/external_skills.py` | Registro de adaptadores externos, `status`, `plan` e `probe` REA limitado. |
+| `integrations/external_skills.py` | Registro de adaptadores externos, `status`, `plan`, `probe` REA limitado e `safe_argv`. |
+| `integrations/video_qa.py` | QA técnico de vídeo com ffprobe/ffmpeg: black frames, silêncio, loudness e frames. |
+| `.opencode/skills/code-video-visual-qa/SKILL.md` | Skill Core-native que substitui a dependência homônima do hbg. |
 | `marceloclaro/orchestrator.py` | Método `production_center_action` para `status`, `plan` e `run`. |
 | `integrations/ecosystem_mcp.py` | Ferramenta MCP `ecosystem_production`. |
 | `.opencode/skills/producao-global/SKILL.md` | Interface `/producao` e política de gates. |
@@ -62,7 +64,8 @@ evidência. Isso é um limite do transporte, não uma falha silenciosa.
 | `image-story-video-wizard` | MIT; 9 testes; estado `VALID` | Instalado em `~/.agents/skills/image-story-video-wizard` e carregado. |
 | `opus-video-skills` | MIT; Chromium Playwright encontrado; ffmpeg presente | Pronto; nenhuma instalação extra de Chrome necessária. |
 | `kdense-scientific-agent-skills` | MIT; 177 SKILL.md | Já integrado; commit local = HEAD. |
-| `hbg-life-simulation` | MIT; 10 `.mjs` válidos; estilo 1920×1080 | Parcialmente destravado: `hyperframes` e `media-use` instalados do upstream Apache-2.0; ainda faltam `code-video-visual-qa` e `imagegen`; proxy local não configurado. |
+| `hbg-life-simulation` | MIT; 10 `.mjs` válidos; estilo 1920×1080 | Parcialmente destravado: `hyperframes`, `media-use` e `code-video-visual-qa` presentes; falta apenas `imagegen` (backend de imagem) e o proxy local. |
+| `code-video-visual-qa` | implementação Core-native | QA técnico com `ffprobe`/`ffmpeg`; frames, black frames, silêncio e loudness | Criado como adaptação original, sem copiar o hbg. |
 | `reel-video` | MIT; CLI/review board | Bloqueado: `grok` e `codex` ausentes; decisão adiada. |
 | `distilly` | MIT; 40 testes rápidos | Gate de consentimento/privacidade; nenhum perfil criado. |
 | OpenDesign / Paperclip | Apache-2.0 / MIT | Mantidos fora do Core. |
@@ -74,9 +77,11 @@ Decisão:
 - `hyperframes`, `hyperframes-cli`, `hyperframes-registry` e `media-use` foram
   instalados externamente pelo CLI oficial do HyperFrames 0.9.15
   (Apache-2.0), sem copiar o OpenMontage AGPL.
-- Não instalar `imagegen` nem `code-video-visual-qa` a partir de clones não
-  oficiais: o hbg espera o caminho de sistema do Codex
+- `code-video-visual-qa` foi implementado como **skill Core-native** em
+  `.opencode/skills/` e `integrations/video_qa.py`, sem copiar o hbg.
+- `imagegen` continua ausente: o hbg espera o caminho de sistema do Codex
   (`~/.codex/skills/.system/imagegen`) e não há fonte oficial verificada.
+  Clones não oficiais não foram instalados.
 - O proxy local exige OAuth e consentimento por projeto; não foi iniciado.
 - O pipeline é chinês e usa GSAP via CDN.
 - `media-use` recebeu alerta Socket/Snyk no instalador; permanece externo e
@@ -115,7 +120,8 @@ tests/test_r644_autonomous_health.py
 tests/test_r886_metacognitive_loop.py
 tests/test_r1050_metacognitive_gate.py
 tests/test_metacognitive_superhuman.py
-99 passed
+tests/test_r1069_video_qa.py
+102 passed
 ```
 
 ## 7. Limites
@@ -133,7 +139,7 @@ tests/test_metacognitive_superhuman.py
 1. Reiniciar/reconectar o OpenCode para carregar `ecosystem_production` e a
    skill `producao-global`.
 2. Usar `/producao plan` e `--safe-checks` antes de qualquer produção externa.
-3. Para o `hbg`, ainda faltam `imagegen` e `code-video-visual-qa`; não instalar
-   clones não oficiais. O proxy local continua exigindo OAuth/consentimento.
+3. Para o `hbg`, falta apenas `imagegen`; não instalar clones não oficiais.
+   O proxy local continua exigindo OAuth/consentimento.
 4. Para o `reel-video`, decidir se `grok`/`codex` serão instalados e
    autenticados.
