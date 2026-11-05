@@ -11247,17 +11247,6 @@
       "timeout": 120000
     },
     "servers": {
-      "dubbing-local": {
-        "type": "local",
-        "command": [
-          "/home/marceloclaro/opencode-ecosystem-core/.venv/bin/python",
-          "-m",
-          "integrations.dubbing_mcp"
-        ],
-        "environment": {
-          "DUBBING_PROJECT_ROOT": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1035-02XpQTA-_XE"
-        }
-      },
       "editor-local": {
         "type": "local",
         "command": [
