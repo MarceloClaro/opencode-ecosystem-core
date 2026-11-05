@@ -86,6 +86,9 @@ corrigir o TeX Live (`luaotfload`) ou usar um pipeline dedicado de tagging.
 ## 4. Caminho de correção
 
 1. Reexportar capa e contracapa a 300 DPI (ou vetor).
+   A maior arte ativa é 1046×1504 px; não há fonte em 300 DPI no projeto.
+   Os painéis maiores estavam no `_archive` excluído em 2026-11-05. Se existir
+   cópia externa, usá-la; caso contrário, a capa precisa ser recriada.
 2. Remover o código/ISBN fictício da arte.
 3. Reservar 2,0×1,2 in no canto inferior direito da contracapa, a 0,25 in do
    corte.
