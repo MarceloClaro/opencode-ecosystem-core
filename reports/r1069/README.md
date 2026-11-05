@@ -64,8 +64,9 @@ evidência. Isso é um limite do transporte, não uma falha silenciosa.
 | `image-story-video-wizard` | MIT; 9 testes; estado `VALID` | Instalado em `~/.agents/skills/image-story-video-wizard` e carregado. |
 | `opus-video-skills` | MIT; Chromium Playwright encontrado; ffmpeg presente | Pronto; nenhuma instalação extra de Chrome necessária. |
 | `kdense-scientific-agent-skills` | MIT; 177 SKILL.md | Já integrado; commit local = HEAD. |
-| `hbg-life-simulation` | MIT; 10 `.mjs` válidos; estilo 1920×1080 | Parcialmente destravado: `hyperframes`, `media-use` e `code-video-visual-qa` presentes; falta apenas `imagegen` (backend de imagem) e o proxy local. |
+| `hbg-life-simulation` | MIT; 10 `.mjs` válidos; estilo 1920×1080 | Bloqueado apenas pelo proxy local (`readiness: not-configured`); `hyperframes`, `media-use`, `code-video-visual-qa` e `imagegen` presentes. |
 | `code-video-visual-qa` | implementação Core-native | QA técnico com `ffprobe`/`ffmpeg`; frames, black frames, silêncio e loudness | Criado como adaptação original, sem copiar o hbg. |
+| `imagegen` | implementação Core-native | Cliente OpenAI-compatible `generate`/`generate-batch` | Instalado em `~/.agents/skills/imagegen` e linkado em `~/.codex/skills/.system/imagegen`. |
 | `reel-video` | MIT; CLI/review board | Bloqueado: `grok` e `codex` ausentes; decisão adiada. |
 | `distilly` | MIT; 40 testes rápidos | Gate de consentimento/privacidade; nenhum perfil criado. |
 | OpenDesign / Paperclip | Apache-2.0 / MIT | Mantidos fora do Core. |
@@ -79,10 +80,12 @@ Decisão:
   (Apache-2.0), sem copiar o OpenMontage AGPL.
 - `code-video-visual-qa` foi implementado como **skill Core-native** em
   `.opencode/skills/` e `integrations/video_qa.py`, sem copiar o hbg.
-- `imagegen` continua ausente: o hbg espera o caminho de sistema do Codex
-  (`~/.codex/skills/.system/imagegen`) e não há fonte oficial verificada.
-  Clones não oficiais não foram instalados.
-- O proxy local exige OAuth e consentimento por projeto; não foi iniciado.
+- `imagegen` foi implementado como cliente OpenAI-compatible Core-native em
+  `skills/imagegen/`, com `generate`/`generate-batch`; o caminho
+  `~/.codex/skills/.system/imagegen` aponta para ele.
+- CLIProxyAPI 7.2.119 foi instalado com SHA-256 registrado, permissões 700/600
+  e bind localhost-only. O device flow do Codex foi iniciado e aguarda o
+  operador concluir o login; o proxy ainda não foi iniciado.
 - O pipeline é chinês e usa GSAP via CDN.
 - `media-use` recebeu alerta Socket/Snyk no instalador; permanece externo e
   não foi executado.
@@ -121,7 +124,8 @@ tests/test_r886_metacognitive_loop.py
 tests/test_r1050_metacognitive_gate.py
 tests/test_metacognitive_superhuman.py
 tests/test_r1069_video_qa.py
-102 passed
+tests/test_r1069_imagegen.py
+107 passed
 ```
 
 ## 7. Limites
@@ -139,7 +143,7 @@ tests/test_r1069_video_qa.py
 1. Reiniciar/reconectar o OpenCode para carregar `ecosystem_production` e a
    skill `producao-global`.
 2. Usar `/producao plan` e `--safe-checks` antes de qualquer produção externa.
-3. Para o `hbg`, falta apenas `imagegen`; não instalar clones não oficiais.
-   O proxy local continua exigindo OAuth/consentimento.
+3. Para o `hbg`, concluir o device flow do Codex já iniciado; depois rodar
+   `start`, `smoke-test` e um teste único de imagem pelo `imagegen`.
 4. Para o `reel-video`, decidir se `grok`/`codex` serão instalados e
    autenticados.

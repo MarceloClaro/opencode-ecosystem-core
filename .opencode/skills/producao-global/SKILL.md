@@ -77,6 +77,8 @@ core.production_center_action({"operation": "plan", "goal": "produzir um artigo"
   `code-video-visual-qa` estão presentes.
 - `code-video-visual-qa` — QA Core-native com ffprobe/ffmpeg; substitui a
   dependência homônima do hbg.
+- `imagegen` — cliente OpenAI-compatible `generate`/`generate-batch`; usa
+  apenas `OPENAI_API_KEY`/`OPENAI_BASE_URL` e exige loopback ou HTTPS.
 - `opus-video-skills` — p5.js/three.js; MIT; requer Chrome.
 - `reel-video` — CLI/review board; MIT; requer Grok/Codex.
 - `distilly` — perfis de pessoa; MIT; exige consentimento e privacidade.

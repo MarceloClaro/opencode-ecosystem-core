@@ -44,6 +44,7 @@ class ExternalSkill:
     prerequisites: tuple[str, ...] = ()
     keywords: tuple[str, ...] = ()
     safe_argv: tuple[str, ...] = ()
+    readiness_argv: tuple[str, ...] = ()
     notes: str = ""
 
     def to_dict(self) -> Dict[str, Any]:
@@ -60,6 +61,7 @@ class ExternalSkill:
             "prerequisites": list(self.prerequisites),
             "keywords": list(self.keywords),
             "safe_argv": list(self.safe_argv),
+            "readiness_argv": list(self.readiness_argv),
             "notes": self.notes,
         }
 
@@ -102,6 +104,7 @@ def load_registry() -> Dict[str, ExternalSkill]:
             requires_consent=True,
             prerequisites=("hyperframes", "media-use", "code-video-visual-qa", "imagegen"),
             keywords=("video", "narracao", "tts", "legendas", "hyperframes"),
+            readiness_argv=("bash", "scripts/setup_local_cliproxyapi.sh", "ready"),
             notes="Exige skills /hyperframes, /media-use, /code-video-visual-qa, /imagegen e proxy local.",
         ),
         ExternalSkill(
@@ -172,6 +175,7 @@ def _skill_available(name: str) -> bool:
         Path.home() / ".agents" / "skills" / name / "SKILL.md",
         Path.home() / ".config" / "opencode" / "skills" / name / "SKILL.md",
         ROOT / ".opencode" / "skills" / name / "SKILL.md",
+        Path.home() / ".codex" / "skills" / ".system" / name / "SKILL.md",
     )
     return any(candidate.is_file() for candidate in candidates)
 
@@ -188,6 +192,25 @@ def _commit(path: Path) -> str | None:
         return None
     commit = result.stdout.strip()
     return commit if result.returncode == 0 and len(commit) in (40, 64) else None
+
+
+def _readiness(entry: ExternalSkill) -> Dict[str, Any] | None:
+    """Executa somente um check read-only declarado, com cwd do adaptador."""
+    if not entry.readiness_argv:
+        return None
+    argv = [str(part) for part in entry.readiness_argv]
+    if not argv or any("\x00" in part for part in argv):
+        return {"state": "invalid", "ready": False, "returncode": None}
+    try:
+        result = subprocess.run(argv, cwd=str(entry.path), capture_output=True,
+                                text=True, timeout=20, shell=False)
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        return {"state": "check_failed", "ready": False, "returncode": None,
+                "error": type(exc).__name__}
+    output = (result.stdout or "").strip().splitlines()
+    state = output[-1].strip() if output else ""
+    return {"state": state, "ready": state == "ready",
+            "returncode": result.returncode}
 
 
 def status(skill_id: str | None = None,
@@ -211,11 +234,15 @@ def status(skill_id: str | None = None,
                        if not _dependency_available(name))
         missing.extend(f"prerequisite_missing:{name}" for name in entry.prerequisites
                        if not _skill_available(name))
+        readiness = _readiness(entry)
+        if readiness is not None and not readiness.get("ready"):
+            missing.append("readiness:" + str(readiness.get("state", "unknown")))
         rows.append({
             **entry.to_dict(),
             "ready": not missing,
             "status": "ready" if not missing else "blocked",
             "missing": missing,
+            "readiness": readiness,
             "commit": _commit(entry.path),
             "consent_required": entry.requires_consent,
         })

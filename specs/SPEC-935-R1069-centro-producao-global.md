@@ -14,6 +14,8 @@ passo de uma produção e de adaptar skills externas sem copiar código de terce
 | `integrations/external_skills.py` | Registro de adaptadores externos: licença, caminho, entrypoint, dependências, `status`, `plan`, `probe` REA limitado e `safe_argv`. |
 | `integrations/video_qa.py` | QA técnico de vídeo com ffprobe/ffmpeg: metadados, black frames, silêncio, loudness e frames. |
 | `.opencode/skills/code-video-visual-qa/SKILL.md` | Adaptação Core-native que substitui a dependência homônima do hbg. |
+| `skills/imagegen/` | Cliente OpenAI-compatible `generate`/`generate-batch`, compatível com o caminho `.codex` do hbg; chave só no ambiente. |
+| `.opencode/skills/imagegen/SKILL.md` | Skill Core-native que expõe o cliente ao catálogo. |
 | `MarceloClaroOrchestrator.production_center_action` | Operações `status`, `plan` e `run`, com observação metacognitiva sem promoção de confiança. |
 | MCP `ecosystem_production` | Expõe o centro pela rede coordenada. |
 | Skill `producao-global` | Interface de comandos e política de gates. |
@@ -56,7 +58,7 @@ O centro devolve `awaiting_consent` em vez de inventar autorização.
 | `image-story-video-wizard` | MIT | pronto; instalado e carregado |
 | `opus-video-skills` | MIT | pronto; Chromium do cache Playwright encontrado |
 | `kdense-scientific-agent-skills` | MIT | pronto; catálogo espelhado |
-| `hbg-life-simulation` | MIT | bloqueado: `hyperframes`, `media-use` e `code-video-visual-qa` presentes; falta `imagegen` e proxy local |
+| `hbg-life-simulation` | MIT | bloqueado apenas pelo proxy local (`readiness: not-configured`); `hyperframes`, `media-use`, `code-video-visual-qa` e `imagegen` presentes |
 | `reel-video` | MIT | bloqueado: `grok` e `codex` ausentes |
 | `distilly` | MIT | gate de consentimento/privacidade |
 
@@ -87,12 +89,15 @@ para o diretório externo e prepara um handoff auditável.
    resultado; sem `safe_argv`, nada é executado.
 8. `code-video-visual-qa` detecta black frames, silêncio, loudness e extrai
    frames de um MP4 local sem executar o alvo.
-9. MCP `ecosystem_production` roteia para o primário.
-10. Testes verdes.
+9. `imagegen` gera uma imagem e um lote por endpoint OpenAI-compatible local,
+   rejeita path traversal, exige chave de ambiente e aceita `http` apenas em
+   loopback.
+10. MCP `ecosystem_production` roteia para o primário.
+11. Testes verdes.
 
-**Resultado:** **102 passed** em R1069, R640, Transformer, atenção, autonomia,
-metacognição e QA de vídeo. Execução real do centro: `specify → route →
-execute:archify → verify → reflect → deliver`, com `archify doctor` via safe
+**Resultado:** **107 passed** em R1069, R640, Transformer, atenção, autonomia,
+metacognição, QA de vídeo e imagegen. Execução real do centro: `specify → route
+→ execute:archify → verify → reflect → deliver`, com `archify doctor` via safe
 check, `confidence_promoted=false` e `external_validation=false`.
 
 ## 7. Limites
