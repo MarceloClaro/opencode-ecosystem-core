@@ -1,0 +1,80 @@
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025/Debian)  (format=lualatex 2026.9.8)  5 NOV 2026 19:43
+ restricted system commands enabled.
+**tagged_min.tex
+(./tagged_min.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+[\directlua]:1: module 'luaotfload-main' not found:
+	no field package.preload['luaotfload-main']
+	[kpse lua searcher] file not found: 'luaotfload-main'
+Error in luaotfload: reverting to OT1
+Inserting `tracingstacklevels' in `input_level_string'.
+(/usr/share/texlive/texmf-dist/tex/latex/latex-lab/documentmetadata-support.ltx
+
+(/usr/share/texlive/texmf-dist/tex/latex/pdfmanagement-testphase/pdfmanagement-
+testphase.sty
+Package: pdfmanagement-testphase 2025-11-12 v0.96x LaTeX PDF management bundle
+ (/usr/share/texlive/texmf-dist/tex/latex/tagpdf/tagpdf-base.sty
+Package: tagpdf-base 2026-01-12 v0.99x part of tagpdf - provide base, no-op ver
+sions of the user commands 
+\c@g__tag_MCID_abs_int=\count273
+\c@g__tag_struct_abs_int=\count274
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pdfmanagement-testphase/pdfmanagement.
+ltx
+File: p
+! Font \TU/lmr/m/n/10=[lmroman10-regular]:+tlig; at 10pt not loadable: metric d
+ata not found or bad.
+<to be read again> 
+                   relax 
+l.25 ...ntshape{n}\fontsize{10pt}{10pt}\selectfont
+                                                  
+ 288 words of node memory still in use:
+   1 hlist, 1 dir, 40 glue_spec, 4 if_stack nodes
+   avail lists: 2:8,3:3,4:1,5:1
+!  ==> Fatal error occurred, no output PDF file produced!
+Transcript written on tagged_min.log.
+se/l3backend-test
+phase-luatex.def
+File: l3backend-testphase-luatex.def 2025-11-12 v0.96s LaTeX PDF management bun
+dle backend support:PDFoutput(LuaTeX)
+\l__pdf_backend_tmpa_box=\box53
+\l__pdf_backend_tmpb_box=\box54
+\g__pdf_backend_resourceid_int=\count280
+\g__pdf_backend_name_int=\count281
+\g__pdf_backend_page_int=\count282
+Custom whatsit pdf_link_adjust_level = 1
+Inserting `linksplit' in `pre_shipout_filter'.
+Lua function pdflinkadjustlevel = 31)
+(/usr/share/texlive/texmf-dist/tex/latex/latex-lab/latex-lab-testphase-latest.s
+ty
+Package: latex-lab-testphase-latest 2025-09-13 v0.1d latex-lab modules
+ (/usr/share/texlive/texmf-dist/tex/latex/tagpdf/tagpdf.sty
+Package: tagpdf 2026-01-12 v0.99x  LaTeX kernel code for PDF tagging 
+\l__tag_tmpa_int=\count283
+\l__tag_tmpa_box=\box55
+\l__tag_tmpb_box=\box56
+\l__tag_loglevel_int=\count284
+\g__tag_unique_cnt_int=\count285
+\l__tag_tag_stop_int=\count286
+
+(/usr/share/texlive/texmf-dist/tex/latex/tagpdf/tagpdf-luatex.def
+File: tagpdf-luatex.def 2026-01-12 v0.99x tagpdf driver for luatex
+
+! Font \TU/lmr/m/n/10=[lmroman10-regular]:+tlig; at 10pt not loadable: metric da
+ta not found or bad.
+<to be read again> 
+                   relax 
+l.25 ...ntshape{n}\fontsize{10pt}{10pt}\selectfont
+                                                  
+
+Here is how much of LuaTeX's memory you used:
+ 1464 strings out of 476076
+ 100000,460012 words of node,token memory allocated
+ 288 words of node memory still in use:
+   1 hlist, 1 dir, 40 glue_spec, 4 if_stack nodes
+   avail lists: 2:8,3:3,4:1,5:1
+ 23978 multiletter control sequences out of 65536+600000
+ 14 fonts using 591999 bytes
+ 58i,0n,58p,380b,78s stack positions out of 10000i,1000n,20000p,200000b,200000s
+!  ==> Fatal error occurred, no output PDF file produced!
