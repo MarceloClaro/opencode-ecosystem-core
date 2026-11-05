@@ -84,7 +84,8 @@ core.production_center_action({"operation": "plan", "goal": "produzir um artigo"
 - `hyperframes` — skill oficial Apache-2.0 para autoria/render HTML; use o
   `hyperframes-cli` para scaffold, validação e render.
 - `opus-video-skills` — p5.js/three.js; MIT; requer Chrome.
-- `reel-video` — CLI/review board; MIT; `codex` pronto, falta `grok`.
+- `reel-video` — CLI/review board; MIT; fallback `still-motion` via ffmpeg;
+  Grok opcional para vídeo generativo; Codex opcional para stills.
 - `distilly` — perfis de pessoa; MIT; exige consentimento e privacidade.
 - `kdense-scientific-agent-skills` — catálogo de 177 SKILL.md; MIT; integrado.
 

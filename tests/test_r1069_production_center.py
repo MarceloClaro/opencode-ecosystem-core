@@ -95,6 +95,15 @@ def test_safe_checks_run_only_declared_read_only_argv(tmp_path):
     assert check["read_only"] is True
 
 
+def test_failed_safe_check_blocks_instead_of_looping(tmp_path):
+    safe = (sys.executable, "-c", "raise SystemExit(1)")
+    center = ProductionCenter(registry=fake_registry(tmp_path, safe_argv=safe))
+    report = center.run("documentar o fluxo", allow_safe_checks=True)
+    assert report["status"] == "blocked"
+    assert [row["action"] for row in report["history"]].count("verify") == 1
+    assert any("verificação falhou" in item for item in report["limitations"])
+
+
 def test_production_center_requires_consent(tmp_path):
     center = ProductionCenter(registry=fake_registry(tmp_path, requires_consent=True))
     blocked = center.run("criar um perfil de pessoa", consent=False)

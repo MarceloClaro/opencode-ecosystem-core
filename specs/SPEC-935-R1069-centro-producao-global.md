@@ -63,7 +63,7 @@ O centro devolve `awaiting_consent` em vez de inventar autorização.
 | `opus-video-skills` | MIT | pronto; Chromium do cache Playwright encontrado |
 | `kdense-scientific-agent-skills` | MIT | pronto; catálogo espelhado |
 | `hbg-life-simulation` | MIT | **pronto**: `hyperframes`, `media-use`, `code-video-visual-qa` e `imagegen` presentes; CLIProxyAPI autenticado e `readiness: ready` |
-| `reel-video` | MIT | bloqueado apenas por `grok`; `codex` 0.166.0 instalado e logado |
+| `reel-video` | MIT | pronto com fallback `still-motion`; Grok opcional; Codex opcional para stills |
 | `distilly` | MIT | gate de consentimento/privacidade |
 
 Nenhum código de terceiro foi copiado para o repositório. O adaptador aponta
@@ -108,7 +108,7 @@ para o diretório externo e prepara um handoff auditável.
 12. Cache de status evita repetir prontidão/git dentro do TTL.
 13. Testes verdes.
 
-**Resultado:** **112 passed** em R1069, R640, Transformer, atenção, autonomia,
+**Resultado:** **113 passed** em R1069, R640, Transformer, atenção, autonomia,
 metacognição, QA de vídeo e imagegen. Execução real do centro com
 `hbg-life-simulation`: `specify → route → consent:hbg → execute:hbg → verify →
 reflect → deliver`, `readiness=ready` no safe check e

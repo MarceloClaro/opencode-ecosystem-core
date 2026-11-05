@@ -159,15 +159,17 @@ def load_registry() -> Dict[str, ExternalSkill]:
         ),
         ExternalSkill(
             skill_id="reel-video",
-            path=_expand("~/.cache/opencode-pilot/external-evals/reel-video"),
+            path=_expand("~/.local/share/opencode-core/reel-video"),
             license="MIT",
             kind="external-video-tool",
             entrypoint="bin/canvas.js",
-            dependencies=("node", "grok", "codex"),
+            dependencies=("node", "ffmpeg"),
             requires_consent=True,
-            rea_sources=("src/cli.ts",),
-            keywords=("video", "storyboard", "keyframes", "reel"),
-            notes="CLI + review board; usa Grok/Codex e workspace-write.",
+            rea_sources=("src/cli.ts", "src/still-motion.ts"),
+            keywords=("video", "storyboard", "keyframes", "reel", "still-motion", "motion"),
+            safe_argv=("node", "--import", "tsx", "--input-type=module", "-e",
+                       "await import('./src/still-motion.ts'); await import('./src/runner.ts');"),
+            notes="Grok opcional; provider still-motion usa ffmpeg; Codex opcional para stills.",
         ),
         ExternalSkill(
             skill_id="distilly",
@@ -385,8 +387,9 @@ def plan(skill_id: str, task: str, *, consent: bool = False,
     elif skill_id == "reel-video":
         mode = "cli"
         argv = ["node", str(base / "bin/canvas.js")]
-        handoff = ("Usar o CLI local do reel-video; exige login Grok/Codex e "
-                   "consentimento para workspace-write")
+        handoff = ("Usar o CLI local do reel-video com --video-provider still-motion "
+                   "para motion determinístico; Grok é opcional e Codex é opcional "
+                   "para stills; consentimento para workspace-write")
     elif skill_id == "distilly":
         mode = "skill"
         argv = ["node", str(base / "bin/distilly.mjs")]

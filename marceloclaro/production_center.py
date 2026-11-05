@@ -465,10 +465,17 @@ class ProductionCenter:
             verified = (plan.get("status") == "planned"
                         and bool(plan.get("argv") or plan.get("mode"))
                         and safe_ok)
-            state.stage = "reflect" if verified else "execute"
             if not verified:
-                state.limitations.append("plano de execução ausente ou inválido")
-            return {"status": "completed" if verified else "partial", "verified": verified,
+                state.status = "blocked"
+                state.stage = "blocked"
+                state.limitations.append(
+                    "verificação falhou; corrija o plano/check antes de retomar")
+                return {"status": "blocked", "verified": False,
+                        "gates": plan.get("gates", []),
+                        "safe_returncode": (safe or {}).get("returncode")
+                        if isinstance(safe, dict) else None}
+            state.stage = "reflect"
+            return {"status": "completed", "verified": True,
                     "gates": plan.get("gates", [])}
         if kind == "reflect":
             lesson = (f"Produção {state.production_id}: adaptador "

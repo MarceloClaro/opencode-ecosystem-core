@@ -101,9 +101,14 @@ continua como dependência externa do hbg, não como adaptador padrão do Core.
 | `code-video-visual-qa` | Core-native; QA com `ffprobe`/`ffmpeg` | Criado como adaptação original, sem copiar o hbg. |
 | `imagegen` | Core-native; cliente OpenAI-compatible | Instalado em `~/.agents/skills/imagegen` e linkado em `~/.codex/skills/.system/imagegen`; teste real gerou PNG 1536×1024 (2,2 MB) em 22,3 s com `gpt-image-2`. |
 | `hyperframes` | Apache-2.0; skill oficial 0.9.15 | Instalado externamente; base do pipeline HyperFrames. |
-| `reel-video` | MIT; CLI/review board | Bloqueado apenas por `grok`; `codex` 0.166.0 instalado e logado. |
+| `reel-video` | MIT; CLI/review board | **Pronto** com fallback `still-motion` (ffmpeg); Grok opcional; `codex` 0.166.0 opcional para stills. |
 | `distilly` | MIT; 40 testes rápidos | Gate de consentimento/privacidade; nenhum perfil criado. |
 | OpenDesign / Paperclip | Apache-2.0 / MIT | Mantidos fora do Core. |
+
+O `reel-video` ganhou o fallback `still-motion` (SPEC-935-R1070): 1 still com
+zoompan ou 2–3 stills com crossfade, via ffmpeg, sem Grok. O provider `grok`
+continua opcional para vídeo generativo. Detalhes e hashes em
+`reports/r1070/README.md`.
 
 ### Decisão sobre o `hbg-life-simulation`
 
@@ -167,7 +172,7 @@ tests/test_r1050_metacognitive_gate.py
 tests/test_metacognitive_superhuman.py
 tests/test_r1069_video_qa.py
 tests/test_r1069_imagegen.py
-112 passed
+113 passed
 ```
 
 ## 7. Limites
@@ -188,5 +193,5 @@ tests/test_r1069_imagegen.py
    produção externa; `list`/`resume` retomam sem recriar histórico.
 3. O `hbg` está pronto para um projeto real; o próximo teste é um projeto
    pequeno de imagem-story ou HyperFrames com revisão humana.
-4. Para o `reel-video`, decidir se `grok` será instalado; o `codex` CLI já está
-   logado.
+4. Para o `reel-video`, o fallback `still-motion` já está pronto; o próximo
+   teste é uma cena real com `--provider codex --video-provider still-motion`.
