@@ -52,4 +52,4 @@ internas; não constituem validação externa.
 
 Fontes: [Ghidra 12.1.4 oficial](https://github.com/NationalSecurityAgency/ghidra/releases/tag/Ghidra_12.1.4_build),
 [Temurin JDK 21 oficial](https://github.com/adoptium/temurin21-binaries/releases/tag/jdk-21.0.12.1%2B1),
-[REA solicitado](https://github.com/MarceloClaro/rea).
+[REA upstream](https://github.com/morluto/rea).

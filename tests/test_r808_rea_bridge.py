@@ -110,10 +110,32 @@ def test_status_reads_installation_without_starting_mcp_or_target(runtime, tmp_p
     result = ReaBridge(tmp_path).status()
     assert result["status"] == "completed" and result["success"]
     assert result["verification"] == "installation_only"
-    assert result["provenance"]["repository"] == "https://github.com/MarceloClaro/rea"
+    assert result["provenance"]["repository"] == "https://github.com/morluto/rea"
     assert result["provenance"]["version"] == "6.4.0"
     assert result["provenance"]["runtime"]["source_dir"] == str(runtime)
     assert not (runtime / "pid").exists()
+
+
+def test_source_dir_prefers_680_and_falls_back_to_fork(monkeypatch, tmp_path):
+    monkeypatch.delenv("REA_SOURCE_DIR", raising=False)
+    base = tmp_path / "opencode-core"
+    (base / "rea").mkdir(parents=True)
+    (base / "rea" / "package.json").write_text("{}")
+    monkeypatch.setattr(ReaBridge, "_default_source_base", staticmethod(lambda: base))
+    assert ReaBridge._source_dir() == (base / "rea").resolve()
+    (base / "rea-6.8.0").mkdir()
+    (base / "rea-6.8.0" / "package.json").write_text("{}")
+    assert ReaBridge._source_dir() == (base / "rea-6.8.0").resolve()
+
+
+def test_repository_reads_package_metadata_and_normalizes(tmp_path):
+    assert ReaBridge._repository(
+        tmp_path, {"repository": {"url": "git+https://github.com/morluto/rea.git"}}
+    ) == "https://github.com/morluto/rea"
+    assert ReaBridge._repository(
+        tmp_path, {"repository": "git@github.com:morluto/rea.git"}
+    ) == "https://github.com/morluto/rea"
+    assert ReaBridge._repository(tmp_path, {}) == "https://github.com/morluto/rea"
 
 
 def test_absent_runtime_is_unavailable_without_starting_process(monkeypatch, tmp_path):

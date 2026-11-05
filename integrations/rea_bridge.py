@@ -40,7 +40,7 @@ from integrations.rea_layers import (
 class ReaBridge:
     """Executa um handshake e uma operação estática em processo MCP isolado."""
 
-    REPOSITORY = "https://github.com/MarceloClaro/rea"
+    REPOSITORY = "https://github.com/morluto/rea"
     OPERATIONS = frozenset({"status", "catalog", "session", "layers", "layer",
                             "analyze", "analyze_binary"})
     MAX_TIMEOUT_SECONDS = 180
@@ -90,8 +90,59 @@ class ReaBridge:
         return next((str(path.resolve()) for path in candidates if path.is_file() and os.access(path, os.X_OK)), None)
 
     @staticmethod
-    def _source_dir() -> Path:
-        return Path(os.environ.get("REA_SOURCE_DIR") or Path.home() / ".local" / "share" / "opencode-core" / "rea").expanduser().resolve()
+    def _default_source_base() -> Path:
+        return Path.home() / ".local" / "share" / "opencode-core"
+
+    @classmethod
+    def _source_dir(cls) -> Path:
+        configured = os.environ.get("REA_SOURCE_DIR")
+        if configured:
+            return Path(configured).expanduser().resolve()
+        base = cls._default_source_base()
+        for name in ("rea-6.8.0", "rea"):
+            candidate = base / name
+            if (candidate / "package.json").is_file():
+                return candidate.resolve()
+        return (base / "rea").resolve()
+
+    @staticmethod
+    def _repository(source: Path, metadata: dict[str, Any] | None = None) -> str:
+        """Lê a origem real do checkout; o pacote npm não tem .git."""
+        value: Any = None
+        git = shutil.which("git")
+        if git and (source / ".git").exists():
+            try:
+                result = subprocess.run(
+                    [git, "-C", str(source), "remote", "get-url", "origin"],
+                    capture_output=True, text=True, timeout=2, shell=False)
+                if result.returncode == 0:
+                    value = result.stdout.strip()
+            except (OSError, subprocess.TimeoutExpired):
+                value = None
+        if not value and isinstance(metadata, dict):
+            repository = metadata.get("repository")
+            if isinstance(repository, dict):
+                value = repository.get("url")
+            elif isinstance(repository, str):
+                value = repository
+        if not isinstance(value, str) or not value.strip():
+            return ReaBridge.REPOSITORY
+        value = value.strip()
+        if value.startswith("git+"):
+            value = value[4:]
+        if value.startswith("git@github.com:"):
+            value = "https://github.com/" + value[len("git@github.com:"):]
+        if value.startswith("ssh://git@github.com/"):
+            value = "https://github.com/" + value[len("ssh://git@github.com/"):]
+        if value.startswith("git://github.com/"):
+            value = "https://github.com/" + value[len("git://github.com/"):]
+        if value.endswith(".git"):
+            value = value[:-4]
+        if value.startswith("http://"):
+            value = "https://" + value[len("http://"):]
+        if not re.fullmatch(r"https://[^\s]+", value):
+            return ReaBridge.REPOSITORY
+        return value
 
     @staticmethod
     def _source_commit(source: Path) -> str | None:
@@ -131,7 +182,7 @@ class ReaBridge:
             if importlib.util.find_spec(dependency) is None:
                 missing.append(f"dependência Python {dependency}")
         provenance = {
-            "repository": self.REPOSITORY,
+            "repository": self._repository(source, metadata),
             "commit": self._source_commit(source) if include_commit else None,
             "version": metadata.get("version"),
             "runtime": {"source_dir": str(source), "node": node, "launcher": str(launcher)},
@@ -486,7 +537,8 @@ class ReaBridge:
         if operation == "layers":
             report = layers_status()
             report["rea_installed"] = result["available"]
-            report["provenance"] = {"repository": self.REPOSITORY, "commit": None,
+            report["provenance"] = {"repository": result["provenance"].get("repository", self.REPOSITORY),
+                                    "commit": None,
                                     "version": result["provenance"].get("version"),
                                     "runtime": result["provenance"].get("runtime"), "response_sha256": None}
             return report
