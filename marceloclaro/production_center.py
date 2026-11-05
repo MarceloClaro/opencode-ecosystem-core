@@ -380,8 +380,10 @@ class ProductionCenter:
             if gated and free:
                 best_gated = max(gated, key=lambda c: tags.get(c["action_id"], 0.0))
                 best_free = max(free, key=lambda c: tags.get(c["action_id"], 0.0))
-                if tags.get(best_gated["action_id"], 0.0) >= tags.get(
-                        best_free["action_id"], 0.0) - 1e-9:
+                # Só peça consentimento quando o adaptador gated for
+                # materialmente mais aderente; empate favorece o livre.
+                if tags.get(best_gated["action_id"], 0.0) > tags.get(
+                        best_free["action_id"], 0.0) + 0.05:
                     return best_gated
         selected = decision.get("selected")
         return next((c for c in candidates if c["action_id"] == selected), None)

@@ -120,7 +120,7 @@ def load_registry() -> Dict[str, ExternalSkill]:
             kind="video-skill",
             entrypoint="SKILL.md",
             dependencies=("node", "ffmpeg"),
-            keywords=("video", "hyperframes", "render", "animacao", "motion", "html"),
+            keywords=("video", "hyperframes", "render", "renderizar", "animacao", "motion", "html"),
             notes="Skill oficial HyperFrames; usar hyperframes-cli para scaffold e render.",
         ),
         ExternalSkill(

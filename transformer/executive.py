@@ -71,11 +71,19 @@ def _finite(value: Any, default: float = 0.0) -> float:
     return number if math.isfinite(number) else default
 
 
+STOPWORDS = {
+    "de", "da", "do", "das", "dos", "com", "um", "uma", "e", "o", "a",
+    "os", "as", "em", "para", "por", "que", "the", "and", "of", "to", "in",
+    "on", "for",
+}
+
+
 def _tag_tokens(value: str) -> set[str]:
-    """Tokeniza ignorando acentos para casar 'vídeo' com 'video'."""
+    """Tokeniza ignorando acentos e stopwords; preserva p5, 3d e similares."""
     normalized = unicodedata.normalize("NFKD", value)
     normalized = "".join(char for char in normalized if not unicodedata.combining(char))
-    return {token for token in _tokenize(normalized) if len(token) > 2}
+    return {token for token in _tokenize(normalized)
+            if len(token) >= 2 and token not in STOPWORDS}
 
 
 def _stage_score(current: str, candidate: str) -> float:
