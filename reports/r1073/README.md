@@ -67,3 +67,10 @@ provam mérito literário, aprovação editorial ou validação externa.
 - PDF tagged bloqueado pelo toolchain; nenhum PDF/UA produzido.
 - Release atualizado em `literatura/molambudos/release/2026-11-05/` com EPUB e
   preflight.
+
+## Atualização R1075
+
+- Edição revista em `literatura/molambudos/Molambudos_Revisada_R1075/`:
+  415 pp, 84 fragmentos, DOC −18,3%, CONT 7, LUC 23. PDF/EPUB revisados;
+  não substitui a canônica; capa/lombada a recalcular; sem nova ISBN.
+- Relatório: `reports/r1075/README.md`.

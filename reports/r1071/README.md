@@ -39,6 +39,10 @@ Atualização R1074: EPUB de leitura validado localmente; preflight KDP com
 **status FAIL** (capa a ~163 DPI, reserva de barras 2,15×0,95 in e posição
 inferior esquerda). Não enviar à KDP sem corrigir. Ver `reports/r1074/README.md`.
 
+Atualização R1075: edição revista em
+`literatura/molambudos/Molambudos_Revisada_R1075` (415 pp; DOC −18,3%; CONT 7;
+LUC 23). Ver `reports/r1075/README.md`.
+
 ## 3. QA técnico do KDP
 
 - 435 páginas; 453,543 × 651,968 pts = **160 × 230 mm**.

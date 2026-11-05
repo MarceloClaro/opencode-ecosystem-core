@@ -65,6 +65,18 @@ WORKS = [
         'notes': 'Build corrigido 3378f438 promovido em 2026-11-05; PDF antigo 77aabe2e excluído; revisão em REVISAO_FINAL.md.',
     },
     {
+        'id': 'molambudos-revisada',
+        'title': 'Molambudos — O Diário do Paciente 1.260 (edição revista R1075)',
+        'category': 'livro', 'scope': 'literario', 'canonical': False,
+        'status': 'edição revista de trabalho; 415 pp; DOC −18,3%; CONT 7; LUC 23',
+        'source': 'literatura/molambudos/Molambudos_Revisada_R1075',
+        'compiled': 'literatura/molambudos/Molambudos_Revisada_R1075',
+        'pdf': 'literatura/molambudos/Molambudos_Revisada_R1075/main_kdp_pt_160x230mm.pdf',
+        'links': [],
+        'audit': 'reports/r1075',
+        'notes': 'Revisão editorial autorizada; não substitui a canônica; capa/lombada a recalcular; sem nova ISBN.',
+    },
+    {
         'id': 'molambudos-v2',
         'title': 'Molambudos v2.0 — O Prontuário 1.263 (esboço)',
         'category': 'livro', 'scope': 'literario', 'canonical': False,

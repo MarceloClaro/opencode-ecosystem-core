@@ -78,6 +78,10 @@ edições excluídas. A escolha da edição canônica é editorial e pertence ao
 - Relatório e evidências: `reports/r1074/README.md`.
 - PDF tagged: bloqueado pelo toolchain (`luaotfload` ausente; `tagpdf` aborta na
   mudança de versão PDF). Nenhum PDF/UA foi produzido.
+- **Edição revista R1075**: `literatura/molambudos/Molambudos_Revisada_R1075/`
+  — 415 pp, 84 fragmentos, DOC −18,3%, CONT 7, LUC 23. PDF e EPUB revisados;
+  não substitui a canônica; capa/lombada a recalcular; sem nova ISBN. Ver
+  `reports/r1075/README.md`.
 
 ### Podcast
 
@@ -145,7 +149,7 @@ Ordem mínima por obra:
 
 ## 6. Catálogo
 
-`reports/r1072/catalogo.json` contém 46 registros (43 ativos + 3 excluídos)
+`reports/r1072/catalogo.json` contém 47 registros (44 ativos + 3 excluídos)
 com:
 
 - `id`, `title`, `category`, `scope`, `canonical`, `status`;
