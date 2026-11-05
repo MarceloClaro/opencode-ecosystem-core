@@ -1,0 +1,1154 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-11-05T21:52:39.094098+00:00",
+  "root": "projetos/literarios",
+  "policy": "symlinks; nenhum original foi movido; projetos/ é gitignored",
+  "count": 45,
+  "works": [
+    {
+      "id": "molambudos-victoria-regia",
+      "title": "Molambudos — O Diário do Paciente 1.260 (KDP PT-BR)",
+      "category": "livro",
+      "scope": "literario",
+      "canonical": true,
+      "status": "canônico KDP PT-BR; 435 pp; 160×230 mm",
+      "source": "projetos/molambudos/Molambudos_VictoriaRegia",
+      "compiled": "projetos/molambudos/Molambudos_VictoriaRegia",
+      "pdf": "projetos/molambudos/Molambudos_VictoriaRegia/main_kdp_pt_160x230mm.pdf",
+      "links": [
+        {
+          "path": "molambudos/victoria-regia",
+          "target": "projetos/molambudos/Molambudos_VictoriaRegia",
+          "status": "ok"
+        }
+      ],
+      "audit": "reports/r1071",
+      "notes": "Book Studio: book.json, engine latex, source main_kdp_pt_160x230mm.tex; metadados e aspas corrigidos localmente.",
+      "pdf_pages": 435,
+      "pdf_page_size": "453.543 x 651.968 pts",
+      "pdf_title": null,
+      "pdf_sha256": "77aabe2e4e055d7f53fbef17dd3857e561f50f556a94f92da0d3ff039f4ea66f",
+      "pdf_bytes": 13519902
+    },
+    {
+      "id": "molambudos-v2",
+      "title": "Molambudos v2.0 — O Prontuário 1.263 (esboço)",
+      "category": "livro",
+      "scope": "literario",
+      "canonical": false,
+      "status": "esboço v0.1; 57 pp; 6×9 in; 112 testes",
+      "source": "projetos/molambudos/Molambudos_v2",
+      "compiled": "projetos/molambudos/Molambudos_v2",
+      "pdf": "projetos/molambudos/Molambudos_v2/Molambudos_O-Prontuario-1263_v2.0-esboco_2026-07-13.pdf",
+      "links": [
+        {
+          "path": "molambudos/v2",
+          "target": "projetos/molambudos/Molambudos_v2",
+          "status": "ok"
+        }
+      ],
+      "audit": "projetos/molambudos/Molambudos_v2/misc/avaliacao_honesta_v2.0.md",
+      "notes": "Sete degraus lineares; projeto distinto da edição VictoriaRegia.",
+      "pdf_pages": 57,
+      "pdf_page_size": "432 x 648 pts",
+      "pdf_title": null,
+      "pdf_sha256": "8c7edb2b1b81ba0c29103a7369644235ef50dab892d92c97e71b99a068e5a0ca",
+      "pdf_bytes": 275386
+    },
+    {
+      "id": "molambudos-diario",
+      "title": "Molambudos — Diário 1.260 v2 (Partes I–II)",
+      "category": "livro",
+      "scope": "literario",
+      "canonical": false,
+      "status": "49 pp; 6×9 in; versão ilustrada",
+      "source": "projetos/molambudos/Molambudos_v2_Diario",
+      "compiled": "projetos/molambudos/Molambudos_v2_Diario",
+      "pdf": "projetos/molambudos/Molambudos_v2_Diario/Molambudos_Diario-1260_v2-visceral_PartesI-II-ilustrada_2026-07-13.pdf",
+      "links": [
+        {
+          "path": "molambudos/diario",
+          "target": "projetos/molambudos/Molambudos_v2_Diario",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Derivação visual do Diário; não substitui a edição VictoriaRegia.",
+      "pdf_pages": 49,
+      "pdf_page_size": "432 x 648 pts",
+      "pdf_title": null,
+      "pdf_sha256": "dfd9c24b367db7b29965cc3bb011760772dfa029b15996910995eceec0ab9e95",
+      "pdf_bytes": 23768405
+    },
+    {
+      "id": "molambudos-template-antigo",
+      "title": "Molambudos — template LaTeX antigo (4 capítulos)",
+      "category": "template",
+      "scope": "literario",
+      "canonical": false,
+      "status": "25 pp; A4; template incompleto",
+      "source": "templates/livro/molambudos",
+      "compiled": "templates/livro/molambudos",
+      "pdf": "templates/livro/molambudos/main.pdf",
+      "links": [
+        {
+          "path": "molambudos/template-antigo",
+          "target": "templates/livro/molambudos",
+          "status": "ok"
+        }
+      ],
+      "audit": "REVISAO_MOLAMBUDOS.md",
+      "notes": "Objeto do parecer antigo; NÃO representa a edição VictoriaRegia. Ver nota de escopo.",
+      "pdf_pages": 25,
+      "pdf_page_size": "595.276 x 841.89 pts (A4)",
+      "pdf_title": null,
+      "pdf_sha256": "102dea443563731dace8f9ad6ef3956406a3ed498b2a17c4af4e7d3ed835a081",
+      "pdf_bytes": 153265
+    },
+    {
+      "id": "livro-opencode",
+      "title": "Engenharia de Ecossistemas Cognitivos: OpenCode Ecosystem",
+      "category": "livro",
+      "scope": "literario",
+      "canonical": true,
+      "status": "478 pp; A4; compilado em template/projects",
+      "source": "projetos/02_Livro_OpenCode",
+      "compiled": "templates/projects/livro-opencode",
+      "pdf": "templates/projects/livro-opencode/livro-dark.pdf",
+      "links": [
+        {
+          "path": "livros/livro-opencode-fonte",
+          "target": "projetos/02_Livro_OpenCode",
+          "status": "ok"
+        },
+        {
+          "path": "livros/livro-opencode-compilado",
+          "target": "templates/projects/livro-opencode",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Fonte em projetos/02; PDF em templates/projects/livro-opencode.",
+      "pdf_pages": 478,
+      "pdf_page_size": "595.276 x 841.89 pts (A4)",
+      "pdf_title": "Engenharia de Ecossistemas Cognitivos: OpenCode Ecosystem",
+      "pdf_sha256": "9b620f2df79e1cb207a9f527014a9fb449ec100c6025c42f97b859c853ff2785",
+      "pdf_bytes": 5510547
+    },
+    {
+      "id": "livro-volume2",
+      "title": "Volume 2 — Gêmeos Digitais Periodontais: O Framework SUS-Twin",
+      "category": "livro",
+      "scope": "literario",
+      "canonical": true,
+      "status": "184 pp; A4; compilado em template/projects",
+      "source": "projetos/03_Livro_Volume2",
+      "compiled": "templates/projects/livro-volume2",
+      "pdf": "templates/projects/livro-volume2/dark.pdf",
+      "links": [
+        {
+          "path": "livros/livro-volume2-fonte",
+          "target": "projetos/03_Livro_Volume2",
+          "status": "ok"
+        },
+        {
+          "path": "livros/livro-volume2-compilado",
+          "target": "templates/projects/livro-volume2",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Fonte em projetos/03; PDF em templates/projects/livro-volume2.",
+      "pdf_pages": 184,
+      "pdf_page_size": "595.276 x 841.89 pts (A4)",
+      "pdf_title": "Volume 2 — Gêmeos Digitais Periodontais: O Framework SUS-Twin",
+      "pdf_sha256": "a3eed4bdde606d24ca6ac2d531b4983fee706a45806c74e2b509965c189bd361",
+      "pdf_bytes": 2799421
+    },
+    {
+      "id": "livro-gemeos-odontologia",
+      "title": "Gêmeos Digitais Periodontais: O Framework SUS-Twin",
+      "category": "livro",
+      "scope": "literario",
+      "canonical": true,
+      "status": "180 pp; A4; compilado em template/projects",
+      "source": "projetos/04_Livro_Gemeos_Odontologia",
+      "compiled": "templates/projects/livro-gemeos-odontologia",
+      "pdf": "templates/projects/livro-gemeos-odontologia/dark.pdf",
+      "links": [
+        {
+          "path": "livros/livro-gemeos-fonte",
+          "target": "projetos/04_Livro_Gemeos_Odontologia",
+          "status": "ok"
+        },
+        {
+          "path": "livros/livro-gemeos-compilado",
+          "target": "templates/projects/livro-gemeos-odontologia",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Fonte em projetos/04; PDF em templates/projects/livro-gemeos-odontologia.",
+      "pdf_pages": 180,
+      "pdf_page_size": "595.276 x 841.89 pts (A4)",
+      "pdf_title": "Gêmeos Digitais Periodontais: O Framework SUS-Twin",
+      "pdf_sha256": "ba302e62862afac862da06ee9db0ed75b3ab3347518b70ff94a06ba231d2a0be",
+      "pdf_bytes": 2443045
+    },
+    {
+      "id": "ia-em-odontologia",
+      "title": "IA em Odontologia — livro/template",
+      "category": "livro",
+      "scope": "literario",
+      "canonical": false,
+      "status": "fonte e template; sem PDF compilado no diretório",
+      "source": "projetos/ia-em-odontologia",
+      "compiled": "templates/livro/ia-em-odontologia",
+      "pdf": null,
+      "links": [
+        {
+          "path": "livros/ia-odontologia-fonte",
+          "target": "projetos/ia-em-odontologia",
+          "status": "ok"
+        },
+        {
+          "path": "livros/ia-odontologia-template",
+          "target": "templates/livro/ia-em-odontologia",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Fonte em projetos/ia-em-odontologia; template em templates/livro.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    },
+    {
+      "id": "template-victoria-regia",
+      "title": "Victoria Regia — template clássico LaTeX",
+      "category": "template",
+      "scope": "literario",
+      "canonical": false,
+      "status": "template; sem PDF compilado",
+      "source": "projetos/36_Victoria_Regia",
+      "compiled": null,
+      "pdf": null,
+      "links": [
+        {
+          "path": "templates/victoria-regia",
+          "target": "projetos/36_Victoria_Regia",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Template base; duplicatas em 23_Template_Livros e na raiz.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    },
+    {
+      "id": "template-livros",
+      "title": "23_Template_Livros — coleção de templates",
+      "category": "template",
+      "scope": "literario",
+      "canonical": false,
+      "status": "coleção de templates; sem PDF único",
+      "source": "projetos/23_Template_Livros",
+      "compiled": null,
+      "pdf": null,
+      "links": [
+        {
+          "path": "templates/template-livros",
+          "target": "projetos/23_Template_Livros",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Contém Victoria Regia e template Springer Nature.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    },
+    {
+      "id": "template-livro-opencode",
+      "title": "Template — Livro OpenCode",
+      "category": "template",
+      "scope": "literario",
+      "canonical": false,
+      "status": "template com PDF compilado",
+      "source": "templates/projects/livro-opencode",
+      "compiled": "templates/projects/livro-opencode",
+      "pdf": "templates/projects/livro-opencode/livro-dark.pdf",
+      "links": [
+        {
+          "path": "templates/livro-opencode",
+          "target": "templates/projects/livro-opencode",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Template e PDF do livro OpenCode.",
+      "pdf_pages": 478,
+      "pdf_page_size": "595.276 x 841.89 pts (A4)",
+      "pdf_title": "Engenharia de Ecossistemas Cognitivos: OpenCode Ecosystem",
+      "pdf_sha256": "9b620f2df79e1cb207a9f527014a9fb449ec100c6025c42f97b859c853ff2785",
+      "pdf_bytes": 5510547
+    },
+    {
+      "id": "template-livro-volume2",
+      "title": "Template — Livro Volume 2",
+      "category": "template",
+      "scope": "literario",
+      "canonical": false,
+      "status": "template com PDF compilado",
+      "source": "templates/projects/livro-volume2",
+      "compiled": "templates/projects/livro-volume2",
+      "pdf": "templates/projects/livro-volume2/dark.pdf",
+      "links": [
+        {
+          "path": "templates/livro-volume2",
+          "target": "templates/projects/livro-volume2",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Template e PDF do Volume 2.",
+      "pdf_pages": 184,
+      "pdf_page_size": "595.276 x 841.89 pts (A4)",
+      "pdf_title": "Volume 2 — Gêmeos Digitais Periodontais: O Framework SUS-Twin",
+      "pdf_sha256": "a3eed4bdde606d24ca6ac2d531b4983fee706a45806c74e2b509965c189bd361",
+      "pdf_bytes": 2799421
+    },
+    {
+      "id": "template-livro-gemeos",
+      "title": "Template — Livro Gêmeos Odontologia",
+      "category": "template",
+      "scope": "literario",
+      "canonical": false,
+      "status": "template com PDF compilado",
+      "source": "templates/projects/livro-gemeos-odontologia",
+      "compiled": "templates/projects/livro-gemeos-odontologia",
+      "pdf": "templates/projects/livro-gemeos-odontologia/dark.pdf",
+      "links": [
+        {
+          "path": "templates/livro-gemeos",
+          "target": "templates/projects/livro-gemeos-odontologia",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Template e PDF do livro Gêmeos.",
+      "pdf_pages": 180,
+      "pdf_page_size": "595.276 x 841.89 pts (A4)",
+      "pdf_title": "Gêmeos Digitais Periodontais: O Framework SUS-Twin",
+      "pdf_sha256": "ba302e62862afac862da06ee9db0ed75b3ab3347518b70ff94a06ba231d2a0be",
+      "pdf_bytes": 2443045
+    },
+    {
+      "id": "template-livro-odontologia-ia",
+      "title": "Template — Livro Odontologia IA",
+      "category": "template",
+      "scope": "literario",
+      "canonical": false,
+      "status": "template; sem PDF compilado",
+      "source": "templates/projects/livro-odontologia-ia",
+      "compiled": null,
+      "pdf": null,
+      "links": [
+        {
+          "path": "templates/livro-odontologia-ia",
+          "target": "templates/projects/livro-odontologia-ia",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Template de livro; compilar antes de auditar.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    },
+    {
+      "id": "academico-01-dissertacao-opencode",
+      "title": "Dissertação OpenCode",
+      "category": "academico",
+      "scope": "academico",
+      "canonical": false,
+      "status": "contexto acadêmico; fora do escopo literário",
+      "source": "projetos/01_Dissertacao_OpenCode",
+      "compiled": null,
+      "pdf": null,
+      "links": [
+        {
+          "path": "academicos/01_dissertacao_opencode",
+          "target": "projetos/01_Dissertacao_OpenCode",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Mantido para contexto; não é obra literária.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    },
+    {
+      "id": "academico-05-artigo-mit-ia",
+      "title": "Artigo MIT/IA",
+      "category": "academico",
+      "scope": "academico",
+      "canonical": false,
+      "status": "contexto acadêmico; fora do escopo literário",
+      "source": "projetos/05_Artigo_MIT_IA",
+      "compiled": null,
+      "pdf": null,
+      "links": [
+        {
+          "path": "academicos/05_artigo_mit_ia",
+          "target": "projetos/05_Artigo_MIT_IA",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Mantido para contexto; não é obra literária.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    },
+    {
+      "id": "academico-06-artigos",
+      "title": "Artigos",
+      "category": "academico",
+      "scope": "academico",
+      "canonical": false,
+      "status": "contexto acadêmico; fora do escopo literário",
+      "source": "projetos/06_Artigos",
+      "compiled": null,
+      "pdf": null,
+      "links": [
+        {
+          "path": "academicos/06_artigos",
+          "target": "projetos/06_Artigos",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Mantido para contexto; não é obra literária.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    },
+    {
+      "id": "academico-07-criador-artigo",
+      "title": "Criador de Artigo",
+      "category": "academico",
+      "scope": "academico",
+      "canonical": false,
+      "status": "contexto acadêmico; fora do escopo literário",
+      "source": "projetos/07_Criador_Artigo",
+      "compiled": null,
+      "pdf": null,
+      "links": [
+        {
+          "path": "academicos/07_criador_artigo",
+          "target": "projetos/07_Criador_Artigo",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Mantido para contexto; não é obra literária.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    },
+    {
+      "id": "academico-08-docs-dissertacao",
+      "title": "Docs da Dissertação",
+      "category": "academico",
+      "scope": "academico",
+      "canonical": false,
+      "status": "contexto acadêmico; fora do escopo literário",
+      "source": "projetos/08_Docs_Dissertacao",
+      "compiled": null,
+      "pdf": null,
+      "links": [
+        {
+          "path": "academicos/08_docs_dissertacao",
+          "target": "projetos/08_Docs_Dissertacao",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Mantido para contexto; não é obra literária.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    },
+    {
+      "id": "academico-09-md-dissertacao-latex",
+      "title": "Dissertação LaTeX",
+      "category": "academico",
+      "scope": "academico",
+      "canonical": false,
+      "status": "contexto acadêmico; fora do escopo literário",
+      "source": "projetos/09_MD_Dissertacao_LaTeX",
+      "compiled": null,
+      "pdf": null,
+      "links": [
+        {
+          "path": "academicos/09_md_dissertacao_latex",
+          "target": "projetos/09_MD_Dissertacao_LaTeX",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Mantido para contexto; não é obra literária.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    },
+    {
+      "id": "academico-10-dados-entrada-mestrado",
+      "title": "Dados de Entrada do Mestrado",
+      "category": "academico",
+      "scope": "academico",
+      "canonical": false,
+      "status": "contexto acadêmico; fora do escopo literário",
+      "source": "projetos/10_Dados_Entrada_Mestrado",
+      "compiled": null,
+      "pdf": null,
+      "links": [
+        {
+          "path": "academicos/10_dados_entrada_mestrado",
+          "target": "projetos/10_Dados_Entrada_Mestrado",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Mantido para contexto; não é obra literária.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    },
+    {
+      "id": "academico-11-evolve-artigos",
+      "title": "Evolução de Artigos",
+      "category": "academico",
+      "scope": "academico",
+      "canonical": false,
+      "status": "contexto acadêmico; fora do escopo literário",
+      "source": "projetos/11_Evolve_Artigos",
+      "compiled": null,
+      "pdf": null,
+      "links": [
+        {
+          "path": "academicos/11_evolve_artigos",
+          "target": "projetos/11_Evolve_Artigos",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Mantido para contexto; não é obra literária.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    },
+    {
+      "id": "academico-31-template-ensaio-fichamento",
+      "title": "Template de Ensaio/Fichamento",
+      "category": "academico",
+      "scope": "academico",
+      "canonical": false,
+      "status": "contexto acadêmico; fora do escopo literário",
+      "source": "projetos/31_Template_Ensaio_Fichamento",
+      "compiled": null,
+      "pdf": null,
+      "links": [
+        {
+          "path": "academicos/31_template_ensaio_fichamento",
+          "target": "projetos/31_Template_Ensaio_Fichamento",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Mantido para contexto; não é obra literária.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    },
+    {
+      "id": "academico-32-documentos",
+      "title": "Documentos",
+      "category": "academico",
+      "scope": "academico",
+      "canonical": false,
+      "status": "contexto acadêmico; fora do escopo literário",
+      "source": "projetos/32_Documentos",
+      "compiled": null,
+      "pdf": null,
+      "links": [
+        {
+          "path": "academicos/32_documentos",
+          "target": "projetos/32_Documentos",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Mantido para contexto; não é obra literária.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    },
+    {
+      "id": "academico-33-nano",
+      "title": "Nano",
+      "category": "academico",
+      "scope": "academico",
+      "canonical": false,
+      "status": "contexto acadêmico; fora do escopo literário",
+      "source": "projetos/33_Nano",
+      "compiled": null,
+      "pdf": null,
+      "links": [
+        {
+          "path": "academicos/33_nano",
+          "target": "projetos/33_Nano",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Mantido para contexto; não é obra literária.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    },
+    {
+      "id": "academico-34-orchestration",
+      "title": "Orchestration",
+      "category": "academico",
+      "scope": "academico",
+      "canonical": false,
+      "status": "contexto acadêmico; fora do escopo literário",
+      "source": "projetos/34_Orchestration",
+      "compiled": null,
+      "pdf": null,
+      "links": [
+        {
+          "path": "academicos/34_orchestration",
+          "target": "projetos/34_Orchestration",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Mantido para contexto; não é obra literária.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    },
+    {
+      "id": "academico-35-zrm-master",
+      "title": "ZRM Master",
+      "category": "academico",
+      "scope": "academico",
+      "canonical": false,
+      "status": "contexto acadêmico; fora do escopo literário",
+      "source": "projetos/35_ZRM_Master",
+      "compiled": null,
+      "pdf": null,
+      "links": [
+        {
+          "path": "academicos/35_zrm_master",
+          "target": "projetos/35_ZRM_Master",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Mantido para contexto; não é obra literária.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    },
+    {
+      "id": "template-academico-12-template-abntex2",
+      "title": "12 Template ABNTEX2",
+      "category": "template-academico",
+      "scope": "academico",
+      "canonical": false,
+      "status": "template acadêmico; contexto",
+      "source": "projetos/12_Template_ABNTEX2",
+      "compiled": null,
+      "pdf": null,
+      "links": [
+        {
+          "path": "templates-academicos/12_template_abntex2",
+          "target": "projetos/12_Template_ABNTEX2",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Template acadêmico; fora do escopo literário.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    },
+    {
+      "id": "template-academico-13-template-acm",
+      "title": "13 Template ACM",
+      "category": "template-academico",
+      "scope": "academico",
+      "canonical": false,
+      "status": "template acadêmico; contexto",
+      "source": "projetos/13_Template_ACM",
+      "compiled": null,
+      "pdf": null,
+      "links": [
+        {
+          "path": "templates-academicos/13_template_acm",
+          "target": "projetos/13_Template_ACM",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Template acadêmico; fora do escopo literário.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    },
+    {
+      "id": "template-academico-14-template-artigo",
+      "title": "14 Template Artigo",
+      "category": "template-academico",
+      "scope": "academico",
+      "canonical": false,
+      "status": "template acadêmico; contexto",
+      "source": "projetos/14_Template_Artigo",
+      "compiled": null,
+      "pdf": null,
+      "links": [
+        {
+          "path": "templates-academicos/14_template_artigo",
+          "target": "projetos/14_Template_Artigo",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Template acadêmico; fora do escopo literário.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    },
+    {
+      "id": "template-academico-15-template-cv-curriculo",
+      "title": "15 Template CV Curriculo",
+      "category": "template-academico",
+      "scope": "academico",
+      "canonical": false,
+      "status": "template acadêmico; contexto",
+      "source": "projetos/15_Template_CV_Curriculo",
+      "compiled": null,
+      "pdf": null,
+      "links": [
+        {
+          "path": "templates-academicos/15_template_cv_curriculo",
+          "target": "projetos/15_Template_CV_Curriculo",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Template acadêmico; fora do escopo literário.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    },
+    {
+      "id": "template-academico-16-template-dissertacao",
+      "title": "16 Template Dissertacao",
+      "category": "template-academico",
+      "scope": "academico",
+      "canonical": false,
+      "status": "template acadêmico; contexto",
+      "source": "projetos/16_Template_Dissertacao",
+      "compiled": null,
+      "pdf": null,
+      "links": [
+        {
+          "path": "templates-academicos/16_template_dissertacao",
+          "target": "projetos/16_Template_Dissertacao",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Template acadêmico; fora do escopo literário.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    },
+    {
+      "id": "template-academico-17-template-elsevier",
+      "title": "17 Template Elsevier",
+      "category": "template-academico",
+      "scope": "academico",
+      "canonical": false,
+      "status": "template acadêmico; contexto",
+      "source": "projetos/17_Template_Elsevier",
+      "compiled": null,
+      "pdf": null,
+      "links": [
+        {
+          "path": "templates-academicos/17_template_elsevier",
+          "target": "projetos/17_Template_Elsevier",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Template acadêmico; fora do escopo literário.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    },
+    {
+      "id": "template-academico-18-template-elsevier-cas",
+      "title": "18 Template Elsevier CAS",
+      "category": "template-academico",
+      "scope": "academico",
+      "canonical": false,
+      "status": "template acadêmico; contexto",
+      "source": "projetos/18_Template_Elsevier_CAS",
+      "compiled": null,
+      "pdf": null,
+      "links": [
+        {
+          "path": "templates-academicos/18_template_elsevier_cas",
+          "target": "projetos/18_Template_Elsevier_CAS",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Template acadêmico; fora do escopo literário.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    },
+    {
+      "id": "template-academico-19-template-icmc",
+      "title": "19 Template ICMC",
+      "category": "template-academico",
+      "scope": "academico",
+      "canonical": false,
+      "status": "template acadêmico; contexto",
+      "source": "projetos/19_Template_ICMC",
+      "compiled": null,
+      "pdf": null,
+      "links": [
+        {
+          "path": "templates-academicos/19_template_icmc",
+          "target": "projetos/19_Template_ICMC",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Template acadêmico; fora do escopo literário.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    },
+    {
+      "id": "template-academico-20-template-ieee",
+      "title": "20 Template IEEE",
+      "category": "template-academico",
+      "scope": "academico",
+      "canonical": false,
+      "status": "template acadêmico; contexto",
+      "source": "projetos/20_Template_IEEE",
+      "compiled": null,
+      "pdf": null,
+      "links": [
+        {
+          "path": "templates-academicos/20_template_ieee",
+          "target": "projetos/20_Template_IEEE",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Template acadêmico; fora do escopo literário.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    },
+    {
+      "id": "template-academico-21-template-ipleiria",
+      "title": "21 Template IPLeiria",
+      "category": "template-academico",
+      "scope": "academico",
+      "canonical": false,
+      "status": "template acadêmico; contexto",
+      "source": "projetos/21_Template_IPLeiria",
+      "compiled": null,
+      "pdf": null,
+      "links": [
+        {
+          "path": "templates-academicos/21_template_ipleiria",
+          "target": "projetos/21_Template_IPLeiria",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Template acadêmico; fora do escopo literário.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    },
+    {
+      "id": "template-academico-22-template-koma-script",
+      "title": "22 Template KOMA Script",
+      "category": "template-academico",
+      "scope": "academico",
+      "canonical": false,
+      "status": "template acadêmico; contexto",
+      "source": "projetos/22_Template_KOMA_Script",
+      "compiled": null,
+      "pdf": null,
+      "links": [
+        {
+          "path": "templates-academicos/22_template_koma_script",
+          "target": "projetos/22_Template_KOMA_Script",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Template acadêmico; fora do escopo literário.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    },
+    {
+      "id": "template-academico-24-template-mdpi",
+      "title": "24 Template MDPI",
+      "category": "template-academico",
+      "scope": "academico",
+      "canonical": false,
+      "status": "template acadêmico; contexto",
+      "source": "projetos/24_Template_MDPI",
+      "compiled": null,
+      "pdf": null,
+      "links": [
+        {
+          "path": "templates-academicos/24_template_mdpi",
+          "target": "projetos/24_Template_MDPI",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Template acadêmico; fora do escopo literário.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    },
+    {
+      "id": "template-academico-25-template-nature",
+      "title": "25 Template Nature",
+      "category": "template-academico",
+      "scope": "academico",
+      "canonical": false,
+      "status": "template acadêmico; contexto",
+      "source": "projetos/25_Template_Nature",
+      "compiled": null,
+      "pdf": null,
+      "links": [
+        {
+          "path": "templates-academicos/25_template_nature",
+          "target": "projetos/25_Template_Nature",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Template acadêmico; fora do escopo literário.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    },
+    {
+      "id": "template-academico-26-template-sbc",
+      "title": "26 Template SBC",
+      "category": "template-academico",
+      "scope": "academico",
+      "canonical": false,
+      "status": "template acadêmico; contexto",
+      "source": "projetos/26_Template_SBC",
+      "compiled": null,
+      "pdf": null,
+      "links": [
+        {
+          "path": "templates-academicos/26_template_sbc",
+          "target": "projetos/26_Template_SBC",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Template acadêmico; fora do escopo literário.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    },
+    {
+      "id": "template-academico-27-template-springer",
+      "title": "27 Template Springer",
+      "category": "template-academico",
+      "scope": "academico",
+      "canonical": false,
+      "status": "template acadêmico; contexto",
+      "source": "projetos/27_Template_Springer",
+      "compiled": null,
+      "pdf": null,
+      "links": [
+        {
+          "path": "templates-academicos/27_template_springer",
+          "target": "projetos/27_Template_Springer",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Template acadêmico; fora do escopo literário.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    },
+    {
+      "id": "template-academico-28-template-taylor-francis",
+      "title": "28 Template Taylor Francis",
+      "category": "template-academico",
+      "scope": "academico",
+      "canonical": false,
+      "status": "template acadêmico; contexto",
+      "source": "projetos/28_Template_Taylor_Francis",
+      "compiled": null,
+      "pdf": null,
+      "links": [
+        {
+          "path": "templates-academicos/28_template_taylor_francis",
+          "target": "projetos/28_Template_Taylor_Francis",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Template acadêmico; fora do escopo literário.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    },
+    {
+      "id": "template-academico-29-template-unb-monografia",
+      "title": "29 Template UnB Monografia",
+      "category": "template-academico",
+      "scope": "academico",
+      "canonical": false,
+      "status": "template acadêmico; contexto",
+      "source": "projetos/29_Template_UnB_Monografia",
+      "compiled": null,
+      "pdf": null,
+      "links": [
+        {
+          "path": "templates-academicos/29_template_unb_monografia",
+          "target": "projetos/29_Template_UnB_Monografia",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Template acadêmico; fora do escopo literário.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    },
+    {
+      "id": "template-academico-30-template-usp",
+      "title": "30 Template USP",
+      "category": "template-academico",
+      "scope": "academico",
+      "canonical": false,
+      "status": "template acadêmico; contexto",
+      "source": "projetos/30_Template_USP",
+      "compiled": null,
+      "pdf": null,
+      "links": [
+        {
+          "path": "templates-academicos/30_template_usp",
+          "target": "projetos/30_Template_USP",
+          "status": "ok"
+        }
+      ],
+      "audit": null,
+      "notes": "Template acadêmico; fora do escopo literário.",
+      "pdf_pages": null,
+      "pdf_page_size": null,
+      "pdf_title": null,
+      "pdf_sha256": null,
+      "pdf_bytes": null
+    }
+  ]
+}
