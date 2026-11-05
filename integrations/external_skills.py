@@ -43,6 +43,7 @@ class ExternalSkill:
     rea_sources: tuple[str, ...] = ()
     prerequisites: tuple[str, ...] = ()
     keywords: tuple[str, ...] = ()
+    safe_argv: tuple[str, ...] = ()
     notes: str = ""
 
     def to_dict(self) -> Dict[str, Any]:
@@ -58,6 +59,7 @@ class ExternalSkill:
             "rea_sources": list(self.rea_sources),
             "prerequisites": list(self.prerequisites),
             "keywords": list(self.keywords),
+            "safe_argv": list(self.safe_argv),
             "notes": self.notes,
         }
 
@@ -238,11 +240,22 @@ def plan(skill_id: str, task: str, *, consent: bool = False,
     if not current["ready"]:
         return {"status": "blocked", "adapter": skill_id,
                 "missing": current["missing"], "executed": False}
+    base = entry.path
+    if entry.safe_argv:
+        safe_argv = [str(part) for part in entry.safe_argv]
+    elif skill_id == "archify":
+        safe_argv = ["node", str(base / "bin/archify.mjs"), "doctor"]
+    elif skill_id == "image-story-video-wizard":
+        safe_argv = ["python3", str(base / "scripts/project_state.py"), "--help"]
+    elif skill_id == "hbg-life-simulation":
+        safe_argv = ["bash", str(base / "scripts/setup_local_cliproxyapi.sh"), "ready"]
+    else:
+        safe_argv = []
     if entry.requires_consent and consent is not True:
         return {"status": "consent_required", "adapter": skill_id,
                 "reason": "a skill exige consentimento explícito para esta operação",
-                "executed": False}
-    base = entry.path
+                "cwd": str(base), "safe_argv": safe_argv,
+                "safe_checks": bool(safe_argv), "executed": False}
     if skill_id == "archify":
         mode = "skill"
         argv = ["node", str(base / "bin/archify.mjs"), "doctor"]
@@ -280,6 +293,7 @@ def plan(skill_id: str, task: str, *, consent: bool = False,
     return {
         "status": "planned", "adapter": skill_id, "mode": mode,
         "task": task[:1000], "cwd": str(base), "argv": argv, "handoff": handoff,
+        "safe_argv": safe_argv, "safe_checks": bool(safe_argv),
         "license": entry.license, "commit": current.get("commit"),
         "requires_consent": entry.requires_consent,
         "gates": ["license_preserved", "path_within_adapter", "no_shell"],

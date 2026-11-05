@@ -16,6 +16,7 @@ from dataclasses import dataclass, field
 import hashlib
 import json
 from pathlib import Path
+import subprocess
 from typing import Any, Callable, Dict, List, Optional
 import uuid
 
@@ -238,7 +239,35 @@ class ProductionCenter:
         selected = decision.get("selected")
         return next((c for c in candidates if c["action_id"] == selected), None)
 
-    def _default_handler(self, action: Dict[str, Any], state: ProductionState) -> Dict[str, Any]:
+    @staticmethod
+    def _safe_check(plan: Dict[str, Any], timeout: int = 60) -> Optional[Dict[str, Any]]:
+        """Executa somente o argv read-only declarado pelo adaptador."""
+        argv = plan.get("safe_argv")
+        if not isinstance(argv, list) or not argv or not all(
+                isinstance(part, str) and part for part in argv):
+            return None
+        if any("\x00" in part for part in argv):
+            return {"returncode": None, "error": "argv_invalid", "executed": False}
+        try:
+            result = subprocess.run(
+                argv, cwd=plan.get("cwd") or None, capture_output=True,
+                text=True, timeout=timeout, shell=False,
+            )
+        except subprocess.TimeoutExpired:
+            return {"returncode": None, "error": "timeout", "executed": False}
+        except OSError as exc:
+            return {"returncode": None, "error": type(exc).__name__, "executed": False}
+        return {
+            "returncode": result.returncode,
+            "stdout": (result.stdout or "")[-4000:],
+            "stderr": (result.stderr or "")[-2000:],
+            "argv": argv,
+            "read_only": True,
+            "executed": True,
+        }
+
+    def _default_handler(self, action: Dict[str, Any], state: ProductionState,
+                         allow_safe_checks: bool = False) -> Dict[str, Any]:
         kind = action["kind"]
         if kind == "specify":
             spec_id = "spec-" + hashlib.sha256(state.goal.encode()).hexdigest()[:12]
@@ -264,6 +293,10 @@ class ProductionCenter:
             from integrations.external_skills import plan as adapter_plan
             plan = adapter_plan(state.selected_adapter, state.goal,
                                 consent=state.consent, registry=self.registry)
+            if allow_safe_checks:
+                safe = self._safe_check(plan)
+                if safe is not None:
+                    plan["safe_check"] = safe
             state.execution_plan = plan
             if plan.get("status") == "consent_required":
                 state.status = "awaiting_consent"
@@ -278,7 +311,11 @@ class ProductionCenter:
             return plan
         if kind == "verify":
             plan = state.execution_plan or {}
-            verified = plan.get("status") == "planned" and bool(plan.get("argv") or plan.get("mode"))
+            safe = plan.get("safe_check")
+            safe_ok = True if not isinstance(safe, dict) else safe.get("returncode") == 0
+            verified = (plan.get("status") == "planned"
+                        and bool(plan.get("argv") or plan.get("mode"))
+                        and safe_ok)
             state.stage = "reflect" if verified else "execute"
             if not verified:
                 state.limitations.append("plano de execução ausente ou inválido")
@@ -304,8 +341,8 @@ class ProductionCenter:
         return {"status": "blocked", "reason": "ação de parada"}
 
     def step(self, state: ProductionState,
-             handler: Callable[[Dict[str, Any], ProductionState], Dict[str, Any]] | None = None
-             ) -> Dict[str, Any]:
+             handler: Callable[[Dict[str, Any], ProductionState], Dict[str, Any]] | None = None,
+             allow_safe_checks: bool = False) -> Dict[str, Any]:
         if state.status not in {"active"}:
             return {"status": state.status, "state": state.to_dict(),
                     "executed": False, "reason": "produção não está ativa"}
@@ -330,7 +367,10 @@ class ProductionCenter:
         state.budget = max(0.0, state.budget - float(action.get("cost", 0.0)))
         state.cost_spent += float(action.get("cost", 0.0))
         stage_before = state.stage
-        result = (handler or self._default_handler)(action, state)
+        if handler is None:
+            result = self._default_handler(action, state, allow_safe_checks)
+        else:
+            result = handler(action, state)
         state.evidence.append({"step": len(state.history) + 1,
                                "action": selected, "kind": action["kind"],
                                "result": result})
@@ -353,8 +393,13 @@ class ProductionCenter:
     def run(self, goal: str, *, risk_level: str = "low", budget: float = 8.0,
             consent: bool = False,
             handler: Callable[[Dict[str, Any], ProductionState], Dict[str, Any]] | None = None,
-            max_steps: int | None = None) -> Dict[str, Any]:
-        """Executa o ciclo de planejamento/gates; não executa terceiros."""
+            max_steps: int | None = None,
+            allow_safe_checks: bool = False) -> Dict[str, Any]:
+        """Executa o ciclo de planejamento/gates; não executa terceiros.
+
+        ``allow_safe_checks`` permite apenas o ``safe_argv`` read-only
+        declarado pelo adaptador; render, OAuth e coletores continuam fora.
+        """
         state = self._new_state(goal, risk_level=risk_level, budget=budget, consent=consent)
         limit = self.max_steps if max_steps is None else max_steps
         if type(limit) is not int or not 1 <= limit <= 32:
@@ -363,7 +408,8 @@ class ProductionCenter:
         for _ in range(limit):
             if state.status != "active":
                 break
-            outcome = self.step(state, handler=handler)
+            outcome = self.step(state, handler=handler,
+                                allow_safe_checks=allow_safe_checks)
             steps.append({"status": outcome.get("status"),
                           "action": (outcome.get("action") or {}).get("action_id")
                           if isinstance(outcome.get("action"), dict) else None})
@@ -425,6 +471,8 @@ def main(argv: list[str] | None = None) -> int:
     run_cmd.add_argument("--risk", choices=("low", "medium", "high"), default="low")
     run_cmd.add_argument("--budget", type=float, default=8.0)
     run_cmd.add_argument("--consent", action="store_true")
+    run_cmd.add_argument("--safe-checks", action="store_true",
+                         help="executa apenas checagens read-only declaradas")
     args = parser.parse_args(argv)
     center = ProductionCenter()
     try:
@@ -437,7 +485,8 @@ def main(argv: list[str] | None = None) -> int:
                                   budget=args.budget, consent=args.consent)
         else:
             payload = center.run(args.goal, risk_level=args.risk,
-                                 budget=args.budget, consent=args.consent)
+                                 budget=args.budget, consent=args.consent,
+                                 allow_safe_checks=args.safe_checks)
     except (ValueError, OSError) as exc:
         payload = {"status": "blocked", "error": str(exc), "executed": False}
         print(json.dumps(payload, ensure_ascii=False, indent=2))

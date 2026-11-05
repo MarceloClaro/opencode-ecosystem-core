@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import asyncio
+import sys
 
 import pytest
 
@@ -10,7 +11,8 @@ from marceloclaro.production_center import ProductionCenter
 from transformer.executive import ExecutiveAttention
 
 
-def fake_registry(tmp_path, *, requires_consent: bool = False):
+def fake_registry(tmp_path, *, requires_consent: bool = False,
+                  safe_argv: tuple[str, ...] = ()):
     path = tmp_path / "fake-skill"
     path.mkdir()
     (path / "SKILL.md").write_text("---\nname: fake\n---\n", encoding="utf-8")
@@ -20,6 +22,7 @@ def fake_registry(tmp_path, *, requires_consent: bool = False):
         skill_id="fake", path=path, license="MIT",
         kind="state-machine-skill", entrypoint="run.py",
         dependencies=(), requires_consent=requires_consent,
+        safe_argv=safe_argv,
     )
     return {"fake": entry}
 
@@ -74,6 +77,20 @@ def test_production_center_completes_plan_without_execution(tmp_path):
     assert report["confidence_promoted"] is False
     assert report["external_validation"] is False
     assert report["human_review_required"] is True
+
+
+def test_safe_checks_run_only_declared_read_only_argv(tmp_path):
+    safe = (sys.executable, "-c", "print('safe-ok')")
+    center = ProductionCenter(registry=fake_registry(tmp_path, safe_argv=safe))
+    without = center.run("documentar o fluxo")
+    assert "safe_check" not in (without["execution_plan"] or {})
+
+    with_safe = center.run("documentar o fluxo", allow_safe_checks=True)
+    assert with_safe["status"] == "completed"
+    check = with_safe["execution_plan"]["safe_check"]
+    assert check["returncode"] == 0
+    assert "safe-ok" in check["stdout"]
+    assert check["read_only"] is True
 
 
 def test_production_center_requires_consent(tmp_path):

@@ -69,6 +69,9 @@ para o diretório externo e prepara um handoff auditável.
   `--evidence_output` em cache externo; sem despejar dezenas de MiB no contexto.
 - Nenhum shell livre; comandos são listas de argumentos.
 - Nenhuma varredura REA no caminho crítico do `status`.
+- `allow_safe_checks` executa apenas o `safe_argv` read-only declarado pelo
+  adaptador (ex.: `archify doctor`, `project_state.py --help`, `hbg ready`);
+  render, OAuth, coletor e workspace-write continuam bloqueados.
 
 ## 6. Aceitação
 
@@ -78,13 +81,15 @@ para o diretório externo e prepara um handoff auditável.
 4. Orçamento limita passos e custo.
 5. Registro externo distingue pronto/bloqueado e não executa terceiros.
 6. `probe` REA é limitado, grava evidência e devolve hash.
-7. MCP `ecosystem_production` roteia para o primário.
-8. Testes verdes.
+7. `allow_safe_checks` executa somente `safe_argv` read-only e registra o
+   resultado; sem `safe_argv`, nada é executado.
+8. MCP `ecosystem_production` roteia para o primário.
+9. Testes verdes.
 
-**Resultado:** **98 passed** em R1069, R640, Transformer, atenção, autonomia e
+**Resultado:** **99 passed** em R1069, R640, Transformer, atenção, autonomia e
 metacognição. Execução real do centro: `specify → route → execute:archify →
-verify → reflect → deliver`, com `confidence_promoted=false` e
-`external_validation=false`.
+verify → reflect → deliver`, com `archify doctor` via safe check,
+`confidence_promoted=false` e `external_validation=false`.
 
 ## 7. Limites
 

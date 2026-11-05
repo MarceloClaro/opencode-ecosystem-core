@@ -30,7 +30,7 @@ orçamento, progresso e tags — e devolve um recibo auditável.
 | `/producao status` | Mostra estágios, pesos das cabeças e adaptadores externos |
 | `/producao adapters` | Lista adaptadores, licenças, dependências e bloqueios |
 | `/producao plan '<objetivo>' [--risk low\|medium\|high] [--budget N] [--consent]` | Dry-run: ranqueia ações sem executar |
-| `/producao run '<objetivo>' [--risk ...] [--budget N] [--consent]` | Ciclo de planejamento/gates; não executa terceiros |
+| `/producao run '<objetivo>' [--risk ...] [--budget N] [--consent] [--safe-checks]` | Ciclo de planejamento/gates; `--safe-checks` roda só checagens read-only declaradas |
 | `/producao probe <adapter>` | Análise REA em escopo reduzido, com evidência em cache |
 
 ## Uso programático
@@ -65,6 +65,8 @@ core.production_center_action({"operation": "plan", "goal": "produzir um artigo"
 5. **Orçamento**: passos e custo são limitados; esgotou, para.
 6. **Sem cópia sem licença**: os adaptadores apontam para o diretório externo;
    não copiam conteúdo de terceiros para o repositório.
+7. **Checagem segura**: `--safe-checks` executa apenas o `safe_argv` read-only
+   declarado pelo adaptador; sem essa declaração, nada roda.
 
 ## Adaptadores conhecidos
 
