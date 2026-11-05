@@ -50,5 +50,5 @@ def test_catalog_has_unique_link_paths():
 def test_generator_is_versioned():
     assert GENERATOR.is_file()
     text = GENERATOR.read_text(encoding="utf-8")
-    assert "projetos/literarios" in text
+    assert "literatura" in text
     assert "catalogo.json" in text

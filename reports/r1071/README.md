@@ -27,7 +27,7 @@ copiado.
 | `Molambudos_VictoriaRegia` | 435 pp, 160×230 mm, PT/EN/ZH, capa, ISBN |
 | `Molambudos_v2` | 57 pp, 7 degraus, esboço linear |
 | `Molambudos_v2_Diario` | 49 pp, Parte I–II ilustrada |
-| `templates/livro/molambudos` | 4 capítulos incompletos; objeto do parecer antigo |
+| `literatura/templates/molambudos-antigo` | 4 capítulos incompletos; objeto do parecer antigo |
 
 O `book.json` aponta para a edição KDP PT-BR. A escolha da edição canônica é
 editorial e pertence ao autor.

@@ -1,14 +1,15 @@
 # R1072 — Hub dos projetos literários
 
-**Status:** hub local criado; nenhum original foi movido. `projetos/` é
-gitignored, então o conteúdo das obras permanece fora do versionamento.
+**Status:** projetos literários movidos fisicamente para `literatura/`; caminhos
+antigos preservados por symlinks de compatibilidade. `literatura/` e `projetos/`
+são gitignored, então o conteúdo das obras permanece fora do versionamento.
 **Objetivo:** organizar Molambudos e os demais projetos literários em uma única
 entrada para auditoria, revisão, build e QA.
 
 ## 1. Estrutura
 
 ```text
-projetos/literarios/
+literatura/
 ├── README.md
 ├── catalogo.json
 ├── CHECKLIST_AUDITORIA.md
@@ -27,14 +28,16 @@ projetos/literarios/
 └── templates-academicos/   -> templates 12–30, contexto
 ```
 
-O hub usa **symlinks relativos**. Se um link quebrar, o projeto original pode
-ter sido movido; o catálogo indica o caminho de origem.
+Os projetos literários foram **movidos fisicamente** para `literatura/`.
+`projetos/` mantém symlinks de compatibilidade para os caminhos antigos. Os
+templates versionados em `templates/projects/livro-*` permanecem no lugar; o
+caminho `literatura/livros/.../compilado` aponta para eles por symlink.
 
 ## 2. Obras canônicas
 
 | ID | Obra | Páginas | PDF |
 |---|---|---:|---|
-| `molambudos-victoria-regia` | Molambudos — O Diário do Paciente 1.260 (KDP PT-BR) | 435 | `projetos/molambudos/Molambudos_VictoriaRegia/main_kdp_pt_160x230mm.pdf` |
+| `molambudos-victoria-regia` | Molambudos — O Diário do Paciente 1.260 (KDP PT-BR) | 435 | `literatura/molambudos/Molambudos_VictoriaRegia/main_kdp_pt_160x230mm.pdf` |
 | `livro-opencode` | Engenharia de Ecossistemas Cognitivos: OpenCode Ecosystem | 478 | `templates/projects/livro-opencode/livro-dark.pdf` |
 | `livro-volume2` | Volume 2 — Gêmeos Digitais Periodontais: O Framework SUS-Twin | 184 | `templates/projects/livro-volume2/dark.pdf` |
 | `livro-gemeos-odontologia` | Gêmeos Digitais Periodontais: O Framework SUS-Twin | 180 | `templates/projects/livro-gemeos-odontologia/dark.pdf` |
@@ -45,7 +48,7 @@ A escolha da edição canônica é editorial e pertence ao autor.
 ## 3. Como usar
 
 ```bash
-cd projetos/literarios
+cd literatura
 cat catalogo.json | python3 -m json.tool | less
 
 cd molambudos/victoria-regia

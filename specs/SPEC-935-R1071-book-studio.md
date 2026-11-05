@@ -47,7 +47,7 @@ somente no engine `latex`, que usa `source`.
 
 ## 5. Molambudos
 
-- Projeto: `projetos/molambudos/Molambudos_VictoriaRegia`.
+- Projeto: `literatura/molambudos/Molambudos_VictoriaRegia`.
 - Manifesto: `book.json`, `engine=latex`,
   `source=main_kdp_pt_160x230mm.tex`, `trim=160x230mm`.
 - Build: 435 pp, 160×230 mm, 15 fontes embutidas, metadados preenchidos, zero

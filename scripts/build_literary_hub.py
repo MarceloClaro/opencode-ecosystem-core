@@ -4,7 +4,7 @@ from datetime import datetime, timezone
 import hashlib, json, os, subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
-HUB = ROOT / 'projetos/literarios'
+HUB = ROOT / 'literatura'
 HUB.mkdir(parents=True, exist_ok=True)
 
 def pdf_info(path: Path):
@@ -57,10 +57,10 @@ WORKS = [
         'title': 'Molambudos — O Diário do Paciente 1.260 (KDP PT-BR)',
         'category': 'livro', 'scope': 'literario', 'canonical': True,
         'status': 'canônico KDP PT-BR; 435 pp; 160×230 mm',
-        'source': 'projetos/molambudos/Molambudos_VictoriaRegia',
-        'compiled': 'projetos/molambudos/Molambudos_VictoriaRegia',
-        'pdf': 'projetos/molambudos/Molambudos_VictoriaRegia/main_kdp_pt_160x230mm.pdf',
-        'links': [('molambudos/victoria-regia', 'projetos/molambudos/Molambudos_VictoriaRegia')],
+        'source': 'literatura/molambudos/Molambudos_VictoriaRegia',
+        'compiled': 'literatura/molambudos/Molambudos_VictoriaRegia',
+        'pdf': 'literatura/molambudos/Molambudos_VictoriaRegia/main_kdp_pt_160x230mm.pdf',
+        'links': [('molambudos/victoria-regia', 'literatura/molambudos/Molambudos_VictoriaRegia')],
         'audit': 'reports/r1071',
         'notes': 'Book Studio: book.json, engine latex, source main_kdp_pt_160x230mm.tex; metadados e aspas corrigidos localmente.',
     },
@@ -69,11 +69,11 @@ WORKS = [
         'title': 'Molambudos v2.0 — O Prontuário 1.263 (esboço)',
         'category': 'livro', 'scope': 'literario', 'canonical': False,
         'status': 'esboço v0.1; 57 pp; 6×9 in; 112 testes',
-        'source': 'projetos/molambudos/Molambudos_v2',
-        'compiled': 'projetos/molambudos/Molambudos_v2',
-        'pdf': 'projetos/molambudos/Molambudos_v2/Molambudos_O-Prontuario-1263_v2.0-esboco_2026-07-13.pdf',
-        'links': [('molambudos/v2', 'projetos/molambudos/Molambudos_v2')],
-        'audit': 'projetos/molambudos/Molambudos_v2/misc/avaliacao_honesta_v2.0.md',
+        'source': 'literatura/molambudos/Molambudos_v2',
+        'compiled': 'literatura/molambudos/Molambudos_v2',
+        'pdf': 'literatura/molambudos/Molambudos_v2/Molambudos_O-Prontuario-1263_v2.0-esboco_2026-07-13.pdf',
+        'links': [('molambudos/v2', 'literatura/molambudos/Molambudos_v2')],
+        'audit': 'literatura/molambudos/Molambudos_v2/misc/avaliacao_honesta_v2.0.md',
         'notes': 'Sete degraus lineares; projeto distinto da edição VictoriaRegia.',
     },
     {
@@ -81,10 +81,10 @@ WORKS = [
         'title': 'Molambudos — Diário 1.260 v2 (Partes I–II)',
         'category': 'livro', 'scope': 'literario', 'canonical': False,
         'status': '49 pp; 6×9 in; versão ilustrada',
-        'source': 'projetos/molambudos/Molambudos_v2_Diario',
-        'compiled': 'projetos/molambudos/Molambudos_v2_Diario',
-        'pdf': 'projetos/molambudos/Molambudos_v2_Diario/Molambudos_Diario-1260_v2-visceral_PartesI-II-ilustrada_2026-07-13.pdf',
-        'links': [('molambudos/diario', 'projetos/molambudos/Molambudos_v2_Diario')],
+        'source': 'literatura/molambudos/Molambudos_v2_Diario',
+        'compiled': 'literatura/molambudos/Molambudos_v2_Diario',
+        'pdf': 'literatura/molambudos/Molambudos_v2_Diario/Molambudos_Diario-1260_v2-visceral_PartesI-II-ilustrada_2026-07-13.pdf',
+        'links': [('molambudos/diario', 'literatura/molambudos/Molambudos_v2_Diario')],
         'audit': None,
         'notes': 'Derivação visual do Diário; não substitui a edição VictoriaRegia.',
     },
@@ -93,10 +93,10 @@ WORKS = [
         'title': 'Molambudos — template LaTeX antigo (4 capítulos)',
         'category': 'template', 'scope': 'literario', 'canonical': False,
         'status': '25 pp; A4; template incompleto',
-        'source': 'templates/livro/molambudos',
-        'compiled': 'templates/livro/molambudos',
-        'pdf': 'templates/livro/molambudos/main.pdf',
-        'links': [('molambudos/template-antigo', 'templates/livro/molambudos')],
+        'source': 'literatura/templates/molambudos-antigo',
+        'compiled': 'literatura/templates/molambudos-antigo',
+        'pdf': 'literatura/templates/molambudos-antigo/main.pdf',
+        'links': [('molambudos/template-antigo', 'literatura/templates/molambudos-antigo')],
         'audit': 'REVISAO_MOLAMBUDOS.md',
         'notes': 'Objeto do parecer antigo; NÃO representa a edição VictoriaRegia. Ver nota de escopo.',
     },
@@ -104,11 +104,11 @@ WORKS = [
         'id': 'livro-opencode',
         'title': 'Engenharia de Ecossistemas Cognitivos: OpenCode Ecosystem',
         'category': 'livro', 'scope': 'literario', 'canonical': True,
-        'status': '478 pp; A4; compilado em template/projects',
-        'source': 'projetos/02_Livro_OpenCode',
+        'status': '478 pp; A4; compilado em templates/projects/livro-opencode',
+        'source': 'literatura/livros/livro-opencode/fonte',
         'compiled': 'templates/projects/livro-opencode',
         'pdf': 'templates/projects/livro-opencode/livro-dark.pdf',
-        'links': [('livros/livro-opencode-fonte', 'projetos/02_Livro_OpenCode'),
+        'links': [('livros/livro-opencode-fonte', 'literatura/livros/livro-opencode/fonte'),
                   ('livros/livro-opencode-compilado', 'templates/projects/livro-opencode')],
         'audit': None,
         'notes': 'Fonte em projetos/02; PDF em templates/projects/livro-opencode.',
@@ -117,11 +117,11 @@ WORKS = [
         'id': 'livro-volume2',
         'title': 'Volume 2 — Gêmeos Digitais Periodontais: O Framework SUS-Twin',
         'category': 'livro', 'scope': 'literario', 'canonical': True,
-        'status': '184 pp; A4; compilado em template/projects',
-        'source': 'projetos/03_Livro_Volume2',
+        'status': '184 pp; A4; compilado em templates/projects/livro-volume2',
+        'source': 'literatura/livros/livro-volume2/fonte',
         'compiled': 'templates/projects/livro-volume2',
         'pdf': 'templates/projects/livro-volume2/dark.pdf',
-        'links': [('livros/livro-volume2-fonte', 'projetos/03_Livro_Volume2'),
+        'links': [('livros/livro-volume2-fonte', 'literatura/livros/livro-volume2/fonte'),
                   ('livros/livro-volume2-compilado', 'templates/projects/livro-volume2')],
         'audit': None,
         'notes': 'Fonte em projetos/03; PDF em templates/projects/livro-volume2.',
@@ -130,11 +130,11 @@ WORKS = [
         'id': 'livro-gemeos-odontologia',
         'title': 'Gêmeos Digitais Periodontais: O Framework SUS-Twin',
         'category': 'livro', 'scope': 'literario', 'canonical': True,
-        'status': '180 pp; A4; compilado em template/projects',
-        'source': 'projetos/04_Livro_Gemeos_Odontologia',
+        'status': '180 pp; A4; compilado em templates/projects/livro-gemeos-odontologia',
+        'source': 'literatura/livros/livro-gemeos/fonte',
         'compiled': 'templates/projects/livro-gemeos-odontologia',
         'pdf': 'templates/projects/livro-gemeos-odontologia/dark.pdf',
-        'links': [('livros/livro-gemeos-fonte', 'projetos/04_Livro_Gemeos_Odontologia'),
+        'links': [('livros/livro-gemeos-fonte', 'literatura/livros/livro-gemeos/fonte'),
                   ('livros/livro-gemeos-compilado', 'templates/projects/livro-gemeos-odontologia')],
         'audit': None,
         'notes': 'Fonte em projetos/04; PDF em templates/projects/livro-gemeos-odontologia.',
@@ -144,22 +144,22 @@ WORKS = [
         'title': 'IA em Odontologia — livro/template',
         'category': 'livro', 'scope': 'literario', 'canonical': False,
         'status': 'fonte e template; sem PDF compilado no diretório',
-        'source': 'projetos/ia-em-odontologia',
-        'compiled': 'templates/livro/ia-em-odontologia',
+        'source': 'literatura/livros/ia-odontologia/fonte',
+        'compiled': 'literatura/livros/ia-odontologia/template',
         'pdf': None,
-        'links': [('livros/ia-odontologia-fonte', 'projetos/ia-em-odontologia'),
-                  ('livros/ia-odontologia-template', 'templates/livro/ia-em-odontologia')],
+        'links': [('livros/ia-odontologia-fonte', 'literatura/livros/ia-odontologia/fonte'),
+                  ('livros/ia-odontologia-template', 'literatura/livros/ia-odontologia/template')],
         'audit': None,
-        'notes': 'Fonte em projetos/ia-em-odontologia; template em templates/livro.',
+        'notes': 'Fonte em literatura/livros/ia-odontologia/fonte; template em templates/livro.',
     },
     {
         'id': 'template-victoria-regia',
         'title': 'Victoria Regia — template clássico LaTeX',
         'category': 'template', 'scope': 'literario', 'canonical': False,
         'status': 'template; sem PDF compilado',
-        'source': 'projetos/36_Victoria_Regia',
+        'source': 'literatura/templates/victoria-regia',
         'compiled': None, 'pdf': None,
-        'links': [('templates/victoria-regia', 'projetos/36_Victoria_Regia')],
+        'links': [('templates/victoria-regia', 'literatura/templates/victoria-regia')],
         'audit': None,
         'notes': 'Template base; duplicatas em 23_Template_Livros e na raiz.',
     },
@@ -168,9 +168,9 @@ WORKS = [
         'title': '23_Template_Livros — coleção de templates',
         'category': 'template', 'scope': 'literario', 'canonical': False,
         'status': 'coleção de templates; sem PDF único',
-        'source': 'projetos/23_Template_Livros',
+        'source': 'literatura/templates/template-livros',
         'compiled': None, 'pdf': None,
-        'links': [('templates/template-livros', 'projetos/23_Template_Livros')],
+        'links': [('templates/template-livros', 'literatura/templates/template-livros')],
         'audit': None,
         'notes': 'Contém Victoria Regia e template Springer Nature.',
     },
@@ -212,9 +212,9 @@ WORKS = [
         'title': 'Template — Livro Odontologia IA',
         'category': 'template', 'scope': 'literario', 'canonical': False,
         'status': 'template; sem PDF compilado',
-        'source': 'templates/projects/livro-odontologia-ia',
+        'source': 'literatura/templates/livro-odontologia-ia',
         'compiled': None, 'pdf': None,
-        'links': [('templates/livro-odontologia-ia', 'templates/projects/livro-odontologia-ia')],
+        'links': [('templates/livro-odontologia-ia', 'literatura/templates/livro-odontologia-ia')],
         'audit': None, 'notes': 'Template de livro; compilar antes de auditar.',
     },
 ]
@@ -267,9 +267,11 @@ stale = HUB / 'templates-academicos/23_template_livros'
 if stale.is_symlink():
     stale.unlink()
 
-# Create links and catalog rows
+# Create links and catalog rows. Works already inside literatura/ need no alias.
 rows = []
 for work in WORKS:
+    if str(work.get('source','')).startswith('literatura/'):
+        work['links'] = []
     pdf = ROOT / work['pdf'] if work.get('pdf') else None
     info = pdf_info(pdf) if pdf else {}
     row = dict(work)
@@ -285,8 +287,8 @@ for work in WORKS:
 catalog = {
     'schema_version': 1,
     'generated_at': datetime.now(timezone.utc).isoformat(),
-    'root': 'projetos/literarios',
-    'policy': 'symlinks; nenhum original foi movido; projetos/ é gitignored',
+    'root': 'literatura',
+    'policy': 'projetos em literatura/; projetos/ com links de compatibilidade; templates versionados em templates/projects',
     'count': len(rows),
     'works': rows,
 }
@@ -314,12 +316,12 @@ def template_table(scope):
 readme = f'''# Hub dos projetos literários
 
 **Gerado:** {catalog['generated_at']}  
-**Política:** symlinks; nenhum original foi movido. `projetos/` é gitignored.
+**Política:** projetos literários físicos em `literatura/`; `projetos/` mantém links de compatibilidade; templates versionados permanecem em `templates/projects`. Conteúdo gitignored.
 
 ## Como usar
 
 ```bash
-cd projetos/literarios
+cd literatura
 cat catalogo.json | python3 -m json.tool | less
 cd molambudos/victoria-regia
 python3 -m marceloclaro.book_studio status .

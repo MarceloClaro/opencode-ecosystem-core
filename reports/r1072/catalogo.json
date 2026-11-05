@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-05T21:52:39.094098+00:00",
-  "root": "projetos/literarios",
-  "policy": "symlinks; nenhum original foi movido; projetos/ é gitignored",
+  "generated_at": "2026-11-05T22:00:06.862871+00:00",
+  "root": "literatura",
+  "policy": "projetos em literatura/; projetos/ com links de compatibilidade; templates versionados em templates/projects",
   "count": 45,
   "works": [
     {
@@ -12,16 +12,10 @@
       "scope": "literario",
       "canonical": true,
       "status": "canônico KDP PT-BR; 435 pp; 160×230 mm",
-      "source": "projetos/molambudos/Molambudos_VictoriaRegia",
-      "compiled": "projetos/molambudos/Molambudos_VictoriaRegia",
-      "pdf": "projetos/molambudos/Molambudos_VictoriaRegia/main_kdp_pt_160x230mm.pdf",
-      "links": [
-        {
-          "path": "molambudos/victoria-regia",
-          "target": "projetos/molambudos/Molambudos_VictoriaRegia",
-          "status": "ok"
-        }
-      ],
+      "source": "literatura/molambudos/Molambudos_VictoriaRegia",
+      "compiled": "literatura/molambudos/Molambudos_VictoriaRegia",
+      "pdf": "literatura/molambudos/Molambudos_VictoriaRegia/main_kdp_pt_160x230mm.pdf",
+      "links": [],
       "audit": "reports/r1071",
       "notes": "Book Studio: book.json, engine latex, source main_kdp_pt_160x230mm.tex; metadados e aspas corrigidos localmente.",
       "pdf_pages": 435,
@@ -37,17 +31,11 @@
       "scope": "literario",
       "canonical": false,
       "status": "esboço v0.1; 57 pp; 6×9 in; 112 testes",
-      "source": "projetos/molambudos/Molambudos_v2",
-      "compiled": "projetos/molambudos/Molambudos_v2",
-      "pdf": "projetos/molambudos/Molambudos_v2/Molambudos_O-Prontuario-1263_v2.0-esboco_2026-07-13.pdf",
-      "links": [
-        {
-          "path": "molambudos/v2",
-          "target": "projetos/molambudos/Molambudos_v2",
-          "status": "ok"
-        }
-      ],
-      "audit": "projetos/molambudos/Molambudos_v2/misc/avaliacao_honesta_v2.0.md",
+      "source": "literatura/molambudos/Molambudos_v2",
+      "compiled": "literatura/molambudos/Molambudos_v2",
+      "pdf": "literatura/molambudos/Molambudos_v2/Molambudos_O-Prontuario-1263_v2.0-esboco_2026-07-13.pdf",
+      "links": [],
+      "audit": "literatura/molambudos/Molambudos_v2/misc/avaliacao_honesta_v2.0.md",
       "notes": "Sete degraus lineares; projeto distinto da edição VictoriaRegia.",
       "pdf_pages": 57,
       "pdf_page_size": "432 x 648 pts",
@@ -62,16 +50,10 @@
       "scope": "literario",
       "canonical": false,
       "status": "49 pp; 6×9 in; versão ilustrada",
-      "source": "projetos/molambudos/Molambudos_v2_Diario",
-      "compiled": "projetos/molambudos/Molambudos_v2_Diario",
-      "pdf": "projetos/molambudos/Molambudos_v2_Diario/Molambudos_Diario-1260_v2-visceral_PartesI-II-ilustrada_2026-07-13.pdf",
-      "links": [
-        {
-          "path": "molambudos/diario",
-          "target": "projetos/molambudos/Molambudos_v2_Diario",
-          "status": "ok"
-        }
-      ],
+      "source": "literatura/molambudos/Molambudos_v2_Diario",
+      "compiled": "literatura/molambudos/Molambudos_v2_Diario",
+      "pdf": "literatura/molambudos/Molambudos_v2_Diario/Molambudos_Diario-1260_v2-visceral_PartesI-II-ilustrada_2026-07-13.pdf",
+      "links": [],
       "audit": null,
       "notes": "Derivação visual do Diário; não substitui a edição VictoriaRegia.",
       "pdf_pages": 49,
@@ -87,16 +69,10 @@
       "scope": "literario",
       "canonical": false,
       "status": "25 pp; A4; template incompleto",
-      "source": "templates/livro/molambudos",
-      "compiled": "templates/livro/molambudos",
-      "pdf": "templates/livro/molambudos/main.pdf",
-      "links": [
-        {
-          "path": "molambudos/template-antigo",
-          "target": "templates/livro/molambudos",
-          "status": "ok"
-        }
-      ],
+      "source": "literatura/templates/molambudos-antigo",
+      "compiled": "literatura/templates/molambudos-antigo",
+      "pdf": "literatura/templates/molambudos-antigo/main.pdf",
+      "links": [],
       "audit": "REVISAO_MOLAMBUDOS.md",
       "notes": "Objeto do parecer antigo; NÃO representa a edição VictoriaRegia. Ver nota de escopo.",
       "pdf_pages": 25,
@@ -111,22 +87,11 @@
       "category": "livro",
       "scope": "literario",
       "canonical": true,
-      "status": "478 pp; A4; compilado em template/projects",
-      "source": "projetos/02_Livro_OpenCode",
+      "status": "478 pp; A4; compilado em templates/projects/livro-opencode",
+      "source": "literatura/livros/livro-opencode/fonte",
       "compiled": "templates/projects/livro-opencode",
       "pdf": "templates/projects/livro-opencode/livro-dark.pdf",
-      "links": [
-        {
-          "path": "livros/livro-opencode-fonte",
-          "target": "projetos/02_Livro_OpenCode",
-          "status": "ok"
-        },
-        {
-          "path": "livros/livro-opencode-compilado",
-          "target": "templates/projects/livro-opencode",
-          "status": "ok"
-        }
-      ],
+      "links": [],
       "audit": null,
       "notes": "Fonte em projetos/02; PDF em templates/projects/livro-opencode.",
       "pdf_pages": 478,
@@ -141,22 +106,11 @@
       "category": "livro",
       "scope": "literario",
       "canonical": true,
-      "status": "184 pp; A4; compilado em template/projects",
-      "source": "projetos/03_Livro_Volume2",
+      "status": "184 pp; A4; compilado em templates/projects/livro-volume2",
+      "source": "literatura/livros/livro-volume2/fonte",
       "compiled": "templates/projects/livro-volume2",
       "pdf": "templates/projects/livro-volume2/dark.pdf",
-      "links": [
-        {
-          "path": "livros/livro-volume2-fonte",
-          "target": "projetos/03_Livro_Volume2",
-          "status": "ok"
-        },
-        {
-          "path": "livros/livro-volume2-compilado",
-          "target": "templates/projects/livro-volume2",
-          "status": "ok"
-        }
-      ],
+      "links": [],
       "audit": null,
       "notes": "Fonte em projetos/03; PDF em templates/projects/livro-volume2.",
       "pdf_pages": 184,
@@ -171,22 +125,11 @@
       "category": "livro",
       "scope": "literario",
       "canonical": true,
-      "status": "180 pp; A4; compilado em template/projects",
-      "source": "projetos/04_Livro_Gemeos_Odontologia",
+      "status": "180 pp; A4; compilado em templates/projects/livro-gemeos-odontologia",
+      "source": "literatura/livros/livro-gemeos/fonte",
       "compiled": "templates/projects/livro-gemeos-odontologia",
       "pdf": "templates/projects/livro-gemeos-odontologia/dark.pdf",
-      "links": [
-        {
-          "path": "livros/livro-gemeos-fonte",
-          "target": "projetos/04_Livro_Gemeos_Odontologia",
-          "status": "ok"
-        },
-        {
-          "path": "livros/livro-gemeos-compilado",
-          "target": "templates/projects/livro-gemeos-odontologia",
-          "status": "ok"
-        }
-      ],
+      "links": [],
       "audit": null,
       "notes": "Fonte em projetos/04; PDF em templates/projects/livro-gemeos-odontologia.",
       "pdf_pages": 180,
@@ -202,23 +145,12 @@
       "scope": "literario",
       "canonical": false,
       "status": "fonte e template; sem PDF compilado no diretório",
-      "source": "projetos/ia-em-odontologia",
-      "compiled": "templates/livro/ia-em-odontologia",
+      "source": "literatura/livros/ia-odontologia/fonte",
+      "compiled": "literatura/livros/ia-odontologia/template",
       "pdf": null,
-      "links": [
-        {
-          "path": "livros/ia-odontologia-fonte",
-          "target": "projetos/ia-em-odontologia",
-          "status": "ok"
-        },
-        {
-          "path": "livros/ia-odontologia-template",
-          "target": "templates/livro/ia-em-odontologia",
-          "status": "ok"
-        }
-      ],
+      "links": [],
       "audit": null,
-      "notes": "Fonte em projetos/ia-em-odontologia; template em templates/livro.",
+      "notes": "Fonte em literatura/livros/ia-odontologia/fonte; template em templates/livro.",
       "pdf_pages": null,
       "pdf_page_size": null,
       "pdf_title": null,
@@ -232,16 +164,10 @@
       "scope": "literario",
       "canonical": false,
       "status": "template; sem PDF compilado",
-      "source": "projetos/36_Victoria_Regia",
+      "source": "literatura/templates/victoria-regia",
       "compiled": null,
       "pdf": null,
-      "links": [
-        {
-          "path": "templates/victoria-regia",
-          "target": "projetos/36_Victoria_Regia",
-          "status": "ok"
-        }
-      ],
+      "links": [],
       "audit": null,
       "notes": "Template base; duplicatas em 23_Template_Livros e na raiz.",
       "pdf_pages": null,
@@ -257,16 +183,10 @@
       "scope": "literario",
       "canonical": false,
       "status": "coleção de templates; sem PDF único",
-      "source": "projetos/23_Template_Livros",
+      "source": "literatura/templates/template-livros",
       "compiled": null,
       "pdf": null,
-      "links": [
-        {
-          "path": "templates/template-livros",
-          "target": "projetos/23_Template_Livros",
-          "status": "ok"
-        }
-      ],
+      "links": [],
       "audit": null,
       "notes": "Contém Victoria Regia e template Springer Nature.",
       "pdf_pages": null,
@@ -357,16 +277,10 @@
       "scope": "literario",
       "canonical": false,
       "status": "template; sem PDF compilado",
-      "source": "templates/projects/livro-odontologia-ia",
+      "source": "literatura/templates/livro-odontologia-ia",
       "compiled": null,
       "pdf": null,
-      "links": [
-        {
-          "path": "templates/livro-odontologia-ia",
-          "target": "templates/projects/livro-odontologia-ia",
-          "status": "ok"
-        }
-      ],
+      "links": [],
       "audit": null,
       "notes": "Template de livro; compilar antes de auditar.",
       "pdf_pages": null,
