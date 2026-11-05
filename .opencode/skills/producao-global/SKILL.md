@@ -20,8 +20,8 @@ spec: SPEC-935-R1069-centro-producao-global.md
 
 O Centro de Produção Global transforma o orquestrador em uma central de
 produção: em vez de apenas escolher um agente, ele pondera o próximo passo por
-seis cabeças de atenção — objetivo, estágio, evidência, risco, confiança e
-orçamento — e devolve um recibo auditável.
+oito cabeças de atenção — objetivo, estágio, evidência, risco, confiança,
+orçamento, progresso e tags — e devolve um recibo auditável.
 
 ## Comandos
 
