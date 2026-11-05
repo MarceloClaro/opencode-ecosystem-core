@@ -8,11 +8,13 @@ somente pela CLI `approve`, nunca pelo MCP.
 from __future__ import annotations
 
 import base64
+import getpass
 import hashlib
 import hmac
 import json
 import os
 import secrets
+import socket
 import time
 from pathlib import Path
 
@@ -71,7 +73,8 @@ def _text_hash(text: str | None) -> str | None:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
-def _payload(command: str, app: str, ref: str, text: str | None, exp: int, nonce: str) -> dict:
+def _payload(command: str, app: str, ref: str, text: str | None, exp: int,
+             nonce: str, operator: str, host: str) -> dict:
     return {
         "v": 1,
         "command": command,
@@ -80,6 +83,8 @@ def _payload(command: str, app: str, ref: str, text: str | None, exp: int, nonce
         "text_sha256": _text_hash(text),
         "exp": exp,
         "nonce": nonce,
+        "operator": operator,
+        "host": host,
     }
 
 
@@ -96,6 +101,7 @@ def issue_approval(
     text: str | None = None,
     ttl_seconds: int | None = None,
     now: int | None = None,
+    operator: str | None = None,
 ) -> dict:
     if command not in {"click", "type"}:
         raise ApprovalError("command_denied", "aprovação só existe para click/type")
@@ -105,7 +111,9 @@ def issue_approval(
     if type(ttl) is not int or not 1 <= ttl <= MAX_TTL:
         raise ApprovalError("ttl_invalid", f"TTL deve estar entre 1 e {MAX_TTL} segundos")
     issued_at = int(time.time() if now is None else now)
-    payload = _payload(command, app, ref, text, issued_at + ttl, secrets.token_hex(16))
+    payload = _payload(command, app, ref, text, issued_at + ttl,
+                       secrets.token_hex(16), operator or getpass.getuser(),
+                       socket.gethostname())
     signature = hmac.new(_secret(config), _canonical(payload), hashlib.sha256).digest()
     return {
         "token": f"v1.{_b64(_canonical(payload))}.{_b64(signature)}",
@@ -140,6 +148,8 @@ def verify_approval(
     expected = hmac.new(_secret(config), _canonical(payload), hashlib.sha256).digest()
     if not hmac.compare_digest(provided, expected):
         raise ApprovalError("approval_invalid", "assinatura de aprovação inválida")
+    if payload.get("host") != socket.gethostname():
+        raise ApprovalError("approval_mismatch", "aprovação emitida em outro host")
     current = int(time.time() if now is None else now)
     if int(payload.get("exp", 0)) <= current:
         raise ApprovalError("approval_expired", "aprovação expirada")

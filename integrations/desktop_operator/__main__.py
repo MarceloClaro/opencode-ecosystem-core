@@ -67,6 +67,7 @@ def main(argv: list[str] | None = None) -> int:
             "ok": True,
             "binary": Path(policy.resolve_binary(config)).name if policy.resolve_binary(config) else None,
             "binary_found": bool(policy.resolve_binary(config)),
+            "backend": config.backend,
             "allowed_apps": list(config.allowed_apps),
             "state_dir": str(Path(config.state_dir).expanduser()),
             "timeout_ms": config.timeout_ms,

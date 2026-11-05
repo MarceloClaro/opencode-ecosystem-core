@@ -1,0 +1,87 @@
+{
+  "version": "r1060-atspi/1",
+  "ok": true,
+  "command": "snapshot",
+  "data": {
+    "app": "r1060-entry-app.py",
+    "snapshot_id": "8ec1e242",
+    "ref_count": 3,
+    "complete": true,
+    "truncated": false,
+    "backend": "atspi",
+    "tree": {
+      "role": "application",
+      "name": "r1060-entry-app.py",
+      "children": [
+        {
+          "role": "frame",
+          "name": "R1060 Entry App",
+          "states": [
+            "enabled",
+            "visible"
+          ],
+          "children": [
+            {
+              "role": "filler",
+              "name": "",
+              "states": [
+                "enabled",
+                "visible"
+              ],
+              "children": [
+                {
+                  "role": "text",
+                  "name": "",
+                  "value": "R1060",
+                  "ref_id": "@8ec1e242:e1",
+                  "states": [
+                    "enabled",
+                    "visible"
+                  ]
+                },
+                {
+                  "role": "button",
+                  "name": "Aplicar",
+                  "ref_id": "@8ec1e242:e2",
+                  "states": [
+                    "enabled",
+                    "visible"
+                  ]
+                },
+                {
+                  "role": "label",
+                  "name": "Resultado: (vazio)",
+                  "value": "Resultado: (vazio)",
+                  "states": [
+                    "enabled",
+                    "visible"
+                  ]
+                },
+                {
+                  "role": "button",
+                  "name": "Fechar",
+                  "ref_id": "@8ec1e242:e3",
+                  "states": [
+                    "enabled",
+                    "visible"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "policy": {
+    "allowed": true,
+    "command": "snapshot",
+    "app": "r1060-entry-app.py",
+    "backend": "atspi",
+    "approval_used": false,
+    "duration_ms": 66,
+    "truncated": false,
+    "fallback_from": null,
+    "external_validation": false
+  }
+}

@@ -44,6 +44,7 @@ class PolicyDenied(Exception):
 @dataclass(frozen=True)
 class PolicyConfig:
     binary: str = ""
+    backend: str = "auto"
     allowed_apps: tuple[str, ...] = field(default_factory=tuple)
     state_dir: str = DEFAULT_STATE
     timeout_ms: int = 15000
@@ -53,6 +54,8 @@ class PolicyConfig:
 
     def __post_init__(self) -> None:
         object.__setattr__(self, "allowed_apps", tuple(str(a) for a in self.allowed_apps))
+        if self.backend not in {"auto", "agent-desktop", "atspi"}:
+            raise ValueError("backend deve ser auto, agent-desktop ou atspi")
         for name in ("timeout_ms", "max_text_bytes", "max_output_bytes", "approval_ttl_seconds"):
             value = getattr(self, name)
             if type(value) is not int or value <= 0:
@@ -67,8 +70,8 @@ def _config_dict(path: Path | None, environ: dict[str, str]) -> dict[str, Any]:
     data = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(data, dict):
         raise ValueError("configuração deve ser objeto JSON")
-    allowed = {"binary", "allowed_apps", "state_dir", "timeout_ms", "max_text_bytes",
-               "max_output_bytes", "approval_ttl_seconds"}
+    allowed = {"binary", "backend", "allowed_apps", "state_dir", "timeout_ms",
+               "max_text_bytes", "max_output_bytes", "approval_ttl_seconds"}
     unknown = set(data) - allowed
     if unknown:
         raise ValueError(f"chaves desconhecidas na configuração: {sorted(unknown)}")
@@ -85,9 +88,11 @@ def load_config(path: Path | None = None, environ: dict[str, str] | None = None)
     if env_apps:
         apps = [item.strip() for item in env_apps.split(",") if item.strip()]
     binary = env.get("DESKTOP_OPERATOR_BIN", "").strip() or str(data.get("binary", "") or "")
+    backend = env.get("DESKTOP_OPERATOR_BACKEND", "").strip() or str(data.get("backend", "auto") or "auto")
     state_dir = env.get("DESKTOP_OPERATOR_STATE_DIR", "").strip() or str(data.get("state_dir", "") or DEFAULT_STATE)
     return PolicyConfig(
         binary=binary,
+        backend=backend,
         allowed_apps=tuple(apps),
         state_dir=state_dir,
         timeout_ms=int(data.get("timeout_ms", 15000)),

@@ -47,14 +47,41 @@
       "accessibility": "granted",
       "platform": "linux"
     },
-    "list_apps": {
+    "snapshot": "ok via atspi",
+    "click": "ok via atspi",
+    "reason": "agent-desktop falha com native_window_unproven; fallback AT-SPI concluiu o piloto em apps Linux.",
+    "agent_desktop": {
       "ok": false,
       "error": "ACTION_NOT_SUPPORTED",
       "message": "The native window type of accessibility frame owned by pid 3693283 could not be proven"
     },
-    "snapshot": "not_executed",
-    "click": "not_executed",
-    "reason": "bloqueio upstream native_window_unproven (issue #435) em Ubuntu 26.04/Wayland e reproduzido em Xvfb/Openbox"
+    "atspi": {
+      "snapshot": {
+        "ok": true,
+        "refs": 3,
+        "complete": true
+      },
+      "type": {
+        "ok": true,
+        "delivery": "delivered_verified",
+        "value": "R1060"
+      },
+      "click_apply": {
+        "ok": true,
+        "verified_by": "snapshot label Resultado: R1060"
+      },
+      "click_close": {
+        "ok": true,
+        "verified_by": "list-apps vazio"
+      },
+      "wait": {
+        "ok": true,
+        "found": true,
+        "elapsed_ms": 71
+      },
+      "approvals_consumed": 3,
+      "evidence": "pilot-atspi/summary.json"
+    }
   },
   "upstream_issue": {
     "number": 435,

@@ -1,0 +1,25 @@
+{
+  "version": "r1060-atspi/1",
+  "ok": true,
+  "command": "click",
+  "data": {
+    "action": "click",
+    "backend": "atspi",
+    "ref": "@044ec0b9:e2",
+    "disposition": {
+      "delivery": "delivered_unverified",
+      "retry": "unsafe"
+    }
+  },
+  "policy": {
+    "allowed": true,
+    "command": "click",
+    "app": "r1060-entry-app.py",
+    "backend": "atspi",
+    "approval_used": true,
+    "duration_ms": 59,
+    "truncated": false,
+    "fallback_from": null,
+    "external_validation": false
+  }
+}

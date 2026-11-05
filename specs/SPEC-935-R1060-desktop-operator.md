@@ -137,8 +137,8 @@ Testes em `tests/test_r1060_desktop_operator.py` devem provar:
 
 ## 10. Resultado da implementação (2026-11-05)
 
-**Status:** implementação concluída; piloto real parcialmente bloqueado por
-bug upstream. Nada foi publicado.
+**Status:** implementação concluída; piloto real concluído via fallback AT-SPI.
+O caminho agent-desktop segue bloqueado pelo bug upstream. Nada foi publicado.
 
 | Item | Resultado |
 |---|---|
@@ -147,10 +147,12 @@ bug upstream. Nada foi publicado.
 | Integridade npm | registrada em `pilots/r1060-desktop-operator/install-receipt.json` |
 | MCP | `desktop-operator` com seis ferramentas, registrado no `opencode.json` |
 | Perfil | `agents/catalog/desktop-operator.md`, registrado no Blackboard |
-| Testes | **41 passed** com binário falso |
+| Testes | **46 passed** com binário falso |
 | `status` real | ok; acessibilidade `granted` |
-| `list-apps` com app | falha `native_window_unproven` |
-| `snapshot`/`click` reais | não executados; nenhuma aprovação consumida |
+| `list-apps` com app, via agent-desktop | falha `native_window_unproven` |
+| `list-apps`/`snapshot` via fallback AT-SPI | ok; refs qualificados |
+| `type`/`click` reais via AT-SPI | `delivered_verified`; clique em “Aplicar” confirmado por novo snapshot |
+| Aprovações reais | 3 tokens de uso único, nenhum persistido |
 
 ### Causa do bloqueio
 
@@ -158,22 +160,27 @@ Issue upstream aberta `vercel-labs/agent-desktop#435`: em Ubuntu 26.04 /
 GNOME Shell 50.1 / Wayland, comandos de inventário e snapshot falham com
 `ACTION_NOT_SUPPORTED` / `native_window_unproven`. O erro foi reproduzido em
 WSLg e em Xvfb+Openbox com `gtk3-demo` e `zenity`. `status` permanece saudável,
-portanto não é suficiente para declarar a integração operacional.
+portanto não é suficiente para declarar a integração operacional. O fallback
+AT-SPI local cobre apps Linux e permitiu concluir snapshot/type/click/wait no
+piloto; ele não corrige o binário upstream.
 
 ### Decisões de segurança verificadas
 
 - Allowlist vazia nega `snapshot/click/type`; `status/list-apps` continuam.
 - Comandos e flags proibidos são negados antes de qualquer subprocesso.
 - Texto de `type` vai por stdin e é vinculado ao hash na aprovação.
-- Aprovação é de uso único e não pode ser emitida pelo MCP.
-- Saída passa por redação e limite de 256 KiB.
+- Aprovação é de uso único, presa ao host, registra operador declarado e não
+  pode ser emitida pelo MCP.
+- Saída passa por redação, remoção de controles invisíveis, sinalização de
+  instruções suspeitas e limite de 256 KiB; isso não impede prompt injection.
 - Ambiente do subprocesso não repassa segredos do processo pai.
 - `shell=False` e argv em lista.
 
 ### Limites
 
-- O wrapper não corrige o adapter upstream.
-- O piloto não comprova operação real de apps neste host.
+- O wrapper não corrige o adapter upstream; o fallback AT-SPI é um caminho
+  alternativo para apps Linux.
+- O piloto comprova operação via AT-SPI, não via agent-desktop.
 - Aprovação local não substitui sandbox, consentimento ou revisão humana.
 - WSL enxerga apps Linux, não apps Windows.
 - `opencode.json` foi editado de forma conservadora; regeneração futura pode
@@ -181,5 +188,7 @@ portanto não é suficiente para declarar a integração operacional.
 
 ### Próximo passo
 
-Acompanhar a correção upstream; repetir o piloto em ambiente suportado; só
-depois ampliar allowlist e habilitar click/type para app descartável.
+Acompanhar a correção upstream para o caminho agent-desktop; manter o fallback
+AT-SPI para Linux; ampliar allowlist apenas para apps descartáveis; tratar apps
+Windows como escopo separado, no host; buscar validação externa antes de
+publicar.

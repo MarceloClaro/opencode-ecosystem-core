@@ -1,7 +1,8 @@
 # R1060 — relatório do desktop-operator
 
-**Status:** implementação concluída e testada; piloto real **parcialmente
-bloqueado** por bug upstream. Não publicado, sem validação externa.
+**Status:** implementação concluída e testada; piloto real concluído via
+fallback AT-SPI. O caminho agent-desktop continua bloqueado pelo bug upstream.
+Não publicado, sem validação externa.
 
 ## Entregue
 
@@ -23,16 +24,18 @@ bloqueado** por bug upstream. Não publicado, sem validação externa.
 
 | Evidência | Resultado |
 |---|---|
-| `pytest tests/test_r1060_desktop_operator.py -q` | **41 passed** |
+| `pytest tests/test_r1060_desktop_operator.py -q` | **46 passed** |
 | `desktop_status` via MCP | ok, acessibilidade `granted` |
 | `desktop_list_apps` sem apps | ok, lista vazia |
-| `desktop_list_apps` com `gtk3-demo` | `ACTION_NOT_SUPPORTED` / `native_window_unproven` |
+| `desktop_list_apps` via agent-desktop com app | `ACTION_NOT_SUPPORTED` / `native_window_unproven` |
+| `desktop_list_apps` via fallback AT-SPI | ok, app listado |
 | `desktop_snapshot` com app fora da allowlist | negado (`app_not_allowed`) |
-| `desktop_snapshot` com app real | **não executado** — bloqueio upstream |
-| `desktop_click` real | **não executado** — bloqueio upstream |
-| Aprovação real consumida | nenhuma |
+| `desktop_snapshot` via AT-SPI | ok, refs qualificados |
+| `desktop_type` real via AT-SPI | ok, `delivered_verified`, valor “R1060” |
+| `desktop_click` real via AT-SPI | ok; “Aplicar” mudou o rótulo; “Fechar” removeu o app |
+| Aprovação real consumida | 3 tokens de uso único, sem persistência |
 
-## Bug upstream
+## Bug upstream e fallback
 
 `vercel-labs/agent-desktop#435` (aberto em 2026-11-01): em Ubuntu 26.04 /
 GNOME Shell 50.1 / Wayland, todos os comandos de inventário e snapshot falham
@@ -40,9 +43,15 @@ com `native_window_unproven`. O mesmo erro foi reproduzido neste host em
 WSLg e em Xvfb+Openbox, com `gtk3-demo` e `zenity`. `status` continua saudável,
 o que mascara a falha se apenas o status for testado.
 
+O fallback **AT-SPI** local (`backend: auto|atspi`) cobre apps Linux e permitiu
+concluir snapshot, `type`, `click` e `wait` no piloto. Ele não corrige o
+binário upstream; é um caminho alternativo sob a mesma política de allowlist e
+aprovação.
+
 ## Limitações
 
-- O wrapper não corrige o adapter; a falha é do binário upstream.
+- O caminho agent-desktop não foi corrigido; o fallback AT-SPI é local e cobre
+  apps Linux, não apps Windows.
 - A aprovação local não é assinatura criptográfica de identidade humana.
 - Prompt injection via texto de interface permanece possível; snapshots são
   dados, não instruções.
@@ -54,6 +63,7 @@ o que mascara a falha se apenas o status for testado.
 
 ## Próximo passo
 
-Aguardar correção upstream ou testar em ambiente suportado. Só então executar
-snapshot + uma ação semântica + novo snapshot, com aprovação humana e app
-descartável.
+Manter o fallback AT-SPI no Linux, acompanhar a correção upstream para o
+caminho agent-desktop, testar apps Windows em escopo separado (host) e obter
+validação externa antes de publicar. Ampliar a allowlist apenas para apps
+descartáveis e com aprovação humana por lote.
