@@ -7,7 +7,7 @@ import json
 import sys
 from pathlib import Path
 
-from . import dialog, memory, routine, voice, windows_uia
+from . import dialog, memory, opencode_gateway, routine, voice, windows_uia
 
 
 def _emit(payload: dict) -> int:
@@ -40,6 +40,10 @@ def _parser() -> argparse.ArgumentParser:
     press = win_sub.add_parser("press")
     press.add_argument("--confirm", action="store_true")
 
+    ask = sub.add_parser("ask")
+    ask.add_argument("--text", required=True)
+    ask.add_argument("--agent", default="plan")
+    ask.add_argument("--new", action="store_true")
     say = sub.add_parser("say")
     say.add_argument("--text", required=True)
     listen = sub.add_parser("listen")
@@ -123,6 +127,19 @@ def voice_loop(seconds: int = 5, once: bool = False) -> int:
                     _speak_safe("Texto escrito.")
                 else:
                     _speak_safe("Cancelado.")
+            elif intent == "ask":
+                question = command.get("text", "")
+                _speak_safe("Confirma enviar esta pergunta ao OpenCode? Diga sim.")
+                answer = voice.transcribe(voice.record(3))
+                mem.append("confirmation", answer)
+                if dialog.is_confirmation(answer):
+                    result = opencode_gateway.ask(question)
+                    reply = result.get("text", "")
+                    mem.append("ask", question, session=result.get("sessionID"))
+                    mem.append("answer", reply, session=result.get("sessionID"))
+                    _speak_safe(reply[:1200] or "O OpenCode não retornou texto.")
+                else:
+                    _speak_safe("Cancelado.")
             elif intent == "press":
                 _speak_safe("Confirma acionar o elemento em foco? Diga sim.")
                 answer = voice.transcribe(voice.record(3))
@@ -152,6 +169,13 @@ def main(argv: list[str] | None = None) -> int:
                       "denied_windows": config["denied_windows"],
                       "bridge_path": config["bridge_path"],
                       "external_validation": False})
+    if args.command == "ask":
+        try:
+            result = opencode_gateway.ask(args.text, agent=args.agent, new_session=args.new)
+        except opencode_gateway.GatewayError as exc:
+            return _emit({"ok": False, "error": {"code": exc.code, "message": exc.message}})
+        memory.ActivityMemory().append("ask", args.text, session=result.get("sessionID"))
+        return _emit(result)
     if args.command == "say":
         try:
             path = voice.speak(args.text)

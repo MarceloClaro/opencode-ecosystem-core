@@ -10,6 +10,7 @@ WRITE = re.compile(r"\b(?:escrever|digitar|ditar)\s+(.+)$", re.IGNORECASE)
 READ = re.compile(r"\b(?:o que (?:está|esta) na tela|ler (?:a )?tela|descrever (?:a )?tela|onde estou)\b", re.IGNORECASE)
 STOP = re.compile(r"\b(?:parar|pare|encerrar|sair|desligar)\b", re.IGNORECASE)
 PRESS = re.compile(r"\b(?:apertar|pressionar|ativar)\b", re.IGNORECASE)
+ASK = re.compile(r"\b(?:perguntar|pergunte|pedir|peça|opencode)\s+(.+)$", re.IGNORECASE)
 
 
 def has_wake(text: str) -> bool:
@@ -35,6 +36,9 @@ def parse_command(text: str) -> dict:
     match = WRITE.search(command)
     if match:
         return {"intent": "write", "text": match.group(1).strip()}
+    match = ASK.search(command)
+    if match:
+        return {"intent": "ask", "text": match.group(1).strip()}
     if PRESS.search(command):
         return {"intent": "press"}
     return {"intent": "unknown", "text": command}

@@ -39,7 +39,7 @@ não comprova o aceite integral.
 - Ponte **UI Automation do Windows** (list/snapshot/read/focused/invoke) com allowlist, confirmação e redação; testada em Notepad/Explorer.
 - **Voz** WSLg: microfone `RDPSource`, ASR faster-whisper local e TTS Edge em `RDPSink`; comandos “Core, …” com confirmação falada.
 - **Memória** Fernet de 24 h para eventos/transcrições; `routine` captura janela + voz sem pixels/áudio bruto.
-- 12 testes; `routine --once` executado; terminal OpenCode em **somente leitura** (7.224 caracteres lidos), sem digitação; **24 h reais, replay autônomo e gravação de tela não homologados**.
+- **16 testes**; `routine --once` executado; terminal OpenCode em **somente leitura** (7.224 caracteres lidos), sem digitação; gateway `ask --agent plan` respondeu “OK”; **24 h reais, replay autônomo e gravação de tela não homologados**.
 - Nada publicado; sem validação externa.
 
 ## Checkpoint R1061 — storage-operator e Drive

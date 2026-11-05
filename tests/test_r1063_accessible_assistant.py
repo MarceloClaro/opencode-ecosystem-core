@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from integrations.accessible_assistant import dialog, memory, voice, windows_uia
+from integrations.accessible_assistant import dialog, memory, opencode_gateway, voice, windows_uia
 
 
 def test_window_allowlist_and_denylist():
@@ -112,3 +112,40 @@ def test_terminal_is_read_only_not_writable(monkeypatch):
     assert windows_uia.window_readable(config, "OC | Implement skill")
     assert not windows_uia.window_allowed(config, "OC | Implement skill")
     assert windows_uia.window_allowed(config, "Bloco de notas")
+
+
+def test_parse_ask_command():
+    command = dialog.parse_command("Core, perguntar como está o sistema")
+    assert command == {"intent": "ask", "text": "como está o sistema"}
+
+
+def test_opencode_gateway_parses_jsonl_and_disallows_auto(monkeypatch, tmp_path):
+    class Result:
+        returncode = 0
+        stderr = ""
+        stdout = "\n".join([
+            json.dumps({"type": "step_start", "sessionID": "ses_teste"}),
+            json.dumps({"type": "text", "sessionID": "ses_teste",
+                        "part": {"type": "text", "text": "resposta sk-1234567890abcdefghij"}}),
+        ])
+
+    calls = []
+    monkeypatch.setenv("OPENCODE_BIN", "/bin/echo")
+    monkeypatch.setattr(opencode_gateway.subprocess, "run",
+                        lambda argv, **kwargs: (calls.append(argv), Result())[1])
+    result = opencode_gateway.ask("qual é?", state_dir=tmp_path)
+    assert result["text"] == "resposta [REDACTED_API_KEY]"
+    assert result["sessionID"] == "ses_teste"
+    assert "--auto" not in calls[0]
+    assert calls[0][calls[0].index("--agent") + 1] == "plan"
+
+
+def test_opencode_gateway_rejects_unlisted_agent(tmp_path):
+    with pytest.raises(opencode_gateway.GatewayError) as exc:
+        opencode_gateway.ask("oi", agent="build", state_dir=tmp_path)
+    assert exc.value.code == "AGENT_NOT_ALLOWED"
+
+
+def test_opencode_gateway_rejects_empty(tmp_path):
+    with pytest.raises(opencode_gateway.GatewayError):
+        opencode_gateway.ask("  ", state_dir=tmp_path)

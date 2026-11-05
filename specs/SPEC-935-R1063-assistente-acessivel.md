@@ -42,6 +42,7 @@ apps Windows. O Core permanece no WSL e chama a ponte por argv, sem shell.
 | `dialog.py` | parser de comandos e confirmação |
 | `memory.py` | log cifrado com TTL 24 h |
 | `routine.py` | captura periódica de janela + voz, sem pixels/áudio bruto |
+| `opencode_gateway.py` | envia pergunta ao OpenCode via CLI, agente `plan`, sem teclado na TUI |
 | `__main__.py` | CLI `windows`, `voice`, `routine`, `say`, `listen`, `memory` |
 
 ## 4. Comandos de voz
@@ -50,6 +51,7 @@ apps Windows. O Core permanece no WSL e chama a ponte por argv, sem shell.
 - “Core, clicar em Salvar” → pede confirmação e invoca.
 - “Core, escrever …” → pede confirmação e escreve no campo em foco.
 - “Core, apertar” → aciona o elemento em foco.
+- “Core, perguntar …” → confirma, envia ao OpenCode (`--agent plan`) e fala a resposta.
 - “Core, parar” → encerra o loop.
 
 Sem confirmação (“sim”), nenhuma ação é executada.
@@ -93,6 +95,8 @@ Sem confirmação (“sim”), nenhuma ação é executada.
 - Voz: microfone grava (`RDPSource`), ASR local disponível, TTS Edge toca.
 - Memória 24 h: implementada e testada com TTL.
 - Loop de voz: implementado; falta piloto com fala real do operador.
+- Gateway OpenCode: **funciona** com `--agent plan` (teste “Responda somente: OK”
+  retornou “OK”); não usa `--auto` e não simula teclado na TUI.
 - `routine`: implementado; **não** executado por 24 h nesta sessão.
 - Reprodução autônoma de rotinas (“faça o que eu faço”): **não implementada**;
   exige episódios revisados e confirmação.
@@ -103,6 +107,8 @@ Sem confirmação (“sim”), nenhuma ação é executada.
 - `set-value` substitui o conteúdo do campo; não é digitação incremental.
 - O terminal é somente leitura; não há injeção de teclado. Executar comandos
   nele exigiria um modo guardado, com revisão, allowlist e confirmação.
+- O gateway usa o agente `plan` (somente leitura) por padrão; agentes de edição
+  exigem liberação explícita e não são usados no loop de voz.
 - Microfone depende da permissão do Windows e do dispositivo padrão.
 - Voz sintética Edge envia texto ao serviço da Microsoft; para uso offline,
   trocar por Piper local.

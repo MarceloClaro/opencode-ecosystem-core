@@ -23,6 +23,10 @@ REDACTIONS = (
     (re.compile(r"\b\d{2}\.?\d{3}\.?\d{3}/?\d{4}-?\d{2}\b"), "[REDACTED_CNPJ]"),
     (re.compile(r"\b(?:\d[ -]?){13,19}\b"), "[REDACTED_CARD]"),
     (re.compile(r"(?i)\bbearer\s+[A-Za-z0-9._~+/-]+=*"), "[REDACTED_BEARER]"),
+    (re.compile(r"\bsk-[A-Za-z0-9_-]{16,}\b"), "[REDACTED_API_KEY]"),
+    (re.compile(r"\bgh[pousr]_[A-Za-z0-9]{20,}\b"), "[REDACTED_GITHUB_TOKEN]"),
+    (re.compile(r"\bxox[baprs]-[A-Za-z0-9-]{10,}\b"), "[REDACTED_SLACK_TOKEN]"),
+
     (re.compile(r"\b[a-fA-F0-9]{32,}\b"), "[REDACTED_HEX]"),
     (re.compile(r"\b[A-Za-z0-9+/_-]{40,}={0,2}\b"), "[REDACTED_BLOB]"),
 )
