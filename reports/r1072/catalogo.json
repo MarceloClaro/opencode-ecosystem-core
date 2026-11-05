@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-05T22:00:06.862871+00:00",
+  "generated_at": "2026-11-05T22:05:26.462301+00:00",
   "root": "literatura",
   "policy": "projetos em literatura/; projetos/ com links de compatibilidade; templates versionados em templates/projects",
-  "count": 45,
+  "count": 46,
   "works": [
     {
       "id": "molambudos-victoria-regia",
@@ -63,6 +63,25 @@
       "pdf_bytes": 23768405
     },
     {
+      "id": "molambudos-podcast",
+      "title": "Molambudos — Podcast (26 episódios + pacote editorial)",
+      "category": "podcast",
+      "scope": "literario",
+      "canonical": false,
+      "status": "26 episódios + piloto R550; slides, infográficos, feed, trailer e deploy",
+      "source": "literatura/molambudos/podcast/producao",
+      "compiled": "literatura/molambudos/podcast/producao",
+      "pdf": "literatura/molambudos/podcast/producao/slides_molambudos.pdf",
+      "links": [],
+      "audit": "literatura/molambudos/podcast/README.md",
+      "notes": "Produção NotebookLM; 26/26 áudios; EP26 inclui epílogo; feed e pacote editorial.",
+      "pdf_pages": 15,
+      "pdf_page_size": "1376 x 768 pts",
+      "pdf_title": null,
+      "pdf_sha256": "a30d397c23728dc3f2422deb363803afc42bef2c27579afcfe54923fdd1811bc",
+      "pdf_bytes": 19324175
+    },
+    {
       "id": "molambudos-template-antigo",
       "title": "Molambudos — template LaTeX antigo (4 capítulos)",
       "category": "template",
@@ -73,7 +92,7 @@
       "compiled": "literatura/templates/molambudos-antigo",
       "pdf": "literatura/templates/molambudos-antigo/main.pdf",
       "links": [],
-      "audit": "REVISAO_MOLAMBUDOS.md",
+      "audit": "literatura/molambudos/auditorias/revisao-2026-07.md",
       "notes": "Objeto do parecer antigo; NÃO representa a edição VictoriaRegia. Ver nota de escopo.",
       "pdf_pages": 25,
       "pdf_page_size": "595.276 x 841.89 pts (A4)",

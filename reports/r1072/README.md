@@ -3,8 +3,8 @@
 **Status:** projetos literários movidos fisicamente para `literatura/`; caminhos
 antigos preservados por symlinks de compatibilidade. `literatura/` e `projetos/`
 são gitignored, então o conteúdo das obras permanece fora do versionamento.
-**Objetivo:** organizar Molambudos e os demais projetos literários em uma única
-entrada para auditoria, revisão, build e QA.
+**Objetivo:** organizar Molambudos — livro, podcast e auditorias — e os demais
+projetos literários em uma única entrada para revisão, build e QA.
 
 ## 1. Estrutura
 
@@ -17,13 +17,17 @@ literatura/
 │   ├── victoria-regia      -> edição KDP PT-BR, 435 pp
 │   ├── v2                  -> esboço de 57 pp
 │   ├── diario              -> Diário de 49 pp
-│   └── template-antigo     -> template de 25 pp
+│   ├── podcast/producao    -> 26 episódios + piloto R550, pacotes, slides, feed e deploy
+│   ├── auditorias          -> revisão, banca, cultural-episteme, Book Studio
+│   ├── capas               -> frente e contracapa corrigidas
+│   ├── scripts/ specs/     -> links para fontes versionadas
+│   └── README.md           -> mapa do projeto
 ├── livros/
 │   ├── livro-opencode-*    -> fonte + compilado
 │   ├── livro-volume2-*     -> fonte + compilado
 │   ├── livro-gemeos-*      -> fonte + compilado
 │   └── ia-odontologia-*    -> fonte + template
-├── templates/              -> Victoria Regia, Template Livros e templates de livro
+├── templates/              -> Victoria Regia, Template Livros, Molambudos antigo e templates
 ├── academicos/             -> contexto acadêmico, fora do escopo literário
 └── templates-academicos/   -> templates 12–30, contexto
 ```
@@ -31,7 +35,9 @@ literatura/
 Os projetos literários foram **movidos fisicamente** para `literatura/`.
 `projetos/` mantém symlinks de compatibilidade para os caminhos antigos. Os
 templates versionados em `templates/projects/livro-*` permanecem no lugar; o
-caminho `literatura/livros/.../compilado` aponta para eles por symlink.
+caminho `literatura/livros/.../compilado` aponta para eles por symlink. O podcast
+está em `literatura/molambudos/podcast/producao`; `research/producao_real` é o
+symlink de compatibilidade.
 
 ## 2. Obras canônicas
 
@@ -44,6 +50,16 @@ caminho `literatura/livros/.../compilado` aponta para eles por symlink.
 
 As demais entradas são versões alternativas, templates ou contexto acadêmico.
 A escolha da edição canônica é editorial e pertence ao autor.
+
+### Podcast
+
+`Molambudos — Podcast (26 episódios + pacote editorial)`:
+
+- 26/26 episódios `.m4a` + `podcast_R550.m4a` (piloto) em `literatura/molambudos/podcast/producao/audio/`.
+- Pacotes editoriais, slides (15 pp), infográficos, mapa mental, feed, trailer
+  e deploy em `literatura/molambudos/podcast/producao/`.
+- Produção NotebookLM; EP26 inclui MEM-26 + material de epílogo.
+- Nenhuma publicação automática; deploy exige autorização.
 
 ## 3. Como usar
 
@@ -88,10 +104,12 @@ Ordem mínima por obra:
   capítulos; não vale para a edição VictoriaRegia.
 - `lombada.pdf` isolado é de outro projeto (capa dura); a capa completa atual
   calcula 1,021 in de lombada para 435 pp.
+- O podcast está em `literatura/molambudos/podcast/producao/`; `research/producao_real`
+  é mantido como symlink de compatibilidade.
 
 ## 6. Catálogo
 
-`reports/r1072/catalogo.json` contém 45 obras com:
+`reports/r1072/catalogo.json` contém 46 obras com:
 
 - `id`, `title`, `category`, `scope`, `canonical`, `status`;
 - `source`, `compiled`, `pdf`, `pdf_pages`, `pdf_page_size`;
@@ -99,7 +117,7 @@ Ordem mínima por obra:
 - `links` (symlinks do hub);
 - `audit`, `notes`.
 
-Categorias: `livro`, `template`, `academico`, `template-academico`.
+Categorias: `livro`, `podcast`, `template`, `academico`, `template-academico`.
 Escopos: `literario`, `academico`.
 
 ## 7. Limites

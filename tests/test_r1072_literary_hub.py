@@ -17,10 +17,10 @@ def test_catalog_schema_and_uniqueness():
     data = load_catalog()
     assert data["schema_version"] == 1
     works = data["works"]
-    assert data["count"] == len(works) == 45
+    assert data["count"] == len(works) == 46
     ids = [work["id"] for work in works]
     assert len(ids) == len(set(ids))
-    assert {"livro", "template", "academico", "template-academico"} >= {
+    assert {"livro", "podcast", "template", "academico", "template-academico"} >= {
         work["category"] for work in works
     }
     assert {work["scope"] for work in works} <= {"literario", "academico"}

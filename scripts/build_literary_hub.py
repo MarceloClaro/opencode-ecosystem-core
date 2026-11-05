@@ -89,6 +89,18 @@ WORKS = [
         'notes': 'Derivação visual do Diário; não substitui a edição VictoriaRegia.',
     },
     {
+        'id': 'molambudos-podcast',
+        'title': 'Molambudos — Podcast (26 episódios + pacote editorial)',
+        'category': 'podcast', 'scope': 'literario', 'canonical': False,
+        'status': '26 episódios + piloto R550; slides, infográficos, feed, trailer e deploy',
+        'source': 'literatura/molambudos/podcast/producao',
+        'compiled': 'literatura/molambudos/podcast/producao',
+        'pdf': 'literatura/molambudos/podcast/producao/slides_molambudos.pdf',
+        'links': [],
+        'audit': 'literatura/molambudos/podcast/README.md',
+        'notes': 'Produção NotebookLM; 26/26 áudios; EP26 inclui epílogo; feed e pacote editorial.'
+    },
+    {
         'id': 'molambudos-template-antigo',
         'title': 'Molambudos — template LaTeX antigo (4 capítulos)',
         'category': 'template', 'scope': 'literario', 'canonical': False,
@@ -97,7 +109,7 @@ WORKS = [
         'compiled': 'literatura/templates/molambudos-antigo',
         'pdf': 'literatura/templates/molambudos-antigo/main.pdf',
         'links': [('molambudos/template-antigo', 'literatura/templates/molambudos-antigo')],
-        'audit': 'REVISAO_MOLAMBUDOS.md',
+        'audit': 'literatura/molambudos/auditorias/revisao-2026-07.md',
         'notes': 'Objeto do parecer antigo; NÃO representa a edição VictoriaRegia. Ver nota de escopo.',
     },
     {
@@ -297,12 +309,22 @@ catalog = {
 def table(scope):
     lines = ['| ID | Título | Canônico | Estado | Páginas | PDF |', '|---|---|:---:|---|---:|---|']
     for row in rows:
-        if row['scope'] != scope or row['category'].startswith('template'):
+        if row['scope'] != scope or row['category'] not in {'livro', 'academico'}:
             continue
         pdf = f"`{row['pdf']}`" if row.get('pdf') else '—'
         canon = 'sim' if row.get('canonical') else '—'
         lines.append(f"| `{row['id']}` | {row['title']} | {canon} | {row['status']} | {row.get('pdf_pages') or '—'} | {pdf} |")
     return '\n'.join(lines)
+
+def podcast_table():
+    lines = ['| ID | Título | Estado | Páginas | PDF |', '|---|---|---|---:|---|']
+    for row in rows:
+        if row['category'] != 'podcast':
+            continue
+        pdf = f"`{row['pdf']}`" if row.get('pdf') else '—'
+        lines.append(f"| `{row['id']}` | {row['title']} | {row['status']} | {row.get('pdf_pages') or '—'} | {pdf} |")
+    return '\n'.join(lines)
+
 
 def template_table(scope):
     lines = ['| ID | Título | Estado | PDF |', '|---|---|---|---|']
@@ -332,6 +354,10 @@ python3 -m marceloclaro.book_studio build . --engine latex --timeout 300
 
 {table('literario')}
 
+## Podcast
+
+{podcast_table()}
+
 ## Templates literários
 
 {template_table('literario')}
@@ -347,7 +373,7 @@ python3 -m marceloclaro.book_studio build . --engine latex --timeout 300
 ## Auditoria
 
 - Molambudos: `reports/r1071/README.md` e `molambudos/victoria-regia/BOOK_STUDIO_AUDIT.md`.
-- O parecer antigo `REVISAO_MOLAMBUDOS.md` descreve a versão de 4 capítulos; não usar para a edição VictoriaRegia.
+- O parecer antigo `literatura/molambudos/auditorias/revisao-2026-07.md` descreve a versão de 4 capítulos; não usar para a edição VictoriaRegia.
 - Checklist mínimo por obra: metadados, trim, fontes embutidas, TOC/bookmarks, duplicações, aspas/dashes, capa/lombada, EPUB e KDP preflight.
 
 ## Limites
