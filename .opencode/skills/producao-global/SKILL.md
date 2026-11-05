@@ -80,7 +80,7 @@ core.production_center_action({"operation": "plan", "goal": "produzir um artigo"
 - `imagegen` — cliente OpenAI-compatible `generate`/`generate-batch`; usa
   apenas `OPENAI_API_KEY`/`OPENAI_BASE_URL` e exige loopback ou HTTPS.
 - `opus-video-skills` — p5.js/three.js; MIT; requer Chrome.
-- `reel-video` — CLI/review board; MIT; requer Grok/Codex.
+- `reel-video` — CLI/review board; MIT; `codex` pronto, falta `grok`.
 - `distilly` — perfis de pessoa; MIT; exige consentimento e privacidade.
 - `kdense-scientific-agent-skills` — catálogo de 177 SKILL.md; MIT; integrado.
 

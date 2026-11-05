@@ -74,7 +74,7 @@ evidência. Isso é um limite do transporte, não uma falha silenciosa.
 | `hbg-life-simulation` | MIT; 10 `.mjs` válidos; estilo 1920×1080 | **Pronto**: `hyperframes`, `media-use`, `code-video-visual-qa` e `imagegen` presentes; CLIProxyAPI autenticado e `readiness: ready`. |
 | `code-video-visual-qa` | implementação Core-native | QA técnico com `ffprobe`/`ffmpeg`; frames, black frames, silêncio e loudness | Criado como adaptação original, sem copiar o hbg. |
 | `imagegen` | implementação Core-native | Cliente OpenAI-compatible `generate`/`generate-batch` | Instalado em `~/.agents/skills/imagegen` e linkado em `~/.codex/skills/.system/imagegen`; teste real gerou PNG 1536×1024 (2,2 MB) em 22,3 s com `gpt-image-2`. |
-| `reel-video` | MIT; CLI/review board | Bloqueado: `grok` e `codex` ausentes; decisão adiada. |
+| `reel-video` | MIT; CLI/review board | Bloqueado apenas por `grok`; `codex` 0.166.0 instalado e logado. |
 | `distilly` | MIT; 40 testes rápidos | Gate de consentimento/privacidade; nenhum perfil criado. |
 | OpenDesign / Paperclip | Apache-2.0 / MIT | Mantidos fora do Core. |
 

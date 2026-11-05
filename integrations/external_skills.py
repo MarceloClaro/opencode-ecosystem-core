@@ -158,6 +158,11 @@ def load_registry() -> Dict[str, ExternalSkill]:
 
 
 def _dependency_available(name: str) -> bool:
+    if name == "codex":
+        if shutil.which("codex"):
+            return True
+        return (Path.home() / ".local/share/opencode-core/codex-cli/"
+                "node_modules/.bin/codex").is_file()
     if name == "google-chrome":
         if any(shutil.which(candidate) for candidate in
                ("google-chrome", "google-chrome-stable", "chromium", "chromium-browser")):

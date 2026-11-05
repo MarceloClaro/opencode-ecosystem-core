@@ -60,7 +60,7 @@ O centro devolve `awaiting_consent` em vez de inventar autorização.
 | `opus-video-skills` | MIT | pronto; Chromium do cache Playwright encontrado |
 | `kdense-scientific-agent-skills` | MIT | pronto; catálogo espelhado |
 | `hbg-life-simulation` | MIT | **pronto**: `hyperframes`, `media-use`, `code-video-visual-qa` e `imagegen` presentes; CLIProxyAPI autenticado e `readiness: ready` |
-| `reel-video` | MIT | bloqueado: `grok` e `codex` ausentes |
+| `reel-video` | MIT | bloqueado apenas por `grok`; `codex` 0.166.0 instalado e logado |
 | `distilly` | MIT | gate de consentimento/privacidade |
 
 Nenhum código de terceiro foi copiado para o repositório. O adaptador aponta
