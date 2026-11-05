@@ -113,6 +113,19 @@ def load_registry() -> Dict[str, ExternalSkill]:
             notes="QA técnico de MP4: metadados, black frames, silêncio, loudness e frames.",
         ),
         ExternalSkill(
+            skill_id="book-studio",
+            path=_expand(ROOT / ".opencode/skills/book-studio"),
+            license="Core-native",
+            license_file="",
+            kind="book-pipeline",
+            entrypoint="SKILL.md",
+            dependencies=("pandoc",),
+            keywords=("livro", "livros", "editora", "editorial", "diagramacao",
+                      "diagramar", "pdf", "epub", "isbn", "molambudos", "capa"),
+            safe_argv=("python3", str(ROOT / "marceloclaro/book_studio.py"), "status"),
+            notes="Manifesto, build PDF/EPUB e QA; Scribus/Vivliostyle/CaSILE externos.",
+        ),
+        ExternalSkill(
             skill_id="hyperframes",
             path=_expand("~/.agents/skills/hyperframes"),
             license="Apache-2.0",
@@ -364,6 +377,11 @@ def plan(skill_id: str, task: str, *, consent: bool = False,
         argv = ["python3", str(ROOT / "integrations/video_qa.py"), "probe", "<video>"]
         handoff = ("Rodar python3 integrations/video_qa.py probe no MP4 final e "
                    f"inspecionar os frames; tarefa: {task[:500]}")
+    elif skill_id == "book-studio":
+        mode = "cli"
+        argv = ["python3", str(ROOT / "marceloclaro/book_studio.py"), "status"]
+        handoff = ("Criar/abrir book.json, escolher engine (typst/pandoc/weasyprint/"
+                   f"latex), compilar e rodar QA; tarefa: {task[:500]}")
     elif skill_id == "hyperframes":
         mode = "skill"
         argv = []
