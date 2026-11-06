@@ -41,6 +41,8 @@ def envolver_tabelas(texto: str) -> str:
     saida: list[str] = []
     dentro = False
     for linha in linhas:
+        if linha.startswith("**Quadro"):
+            saida += ["", "```{=latex}", "\\needspace{9\\baselineskip}", "```", ""]
         if linha.startswith("|"):
             if not dentro:
                 saida += ["", "```{=latex}", "\\begingroup\\small", "```", ""]
