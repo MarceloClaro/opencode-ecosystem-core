@@ -14,7 +14,7 @@ REPORT = ROOT / "reports/r1077"
 MANIFEST = REPORT / "print_manifest.json"
 PRINT = ROOT / "literatura/molambudos/Molambudos_Print_R1077"
 DIGITAL = ROOT / "literatura/molambudos/Molambudos_Revisada_R1075"
-DIGITAL_SHA = "9ee4c4679fe7d42b1c30605f3bebaae5dfe42cfb18567cf93f96444f5cb955be"
+DIGITAL_SHA = json.loads((ROOT / "reports/r1076/design_manifest.json").read_text(encoding="utf-8"))["pdf"]["sha256"]
 
 
 def load(path: Path):

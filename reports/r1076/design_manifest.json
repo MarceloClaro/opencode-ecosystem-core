@@ -56,6 +56,12 @@
       "contrast": null,
       "family": "Olho",
       "use": "apenas fundo escuro"
+    },
+    "sangueclaro": {
+      "hex": "#FF4D4D",
+      "contrast": 2.87,
+      "contrast_on_black": 6.42,
+      "use": "apenas Cuidado em fundo preto; não usar sobre papel"
     }
   },
   "typography": {
@@ -109,8 +115,8 @@
   },
   "pdf": {
     "pages": 421,
-    "bytes": 19400527,
-    "sha256": "9ee4c4679fe7d42b1c30605f3bebaae5dfe42cfb18567cf93f96444f5cb955be"
+    "bytes": 19400516,
+    "sha256": "cc0c5c2110f0a334a9650044191dabaf5da168a701dc194604069c16444991ab"
   },
   "epub": {
     "images": 13,
@@ -148,6 +154,11 @@
       "id": "epub_images",
       "status": "pass",
       "detail": "13 imagens; 84 seções; 0 links quebrados; 0 LaTeX cru."
+    },
+    {
+      "id": "cuidado_red",
+      "status": "pass",
+      "detail": "Cuidado #FF4D4D sobre preto: 6,42:1; título e aviso final usam o mesmo vermelho vivo; sobre papel 2,87:1, por isso é restrito ao fundo escuro."
     }
   ],
   "limits": [

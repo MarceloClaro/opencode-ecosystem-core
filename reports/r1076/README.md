@@ -31,6 +31,7 @@ Todas as cores de leitura foram medidas contra o papel sépia `#F8F0D7`.
 | CONT | carmim | `#9B1B1B` | **7,18:1** | inicial, filete e código |
 | EPI | âmbar escuro | `#6E4E10` | **6,68:1** | filete do caderno |
 | Tinta | sépia escuro | `#2B2117` | **13,83:1** | corpo do texto |
+| Cuidado (fundo preto) | vermelho vivo | `#FF4D4D` | **6,42:1 sobre preto** (2,87:1 sobre papel) | **apenas** Cuidado, nunca em papel |
 | Papel | sépia claro | `#F8F0D7` | — | fundo |
 | Dourado | `customgold` | `#CBA135` | — | **apenas** fundo escuro |
 | Olho | amarelo | `#FFD700` | — | **apenas** fundo escuro |
@@ -94,7 +95,7 @@ arquivo que o livro já possuía.
 | Item | Resultado |
 |---|---|
 | PDF | 421 pp; 160×230 mm; fontes embutidas; sem referências indefinidas |
-| PDF SHA-256 | `9ee4c4679fe7d42b1c30605f3bebaae5dfe42cfb18567cf93f96444f5cb955be` |
+| PDF SHA-256 | `cc0c5c2110f0a334a9650044191dabaf5da168a701dc194604069c16444991ab` |
 | EPUB | 84 seções; 105 links; 0 quebrados; 0 LaTeX cru; **13 imagens** |
 | EPUB palavras | 53.554 |
 | EPUB SHA-256 | `b0fad09043777b1d0e4d743524d78a37056488fa6f26a94e035efa708460e9ac` |

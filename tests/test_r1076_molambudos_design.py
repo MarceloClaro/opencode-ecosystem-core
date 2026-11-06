@@ -57,6 +57,9 @@ def test_palette_contrast_and_families():
         assert palette[family]["contrast"] >= 4.5, family
         assert contrast(palette[family]["hex"], paper) >= 4.5, family
     assert palette["ink"]["contrast"] >= 7.0
+    red = palette["sangueclaro"]
+    assert red["contrast_on_black"] >= 4.5
+    assert red["contrast"] < 4.5  # documentado como uso exclusivo em fundo preto
     assert data["fragments"]["total"] == data["fragments"]["fragtitle"] == 84
     assert data["fragments"]["families"] == {"MEM": 27, "DOC": 27, "LUC": 23, "CONT": 7}
 

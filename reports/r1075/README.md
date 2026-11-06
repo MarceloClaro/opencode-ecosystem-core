@@ -118,12 +118,12 @@ mental. Não há alegação de eficácia terapêutica.
 | Item | Resultado |
 |---|---|
 | PDF revisado | 421 pp; 160×230 mm; fontes embutidas; sem referências indefinidas |
-| PDF SHA-256 | `9ee4c4679fe7d42b1c30605f3bebaae5dfe42cfb18567cf93f96444f5cb955be` |
+| PDF SHA-256 | `cc0c5c2110f0a334a9650044191dabaf5da168a701dc194604069c16444991ab` |
 | EPUB revisado | 84 seções; 105 links no TOC; 0 quebrados; 0 LaTeX cru; 13 imagens |
 | EPUB palavras | 53.554 |
 | EPUB SHA-256 | `b0fad09043777b1d0e4d743524d78a37056488fa6f26a94e035efa708460e9ac` |
 | Canônico | intacto; PDF `3378f438…` |
-| Design | R1076: legenda dos códigos + Caderno de Provas Iconográficas (6 pranchas) |
+| Design | R1076: legenda, Caderno de Provas Iconográficas e Cuidado digital #FF4D4D |
 | Gate | `tests/test_r1075_molambudos_revision.py` |
 
 ## 5. Limites
