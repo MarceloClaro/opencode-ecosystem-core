@@ -526,7 +526,8 @@ release/
 # R1082: literatura versionável — fonte, docs, manifestos e capas selecionadas.
 # Binários grandes (PDF/EPUB/áudio/vídeo/ZIP) permanecem fora por limite do GitHub.
 !literatura/
-!literatura/**
+# R1084: negar arquivos por padrão; permissões específicas aparecem abaixo.
+literatura/**
 literatura/**/*.pdf
 literatura/**/*.epub
 literatura/**/*.mobi
@@ -555,9 +556,7 @@ literatura/**/*.sqlite
 literatura/**/*.db
 literatura/**/build/
 literatura/**/__pycache__/
-# exceções: capas finais selecionadas
-!literatura/molambudos/capas/molambudos_final/**/*.pdf
-!literatura/molambudos/capas/molambudos_final/**/*.png
+# Exceções de capa controladas somente no bloco R1084 de fontes abaixo.
 # R1082: artefatos de build e metadados dentro de literatura
 literatura/**/*.aux
 literatura/**/*.log
@@ -613,6 +612,52 @@ literatura/**/*.M4A
 literatura/**/*.MP3
 literatura/**/*.WAV
 literatura/**/*.MP4
+# R1084: reabrir diretórios (não arquivos) e apenas fontes/documentos escolhidos.
+!literatura/**/
+!literatura/**/*.md
+!literatura/**/*.json
+!literatura/**/*.jsonl
+!literatura/**/*.tex
+!literatura/**/*.bib
+!literatura/**/*.sty
+!literatura/**/*.cls
+!literatura/**/*.py
+!literatura/**/*.sh
+!literatura/**/*.svg
+!literatura/**/*.txt
+!literatura/**/*.html
+!literatura/**/*.toml
+!literatura/**/*.yml
+!literatura/**/*.yaml
+!literatura/**/*.xml
+!literatura/**/*.lua
+!literatura/**/*.mmd
+!literatura/**/*.dot
+!literatura/**/*.js
+!literatura/**/*.css
+!literatura/**/*.cff
+!literatura/**/Makefile
+!literatura/**/LICENSE
+!literatura/**/.gitignore
+!literatura/**/.gitkeep
+!literatura/templates/livro-odontologia-ia/codigos/cap01/*.ipynb
+!literatura/templates/livro-odontologia-ia/odontoia-pkg/notebooks/*.ipynb
+# Apenas as capas selecionadas e explicitamente inventariadas entram no Git.
+!literatura/molambudos/capas/molambudos_final/**/*.png
+!literatura/molambudos/capas/molambudos_final/molambudos_capa_completa_422p_print_300dpi.pdf
+!literatura/molambudos/capas/molambudos_final/molambudos_capa_completa_436p_canonica_300dpi.pdf
+# Limites de produção/privacidade têm precedência sobre a allowlist acima.
+literatura/**/private/
+literatura/**/build/
+literatura/**/dist/
+literatura/**/__pycache__/
+literatura/**/.venv/
+literatura/**/.git/
+literatura/**/.tracado/
+literatura/**/credentials.*
+literatura/**/secrets.*
+literatura/**/id_rsa*
+literatura/**/id_ed25519*
 /literatura/templates-academicos/30_template_usp
 /literatura/templates-academicos/20_template_ieee
 /literatura/templates-academicos/29_template_unb_monografia

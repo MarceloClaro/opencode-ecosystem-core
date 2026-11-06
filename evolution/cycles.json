@@ -23935,6 +23935,33 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1084",
+      "objective": "Corrigir política Git de literatura e reconciliar READMEs sem reescrever histórico",
+      "changes": [
+        "Whitelist deny-by-default em literatura; remoção do índice de XDV e synctex(busy) sem apagar fontes locais",
+        "Badges do README sincronizados com configuração; descrições corrigidas para 435/421/422/436 páginas e limites do clone",
+        "Gates de whitespace reativados; 165 testes focados e doctor 22/22 executados localmente"
+      ],
+      "score": 7.0,
+      "lessons": [
+        "Uma exceção global !literatura/** reautoriza até arquivos .env; usar allowlist testada com git check-ignore --no-index.",
+        "O teste git show --check HEAD não apaga defeitos de um commit anterior; uma correção aditiva não reescreve histórico.",
+        "Badge, triagem de links e teste coletado não provam execução externa, publicação ou aprovação editorial.",
+        "Revisão externa bloqueada por permissão não pode ser marcada como análise concluída, mesmo se o roteador a pontuar como sucesso."
+      ],
+      "timestamp": 1793954876.014953,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [

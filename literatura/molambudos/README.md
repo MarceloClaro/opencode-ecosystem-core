@@ -1,14 +1,21 @@
-# Molambudos — projeto completo
+# Molambudos — fontes versionadas e artefatos locais
 
 **Obra:** *Molambudos — O Diário do Paciente 1.260*  
 **Autor:** Marcelo Dias de Carvalho Filho  
 **Edição canônica:** `Molambudos_VictoriaRegia` — 435 pp, 160×230 mm, KDP PT-BR.
 
+Este mapa cobre também artefatos presentes apenas na máquina de produção.
+Um clone do Git contém fontes e documentação, as capas selecionadas 422/436 pp
+e provas pequenas rastreadas; **não** contém os PDFs dos miolos, EPUBs, áudio,
+vídeo, ZIPs nem o caderno PDF de provas. A regra de entrada é uma allowlist
+em [`.gitignore`](../../.gitignore); ignorar não equivale a auditar segredos.
+Ver [política e edição](../../README.md#o-que-entra-no-git-e-o-que-fica-local).
+
 ## Mapa
 
 | Caminho | Conteúdo |
 |---|---|
-| `Molambudos_VictoriaRegia/` | edição canônica PT/EN/ZH/TRI, PDF 435 pp, capas, ISBN, dossiê e Book Studio |
+| `Molambudos_VictoriaRegia/` | fontes da edição canônica PT/EN/ZH/TRI e dossiê; PDF de 435 pp, capas anteriores e release completo são locais |
 | `release/2026-11-05/` | pacote local: PDFs PT/EN/ZH/TRI, capas, metadados e checksums |
 | `release/2026-11-05/epub/` | EPUB de leitura, fonte Markdown, CSS e manifesto |
 | `release/2026-11-05/preflight/` | preflight KDP local com status FAIL documentado |
@@ -16,9 +23,9 @@
 | `reports/r1074/` | EPUB, preflight KDP e estado do PDF tagged |
 | `Molambudos_Revisada_R1075/` | edição revista e redesenhada: 421 pp, DOC −18,3%, CONT 7, LUC 23, 6 pranchas |
 | `reports/r1075/` | manifesto, EPUB e relatório da edição revista |
-| `Molambudos_Print_R1077/` | variante print-safe: 422 pp, sem fundo, imagens ≥300 DPI, TAC 11,7% |
+| `Molambudos_Print_R1077/` | fontes da variante print-safe: PDF local de 422 pp, sem fundo, imagens ≥300 DPI, TAC 11,7% |
 | `reports/r1077/` | manifesto de tinta, CMYK e qualidade de impressão |
-| `capas/molambudos_final/` | capa selecionada preta/ouro: PDFs 422/436 pp, 300 DPI, fontes embutidas e manifesto |
+| `capas/molambudos_final/` | capa selecionada preta/ouro: PDFs 422/436 pp, 300 DPI, fontes embutidas e manifesto; nome `436p` não confirma compatibilidade com o miolo canônico de 435 pp |
 | `capas/piranesi_pencz_2026-11-05/` | alternativa Piranesi/Pencz: capas, tríptico, masters 600 DPI e manifesto |
 | `reports/r1081/` | direção de arte Piranesi/Pencz e provas determinísticas |
 | `reports/r1082/` | 6 pranchas de prova, caderno de 8 pp, preflight, revisão e perfil local |
@@ -32,14 +39,16 @@
 
 ## Comandos
 
-```bash
-cd Molambudos_VictoriaRegia
-python3 -m marceloclaro.book_studio status .
-python3 -m marceloclaro.book_studio build . --engine latex --timeout 300
+Da raiz do repositório, consulte o diagnóstico **sem gerar nem alterar** miolos:
 
-python3 -m marceloclaro.book_studio qa \
-  build/molambudos-o-di-rio-do-paciente-1-260.pdf --trim 160x230mm
+```bash
+python3 -m marceloclaro.bookstudio status
+python3 -m marceloclaro.cli doctor
+git ls-files literatura/molambudos/capas/molambudos_final/
 ```
+
+O build com `marceloclaro.book_studio` exige conferir dependências, fontes e
+licenças antes da execução; as saídas não são artefatos presentes em clones.
 
 ## Estado
 
@@ -55,8 +64,9 @@ python3 -m marceloclaro.book_studio qa \
 - Preflight KDP da capa canônica antiga: **FAIL** — capa a ~163 DPI, reserva de barras 2,15×0,95 in e posição inferior esquerda. A capa selecionada R1082 foi refeita em 300 DPI (422/436 pp), mas ainda não tem CMYK/PDF-X, prova física ou confirmação KDP.
 - PDF tagged: bloqueado pelo toolchain (`luaotfload` ausente; `tagpdf` aborta); nenhum PDF/UA produzido.
 - Edição revista R1075 + design R1076: 421 pp, 84 fragmentos, DOC −18,3%, CONT 7, LUC 23; 6 pranchas e legenda de códigos. Não substitui a canônica; capa/lombada a recalcular; sem nova ISBN.
-- Variante print-safe R1077: 422 pp, sem fundo sépia, aberturas tipográficas, imagens ≥300 DPI, TAC médio 11,7%. Capa 300 DPI ainda pendente.
+- Variante print-safe R1077: 422 pp, sem fundo sépia, aberturas tipográficas, imagens ≥300 DPI, TAC médio 11,7%. Há capa selecionada R1082 a 300 DPI; CMYK/PDF-X e prova física pendentes.
 - R1082 — capa selecionada preta/ouro: PDFs 422/436 pp, 300 DPI, fontes embutidas; 6 pranchas de prova a 316–345 DPI no tamanho final de 86 mm; 2× a 300 DPI não atingido (158–173 DPI), sem upscale; caderno de provas de 8 pp e preflight com TAC máximo 117,9%.
+- A capa denominada `436p_canonica` é provisória frente ao miolo canônico **435 pp**; confirmar paginação e recalcular lombada antes de qualquer uso gráfico/KDP. A variante R1076 (421 pp) é digital/sensorial; R1077 (422 pp) é print-safe, ambas separadas da canônica.
 - Perfil literário `romance-psicologico-molambudos` registrado e configurado para `ollama-local/gemma4:e2b-tuned`, sem fallback OpenCode Go; a inferência local não foi comprovada.
 - Geração de imagem: OpenAI sem créditos e Gemini com cota zero; nenhuma arte nova gerada.
 - `Tagged: no` no PDF canônico é gap conhecido; o EPUB revisado tem EPUBCheck/Ace.

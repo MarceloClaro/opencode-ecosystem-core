@@ -10,20 +10,23 @@
 [![License](https://img.shields.io/badge/license-MIT-22c55e?style=for-the-badge&logo=opensourceinitiative)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.10%2B-3b82f6?style=for-the-badge&logo=python)](https://www.python.org/)
 [![Tests](https://img.shields.io/badge/tests-local%20suite-3b82f6?style=for-the-badge&logo=pytest)](tests/)
-[![Doctor](https://img.shields.io/badge/doctor-22%2F22-16a34a?style=for-the-badge)](marceloclaro/doctor.py)
-[![MCP](https://img.shields.io/badge/MCP-27%20servers-8b5cf6?style=for-the-badge)](opencode.json)
-[![Agents](https://img.shields.io/badge/agents-333-7c3aed?style=for-the-badge)](agents/catalog)
+<!-- core-badges:start -->
+[![Checks](https://img.shields.io/badge/checks-22%20estruturais-64748b?style=for-the-badge)](marceloclaro/doctor.py)
+[![MCP](https://img.shields.io/badge/MCP-30%20servers-8b5cf6?style=for-the-badge)](opencode.json)
+[![Agents](https://img.shields.io/badge/agents-337-7c3aed?style=for-the-badge)](agents/catalog)
+<!-- core-badges:end -->
 [![Evidence](https://img.shields.io/badge/evidence--first-f59e0b?style=for-the-badge)](reports/r1054/README.md)
 
 [Comece em 5 minutos](#início-rápido-local) ·
 [Documentação](docs/README.md) ·
+[Livro e arquivos no Git](#o-que-entra-no-git-e-o-que-fica-local) ·
 [Pipeline científico](docs/SCIENTIFIC_RESEARCH_PIPELINE_R1054.md) ·
 [Atlas animado](docs/architecture/ANIMATED.md) ·
 [Evidência](reports/r1054/README.md) ·
 [Manual](MANUAL.md) ·
 [Arquitetura](ARCHITECTURE.md)
 
-**Mapa rápido:** [Visão geral](#visão-geral) · [Pipeline](#pesquisador-científico-r1051-r1054) · [Capacidades](#capacidades-principais) · [Arquitetura](#arquitetura-em-60-segundos) · [Quickstart](#início-rápido-local) · [Evidência](#trilha-de-evidências) · [Documentação](#documentação) · [Roadmap](#roadmap)
+**Mapa rápido:** [Visão geral](#visão-geral) · [Pipeline](#pesquisador-científico-r1051-r1054) · [Capacidades](#capacidades-principais) · [Livro e clone](#o-que-entra-no-git-e-o-que-fica-local) · [Arquitetura](#arquitetura-em-60-segundos) · [Quickstart](#início-rápido-local) · [Evidência](#trilha-de-evidências) · [Documentação](#documentação) · [Roadmap](#roadmap)
 
 <sub>Social preview: <a href="docs/images/social-preview.png">1280×640</a> · Maintained by <a href="https://github.com/MarceloClaro">Marcelo Claro Laranjeira</a></sub>
 
@@ -65,14 +68,16 @@ fonte, qual hash e qual limite?”**.
 - **Pesquisa científica ponta a ponta** — tema, contrato de recuperação, busca,
   triagem, texto integral, integridade, meta-análise, risco de viés, GRADE,
   manuscrito e pacote de submissão.
-- **Orquestração governada** — 337 perfis de agente, Blackboard, MetaBus,
+- **Orquestração governada** — perfis de agente configurados, Blackboard, MetaBus,
   Trust Engine, EvolutionRegistry e gates de evidência.
 - **Engenharia reversa local (REA)** — inspeção controlada, camadas de provedores
   e recibos por hash.
 - **Vídeo e dublagem** — editor multifaixa, FFmpeg, Remotion, XTTS/Edge TTS,
   ASR, legendas, câmera por frames, mapa narrativo e QC técnico (piloto R1055).
-- **MCP e ferramentas locais** — 27 servidores configurados, federação, probes e
+- **MCP e ferramentas locais** — servidores configurados, federação, probes e
   smoke tests delimitados.
+- **Book Studio e Molambudos** — fontes, testes, capas selecionadas e provas
+  documentadas; os miolos compilados e pacotes de mídia não acompanham o clone.
 
 ## Por que este projeto é diferente
 
@@ -162,23 +167,24 @@ registrada, não escondida. Evidência:
 | Área | Estado | O que existe | Limite honesto |
 |---|---|---|---|
 | Orquestração | ✅ implementado/testado | `MarceloClaroOrchestrator`, Blackboard, MetaBus, workflows DAG, cancelamento | CLI instalada não comprova autenticação ou execução |
-| Agentes | ✅ 337 perfis | catálogo, registro, especificação, trust e evolução | registro/atribuição ≠ inferência concluída |
+| Agentes | 🟡 perfis configurados (inventário acima) | catálogo, registro, especificação, trust e evolução | registro/atribuição ≠ inferência concluída |
 | Pesquisa científica | ✅ R1051–R1054 | busca, texto integral, triagem humana, integridade, meta-análise, manuscrito, submissão | extração/RoB/GRADE assistivos; revisão humana obrigatória |
 | SDD/TDD | ✅ | SpecRegistry, SpecVerifier, TDDRunner, RED/GREEN | critério textual ≠ verdade científica |
 | REA | 🟡 com limites | inspeção local, camadas de provedores, recibos | formato, engine, licença e isolamento precisam ser conferidos |
 | Vídeo e dublagem | ✅ R1046–R1055 | multifaixa, TTS, ASR, legendas, mapa e câmera; piloto 16:9/9:16 nativo | render/QC técnico ≠ aprovação estética, naturalidade ou rigor científico |
-| MCP | 🟡 30 configurados | federação, probes, smoke, recibos | configuração ≠ disponibilidade no momento de uso |
+| MCP | 🟡 servidores configurados (inventário acima) | federação, probes, smoke, recibos | configuração ≠ disponibilidade no momento de uso |
 | Governança | ✅ | gate metacognitivo, TrustEngine, slashing, EvolutionRegistry | `externally_supported` não é verdade absoluta |
 | Publicação | 🧭 gate | validação externa, aceite, autorização | nenhum upload/publicação automática |
-| Book Studio | ✅ R1078–R1082 | KDP, tokens, licença, EPUB, capas e 6 pranchas de prova | arte final, 2× 300 DPI, CMYK/PDF-X e prova física pendentes |
+| Book Studio | 🟡 R1078–R1082 | KDP, tokens, licença, auditoria EPUB, capas e 6 pranchas de prova | arte final, 2× 300 DPI, CMYK/PDF-X e prova física pendentes |
 
 **Legenda:** ✅ implementado e testado; 🟡 implementado com limites; 🧪 experimental; 📋 apenas especificado.
 
 ## Book Studio e Molambudos (R1078–R1082)
 
-O Book Studio saiu de scripts isolados para um pacote com contratos, KDP, design
-tokens, gate de licença, manifesto de release e auditoria de EPUB. O Molambudos
-ganhou uma direção de arte Piranesi/Pencz e um caderno de provas.
+O Book Studio saiu de scripts isolados para um pacote com contratos, cálculos de
+capa KDP, design tokens, gate de licença, manifesto de release e auditoria de
+EPUB. O Molambudos ganhou uma direção de arte Piranesi/Pencz e um caderno de
+provas **local**, sem aprovação para impressão ou distribuição.
 
 | Ciclo | Entrega | Estado |
 |---|---|---|
@@ -186,7 +192,8 @@ ganhou uma direção de arte Piranesi/Pencz e um caderno de provas.
 | **R1079** | preflight dos artefatos: 422 pp, 160×230 mm, 15 fontes, 20 imagens ≥300 DPI, TAC 11,7% | ✅/parcial |
 | **R1080** | perfil `romance-psicologico-molambudos`, 16 estilos, PT-BR/EN/ZH, ética | ✅ 6 testes |
 | **R1081** | direção Piranesi/Pencz, 6 tipos de prancha, provas determinísticas | ✅ 5 testes |
-| **R1082** | capa preta/ouro 422/436 pp, 6 pranchas de prova, caderno de 8 pp e preflight | ✅ 12 testes |
+| **R1082** | capa preta/ouro 422/436 pp, 6 pranchas de prova, caderno local de 8 pp e preflight | ✅ testes locais; uso gráfico pendente |
+| **R1083** | fontes literárias e capas selecionadas passam a ser rastreadas; binários extensos permanecem locais | 🟡 política revista em R1084 |
 
 **Limites:** a capa selecionada tem 300 DPI, mas ainda não tem CMYK/PDF-X,
 prova física ou confirmação KDP; as 6 pranchas estão a 316–345 DPI no tamanho
@@ -195,6 +202,46 @@ Gemini com cota zero para imagem; nenhuma arte nova foi gerada. O perfil local
 está configurado, mas a inferência não foi comprovada. Detalhes:
 [R1082](reports/r1082/README.md), [R1081](reports/r1081/illustration_style/README.md),
 [R1080](reports/r1080/README.md) e [R1078](reports/r1078/README.md).
+
+### Edições e capas: não trocar uma variante pela outra
+
+| Variante | Paginação observada | Estado da capa |
+|---|---:|---|
+| Edição canônica `Molambudos_VictoriaRegia` | **435 pp** | a capa rastreada com nome `436p_canonica` é **provisória**: confirmar a paginação final e recalcular a lombada antes de usá-la; não assumir que 435 = 436 para a gráfica |
+| Edição digital/sensorial R1076 | **421 pp** | não é substituta da canônica nem da print-safe |
+| Variante print-safe R1077 | **422 pp** | capa preta/ouro `422p_print` selecionada, sem CMYK/PDF-X e sem prova física |
+
+As **6 pranchas de prova** alcançam 300 DPI efetivos a 86 mm, mas não a 2×;
+três artes ainda exibem arquitetura europeia e precisam de adaptação brasileira
+e revisão humana. A inferência do perfil local não foi comprovada. A obra não
+foi enviada à KDP nem publicada por esta rodada.
+
+### O que entra no Git e o que fica local
+
+| No clone deste repositório | Só na máquina ou em storage autorizado |
+|---|---|
+| Código, specs, testes, documentação e fontes literárias permitidas pela `.gitignore` | Memória privada, ambientes, caches, intermediários de compilação e repositórios externos |
+| [README do Molambudos](literatura/molambudos/README.md), fontes `.tex/.md`, manifestos e [capas selecionadas](literatura/molambudos/capas/molambudos_final/manifesto.json) (PDFs e PNGs de capa especificados) | PDFs de **miolo**, EPUBs, áudio, vídeo, ZIPs e o caderno de prova em PDF; seus manifestos não os recriam automaticamente |
+| [Pranchas e preflight rastreados](reports/r1082/plate_proof/plates_manifest.json) | Parte da arte original fora da seleção Git, arte nova a 2× e prova gráfica física |
+
+Esta é uma política **deny-by-default para novos arquivos em `literatura/`**:
+fontes/documentos escolhidos entram, segredos e artefatos de build ficam de
+fora. O `.gitignore` não faz varredura de segredos e não remove objetos já
+publicados em commits anteriores. Antes de `git add`, revise o índice e os
+direitos de cada arquivo. Para binários grandes, avalie **Git LFS** ou storage
+de release com autorização e recibos; nenhum push ou upload é realizado por
+esta documentação. Veja a [política reproduzível](docs/REPOSITORIO_REPRODUZIVEL.md)
+e a [spec R1084](specs/SPEC-935-R1084-git-policy-readme-reconciliation.md).
+
+```bash
+git ls-files literatura/molambudos/capas/molambudos_final/
+git ls-files literatura/molambudos/Molambudos_Print_R1077/
+python3 scripts/reconcile_operational_docs.py --check
+python3 -m marceloclaro.cli doctor
+```
+
+Os testes do Book Studio que dependem de PDFs excluídos podem ser ignorados
+(`skip`) num clone sem os artefatos; testes coletados não são testes aprovados.
 
 ## Arquitetura em 60 segundos
 
@@ -222,7 +269,7 @@ flowchart TB
     O --> R["Research Lab R1051-R1054"]
     O --> V["Vídeo / câmera / mapa R1055"]
     O --> E["REA"]
-    B --> A["333 agent profiles"]
+    B --> A["Agent profiles (see configuration inventory)"]
     M --> G["Trust / Evolution / Evidence"]
     S --> Gate["Evidence Gate"]
     R --> Gate
@@ -300,8 +347,9 @@ cd opencode-ecosystem-core
 .venv/bin/python -m marceloclaro.cli doctor
 ```
 
-Saída esperada do `doctor`: **22/22 checks estruturais**. Isso não prova
-autenticação, inferência ou validação externa.
+Neste checkout foram observados **22/22 checks estruturais**; rode o `doctor`
+novamente na sua instalação. Uma passagem local não prova autenticação,
+inferência ou validação externa.
 
 Primeiro projeto de pesquisa, sem rede:
 
@@ -317,7 +365,7 @@ Primeiro projeto de pesquisa, sem rede:
 | Nível | Significado | Exemplo |
 |---|---|---|
 | **L0 — implementado** | código e contrato existem | módulos `scientific_lab/*` |
-| **L1 — testado** | testes herméticos passam | 410 passed, 1 skipped na regressão R1033–R1054 |
+| **L1 — testado** | testes herméticos passam em escopo definido | registro histórico: 410 passed, 1 skipped na regressão R1033–R1054; não é a suíte inteira |
 | **L2 — renderizado** | vídeo/PDF/DOCX gerados com recibo | R1047, pacote R1053 |
 | **L3 — benchmarkado** | replicação numérica em dados públicos | BCG REML, R1054 |
 | **L4 — validação externa** | artefato independente verificado | gate R1054; **não emitido** |
@@ -339,6 +387,8 @@ não é aceite editorial.
 | [Spec R1054](specs/SPEC-1054-automacao-assistida-validacao-real.md) | contrato e critérios de aceitação |
 | [Relatório R1054](reports/r1054/README.md) | benchmark BCG e limites |
 | [Piloto R1055](pilots/r1055-qubit/README.md) | vídeo de qubit, fontes, código e limites |
+| [Molambudos](literatura/molambudos/README.md) | edições, fontes, capas e limites do clone |
+| [Política Git R1084](specs/SPEC-935-R1084-git-policy-readme-reconciliation.md) | allowlist, testes e divergência de paginação |
 | [Vídeo R1058](pilots/r1058-airam-veras/README.md) | plano de ação Airam Veras, mapa, cronograma e exemplos |
 | [Atlas animado R1056](docs/architecture/ANIMATED.md) | GIF/PNG/SVG e Mermaid de todos os diagramas do escopo |
 | [Reprodução R1056](reports/r1056/README.md) | exportador local, cobertura, testes e hashes |
@@ -360,6 +410,7 @@ não é aceite editorial.
 | R1054 | ✅ | extração assistida, PLOS ONE, gate de publicação, benchmark BCG |
 | R1055 | ✅ técnico; revisão humana pendente | vídeo didático de qubit, câmera, mapa e versões 16:9/9:16 |
 | R1056 | ✅ documental; não valida runtime | atlas animado, fontes preservadas, manifesto e testes |
+| R1078–R1084 | 🟡 estúdio editorial; publicação bloqueada | Book Studio, fontes e capas versionadas; revisão de lombada, CMYK/PDF-X e prova física pendentes |
 | Próximos ciclos | 🧭 | backend real de submissão, perfis brasileiros, UI, tabelas e validação externa assistida |
 
 O roadmap é uma direção, não uma promessa de data. Cada ciclo só é marcado
@@ -503,7 +554,7 @@ composições e recibos permitem reproduzir o fluxo.
 | Pesquisa acadêmica | pipeline ABNT, revisão de fontes, bibliografia, provas e conselho de 13 | não substitui bibliotecário, estatístico ou revisão por pares |
 | Pesquisador ponta a ponta (R1051–R1054) | tema → contrato → busca → triagem humana → texto integral → integridade → meta-análise/GRADE → manuscrito → submissão → gate de publicação | extração/RoB/GRADE são assistivos; submissão e aceite exigem backend/artefatos humanos |
 | Ciência | 8 protocolos K-Dense, catálogo de 177 skills, 9 adaptações originais e laboratório com budget | 177 skills não são 177 validações; nada é executado sem gate |
-| Programação | SDD/TDD, **9.552 testes coletados**, agentes, skills e Macro-rede de 584 nós/776 arestas | grafo é projeção read-only; aresta não é execução |
+| Programação | SDD/TDD, suíte pytest com escopo variável, agentes, skills e macro-rede observável | coleta ≠ aprovação; grafo é projeção read-only, aresta não é execução |
 | Governança | gate metacognitivo, citações literais, contradições e validação externa | `externally_supported` não é verdade absoluta; voto/nota/payoff não decide |
 | Publicação | nenhum upload ou agendamento nesta rodada | exige direitos, credenciais e autorização explícita |
 
@@ -568,7 +619,7 @@ Nenhum código de terceiro foi copiado ou executado; instruções permissivas fo
 `reports/r1049/sources.json`. Ver [evidência R1049](reports/r1049/README.md).
 
 **Macro-rede e gate metacognitivo (R1050):** `mci/macro_network.py` projeta
-**584 nós e 776 arestas** no snapshot atual — orquestrador, 337 agentes, 54 skills, 177
+**584 nós e 776 arestas** no snapshot local conferido em 06/11/2026 — orquestrador, 337 agentes, 54 skills, 177
 skills K-Dense, 11 categorias e 4 gates. `mci/metacognitive_gate.py` impede que
 confiança, voto, nota ou payoff virem verdade; o conselho ganhou
 `validate_claims` com evidência literal, falseabilidade, mecanismo e
@@ -2781,6 +2832,7 @@ Advisories** e **não abra issue pública** para vulnerabilidades.
 | [`integrations/code_executor.py`](integrations/code_executor.py) | Execução de código para pipelines de agentes |
 | [`integrations/free_model_catalog.py`](integrations/free_model_catalog.py) | Catálogo de modelos livres e provedores OpenCode |
 | [`scripts/preprocess_docx.py`](scripts/preprocess_docx.py) | Normalização de docx → markdown (estrutura, cabeçalhos, tabelas) |
+| [`literatura/molambudos/README.md`](literatura/molambudos/README.md) | Fontes e estado das variantes; PDFs de miolo e EPUBs permanecem locais |
 
 Links: [GitHub](https://github.com/MarceloClaro/opencode-ecosystem-core) ·
 [HuggingFace Core](https://huggingface.co/datasets/marceloclaro/opencode-ecosystem-core) ·
@@ -2809,6 +2861,10 @@ O diagnóstico estrutural R868 registrou 22 checks aprovados, com alcance
 exigem seus próprios recibos. Configuração, memória privada, evidências de
 alvos e resultados locais completos ficam fora do Git conforme
 [as regras de reprodução](docs/REPOSITORIO_REPRODUZIVEL.md).
+
+A política de Git para `literatura/` admite fontes e capas escolhidas, mas
+não substitui a conferência de sigilo e direitos nem inclui os binários do
+livro em um clone. Ver [estado dos artefatos](#o-que-entra-no-git-e-o-que-fica-local).
 
 A licença MIT do Core não atribui automaticamente licença a modelos,
 ferramentas comerciais ou artefatos federados. Consulte a procedência de cada
