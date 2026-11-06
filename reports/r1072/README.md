@@ -83,6 +83,10 @@ edições excluídas. A escolha da edição canônica é editorial e pertence ao
   legenda e 6 pranchas. PDF e EPUB revisados;
   não substitui a canônica; capa/lombada a recalcular; sem nova ISBN. Ver
   `reports/r1076/README.md`.
+- **Variante print-safe R1077**: `literatura/molambudos/Molambudos_Print_R1077/`
+  — 418 pp, sem fundo sépia, aberturas tipográficas, imagens ≥300 DPI e TAC
+  médio 11,4%. Candidato de impressão; capa 300 DPI pendente; ver
+  `reports/r1077/README.md`.
 
 ### Podcast
 
@@ -150,7 +154,7 @@ Ordem mínima por obra:
 
 ## 6. Catálogo
 
-`reports/r1072/catalogo.json` contém 47 registros (44 ativos + 3 excluídos)
+`reports/r1072/catalogo.json` contém 48 registros (45 ativos + 3 excluídos)
 com:
 
 - `id`, `title`, `category`, `scope`, `canonical`, `status`;

@@ -77,6 +77,18 @@ WORKS = [
         'notes': 'Texto R1075 + design R1076; não substitui a canônica; capa/lombada a recalcular; sem nova ISBN.',
     },
     {
+        'id': 'molambudos-print-r1077',
+        'title': 'Molambudos — O Diário do Paciente 1.260 (variante print-safe)',
+        'category': 'livro', 'scope': 'literario', 'canonical': False,
+        'status': 'candidato print-safe; 418 pp; TAC médio 11,4%; imagens ≥300 DPI',
+        'source': 'literatura/molambudos/Molambudos_Print_R1077',
+        'compiled': 'literatura/molambudos/Molambudos_Print_R1077',
+        'pdf': 'literatura/molambudos/Molambudos_Print_R1077/main_kdp_print_r1077.pdf',
+        'links': [],
+        'audit': 'reports/r1077',
+        'notes': 'Variante de impressão; sem fundo sépia; capa 300 DPI pendente; não substitui a canônica/R1076.',
+    },
+    {
         'id': 'molambudos-v2',
         'title': 'Molambudos v2.0 — O Prontuário 1.263 (esboço)',
         'category': 'livro', 'scope': 'literario', 'canonical': False,

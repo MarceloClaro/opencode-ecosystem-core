@@ -43,6 +43,10 @@ Atualização R1075: edição revista em
 `literatura/molambudos/Molambudos_Revisada_R1075` (421 pp; DOC −18,3%; CONT 7;
 LUC 23; design R1076 com 6 pranchas). Ver `reports/r1076/README.md`.
 
+Atualização R1077: variante print-safe em
+`literatura/molambudos/Molambudos_Print_R1077` (418 pp; TAC médio 11,4%;
+imagens ≥300 DPI). Ver `reports/r1077/README.md`.
+
 ## 3. QA técnico do KDP
 
 - 435 páginas; 453,543 × 651,968 pts = **160 × 230 mm**.

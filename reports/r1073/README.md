@@ -75,3 +75,6 @@ provam mérito literário, aprovação editorial ou validação externa.
   legenda e 6 pranchas. PDF/EPUB revisados; não substitui a canônica;
   capa/lombada a recalcular; sem nova ISBN.
 - Relatório: `reports/r1075/README.md`.
+- Variante print-safe R1077: 418 pp, sem fundo sépia, imagens ≥300 DPI e TAC
+  médio 11,4%. Candidato de impressão; capa 300 DPI pendente. Ver
+  `reports/r1077/README.md`.

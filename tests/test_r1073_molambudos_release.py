@@ -78,7 +78,7 @@ def test_manifest_items_have_hashes_and_reasons():
 def test_catalog_marks_alternates_as_deleted():
     data = load(CATALOG)
     by_id = {work["id"]: work for work in data["works"]}
-    assert data["count"] == len(data["works"]) == 47
+    assert data["count"] == len(data["works"]) == 48
 
     canonical = by_id["molambudos-victoria-regia"]
     assert canonical["canonical"] is True
