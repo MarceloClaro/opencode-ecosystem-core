@@ -8,7 +8,7 @@
 
 | Arquivo | Conteúdo |
 |---|---|
-| `TCC_MARIA_SOCORRO.pdf` | TCC completo, 43 páginas, A4, 2,5 cm, 1,5, sumário com 40 entradas e 8 quadros |
+| `TCC_MARIA_SOCORRO.pdf` | TCC completo, 27 páginas, A4, 2,5 cm, 1,5, sumário com 33 entradas e 6 quadros |
 | `TCC_MARIA_SOCORRO.docx` | Versão editável, Times New Roman 12, 2,5 cm, 1,5 |
 | `TCC_CORPO.md` | Corpo textual (introdução ao apêndice) |
 | `TCC_PRETEXTUAL.tex` / `.md` | Capa, folha de rosto, resumo, abstract, lista de abreviaturas |
@@ -35,13 +35,12 @@
 - Lista de abreviaturas e siglas
 - Sumário
 - 1 Introdução
-- 2 Revisão da literatura (2.1 a 2.6)
-- 3 Metodologia (3.1 a 3.7)
+- 2 Referencial teórico (2.1 a 2.4)
+- 3 Metodologia (3.1 a 3.5)
 - 4 Resultados (4.1 a 4.7)
-- 5 Discussão (5.1 a 5.7)
+- 5 Discussão (5.1 a 5.6)
 - 6 Conclusão
 - Referências
-- Apêndice A — indicadores por unidade da federação (2024)
 
 ## Como reconstruir
 

@@ -20,7 +20,7 @@
 | `ADAPTACAO_PERIODICO.md` | Opções de título/palavras-chave e checklist para o periódico-alvo. |
 | `CONFORMIDADE_METODOLOGIA_CIENTIFICA.md` | Comparação item a item com o manual de Metodologia Científica (PDF de 66 p.). |
 | `SPEC-986.md` | Especificação e critérios de aceitação usados no trabalho. |
-| `TCC/` | TCC completo em nome de Maria do Socorro (43 páginas, 20 DOI auditáveis e análise do Censo Escolar 2021–2024). |
+| `TCC/` | TCC completo em nome de Maria do Socorro (27 páginas, 20 DOI auditáveis e análise do Censo Escolar 2021–2024). |
 | `dados/` | Respostas brutas da API Crossref e saídas dos scanners. |
 | `scripts/` | Scripts reprodutíveis de correção, verificação e compilação. |
 | `templates/` | Cabeçalho LaTeX e referência DOCX usados na renderização. |
