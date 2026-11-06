@@ -1,0 +1,44 @@
+\documentclass[12pt]{article}
+\usepackage[paperwidth=160mm,paperheight=230mm,margin=0pt]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{tikz,graphicx,xcolor,yfonts,fontawesome5}
+\pagestyle{empty}
+\definecolor{ink}{HTML}{0B0806}
+\definecolor{gold}{HTML}{B08D57}
+\definecolor{blood}{HTML}{7A1E1E}
+\begin{document}
+\begin{tikzpicture}[remember picture,overlay]
+  \fill[ink] (current page.south west) rectangle (current page.north east);
+  \node[anchor=center, opacity=0.38] at (current page.center)
+    {\includegraphics[width=\paperwidth,height=\paperheight]{../../capas/molambudos_final/fontes/arte_frontal_original.png}};
+  \fill[ink, opacity=0.52] (current page.south west) rectangle (current page.north east);
+  \draw[gold, line width=1.2pt]
+    ([xshift=10mm,yshift=10mm]current page.south west) rectangle
+    ([xshift=-10mm,yshift=-10mm]current page.north east);
+  \draw[gold, line width=0.4pt]
+    ([xshift=13mm,yshift=13mm]current page.south west) rectangle
+    ([xshift=-13mm,yshift=-13mm]current page.north east);
+  \node[anchor=north, text=gold, font=\gothfamily\fontsize{30}{32}\selectfont,
+    text width=132mm, align=center] at ([yshift=-28mm]current page.north) {MOLAMBUDOS};
+  \node[anchor=north, text=gold, font=\scshape\fontsize{14}{18}\selectfont,
+    text width=120mm, align=center] at ([yshift=-45mm]current page.north) {O DIÁRIO DO PACIENTE 1.260};
+  \node[anchor=north, text=gold!80, font=\itshape\small, text width=110mm,
+    align=center] at ([yshift=-57mm]current page.north) {Uma narrativa em fragmentos};
+  \node[anchor=center] at ([yshift=18mm]current page.center) {%
+    \tikz{
+      \draw[gold, line width=1.2pt] (0,0) circle (16mm);
+      \draw[gold, line width=0.6pt] (0,14mm) -- (-12.1mm,-7mm) -- (12.1mm,-7mm) -- cycle;
+      \node[text=gold, font=\bfseries\large] at (0,0) {1.260};
+    }};
+  \node[anchor=center, text=gold, font=\scshape\bfseries\large]
+    at ([yshift=-30mm]current page.center) {EDIÇÃO GRIMÓRIO};
+  \node[anchor=center, text=gold!75, font=\footnotesize\scshape]
+    at ([yshift=-38mm]current page.center) {ARQUIVO DE MESA};
+  \node[anchor=south, text=gold, font=\small\scshape]
+    at ([yshift=32mm]current page.south) {MARCELO DIAS DE CARVALHO FILHO};
+  \node[anchor=south, text=gold!85, font=\footnotesize\scshape]
+    at ([yshift=25mm]current page.south) {COAUTOR E ILUSTRADOR: MARCELO CLARO};
+  \node[anchor=south, text=gold!70, font=\footnotesize\scshape]
+    at ([yshift=18mm]current page.south) {OPENCODE BOOKS · CRATEÚS · 2026};
+\end{tikzpicture}
+\end{document}

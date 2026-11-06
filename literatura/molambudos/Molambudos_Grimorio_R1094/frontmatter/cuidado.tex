@@ -1,0 +1,23 @@
+% =================
+% CUIDADO — página de choque (preta), quebra sensorial no folhear
+% =================
+\cleardoublepage
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+  \fill[black] (current page.south west) rectangle (current page.north east);
+  \node[anchor=center, text width=0.74\paperwidth, align=center]
+    at (current page.center){%
+    {\color{sangueclaro}\scshape\Huge CUIDADO}\\[0.4em]
+    {\color{sangueclaro}\rule{0.35\paperwidth}{0.6pt}}\\[2.2em]
+    {\color{sepiabg}\large Este livro contém um ciclo de\\
+     contaminação narrativa.}\\[1.8em]
+    {\color{sepiabg}\large Ao ler, você se torna\\ o
+     {\color{olho}\bfseries Paciente 1.263}.}\\[3em]
+    {\color{sepiabg!55}\footnotesize\itshape ao final, não haverá como devolver o livro à estante\\
+     como se você não o tivesse aberto.}\\[3em]
+    {\color{sangueclaro}\footnotesize\itshape Se um zumbido surgir durante a leitura, não pare.\\
+     Já é tarde demais para parar.}\\[1.2em]
+    {\color{sepiabg}\footnotesize\itshape Esta página é parte da ficção. Se precisar parar, pare.}%
+  };
+\end{tikzpicture}%
+\null\vfill\clearpage

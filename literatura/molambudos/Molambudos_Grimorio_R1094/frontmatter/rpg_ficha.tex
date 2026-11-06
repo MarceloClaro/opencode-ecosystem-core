@@ -1,0 +1,78 @@
+\cleardoublepage
+\thispagestyle{empty}
+\begin{rpgdark}[FICHA DO PACIENTE 1.263]
+\centering
+{\textgoth{\fontsize{26}{28}\selectfont FICHA}}\\[0.2em]
+{\scshape\bfseries\small ARQUIVO 1.260 · FORMULÁRIO DE ACOMPANHAMENTO}\\[0.3em]
+{\color{rpggold}\rule{0.6\textwidth}{0.7pt}}
+\end{rpgdark}
+
+\vspace{0.5em}
+\begin{rpgbox}[IDENTIFICAÇÃO]
+\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\textbf{Nome:} & \hrulefill \\
+\textbf{Idade:} & \hrulefill \\
+\textbf{Ocupação:} & \hrulefill \\
+\textbf{Procedência:} & \hrulefill \\
+\end{tabularx}
+\end{rpgbox}
+
+\vspace{0.4em}
+\begin{rpgbox}[ATRIBUTOS]
+\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabularx}{\textwidth}{@{}XX@{}}
+\textbf{\textcolor{mem}{MEMÓRIA}} & \textbf{\textcolor{doc}{LUCIDEZ}} \\
+\rpgdot\;\rpgdot\;\rpgdot\;\rpgdot\;\rpgdot & \rpgdot\;\rpgdot\;\rpgdot\;\rpgdot\;\rpgdot \\
+\textbf{\textcolor{cont}{VONTADE}} & \textbf{\textcolor{luc}{CONTAMINAÇÃO}} \\
+\rpgdot\;\rpgdot\;\rpgdot\;\rpgdot\;\rpgdot & \rpgdot\;\rpgdot\;\rpgdot\;\rpgdot\;\rpgdot \\
+\end{tabularx}
+\end{rpgbox}
+
+\vspace{0.4em}
+\begin{rpgbox}[TRILHA DE CONTAMINAÇÃO · 0--20]
+\centering
+\begin{tikzpicture}[baseline]
+  \foreach \i in {1,...,20} {
+    \node[draw=rpggold, fill=rpgpaper, minimum size=3.3mm, inner sep=0pt]
+      at (\i*4.7mm,0) {\tiny\color{rpgsepia}\i};
+  }
+\end{tikzpicture}
+
+\vspace{0.35em}
+{\footnotesize\itshape Marque um quadrado por contato direto com o diário, por noite sem sono ou por leitura da Parte 5.}
+\end{rpgbox}
+
+\vspace{0.4em}
+\begin{rpgbox}[SINTOMAS E SINAIS]
+\small
+\begin{itemize}[leftmargin=1.4em,itemsep=0.15em]
+  \item[$\square$] Cheiro adocicado de terra molhada.
+  \item[$\square$] Olho direito amarelo no espelho.
+  \item[$\square$] Despertar às 3h14 sem motivo.
+  \item[$\square$] Sonho com a vala e com a voz que canta.
+  \item[$\square$] Vontade de passar o diário adiante.
+\end{itemize}
+\end{rpgbox}
+
+\vspace{0.4em}
+\begin{rpgbox}[REGISTRO]
+\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\textbf{Assinatura:} & \hrulefill \\
+\textbf{Data:} & \hrulefill \\
+\end{tabularx}
+\end{rpgbox}
+
+\vspace{0.4em}
+\begin{rpgbox}[NOTAS DO JOGADOR]
+\small
+\foreach \i in {1,...,10} {\noindent\rule{\textwidth}{0.25pt}\par\vspace{0.55em}}
+\end{rpgbox}
+
+\vfill
+\noindent{\footnotesize\itshape Formulário opcional, sem valor clínico. Uso ficcional. Não deve ser enviado a ninguém.}
+\clearpage

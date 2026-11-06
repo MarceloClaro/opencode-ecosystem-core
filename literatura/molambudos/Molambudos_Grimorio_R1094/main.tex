@@ -1,0 +1,876 @@
+% =============================================================================
+% MOLAMBUDOS — O Diário do Paciente 1.260
+% Template Victoria-Regia by @jancarauma
+% 84 fragmentos · 223 rotas de leitura · 5 partes
+% Atualizado com revisoes R286-R295:
+%   Aviso de Conteudo, Protocolo de Leitura, escalas dinamicas,
+%   MEM-27, LUC-Contraprova/Entrevista/Escolha, CONT-01 a CONT-13 (nova edição R376)
+% =============================================================================
+
+\documentclass[12pt,openany]{extbook}
+\newif\ifmolambudoskdpprint
+\ifdefined\KDPPRINT
+  \molambudoskdpprinttrue
+\else
+  \molambudoskdpprintfalse
+\fi
+\newcommand{\goldenratio}{1.618}
+\usepackage[T1]{fontenc}
+
+% --- Book metadata ---
+\newcommand{\authorname}{Marcelo Dias de Carvalho Filho}
+\newcommand{\coauthorname}{Marcelo Claro}
+\newcommand{\translatorname}{}
+\newcommand{\booktitle}{Molambudos --- O Diário do Paciente 1.260}
+\newcommand{\subtitle}{Uma narrativa em fragmentos}
+\newcommand{\publisher}{OpenCode Books}
+\newcommand{\publishercity}{Crateús}
+\newcommand{\editionyear}{2026}
+\newcommand{\isbn}{9798189170492}
+
+% --- Template packages + customizations ---
+
+% --- Geometria da edição Grimório (160 x 230 mm, margem externa ampliada) ---
+\def\MolambudosPaperWidth{160mm}
+\def\MolambudosPaperHeight{230mm}
+\def\MolambudosInnerMargin{22mm}
+\def\MolambudosOuterMargin{30mm}
+\def\MolambudosTopMargin{20mm}
+\def\MolambudosBottomMargin{22mm}
+
+\usepackage{misc/options}
+\usepackage{float}
+\usepackage{etoolbox}
+\usepackage{xstring}
+
+% --- Sistema visual R1076: cor por código, capitular e abertura de fragmento ---
+\newcommand{\fragcode}[1]{%
+  \IfBeginWith{#1}{MEM}{\textcolor{mem}{\textbf{#1}}}{%
+  \IfBeginWith{#1}{DOC}{\textcolor{doc}{\textbf{#1}}}{%
+  \IfBeginWith{#1}{LUC}{\textcolor{luc}{\textbf{#1}}}{%
+  \IfBeginWith{#1}{CONT}{\textcolor{cont}{\textbf{#1}}}{\textbf{#1}}}}}%
+}
+
+\newcommand{\fragfamily}[1]{%
+  \ifstrequal{#1}{MEM}{Memória}{%
+  \ifstrequal{#1}{DOC}{Documento}{%
+  \ifstrequal{#1}{LUC}{Lucidez}{%
+  \ifstrequal{#1}{CONT}{Contaminação}{#1}}}}%
+}
+
+\newcommand{\fragtitle}[5]{%
+  % #1 cor, #2 inicial, #3 código, #4 número, #5 título
+  \par\addvspace{2.2em}%
+  \noindent
+  \begin{minipage}[c]{0.14\textwidth}
+    \centering
+    {\fontsize{40}{40}\selectfont\bfseries\color{#1}#2}
+  \end{minipage}%
+  \begin{minipage}[c]{0.82\textwidth}
+    {\fontfamily{cmss}\selectfont\bfseries\footnotesize\color{#1}%
+      \fragfamily{#3}\ifx&#4&\else\,#4\fi}\par
+    \vspace{0.2em}
+    {\fontsize{18}{22}\selectfont\bfseries #5\par}
+    \vspace{0.35em}
+    {\color{#1}\rule{0.28\textwidth}{1.2pt}}
+  \end{minipage}\par
+  \addvspace{1.4em}%
+}
+
+\newcommand{\fragcap}[2]{%
+  \lettrine[lines=2,findent=2pt,nindent=4pt]{\textcolor{#1}{#2}}{}%
+}
+
+
+% --- Diretório de figuras (fotografias sépia do diário) ---
+\graphicspath{{figures/}}
+
+% ============================================================================
+% Customizações específicas do Molambudos
+% ============================================================================
+
+% Unicode characters used in fragments
+% (only for pdflatex; xelatex handles Unicode natively)
+\ifdefined\DeclareUnicodeCharacter
+\DeclareUnicodeCharacter{21AA}{\ensuremath{\hookrightarrow}}
+\DeclareUnicodeCharacter{2610}{\ensuremath{\square}}
+\DeclareUnicodeCharacter{2713}{\checkmark}
+\DeclareUnicodeCharacter{2717}{\texttimes}
+\DeclareUnicodeCharacter{2611}{\ensuremath{\checkmark}}
+\DeclareUnicodeCharacter{2639}{\textfrown}
+\DeclareUnicodeCharacter{263A}{\textsmile}
+\DeclareUnicodeCharacter{2665}{\ensuremath{\heartsuit}}
+\DeclareUnicodeCharacter{2714}{\checkmark}
+\DeclareUnicodeCharacter{2605}{\ensuremath{\bigstar}}
+\DeclareUnicodeCharacter{27E1}{\ensuremath{\blacktriangleright}}
+\DeclareUnicodeCharacter{2022}{\textbullet}
+\DeclareUnicodeCharacter{25CF}{\textbullet}
+\DeclareUnicodeCharacter{25CB}{\ensuremath{\circ}}
+\DeclareUnicodeCharacter{2726}{\ensuremath{\star}}
+\DeclareUnicodeCharacter{25C6}{\ensuremath{\blacklozenge}}
+\DeclareUnicodeCharacter{26A0}{\textbf{!}}
+\DeclareUnicodeCharacter{2192}{$\rightarrow$}
+\DeclareUnicodeCharacter{2190}{$\leftarrow$}
+\DeclareUnicodeCharacter{00B0}{$^\circ$}
+\DeclareUnicodeCharacter{2013}{--}
+\DeclareUnicodeCharacter{2014}{---}
+\DeclareUnicodeCharacter{2018}{`}
+\DeclareUnicodeCharacter{2019}{'}
+\DeclareUnicodeCharacter{201C}{``}
+\DeclareUnicodeCharacter{201D}{''}
+\fi
+
+% Hipertexto condicional — reconhece o percurso de leitura
+% \ifpath{origem1}{origem2}{texto se veio de 1}{texto se veio de 2}
+% Usa o sistema de rótulos do LaTeX para detectar qual fragmento
+% foi lido primeiro com base na ordem de aparição no .aux.
+% \ifpath{origem1}{origem2}{texto se veio de 1}{texto se veio de 2}
+% Em PDF, o caminho real é indeterminável: exibe ambos como possibilidades.
+% O leitor reconhece o próprio percurso entre as alternativas.
+\newcommand{\ifpath}[4]{%
+  \textit{Se você veio de #1:} #3\par
+  \vspace{0.3em}
+  \textit{Se você veio de #2:} #4\par
+  \vspace{0.3em}
+  \textit{(Ambos os caminhos levam ao mesmo lugar. A entidade não precisa saber por onde você veio. Ela só precisa que você tenha chegado.)}%
+}
+
+% Rota fantasma — linka para um fragmento que não existe.
+% O leitor descobre que a rota não leva a lugar nenhum.
+% Usado para criar o "fragmento que você não leu".
+\newcommand{\rotaphantom}[1]{%
+  \textbf{#1}{\footnotesize(p.~---)}%
+}
+
+% Molambudos color palette
+% Paleta R1076 — legibilidade sobre papel sépia (#F8F0D7)
+% Contrastes medidos: MEM 6,76:1; DOC 6,76:1; LUC 9,23:1; CONT 7,18:1.
+\definecolor{sangue}{HTML}{8B1A1A}   % alerta/nota; 8,16:1
+\definecolor{sangueclaro}{HTML}{FF4D4D} % apenas fundo preto; 6,42:1 sobre #000
+\definecolor{olho}{HTML}{FFD700}     % apenas sobre fundo escuro
+\definecolor{mem}{HTML}{8A3B1F}      % cobre queimado
+\definecolor{doc}{HTML}{1F5C57}      % teal profundo
+\definecolor{cont}{HTML}{9B1B1B}     % carmim
+\definecolor{luc}{HTML}{552A7A}      % violeta
+\definecolor{epi}{HTML}{6E4E10}      % âmbar escuro; 6,68:1
+% Paleta sépia imersiva (fundo de página + tinta) — apelo sensorial.
+\definecolor{sepiabg}{HTML}{F2E8CF}
+\definecolor{sepiaink}{HTML}{2B2117}
+
+% Hyperlink setup (internal hyperlinks between fragments)
+\ifmolambudoskdpprint
+  \hypersetup{
+    colorlinks=false,
+    hidelinks
+  }
+\else
+  \hypersetup{
+    colorlinks=true,
+    linkcolor=linkred,
+    citecolor=linkred,
+    urlcolor=linkred
+  }
+\fi
+
+% Metadados editoriais do PDF (Title/Author/Subject/Keywords).
+% Sem isso, o arquivo sai com os campos vazios mesmo tendo hyperref.
+\hypersetup{
+  pdftitle={\booktitle},
+  pdfauthor={\authorname},
+  pdfsubject={Ficção brasileira contemporânea; horror; romance em fragmentos},
+  pdfkeywords={Molambudos, Paciente 1.260, Marcelo Dias de Carvalho Filho,
+    ficção brasileira, horror, Ceará, romance fragmentado},
+  pdfcreator={LaTeX with hyperref},
+  pdfproducer={pdfTeX}
+}
+
+% Abertura de parte — título + medalhão circular temático (icone/N.png)
+% numa única página limpa. #1 título exibido, #2 nome curto (TOC), #3 ícone.
+% Mapeamento: 2=Sertão, 4=Colônia, 1=Diário/Laudos,
+% 3=Investigação Lúcia, 5=Contaminação.
+\newcommand{\partopener}[3]{%
+  \cleardoublepage
+  \thispagestyle{empty}%
+  \phantomsection\addcontentsline{toc}{part}{#2}%
+  \markboth{}{}%
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[black] (current page.south west) rectangle (current page.north east);
+    \node[anchor=center] at (current page.center){%
+      \begin{tabular}{c}
+        {\bfseries\LARGE\color{customgold} #1}\\[2.4em]
+        \includegraphics[width=0.58\textwidth]{icone/#3}\\
+      \end{tabular}};
+  \end{tikzpicture}%
+  \null\vfill\clearpage}
+
+% Rota de leitura — link para um fragmento + seu número de página, para que
+% o leitor navegue a obra fora da ordem linear. \rota{ID} usa \pageref sobre
+% os \label{frag:ID} colocados em cada abertura de fragmento (ver \mainmatter).
+\ifmolambudoskdpprint
+  \newcommand{\rota}[1]{\textbf{#1}\,{\footnotesize(p.~\pageref{frag:#1})}}
+\else
+  \newcommand{\rota}[1]{\hyperlink{#1}{\textbf{#1}}\,{\footnotesize(p.~\pageref{frag:#1})}}
+\fi
+\newcommand{\rotasep}{\quad\textbullet\quad}
+
+% Marginália dos fragmentos de Contaminação — anotações que parecem escritas
+% à mão na cópia do leitor (vermelho-sangue), para intensificar a quebra da
+% quarta parede. Margem estreita (livro 6x9), então notas curtas.
+\setlength{\marginparwidth}{0.75in}
+\setlength{\marginparsep}{6pt}
+\ifmolambudoskdpprint
+  % Modo impressão KDP: as notas de margem são suprimidas para evitar
+  % reprovação por "texto fora das margens" no previewer da Amazon.
+  \newcommand{\margnota}[1]{}
+\else
+  \newcommand{\margnota}[1]{\marginpar{\raggedright\footnotesize\itshape\color{sangue}#1}}
+\fi
+
+% Nota do Editor — anotação paratextual para moldura editorial crítica.
+% Agora implementada como nota de rodapé (fonte ~10pt) para discrição.
+\newcommand{\NE}[1]{\footnote{\footnotesize\textbf{[N.E.]} #1}}
+
+% Contador de fragmento — garante que cada \label{frag:ID} tenha âncora única
+% em vez de herdar o \phantomsection do \partopener (que faz o \pageref
+% apontar para a página do ato em vez da página do fragmento).
+\newcounter{fragctr}
+\newcommand{\fragdef}[1]{%
+  \refstepcounter{fragctr}%
+  \hypertarget{#1}{}%
+  \label{frag:#1}%
+}
+
+
+% ============================================================================
+% CAMADA RPG / GRIMÓRIO — tipografia, caixas, selos e dados
+% ============================================================================
+\usepackage{yfonts}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{marginnote}
+\usepackage{fontawesome5}
+\usepackage{pifont}
+\usepackage{tabularx}
+\usetikzlibrary{shapes.geometric}
+
+% Paleta de grimório
+\definecolor{rpgink}{HTML}{1A120C}
+\definecolor{rpgpaper}{HTML}{EFE0BF}
+\definecolor{rpggold}{HTML}{B08D57}
+\definecolor{rpgblood}{HTML}{7A1E1E}
+\definecolor{rpgteal}{HTML}{1F5C57}
+\definecolor{rpgviolet}{HTML}{4B2A5E}
+\definecolor{rpgsepia}{HTML}{6B4A2E}
+
+% Cores das famílias, redefinidas para o tom de grimório
+\definecolor{mem}{HTML}{6E3B24}
+\definecolor{doc}{HTML}{1F5C57}
+\definecolor{luc}{HTML}{4B2A5E}
+\definecolor{cont}{HTML}{7A1E1E}
+\definecolor{epi}{HTML}{8A6A2F}
+\definecolor{sangue}{HTML}{7A1E1E}
+\definecolor{sepiabg}{HTML}{EFE0BF}
+\definecolor{sepiaink}{HTML}{241A12}
+
+% Textura sutil de papel (pontos a 3,5% de opacidade)
+
+
+% Cabeçalho e folio de grimório
+\pagestyle{fancy}
+\setlength{\headheight}{25pt}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{rpggold}\leaders\hrule height \headrulewidth\hfill}}
+\fancyhead[LE]{\textsc{\footnotesize\color{rpgink}Molambudos · Arquivo 1.260}}
+\fancyhead[RO]{\textsc{\footnotesize\color{rpgink}Edição Grimório}}
+\fancyfoot[C]{\textcolor{rpggold}{\small$\blacklozenge$}~\thepage~\textcolor{rpggold}{\small$\blacklozenge$}}
+\hypersetup{hidelinks}
+
+% Caixas
+\newtcolorbox{rpgbox}[1][]{enhanced, breakable, colback=rpgpaper!88!white,
+  colframe=rpggold, boxrule=0.7pt, arc=1.2mm, left=3.5mm, right=3.5mm,
+  top=2.5mm, bottom=2.5mm, fonttitle=\scshape\bfseries\small,
+  coltitle=rpgink, colbacktitle=rpggold!32!rpgpaper, title={#1}}
+\newtcolorbox{rpgdark}[1][]{enhanced, breakable, colback=rpgink,
+  coltext=rpggold, colframe=rpggold, boxrule=0.9pt, arc=1.2mm,
+  left=3.5mm, right=3.5mm, top=2.5mm, bottom=2.5mm,
+  fonttitle=\scshape\bfseries\small, coltitle=rpggold,
+  colbacktitle=rpgink, title={#1}}
+\newtcolorbox{rpgcard}[1][]{enhanced, colback=rpgpaper!92!white,
+  colframe=rpggold!70!black, boxrule=0.6pt, arc=1.5mm,
+  left=2.5mm, right=2.5mm, top=2mm, bottom=2mm,
+  fonttitle=\scshape\bfseries\footnotesize, coltitle=rpgink,
+  colbacktitle=rpggold!25!rpgpaper, title={#1}}
+
+% Linhas, selos e dados
+\newcommand{\rpgrule}{\par\noindent\centerline{%
+  \textcolor{rpggold}{\rule{0.22\textwidth}{0.5pt}}\hspace{0.6em}%
+  \textcolor{rpgblood}{\faDiceD20}\hspace{0.6em}%
+  \textcolor{rpggold}{\rule{0.22\textwidth}{0.5pt}}}\par}
+\newcommand{\rpglabel}[1]{{\scshape\bfseries\footnotesize\color{rpgblood}#1}}
+\newcommand{\rpgnota}[1]{\marginnote{\raggedright\footnotesize\itshape\textcolor{rpgblood}{#1}}}
+\newcommand{\rpgdot}{\raisebox{0.15ex}{\tiny$\square$}}
+
+% Capitular gótica: o inicial é sempre uma letra sem acento (M, D, L, C)
+\renewcommand{\fragcap}[2]{%
+  \lettrine[lines=3,findent=2pt,nindent=4pt]{\textcolor{#1}{\textgoth{#2}}}{}%
+}
+
+% Abertura de fragmento: selo gótico + título em Garamond + filete dourado
+\renewcommand{\fragtitle}[5]{%
+  \par\addvspace{2.2em}%
+  \noindent
+  \begin{tikzpicture}[baseline=(ini.center)]
+    \node[circle, draw=rpggold, line width=0.8pt, fill=#1, text=white,
+      inner sep=3pt, font=\gothfamily\fontsize{20}{20}\selectfont] (ini) {#2};
+  \end{tikzpicture}\hspace{0.55em}%
+  \begin{minipage}[b]{0.80\textwidth}
+    {\scshape\bfseries\footnotesize\color{#1}\fragfamily{#3}\ifx&#4&\else\enspace #4\fi}\par
+    \vspace{0.15em}
+    {\fontsize{17}{20}\selectfont\bfseries\color{rpgink}#5\par}
+    \vspace{0.22em}
+    {\color{rpggold}\rule{0.38\textwidth}{0.8pt}}\par
+  \end{minipage}\par
+  \addvspace{1.1em}%
+}
+
+% Abertura de parte: página preta, numeral gótico, título em versaletes
+\newcounter{partopenerctr}
+\renewcommand{\partopener}[3]{%
+  \cleardoublepage
+  \thispagestyle{empty}%
+  \stepcounter{partopenerctr}%
+  \phantomsection\addcontentsline{toc}{part}{#2}%
+  \markboth{}{}%
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[rpgink] (current page.south west) rectangle (current page.north east);
+    \draw[rpggold, line width=1pt]
+      ([xshift=12mm,yshift=12mm]current page.south west) rectangle
+      ([xshift=-12mm,yshift=-12mm]current page.north east);
+    \draw[rpggold, line width=0.35pt]
+      ([xshift=15mm,yshift=15mm]current page.south west) rectangle
+      ([xshift=-15mm,yshift=-15mm]current page.north east);
+    \node[anchor=center, text=rpggold, font=\gothfamily\fontsize{64}{64}\selectfont]
+      at ([yshift=38mm]current page.center) {\Roman{partopenerctr}};
+    \node[anchor=center, text=rpggold, font=\scshape\bfseries\fontsize{22}{26}\selectfont,
+      text width=0.78\paperwidth, align=center]
+      at ([yshift=2mm]current page.center) {#1};
+    \node[anchor=center] at ([yshift=-28mm]current page.center)
+      {\includegraphics[width=0.24\textwidth]{icone/#3}};
+    \node[anchor=center, text=rpggold!80, font=\footnotesize\scshape]
+      at ([yshift=-52mm]current page.center) {Arquivo 1.260 · Acesso restrito};
+  \end{tikzpicture}%
+  \null\vfill\clearpage}
+
+\renewcommand{\NE}[1]{\footnote{\footnotesize\textcolor{rpgblood}{\textbf{[N.E.]}} #1}}
+
+\begin{document}
+
+% Uma única sequência romana cobre capa e todos os pré-textuais. As âncoras
+% automáticas de página ficam desativadas até o início arábico do corpus.
+\hypersetup{pageanchor=false}
+\frontmatter
+
+\input{frontmatter/rpg_titlepage}
+
+\input{frontmatter/aviso_ao_leitor}
+
+\ifdefined\MolambudosKDPNoFolios
+  \makeatletter
+  \let\ps@plain\ps@empty
+  \makeatother
+  \pagestyle{empty}
+\fi
+\ifdefined\MolambudosKDPSafeFolios
+  % Modo impressão KDP com navegação física preservada:
+  % sem cabeçalhos corridos, mas com folio central seguro no rodapé.
+  \setlength{\footskip}{6mm}
+  \fancypagestyle{molambudos-kdp-folios}{%
+    \fancyhf{}%
+    \renewcommand{\headrulewidth}{0pt}%
+    \renewcommand{\footrulewidth}{0pt}%
+    \fancyfoot[C]{\normalfont\footnotesize\thepage}%
+  }%
+  \fancypagestyle{plain}{%
+    \fancyhf{}%
+    \renewcommand{\headrulewidth}{0pt}%
+    \renewcommand{\footrulewidth}{0pt}%
+    \fancyfoot[C]{\normalfont\footnotesize\thepage}%
+  }%
+  \pagestyle{molambudos-kdp-folios}
+\fi
+
+% Fundo sépia (pergaminho) + tinta sépia escura — apelo sensorial imersivo.
+\pagecolor{sepiabg}
+\color{sepiaink}
+
+\input{frontmatter/epigrafe}
+\input{frontmatter/cuidado}
+\input{frontmatter/copyrightpage}
+\input{frontmatter/ficha_catalografica}
+\cleardoublepage
+\input{frontmatter/nota_arquivista}
+\input{frontmatter/rpg_protocolo}
+\input{frontmatter/rpg_ficha}
+\input{frontmatter/legenda_codigos}
+\input{frontmatter/tocpage}
+\input{frontmatter/rpg_tabela_rotas}
+
+% ===== Navegação pré-textual =====
+\pagestyle{fancy}
+\ifdefined\MolambudosKDPNoFolios
+  \pagestyle{empty}
+\fi
+\ifdefined\MolambudosKDPSafeFolios
+  \pagestyle{molambudos-kdp-folios}
+\fi
+
+% ============================================
+% SEÇÃO DE NAVEGAÇÃO — Leitura Não-Linear
+% ============================================
+\chapter*{Navegação --- Rotas de Leitura}
+\addcontentsline{toc}{chapter}{Navegação --- Rotas de Leitura}
+
+\noindent\textit{Este arquivo contém 84 fragmentos organizados em 5 partes.}
+\textit{Cada fragmento é independente e pode ser lido em qualquer ordem.}
+\textit{As setas ↪ ao final de cada fragmento indicam rotas de leitura possíveis.}
+\textit{A leitura linear recomendada segue a ordem das partes abaixo.}
+
+\vspace{1em}
+
+\section*{Índice de Fragmentos}
+
+% Compact fraglink for the index (reduces paragraph spacing locally)
+\ifmolambudoskdpprint
+  \newcommand{\fraglink}[3]{%
+    \par\noindent%
+    \fragcode{#1} --- #2\,{\footnotesize(p.~\pageref{frag:#1})}%
+    \ifx&#3&\else\hfill {\itshape\textcolor{textgray}{#3}}\fi%
+    \ifdefined\MolambudosCompactIndex\par\vspace{0pt}\else\par\vspace{0.1em}\fi}
+\else
+  \newcommand{\fraglink}[3]{%
+    \par\noindent%
+    \hyperlink{#1}{\fragcode{#1}} --- #2\,{\footnotesize(p.~\pageref{frag:#1})}%
+    \ifx&#3&\else\hfill {\itshape\textcolor{textgray}{#3}}\fi%
+    \par\vspace{0.1em}}
+\fi
+
+\subsection*{Parte 1 --- Sertão (9 fragmentos)}
+{\setlength{\parskip}{0.15em}
+\fraglink{MEM-01}{O Sertão Antes do Fim}{1914}
+\fraglink{MEM-02}{A Caminhada dos Retirantes}{1915}
+\fraglink{MEM-03}{A Morte do Pai}{1915}
+\fraglink{MEM-04}{A Vala}{1915}
+\fraglink{MEM-05}{O Olho Amarelo}{1915}
+\fraglink{MEM-06}{O Curral do Governo}{1915}
+\fraglink{MEM-07}{A Mãe Levada}{1915}
+\fraglink{DOC-17}{Carta de um Soldado}{1915}
+\fraglink{DOC-18}{Relatório Oficial do Curral}{1916}
+}
+
+\subsection*{Parte 2 --- Colônia (16 fragmentos)}
+{\setlength{\parskip}{0.15em}
+\fraglink{MEM-08}{A Chegada ao Colônia}{1917}
+\fraglink{DOC-02}{Prontuário do Paciente 1.260}{1917}
+\fraglink{MEM-09}{Os Primeiros Anos}{1920--1930}
+\fraglink{MEM-10}{O Primeiro Homicídio}{1922}
+\fraglink{MEM-11}{O Isolamento}{1923--1945}
+\fraglink{MEM-17}{O Eletrochoque}{1937}
+\fraglink{MEM-18}{A Tentativa de Fuga}{1943}
+\fraglink{MEM-12}{A Rasga Mortalha}{1945}
+\fraglink{MEM-21}{O Jornal}{1948}
+\fraglink{MEM-19}{O Visitante}{1950}
+\fraglink{DOC-10}{Registro de Eletroconvulsoterapia}{1937}
+\fraglink{MEM-22}{As Vozes}{1952}
+\fraglink{MEM-23}{A Neve de Cinzas}{1960}
+\fraglink{MEM-20}{A Morte do Vizinho de Cela}{1963}
+\fraglink{MEM-24}{A Enfermeira que Chorava}{1964}
+\fraglink{MEM-25}{A Morte no Espelho}{1970}
+}
+
+\subsection*{Parte 3 --- Diário de Oliveira\\\hspace*{2.5em}e Laudos (25 fragmentos)}
+{\setlength{\parskip}{0.15em}
+\fraglink{DOC-01}{A Exumação}{1979}
+\fraglink{DOC-03}{Laudo de Necropsia}{1979}
+\fraglink{DOC-04}{Relatório de Sessão I}{1979}
+\fraglink{DOC-05}{Relatório de Sessão II}{1979}
+\fraglink{DOC-06}{Relatório de Sessão III}{1979}
+\fraglink{DOC-07}{Diagnóstico Psiquiátrico (1979)}{1979}
+\fraglink{MEM-13}{O Médico Novo}{1979}
+\fraglink{MEM-14}{O Diário Emerge}{1979}
+\fraglink{MEM-15}{A Entidade Fala}{1979}
+\fraglink{MEM-16}{A Morte no Colônia}{1979}
+\fraglink{MEM-26}{A Última Página}{1979}
+\fraglink{DOC-11}{Diário de Oliveira I}{1979}
+\fraglink{DOC-12}{Diário de Oliveira II}{1979}
+\fraglink{DOC-13}{Diário de Oliveira III}{1979}
+\fraglink{DOC-14}{Diário de Oliveira IV}{1979}
+\fraglink{DOC-15}{Diário de Oliveira V}{1979}
+\fraglink{DOC-16}{Diário de Oliveira VI}{1979}
+\fraglink{DOC-19}{Holocausto Brasileiro}{Daniela Arbex}
+\fraglink{DOC-20}{Termo de Cadeia de Custódia}{2026}
+\fraglink{DOC-21}{Carta de Heitor Oliveira (não enviada)}{1979}
+\fraglink{DOC-22}{Memorando Interno nº~47/2026}{2026}
+\fraglink{DOC-23}{Registro de Ocorrência do Arquivo}{2026}
+\fraglink{DOC-24}{Parecer Técnico de Conservação}{2026}
+\fraglink{DOC-25}{O Homem do Pano Preto}{2026}
+\fraglink{DOC-26}{Anotações de Oliveira — O Mecanismo}{1979}
+}
+
+\subsection*{Parte 4 --- Investigação Lúcia (26 fragmentos)}
+{\setlength{\parskip}{0.15em}
+\fraglink{DOC-08}{Re-Diagnóstico Psiquiátrico (2026)}{Lúcia Mendes}
+\fraglink{DOC-09}{Escala de Avaliação do Paciente 1.263}{Instrumento clínico}
+\fraglink{DOC-27}{A Origem (1853)}{Padre José Inácio}
+\fraglink{LUC-01}{O Convite}{2026}
+\fraglink{LUC-15}{A Mulher que Não Voltou para Casa}{2026}
+\fraglink{LUC-02}{O Arquivo}{2026}
+\fraglink{LUC-03}{As Ruínas}{2026}
+\fraglink{LUC-04}{A Fotografia}{2026}
+\fraglink{LUC-05}{O Sonho de Lúcia}{2026}
+\fraglink{LUC-Contraprova}{A Contraprova}{2026}
+\fraglink{LUC-Entrevista}{A Entrevista}{2026}
+\fraglink{LUC-16}{A Mãe no Telefone}{2026}
+\fraglink{LUC-Escolha}{A Escolha}{2026}
+\fraglink{LUC-06}{O Desaparecimento}{2026}
+\fraglink{LUC-07}{O Rastro de Oliveira}{2026}
+\fraglink{LUC-08}{A Última Sessão de Lúcia}{2026}
+\fraglink{LUC-09}{A Exumação de Oliveira}{2026}
+\fraglink{LUC-10}{O Laudo de Lúcia}{2026}
+\fraglink{LUC-11}{O Diário Digital}{2026}
+\fraglink{LUC-12}{A Última Foto}{2026}
+\fraglink{LUC-17}{O Medo}{2026}
+\fraglink{LUC-13}{A Noite do Diagnóstico}{2026}
+\fraglink{LUC-18}{O Que Ronaldo Não Disse}{2026}
+\fraglink{LUC-14}{Autoavaliação Clínica (DSM-5-TR)}{2026}
+\fraglink{LUC-19}{A Última Noite em Casa}{2026}
+\fraglink{LUC-20}{O Arquivo Aberto}{2026}
+}
+
+\subsection*{Parte 5 --- Contaminação (7 fragmentos + Epílogo)}
+{\setlength{\parskip}{0.15em}
+\fraglink{CONT-01}{Você Abriu o Diário}{}
+\fraglink{CONT-03}{Você Sente o Cheiro}{}
+\fraglink{CONT-04}{Você Começa a Sonhar}{}
+\fraglink{CONT-05}{LAUDO DE AVALIAÇÃO CLÍNICA}{}
+\fraglink{CONT-07}{O Diagnóstico Final}{}
+\fraglink{CONT-09}{O Espelho}{}
+\fraglink{CONT-13}{A Fila}{}
+\fraglink{MEM-27}{A Página Seguinte}{Joaquim, 1907--1979}
+}
+
+\newpage
+
+% ============================================
+% GRAFOS NARRATIVOS — Navegação Visual da Obra
+% ============================================
+\chapter*{Navegação Visual --- Os Mapas do Arquivo}
+\addcontentsline{toc}{chapter}{Navegação Visual --- Mapas}
+
+\noindent\textit{Nas páginas seguintes, três mapas ajudam a orientar sua leitura.}
+\textit{Cada um serve a um propósito diferente: explorar, compreender ou seguir.}
+\textit{Nenhum é obrigatório. Todos são rotas possíveis.}
+
+\vspace{0.6em}
+\noindent\textbf{Mapa 1} --- O \textbf{grafo de rotas} mostra todos os fragmentos e suas conexões. Use-o para \textit{navegação não linear}: escolha um fragmento e siga as setas.
+
+\noindent\textbf{Mapa 2} --- O \textbf{grafo do enredo} revela a arquitetura secreta da obra em três atos. Nele estão as causas, as transmissões e o ciclo que conecta os quatro hospedeiros --- inclusive você.
+
+\noindent\textbf{Mapa 3} --- O \textbf{grafo linear} é o percurso tradicional, do Sertão (1914) ao Epílogo. Recomendado para quem prefere começar pelo começo.
+
+\vspace{0.8em}
+\noindent{\small\textit{A escolha do caminho não altera o destino: todas as rotas convergem para o mesmo ciclo.}}
+
+%% --- GRAFO 1: MAPA DE ROTAS (rotacionado 90°) ---
+\newpage
+\thispagestyle{empty}
+\begingroup
+\vbox to \textheight{%
+  \vfill
+  \centering
+  \setlength{\fboxsep}{3pt}%
+  \setlength{\fboxrule}{0.6pt}%
+  \fbox{\includegraphics[angle=90,width=0.98\textwidth,height=0.90\textheight,keepaspectratio]{misc/grafo_narrativo.png}}%
+  \vfill
+}%
+\endgroup
+\newpage
+
+\section*{Mapa 1 --- Grafo de Leitura: Rotas entre Fragmentos}
+
+\noindent Este mapa representa os \textbf{84 fragmentos} (cada um é um nodo) e suas \textbf{223 conexões} (as arestas que os ligam). Cada fragmento aponta para outros ao final do texto através dos links \texttt{↪} acompanhados do número da página.
+
+\noindent Quanto mais conexões um fragmento tem, mais central ele é na teia da narrativa. Os mais conectados são:
+
+\begin{itemize}
+\itemsep0em
+\item \textbf{DOC-01} (A Exumação) --- 19 rotas chegam até ele; o diário emerge do passado
+\item \textbf{LUC-02} (O Arquivo) --- 13 rotas; a investigação de Lúcia é o segundo polo
+\item \textbf{MEM-12} (A Rasga Mortalha) e \textbf{CONT-07} (O Diagnóstico Final) --- 7 rotas cada; memória e diagnóstico disputam o centro
+\end{itemize}
+
+\vspace{0.5em}
+\noindent\textbf{Legenda:}
+\textcolor{mem}{MEM (marrom)} --- Memórias do Paciente 1.260 \quad
+\textcolor{doc}{DOC (cinza)} --- Documentos e laudos \quad
+\textcolor{cont}{CONT (vermelho)} --- Contaminação do leitor \quad
+\textcolor{luc}{LUC (índigo)} --- Investigação forense
+
+%% --- GRAFO 2: ESTRUTURA DO ENREDO ---
+\newpage
+\thispagestyle{empty}
+\begingroup
+\vbox to \textheight{%
+  \vfill
+  \centering
+  \setlength{\fboxsep}{3pt}%
+  \setlength{\fboxrule}{0.6pt}%
+  \fbox{\includegraphics[angle=90,width=0.98\textwidth,height=0.90\textheight,keepaspectratio]{misc/grafo_enredo.png}}%
+  \vfill
+}%
+\endgroup
+\newpage
+
+\section*{Mapa 2 --- Grafo do Enredo: Arquitetura em Três Atos}
+
+\begingroup\raggedright
+
+\noindent Diferente do mapa anterior (que mostra \textit{conexões}), este grafo revela a \textit{estrutura causal} da obra --- o esqueleto narrativo que sustenta os 84 fragmentos.
+
+\vspace{1em}
+\noindent\textbf{Os três atos:}
+
+\vspace{0.4em}
+\noindent\textcolor{mem}{\textbf{ATO 1 --- O Trauma}} \textit{(marrom)}:
+a seca de 1853 que pariu a entidade, a seca de 1915 que levou Joaquim à vala,
+o pacto de um menino de oito anos com a fome que nunca acaba.\\[0.35em]
+\noindent\textcolor{doc}{\textbf{ATO 2 --- Institucionalização}} \textit{(cinza)}:
+62 anos no Colônia, o diário que testemunha, a exumação que o devolve ao
+mundo, e o médico que ao ler se torna o próximo elo.\\[0.35em]
+\noindent\textcolor{cont}{\textbf{ATO 3 --- O Ciclo}} \textit{(vermelho)}:
+a investigação de Lúcia, a descoberta de que o horror é um ciclo,
+a contaminação do leitor --- e a constatação final de que
+\textit{o ciclo recomeça a cada leitor}.
+
+\vspace{0.9em}
+\noindent\textbf{A fila dos hospedeiros:} as arestas tracejadas
+(\textcolor{sangue}{-\,-\,-}) ligam quem carrega a criatura, um após o outro
+--- Joaquim (1.260), Oliveira (1.261), Lúcia (1.262) e você (1.263) ---,
+numa corrente que começou em 1853 e não tem fim anunciado.
+
+\vspace{0.5em}
+\noindent\textit{Nota: os fragmentos DOC-27 (A Origem, 1853) e LUC-13 (A Noite do
+Diagnóstico) foram acrescentados ao arquivo durante a pesquisa de Lúcia.
+DOC-27 é o documento mais antigo do acervo (1853) e revela a origem da
+entidade; LUC-13 registra o momento exato em que Lúcia deixa de ser
+investigadora para tornar-se hospedeira.}
+
+\endgroup
+
+%% --- GRAFO 3: PERCURSO LINEAR (rotacionado 90°) ---
+\newpage
+\thispagestyle{empty}
+\begingroup
+\vbox to \textheight{%
+  \vfill
+  \centering
+  \setlength{\fboxsep}{3pt}%
+  \setlength{\fboxrule}{0.6pt}%
+  \fbox{\includegraphics[angle=90,width=0.98\textwidth,height=0.90\textheight,keepaspectratio]{misc/grafo_leitura_linear.png}}%
+  \vfill
+}%
+\endgroup
+\newpage
+
+\section*{Mapa 3 --- Grafo de Leitura Linear: Percurso Tradicional}
+
+\noindent Para quem prefere uma leitura sequencial, este grafo organiza os
+\textbf{84 fragmentos} na ordem cronológico-narrativa recomendada:
+do Sertão (1914) ao Epílogo --- passando pelo Colônia, pelos diários de
+Oliveira e pela investigação de Lúcia, até a contaminação final.
+
+\vspace{0.8em}
+
+\noindent\textbf{Percurso linear:}
+\textcolor{mem}{Sertão (9)} $\to$ \textcolor{doc}{Colônia (16)} $\to$
+\textcolor{doc}{Diário de Oliveira e Laudos (25)} $\to$
+\textcolor{luc}{Investigação Lúcia (26)} $\to$
+\textcolor{cont}{Contaminação (7)} $\to$
+\textcolor{olho}{MEM-27 (1)}
+
+\vspace{0.3em}
+\noindent{\small $\bigstar$ = Fragmentos marcados com estrela são obrigatórios na rota essencial mínima.}
+
+\vspace{0.7em}
+\noindent\textit{Dica de leitura:} se esta é sua primeira vez no arquivo,
+comece pelo Sertão. As memórias de Joaquim preparam o terreno para tudo
+o que vem depois. Se preferir o mistério, comece pela Investigação de Lúcia
+(Parte 4) e descubra os fragmentos anteriores como quem escava um passado.
+
+\vspace{0.3em}
+\noindent{\small \textcolor{sangue}{\textbf{Atenção:}} a Parte 5 (Contaminação) deve ser lida por último em qualquer percurso.}
+\textit{Ela não é sobre a história. Ela é sobre você.}
+
+\newpage
+
+% ============================================
+% LEITURA LINEAR — 84 FRAGMENTOS EM 5 PARTES + EPÍLOGO
+% ============================================
+
+%% ============================================
+%% PARTE 1 — SERTÃO (1915--1928)
+%% ============================================
+\partopener{Sertão (1914--1917)}{Sertão}{2.png}
+
+% O primeiro fragmento é a página arábica 1; não inserir \newpage antes dele.
+\mainmatter
+\hypersetup{pageanchor=true}
+\fragdef{MEM-01}\input{fragmentos/mem/MEM-01}
+\newpage\fragdef{MEM-02}\input{fragmentos/mem/MEM-02}
+\newpage\fragdef{MEM-03}\input{fragmentos/mem/MEM-03}
+\newpage\fragdef{MEM-04}\input{fragmentos/mem/MEM-04}
+\newpage\fragdef{MEM-05}\input{fragmentos/mem/MEM-05}
+\newpage\fragdef{MEM-06}\input{fragmentos/mem/MEM-06}
+\newpage\fragdef{MEM-07}\input{fragmentos/mem/MEM-07}
+\newpage\fragdef{DOC-17}\input{fragmentos/doc/DOC-17}
+\newpage\fragdef{DOC-18}\input{fragmentos/doc/DOC-18}
+
+%% ============================================
+%% PARTE 2 — COLÔNIA (1928--1979)
+%% ============================================
+\partopener{Colônia (1917--1979)}{Colônia}{4.png}
+
+\newpage\fragdef{MEM-08}\input{fragmentos/mem/MEM-08}
+\newpage\fragdef{DOC-02}\input{fragmentos/doc/DOC-02}
+\newpage\fragdef{MEM-09}\input{fragmentos/mem/MEM-09}
+\newpage\fragdef{MEM-10}\input{fragmentos/mem/MEM-10}
+\newpage\fragdef{MEM-11}\input{fragmentos/mem/MEM-11}
+\newpage\fragdef{MEM-17}\input{fragmentos/mem/MEM-17}
+\newpage\fragdef{MEM-18}\input{fragmentos/mem/MEM-18}
+\newpage\fragdef{MEM-12}\input{fragmentos/mem/MEM-12}
+\newpage\fragdef{MEM-21}\input{fragmentos/mem/MEM-21}
+\newpage\fragdef{MEM-19}\input{fragmentos/mem/MEM-19}
+\newpage\fragdef{DOC-10}\input{fragmentos/doc/DOC-10}
+\newpage\fragdef{MEM-22}\input{fragmentos/mem/MEM-22}
+\newpage\fragdef{MEM-23}\input{fragmentos/mem/MEM-23}
+\newpage\fragdef{MEM-20}\input{fragmentos/mem/MEM-20}
+\newpage\fragdef{MEM-24}\input{fragmentos/mem/MEM-24}
+\newpage\fragdef{MEM-25}\input{fragmentos/mem/MEM-25}
+
+%% ============================================
+%% PARTE 3 — DIÁRIO DE OLIVEIRA + LAUDOS (1979)
+%% ============================================
+\ifmolambudoskdpprint
+  \partopener{\shortstack{Diário de Oliveira\\e Laudos (1979)}}{Diário de Oliveira e Laudos}{1.png}
+\else
+  \partopener{Diário de Oliveira e Laudos (1979)}{Diário de Oliveira e Laudos}{1.png}
+\fi
+
+\vspace{0.5em}
+\noindent{\footnotesize\textit{Nota do Arquivista: a partir deste ponto, a voz principal deixa de ser a de Joaquim e passa a ser a de quem o estudou. Os documentos a seguir foram escritos por médicos, peritos, arquivistas e pelo coveiro que abriu a cova. A linguagem muda. O olhar muda. Mas o diário é o mesmo.}}
+
+\newpage\fragdef{DOC-01}\input{fragmentos/doc/DOC-01}
+\newpage\fragdef{DOC-03}\input{fragmentos/doc/DOC-03}
+\newpage\fragdef{DOC-04}\input{fragmentos/doc/DOC-04}
+\newpage\fragdef{DOC-05}\input{fragmentos/doc/DOC-05}
+\newpage\fragdef{DOC-06}\input{fragmentos/doc/DOC-06}
+\newpage\fragdef{DOC-07}\input{fragmentos/doc/DOC-07}
+\newpage\fragdef{MEM-13}\input{fragmentos/mem/MEM-13}
+\newpage\fragdef{MEM-14}\input{fragmentos/mem/MEM-14}
+\newpage\fragdef{MEM-15}\input{fragmentos/mem/MEM-15}
+\newpage\fragdef{MEM-16}\input{fragmentos/mem/MEM-16}
+\newpage\fragdef{MEM-26}\input{fragmentos/mem/MEM-26}
+\newpage\fragdef{DOC-11}\input{fragmentos/doc/DOC-11}
+\newpage\fragdef{DOC-12}\input{fragmentos/doc/DOC-12}
+\newpage\fragdef{DOC-13}\input{fragmentos/doc/DOC-13}
+\newpage\fragdef{DOC-14}\input{fragmentos/doc/DOC-14}
+\newpage\fragdef{DOC-15}\input{fragmentos/doc/DOC-15}
+\newpage\fragdef{DOC-16}\input{fragmentos/doc/DOC-16}
+\newpage\fragdef{DOC-19}\input{fragmentos/doc/DOC-19}
+\newpage\fragdef{DOC-20}\input{fragmentos/doc/DOC-20}
+\newpage\fragdef{DOC-21}\input{fragmentos/doc/DOC-21}
+\newpage\fragdef{DOC-22}\input{fragmentos/doc/DOC-22}
+\newpage\fragdef{DOC-23}\input{fragmentos/doc/DOC-23}
+\newpage\fragdef{DOC-24}\input{fragmentos/doc/DOC-24}
+\newpage\fragdef{DOC-25}\input{fragmentos/doc/DOC-25}
+\newpage\fragdef{DOC-26}\input{fragmentos/doc/DOC-26}
+
+%% ============================================
+%% PARTE 4 — INVESTIGAÇÃO LÚCIA (2026)
+%% ============================================
+\partopener{Investigação Lúcia (2026)}{Investigação Lúcia}{3.png}
+
+\vspace{0.5em}
+\noindent{\footnotesize\textit{Nota do Arquivista: os fragmentos desta parte foram organizados por Dra. Lúcia Mendes durante sua pesquisa em 2026. As anotações dela estão incorporadas aos documentos, em itálico, e às notas de rodapé. O documento mais antigo do arquivo --- de 1853 --- foi encontrado por ela e anexado ao processo.}}
+
+\newpage\fragdef{DOC-08}\input{fragmentos/doc/DOC-08}
+\newpage\fragdef{DOC-09}\input{fragmentos/doc/DOC-09}
+\newpage\fragdef{DOC-27}\input{fragmentos/doc/DOC-27}
+\newpage\fragdef{LUC-01}\input{fragmentos/luc/LUC-01}
+\newpage\fragdef{LUC-15}\input{fragmentos/luc/LUC-15}
+\newpage\fragdef{LUC-02}\input{fragmentos/luc/LUC-02}
+\newpage\fragdef{LUC-03}\input{fragmentos/luc/LUC-03}
+\newpage\fragdef{LUC-04}\input{fragmentos/luc/LUC-04}
+\newpage\fragdef{LUC-05}\input{fragmentos/luc/LUC-05}
+\newpage\fragdef{LUC-Contraprova}\input{fragmentos/luc/LUC-Contraprova}
+\newpage\fragdef{LUC-Entrevista}\input{fragmentos/luc/LUC-Entrevista}
+\newpage\fragdef{LUC-16}\input{fragmentos/luc/LUC-16}
+\newpage\fragdef{LUC-Escolha}\input{fragmentos/luc/LUC-Escolha}
+\newpage\fragdef{LUC-06}\input{fragmentos/luc/LUC-06}
+\newpage\fragdef{LUC-07}\input{fragmentos/luc/LUC-07}
+\newpage\fragdef{LUC-08}\input{fragmentos/luc/LUC-08}
+\newpage\fragdef{LUC-09}\input{fragmentos/luc/LUC-09}
+\newpage\fragdef{LUC-10}\input{fragmentos/luc/LUC-10}
+\newpage\fragdef{LUC-11}\input{fragmentos/luc/LUC-11}
+\newpage\fragdef{LUC-12}\input{fragmentos/luc/LUC-12}
+\newpage\fragdef{LUC-17}\input{fragmentos/luc/LUC-17}
+\newpage\fragdef{LUC-13}\input{fragmentos/luc/LUC-13}
+\newpage\fragdef{LUC-18}\input{fragmentos/luc/LUC-18}
+\newpage\fragdef{LUC-14}\input{fragmentos/luc/LUC-14}
+\newpage\fragdef{LUC-19}\input{fragmentos/luc/LUC-19}
+\newpage\fragdef{LUC-20}\input{fragmentos/luc/LUC-20}
+
+%% ============================================
+%% PARTE 5 — CONTAMINAÇÃO (VOCÊ)
+%% ============================================
+\partopener{Contaminação (Você)}{Contaminação}{5.png}
+
+\newpage\fragdef{CONT-01}\input{fragmentos/cont/CONT-01}
+\newpage\fragdef{CONT-03}\input{fragmentos/cont/CONT-03}
+\newpage\fragdef{CONT-04}\input{fragmentos/cont/CONT-04}
+\newpage\fragdef{CONT-05}\input{fragmentos/cont/CONT-05}
+\newpage\fragdef{CONT-07}\input{fragmentos/cont/CONT-07}
+\newpage\fragdef{CONT-09}\input{fragmentos/cont/CONT-09}
+\newpage\fragdef{CONT-13}\input{fragmentos/cont/CONT-13}
+
+\newpage
+
+%% ============================================
+%% MEM-27 — EPÍLOGO DE JOAQUIM
+%% ============================================
+\newpage\fragdef{MEM-27}\input{fragmentos/mem/MEM-27}
+
+\newpage
+
+% ============================================
+% EPÍLOGO
+% ============================================
+\fragdef{EPI-01}
+\chapter*{Epílogo}
+\addcontentsline{toc}{chapter}{Epílogo}
+
+\input{fragmentos/epilogo_revisado}
+
+% ===== Apêndice Editorial =====
+\input{frontmatter/nota_editorial}
+\input{frontmatter/rpg_handouts}
+
+% ===== Back Matter =====
+\backmatter
+\input{frontmatter/glossario_historico}
+\input{frontmatter/nota_historica}
+\input{frontmatter/ficha_beta_diegetica}
+\input{frontmatter/rpg_bestiario}
+\input{frontmatter/colofao}
+
+\end{document}

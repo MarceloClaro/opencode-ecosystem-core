@@ -1,0 +1,31 @@
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+  \fill[rpgink] (current page.south west) rectangle (current page.north east);
+  \draw[rpggold, line width=1pt]
+    ([xshift=12mm,yshift=12mm]current page.south west) rectangle
+    ([xshift=-12mm,yshift=-12mm]current page.north east);
+  \draw[rpggold, line width=0.35pt]
+    ([xshift=15mm,yshift=15mm]current page.south west) rectangle
+    ([xshift=-15mm,yshift=-15mm]current page.north east);
+  \node[anchor=north, text=rpggold, font=\gothfamily\fontsize{28}{30}\selectfont,
+    text width=132mm, align=center] at ([yshift=-28mm]current page.north) {MOLAMBUDOS};
+  \node[anchor=north, text=rpggold, font=\scshape\fontsize{14}{18}\selectfont,
+    text width=122mm, align=center] at ([yshift=-43mm]current page.north) {O DIÁRIO DO PACIENTE 1.260};
+  \node[anchor=north, text=rpggold!80, font=\itshape\small,
+    text width=110mm, align=center] at ([yshift=-55mm]current page.north) {Uma narrativa em fragmentos};
+  \node[anchor=center] at ([yshift=12mm]current page.center) {%
+    \tikz{
+      \draw[rpggold, line width=1pt] (0,0) circle (14mm);
+      \draw[rpggold, line width=0.6pt] (0,12mm) -- (-10.4mm,-6mm) -- (10.4mm,-6mm) -- cycle;
+      \node[text=rpggold, font=\bfseries\large] at (0,0) {1.260};
+    }};
+  \node[anchor=center, text=rpggold, font=\scshape\bfseries\large]
+    at ([yshift=-28mm]current page.center) {EDIÇÃO GRIMÓRIO};
+  \node[anchor=south, text=rpggold, font=\small\scshape]
+    at ([yshift=34mm]current page.south) {MARCELO DIAS DE CARVALHO FILHO};
+  \node[anchor=south, text=rpggold!85, font=\footnotesize\scshape]
+    at ([yshift=27mm]current page.south) {COAUTOR E ILUSTRADOR: MARCELO CLARO};
+  \node[anchor=south, text=rpggold!70, font=\footnotesize\scshape]
+    at ([yshift=20mm]current page.south) {OPENCODE BOOKS · CRATEÚS · 2026};
+\end{tikzpicture}
+\null\vfill\clearpage
