@@ -33,6 +33,11 @@ em `reports/r1078/cover/build_cover.py` (WeasyPrint + cairosvg + pypdf).
 
 Detalhes e prompts: `codex_image_workflow.md`.
 
+A direção de arte das ilustrações foi fixada em **Piranesi (Carceri, 1750-3) +
+Pencz (1500-1550)**: arquitetura opressiva, figura pequena e legível, hachura,
+chiaroscuro e um acento carmim. O pacote está em
+`reports/r1081/illustration_style/`.
+
 ## 2. Identidade do assistente
 
 **Nome de trabalho:** Assistente de Romance Psicológico — Linhagem Molambudos.
@@ -180,6 +185,9 @@ ofício.
 - Blocos `ethics`, `translation_protocol`, `tagline_engine` e `quality_gates`.
 - Teste: `tests/test_r1080_style_catalog.py`.
 - Perfil gerenciado registrado: `romance-psicologico-molambudos`; nenhum modelo de imagem foi executado.
+- O subagente registrado não executou nesta sessão: o modelo padrão exige
+  assinatura OpenCode Go. A prancha-demonstração foi produzida pelo orquestrador
+  na voz do perfil (`reports/r1081/illustration_style/demo_plate.md`).
 
 ## 9. Limites
 
@@ -198,3 +206,4 @@ ofício.
 | `assistant_prompt.md` | system prompt e contrato de voz |
 | `codex_image_workflow.md` | o que o Codex faz e não faz com imagens |
 | `repos_analysis.md` | análise dos 23 repositórios |
+| `../r1081/illustration_style/` | direção de arte Piranesi/Pencz, prompts e provas |
