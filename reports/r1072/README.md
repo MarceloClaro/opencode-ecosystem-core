@@ -84,7 +84,7 @@ edições excluídas. A escolha da edição canônica é editorial e pertence ao
   não substitui a canônica; capa/lombada a recalcular; sem nova ISBN. Ver
   `reports/r1076/README.md`.
 - **Variante print-safe R1077**: `literatura/molambudos/Molambudos_Print_R1077/`
-  — 418 pp, sem fundo sépia, aberturas tipográficas, imagens ≥300 DPI e TAC
+  — 422 pp, sem fundo sépia, aberturas tipográficas, imagens ≥300 DPI e TAC
   médio 11,4%. Candidato de impressão; capa 300 DPI pendente; ver
   `reports/r1077/README.md`.
 

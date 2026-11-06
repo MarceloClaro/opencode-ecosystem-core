@@ -23,32 +23,42 @@ impresso, ganha a temperatura sépia sem pagar o custo de tinta.
 
 | Item | R1076 (digital/sensorial) | R1077 (print-safe) |
 |---|---|---|
-| Páginas | 421 | **418** |
+| Páginas | 421 | **422** |
 | Fundo | sépia impresso em todas as páginas | **papel cream, sem fundo impresso** |
 | Aberturas de parte | página preta + dourado | **numeral romano + título + filete + ícone** |
 | Rosto, colofão e “Cuidado” | arte/fundo | **tipográficos** |
-| Imagens de fragmento | 0,55 textwidth (222–296 DPI) | **0,40 textwidth (≥305 DPI)** |
+| Imagens de fragmento | 0,55 textwidth (222–296 DPI) | **0,54 textwidth (paisagens) / 0,40 (retrato), ≥300 DPI** |
 | Cores vetoriais | RGB | **CMYK com TAC ≤205%** |
-| TAC médio | **304,4%** | **11,4%** |
+| TAC médio | **304,4%** | **11,7%** |
 | TAC máximo | **400%** | **173,4%** |
-| PDF | `9ee4c467…` | `fe797f15c7dc363339b9c1b6b587dce7a1dbe9ae4c0a75a5f32c1258de30c721` |
+| PDF | `9ee4c467…` | `0bb22d292f9e7ed04820c0fcac093495a1951a734b308bf674e33afae1e381a5` |
 
 ## 3. Qualidade gráfica
 
 | Verificação | Resultado |
 |---|---|
-| Páginas | 418 |
+| Páginas | 422 |
 | Tamanho | 453,543 × 651,968 pt = 160 × 230 mm |
 | Fontes | todas embutidas |
-| Imagens | 20; **mínimo 305 DPI**; nenhuma abaixo de 300 |
+| Imagens | 20; **mínimo 300 DPI**; nenhuma abaixo de 300 |
 | Cores | CMYK para elementos vetoriais; TAC máx. 205% nos textos |
-| Cobertura média | 11,4% (C 0,62%; M 3,71%; Y 3,71%; K 3,40%) |
+| Cobertura média | 11,7% (C 0,70%; M 3,76%; Y 3,77%; K 3,44%) |
 | Cobertura máxima | 173,4% |
-| Preflight KDP | capa exterior ainda a ~163 DPI; lombada a recalcular para 418 pp |
+| Preflight KDP | capa exterior ainda a ~163 DPI; lombada a recalcular para 422 pp |
 
 A queda de TAC é o dado central: o miolo deixa de imprimir um fundo em todas as
 páginas e passa a imprimir **texto, imagens e acentos**. Isso reduz risco de
 show-through, consumo de tinta e variação de cor.
+
+### Pranchas ampliadas
+
+- Joaquim: **3,2 × 4,0 in** (~350 DPI).
+- Paisagens do caderno: **2,3 in** (~348 DPI).
+- Retrato do Dr. Oliveira: **2,0 in** (~300 DPI).
+- Imagens de fragmento: paisagens **0,54 textwidth** (~301 DPI); retrato **0,40** (~305 DPI).
+
+A ampliação para 3,2 in no retrato de Joaquim é o limite nativo seguro; acima
+disso seria upscale, que não entra nesta edição print-safe.
 
 ## 4. O que permaneceu
 
@@ -71,7 +81,7 @@ mesma peça:
 ## 6. Limites
 
 - A capa exterior continua a ~163 DPI; precisa de arte em 300 DPI.
-- A lombada deve ser recalculada para **418 pp** (≈0,982 in na fórmula adotada).
+- A lombada deve ser recalculada para **422 pp** (≈0,992 in na fórmula adotada).
 - Sem nova ISBN; uma edição impressa substancialmente revista exige ISBN própria.
 - Traduções EN/ZH/TRI não atualizadas.
 - PDF tagged/PDF-UA bloqueado pelo toolchain.

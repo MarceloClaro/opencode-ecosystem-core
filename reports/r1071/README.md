@@ -44,7 +44,7 @@ Atualização R1075: edição revista em
 LUC 23; design R1076 com 6 pranchas). Ver `reports/r1076/README.md`.
 
 Atualização R1077: variante print-safe em
-`literatura/molambudos/Molambudos_Print_R1077` (418 pp; TAC médio 11,4%;
+`literatura/molambudos/Molambudos_Print_R1077` (422 pp; TAC médio 11,7%;
 imagens ≥300 DPI). Ver `reports/r1077/README.md`.
 
 ## 3. QA técnico do KDP

@@ -116,5 +116,5 @@ arquivo que o livro já possuía.
 ## 7. Variante de impressão
 
 O R1076 é a edição **digital/sensorial**. Para impressão em papel cream, existe
-o candidato **R1077**: 418 pp, sem fundo sépia, aberturas tipográficas, imagens
+o candidato **R1077**: 422 pp, sem fundo sépia, aberturas tipográficas, imagens
 ≥300 DPI e TAC médio 11,4%. Ver `reports/r1077/README.md`.

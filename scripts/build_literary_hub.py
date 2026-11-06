@@ -80,7 +80,7 @@ WORKS = [
         'id': 'molambudos-print-r1077',
         'title': 'Molambudos — O Diário do Paciente 1.260 (variante print-safe)',
         'category': 'livro', 'scope': 'literario', 'canonical': False,
-        'status': 'candidato print-safe; 418 pp; TAC médio 11,4%; imagens ≥300 DPI',
+        'status': 'candidato print-safe; 422 pp; TAC médio 11,7%; imagens ≥300 DPI',
         'source': 'literatura/molambudos/Molambudos_Print_R1077',
         'compiled': 'literatura/molambudos/Molambudos_Print_R1077',
         'pdf': 'literatura/molambudos/Molambudos_Print_R1077/main_kdp_print_r1077.pdf',

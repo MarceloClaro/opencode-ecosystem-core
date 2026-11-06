@@ -23,7 +23,7 @@ com resolução suficiente.
 | Caminho | Papel |
 |---|---|
 | `literatura/molambudos/Molambudos_Print_R1077/` | fonte e PDF print-safe |
-| `main_kdp_print_r1077.pdf` | PDF 418 pp |
+| `main_kdp_print_r1077.pdf` | PDF 422 pp |
 | `frontmatter/titlepage_print.tex` | rosto tipográfico |
 | `frontmatter/backpage_print.tex` | colofão tipográfico |
 | `frontmatter/cuidado_print.tex` | advertência tipográfica |
@@ -32,9 +32,9 @@ com resolução suficiente.
 
 ## 3. Aceitação
 
-1. PDF 418 pp; 160×230 mm; fontes embutidas.
+1. PDF 422 pp; 160×230 mm; fontes embutidas.
 2. 20 imagens; mínimo 305 DPI; nenhuma abaixo de 300.
-3. TAC médio 11,4%; máximo 173,4%.
+3. TAC médio 11,7%; máximo 173,4%.
 4. Cores CMYK com TAC ≤205% nos elementos de texto.
 5. R1076 digital permanece intacta.
 6. Relatório declara: capa 300 DPI pendente, lombada a recalcular, sem nova

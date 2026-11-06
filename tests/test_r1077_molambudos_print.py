@@ -32,7 +32,7 @@ def sha256(path: Path) -> str:
 def test_manifest_print_safe_metrics():
     data = load(MANIFEST)
     assert data["status"] == "completed"
-    assert data["pdf"]["pages"] == 418
+    assert data["pdf"]["pages"] == 422
     assert data["images"]["count"] == 20
     assert data["images"]["min_xppi"] >= 300
     assert data["images"]["below_300"] == []
@@ -57,7 +57,8 @@ def test_print_source_uses_safe_paths():
 
     fragments = [p for p in (PRINT / "fragmentos").rglob("*.tex") if "_removidos" not in str(p)]
     text = "\n".join(p.read_text(encoding="utf-8") for p in fragments)
-    assert text.count("width=0.40\\textwidth") == 5
+    assert text.count("width=0.54\\textwidth") == 4
+    assert text.count("width=0.40\\textwidth") == 1
     assert "width=0.55\\textwidth" not in text
 
     data = load(MANIFEST)
