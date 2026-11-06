@@ -503,7 +503,7 @@ composições e recibos permitem reproduzir o fluxo.
 | Pesquisa acadêmica | pipeline ABNT, revisão de fontes, bibliografia, provas e conselho de 13 | não substitui bibliotecário, estatístico ou revisão por pares |
 | Pesquisador ponta a ponta (R1051–R1054) | tema → contrato → busca → triagem humana → texto integral → integridade → meta-análise/GRADE → manuscrito → submissão → gate de publicação | extração/RoB/GRADE são assistivos; submissão e aceite exigem backend/artefatos humanos |
 | Ciência | 8 protocolos K-Dense, catálogo de 177 skills, 9 adaptações originais e laboratório com budget | 177 skills não são 177 validações; nada é executado sem gate |
-| Programação | SDD/TDD, **410 testes**, agentes, skills e Macro-rede de 584 nós/776 arestas | grafo é projeção read-only; aresta não é execução |
+| Programação | SDD/TDD, **9.552 testes coletados**, agentes, skills e Macro-rede de 584 nós/776 arestas | grafo é projeção read-only; aresta não é execução |
 | Governança | gate metacognitivo, citações literais, contradições e validação externa | `externally_supported` não é verdade absoluta; voto/nota/payoff não decide |
 | Publicação | nenhum upload ou agendamento nesta rodada | exige direitos, credenciais e autorização explícita |
 
@@ -568,7 +568,7 @@ Nenhum código de terceiro foi copiado ou executado; instruções permissivas fo
 `reports/r1049/sources.json`. Ver [evidência R1049](reports/r1049/README.md).
 
 **Macro-rede e gate metacognitivo (R1050):** `mci/macro_network.py` projeta
-**584 nós e 776 arestas** no snapshot atual — orquestrador, 337 agentes, 50 skills, 177
+**584 nós e 776 arestas** no snapshot atual — orquestrador, 337 agentes, 54 skills, 177
 skills K-Dense, 11 categorias e 4 gates. `mci/metacognitive_gate.py` impede que
 confiança, voto, nota ou payoff virem verdade; o conselho ganhou
 `validate_claims` com evidência literal, falseabilidade, mecanismo e
