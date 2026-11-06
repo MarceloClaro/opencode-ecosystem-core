@@ -69,7 +69,7 @@ def test_caderno_and_hashes():
     assert data["plates"]["count"] == 6
     assert len(data["plates"]["files"]) == 6
     assert "não são provas históricas" in data["plates"]["note"].lower() or "não são provas" in data["plates"]["note"].lower()
-    assert data["pdf"]["pages"] == 421
+    assert data["pdf"]["pages"] == 423
     assert data["epub"]["images"] == 13
     assert len(data["pdf"]["sha256"]) == 64
     assert len(data["epub"]["sha256"]) == 64

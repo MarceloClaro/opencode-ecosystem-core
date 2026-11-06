@@ -23989,6 +23989,59 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1090",
+      "objective": "Revisão integral somente leitura do miolo Molambudos R1075 com parecer rastreável por fragmento",
+      "changes": [
+        "Parecer R1089 com 84 entradas na ordem de main.tex, 16 paratextos, epílogo, QA do PDF de 421 pp e prioridades P0-P2",
+        "Especificação R1089 e dois testes de cobertura; nenhum .tex, imagem, PDF ou EPUB do manuscrito foi alterado"
+      ],
+      "score": null,
+      "lessons": [
+        "Revisão de manuscrito deve separar erro de deliberação e conferir cada hipótese de leitor na fonte antes de consolidar",
+        "Contagens declaradas em aparato de navegação precisam ser derivadas da lista efetiva de fragmentos, não de versões anteriores",
+        "Motivo numérico recorrente pode mascarar intervalos incompatíveis; testar as âncoras de data e de custódia",
+        "Capa, contracapa, ISBN e sangria devem ser verificados separadamente do miolo"
+      ],
+      "timestamp": 1793962388.2618062,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1092",
+      "objective": "Correções críticas R1091 do miolo Molambudos R1075 a partir do parecer R1089",
+      "changes": [
+        "Cluster dos 62, linha de Lúcia, moldura DOC, 223 rotas, grafos, paratextos e miolo sem capa/contracapa",
+        "PDF recompilado com 423 pp e hash bd78c8db32db2976e2c087bf342cf909a232c56f3348885ea577d9f82773902a",
+        "10 testes R1091/R1089 e 58 regressões passaram; R362 mantém 1 falha preexistente de caminho canônico"
+      ],
+      "score": null,
+      "lessons": [
+        "Recompilar altera o hash do PDF: manifestos e relatórios precisam acompanhar o mesmo ciclo",
+        "Motivo numérico recorrente precisa de uma regra editorial; corrigir aritmética não basta",
+        "A moldura ficcional deve ser uniforme por família documental, não por arquivo",
+        "Grafos devem ser gerados da lista efetiva de main.tex, não de todos os .tex do diretório"
+      ],
+      "timestamp": 1793966355.7985814,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [

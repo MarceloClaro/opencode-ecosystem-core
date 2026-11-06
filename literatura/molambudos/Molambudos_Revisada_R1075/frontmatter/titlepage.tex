@@ -1,14 +1,8 @@
 \thispagestyle{empty}
 
 % =================
-% Capa — imagem pronta (frontmatter/capa.png), full-bleed 6x9 (Página 1)
+% Folha de rosto tipográfica. A capa é um asset separado do miolo.
 % =================
-\noindent\begin{tikzpicture}[remember picture,overlay]
-    \fill[black] (current page.south west) rectangle (current page.north east);
-    \node[anchor=center] at (current page.center)
-        {\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{frontmatter/capa.png}};
-\end{tikzpicture}%
-\clearpage
 
 % =================
 % Title page (folha de rosto tipográfica — Página 2)

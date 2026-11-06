@@ -1,9 +1,14 @@
 # R1076 — Direção visual e tipográfica do Molambudos
 
 **Data:** 2026-11-05  
-**Status:** design aplicado à edição revista; PDF de 421 pp e EPUB de 13
+**Status:** design aplicado à edição revista; PDF de 423 pp e EPUB de 13
 imagens gerados. Não é validação profissional independente, publicação ou nova
 ISBN.
+
+> **Atualização R1091 (2026-11-06):** o miolo foi corrigido e recompilado;
+> o PDF passou a 423 pp e o hash para
+> `bd78c8db32db2976e2c087bf342cf909a232c56f3348885ea577d9f82773902a`.
+> O EPUB é o da versão anterior; capa e lombada continuam a recalcular.
 
 ## 1. O diagnóstico
 
@@ -94,8 +99,8 @@ arquivo que o livro já possuía.
 
 | Item | Resultado |
 |---|---|
-| PDF | 421 pp; 160×230 mm; fontes embutidas; sem referências indefinidas |
-| PDF SHA-256 | `cc0c5c2110f0a334a9650044191dabaf5da168a701dc194604069c16444991ab` |
+| PDF | 423 pp; 160×230 mm; fontes embutidas; sem referências indefinidas |
+| PDF SHA-256 | `bd78c8db32db2976e2c087bf342cf909a232c56f3348885ea577d9f82773902a` |
 | EPUB | 84 seções; 105 links; 0 quebrados; 0 LaTeX cru; **13 imagens** |
 | EPUB palavras | 53.554 |
 | EPUB SHA-256 | `0269e8c0c1d26c1f66eb1c7773c732afa2332a58bd1ce5acf2c4fe6b2a4b9c4c` |
@@ -108,7 +113,7 @@ arquivo que o livro já possuía.
 ## 6. Limites
 
 - Direção de arte interna; não é parecer profissional independente.
-- Capa e lombada precisam ser recalculadas para **421 pp**; a capa em 300 DPI
+- Capa e lombada precisam ser recalculadas para **423 pp**; a capa em 300 DPI
   continua pendente.
 - As imagens são ficção documental; não são documentos históricos.
 - Traduções EN/ZH/TRI não foram atualizadas.

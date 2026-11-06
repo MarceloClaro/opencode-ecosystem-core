@@ -4,6 +4,11 @@
 **Status:** candidato de impressão gerado e medido. Não é publicação, não é nova
 ISBN e não é validação externa.
 
+> **Nota R1091:** esta variante não foi regenerada após as correções do miolo;
+> a comparação 421/422 pp abaixo é histórica. O PDF digital corrigido tem 423
+> pp e hash
+> `bd78c8db32db2976e2c087bf342cf909a232c56f3348885ea577d9f82773902a`.
+
 ## 1. Por que uma variante print-safe
 
 A edição R1076 tem forte impacto sensorial na tela: fundo sépia em todas as

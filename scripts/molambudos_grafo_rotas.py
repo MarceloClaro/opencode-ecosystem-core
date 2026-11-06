@@ -94,18 +94,36 @@ def familia(fid: str) -> str:
 
 
 def ler_rotas() -> tuple[list[str], list[tuple[str, str]]]:
-    """(fragmentos, arestas) lidos do corpus PT."""
-    nos: list[str] = []
+    """(fragmentos, arestas) apenas dos fragmentos incluídos em main.tex.
+
+    A versão anterior varria todos os ``.tex`` de ``fragmentos/``, inclusive
+    ``_removidos``, e por isso o mapa continuava mostrando CONT-02/06/08/10/11/12
+    depois que a edição passou a ter 7 CONT. A lista de nós vem de ``ler_partes``
+    (a ordem real de ``main.tex``); o disco só fornece o corpo de cada ID.
+    """
+    partes = ler_partes()
+    nos = [frag for _, frags in partes for frag in frags]
+    if EPILOGO not in nos:
+        nos.append(EPILOGO)
+
+    por_id: dict[str, Path] = {}
+    for path in FRAGMENTOS.rglob("*.tex"):
+        if "_removidos" in str(path):
+            continue
+        por_id[path.stem] = path
+
     arestas: list[tuple[str, str]] = []
-    for path in sorted(FRAGMENTOS.rglob("*.tex")):
-        origem = path.stem
-        nos.append(origem)
+    for origem in nos:
+        if origem == EPILOGO:
+            continue
+        path = por_id.get(origem)
+        if path is None:
+            continue
         texto = path.read_text(encoding="utf-8")
         # Só a linha de navegação no fim do fragmento conta como rota de leitura;
         # `\rota{}` no corpo (raro) também é um salto oferecido ao leitor.
         for destino in ROTA_RE.findall(texto):
             arestas.append((origem, destino))
-    nos.append(EPILOGO)
     return nos, arestas
 
 
@@ -180,7 +198,7 @@ def desenhar(nos: list[str], arestas: list[tuple[str, str]], saida: Path) -> Non
         edgecolors="#2E241A", linewidths=0.8, alpha=0.95,
     )
     nx.draw_networkx_labels(
-        g, pos, ax=ax, font_size=7.2, font_color="#1A1410",
+        g, pos, ax=ax, font_size=9.8, font_color="#1A1410",
         font_family="serif", font_weight="bold",
     )
 
@@ -190,7 +208,7 @@ def desenhar(nos: list[str], arestas: list[tuple[str, str]], saida: Path) -> Non
         fontsize=13, title="Famílias de fragmento", title_fontsize=14,
     )
     ax.set_title(
-        f"Molambudos — Grafo de Leitura: {len(g.nodes())} fragmentos, "
+        f"Molambudos — Grafo de Leitura: {len(g.nodes()) - 1} fragmentos + Epílogo, "
         f"{len(g.edges())} rotas\n"
         "O tamanho do nó cresce com o número de rotas que chegam até ele",
         fontsize=19, color="#2E241A", family="serif", pad=22,
@@ -289,7 +307,7 @@ def desenhar_enredo(arestas: list[tuple[str, str]], saida: Path) -> dict:
     for frag, (x, y) in pos.items():
         ax.plot(x, y, "o", markersize=9, color=ATOS[ato_de[frag]][2],
                 markeredgecolor="#2E241A", markeredgewidth=0.6, zorder=3)
-        ax.text(x, y - 0.3, frag, fontsize=5.6, ha="center", va="top",
+        ax.text(x, y - 0.3, frag, fontsize=7.4, ha="center", va="top",
                 family="serif", color="#1A1410", zorder=4)
 
     ax.set_xlim(-0.4, LARG + 2.4)
@@ -346,12 +364,22 @@ def desenhar_linear(saida: Path) -> dict:
         ax.text(x, y, frag.replace("LUC-", "LUC\n").replace("CONT-", "CONT\n")
                 .replace("MEM-", "MEM\n").replace("DOC-", "DOC\n")
                 .replace("EPI-", "EPI\n"),
-                fontsize=5.4, ha="center", va="center", linespacing=0.85,
+                fontsize=6.9, ha="center", va="center", linespacing=0.85,
                 family="serif", color="#F2E8CF", weight="bold", zorder=4)
 
+    handles = []
+    for nome, cor in COR_PARTE.items():
+        if nome not in dict(partes):
+            continue
+        if nome == "Contaminação":
+            # A parte inclui MEM-27 e o Epílogo; a legenda deve contar só CONT,
+            # para não repetir o erro de anunciar 15/13/9 onde o livro tem 7.
+            qtd = sum(1 for frag in dict(partes)[nome] if frag.startswith("CONT-"))
+        else:
+            qtd = len(dict(partes)[nome])
+        handles.append(mpatches.Patch(color=cor, label=f"{nome} ({qtd})"))
     ax.legend(
-        handles=[mpatches.Patch(color=c, label=f"{n} ({len(dict(partes)[n])})")
-                 for n, c in COR_PARTE.items() if n in dict(partes)],
+        handles=handles,
         loc="lower center", ncol=5, frameon=True, facecolor="#EDE0C0",
         edgecolor="#5A4632", fontsize=12, title="Partes, na ordem de leitura",
         title_fontsize=13, bbox_to_anchor=(0.5, -0.06),
@@ -378,13 +406,25 @@ def _tem_pygraphviz() -> bool:
 
 
 def main(argv: list[str] | None = None) -> int:
+    global BOOK, FRAGMENTOS, MISC, SAIDA, SAIDA_ENREDO, SAIDA_LINEAR
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--stats", action="store_true", help="só imprime métricas")
     p.add_argument("--json", action="store_true")
-    p.add_argument("--saida", type=Path, default=SAIDA)
+    p.add_argument("--book", type=Path, default=BOOK,
+                   help="raiz do livro (padrão: Molambudos_VictoriaRegia)")
+    p.add_argument("--saida", type=Path, default=None)
     p.add_argument("--mapa", choices=("rotas", "enredo", "linear", "todos"),
                    default="todos", help="qual mapa gerar (padrão: todos)")
     args = p.parse_args(argv)
+
+    BOOK = args.book.resolve()
+    FRAGMENTOS = BOOK / "fragmentos"
+    MISC = BOOK / "misc"
+    SAIDA = MISC / "grafo_narrativo.png"
+    SAIDA_ENREDO = MISC / "grafo_enredo.png"
+    SAIDA_LINEAR = MISC / "grafo_leitura_linear.png"
+    if args.saida is None:
+        args.saida = SAIDA
 
     nos, arestas = ler_rotas()
     st = estatisticas(nos, arestas)

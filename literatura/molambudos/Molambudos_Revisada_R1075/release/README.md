@@ -3,8 +3,12 @@
 **Status:** edição de trabalho; não é publicação, não é nova ISBN e não é
 validação externa.
 
-- `Molambudos_PT_revisado.pdf` — 421 pp; 160×230 mm; fontes embutidas.
-  SHA-256: `cc0c5c2110f0a334a9650044191dabaf5da168a701dc194604069c16444991ab`.
+> **Nota R1091:** o PDF abaixo é o miolo corrigido (423 pp, sem capa/contracapa
+> no arquivo); o EPUB é o da versão anterior e precisa ser regenerado. A capa
+> é um asset separado e deve ser recalculada para 423 pp.
+
+- `Molambudos_PT_revisado.pdf` — 423 pp; 160×230 mm; fontes embutidas.
+  SHA-256: `bd78c8db32db2976e2c087bf342cf909a232c56f3348885ea577d9f82773902a`.
 - `Molambudos_PT_revisado.epub` — 84 seções; 105 links no TOC; 0 quebrados;
   13 imagens; 53.554 palavras. SHA-256: `0269e8c0c1d26c1f66eb1c7773c732afa2332a58bd1ce5acf2c4fe6b2a4b9c4c`.
   EPUBCheck 5.4.0: 0 erros/0 avisos; Ace 1.4.6: 26 pass/0 fail.
@@ -26,7 +30,7 @@ validação externa.
 
 ## Limites
 
-- Capa/lombada a recalcular para 421 pp; capa em 300 DPI pendente.
+- Capa/lombada a recalcular para 423 pp; capa em 300 DPI pendente.
 - Traduções EN/ZH/TRI não atualizadas.
 - PDF tagged/PDF-UA bloqueado pelo toolchain.
 - Nenhuma nota 10/10 é declarada; a recepção externa continua fora do escopo.

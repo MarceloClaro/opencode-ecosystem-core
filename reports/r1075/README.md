@@ -5,6 +5,12 @@
 e verificados localmente. Não é publicação, não é nova ISBN e não é validação
 externa.
 
+> **Atualização R1091 (2026-11-06):** o miolo foi corrigido; o PDF passou a
+> 423 pp e o hash foi atualizado para
+> `bd78c8db32db2976e2c087bf342cf909a232c56f3348885ea577d9f82773902a`.
+> O EPUB abaixo é o da versão anterior e precisa ser regenerado antes de ser
+> anunciado como equivalente ao PDF corrigido.
+
 ## 1. O que mudou
 
 | Bloco | Antes | Depois | Variação |
@@ -14,7 +20,7 @@ externa.
 | LUC | 17 / 11.182 | **23 / 15.596** | **+39,5%** |
 | CONT | **13 / 7.000** | **7 / 4.551** | **−35,0%** |
 | Total | 84 / 52.577 | **84 / 51.152** | −2,7% |
-| PDF | 435 pp | **421 pp** | −14 pp |
+| PDF | 435 pp | **423 pp** | −12 pp |
 
 A redução do total é pequena porque os cortes de DOC/CONT foram reinvestidos no
 arco de Lúcia. O livro ficou mais equilibrado, não apenas mais curto.
@@ -117,8 +123,8 @@ mental. Não há alegação de eficácia terapêutica.
 
 | Item | Resultado |
 |---|---|
-| PDF revisado | 421 pp; 160×230 mm; fontes embutidas; sem referências indefinidas |
-| PDF SHA-256 | `cc0c5c2110f0a334a9650044191dabaf5da168a701dc194604069c16444991ab` |
+| PDF revisado | 423 pp; 160×230 mm; fontes embutidas; sem referências indefinidas |
+| PDF SHA-256 | `bd78c8db32db2976e2c087bf342cf909a232c56f3348885ea577d9f82773902a` |
 | EPUB revisado | 84 seções; 105 links no TOC; 0 quebrados; 0 LaTeX cru; 13 imagens |
 | EPUB palavras | 53.554 |
 | EPUB SHA-256 | `0269e8c0c1d26c1f66eb1c7773c732afa2332a58bd1ce5acf2c4fe6b2a4b9c4c` |
@@ -132,7 +138,7 @@ mental. Não há alegação de eficácia terapêutica.
 
 - É uma **edição de trabalho**. Não é publicação, não é nova ISBN e não é
   validação por banca externa.
-- A capa e a lombada precisam ser recalculadas para 421 pp; a capa em 300 DPI
+- A capa e a lombada precisam ser recalculadas para 423 pp; a capa em 300 DPI
   continua pendente.
 - As traduções EN/ZH/TRI não foram atualizadas.
 - O PDF tagged/PDF-UA continua bloqueado pelo toolchain.
