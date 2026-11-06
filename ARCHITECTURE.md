@@ -20,7 +20,7 @@ python3 -c "import json; c=json.load(open('opencode.json', encoding='utf-8')); p
 ```
 
 <!-- core-state:start -->
-**333 agentes** · **27 MCPs** · **35 comandos** · **22 checks**
+**337 agentes** · **30 MCPs** · **35 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 
@@ -169,26 +169,29 @@ As entradas abaixo são derivadas das chaves `mcp` de `opencode.json`:
 5. `chroma`;
 6. `colibri-mcp`;
 7. `context7`;
-8. `ecosystem-network`;
-9. `educacao-legislacao`;
-10. `fetch`;
-11. `filesystem`;
-12. `latexmk-mcp`;
-13. `litert-lm`;
-14. `mcp-memory`;
-15. `mcp-time`;
-16. `metacognitive-interconnect`;
-17. `oa-resolver`;
-18. `playwright`;
-19. `polymath-labs-mcp`;
-20. `pypi-search`;
-21. `qdrant`;
-22. `rea`;
-23. `remotion-audit`;
-24. `scanners-mcp`;
-25. `sequential-thinking`;
-26. `servers`;
-27. `web-deploy-mcp`;
+8. `desktop-operator`;
+9. `ecosystem-network`;
+10. `educacao-legislacao`;
+11. `fetch`;
+12. `filesystem`;
+13. `latexmk-mcp`;
+14. `litert-lm`;
+15. `mcp-memory`;
+16. `mcp-time`;
+17. `metacognitive-interconnect`;
+18. `oa-resolver`;
+19. `playwright`;
+20. `polymath-labs-mcp`;
+21. `pypi-search`;
+22. `qdrant`;
+23. `rea`;
+24. `remotion-audit`;
+25. `scanners-mcp`;
+26. `scientific-data`;
+27. `sequential-thinking`;
+28. `servers`;
+29. `storage-operator`;
+30. `web-deploy-mcp`;
 <!-- core-mcp:end -->
 
 O MCP `ecosystem-network` conecta o `MarceloClaroOrchestrator`, o roteamento

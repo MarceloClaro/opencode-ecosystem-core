@@ -30,7 +30,7 @@
 </div>
 
 <!-- core-state:start -->
-**333 agentes** · **27 MCPs** · **35 comandos** · **22 checks**
+**337 agentes** · **30 MCPs** · **35 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 
@@ -91,6 +91,7 @@ fonte, qual hash e qual limite?”**.
 | Pesquisar um tema e chegar a um artigo | [Pipeline R1051–R1054](docs/SCIENTIFIC_RESEARCH_PIPELINE_R1054.md) | `research project --theme ... --dry-run` |
 | Auditar evidência e claims | [R1054](reports/r1054/README.md), [gate metacognitivo](mci/metacognitive_gate.py) | `research benchmark-meta ...` |
 | Construir ou registrar agentes | [AGENTS.md](AGENTS.md), [catálogo](agents/catalog) | `agentes list` |
+| Diagramar, editar e ilustrar um livro | [Book Studio](reports/r1078/README.md), [R1082](reports/r1082/README.md) | `python3 -m marceloclaro.bookstudio status` |
 | Editar vídeo, dublar e legendar | [Editor universal](docs/EDITOR_VIDEO_UNIVERSAL_R1042.md) | `video_editor --help` |
 | Fazer engenharia reversa local | [REA](docs/REA.md) | `rea status` |
 | Entender a arquitetura completa | [ARCHITECTURE.md](ARCHITECTURE.md), [mapa R916](docs/ARQUITETURA_COMPLETA_CORE_R916.md) | leitura guiada |
@@ -161,16 +162,39 @@ registrada, não escondida. Evidência:
 | Área | Estado | O que existe | Limite honesto |
 |---|---|---|---|
 | Orquestração | ✅ implementado/testado | `MarceloClaroOrchestrator`, Blackboard, MetaBus, workflows DAG, cancelamento | CLI instalada não comprova autenticação ou execução |
-| Agentes | ✅ 333 perfis | catálogo, registro, especificação, trust e evolução | registro/atribuição ≠ inferência concluída |
+| Agentes | ✅ 337 perfis | catálogo, registro, especificação, trust e evolução | registro/atribuição ≠ inferência concluída |
 | Pesquisa científica | ✅ R1051–R1054 | busca, texto integral, triagem humana, integridade, meta-análise, manuscrito, submissão | extração/RoB/GRADE assistivos; revisão humana obrigatória |
 | SDD/TDD | ✅ | SpecRegistry, SpecVerifier, TDDRunner, RED/GREEN | critério textual ≠ verdade científica |
 | REA | 🟡 com limites | inspeção local, camadas de provedores, recibos | formato, engine, licença e isolamento precisam ser conferidos |
 | Vídeo e dublagem | ✅ R1046–R1055 | multifaixa, TTS, ASR, legendas, mapa e câmera; piloto 16:9/9:16 nativo | render/QC técnico ≠ aprovação estética, naturalidade ou rigor científico |
-| MCP | 🟡 27 configurados | federação, probes, smoke, recibos | configuração ≠ disponibilidade no momento de uso |
+| MCP | 🟡 30 configurados | federação, probes, smoke, recibos | configuração ≠ disponibilidade no momento de uso |
 | Governança | ✅ | gate metacognitivo, TrustEngine, slashing, EvolutionRegistry | `externally_supported` não é verdade absoluta |
 | Publicação | 🧭 gate | validação externa, aceite, autorização | nenhum upload/publicação automática |
+| Book Studio | ✅ R1078–R1082 | KDP, tokens, licença, EPUB, capas e 6 pranchas de prova | arte final, 2× 300 DPI, CMYK/PDF-X e prova física pendentes |
 
 **Legenda:** ✅ implementado e testado; 🟡 implementado com limites; 🧪 experimental; 📋 apenas especificado.
+
+## Book Studio e Molambudos (R1078–R1082)
+
+O Book Studio saiu de scripts isolados para um pacote com contratos, KDP, design
+tokens, gate de licença, manifesto de release e auditoria de EPUB. O Molambudos
+ganhou uma direção de arte Piranesi/Pencz e um caderno de provas.
+
+| Ciclo | Entrega | Estado |
+|---|---|---|
+| **R1078** | pacote `marceloclaro/bookstudio/`, KDP, tokens, licença, release e EPUB | ✅ 13 testes |
+| **R1079** | preflight dos artefatos: 422 pp, 160×230 mm, 15 fontes, 20 imagens ≥300 DPI, TAC 11,7% | ✅/parcial |
+| **R1080** | perfil `romance-psicologico-molambudos`, 16 estilos, PT-BR/EN/ZH, ética | ✅ 6 testes |
+| **R1081** | direção Piranesi/Pencz, 6 tipos de prancha, provas determinísticas | ✅ 5 testes |
+| **R1082** | capa preta/ouro 422/436 pp, 6 pranchas de prova, caderno de 8 pp e preflight | ✅ 12 testes |
+
+**Limites:** a capa selecionada tem 300 DPI, mas ainda não tem CMYK/PDF-X,
+prova física ou confirmação KDP; as 6 pranchas estão a 316–345 DPI no tamanho
+final de 86 mm e **não** a 2× 300 DPI (158–173 DPI). OpenAI está sem créditos e
+Gemini com cota zero para imagem; nenhuma arte nova foi gerada. O perfil local
+está configurado, mas a inferência não foi comprovada. Detalhes:
+[R1082](reports/r1082/README.md), [R1081](reports/r1081/illustration_style/README.md),
+[R1080](reports/r1080/README.md) e [R1078](reports/r1078/README.md).
 
 ## Arquitetura em 60 segundos
 
@@ -1052,14 +1076,6 @@ flowchart TB
 > auxiliares ou serviços opcionais do ecossistema.
 
 <!-- core-runtime-diagram:start -->
-<!-- svg-presentation:diagram-8e1e0ff7aba73edb -->
-<img src="docs/architecture/animated/diagram-8e1e0ff7aba73edb.svg" alt="Diagrama Operacional Atual — diagrama estático" width="100%">
-
-<sub>[GIF](docs/architecture/animated/diagram-8e1e0ff7aba73edb.gif) · [PNG](docs/architecture/animated/diagram-8e1e0ff7aba73edb.png) · [Fonte Mermaid](docs/architecture/animated/diagram-8e1e0ff7aba73edb.mmd)</sub>
-
-<details>
-<summary>Fonte Mermaid (auditoria)</summary>
-
 ```mermaid
 flowchart TB
     Usuario2[Usuário ou automação] --> CLI2[CLI marceloclaro]
@@ -1070,14 +1086,12 @@ flowchart TB
     Orq2 --> TDDRunner2[TDDRunner]
     Orq2 --> MetaBus2[MetaBus]
     Orq2 --> Blackboard2[Blackboard]
-    Orq2 --> MCP2[27 MCPs configurados]
-    Orq2 --> Agents2[333 agentes configurados]
+    Orq2 --> MCP2[30 MCPs configurados]
+    Orq2 --> Agents2[337 agentes configurados]
     Orq2 --> Mira2[mira-presenter]
     Mira2 --> Deck2[MiraDeckPipeline]
     Deck2 --> Engine2[MiraEngine]
 ```
-
-</details>
 <!-- core-runtime-diagram:end -->
 
 O MCP `ecosystem-network`, acrescentado na R640, conecta o orquestrador e seu
