@@ -64,11 +64,42 @@ Serif, DejaVu Sans). A rasterização a 300 DPI resultou em **4152 × 2792 px**.
 4. Rodar preflight de capa: trim, bleed, fontes, imagens, barcode, spine.
 5. Só então considerar upload — com nova ISBN e prova física.
 
-## 6. Arquivos
+## 6. Build reprodutível
+
+O script seguro usa **WeasyPrint + cairosvg + pypdf + pdftoppm**, sem PyMuPDF e
+sem svglib:
+
+```bash
+python3 reports/r1078/cover/build_cover.py \
+  --outdir reports/r1078/cover/build_422 \
+  --pages 422
+```
+
+Resultado em `build_422/`:
+
+| Artefato | Resultado |
+|---|---|
+| `molambudos_cover_422pp.pdf` | 13,8389 × 9,3051 in; 1 página; 8 fontes embutidas |
+| `molambudos_cover_422pp_guides.pdf` | mesma capa com guias de trim/safe/barcode |
+| `front_300dpi.png` | 1890 × 2717 px (300 DPI) |
+| `cover_preview_150dpi.png` | prévia de revisão |
+| `manifest.json` | especificação, hashes e warnings |
+| `SHA256SUMS.txt` | checksums de todos os artefatos |
+
+O PDF de impressão **não** tem guias; o PDF de guias é separado. A contracapa
+continua com `contain` e precisa de re-layout; o barcode antigo segue visível no
+canto inferior esquerdo.
+
+> O Codex foi acionado para gerar um script alternativo. A revisão está em
+> `reports/r1080/codex_cover_review.md`: o rascunho não foi executado porque
+> depende de `svglib` (ausente), PyMuPDF (AGPL) e rejeita os `<text>` dos SVGs.
+
+## 7. Arquivos
 
 | Caminho | Conteúdo |
 |---|---|
 | `kdp_specs.json` | cálculos para 421, 422 e 435 pp |
-| `cover/molambudos_cover_template_422pp.pdf` | template com guias |
-| `cover/molambudos_cover_template_422pp.html` | fonte do template |
-| `/tmp/opencode/molambudos_front_300dpi.png` | prova da frente em 300 DPI (fora do repositório) |
+| `cover/build_cover.py` | build reprodutível com WeasyPrint/cairosvg |
+| `cover/build_422/` | PDF de impressão, PDF de guias, frente 300 DPI, prévia e manifesto |
+| `cover/molambudos_cover_template_422pp.pdf` | template antigo com guias |
+| `/tmp/opencode/molambudos_front_300dpi.png` | prova avulsa da frente em 300 DPI |

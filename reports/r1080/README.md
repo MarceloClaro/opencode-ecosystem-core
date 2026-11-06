@@ -1,8 +1,8 @@
 # R1080 — Assistente de Romance Psicológico (Linhagem Molambudos)
 
-**Status:** catálogo, prompt e protocolo de tradução criados.
-**Não é terapia, não é NLP clínico, não é validação literária e não é um agente
-novo registrado.**
+**Status:** catálogo, prompt, protocolo de tradução e perfil gerenciado
+registrado (`romance-psicologico-molambudos`).
+**Não é terapia, não é NLP clínico e não é validação literária.**
 **Não há nota 10/10, publicação ou garantia de qualidade.**
 
 ## 1. Codex e edição de imagens
@@ -24,6 +24,12 @@ difusão. O modelo `gemini-nano-banana-2.1` estava indisponível nesta conexão.
 Nesta ponte, Codex é read-only: ele devolve o script; o Core executa, verifica e
 registra. **Não fazer upscale artificial para alegar 300 DPI**; preferir
 re-render vetorial.
+
+O Codex foi acionado em 2026-11-05 (`task-ce22a7df`, spec `TSPEC-43c399c2`) e
+devolveu um script de capa. Ele **não foi executado**: depende de `svglib`
+(ausente), usa PyMuPDF (AGPL) e rejeita os elementos `<text>` dos SVGs atuais.
+A revisão está em `codex_cover_review.md`; a versão segura e reprodutível está
+em `reports/r1078/cover/build_cover.py` (WeasyPrint + cairosvg + pypdf).
 
 Detalhes e prompts: `codex_image_workflow.md`.
 
@@ -173,7 +179,7 @@ ofício.
 - 2+ canais sensoriais e 2+ motivos por estilo.
 - Blocos `ethics`, `translation_protocol`, `tagline_engine` e `quality_gates`.
 - Teste: `tests/test_r1080_style_catalog.py`.
-- Nenhum agente novo foi registrado; nenhum modelo de imagem foi executado.
+- Perfil gerenciado registrado: `romance-psicologico-molambudos`; nenhum modelo de imagem foi executado.
 
 ## 9. Limites
 
