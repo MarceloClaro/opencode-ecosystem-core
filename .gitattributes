@@ -1,3 +1,18 @@
 # Scripts conferidos por SHA-256 no fluxo Windows/WSL devem manter bytes LF
 # idênticos entre checkout, cache temporário e execução no Bash.
 *.sh text eol=lf
+
+# R1083: LaTeX usa espaços finais como quebra de linha; não tratar como erro.
+*.tex whitespace=-trailing-space
+*.sty whitespace=-trailing-space
+*.cls whitespace=-trailing-space
+*.bib whitespace=-trailing-space
+# Código e markup histórico: não bloquear diffs por espaços finais.
+*.py whitespace=-trailing-space
+*.html whitespace=-trailing-space
+*.md whitespace=-trailing-space
+*.txt whitespace=-trailing-space
+*.sh whitespace=-trailing-space
+*.dot whitespace=-trailing-space
+*.lua whitespace=-trailing-space
+*.svg whitespace=-trailing-space
