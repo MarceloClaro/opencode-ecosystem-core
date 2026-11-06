@@ -429,8 +429,12 @@ O Studio é a camada de UX, não o motor. Proposta:
 
 - **R1078 aprovada e fase 0 implementada** em `marceloclaro/bookstudio/`:
   contratos, KDP, design tokens, gate de licença, manifesto de release e CLI.
-- **R1079–R1083 autorizadas**, mas não concluídas neste ciclo. O piloto de
-  PDF/UA, o EPUBCheck/Ace e o LanguageTool/Vale já produziram evidência inicial.
+- **R1079 parcial:** o preflight dos artefatos existentes passou (422 pp,
+  160×230 mm, 15 fontes embutidas, 20 imagens ≥300 DPI, TAC 11,7%/173,4%,
+  EPUBCheck/Ace). pdfcpu/qpdf/veraPDF e um build novo ainda pendem.
+- **R1080–R1083 autorizadas**, mas não concluídas neste ciclo. O LanguageTool/Vale
+  já produziu evidência inicial; spaCy/BookNLP/NetworkX, Thoth/COMET, áudio/vídeo
+  e o shell do Studio continuam pendentes.
 - A capa 300 DPI foi investigada: a frente é vetorial e pode ser re-renderizada;
   a contracapa precisa de re-layout por proporção incompatível.
 - A edição R1076/R1077 permanece intacta; o EPUB revisado recebeu apenas o
