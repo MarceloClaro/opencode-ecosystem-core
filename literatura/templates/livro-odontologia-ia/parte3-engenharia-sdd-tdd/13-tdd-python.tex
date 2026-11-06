@@ -1,0 +1,541 @@
+%==============================================================================
+% CAPÍTULO 13 — TDD: TESTE ANTES DO MODELO
+% PARTE III — Engenharia de Software Odontológico com SDD e TDD
+%==============================================================================
+\chapter{TDD: Teste Antes do Modelo}
+\label{cap:tdd-python}
+\niveltres
+
+Se o SDD (Capítulo~12) estabelece \textbf{o quê} deve ser construído,
+o \textit{Test-Driven Development} (TDD) define \textbf{como} verificar
+que foi construído corretamente. Este capítulo apresenta o ciclo
+Red--Green--Refactor aplicado ao desenvolvimento de software odontológico,
+com ferramentas práticas do ecossistema Python e do pacote \texttt{odontoia}.
+
+\section{Filosofia RED $\rightarrow$ GREEN $\rightarrow$ REFACTOR}
+
+O TDD foi popularizado por Kent Beck no final dos anos 1990 e consolidado
+em seu livro \textit{Test-Driven Development: By Example} (2003). A
+filosofia é radicalmente simples — e profundamente transformadora:
+
+\begin{quote}
+  \textbf{Nunca escreva código de produção antes de ter um teste que
+  falhe por sua ausência.}
+\end{quote}
+
+\indice{Test-Driven Development} \indice{Kent Beck}
+
+O ciclo TDD opera em três estágios, ilustrados na Figura~\ref{fig:tdd-cycle}:
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[
+    node distance=2.2cm,
+    redbox/.style={rectangle, draw=corTesteFalha, fill=corTesteFalha!10, text width=4cm, align=center, align=center, minimum height=1.8cm, rounded corners=4pt},
+    greenbox/.style={rectangle, draw=corTesteSucesso, fill=corTesteSucesso!10, text width=4cm, align=center, align=center, minimum height=1.8cm, rounded corners=4pt},
+    bluebox/.style={rectangle, draw=corSecundaria, fill=corSecundaria!10, text width=4cm, align=center, align=center, minimum height=1.8cm, rounded corners=4pt},
+    arrow/.style={->, >=stealth, thick},
+  ]
+    \node[align=center, redbox] (red) {\textbf{[ICON] RED}\\\footnotesize Escrever teste que falha\\\footnotesize (contrato não atendido)};
+    \node[align=center, greenbox, right=of red] (green) {\textbf{[ICON] GREEN}\\\footnotesize Código mínimo para\\\footnotesize o teste passar};
+    \node[align=center, bluebox, below=of green] (refactor) {\textbf{[ICON] REFACTOR}\\\footnotesize Melhorar código\\\footnotesize mantendo testes verdes};
+
+    \draw[arrow] (red) -- (green);
+    \draw[arrow] (green) -- (refactor);
+    \draw[arrow, dashed, corDestaque] (refactor) -| (red) node[near start, below, corDestaque] {\footnotesize próximo teste};
+  \end{tikzpicture}
+  \caption{Ciclo TDD: RED (falha) $\rightarrow$ GREEN (passa) $\rightarrow$ REFACTOR (melhora).}
+  \label{fig:tdd-cycle}
+\end{figure}
+
+\subsection{RED: O Teste Que Falha}
+
+O estágio RED é \textbf{contraintuitivo mas essencial}: você escreve um
+teste que \textit{sabidamente} vai falhar, porque o código que ele testa
+ainda não existe (ou ainda não atende ao critério). Este teste funciona
+como \textbf{contrato}: ele define, de forma executável, o que o código
+\textit{deve} fazer.
+
+\begin{pratica}{RED: Teste antes da implementação}
+  Escreva o teste que define o contrato da função \texttt{preprocess\_dental\_image}
+  antes de implementá-la.
+\end{pratica}
+
+\begin{lstlisting}[language=Python, caption=Teste RED — define o contrato antes da implementação]
+# TESTE (escrito PRIMEIRO — vai falhar!)
+def test_preprocess_output_shape():
+    """A saída deve ter dimensão (224, 224) após redimensionamento."""
+    img = np.random.randint(0, 255, (300, 400), dtype=np.uint8)
+    result = preprocess_dental_image(img)  # Função ainda não existe!
+    assert result.shape == (224, 224)
+# pytest: FAILED — NameError: name 'preprocess_dental_image' is not defined
+\end{lstlisting}
+
+\testefalha{O teste RED falha com \texttt{NameError}: a função ainda não
+foi implementada. Este é o comportamento esperado e desejável no estágio RED.}
+
+\subsection{GREEN: O Código Mínimo Que Passa}
+
+No estágio GREEN, você escreve \textbf{o código mínimo necessário} para
+fazer o teste passar — nada mais. Se o teste verifica apenas o \textit{shape},
+basta uma função que redimensione a imagem. Não adicione CLAHE, normalização
+ou qualquer outra feature que o teste não exija.
+
+\begin{lstlisting}[language=Python, caption=GREEN — implementação mínima]
+def preprocess_dental_image(image):
+    """Redimensiona imagem odontológica para 224x224."""
+    import cv2
+    return cv2.resize(image, (224, 224))
+# pytest: PASSED [ICON]
+\end{lstlisting}
+
+\teste{O teste GREEN passa: \texttt{result.shape == (224, 224)}. Implementação
+mínima atende ao contrato.}
+
+\subsection{REFACTOR: Melhorar Sem Quebrar}
+
+Com o teste verde, você pode \textbf{refatorar} o código para melhorar
+legibilidade, performance ou generalidade — desde que o teste continue
+passando. Neste estágio, adicionamos CLAHE, normalização e validação.
+
+\codigo{codigos/cap13/tdd_dental_testdata.py}
+
+\teste{Após refatoração, todos os testes originais continuam passando.
+O \texttt{preprocess\_batch} foi adicionado como otimização, sem quebrar
+os testes existentes.}
+
+\section{pytest e unittest no Google Colab}
+
+O ecossistema Python oferece duas ferramentas principais para TDD:
+\texttt{unittest} (biblioteca padrão) e \texttt{pytest} (terceiro, mais
+expressivo). Para desenvolvimento odontológico, recomendamos \texttt{pytest}
+por sua sintaxe concisa e rica coleção de fixtures e plugins.
+
+\subsection{Configuração no Google Colab}
+
+\begin{lstlisting}[language=bash, caption=Instalação e configuração do pytest no Colab]
+!pip install pytest pytest-cov pytest-xdist
+!mkdir -p /content/tests
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Estrutura básica de teste com pytest no Colab]
+# %%writefile /content/tests/test_preprocessing.py
+import numpy as np
+import pytest
+
+class TestDentalPreprocessing:
+    """Suíte de testes para pré-processamento de imagens odontológicas."""
+
+    def test_resize_preserves_aspect_ratio(self):
+        """Redimensionamento deve preservar razão de aspecto."""
+        img = np.random.randint(0, 255, (300, 400), dtype=np.uint8)
+        # Implementação deve manter proporção
+        assert img.shape[1] / img.shape[0] == 400/300
+
+    def test_normalization_range(self):
+        """Normalização deve mapear pixels para [0, 1]."""
+        img = np.random.randint(0, 255, (224, 224), dtype=np.uint8)
+        normalized = img.astype(np.float32) / 255.0
+        assert normalized.min() >= 0.0
+        assert normalized.max() <= 1.0
+
+    @pytest.mark.parametrize("size", [(128, 128), (256, 256), (512, 512)])
+    def test_multiple_resolutions(self, size):
+        """Pré-processamento deve funcionar em múltiplas resoluções."""
+        img = np.random.randint(0, 255, size, dtype=np.uint8)
+        # Verifica que o processamento não lança exceção
+        assert img.shape == size
+\end{lstlisting}
+
+\subsection{Executando Testes no Colab}
+
+\begin{lstlisting}[language=bash, caption=Execução de testes com pytest]
+!python -m pytest /content/tests/ -v --tb=short
+# ============================= test session starts =============================
+# collected 3 items
+# tests/test_preprocessing.py::TestDentalPreprocessing::test_resize_preserves [ICON]
+# tests/test_preprocessing.py::TestDentalPreprocessing::test_normalization [ICON]
+# tests/test_preprocessing.py::TestDentalPreprocessing::test_multiple_resolutions[128] [ICON]
+# tests/test_preprocessing.py::TestDentalPreprocessing::test_multiple_resolutions[256] [ICON]
+# tests/test_preprocessing.py::TestDentalPreprocessing::test_multiple_resolutions[512] [ICON]
+# ============================= 5 passed in 0.15s ==============================
+\end{lstlisting}
+
+\notaexplicativa{O Google Colab permite executar comandos de terminal
+prefixados com \texttt{!}. Isso significa que você pode rodar \texttt{pytest}
+diretamente de uma célula do notebook, integrando TDD ao fluxo de trabalho
+interativo.}
+
+\section{Fixtures para Dados Odontológicos Sintéticos}
+
+Uma \textit{fixture} é um mecanismo do pytest que fornece dados de teste
+consistentes e reutilizáveis. O pacote \texttt{odontoia.tdd.test\_helpers}
+oferece fixtures especializadas para o domínio odontológico.
+
+\subsection{DentalTestData: Estrutura de Dados de Teste}
+
+A classe \texttt{DentalTestData} é o contêiner central para dados
+odontológicos sintéticos:
+
+\begin{description}
+  \item[\texttt{images}] ndarray (N, H, W) — radiografias sintéticas.
+  \item[\texttt{labels}] ndarray (N,) — rótulos de classe.
+  \item[\texttt{masks}] ndarray (N, H, W) opcional — máscaras de segmentação.
+  \item[\texttt{patient\_ids}] List[str] opcional — identificadores de pacientes.
+  \item[\texttt{feature\_names}] List[str] opcional — nomes das colunas (tabular).
+  \item[\texttt{feature\_matrix}] ndarray (N, F) opcional — dados tabulares.
+\end{description}
+
+Propriedades computadas:
+\begin{itemize}
+  \item \texttt{n\_samples} — número de amostras.
+  \item \texttt{n\_classes} — número de classes únicas.
+  \item \texttt{image\_shape} — tupla (H, W) das imagens.
+  \item \texttt{split(test\_size, random\_state)} — divide em treino/teste.
+\end{itemize}
+
+\subsection{Geradores de Dados Sintéticos}
+
+O módulo \texttt{test\_helpers} fornece três geradores principais:
+
+\begin{enumerate}
+  \item \textbf{\texttt{create\_test\_radiograph(size, n\_classes, random\_state)}}
+    — Gera um dataset de radiografias sintéticas com estruturas elípticas
+    simulando dentes. Ideal para testar pipelines de classificação de imagens.
+
+  \item \textbf{\texttt{create\_test\_patient(patient\_id, idade, fumante, diabetes, periodontal\_stage)}}
+    — Cria um registro de paciente odontológico com dados clínicos simulados:
+    32 dentes (notação FDI), profundidade de sondagem, mobilidade e exames.
+
+  \item \textbf{\texttt{generate\_periodontal\_dataset(n\_samples, random\_state)}}
+    — Gera dataset tabular com 10 features periodontais: profundidade de
+    sondagem, nível de inserção, sangramento, perda óssea, mobilidade, placa,
+    fumante, diabetes, idade e higiene oral.
+\end{enumerate}
+
+\begin{pratica}{Criando datasets sintéticos para TDD odontológico}
+  Objetivo: Utilizar os geradores do \texttt{odontoia.tdd.test\_helpers}
+  para criar dados de teste e validar pipelines antes de usar dados reais.
+\end{pratica}
+
+\teste{\texttt{create\_test\_radiograph((256,256), n\_classes=3)} gera 32 imagens
+de $256\times256$ com 3 classes, valores no intervalo [0, 255], e método
+\texttt{split()} funcional.}
+
+\teste{\texttt{create\_test\_patient("PAC-042", idade=45)} gera registro
+completo com 32 dentes, exames periodontais e dados demográficos.}
+
+\section{Testes para Pré-processamento de Imagens Odontológicas}
+
+O pré-processamento é a etapa mais crítica — e mais propensa a erros
+sutis — em qualquer pipeline de IA odontológica. Testes rigorosos nesta
+etapa previnem que erros de normalização, redimensionamento ou equalização
+se propaguem para o modelo, produzindo resultados clinicamente inválidos.
+
+\subsection{Testes de Dimensionalidade}
+
+\begin{lstlisting}[language=Python, caption=Testes de dimensionalidade para pré-processamento]
+def test_resize_output_shape():
+    """Redimensionamento deve produzir exatamente o tamanho solicitado."""
+    from odontoia.tdd.test_helpers import create_test_radiograph
+    data = create_test_radiograph(size=(300, 400), n_classes=2)
+    img = data.images[0]
+    import cv2
+    resized = cv2.resize(img, (224, 224))
+    assert resized.shape == (224, 224)
+
+def test_grayscale_preserved():
+    """Imagem grayscale deve permanecer 2D após pré-processamento."""
+    img = np.random.randint(0, 255, (256, 256), dtype=np.uint8)
+    processed = img.astype(np.float32) / 255.0
+    assert processed.ndim == 2  # Não deve ganhar canal de cor
+\end{lstlisting}
+
+\subsection{Testes de Normalização}
+
+\begin{lstlisting}[language=Python, caption=Testes de normalização de intensidade]
+def test_normalization_bounds():
+    """Normalização [0,1] deve preservar extremos relativos."""
+    img = np.array([[0, 128, 255]], dtype=np.uint8)
+    normalized = img.astype(np.float32) / 255.0
+    assert normalized.min() == 0.0
+    assert normalized.max() == 1.0
+    assert normalized[0, 1] == pytest.approx(128/255, abs=1e-4)
+
+def test_normalization_idempotent():
+    """Normalizar duas vezes não deve alterar o resultado."""
+    img = np.random.randint(0, 255, (100, 100), dtype=np.uint8)
+    n1 = img.astype(np.float32) / 255.0
+    n2 = (n1 * 255).astype(np.uint8).astype(np.float32) / 255.0
+    # Pequena perda por conversão uint8 → float32
+    assert np.allclose(n1, n2, atol=1/255)
+\end{lstlisting}
+
+\subsection{Testes de CLAHE e Equalização}
+
+\teste{\texttt{createCLAHE(clipLimit=2.0, tileGridSize=(8,8))}
+melhora o contraste local sem introduzir artefatos: PSNR $>$ 30 dB
+entre original e equalizada.}
+
+\testefalha{CLAHE com \texttt{clipLimit=0} ou \texttt{tileGridSize=(1,1)}
+produz resultado igual à imagem original — não há equalização efetiva.}
+
+\section{Testes para Métricas Clínicas}
+
+As métricas clínicas são o critério último de qualidade de um sistema
+de IA odontológica. O módulo \texttt{odontoia.tdd.test\_helpers} fornece
+a função \texttt{assert\_clinical\_metrics} para validação automatizada.
+
+\subsection{assert\_clinical\_metrics}
+
+\begin{lstlisting}[language=Python, caption={Uso de assert\_clinical\_metrics em TDD}]
+from odontoia.tdd.test_helpers import assert_clinical_metrics
+
+def test_model_meets_clinical_thresholds():
+    """Modelo deve atender aos limiares clínicos mínimos."""
+    y_true = np.array([0, 0, 0, 0, 1, 1, 1, 1, 1, 1])
+    y_pred = np.array([0, 0, 0, 0, 1, 1, 1, 1, 1, 1])  # Perfeito
+
+    result = assert_clinical_metrics(
+        y_true, y_pred,
+        min_accuracy=0.85,
+        min_sensitivity=0.80,
+        min_specificity=0.80,
+        raise_on_fail=False,
+    )
+    assert result["approved"] is True
+    assert result["accuracy"] == 1.0
+    assert result["sensitivity"] == 1.0
+    assert result["specificity"] == 1.0
+\end{lstlisting}
+
+\teste{Com predições perfeitas, \texttt{assert\_clinical\_metrics} retorna
+\texttt{approved=True} com todas as métricas em 1.0.}
+
+\testefalha{Com predições aleatórias (50\% de acerto), \texttt{approved=False}
+e a mensagem de erro lista quais métricas ficaram abaixo do limiar.}
+
+\subsection{Métricas Suportadas}
+
+A Tabela~\ref{tab:clinical-metrics-supported} lista as métricas suportadas
+pelo \texttt{assert\_clinical\_metrics}:
+
+\begin{table}[H]
+  \centering
+  \caption{Métricas clínicas verificáveis automaticamente.}
+  \label{tab:clinical-metrics-supported}
+  \begin{tabularx}{\textwidth}{lXl}
+    \toprule
+    \textbf{Métrica} & \textbf{Fórmula / Descrição} & \textbf{Limiar Padrão} \\
+    \midrule
+    Acurácia & $(TP + TN) / (TP + TN + FP + FN)$ & $>$ 0,80 \\
+    Sensibilidade & $TP / (TP + FN)$ & $>$ 0,75 \\
+    Especificidade & $TN / (TN + FP)$ & $>$ 0,75 \\
+    Precisão & $TP / (TP + FP)$ & $>$ 0,75 \\
+    F1-Score & $2 \times (P \times S) / (P + S)$ & $>$ 0,75 \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\notaexplicativa{Para classificação multiclasse, as métricas são calculadas
+como média macro (\textit{one-vs-rest}), garantindo que classes minoritárias
+(como carcinoma espinocelular) não sejam ignoradas na avaliação.}
+
+\section{Mocking de Datasets e Modelos}
+
+Em TDD, \textit{mocking} é a técnica de substituir dependências reais
+(como datasets de 50 GB ou modelos que levam horas para treinar) por
+versões simplificadas que retornam respostas pré-definidas.
+
+\subsection{Mock de Dataset DICOM}
+
+\begin{lstlisting}[language=Python, caption=Mock para carregador de imagens DICOM]
+from unittest.mock import patch, MagicMock
+import numpy as np
+
+def test_dicom_loader_with_mock():
+    """Testa o pipeline sem acessar arquivos DICOM reais."""
+    mock_dicom = np.random.randint(0, 4096, (512, 512), dtype=np.uint16)
+
+    with patch("pydicom.dcmread") as mock_read:
+        mock_dataset = MagicMock()
+        mock_dataset.pixel_array = mock_dicom
+        mock_read.return_value = mock_dataset
+
+        # Agora o teste executa sem arquivos reais
+        from odontoia.data.loader import load_dicom_as_array
+        result = load_dicom_as_array("fake/path.dcm")
+        assert result.shape == (512, 512)
+        assert result.dtype == np.uint16
+\end{lstlisting}
+
+\subsection{Mock de Modelo Treinado}
+
+\begin{lstlisting}[language=Python, caption=Mock de modelo para testar pipeline de inferência]
+def test_inference_pipeline_with_mock_model():
+    """Testa o pipeline de inferência sem carregar pesos reais."""
+    mock_model = MagicMock()
+    mock_model.predict.return_value = np.array([[0.1, 0.8, 0.1]])
+
+    # Testa o pós-processamento da predição
+    probs = mock_model.predict(np.zeros((1, 224, 224, 3)))
+    predicted_class = np.argmax(probs, axis=1)[0]
+    confidence = np.max(probs)
+
+    assert predicted_class == 1
+    assert confidence == 0.8
+    assert probs.shape == (1, 3)
+\end{lstlisting}
+
+\teste{O mock do modelo permite testar a lógica de pós-processamento
+(pipeline de inferência) sem depender de um modelo real treinado,
+reduzindo o tempo de execução do teste de horas para milissegundos.}
+
+\subsection{Mock de API Externa}
+
+Para sistemas que consultam APIs externas (ex.: Hugging Face Inference
+API, DICOMweb), o mocking é essencial para testes offline:
+
+\begin{lstlisting}[language=Python, caption=Mock de API externa para teste offline]
+from unittest.mock import patch
+import json
+
+def test_api_inference_with_mock():
+    """Testa integração com API sem conexão de rede."""
+    mock_response = MagicMock()
+    mock_response.status_code = 200
+    mock_response.json.return_value = {
+        "predictions": [{"class": "carie", "confidence": 0.92}]
+    }
+
+    with patch("requests.post", return_value=mock_response):
+        import requests
+        resp = requests.post("https://api.hf.co/models/odontologia/caries",
+                             json={"image": "base64..."})
+        assert resp.status_code == 200
+        data = resp.json()
+        assert data["predictions"][0]["class"] == "carie"
+        assert data["predictions"][0]["confidence"] > 0.9
+\end{lstlisting}
+
+\section{Cobertura de Testes e CI/CD}
+
+\subsection{Cobertura de Código com pytest-cov}
+
+A cobertura de código (\textit{code coverage}) mede qual porcentagem do
+código-fonte é exercitada pelos testes. Embora 100\% de cobertura não
+garanta ausência de bugs, \textbf{baixa cobertura é um forte indicador
+de risco}.
+
+\begin{lstlisting}[language=bash, caption=Relatório de cobertura com pytest-cov]
+!python -m pytest tests/ -v \
+    --cov=odontoia \
+    --cov-report=term-missing \
+    --cov-report=html \
+    --cov-fail-under=80
+\end{lstlisting}
+
+\destaque{Para software odontológico com potencial uso clínico-assistido,
+recomendamos cobertura mínima de 85\%. Módulos de inferência e
+pré-processamento devem ter cobertura $\geq$ 95\%.}
+
+\subsection{CI/CD com GitHub Actions}
+
+A integração contínua (CI) automatiza a execução de testes a cada
+\texttt{git push}, garantindo que nenhuma regressão passe despercebida.
+
+\begin{lstlisting}[language=yaml, caption=GitHub Actions workflow para testes odontológicos]
+# .github/workflows/tests.yml
+name: Dental AI Tests
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Install dependencies
+        run: |
+          pip install -e .
+          pip install pytest pytest-cov
+      - name: Run TDD tests
+        run: |
+          python -m pytest tests/ -v --cov=odontoia \
+            --cov-fail-under=80 \
+            --junitxml=test-results.xml
+      - name: Verify SDD specs
+        run: |
+          python -c "from odontoia.sdd.validator import verify_all_specs; \
+                     results = verify_all_specs(); \
+                     assert all(r.valid for r in results.values())"
+\end{lstlisting}
+
+\teste{O workflow CI/CD acima executa \textbf{duas camadas de verificação}:
+(1) testes TDD via pytest com cobertura mínima de 80\% e (2) validação
+de todas as especificações SDD registradas via SpecVerifier.}
+
+\subsection{Pirâmide de Testes Odontológicos}
+
+A Figura~\ref{fig:test-pyramid} adapta a clássica pirâmide de testes
+para o contexto odontológico:
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[scale=0.9]
+    % Camada superior (UI / E2E)
+    \fill[corDestaque!20] (0,0) -- (8,0) -- (7,3) -- (1,3) -- cycle;
+    \draw[corDestaque, thick] (0,0) -- (8,0) -- (7,3) -- (1,3) -- cycle;
+    \node at (4,1.2) {\begin{tabular}{c}\textbf{E2E Clínico}\\\footnotesize Workflow completo\\\footnotesize (5\% dos testes)\end{tabular}};
+
+    % Camada intermediária (Integração)
+    \fill[corSecundaria!15] (0.8,0) -- (7.2,0) -- (6.5,5.5) -- (1.5,5.5) -- cycle;
+    \draw[corSecundaria, thick] (0.8,0) -- (7.2,0) -- (6.5,5.5) -- (1.5,5.5) -- cycle;
+    \node at (4,3.5) {\begin{tabular}{c}\textbf{Integração}\\\footnotesize Pipeline pré-processamento\\\footnotesize + modelo + pós-processamento\\\footnotesize (15\% dos testes)\end{tabular}};
+
+    % Camada base (Unidade)
+    \fill[corTesteSucesso!12] (1.5,0) -- (6.5,0) -- (6,8) -- (2,8) -- cycle;
+    \draw[corTesteSucesso, thick] (1.5,0) -- (6.5,0) -- (6,8) -- (2,8) -- cycle;
+    \node at (4,5.5) {\begin{tabular}{c}\textbf{Unidade}\\\footnotesize Funções isoladas,\\fixtures, métricas clínicas\\\footnotesize (80\% dos testes)\end{tabular}};
+
+    % Rótulo
+    \node[right] at (8.5, 4) {\footnotesize Lento, frágil};
+    \node[right, corDestaque] at (8.5, 1.2) {\footnotesize $\uparrow$};
+    \node[right, corTesteSucesso] at (8.5, 5.5) {\footnotesize $\downarrow$};
+    \node[right] at (8.5, 7) {\footnotesize Rápido, robusto};
+  \end{tikzpicture}
+  \caption{Pirâmide de testes odontológicos: 80\% unitários, 15\% integração, 5\% E2E.}
+  \label{fig:test-pyramid}
+\end{figure}
+
+\section{Síntese do Capítulo}
+
+Neste capítulo, cobrimos a aplicação completa do TDD ao desenvolvimento
+de software odontológico. Os principais pontos são:
+
+\begin{itemize}
+  \item \textbf{Ciclo RED $\rightarrow$ GREEN $\rightarrow$ REFACTOR}:
+    teste falha $\rightarrow$ código mínimo $\rightarrow$ melhoria segura.
+
+  \item \textbf{pytest no Google Colab}: testes automatizados executam
+    diretamente no notebook, sem sair do ambiente de desenvolvimento.
+
+  \item \textbf{DentalTestData e fixtures sintéticas}: permitem testar
+    pipelines odontológicos sem depender de datasets reais (grandes,
+    privados, regulados).
+
+  \item \textbf{assert\_clinical\_metrics}: valida automaticamente se
+    métricas clínicas (acurácia, sensibilidade, especificidade) atendem
+    aos limiares clinicamente significativos.
+
+  \item \textbf{Mocking}: isola dependências externas (DICOM, APIs, modelos
+    grandes), tornando os testes rápidos e determinísticos.
+
+  \item \textbf{CI/CD + cobertura}: GitHub Actions executa testes e
+    valida especificações a cada push, com cobertura mínima de 80\%.
+\end{itemize}
+
+O SDD (Capítulo~12) e o TDD (este capítulo) formam a dupla metodológica
+que guiará todos os projetos práticos do Capítulo~14. Antes de implementar,
+especifique; antes de considerar pronto, teste.

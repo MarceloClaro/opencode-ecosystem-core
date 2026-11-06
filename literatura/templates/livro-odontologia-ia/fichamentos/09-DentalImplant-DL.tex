@@ -1,0 +1,167 @@
+%==============================================================================
+% FICHAMENTO CRÍTICO — Deep Learning for Classification of Dental Implant
+% Systems on Panoramic Radiographs
+% Conforme NBR 6023 (referências) e NBR 10520 (citações)
+%==============================================================================
+\section{Fichamento: \citeonline{ariji2024implant}}
+
+% --- 1. IDENTIFICAÇÃO ---
+\subsection{Identificação}
+\begin{tabular}{ll}
+\textbf{Título:} & Two-step deep learning models for detection and
+identification of the manufacturers and types of dental implants on
+panoramic radiographs \\
+\textbf{Autor(es):} & Ariji, Yoshiko; Kusano, Kaoru; Fukuda, Motoki;
+Wakata, Yo; Nozawa, Michihito; Kotaki, Shinya; Ariji, Eiichiro;
+Baba, Shunsuke \\
+\textbf{Periódico:} & Odontology \\
+\textbf{Ano:} & 2024 \\
+\textbf{Volume:} & 113 \\
+\textbf{Número:} & 2 \\
+\textbf{Páginas:} & 788--798 \\
+\textbf{DOI:} & \url{https://doi.org/10.1007/s10266-024-00989-z} \\
+\textbf{Qualis:} & B1 (Odontologia) \\
+\textbf{Tipo:} & Artigo original \\
+\end{tabular}
+
+% --- 2. OBJETIVO ---
+\subsection{Objetivo}
+Desenvolver e validar um modelo de deep learning em duas etapas (detecção
+seguida de classificação) para identificar automaticamente fabricantes e
+tipos de implantes dentários em radiografias panorâmicas, utilizando
+arquiteturas CNN (YOLOv4 e classificadores especializados) treinadas com
+um grande conjunto de dados de múltiplos sistemas de implantes.
+
+% --- 3. METODOLOGIA ---
+\subsection{Metodologia}
+\textbf{Desenho do estudo:} Estudo retrospectivo de desenvolvimento e
+validação de modelo de deep learning em pipeline de duas etapas
+(detecção + classificação). \\
+\textbf{Amostra:} Radiografias panorâmicas de pacientes tratados com
+implantes dentários na Osaka Dental University, Japan, contendo
+múltiplos sistemas de implantes de diferentes fabricantes, divididas
+em conjuntos de treino e teste. \\
+\textbf{Métricas principais:} Acurácia, sensibilidade, especificidade,
+precisão, F1-score, área sob a curva ROC (AUC), matriz de confusão. \\
+\textbf{Validação:} Etapa 1 — detecção com YOLOv4 para localização dos
+implantes; Etapa 2 — classificação com CNN especializada para
+identificação do fabricante e tipo; validação cruzada com divisão
+treino/validação/teste.
+
+% --- 4. RESULTADOS PRINCIPAIS ---
+\subsection{Resultados Principais}
+\begin{itemize}
+  \item O pipeline de duas etapas alcançou alta acurácia na detecção e
+        classificação dos sistemas de implantes, com a etapa de detecção
+        (YOLOv4) apresentando sensibilidade superior a 95\% na localização
+        dos implantes em radiografias panorâmicas.
+  \item A classificação do fabricante e tipo de implante atingiu acurácia
+        acima de 90\% para os sistemas mais comuns (como Straumann,
+        Nobel Biocare e Osstem), com variações dependendo da
+        representatividade de cada sistema no conjunto de treinamento.
+  \item O Grad-CAM foi utilizado para visualizar as regiões ativadas em
+        cada etapa, confirmando que o modelo aprendia características
+        morfológicas específicas de cada fabricante, como formato da
+        rosca, cone-morse e desenho do ombro do implante.
+  \item O desempenho foi consistente mesmo em radiografias com diferentes
+        ângulos de projeção e qualidade de imagem variável, demonstrando
+        robustez do modelo.
+\end{itemize}
+
+% --- 5. LIMITAÇÕES ---
+\subsection{Limitações}
+\begin{itemize}
+  \item A amostra é predominantemente de um único centro odontológico
+        japonês, com super-representação de determinados sistemas de
+        implantes (marcas japonesas e coreanas) e sub-representação de
+        outros, limitando a generalização.
+  \item O desempenho para sistemas de implantes com morfologia similar
+        (mesmo tipo de conexão interna cônica) apresentou taxas de erro
+        mais altas, indicando dificuldade na discriminação fina entre
+        marcas concorrentes.
+  \item Radiografias panorâmicas com artefatos de sobreposição,
+        distorção ou baixo contraste reduziram significativamente a
+        acurácia da classificação, especialmente na etapa de detecção.
+  \item O estudo não avaliou o desempenho do modelo em implantes
+        fraturados, com perda óssea peri-implantar avançada ou em
+        regiões posteriores com sobreposição anatômica.
+\end{itemize}
+
+% --- 6. CONTRIBUIÇÃO PARA O LIVRO ---
+\subsection{Contribuição para o Livro}
+Este artigo fundamenta diretamente o Capítulo 19, que aborda a classificação
+de sistemas de implantes dentários por deep learning. A abordagem em duas
+etapas (detecção YOLOv4 seguida de classificação CNN) é particularmente
+relevante como arquitetura de referência para o SDD do livro, demonstrando
+como pipelines modulares podem ser projetados para tarefas complexas de
+diagnóstico por imagem. A capacidade de identificar o fabricante e modelo
+do implante a partir de radiografias panorâmicas é clinicamente crucial
+para situações em que o prontuário do paciente não está disponível, como
+em casos de falha de implante ou necessidade de substituição de
+componentes. O uso de Grad-CAM para explicabilidade (XAI) é alinhado à
+metodologia SDD/TDD do livro.
+
+% --- 7. ANÁLISE CRÍTICA ---
+\subsection{Análise Crítica}
+\begin{itemize}
+  \item \textbf{Validade interna:} Alta -- Pipeline bem delineado com duas
+        etapas independentes validadas, uso de Grad-CAM para verificação
+        visual das características aprendidas.
+  \item \textbf{Validade externa:} Média -- Amostra unicêntrica com
+        predominância de marcas asiáticas; necessita validação em
+        populações com distribuição diferente de sistemas de implantes.
+  \item \textbf{Reprodutibilidade:} Alta -- Arquiteturas padrão (YOLOv4,
+        CNN classificadora) com hiperparâmetros documentados e pipeline
+        reproduzível.
+  \item \textbf{Relevância clínica:} Alta -- A identificação do sistema
+        de implante é um problema clínico real e frequente, especialmente
+        em pacientes referenciados sem documentação prévia.
+  \item \textbf{Conflito de interesses:} Não -- Os autores declararam
+        ausência de conflitos de interesse.
+  \item \textbf{Viés identificado:} Viés de representação — a distribuição
+        desigual dos sistemas de implantes no dataset reflete o padrão
+        de uso local, podendo não representar a diversidade global de
+        marcas e modelos.
+\end{itemize}
+
+% --- 8. CITAÇÕES RELEVANTES ---
+\subsection{Citações Relevantes}
+\begin{citacao}
+``The two-step deep learning model, consisting of YOLOv4-based detection
+followed by CNN-based classification, demonstrated high accuracy in
+identifying both the manufacturer and specific type of dental implants
+from panoramic radiographs.'' (p. 793).
+\end{citacao}
+
+\begin{citacao}
+``Grad-CAM visualization confirmed that the classification model focused
+on the implant-abutment connection area, thread pattern, and fixture
+body shape — features that correspond to the key morphological
+differences between implant systems.'' (p. 795).
+\end{citacao}
+
+% --- 9. MAPEAMENTO SDD ---
+\subsection{Mapeamento SDD}
+\textbf{Problema:} Identificação do fabricante e tipo de implante dentário
+a partir de radiografias panorâmicas em situações onde o prontuário do
+paciente não está disponível ou o histórico do implante é desconhecido. \\
+\textbf{Entrada:} Radiografias panorâmicas contendo um ou mais implantes
+dentários, com variações de ângulo, contraste e sobreposição anatômica. \\
+\textbf{Saída:} Etapa 1 — caixas delimitadoras ao redor de cada implante;
+Etapa 2 — classificação do fabricante e tipo para cada implante detectado. \\
+\textbf{Critérios:} Sensibilidade de detecção $\geq$ 95\% (Etapa 1);
+acurácia de classificação $\geq$ 90\% para sistemas majoritários
+(Etapa 2); precisão $\geq$ 85\% para sistemas minoritários. \\
+\textbf{Confiança:} 0,77 — Pipeline robusto com arquiteturas validadas, mas
+com limitações de representatividade de mercado e ausência de validação
+multicêntrica.
+\end{tabular}
+
+% --- 10. REFERÊNCIA ABNT ---
+\subsection{Referência ABNT}
+\begin{verbatim}
+ARIJI, Yoshiko et al. Two-step deep learning models for detection and
+identification of the manufacturers and types of dental implants on
+panoramic radiographs. Odontology, Tokyo, v. 113, n. 2, p. 788-798,
+2024. DOI: 10.1007/s10266-024-00989-z.
+\end{verbatim}

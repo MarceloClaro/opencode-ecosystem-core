@@ -47,26 +47,39 @@ de um agente, usando nomes atuais do catálogo. Esse filtro segue a
 
 ## Instalação identificada
 
-- Origem: [MarceloClaro/rea](https://github.com/MarceloClaro/rea).
-- Commit: `4daea941bfeeb426886f2d048aed7f3cb2dbf97b`.
-- Pacote: `rea-agents` 6.4.0; licença MIT preservada.
-- Runtime padrão: `~/.local/share/opencode-core/rea`.
-- Neste host: Node.js 22.23.1, npm 10.9.8; build a partir do checkout indicado.
-- Outra instalação: definir `REA_SOURCE_DIR` com caminho absoluto do checkout
-  compilado e `REA_NODE_BIN` se necessário para selecionar Node compatível.
+- Origem preferencial: [morluto/rea](https://github.com/morluto/rea), upstream
+  oficial do pacote `rea-agents`.
+- Tag: `rea-agents-6.8.0`; commit `160d821ac9a0310afcb8d1fc427862dd6508add5`.
+- Pacote: `rea-agents` 6.8.0; licença MIT preservada.
+- Runtime preferencial: `~/.local/share/opencode-core/rea-6.8.0`, com o tarball
+  npm e dependências de produção.
+- Fallback preservado: `~/.local/share/opencode-core/rea`, fork
+  [MarceloClaro/rea](https://github.com/MarceloClaro/rea) 6.4.0, commit
+  `4daea941bfeeb426886f2d048aed7f3cb2dbf97b`.
+- Neste host: Node.js 22.23.1, npm 10.9.8. O upstream declara
+  `^22.23.4 || ^24.22.1 || >=26.12.1`; a versão 6.8.0 foi testada com
+  22.23.1, mas o runtime ideal é um Node que satisfaça o campo `engines`.
+- Seleção: `REA_SOURCE_DIR` tem precedência; sem ele, a ponte prefere
+  `rea-6.8.0` e usa `rea` como fallback. `REA_NODE_BIN` escolhe outro Node.
 
-Para reproduzir em outro host com Node suportado, use um diretório novo:
+Para reproduzir em outro host com Node suportado:
 
 ```bash
-mkdir -p ~/.local/share/opencode-core
-git clone https://github.com/MarceloClaro/rea.git ~/.local/share/opencode-core/rea
-cd ~/.local/share/opencode-core/rea
-git checkout 4daea941bfeeb426886f2d048aed7f3cb2dbf97b
-npm ci
-npm run build:cached
+mkdir -p /tmp/rea-install ~/.local/share/opencode-core/rea-6.8.0
+cd /tmp/rea-install
+npm pack rea-agents@6.8.0
+tar -xzf rea-agents-6.8.0.tgz
+cp -a package/. ~/.local/share/opencode-core/rea-6.8.0/
+cd ~/.local/share/opencode-core/rea-6.8.0
+npm install --omit=dev --ignore-scripts --legacy-peer-deps --package-lock=false
 cd /caminho/para/opencode-ecosystem-core
 python3 -m integrations.opencode_cli
 ```
+
+O `--legacy-peer-deps` evita um erro do Arborist/npm 10 ao resolver peers
+deste pacote; com npm 11.16.0 (declarado em `packageManager`) a instalação
+normal deve funcionar. O pacote npm já traz `dist/`; não é necessário compilar
+TypeScript no host.
 
 Reinicie ou reconecte o OpenCode após modificar seus servidores MCP.
 Nenhum setup global de Codex, Claude ou Antigravity é necessário à ponte

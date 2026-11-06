@@ -1,0 +1,103 @@
+% =============================================================================
+% CAPA COMPLETA COM LOMBADA E SANGRIA — MOLAMBUDOS
+% Especificação Técnica de Impressão (Print-on-Demand / Capa Dura & Brochura)
+% Dimensões Totais: 14.728in x 10.417in | Lombada: 1.154in | Capa Frontal: 6.197in
+% =============================================================================
+
+\documentclass[12pt]{article}
+
+% --- Geometria estrita da capa total (14.728in x 10.417in) ---
+\usepackage[
+  paperwidth=14.728in,
+  paperheight=10.417in,
+  margin=0in
+]{geometry}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[brazilian]{babel}
+\usepackage{ebgaramond}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+\pagestyle{empty}
+
+% --- Cores da Identidade Visual ---
+\definecolor{fundoescuro}{HTML}{1A1410}
+\definecolor{sepiabg}{HTML}{F2E8CF}
+\definecolor{customgold}{HTML}{CBA135}
+\definecolor{sangue}{HTML}{8B0000}
+\definecolor{textwhite}{HTML}{F5F0EB}
+
+\begin{document}
+
+\begin{tikzpicture}[remember picture, overlay, x=1in, y=1in]
+  % ---------------------------------------------------------------------------
+  % 1. FUNDO INTEGRAL (Sangria + Wrap: 14.728in x 10.417in)
+  % ---------------------------------------------------------------------------
+  \fill[fundoescuro] (current page.south west) rectangle (current page.north east);
+
+  % ---------------------------------------------------------------------------
+  % 2. QUARTA CAPA / CONTRACAPA (X: 0.591in a 6.788in, Largura: 6.197in)
+  % ---------------------------------------------------------------------------
+  \node[anchor=south west, inner sep=0pt] at (0.591, 0.591) {%
+    \includegraphics[width=6.197in, height=9.236in, keepaspectratio=true]{frontmatter/contracapa.png}%
+  };
+
+  % --- Caixa do Código de Barras (Margem mínima KDP: 0.375in da borda de corte) ---
+  \node[anchor=south east, fill=white, inner sep=4pt] at (6.538, 0.966) {%
+    \begin{tabular}{c}
+      {\color{black}\sffamily\bfseries\tiny ISBN: 9798189170492}\\[0.1em]
+      \rule{1.8in}{0.5in}\\[0.1em]
+      {\color{black}\sffamily\tiny 9 798189 170492}%
+    \end{tabular}%
+  };
+
+  % ---------------------------------------------------------------------------
+  % 3. LOMBADA / SPINE (X: 6.788in a 7.942in, Largura: 1.154in, Centro X: 7.365in)
+  % ---------------------------------------------------------------------------
+  % Fundo da Lombada
+  \fill[fundoescuro!95!black] (6.788, 0.591) rectangle (7.942, 9.827);
+
+  % Guias sutis da Área Segura da Lombada (1.029in x 8.986in)
+  \draw[customgold!30, dashed, line width=0.4pt] (6.8505, 0.7155) rectangle (7.8795, 9.7015);
+
+  % Conteúdo da Lombada Rotacionado (-90 graus: Topo para Base)
+  \node[anchor=center, rotate=-90] at (7.365, 5.209) {%
+    \begin{minipage}{8.0in}
+      \centering
+      {\color{customgold}\fontfamily{ebgaramond}\selectfont\bfseries\Large MOLAMBUDOS}
+      \hspace{0.8em}{\color{textwhite}\small\textbullet}\hspace{0.8em}
+      {\color{textwhite}\fontfamily{ebgaramond}\selectfont\itshape\small O Diário do Paciente 1.260}
+      \hspace{1.5em}
+      {\color{customgold!80}\fontfamily{ebgaramond}\selectfont\scriptsize Marcelo Dias de Carvalho Filho \& Marcelo Claro}
+    \end{minipage}%
+  };
+
+  % Logomarca na Base da Lombada
+  \node[anchor=south] at (7.365, 0.85) {%
+    \includegraphics[width=0.45in]{frontmatter/logo-white.png}%
+  };
+
+  % ---------------------------------------------------------------------------
+  % 4. CAPA FRONTAL / FRONT COVER (X: 7.942in a 14.139in, Largura: 6.197in)
+  % ---------------------------------------------------------------------------
+  \node[anchor=south west, inner sep=0pt] at (7.942, 0.591) {%
+    \includegraphics[width=6.197in, height=9.236in, keepaspectratio=true]{frontmatter/capa.png}%
+  };
+
+  % ---------------------------------------------------------------------------
+  % 5. GUIA TÉCNICA DE CORTE E SANGRIA (Linhas de Dobra e Hinge)
+  % ---------------------------------------------------------------------------
+  % Linha de Sangria Externa (Wrap 0.591in)
+  \draw[white!20, dotted, line width=0.3pt] (0.591, 0.591) rectangle (14.139, 9.827);
+
+  % Linhas de Dobradura da Lombada (Spine Hinges: 0.394in)
+  \draw[customgold!50, dotted, line width=0.5pt] (6.788, 0) -- (6.788, 10.417);
+  \draw[customgold!50, dotted, line width=0.5pt] (7.942, 0) -- (7.942, 10.417);
+
+\end{tikzpicture}
+
+\end{document}

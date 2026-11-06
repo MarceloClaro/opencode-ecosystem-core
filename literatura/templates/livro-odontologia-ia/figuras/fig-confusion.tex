@@ -1,0 +1,39 @@
+% ======================================================================
+% FIGURA: Matriz de Confusão para Classificação de Cárie (Capítulo 7/9)
+% ======================================================================
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.9]
+% Grid da matriz de confusão
+\fill[codegreen!20] (0,0) rectangle (2,2);
+\fill[red!20] (2,0) rectangle (4,2);
+\fill[red!20] (0,-2) rectangle (2,0);
+\fill[codegreen!20] (2,-2) rectangle (4,0);
+
+% Linhas da grade
+\draw[thick] (0,-2) -- (4,-2) -- (4,2) -- (0,2) -- cycle;
+\draw (2,-2) -- (2,2);
+\draw (0,0) -- (4,0);
+
+% Labels
+\node[font=\large\bfseries] at (1,1) {VP\\85};
+\node[font=\large] at (3,1) {FP\\12};
+\node[font=\large] at (1,-1) {FN\\8};
+\node[font=\large\bfseries] at (3,-1) {VN\\95};
+
+% Eixos
+\node[font=\footnotesize] at (2,2.5) {\textbf{Real: Cárie}};
+\node[font=\footnotesize] at (2,-2.8) {\textbf{Real: Sem Cárie}};
+\node[font=\footnotesize, rotate=90] at (-1,1) {\textbf{Pred: Cárie}};
+\node[font=\footnotesize, rotate=90] at (-1,-1) {\textbf{Pred: Sem Cárie}};
+
+% Métricas
+\node[font=\small, anchor=west] at (5,1.5) {Sensibilidade: $\frac{85}{93}=0.914$};
+\node[font=\small, anchor=west] at (5,0.5) {Especificidade: $\frac{95}{107}=0.888$};
+\node[font=\small, anchor=west] at (5,-0.5) {Acurácia: $\frac{180}{200}=0.900$};
+\node[font=\small\bfseries, anchor=west] at (5,-1.5) {F1-Score: $0.895$};
+
+\end{tikzpicture}
+\caption{Matriz de confusão ilustrativa para um classificador de cárie dentária (Rohban et al., 2024). VP=Verdadeiro Positivo, FP=Falso Positivo, FN=Falso Negativo, VN=Verdadeiro Negativo. A diagonal principal (verde) representa acertos; a diagonal secundária (vermelho) representa erros.}
+\label{fig:confusion-matrix}
+\end{figure}

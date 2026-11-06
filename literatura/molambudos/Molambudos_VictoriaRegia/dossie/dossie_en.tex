@@ -1,0 +1,510 @@
+% =============================================================================
+% STUDY DOSSIER — MOLAMBUDOS: THE DIARY OF PATIENT 1,260
+% Critical apparatus. NOT part of the fiction; not to be bound with the book.
+% =============================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{ebgaramond}
+\usepackage[margin=2.6cm]{geometry}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{sangue}{HTML}{8B0000}
+\definecolor{tinta}{HTML}{2E241A}
+\titleformat{\section}{\Large\bfseries\color{sangue}}{\thesection}{0.7em}{}
+\titleformat{\subsection}{\large\bfseries\color{tinta}}{\thesubsection}{0.7em}{}
+\setlist{itemsep=0.25em, topsep=0.35em}
+
+\newcommand{\caveat}[1]{%
+  \par\vspace{0.5em}\noindent\fcolorbox{sangue!40}{sangue!4}{%
+  \parbox{0.965\linewidth}{\small\textbf{Methodological caveat.} #1}}\par\vspace{0.5em}}
+
+\title{\vspace{-1.5cm}\textbf{Molambudos --- The Diary of Patient 1,260}\\[0.3em]
+\large Study dossier: literary project, techniques, theory, limits}
+\author{\small Critical apparatus to the trilingual edition}
+\date{\small 5 August 2026}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+\begin{abstract}
+\noindent This dossier describes and analyses \textit{Molambudos --- The Diary
+of Patient 1,260}, an archive-novel built as printed hypertext and issued in
+three language editions plus a trilingual one. It gathers the work's measured
+technical record, its formal architecture, the literary lineage it belongs to,
+the narrative techniques it deploys, the theoretical frameworks it mobilises,
+its historical basis, and a critical analysis that includes verified
+limitations. This is a study apparatus, not promotional copy: sections
+\ref{sec:limits} and \ref{sec:validation} exist to state what the work has
+\textit{not} achieved and what has \textit{not} been externally validated.
+\end{abstract}
+
+\caveat{Every figure in this dossier was measured against the work's source
+files on 2026-08-05, not estimated. Where a claim is interpretive, the text
+says so. Where a claim would require external validation that does not exist
+--- reception, impact, comparative merit --- the dossier abstains rather than
+guesses. See \S\ref{sec:validation}.}
+
+% =============================================================================
+\section{Technical record}
+
+\begin{center}\small
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Title} & Molambudos --- The Diary of Patient 1,260 \\
+\textbf{Author} & Marcelo Dias de Carvalho Filho \\
+\textbf{Co-author and illustrator} & Marcelo Claro \\
+\textbf{ISBN} & 9798189170492 \\
+\textbf{Genre} & Archive-novel; documentary psychological horror \\
+\textbf{Form} & Printed hypertext, 84 fragments, 216 reading routes \\
+\textbf{Languages} & Portuguese (BR), English, Simplified Chinese \\
+\textbf{Print format} & 160 $\times$ 230 mm, paperback \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.6em}
+\noindent\textbf{Measured extent by edition}
+
+\begin{center}\small
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+\textbf{Edition} & \textbf{Digital} & \textbf{Print 160$\times$230} & \textbf{Words} \\
+\midrule
+Portuguese & 415 pp. & 435 pp. & 43,730 \\
+English    & 411 pp. & 427 pp. & 44,978 \\
+Chinese    & 387 pp. & 397 pp. & 70,750 characters \\
+Trilingual & 1,061 pp. & 1,115 pp. & --- \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\small Word counts are not comparable between Chinese and Western
+languages; for Chinese the character count is given, which is the usual metric.
+
+% =============================================================================
+\section{The literary project}
+
+\textit{Molambudos} presents itself as a \textbf{forensic archive}, not as a
+novel. The reader receives 84 fragments --- memories, medical reports,
+letters, audio transcripts, clinical forms --- assembled by an anonymous
+archivist around a single object: the diary of Joaquim Antônio Correia,
+registered at the Barbacena Colony Hospital under the number 1,260.
+
+The declared project, legible in both structure and paratext, has three
+movements:
+
+\begin{enumerate}
+\item \textbf{Recovering a buried history.} The Barbacena Colony existed;
+across the twentieth century, historiography estimates that tens of thousands
+of people died within its walls, many with no psychiatric diagnosis at all.
+The work is built on that ground.
+
+\item \textbf{Making form carry the argument.} Fragmentation is not ornament:
+it enacts the impossibility of reconstructing a life from documentary
+remains. The reader must assemble the case, and the assembly is always partial.
+
+\item \textbf{Implicating the reader.} The work refuses the spectator
+position. An entire family of fragments (CONT) addresses the reader in the
+second person and inscribes them in the chain of transmission as
+\textbf{Patient 1,263}.
+\end{enumerate}
+
+\subsection{The chain of transmission}
+
+The central device is a numbered queue of occupied bodies:
+
+\begin{center}\small
+\begin{tabular}{@{}cll@{}}
+\toprule
+\textbf{No.} & \textbf{Who} & \textbf{Where fixed} \\
+\midrule
+1,259 & the one before Joaquim & CONT-07, CONT-08 \\
+1,260 & Joaquim Antônio Correia & title of the work \\
+1,261 & Dr Heitor Oliveira & DOC-16 (signs it) \\
+1,262 & Dr Lúcia Mendes & LUC-10, LUC-11, Epilogue \\
+\textbf{1,263} & \textbf{the reader} & LUC-12, DOC-24, CONT-09, protocol \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The precision of this count is a condition of the device working: it is what
+turns the last position into a personal threat rather than a vague metaphor.
+
+% =============================================================================
+\section{Formal architecture}
+
+\subsection{The four fragment families}
+
+\begin{center}\small
+\begin{tabular}{@{}llrrr@{}}
+\toprule
+\textbf{Code} & \textbf{Nature} & \textbf{N} & \textbf{Words} & \textbf{Mean} \\
+\midrule
+MEM  & Memories of Patient 1,260 & 27 & 13,310 & 492 \\
+DOC  & Documents, reports, letters & 27 & 15,247 & 564 \\
+LUC  & Lúcia Mendes's investigation (2026) & 17 & 8,934 & 525 \\
+CONT & Reader contamination protocols & 13 & 6,239 & 479 \\
+\midrule
+     & \textbf{Total} & \textbf{84} & \textbf{43,730} & 521 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The variation in length is wide and functional: from 130 words (MEM-26) to
+2,310 (DOC-03, the autopsy report). Short fragments land as blows; long ones
+work as documentary immersion.
+
+\subsection{Five parts, three acts}
+
+Linear reading runs through five parts --- Sertão (9), Colony (16), Oliveira's
+Diary and Reports (25), Lúcia's Investigation (20), Contamination (14 +
+Epilogue) --- grouped into three acts: Trauma (9 fragments),
+Institutionalisation (41) and The Cycle (35).
+
+The asymmetry is meaningful: the central act, corresponding to 62 years of
+confinement, occupies nearly half the work. The duration of the confinement is
+reproduced in the duration of the reading.
+
+\subsection{The route network}
+
+\begin{center}\small
+\begin{tabular}{@{}lr@{}}
+\toprule
+Fragments & 84 \\
+Reading routes & 216 \\
+Distinct destinations & 85 (84 fragments + Epilogue) \\
+Fragments with no inbound route & 0 \\
+Fragments from which the Epilogue is reachable & 84 / 84 \\
+Cycles (strongly connected components $>$ 1) & 6 \\
+Cycles with no exit & 0 \\
+Most referenced node & DOC-01, with 20 inbound routes \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Two properties are deliberate and were verified: \textbf{every route leads to
+the Epilogue} and \textbf{no cycle traps the reader}. The cycles are preserved
+--- they are the work's thesis, which states that ``the cycle begins again''
+--- but none is a trap: from any fragment there is a finite path to the end.
+
+\caveat{The alternative was a strictly acyclic graph. It was measured and
+rejected: it would cost 85 of the 216 routes, precisely the
+document$\to$memory cross-references that give the work its archival
+character, and it would contradict the text's own thesis. The choice is the
+author's and is on record.}
+
+% =============================================================================
+\section{Literary and narrative lineage}
+
+\caveat{This section identifies \textbf{formal affinities verifiable in the
+text}. It does not claim the author read the works cited or consciously
+derived from them. Lineage here means kinship of procedure --- what criticism
+can compare --- not a genealogy of reading.}
+
+\subsection{The archive-novel and the forged document}
+
+The work belongs to the tradition of literary found footage, whose modern
+matrix is epistolary: \textit{Dracula} (1897) assembles horror from diaries,
+letters and clippings, and delegates to the reader the synthesis no character
+achieves. \textit{Molambudos} adopts the same principle and radicalises it by
+including forensic reports, chains of custody and conservation assessments ---
+bureaucratic genres, not intimate ones.
+
+It also stands near \textit{House of Leaves} (Danielewski, 2000) in its use of
+the page as space, its navigation apparatus and its bibliographic vertigo. It
+differs on one decisive point: where Danielewski multiplies levels of
+commentary into a labyrinth, \textit{Molambudos} keeps the chain short and
+named, and uses it to reach the reader.
+
+\subsection{Hypertext fiction on a printed support}
+
+\textit{Hopscotch} (Cortázar, 1963) established the precedent of a book with
+more than one reading order. \textit{Molambudos} goes beyond Cortázar's
+``board'' by offering a dense network (216 edges over 85 nodes) with
+properties guaranteed by automated verification --- convergence and absence of
+entrapment.
+
+\caveat{That verification is a feature of \textit{production}, not of literary
+merit. It guarantees the navigational promise is kept; it says nothing about
+the quality of the prose.}
+
+\subsection{Testimony and atrocity literature}
+
+The work converses with the Brazilian tradition of denouncing the asylum
+system, whose contemporary journalistic landmark is \textit{Holocausto
+Brasileiro} (Daniela Arbex, 2013), cited by name in DOC-19. In literary
+register, its first part echoes \textit{Barren Lives} (Graciliano Ramos,
+1938): the drought, the family's march, the stripped-down language.
+
+The underlying theoretical question is that of \textit{representability}: how
+to narrate an atrocity without spectacularising it. The work's choice ---
+supernatural horror as an explicit metaphor, declared as such in the
+\textit{Historical Note} --- is a position, and a debatable one, examined in
+\S\ref{sec:critique}.
+
+\subsection{Second person and the implicated reader}
+
+Second-person address has a canonical precedent in \textit{If on a winter's
+night a traveller} (Calvino, 1979), where it is playful and metaliterary.
+\textit{Molambudos} inverts the key: not to play with reading, but to accuse
+it. Twenty-seven of the 84 fragments sustain the ``you''.
+
+% =============================================================================
+\section{Narrative techniques}
+
+\subsection{Induction and suggestion}
+
+The CONT fragments deploy identifiable procedures from the literature of
+clinical suggestion:
+
+\begin{itemize}
+\item \textbf{Double bind.} CONT-03 builds an alternative with no exit:
+``\textit{If yes: the smell is there. [\ldots] If no: you are lying. You
+lifted it. Everyone lifts it.}'' Both answers confirm the premise.
+
+\item \textbf{Ideomotor suggestion.} ``\textit{Later, when you are distracted,
+your finger will return to the page on its own.}''
+
+\item \textbf{Post-hypnotic suggestion.} ``\textit{It will be on your pillow
+tonight.}''
+
+\item \textbf{Physiological anchoring.} Describing symptoms (breathing,
+pupils, extremity temperature) tends to induce the attention that confirms them.
+
+\item \textbf{Directed pareidolia.} ``\textit{Look at the upper right corner of
+the room [\ldots] Fix your eye on the dark corner for 10 seconds.}''
+\end{itemize}
+
+\subsection{The inversion of absence}
+
+The work's most sophisticated technique appears in CONT-04, ``Night 4'': after
+three nights of nightmare, nothing happens. And the text converts the relief
+into threat: ``\textit{the absence of fear was worse than the fear [\ldots]
+The waiting is the true contagion.}''
+
+The procedure is notable because it removes the stimulus and keeps the effect
+--- transferring the production of horror from the text to the reader.
+
+\subsection{The clinical instrument as form}
+
+DOC-09 and CONT-05 take the shape of psychiatric self-assessment scales, with
+items, options and a final score. Item 15 of DOC-09 --- ``\textit{If you could
+stop reading now and never open this book again, would you stop? ( ) Yes ( )
+No ( ) I already tried}'' --- works by double meaning: within the fiction it
+refers to reading; in the register of the clinical instrument it imitates, it
+reads as a suicidality item.
+
+\caveat{That ambiguity is effective, and it is also why the front warning page,
+with its crisis line, is not ornament. See \S\ref{sec:ethics}.}
+
+\subsection{Marginalia and diegetic paratext}
+
+The work uses marginal notes that comment on the text from outside, patient
+records, archive seals and a fully diegetic ``Caution'' page. The paratext
+participates in the fiction rather than framing it.
+
+% =============================================================================
+\section{Theoretical frameworks mobilised}
+
+\caveat{The work declares no theoretical affiliation. What follows are
+frameworks a critical study can apply productively, with an indication of what
+in the work invites them --- not an attribution of intent to the author.}
+
+\begin{description}[style=unboxed,leftmargin=0pt]
+\item[Trauma and intergenerational transmission.] The creature figures pain
+that crosses generations without being worked through. The
+\textit{Historical Note} states it outright: ``\textit{the pain that crosses
+generations, that no one processes and that is passed on like a contagion, is
+the only true creature}''. This is the reading key the work offers of itself.
+
+\item[Total institutions.] The Colony is described with the traits Goffman
+identified in total institutions: collapse of the barriers between spheres of
+life, mortification of the self, an economy of privileges. The ward of the
+silenced intensifies that regime.
+
+\item[Necropolitics and disposable lives.] The work insists that the Colony's
+dead were ``poor, Black, epileptic, single mothers, homosexuals''. The
+criterion for admission is social, not clinical --- which shifts the reading
+from psychiatric horror to political horror.
+
+\item[Archive, power and gap.] The chain of custody with documentary gaps
+(DOC-20) and the archive incident reports (DOC-23) thematise the archive as an
+instance of power and documentary silence as additional violence.
+
+\item[Reception and the implicated reader.] The work constructs a model reader
+and names them. The entire CONT family is a reception-theory device put to
+work rather than discussed.
+\end{description}
+
+% =============================================================================
+\section{Historical basis and ethical stance}
+\label{sec:ethics}
+
+The work's \textit{Historical Note} is methodologically careful, and this is
+worth recording because it is rare in the genre:
+
+\begin{itemize}
+\item It states that Joaquim, the creature and the narrated institution are
+fictional.
+\item It distinguishes two historical referents the fiction might blur: the
+1915 refugee corral (Alagadiço) and the Senador Pompeu one (1932--1933).
+\item It states explicitly that ``\textit{the totals of inmates and deaths are
+not presented as precise}''.
+\item It attributes the documentary basis for the Barbacena Colony to a named
+source (Arbex).
+\item It declares the supernatural horror to be a metaphor, not a thesis.
+\end{itemize}
+
+The volume also carries a reader warning page, preceding the fiction, listing
+sensitive content, distinguishing fiction from history and giving a crisis
+line. It is paratext: it precedes the fictional frame and does not interrupt
+immersion.
+
+% =============================================================================
+\section{Critical analysis}
+\label{sec:critique}
+
+\subsection{Where the work is strong}
+
+\begin{enumerate}
+\item \textbf{Form carries the argument.} Fragmentation, the asymmetry between
+parts and the route network are not decorative: they formally reproduce the
+impossibility of reconstruction and the duration of confinement.
+
+\item \textbf{The reader's implication is executed, not announced.} The
+numbered chain ends in a vacant position the reader occupies. It is a simple
+device, rigorously built.
+
+\item \textbf{Documentary honesty is explicit.} The work separates what it
+invents from what it documents, and declines precision it does not have.
+
+\item \textbf{The induction prose is technically competent.} The CONT-04
+inversion is the best example: it removes the stimulus and keeps the effect.
+\end{enumerate}
+
+\subsection{Where the work is debatable}
+
+\begin{enumerate}
+\item \textbf{The supernatural metaphor may soften the historical horror.} By
+giving the suffering a fantastic cause, the work risks displacing political
+responsibility onto an entity. The \textit{Historical Note} anticipates the
+objection and answers it; whether the answer suffices is an open critical
+question, and the most productive one the work offers.
+
+\item \textbf{Editor's notes interrupt the induction.} Thirteen fragments
+carry footnotes declaring the device to be formal. Two land at the peak of the
+effect --- CONT-03 closes on ``\textit{For your body, she is real}'' and the
+note follows by stating that the contamination is textual. The information is
+necessary; its placement is debatable. Consolidating the notes into a single
+endnote would preserve both functions.
+
+\item \textbf{The density of second person may saturate.} Twenty-seven
+fragments sustain the ``you''. In continuous linear reading the procedure
+tends towards the predictable --- a risk route-reading mitigates but the
+printed edition does not remove.
+\end{enumerate}
+
+% =============================================================================
+\section{Verified limitations}
+\label{sec:limits}
+
+\begin{enumerate}
+\item \textbf{The three editions are not the same book.} Ten fragments diverge
+structurally beyond what language difference explains. The extreme cases:
+CONT-05 has 163 lines in PT and EN and 63 in ZH; CONT-03 has 174 in PT against
+102 in EN and ZH; DOC-26 has 110 in PT and EN against 56 in ZH. In the
+trilingual edition the three versions appear side by side, making the
+divergence visible to the reader. \textbf{This is the most serious limitation
+for any claim to being an international reference work.}
+
+\item \textbf{Cover art is below print standard.} The cover and back-cover
+files are 1,046 $\times$ 1,504 px, yielding 163 DPI on the printed panel; the
+required standard is 300 DPI.
+
+\item \textbf{The back cover carries a placeholder barcode.} The element
+embedded in the artwork declares ISBN 978-65-01-23456-7, which is not the
+work's ISBN.
+
+\item \textbf{The corpus is not under version control.} The work's source
+files have no commit history: there is no diff and no way to revert a bad edit.
+\end{enumerate}
+
+% =============================================================================
+\section{Validation status}
+\label{sec:validation}
+
+This section exists to prevent the dossier being read as an endorsement.
+
+\begin{center}\small
+\begin{tabular}{@{}p{6.5cm}l@{}}
+\toprule
+\textbf{Dimension} & \textbf{Status} \\
+\midrule
+Build integrity of the 5 editions & verified \\
+Route parity, source vs.\ printed & verified (648/648) \\
+Convergence and absence of entrapment & verified \\
+Fragment integrity (SHA-256) & verified \\
+\midrule
+Academic peer review & \textbf{not carried out} \\
+External professional editorial review & \textbf{not carried out} \\
+Historiographic verification by a specialist & \textbf{not carried out} \\
+Native review of the EN and ZH translations & \textbf{not carried out} \\
+Critical reception & \textbf{none} (work unpublished) \\
+Impact & \textbf{not measurable} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\caveat{The first four rows are \textbf{internal technical} verifications:
+they say the object is well built, not that it is good. None substitutes for
+critical judgement. The last six have not been carried out, and this dossier
+does not anticipate them. Any claim of merit, originality or impact appearing
+in material derived from this text should be treated as unfounded until
+external validation exists.}
+
+% =============================================================================
+\section{Research agenda}
+
+Questions the work opens that a study might take up:
+
+\begin{enumerate}
+\item Does the supernatural metaphor amplify or attenuate the testimonial
+force of a narrative about documented atrocity?
+\item What effects does the route network produce on the reading experience,
+measured empirically rather than postulated?
+\item Does second-person address sustained across 27 fragments produce
+implication or reactance in readers?
+\item How does divergence between the three editions alter the work as
+received in each language --- and what does that say about the concept of a
+``trilingual edition''?
+\item How do the protective paratexts (warning page, editor's notes) interact
+with the immersion device the work builds?
+\end{enumerate}
+
+% =============================================================================
+\section*{Works referred to}
+
+\begin{itemize}\small
+\item ARBEX, Daniela. \textit{Holocausto Brasileiro}. Geração Editorial, 2013.
+\item CALVINO, Italo. \textit{If on a winter's night a traveller}. 1979.
+\item CORTÁZAR, Julio. \textit{Hopscotch}. 1963.
+\item DANIELEWSKI, Mark Z. \textit{House of Leaves}. Pantheon, 2000.
+\item GOFFMAN, Erving. \textit{Asylums}. 1961.
+\item RAMOS, Graciliano. \textit{Barren Lives}. 1938.
+\item STOKER, Bram. \textit{Dracula}. 1897.
+\end{itemize}
+
+\vfill
+\noindent\rule{\linewidth}{0.4pt}\\
+{\footnotesize Dossier produced as critical apparatus. On caveats regarding
+the project's metrics and claims, see \texttt{CORRIGENDUM.md}.}
+
+\end{document}

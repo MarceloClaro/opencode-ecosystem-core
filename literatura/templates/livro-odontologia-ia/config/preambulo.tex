@@ -1,0 +1,69 @@
+%==============================================================================
+% PRÉÂMBULO ABNT — Livro: Odontologia & Inteligência Artificial
+% Conforme NBR 14724 (Trabalhos Acadêmicos) e NBR 6029 (Livro)
+%==============================================================================
+
+% Carrega metadados primeiro
+\input{config/metadados}
+
+% Carrega todos os pacotes
+\input{config/pacotes}
+
+% Carrega comandos personalizados
+\input{config/comandos}
+
+% Carrega a camada imersiva (modelo sensorial)
+\input{config/design}
+
+%==============================================================================
+% CONFIGURAÇÕES ABNT (NBR 14724)
+%==============================================================================
+
+% Espaçamento 1,5 entre linhas (NBR 14724)
+\OnehalfSpacing
+
+% Profundidade do sumário (até subsubseção)
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+
+% Numeração de capítulos em algarismos arábicos (NBR 6024)
+\renewcommand{\thechapter}{\arabic{chapter}}
+
+% Formatação de títulos conforme ABNT
+\renewcommand{\ABNTEXchapterfont}{\bfseries}
+\renewcommand{\ABNTEXchapterfontsize}{\normalsize}
+\renewcommand{\ABNTEXsectionfont}{\bfseries}
+\renewcommand{\ABNTEXsubsectionfont}{\bfseries}
+
+% Estilo de página
+\pagestyle{abntheadings}
+
+% Ambiente de citação recuada (NBR 10520) — já definido pela classe abntex2
+
+% Configuração de legendas
+\captionsetup{
+  format=hang,
+  font=small,
+  labelfont=bf,
+  justification=justified,
+  singlelinecheck=false
+}
+
+% Configuração de listas
+\setlist{
+  nosep,
+  leftmargin=2em
+}
+
+% Glossário com estilo de árvore
+\setglossarystyle{tree}
+\renewcommand{\glsnamefont}[1]{\textbf{#1}}
+
+% Informações do PDF
+\AtBeginDocument{%
+  \hypersetup{%
+    pdftitle={\LivroTitulo\ -- \LivroSubtitulo},
+    pdfauthor={\LivroAutor},
+    pdfsubject={Odontologia e Inteligência Artificial}
+  }%
+}

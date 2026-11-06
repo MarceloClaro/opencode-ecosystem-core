@@ -42,6 +42,7 @@ def _checkout(tmp_path: Path) -> Path:
         if name == "ARCHITECTURE.md":
             body += "<!-- core-mcp:start -->\nLista antiga.\n<!-- core-mcp:end -->\n"
         if name == "README.md":
+            body += "<!-- core-badges:start -->\nBadges antigos.\n<!-- core-badges:end -->\n"
             body += "<!-- core-runtime-diagram:start -->\nMapa antigo.\n<!-- core-runtime-diagram:end -->\n"
         body += "Evidência histórica mantida; 0,701 → 0,105; sem inferência causal.\n"
         path.write_text(body, encoding="utf-8")
@@ -92,6 +93,9 @@ def test_new_agent_and_server_update_inventory_and_list(tmp_path):
     diagram = (root / "README.md").read_text(encoding="utf-8")
     assert "Agents2[3 agentes configurados]" in diagram
     assert "MCP2[3 MCPs configurados]" in diagram
+    assert "badge/agents-3" in diagram
+    assert "badge/MCP-3%20servers" in diagram
+    assert "badge/checks-4%20estruturais" in diagram
 
 
 def test_repeated_sync_and_check_leave_bytes_identical(tmp_path):
@@ -101,6 +105,30 @@ def test_repeated_sync_and_check_leave_bytes_identical(tmp_path):
     original = _bytes(root)
     assert sync(root, check_count=4, write=True) == []
     assert sync(root, check_count=4, write=False) == []
+    assert _bytes(root) == original
+
+
+def test_stale_badges_are_reported_and_repaired_without_touching_history(tmp_path):
+    root = _checkout(tmp_path)
+    sync = _synchronizer()
+    sync(root, check_count=4, write=True)
+    readme = root / "README.md"
+    readme.write_text(readme.read_text().replace("badge/agents-2", "badge/agents-999"))
+    original = readme.read_bytes()
+    assert sync(root, check_count=4, write=False) == ["README.md"]
+    assert readme.read_bytes() == original
+    assert sync(root, check_count=4, write=True) == ["README.md"]
+    assert "badge/agents-2" in readme.read_text()
+    assert readme.read_text().startswith(HISTORY)
+
+
+def test_badge_marker_error_prevents_all_documents_being_written(tmp_path):
+    root = _checkout(tmp_path)
+    readme = root / "README.md"
+    readme.write_text(readme.read_text().replace("<!-- core-badges:end -->", ""))
+    original = _bytes(root)
+    with pytest.raises(ValueError, match="[Mm]arcador"):
+        _synchronizer()(root, check_count=4, write=True)
     assert _bytes(root) == original
 
 

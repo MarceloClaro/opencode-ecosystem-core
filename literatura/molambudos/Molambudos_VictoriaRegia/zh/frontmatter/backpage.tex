@@ -1,0 +1,16 @@
+\pagestyle{empty}  % Disable headers and footers on this page
+
+\cleardoublepage    % Ensure the following content starts on a right-hand page
+
+% =================
+% Back cover — ready image (frontmatter/contracapa.png), full-bleed 6x9
+% =================
+\begin{center}
+\begin{tikzpicture}[remember picture,overlay]
+    % Black background covering the whole page (image borders = black).
+    \fill[black] (current page.south west) rectangle (current page.north east);
+    % Back cover image centered, filling the page.
+    \node[anchor=center] at (current page.center)
+        {\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{frontmatter/contracapa.png}};
+\end{tikzpicture}
+\end{center}

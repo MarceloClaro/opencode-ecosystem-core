@@ -1,0 +1,153 @@
+%==============================================================================
+% FICHAMENTO CRÍTICO — Deep Learning for Automated Detection of Maxillary
+% Sinus Lesions on Panoramic Radiographs
+% Conforme NBR 6023 (referências) e NBR 10520 (citações)
+%==============================================================================
+\section{Fichamento: \citeonline{kuwana2021maxillary}}
+
+% --- 1. IDENTIFICAÇÃO ---
+\subsection{Identificação}
+\begin{tabular}{ll}
+\textbf{Título:} & Performance of deep learning object detection technology in the
+detection and diagnosis of maxillary sinus lesions on panoramic radiographs \\
+\textbf{Autor(es):} & Kuwana, Ryosuke; Ariji, Yoshiko; Fukuda, Motoki; Kise,
+Yoshitaka; Nozawa, Michihito; Kuwada, Chiaki; Muramatsu, Chisako; Katsumata,
+Akitoshi; Fujita, Hiroshi; Ariji, Eiichiro \\
+\textbf{Periódico:} & Dentomaxillofacial Radiology \\
+\textbf{Ano:} & 2021 \\
+\textbf{Volume:} & 50 \\
+\textbf{Número:} & 1 \\
+\textbf{Páginas:} & 20200171 \\
+\textbf{DOI:} & \url{https://doi.org/10.1259/dmfr.20200171} \\
+\textbf{Qualis:} & A2 (Odontologia) \\
+\textbf{Tipo:} & Artigo original \\
+\end{tabular}
+
+% --- 2. OBJETIVO ---
+\subsection{Objetivo}
+Determinar o desempenho de uma técnica de deep learning baseada em detecção de
+objetos (DetectNet) para detectar seios maxilares em radiografias panorâmicas e
+classificar lesões do seio maxilar (sinusite, cistos) em comparação com seios
+saudáveis. O estudo visa fornecer uma ferramenta automatizada de auxílio
+diagnóstico para cirurgiões-dentistas na interpretação de alterações
+sinusais em exames panorâmicos de rotina.
+
+% --- 3. METODOLOGIA ---
+\subsection{Metodologia}
+\textbf{Desenho do estudo:} Estudo experimental retrospectivo de desenvolvimento
+e validação de modelo de deep learning para detecção e classificação de objetos. \\
+\textbf{Amostra:} 1.174 imagens de seios maxilares (587 saudáveis, 416 com
+inflamação/sinusite, 171 com cistos) extraídas de radiografias panorâmicas,
+divididas em conjuntos de treino, teste 1 e teste 2. \\
+\textbf{Métricas principais:} Sensibilidade de detecção, taxa de falsos-positivos
+por imagem, acurácia, sensibilidade e especificidade para classificação
+diagnóstica. \\
+\textbf{Validação:} Treinamento com 1.000 épocas usando DetectNet (NVIDIA DIGITS)
+com validação em dois conjuntos de teste independentes (teste 1 e teste 2).
+
+% --- 4. RESULTADOS PRINCIPAIS ---
+\subsection{Resultados Principais}
+\begin{itemize}
+  \item Sensibilidade de detecção de 100\% para seios saudáveis e inflamados
+        em ambos os conjuntos de teste; para cistos, 98\% (teste 1) e 89\%
+        (teste 2).
+  \item Taxa de falsos-positivos por imagem de 0,00 para seios saudáveis e
+        inflamados; para cistos, 0,00 (teste 1) e 0,18 (teste 2).
+  \item Acurácia, sensibilidade e especificidade para sinusite de 90--91\%,
+        88--85\% e 91--96\%; para cistos, 97--100\%, 80--100\% e 100--100\%,
+        respectivamente.
+\end{itemize}
+
+% --- 5. LIMITAÇÕES ---
+\subsection{Limitações}
+\begin{itemize}
+  \item Amostra proveniente de um único centro odontológico japonês, o que
+        limita a validade externa e a generalização para outras populações e
+        equipamentos de imagem.
+  \\item A classificação dos cistos apresentou sensibilidade significativamente
+        menor (80--100\%) em comparação com a sinusite, possivelmente devido
+        à heterogeneidade morfológica dos cistos no seio maxilar.
+  \item Foram excluídas lesões malignas do seio maxilar devido ao pequeno
+        número de casos, deixando uma lacuna importante para a aplicação
+        clínica completa do modelo.
+  \item O estudo não realizou validação externa com equipamentos de diferentes
+        fabricantes ou com diferentes protocolos de aquisição de imagem.
+\end{itemize}
+
+% --- 6. CONTRIBUIÇÃO PARA O LIVRO ---
+\subsection{Contribuição para o Livro}
+Este artigo fundamenta diretamente o Capítulo 8, que trata do uso de deep
+learning para diagnóstico por imagem em radiografias panorâmicas, com foco
+na detecção automatizada de alterações nos seios maxilares. Os resultados
+demonstram que modelos de detecção de objetos (DetectNet) podem atingir
+sensibilidade de 100\% na identificação de seios maxilares saudáveis e
+inflamados, com taxas de falso-positivo próximas de zero. O estudo é
+particularmente relevante para a subseção que discute a aplicação de DL
+em contexto de anatomia sinusal para planejamento de implantes e cirurgias
+ortognáticas. O mapeamento SDD do livro incorpora as métricas de acurácia
+($\geq$ 90\%) como critérios de aceitação para modelos de classificação
+de lesões sinusais em panorâmicas.
+
+% --- 7. ANÁLISE CRÍTICA ---
+\subsection{Análise Crítica}
+\begin{itemize}
+  \item \textbf{Validade interna:} Alta -- O estudo utiliza dois conjuntos de
+        teste independentes (teste 1 e teste 2) para validação, com métricas
+        consistentes entre ambos.
+  \item \textbf{Validade externa:} Média -- Dados de um único centro e de uma
+        única população asiática, sem validação multicêntrica ou em populações
+        ocidentais.
+  \item \textbf{Reprodutibilidade:} Alta -- O pipeline utilizando DetectNet
+        com 1.000 épocas e o ambiente DIGITS é reproduzível; a descrição do
+        dataset é detalhada.
+  \item \textbf{Relevância clínica:} Alta -- A detecção automatizada de
+        sinusite (AUC $\geq$ 0,90) pode auxiliar cirurgiões-dentistas gerais
+        na triagem de pacientes que necessitam de encaminhamento
+        otorrinolaringológico.
+  \item \textbf{Conflito de interesses:} Não -- Os autores declararam ausência
+        de conflitos de interesse.
+  \item \textbf{Viés identificado:} Viés de seleção -- apenas lesões
+        benignas (sinusite e cistos) foram incluídas, excluindo neoplasias
+        malignas e outras patologias sinusais relevantes na prática clínica.
+\end{itemize}
+
+% --- 8. CITAÇÕES RELEVANTES ---
+\subsection{Citações Relevantes}
+\begin{citacao}
+``Detection sensitivities of healthy (Class 0) and inflamed (Class 1) maxillary
+sinuses were 100\% for both testing 1 and testing 2 data sets, whereas they
+were 98 and 89\% for cysts of the maxillary sinus regions (Class 2).'' (p. 5).
+\end{citacao}
+
+\begin{citacao}
+``Accuracies, sensitivities and specificities for diagnosis maxillary sinusitis
+were 90--91\%, 88--85\%, and 91--96\%, respectively; for cysts of the maxillary
+sinus regions, these values were 97--100\%, 80--100\%, and 100--100\%,
+respectively.'' (p. 6).
+\end{citacao}
+
+% --- 9. MAPEAMENTO SDD ---
+\subsection{Mapeamento SDD}
+\textbf{Problema:} Detecção e classificação automatizada de lesões do seio
+maxilar (sinusite e cistos) em radiografias panorâmicas, reduzindo a
+necessidade de exames complementares (CBCT) e falso-diagnósticos. \\
+\textbf{Entrada:} Imagens de radiografias panorâmicas (anonimizadas) com
+anotação manual das regiões de interesse (seios maxilares). \\
+\textbf{Saída:} Caixas delimitadoras com classificação em três categorias:
+saudável, inflamado (sinusite) e cisto. \\
+\textbf{Critérios:} Sensibilidade de detecção $\geq$ 98\%; acurácia de
+classificação $\geq$ 90\% para sinusite e $\geq$ 95\% para cistos;
+taxa de falsos-positivos $<$ 0,05 por imagem. \\
+\textbf{Confiança:} 0,78 -- Estudo bem executado, com validação em dois
+testes independentes, mas limitado por amostra unicêntrica e exclusão de
+lesões malignas.
+\end{tabular}
+
+% --- 10. REFERÊNCIA ABNT ---
+\subsection{Referência ABNT}
+\begin{verbatim}
+KUWANA, Ryosuke et al. Performance of deep learning object detection technology
+in the detection and diagnosis of maxillary sinus lesions on panoramic
+radiographs. Dentomaxillofacial Radiology, London, v. 50, n. 1, p. 20200171,
+2021. DOI: 10.1259/dmfr.20200171.
+\end{verbatim}

@@ -98,6 +98,7 @@ LiteRT-LM-main.zip
 LiteRT-LM-main.zip:Zone.Identifier
 pesquisa/
 projetos/
+literatura/
 livro-odontologia-ia/
 
 # --- Node / JavaScript ---
@@ -253,6 +254,7 @@ LiteRT-LM-main.zip
 # --- Conteúdo volumoso / gerado / sensível (organização 2026-09-25) ---
 # Produção de podcast com áudio/pacotes editoriais (3.7 GB) — nunca versionar
 research/producao_real/
+research/producao_real
 
 # Bundles de distribuição gerados (conteúdo = o próprio repo)
 opencode-ecosystem-core-pesquisador-universal-v4.1*/
@@ -455,3 +457,315 @@ editor-workspace/remotion-smoke/r1047-stage*.mp4
 editor-workspace/remotion-smoke/r1047-stage*.receipt.json
 editor-workspace/remotion-smoke/r1047-stage-time*.txt
 editor-workspace/remotion-smoke/r1047-stage-render*.json
+
+# R1055: cache de TTS por batida (regenerável; WAVs já são ignorados)
+pilots/r1055-qubit/audio/beats-*/
+
+# R1056: raster intermediário; PNG final, SVG, GIF e manifesto são versionados
+docs/architecture/animated/*.render.png
+
+# R1056: geometria intermediária de câmera; regenerável, não é entrega
+docs/architecture/animated/*.geometry.json
+
+# R1058: cache TTS por batida (regenerável; WAV/MP4 já são ignorados)
+pilots/r1058-airam-veras/audio/beats/
+pilots/r1058-airam-veras/voice-ref/
+
+# R1059 — mídia regenerável e sessão de navegador
+.playwright-mcp/
+editor-workspace/r1059-motion-canvas/node_modules/
+editor-workspace/r1059-motion-canvas/output/
+editor-workspace/remotion-smoke/public/r1059-tepui/
+editor-workspace/remotion-smoke/public/r1059-narration.wav
+pilots/r1059-roraima/out/*.mp4
+pilots/r1059-roraima/out/*.png
+pilots/r1059-roraima/out/*.log
+
+# R1059: exceção explícita para a timeline da referência
+!pilots/r1059-roraima/reference/mapa-de-cenas.csv
+
+# R1064: OpenMontage externo (AGPL) e artefatos de produção
+external/OpenMontage/
+external/litellm-env/
+.env.litellm
+.env.litellm.*
+!.env.litellm.example
+
+# R1071: produção de vídeo — segmentos e build são regeneráveis
+artigos/**/video_banca/segments/
+artigos/**/video_banca/build/
+
+# R1071: intermediários de build do TCC (fontes .md/.tex e entregáveis ficam)
+artigos/**/_TCC_COMPLETO.md
+artigos/**/_corpo_wrapped.md
+artigos/**/_pretextual_com_sumario.md
+artigos/**/tcc_wrapper.pdf
+artigos/**/tcc_wrapper.aux
+artigos/**/tcc_wrapper.log
+artigos/**/tcc_wrapper.out
+artigos/**/tcc_wrapper.toc
+
+# R1071: cache ASR de dublagem (regenerável)
+**/.dubbing-asr-large/
+
+# R1071: entregáveis versionados de propósito (PDF e CSV são ignorados por padrão)
+!artigos/TCC_MARCELO_AUTISMO_AH_SD/TCC_MARCELO_AUTISMO_AH_SD.pdf
+!artigos/TCC_MARCELO_AUTISMO_AH_SD/TCC_MARCELO_AUTISMO_AH_SD.docx
+!artigos/TCC_MARCELO_AUTISMO_AH_SD/dados/*.csv
+!artigos/ARTIGO_MARIA_SOCORRO_TEA/01_ARTIGO_CORRIGIDO_ABNT.pdf
+!artigos/ARTIGO_MARIA_SOCORRO_TEA/02_ARTIGO_QUALIS_A1.pdf
+!artigos/ARTIGO_MARIA_SOCORRO_TEA/TCC/TCC_MARIA_SOCORRO.pdf
+!artigos/ARTIGO_MARIA_SOCORRO_TEA/dados/*.csv
+
+# R1071: sumário é gerado pelo build a partir do .toc
+artigos/**/SUMARIO.md
+
+# R1071: pacotes de distribuição locais
+release/
+
+# R1082: literatura versionável — fonte, docs, manifestos e capas selecionadas.
+# Binários grandes (PDF/EPUB/áudio/vídeo/ZIP) permanecem fora por limite do GitHub.
+!literatura/
+# R1084: negar arquivos por padrão; permissões específicas aparecem abaixo.
+literatura/**
+literatura/**/*.pdf
+literatura/**/*.epub
+literatura/**/*.mobi
+literatura/**/*.kpf
+literatura/**/*.zip
+literatura/**/*.tar
+literatura/**/*.tar.gz
+literatura/**/*.m4a
+literatura/**/*.mp3
+literatura/**/*.wav
+literatura/**/*.mp4
+literatura/**/*.mov
+literatura/**/*.avi
+literatura/**/*.png
+literatura/**/*.jpg
+literatura/**/*.jpeg
+literatura/**/*.webp
+literatura/**/*.gif
+literatura/**/*.ttf
+literatura/**/*.otf
+literatura/**/*.woff
+literatura/**/*.woff2
+literatura/**/*.docx
+literatura/**/*.xlsx
+literatura/**/*.sqlite
+literatura/**/*.db
+literatura/**/build/
+literatura/**/__pycache__/
+# Exceções de capa controladas somente no bloco R1084 de fontes abaixo.
+# R1082: artefatos de build e metadados dentro de literatura
+literatura/**/*.aux
+literatura/**/*.log
+literatura/**/*.out
+literatura/**/*.toc
+literatura/**/*.bbl
+literatura/**/*.blg
+literatura/**/*.lof
+literatura/**/*.lot
+literatura/**/*.idx
+literatura/**/*.ilg
+literatura/**/*.ind
+literatura/**/*.synctex.gz
+literatura/**/*.fls
+literatura/**/*.fdb_latexmk
+literatura/**/*.run.xml
+literatura/**/*.bcf
+literatura/**/*.nav
+literatura/**/*.snm
+literatura/**/*.vrb
+literatura/**/*.Zone.Identifier
+literatura/**/.DS_Store
+literatura/**/Thumbs.db
+literatura/**/*.pyc
+literatura/**/*.pyo
+literatura/**/*.class
+literatura/**/*.jar
+literatura/**/*.dll
+literatura/**/*.exe
+literatura/**/*.bin
+literatura/**/*.rar
+literatura/**/*.7z
+literatura/**/*.gz
+literatura/**/*.bz2
+literatura/**/*.xz
+literatura/**/*.pptx
+literatura/**/*.odt
+literatura/**/*.ods
+literatura/**/*.psd
+literatura/**/*.ai
+literatura/**/*.indd
+literatura/**/.venv/
+literatura/**/dist/
+# R1082: intermediários de vetorização e symlinks para projetos/ (583 MB, não versionável)
+literatura/**/.tracado/
+literatura/**/*.PDF
+literatura/**/*.EPUB
+literatura/**/*.PNG
+literatura/**/*.JPG
+literatura/**/*.JPEG
+literatura/**/*.ZIP
+literatura/**/*.M4A
+literatura/**/*.MP3
+literatura/**/*.WAV
+literatura/**/*.MP4
+# R1084: reabrir diretórios (não arquivos) e apenas fontes/documentos escolhidos.
+!literatura/**/
+!literatura/**/*.md
+!literatura/**/*.json
+!literatura/**/*.jsonl
+!literatura/**/*.tex
+!literatura/**/*.bib
+!literatura/**/*.sty
+!literatura/**/*.cls
+!literatura/**/*.py
+!literatura/**/*.sh
+!literatura/**/*.svg
+!literatura/**/*.txt
+!literatura/**/*.html
+!literatura/**/*.toml
+!literatura/**/*.yml
+!literatura/**/*.yaml
+!literatura/**/*.xml
+!literatura/**/*.lua
+!literatura/**/*.mmd
+!literatura/**/*.dot
+!literatura/**/*.js
+!literatura/**/*.css
+!literatura/**/*.cff
+!literatura/**/Makefile
+!literatura/**/LICENSE
+!literatura/**/.gitignore
+!literatura/**/.gitkeep
+!literatura/templates/livro-odontologia-ia/codigos/cap01/*.ipynb
+!literatura/templates/livro-odontologia-ia/odontoia-pkg/notebooks/*.ipynb
+# Apenas as capas selecionadas e explicitamente inventariadas entram no Git.
+!literatura/molambudos/capas/molambudos_final/**/*.png
+!literatura/molambudos/capas/molambudos_final/molambudos_capa_completa_422p_print_300dpi.pdf
+!literatura/molambudos/capas/molambudos_final/molambudos_capa_completa_436p_canonica_300dpi.pdf
+# Limites de produção/privacidade têm precedência sobre a allowlist acima.
+literatura/**/private/
+literatura/**/build/
+literatura/**/dist/
+literatura/**/__pycache__/
+literatura/**/.venv/
+literatura/**/.git/
+literatura/**/.tracado/
+literatura/**/credentials.*
+literatura/**/secrets.*
+literatura/**/id_rsa*
+literatura/**/id_ed25519*
+/literatura/templates-academicos/30_template_usp
+/literatura/templates-academicos/20_template_ieee
+/literatura/templates-academicos/29_template_unb_monografia
+/literatura/templates-academicos/18_template_elsevier_cas
+/literatura/templates-academicos/12_template_abntex2
+/literatura/templates-academicos/24_template_mdpi
+/literatura/templates-academicos/21_template_ipleiria
+/literatura/templates-academicos/14_template_artigo
+/literatura/templates-academicos/15_template_cv_curriculo
+/literatura/templates-academicos/13_template_acm
+/literatura/templates-academicos/28_template_taylor_francis
+/literatura/templates-academicos/19_template_icmc
+/literatura/templates-academicos/26_template_sbc
+/literatura/templates-academicos/17_template_elsevier
+/literatura/templates-academicos/22_template_koma_script
+/literatura/templates-academicos/25_template_nature
+/literatura/templates-academicos/16_template_dissertacao
+/literatura/templates-academicos/27_template_springer
+/literatura/academicos/11_evolve_artigos
+/literatura/academicos/07_criador_artigo
+/literatura/academicos/35_zrm_master
+/literatura/academicos/06_artigos
+/literatura/academicos/10_dados_entrada_mestrado
+/literatura/academicos/09_md_dissertacao_latex
+/literatura/academicos/34_orchestration
+/literatura/academicos/05_artigo_mit_ia
+/literatura/academicos/08_docs_dissertacao
+/literatura/academicos/01_dissertacao_opencode
+/literatura/academicos/33_nano
+/literatura/academicos/31_template_ensaio_fichamento
+/literatura/academicos/32_documentos
+/literatura/molambudos/victoria-regia
+/literatura/molambudos/scripts/validate_molambudos_routes.py
+/literatura/molambudos/scripts/molambudos_grafo_rotas.py
+/literatura/molambudos/scripts/molambudos_canone.py
+/literatura/molambudos/scripts/molambudos_indice.py
+/literatura/molambudos/scripts/normalize_molambudos_quotes.py
+/literatura/molambudos/scripts/molambudos_selo.py
+/literatura/molambudos/auditorias/parecer-banca.md
+/literatura/molambudos/auditorias/book-studio-r1071
+/literatura/molambudos/auditorias/cultural-episteme
+/literatura/molambudos/auditorias/catalogo-r1072
+/literatura/molambudos/specs/SPEC-903-molambudos-fonte-igual-cabecalho.md
+/literatura/molambudos/specs/SPEC-935-R278-molambudos-review-cont-doc.md
+/literatura/molambudos/specs/SPEC-935-R390-molambudos-scanner-guided-editorial-pass.md
+/literatura/molambudos/specs/SPEC-911-molambudos-fase0-best-seller.md
+/literatura/molambudos/specs/SPEC-935-R263-molambudos-miolo-160x230mm.md
+/literatura/molambudos/specs/SPEC-935-R260-molambudos-kdp-bleed-no-text-outside.md
+/literatura/molambudos/specs/SPEC-904-molambudos-residuos-markdown.md
+/literatura/molambudos/specs/SPEC-935-R406-molambudos-coerencia-factual.md
+/literatura/molambudos/specs/SPEC-935-R252-molambudos-epub-export.md
+/literatura/molambudos/specs/SPEC-907-molambudos-titulos-fragmentos-expandidos.md
+/literatura/molambudos/specs/SPEC-935-R401-molambudos-mapas-e-indice.md
+/literatura/molambudos/specs/SPEC-935-R389-molambudos-trilingual-build-readiness.md
+/literatura/molambudos/specs/SPEC-935-R402-molambudos-quatro-edicoes-de-impressao.md
+/literatura/molambudos/specs/SPEC-935-R407-molambudos-indice-e-registro.md
+/literatura/molambudos/specs/SPEC-935-R361-molambudos-cultural-decision-matrix.md
+/literatura/molambudos/specs/SPEC-935-R362-molambudos-rota-a-paginacao-preflight.md
+/literatura/molambudos/specs/SPEC-935-R384-molambudos-extend-regen-cont03-mem27-luc-escolha.md
+/literatura/molambudos/specs/SPEC-935-R399-molambudos-preparacao-de-impressao.md
+/literatura/molambudos/specs/SPEC-935-R271-molambudos-critical-dossier.md
+/literatura/molambudos/specs/SPEC-935-R277-molambudos-multiagent-dossier.md
+/literatura/molambudos/specs/SPEC-935-R358-molambudos-polimento-cultural-trilingue.md
+/literatura/molambudos/specs/SPEC-935-R264-molambudos-160x230mm-safe-folios.md
+/literatura/molambudos/specs/SPEC-915-molambudos-fase1d-doc19-eco-vocabular.md
+/literatura/molambudos/specs/SPEC-935-R404-molambudos-notas-fora-do-climax.md
+/literatura/molambudos/specs/SPEC-935-R255-molambudos-amazon-kdp-interior.md
+/literatura/molambudos/specs/SPEC-935-R261-molambudos-kdp-remove-hyperlinks.md
+/literatura/molambudos/specs/SPEC-935-R270-molambudos-full-literary-scan.md
+/literatura/molambudos/specs/SPEC-935-R403-molambudos-dossie-de-estudo.md
+/literatura/molambudos/specs/SPEC-935-R257-molambudos-cover-final-images.md
+/literatura/molambudos/specs/SPEC-913-molambudos-fase1b-voz-documental.md
+/literatura/molambudos/specs/SPEC-905-molambudos-tabela-paginacao.md
+/literatura/molambudos/specs/SPEC-935-R397-molambudos-coerencia-diegetica.md
+/literatura/molambudos/specs/SPEC-935-R273-molambudos-repeat-analysis-post-polish.md
+/literatura/molambudos/specs/SPEC-935-R253-molambudos-isbn-update.md
+/literatura/molambudos/specs/SPEC-935-R258-molambudos-cover-fullspread-retry.md
+/literatura/molambudos/specs/SPEC-935-R266-molambudos-ficha-estudo-scanners.md
+/literatura/molambudos/specs/SPEC-906-molambudos-titulos-indice-lista.md
+/literatura/molambudos/specs/SPEC-935-R279-molambudos-beta-protocol-bibliography.md
+/literatura/molambudos/specs/SPEC-935-R265-molambudos-final-scanner-10.md
+/literatura/molambudos/specs/SPEC-935-R388-molambudos-md-tex-content-sync.md
+/literatura/molambudos/specs/SPEC-935-R383-molambudos-build-miolo-links-epilogue-fix.md
+/literatura/molambudos/specs/SPEC-935-R360-molambudos-cultural-episteme-pilot.md
+/literatura/molambudos/specs/SPEC-935-R398-molambudos-deduplicacao-e-coerencia-factual.md
+/literatura/molambudos/specs/SPEC-935-R400-molambudos-convergencia-das-rotas.md
+/literatura/molambudos/specs/SPEC-935-R254-molambudos-miolo-pdf.md
+/literatura/molambudos/specs/SPEC-902-molambudos-1260-apocalipse.md
+/literatura/molambudos/specs/SPEC-935-R351-molambudos-sepia-pipeline.md
+/literatura/molambudos/specs/SPEC-935-R259-molambudos-interior-kdp-margins.md
+/literatura/molambudos/specs/SPEC-917-molambudos-fase1e-terror-visceral-eco.md
+/literatura/molambudos/specs/SPEC-935-R405-molambudos-paridade-textual-en-zh.md
+/literatura/molambudos/specs/SPEC-914-molambudos-fase1c-doc08-luc10-overfull.md
+/literatura/molambudos/specs/SPEC-912-molambudos-fase1-revisao-literaria.md
+/literatura/molambudos/specs/SPEC-935-R256-molambudos-cover-template-371.md
+/literatura/molambudos/meta/reflexao_molambudos_completa.json
+/literatura/molambudos/capas/frente-corrigida.svg
+/literatura/molambudos/capas/contracapa-corrigida.svg
+/literatura/templates/livro-gemeos
+/literatura/templates/livro-volume2
+/literatura/templates/livro-opencode
+/literatura/livros/livro-gemeos/compilado
+/literatura/livros/livro-volume2/compilado
+/literatura/livros/livro-opencode/compilado
+# R1082: metadados Windows com dois-pontos e repositório Git embutido no podcast
+literatura/**/*:Zone.Identifier
+literatura/**/*Zone.Identifier
+literatura/molambudos/podcast/producao/pacote_editorial_podcast_molambudos_gh/
+# R1083: metadados Windows em qualquer diretório
+*:Zone.Identifier
+*Zone.Identifier

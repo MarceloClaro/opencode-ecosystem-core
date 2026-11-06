@@ -1,5 +1,9 @@
 # Arquitetura completa do Core — R916
 
+> **Apresentação R1056:** [todos os fluxos em GIF/PNG/SVG](architecture/ANIMATED.md).
+> A animação complementa este retrato histórico; não recalcula seus módulos,
+> fontes ou hashes. [Manifesto](architecture/animated/manifest.json).
+
 Este atlas parte das fontes e percorre interfaces, coordenação, execução,
 conhecimento e entrega. Os diagramas estruturais e operacionais se completam:
 um import mostra dependência declarada; um fluxo curado explica um caminho e
@@ -7,9 +11,9 @@ seus gates. Nenhum dos dois comprova que todos os caminhos foram executados.
 
 ## Origem, abrangência e formatos
 
-Base Git `d02817ca460ee6411761a8a3f0b82d17dafd2740`; identidade das fontes locais `d53ac4511f757431da55589db0e6a0fcde2daebdb2b20303611d45882b7ab6b5`.
+Base Git `b7f5683f84609a5e957a56af4ca090c905f5ab80`; identidade das fontes locais `1a170ef08b78071c65b55ee5cc0bb4821d77622b8326d018835dbf4a27d6ec7a`.
 
-**707 módulos Python**, **1000 pares internos**, **1131 declarações de importação**, **6779 símbolos**, **45 pacotes**, **18 camadas** e **22 fluxogramas**.
+**711 módulos Python**, **1014 pares internos**, **1153 declarações de importação**, **6843 símbolos**, **45 pacotes**, **18 camadas** e **22 fluxogramas**.
 
 O inventário inclui 10267 arquivos rastreados presentes e
 8 superfícies não Python. Há 0 erros

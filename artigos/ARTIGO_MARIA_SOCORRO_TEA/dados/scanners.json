@@ -1,0 +1,372 @@
+{
+  "domain": "geral",
+  "started_at": 1793892562.2138724,
+  "verification": "local_operation",
+  "measurement": {
+    "kind": "provided_input_lexical",
+    "corpus_mode": "autodiscovery",
+    "corpus_id": null,
+    "input_sha256": "5d5e1b4c718da88f1305d645d3913ade77ed8a81a77e132fbc1f26bff945d079",
+    "measured_corpus_sha256": "5d5e1b4c718da88f1305d645d3913ade77ed8a81a77e132fbc1f26bff945d079",
+    "measured_bytes": 43407,
+    "functional_validation": false,
+    "externally_validated": false,
+    "confidence_calibrated": false
+  },
+  "noological": {
+    "coverage": 34,
+    "gaps": [],
+    "summary": {
+      "research_domain": "geral",
+      "timestamp": "2026-11-05T15:29:22.480106+00:00",
+      "version": "2.0",
+      "overall_density": 0.34,
+      "overall_coverage_pct": 34,
+      "dimensions_analyzed": 10,
+      "total_categories": 92,
+      "categories_covered": 31,
+      "categories_absent": 61,
+      "completeness_grade": "C — Cobertura Limitada",
+      "measurement_kind": "lexical_category_mentions",
+      "functional_validation": false,
+      "externally_validated": false
+    },
+    "measurement": {
+      "kind": "provided_input_lexical",
+      "corpus_mode": "autodiscovery",
+      "corpus_id": null,
+      "input_sha256": "5d5e1b4c718da88f1305d645d3913ade77ed8a81a77e132fbc1f26bff945d079",
+      "measured_corpus_sha256": "5d5e1b4c718da88f1305d645d3913ade77ed8a81a77e132fbc1f26bff945d079",
+      "measured_bytes": 43407,
+      "functional_validation": false,
+      "externally_validated": false,
+      "confidence_calibrated": false
+    }
+  },
+  "teleological": {
+    "skipped": "sem metas definidas"
+  },
+  "potentiality": {
+    "n_candidates": 2,
+    "score_kind": "heuristic",
+    "probability_calibrated": false,
+    "hypothesis_only": true,
+    "top_latent": [
+      {
+        "id": "evidence-oriented-evolution",
+        "description": "Hipótese de evolução orientada a evidências",
+        "requires": [
+          "self_evolution",
+          "evaluation",
+          "shared_memory"
+        ],
+        "coverage": 1.0,
+        "missing": [],
+        "resistencia": 0.0,
+        "tier": "latente-alto",
+        "present": [
+          "self_evolution",
+          "evaluation",
+          "shared_memory"
+        ],
+        "evidence": [
+          {
+            "capability": "self_evolution",
+            "state": "declared",
+            "providers": [
+              {
+                "module": "auto_evolve",
+                "state": "declared",
+                "declared_state": "declared",
+                "evidence": [],
+                "origin": "module:auto_evolve:self_evolution",
+                "requires": [],
+                "inputs": [],
+                "outputs": [],
+                "tags": [],
+                "composition": {
+                  "conceitos": [],
+                  "metodos": [],
+                  "bases": [],
+                  "ferramentas": [],
+                  "dominios": [],
+                  "validacoes": [],
+                  "recursos": []
+                },
+                "validation_criteria": []
+              }
+            ],
+            "references": []
+          },
+          {
+            "capability": "evaluation",
+            "state": "declared",
+            "providers": [
+              {
+                "module": "trust_engine",
+                "state": "declared",
+                "declared_state": "declared",
+                "evidence": [],
+                "origin": "module:trust_engine:evaluation",
+                "requires": [],
+                "inputs": [],
+                "outputs": [],
+                "tags": [],
+                "composition": {
+                  "conceitos": [],
+                  "metodos": [],
+                  "bases": [],
+                  "ferramentas": [],
+                  "dominios": [],
+                  "validacoes": [],
+                  "recursos": []
+                },
+                "validation_criteria": []
+              }
+            ],
+            "references": []
+          },
+          {
+            "capability": "shared_memory",
+            "state": "declared",
+            "providers": [
+              {
+                "module": "metabus",
+                "state": "declared",
+                "declared_state": "declared",
+                "evidence": [],
+                "origin": "module:metabus:shared_memory",
+                "requires": [],
+                "inputs": [],
+                "outputs": [],
+                "tags": [],
+                "composition": {
+                  "conceitos": [],
+                  "metodos": [],
+                  "bases": [],
+                  "ferramentas": [],
+                  "dominios": [],
+                  "validacoes": [],
+                  "recursos": []
+                },
+                "validation_criteria": []
+              }
+            ],
+            "references": []
+          }
+        ],
+        "explanation": "Receita declarativa de composição; componentes ainda precisam de critérios e evidências. Hipótese com 3/3 componentes declarados, 0/3 disponíveis e 0/3 com registros de execução. Faltantes: nenhum declarado. Cobertura declarativa não implica capacidade integrada em execução.",
+        "origin": "curated_recipe",
+        "operational_coverage": 0.0,
+        "executed_coverage": 0.0,
+        "external_coverage": 0.0,
+        "heuristic_score": 0.4,
+        "heuristic_resistance": 0.6,
+        "resistance_factors": {
+          "missing": [],
+          "not_available": [
+            "self_evolution",
+            "evaluation",
+            "shared_memory"
+          ],
+          "no_execution_reference": [
+            "self_evolution",
+            "evaluation",
+            "shared_memory"
+          ]
+        },
+        "score_kind": "heuristic",
+        "probability_calibrated": false,
+        "hypothesis_only": true,
+        "interfaces": [],
+        "hypothesis_references": []
+      },
+      {
+        "id": "goal-oriented-composition",
+        "description": "Hipótese de composição orientada a um estado futuro",
+        "requires": [
+          "target_definition",
+          "capacity_decomposition",
+          "input_decomposition",
+          "dependency_mapping"
+        ],
+        "coverage": 1.0,
+        "missing": [],
+        "resistencia": 0.0,
+        "tier": "latente-alto",
+        "present": [
+          "target_definition",
+          "capacity_decomposition",
+          "input_decomposition",
+          "dependency_mapping"
+        ],
+        "evidence": [
+          {
+            "capability": "target_definition",
+            "state": "declared",
+            "providers": [
+              {
+                "module": "teleological_scanner",
+                "state": "declared",
+                "declared_state": "declared",
+                "evidence": [],
+                "origin": "module:teleological_scanner:target_definition",
+                "requires": [],
+                "inputs": [],
+                "outputs": [],
+                "tags": [],
+                "composition": {
+                  "conceitos": [],
+                  "metodos": [],
+                  "bases": [],
+                  "ferramentas": [],
+                  "dominios": [],
+                  "validacoes": [],
+                  "recursos": []
+                },
+                "validation_criteria": []
+              }
+            ],
+            "references": []
+          },
+          {
+            "capability": "capacity_decomposition",
+            "state": "declared",
+            "providers": [
+              {
+                "module": "reverse_scanner",
+                "state": "declared",
+                "declared_state": "declared",
+                "evidence": [],
+                "origin": "module:reverse_scanner:capacity_decomposition",
+                "requires": [],
+                "inputs": [],
+                "outputs": [],
+                "tags": [],
+                "composition": {
+                  "conceitos": [],
+                  "metodos": [],
+                  "bases": [],
+                  "ferramentas": [],
+                  "dominios": [],
+                  "validacoes": [],
+                  "recursos": []
+                },
+                "validation_criteria": []
+              }
+            ],
+            "references": []
+          },
+          {
+            "capability": "input_decomposition",
+            "state": "declared",
+            "providers": [
+              {
+                "module": "knowledge_composition",
+                "state": "declared",
+                "declared_state": "declared",
+                "evidence": [],
+                "origin": "module:knowledge_composition:input_decomposition",
+                "requires": [],
+                "inputs": [],
+                "outputs": [],
+                "tags": [],
+                "composition": {
+                  "conceitos": [],
+                  "metodos": [],
+                  "bases": [],
+                  "ferramentas": [],
+                  "dominios": [],
+                  "validacoes": [],
+                  "recursos": []
+                },
+                "validation_criteria": []
+              }
+            ],
+            "references": []
+          },
+          {
+            "capability": "dependency_mapping",
+            "state": "declared",
+            "providers": [
+              {
+                "module": "trajectory_mapper",
+                "state": "declared",
+                "declared_state": "declared",
+                "evidence": [],
+                "origin": "module:trajectory_mapper:dependency_mapping",
+                "requires": [],
+                "inputs": [],
+                "outputs": [],
+                "tags": [],
+                "composition": {
+                  "conceitos": [],
+                  "metodos": [],
+                  "bases": [],
+                  "ferramentas": [],
+                  "dominios": [],
+                  "validacoes": [],
+                  "recursos": []
+                },
+                "validation_criteria": []
+              }
+            ],
+            "references": []
+          }
+        ],
+        "explanation": "Receita declarativa de composição; componentes ainda precisam de critérios e evidências. Hipótese com 4/4 componentes declarados, 0/4 disponíveis e 0/4 com registros de execução. Faltantes: nenhum declarado. Cobertura declarativa não implica capacidade integrada em execução.",
+        "origin": "curated_recipe",
+        "operational_coverage": 0.0,
+        "executed_coverage": 0.0,
+        "external_coverage": 0.0,
+        "heuristic_score": 0.4,
+        "heuristic_resistance": 0.6,
+        "resistance_factors": {
+          "missing": [],
+          "not_available": [
+            "target_definition",
+            "capacity_decomposition",
+            "input_decomposition",
+            "dependency_mapping"
+          ],
+          "no_execution_reference": [
+            "target_definition",
+            "capacity_decomposition",
+            "input_decomposition",
+            "dependency_mapping"
+          ]
+        },
+        "score_kind": "heuristic",
+        "probability_calibrated": false,
+        "hypothesis_only": true,
+        "interfaces": [],
+        "hypothesis_references": []
+      }
+    ]
+  },
+  "social_impact": {
+    "sroi_ratio": null,
+    "summary": "SocialImpactReport(title='Diagnóstico do Ecossistema', date='2026-11-05', sroi=SROIResult(total_investment=200000.0, gross_social_value=230000.0, deadweight_value=34500.0, attribution_value=184000.0, displacement_value=11500.0, net_present_value=510966.62, sroi_ratio=2.5548331, stakeholders=[Stakeholder(name='Academia/Pesquisadores', weight=0.8, outcomes=['Avanço científico', 'Publicações', 'Formação RH'], monetized_value=30000.0), Stakeholder(name='Sociedade/Beneficiários', weight=1.0, outcomes=['Aplicação prática', 'Impacto social'], monetized_value=150000.0), Stakeholder(name='Governo/Políticas Públicas', weight=0.6, outcomes=['Evidências para políticas', 'ODS'], monetized_value=50000.0)], iso_26000_themes={'governanca_organizacional': 0.0, 'direitos_humanos': 0.0, 'praticas_trabalhista"
+  },
+  "evolutionary": {
+    "total_gaps": 61,
+    "absent_categories": 61,
+    "teleological_gaps": 0,
+    "recommendation": "Priorizar fechamento de lacunas críticas (61 gaps) antes de novas features."
+  },
+  "reversa": {
+    "score": 3.0,
+    "findings": [
+      "Nenhum código estruturado detectado para engenharia reversa."
+    ],
+    "recommendations": []
+  },
+  "duration_s": 0.277,
+  "timings": {
+    "noological": 0.266,
+    "teleological": 0.0,
+    "potentiality": 0.001,
+    "evolutionary": 0.002,
+    "reversa": 0.009
+  }
+}

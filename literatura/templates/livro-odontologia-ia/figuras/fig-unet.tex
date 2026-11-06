@@ -1,0 +1,56 @@
+% ======================================================================
+% FIGURA: Arquitetura U-Net para segmentação dentária (Capítulo 8)
+% ======================================================================
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    node distance=0.4cm and 0.6cm,
+    enc/.style={rectangle, draw=blueaccent, fill=blueaccent!15, minimum width=1.3cm, minimum height=0.5cm, font=\tiny},
+    dec/.style={rectangle, draw=cyanaccent, fill=cyanaccent!15, minimum width=1.3cm, minimum height=0.5cm, font=\tiny},
+    skip/.style={-latex, dashed, gray, thick},
+    arrow/.style={-latex, thick},
+]
+% Encoder (esquerda)
+\node[enc] (e1) at (0,0) {$512^2$};
+\node[enc] (e2) at (0,-1.2) {$256^2$};
+\node[enc] (e3) at (0,-2.4) {$128^2$};
+\node[enc] (e4) at (0,-3.6) {$64^2$};
+\node[enc] (e5) at (0,-4.8) {$32^2$};
+
+% Decoder (direita)
+\node[dec] (d5) at (4,-4.8) {$32^2$};
+\node[dec] (d4) at (4,-3.6) {$64^2$};
+\node[dec] (d3) at (4,-2.4) {$128^2$};
+\node[dec] (d2) at (4,-1.2) {$256^2$};
+\node[dec] (d1) at (4,0) {$512^2$};
+
+% Skip connections
+\draw[skip] (e1.east) -- (d1.west) node[midway, above, font=\tiny] {copy};
+\draw[skip] (e2.east) -- (d2.west) node[midway, above, font=\tiny] {copy};
+\draw[skip] (e3.east) -- (d3.west) node[midway, above, font=\tiny] {copy};
+\draw[skip] (e4.east) -- (d4.west) node[midway, above, font=\tiny] {copy};
+
+% Down arrows
+\draw[arrow] (e1.south) -- (e2.north) node[midway, right, font=\tiny] {$\downarrow$};
+\draw[arrow] (e2.south) -- (e3.north);
+\draw[arrow] (e3.south) -- (e4.north);
+\draw[arrow] (e4.south) -- (e5.north);
+
+% Up arrows
+\draw[arrow] (d5.north) -- (d4.south) node[midway, right, font=\tiny] {$\uparrow$};
+\draw[arrow] (d4.north) -- (d3.south);
+\draw[arrow] (d3.north) -- (d2.south);
+\draw[arrow] (d2.north) -- (d1.south);
+
+% Center arrow
+\draw[arrow, thick, red] (e5.east) -- (d5.west) node[midway, below, font=\tiny] {bottleneck};
+
+% Labels
+\node[font=\footnotesize, above=0.3cm] at (0,0.5) {\textbf{Encoder}};
+\node[font=\footnotesize, above=0.3cm] at (4,0.5) {\textbf{Decoder}};
+\node[font=\tiny\color{codegray}] at (2,-6.0) {Radiografia $\rightarrow$ Máscara de Segmentação};
+
+\end{tikzpicture}
+\caption{Arquitetura U-Net com skip connections (Ronneberger et al., 2015). O encoder (azul) comprime a imagem extraindo características hierárquicas. O decoder (ciano) reconstrói a máscara de segmentação. As conexões de salto (tracejadas) preservam detalhes espaciais finos, essenciais para delimitar bordas dentárias.}
+\label{fig:unet-architecture}
+\end{figure}

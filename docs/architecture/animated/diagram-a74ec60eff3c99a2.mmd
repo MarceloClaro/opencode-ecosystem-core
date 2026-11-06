@@ -1,0 +1,14 @@
+flowchart TB
+    U["Tarefa do usuário"] --> P["MarceloClaroOrchestrator.delegate"]
+    P --> M["MetaBus: busca contextual de episódios e observações"]
+    M --> C["Preparação crítica local: heurística, sem LLM"]
+    C --> B["Blackboard: agentes elegíveis e atribuição"]
+    B --> E["AutonomousCoordinator / executor com orçamento"]
+    E --> G{"Gate autoritativo SDD/TDD"}
+    G -->|"Aceita ou reprova"| R["Reflexion: resultado, erro observado e próxima ação"]
+    R --> V["MetacognitiveEvaluator: dimensões heurísticas"]
+    V --> O["Observação tipada persistida; sem autopromoção"]
+    O --> M
+    R -->|"Persistência falhou"| D["metacognition.failed: degradação explícita"]
+    F["Orchestrator.reason: motores formais/heurísticos existentes"] --> O
+    M -. "Contexto e proveniência; não altera expressão formal" .-> F

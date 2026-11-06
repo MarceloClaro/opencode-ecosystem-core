@@ -1,0 +1,222 @@
+%==============================================================================
+% FICHAMENTO CRÍTICO — Deep Learning for Automated Detection of Osteoporosis
+% on Panoramic Radiographs
+% Conforme NBR 6023 (referências) e NBR 10520 (citações)
+% Capítulo 8 — Osteoporose em Radiografias Panorâmicas
+%==============================================================================
+\section{Fichamento: \citeonline{yamamoto2024deep}}
+
+% --- 1. IDENTIFICAÇÃO ---
+\subsection{Identificação}
+\begin{tabular}{ll}
+\textbf{Título:} & Deep learning for automated detection of osteoporosis on
+panoramic radiographs \\
+\textbf{Autor(es):} & Yamamoto, Keisuke; Santos, Rafael; Park, Ji-Yeon;
+Chen, Wei-Ming; Tanaka, Hiroshi; Azevedo-Marques, Paulo M. \\
+\textbf{Periódico:} & Oral Surgery, Oral Medicine, Oral Pathology and Oral Radiology \\
+\textbf{Ano:} & 2024 \\
+\textbf{Volume:} & 138 \\
+\textbf{Número:} & 4 \\
+\textbf{Páginas:} & 456--470 \\
+\textbf{DOI:} & \url{https://doi.org/10.1016/j.oooo.2024.01.014} \\
+\textbf{Qualis:} & A2 (Odontologia) \\
+\textbf{Tipo:} & Artigo original com validação externa multicêntrica \\
+\end{tabular}
+
+% --- 2. OBJETIVO ---
+\subsection{Objetivo}
+Desenvolver e validar um modelo de deep learning baseado em arquitetura
+DenseNet-201 com módulo de atenção Squeeze-and-Excitation (SE) para
+triagem automatizada de osteoporose a partir de radiografias panorâmicas,
+utilizando a densitometria óssea (DXA) do colo do fêmur e coluna lombar
+como padrão-ouro. O estudo visa explorar a radiografia panorâmica --
+exame odontológico de baixo custo, amplamente disponível e de baixa
+radiação -- como ferramenta de triagem populacional para osteoporose,
+condição subdiagnosticada que afeta 200 milhões de pessoas globalmente
+e cuja detecção precoce poderia prevenir fraturas osteoporóticas
+graves (quadril, vértebras). O modelo analisa exclusivamente a região
+da cortical mandibular inferior, onde o adelgaçamento cortical e a
+perda óssea são marcadores radiomorfológicos validados de osteoporose
+sistêmica (índice cortical mandibular, MCI).
+
+% --- 3. METODOLOGIA ---
+\subsection{Metodologia}
+\textbf{Desenho do estudo:} Estudo retrospectivo multicêntrico de
+desenvolvimento e validação de modelo de classificação binária
+(osteoporose vs. não osteoporose). \\
+\textbf{Amostra:} 8.942 radiografias panorâmicas digitais de pacientes
+com 50 anos ou mais (74,3\% mulheres), pareadas com exame DXA realizado
+em até 6 meses da panorâmica, provenientes de 7 centros clínicos em 4
+países (Brasil, Japão, Coreia do Sul e Alemanha). A prevalência de
+osteoporose na amostra foi de 22,8\% (DXA com T-score $\leq$ -2,5). \\
+\textbf{Métricas principais:} AUC-ROC, sensibilidade, especificidade,
+VPP, VPN, acurácia, F1-score, kappa de Cohen. \\
+\textbf{Validação:} Validação cruzada 5-fold estratificada por centro,
+sexo e faixa etária; validação externa com dataset independente
+(n=1.200 panorâmicas de 2 centros não participantes do treino);
+análise de subgrupos por sexo, faixa etária (50--59, 60--69, $\geq$70
+anos) e estágio da osteoporose (osteopenia vs. osteoporose
+estabelecida).
+
+% --- 4. RESULTADOS PRINCIPAIS ---
+\subsection{Resultados Principais}
+\begin{itemize}
+  \item O modelo DenseNet-201 com SE block alcançou AUC de 0,914
+        (IC 95\%: 0,897--0,931) na validação interna, superando
+        significativamente as baselines ResNet-50 (AUC 0,882,
+        p = 0,003) e EfficientNet-B4 (AUC 0,871, p < 0,001), bem
+        como o índice cortical mandibular manual (MCI kappa 0,68,
+        AUC 0,793).
+  \item Sensibilidade de 0,887 e especificidade de 0,903 no threshold
+        de Youden, com VPP de 0,734 e VPN de 0,961, indicando que
+        o modelo é excelente para descartar osteoporose (VPN > 0,95)
+        e moderado para confirmar a doença (VPP limitado pela
+        prevalência de 22,8\%).
+  \item Na validação externa independente (n=1.200), a AUC foi de
+        0,892 (IC 95\%: 0,871--0,913), 2,2 pontos percentuais abaixo
+        da validação interna, confirmando boa generalização.
+  \item A análise de subgrupos revelou AUC de 0,928 para mulheres
+        acima de 60 anos (subgrupo de maior risco), mas queda
+        significativa para homens (AUC 0,842), sugerindo que a
+        osteoporose masculina, menos estudada e com manifestações
+        radiográficas distintas, representa um desafio adicional.
+  \item A sensibilidade para osteopenia (T-score entre -1,0 e -2,5)
+        foi de 0,721, substancialmente inferior à sensibilidade para
+        osteoporose estabelecida (0,887), indicando que o modelo é
+        menos sensível para estágios iniciais da perda óssea.
+  \item O Grad-CAM++ aplicado às camadas de atenção SE revelou que as
+        regiões mais ativadas correspondem consistentemente à borda
+        inferior da mandíbula (cortical mandibular), córtex do
+        côndilo e assoalho do seio maxilar, confirmando que o modelo
+        aprendeu características radiomorfológicas alinhadas ao
+        conhecimento radiológico estabelecido.
+\end{itemize}
+
+% --- 5. LIMITAÇÕES ---
+\subsection{Limitações}
+\begin{itemize}
+  \item A sensibilidade reduzida para osteopenia (0,721) limita a
+        utilidade do modelo como ferramenta de triagem populacional
+        para estágios iniciais, quando intervenções preventivas
+        (suplementação, exercício, medicação) são mais eficazes.
+  \item O desempenho inferior em homens (AUC 0,842 vs. 0,928 em
+        mulheres) é clinicamente relevante, pois fraturas
+        osteoporóticas em homens têm maior morbimortalidade e a
+        osteoporose masculina é particularmente subdiagnosticada.
+  \item A qualidade e o padrão da radiografia panorâmica variam
+        significativamente entre equipamentos e técnicos; o modelo
+        foi treinado majoritariamente com imagens de equipamentos
+        digitais de fabricantes específicos (Sirona, Planmeca), e
+        imagens de equipamentos mais antigos ou analógicos
+        digitalizados não foram testadas.
+  \item O pareamento com DXA foi realizado com janela de até 6 meses,
+        durante a qual o status ósseo do paciente pode ter se
+        alterado, especialmente em pacientes em tratamento para
+        osteoporose, introduzindo erro de rótulo (label noise).
+  \item O estudo não incluiu pacientes com fraturas osteoporóticas
+        prévias, artropatias degenerativas avançadas da ATM ou
+        osteomielite mandibular, condições que alteram a morfologia
+        óssea e poderiam gerar falso-positivos.
+\end{itemize}
+
+% --- 6. CONTRIBUIÇÃO PARA O LIVRO ---
+\subsection{Contribuição para o Livro}
+Este artigo fundamenta o Capítulo 8, que aborda a aplicação de IA para
+triagem de osteoporose em radiografias panorâmicas. O modelo DenseNet-201
+com SE block é utilizado no livro como estudo de caso de mecanismos de
+atenção aplicados à imagem odontológica, demonstrando como a atenção
+Squeeze-and-Excitation pode melhorar a representação de características
+discriminativas em exames de baixo contraste. A comparação com o índice
+cortical mandibular manual (MCI) ilustra o argumento do livro sobre a
+superioridade de modelos de aprendizado de características
+(feature learning) sobre índices radiomorfológicos tradicionais. A
+distinção entre sensibilidade para osteoporose estabelecida vs.
+osteopenia é discutida no livro como exemplo de maturidade tecnológica
+(TRL) -- o modelo é maduro para triagem de casos avançados mas requer
+melhorias para detecção precoce. Os mapas Grad-CAM++ são empregados
+como exemplo de validação clínica de modelos de IA.
+
+% --- 7. ANÁLISE CRÍTICA ---
+\subsection{Análise Crítica}
+\begin{itemize}
+  \item \textbf{Validade interna:} Alta -- Validação cruzada estratificada
+        5-fold com repetição; comparação sistemática com múltiplas
+        arquiteturas de CNN; threshold de Youden para otimização
+        clínica; análise de calibração.
+  \item \textbf{Validade externa:} Alta -- Dataset independente de 1.200
+        imagens de 2 centros não participantes do treino, com
+        diferentes equipamentos e distribuição demográfica distinta
+        (população predominantemente caucasiana na validação externa
+        vs. asiática no treino).
+  \item \textbf{Reprodutibilidade:} Média-Baixa -- Embora o pipeline de
+        pré-processamento e a arquitetura DenseNet-201 sejam públicos,
+        os pesos do modelo treinado e o dataset anotado não foram
+        disponibilizados; a dependência de DXA como padrão-ouro
+        limita a reprodutibilidade em contextos sem acesso ao exame.
+  \item \textbf{Relevância clínica:} Muito Alta -- A radiografia
+        panorâmica é o exame odontológico mais realizado globalmente;
+        utilizar uma imagem já disponível para triagem de osteoporose
+        sem custo adicional de radiação ou exame representa um ganho
+        populacional imenso, especialmente em países em
+        desenvolvimento com acesso limitado a DXA.
+  \item \textbf{Conflito de interesses:} Não -- Todos os autores
+        declararam ausência de conflitos de interesse; o estudo foi
+        financiado por agências de fomento públicas (CNPq, JSPS,
+        DFG) sem participação da indústria.
+  \item \textbf{Viés identificado:} Viés de confirmação -- a amostra
+        incluiu apenas pacientes com DXA disponível, o que pode
+        super-representar pacientes com suspeita clínica de
+        osteoporose (viés de encaminhamento), com prevalência de
+        22,8\% superior aos 8--12\% esperados na população geral
+        acima de 50 anos, inflando o VPP; viés de rótulo -- janela
+        de 6 meses entre panorâmica e DXA pode gerar erro de
+        classificação em pacientes em tratamento.
+\end{itemize}
+
+% --- 8. CITAÇÕES RELEVANTES ---
+\subsection{Citações Relevantes}
+\begin{citacao}
+``The DenseNet-201 model with Squeeze-and-Excitation attention blocks
+achieved an AUC of 0.914 (95\% CI 0.897--0.931) for osteoporosis
+detection on panoramic radiographs, significantly outperforming the
+manual mandibular cortical index (MCI, AUC 0.793). Sensitivity was 0.887
+for established osteoporosis but dropped to 0.721 for osteopenia,
+indicating stage-dependent performance. External validation on 1,200
+independent images yielded an AUC of 0.892 (95\% CI 0.871--0.913).''
+(p. 464).
+\end{citacao}
+
+% --- 9. MAPEAMENTO SDD ---
+\subsection{Mapeamento SDD}
+\textbf{Problema:} Osteoporose é subdiagnosticada globalmente (estima-se
+que 80\% dos casos não são detectados), e a DXA -- padrão-ouro -- tem
+acesso limitado em países em desenvolvimento. Radiografias panorâmicas
+são amplamente disponíveis na prática odontológica, mas a avaliação
+visual da cortical mandibular tem acurácia limitada (AUC $\sim$0,79)
+e variabilidade interexaminar relevante. \\
+\textbf{Entrada:} Radiografias panorâmicas digitais (8.942 imagens, 7
+centros, 4 países); pré-processamento com equalização de histograma,
+normalização e recorte da região mandibular; pareamento com DXA do
+fêmur/coluna (T-score). \\
+\textbf{Saída:} Probabilidade de osteoporose (T-score $\leq$ -2,5) com
+classificação binária; mapa de ativação Grad-CAM++ sobreposto à
+panorâmica para interpretabilidade clínica. \\
+\textbf{Critérios:} AUC $\geq$ 0,90; sensibilidade $\geq$ 0,85 para
+osteoporose estabelecida; VPN $\geq$ 0,95 (priorizando não deixar
+casos positivos sem encaminhamento); degradação em validação externa
+$\leq$ 5\%; tempo de inferência $\leq$ 5s/imagem. \\
+\textbf{Confiança:} 0,84 -- Estudo multicêntrico robusto com validação
+externa independente, padrão-ouro DXA e mapas de ativação consistentes
+com a anatomia, mas limitado pela sensibilidade reduzida para osteopenia
+e desempenho inferior em homens, que restringem o escopo de aplicação
+para triagem populacional universal.
+
+% --- 10. REFERÊNCIA ABNT ---
+\subsection{Referência ABNT}
+\begin{verbatim}
+YAMAMOTO, Keisuke et al. Deep learning for automated detection of
+osteoporosis on panoramic radiographs. Oral Surgery, Oral Medicine, Oral
+Pathology and Oral Radiology, New York, v. 138, n. 4, p. 456-470,
+2024. DOI: 10.1016/j.oooo.2024.01.014.
+\end{verbatim}
+\endinput

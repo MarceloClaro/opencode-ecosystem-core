@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 480" font-family="Arial, sans-serif">
+  <!-- ===== COMENTÁRIO DIDÁTICO =====
+  Esta figura ilustra o ciclo RED→GREEN→REFACTOR do TDD (Beck, 2003).
+  
+  COMO LER: Comece no topo (RED) e siga as setas no sentido horário.
+  - RED: escreva um teste que FALHA (porque a funcionalidade ainda não existe)
+  - GREEN: implemente o código MÍNIMO para o teste passar
+  - REFACTOR: melhore a estrutura SEM quebrar o que já funciona
+  
+  O ciclo se repete para cada nova funcionalidade. A régua na base mostra
+  o score Qualis subindo a cada iteração, conectando TDD à qualidade acadêmica.
+  -->
+
+  <!-- Título -->
+  <text x="375" y="22" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">Ciclo TDD — RED → GREEN → REFACTOR</text>
+  <text x="375" y="38" text-anchor="middle" font-size="10" fill="#64748b">Adaptado do ciclo original de Kent Beck (2003) para validação de pipelines científicos</text>
+
+  <!-- Círculo central -->
+  <circle cx="375" cy="270" r="85" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,4"/>
+  <text x="375" y="265" text-anchor="middle" font-size="11" font-weight="bold" fill="#475569">ITERAÇÃO</text>
+  <text x="375" y="282" text-anchor="middle" font-size="10" fill="#94a3b8">a cada</text>
+  <text x="375" y="296" text-anchor="middle" font-size="10" fill="#94a3b8">funcionalidade</text>
+
+  <!-- Nó RED -->
+  <rect x="265" y="118" width="220" height="65" rx="6" fill="#fee2e2" stroke="#ef4444" stroke-width="2"/>
+  <text x="375" y="140" text-anchor="middle" font-size="15" font-weight="bold" fill="#991b1b">RED</text>
+  <text x="375" y="157" text-anchor="middle" font-size="10" fill="#7f1d1d">Escreva um teste que FALHA</text>
+  <text x="375" y="173" text-anchor="middle" font-size="9" fill="#b91c1c" font-style="italic">(a funcionalidade ainda não existe)</text>
+
+  <!-- Seta RED→GREEN (arco direito) -->
+  <path d="M485,180 Q540,260 485,290" fill="none" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="520" y="240" font-size="9" fill="#475569" font-style="italic">implementar</text>
+  <text x="520" y="252" font-size="9" fill="#475569" font-style="italic">mínimo</text>
+
+  <!-- Nó GREEN -->
+  <rect x="265" y="310" width="220" height="65" rx="6" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+  <text x="375" y="332" text-anchor="middle" font-size="15" font-weight="bold" fill="#14532d">GREEN</text>
+  <text x="375" y="349" text-anchor="middle" font-size="10" fill="#166534">Faça o teste PASSAR</text>
+  <text x="375" y="365" text-anchor="middle" font-size="9" fill="#16a34a" font-style="italic">(código mínimo necessário)</text>
+
+  <!-- Seta GREEN→REFACTOR (arco esquerdo) -->
+  <path d="M265,290 Q210,260 265,180" fill="none" stroke="#475569" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="175" y="240" font-size="9" fill="#475569" font-style="italic">melhorar</text>
+  <text x="175" y="252" font-size="9" fill="#475569" font-style="italic">estrutura</text>
+
+  <!-- Nó REFACTOR -->
+  <rect x="265" y="440" width="220" height="55" rx="6" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="375" y="462" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e3a5f">REFACTOR</text>
+  <text x="375" y="479" text-anchor="middle" font-size="10" fill="#1e40af">Melhore o código sem quebrar testes</text>
+
+  <!-- Seta REFACTOR→RED (retorno) -->
+  <path d="M265,467 L140,467 L140,150 L258,150" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#arr)"/>
+  <text x="145" y="310" text-anchor="middle" font-size="9" fill="#7c3aed" transform="rotate(-90,145,310)">nova funcionalidade</text>
+
+  <!-- Régua de qualidade na base -->
+  <rect x="30" y="510" width="690" height="28" rx="4" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+  <rect x="30" y="510" width="680" height="28" rx="4" fill="#4ade80" opacity="0.3"/>
+  <text x="375" y="529" text-anchor="middle" font-size="11" fill="#475569">Score Qualis: 85 → 90 → 92 → 95 → 98 → 99/100 (a cada iteração do ciclo)</text>
+
+  <!-- Seta para conectar ao próximo conceito -->
+  <text x="375" y="555" text-anchor="middle" font-size="10" fill="#94a3b8">Cada ciclo TDD alimenta o SDD (spec → test → code) e o AutoEvolve (aprender → melhorar)</text>
+
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#475569"/>
+    </marker>
+  </defs>
+</svg>

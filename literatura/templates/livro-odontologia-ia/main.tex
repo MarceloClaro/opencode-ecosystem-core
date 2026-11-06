@@ -1,0 +1,161 @@
+%==============================================================================
+% main.tex — OdontoIA: Inteligência Artificial, Deep Learning e Gêmeos Digitais
+%            na Odontologia
+% Conforme NBR 6029 (Livro) e NBR 14724 (Trabalhos Acadêmicos)
+% Autor: Edson Laranjeiras
+% 500 laudas | 28 capítulos | 5 partes
+% Compilação: xelatex main.tex && bibtex main && xelatex main.tex && xelatex main.tex
+%==============================================================================
+
+\documentclass[
+  12pt,
+  a4paper,
+  twoside,
+  openright,
+  chapter=TITLE,
+  section=TITLE,
+]{abntex2}
+
+% --- Configurações ABNT ---
+\input{config/preambulo}
+
+%==============================================================================
+% INÍCIO DO DOCUMENTO
+%==============================================================================
+\begin{document}
+
+%-----------------------------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS (NBR 14724)
+%-----------------------------------------------------------------------------
+\pretextual
+
+% Capa (obrigatório NBR 6029)
+\input{prefacio/01-folha-rosto}
+
+% Ficha catalográfica (verso da folha de rosto)
+\input{prefacio/02-ficha-catalografica}
+
+% Dedicatória
+\input{prefacio/03-dedicatoria}
+
+% Agradecimentos
+\input{prefacio/04-agradecimentos}
+
+% Epígrafe
+\input{prefacio/05-epigrafe}
+
+% Resumo em português (NBR 6028)
+\input{prefacio/06-resumo}
+
+% Abstract em inglês
+\input{prefacio/07-abstract}
+
+% Lista de figuras
+\input{prefacio/08-lista-figuras}
+
+% Lista de tabelas
+\input{prefacio/09-lista-tabelas}
+
+% Lista de abreviaturas e siglas
+\input{prefacio/10-lista-siglas}
+
+% Sumário (NBR 6027)
+\input{prefacio/11-sumario}
+
+%==============================================================================
+% ELEMENTOS TEXTUAIS (NBR 14724)
+%==============================================================================
+\textual
+
+%==================================================================
+% PARTE I — FUNDAMENTOS (Capítulos 1 a 5)
+%==================================================================
+\aberturaparte{I}{FUNDAMENTOS HISTÓRICOS E TECNOLÓGICOS}
+  {Toda tecnologia suficientemente avançada é indistinguível de magia.}
+  {0 a 2 — iniciante a intermediário}
+\label{part:fundamentos}
+
+\include{parte1-fundamentos/01-historia-ia-odontologia}
+\include{parte1-fundamentos/02-evidencia-revisoes}
+\include{parte1-fundamentos/03-python-colab}
+\include{parte1-fundamentos/04-estatistica-essencial}
+\include{parte1-fundamentos/05-ml-classico}
+
+%==================================================================
+% PARTE II — TEORIA E MODELOS DE DEEP LEARNING (Cap. 6-11)
+%==================================================================
+\part{TEORIA E MODELOS DE DEEP LEARNING}
+
+\include{parte2-teoria-modelos/06-redes-neurais}
+\include{parte2-teoria-modelos/07-cnns-imagens}
+\include{parte2-teoria-modelos/08-segmentacao-dental}
+\include{parte2-teoria-modelos/09-radiologia-dl}
+\include{parte2-teoria-modelos/10-lesoes-bucais-classificacao}
+\include{parte2-teoria-modelos/11-cancer-oral-opmd}
+
+%==================================================================
+% PARTE III — ENGENHARIA DE SOFTWARE ODONTOLÓGICO (Cap. 12-17)
+%==================================================================
+\part{ENGENHARIA DE SOFTWARE ODONTOLÓGICO COM SDD E TDD}
+
+\include{parte3-engenharia-sdd-tdd/12-sdd-metodologia}
+\include{parte3-engenharia-sdd-tdd/13-tdd-python}
+\include{parte3-engenharia-sdd-tdd/14-projetos-guiados}
+\include{parte3-engenharia-sdd-tdd/15-interpretacao-modelos}
+\include{parte3-engenharia-sdd-tdd/16-auditoria-github}
+\include{parte3-engenharia-sdd-tdd/17-reprodutibilidade}
+
+%==================================================================
+% PARTE IV — APLICAÇÕES AVANÇADAS (Capítulos 18 a 23)
+%==================================================================
+\part{APLICAÇÕES AVANÇADAS EM ESPECIALIDADES ODONTOLÓGICAS}
+
+\include{parte4-aplicacoes-avancadas/18-periodontia-ia}
+\include{parte4-aplicacoes-avancadas/19-implantodontia-ia}
+\include{parte4-aplicacoes-avancadas/20-ortodontia-ia}
+\include{parte4-aplicacoes-avancadas/21-gemeos-digitais}
+\include{parte4-aplicacoes-avancadas/22-modelos-fundacionais}
+\include{parte4-aplicacoes-avancadas/23-rag-odontologico}
+
+%==================================================================
+% PARTE V — FUTURO, ÉTICA E REGULAÇÃO (Capítulos 24 a 28)
+%==================================================================
+\part{FUTURO, ÉTICA E REGULAÇÃO DA IA EM ODONTOLOGIA}
+
+\include{parte5-futuro-etica/24-publicacao-cientifica}
+\include{parte5-futuro-etica/25-etica-lgpd-regulacao}
+\include{parte5-futuro-etica/26-educacao-odontologica-ia}
+\include{parte5-futuro-etica/27-futuro-odontologia}
+\include{parte5-futuro-etica/28-conclusao-final}
+
+%-----------------------------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS (NBR 14724)
+%-----------------------------------------------------------------------------
+\postextual
+
+% Apêndices (NBR 14724 — documentos elaborados pelo autor)
+\begin{apendicesenv}
+\partapendices
+
+\input{apendices/apendice-a-glossario}
+\input{apendices/apendice-b-referencias-artigos}
+\input{apendices/apendice-c-datasets-publicos}
+\input{apendices/apendice-d-instalacao-ambiente}
+\end{apendicesenv}
+
+% Anexos (NBR 14724 — documentos não elaborados pelo autor)
+% (se houver, incluir aqui)
+
+% Referências Bibliográficas (NBR 6023) — biblatex
+\printbibliography[title=REFERÊNCIAS]
+
+% Glossário
+\printglossary[title=GLOSSÁRIO]
+
+% Índice Remissivo
+\printindex
+
+\end{document}
+%==============================================================================
+% FIM DO DOCUMENTO
+%==============================================================================

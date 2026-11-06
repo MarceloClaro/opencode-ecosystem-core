@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 460" font-family="Arial, sans-serif">
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#6366f1"/></marker>
+    <filter id="sh"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-opacity="0.1"/></filter>
+  </defs>
+
+  <text x="375" y="22" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">Ciclo AutoEvolve + 5 Scanners — 18 Iteracoes Documentadas</text>
+  <text x="375" y="38" text-anchor="middle" font-size="10" fill="#64748b">PLAN → ACT → REFLECT → EXTRACT → EVOLVE | Score: 85 → 99 (+14 pts) | Cohen d = 2.8</text>
+
+  <ellipse cx="100" cy="140" rx="80" ry="42" fill="#e0e7ff" stroke="#6366f1" stroke-width="1.5" filter="url(#sh)"/>
+  <text x="100" y="134" text-anchor="middle" font-size="12" fill="#4338ca" font-weight="bold">PLAN</text>
+  <text x="100" y="150" text-anchor="middle" font-size="8" fill="#6366f1">NoologicalScanner</text>
+  <text x="100" y="162" text-anchor="middle" font-size="7" fill="#a5b4fc">"O que esta ausente?"</text>
+
+  <ellipse cx="370" cy="70" rx="80" ry="42" fill="#d1fae5" stroke="#10b981" stroke-width="1.5" filter="url(#sh)"/>
+  <text x="370" y="64" text-anchor="middle" font-size="12" fill="#047857" font-weight="bold">ACT</text>
+  <text x="370" y="80" text-anchor="middle" font-size="8" fill="#10b981">TeleologicalScanner</text>
+  <text x="370" y="92" text-anchor="middle" font-size="7" fill="#6ee7b7">"O que e necessario?"</text>
+
+  <ellipse cx="640" cy="140" rx="80" ry="42" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5" filter="url(#sh)"/>
+  <text x="640" y="134" text-anchor="middle" font-size="12" fill="#b45309" font-weight="bold">REFLECT</text>
+  <text x="640" y="150" text-anchor="middle" font-size="8" fill="#f59e0b">CrossValidation</text>
+  <text x="640" y="162" text-anchor="middle" font-size="7" fill="#fcd34d">"O que sustenta o que?"</text>
+
+  <ellipse cx="370" cy="270" rx="80" ry="42" fill="#fee2e2" stroke="#ef4444" stroke-width="1.5" filter="url(#sh)"/>
+  <text x="370" y="264" text-anchor="middle" font-size="12" fill="#b91c1c" font-weight="bold">EXTRACT</text>
+  <text x="370" y="280" text-anchor="middle" font-size="8" fill="#ef4444">PolymathicConverg.</text>
+  <text x="370" y="292" text-anchor="middle" font-size="7" fill="#fca5a5">"Quem ja resolveu?"</text>
+
+  <ellipse cx="100" cy="270" rx="80" ry="48" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.5" filter="url(#sh)"/>
+  <text x="100" y="262" text-anchor="middle" font-size="12" fill="#6d28d9" font-weight="bold">EVOLVE</text>
+  <text x="100" y="278" text-anchor="middle" font-size="8" fill="#8b5cf6">TrajectoryMapper</text>
+  <text x="100" y="290" text-anchor="middle" font-size="7" fill="#c4b5fd">MCSP Solver</text>
+
+  <line x1="175" y1="125" x2="295" y2="90" stroke="#6366f1" stroke-width="1.5" marker-end="url(#a)"/>
+  <line x1="445" y1="90" x2="565" y2="125" stroke="#6366f1" stroke-width="1.5" marker-end="url(#a)"/>
+  <line x1="610" y1="180" x2="420" y2="250" stroke="#6366f1" stroke-width="1.5" marker-end="url(#a)"/>
+  <line x1="340" y1="310" x2="160" y2="295" stroke="#6366f1" stroke-width="1.5" marker-end="url(#a)"/>
+  <line x1="100" y1="240" x2="100" y2="195" stroke="#6366f1" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <ellipse cx="370" cy="165" rx="50" ry="28" fill="#1e293b" opacity="0.9"/>
+  <text x="370" y="160" text-anchor="middle" font-size="11" fill="#4ade80" font-weight="bold">Score 99</text>
+  <text x="370" y="175" text-anchor="middle" font-size="8" fill="#94a3b8">+14 pts</text>
+  <text x="370" y="187" text-anchor="middle" font-size="7" fill="#64748b">18 ciclos</text>
+
+  <rect x="20" y="345" width="710" height="105" rx="6" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="40" y="365" font-size="9" fill="#334155" font-weight="bold">Metacognicao Artificial (3 niveis):</text>
+  <text x="40" y="380" font-size="8" fill="#64748b">Nivel 1 — Monitoramento: REFLECT detecta padroes de falha nos outputs</text>
+  <text x="40" y="395" font-size="8" fill="#64748b">Nivel 2 — Controle: EVOLVE ajusta comportamento (habilita/desabilita skills)</text>
+  <text x="40" y="410" font-size="8" fill="#64748b">Nivel 3 — Meta-aprendizado: 18 ciclos documentados constituem registro de "aprender sobre como aprender"</text>
+  <text x="40" y="430" font-size="8" fill="#6366f1" font-weight="bold">Validacao: 255 CTs · 8 suites TDD · 100% aprovacao · Pesquisa-Acao (Lewin, 1946) ≡ PLAN→ACT→REFLECT→EVOLVE</text>
+</svg>

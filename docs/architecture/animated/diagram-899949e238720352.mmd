@@ -1,0 +1,22 @@
+flowchart TD
+  U[Usuário ou agente executor] --> S[Spec e testes do perfil]
+  S --> P[MarceloClaroOrchestrator]
+  C[CLI agentes / MCP ecosystem_agent_profile] --> P
+  P --> V[AgentLifecycleService]
+  V --> G{Definição, identidade, fonte e política válidas?}
+  G -->|não| B[Bloqueio com motivo]
+  G -->|sim| A[Publicação atômica do cartão no catálogo]
+  A --> O[Gerador OpenCode: mesmos bytes validados]
+  O --> D[opencode.json]
+  P --> H{Fonte permanece com o hash validado?}
+  H -->|não| B
+  H -->|sim| M[MetaBus agent.register]
+  M --> BB[Blackboard e capacidade exclusiva]
+  BB --> T{Perfil disponível e identidade correta?}
+  T -->|não| B
+  T -->|sim| Q[Tarefa com prompt, hash e contrato exatos]
+  Q --> E[Executor elegível]
+  E --> R[Resultado e evidências de execução]
+  R --> F[Gate de entrega SDD/TDD]
+  F --> K[Memória metacognitiva]
+  B --> K

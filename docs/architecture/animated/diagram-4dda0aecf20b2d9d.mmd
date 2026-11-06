@@ -1,0 +1,18 @@
+flowchart TB
+  INPUT["ci-local ou ecosystem_local_ci"] --> MC["MarceloClaro.local_ci_action"]
+  MC --> OP{"start / status / runs / cancel"}
+  OP -->|start| PROFILE["Somente perfil scientific enumerado"]
+  PROFILE --> LOCK["Lock de escritor único; identidade das fontes"]
+  LOCK --> RUN["Supervisor: grupos, prazo e memória delimitados"]
+  RUN --> JUNIT["JUnit, seleção, execução e hashes"]
+  JUNIT --> VERIFY{"Fontes estáveis e todos os grupos exigidos concluídos?"}
+  VERIFY -->|não| BLOCK["blocked ou cancelled; preservar erro"]
+  VERIFY -->|sim| PASS["passed no escopo selecionado"]
+  OP -->|status ou runs| READ["Ler recibos e conferir compatibilidade"]
+  OP -->|cancel| CANCEL["Cancelar e limpar processos observados"]
+  READ --> RESULT["Estado observado e limitações"]
+  CANCEL --> RESULT
+  PASS --> RESULT
+  BLOCK --> RESULT
+  RESULT --> META["Observação no MetaBus"]
+  RESULT -.->|github_check_created false| REMOTE["CI remota exige execução e evidência próprias"]

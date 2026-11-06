@@ -1,13 +1,13 @@
 # PROGRESS — Estado corrente e arquivo de checkpoints
 
-## Estado atual — orientação de 03/11/2026
+## Estado atual — orientação de 04/11/2026
 
 A retomada parte do checkout e da tarefa atual. O bloco abaixo deriva as
 contagens das fontes locais; o histórico R414 preservado ao final não representa
 o último estado operacional do Core.
 
 <!-- core-state:start -->
-**333 agentes** · **27 MCPs** · **35 comandos** · **22 checks**
+**337 agentes** · **30 MCPs** · **35 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 
@@ -22,6 +22,54 @@ e [o contrato de interrupção](specs/SPEC-935-R825-execution-cancellation.md)
 explicam integrações e limites específicos. Recibos datados em `outputs/` e
 `docs/evidence/` são evidências de execuções determinadas; uma suíte interrompida
 não comprova o aceite integral.
+
+## Checkpoint R1055–R1056 — vídeo e documentação animada
+
+- **R1055**, commit `c800112d`: vídeo de qubit 16:9 e 9:16 nativo, 109,73 s,
+  voz Francisca sem clonagem, mapa Natural Earth e câmera por frames.
+  [QC/hashes](reports/r1055/README.md); MP4 local/ignorado no Git; revisão
+  humana da voz, física e edição pendente. Sem publicação.
+- **R1056**: [atlas animado](docs/architecture/ANIMATED.md) dos Mermaid de raiz
+  e `docs/`, incluindo os 22 fluxos do catálogo. Fontes históricas preservadas,
+  GIFs opcionais de um ciclo, PNG/SVG acessíveis, manifesto e verificação local.
+  [Relatório](reports/r1056/README.md); não é reauditoria do runtime R916.
+
+## Checkpoint R1063 — assistente acessível (fundação)
+
+- Ponte **UI Automation do Windows** (list/snapshot/read/focused/invoke) com allowlist, confirmação e redação; testada em Notepad/Explorer.
+- **Voz** WSLg: microfone `RDPSource`, ASR faster-whisper local e TTS Edge em `RDPSink`; comandos “Core, …” com confirmação falada.
+- **Memória** Fernet de 24 h para eventos/transcrições; `routine` captura janela + voz sem pixels/áudio bruto.
+- **16 testes**; `routine --once` executado; terminal OpenCode em **somente leitura** (7.224 caracteres lidos), sem digitação; gateway `ask --agent plan` respondeu “OK”; **24 h reais, replay autônomo e gravação de tela não homologados**.
+- Nada publicado; sem validação externa.
+
+## Checkpoint R1061 — storage-operator e Drive
+
+- **15 testes** para manifesto, allowlist, aprovação e purge; MCP com 7 ferramentas e perfil `storage-operator`.
+- Upload real de **18 arquivos (13,5 MB)** para `gdrive:Downloads_2026-11-04_23-22-00`, verificado por `rclone check --checksum`.
+- Purge de **20 arquivos (34,6 MB)**: 18 enviados + 2 `.crdownload`; `.tmp.driveupload`, `.gdoc` e `desktop.ini` preservados.
+- `C:` continua ~98% cheio: Downloads não era o gargalo. Próximo passo é inventariar os grandes consumidores do `C:` somente leitura.
+- Manifesto com nomes pessoais não versionado; token fora do repositório; nada publicado.
+
+## Checkpoint R1060 — desktop-operator com política
+
+- MCP local com **seis ferramentas** (`status`, `list_apps`, `snapshot`, `wait`, `click`, `type`), allowlist fechada por padrão, aprovação humana de uso único e redação; nada de clipboard, screenshot, launch ou mouse.
+- **46 testes** com binário falso; perfil `desktop-operator` registrado no catálogo; `opencode.json` atualizado sem remover os demais MCPs.
+- Piloto real: `status` ok; caminho agent-desktop bloqueado por **bug upstream #435** (`native_window_unproven`); fallback **AT-SPI** executou snapshot, `type` verificado (“R1060”), clique em “Aplicar” confirmado por novo snapshot, “Fechar” e `wait`. Três aprovações de uso único consumidas; nada publicado.
+- Nada publicado; binário fixado em `1.1.0` no cache isolado. Ver `pilots/r1060-desktop-operator/` e `reports/r1060/`.
+
+## Checkpoint R1059 — piloto de vídeo por referência
+
+- Prévia vertical de **10 s, 720×1280, 30 fps**, com mapa EOX/Natural Earth, ilustração vetorial no **Motion Canvas 3.17.2** e composição no **Remotion 4.0.540**.
+- 300 PNG RGBA exportados e efetivamente consumidos na composição; QC aprovado (−14,47 LUFS, true peak −4,51 dBTP, 0 s de preto); 27 testes locais.
+- Referência analisada por amostragem de 2 fps; cobertura declarada parcial. Marca, voz, textos e assets da referência não foram reutilizados.
+- Nada publicado; MP4, frames e áudio permanecem locais. Ver `pilots/r1059-roraima/` e `specs/SPEC-935-R1059-agentes-video-referencia.md`.
+
+## Checkpoint R1058 — vídeo institucional Airam Veras
+
+- Vídeo de **7min38s**, 19 cenas, 5º A/B, LP e Matemática; mapa mundo→Crateús→Maratoan, diagnóstico, cronograma com prova em **01/12/2026**, rotina semanal fixa, 11 habilidades com exemplos e agradecimento com foto/QR.
+- Voz institucional Edge TTS; agradecimento final com clonagem XTTS autorizada do próprio autor, aplicada em uma frase curta por limite de CPU.
+- Nada publicado; MP4 e áudio permanecem locais. Ver `pilots/r1058-airam-veras/` e `reports/r1058/`.
+- Dados agregados; sem nomes ou ranking de estudantes; H01–H20 não são descritores oficiais.
 
 ## Checkpoint R1046 — vídeo, dublagem e instalação
 

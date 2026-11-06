@@ -1,0 +1,185 @@
+// ============================================
+// MOLAMBUDOS — Grafo do Enredo (Plot Graph)
+// Estrutura narrativa: eventos, causas, ciclos
+// 62 fragmentos · 3 atos · 1 ciclo
+// ============================================
+
+digraph EnredoMolambudos {
+    rankdir=TB;
+    bgcolor="white";
+    fontname="Helvetica";
+    label="MOLAMBUDOS — Grafo do Enredo\nEstrutura Narrativa: Eventos, Causas e o Ciclo da Contaminação";
+    labelloc=t;
+    labeljust=l;
+    fontsize=20;
+    dpi=150;
+    pad=0.5;
+    nodesep=0.3;
+    ranksep=0.6;
+    compound=true;
+    splines=polyline;
+
+    // Estilos globais
+    node [style="filled,rounded", fontname="Helvetica", fontsize=9, penwidth=1.5, shape=box];
+    edge [color="#666666", penwidth=0.8, arrowsize=0.5];
+
+    // ============================================
+    // ATO 1 — O TRAUMA (Sertão 1915-1928)
+    // ============================================
+    subgraph cluster_ato1 {
+        label="ATO 1 — O TRAUMA (1915-1928)";
+        fontcolor="#8B4513";
+        fontsize=13;
+        style="rounded";
+        color="#8B4513";
+        bgcolor="#FFF8F0";
+        pencolor="#8B4513";
+        penwidth=1.5;
+
+        // Eventos
+        "seca_1915" [label="Seca de 1915\nNordeste", fillcolor="#8B451320", color="#8B4513", tooltip="A grande seca que devastou o Ceará"];
+        "morte_pai" [label="Morte do Pai", fillcolor="#8B451330", color="#8B4513", tooltip="Joaquim perde o pai na caminhada"];
+        "vala_encontro" [label="A Vala\nEncontro com a Criatura", fillcolor="#8B451340", color="#8B4513", penwidth=2.5, tooltip="Ponto de virada: Joaquim encontra a criatura"];
+        "olho_amarelo" [label="Olho Amarelo\nMarcação", fillcolor="#8B451345", color="#8B4513", penwidth=2, tooltip="A marca física da contaminação"];
+        "curral_governo" [label="Curral do Governo\nCampo de Concentração", fillcolor="#8B451325", color="#8B4513", tooltip="Concentração forçada de retirantes"];
+        "separacao_mae" [label="Separação da Mãe", fillcolor="#8B451330", color="#8B4513", tooltip="A mãe de Joaquim é levada"];
+    }
+
+    // Arestas do Ato 1
+    "seca_1915" -> "morte_pai" [label="causa", color="#8B451360"];
+    "morte_pai" -> "vala_encontro" [label="orfandade + fome", color="#8B451360", penwidth=1.5];
+    "vala_encontro" -> "olho_amarelo" [label="contaminação visual", color="#8B451360", penwidth=1.5];
+    "vala_encontro" -> "curral_governo" [label="seqüência cronológica", color="#8B451360", style="dashed"];
+    "curral_governo" -> "separacao_mae" [label="separação forçada", color="#8B451360"];
+
+    // ============================================
+    // ATO 2 — A INSTITUCIONALIZAÇÃO (Colônia 1917-1979)
+    // ============================================
+    subgraph cluster_ato2 {
+        label="ATO 2 — A INSTITUCIONALIZAÇÃO (1917-1979)";
+        fontcolor="#2F4F4F";
+        fontsize=13;
+        style="rounded";
+        color="#2F4F4F";
+        bgcolor="#F0F5F5";
+        pencolor="#2F4F4F";
+        penwidth=1.5;
+
+        "chegada_colonia" [label="Chegada ao Colônia\nBarbacena", fillcolor="#2F4F4F25", color="#2F4F4F", tooltip="Joaquim é internado aos 10 anos"];
+        "diagnostico_falso" [label="Diagnóstico Fabricado\nEsquizofrenia", fillcolor="#2F4F4F30", color="#2F4F4F", tooltip="'Se não tem, a gente inventa'"];
+        "anos_silencio" [label="Os Anos de Silêncio\n1949-1956", fillcolor="#2F4F4F35", color="#2F4F4F", tooltip="Joaquim passa 7 anos sem falar"];
+        "homicidios" [label="3 Homicídios\n1922, 1937, 1948", fillcolor="#2F4F4F30", color="#2F4F4F", tooltip="Funcionários e pacientes mortos"];
+        "ect_lobotomia" [label="ECT + Lobotomia\n54 anos de choque", fillcolor="#2F4F4F30", color="#2F4F4F", tooltip="Eletrochoque sem anestesia, lobotomia transorbital"];
+        "diario_emerge" [label="O Diário Emerge\n1947-1979", fillcolor="#2F4F4F40", color="#2F4F4F", penwidth=1.5, tooltip="Joaquim escreve seu diário por décadas"];
+        "criatura_cresce" [label="A Criatura Cresce\nDentro do Colônia", fillcolor="#2F4F4F35", color="#2F4F4F", tooltip="Cada grito, cada lágrima alimenta a entidade"];
+        "oliveira_chega" [label="Dr. Oliveira Chega\n1979", fillcolor="#2F4F4F30", color="#2F4F4F", tooltip="O psiquiatra que mudaria tudo"];
+    }
+
+    // Arestas do Ato 2
+    "chegada_colonia" -> "diagnostico_falso" [label="burocracia", color="#2F4F4F60"];
+    "chegada_colonia" -> "anos_silencio" [label="trauma institucional", color="#2F4F4F60", style="dashed"];
+    "chegada_colonia" -> "ect_lobotomia" [label="rotina hospitalar", color="#2F4F4F60"];
+    "diagnostico_falso" -> "homicidios" [label="contenção + violência", color="#2F4F4F60"];
+    "ect_lobotomia" -> "criatura_cresce" [label="abuso alimenta a entidade", color="#2F4F4F60", penwidth=1.2];
+    "homicidios" -> "criatura_cresce" [label="violência nutre", color="#2F4F4F60"];
+    "diario_emerge" -> "oliveira_chega" [label="diário desperta interesse", color="#2F4F4F60"];
+    "criatura_cresce" -> "diario_emerge" [label="entidade usa a escrita", color="#2F4F4F60", penwidth=1.2];
+
+    // ============================================
+    // ATO 3 — O CICLO (Transmissão)
+    // ============================================
+    subgraph cluster_ato3 {
+        label="ATO 3 — O CICLO DA TRANSMISSÃO (1979-∞)";
+        fontcolor="#8B0000";
+        fontsize=13;
+        style="rounded";
+        color="#8B0000";
+        bgcolor="#FFF5F5";
+        pencolor="#8B0000";
+        penwidth=1.5;
+
+        // Oliveira
+        "oliveira_le_diario" [label="Oliveira Lê o Diário\nTransmissão 1", fillcolor="#8B000025", color="#8B0000", tooltip="Médico se contamina ao ler o diário"];
+        "oliveira_enlouquece" [label="Oliveira Enlouquece\n47 anos fugindo", fillcolor="#8B000030", color="#8B0000", tooltip="A contaminação destrói Oliveira"];
+        "oliveira_desaparece" [label="Oliveira Desaparece\nJunho 1979", fillcolor="#8B000030", color="#8B0000", tooltip="Médico some após devolver o diário"];
+
+        // Lúcia
+        "exumacao" [label="Exumação de Joaquim\n1979", fillcolor="#4B008220", color="#4B0082", tooltip="Diário encontrado junto ao corpo"];
+        "lucia_convite" [label="Lúcia é Convidada\n2026", fillcolor="#4B008230", color="#4B0082", tooltip="Psicóloga recebe e-mail do arquivo"];
+        "lucia_investiga" [label="Lúcia Investiga\nArquivo + Ruínas + Entrevistas", fillcolor="#4B008240", color="#4B0082", tooltip="Pesquisa ativa: contradições, testemunhas, provas"];
+        "lucia_le_diario" [label="Lúcia Lê o Diário\nTransmissão 2", fillcolor="#8B000025", color="#8B0000", tooltip="Segunda contaminação documentada"];
+        "lucia_contaminada" [label="Lúcia se Contamina\nOlho amarelo + sonhos", fillcolor="#8B000035", color="#8B0000", penwidth=1.5, tooltip="A contaminação se manifesta fisicamente"];
+        "lucia_diagnostico" [label="Lúcia se Diagnostica\nTEPT Induzido por Narrativa", fillcolor="#4B008230", color="#4B0082", tooltip="Auto-diagnóstico como forma de resistência"];
+
+        // Leitor
+        "leitor_abre_livro" [label="VOCÊ Abre o Livro\nTransmissão 3", fillcolor="#8B000040", color="#8B0000", penwidth=2.5, tooltip="O leitor é o próximo hospedeiro"];
+        "leitor_contaminado" [label="VOCÊ é Contaminado\nSonhos + cheiro + 3:14", fillcolor="#8B000045", color="#8B0000", penwidth=2, tooltip="Os sintomas se manifestam no leitor"];
+        "ciclo_completo" [label="O Ciclo se Completa\nPaciente 1.263", fillcolor="#8B000050", color="#8B0000", penwidth=2.5, tooltip="O leitor se torna o próximo paciente"];
+        "pagina_branca" [label="Página em Branco\nEsperando o Próximo", fillcolor="#8B000020", color="#8B0000", style="dashed,rounded", tooltip="O ciclo aguarda o próximo leitor"];
+    }
+
+    // Arestas do Ato 3 — Oliveira
+    "oliveira_chega" -> "oliveira_le_diario" [label="sessões com Joaquim", color="#8B000060", penwidth=1.5];
+    "oliveira_le_diario" -> "oliveira_enlouquece" [label="contaminação progressiva", color="#8B000060", penwidth=1.2];
+    "oliveira_enlouquece" -> "oliveira_desaparece" [label="fuga + retorno", color="#8B000060"];
+
+    // Arestas do Ato 3 — Lúcia
+    "exumacao" -> "lucia_convite" [label="diário re-emerge 47 anos depois", style="dashed", color="#4B008260"];
+    "lucia_convite" -> "lucia_investiga" [label="pesquisa ativa", color="#4B008260", penwidth=1.2];
+    "lucia_investiga" -> "lucia_le_diario" [label="curiosidade acadêmica", color="#4B008260"];
+    "lucia_le_diario" -> "lucia_contaminada" [label="transmissão", color="#8B000060", penwidth=1.5];
+    "lucia_contaminada" -> "lucia_diagnostico" [label="resistência profissional", color="#4B008260"];
+
+    // Arestas do Ato 3 — Leitor
+    "lucia_contaminada" -> "leitor_abre_livro" [label="ela escreve → você lê", color="#8B000060", penwidth=1.5, style="dashed"];
+    "lucia_diagnostico" -> "leitor_abre_livro" [label="registro público do caso", color="#4B008260", style="dotted"];
+    "leitor_abre_livro" -> "leitor_contaminado" [label="a leitura como vecto", color="#8B000060", penwidth=2];
+    "leitor_contaminado" -> "ciclo_completo" [label="diagnóstico final", color="#8B000060", penwidth=2];
+    "ciclo_completo" -> "pagina_branca" [label="o ciclo não termina", color="#8B000060", style="dashed"];
+
+    // ============================================
+    // CONEXÕES CRUZADAS ENTRE ATOS
+    // ============================================
+
+    // A ligação fundamental — o ciclo
+    "olho_amarelo" -> "vala_encontro" [label="🔁 ciclo visual", color="#8B4513", style="dotted", constraint=false];
+    "vala_encontro" -> "chegada_colonia" [label="1915 → 1917", color="#666666", style="bold"];
+    
+    // A contaminação salta entre atos
+    "criatura_cresce" -> "oliveira_le_diario" [label="entidade migra para o papel", color="#8B000060", penwidth=1.5];
+    "diario_emerge" -> "exumacao" [label="diário enterrado com Joaquim", color="#2F4F4F60"];
+    "oliveira_desaparece" -> "exumacao" [label="diário devolvido ao arquivo", color="#66666660", style="dashed"];
+    "exumacao" -> "lucia_convite" [label="documento aguarda 47 anos", color="#4B008260"];
+    
+    // A criatura como eixo oculto
+    "vala_encontro" -> "criatura_cresce" [label="entidade habita Joaquim", color="#8B451360", style="dotted", penwidth=0.5];
+    "criatura_cresce" -> "oliveira_enlouquece" [label="entidade migra pela leitura", color="#8B000060", style="dotted"];
+    "criatura_cresce" -> "lucia_contaminada" [label="entidade salta de hospedeiro", color="#8B000060", style="dotted"];
+
+    // Fechamento do ciclo
+    "pagina_branca" -> "seca_1915" [label="🔁 o ciclo recomeça", color="#8B000060", penwidth=1.5, style="bold", constraint=false];
+    "ciclo_completo" -> "vala_encontro" [label="todo leitor refaz o encontro", color="#8B000060", style="dotted", penwidth=1.2];
+
+    // ============================================
+    // LEGENDA (nodos invisíveis para labels)
+    // ============================================
+    subgraph cluster_legenda {
+        label="LEGENDA";
+        fontsize=11;
+        color="#cccccc";
+        bgcolor="#fafafa";
+        style="rounded,dashed";
+        pencolor="#cccccc";
+
+        legenda_ato1 [label="ATO 1: Trauma", fillcolor="#8B451330", color="#8B4513", fontsize=7, width=1.5, height=0.3];
+        legenda_ato2 [label="ATO 2: Institucionalização", fillcolor="#2F4F4F30", color="#2F4F4F", fontsize=7, width=1.5, height=0.3];
+        legenda_ato3 [label="ATO 3: Ciclo", fillcolor="#8B000030", color="#8B0000", fontsize=7, width=1.5, height=0.3];
+        legenda_lucia [label="Investigação Lúcia", fillcolor="#4B008230", color="#4B0082", fontsize=7, width=1.5, height=0.3];
+        legenda_cycle [label="↪ Ciclo da Contaminação", fillcolor="white", color="#8B0000", fontsize=7, width=1.5, height=0.3, style="dashed,rounded"];
+        
+        legenda_ato1 -> legenda_ato2 [color="white", penwidth=0];
+        legenda_ato2 -> legenda_ato3 [color="white", penwidth=0];
+        legenda_ato3 -> legenda_lucia [color="white", penwidth=0];
+        legenda_lucia -> legenda_cycle [color="white", penwidth=0];
+    }
+}

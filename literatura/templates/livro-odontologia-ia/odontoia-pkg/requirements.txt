@@ -1,0 +1,59 @@
+# -*- coding: utf-8 -*-
+#
+# requirements.txt — Dependências do pacote odontoia
+#
+# Uso no Google Colab:
+#   !pip install -q -r requirements.txt
+#
+# Uso local:
+#   pip install -r requirements.txt
+#
+
+# ============================================================
+# DEPENDÊNCIAS PRINCIPAIS
+# ============================================================
+
+# Processamento numérico e científico
+numpy>=1.24,<2.0
+scipy>=1.11,<2.0
+pandas>=2.0,<3.0
+
+# Aprendizado de máquina
+scikit-learn>=1.3,<2.0
+
+# Deep Learning (PyTorch — compatível com CPU e GPU)
+torch>=2.1,<3.0
+torchvision>=0.16,<1.0
+
+# Processamento de imagens
+opencv-python>=4.8,<5.0
+pillow>=10.0,<11.0
+
+# Visualização
+matplotlib>=3.7,<4.0
+seaborn>=0.13,<1.0
+
+# Utilitários
+pydantic>=2.4,<3.0     # Validação de dados e schemas
+tqdm>=4.66,<5.0        # Barras de progresso
+
+# ============================================================
+# DEPENDÊNCIAS DE DESENVOLVIMENTO
+# ============================================================
+
+# Testes
+pytest>=7.4,<8.0
+pytest-cov>=4.1,<5.0
+
+# Jupyter / Colab
+jupyter>=1.0,<2.0
+ipykernel>=6.28,<7.0
+jupyterlab>=4.0,<5.0
+
+# Qualidade de código
+pylint>=3.0,<4.0
+black>=23.12,<24.0
+
+# ============================================================
+# NOTA: no Google Colab, torch/torchvision já estão instalados
+# ============================================================

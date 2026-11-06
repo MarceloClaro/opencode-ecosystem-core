@@ -1,0 +1,15 @@
+flowchart TB
+    subgraph Core [Core Subsystems]
+        ORCH[Orquestração Multi‑Agente]
+        SPEC[SpecRegistry / SpecVerifier]
+        META[MetaBus / Blackboard]
+        TRUST[Trust Engine]
+    end
+    subgraph MIRA[MIRA v3.9.0]
+        PIPELINE[MiraDeckPipeline]
+        ENGINE[MiraEngine]
+        AGENT[mira-presenter]
+    end
+    CLI[CLI marceloclaro] --> Core
+    Core --> MIRA
+    MIRA --> DECK[Deck com animação e QR]

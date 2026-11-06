@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "status": "rendered_pending_review",
+  "backend": "remotion",
+  "media_type": "video",
+  "plan_sha256": "82041934c71cd9afb1d32dac99192b8c66144be91b99abe7da31d5e2f0897ffc",
+  "output": "/home/marceloclaro/opencode-ecosystem-core/pilots/r1055-qubit/out/qubit-visual-camera-16b.mp4",
+  "output_sha256": "ceb65df0cffca0dec0533cd35c85bca6c5d9a6a48f8dc1d7778934cf1e9ab82b",
+  "bytes": 21213728,
+  "expected_frames": 3292,
+  "frame_tolerance": 0,
+  "probe": {
+    "duration_seconds": 109.733333,
+    "video": {
+      "index": 0,
+      "codec": "h264",
+      "width": 1920,
+      "height": 1080,
+      "fps": "30/1",
+      "r_fps": "30/1",
+      "frames": 3292,
+      "rotation": 0,
+      "duration_seconds": 109.733333,
+      "variable_frame_rate": false,
+      "pix_fmt": "yuv420p"
+    },
+    "audio": null
+  },
+  "audiovisual_approved": false,
+  "limitations": [
+    "technical render only; content, voice and lip sync remain unapproved"
+  ]
+}

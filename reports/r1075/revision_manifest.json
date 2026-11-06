@@ -1,0 +1,196 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-11-06T01:41:36.621272+00:00",
+  "status": "completed",
+  "canonical": {
+    "project": "literatura/molambudos/Molambudos_VictoriaRegia",
+    "pdf_pages": 435,
+    "groups": {
+      "MEM": {
+        "sections": 27,
+        "words": 16079
+      },
+      "DOC": {
+        "sections": 27,
+        "words": 18316
+      },
+      "LUC": {
+        "sections": 17,
+        "words": 11182
+      },
+      "CONT": {
+        "sections": 13,
+        "words": 7000
+      }
+    },
+    "total_section_words": 52577,
+    "phrases": {
+      "nao_e": 41,
+      "nao_era": 22,
+      "voce": 303,
+      "sinta": 13,
+      "ciclo": 87,
+      "cheiro": 157,
+      "vala": 114,
+      "fome": 102
+    },
+    "pdf_sha256": "3378f438d1124432b1b67fdf29161363e28276bb4a754c2a070bf5b054d56f4b"
+  },
+  "revised": {
+    "project": "literatura/molambudos/Molambudos_Revisada_R1075",
+    "pdf_pages": 421,
+    "groups": {
+      "MEM": {
+        "sections": 27,
+        "words": 16034
+      },
+      "DOC": {
+        "sections": 27,
+        "words": 14969
+      },
+      "LUC": {
+        "sections": 23,
+        "words": 15605
+      },
+      "CONT": {
+        "sections": 7,
+        "words": 4538
+      }
+    },
+    "total_section_words": 51146,
+    "epub_words": 53554,
+    "epub_sha256": "0269e8c0c1d26c1f66eb1c7773c732afa2332a58bd1ce5acf2c4fe6b2a4b9c4c",
+    "epub_bytes": 12524260,
+    "pdf_sha256": "cc0c5c2110f0a334a9650044191dabaf5da168a701dc194604069c16444991ab",
+    "pdf_bytes": 19400516,
+    "phrases": {
+      "nao_e": 22,
+      "nao_era": 16,
+      "voce": 239,
+      "sinta": 7,
+      "ciclo": 70,
+      "cheiro": 167,
+      "vala": 116,
+      "fome": 91
+    },
+    "images": 13,
+    "accessibility": {
+      "epubcheck": "5.4.0: 0 fatals / 0 errors / 0 warnings / 0 infos",
+      "ace": "1.4.6: 26 pass / 0 fail",
+      "accessibility_summary": true
+    }
+  },
+  "changes": {
+    "doc_cut_percent": 18.27,
+    "cont_cut_percent": 35.17,
+    "luc_growth_percent": 39.55,
+    "removed_cont": [
+      "CONT-02",
+      "CONT-06",
+      "CONT-08",
+      "CONT-10",
+      "CONT-11",
+      "CONT-12"
+    ],
+    "added_luc": [
+      "LUC-15",
+      "LUC-16",
+      "LUC-17",
+      "LUC-18",
+      "LUC-19",
+      "LUC-20"
+    ],
+    "rewritten_doc": [
+      "DOC-03",
+      "DOC-08",
+      "DOC-26",
+      "DOC-27"
+    ],
+    "ontological_line": "Diegese psicológica; o único resíduo sobrenatural é o ato de leitura do leitor (CONT-07, seção IV).",
+    "sixty_two": "Mantido como assinatura/motivo; removido o manual de 276 saltos e a explicação mecânica da página 62 em DOC-26.",
+    "syntax_pass": "24 substituições de fórmulas \"Não é X. É Y.\" / \"Não era X. Era Y.\" em CONT, DOC, MEM e LUC.",
+    "techniques": [
+      "ancoragem sensorial",
+      "pacing",
+      "endereçamento direto restrito a 7 CONT",
+      "presupposição",
+      "interrupção de padrão",
+      "future pacing",
+      "ambiguidade disciplinada"
+    ]
+  },
+  "limits": [
+    "Edição revisada de trabalho; não é publicação nem validação externa.",
+    "Mantém o ISBN original; uma edição substancialmente revista exige nova ISBN se publicada.",
+    "Capa e lombada precisam ser recalculadas para 415 pp; a capa em 300 DPI segue pendente.",
+    "Traduções EN/ZH/TRI não foram atualizadas.",
+    "O PDF tagged/PDF-UA continua bloqueado pelo toolchain.",
+    "As técnicas de imersão são retórica narrativa, sem alegação de eficácia clínica."
+  ],
+  "files": {
+    "changed": [
+      "main.tex",
+      "fragmentos/doc/DOC-03.tex",
+      "fragmentos/doc/DOC-08.tex",
+      "fragmentos/doc/DOC-26.tex",
+      "fragmentos/doc/DOC-27.tex",
+      "fragmentos/cont/CONT-01.tex",
+      "fragmentos/cont/CONT-03.tex",
+      "fragmentos/cont/CONT-07.tex",
+      "fragmentos/cont/CONT-09.tex",
+      "fragmentos/cont/CONT-13.tex",
+      "fragmentos/mem/MEM-01.tex",
+      "fragmentos/mem/MEM-04.tex",
+      "fragmentos/mem/MEM-12.tex",
+      "frontmatter/como_ler.tex",
+      "frontmatter/copyrightpage.tex",
+      "frontmatter/ficha_catalografica.tex",
+      "book.json"
+    ],
+    "added": [
+      "fragmentos/luc/LUC-15.tex",
+      "fragmentos/luc/LUC-16.tex",
+      "fragmentos/luc/LUC-17.tex",
+      "fragmentos/luc/LUC-18.tex",
+      "fragmentos/luc/LUC-19.tex",
+      "fragmentos/luc/LUC-20.tex",
+      "fragmentos/epilogo_revisado.tex",
+      "frontmatter/legenda_codigos.tex",
+      "frontmatter/caderno_iconografico.tex",
+      "figures/immersao/placa_00.png",
+      "figures/immersao/placa_01.png",
+      "figures/immersao/placa_02.png",
+      "figures/immersao/placa_03.png",
+      "figures/immersao/placa_04.png",
+      "figures/immersao/placa_05.png"
+    ],
+    "removed_from_edition": [
+      "fragmentos/cont/CONT-02.tex",
+      "fragmentos/cont/CONT-06.tex",
+      "fragmentos/cont/CONT-08.tex",
+      "fragmentos/cont/CONT-10.tex",
+      "fragmentos/cont/CONT-11.tex",
+      "fragmentos/cont/CONT-12.tex"
+    ],
+    "removed_kept_in_source": "fragmentos/cont/_removidos/"
+  },
+  "doc_fragments": {
+    "DOC-03": {
+      "before": 2686,
+      "after": 768
+    },
+    "DOC-08": {
+      "before": 1362,
+      "after": 512
+    },
+    "DOC-26": {
+      "before": 1314,
+      "after": 876
+    },
+    "DOC-27": {
+      "before": 1299,
+      "after": 1158
+    }
+  },
+  "design": "reports/r1076 — paleta, capitular de família, legenda, caderno e Cuidado digital #FF4D4D"
+}

@@ -1,0 +1,1830 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-11-05",
+  "status": "research_completed_no_integration",
+  "source": "GitHub API + license files; stars/pushed_at captured 2026-11-05",
+  "gaps": {
+    "G1": "Capa/lombada/bleed/trim 300 DPI e preflight KDP",
+    "G2": "ISBN/ONIX/metadados/ficha catalográfica",
+    "G3": "PDF/UA e PDF tagged",
+    "G4": "EPUB acessível (alt text, nav, reading order)",
+    "G5": "Editor/copyediting pt-BR",
+    "G6": "Assistente literário (personagens, timeline, continuidade)",
+    "G7": "Diagramação/tipografia/layout e TAC/CMYK",
+    "G8": "Diagramas visuais (mapas, árvores, timelines, redes)",
+    "G9": "Ingestão/Document IR/OCR",
+    "G10": "Proveniência/versionamento/integridade",
+    "G11": "Tradução/QA trilíngue",
+    "G12": "Áudio/vídeo/podcast",
+    "G13": "Distribuição",
+    "G14": "UX/Studio",
+    "G15": "Testes/QA visual e de impressão"
+  },
+  "selection_criteria": [
+    "licença permissiva primeiro (MIT/Apache/BSD); GPL/AGPL só como CLI externo",
+    "manutenção: pushed_at recente e não arquivado",
+    "adequação ao gap, não popularidade",
+    "modo de integração explícito: core-native, adapter, library, reference, avoid",
+    "risco de licença, segurança, dados e falsa autoridade"
+  ],
+  "repos": [
+    {
+      "repo": "openai/whisper",
+      "url": "https://github.com/openai/whisper",
+      "stars": 112036,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2026-08-31",
+      "layer": "audio",
+      "gaps": [
+        "G12"
+      ],
+      "integration": "library",
+      "priority": "P0",
+      "note": "ASR multilíngue para audiolivro, podcast e legendas; base para transcrição e QA de narração."
+    },
+    {
+      "repo": "FFmpeg/FFmpeg",
+      "url": "https://github.com/FFmpeg/FFmpeg",
+      "stars": 66584,
+      "license": "LGPL-2.1+ (GPL se build GPL)",
+      "license_verified": false,
+      "language": "C",
+      "pushed_at": "2026-11-05",
+      "layer": "audio/video",
+      "gaps": [
+        "G12"
+      ],
+      "integration": "adapter",
+      "priority": "P0",
+      "note": "Padrão de fato para áudio/vídeo, loudness, frames e legendas. Build LGPL para distribuição; externo ao Core."
+    },
+    {
+      "repo": "abntex/abntex2",
+      "url": "https://github.com/abntex/abntex2",
+      "stars": 1158,
+      "license": "LPPL-1.3c",
+      "license_verified": true,
+      "language": "TeX",
+      "pushed_at": "2024-07-09",
+      "layer": "design/abnt",
+      "gaps": [
+        "G2",
+        "G7"
+      ],
+      "integration": "library",
+      "priority": "P0",
+      "note": "Classe LaTeX e estilo bibliográfico ABNT; já usado no Molambudos. Manter como trilha ABNT."
+    },
+    {
+      "repo": "facelessuser/coloraide",
+      "url": "https://github.com/facelessuser/coloraide",
+      "stars": 365,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2026-11-02",
+      "layer": "design/color",
+      "gaps": [
+        "G7"
+      ],
+      "integration": "library",
+      "priority": "P0",
+      "note": "Conversão de cor, contraste, gamut e espaços CMYK/OKLCH; base para design tokens print-safe."
+    },
+    {
+      "repo": "jgm/pandoc",
+      "url": "https://github.com/jgm/pandoc",
+      "stars": 46830,
+      "license": "GPL-2.0",
+      "license_verified": true,
+      "language": "Haskell",
+      "pushed_at": "2026-11-05",
+      "layer": "design/convert",
+      "gaps": [
+        "G4",
+        "G7",
+        "G9"
+      ],
+      "integration": "adapter",
+      "priority": "P0",
+      "note": "Conversor universal Markdown/LaTeX/DOCX/EPUB/HTML. Invocar como processo separado; não linkar nem vender binário sem cumprir GPL."
+    },
+    {
+      "repo": "fonttools/fonttools",
+      "url": "https://github.com/fonttools/fonttools",
+      "stars": 5308,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2026-11-05",
+      "layer": "design/fonts",
+      "gaps": [
+        "G7"
+      ],
+      "integration": "library",
+      "priority": "P0",
+      "note": "Inspeção, subsetting e validação de fontes; garante embedding e cobertura de glifos."
+    },
+    {
+      "repo": "Kozea/WeasyPrint",
+      "url": "https://github.com/Kozea/WeasyPrint",
+      "stars": 9760,
+      "license": "BSD-3-Clause",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2026-11-05",
+      "layer": "design/pdf",
+      "gaps": [
+        "G3",
+        "G4",
+        "G7"
+      ],
+      "integration": "library",
+      "priority": "P0",
+      "note": "HTML/CSS para PDF com paginação, margens, cabeçalhos e variantes PDF/UA em versões recentes. Alternativa permissiva para prova de página e PDF acessível."
+    },
+    {
+      "repo": "quarto-dev/quarto-cli",
+      "url": "https://github.com/quarto-dev/quarto-cli",
+      "stars": 6155,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "JavaScript",
+      "pushed_at": "2026-11-05",
+      "layer": "design/publish",
+      "gaps": [
+        "G4",
+        "G7",
+        "G14"
+      ],
+      "integration": "adapter",
+      "priority": "P0",
+      "note": "Orquestra livro em PDF/EPUB/HTML/DOCX sobre Pandoc; bom para projeto, preview e múltiplas saídas. MIT, mas embarca Pandoc GPL: usar como CLI externo."
+    },
+    {
+      "repo": "typst/typst",
+      "url": "https://github.com/typst/typst",
+      "stars": 57007,
+      "license": "Apache-2.0",
+      "license_verified": true,
+      "language": "Rust",
+      "pushed_at": "2026-11-05",
+      "layer": "design/typeset",
+      "gaps": [
+        "G3",
+        "G7",
+        "G15"
+      ],
+      "integration": "adapter",
+      "priority": "P0",
+      "note": "Motor de composição moderno, rápido e scriptável; PDF com suporte a acessibilidade em evolução. Substitui o ciclo LaTeX-only para interiores e variantes."
+    },
+    {
+      "repo": "daisy/ace",
+      "url": "https://github.com/daisy/ace",
+      "stars": 101,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "JavaScript",
+      "pushed_at": "2026-05-01",
+      "layer": "ebook/a11y",
+      "gaps": [
+        "G4",
+        "G15"
+      ],
+      "integration": "adapter",
+      "priority": "P0",
+      "note": "Checador de acessibilidade EPUB (DAISY). Complementa o EPUBCheck com leitura, contraste e estrutura."
+    },
+    {
+      "repo": "w3c/epubcheck",
+      "url": "https://github.com/w3c/epubcheck",
+      "stars": 1985,
+      "license": "BSD-3-Clause",
+      "license_verified": true,
+      "language": "Java",
+      "pushed_at": "2026-11-02",
+      "layer": "ebook/epub",
+      "gaps": [
+        "G4",
+        "G15"
+      ],
+      "integration": "adapter",
+      "priority": "P0",
+      "note": "Validador oficial de EPUB 2/3. Gate obrigatório antes de qualquer release digital."
+    },
+    {
+      "repo": "languagetool-org/languagetool",
+      "url": "https://github.com/languagetool-org/languagetool",
+      "stars": 15232,
+      "license": "LGPL-2.1",
+      "license_verified": true,
+      "language": "Java",
+      "pushed_at": "2026-11-05",
+      "layer": "editorial",
+      "gaps": [
+        "G5"
+      ],
+      "integration": "adapter",
+      "priority": "P0",
+      "note": "Corretor gramatical/estilístico com pt-BR; rodar em servidor HTTP local ou CLI. LGPL: usar como serviço externo para não contaminar o Core."
+    },
+    {
+      "repo": "vale-cli/vale",
+      "url": "https://github.com/vale-cli/vale",
+      "stars": 6334,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "Go",
+      "pushed_at": "2026-11-05",
+      "layer": "editorial",
+      "gaps": [
+        "G5"
+      ],
+      "integration": "adapter",
+      "priority": "P0",
+      "note": "Linter de prosa markup-aware com regras próprias; excelente para guia de estilo, repetições, clichês e consistência."
+    },
+    {
+      "repo": "textstat/textstat",
+      "url": "https://github.com/textstat/textstat",
+      "stars": 1393,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2026-11-05",
+      "layer": "editorial",
+      "gaps": [
+        "G5",
+        "G6"
+      ],
+      "integration": "library",
+      "priority": "P0",
+      "note": "Métricas de legibilidade (Flesch, Gunning, SMOG) em Python; usar como diagnóstico, não como nota literária."
+    },
+    {
+      "repo": "docling-project/docling",
+      "url": "https://github.com/docling-project/docling",
+      "stars": 70166,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2026-11-05",
+      "layer": "ingest",
+      "gaps": [
+        "G9"
+      ],
+      "integration": "library",
+      "priority": "P0",
+      "note": "PDF/DOCX/PPTX/HTML para JSON estruturado com layout, tabelas e leitura; base do Document IR."
+    },
+    {
+      "repo": "jsvine/pdfplumber",
+      "url": "https://github.com/jsvine/pdfplumber",
+      "stars": 10876,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2026-10-15",
+      "layer": "ingest",
+      "gaps": [
+        "G9",
+        "G15"
+      ],
+      "integration": "library",
+      "priority": "P0",
+      "note": "Coordenadas de caracteres, linhas e retângulos; ideal para auditar margens, overlaps e layout do PDF."
+    },
+    {
+      "repo": "py-pdf/pypdf",
+      "url": "https://github.com/py-pdf/pypdf",
+      "stars": 10287,
+      "license": "BSD-3-Clause",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2026-11-04",
+      "layer": "ingest",
+      "gaps": [
+        "G9",
+        "G1"
+      ],
+      "integration": "library",
+      "priority": "P0",
+      "note": "Split/merge/crop/metadados em Python puro; alternativa permissiva ao PyMuPDF."
+    },
+    {
+      "repo": "explosion/spaCy",
+      "url": "https://github.com/explosion/spaCy",
+      "stars": 34030,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2026-10-27",
+      "layer": "literary",
+      "gaps": [
+        "G6",
+        "G9"
+      ],
+      "integration": "library",
+      "priority": "P0",
+      "note": "NLP industrial com modelos pt; base para NER, dependências, redes de personagens e análise de cena."
+    },
+    {
+      "repo": "networkx/networkx",
+      "url": "https://github.com/networkx/networkx",
+      "stars": 17386,
+      "license": "BSD-3-Clause",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2026-11-04",
+      "layer": "literary",
+      "gaps": [
+        "G6",
+        "G8"
+      ],
+      "integration": "library",
+      "priority": "P0",
+      "note": "Grafos de personagens, comunidades, centralidade e evolução por capítulo."
+    },
+    {
+      "repo": "booknlp/booknlp",
+      "url": "https://github.com/booknlp/booknlp",
+      "stars": 946,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2024-07-31",
+      "layer": "literary",
+      "gaps": [
+        "G6"
+      ],
+      "integration": "library",
+      "priority": "P0",
+      "note": "Pipeline para livros: personagens, citações, eventos, supersentidos. Inglês; para PT-BR exige adaptação/avaliação."
+    },
+    {
+      "repo": "thoth-pub/thoth",
+      "url": "https://github.com/thoth-pub/thoth",
+      "stars": 55,
+      "license": "Apache-2.0",
+      "license_verified": true,
+      "language": "Rust",
+      "pushed_at": "2026-11-02",
+      "layer": "metadata",
+      "gaps": [
+        "G2",
+        "G13"
+      ],
+      "integration": "adapter",
+      "priority": "P0",
+      "note": "Gestão de metadados de livros OA com exportação ONIX 3.0, Crossref e ISBN. Referência direta para o gap de metadados."
+    },
+    {
+      "repo": "pdfcpu/pdfcpu",
+      "url": "https://github.com/pdfcpu/pdfcpu",
+      "stars": 8897,
+      "license": "Apache-2.0",
+      "license_verified": true,
+      "language": "Go",
+      "pushed_at": "2026-11-02",
+      "layer": "print/pdf",
+      "gaps": [
+        "G1",
+        "G7",
+        "G15"
+      ],
+      "integration": "adapter",
+      "priority": "P0",
+      "note": "Validação, otimização, merge/split, carimbos e metadados via CLI/Go. Bom para pré-impressão e checagens automáticas sem AGPL."
+    },
+    {
+      "repo": "qpdf/qpdf",
+      "url": "https://github.com/qpdf/qpdf",
+      "stars": 5559,
+      "license": "Apache-2.0",
+      "license_verified": true,
+      "language": "C++",
+      "pushed_at": "2026-09-26",
+      "layer": "print/pdf",
+      "gaps": [
+        "G1",
+        "G7",
+        "G15"
+      ],
+      "integration": "adapter",
+      "priority": "P0",
+      "note": "Transformação PDF que preserva conteúdo; base do pikepdf. Ideal para impor, linearizar, remover senha e inspecionar estrutura."
+    },
+    {
+      "repo": "veraPDF/veraPDF-library",
+      "url": "https://github.com/veraPDF/veraPDF-library",
+      "stars": 352,
+      "license": "GPL-3.0",
+      "license_verified": true,
+      "language": "Java",
+      "pushed_at": "2026-11-05",
+      "layer": "print/pdfa",
+      "gaps": [
+        "G3",
+        "G15"
+      ],
+      "integration": "adapter",
+      "priority": "P0",
+      "note": "Validador PDF/A e PDF/UA de referência. Usar como CLI externo; GPL impede linkagem proprietária."
+    },
+    {
+      "repo": "mermaid-js/mermaid",
+      "url": "https://github.com/mermaid-js/mermaid",
+      "stars": 91020,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "TypeScript",
+      "pushed_at": "2026-11-05",
+      "layer": "visual",
+      "gaps": [
+        "G8"
+      ],
+      "integration": "library",
+      "priority": "P0",
+      "note": "Diagramas a partir de texto: fluxos, timelines, estados, ER, sequência. Já é padrão em documentação."
+    },
+    {
+      "repo": "dequelabs/axe-core",
+      "url": "https://github.com/dequelabs/axe-core",
+      "stars": 7764,
+      "license": "MPL-2.0",
+      "license_verified": true,
+      "language": "HTML",
+      "pushed_at": "2026-11-05",
+      "layer": "a11y",
+      "gaps": [
+        "G4",
+        "G14"
+      ],
+      "integration": "library",
+      "priority": "P1",
+      "note": "Motor de acessibilidade web; útil para previews HTML e documentação do livro."
+    },
+    {
+      "repo": "m-bain/whisperX",
+      "url": "https://github.com/m-bain/whisperX",
+      "stars": 25105,
+      "license": "BSD-2-Clause",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2026-10-22",
+      "layer": "audio",
+      "gaps": [
+        "G12"
+      ],
+      "integration": "library",
+      "priority": "P1",
+      "note": "ASR com timestamps por palavra e diarização; essencial para legendas e audiolivro."
+    },
+    {
+      "repo": "rhasspy/piper",
+      "url": "https://github.com/rhasspy/piper",
+      "stars": 11317,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "C++",
+      "pushed_at": "2025-08-26",
+      "layer": "audio",
+      "gaps": [
+        "G12"
+      ],
+      "integration": "adapter",
+      "priority": "P1",
+      "note": "TTS neural local, rápido e multilíngue; bom para audiolivro de baixo custo."
+    },
+    {
+      "repo": "jiixyj/libebur128",
+      "url": "https://github.com/jiixyj/libebur128",
+      "stars": 494,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "C",
+      "pushed_at": "2023-06-25",
+      "layer": "audio",
+      "gaps": [
+        "G12"
+      ],
+      "integration": "library",
+      "priority": "P1",
+      "note": "Medição de loudness EBU R128; gate técnico para audiolivro/podcast."
+    },
+    {
+      "repo": "tectonic-typesetting/tectonic",
+      "url": "https://github.com/tectonic-typesetting/tectonic",
+      "stars": 5230,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "C",
+      "pushed_at": "2026-08-01",
+      "layer": "design/latex",
+      "gaps": [
+        "G7"
+      ],
+      "integration": "adapter",
+      "priority": "P1",
+      "note": "Engine TeX autocontido e reproduzível; resolve dependências e builds em CI."
+    },
+    {
+      "repo": "kovidgoyal/calibre",
+      "url": "https://github.com/kovidgoyal/calibre",
+      "stars": 26357,
+      "license": "GPL-3.0",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2026-11-06",
+      "layer": "ebook",
+      "gaps": [
+        "G4",
+        "G13"
+      ],
+      "integration": "adapter",
+      "priority": "P1",
+      "note": "Conversão e gestão de ebooks; usar `ebook-convert` como CLI externo. GPL: não linkar."
+    },
+    {
+      "repo": "Automattic/harper",
+      "url": "https://github.com/Automattic/harper",
+      "stars": 17426,
+      "license": "Apache-2.0",
+      "license_verified": true,
+      "language": "Rust",
+      "pushed_at": "2026-11-05",
+      "layer": "editorial",
+      "gaps": [
+        "G5"
+      ],
+      "integration": "adapter",
+      "priority": "P1",
+      "note": "Corretor offline e privado em Rust; verificar cobertura de pt-BR antes de adotar."
+    },
+    {
+      "repo": "textlint/textlint",
+      "url": "https://github.com/textlint/textlint",
+      "stars": 3205,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "TypeScript",
+      "pushed_at": "2026-11-05",
+      "layer": "editorial",
+      "gaps": [
+        "G5"
+      ],
+      "integration": "adapter",
+      "priority": "P1",
+      "note": "Linter plugável de linguagem natural; regras customizadas em JS."
+    },
+    {
+      "repo": "hunspell/hunspell",
+      "url": "https://github.com/hunspell/hunspell",
+      "stars": 2619,
+      "license": "LGPL-2.1",
+      "license_verified": true,
+      "language": "C++",
+      "pushed_at": "2026-11-01",
+      "layer": "editorial",
+      "gaps": [
+        "G5"
+      ],
+      "integration": "library",
+      "priority": "P1",
+      "note": "Spellcheck maduro com dicionários pt_BR; usar via CLI ou linkagem dinâmica."
+    },
+    {
+      "repo": "treeverse/dvc",
+      "url": "https://github.com/treeverse/dvc",
+      "stars": 15961,
+      "license": "Apache-2.0",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2026-11-02",
+      "layer": "governance",
+      "gaps": [
+        "G10"
+      ],
+      "integration": "adapter",
+      "priority": "P1",
+      "note": "Versionamento de dados e artefatos; útil para imagens, PDFs e releases reproduzíveis."
+    },
+    {
+      "repo": "ResearchObject/ro-crate-py",
+      "url": "https://github.com/ResearchObject/ro-crate-py",
+      "stars": 92,
+      "license": "Apache-2.0",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2026-11-02",
+      "layer": "governance",
+      "gaps": [
+        "G10"
+      ],
+      "integration": "library",
+      "priority": "P1",
+      "note": "Empacotamento de pesquisa com metadados e proveniência; bom para dossiês editoriais."
+    },
+    {
+      "repo": "tesseract-ocr/tesseract",
+      "url": "https://github.com/tesseract-ocr/tesseract",
+      "stars": 77378,
+      "license": "Apache-2.0",
+      "license_verified": true,
+      "language": "C++",
+      "pushed_at": "2026-11-02",
+      "layer": "ingest",
+      "gaps": [
+        "G9"
+      ],
+      "integration": "adapter",
+      "priority": "P1",
+      "note": "OCR maduro com modelos pt; base do OCRmyPDF e de pipelines de digitalização."
+    },
+    {
+      "repo": "datalab-to/marker",
+      "url": "https://github.com/datalab-to/marker",
+      "stars": 40790,
+      "license": "Apache-2.0",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2026-10-29",
+      "layer": "ingest",
+      "gaps": [
+        "G9"
+      ],
+      "integration": "adapter",
+      "priority": "P1",
+      "note": "PDF para Markdown/JSON com layout e tabelas; rápido, GPU opcional. Complementa Docling."
+    },
+    {
+      "repo": "ocrmypdf/OCRmyPDF",
+      "url": "https://github.com/ocrmypdf/OCRmyPDF",
+      "stars": 35245,
+      "license": "MPL-2.0",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2026-10-25",
+      "layer": "ingest",
+      "gaps": [
+        "G9"
+      ],
+      "integration": "adapter",
+      "priority": "P1",
+      "note": "Adiciona camada OCR pesquisável e PDF/A a digitalizações; preserva a imagem original."
+    },
+    {
+      "repo": "grobidOrg/grobid",
+      "url": "https://github.com/grobidOrg/grobid",
+      "stars": 5220,
+      "license": "Apache-2.0",
+      "license_verified": true,
+      "language": "Java",
+      "pushed_at": "2026-11-04",
+      "layer": "ingest",
+      "gaps": [
+        "G2",
+        "G9"
+      ],
+      "integration": "adapter",
+      "priority": "P1",
+      "note": "Extração de estrutura de artigos científicos: cabeçalho, referências, citações. Útil para auditoria bibliográfica."
+    },
+    {
+      "repo": "apache/tika",
+      "url": "https://github.com/apache/tika",
+      "stars": 4130,
+      "license": "Apache-2.0",
+      "license_verified": true,
+      "language": "Java",
+      "pushed_at": "2026-11-05",
+      "layer": "ingest",
+      "gaps": [
+        "G9"
+      ],
+      "integration": "adapter",
+      "priority": "P1",
+      "note": "Detecção e extração de texto/metadados de mais de mil formatos; bom para ingestão heterogênea."
+    },
+    {
+      "repo": "MaartenGr/BERTopic",
+      "url": "https://github.com/MaartenGr/BERTopic",
+      "stars": 7932,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2026-11-05",
+      "layer": "literary",
+      "gaps": [
+        "G6"
+      ],
+      "integration": "library",
+      "priority": "P1",
+      "note": "Temas e motivos recorrentes por capítulo/parte; visualização de clusters."
+    },
+    {
+      "repo": "stanfordnlp/stanza",
+      "url": "https://github.com/stanfordnlp/stanza",
+      "stars": 7906,
+      "license": "Apache-2.0",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2026-11-05",
+      "layer": "literary",
+      "gaps": [
+        "G6",
+        "G9"
+      ],
+      "integration": "library",
+      "priority": "P1",
+      "note": "NLP multilíngue com modelos PT; alternativa/complemento ao spaCy para morfologia e dependências."
+    },
+    {
+      "repo": "computationalstylistics/stylo",
+      "url": "https://github.com/computationalstylistics/stylo",
+      "stars": 230,
+      "license": "GPL-3.0 (confirmar)",
+      "license_verified": false,
+      "language": "R",
+      "pushed_at": "2026-06-19",
+      "layer": "literary",
+      "gaps": [
+        "G6"
+      ],
+      "integration": "reference",
+      "priority": "P1",
+      "note": "Pacote R de referência em estilometria; usar como CLI/estudo, não embutir."
+    },
+    {
+      "repo": "fastdatascience/faststylometry",
+      "url": "https://github.com/fastdatascience/faststylometry",
+      "stars": 55,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2025-07-21",
+      "layer": "literary",
+      "gaps": [
+        "G6"
+      ],
+      "integration": "library",
+      "priority": "P1",
+      "note": "Burrows Delta em Python; comparação de estilo entre autores, traduções e revisões."
+    },
+    {
+      "repo": "ollama/ollama",
+      "url": "https://github.com/ollama/ollama",
+      "stars": 186037,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "Go",
+      "pushed_at": "2026-11-06",
+      "layer": "llm",
+      "gaps": [
+        "G6",
+        "G14"
+      ],
+      "integration": "adapter",
+      "priority": "P1",
+      "note": "Inferência local simples; já alinhado ao ecossistema. Usar para assistente literário offline."
+    },
+    {
+      "repo": "huggingface/transformers",
+      "url": "https://github.com/huggingface/transformers",
+      "stars": 168588,
+      "license": "Apache-2.0",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2026-11-06",
+      "layer": "llm",
+      "gaps": [
+        "G6",
+        "G11"
+      ],
+      "integration": "library",
+      "priority": "P1",
+      "note": "Modelos e tokenizers; base para NER, tradução, embeddings e avaliação."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "url": "https://github.com/ggml-org/llama.cpp",
+      "stars": 133492,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "C++",
+      "pushed_at": "2026-11-06",
+      "layer": "llm",
+      "gaps": [
+        "G6"
+      ],
+      "integration": "library",
+      "priority": "P1",
+      "note": "Inferência CPU/GPU de LLMs; base para modelos locais e reprodutibilidade."
+    },
+    {
+      "repo": "run-llama/llama_index",
+      "url": "https://github.com/run-llama/llama_index",
+      "stars": 52821,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2026-11-05",
+      "layer": "llm",
+      "gaps": [
+        "G6",
+        "G9"
+      ],
+      "integration": "library",
+      "priority": "P1",
+      "note": "RAG sobre manuscritos, fichamentos e auditorias; bom para assistente com citação."
+    },
+    {
+      "repo": "deepset-ai/haystack",
+      "url": "https://github.com/deepset-ai/haystack",
+      "stars": 26929,
+      "license": "Apache-2.0",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2026-11-05",
+      "layer": "llm",
+      "gaps": [
+        "G6",
+        "G9"
+      ],
+      "integration": "library",
+      "priority": "P1",
+      "note": "Pipelines RAG com componentes explícitos; já há skill Haystack no Core."
+    },
+    {
+      "repo": "huggingface/sentence-transformers",
+      "url": "https://github.com/huggingface/sentence-transformers",
+      "stars": 19258,
+      "license": "Apache-2.0",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2026-11-05",
+      "layer": "llm",
+      "gaps": [
+        "G6",
+        "G9",
+        "G11"
+      ],
+      "integration": "library",
+      "priority": "P1",
+      "note": "Embeddings para busca semântica, similaridade e detecção de duplicidade."
+    },
+    {
+      "repo": "retorquere/zotero-better-bibtex",
+      "url": "https://github.com/retorquere/zotero-better-bibtex",
+      "stars": 7276,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "JavaScript",
+      "pushed_at": "2026-11-04",
+      "layer": "metadata",
+      "gaps": [
+        "G2"
+      ],
+      "integration": "adapter",
+      "priority": "P1",
+      "note": "Exportação BibTeX/BibLaTeX estável do Zotero; ponte para bibliografia auditável."
+    },
+    {
+      "repo": "xlcnd/isbnlib",
+      "url": "https://github.com/xlcnd/isbnlib",
+      "stars": 281,
+      "license": "LGPL-3.0",
+      "license_verified": false,
+      "language": "Python",
+      "pushed_at": "2024-08-01",
+      "layer": "metadata",
+      "gaps": [
+        "G2"
+      ],
+      "integration": "library",
+      "priority": "P1",
+      "note": "Validação, limpeza e metadados de ISBN. Alternativa: reimplementar checksum ISBN-10/13 no Core."
+    },
+    {
+      "repo": "citation-js/citation-js",
+      "url": "https://github.com/citation-js/citation-js",
+      "stars": 213,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "JavaScript",
+      "pushed_at": "2026-11-02",
+      "layer": "metadata",
+      "gaps": [
+        "G2",
+        "G9"
+      ],
+      "integration": "library",
+      "priority": "P1",
+      "note": "CSL, BibTeX, RIS e DOI; formata citações e referências em vários estilos."
+    },
+    {
+      "repo": "titusz/onixcheck",
+      "url": "https://github.com/titusz/onixcheck",
+      "stars": 28,
+      "license": "Apache-2.0",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2026-11-02",
+      "layer": "metadata",
+      "gaps": [
+        "G2"
+      ],
+      "integration": "library",
+      "priority": "P1",
+      "note": "Validação ONIX 3.0; complemento ao Thoth para gate de metadados."
+    },
+    {
+      "repo": "ImageMagick/ImageMagick",
+      "url": "https://github.com/ImageMagick/ImageMagick",
+      "stars": 17805,
+      "license": "ImageMagick License",
+      "license_verified": false,
+      "language": "C",
+      "pushed_at": "2026-11-05",
+      "layer": "print/img",
+      "gaps": [
+        "G1",
+        "G7"
+      ],
+      "integration": "adapter",
+      "priority": "P1",
+      "note": "Conversão, DPI, perfis e operações raster; útil para auditoria de imagens e provas."
+    },
+    {
+      "repo": "libvips/libvips",
+      "url": "https://github.com/libvips/libvips",
+      "stars": 11782,
+      "license": "LGPL-2.1",
+      "license_verified": true,
+      "language": "C",
+      "pushed_at": "2026-11-05",
+      "layer": "print/img",
+      "gaps": [
+        "G7"
+      ],
+      "integration": "library",
+      "priority": "P1",
+      "note": "Processamento de imagem rápido e com baixo consumo; alternativa para lotes grandes."
+    },
+    {
+      "repo": "pikepdf/pikepdf",
+      "url": "https://github.com/pikepdf/pikepdf",
+      "stars": 2819,
+      "license": "MPL-2.0",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2026-11-03",
+      "layer": "print/pdf",
+      "gaps": [
+        "G1",
+        "G7"
+      ],
+      "integration": "library",
+      "priority": "P1",
+      "note": "Leitura/escrita PDF sobre QPDF; útil para metadados, anexos e reparos cirúrgicos."
+    },
+    {
+      "repo": "opendataloader-project/opendataloader-pdf",
+      "url": "https://github.com/opendataloader-project/opendataloader-pdf",
+      "stars": 30177,
+      "license": "Apache-2.0",
+      "license_verified": true,
+      "language": "Java",
+      "pushed_at": "2026-11-06",
+      "layer": "print/pdfa",
+      "gaps": [
+        "G3",
+        "G15"
+      ],
+      "integration": "adapter",
+      "priority": "P1",
+      "note": "Parse e automação de acessibilidade PDF; complemento ao veraPDF, não substituto de revisão manual."
+    },
+    {
+      "repo": "ArtifexSoftware/ghostpdl",
+      "url": "https://github.com/ArtifexSoftware/ghostpdl",
+      "stars": 302,
+      "license": "AGPL-3.0",
+      "license_verified": true,
+      "language": "C",
+      "pushed_at": "2026-11-03",
+      "layer": "print/preflight",
+      "gaps": [
+        "G1",
+        "G7",
+        "G15"
+      ],
+      "integration": "adapter",
+      "priority": "P1",
+      "note": "Ghostscript para inkcov, render e PDF/X. AGPL: só CLI externo/local; não embutir em serviço de rede sem revisão jurídica."
+    },
+    {
+      "repo": "argosopentech/argos-translate",
+      "url": "https://github.com/argosopentech/argos-translate",
+      "stars": 6626,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2026-08-08",
+      "layer": "translate",
+      "gaps": [
+        "G11"
+      ],
+      "integration": "library",
+      "priority": "P1",
+      "note": "Tradução offline MIT; alternativa permissiva ao LibreTranslate (AGPL)."
+    },
+    {
+      "repo": "mjpost/sacrebleu",
+      "url": "https://github.com/mjpost/sacrebleu",
+      "stars": 1265,
+      "license": "Apache-2.0",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2026-08-20",
+      "layer": "translate/qa",
+      "gaps": [
+        "G11"
+      ],
+      "integration": "library",
+      "priority": "P1",
+      "note": "BLEU/chrF/TER reproduzíveis com versão registrada; bom para comparar versões EN/ZH/TRI."
+    },
+    {
+      "repo": "Unbabel/COMET",
+      "url": "https://github.com/Unbabel/COMET",
+      "stars": 789,
+      "license": "Apache-2.0",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2026-04-21",
+      "layer": "translate/qa",
+      "gaps": [
+        "G11"
+      ],
+      "integration": "library",
+      "priority": "P1",
+      "note": "Métrica neural de qualidade de tradução (COMET); usar com referência humana e não como aprovação automática."
+    },
+    {
+      "repo": "d2lang/d2",
+      "url": "https://github.com/d2lang/d2",
+      "stars": 25799,
+      "license": "MPL-2.0",
+      "license_verified": true,
+      "language": "Go",
+      "pushed_at": "2026-11-05",
+      "layer": "visual",
+      "gaps": [
+        "G8"
+      ],
+      "integration": "adapter",
+      "priority": "P1",
+      "note": "Linguagem de diagramas moderna com layout automático; boa para arquitetura e fluxos."
+    },
+    {
+      "repo": "cytoscape/cytoscape.js",
+      "url": "https://github.com/cytoscape/cytoscape.js",
+      "stars": 11267,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "JavaScript",
+      "pushed_at": "2026-11-05",
+      "layer": "visual",
+      "gaps": [
+        "G6",
+        "G8"
+      ],
+      "integration": "library",
+      "priority": "P1",
+      "note": "Visualização interativa de redes de personagens e relações; exporta SVG/PNG."
+    },
+    {
+      "repo": "vega/vega-lite",
+      "url": "https://github.com/vega/vega-lite",
+      "stars": 5545,
+      "license": "BSD-3-Clause",
+      "license_verified": true,
+      "language": "TypeScript",
+      "pushed_at": "2026-11-05",
+      "layer": "visual",
+      "gaps": [
+        "G8"
+      ],
+      "integration": "library",
+      "priority": "P1",
+      "note": "Gramática de gráficos declarativa; ideal para dados literários e editoriais."
+    },
+    {
+      "repo": "yuzutech/kroki",
+      "url": "https://github.com/yuzutech/kroki",
+      "stars": 4398,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "JavaScript",
+      "pushed_at": "2026-11-05",
+      "layer": "visual",
+      "gaps": [
+        "G8"
+      ],
+      "integration": "adapter",
+      "priority": "P1",
+      "note": "Servidor único para Mermaid, D2, PlantUML, Graphviz e outros; simplifica o Core."
+    },
+    {
+      "repo": "coqui-ai/TTS",
+      "url": "https://github.com/coqui-ai/TTS",
+      "stars": 46184,
+      "license": "MPL-2.0",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2024-08-16",
+      "layer": "audio",
+      "gaps": [
+        "G12"
+      ],
+      "integration": "library",
+      "priority": "P2",
+      "note": "TTS de pesquisa com muitas vozes; verificar manutenção e licenças de modelos."
+    },
+    {
+      "repo": "pagedjs/pagedjs",
+      "url": "https://github.com/pagedjs/pagedjs",
+      "stars": 1561,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "HTML",
+      "pushed_at": "2026-10-23",
+      "layer": "design/preview",
+      "gaps": [
+        "G7",
+        "G14"
+      ],
+      "integration": "library",
+      "priority": "P2",
+      "note": "Paginação CSS no navegador; excelente para preview de página e prova digital."
+    },
+    {
+      "repo": "rust-lang/mdBook",
+      "url": "https://github.com/rust-lang/mdBook",
+      "stars": 22268,
+      "license": "MPL-2.0",
+      "license_verified": true,
+      "language": "Rust",
+      "pushed_at": "2026-11-02",
+      "layer": "design/publish",
+      "gaps": [
+        "G7",
+        "G14"
+      ],
+      "integration": "adapter",
+      "priority": "P2",
+      "note": "Livro em Markdown para web/PDF; simples e rápido para documentação."
+    },
+    {
+      "repo": "iamgio/quarkdown",
+      "url": "https://github.com/iamgio/quarkdown",
+      "stars": 16344,
+      "license": "GPL-3.0",
+      "license_verified": true,
+      "language": "Kotlin",
+      "pushed_at": "2026-11-05",
+      "layer": "design/publish",
+      "gaps": [
+        "G7"
+      ],
+      "integration": "reference",
+      "priority": "P2",
+      "note": "Markdown para livros/papers/slides; referência de sintaxe e templates."
+    },
+    {
+      "repo": "jupyter-book/jupyter-book",
+      "url": "https://github.com/jupyter-book/jupyter-book",
+      "stars": 4289,
+      "license": "BSD-3-Clause",
+      "license_verified": true,
+      "language": "TypeScript",
+      "pushed_at": "2026-11-04",
+      "layer": "design/publish",
+      "gaps": [
+        "G7",
+        "G14"
+      ],
+      "integration": "adapter",
+      "priority": "P2",
+      "note": "Livros computacionais com execução e citação; bom para livros técnicos."
+    },
+    {
+      "repo": "rstudio/bookdown",
+      "url": "https://github.com/rstudio/bookdown",
+      "stars": 4094,
+      "license": "GPL-3.0",
+      "license_verified": true,
+      "language": "JavaScript",
+      "pushed_at": "2026-09-18",
+      "layer": "design/publish",
+      "gaps": [
+        "G7"
+      ],
+      "integration": "reference",
+      "priority": "P2",
+      "note": "Livros em R Markdown; referência de pipeline reprodutível."
+    },
+    {
+      "repo": "booktype/Booktype",
+      "url": "https://github.com/booktype/Booktype",
+      "stars": 962,
+      "license": "AGPL-3.0",
+      "license_verified": true,
+      "language": "JavaScript",
+      "pushed_at": "2026-09-24",
+      "layer": "design/publish",
+      "gaps": [
+        "G7",
+        "G14",
+        "G13"
+      ],
+      "integration": "reference",
+      "priority": "P2",
+      "note": "Plataforma editorial completa; referência de fluxo, não código a embutir."
+    },
+    {
+      "repo": "stencila/stencila",
+      "url": "https://github.com/stencila/stencila",
+      "stars": 914,
+      "license": "Apache-2.0",
+      "license_verified": true,
+      "language": "Rust",
+      "pushed_at": "2026-11-02",
+      "layer": "design/publish",
+      "gaps": [
+        "G7",
+        "G14"
+      ],
+      "integration": "adapter",
+      "priority": "P2",
+      "note": "Documentos executáveis e reprodutíveis; ponte entre texto e código."
+    },
+    {
+      "repo": "pressbooks/pressbooks",
+      "url": "https://github.com/pressbooks/pressbooks",
+      "stars": 461,
+      "license": "GPL-3.0",
+      "license_verified": true,
+      "language": "PHP",
+      "pushed_at": "2026-11-06",
+      "layer": "design/publish",
+      "gaps": [
+        "G7",
+        "G14",
+        "G13"
+      ],
+      "integration": "reference",
+      "priority": "P2",
+      "note": "CMS de publicação com exportação EPUB/PDF; referência de produto."
+    },
+    {
+      "repo": "sile-typesetter/sile",
+      "url": "https://github.com/sile-typesetter/sile",
+      "stars": 1790,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "Lua",
+      "pushed_at": "2026-11-01",
+      "layer": "design/typeset",
+      "gaps": [
+        "G7"
+      ],
+      "integration": "adapter",
+      "priority": "P2",
+      "note": "Compositor com tipografia fina e scripting Lua; alternativa ao Typst/LaTeX."
+    },
+    {
+      "repo": "vivliostyle/vivliostyle-cli",
+      "url": "https://github.com/vivliostyle/vivliostyle-cli",
+      "stars": 238,
+      "license": "AGPL-3.0",
+      "license_verified": true,
+      "language": "TypeScript",
+      "pushed_at": "2026-11-06",
+      "layer": "design/typeset",
+      "gaps": [
+        "G7"
+      ],
+      "integration": "avoid",
+      "priority": "P2",
+      "note": "CSS typesetting com boa qualidade, mas AGPL; handoff externo apenas."
+    },
+    {
+      "repo": "Sigil-Ebook/Sigil",
+      "url": "https://github.com/Sigil-Ebook/Sigil",
+      "stars": 7020,
+      "license": "GPL-3.0",
+      "license_verified": true,
+      "language": "C++",
+      "pushed_at": "2026-11-05",
+      "layer": "ebook",
+      "gaps": [
+        "G4",
+        "G13"
+      ],
+      "integration": "reference",
+      "priority": "P2",
+      "note": "Editor EPUB maduro; útil como validação manual e referência de UX."
+    },
+    {
+      "repo": "standardebooks/tools",
+      "url": "https://github.com/standardebooks/tools",
+      "stars": 1685,
+      "license": "GPL-3.0",
+      "license_verified": true,
+      "language": "HTML",
+      "pushed_at": "2026-11-03",
+      "layer": "ebook",
+      "gaps": [
+        "G4",
+        "G13"
+      ],
+      "integration": "reference",
+      "priority": "P2",
+      "note": "Toolset de produção de ebooks com padrões editoriais altos; referência, não dependência."
+    },
+    {
+      "repo": "pgaskin/kepubify",
+      "url": "https://github.com/pgaskin/kepubify",
+      "stars": 899,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "Go",
+      "pushed_at": "2025-12-06",
+      "layer": "ebook",
+      "gaps": [
+        "G4",
+        "G13"
+      ],
+      "integration": "adapter",
+      "priority": "P2",
+      "note": "Conversão EPUB para Kobo; complemento de distribuição, não de KDP."
+    },
+    {
+      "repo": "get-alex/alex",
+      "url": "https://github.com/get-alex/alex",
+      "stars": 5106,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "JavaScript",
+      "pushed_at": "2024-11-27",
+      "layer": "editorial",
+      "gaps": [
+        "G5"
+      ],
+      "integration": "adapter",
+      "priority": "P2",
+      "note": "Linguagem inclusiva em inglês; usar como referência para regras PT."
+    },
+    {
+      "repo": "amperser/proselint",
+      "url": "https://github.com/amperser/proselint",
+      "stars": 4595,
+      "license": "BSD-3-Clause",
+      "license_verified": true,
+      "language": "JavaScript",
+      "pushed_at": "2026-09-04",
+      "layer": "editorial",
+      "gaps": [
+        "G5"
+      ],
+      "integration": "adapter",
+      "priority": "P2",
+      "note": "Linter de prosa em inglês; útil para EN, não para pt-BR."
+    },
+    {
+      "repo": "nuspell/nuspell",
+      "url": "https://github.com/nuspell/nuspell",
+      "stars": 269,
+      "license": "LGPL-3.0",
+      "license_verified": true,
+      "language": "C++",
+      "pushed_at": "2026-09-11",
+      "layer": "editorial",
+      "gaps": [
+        "G5"
+      ],
+      "integration": "library",
+      "priority": "P2",
+      "note": "Spellcheck rápido e seguro; alternativa moderna ao Hunspell."
+    },
+    {
+      "repo": "in-toto/in-toto",
+      "url": "https://github.com/in-toto/in-toto",
+      "stars": 1055,
+      "license": "Apache-2.0",
+      "license_verified": false,
+      "language": "Python",
+      "pushed_at": "2026-08-27",
+      "layer": "governance",
+      "gaps": [
+        "G10"
+      ],
+      "integration": "adapter",
+      "priority": "P2",
+      "note": "Integridade de cadeia de suprimentos; útil para builds e releases."
+    },
+    {
+      "repo": "sigstore/sigstore",
+      "url": "https://github.com/sigstore/sigstore",
+      "stars": 540,
+      "license": "Apache-2.0",
+      "license_verified": true,
+      "language": "Go",
+      "pushed_at": "2026-11-05",
+      "layer": "governance",
+      "gaps": [
+        "G10"
+      ],
+      "integration": "adapter",
+      "priority": "P2",
+      "note": "Assinatura e transparência de artefatos; complemento de release."
+    },
+    {
+      "repo": "contentauth/c2pa-rs",
+      "url": "https://github.com/contentauth/c2pa-rs",
+      "stars": 439,
+      "license": "Apache-2.0/MIT",
+      "license_verified": false,
+      "language": "Rust",
+      "pushed_at": "2026-11-06",
+      "layer": "governance",
+      "gaps": [
+        "G10"
+      ],
+      "integration": "library",
+      "priority": "P2",
+      "note": "Proveniência de conteúdo para imagens; útil contra fabricação documental."
+    },
+    {
+      "repo": "pymupdf/PyMuPDF",
+      "url": "https://github.com/pymupdf/PyMuPDF",
+      "stars": 11074,
+      "license": "AGPL-3.0",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2026-11-05",
+      "layer": "ingest",
+      "gaps": [
+        "G9",
+        "G15"
+      ],
+      "integration": "avoid",
+      "priority": "P2",
+      "note": "Muito rápido, mas AGPL; usar pypdf/pdfplumber/pikepdf para evitar contaminação."
+    },
+    {
+      "repo": "ArtifexSoftware/mupdf",
+      "url": "https://github.com/ArtifexSoftware/mupdf",
+      "stars": 3035,
+      "license": "AGPL-3.0",
+      "license_verified": true,
+      "language": "C",
+      "pushed_at": "2026-11-05",
+      "layer": "ingest",
+      "gaps": [
+        "G9"
+      ],
+      "integration": "avoid",
+      "priority": "P2",
+      "note": "Base do PyMuPDF; mesma restrição AGPL."
+    },
+    {
+      "repo": "zotero/zotero",
+      "url": "https://github.com/zotero/zotero",
+      "stars": 15859,
+      "license": "AGPL-3.0",
+      "license_verified": false,
+      "language": "JavaScript",
+      "pushed_at": "2026-11-05",
+      "layer": "metadata",
+      "gaps": [
+        "G2"
+      ],
+      "integration": "reference",
+      "priority": "P2",
+      "note": "Gestor de referências; AGPL, usar como app externo e exportar .bib."
+    },
+    {
+      "repo": "JabRef/jabref",
+      "url": "https://github.com/JabRef/jabref",
+      "stars": 4872,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "Java",
+      "pushed_at": "2026-11-05",
+      "layer": "metadata",
+      "gaps": [
+        "G2"
+      ],
+      "integration": "reference",
+      "priority": "P2",
+      "note": "Gestor BibTeX/BibLaTeX; referência para bibliografia e integração .bib."
+    },
+    {
+      "repo": "LibreTranslate/LibreTranslate",
+      "url": "https://github.com/LibreTranslate/LibreTranslate",
+      "stars": 17283,
+      "license": "AGPL-3.0",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2026-10-26",
+      "layer": "translate",
+      "gaps": [
+        "G11"
+      ],
+      "integration": "avoid",
+      "priority": "P2",
+      "note": "MT self-hosted, mas AGPL; preferir Argos (MIT) ou API externa com contrato."
+    },
+    {
+      "repo": "OpenNMT/OpenNMT-py",
+      "url": "https://github.com/OpenNMT/OpenNMT-py",
+      "stars": 7023,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2025-10-14",
+      "layer": "translate",
+      "gaps": [
+        "G11"
+      ],
+      "integration": "library",
+      "priority": "P2",
+      "note": "Framework de tradução neural; útil para domínio literário com corpus próprio."
+    },
+    {
+      "repo": "marian-nmt/marian",
+      "url": "https://github.com/marian-nmt/marian",
+      "stars": 1476,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "C++",
+      "pushed_at": "2023-08-25",
+      "layer": "translate",
+      "gaps": [
+        "G11"
+      ],
+      "integration": "reference",
+      "priority": "P2",
+      "note": "MT neural rápido; referência de treino/inferência, não dependência do estúdio."
+    },
+    {
+      "repo": "remotion-dev/remotion",
+      "url": "https://github.com/remotion-dev/remotion",
+      "stars": 71052,
+      "license": "Remotion License (não OSI)",
+      "license_verified": false,
+      "language": "TypeScript",
+      "pushed_at": "2026-11-05",
+      "layer": "video",
+      "gaps": [
+        "G12"
+      ],
+      "integration": "avoid",
+      "priority": "P2",
+      "note": "Poderoso, mas com restrições comerciais; não usar como dependência central sem licença."
+    },
+    {
+      "repo": "ManimCommunity/manim",
+      "url": "https://github.com/ManimCommunity/manim",
+      "stars": 42273,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2026-11-05",
+      "layer": "video",
+      "gaps": [
+        "G12"
+      ],
+      "integration": "library",
+      "priority": "P2",
+      "note": "Animação matemática e explicativa; bom para trailers didáticos."
+    },
+    {
+      "repo": "motion-canvas/motion-canvas",
+      "url": "https://github.com/motion-canvas/motion-canvas",
+      "stars": 19706,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "TypeScript",
+      "pushed_at": "2026-07-02",
+      "layer": "video",
+      "gaps": [
+        "G12"
+      ],
+      "integration": "library",
+      "priority": "P2",
+      "note": "Animação programática em TypeScript; alternativa ao Remotion sem licença comercial."
+    },
+    {
+      "repo": "midrender/revideo",
+      "url": "https://github.com/midrender/revideo",
+      "stars": 4180,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "TypeScript",
+      "pushed_at": "2026-07-15",
+      "layer": "video",
+      "gaps": [
+        "G12"
+      ],
+      "integration": "library",
+      "priority": "P2",
+      "note": "Vídeo programático em TypeScript; verificar maturidade e codecs."
+    },
+    {
+      "repo": "excalidraw/excalidraw",
+      "url": "https://github.com/excalidraw/excalidraw",
+      "stars": 135214,
+      "license": "MIT",
+      "license_verified": true,
+      "language": "TypeScript",
+      "pushed_at": "2026-11-05",
+      "layer": "visual",
+      "gaps": [
+        "G8"
+      ],
+      "integration": "library",
+      "priority": "P2",
+      "note": "Quadro branco hand-drawn; útil para esboços e mapas de cena."
+    },
+    {
+      "repo": "d3/d3",
+      "url": "https://github.com/d3/d3",
+      "stars": 113876,
+      "license": "ISC",
+      "license_verified": true,
+      "language": "JavaScript",
+      "pushed_at": "2026-11-03",
+      "layer": "visual",
+      "gaps": [
+        "G8"
+      ],
+      "integration": "library",
+      "priority": "P2",
+      "note": "Visualização SVG/Canvas; controle total, custo de implementação maior."
+    },
+    {
+      "repo": "tldraw/tldraw",
+      "url": "https://github.com/tldraw/tldraw",
+      "stars": 51283,
+      "license": "tldraw License (não OSI)",
+      "license_verified": false,
+      "language": "TypeScript",
+      "pushed_at": "2026-11-05",
+      "layer": "visual",
+      "gaps": [
+        "G8"
+      ],
+      "integration": "avoid",
+      "priority": "P2",
+      "note": "Canvas excelente, mas licença com watermark/paid removal; evitar como core."
+    },
+    {
+      "repo": "plantuml/plantuml",
+      "url": "https://github.com/plantuml/plantuml",
+      "stars": 13402,
+      "license": "LGPL-3.0",
+      "license_verified": true,
+      "language": "Java",
+      "pushed_at": "2026-11-05",
+      "layer": "visual",
+      "gaps": [
+        "G8"
+      ],
+      "integration": "adapter",
+      "priority": "P2",
+      "note": "Diagramas UML e de arquitetura; usar via Kroki/CLI."
+    },
+    {
+      "repo": "jgraph/drawio",
+      "url": "https://github.com/jgraph/drawio",
+      "stars": 9204,
+      "license": "Apache-2.0",
+      "license_verified": true,
+      "language": "JavaScript",
+      "pushed_at": "2026-11-04",
+      "layer": "visual",
+      "gaps": [
+        "G8"
+      ],
+      "integration": "library",
+      "priority": "P2",
+      "note": "Editor de diagramas completo; referência de UX e formato para mapas mentais."
+    },
+    {
+      "repo": "observablehq/plot",
+      "url": "https://github.com/observablehq/plot",
+      "stars": 5419,
+      "license": "ISC",
+      "license_verified": true,
+      "language": "JavaScript",
+      "pushed_at": "2026-11-05",
+      "layer": "visual",
+      "gaps": [
+        "G8"
+      ],
+      "integration": "library",
+      "priority": "P2",
+      "note": "Gráficos concisos em JS; alternativa moderna ao D3 para dados editoriais."
+    },
+    {
+      "repo": "Leaflet/Leaflet",
+      "url": "https://github.com/Leaflet/Leaflet",
+      "stars": 45860,
+      "license": "BSD-2-Clause",
+      "license_verified": true,
+      "language": "JavaScript",
+      "pushed_at": "2026-11-05",
+      "layer": "visual/maps",
+      "gaps": [
+        "G8"
+      ],
+      "integration": "library",
+      "priority": "P2",
+      "note": "Mapas interativos; útil para geografia de cenas e rotas."
+    },
+    {
+      "repo": "maplibre/maplibre-gl-js",
+      "url": "https://github.com/maplibre/maplibre-gl-js",
+      "stars": 12031,
+      "license": "BSD-3-Clause",
+      "license_verified": false,
+      "language": "TypeScript",
+      "pushed_at": "2026-11-05",
+      "layer": "visual/maps",
+      "gaps": [
+        "G8"
+      ],
+      "integration": "library",
+      "priority": "P2",
+      "note": "Mapas vetoriais abertos; alternativa ao Mapbox GL."
+    },
+    {
+      "repo": "saga-soft/novelWriter",
+      "url": "https://github.com/saga-soft/novelWriter",
+      "stars": 3220,
+      "license": "GPL-3.0",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2026-11-05",
+      "layer": "writing",
+      "gaps": [
+        "G6",
+        "G14"
+      ],
+      "integration": "reference",
+      "priority": "P2",
+      "note": "Editor plain-text para romances com projeto, notas e personagens; referência de fluxo."
+    },
+    {
+      "repo": "olivierkes/manuskript",
+      "url": "https://github.com/olivierkes/manuskript",
+      "stars": 2476,
+      "license": "GPL-3.0",
+      "license_verified": true,
+      "language": "Python",
+      "pushed_at": "2026-11-06",
+      "layer": "writing",
+      "gaps": [
+        "G6",
+        "G14"
+      ],
+      "integration": "reference",
+      "priority": "P2",
+      "note": "Ferramenta de escrita com estrutura de projeto, personagens e timeline; referência de UX."
+    },
+    {
+      "repo": "andreafeccomandi/bibisco",
+      "url": "https://github.com/andreafeccomandi/bibisco",
+      "stars": 773,
+      "license": "GPL-3.0",
+      "license_verified": true,
+      "language": "JavaScript",
+      "pushed_at": "2026-11-05",
+      "layer": "writing",
+      "gaps": [
+        "G6",
+        "G14"
+      ],
+      "integration": "reference",
+      "priority": "P2",
+      "note": "Software de romance com capítulos, personagens e entrevistas; referência de organização."
+    }
+  ]
+}

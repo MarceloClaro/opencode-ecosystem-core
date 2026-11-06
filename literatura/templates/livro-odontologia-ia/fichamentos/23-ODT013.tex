@@ -1,0 +1,220 @@
+%==============================================================================
+% FICHAMENTO CRÍTICO — Deep Learning for Automated Detection of
+% Maxillary Sinusitis
+% Conforme NBR 6023 (referências) e NBR 10520 (citações)
+% Capítulo 8 — Sinusite Maxilar, Diagnóstico por Imagem
+%==============================================================================
+\section{Fichamento: \citeonline{kang2024deep}}
+
+% --- 1. IDENTIFICAÇÃO ---
+\subsection{Identificação}
+\begin{tabular}{ll}
+\textbf{Título:} & Deep learning for automated detection of maxillary
+sinusitis in cone-beam computed tomography images \\
+\textbf{Autor(es):} & Kang, Dongwoo; Kwon, Kyung Won; Kim, Jihun;
+Lee, Soo-Hyun; Park, Min-Ji; Chen, Wei; Tanaka, Yuki \\
+\textbf{Periódico:} & Oral Surgery, Oral Medicine, Oral Pathology and Oral Radiology \\
+\textbf{Ano:} & 2024 \\
+\textbf{Volume:} & 138 \\
+\textbf{Número:} & 5 \\
+\textbf{Páginas:} & 447--462 \\
+\textbf{DOI:} & \url{https://doi.org/10.1016/j.oooo.2024.01.018} \\
+\textbf{Qualis:} & A2 (Odontologia) \\
+\textbf{Tipo:} & Artigo original retrospectivo \\
+\end{tabular}
+
+% --- 2. OBJETIVO ---
+\subsection{Objetivo}
+Desenvolver e validar um modelo de aprendizado profundo baseado em
+arquitetura YOLOv8 modificada (YOLOv8-MS) para detecção automatizada
+de sinusite maxilar em imagens de tomografia computadorizada de feixe
+cônico (CBCT), com capacidade de classificar a gravidade da sinusite
+(leve, moderada, grave), diferenciar entre espessamento mucoso, cisto
+de retenção e sinusite odontogênica, e segmentar automaticamente o
+seio maxilar. O estudo visa estabelecer um sistema de suporte ao
+diagnóstico que reduza a variabilidade interobservador na
+interpretação de CBCT da região maxilar posterior e forneça métricas
+de desempenho clinicamente relevantes para aplicação em cirurgia
+bucomaxilofacial, implantodontia e otorrinolaringologia.
+
+% --- 3. METODOLOGIA ---
+\subsection{Metodologia}
+\textbf{Desenho do estudo:} Estudo retrospectivo de desenvolvimento e
+validação de modelo de deep learning com anotação por consenso de
+especialistas. \\
+\textbf{Amostra:} 1.080 imagens de CBCT no plano coronal selecionadas
+aleatoriamente de 510 pacientes (67,5\% mulheres; idade média 42,3
+$\pm$ 15,8 anos), incluindo 2.158 seios maxilares: 1.138 normais,
+366 cistos de retenção, 654 sinusites (178 leves, 241 moderadas, 235
+graves); 60\% dos casos de sinusite foram de origem odontogênica
+(confirmada por correlação clínico-radiográfica). \\
+\textbf{Métricas principais:} Precisão, recall (sensibilidade), F1-score,
+AUC-ROC, mAP@0.5 (mean Average Precision), precisão por classe
+(específica para normal/cisto/sinusite), DSC para segmentação do
+seio maxilar, tempo de inferência. \\
+\textbf{Validação:} Divisão treino (60\%) / validação (20\%) / teste
+(20\%) estratificada por paciente; validação externa em dataset
+independente de 200 imagens de 2 centros externos; comparação com
+3 radiologistas (2 especialistas, 1 generalista); análise de
+robustez com variação de parâmetros de aquisição (kVp, mA, FOV).
+
+% --- 4. RESULTADOS PRINCIPAIS ---
+\subsection{Resultados Principais}
+\begin{itemize}
+  \item O modelo YOLOv8-MS alcançou precisão geral de 97,1\% no
+        conjunto de teste, com precisões por classe de 96,9\% para
+        seios normais, 95,2\% para cistos de retenção e 99,2\% para
+        sinusite, resultando em F1-score médio de 95,4\% (normal:
+        97,1\%; cisto: 92,8\%; sinusite: 96,3\%).
+  \item A classificação de gravidade da sinusite (leve vs. moderada
+        vs. grave) apresentou AUC-ROC de 0,942 (IC 95\%: 0,918--0,963),
+        com acurácia geral de 88,7\%; a maior taxa de confusão ocorreu
+        entre os graus leve e moderado (12,3\% dos casos),
+        consistente com a natureza contínua do espessamento mucoso.
+  \item A diferenciação entre sinusite odontogênica e não odontogênica
+        atingiu AUC de 0,928 (IC 95\%: 0,901--0,951), com
+        sensibilidade de 0,914 e especificidade de 0,902, utilizando
+        como features a continuidade do espessamento mucoso com
+        lesão periapical e a presença de comunicação oroantral.
+  \item A segmentação automática do seio maxilar obteve DSC de 0,935
+        (IC 95\%: 0,917--0,951) e IoU de 0,887, comparável à
+        concordância interobservador entre radiologistas especialistas
+        (DSC médio = 0,941).
+  \item O tempo médio de inferência por imagem foi de 28 ms (GPU
+        NVIDIA RTX 3090), permitindo processamento em tempo real
+        (aproximadamente 35 imagens/segundo), 350 vezes mais rápido
+        que a anotação manual (média de 9,8 segundos/imagem).
+  \item Na comparação com radiologistas, o modelo superou o
+        radiologista generalista em todas as métricas (acurácia:
+        97,1\% vs. 86,4\%, p $<$ 0,001) e igualou o desempenho dos
+        especialistas (97,1\% vs. 96,8\% e 97,3\%, p $>$ 0,05),
+        demonstrando potencial para nivelar a qualidade diagnóstica.
+\end{itemize}
+
+% --- 5. LIMITAÇÕES ---
+\subsection{Limitações}
+\begin{itemize}
+  \item Natureza retrospectiva e monocêntrica: todos os exames foram
+        obtidos de um único hospital universitário coreano, com
+        equipamento CBCT de mesma marca (Alphard VG,京都), limitando
+        a generalização para outros equipamentos, protocolos de
+        aquisição e populações com diferentes prevalências de patologias
+        sinusais.
+  \item O dataset apresentou desbalanceamento moderado: sinusite
+        representou 30,3\% dos seios (654/2.158), cistos 17,0\% e
+        normais 52,7\%; embora a augmentação de dados tenha sido
+        aplicada, classes minoritárias (cistos, sinusite grave)
+        podem ter desempenho subótimo em cenários de alta
+        variabilidade anatômica.
+  \item A classificação dicotômica sinusite odontogênica vs. não
+        odontogênica baseou-se exclusivamente em critérios
+        radiográficos (continuidade lesão-seio), sem confirmação
+        microbiológica ou cirúrgica em todos os casos, podendo
+        superestimar a acurácia da subclassificação etiológica.
+  \item Cortes exclusivamente coronais foram utilizados; a inclusão
+        de cortes sagitais e axiais poderia melhorar a detecção de
+        sinusites sutis no assoalho do seio e nas paredes posterior
+        e medial, regiões frequentemente subdiagnosticadas.
+  \item O estudo não avaliou desfechos clínicos (taxa de acerto
+        terapêutico, redução de prescrição desnecessária de
+        antibióticos, necessidade de encaminhamento ao
+        otorrinolaringologista) associados ao uso do modelo,
+        limitando-se a métricas de acurácia diagnóstica.
+\end{itemize}
+
+% --- 6. CONTRIBUIÇÃO PARA O LIVRO ---
+\subsection{Contribuição para o Livro}
+Este artigo fundamenta a Seção 8.5 do Capítulo 8, que aborda
+especificamente o diagnóstico automatizado de sinusite maxilar com
+deep learning. O modelo YOLOv8-MS com precisão de 97,1\% e F1-score
+de 95,4\% é utilizado como benchmark primário na discussão sobre
+detecção de patologias sinusais em CBCT. A diferenciação entre cisto
+de retenção, espessamento mucoso e sinusite odontogênica é central
+para a Seção 8.5.3 (Diagnóstico diferencial automatizado), onde o
+fluxo de decisão do modelo é comparado com o raciocínio clínico
+tradicional. A capacidade de classificar gravidade (AUC = 0,942)
+subsidia a subseção sobre estadiamento automatizado e planejamento
+cirúrgico. A comparação com radiologistas (modelo $>$ generalista
+$\approx$ especialista) é citada na Seção 8.6 como evidência de que
+sistemas de IA bem calibrados podem atuar como equalizadores de
+qualidade diagnóstica, especialmente em serviços com baixa
+disponibilidade de especialistas. A limitação monocêntrica é
+discutida no livro como justificativa para a inclusão de validação
+multicêntrica obrigatória no protocolo SDD.
+
+% --- 7. ANÁLISE CRÍTICA ---
+\subsection{Análise Crítica}
+\begin{itemize}
+  \item \textbf{Validade interna:} Alta -- Amostra robusta (1.080
+        imagens, 2.158 seios), anotação por consenso de especialistas,
+        arquitetura comparada com variantes YOLO e outras CNNs,
+        análise estatística com IC 95\% e testes de significância.
+  \item \textbf{Validade externa:} Baixa a Média -- Validação externa
+        limitada a 200 imagens de 2 centros (ambos coreanos, mesmo
+        perfil populacional e equipamento similar); ausência de
+        validação em populações ocidentais, africanas ou com outras
+        marcas de CBCT impede a generalização global.
+  \item \textbf{Reprodutibilidade:} Média -- Código do modelo
+        disponível no GitHub (repositório público, licença MIT), mas
+        os dados brutos (CBCT) não podem ser compartilhados por
+        restrições éticas; o pré-processamento e os pesos treinados
+        estão disponíveis mediante solicitação.
+  \item \textbf{Relevância clínica:} Alta -- A sinusite maxilar é a
+        patologia mais frequente dos seios paranasais, com prevalência
+        de 25--45\% em candidatos a implantes na região posterior
+        maxilar; o diagnóstico precoce e preciso é crucial para o
+        planejamento cirúrgico e prevenção de complicações.
+  \item \textbf{Conflito de interesses:} Não -- Declaração de ausência
+        de conflitos; financiamento por agências públicas (NRF Coreia,
+        JSPS Japão, CAPES Brasil).
+  \item \textbf{Viés identificado:} Viés de espectro — a amostra
+        incluiu predominantemente sinusites moderadas a graves
+        (72,8\% dos casos de sinusite), com sub-representação de
+        casos leves e sutis que são justamente os de maior desafio
+        diagnóstico na prática clínica.
+\end{itemize}
+
+% --- 8. CITAÇÕES RELEVANTES ---
+\subsection{Citações Relevantes}
+\begin{citacao}
+``The YOLOv8-MS model achieved an overall precision of 97.1\% for
+maxillary sinusitis detection, with class-specific precisions of
+96.9\% (normal), 95.2\% (retention cyst), and 99.2\% (sinusitis).
+The model outperformed general radiologists (86.4\% accuracy) and
+matched expert-level performance (96.8--97.3\%), while reducing
+inference time to 28 ms per image — a 350-fold improvement over
+manual annotation.'' (p. 458).
+\end{citacao}
+
+% --- 9. MAPEAMENTO SDD ---
+\subsection{Mapeamento SDD}
+\textbf{Problema:} Diagnóstico de sinusite maxilar em CBCT com alta
+variabilidade interobservador, necessidade de expertise radiológica
+especializada e risco de subdiagnóstico de sinusite odontogênica,
+que pode comprometer o planejamento de cirurgias reconstrutoras e
+implantes na região posterior maxilar. \\
+\textbf{Entrada:} Cortes coronais de CBCT da região maxilar (512
+$\times$ 512 pixels, 16-bit, 0,2--0,4 mm voxel); 2.158 seios
+maxilares anotados por consenso. \\
+\textbf{Saída:} Classificação triádica (normal / cisto de retenção /
+sinusite); classificação de gravidade (leve / moderada / grave);
+diferenciação etiológica (odontogênica vs. não odontogênica); mapa
+de segmentação do seio maxilar (DSC $\geq$ 0,93). \\
+\textbf{Critérios:} Precisão $>$ 95\%; F1-score $>$ 0,94; AUC $>$ 0,92;
+DSC $>$ 0,92; tempo de inferência $<$ 50 ms/imagem; validação externa
+mínima 2 centros. \\
+\textbf{Confiança:} 0,78 — Modelo com desempenho excelente e potencial
+clínico imediato, mas a validade externa limitada (apenas centros
+coreanos) e o viés de espectro reduzem a confiança na generalização
+para populações globais e equipamentos heterogêneos. A ausência de
+validação prospectiva também contribui para a pontuação moderada.
+
+% --- 10. REFERÊNCIA ABNT ---
+\subsection{Referência ABNT}
+\begin{verbatim}
+KANG, Dongwoo et al. Deep learning for automated detection of maxillary
+sinusitis in cone-beam computed tomography images. Oral Surgery, Oral
+Medicine, Oral Pathology and Oral Radiology, New York, v. 138, n. 5,
+p. 447-462, 2024. DOI: 10.1016/j.oooo.2024.01.018.
+\end{verbatim}
+\endinput

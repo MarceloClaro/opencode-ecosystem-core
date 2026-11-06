@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<title>Piloto PDF/UA — Book Studio</title>
+<style>
+@page { size: 6in 9in; margin: 0.75in; }
+body { font-family: "Liberation Serif", serif; font-size: 11pt; line-height: 1.45; color: #2B2117; }
+h1 { font-size: 20pt; } h2 { font-size: 14pt; margin-top: 1.2em; }
+table { border-collapse: collapse; width: 100%; margin: 0.6em 0; }
+caption { text-align: left; font-style: italic; margin-bottom: 0.3em; }
+th, td { border: 0.5pt solid #2B2117; padding: 4pt; text-align: left; }
+figure { margin: 1em 0; } figcaption { font-size: 9pt; font-style: italic; }
+a { color: #1F5C57; }
+</style></head>
+<body>
+<h1>Piloto de acessibilidade</h1>
+<p>Este documento testa estrutura tagged, <a href="https://example.org">link externo</a>, tabela com cabeçalho e nota de rodapé.<sup><a href="#fn1" id="ref1" aria-label="Nota 1">1</a></sup></p>
+<h2>Tabela de contraste</h2>
+<table>
+<caption>Contraste da paleta sobre papel sépia</caption>
+<thead><tr><th scope="col">Cor</th><th scope="col">Hexadecimal</th><th scope="col">Contraste</th></tr></thead>
+<tbody>
+<tr><td>Memória</td><td>#8A3B1F</td><td>6,32:1</td></tr>
+<tr><td>Documento</td><td>#1F5C57</td><td>6,31:1</td></tr>
+<tr><td>Cuidado</td><td>#FF4D4D</td><td>6,42:1 sobre preto</td></tr>
+</tbody></table>
+<h2>Figura com texto alternativo</h2>
+<figure>
+<img src="pilot.png" alt="Retângulo sépia com moldura cobre e a palavra CUIDADO em vermelho sobre fundo preto." style="width:100%">
+<figcaption>Figura 1 — teste de texto alternativo e legenda.</figcaption>
+</figure>
+<p id="fn1"><sup>1</sup> Nota de rodapé: a acessibilidade exige estrutura, não apenas texto extraível.</p>
+</body></html>

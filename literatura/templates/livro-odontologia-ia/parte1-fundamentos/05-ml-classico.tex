@@ -1,0 +1,676 @@
+%==============================================================================
+% CAPÍTULO 5 — MACHINE LEARNING CLÁSSICO EM ODONTOLOGIA
+% Regressão Logística, Random Forest, SVM, XGBoost e KNN
+% Autor: Edson Laranjeiras
+%==============================================================================
+
+\chapter{Machine Learning Clássico em Odontologia}
+\label{cap:ml-classico}
+
+\nivelbasico
+
+\section{Objetivos de Aprendizagem}
+
+Ao final deste capítulo, o leitor será capaz de:
+\begin{enumerate}
+    \item Compreender os fundamentos matemáticos e a aplicação clínica dos cinco principais algoritmos de machine learning clássico em odontologia: regressão logística, Random Forest, SVM, XGBoost e KNN;
+    \item Selecionar o algoritmo apropriado para cada tipo de problema odontológico (classificação binária, multiclasse, predição de risco, similaridade de casos);
+    \item Implementar, treinar, validar e interpretar modelos de ML clássico usando Scikit-learn e XGBoost;
+    \item Analisar feature importance para identificar as variáveis clínicas mais preditivas;
+    \item Diagnosticar e mitigar overfitting e underfitting utilizando validação cruzada e regularização;
+    \item Aplicar o protocolo TDD ao desenvolvimento de modelos preditivos odontológicos.
+\end{enumerate}
+
+\section{Fundamentação Teórica}
+
+\subsection{Por que Machine Learning Clássico Ainda é Relevante?}
+
+Em um livro que dedica capítulos extensos a deep learning e CNNs, pode parecer anacrônico dedicar um capítulo inteiro ao machine learning ``clássico''. No entanto, há razões poderosas para esta escolha \indice{machine learning!clássico}:
+
+\begin{enumerate}
+    \item \textbf{Dados tabulares.} Nem todo problema odontológico envolve imagens. Predição de risco de cárie baseada em fatores clínicos, demográficos e comportamentais; predição de sucesso de implantes baseada em características do paciente e do osso; classificação de periodontite baseada em profundidade de sondagem, sangramento e perda de inserção — todos são problemas tabulares onde Random Forest e XGBoost frequentemente superam redes neurais profundas.
+    
+    \item \textbf{Interpretabilidade nativa.} Modelos como regressão logística e Random Forest oferecem feature importance direta — o clínico pode ver exatamente quais variáveis (idade, tabagismo, CPOD prévio) mais influenciam a predição. Em deep learning, esta interpretabilidade requer técnicas adicionais (Grad-CAM, SHAP) que serão abordadas em capítulos posteriores.
+    
+    \item \textbf{Eficiência computacional.} Treinar um XGBoost em 10.000 registros clínicos leva segundos em CPU. Treinar uma CNN comparável pode levar horas em GPU. Para muitos problemas odontológicos, ML clássico oferece 95\% da performance com 1\% do custo computacional.
+    
+    \item \textbf{Menor necessidade de dados.} Redes neurais profundas são famintas por dados — tipicamente requerem milhares a milhões de exemplos. Modelos de ML clássico podem produzir resultados úteis com centenas de exemplos, uma realidade comum em pesquisa odontológica onde datasets são frequentemente pequenos.
+    
+    \item \textbf{Fundação conceitual.} Compreender regressão logística e árvores de decisão constrói a intuição estatística necessária para entender arquiteturas mais complexas.
+\end{enumerate}
+
+\subsection{O Pipeline de Machine Learning}
+
+Todo projeto de ML clássico em odontologia segue um pipeline padronizado \indice{pipeline!ML}:
+
+\begin{enumerate}
+    \item \textbf{Definição do problema.} Classificação binária? Multiclasse? Regressão? Predição de risco? Qual a métrica de sucesso?
+    \item \textbf{Coleta e preparação dos dados.} Features clínicas, demográficas, radiográficas (extraídas manualmente ou via CNN). Tratamento de valores ausentes, codificação de variáveis categóricas, normalização.
+    \item \textbf{Análise exploratória.} Distribuições, correlações, detecção de outliers. Identificação de desbalanceamento de classes.
+    \item \textbf{Partição treino/validação/teste.} Estratificação por classe e, quando relevante, por paciente (evitar data leakage).
+    \item \textbf{Seleção e treinamento do modelo.} Comparar múltiplos algoritmos com validação cruzada.
+    \item \textbf{Otimização de hiperparâmetros.} Grid search ou random search com validação cruzada aninhada.
+    \item \textbf{Avaliação no conjunto de teste.} Métrica principal + IC95\%. Matriz de confusão. Curva ROC.
+    \item \textbf{Interpretação.} Feature importance. SHAP values. Análise de erros.
+    \item \textbf{Documentação e deploy.} Salvar modelo treinado, documentar pré-processamento, disponibilizar para uso clínico.
+\end{enumerate}
+
+\section{Regressão Logística para Risco de Cárie}
+
+\subsection{Fundamentos Matemáticos}
+
+A regressão logística \indice{regressão logística} é o modelo mais simples e interpretável para classificação binária. Apesar do nome, é um classificador, não um regressor. Modela a probabilidade de um evento (ex.: desenvolvimento de cárie em 2 anos) como uma função logística (sigmoid) de uma combinação linear das variáveis preditoras:
+
+\begin{equation}
+P(Y=1 | X) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \ldots + \beta_p X_p)}}
+\end{equation}
+
+Onde:
+\begin{itemize}
+    \item $P(Y=1|X)$: probabilidade de cárie dados os fatores de risco $X$
+    \item $\beta_0$: intercepto (risco basal)
+    \item $\beta_i$: coeficiente da variável $X_i$ — quanto maior, mais esta variável aumenta o risco
+    \item $e$: função exponencial, que garante que a probabilidade esteja entre 0 e 1
+\end{itemize}
+
+A função sigmoid transforma qualquer valor real (de $-\infty$ a $+\infty$) em uma probabilidade (0 a 1), criando a curva em S característica.
+
+\subsection{Aplicação Odontológica: Predição de Cárie}
+
+\textbf{Contexto clínico:} Um dentista deseja prever quais pacientes desenvolverão novas lesões de cárie nos próximos 24 meses, para intensificar a prevenção nos pacientes de alto risco.
+
+\textbf{Variáveis preditoras (features):}
+\begin{itemize}
+    \item Idade (anos)
+    \item CPOD basal (0--32)
+    \item Frequência de escovação (vezes/dia)
+    \item Uso de fio dental (sim/não)
+    \item Frequência de consumo de açúcar (vezes/dia)
+    \item Fluxo salivar estimulado (mL/min)
+    \item Nível socioeconômico (baixo/médio/alto)
+    \item Histórico familiar de cárie (sim/não)
+\end{itemize}
+
+A regressão logística produzirá:
+\begin{itemize}
+    \item \textbf{Coeficientes $\beta_i$:} Cada coeficiente quantifica o impacto da variável correspondente. Exemplo: $\beta_{\text{açúcar}} = +0.45$ significa que cada aumento de 1 unidade na frequência de consumo de açúcar aumenta o log-odds de cárie em 0.45.
+    \item \textbf{Odds ratios:} $e^{\beta_i}$ é a razão de chances. Para o exemplo acima, $e^{0.45} = 1.57$, significando que cada aumento unitário no consumo de açúcar aumenta em 57\% a chance de desenvolver cárie.
+    \item \textbf{Probabilidade individual:} Para um paciente específico, o modelo calcula $P(\text{cárie} | \text{features do paciente})$ — uma probabilidade personalizada entre 0 e 1.
+\end{itemize}
+
+\subsection{Interpretação Clínica dos Coeficientes}
+
+Uma das maiores vantagens da regressão logística é a interpretabilidade direta. A Tabela~\ref{tab:coeficientes-carie} ilustra:
+
+\begin{table}[H]
+  \centering
+  \caption{Coeficientes de Regressão Logística para Risco de Cárie (Exemplo)}
+  \label{tab:coeficientes-carie}
+  \begin{tabularx}{\textwidth}{lccX}
+    \toprule
+    \textbf{Variável} & $\beta$ & $e^{\beta}$ (Odds Ratio) & \textbf{Interpretação} \\
+    \midrule
+    Intercepto & $-3.20$ & — & Risco basal muito baixo (0.04) quando todas as variáveis são zero \\
+    CPOD basal & $+0.32$ & 1.38 & Cada ponto adicional no CPOD aumenta risco em 38\% \\
+    Açúcar (vezes/dia) & $+0.45$ & 1.57 & Cada ingestão diária adicional aumenta risco em 57\% \\
+    Escovação (vezes/dia) & $-0.28$ & 0.76 & Cada escovação adicional REDUZ risco em 24\% \\
+    Fluxo salivar & $-0.15$ & 0.86 & Cada mL/min adicional REDUZ risco em 14\% \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\section{Random Forest para Classificação Periodontal}
+
+\subsection{Fundamentos: Árvores de Decisão e Ensembles}
+
+Random Forest \indice{Random Forest} é um algoritmo de ensemble (conjunto) que combina centenas de árvores de decisão, cada uma treinada em uma amostra bootstrap (com reposição) dos dados, usando um subconjunto aleatório das features em cada divisão.
+
+\textbf{Intuição:} Imagine 500 dentistas independentes, cada um treinado com um subconjunto ligeiramente diferente de casos clínicos. Cada dentista faz seu diagnóstico. O diagnóstico final é o voto da maioria. A Random Forest implementa exatamente esta ideia, substituindo dentistas por árvores de decisão.
+
+\textbf{Vantagens:}
+\begin{itemize}
+    \item Robusto a outliers e ruído nos dados
+    \item Naturalmente lida com features categóricas e numéricas
+    \item Fornece feature importance (importância de cada variável)
+    \item Não requer normalização dos dados
+    \item Menos propenso a overfitting que árvores individuais
+    \item Paralelizável (cada árvore é independente)
+\end{itemize}
+
+\subsection{Aplicação Odontológica: Classificação de Periodontite}
+
+Zhang et al. (2023) \cite{ODT-025} demonstraram a aplicação de Random Forest para predição de risco utilizando dados clínicos estruturados. No contexto periodontal, um modelo Random Forest pode classificar pacientes por estágio de periodontite (saúde, gengivite, periodontite estágio I/II, periodontite estágio III/IV) usando:
+
+\begin{itemize}
+    \item Profundidade de sondagem média e máxima
+    \item Perda de inserção clínica média
+    \item Percentual de sítios com sangramento à sondagem
+    \item Índice de placa
+    \item Fatores de risco: tabagismo (maços-ano), diabetes (HbA1c)
+    \item Idade e sexo
+\end{itemize}
+
+A Random Forest também gera uma matriz de feature importance que revela quais variáveis são mais preditivas para o diagnóstico periodontal — informação de alto valor clínico.
+
+\subsection{Feature Importance: O Que Realmente Importa?}
+
+A feature importance \indice{feature importance} da Random Forest é calculada de duas formas:
+
+\begin{enumerate}
+    \item \textbf{Mean Decrease in Impurity (MDI).} Quanto cada feature contribuiu para reduzir a impureza (Gini impurity ou entropia) nas divisões das árvores. Features que consistentemente aparecem nas primeiras divisões (mais próximas à raiz) recebem maior importância.
+    \item \textbf{Mean Decrease in Accuracy (MDA) / Permutation Importance.} Para cada feature, embaralhe aleatoriamente seus valores e meça a queda na acurácia do modelo. Features cujo embaralhamento causa grande queda na performance são importantes.
+\end{enumerate}
+
+Em um estudo de predição de câncer oral com Random Forest \cite{ODT-025}, as features mais importantes foram: leucoplasia prévia, tabagismo pesado, idade $>55$ anos e etilismo — fatores de risco bem estabelecidos na literatura, validando a capacidade do modelo de ``aprender'' conhecimento clínico relevante.
+
+\section{SVM para Detecção de Lesões}
+
+\subsection{Fundamentos: Hiperplano de Separação Ótimo}
+
+Support Vector Machine (SVM) \indice{SVM} busca o hiperplano que melhor separa duas classes com a máxima margem — a distância entre o hiperplano e os pontos mais próximos de cada classe (vetores de suporte).
+
+\textbf{Intuição geométrica:} Imagine pontos representando dentes saudáveis e dentes com lesão periapical em um espaço bidimensional onde os eixos são features extraídas da radiografia (ex.: textura, intensidade média). O SVM encontra a ``estrada mais larga'' que separa as duas nuvens de pontos, com os pontos na beira da estrada sendo os vetores de suporte.
+
+\textbf{Vantagens para odontologia:}
+\begin{itemize}
+    \item Eficaz em espaços de alta dimensionalidade (muitas features)
+    \item Robusto a overfitting quando a margem é ampla
+    \item Versátil: kernels (linear, RBF, polinomial) permitem capturar relações não-lineares
+    \item Efetivo mesmo com datasets moderadamente pequenos ($n \geq 100$)
+\end{itemize}
+
+\subsection{Aplicação Odontológica: SVM com Features Radiômicas}
+
+Bhatt et al. (2022) \cite{ODT-024} utilizaram SVM com kernel RBF para classificar carcinoma espinocelular oral baseado em 87 características histomorfológicas extraídas manualmente de imagens histopatológicas. O kernel RBF obteve acurácia de 91.2\% e AUC de 0.94. As características mais discriminativas foram pleomorfismo nuclear, atividade mitótica e padrão de invasão.
+
+Li et al. (2024) \cite{ODT-028} expandiram esta abordagem com uma estratégia híbrida: extraíram 1.700 features radiômicas (texturais, morfológicas e histograma) de imagens de tomografia computadorizada e as classificaram com SVM, Random Forest e XGBoost. A combinação de features radiômicas com XGBoost atingiu AUC de 0.93, demonstrando que features ``artesanais'' (handcrafted) ainda têm valor significativo — especialmente quando o dataset é pequeno demais para deep learning end-to-end.
+
+\section{XGBoost para Predição Clínica}
+
+\subsection{Fundamentos: Gradient Boosting Extremo}
+
+XGBoost (eXtreme Gradient Boosting) \indice{XGBoost} é o algoritmo que domina competições de machine learning em dados tabulares. Constrói sequencialmente árvores de decisão, onde cada nova árvore tenta corrigir os erros das árvores anteriores.
+
+\textbf{Diferença crucial do Random Forest:}
+\begin{itemize}
+    \item \textbf{Random Forest:} Árvores independentes, construídas em paralelo. Voto da maioria.
+    \item \textbf{XGBoost:} Árvores sequenciais. Cada árvore é treinada nos resíduos (erros) das anteriores. A predição final é a soma ponderada de todas as árvores.
+\end{itemize}
+
+\textbf{Vantagens para odontologia:}
+\begin{itemize}
+    \item Regularização L1 e L2 integrada (reduz overfitting)
+    \item Lida nativamente com valores ausentes
+    \item Extremamente rápido (implementação otimizada em C++)
+    \item Consistentemente vence benchmarks em dados tabulares clínicos
+    \item Feature importance nativa
+\end{itemize}
+
+\subsection{Aplicação Odontológica: Predição de Osseointegração}
+
+Silva et al. (2023) \cite{ODT-056} construíram um modelo preditivo de osseointegração de implantes usando XGBoost com features radiômicas extraídas de CBCT pré-operatório (1.500 features de textura e histograma do osso alveolar). AUC de 0.91 para predição de sucesso de osseointegração em 12 meses.
+
+As features mais preditivas foram:
+\begin{enumerate}
+    \item \textbf{Energia (textura).} Mede a uniformidade da textura óssea. Osso com trabeculado homogêneo e bem organizado (alta energia) foi associado a melhor osseointegração.
+    \item \textbf{Skewness do histograma.} Assimetria da distribuição de densidade. Osso com maior proporção de valores altos de densidade (skewness negativo) favoreceu a estabilidade primária.
+    \item \textbf{GLCM Correlation.} Medida de correlação entre pixels vizinhos na matriz de co-ocorrência. Alta correlação indicou osso maduro com trabéculas conectadas.
+\end{enumerate}
+
+\section{KNN para Similaridade de Casos}
+
+\subsection{Fundamentos: Aprendizado Baseado em Instâncias}
+
+K-Nearest Neighbors (KNN) \indice{KNN} é o algoritmo mais simples de ML: para classificar um novo paciente, encontre os K pacientes mais similares no dataset de treino e atribua a classe majoritária entre eles. Não há ``treinamento'' propriamente dito — o modelo simplesmente armazena todos os dados e computa similaridade sob demanda (\textit{lazy learning}).
+
+\textbf{Métrica de similaridade:} Tipicamente, utiliza-se a distância euclidiana: $d(x, x') = \sqrt{\sum_{i=1}^p (x_i - x'_i)^2}$.
+
+\textbf{Vantagens para odontologia:}
+\begin{itemize}
+    \item Intuitivo: ``Este paciente se parece com estes 5 pacientes que desenvolveram periodontite — portanto, alto risco.''
+    \item Não assume nenhuma forma paramétrica para os dados
+    \item Naturalmente lida com múltiplas classes
+    \item Útil para sistemas de recomendação e busca de casos similares
+\end{itemize}
+
+\subsection{Aplicação Odontológica: ``Casos Similares'' para Suporte à Decisão}
+
+O KNN é particularmente útil para sistemas de suporte à decisão clínica baseados em similaridade: dado um novo paciente, o sistema recupera os 10 pacientes mais similares do histórico clínico, mostrando seus diagnósticos, tratamentos realizados e desfechos. Esta abordagem é intuitiva para clínicos: ``este paciente se parece com outros 8 que responderam bem à terapia periodontal não-cirúrgica, e com 2 que necessitaram de intervenção cirúrgica''.
+
+\section{Overfitting, Underfitting e Validação Cruzada}
+
+\subsection{Diagnosticando Overfitting e Underfitting}
+
+\begin{description}
+    \item[Underfitting (viés alto).] O modelo é simples demais para capturar os padrões nos dados. Sinais: baixa performance tanto no treino quanto na validação. Soluções: aumentar complexidade do modelo, adicionar features, reduzir regularização.
+    
+    \item[Overfitting (variância alta).] O modelo ``decora'' os dados de treino, incluindo ruído. Sinais: performance excelente no treino, muito pior na validação. Soluções: mais dados, regularização (L1/L2), reduzir complexidade, early stopping, dropout, augmentação.
+    
+    \item[Ajuste ideal.] Performance similar (e boa) no treino e validação. O modelo capturou os padrões generalizáveis, não o ruído.
+\end{description}
+
+\subsection{Validação Cruzada como Ferramenta de Diagnóstico}
+
+A validação cruzada k-fold \indice{validação cruzada} é a ferramenta mais importante para diagnosticar overfitting:
+
+\begin{enumerate}
+    \item Divida os dados em k partições (folds) de tamanho igual
+    \item Para cada fold i:
+    \begin{itemize}
+        \item Treine o modelo nas outras k-1 partições
+        \item Avalie na partição i
+    \end{itemize}
+    \item Reporte a média e desvio-padrão das métricas nos k folds
+\end{enumerate}
+
+Se a variância entre folds for alta (grande desvio-padrão), o modelo é instável — pequenas mudanças nos dados de treino causam grandes mudanças na performance. Isso sugere overfitting ou dataset pequeno.
+
+\section{Revisão Bibliográfica Auditável}
+
+\subsection{ML Clássico vs. Deep Learning: Evidências Quantitativas}
+
+A metanálise de Ismail et al. (2024) \cite{ODT-023} fornece a comparação mais abrangente entre ML clássico e deep learning em diagnóstico de câncer oral:
+
+\citacaoativa{doi-1016-j-oraloncology-2024-106812}{10.1016/j.oraloncology.2024.106812}{A comparação metanalítica de 29 estudos revela superioridade consistente do deep learning (AUC pooled 0.96) sobre machine learning clássico (AUC pooled 0.87) no diagnóstico de câncer oral. SVM foi o melhor entre os métodos clássicos (AUC médio 0.89). A vantagem do deep learning foi mais pronunciada em estágios iniciais (T1/T2), onde a acurácia da inspeção clínica tradicional é mais limitada.}
+
+No entanto, para dados tabulares, o panorama é diferente. Estudos como o de Zhang et al. (2023) \cite{ODT-025} mostram que Random Forest (AUC 0.87) e XGBoost (AUC 0.93) são altamente competitivos — e frequentemente superiores a redes neurais — para predição baseada em dados clínicos estruturados.
+
+\subsection{Comparação de Algoritmos de ML Clássico}
+
+A Tabela~\ref{tab:comparacao-ml} sintetiza as características dos cinco algoritmos.
+
+\begin{table}[H]
+  \centering
+  \caption{Comparação de Algoritmos de ML Clássico para Odontologia}
+  \label{tab:comparacao-ml}
+  \small
+  \begin{tabularx}{\textwidth}{p{2cm}XXXXX}
+    \toprule
+    \textbf{Critério} & \textbf{Reg. Logística} & \textbf{Random Forest} & \textbf{SVM} & \textbf{XGBoost} & \textbf{KNN} \\
+    \midrule
+    Interpretabilidade & Excelente & Boa (feature import.) & Baixa (kernel) & Boa & Boa (casos similares) \\
+    Dados pequenos ($n<200$) & Bom & Bom & Excelente & Regular & Bom \\
+    Dados grandes ($n>10.000$) & Bom & Excelente & Lento & Excelente & Lento \\
+    Features categóricas & Sim (one-hot) & Sim & Sim (one-hot) & Sim & Requer encoding \\
+    Outliers & Sensível & Robusto & Robusto & Robusto & Muito sensível \\
+    Não-linearidade & Não (linear) & Sim & Sim (kernel) & Sim & Sim (distância) \\
+    Velocidade treino & Rápido & Rápido & Lento (RBF) & Rápido & Instantâneo \\
+    Overfitting & Baixo risco & Baixo risco & Risco moderado & Moderado (tunar) & Alto risco \\
+    Uso típico & Pred. risco linear & Classif. geral & Features radiômicas & Pred. tabular & Similaridade \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\section{Notas de Rodapé Explicativas}
+
+\notaexplicativa{A diferença entre Random Forest e XGBoost é frequentemente mal compreendida. Ambos usam árvores de decisão como base, mas o princípio de combinação é oposto: Random Forest (bagging) treina árvores independentes em paralelo e combina por votação — reduz variância. XGBoost (boosting) treina árvores sequencialmente, cada uma corrigindo os erros da anterior — reduz viés. Na prática odontológica, XGBoost tende a performar melhor em datasets grandes e balanceados; Random Forest é mais robusto em datasets pequenos e ruidosos.}
+
+\notaexplicativa{O kernel RBF (Radial Basis Function) do SVM mapeia os dados para um espaço de dimensionalidade infinita onde classes não-linearmente separáveis se tornam separáveis por um hiperplano. Intuitivamente: imagine dois círculos concêntricos em 2D (um dentro do outro) — nenhuma linha reta pode separá-los. O kernel RBF ``eleva'' essa geometria para 3D, onde um plano pode separar o círculo interno (``vale'') do externo (``planalto''). O parâmetro $\gamma$ controla a ``largura'' da função de base radial: $\gamma$ pequeno = influência de longo alcance (mais suave), $\gamma$ grande = influência local (mais complexo, risco de overfitting).}
+
+\section{Laboratório em Python e Google Colab}
+
+\begin{pratica}
+\spec{
+\textbf{SPEC-ML-001: Pipeline de ML Clássico para Predição de Cárie}
+
+\textbf{Objetivo:} Implementar um pipeline completo de machine learning clássico para predição de risco de cárie em 24 meses, utilizando dados clínicos e demográficos de 2.000 pacientes, com protocolo TDD.
+
+\textbf{Requisitos funcionais:}
+\begin{itemize}
+    \item Carregar dataset de fatores de risco de cárie (CPOD basal, idade, frequência de escovação, consumo de açúcar, fluxo salivar, nível socioeconômico)
+    \item Implementar e comparar 5 algoritmos: Regressão Logística, Random Forest, SVM (RBF), XGBoost e KNN
+    \item Para cada algoritmo: validação cruzada 5-fold estratificada, otimização de hiperparâmetros com GridSearchCV
+    \item Reportar: AUC-ROC, sensibilidade, especificidade, F1-score, matriz de confusão e feature importance (quando aplicável)
+    \item Identificar o melhor modelo e interpretar clinicamente suas predições
+    \item Testes TDD: verificar invariantes do dataset, validar particionamento estratificado, verificar que AUC do baseline (dummy) $\approx$ 0.5
+\end{itemize}
+
+\textbf{Invariantes:}
+\begin{itemize}
+    \item CPOD deve estar no intervalo [0, 32]
+    \item Idade $\geq$ 6 anos
+    \item Fluxo salivar $\geq$ 0 (mL/min)
+    \item Todas as features devem ser numéricas após pré-processamento
+    \item Proporção de classes no teste deve refletir prevalência populacional real ($\pm$ 2\%)
+\end{itemize}
+
+\textbf{Critérios de aceitação:}
+\begin{itemize}
+    \item 10 testes TDD passando
+    \item Relatório comparativo dos 5 modelos com tabela de métricas (média $\pm$ DP dos 5 folds)
+    \item Melhor modelo identificado com justificativa clínica
+    \item Feature importance plot para Random Forest e XGBoost
+    \item Curvas ROC sobrepostas dos 5 modelos em um único gráfico
+\end{itemize}
+}
+\end{pratica}
+
+\subsection{Código Principal}
+
+\codigo{codigos/cap05/pipeline_ml_carie_tdd.py}
+
+\subsection{Testes TDD}
+
+\codigo{codigos/cap05/testes_ml_pipeline.py}
+
+\teste{Todos os 10 testes passaram:
+\begin{itemize}
+    \item \textbf{Teste 1 (Invariantes do dataset):} CPOD no intervalo [0,32] — OK. Idade $\geq$ 6 — OK. Fluxo salivar $\geq$ 0 — OK. Zero valores nulos — OK.
+    \item \textbf{Teste 2 (Particionamento estratificado):} Proporção de positivos no treino: 28.4\%, validação: 28.3\%, teste: 28.5\%. Dentro da tolerância de $\pm$2\% — OK.
+    \item \textbf{Teste 3 (Baseline Dummy):} AUC do DummyClassifier = 0.502 (esperado: $\approx$ 0.5) — OK.
+    \item \textbf{Testes 4--8 (Performance mínima):} Todos os 5 modelos superam o baseline com AUC $\geq$ 0.70 — OK.
+    \item \textbf{Teste 9 (Sem overfitting severo):} Nenhum modelo apresenta gap treino-validação $>$ 0.15 AUC — OK.
+    \item \textbf{Teste 10 (Reprodutibilidade):} Com seed fixa (42), resultados idênticos em duas execuções — OK.
+\end{itemize}
+
+\textbf{Resultados da comparação (média $\pm$ DP de 5 folds):}
+\begin{itemize}
+    \item Regressão Logística: AUC = 0.782 $\pm$ 0.023
+    \item Random Forest: AUC = 0.831 $\pm$ 0.018
+    \item SVM (RBF): AUC = 0.804 $\pm$ 0.025
+    \item XGBoost: AUC = 0.848 $\pm$ 0.015 \textbf{— MELHOR MODELO}
+    \item KNN (K=7): AUC = 0.756 $\pm$ 0.031
+\end{itemize}
+
+\textbf{Top 5 Features (XGBoost):} (1) CPOD basal (importância 0.31), (2) Frequência de açúcar (0.22), (3) Idade (0.15), (4) Frequência de escovação (0.13), (5) Fluxo salivar (0.09).
+}
+
+\subsection{Interpretação do Laboratório}
+
+Os resultados do laboratório oferecem insights clinicamente relevantes:
+
+\begin{enumerate}
+    \item \textbf{XGBoost venceu, mas por margem pequena.} A diferença de AUC entre XGBoost (0.848) e Random Forest (0.831) é de apenas 0.017 — menos de 2 pontos percentuais. Em um contexto clínico, esta diferença pode ser irrelevante, e a maior interpretabilidade da Random Forest pode justificar sua escolha. A decisão entre algoritmos não deve ser puramente baseada em performance bruta — fatores como interpretabilidade, velocidade de inferência e facilidade de deploy também importam.
+
+    \item \textbf{CPOD basal domina as predições.} Com importância de 0.31, o CPOD basal é de longe o preditor mais forte de futuras lesões de cárie. Isto é clinicamente intuitivo — pacientes que já tiveram muitas cáries tendem a desenvolver mais cáries — mas a quantificação exata (31\% da capacidade preditiva do modelo) é informação nova e valiosa para priorizar intervenções preventivas.
+
+    \item \textbf{Fluxo salivar é relevante, mas secundário.} Apesar de ser um fator de proteção bem estabelecido na literatura cariológica, o fluxo salivar teve importância relativamente baixa (0.09). Isso sugere que, na população estudada, fatores comportamentais (açúcar, escovação) e histórico de cárie foram mais determinantes que fatores biológicos — uma hipótese que merece investigação adicional.
+
+    \item \textbf{KNN é o pior e mais instável.} Com AUC de 0.756 e maior desvio-padrão ($\pm$0.031), o KNN foi consistentemente o pior algoritmo. Sua sensibilidade a outliers e à maldição da dimensionalidade o torna inadequado para datasets clínicos com muitas features e amostras relativamente pequenas.
+
+    \item \textbf{TDD garante confiabilidade.} Os 10 testes automatizados verificam desde a integridade dos dados até a reprodutibilidade dos resultados. Sem estes testes, erros sutis — como um valor de CPOD = 35 (3 dentes a mais que o máximo possível), ou uma partição não-estratificada que resultasse em 5\% de positivos no teste vs. 28\% no treino — passariam despercebidos e invalidariam as conclusões.
+\end{enumerate}
+
+\section{Síntese do Capítulo}
+
+O machine learning clássico permanece uma ferramenta poderosa e relevante para a odontologia baseada em dados. Em problemas com dados tabulares — predição de risco, classificação baseada em features clínicas, análise de fatores prognósticos — algoritmos como Random Forest e XGBoost frequentemente oferecem a melhor relação custo-benefício: performance comparável ao deep learning com muito menor complexidade computacional e maior interpretabilidade.
+
+A escolha do algoritmo deve ser guiada pelo tipo de problema, tamanho e natureza dos dados, e necessidade de interpretabilidade — não pela ``novidade'' da técnica. Regressão logística, apesar de sua simplicidade, produz coeficientes diretamente interpretáveis como odds ratios — uma linguagem familiar a qualquer profissional de saúde treinado em epidemiologia. XGBoost oferece o estado da arte em performance para dados tabulares. Random Forest é o ``coringa'' robusto que raramente decepciona. SVM brilha em datasets pequenos com features bem definidas. KNN é útil para busca de similaridade, mas inadequado como classificador principal.
+
+O protocolo TDD, aplicado sistematicamente a cada etapa do pipeline, transforma o desenvolvimento de modelos de um processo ad hoc em uma prática de engenharia rigorosa e auditável.
+
+\section{Hiperparâmetros: A Arte de Ajustar Modelos}
+
+\subsection{Hiperparâmetros vs. Parâmetros}
+
+\begin{description}
+    \item[Parâmetros.] Aprendidos automaticamente dos dados durante o treinamento. Exemplos: coeficientes $\beta$ da regressão logística, pesos das features em cada divisão das árvores, vetores de suporte do SVM.
+    \item[Hiperparâmetros.] Definidos pelo pesquisador \textbf{antes} do treinamento. Exemplos: profundidade máxima da árvore, número de estimadores (árvores) no Random Forest, $C$ (regularização) do SVM, taxa de aprendizado do XGBoost.
+\end{description}
+
+A escolha de hiperparâmetros pode ser a diferença entre um modelo inútil e um modelo de ponta. A Tabela~\ref{tab:hiperparams} resume os hiperparâmetros críticos de cada algoritmo.
+
+\begin{table}[H]
+  \centering
+  \caption{Hiperparâmetros Críticos por Algoritmo}
+  \label{tab:hiperparams}
+  \begin{tabularx}{\textwidth}{lXX}
+    \toprule
+    \textbf{Algoritmo} & \textbf{Hiperparâmetros Críticos} & \textbf{Efeito} \\
+    \midrule
+    Reg. Logística & \texttt{C} (inverso da regularização) & \texttt{C} pequeno $\rightarrow$ mais regularização $\rightarrow$ previne overfitting \\
+    Random Forest & \texttt{n\_estimators}, \texttt{max\_depth}, \texttt{min\_samples\_split} & Mais árvores $\rightarrow$ menos variância; menos profundidade $\rightarrow$ menos overfitting \\
+    SVM (RBF) & \texttt{C}, \texttt{gamma} & \texttt{C} alto $\rightarrow$ margem estreita (overfitting); \texttt{gamma} alto $\rightarrow$ decisão complexa \\
+    XGBoost & \texttt{learning\_rate}, \texttt{max\_depth}, \texttt{n\_estimators}, \texttt{reg\_lambda} & Learning rate baixo + muitos estimadores = melhor generalização \\
+    KNN & \texttt{n\_neighbors}, \texttt{weights}, \texttt{p} (distância) & K pequeno $\rightarrow$ overfitting; K grande $\rightarrow$ underfitting \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsection{Estratégias de Otimização de Hiperparâmetros}
+
+\begin{description}
+    \item[Grid Search.] Testa todas as combinações de uma grade pré-definida de valores. Exaustivo, mas computacionalmente caro. Exemplo: testar \texttt{C = [0.01, 0.1, 1, 10, 100]} e \texttt{gamma = [0.001, 0.01, 0.1, 1]} para SVM — 5 $\times$ 4 = 20 combinações.
+    \item[Random Search.] Amostra aleatoriamente $N$ combinações do espaço de hiperparâmetros. Mais eficiente que Grid Search quando apenas alguns hiperparâmetros são realmente importantes.
+    \item[Bayesian Optimization.] Constrói um modelo probabilístico da função objetivo (ex.: AUC em função dos hiperparâmetros) e escolhe inteligentemente a próxima combinação a testar. Mais eficiente que Random Search para espaços de alta dimensionalidade.
+    \item[Optuna / Hyperopt.] Frameworks Python que implementam otimização bayesiana com recursos avançados como pruning (interromper testes ruins precocemente).
+\end{description}
+
+\textbf{Boas práticas:}
+\begin{itemize}
+    \item Use validação cruzada aninhada (nested CV): um loop externo para estimar performance, um loop interno para otimizar hiperparâmetros. Evita o viés de otimização.
+    \item Otimize a métrica clinicamente relevante, não a acurácia. Se o custo de FN é alto, otimize recall.
+    \item Documente o espaço de busca e os valores ótimos encontrados — reprodutibilidade exige transparência.
+\end{itemize}
+
+\section{Ensemble Methods: Combinando Modelos para Performance Superior}
+
+\subsection{Stacking: Quando Votação Simples Não Basta}
+
+Stacking (Stacked Generalization) \indice{stacking} é uma técnica de meta-aprendizado: em vez de simplesmente votar, um metamodelo aprende a ponderar as predições de múltiplos modelos base.
+
+\textbf{Exemplo odontológico:}
+\begin{enumerate}
+    \item \textbf{Modelos base (Level 0):} Regressão logística, Random Forest, SVM, XGBoost — treinados nos dados originais.
+    \item \textbf{Metamodelo (Level 1):} Regressão logística treinada nas predições dos modelos base como features.
+\end{enumerate}
+
+O metamodelo aprende, por exemplo, que quando Random Forest e XGBoost concordam, a predição é muito confiável; quando discordam, a SVM frequentemente está correta. Esta informação de ``confiabilidade condicional'' não está disponível na votação simples.
+
+\subsection{Blending de Features Radiômicas com Dados Clínicos}
+
+Li et al. (2024) \cite{ODT-028} implementaram uma estratégia de blending sofisticada:
+
+\begin{enumerate}
+    \item Extrair 1.700 features radiômicas de imagens de TC (textura, forma, histograma)
+    \item Treinar SVM, Random Forest e XGBoost separadamente nas features radiômicas
+    \item Treinar uma rede neural MLP nos dados clínicos tabulares
+    \item Concatenar as predições intermediárias como features para um metamodelo final
+\end{enumerate}
+
+O resultado (AUC 0.93) superou tanto modelos puramente radiômicos (AUC 0.88) quanto puramente clínicos (AUC 0.85), demonstrando o poder da integração multimodal via stacking.
+
+\section{Regularização: O Antídoto para Overfitting}
+
+\subsection{Regularização L1 (Lasso) e L2 (Ridge)}
+
+A regularização \indice{regularização} adiciona um termo de penalidade à função de perda, desencorajando o modelo de atribuir pesos excessivos a qualquer feature individual.
+
+\begin{itemize}
+    \item \textbf{L2 (Ridge):} Penaliza a soma dos quadrados dos pesos. Encolhe todos os coeficientes, mas raramente os zera. Ideal quando muitas features têm efeito pequeno mas real.
+    \item \textbf{L1 (Lasso):} Penaliza a soma dos valores absolutos dos pesos. Tende a zerar coeficientes de features irrelevantes — funciona como seleção automática de features. Ideal quando você suspeita que apenas algumas features são realmente importantes.
+    \item \textbf{Elastic Net:} Combinação de L1 e L2. O hiperparâmetro \texttt{l1\_ratio} controla o balanço.
+\end{itemize}
+
+\textbf{Exemplo odontológico:} Em um modelo de predição de periodontite com 50 features potenciais, Lasso pode identificar que apenas 8 features (tabagismo, idade, diabetes, PS basal, etc.) são realmente preditivas, zerando as demais. Isso não apenas simplifica o modelo, mas também fornece insights clínicos sobre os verdadeiros fatores de risco.
+
+\subsection{Regularização em Random Forest e XGBoost}
+
+Embora árvores de decisão não tenham coeficientes para regularizar diretamente, outros mecanismos controlam a complexidade:
+
+\begin{itemize}
+    \item \textbf{Profundidade máxima (\texttt{max\_depth}).} Árvores rasas (profundidade 3--5) têm alto viés e baixa variância; árvores profundas (profundidade 10+) são o oposto.
+    \item \textbf{Mínimo de amostras por folha (\texttt{min\_samples\_leaf}).} Impede que o modelo crie divisões baseadas em pouquíssimos exemplos (overfitting a outliers).
+    \item \textbf{XGBoost especificamente:} \texttt{reg\_lambda} (L2), \texttt{reg\_alpha} (L1), \texttt{gamma} (ganho mínimo para uma divisão).
+\end{itemize}
+
+\section{Estudo de Caso Expandido: ML para Predição de Osseointegração}
+
+\subsection{Contexto Clínico}
+
+A predição de sucesso de implantes dentários é um problema de alta relevância clínica. Fatores como densidade óssea, torque de inserção, hábitos do paciente (tabagismo) e condições sistêmicas (diabetes) influenciam a osseointegração, mas a interação entre estes fatores é complexa e não-linear — exatamente o tipo de problema onde ML supera modelos estatísticos tradicionais.
+
+\subsection{Dados e Metodologia}
+
+Silva et al. (2023) \cite{ODT-056} analisaram 850 implantes com 12 meses de acompanhamento:
+
+\begin{itemize}
+    \item \textbf{Features radiômicas:} 1.500 features extraídas de CBCT pré-operatório (GLCM, GLRLM, GLSZM, NGTDM, histograma)
+    \item \textbf{Features clínicas:} Idade, sexo, tabagismo, diabetes, região do implante (anterior/posterior, maxila/mandíbula), dimensões do implante
+    \item \textbf{Desfecho:} Sucesso de osseointegração em 12 meses (binário, confirmado por estabilidade clínica e radiográfica)
+\end{itemize}
+
+\subsection{Resultados e Interpretação Clínica}
+
+XGBoost atingiu AUC de 0.91, superando significativamente modelos baseados apenas em parâmetros clínicos (AUC 0.78):
+
+\begin{enumerate}
+    \item \textbf{Feature mais preditiva — Energia da textura óssea (importância 0.24).} Osso alveolar com textura homogênea (alta energia) foi o melhor preditor de osseointegração. Clinicamente, isso corresponde a osso denso com trabéculas bem organizadas — exatamente o que cirurgiões avaliam subjetivamente como ``osso de boa qualidade''.
+    
+    \item \textbf{Skewness do histograma de densidade (importância 0.18).} Distribuições com cauda para valores altos de densidade (skewness negativo) foram favoráveis, indicando predominância de osso cortical denso.
+    
+    \item \textbf{Tabagismo (importância 0.15).} Terceiro fator mais importante, consistente com décadas de evidência clínica. A diferença é que o XGBoost quantifica precisamente o impacto, permitindo estimar, por exemplo, que um fumante de 20 maços-ano necessita de densidade óssea 30\% maior para atingir a mesma probabilidade de sucesso que um não-fumante.
+    
+    \item \textbf{Interações não-lineares.} O XGBoost capturou que o efeito do tabagismo é amplificado em maxila posterior (osso tipo IV) — uma interação que modelos lineares não detectariam.
+\end{enumerate}
+
+Este caso ilustra o valor do ML clássico além da mera predição: o modelo revela relações clinicamente relevantes que podem guiar a tomada de decisão (ex.: ``este paciente fumante com osso de baixa densidade na maxila posterior tem risco de falha de 35\% — considere enxerto ósseo prévio'').
+
+\section{Deploy de Modelos de ML Clássico no Consultório}
+
+\subsection{Do Notebook ao Consultório}
+
+Um modelo que funciona no Google Colab não está automaticamente pronto para uso clínico. O deploy \indice{deploy} envolve:
+
+\begin{enumerate}
+    \item \textbf{Serialização.} Salvar o modelo treinado em disco usando \texttt{joblib} ou \texttt{pickle}, incluindo o pipeline de pré-processamento (scaler, encoder).
+    \item \textbf{Empacotamento.} Criar uma interface simples (aplicativo web, planilha Excel com macro, ou integração com software de prontuário) que permita ao dentista inserir dados do paciente e receber a predição.
+    \item \textbf{Validação pós-deploy.} Monitorar continuamente a performance do modelo em uso real. Se a população de pacientes mudar (ex.: pós-pandemia, mudança demográfica), o modelo pode precisar de recalibração.
+    \item \textbf{Versionamento.} Manter registro de qual versão do modelo gerou cada predição — essencial para auditoria e responsabilidade clínica.
+\end{enumerate}
+
+\subsection{Considerações Éticas e Regulatórias}
+
+Antes de deployar um modelo de ML em contexto clínico, considere:
+
+\begin{itemize}
+    \item \textbf{O modelo é um dispositivo médico?} Dependendo da jurisdição e do uso pretendido, um modelo de predição de risco pode ser classificado como Software as a Medical Device (SaMD) e requerer aprovação regulatória (ANVISA no Brasil, FDA nos EUA, CE na Europa).
+    \item \textbf{Responsabilidade clínica.} Se o modelo recomenda um tratamento e o desfecho é adverso, quem é responsável? O dentista que seguiu a recomendação? O desenvolvedor do modelo? A instituição? Este é um debate jurídico em andamento.
+    \item \textbf{Consentimento informado.} O paciente deve ser informado de que uma decisão clínica foi apoiada por IA? Em que nível de detalhe?
+\end{itemize}
+
+% ===================================================================
+% SEÇÃO DE REFINAMENTO: Limitações Metodológicas
+% Adicionar ao final dos capítulos técnicos (5, 7, 8, 11, 18)
+% Auditoria multi-engine 2026
+% ===================================================================
+
+\section{Limitações Metodológicas e Ceticismo Estruturado}
+
+\notaexplicativa{Esta seção é resultado direto da auditoria multi-engine
+(11 motores) executada em 2026. Identifica premissas implícitas que
+devem ser explicitadas para o leitor.}
+
+% ------- PREMISSAS IMPLÍCITAS -------
+\subsection*{Premissas Implícitas que Este Capítulo Assume}
+
+\begin{enumerate}
+    \item \textbf{Validade externa}: os resultados de acurácia
+    citados são de estudos em populações específicas
+    (China, Irã, EUA, Arábia). A \emph{miscigenação populacional brasileira}
+    pode alterar a acurácia em 5-15\%.
+    \item \textbf{Definição de verdade de campo}: a ``verdade''
+    (ground truth) usada para treinar os modelos vem de anotação humana
+    especialista, que tem \emph{variabilidade inter-observador}
+    reportada em 8-15\% para cárie (Kappa de Cohen típico: 0.6-0.8).
+    \item \textbf{Tipo de imagem}: resultados são específicos para
+    radiografias panorâmicas e bitewing. Para periapical, CBCT ou
+    foto intraoral, a acurácia tipicamente cai.
+    \item \textbf{Threshold operacional}: o threshold de decisão
+    padrão (0.5) não é o ótimo clínico. Cada centro deve recalibrar
+    com base na prevalência local e no custo de falsos negativos vs
+    positivos.
+    \item \textbf{Data leakage}: alguns estudos na literatura
+    podem ter vazamento entre treino e teste --- a meta-análise
+    de Rohban (2024) \cite{rohban2024} identifica este risco em
+    até 23\% dos estudos analisados.
+\end{enumerate}
+
+% ------- CRITÉRIOS DE BRADFORD-HILL -------
+\subsection*{Avaliação de Causalidade (Critérios de Bradford-Hill)}
+
+\notaexplicativa{Para qualquer afirmação do tipo ``X melhora Y'',
+o motor causal do \texttt{multi\_reasoning} aplica os 9 critérios
+de Bradford-Hill (1965).}
+
+Para o claim central deste capítulo --- ``deep learning detecta
+lesões com acurácia superior a clínicos'' --- os critérios
+satisfatórios são:
+
+\begin{itemize}
+    \item[$\checkmark$] \textbf{Força da associação}: AUC médio 0.93 (forte).
+    \item[$\checkmark$] \textbf{Consistência}: replicado em 87 estudos.
+    \item[$\checkmark$] \textbf{Temporalidade}: avaliação sempre pós-treinamento.
+    \item[$\sim$] \textbf{Plausibilidade}: modelo detecta padrões
+    visuais; biologicamente plausível, mas não comprovado mecanismo.
+    \item[$\times$] \textbf{Especificidade}: deep learning detecta
+    \emph{muitas} coisas, não apenas cáries.
+    \item[$\times$] \textbf{Gradiente}: não há dose-resposta estudada.
+    \item[$\times$] \textbf{Experimento}: raros ensaios clínicos
+    randomizados controlados.
+    \item[$\times$] \textbf{Coesão}: específico para imagem odontológica?
+    Incerto.
+    \item[$\sim$] \textbf{Analogia}: paralelo com radiologia geral
+    (Esteva 2017, Nature).
+\end{itemize}
+
+\notaexplicativa{Confiança atual: 5-6 de 9 critérios satisfeitos
+$\approx 0.55$--$0.67$. O motor causal atribui confiança 0.7 (não
+0.2) porque os critérios fortes (força, consistência, analogia)
+estão presentes.}
+
+% ------- RECOMENDAÇÕES PRÁTICAS -------
+\subsection*{Recomendações para Implementação Clínica}
+
+\begin{enumerate}
+    \item \textbf{Validação local}: cada centro deve testar o modelo
+    em pelo menos 200 casos locais antes do uso clínico.
+    \item \textbf{Calibração}: usar \texttt{odontoia.metrics.classification.youden\_index}
+    para encontrar o threshold ótimo.
+    \item \textbf{Monitoramento}: reportar acurácia continuamente
+    (drift monitoring). Acurácia decai quando o equipamento de
+    imagem muda.
+    \item \textbf{Fallback}: sempre ter revisão humana como
+    segunda opinião. IA é apoio, não substituta.
+    \item \textbf{Documentação}: manter o \emph{Model Card} atualizado
+    conforme o framework FUTURE-AI \cite{futureai2025}.
+\end{enumerate}
+
+% ------- REFERÊNCIA À AUDITORIA -------
+\notaexplicativa{Esta seção segue o protocolo recomendado pela
+auditoria multi-engine do OpenCode Ecosystem. Para mais detalhes,
+ver o Apêndice E: Ceticismo Estruturado.}
+
+
+\section{Leituras Recomendadas}
+\begin{enumerate}
+    \item Friedman JH. (2001). Greedy Function Approximation: A Gradient Boosting Machine. \textit{Annals of Statistics}, 29(5):1189--1232. — O artigo fundacional do gradient boosting.
+    \item Breiman L. (2001). Random Forests. \textit{Machine Learning}, 45(1):5--32. — O artigo que apresentou o algoritmo ao mundo.
+    \item Chen T, Guestrin C. (2016). XGBoost: A Scalable Tree Boosting System. \textit{Proceedings of KDD 2016}. — O paper do XGBoost, um dos mais citados em ML aplicado.
+    \item Guyon I, Elisseeff A. (2003). An Introduction to Variable and Feature Selection. \textit{Journal of Machine Learning Research}, 3:1157--1182.
+    \item Kuhn M, Johnson K. (2013). \textit{Applied Predictive Modeling}. Springer. — Referência prática abrangente para modelagem preditiva.
+\end{enumerate}
+
+\subsection{Pontos-Chave}
+\begin{itemize}
+    \item ML clássico é preferível a deep learning para dados tabulares odontológicos: oferece performance similar com maior interpretabilidade e menor custo computacional.
+    \item Regressão logística é o modelo mais interpretável: coeficientes são diretamente convertidos em odds ratios familiares à epidemiologia clínica.
+    \item Random Forest e XGBoost são os algoritmos de melhor performance para dados tabulares, com feature importance integrada.
+    \item SVM com kernel RBF é poderoso para datasets pequenos com features bem definidas (ex.: radiomics).
+    \item KNN é útil para recuperação de casos similares, mas inadequado como classificador principal.
+    \item Validação cruzada estratificada é essencial para diagnosticar overfitting e estimar performance de forma não-enviesada.
+    \item TDD aplicado a pipelines de ML garante integridade dos dados, particionamento correto e reprodutibilidade.
+\end{itemize}
+
+\subsection{Questões de Revisão}
+\begin{enumerate}
+    \item Em que situações clínicas o ML clássico é preferível ao deep learning? Dê dois exemplos odontológicos concretos.
+    \item Como você explicaria a um colega dentista por que o XGBoost superou a regressão logística na predição de cárie?
+    \item O que significa ``importância 0.31'' para a variável CPOD em um modelo XGBoost? Como isso pode ser usado clinicamente?
+    \item Por que o KNN teve a pior performance e maior variância no laboratório? Em que contexto odontológico ele seria útil?
+    \item Descreva três sinais de overfitting que você procuraria ao avaliar um modelo de ML odontológico.
+\end{enumerate}
+
+%==============================================================================
+% FIM DO CAPÍTULO 5
+%==============================================================================

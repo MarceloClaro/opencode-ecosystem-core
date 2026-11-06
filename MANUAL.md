@@ -22,7 +22,7 @@ Não use esta contagem como indicador de cobertura, qualidade ou validação
 externa.
 
 <!-- core-state:start -->
-**333 agentes** · **27 MCPs** · **35 comandos** · **22 checks**
+**337 agentes** · **30 MCPs** · **35 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 
@@ -64,6 +64,26 @@ consulte o [guia das integrações científicas](docs/INTEGRACOES_CIENTIFICAS_R6
 No OpenCode, use `/runtime-cientifico`, `/datasets` e `/plugins-cientificos`.
 
 ## Conexões, plugins e modelos
+
+### Mapas animados e vídeo didático
+
+- Consulte a [galeria R1056–R1057](docs/architecture/ANIMATED.md): cada diagrama
+  tem SVG como visual primário, PNG sem movimento, GIF opcional e fonte Mermaid.
+  O GIF executa um ciclo de 8 s e pulsa as arestas na ordem topológica do desenho;
+  movimento não representa execução real.
+- `python3 scripts/animate_architecture.py --check` confere cobertura e hashes
+  sem escrever arquivos nem abrir navegador.
+- `python3 scripts/animate_architecture.py --inventory` lista as fontes.
+- `python3 scripts/svgify_markdown.py --check` confere se cada bloco Mermaid
+  visível foi substituído por SVG e se a fonte auditável continua presente.
+- `python3 scripts/sync_readme_flowcharts.py --refresh-current` recalcula
+  hashes e linhas do catálogo a partir do checkout atual.
+- Para gerar, use `python3 scripts/animate_architecture.py` com Mermaid,
+  Puppeteer, Chromium e Pillow **já instalados**. Nenhum pacote é instalado
+  pelo exportador. [Ambiente e limites](reports/r1057/README.md).
+- O [piloto R1055](pilots/r1055-qubit/README.md) tem arquivos MP4 locais em
+  `pilots/r1055-qubit/out/`, não disponíveis num clone Git novo. Consulte
+  [QC/hashes](reports/r1055/README.md) antes de revisar ou distribuir.
 
 - [ChatGPT/OpenAI, Gemini/Google e NotebookLM](docs/AUTENTICACAO_CHATGPT_NOTEBOOKLM.md)
   usam autenticações distintas. Login não comprova inferência, cota ou

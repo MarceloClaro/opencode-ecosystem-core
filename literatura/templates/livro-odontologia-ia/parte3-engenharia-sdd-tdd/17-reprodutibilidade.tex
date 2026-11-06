@@ -1,0 +1,674 @@
+%==============================================================================
+% CAPÍTULO 17 — REPRODUTIBILIDADE E LICENÇAS
+% PARTE III — Engenharia de Software Odontológico com SDD e TDD
+%==============================================================================
+\chapter{Reprodutibilidade e Licenças}
+\label{cap:reprodutibilidade}
+\nivelquatro
+
+A Parte~III do livro começou com a disciplina da especificação (Capítulo~12)
+e do teste (Capítulo~13), passou por projetos completos (Capítulo~14),
+interpretabilidade (Capítulo~15) e auditoria de código alheio
+(Capítulo~16). Este capítulo fecha o ciclo abordando a \textbf{publicação
+responsável}: como garantir que \textbf{seu} código seja reproduzível,
+corretamente licenciado e adequadamente documentado para a comunidade
+científica e clínica.
+
+\section{Reprodutibilidade Computacional em Odontologia}
+
+\subsection{A crise de reprodutibilidade}
+
+Em 2016, a revista \textit{Nature} publicou uma pesquisa histórica:
+\textbf{mais de 70\% dos cientistas já tentaram — e falharam — em
+reproduzir experimentos de outros pesquisadores}. Na IA odontológica,
+o problema é agravado por três fatores:
+
+\begin{enumerate}
+  \item \textbf{Datasets privados}: a maioria dos datasets odontológicos
+    contém dados de pacientes e não pode ser compartilhada publicamente.
+  \item \textbf{Ambientes não versionados}: ``funciona na minha máquina''
+    é a frase mais perigosa da ciência computacional.
+  \item \textbf{Hiperparâmetros não documentados}: learning rate, batch
+    size, augmentações — pequenas variações produzem grandes diferenças.
+\end{enumerate}
+
+\citacaoativa{baker2016reproducibility}{10.1038/533452a}{%
+  ``A reprodutibilidade é um dos pilares do método científico. Sem ela,
+  a ciência se torna anedótica, e a confiança pública na pesquisa se
+  erosão.''}
+
+\indice{reprodutibilidade computacional} \indice{crise de reprodutibilidade}
+
+\subsection{Os 5 pilares da reprodutibilidade}
+
+Para um projeto de IA odontológica ser considerado reproduzível, ele
+deve atender a cinco pilares:
+
+\begin{enumerate}
+  \item \textbf{Código aberto e versionado}: repositório Git público com
+    tags de versão correspondentes a cada resultado publicado.
+
+  \item \textbf{Ambiente determinístico}: \texttt{requirements.txt} com
+    versões exatas (\texttt{numpy==1.24.3}, não \texttt{numpy>=1.20}) ou
+    Dockerfile com imagem congelada.
+
+  \item \textbf{Dataset documentado}: se não puder ser compartilhado,
+    descreva exatamente como foi obtido, processado e dividido. Forneça
+    um \textbf{Data Card} (Seção~17.4).
+
+  \item \textbf{Scripts de treinamento completos}: não apenas o modelo
+    treinado, mas o script que o produziu — incluindo todas as
+    augmentações, callbacks e seeds aleatórias.
+
+  \item \textbf{Métricas na ``vida real''}: reporte métricas no conjunto
+    de teste (nunca no de treino), com intervalos de confiança e
+    \textit{k-fold cross-validation}.
+\end{enumerate}
+
+\destaque{A seed aleatória (\texttt{random\_state=42}) é o detalhe mais
+negligenciado — e mais importante — para reprodutibilidade. Sem ela,
+duas execuções idênticas produzem resultados diferentes.}
+
+\section{Licenças: MIT, Apache, CC BY, GPL — O Que Pode Usar?}
+
+A escolha da licença é uma decisão \textbf{legal}, não apenas técnica.
+A Tabela~\ref{tab:licenses-comparison} compara as licenças mais relevantes
+para projetos odontológicos.
+
+\begin{table}[H]
+  \centering
+  \caption{Comparação de licenças para software e datasets odontológicos.}
+  \label{tab:licenses-comparison}
+  \begin{tabularx}{\textwidth}{lccccX}
+    \toprule
+    \textbf{Licença} & \textbf{Uso com.} & \textbf{Modif.} & \textbf{Patente} & \textbf{Copyleft} & \textbf{Recomendado para} \\
+    \midrule
+    MIT & Sim & Sim & Não & Não & Código flexível \\
+    Apache 2.0 & Sim & Sim & Sim & Não & Código com proteção \\
+    GPLv3 & Sim & Sim & Sim & Forte & Software livre \\
+    CC BY 4.0 & Sim & Sim & N/A & Não & Datasets, artigos \\
+    CC BY-SA 4.0 & Sim & Sim & N/A & Sim & Datasets abertos \\
+    CC BY-NC 4.0 & Não & Sim & N/A & Não & Uso acadêmico \\
+    CC0 & Sim & Sim & N/A & Não & Domínio público \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\indice{licenças de software} \indice{MIT} \indice{Apache} \indice{GPL} \indice{Creative Commons}
+
+\subsection{Recomendações práticas}
+
+\begin{itemize}
+  \item \textbf{Para código}: MIT se quiser máxima adoção; Apache 2.0 se
+    quiser proteção de patentes; GPLv3 se quiser garantir que derivados
+    permaneçam livres.
+
+  \item \textbf{Para datasets}: CC BY 4.0 (atribuição obrigatória) ou
+    CC0 (domínio público). \textbf{Evite} CC BY-NC se quiser que empresas
+    usem seu dataset — o ``NC'' (não comercial) bloqueia uso por startups
+    e indústria.
+
+  \item \textbf{Para modelos treinados}: os pesos de uma rede neural são
+    considerados ``obra derivada'' do dataset de treinamento. Se o dataset
+    for CC BY-NC, o modelo também será NC.
+
+  \item \textbf{Para documentação}: CC BY 4.0 é o padrão recomendado pela
+    comunidade científica.
+\end{itemize}
+
+\notaexplicativa{Um erro comum é publicar código no GitHub \textbf{sem}
+arquivo LICENSE. Na ausência de licença explícita, os termos padrão do
+GitHub aplicam-se — você concede direito de \textit{view} e \textit{fork},
+mas \textbf{não} de uso comercial, modificação ou redistribuição. Se
+você quer que outros usem seu código, \textbf{escolha uma licença}.}
+
+\subsection{Exercício: Escolhendo a Licença Correta}
+
+\begin{enumerate}
+  \item Você é um pesquisador que quer máxima citação e não se importa
+    com uso comercial do seu código. $\rightarrow$ \textbf{MIT}
+  \item Você é uma startup que quer proteger seu algoritmo de ser
+    patentado por concorrentes. $\rightarrow$ \textbf{Apache 2.0}
+  \item Você quer garantir que qualquer melhoria no seu código permaneça
+    aberta. $\rightarrow$ \textbf{GPLv3}
+  \item Você está publicando um dataset de radiografias anonimizadas e
+    quer atribuição. $\rightarrow$ \textbf{CC BY 4.0}
+  \item Você está publicando material educacional (este livro!).
+    $\rightarrow$ \textbf{CC BY-NC-SA 4.0}
+\end{enumerate}
+
+\section{Model Card e Data Card}
+
+\subsection{Model Card: a ``bula'' do seu modelo}
+
+Proposto por \citeonline{mitchell2019model}, o \textit{Model Card} é um
+documento estruturado que descreve:
+
+\begin{itemize}
+  \item \textbf{Detalhes do modelo}: nome, versão, arquitetura, framework.
+  \item \textbf{Uso pretendido}: tarefa clínica, população-alvo, setting.
+  \item \textbf{Uso fora do escopo}: situações em que \textbf{não} deve
+    ser usado.
+  \item \textbf{Dados de treinamento}: fonte, tamanho, demografia, divisão.
+  \item \textbf{Métricas de desempenho}: acurácia, sensibilidade,
+    especificidade, com intervalos de confiança e estratificação.
+  \item \textbf{Limitações}: vieses conhecidos, populações não validadas.
+  \item \textbf{Licença e citação}: como citar e sob qual licença usar.
+\end{itemize}
+
+\subsection{Data Card: a ``certidão de nascimento'' do dataset}
+
+Proposto por \citeonline{gebru2021datasheets}, o \textit{Data Card}
+(ou \textit{Datasheet}) documenta:
+
+\begin{itemize}
+  \item \textbf{Motivação}: por que o dataset foi criado?
+  \item \textbf{Composição}: quantas amostras, classes, distribuição.
+  \item \textbf{Coleta}: período, instituição, equipamento utilizado.
+  \item \textbf{Pré-processamento}: todas as transformações aplicadas.
+  \item \textbf{Anonimização}: como os dados dos pacientes foram protegidos.
+  \item \textbf{Aprovação ética}: número CAAE ou equivalente.
+  \item \textbf{Uso recomendado e restrições}.
+\end{itemize}
+
+\begin{pratica}{Gerando Model Card e Data Card para publicação}
+  Objetivo: Criar documentação completa para o classificador de cáries
+  do Projeto 1 (Capítulo~14) usando templates estruturados.
+\end{pratica}
+
+\codigo{codigos/cap17/publish_model_hf.py}
+
+\teste{O Model Card gerado contém todos os campos obrigatórios segundo
+Mitchell et al. (2019): detalhes do modelo, uso pretendido, dados de
+treinamento, métricas, limitações e licença. O Data Card inclui
+motivação, composição, coleta, anonimização e aprovação ética.}
+
+\section{Como Publicar Modelo no Hugging Face}
+
+O Hugging Face Model Hub é a plataforma mais utilizada para compartilhar
+modelos de IA. Publicar seu modelo odontológico lá oferece:
+
+\begin{itemize}
+  \item \textbf{DOI automático}: cada modelo recebe um DOI via Zenodo.
+  \item \textbf{Versionamento}: cada commit gera uma versão rastreável.
+  \item \textbf{API de inferência gratuita}: outros podem testar seu
+    modelo sem instalar nada.
+  \item \textbf{Model Card integrado}: documentação fica junto com o modelo.
+  \item \textbf{Descoberta}: comunidade de 500k+ desenvolvedores.
+\end{itemize}
+
+\subsection{Passo a passo}
+
+\begin{enumerate}
+  \item \textbf{Crie uma conta} em \url{https://huggingface.co}.
+  \item \textbf{Instale a biblioteca}:
+\begin{lstlisting}[language=bash]
+!pip install huggingface_hub
+\end{lstlisting}
+
+  \item \textbf{Autentique-se}:
+\begin{lstlisting}[language=Python]
+from huggingface_hub import notebook_login
+notebook_login()  # Cole seu token de acesso
+\end{lstlisting}
+
+  \item \textbf{Salve e envie o modelo}:
+\begin{lstlisting}[language=Python]
+from huggingface_hub import HfApi, create_repo
+
+# Cria repositório
+repo_name = "edsonlaranjeiras/CariesICDAS-EfficientNetB3"
+create_repo(repo_name, exist_ok=True)
+
+# Envia modelo + Model Card
+api = HfApi()
+api.upload_file(
+    path_or_fileobj="model.h5",
+    path_in_repo="model.h5",
+    repo_id=repo_name,
+)
+api.upload_file(
+    path_or_fileobj="model_card.md",
+    path_in_repo="README.md",
+    repo_id=repo_name,
+)
+\end{lstlisting}
+
+  \item \textbf{Adicione metadados} no arquivo \texttt{README.md} (YAML
+    frontmatter):
+\begin{lstlisting}[language=yaml]
+---
+license: mit
+language: pt
+tags:
+  - odontologia
+  - caries
+  - classificacao
+  - radiografia
+  - bitewing
+datasets:
+  - edsonlaranjeiras/ICDAS-Brasil-2024
+metrics:
+  - accuracy
+  - sensitivity
+  - specificity
+  - auc
+pipeline_tag: image-classification
+---
+\end{lstlisting}
+
+  \item \textbf{Ative o DOI via Zenodo}: nas configurações do repositório
+    no Hugging Face, ative a integração com Zenodo.
+\end{enumerate}
+
+\teste{Modelo publicado no Hugging Face Hub com DOI automático,
+Model Card integrado, tag \texttt{odontologia} e pipeline de
+classificação de imagens configurado.}
+
+\section{Como Citar GitHub + DOI + Dataset em ABNT}
+
+A citação correta de software, datasets e modelos é uma exigência
+crescente em periódicos odontológicos. A ABNT NBR 6023:2018 prevê
+formatos específicos.
+
+\subsection{Citação de software (ABNT NBR 6023)}
+
+\begin{quote}
+  \textbf{Formato:} SOBRENOME, Nome. \textbf{Título do software}
+  [software]. Versão. Local: Distribuidor, Ano. Disponível em: URL.
+  Acesso em: data.
+\end{quote}
+
+\begin{mdframed}[linecolor=corSecundaria, linewidth=1pt, backgroundcolor=corSecundaria!5, roundcorner=4pt]
+  \textbf{Exemplo de citação ABNT:} \\
+  LARANJEIRAS, Edson. \textbf{CariesICDAS-EfficientNetB3} [software].
+  v1.0.0. Hugging Face Model Hub, 2026. Disponível em:
+  \url{https://huggingface.co/edsonlaranjeiras/CariesICDAS-EfficientNetB3}.
+  Acesso em: 09 jul. 2026.
+\end{mdframed}
+
+\subsection{Citação de dataset}
+
+\begin{quote}
+  \textbf{Formato:} SOBRENOME, Nome. \textbf{Título do dataset} [dataset].
+  Versão. Plataforma, Ano. DOI: xx.xxxx/xxxxx.
+\end{quote}
+
+\subsection{Citação de repositório GitHub com DOI}
+
+Quando o repositório tem DOI (via Zenodo), cite o DOI, não o link do
+GitHub (links podem mudar, DOIs são permanentes):
+
+\begin{mdframed}[linecolor=corSecundaria, linewidth=1pt, backgroundcolor=corSecundaria!5, roundcorner=4pt]
+  \textbf{Exemplo de citação com DOI:} \\
+  LARANJEIRAS, Edson. \textbf{OdontoIA: classificador de cáries ICDAS}
+  [código-fonte]. v1.0.0. Zenodo, 2026. DOI: 10.5281/zenodo.1234567.
+\end{mdframed}
+
+\destaque{Sempre cite o \textbf{DOI} (via Zenodo), não o link do GitHub.
+O GitHub pode alterar URLs, excluir repositórios ou tornar-se inacessível.
+O DOI é permanente e rastreável.}
+
+\section{Ética de Uso de Código Alheio}
+
+\subsection{Atribuição é obrigatória — e é lei}
+
+Usar código open source sem atribuição é \textbf{violação de licença}
+— o equivalente jurídico a plágio. A licença MIT, a mais permissiva,
+exige apenas que o aviso de copyright original seja mantido. Ignorar
+esse requisito expõe você a riscos legais.
+
+\subsection{Boa prática: dependências explícitas}
+
+\begin{itemize}
+  \item Liste \textbf{todas} as dependências no \texttt{requirements.txt}
+    com versões exatas.
+  \item No artigo, inclua uma seção ``Software Utilizado'' com citações
+    ABNT de cada dependência relevante.
+  \item Se você modificou código de terceiros, documente as modificações
+    e mantenha os avisos de copyright originais.
+\end{itemize}
+
+\subsection{Checklist ético antes de publicar}
+
+\begin{enumerate}
+  \item \textbf{Licença}: todo arquivo de código tem uma licença compatível?
+  \item \textbf{Atribuição}: código de terceiros está corretamente atribuído?
+  \item \textbf{Dados de pacientes}: foram anonimizados? O CEP aprovou?
+  \item \textbf{Viés}: o modelo foi testado em subgrupos demográficos?
+  \item \textbf{Limitações}: estão claramente declaradas no Model Card?
+  \item \textbf{Uso indevido}: você declarou usos fora do escopo?
+\end{enumerate}
+
+\section{Síntese do Capítulo e da Parte III}
+
+Este capítulo concluiu a Parte~III do livro, cobrindo os aspectos legais
+e éticos da publicação de software odontológico com IA:
+
+\begin{itemize}
+  \item \textbf{Reprodutibilidade} em 5 pilares: código aberto, ambiente
+    determinístico, dataset documentado, scripts completos, métricas
+    honestas.
+
+  \item \textbf{Licenças}: MIT para código flexível, Apache 2.0 com
+    proteção de patentes, CC BY 4.0 para datasets. \textbf{Nunca publique
+    sem licença.}
+
+  \item \textbf{Model Card e Data Card}: documentação estruturada que
+    acompanha modelo e dataset, permitindo uso informado e responsável.
+
+  \item \textbf{Hugging Face}: plataforma para publicação com DOI
+    automático, versionamento e API de inferência gratuita.
+
+  \item \textbf{Citação ABNT}: formatos específicos para software,
+    dataset e repositório, sempre priorizando o DOI.
+
+  \item \textbf{Ética}: atribuição é obrigatória; dados de pacientes
+    exigem anonimização e aprovação ética; limitações e vieses devem
+    ser declarados.
+\end{itemize}
+
+\subsection*{Balanço da Parte III}
+
+A Parte~III percorreu o ciclo completo da engenharia de software
+odontológico com qualidade profissional:
+
+\begin{center}
+  \begin{tikzpicture}[
+    box/.style={rectangle, draw=corPrimaria, fill=corPrimaria!5, text width=3.5cm, align=center, align=center, minimum height=1.8cm, rounded corners=4pt, font=\footnotesize},
+    arrow/.style={->, >=stealth, thick, corDestaque},
+  ]
+    \node[align=center, box] (spec) {\textbf{Cap 12 — SDD}\\\footnotesize Especificar\\\footnotesize antes de codar};
+    \node[align=center, box, right=0.5cm of spec] (tdd) {\textbf{Cap 13 — TDD}\\\footnotesize Testar antes\\\footnotesize do modelo};
+    \node[align=center, box, right=0.5cm of tdd] (proj) {\textbf{Cap 14 — Projetos}\\\footnotesize 4 projetos\\\footnotesize SDD+TDD};
+    \node[align=center, box, below=1cm of tdd] (xai) {\textbf{Cap 15 — XAI}\\\footnotesize Interpretar\\\footnotesize e explicar};
+    \node[align=center, box, left=0.5cm of xai] (audit) {\textbf{Cap 16 — Auditoria}\\\footnotesize Auditar código\\\footnotesize de terceiros};
+    \node[align=center, box, right=0.5cm of xai] (reprod) {\textbf{Cap 17 — Publicação}\\\footnotesize Licenciar, documentar\\\footnotesize e publicar};
+
+    \draw[arrow] (spec) -- (tdd);
+    \draw[arrow] (tdd) -- (proj);
+    \draw[arrow] (proj) -- (xai);
+    \draw[arrow] (xai) -- (audit);
+    \draw[arrow] (xai) -- (reprod);
+    \draw[arrow, bend right=30] (reprod) to (spec);
+  \end{tikzpicture}
+\end{center}
+
+A Parte~IV do livro aplicará todo esse arcabouço metodológico às
+especialidades odontológicas: periodontia, implantodontia, ortodontia
+e gêmeos digitais — sempre com SDD, TDD e XAI como alicerces de
+qualidade.
+
+\section{Ambientes Reproduzíveis com Docker e Conda}
+
+\subsection{Docker: ``Funciona na minha máquina'' resolvido}
+
+O Docker encapsula todo o ambiente de execução — sistema operacional,
+bibliotecas, dependências, variáveis de ambiente — em um contêiner
+imutável. Para projetos odontológicos, isso significa que qualquer
+pesquisador, em qualquer sistema operacional, pode reproduzir seus
+resultados com um único comando.
+
+\begin{lstlisting}[language=docker, caption=Dockerfile para ambiente odontológico reproduzível]
+FROM tensorflow/tensorflow:2.15.0-gpu
+
+# Dependências do sistema
+RUN apt-get update && apt-get install -y \
+    libgl1-mesa-glx \
+    libgomp1 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Dependências Python com versões exatas
+COPY requirements.txt /tmp/
+RUN pip install --no-cache-dir -r /tmp/requirements.txt
+
+# Código do projeto
+COPY . /app
+WORKDIR /app
+
+# Comando padrão: treinar e avaliar
+CMD ["python", "train.py", "--epochs", "100", "--batch-size", "32"]
+\end{lstlisting}
+
+Para construir e executar:
+
+\begin{lstlisting}[language=bash]
+docker build -t odontoia-caries:1.0.0 .
+docker run --gpus all -v $(pwd)/data:/app/data odontoia-caries:1.0.0
+\end{lstlisting}
+
+\subsection{Conda: Reprodutibilidade para Ciência de Dados}
+
+Para quem prefere o ecossistema Conda (comum em bioinformática e
+imagens médicas), o \texttt{environment.yml} oferece controle preciso:
+
+\begin{lstlisting}[language=yaml, caption=environment.yml com versões exatas]
+name: odontoia
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10.13
+  - numpy=1.24.3
+  - opencv=4.8.1
+  - matplotlib=3.7.2
+  - scikit-learn=1.3.0
+  - pip
+  - pip:
+    - tensorflow==2.15.0
+    - torch==2.1.0
+    - pydicom==2.4.3
+    - odontoia==1.0.0
+\end{lstlisting}
+
+\subsection{Pinning de Versões: O Detalhe que Faz a Diferença}
+
+A diferença entre \texttt{numpy>=1.20} e \texttt{numpy==1.24.3} é a
+diferença entre ``provavelmente funciona'' e ``certamente funciona''.
+Sempre especifique versões \textbf{exatas}:
+
+\begin{itemize}
+  \item \textbf{Python}: \texttt{python==3.10.13}
+  \item \textbf{NumPy}: \texttt{numpy==1.24.3}
+  \item \textbf{TensorFlow}: \texttt{tensorflow==2.15.0}
+  \item \textbf{PyTorch}: \texttt{torch==2.1.0}
+  \item \textbf{CUDA/cuDNN}: compatível com a versão do framework
+\end{itemize}
+
+\section{Versionamento de Dados com DVC}
+
+O Git é excelente para código, mas péssimo para datasets grandes (50 GB
+de radiografias DICOM). O \textbf{DVC} (Data Version Control) resolve
+isso versionando datasets em armazenamento externo (S3, GCS, SSH) e
+mantendo apenas ponteiros leves no Git.
+
+\begin{lstlisting}[language=bash, caption=Workflow DVC para dataset odontológico]
+# Inicializa DVC no projeto
+dvc init
+
+# Adiciona dataset ao controle de versão
+dvc add data/radiografias/
+git add data/radiografias.dvc data/.gitignore
+git commit -m "Dataset: 3.400 radiografias bitewing (ICDAS-Brasil-2024)"
+
+# Configura armazenamento remoto (ex: Google Drive)
+dvc remote add -d storage gdrive://1a2b3c4d5e6f
+dvc push
+
+# Outro pesquisador recupera o dataset exato:
+git clone https://github.com/usuario/repo.git
+dvc pull  # Baixa os dados do armazenamento remoto
+\end{lstlisting}
+
+\section{Publicação em Zenodo e Atribuição de DOI}
+
+O \textbf{Zenodo} (\url{https://zenodo.org}) é um repositório europeu
+de acesso aberto que atribui DOIs gratuitos a software, datasets e
+artigos. Ele integra-se nativamente com o GitHub: cada release gera
+automaticamente um registro no Zenodo com DOI.
+
+\subsection{Passo a Passo GitHub + Zenodo}
+
+\begin{enumerate}
+  \item Acesse \url{https://zenodo.org} e faça login com sua conta GitHub.
+  \item Autorize o Zenodo a acessar seus repositórios.
+  \item No Zenodo, ative o \textit{webhook} para o repositório desejado.
+  \item No GitHub, crie uma \textbf{release} (ex.: \texttt{v1.0.0}).
+  \item Automaticamente, o Zenodo criará um registro com:
+    \begin{itemize}
+      \item DOI único (ex.: \texttt{10.5281/zenodo.1234567})
+      \item Metadados extraídos do repositório (autores, descrição, licença)
+      \item Badge de DOI para adicionar ao README
+    \end{itemize}
+\end{enumerate}
+
+\destaque{Sempre que publicar um artigo que usa seu código, \textbf{faça
+uma release no GitHub antes de submeter o artigo}. O DOI estará disponível
+para incluir na seção ``Disponibilidade de Código'' do manuscrito.}
+
+\section{Checklist Final de Publicação}
+
+Antes de publicar qualquer projeto odontológico de IA, verifique esta
+lista exaustiva:
+
+\subsection{ checklist — Código}
+
+\begin{itemize}
+  \item[\checkmark] Repositório público no GitHub/GitLab
+  \item[\checkmark] Arquivo LICENSE compatível com o uso pretendido
+  \item[\checkmark] README.md com: descrição, instalação, uso, exemplos, citação
+  \item[\checkmark] requirements.txt ou environment.yml com versões exatas
+  \item[\checkmark] Dockerfile para ambiente reproduzível
+  \item[\checkmark] Scripts de treinamento completos (não apenas modelo salvo)
+  \item[\checkmark] Seeds aleatórias fixadas (\texttt{random\_state=42})
+  \item[\checkmark] Testes automatizados com pytest (cobertura $\geq$ 80\%)
+  \item[\checkmark] CI/CD via GitHub Actions
+  \item[\checkmark] Release no GitHub com tag semântica (v1.0.0)
+  \item[\checkmark] DOI via Zenodo
+\end{itemize}
+
+\subsection{ checklist — Modelo}
+
+\begin{itemize}
+  \item[\checkmark] Model Card completo (nome, tarefa, arquitetura, dataset, métricas, limitações)
+  \item[\checkmark] Pesos do modelo publicados (Hugging Face, Zenodo ou GitHub Releases)
+  \item[\checkmark] Script de inferência independente (não requer re-treinamento)
+  \item[\checkmark] Formatos de exportação: H5 ou SavedModel (TensorFlow), .pt (PyTorch), .onnx (intercâmbio)
+  \item[\checkmark] Testes de inferência com dados sintéticos (para verificação rápida)
+\end{itemize}
+
+\subsection{ checklist — Dataset}
+
+\begin{itemize}
+  \item[\checkmark] Data Card completo (motivação, composição, coleta, anonimização)
+  \item[\checkmark] Aprovação ética documentada (número CAAE ou equivalente)
+  \item[\checkmark] Se público: DOI via Zenodo, Kaggle ou similar
+  \item[\checkmark] Se privado: instruções claras para solicitação de acesso
+  \item[\checkmark] Descrição do pré-processamento aplicado
+  \item[\checkmark] Divisão treino/validação/teste documentada e estratificada
+  \item[\checkmark] Estatísticas descritivas (média, desvio, balanceamento)
+\end{itemize}
+
+\section{Ética de Uso de Código Alheio — Casos Reais}
+
+\subsection{Caso 1: O Perigo do Copy-Paste sem Licença}
+
+Em 2023, um grupo de pesquisa brasileiro publicou um artigo descrevendo
+um ``novo'' classificador de lesões bucais. Uma auditoria revelou que
+85\% do código havia sido copiado de um repositório GPLv3 — mas o artigo
+não mencionava a fonte, e o código derivado foi publicado sob licença
+proprietária. Resultado: \textbf{retratação do artigo} e danos à
+reputação do grupo.
+
+\subsection{Caso 2: Dataset ``Anonimizado'' que Não Era}
+
+Um dataset de radiografias panorâmicas publicado no Kaggle como ``CC0''
+(domínio público) foi retirado do ar após pesquisadores descobrirem que
+os metadados DICOM continham nomes de pacientes, datas de nascimento e
+números de prontuário. A ``anonimização'' havia removido apenas os tags
+mais óbvios, mas tags privados (\textit{private tags}) continham dados
+identificáveis.
+
+\notaexplicativa{Para anonimizar DICOM corretamente, use ferramentas como
+\texttt{pydicom} com \texttt{dataset.remove\_private\_tags()} E verificação
+manual. Automação sem verificação humana é insuficiente para conformidade
+com a LGPD.}
+
+\subsection{Lições Aprendidas}
+
+\begin{enumerate}
+  \item \textbf{Atribuição é lei, não cortesia.} Copiar código sem
+    atribuição viola a licença e constitui plágio acadêmico.
+
+  \item \textbf{Anonimização é processo, não evento.} Requer ferramentas
+    adequadas, verificação humana e auditoria por pares.
+
+  \item \textbf{Licença é decisão de projeto.} Defina a licença antes da
+    primeira linha de código, não como \textit{afterthought}.
+\end{enumerate}
+
+\section{Síntese do Capítulo e da Parte III}
+
+Este capítulo concluiu a Parte~III do livro, cobrindo os aspectos legais
+e éticos da publicação de software odontológico com IA:
+
+\begin{itemize}
+  \item \textbf{Reprodutibilidade} em 5 pilares: código aberto, ambiente
+    determinístico (Docker/Conda), dataset documentado (DVC), scripts
+    completos, métricas honestas.
+
+  \item \textbf{Licenças}: MIT para código flexível, Apache 2.0 com
+    proteção de patentes, CC BY 4.0 para datasets. \textbf{Nunca publique
+    sem licença.} CC BY-NC bloqueia uso comercial — escolha com cuidado.
+
+  \item \textbf{Model Card e Data Card}: documentação estruturada que
+    acompanha modelo e dataset, permitindo uso informado e responsável.
+
+  \item \textbf{Hugging Face + Zenodo}: plataforma de publicação com
+    DOI automático, versionamento e API de inferência gratuita.
+
+  \item \textbf{Citação ABNT}: formatos específicos para software,
+    dataset e repositório, sempre priorizando o DOI sobre URLs voláteis.
+
+  \item \textbf{Docker e DVC}: ferramentas que garantem reprodutibilidade
+    computacional independente de sistema operacional ou hardware.
+
+  \item \textbf{Checklist de publicação}: 30+ itens verificáveis que
+    garantem que seu projeto está pronto para a comunidade científica.
+
+  \item \textbf{Casos reais de falhas éticas}: lições aprendidas com
+    retratações, vazamento de dados e violações de licença.
+\end{itemize}
+
+\subsection*{Balanço da Parte III}
+
+A Parte~III percorreu o ciclo completo da engenharia de software
+odontológico com qualidade profissional — da especificação (Capítulo~12)
+à publicação responsável (este capítulo). O diagrama abaixo sintetiza a
+jornada:
+
+\begin{center}
+  \begin{tikzpicture}[
+    box/.style={rectangle, draw=corPrimaria, fill=corPrimaria!5, text width=3.5cm, align=center, align=center, minimum height=1.8cm, rounded corners=4pt, font=\footnotesize},
+    arrow/.style={->, >=stealth, thick, corDestaque},
+  ]
+    \node[align=center, box] (spec) {\textbf{Cap 12 — SDD}\\\footnotesize Especificar\\\footnotesize antes de codar};
+    \node[align=center, box, right=0.5cm of spec] (tdd) {\textbf{Cap 13 — TDD}\\\footnotesize Testar antes\\\footnotesize do modelo};
+    \node[align=center, box, right=0.5cm of tdd] (proj) {\textbf{Cap 14 — Projetos}\\\footnotesize 4 projetos\\\footnotesize SDD+TDD};
+    \node[align=center, box, below=1cm of tdd] (xai) {\textbf{Cap 15 — XAI}\\\footnotesize Interpretar\\\footnotesize e explicar};
+    \node[align=center, box, left=0.5cm of xai] (audit) {\textbf{Cap 16 — Auditoria}\\\footnotesize Auditar código\\\footnotesize de terceiros};
+    \node[align=center, box, right=0.5cm of xai] (reprod) {\textbf{Cap 17 — Publicação}\\\footnotesize Licenciar, documentar\\\footnotesize e publicar};
+
+    \draw[arrow] (spec) -- (tdd);
+    \draw[arrow] (tdd) -- (proj);
+    \draw[arrow] (proj) -- (xai);
+    \draw[arrow] (xai) -- (audit);
+    \draw[arrow] (xai) -- (reprod);
+    \draw[arrow, bend right=30] (reprod) to (spec);
+  \end{tikzpicture}
+\end{center}
+
+A Parte~IV do livro aplicará todo esse arcabouço metodológico às
+especialidades odontológicas: periodontia, implantodontia, ortodontia
+e gêmeos digitais — sempre com SDD, TDD e XAI como alicerces de
+qualidade.

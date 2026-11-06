@@ -1,0 +1,100 @@
+%==============================================================================
+% APÊNDICE A — GLOSSÁRIO DE TERMOS TÉCNICOS
+%==============================================================================
+\chapter{Glossário de Termos Técnicos}
+\label{apendice:glossario}
+
+% Definições de entradas do glossário
+\newglossaryentry{supervisionado}{
+  name=Aprendizado Supervisionado,
+  description={Paradigma de aprendizado de máquina no qual o modelo é
+    treinado utilizando pares de entrada-saída rotulados. É o método
+    mais comum para classificação de imagens odontológicas.}
+}
+
+\newglossaryentry{naosupervisionado}{
+  name=Aprendizado Não Supervisionado,
+  description={Paradigma onde o modelo identifica padrões em dados não
+    rotulados, como agrupamento de tipos de lesões.}
+}
+
+\newglossaryentry{reforco}{
+  name=Aprendizado por Reforço,
+  description={Paradigma onde um agente aprende a tomar decisões através
+    de interações com o ambiente, recebendo recompensas por ações corretas.}
+}
+
+\newglossaryentry{deeplearning}{
+  name=Deep Learning,
+  description={Subcampo do aprendizado de máquina que utiliza redes
+    neurais com múltiplas camadas para aprender representações hierárquicas
+    de dados, como imagens ou textos.}
+}
+
+\newglossaryentry{transferlearning}{
+  name=Transfer Learning,
+  description={Técnica que reutiliza um modelo pré-treinado em uma grande
+    base de dados como ponto de partida para uma tarefa correlata com
+    menos dados disponíveis.}
+}
+
+\newglossaryentry{cnn}{
+  name=CNN (Rede Neural Convolucional),
+  description={Arquitetura de rede neural profunda especializada no
+    processamento de dados com grade topológica, como imagens,
+    utilizando operações de convolução.}
+}
+
+\newglossaryentry{unet}{
+  name=U-Net,
+  description={Arquitetura de segmentação semântica baseada em
+    codificador-decodificador com conexões de salto, amplamente utilizada
+    para segmentação de imagens médicas e odontológicas.}
+}
+
+\newglossaryentry{gradcam}{
+  name=Grad-CAM,
+  description={Gradient-weighted Class Activation Mapping: técnica de
+    visualização que destaca as regiões da imagem mais relevantes para
+    a decisão de uma CNN, gerando mapas de ativação.}
+}
+
+\newglossaryentry{gememdigital}{
+  name=Gêmeo Digital,
+  description={Réplica virtual detalhada de uma estrutura física ou
+    biológica, atualizada em tempo real com dados do sensor, usada para
+    simulação e planejamento de tratamentos.}
+}
+
+\newglossaryentry{sdd}{
+  name=SDD (Especificação Dirigida por Software),
+  description={Metodologia de desenvolvimento que parte de uma
+    especificação formal do sistema para orientar a implementação e
+    os testes, garantindo rastreabilidade entre requisitos e código.}
+}
+
+\newglossaryentry{tdd}{
+  name=TDD (Test-Driven Development),
+  description={Metodologia de desenvolvimento onde os testes são escritos
+    antes do código de produção, seguindo o ciclo Red-Green-Refactor.}
+}
+
+% Glossário como tabela
+O glossário completo está disponível no final do livro, na seção
+\backmatter. Abaixo listamos os principais termos:
+
+\begin{longtable}{lp{0.65\textwidth}}
+  \toprule
+  \textbf{Termo} & \textbf{Definição} \\
+  \midrule
+  \endhead
+  Aprendizado Supervisionado & Método de ML treinado com dados rotulados. \\
+  Aprendizado Não Supervisionado & Método que descobre padrões sem rótulos. \\
+  Deep Learning & Redes neurais com múltiplas camadas. \\
+  Grad-CAM & Mapa de ativação para interpretação de CNNs. \\
+  Gêmeo Digital & Réplica virtual de sistemas físicos. \\
+  Segmentação Semântica & Classificação pixel-a-pixel de imagens. \\
+  Transfer Learning & Reutilização de modelos pré-treinados. \\
+  U-Net & Arquitetura para segmentação semântica. \\
+  \bottomrule
+\end{longtable}

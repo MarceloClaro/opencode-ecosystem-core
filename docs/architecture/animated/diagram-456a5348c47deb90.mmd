@@ -1,0 +1,19 @@
+flowchart TB
+  TASK["Solicitação ao MarceloClaro"] --> PREP["MetacognitiveLoop.prepare"]
+  PREP --> SEARCH["Recuperar lições; deduplicar e excluir substituídos"]
+  SEARCH --> BRIEF["Briefing: referências e limites locais"]
+  BRIEF --> A2A["delegate: contexto da tarefa Blackboard"]
+  A2A --> EXEC["Executor realiza o trabalho"]
+  EXEC --> GATE["report_completion: contrato e histórico quando aplicável"]
+  GATE --> BB["task.complete e atualização da tarefa"]
+  BB --> REF["ReflexionEngine: solicitação de reflexão"]
+  REF --> COMPLETE["MetacognitiveLoop.complete"]
+  COMPLETE --> EPISODE["Outcome, erro observado e próxima ação"]
+  EPISODE --> RECORD["record_observation: calibrated false"]
+  RECORD --> SEARCH
+  GATE --> TRUST["Trust.learn e economia conforme outcome"]
+  REASON["primário.reason"] --> PREP
+  REASON --> ENGINE["Motor solicitado e resultado tipado"]
+  ENGINE --> OBS["observe_reasoning"]
+  OBS --> RECORD
+  RECORD -.->|confidence_promoted false nesta observação| LIMIT["Não comprova verdade, causalidade ou revisão humana"]

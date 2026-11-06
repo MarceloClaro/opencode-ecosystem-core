@@ -1,0 +1,814 @@
+% =============================================================================
+% MOLAMBUDOS — The Diary of Patient 1,260 (ENGLISH TRANSLATION)
+% Template Victoria-Regia by @jancarauma
+% 84 fragments · 216 reading paths · 5 parts
+% English edition mirror of main.tex (SPEC-935-R355)
+% =============================================================================
+
+\documentclass[14pt,openany]{extbook}
+\newif\ifmolambudoskdpprint
+\ifdefined\KDPPRINT
+  \molambudoskdpprinttrue
+\else
+  \molambudoskdpprintfalse
+\fi
+\newcommand{\goldenratio}{1.618}
+\usepackage[T1]{fontenc}
+
+% --- Book metadata ---
+\newcommand{\authorname}{Marcelo Dias de Carvalho Filho}
+\newcommand{\coauthorname}{Marcelo Claro}
+\newcommand{\translatorname}{}
+\newcommand{\booktitle}{Molambudos --- The Diary of Patient 1,260}
+\newcommand{\subtitle}{A Narrative in Fragments}
+\newcommand{\publisher}{OpenCode Books}
+\newcommand{\publishercity}{Crateús}
+\newcommand{\editionyear}{2026}
+\newcommand{\isbn}{9798189170492}
+
+% --- Template packages + customizations ---
+\usepackage{misc/options}
+\usepackage{float}
+%\usepackage{pdflscape}  % no longer used (graphs on portrait pages with rotate)
+
+% --- Figure directory (sepia photographs of the diary) ---
+\graphicspath{{figures/}}
+
+% ============================================================================
+% Molambudos-specific customizations
+% ============================================================================
+
+% Unicode characters used in fragments
+% (only for pdflatex; xelatex handles Unicode natively)
+\ifdefined\DeclareUnicodeCharacter
+\DeclareUnicodeCharacter{21AA}{\ensuremath{\hookrightarrow}}
+\DeclareUnicodeCharacter{2610}{\ensuremath{\square}}
+\DeclareUnicodeCharacter{2713}{\checkmark}
+\DeclareUnicodeCharacter{2717}{\texttimes}
+\DeclareUnicodeCharacter{2611}{\ensuremath{\checkmark}}
+\DeclareUnicodeCharacter{2639}{\textfrown}
+\DeclareUnicodeCharacter{263A}{\textsmile}
+\DeclareUnicodeCharacter{2665}{\ensuremath{\heartsuit}}
+\DeclareUnicodeCharacter{2714}{\checkmark}
+\DeclareUnicodeCharacter{2605}{\ensuremath{\bigstar}}
+\DeclareUnicodeCharacter{27E1}{\ensuremath{\blacktriangleright}}
+\DeclareUnicodeCharacter{2022}{\textbullet}
+\DeclareUnicodeCharacter{25CF}{\textbullet}
+\DeclareUnicodeCharacter{25CB}{\ensuremath{\circ}}
+\DeclareUnicodeCharacter{2726}{\ensuremath{\star}}
+\DeclareUnicodeCharacter{25C6}{\ensuremath{\blacklozenge}}
+\DeclareUnicodeCharacter{26A0}{\textbf{!}}
+\DeclareUnicodeCharacter{2192}{$\rightarrow$}
+\DeclareUnicodeCharacter{2190}{$\leftarrow$}
+\DeclareUnicodeCharacter{00B0}{$^\circ$}
+\DeclareUnicodeCharacter{2013}{--}
+\DeclareUnicodeCharacter{2014}{---}
+\DeclareUnicodeCharacter{2018}{`}
+\DeclareUnicodeCharacter{2019}{'}
+\DeclareUnicodeCharacter{201C}{``}
+\DeclareUnicodeCharacter{201D}{''}
+\fi
+
+% Conditional hypertext — recognizes the reading path
+% \ifpath{origin1}{origin2}{text if came from 1}{text if came from 2}
+% Uses the LaTeX label system to detect which fragment was read first
+% based on appearance order in the .aux file.
+% In PDF, the real path is undeterminable: both are shown as possibilities.
+% The reader recognizes their own path among the alternatives.
+\newcommand{\ifpath}[4]{%
+  \textit{If you came from #1:} #3\par
+  \vspace{0.3em}
+  \textit{If you came from #2:} #4\par
+  \vspace{0.3em}
+  \textit{(Both paths lead to the same place. The entity does not need to know where you came from. It only needs you to have arrived.)}%
+}
+
+% Phantom route — links to a fragment that does not exist.
+% The reader discovers that the route leads nowhere.
+% Used to create the "fragment you did not read".
+\newcommand{\rotaphantom}[1]{%
+  \textbf{#1}{\footnotesize(p.~---)}%
+}
+
+% Molambudos color palette
+\definecolor{sangue}{HTML}{8B0000}
+\definecolor{olho}{HTML}{FFD700}
+\definecolor{mem}{HTML}{8B4513}
+\definecolor{doc}{HTML}{2F4F4F}
+\definecolor{cont}{HTML}{8B0000}
+\definecolor{luc}{HTML}{4B0082}
+% Immersive sepia palette (page background + ink) — sensory appeal.
+\definecolor{sepiabg}{HTML}{F2E8CF}
+\definecolor{sepiaink}{HTML}{2B2117}
+
+% Hyperlink setup (internal hyperlinks between fragments)
+\ifmolambudoskdpprint
+  \hypersetup{
+    colorlinks=false,
+    hidelinks
+  }
+\else
+  \hypersetup{
+    colorlinks=true,
+    linkcolor=linkred,
+    citecolor=linkred,
+    urlcolor=linkred
+  }
+\fi
+
+% Part opener — title + thematic roundel (icone/N.png)
+% on a single clean page. #1 displayed title, #2 short name (TOC), #3 icon.
+% Mapping: 2=Sertão, 4=Colônia, 1=Diary/Reports,
+% 3=Lúcia's Investigation, 5=Contamination.
+\newcommand{\partopener}[3]{%
+  \cleardoublepage
+  \thispagestyle{empty}%
+  \phantomsection\addcontentsline{toc}{part}{#2}%
+  \markboth{}{}%
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[black] (current page.south west) rectangle (current page.north east);
+    \node[anchor=center] at (current page.center){%
+      \begin{tabular}{c}
+        {\bfseries\LARGE\color{customgold} #1}\\[2.4em]
+        \includegraphics[width=0.58\textwidth]{icone/#3}\\
+      \end{tabular}};
+  \end{tikzpicture}%
+  \null\vfill\clearpage}
+
+% Reading route — link to a fragment + its page number, so the
+% reader can navigate the work out of linear order. \rota{ID} uses \pageref on
+% the \label{frag:ID} placed at each fragment opening (see \mainmatter).
+\ifmolambudoskdpprint
+  \newcommand{\rota}[1]{\textbf{#1}\,{\footnotesize(p.~\pageref{frag:#1})}}
+\else
+  \newcommand{\rota}[1]{\hyperlink{#1}{\textbf{#1}}\,{\footnotesize(p.~\pageref{frag:#1})}}
+\fi
+\newcommand{\rotasep}{\quad\textbullet\quad}
+
+% Marginalia of the Contamination fragments — annotations that look like
+% handwritten notes in the reader's copy (blood-red), to intensify the
+% fourth-wall break. Narrow margin (6x9 book), so keep notes short.
+\setlength{\marginparwidth}{0.75in}
+\setlength{\marginparsep}{6pt}
+\ifmolambudoskdpprint
+  % KDP print mode: margin notes suppressed to avoid rejection for
+  % "text outside margins" in the Amazon previewer.
+  \newcommand{\margnota}[1]{}
+\else
+  \newcommand{\margnota}[1]{\marginpar{\raggedright\footnotesize\itshape\color{sangue}#1}}
+\fi
+
+% Editor's Note — paratextual annotation for the critical editorial frame.
+% Implemented as a footnote (font ~10pt) for discretion.
+\newcommand{\NE}[1]{\footnote{\footnotesize\textbf{[Ed. Note]} #1}}
+
+% Fragment counter — guarantees each \label{frag:ID} has a unique anchor
+% instead of inheriting the \phantomsection of the \partopener (which would
+% make the \pageref point to the act page instead of the fragment page).
+\newcounter{fragctr}
+\newcommand{\fragdef}[1]{%
+  \refstepcounter{fragctr}%
+  \hypertarget{#1}{}%
+  \label{frag:#1}%
+}
+
+\begin{document}
+
+% One Roman sequence covers the cover and every preliminary page. Automatic
+% page anchors remain disabled until the Arabic-numbered corpus begins.
+\hypersetup{pageanchor=false}
+\frontmatter
+
+\input{en/frontmatter/titlepage}
+
+\input{en/frontmatter/aviso_ao_leitor}
+
+\ifdefined\MolambudosKDPNoFolios
+  \makeatletter
+  \let\ps@plain\ps@empty
+  \makeatother
+  \pagestyle{empty}
+\fi
+\ifdefined\MolambudosKDPSafeFolios
+  % KDP print mode with preserved physical navigation:
+  % no running headers, but a safe centered folio in the footer.
+  \setlength{\footskip}{6mm}
+  \fancypagestyle{molambudos-kdp-folios}{%
+    \fancyhf{}%
+    \renewcommand{\headrulewidth}{0pt}%
+    \renewcommand{\footrulewidth}{0pt}%
+    \fancyfoot[C]{\normalfont\footnotesize\thepage}%
+  }%
+  \fancypagestyle{plain}{%
+    \fancyhf{}%
+    \renewcommand{\headrulewidth}{0pt}%
+    \renewcommand{\footrulewidth}{0pt}%
+    \fancyfoot[C]{\normalfont\footnotesize\thepage}%
+  }%
+  \pagestyle{molambudos-kdp-folios}
+\fi
+
+% Sepia background (parchment) + dark sepia ink — immersive sensory appeal.
+\pagecolor{sepiabg}
+\color{sepiaink}
+
+\input{en/frontmatter/epigrafe}
+\input{en/frontmatter/cuidado}
+\input{en/frontmatter/copyrightpage}
+\input{en/frontmatter/ficha_catalografica}
+\cleardoublepage
+\input{en/frontmatter/nota_arquivista}
+\input{en/frontmatter/como_ler}
+\input{en/frontmatter/tocpage}
+
+% ===== Preliminary navigation =====
+\pagestyle{fancy}
+\ifdefined\MolambudosKDPNoFolios
+  \pagestyle{empty}
+\fi
+\ifdefined\MolambudosKDPSafeFolios
+  \pagestyle{molambudos-kdp-folios}
+\fi
+
+% ============================================
+% NAVIGATION SECTION — Non-Linear Reading
+% ============================================
+\chapter*{Navigation --- Reading Paths}
+\addcontentsline{toc}{chapter}{Navigation --- Reading Paths}
+
+\noindent\textit{This archive contains 84 fragments organized into 5 parts.}
+\textit{Each fragment is independent and may be read in any order.}
+\textit{The arrows ↪ at the end of each fragment indicate possible reading paths.}
+\textit{The recommended linear reading follows the order of the parts below.}
+
+\vspace{1em}
+
+\section*{Index of Fragments}
+
+% Compact fraglink for the index (reduces paragraph spacing locally)
+\ifmolambudoskdpprint
+  \newcommand{\fraglink}[3]{%
+    \par\noindent%
+    \textbf{#1} --- #2\,{\footnotesize(p.~\pageref{frag:#1})}%
+    \ifx&#3&\else\hfill {\itshape\textcolor{textgray}{#3}}\fi%
+    \ifdefined\MolambudosCompactIndex\par\vspace{0pt}\else\par\vspace{0.1em}\fi}
+\else
+  \newcommand{\fraglink}[3]{%
+    \par\noindent%
+    \hyperlink{#1}{\textbf{#1}} --- #2\,{\footnotesize(p.~\pageref{frag:#1})}%
+    \ifx&#3&\else\hfill {\itshape\textcolor{textgray}{#3}}\fi%
+    \par\vspace{0.1em}}
+\fi
+
+\subsection*{Part 1 --- The Sertão (9 fragments)}
+{\setlength{\parskip}{0.15em}
+\fraglink{MEM-01}{The Sertão Before the End}{1914}
+\fraglink{MEM-02}{The Retirantes' March}{1915}
+\fraglink{MEM-03}{The Father's Death}{1915}
+\fraglink{MEM-04}{The Trench}{1915}
+\fraglink{MEM-05}{The Yellow Eye}{1915}
+\fraglink{MEM-06}{The Government Pen}{1915}
+\fraglink{MEM-07}{The Mother Taken}{1915}
+\fraglink{DOC-17}{A Soldier's Letter}{1915}
+\fraglink{DOC-18}{Official Report on the Pen}{1916}
+}
+
+\subsection*{Part 2 --- The Colony (16 fragments)}
+{\setlength{\parskip}{0.15em}
+\fraglink{MEM-08}{Arrival at the Colony}{1917}
+\fraglink{DOC-02}{Medical Record of Patient 1,260}{1917}
+\fraglink{MEM-09}{The Early Years}{1920--1930}
+\fraglink{MEM-10}{The First Homicide}{1922}
+\fraglink{MEM-11}{The Isolation}{1923--1945}
+\fraglink{MEM-17}{The Electroshock}{1937}
+\fraglink{MEM-18}{The Escape Attempt}{1943}
+\fraglink{MEM-12}{The Shroud-Ripper}{1945}
+\fraglink{MEM-21}{The Newspaper}{1948}
+\fraglink{MEM-19}{The Visitor}{1950}
+\fraglink{DOC-10}{Electroconvulsive Therapy Record}{1937}
+\fraglink{MEM-22}{The Voices}{1952}
+\fraglink{MEM-23}{The Snow of Ashes}{1960}
+\fraglink{MEM-20}{The Death of My Cell Neighbor}{1963}
+\fraglink{MEM-24}{The Nurse Who Cried}{1964}
+\fraglink{MEM-25}{The Death in the Mirror}{1970}
+}
+
+\subsection*{Part 3 --- Oliveira's Diary\\\hspace*{2.5em}and Reports (25 fragments)}
+{\setlength{\parskip}{0.15em}
+\fraglink{DOC-01}{The Exhumation}{1979}
+\fraglink{DOC-03}{Autopsy Report}{1979}
+\fraglink{DOC-04}{Session Report I}{1979}
+\fraglink{DOC-05}{Session Report II}{1979}
+\fraglink{DOC-06}{Session Report III}{1979}
+\fraglink{DOC-07}{Psychiatric Diagnosis (1979)}{1979}
+\fraglink{MEM-13}{The New Doctor}{1979}
+\fraglink{MEM-14}{The Diary Emerges}{1979}
+\fraglink{MEM-15}{The Entity Speaks}{1979}
+\fraglink{MEM-16}{The Death at the Colony}{1979}
+\fraglink{MEM-26}{The Last Page}{1979}
+\fraglink{DOC-11}{Oliveira's Diary I}{1979}
+\fraglink{DOC-12}{Oliveira's Diary II}{1979}
+\fraglink{DOC-13}{Oliveira's Diary III}{1979}
+\fraglink{DOC-14}{Oliveira's Diary IV}{1979}
+\fraglink{DOC-15}{Oliveira's Diary V}{1979}
+\fraglink{DOC-16}{Oliveira's Diary VI}{1979}
+\fraglink{DOC-19}{Brazilian Holocaust}{Daniela Arbex}
+\fraglink{DOC-20}{Chain of Custody Record}{2026}
+\fraglink{DOC-21}{Letter from Heitor Oliveira (unsent)}{1979}
+\fraglink{DOC-22}{Internal Memorandum No. 47/2026}{2026}
+\fraglink{DOC-23}{Archive Incident Report}{2026}
+\fraglink{DOC-24}{Conservation Technical Assessment}{2026}
+\fraglink{DOC-25}{The Man in the Black Cloth}{2026}
+\fraglink{DOC-26}{Oliveira's Notes --- The Mechanism}{1979}
+}
+
+\subsection*{Part 4 --- Lúcia's Investigation (20 fragments)}
+{\setlength{\parskip}{0.15em}
+\fraglink{DOC-08}{Re-Diagnosis (2026)}{Lúcia Mendes}
+\fraglink{DOC-09}{Assessment Scale 1,263}{Clinical instrument}
+\fraglink{DOC-27}{The Origin (1853)}{Father José Inácio}
+\fraglink{LUC-01}{The Invitation}{2026}
+\fraglink{LUC-02}{The Archive}{2026}
+\fraglink{LUC-03}{The Ruins}{2026}
+\fraglink{LUC-04}{The Photograph}{2026}
+\fraglink{LUC-05}{Lúcia's Dream}{2026}
+\fraglink{LUC-Contraprova}{The Counterproof}{2026}
+\fraglink{LUC-Entrevista}{The Interview}{2026}
+\fraglink{LUC-Escolha}{The Choice}{2026}
+\fraglink{LUC-06}{The Disappearance}{2026}
+\fraglink{LUC-07}{Oliveira's Trail}{2026}
+\fraglink{LUC-08}{Lúcia's Last Session}{2026}
+\fraglink{LUC-09}{Oliveira's Exhumation}{2026}
+\fraglink{LUC-10}{Lúcia's Report}{2026}
+\fraglink{LUC-11}{The Digital Diary}{2026}
+\fraglink{LUC-12}{The Last Photo}{2026}
+\fraglink{LUC-13}{The Night of the Diagnosis}{2026}
+\fraglink{LUC-14}{Clinical Self-Assessment (DSM-5-TR)}{2026}
+}
+
+\subsection*{Part 5 --- Contamination (14 fragments + Epilogue)}
+{\setlength{\parskip}{0.15em}
+\fraglink{CONT-01}{You Opened the Diary}{}
+\fraglink{CONT-02}{You Were There}{}
+\fraglink{CONT-03}{You Smell It}{}
+\fraglink{CONT-04}{You Begin to Dream}{}
+\fraglink{CONT-05}{Clinical Assessment Report}{}
+\fraglink{CONT-06}{You Read This Line Three Times}{}
+\fraglink{CONT-07}{The Final Diagnosis}{}
+\fraglink{CONT-08}{You Have Read This Before}{}
+\fraglink{CONT-09}{The Mirror}{}
+\fraglink{CONT-10}{The Wound}{}
+\fraglink{CONT-11}{The Number}{}
+\fraglink{CONT-12}{3:14}{}
+\fraglink{CONT-13}{The Line}{}
+\fraglink{MEM-27}{The Next Page}{Joaquim, 1907--1979}
+}
+
+\newpage
+
+% ============================================
+% NARRATIVE GRAPHS — Visual Navigation of the Work
+% ============================================
+\chapter*{Visual Navigation --- The Maps of the Archive}
+\addcontentsline{toc}{chapter}{Visual Navigation --- Maps}
+
+\noindent\textit{On the following pages, three maps help orient your reading.}
+\textit{Each serves a different purpose: to explore, to understand, or to follow.}
+\textit{None is mandatory. All are possible paths.}
+
+\vspace{0.6em}
+\noindent\textbf{Map 1} --- The \textbf{path graph} shows all fragments and their connections. Use it for \textit{non-linear navigation}: choose a fragment and follow the arrows.
+
+\noindent\textbf{Map 2} --- The \textbf{plot graph} reveals the secret architecture of the work in three acts. Within it lie the causes, the transmissions, and the cycle connecting the four hosts --- including you.
+
+\noindent\textbf{Map 3} --- The \textbf{linear graph} is the traditional route, from the Sertão (1914) to the Epilogue. Recommended for those who prefer to begin at the beginning.
+
+\vspace{0.8em}
+\noindent{\small\textit{The choice of path does not change the destination: all routes converge on the same cycle.}}
+
+%% --- GRAPH 1: PATH MAP (rotated 90°) ---
+\newpage
+\thispagestyle{empty}
+\begingroup
+\vbox to \textheight{%
+  \vfill
+  \centering
+  \setlength{\fboxsep}{3pt}%
+  \setlength{\fboxrule}{0.6pt}%
+  \fbox{\includegraphics[angle=90,width=0.98\textwidth,height=0.90\textheight,keepaspectratio]{misc/grafo_narrativo.png}}%
+  \vfill
+}%
+\endgroup
+\newpage
+
+\section*{Map 1 --- Reading Graph: Paths between Fragments}
+
+\noindent This map represents the \textbf{84 fragments} (each one is a node) and their \textbf{216 connections} (the edges linking them). Each fragment points to others at the end of its text through the links \texttt{↪} accompanied by the page number.
+
+\noindent The more connections a fragment has, the more central it is in the web of the narrative. The most connected are:
+
+\begin{itemize}
+\itemsep0em
+\item \textbf{MEM-04} (The Trench) --- the encounter that originates everything
+\item \textbf{CONT-04} (You Begin to Dream) --- the contamination reaches the reader
+\item \textbf{DOC-01} (The Exhumation) --- the diary emerges from the past
+\end{itemize}
+
+\vspace{0.5em}
+\noindent\textbf{Legend:}
+\textcolor{mem}{MEM (brown)} --- Memories of Patient 1,260 \quad
+\textcolor{doc}{DOC (gray)} --- Documents and reports \quad
+\textcolor{cont}{CONT (red)} --- Contamination of the reader \quad
+\textcolor{luc}{LUC (indigo)} --- Forensic investigation
+
+%% --- GRAPH 2: PLOT STRUCTURE ---
+\newpage
+\thispagestyle{empty}
+\begingroup
+\vbox to \textheight{%
+  \vfill
+  \centering
+  \setlength{\fboxsep}{3pt}%
+  \setlength{\fboxrule}{0.6pt}%
+  \fbox{\includegraphics[angle=90,width=0.98\textwidth,height=0.90\textheight,keepaspectratio]{misc/grafo_enredo.png}}%
+  \vfill
+}%
+\endgroup
+\newpage
+
+\section*{Map 2 --- Plot Graph: Architecture in Three Acts}
+
+\begingroup\raggedright
+
+\noindent Unlike the previous map (which shows \textit{connections}), this graph reveals the \textit{causal structure} of the work --- the narrative skeleton supporting the 84 fragments.
+
+\vspace{1em}
+\noindent\textbf{The three acts:}
+
+\vspace{0.4em}
+\noindent\textcolor{mem}{\textbf{ACT 1 --- The Trauma}} \textit{(brown)}:
+the 1853 drought that gave birth to the entity, the 1915 drought that took Joaquim to the trench,
+the pact of an eight-year-old boy with the hunger that never ends.\\[0.35em]
+\noindent\textcolor{doc}{\textbf{ACT 2 --- Institutionalization}} \textit{(gray)}:
+62 years in the Colony, the diary that bears witness, the exhumation that returns it to the
+world, and the doctor who, by reading it, becomes the next link.\\[0.35em]
+\noindent\textcolor{cont}{\textbf{ACT 3 --- The Cycle}} \textit{(red)}:
+Lúcia's investigation, the discovery that the horror is a cycle,
+the contamination of the reader --- and the final realization that
+\textit{the cycle begins anew with every reader}.
+
+\vspace{0.9em}
+\noindent\textbf{The line of hosts:} the dashed edges
+(\textcolor{sangue}{-\,-\,-}) link those who carry the creature, one after another
+--- Joaquim (1,260), Oliveira (1,261), Lúcia (1,262), and you (1,263) ---,
+in a chain that began in 1853 and has no announced end.
+
+\vspace{0.5em}
+\noindent\textit{Note: the fragments DOC-27 (The Origin, 1853) and LUC-13 (The Night of the
+Diagnosis) were added to the archive during Lúcia's research.
+DOC-27 is the oldest document in the collection (1853) and reveals the origin of the
+entity; LUC-13 records the exact moment when Lúcia ceases to be an
+investigator and becomes a host.}
+
+\endgroup
+
+%% --- GRAPH 3: LINEAR ROUTE (rotated 90°) ---
+\newpage
+\thispagestyle{empty}
+\begingroup
+\vbox to \textheight{%
+  \vfill
+  \centering
+  \setlength{\fboxsep}{3pt}%
+  \setlength{\fboxrule}{0.6pt}%
+  \fbox{\includegraphics[angle=90,width=0.98\textwidth,height=0.90\textheight,keepaspectratio]{misc/grafo_leitura_linear.png}}%
+  \vfill
+}%
+\endgroup
+\newpage
+
+\section*{Map 3 --- Linear Reading Graph: Traditional Route}
+
+\noindent For those who prefer a sequential reading, this graph organizes the
+\textbf{84 fragments} in the recommended chronological-narrative order:
+from the Sertão (1914) to the Epilogue --- through the Colony, Oliveira's
+diaries, and Lúcia's investigation, up to the final contamination.
+
+\vspace{0.8em}
+
+\noindent\textbf{Linear route:}
+\textcolor{mem}{Sertão (9)} $\to$ \textcolor{doc}{Colony (16)} $\to$
+\textcolor{doc}{Oliveira's Diary (18)} $\to$
+\textcolor{luc}{Lúcia's Investigation (21)} $\to$
+\textcolor{cont}{Contamination (13)} $\to$
+\textcolor{olho}{MEM-27 (1)}
+
+\vspace{0.3em}
+\noindent{\small $\bigstar$ = Fragments marked with a star are mandatory on the essential minimum route.}
+
+\vspace{0.7em}
+\noindent\textit{Reading tip:} if this is your first time in the archive,
+begin with the Sertão. Joaquim's memories prepare the ground for everything
+that comes after. If you prefer mystery, begin with Lúcia's Investigation
+(Part 4) and discover the earlier fragments as if excavating a past.
+
+\vspace{0.3em}
+\noindent{\small \textcolor{sangue}{\textbf{Warning:}} Part 5 (Contamination) must be read last on any route.}
+\textit{It is not about the story. It is about you.}
+
+\newpage
+
+% ============================================
+% LINEAR READING — 78 FRAGMENTS IN 5 PARTS
+% ============================================
+
+%% ============================================
+%% PART 1 — THE SERTÃO (1915--1928)
+%% ============================================
+\partopener{The Sertão (1914--1917)}{The Sertão}{2.png}
+
+% The first fragment is Arabic page 1; do not insert \newpage before it.
+\mainmatter
+\hypersetup{pageanchor=true}
+\fragdef{MEM-01}\input{en/fragmentos/mem/MEM-01}
+\newpage\fragdef{MEM-02}\input{en/fragmentos/mem/MEM-02}
+\newpage\fragdef{MEM-03}\input{en/fragmentos/mem/MEM-03}
+\newpage\fragdef{MEM-04}\input{en/fragmentos/mem/MEM-04}
+\newpage\fragdef{MEM-05}\input{en/fragmentos/mem/MEM-05}
+\newpage\fragdef{MEM-06}\input{en/fragmentos/mem/MEM-06}
+\newpage\fragdef{MEM-07}\input{en/fragmentos/mem/MEM-07}
+\newpage\fragdef{DOC-17}\input{en/fragmentos/doc/DOC-17}
+\newpage\fragdef{DOC-18}\input{en/fragmentos/doc/DOC-18}
+
+%% ============================================
+%% PART 2 — THE COLONY (1928--1979)
+%% ============================================
+\partopener{The Colony (1917--1979)}{The Colony}{4.png}
+
+\newpage\fragdef{MEM-08}\input{en/fragmentos/mem/MEM-08}
+\newpage\fragdef{DOC-02}\input{en/fragmentos/doc/DOC-02}
+\newpage\fragdef{MEM-09}\input{en/fragmentos/mem/MEM-09}
+\newpage\fragdef{MEM-10}\input{en/fragmentos/mem/MEM-10}
+\newpage\fragdef{MEM-11}\input{en/fragmentos/mem/MEM-11}
+\newpage\fragdef{MEM-17}\input{en/fragmentos/mem/MEM-17}
+\newpage\fragdef{MEM-18}\input{en/fragmentos/mem/MEM-18}
+\newpage\fragdef{MEM-12}\input{en/fragmentos/mem/MEM-12}
+\newpage\fragdef{MEM-21}\input{en/fragmentos/mem/MEM-21}
+\newpage\fragdef{MEM-19}\input{en/fragmentos/mem/MEM-19}
+\newpage\fragdef{DOC-10}\input{en/fragmentos/doc/DOC-10}
+\newpage\fragdef{MEM-22}\input{en/fragmentos/mem/MEM-22}
+\newpage\fragdef{MEM-23}\input{en/fragmentos/mem/MEM-23}
+\newpage\fragdef{MEM-20}\input{en/fragmentos/mem/MEM-20}
+\newpage\fragdef{MEM-24}\input{en/fragmentos/mem/MEM-24}
+\newpage\fragdef{MEM-25}\input{en/fragmentos/mem/MEM-25}
+
+%% ============================================
+%% PART 3 — OLIVEIRA'S DIARY + REPORTS (1979)
+%% ============================================
+\ifmolambudoskdpprint
+  \partopener{\shortstack{Oliveira's Diary\\and Reports (1979)}}{Oliveira's Diary and Reports}{1.png}
+\else
+  \partopener{Oliveira's Diary and Reports (1979)}{Oliveira's Diary and Reports}{1.png}
+\fi
+
+\vspace{0.5em}
+\noindent{\footnotesize\textit{Archivist's Note: from this point on, the main voice ceases to be Joaquim's and becomes that of the man who studied him. The documents that follow were written by doctors, examiners, and archivists. The language changes. The gaze changes. But the diary is the same.}}
+
+\newpage\fragdef{DOC-01}\input{en/fragmentos/doc/DOC-01}
+\newpage\fragdef{DOC-03}\input{en/fragmentos/doc/DOC-03}
+\newpage\fragdef{DOC-04}\input{en/fragmentos/doc/DOC-04}
+\newpage\fragdef{DOC-05}\input{en/fragmentos/doc/DOC-05}
+\newpage\fragdef{DOC-06}\input{en/fragmentos/doc/DOC-06}
+\newpage\fragdef{DOC-07}\input{en/fragmentos/doc/DOC-07}
+\newpage\fragdef{MEM-13}\input{en/fragmentos/mem/MEM-13}
+\newpage\fragdef{MEM-14}\input{en/fragmentos/mem/MEM-14}
+\newpage\fragdef{MEM-15}\input{en/fragmentos/mem/MEM-15}
+\newpage\fragdef{MEM-16}\input{en/fragmentos/mem/MEM-16}
+\newpage\fragdef{MEM-26}\input{en/fragmentos/mem/MEM-26}
+\newpage\fragdef{DOC-11}\input{en/fragmentos/doc/DOC-11}
+\newpage\fragdef{DOC-12}\input{en/fragmentos/doc/DOC-12}
+\newpage\fragdef{DOC-13}\input{en/fragmentos/doc/DOC-13}
+\newpage\fragdef{DOC-14}\input{en/fragmentos/doc/DOC-14}
+\newpage\fragdef{DOC-15}\input{en/fragmentos/doc/DOC-15}
+\newpage\fragdef{DOC-16}\input{en/fragmentos/doc/DOC-16}
+\newpage\fragdef{DOC-19}\input{en/fragmentos/doc/DOC-19}
+\newpage\fragdef{DOC-20}\input{en/fragmentos/doc/DOC-20}
+\newpage\fragdef{DOC-21}\input{en/fragmentos/doc/DOC-21}
+\newpage\fragdef{DOC-22}\input{en/fragmentos/doc/DOC-22}
+\newpage\fragdef{DOC-23}\input{en/fragmentos/doc/DOC-23}
+\newpage\fragdef{DOC-24}\input{en/fragmentos/doc/DOC-24}
+\newpage\fragdef{DOC-25}\input{en/fragmentos/doc/DOC-25}
+\newpage\fragdef{DOC-26}\input{en/fragmentos/doc/DOC-26}
+
+%% ============================================
+%% PART 4 — LÚCIA'S INVESTIGATION (2026)
+%% ============================================
+\partopener{Lúcia's Investigation (2026)}{Lúcia's Investigation}{3.png}
+
+\vspace{0.5em}
+\noindent{\footnotesize\textit{Archivist's Note: the fragments of this part were organized by Dr. Lúcia Mendes during her research in 2026. Her notes are in italics in the margins of the original documents. The oldest document in the archive --- from 1853 --- was found by her and attached to the case file.}}
+
+\newpage\fragdef{DOC-08}\input{en/fragmentos/doc/DOC-08}
+\newpage\fragdef{DOC-09}\input{en/fragmentos/doc/DOC-09}
+\newpage\fragdef{DOC-27}\input{en/fragmentos/doc/DOC-27}
+\newpage\fragdef{LUC-01}\input{en/fragmentos/luc/LUC-01}
+\newpage\fragdef{LUC-02}\input{en/fragmentos/luc/LUC-02}
+\newpage\fragdef{LUC-03}\input{en/fragmentos/luc/LUC-03}
+\newpage\fragdef{LUC-04}\input{en/fragmentos/luc/LUC-04}
+\newpage\fragdef{LUC-05}\input{en/fragmentos/luc/LUC-05}
+\newpage\fragdef{LUC-Contraprova}\input{en/fragmentos/luc/LUC-Contraprova}
+\newpage\fragdef{LUC-Entrevista}\input{en/fragmentos/luc/LUC-Entrevista}
+\newpage\fragdef{LUC-Escolha}\input{en/fragmentos/luc/LUC-Escolha}
+\newpage\fragdef{LUC-06}\input{en/fragmentos/luc/LUC-06}
+\newpage\fragdef{LUC-07}\input{en/fragmentos/luc/LUC-07}
+\newpage\fragdef{LUC-08}\input{en/fragmentos/luc/LUC-08}
+\newpage\fragdef{LUC-09}\input{en/fragmentos/luc/LUC-09}
+\newpage\fragdef{LUC-10}\input{en/fragmentos/luc/LUC-10}
+\newpage\fragdef{LUC-11}\input{en/fragmentos/luc/LUC-11}
+\newpage\fragdef{LUC-12}\input{en/fragmentos/luc/LUC-12}
+\newpage\fragdef{LUC-13}\input{en/fragmentos/luc/LUC-13}
+\newpage\fragdef{LUC-14}\input{en/fragmentos/luc/LUC-14}
+
+%% ============================================
+%% PART 5 — CONTAMINATION (YOU)
+%% ============================================
+\partopener{Contamination (You)}{Contamination}{5.png}
+
+\newpage\fragdef{CONT-01}\input{en/fragmentos/cont/CONT-01}
+\newpage\fragdef{CONT-02}\input{en/fragmentos/cont/CONT-02}
+\newpage\fragdef{CONT-03}\input{en/fragmentos/cont/CONT-03}
+\newpage\fragdef{CONT-04}\input{en/fragmentos/cont/CONT-04}
+\newpage\fragdef{CONT-05}\input{en/fragmentos/cont/CONT-05}
+\newpage\fragdef{CONT-06}\input{en/fragmentos/cont/CONT-06}
+\newpage\fragdef{CONT-07}\input{en/fragmentos/cont/CONT-07}
+\newpage\fragdef{CONT-08}\input{en/fragmentos/cont/CONT-08}
+\newpage\fragdef{CONT-09}\input{en/fragmentos/cont/CONT-09}
+\newpage\fragdef{CONT-10}\input{en/fragmentos/cont/CONT-10}
+\newpage\fragdef{CONT-11}\input{en/fragmentos/cont/CONT-11}
+\newpage\fragdef{CONT-12}\input{en/fragmentos/cont/CONT-12}
+\newpage\fragdef{CONT-13}\input{en/fragmentos/cont/CONT-13}
+
+\newpage
+
+%% ============================================
+%% MEM-27 — JOAQUIM'S EPILOGUE
+%% ============================================
+\newpage\fragdef{MEM-27}\input{en/fragmentos/mem/MEM-27}
+
+\newpage
+
+% ============================================
+% EPILOGUE
+% ============================================
+\fragdef{EPI-01}
+\chapter*{Epilogue}
+\addcontentsline{toc}{chapter}{Epilogue}
+
+\begin{center}
+\vspace{2em}
+\textit{The cycle begins anew with every reader.}
+
+\vspace{2em}
+\rule{0.3\textwidth}{0.5pt}
+
+\vspace{1em}
+\textit{Welcome to the archive.}
+
+\vspace{0.5em}
+\textit{Has the smell started already?}
+
+\vspace{1.5em}
+--- Lúcia Mendes, Patient 1,262
+
+\vspace{0.5em}
+\rule{0.3\textwidth}{0.5pt}
+
+\vspace{0.5em}
+\noindent\textit{Archive note: Dr. Ronaldo Torres, director of the Minas Gerais Public Archive, requested leave in October 2026. The medical form records \textquotedbl{}persistent insomnia, frontal headache, and tinnitus.\textquotedbl{} It does not mention the eye. It does not mention the smell. The last entry in the protocol log, written in his own hand, reads: \textquotedbl{}Return to patient 1,263, when they appear.\textquotedbl{} Below it, in handwriting the examiners could not identify, is written: \textquotedbl{}Waiting.\textquotedbl{}}
+
+\vspace{0.3em}
+\noindent\textit{During the night, the buzzing rises and falls like an owl's song --- thin, high-pitched, like a woman singing in the corridor of the empty archive. No one opens the door to check.}
+\end{center}
+
+\newpage
+\thispagestyle{empty}
+\null
+\vfill
+\begin{center}
+\vspace*{\fill}
+
+\textit{This book contains 84 fragments.}
+\textit{If you have read them all, the cycle is complete in you.}
+
+\vspace{2em}
+\rule{0.2\textwidth}{0.5pt}
+
+\vspace{2em}
+\textit{It is here now.}
+\textit{On the blank page.}
+\textit{Waiting for the next reader.}
+
+\vspace{2em}
+\textcolor{olho}{\large \textbf{1260}}
+\end{center}
+
+\vfill
+\clearpage
+
+% ============================================
+% EPILOGUE — SECOND PART (POST-READING)
+% The terror that continues after the book is closed.
+% ============================================
+\thispagestyle{empty}
+\null
+\vfill
+\begin{center}
+
+\vspace*{\fill}
+
+\noindent\textit{\textcolor{sangue}{\textbf{Post-Reading Instruction}}}
+
+\vspace{1.5em}
+
+\noindent\textit{Now close the book.}
+
+\noindent\textit{Do not put it on the shelf yet. Leave it on the table.}
+
+\vspace{0.8em}
+
+\noindent\textit{Count 62 seconds.}
+
+\noindent\textit{Think of nothing. Just count.}
+
+\vspace{0.8em}
+
+\noindent\textit{Now open the book again. On page 62.}
+
+\noindent\textit{Read the first line.}
+
+\vspace{1em}
+
+\noindent\textcolor{sangue}{\rule{0.15\textwidth}{0.5pt}}
+
+\vspace{1em}
+
+\noindent\textit{If the line reads \textquotedbl{}Sixty-two\textquotedbl{}: the cycle has closed on you. The number that marked Joaquim's life --- 62 years, 62 days, 62 seconds --- is now yours. Keep the number. It will appear in places you do not expect.}
+
+\noindent\textit{If the line reads something else: you have read this book in the wrong order. Or the right order. There is no way to know. Page 62 changes according to who opens it.}
+
+\vspace{1.5em}
+
+\noindent\textcolor{sangue}{\rule{0.15\textwidth}{0.5pt}}
+
+\vspace{1.5em}
+
+\noindent\textit{Before storing the book for good:}
+
+\vspace{0.5em}
+
+\noindent\textit{--- Pass your right hand over page 126. Feel the texture.}
+\noindent\textit{--- Bring your hand to your nose. Inhale.}
+\noindent\textit{--- If the sweet smell is stronger than the first time, the diagnosis is confirmed.}
+\noindent\textit{--- If the smell is fainter, you are still in the incubation period.}
+
+\vspace{1.5em}
+
+\noindent\textcolor{sangue}{\rule{0.15\textwidth}{0.5pt}}
+
+\vspace{1.5em}
+
+\noindent\textit{Patient 1,263's file has been filled out.}
+
+\noindent\textit{The \textquotedbl{}name\textquotedbl{} field is blank.}
+
+\noindent\textit{The \textquotedbl{}date of contamination\textquotedbl{} field is filled with the date on which you read this line.}
+
+\noindent\textit{Welcome to the archive.}
+
+\noindent\textit{The line has not grown shorter.}
+
+\vspace{1.5em}
+
+\noindent\textit{--- The Archivist}
+\vspace{0.3em}
+\noindent\textit{--- Patient 1,262}
+\vspace{0.3em}
+\noindent\textit{--- What is left of Joaquim}
+
+\vspace{2em}
+\textcolor{olho}{\large \textbf{1,263}}
+
+\end{center}
+\vfill
+
+% ===== Editorial Appendix =====
+\input{en/frontmatter/nota_editorial}
+
+% ===== Back Matter =====
+\backmatter
+\input{en/frontmatter/glossario_historico}
+\input{en/frontmatter/nota_historica}
+\input{en/frontmatter/ficha_beta_diegetica}
+\input{en/frontmatter/backpage}
+
+\end{document}

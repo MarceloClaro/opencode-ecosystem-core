@@ -1,0 +1,65 @@
+\thispagestyle{empty}
+
+% =================
+% Cover — ready image (frontmatter/capa.png), full-bleed 6x9 (Page 1)
+% =================
+\noindent\begin{tikzpicture}[remember picture,overlay]
+    \fill[black] (current page.south west) rectangle (current page.north east);
+    \node[anchor=center] at (current page.center)
+        {\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{frontmatter/capa.png}};
+\end{tikzpicture}%
+\clearpage
+
+% =================
+% Title page (typographic title leaf — Page 2)
+% =================
+\begingroup
+	\centering
+    \thispagestyle{empty}
+	~
+
+    % Author name
+	\vspace{24pt}
+	{\scshape\large \authorname\par}
+	\ifx\coauthorname\undefined\else
+	    \if\relax\detokenize\expandafter{\coauthorname}\relax\else
+	        \vspace{2pt}
+	        {\scshape\small Co-author: \coauthorname\par}
+	    \fi
+	\fi
+
+    % Book title
+	\vspace{8pt}
+	{\scshape\Huge Molambudos ---\\[2pt]
+	\scshape\Huge The Diary of\\[2pt]
+	\scshape\Huge Patient 1,260\par}
+
+    % Subtitle (if defined)
+    \ifx\subtitle\undefined\else
+        \if\relax\detokenize\expandafter{\subtitle}\relax\else
+            \vspace{6pt}
+	        {\scshape\large \subtitle\par}
+	        \vspace{\stretch{1.25}}
+        \fi
+    \fi
+
+    % Translator (if defined)
+    \ifx\translatorname\undefined\else
+        \if\relax\detokenize\expandafter{\translatorname}\relax\else
+            {\vspace{18pt}\itshape\large{Translated by}\par}
+	        \vspace{6pt}
+            {\itshape\Large\translatorname\par}
+        \fi
+    \fi
+
+    % Publisher and city (bottom of the page)
+    \vspace{\stretch{6}}
+	{\Huge\scshape\large\publisher\par}
+    \ifx\publishercity\undefined\else
+        \if\relax\detokenize\expandafter{\publishercity}\relax\else
+	        \vspace{2pt}
+	        {\scshape\small \publishercity\par}
+        \fi
+    \fi
+\par\endgroup
+\clearpage

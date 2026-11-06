@@ -1,0 +1,1018 @@
+%==============================================================================
+% CAPÍTULO 25 — ÉTICA, LGPD E REGULAÇÃO DA IA EM ODONTOLOGIA
+% PARTE V — Futuro, Ética e Regulação da IA em Odontologia
+%==============================================================================
+\chapter{Ética, LGPD e Regulação da Inteligência Artificial em Odontologia}
+\label{cap:etica-lgpd-regulacao}
+
+\nivelcinco
+
+A inteligência artificial na Odontologia não é apenas uma questão técnica --
+é, fundamentalmente, uma questão ética e jurídica. Cada radiografia panorâmica
+analisada por uma rede neural, cada prontuário eletrônico processado por um
+LLM, cada predição de risco de doença periodontal gerada por um modelo de
+\textit{machine learning} carrega consigo um feixe de responsabilidades legais
+que o cirurgião-dentista brasileiro precisa conhecer.
+
+Este capítulo aborda o arcabouço regulatório que rege o uso de IA em saúde
+bucal no Brasil, da Lei Geral de Proteção de Dados (LGPD) ao Projeto de Lei
+2338/2023, passando pela regulação internacional (FDA, CE Mark) e pelos
+princípios éticos que devem guiar cada profissional que opta por incorporar
+sistemas inteligentes à sua prática clínica.
+
+\indice{LGPD} \indice{ética em IA} \indice{regulação} \indice{PL 2338/2023}
+
+%-----------------------------------------------------------------------------
+% SEÇÃO 25.1
+%-----------------------------------------------------------------------------
+\section{LGPD e Dados de Saúde Bucal no Brasil}
+\label{sec:lgpd-saude-bucal}
+
+\nivelquatro
+
+A Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709, de 14 de agosto de
+2018), em vigor desde setembro de 2020, estabelece que \textbf{dados de saúde
+são dados pessoais sensíveis} (Art. 5º, inciso II) e, como tais, gozam de
+proteção jurídica reforçada \cite{brasil2018lgpd}.
+
+\indice{LGPD|(}
+
+\subsection{O Que a LGPD Classifica como Dado de Saúde Bucal?}
+
+Para a LGPD, são considerados dados de saúde bucal -- e, portanto, dados
+pessoais sensíveis -- quaisquer informações relacionadas à saúde oral de uma
+pessoa natural identificada ou identificável, incluindo, mas não se limitando a:
+
+\begin{itemize}
+  \item Radiografias (periapicais, panorâmicas, oclusais, TCFC) e imagens
+    intraorais -- mesmo quando anonimizadas de forma reversível.
+  \item Modelos digitais 3D de arcadas dentárias (escaneamento intraoral).
+  \item Prontuários odontológicos (eletrônicos ou físicos) contendo diagnóstico,
+    plano de tratamento, evolução clínica e prescrições.
+  \item Imagens de lesões bucais, língua, mucosa -- inclusive fotografias
+    clínicas com finalidade diagnóstica ou de documentação.
+  \item Dados genéticos obtidos de amostras salivares com finalidade diagnóstica.
+  \item Qualquer informação que, combinada com dados odontológicos, permita a
+    identificação do titular (nome, CPF, CNS, endereço, telefone).
+\end{itemize}
+
+\destaque{A jurisprudência da ANPD (Autoridade Nacional de Proteção de Dados)
+tem consolidado o entendimento de que imagens da face -- incluindo sorriso,
+arcada dentária exposta e região peribucal -- constituem dado biométrico e,
+portanto, dado pessoal sensível (Art. 5º, inciso V, LGPD). Radiografias
+panorâmicas, que capturam toda a estrutura maxilofacial, inequivocamente se
+enquadram nesta categoria.}
+
+\subsection{Bases Legais para o Tratamento de Dados Odontológicos}
+
+A LGPD estabelece que o tratamento de dados pessoais sensíveis só pode ocorrer
+nas seguintes hipóteses (Art. 11):
+
+\begin{enumerate}
+  \item \textbf{Consentimento explícito e específico do titular} (Inciso I):
+    O paciente deve ser informado, de forma clara e em linguagem acessível,
+    sobre quais dados serão coletados, para quais finalidades, por quanto tempo
+    serão armazenados e com quem poderão ser compartilhados. O consentimento
+    deve ser obtido por escrito ou por meio eletrônico que demonstre a
+    manifestação inequívoca de vontade.
+
+  \item \textbf{Tutela da saúde} (Inciso II, alínea `f'): O tratamento de dados
+    sensíveis é permitido sem consentimento quando for indispensável para a
+    tutela da saúde, exclusivamente em procedimento realizado por profissionais
+    de saúde, serviços de saúde ou autoridade sanitária. Esta base legal é a
+    que fundamenta o tratamento de dados no contexto assistencial -- a consulta
+    odontológica propriamente dita.
+
+  \item \textbf{Pesquisa} (Inciso II, alínea `c'): A LGPD permite o tratamento
+    de dados sensíveis para fins de pesquisa sem consentimento, desde que
+    anonimizados. A anonimização, neste contexto, deve ser irreversível -- ou
+    seja, não deve ser possível, por meios técnicos razoáveis, reidentificar o
+    titular.
+
+  \item \textbf{Exercício regular de direitos} (Inciso II, alínea `d'): Inclui
+    o direito de defesa em processo judicial, administrativo ou arbitral,
+    relevante para ações de responsabilidade civil.
+\end{enumerate}
+
+\notaexplicativa{A distinção entre anonimização (irreversível) e
+pseudonimização (reversível, pois o dado pode ser reidentificado com uma chave)
+é central na LGPD. Dados pseudonimizados continuam sendo dados pessoais e
+estão sujeitos a todas as obrigações da lei. Apenas dados efetivamente
+anonimizados -- sem possibilidade razoável de reidentificação -- deixam de ser
+considerados dados pessoais (Art. 12).}
+
+\subsection{Implicações Práticas para o Consultório que Usa IA}
+
+\begin{table}[H]
+  \centering
+  \caption{Obrigações do cirurgião-dentista sob a LGPD ao utilizar IA.}
+  \label{tab:lgpd-ia-consultorio}
+  \begin{tabularx}{\textwidth}{lX}
+    \toprule
+    \textbf{Obrigação} & \textbf{Descrição} \\
+    \midrule
+    Consentimento & Obter consentimento explícito do paciente para uso de
+      seus dados por sistemas de IA, especificando a finalidade \\
+    Finalidade & Não utilizar dados coletados para diagnóstico em treinamento
+      de modelos sem consentimento adicional \\
+    Transparência & Informar ao paciente quando uma decisão clínica foi
+      auxiliada por IA (Art. 20, LGPD) \\
+    Segurança & Adotar medidas técnicas (criptografia, controle de acesso) e
+      administrativas para proteger dados odontológicos \\
+    Minimização & Coletar apenas os dados estritamente necessários para a
+      finalidade declarada \\
+    Eliminação & Eliminar dados após o término da finalidade ou do prazo
+      legal de guarda (20 anos para prontuários, CFM/CFO) \\
+    Direitos do titular & Garantir ao paciente acesso, correção,
+      portabilidade e eliminação de seus dados \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsection{Transferência Internacional de Dados Odontológicos}
+
+Quando um cirurgião-dentista brasileiro utiliza serviços de IA hospedados em
+nuvem no exterior (ex.: Google Colab, AWS, Azure, OpenAI API), está realizando
+transferência internacional de dados pessoais sensíveis. A LGPD (Art. 33) exige
+que o país de destino proporcione grau de proteção de dados adequado (decisão
+de adequação da ANPD) ou que o controlador adote garantias contratuais
+específicas (\textit{Standard Contractual Clauses}).
+
+Na prática odontológica, isso significa:
+
+\begin{itemize}
+  \item Verificar se o fornecedor de IA possui servidores no Brasil (reduzindo
+    a complexidade legal) ou, no mínimo, cláusulas contratuais compatíveis com
+    a LGPD.
+  \item Priorizar soluções de IA que processem dados \textit{on-premise} (no
+    próprio consultório) ou em nuvem brasileira para minimizar riscos de
+    transferência internacional.
+  \item Documentar todas as transferências no Relatório de Impacto à Proteção
+    de Dados Pessoais (RIPD), recomendado -- e em breve obrigatório -- pela
+    ANPD para tratamento de dados sensíveis em larga escala.
+\end{itemize}
+
+\indice{LGPD|)}
+
+%-----------------------------------------------------------------------------
+% SEÇÃO 25.2
+%-----------------------------------------------------------------------------
+\section{Consentimento Informado para Inteligência Artificial}
+\label{sec:consentimento-ia}
+
+\nivelquatro
+
+O consentimento informado -- pilar da bioética desde o Código de Nuremberg
+(1947) e a Declaração de Helsinki (1964) -- adquire complexidade adicional
+quando sistemas de IA estão envolvidos no cuidado odontológico.
+
+\subsection{As Três Dimensões do Consentimento para IA}
+
+\begin{enumerate}
+  \item \textbf{Consentimento clínico (relação dentista-paciente):} O paciente
+    consente com o uso de IA como ferramenta auxiliar no seu diagnóstico ou
+    plano de tratamento. Deve abranger: (a) quais sistemas de IA serão
+    utilizados, (b) qual o papel do sistema (auxiliar/suporte, não substituto
+    do julgamento profissional), (c) limitações conhecidas do sistema
+    (taxa de erro, populações para as quais o sistema não foi validado).
+
+  \item \textbf{Consentimento para treinamento do modelo (pesquisa):} Quando os
+    dados do paciente são utilizados para treinar ou aperfeiçoar um modelo de
+    IA, o consentimento deve ser específico para esta finalidade. O paciente
+    deve ser informado se seus dados serão compartilhados com terceiros
+    (ex.: empresas de tecnologia, universidades parceiras).
+
+  \item \textbf{Consentimento para armazenamento em nuvem (LGPD):} Se os dados
+    do paciente serão processados ou armazenados em infraestrutura de nuvem --
+    especialmente se hospedada fora do Brasil -- o paciente deve consentir com
+    esta transferência internacional de dados sensíveis.
+\end{enumerate}
+
+\subsection{Elementos Obrigatórios do Termo de Consentimento para IA}
+
+\begin{table}[H]
+  \centering
+  \caption{Elementos mínimos do Termo de Consentimento Livre e Esclarecido
+  (TCLE) para uso de IA em Odontologia.}
+  \label{tab:elementos-tcle-ia}
+  \begin{tabularx}{\textwidth}{lX}
+    \toprule
+    \textbf{Elemento} & \textbf{Conteúdo Mínimo} \\
+    \midrule
+    Identificação do sistema & Nome, versão, desenvolvedor e registro
+      (ANVISA, se aplicável) \\
+    Finalidade específica & Qual tarefa a IA executa (detecção, classificação,
+      predição, sugestão de plano) \\
+    Papel do sistema & Auxiliar/suporte -- NÃO substitui o julgamento do
+      profissional \\
+    Dados coletados & Lista exaustiva de quais dados serão processados
+      (imagens, texto, áudio) \\
+    Destino dos dados & Onde serão armazenados (servidor local, nuvem, país) \\
+    Compartilhamento & Com quem os dados poderão ser compartilhados \\
+    Prazo de armazenamento & Por quanto tempo os dados serão mantidos \\
+    Direitos do titular & Acesso, correção, eliminação, revogação do
+      consentimento \\
+    Riscos conhecidos & Vieses do modelo, taxa de erro reportada, limitações
+      populacionais \\
+    Contato do responsável & Nome, CRM/CRO, telefone e e-mail do controlador \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\citacaoativa{doi-1016-j-adaj-2023-06-002}{10.1016/j.adaj.2023.06.002}{%
+  ``O consentimento informado para IA odontológica não pode ser genérico. O
+  paciente tem o direito de saber, em linguagem compreensível, que um algoritmo
+  -- e não apenas o julgamento humano do dentista -- contribuiu para a decisão
+  que afeta sua saúde bucal.''}
+
+%-----------------------------------------------------------------------------
+% SEÇÃO 25.3
+%-----------------------------------------------------------------------------
+\section{Anonimização e Pseudonimização de Imagens Odontológicas}
+\label{sec:anonimizacao}
+
+\nivelcinco
+
+A anonimização de imagens odontológicas para pesquisa e desenvolvimento de IA
+é um desafio técnico e jurídico de primeira ordem. Ao contrário do que sugere o
+senso comum, remover o nome do arquivo DICOM ou cortar metadados não é
+suficiente para anonimizar uma imagem odontológica.
+
+\indice{anonimização} \indice{pseudonimização}
+
+\subsection{Por que Imagens Odontológicas São Difíceis de Anonimizar?}
+
+Uma radiografia panorâmica contém, intrinsecamente, informações que podem
+permitir a reidentificação do paciente:
+
+\begin{itemize}
+  \item \textbf{Anatomia única:} A configuração de dentes presentes, ausentes,
+    restaurados e implantados -- a chamada ``impressão digital odontológica'' --
+    é virtualmente única para cada indivíduo, análoga a uma impressão digital
+    datiloscópica.
+  \item \textbf{Materiais dentários identificáveis:} Coroas, pontes, implantes
+    e restaurações com formatos e posições específicas constituem assinaturas
+    individuais.
+  \item \textbf{Patologias e anomalias raras:} A combinação de condições
+    odontológicas incomuns pode ser suficientemente distintiva para
+    reidentificação.
+  \item \textbf{Metadados DICOM:} Arquivos DICOM contêm dezenas de campos com
+    informações potencialmente identificadoras (nome do paciente, data de
+    nascimento, ID do paciente, instituição, data do exame, parâmetros técnicos
+    do equipamento).
+  \item \textbf{Sobreposição facial:} Radiografias panorâmicas e TCFC capturam
+    estruturas ósseas da face que, combinadas com outras fontes de dados,
+    podem permitir reidentificação.
+\end{itemize}
+
+\destaque{A ANPD e o \textit{European Data Protection Board} (EDPB) convergem no
+entendimento de que a mera remoção de identificadores diretos (nome, CPF) NÃO
+constitui anonimização efetiva se existirem meios técnicos razoáveis de
+reidentificação. Imagens médicas/odontológicas, por sua natureza rica em
+informações, raramente podem ser consideradas plenamente anonimizadas.}
+
+\subsection{Estratégias Técnicas de Desidentificação}
+
+\begin{description}
+  \item[Limpeza de metadados DICOM:] Remoção ou substituição de todos os
+    \textit{tags} DICOM que contenham informações do paciente (PatientName,
+    PatientID, PatientBirthDate, InstitutionName, StudyDate, etc.). Ferramentas
+    como \texttt{pydicom} (Python) e \texttt{dcm4che} (Java) oferecem funções
+    específicas para anonimização DICOM em lote.
+
+  \item[Desfoque seletivo (\textit{selective blurring}):] Aplicação de
+    desfoque gaussiano ou \textit{pixelation} em regiões potencialmente
+    identificadoras, como a região do seio frontal e estruturas ósseas faciais
+    não relevantes para a tarefa clínica. Esta técnica deve ser aplicada com
+    cautela para não degradar as regiões de interesse odontológico.
+
+  \item[Máscara facial (\textit{face masking}):] Em TCFC, algoritmos de
+    segmentação podem isolar e remover a superfície facial, preservando apenas
+    as estruturas dentoalveolares.
+
+  \item[Geração sintética:] Uso de \textit{Generative Adversarial Networks}
+    (GANs) ou \textit{Diffusion Models} para gerar imagens odontológicas
+    sintéticas que preservam as propriedades estatísticas do \textit{dataset}
+    original sem corresponder a nenhum paciente real. O OdontoIA mantém um
+    \textit{pipeline} aberto de geração de radiografias sintéticas.
+
+  \item[K-anonimato em \textit{datasets} odontológicos:] Garantir que cada
+    combinação de características quase-identificadoras (faixa etária, sexo,
+    região geográfica, características odontológicas raras) apareça em pelo
+    menos $k$ registros distintos no \textit{dataset}.
+\end{description}
+
+\notaexplicativa{O conceito de \textit{k-anonimato}, introduzido por Sweeney
+(2002), estabelece que um \textit{dataset} é \textit{k}-anônimo se cada registro
+é indistinguível de pelo menos $k-1$ outros registros com respeito a um conjunto
+de quase-identificadores. Para \textit{datasets} odontológicos, recomendamos
+$k \geq 5$.}
+
+\subsection{O Papel do OdontoIA na Desidentificação}
+
+O ecossistema OdontoIA oferece, como parte de seu compromisso com a ética e a
+conformidade legal, um módulo de desidentificação de imagens odontológicas que:
+
+\begin{itemize}
+  \item Remove automaticamente metadados DICOM sensíveis (\texttt{pydicom}).
+  \item Aplica máscara facial em TCFC (modelo U-Net treinado em 500 exames).
+  \item Gera relatório de auditoria de anonimização exportável.
+  \item Sugere, quando a anonimização completa não é possível, a via da
+    pseudonimização com Termo de Compromisso de Utilização de Dados (TCUD).
+\end{itemize}
+
+%-----------------------------------------------------------------------------
+% SEÇÃO 25.4
+%-----------------------------------------------------------------------------
+\section{Viés Algorítmico: Etnia, Gênero, Idade e Classe Social}
+\label{sec:vies-algoritmico}
+
+\nivelcinco
+
+O viés algorítmico é, talvez, o desafio ético mais insidioso da IA em saúde --
+porque é invisível a olho nu e, frequentemente, se disfarça de objetividade
+matemática. Quando um modelo de \textit{deep learning} apresenta acurácia de
+93\% na detecção de lesões bucais, a pergunta que precisa ser feita é:
+93\% para quem?
+
+\indice{viés algorítmico|(}
+
+\subsection{As Quatro Fontes de Viés em IA Odontológica}
+
+\begin{enumerate}
+  \item \textbf{Viés de representação (\textit{representation bias}):} Ocorre
+    quando o \textit{dataset} de treinamento não reflete a diversidade da
+    população-alvo. Exemplo concreto: um modelo treinado exclusivamente com
+    radiografias de pacientes caucasianos europeus terá desempenho
+    significativamente inferior em pacientes negros, asiáticos e indígenas
+    brasileiros, cujas características de densidade óssea, anatomia
+    dentofacial e padrões de doença podem diferir.
+
+  \item \textbf{Viés de anotação (\textit{label bias}):} Ocorre quando o
+    \textit{ground truth} é estabelecido por anotadores que carregam seus
+    próprios vieses. Se um \textit{dataset} de lesões orais é anotado apenas por
+    especialistas formados em uma única escola odontológica, os critérios
+    diagnósticos podem não ser representativos da diversidade de práticas
+    clínicas.
+
+  \item \textbf{Viés histórico (\textit{historical bias}):} Ocorre quando os
+    dados refletem desigualdades estruturais pré-existentes. Se um modelo de
+    predição de risco de cárie é treinado com dados de pacientes que tiveram
+    acesso regular a tratamento odontológico, ele sistematicamente subestimará
+    o risco de pacientes que não tiveram esse acesso -- tipicamente, populações
+    de baixa renda atendidas pelo SUS.
+
+  \item \textbf{Viés de confirmação (\textit{confirmation bias}):} Ocorre quando
+    o clínico confia excessivamente nas predições do modelo, ignorando
+    evidências contraditórias do exame clínico. Este viés é particularmente
+    perigoso em sistemas com interface ``caixa-preta'' que não oferecem
+    explicações para suas predições.
+\end{enumerate}
+
+\subsection{Evidências de Viés em IA Odontológica}
+
+Um estudo de 2023 analisou 45 modelos de \textit{deep learning} para
+diagnóstico odontológico publicados entre 2018--2022 e constatou que:
+
+\begin{itemize}
+  \item \textbf{87\%} dos \textit{datasets} não reportaram a composição
+    étnico-racial da amostra.
+  \item \textbf{92\%} não realizaram análise de desempenho por subgrupo (sexo,
+    idade, etnia).
+  \item \textbf{76\%} utilizaram dados de um único país -- predominantemente
+    EUA (34\%), China (22\%) e Coreia do Sul (12\%).
+  \item \textbf{Apenas 2 estudos} (4,4\%) incluíram pacientes brasileiros.
+  \item \textbf{Nenhum estudo} reportou nível socioeconômico dos pacientes ou
+    tipo de cobertura de saúde (pública, privada, filantrópica).
+\end{itemize}
+
+Esses números são alarmantes. Eles significam que, em 2024, a vasta maioria dos
+modelos de IA odontológica publicados não pode ter seu desempenho generalizado
+para a população brasileira -- muito menos para as populações historicamente
+marginalizadas que mais necessitam de melhorias no acesso ao diagnóstico.
+
+\citacaoativa{doi-1038-s41591-021-01614-0}{10.1038/s41591-022-01981-2}{%
+  ``Modelos de IA treinados em populações homogêneas podem exacerbar
+  desigualdades em saúde quando implantados em populações diversas. A auditoria
+  de equidade deve ser um requisito regulatório, não uma opção ética.''}
+
+\subsection{Estratégias de Mitigação de Viés}
+
+\begin{description}
+  \item[Auditoria de equidade:] Antes de publicar ou implantar um modelo,
+    calcule métricas de desempenho estratificadas por sexo, faixa etária,
+    etnia/raça (categorias IBGE), nível socioeconômico e tipo de serviço de
+    saúde (público/privado). Se houver diferença estatisticamente significativa
+    ($p < 0,05$) entre subgrupos, o modelo não está pronto para implantação.
+
+  \item[Coleta intencionalmente diversa:] Projete \textit{datasets} que reflitam
+    a diversidade da população brasileira. O Censo IBGE 2022 reporta 45,3\% de
+    pardos, 43,5\% de brancos, 10,2\% de pretos, 0,6\% de indígenas e 0,4\% de
+    amarelos. Seu \textit{dataset} se aproxima dessa distribuição?
+
+  \item[\textit{Data augmentation} consciente:] Utilize técnicas de aumento de
+    dados que compensem sub-representação de grupos minoritários, mas sem
+    introduzir artefatos irreais.
+
+  \item[\textit{Fairness constraints} no treinamento:] Incorpore restrições de
+    equidade diretamente na função de perda do modelo, penalizando
+    discrepâncias de desempenho entre subgrupos.
+
+  \item[Transparência radical:] Publique a \textit{datasheet} completa do
+    \textit{dataset} (seguindo o modelo de \cite{gebru2021datasheets}),
+    incluindo composição demográfica, critérios de inclusão/exclusão e vieses
+    conhecidos.
+\end{description}
+
+\indice{viés algorítmico|)}
+
+%-----------------------------------------------------------------------------
+% SEÇÃO 25.5
+%-----------------------------------------------------------------------------
+\section{Regulação da IA no Brasil: PL 2338/2023}
+\label{sec:pl-2338}
+
+\nivelquatro
+
+O Projeto de Lei nº 2.338/2023, em tramitação no Senado Federal, representa a
+tentativa mais abrangente do legislador brasileiro de estabelecer um marco
+regulatório para a inteligência artificial. Inspirado no AI Act europeu, mas
+com adaptações à realidade brasileira, o PL 2338 terá impacto direto sobre o
+uso de IA em Odontologia.
+
+\indice{PL 2338/2023|(}
+
+\subsection{Estrutura do PL 2338/2023}
+
+O projeto estrutura-se em torno de três eixos principais:
+
+\begin{enumerate}
+  \item \textbf{Classificação de riscos:} Os sistemas de IA são classificados
+    em níveis de risco -- risco excessivo (proibidos), alto risco (regulação
+    intensa), risco limitado (obrigações de transparência) e risco mínimo (sem
+    obrigações adicionais). Sistemas de IA para diagnóstico e tratamento em
+    saúde são explicitamente categorizados como \textbf{alto risco} (Art. 17,
+    inciso I).
+
+  \item \textbf{Direitos das pessoas afetadas:} Direito à explicação (Art. 8º),
+    direito à revisão humana de decisões automatizadas (Art. 9º), direito à
+    não-discriminação algorítmica (Art. 11) e direito à correção de dados
+    incorretos (Art. 10).
+
+  \item \textbf{Obrigações dos desenvolvedores e operadores:} Avaliação de
+    impacto algorítmico (Art. 23), documentação técnica completa (Art. 24),
+    supervisão humana (Art. 25), robustez e acurácia (Art. 26), transparência
+    (Art. 27) e governança de dados (Art. 28).
+\end{enumerate}
+
+\subsection{Implicações para o Cirurgião-Dentista}
+
+Se aprovado nos termos atuais, o PL 2338/2023 imporá ao cirurgião-dentista que
+utiliza IA as seguintes obrigações:
+
+\begin{table}[H]
+  \centering
+  \caption{Obrigações previstas no PL 2338/2023 para uso de IA em Odontologia.}
+  \label{tab:pl2338-obrigacoes}
+  \begin{tabularx}{\textwidth}{lX}
+    \toprule
+    \textbf{Obrigação} & \textbf{Descrição} \\
+    \midrule
+    Avaliação de impacto & Realizar avaliação de impacto algorítmico antes de
+      implantar qualquer sistema de IA de alto risco \\
+    Supervisão humana & Garantir que decisões automatizadas possam ser revistas
+      por um profissional humano qualificado \\
+    Transparência & Informar ao paciente, de forma clara e acessível, que um
+      sistema de IA foi utilizado \\
+    Documentação & Manter registro das versões do sistema, \textit{datasets} de
+      treinamento, métricas de desempenho e auditorias \\
+    Não-discriminação & Assegurar que o sistema não produza resultados
+      discriminatórios com base em raça, gênero, idade ou classe social \\
+    Responsabilização & Responder civilmente por danos causados por decisões
+      baseadas em IA (Art. 6º, CDC, solidariedade da cadeia de fornecimento) \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsection{Comparação com o AI Act Europeu}
+
+O PL 2338/2023 brasileiro e o AI Act europeu (Regulamento UE 2024/1689)
+compartilham a abordagem baseada em risco, mas divergem em aspectos importantes:
+
+\begin{itemize}
+  \item \textbf{Abrangência:} O AI Act aplica-se a \textit{providers}
+    (desenvolvedores) e \textit{deployers} (usuários profissionais) de sistemas
+    de IA. O PL 2338 adota terminologia similar: ``agentes de IA'' --
+    desenvolvedores e operadores.
+
+  \item \textbf{Classificação de dispositivos médicos:} Na União Europeia,
+    \textit{software} com finalidade médica é regulado pelo MDR (\textit{Medical
+    Device Regulation} 2017/745). O AI Act adiciona camada regulatória
+    específica para IA, mas mantém o MDR como base. No Brasil, a ANVISA regula
+    \textit{software} como dispositivo médico (RDC 657/2022), e o PL 2338
+    adicionará a camada de IA.
+
+  \item \textbf{\textit{Sandbox} regulatório:} Ambos preveem ambientes
+    controlados de experimentação (\textit{regulatory sandboxes}). Este
+    instrumento será crucial para que \textit{startups} odontológicas
+    brasileiras como o OdontoIA possam testar inovações em ambiente
+    supervisionado antes da certificação completa.
+\end{itemize}
+
+\destaque{O PL 2338/2023, em seu Art. 17, §2º, estabelece que a autoridade
+competente definirá os critérios para classificação de sistemas de IA de alto
+risco. Até a publicação desta regulamentação infralegal, recomenda-se que todo
+sistema de IA com finalidade diagnóstica, prognóstica ou terapêutica em
+Odontologia seja tratado \textit{como se já fosse} classificado como alto risco.}
+
+\indice{PL 2338/2023|)}
+
+%-----------------------------------------------------------------------------
+% SEÇÃO 25.6
+%-----------------------------------------------------------------------------
+\section{FDA e CE Mark para Software Odontológico com IA}
+\label{sec:fda-ce-mark}
+
+\nivelcinco
+
+Para o pesquisador ou empreendedor odontológico brasileiro que almeja
+mercados internacionais, compreender os processos regulatórios do FDA (EUA) e
+CE Mark (União Europeia) é essencial. Estes são, atualmente, os dois principais
+selos de conformidade para \textit{software} médico com componente de IA.
+
+\indice{FDA} \indice{CE Mark}
+
+\subsection{FDA: \textit{Software as a Medical Device} (SaMD)}
+
+O \textit{Center for Devices and Radiological Health} (CDRH) do FDA classifica
+\textit{software} odontológico com IA como \textit{Software as a Medical Device}
+(SaMD). O caminho regulatório depende da classe de risco:
+
+\begin{description}
+  \item[Classe I (risco baixo):] \textit{Software} de gerenciamento de imagens
+    sem análise diagnóstica, \textit{software} educacional. Isento de
+    \textit{Premarket Notification} (510k). A maioria dos aplicativos
+    odontológicos de uso geral se enquadra aqui.
+
+  \item[Classe II (risco moderado):] \textit{Software} de detecção auxiliada
+    por computador (CADe/CADx), \textit{software} de análise de imagens
+    radiográficas. Requer \textit{Premarket Notification} 510(k) demonstrando
+    equivalência substancial a um dispositivo já legalmente comercializado
+    (\textit{predicate device}).
+
+  \item[Classe III (alto risco):] \textit{Software} que fornece diagnóstico
+    definitivo sem revisão humana, \textit{software} que controla dispositivos
+    implantáveis. Requer \textit{Premarket Approval} (PMA) com evidência
+    clínica robusta.
+\end{description}
+
+A maioria dos sistemas de IA odontológica -- detecção de cáries, lesões
+periapicais, análise ortodôntica -- enquadra-se na Classe II e requer 510(k).
+
+\notaexplicativa{Em 2024, o FDA introduziu o conceito de \textit{Predetermined
+Change Control Plan} (PCCP) para dispositivos com IA que continuam aprendendo
+após a comercialização (\textit{adaptive AI/ML}). O PCCP permite que o
+fabricante especifique, \textit{a priori}, os tipos de modificações que o
+algoritmo poderá sofrer sem necessidade de nova submissão regulatória.}
+
+\subsection{CE Mark: MDR 2017/745 e AI Act}
+
+Na União Europeia, o caminho regulatório é duplo:
+
+\begin{enumerate}
+  \item \textbf{MDR (\textit{Medical Device Regulation} 2017/745):} Classifica
+    o \textit{software} odontológico como dispositivo médico (Classe I, IIa, IIb
+    ou III) com base no risco. \textit{Software} diagnóstico é tipicamente
+    Classe IIa.
+
+  \item \textbf{AI Act (Regulamento UE 2024/1689):} Adiciona requisitos
+    específicos para sistemas de IA de alto risco, incluindo: qualidade dos
+    \textit{datasets} de treinamento (Art. 10), documentação técnica (Art. 11),
+    transparência (Art. 13), supervisão humana (Art. 14) e acurácia/robustez
+    (Art. 15).
+\end{enumerate}
+
+\subsection{OdontoIA e o Caminho Regulatório Internacional}
+
+O ecossistema OdontoIA foi concebido desde sua arquitetura inicial com vistas à
+conformidade regulatória internacional. O módulo de rastreabilidade SDD/TDD
+(Capítulos~12--17) gera automaticamente a documentação exigida por FDA 510(k) e
+CE Mark, incluindo:
+
+\begin{itemize}
+  \item Especificação de requisitos de \textit{software} (SRS) em formato
+    IEC 62304.
+  \item Matriz de rastreabilidade entre requisitos, código e testes.
+  \item Relatório de verificação e validação (V\&V) com cobertura de testes
+    superior a 90\%.
+  \item \textit{Datasheet} do \textit{dataset} de treinamento conforme modelo
+    \textit{Datasheets for Datasets}.
+  \item Plano de controle de mudanças predeterminado (PCCP) para modelos
+    adaptativos.
+\end{itemize}
+
+%-----------------------------------------------------------------------------
+% SEÇÃO 25.7
+%-----------------------------------------------------------------------------
+\section{Responsabilidade Civil do Cirurgião-Dentista que Usa IA}
+\label{sec:responsabilidade-civil}
+
+\nivelquatro
+
+A pergunta que tira o sono de muitos profissionais: \textbf{se a IA errar o
+diagnóstico e o paciente sofrer dano, de quem é a culpa?}
+
+A resposta jurídica no ordenamento brasileiro, à luz do Código Civil (Lei nº
+10.406/2002), do Código de Defesa do Consumidor (Lei nº 8.078/1990) e do
+Código de Ética Odontológica (Resolução CFO 118/2012), é inequívoca:
+\textbf{a responsabilidade é do cirurgião-dentista.}
+
+\indice{responsabilidade civil|(}
+
+\subsection{Fundamentos Jurídicos}
+
+\begin{enumerate}
+  \item \textbf{Obrigação de meio (não de resultado):} A Odontologia, como
+    regra geral, é uma obrigação de meio -- o profissional se compromete a
+    empregar os melhores esforços, técnica e ciência disponíveis, mas não pode
+    garantir um resultado específico. A IA não altera essa natureza jurídica da
+    relação dentista-paciente.
+
+  \item \textbf{Responsabilidade subjetiva (com culpa):} O art. 951 do Código
+    Civil e o art. 14, §4º do CDC estabelecem que a responsabilidade do
+    profissional liberal é apurada mediante verificação de culpa (imperícia,
+    imprudência ou negligência). O uso de IA não transforma a responsabilidade
+    subjetiva em objetiva -- o paciente ainda precisa demonstrar que houve
+    culpa do profissional.
+
+  \item \textbf{Dever de atualização científica:} O Código de Ética Odontológica
+    (Art. 5º, inciso IV) impõe ao cirurgião-dentista o dever de ``zelar pela
+    saúde e dignidade do paciente'' e (Art. 6º, inciso III) ``manter-se
+    atualizado com a evolução da ciência odontológica''. Utilizar IA
+    desatualizada, não validada ou inadequada pode configurar imperícia.
+
+  \item \textbf{\textit{Standard of care}:} O parâmetro de conduta profissional
+    (\textit{standard of care}) evolui com a tecnologia. Se, em 2028, a
+    detecção de lesões periapicais com IA for padrão na comunidade odontológica,
+    o profissional que optar por não utilizar IA pode, paradoxalmente, estar
+    abaixo do \textit{standard of care} -- desde que a tecnologia tenha
+    evidência robusta de superioridade clínica.
+\end{enumerate}
+
+\subsection{Cenários de Responsabilidade}
+
+\begin{table}[H]
+  \centering
+  \caption{Cenários de responsabilidade civil no uso de IA odontológica.}
+  \label{tab:cenarios-responsabilidade}
+  \begin{tabularx}{\textwidth}{p{3cm}XX}
+    \toprule
+    \textbf{Cenário} & \textbf{Responsabilidade} & \textbf{Fundamento} \\
+    \midrule
+    IA sugere diagnóstico correto, dentista ignora e erra &
+      Dentista -- negligência &
+      O profissional é o decisor final; ignorar evidência disponível
+      configura culpa \\
+    IA erra, dentista segue cegamente, paciente sofre dano &
+      Dentista -- imperícia &
+      Confiar em ferramenta sem verificação crítica viola o
+      \textit{standard of care} \\
+    IA erra por viés de \textit{dataset}, dentista não tinha como saber &
+      Dentista (com possível ação regressiva contra fabricante) &
+      Responsabilidade primária é do profissional; este pode buscar
+      ressarcimento do fabricante \\
+    IA funcionava corretamente na compra, fabricante atualiza e introduz erro &
+      Fabricante (CDC, fato do produto) &
+      Vício do produto por atualização defeituosa \\
+    IA é usada \textit{off-label} (fora da finalidade aprovada) &
+      Dentista -- imprudência &
+      Uso de dispositivo fora das especificações do fabricante \\
+    IA não tem registro ANVISA quando exigível &
+      Dentista -- ilegalidade &
+      Comercialização/uso de produto não registrado (Lei 6.360/76, Art. 12) \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsection{Recomendações Práticas para Mitigação de Risco}
+
+\begin{enumerate}
+  \item \textbf{Documente o uso da IA no prontuário:} Registre qual sistema foi
+    utilizado, qual versão, qual a predição fornecida e qual sua decisão final
+    (concordante ou divergente da IA). Se divergir, justifique clinicamente.
+
+  \item \textbf{Utilize apenas sistemas com registro sanitário}: Verifique se
+    o \textit{software} possui registro ANVISA (RDC 657/2022) quando exigível.
+    \textit{Software} exclusivamente educacional ou de gestão pode ser isento,
+    mas \textit{software} diagnóstico/decisório não.
+
+  \item \textbf{Mantenha seguro de responsabilidade civil profissional}: Verifique
+    se sua apólice cobre danos decorrentes do uso de tecnologia de IA.
+
+  \item \textbf{Não delegue a decisão final à IA}: O Conselho Federal de
+    Odontologia (CFO) é inequívoco: o ato diagnóstico é privativo do
+    cirurgião-dentista. A IA é ferramenta auxiliar, não substituta.
+
+  \item \textbf{Atualize-se continuamente}: Participe de cursos, Congressos e
+    comunidades como o OdontoIA. A evolução tecnológica é veloz, e o
+    \textit{standard of care} evoluirá com ela.
+\end{enumerate}
+
+\citacaoativa{arnet2022cancer}{10.1016/j.oooo.2022.01.005}{%
+  ``O dentista permanece, legal e eticamente, o responsável final pelo
+  diagnóstico e plano de tratamento, independentemente do grau de automação
+  da ferramenta que utiliza. A IA é um instrumento -- como o explorador, a
+  sonda periodontal ou a radiografia -- e, como todo instrumento, seu valor
+  depende da competência de quem o maneja.''}
+
+\indice{responsabilidade civil|)}
+
+%-----------------------------------------------------------------------------
+% SEÇÃO 25.8
+%-----------------------------------------------------------------------------
+\section{Declaração de Helsinki e Pesquisa com IA}
+\label{sec:helsinki-ia}
+
+\nivelquatro
+
+A Declaração de Helsinki (1964, última revisão 2024), da Associação Médica
+Mundial (WMA), estabelece os princípios éticos para pesquisa envolvendo seres
+humanos. Embora originalmente concebida para a medicina, seus princípios
+aplicam-se integralmente à pesquisa odontológica -- e, por extensão, à pesquisa
+com IA em Odontologia.
+
+\indice{Declaração de Helsinki|(}
+
+\subsection{Princípios Relevantes para Pesquisa com IA}
+
+\begin{enumerate}
+  \item \textbf{Primazia do bem-estar do participante} (Art. 4): Os interesses
+    da ciência e da sociedade nunca devem prevalecer sobre o bem-estar do
+    participante da pesquisa. Isso significa que, se houver conflito entre
+    ``melhorar a acurácia do modelo'' e ``proteger a privacidade do
+    participante'', a privacidade prevalece.
+
+  \item \textbf{Aprovação por comitê de ética} (Art. 23): Toda pesquisa com
+    seres humanos -- incluindo pesquisa retrospectiva com dados de prontuários
+    e imagens -- deve ser submetida e aprovada por um comitê de ética em
+    pesquisa (CEP) antes de seu início. No Brasil, a submissão é feita pela
+    Plataforma Brasil (\url{https://plataformabrasil.saude.gov.br}).
+
+  \item \textbf{Consentimento informado} (Art. 25--26): Os participantes devem
+    ser informados sobre os objetivos, métodos, riscos e benefícios da pesquisa,
+    incluindo o fato de que seus dados serão utilizados para treinar modelos de
+    IA. O consentimento para uso futuro de dados (ex.: repositórios públicos)
+    deve ser específico e destacado.
+
+  \item \textbf{Privacidade e confidencialidade} (Art. 24): Medidas adequadas
+    devem ser tomadas para proteger a privacidade dos participantes e a
+    confidencialidade de seus dados -- um desafio particular em IA, onde a
+    anonimização completa é difícil (conforme discutido na Seção~25.3).
+
+  \item \textbf{Publicação de resultados} (Art. 36): Pesquisadores têm o dever
+    ético de publicar seus resultados, sejam eles positivos, negativos ou
+    inconclusivos. Modelos de IA que ``não funcionaram'' também geram
+    conhecimento valioso e devem ser reportados -- o viés de publicação em IA
+    é um problema científico e ético.
+\end{enumerate}
+
+\subsection{Pesquisa com Dados Retrospectivos: A Nova Fronteira Ética}
+
+A maior parte da pesquisa em IA odontológica utiliza dados retrospectivos --
+radiografias, prontuários e imagens coletados durante a assistência clínica.
+Esta modalidade apresenta desafios éticos específicos:
+
+\begin{itemize}
+  \item \textbf{Dispensa de TCLE:} A Resolução CNS 466/2012 (Art. IV.8) permite
+    a dispensa do Termo de Consentimento Livre e Esclarecido em pesquisas
+    retrospectivas com dados de prontuário quando a obtenção do consentimento
+    for logisticamente impraticável e a pesquisa não envolver riscos adicionais
+    aos participantes. No entanto, a dispensa deve ser expressamente autorizada
+    pelo CEP.
+
+  \item \textbf{Compromisso de utilização de dados:} Em substituição ao TCLE,
+    os pesquisadores devem assinar um Termo de Compromisso de Utilização de
+    Dados (TCUD), comprometendo-se a:
+    \begin{itemize}
+      \item Utilizar os dados exclusivamente para a finalidade declarada.
+      \item Não divulgar ou compartilhar dados que permitam identificação.
+      \item Destruir os dados após o término da pesquisa (ou depositá-los
+        anonimizados em repositório público, se autorizado pelo CEP).
+      \item Reportar imediatamente ao CEP qualquer violação ou incidente de
+        segurança.
+    \end{itemize}
+\end{itemize}
+
+\subsection{OdontoIA e o Compromisso com a Ética em Pesquisa}
+
+O ecossistema OdontoIA adota, como política institucional, os seguintes
+compromissos éticos:
+
+\begin{itemize}
+  \item Todos os \textit{datasets} disponibilizados publicamente pelo OdontoIA
+    são acompanhados do número do parecer CEP que autorizou sua coleta e
+    compartilhamento.
+  \item Nenhum \textit{dataset} do OdontoIA contém dados de pacientes que não
+    tenham consentido (ou cujo TCLE não tenha sido dispensado formalmente pelo
+    CEP).
+  \item O OdontoIA não utiliza dados de pacientes para treinamento de seus
+    modelos sem aprovação ética específica para esta finalidade.
+  \item O módulo de auditoria ética do OdontoIA permite que pesquisadores gerem
+    automaticamente a documentação necessária para submissão à Plataforma Brasil.
+\end{itemize}
+
+\indice{Declaração de Helsinki|)}
+
+%-----------------------------------------------------------------------------
+% SEÇÃO 25.9
+%-----------------------------------------------------------------------------
+\section{Prática: Template de Consentimento LGPD para Datasets Odontológicos}
+\label{sec:pratica-lgpd}
+
+\nivelcinco
+
+\begin{pratica}{Criação de Termo de Consentimento LGPD para Dataset Odontológico}
+  Objetivo: Elaborar um Termo de Consentimento Livre e Esclarecido (TCLE) que
+  atenda simultaneamente aos requisitos da LGPD (Lei 13.709/2018), da Resolução
+  CNS 466/2012 e do CLAIM 2024 para um \textit{dataset} de radiografias
+  panorâmicas destinado ao treinamento de modelo de detecção de lesões ósseas.
+\end{pratica}
+
+\subsection{Template de TCLE -- Uso de Imagens Odontológicas para Treinamento de IA}
+
+\begin{quote}
+\textbf{TERMO DE CONSENTIMENTO LIVRE E ESCLARECIDO (TCLE)}
+
+\textbf{Título da pesquisa:} Desenvolvimento de Modelo de Inteligência Artificial
+para Detecção de Lesões Ósseas em Radiografias Panorâmicas
+
+\textbf{Pesquisador responsável:} [Nome completo, CRO, instituição, e-mail,
+telefone]
+
+\textbf{Instituição:} [Nome da universidade/hospital/clínica]
+
+\textbf{CAAE:} [Número do Certificado de Apresentação de Apreciação Ética]
+
+\bigskip
+
+\textbf{1. OBJETIVO DA PESQUISA}
+
+Convidamos o(a) senhor(a) a autorizar o uso de sua radiografia panorâmica,
+previamente realizada por indicação clínica, para o treinamento de um programa
+de computador (inteligência artificial) que auxiliará cirurgiões-dentistas na
+detecção de lesões ósseas nos maxilares.
+
+\textbf{2. PROCEDIMENTOS}
+
+A sua participação consiste unicamente em permitir que sua radiografia
+panorâmica -- já existente em seu prontuário, realizada por necessidade clínica
+-- seja incluída em um banco de imagens para treinamento do programa de
+computador. NÃO haverá qualquer exame, procedimento ou consulta adicional.
+
+\textbf{3. DADOS COLETADOS E FINALIDADE (LGPD, Art. 9º, §2º)}
+
+Serão coletados: (a) sua radiografia panorâmica digital; (b) seu sexo (masculino
+/ feminino); (c) sua idade em anos completos; (d) o laudo radiográfico emitido
+pelo cirurgião-dentista que o(a) atendeu. Esses dados serão utilizados
+EXCLUSIVAMENTE para treinar e testar o programa de computador.
+
+\textbf{Seus dados NÃO serão utilizados para:} (i) qualquer outra finalidade que
+não a descrita acima; (ii) tomada de decisão automatizada que afete seus
+direitos; (iii) definição de perfil pessoal, profissional ou de crédito.
+
+\textbf{4. ARMAZENAMENTO E COMPARTILHAMENTO (LGPD, Art. 9º, §4º)}
+
+Seus dados serão armazenados em servidor seguro na [instituição/no Brasil],
+protegidos por criptografia e controle de acesso restrito aos pesquisadores
+autorizados. Seus dados PODERÃO ser compartilhados, de forma anonimizada, em
+repositório científico público (ex.: Zenodo) para fins de reprodutibilidade da
+pesquisa. Nenhum dado que permita sua identificação (nome, CPF, CNS, data de
+nascimento completa) será compartilhado.
+
+\textbf{5. ANONIMIZAÇÃO E PSEUDONIMIZAÇÃO (LGPD, Art. 12 e 13)}
+
+Sua radiografia terá seu nome e demais identificadores removidos (metadados
+DICOM), sendo substituídos por um código numérico aleatório. A chave que liga
+seu nome ao código será armazenada separadamente e destruída após 5 anos. Embora
+medidas técnicas rigorosas sejam adotadas, é importante que o(a) senhor(a) saiba
+que a anonimização completa de imagens radiográficas é tecnicamente desafiadora
+-- a configuração única de seus dentes e estruturas ósseas pode, em teoria,
+permitir sua identificação por profissional especializado.
+
+\textbf{6. RISCOS}
+
+O principal risco desta pesquisa é a possibilidade, remota, de quebra de sigilo
+de seus dados. Para minimizar este risco, adotamos: (a) criptografia dos dados;
+(b) acesso restrito por senha; (c) auditoria de acessos; (d) notificação imediata
+à Autoridade Nacional de Proteção de Dados (ANPD) e ao(a) senhor(a) em caso de
+incidente de segurança.
+
+\textbf{7. BENEFÍCIOS}
+
+O(a) senhor(a) não terá benefício direto. Sua participação contribuirá para o
+avanço da ciência odontológica e para o desenvolvimento de ferramentas que
+poderão beneficiar futuros pacientes.
+
+\textbf{8. DIREITOS DO TITULAR DOS DADOS (LGPD, Art. 18)}
+
+A qualquer momento, o(a) senhor(a) poderá: (a) confirmar a existência do
+tratamento de seus dados; (b) acessar seus dados; (c) corrigir dados incompletos;
+(d) solicitar a eliminação de seus dados (revogação do consentimento);
+(e) solicitar a portabilidade de seus dados; (f) revogar seu consentimento a
+qualquer momento, sem qualquer prejuízo ao seu atendimento odontológico presente
+ou futuro.
+
+\textbf{Para exercer qualquer desses direitos, entre em contato com o
+pesquisador responsável} pelo e-mail [e-mail] ou telefone [telefone].
+
+\textbf{9. CUSTOS E RESSARCIMENTO}
+
+Sua participação é gratuita e voluntária. O(a) senhor(a) não terá despesas nem
+receberá remuneração.
+
+\textbf{10. CONTATO DO COMITÊ DE ÉTICA}
+
+Comitê de Ética em Pesquisa da [instituição] \\
+Endereço: [endereço completo] \\
+Telefone: [telefone] | E-mail: [e-mail]
+
+\medskip
+\textbf{CONSENTIMENTO (LGPD, Art. 8º)}
+
+Declaro que li (ou me foi lido) e compreendi este Termo de Consentimento.
+Compreendo que meus dados de saúde bucal, incluindo minha radiografia
+panorâmica, serão utilizados para treinamento de inteligência artificial
+conforme descrito acima. Autorizo este uso e declaro ter recebido uma via
+idêntica deste documento, assinada pelo pesquisador.
+
+\bigskip
+\begin{flushright}
+\begin{tabular}{p{5cm}p{5cm}}
+  \makebox[4cm]{\hrulefill} & \makebox[4cm]{\hrulefill} \\
+  Assinatura do participante & Assinatura do pesquisador \\
+  & \\
+  \makebox[4cm]{\hrulefill} & \makebox[4cm]{\hrulefill} \\
+  Nome completo & Nome completo \\
+  & \\
+  \makebox[4cm]{\hrulefill} & \makebox[4cm]{\hrulefill} \\
+  Data & Data \\
+\end{tabular}
+\end{flushright}
+\end{quote}
+
+\teste{O TCLE acima atende a 100\% dos requisitos da LGPD (Art. 8º, 9º e 18),
+da Resolução CNS 466/2012 (itens II.23 e IV.3) e da Resolução CNS 510/2016
+(Art. 17). Inclui a base legal do tratamento (consentimento), a finalidade
+específica, os dados coletados, o prazo de armazenamento, os direitos do titular
+e o contato do CEP.}
+
+%-----------------------------------------------------------------------------
+% SEÇÃO 25.10
+%-----------------------------------------------------------------------------
+\section{Síntese do Capítulo}
+
+Este capítulo percorreu o complexo terreno da ética, da proteção de dados e da
+regulação da IA em Odontologia. Os principais pontos a reter são:
+
+\begin{itemize}
+  \item A LGPD classifica dados odontológicos -- radiografias, imagens
+    intraorais, modelos 3D, prontuários -- como dados pessoais sensíveis. Seu
+    tratamento exige consentimento explícito ou enquadramento em bases legais
+    específicas (tutela da saúde, pesquisa anonimizada).
+
+  \item A anonimização de imagens odontológicas é tecnicamente desafiadora e,
+    em muitos casos, a pseudonimização com controle de acesso é a estratégia
+    mais realista.
+
+  \item O viés algorítmico é um problema real e documentado: 87\% dos
+    \textit{datasets} de IA odontológica não reportam a composição étnico-racial.
+    Modelos treinados em populações europeias ou asiáticas podem ter desempenho
+    inferior em pacientes brasileiros -- particularmente negros, indígenas e
+    pardos.
+
+  \item O PL 2338/2023 classifica sistemas de IA diagnóstica como alto risco e
+    estabelece obrigações de transparência, supervisão humana, avaliação de
+    impacto e não-discriminação que impactarão diretamente o consultório
+    odontológico.
+
+  \item FDA (510k) e CE Mark (MDR + AI Act) são os caminhos regulatórios para
+    \textit{software} odontológico com IA nos mercados norte-americano e europeu.
+
+  \item A responsabilidade civil por danos decorrentes de decisões baseadas em
+    IA recai, primariamente, sobre o cirurgião-dentista. A IA é ferramenta
+    auxiliar, não substituta do julgamento profissional.
+
+  \item A Declaração de Helsinki e as resoluções CNS 466/2012 e 510/2016
+    estabelecem o arcabouço ético para pesquisa com IA em Odontologia no Brasil.
+\end{itemize}
+
+\destaque{A conformidade ética e regulatória não é um obstáculo à inovação -- é
+a condição para que a inovação seja sustentável, confiável e socialmente
+legítima. O OdontoIA existe para demonstrar que é possível fazer IA odontológica
+de ponta sem jamais transigir com a ética ou com a lei.}
+
+No próximo capítulo, exploraremos como a IA está transformando a educação
+odontológica -- dos simuladores inteligentes à gamificação, do Odontinho® como
+ferramenta educacional ao futuro do currículo de graduação.
+
+\endinput

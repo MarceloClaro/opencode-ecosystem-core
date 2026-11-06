@@ -15,6 +15,14 @@ concluída. O resultado de execução continua exigindo recibo próprio.
 
 ## Registro e ativação pelo primário
 
+<!-- svg-presentation:diagram-899949e238720352 -->
+<img src="architecture/animated/diagram-899949e238720352.svg" alt="Registro e ativação pelo primário — diagrama estático" width="100%">
+
+<sub>[GIF](architecture/animated/diagram-899949e238720352.gif) · [PNG](architecture/animated/diagram-899949e238720352.png) · [Fonte Mermaid](architecture/animated/diagram-899949e238720352.mmd)</sub>
+
+<details>
+<summary>Fonte Mermaid (auditoria)</summary>
+
 ```mermaid
 flowchart TD
   U[Usuário ou agente executor] --> S[Spec e testes do perfil]
@@ -39,6 +47,8 @@ flowchart TD
   F --> K[Memória metacognitiva]
   B --> K
 ```
+
+</details>
 
 Setas representam o contrato do percurso. A existência de uma seta não comprova
 que cada executor foi autenticado ou que todas as tarefas foram executadas.
@@ -82,6 +92,14 @@ Os 20 pedidos constam em `REQUESTED_PLUGIN_IDS`, no
 [serviço canônico](../integrations/scientific_plugins.py). Não foram executados
 hooks dos pacotes ou copiadas credenciais durante a importação.
 
+<!-- svg-presentation:diagram-b3a6ae7a9d2b3d4d -->
+<img src="architecture/animated/diagram-b3a6ae7a9d2b3d4d.svg" alt="Vinte plugins, um registro de capacidades — diagrama estático" width="100%">
+
+<sub>[GIF](architecture/animated/diagram-b3a6ae7a9d2b3d4d.gif) · [PNG](architecture/animated/diagram-b3a6ae7a9d2b3d4d.png) · [Fonte Mermaid](architecture/animated/diagram-b3a6ae7a9d2b3d4d.mmd)</sub>
+
+<details>
+<summary>Fonte Mermaid (auditoria)</summary>
+
 ```mermaid
 flowchart LR
   P[Primário] --> S[ScientificPluginService]
@@ -96,6 +114,8 @@ flowchart LR
   REC --> S
   S --> MEM[MetaBus: observação sem promoção de confiança]
 ```
+
+</details>
 
 Importação, autenticação e execução são estados diferentes. SciGrant exige
 intenção de redação de projeto; sua integração não dispara o workflow de
@@ -141,6 +161,14 @@ linguagens diferentes de Python.
 
 ## CI independente da cobrança GitHub
 
+<!-- svg-presentation:diagram-9a0642ee46b2aafb -->
+<img src="architecture/animated/diagram-9a0642ee46b2aafb.svg" alt="CI independente da cobrança GitHub — diagrama estático" width="100%">
+
+<sub>[GIF](architecture/animated/diagram-9a0642ee46b2aafb.gif) · [PNG](architecture/animated/diagram-9a0642ee46b2aafb.png) · [Fonte Mermaid](architecture/animated/diagram-9a0642ee46b2aafb.mmd)</sub>
+
+<details>
+<summary>Fonte Mermaid (auditoria)</summary>
+
 ```mermaid
 flowchart TD
   U[CLI ci-local / MCP ecosystem_local_ci] --> P[MarceloClaroOrchestrator]
@@ -158,6 +186,8 @@ flowchart TD
   OK --> HIST[Histórico separado da compatibilidade atual]
   B --> HIST
 ```
+
+</details>
 
 ```bash
 .venv/bin/python -m marceloclaro.cli ci-local iniciar --profile scientific

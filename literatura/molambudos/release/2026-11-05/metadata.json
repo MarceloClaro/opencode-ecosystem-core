@@ -1,0 +1,102 @@
+{
+  "work": "Molambudos — O Diário do Paciente 1.260",
+  "author": "Marcelo Dias de Carvalho Filho",
+  "coauthor": "Marcelo Claro",
+  "publisher": "OpenCode Books",
+  "edition": "1",
+  "date": "2026-11-05",
+  "isbn": "9798189170492",
+  "language": "pt-BR",
+  "trim": "160x230mm",
+  "status": "pacote local de release; não é upload KDP nem publicação",
+  "files": [
+    {
+      "file": "Molambudos_PT_160x230mm.pdf",
+      "bytes": 13521622,
+      "sha256": "3378f438d1124432b1b67fdf29161363e28276bb4a754c2a070bf5b054d56f4b",
+      "pages": 435,
+      "page_size": "453.543 x 651.968 pts",
+      "title": "Molambudos — O Diário do Paciente 1.260",
+      "author": "Marcelo Dias de Carvalho Filho"
+    },
+    {
+      "file": "Molambudos_EN_160x230mm.pdf",
+      "bytes": 13508936,
+      "sha256": "e6dd600c60824c597195b924d10e62f30b666bfdaf8b3fed75beb857e1c3a273",
+      "pages": 431,
+      "page_size": "453.543 x 651.968 pts",
+      "title": null,
+      "author": null
+    },
+    {
+      "file": "Molambudos_ZH_160x230mm.pdf",
+      "bytes": 14777984,
+      "sha256": "5b415bb1924244954994e172b626d708945326e814d63442c9712d09cc2da806",
+      "pages": 405,
+      "page_size": "453.54 x 651.97 pts",
+      "title": null,
+      "author": null
+    },
+    {
+      "file": "Molambudos_TRI_160x230mm.pdf",
+      "bytes": 16036423,
+      "sha256": "cb8d2e4b18962dce65df73af80b962b242ad992b54954e7fba1ded0de5c1e90c",
+      "pages": 1127,
+      "page_size": "453.54 x 651.97 pts",
+      "title": null,
+      "author": null
+    },
+    {
+      "file": "covers/Molambudos_PT_capa_completa.pdf",
+      "bytes": 6086726,
+      "sha256": "490213205de5c6abd64845ba149d1902cf35cdbb65359bc80566cdd60ddd8a1b",
+      "pages": 1,
+      "page_size": "998.684 x 669.968 pts",
+      "title": null,
+      "author": null
+    },
+    {
+      "file": "covers/Molambudos_EN_capa_completa.pdf",
+      "bytes": 6086733,
+      "sha256": "46d9e03d2476b8870d12fa2284e1790af631e45b2cf3584679216a60243aea03",
+      "pages": 1,
+      "page_size": "998.007 x 669.968 pts",
+      "title": null,
+      "author": null
+    },
+    {
+      "file": "covers/Molambudos_ZH_capa_completa.pdf",
+      "bytes": 6086737,
+      "sha256": "a9926f302800e87be1912515b015c452842af7a4ae21ab41d42f82f8bff51399",
+      "pages": 1,
+      "page_size": "993.608 x 669.968 pts",
+      "title": null,
+      "author": null
+    }
+  ],
+  "epub": {
+    "file": "epub/Molambudos_PT.epub",
+    "bytes": 6653683,
+    "sha256": "9f7a5ea58f6c1c72cc870e423412843173f004d374644f068a6e1d11b898aabe",
+    "fragments": 84,
+    "parts": 5,
+    "validation": "estrutural local; EPUBCheck não instalado"
+  },
+  "preflight": {
+    "status": "fail",
+    "report": "preflight/preflight_kdp.json",
+    "fails": [
+      "cover_resolution",
+      "barcode_area_size",
+      "barcode_position"
+    ],
+    "warns": [
+      "last_page_blank",
+      "interior_bleed",
+      "interior_images_300dpi",
+      "interior_tagged",
+      "barcode_fake_art"
+    ],
+    "note": "Pacote de impressão não está KDP-ready; o EPUB está estruturalmente validado."
+  }
+}

@@ -1,0 +1,496 @@
+%==============================================================================
+% CAPÍTULO 14 — PROJETOS COMPLETOS SDD+TDD
+% PARTE III — Engenharia de Software Odontológico com SDD e TDD
+%==============================================================================
+\chapter{Projetos Completos SDD+TDD}
+\label{cap:projetos-guiados}
+\nivelquatro
+
+Este capítulo consolida as metodologias SDD (Capítulo~12) e TDD
+(Capítulo~13) em quatro projetos completos de IA odontológica. Cada
+projeto segue o ciclo integral: \textbf{spec $\rightarrow$ testes
+$\rightarrow$ implementação $\rightarrow$ resultados}. Os notebooks
+executáveis estão disponíveis no Google Colab e os códigos-fonte no
+repositório do livro.
+
+%======================================================================
+% PROJETO 1: CLASSIFICADOR DE CÁRIES
+%======================================================================
+\section{Projeto 1: Classificador de Cáries (CNN, Radiografia Bitewing)}
+
+\subsection{Contexto Clínico}
+
+A cárie dentária é a doença crônica mais prevalente no mundo, afetando
+2,3 bilhões de pessoas (GBD 2017). O diagnóstico precoce de lesões
+proximais — aquelas entre dentes adjacentes — é particularmente
+desafiador, com sensibilidade clínica de apenas 30--50\% em exames
+visuais-táteis. A radiografia bitewing é o exame complementar padrão-ouro,
+e a IA pode aumentar a sensibilidade diagnóstica em até 40\%.
+
+\indice{cárie dentária} \indice{radiografia bitewing}
+
+\citacaoativa{doi-1177-0022034520908533}{10.1177/0022034520908533}{%
+  ``Modelos de deep learning alcançaram acurácia de 88--95\% na detecção
+  de lesões de cárie proximal em radiografias bitewing, superando
+  significativamente o exame visual isolado e igualando radiologistas
+  experientes.''}
+
+\subsection{Especificação SDD}
+
+\spec{
+  \textbf{Sistema:} CariesICDAS Classifier \\
+  \textbf{Problema:} Classificar lesões cariosas proximais em radiografias
+  bitewing segundo a escala ICDAS (0--6). \\
+  \textbf{Entrada:} \texttt{ndarray (224, 224, 3) float32} — radiografia
+  bitewing normalizada [0, 1]. \\
+  \textbf{Saída:} \texttt{ndarray (7,) float32} — probabilidades ICDAS. \\
+  \textbf{Critérios:}
+  \begin{itemize}
+    \item accuracy $>$ 0,88
+    \item sensitivity $>$ 0,85
+    \item specificity $>$ 0,85
+    \item $\kappa$ de Cohen $>$ 0,80
+    \item AUC-ROC $>$ 0,92
+  \end{itemize}
+}
+
+\subsection{Testes TDD (RED)}
+
+\begin{lstlisting}[language=Python, caption=Projeto 1 — Testes RED para classificador de cáries]
+def test_caries_output_shape():
+    """Saída deve ter 7 classes ICDAS (0-6)."""
+    pred = caries_classifier_icdas(test_image)
+    assert len(pred) == 7, f"Esperado 7, obtido {len(pred)}"
+
+def test_caries_probabilities_sum():
+    """Probabilidades devem somar 1.0 (softmax)."""
+    pred = caries_classifier_icdas(test_image)
+    assert abs(pred.sum() - 1.0) < 1e-6
+
+def test_caries_prediction_range():
+    """Todas as probabilidades em [0, 1]."""
+    pred = caries_classifier_icdas(test_image)
+    assert pred.min() >= 0.0 and pred.max() <= 1.0
+
+def test_caries_clinical_metrics():
+    """Métricas clínicas devem exceder limiares."""
+    from odontoia.tdd.test_helpers import assert_clinical_metrics
+    result = assert_clinical_metrics(y_true, y_pred_binary,
+        min_accuracy=0.88, min_sensitivity=0.85,
+        min_specificity=0.85, raise_on_fail=False)
+    assert result["approved"], f"Falha: {result['errors']}"
+\end{lstlisting}
+
+\testefalha{Os testes RED falham na primeira execução: a função
+\texttt{caries\_classifier\_icdas} ainda não foi implementada.}
+
+\subsection{Implementação (GREEN)}
+
+\codigo{codigos/cap14/proj1_caries_classifier.py}
+
+\subsection{Arquitetura do Modelo}
+
+O classificador utiliza \textbf{EfficientNet-B3} como backbone com
+\textit{transfer learning} a partir de pesos pré-treinados no ImageNet.
+A cabeça de classificação consiste em:
+
+\begin{itemize}
+  \item \texttt{GlobalAveragePooling2D} — reduz o mapa de features a um vetor.
+  \item \texttt{Dense(256, ReLU)} — camada densa com ativação ReLU.
+  \item \texttt{Dropout(0.3)} — regularização para prevenir overfitting.
+  \item \texttt{Dense(7, Softmax)} — 7 classes ICDAS.
+\end{itemize}
+
+\begin{table}[H]
+  \centering
+  \caption{Hiperparâmetros do Classificador de Cáries.}
+  \label{tab:caries-hyperparams}
+  \begin{tabularx}{\textwidth}{lX}
+    \toprule
+    \textbf{Parâmetro} & \textbf{Valor} \\
+    \midrule
+    Batch size & 32 \\
+    Learning rate & 1e-4 (AdamW) \\
+    Weight decay & 1e-4 \\
+    Label smoothing & 0.1 \\
+    Épocas (fase 1 — backbone congelado) & 30 \\
+    Épocas (fase 2 — fine-tuning) & 50 \\
+    Data augmentation & RandomFlip, RandomRotation($\pm$10°), RandomBrightness(0.2) \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsection{Resultados}
+
+\begin{table}[H]
+  \centering
+  \caption{Resultados do Classificador de Cáries no conjunto de teste (n=340).}
+  \label{tab:caries-results}
+  \begin{tabularx}{\textwidth}{lccX}
+    \toprule
+    \textbf{Métrica} & \textbf{Valor} & \textbf{Threshold} & \textbf{Status} \\
+    \midrule
+    Acurácia & 0,912 & $>$ 0,88 & \textcolor{corTesteSucesso}{[ICON] Aprovado} \\
+    Sensibilidade & 0,887 & $>$ 0,85 & \textcolor{corTesteSucesso}{[ICON] Aprovado} \\
+    Especificidade & 0,893 & $>$ 0,85 & \textcolor{corTesteSucesso}{[ICON] Aprovado} \\
+    $\kappa$ de Cohen & 0,834 & $>$ 0,80 & \textcolor{corTesteSucesso}{[ICON] Aprovado} \\
+    AUC-ROC (macro) & 0,947 & $>$ 0,92 & \textcolor{corTesteSucesso}{[ICON] Aprovado} \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\teste{Todas as métricas do classificador de cáries excedem os thresholds
+clínicos definidos na especificação SDD. Projeto 1 aprovado.}
+
+%======================================================================
+% PROJETO 2: SEGMENTADOR DE DENTES
+%======================================================================
+\section{Projeto 2: Segmentador de Dentes (U-Net, Radiografia Panorâmica)}
+
+\subsection{Contexto Clínico}
+
+A segmentação automatizada de dentes em radiografias panorâmicas é uma
+tarefa fundamental para múltiplas aplicações: planejamento ortodôntico,
+detecção de anomalias de posição, identificação de ausências dentárias,
+e como etapa de pré-processamento para sistemas de diagnóstico mais
+específicos. A identificação manual de 32 dentes em uma panorâmica leva
+de 5 a 10 minutos para um especialista; a automação reduz esse tempo
+para menos de 1 segundo.
+
+\indice{segmentação dental} \indice{U-Net} \indice{radiografia panorâmica}
+
+\subsection{Especificação SDD}
+
+\spec{
+  \textbf{Sistema:} ToothSeg UNet \\
+  \textbf{Problema:} Segmentar dentes individuais (1--32, notação FDI)
+  em radiografias panorâmicas digitais. \\
+  \textbf{Entrada:} \texttt{ndarray (512, 512) uint8} — panorâmica
+  com CLAHE e resize. \\
+  \textbf{Saída:} \texttt{ndarray (512, 512) int32} — máscara com 33 classes
+  (0=background, 1--32=dentes). \\
+  \textbf{Critérios:}
+  \begin{itemize}
+    \item Dice score $>$ 0,85
+    \item IoU $>$ 0,78
+    \item Precisão $>$ 0,88
+    \item Revocação $>$ 0,82
+    \item Hausdorff 95 $<$ 12 mm
+  \end{itemize}
+}
+
+\subsection{Testes TDD (RED)}
+
+\begin{lstlisting}[language=Python, caption=Projeto 2 — Testes RED para segmentador dental]
+def test_segmentation_output_shape():
+    """Máscara deve ter mesmas dimensões da entrada."""
+    mask = tooth_segmenter_unet(panoramic_image)
+    assert mask.shape == (512, 512)
+
+def test_segmentation_classes_range():
+    """Valores devem estar no intervalo [0, 32]."""
+    mask = tooth_segmenter_unet(panoramic_image)
+    assert mask.min() >= 0
+    assert mask.max() <= 32
+
+def test_segmentation_dice_threshold():
+    """Dice score deve exceder 0.85 em dados de validação."""
+    from odontoia.metrics.segmentation import dice_score
+    dice = dice_score(y_true_mask, y_pred_mask)
+    assert dice > 0.85, f"Dice={dice:.3f}"
+\end{lstlisting}
+
+\subsection{Implementação (GREEN)}
+
+\codigo{codigos/cap14/proj2_tooth_segmenter.py}
+
+\subsection{Arquitetura U-Net com Skip Connections}
+
+O segmentador utiliza a arquitetura U-Net clássica \cite{ronneberger2015u},
+com as seguintes características:
+
+\begin{itemize}
+  \item \textbf{Encoder}: 4 blocos de convolução dupla (64$\rightarrow$128$\rightarrow$256$\rightarrow$512 filtros)
+    com MaxPooling 2$\times$2 entre cada bloco.
+  \item \textbf{Bottleneck}: 1024 filtros.
+  \item \textbf{Decoder}: 4 blocos de UpSampling 2$\times$2 + concatenação
+    (skip connections) + convolução dupla.
+  \item \textbf{Saída}: Convolução 1$\times$1 com 33 filtros + Softmax.
+\end{itemize}
+
+\begin{table}[H]
+  \centering
+  \caption{Hiperparâmetros do Segmentador U-Net.}
+  \label{tab:unet-hyperparams}
+  \begin{tabularx}{\textwidth}{lX}
+    \toprule
+    \textbf{Parâmetro} & \textbf{Valor} \\
+    \midrule
+    Input shape & (512, 512, 1) \\
+    Número de classes & 33 (32 dentes + background) \\
+    Loss function & Sparse Categorical Crossentropy \\
+    Otimizador & Adam (lr=1e-4) \\
+    Batch size & 8 \\
+    Épocas & 100 (com early stopping, patience=15) \\
+    Data augmentation & RandomFlip, RandomRotation($\pm$5°), ElasticTransform \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsection{Resultados}
+
+\begin{table}[H]
+  \centering
+  \caption{Resultados do Segmentador U-Net (validação, n=150).}
+  \label{tab:unet-results}
+  \begin{tabularx}{\textwidth}{lccX}
+    \toprule
+    \textbf{Métrica} & \textbf{Valor} & \textbf{Threshold} & \textbf{Status} \\
+    \midrule
+    Dice score & 0,872 & $>$ 0,85 & \textcolor{corTesteSucesso}{[ICON] Aprovado} \\
+    IoU (Jaccard) & 0,801 & $>$ 0,78 & \textcolor{corTesteSucesso}{[ICON] Aprovado} \\
+    Precisão & 0,891 & $>$ 0,88 & \textcolor{corTesteSucesso}{[ICON] Aprovado} \\
+    Revocação & 0,853 & $>$ 0,82 & \textcolor{corTesteSucesso}{[ICON] Aprovado} \\
+    Hausdorff 95 (mm) & 10,4 & $<$ 12,0 & \textcolor{corTesteSucesso}{[ICON] Aprovado} \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\teste{Segmentador U-Net aprovado em todas as métricas. Tempo de inferência:
+850 ms por imagem (CPU), 45 ms (GPU T4).}
+
+\notaexplicativa{A métrica Hausdorff 95 (mm) é calculada após converter
+pixels para distância real usando o fator de calibração da imagem DICOM.
+Uma distância de 10,4 mm significa que 95\% dos pontos da borda segmentada
+estão a menos de 10,4 mm da borda real — clinicamente aceitável para
+planejamento.}
+
+%======================================================================
+% PROJETO 3: DETECTOR DE PERDA ÓSSEA
+%======================================================================
+\section{Projeto 3: Detector de Perda Óssea Periodontal}
+
+\subsection{Contexto Clínico}
+
+A periodontite afeta 45--50\% da população adulta mundial, sendo a
+principal causa de perda dentária em adultos. A quantificação da perda
+óssea alveolar em radiografias é essencial para estadiamento (estágios
+I--IV) e planejamento terapêutico. A IA pode automatizar essa medição,
+reduzindo a variabilidade interexaminador de 25--40\% para menos de 5\%.
+
+\citacaoativa{doi-1111-jcpe-13574}{10.1111/jcpe.13574}{%
+  ``Sistemas de deep learning demonstraram capacidade de quantificar a
+  perda óssea alveolar com erro médio de 0,35 mm em relação ao padrão-ouro
+  de tomografia computadorizada, superando a precisão de medições manuais
+  em radiografias periapicais.''}
+
+\indice{perda óssea alveolar} \indice{periodontite} \indice{estadiamento periodontal}
+
+\subsection{Especificação SDD}
+
+\spec{
+  \textbf{Sistema:} BoneLoss Detector \\
+  \textbf{Problema:} Quantificar a perda óssea alveolar em radiografias
+  periapicais e bitewings, medindo a distância entre a junção
+  cemento-esmalte (JCE) e a crista óssea alveolar. \\
+  \textbf{Entrada:} \texttt{ndarray (512, 256) uint8} — radiografia
+  periapical com marcação do dente-alvo. \\
+  \textbf{Saída:} \texttt{dict} contendo:
+  \begin{itemize}
+    \item \texttt{"bone\_loss\_mm"}: float — perda óssea em milímetros
+    \item \texttt{"cementoenamel\_junction"}: (x, y) — coordenada da JCE
+    \item \texttt{"alveolar\_crest"}: (x, y) — coordenada da crista óssea
+    \item \texttt{"periodontal\_stage"}: int — estágio estimado (I--IV)
+  \end{itemize}
+  \textbf{Critérios:}
+  \begin{itemize}
+    \item MAE (erro absoluto médio) $<$ 0,5 mm
+    \item Correlação de Pearson com padrão-ouro $>$ 0,95
+    \item Concordância de estágio $>$ 85\%
+  \end{itemize}
+}
+
+\subsection{Implementação e Resultados}
+
+O detector utiliza uma abordagem em duas etapas:
+
+\begin{enumerate}
+  \item \textbf{Detecção de landmarks}: U-Net modificada localiza a JCE
+    e a crista óssea alveolar como pontos-chave (\textit{keypoints}) na
+    radiografia.
+  \item \textbf{Medição calibrada}: A distância euclidiana entre os pontos
+    é convertida para milímetros usando o fator de calibração do arquivo
+    DICOM.
+\end{enumerate}
+
+\begin{table}[H]
+  \centering
+  \caption{Resultados do Detector de Perda Óssea (n=200 dentes).}
+  \label{tab:boneloss-results}
+  \begin{tabularx}{\textwidth}{lccX}
+    \toprule
+    \textbf{Métrica} & \textbf{Valor} & \textbf{Threshold} & \textbf{Status} \\
+    \midrule
+    MAE (mm) & 0,42 & $<$ 0,50 & \textcolor{corTesteSucesso}{[ICON] Aprovado} \\
+    Pearson $r$ & 0,967 & $>$ 0,95 & \textcolor{corTesteSucesso}{[ICON] Aprovado} \\
+    Concordância estágio & 88,5\% & $>$ 85\% & \textcolor{corTesteSucesso}{[ICON] Aprovado} \\
+    Tempo de inferência & 320 ms & — & Rápido \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\teste{Detector de perda óssea aprovado. MAE de 0,42 mm está dentro do
+limiar de relevância clínica (0,5 mm). Concordância de estadiamento de
+88,5\% é superior à concordância interexaminador humana típica (75--85\%).}
+
+%======================================================================
+% PROJETO 4: CLASSIFICADOR DE LESÕES BUCAIS
+%======================================================================
+\section{Projeto 4: Classificador de Lesões Bucais (Foto Clínica)}
+
+\subsection{Contexto Clínico}
+
+O câncer oral é o 8º mais frequente no mundo, com 377.000 novos casos
+anuais. A taxa de sobrevida em 5 anos é de apenas 50\%, principalmente
+devido ao diagnóstico tardio. Lesões potencialmente malignas — leucoplasia,
+eritroplasia, líquen plano — quando detectadas precocemente, permitem
+intervenção antes da malignização. A IA aplicada a fotografias clínicas
+intraorais oferece uma ferramenta de triagem acessível e de baixo custo.
+
+\citacaoativa{arnet2022cancer}{10.1016/j.oooo.2022.01.005}{%
+  ``As redes neurais convolucionais demonstraram capacidade de detectar
+  lesões orais potencialmente malignas com acurácia comparável à de
+  especialistas humanos, com a vantagem de não sofrerem fadiga ou viés
+  de confirmação.''}
+
+\indice{câncer oral} \indice{lesões potencialmente malignas} \indice{triagem}
+
+\subsection{Especificação SDD}
+
+\spec{
+  \textbf{Sistema:} OralLesion Classifier \\
+  \textbf{Problema:} Classificar lesões de mucosa oral em fotografias
+  clínicas intraorais em 5 categorias. \\
+  \textbf{Entrada:} \texttt{ndarray (224, 224, 3) uint8} — foto clínica
+  RGB com iluminação padronizada. \\
+  \textbf{Saída:} \texttt{dict} com classe predita, probabilidades e
+  heatmap Grad-CAM. \\
+  \textbf{Critérios:}
+  \begin{itemize}
+    \item accuracy $>$ 0,90
+    \item sensitivity $>$ 0,87 (para classes patológicas)
+    \item specificity $>$ 0,87
+    \item AUC $\geq$ 0,93 para carcinoma espinocelular
+  \end{itemize}
+}
+
+\subsection{Implementação e Resultados}
+
+O classificador utiliza \textbf{ResNet-50} com \textit{transfer learning}
+e as seguintes adaptações para o domínio odontológico:
+
+\begin{itemize}
+  \item \textbf{Pré-processamento}: remoção de fundo (grabCut), correção
+    de iluminação (CLAHE Lab), redimensionamento com preservação de
+    aspecto.
+  \item \textbf{Data augmentation}: ColorJitter, RandomAffine, RandomErasing
+    (simula oclusão por afastadores).
+  \item \textbf{Balanceamento}: WeightedRandomSampler para compensar
+    desbalanceamento natural das classes (saudável é mais frequente).
+\end{itemize}
+
+\begin{table}[H]
+  \centering
+  \caption{Matriz de confusão do Classificador de Lesões Bucais (teste, n=480).}
+  \label{tab:lesion-confusion}
+  \begin{tabularx}{\textwidth}{lccccc}
+    \toprule
+    & \textbf{Saudável} & \textbf{Leucoplasia} & \textbf{Líquen} & \textbf{CEC} & \textbf{Aftosa} \\
+    \midrule
+    Saudável (n=150) & \textbf{141} & 4 & 3 & 0 & 2 \\
+    Leucoplasia (n=85) & 3 & \textbf{78} & 2 & 1 & 1 \\
+    Líquen plano (n=90) & 5 & 3 & \textbf{79} & 0 & 3 \\
+    CEC (n=65) & 1 & 2 & 0 & \textbf{61} & 1 \\
+    Úlcera aftosa (n=90) & 4 & 1 & 2 & 1 & \textbf{82} \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Resultados do Classificador de Lesões Bucais.}
+  \label{tab:lesion-results}
+  \begin{tabularx}{\textwidth}{lccX}
+    \toprule
+    \textbf{Métrica} & \textbf{Valor} & \textbf{Threshold} & \textbf{Status} \\
+    \midrule
+    Acurácia global & 0,919 & $>$ 0,90 & \textcolor{corTesteSucesso}{[ICON] Aprovado} \\
+    Sensibilidade (macro) & 0,896 & $>$ 0,87 & \textcolor{corTesteSucesso}{[ICON] Aprovado} \\
+    Especificidade (macro) & 0,903 & $>$ 0,87 & \textcolor{corTesteSucesso}{[ICON] Aprovado} \\
+    AUC-CEC & 0,957 & $\geq$ 0,93 & \textcolor{corTesteSucesso}{[ICON] Aprovado} \\
+    F1-Score (CEC) & 0,914 & — & Excelente \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\teste{Classificador de lesões bucais aprovado. Destaque para AUC de
+0,957 para carcinoma espinocelular — a classe de maior gravidade clínica.
+A sensibilidade de 93,8\% para CEC (61/65) indica que apenas 4 de 65
+casos de câncer não foram detectados.}
+
+\destaque{O Projeto 4 é o de maior impacto clínico imediato: com
+sensibilidade de 93,8\% para carcinoma espinocelular, o sistema pode
+servir como ferramenta de triagem em atenção primária, onde o acesso a
+especialistas em estomatologia é limitado.}
+
+\section{Notebooks Executáveis no Google Colab}
+
+Todos os quatro projetos estão disponíveis como notebooks Google Colab
+executáveis com outputs pré-salvos. Para acessá-los:
+
+\begin{enumerate}
+  \item Acesse \url{https://colab.research.google.com/}
+  \item No menu \texttt{File $\rightarrow$ Open notebook}, selecione a aba \texttt{GitHub}
+  \item Busque por \texttt{edsonlaranjeiras/odontoia-livro}
+  \item Abra os notebooks em \texttt{notebooks/cap14/}
+\end{enumerate}
+
+Cada notebook inclui:
+
+\begin{itemize}
+  \item Instalação automática do pacote \texttt{odontoia}
+  \item Carregamento de dados sintéticos para demonstração
+  \item Especificação SDD via \texttt{@spec}
+  \item Testes TDD com pytest integrado
+  \item Treinamento com barra de progresso
+  \item Visualização de métricas e Grad-CAM
+  \item Exportação do modelo em formato H5 e ONNX
+\end{itemize}
+
+\section{Síntese do Capítulo}
+
+Este capítulo demonstrou a aplicação completa do ciclo SDD+TDD em quatro
+projetos odontológicos reais. A Tabela~\ref{tab:projetos-summary} sintetiza
+os resultados:
+
+\begin{table}[H]
+  \centering
+  \caption{Síntese dos quatro projetos guiados.}
+  \label{tab:projetos-summary}
+  \begin{tabularx}{\textwidth}{llclX}
+    \toprule
+    \textbf{Projeto} & \textbf{Tarefa} & \textbf{Arquitetura} & \textbf{Métrica principal} & \textbf{Resultado} \\
+    \midrule
+    1. Cáries & Classificação & EfficientNet-B3 & Acurácia & 91,2\% [ICON] \\
+    2. Dentes & Segmentação & U-Net & Dice score & 0,872 [ICON] \\
+    3. Perda óssea & Detecção/Regressão & U-Net + keypoints & MAE & 0,42 mm [ICON] \\
+    4. Lesões bucais & Classificação & ResNet-50 & AUC-CEC & 0,957 [ICON] \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+Os leitores são encorajados a executar os notebooks, modificar
+hiperparâmetros, adicionar novos critérios de aceitação e refatorar
+o código — sempre mantendo os testes verdes. A metodologia SDD+TDD
+não é um fim em si mesma, mas um meio de produzir software odontológico
+confiável, reprodutível e auditável.

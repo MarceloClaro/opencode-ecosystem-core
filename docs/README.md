@@ -13,6 +13,7 @@ não precise adivinhar onde está a verdade, a especificação ou o limite.
 [🏠 README principal](../README.md) ·
 [📘 Manual](../MANUAL.md) ·
 [🏗️ Arquitetura](../ARCHITECTURE.md) ·
+[🎞️ Atlas animado](architecture/ANIMATED.md) ·
 [🔬 Pipeline científico](SCIENTIFIC_RESEARCH_PIPELINE_R1054.md) ·
 [🧪 Evidência R1054](../reports/r1054/README.md) ·
 [📈 PROGRESS](../PROGRESS.md)
@@ -23,7 +24,7 @@ não precise adivinhar onde está a verdade, a especificação ou o limite.
 
 | Você quer… | Comece por… | Depois veja… |
 |---|---|---|
-| Instalar e rodar o Core | [README § Comece em 5 minutos](../README.md#comece-em-5-minutos) | [Instalador](../installer/README.md), [Manual](../MANUAL.md) |
+| Instalar e rodar o Core | [README § Início rápido local](../README.md#início-rápido-local) | [Instalador](../installer/README.md), [Manual](../MANUAL.md) |
 | Entender a arquitetura | [ARCHITECTURE.md](../ARCHITECTURE.md) | [Guia R916](ARQUITETURA_COMPLETA_CORE_R916.md), [Atlas](architecture_map.html) |
 | Pesquisar um tema e chegar a um artigo | [Pipeline R1054](SCIENTIFIC_RESEARCH_PIPELINE_R1054.md) | [Spec R1054](../specs/SPEC-1054-automacao-assistida-validacao-real.md), [Relatório](../reports/r1054/README.md) |
 | Auditar claims e evidências | [R1054](../reports/r1054/README.md) | [Gate metacognitivo](../mci/metacognitive_gate.py), [CORRIGENDUM](../CORRIGENDUM.md) |
@@ -88,6 +89,14 @@ não precise adivinhar onde está a verdade, a especificação ou o limite.
 | Pipeline de dublagem | [R1041–R1045](DUBBING_PIPELINE_R1041_R1045.md) |
 | Evidência R1047 | [Quantum dub](../reports/r1047/QUANTUM-DUB-EVIDENCE.md) |
 | Slide/palco com cartão | [R1050](../reports/r1050/CARD-STAGE.md) |
+| Qubit 16:9 e vertical nativo | [Piloto R1055](../pilots/r1055-qubit/README.md), [QC e hashes](../reports/r1055/README.md) |
+| Plano de ação Airam Veras | [Vídeo R1058](../pilots/r1058-airam-veras/README.md), [roteiro](../pilots/r1058-airam-veras/SCRIPT.md), [QC](../reports/r1058/README.md) |
+| Piloto Monte Roraima | [Vídeo R1059](../pilots/r1059-roraima/README.md), [receita visual](../pilots/r1059-roraima/reference/receita-visual.json), [recibo](../pilots/r1059-roraima/out/render-receipt.json) |
+| Desktop operator | [R1060](../pilots/r1060-desktop-operator/README.md), [receipt](../pilots/r1060-desktop-operator/install-receipt.json), [spec](../specs/SPEC-935-R1060-desktop-operator.md) |
+| Storage operator | [R1061](../pilots/r1061-storage-operator/README.md), [resumo](../pilots/r1061-storage-operator/summary.json), [spec](../specs/SPEC-935-R1061-storage-operator.md) |
+| Assistente acessível | [Spec R1063](../specs/SPEC-935-R1063-assistente-acessivel.md), [testes](../tests/test_r1063_accessible_assistant.py) |
+| Câmera, mapa e narração por batida | [R1055](CINEMATIC_REMOTION_R1055.md), [roteiro](../pilots/r1055-qubit/SCRIPT.md), [créditos](../pilots/r1055-qubit/REFERENCES.md) |
+| GIFs de arquitetura e fluxos | [Galeria R1056–R1057](architecture/ANIMATED.md), [geração e testes](../reports/r1057/README.md) |
 | Remotion auditável | [Skill](../.opencode/skills/remotion-auditavel/SKILL.md), [Composição](../editor-workspace/remotion-smoke/src/r1047-slide/R1047Stage.tsx) |
 | Catálogo de ferramentas | [R1043](VIDEO_EDITOR_TOOLCHAIN_R1043.md), [toolchain](../reports/r1043/toolchain.json) |
 
@@ -145,6 +154,14 @@ GitHub; ele fica disponível como [raw para renderização local](https://raw.gi
 Para uma visão que o GitHub renderiza, use o bloco abaixo ou o
 [SVG curado](architecture/curated-overview.svg).
 
+<!-- svg-presentation:diagram-e19b5e3314e41476 -->
+<img src="architecture/animated/diagram-e19b5e3314e41476.svg" alt="Arquitetura em 60 segundos — diagrama estático" width="100%">
+
+<sub>[GIF](architecture/animated/diagram-e19b5e3314e41476.gif) · [PNG](architecture/animated/diagram-e19b5e3314e41476.png) · [Fonte Mermaid](architecture/animated/diagram-e19b5e3314e41476.mmd)</sub>
+
+<details>
+<summary>Fonte Mermaid (auditoria)</summary>
+
 ```mermaid
 flowchart TB
     U["CLI / OpenCode / MCP / Streamlit"] --> O["MarceloClaro Orchestrator"]
@@ -152,7 +169,7 @@ flowchart TB
     O --> M["MetaBus / MCI"]
     O --> S["SpecRegistry / SDD-TDD"]
     O --> R["Research Lab R1051-R1054"]
-    O --> V["Video Editor R1046-R1047"]
+    O --> V["Vídeo / câmera / mapa R1055"]
     O --> E["REA"]
     B --> A["333 agent profiles"]
     M --> G["Trust / Evolution / Evidence"]
@@ -162,12 +179,18 @@ flowchart TB
     E --> Gate
 ```
 
+</details>
+
 > **Regra:** diagramas grandes são evidência de inventário, não prova de
 > execução. O SVG e a página offline são as fontes de leitura; o `.mmd` integral
 > é matéria-prima para renderização local.
 
 ## Atlas e fluxogramas
 
+- [Todos os diagramas do escopo em GIF/PNG/SVG/Mermaid](architecture/ANIMATED.md)
+- [Manifesto de cobertura e hashes](architecture/animated/manifest.json)
+- [Reprodução local e limites R1057](../reports/r1057/README.md)
+- SVG é a visualização primária; a fonte Mermaid fica em `<details>` de auditoria.
 - [Atlas offline](architecture_map.html)
 - [Mapa curado](architecture/curated-overview.svg)
 - [Dependências Mermaid — raw 2,4 MB](https://raw.githubusercontent.com/MarceloClaro/opencode-ecosystem-core/main/docs/architecture/dependencies.mmd)
@@ -177,6 +200,10 @@ flowchart TB
 - [README § Arquitetura completa](../README.md#arquitetura-completa-e-fluxogramas-atuais)
 
 ## Documentos históricos
+
+A R1056 anima os diagramas publicados; não transforma o inventário R916 em
+uma auditoria atual do runtime. A síntese por camadas não substitui o grafo
+integral. As prévias da galeria são estáticas para evitar movimento compulsório.
 
 Os atlas R433–R438, R879, R900 e R911 permanecem como retratos históricos. O
 livro tem processo editorial e atlas próprios; atualizar estes mapas não

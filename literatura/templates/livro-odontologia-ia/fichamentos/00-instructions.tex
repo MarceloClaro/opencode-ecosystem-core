@@ -1,0 +1,105 @@
+%==============================================================================
+% INSTRUÇÕES DE USO — Fichamentos Críticos
+% Livro: Odontologia & Inteligência Artificial
+% Conforme NBR 6023 (Referências) e NBR 10520 (Citações)
+%==============================================================================
+
+\chapter*{Instruções para Elaboração dos Fichamentos Críticos}
+\addcontentsline{toc}{chapter}{Instruções — Fichamentos Críticos}
+
+\section*{Propósito}
+Os fichamentos críticos constituem o registro sistematizado da fundamentação
+científica do livro. Cada artigo citado via \texttt{\textbackslash citacaoativa}
+no texto deve possuir um fichamento correspondente, assegurando
+rastreabilidade, auditabilidade e reprodutibilidade das fontes.
+
+\section*{Estrutura do Arquivo}
+Cada fichamento deve ser salvo como \texttt{fichamento-ODTXXX.tex}, onde
+\texttt{XXX} é o identificador sequencial (001, 002, \ldots, 062).
+\begin{itemize}
+  \item Utilize o arquivo \texttt{template-fichamento.tex} como base.
+  \item Substitua todos os campos entre colchetes pelos valores
+        correspondentes do artigo fichado.
+  \item A chave bibliográfica (\texttt{CHAVE\_BIB}) deve corresponder à
+        entrada no arquivo \texttt{.bib} do projeto.
+\end{itemize}
+
+\section*{Seções Obrigatórias}
+Cada fichamento deve conter obrigatoriamente as seguintes seções:
+
+\begin{enumerate}
+  \item \textbf{Identificação} — Dados bibliográficos completos conforme
+        NBR 6023.
+  \item \textbf{Objetivo} — Síntese do propósito do artigo em 3--5 linhas.
+  \item \textbf{Metodologia} — Desenho do estudo, amostra, métricas e
+        validação.
+  \item \textbf{Resultados Principais} — Valores numéricos relevantes em
+        lista itemizada.
+  \item \textbf{Limitações} — Pelo menos duas limitações identificadas.
+  \item \textbf{Contribuição para o Livro} — Relação explícita entre o
+        artigo e o(s) capítulo(s) que ele fundamenta.
+  \item \textbf{Análise Crítica} — Validade interna/externa,
+        reprodutibilidade, relevância clínica, conflito de interesses e
+        viés.
+  \item \textbf{Citações Relevantes} — Transcrição de trechos citados no
+        livro com indicação de página.
+  \item \textbf{Mapeamento SDD} — Relação problema-entrada-saída-critérios
+        conforme metodologia SDD do livro.
+  \item \textbf{Referência ABNT} — Referência formatada conforme NBR 6023
+        dentro de ambiente \texttt{verbatim}.
+\end{enumerate}
+
+\section*{Critérios de Qualidade}
+\begin{itemize}
+  \item \textbf{Rastreabilidade:} Toda afirmação no livro apoiada por
+        \texttt{\textbackslash citacaoativa} deve ter fichamento
+        correspondente.
+  \item \textbf{Precisão:} Métricas numéricas (acurácia, sensibilidade,
+        AUC, etc.) devem ser transcritas exatamente como publicadas.
+  \item \textbf{Imparcialidade:} A análise crítica deve apontar tanto
+        contribuições quanto limitações, sem viés de confirmação.
+  \item \textbf{SDD:} O mapeamento SDD deve explicitar o problema
+        odontológico, os tipos de dado de entrada/saída e os critérios de
+        aceitação reportados no artigo.
+  \item \textbf{Confiança:} Atribuir valor entre 0 (mínima) e 1 (máxima)
+        refletindo a confiabilidade do estudo com base no desenho, tamanho
+        amostral, validação e reprodutibilidade.
+\end{itemize}
+
+\section*{Verificação de DOIs}
+Antes de finalizar o fichamento, verifique se o DOI do artigo está ativo
+em \url{https://doi.org/}. DOIs que retornam \texttt{HTTP 404} ou
+\texttt{HTTP 403} devem ser sinalizados no campo \textbf{DOI} com a
+observação \texttt{(pendente -- possível DOI fabricado)} e reportados no
+arquivo \texttt{00-doi-audit.tex}.
+
+\section*{Integração ao Documento Principal}
+Para incluir os fichamentos no livro, adicione no preâmbulo:
+\begin{verbatim}
+% Inclusão dos fichamentos críticos (apêndice documental)
+\input{fichamentos/00-instructions}
+\input{fichamentos/fichamento-ODT001}
+\input{fichamentos/fichamento-ODT002}
+% ...
+\end{verbatim}
+Ou, alternativamente, crie um apêndice específico:
+\begin{verbatim}
+\begin{apendicesenv}
+\partapendices
+\chapter{FICHAMENTOS CRÍTICOS}
+\input{fichamentos/00-instructions}
+\input{fichamentos/fichamento-ODT001}
+% ...
+\end{apendicesenv}
+\end{verbatim}
+
+\section*{Exemplo de Arquivo}
+Consulte \texttt{template-fichamento.tex} para o modelo completo e
+\texttt{00-doi-audit.tex} para o relatório de auditoria de DOIs.
+
+\vfill
+\begin{center}
+\rule{0.5\textwidth}{0.4pt}\\
+\small{Documento elaborado conforme NBR 14724 e NBR 6029.}\\
+\small{Revisão Qualis A1.}
+\end{center}

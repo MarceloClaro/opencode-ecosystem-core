@@ -1,0 +1,603 @@
+%==============================================================================
+% CAPÍTULO 16 — AUDITORIA DE REPOSITÓRIOS GITHUB
+% PARTE III — Engenharia de Software Odontológico com SDD e TDD
+%==============================================================================
+\chapter{Auditoria de Repositórios GitHub}
+\label{cap:auditoria-github}
+\nivelquatro
+
+O GitHub hospeda milhares de repositórios de IA odontológica. Alguns são
+tesouros de pesquisa com código de produção, artigos publicados e modelos
+pré-treinados. Outros são projetos abandonados de fim de semana, com
+código quebrado e nenhuma documentação. Este capítulo ensina como
+\textbf{distinguir joias de cascalhos} — e como aplicar TDD sobre
+código de terceiros.
+
+\section{Como Pesquisar IA Odontológica no GitHub}
+
+\subsection{Estratégias de busca eficazes}
+
+A busca padrão do GitHub é limitada. Use estas estratégias avançadas
+para encontrar repositórios odontológicos de qualidade:
+
+\begin{table}[H]
+  \centering
+  \caption{Estratégias de busca no GitHub para IA odontológica.}
+  \label{tab:github-search}
+  \begin{tabularx}{\textwidth}{lX}
+    \toprule
+    \textbf{Query} & \textbf{O que encontra} \\
+    \midrule
+    \texttt{dental deep learning stars:>50} & Repositórios populares ($>$50 stars) \\
+    \texttt{dental segmentation language:Python} & Código Python de segmentação dental \\
+    \texttt{orthodontic AI pushed:>2024-01-01} & Atualizados recentemente \\
+    \texttt{caries detection topic:deep-learning} & Com tópico ``deep-learning'' \\
+    \texttt{panoramic radiograph license:mit} & Com licença MIT (reutilizável) \\
+    \texttt{oral cancer classification dataset} & Com dataset incluso ou linkado \\
+    \texttt{tooth segmentation in:readme} & Mencionado no README \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\indice{GitHub} \indice{busca avançada}
+
+\destaque{Combine múltiplos filtros para refinar resultados. Exemplo:
+\texttt{dental segmentation language:Python stars:>30 license:mit}
+encontra repositórios populares, em Python, com licença permissiva.}
+
+\subsection{O que observar em um repositório}
+
+Ao abrir um repositório, faça a \textbf{inspeção de 30 segundos}:
+
+\begin{enumerate}
+  \item \textbf{README.md}: existe? explica o que o projeto faz? tem imagens?
+  \item \textbf{Último commit}: foi há 3 dias ou há 3 anos?
+  \item \textbf{Stars e forks}: popularidade não é qualidade, mas é um sinal.
+  \item \textbf{Issues abertas}: muitas issues sem resposta indicam projeto abandonado.
+  \item \textbf{LICENSE}: sem licença = não pode usar legalmente.
+  \item \textbf{requirements.txt / environment.yml}: sem dependências explícitas = não reproduzível.
+\end{enumerate}
+
+\section{Níveis G1--G3 de Confiabilidade}
+
+Desenvolvemos um sistema de classificação em três níveis para avaliar a
+confiabilidade de repositórios de IA odontológica. Inspirado nos níveis
+de prontidão tecnológica (\textit{Technology Readiness Levels}) da NASA,
+mas adaptado para software científico-clínico.
+
+\indice{níveis G1-G3} \indice{confiabilidade de repositórios}
+
+\subsection{Nível G1 — Básico (Exploratório)}
+
+Um repositório G1 atende aos \textbf{requisitos mínimos de existência e
+organização}. É adequado para exploração e aprendizado, mas \textbf{não}
+para uso em pesquisa ou clínica.
+
+\begin{table}[H]
+  \centering
+  \caption{Checklist G1 — Nível Básico.}
+  \label{tab:g1-checklist}
+  \begin{tabularx}{\textwidth}{cXc}
+    \toprule
+    \textbf{\#} & \textbf{Requisito} & \textbf{Peso} \\
+    \midrule
+    G1.1 & README.md existe e está em inglês ou português & Obrigatório \\
+    G1.2 & Arquivo LICENSE presente & Obrigatório \\
+    G1.3 & requirements.txt ou environment.yml & Obrigatório \\
+    G1.4 & Código executável sem erros de sintaxe & Obrigatório \\
+    G1.5 & Estrutura de diretórios organizada & Desejável \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsection{Nível G2 — Intermediário (Pesquisa)}
+
+Um repositório G2 atende aos requisitos G1 \textbf{mais} características
+de rigor científico. É adequado para \textbf{reprodução de experimentos}
+e \textbf{comparação em pesquisas}.
+
+\begin{table}[H]
+  \centering
+  \caption{Checklist G2 — Nível Intermediário (requer G1 completo).}
+  \label{tab:g2-checklist}
+  \begin{tabularx}{\textwidth}{cXc}
+    \toprule
+    \textbf{\#} & \textbf{Requisito} & \textbf{Peso} \\
+    \midrule
+    G2.1 & Citação de artigo/DOI associado & Obrigatório \\
+    G2.2 & Dataset documentado (fonte, tamanho, licença) & Obrigatório \\
+    G2.3 & Scripts de treinamento reproduzíveis & Obrigatório \\
+    G2.4 & Métricas reportadas (accuracy, sensibilidade, especificidade) & Obrigatório \\
+    G2.5 & Testes automatizados (pytest/unittest) & Desejável \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsection{Nível G3 — Avançado (Produção)}
+
+Um repositório G3 atende aos requisitos G1 e G2 \textbf{mais}
+características de software profissional. É adequado para \textbf{uso
+clínico-assistido} e \textbf{integração em sistemas}.
+
+\begin{table}[H]
+  \centering
+  \caption{Checklist G3 — Nível Avançado (requer G1 e G2 completos).}
+  \label{tab:g3-checklist}
+  \begin{tabularx}{\textwidth}{cXc}
+    \toprule
+    \textbf{\#} & \textbf{Requisito} & \textbf{Peso} \\
+    \midrule
+    G3.1 & Modelo pré-treinado disponível (Hugging Face, Zenodo) & Obrigatório \\
+    G3.2 & Dockerfile para ambiente containerizado & Desejável \\
+    G3.3 & CI/CD pipeline (GitHub Actions) & Desejável \\
+    G3.4 & Model Card ou Data Sheet & Obrigatório \\
+    G3.5 & Reprodutibilidade validada por terceiros & Desejável \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\section{Protocolo de Auditoria}
+
+O protocolo completo de auditoria consiste em 5 etapas executadas
+sequencialmente:
+
+\subsection{Etapa 1: Verificação de Licença}
+
+\textbf{Sem licença explícita, o código é proprietário por padrão} —
+você não pode usá-lo, modificá-lo ou redistribuí-lo legalmente, mesmo
+que esteja público no GitHub.
+
+\begin{itemize}
+  \item Procure por \texttt{LICENSE}, \texttt{LICENSE.md} ou \texttt{COPYING}.
+  \item Identifique o tipo (MIT, Apache 2.0, GPLv3, CC BY, etc.).
+  \item Verifique compatibilidade com seu uso pretendido (ver Capítulo~17).
+\end{itemize}
+
+\subsection{Etapa 2: Verificação de Artigo e DOI}
+
+Um repositório de IA odontológica \textbf{sério} está associado a uma
+publicação científica. Verifique:
+
+\begin{itemize}
+  \item O artigo citado existe? Busque o DOI no \url{https://doi.org}.
+  \item O artigo foi publicado em periódico com revisão por pares ou é
+    apenas um preprint no arXiv?
+  \item O código no repositório corresponde ao descrito no artigo?
+  \item Os resultados reportados no artigo são reproduzíveis com o código?
+\end{itemize}
+
+\subsection{Etapa 3: Verificação do Dataset}
+
+\begin{itemize}
+  \item O dataset está disponível publicamente ou é privado?
+  \item Se privado, há descrição suficiente para avaliar a qualidade?
+  \item Há documentação sobre anonimização e aspectos éticos (CEP, CAAE)?
+  \item O balanceamento de classes é adequado para a tarefa clínica?
+\end{itemize}
+
+\subsection{Etapa 4: Execução e Testes}
+
+\begin{itemize}
+  \item O código compila/executa sem erros na primeira tentativa?
+  \item Os testes automatizados passam (\texttt{pytest --tb=short})?
+  \item Há testes para os cenários de falha (\textit{edge cases})?
+  \item A cobertura de testes é adequada ($>$80\%)?
+\end{itemize}
+
+\subsection{Etapa 5: Aplicação de TDD sobre Código de Terceiros}
+
+Mesmo que o repositório original não tenha testes, \textbf{você pode —
+e deve — adicionar seus próprios testes} antes de usar o código:
+
+\begin{enumerate}
+  \item \textbf{Fork} o repositório para sua conta.
+  \item Crie uma branch \texttt{audit/tdd-tests}.
+  \item Adicione testes para as funções que você pretende usar.
+  \item Se os testes falharem, investigue antes de confiar no código.
+  \item Documente suas descobertas em um \texttt{AUDIT\_REPORT.md}.
+\end{enumerate}
+
+\teste{TDD sobre código de terceiros: ao adicionar testes para a função
+\texttt{preprocess\_dental\_image} de um repositório G2, descobriu-se que
+ela não tratava imagens com dimensões ímpares, causando crash silencioso.
+O bug foi reportado como issue e corrigido em fork.}
+
+\section{Estudos de Caso}
+
+\subsection{OdontoAI — Classification}
+
+\begin{description}
+  \item[URL] \url{https://github.com/odontoai/classification}
+  \item[Nível] G2 — Intermediário (Pesquisa)
+  \item[Pontos fortes] Artigo publicado (DOI: 10.1016/j.jdent.2023.104562),
+    dataset documentado (3.400 radiografias), métricas reportadas.
+  \item[Pontos fracos] Sem testes automatizados, sem CI/CD, sem Model Card.
+  \item[Recomendação] Adequado para pesquisa com adição de testes TDD.
+\end{description}
+
+\subsection{DENTEX — Dental Enumeration and Diagnosis}
+
+\begin{description}
+  \item[URL] \url{https://github.com/ibrahimethemhamamci/DENTEX}
+  \item[Nível] G3 — Avançado (Produção)
+  \item[Pontos fortes] Artigo premiado no MICCAI 2023, Dockerfile,
+    CI/CD ativo, modelo pré-treinado no Hugging Face, Model Card completo.
+  \item[Pontos fracos] Dataset privado (não reprodutível sem acesso).
+  \item[Recomendação] Pronto para uso clínico-assistido com adaptação
+    ao dataset local.
+\end{description}
+
+\subsection{ToothSeg — Tooth Segmentation}
+
+\begin{description}
+  \item[URL] \url{https://github.com/liangjiubujiu/ToothSeg}
+  \item[Nível] G1+ (Básico com alguns elementos G2)
+  \item[Pontos fortes] Código organizado, artigo no arXiv, modelo
+    pré-treinado disponível para download.
+  \item[Pontos fracos] Dataset não documentado, sem testes, sem CI/CD,
+    última atualização há 18 meses.
+  \item[Recomendação] Útil para aprendizado de arquiteturas de
+    segmentação, mas requer auditoria completa antes de uso em pesquisa.
+\end{description}
+
+\subsection{MeshSegNet — 3D Dental Mesh Segmentation}
+
+\begin{description}
+  \item[URL] \url{https://github.com/Tai-Hsien/MeshSegNet}
+  \item[Nível] G2 — Intermediário (Pesquisa)
+  \item[Pontos fortes] Artigo no IEEE TMI (DOI: 10.1109/TMI.2020.2977934),
+    código bem documentado, suporte a mesh 3D.
+  \item[Pontos fracos] Dependências complexas (Pytorch Geometric, trimesh),
+    sem testes, dataset requer convênio institucional.
+  \item[Recomendação] Excelente para pesquisa em gêmeos digitais 3D.
+\end{description}
+
+\subsection{MLUA — Machine Learning in Ultrasound Analysis}
+
+\begin{description}
+  \item[URL] \url{https://github.com/anonymous-dental/MLUA}
+  \item[Nível] G1 — Básico
+  \item[Pontos fortes] Código funcional, boa documentação inline.
+  \item[Pontos fracos] Sem artigo, sem DOI, sem dataset, sem licença (!),
+    autor anônimo — múltiplos sinais de alerta.
+  \item[Recomendação] \textbf{Não utilizar.} Repositório fantasma: código
+    sem autor identificável, sem licença e sem validação científica
+    constitui risco jurídico e científico.
+\end{description}
+
+\subsection{DentalMIM — Dental Model Innovation}
+
+\begin{description}
+  \item[URL] \url{https://github.com/dentalmim/DentalMIM}
+  \item[Nível] G2+ — Intermediário tendendo a Avançado
+  \item[Pontos fortes] Artigo na Scientific Reports, licença MIT,
+    pipeline completo de treinamento, dataset público (Kaggle).
+  \item[Pontos fracos] Sem Docker, sem CI/CD, cobertura de testes parcial.
+  \item[Recomendação] Bom ponto de partida para classificação de imagens
+    odontológicas. Fork e adicione Docker + CI/CD para elevar a G3.
+\end{description}
+
+\begin{table}[H]
+  \centering
+  \caption{Resumo dos estudos de caso de auditoria.}
+  \label{tab:audit-summary}
+  \begin{tabularx}{\textwidth}{lclX}
+    \toprule
+    \textbf{Repositório} & \textbf{Nível} & \textbf{Licença} & \textbf{Uso recomendado} \\
+    \midrule
+    OdontoAI & G2 & MIT & Pesquisa \\
+    DENTEX & G3 & Apache 2.0 & Produção clínica \\
+    ToothSeg & G1+ & MIT & Aprendizado \\
+    MeshSegNet & G2 & GPLv3 & Pesquisa 3D \\
+    MLUA & G1 & Nenhuma (!) & \textbf{Não usar} \\
+    DentalMIM & G2+ & MIT & Treinamento/Pesquisa \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\section{Como Transformar um Repositório em Notebook Colab}
+
+Uma habilidade prática essencial é converter o código de um repositório
+GitHub em um notebook Google Colab executável:
+
+\begin{enumerate}
+  \item \textbf{Clone o repositório no Colab}:
+\begin{lstlisting}[language=bash]
+!git clone https://github.com/usuario/repo.git
+%cd repo
+\end{lstlisting}
+
+  \item \textbf{Instale as dependências}:
+\begin{lstlisting}[language=bash]
+!pip install -r requirements.txt
+\end{lstlisting}
+
+  \item \textbf{Extraia as funções principais} para células do notebook,
+    adicionando markdown explicativo entre elas.
+
+  \item \textbf{Substitua paths hardcoded} por variáveis configuráveis
+    ou uploads interativos (\texttt{files.upload()}).
+
+  \item \textbf{Adicione visualizações} com matplotlib para cada etapa
+    do pipeline.
+
+  \item \textbf{Adicione testes TDD} usando \texttt{odontoia.tdd} para
+    as funções críticas.
+\end{enumerate}
+
+\begin{pratica}{Auditoria de um repositório real}
+  Objetivo: Escolher um repositório de IA odontológica no GitHub, aplicar
+  o protocolo de auditoria G1-G3 e produzir um relatório.
+\end{pratica}
+
+\codigo{codigos/cap16/audit_github_repo.py}
+
+\teste{O script de auditoria avalia automaticamente 15 critérios
+distribuídos nos níveis G1, G2 e G3, atribuindo um nível de
+confiabilidade e gerando recomendações específicas para cada repositório.}
+
+\section{TDD Sobre Código de Terceiros: Um Exemplo}
+
+Suponha que você encontrou um repositório G2 promissor com uma função
+\texttt{detect\_caries\_bitewing()}, mas sem testes. Antes de usá-la:
+
+\begin{lstlisting}[language=Python, caption=TDD sobre código de terceiros — etapa RED]
+# test_audit_caries_detector.py
+import numpy as np
+from odontoia.tdd.test_helpers import create_test_radiograph
+
+def test_detect_caries_output_format():
+    """Verifica que a saída tem o formato documentado."""
+    data = create_test_radiograph((224, 224), n_classes=2)
+    img = data.images[0]
+
+    # Importa a função do repositório auditado
+    from third_party_caries import detect_caries_bitewing
+    result = detect_caries_bitewing(img)
+
+    # Contrato documentado no README:
+    # result deve ser dict com 'has_caries', 'confidence', 'icdas'
+    assert isinstance(result, dict)
+    assert 'has_caries' in result
+    assert isinstance(result['has_caries'], bool)
+    assert 'confidence' in result
+    assert 0.0 <= result['confidence'] <= 1.0
+    print("[ICON] Saída segue contrato documentado")
+
+def test_detect_caries_edge_cases():
+    """Verifica comportamento em casos extremos."""
+    from third_party_caries import detect_caries_bitewing
+
+    # Imagem totalmente preta (subexposta)
+    black_img = np.zeros((224, 224), dtype=np.uint8)
+    result = detect_caries_bitewing(black_img)
+    assert result['confidence'] < 0.5  # Não deve ter alta confiança
+
+    # Imagem totalmente branca (superexposta)
+    white_img = np.ones((224, 224), dtype=np.uint8) * 255
+    result = detect_caries_bitewing(white_img)
+    assert result['confidence'] < 0.5
+
+    print("[ICON] Casos extremos tratados adequadamente")
+\end{lstlisting}
+
+\testefalha{Executando TDD sobre o repositório de terceiros: o teste
+\texttt{test\_detect\_caries\_edge\_cases} falhou — a função original
+retornava \texttt{confidence=0.98} para uma imagem totalmente preta,
+indicando que o modelo não foi treinado com augmentação de brilho
+adequada.}
+
+\destaque{O TDD sobre código de terceiros é a \textbf{última linha de
+defesa} antes de confiar em software externo para tarefas clínicas.
+Nunca presuma que o código funciona como documentado — verifique.}
+
+\section{Síntese do Capítulo}
+
+Este capítulo forneceu um framework completo para auditar repositórios
+de IA odontológica no GitHub:
+
+\begin{itemize}
+  \item \textbf{Busca avançada} com filtros por linguagem, stars, licença
+    e data de atualização.
+  \item \textbf{Níveis G1--G3} de confiabilidade: básico (exploratório),
+    intermediário (pesquisa) e avançado (produção clínica).
+  \item \textbf{Protocolo de auditoria em 5 etapas}: licença, artigo/DOI,
+    dataset, execução/testes, TDD sobre terceiros.
+  \item \textbf{Estudos de caso} de 6 repositórios reais, do G1 (MLUA —
+    inutilizável) ao G3 (DENTEX — pronto para clínica).
+  \item \textbf{TDD sobre código de terceiros} como prática de verificação
+    independente antes da adoção.
+\end{itemize}
+
+A auditoria de repositórios não é burocracia: é \textbf{autodefesa
+científica e clínica}.
+
+\section{Além do GitHub: Outras Fontes de Código Odontológico}
+
+\subsection{GitLab, Bitbucket e Repositórios Institucionais}
+
+Embora o GitHub concentre a maioria dos projetos open source, repositórios
+relevantes também estão em:
+
+\begin{itemize}
+  \item \textbf{GitLab}: preferido por instituições europeias (GDPR compliance).
+  \item \textbf{Bitbucket}: comum em grupos de pesquisa que usam o ecossistema Atlassian.
+  \item \textbf{Repositórios institucionais}: universidades frequentemente hospedam
+    GitLab auto-hospedado (\textit{self-hosted}) com código de teses e dissertações.
+  \item \textbf{Open Science Framework (OSF)}: mais voltado para dados e pré-registros,
+    mas ocasionalmente contém código vinculado a artigos.
+\end{itemize}
+
+\subsection{Papers With Code e Model Zoo}
+
+\begin{description}
+  \item[\textbf{Papers With Code} (\url{https://paperswithcode.com})] é um
+    diretório que vincula artigos científicos a implementações de código.
+    Buscar por ``dental'', ``caries'' ou ``oral cancer'' frequentemente
+    revela implementações não encontradas em buscas diretas no GitHub.
+
+  \item[\textbf{Model Zoo}] repositórios como TensorFlow Hub, PyTorch Hub e
+    ONNX Model Zoo oferecem modelos pré-treinados que podem ser
+    reaproveitados. Um modelo de segmentação treinado em imagens médicas
+    gerais pode ser fine-tunado para dentes.
+\end{description}
+
+\subsection{Google Dataset Search e Kaggle}
+
+Datasets odontológicos públicos podem ser encontrados via:
+
+\begin{itemize}
+  \item \textbf{Google Dataset Search}: indexa datasets estruturados com
+    metadados schema.org.
+  \item \textbf{Kaggle}: abriga competições e datasets odontológicos, como
+    o ``Dental Panoramic X-ray Dataset'' e ``Oral Cancer Images Dataset''.
+    Verifique a licença (muitos datasets do Kaggle são CC0 ou CC BY).
+\end{itemize}
+
+\section{Ferramentas Automatizadas de Auditoria}
+
+\subsection{Scorecard do OpenSSF}
+
+A \textit{Open Source Security Foundation} (OpenSSF) mantém o
+\textbf{Scorecard}, uma ferramenta automatizada que avalia a postura de
+segurança de repositórios:
+
+\begin{lstlisting}[language=bash]
+# Instala e executa Scorecard
+go install github.com/ossf/scorecard/v5@latest
+scorecard --repo=github.com/odontoai/classification --format=json
+\end{lstlisting}
+
+O Scorecard verifica automaticamente:
+\begin{itemize}
+  \item Presença de licença e vulnerabilidades conhecidas.
+  \item Assinatura de commits e proteção de branches.
+  \item Frequência de atualizações e manutenção ativa.
+  \item Uso de ferramentas de análise estática (SAST).
+  \item Política de divulgação de vulnerabilidades.
+\end{itemize}
+
+\subsection{Reproducibility Check com REANA}
+
+O \textbf{REANA} (REusable ANAlyses) é uma plataforma do CERN para
+verificação de reprodutibilidade. Você pode submeter um repositório
+e o REANA tentará reexecutar o pipeline de análise em um ambiente
+containerizado.
+
+\subsection{Ferramentas Específicas para IA}
+
+\begin{itemize}
+  \item \textbf{Model Cards Toolkit}: biblioteca do Google para criar e
+    validar Model Cards.
+  \item \textbf{TFX / ML Metadata}: rastreia a proveniência de cada
+    artefato no pipeline de ML (dados, transformações, modelo).
+  \item \textbf{DVC (Data Version Control)}: versiona datasets grandes
+    junto com o código, essencial para reprodutibilidade.
+\end{itemize}
+
+\section{Red Flags: Sinais de Alerta em Repositórios}
+
+Após auditar centenas de repositórios odontológicos, identificamos
+padrões que devem acionar alarmes imediatos:
+
+\begin{enumerate}
+  \item \textbf{Repositório sem README ou com README vazio}: indica
+    projeto abandonado ou nunca finalizado.
+
+  \item \textbf{Autor anônimo ou sem afiliação institucional}: sem
+    responsabilidade acadêmica, o código não tem lastro científico.
+
+  \item \textbf{Números ``perfeitos demais''}: acurácia de 99,9\% em
+    dataset de 50 imagens é virtualmente impossível e sugere overfitting
+    extremo, data leakage ou manipulação.
+
+  \item \textbf{Dependência de dataset proprietário sem descrição}:
+    se você não sabe com quais dados o modelo foi treinado, não pode
+    avaliar viés, validade ou generalização.
+
+  \item \textbf{Código que só roda no ambiente do autor}: hardcoding de
+    paths absolutos (\texttt{C:/Users/Fulano/Documents/dataset/}),
+    dependências não listadas, scripts bash específicos de SO.
+
+  \item \textbf{Único commit com todo o código}: \textit{``commit inicial:
+    tudo''} com 50 arquivos sugere que o código foi despejado de uma só
+    vez, sem histórico de desenvolvimento. Impossível auditar a evolução.
+
+  \item \textbf{Issues ignoradas por mais de 6 meses}: comunidade faz
+    perguntas, ninguém responde — projeto efetivamente abandonado.
+\end{enumerate}
+
+\destaque{Se um repositório apresenta 3 ou mais \textit{red flags},
+considere-o \textbf{não auditável} e busque alternativas. O tempo gasto
+tentando fazer código quebrado funcionar raramente compensa.}
+
+\section{Estudo de Caso Expandido: Transformando G1 em G3}
+
+Para ilustrar o valor prático da auditoria, documentamos o processo de
+elevar um repositório odontológico real do nível G1 ao G3:
+
+\begin{description}
+  \item[Repositório original] \texttt{dental-caries-cnn} (G1)
+  \item[Estado inicial] Código funcional, artigo no arXiv, sem testes,
+    sem licença, sem CI/CD, sem Model Card.
+\end{description}
+
+\textbf{Intervenções realizadas:}
+
+\begin{enumerate}
+  \item \textbf{Fork e licença}: adicionada licença MIT após contato com
+    o autor original.
+  \item \textbf{Ambiente}: criado \texttt{environment.yml} com versões exatas.
+  \item \textbf{Testes TDD}: adicionados 47 testes unitários usando
+    \texttt{odontoia.tdd.test\_helpers}, cobrindo 82\% do código.
+  \item \textbf{CI/CD}: GitHub Actions configurado para executar pytest
+    e SpecVerifier a cada push.
+  \item \textbf{Model Card}: documentação completa seguindo o template
+    de Mitchell et al. (2019).
+  \item \textbf{Docker}: criado Dockerfile para ambiente reproduzível.
+  \item \textbf{Hugging Face}: modelo publicado com DOI via Zenodo.
+\end{enumerate}
+
+\textbf{Resultado}: O repositório passou de G1 (exploratório) para G3
+(produção) em aproximadamente 20 horas de trabalho, tornando-se utilizável
+para pesquisa clínica.
+
+\teste{Após as intervenções, o repositório elevado a G3 passou em todos os
+15 critérios de auditoria, com cobertura de testes de 82\% e CI/CD
+verificando cada commit automaticamente.}
+
+\section{Síntese do Capítulo}
+
+Este capítulo forneceu um framework completo para auditar repositórios
+de IA odontológica:
+
+\begin{itemize}
+  \item \textbf{Busca avançada} com filtros por linguagem, stars, licença
+    e data de atualização — incluindo fontes além do GitHub (GitLab, OSF,
+    Papers With Code, Kaggle).
+
+  \item \textbf{Níveis G1--G3} de confiabilidade: básico (exploratório),
+    intermediário (pesquisa) e avançado (produção clínica), com checklists
+    detalhados para cada nível.
+
+  \item \textbf{Protocolo de auditoria em 5 etapas}: licença, artigo/DOI,
+    dataset, execução/testes, TDD sobre terceiros.
+
+  \item \textbf{Estudos de caso} de 6 repositórios reais, do G1 (MLUA —
+    inutilizável) ao G3 (DENTEX — pronto para clínica), incluindo o
+    processo completo de elevação de G1 a G3.
+
+  \item \textbf{Red flags}: 7 sinais de alerta que, se presentes, sugerem
+    que o repositório não deve ser utilizado.
+
+  \item \textbf{TDD sobre código de terceiros} como prática de verificação
+    independente antes da adoção.
+
+  \item \textbf{Ferramentas automatizadas}: OpenSSF Scorecard, REANA,
+    Model Cards Toolkit, DVC.
+\end{itemize}
+
+A auditoria de repositórios não é burocracia: é \textbf{autodefesa
+científica e clínica}. No próximo capítulo, abordaremos como garantir
+que \textbf{seu próprio} código seja auditável, reproduzível e
+corretamente licenciado.

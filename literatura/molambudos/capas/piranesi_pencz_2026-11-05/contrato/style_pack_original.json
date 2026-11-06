@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "name": "Molambudos — gravura de imaginação (Piranesi 1750-3 / Pencz 1500-1550)",
+  "lineage": {
+    "piranesi": {
+      "artist": "Giovanni Battista Piranesi (1720-1778)",
+      "reference": "Carceri d'invenzione, primeira série (c. 1745-1750; reimpressão 1761)",
+      "use": "espaço, arquitetura, escala, vertigem, chiaroscuro, ruína, labirinto institucional",
+      "grammar": [
+        "perspectiva dramática",
+        "arcos e escadas impossíveis",
+        "vigas, correntes e polias",
+        "figuras minúsculas para escala",
+        "hachura cruzada",
+        "preto profundo",
+        "vignette"
+      ]
+    },
+    "pencz": {
+      "artist": "Georg Pencz (c. 1500-1550)",
+      "reference": "gravuras e xilogravuras do Renascimento alemão, alegorias e cenas bíblicas",
+      "use": "figura humana, gesto, contorno, emblema moral, composição equilibrada",
+      "grammar": [
+        "contorno límpido",
+        "hachura fina",
+        "gesto legível",
+        "draperia",
+        "grupo humano",
+        "emblema",
+        "monograma"
+      ]
+    }
+  },
+  "synthesis": "Piranesi constrói a prisão; Pencz coloca o corpo dentro dela. A arquitetura domina a escala; a figura carrega o sentido moral.",
+  "palette": {
+    "paper": "#F2E8CF",
+    "ink": "#2B2117",
+    "shadow": "#140E08",
+    "accent": "#9B1B1B",
+    "accent_use": "apenas um detalhe por prancha: sangue, contaminação, carimbo ou Cuidado",
+    "forbidden": [
+      "fotografia colorida",
+      "neon",
+      "gradiente digital",
+      "3D glossy",
+      "anime",
+      "cartoon"
+    ]
+  },
+  "composition": {
+    "perspective": "uma linha de fuga dominante; arquitetura em diagonal ou eixo central",
+    "scale": "figura humana pequena em relação ao espaço, exceto no retrato emblemático",
+    "framing": "arco, porta, corredor ou moldura de placa; margem generosa",
+    "light": "fonte única lateral; sombras profundas; hachura nas áreas escuras",
+    "paper": "textura de papel cream; marca de placa; sem brilho",
+    "caption": "legenda curta em small caps, fora da imagem, com crédito de ficção"
+  },
+  "motifs": [
+    "arcos",
+    "escadas",
+    "corredores",
+    "celas",
+    "camas",
+    "correntes",
+    "polias",
+    "vigas",
+    "chaves",
+    "livros-razão",
+    "carimbos",
+    "ossos",
+    "corvos",
+    "carrascos",
+    "cruz",
+    "espelho",
+    "poeira",
+    "seca",
+    "carroça",
+    "dentes",
+    "leite",
+    "zumbido"
+  ],
+  "plate_types": [
+    {
+      "id": "carceri-colonia",
+      "name": "Carceri do Colônia",
+      "use_when": "hospital-colônia, currais, corredores, cela, arquivo, poder institucional",
+      "piranesi": "arcos sobrepostos, escada impossível, vigas, escala gigantesca",
+      "pencz": "funcionário, paciente e guarda como figuras pequenas e legíveis",
+      "composition": "perspectiva central; figura minúscula no terço inferior; luz lateral",
+      "prompt": "18th-century etching in the manner of Piranesi's Carceri, vast institutional hospital-prison, impossible staircases, arches, beams, chains, tiny human figures for scale, deep cross-hatching, dramatic chiaroscuro, sepia ink on cream paper, plate mark, no text",
+      "negative": "photorealistic, 3D render, glossy, neon, anime, cartoon, watermark, signature, modern objects, color photograph, soft digital gradients",
+      "caption": "Reconstituição ficcional. Colônia de Barbacena, 1917."
+    },
+    {
+      "id": "retrato-emblematico",
+      "name": "Retrato Emblemático",
+      "use_when": "Paciente 1.260, Dr. Heitor, Lúcia, mãe, criança; retrato de arquivo",
+      "piranesi": "fundo arquitetônico em ruína, sombra profunda, janela ou arco",
+      "pencz": "contorno límpido, rosto e mãos legíveis, draperia, emblema no canto",
+      "composition": "busto em três quartos; fundo arquitetônico; objeto emblemático",
+      "prompt": "Northern Renaissance engraving in the manner of Georg Pencz, portrait of a patient in a colonial asylum, clear linear contours, fine hatching, emblematic object, ruined architectural background in the manner of Piranesi, sepia ink on cream paper, plate mark, no text",
+      "negative": "photorealistic, smiling, glamour, modern clothing, 3D render, neon, anime, watermark, text, real person",
+      "caption": "Retrato de arquivo. Reconstituição ficcional."
+    },
+    {
+      "id": "tabela-alegorica",
+      "name": "Tabela Alegórica",
+      "use_when": "o ciclo, a contaminação, a linhagem, o laudo, a culpa, o cuidado",
+      "piranesi": "ruína como palco; arquitetura moral",
+      "pencz": "alegoria com figuras, gestos e atributos; composição emblemática",
+      "composition": "cenário alegórico; figuras em grupo; um objeto central",
+      "prompt": "Renaissance allegorical engraving in the manner of Georg Pencz, moral tableau of contamination and care, figures with emblematic attributes, ruined asylum architecture in the background in the manner of Piranesi, fine cross-hatching, sepia ink on cream paper, plate mark, no text",
+      "negative": "photorealistic, horror gore, 3D render, neon, anime, watermark, text, modern objects",
+      "caption": "Tabela alegórica. Reconstituição ficcional."
+    },
+    {
+      "id": "paisagem-erodida",
+      "name": "Paisagem Erodida",
+      "use_when": "seca, sertão, estrada, carroça, êxodo, cemitério, horizonte",
+      "piranesi": "ruína geológica, escala sublime, poeira, atmosfera",
+      "pencz": "figuras pequenas, gestos de fome e deslocamento",
+      "composition": "horizonte alto; estrada ou rio seco; figura minúscula",
+      "prompt": "Sublime etching of a drought landscape in the manner of Piranesi, eroded earth, dry riverbed, tiny migrating figures in the manner of Georg Pencz, deep hatching, sepia ink on cream paper, plate mark, no text",
+      "negative": "postcard, tropical paradise, photorealistic, 3D render, neon, anime, watermark, text, modern cars",
+      "caption": "Sertão. Reconstituição ficcional."
+    },
+    {
+      "id": "anatomia-contaminacao",
+      "name": "Anatomia da Contaminação",
+      "use_when": "corpo, doença, metamorfose, ferida, parto, fome, bicho",
+      "piranesi": "sombra profunda, caverna, arquitetura do corpo",
+      "pencz": "linha anatômica precisa, gesto, dignidade da figura",
+      "composition": "corpo em primeiro plano; fundo escuro; um detalhe em carmim",
+      "prompt": "Anatomical etching in the manner of Georg Pencz with the shadow of Piranesi, human body in transformation, precise line, deep cross-hatching, one carmine accent, sepia ink on cream paper, plate mark, no text",
+      "negative": "gore, splatter, photorealistic, 3D render, neon, anime, watermark, text, sexualized body",
+      "caption": "Anatomia ficcional. Reconstituição ficcional."
+    },
+    {
+      "id": "arquivo-doente",
+      "name": "Arquivo Doente",
+      "use_when": "laudo, carta, foto, carimbo, livro-razão, processo, prova",
+      "piranesi": "labirinto de estantes, arquivo como prisão",
+      "pencz": "ornamento, emblema, caligrafia, selo",
+      "composition": "mesa de arquivo; documento central; mão ou carimbo",
+      "prompt": "Renaissance emblematic engraving of a diseased archive, ledgers, stamps, files, labyrinth of shelves in the manner of Piranesi, fine line and ornament in the manner of Georg Pencz, sepia ink on cream paper, plate mark, fictional document, no readable text",
+      "negative": "real document, readable personal data, photorealistic, 3D render, neon, anime, watermark, modern computer",
+      "caption": "Documento ficcional. Não é prova histórica."
+    }
+  ],
+  "prompts": {
+    "base_en": "Old master etching, Piranesi carceri architecture and Georg Pencz figure, fine cross-hatching, dramatic chiaroscuro, sepia ink on cream paper, plate mark, high detail, print-ready line art, no text",
+    "base_pt": "Gravura de old master, arquitetura de carceri de Piranesi e figura de Georg Pencz, hachura cruzada fina, chiaroscuro dramático, tinta sépia sobre papel cream, marca de placa, linha pronta para impressão, sem texto",
+    "negative_en": "photorealistic, 3D render, glossy, neon, anime, cartoon, watermark, signature, modern objects, color photograph, soft digital gradients, fake historical document, real person, text, logo",
+    "negative_pt": "fotorrealista, render 3D, brilho, neon, anime, cartoon, marca d'água, assinatura, objetos modernos, fotografia colorida, gradientes digitais suaves, documento histórico falso, pessoa real, texto, logotipo",
+    "zh": "老大师蚀刻版画，皮拉内西式监狱建筑与乔治·彭茨式人物，细密交叉排线，强烈明暗对比，米色纸上赭色墨水，版痕，高细节，无文字"
+  },
+  "technical": {
+    "min_dpi": 300,
+    "color_mode": "duotone sépia ou 1-bit; um acento carmim",
+    "line": "hachura e água-forte; sem aerógrafo digital",
+    "paper": "#F2E8CF",
+    "ink": "#2B2117",
+    "accent": "#9B1B1B",
+    "tac_limit": 210,
+    "min_print_size": "2x o tamanho final",
+    "formats": [
+      "TIFF 16-bit",
+      "PNG sem perdas",
+      "SVG/PDF vetorial"
+    ],
+    "provenance": "hash + manifesto; marcar homagem e IA quando houver"
+  },
+  "ethics": {
+    "public_domain": "Piranesi e Pencz são domínio público; a obra não copia uma prancha específica.",
+    "fiction": "Toda imagem é reconstituição ficcional; não é prova histórica.",
+    "no_real_targets": "Não retratar vítimas reais identificáveis.",
+    "content_warning": "Imagens de corpo, doença, violência e morte exigem aviso.",
+    "human_review": "A arte final exige desenhista, revisão de sensibilidade e prova de impressão.",
+    "ai_disclosure": "Imagem gerada ou assistida por IA deve ser declarada no manifesto."
+  }
+}

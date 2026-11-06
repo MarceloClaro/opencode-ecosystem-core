@@ -1,0 +1,30 @@
+{
+  "spec": "SPEC-935-R1057",
+  "external_validation": false,
+  "published": false,
+  "tests": {
+    "command": "pytest R1055–R1057 + R127 + R231 + R236 + R237 + R449 + R455 + R879 + R881 + R911 + R916 + R919",
+    "result": "189 passed",
+    "evidence": "reports/r1057/focused-tests.txt"
+  },
+  "svgify": {
+    "command": "python3 scripts/svgify_markdown.py --check",
+    "result": "pass"
+  },
+  "sync": {
+    "command": "python3 scripts/sync_readme_flowcharts.py --check",
+    "result": "pass"
+  },
+  "animate": {
+    "command": "python3 scripts/animate_architecture.py --check",
+    "result": "pass",
+    "diagrams": 46,
+    "gif_bytes": 13771507
+  },
+  "limits": [
+    "ordem topológica é guia de leitura, não execução observada",
+    "SVG não substitui a fonte Mermaid nem o inventário",
+    "nenhuma validação externa foi emitida",
+    "a suíte integral do repositório não foi executada por completo"
+  ]
+}

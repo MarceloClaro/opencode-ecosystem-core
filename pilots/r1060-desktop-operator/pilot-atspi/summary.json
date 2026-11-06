@@ -1,0 +1,61 @@
+{
+  "backend": "atspi",
+  "app": "r1060-entry-app.py",
+  "upstream_agent_desktop": "bloqueado por native_window_unproven (issue #435); fallback AT-SPI usado para o piloto",
+  "steps": [
+    {
+      "step": "snapshot",
+      "ok": true,
+      "refs": 3,
+      "complete": true,
+      "file": "snapshot-before.json"
+    },
+    {
+      "step": "type",
+      "ok": true,
+      "delivery": "delivered_verified",
+      "text": "R1060",
+      "file": "type-result.json"
+    },
+    {
+      "step": "snapshot_after_type",
+      "value": "R1060",
+      "file": "snapshot-after-type.json"
+    },
+    {
+      "step": "click_apply",
+      "ok": true,
+      "delivery": "delivered_unverified",
+      "file": "click-apply.json"
+    },
+    {
+      "step": "snapshot_after_apply",
+      "label": "Resultado: R1060",
+      "file": "snapshot-after-apply.json"
+    },
+    {
+      "step": "click_close",
+      "ok": true,
+      "file": "click-close.json"
+    },
+    {
+      "step": "list_apps_after_close",
+      "apps": [],
+      "file": "list-apps-after-close.json"
+    },
+    {
+      "step": "wait_text",
+      "found": true,
+      "elapsed_ms": 71,
+      "file": "wait-result.json"
+    }
+  ],
+  "approvals_consumed": 3,
+  "external_validation": false,
+  "published": false,
+  "notes": [
+    "Piloto executado em Xvfb :99 com app GTK3 descartável.",
+    "Nenhum token de aprovação foi persistido nos arquivos de evidência.",
+    "O backend AT-SPI é fallback local; o binário agent-desktop não foi corrigido."
+  ]
+}

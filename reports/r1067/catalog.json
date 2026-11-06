@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "scope": "auditoria somente leitura; nenhuma instalacao ou copia",
+  "sources": [
+    {
+      "id": "nexu-io/open-design",
+      "url": "https://github.com/nexu-io/open-design",
+      "license": "Apache-2.0",
+      "type": "app-desktop-cli-mcp",
+      "decision": "externo_sob_confirmacao",
+      "risk": "instalacao_pesada_node_24",
+      "notes": "Workspace de design local-first; od mcp install opencode; nao substitui MIRA/OpenMontage."
+    },
+    {
+      "id": "K-Dense-AI/scientific-agent-skills",
+      "url": "https://github.com/K-Dense-AI/scientific-agent-skills",
+      "license": "MIT",
+      "type": "skills-177",
+      "decision": "ja_integrado",
+      "risk": "scripts_nao_vendorizados",
+      "notes": "Catalogo espelhado em external/kdense-scientific-agent-skills; commit local a25cf9ec = HEAD; 177 SKILL.md; 9 license_hold com adaptacoes."
+    },
+    {
+      "id": "hesreallyhim/awesome-claude-code",
+      "url": "https://github.com/hesreallyhim/awesome-claude-code",
+      "license": "CC-BY-NC-ND-4.0",
+      "type": "lista-curada",
+      "decision": "referencia_apenas",
+      "risk": "proibe_derivados_e_uso_comercial",
+      "notes": "Nao copiar nem incorporar; usar somente como indice com atribuicao."
+    },
+    {
+      "id": "titanwings/distilly",
+      "url": "https://github.com/titanwings/distilly",
+      "license": "MIT",
+      "type": "meta-skill-perfil-pessoa",
+      "decision": "nao_integrar_como_esta",
+      "risk": "consentimento_privacidade_impersonacao",
+      "notes": "Exige contrato de consentimento, minimizacao de dados e direito de exclusao."
+    },
+    {
+      "id": "tt-a1i/archify",
+      "url": "https://github.com/tt-a1i/archify",
+      "license": "Apache-2.0",
+      "type": "skill-cli-node",
+      "decision": "candidato_externo",
+      "risk": "scripts_e_template_grande",
+      "notes": "Diagramas HTML interativos; instalar via npx skills apos confirmacao; verificar com doctor."
+    },
+    {
+      "id": "paperclipai/paperclip",
+      "url": "https://github.com/paperclipai/paperclip",
+      "license": "MIT",
+      "type": "app-control-plane",
+      "decision": "externo",
+      "risk": "duplica_orquestracao_do_core",
+      "notes": "Servidor Node + UI React; avaliar somente como dashboard/control plane separado."
+    },
+    {
+      "id": "MarceloClaro/xianxia-cinematic-video-director",
+      "url": "https://github.com/MarceloClaro/xianxia-cinematic-video-director",
+      "license": null,
+      "type": "skill-codex",
+      "decision": "referencia_apenas",
+      "risk": "sem_licenca_nao_permite_copia",
+      "notes": "Fork de liyue-aigc/xianxia-cinematic-video-director; ambos sem licenca declarada."
+    },
+    {
+      "id": "gnipbao/story-to-handdrawn-video",
+      "url": "https://github.com/gnipbao/story-to-handdrawn-video",
+      "license": "MIT",
+      "type": "skill-remotion",
+      "decision": "avaliar",
+      "risk": "nicho_hand-drawn",
+      "notes": "Receita Remotion para video hand-drawn retrato."
+    },
+    {
+      "id": "lemomo-ai/lemo-opuscar",
+      "url": "https://github.com/lemomo-ai/lemo-opuscar",
+      "license": "MIT",
+      "type": "prompt-library",
+      "decision": "referencia",
+      "risk": "biblioteca_grande",
+      "notes": "Prompts de direcao; nao copiar a biblioteca inteira."
+    },
+    {
+      "id": "JohnHeibel/ClaudeAnimationBase",
+      "url": "https://github.com/JohnHeibel/ClaudeAnimationBase",
+      "license": "MIT",
+      "type": "starter-p5js",
+      "decision": "referencia",
+      "risk": "necessita_demanda_p5js",
+      "notes": "Animacao de personagem com p5.brush para MP4."
+    },
+    {
+      "id": "aaronyi97/image-story-video-wizard",
+      "url": "https://github.com/aaronyi97/image-story-video-wizard",
+      "license": "MIT",
+      "type": "skill-codex",
+      "decision": "avaliar",
+      "risk": "dependencias_externas",
+      "notes": "Fluxo audio-first de imagem-story; bom encaixe com o pipeline atual."
+    },
+    {
+      "id": "liyue-aigc/xianxia-cinematic-video-director",
+      "url": "https://github.com/liyue-aigc/xianxia-cinematic-video-director",
+      "license": null,
+      "type": "skill-codex",
+      "decision": "referencia_apenas",
+      "risk": "sem_licenca",
+      "notes": "Storyboard/camera/continuidade xianxia; nao copiar."
+    },
+    {
+      "id": "LetMeHappyCode/auto-video-agent",
+      "url": "https://github.com/LetMeHappyCode/auto-video-agent",
+      "license": null,
+      "type": "agentes-claude-code",
+      "decision": "referencia_apenas",
+      "risk": "sem_licenca",
+      "notes": "SRT para shot list, imagens e video mudo."
+    },
+    {
+      "id": "tuzhechen2005/opus-video-skills",
+      "url": "https://github.com/tuzhechen2005/opus-video-skills",
+      "license": "MIT",
+      "type": "skills-p5js",
+      "decision": "avaliar",
+      "risk": "headless_chrome_ffmpeg",
+      "notes": "Videos procedurais em estilos; complementa Motion Canvas/Remotion."
+    },
+    {
+      "id": "Mr-funny/hbg-life-simulation",
+      "url": "https://github.com/Mr-funny/hbg-life-simulation",
+      "license": "MIT",
+      "type": "skill-hyperframes",
+      "decision": "avaliar_prioridade_alta",
+      "risk": "tts_captions_qa",
+      "notes": "O mais proximo do stack HyperFrames do Core."
+    },
+    {
+      "id": "liangdabiao/story-handdrawn-remotion",
+      "url": "https://github.com/liangdabiao/story-handdrawn-remotion",
+      "license": null,
+      "type": "skill-remotion",
+      "decision": "referencia_apenas",
+      "risk": "sem_licenca",
+      "notes": "Diario-comic vertical com camadas progressivas."
+    },
+    {
+      "id": "JimLiu/taohuayuan",
+      "url": "https://github.com/JimLiu/taohuayuan",
+      "license": null,
+      "type": "showcase-threejs",
+      "decision": "nao_integrar",
+      "risk": "sem_licenca_nao_e_skill",
+      "notes": "Cena 3D interativa; nao e skill."
+    },
+    {
+      "id": "AsadMoulviDev/reel-video",
+      "url": "https://github.com/AsadMoulviDev/reel-video",
+      "license": "MIT",
+      "type": "cli-review-board",
+      "decision": "avaliar",
+      "risk": "sobrepoe_editor_local",
+      "notes": "Ideia, storyboard, keyframes e video curto com review board."
+    },
+    {
+      "id": "AllenAI2014/remotion-guofeng-starter",
+      "url": "https://github.com/AllenAI2014/remotion-guofeng-starter",
+      "license": "MIT",
+      "type": "skill-remotion",
+      "decision": "avaliar_se_necessario",
+      "risk": "nicho_guofeng",
+      "notes": "Estilo paper-collage chines a partir de poema/idioma."
+    },
+    {
+      "id": "taylorzhou16/video-gen",
+      "url": "https://github.com/taylorzhou16/video-gen",
+      "license": null,
+      "type": "skill-claude-code",
+      "decision": "referencia_apenas",
+      "risk": "sem_licenca",
+      "notes": "Edicao de vlog/musica no chat."
+    }
+  ]
+}

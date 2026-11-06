@@ -1,8 +1,13 @@
 # Arquitetura integral em Mermaid — R916
 
-**707 módulos Python**, **1000 pares internos**, **1131 declarações de importação**, **6779 símbolos**, **45 pacotes**, **18 camadas** e **22 fluxogramas**.
+> [Atlas animado R1056](ANIMATED.md): 22 fluxos e vistas publicadas, com fonte
+> editável e alternativa sem movimento. Para este grafo integral, o GIF é
+> **somente uma síntese por camadas**; os módulos e as arestas continuam nos
+> artefatos originais abaixo. Não é uma nova auditoria do código.
 
-Base Git `d02817ca460ee6411761a8a3f0b82d17dafd2740`; identidade das fontes locais `d53ac4511f757431da55589db0e6a0fcde2daebdb2b20303611d45882b7ab6b5`.
+**711 módulos Python**, **1014 pares internos**, **1153 declarações de importação**, **6843 símbolos**, **45 pacotes**, **18 camadas** e **22 fluxogramas**.
+
+Base Git `b7f5683f84609a5e957a56af4ca090c905f5ab80`; identidade das fontes locais `1a170ef08b78071c65b55ee5cc0bb4821d77622b8326d018835dbf4a27d6ec7a`.
 
 A [fonte Mermaid — raw 2,4 MB](https://raw.githubusercontent.com/MarceloClaro/opencode-ecosystem-core/main/docs/architecture/dependencies.mmd), o [SVG Graphviz](dependencies.svg) e o
 [SVG Mermaid](dependencies-mermaid.svg) representam os mesmos conjuntos de
@@ -60,7 +65,7 @@ removido para caber. Use o SVG e a [página offline](../architecture_map.html).
   --output docs/architecture/dependencies.mmd \
   --correspondence docs/architecture/mermaid-correspondence.json
 
-npx --yes --package @mermaid-js/mermaid-cli@12.0.0 mmdc \
+npx --yes --package @mermaid-js/mermaid-cli@12.2.0 mmdc \
   -c docs/architecture/mermaid-render-config.json \
   -i docs/architecture/dependencies.mmd \
   -o docs/architecture/dependencies-mermaid.svg \
@@ -114,6 +119,10 @@ e a ref-base devem ser os mesmos do [guia de reprodução](../ARQUITETURA_COMPLE
 | `publicacao` | 3 | 32 |
 | `raciocinio` | 16 | 152 |
 | `skills` | 46 | 469 |
+
+> A tabela detalhada preserva o recorte R916. O total acima foi atualizado
+> pelo inventário vigente (711 módulos, 1014 pares, 1153 declarações e 6843
+> símbolos); a soma das linhas pode não coincidir com o total atual.
 
 ## Pacotes da coleta
 

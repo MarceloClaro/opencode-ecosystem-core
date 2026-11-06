@@ -1,0 +1,504 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-11-05T22:43:22.980177+00:00",
+  "status": "fail",
+  "source": {
+    "interior": "literatura/molambudos/Molambudos_VictoriaRegia/main_kdp_pt_160x230mm.pdf",
+    "cover": "literatura/molambudos/Molambudos_VictoriaRegia/capa_completa_pt_160x230mm.pdf"
+  },
+  "measurements": {
+    "interior": {
+      "pages": 435,
+      "page_size_pt": [
+        453.543,
+        651.968
+      ],
+      "page_size_mm": [
+        160.0,
+        230.0
+      ],
+      "fonts": {
+        "total": 10,
+        "not_embedded": []
+      },
+      "metadata": {
+        "Title": "Molambudos — O Diário do Paciente 1.260",
+        "Author": "Marcelo Dias de Carvalho Filho",
+        "Subject": "Ficção brasileira contemporânea; horror; romance em fragmentos",
+        "Keywords": "Molambudos, Paciente 1.260, Marcelo Dias de Carvalho Filho, ficção brasileira, horror, Ceará, romance fragmentado"
+      },
+      "pdf_version": "1.7",
+      "encrypted": "no",
+      "tagged": "no",
+      "margins": {
+        "page_width_pt": 453.543,
+        "page_height_pt": 651.968,
+        "pages_with_text": 428,
+        "left_pt": 38.62,
+        "right_pt": 39.76,
+        "top_pt": 26.23,
+        "bottom_pt": 19.34,
+        "safe_margin_pt": 18.0,
+        "violations": []
+      },
+      "images_below_300": [
+        {
+          "page": 1,
+          "width": 1046,
+          "height": 1504,
+          "xppi": 166,
+          "yppi": 166
+        },
+        {
+          "page": 37,
+          "width": 300,
+          "height": 300,
+          "xppi": 105,
+          "yppi": 105
+        },
+        {
+          "page": 79,
+          "width": 300,
+          "height": 300,
+          "xppi": 105,
+          "yppi": 105
+        },
+        {
+          "page": 145,
+          "width": 300,
+          "height": 300,
+          "xppi": 105,
+          "yppi": 105
+        },
+        {
+          "page": 257,
+          "width": 300,
+          "height": 300,
+          "xppi": 105,
+          "yppi": 105
+        },
+        {
+          "page": 286,
+          "width": 800,
+          "height": 640,
+          "xppi": 296,
+          "yppi": 296
+        },
+        {
+          "page": 287,
+          "width": 600,
+          "height": 800,
+          "xppi": 222,
+          "yppi": 222
+        },
+        {
+          "page": 288,
+          "width": 800,
+          "height": 640,
+          "xppi": 296,
+          "yppi": 296
+        },
+        {
+          "page": 299,
+          "width": 800,
+          "height": 640,
+          "xppi": 296,
+          "yppi": 296
+        },
+        {
+          "page": 339,
+          "width": 800,
+          "height": 640,
+          "xppi": 296,
+          "yppi": 296
+        },
+        {
+          "page": 361,
+          "width": 300,
+          "height": 300,
+          "xppi": 105,
+          "yppi": 105
+        },
+        {
+          "page": 435,
+          "width": 1046,
+          "height": 1504,
+          "xppi": 166,
+          "yppi": 166
+        }
+      ],
+      "boxes": {
+        "MediaBox": "0.00     0.00   453.54   651.97",
+        "CropBox": "0.00     0.00   453.54   651.97",
+        "BleedBox": "0.00     0.00   453.54   651.97",
+        "TrimBox": "0.00     0.00   453.54   651.97"
+      }
+    },
+    "cover": {
+      "page_size_in": [
+        13.8706,
+        9.3051
+      ],
+      "expected_size_in": [
+        13.8706,
+        9.3051
+      ],
+      "spine_in": 1.0222,
+      "spine_mm": 25.96,
+      "bleed_in": 0.125,
+      "fonts": {
+        "total": 6,
+        "not_embedded": []
+      },
+      "images_below_300": [
+        {
+          "page": 1,
+          "width": 1046,
+          "height": 1504,
+          "xppi": 163,
+          "yppi": 162
+        },
+        {
+          "page": 1,
+          "width": 1046,
+          "height": 1504,
+          "xppi": 163,
+          "yppi": 162
+        }
+      ],
+      "isbn": "9798189170492",
+      "barcode_reserve_in": [
+        2.15,
+        0.95
+      ],
+      "barcode_required_in": [
+        2.0,
+        1.2
+      ],
+      "barcode_position": "lower-left",
+      "barcode_expected_ltr": "lower-right",
+      "fake_barcode_in_art": true
+    }
+  },
+  "checks": [
+    {
+      "id": "trim_custom",
+      "status": "pass",
+      "detail": "160×230 mm (6,299×9,055 in) está dentro da faixa KDP de trim personalizado: 4–8,5 in × 6–11,69 in.",
+      "evidence": {
+        "width_mm": 160,
+        "height_mm": 230,
+        "width_in": 6.2992,
+        "height_in": 9.0551
+      }
+    },
+    {
+      "id": "page_count",
+      "status": "pass",
+      "detail": "435 páginas; dentro da faixa de 24–828 páginas do KDP para papel premium color.",
+      "evidence": {
+        "pages": 435
+      }
+    },
+    {
+      "id": "last_page_blank",
+      "status": "warn",
+      "detail": "A página 435 é branca (1 carácter de extração). Não é 'excessivo', mas confirmar no previewer.",
+      "evidence": {
+        "last_page_chars": 0
+      }
+    },
+    {
+      "id": "interior_size",
+      "status": "pass",
+      "detail": "Miolo em 453,543×651,968 pt = 160×230 mm.",
+      "evidence": {
+        "page_size_pt": [
+          453.543,
+          651.968
+        ]
+      }
+    },
+    {
+      "id": "interior_fonts",
+      "status": "pass",
+      "detail": "10 fontes; nenhuma não embutida.",
+      "evidence": {
+        "total": 10,
+        "not_embedded": []
+      }
+    },
+    {
+      "id": "interior_metadata",
+      "status": "pass",
+      "detail": "Title, Author, Subject e Keywords presentes.",
+      "evidence": {
+        "Title": "Molambudos — O Diário do Paciente 1.260",
+        "Author": "Marcelo Dias de Carvalho Filho",
+        "Subject": "Ficção brasileira contemporânea; horror; romance em fragmentos",
+        "Keywords": "Molambudos, Paciente 1.260, Marcelo Dias de Carvalho Filho, ficção brasileira, horror, Ceará, romance fragmentado"
+      }
+    },
+    {
+      "id": "interior_encryption",
+      "status": "pass",
+      "detail": "PDF não criptografado.",
+      "evidence": {
+        "Encrypted": "no"
+      }
+    },
+    {
+      "id": "interior_version",
+      "status": "pass",
+      "detail": "PDF 1.7; sem criptografia.",
+      "evidence": {
+        "PDF version": "1.7"
+      }
+    },
+    {
+      "id": "interior_margins",
+      "status": "pass",
+      "detail": "Margens mínimas: esquerda 38.62 pt, topo 26.23 pt, direita 39.76 pt, base 19.34 pt; 0 violações de 18 pt.",
+      "evidence": {
+        "page_width_pt": 453.543,
+        "page_height_pt": 651.968,
+        "pages_with_text": 428,
+        "left_pt": 38.62,
+        "right_pt": 39.76,
+        "top_pt": 26.23,
+        "bottom_pt": 19.34,
+        "safe_margin_pt": 18.0,
+        "violations": []
+      }
+    },
+    {
+      "id": "interior_bleed",
+      "status": "warn",
+      "detail": "BleedBox = TrimBox = 160×230 mm. As páginas 1 e 435 usam imagem de página inteira; se a arte toca o corte, falta sangria de 0,125 in.",
+      "evidence": {
+        "boxes": {
+          "MediaBox": "0.00     0.00   453.54   651.97",
+          "CropBox": "0.00     0.00   453.54   651.97",
+          "BleedBox": "0.00     0.00   453.54   651.97",
+          "TrimBox": "0.00     0.00   453.54   651.97"
+        }
+      }
+    },
+    {
+      "id": "interior_images_300dpi",
+      "status": "warn",
+      "detail": "12 imagens abaixo de 300 DPI; páginas [1, 37, 79, 145, 257, 286, 287, 288, 299, 339, 361, 435].",
+      "evidence": {
+        "below_300": [
+          {
+            "page": 1,
+            "width": 1046,
+            "height": 1504,
+            "xppi": 166,
+            "yppi": 166
+          },
+          {
+            "page": 37,
+            "width": 300,
+            "height": 300,
+            "xppi": 105,
+            "yppi": 105
+          },
+          {
+            "page": 79,
+            "width": 300,
+            "height": 300,
+            "xppi": 105,
+            "yppi": 105
+          },
+          {
+            "page": 145,
+            "width": 300,
+            "height": 300,
+            "xppi": 105,
+            "yppi": 105
+          },
+          {
+            "page": 257,
+            "width": 300,
+            "height": 300,
+            "xppi": 105,
+            "yppi": 105
+          },
+          {
+            "page": 286,
+            "width": 800,
+            "height": 640,
+            "xppi": 296,
+            "yppi": 296
+          },
+          {
+            "page": 287,
+            "width": 600,
+            "height": 800,
+            "xppi": 222,
+            "yppi": 222
+          },
+          {
+            "page": 288,
+            "width": 800,
+            "height": 640,
+            "xppi": 296,
+            "yppi": 296
+          },
+          {
+            "page": 299,
+            "width": 800,
+            "height": 640,
+            "xppi": 296,
+            "yppi": 296
+          },
+          {
+            "page": 339,
+            "width": 800,
+            "height": 640,
+            "xppi": 296,
+            "yppi": 296
+          },
+          {
+            "page": 361,
+            "width": 300,
+            "height": 300,
+            "xppi": 105,
+            "yppi": 105
+          },
+          {
+            "page": 435,
+            "width": 1046,
+            "height": 1504,
+            "xppi": 166,
+            "yppi": 166
+          }
+        ]
+      }
+    },
+    {
+      "id": "interior_tagged",
+      "status": "warn",
+      "detail": "PDF não é tagged (`Tagged: no`). Não bloqueia impressão KDP; é gap de acessibilidade digital.",
+      "evidence": {
+        "Tagged": "no"
+      }
+    },
+    {
+      "id": "cover_size",
+      "status": "pass",
+      "detail": "Capa 13.8706×9.3051 in; esperado 13.8706×9.3051 in.",
+      "evidence": {
+        "actual_in": [
+          13.8706,
+          9.3051
+        ],
+        "expected_in": [
+          13.8706,
+          9.3051
+        ]
+      }
+    },
+    {
+      "id": "cover_spine",
+      "status": "pass",
+      "detail": "Lombada calculada do arquivo: 1.0222 in (25.96 mm). Conferir na calculadora KDP para o papel escolhido.",
+      "evidence": {
+        "spine_in": 1.0222,
+        "spine_mm": 25.96
+      }
+    },
+    {
+      "id": "cover_bleed",
+      "status": "pass",
+      "detail": "Capa inclui 0,125 in de sangria nas bordas externas; dimensão total compatível com a fórmula KDP.",
+      "evidence": {
+        "bleed_in": 0.125
+      }
+    },
+    {
+      "id": "cover_fonts",
+      "status": "pass",
+      "detail": "6 fontes; nenhuma não embutida.",
+      "evidence": {
+        "total": 6,
+        "not_embedded": []
+      }
+    },
+    {
+      "id": "cover_resolution",
+      "status": "fail",
+      "detail": "Capa com 2 imagens abaixo de 300 DPI; a arte principal está a ~163 DPI. O KDP exige mínimo de 300 DPI para a capa.",
+      "evidence": {
+        "below_300": [
+          {
+            "page": 1,
+            "width": 1046,
+            "height": 1504,
+            "xppi": 163,
+            "yppi": 162
+          },
+          {
+            "page": 1,
+            "width": 1046,
+            "height": 1504,
+            "xppi": 163,
+            "yppi": 162
+          }
+        ]
+      }
+    },
+    {
+      "id": "cover_isbn",
+      "status": "pass",
+      "detail": "ISBN da capa 9798189170492 e do miolo 9798189170492.",
+      "evidence": {
+        "cover": "9798189170492",
+        "interior": "9798189170492"
+      }
+    },
+    {
+      "id": "barcode_area_size",
+      "status": "fail",
+      "detail": "Reserva 2.15×0.95 in; requerido 2,0×1,2 in. Altura 0.95 in é insuficiente.",
+      "evidence": {
+        "reserve_in": [
+          2.15,
+          0.95
+        ],
+        "required_in": [
+          2.0,
+          1.2
+        ]
+      }
+    },
+    {
+      "id": "barcode_position",
+      "status": "fail",
+      "detail": "Reserva no canto inferior esquerdo da contracapa. Para conteúdo LTR, o KDP posiciona o código no canto inferior direito; confirmar no previewer.",
+      "evidence": {
+        "position": "lower-left",
+        "expected_ltr": "lower-right"
+      }
+    },
+    {
+      "id": "barcode_fake_art",
+      "status": "warn",
+      "detail": "A arte da contracapa contém um código/ISBN fictício; a reserva branca o cobre, mas o ideal é remover o elemento da arte de origem.",
+      "evidence": {
+        "fake_barcode_declared": true
+      }
+    }
+  ],
+  "summary": {
+    "pass": 13,
+    "warn": 5,
+    "fail": 3
+  },
+  "limits": [
+    "Preflight local; não substitui o previewer oficial da KDP.",
+    "Trim personalizado aceito segundo a ajuda KDP consultada em 2026-11-05.",
+    "A capa não foi corrigida nesta rodada; as falhas estão documentadas."
+  ]
+}

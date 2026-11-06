@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Molambudos — Grafo Narrativo Interativo</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:white;color:#333;font-family:Georgia,serif;overflow:hidden;height:100vh}
+#header{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(180deg,white 60%,transparent);padding:12px 20px 20px;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px}
+#header h1{font-size:20px;color:#8B6914;letter-spacing:2px}
+#header .subtitle{font-size:11px;color:#888;margin-top:2px}
+#controls{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+.btn{background:#333;color:#ddd;border:1px solid #ddd;padding:3px 8px;border-radius:3px;cursor:pointer;font-size:10px;font-family:inherit;transition:all .2s;white-space:nowrap}
+.btn:hover{background:#e0e0e0;border-color:#999}
+.btn.active{background:#8B0000;border-color:#FF4444;color:#fff}
+.sep{color:#444;margin:0 2px;font-size:12px}
+#legend{position:fixed;bottom:12px;left:12px;z-index:100;background:rgba(255,255,255,0.95);border:1px solid #ddd;border-radius:6px;padding:8px 12px;font-size:10px;line-height:1.5}
+#legend .item{display:flex;align-items:center;gap:5px}
+#legend .dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+#network{width:100%;height:100vh}
+#info{position:fixed;bottom:12px;right:12px;z-index:100;background:rgba(255,255,255,0.95);border:1px solid #ddd;border-radius:6px;padding:8px 12px;font-size:11px;max-width:260px;display:none;line-height:1.4}
+#info .fid{color:#8B6914;font-weight:bold}
+#info .ftitle{color:#fff;font-style:italic}
+#info .flinks{color:#888;font-size:9px;margin-top:2px}
+@media(max-width:700px){#legend{display:none}#header h1{font-size:16px}.btn{font-size:9px;padding:2px 5px}}
+</style>
+</head>
+<body>
+<div id="header">
+<div><h1>MOLAMBUDOS</h1><div class="subtitle">62 fragmentos · 142 rotas de leitura</div></div>
+<div id="controls">
+<button class="btn" onclick="resetView()">Reset</button>
+<span class="sep">|</span>
+<button class="btn" onclick="focusPath('sertao')" style="border-color:#8B4513">Sertao</button>
+<button class="btn" onclick="focusPath('colonia')" style="border-color:#2F4F4F">Colonia</button>
+<button class="btn" onclick="focusPath('diario')" style="border-color:#2F4F4F">Diario</button>
+<button class="btn" onclick="focusPath('investigation')" style="border-color:#4B0082">Investigacao</button>
+<button class="btn" onclick="focusPath('contamination')" style="border-color:#8B0000">Contaminacao</button>
+<span class="sep">|</span>
+<button class="btn active" onclick="filterType('all')" id="b-all">Todos</button>
+<button class="btn" onclick="filterType('MEM')" id="b-MEM" style="border-color:#8B4513">MEM</button>
+<button class="btn" onclick="filterType('DOC')" id="b-DOC" style="border-color:#2F4F4F">DOC</button>
+<button class="btn" onclick="filterType('CONT')" id="b-CONT" style="border-color:#8B0000">CONT</button>
+<button class="btn" onclick="filterType('LUC')" id="b-LUC" style="border-color:#4B0082">LUC</button>
+</div>
+</div>
+<div id="legend">
+<div style="font-weight:bold;margin-bottom:2px">LEGENDA</div>
+<div class="item"><span class="dot" style="background:#8B4513"></span>MEM — Memorias do Paciente</div>
+<div class="item"><span class="dot" style="background:#2F4F4F"></span>DOC — Documentos e Laudos</div>
+<div class="item"><span class="dot" style="background:#8B0000"></span>CONT — Contaminacao do Leitor</div>
+<div class="item"><span class="dot" style="background:#4B0082"></span>LUC — Investigacao de Lucia</div>
+<div style="color:#999;font-size:9px;margin-top:3px">Clique:info | Duplo:isolar | Arraste:navegar</div>
+</div>
+<div id="info"></div>
+<div id="network"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.6/vis-network.min.js"></script>
+<script src="grafo_data.js"></script>
+<script>
+const allNodes = new vis.DataSet(NODES.map(function(n){
+  var c = TYPES[n.group].color;
+  return {
+    id: n.id, label: n.id, group: n.group,
+    title: n.title,
+    borderWidth: 2,
+    shape: 'box',
+    font: {color:'#e0e0e0',size:10,face:'Georgia'},
+    color: {background:c+'30',border:c,highlight:{background:c+'80',border:'#FFD700'}}
+  };
+}));
+
+const allEdges = new vis.DataSet(EDGES.map(function(e){
+  return {
+    from: e.from, to: e.to,
+    color:{color:'#555',highlight:'#FFD700'},
+    width:0.8,
+    smooth:{type:'curvedCW',roundness:0.1},
+    arrows:{to:{enabled:true,scaleFactor:0.4}}
+  };
+}));
+
+var container = document.getElementById('network');
+var network = new vis.Network(container, {nodes:allNodes,edges:allEdges}, {
+  physics: {
+    solver:'barnesHut',
+    barnesHut:{gravitationalConstant:-2500,centralGravity:0.3,springLength:180},
+    stabilization:{iterations:150}
+  },
+  interaction:{navigationButtons:true,keyboard:true,hover:true,tooltipDelay:200},
+  edges:{smooth:{type:'curvedCW'},arrows:{to:{enabled:true,scaleFactor:0.4}}}
+});
+
+network.on('click',function(p){
+  if(p.nodes.length) showInfo(p.nodes[0]); else hideInfo();
+});
+
+network.on('doubleClick',function(p){
+  if(!p.nodes.length) return;
+  var nid=p.nodes[0], neighbors=network.getConnectedNodes(nid);
+  allNodes.forEach(function(n){
+    allNodes.update({id:n.id,opacity:(n.id===nid||neighbors.indexOf(n.id)>=0)?1:0.12});
+  });
+});
+
+function showInfo(id){
+  var d=document.getElementById('info'), t=TITLES[id]||'';
+  var out=[], inn=[];
+  EDGES.forEach(function(e){
+    if(e.from===id) out.push(e.to);
+    if(e.to===id) inn.push(e.from);
+  });
+  var html='<div class="fid">'+id+'</div><div class="ftitle">'+t+'</div>';
+  if(out.length) html+='<div class="flinks">SAI: '+out.join(', ')+'</div>';
+  if(inn.length) html+='<div class="flinks">ENTRA: '+inn.join(', ')+'</div>';
+  d.innerHTML=html; d.style.display='block';
+}
+function hideInfo(){document.getElementById('info').style.display='none';}
+
+function resetView(){
+  allNodes.forEach(function(n){allNodes.update({id:n.id,opacity:1});});
+  network.fit({animation:true});
+  hideInfo();
+}
+
+function filterType(t){
+  document.querySelectorAll('#controls .btn').forEach(function(b){b.classList.remove('active');});
+  var btn=document.getElementById(t==='all'?'b-all':'b-'+t);
+  if(btn) btn.classList.add('active');
+  allNodes.forEach(function(n){
+    allNodes.update({id:n.id,opacity:(t==='all'||n.id.indexOf(t)===0)?1:0.08});
+  });
+  network.fit({animation:true});
+}
+
+function focusPath(p){
+  var path=PATHS[p]; if(!path) return;
+  allNodes.forEach(function(n){
+    allNodes.update({id:n.id,opacity:(path.indexOf(n.id)>=0)?1:0.12});
+  });
+  allEdges.forEach(function(e){
+    var inPath=path.indexOf(e.from)>=0&&path.indexOf(e.to)>=0;
+    allEdges.update({id:e.id,color:inPath?'#FFD700':'#333',width:inPath?2:0.3});
+  });
+  network.fit({animation:true});
+}
+
+network.once('stabilizationIterationsDone',function(){network.fit();});
+setTimeout(function(){network.fit();},500);
+</script>
+</body>
+</html>

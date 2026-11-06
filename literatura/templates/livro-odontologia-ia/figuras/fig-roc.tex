@@ -1,0 +1,47 @@
+% ======================================================================
+% FIGURA: Curva ROC comparativa (Capítulo 4/11)
+% ======================================================================
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.85]
+% Eixos
+\draw[-latex, thick] (0,0) -- (7,0) node[right] {1 - Especificidade};
+\draw[-latex, thick] (0,0) -- (0,7) node[above] {Sensibilidade};
+
+% Linha de referência (random)
+\draw[dashed, gray, thick] (0,0) -- (6,6) node[above left, font=\tiny] {AUC=0.50};
+
+% Curva ROC do modelo bom (CNN)
+\draw[thick, blueaccent] (0,0) .. controls (0.5,2) and (1,5.5) .. (2,6.2) -- (5,6.8) -- (6,7);
+\node[font=\small, blueaccent] at (4.5,5.5) {CNN (AUC=0.93)};
+
+% Curva ROC do modelo baseline (Random Forest)
+\draw[thick, orangeaccent] (0,0) .. controls (0.5,1) and (2,3) .. (3,4.5) .. controls (4,5.2) and (5,5.5) .. (6,6.5);
+\node[font=\small, orangeaccent] at (5.5,3.5) {RF (AUC=0.82)};
+
+% Curva ROC do clínico
+\draw[thick, codegreen] (0,0) .. controls (0.3,1.5) and (0.8,4) .. (1.5,5.5) .. controls (2,6) and (2.5,6.3) .. (6,6.9);
+\node[font=\small, codegreen] at (2.5,5.0) {Clínico (AUC=0.88)};
+
+% Grid
+\draw[gray!30, thin] (1,0) -- (1,7);
+\draw[gray!30, thin] (2,0) -- (2,7);
+\draw[gray!30, thin] (3,0) -- (3,7);
+\draw[gray!30, thin] (4,0) -- (4,7);
+\draw[gray!30, thin] (5,0) -- (5,7);
+\draw[gray!30, thin] (6,0) -- (6,7);
+
+% Ticks
+\foreach \x in {0,0.2,0.4,0.6,0.8,1.0} {
+    \pgfmathsetmacro{\xp}{\x*6}
+    \draw (\xp, -0.1) -- (\xp, 0.1);
+    \node[font=\tiny, below] at (\xp, -0.2) {\x};
+    \draw (-0.1, \xp) -- (0.1, \xp);
+    \node[font=\tiny, left] at (-0.3, \xp) {\x};
+}
+
+\node[font=\footnotesize] at (3.5, -1) {Curvas ROC comparativas para diagnóstico de cárie (Rohban et al., 2024, meta-análise de 87 estudos)};
+\end{tikzpicture}
+\caption{Curvas ROC comparativas para detecção de cárie em radiografias panorâmicas. A CNN (azul, AUC=0.93) supera o clínico humano (verde, AUC=0.88) e o Random Forest baseline (laranja, AUC=0.82). Dados da meta-análise de Rohban et al. (2024).}
+\label{fig:roc-curves}
+\end{figure}

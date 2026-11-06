@@ -1,0 +1,22 @@
+name: odontoia
+channels:
+  - conda-forge
+  - pytorch
+dependencies:
+  - python=3.10
+  - numpy
+  - pandas
+  - matplotlib
+  - scikit-learn
+  - pytorch
+  - torchvision
+  - opencv
+  - pillow
+  - scipy
+  - pytest
+  - pytest-cov
+  - jupyter
+  - seaborn
+  - pip
+  - pip:
+    - -e ./odontoia-pkg

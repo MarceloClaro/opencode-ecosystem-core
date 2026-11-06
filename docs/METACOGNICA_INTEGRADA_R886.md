@@ -4,6 +4,14 @@ O primário `marceloclaro` conecta preparação, execução, avaliação e memó
 A mudança corrige caminhos delimitados; não demonstra que todo o repositório
 esteja integrado ou livre de falhas.
 
+<!-- svg-presentation:diagram-a74ec60eff3c99a2 -->
+<img src="architecture/animated/diagram-a74ec60eff3c99a2.svg" alt="Ciclo metacognitivo integrado — R886 — diagrama estático" width="100%">
+
+<sub>[GIF](architecture/animated/diagram-a74ec60eff3c99a2.gif) · [PNG](architecture/animated/diagram-a74ec60eff3c99a2.png) · [Fonte Mermaid](architecture/animated/diagram-a74ec60eff3c99a2.mmd)</sub>
+
+<details>
+<summary>Fonte Mermaid (auditoria)</summary>
+
 ```mermaid
 flowchart TB
     U["Tarefa do usuário"] --> P["MarceloClaroOrchestrator.delegate"]
@@ -20,6 +28,8 @@ flowchart TB
     F["Orchestrator.reason: motores formais/heurísticos existentes"] --> O
     M -. "Contexto e proveniência; não altera expressão formal" .-> F
 ```
+
+</details>
 
 **Legenda:** setas contínuas representam o caminho de controle ou dados
 indicado; a pontilhada delimita contexto auditável. As caixas não comprovam

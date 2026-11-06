@@ -384,6 +384,14 @@ def _catalog_agents() -> Dict[str, Any]:
             agent["options"] = opcoes
             if cabeca and not agent.get("model"):
                 agent["model"] = cabeca
+        local_model = LOCAL_AGENT_MODELS.get(slug)
+        if local_model:
+            agent["model"] = local_model
+            if "options" in agent:
+                agent["options"]["model_fallbacks"] = list(
+                    LOCAL_AGENT_FALLBACKS.get(slug, [local_model])
+                )
+                agent["options"].setdefault("model_economy", {})["head"] = local_model
         agents[slug] = agent
     return agents
 
@@ -546,6 +554,19 @@ PRIMARY_MODEL_FALLBACKS = (
     "opencode-go/deepseek-v4.1-flash",
     "opencode-go/deepseek-v4-pro",
 )
+
+# Override local explícito para o assistente literário: não usa OpenCode Go.
+# O endpoint precisa estar ativo; a configuração não comprova inferência.
+LOCAL_AGENT_MODELS = {
+    "romance-psicologico-molambudos": "ollama-local/gemma4:e2b-tuned",
+}
+LOCAL_AGENT_FALLBACKS = {
+    "romance-psicologico-molambudos": [
+        "ollama-local/gemma4:e2b-tuned",
+        "ollama-local/gemma4:e4b-tuned",
+        "litert-lm/litert-community/gemma-4-E4B-it-litert-lm",
+    ],
+}
 
 
 def build_config() -> Dict[str, Any]:
@@ -817,6 +838,31 @@ def build_config() -> Dict[str, Any]:
                 "command": [".venv/bin/python", "-m", "integrations.remotion_mcp"],
                 "enabled": True,
                 "timeout": 30000,
+            },
+            # R1061: storage-operator com manifesto, checksum e purge verificado.
+            "storage-operator": {
+                "type": "local",
+                "command": [".venv/bin/python", "-m", "integrations.storage_operator.mcp_server"],
+                "enabled": True,
+                "timeout": 120000,
+            },
+            # R1060: desktop operado por allowlist e aprovação; seis tools, sem clipboard.
+            "desktop-operator": {
+                "type": "local",
+                "command": [".venv/bin/python", "-m", "integrations.desktop_operator.mcp_server"],
+                "enabled": True,
+                "timeout": 60000,
+            },
+            # R1065: dados científicos locais, somente leitura, no venv científico.
+            "scientific-data": {
+                "type": "local",
+                "command": [
+                    os.path.expanduser("~/.cache/opencode-pilot/venvs/scientific/bin/python"),
+                    "-m",
+                    "integrations.scientific_data.mcp_server",
+                ],
+                "enabled": True,
+                "timeout": 180000,
             },
             "polymath-labs-mcp": {
                 "type": "local",
@@ -1092,6 +1138,19 @@ def build_config() -> Dict[str, Any]:
             }
         },
     }
+
+    # R1060: preserva MCPs existentes que não são gerados aqui (federados,
+    # experimentais ou locais do operador) para que regenerar não os remova.
+    if os.path.isfile(CONFIG_PATH):
+        try:
+            with open(CONFIG_PATH, "r", encoding="utf-8") as stream:
+                current = json.load(stream)
+        except (OSError, json.JSONDecodeError):
+            current = {}
+        if isinstance(current, dict):
+            for name, entry in (current.get("mcp") or {}).items():
+                if isinstance(entry, dict):
+                    config["mcp"].setdefault(name, entry)
 
     # R1014: só entra no config o servidor federado que passou pelo probe.
     for name, entry in _federation_activated_mcp().items():

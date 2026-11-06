@@ -1,0 +1,103 @@
+{
+  "titulo": "Molambudos — O Diário do Paciente 1.260",
+  "subtitulo": "A voz do diário, capítulo por capítulo",
+  "autor": "Marcelo Claro",
+  "categoria": "Ficção",
+  "idioma": "pt-BR",
+  "explicito": false,
+  "descricao": "Série em 26 episódios — um episódio por capítulo do manuscrito Molambudos, o diário de um paciente do Colônia. Produzido com NotebookLM a partir do texto integral em ordem física do manuscrito (SPEC-973).",
+  "capa": "capa_podcast.jpg (1400x1400, sha256 f84aedc95ea77be3…, composição da capa oficial do livro frontmatter/capa.png + faixa editorial 'SÉRIE EM 26 EPISÓDIOS • PODCAST')",
+  "feed_rss": "podcast_feed.xml",
+  "episodios": 26,
+  "volume_mb": 1014,
+  "data_publicacao": "2026-09-22",
+  "integridade": {
+    "arquivo": "audio/SHA256SUMS.txt",
+    "metodo": "sha256"
+  },
+  "licenca": "CC BY-NC-ND 4.0 (sugestão) — texto/obro original de Marcelo Claro; produção com IA registrada",
+  "nota_ia": "Áudios gerados por NotebookLM (Google) a partir do texto integral. Transparência de IA declarada conforme boas práticas (R556-R558).",
+  "infograficos": [
+    {
+      "arquivo": "infografico_molambudos.png",
+      "origem": "NotebookLM (nlm download infographic) — notebook 'Molambudos — O Diário do Paciente 1.260' (51d8ed03…), artifact 46393e94…, status completed",
+      "dimensoes": "2752x1536 RGBA",
+      "sha256": "99b7a994cab3ede1a2859c1b1f9f0baa7d7ca8387c0611f15e14a57b18fb12ae",
+      "conteudo_ocr": "Protocolo de Contágio — O Ciclo da Contaminação: Do Prontuário 1.260 ao Leitor (cadeia de hospedeiros, Paciente 1.261, médico infectado)",
+      "foco": "protocolo de contágio (artifact original)"
+    },
+    {
+      "arquivo": "infografico_podcast.png",
+      "foco": "série de podcast: jornada do paciente, temas do diário, cadeia de contágio do leitor (gerado a pedido via chat)",
+      "origem": "NotebookLM — nlm notebook query (chat) → artifact novo 76354c2f-d453-4085-b267-f3c726e2ae93, status completed",
+      "dimensoes": "2752x1536 RGBA",
+      "sha256": "f685f3ca0526bf0f2ec1faa96e5120dfa3973210b3754e75ecbf45f3f45dc8e6",
+      "conteudo_ocr": "Molambudos: o surgimento do trauma e o ciclo do paciente; 62 anos de cárcere em Barbacena (1917-1979); transmissão por hospedeiros: Joaquim (1.260) → Dr. H. (1.261) → Dra. L. (1.262) → Leitor (1.263); do sertão ao campo"
+    }
+  ],
+  "mindmap": {
+    "arquivo": "mindmap_molambudos.json",
+    "origem": "NotebookLM via chat (nlm notebook query) — artifact 89ee21db-a03e-4f93-ac72-2103ef271781, completed",
+    "formato": "JSON (1942 chars de conteúdo)",
+    "sha256": "4c5c00e0bee3f15f571574c0a5e584ad7579e9e2fe1d5d0247b8d44e66f07a4b",
+    "conteudo_verificado": "Molambudos, 1.260, Barbacena, estrutura narrativa (5 partes, rotas hipertextuais, 3 atos)",
+    "mermaid": {
+      "arquivo": "mindmap_molambudos.mmd",
+      "sintaxe": "Mermaid mindmap (raiz root(( )), nós texto puro indentado)",
+      "nós": 35,
+      "sha256": "b0558b561a8ce59360cdd2aa452b4b37bc329017ad6fc3249262d13b178d6369"
+    },
+    "svg_renderizado": {
+      "arquivo": "mindmap_molambudos.svg",
+      "render": "mmdc (mermaid-cli) + Chromium real (Puppeteer) — layout correto (viewBox 1644x852); render anterior via stub jsdom gerava SVG em branco (viewBox 228685x41.6) — corrigido R567",
+      "labels_verificados": 46,
+      "sha256": "729b18d6fd29c238cbe094022234b280dd4ecc94da318fd57eb620f7fcd3914f"
+    }
+  },
+  "slide_deck": {
+    "arquivo": "slides_molambudos.pdf",
+    "origem": "NotebookLM via chat (nlm notebook query) — artifact 99a7c298-dea4-4932-b286-b7631b8ce3c4, completed (~9min de geração)",
+    "formato": "PDF 15 páginas, 19MB, slides em imagem full-page",
+    "sha256": "a30d397c23728dc3f2422deb363803afc42bef2c27579afcfe54923fdd1811bc",
+    "conteudo_ocr": "p1: 'Molambudos — O Diário do Paciente 1.260 — Uma série imersiva em áudio de 26 episódios'; p8: 'A Cadeia de Contágio Narrativo: 1.260 Joaquim → 1.261 Dr. Heitor → 1.262 Dra. Lúcia → 1.263 VOCÊ'; p15: 'O paciente 1.260 morreu para que você escutasse. Você escuta para que o ciclo continue.'"
+  },
+  "preview_trailer": {
+    "arquivo": "preview_ep01_30s.m4a",
+    "descricao": "Trailer de 30s (início do EP01, fades 2s) para divulgação em redes sociais",
+    "duracao_ffmpeg": "30.00s (mutagen: 30.02s)",
+    "codec": "AAC LC 44100 Hz stereo 128kbps",
+    "sha256": "6d46baa4d7cfe2a17b63251e426b5dd6932441c2ea58b178aaa5bc1ba853ebbf"
+  },
+  "instrucoes_upload": {
+    "arquivo": "INSTRUCOES_UPLOAD.md",
+    "cobre": "host de feed, Podcast Index, Spotify, Apple Podcasts, YouTube, divulgação e checklist final",
+    "sha256": "c181bd1ade2011437e20d27ce175e8e228010e80fd5c4e4818a2b40080ec6e5a"
+  },
+  "trailer_video": {
+    "arquivo": "trailer_podcast.mp4",
+    "descricao": "Vídeo promocional 30s: capa 1400x1400 com efeito Ken Burns (zoom 1.0→1.15) + áudio do preview",
+    "duracao": "30.00s",
+    "codec": "H.264 High yuv420p 1080x1080 25fps + AAC LC 44100Hz stereo 160k",
+    "sha256": "25b0643172fa1bbe4e3d139f681c2f20811aa5a8801b971d40e02d021d363f36"
+  },
+  "landing_page": {
+    "arquivo": "index_podcast.html",
+    "descricao": "Página de destino do podcast: capa, trailer (player), 26 players de áudio, aviso de conteúdo, material de divulgação, recursos técnicos",
+    "tracklist": "26 episódios com títulos reais (do nlm notebook list) e mapeamento epNN→memXX",
+    "sha256": "21f2eeeeb1c638de1b26f54d46d9db81c6d0eac736a4685e07b518e4b4860a46",
+    "nota": "Mermaid agora DINÂMICO: código carregado via fetch(mindmap_molambudos.mmd) + render no navegador via CDN mermaid@11 (div #mermaid-live); bloco hardcoded removido"
+  },
+  "publicacao_online": {
+    "link_publico": "https://imported-exec-institute-looksmart.trycloudflare.com/index_podcast.html",
+    "tipo": "túnel Cloudflare quick (trycloudflare) — acesso público temporário, ativo enquanto o processo cloudflared estiver de pé",
+    "criado_em": "2026-09-23",
+    "testado": "7/7 assets 200 pela internet (index, capa, trailer, preview, svg, mmd, feed)",
+    "limite": "link da URL muda a cada reinício do túnel; para link estático usar domínio próprio com Cloudflare Tunnel nomeado"
+  },
+  "publicacao_permanente": {
+    "url": "https://marceloclaro.github.io/molambudos-podcast/",
+    "repo": "https://github.com/MarceloClaro/molambudos-podcast",
+    "tipo": "GitHub Pages (gratuito); edição web 96k em pacote_editorial_podcast_molambudos_gh",
+    "nota": "originais deste pacote preservados; link público é a raiz / (index.html → index_podcast.html)"
+  }
+}

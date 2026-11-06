@@ -1,0 +1,15 @@
+flowchart TD
+    U[Solicitação local] --> O[MarceloClaroOrchestrator]
+    O --> R[MultiReasoningEngine]
+    R -->|engine=quantum| Q[QuantumReasoningEngine]
+    O -->|quantum_experiment direto| S[Suíte python_statevector]
+    Q --> S
+    S --> E[Evidência tipada: configuração, métricas e digest]
+    E --> M[Retorno ao primário e resumo metacognitivo]
+    M --> B[MetaBus: observação sem promoção de trust]
+    O --> C{Alvo compatível com REA?}
+    C -->|sim| A[Inspeção estática do artefato local]
+    C -->|não| L[Limitação explícita: sem análise REA]
+    A --> F[Achados, hashes e limitações]
+    L -.-> D[Revisão de fonte separada na curadoria]
+    F -->|primário registra resumo e referência| B

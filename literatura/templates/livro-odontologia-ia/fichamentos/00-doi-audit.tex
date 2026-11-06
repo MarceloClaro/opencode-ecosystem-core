@@ -1,0 +1,194 @@
+%==============================================================================
+% RELATÓRIO DE AUDITORIA DE DOIs
+% Livro: Odontologia & Inteligência Artificial
+% Data da verificação: \today
+% Método: GET https://doi.org/{DOI} com seguimento de redirects (curl -sL)
+%==============================================================================
+
+\chapter*{Relatório de Auditoria de DOIs}
+\addcontentsline{toc}{chapter}{Auditoria de DOIs}
+
+\section*{Resumo da Auditoria}
+\begin{tabular}{lrr}
+\textbf{Status} & \textbf{Quantidade} & \textbf{Percentual} \\
+\hline
+Verificado (HTTP 200) & 28 & 45,2\% \\
+Acesso restrito (HTTP 403) & 12 & 19,4\% \\
+Não encontrado (HTTP 404) & 22 & 35,5\% \\
+\hline
+\textbf{Total} & \textbf{62} & \textbf{100\%}
+\end{tabular}
+
+\bigskip
+\noindent
+\textbf{Conclusão:} Dos 62 DOIs utilizados no livro, 28 (45,2\%)
+redirecionam para páginas de artigos acessíveis, 12 (19,4\%) redirecionam
+para páginas com acesso restrito (paywall) e 22 (35,5\%) retornaram
+\texttt{HTTP 404} -- o que sugere que estes DOIs podem ser fabricados
+ou ainda não registrados. \textbf{Recomenda-se verificação manual e
+substituição de todos os DOIs com status 404 antes da publicação.}
+
+%==============================================================================
+\section{DOIs Verificados (HTTP 200)}
+%==============================================================================
+% Estes DOIs redirecionam para páginas de artigos ativas e acessíveis.
+%------------------------------------------------------------------------------
+
+\begin{longtable}{|p{3.5cm}|p{2cm}|p{6.5cm}|p{2cm}|}
+\hline
+\textbf{DOI} & \textbf{HTTP} & \textbf{Periódico/Origem} & \textbf{Status} \\
+\hline
+\endhead
+\hline
+\endfoot
+\verb|10.1007/978-3-031-72086-4_6| & 200 & Springer LNCS & Verificado \\
+\verb|10.1007/s00784-024-05678-3| & 200 & Clin Oral Investig & Verificado \\
+\verb|10.1016/0933-3657(93)90035-2| & 200 & Artif Intell Med & Verificado \\
+\verb|10.1016/S0300-5712(97)00027-4| & 200 & J Dent & Verificado \\
+\verb|10.1016/j.adaj.2023.06.002| & 200 & J Am Dent Assoc & Verificado \\
+\verb|10.1016/j.ajodo.2024.01.015| & 200 & Am J Orthod & Verificado \\
+\verb|10.1016/j.ajodo.2024.03.008| & 200 & Am J Orthod & Verificado \\
+\verb|10.1016/j.cmpb.2024.108234| & 200 & Comput Methods Programs Biomed & Verificado \\
+\verb|10.1016/j.compmedimag.2024.102347| & 200 & Comput Med Imaging Graph & Verificado \\
+\verb|10.1016/j.ejwf.2023.12.002| & 200 & J World Fed Orthod & Verificado \\
+\verb|10.1016/j.jcms.2023.09.005| & 200 & J Craniomaxillofac Surg & Verificado \\
+\verb|10.1016/j.jdent.2021.103830| & 200 & J Dent & Verificado \\
+\verb|10.1016/j.jdent.2024.105398| & 200 & J Dent & Verificado \\
+\verb|10.1016/j.jds.2020.06.019| & 200 & J Dent Sci & Verificado \\
+\verb|10.1016/j.media.2024.103158| & 200 & Med Image Anal & Verificado \\
+\verb|10.1016/j.oooo.2022.01.005| & 200 & Oral Surg Oral Med Oral Pathol & Verificado \\
+\verb|10.1016/j.oraloncology.2024.106789| & 200 & Oral Oncol & Verificado \\
+\verb|10.1016/j.oraloncology.2024.106812| & 200 & Oral Oncol & Verificado \\
+\verb|10.1016/j.prosdent.2024.03.034| & 200 & J Prosthet Dent & Verificado \\
+\verb|10.1038/533452a| & 200 & Nature & Verificado \\
+\verb|10.1038/s41598-022-23901-7| & 200 & Sci Rep & Verificado \\
+\verb|10.1038/s42256-021-00307-0| & 200 & Nat Mach Intell & Verificado \\
+\verb|10.1038/sj.bdj.4806228| & 200 & Br Dent J & Verificado \\
+\verb|10.1109/access.2024.3401234| & 200 & IEEE Access & Verificado \\
+\verb|10.48550/arXiv.2304.02643| & 200 & arXiv (SAM) & Verificado \\
+\verb|10.48550/arXiv.2312.10997| & 200 & arXiv (RAG) & Verificado \\
+\verb|10.5051/jpis.2302880144| & 200 & J Periodontal Implant Sci & Verificado \\
+\verb|10.62486/aid202525| & 200 & Adv Dent & Verificado \\
+\hline
+\end{longtable}
+
+%==============================================================================
+\section{DOIs com Acesso Restrito (HTTP 403)}
+%==============================================================================
+% Estes DOIs existem e redirecionam para páginas de artigos, mas o acesso
+% ao conteúdo completo exige assinatura ou pagamento (paywall).
+%------------------------------------------------------------------------------
+
+\begin{longtable}{|p{3.5cm}|p{2cm}|p{6.5cm}|p{2cm}|}
+\hline
+\textbf{DOI} & \textbf{HTTP} & \textbf{Periódico/Origem} & \textbf{Status} \\
+\hline
+\endhead
+\hline
+\endfoot
+\verb|10.1002/hed.27890| & 403 & Head \& Neck (Wiley) & Paywall \\
+\verb|10.1002/hed.27912| & 403 & Head \& Neck (Wiley) & Paywall \\
+\verb|10.1111/cid.13390| & 403 & Clin Implant Dent (Wiley) & Paywall \\
+\verb|10.1111/jcpe.13890| & 403 & J Clin Periodontol (Wiley) & Paywall \\
+\verb|10.1111/jcpe.14012| & 403 & J Clin Periodontol (Wiley) & Paywall \\
+\verb|10.1111/jop.13456| & 403 & J Oral Pathol Med (Wiley) & Paywall \\
+\verb|10.1111/ocr.12745| & 403 & Orthod Craniofac Res (Wiley) & Paywall \\
+\verb|10.1111/odi.14789| & 403 & Oral Dis (Wiley) & Paywall \\
+\verb|10.1111/prd.12567| & 403 & Periodontol 2000 (Wiley) & Paywall \\
+\verb|10.1177/0022034520908533| & 403 & J Dent Res (SAGE) & Paywall \\
+\verb|10.1179/bjo.23.1.1| & 403 & Br J Orthod (Taylor \& Francis) & Paywall \\
+\verb|10.1259/dmfr.20200425| & 403 & Dentomaxillofac Radiol (BRAD) & Paywall \\
+\hline
+\end{longtable}
+
+%==============================================================================
+\section{DOIs NÃO Encontrados (HTTP 404)}
+%==============================================================================
+% Estes DOIs retornaram HTTP 404 em doi.org, indicando que podem ser
+% fabricados, digitados incorretamente, ou ainda não registrados.
+% REQUEREM VERIFICAÇÃO MANUAL URGENTE.
+%------------------------------------------------------------------------------
+
+\begin{longtable}{|p{3.5cm}|p{2cm}|p{6.5cm}|p{2cm}|}
+\hline
+\textbf{DOI} & \textbf{HTTP} & \textbf{Periódico/Origem} & \textbf{Status} \\
+\hline
+\endhead
+\hline
+\endfoot
+\verb|10.1002/JPER.23-0001| & 404 & J Periodontol & \textbf{Não encontrado} \\
+\verb|10.1002/JPER.23-0123| & 404 & J Periodontol & \textbf{Não encontrado} \\
+\verb|10.1002/j.0022-0337.2003.67.11.tb03708.x| & 404 & J Dent Educ & \textbf{Não encontrado} \\
+\verb|10.1002/jdd.2024.13345| & 404 & J Dent Educ & \textbf{Não encontrado} \\
+\verb|10.1007/978-3-031-73471-7_24| & 404 & Springer LNCS & \textbf{Não encontrado} \\
+\verb|10.1016/j.artmed.2023.102567| & 404 & Artif Intell Med & \textbf{Não encontrado} \\
+\verb|10.1016/j.oraloncology.2023.106456| & 404 & Oral Oncol & \textbf{Não encontrado} \\
+\verb|10.1038/s41467-024-46830-1| & 404 & Nat Commun & \textbf{Não encontrado} \\
+\verb|10.1038/s41578-023-00612-9| & 404 & Nat Rev Mater & \textbf{Não encontrado} \\
+\verb|10.1038/s41591-023-02345-w| & 404 & Nat Med & \textbf{Não encontrado} \\
+\verb|10.1038/s41598-023-45569-5| & 404 & Sci Rep & \textbf{Não encontrado} \\
+\verb|10.1038/s41598-023-45678-1| & 404 & Sci Rep & \textbf{Não encontrado} \\
+\verb|10.1038/s41598-023-45679-0| & 404 & Sci Rep & \textbf{Não encontrado} \\
+\verb|10.1109/ACCESS.2024.000000| & 404 & IEEE Access & \textbf{Não encontrado} \\
+\verb|10.1111/cid.13345| & 404 & Clin Implant Dent & \textbf{Não encontrado} \\
+\verb|10.11607/ijp.8567| & 404 & Int J Prosthodont & \textbf{Não encontrado} \\
+\verb|10.11607/jomi.10456| & 404 & Int J Oral Maxillofac Implants & \textbf{Não encontrado} \\
+\verb|10.1177/002203452211354| & 404 & J Dent Res & \textbf{Não encontrado} \\
+\verb|10.1177/0022034524125678| & 404 & J Dent Res & \textbf{Não encontrado} \\
+\verb|10.3390/diagnostics13152684| & 404 & Diagnostics (MDPI) & \textbf{Não encontrado} \\
+\verb|10.3390/diagnostics15030456| & 404 & Diagnostics (MDPI) & \textbf{Não encontrado} \\
+\verb|10.5051/jpis.2301240| & 404 & J Periodontal Implant Sci & \textbf{Não encontrado} \\
+\hline
+\end{longtable}
+
+%==============================================================================
+\section{Recomendações}
+%==============================================================================
+
+\begin{enumerate}
+  \item \textbf{Crítico (35,5\% dos DOIs):} Os 22 DOIs com status 404
+        representam o risco mais grave à credibilidade acadêmica do livro.
+        Recomenda-se:
+        \begin{itemize}
+          \item Verificar manualmente cada referência no PubMed, Scopus
+                ou Web of Science;
+          \item Substituir o DOI por outro válido ou remover a citação
+                se o artigo não for localizado;
+          \item Documentar o resultado da verificação em
+                \texttt{CORRIGENDUM.md}.
+        \end{itemize}
+  \item \textbf{Atenção (19,4\% dos DOIs):} Os 12 DOIs com acesso
+        restrito (403) existem e são válidos, mas exigem assinatura
+        institucional ou pagamento para acesso ao texto completo. O
+        DOI como identificador persistente é funcional; recomenda-se
+        que o autor verifique se possui acesso institucional para
+        confirmar o conteúdo.
+  \item \textbf{Satisfatório (45,2\% dos DOIs):} Os 28 DOIs verificados
+        com sucesso (200) estão ativos e acessíveis. Nenhuma ação
+        requerida.
+  \item \underline{Auditoria adicional:} Após a correção dos DOIs com
+        404, repetir este procedimento de verificação e atualizar este
+        relatório.
+\end{enumerate}
+
+%==============================================================================
+\section{Metodologia}
+%==============================================================================
+A auditoria foi realizada em \today\ utilizando \texttt{curl -sL}
+(seguimento de redirects) contra \url{https://doi.org/{DOI}}.
+\begin{itemize}
+  \item \textbf{HTTP 200:} DOI resolvido com sucesso para página do
+        artigo.
+  \item \textbf{HTTP 403:} DOI resolvido para página do artigo, mas
+        acesso negado (paywall).
+  \item \textbf{HTTP 404/202:} DOI não encontrado no sistema CrossRef.
+        Causas possíveis: DOI digitado incorretamente, DOI fabricado,
+        DOI ainda não registrado, ou DOI retirado.
+\end{itemize}
+
+\vfill
+\begin{center}
+\rule{0.5\textwidth}{0.4pt}\\
+\small{Relatório gerado automaticamente em \today.}\\
+\small{Revisão Qualis A1.}
+\end{center}

@@ -1,0 +1,136 @@
+{
+  "schema_version": "1.0",
+  "reference": {
+    "id": "r1059-reference-01",
+    "source_type": "link",
+    "media_path": null,
+    "source_url": null,
+    "source_host": "instagram.fjdo10-1.fna.fbcdn.net",
+    "source_url_sha256": "84f8ca0e3ab2d7084c1bda39022316a0a409bfa90cfad82eeae13571a7df7574",
+    "sha256": "9e1a716e9ca4b282fa40759d23acdd725d4ad2b973ec5242ba667c45c342cdbe",
+    "duration_s": 82.174708,
+    "width_px": 720,
+    "height_px": 1280,
+    "fps": 30,
+    "variable_fps": false,
+    "audio_present": true,
+    "time_origin": "início do arquivo acessível",
+    "source_offset_s": null,
+    "retrieved_at_utc": "2026-11-05T00:18:14Z"
+  },
+  "coverage": {
+    "visual": {
+      "status": "parcial",
+      "intervals": [
+        {"start_s": 0.0, "end_s": 82.174708, "method": "folhas de contato a 2 fps (9 imagens)"}
+      ],
+      "point_record_ids": [],
+      "gaps": [],
+      "limitations": [
+        "Amostragem de 2 fps não observa movimento entre amostras.",
+        "Cortes candidatos não foram confirmados quadro a quadro."
+      ]
+    },
+    "audio": {
+      "status": "parcial",
+      "intervals": [
+        {"start_s": 0.0, "end_s": 82.174708, "method": "detecção de atividade de voz e transcrição automática"}
+      ],
+      "point_record_ids": [],
+      "gaps": [],
+      "limitations": ["Sem escuta humana; música e efeitos não classificados."]
+    },
+    "transcription": {
+      "status": "parcial",
+      "intervals": [
+        {"start_s": 0.0, "end_s": 82.174708, "method": "faster-whisper small, CPU, 21 segmentos"}
+      ],
+      "point_record_ids": [],
+      "gaps": [],
+      "limitations": ["Nomes e números não conferidos por escuta humana."]
+    }
+  },
+  "evidence": [
+    {
+      "id": "e01",
+      "record_ids": ["seg01", "seg02", "seg03", "seg04", "seg05", "seg06", "seg07"],
+      "start_s": 0.0,
+      "end_s": 82.174708,
+      "time_precision": "aproximado",
+      "method": "ffmpeg fps=2 + tile 5x4",
+      "description": "Nove folhas de contato cobrindo a duração acessível.",
+      "artifact_path": null
+    },
+    {
+      "id": "e02",
+      "record_ids": ["seg01", "seg02", "seg03"],
+      "start_s": 22.266667,
+      "end_s": 40.5,
+      "time_precision": "verificado",
+      "method": "ffmpeg select scene > 0.15",
+      "description": "Dois candidatos de corte; não são prova de transição.",
+      "artifact_path": null
+    },
+    {
+      "id": "e03",
+      "record_ids": ["seg07"],
+      "start_s": 76.5,
+      "end_s": 82.174708,
+      "time_precision": "aproximado",
+      "method": "ffprobe + amostragem",
+      "description": "Encerramento com logotipo de terceiro e chamada de inscrição.",
+      "artifact_path": null
+    },
+    {
+      "id": "e04",
+      "record_ids": ["seg01", "seg02", "seg03", "seg04", "seg05", "seg06", "seg07"],
+      "start_s": 0.0,
+      "end_s": 82.174708,
+      "time_precision": "aproximado",
+      "method": "faster-whisper small",
+      "description": "Transcrição automática com 21 segmentos; sem escuta humana.",
+      "artifact_path": null
+    }
+  ],
+  "findings": [
+    {"id": "f01", "category": "enquadramento", "status": "observado", "statement": "Vídeo vertical 9:16 com mapas em tela cheia e texto no terço inferior.", "evidence_ids": ["e01"], "limitations": []},
+    {"id": "f02", "category": "crop_zoom_tracking", "status": "observado", "statement": "Zoom lento sobre mapas; ilustração do tepui permanece central.", "evidence_ids": ["e01"], "limitations": ["Trajetória exata entre amostras não medida."]},
+    {"id": "f03", "category": "tipografia_hierarquia", "status": "observado", "statement": "Títulos brancos em caixa alta e etiquetas amarelas com texto escuro.", "evidence_ids": ["e01"], "limitations": ["Família tipográfica não identificada."]},
+    {"id": "f04", "category": "cor_luz", "status": "observado", "statement": "Base verde-azulada escura com acentos amarelo, ciano e verde.", "evidence_ids": ["e01"], "limitations": ["Valores amostrados de pixels comprimidos."]},
+    {"id": "f05", "category": "legendas", "status": "observado", "statement": "Legenda em pílula inferior central, geralmente uma linha.", "evidence_ids": ["e01"], "limitations": []},
+    {"id": "f06", "category": "elementos_insercoes", "status": "observado", "statement": "Bandeiras, ícones, capa de livro e fotografias com moldura clara.", "evidence_ids": ["e01"], "limitations": []},
+    {"id": "f07", "category": "transicoes", "status": "inferido", "statement": "Alternância entre cortes secos e entradas por escala/opacidade.", "evidence_ids": ["e01", "e02"], "limitations": ["Plugins e presets não são dedutíveis da imagem."]},
+    {"id": "f08", "category": "composicao_camadas", "status": "observado", "statement": "Mapa ao fundo, ilustração isométrica e texto em camadas.", "evidence_ids": ["e01"], "limitations": []},
+    {"id": "f09", "category": "alfa_3d", "status": "nao_verificavel", "statement": "A ilustração aparenta volume, sem prova de geometria 3D ou alfa real.", "evidence_ids": [], "limitations": ["Projeto de origem não disponível."]},
+    {"id": "f10", "category": "ritmo_pausas", "status": "observado", "statement": "Sete unidades em 82 s, com estados de aproximadamente 2–4 s.", "evidence_ids": ["e01"], "limitations": ["Duração estimada por amostragem."]},
+    {"id": "f11", "category": "audio_musica_sfx", "status": "nao_verificavel", "statement": "Fala detectada; trilha e efeitos não classificados.", "evidence_ids": ["e04"], "limitations": ["Sem escuta humana; ASR não classifica trilha."]},
+    {"id": "f12", "category": "fala_movimento", "status": "inferido", "statement": "Mudanças de texto ocorrem próximas das fronteiras da fala.", "evidence_ids": ["e01", "e04"], "limitations": ["Sincronismo não medido quadro a quadro."]}
+  ],
+  "reusable_rules": [
+    {"id": "r01", "finding_ids": ["f03", "f05"], "scope": "recorrente", "trigger": "Fato enunciado pela narração", "action": "Mostrar uma pílula de alto contraste no terço inferior", "hold": "Uma ideia por estado; leitura confortável no tamanho final", "exit": "Trocar quando a fala mudar de ideia", "preserve": "Hierarquia e contraste", "avoid": "Parágrafos longos", "required_materials": ["texto próprio"], "validation": "Ler no quadro final", "adaptation_notes": "Não copiar frases da referência."},
+    {"id": "r02", "finding_ids": ["f02", "f04"], "scope": "recorrente", "trigger": "Explicação geográfica", "action": "Mapa escurecido com vinheta e zoom lento", "hold": "Enquanto a localização for o foco", "exit": "Cortar para o objeto ou dado", "preserve": "Legibilidade de texto", "avoid": "Zoom rápido e texto sobre área clara", "required_materials": ["mapa licenciado"], "validation": "Conferir ponto e crédito", "adaptation_notes": "Usar projeção declarada."},
+    {"id": "r03", "finding_ids": ["f03"], "scope": "recorrente", "trigger": "Mudança de capítulo", "action": "Título curto em caixa alta com acento de cor", "hold": "Dois a quatro segundos", "exit": "Entrada do conteúdo", "preserve": "Contraste", "avoid": "Mais de duas linhas", "required_materials": ["tipografia licenciada"], "validation": "Ler em 720 px de largura", "adaptation_notes": "Tempos são da referência, não regra universal."},
+    {"id": "r04", "finding_ids": ["f08", "f02"], "scope": "recorrente", "trigger": "Conceito que retorna", "action": "Reutilizar a mesma ilustração-âncora mudando escala/posição", "hold": "Enquanto o conceito estiver ativo", "exit": "Fade ou corte", "preserve": "Continuidade visual", "avoid": "Novo desenho para cada ideia", "required_materials": ["ilustração própria"], "validation": "Comparar quadros", "adaptation_notes": "Produzida no Motion Canvas."},
+    {"id": "r05", "finding_ids": ["f06"], "scope": "pontual", "trigger": "Relação entre três países", "action": "Etiquetas ligadas ao objeto por linhas tracejadas", "hold": "Até a relação ser compreendida", "exit": "Saída das etiquetas", "preserve": "Associação correta", "avoid": "Bandeiras sem vínculo visual", "required_materials": ["nomes e cores"], "validation": "Conferir posição", "adaptation_notes": "Não reproduzir brasões oficiais."},
+    {"id": "r06", "finding_ids": ["f06"], "scope": "proposta_condicional", "trigger": "Documento ou fotografia citada", "action": "Inserir com moldura clara e legenda curta", "hold": "Tempo de leitura", "exit": "Retorno ao mapa", "preserve": "Crédito", "avoid": "Usar sem licença", "required_materials": ["imagem licenciada"], "validation": "Conferir fonte", "adaptation_notes": "Não usada no piloto."},
+    {"id": "r07", "finding_ids": ["f10", "f12"], "scope": "proposta_condicional", "trigger": "Nova frase da narração", "action": "Trocar o estado visual na fronteira da fala", "hold": "Duração da frase", "exit": "Próxima fronteira", "preserve": "Compreensão", "avoid": "Cortar no meio de uma condição", "required_materials": ["narração medida"], "validation": "Comparar áudio e quadro", "adaptation_notes": "Sincronismo não comprovado na referência."}
+  ],
+  "routing": [
+    {"skill_id": "cp-estilo-por-referencia", "reason": "Adaptar as regras ao vídeo destino.", "finding_ids": ["f01", "f03"], "rule_ids": ["r01", "r03"], "when_to_load": "Depois de escolher o conteúdo próprio."},
+    {"skill_id": "cp-motion-explicativo", "reason": "Converter relações em ações visuais.", "finding_ids": ["f08"], "rule_ids": ["r04"], "when_to_load": "Ao planejar a animação do objeto-âncora."},
+    {"skill_id": "remotion-auditavel", "reason": "Licença, prévia e gate de render.", "finding_ids": ["f09"], "rule_ids": ["r02"], "when_to_load": "Antes de renderizar."}
+  ],
+  "limitations": [
+    "Cobertura visual por amostragem de 2 fps; sem reprodução contínua.",
+    "Áudio transcrito por ASR, sem escuta humana.",
+    "Cortes candidatos não confirmados.",
+    "Técnica 3D, alfa e fontes não verificáveis.",
+    "Direitos da referência não transferidos ao projeto destino."
+  ],
+  "outputs": {
+    "report": "referencia-de-edicao.md",
+    "timeline": "mapa-de-cenas.csv",
+    "recipe": "receita-visual.json",
+    "recreation_prompt": "prompt-de-recriacao.txt"
+  }
+}

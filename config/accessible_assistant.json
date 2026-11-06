@@ -1,0 +1,33 @@
+{
+  "bridge_path": "C:\\Users\\marce\\AppData\\Local\\Temp\\opencode-uia.ps1",
+  "allowed_windows": [
+    "Bloco de notas",
+    "Notepad",
+    "Calculadora",
+    "Calculator",
+    "Explorador de Arquivos",
+    "Microsoft Edge",
+    "ChatGPT",
+    "Word",
+    "Excel"
+  ],
+  "denied_windows": [
+    "Terminal",
+    "PowerShell",
+    "cmd",
+    "Banco",
+    "PayPal",
+    "Senha",
+    "1Password",
+    "Bitwarden",
+    "WhatsApp"
+  ],
+  "max_depth": 6,
+  "timeout_seconds": 30,
+  "read_only_windows": [
+    "OC |"
+  ],
+  "opencode_agents": [
+    "plan"
+  ]
+}

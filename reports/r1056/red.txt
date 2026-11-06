@@ -1,0 +1,224 @@
+FFFFFFFFFFF                                                              [100%]
+=================================== FAILURES ===================================
+____________ test_discovery_deduplicates_and_keeps_every_occurrence ____________
+
+tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-144/test_discovery_deduplicates_an0')
+
+    def test_discovery_deduplicates_and_keeps_every_occurrence(tmp_path):
+        code = 'flowchart LR\n A[Entrada] --> B[Saída]\n'
+        (tmp_path / 'README.md').write_text('# Um\n```mermaid\n' + code + '```\n')
+        (tmp_path / 'docs').mkdir()
+        (tmp_path / 'docs/X.md').write_text('# Dois\n```mermaid\n' + code + '```\n')
+>       found = module().discover(tmp_path, ['README.md', 'docs/X.md'], catalog=False)
+                ^^^^^^^^
+
+tests/test_r1056_animated_architecture.py:24:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def module():
+>       from scripts import animate_architecture as mod
+E       ImportError: cannot import name 'animate_architecture' from 'scripts' (/home/marceloclaro/opencode-ecosystem-core/scripts/__init__.py)
+
+tests/test_r1056_animated_architecture.py:15: ImportError
+_____________________ test_path_escape_rejected[../secret] _____________________
+
+tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-144/test_path_escape_rejected____s0')
+path = '../secret'
+
+    @pytest.mark.parametrize('path', ['../secret', '/etc/passwd', 'docs/../../secret'])
+    def test_path_escape_rejected(tmp_path, path):
+        with pytest.raises(ValueError):
+>           module().inside(tmp_path, path)
+            ^^^^^^^^
+
+tests/test_r1056_animated_architecture.py:34:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def module():
+>       from scripts import animate_architecture as mod
+E       ImportError: cannot import name 'animate_architecture' from 'scripts' (/home/marceloclaro/opencode-ecosystem-core/scripts/__init__.py)
+
+tests/test_r1056_animated_architecture.py:15: ImportError
+____________________ test_path_escape_rejected[/etc/passwd] ____________________
+
+tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-144/test_path_escape_rejected__etc0')
+path = '/etc/passwd'
+
+    @pytest.mark.parametrize('path', ['../secret', '/etc/passwd', 'docs/../../secret'])
+    def test_path_escape_rejected(tmp_path, path):
+        with pytest.raises(ValueError):
+>           module().inside(tmp_path, path)
+            ^^^^^^^^
+
+tests/test_r1056_animated_architecture.py:34:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def module():
+>       from scripts import animate_architecture as mod
+E       ImportError: cannot import name 'animate_architecture' from 'scripts' (/home/marceloclaro/opencode-ecosystem-core/scripts/__init__.py)
+
+tests/test_r1056_animated_architecture.py:15: ImportError
+_________________ test_path_escape_rejected[docs/../../secret] _________________
+
+tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-144/test_path_escape_rejected_docs0')
+path = 'docs/../../secret'
+
+    @pytest.mark.parametrize('path', ['../secret', '/etc/passwd', 'docs/../../secret'])
+    def test_path_escape_rejected(tmp_path, path):
+        with pytest.raises(ValueError):
+>           module().inside(tmp_path, path)
+            ^^^^^^^^
+
+tests/test_r1056_animated_architecture.py:34:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def module():
+>       from scripts import animate_architecture as mod
+E       ImportError: cannot import name 'animate_architecture' from 'scripts' (/home/marceloclaro/opencode-ecosystem-core/scripts/__init__.py)
+
+tests/test_r1056_animated_architecture.py:15: ImportError
+_________________________ test_symlink_escape_rejected _________________________
+
+tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-144/test_symlink_escape_rejected0')
+
+    def test_symlink_escape_rejected(tmp_path):
+        (tmp_path / 'link').symlink_to('/etc/passwd')
+        with pytest.raises(ValueError):
+>           module().inside(tmp_path, 'link')
+            ^^^^^^^^
+
+tests/test_r1056_animated_architecture.py:40:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def module():
+>       from scripts import animate_architecture as mod
+E       ImportError: cannot import name 'animate_architecture' from 'scripts' (/home/marceloclaro/opencode-ecosystem-core/scripts/__init__.py)
+
+tests/test_r1056_animated_architecture.py:15: ImportError
+_ test_unsafe_mermaid_rejected[%%{init: {securityLevel: "loose"}}%%\nflowchart LR\nA-->B] _
+
+source = '%%{init: {securityLevel: "loose"}}%%\nflowchart LR\nA-->B'
+
+    @pytest.mark.parametrize('source', [
+        '%%{init: {securityLevel: "loose"}}%%\nflowchart LR\nA-->B',
+        'flowchart LR\nA-->B\nclick A "https://example.org"',
+        'flowchart LR\nA["<script>alert(1)</script>"]',
+    ])
+    def test_unsafe_mermaid_rejected(source):
+        with pytest.raises(ValueError):
+>           module().validate_source(source)
+            ^^^^^^^^
+
+tests/test_r1056_animated_architecture.py:50:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def module():
+>       from scripts import animate_architecture as mod
+E       ImportError: cannot import name 'animate_architecture' from 'scripts' (/home/marceloclaro/opencode-ecosystem-core/scripts/__init__.py)
+
+tests/test_r1056_animated_architecture.py:15: ImportError
+_ test_unsafe_mermaid_rejected[flowchart LR\nA-->B\nclick A "https://example.org"] _
+
+source = 'flowchart LR\nA-->B\nclick A "https://example.org"'
+
+    @pytest.mark.parametrize('source', [
+        '%%{init: {securityLevel: "loose"}}%%\nflowchart LR\nA-->B',
+        'flowchart LR\nA-->B\nclick A "https://example.org"',
+        'flowchart LR\nA["<script>alert(1)</script>"]',
+    ])
+    def test_unsafe_mermaid_rejected(source):
+        with pytest.raises(ValueError):
+>           module().validate_source(source)
+            ^^^^^^^^
+
+tests/test_r1056_animated_architecture.py:50:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def module():
+>       from scripts import animate_architecture as mod
+E       ImportError: cannot import name 'animate_architecture' from 'scripts' (/home/marceloclaro/opencode-ecosystem-core/scripts/__init__.py)
+
+tests/test_r1056_animated_architecture.py:15: ImportError
+__ test_unsafe_mermaid_rejected[flowchart LR\nA["<script>alert(1)</script>"]] __
+
+source = 'flowchart LR\nA["<script>alert(1)</script>"]'
+
+    @pytest.mark.parametrize('source', [
+        '%%{init: {securityLevel: "loose"}}%%\nflowchart LR\nA-->B',
+        'flowchart LR\nA-->B\nclick A "https://example.org"',
+        'flowchart LR\nA["<script>alert(1)</script>"]',
+    ])
+    def test_unsafe_mermaid_rejected(source):
+        with pytest.raises(ValueError):
+>           module().validate_source(source)
+            ^^^^^^^^
+
+tests/test_r1056_animated_architecture.py:50:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def module():
+>       from scripts import animate_architecture as mod
+E       ImportError: cannot import name 'animate_architecture' from 'scripts' (/home/marceloclaro/opencode-ecosystem-core/scripts/__init__.py)
+
+tests/test_r1056_animated_architecture.py:15: ImportError
+___________ test_real_inventory_covers_catalog_and_published_blocks ____________
+
+    def test_real_inventory_covers_catalog_and_published_blocks():
+>       items = module().discover(ROOT)
+                ^^^^^^^^
+
+tests/test_r1056_animated_architecture.py:54:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def module():
+>       from scripts import animate_architecture as mod
+E       ImportError: cannot import name 'animate_architecture' from 'scripts' (/home/marceloclaro/opencode-ecosystem-core/scripts/__init__.py)
+
+tests/test_r1056_animated_architecture.py:15: ImportError
+____________ test_gif_validation_rejects_static_and_checks_duration ____________
+
+tmp_path = PosixPath('/tmp/pytest-of-marceloclaro/pytest-144/test_gif_validation_rejects_st0')
+
+    def test_gif_validation_rejects_static_and_checks_duration(tmp_path):
+        p = tmp_path / 'test.gif'
+        a = Image.new('RGB', (32, 32), 'white')
+        a.save(p)
+        with pytest.raises(ValueError):
+>           module().inspect_gif(p)
+            ^^^^^^^^
+
+tests/test_r1056_animated_architecture.py:68:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def module():
+>       from scripts import animate_architecture as mod
+E       ImportError: cannot import name 'animate_architecture' from 'scripts' (/home/marceloclaro/opencode-ecosystem-core/scripts/__init__.py)
+
+tests/test_r1056_animated_architecture.py:15: ImportError
+__________ test_delivery_manifest_has_real_media_and_no_source_drift ___________
+
+    def test_delivery_manifest_has_real_media_and_no_source_drift():
+>       result = module().verify(ROOT)
+                 ^^^^^^^^
+
+tests/test_r1056_animated_architecture.py:78:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def module():
+>       from scripts import animate_architecture as mod
+E       ImportError: cannot import name 'animate_architecture' from 'scripts' (/home/marceloclaro/opencode-ecosystem-core/scripts/__init__.py)
+
+tests/test_r1056_animated_architecture.py:15: ImportError
+=========================== short test summary info ============================
+FAILED tests/test_r1056_animated_architecture.py::test_discovery_deduplicates_and_keeps_every_occurrence
+FAILED tests/test_r1056_animated_architecture.py::test_path_escape_rejected[../secret]
+FAILED tests/test_r1056_animated_architecture.py::test_path_escape_rejected[/etc/passwd]
+FAILED tests/test_r1056_animated_architecture.py::test_path_escape_rejected[docs/../../secret]
+FAILED tests/test_r1056_animated_architecture.py::test_symlink_escape_rejected
+FAILED tests/test_r1056_animated_architecture.py::test_unsafe_mermaid_rejected[%%{init: {securityLevel: "loose"}}%%\nflowchart LR\nA-->B]
+FAILED tests/test_r1056_animated_architecture.py::test_unsafe_mermaid_rejected[flowchart LR\nA-->B\nclick A "https://example.org"]
+FAILED tests/test_r1056_animated_architecture.py::test_unsafe_mermaid_rejected[flowchart LR\nA["<script>alert(1)</script>"]]
+FAILED tests/test_r1056_animated_architecture.py::test_real_inventory_covers_catalog_and_published_blocks
+FAILED tests/test_r1056_animated_architecture.py::test_gif_validation_rejects_static_and_checks_duration
+FAILED tests/test_r1056_animated_architecture.py::test_delivery_manifest_has_real_media_and_no_source_drift
+11 failed in 0.54s

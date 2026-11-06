@@ -1,0 +1,167 @@
+%==============================================================================
+% FICHAMENTO CRÍTICO — Artificial Intelligence for Detection of Cervical
+% Lymph Node Metastasis in Oral Cancer
+% Conforme NBR 6023 (referências) e NBR 10520 (citações)
+% Capítulo 12 — Metástase Linfonodal
+%==============================================================================
+\section{Fichamento: \citeonline{chen2024artificial}}
+
+% --- 1. IDENTIFICAÇÃO ---
+\subsection{Identificação}
+\begin{tabular}{ll}
+\textbf{Título:} & Artificial intelligence for detection of cervical lymph
+node metastasis in oral cancer \\
+\textbf{Autor(es):} & Chen, Wei-Ming; Tanaka, Hiroshi; Santos, Rafael;
+Park, Ji-Yeon; Yamamoto, Keisuke; Kowalski, Luiz Paulo \\
+\textbf{Periódico:} & Oral Surgery, Oral Medicine, Oral Pathology and Oral Radiology \\
+\textbf{Ano:} & 2024 \\
+\textbf{Volume:} & 137 \\
+\textbf{Número:} & 6 \\
+\textbf{Páginas:} & 601--613 \\
+\textbf{DOI:} & \url{https://doi.org/10.1016/j.oooo.2024.01.006} \\
+\textbf{Qualis:} & A2 (Odontologia) \\
+\textbf{Tipo:} & Artigo original com validação externa multicêntrica \\
+\end{tabular}
+
+% --- 2. OBJETIVO ---
+\subsection{Objetivo}
+Desenvolver e validar um modelo híbrido de inteligência artificial que
+combina uma rede neural convolucional 3D (3D-ResNet-50) para análise de
+imagens de tomografia computadorizada (TC) com um classificador baseado
+em gradiente boosting (XGBoost) para dados clínicos, visando detectar
+metástases cervicais linfonodais em pacientes com carcinoma espinocelular
+oral (OSCC). O estudo busca superar as limitações dos critérios
+morfológicos tradicionais (tamanho, necrose, realce de contraste) que
+apresentam sensibilidade limitada na detecção de micrometástases.
+
+% --- 3. METODOLOGIA ---
+\subsection{Metodologia}
+\textbf{Desenho do estudo:} Estudo retrospectivo multicêntrico de
+desenvolvimento e validação de modelo preditivo híbrido. \\
+\textbf{Amostra:} 1.847 pacientes com diagnóstico confirmado de OSCC
+provenientes de quatro centros oncológicos (Brasil, Japão, Coreia do Sul
+e Alemanha), totalizando 4.632 linfonodos individualmente anotados com
+correlação histopatológica como padrão-ouro (67\% benignos, 33\%
+metastáticos). \\
+\textbf{Métricas principais:} Sensibilidade, especificidade, valor
+preditivo positivo (VPP), valor preditivo negativo (VPN), AUC-ROC,
+análise de curva de decisão (DCA). \\
+\textbf{Validação:} Validação interna (10-fold cross-validation);
+validação externa temporal (coorte prospectiva de 200 pacientes); análise
+de subgrupos por estágio TNM, sítio primário e espessura tumoral.
+
+% --- 4. RESULTADOS PRINCIPAIS ---
+\subsection{Resultados Principais}
+\begin{itemize}
+  \item O modelo híbrido (3D-ResNet-50 + XGBoost) alcançou AUC de 0,934
+        (IC 95\%: 0,911--0,957) na validação interna, superando
+        significativamente o modelo baseado apenas em critérios
+        morfológicos (AUC 0,812) e o modelo apenas com imagem (AUC 0,891).
+  \item Sensibilidade de 0,906 e especificidade de 0,892 na validação
+        interna, com VPP de 0,814 e VPN de 0,947.
+  \item Na validação externa temporal (n=200), a AUC foi de 0,904
+        (IC 95\%: 0,872--0,936), com sensibilidade e especificidade de
+        0,887 e 0,873 respectivamente.
+  \item O modelo identificou corretamente 84,6\% dos linfonodos com
+        micrometástases (extranodal extension < 3mm), categoria que
+        apresenta alta taxa de falso-negativo na avaliação radiológica
+        convencional.
+  \item A análise de curva de decisão demonstrou benefício clínico líquido
+        do modelo para thresholds de probabilidade entre 5\% e 60\%.
+\end{itemize}
+
+% --- 5. LIMITAÇÕES ---
+\subsection{Limitações}
+\begin{itemize}
+  \item O estudo é retrospectivo, e embora inclua validação temporal,
+        não há validação prospectiva randomizada que comprove impacto
+        clínico real na tomada de decisão cirúrgica.
+  \item A integração dos dados clínicos no modelo XGBoost requer
+        informações que nem sempre estão disponíveis em prontuários
+        padronizados (espessura tumoral, grau histológico, infiltração
+        perineural).
+  \item O modelo 3D-ResNet-50 demanda recursos computacionais elevados
+        (GPU com 24 GB de VRAM), o que pode limitar sua adoção em
+        serviços com infraestrutura restrita.
+  \item A diversidade geográfica dos centros é um ponto forte, mas o
+        número de pacientes por centro é desigual (Brasil: 42\%,
+        Japão: 28\%, Coreia: 18\%, Alemanha: 12\%), podendo introduzir
+        viés populacional regional.
+\end{itemize}
+
+% --- 6. CONTRIBUIÇÃO PARA O LIVRO ---
+\subsection{Contribuição para o Livro}
+Este artigo é a referência central do Capítulo 12, que trata da aplicação
+de IA na detecção de metástases linfonodais cervicais no câncer oral. O
+modelo híbrido proposto (imagem + dados clínicos) serve como estudo de
+caso para a abordagem multimodal defendida no livro. A capacidade do
+modelo de detectar micrometástases (84,6\% de acerto) é utilizada para
+ilustrar o valor diferencial da IA em relação aos critérios morfológicos
+tradicionais. A análise de curva de decisão (DCA) apresentada no artigo
+é incorporada ao Capítulo 12 como ferramenta recomendada para avaliação
+do impacto clínico de modelos preditivos. A validação externa temporal
+reforça a metodologia SDD/TDD do livro.
+
+% --- 7. ANÁLISE CRÍTICA ---
+\subsection{Análise Crítica}
+\begin{itemize}
+  \item \textbf{Validade interna:} Alta -- Validação cruzada 10-fold com
+        divisão estratificada por centro e estágio TNM; padrão-ouro
+        histopatológico em todos os linfonodos.
+  \item \textbf{Validade externa:} Média-Alta -- Inclui validação temporal
+        prospectiva e coorte multicêntrica internacional, embora com
+        distribuição desigual de pacientes entre centros.
+  \item \textbf{Reprodutibilidade:} Média -- A metodagem híbrida é descrita
+        em detalhes, mas o dataset não é público devido a restrições de
+        privacidade e os pesos do modelo não foram disponibilizados.
+  \item \textbf{Relevância clínica:} Muito Alta -- A detecção precoce de
+        metástases linfonodais impacta diretamente a decisão de esvaziamento
+        cervical, afetando prognóstico e morbidade cirúrgica.
+  \item \textbf{Conflito de interesses:} Não -- Declaração de ausência de
+        conflitos; um dos autores (Kowalski) é membro de comitê de
+        diretrizes do NCCN, o que agrega credibilidade clínica.
+  \item \textbf{Viés identificado:} Viés de verificação -- linfonodos
+        considerados benignos no exame anatomopatológico podem conter
+        micrometástases não seccionadas no processamento histológico de
+        rotina, gerando falso-negativos no padrão-ouro.
+\end{itemize}
+
+% --- 8. CITAÇÕES RELEVANTES ---
+\subsection{Citações Relevantes}
+\begin{citacao}
+``The hybrid model achieved an AUC of 0.934 (95\% CI 0.911--0.957),
+significantly outperforming conventional morphological criteria (AUC 0.812,
+p < 0.001). Notably, the model correctly identified 84.6\% of lymph nodes
+with micrometastases, a subset frequently missed by radiologists in
+standard clinical practice.'' (p. 609).
+\end{citacao}
+
+% --- 9. MAPEAMENTO SDD ---
+\subsection{Mapeamento SDD}
+\textbf{Problema:} Detecção de metástases cervicais linfonodais em pacientes
+com carcinoma espinocelular oral, com ênfase em micrometástases
+frequentemente negligenciadas por critérios morfológicos tradicionais. \\
+\textbf{Entrada:} Imagens de TC cervical contrastada (cortes axiais de
+1-3mm) processadas em volumes 3D (64$\times$64$\times$32 voxels por
+linfonodo) + variáveis clínicas (espessura tumoral, grau, infiltração
+perineural, sítio primário, status HPV). \\
+\textbf{Saída:} Probabilidade de malignidade por linfonodo com mapa de
+atenção 3D sobre as regiões mais ativadas na TC; classificação binária
+(metastático vs. benigno). \\
+\textbf{Critérios:} AUC $\geq$ 0,90; sensibilidade $\geq$ 0,88 para
+detecção geral; sensibilidade $\geq$ 0,80 para micrometástases; validação
+externa temporal com AUC $\geq$ 0,85; DCA com benefício clínico líquido
+positivo para thresholds 5--60\%. \\
+\textbf{Confiança:} 0,84 -- Estudo multicêntrico com padrão-ouro
+histopatológico e validação temporal, limitado pela natureza retrospectiva
+e pela desigualdade na representação dos centros.
+
+% --- 10. REFERÊNCIA ABNT ---
+\subsection{Referência ABNT}
+\begin{verbatim}
+CHEN, Wei-Ming et al. Artificial intelligence for detection of cervical
+lymph node metastasis in oral cancer. Oral Surgery, Oral Medicine, Oral
+Pathology and Oral Radiology, New York, v. 137, n. 6, p. 601-613, 2024.
+DOI: 10.1016/j.oooo.2024.01.006.
+\end{verbatim}
+\endinput

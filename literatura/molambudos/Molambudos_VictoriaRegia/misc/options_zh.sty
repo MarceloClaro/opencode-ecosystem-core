@@ -1,0 +1,251 @@
+% =============================================================================
+% options_zh.sty — OpenCode Typography System (XeLaTeX + CJK variant)
+% Mirrors misc/options.sty for the Simplified Chinese edition (SPEC-935-R356).
+% Differences vs options.sty:
+%   - fontspec + xeCJK (XeLaTeX) instead of ebgaramond (pdflatex)
+%   - microtype removed (no tracking support under XeLaTeX/fontspec)
+%   - babel english (neutral language; CJK handled by xeCJK)
+% =============================================================================
+
+% --- Idioma (neutro; CJK via xeCJK) ---
+\usepackage[english]{babel}
+
+% --- Capitulares Decorativas (Lettrines) — mesmo padrão do template ---
+\usepackage{lettrine}
+\setcounter{DefaultLines}{3}
+\setlength{\DefaultFindent}{2pt}
+\setlength{\DefaultNindent}{4pt}
+\renewcommand{\DefaultLhang}{0}
+\renewcommand{\LettrineTextFont}{\scshape}
+
+\usepackage{graphicx}
+\usepackage{xcolor}
+
+% --- Fontes: EB Garamond (latim) + Noto Serif CJK SC (chinês) ---
+\usepackage{fontspec}
+\setmainfont{EB Garamond}
+\setsansfont{Noto Serif CJK SC}
+\usepackage{xeCJK}
+\setCJKmainfont{Noto Serif CJK SC}
+\setCJKsansfont{Noto Serif CJK SC}
+\setCJKmonofont{Noto Serif CJK SC}
+% Símbolos não-CJK críticos (☑ ↪ ★ ● ☒ ☐) mapeados para comandos seguros
+\usepackage{newunicodechar}
+\newunicodechar{☑}{\ensuremath{\checkmark}}
+\newunicodechar{☐}{\ensuremath{\Box}}
+\newunicodechar{☒}{\texttimes}
+\newunicodechar{↪}{\ensuremath{\hookrightarrow}}
+\newunicodechar{★}{\ensuremath{\bigstar}}
+\newunicodechar{●}{\textbullet}
+\newunicodechar{○}{\ensuremath{\circ}}
+\newunicodechar{→}{$\rightarrow$}
+\newunicodechar{←}{$\leftarrow$}
+\newunicodechar{◆}{\ensuremath{\blacklozenge}}
+\newunicodechar{☆}{\ensuremath{\star}}
+\newunicodechar{⟡}{\ensuremath{\blacktriangleright}}
+
+\usepackage{tikz}
+\usetikzlibrary{math,positioning,shadows.blur}
+\usepackage{url}
+\usepackage{pgfornament}
+\usepackage{amssymb}
+\usepackage[
+  colorlinks=true,
+  linkcolor=red!75!black,
+  citecolor=red!75!black,
+  urlcolor=red!75!black
+]{hyperref}
+\usepackage{booktabs}
+\usepackage{enumitem}
+% Unnumbered captions must not create a duplicate anchor in the same float.
+\usepackage[hypcap=false]{caption}
+\usepackage{array}
+\usepackage{supertabular}
+
+% Reflowable documentary tables with a local minimum font size.
+\newenvironment{moltabletwo}{%
+  \begingroup\footnotesize\setlength{\tabcolsep}{2.5pt}%
+  \renewcommand{\arraystretch}{1.12}%
+  \begin{supertabular}{|p{0.25\textwidth}|p{0.65\textwidth}|}%
+}{\end{supertabular}\endgroup}
+\newenvironment{moltablethree}{%
+  \begingroup\footnotesize\setlength{\tabcolsep}{2.5pt}%
+  \renewcommand{\arraystretch}{1.12}%
+  \begin{supertabular}{|p{0.20\textwidth}|p{0.41\textwidth}|p{0.29\textwidth}|}%
+}{\end{supertabular}\endgroup}
+\newenvironment{moltablefour}{%
+  \begingroup\footnotesize\setlength{\tabcolsep}{2.5pt}%
+  \renewcommand{\arraystretch}{1.12}%
+  \begin{supertabular}{|p{0.17\textwidth}|p{0.24\textwidth}|p{0.25\textwidth}|p{0.24\textwidth}|}%
+}{\end{supertabular}\endgroup}
+\newenvironment{moltablefive}{%
+  \begingroup\footnotesize\setlength{\tabcolsep}{2pt}%
+  \renewcommand{\arraystretch}{1.12}%
+  \begin{supertabular}{|p{0.07\textwidth}|p{0.15\textwidth}|p{0.225\textwidth}|p{0.205\textwidth}|p{0.24\textwidth}|}%
+}{\end{supertabular}\endgroup}
+\newenvironment{moltablesix}{%
+  \begingroup\footnotesize\setlength{\tabcolsep}{2pt}%
+  \renewcommand{\arraystretch}{1.12}%
+  \begin{supertabular}{|p{0.05\textwidth}|p{0.13\textwidth}|p{0.10\textwidth}|p{0.10\textwidth}|p{0.245\textwidth}|p{0.235\textwidth}|}%
+}{\end{supertabular}\endgroup}
+
+\newcommand{\hsp}{\kern 1pt}
+
+% =============================================================================
+% TIPOGRAFIA PROFISSIONAL DE ALTA MANCHETA (Master Typographer)
+% =============================================================================
+
+% --- Entrelinha de Alta Legibilidade (1.25 para 14pt) ---
+\renewcommand{\baselinestretch}{1.25}
+
+% --- Espaçamento entre parágrafos (livre de indentação, respiro visual) ---
+\setlength{\parskip}{0.5em}
+\setlength{\parindent}{0pt}
+
+% --- Sentence spacing ---
+\frenchspacing
+
+% --- Prevenção Absoluta de Viúvas, Órfãs e Quebras de Página Ruins ---
+\widowpenalty=10000
+\clubpenalty=10000
+\brokenpenalty=10000
+
+% --- Margens ampliadas para respiro visual ---
+\ifdefined\MolambudosPaperWidth
+  \usepackage[
+      paperheight=\MolambudosPaperHeight,
+      paperwidth=\MolambudosPaperWidth,
+      top=\MolambudosTopMargin,
+      bottom=\MolambudosBottomMargin,
+      outer=\MolambudosOuterMargin,
+      inner=\MolambudosInnerMargin,
+      twoside,
+      headsep=6mm,
+      footskip=8mm
+  ]{geometry}
+\else
+  \usepackage[
+      paperheight=9in,
+      paperwidth=9in,
+      top=1in,
+      bottom=1in,
+      outer=1in,
+      inner=1in,
+      twoside
+  ]{geometry}
+\fi
+
+% --- Composição Mestra (Justificação Equilibrada) ---
+\tolerance=1200
+\hbadness=1400
+\hyphenpenalty=400
+\exhyphenpenalty=200
+\doublehyphendemerits=10000
+\finalhyphendemerits=5000
+\emergencystretch=1.5em
+
+% =============================================================================
+% TÍTULOS
+% =============================================================================
+
+% --- Table of contents (compactado para caber em 1 página) ---
+\usepackage[titles]{tocloft}
+\renewcommand{\cftchapfont}{\normalsize\bfseries}
+\renewcommand{\cftchappagefont}{\normalfont}
+\renewcommand{\cftpartfont}{\normalsize\scshape}
+\renewcommand{\cftpartpagefont}{\normalfont}
+\renewcommand{\numberline}[1]{}
+\setlength{\cftchapnumwidth}{0pt}
+\setlength{\cftpartnumwidth}{0pt}
+\setlength{\cftbeforechapskip}{0.4em}
+\setlength{\cftbeforepartskip}{0.8em}
+\setlength{\cftchapindent}{0pt}
+\setlength{\cftpartindent}{0pt}
+
+% --- Chapter titles: centered ---
+\usepackage[center]{titlesec}
+\renewcommand{\thechapter}{\Roman{chapter}}
+
+\titleformat{\chapter}[block]
+  {\normalfont\LARGE\centering}
+  {\thechapter\\}
+  {0pt}
+  {}
+\titlespacing*{\chapter}{0pt}{0pt}{0.5em}
+
+\makeatletter
+\renewcommand{\@makechapterhead}[1]{%
+  \vspace*{20pt}
+  {\parindent \z@ \centering \normalfont
+    \LARGE
+    \ifnum\c@chapter>0
+    \thechapter \par {#1}\par\nobreak
+    \vspace{0.3em}
+    \pgfornament[width=4cm]{85}\par
+    \vspace{1em}
+    \else
+      #1\par\nobreak
+      \vspace{0.5em}
+    \fi
+  }}
+\makeatother
+
+% --- Section titles ---
+\titleformat{\section}
+  {\normalfont\large\bfseries\centering}
+  {}
+  {0pt}
+  {}
+\titlespacing*{\section}{0pt}{1em}{0.5em}
+
+% --- Subsection titles ---
+\titleformat{\subsection}
+  {\normalfont\normalsize\bfseries}
+  {}
+  {0pt}
+  {}
+\titlespacing*{\subsection}{0pt}{0.5em}{0.3em}
+
+% =============================================================================
+% CABEÇALHO E RODAPÉ
+% =============================================================================
+\usepackage{fancyhdr}
+\setlength{\headheight}{18pt}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhf[CFE,CFO]{\thepage}
+\fancyhead[CE]{\itshape\authorname}
+\fancyhead[CO]{\itshape\booktitle}
+
+% =============================================================================
+% CORES
+% =============================================================================
+\definecolor{customgold}{RGB}{203,161,53}
+\definecolor{darkmagenta}{RGB}{139, 0, 139}
+\definecolor{ultradarkmagenta}{RGB}{50, 0, 50}
+\definecolor{textgray}{RGB}{90, 90, 90}
+\definecolor{linkred}{RGB}{160, 30, 30}
+
+% =============================================================================
+% FUNDO SÉPIA
+% =============================================================================
+\definecolor{papersepia}{RGB}{248, 240, 215}
+\pagecolor{papersepia}
+
+% =============================================================================
+% ÍCONES POR GRUPO DE FRAGMENTO
+% =============================================================================
+\newcommand{\fragiconmem}{1}
+\newcommand{\fragicondoc}{2}
+\newcommand{\fragiconluc}{3}
+\newcommand{\fragiconcont}{4}
+\newcommand{\fragiconpart}{5}
+
+\newcommand{\fragicon}[1]{%
+  \par\vspace{0.8em}%
+  \noindent\hfill%
+  \includegraphics[width=1.2cm]{icone/\csname fragicon#1\endcsname.png}%
+  \hfill\null\par%
+  \vspace{0.4em}%
+}

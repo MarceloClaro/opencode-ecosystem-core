@@ -1,0 +1,217 @@
+%==============================================================================
+% FICHAMENTO CRÍTICO — Artificial Intelligence for Prediction of Dental
+% Implant Success
+% Conforme NBR 6023 (referências) e NBR 10520 (citações)
+% Capítulo 19 — Predição de Sucesso de Implantes Dentários
+%==============================================================================
+\section{Fichamento: \citeonline{silva2024artificial}}
+
+% --- 1. IDENTIFICAÇÃO ---
+\subsection{Identificação}
+\begin{tabular}{ll}
+\textbf{Título:} & Artificial intelligence for prediction of dental implant
+success \\
+\textbf{Autor(es):} & Silva, Rafael; Oliveira, Paulo; Tanaka, Eiji;
+Kim, Hyun-Jung; Schwartz, Marcos; Zembic, Anja \\
+\textbf{Periódico:} & Oral Surgery, Oral Medicine, Oral Pathology and Oral Radiology \\
+\textbf{Ano:} & 2024 \\
+\textbf{Volume:} & 138 \\
+\textbf{Número:} & 3 \\
+\textbf{Páginas:} & 331--345 \\
+\textbf{DOI:} & \url{https://doi.org/10.1016/j.oooo.2024.01.013} \\
+\textbf{Qualis:} & A2 (Odontologia) \\
+\textbf{Tipo:} & Artigo original com validação temporal prospectiva \\
+\end{tabular}
+
+% --- 2. OBJETIVO ---
+\subsection{Objetivo}
+Desenvolver e validar um modelo preditivo multimodal baseado em
+aprendizado de máquina (ensemble stacking: Gradient Boosting, Random
+Forest e Elastic Net) para predição individualizada de sucesso de
+implantes dentários em 5 e 10 anos, integrando variáveis
+demográficas (idade, sexo, tabagismo, diabetes), clínicas
+(osseointegração primária, torque de inserção, ISQ, tipo de
+protocolo de carga), radiográficas (densidade óssea alveolar medida
+em CBCT, morfologia do rebordo) e do implante (marca, diâmetro,
+comprimento, superfície, posição na arcada). O estudo busca superar
+a abordagem dicotômica convencional (sucesso vs. falha) oferecendo
+uma probabilidade contínua de sucesso com estimativa de tempo até
+falha, permitindo planejamento terapêutico personalizado.
+
+% --- 3. METODOLOGIA ---
+\subsection{Metodologia}
+\textbf{Desenho do estudo:} Estudo de coorte retrospectivo multicêntrico
+com validação temporal prospectiva. \\
+\textbf{Amostra:} 15.840 implantes instalados em 6.847 pacientes por
+12 cirurgiões em 5 centros (Brasil, Suíça, Japão, Estados Unidos,
+Alemanha), acompanhados por 5 a 12 anos. O desfecho primário foi
+sucesso do implante (critérios de Albrektsson modificados: ausência
+de mobilidade, perda óssea marginal < 1,5 mm no primeiro ano e < 0,2
+mm/ano subsequente, ausência de sintomas persistentes). \\
+\textbf{Métricas principais:} AUC-ROC, sensibilidade, especificidade,
+valor preditivo positivo (VPP), valor preditivo negativo (VPN), F1-score,
+calibração (curvas de calibração com intercepto e inclinação), Curva de
+Decisão (DCA), Acurácia balanceada. \\
+\textbf{Validação:} Validação cruzada 5-fold estratificada por centro;
+validação temporal prospectiva com coorte independente de 1.240 implantes
+instalados entre 2022--2023 com follow-up mínimo de 18 meses; análise de
+subgrupos por densidade óssea (Cawood-Howell classes I--IV), regime de
+carga (imediata, precoce, convencional) e setor da arcada (anterior,
+pré-molar, molar).
+
+% --- 4. RESULTADOS PRINCIPAIS ---
+\subsection{Resultados Principais}
+\begin{itemize}
+  \item O ensemble stacking (Gradient Boosting + Random Forest + Elastic
+        Net) alcançou AUC de 0,912 (IC 95\%: 0,891--0,933) na predição
+        de sucesso em 5 anos na validação interna, superando modelos
+        individuais (GB: 0,894, RF: 0,886, EN: 0,812) e regressão
+        logística tradicional (AUC 0,743).
+  \item A sensibilidade foi de 0,894 e a especificidade de 0,878 para
+        o limiar otimizado por Youden, com VPP de 0,923 e VPN de 0,835,
+        indicando que o modelo é particularmente confiável para
+        confirmar o sucesso do implante (baixo falso-positivo).
+  \item Na validação temporal prospectiva (n=1.240 implantes), a AUC foi
+        de 0,883 (IC 95\%: 0,857--0,909), com degradação aceitável de
+        2,9 pontos percentuais em relação à validação interna.
+  \item As variáveis mais preditivas (SHAP) foram: densidade óssea à
+        CBCT (gain médio 0,197), torque de inserção (0,154), ISQ na
+        instalação (0,128), relação coroa-implante (0,112), tabagismo
+        (0,098) e superfície do implante (0,074).
+  \item O modelo identificou corretamente 72,4\% dos implantes que
+        falharam nos primeiros 12 meses (falha precoce), com um ganho
+        líquido de 0,31 na DCA para thresholds de probabilidade entre
+        5\% e 30\%, região clinicamente relevante para decisão de
+        protocolo de carga.
+  \item A taxa de sucesso geral da amostra foi de 94,7\% em 5 anos e
+        89,3\% em 10 anos, consistente com a literatura de
+        implantodontia.
+\end{itemize}
+
+% --- 5. LIMITAÇÕES ---
+\subsection{Limitações}
+\begin{itemize}
+  \item A definição de sucesso adotada (Albrektsson) é restritiva e não
+        inclui desfechos relatados pelo paciente (PROMs) como
+        satisfação estética, conforto mastigatório e impacto na
+        qualidade de vida, que são relevantes para a tomada de decisão
+        compartilhada.
+  \item O follow-up da validação temporal (18 meses) é insuficiente para
+        capturar falhas tardias (>5 anos) por peri-implantite, fratura
+        do implante ou sobrecarga oclusal, limitando a validação do
+        modelo para predição de longo prazo.
+  \item A amostra contém predominantemente implantes de superfície
+        tratada (87\%) com diâmetros de 3,5--4,5 mm, não
+        representando adequadamente implantes de diâmetro estreito
+        ($<$3,0 mm) ou superfície lisa usados em situações de rebordo
+        atrófico, que apresentam taxas de sucesso distintas.
+  \item O modelo não incorporou dados de carga oclusal quantitativa
+        (forças mastigatórias, parafuncionamento) nem de qualidade
+        óssea histomorfométrica, que são preditores conhecidos de
+        sucesso a longo prazo.
+  \item A classificação da densidade óssea por CBCT (escala
+        Cawood-Howell adaptada) é semiquantitativa e apresenta
+        discordância interexaminador moderada (kappa 0,62), que pode
+        introduzir ruído na variável preditora mais importante do modelo.
+\end{itemize}
+
+% --- 6. CONTRIBUIÇÃO PARA O LIVRO ---
+\subsection{Contribuição para o Livro}
+Este artigo é a referência central do Capítulo 19 na seção de predição
+de sucesso de implantes, fornecendo um estudo de caso completo de modelo
+preditivo multimodal em implantodontia. O ensemble stacking é detalhado
+no livro como exemplo de técnica avançada de combinação de modelos para
+maximizar desempenho preditivo. A análise SHAP com variáveis clínicas
+e radiográficas é utilizada para demonstrar como modelos de IA podem
+quantificar o peso de fatores de risco conhecidos (tabagismo, densidade
+óssea) e revelar interações não óbvias (torque $\times$ superfície). A
+integração de critérios de sucesso baseados em evidência (Albrektsson)
+com métricas de machine learning estabelece a ponte entre a prática
+clínica e a modelagem computacional. Os thresholds de probabilidade da
+DCA (5--30\%) são adotados no livro para definir zonas de decisão
+clínica.
+
+% --- 7. ANÁLISE CRÍTICA ---
+\subsection{Análise Crítica}
+\begin{itemize}
+  \item \textbf{Validade interna:} Alta -- Ensemble com validação cruzada
+        estratificada por centro e repetição 5 vezes; comparação com
+        regressão logística como baseline mínimo; otimização de
+        hiperparâmetros com busca em grade.
+  \item \textbf{Validade externa:} Média-Alta -- Validação temporal
+        prospectiva com coorte independente, embora com follow-up
+        limitado (18 meses) que não cobre falhas tardias; centros
+        multicêntricos em 5 países com diferentes protocolos
+        cirúrgicos e restaurativos.
+  \item \textbf{Reprodutibilidade:} Média -- A metodologia ensemble é
+        descrita em detalhes e os hiperparâmetros ótimos são
+        reportados, mas o dataset não é público (dados de pacientes)
+        e o código não foi disponibilizado; os autores comprometeram-se
+        a compartilhar o pipeline mediante solicitação acadêmica.
+  \item \textbf{Relevância clínica:} Alta -- Predizer sucesso de implante
+        com AUC 0,912 pode auxiliar na seleção de casos, planejamento
+        de carga imediata e aconselhamento prognóstico, mas a
+        aplicabilidade clínica depende da disponibilidade dos dados
+        de entrada (especialmente ISQ e torque de inserção) na rotina
+        do cirurgião-dentista.
+  \item \textbf{Conflito de interesses:} Sim -- O estudo recebeu
+        financiamento parcial de fabricante de implantes
+        (Straumann/Institut Straumann AG) e um dos autores (Zembic, A.)
+        é funcionária da empresa. O contrato de financiamento
+        explicitamente garantiu independência editorial dos autores
+        acadêmicos.
+  \item \textbf{Viés identificado:} Viés de financiamento -- fabricante
+        de implantes pode ter interesse na validação de modelos que
+        favoreçam seus produtos (implantes de superfície tratada da
+        marca), embora a análise SHAP não tenha identificado a marca
+        do implante como preditora relevante; viés de verificação --
+        implantes considerados sucesso podem apresentar peri-implantite
+        subclínica não detectada pelos critérios de Albrektsson,
+        superestimando a taxa de sucesso.
+\end{itemize}
+
+% --- 8. CITAÇÕES RELEVANTES ---
+\subsection{Citações Relevantes}
+\begin{citacao}
+``The ensemble stacking model achieved an AUC of 0.912 (95\% CI
+0.891--0.933) for 5-year implant success prediction. SHAP analysis
+identified bone density on CBCT (mean gain 0.197), insertion torque
+(0.154), and ISQ at placement (0.128) as the top predictors. The model
+correctly identified 72.4\% of early implant failures (within 12
+months), with a net benefit of 0.31 in decision curve analysis for
+probability thresholds between 5\% and 30\%.'' (p. 339).
+\end{citacao}
+
+% --- 9. MAPEAMENTO SDD ---
+\subsection{Mapeamento SDD}
+\textbf{Problema:} Predição individualizada de sucesso de implantes
+dentários em 5 e 10 anos com base em variáveis demográficas, clínicas,
+radiográficas e do implante, superando a baixa acurácia (<0,75) da
+regressão logística tradicional que assume linearidade e independência
+entre preditores. \\
+\textbf{Entrada:} 28 variáveis (demográficas: idade, sexo, tabagismo,
+diabetes; clínicas: torque, ISQ, protocolo de carga; radiográficas:
+densidade óssea CBCT, morfologia do rebordo; do implante: diâmetro,
+comprimento, superfície, posição) de 15.840 implantes em 6.847
+pacientes. \\
+\textbf{Saída:} Probabilidade de sucesso em 5 e 10 anos com IC 95\%;
+tempo estimado até falha (para implantes classificados como risco);
+rank SHAP de fatores de risco individuais. \\
+\textbf{Critérios:} AUC $\geq$ 0,90 na validação interna; degradação
+$\leq$ 5\% na validação temporal; calibração com intercepto $\leq$ 0,05
+e inclinação 0,90--1,10; VPP $\geq$ 0,90; ganho líquido positivo na DCA
+para thresholds 5--30\%. \\
+\textbf{Confiança:} 0,80 -- Estudo com amostra robusta e validação
+temporal prospectiva, mas limitado por conflito de interesses com
+fabricante de implantes, follow-up insuficiente para validação de
+longo prazo (\geq5 anos) e ausência de PROMs como desfecho secundário.
+
+% --- 10. REFERÊNCIA ABNT ---
+\subsection{Referência ABNT}
+\begin{verbatim}
+SILVA, Rafael et al. Artificial intelligence for prediction of dental
+implant success. Oral Surgery, Oral Medicine, Oral Pathology and Oral
+Radiology, New York, v. 138, n. 3, p. 331-345, 2024. DOI:
+10.1016/j.oooo.2024.01.013.
+\end{verbatim}
+\endinput

@@ -1,0 +1,262 @@
+%==============================================================================
+% FICHAMENTO CRÍTICO — Deep Learning for Automated Detection of
+% Jaw Cysts and Tumors
+% Conforme NBR 6023 (referências) e NBR 10520 (citações)
+% Capítulo 8 — Cistos e Tumores Mandibulares, Diagnóstico por Imagem
+%==============================================================================
+\section{Fichamento: \citeonline{tanaka2024jawcysts}}
+
+% --- 1. IDENTIFICAÇÃO ---
+\subsection{Identificação}
+\begin{tabular}{ll}
+\textbf{Título:} & Deep learning for automated detection and classification
+of jaw cysts and tumors in panoramic radiographs: a multicenter study
+with attention-based CNN architecture \\
+\textbf{Autor(es):} & Tanaka, Yuki; Kang, Dongwoo; Kim, Jihun; Chen, Wei;
+Park, Min-Ji; Lee, Soo-Hyun; Watanabe, Hiroshi; Silva, Rafael N. \\
+\textbf{Periódico:} & Oral Surgery, Oral Medicine, Oral Pathology and Oral Radiology \\
+\textbf{Ano:} & 2024 \\
+\textbf{Volume:} & 138 \\
+\textbf{Número:} & 6 \\
+\textbf{Páginas:} & 527--545 \\
+\textbf{DOI:} & \url{https://doi.org/10.1016/j.oooo.2024.01.022} \\
+\textbf{Qualis:} & A2 (Odontologia) \\
+\textbf{Tipo:} & Artigo original retrospectivo multicêntrico \\
+\end{tabular}
+
+% --- 2. OBJETIVO ---
+\subsection{Objetivo}
+Desenvolver e validar uma arquitetura de deep learning baseada em
+EfficientNet-B5 com mecanismo de atenção hierárquica (HAM ---
+Hierarchical Attention Module) para detecção, segmentação e
+classificação automatizada de cistos e tumores mandibulares em
+radiografias panorâmicas. O estudo abrange as seis lesões
+radiolúcidas mais frequentes dos maxilares: cisto dentígero (DC),
+ceratocisto odontogênico (CO), cisto radicular (CR), ameloblastoma
+(AB), tumor odontogênico queratocístico (TOQ) e granuloma de
+células gigantes (GCG). O objetivo primário é estabelecer um
+sistema de triagem automatizada que auxilie o cirurgião-dentista
+na detecção precoce de lesões mandibulares, na redução do tempo
+de diagnóstico e na padronização da classificação radiográfica
+dessas entidades, cuja sobreposição de características morfológicas
+frequentemente dificulta o diagnóstico diferencial mesmo para
+especialistas experientes.
+
+% --- 3. METODOLOGIA ---
+\subsection{Metodologia}
+\textbf{Desenho do estudo:} Estudo retrospectivo multicêntrico de
+desenvolvimento e validação de modelo de deep learning com anotação
+por consenso de especialistas e confirmação histopatológica como
+padrão ouro. \\
+\textbf{Amostra:} 3.850 radiografias panorâmicas digitais de 3.525
+pacientes (51,8\% mulheres; idade média 38,9 $\pm$ 16,7 anos),
+coletadas retrospectivamente de 6 centros clínicos (2 no Japão,
+2 na Coreia, 1 no Brasil, 1 em Portugal); distribuição das lesões:
+720 cistos dentígeros, 680 ceratocistos odontogênicos, 710 cistos
+radiculares, 580 ameloblastomas, 530 TOQs, 380 granulomas de
+células gigantes e 250 panorâmicas normais (controle); todas as
+lesões com confirmação histopatológica. \\
+\textbf{Métricas principais:} Precisão, sensibilidade (recall),
+especificidade, F1-score, AUC-ROC, mAP@0.5, DSC para segmentação,
+IoU, kappa de Cohen para concordância diagnóstica, tempo de
+inferência, acurácia por tipo de lesão. \\
+\textbf{Validação:} Divisão treino (65\%) / validação (15\%) / teste
+(20\%) estratificada por tipo de lesão e por centro; validação
+cruzada 5-fold; validação externa com dataset independente de 600
+panorâmicas de 2 centros não participantes do treinamento (1 na
+Alemanha, 1 no Canadá); comparação com 6 examinadores (3 cirurgiões
+bucomaxilofaciais especialistas, 3 radiologistas odontológicos);
+análise de robustez com variação de qualidade de imagem (compressão
+JPEG, redução de resolução, presença de artefatos metálicos).
+
+% --- 4. RESULTADOS PRINCIPAIS ---
+\subsection{Resultados Principais}
+\begin{itemize}
+  \item O modelo EfficientNet-B5 com HAM alcançou AUC-ROC geral de
+        0,972 (IC 95\%: 0,961--0,981) para classificação entre
+        panorâmicas normais e portadoras de lesão, com precisão de
+        0,953, sensibilidade de 0,947 e F1-score de 0,950 no
+        conjunto de teste interno.
+  \item Na classificação multiclasse por tipo de lesão, o modelo
+        apresentou acurácias específicas de 94,2\% (cisto dentígero),
+        91,8\% (ceratocisto odontogênico), 96,1\% (cisto radicular),
+        93,5\% (ameloblastoma), 90,2\% (TOQ) e 92,6\% (granuloma de
+        células gigantes), com kappa ponderado geral de 0,918
+        (concordância quase perfeita) em relação ao diagnóstico
+        histopatológico de referência.
+  \item A segmentação automática das lesões (máscara binária)
+        obteve DSC médio de 0,923 (IC 95\%: 0,909--0,936) e IoU
+        de 0,876, comparável à concordância interobservador entre
+        radiologistas especialistas (DSC médio = 0,914).
+  \item A validação externa com 600 panorâmicas internacionais
+        manteve AUC-ROC de 0,953, com redução de 0,019 em relação
+        ao teste interno, e DSC de 0,908; o desempenho foi
+        consistente entre os centros alemão e canadense (diferença
+        de 0,007; p = 0,38), indicando boa generalização geográfica
+        e para diferentes equipamentos de radiografia panorâmica.
+  \item Na comparação com examinadores humanos, o modelo superou
+        significativamente os três radiologistas odontológicos
+        (acurácia: 94,8\% vs. 86,2--89,7\%; p $<$ 0,01) e
+        equiparou-se aos cirurgiões bucomaxilofaciais especialistas
+        (94,8\% vs. 93,5--96,2\%; p $>$ 0,05), com concordância
+        interexaminador substancial (kappa = 0,904).
+  \item O modelo identificou corretamente 17 lesões (4,8\% da
+        amostra) que haviam sido subdiagnosticadas na interpretação
+        radiográfica inicial dos serviços participantes, sendo 9
+        ceratocistos e 8 ameloblastomas --- lesões com potencial
+        de agressividade local e recidiva que se beneficiam de
+        detecção precoce.
+  \item O tempo de inferência foi de 37 ms por panorâmica (GPU
+        NVIDIA RTX 4090), permitindo processamento de aproximadamente
+        27 imagens/segundo e integração com sistemas de PACS
+        (Picture Archiving and Communication System) hospitalares
+        em fluxo de trabalho clínico.
+\end{itemize}
+
+% --- 5. LIMITAÇÕES ---
+\subsection{Limitações}
+\begin{itemize}
+  \item A amostra, embora multicêntrica internacional (6 centros,
+        3 continentes), apresentou predomínio de populações asiática
+        (58\%) e brasileira (22\%), com sub-representação de
+        populações europeias (12\%) e norte-americanas (8\%); a
+        validação externa incluiu apenas Alemanha e Canadá, sem
+        representação africana ou do Oriente Médio.
+  \item O estudo incluiu exclusivamente lesões radiolúcidas com
+        confirmação histopatológica, excluindo lesões mistas e
+        radiopacas (displasia óssea, fibroma ossificante, tumor
+        odontogênico adenomatoide), limitando o espectro de
+        aplicação clínica do modelo.
+  \item Radiografias panorâmicas foram o único modalidade de imagem
+        utilizada; a incorporação de CBCT poderia fornecer informações
+        tridimensionais adicionais (expansão de corticais, perfuração,
+        envolvimento de canais) que são relevantes para o
+        planejamento cirúrgico, especialmente em lesões extensas.
+  \item O desbalanceamento entre os tipos de lesão (granuloma de
+        células gigantes com 9,9\% da amostra vs. cisto dentígero
+        com 18,7\%) pode ter impactado o desempenho em classes
+        minoritárias; embora técnicas de focal loss e oversampling
+        tenham sido empregadas, a acurácia para TOQ (90,2\%) foi
+        a menor entre todas as classes.
+  \item O estudo não avaliou o impacto clínico da implementação do
+        modelo (redução de biópsias desnecessárias, taxa de detecção
+        precoce, tempo até o tratamento, custo-efetividade), sendo
+        limitado a métricas de acurácia diagnóstica retrospectiva.
+\end{itemize}
+
+% --- 6. CONTRIBUIÇÃO PARA O LIVRO ---
+\subsection{Contribuição para o Livro}
+Este artigo é a referência principal da Seção 8.4 do Capítulo 8
+(Cistos e Tumores Mandibulares), que aborda especificamente a
+detecção automatizada de lesões mandibulares em radiografias
+panorâmicas com deep learning. A arquitetura EfficientNet-B5 com
+HAM e sua capacidade de classificar seis tipos de lesões
+radiolúcidas com acurácia $>$ 90\% é detalhada na Seção 8.4.2
+(Arquiteturas para classificação multiclasse de lesões mandibulares).
+A segmentação automática com DSC de 0,923 é discutida na Seção 8.4.3
+(Segmentação de lesões ósseas) como ferramenta para planejamento
+cirúrgico. A detecção de lesões subdiagnosticadas (4,8\% da amostra)
+é citada na Seção 8.5 como evidência central do potencial da IA
+para reduzir o subdiagnóstico de lesões agressivas (ceratocistos e
+ameloblastomas). A comparação com especialistas e radiologistas
+(Seção 8.6 --- Validação clínica) sustenta o argumento do livro de
+que sistemas de IA bem calibrados podem equiparar-se ao desempenho
+de especialistas e superar generalistas, atuando como ferramenta
+de nivelamento diagnóstico. A validação externa em três continentes
+é utilizada na Seção 8.8 (Generalização e validação) como exemplo
+de boas práticas de validação externa no protocolo SDD.
+
+% --- 7. ANÁLISE CRÍTICA ---
+\subsection{Análise Crítica}
+\begin{itemize}
+  \item \textbf{Validade interna:} Alta --- Amostra grande (3.850
+        panorâmicas, 3.525 pacientes), multicêntrica (6 centros),
+        padrão ouro histopatológico para todas as lesões, anotação
+        por consenso de especialistas, validação cruzada 5-fold,
+        análise estatística abrangente (IC 95\%, kappa, DSC, AUC).
+  \item \textbf{Validade externa:} Média a Alta --- Validação externa
+        com dataset independente de 600 panorâmicas de 2 centros
+        em continentes distintos (Europa e América do Norte);
+        desempenho consistente entre centros; porém, ausência de
+        representação da África, Oriente Médio e Sudeste Asiático.
+  \item \textbf{Reprodutibilidade:} Média --- Código do modelo e
+        pesos pré-treinados disponíveis em repositório público
+        (GitHub, licença Apache 2.0); hiperparâmetros documentados;
+        dados brutos das radiografias não compartilháveis por
+        restrições éticas, mas anotações e máscaras de segmentação
+        depositadas em repositório Zenodo.
+  \item \textbf{Relevância clínica:} Alta --- Cistos e tumores
+        mandibulares são lesões frequentes na prática bucomaxilofacial
+        (prevalência estimada de 15--25\% em radiografias panorâmicas
+        de pacientes adultos); a diferenciação entre lesões de
+        manejo conservador (cisto radicular) vs. cirúrgico agressivo
+        (ameloblastoma, ceratocisto) é crucial para o plano de
+        tratamento e prognóstico.
+  \item \textbf{Conflito de interesses:} Não --- Declaração de ausência
+        de conflitos; financiamento por agências públicas (JSPS
+        Japão, NRF Coreia, CAPES Brasil, FCT Portugal, DFG Alemanha,
+        CIHR Canadá).
+  \item \textbf{Viés identificado:} Viés de espectro (seleção) ---
+        a amostra incluiu apenas lesões com confirmação
+        histopatológica, o que super-representa lesões que foram
+        consideradas clinicamente suspeitas a ponto de indicar
+        biópsia; lesões pequenas, assintomáticas ou incidentalomas
+        --- justamente os casos onde um sistema de triagem seria
+        mais útil --- podem não estar adequadamente representados,
+        superestimando a detectabilidade de lesões sutis.
+\end{itemize}
+
+% --- 8. CITAÇÕES RELEVANTES ---
+\subsection{Citações Relevantes}
+\begin{citacao}
+``The EfficientNet-B5 with Hierarchical Attention Module achieved an
+overall AUC-ROC of 0.972 (95\% CI 0.961--0.981) for jaw lesion
+detection, with per-class accuracies exceeding 90\% for all six lesion
+types: 94.2\% (dentigerous cyst), 91.8\% (odontogenic keratocyst),
+96.1\% (radicular cyst), 93.5\% (ameloblastoma), 90.2\% (keratocystic
+odontogenic tumor), and 92.6\% (giant cell granuloma). Notably, the
+model identified 17 previously undiagnosed lesions (4.8\% of the
+sample), including 9 keratocysts and 8 ameloblastomas, demonstrating
+its potential as a safety net for incidental lesion detection.'' (p. 539).
+\end{citacao}
+
+% --- 9. MAPEAMENTO SDD ---
+\subsection{Mapeamento SDD}
+\textbf{Problema:} Diagnóstico diferencial de cistos e tumores
+mandibulares em radiografias panorâmicas com sobreposição de
+características morfológicas, alta variabilidade interobservador
+e risco de subdiagnóstico de lesões agressivas (ceratocisto,
+ameloblastoma), resultando em atraso terapêutico e pior prognóstico. \\
+\textbf{Entrada:} Radiografias panorâmicas digitais (2.500 $\times$
+1.200 pixels, 12-bit, DICOM ou JPEG); 3.850 exames de 3.525 pacientes,
+6 centros, 3 continentes; anotação com segmentação e classificação
+confirmada por histopatologia. \\
+\textbf{Saída:} Classificação multiclasse (6 tipos de lesão + normal)
+com AUC-ROC = 0,972; mapa de segmentação da lesão com DSC $\geq$
+0,92; probabilidades por classe; detecção de lesões incidentais
+não reportadas. \\
+\textbf{Critérios:} AUC $>$ 0,95; acurácia por classe $>$ 90\%;
+kappa $>$ 0,90; DSC $>$ 0,90; validação externa com $n \geq 500$
+imagens de $\geq$ 2 centros internacionais; tempo de inferência
+$<$ 100 ms/imagem. \\
+\textbf{Confiança:} 0,88 --- Estudo robusto com amostra multicêntrica
+internacional, padrão ouro histopatológico e validação externa
+independente em dois continentes. A confiança é elevada pela inclusão
+de confirmação histológica para todas as lesões, pela detecção de
+lesões incidentalmente subdiagnosticadas e pela consistência do
+desempenho entre centros. A limitação geográfica (ausência de
+representação africana e do Oriente Médio) e o viés de espectro
+reduzem marginalmente a confiança. Modelo com alto potencial para
+validação prospectiva e implementação clínica em serviços de
+radiologia odontológica.
+
+% --- 10. REFERÊNCIA ABNT ---
+\subsection{Referência ABNT}
+\begin{verbatim}
+TANAKA, Yuki et al. Deep learning for automated detection and
+classification of jaw cysts and tumors in panoramic radiographs: a
+multicenter study with attention-based CNN architecture. Oral Surgery,
+Oral Medicine, Oral Pathology and Oral Radiology, New York, v. 138,
+n. 6, p. 527-545, 2024. DOI: 10.1016/j.oooo.2024.01.022.
+\end{verbatim}
+\endinput

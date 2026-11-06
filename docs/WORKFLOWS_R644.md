@@ -17,6 +17,14 @@ transitório; não aceita entrega de software. Código exige spec formal e o
 histórico RED→GREEN exigido pelo gate. O primário permanece compartilhado entre
 biblioteca, análise e workflow; consultar a biblioteca não chama um modelo.
 
+<!-- svg-presentation:diagram-57fc3d7d66f7c94b -->
+<img src="architecture/animated/diagram-57fc3d7d66f7c94b.svg" alt="Coordenação em etapas e retomada — diagrama estático" width="100%">
+
+<sub>[GIF](architecture/animated/diagram-57fc3d7d66f7c94b.gif) · [PNG](architecture/animated/diagram-57fc3d7d66f7c94b.png) · [Fonte Mermaid](architecture/animated/diagram-57fc3d7d66f7c94b.mmd)</sub>
+
+<details>
+<summary>Fonte Mermaid (auditoria)</summary>
+
 ```mermaid
 flowchart LR
     Pedido --> Analise[Análise por especialista]
@@ -26,6 +34,8 @@ flowchart LR
     Checkpoint --> Retomada[Retomada reutiliza a análise]
     Retomada --> Revisao
 ```
+
+</details>
 
 `ecosystem_workflow_status` consulta um workflow sem execução. Para retomar,
 envie a mesma definição, seu identificador e `resume=true`. A rede reutiliza

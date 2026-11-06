@@ -1,0 +1,31 @@
+% ======================================================================
+% FIGURA: Fluxograma PRISMA 2020 (Capítulo 2)
+% ======================================================================
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    node distance=0.7cm,
+    box/.style={rectangle, draw=blueaccent, fill=blueaccent!15, minimum width=5cm, minimum height=0.7cm, font=\footnotesize, rounded corners=2pt, align=center},
+    smallbox/.style={rectangle, draw=codegray, fill=codeback, minimum width=4cm, minimum height=0.5cm, font=\tiny\color{codegray}, rounded corners=1pt},
+    arrow/.style={-latex, thick, blueaccent},
+]
+\node[box] (id) {Registros identificados: \textbf{1.247}\\PubMed (543) + Scopus (412) + arXiv (182) + outros (110)};
+\node[box, below=of id] (dup) {Após remover duplicatas: \textbf{892}};
+\node[box, below=of dup] (screen) {Triagem por título/resumo: \textbf{892}};
+\node[smallbox, below=0.3cm of screen] {Excluídos: 612 (não-odontológico, sem IA, abstract apenas)};
+\node[box, below=of screen] (full) {Artigos completos avaliados: \textbf{280}};
+\node[smallbox, below=0.3cm of full] {Excluídos: 180 (sem dados, revisão narrativa, sem métricas)};
+\node[box, below=of full] (incl) {Estudos incluídos na síntese: \textbf{100}};
+\node[smallbox, below=0.3cm of incl] {Revisões sistemáticas: 15 $\cdot$ Meta-análises: 8 $\cdot$ Originais: 77};
+
+\draw[arrow] (id) -- (dup);
+\draw[arrow] (dup) -- (screen);
+\draw[arrow] (screen) -- (full);
+\draw[arrow] (full) -- (incl);
+
+\node[font=\footnotesize, right=1cm of incl] {\textbf{100 artigos}\\com DOI ativo};
+
+\end{tikzpicture}
+\caption{Fluxograma PRISMA 2020 adaptado para a revisão bibliográfica do livro OdontoIA. De 1.247 registros iniciais nas bases PubMed, Scopus, arXiv e Google Scholar, 100 estudos atenderam aos critérios de inclusão e compõem a base de evidências desta obra.}
+\label{fig:prisma}
+\end{figure}

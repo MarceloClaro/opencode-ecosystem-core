@@ -1,0 +1,75 @@
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "odontoia"
+version = "0.1.0"
+description = "Pacote oficial de códigos do livro 'Odontologia & Inteligência Artificial' — modelos, métricas, visualização e ferramentas para diagnóstico bucal assistido por IA."
+authors = [
+    "Edson Laranjeiras <edson.laranjeiras@openbook.odontologia>",
+    "OpenCode Ecosystem <ecosystem@opencode.ai>"
+]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/marceloclaro/opencode-ecosystem-core"
+repository = "https://github.com/marceloclaro/opencode-ecosystem-core"
+keywords = ["odontologia", "inteligencia-artificial", "diagnostico-bucal", "deep-learning", "radiografia"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Healthcare Industry",
+    "Intended Audience :: Education",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence"
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+numpy = "^1.24"
+pandas = "^2.0"
+matplotlib = "^3.7"
+scikit-learn = "^1.3"
+torch = "^2.1"
+torchvision = "^0.16"
+opencv-python = "^4.8"
+pillow = "^10.0"
+scipy = "^1.11"
+seaborn = "^0.13"
+pydicom = "^2.4"
+tqdm = "^4.66"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4"
+pytest-cov = "^4.1"
+jupyter = "^1.0"
+ipykernel = "^6.28"
+pylint = "^3.0"
+black = "^23.12"
+
+[tool.poetry.group.notebooks.dependencies]
+jupyterlab = "^4.0"
+papermill = "^2.5"
+
+[tool.black]
+line-length = 88
+target-version = ['py310', 'py311']
+include = '\.pyi?$'
+extend-exclude = 'notebooks'
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+addopts = "-v --tb=short"
+markers = [
+    "slow: testes que demandam maior tempo de execução",
+    "gpu: testes que requerem GPU (skipped se CPU)",
+    "sdd: testes de Specification-Driven Development",
+    "clinical: testes com métricas clínicas odontológicas"
+]
+
+[tool.pylint.MASTER]
+ignore = ["tests", "notebooks"]
+max-line-length = 100

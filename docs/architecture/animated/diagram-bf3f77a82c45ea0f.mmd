@@ -1,0 +1,18 @@
+flowchart TD
+    U[Usuário ou agente autorizado] --> P[MarceloClaroOrchestrator]
+    P --> G{Finalidade, dados e rota permitidos?}
+    G -->|não| B[Bloqueio explícito e motivo]
+    G -->|sim| L[SymPy / Z3 e métodos locais existentes]
+    G -->|Wolfram hospedado autorizado| T[ScientificPluginService: ticket + hash]
+    T --> H[Host autenticado: ferramenta registrada]
+    H --> R[Resposta ligada ao ticket]
+    G -. futuro: runtime e licença aceitos .-> W[Adaptador Wolfram local delimitado]
+    W -. cálculo permitido .-> K[Engine local com orçamento e confinamento medidos]
+    L --> E[Resultado, premissas, limites e proveniência]
+    R --> E
+    K --> E
+    E --> M[MetaBus: observação sem promoção de confiança]
+    E --> C{Entrega científica ou software?}
+    C -->|sim| S[Gates próprios: SDD/TDD ou aceite científico]
+    C -->|não| A[Explicação ao usuário com alcance explícito]
+    S --> A

@@ -1,0 +1,43 @@
+% ======================================================================
+% FIGURA: Arquitetura CNN para diagnóstico odontológico (Capítulo 7)
+% ======================================================================
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    node distance=0.8cm,
+    box/.style={rectangle, draw=blueaccent, fill=blueaccent!15, minimum width=1.8cm, minimum height=0.8cm, font=\scriptsize, rounded corners=2pt},
+    arrow/.style={-latex, thick, blueaccent},
+]
+% Entrada
+\node[box, fill=codeblue!20] (input) {Radiografia\\Panorâmica\\$512\times256$};
+
+% Camadas convolucionais
+\node[box, right=of input] (conv1) {Conv2D\\$3\times3$, 64\\ReLU};
+\node[box, right=of conv1] (pool1) {MaxPool\\$2\times2$};
+\node[box, right=of pool1] (conv2) {Conv2D\\$3\times3$, 128\\ReLU};
+\node[box, right=of conv2] (pool2) {MaxPool\\$2\times2$};
+\node[box, right=of pool2] (conv3) {Conv2D\\$3\times3$, 256\\ReLU};
+\node[box, right=of conv3] (pool3) {GlobalAvg\\Pooling};
+
+% Classificador
+\node[box, right=of pool3, fill=orangeaccent!20] (dense1) {Dense\\512, ReLU\\Dropout 0.5};
+\node[box, right=of dense1, fill=orangeaccent!20] (dense2) {Dense\\$N$ classes\\Softmax};
+
+% Setas
+\draw[arrow] (input) -- (conv1);
+\draw[arrow] (conv1) -- (pool1);
+\draw[arrow] (pool1) -- (conv2);
+\draw[arrow] (conv2) -- (pool2);
+\draw[arrow] (pool2) -- (conv3);
+\draw[arrow] (conv3) -- (pool3);
+\draw[arrow] (pool3) -- (dense1);
+\draw[arrow] (dense1) -- (dense2);
+
+% Labels
+\node[font=\tiny\color{codegray}, above=0.2cm of conv1] {Extração de Características};
+\node[font=\tiny\color{codegray}, above=0.2cm of dense1] {Classificação};
+
+\end{tikzpicture}
+\caption{Arquitetura típica de uma Rede Neural Convolucional (CNN) para diagnóstico odontológico por imagem. O bloco convolucional extrai características hierárquicas (bordas $\rightarrow$ texturas $\rightarrow$ padrões anatômicos). O bloco denso realiza a classificação final. Adaptado de Rohban et al. (2024).}
+\label{fig:cnn-architecture}
+\end{figure}

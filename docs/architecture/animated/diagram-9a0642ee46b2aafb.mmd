@@ -1,0 +1,15 @@
+flowchart TD
+  U[CLI ci-local / MCP ecosystem_local_ci] --> P[MarceloClaroOrchestrator]
+  P --> C[LocalCIService]
+  C --> LOCK{Execução local já em andamento?}
+  LOCK -->|sim| BUSY[Busy: nenhuma segunda execução]
+  LOCK -->|não| S[Supervisor efêmero com limites]
+  S --> SNAP[Snapshot das fontes, HEAD e seleção registrada]
+  SNAP --> RUN[Dez grupos científicos enumerados]
+  RUN --> J[JUnit e ledger de fases reais]
+  J --> CHECK{Seleção, execução e recibos íntegros e novos?}
+  CHECK -->|não| B[Bloqueado: motivo preservado]
+  CHECK -->|sim| OK[Passed: escopo local enumerado]
+  C --> CAN[Cancelamento dos processos pertencentes à execução]
+  OK --> HIST[Histórico separado da compatibilidade atual]
+  B --> HIST

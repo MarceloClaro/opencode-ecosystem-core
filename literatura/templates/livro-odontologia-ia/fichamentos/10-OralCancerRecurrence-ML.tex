@@ -1,0 +1,162 @@
+%==============================================================================
+% FICHAMENTO CRÍTICO — Machine Learning for Prediction of Oral Cancer
+% Recurrence
+% Conforme NBR 6023 (referências) e NBR 10520 (citações)
+%==============================================================================
+\section{Fichamento: \citeonline{fatapour2023recurrence}}
+
+% --- 1. IDENTIFICAÇÃO ---
+\subsection{Identificação}
+\begin{tabular}{ll}
+\textbf{Título:} & Development of a machine learning model to predict
+recurrence of oral tongue squamous cell carcinoma \\
+\textbf{Autor(es):} & Fatapour, Yasaman; Abiri, Arash; Kuan, Edward C.;
+Brody, James P. \\
+\textbf{Periódico:} & Cancers \\
+\textbf{Ano:} & 2023 \\
+\textbf{Volume:} & 15 \\
+\textbf{Número:} & 10 \\
+\textbf{Páginas:} & 2769 \\
+\textbf{DOI:} & \url{https://doi.org/10.3390/cancers15102769} \\
+\textbf{Qualis:} & A1 (Oncologia) \\
+\textbf{Tipo:} & Artigo original \\
+\end{tabular}
+
+% --- 2. OBJETIVO ---
+\subsection{Objetivo}
+Desenvolver um framework genérico baseado em machine learning para analisar
+a base de dados SEER (Surveillance, Epidemiology, and End Results) e gerar
+modelos preditivos confiáveis para recorrência do carcinoma espinocelular
+de língua oral (OTSCC) em 5 e 10 anos, utilizando marcadores prognósticos
+simples e comumente disponíveis na prática clínica.
+
+% --- 3. METODOLOGIA ---
+\subsection{Metodologia}
+\textbf{Desenho do estudo:} Estudo retrospectivo de desenvolvimento e
+validação de modelos preditivos baseados em ML a partir da base SEER
+(2000--2018). \\
+\textbf{Amostra:} 130.979 pacientes com OTSCC, sendo 36.042 (27,5\%) do
+sexo feminino, idade média de 58,2 anos (DP 13,7); 13.873 não-recorrência
+vs. 657 recorrência em 5 anos e 6.129 vs. 971 em 10 anos. \\
+\textbf{Métricas principais:} Acurácia, precisão, recall (sensibilidade),
+AUC-ROC, análise de importância de características por Shapley Additive
+Explanation (SHAP). \\
+\textbf{Validação:} Plataforma H2O AI com AutoML; 4 modelos testados
+(Gradient Boosting Machine, Distributed Random Forest, Deep Learning,
+Logistic Regression); 5-fold cross-validation; under-sampling para
+balanceamento; 80\% treino / 20\% teste; 5 execuções independentes.
+
+% --- 4. RESULTADOS PRINCIPAIS ---
+\subsection{Resultados Principais}
+\begin{itemize}
+  \item O modelo Gradient Boosting Machine (GBM) apresentou o melhor
+        desempenho, com acurácia de 81,8\% e precisão de 97,7\% para
+        predição de recorrência em 5 anos.
+  \item Para predição em 10 anos, o GBM alcançou acurácia de 80,0\%
+        e precisão de 94,0\%.
+  \item As características mais preditivas foram: número de tumores
+        prévios, idade ao diagnóstico, sítio de recorrência e
+        histologia tumoral, conforme análise SHAP.
+  \item A aplicação de under-sampling para balanceamento das classes
+        melhorou significativamente a sensibilidade do modelo sem
+        comprometer a especificidade, demonstrando a importância do
+        tratamento do desbalanceamento em bases de dados oncológicas
+        de larga escala.
+\end{itemize}
+
+% --- 5. LIMITAÇÕES ---
+\subsection{Limitações}
+\begin{itemize}
+  \item A base SEER apresenta limitações inerentes quanto à qualidade
+        e completude dos dados, incluindo ausência de informações sobre
+        tratamento sistêmico detalhado, comorbidades e status
+        tabagista/etilista.
+  \item A definição de recorrência no SEER depende de codificação
+        secundária, que pode subestimar a taxa real de recorrência
+        em comparação com dados de prontuário clínico.
+  \item O estudo concentrou-se exclusivamente em carcinoma de língua
+        oral (OTSCC), não abrangendo outros sítios de carcinoma
+        espinocelular oral, o que limita a generalização dos achados.
+  \item A precisão dos modelos para predição em 5 anos (97,7\%) é
+        artificialmente elevada devido ao desbalanceamento residual
+        mesmo após under-sampling; a acurácia de 81,8\% é uma
+        estimativa mais realista do desempenho geral.
+\end{itemize}
+
+% --- 6. CONTRIBUIÇÃO PARA O LIVRO ---
+\subsection{Contribuição para o Livro}
+Este artigo fundamenta diretamente o Capítulo 12, que aborda machine learning
+para predição de recorrência de câncer oral. O estudo é particularmente
+relevante por quatro aspectos: (1) demonstra o uso de uma base de dados
+populacional de larga escala (SEER) com 130.979 pacientes, estabelecendo
+um padrão de referência para validação de modelos preditivos; (2) compara
+sistematicamente quatro algoritmos de ML (GBM, DRF, Deep Learning, GLM),
+fornecendo um benchmark para a seleção de modelos na seção de experimentos
+do livro; (3) a análise SHAP de importância de características oferece uma
+abordagem de explicabilidade (XAI) que se alinha ao framework SDD/TDD
+proposto; (4) o tratamento do desbalanceamento com under-sampling é uma
+lição metodológica importante para o pipeline de experimentação.
+
+% --- 7. ANÁLISE CRÍTICA ---
+\subsection{Análise Crítica}
+\begin{itemize}
+  \item \textbf{Validade interna:} Alta -- Framework robusto com 5-fold
+        cross-validation, 5 execuções independentes e comparação
+        sistemática de múltiplos algoritmos com AutoML.
+  \item \textbf{Validade externa:} Média -- Dados SEER representam
+        aproximadamente 28\% da população dos EUA, com diversidade
+        étnica e geográfica, mas a validação em coortes internacionais
+        não foi realizada.
+  \item \textbf{Reprodutibilidade:} Alta -- Código disponível em
+        plataforma H2O.ai; metodologia detalhada com pipeline de
+        extração de dados SEER documentado passo a passo.
+  \item \textbf{Relevância clínica:} Alta -- A capacidade de predizer
+        recorrência com acurácia de 81,8\% pode auxiliar na
+        estratificação de risco e personalização do seguimento
+        oncológico pós-tratamento.
+  \item \textbf{Conflito de interesses:} Não -- Os autores declararam
+        ausência de conflitos de interesse.
+  \item \textbf{Viés identificado:} Viés de classificação — a definição
+        de recorrência baseada em codificação secundária do SEER pode
+        diferir da definição clínica padrão (RECIST), introduzindo
+        viés de mensuração.
+\end{itemize}
+
+% --- 8. CITAÇÕES RELEVANTES ---
+\subsection{Citações Relevantes}
+\begin{citacao}
+``The Gradient Boosting Machine model performed the best, achieving 81.8\%
+accuracy and 97.7\% precision for 5-year prediction. Moreover, 10-year
+predictions demonstrated 80.0\% accuracy and 94.0\% precision.'' (p. 8).
+\end{citacao}
+
+\begin{citacao}
+``The number of prior tumors, patient age, the site of cancer recurrence,
+and tumor histology were the most significant predictors.'' (p. 9).
+\end{citacao}
+
+% --- 9. MAPEAMENTO SDD ---
+\subsection{Mapeamento SDD}
+\textbf{Problema:} Predição de recorrência locorregional do carcinoma
+espinocelular de língua oral em janelas de 5 e 10 anos para estratificação
+de risco e personalização do seguimento oncológico. \\
+\textbf{Entrada:} Dados demográficos e clínicos extraídos do SEER (idade,
+sexo, raça, estado civil, ano do diagnóstico, número de tumores prévios,
+sítio tumoral, histologia, estadiamento). \\
+\textbf{Saída:} Probabilidade de recorrência em 5 anos e 10 anos
+(classificação binária: recorrente vs. não-recorrente). \\
+\textbf{Critérios:} Acurácia $\geq$ 80\%; precisão $\geq$ 90\%;
+AUC-ROC $\geq$ 0,80; identificação das top-5 características preditivas
+com SHAP. \\
+\textbf{Confiança:} 0,83 — Framework metodologicamente sólido com
+validação cruzada e análise SHAP; limitado pela natureza retrospectiva
+dos dados SEER e pela restrição a OTSCC.
+\end{tabular}
+
+% --- 10. REFERÊNCIA ABNT ---
+\subsection{Referência ABNT}
+\begin{verbatim}
+FATAPOUR, Yasaman et al. Development of a machine learning model to predict
+recurrence of oral tongue squamous cell carcinoma. Cancers, Basel, v. 15,
+n. 10, p. 2769, 2023. DOI: 10.3390/cancers15102769.
+\end{verbatim}

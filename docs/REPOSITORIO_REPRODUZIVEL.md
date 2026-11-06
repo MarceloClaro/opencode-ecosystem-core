@@ -1,7 +1,8 @@
 # Fontes reproduzíveis e estado local
 
-O repositório contém fontes do Core, testes, especificações, documentação e assets
-necessários ao livro. Perfis gerados pelo setup REA, evidências de alvos, memória
+O repositório contém fontes do Core, testes, especificações, documentação e uma
+seleção de fontes e capas do Molambudos; nem todos os assets de livro acompanham
+um clone. Perfis gerados pelo setup REA, evidências de alvos, memória
 de execução, capturas do navegador e pedidos locais de plugins ficam na máquina.
 A configuração é criada novamente por `rea setup`; não deve ser copiada de outro
 operador. As regras de exclusão preservam todos os arquivos existentes no disco.
@@ -43,6 +44,9 @@ caminhos pessoais e dependências transitivas antes de publicar uma entrega.
 
 Para preparar um commit, selecione os arquivos explicitamente e confira o índice
 antes de confirmar. Uma regra de `.gitignore` não retira arquivos que já sejam
-rastreados. Manuscritos, dados de pesquisas paralelas, áudio, ambientes virtuais,
-pacotes externos, credenciais e logs completos devem ficar fora deste commit do
-Core. O contrato da separação está em SPEC-935-R864.
+rastreados: o material literário autorizado tem allowlist específica em
+`literatura/`, conforme [SPEC-935-R1084](../specs/SPEC-935-R1084-git-policy-readme-reconciliation.md).
+Manuscritos privados ou alheios a essa allowlist, dados sensíveis de outras
+pesquisas, PDFs dos miolos, EPUBs, áudio, ambientes virtuais, pacotes externos,
+credenciais e logs completos continuam fora da nova seleção. O contrato da
+separação anterior está em SPEC-935-R864; não foi alterado retroativamente.

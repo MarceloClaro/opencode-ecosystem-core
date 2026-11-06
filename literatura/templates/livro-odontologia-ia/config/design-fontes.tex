@@ -1,0 +1,21 @@
+%==============================================================================
+% design-fontes.tex — Tipografia XeLaTeX (fontspec)
+% Corpo de leitura moderno (Noto Serif). Pré/pós-textuais trocam para
+% Liberation Serif via hooks em design-margem.tex.
+%==============================================================================
+\setmainfont{Noto Serif}[Ligatures=TeX]
+\setsansfont{Inter}[Ligatures=TeX]
+\setmonofont{DejaVu Sans Mono}[Scale=0.92]
+
+% Famílias auxiliares
+\newfontfamily\abntserif{Liberation Serif}[Ligatures=TeX] % ABNT pré/pós-textual
+\newfontfamily\tituloface{Inter}[Ligatures=TeX]           % títulos/aberturas
+
+%------------------------------------------------------------------
+% Letra capitular (drop cap) colorida pelo nível do capítulo
+% Uso: \capitular{nível 0-5}{primeira letra}{resto da 1ª palavra}
+% A cor da capitular sinaliza o nível (verde=0 ... roxo=PhD).
+%------------------------------------------------------------------
+\newcommand{\capitular}[3]{%
+  \lettrine[lines=3, findent=2pt, nindent=0pt]%
+    {\tituloface\bfseries\textcolor{\cornivel{#1}}{#2}}{#3}}

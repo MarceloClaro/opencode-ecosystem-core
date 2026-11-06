@@ -1,0 +1,829 @@
+% =============================================================================
+% MOLAMBUDOS — EDIÇÃO TRILÍNGUE (PT-BR / EN / ZH) — SPEC-935-R357
+% Molambudos —— O Diário do Paciente 1.260 · The Diary of Patient 1,260 ·
+% 莫兰布多斯——患者1,260的日记
+% Template Victoria-Regia by @jancarauma — XeLaTeX + xeCJK variant
+% 84 fragments × 3 línguas (PT → EN → ZH) · 216 reading paths · 5 parts
+% Espelho integral dos miolos main.tex / en/main_en.tex / zh/main_zh.tex
+% Compile (da raiz): xelatex -interaction=nonstopmode -halt-on-error tri/main_tri.tex
+% =============================================================================
+
+\documentclass[14pt,openany]{extbook}
+\newif\ifmolambudoskdpprint
+\ifdefined\KDPPRINT
+  \molambudoskdpprinttrue
+\else
+  \molambudoskdpprintfalse
+\fi
+\newcommand{\goldenratio}{1.618}
+
+% --- Book metadata ---
+\newcommand{\authorname}{Marcelo Dias de Carvalho Filho}
+\newcommand{\coauthorname}{Marcelo Claro}
+\newcommand{\translatorname}{}
+\newcommand{\booktitle}{Molambudos --- 三语版 (PT/EN/ZH)}
+\newcommand{\subtitle}{O Diário do Paciente 1.260 · The Diary of Patient 1,260 · 患者1,260的日记}
+\newcommand{\publisher}{OpenCode Books}
+\newcommand{\publishercity}{Crateús}
+\newcommand{\editionyear}{2026}
+\newcommand{\isbn}{9798189170492}
+
+% --- Template packages (XeLaTeX variant) + customizations ---
+\usepackage{misc/options_zh}
+\usepackage{float}
+
+% --- Figure directory (sepia photographs of the diary) ---
+\graphicspath{{figures/}}
+
+% ============================================================================
+% Molambudos-specific customizations (idênticas ao main_zh.tex)
+% ============================================================================
+
+% Conditional hypertext — recognizes the reading path (keep for parity)
+\newcommand{\ifpath}[4]{%
+  \textit{如果来自#1:} #3\par
+  \vspace{0.3em}
+  \textit{如果来自#2:} #4\par
+  \vspace{0.3em}
+  \textit{（两条路径通向同一处。实体无需知道您来自哪里。它只需要您已经抵达。）}%
+}
+
+% Phantom route — links to a fragment that does not exist.
+\newcommand{\rotaphantom}[1]{%
+  \textbf{#1}{\footnotesize(p.~---)}%
+}
+
+% Molambudos color palette
+\definecolor{sangue}{HTML}{8B0000}
+\definecolor{olho}{HTML}{FFD700}
+\definecolor{mem}{HTML}{8B4513}
+\definecolor{doc}{HTML}{2F4F4F}
+\definecolor{cont}{HTML}{8B0000}
+\definecolor{luc}{HTML}{4B0082}
+% Immersive sepia palette (page background + ink) — sensory appeal.
+\definecolor{sepiabg}{HTML}{F2E8CF}
+\definecolor{sepiaink}{HTML}{2B2117}
+
+% Hyperlink setup (internal hyperlinks between fragments)
+\ifmolambudoskdpprint
+  \hypersetup{
+    colorlinks=false,
+    hidelinks
+  }
+\else
+  \hypersetup{
+    colorlinks=true,
+    linkcolor=linkred,
+    citecolor=linkred,
+    urlcolor=linkred
+  }
+\fi
+
+% Part opener — optional short ToC title, then PT, EN, ZH and icon.
+\newcommand{\partopener}[5][]{%
+  \cleardoublepage
+  \thispagestyle{empty}%
+  \phantomsection
+  \if\relax\detokenize{#1}\relax
+    \addcontentsline{toc}{part}{#2 · #3 · #4}%
+  \else
+    \addcontentsline{toc}{part}{#1}%
+  \fi
+  \markboth{}{}%
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[black] (current page.south west) rectangle (current page.north east);
+    \node[anchor=center] at (current page.center){%
+      \begin{tabular}{c}
+        {\bfseries\LARGE\color{customgold} #2}\\[0.9em]
+        {\bfseries\large\color{white} #3}\\[0.7em]
+        {\bfseries\large\color{white} #4}\\[2.2em]
+        \includegraphics[width=0.58\textwidth]{icone/#5}\\
+      \end{tabular}};
+  \end{tikzpicture}%
+  \null\vfill\clearpage}
+
+% Reading route — link to a fragment + its page number.
+% Language-aware: resolves the label of the CURRENT language block
+% (PT frag:, EN fragen:, ZH fragzh:), so each language points to its own page.
+\newcommand{\trilangrefpt}[1]{frag:#1}
+\newcommand{\trilangrefen}[1]{fragen:#1}
+\newcommand{\trilangrefzh}[1]{fragzh:#1}
+\let\trilangref\trilangrefpt
+\ifmolambudoskdpprint
+  \newcommand{\rota}[1]{\textbf{#1}\,{\footnotesize(p.~\pageref{\trilangref{#1}})}}
+\else
+  \newcommand{\rota}[1]{\expandafter\hyperlink\expandafter{\trilangref{#1}}{\textbf{#1}}\,{\footnotesize(p.~\pageref{\trilangref{#1}})}}
+\fi
+\newcommand{\rotasep}{\quad\textbullet\quad}
+
+% Marginalia of the Contamination fragments
+\setlength{\marginparwidth}{0.75in}
+\setlength{\marginparsep}{6pt}
+\ifmolambudoskdpprint
+  % KDP print mode: margin notes suppressed
+  \newcommand{\margnota}[1]{}
+\else
+  \newcommand{\margnota}[1]{\marginpar{\raggedright\footnotesize\itshape\color{sangue}#1}}
+\fi
+
+% Editor's Note — contextual per language
+\newcommand{\NEpt}[1]{\footnote{\footnotesize\textbf{[N.E.]} #1}}
+\newcommand{\NEen}[1]{\footnote{\footnotesize\textbf{[Ed. Note]} #1}}
+\newcommand{\NEzh}[1]{\footnote{\footnotesize\textbf{[编者按]} #1}}
+\let\NE\NEpt
+
+% Fragment counter
+\newcounter{fragctr}
+\newcommand{\fragdef}[1]{%
+  \refstepcounter{fragctr}%
+  \hypertarget{#1}{}%
+  \label{frag:#1}%
+}
+
+% --- Trilingual language separator ---
+\newcommand{\trisec}[1]{%
+  \par\vspace{1.2em}\noindent\rule{\textwidth}{0.5pt}\par
+  \vspace{0.4em}\noindent{\footnotesize\itshape\textcolor{textgray}{#1}}\par
+  \vspace{0.6em}\nopagebreak}
+
+% --- Language directory: MEM→mem, DOC→doc, LUC→luc, CONT→cont ---
+\def\trilangdir#1{\trilangdirsplit#1\relax}
+\def\trilangdirsplit#1#2\relax{%
+  \ifx#1M%
+  mem\else%
+  \ifx#1D%
+  doc\else%
+  \ifx#1L%
+  luc\else cont\fi\fi\fi}
+
+% --- Trilingual fragment: PT (fragdef) → EN → ZH ---
+\newcommand{\tribody}[1]{%
+  \fragdef{#1}%
+  \hypertarget{frag:#1}{}%
+  \let\NE\NEpt\let\trilangref\trilangrefpt
+  \input{fragmentos/\trilangdir{#1}/#1}%
+  \trisec{ENGLISH --- English version}
+  \hypertarget{fragen:#1}{}\label{fragen:#1}%
+  \let\NE\NEen\let\trilangref\trilangrefen
+  \input{en/fragmentos/\trilangdir{#1}/#1}%
+  \trisec{中文版 --- 简体中文}
+  \hypertarget{fragzh:#1}{}\label{fragzh:#1}%
+  \let\NE\NEzh\let\trilangref\trilangrefzh
+  \input{zh/fragmentos/\trilangdir{#1}/#1}%
+  \let\NE\NEpt\let\trilangref\trilangrefpt}
+\newcommand{\triinput}[1]{\newpage\tribody{#1}}
+\newcommand{\trifirstinput}[1]{\tribody{#1}}
+
+% Compact trilingual fraglink for the index: {ID}{PT}{EN}{ZH}{year/note}
+% Three independent links (PT · EN · ZH), each pointing to its own language
+% block — the reader chooses their language and lands on its instance.
+\newcommand{\fraglinktri}[5]{%
+  \par\noindent%
+  \hyperlink{frag:#1}{\textbf{#1} (PT)} --- #2\,·\,#3\,·\,#4\quad
+  {\footnotesize
+    \hyperlink{frag:#1}{p.~\pageref{frag:#1}}\,·\,%
+    \hyperlink{fragen:#1}{p.~\pageref{fragen:#1}}\,·\,%
+    \hyperlink{fragzh:#1}{p.~\pageref{fragzh:#1}}}%
+  \ifx&#5&\else\hfill {\itshape\textcolor{textgray}{#5}}\fi%
+  \par\vspace{0.1em}}
+
+\begin{document}
+
+% Uma única sequência romana cobre capa e pré-textuais; âncoras automáticas de
+% página são ativadas apenas quando o corpus reinicia em algarismo arábico.
+\hypersetup{pageanchor=false}
+\frontmatter
+
+\input{tri/frontmatter/titlepage}
+
+\input{tri/frontmatter/aviso}
+
+\ifdefined\MolambudosKDPNoFolios
+  \makeatletter
+  \let\ps@plain\ps@empty
+  \makeatother
+  \pagestyle{empty}
+\fi
+\ifdefined\MolambudosKDPSafeFolios
+  % KDP print mode with preserved physical navigation
+  \setlength{\footskip}{6mm}
+  \fancypagestyle{molambudos-kdp-folios}{%
+    \fancyhf{}%
+    \renewcommand{\headrulewidth}{0pt}%
+    \renewcommand{\footrulewidth}{0pt}%
+    \fancyfoot[C]{\normalfont\footnotesize\thepage}%
+  }%
+  \fancypagestyle{plain}{%
+    \fancyhf{}%
+    \renewcommand{\headrulewidth}{0pt}%
+    \renewcommand{\footrulewidth}{0pt}%
+    \fancyfoot[C]{\normalfont\footnotesize\thepage}%
+  }%
+  \pagestyle{molambudos-kdp-folios}
+\fi
+
+% Sepia background (parchment) + dark sepia ink
+\pagecolor{sepiabg}
+\color{sepiaink}
+
+\input{tri/frontmatter/epigrafe}
+\input{tri/frontmatter/cuidado}
+\input{tri/frontmatter/copyrightpage}
+\input{tri/frontmatter/ficha_catalografica}
+\cleardoublepage
+\input{tri/frontmatter/nota_arquivista}
+\input{tri/frontmatter/como_ler}
+\input{tri/frontmatter/tocpage}
+
+% ===== Navegação pré-textual =====
+\pagestyle{fancy}
+\ifdefined\MolambudosKDPNoFolios
+  \pagestyle{empty}
+\fi
+\ifdefined\MolambudosKDPSafeFolios
+  \pagestyle{molambudos-kdp-folios}
+\fi
+
+% ============================================
+% NAVIGATION — Non-Linear Reading (trilingual)
+% ============================================
+\chapter*{Navegação --- Como Ler · Navigation --- How to Read · 导航——阅读路线}
+\addcontentsline{toc}{chapter}{Navegação · Navigation · 导航}
+\markboth{Navegação · Navigation · 导航}{}
+
+\noindent\textbf{Português.} Este arquivo contém 84 fragmentos organizados em 5 partes,
+apresentados em três línguas (Português → English → 简体中文). Cada fragmento é
+autônomo e pode ser lido em qualquer ordem. As setas ↪ no fim de cada fragmento
+indicam percursos de leitura possíveis. A leitura linear recomendada segue a
+ordem das partes.
+
+\vspace{0.6em}
+\noindent\textbf{English.} This archive contains 84 fragments organized in 5 parts,
+presented in three languages (Portuguese → English → Simplified Chinese). Each
+fragment is autonomous and may be read in any order. The arrows ↪ at the end of
+each fragment indicate possible reading paths. Recommended linear reading
+follows the order of the parts.
+
+\vspace{0.6em}
+\noindent\textbf{中文.} 本档案包含按5个部分组织的78个碎片，以三种语言呈现（葡萄牙语 → 英语 → 简体中文）。
+每个碎片都是独立的，可以按任意顺序阅读。每个碎片末尾的箭头 ↪ 表示可能的阅读路径。
+推荐的线性阅读遵循各部分顺序。
+
+\vspace{1em}
+
+\section*{Índice de Fragmentos · Index of Fragments · 碎片索引}
+
+\subsection*{Parte 1 · Part 1 · 第一部 --- Sertão · The Sertão · 塞尔唐 (9 fragmentos)}
+{\setlength{\parskip}{0.15em}
+\fraglinktri{MEM-01}{O Sertão Antes do Fim}{The Sertão Before the End}{终结前的塞尔唐}{1914}
+\fraglinktri{MEM-02}{A Caminhada dos Retirantes}{The Retirantes' March}{逃荒者的跋涉}{1915}
+\fraglinktri{MEM-03}{A Morte do Pai}{The Father's Death}{父亲的死}{1915}
+\fraglinktri{MEM-04}{A Vala}{The Trench}{乱葬坑}{1915}
+\fraglinktri{MEM-05}{O Olho Amarelo}{The Yellow Eye}{黄眼}{1915}
+\fraglinktri{MEM-06}{O Curral do Governo}{The Government Pen}{政府牲畜圈}{1915}
+\fraglinktri{MEM-07}{A Mãe Levada}{The Mother Taken}{被带走的母亲}{1915}
+\fraglinktri{DOC-17}{Carta de um Soldado}{A Soldier's Letter}{一个士兵的信}{1915}
+\fraglinktri{DOC-18}{Relatório Oficial do Curral}{Official Report on the Pen}{圈栏官方报告}{1916}
+}
+
+\subsection*{Parte 2 · Part 2 · 第二部 --- Colônia · The Colony · 收容院 (16 fragmentos)}
+{\setlength{\parskip}{0.15em}
+\fraglinktri{MEM-08}{A Chegada ao Colônia}{Arrival at the Colony}{抵达收容院}{1917}
+\fraglinktri{DOC-02}{Prontuário do Paciente 1.260}{Medical Record of Patient 1,260}{患者1,260病历}{1917}
+\fraglinktri{MEM-09}{Os Primeiros Anos}{The Early Years}{最初几年}{1920--1930}
+\fraglinktri{MEM-10}{O Primeiro Homicídio}{The First Homicide}{第一起谋杀}{1922}
+\fraglinktri{MEM-11}{O Isolamento}{The Isolation}{隔离}{1923--1945}
+\fraglinktri{MEM-17}{O Eletrochoque}{The Electroshock}{电休克}{1937}
+\fraglinktri{MEM-18}{A Tentativa de Fuga}{The Escape Attempt}{逃跑的尝试}{1943}
+\fraglinktri{MEM-12}{A Rasga Mortalha}{The Shroud-Ripper}{裹尸布撕裂者}{1945}
+\fraglinktri{MEM-21}{O Jornal}{The Newspaper}{报纸}{1948}
+\fraglinktri{MEM-19}{O Visitante}{The Visitor}{访客}{1950}
+\fraglinktri{DOC-10}{Registro de Eletroconvulsoterapia}{Electroconvulsive Therapy Record}{ECT记录}{1937}
+\fraglinktri{MEM-22}{As Vozes}{The Voices}{声音}{1952}
+\fraglinktri{MEM-23}{A Neve de Cinzas}{The Snow of Ashes}{灰雪}{1960}
+\fraglinktri{MEM-20}{A Morte do Vizinho de Cela}{The Death of My Cell Neighbor}{牢房邻居之死}{1963}
+\fraglinktri{MEM-24}{A Enfermeira que Chorava}{The Nurse Who Cried}{哭泣的护士}{1964}
+\fraglinktri{MEM-25}{A Morte no Espelho}{The Death in the Mirror}{镜中之死}{1970}
+}
+
+\subsection*{Parte 3 · Part 3 · 第三部 --- Diário de Oliveira\\\hspace*{2.5em}e Laudos · Oliveira's Diary\\\hspace*{2.5em}and Reports · 奥利维拉日记\\\hspace*{2.5em}与鉴定报告 (25 fragmentos)}
+{\setlength{\parskip}{0.15em}
+\fraglinktri{DOC-01}{A Exumação}{The Exhumation}{掘尸}{1979}
+\fraglinktri{DOC-03}{Laudo de Necropsia}{Autopsy Report}{尸检报告}{1979}
+\fraglinktri{DOC-04}{Relatório de Sessão I}{Session Report I}{会谈报告I}{1979}
+\fraglinktri{DOC-05}{Relatório de Sessão II}{Session Report II}{会谈报告II}{1979}
+\fraglinktri{DOC-06}{Relatório de Sessão III}{Session Report III}{会谈报告III}{1979}
+\fraglinktri{DOC-07}{Diagnóstico Psiquiátrico (1979)}{Psychiatric Diagnosis (1979)}{精神科诊断（1979）}{1979}
+\fraglinktri{MEM-13}{O Médico Novo}{The New Doctor}{新医生}{1979}
+\fraglinktri{MEM-14}{O Diário Emerge}{The Diary Emerges}{日记浮现}{1979}
+\fraglinktri{MEM-15}{A Entidade Fala}{The Entity Speaks}{实体开口}{1979}
+\fraglinktri{MEM-16}{A Morte no Colônia}{The Death at the Colony}{收容院之死}{1979}
+\fraglinktri{MEM-26}{A Última Página}{The Last Page}{最后一页}{1979}
+\fraglinktri{DOC-11}{Diário de Oliveira I}{Oliveira's Diary I}{奥利维拉日记I}{1979}
+\fraglinktri{DOC-12}{Diário de Oliveira II}{Oliveira's Diary II}{奥利维拉日记II}{1979}
+\fraglinktri{DOC-13}{Diário de Oliveira III}{Oliveira's Diary III}{奥利维拉日记III}{1979}
+\fraglinktri{DOC-14}{Diário de Oliveira IV}{Oliveira's Diary IV}{奥利维拉日记IV}{1979}
+\fraglinktri{DOC-15}{Diário de Oliveira V}{Oliveira's Diary V}{奥利维拉日记V}{1979}
+\fraglinktri{DOC-16}{Diário de Oliveira VI}{Oliveira's Diary VI}{奥利维拉日记VI}{1979}
+\fraglinktri{DOC-19}{Holocausto Brasileiro}{Brazilian Holocaust}{巴西大屠杀}{达妮埃拉·阿尔贝克斯}
+\fraglinktri{DOC-20}{Termo de Cadeia de Custódia}{Chain of Custody Record}{保管链文书}{2026}
+\fraglinktri{DOC-21}{Carta de Heitor Oliveira (não enviada)}{Letter from Heitor Oliveira (unsent)}{埃托尔·奥利维拉的信（未寄出）}{1979}
+\fraglinktri{DOC-22}{Memorando Interno nº~47/2026}{Internal Memorandum No. 47/2026}{内部备忘录第47/2026号}{2026}
+\fraglinktri{DOC-23}{Registro de Ocorrência do Arquivo}{Archive Incident Report}{档案馆事件记录}{2026}
+\fraglinktri{DOC-24}{Parecer Técnico de Conservação}{Conservation Technical Assessment}{保护技术意见书}{2026}
+\fraglinktri{DOC-25}{O Homem do Pano Preto}{The Man in the Black Cloth}{黑布男人}{2026}
+\fraglinktri{DOC-26}{Anotações de Oliveira — O Mecanismo}{Oliveira's Notes --- The Mechanism}{奥利维拉的笔记——机制}{1979}
+}
+
+\subsection*{Parte 4 · Part 4 · 第四部 --- Investigação Lúcia · Lúcia's Investigation · 卢西亚调查 (20 fragmentos)}
+{\setlength{\parskip}{0.15em}
+\fraglinktri{DOC-08}{Re-Diagnóstico Psiquiátrico (2026)}{Re-Diagnosis (2026)}{精神科再诊断（2026）}{卢西亚·门德斯}
+\fraglinktri{DOC-09}{Escala de Avaliação do Paciente 1.263}{Assessment Scale 1,263}{患者1,263评估量表}{临床工具}
+\fraglinktri{DOC-27}{A Origem (1853)}{The Origin (1853)}{起源（1853）}{若泽·伊纳西奥神父}
+\fraglinktri{LUC-01}{O Convite}{The Invitation}{邀请}{2026}
+\fraglinktri{LUC-02}{O Arquivo}{The Archive}{档案}{2026}
+\fraglinktri{LUC-03}{As Ruínas}{The Ruins}{废墟}{2026}
+\fraglinktri{LUC-04}{A Fotografia}{The Photograph}{照片}{2026}
+\fraglinktri{LUC-05}{O Sonho de Lúcia}{Lúcia's Dream}{卢西亚的梦}{2026}
+\fraglinktri{LUC-Contraprova}{A Contraprova}{The Counterproof}{反证}{2026}
+\fraglinktri{LUC-Entrevista}{A Entrevista}{The Interview}{访谈}{2026}
+\fraglinktri{LUC-Escolha}{A Escolha}{The Choice}{抉择}{2026}
+\fraglinktri{LUC-06}{O Desaparecimento}{The Disappearance}{失踪}{2026}
+\fraglinktri{LUC-07}{O Rastro de Oliveira}{Oliveira's Trail}{奥利维拉的踪迹}{2026}
+\fraglinktri{LUC-08}{A Última Sessão de Lúcia}{Lúcia's Last Session}{卢西亚最后一次会谈}{2026}
+\fraglinktri{LUC-09}{A Exumação de Oliveira}{Oliveira's Exhumation}{奥利维拉的掘尸}{2026}
+\fraglinktri{LUC-10}{O Laudo de Lúcia}{Lúcia's Report}{卢西亚的鉴定书}{2026}
+\fraglinktri{LUC-11}{O Diário Digital}{The Digital Diary}{数字日记}{2026}
+\fraglinktri{LUC-12}{A Última Foto}{The Last Photo}{最后一张照片}{2026}
+\fraglinktri{LUC-13}{A Noite do Diagnóstico}{The Night of the Diagnosis}{诊断之夜}{2026}
+\fraglinktri{LUC-14}{Autoavaliação Clínica (DSM-5-TR)}{Clinical Self-Assessment (DSM-5-TR)}{临床自评（DSM-5-TR）}{2026}
+}
+
+\subsection*{Parte 5 · Part 5 · 第五部 --- Contaminação · Contamination · 污染 (14 fragmentos + Epílogo)}
+{\setlength{\parskip}{0.15em}
+\fraglinktri{CONT-01}{Você Abriu o Diário}{You Opened the Diary}{您打开了日记}{}
+\fraglinktri{CONT-02}{Você Estava Lá}{You Were There}{您当时就在那里}{}
+\fraglinktri{CONT-03}{Você Sente o Cheiro}{You Smell It}{您闻到了气味}{}
+\fraglinktri{CONT-04}{Você Começa a Sonhar}{You Begin to Dream}{您开始做梦}{}
+\fraglinktri{CONT-05}{LAUDO DE AVALIAÇÃO CLÍNICA}{Clinical Assessment Report}{临床评估报告}{}
+\fraglinktri{CONT-06}{Você Leu Esta Linha Três Vezes}{You Read This Line Three Times}{您已经读过这一行三遍}{}
+\fraglinktri{CONT-07}{O Diagnóstico Final}{The Final Diagnosis}{最终诊断}{}
+\fraglinktri{CONT-08}{Você Leu Isto Antes}{You Have Read This Before}{您以前读过这一切}{}
+\fraglinktri{CONT-09}{O Espelho}{The Mirror}{镜子}{}
+\fraglinktri{CONT-10}{A Ferida}{The Wound}{印记}{}
+\fraglinktri{CONT-11}{O Número}{The Number}{数字}{}
+\fraglinktri{CONT-12}{3:14}{3:14}{3:14}{}
+\fraglinktri{CONT-13}{A Fila}{The Line}{队列}{}
+\fraglinktri{MEM-27}{A Página Seguinte}{The Next Page}{下一页}{若阿金，1907--1979}
+}
+
+\newpage
+
+% ============================================
+% NARRATIVE GRAPHS — Visual Navigation (trilingual)
+% ============================================
+\chapter*{Navegação Visual --- Mapas · Visual Navigation --- Maps · 视觉导航——档案地图}
+\addcontentsline{toc}{chapter}{Navegação Visual · Visual Navigation · 视觉导航}
+\markboth{Navegação Visual · Visual Navigation · 视觉导航}{}
+
+\noindent\textbf{Português.} Nas próximas páginas, três mapas orientam a leitura.
+\textbf{Mapa 1} — grafo de leitura: os 84 fragmentos e suas 216 conexões (navegação
+não linear). \textbf{Mapa 2} — grafo do enredo: a arquitetura em três atos (trauma,
+institucionalização, ciclo) e a fila de hospedeiros. \textbf{Mapa 3} — grafo linear:
+a rota tradicional, do sertão (1914) ao epílogo. Nenhum mapa é obrigatório.
+
+\vspace{0.6em}
+\noindent\textbf{English.} On the following pages, three maps orient the reading.
+\textbf{Map 1} — reading graph: the 84 fragments and their 216 connections
+(non-linear navigation). \textbf{Map 2} — plot graph: the architecture in three
+acts (trauma, institutionalization, cycle) and the queue of hosts. \textbf{Map 3}
+— linear graph: the traditional route, from the Sertão (1914) to the epilogue.
+No map is required.
+
+\vspace{0.6em}
+\noindent\textbf{中文.} 在接下来的几页中，三张地图帮助您为阅读定向。
+\textbf{地图1} —— 阅读图：78个碎片及其180条连接（非线性导航）。
+\textbf{地图2} —— 情节图：三幕架构（创伤、制度化、循环）与宿主队列。
+\textbf{地图3} —— 线性图：从塞尔唐（1914）到尾声的传统路线。没有一张是必须的。
+
+\vspace{0.8em}
+\noindent{\small\textit{路径的选择不会改变目的地：所有路线都汇聚于同一个循环。
+The choice of path does not change the destination: all routes converge on the same cycle.
+路径的选择不会改变目的地：所有路线都汇聚于同一个循环。}}
+
+%% --- GRAPH 1: PATH MAP (rotated 90°) ---
+\newpage
+\thispagestyle{empty}
+\begingroup
+\vbox to \textheight{%
+  \vfill
+  \centering
+  \setlength{\fboxsep}{3pt}%
+  \setlength{\fboxrule}{0.6pt}%
+  \fbox{\includegraphics[angle=90,width=0.98\textwidth,height=0.90\textheight,keepaspectratio]{misc/grafo_narrativo.png}}%
+  \vfill
+}%
+\endgroup
+\newpage
+
+\section*{Mapa 1 · Map 1 · 地图1 —— Grafo de Leitura · Reading Graph · 阅读图}
+
+\noindent\textbf{PT:} Os 84 fragmentos (nós) e 216 conexões (arestas). Os mais
+centrais: \textbf{MEM-04} (A Vala), \textbf{CONT-04} (Você Começa a Sonhar),
+\textbf{DOC-01} (A Exumação). Legenda: \textcolor{mem}{MEM (marrom)} memórias ·
+\textcolor{doc}{DOC (cinza)} documentos · \textcolor{cont}{CONT (vermelho)} contaminação ·
+\textcolor{luc}{LUC (índigo)} investigação.
+
+\vspace{0.4em}
+\noindent\textbf{EN:} The 84 fragments (nodes) and 216 connections (edges). The
+most central: \textbf{MEM-04} (The Trench), \textbf{CONT-04} (You Begin to
+Dream), \textbf{DOC-01} (The Exhumation). Legend: \textcolor{mem}{MEM (brown)}
+memories · \textcolor{doc}{DOC (gray)} documents · \textcolor{cont}{CONT (red)}
+contamination · \textcolor{luc}{LUC (indigo)} investigation.
+
+\vspace{0.4em}
+\noindent\textbf{ZH:} 78个碎片（节点）及其180条连接（边）。最核心者：
+\textbf{MEM-04}（乱葬坑）、\textbf{CONT-04}（您开始做梦）、\textbf{DOC-01}（掘尸）。
+图例：\textcolor{mem}{MEM（棕色）} 记忆 · \textcolor{doc}{DOC（灰色）} 文件 ·
+\textcolor{cont}{CONT（红色）} 污染 · \textcolor{luc}{LUC（靛蓝）} 法证调查。
+
+%% --- GRAPH 2: PLOT STRUCTURE ---
+\newpage
+\thispagestyle{empty}
+\begingroup
+\vbox to \textheight{%
+  \vfill
+  \centering
+  \setlength{\fboxsep}{3pt}%
+  \setlength{\fboxrule}{0.6pt}%
+  \fbox{\includegraphics[angle=90,width=0.98\textwidth,height=0.90\textheight,keepaspectratio]{misc/grafo_enredo.png}}%
+  \vfill
+}%
+\endgroup
+\newpage
+
+\section*{Mapa 2 · Map 2 · 地图2 —— Grafo do Enredo · Plot Graph · 情节图}
+
+\noindent\textbf{PT:} \textcolor{mem}{\textbf{Ato I --- Trauma}} (marrom): a seca de 1853 que
+gera a entidade; a seca de 1915 que leva Joaquim à vala. \textcolor{doc}{\textbf{Ato II
+--- Institucionalização}} (cinza): 62 anos no Colônia, o diário, a exumação, o médico.
+\textcolor{cont}{\textbf{Ato III --- Ciclo}} (vermelho): a investigação de Lúcia, a
+descoberta de que o horror é um ciclo, a contaminação do leitor. \textit{O ciclo
+recomeça a cada leitor.}
+
+\vspace{0.4em}
+\noindent\textbf{EN:} \textcolor{mem}{\textbf{Act I --- Trauma}} (brown): the 1853 drought
+that engenders the entity; the 1915 drought that takes Joaquim to the trench.
+\textcolor{doc}{\textbf{Act II --- Institutionalization}} (gray): 62 years at the Colony,
+the diary, the exhumation, the doctor. \textcolor{cont}{\textbf{Act III --- Cycle}}
+(red): Lúcia's investigation, the discovery that the horror is a cycle, the
+contamination of the reader. \textit{The cycle restarts with each reader.}
+
+\vspace{0.4em}
+\noindent\textbf{ZH:} \textcolor{mem}{\textbf{第一幕 —— 创伤}}（棕色）：1853年诞生实体的大旱；
+1915年将若阿金带往乱葬坑的大旱。\textcolor{doc}{\textbf{第二幕 —— 制度化}}（灰色）：
+收容院中的62年、作证的日记、掘尸、医生。\textcolor{cont}{\textbf{第三幕 —— 循环}}（红色）：
+卢西亚的调查，发现恐怖是一个循环，读者的污染。\textit{循环随每位读者重新开始。}
+
+%% --- GRAPH 3: LINEAR ROUTE (rotated 90°) ---
+\newpage
+\thispagestyle{empty}
+\begingroup
+\vbox to \textheight{%
+  \vfill
+  \centering
+  \setlength{\fboxsep}{3pt}%
+  \setlength{\fboxrule}{0.6pt}%
+  \fbox{\includegraphics[angle=90,width=0.98\textwidth,height=0.90\textheight,keepaspectratio]{misc/grafo_leitura_linear.png}}%
+  \vfill
+}%
+\endgroup
+\newpage
+
+\section*{Mapa 3 · Map 3 · 地图3 —— Leitura Linear · Linear Reading · 线性阅读}
+
+\noindent\textbf{PT:} Rota cronológica recomendada: \textcolor{mem}{Sertão (9)}
+$\to$ \textcolor{doc}{Colônia (16)} $\to$ \textcolor{doc}{Diário de Oliveira (18)}
+$\to$ \textcolor{luc}{Investigação de Lúcia (21)} $\to$ \textcolor{cont}{Contaminação (13)}
+$\to$ \textcolor{olho}{MEM-27 (1)}. Em qualquer rota, a Parte 5 deve ser lida por
+último. \textit{Não é sobre a história. É sobre você.}
+
+\vspace{0.4em}
+\noindent\textbf{EN:} Recommended chronological route: \textcolor{mem}{Sertão (9)}
+$\to$ \textcolor{doc}{Colony (16)} $\to$ \textcolor{doc}{Oliveira's Diary (18)}
+$\to$ \textcolor{luc}{Lúcia's Investigation (21)} $\to$ \textcolor{cont}{Contamination (13)}
+$\to$ \textcolor{olho}{MEM-27 (1)}. On any route, Part 5 must be read last.
+\textit{It is not about the story. It is about you.}
+
+\vspace{0.4em}
+\noindent\textbf{ZH:} 推荐的编年路线：\textcolor{mem}{塞尔唐（9）} $\to$
+\textcolor{doc}{收容院（16）} $\to$ \textcolor{doc}{奥利维拉日记（18）} $\to$
+\textcolor{luc}{卢西亚调查（21）} $\to$ \textcolor{cont}{污染（13）} $\to$
+\textcolor{olho}{MEM-27（1）}。在任何路线上，第五部都必须最后阅读。
+\textit{它不是关于故事的。它是关于您的。}
+
+\newpage
+
+% ============================================
+% LINEAR READING — 78 FRAGMENTS × 3 LANGUAGES
+% ============================================
+
+%% ============================================
+%% PART 1 — THE SERTÃO (1915--1928)
+%% ============================================
+\partopener{A Vala (1914--1917)}{The Sertão (1914--1917)}{塞尔唐（1914--1917）}{2.png}
+
+% O primeiro fragmento é a página arábica 1.
+\mainmatter
+\hypersetup{pageanchor=true}
+\trifirstinput{MEM-01}
+\triinput{MEM-02}
+\triinput{MEM-03}
+\triinput{MEM-04}
+\triinput{MEM-05}
+\triinput{MEM-06}
+\triinput{MEM-07}
+\triinput{DOC-17}
+\triinput{DOC-18}
+
+%% ============================================
+%% PART 2 — THE COLONY (1917--1979)
+%% ============================================
+\partopener{O Colônia (1917--1979)}{The Colony (1917--1979)}{收容院（1917--1979）}{4.png}
+
+\triinput{MEM-08}
+\triinput{DOC-02}
+\triinput{MEM-09}
+\triinput{MEM-10}
+\triinput{MEM-11}
+\triinput{MEM-17}
+\triinput{MEM-18}
+\triinput{MEM-12}
+\triinput{MEM-21}
+\triinput{MEM-19}
+\triinput{DOC-10}
+\triinput{MEM-22}
+\triinput{MEM-23}
+\triinput{MEM-20}
+\triinput{MEM-24}
+\triinput{MEM-25}
+
+%% ============================================
+%% PART 3 — OLIVEIRA'S DIARY AND REPORTS (1979)
+%% ============================================
+\partopener[Diário (1979) · Diary (1979) · 日记（1979）]{Diário e Relatórios (1979)}{Diary and Reports (1979)}{日记与报告（1979）}{1.png}
+
+\triinput{DOC-01}
+\triinput{DOC-03}
+\triinput{DOC-04}
+\triinput{DOC-05}
+\triinput{DOC-06}
+\triinput{DOC-07}
+\triinput{MEM-13}
+\triinput{MEM-14}
+\triinput{MEM-15}
+\triinput{MEM-16}
+\triinput{MEM-26}
+\triinput{DOC-11}
+\triinput{DOC-12}
+\triinput{DOC-13}
+\triinput{DOC-14}
+\triinput{DOC-15}
+\triinput{DOC-16}
+\triinput{DOC-19}
+\triinput{DOC-20}
+\triinput{DOC-21}
+\triinput{DOC-22}
+\triinput{DOC-23}
+\triinput{DOC-24}
+\triinput{DOC-25}
+\triinput{DOC-26}
+
+%% ============================================
+%% PART 4 — LÚCIA'S INVESTIGATION (2026)
+%% ============================================
+\partopener{A Investigação de Lúcia (2026)}{Lúcia's Investigation (2026)}{卢西亚调查（2026）}{3.png}
+
+\triinput{DOC-08}
+\triinput{DOC-09}
+\triinput{DOC-27}
+\triinput{LUC-01}
+\triinput{LUC-02}
+\triinput{LUC-03}
+\triinput{LUC-04}
+\triinput{LUC-05}
+\triinput{LUC-Contraprova}
+\triinput{LUC-Entrevista}
+\triinput{LUC-Escolha}
+\triinput{LUC-06}
+\triinput{LUC-07}
+\triinput{LUC-08}
+\triinput{LUC-09}
+\triinput{LUC-10}
+\triinput{LUC-11}
+\triinput{LUC-12}
+\triinput{LUC-13}
+\triinput{LUC-14}
+
+%% ============================================
+%% PART 5 — CONTAMINATION (YOU)
+%% ============================================
+\partopener{A Contaminação (Você)}{Contamination (You)}{污染（您）}{5.png}
+
+\triinput{CONT-01}
+\triinput{CONT-02}
+\triinput{CONT-03}
+\triinput{CONT-04}
+\triinput{CONT-05}
+\triinput{CONT-06}
+\triinput{CONT-07}
+\triinput{CONT-08}
+\triinput{CONT-09}
+\triinput{CONT-10}
+\triinput{CONT-11}
+\triinput{CONT-12}
+\triinput{CONT-13}
+
+%% ============================================
+%% MEM-27 — JOAQUIM'S EPILOGUE
+%% ============================================
+\triinput{MEM-27}
+
+% ============================================
+% EPILOGUE (trilingual)
+% ============================================
+% O Epílogo é o sorvedouro do grafo de rotas (R400): recebe rotas dos 10
+% fragmentos terminais e não emite nenhuma. Na edição trilíngue ele precisa
+% das TRÊS âncoras, como qualquer fragmento, senão as rotas \rota{EPI-01}
+% das versões EN e ZH não resolvem e o preflight acusa rotas faltantes.
+\fragdef{EPI-01}%
+\hypertarget{frag:EPI-01}{}%
+\hypertarget{fragen:EPI-01}{}\label{fragen:EPI-01}%
+\hypertarget{fragzh:EPI-01}{}\label{fragzh:EPI-01}%
+\chapter*{Epílogo · Epilogue · 尾声}
+\addcontentsline{toc}{chapter}{Epílogo · Epilogue · 尾声}
+
+\begin{center}
+\vspace{2em}
+\textit{O ciclo recomeça a cada leitor.\\[0.3em]
+The cycle restarts with each reader.\\[0.3em]
+循环随每位读者重新开始。}
+
+\vspace{2em}
+\rule{0.3\textwidth}{0.5pt}
+
+\vspace{2em}
+\textit{Bem-vindo ao arquivo. --- Welcome to the archive. --- 欢迎来到档案。}\\[0.6em]
+\textit{O cheiro já começou? --- Has the smell started yet? --- 气味已经开始了吗？}
+
+\vspace{1.5em}
+--- Lúcia Mendes, Paciente 1.262
+
+\vspace{0.5em}
+\rule{0.3\textwidth}{0.5pt}
+
+\vspace{0.5em}
+\noindent\textit{Nota de arquivo: o Dr. Ronaldo Torres, diretor do Arquivo Público Mineiro, pediu afastamento em outubro de 2026. O formulário médico registra \textquotedbl{}insônia persistente, cefaleia frontal e zumbido.\textquotedbl{} Não menciona o olho. Não menciona o cheiro. A última anotação no diário de protocolo, escrita pela mão dele, diz: \textquotedbl{}Devolver ao paciente 1.263, quando aparecer.\textquotedbl{} Abaixo, em caligrafia que os peritos não conseguiram identificar, está escrito: \textquotedbl{}Aguardando.\textquotedbl{}}
+
+\vspace{0.3em}
+\noindent\textit{Archive note: Dr. Ronaldo Torres, director of the Minas Gerais Public Archive, requested leave in October 2026. The medical form records \textquotedbl{}persistent insomnia, frontal headache, and tinnitus.\textquotedbl{} It does not mention the eye. It does not mention the smell. The last entry in the protocol log, written by his hand, reads: \textquotedbl{}Return to patient 1,263, when they appear.\textquotedbl{} Below, in handwriting the examiners could not identify: \textquotedbl{}Waiting.\textquotedbl{}}
+
+\vspace{0.3em}
+\noindent\textit{档案注：米纳斯吉拉斯州公共档案馆馆长罗纳尔多·托雷斯医生于2026年10月申请休假。医疗表格记录“持续性失眠、前额头痛和耳鸣”。没有提到眼睛。没有提到气味。协议日志中的最后一条，以他本人的笔迹写道：“交还患者1,263，待其出现。”其下，以检验人员无法辨认的笔迹写着：“等待。”}
+
+\vspace{0.3em}
+\noindent\textit{During the night, the hum rises and falls like an owl's song --- thin, high-pitched, like a woman singing in the corridor of the empty archive. No one opens the door to confirm. \\[0.3em] 夜里，嗡鸣声像猫头鹰的歌一样起落——细弱、高亢，像一个女人在空档案馆的走廊里歌唱。没有人打开门去查看。}
+\end{center}
+
+\newpage
+\thispagestyle{empty}
+\null
+\vfill
+\begin{center}
+
+\vspace*{\fill}
+
+\textit{Este livro contém 84 fragmentos, em três línguas.\\[0.2em]
+This book contains 84 fragments, in three languages.\\[0.2em]
+这本书包含78个碎片，以三种语言呈现。}
+\textit{Se você leu todos, o ciclo está completo em você. --- If you read them all, the cycle is complete in you. --- 如果您全部读完了，循环就在您体内完成了。}
+
+\vspace{2em}
+\rule{0.2\textwidth}{0.5pt}
+
+\vspace{2em}
+\textit{Aquilo agora está aqui. --- It is now here. --- 它现在就在这里。}
+\textit{Na página em branco. --- On the blank page. --- 在空白的书页上。}
+\textit{Esperando o próximo leitor. --- Waiting for the next reader. --- 等待下一位读者。}
+
+\vspace{2em}
+\textcolor{olho}{\large \textbf{1260}}
+\end{center}
+
+\vfill
+\clearpage
+
+% ============================================
+% EPILOGUE — SECOND PART (POST-READING), trilingual
+% ============================================
+\thispagestyle{empty}
+\null
+\vfill
+\begin{center}
+
+\vspace*{\fill}
+
+\noindent\textit{\textcolor{sangue}{\textbf{Instrução pós-leitura --- Post-Reading Instruction --- 读后指示}}}
+
+\vspace{1.5em}
+
+\noindent\textit{Agora feche o livro. --- Now close the book. --- 现在合上这本书。}
+
+\noindent\textit{Não o coloque na estante ainda. Deixe-o sobre a mesa. --- Do not put it back on the shelf yet. Leave it on the table. --- 先别放回书架。把它留在桌上。}
+
+\vspace{0.8em}
+
+\noindent\textit{Conte 62 segundos. --- Count 62 seconds. --- 数62秒。}
+
+\noindent\textit{Não pense em nada. Apenas conte. --- Think of nothing. Just count. --- 什么也不想。只是数。}
+
+\vspace{0.8em}
+
+\noindent\textit{Agora abra o livro novamente. Na página 62. --- Now open the book again. On page 62. --- 现在重新翻开这本书。翻到第62页。}
+
+\noindent\textit{Leia a primeira linha. --- Read the first line. --- 读第一行。}
+
+\vspace{1em}
+
+\noindent\textcolor{sangue}{\rule{0.15\textwidth}{0.5pt}}
+
+\vspace{1em}
+
+\noindent\textit{Se a linha diz \textquotedbl{}Sessenta e dois\textquotedbl{}: o ciclo se fechou em você. O número que marcou a vida de Joaquim --- 62 anos, 62 dias, 62 segundos --- agora é seu. Guarde o número. Ele vai aparecer em lugares que você não espera.}
+
+\noindent\textit{If the line reads \textquotedbl{}Sixty-two\textquotedbl{}: the cycle has closed on you. The number that marked Joaquim's life --- 62 years, 62 days, 62 seconds --- is now yours. Keep the number. It will appear in places you do not expect.}
+
+\noindent\textit{如果那一行写着“六十二”: 循环已经在您身上闭合。那个标记了若阿金一生的数字——62年、62天、62秒——现在属于您了。记住这个数字。它会在您意想不到的地方出现。}
+
+\noindent\textit{Se a linha diz outra coisa: você leu este livro na ordem errada. Ou na ordem certa. Não há como saber. A página 62 muda de acordo com quem abre.}
+
+\noindent\textit{If the line reads something else: you have read this book in the wrong order. Or the right order. There is no way to know. Page 62 changes according to who opens it.}
+
+\noindent\textit{如果那一行写着别的东西: 您以错误的顺序读了这本书。或者正确的顺序。无从知晓。第62页会随着打开它的人而改变。}
+
+\vspace{1.5em}
+
+\noindent\textcolor{sangue}{\rule{0.15\textwidth}{0.5pt}}
+
+\vspace{1.5em}
+
+\noindent\textit{Antes de guardar o livro definitivamente: --- Before storing the book for good: --- 在最终收好这本书之前:}
+
+\vspace{0.5em}
+
+\noindent\textit{--- Passe a mão direita sobre a página 126. Sinta a textura. --- Pass your right hand over page 126. Feel the texture. --- 用右手抚过第126页。感受纸的纹理。}
+\noindent\textit{--- Leve a mão ao nariz. Inspire. --- Bring your hand to your nose. Inhale. --- 把手凑到鼻前。吸气。}
+\noindent\textit{--- Se o cheiro doce estiver mais forte que na primeira vez, o diagnóstico está confirmado. --- If the sweet smell is stronger than the first time, the diagnosis is confirmed. --- 如果甜味比第一次更浓，诊断已被确认。}
+\noindent\textit{--- Se o cheiro estiver mais fraco, você ainda está no período de incubação. --- If the smell is fainter, you are still in the incubation period. --- 如果气味更淡，您还处于潜伏期。}
+
+\vspace{1.5em}
+
+\noindent\textcolor{sangue}{\rule{0.15\textwidth}{0.5pt}}
+
+\vspace{1.5em}
+
+\noindent\textit{A ficha do Paciente 1.263 está preenchida. --- Patient 1,263's file has been filled out. --- 患者1,263的档案已经填好。}
+
+\noindent\textit{O campo \textquotedbl{}nome\textquotedbl{} está em branco. --- The \textquotedbl{}name\textquotedbl{} field is blank. --- “姓名”一栏是空白的。}
+
+\noindent\textit{O campo \textquotedbl{}data de contaminação\textquotedbl{} está preenchido com a data em que você leu esta linha. --- The \textquotedbl{}date of contamination\textquotedbl{} field is filled with the date on which you read this line. --- “污染日期”一栏填着您读到这一行的日期。}
+
+\noindent\textit{Bem-vindo ao arquivo. --- Welcome to the archive. --- 欢迎来到档案。}
+
+\noindent\textit{A fila não diminuiu. --- The line has not grown shorter. --- 队列并没有变短。}
+
+\vspace{1.5em}
+
+\noindent\textit{--- O Arquivista --- The Archivist --- 档案员}
+\vspace{0.3em}
+\noindent\textit{--- O Paciente 1.262 --- Patient 1,262 --- 患者1,262}
+\vspace{0.3em}
+\noindent\textit{--- O que sobrou de Joaquim --- What is left of Joaquim --- 若阿金留下的残片}
+
+\vspace{2em}
+\textcolor{olho}{\large \textbf{1.263}}
+
+\end{center}
+\vfill
+
+% ===== Editorial Appendix (trilingual) =====
+\input{tri/frontmatter/nota_editorial}
+
+% ===== Back Matter =====
+\backmatter
+\input{tri/frontmatter/glossario}
+\input{tri/frontmatter/nota_historica}
+\input{tri/frontmatter/ficha_beta}
+\input{tri/frontmatter/backpage}
+
+\end{document}

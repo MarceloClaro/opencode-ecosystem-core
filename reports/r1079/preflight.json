@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "status": "partial",
+  "scope": "Preflight dos artefatos R1077 PDF + R1075/R1076 EPUB; não é migração completa do pipeline.",
+  "pdf": {
+    "path": "literatura/molambudos/Molambudos_Print_R1077/main_kdp_print_r1077.pdf",
+    "sha256": "0bb22d292f9e7ed04820c0fcac093495a1951a734b308bf674e33afae1e381a5",
+    "bytes": 13587728
+  },
+  "epub": {
+    "path": "literatura/molambudos/Molambudos_Revisada_R1075/release/Molambudos_PT_revisado.epub",
+    "sha256": "0269e8c0c1d26c1f66eb1c7773c732afa2332a58bd1ce5acf2c4fe6b2a4b9c4c",
+    "bytes": 12524260
+  },
+  "checks": {
+    "pdf_pages": {
+      "status": "pass",
+      "value": "422"
+    },
+    "pdf_page_size": {
+      "status": "pass",
+      "value": "453.543 x 651.968 pts"
+    },
+    "pdf_fonts_embedded": {
+      "status": "pass",
+      "value": "15 fontes; 0 não embutidas"
+    },
+    "pdf_images_300dpi": {
+      "status": "pass",
+      "value": "20 imagens; mínimo 300 DPI"
+    },
+    "pdf_tac": {
+      "status": "pass",
+      "value": "médio 11.7%; máximo 173.4%"
+    },
+    "epub_epubcheck": {
+      "status": "pass",
+      "value": "5.4.0: 0 fatals / 0 errors / 0 warnings / 0 infos"
+    },
+    "epub_ace": {
+      "status": "pass",
+      "value": "26 pass / 0 fail"
+    },
+    "epub_accessibility_summary": {
+      "status": "pass",
+      "value": true
+    }
+  },
+  "toolchain": {
+    "executed": [
+      "pdftoppm/pdfinfo/pdffonts/pdfimages",
+      "ghostscript inkcov",
+      "epubcheck 5.4.0",
+      "ace 1.4.6",
+      "weasyprint 67.0 (piloto PDF/UA)",
+      "typst 0.15.1 (piloto PDF/UA)"
+    ],
+    "not_executed": [
+      "pdfcpu",
+      "qpdf",
+      "veraPDF",
+      "quarto",
+      "pandoc build do miolo"
+    ],
+    "reason": "Ferramentas não instaladas ou fora do escopo desta rodada; nenhuma foi embutida no Core."
+  },
+  "limits": [
+    "Não é validação PDF/UA formal; veraPDF não foi executado.",
+    "Não é upload KDP, nova ISBN ou prova física.",
+    "O PDF R1077 e o EPUB R1075/R1076 são artefatos existentes; não houve rebuild completo.",
+    "A contracapa continua exigindo re-layout."
+  ]
+}

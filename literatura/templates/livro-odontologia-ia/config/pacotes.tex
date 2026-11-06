@@ -1,0 +1,196 @@
+%==============================================================================
+% PACOTES ABNT — Livro: Odontologia & Inteligência Artificial
+% Conforme NBR 14724 e NBR 6029
+% Compilação: xelatex → bibtex → xelatex × 2
+%==============================================================================
+
+% --- Codificação e língua ---
+\usepackage[utf8]{inputenc}
+\usepackage{fontspec}
+% babel já carregado pela classe abntex2
+\usepackage{csquotes}
+\usepackage{hyphenat}
+
+% --- Geografia da página ABNT (NBR 14724) ---
+\usepackage[a4paper,
+  left=3cm,
+  top=3cm,
+  right=2cm,
+  bottom=2cm
+]{geometry}
+
+% --- Matemática e ciência ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{siunitx}
+\usepackage{textcomp}
+\usepackage{gensymb}
+
+% --- Cores ---
+\usepackage{xcolor}
+\definecolor{corPrimaria}{HTML}{1A5276}
+\definecolor{corSecundaria}{HTML}{2E86C1}
+\definecolor{corDestaque}{HTML}{E67E22}
+\definecolor{corFundoCodigo}{HTML}{F5F5F5}
+\definecolor{corBordaCodigo}{HTML}{CCCCCC}
+\definecolor{corTesteSucesso}{HTML}{27AE60}
+\definecolor{corTesteFalha}{HTML}{C0392B}
+\definecolor{corNivelFacil}{HTML}{2ECC71}
+\definecolor{corNivelMedio}{HTML}{F39C12}
+\definecolor{corNivelDificil}{HTML}{E67E22}
+\definecolor{corNivelAvancado}{HTML}{E74C3C}
+\definecolor{corNivelPhD}{HTML}{8E44AD}
+\definecolor{azulMedio}{HTML}{2E86C1}
+\definecolor{verdeComentario}{HTML}{27AE60}
+\definecolor{azPrimario}{HTML}{1A5276}
+\definecolor{blueaccent}{HTML}{2E86C1}
+\definecolor{codegreen}{HTML}{27AE60}
+\definecolor{codegray}{HTML}{808080}
+\definecolor{codeback}{HTML}{F5F5F5}
+\definecolor{codeblue}{HTML}{2E86C1}
+\definecolor{orangeaccent}{HTML}{E67E22}
+\definecolor{cyanaccent}{HTML}{17A2B8}
+
+% --- Figuras ---
+\usepackage{graphicx}
+\graphicspath{%
+  {imagens/}%
+  {imagens/figuras/cap01/}{imagens/figuras/cap02/}%
+  {imagens/figuras/cap03/}{imagens/figuras/cap04/}%
+  {imagens/figuras/cap05/}{imagens/figuras/cap06/}%
+  {imagens/figuras/cap07/}{imagens/figuras/cap08/}%
+  {imagens/figuras/cap09/}{imagens/figuras/cap10/}%
+  {imagens/figuras/cap11/}{imagens/figuras/cap12/}%
+  {imagens/figuras/cap13/}{imagens/figuras/cap14/}%
+  {imagens/figuras/cap15/}%
+}
+\usepackage[export]{adjustbox}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+
+% --- TikZ e gráficos vetoriais ---
+\usepackage{tikz}
+\usetikzlibrary{shapes, arrows, positioning, calc, decorations.pathreplacing}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% --- Tabelas ---
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{ltablex}
+
+% --- Código-fonte (listings) ---
+\usepackage{listings}
+\lstset{
+  language=Python,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{azulMedio},
+  commentstyle=\itshape\color{verdeComentario},
+  stringstyle=\color{magenta},
+  numberstyle=\tiny\color{gray},
+  numbers=left, numbersep=5pt,
+  tabsize=2, breaklines=true,
+  prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+  frame=single, frameround=tttt,
+  rulecolor=\color{corBordaCodigo},
+  backgroundcolor=\color{corFundoCodigo},
+  showstringspaces=false, showtabs=false,
+  xleftmargin=2em, framexleftmargin=2em,
+  literate={°}{{\degree}}1,
+  morekeywords={True, False, None, self, class, def, return, yield, import,
+    from, as, with, assert, async, await, print, len, range, enumerate, zip,
+    map, filter, lambda, in, not, and, or, is, if, elif, else, for, while, try,
+    except, finally, raise, break, continue, pass},
+  emphstyle=\color{azPrimario}
+}
+\lstnewenvironment{saida}[1][]{%
+  \lstset{language={},basicstyle=\footnotesize\ttfamily\color{black},
+    backgroundcolor=\color{black!5},frame=single,numbers=none,#1}}{}
+
+% Estilo 'saida' (para \begin{lstlisting}[style=saida]) — espelha o ambiente saida
+\lstdefinestyle{saida}{language={},basicstyle=\footnotesize\ttfamily\color{black},
+  backgroundcolor=\color{black!5},frame=single,numbers=none}
+
+% Linguagens ausentes no listings (usadas nos capítulos de engenharia)
+\lstdefinelanguage{yaml}{%
+  keywords={true,false,null,yes,no,on,off},
+  sensitive=true, comment=[l]{\#},
+  morestring=[b]', morestring=[b]"}
+\lstdefinelanguage{docker}{%
+  keywords={FROM,RUN,CMD,LABEL,MAINTAINER,EXPOSE,ENV,ADD,COPY,ENTRYPOINT,%
+    VOLUME,USER,WORKDIR,ARG,ONBUILD,STOPSIGNAL,HEALTHCHECK,SHELL},
+  sensitive=true, comment=[l]{\#}, morestring=[b]"}
+
+% --- Caixas destacadas ---
+\usepackage{mdframed}
+
+% --- Camada imersiva (modelo sensorial) ---
+\usepackage[most]{tcolorbox}
+% sidenotes exige changepage[strict]; abntex2/memoir já "emula" changepage
+% sem opções e define \sidecaption/marginfigure/margintable — resolvemos o
+% choque de opções/nomes ANTES de carregar sidenotes (nenhum desses comandos
+% do memoir é usado nos capítulos do livro; sidenotes assume o papel deles).
+\PassOptionsToPackage{strict}{changepage}
+\makeatletter
+\let\sidecaption\undefined
+\let\marginfigure\undefined
+\let\endmarginfigure\undefined
+\let\margintable\undefined
+\let\endmargintable\undefined
+\makeatother
+\usepackage{sidenotes}   % requer/puxa marginnote
+\usepackage{fontawesome5}
+\usepackage{qrcode}
+
+% --- Aumentar profundidade máxima de aninhamento de listas ---
+\usepackage{enumitem}
+\setlist{maxdepth=6}
+% Também aumentar os contadores padrão do LaTeX
+\renewcommand{\theenumi}{\arabic{enumi}}
+\renewcommand{\theenumii}{\alph{enumii}}
+\renewcommand{\theenumiii}{\roman{enumiii}}
+\renewcommand{\theenumiv}{\Alph{enumiv}}
+
+% --- Hiperlinks ---
+% hyperref já carregado pela classe abntex2
+\hypersetup{
+  bookmarksnumbered=true, bookmarksopen=true, bookmarksopenlevel=1,
+  colorlinks=true, linkcolor=black, citecolor=black, urlcolor=black,
+  linktoc=all,
+  pdfauthor={\LivroAutor},
+  pdftitle={\LivroTitulo\ -- \LivroSubtitulo},
+  pdfsubject={Odontologia e Inteligência Artificial},
+  pdfkeywords={\LivroPalavrasChave}
+}
+\usepackage{bookmark}
+
+% --- Índices e glossário ---
+\usepackage[toc, acronym, nomain, style=alttree]{glossaries}
+\makeglossaries
+\usepackage{makeidx}
+\makeindex
+
+% --- Referências ABNT (NBR 6023) ---
+\usepackage[backend=biber, style=abnt-numeric, giveninits=true, uniquename=init]{biblatex}
+\addbibresource{referencias/bibliografia.bib}
+\addbibresource{referencias/dois-pendentes.bib}
+
+% --- Miscelânea ---
+\usepackage[bottom]{footmisc}
+\usepackage{pdfpages}
+\usepackage{tocloft}
+\usepackage{etoolbox}
+\usepackage{ifplatform}
+\usepackage{datetime2}
+\usepackage[type={CC}, modifier={by-nc-sa}, version={4.0}]{doclicense}
+\usepackage{lettrine}   % letra capitular (drop cap) por nível
+
+% --- Listas de figuras e tabelas (memoir/abntex2) ---
+\renewcommand{\cftfigurefont}{Figura }
+\renewcommand{\cfttablefont}{Tabela }
+\addto\captionsbrazil{\renewcommand{\listfigurename}{Lista de Figuras}}
+\addto\captionsbrazil{\renewcommand{\listtablename}{Lista de Tabelas}}

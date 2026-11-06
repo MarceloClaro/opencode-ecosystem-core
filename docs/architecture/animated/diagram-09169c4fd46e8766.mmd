@@ -1,0 +1,18 @@
+flowchart TB
+  INPUT["CLI agentes ou ecosystem_agent_profile"] --> MC["MarceloClaro.agent_profile_action"]
+  MC --> CHECK["Capacidades, origem, spec/teste, saída e permissões"]
+  CHECK --> VALID{"Definição gerenciada válida?"}
+  VALID -->|não| LEGACY["Recusar criação ou preservar baseline histórico"]
+  VALID -->|sim| HASH["Conferir SHA antes do registro"]
+  HASH --> BUSY{"Definição em uso conflita?"}
+  BUSY -->|sim| BLOCK["blocked; preservar trabalho em andamento"]
+  BUSY -->|não| REG["Registrar cartão no Blackboard"]
+  REG --> ACTION{"Criar ou ativar?"}
+  ACTION -->|criar| CONFIG["Compilar configuração do OpenCode"]
+  ACTION -->|ativar| DELEGATE["delegate: capacidade exclusiva e contexto"]
+  DELEGATE --> ID["Correlacionar task_id, perfil e executor externo"]
+  ID --> WAIT["pending_executor até execução real"]
+  WAIT --> WORK["Trabalho e evidência observados"]
+  WORK --> GATE["Contrato e conclusão pelo primário"]
+  CONFIG --> MEM["MetaBus: observações e limites"]
+  GATE --> MEM

@@ -1,0 +1,20 @@
+% =================
+% 当心 — shock page (black), sensory rupture while leafing
+% =================
+\cleardoublepage
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+  \fill[black] (current page.south west) rectangle (current page.north east);
+  \node[anchor=center, text width=0.74\paperwidth, align=center]
+    at (current page.center){%
+    {\color{sangue}\scshape\Huge 当心}\\[0.4em]
+    {\color{sangue}\rule{0.35\paperwidth}{0.6pt}}\\[2.2em]
+    {\color{sepiabg}\large 这本书包含一个\\ 叙事污染的循环。}\\[1.8em]
+    {\color{sepiabg}\large 阅读本书，您将变成\\  {\color{olho}\bfseries 患者1,263}。}\\[3em]
+    {\color{sepiabg!55}\footnotesize\itshape 到头来，您将再也无法把这本书放回书架，\\
+     仿佛从未打开过它。}\\[3em]
+    {\color{sangue!40}\footnotesize\itshape 阅读时若响起嗡鸣，不要停下。\\
+     现在停下已经太迟。}%
+  };
+\end{tikzpicture}%
+\null\vfill\clearpage

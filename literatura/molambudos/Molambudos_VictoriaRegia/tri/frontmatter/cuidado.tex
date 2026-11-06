@@ -1,0 +1,29 @@
+% =================
+% BEWARE — CUIDADO — 当心 — página de choque (preta), ruptura sensorial
+% =================
+\cleardoublepage
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+  \fill[black] (current page.south west) rectangle (current page.north east);
+  % Composição local compacta: a versão trilíngue não deve ultrapassar o
+  % MediaBox, inclusive no miolo KDP 160 x 230 mm. A narrativa global e o
+  % piso \footnotesize de notas/legendas permanecem inalterados.
+  \node[anchor=center, text width=0.80\paperwidth, align=center]
+    at (current page.center){%
+    {\color{sangue}\scshape\LARGE CUIDADO --- BEWARE --- 当心}\\[0.25em]
+    {\color{sangue}\rule{0.35\paperwidth}{0.6pt}}\\[1.1em]
+    {\color{sepiabg}\normalsize Este livro contém um ciclo de\\ contaminação narrativa.}\\[0.45em]
+    {\color{sepiabg}\normalsize This book contains a cycle of\\ narrative contamination.}\\[0.45em]
+    {\color{sepiabg}\normalsize 这本书包含一个\\ 叙事污染的循环。}\\[1em]
+    {\color{sepiabg}\normalsize Ao ler, você se torna\\ {\color{olho}\bfseries Paciente 1.263}.}\\[0.35em]
+    {\color{sepiabg}\normalsize By reading, you become\\ {\color{olho}\bfseries Patient 1,263}.}\\[0.35em]
+    {\color{sepiabg}\normalsize 阅读本书，您将变成\\ {\color{olho}\bfseries 患者1,263}。}\\[1.4em]
+    {\color{sepiabg!55}\footnotesize\itshape No fim, não haverá como devolver o livro à estante como se nunca o tivesse aberto.\\[0.3em]
+    In the end, there will be no way to return the book to the shelf as if you had never opened it.\\[0.3em]
+    到头来，您将再也无法把这本书放回书架，仿佛从未打开过它。}\\[1.4em]
+    {\color{sangue!40}\footnotesize\itshape Se um zumbido surgir durante a leitura, não pare. Já é tarde demais para parar.\\[0.3em]
+    If a hum arises during reading, do not stop. It is already too late to stop.\\[0.3em]
+    阅读时若响起嗡鸣，不要停下。现在停下已经太迟。}%
+  };
+\end{tikzpicture}%
+\null\vfill\clearpage

@@ -1,0 +1,130 @@
+%==============================================================================
+% FICHAMENTO CRÍTICO — Automatic Jawbone Structure Segmentation on Dental CBCT
+% Images via Deep Learning
+% Conforme NBR 6023 (referências) e NBR 10520 (citações)
+%==============================================================================
+\section{Fichamento: \citeonline{tian2024jawbone}}
+
+% --- 1. IDENTIFICAÇÃO ---
+\subsection{Identificação}
+\begin{tabular}{ll}
+\textbf{Título:} & Automatic jawbone structure segmentation on dental CBCT
+images via deep learning \\
+\textbf{Autor(es):} & Tian, Yuan; Jin, Hao; Wang, Mingzheng; Zhang, Zhejia;
+Wang, Ge; Kou, Dazhi \\
+\textbf{Periódico:} & Clinical Oral Investigations \\
+\textbf{Ano:} & 2024 \\
+\textbf{Volume:} & 28 \\
+\textbf{Número:} & 12 \\
+\textbf{Páginas:} & 663 \\
+\textbf{DOI:} & \url{https://doi.org/10.1007/s00784-024-06061-y} \\
+\textbf{Qualis:} & A2 (Odontologia) \\
+\textbf{Tipo:} & Artigo original \\
+\end{tabular}
+
+% --- 2. OBJETIVO ---
+\subsection{Objetivo}
+Desenvolver e avaliar um sistema de segmentação automática baseado em deep
+learning em dois estágios para segmentar o osso cortical mandibular, osso
+medular mandibular, osso cortical maxilar e osso medular maxilar em imagens
+de tomografia computadorizada de feixe cônico (CBCT), avaliando o impacto de
+anomalias de qualidade e comparando com segmentação manual refinada.
+
+% --- 3. METODOLOGIA ---
+\subsection{Metodologia}
+\textbf{Desenho do estudo:} Estudo experimental de desenvolvimento e validação
+de sistema de segmentação baseado em DL. \\
+\textbf{Amostra:} 155 exames de CBCT adquiridos com diferentes parâmetros
+(campo de visão, resolução, fabricante). \\
+\textbf{Métricas principais:} Dice Similarity Coefficient (DSC) e Average
+Symmetric Surface Distance (ASSD). \\
+\textbf{Validação:} Comparação com ground truth manual; análise de subgrupo por
+anomalias de qualidade (artefatos de movimento, ruído, hipodensidades);
+comparação entre segmentação automática (AS) e segmentação manual refinada (MRS).
+
+% --- 4. RESULTADOS PRINCIPAIS ---
+\subsection{Resultados Principais}
+\begin{itemize}
+  \item DSC médio: mandíbula cortical = 93,69\%; mandíbula medular = 96,83\%;
+        maxila cortical = 86,14\%; maxila medular = 95,57\%.
+  \item ASSD médio: mandíbula cortical = 0,13 mm; mandíbula medular = 0,16 mm;
+        maxila cortical = 0,29 mm; maxila medular = 0,41 mm.
+  \item A segmentação da maxila cortical apresentou o menor DSC (86,14\%) e o
+        maior ASSD (0,29 mm), refletindo a complexidade anatômica e a fina
+        espessura cortical na maxila.
+  \item A comparação AS $\times$ MRS mostrou DSC $>$ 98,8\% e ASSD $<$ 0,1 mm,
+        indicando alta concordância entre a segmentação automática e a refinada.
+\end{itemize}
+
+% --- 5. LIMITAÇÕES ---
+\subsection{Limitações}
+\begin{itemize}
+  \item Anomalias de qualidade (movimento, ruído, hipodensidades) reduziram
+        significativamente o desempenho, especialmente na maxila cortical.
+  \item A amostra de 155 exames é relativamente modesta considerando a
+        diversidade de parâmetros de aquisição e variações anatômicas.
+  \item O estudo não incluiu segmentação de estruturas clinicamente relevantes
+        como seios maxilares, canal mandibular ou dentes.
+\end{itemize}
+
+% --- 6. CONTRIBUIÇÃO PARA O LIVRO ---
+\subsection{Contribuição para o Livro}
+Este artigo é a principal referência do Capítulo 19, que aborda o uso de U-Net
+para segmentação óssea em CBCT. A arquitetura em dois estágios (detecção da
+região de interesse seguida de segmentação refinada) é apresentada no livro
+como uma variação da arquitetura U-Net clássica adaptada para imagens
+volumétricas. A análise do impacto de anomalias de qualidade no desempenho
+fornece subsídios para a discussão sobre robustez e pré-processamento de
+imagens CBCT. O DSC de 96,83\% para osso medular mandibular é utilizado como
+benchmark no livro para comparação com outras arquiteturas de segmentação.
+
+% --- 7. ANÁLISE CRÍTICA ---
+\subsection{Análise Crítica}
+\begin{itemize}
+  \item \textbf{Validade interna:} Alta -- Uso de 155 exames com parâmetros
+        variados, validação com ground truth manual e análise de subgrupos.
+  \item \textbf{Validade externa:} Média -- Dados de múltiplos parâmetros, mas
+        não há validação multicêntrica ou em populações diversas.
+  \item \textbf{Reprodutibilidade:} Média -- A arquitetura em dois estágios é
+        descrita conceitualmente, mas os autores não disponibilizaram código
+        ou pesos pré-treinados publicamente.
+  \item \textbf{Relevância clínica:} Alta -- Segmentação óssea automática é
+        pré-requisito para planejamento de implantes, cirurgia ortognática e
+        geração de gêmeos digitais.
+  \item \textbf{Conflito de interesses:} Não -- Os autores declararam ausência de
+        conflitos.
+  \item \textbf{Viés identificado:} Viés de espectro -- A amostra pode não
+        representar toda a gama de variações anatômicas e patológicas
+        encontradas na prática clínica.
+\end{itemize}
+
+% --- 8. CITAÇÕES RELEVANTES ---
+\subsection{Citações Relevantes}
+\begin{citacao}
+``The system achieved promising segmentation performance, with average DSC
+values of 93.69\%, 96.83\%, 86.14\% and 95.57\% and average ASSD values of
+0.13 mm, 0.16 mm, 0.29 mm and 0.41 mm for the mandibular cortical bone,
+mandibular cancellous bone, maxillary cortical bone and maxillary cancellous
+bone, respectively.'' (p. 663).
+\end{citacao}
+
+% --- 9. MAPEAMENTO SDD ---
+\subsection{Mapeamento SDD}
+\textbf{Problema:} Segmentação manual de estruturas ósseas maxilomandibulares
+em CBCT é demorada, subjetiva e impraticável em larga escala clínica. \\
+\textbf{Entrada:} Imagens CBCT (formato DICOM) com parâmetros de aquisição
+variáveis (FOV, resolução, fabricante), 155 exames. \\
+\textbf{Saída:} Mapas de segmentação com 4 classes: osso cortical mandibular,
+osso medular mandibular, osso cortical maxilar, osso medular maxilar. \\
+\textbf{Critérios:} DSC $\geq$ 85\% para todas as classes; ASSD $\leq$ 0,5 mm;
+robustez a anomalias de qualidade (movimento, ruído, hipodensidades). \\
+\textbf{Confiança:} 0,78 -- Estudo tecnicamente sólido, mas com amostra
+moderada, sem código aberto e sem validação externa multicêntrica.
+
+% --- 10. REFERÊNCIA ABNT ---
+\subsection{Referência ABNT}
+\begin{verbatim}
+TIAN, Yuan et al. Automatic jawbone structure segmentation on dental CBCT
+images via deep learning. Clinical Oral Investigations, Berlin, v. 28, n. 12,
+p. 663, 2024. DOI: 10.1007/s00784-024-06061-y.
+\end{verbatim}

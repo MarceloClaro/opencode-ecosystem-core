@@ -23798,6 +23798,197 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1055",
+      "objective": "R1055 — vídeo didático de qubit, câmera e versões nativas",
+      "changes": [
+        "voz Edge Francisca sem clonagem e roteiro em 26 batidas",
+        "mapa Natural Earth com pulsos e timeline histórica",
+        "câmera por frames, esferas de Bloch e correlação",
+        "masters 16:9 e 9:16 com QC técnico, sem publicação"
+      ],
+      "score": 7.6,
+      "lessons": [
+        "QC de loudness/frames não aprova naturalidade da voz nem precisão científica",
+        "MP4 fora do Git exige recibos e hashes para revisão reproduzível"
+      ],
+      "timestamp": 1793805757.150018,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1056",
+      "objective": "R1056 — atlas animado e documentação R1055",
+      "changes": [
+        "49 identidades Mermaid convertidas em GIF/PNG/SVG/MMD",
+        "22 fluxos do catálogo cobertos e fontes deduplicadas",
+        "galeria, manifesto, câmera e verificação local",
+        "README, manual, arquitetura e progress atualizados"
+      ],
+      "score": 7.8,
+      "lessons": [
+        "GIF documental precisa de alternativa estática e declaração de que não é execução",
+        "Orçamento de mídia deve ser medido antes de congelar o limite",
+        "Snapshots históricos não devem ser reescritos apenas para obter suíte verde"
+      ],
+      "timestamp": 1793805757.353811,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1061",
+      "objective": "R1060 — desktop-operator com allowlist, aprovação humana e MCP curado",
+      "changes": [
+        "Wrapper local com seis comandos permitidos e negação padrão de clipboard/screenshot/launch/mouse/headed/force/trace.",
+        "Aprovação HMAC de uso único vinculada a comando+app+ref+hash do texto; CLI approve exige --confirm.",
+        "MCP com seis ferramentas e perfil desktop-operator registrado; opencode.json atualizado sem remover MCPs existentes.",
+        "41 testes locais com binário falso; redação, truncamento, allowlist e ambiente reduzido cobertos.",
+        "Piloto real: status ok; list-apps/snapshot bloqueados por bug upstream #435 (native_window_unproven)."
+      ],
+      "score": 7.5,
+      "lessons": [
+        "Status saudável do adapter não prova inventário nem snapshot; testar o caminho completo antes de habilitar ações.",
+        "Allowlist vazia, aprovação de uso único e texto por stdin reduzem a superfície, mas não substituem sandbox.",
+        "Regenerar opencode.json pode remover MCPs federados inativos; preservar entradas existentes e revisar o diff.",
+        "Bug upstream conhecido deve bloquear a promoção da capacidade, não ser mascarado por testes com binário falso."
+      ],
+      "timestamp": 1793843530.0941746,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1062",
+      "objective": "R1061 — storage-operator: inventário, upload verificado e purge por manifesto",
+      "changes": [
+        "Manifesto SHA-256 por arquivo, allowlist de raiz e exclusão de segredos/.tmp.driveupload/.gdoc/desktop.ini.",
+        "Upload rclone com --checksum/--files-from, verificação remota e purge por unlink com hash reconferido.",
+        "Aprovação HMAC de uso único vinculada ao hash do manifesto; MCP com 7 ferramentas e perfil storage-operator.",
+        "Piloto real: 18 arquivos/13,5 MB enviados ao Drive, verificados; 20 arquivos/34,6 MB apagados; 15 testes.",
+        "C: permaneceu ~98%: Downloads não é o gargalo; próximo passo é inventário dos grandes consumidores."
+      ],
+      "score": 7.8,
+      "lessons": [
+        "Upload verificado e purge por manifesto funcionam, mas o ganho de espaço depende de escolher a raiz correta.",
+        "Pastas de sincronização (.tmp.driveupload), atalhos .gdoc e desktop.ini não devem entrar em manifesto de upload/purge.",
+        "A saída de rclone config create pode expor token; redigir e orientar revogação se o log for compartilhado.",
+        "Exclusão permanente exige manifesto + verificação remota + aprovação vinculada; não usar glob ou diretório."
+      ],
+      "timestamp": 1793846443.3458464,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1083",
+      "objective": "Correção editorial e vetorização SVG de capa, contracapa e lombada de Molambudos",
+      "changes": [
+        "Seis SVGs sem raster: três em curvas e três com texto editável e fontes incorporadas",
+        "Textos PT/EN/ZH revistos; cronologia de 62 anos corrigida e Paciente 1.263 preservado no aviso",
+        "Integridade XML, referências, glifos, geometria e hashes originais conferidos; prévias inspecionadas",
+        "Evidência: literatura/molambudos/capas/svg_corrigidos/validacao.json; revisão auxiliar A2A task-b8f38e52"
+      ],
+      "score": null,
+      "lessons": [
+        "Vetorização não acrescenta detalhes ausentes no PNG; dimensões de impressão permanecem sem definição",
+        "Validação local não é aprovação externa nem prova física de impressão"
+      ],
+      "timestamp": 1793937431.5302854,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1084",
+      "objective": "Corrigir política Git de literatura e reconciliar READMEs sem reescrever histórico",
+      "changes": [
+        "Whitelist deny-by-default em literatura; remoção do índice de XDV e synctex(busy) sem apagar fontes locais",
+        "Badges do README sincronizados com configuração; descrições corrigidas para 435/421/422/436 páginas e limites do clone",
+        "Gates de whitespace reativados; 165 testes focados e doctor 22/22 executados localmente"
+      ],
+      "score": 7.0,
+      "lessons": [
+        "Uma exceção global !literatura/** reautoriza até arquivos .env; usar allowlist testada com git check-ignore --no-index.",
+        "O teste git show --check HEAD não apaga defeitos de um commit anterior; uma correção aditiva não reescreve histórico.",
+        "Badge, triagem de links e teste coletado não provam execução externa, publicação ou aprovação editorial.",
+        "Revisão externa bloqueada por permissão não pode ser marcada como análise concluída, mesmo se o roteador a pontuar como sucesso."
+      ],
+      "timestamp": 1793954876.014953,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1086",
+      "objective": "Triar três repositórios e sanear apenas objetos de build do histórico local antes de publicar",
+      "changes": [
+        "Parecer documental R1085 (MIT/MIT/AGPL) sem executar terceiros",
+        "Rebase local a partir de aba3fae1, retirando somente dois resíduos de build desde a introdução",
+        "Literatura preservada (árvore Git f88b8141), 79 testes focados e doctor 22/22 antes do push"
+      ],
+      "score": null,
+      "lessons": [
+        "Nunca confundir clone/configuração com qualidade auditiva; ensaio cego com consentimento antes de adotar TTS",
+        "Reescrever apenas commits ainda locais evita substituição de histórico remoto",
+        "Não remover whitespace de manuscrito em massa: Markdown pode usar espaços para quebras de linha",
+        "Roteamento exigente do executor não teve agente elegível; revisão textual geral funcionou apenas no escopo informado"
+      ],
+      "timestamp": 1793956612.1293378,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [

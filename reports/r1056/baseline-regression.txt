@@ -1,0 +1,37 @@
+F.............................F........                                  [100%]
+=================================== FAILURES ===================================
+____________ test_catalogo_atual_integralmente_publicado_no_readme _____________
+
+    def test_catalogo_atual_integralmente_publicado_no_readme():
+        """Omitir um fluxo, uma aresta ou metadado do catálogo rompe o contrato."""
+        catalog = json.loads((ROOT / "docs/architecture/flows.json").read_text(encoding="utf-8"))
+        assert len(catalog["flows"]) >= 13
+        result = run_sync(ROOT, "--check")
+>       assert result.returncode == 0, result.stdout + result.stderr
+E       AssertionError: Erro de sincronização: Âncora com fonte modificada: marceloclaro/orchestrator.py
+E
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['/usr/bin/python3', '/home/marceloclaro/opencode-ecosystem-core/scripts/sync_readme_flowcharts...., returncode=2, stdout='', stderr='Erro de sincronização: Âncora com fonte modificada: marceloclaro/orchestrator.py\n').returncode
+
+tests/test_r881_readme_flowcharts.py:62: AssertionError
+_____ test_published_mermaid_manifest_and_rendered_svg_preserve_the_graph ______
+
+builder = <module 'r881_mermaid' from '/home/marceloclaro/opencode-ecosystem-core/scripts/build_mermaid_architecture.py'>
+
+    def test_published_mermaid_manifest_and_rendered_svg_preserve_the_graph(builder):
+        directory = ROOT / "docs/architecture"
+>       assert builder.main(["--inventory", str(directory / "architecture-inventory.json"),
+                             "--output", str(directory / "dependencies.mmd"),
+                             "--correspondence", str(directory / "mermaid-correspondence.json"),
+                             "--check"]) == 0
+E       AssertionError: assert 1 == 0
+E        +  where 1 = <function main at 0x7f4d512c5bc0>(['--inventory', '/home/marceloclaro/opencode-ecosystem-core/docs/architecture/architecture-inventory.json', '--output'...', '--correspondence', '/home/marceloclaro/opencode-ecosystem-core/docs/architecture/mermaid-correspondence.json', ...])
+E        +    where <function main at 0x7f4d512c5bc0> = <module 'r881_mermaid' from '/home/marceloclaro/opencode-ecosystem-core/scripts/build_mermaid_architecture.py'>.main
+
+tests/test_r881_mermaid_integral.py:188: AssertionError
+----------------------------- Captured stderr call -----------------------------
+Erro de exportação: Artefato ausente ou divergente; regenere a partir do inventário.
+=========================== short test summary info ============================
+FAILED tests/test_r881_readme_flowcharts.py::test_catalogo_atual_integralmente_publicado_no_readme
+FAILED tests/test_r881_mermaid_integral.py::test_published_mermaid_manifest_and_rendered_svg_preserve_the_graph
+2 failed, 37 passed in 3.37s

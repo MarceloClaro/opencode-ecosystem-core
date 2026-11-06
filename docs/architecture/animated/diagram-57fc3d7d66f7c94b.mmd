@@ -1,0 +1,7 @@
+flowchart LR
+    Pedido --> Analise[Análise por especialista]
+    Analise --> Checkpoint[Resultado salvo]
+    Checkpoint --> Revisao[Revisão por outro especialista]
+    Revisao --> Entrega[Conclusão aceita e memória]
+    Checkpoint --> Retomada[Retomada reutiliza a análise]
+    Retomada --> Revisao

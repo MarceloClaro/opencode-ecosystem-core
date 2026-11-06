@@ -46,6 +46,15 @@ flowchart TB
 ```"""
 
 
+def _badges(agents: int, mcps: int, checks: int) -> str:
+    """Números de configuração, não um atestado de saúde em tempo real."""
+    return "\n".join((
+        f"[![Checks](https://img.shields.io/badge/checks-{checks}%20estruturais-64748b?style=for-the-badge)](marceloclaro/doctor.py)",
+        f"[![MCP](https://img.shields.io/badge/MCP-{mcps}%20servers-8b5cf6?style=for-the-badge)](opencode.json)",
+        f"[![Agents](https://img.shields.io/badge/agents-{agents}-7c3aed?style=for-the-badge)](agents/catalog)",
+    ))
+
+
 def synchronize(root: Path, check_count: int, *, write: bool = False) -> list[str]:
     """Confere tudo antes de escrever; conteúdo fora dos blocos é preservado."""
     root = Path(root)
@@ -77,6 +86,7 @@ def synchronize(root: Path, check_count: int, *, write: bool = False) -> list[st
             listing = "\n".join(f"{index}. `{server}`;" for index, server in enumerate(sorted(config["mcp"]), 1))
             new = _replace_block(new, "core-mcp", listing)
         if name == "README.md":
+            new = _replace_block(new, "core-badges", _badges(agents, mcps, check_count))
             new = _replace_block(new, "core-runtime-diagram", _runtime_diagram(agents, mcps))
         if new != old:
             pending[name] = new

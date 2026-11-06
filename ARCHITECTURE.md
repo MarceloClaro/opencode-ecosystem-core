@@ -20,7 +20,7 @@ python3 -c "import json; c=json.load(open('opencode.json', encoding='utf-8')); p
 ```
 
 <!-- core-state:start -->
-**333 agentes** · **27 MCPs** · **35 comandos** · **22 checks**
+**337 agentes** · **30 MCPs** · **35 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 
@@ -35,6 +35,18 @@ respectivamente, `specs/`, `evolution/cycles.json`, `tests/` e a configuração
 de CI em vez de tratar números de documentos antigos como estado atual.
 
 ## Atlas atual R916 e fluxos conectados
+
+**Edição visual R1056–R1057:** [galeria SVG/GIF/PNG](docs/architecture/ANIMATED.md),
+[manifesto](docs/architecture/animated/manifest.json) e
+[reprodução](reports/r1056/README.md). Os 22 fluxos e os demais Mermaid
+publicados permanecem editáveis. O SVG é a visualização primária; a fonte
+Mermaid fica em auditoria. O GIF pulsa as arestas na ordem topológica do desenho,
+que é guia de leitura, não tráfego, telemetria ou ordem comprovada de execução.
+
+**Recorte temporal:** o inventário abaixo é o retrato R916, não uma nova
+extração do checkout R1056. As expansões científicas R1051–R1054 e o piloto de
+vídeo R1055 são documentados separadamente. Não promover hashes históricos
+a prova do código corrente.
 
 A [página offline](docs/architecture_map.html) e o
 [guia minucioso R916](docs/ARQUITETURA_COMPLETA_CORE_R916.md) reúnem o grafo
@@ -72,6 +84,14 @@ R879, R900 e R911 permanecem históricos, sem reescrever suas evidências.
 
 ## Visão das camadas
 
+<!-- svg-presentation:diagram-0a347110aad90186 -->
+<img src="docs/architecture/animated/diagram-0a347110aad90186.svg" alt="Visão das camadas — diagrama estático" width="100%">
+
+<sub>[GIF](docs/architecture/animated/diagram-0a347110aad90186.gif) · [PNG](docs/architecture/animated/diagram-0a347110aad90186.png) · [Fonte Mermaid](docs/architecture/animated/diagram-0a347110aad90186.mmd)</sub>
+
+<details>
+<summary>Fonte Mermaid (auditoria)</summary>
+
 ```mermaid
 graph TD
     Usuario[Usuário ou automação] --> CLI[marceloclaro CLI]
@@ -83,10 +103,20 @@ graph TD
     Orquestrador --> MIRA[mira-presenter]
 ```
 
+</details>
+
 ## Diagrama operacional atual
 
 O diagrama abaixo resume o runtime observável sem tentar listar todos os
 arquivos, classes auxiliares ou serviços opcionais do ecossistema.
+
+<!-- svg-presentation:diagram-4c75ee83141913a3 -->
+<img src="docs/architecture/animated/diagram-4c75ee83141913a3.svg" alt="Diagrama operacional atual — diagrama estático" width="100%">
+
+<sub>[GIF](docs/architecture/animated/diagram-4c75ee83141913a3.gif) · [PNG](docs/architecture/animated/diagram-4c75ee83141913a3.png) · [Fonte Mermaid](docs/architecture/animated/diagram-4c75ee83141913a3.mmd)</sub>
+
+<details>
+<summary>Fonte Mermaid (auditoria)</summary>
 
 ```mermaid
 flowchart TB
@@ -105,6 +135,8 @@ flowchart TB
     Deck2 --> Engine2[MiraEngine]
 ```
 
+</details>
+
 | Camada | Responsabilidade | Referências principais |
 |---|---|---|
 | Entrada | CLI interativo e comandos diretos. | `marceloclaro/cli.py`, `MANUAL.md` |
@@ -114,6 +146,16 @@ flowchart TB
 | Integrações | Servidores MCP e definição de agentes. | `opencode.json`, `integrations/` |
 | Apresentação | Geração de deck a partir de pasta de produção. | `illustrations/mira_deck.py` |
 | Integridade | Cálculo local de raiz de arquivos selecionados. | `benchmarks/merkle_integrity_guard.py` |
+
+### Pipeline audiovisual R1055
+
+O [pipeline do piloto](docs/CINEMATIC_REMOTION_R1055.md#pipeline-audiovisual-r1055)
+liga roteiro/TTS, timeline, assets locais, composições 16:9 e 9:16,
+`integrations.video_editor`, mux FFmpeg e `scripts/video_qa.py`.
+`cinematic.tsx` é uma camada CSS/SVG compartilhada dentro do piloto, não um
+motor 3D nem um plugin instalado globalmente. Câmera e estado visual usam
+frames; a esfera de Bloch é uma projeção 2D estilizada. Os recibos de render
+não equivalem à aprovação da explicação física ou da naturalidade da voz.
 
 ## Servidores MCP Interoperáveis
 
@@ -127,26 +169,29 @@ As entradas abaixo são derivadas das chaves `mcp` de `opencode.json`:
 5. `chroma`;
 6. `colibri-mcp`;
 7. `context7`;
-8. `ecosystem-network`;
-9. `educacao-legislacao`;
-10. `fetch`;
-11. `filesystem`;
-12. `latexmk-mcp`;
-13. `litert-lm`;
-14. `mcp-memory`;
-15. `mcp-time`;
-16. `metacognitive-interconnect`;
-17. `oa-resolver`;
-18. `playwright`;
-19. `polymath-labs-mcp`;
-20. `pypi-search`;
-21. `qdrant`;
-22. `rea`;
-23. `remotion-audit`;
-24. `scanners-mcp`;
-25. `sequential-thinking`;
-26. `servers`;
-27. `web-deploy-mcp`;
+8. `desktop-operator`;
+9. `ecosystem-network`;
+10. `educacao-legislacao`;
+11. `fetch`;
+12. `filesystem`;
+13. `latexmk-mcp`;
+14. `litert-lm`;
+15. `mcp-memory`;
+16. `mcp-time`;
+17. `metacognitive-interconnect`;
+18. `oa-resolver`;
+19. `playwright`;
+20. `polymath-labs-mcp`;
+21. `pypi-search`;
+22. `qdrant`;
+23. `rea`;
+24. `remotion-audit`;
+25. `scanners-mcp`;
+26. `scientific-data`;
+27. `sequential-thinking`;
+28. `servers`;
+29. `storage-operator`;
+30. `web-deploy-mcp`;
 <!-- core-mcp:end -->
 
 O MCP `ecosystem-network` conecta o `MarceloClaroOrchestrator`, o roteamento

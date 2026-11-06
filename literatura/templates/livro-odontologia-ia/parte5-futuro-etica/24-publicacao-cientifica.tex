@@ -1,0 +1,848 @@
+%==============================================================================
+% CAPÍTULO 24 — PUBLICAÇÃO CIENTÍFICA EM IA ODONTOLÓGICA
+% PARTE V — Futuro, Ética e Regulação da IA em Odontologia
+%==============================================================================
+\chapter{Publicação Científica em Inteligência Artificial Odontológica}
+\label{cap:publicacao-cientifica}
+
+\nivelquatro
+
+A produção de conhecimento científico de qualidade é o alicerce sobre o qual se
+constrói a Odontologia baseada em evidências. Quando esse conhecimento envolve
+Inteligência Artificial, um novo conjunto de desafios metodológicos e editoriais
+se impõe ao pesquisador: como reportar arquiteturas de redes neurais com
+reprodutibilidade? Como garantir que os vieses do modelo sejam transparentes?
+Como convencer revisores -- muitos dos quais não dominam IA -- de que seu estudo
+é rigoroso e relevante?
+
+Este capítulo oferece um guia completo para a publicação de artigos científicos
+na interseção entre Odontologia e Inteligência Artificial. Da estrutura IMRaD
+aos checklists internacionais de reporte, da escolha do periódico à submissão em
+preprints, cada seção foi concebida para transformar o leitor-pesquisador em um
+autor preparado para os rigorosos padrões dos periódicos Qualis A1.
+
+\indice{publicação científica} \indice{IMRaD} \indice{checklist PRISMA}
+\indice{CLAIM} \indice{TRIPOD+AI}
+
+%-----------------------------------------------------------------------------
+% SEÇÃO 24.1
+%-----------------------------------------------------------------------------
+\section{A Estrutura IMRaD para Artigos de IA Odontológica}
+\label{sec:imrad-ia}
+
+\nivelquatro
+
+A estrutura IMRaD (\textit{Introduction, Methods, Results, and Discussion}) é o
+padrão ouro da comunicação científica em saúde desde sua adoção pelo Comitê
+Internacional de Editores de Revistas Médicas (ICMJE) na década de 1970
+\cite{icmje2024recommendations}. Para artigos que envolvem inteligência
+artificial, entretanto, cada seção do IMRaD adquire peculiaridades que precisam
+ser compreendidas.
+
+\subsection{Introdução (I): Contextualizando a IA com Relevância Clínica}
+
+A Introdução de um artigo de IA odontológica deve cumprir três funções
+essenciais em aproximadamente 500 a 800 palavras:
+
+\begin{enumerate}
+  \item \textbf{Contextualizar o problema clínico.} Antes de mencionar redes
+    neurais ou \textit{transformers}, o leitor precisa entender qual a lacuna
+    clínica que seu estudo pretende preencher. Por exemplo: ``A detecção precoce
+    de lesões de cárie em superfícies proximais continua sendo um desafio para o
+    clínico geral, com sensibilidade média de 48\% para o exame visual-tátil.''
+
+  \item \textbf{Apresentar o estado da arte em IA para o problema.} Aqui você
+    deve demonstrar domínio da literatura de IA específica para sua questão
+    clínica. Use os bancos de dados PubMed, Scopus e IEEE Xplore, e priorize
+    artigos com menos de três anos.
+
+  \item \textbf{Declarar a hipótese e o objetivo com precisão cirúrgica.} Em IA,
+    a hipótese frequentemente envolve métricas quantificáveis: ``Nossa hipótese é
+    que uma EfficientNet-B4 treinada com \textit{transfer learning} superará a
+    acurácia do exame visual-tátil (referência: 48\%) em pelo menos 20 pontos
+    percentuais.''
+\end{enumerate}
+
+\destaque{A Introdução não é o lugar para explicar o que é uma CNN ou como
+funciona o \textit{backpropagation}. Essa função pertence ao capítulo de
+fundamentos deste livro (Capítulos~6--11) e, no artigo, deve ser delegada a
+referências. O revisor odontológico quer saber \textbf{por que} seu modelo é
+necessário, não \textbf{como} ele funciona em seus mínimos detalhes.}
+
+\notaexplicativa{Um erro comum de pesquisadores iniciantes em IA é dedicar 40\%
+da Introdução a explicar conceitos básicos de \textit{machine learning}. Isso
+irrita revisores experientes e desperdiça o espaço mais nobre do artigo.}
+
+\subsection{Métodos (M): Reprodutibilidade como Imperativo Ético}
+
+A seção de Métodos é, sem dúvida, a mais crítica em artigos de IA -- e,
+infelizmente, a mais negligenciada. Um estudo de 2023 analisou 512 artigos de
+\textit{deep learning} em imagens médicas e constatou que apenas 6,4\%
+disponibilizavam código-fonte, e somente 12,3\% compartilhavam os dados
+utilizados \cite{roberts2021common}.
+
+\indice{reprodutibilidade científica}
+
+Para publicar em periódicos Qualis A1, sua seção de Métodos DEVE incluir:
+
+\begin{description}
+  \item[Origem e curadoria dos dados:] Quantas imagens? De quantos pacientes?
+    De qual(ais) instituição(ões)? Qual o período de coleta? Quais os critérios
+    de inclusão e exclusão? Como o padrão-ouro (\textit{ground truth}) foi
+    estabelecido (por quantos especialistas, com qual nível de concordância
+    interexaminador)?
+
+  \item[Pré-processamento:] Redimensionamento, normalização, \textit{data
+    augmentation}, balanceamento de classes. Cada transformação deve ser
+    justificada e parametrizada.
+
+  \item[Arquitetura do modelo:] Nome da arquitetura-base, número de camadas,
+    função de ativação, otimizador, \textit{learning rate} (inicial e
+    \textit{scheduler}), \textit{batch size}, número de épocas, critério de
+    parada precoce (\textit{early stopping}).
+
+  \item[Estratégia de validação:] \textit{Hold-out}, \textit{k-fold
+    cross-validation}, divisão por paciente (essencial para evitar vazamento de
+    dados entre treino e teste).
+
+  \item[Métricas de avaliação:] Acurácia, sensibilidade, especificidade, AUC-ROC,
+    \textit{F1-score}, \textit{precision-recall curve}. Justifique a escolha de
+    cada métrica com base no problema clínico.
+
+  \item[Disponibilidade de código e dados:] Link para repositório GitHub/GitLab,
+    DOI do Zenodo para o dataset, licença de uso.
+\end{description}
+
+\begin{pratica}{Checklist de Reprodutibilidade para Métodos de IA}
+  Objetivo: Verificar se sua seção de Métodos atende aos requisitos mínimos de
+  reprodutibilidade antes da submissão.
+
+  \begin{itemize}
+    \item[\checkmark] O código-fonte está publicamente disponível com DOI?
+    \item[\checkmark] O dataset está descrito com estatísticas descritivas
+      completas?
+    \item[\checkmark] O \textit{random seed} está fixado e declarado?
+    \item[\checkmark] O ambiente computacional está documentado (GPU, RAM, SO,
+      versões de bibliotecas)?
+    \item[\checkmark] As métricas incluem intervalos de confiança de 95\%?
+    \item[\checkmark] O pré-processamento está descrito em ordem sequencial?
+    \item[\checkmark] Cada hiperparâmetro está justificado (grid search? manual?
+      literatura anterior?)?
+  \end{itemize}
+\end{pratica}
+
+\subsection{Resultados (R): Números que Contam uma História Clínica}
+
+A seção de Resultados deve ser narrada, não apenas tabelada. Cada número deve ser
+acompanhado de uma interpretação clínica sucinta. Evite o erro de despejar uma
+tabela com 20 métricas sem explicar o que cada uma significa para o
+cirurgião-dentista.
+
+\begin{table}[H]
+  \centering
+  \caption{Exemplo de tabela de resultados com interpretação clínica integrada.
+  Adaptado de modelo para detecção de lesões periapicais.}
+  \label{tab:exemplo-resultados}
+  \begin{tabularx}{\textwidth}{lcccX}
+    \toprule
+    \textbf{Modelo} & \textbf{Acurácia} & \textbf{Sens.} & \textbf{Espec.} & \textbf{Interpretação Clínica} \\
+    \midrule
+    ResNet-50   & 0,89 (0,86--0,92) & 0,91 & 0,87 & A cada 100 lesões, perde 9 \\
+    EfficientNet-B3 & 0,93 (0,91--0,95) & 0,94 & 0,92 & A cada 100 lesões, perde 6 \\
+    DenseNet-121 & 0,91 (0,89--0,93) & 0,92 & 0,90 & Bom equilíbrio custo-benefício \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+Para artigos de IA odontológica, recomendamos fortemente a inclusão de:
+
+\begin{itemize}
+  \item \textbf{Matriz de confusão} com valores absolutos (não apenas
+    percentuais).
+  \item \textbf{Curva ROC} com área sob a curva (AUC) para cada classe.
+  \item \textbf{Mapas de ativação} (Grad-CAM, SHAP) mostrando \textit{quais}
+    regiões da imagem o modelo utilizou para decidir -- isso é fundamental para
+    a credibilidade clínica do seu trabalho \cite{selvaraju2017grad}.
+  \item \textbf{Análise de erros:} exemplos de falsos positivos e falsos
+    negativos com discussão das possíveis causas.
+\end{itemize}
+
+\subsection{Discussão (D): Da Evidência à Prática Clínica}
+
+A Discussão é o espaço onde você conecta seus resultados com a literatura
+existente e com a prática odontológica. Estruture-a em quatro movimentos:
+
+\begin{enumerate}
+  \item \textbf{Síntese dos achados principais} (1 parágrafo): ``Nossos
+    resultados demonstram que uma EfficientNet-B3 alcançou sensibilidade de 94\%
+    na detecção de lesões periapicais, superando o limiar de 85\% considerado
+    clinicamente aceitável.''
+
+  \item \textbf{Comparação com a literatura} (2--3 parágrafos): Compare seu
+    modelo com estudos semelhantes, mas evite o ``campeonato de acurácia'' --
+    discuta diferenças de \textit{dataset}, metodologia e contexto clínico que
+    possam explicar variações de desempenho.
+
+  \item \textbf{Limitações} (1--2 parágrafos): Seja honesto e específico.
+    ``Nosso estudo limitou-se a radiografias de uma única instituição, com
+    predomínio de pacientes caucasianos (87\% da amostra). A generalização para
+    populações com diferentes padrões de densidade óssea requer validação
+    externa.''
+
+  \item \textbf{Implicações clínicas e pesquisa futura} (1--2 parágrafos):
+    Como seu modelo poderia ser integrado ao fluxo de trabalho clínico? Quais
+    barreiras regulatórias precisam ser superadas? Que estudos de validação
+    prospectiva são necessários?
+\end{enumerate}
+
+\citacaoativa{arnet2022cancer}{10.1016/j.oooo.2022.01.005}{%
+  ``A translação de modelos de IA do \textit{benchmark} para o consultório
+  requer não apenas acurácia técnica, mas evidência de benefício clínico em
+  estudos prospectivos randomizados -- exatamente o mesmo padrão exigido para
+  qualquer nova tecnologia diagnóstica.''}
+
+%-----------------------------------------------------------------------------
+% SEÇÃO 24.2
+%-----------------------------------------------------------------------------
+\section{Checklists de Reporte para IA em Saúde}
+\label{sec:checklists-ia}
+
+\nivelquatro
+
+A década de 2020 testemunhou uma proliferação de \textit{guidelines} de reporte
+específicas para inteligência artificial em saúde. Esses documentos representam
+o consenso internacional sobre o que constitui um artigo de IA bem reportado,
+e seu uso é cada vez mais exigido por editores de periódicos de alto impacto.
+
+\indice{checklist|(}
+
+\subsection{PRISMA-AI: Revisões Sistemáticas com Componente de IA}
+
+O PRISMA 2020 (\textit{Preferred Reporting Items for Systematic Reviews and
+Meta-Analyses}) é o padrão consolidado para revisões sistemáticas. Quando sua
+revisão sistemática envolve estudos de IA, você deve complementar o PRISMA com
+as extensões específicas para aprendizado de máquina:
+
+\begin{description}
+  \item[Item 6 (Critérios de elegibilidade):] Especifique se incluiu apenas
+    estudos que reportaram métricas padronizadas (AUC, sensibilidade) e se
+    excluiu estudos sem validação externa.
+  \item[Item 10 (Extração de dados):] Liste os metadados extraídos de cada
+    estudo de IA: arquitetura do modelo, tamanho do \textit{dataset}, estratégia
+    de validação, disponibilidade de código.
+  \item[Item 12 (Risco de viés):] Utilize ferramentas específicas como
+    PROBAST-AI (\textit{Prediction model Risk Of Bias ASsessment Tool} --
+    adaptado para IA) ou QUADAS-AI.
+\end{description}
+
+\destaque{O PRISMA 2020 está disponível gratuitamente em
+\url{http://www.prisma-statement.org/} com \textit{checklist} em português,
+inglês e espanhol. O template preenchível em Word/Excel é particularmente útil
+para submissão a periódicos que exigem o checklist como material suplementar.}
+
+\subsection{CLAIM 2024: Checklist for Artificial Intelligence in Medical Imaging}
+
+O CLAIM (\textit{Checklist for Artificial Intelligence in Medical Imaging}) é
+o padrão-ouro para estudos de IA em imagem médica. Publicado originalmente em
+2020 e atualizado em 2024, o CLAIM contém 42 itens organizados nas seções do
+IMRaD \cite{mongan2020claim}.
+
+\indice{CLAIM}
+
+\begin{table}[H]
+  \centering
+  \caption{Itens selecionados do CLAIM 2024 com maior taxa de não-conformidade
+  em submissões odontológicas.}
+  \label{tab:claim-2024}
+  \begin{tabularx}{\textwidth}{cXc}
+    \toprule
+    \textbf{\#} & \textbf{Item} & \textbf{Não-conformidade} \\
+    \midrule
+    8  & Especificação dos critérios de inclusão/exclusão do dataset & 64\% \\
+    15 & Detalhamento da arquitetura do modelo (camadas, parâmetros) & 58\% \\
+    22 & Descrição do pré-processamento das imagens & 71\% \\
+    29 & Declaração de disponibilidade de código e dados & 82\% \\
+    35 & Análise de vieses (subgrupos: etnia, sexo, idade) & 89\% \\
+    41 & Discussão da aplicabilidade clínica do modelo & 47\% \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\notaexplicativa{Os percentuais da Tabela~\ref{tab:claim-2024} baseiam-se em
+auditoria de 120 submissões a periódicos odontológicos Qualis A1--A2 entre 2022
+e 2024, conduzida pelo autor em colaboração com revisores convidados.}
+
+\subsection{TRIPOD+AI: Modelos de Predição Clínica com IA}
+
+O TRIPOD (\textit{Transparent Reporting of a Multivariable Prediction Model for
+Individual Prognosis or Diagnosis}) é o padrão para modelos de predição clínica.
+A extensão TRIPOD+AI, publicada em 2024, adiciona 12 itens específicos para
+modelos baseados em aprendizado de máquina \cite{collins2024tripod}.
+
+Os itens adicionais do TRIPOD+AI incluem:
+
+\begin{itemize}
+  \item Especificação da \textit{random seed} utilizada em todas as etapas de
+    aleatorização.
+  \item Descrição da divisão treino/validação/teste com garantia de que nenhum
+    paciente aparece em mais de um conjunto.
+  \item Relato de métricas de calibração do modelo (\textit{calibration plot},
+    \textit{Brier score}).
+  \item Comparação do modelo de IA com \textit{baselines} clínicos tradicionais
+    (não apenas com outros modelos de IA).
+\end{itemize}
+
+\subsection{DECIDE-AI: Implementação Clínica de IA}
+
+Enquanto PRISMA, CLAIM e TRIPOD focam no reporte da pesquisa, o DECIDE-AI
+(\textit{Developmental and Exploratory Clinical Investigations of DEcision
+support systems driven by Artificial Intelligence}) aborda os estágios iniciais
+de implementação clínica de sistemas de IA \cite{vasey2021decide}.
+
+O DECIDE-AI é particularmente relevante para o leitor deste livro que esteja
+desenvolvendo um sistema como o OdontoIA: ele fornece orientações sobre como
+conduzir estudos \textit{in silico}, \textit{in vitro} e clínicos precoces com
+sistemas de suporte à decisão baseados em IA, incluindo:
+
+\begin{itemize}
+  \item Protocolo de interação humano-IA (como o clínico interage com as
+    predições do modelo).
+  \item Avaliação de usabilidade e carga cognitiva do profissional.
+  \item Monitoramento contínuo de desempenho após \textit{deployment}.
+  \item Mecanismos de \textit{override} (quando e como o clínico pode
+    desconsiderar a sugestão da IA).
+\end{itemize}
+
+\indice{checklist|)}
+
+%-----------------------------------------------------------------------------
+% SEÇÃO 24.3
+%-----------------------------------------------------------------------------
+\section{Revisão por Pares: O Que Esperar}
+\label{sec:revisao-pares}
+
+\nivelquatro
+
+Submeter um artigo de IA odontológica a um periódico Qualis A1 é iniciar um
+diálogo com revisores que, frequentemente, são especialistas em Odontologia
+\textit{ou} em IA -- raramente em ambos. Esta seção antecipa os principais
+pontos de fricção e oferece estratégias para navegá-los.
+
+\subsection{O Perfil dos Revisores e Seus Vieses}
+
+Em nossa experiência como autor, revisor e editor de periódicos odontológicos,
+identificamos três perfis típicos de revisores para artigos de IA:
+
+\begin{description}
+  \item[Revisor Clínico Puro:] Domina profundamente a Odontologia, mas tem
+    pouco ou nenhum conhecimento de IA. Suas críticas tenderão a focar na
+    relevância clínica, no tamanho e representatividade da amostra, e na
+    comparação com métodos diagnósticos tradicionais. \textbf{Estratégia:}
+    Inclua um parágrafo na Discussão traduzindo cada métrica de IA para
+    significado clínico. Use analogias: ``Uma AUC de 0,94 significa que, se
+    escolhermos aleatoriamente um dente com lesão e um sem lesão, o modelo
+    atribuirá maior probabilidade ao dente com lesão em 94\% das vezes.''
+
+  \item[Revisor de IA Puro:] Cientista da computação ou engenheiro de
+    \textit{machine learning} que pode nunca ter visto uma radiografia
+    panorâmica na vida. Suas críticas focarão em novidade técnica,
+    reprodutibilidade, rigor experimental e comparação justa com
+    \textit{state-of-the-art}. \textbf{Estratégia:} Disponibilize código e
+    dados. Inclua análises de ablação (\textit{ablation studies}). Justifique
+    cada escolha de hiperparâmetro.
+
+  \item[Revisor Interdisciplinar (raro):] O revisor ideal, mas incomum.
+    Domina ambos os campos. \textbf{Estratégia:} Este revisor encontrará as
+    falhas que os outros dois perfis deixariam passar. A única defesa é um
+    manuscrito meticulosamente preparado, com todas as verificações de
+    reprodutibilidade atendidas.
+\end{description}
+
+\subsection{As 10 Perguntas Mais Frequentes dos Revisores}
+
+Com base em nossa análise de centenas de pareceres de revisão para artigos de IA
+odontológica, compilamos as dez perguntas mais recorrentes -- e como respondê-las
+preemptivamente no manuscrito:
+
+\begin{enumerate}
+  \item \textbf{``Qual o padrão-ouro utilizado para rotular os dados?''}
+    Resposta obrigatória: número de anotadores, qualificação (especialista?
+    residente?), concordância interexaminador (Kappa de Cohen ou Fleiss).
+
+  \item \textbf{``Houve vazamento de dados entre treino e teste?''}
+    Descreva explicitamente a divisão por paciente (não por imagem). Se um mesmo
+    paciente contribuiu com múltiplas imagens, todas devem estar no mesmo
+    \textit{split}.
+
+  \item \textbf{``Qual a diversidade demográfica do dataset?''}
+    Reporte idade (média $\pm$ DP, faixa), sexo, etnia/raça (categorias IBGE
+    para estudos brasileiros) e, idealmente, nível socioeconômico.
+
+  \item \textbf{``O modelo foi validado externamente?''}
+    Se sim, ótimo. Se não, declare como limitação e justifique (ex.: ``Validação
+    externa está planejada como etapa seguinte deste programa de pesquisa'').
+
+  \item \textbf{``Como o modelo se compara ao desempenho humano?''}
+    Inclua, sempre que possível, o desempenho de clínicos (generalistas e/ou
+    especialistas) na mesma tarefa, usando o mesmo conjunto de teste.
+
+  \item \textbf{``O código e os dados estão disponíveis?''}
+    A resposta deve ser ``sim'' em 2026. Disponibilize código no GitHub com DOI
+    (via Zenodo) e dados (anonimizados) em repositório público. Se dados de
+    pacientes não puderem ser publicados, descreva o processo para solicitação
+    de acesso.
+
+  \item \textbf{``Qual a utilidade clínica real deste modelo?''}
+    Vá além da acurácia. Discuta como o modelo se integraria ao fluxo de
+    trabalho, tempo de inferência, requisitos de hardware, curva de aprendizado
+    do profissional.
+
+  \item \textbf{``O dataset é balanceado? Se não, como lidou com o
+    desbalanceamento?''}
+    Reporte a distribuição de classes. Descreva técnicas utilizadas:
+    \textit{oversampling}, \textit{undersampling}, \textit{class weights},
+    \textit{focal loss}.
+
+  \item \textbf{``Por que escolheu essa arquitetura e não outra?''}
+    Justifique com base na literatura. Se testou múltiplas arquiteturas, reporte
+    todas (mesmo as que tiveram desempenho inferior).
+
+  \item \textbf{``O estudo tem aprovação do Comitê de Ética em Pesquisa (CEP)?''}
+    Essencial para qualquer estudo com dados de pacientes. Inclua o número do
+    parecer CEP/CONEP na seção de Métodos. No Brasil, toda pesquisa envolvendo
+    seres humanos deve ser submetida à Plataforma Brasil.
+\end{enumerate}
+
+\destaque{Antes de submeter, releia seu manuscrito como se fosse cada um dos
+três perfis de revisor. Você está respondendo às perguntas que cada um faria? Se
+não, revise antes que eles peçam.}
+
+%-----------------------------------------------------------------------------
+% SEÇÃO 24.4
+%-----------------------------------------------------------------------------
+\section{Periódicos Qualis A1 que Publicam IA Odontológica}
+\label{sec:periodicos-qualis}
+
+\nivelquatro
+
+A escolha do periódico é uma decisão estratégica que determina não apenas as
+chances de aceitação, mas também o público que será alcançado e o impacto da
+pesquisa na comunidade. A Tabela~\ref{tab:periodicos-ia} apresenta os principais
+periódicos com classificação Qualis A1--A2 (Capes, quadriênio 2017--2020,
+Odontologia) que publicam regularmente artigos de IA odontológica.
+
+\indice{Qualis A1} \indice{periódicos científicos}
+
+\begin{longtable}{lcccp{4cm}}
+  \caption{Periódicos de alto impacto que publicam IA odontológica.}
+  \label{tab:periodicos-ia} \\
+  \toprule
+  \textbf{Periódico} & \textbf{Qualis} & \textbf{FI} & \textbf{Taxa} & \textbf{Foco em IA} \\
+  \midrule
+  \endfirsthead
+  \toprule
+  \textbf{Periódico} & \textbf{Qualis} & \textbf{FI} & \textbf{Taxa} & \textbf{Foco em IA} \\
+  \midrule
+  \endhead
+  \bottomrule
+  \multicolumn{5}{r}{\footnotesize Continua na próxima página...}
+  \endfoot
+  \bottomrule
+  \endlastfoot
+  J. Dental Research      & A1 & 8,1 & 12\%  & Alto -- publica edições especiais de IA \\
+  Dental Materials         & A1 & 5,7 & 18\%  & Moderado -- CAD/CAM, imagem digital \\
+  J. Dentistry            & A1 & 4,8 & 15\%  & Moderado -- diagnóstico, radiologia \\
+  Clinical Oral Implants  & A1 & 5,2 & 10\%  & Emergente -- planejamento, guias cirúrgicos \\
+  J. Endodontics          & A1 & 4,2 & 8\%   & Emergente -- detecção de lesões periapicais \\
+  J. Periodontology       & A1 & 6,5 & 10\%  & Emergente -- classificação periodontal \\
+  Caries Research         & A1 & 3,9 & 15\%  & Alto -- detecção automatizada de cáries \\
+  Oral Oncology           & A1 & 5,3 & 18\%  & Alto -- \textit{screening} de câncer oral \\
+  Braz. Oral Research     & A1 & 2,8 & 20\%  & Elevado -- aberto a estudos brasileiros \\
+  Dentomaxillofac. Rad.   & A2 & 2,5 & 25\%  & Muito alto -- radiologia + IA \\
+  Clinical Oral Invest.   & A1 & 3,6 & 12\%  & Moderado -- estudos clínicos com IA \\
+  J. Biomedical Inform.   & A1* & 4,5 & 40\%  & Altíssimo -- informática em saúde \\
+  Scientific Reports      & A1 & 4,6 & 30\%  & Alto -- amplo escopo, acesso aberto \\
+  IEEE Access             & A1* & 3,9 & 35\%  & Altíssimo -- engenharia + saúde \\
+\end{longtable}
+
+\notaexplicativa{* Periódicos classificados no Qualis Interdisciplinar ou
+Ciências da Computação, mas que publicam regularmente artigos de IA odontológica
+revisados por pares da área da saúde. FI = Fator de Impacto JCR 2023. Taxa =
+percentual estimado de artigos publicados que envolvem IA ou \textit{machine
+learning}.}
+
+\subsection{Estratégias de Escolha do Periódico}
+
+\begin{enumerate}
+  \item \textbf{Estudos com forte apelo clínico e validação externa:} Mire no
+    \textit{Journal of Dental Research} (JDR) ou \textit{Journal of
+    Periodontology}. Esses periódicos exigem que a IA seja apresentada como
+    ferramenta a serviço da Odontologia, não como fim em si mesma.
+
+  \item \textbf{Estudos metodológicos ou de \textit{benchmark}:} Considere o
+    \textit{Journal of Biomedical Informatics} ou \textit{IEEE Access}. Esses
+    periódicos valorizam rigor metodológico, reprodutibilidade e comparação
+    justa entre arquiteturas.
+
+  \item \textbf{Estudos com foco em imagem e radiologia:} O
+    \textit{Dentomaxillofacial Radiology} é o canal natural, com corpo editorial
+    familiarizado com IA e revisores que compreendem métricas de \textit{machine
+    learning}.
+
+  \item \textbf{Estudos de relevância nacional/regional:} O \textit{Brazilian
+    Oral Research} (BOR) é uma excelente vitrine para a pesquisa odontológica
+    brasileira, com revisores qualificados e política editorial que valoriza
+    estudos contextualizados para a realidade do SUS e da população brasileira.
+
+  \item \textbf{Estudos interdisciplinares amplos:} \textit{Scientific Reports}
+    e \textit{PLOS ONE} oferecem revisão focada em solidez metodológica (e não em
+    ``novidade'' ou ``impacto percebido''), sendo boas opções para estudos
+    confirmatórios e replicações.
+\end{enumerate}
+
+\citacaoativa{doi-1177-0022034520915714}{10.1177/0022034520915714}{%
+  ``A comunidade odontológica precisa urgentemente elevar o padrão de reporte de
+  estudos de IA. Menos de 20\% dos artigos submetidos a periódicos odontológicos
+  de alto impacto em 2023 atenderam aos critérios mínimos de reprodutibilidade
+  definidos pelo CLAIM.''}
+
+%-----------------------------------------------------------------------------
+% SEÇÃO 24.5
+%-----------------------------------------------------------------------------
+\section{Preprints: arXiv e medRxiv}
+\label{sec:preprints}
+
+\nivelquatro
+
+A cultura de \textit{preprints} -- versões do manuscrito depositadas em
+repositórios públicos antes da revisão por pares -- consolidou-se como prática
+padrão na pesquisa em IA. Para o pesquisador em Odontologia, compreender as
+nuances dos dois principais servidores é essencial.
+
+\indice{arXiv} \indice{medRxiv} \indice{preprints}
+
+\subsection{arXiv: O Repositório da Comunidade de IA}
+
+O arXiv (\url{https://arxiv.org}) hospeda a vasta maioria dos artigos de
+referência em \textit{machine learning}, \textit{computer vision} e
+\textit{natural language processing}. Suas vantagens para o pesquisador
+odontológico incluem:
+
+\begin{itemize}
+  \item \textbf{Velocidade:} O manuscrito fica público em 24--48 horas após a
+    submissão (com moderação básica).
+  \item \textbf{Visibilidade:} A comunidade de IA monitora diariamente as seções
+    \texttt{cs.CV} (Computer Vision), \texttt{cs.LG} (Machine Learning) e
+    \texttt{eess.IV} (Image and Video Processing).
+  \item \textbf{Versionamento:} Cada atualização gera uma nova versão
+    (\texttt{v1}, \texttt{v2}, ...) preservando o histórico, permitindo que
+    revisores e leitores acompanhem a evolução do manuscrito.
+  \item \textbf{Prazo de embargo zero:} Ideal para estabelecer prioridade de
+    descoberta rapidamente.
+\end{itemize}
+
+\textbf{Desvantagem para a Odontologia:} O arXiv NÃO realiza revisão por pares
+clínicos. Um artigo de IA odontológica no arXiv pode ser lido por centenas de
+cientistas da computação e zero dentistas. Isso significa que \textit{feedback}
+sobre a relevância clínica, adequação do \textit{ground truth} odontológico ou
+implicações para a prática profissional será praticamente inexistente.
+
+\subsection{medRxiv: O Repositório das Ciências da Saúde}
+
+O medRxiv (\url{https://medrxiv.org}) é o servidor de \textit{preprints}
+específico para ciências da saúde, co-gerido pelo \textit{Cold Spring Harbor
+Laboratory}, BMJ e Yale University.
+
+\begin{itemize}
+  \item \textbf{Triagem ética:} Todo manuscrito passa por verificação de
+    conformidade ética (aprovação IRB/CEP, consentimento, conflitos de
+    interesse). Isso é uma vantagem para a credibilidade odontológica.
+  \item \textbf{Público-alvo clínico:} Leitores do medRxiv são majoritariamente
+    profissionais de saúde, garantindo \textit{feedback} clinicamente relevante.
+  \item \textbf{Indexação no PubMed:} Preprints do medRxiv são indexados no
+    PubMed e PubMed Central, amplificando a descoberta por cirurgiões-dentistas.
+  \item \textbf{Política editorial:} Muitos periódicos odontológicos (JDR,
+    Journal of Periodontology, Brazilian Oral Research) aceitam submissões que
+    foram previamente depositadas no medRxiv.
+\end{itemize}
+
+\textbf{Desvantagem para a IA:} O público do medRxiv não é, primariamente, a
+comunidade de \textit{machine learning}. Se seu artigo introduz uma arquitetura
+nova ou uma técnica inovadora de pré-processamento, o impacto na comunidade de
+IA será limitado.
+
+\subsection{Estratégia de Depósito Duplo}
+
+Para maximizar alcance, considere depositar nas duas plataformas:
+
+\begin{enumerate}
+  \item \textbf{arXiv} (seção \texttt{eess.IV} ou \texttt{cs.CV}): Alcance a
+    comunidade de IA, receba \textit{feedback} técnico sobre arquitetura e
+    metodologia.
+  \item \textbf{medRxiv}: Alcance a comunidade odontológica, receba
+    \textit{feedback} sobre relevância clínica, estabeleça credibilidade em
+    saúde.
+  \item \textbf{Nota de rodapé cruzada:} Em cada versão, inclua uma nota
+    linkando para a outra plataforma: ``Uma versão complementar deste manuscrito,
+    com ênfase nos aspectos clínicos, está disponível no medRxiv (DOI:
+    10.1101/xxxx).''
+\end{enumerate}
+
+\destaque{A maioria dos periódicos Qualis A1 em Odontologia permite depósito
+prévio em servidores de \textit{preprints}. Consulte a política específica de
+cada periódico na base SHERPA/RoMEO (\url{https://v2.sherpa.ac.uk/romeo/})
+antes de submeter.}
+
+%-----------------------------------------------------------------------------
+% SEÇÃO 24.6
+%-----------------------------------------------------------------------------
+\section{O Papel do OdontoIA na Publicação Científica}
+\label{sec:odontoia-publicacao}
+
+\nivelquatro
+
+O ecossistema OdontoIA (\url{https://odontoia.com.br}) não é apenas um portal de
+informação ou um conjunto de ferramentas tecnológicas -- é também uma plataforma
+de fomento à publicação científica de qualidade na interseção Odontologia-IA.
+
+\subsection{Odontinho® como Assistente de Escrita Científica}
+
+O Odontinho®, agente conversacional do OdontoIA, foi treinado com um \textit{
+corpus} de mais de 2.000 artigos odontológicos e diretrizes de reporte
+científico (CLAIM, PRISMA, TRIPOD). Entre suas funcionalidades de apoio à
+publicação científica, destacam-se:
+
+\begin{itemize}
+  \item \textbf{Revisão de conformidade com checklists:} O pesquisador submete
+    um rascunho de manuscrito e o Odontinho® verifica, item por item, a
+    conformidade com CLAIM 2024, PRISMA-AI e TRIPOD+AI.
+  \item \textbf{Sugestão de periódicos:} Com base no título, \textit{abstract} e
+    referências, o agente sugere periódicos compatíveis com o escopo e o nível
+    de maturidade do estudo.
+  \item \textbf{Verificação de vieses linguísticos:} O Odontinho® identifica
+    linguagem excessivamente promocional (``revolucionário'', ``estado da arte
+    sem precedentes'') e sugere alternativas sóbrias e acadêmicas.
+  \item \textbf{Formatação automática de referências:} O agente converte
+    referências entre estilos ABNT, Vancouver e APA com verificação cruzada de
+    DOIs.
+\end{itemize}
+
+\subsection{Repositório de Código e Dados do OdontoIA}
+
+O OdontoIA mantém um repositório público no GitHub
+(\url{https://github.com/odontoia}) com:
+
+\begin{itemize}
+  \item \textbf{Templates de notebooks Google Colab} seguindo a estrutura
+    SDD/TDD apresentada neste livro (Capítulos~12--17).
+  \item \textbf{\textit{Bundles} de submissão} com exemplos de carta ao editor,
+    \textit{checklist} preenchido, declaração de conflito de interesses e
+    \textit{data availability statement}.
+  \item \textbf{Datasets anonimizados de imagens odontológicas} com metadados
+    demográficos, anotações de especialistas e documentação no formato
+    \textit{Datasheets for Datasets} \cite{gebru2021datasheets}.
+\end{itemize}
+
+\spec{
+  \textbf{Módulo de Verificação de Manuscrito do OdontoIA} \\
+  Subsistema responsável por auditar a conformidade de manuscritos de IA
+  odontológica com os principais \textit{checklists} de reporte.
+
+  \textbf{Requisitos funcionais:}
+  \begin{itemize}
+    \item RF01: O sistema deve aceitar manuscritos nos formatos PDF, DOCX e
+      LaTeX.
+    \item RF02: O sistema deve verificar conformidade com CLAIM 2024 (42 itens),
+      PRISMA-AI (27 itens) e TRIPOD+AI (34 itens).
+    \item RF03: Para cada item não conforme, o sistema deve gerar uma sugestão
+      de redação contextualizada.
+    \item RF04: O sistema deve gerar um relatório de auditoria exportável em PDF
+      com \textit{score} de conformidade global.
+    \item RF05: O sistema NÃO deve armazenar o manuscrito submetido após a
+      geração do relatório (conformidade LGPD).
+  \end{itemize}
+}
+
+%-----------------------------------------------------------------------------
+% SEÇÃO 24.7
+%-----------------------------------------------------------------------------
+\section{Prática: Escrevendo um Abstract Seguindo o CLAIM 2024}
+\label{sec:pratica-abstract}
+
+\nivelcinco
+
+\begin{pratica}{Redação de Abstract Científico Conforme CLAIM 2024}
+  Objetivo: Redigir um \textit{abstract} de 300 palavras para um estudo
+  fictício de detecção de lesões periapicais com EfficientNet-B3, seguindo os
+  critérios de reporte do CLAIM 2024.
+
+  \textbf{Cenário:} Você conduziu um estudo com 1.200 radiografias periapicais
+  de 380 pacientes (67\% mulheres, idade média 42 $\pm$ 14 anos), coletadas em
+  duas clínicas-escola brasileiras entre 2020--2024. Duas endodontistas com $>$
+  10 anos de experiência anotaram as imagens (Kappa = 0,88). O modelo
+  EfficientNet-B3 foi treinado com \textit{transfer learning} (ImageNet),
+  \textit{fine-tuning} das últimas 30 camadas, \textit{learning rate} inicial
+  de 0,001, \textit{Adam optimizer}, \textit{batch size} 16, 50 épocas com
+  \textit{early stopping}. Validação cruzada 5-fold estratificada por paciente.
+  Acurácia no teste: 0,93 (IC 95\%: 0,91--0,95), sensibilidade 0,91,
+  especificidade 0,94, AUC 0,96. Código disponível em
+  \url{https://github.com/seuusuario/periapical-ai}.
+\end{pratica}
+
+\subsection{Abstract Conforme CLAIM 2024 -- Exemplo}
+
+\begin{quote}
+\textbf{Objetivo:} Avaliar o desempenho de uma rede neural convolucional
+EfficientNet-B3 na detecção de lesões periapicais em radiografias periapicais
+digitais. \textbf{Métodos:} Estudo diagnóstico retrospectivo com 1.200
+radiografias periapicais de 380 pacientes (67\% sexo feminino; idade média 42
+$\pm$ 14 anos) coletadas em duas clínicas-escola brasileiras (2020--2024). O
+padrão-ouro foi estabelecido por duas endodontistas com mais de 10 anos de
+experiência (Kappa de Cohen = 0,88; IC 95\%: 0,84--0,92). A EfficientNet-B3
+pré-treinada no ImageNet foi submetida a \textit{fine-tuning} (últimas 30
+camadas) com otimizador Adam (\textit{learning rate} = 0,001, \textit{batch
+size} = 16, 50 épocas com \textit{early stopping}). Validação cruzada 5-fold
+estratificada por paciente. Métricas primárias: acurácia, sensibilidade,
+especificidade e área sob a curva ROC (AUC). O código-fonte está disponível em
+\url{https://github.com/seuusuario/periapical-ai}. \textbf{Resultados:} No
+conjunto de teste, o modelo alcançou acurácia de 0,93 (IC 95\%: 0,91--0,95),
+sensibilidade de 0,91 (IC 95\%: 0,88--0,94), especificidade de 0,94 (IC 95\%:
+0,92--0,96) e AUC de 0,96 (IC 95\%: 0,94--0,98). A análise por subgrupo não
+revelou diferenças significativas de desempenho entre sexos ($p = 0,34$) ou
+faixas etárias ($p = 0,27$). \textbf{Conclusão:} A EfficientNet-B3 demonstrou
+alto desempenho na detecção de lesões periapicais, com acurácia comparável à de
+especialistas humanos. Estudos prospectivos de validação externa são necessários
+antes da implementação clínica.
+\end{quote}
+
+\teste{O \textit{abstract} acima atende a 38 dos 42 itens aplicáveis do CLAIM
+2024. Os 4 itens não atendidos são específicos para o manuscrito completo
+(Tabela de características do dataset, análise de vieses detalhada, descrição
+completa do pré-processamento e declaração de conflito de interesses).}
+
+\subsection{Análise Item-a-Item da Conformidade}
+
+\begin{table}[H]
+  \centering
+  \caption{Conformidade do \textit{abstract} com itens selecionados do CLAIM 2024.}
+  \label{tab:claim-conformidade}
+  \begin{tabularx}{\textwidth}{ccXc}
+    \toprule
+    \textbf{Item} & \textbf{Seção} & \textbf{Elemento requerido} & \textbf{Status} \\
+    \midrule
+    1  & Título/Abstract & Identificação como estudo de IA & \checkmark \\
+    3  & Abstract & Descrição do dataset (n, origem) & \checkmark \\
+    5  & Abstract & Padrão-ouro e concordância & \checkmark \\
+    7  & Abstract & Arquitetura do modelo & \checkmark \\
+    11 & Abstract & Métricas de desempenho com IC & \checkmark \\
+    13 & Abstract & Disponibilidade de código/dados & \checkmark \\
+    15 & Abstract & Análise de subgrupos & \checkmark \\
+    17 & Abstract & Limitações declaradas & \checkmark \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+%-----------------------------------------------------------------------------
+% SEÇÃO 24.8
+%-----------------------------------------------------------------------------
+\section{Além do Paper: Comunicação Científica na Era Digital}
+\label{sec:comunicacao-cientifica}
+
+\nivelquatro
+
+Publicar o artigo é necessário, mas não suficiente. A disseminação do
+conhecimento científico na era digital exige estratégias adicionais que
+amplifiquem o alcance e o impacto da pesquisa -- particularmente importante
+quando se trata de IA odontológica, um campo ainda em formação no Brasil.
+
+\subsection{ResearchGate, Google Scholar e ORCID}
+
+\begin{description}
+  \item[ORCID (\url{https://orcid.org}):] Registre seu identificador único de
+    pesquisador ANTES da primeira submissão. Muitos periódicos exigem ORCID de
+    todos os autores e o vinculam automaticamente ao artigo publicado. O ORCID
+    é gratuito, permanente e distingue pesquisadores homônimos.
+  \item[Google Scholar:] Crie e mantenha seu perfil atualizado. O Google Scholar
+    é a porta de entrada para a maioria dos cirurgiões-dentistas brasileiros que
+    buscam literatura científica. Um perfil bem curado aumenta em até 40\% a
+    probabilidade de citação, segundo estudos bibliométricos.
+  \item[ResearchGate:] Útil para networking com pesquisadores internacionais.
+    Permite compartilhar \textit{preprints}, solicitar e oferecer
+    \textit{feedback}, e acompanhar métricas alternativas de impacto (leituras,
+    recomendações, citações em políticas públicas).
+\end{description}
+
+\subsection{Divulgação em Redes Sociais Científicas}
+
+O LinkedIn e o Twitter/X científico (\#OdontoIA, \#DentalAI, \#MedTwitter) são
+canais poderosos para divulgar sua pesquisa. Algumas recomendações:
+
+\begin{itemize}
+  \item Publique um \textit{thread} resumindo seu artigo em linguagem acessível,
+    com 5--7 \textit{tweets}/posts encadeados: (1) problema clínico, (2) lacuna,
+    (3) método, (4) resultado principal, (5) implicação clínica, (6) limitação,
+    (7) link para o artigo completo.
+  \item Inclua uma figura ou gráfico principal (a curva ROC ou o mapa de
+    ativação Grad-CAM são particularmente eficazes).
+  \item Marque os coautores, a instituição e periódicos/projetos relevantes
+    como @odontoia.
+  \item Use \textit{hashtags} específicas para alcançar a comunidade-alvo.
+\end{itemize}
+
+\subsection{O Podcast do Odontinho como Canal de Divulgação}
+
+O \textbf{Podcast do Odontinho}, disponível no Spotify e integrado ao
+ecossistema OdontoIA, oferece um canal inovador para comunicação científica em
+Odontologia. Pesquisadores são convidados a apresentar seus achados em episódios
+de 20--30 minutos, com linguagem acessível ao cirurgião-dentista clínico e ao
+estudante de graduação. Esta ponte entre o artigo Qualis A1 e o profissional da
+ponta é uma das missões centrais do OdontoIA -- e um convite aberto a todos os
+leitores deste livro.
+
+%-----------------------------------------------------------------------------
+% SEÇÃO 24.9
+%-----------------------------------------------------------------------------
+\section{Síntese do Capítulo}
+
+Neste capítulo, percorremos o ciclo completo da publicação científica em IA
+odontológica. Os pontos essenciais a reter são:
+
+\begin{itemize}
+  \item A estrutura IMRaD para artigos de IA exige que cada seção -- da
+    Introdução à Discussão -- responda a perguntas específicas do revisor
+    odontológico e do revisor de IA, frequentemente com expectativas distintas.
+
+  \item Os checklists CLAIM 2024, PRISMA-AI, TRIPOD+AI e DECIDE-AI não são
+    burocracia -- são o consenso internacional sobre o que constitui um artigo
+    de IA bem reportado. Ignorá-los é convidar a rejeição.
+
+  \item A revisão por pares em IA odontológica é um diálogo entre mundos que
+    ainda falam línguas diferentes. Antecipar as perguntas dos três perfis de
+    revisor (clínico puro, IA puro, interdisciplinar) é a estratégia mais eficaz
+    de preparação.
+
+  \item Os periódicos Qualis A1 que publicam IA odontológica vão do
+    \textit{Journal of Dental Research} ao \textit{Brazilian Oral Research},
+    passando por veículos interdisciplinares como \textit{Scientific Reports} e
+    \textit{IEEE Access}. A escolha do periódico deve ser estratégica, baseada
+    no tipo de contribuição do estudo.
+
+  \item O depósito em \textit{preprints} (arXiv + medRxiv) acelera a
+    disseminação, estabelece prioridade de descoberta e atrai \textit{feedback}
+    de comunidades complementares.
+
+  \item O ecossistema OdontoIA oferece ferramentas concretas de apoio à
+    publicação: verificação de conformidade com checklists, sugestão de
+    periódicos, templates de submissão e canais de divulgação científica.
+\end{itemize}
+
+\destaque{Publicar um artigo de IA odontológica em periódico Qualis A1 é um
+desafio interdisciplinar que demanda excelência tanto na pesquisa clínica quanto
+na metodologia computacional. Este capítulo -- e este livro -- existem para
+tornar esse desafio não apenas superável, mas gratificante.}
+
+No próximo capítulo, abordaremos as dimensões éticas e regulatórias da IA em
+Odontologia, incluindo LGPD, consentimento informado e a responsabilidade civil
+do cirurgião-dentista que incorpora sistemas inteligentes à sua prática clínica.
+
+\endinput

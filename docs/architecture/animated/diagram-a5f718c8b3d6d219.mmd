@@ -1,0 +1,14 @@
+flowchart TB
+  R["Roteiro em sete cenas"] --> T["Edge TTS Francisca · sem clonagem"]
+  T --> A["Narração WAV + timeline + SRT"]
+  A --> B["build_remotion_timeline.py"]
+  B --> C["Composições Remotion 16:9 e 9:16"]
+  M["Natural Earth + foto + QR locais"] --> C
+  K["cinematic.tsx · câmera CSS/SVG por frame"] --> C
+  C --> G{"Licença e render aprovados?"}
+  G -->|não| X["Bloquear render"]
+  G -->|sim| V["video_editor · plano e recibo"]
+  V --> F["FFmpeg · mux e loudnorm"]
+  A --> F
+  F --> Q["video_qa.py · frames, áudio e pretos"]
+  Q --> H["Revisão humana · não publica automaticamente"]

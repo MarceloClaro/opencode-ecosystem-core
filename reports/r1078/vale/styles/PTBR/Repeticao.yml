@@ -1,0 +1,6 @@
+extends: repetition
+message: "Palavra repetida: '%s'."
+level: error
+alpha: true
+tokens:
+  - '[^\s]+'

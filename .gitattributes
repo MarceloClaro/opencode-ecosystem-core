@@ -1,3 +1,6 @@
 # Scripts conferidos por SHA-256 no fluxo Windows/WSL devem manter bytes LF
 # idênticos entre checkout, cache temporário e execução no Bash.
 *.sh text eol=lf
+
+# R1084: aplicar a checagem padrão de whitespace em novos diffs.
+# Avisos de commits antigos exigiriam reescrita de histórico; não os ocultamos.

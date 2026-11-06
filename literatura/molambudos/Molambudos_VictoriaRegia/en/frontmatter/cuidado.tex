@@ -1,0 +1,22 @@
+% =================
+% BEWARE — shock page (black), sensory rupture while leafing
+% =================
+\cleardoublepage
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+  \fill[black] (current page.south west) rectangle (current page.north east);
+  \node[anchor=center, text width=0.74\paperwidth, align=center]
+    at (current page.center){%
+    {\color{sangue}\scshape\Huge BEWARE}\\[0.4em]
+    {\color{sangue}\rule{0.35\paperwidth}{0.6pt}}\\[2.2em]
+    {\color{sepiabg}\large This book contains a cycle of\\
+     narrative contamination.}\\[1.8em]
+    {\color{sepiabg}\large By reading, you become\\ the
+     {\color{olho}\bfseries Patient 1,263}.}\\[3em]
+    {\color{sepiabg!55}\footnotesize\itshape in the end, there will be no way to return the book to the shelf\\
+     as if you had never opened it.}\\[3em]
+    {\color{sangue!40}\footnotesize\itshape If a buzzing arises while you read, do not stop.\\
+     It is already too late to stop.}%
+  };
+\end{tikzpicture}%
+\null\vfill\clearpage

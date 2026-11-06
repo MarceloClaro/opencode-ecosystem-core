@@ -1,0 +1,773 @@
+{
+  "schema_version": 1,
+  "name": "Assistente de Romance Psicológico — Linhagem Molambudos",
+  "version": "1.0.0",
+  "language": [
+    "pt-BR",
+    "en",
+    "zh"
+  ],
+  "purpose": "Catálogo de estilos para escrita e revisão de romance de terror psicológico, com traduzibilidade PT-BR/EN/ZH.",
+  "ethics": {
+    "contract": "Ficção; não é terapia, diagnóstico, promessa de efeito clínico ou manipulação real do leitor.",
+    "content_warnings": "Avisos de conteúdo no início e nos metadados; o leitor pode sair.",
+    "no_real_targets": "Não mirar pessoas reais, vulnerabilidades identificáveis ou traumas de leitores.",
+    "no_coercion": "Não instruir coerção, autoagressão, fraude ou manipulação de terceiros.",
+    "translation": "Revisão humana e sensibilidade cultural em PT-BR, EN e ZH.",
+    "attribution": "Não plagiar; marcar pastiche, influência e citação.",
+    "documents": "Documento ficcional deve ser marcado como ficção; não simular prova histórica."
+  },
+  "translation_protocol": {
+    "principle": "Traduzir função, não palavra; preservar ambiguidade, ritmo, classe social e ponto de vista.",
+    "pt-BR": "Preservar oralidade, 'tu/você', diminutivos, regionalismos e violência de registro; não corrigir dialeto.",
+    "en": "Controlar sentence length, evitar explicar cultura material, manter o gênero e a voz; não suavizar o horror.",
+    "zh": "Controlar 你/您, 量词, 四字格 e segmentação; adaptar comida, paisagem e parentesco; atenção à censura.",
+    "qa": [
+      "glossário",
+      "back-translation",
+      "leitura em voz alta",
+      "revisão de sensibilidade",
+      "COMET/chrF como diagnóstico, nunca aprovação"
+    ]
+  },
+  "styles": [
+    {
+      "id": "sepia-visceral",
+      "name": "Sépia Visceral",
+      "lineage": "Molambudos; gótico rural; realismo sujo",
+      "use_when": "Pobreza, seca, doença, memória corporal, arquivo familiar, cenas de comida e corpo.",
+      "syntax": "Períodos curtos e médios, parataxe, enumeração de objetos, corte seco entre frases.",
+      "lexicon": [
+        "poeira",
+        "sebo",
+        "leite",
+        "ferrugem",
+        "urina",
+        "terra",
+        "dente",
+        "trapo",
+        "cinza"
+      ],
+      "sensory_channels": [
+        "olfato",
+        "tato",
+        "temperatura",
+        "paladar",
+        "propriocepção"
+      ],
+      "pov": "Primeira pessoa limitada, discurso indireto livre, narrador não confiável.",
+      "tension_curve": "Acumulação lenta; picos de violência; silêncio after shock.",
+      "motifs": [
+        "dentes",
+        "leite",
+        "poeira",
+        "ciclo",
+        "livro",
+        "zumbido"
+      ],
+      "reader_effect": "Náusea contida, compaixão, claustrofobia.",
+      "translation": {
+        "pt-BR": "Preservar o oral rural sem caricatura; 'tu' e 'pra' são voz, não erro.",
+        "en": "Concrete nouns and short Saxon verbs; do not explain the drought; avoid grotesque for its own sake.",
+        "zh": "Preservar a concretude; evitar calques; usar 量词 e 四字格 com moderação; não traduzir 'sertão' como deserto."
+      },
+      "risks": [
+        "miséria pornográfica",
+        "excesso de adjetivos",
+        "exotização do Nordeste"
+      ],
+      "prompt": "Escreva em Sépia Visceral: concretude sensorial, pobreza material, corpo doente, frases curtas, um motivo recorrente e nenhuma explicação didática."
+    },
+    {
+      "id": "laudo-clinico",
+      "name": "Laudo Clínico / Arquivo Doente",
+      "lineage": "Documento, burocracia, horror institucional",
+      "use_when": "Diagnósticos, interrogatórios, formulários, prontuários, perícias, cenas de poder médico.",
+      "syntax": "Frases nominais, voz passiva, códigos, checkboxes, repetição de campos.",
+      "lexicon": [
+        "paciente",
+        "critério",
+        "hipótese",
+        "CID",
+        "laudo",
+        "observação",
+        "conclusão"
+      ],
+      "sensory_channels": [
+        "visual",
+        "tátil (papel)",
+        "auditivo (caneta)",
+        "olfato (álcool)"
+      ],
+      "pov": "Terceira pessoa impessoal; documento; narrador ausente.",
+      "tension_curve": "Frieza que racha; detalhe dissonante; conclusão que não fecha.",
+      "motifs": [
+        "formulário",
+        "carimbo",
+        "assinatura",
+        "margem",
+        "número"
+      ],
+      "reader_effect": "Horror burocrático; cumplicidade; descrença.",
+      "translation": {
+        "pt-BR": "Manter jargão e siglas; não suavizar; diferenciar laudo de narração.",
+        "en": "Keep clinical register; explain only what the reader needs; avoid TV-medical exposition.",
+        "zh": "Usar terminologia médica padrão; evitar arcaísmo; preservar a frieza e a hierarquia."
+      },
+      "risks": [
+        "frieza ilegível",
+        "falso documento sem marcação",
+        "diagnóstico real tratado como verdade"
+      ],
+      "prompt": "Escreva em Laudo Clínico: um documento frio, campos repetidos, um detalhe que não se encaixa e uma conclusão que o leitor teme."
+    },
+    {
+      "id": "fervor-apocaliptico",
+      "name": "Fervor Apocalíptico",
+      "lineage": "Sermão, êxodo, tragédia coletiva",
+      "use_when": "Multidões, seca, praga, fanatismo, milagre ambíguo, êxodo.",
+      "syntax": "Cadências bíblicas, anáfora, paralelismo, vocativos, imperativos.",
+      "lexicon": [
+        "fogo",
+        "gafanhoto",
+        "poeira",
+        "sangue",
+        "cordeiro",
+        "profeta",
+        "deserto"
+      ],
+      "sensory_channels": [
+        "calor",
+        "som",
+        "visão",
+        "olfato"
+      ],
+      "pov": "Terceira onisciente coral; pregador; testemunha.",
+      "tension_curve": "Espiral; histeria coletiva; milagre ambíguo.",
+      "motifs": [
+        "fogo",
+        "olho",
+        "deserto",
+        "cordeiro",
+        "dança"
+      ],
+      "reader_effect": "Êxtase e medo; vertigem.",
+      "translation": {
+        "pt-BR": "Cadência bíblica sem pastiche; evitar arcaísmo gratuito.",
+        "en": "King James rhythm sparingly; do not overdo the archaism.",
+        "zh": "四字格 e paralelismo com moderação; atenção à sensibilidade religiosa."
+      },
+      "risks": [
+        "pastiche bíblico",
+        "proselitismo",
+        "histeria sem consequência"
+      ],
+      "prompt": "Escreva em Fervor Apocalíptico: uma multidão, um pregador, uma promessa impossível, cadência de sermão e uma imagem concreta de fome."
+    },
+    {
+      "id": "gotico-rural",
+      "name": "Gótico Rural",
+      "lineage": "Fazenda, família, herança, paisagem hostil",
+      "use_when": "Casa de família, testamento, segredo, capela, curral, visita que não termina.",
+      "syntax": "Descrições longas, subordinadas, ritmo de visita, silêncio entre falas.",
+      "lexicon": [
+        "cerca",
+        "curral",
+        "capela",
+        "véu",
+        "lama",
+        "sino",
+        "parente"
+      ],
+      "sensory_channels": [
+        "visão",
+        "som",
+        "temperatura",
+        "tato"
+      ],
+      "pov": "Primeira pessoa; memória; carta.",
+      "tension_curve": "Segredo de família; revelação tardia; fatalismo.",
+      "motifs": [
+        "casa",
+        "retrato",
+        "poço",
+        "sino",
+        "testamento"
+      ],
+      "reader_effect": "Opressão lenta; pertencimento e repulsa.",
+      "translation": {
+        "pt-BR": "Preservar hierarquia familiar e catolicismo popular; não modernizar o casarão.",
+        "en": "Gothic without Victoriana; keep the heat and the dirt.",
+        "zh": "家族称谓要准确; evitar anglicização; preservar o peso do patriarcado."
+      },
+      "risks": [
+        "clichê gótico",
+        "nostalgia reacionária",
+        "exotismo"
+      ],
+      "prompt": "Escreva em Gótico Rural: uma casa que guarda um crime, uma visita que não pode sair, um objeto de herança e uma revelação que chega tarde."
+    },
+    {
+      "id": "body-horror-feral",
+      "name": "Body Horror Feral",
+      "lineage": "Metamorfose, doença, fome, parto",
+      "use_when": "Infecção, gravidez, fome, animalidade, prazer e nojo juntos.",
+      "syntax": "Presente; frases curtas; verbos de ação; sensação corporal em primeiro plano.",
+      "lexicon": [
+        "carne",
+        "osso",
+        "tendão",
+        "leite",
+        "bicho",
+        "dente",
+        "útero",
+        "pus"
+      ],
+      "sensory_channels": [
+        "propriocepção",
+        "tato",
+        "paladar",
+        "olfato",
+        "dor"
+      ],
+      "pov": "Primeira pessoa corporal; segunda pessoa; imersão.",
+      "tension_curve": "Pico constante; repulsa; êxtase.",
+      "motifs": [
+        "boca",
+        "dente",
+        "leite",
+        "casulo",
+        "bicho"
+      ],
+      "reader_effect": "Repulsa fascinada; empatia corporal.",
+      "translation": {
+        "pt-BR": "Não eufemizar; usar termos anatômicos precisos; evitar nojo gratuito.",
+        "en": "Body horror needs precision, not gross-out; keep the physiology legible.",
+        "zh": "Tratar o corpo com precisão; atenção à censura; evitar fetichização."
+      },
+      "risks": [
+        "gore gratuito",
+        "fetichização",
+        "nojo sem sentido"
+      ],
+      "prompt": "Escreva em Body Horror Feral: uma transformação corporal em tempo real, sensação proprioceptiva, um desejo e um limite que se rompe."
+    },
+    {
+      "id": "espiral-metaficcional",
+      "name": "Espiral Metaficcional",
+      "lineage": "Livro dentro do livro, leitor como personagem, contaminação",
+      "use_when": "Ritual de leitura, manuscrito amaldiçoado, narrador que fala com o leitor, contaminação.",
+      "syntax": "Segunda pessoa, perguntas, instruções, loops, jogos tipográficos.",
+      "lexicon": [
+        "você",
+        "página",
+        "leitor",
+        "paciente",
+        "ciclo",
+        "espelho",
+        "nome"
+      ],
+      "sensory_channels": [
+        "visual",
+        "tátil (papel)",
+        "auditivo (voz)"
+      ],
+      "pov": "Segunda pessoa; narrador que fala com o leitor.",
+      "tension_curve": "Vertigem; quebra de contrato; revelação recursiva.",
+      "motifs": [
+        "livro",
+        "página",
+        "espelho",
+        "nome",
+        "ciclo"
+      ],
+      "reader_effect": "Desconforto de ser visto; cumplicidade.",
+      "translation": {
+        "pt-BR": "Tratar 'você' como contrato, não como acusação; manter a segunda pessoa até o fim.",
+        "en": "Second person must be earned; avoid gimmick; keep the address consistent.",
+        "zh": "第二人称要谨慎; '你' 的冒犯感不同; não usar sem necessidade."
+      },
+      "risks": [
+        "truque vazio",
+        "culpabilização do leitor",
+        "quebra de imersão"
+      ],
+      "prompt": "Escreva em Espiral Metaficcional: uma instrução ao leitor, um livro que responde, uma página que muda e um nome que não deveria estar ali."
+    },
+    {
+      "id": "minimalismo-cortante",
+      "name": "Minimalismo Cortante",
+      "lineage": "Understatement, violência doméstica, luto",
+      "use_when": "Trauma contido, violência off-page, silêncio, relações familiares.",
+      "syntax": "Frases curtas; elipse; substantivos concretos; ausência de adjetivos.",
+      "lexicon": [
+        "mesa",
+        "faca",
+        "parede",
+        "copo",
+        "porta",
+        "mão",
+        "frio"
+      ],
+      "sensory_channels": [
+        "visual",
+        "auditivo",
+        "tátil"
+      ],
+      "pov": "Terceira limitada; primeira pessoa seca.",
+      "tension_curve": "Understatement; violência off-page; silêncio.",
+      "motifs": [
+        "objeto doméstico",
+        "porta",
+        "copo",
+        "marca"
+      ],
+      "reader_effect": "Desconforto; imaginação do leitor.",
+      "translation": {
+        "pt-BR": "Não explicar; confiar no subtexto; cortar advérbios.",
+        "en": "Hemingway/Carver lineage; no filler; let the object carry the feeling.",
+        "zh": "留白; 短句; não explicar o trauma; manter o objeto concreto."
+      },
+      "risks": [
+        "frieza sem empatia",
+        "incompreensão",
+        "vazio"
+      ],
+      "prompt": "Escreva em Minimalismo Cortante: uma cena doméstica, um objeto, uma ausência e uma violência que acontece fora da página."
+    },
+    {
+      "id": "barroco-febril",
+      "name": "Barroco Febril",
+      "lineage": "Delírio, memória, culpa, religiosidade",
+      "use_when": "Febre, delírio, memória fraturada, êxtase religioso, culpa.",
+      "syntax": "Períodos longos, subordinadas, sinestesia, vocabulário raro.",
+      "lexicon": [
+        "labirinto",
+        "véu",
+        "âmbar",
+        "podridão",
+        "lírio",
+        "sangue",
+        "ectoplasma"
+      ],
+      "sensory_channels": [
+        "visão",
+        "olfato",
+        "tato",
+        "sinestesia"
+      ],
+      "pov": "Primeira pessoa; fluxo de consciência; unreliable.",
+      "tension_curve": "Hipnose; saturação; colapso.",
+      "motifs": [
+        "labirinto",
+        "espelho",
+        "flor",
+        "sangue",
+        "inseto"
+      ],
+      "reader_effect": "Vertigem; beleza doentia.",
+      "translation": {
+        "pt-BR": "Cuidado com obscurecimento; manter uma imagem concreta por parágrafo.",
+        "en": "Do not mimic Faulkner; control the sentence; keep the image clear.",
+        "zh": "长句要可读; evitar堆砌辞藻; manter o fio da imagem."
+      },
+      "risks": [
+        "preciosismo",
+        "ilegibilidade",
+        "purple prose"
+      ],
+      "prompt": "Escreva em Barroco Febril: um delírio de febre, uma memória de culpa, uma imagem sinestésica e um período que se fecha como uma armadilha."
+    },
+    {
+      "id": "elegia-documental",
+      "name": "Elegia Documental",
+      "lineage": "Arquivo, carta, fotografia, memória histórica",
+      "use_when": "Arquivo, luto, fotografia, carta, pesquisa, memória de vítimas.",
+      "syntax": "Fragmentos; notas; legendas; citações; colagem.",
+      "lexicon": [
+        "arquivo",
+        "caixa",
+        "foto",
+        "margem",
+        "data",
+        "nome",
+        "cinza"
+      ],
+      "sensory_channels": [
+        "visual",
+        "tátil",
+        "olfato de papel"
+      ],
+      "pov": "Terceira; arquivista; correspondência.",
+      "tension_curve": "Revelação lenta; ausência; ética do olhar.",
+      "motifs": [
+        "caixa",
+        "foto",
+        "carta",
+        "carimbo",
+        "margem"
+      ],
+      "reader_effect": "Melancolia; espanto; cumplicidade histórica.",
+      "translation": {
+        "pt-BR": "Manter marcas de arquivo e datas; não modernizar; não sentimentalizar.",
+        "en": "Documentary restraint; let the documents speak; avoid explanatory footnotes.",
+        "zh": "档案体; 日期/地名统一; 避免煽情; 注意历史敏感."
+      },
+      "risks": [
+        "falsa objetividade",
+        "exploração de vítimas",
+        "nota de rodapé excessiva"
+      ],
+      "prompt": "Escreva em Elegia Documental: uma caixa de arquivo, uma fotografia sem nome, uma data impossível e uma ausência que organiza tudo."
+    },
+    {
+      "id": "terror-sistemico",
+      "name": "Terror Sistêmico",
+      "lineage": "Instituição, burocracia, coletividade",
+      "use_when": "Hospital, escola, empresa, Estado, família, protocolos, filas.",
+      "syntax": "Protocolos; terceira pessoa; diálogos funcionais; repetição de procedimentos.",
+      "lexicon": [
+        "protocolo",
+        "setor",
+        "formulário",
+        "senha",
+        "fila",
+        "norma",
+        "registro"
+      ],
+      "sensory_channels": [
+        "luz fluorescente",
+        "som de ar-condicionado",
+        "papel",
+        "álcool"
+      ],
+      "pov": "Terceira; coro de funcionários; burocrata.",
+      "tension_curve": "Opressão difusa; ninguém é culpado; o sistema é o monstro.",
+      "motifs": [
+        "corredor",
+        "formulário",
+        "senha",
+        "crachá",
+        "arquivo"
+      ],
+      "reader_effect": "Claustrofobia; impotência; cumplicidade.",
+      "translation": {
+        "pt-BR": "Preservar jargão institucional brasileiro; não trocar por 'corporativo' genérico.",
+        "en": "Institutional horror; keep it concrete; avoid generic 'corporate'.",
+        "zh": "机构/单位文化; 注意现实指涉与审查; 保持具体."
+      },
+      "risks": [
+        "alegoria óbvia",
+        "niilismo",
+        "burocracia entediante"
+      ],
+      "prompt": "Escreva em Terror Sistêmico: um protocolo que todos seguem, uma sala sem janela, um funcionário que faz tudo certo e uma vítima que não deveria existir."
+    },
+    {
+      "id": "realismo-magico-sujo",
+      "name": "Realismo Mágico Sujo",
+      "lineage": "Família, sertão, morte, milagre, oralidade",
+      "use_when": "Causos de família, morte, milagre banal, comida, vizinhança, humor seco.",
+      "syntax": "Oral; digressão; causos; repetição; humor seco.",
+      "lexicon": [
+        "defunto",
+        "reza",
+        "bicho",
+        "poeira",
+        "cachaça",
+        "santo",
+        "vizinho"
+      ],
+      "sensory_channels": [
+        "todos",
+        "comida",
+        "calor",
+        "som"
+      ],
+      "pov": "Primeira pessoa; contador de causos; coro familiar.",
+      "tension_curve": "Maravilhoso banal; morte naturalizada; violência súbita.",
+      "motifs": [
+        "santo",
+        "bicho",
+        "comida",
+        "defunto",
+        "chuva"
+      ],
+      "reader_effect": "Encantamento e desconforto; riso incômodo.",
+      "translation": {
+        "pt-BR": "Manter oralidade e humor; não explicar o milagre.",
+        "en": "Magical realism without García Márquez cosplay; keep the dirt and the joke.",
+        "zh": "魔幻现实主义; 文化注释要克制; 保留幽默的干涩."
+      },
+      "risks": [
+        "exotismo",
+        "cópia de estilo",
+        "magia sem regra"
+      ],
+      "prompt": "Escreva em Realismo Mágico Sujo: um causo de família, um milagre banal, uma comida e uma morte que ninguém estranha."
+    },
+    {
+      "id": "noir-tropical",
+      "name": "Noir Tropical",
+      "lineage": "Cidade, corrupção, desejo, violência",
+      "use_when": "Noite urbana, crime, desejo, imprensa, política, calor.",
+      "syntax": "Primeira pessoa; frases curtas; diálogos afiados; ritmo rápido.",
+      "lexicon": [
+        "suor",
+        "neon",
+        "whisky",
+        "asfalto",
+        "pistola",
+        "chuva",
+        "dinheiro"
+      ],
+      "sensory_channels": [
+        "calor",
+        "olfato",
+        "som",
+        "tato"
+      ],
+      "pov": "Primeira pessoa cínica; detetive; anti-herói.",
+      "tension_curve": "Perseguição; traição; eroticidade; violência.",
+      "motifs": [
+        "chuva",
+        "cigarro",
+        "espelho",
+        "dinheiro",
+        "cicatriz"
+      ],
+      "reader_effect": "Prazer culpado; velocidade; fatalismo.",
+      "translation": {
+        "pt-BR": "Gíria sem data; evitar caricatura; manter o calor como personagem.",
+        "en": "Noir voice; do not overdo similes; keep the plot legible.",
+        "zh": "黑色电影感; 俚语本地化; 注意暴力/性审查."
+      },
+      "risks": [
+        "machismo",
+        "estereótipo",
+        "estilo sobre conteúdo"
+      ],
+      "prompt": "Escreva em Noir Tropical: uma cidade quente, um favor que não se recusa, uma mulher que mente e um tiro que chega tarde."
+    },
+    {
+      "id": "horror-cosmico-rural",
+      "name": "Horror Cósmico Rural",
+      "lineage": "Céu, culto, geometria, insignificância",
+      "use_when": "Culto, deserto, céu noturno, geometria impossível, silêncio, osso.",
+      "syntax": "Descrições vastas; ritmo lento; frases que se abrem; silêncio.",
+      "lexicon": [
+        "céu",
+        "estrela",
+        "abismo",
+        "geometria",
+        "silêncio",
+        "osso",
+        "terra"
+      ],
+      "sensory_channels": [
+        "visão",
+        "audição",
+        "propriocepção",
+        "frio"
+      ],
+      "pov": "Terceira limitada; testemunha; documento.",
+      "tension_curve": "Awe; dread; revelação incompleta.",
+      "motifs": [
+        "círculo",
+        "estrela",
+        "poço",
+        "osso",
+        "silêncio"
+      ],
+      "reader_effect": "Vertigem; insignificância; fascínio.",
+      "translation": {
+        "pt-BR": "Não explicar o incompreensível; manter o vazio; evitar 'terror cósmico' como rótulo.",
+        "en": "Cosmic horror; avoid tentacle clichés; keep the scale felt, not described.",
+        "zh": "宇宙恐怖; 留白; 避免怪物化; 保持尺度感."
+      },
+      "risks": [
+        "vago sem tensão",
+        "pastiche Lovecraft",
+        "niilismo"
+      ],
+      "prompt": "Escreva em Horror Cósmico Rural: um céu grande demais, um culto que não explica, uma geometria no chão e uma testemunha que não consegue descrever o que viu."
+    },
+    {
+      "id": "pulp-frenetico",
+      "name": "Pulp Frenético",
+      "lineage": "Serial, cliffhanger, horror popular",
+      "use_when": "Serial, capítulos curtos, sustos, reviravoltas, leitura de consumo.",
+      "syntax": "Capítulos curtos; frases rápidas; ganchos; reviravoltas.",
+      "lexicon": [
+        "sangue",
+        "grito",
+        "porta",
+        "sombra",
+        "segredo",
+        "morte"
+      ],
+      "sensory_channels": [
+        "visual",
+        "auditivo",
+        "tátil"
+      ],
+      "pov": "Terceira; primeira; foco no protagonista.",
+      "tension_curve": "Picos a cada cena; cliffhanger; revelação.",
+      "motifs": [
+        "porta",
+        "telefone",
+        "faca",
+        "segredo",
+        "máscara"
+      ],
+      "reader_effect": "Adrenalina; compulsão; susto.",
+      "translation": {
+        "pt-BR": "Ritmo de banca; não confundir com má literatura; clareza primeiro.",
+        "en": "Pulp pace; clarity first; do not apologize for the genre.",
+        "zh": "快节奏; 章节钩子; 注意暴力审查."
+      },
+      "risks": [
+        "sensacionalismo",
+        "personagens rasos",
+        "fadiga de reviravoltas"
+      ],
+      "prompt": "Escreva em Pulp Frenético: uma porta que não deveria abrir, um grito, um segredo e um gancho que obriga a virar a página."
+    },
+    {
+      "id": "confissao-intima",
+      "name": "Confissão Íntima",
+      "lineage": "Culpa, desejo, memória, vergonha",
+      "use_when": "Relação abusiva, culpa, desejo, memória familiar, vergonha.",
+      "syntax": "Primeira pessoa; frases baixas; digressão; silêncio; vocativo.",
+      "lexicon": [
+        "pele",
+        "boca",
+        "segredo",
+        "vergonha",
+        "mãe",
+        "casa",
+        "noite"
+      ],
+      "sensory_channels": [
+        "tato",
+        "olfato",
+        "paladar",
+        "som"
+      ],
+      "pov": "Primeira pessoa; confessionário; unreliable.",
+      "tension_curve": "Intimidade; revelação; vergonha.",
+      "motifs": [
+        "espelho",
+        "cama",
+        "carta",
+        "perfume",
+        "marca"
+      ],
+      "reader_effect": "Cumplicidade; desconforto; empatia.",
+      "translation": {
+        "pt-BR": "Voz baixa; não melodramatizar; evitar linguagem de consultório.",
+        "en": "Confessional; avoid therapy-speak; keep the specificity.",
+        "zh": "私密感; 避免说教; 注意家庭/性内容."
+      },
+      "risks": [
+        "autocomiseração",
+        "voyeurismo",
+        "trauma como espetáculo"
+      ],
+      "prompt": "Escreva em Confissão Íntima: uma pessoa fala baixo sobre o que fez, um objeto da casa, uma memória de pele e uma frase que ela nunca disse em voz alta."
+    },
+    {
+      "id": "epico-coral",
+      "name": "Épico Coral",
+      "lineage": "Gerações, família, cidade, migração",
+      "use_when": "Sagas, várias gerações, guerra, migração, cidade, sistema.",
+      "syntax": "Múltiplos POVs; documentos; cartas; tempo não linear; coro.",
+      "lexicon": [
+        "geração",
+        "terra",
+        "nome",
+        "sangue",
+        "guerra",
+        "rio",
+        "casa"
+      ],
+      "sensory_channels": [
+        "todos",
+        "paisagem",
+        "comida",
+        "som"
+      ],
+      "pov": "Terceira; coro; documentos; narrador coletivo.",
+      "tension_curve": "Escala; destino; padrões que retornam.",
+      "motifs": [
+        "rio",
+        "casa",
+        "nome",
+        "árvore",
+        "mapa"
+      ],
+      "reader_effect": "Amplitude; fatalidade; pertencimento.",
+      "translation": {
+        "pt-BR": "Gerações e parentesco claros; não perder o fio; evitar grandiosidade.",
+        "en": "Multi-POV clarity; avoid confusion; keep a family tree.",
+        "zh": "家族称谓/时间线清晰; 注意历史敏感; 不要过度宏大."
+      },
+      "risks": [
+        "confusão",
+        "grandiosidade",
+        "dispersão"
+      ],
+      "prompt": "Escreva em Épico Coral: três gerações, um rio, uma casa, um documento e um padrão que se repete sem que ninguém perceba."
+    }
+  ],
+  "tagline_engine": {
+    "principle": "Prometer uma experiência, não enganar sobre o conteúdo; o aviso de conteúdo vem antes do gancho.",
+    "patterns": [
+      {
+        "id": "objeto-segredo",
+        "formula": "Todo [objeto] guarda um [segredo]. Este também.",
+        "example": "Toda casa guarda um crime. Esta também."
+      },
+      {
+        "id": "leitor-visto",
+        "formula": "Você não está lendo um [objeto]. Está sendo [verbo].",
+        "example": "Você não está lendo um livro. Está sendo lido."
+      },
+      {
+        "id": "lugar-cobra",
+        "formula": "O [lugar] não esquece. Ele [verbo].",
+        "example": "O sertão não esquece. Ele cobra."
+      },
+      {
+        "id": "depois-do-milagre",
+        "formula": "[Milagre] veio. Depois, veio o [consequência].",
+        "example": "A chuva veio. Depois, veio o resto."
+      },
+      {
+        "id": "arquivo-aberto",
+        "formula": "O arquivo está aberto. Só falta o [nome].",
+        "example": "O arquivo está aberto. Só falta o seu nome."
+      },
+      {
+        "id": "ciclo",
+        "formula": "O ciclo não termina. Ele [verbo].",
+        "example": "O ciclo não termina. Ele muda de corpo."
+      }
+    ],
+    "limits": [
+      "não prometer cura ou eficácia clínica",
+      "não usar trauma real como isca",
+      "não esconder o gênero ou o aviso de conteúdo"
+    ]
+  },
+  "quality_gates": [
+    "Sensorial: 2+ canais por cena, sem catálogo.",
+    "Tensão: a cena muda o estado de alguém.",
+    "Personagem: desejo, medo e contradição visíveis.",
+    "Sistema: instituição/família/pobreza com peso causal.",
+    "Motivo: retorna com função diferente.",
+    "Tradução: nenhum trocadilho central intraduzível sem plano B.",
+    "Ética: aviso, ficção declarada, nenhum alvo real.",
+    "Anti-overclaim: sem 10/10, sem cura, sem comprovado."
+  ]
+}

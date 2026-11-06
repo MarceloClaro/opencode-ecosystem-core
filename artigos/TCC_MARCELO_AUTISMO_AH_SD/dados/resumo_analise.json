@@ -1,0 +1,144 @@
+{
+  "serie": [
+    {
+      "ano": 2021,
+      "tea_classes_comuns": 273924,
+      "tea_classes_exclusivas": 20470,
+      "tea_total": 294394,
+      "ahsd_classes_comuns": 23506,
+      "ahsd_classes_exclusivas": 252,
+      "ahsd_total": 23758,
+      "total_educacao_basica": 46668401,
+      "percentual_tea": 0.6308208417082899,
+      "percentual_ahsd": 0.050908108036527754,
+      "razao_tea_ahsd": 12.391362909335802
+    },
+    {
+      "ano": 2022,
+      "tea_classes_comuns": 405056,
+      "tea_classes_exclusivas": 24465,
+      "tea_total": 429521,
+      "ahsd_classes_comuns": 26589,
+      "ahsd_classes_exclusivas": 226,
+      "ahsd_total": 26815,
+      "total_educacao_basica": 47382074,
+      "percentual_tea": 0.9065052745475008,
+      "percentual_ahsd": 0.0565931326686966,
+      "razao_tea_ahsd": 16.017937721424577
+    },
+    {
+      "ano": 2023,
+      "tea_classes_comuns": 607144,
+      "tea_classes_exclusivas": 29058,
+      "tea_total": 636202,
+      "ahsd_classes_comuns": 37638,
+      "ahsd_classes_exclusivas": 381,
+      "ahsd_total": 38019,
+      "total_educacao_basica": 47304632,
+      "percentual_tea": 1.3449042368620476,
+      "percentual_ahsd": 0.08037056497976773,
+      "razao_tea_ahsd": 16.733790999237222
+    },
+    {
+      "ano": 2024,
+      "tea_classes_comuns": 884403,
+      "tea_classes_exclusivas": 34474,
+      "tea_total": 918877,
+      "ahsd_classes_comuns": 43950,
+      "ahsd_classes_exclusivas": 221,
+      "ahsd_total": 44171,
+      "total_educacao_basica": 47088922,
+      "percentual_tea": 1.9513655462318718,
+      "percentual_ahsd": 0.0938033790622771,
+      "razao_tea_ahsd": 20.802721242444136
+    }
+  ],
+  "regioes_2024": [
+    {
+      "regiao": "Norte",
+      "tea": 89150,
+      "ahsd": 3671,
+      "razao": 24.3,
+      "total": 198915
+    },
+    {
+      "regiao": "Nordeste",
+      "tea": 282410,
+      "ahsd": 6253,
+      "razao": 45.2,
+      "total": 649724
+    },
+    {
+      "regiao": "Sudeste",
+      "tea": 340751,
+      "ahsd": 11584,
+      "razao": 29.4,
+      "total": 701764
+    },
+    {
+      "regiao": "Sul",
+      "tea": 144536,
+      "ahsd": 17985,
+      "razao": 8.0,
+      "total": 361307
+    },
+    {
+      "regiao": "Centro-Oeste",
+      "tea": 62030,
+      "ahsd": 4678,
+      "razao": 13.3,
+      "total": 165115
+    }
+  ],
+  "ajuste_linear": {
+    "tea": {
+      "intercepto": -420136543.9999458,
+      "inclinacao_ano": 208012.99999997317,
+      "r2": 0.975456182410443
+    },
+    "ahsd": {
+      "intercepto": -14618405.999997923,
+      "inclinacao_ano": 7244.299999998972,
+      "r2": 0.9593958339285201
+    }
+  },
+  "cenarios": [
+    {
+      "ano": 2025,
+      "linear_tea": 1089781,
+      "linear_ahsd": 51301,
+      "linear_razao": 21.2,
+      "moderado_tea": 1102652,
+      "moderado_ahsd": 50797,
+      "moderado_razao": 21.7,
+      "convergencia_tea": 1010765,
+      "convergencia_ahsd": 55214,
+      "convergencia_razao": 18.3
+    },
+    {
+      "ano": 2026,
+      "linear_tea": 1297794,
+      "linear_ahsd": 58546,
+      "linear_razao": 22.2,
+      "moderado_tea": 1323183,
+      "moderado_ahsd": 58416,
+      "moderado_razao": 22.7,
+      "convergencia_tea": 1111841,
+      "convergencia_ahsd": 69017,
+      "convergencia_razao": 16.1
+    },
+    {
+      "ano": 2027,
+      "linear_tea": 1505807,
+      "linear_ahsd": 65790,
+      "linear_razao": 22.9,
+      "moderado_tea": 1587819,
+      "moderado_ahsd": 67179,
+      "moderado_razao": 23.6,
+      "convergencia_tea": 1223025,
+      "convergencia_ahsd": 86271,
+      "convergencia_razao": 14.2
+    }
+  ],
+  "aviso": "Cenários exploratórios; não são previsões. As categorias do Censo podem se sobrepor."
+}

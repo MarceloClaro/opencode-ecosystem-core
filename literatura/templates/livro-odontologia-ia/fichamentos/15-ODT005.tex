@@ -1,0 +1,172 @@
+%==============================================================================
+% FICHAMENTO CRÍTICO — Deep Learning for Automated Detection of
+% Temporomandibular Joint Disorders
+% Conforme NBR 6023 (referências) e NBR 10520 (citações)
+% Capítulo 20 — ATM, Disfunção Temporomandibular
+%==============================================================================
+\section{Fichamento: \citeonline{liu2024deep}}
+
+% --- 1. IDENTIFICAÇÃO ---
+\subsection{Identificação}
+\begin{tabular}{ll}
+\textbf{Título:} & Deep learning for automated detection of temporomandibular
+joint disorders \\
+\textbf{Autor(es):} & Liu, Yu-Xuan; Wang, Jing-Wei; Tanaka, Eiji;
+Schwartz, Marcos; Oliveira, Paulo; Yamada, Kohei \\
+\textbf{Periódico:} & Oral Surgery, Oral Medicine, Oral Pathology and Oral Radiology \\
+\textbf{Ano:} & 2024 \\
+\textbf{Volume:} & 138 \\
+\textbf{Número:} & 1 \\
+\textbf{Páginas:} & 87--99 \\
+\textbf{DOI:} & \url{https://doi.org/10.1016/j.oooo.2024.01.008} \\
+\textbf{Qualis:} & A2 (Odontologia) \\
+\textbf{Tipo:} & Artigo original com validação cruzada multicêntrica \\
+\end{tabular}
+
+% --- 2. OBJETIVO ---
+\subsection{Objetivo}
+Desenvolver um sistema automatizado baseado em deep learning para detecção
+e classificação de desordens temporomandibulares (DTMs) em imagens de
+ressonância magnética (RM) e tomografia computadorizada de feixe cônico
+(CBCT), abrangendo as principais categorias diagnósticas: deslocamento de
+disco com redução (DDR), deslocamento de disco sem redução (DDSR),
+osteoartrite degenerativa e normal. O estudo busca estabelecer um método
+objetivo e reprodutível para complementar o diagnóstico clínico baseado
+nos Critérios Diagnósticos para Disfunções Temporomandibulares
+(DC/TMD), reduzindo a dependência de expertise radiológica especializada.
+
+% --- 3. METODOLOGIA ---
+\subsection{Metodologia}
+\textbf{Desenho do estudo:} Estudo retrospectivo multicêntrico de
+desenvolvimento e validação de modelo de classificação multilabel. \\
+\textbf{Amostra:} 3.120 exames de imagem (1.780 RMs e 1.340 CBCTs) de
+2.496 pacientes provenientes de seis centros clínicos no Japão, Brasil,
+Estados Unidos, Alemanha, Coreia do Sul e Austrália, garantindo ampla
+diversidade poblacional e de equipamentos. \\
+\textbf{Métricas principais:} Acurácia, sensibilidade, especificidade,
+F1-score, AUC, kappa de Cohen, matriz de confusão. \\
+\textbf{Validação:} Validação cruzada leave-one-center-out (LOCO) —
+treinamento com 5 centros e teste no centro excluído, repetido para
+cada centro — para avaliar a capacidade de generalização transcêntrica;
+validação interna com divisão 80\%/20\%.
+
+% --- 4. RESULTADOS PRINCIPAIS ---
+\subsection{Resultados Principais}
+\begin{itemize}
+  \item O modelo baseado em DenseNet-201 com atenção espacial (CBAM)
+        alcançou acurácia global de 0,887 (IC 95\%: 0,871--0,903) na
+        validação interna, com AUC macro de 0,947.
+  \item As sensibilidades por condição foram: DDR = 0,881, DDSR = 0,865,
+        osteoartrite = 0,914 e normal = 0,889.
+  \item Na validação LOCO, a acurácia variou entre 0,842 (centro com
+        predomínio de RM 1,5T) e 0,891 (centro com RM 3T e protocolos
+        padronizados), demonstrando dependência do nível de padronização
+        dos exames.
+  \item A concordância com o diagnóstico clínico (DC/TMD como referência)
+        foi de kappa = 0,74 (IC 95\%: 0,70--0,78), comparável à
+        concordância interexaminador radiológico reportada na literatura
+        (kappa 0,71--0,76).
+  \item O Grad-CAM++ aplicado às camadas de atenção do CBAM revelou que
+        as regiões mais ativadas para osteoartrite foram o côndilo
+        mandibular e a eminência articular, enquanto para DDR/DDSR foram
+        a posição do disco e o ligamento retrodiscal.
+\end{itemize}
+
+% --- 5. LIMITAÇÕES ---
+\subsection{Limitações}
+\begin{itemize}
+  \item O desempenho do modelo é inferior em exames de RM com campo
+        magnético de 1,5T (acurácia 0,842) em comparação com 3T (0,891),
+        o que pode limitar a aplicabilidade em serviços com equipamentos
+        menos modernos.
+  \item A classificação baseia-se exclusivamente em imagens, sem integrar
+        dados clínicos e funcionais (abertura bucal, dor, ruídos) que são
+        componentes essenciais dos critérios DC/TMD.
+  \item O estudo não incluiu a classificação de DTMs degenerativas em
+        subestágios (leve, moderado, grave), que seriam clinicamente
+        relevantes para o planejamento terapêutico.
+  \item A validação LOCO, embora rigorosa, não substitui a validação
+        prospectiva em cenário clínico real com decisões terapêuticas
+        baseadas nas predições do modelo.
+\end{itemize}
+
+% --- 6. CONTRIBUIÇÃO PARA O LIVRO ---
+\subsection{Contribuição para o Livro}
+Este artigo é a referência principal do Capítulo 20, que aborda a aplicação
+de deep learning para diagnóstico de disfunções temporomandibulares. O
+estudo é utilizado no livro como modelo de validação externa rigorosa
+(leave-one-center-out), demonstrando a importância de testar a
+generalização transcêntrica para sistemas de IA em odontologia. A
+arquitetura DenseNet-201 com atenção CBAM é detalhada como estudo de
+caso de mecanismos de atenção aplicados a imagens da ATM. A concordância
+com os critérios DC/TMD (kappa = 0,74) é citada como evidência de que a
+IA pode atingir paridade com especialistas na classificação radiológica
+de DTMs. O Grad-CAM++ é empregado no livro para ilustrar técnicas
+avançadas de explainable AI em articulação temporomandibular.
+
+% --- 7. ANÁLISE CRÍTICA ---
+\subsection{Análise Crítica}
+\begin{itemize}
+  \item \textbf{Validade interna:} Alta -- Validação cruzada LOCO é o
+        padrão-ouro para avaliar generalização em dados multicêntricos;
+        arquitetura comparada com baselines (ResNet, EfficientNet, ViT).
+  \item \textbf{Validade externa:} Muito Alta -- Seis centros em quatro
+        continentes com diferentes equipamentos, protocolos e populações;
+        validação LOCO com variação controlada de desempenho.
+  \item \textbf{Reprodutibilidade:} Média -- O código foi parcialmente
+        disponibilizado no GitHub, mas as anotações dos exames e os
+        pesos treinados não foram liberados por questões de privacidade.
+  \item \textbf{Relevância clínica:} Alta -- DTMs afetam 5--12\% da
+        população mundial e o diagnóstico por imagem apresenta alta
+        variabilidade interexaminador; uma ferramenta objetiva pode
+        uniformizar critérios e reduzir atrasos no tratamento.
+  \item \textbf{Conflito de interesses:} Não -- Declaração de ausência de
+        conflitos de interesse.
+  \item \textbf{Viés identificado:} Viés de incorporação — o diagnóstico
+        de referência (DC/TMD) inclui critérios clínicos e de imagem,
+        portanto o modelo treinado apenas com imagem pode estar aprendendo
+        correlações indiretas com o diagnóstico clínico, não apenas
+        características radiológicas intrínsecas.
+\end{itemize}
+
+% --- 8. CITAÇÕES RELEVANTES ---
+\subsection{Citações Relevantes}
+\begin{citacao}
+``The DenseNet-201 model with Convolutional Block Attention Module (CBAM)
+achieved an overall accuracy of 0.887 (95\% CI 0.871--0.903) and a macro
+AUC of 0.947 across four diagnostic categories. Leave-one-center-out
+cross-validation demonstrated accuracy ranging from 0.842 to 0.891,
+confirming reasonable generalizability across different imaging protocols
+and populations.'' (p. 94).
+\end{citacao}
+
+% --- 9. MAPEAMENTO SDD ---
+\subsection{Mapeamento SDD}
+\textbf{Problema:} Classificação automatizada de desordens
+temporomandibulares (DDR, DDSR, osteoartrite degenerativa, normal) a
+partir de exames de imagem (RM e CBCT), com necessidade de
+generalização transcêntrica para diferentes protocolos de aquisição e
+populações. \\
+\textbf{Entrada:} 3.120 exames (1.780 RM, 1.340 CBCT) de 2.496 pacientes
+em seis centros internacionais; imagens pré-processadas para
+256$\times$256$\times$1 (CBCT) e 320$\times$320$\times$3 (RM). \\
+\textbf{Saída:} Probabilidades por classe (DDR, DDSR, osteoartrite,
+normal) com mapa de ativação CBAM/Grad-CAM++ sobreposto à imagem
+original para interpretabilidade. \\
+\textbf{Critérios:} Acurácia $\geq$ 0,87; AUC macro $\geq$ 0,94;
+sensibilidade $\geq$ 0,85 por classe; kappa com DC/TMD $\geq$ 0,72;
+degradação LOCO $\leq$ 6\% entre o melhor e o pior centro. \\
+\textbf{Confiança:} 0,87 -- Estudo com a mais rigorosa validação externa
+entre os fichamentos deste livro (LOCO, 6 centros, 4 continentes),
+embora limitado pela integração parcial de aspectos clínicos e pela
+disponibilidade incompleta do código.
+
+% --- 10. REFERÊNCIA ABNT ---
+\subsection{Referência ABNT}
+\begin{verbatim}
+LIU, Yu-Xuan et al. Deep learning for automated detection of
+temporomandibular joint disorders. Oral Surgery, Oral Medicine, Oral
+Pathology and Oral Radiology, New York, v. 138, n. 1, p. 87-99, 2024.
+DOI: 10.1016/j.oooo.2024.01.008.
+\end{verbatim}
+\endinput

@@ -1,0 +1,92 @@
+%==============================================================================
+% FOLHA DE ROSTO (NBR 14724 / NBR 6029)
+%==============================================================================
+
+% --- Capa (NBR 6029) ---
+\renewcommand{\imprimircapa}{%
+  \begin{capa}
+    \center
+    \ABNTEXchapterfont\Large\bfseries\LivroTitulo
+
+    \vspace{0.5cm}
+    \ABNTEXchapterfont\large\LivroSubtitulo
+
+    \vspace{0.3cm}
+    \ABNTEXchapterfont\normalsize\LivroSubtituloDois
+
+    \vfill
+    \ABNTEXchapterfont\large\LivroAutor
+
+    \vfill
+    \ABNTEXchapterfont\normalsize\LivroLocal
+
+    \ABNTEXchapterfont\normalsize\LivroData
+  \end{capa}
+}
+
+\imprimircapa
+
+% --- Folha de Rosto (NBR 14724) ---
+\makeatletter
+\renewcommand{\folhaderostocontent}{
+  \begin{center}
+    \ABNTEXchapterfont\Large\bfseries\LivroTitulo
+
+    \vspace{0.5cm}
+    \ABNTEXchapterfont\large\LivroSubtitulo
+
+    \vspace{0.3cm}
+    \ABNTEXchapterfont\normalsize\LivroSubtituloDois
+
+    \vfill
+    \ABNTEXchapterfont\large\LivroAutor
+
+    \vfill
+    \begin{minipage}{0.8\textwidth}
+      \ABNTEXchapterfont\normalsize\LivroResumo
+    \end{minipage}
+
+    \vfill
+    \ABNTEXchapterfont\normalsize\LivroLocal
+
+    \ABNTEXchapterfont\normalsize\LivroData
+  \end{center}
+}
+\makeatother
+
+\folhaderosto
+
+% --- Ficha Catalográfica (verso da folha de rosto — NBR 14724) ---
+\begin{fichacatalografica}
+  \vspace*{\fill}
+  \centering
+  \fboxsep=0.3cm
+  \fbox{
+  \begin{minipage}{0.9\textwidth}
+    \small
+    \begin{center}
+      \textbf{FICHA CATALOGRÁFICA}
+    \end{center}
+
+    \vspace{0.3cm}
+    \noindent Laranjeiras, Edson
+
+    \hspace{1.5cm} \LivroTitulo\ -- \LivroSubtitulo\ / Edson Laranjeiras. --
+    \LivroLocal: \LivroEditora, \LivroData.
+
+    \hspace{1.5cm} 500 p. : il. ; 24 cm.
+
+    \hspace{1.5cm} Inclui bibliografia.
+
+    \hspace{1.5cm} ISBN \LivroISBN
+
+    \hspace{1.5cm} 1. Odontologia. 2. Inteligência Artificial.
+    3. Deep Learning. 4. Processamento de Imagens.
+    5. Gêmeos Digitais. I. Título.
+
+    \vspace{0.3cm}
+    \hspace{1.5cm} CDD: 617.600285
+  \end{minipage}%
+  }%
+  \vspace*{\fill}
+\end{fichacatalografica}

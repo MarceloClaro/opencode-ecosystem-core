@@ -1,0 +1,64 @@
+{
+  "ecosystem": "OpenCode Ecosystem Core",
+  "module": "livro-odontologia-ia",
+  "version": "1.0.0",
+  "description": "OdontoIA — Inteligência Artificial, Deep Learning e Gêmeos Digitais na Odontologia. Livro didático (nível 0 a PhD) em abntex2 com modelo LaTeX imersivo/autodidático (híbrido ABNT).",
+  "type": "livro-latex-abntex2",
+  "engine": "xelatex+biber",
+  "entrypoint": "main.tex",
+  "modelo_imersivo": {
+    "fonte": "templates/abntex2-imersivo/",
+    "arquivos": [
+      "config/design.tex",
+      "config/design-cores.tex",
+      "config/design-fontes.tex",
+      "config/design-caixas.tex",
+      "config/design-margem.tex",
+      "config/design-aberturas.tex",
+      "config/design-digital.tex"
+    ],
+    "recursos": [
+      "notas laterais Tufte (\\notalateral, \\citdoi, \\figmargem)",
+      "caixas pedagógicas tcolorbox (objetivos, dica, atencao, errocomum, pareepense, exercicio, analogia, resumocap + legados SDD/TDD/pratica/destaque)",
+      "aberturas de parte/capítulo com trilha de nível 0→PhD (\\aberturaparte, \\aberturacap)",
+      "letra capitular colorida por nível (\\capitular)",
+      "elementos digitais com QR (\\colab, \\repo, \\dataset)"
+    ]
+  },
+  "agents": {
+    "autoevolve": {
+      "discover_paths": ["./odontoia-pkg", "./codigos"],
+      "install_rules": { "require_skill_md": false },
+      "verify_commands": [
+        "latexmk -xelatex -interaction=nonstopmode main.tex",
+        "python3 -m pytest odontoia-pkg/tests -q"
+      ]
+    },
+    "seeker": {
+      "research_domains": ["odontologia", "inteligencia_artificial", "deep_learning", "gemeos_digitais", "radiologia", "cancer_oral"],
+      "min_sources": 5,
+      "output_dir": "fichamentos/"
+    },
+    "marceloclaro": {
+      "architecture_role": "supervisor",
+      "pipelines": ["build", "validate", "publish"]
+    }
+  },
+  "specs": {
+    "design": "docs/superpowers/specs/2026-07-14-modelo-latex-imersivo-design.md",
+    "plano": "docs/superpowers/plans/2026-07-14-modelo-latex-imersivo.md"
+  },
+  "build_status": {
+    "engine": "xelatex+biber (latexmk)",
+    "pages": 706,
+    "latex_errors": 0,
+    "verified_on": "2026-07-14",
+    "verified_branch": "feat/modelo-latex-imersivo",
+    "note": "Compilação do livro completo sem erros LaTeX. Suíte de testes do odontoia-pkg não re-executada nesta sessão."
+  },
+  "structure": {
+    "partes": 5,
+    "capitulos": 28,
+    "fichamentos": 29
+  }
+}
