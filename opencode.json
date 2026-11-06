@@ -9809,19 +9809,19 @@
       },
       "options": {
         "model_fallbacks": [
-          "opencode-go/mimo-v2.6-flash",
-          "opencode-go/deepseek-v4.1-flash",
-          "opencode-go/minimax-m3.1-flash"
+          "ollama-local/gemma4:e2b-tuned",
+          "ollama-local/gemma4:e4b-tuned",
+          "litert-lm/litert-community/gemma-4-E4B-it-litert-lm"
         ],
         "model_economy": {
           "complexity": "media",
           "ceiling": "capaz",
-          "head": "opencode-go/mimo-v2.6-flash",
+          "head": "ollama-local/gemma4:e2b-tuned",
           "tariff_source": "https://models.dev/api.json",
           "tariff_source_date": "2026-10-30"
         }
       },
-      "model": "opencode-go/mimo-v2.6-flash"
+      "model": "ollama-local/gemma4:e2b-tuned"
     },
     "runtime-regression": {
       "description": "Reproduzir regressões de execução, prazo e cancelamento.",

@@ -97,8 +97,8 @@ def _safe_output(root: Path, relative: str) -> Path:
 def _generate_one(prompt: str, model: str, size: str, out: Path,
                   timeout: int) -> Dict[str, Any]:
     base, key = _endpoint()
-    payload = {"model": model, "prompt": prompt, "n": 1, "size": size,
-               "response_format": "b64_json"}
+    # gpt-image-2 rejeita response_format; o retorno já vem em b64_json.
+    payload = {"model": model, "prompt": prompt, "n": 1, "size": size}
     started = time.monotonic()
     try:
         body = _post(base + "/images/generations", key, payload, timeout)

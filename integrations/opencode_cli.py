@@ -384,6 +384,14 @@ def _catalog_agents() -> Dict[str, Any]:
             agent["options"] = opcoes
             if cabeca and not agent.get("model"):
                 agent["model"] = cabeca
+        local_model = LOCAL_AGENT_MODELS.get(slug)
+        if local_model:
+            agent["model"] = local_model
+            if "options" in agent:
+                agent["options"]["model_fallbacks"] = list(
+                    LOCAL_AGENT_FALLBACKS.get(slug, [local_model])
+                )
+                agent["options"].setdefault("model_economy", {})["head"] = local_model
         agents[slug] = agent
     return agents
 
@@ -546,6 +554,19 @@ PRIMARY_MODEL_FALLBACKS = (
     "opencode-go/deepseek-v4.1-flash",
     "opencode-go/deepseek-v4-pro",
 )
+
+# Override local explícito para o assistente literário: não usa OpenCode Go.
+# O endpoint precisa estar ativo; a configuração não comprova inferência.
+LOCAL_AGENT_MODELS = {
+    "romance-psicologico-molambudos": "ollama-local/gemma4:e2b-tuned",
+}
+LOCAL_AGENT_FALLBACKS = {
+    "romance-psicologico-molambudos": [
+        "ollama-local/gemma4:e2b-tuned",
+        "ollama-local/gemma4:e4b-tuned",
+        "litert-lm/litert-community/gemma-4-E4B-it-litert-lm",
+    ],
+}
 
 
 def build_config() -> Dict[str, Any]:

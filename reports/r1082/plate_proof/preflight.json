@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "status": "proof_only",
+  "pdf": {
+    "path": "/home/marceloclaro/opencode-ecosystem-core/reports/r1082/plate_proof/caderno_provas.pdf",
+    "bytes": 8606045,
+    "sha256": "62fdb2185e1f7b1a41c0efa4f8c23581c6cdc0e675c29f06b5c37108106831d2"
+  },
+  "checks": {
+    "page_size_160x230": {
+      "status": "pass",
+      "value": "453.543 x 651.969 pts"
+    },
+    "pages": {
+      "status": "pass",
+      "value": "8"
+    },
+    "fonts_embedded": {
+      "status": "pass",
+      "value": "7 fontes; 0 não embutidas"
+    },
+    "images_min_300dpi": {
+      "status": "pass",
+      "value": "6 imagens; mínimo 317 DPI"
+    },
+    "two_x_300dpi": {
+      "status": "fail",
+      "value": "fontes 1024–1122 px; 2× exige 2032 px"
+    },
+    "ink_coverage": {
+      "status": "info",
+      "value": {
+        "pages": 8,
+        "avg_cmyk": [
+          0.2266,
+          0.2266,
+          0.2266,
+          0.1841
+        ],
+        "avg_tac": 0.8639,
+        "max_tac": 1.1789
+      }
+    }
+  },
+  "limits": [
+    "Prova de caderno; não é o caderno canônico do livro.",
+    "RGB; sem CMYK perfilado, PDF/X ou prova física.",
+    "2× a 300 DPI não é possível com as fontes atuais; não houve upscale.",
+    "Três artes têm arquitetura europeia; adaptação brasileira pendente.",
+    "Nenhuma publicação, KDP ou validação externa."
+  ]
+}
