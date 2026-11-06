@@ -24042,6 +24042,34 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1093",
+      "objective": "Pacote de produção R1091: EPUB regenerado, R1077 sincronizado e capa 422p validada",
+      "changes": [
+        "EPUB regenerado com capa 300 DPI: 84 seções, 107 links, 53.175 palavras, hash 70e4216a",
+        "R1077 sincronizado com o texto corrigido: 422 pp, 20 imagens >=300 DPI, hash 1490915c",
+        "Capa 422p em 300 DPI: 351,507 x 236,35 mm, 2 imagens a 302,4 DPI, sem ISBN falso",
+        "Testes R1075/R1076/R1077 e preflight da capa passaram; R362 mantém falha preexistente de caminho"
+      ],
+      "score": null,
+      "lessons": [
+        "A capa KDP pertence ao miolo de impressão, não ao digital; contagens de página podem divergir",
+        "O gerador de EPUB tem textos fixos que precisam ser sincronizados com o miolo",
+        "O merge do print-safe deve preservar larguras de imagem e blocos PRINTSAFE próprios",
+        "Artefatos binários (PDF/EPUB/PNG) são regeneráveis e não entram no índice; manifestos e hashes entram"
+      ],
+      "timestamp": 1793971976.7912955,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [

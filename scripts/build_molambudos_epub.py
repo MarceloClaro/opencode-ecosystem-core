@@ -47,13 +47,13 @@ PART_NOTES = {
     3: (
         "Nota do Arquivista: a partir deste ponto, a voz principal deixa de ser "
         "a de Joaquim e passa a ser a de quem o estudou. Os documentos a seguir "
-        "foram escritos por médicos, peritos e arquivistas. A linguagem muda. "
+        "foram escritos por médicos, peritos, arquivistas e pelo coveiro que abriu a cova. A linguagem muda. "
         "O olhar muda. Mas o diário é o mesmo."
     ),
     4: (
         "Nota do Arquivista: os fragmentos desta parte foram organizados por "
         "Dra. Lúcia Mendes durante sua pesquisa em 2026. As anotações dela "
-        "estão em itálico nas margens dos documentos originais. O documento "
+        "estão incorporadas aos documentos, em itálico, e às notas de rodapé. O documento "
         "mais antigo do arquivo — de 1853 — foi encontrado por ela e anexado "
         "ao processo."
     ),
@@ -375,7 +375,7 @@ author:
 lang: pt-BR
 publisher: "OpenCode Books"
 date: "2026"
-identifier: "ISBN 9798189170492"
+identifier: "ISBN 979-8-18-917049-2"
 rights: "© 2026 Marcelo Dias de Carvalho Filho e Marcelo Claro. Todos os direitos reservados."
 description: "Romance em fragmentos. Edição digital de leitura derivada da edição canônica KDP PT-BR."
 ---""")
@@ -398,7 +398,8 @@ description: "Romance em fragmentos. Edição digital de leitura derivada da edi
         "> Este livro contém um ciclo de contaminação narrativa.\n>\n"
         "> Ao ler, você se torna o **Paciente 1.263**.\n>\n"
         "> Ao final, não haverá como devolver o livro à estante como se você não o tivesse aberto.\n>\n"
-        "> Se um zumbido surgir durante a leitura, não pare. Já é tarde demais para parar."
+        "> Se um zumbido surgir durante a leitura, não pare. Já é tarde demais para parar.\n>\n"
+        "> Esta página é parte da ficção. Se precisar parar, pare."
     )
 
     preamble = (
@@ -409,7 +410,7 @@ description: "Romance em fragmentos. Edição digital de leitura derivada da edi
         "\\newcommand{\\publisher}{OpenCode Books}\n"
         "\\newcommand{\\publishercity}{Crateús}\n"
         "\\newcommand{\\editionyear}{2026}\n"
-        "\\newcommand{\\isbn}{9798189170492}\n"
+        "\\newcommand{\\isbn}{979-8-18-917049-2}\n"
         "\\begin{document}\n"
     )
     add_frontmatter("copyright", "Copyright", project / "frontmatter/copyrightpage.tex", preamble=preamble)
@@ -418,8 +419,8 @@ description: "Romance em fragmentos. Edição digital de leitura derivada da edi
     chunks.append(
         "**Dados Internacionais de Catalogação na Publicação (CIP)**\n\n"
         "Carvalho Filho, Marcelo Dias de.\n"
-        "*Molambudos — O Diário do Paciente 1.260* / Marcelo Dias de Carvalho Filho, Marcelo Claro. — 1. ed. — Crateús: OpenCode Books, 2026.\n\n"
-        "ISBN 9798189170492.\n\n"
+        "*Molambudos — O Diário do Paciente 1.260* / Marcelo Dias de Carvalho Filho, Marcelo Claro. — 2. ed. rev. — Crateús: OpenCode Books, 2026.\n\n"
+        "ISBN 979-8-18-917049-2.\n\n"
         "1. Ficção brasileira. 2. Horror psicológico. 3. Narrativa fragmentária. "
         "4. Literatura contemporânea. 5. Memória e trauma. I. Carvalho Filho, Marcelo Dias de. "
         "II. Claro, Marcelo. III. Título.\n\n"
@@ -499,8 +500,9 @@ description: "Romance em fragmentos. Edição digital de leitura derivada da edi
         "O texto é o mesmo da edição impressa; o layout, as folhas e os folios não "
         "são reproduzidos. As imagens disponíveis no projeto foram incluídas quando "
         "referenciadas pelo texto.\n\n"
-        "Gerada com Pandoc 3.7 em 2026-11-05. Não passou por EPUBCheck, revisão "
-        "humana de galerada ou validação editorial externa. O PDF canônico permanece "
+        "Gerada com Pandoc 3.7 em 2026-11-06 a partir do miolo corrigido R1091. "
+        "A validação estrutural local está no manifesto; EPUBCheck/Ace da versão "
+        "anterior devem ser reexecutados antes de publicar. O PDF canônico permanece "
         "a referência de impressão."
     )
 

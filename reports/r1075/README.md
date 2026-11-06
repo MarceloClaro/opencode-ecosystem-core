@@ -8,8 +8,9 @@ externa.
 > **Atualização R1091 (2026-11-06):** o miolo foi corrigido; o PDF passou a
 > 423 pp e o hash foi atualizado para
 > `bd78c8db32db2976e2c087bf342cf909a232c56f3348885ea577d9f82773902a`.
-> O EPUB abaixo é o da versão anterior e precisa ser regenerado antes de ser
-> anunciado como equivalente ao PDF corrigido.
+> O EPUB abaixo foi regenerado na R1091 (hash
+> `70e4216a81564f88cabf7b1f9ef037b43357f568f34b12f7aee3071f3899276c`); a capa
+> de produção é a variante 422p em 300 DPI do pacote de capas.
 
 ## 1. O que mudou
 
@@ -25,7 +26,7 @@ externa.
 A redução do total é pequena porque os cortes de DOC/CONT foram reinvestidos no
 arco de Lúcia. O livro ficou mais equilibrado, não apenas mais curto.
 
-> O total da tabela soma apenas os 84 fragmentos. O EPUB completo tem **53.554
+> O total da tabela soma apenas os 84 fragmentos. O EPUB completo tem **53.175
 > palavras**, incluindo frontmatter, notas e apêndice.
 
 ### Fórmulas repetidas
@@ -125,10 +126,10 @@ mental. Não há alegação de eficácia terapêutica.
 |---|---|
 | PDF revisado | 423 pp; 160×230 mm; fontes embutidas; sem referências indefinidas |
 | PDF SHA-256 | `bd78c8db32db2976e2c087bf342cf909a232c56f3348885ea577d9f82773902a` |
-| EPUB revisado | 84 seções; 105 links no TOC; 0 quebrados; 0 LaTeX cru; 13 imagens |
-| EPUB palavras | 53.554 |
-| EPUB SHA-256 | `0269e8c0c1d26c1f66eb1c7773c732afa2332a58bd1ce5acf2c4fe6b2a4b9c4c` |
-| EPUBCheck | 5.4.0: 0 erros, 0 avisos |
+| EPUB revisado | 84 seções; 107 links no TOC; 0 quebrados; 0 LaTeX cru; 13 imagens |
+| EPUB palavras | 53.175 |
+| EPUB SHA-256 | `70e4216a81564f88cabf7b1f9ef037b43357f568f34b12f7aee3071f3899276c` |
+| EPUBCheck | não reexecutado na R1091; validação estrutural local |
 | Ace | 1.4.6: 26 pass, 0 fail; `accessibilitySummary` presente |
 | Canônico | intacto; PDF `3378f438…` |
 | Design | R1076: legenda, Caderno de Provas Iconográficas e Cuidado digital #FF4D4D |

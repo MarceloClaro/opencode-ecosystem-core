@@ -3,15 +3,18 @@
 **Status:** edição de trabalho; não é publicação, não é nova ISBN e não é
 validação externa.
 
-> **Nota R1091:** o PDF abaixo é o miolo corrigido (423 pp, sem capa/contracapa
-> no arquivo); o EPUB é o da versão anterior e precisa ser regenerado. A capa
-> é um asset separado e deve ser recalculada para 423 pp.
+> **Nota R1091:** o PDF abaixo é o miolo digital corrigido (423 pp, sem
+> capa/contracapa no arquivo). O EPUB foi regenerado (hash
+> `70e4216a81564f88cabf7b1f9ef037b43357f568f34b12f7aee3071f3899276c`). A capa
+> de produção é a variante **422p em 300 DPI** do pacote de capas,
+> correspondente ao miolo de impressão R1077; o digital de 423 pp não deve ser
+> usado como miolo da capa.
 
 - `Molambudos_PT_revisado.pdf` — 423 pp; 160×230 mm; fontes embutidas.
   SHA-256: `bd78c8db32db2976e2c087bf342cf909a232c56f3348885ea577d9f82773902a`.
-- `Molambudos_PT_revisado.epub` — 84 seções; 105 links no TOC; 0 quebrados;
-  13 imagens; 53.554 palavras. SHA-256: `0269e8c0c1d26c1f66eb1c7773c732afa2332a58bd1ce5acf2c4fe6b2a4b9c4c`.
-  EPUBCheck 5.4.0: 0 erros/0 avisos; Ace 1.4.6: 26 pass/0 fail.
+- `Molambudos_PT_revisado.epub` — 84 seções; 107 links no TOC; 0 quebrados;
+  13 imagens; 53.175 palavras. SHA-256: `70e4216a81564f88cabf7b1f9ef037b43357f568f34b12f7aee3071f3899276c`.
+  Validação estrutural local: 84 seções, 107 links, 0 quebrados; EPUBCheck/Ace não reexecutados nesta versão.
 
 ## Texto (R1075)
 

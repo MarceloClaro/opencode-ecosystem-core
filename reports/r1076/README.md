@@ -8,7 +8,9 @@ ISBN.
 > **Atualização R1091 (2026-11-06):** o miolo foi corrigido e recompilado;
 > o PDF passou a 423 pp e o hash para
 > `bd78c8db32db2976e2c087bf342cf909a232c56f3348885ea577d9f82773902a`.
-> O EPUB é o da versão anterior; capa e lombada continuam a recalcular.
+> O EPUB foi regenerado (hash
+> `70e4216a81564f88cabf7b1f9ef037b43357f568f34b12f7aee3071f3899276c`); a capa
+> 422p em 300 DPI está no pacote de capas e falta previewer KDP/prova física.
 
 ## 1. O diagnóstico
 
@@ -101,10 +103,10 @@ arquivo que o livro já possuía.
 |---|---|
 | PDF | 423 pp; 160×230 mm; fontes embutidas; sem referências indefinidas |
 | PDF SHA-256 | `bd78c8db32db2976e2c087bf342cf909a232c56f3348885ea577d9f82773902a` |
-| EPUB | 84 seções; 105 links; 0 quebrados; 0 LaTeX cru; **13 imagens** |
-| EPUB palavras | 53.554 |
-| EPUB SHA-256 | `0269e8c0c1d26c1f66eb1c7773c732afa2332a58bd1ce5acf2c4fe6b2a4b9c4c` |
-| EPUBCheck | 5.4.0: 0 erros, 0 avisos |
+| EPUB | 84 seções; 107 links; 0 quebrados; 0 LaTeX cru; **13 imagens** |
+| EPUB palavras | 53.175 |
+| EPUB SHA-256 | `70e4216a81564f88cabf7b1f9ef037b43357f568f34b12f7aee3071f3899276c` |
+| EPUBCheck | não reexecutado na R1091; validação estrutural local |
 | Ace | 1.4.6: 26 pass, 0 fail |
 | Fragmentos com capitular | 84/84 |
 | Contraste mínimo | 6,68:1 (EPI) |

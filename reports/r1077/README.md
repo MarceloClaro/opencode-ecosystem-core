@@ -28,7 +28,7 @@ impresso, ganha a temperatura sépia sem pagar o custo de tinta.
 
 | Item | R1076 (digital/sensorial) | R1077 (print-safe) |
 |---|---|---|
-| Páginas | 421 | **422** |
+| Páginas | 423 | **422** |
 | Fundo | sépia impresso em todas as páginas | **papel cream, sem fundo impresso** |
 | Aberturas de parte | página preta + dourado | **numeral romano + título + filete + ícone** |
 | Rosto, colofão e “Cuidado” | arte/fundo | **tipográficos** |
@@ -36,7 +36,7 @@ impresso, ganha a temperatura sépia sem pagar o custo de tinta.
 | Cores vetoriais | RGB | **CMYK com TAC ≤205%** |
 | TAC médio | **304,4%** | **11,7%** |
 | TAC máximo | **400%** | **173,4%** |
-| PDF | `9ee4c467…` | `0bb22d292f9e7ed04820c0fcac093495a1951a734b308bf674e33afae1e381a5` |
+| PDF | `9ee4c467…` | `1490915c06ab5250389090d1a739135bd998629341b30a5c3b33e8502f1b5e5b` |
 
 ## 3. Qualidade gráfica
 

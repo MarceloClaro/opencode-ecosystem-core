@@ -6,6 +6,16 @@ partir do parecer R1089 e da especificação R1091.
 **PDF final:** 423 pp; 160 × 230 mm; SHA-256
 `bd78c8db32db2976e2c087bf342cf909a232c56f3348885ea577d9f82773902a`.
 
+**Miolo de impressão R1077:** 422 pp; SHA-256
+`1490915c06ab5250389090d1a739135bd998629341b30a5c3b33e8502f1b5e5b`;
+20 imagens ≥300 DPI; fontes embutidas.
+
+**EPUB:** 84 seções; 107 links; 53.175 palavras; 13 imagens; SHA-256
+`70e4216a81564f88cabf7b1f9ef037b43357f568f34b12f7aee3071f3899276c`.
+
+**Capa de produção:** variante 422p; 351,507 × 236,35 mm; 2 imagens a
+302,4 DPI; 4 fontes embutidas; sem ISBN falso; aprovação externa pendente.
+
 **Natureza:** avaliação interna por rubrica, baseada em evidência textual e
 testes. **Não é nota certificada, não é 10/10 externo, não é Qualis, não é
 aceite editorial, não é validação clínica ou histórica.** O objetivo foi
@@ -44,6 +54,7 @@ o valor literário final continua dependendo de leitura humana independente.
 | Epílogo | página 62 fixa; “diagnóstico confirmado” | página impressa ou âncora de tela; “o ciclo se completou” | `epilogo_revisado.tex:42,51,55` |
 | Miolo | capa e contracapa dentro do PDF | folha de rosto no início; colofão no fim; capa é asset separado | `titlepage.tex`; `colofao.tex`; `main.tex:738` |
 | ISBN | miolo `9798189170492`; contracapa `978-65-01-23456-7` | miolo e colofão `979-8-18-917049-2`; o ISBN errado não aparece mais no PDF | teste R1091; `colofao.tex` |
+| Pacote de produção | EPUB antigo, R1077 antigo, capa de 166 DPI | EPUB regenerado (`70e4216a…`), R1077 sincronizado em 422 pp (`1490915c…`), capa 422p em 300 DPI | testes R1075/R1076/R1077; preflight da capa |
 
 **Sobre a paginação:** o miolo perdeu duas páginas de capa/contracapa, mas o
 colofão e a nota de MEM-27 acrescentaram páginas; o PDF final ficou com 423
@@ -64,12 +75,12 @@ textual, não uma medida psicométrica.
 | 4 | Voz e estilo | 9,6 | As correções foram mínimas e preservaram a dicção de Joaquim, a segunda pessoa e o tom pericial. A nota longa saiu do clímax de MEM-27. |
 | 5 | Estrutura e ritmo | 9,4 | A Parte 5 continua sendo o melhor bloco formal; CONT-07 ganhou uma função nova (“este descreve você”). Desconto: 423 pp e a recapitulação A–G ainda pesam. |
 | 6 | Navegação e legibilidade | 9,0 | 223 rotas, zero Markdown, grafos corrigidos e rótulos maiores; a lista dos mais conectados agora bate com os dados. Desconto: os mapas seguem densos e pequenos no tamanho de impressão. |
-| 7 | Ética da representação e paratextos | 9,6 | Cuidado, Ficha Beta, Nota Histórica, Nota do Arquivista, Glossário, Copyright e Epílogo foram harmonizados; a saída do leitor é explícita. Desconto: a contracapa antiga ainda tem o ISBN e a sinopse errados, mas está fora do miolo. |
+| 7 | Ética da representação e paratextos | 9,6 | Cuidado, Ficha Beta, Nota Histórica, Nota do Arquivista, Glossário, Copyright e Epílogo foram harmonizados; a saída do leitor é explícita. A capa 422p em 300 DPI está no pacote; falta previewer KDP e prova física. |
 | 8 | Originalidade e contribuição | 9,7 | O arquivo como corpo, a leitura como contágio e a cadeia 1.260 → 1.263 sustentam uma proposta forte e pouco comum. |
-| 9 | Acabamento editorial e produção | 9,2 | O miolo abre na folha de rosto, fecha em colofão, tem ISBN correto e não exibe Markdown. Desconto: PDF não tagged; capa/lombada, EPUB e variante R1077 não foram regenerados. |
+| 9 | Acabamento editorial e produção | 9,5 | O miolo abre na folha de rosto, fecha em colofão, tem ISBN correto e não exibe Markdown; o EPUB, a R1077 (422 pp) e a capa 422p em 300 DPI foram regenerados. Desconto: PDF não tagged; falta previewer KDP/prova física. |
 | 10 | Rastreabilidade e limites | 9,6 | Spec R1091, testes, manifestos e este relatório registram o antes/depois; o parecer R1089 permanece como estado anterior. Desconto: não houve leitura humana externa nem verificação histórica/clínica primária. |
 
-**Média interna:** 9,46/10. **Faixa editorial:** 9,4–9,6/10, dependendo da
+**Média interna:** 9,49/10. **Faixa editorial:** 9,4–9,6/10, dependendo da
 leitura humana. Não há 10/10 certificado; a diferença para 10 é composta de
 limites de produção e de validação externa, não de defeitos factuais
 conhecidos.
@@ -80,22 +91,17 @@ conhecidos.
    aumentaram, mas 85 nós em uma página de 160 × 230 mm continuam densos. A
    lista dos mais conectados e o Índice de Fragmentos carregam a informação;
    o mapa é uma visão de conjunto, não a referência principal.
-2. **Capa e lombada.** A capa é um asset separado. A contracapa antiga ainda
-   traz o ISBN `978-65-01-23456-7` e a sinopse dos “62 anos” debaixo da terra.
-   Para KDP, é preciso redesenhar a capa completa para 423 pp, com sangria e
-   lombada, e usar o ISBN `979-8-18-917049-2`.
-3. **EPUB.** O EPUB do release é o da versão anterior. O texto corrigido não
-   foi recompilado em EPUB; o arquivo atual não deve ser anunciado como
-   equivalente ao PDF R1091.
-4. **Variante de impressão R1077.** A variante print-safe tem 422 pp e foi
-   construída sobre o texto anterior. Precisa ser regenerada a partir do miolo
-   corrigido antes de qualquer uso de impressão.
-5. **PDF não tagged.** O PDF continua sem marcação de acessibilidade
+2. **PDF não tagged.** O PDF continua sem marcação de acessibilidade
    (`Tagged: no`). PDF/UA não foi alcançado.
-6. **Validação externa.** Não houve leitura beta humana, parecer de historiador
+3. **EPUB: validação externa.** O EPUB foi regenerado com 84 seções, 107 links
+   e 13 imagens; falta rodar EPUBCheck/Ace e fazer revisão de galerada.
+4. **Capa e R1077: prova física.** A capa 422p em 300 DPI e a R1077 de 422 pp
+   existem e passaram no preflight local; falta conferência no previewer KDP e
+   prova de impressão.
+5. **Validação externa.** Não houve leitura beta humana, parecer de historiador
    ou de clínico, nem verificação de arquivo. O que existe é coerência interna
    e rastreabilidade, não prova externa.
-7. **P2 remanescente.** O envelope de Regina em `LUC-08`, o “segundo diário” em
+6. **P2 remanescente.** O envelope de Regina em `LUC-08`, o “segundo diário” em
    `LUC-Entrevista`, a contagem de páginas de `DOC-24` e a nota longa de
    `MEM-07` ainda podem ser refinados em uma próxima passada.
 
@@ -128,6 +134,12 @@ conhecidos.
   código 0.
 - PDF: 423 pp; 160 × 230 mm; fontes embutidas; texto extraível; sem
   `> **↪ Rotas:**`; sem “um dos 60 mil”; sem o ISBN errado.
+- R1077: 422 pp; 20 imagens ≥300 DPI; fontes embutidas; hash
+  `1490915c06ab5250389090d1a739135bd998629341b30a5c3b33e8502f1b5e5b`.
+- EPUB: 84 seções; 107 links; 0 quebrados; 53.175 palavras; 13 imagens; hash
+  `70e4216a81564f88cabf7b1f9ef037b43357f568f34b12f7aee3071f3899276c`.
+- Capa 422p: 351,507 × 236,35 mm; 2 imagens a 302,4 DPI; 4 fontes embutidas;
+  sem ISBN falso.
 - Grafos: `--stats` retorna 84 fragmentos, 223 rotas, 0 destinos inexistentes,
   84/84 alcançam o Epílogo, 0 ciclos que aprisionam.
 - Manifestos: `reports/r1075/revision_manifest.json` e
@@ -142,10 +154,10 @@ conhecidos.
   exumados seguem atribuídos a Daniela Arbex; não houve pesquisa primária.
 - **Não é validação clínica.** A linguagem de 1979 foi ajustada para
   verossimilhança histórica; isso não é parecer médico.
-- **Não é certificação KDP.** O miolo está corrigido, mas capa, lombada,
-  sangria e EPUB continuam pendentes.
-- **Não é a edição canônica nem a R1077.** O ciclo corrigiu a R1075; a canônica
-  e a variante de impressão não foram revalidadas.
+- **Não é certificação KDP.** O miolo, o EPUB, a R1077 e a capa 422p existem;
+  falta previewer KDP, prova física, EPUBCheck/Ace e revisão de galerada.
+- **Não é a edição canônica nem a R1077.** O ciclo corrigiu a R1075 e regenerou
+  a R1077; a canônica não foi revalidada; a R1077 não teve prova de impressão.
 - **Não é prova de qualidade literária.** O livro pode ser julgado perto do
   topo da rubrica interna e ainda assim receber uma leitura externa diferente.
   O que se pode afirmar é que os defeitos factuais e editoriais conhecidos
