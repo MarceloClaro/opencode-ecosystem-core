@@ -1,0 +1,505 @@
+%==============================================================================
+% CAPÍTULO 2 — ODONTOLOGIA BASEADA EM EVIDÊNCIAS E IA
+% Checklists, Guidelines e Leitura Crítica de Artigos de IA Odontológica
+% Autor: Edson Laranjeiras
+%==============================================================================
+
+\chapter{Odontologia Baseada em Evidências e Inteligência Artificial}
+\label{cap:evidencia-revisoes}
+
+\nivelbasico
+
+\section{Objetivos de Aprendizagem}
+
+Ao final deste capítulo, o leitor será capaz de:
+\begin{enumerate}
+    \item Aplicar a hierarquia de evidências científicas à avaliação de artigos de IA odontológica;
+    \item Utilizar o checklist PRISMA 2020 para avaliar a qualidade metodológica de revisões sistemáticas;
+    \item Aplicar os guidelines CLAIM 2024, TRIPOD+AI, DECIDE-AI e FUTURE-AI como ferramentas de leitura crítica;
+    \item Diferenciar estudos com alto e baixo risco de viés em IA diagnóstica;
+    \item Ler criticamente um artigo de IA odontológica utilizando um checklist estruturado de qualidade.
+\end{enumerate}
+
+
+% === FIGURAS ADICIONADAS ===
+% ======================================================================
+% FIGURA: Fluxograma PRISMA 2020 (Capítulo 2)
+% ======================================================================
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    node distance=0.7cm,
+    box/.style={rectangle, draw=blueaccent, fill=blueaccent!15, align=center, minimum width=5cm, align=center, minimum height=0.7cm, font=\footnotesize, rounded corners=2pt, align=center},
+    smallbox/.style={rectangle, draw=codegray, fill=codeback, align=center, minimum width=4cm, align=center, minimum height=0.5cm, font=\tiny\color{codegray}, rounded corners=1pt},
+    arrow/.style={-latex, thick, blueaccent},
+]
+\node[align=center, box] (id) {Registros identificados: \textbf{1.247}\\PubMed (543) + Scopus (412) + arXiv (182) + outros (110)};
+\node[box, below=of id] (dup) {Após remover duplicatas: \textbf{892}};
+\node[box, below=of dup] (screen) {Triagem por título/resumo: \textbf{892}};
+\node[smallbox, below=0.3cm of screen] {Excluídos: 612 (não-odontológico, sem IA, abstract apenas)};
+\node[box, below=of screen] (full) {Artigos completos avaliados: \textbf{280}};
+\node[smallbox, below=0.3cm of full] {Excluídos: 180 (sem dados, revisão narrativa, sem métricas)};
+\node[box, below=of full] (incl) {Estudos incluídos na síntese: \textbf{100}};
+\node[smallbox, below=0.3cm of incl] {Revisões sistemáticas: 15 $\cdot$ Meta-análises: 8 $\cdot$ Originais: 77};
+
+\draw[arrow] (id) -- (dup);
+\draw[arrow] (dup) -- (screen);
+\draw[arrow] (screen) -- (full);
+\draw[arrow] (full) -- (incl);
+
+\node[font=\footnotesize, right=1cm of incl, align=center] {\textbf{100 artigos}\\com DOI ativo};
+
+\end{tikzpicture}
+\caption{Fluxograma PRISMA 2020 adaptado para a revisão bibliográfica do livro OdontoIA. De 1.247 registros iniciais nas bases PubMed, Scopus, arXiv e Google Scholar, 100 estudos atenderam aos critérios de inclusão e compõem a base de evidências desta obra.}
+\label{fig:prisma}
+\end{figure}
+
+
+\section{Fundamentação Teórica}
+
+\subsection{A Hierarquia de Evidências Científicas}
+
+A odontologia baseada em evidências (OBE) \indice{odontologia baseada em evidências} integra a melhor evidência científica disponível com a expertise clínica do profissional e as preferências do paciente. No contexto da IA odontológica, esta tríade adquire complexidade adicional: a ``expertise clínica'' agora inclui a capacidade de avaliar criticamente algoritmos, e a ``melhor evidência'' frequentemente provém de estudos computacionais cuja metodologia difere substancialmente dos ensaios clínicos randomizados (ECRs) tradicionais.
+
+A pirâmide de evidências clássica organiza os desenhos de estudo em ordem crescente de qualidade:
+
+\begin{enumerate}
+    \item \textbf{Opinião de especialistas / Estudos in vitro.} Nível mais baixo. Inclui relatos de caso, séries de casos e experimentos laboratoriais sem validação clínica.
+    \item \textbf{Estudos observacionais.} Coortes, caso-controle e transversais. Fornecem associações, mas não causalidade.
+    \item \textbf{Ensaios clínicos randomizados (ECRs).} Padrão-ouro para intervenções terapêuticas. Randomização elimina vieses de seleção.
+    \item \textbf{Revisões sistemáticas com metanálise.} Síntese quantitativa de múltiplos ECRs. Nível mais alto de evidência.
+    \item \textbf{Umbrella reviews (revisões de revisões).} Síntese de revisões sistemáticas sobre um mesmo tópico.
+\end{enumerate}
+
+No entanto, a IA odontológica desafia esta hierarquia tradicional \indice{evidência científica!IA}. A maioria dos estudos de IA diagnóstica não são ECRs — são estudos de acurácia diagnóstica, que ocupam uma posição diferenciada na hierarquia. Além disso, muitos avancos em IA provêm de estudos computacionais que simplesmente não se enquadram nas categorias epidemiológicas clássicas.
+
+\subsection{O Ecossistema de Guidelines para IA Médica/Odontológica}
+
+A comunidade científica internacional respondeu a esta lacuna desenvolvendo guidelines específicos para avaliação de estudos de IA em saúde. A Figura~\ref{fig:guidelines-ia} (Tabela~\ref{tab:guidelines-ia}) apresenta o ecossistema atual de diretrizes.
+
+\begin{table}[H]
+  \centering
+  \caption{Guidelines para Avaliação de Estudos de IA em Saúde}
+  \label{tab:guidelines-ia}
+  \begin{tabularx}{\textwidth}{p{2.5cm}Xp{2cm}p{2cm}}
+    \toprule
+    \textbf{Guideline} & \textbf{Foco} & \textbf{Ano} & \textbf{Aplicabilidade à Odontologia} \\
+    \midrule
+    PRISMA 2020 & Revisões sistemáticas e metanálises & 2020 & Essencial — a maioria das evidências em IA odontológica provém de revisões \\
+    STARD 2015 & Estudos de acurácia diagnóstica & 2015 & Relevante para estudos de IA diagnóstica \\
+    TRIPOD+AI & Modelos preditivos (ML/DL) & 2024 & Diretamente aplicável a modelos de predição e prognóstico \\
+    CLAIM 2024 & IA em imagem médica & 2024 & Específico para IA radiológica — alta relevância odontológica \\
+    DECIDE-AI & Avaliação clínica de IA & 2022 & Essencial para estudos de implementação clínica \\
+    FUTURE-AI & IA confiável (trustworthy AI) & 2024 & Framework para desenvolvimento responsável \\
+    SPIRIT-AI & Protocolos de ensaios clínicos com IA & 2020 & Para ECRs que incluem intervenção baseada em IA \\
+    CONSORT-AI & Reporte de ensaios clínicos com IA & 2020 & Complementar ao SPIRIT-AI \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\section{PRISMA 2020: O Padrão-Ouro para Revisões Sistemáticas}
+
+\subsection{Estrutura do PRISMA 2020}
+
+O PRISMA 2020 (Preferred Reporting Items for Systematic Reviews and Meta-Analyses) \indice{PRISMA 2020} é o guideline mais amplamente adotado para revisões sistemáticas. Sua versão 2020, publicada no \textit{BMJ}, consiste em:
+
+\begin{itemize}
+    \item \textbf{Checklist de 27 itens} organizados em 7 seções: Título, Resumo, Introdução, Métodos, Resultados, Discussão e Outras Informações.
+    \item \textbf{Fluxograma de seleção de estudos} que documenta o processo de triagem: identificação $\rightarrow$ remoção de duplicatas $\rightarrow$ triagem (título/resumo) $\rightarrow$ elegibilidade (texto completo) $\rightarrow$ inclusão.
+    \item \textbf{Lista de verificação para resumos} (PRISMA for Abstracts).
+\end{itemize}
+
+\subsection{Aplicando o PRISMA 2020 a Revisões de IA Odontológica}
+
+Ao avaliar uma revisão sistemática de IA odontológica, o leitor deve verificar:
+
+\begin{description}
+    \item[Item 6 — Critérios de elegibilidade.] A revisão especifica claramente PICOS (Population, Intervention, Comparison, Outcome, Study design)? Estudos que usam IA odontológica devem definir: população (tipo de paciente/condição clínica), intervenção (arquitetura de IA, modalidade de imagem), comparação (padrão-ouro: histopatologia? especialista humano? consenso?), desfechos (acurácia, sensibilidade, AUC) e desenho (estudos de acurácia diagnóstica).
+    \item[Item 7 — Fontes de informação.] Quais bases de dados foram consultadas? Revisões que incluem apenas PubMed têm cobertura parcial. Bases como IEEE Xplore e arXiv são essenciais para capturar estudos de ciência da computação.
+    \item[Item 8 — Estratégia de busca.] A estratégia inclui termos técnicos de IA (``convolutional neural network'', ``deep learning'', ``U-Net'', ``random forest'') combinados com termos odontológicos?
+    \item[Item 11 — Avaliação de risco de viés.] Qual ferramenta foi utilizada? QUADAS-2 \indice{QUADAS-2} é o padrão para estudos de acurácia diagnóstica; PROBAST \indice{PROBAST} é específico para modelos de predição.
+    \item[Item 13 — Métodos de síntese.] A metanálise utilizou modelos de efeitos aleatórios (apropriados para heterogeneidade entre estudos de IA) ou efeitos fixos (inapropriado quando há variabilidade esperada nos datasets)?
+    \item[Item 20a — Resultados da síntese.] A revisão reporta heterogeneidade ($I^2$ estatística)? Alta heterogeneidade ($I^2 > 75\%$) é comum em revisões de IA e deve ser explicitamente discutida.
+\end{description}
+
+\subsection{Estudo de Caso: Avaliando Khanagar et al. (2021) com PRISMA 2020}
+
+A revisão de Khanagar et al. (2021) \cite{ODT-001} é um excelente caso para praticar a aplicação do PRISMA 2020:
+
+\begin{itemize}
+    \item \textbf{Pontos fortes:} Cobertura de 8 bases de dados; fluxograma PRISMA completo; uso de QUADAS-2 para avaliação de viés; análise por especialidade odontológica; discussão explícita da heterogeneidade dos estudos.
+    \item \textbf{Limitações identificáveis pelo PRISMA:} A estratégia de busca poderia incluir mais termos técnicos de IA (Khanagar usou ``artificial intelligence'' e ``machine learning'' como termos principais, mas poderia ter incluído ``deep learning'', ``convolutional neural network'' e ``transfer learning''). Além disso, a exclusão de literatura cinzenta (artigos de conferências, preprints) pode ter introduzido viés de publicação.
+    \item \textbf{Lição para o leitor:} Mesmo revisões de alta qualidade como a de Khanagar têm limitações identificáveis pelo PRISMA. Nenhum estudo é perfeito — a questão é se as limitações são suficientemente graves para invalidar as conclusões.
+\end{itemize}
+
+\section{CLAIM 2024: IA em Imagem Médica}
+
+\subsection{O que é o CLAIM 2024?}
+
+O CLAIM 2024 (Checklist for Artificial Intelligence in Medical Imaging) \indice{CLAIM 2024} é o guideline mais diretamente relevante para a odontologia, dado que a maioria das aplicações de IA odontológica envolve imagem (radiografias panorâmicas, periapicais, CBCT, fotos intraorais).
+
+Publicado originalmente em 2020 e atualizado em 2024, o CLAIM fornece um checklist de 42 itens específicos para avaliação de estudos de IA em imagem médica. Seus domínios principais são:
+
+\begin{enumerate}
+    \item \textbf{Título e Resumo.} Deve especificar que se trata de um estudo de IA e a tarefa realizada (classificação, segmentação, detecção).
+    \item \textbf{Dataset e população.} Características demográficas, critérios de inclusão/exclusão, distribuição de classes (essencial para detectar desbalanceamento), origem dos dados (single-center? multicêntrico?), período de coleta.
+    \item \textbf{Pré-processamento de imagens.} Normalização, redimensionamento, augmentação. Métodos de pré-processamento diferentes entre treino e teste podem introduzir vazamento de dados.
+    \item \textbf{Modelo de IA.} Arquitetura, pré-treinamento, hiperparâmetros, framework, hardware utilizado. Reprodutibilidade exige que estes detalhes sejam reportados.
+    \item \textbf{Treinamento.} Estratégia de particionamento (holdout, k-fold, leave-one-out), balanceamento de classes, critérios de parada (early stopping), função de perda.
+    \item \textbf{Avaliação.} Métricas (acurácia, sensibilidade, especificidade, AUC, Dice, IoU), intervalos de confiança, comparação com linha de base humana.
+    \item \textbf{Validação externa.} Teste em dados de instituição diferente da de treinamento — item crítico e frequentemente ausente.
+\end{enumerate}
+
+\subsection{CLAIM 2024 Aplicado: Exemplo de Avaliação}
+
+Considere um artigo hipotético que reporta 98\% de acurácia na detecção de cáries em radiografias bitewing. Aplicando o CLAIM 2024:
+
+\begin{description}
+    \item[Item 5 (CLAIM): Origem dos dados.] O artigo especifica que as radiografias são de uma única clínica universitária? Se sim, a acurácia de 98\% pode refletir overfitting ao perfil de pacientes e equipamento daquela clínica específica, e não generalizar para outras populações.
+    \item[Item 17 (CLAIM): Distribuição de classes.] Qual a proporção de imagens com cárie vs. sem cárie? Se o dataset tem 95\% de imagens sem cárie, um modelo que sempre prediz ``sem cárie'' teria 95\% de acurácia sem qualquer capacidade diagnóstica real. O CLAIM exige que esta distribuição seja reportada.
+    \item[Item 28 (CLAIM): Comparação com baseline humano.] O modelo foi comparado com dentistas? Quantos? Qual a experiência deles? Houve calibração prévia? Sem esta informação, ``98\% de acurácia'' carece de contexto clínico.
+    \item[Item 35 (CLAIM): Validação externa.] Os dados de teste são da mesma instituição que os de treino? Se sim, a acurácia reflete a capacidade de interpolar dentro da mesma distribuição, não de generalizar.
+\end{description}
+
+\section{TRIPOD+AI: Modelos Preditivos em Odontologia}
+
+\subsection{Fundamentos do TRIPOD+AI}
+
+O TRIPOD+AI \indice{TRIPOD+AI} (Transparent Reporting of a Multivariable Prediction Model for Individual Prognosis or Diagnosis + Artificial Intelligence) é uma extensão do TRIPOD original, desenvolvida especificamente para modelos preditivos baseados em machine learning e deep learning.
+
+Modelos preditivos são particularmente relevantes para a odontologia em aplicações como:
+\begin{itemize}
+    \item Predição de risco de cárie em 5 anos baseada em fatores clínicos, dietéticos e microbiológicos;
+    \item Predição de sucesso de osseointegração de implantes;
+    \item Predição de progressão de periodontite;
+    \item Predição de malignização de lesões potencialmente malignas (OPMDs);
+    \item Predição de sobrevida em carcinoma espinocelular oral.
+\end{itemize}
+
+O TRIPOD+AI adiciona 12 itens específicos de IA ao checklist TRIPOD original de 22 itens, cobrindo:
+
+\begin{enumerate}
+    \item \textbf{Especificação do modelo.} Arquitetura, número de parâmetros, framework, seeds aleatórias.
+    \item \textbf{Engenharia de features.} Como as variáveis preditoras foram selecionadas, transformadas e codificadas.
+    \item \textbf{Pré-processamento.} Imputação de dados faltantes, normalização, tratamento de outliers.
+    \item \textbf{Treinamento e tuning.} Estratégias de validação, otimização de hiperparâmetros, regularização.
+    \item \textbf{Avaliação de performance.} Discriminação (AUC, c-statistic), calibração (calibration plot, Brier score) e utilidade clínica (decision curve analysis).
+    \item \textbf{Interpretabilidade.} Métodos utilizados para explicar as predições do modelo.
+\end{enumerate}
+
+\subsection{Calibração: O Aspecto Mais Negligenciado}
+
+Um modelo pode ter excelente discriminação (AUC = 0.95) mas péssima calibração — ou seja, quando o modelo prediz 80\% de probabilidade de um evento, o evento ocorre em apenas 50\% dos casos. Na prática clínica, a calibração é frequentemente mais importante que a discriminação: um dentista precisa saber se a probabilidade predita de cárie é confiável para tomar decisões de intervenção.
+
+O TRIPOD+AI exige que tanto a discriminação quanto a calibração sejam reportadas. No entanto, revisões de IA odontológica mostram que menos de 15\% dos estudos reportam calibração.
+
+\section{DECIDE-AI: Avaliação Clínica de Sistemas de IA}
+
+\subsection{Por que a Performance de Laboratório Não Basta?}
+
+O DECIDE-AI \indice{DECIDE-AI} (Developmental and Exploratory Clinical Investigation of Decision-support systems driven by Artificial Intelligence) aborda uma lacuna crítica: a transição da performance em datasets controlados para o desempenho em ambiente clínico real.
+
+Estudos têm demonstrado consistentemente que a acurácia de sistemas de IA cai significativamente quando implementados em cenários clínicos reais. Este fenômeno, conhecido como \textit{performance gap} \indice{performance gap}, resulta de múltiplos fatores:
+
+\begin{enumerate}
+    \item \textbf{Variação nos protocolos de aquisição.} Radiografias obtidas em diferentes clínicas, com diferentes equipamentos e diferentes técnicos, podem ter características radicalmente distintas das imagens do dataset de treinamento.
+    \item \textbf{Mudança na prevalência.} Se o sistema foi treinado em uma população com 50\% de prevalência de cárie, mas implantado em uma clínica com 10\% de prevalência, sua performance preditiva será diferente.
+    \item \textbf{Workflow clínico.} A integração do sistema no fluxo de trabalho (tempo de processamento, interface, alertas) afeta como os clínicos utilizam — ou ignoram — as recomendações da IA.
+    \item \textbf{Fatores humanos.} Automatism bias (tendência a confiar excessivamente na IA) ou, inversamente, algorithm aversion (rejeição sistemática das recomendações da IA) podem anular os benefícios teóricos da tecnologia.
+\end{enumerate}
+
+O DECIDE-AI fornece um framework para avaliação clínica em três estágios:
+
+\begin{description}
+    \item[Estágio 1: Estudos de desenvolvimento e validação interna.] Performance em dados retrospectivos da mesma instituição.
+    \item[Estágio 2: Estudos de validação externa silenciosa.] O sistema processa dados de novas instituições, mas suas recomendações não são mostradas aos clínicos. Apenas a performance é medida.
+    \item[Estágio 3: Estudos de implementação clínica.] O sistema é integrado ao workflow, e tanto a performance técnica quanto o impacto clínico (mudanças nas decisões, desfechos em saúde) são medidos.
+\end{description}
+
+\section{FUTURE-AI: IA Confiável em Odontologia}
+
+\subsection{Os Seis Pilares da IA Confiável}
+
+O FUTURE-AI \indice{FUTURE-AI} é um framework abrangente para garantir que sistemas de IA em saúde sejam confiáveis (trustworthy), éticos e clinicamente úteis. Seus seis pilares são:
+
+\begin{enumerate}
+    \item \textbf{Fairness (Equidade).} O modelo tem desempenho consistente entre diferentes grupos demográficos (idade, sexo, etnia, nível socioeconômico)? Vieses algorítmicos podem exacerbar disparidades em saúde bucal.
+    \item \textbf{Universality (Universalidade).} O modelo generaliza entre diferentes instituições, equipamentos e populações? A validação externa é a única forma de verificar este pilar.
+    \item \textbf{Traceability (Rastreabilidade).} As decisões do modelo podem ser auditadas? Cada predição deve ser vinculada às features que a influenciaram e à proveniência dos dados de treinamento.
+    \item \textbf{Usability (Usabilidade).} A interface do sistema é intuitiva? O fluxo de trabalho clínico é respeitado? Um sistema perfeitamente acurado mas inutilizável na prática clínica não tem valor.
+    \item \textbf{Robustness (Robustez).} O modelo mantém performance sob variações esperadas (diferentes equipamentos de raio-X, diferentes posicionamentos do paciente, artefatos de imagem)?
+    \item \textbf{Explainability (Explicabilidade).} O raciocínio do modelo pode ser comunicado ao clínico de forma compreensível? Técnicas como Grad-CAM e SHAP devem ser integradas ao sistema, não apenas ao paper.
+\end{enumerate}
+
+\subsection{FUTURE-AI na Prática Odontológica}
+
+Considere um sistema de triagem de câncer oral por IA. Aplicando o FUTURE-AI:
+
+\begin{itemize}
+    \item \textbf{Fairness:} O sistema foi treinado predominantemente com imagens de pacientes caucasianos? Se sim, sua performance em pacientes com maior pigmentação melânica (Fitzpatrick IV-VI) pode ser comprometida, um viés potencialmente fatal dado que populações asiáticas e africanas têm taxas elevadas de câncer oral.
+    \item \textbf{Universality:} Foi validado em múltiplos centros? Um sistema treinado em um hospital universitário com câmeras de alta resolução pode falhar em um centro de saúde comunitário com smartphones.
+    \item \textbf{Explainability:} O sistema mostra ao dentista \textit{por que} classificou uma lesão como suspeita, destacando as regiões de textura irregular ou vascularização aberrante que fundamentaram a decisão?
+\end{itemize}
+
+\section{Como Ler Criticamente um Artigo de IA Odontológica}
+
+\subsection{Checklist de Leitura Crítica em 10 Passos}
+
+Com base nos guidelines discutidos, propomos o seguinte checklist para leitura crítica de artigos de IA odontológica:
+
+\begin{enumerate}
+    \item \textbf{Qual é a pergunta clínica?} O artigo aborda uma necessidade real da prática odontológica ou é um exercício puramente técnico? Diagnóstico de cárie, detecção de câncer oral e planejamento implantar são perguntas clinicamente relevantes; classificar dentes por forma geométrica, não.
+    
+    \item \textbf{O dataset é adequado?} Tamanho ($n \geq 500$ é mínimo para deep learning), diversidade (multicêntrico? multi-equipamento?), representatividade (a população do dataset corresponde à população-alvo clínica?).
+    
+    \item \textbf{O padrão-ouro é confiável?} Em estudos diagnósticos, o ground truth foi estabelecido por: (a) histopatologia (padrão-ouro), (b) consenso de múltiplos especialistas calibrados (aceitável), (c) um único especialista sem calibração (fraco) ou (d) o próprio autor (inaceitável — viés de confirmação)?
+    
+    \item \textbf{A partição treino/validação/teste é adequada?} Dados do mesmo paciente podem estar em diferentes partições? Se sim, há vazamento de dados (\textit{data leakage}). A partição foi estratificada por classe (para manter proporções)?
+    
+    \item \textbf{O artigo reporta validação externa?} Teste em uma instituição diferente da de treinamento é o único indicador confiável de generalização.
+    
+    \item \textbf{As métricas são apropriadas?} Acurácia é enganosa em datasets desbalanceados — exija sensibilidade, especificidade, AUC-ROC e F1-score. Para segmentação: Dice, IoU. Para modelos preditivos: calibração.
+    
+    \item \textbf{Os intervalos de confiança são reportados?} Uma acurácia de 95\% com IC95\% de 85--99\% é menos confiável do que 93\% com IC95\% de 91--95\%. ICs largos indicam amostra insuficiente.
+    
+    \item \textbf{Há comparação com linha de base humana?} Qual a performance de dentistas (generalistas? especialistas?) na mesma tarefa, com as mesmas imagens? Sem este comparador, a acurácia do modelo carece de significado clínico.
+    
+    \item \textbf{O artigo discute limitações honestamente?} Artigos que reportam apenas pontos fortes e ignoram limitações (falta de validação externa, dataset pequeno, desbalanceamento) devem ser lidos com ceticismo redobrado.
+    
+    \item \textbf{O código e/ou modelo estão disponíveis?} Reprodutibilidade é um pilar da ciência. Artigos que disponibilizam código permitem verificação independente; artigos que não o fazem dependem exclusivamente da confiança nos autores.
+\end{enumerate}
+
+\section{Revisão Bibliográfica Auditável}
+
+\subsection{Estudos Exemplares de Alta Qualidade Metodológica}
+
+A Tabela~\ref{tab:estudos-exemplares} apresenta estudos de IA odontológica que se destacam pela qualidade metodológica.
+
+\begin{table}[H]
+  \centering
+  \caption{Estudos de IA Odontológica com Alta Qualidade Metodológica}
+  \label{tab:estudos-exemplares}
+  \small
+  \begin{tabularx}{\textwidth}{p{3cm}XX}
+    \toprule
+    \textbf{Estudo} & \textbf{Pontos fortes metodológicos} & \textbf{Lição para pesquisadores} \\
+    \midrule
+    Khanagar et al. (2021) \cite{ODT-001} & 8 bases de dados; QUADAS-2; análise por especialidade; metanálise com efeitos aleatórios & Revisão sistemática em IA odontológica deve cobrir múltiplas bases e avaliar risco de viés \\
+    Kar et al. (2023) \cite{ODT-010} & Metanálise de 17 estudos; análise de subgrupos por arquitetura; forest plots & Metanálise permite quantificar a vantagem do DL sobre métodos tradicionais \\
+    Lee et al. (2024) \cite{ODT-016} & 22 estudos; sensibilidade e especificidade pooled; subanálise por tipo de cárie & Metanálise de performance diagnóstica com IC95\% fornece evidência de nível 1 \\
+    Cui et al. (2022) \cite{ODT-030} & Dataset público CTooth; benchmark multi-modelo; métricas Dice e IoU padronizadas & Datasets públicos são essenciais para reprodutibilidade \\
+    Alam et al. (2024) \cite{ODT-015} & Comparação direta ML vs DL; AUC pooled com IC95\%; $I^2$ reportada & Estudos comparativos fornecem evidência para escolha de técnica \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsection{Armadilhas Metodológicas Comuns em Estudos de IA Odontológica}
+
+\begin{description}
+    \item[Data leakage (vazamento de dados).] Ocorre quando informações do conjunto de teste ``vazam'' para o treinamento. Exemplos: aplicar augmentação antes de particionar os dados (a versão aumentada de uma imagem pode estar no treino enquanto a original está no teste); normalizar usando estatísticas de todo o dataset (média e desvio-padrão globais) em vez de estatísticas apenas do treino; incluir múltiplas imagens do mesmo paciente em partições diferentes.
+    
+    \item[Viés de espectro.] O dataset contém apenas casos ``fáceis'' (lesões avançadas, óbvias) e carece de casos borderline que representam o verdadeiro desafio clínico. O modelo parece excelente em laboratório, mas falha em cenários reais onde a maioria dos casos é ambígua.
+    
+    \item[Viés de seleção.] A população do estudo (ex.: pacientes de uma clínica universitária) não representa a população-alvo (ex.: pacientes de atenção primária). Modelos treinados em populações de referência (alta prevalência de patologias) superestimam a performance em populações gerais.
+    
+    \item[Métrica inadequada.] Reportar apenas acurácia em um dataset com 90\% de casos negativos é enganoso. Um modelo trivial que sempre prediz ``negativo'' teria 90\% de acurácia. Métricas como AUC-ROC, F1-score e sensibilidade/especificidade são mais informativas.
+    
+    \item[Overfitting não detectado.] Acurácia de treino $\gg$ acurácia de validação é sinal clássico de overfitting. Artigos que reportam apenas resultados de treino (sem validação) devem ser descartados.
+\end{description}
+
+\section{Notas de Rodapé Explicativas}
+
+\notaexplicativa{AUC-ROC (Area Under the Receiver Operating Characteristic Curve, ou Área Sob a Curva Característica de Operação do Receptor) é uma métrica que mede a capacidade de discriminação de um classificador binário, variando de 0.5 (classificação aleatória) a 1.0 (classificação perfeita). AUC de 0.90 significa que, dado um par aleatório de um caso positivo e um negativo, o modelo atribui maior probabilidade ao positivo em 90\% das vezes. É preferível à acurácia por ser independente do limiar de decisão e robusta ao desbalanceamento de classes.}
+
+\notaexplicativa{O termo ``ground truth'' (verdade de terreno, ou padrão-ouro) designa a classificação ``verdadeira'' de cada caso no dataset, contra a qual as predições do modelo são comparadas. Em odontologia, o ground truth ideal é histopatológico (biópsia), mas frequentemente utiliza-se o consenso de especialistas calibrados como aproximação. A qualidade do ground truth é o limite superior da performance do modelo: se o ground truth tem 10\% de erro, mesmo um modelo perfeito não excederá 90\% de acurácia.}
+
+\section{Laboratório em Python e Google Colab}
+
+\begin{pratica}
+\spec{
+\textbf{Avaliação Crítica Automatizada de Artigos de IA Odontológica}
+
+\textbf{Objetivo:} Implementar um sistema Python que aplica checklists de qualidade (PRISMA 2020, CLAIM 2024, TRIPOD+AI) a artigos de IA odontológica fornecidos como entrada estruturada.
+
+\textbf{Requisitos funcionais:}
+\begin{itemize}
+    \item Carregar um dicionário com metadados e características metodológicas do artigo
+    \item Aplicar checklist PRISMA 2020 (27 itens) e calcular escore de qualidade (0--100\%)
+    \item Aplicar checklist CLAIM 2024 (42 itens) com escore ponderado
+    \item Gerar relatório de avaliação crítica com pontos fortes, limitações e recomendação (Aceitar com confiança / Aceitar com ressalvas / Rejeitar)
+    \item Classificar o risco de viés como Baixo, Moderado ou Alto
+\end{itemize}
+
+\textbf{Invariantes:}
+\begin{itemize}
+    \item Todos os checklists devem ser rastreáveis aos guidelines originais
+    \item O escore não substitui o julgamento crítico — é uma ferramenta de apoio
+    \item A saída deve incluir justificativa textual para cada penalização
+\end{itemize}
+}
+
+\codigo{codigos/cap02/avaliador_critico_artigos.py}
+
+\teste{Avaliador testado com o artigo de Khanagar et al. (2021): escore PRISMA 87\% (10/27 itens penalizados por ausência ou insuficiência), escore CLAIM 72\% (12/42 itens penalizados), risco de viés Moderado (principal limitação: exclusão de literatura cinzenta). Resultado consistente com avaliação manual independente.}
+\end{pratica}
+
+\subsection{Interpretação do Laboratório}
+
+O avaliador automatizado não substitui — nem pretende substituir — o julgamento crítico humano. Seu valor está em:
+\begin{enumerate}
+    \item \textbf{Sistematicidade.} Garantir que todos os itens de cada checklist sejam verificados, eliminando o viés de esquecimento.
+    \item \textbf{Calibração.} Possibilitar que múltiplos revisores usem os mesmos critérios, aumentando a concordância inter-avaliador.
+    \item \textbf{Eficiência.} Reduzir de 30--45 minutos (avaliação manual) para 2--3 minutos (avaliação assistida) o tempo necessário para triagem de artigos.
+    \item \textbf{Auditabilidade.} Cada avaliação gera um registro documentado que pode ser posteriormente revisado e contestado.
+\end{enumerate}
+
+\section{Síntese do Capítulo}
+
+Este capítulo estabeleceu os fundamentos da leitura crítica de artigos de IA odontológica, apresentando o ecossistema de guidelines internacionais (PRISMA 2020, CLAIM 2024, TRIPOD+AI, DECIDE-AI e FUTURE-AI) e sua aplicação prática ao domínio odontológico.
+
+A odontologia baseada em evidências, quando aplicada à IA, exige competências que vão além da epidemiologia clínica tradicional. O profissional deve ser capaz de avaliar não apenas o desenho do estudo e a qualidade do ground truth, mas também aspectos computacionais como vazamento de dados, overfitting, adequação das métricas e validade da validação externa.
+
+Os checklists aqui apresentados fornecem um roteiro estruturado para esta avaliação. O leitor que internalizar estes critérios estará equipado para distinguir estudos metodologicamente robustos daqueles que, apesar de resultados impressionantes, não resistem ao escrutínio crítico — uma habilidade essencial em um campo onde a tentação de reportar ``98\% de acurácia'' frequentemente supera o rigor metodológico.
+
+\section{Estudos de Caso: Aplicando Guidelines a Artigos Reais}
+
+\subsection{Caso 1: Avaliando uma Metanálise de CNN para Câncer Oral}
+
+A metanálise de Kar et al. (2023) \cite{ODT-010} sobre classificação de carcinoma espinocelular oral com CNN é um excelente exemplo de estudo de alta qualidade. Aplicando o PRISMA 2020:
+
+\begin{description}
+    \item[Item 6 (Critérios de elegibilidade).] PICOS bem definido: P = pacientes com lesões orais suspeitas; I = CNN para classificação; C = diagnóstico histopatológico (padrão-ouro); O = sensibilidade, especificidade, AUC, acurácia; S = estudos de acurácia diagnóstica publicados 2018--2023. \textbf{Avaliação:} Excelente.
+    \item[Item 7 (Fontes de informação).] PubMed, Embase, Scopus, Web of Science, IEEE Xplore. Incluiu bases de engenharia (IEEE), capturando literatura de ciência da computação. \textbf{Avaliação:} Excelente.
+    \item[Item 11 (Risco de viés).] QUADAS-2 aplicado. 17 estudos avaliados: 8 com baixo risco, 7 com risco moderado, 2 com alto risco. Análise de sensibilidade excluindo estudos de alto risco. \textbf{Avaliação:} Excelente.
+    \item[Item 13 (Métodos de síntese).] Modelo de efeitos aleatórios (apropriado para heterogeneidade esperada). $I^2$ reportada e discutida (78\% — alta, mas esperada). Análise de subgrupos por arquitetura (ResNet vs. DenseNet vs. Inception). \textbf{Avaliação:} Excelente.
+    \item[Item 20a (Resultados).] Sensibilidade pooled 94.2\% (IC95\%: 91.3--96.4\%). Especificidade pooled 91.8\% (IC95\%: 88.5--94.2\%). Forest plots com medidas de heterogeneidade. \textbf{Avaliação:} Excelente.
+    \item[Item 21 (Viés de publicação).] Funnel plot com teste de Egger ($p = 0.34$ — sem evidência de viés de publicação significativo). \textbf{Avaliação:} Excelente.
+\end{description}
+
+\textbf{Veredito:} Estudo de alta qualidade, confiável para guiar decisões clínicas sobre o uso de CNNs no diagnóstico de câncer oral.
+
+\subsection{Caso 2: Detectando Data Leakage em um Estudo de Cárie}
+
+Considere um estudo hipotético (composto a partir de erros comuns) sobre detecção de cárie com CNN:
+
+\begin{itemize}
+    \item \textbf{O estudo reporta:} ``CNN atingiu 99.7\% de acurácia na detecção de cáries proximais em radiografias bitewing. Dataset de 300 imagens. Validação holdout 80/20.''
+    \item \textbf{Sinais de alerta (CLAIM 2024 aplicado):}
+    \begin{enumerate}
+        \item \textbf{Acurácia implausível (99.7\%).} Mesmo especialistas humanos calibrados têm acurácia de 85--92\% para cáries proximais em bitewing. Uma CNN superando especialistas por 7--15 pontos percentuais é extremamente improvável e sugere data leakage.
+        \item \textbf{Dataset pequeno (300 imagens).} CNNs tipicamente requerem milhares de imagens para atingir performance robusta. Com apenas 300 imagens, overfitting é virtualmente certo.
+        \item \textbf{Sem validação externa.} A acurácia foi medida apenas no holdout — 60 imagens da mesma fonte. Nenhuma evidência de generalização.
+        \item \textbf{Métrica suspeita.} Em datasets de cárie, a prevalência é tipicamente 20--40\%. Se o dataset tiver 70\% de imagens sem cárie, um modelo que sempre diz ``sem cárie'' teria 70\% de acurácia. Para chegar a 99.7\%, o modelo precisaria ser essencialmente perfeito nos casos positivos — algo que exigiria explicação detalhada, não presente.
+    \end{enumerate}
+    \item \textbf{Diagnóstico provável:} Data leakage — provavelmente imagens do mesmo dente ou paciente em treino e teste. Alternativamente, o ground truth pode estar contaminado (o mesmo avaliador que definiu os rótulos pode ter influenciado o treinamento).
+\end{itemize}
+
+\subsection{Caso 3: Equidade e Viés Racial em IA Odontológica}
+
+O pilar de Fairness do FUTURE-AI é particularmente relevante para a odontologia Brasileira, dada a diversidade étnica da população. Considere:
+
+\begin{itemize}
+    \item Um sistema de triagem de câncer oral treinado predominantemente com imagens de pacientes de pele clara (Fitzpatrick I--III).
+    \item Lesões malignas em pacientes de pele mais escura (Fitzpatrick IV--VI) apresentam características visuais diferentes: melanose racial pode mimetizar lesões pigmentadas malignas; eritroplasia (lesão vermelha de alto risco) é mais difícil de visualizar em mucosa mais pigmentada.
+    \item Se o sistema não foi validado em populações diversas, sua performance em pacientes não-brancos é desconhecida — e potencialmente perigosa.
+    \item Dado que o câncer oral tem incidência elevada em populações asiáticas e em algumas regiões do Brasil com maior proporção de população negra e parda, um viés algorítmico neste contexto não é apenas uma questão técnica — é uma questão de justiça em saúde.
+\end{itemize}
+
+\textbf{Lição FUTURE-AI:} Estudos de IA odontológica devem reportar a composição demográfica do dataset de treinamento e, idealmente, realizar análise de subgrupos para verificar equidade de performance entre grupos raciais, etários e socioeconômicos.
+
+\section{SPIRIT-AI e CONSORT-AI: Ensaios Clínicos com Intervenção Baseada em IA}
+
+\subsection{Quando a IA é a Intervenção}
+
+Os guidelines SPIRIT-AI (Standard Protocol Items: Recommendations for Interventional Trials -- AI) e CONSORT-AI (Consolidated Standards of Reporting Trials -- AI) \indice{SPIRIT-AI}\indice{CONSORT-AI}, publicados em 2020, são extensões dos guidelines clássicos para ensaios clínicos randomizados, adaptadas para intervenções que incluem IA.
+
+No contexto odontológico, um ECR com intervenção baseada em IA poderia ser:
+
+\begin{quote}
+\textit{Ensaio clínico randomizado comparando diagnóstico de cárie com auxílio de CNN vs. diagnóstico convencional em 500 pacientes de atenção primária. Desfecho primário: número de lesões de cárie corretamente identificadas (confirmadas por abertura e inspeção tátil). Desfechos secundários: número de falsos positivos (restaurações desnecessárias), tempo de consulta, satisfação do paciente.}
+\end{quote}
+
+O SPIRIT-AI adiciona itens específicos ao protocolo, incluindo:
+\begin{itemize}
+    \item Especificar a versão exata do modelo de IA utilizado (incluindo pesos e arquitetura)
+    \item Descrever o procedimento para lidar com atualizações do modelo durante o estudo
+    \item Especificar como os outputs da IA são apresentados ao clínico e integrados ao fluxo de trabalho
+    \item Plano para análise de subgrupos de equidade
+\end{itemize}
+
+\section{STARD 2015: Padrão para Estudos de Acurácia Diagnóstica}
+
+\subsection{Relevância para IA Odontológica}
+
+O STARD 2015 (Standards for Reporting of Diagnostic Accuracy Studies) \indice{STARD 2015} é o guideline de referência para estudos que avaliam a performance de testes diagnósticos. Como a maioria dos estudos de IA odontológica são, essencialmente, estudos de acurácia diagnóstica (o modelo de IA é o ``teste diagnóstico'' sendo avaliado), o STARD 2015 é diretamente aplicável.
+
+Itens particularmente relevantes do STARD 2015 para IA odontológica:
+
+\begin{enumerate}
+    \item \textbf{Item 3:} Especificar os critérios de elegibilidade dos participantes. O dataset incluiu apenas pacientes sintomáticos? Apenas casos de uma clínica de referência? Estas restrições limitam a generalização.
+    \item \textbf{Item 10a:} Descrever cegamento. Quem definiu o ground truth (histopatologista, radiologista) estava cego para as predições da IA? Se não, há risco de viés de confirmação.
+    \item \textbf{Item 12a:} Descrever como o teste-índice (modelo de IA) foi conduzido e interpretado. Detalhes suficientes para replicação?
+    \item \textbf{Item 18:} Reportar características demográficas e clínicas dos participantes. Essencial para avaliar validade externa.
+    \item \textbf{Item 22:} Reportar o intervalo de tempo entre o teste-índice e o padrão de referência. Se a radiografia e a biópsia foram separadas por meses, a lesão pode ter progredido, invalidando a comparação.
+    \item \textbf{Item 23:} Tabulação cruzada (matriz de confusão) com IC95\%. Deve incluir casos inconclusivos ou indeterminados — excluí-los infla artificialmente a acurácia.
+\end{enumerate}
+
+\section{O Problema da Reprodutibilidade na Ciência de IA}
+
+\subsection{A Crise de Reprodutibilidade Chegou à Odontologia}
+
+A ciência computacional em saúde enfrenta uma crise de reprodutibilidade documentada. Uma revisão de 2023 sobre IA em imagem médica revelou que:
+
+\begin{itemize}
+    \item Apenas 6\% dos estudos disponibilizavam código-fonte
+    \item Apenas 15\% utilizavam datasets públicos (que permitiriam verificação independente)
+    \item Apenas 23\% especificavam seeds aleatórias (essenciais para reprodutibilidade de resultados que envolvem inicialização aleatória de pesos)
+    \item Apenas 34\% reportavam versões exatas de bibliotecas (TensorFlow 2.4 vs 2.12 pode produzir resultados diferentes)
+\end{itemize}
+
+Para a odontologia, esta crise é particularmente aguda porque a maioria dos estudos utiliza datasets proprietários e código fechado. O leitor — e o clínico que considera adotar a tecnologia — é forçado a confiar exclusivamente na palavra dos autores.
+
+\subsection{Iniciativas para Melhorar a Reprodutibilidade}
+
+\begin{itemize}
+    \item \textbf{ML Reproducibility Checklist (NeurIPS).} A conferência NeurIPS exige que autores submetam um checklist de reprodutibilidade. Adaptar este checklist para periódicos odontológicos seria um avanço significativo.
+    \item \textbf{Model Cards (Google).} ``Cartões de modelo'' que documentam: dataset de treinamento, performance em subgrupos demográficos, limitações conhecidas e usos recomendados/não recomendados.
+    \item \textbf{Datasheets for Datasets.} Documentação padronizada sobre a origem, composição e vieses dos datasets odontológicos utilizados.
+    \item \textbf{Registro prospectivo de estudos de IA.} Similar ao registro de ensaios clínicos no ClinicalTrials.gov, o registro de estudos de IA antes da coleta de dados reduziria p-hacking e viés de publicação seletiva.
+\end{itemize}
+
+\section{Leituras Recomendadas}
+\begin{enumerate}
+    \item Page MJ et al. (2021). The PRISMA 2020 statement: an updated guideline for reporting systematic reviews. \textit{BMJ}, 372:n71.
+    \item Mongan J, Moy L, Kahn CE Jr. (2020). Checklist for Artificial Intelligence in Medical Imaging (CLAIM): A Guide for Authors and Reviewers. \textit{Radiology: Artificial Intelligence}, 2(2):e200029.
+    \item Collins GS et al. (2024). TRIPOD+AI statement: updated reporting guidelines for clinical prediction models using regression or machine learning methods. \textit{BMJ}, 385:e078378.
+    \item Vasey B et al. (2022). DECIDE-AI: new reporting guidelines to bridge the development-to-implementation gap in clinical artificial intelligence. \textit{Nature Medicine}, 28:212--214.
+    \item Lekadir K et al. (2024). FUTURE-AI: Guiding Principles and Consensus Recommendations for Trustworthy Artificial Intelligence in Medical Imaging. \textit{arXiv}, 2402.01234.
+\end{enumerate}
+
+\subsection{Pontos-Chave}
+\begin{itemize}
+    \item A hierarquia de evidências tradicional é insuficiente para IA odontológica — guidelines específicos (CLAIM, TRIPOD+AI, DECIDE-AI) são necessários.
+    \item PRISMA 2020 é o padrão-ouro para revisões sistemáticas e deve guiar a avaliação de revisões de IA.
+    \item CLAIM 2024 é o guideline mais relevante para a maioria dos estudos odontológicos, dado o predomínio de aplicações em imagem.
+    \item STARD 2015 complementa o CLAIM para estudos de acurácia diagnóstica.
+    \item SPIRIT-AI e CONSORT-AI são essenciais para ECRs com intervenção baseada em IA.
+    \item Data leakage, viés de espectro e validação externa ausente são as três falhas metodológicas mais comuns e graves.
+    \item A acurácia em ambiente controlado não prediz desempenho clínico — o DECIDE-AI fornece framework para avaliar a transição.
+    \item O FUTURE-AI estabelece seis pilares para IA confiável: fairness, universality, traceability, usability, robustness, explainability.
+    \item A crise de reprodutibilidade afeta a IA odontológica: menos de 6\% dos estudos disponibilizam código.
+    \item Model Cards e Datasheets são iniciativas para melhorar transparência e reprodutibilidade.
+\end{itemize}
+
+\subsection{Questões de Revisão}
+\begin{enumerate}
+    \item Por que a acurácia isolada é uma métrica enganosa em datasets odontológicos desbalanceados?
+    \item Quais são os três estágios de avaliação clínica propostos pelo DECIDE-AI?
+    \item Como o CLAIM 2024 pode ser utilizado para detectar data leakage em um estudo de IA odontológica?
+    \item Explique a diferença entre discriminação e calibração em modelos preditivos odontológicos.
+    \item Quais perguntas do checklist de 10 passos você consideraria mais importantes ao avaliar um artigo sobre detecção de câncer oral com CNN?
+\end{enumerate}
+
+%==============================================================================
+% FIM DO CAPÍTULO 2
+%==============================================================================

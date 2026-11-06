@@ -1,0 +1,145 @@
+% =============================================================================
+% CAPA COMPLETA (BROCHURA / PAPERBACK) — MOLAMBUDOS · EDIÇÃO CHINESA (ZH) · 160 x 230 mm
+% Gerada no R399. Toda a geometria é DERIVADA dos parâmetros abaixo: para
+% ajustar, mude só os \def e recompile — nenhum número está fixo no corpo.
+%
+% Por que um arquivo novo em vez de editar capa_completa.tex: aquele é o
+% projeto de CAPA DURA (case laminate, wrap de 0.591in, painéis 6.197x9.236in
+% ≈ 157x235mm, correspondendo ao trim KDP hardcover 6.14x9.21in). A KDP não
+% oferece 160x230mm em capa dura; em brochura o trim personalizado é aceito.
+% Os dois projetos coexistem — nada foi perdido.
+%
+% CONFERIR ANTES DE ENVIAR À GRÁFICA:
+%   1. \Paginas tem de ser a contagem final do miolo aprovado.
+%   2. \EspessuraPapel é a constante da KDP por tipo de impressão:
+%        0.002252 in/pág — P&B em papel branco
+%        0.0025   in/pág — P&B em papel creme
+%        0.002347 in/pág — cor (premium) em papel branco   <-- em uso
+%      O miolo tem fundo sépia em todas as páginas, logo é impressão em cor.
+%   3. Baixar o template oficial da KDP para o trim e a paginação finais e
+%      conferir a lombada contra ele. A KDP recusa capa cuja lombada não
+%      corresponda ao número de páginas.
+% =============================================================================
+
+\documentclass[12pt]{article}
+
+% --- PARÂMETROS -------------------------------------------------------------
+\def\TrimLargura{6.29921}   % 160 mm em polegadas
+\def\TrimAltura{9.05512}    % 230 mm em polegadas
+\def\Paginas{405}           % miolo main_kdp_zh_160x230mm.pdf
+\def\EspessuraPapel{0.002347}
+\def\Sangria{0.125}         % bleed KDP para brochura
+\def\MargemSegura{0.25}     % recuo mínimo do conteúdo em relação ao corte
+
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{pgf}
+
+% --- GEOMETRIA DERIVADA -----------------------------------------------------
+\pgfmathsetmacro{\Lombada}{\Paginas*\EspessuraPapel}
+\pgfmathsetmacro{\CapaLargura}{2*\Sangria + 2*\TrimLargura + \Lombada}
+\pgfmathsetmacro{\CapaAltura}{2*\Sangria + \TrimAltura}
+\pgfmathsetmacro{\ContraX}{\Sangria}
+\pgfmathsetmacro{\LombadaX}{\Sangria + \TrimLargura}
+\pgfmathsetmacro{\FrenteX}{\Sangria + \TrimLargura + \Lombada}
+\pgfmathsetmacro{\CorteTopo}{\Sangria + \TrimAltura}
+\pgfmathsetmacro{\PainelLargura}{\TrimLargura + \Sangria}
+\pgfmathsetmacro{\LombadaCentro}{\Sangria + \TrimLargura + \Lombada/2}
+% A reserva do código de barras fica no canto inferior esquerdo da quarta capa
+% e é dimensionada para COBRIR o código de barras de teste que está embutido em
+% contracapa.png (ISBN fictício 978-65-01-23456-7, que não corresponde ao ISBN
+% real desta obra). O ideal é remover aquele elemento da arte de origem; até lá,
+% esta reserva o oculta e cumpre a exigência da KDP de deixar a área livre.
+\pgfmathsetmacro{\CodigoX}{\Sangria + 0.10}
+\pgfmathsetmacro{\CodigoY}{\Sangria + 0.02}
+\def\CodigoLargura{2.15in}
+\def\CodigoAltura{0.95in}
+\pgfmathsetmacro{\CorteDireita}{\CapaLargura - \Sangria}
+\pgfmathsetmacro{\MeiaAltura}{\CapaAltura/2}
+\pgfmathsetmacro{\LogoY}{\Sangria + 0.22}
+
+\usepackage[
+  paperwidth=\CapaLargura in,
+  paperheight=\CapaAltura in,
+  margin=0in
+]{geometry}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[brazilian]{babel}
+\usepackage{ebgaramond}
+\usepackage{graphicx}
+\usepackage{xcolor}
+
+\pagestyle{empty}
+
+% --- Identidade visual (idêntica ao projeto de capa dura) --------------------
+\definecolor{fundoescuro}{HTML}{1A1410}
+\definecolor{sepiabg}{HTML}{F2E8CF}
+\definecolor{customgold}{HTML}{CBA135}
+\definecolor{sangue}{HTML}{8B0000}
+\definecolor{textwhite}{HTML}{F5F0EB}
+
+\begin{document}
+\begin{tikzpicture}[remember picture, overlay]
+% Tudo é desenhado dentro de um scope ancorado no canto inferior esquerdo da
+% PÁGINA. Sem esse shift, `overlay` faz as coordenadas partirem do ponto de
+% texto corrente — foi exatamente o que deixou capa_completa.pdf (o projeto de
+% capa dura) com todo o conteúdo empurrado para fora da página.
+\begin{scope}[shift={(current page.south west)}, x=1in, y=1in]
+
+  % 1. Fundo integral, sangrado
+  \fill[fundoescuro] (0,0) rectangle (\CapaLargura, \CapaAltura);
+
+  % 2. Quarta capa — a arte cobre o painel inteiro mais a sangria externa
+  \begin{scope}
+    \clip (0, 0) rectangle (\LombadaX, \CapaAltura);
+    \node[anchor=south west, inner sep=0pt] at (0, 0) {%
+      \includegraphics[width=\PainelLargura in, height=\CapaAltura in]{frontmatter/contracapa.png}%
+    };
+  \end{scope}
+
+  % 2b. Reserva do código de barras (KDP: 2.0 x 1.2 in, livre e clara)
+  \node[anchor=south west, fill=white, inner sep=0pt, minimum width=\CodigoLargura,
+        minimum height=\CodigoAltura] at (\CodigoX, \CodigoY) {%
+    \begin{tabular}{c}
+      {\color{black}\sffamily\bfseries\small ISBN 9798189170492}\\[0.5em]
+      {\color{black!40}\sffamily\tiny área reservada ao código de barras}
+    \end{tabular}%
+  };
+
+  % 3. Lombada
+  \fill[fundoescuro!95!black] (\LombadaX, 0) rectangle (\FrenteX, \CapaAltura);
+
+  \node[anchor=center, rotate=-90] at (\LombadaCentro, \MeiaAltura) {%
+    \begin{minipage}{7.6in}
+      \centering
+      {\color{customgold}\fontfamily{ebgaramond}\selectfont\bfseries\Large MOLAMBUDOS}
+      \hspace{0.8em}{\color{textwhite}\small\textbullet}\hspace{0.8em}
+      {\color{textwhite}\fontfamily{ebgaramond}\selectfont\itshape\small O Diário do Paciente 1.260}
+      \hspace{1.5em}
+      {\color{customgold!80}\fontfamily{ebgaramond}\selectfont\scriptsize Marcelo Dias de Carvalho Filho \& Marcelo Claro}
+    \end{minipage}%
+  };
+
+  \node[anchor=south] at (\LombadaCentro, \LogoY) {%
+    \includegraphics[width=0.42in]{frontmatter/logo-white.png}%
+  };
+
+  % 4. Capa frontal — cobre o painel mais a sangria externa
+  \begin{scope}
+    \clip (\FrenteX, 0) rectangle (\CapaLargura, \CapaAltura);
+    \node[anchor=south west, inner sep=0pt] at (\FrenteX, 0) {%
+      \includegraphics[width=\PainelLargura in, height=\CapaAltura in]{frontmatter/capa.png}%
+    };
+  \end{scope}
+
+  % 5. Guias técnicas (corte e dobras da lombada) — remover antes do envio
+  \draw[white!25, dotted, line width=0.3pt]
+    (\Sangria, \Sangria) rectangle (\CorteDireita, \CorteTopo);
+  \draw[customgold!45, dotted, line width=0.5pt] (\LombadaX, 0) -- (\LombadaX, \CapaAltura);
+  \draw[customgold!45, dotted, line width=0.5pt] (\FrenteX, 0) -- (\FrenteX, \CapaAltura);
+
+\end{scope}
+\end{tikzpicture}
+\end{document}

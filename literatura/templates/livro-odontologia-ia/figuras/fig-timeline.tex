@@ -1,0 +1,32 @@
+% ======================================================================
+% FIGURA: Linha do Tempo da IA na Odontologia (Capítulo 1)
+% ======================================================================
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    timeline/.style={thick, blueaccent},
+    event/.style={fill=blueaccent!20, draw=blueaccent, rounded corners=3pt, font=\scriptsize},
+    odonto/.style={fill=codegreen!30, draw=codegreen, rounded corners=3pt, font=\scriptsize},
+]
+% Linha principal
+\draw[timeline, -latex] (0,0) -- (16,0);
+
+% Marcas de década
+\foreach \x/\year in {0/1960, 2/1970, 4/1980, 6/1990, 8/2000, 10/2010, 12/2020, 14/2030} {
+    \draw[timeline] (\x, -0.2) -- (\x, 0.2);
+    \node[font=\tiny\color{codegray}] at (\x, -0.5) {\year};
+}
+
+% Eventos principais
+\node[odonto, above=0.3cm] at (6.5, 0) {1993: Sistema especialista\\para próteses (Hammond)};
+\node[odonto, above=0.3cm] at (7.2, 0) {1998: 1\textsuperscript{a} RNA em\\Odontologia (Brickley)};
+\node[event, above=0.3cm] at (10.8, 0) {2015: U-Net para\\segmentação (Ronneberger)};
+\node[odonto, above=0.3cm] at (12.5, 0) {2020: Schwendicke\\revisão IA+Odonto};
+\node[odonto, below=0.3cm] at (13.0, 0) {2023: Gêmeos Digitais\\Odontológicos};
+\node[odonto, below=0.3cm] at (14.0, 0) {2025: González Herrera\\análise bibliométrica};
+\node[event, fill=orangeaccent!30, draw=orangeaccent, below=0.3cm] at (14.5, 0) {2026: \textbf{OdontoIA Book}\\500 laudas};
+
+\end{tikzpicture}
+\caption{Linha do tempo da IA na Odontologia (1960--2026). As três fases evolutivas: sistemas especialistas (verde), redes neurais (azul) e era do deep learning (laranja).}
+\label{fig:timeline-ia-odonto}
+\end{figure}

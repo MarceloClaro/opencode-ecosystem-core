@@ -1,0 +1,511 @@
+% =============================================================================
+% DOSSIÊ DE ESTUDO — MOLAMBUDOS: O DIÁRIO DO PACIENTE 1.260
+% Aparato crítico. NÃO é parte da ficção e não deve ser encadernado com o miolo.
+% =============================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[brazilian]{babel}
+\usepackage{ebgaramond}
+\usepackage[margin=2.6cm]{geometry}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{sangue}{HTML}{8B0000}
+\definecolor{tinta}{HTML}{2E241A}
+\titleformat{\section}{\Large\bfseries\color{sangue}}{\thesection}{0.7em}{}
+\titleformat{\subsection}{\large\bfseries\color{tinta}}{\thesubsection}{0.7em}{}
+\setlist{itemsep=0.25em, topsep=0.35em}
+
+\newcommand{\ressalva}[1]{%
+  \par\vspace{0.5em}\noindent\fcolorbox{sangue!40}{sangue!4}{%
+  \parbox{0.965\linewidth}{\small\textbf{Ressalva metodológica.} #1}}\par\vspace{0.5em}}
+
+\title{\vspace{-1.5cm}\textbf{Molambudos --- O Diário do Paciente 1.260}\\[0.3em]
+\large Dossiê de estudo: projeto literário, técnicas, teorias, limites}
+\author{\small Aparato crítico da edição trilíngue}
+\date{\small 5 de agosto de 2026}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+\begin{abstract}
+\noindent Este dossiê descreve e analisa \textit{Molambudos --- O Diário do
+Paciente 1.260}, romance-arquivo em hipertexto impresso, publicado em três
+edições de idioma e uma trilíngue. Reúne a ficha técnica medida da obra, sua
+arquitetura formal, a linhagem literária em que se inscreve, as técnicas
+narrativas que emprega, os fundamentos teóricos que mobiliza, sua base
+histórica, e uma análise crítica que inclui limitações verificadas. É um
+aparato de estudo, não uma peça promocional: as seções \ref{sec:limites} e
+\ref{sec:validacao} existem para delimitar o que a obra \textit{não} alcançou
+e o que ainda \textit{não} foi validado externamente.
+\end{abstract}
+
+\ressalva{Todos os números deste dossiê foram medidos sobre os arquivos-fonte
+da obra em 2026-08-05, não estimados. Onde há inferência interpretativa, o
+texto diz explicitamente que infere. Onde a afirmação exigiria validação
+externa inexistente --- recepção, impacto, comparação de mérito ---, o dossiê
+se abstém em vez de estimar. Ver \S\ref{sec:validacao}.}
+
+% =============================================================================
+\section{Ficha técnica}
+
+\begin{center}\small
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Título} & Molambudos --- O Diário do Paciente 1.260 \\
+\textbf{Autoria} & Marcelo Dias de Carvalho Filho \\
+\textbf{Coautoria e ilustração} & Marcelo Claro \\
+\textbf{ISBN} & 9798189170492 \\
+\textbf{Gênero} & Romance-arquivo; horror psicológico documental \\
+\textbf{Forma} & Hipertexto impresso, 84 fragmentos, 216 rotas de leitura \\
+\textbf{Idiomas} & Português (PT-BR), inglês, chinês simplificado \\
+\textbf{Formato de impressão} & 160 $\times$ 230 mm, brochura \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.6em}
+\noindent\textbf{Extensão medida por edição}
+
+\begin{center}\small
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+\textbf{Edição} & \textbf{Miolo digital} & \textbf{Impressão 160$\times$230} & \textbf{Palavras} \\
+\midrule
+Português   & 415 p. & 435 p. & 43.730 \\
+Inglês      & 411 p. & 427 p. & 44.978 \\
+Chinês      & 387 p. & 397 p. & 70.750 caracteres \\
+Trilíngue   & 1.061 p. & 1.115 p. & --- \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\small A contagem em palavras não é comparável entre o chinês e as
+línguas ocidentais; para o chinês registra-se a contagem de caracteres, que é
+a métrica usual.
+
+% =============================================================================
+\section{O projeto literário}
+
+\textit{Molambudos} apresenta-se como um \textbf{arquivo pericial}, não como
+um romance. O leitor recebe 84 fragmentos --- memórias, laudos, cartas,
+transcrições de áudio, formulários clínicos --- reunidos por um arquivista
+anônimo em torno de um objeto: o diário de Joaquim Antônio Correia,
+registrado no Hospital Colônia de Barbacena sob o número 1.260.
+
+A proposta declarada, legível na estrutura e no paratexto, articula três
+movimentos:
+
+\begin{enumerate}
+\item \textbf{Restituir uma história soterrada.} O Colônia de Barbacena
+existiu; nele morreram, ao longo do século XX, um número de pessoas que a
+historiografia estima em dezenas de milhares, em boa parte sem qualquer
+diagnóstico psiquiátrico. A obra constrói sobre esse solo.
+
+\item \textbf{Fazer da forma um argumento.} A fragmentação não é ornamento:
+ela encena a impossibilidade de reconstituir uma vida a partir de restos
+documentais. O leitor tem de montar o caso, e a montagem é sempre parcial.
+
+\item \textbf{Implicar o leitor.} A obra recusa a posição de espectador. Uma
+família inteira de fragmentos (CONT) endereça o leitor em segunda pessoa e o
+inscreve na cadeia de transmissão como \textbf{Paciente 1.263}.
+\end{enumerate}
+
+\subsection{A cadeia de transmissão}
+
+O dispositivo central é uma fila numerada de corpos ocupados:
+
+\begin{center}\small
+\begin{tabular}{@{}cll@{}}
+\toprule
+\textbf{Nº} & \textbf{Quem} & \textbf{Onde se fixa} \\
+\midrule
+1.259 & o anterior a Joaquim & CONT-07, CONT-08 \\
+1.260 & Joaquim Antônio Correia & título da obra \\
+1.261 & Dr.\ Heitor Oliveira & DOC-16 (assina) \\
+1.262 & Dra.\ Lúcia Mendes & LUC-10, LUC-11, Epílogo \\
+\textbf{1.263} & \textbf{o leitor} & LUC-12, DOC-24, CONT-09, protocolo \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+A precisão dessa contagem é condição de funcionamento: é ela que transforma
+a última posição em ameaça pessoal em vez de metáfora vaga.
+
+% =============================================================================
+\section{Arquitetura formal}
+
+\subsection{As quatro famílias de fragmento}
+
+\begin{center}\small
+\begin{tabular}{@{}llrrr@{}}
+\toprule
+\textbf{Sigla} & \textbf{Natureza} & \textbf{N} & \textbf{Palavras} & \textbf{Média} \\
+\midrule
+MEM  & Memórias do Paciente 1.260 & 27 & 13.310 & 492 \\
+DOC  & Documentos, laudos, cartas & 27 & 15.247 & 564 \\
+LUC  & Investigação de Lúcia Mendes (2026) & 17 & 8.934 & 525 \\
+CONT & Protocolos de contaminação do leitor & 13 & 6.239 & 479 \\
+\midrule
+     & \textbf{Total} & \textbf{84} & \textbf{43.730} & 521 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+A variação de extensão é acentuada e funcional: de 130 palavras (MEM-26) a
+2.310 (DOC-03, o laudo de necropsia). Os fragmentos curtos operam como golpes;
+os longos, como imersão documental.
+
+\subsection{Cinco partes, três atos}
+
+A leitura linear percorre cinco partes --- Sertão (9), Colônia (16), Diário de
+Oliveira e Laudos (25), Investigação Lúcia (20), Contaminação (14 + Epílogo)
+--- que se agrupam em três atos: o Trauma (9 fragmentos), a
+Institucionalização (41) e o Ciclo (35).
+
+A assimetria é significativa: o ato central, que corresponde aos 62 anos de
+internação, ocupa quase metade da obra. A duração do confinamento é
+reproduzida na duração da leitura.
+
+\subsection{A rede de rotas}
+
+\begin{center}\small
+\begin{tabular}{@{}lr@{}}
+\toprule
+Fragmentos & 84 \\
+Rotas de leitura (\texttt{\textbackslash rota}) & 216 \\
+Destinos distintos & 85 (84 fragmentos + Epílogo) \\
+Fragmentos sem rota de entrada & 0 \\
+Fragmentos de que se alcança o Epílogo & 84 / 84 \\
+Ciclos (componentes fortemente conexos $>$ 1) & 6 \\
+Ciclos sem saída & 0 \\
+Nó mais referenciado & DOC-01, com 20 rotas de entrada \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Duas propriedades são deliberadas e foram verificadas: \textbf{toda rota leva
+ao Epílogo} e \textbf{nenhum ciclo aprisiona o leitor}. Os ciclos são
+preservados --- são a tese da obra, que afirma ``o ciclo recomeça'' --- mas
+nenhum é uma armadilha: de qualquer fragmento existe percurso finito até o
+fim.
+
+\ressalva{A alternativa seria um grafo acíclico estrito. Ela foi medida e
+descartada: custaria 85 das 216 rotas, precisamente as remissões
+documento$\to$memória que dão à obra o caráter de arquivo, e contradiria a
+tese do texto. A escolha é do autor e está registrada.}
+
+% =============================================================================
+\section{Linhagem literária e narrativa}
+
+\ressalva{Esta seção identifica \textbf{afinidades formais verificáveis no
+texto}. Não afirma que o autor leu as obras citadas nem que delas derivou
+conscientemente. Linhagem, aqui, é parentesco de procedimento --- o que a
+crítica pode comparar ---, não genealogia de leitura.}
+
+\subsection{O romance-arquivo e o documento forjado}
+
+A obra inscreve-se na tradição do \textit{found footage} literário, cuja
+matriz moderna é epistolar: \textit{Drácula} (1897) monta o horror a partir de
+diários, cartas e recortes, e delega ao leitor a síntese que nenhum
+personagem alcança. \textit{Molambudos} adota o mesmo princípio e o radicaliza
+ao incluir laudos periciais, cadeias de custódia e pareceres de conservação
+--- gêneros burocráticos, não íntimos.
+
+Aproxima-se também de \textit{Casa de Folhas} (Danielewski, 2000) no uso da
+página como espaço, dos aparatos de navegação e da vertigem bibliográfica.
+Difere num ponto decisivo: onde Danielewski multiplica níveis de comentário
+até o labirinto, \textit{Molambudos} mantém a cadeia curta e nominal, e a usa
+para chegar ao leitor.
+
+\subsection{A ficção hipertextual em suporte impresso}
+
+\textit{O Jogo da Amarelinha} (Cortázar, 1963) estabeleceu o precedente do
+livro com mais de uma ordem de leitura. \textit{Molambudos} vai além do
+``tabuleiro'' cortazariano ao oferecer uma rede densa (216 arestas entre 85
+nós) com propriedades garantidas por verificação automatizada --- convergência
+e ausência de aprisionamento.
+
+\ressalva{Essa verificação é uma característica de \textit{produção}, não de
+mérito literário. Ela garante que a promessa de navegação seja cumprida; não
+diz nada sobre a qualidade da prosa.}
+
+\subsection{O testemunho e a literatura de atrocidade}
+
+A obra dialoga com a tradição brasileira de denúncia do sistema manicomial,
+cujo marco jornalístico contemporâneo é \textit{Holocausto Brasileiro}
+(Daniela Arbex, 2013), citada nominalmente em DOC-19. Em registro literário,
+ecoa \textit{Vidas Secas} (Graciliano Ramos, 1938) na primeira parte: a seca,
+a marcha da família, a linguagem despojada.
+
+A questão teórica de fundo é a da \textit{representabilidade}: como narrar uma
+atrocidade sem espetacularizá-la. A escolha da obra --- horror sobrenatural
+como metáfora explícita, declarada como tal na \textit{Nota Histórica} --- é
+uma posição, e uma posição discutível, que a \S\ref{sec:critica} examina.
+
+\subsection{A segunda pessoa e o leitor implicado}
+
+O endereçamento em segunda pessoa tem precedente canônico em \textit{Se um
+viajante numa noite de inverno} (Calvino, 1979), onde é lúdico e
+metaliterário. \textit{Molambudos} o emprega em chave inversa: não para
+brincar com a leitura, mas para acusá-la. Vinte e sete dos 84 fragmentos
+mobilizam o ``você'' de forma sustentada.
+
+% =============================================================================
+\section{Técnicas narrativas}
+
+\subsection{Indução e sugestão}
+
+Os fragmentos CONT empregam procedimentos identificáveis da literatura de
+sugestão clínica:
+
+\begin{itemize}
+\item \textbf{Duplo vínculo.} CONT-03 constrói uma alternativa sem saída:
+``\textit{Se sim: o cheiro está lá. [\ldots] Se não: mentira. Você levantou.
+Todos levantam.}'' Ambas as respostas confirmam a premissa.
+
+\item \textbf{Sugestão ideomotora.} ``\textit{Mais tarde, quando você estiver
+distraído, seu dedo vai voltar à página sozinho.}''
+
+\item \textbf{Sugestão pós-hipnótica.} ``\textit{Ele vai estar no seu
+travesseiro esta noite.}''
+
+\item \textbf{Ancoragem fisiológica.} A descrição de sintomas (respiração,
+pupilas, temperatura das extremidades) tende a induzir a atenção que os
+constata.
+
+\item \textbf{Pareidolia dirigida.} ``\textit{Olhe para o canto superior
+direito do quarto [\ldots] Fixe o olho no canto escuro por 10 segundos.}''
+\end{itemize}
+
+\subsection{A inversão da ausência}
+
+A técnica mais sofisticada da obra está em CONT-04, ``Noite 4'': após três
+noites de pesadelo, nada acontece. E o texto converte o alívio em ameaça:
+``\textit{a ausência do medo era pior que o medo [\ldots] A espera é o
+verdadeiro contágio.}''
+
+O procedimento é notável porque remove o estímulo e mantém o efeito ---
+transfere a produção do horror do texto para o leitor.
+
+\subsection{O instrumento clínico como forma}
+
+DOC-09 e CONT-05 adotam a forma de escalas de autoavaliação psiquiátrica,
+com itens, alternativas e escore final. O item 15 de DOC-09 --- ``\textit{Se
+você pudesse parar de ler agora e nunca mais abrir este livro, você pararia?
+( ) Sim ( ) Não ( ) Já tentei}'' --- opera por duplo sentido: dentro da ficção
+refere-se à leitura; no registro do instrumento clínico que imita, lê-se como
+item de suicidalidade.
+
+\ressalva{Essa ambiguidade é eficaz e é também a razão pela qual a página de
+aviso inicial, com a linha do CVV, não é ornamento. Ver \S\ref{sec:etica}.}
+
+\subsection{Marginália e paratexto diegético}
+
+A obra emprega notas marginais (\texttt{margnota}) que comentam o texto de
+fora, fichas de paciente, selos de arquivo e uma página de ``Cuidado''
+integralmente diegética. O paratexto participa da ficção em vez de emoldurá-la.
+
+% =============================================================================
+\section{Fundamentos teóricos mobilizados}
+
+\ressalva{A obra não declara filiação teórica. O que segue são os quadros que
+um estudo crítico pode aplicar produtivamente, com indicação do que na obra
+os convoca --- não atribuição de intenção ao autor.}
+
+\begin{description}[style=unboxed,leftmargin=0pt]
+\item[Trauma e transmissão intergeracional.] A criatura funciona como
+figuração da dor que atravessa gerações sem ser elaborada. A própria
+\textit{Nota Histórica} explicita: ``\textit{a dor que atravessa gerações, que
+ninguém processa e que passa adiante como um contágio, é a única criatura
+verdadeira}''. É a chave de leitura que a obra oferece de si.
+
+\item[Instituição total.] O Colônia é descrito com os traços que Goffman
+identificou nas instituições totais: ruptura das barreiras entre esferas da
+vida, mortificação do eu, economia de privilégios. A ala dos silenciados
+opera como intensificação desse regime.
+
+\item[Necropolítica e vidas descartáveis.] A obra insiste em que os mortos do
+Colônia eram ``pobres, negras, epilépticas, mães solteiras, homossexuais''. O
+critério de internação é social, não clínico --- o que desloca a leitura do
+horror psiquiátrico para o horror político.
+
+\item[Arquivo, poder e lacuna.] A cadeia de custódia com lacunas documentais
+(DOC-20) e as ocorrências de arquivo (DOC-23) tematizam o arquivo como
+instância de poder e o silêncio documental como violência adicional.
+
+\item[Recepção e leitor implicado.] A obra constrói um leitor-modelo e o
+nomeia. Toda a família CONT é um dispositivo de teoria da recepção posto a
+funcionar em vez de discutido.
+\end{description}
+
+% =============================================================================
+\section{Base histórica e postura ética}
+\label{sec:etica}
+
+A \textit{Nota Histórica} da obra é metodologicamente cuidadosa, e convém
+registrá-lo porque é raro no gênero:
+
+\begin{itemize}
+\item Declara que Joaquim, a criatura e a instituição narrada são ficcionais.
+\item Distingue dois referentes históricos que a ficção poderia confundir: o
+curral de retirantes de 1915 (Alagadiço) e o de Senador Pompeu (1932--1933).
+\item Afirma explicitamente que ``\textit{os totais de internados e mortos não
+são apresentados como precisos}''.
+\item Atribui a base documental do Colônia de Barbacena a fonte nomeada
+(Arbex).
+\item Declara o horror sobrenatural como metáfora, não como tese.
+\end{itemize}
+
+O volume traz ainda página de aviso ao leitor, anterior à ficção, com
+enumeração de conteúdos sensíveis, distinção ficção/história e telefone do
+Centro de Valorização da Vida. Trata-se de paratexto: precede o quadro
+ficcional e não interrompe a imersão.
+
+% =============================================================================
+\section{Análise crítica}
+\label{sec:critica}
+
+\subsection{Onde a obra é forte}
+
+\begin{enumerate}
+\item \textbf{A forma sustenta o argumento.} A fragmentação, a assimetria
+entre as partes e a rede de rotas não são decorativas: reproduzem
+formalmente a impossibilidade de reconstituição e a duração do confinamento.
+
+\item \textbf{A implicação do leitor é executada, não anunciada.} A cadeia
+numerada termina numa posição vaga que o leitor ocupa. É um dispositivo
+simples e rigorosamente construído.
+
+\item \textbf{A honestidade documental é explícita.} A obra separa o que
+inventa do que documenta, e recusa precisão que não tem.
+
+\item \textbf{A prosa de indução é tecnicamente competente.} A inversão de
+CONT-04 é o melhor exemplo: retira o estímulo e conserva o efeito.
+\end{enumerate}
+
+\subsection{Onde a obra é discutível}
+
+\begin{enumerate}
+\item \textbf{A metáfora sobrenatural pode aliviar o horror histórico.} Ao
+dar ao sofrimento uma causa fantástica, a obra corre o risco de deslocar a
+responsabilidade política para uma entidade. A \textit{Nota Histórica}
+antecipa a objeção e a responde; se a resposta basta é questão crítica aberta,
+e é a mais produtiva que a obra oferece ao debate.
+
+\item \textbf{As notas do editor interrompem a indução.} Treze fragmentos
+trazem notas de rodapé que declaram o dispositivo como formal. Duas caem no
+pico do efeito --- CONT-03 encerra em ``\textit{Para seu corpo, ela é real}'' e
+a nota emenda informando que a contaminação é textual. A informação é
+necessária; a posição é discutível. Consolidá-las em nota única ao final
+preservaria ambas as funções.
+
+\item \textbf{A densidade de segunda pessoa pode saturar.} Vinte e sete
+fragmentos mobilizam o ``você''. Em leitura linear contínua, o procedimento
+tende ao previsível --- risco que a leitura por rotas mitiga, mas que a
+edição impressa não elimina.
+\end{enumerate}
+
+% =============================================================================
+\section{Limitações verificadas}
+\label{sec:limites}
+
+\begin{enumerate}
+\item \textbf{As três edições não são o mesmo livro.} Dez fragmentos divergem
+estruturalmente além do que a diferença de idioma explica. Os casos extremos:
+CONT-05 tem 163 linhas em PT e EN e 63 em ZH; CONT-03 tem 174 em PT contra 102
+em EN e ZH; DOC-26 tem 110 em PT e EN contra 56 em ZH. Na edição trilíngue as
+três versões aparecem lado a lado, o que torna a divergência visível ao
+leitor. \textbf{É a limitação mais séria para a pretensão de obra de
+referência internacional.}
+
+\item \textbf{A arte de capa está abaixo do padrão de impressão.} Os arquivos
+de capa e contracapa têm 1.046 $\times$ 1.504 px, o que resulta em 163 DPI no
+painel impresso; o padrão exigido é 300 DPI.
+
+\item \textbf{A contracapa traz um código de barras de teste.} O elemento
+embutido na arte declara ISBN 978-65-01-23456-7, que não é o ISBN da obra.
+
+\item \textbf{O corpus não está sob controle de versão.} Os arquivos-fonte da
+obra não têm histórico de commits: não há diff nem possibilidade de reverter
+uma edição malfeita.
+\end{enumerate}
+
+% =============================================================================
+\section{Estado de validação}
+\label{sec:validacao}
+
+Esta seção existe para impedir que o dossiê seja lido como aval.
+
+\begin{center}\small
+\begin{tabular}{@{}p{6.5cm}l@{}}
+\toprule
+\textbf{Dimensão} & \textbf{Estado} \\
+\midrule
+Integridade de compilação das 5 edições & verificada \\
+Paridade de rotas fonte $\times$ impresso & verificada (648/648) \\
+Convergência e ausência de aprisionamento & verificada \\
+Integridade dos fragmentos (SHA-256) & verificada \\
+\midrule
+Revisão por pares acadêmica & \textbf{não realizada} \\
+Revisão editorial profissional externa & \textbf{não realizada} \\
+Verificação historiográfica por especialista & \textbf{não realizada} \\
+Revisão nativa das traduções EN e ZH & \textbf{não realizada} \\
+Recepção crítica & \textbf{inexistente} (obra não publicada) \\
+Impacto & \textbf{não mensurável} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\ressalva{As quatro primeiras linhas são verificações \textbf{técnicas
+internas}: dizem que o objeto está bem construído, não que é bom. Nenhuma
+delas substitui julgamento crítico. As seis últimas não foram realizadas, e
+este dossiê não as antecipa. Qualquer afirmação de mérito, originalidade ou
+impacto que apareça em material derivado deste texto deve ser tratada como
+não fundamentada até que exista validação externa.}
+
+% =============================================================================
+\section{Agenda de pesquisa}
+
+Questões que a obra abre e que um estudo poderia enfrentar:
+
+\begin{enumerate}
+\item A metáfora sobrenatural amplia ou atenua a força testemunhal de uma
+narrativa sobre atrocidade documentada?
+\item Que efeitos a rede de rotas produz na experiência de leitura, medidos
+empiricamente, e não postulados?
+\item O endereçamento em segunda pessoa sustentado por 27 fragmentos produz
+implicação ou reatância no leitor?
+\item Como a divergência entre as três edições altera a obra recebida em cada
+língua --- e o que isso diz sobre o próprio conceito de ``edição trilíngue''?
+\item De que modo os paratextos de proteção (aviso, notas do editor)
+interagem com o dispositivo de imersão que a obra constrói?
+\end{enumerate}
+
+% =============================================================================
+\section*{Referências mencionadas}
+\addcontentsline{toc}{section}{Referências mencionadas}
+
+\begin{itemize}\small
+\item ARBEX, Daniela. \textit{Holocausto Brasileiro}. Geração Editorial, 2013.
+\item CALVINO, Italo. \textit{Se um viajante numa noite de inverno}. 1979.
+\item CORTÁZAR, Julio. \textit{O Jogo da Amarelinha}. 1963.
+\item DANIELEWSKI, Mark Z. \textit{House of Leaves}. Pantheon, 2000.
+\item GOFFMAN, Erving. \textit{Manicômios, prisões e conventos}. 1961.
+\item RAMOS, Graciliano. \textit{Vidas Secas}. 1938.
+\item STOKER, Bram. \textit{Drácula}. 1897.
+\end{itemize}
+
+\vfill
+\noindent\rule{\linewidth}{0.4pt}\\
+{\footnotesize Dossiê gerado como aparato crítico. Sobre ressalvas de métricas
+e alegações do projeto, ver \texttt{CORRIGENDUM.md}.}
+
+\end{document}

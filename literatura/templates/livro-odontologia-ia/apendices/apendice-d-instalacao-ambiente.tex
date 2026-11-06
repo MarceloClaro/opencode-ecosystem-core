@@ -1,0 +1,79 @@
+%==============================================================================
+% APÊNDICE D — INSTALAÇÃO DO AMBIENTE
+%==============================================================================
+\chapter{Instalação e Configuração do Ambiente}
+\label{apendice:instalacao}
+
+Este apêndice guia a instalação do ambiente de desenvolvimento necessário
+para executar todos os exemplos e projetos do livro.
+
+\section{Opção 1: Google Colab (Recomendado para Iniciantes)}
+
+O Google Colab oferece um ambiente Jupyter Notebook com GPU gratuita,
+dispensando instalação local.
+
+\begin{enumerate}
+  \item Acesse \url{https://colab.research.google.com/}
+  \item Faça login com sua conta Google
+  \item Selecione \texttt{Arquivo $\rightarrow$ Abrir Notebook}
+  \item Escolha um notebook do repositório do livro
+  \item Ative a GPU em \texttt{Tempo de execução $\rightarrow$ Alterar
+    tipo de tempo de execução $\rightarrow$ T4 GPU}
+\end{enumerate}
+
+\section{Opção 2: Ambiente Local (usuários avançados)}
+
+\subsection{Instalação do Python}
+
+\codigo{codigos/apendice-d-instalacao.sh}
+
+\subsection{Criação do Ambiente Virtual}
+
+Recomendamos o uso de um ambiente virtual para isolar as dependências:
+
+\begin{lstlisting}[language=bash, numbers=none]
+python3 -m venv odonto-ia-env
+source odonto-ia-env/bin/activate  # Linux/Mac
+# ou
+odonto-ia-env\Scripts\activate.bat  # Windows
+\end{lstlisting}
+
+\subsection{Instalação das Dependências}
+
+\begin{lstlisting}[language=bash, numbers=none]
+pip install -r codigos/requirements.txt
+\end{lstlisting}
+
+\section{Verificação da Instalação}
+
+Execute o seguinte script para confirmar que tudo está funcionando:
+
+\lstinputlisting{codigos/cap01/test_pratica1_1.py}
+
+\teste{Script de verificação executado com sucesso em ambiente local e Colab.}
+
+\section{Comandos Úteis}
+
+\begin{lstlisting}[language=bash, numbers=none]
+# Verificar versão do Python
+python3 --version
+
+# Listar bibliotecas instaladas
+pip list
+
+# Atualizar pip
+pip install --upgrade pip
+\end{lstlisting}
+
+\section{Solução de Problemas Comuns}
+
+\begin{description}
+  \item[Erro: TensorFlow não encontrado]
+    Execute \texttt{pip install tensorflow}
+  \item[Erro: PyTorch não encontrado]
+    Acesse \url{https://pytorch.org/} para o comando de instalação adequado
+  \item[Erro: OpenCV não encontrado]
+    Execute \texttt{pip install opencv-python}
+  \item[Erro de permissão no Linux]
+    Use \texttt{pip install --user} ou um ambiente virtual
+\end{description}

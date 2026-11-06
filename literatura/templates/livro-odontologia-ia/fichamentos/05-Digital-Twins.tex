@@ -1,0 +1,139 @@
+%==============================================================================
+% FICHAMENTO CRÍTICO — Effectiveness of Creating Digital Twins with Different
+% Digital Dentition Models and CBCT
+% Conforme NBR 6023 (referências) e NBR 10520 (citações)
+%==============================================================================
+\section{Fichamento: \citeonline{lee2023twins}}
+
+% --- 1. IDENTIFICAÇÃO ---
+\subsection{Identificação}
+\begin{tabular}{ll}
+\textbf{Título:} & Effectiveness of creating digital twins with different
+digital dentition models and cone-beam computed tomography \\
+\textbf{Autor(es):} & Lee, Joo-Hee; Lee, Hye-Lim; Park, In Young; On, Sung-Woon;
+Byun, Soo-Hwan; Yang, Byoung-Eun \\
+\textbf{Periódico:} & Scientific Reports \\
+\textbf{Ano:} & 2023 \\
+\textbf{Volume:} & 13 \\
+\textbf{Número:} & 1 \\
+\textbf{Páginas:} & 10603 \\
+\textbf{DOI:} & \url{https://doi.org/10.1038/s41598-023-37774-x} \\
+\textbf{Qualis:} & A1 (Multidisciplinar) \\
+\textbf{Tipo:} & Artigo original \\
+\end{tabular}
+
+% --- 2. OBJETIVO ---
+\subsection{Objetivo}
+Avaliar a eficácia de diferentes modelos de dentição digital (escaneamento de
+moldes de alginato em diferentes intervalos de tempo e escaneamento intraoral
+com diferentes métodos) como alternativas ao modelo de gesso para criar gêmeos
+digitais odontológicos quando combinados com CBCT, quantificando as discrepâncias
+tridimensionais em pontos de referência específicos.
+
+% --- 3. METODOLOGIA ---
+\subsection{Metodologia}
+\textbf{Desenho do estudo:} Estudo transversal comparativo intra-sujeito com 5
+grupos de gêmeos digitais por paciente. \\
+\textbf{Amostra:} 20 pacientes (9 meninos, 11 meninas, 12--18 anos) com dentição
+permanente completa, sem síndromes craniofaciais ou aparelhos ortodônticos
+metálicos. \\
+\textbf{Métricas principais:} Diferença média (em mm) entre grupos em 6 pontos
+de referência; voxel size do CBCT (0,39 mm) como limiar de aceitação clínica. \\
+\textbf{Validação:} Análise de sobreposição 3D via programa R2GATE\texttrademark;
+comparação entre 5 métodos por paciente (controle: gesso + CBCT; Grupos I--IV:
+alginato 5 min, alginato 2 h, IOS segmentado CS 3600, IOS arco completo i700).
+
+% --- 4. RESULTADOS PRINCIPAIS ---
+\subsection{Resultados Principais}
+\begin{itemize}
+  \item Todos os grupos apresentaram diferenças médias inferiores ao voxel size
+        do CBCT (0,39 mm), indicando acurácia clinicamente aceitável.
+  \item O Grupo II (alginato após 2 horas) apresentou as maiores discrepâncias
+        ($>$ 0,2 mm em todos os pontos de referência).
+  \item O Grupo I (alginato em até 5 min) e o Grupo III (IOS segmentado CS 3600)
+        apresentaram as menores diferenças (máximo de 0,053 mm).
+  \item A varredura de alginato dentro de 5 minutos mostrou-se equivalente ao
+        IOS segmentado, ambos superiores ao alginato após 2 horas.
+\end{itemize}
+
+% --- 5. LIMITAÇÕES ---
+\subsection{Limitações}
+\begin{itemize}
+  \item Amostra pequena (n = 20) e restrita a adolescentes sem anomalias
+        craniofaciais, limitando a generalização para outras faixas etárias.
+  \item O estudo utilizou apenas a arcada maxilar; não foram avaliados os
+        arcos mandibulares nem a oclusão dinâmica.
+  \item As condições de armazenamento do alginato (temperatura, umidade) foram
+        controladas em ambiente laboratorial, não refletindo necessariamente
+        as condições clínicas reais.
+\end{itemize}
+
+% --- 6. CONTRIBUIÇÃO PARA O LIVRO ---
+\subsection{Contribuição para o Livro}
+Este artigo é a referência central do Capítulo 21, que aborda gêmeos digitais
+em odontologia. O estudo fornece evidências quantitativas sobre a acurácia de
+diferentes métodos de aquisição de modelos dentários para compor gêmeos
+digitais, demonstrando que alternativas digitais (IOS e escaneamento de
+alginato) são clinicamente equivalentes ao modelo de gesso tradicional.
+O conceito de voxel size do CBCT como limiar de aceitação clínica (0,39 mm)
+é utilizado no livro para estabelecer critérios de qualidade para a fusão de
+imagens na criação de gêmeos digitais. A comparação entre diferentes métodos
+de escaneamento intraoral (segmentado vs. arco completo) orienta a escolha do
+protocolo de aquisição mais adequado.
+
+% --- 7. ANÁLISE CRÍTICA ---
+\subsection{Análise Crítica}
+\begin{itemize}
+  \item \textbf{Validade interna:} Alta -- Desenho intra-sujeito com 5 grupos
+        por paciente, controle das condições de armazenamento e uso de
+        software comercial de sobreposição.
+  \item \textbf{Validade externa:} Baixa -- Amostra pequena (n = 20), faixa
+        etária restrita (12--18 anos), apenas maxila, sem patologias ou
+        reabilitações protéticas.
+  \item \textbf{Reprodutibilidade:} Alta -- Protocolo detalhado com marcas
+        comerciais específicas (CS 3600, i700, Alphard 3030, R2GATE),
+        parâmetros de aquisição e pós-processamento claramente documentados.
+  \item \textbf{Relevância clínica:} Alta -- Orienta a escolha entre métodos
+        de aquisição digital para planejamento cirúrgico virtual, confecção
+        de guias cirúrgicos e wafers oclusais.
+  \item \textbf{Conflito de interesses:} Não -- Os autores declararam ausência de
+        conflitos.
+  \item \textbf{Viés identificado:} Viés de seleção -- Amostra de conveniência
+        com pacientes sem restaurações metálicas ou aparelhos ortodônticos,
+        condição que não reflete a maioria dos pacientes que necessitam de
+        gêmeos digitais.
+\end{itemize}
+
+% --- 8. CITAÇÕES RELEVANTES ---
+\subsection{Citações Relevantes}
+\begin{citacao}
+``The mean differences in all groups were less than the 0.39 mm CBCT voxel
+size. Although there may be slight differences in accuracy between groups,
+all were clinically acceptable.'' (p. 8).
+\end{citacao}
+
+% --- 9. MAPEAMENTO SDD ---
+\subsection{Mapeamento SDD}
+\textbf{Problema:} Gêmeos digitais odontológicos dependem de fusão precisa entre
+CBCT e modelos dentários; o modelo de gesso tem limitações logísticas e
+alternativas digitais precisam ser validadas. \\
+\textbf{Entrada:} Imagens CBCT (DICOM, voxel 0,39 mm) + modelos dentários
+digitais (STL) de 5 origens: gesso, alginato 5 min, alginato 2 h, IOS
+segmentado CS 3600, IOS arco completo i700. \\
+\textbf{Saída:} Gêmeo digital fusionado com diferenças quantificadas em 6
+pontos de referência por grupo, em milímetros. \\
+\textbf{Critérios:} Diferença média $<$ voxel size do CBCT (0,39 mm);
+discrepância máxima $\leq$ 0,2 mm para métodos alternativos viáveis;
+equivalência estatística entre método alternativo e controle (gesso). \\
+\textbf{Confiança:} 0,72 -- Estudo meticuloso, mas com amostra pequena e
+restrita que limita a generalização dos achados para a prática clínica
+heterogênea.
+
+% --- 10. REFERÊNCIA ABNT ---
+\subsection{Referência ABNT}
+\begin{verbatim}
+LEE, Joo-Hee et al. Effectiveness of creating digital twins with different
+digital dentition models and cone-beam computed tomography. Scientific
+Reports, London, v. 13, n. 1, p. 10603, 2023. DOI:
+10.1038/s41598-023-37774-x.
+\end{verbatim}

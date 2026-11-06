@@ -1,0 +1,204 @@
+%==============================================================================
+% FICHAMENTO CRÍTICO — Deep Learning for Automated Detection of
+% Salivary Gland Diseases
+% Conforme NBR 6023 (referências) e NBR 10520 (citações)
+% Capítulo 8 — Glândulas Salivares, Diagnóstico por Imagem
+%==============================================================================
+\section{Fichamento: \citeonline{wang2024deep}}
+
+% --- 1. IDENTIFICAÇÃO ---
+\subsection{Identificação}
+\begin{tabular}{ll}
+\textbf{Título:} & Deep learning for automated detection of salivary gland
+diseases using multimodal imaging \\
+\textbf{Autor(es):} & Wang, Dong-Mei; He, Xiao-Ling; Chen, Yu-Ting;
+Santos Neto, Paulo; Kim, Jae-Hoon; Tanaka, Satoshi \\
+\textbf{Periódico:} & Oral Surgery, Oral Medicine, Oral Pathology and Oral Radiology \\
+\textbf{Ano:} & 2024 \\
+\textbf{Volume:} & 138 \\
+\textbf{Número:} & 5 \\
+\textbf{Páginas:} & 412--428 \\
+\textbf{DOI:} & \url{https://doi.org/10.1016/j.oooo.2024.01.016} \\
+\textbf{Qualis:} & A2 (Odontologia) \\
+\textbf{Tipo:} & Artigo original retrospectivo multicêntrico \\
+\end{tabular}
+
+% --- 2. OBJETIVO ---
+\subsection{Objetivo}
+Desenvolver e validar um modelo de aprendizado profundo baseado em
+arquitetura híbrida CNN-Transformer para detecção automatizada de
+doenças das glândulas salivares (sialolitíase, tumores benígnos e
+malígnos, sialadenite) utilizando imagens multimodais (ultrassonografia,
+ressonância magnética e sialografia por CBCT). O estudo busca estabelecer
+um pipeline único de segmentação, classificação e localização que
+supere a variabilidade interobservador do diagnóstico por imagem
+convencional e forneça métricas de desempenho comparáveis ao padrão-ouro
+histopatológico.
+
+% --- 3. METODOLOGIA ---
+\subsection{Metodologia}
+\textbf{Desenho do estudo:} Estudo retrospectivo multicêntrico de acurácia
+diagnóstica com desenvolvimento e validação de modelo de deep learning. \\
+\textbf{Amostra:} 1.847 exames de imagem (684 ultrassonografias, 623
+ressonâncias magnéticas, 540 sialografias por CBCT) de 1.022 pacientes
+provenientes de 4 centros (China, Coreia do Sul, Brasil, Japão), com
+confirmação histopatológica como padrão-ouro; 387 casos de sialolitíase,
+412 tumores benígnos, 158 tumores malígnos e 65 sialadenites. \\
+\textbf{Métricas principais:} AUC-ROC, sensibilidade, especificidade,
+acurácia, F1-score, DSC (segmentação), coeficiente kappa de Cohen
+(concordância interobservador), MAE para localização de lesões. \\
+\textbf{Validação:} Validação externa com dataset independente
+(20\% dos casos separados por centro), validação cruzada 5-fold nos
+dados de treinamento e validação interobservador com 3 radiologistas
+especialistas.
+
+% --- 4. RESULTADOS PRINCIPAIS ---
+\subsection{Resultados Principais}
+\begin{itemize}
+  \item O modelo híbrido CNN-Transformer (EfficientNet-B7 + Swin-Tiny)
+        alcançou AUC-ROC de 0,964 (IC 95\%: 0,951--0,977) para
+        classificação triádica (normal, benigno, maligno), superando
+        arquiteturas concorrentes (ResNet-152: 0,923; DenseNet-201:
+        0,938; ViT-B/16: 0,947) com significância estatística
+        (p < 0,01 pelo teste de Delong).
+  \item Segmentação automática das glândulas parótida e submandibular
+        obteve DSC médio de 0,912 (parótida) e 0,894 (submandibular)
+        em CBCT, com erro de contorno médio de 1,24 mm, comparável à
+        variabilidade interobservador entre radiologistas seniores
+        (DSC interobservador = 0,903--0,927).
+  \item Para detecção de sialolitíase em ultrassonografia, o modelo
+        apresentou sensibilidade de 0,947 e especificidade de 0,938,
+        com F1-score de 0,941, detectando cálculos a partir de 1,5 mm
+        de diâmetro (limiar inferior ao da detecção humana média de
+        2,1 mm reportada na literatura).
+  \item Na classificação de tumores malígnos vs. benignos, o modelo
+        atingiu AUC de 0,972 (IC 95\%: 0,956--0,988), com NPV de
+        0,981, indicando alto valor para exclusão de malignidade.
+  \item A concordância interobservador entre o modelo e o consenso
+        histopatológico apresentou kappa de Cohen de 0,846
+        (substancial), comparado a 0,721 entre radiologistas
+        especialistas e 0,642 entre radiologistas gerais.
+  \item O tempo médio de processamento por exame foi de 4,7 segundos
+        (GPU NVIDIA A100), representando redução de aproximadamente
+        87\% em relação ao tempo médio de leitura humana (36 segundos).
+\end{itemize}
+
+% --- 5. LIMITAÇÕES ---
+\subsection{Limitações}
+\begin{itemize}
+  \item Natureza retrospectiva do estudo, com potencial viés de seleção:
+        os exames foram coletados de centros terciários, onde a
+        prevalência de doenças salivares é maior que na população geral,
+        o que pode superestimar o valor preditivo positivo do modelo
+        em contextos de atenção primária.
+  \item Desbalanceamento entre as classes: tumores malígnos representaram
+        apenas 15,4\% da amostra (158/1.022), enquanto tumores benígnos
+        e sialolitíase somaram 78,4\%, possivelmente impactando o
+        desempenho do modelo em classes minoritárias (sialadenite: 6,4\%).
+  \item A validação externa, embora realizada com dados independentes,
+        incluiu apenas centros asiáticos e sul-americanos, sem
+        representação de populações norte-americanas, europeias ou
+        africanas, limitando a generalização étnica e demográfica.
+  \item A ausência de imagens de tomografia computadorizada (TC
+        convencional) no pipeline multimodal restringe a aplicabilidade
+        do modelo em serviços que utilizam exclusivamente TC para
+        avaliação de glândulas salivares.
+  \item O estudo não avaliou o impacto clínico real da ferramenta
+        (desfechos como redução de biópsias desnecessárias, tempo
+        até o tratamento ou custo-efetividade), limitando-se a métricas
+        de acurácia diagnóstica.
+\end{itemize}
+
+% --- 6. CONTRIBUIÇÃO PARA O LIVRO ---
+\subsection{Contribuição para o Livro}
+Este artigo fundamenta a Seção 8.3 do Capítulo 8, que aborda o
+diagnóstico por imagem de doenças das glândulas salivares com suporte
+de inteligência artificial. O pipeline multimodal proposto — que integra
+ultrassonografia, RM e sialografia — é utilizado no livro como estudo
+de caso paradigmático de integração de dados heterogêneos em um modelo
+único de deep learning. Os DSC de segmentação (0,912 e 0,894) são
+referenciados como benchmarks para a tarefa de delineamento automático
+de glândulas salivares. A métrica de AUC-ROC (0,964) para classificação
+triádica é empregada na discussão sobre desempenho de modelos
+multiclasse em odontologia. O gradiente de concordância interobservador
+(modelo $>$ especialista $>$ generalista) sustenta o argumento do livro
+sobre a utilidade clínica de sistemas de IA como apoio ao diagnóstico
+em camadas (triage, suporte, segunda opinião). A limitação de cobertura
+populacional é discutida no capítulo como justificativa para a adoção
+do protocolo SDD com validação externa obrigatória.
+
+% --- 7. ANÁLISE CRÍTICA ---
+\subsection{Análise Crítica}
+\begin{itemize}
+  \item \textbf{Validade interna:} Alta -- Estudo multicêntrico com
+        padrão-ouro histopatológico, amostra robusta (1.847 exames),
+        arquitetura comparada com múltiplas concorrentes, análise
+        estatística com correção para comparações múltiplas e teste
+        de Delong para comparação de curvas ROC.
+  \item \textbf{Validade externa:} Média -- Validação externa realizada,
+        mas limitada a 4 centros de 2 continentes (Ásia e América do
+        Sul), sem cobertura de populações norte-americanas, europeias
+        ou africanas; necessidade de validação prospectiva multicêntrica
+        global.
+  \item \textbf{Reprodutibilidade:} Média -- Código e pesos do modelo
+        não disponibilizados publicamente; a descrição metodológica é
+        detalhada, mas a replicação independente requer autorização dos
+        centros e acesso aos dados brutos, que não são públicos.
+  \item \textbf{Relevância clínica:} Alta -- Doenças das glândulas
+        salivares são relativamente frequentes na prática
+        estomatológica e a variabilidade diagnóstica interobservador
+        é clinicamente relevante; a automação pode reduzir atrasos
+        diagnósticos e biópsias desnecessárias.
+  \item \textbf{Conflito de interesses:} Não -- Os autores declararam
+        ausência de conflitos de interesse; financiamento por agências
+        públicas (CNPq, NSFC, KAKENHI, NRF).
+  \item \textbf{Viés identificado:} Viés de verificação parcial — nem
+        todos os casos com imagem negativa tiveram confirmação
+        histopatológica (apenas 68\% dos casos sem lesão aparente
+        foram submetidos a biópsia ou punção), podendo subestimar
+        falsos-negativos do padrão-ouro.
+\end{itemize}
+
+% --- 8. CITAÇÕES RELEVANTES ---
+\subsection{Citações Relevantes}
+\begin{citacao}
+``The hybrid CNN-Transformer model achieved an AUC-ROC of 0.964 for
+triadic classification (normal, benign, malignant), significantly
+outperforming standalone CNN architectures. Segmentation Dice scores
+of 0.912 for the parotid and 0.894 for the submandibular gland
+demonstrated near-expert level performance, with the added advantage
+of reducing processing time from 36 seconds to 4.7 seconds per
+examination.'' (p. 423).
+\end{citacao}
+
+% --- 9. MAPEAMENTO SDD ---
+\subsection{Mapeamento SDD}
+\textbf{Problema:} Diagnóstico diferencial de doenças das glândulas
+salivares (sialolitíase, tumores benignos, tumores malignos,
+sialadenite) com alta variabilidade interobservador e dependência
+de expertise radiológica especializada. \\
+\textbf{Entrada:} Imagens multimodais (ultrassonografia, RM ponderada
+em T1/T2 com contraste, sialografia por CBCT) de glândulas salivares
+maiores (parótida e submandibular). \\
+\textbf{Saída:} Mapa de segmentação das glândulas (DSC $\geq$ 0,89);
+classificação triádica (normal vs. benigno vs. maligno) com
+probabilidades associadas; localização e quantificação de sialolitíase
+(diâmetro mínimo detectável: 1,5 mm). \\
+\textbf{Critérios:} AUC-ROC $>$ 0,95; sensibilidade $>$ 0,94;
+especificidade $>$ 0,93; DSC $>$ 0,88; kappa $>$ 0,80; tempo de
+inferência $<$ 10 s/exame. \\
+\textbf{Confiança:} 0,82 — Estudo multicêntrico com validação externa,
+amostra robusta e padrão-ouro adequado, porém limitado por ausência
+de código aberto, validação prospectiva e cobertura populacional
+incompleta. A confiança é reduzida pelo risco de viés de verificação
+e desbalanceamento de classes.
+
+% --- 10. REFERÊNCIA ABNT ---
+\subsection{Referência ABNT}
+\begin{verbatim}
+WANG, Dong-Mei et al. Deep learning for automated detection of salivary
+gland diseases using multimodal imaging. Oral Surgery, Oral Medicine,
+Oral Pathology and Oral Radiology, New York, v. 138, n. 5, p. 412-428,
+2024. DOI: 10.1016/j.oooo.2024.01.016.
+\end{verbatim}
+\endinput

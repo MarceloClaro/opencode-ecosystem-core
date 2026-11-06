@@ -1,0 +1,586 @@
+%==============================================================================
+% CAPÍTULO 12 — SDD: DESENVOLVIMENTO ORIENTADO POR ESPECIFICAÇÃO
+% PARTE III — Engenharia de Software Odontológico com SDD e TDD
+%==============================================================================
+\chapter{SDD: Desenvolvimento Orientado por Especificação}
+\label{cap:sdd-metodologia}
+\niveltres
+
+Este capítulo inaugura a Parte~III do livro, dedicada à engenharia de
+software odontológico com metodologias formais de especificação e teste.
+Aqui, estabelecemos o alicerce conceitual e prático do
+\textit{Specification-Driven Development} (SDD) — a disciplina de nunca
+implementar sem antes especificar. Em um domínio onde erros de software
+podem significar diagnósticos equivocados com consequências clínicas
+graves, a especificação formal não é luxo acadêmico: é exigência
+ética e profissional.
+
+\section{O que é Specification-Driven Development?}
+
+O \textit{Specification-Driven Development} (SDD) é uma metodologia de
+desenvolvimento de software que estabelece que \textbf{toda implementação
+deve ser precedida por uma especificação formal verificável}. Diferentemente
+do desenvolvimento \textit{ad hoc} — em que o programador ``sai codando''
+— o SDD impõe um contrato explícito entre a intenção do desenvolvedor e
+o comportamento do sistema.
+
+\indice{Specification-Driven Development}
+
+A origem intelectual do SDD remonta à engenharia de software formal da
+década de 1980, quando \citeonline{beck2003test} já argumentavam que
+especificações escritas antes do código reduzem defeitos em até 60\%.
+No entanto, o SDD moderno distingue-se por três características:
+
+\begin{enumerate}
+  \item \textbf{Especificações executáveis}: não são documentos estáticos,
+    mas artefatos que podem ser validados automaticamente contra a
+    implementação.
+  \item \textbf{Critérios de aceitação mensuráveis}: cada especificação
+    contém thresholds numéricos verificáveis (ex.: ``acurácia $>$ 0,88'').
+  \item \textbf{Rastreabilidade bidirecional}: é possível navegar da
+    especificação ao código e do código à especificação.
+\end{enumerate}
+
+\notaexplicativa{O termo \textit{specification-driven} não deve ser confundido
+com \textit{specification-based testing}, que é uma técnica de caixa-preta.
+O SDD é uma metodologia completa de desenvolvimento, enquanto
+specification-based testing é apenas uma das técnicas de teste que podem
+ser usadas dentro do SDD.}
+
+\subsection{SDD, TDD e BDD: um triângulo complementar}
+
+É comum que o leitor, ao ouvir falar de ``especificação antes do código'',
+pense imediatamente em TDD (\textit{Test-Driven Development}) ou BDD
+(\textit{Behavior-Driven Development}). A Tabela~\ref{tab:sdd-tdd-bdd}
+esclarece as diferenças e complementaridades.
+
+\begin{table}[H]
+  \centering
+  \caption{Comparação entre SDD, TDD e BDD.}
+  \label{tab:sdd-tdd-bdd}
+  \begin{tabularx}{\textwidth}{lXXX}
+    \toprule
+    \textbf{Aspecto} & \textbf{SDD} & \textbf{TDD} & \textbf{BDD} \\
+    \midrule
+    Foco & Especificação formal & Teste automatizado & Comportamento \\
+    Artefato principal & Documento de spec & Caso de teste & Cenário Gherkin \\
+    Quem escreve & Arquiteto / Especialista & Desenvolvedor & QA / Product Owner \\
+    Verificabilidade & Automática (SpecVerifier) & Automática (pytest) & Automática (Cucumber) \\
+    Nível de abstração & Sistema/função & Unidade/integração & Funcionalidade \\
+    Exemplo odonto & ``accuracy $>$ 0.88'' & ``assert acc $>$ 0.88'' & ``Dado uma radiografia...'' \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+Na prática, as três metodologias se complementam: o SDD define \textbf{o quê}
+deve ser construído; o TDD garante \textbf{como} verificar; o BDD traduz
+\textbf{para quem}. Neste livro, adotamos SDD como metodologia-mãe, com
+TDD como prática de verificação contínua.
+
+
+% === FIGURAS ADICIONADAS (OdontoIA Dark) ===
+% ======================================================================
+% FIGURA: Pipeline SDD+TDD Odontológico (Capítulo 12)
+% ======================================================================
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    node distance=1.2cm and 2.5cm,
+    box/.style={rectangle, draw=blueaccent, fill=blueaccent!15, align=center, minimum width=2.8cm, align=center, minimum height=0.9cm, font=\footnotesize, rounded corners=3pt, align=center},
+    testbox/.style={rectangle, draw=codegreen, fill=codegreen!15, align=center, minimum width=2.8cm, align=center, minimum height=0.9cm, font=\footnotesize, rounded corners=3pt, align=center},
+    arrow/.style={-latex, thick},
+]
+% Fase 1: SDD
+\node[align=center, box, fill=blueaccent!25] (spec) {\textbf{ESPECIFICAR}\\Problema clínico\\Entrada/Saída\\Critérios aceitação};
+\node[align=center, box, right=of spec] (data) {Preparar\\Dados\\Anotar\\Validar};
+
+% Fase 2: TDD
+\node[align=center, testbox, below=of spec] (red) {\textbf{RED}\\Escrever teste\\Ver falhar};
+\node[align=center, box, right=of red] (green) {\textbf{GREEN}\\Implementar\\mínimo código};
+\node[align=center, testbox, right=of green] (refactor) {\textbf{REFACTOR}\\Otimizar\\Documentar};
+
+% Fase 3: Verificar
+\node[align=center, box, fill=orangeaccent!20, below=of red] (validate) {Validar\\Métricas clínicas\\Sens/Espec $\ge 0.85$};
+\node[align=center, box, fill=orangeaccent!20, right=of validate] (deploy) {Publicar\\Modelo + Testes\\DOI + Dataset};
+
+% Setas
+\draw[arrow] (spec) -- (data);
+\draw[arrow] (spec) -- (red);
+\draw[arrow] (data) -- (green);
+\draw[arrow] (red) -- (green) node[midway, above, font=\tiny] {falha};
+\draw[arrow] (green) -- (refactor) node[midway, above, font=\tiny] {passa};
+\draw[arrow] (refactor) -- (validate);
+\draw[arrow] (validate) -- (deploy);
+
+% Ciclo
+\draw[arrow, bend left=40, dashed, gray] (refactor.north) to (red.north) node[midway, above, font=\tiny\color{codegray}] {ciclo};
+
+\node[font=\small\bfseries, above=0.5cm of spec] {SDD + TDD Odontológico};
+
+\end{tikzpicture}
+\caption{Pipeline de desenvolvimento orientado por especificação (SDD) e testes (TDD) para modelos de IA odontológica. O ciclo RED$\rightarrow$GREEN$\rightarrow$REFACTOR garante que cada função clínica seja testada antes da implementação, reduzindo erros em diagnóstico automatizado.}
+\label{fig:sdd-tdd-pipeline}
+\end{figure}
+
+
+\section{Por que SDD na Odontologia?}
+
+A Odontologia é um domínio de \textbf{segurança crítica} (\textit{safety-critical})
+no sentido de que erros de software podem causar danos a pacientes. Um falso
+negativo em um detector de cáries pode atrasar o tratamento; um falso positivo
+em um classificador de lesões pode gerar biópsias desnecessárias.
+
+\indice{segurança clínica} \indice{software safety-critical}
+
+\citacaoativa{doi-1016-j-jdent-2021-103830}{10.1016/j.jdent.2021.103830}{%
+  ``A implementação clínica de sistemas de IA em Odontologia requer
+  protocolos rigorosos de validação, especificação formal de requisitos
+  clínicos e testes de desempenho em cenários realísticos antes de
+  qualquer uso assistencial.''}
+
+Este trecho, extraído de Schwendicke et al.\ (2021), sintetiza a
+motivação central para o SDD odontológico. Vejamos os argumentos
+específicos:
+
+\subsection{Segurança clínica como requisito não negociável}
+
+Na aviação civil, o padrão DO-178C exige rastreabilidade completa entre
+requisitos e código para sistemas críticos de voo. Na Odontologia, ainda
+não temos um equivalente regulatório — o que torna ainda \textbf{mais}
+importante que o desenvolvedor adote voluntariamente práticas rigorosas.
+
+A Tabela~\ref{tab:safety-comparison} compara domínios \textit{safety-critical}.
+
+\begin{table}[H]
+  \centering
+  \caption{Comparação de níveis de criticidade entre domínios.}
+  \label{tab:safety-comparison}
+  \begin{tabularx}{\textwidth}{lccX}
+    \toprule
+    \textbf{Domínio} & \textbf{Criticidade} & \textbf{Padrão} & \textbf{Consequência de falha} \\
+    \midrule
+    Aviação & Nível A (catastrófico) & DO-178C & Perda de vidas \\
+    Medicina (geral) & Nível B-C (grave) & ISO 13485 / IEC 62304 & Lesão ao paciente \\
+    Odontologia IA & Nível B-C (grave) & Não regulado (ainda) & Diagnóstico incorreto \\
+    Software empresarial & Nível D-E (menor) & ISO 9001 & Perda financeira \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\destaque{O software odontológico com IA opera em um vácuo regulatório.
+Enquanto a ANVISA e o FDA discutem frameworks para \textit{SaMD}
+(Software as Medical Device), o desenvolvedor responsável deve adotar
+SDD e TDD como autocertificação de qualidade.}
+
+\subsection{Reprodutibilidade como exigência científica}
+
+A crise de reprodutibilidade na ciência — amplamente documentada por
+\citeonline{baker2016reproducibility} na \textit{Nature} — afeta também
+a IA odontológica. Sem especificações formais, dois grupos de pesquisa
+podem implementar ``o mesmo'' classificador de cáries e obter resultados
+completamente diferentes, simplesmente porque interpretaram diferentemente
+o que significa ``pré-processar uma radiografia''.
+
+\citacaoativa{baker2016reproducibility}{10.1038/533452a}{%
+  ``Mais de 70\% dos pesquisadores já tentaram e falharam em reproduzir
+  experimentos de outros cientistas, e mais da metade falhou em reproduzir
+  seus próprios experimentos.''}
+
+O SDD resolve isso ao tornar \textbf{explícito} o que estava implícito:
+o contrato de entrada/saída de cada função, os critérios de aceitação
+numéricos e as invariantes do sistema.
+
+\subsection{Rastreabilidade para auditoria e regulamentação}
+
+Quando (não \textit{se}, mas \textit{quando}) a ANVISA e o FDA
+estabelecerem requisitos para \textit{SaMD} odontológico, sistemas
+desenvolvidos com SDD terão vantagem competitiva: cada decisão de
+implementação estará vinculada a uma especificação rastreável, cada
+especificação a um requisito clínico, cada requisito a uma evidência
+científica.
+
+\section{Escrevendo Especificações: Problema, Entrada, Saída, Critérios}
+
+Uma especificação SDD bem formada possui \textbf{quatro componentes
+obrigatórios}:
+
+\begin{enumerate}
+  \item \textbf{Problema} (\texttt{problem}): descrição clara do problema
+    odontológico que a função resolve.
+  \item \textbf{Entrada} (\texttt{input}): tipo, forma e domínio dos
+    dados de entrada.
+  \item \textbf{Saída} (\texttt{output}): tipo, forma e semântica dos
+    dados de saída.
+  \item \textbf{Critérios de aceitação} (\texttt{criteria}): lista de
+    condições verificáveis, preferencialmente com thresholds numéricos.
+\end{enumerate}
+
+\subsection{Anatomia de uma boa especificação}
+
+Considere o seguinte exemplo \textbf{ruim} de especificação:
+
+\begin{mdframed}[linecolor=corTesteFalha, linewidth=2pt, backgroundcolor=corTesteFalha!5]
+  \textbf{Especificação VAGA (ruim):} \\
+  \textit{``A função deve detectar cáries em imagens com boa acurácia.''}
+\end{mdframed}
+
+Esta especificação falha em todos os quatro componentes: o problema é
+genérico, a entrada não está tipada, a saída é ambígua e não há critério
+verificável.
+
+Agora, a versão \textbf{correta}:
+
+\begin{mdframed}[linecolor=corTesteSucesso, linewidth=2pt, backgroundcolor=corTesteSucesso!5]
+  \textbf{Especificação PRECISA (boa):} \\
+  \textbf{Problema:} Detectar cáries proximais (ICDAS $\geq$ 2) em radiografias
+  bitewing digitais de dentes posteriores permanentes. \\
+  \textbf{Entrada:} \texttt{ndarray (224, 224) uint8} — radiografia bitewing
+  recortada e normalizada. \\
+  \textbf{Saída:} \texttt{dict\{"has\_caries": bool, "confidence": float, "icdas\_score": int\}} \\
+  \textbf{Critérios:} accuracy $>$ 0,88; sensitivity $>$ 0,85; specificity $>$ 0,85;
+  inference\_time $<$ 200ms.
+\end{mdframed}
+
+\notaexplicativa{O tipo \texttt{ndarray} refere-se a um \texttt{numpy.ndarray},
+o formato padrão de representação de imagens no ecossistema Python científico.
+O sufixo \texttt{uint8} indica inteiros sem sinal de 8 bits (valores 0--255).}
+
+\subsection{Critérios de aceitação clinicamente significativos}
+
+Os critérios de aceitação em SDD odontológico não são métricas arbitrárias:
+cada uma tem significado clínico direto. A Tabela~\ref{tab:criterios-clinicos}
+mapeia métricas de machine learning para implicações clínicas.
+
+\begin{table}[H]
+  \centering
+  \caption{Mapeamento de critérios de aceitação para significado clínico.}
+  \label{tab:criterios-clinicos}
+  \begin{tabularx}{\textwidth}{lXl}
+    \toprule
+    \textbf{Métrica} & \textbf{Significado clínico} & \textbf{Threshold típico} \\
+    \midrule
+    Accuracy & Proporção geral de acertos diagnósticos & $>$ 0,88 \\
+    Sensitivity & Capacidade de detectar doença quando presente & $>$ 0,85 \\
+    Specificity & Capacidade de confirmar ausência de doença & $>$ 0,85 \\
+    PPV (Precision) & Probabilidade de doença dado teste positivo & $>$ 0,80 \\
+    NPV & Probabilidade de saúde dado teste negativo & $>$ 0,90 \\
+    AUC-ROC & Capacidade discriminativa global & $>$ 0,90 \\
+    Dice (seg.) & Sobreposição entre segmentação predita e real & $>$ 0,80 \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\teste{Todos os critérios da Tabela~\ref{tab:criterios-clinicos} são
+verificáveis automaticamente via \texttt{odontoia.metrics} e integráveis
+ao pipeline de CI/CD.}
+
+\section{O Ciclo SDD: Spec $\rightarrow$ Implement $\rightarrow$ Verify $\rightarrow$ Deploy}
+
+O ciclo de desenvolvimento SDD é iterativo e composto por quatro fases
+distintas, como ilustrado na Figura~\ref{fig:sdd-cycle}.
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[
+    node distance=2.5cm,
+    box/.style={rectangle, draw=corPrimaria, fill=corPrimaria!5, text width=3.5cm, align=center, align=center, minimum height=2cm, rounded corners=4pt},
+    arrow/.style={->, >=stealth, thick, corSecundaria},
+  ]
+    \node[align=center, box] (spec) {\textbf{1. SPEC}\\\footnotesize Escrever especificação\\\footnotesize formal com critérios};
+    \node[align=center, box, right=of spec] (impl) {\textbf{2. IMPLEMENT}\\\footnotesize Implementar função\\\footnotesize seguindo a spec};
+    \node[align=center, box, below=of impl] (verify) {\textbf{3. VERIFY}\\\footnotesize SpecVerifier + testes\\\footnotesize automatizados};
+    \node[align=center, box, below=of spec] (deploy) {\textbf{4. DEPLOY}\\\footnotesize Integrar, documentar\\\footnotesize e publicar};
+
+    \draw[arrow] (spec) -- (impl);
+    \draw[arrow] (impl) -- (verify);
+    \draw[arrow] (verify) -- (deploy);
+    \draw[arrow, dashed, corDestaque] (deploy) -- (spec) node[midway, left, corDestaque] {\footnotesize refinamento};
+  \end{tikzpicture}
+  \caption{Ciclo de desenvolvimento SDD em quatro fases.}
+  \label{fig:sdd-cycle}
+\end{figure}
+
+\subsection{Fase 1 — SPEC: Especificação}
+
+A fase de especificação é a mais importante do ciclo: \textbf{se a
+especificação estiver errada, todo o resto estará errado}. Nesta fase:
+
+\begin{itemize}
+  \item O especialista de domínio (cirurgião-dentista) define o problema
+    clínico e os critérios de aceitação clinicamente significativos.
+  \item O engenheiro de software traduz esses requisitos para tipos,
+    contratos e thresholds numéricos.
+  \item A especificação é registrada via decorador \texttt{@spec}.
+\end{itemize}
+
+\subsection{Fase 2 — IMPLEMENT: Implementação}
+
+Com a especificação aprovada, o desenvolvedor implementa a função.
+\textbf{Nenhuma linha de código é escrita antes que a especificação
+esteja aprovada}. A implementação deve:
+
+\begin{itemize}
+  \item Respeitar o contrato de tipos definido na especificação.
+  \item Incluir docstring explicativa (verificada pelo SpecVerifier).
+  \item Ser a implementação \textbf{mínima} que satisfaz os critérios
+    (princípio YAGNI: \textit{You Ain't Gonna Need It}).
+\end{itemize}
+
+\subsection{Fase 3 — VERIFY: Verificação}
+
+A verificação é automatizada pelo \texttt{SpecVerifier} e pelos testes
+TDD (Capítulo~13). O \texttt{SpecVerifier} verifica:
+
+\begin{enumerate}
+  \item Se a função possui especificação registrada.
+  \item Se os tipos de entrada e saída são compatíveis.
+  \item Se a docstring está presente.
+  \item Se os critérios são sintaticamente válidos.
+\end{enumerate}
+
+\subsection{Fase 4 — DEPLOY: Publicação}
+
+Após verificação bem-sucedida, o código é integrado ao repositório,
+documentado e publicado. A especificação viaja junto com o código como
+metadado, permitindo auditoria futura.
+
+\section{Templates de Especificação para Problemas Odontológicos}
+
+Para acelerar o processo de especificação, o pacote \texttt{odontoia}
+oferece templates pré-configurados para as categorias mais comuns de
+problemas odontológicos.
+
+\subsection{Template para Classificação}
+
+\spec{{
+\textbf{Template: Classificação Odontológica} \\
+\textbf{Problema:} Classificar [tipo de imagem] em [N] categorias clínicas. \\
+\textbf{Entrada:} \texttt{ndarray (H, W[, C])} — [descrição da imagem]. \\
+\textbf{Saída:} \texttt{dict\{"class": str/int, "probabilities": ndarray, "confidence": float\}} \\
+\textbf{Critérios:}
+\begin{itemize}
+  \item accuracy $>$ [0.85--0.95]
+  \item sensitivity $>$ [0.80--0.92]
+  \item specificity $>$ [0.80--0.92]
+\end{itemize}
+}
+}
+
+\subsection{Template para Segmentação}
+
+\spec{{
+\textbf{Template: Segmentação Odontológica} \\
+\textbf{Problema:} Segmentar [estrutura anatômica] em [tipo de imagem]. \\
+\textbf{Entrada:} \texttt{ndarray (H, W) uint8} — [descrição da imagem]. \\
+\textbf{Saída:} \texttt{ndarray (H, W) int32} — máscara de segmentação. \\
+\textbf{Critérios:}
+\begin{itemize}
+  \item dice\_score $>$ [0.75--0.90]
+  \item iou $>$ [0.65--0.85]
+  \item hausdorff\_95 $<$ [10--25] mm
+\end{itemize}
+}
+}
+
+\subsection{Template para Detecção}
+
+\spec{{
+\textbf{Template: Detecção Odontológica} \\
+\textbf{Problema:} Detectar [condição clínica] em [tipo de imagem]. \\
+\textbf{Entrada:} \texttt{ndarray (H, W) uint8} — [descrição da imagem]. \\
+\textbf{Saída:} \texttt{list[dict]} — lista de detecções, cada uma com
+\texttt{\{"bbox": (x,y,w,h), "confidence": float, "class": str\}}. \\
+\textbf{Critérios:}
+\begin{itemize}
+  \item mAP@0.5 $>$ [0.70--0.85]
+  \item recall $>$ [0.80--0.90]
+  \item precision $>$ [0.75--0.88]
+\end{itemize}
+}
+}
+
+\section{Exemplos Completos de Especificação}
+
+\subsection{Exemplo 1: Detector de Cáries (Classificação)}
+
+\spec{
+  \textbf{Sistema:} \texttt{detect\_caries\_bitewing} \\
+  \textbf{Problema:} Detectar lesões cariosas proximais em radiografias
+  bitewing digitais de dentes posteriores permanentes. A detecção segue
+  o sistema ICDAS (International Caries Detection and Assessment System),
+  classificando em escores de 0 (hígido) a 6 (cavidade extensa). \\
+  \textbf{Entrada:} \texttt{ndarray (224, 224) uint8} — radiografia
+  bitewing recortada na região interproximal, com equalização CLAHE
+  aplicada e normalizada para intervalo [0, 255]. \\
+  \textbf{Saída:} \texttt{dict} contendo:
+  \begin{itemize}
+    \item \texttt{"icdas\_score"}: int $\in$ [0, 6] — escore ICDAS predito
+    \item \texttt{"has\_caries"}: bool — True se ICDAS $\geq$ 2
+    \item \texttt{"confidence"}: float $\in$ [0, 1] — confiança da predição
+    \item \texttt{"probabilities"}: ndarray (7,) — probabilidades por classe
+  \end{itemize}
+  \textbf{Critérios de aceitação:}
+  \begin{itemize}
+    \item accuracy $>$ 0,88
+    \item sensitivity $>$ 0,85 (para ICDAS $\geq$ 2)
+    \item specificity $>$ 0,85
+    \item $\kappa$ de Cohen $>$ 0,80
+    \item AUC-ROC $>$ 0,92
+    \item tempo de inferência $<$ 150 ms (em CPU)
+  \end{itemize}
+}
+
+\teste{Especificação aprovada pelo SpecVerifier. Campos obrigatórios
+preenchidos, critérios numéricos verificáveis, tipos documentados.}
+
+\subsection{Exemplo 2: Classificador de Lesões Bucais}
+
+\spec{
+  \textbf{Sistema:} \texttt{classify\_oral\_lesion} \\
+  \textbf{Problema:} Classificar imagens intraorais de lesões de mucosa
+  em 5 categorias clínicas: saudável, leucoplasia, líquen plano oral,
+  carcinoma espinocelular (CEC) e úlcera aftosa. \\
+  \textbf{Entrada:} \texttt{ndarray (224, 224, 3) uint8} — foto clínica
+  intraoral RGB com iluminação padronizada e fundo removido. \\
+  \textbf{Saída:} \texttt{dict} contendo:
+  \begin{itemize}
+    \item \texttt{"class"}: str — nome da classe predita
+    \item \texttt{"probabilities"}: dict — \{classe: probabilidade\}
+    \item \texttt{"heatmap"}: ndarray (224, 224) — mapa Grad-CAM
+  \end{itemize}
+  \textbf{Critérios de aceitação:}
+  \begin{itemize}
+    \item accuracy $>$ 0,90
+    \item sensitivity $>$ 0,87 (para classes patológicas)
+    \item specificity $>$ 0,87
+    \item soma das probabilidades = 1,0 $\pm$ 1e-6
+    \item AUC $\geq$ 0,93 para classe CEC (a mais crítica)
+  \end{itemize}
+}
+
+\subsection{Exemplo 3: Segmentador de Dentes}
+
+\spec{
+  \textbf{Sistema:} \texttt{segment\_teeth\_panoramic} \\
+  \textbf{Problema:} Segmentar dentes individuais em radiografias
+  panorâmicas digitais, atribuindo a cada pixel um identificador de
+  dente (1--32, conforme notação FDI) ou 0 para \textit{background}. \\
+  \textbf{Entrada:} \texttt{ndarray (512, 512) uint8} — radiografia
+  panorâmica em escala de cinza, redimensionada mantendo proporção. \\
+  \textbf{Saída:} \texttt{ndarray (512, 512) int32} — máscara de
+  segmentação com valores 0 (fundo) a 32 (dentes). \\
+  \textbf{Critérios de aceitação:}
+  \begin{itemize}
+    \item Dice score $>$ 0,85 (média sobre 32 classes)
+    \item IoU (Jaccard) $>$ 0,78
+    \item Precisão $>$ 0,88
+    \item Revocação $>$ 0,82
+    \item Distância de Hausdorff (95º percentil) $<$ 12 mm
+  \end{itemize}
+}
+
+\teste{Verificação do SpecVerifier: 3/3 especificações aprovadas.
+Critérios formalmente parseados e verificáveis.}
+
+\section{Usando o Decorator \texttt{@spec} do Pacote OdontoIA}
+
+O coração do SDD no ecossistema OdontoIA é o decorador \texttt{@spec},
+implementado no módulo \texttt{odontoia.sdd.spec}. Este decorador anexa
+metadados de especificação a qualquer função Python, registrando-os em
+um registro global consultável.
+
+\begin{pratica}{Decorando funções odontológicas com @spec}
+  Objetivo: Aplicar o decorador \texttt{@spec} a três funções
+  representativas de problemas odontológicos reais e inspecionar
+  as especificações registradas.
+\end{pratica}
+
+\codigo{codigos/cap12/spec_caries_detector.py}
+
+\subsection{Anatomia do @spec}
+
+O decorador aceita cinco parâmetros:
+
+\begin{description}
+  \item[\texttt{problem}] (str, obrigatório): descrição do problema
+    odontológico em linguagem natural.
+  \item[\texttt{input}] (str, obrigatório): especificação do tipo e
+    forma da entrada, preferencialmente com tipos NumPy/PyTorch.
+  \item[\texttt{output}] (str, obrigatório): especificação do tipo e
+    semântica da saída.
+  \item[\texttt{criteria}] (List[str], obrigatório): lista de critérios
+    de aceitação, preferencialmente com operadores relacionais
+    (\texttt{>}, \texttt{<}, \texttt{>=}, \texttt{<=}, \texttt{==}).
+  \item[\texttt{category}] (str, opcional): categoria para agrupamento
+    (\texttt{"classificacao"}, \texttt{"segmentacao"},
+    \texttt{"deteccao"}, \texttt{"preprocessamento"}).
+\end{description}
+
+\subsection{Recuperando e Validando Especificações}
+
+Uma vez registrada, a especificação pode ser recuperada e validada:
+
+\begin{itemize}
+  \item \texttt{get\_spec(func)} — retorna o dicionário de especificação
+    associado à função, ou \texttt{None} se não especificada.
+  \item \texttt{validate\_spec(func)} — valida se todos os campos
+    obrigatórios estão presentes e se os critérios são bem formados.
+  \item \texttt{list\_specs(category=None)} — lista todas as funções
+    registradas, opcionalmente filtradas por categoria.
+\end{itemize}
+
+\subsection{SpecVerifier: Verificação Automatizada}
+
+O módulo \texttt{odontoia.sdd.validator} fornece a classe
+\texttt{SpecVerifier}, que executa verificação programática:
+
+\begin{itemize}
+  \item \texttt{SpecVerifier(strict\_mode=False)} — instancia o
+    verificador; \texttt{strict\_mode=True} levanta exceção na
+    primeira falha.
+  \item \texttt{verify(func, *args, test\_output=None)} — executa a
+    função com os argumentos fornecidos e valida contra a especificação.
+  \item \texttt{summary()} — retorna um resumo de todas as verificações
+    realizadas (total, aprovadas, reprovadas, taxa de sucesso).
+\end{itemize}
+
+\teste{Ao executar \texttt{SpecVerifier().verify(detect\_caries\_bitewing)},
+a especificação é validada com sucesso: campos obrigatórios presentes,
+critérios parseáveis, função documentada.}
+
+\testefalha{Ao executar \texttt{SpecVerifier(strict\_mode=True).verify(func\_sem\_spec)},
+o SpecVerifier levanta \texttt{SpecError}: ``Função não possui especificação @spec''.}
+
+\section{Síntese do Capítulo}
+
+Neste capítulo, estabelecemos os fundamentos do Desenvolvimento Orientado
+por Especificação (SDD) aplicado à Odontologia. Os principais pontos
+a reter são:
+
+\begin{itemize}
+  \item \textbf{SDD é a disciplina de especificar antes de implementar},
+    garantindo que cada função tenha um contrato formal verificável.
+
+  \item \textbf{A Odontologia é um domínio \textit{safety-critical}}:
+    erros de software podem causar danos reais a pacientes, tornando o
+    SDD uma exigência ética, não apenas técnica.
+
+  \item \textbf{Uma boa especificação tem 4 componentes}: problema,
+    entrada, saída e critérios de aceitação verificáveis — todos
+    explícitos e tipados.
+
+  \item \textbf{O ciclo SDD tem 4 fases}: Spec $\rightarrow$ Implement
+    $\rightarrow$ Verify $\rightarrow$ Deploy, com refinamento contínuo.
+
+  \item \textbf{O pacote \texttt{odontoia.sdd}} fornece o decorador
+    \texttt{@spec} e o verificador \texttt{SpecVerifier}, automatizando
+    todo o processo.
+
+  \item \textbf{Templates de especificação} aceleram o trabalho para
+    classificação, segmentação e detecção — as três tarefas mais comuns
+    em IA odontológica.
+\end{itemize}
+
+No próximo capítulo, integraremos o SDD com o TDD (\textit{Test-Driven
+Development}), completando o ciclo de qualidade: especificar o que fazer
+(SDD) e testar se foi feito corretamente (TDD).

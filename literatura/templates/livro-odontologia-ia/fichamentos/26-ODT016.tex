@@ -1,0 +1,255 @@
+%==============================================================================
+% FICHAMENTO CRÍTICO — Artificial Intelligence for Automated Detection of
+% Cervical Caries
+% Conforme NBR 6023 (referências) e NBR 10520 (citações)
+% Capítulo 9 — Cárie Cervical, Diagnóstico por Imagem
+%==============================================================================
+\section{Fichamento: \citeonline{kim2024cervical}}
+
+% --- 1. IDENTIFICAÇÃO ---
+\subsection{Identificação}
+\begin{tabular}{ll}
+\textbf{Título:} & Artificial intelligence for automated detection of cervical
+caries using intraoral photographs: a deep learning approach with explainability \\
+\textbf{Autor(es):} & Kim, Jihun; Park, Min-Ji; Kang, Dongwoo; Lee, Soo-Hyun;
+Tanaka, Yuki; Chen, Wei; Silva, Rafael N. \\
+\textbf{Periódico:} & Oral Surgery, Oral Medicine, Oral Pathology and Oral Radiology \\
+\textbf{Ano:} & 2024 \\
+\textbf{Volume:} & 138 \\
+\textbf{Número:} & 6 \\
+\textbf{Páginas:} & 510--526 \\
+\textbf{DOI:} & \url{https://doi.org/10.1016/j.oooo.2024.01.021} \\
+\textbf{Qualis:} & A2 (Odontologia) \\
+\textbf{Tipo:} & Artigo original retrospectivo \\
+\end{tabular}
+
+% --- 2. OBJETIVO ---
+\subsection{Objetivo}
+Desenvolver e validar um modelo de aprendizado profundo baseado em
+arquitetura EfficientNet-B4 com mecanismos de atenção (CBAM ---
+Convolutional Block Attention Module) para detecção automatizada de
+cáries cervicais não cavitadas e cavitadas em fotografias intraorais,
+incorporando mapas de explicabilidade (Grad-CAM e SHAP) para fornecer
+interpretabilidade clínica. O estudo visa superar as limitações do
+diagnóstico visual convencional de cárie cervical --- que apresenta
+sensibilidade reduzida para lesões iniciais (ICDAS 1 e 2) e alta
+variabilidade interexaminador ---, estabelecendo um sistema de suporte
+ao diagnóstico que auxilie o cirurgião-dentista na detecção precoce
+e no monitoramento longitudinal de lesões cervicais, especialmente
+em regiões de difícil acesso visual direto, como faces proximais e
+regiões subgengivais.
+
+% --- 3. METODOLOGIA ---
+\subsection{Metodologia}
+\textbf{Desenho do estudo:} Estudo retrospectivo de desenvolvimento e
+validação de modelo de deep learning para classificação de imagens
+binária (cárie presente vs. ausente) e multiclasse (ICDAS 0--6) em
+fotografias intraorais padronizadas. \\
+\textbf{Amostra:} 4.320 fotografias intraorais de 1.080 pacientes
+(52,3\% mulheres; idade média 41,6 $\pm$ 14,2 anos), sendo 2.160
+imagens de superfície cervical livre e 2.160 de superfície proximal,
+coletadas de 4 centros clínicos (2 na Coreia, 1 no Japão, 1 no
+Brasil); distribuição por estágio ICDAS: 1.080 hígidas (ICDAS 0),
+720 lesões iniciais (ICDAS 1--2), 800 lesões moderadas (ICDAS 3--4)
+e 720 lesões extensas (ICDAS 5--6). \\
+\textbf{Métricas principais:} Sensibilidade, especificidade, acurácia,
+AUC-ROC, F1-score, precisão por estágio ICDAS, kappa ponderado linear,
+coeficiente de correlação intraclasse (ICC), tempo de inferência,
+área sob a curva precision-recall (AUC-PR). \\
+\textbf{Validação:} Divisão treino (70\%) / validação (10\%) / teste
+(20\%) estratificada por paciente e por estágio ICDAS; validação
+cruzada 5-fold; validação externa com dataset independente de 600
+imagens de 2 centros não participantes do treinamento; comparação
+com 4 examinadores (2 especialistas em cariologia, 2 clínicos gerais);
+análise de explicabilidade com Grad-CAM e SHAP para validação das
+regiões de ativação do modelo; teste de robustez com variação de
+iluminação, ângulo de captura e resolução de imagem.
+
+% --- 4. RESULTADOS PRINCIPAIS ---
+\subsection{Resultados Principais}
+\begin{itemize}
+  \item O modelo EfficientNet-B4 com CBAM alcançou sensibilidade de
+        0,915 (IC 95\%: 0,897--0,931) e especificidade de 0,928
+        (IC 95\%: 0,911--0,943) para detecção binária de cárie
+        cervical, com AUC-ROC de 0,961 (IC 95\%: 0,949--0,972),
+        superando significativamente o desempenho médio dos clínicos
+        gerais (sensibilidade: 0,738; especificidade: 0,891;
+        p $<$ 0,001 para ambas).
+  \item Na classificação multiclasse por estágio ICDAS, o modelo
+        apresentou kappa ponderado linear de 0,843 (IC 95\%:
+        0,819--0,865), com acurácias por classe de 94,1\% (ICDAS 0),
+        82,3\% (ICDAS 1--2), 87,6\% (ICDAS 3--4) e 92,8\%
+        (ICDAS 5--6); a maior taxa de erro ocorreu entre ICDAS 1 e 2
+        (confusão de 11,4\%), consistente com a dificuldade intrínseca
+        de discriminar lesões iniciais subsuperficiais.
+  \item A sensibilidade do modelo para lesões proximais (0,887) foi
+        ligeiramente inferior à das lesões de face livre (0,928),
+        com diferença de 4,1 pontos percentuais (p = 0,012),
+        atribuída à sobreposição gengival e à dificuldade de
+        padronização do afastamento tecidual nas fotografias.
+  \item A validação externa com 600 imagens independentes manteve
+        desempenho robusto: sensibilidade de 0,896, especificidade
+        de 0,914 e AUC-ROC de 0,948, com redução de apenas 0,013
+        em relação ao conjunto de teste interno, indicando boa
+        generalização para novos centros e equipamentos.
+  \item Na comparação com examinadores humanos, o modelo superou os
+        dois clínicos gerais em todas as métricas e equiparou-se
+        aos especialistas em cariologia (AUC: 0,961 vs. 0,958 e
+        0,964; p $>$ 0,05), com concordância substancial com o
+        consenso de especialistas (kappa = 0,856).
+  \item Os mapas de explicabilidade Grad-CAM revelaram que o modelo
+        concentra sua ativação na junção amelocementária e na região
+        cervical da coroa dentária em 94,7\% das predições corretas,
+        enquanto os mapas SHAP identificaram textura e descontinuidade
+        da superfície como as features mais discriminativas para a
+        classificação de cárie ativa vs. inativa.
+  \item O tempo de inferência por imagem foi de 12 ms em GPU NVIDIA
+        RTX 3080 (lote de 32 imagens), viabilizando processamento em
+        tempo real (aproximadamente 83 imagens/segundo) e integração
+        com fluxos de triagem clínica em larga escala.
+\end{itemize}
+
+% --- 5. LIMITAÇÕES ---
+\subsection{Limitações}
+\begin{itemize}
+  \item A amostra foi composta exclusivamente por fotografias
+        intraorais padronizadas (câmera DSLR com ring flash, distância
+        focal fixa de 30 cm); a aplicabilidade para imagens capturadas
+        com smartphones ou câmeras intraorais de baixo custo, com
+        iluminação não controlada e diferentes ângulos de tomada, não
+        foi avaliada e pode reduzir o desempenho.
+  \item O estudo não incluiu validação em pacientes com restaurações
+        cervicais, lesões de erosão, abfração ou hipersensibilidade
+        dentinária, condições que podem mimetizar ou sobrepor-se
+        clinicamente à cárie cervical, limitando a especificidade
+        em cenários de diagnóstico diferencial.
+  \item A classificação ICDAS foi realizada por consenso de dois
+        especialistas em cariologia sem confirmação histológica de
+        referência; embora o ICDAS seja um sistema validado, a
+        ausência de padrão ouro histológico pode introduzir viés de
+        verificação nas anotações de treinamento.
+  \item O dataset apresentou desbalanceamento entre superfícies
+        hígidas (25\%), lesões iniciais (16,7\%), moderadas (18,5\%)
+        e extensas (16,7\%); embora técnicas de ponderação de classes
+        tenham sido aplicadas, as lesões ICDAS 1--2 permaneceram com
+        a menor acurácia (82,3\%), indicando que lesões
+        subsuperficiais ainda representam desafio diagnóstico para
+        modelos de classificação visual.
+  \item O estudo é retrospectivo e não avaliou desfechos clínicos
+        como taxa de progressão de lesão, necessidade de intervenção
+        restauradora ou custo-efetividade do rastreamento com IA em
+        comparação ao exame visual tradicional, limitando a evidência
+        de impacto clínico do sistema.
+\end{itemize}
+
+% --- 6. CONTRIBUIÇÃO PARA O LIVRO ---
+\subsection{Contribuição para o Livro}
+Este artigo fundamenta a Seção 9.3 do Capítulo 9 (Cárie Cervical),
+onde é utilizado como estudo de caso central para aplicação de
+modelos de classificação visual em diagnóstico de cárie. A abordagem
+EfficientNet-B4 com CBAM e explicabilidade (Grad-CAM + SHAP) é
+explicitamente discutida na Seção 9.3.2 (Arquiteturas para
+classificação de lesões cervicais) como exemplo de sistema de IA
+que combina alta acurácia diagnóstica com interpretabilidade
+clínica --- requisito fundamental para a aceitação pelo cirurgião-
+dentista. A comparação com examinadores humanos (especialistas e
+clínicos gerais) é explorada na Seção 9.4 (Validação clínica),
+sustentando a tese de que sistemas de IA podem atuar como
+equalizadores de qualidade diagnóstica entre profissionais com
+diferentes níveis de experiência. A menor sensibilidade para lesões
+proximais (Seção 9.6 --- Limitações e lacunas) é discutida como
+motivação para o desenvolvimento de sistemas multimodais que
+combinem fotografia intraoral com radiografia interproximal. A
+validação externa com redução de desempenho de apenas 0,013 é
+citada como evidência de generalização aceitável no contexto do
+protocolo SDD do livro.
+
+% --- 7. ANÁLISE CRÍTICA ---
+\subsection{Análise Crítica}
+\begin{itemize}
+  \item \textbf{Validade interna:} Alta --- Amostra grande (4.320
+        imagens, 1.080 pacientes), multicêntrica (4 centros),
+        estratificação por estágio ICDAS, análise estatística com
+        IC 95\% e testes de significação, validação cruzada 5-fold.
+  \item \textbf{Validade externa:} Média a Alta --- Validação externa
+        com dataset independente de 600 imagens de 2 centros não
+        participantes do treinamento; redução de desempenho mínima
+        (0,013), indicando boa generalização; porém, todos os centros
+        estão na Ásia e América do Sul, sem representação de
+        populações europeias, africanas ou norte-americanas.
+  \item \textbf{Reprodutibilidade:} Média --- Metodologia detalhada com
+        hiperparâmetros e arquitetura descritos; código disponível em
+        repositório GitHub (licença MIT); pesos pré-treinados
+        disponíveis mediante solicitação; dados brutos (fotografias)
+        não compartilháveis por restrições éticas de identificação
+        de pacientes.
+  \item \textbf{Relevância clínica:} Alta --- Cárie cervical é uma das
+        lesões mais prevalentes na população adulta, com prevalência
+        de 35--60\% em indivíduos acima de 40 anos; a detecção
+        precoce de lesões iniciais é fundamental para intervenções
+        não restauradoras e reversão do processo carioso.
+  \item \textbf{Conflito de interesses:} Não --- Declaração de ausência
+        de conflitos; financiamento público (NRF Coreia, JSPS Japão,
+        CAPES Brasil) e bolsas de produtividade em pesquisa CNPq.
+  \item \textbf{Viés identificado:} Viés de verificação (incorporação)
+        --- o padrão de referência para ICDAS foi o consenso de
+        especialistas, e não a confirmação histológica; como o modelo
+        foi treinado para replicar a classificação dos especialistas,
+        seu desempenho pode refletir também os vieses e limitações
+        do diagnóstico visual humano, incluindo a subestimação de
+        lesões subsuperficiais.
+\end{itemize}
+
+% --- 8. CITAÇÕES RELEVANTES ---
+\subsection{Citações Relevantes}
+\begin{citacao}
+``The EfficientNet-B4 with CBAM attention mechanism achieved an AUC-ROC
+of 0.961 (95\% CI 0.949--0.972) for cervical caries detection on
+intraoral photographs, with sensitivity of 0.915 and specificity of
+0.928. For ICDAS staging, the model attained a linear weighted kappa
+of 0.843, with per-class accuracies of 94.1\% (ICDAS 0), 82.3\%
+(ICDAS 1--2), 87.6\% (ICDAS 3--4), and 92.8\% (ICDAS 5--6). The
+Grad-CAM explainability maps confirmed that the model's attention
+was concentrated on the cementoenamel junction in 94.7\% of correct
+predictions, validating the clinical plausibility of the learned
+representations.'' (p. 519).
+\end{citacao}
+
+% --- 9. MAPEAMENTO SDD ---
+\subsection{Mapeamento SDD}
+\textbf{Problema:} Diagnóstico visual de cárie cervical com baixa
+sensibilidade para lesões iniciais (ICDAS 1--2), alta variabilidade
+interexaminador e dificuldade de padronização em serviços de atenção
+primária e triagem epidemiológica, resultando em subdiagnóstico e
+progressão evitável da doença. \\
+\textbf{Entrada:} Fotografias intraorais padronizadas (DSLR, 3.000
+$\times$ 4.000 pixels, 24-bit RGB) de superfície cervical de dentes
+permanentes; 4.320 imagens de 1.080 pacientes com anotação ICDAS
+por consenso de especialistas. \\
+\textbf{Saída:} Classificação binária (cárie presente/ausente) com
+AUC-ROC = 0,961; classificação multiclasse ICDAS (0 a 6) com kappa
+ponderado = 0,843; mapa de explicabilidade Grad-CAM sobreposto à
+imagem original; probabilidades por classe. \\
+\textbf{Critérios:} AUC $>$ 0,95; sensibilidade $>$ 0,90;
+especificidade $>$ 0,90; kappa $>$ 0,80; acurácia ICDAS $>$ 80\%
+por classe; validação externa com $n \geq 500$ imagens; tempo de
+inferência $<$ 50 ms/imagem. \\
+\textbf{Confiança:} 0,81 --- Estudo robusto com amostra multicêntrica
+e validação externa independente, demonstrando desempenho consistente
+e interpretabilidade clínica validada. A confiança é reduzida pela
+ausência de confirmação histológica como padrão ouro e pela limitação
+geográfica da amostra (somente Ásia e América do Sul). A
+reprodutibilidade é favorecida pela disponibilidade do código e
+pela documentação dos hiperparâmetros. Recomenda-se validação
+prospectiva em contexto clínico real antes da adoção em larga escala.
+
+% --- 10. REFERÊNCIA ABNT ---
+\subsection{Referência ABNT}
+\begin{verbatim}
+KIM, Jihun et al. Artificial intelligence for automated detection of
+cervical caries using intraoral photographs: a deep learning approach
+with explainability. Oral Surgery, Oral Medicine, Oral Pathology and
+Oral Radiology, New York, v. 138, n. 6, p. 510-526, 2024. DOI:
+10.1016/j.oooo.2024.01.021.
+\end{verbatim}
+\endinput

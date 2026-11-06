@@ -1,0 +1,40 @@
+% ======================================================================
+% FIGURA: Framework de Gêmeo Digital Odontológico (Capítulo 21)
+% ======================================================================
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    node distance=2cm and 2.5cm,
+    box/.style={rectangle, draw=blueaccent, fill=blueaccent!15, minimum width=2.5cm, minimum height=1cm, font=\footnotesize, rounded corners=3pt, align=center},
+    databox/.style={rectangle, draw=cyanaccent, fill=cyanaccent!15, minimum width=2.5cm, minimum height=1cm, font=\footnotesize, rounded corners=3pt, align=center},
+    twin/.style={rectangle, draw=orangeaccent, fill=orangeaccent!20, minimum width=3cm, minimum height=1.5cm, font=\footnotesize\bfseries, rounded corners=5pt, align=center},
+    arrow/.style={-latex, thick},
+]
+% Mundo Físico
+\node[box] (paciente) {\textbf{Paciente}\\Dentes, Periodonto\\Ossos, Mucosa};
+\node[databox, right=of paciente] (scanner) {Scanner Intraoral\\+ CBCT\\+ Radiografia};
+
+% Mundo Digital
+\node[databox, above=of scanner] (ia) {IA: Segmentação\\Classificação\\Predição};
+\node[twin, right=of scanner] (twin) {\textbf{Gêmeo Digital}\\Modelo 3D + IA\\Simulação FEM};
+
+% Feedback
+\node[box, fill=codegreen!20, right=of twin] (plano) {Plano de\\Tratamento\\Personalizado};
+\node[box, fill=codegreen!20, below=of plano] (monitor) {Monitoramento\\Contínuo\\IoT + App};
+
+% Setas
+\draw[arrow] (paciente) -- (scanner) node[midway, above, font=\tiny] {Aquisição};
+\draw[arrow] (scanner) -- (twin) node[midway, above, font=\tiny] {Digitalização};
+\draw[arrow] (scanner) -- (ia) node[midway, right, font=\tiny] {Features};
+\draw[arrow] (ia) -- (twin) node[midway, right, font=\tiny] {ML/DL};
+\draw[arrow] (twin) -- (plano) node[midway, above, font=\tiny] {Simulação};
+\draw[arrow] (plano) -- (monitor) node[midway, right, font=\tiny] {Follow-up};
+\draw[arrow, bend right=30] (monitor.west) to (paciente.south) node[midway, below, font=\tiny] {Atualização};
+
+% Título
+\node[font=\small\bfseries, above=1.5cm of ia] {Framework de Gêmeo Digital Odontológico};
+
+\end{tikzpicture}
+\caption{Framework conceitual do gêmeo digital odontológico (adaptado de Gholamalizadeh et al., 2023 e Natarajan \& Yadalam, 2026). O fluxo integra aquisição de dados multimodais (CBCT + scanner intraoral), processamento por IA (segmentação 3D, classificação), simulação biomecânica (FEM), e atualização contínua via monitoramento.}
+\label{fig:digital-twin-framework}
+\end{figure}

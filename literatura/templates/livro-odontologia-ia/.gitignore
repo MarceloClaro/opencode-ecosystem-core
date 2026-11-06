@@ -1,0 +1,83 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+
+# LaTeX
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.synctex(busy)
+*.toc
+*.lof
+*.lot
+*.idx
+*.ind
+*.ilg
+*.glo
+*.gls
+*.glg
+*.glsdefs
+*.ist
+*.acn
+*.acr
+*.alg
+*.xdy
+*.run.xml
+*.bcf
+
+# Output
+*.pdf
+*.docx
+*.odt
+
+# Notebooks
+.ipynb_checkpoints/
+*.pyc
+notebooks/*.log
+
+# Environment
+.env
+.venv/
+env/
+venv/
+.conda/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Template original (backup)
+LatHex_dark/
+
+# pytest
+.pytest_cache/
+htmlcov/
+.coverage
+coverage.xml
+
+# Artigos baixados (grandes)
+artigos/*.pdf
+
+# Jupyter
+.jupyter/
+
+# Harness de compilação (dev)
+_smoke.*

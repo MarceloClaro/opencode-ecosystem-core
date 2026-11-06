@@ -1,0 +1,16 @@
+\pagestyle{empty}  % Desativa cabeçalhos e rodapés nesta página
+
+\cleardoublepage    % Garante início em página ímpar
+
+% =================
+% Contracapa — imagem pronta (frontmatter/contracapa.png), full-bleed
+% =================
+\begin{center}
+\begin{tikzpicture}[remember picture,overlay]
+    % Fundo preto cobrindo a página inteira (bordas da imagem = pretas).
+    \fill[black] (current page.south west) rectangle (current page.north east);
+    % Imagem da contracapa centrada, preenchendo a página.
+    \node[anchor=center] at (current page.center)
+        {\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{frontmatter/contracapa.png}};
+\end{tikzpicture}
+\end{center}

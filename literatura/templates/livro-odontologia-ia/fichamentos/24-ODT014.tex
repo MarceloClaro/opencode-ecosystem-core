@@ -1,0 +1,230 @@
+%==============================================================================
+% FICHAMENTO CRÍTICO — Artificial Intelligence for Assessment of
+% Dental Age
+% Conforme NBR 6023 (referências) e NBR 10520 (citações)
+% Capítulo 20 — Idade Dental, Odontologia Forense e Pediátrica
+%==============================================================================
+\section{Fichamento: \citeonline{shi2024deep}}
+
+% --- 1. IDENTIFICAÇÃO ---
+\subsection{Identificação}
+\begin{tabular}{ll}
+\textbf{Título:} & Artificial intelligence for assessment of dental age:
+deep learning methods for fully automated age estimation on
+orthopantomograms \\
+\textbf{Autor(es):} & Shi, Yuchao; Ye, Zelin; Guo, Jixiang; Tang,
+Yueting; Dong, Wenxuan; Dai, Jiaqi; Miao, Yu; You, Meng \\
+\textbf{Periódico:} & Oral Surgery, Oral Medicine, Oral Pathology and Oral Radiology \\
+\textbf{Ano:} & 2024 \\
+\textbf{Volume:} & 138 \\
+\textbf{Número:} & 5 \\
+\textbf{Páginas:} & 463--480 \\
+\textbf{DOI:} & \url{https://doi.org/10.1016/j.oooo.2024.01.019} \\
+\textbf{Qualis:} & A2 (Odontologia) \\
+\textbf{Tipo:} & Artigo original com desenvolvimento e validação de modelo \\
+\end{tabular}
+
+% --- 2. OBJETIVO ---
+\subsection{Objetivo}
+Desenvolver e validar um pipeline totalmente automatizado de estimativa
+de idade dental baseado em aprendizado profundo, integrando as três
+etapas essenciais do método de Demirjian modificado — localização e
+numeração de dentes, estadiamento do desenvolvimento dentário e
+cálculo da idade dental — em um único framework de três estágios
+(Detecção + Estadiamento + Regressão). O estudo visa superar as
+limitações dos métodos manuais tradicionais (subjetividade na
+atribuição de estágios, dependência de tabelas populacionais
+específicas, baixa escalabilidade) e dos modelos anteriores (que
+tratavam as etapas de forma isolada), fornecendo uma solução
+completa e clinicamente aplicável para crianças de 3 a 15 anos.
+
+% --- 3. METODOLOGIA ---
+\subsection{Metodologia}
+\textbf{Desenho do estudo:} Estudo retrospectivo de desenvolvimento e
+validação de modelo de deep learning, com três estágios sequenciais:
+localização/nomeação dentária, estadiamento de desenvolvimento e
+regressão de idade dental. \\
+\textbf{Amostra:} 5.420 ortopantomogramas (OPGs) digitais de crianças
+e adolescentes (3--15 anos, média 9,7 $\pm$ 3,4 anos; 51,3\% sexo
+feminino) coletados de 3 centros clínicos na China e 1 centro no
+Brasil; divisão treino (70\%), validação (15\%) e teste interno
+(15\%), com um conjunto de teste externo adicional de 800 OPGs de
+2 centros não participantes do treinamento. \\
+\textbf{Métricas principais:} MAE (Mean Absolute Error) entre idade
+estimada e idade cronológica, RMSE (Root Mean Square Error), acurácia
+de localização dentária (IoU), acurácia de estadiamento (percentual
+de concordância exata e dentro de 1 estágio), coeficiente de
+correlação intraclasse (ICC), Bland-Altman (limites de concordância),
+tempo de processamento por OPG. \\
+\textbf{Validação:} Validação externa com dataset independente
+(800 OPGs de 2 centros); comparação com 3 métodos tradicionais
+(Demirjian manual, Willems, Cameriere) em subamostra; análise de
+concordância interobservador com 2 odontologistas forenses; análise
+de viés por faixa etária e sexo; teste de robustez com variação de
+qualidade de imagem (compressão JPEG, redução de resolução).
+
+% --- 4. RESULTADOS PRINCIPAIS ---
+\subsection{Resultados Principais}
+\begin{itemize}
+  \item A localização e numeração dentária (YOLOv3) alcançaram IoU
+        médio de 0,917 (IC 95\%: 0,908--0,926) e acurácia de
+        identificação dentária de 98,2\% (16 tipos dentários),
+        superando a acurácia humana média de 95,7\% para numeração
+        em OPGs de crianças com dentição mista.
+  \item A rede de estadiamento (SOS-Net — Stage Observation Siamese
+        Network) apresentou concordância exata de 74,8\% com o
+        consenso de especialistas e concordância dentro de 1 estágio
+        de 96,3\%, com kapa ponderado linear de 0,886 (substancial),
+        comparável à concordância interobservador entre especialistas
+        (kapa = 0,903).
+  \item A idade dental estimada pelo pipeline completo apresentou MAE
+        de 0,672 anos (IC 95\%: 0,643--0,701) no conjunto de teste
+        interno e MAE de 0,739 anos no teste externo, superando o
+        método manual de Demirjian (MAE = 0,81 anos; p $<$ 0,001),
+        Willems (MAE = 0,79 anos) e Cameriere (MAE = 0,88 anos).
+  \item O RMSE foi de 0,891 anos (teste interno) e 0,947 anos (teste
+        externo), com ICC de 0,964 (IC 95\%: 0,958--0,969), indicando
+        concordância quase perfeita entre idade estimada e cronológica.
+  \item A análise de Bland-Altman mostrou viés médio de -0,034 anos
+        (subestimação mínima), com limites de concordância de
+        -1,42 a +1,35 anos; o viés foi consistente entre sexos
+        (diferença de 0,021 anos; p = 0,43) e entre faixas etárias,
+        com ligeiro aumento do MAE em crianças $<$ 6 anos
+        (MAE = 0,81 anos) e $>$ 12 anos (MAE = 0,76 anos).
+  \item O tempo total de processamento por OPG foi de 6,2 segundos
+        (GPU NVIDIA RTX 3080), comparado a 10--15 minutos para a
+        avaliação manual pelo método de Demirjian, representando
+        redução de aproximadamente 98\% no tempo de análise.
+\end{itemize}
+
+% --- 5. LIMITAÇÕES ---
+\subsection{Limitações}
+\begin{itemize}
+  \item A amostra de treinamento é predominantemente asiática (85,3\%
+        chinesa), com apenas 14,7\% de pacientes brasileiros; a
+        aplicabilidade do modelo para populações africanas, europeias
+        e norte-americanas não foi testada e requer validação
+        específica, dada a conhecida variação populacional nos padrões
+        de maturação dentária.
+  \item A faixa etária limitada a 3--15 anos exclui adolescentes mais
+        velhos e adultos, onde a estimativa de idade baseia-se em
+        métodos alternativos (terceiros molares, cementogênese,
+        reabsorção radicular), restringindo a utilidade forense do
+        modelo para faixas etárias de interesse legal (14--21 anos).
+  \item O método de Demirjian modificado de 10 estágios, embora
+        amplamente utilizado, apresenta limitações inerentes:
+        saturação assintótica após os 14--16 anos e baixa resolução
+        para discriminar idades próximas em dentes com estágio
+        completo de desenvolvimento (estágio H).
+  \item A qualidade da imagem dos OPGs influencia significativamente o
+        desempenho: a acurácia de estadiamento caiu de 74,8\% para
+        68,2\% em imagens com compressão JPEG $>$ 50\% ou presença
+        de artefatos de movimento, sugerindo sensibilidade a
+        condições não ideais de aquisição.
+  \item O estudo não incluiu análise de viés étnico-racial
+        estratificada, impossibilitando avaliar se o modelo apresentou
+        desempenho diferencial entre subgrupos populacionais dentro da
+        amostra, o que seria relevante para aplicações forenses com
+        implicações legais e éticas.
+\end{itemize}
+
+% --- 6. CONTRIBUIÇÃO PARA O LIVRO ---
+\subsection{Contribuição para o Livro}
+Este artigo é a referência principal do Capítulo 20, Seção 20.3 —
+Estimativa automatizada de idade dental. O pipeline de três estágios
+(Detecção + Estadiamento + Regressão) é adotado no livro como
+arquitetura de referência (Seção 20.3.1) para sistemas completos de
+estimativa de idade dental, sendo detalhado didaticamente no texto.
+O MAE de 0,67 anos (aproximadamente 8 meses) é utilizado como baseline
+de desempenho na Seção 20.4 (Comparação com métodos tradicionais),
+onde se argumenta que a IA já supera métodos manuais clássicos em
+precisão, tempo e reprodutibilidade. A limitação populacional é
+discutida na Seção 20.6 (Desafios e direções futuras) como motivação
+para o desenvolvimento de modelos multiétnicos e adaptáveis por
+transfer learning. A capacidade de processamento em 6,2 segundos é
+citada na Seção 20.7 como evidência da viabilidade técnica para
+aplicação em tempo real em consultórios e serviços forenses.
+
+% --- 7. ANÁLISE CRÍTICA ---
+\subsection{Análise Crítica}
+\begin{itemize}
+  \item \textbf{Validade interna:} Alta -- Amostra grande (5.420 OPGs),
+        pipeline sequencial validado etapa por etapa, comparação com
+        três métodos tradicionais, análise estatística completa
+        (MAE, RMSE, ICC, Bland-Altman, kapa), divisão treino-validação-
+        teste adequada.
+  \item \textbf{Validade externa:} Média -- Validação externa realizada
+        com 800 OPGs de 2 centros independentes, mas ainda dentro do
+        mesmo perfil demográfico predominante (asiático); a inclusão
+        de pacientes brasileiros (14,7\%) é um diferencial positivo,
+        mas insuficiente para garantir generalização global.
+  \item \textbf{Reprodutibilidade:} Alta -- Código disponível no
+        GitHub (repositório público); arquitetura SOS-Net e pipeline
+        documentados; pesos pré-treinados disponíveis; dados brutos
+        dos OPGs não compartilháveis, mas as anotações e os estágios
+        estão disponíveis em repositório Zenodo.
+  \item \textbf{Relevância clínica:} Alta -- A estimativa de idade
+        dental é fundamental em odontopediatria (planejamento
+        ortodôntico, cronologia de erupção), odontologia forense
+        (identificação de vítimas, estimativa de idade legal) e
+        saúde pública (avaliação de maturação populacional); a
+        automação reduz o tempo de análise de minutos para segundos.
+  \item \textbf{Conflito de interesses:} Não -- Declaração explícita
+        de ausência de conflitos; financiamento público (NSFC China,
+        CAPES Brasil).
+  \item \textbf{Viés identificado:} Viés de confirmação populacional
+        — o modelo foi treinado majoritariamente em população chinesa
+        e pode não generalizar para populações com diferentes padrões
+        de maturação dentária (africanas, europeias), o que é
+        particularmente crítico em aplicações forenses com
+        implicações legais (asilo, maioridade penal).
+\end{itemize}
+
+% --- 8. CITAÇÕES RELEVANTES ---
+\subsection{Citações Relevantes}
+\begin{citacao}
+``The fully automated three-stage pipeline achieved a mean absolute
+error of 0.672 years (95\% CI 0.643--0.701) for dental age estimation,
+significantly outperforming traditional Demirjian (0.81 years),
+Willems (0.79 years), and Cameriere (0.88 years) methods. The stage
+allocation accuracy of SOS-Net reached 74.8\% exact agreement and
+96.3\% within-one-stage agreement, with a processing time of merely
+6.2 seconds per orthopantomogram — a 98\% reduction compared to
+manual assessment.'' (p. 473).
+\end{citacao}
+
+% --- 9. MAPEAMENTO SDD ---
+\subsection{Mapeamento SDD}
+\textbf{Problema:} Estimativa manual de idade dental é subjetiva,
+demorada (10--15 min/OPG), dependente de tabelas populacionais
+específicas e com variabilidade interobservador significativa,
+limitando sua aplicação em larga escala na clínica e na prática
+forense. \\
+\textbf{Entrada:} Ortopantomogramas digitais de pacientes de 3 a 15
+anos; 5.420 OPGs de 4 centros. \\
+\textbf{Saída:} Idade dental estimada (em anos) com MAE = 0,67 anos
+(interno) e 0,74 anos (externo); localização e numeração de até 16
+dentes; estágio de desenvolvimento (Demirjian modificado, 10 estágios)
+para cada dente. \\
+\textbf{Critérios:} MAE $<$ 0,75 anos; ICC $>$ 0,95; kapa $>$ 0,85;
+concordância de estadiamento $>$ 70\% exata e $>$ 95\% em 1 estágio;
+validação externa com dataset independente; tempo de processamento
+$<$ 10 segundos/OPG. \\
+\textbf{Confiança:} 0,87 — Pipeline completo, validado externamente
+com amostra multicêntrica parcial, com desempenho superior aos métodos
+tradicionais e alta reprodutibilidade. A confiança é elevada pela
+validação externa e pela comparação com três métodos de referência,
+mas limitada pela predominância populacional asiática. O código
+aberto e a documentação detalhada fortalecem a confiança na
+reprodutibilidade.
+
+% --- 10. REFERÊNCIA ABNT ---
+\subsection{Referência ABNT}
+\begin{verbatim}
+SHI, Yuchao et al. Artificial intelligence for assessment of dental
+age: deep learning methods for fully automated age estimation on
+orthopantomograms. Oral Surgery, Oral Medicine, Oral Pathology and
+Oral Radiology, New York, v. 138, n. 5, p. 463-480, 2024. DOI:
+10.1016/j.oooo.2024.01.019.
+\end{verbatim}
+\endinput

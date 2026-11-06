@@ -1,0 +1,42 @@
+% ======================================================================
+% FIGURA: Pipeline SDD+TDD Odontológico (Capítulo 12)
+% ======================================================================
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    node distance=1.2cm and 2.5cm,
+    box/.style={rectangle, draw=blueaccent, fill=blueaccent!15, minimum width=2.8cm, minimum height=0.9cm, font=\footnotesize, rounded corners=3pt, align=center},
+    testbox/.style={rectangle, draw=codegreen, fill=codegreen!15, minimum width=2.8cm, minimum height=0.9cm, font=\footnotesize, rounded corners=3pt, align=center},
+    arrow/.style={-latex, thick},
+]
+% Fase 1: SDD
+\node[box, fill=blueaccent!25] (spec) {\textbf{ESPECIFICAR}\\Problema clínico\\Entrada/Saída\\Critérios aceitação};
+\node[box, right=of spec] (data) {Preparar\\Dados\\Anotar\\Validar};
+
+% Fase 2: TDD
+\node[testbox, below=of spec] (red) {\textbf{RED}\\Escrever teste\\Ver falhar};
+\node[box, right=of red] (green) {\textbf{GREEN}\\Implementar\\mínimo código};
+\node[testbox, right=of green] (refactor) {\textbf{REFACTOR}\\Otimizar\\Documentar};
+
+% Fase 3: Verificar
+\node[box, fill=orangeaccent!20, below=of red] (validate) {Validar\\Métricas clínicas\\Sens/Espec $\ge 0.85$};
+\node[box, fill=orangeaccent!20, right=of validate] (deploy) {Publicar\\Modelo + Testes\\DOI + Dataset};
+
+% Setas
+\draw[arrow] (spec) -- (data);
+\draw[arrow] (spec) -- (red);
+\draw[arrow] (data) -- (green);
+\draw[arrow] (red) -- (green) node[midway, above, font=\tiny] {falha};
+\draw[arrow] (green) -- (refactor) node[midway, above, font=\tiny] {passa};
+\draw[arrow] (refactor) -- (validate);
+\draw[arrow] (validate) -- (deploy);
+
+% Ciclo
+\draw[arrow, bend left=40, dashed, gray] (refactor.north) to (red.north) node[midway, above, font=\tiny\color{codegray}] {ciclo};
+
+\node[font=\small\bfseries, above=0.5cm of spec] {SDD + TDD Odontológico};
+
+\end{tikzpicture}
+\caption{Pipeline de desenvolvimento orientado por especificação (SDD) e testes (TDD) para modelos de IA odontológica. O ciclo RED$\rightarrow$GREEN$\rightarrow$REFACTOR garante que cada função clínica seja testada antes da implementação, reduzindo erros em diagnóstico automatizado.}
+\label{fig:sdd-tdd-pipeline}
+\end{figure}

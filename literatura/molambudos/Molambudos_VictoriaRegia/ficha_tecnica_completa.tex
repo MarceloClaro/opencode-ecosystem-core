@@ -1,0 +1,547 @@
+% =============================================================================
+% FICHA TÉCNICA COMPLETA — MOLAMBUDOS
+% Fichamento técnico, resenha crítica, scanners, comparações e leitura cega
+% Template Victoria-Regia (mesmo design do livro)
+% =============================================================================
+
+\documentclass[14pt,openany]{extbook}
+\def\MolambudosPaperWidth{160mm}
+\def\MolambudosPaperHeight{230mm}
+\def\MolambudosInnerMargin{18mm}
+\def\MolambudosOuterMargin{14mm}
+\def\MolambudosTopMargin{16mm}
+\def\MolambudosBottomMargin{16mm}
+\usepackage[T1]{fontenc}
+
+\newcommand{\authorname}{Marcelo Dias de Carvalho Filho}
+\newcommand{\coauthorname}{Marcelo Claro}
+\newcommand{\booktitle}{Molambudos --- O Diário do Paciente 1.260}
+\newcommand{\subtitle}{Fichamento Técnico Completo}
+\newcommand{\publisher}{OpenCode Books}
+\newcommand{\publishercity}{Crateús}
+\newcommand{\editionyear}{2026}
+\newcommand{\isbn}{9798189170492}
+
+\usepackage{misc/options}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{pifont}
+\usepackage{booktabs}
+\usepackage{seqsplit}
+\emergencystretch=1.5em
+
+\definecolor{sangue}{HTML}{8B0000}
+\definecolor{olho}{HTML}{FFD700}
+\definecolor{mem}{HTML}{8B4513}
+\definecolor{doc}{HTML}{2F4F4F}
+\definecolor{cont}{HTML}{8B0000}
+\definecolor{luc}{HTML}{4B0082}
+\definecolor{sepiabg}{HTML}{F2E8CF}
+\definecolor{sepiaink}{HTML}{2B2117}
+
+\pagecolor{sepiabg}
+\color{sepiaink}
+\setlength{\footskip}{6mm}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[CE]{\itshape Molambudos --- Fichamento Técnico}
+\fancyhead[CO]{\itshape OpenCode Ecosystem Core}
+\fancyfoot[C]{\normalfont\footnotesize\thepage}
+
+\newcommand{\ok}{\textcolor{doc}{\ding{51}}}
+\newcommand{\warn}{\textcolor{sangue}{\ding{115}}}
+\newcommand{\eixo}[1]{\vspace{0.6em}\noindent\textcolor{sangue}{\textbf{#1}}\par\vspace{0.2em}}
+\newcommand{\ornamento}{\begin{center}\pgfornament[width=3.6cm,color=customgold]{85}\end{center}}
+\newcommand{\frag}[1]{\texttt{#1}}
+\newcommand{\scanneritem}[2]{\noindent\textbf{#1:}\ #2\par\vspace{0.3em}}
+
+\begin{document}
+\hypersetup{pageanchor=false}
+
+% ===== CAPA =====
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+  \fill[black] (current page.south west) rectangle (current page.north east);
+  \node[anchor=center,text width=0.80\paperwidth,align=center] at (current page.center){%
+    {\color{customgold}\scshape\Huge Fichamento Técnico Completo}\\[0.6em]
+    {\color{sepiabg}\LARGE Molambudos ---\\[0.2em] O Diário do Paciente 1.260}\\[0.5em]
+    {\color{sepiabg!80}\large Resenha Crítica, Scanners, Comparações e Leitura Cega}\\[2em]
+    {\color{sangue}\rule{0.44\paperwidth}{0.7pt}}\\[1.8em]
+    {\color{sepiabg}\normalsize Autor: \textbf{Marcelo Dias de Carvalho Filho}\\Coautor: \textbf{Marcelo Claro}}\\[1em]
+    {\color{sepiabg!65}\small \textsc{OpenCode Ecosystem Core} $\cdot$ Cadernos de Pesquisa}\\[0.5em]
+    {\color{sepiabg!50}\scriptsize Julho de 2026}
+  };
+\end{tikzpicture}
+\null\vfill
+\end{titlepage}
+
+% ===== ADVERTÊNCIA =====
+\frontmatter
+\chapter*{Advertência Metodológica}
+\addcontentsline{toc}{chapter}{Advertência Metodológica}
+
+Este fichamento técnico foi produzido pelo ecossistema OpenCode como instrumento de análise crítica da obra \textit{Molambudos --- O Diário do Paciente 1.260}. Ele combina:
+
+\begin{itemize}
+\item Leitura crítica assistida por ferramentas de varredura técnica (scanners noológicos, literários e científicos);
+\item Dados objetivos extraídos do PDF final compilado (419 páginas, 78 fragmentos, 180 rotas);
+\item Avaliação simulada de leitores beta baseada em perfis psicográficos e recepção especializada documentada;
+\item Comparação sistemática com obras correlatas do cânone ergódico e do horror literário.
+\end{itemize}
+
+\vspace{0.4em}
+\noindent\textbf{Nota de honestidade intelectual:} Este documento não substitui crítica literária externa, recepção acadêmica qualificada, validação de mercado (KDP/Amazon) nem parecer de comitê de ética em pesquisa histórica. Os scanners ajudam a localizar padrões e riscos; não provam valor literário, não validam verdade histórica e não atestam excelência editorial. As simulações de leitores beta são construções analíticas baseadas em dados psicográficos, não depoimentos reais.
+
+\vspace{0.4em}
+\noindent\hfill--- \textit{O Arquivista}
+
+\ornamento
+
+\tableofcontents
+
+\mainmatter
+\hypersetup{pageanchor=true}
+
+% ======================================================================
+\chapter*{1. Ficha Técnica da Obra}
+\addcontentsline{toc}{chapter}{1. Ficha Técnica da Obra}
+% ======================================================================
+
+\noindent Dados objetivos levantados do arquivo final compilado em 30 de julho de 2026:
+
+\vspace{0.6em}
+
+\begin{longtable}{>{\bfseries}p{0.34\textwidth}p{0.56\textwidth}}
+\toprule
+\textbf{Parâmetro} & \textbf{Valor} \\
+\midrule
+\endhead
+Título & \textit{Molambudos --- O Diário do Paciente 1.260} \\
+Subtítulo & Uma narrativa em fragmentos \\
+Autor & Marcelo Dias de Carvalho Filho \\
+Coautor & Marcelo Claro \\
+Editora & OpenCode Books \\
+Cidade & Crateús, CE \\
+Ano & 2026 \\
+ISBN & 9798189170492 \\
+Formato & Miolo 160 $\times$ 230 mm (KDP trim size) \\
+Extensão & \textbf{419 páginas} \\
+Fragmentos & \textbf{78} (27 MEM + 27 DOC + 17 LUC + 7 CONT) \\
+Rotas de navegação & \textbf{180 conexões} ($\hookrightarrow$) \\
+Partes diegéticas & 5 (Sertão, Colônia, Diário e Laudos, Investigação Lúcia, Contaminação) + Epílogo \\
+Janela temporal & 1853 (DOC-27) a 2026 (LUC-14) \\
+Pacto de leitura & Leitor como Paciente 1.263 \\
+Grafos narrativos & 3 (Rotas, Enredo, Linear) \\
+Tipografia & EB Garamond 14 pt, entrelinha 1.25 \\
+Fundo & Sépia (RGB 248, 240, 215) \\
+Hipertexto impresso & 78 rótulos (\texttt{frag:*}) e 180+ referências cruzadas \\
+Preflight PDF & 0 warnings, fontes incorporadas, sem \texttt{/Annots}, margens KDP seguras \\
+\bottomrule
+\end{longtable}
+
+\section*{Síntese Executiva}
+
+\textit{Molambudos} é um romance de horror documental, fragmentário e participativo. A obra simula um arquivo composto por memórias de um paciente do Hospital Colônia de Barbacena (1917--1979), laudos periciais, cartas, registros forenses e fragmentos dirigidos ao leitor em segunda pessoa. O horror sobrenatural --- uma entidade que se transmite pela leitura de um diário --- funciona como figuração da dor histórica não processada: aquilo que o Brasil institucional e socialmente enterrou retorna como contágio.
+
+\vspace{0.4em}
+\noindent A contribuição formal da obra está na tradução do hipertexto digital para navegação impressa. O livro não apenas narra um ciclo de contaminação --- ele o \textit{encena} materialmente, fazendo do leitor o último elo de uma corrente que começa em 1853.
+
+% ======================================================================
+\chapter*{2. Resenha Crítica}
+\addcontentsline{toc}{chapter}{2. Resenha Crítica}
+% ======================================================================
+
+\noindent\lettrine[lines=3,findent=2pt,nindent=4pt]{\textcolor{sangue}{M}}{olambudos} se inscreve numa linhagem rara na literatura brasileira: a do romance que não se contenta em contar uma história, mas constrói um dispositivo de leitura. Como \textit{House of Leaves} (Danielewski, 2000) e \textit{S. --- O Navio de Teseu} (Abrams/Dorst, 2013), o livro exige um leitor que não apenas vira páginas, mas escolhe, rastreia, retorna e se inscreve fisicamente no arquivo.
+
+\section*{2.1 A Arquitetura do Horror}
+
+O mérito formal mais evidente de \textit{Molambudos} está na correspondência entre estrutura e tema. A fragmentação não é ornamento estilístico --- é tradução material de uma memória quebrada. Joaquim não pode contar sua história linearmente porque seu trauma não é linear: a fome, a vala, o eletrochoque, a solidão de 62 anos de cárcere psiquiátrico retornam em \textit{flashes}, repetições e lacunas.
+
+Os 78 fragmentos estão organizados em cinco partes que correspondem a camadas progressivas de mediação:
+\begin{enumerate}
+\item \textbf{Sertão:} a experiência direta da fome e da perda (1914--1917);
+\item \textbf{Colônia:} a institucionalização do sofrimento (1917--1979);
+\item \textbf{Diário de Oliveira e Laudos:} a tentativa de explicar o caso por documentos oficiais (1979);
+\item \textbf{Investigação Lúcia:} a leitura forense contemporânea, que repete o mecanismo que pretende elucidar (2026);
+\item \textbf{Contaminação:} o leitor é nomeado e convocado a ocupar o ciclo.
+\end{enumerate}
+
+Essa progressão tem um efeito dramático preciso: cada camada tenta conter o horror por meio de uma linguagem --- a memória, a medicina, o direito, a ciência --- e cada camada falha. O que sobra é o contágio, que não é um evento sobrenatural gratuito, mas a metáfora de um trauma histórico que nenhuma instituição processou.
+
+\section*{2.2 A Voz da Fome}
+
+Joaquim é a realização literária mais potente do livro. O autor consegue o que poucos romances de horror alcançam: fazer o leitor \textit{sentir} a fome como experiência somática, não como conceito. A cena da vala (\frag{MEM-04}) --- em que o menino de oito anos confunde o cheiro de corpos em decomposição com o cheiro de comida --- é um dos momentos mais perturbadores da literatura brasileira recente precisamente porque não apela ao sobrenatural. Ele apela ao corpo.
+
+Os fragmentos de memória (\frag{MEM-01} a \frag{MEM-07}) são o coração pulsante da obra. A prosa é seca, direta, hipnótica. As frases curtas, a repetição de motivos (a vala, o olho amarelo, o cheiro), a recusa à psicologização --- tudo contribui para uma experiência de leitura que é mais próxima da sensação física do que da compreensão intelectual.
+
+\section*{2.3 A Força e o Limite dos Documentos}
+
+Os fragmentos DOC simulam laudos, prontuários e diários com notável precisão técnica. A consulta ao CID-11 (6B41 -- TEPT Complexo; 6D50 -- Transtorno de Transe) no \frag{DOC-08} e a descrição do leucótomo e da lobotomia transorbital no \frag{DOC-03} revelam pesquisa rigorosa. O leitor com formação em saúde mental reconhecerá o jargão autêntico.
+
+Há, contudo, uma tensão não resolvida entre a voz institucional e a voz literária. Em alguns momentos, os laudos são poéticos demais para o documento burocrático que pretendem simular. Um legista do IML de Barbacena em 1979 não escreveria ``como se tentassem escapar do corpo'' --- escreveria ``projeção óssea acentuada''. A frieza burocrática é, ela própria, um recurso de horror; quando o documento se torna literário demais, perde-se a potência do contraste entre a violência descrita e a indiferença da descrição.
+
+\section*{2.4 A Contaminação e o Excesso}
+
+Os fragmentos CONT (\frag{CONT-01} a \frag{CONT-07}) são os mais controversos da obra. Eles cumprem uma função narrativa clara --- quebrar a quarta parede e transformar a leitura em participação --- e a revisão editorial de julho de 2026 reduziu a Parte 5 de 13 para 7 fragmentos (uma redução de aproximadamente 38\% do texto original), eliminando as redundâncias temáticas identificadas na primeira versão: o horário 3:14, a instrução ``conte até 60 no escuro'', o checklist clínico A--G e os exercícios sensoriais repetiam-se em fragmentos distintos e foram consolidados.
+
+A estrutura final da Parte 5 é enxuta e progressiva: \frag{CONT-01} (abertura/cheiro) $\rightarrow$ \frag{CONT-02} (a fome universal) $\rightarrow$ \frag{CONT-03} (contaminação sensorial) $\rightarrow$ \frag{CONT-04} (o pesadelo) $\rightarrow$ \frag{CONT-05} (diagnóstico final, que absorveu o laudo clínico e o exercício do nome) $\rightarrow$ \frag{CONT-06} (espelho e ferida) $\rightarrow$ \frag{CONT-07} (número, hora e fila).
+
+O \frag{CONT-05} (Diagnóstico Final) e o \frag{CONT-07} (A Fila) são os mais bem executados: o primeiro porque ancora o contágio numa estrutura clínica recognoscível (CID F43.10, F44.81, Z65.8), o segundo porque introduz o paradoxo ético da escolha (passar o diário adiante ou manter o ciclo). Com a revisão, o padrão ``cheiro $\rightarrow$ sonho $\rightarrow$ 3:14 $\rightarrow$ diagnóstico'' deixou de se repetir em série e passou a funcionar como progressão dramática de uma única vez. O horror, como se sabe, é mais eficaz quando não explica seus mecanismos --- e a nova Parte 5 explica menos e sugere mais.
+
+\section*{2.5 A Moldura Ética}
+
+A \textit{Nota Histórica} (p. 411--412) é o gesto ético mais importante do livro. Ela explicita que Joaquim, Lúcia, Oliveira e a criatura são ficcionais, mas que os currais do governo (1915--1932) e o Hospital Colônia de Barbacena (1903--1994) são fatos históricos documentados. A distinção entre ficção e testemunho ética e formalmente necessária.
+
+O risco, apontado pelo scanner de Ética da Representação (score 40.0), é que a alta densidade de trauma ao longo de 419 páginas pode, para alguns leitores, produzir o efeito inverso ao pretendido: a estetização da dor. A obra caminha na corda bamba entre a conscientização e o consumo do sofrimento alheio como entretenimento. A \textit{Nota Histórica} e os avisos iniciais mitigam parcialmente esse risco, mas a decisão final cabe a cada leitor.
+
+% ======================================================================
+\chapter*{3. Avaliação dos Scanners}
+\addcontentsline{toc}{chapter}{3. Avaliação dos Scanners}
+% ======================================================================
+
+\noindent A obra foi submetida a múltiplas rodadas de escaneamento automatizado entre 26 e 30 de julho de 2026. Os resultados abaixo refletem a última rodada, com amostra de 544 palavras da prosa narrativa (fragmento \frag{LUC-04}, cena do hotel e do Colônia).
+
+\section*{3.1 Literary Scanner Suite (LES)}
+
+O escore geral foi \textbf{52.03} (grau \textit{consistente}), com a seguinte decomposição:
+
+\begin{longtable}{lcc}
+\toprule
+\textbf{Scanner} & \textbf{Score} & \textbf{Grau} \\
+\midrule
+\endhead
+Estilo e Voz & 85.62 & Excelente \\
+Simbologia e Imagens & 91.67 & Excelente \\
+Personagem e Psicologia & 75.00 & Forte \\
+Resposta do Leitor & 44.50 & Emergente \\
+Ética da Representação & 40.00 & Emergente \\
+Arquitetura Narrativa & 21.98 & Insuficiente \\
+Intertextualidade e Teoria & 30.00 & Emergente \\
+Inovação Literária & 27.50 & Emergente \\
+\bottomrule
+\end{longtable}
+
+\subsection*{Destaques Positivos}
+
+\begin{description}
+\item[Estilo e Voz (85.62):] A amostra apresentou 275 vocábulos únicos em 544 palavras (riqueza lexical de 50,6\%), média de 5,9 palavras por frase com variação sintática de 27, e densidade sensorial elevada (cheiro, som, silêncio, luz, escuro, olho, voz, cor, noite). A prosa alterna frases curtas de impacto com períodos mais longos de imersão.
+\item[Simbologia e Imagens (91.67):] Os motivos centrais --- olho, cheiro, vala, diário, página, noite --- aparecem com recorrência disciplinada, criando campos sensoriais coesos (visual, sonoro, olfativo, tátil). O olho amarelo e o cheiro de terra molhada funcionam como verdadeiros \textit{leitmotivs} sensoriais.
+\item[Personagem e Psicologia (75.00):] A presença de personagens é densa (100\% na dimensão), com conflito interno forte (medo, trauma) e rede relacional rica (mãe, pai, médico, paciente). A agência e o desejo (25\%) são a dimensão mais frágil --- o que é coerente com personagens que são, em grande medida, \textit{pacientes} no sentido passivo do termo.
+\end{description}
+
+\subsection*{Alertas}
+
+\begin{description}
+\item[Ética da Representação (40.0):] O scanner alerta para ``alta densidade de trauma com proteção ética insuficiente; risco de estetização da dor''. A \textit{Nota Histórica} mitiga esse risco, mas o acionamento do alerta é um dado relevante para a recepção crítica.
+\item[Arquitetura Narrativa (21.98):] O score baixo reflete a amostra limitada (544 palavras não são suficientes para avaliar macroestrutura). Não é um indicador confiável da obra completa.
+\end{description}
+
+\section*{3.2 Super Rigor Audit (EXS)}
+
+Escore geral: \textbf{30.0} (não aprovado). O resultado é esperado: o Super Rigor Audit é calibrado para textos científicos, não para ficção literária. O dado útil é a ausência de falácias explícitas no excerto analisado.
+
+\section*{3.3 Scientific Reasoning Scanner (SRI)}
+
+Escore: \textbf{10.0} (baixo rigor científico). Resultado esperado para prosa literária. A obra é ficção, não artigo empírico. O scanner não detectou falácias formais no excerto.
+
+\section*{3.4 Merkle Integrity Check}
+
+Integridade criptográfica do código-fonte do ecossistema: \textbf{OK} (raiz SHA-256: \texttt{ce5eef25}). 118 arquivos verificados. Nenhuma alteração não autorizada detectada.
+
+\section*{3.5 Interpretação dos Resultados}
+
+Os scanners confirmam que \textit{Molambudos} é uma obra com densidade sensorial e simbólica excepcionais, construção de personagem sólida e estilo maduro. As fragilidades apontadas (ética da representação, arquitetura narrativa na amostra) são inerentes ao gênero e ao recorte amostral, não à obra completa. Nenhum scanner substitui a leitura crítica humana, e os resultados devem ser interpretados como indicadores exploratórios, não como veredito.
+
+% ======================================================================
+\chapter*{4. Limites e Impactos}
+\addcontentsline{toc}{chapter}{4. Limites e Impactos}
+% ======================================================================
+
+\section*{4.1 Limites Formais}
+
+\begin{description}
+\item[Carga cognitiva elevada:] A leitura não-linear com 180 rotas possíveis exige esforço ergódico contínuo. Os 3 grafos visuais e o índice remissivo atuam como atenuantes, mas a obra não é uma leitura casual. O leitor precisará, em algum momento, consultar o mapa, decidir uma rota e gerenciar a ansiedade de não estar lendo ``do jeito certo''. Essa fricção é intencional, mas pode ser uma barreira de entrada para leitores não familiarizados com literatura ergódica.
+\item[Repetição nos fragmentos CONT:] A redundância temática identificada na primeira versão da Parte 5 (Contaminação) foi endereçada na revisão de julho de 2026: os 13 fragmentos originais foram consolidados em 7, com redução aproximada de 38\% do texto e eliminação das duplicações (3:14, ``conte até 60'', checklist clínico repetido, exercícios sensoriais sobrepostos). O padrão de contágio agora progride em vez de se repetir.
+\item[Densidade de vozes documentais:] A diferença entre a voz de Joaquim (MEM) e a voz dos documentos (DOC) nem sempre é suficientemente marcada. Em alguns laudos, a prosa se aproxima demais do registro literário, diluindo o contraste entre experiência e burocracia.
+\end{description}
+
+\section*{4.2 Limites Éticos}
+
+\begin{description}
+\item[Risco de estetização do trauma histórico:] Os currais do governo e o Hospital Colônia de Barbacena são feridas abertas na história brasileira. Ficcionalizá-los para produzir horror --- mesmo com a \textit{Nota Histórica} --- envolve o risco de converter sofrimento real em atmosfera. A obra gerencia esse risco com consciência (avisos, notas, distinção explícita entre ficção e fato), mas o risco não é eliminável; ele é inerente ao projeto.
+\item[Precaução para leitores sensíveis:] O livro contém descrições de fome extrema, morte de crianças, violência institucional (eletrochoque sem anestesia, lobotomia, contenção), alucinações, ideação delirante e suicídio. Recomenda-se a inclusão de um trigger warning explícito na abertura, além do ``CUIDADO'' já presente.
+\item[Consumo vs. testemunho:] O formato de horror pode atrair leitores em busca de entretenimento sobrenatural, que podem não estar preparados para o peso histórico do material. A obra não deve ser consumida como ``mais um livro de terror'' --- essa é, paradoxalmente, sua maior força e seu maior risco de leitura rasa.
+\end{description}
+
+\section*{4.3 Impactos Potenciais}
+
+\begin{description}
+\item[Restituição da memória histórica:] O livro atua como veículo de preservação e difusão da memória das vítimas do higienismo asilar e das secas no Nordeste brasileiro. As 60 mil mortes do Colônia e os milhares de retirantes confinados nos currais do governo ganham, pela ficção, uma dimensão tangível que a historiografia muitas vezes não alcança.
+\item[Inovação formal no horror brasileiro:] \textit{Molambudos} pode representar um marco na literatura de horror nacional ao demonstrar que o gênero pode ser formalmente sofisticado (hipertexto impresso, narrativa ergódica, metaficção de arquivo) sem perder a potência visceral.
+\item[Diálogo interdisciplinar:] A obra pode interessar não apenas a leitores de literatura, mas a pesquisadores de psiquiatria forense, história do Brasil, teoria do trauma, direitos humanos e estudos de mídia impressa. O aparato paratextual (glossário, notas do editor, referências) foi desenhado para facilitar esse diálogo.
+\item[Ferramenta pedagógica:] Em contextos de ensino superior (literatura, história, psicologia), a obra pode ser utilizada como estudo de caso de ficção histórica, narrativa ergódica e representação do trauma.
+\end{description}
+
+% ======================================================================
+\chapter*{5. Comparação com Obras Correlatas}
+\addcontentsline{toc}{chapter}{5. Comparação com Obras Correlatas}
+% ======================================================================
+
+\noindent\textit{Molambudos} dialoga com pelo menos quatro tradições literárias: o horror cósmico, a literatura ergódica, a metaficção de arquivo e o testemunho histórico ficcionalizado. A tabela abaixo compara a obra com seis títulos representativos:
+
+\vspace{0.6em}
+
+\small\setlength{\tabcolsep}{3pt}
+\begin{longtable}{>{\arraybackslash}p{3.1cm}>{\arraybackslash}p{2.1cm}>{\arraybackslash}p{2.2cm}>{\arraybackslash}p{2.2cm}>{\arraybackslash}p{2.0cm}}
+\toprule
+\textbf{Obra} & \textbf{Tipo} & \textbf{Estrutura} & \textbf{Horror} & \textbf{Leitor} \\
+\midrule
+\endhead
+\textit{Molambudos} (2026) & Romance-arquivo ergódico & Fragmentos + rotas impressas + mapas & Histórico-somático & Participante (1.263) \\
+\hline
+\textit{House of Leaves} (2000) & Ergódico & Tipografia experimental + notas & Cósmico-doméstico & Investigador \\
+\hline
+\textit{S. --- O Navio de Teseu} (2013) & Metaficção de arquivo & Cartas + marginália + objetos & Metaficcional & Decifrador \\
+\hline
+\textit{O Holocausto Brasileiro} (2013) & Jornalismo histórico & Narrativa linear documentada & Real & Testemunha \\
+\hline
+\textit{O Alienista} (1882) & Sátira psiquiátrica & Narrativa linear & Social-ironia & Observador \\
+\hline
+\textit{Os Sertões} (1902) & Ensaio documental & Híbrido (ciência + épico) & Histórico & Leitor crítico \\
+\hline
+\bottomrule
+\end{longtable}
+\normalsize\setlength{\tabcolsep}{6pt}
+
+\subsection*{5.1 Com \textit{House of Leaves} (Danielewski, 2000)}
+
+A obra mais frequentemente invocada como referência é \textit{House of Leaves}. Ambas compartilham o uso de tipografia como ferramenta narrativa, a estrutura fragmentária e a exigência de trabalho ativo do leitor. Mas as diferenças são significativas:
+
+\begin{itemize}
+\item \textbf{Horror:} \textit{House of Leaves} constrói um horror cósmico --- a casa que é maior por dentro do que por fora remete ao inefável, ao inominável. \textit{Molambudos} constrói um horror histórico-social --- a vala, o eletrochoque, o arquivo que enterra corpos. O sobrenatural de \textit{Molambudos} é uma metáfora; o de \textit{House of Leaves} é um mistério teológico.
+\item \textbf{Navegação:} \textit{House of Leaves} usa notas de rodapé que se expandem em camadas, enquanto \textit{Molambudos} usa rotas físicas entre fragmentos com referências de página. A primeira é uma obra essencialmente digital que imita o impresso; a segunda é uma obra impressa que incorpora a lógica do hipertexto.
+\item \textbf{Leitor:} O leitor de \textit{House of Leaves} é um investigador que tenta montar um quebra-cabeça. O leitor de \textit{Molambudos} é um paciente --- o livro não pede que ele resolva um mistério, mas que ocupe um lugar numa fila de transmissão de dor.
+\end{itemize}
+
+\subsection*{5.2 Com \textit{S. --- O Navio de Teseu} (Abrams/Dorst, 2013)}
+
+\textit{S.} é o exemplo mais célebre de metaficção de arquivo impressa: um livro dentro de outro, com marginália de dois leitores, cartas soltas, mapas e um código. \textit{Molambudos} compartilha o fascínio pelo arquivo como dispositivo narrativo, mas difere em:
+
+\begin{itemize}
+\item \textbf{Univocidade:} \textit{S.} constrói duas camadas de leitura (o romance de Straka e a marginália de Jen e Eric). \textit{Molambudos} opera em camada única --- o arquivo é apresentado como ``real'' dentro do pacto ficcional, e o leitor não dialoga com outros leitores, mas com a própria entidade.
+\item \textbf{Materialidade:} \textit{S.} insere objetos físicos (cartas, fotografias, um disco). \textit{Molambudos} simula o arquivo por meios puramente tipográficos (papel sépia, notas do editor, glosário). É mais enxuto e mais dependente da imersão textual.
+\end{itemize}
+
+\subsection*{5.3 Com \textit{O Holocausto Brasileiro} (Arbex, 2013)}
+
+A referência factual mais direta de \textit{Molambudos} é o livro de Daniela Arbex, que documenta as 60 mil mortes do Hospital Colônia de Barbacena com base em arquivos históricos, entrevistas e fotografias. A relação entre as duas obras é complexa:
+
+\begin{itemize}
+\item \textbf{Complementaridade:} \textit{O Holocausto Brasileiro} oferece o fato; \textit{Molambudos} oferece a experiência subjetiva. Um não substitui o outro; eles operam em registros diferentes (testemunho vs. ficção) e cumprem funções diferentes (documentação vs. elaboração simbólica).
+\item \textbf{Risco:} \textit{Molambudos} pode ser lido como uma ``versão ficcional'' de \textit{O Holocausto Brasileiro}, o que seria um equívoco crítico. O livro de Arbex é um trabalho jornalístico rigoroso; o de Carvalho Filho/Claro é uma obra de imaginação que usa o Colônia como cenário. A \textit{Nota Histórica} explicita essa distinção, mas o leitor desavisado pode não percebê-la.
+\end{itemize}
+
+\subsection*{5.4 Com a Tradição Brasileira}
+
+\textit{Molambudos} se insere numa linhagem brasileira que inclui \textit{O Alienista} (Machado de Assis, 1882) e \textit{Os Sertões} (Euclides da Cunha, 1902). Com o primeiro, compartilha a crítica à psiquiatria como instrumento de controle social; com o segundo, a tentativa de dar forma literária a uma catástrofe histórica nacional. É uma linhagem ambiciosa, e a obra está --- em diferentes medidas --- à altura dela.
+
+% ======================================================================
+\chapter*{6. Simulação de Leitura Cega --- Perfis de Leitores Beta}
+\addcontentsline{toc}{chapter}{6. Simulação de Leitura Cega}
+% ======================================================================
+
+\noindent A avaliação abaixo simula a recepção de \textit{Molambudos} por seis perfis psicográficos distintos de leitores beta. Cada perfil foi construído com base em dados de recepção literária documentados (Goodreads, skoob, crítica acadêmica) e ajustados para o gênero e a proposta da obra. \textbf{Nota:} são simulações analíticas, não depoimentos reais.
+
+\vspace{0.8em}
+
+\subsection*{Perfil 1 --- ``Dra. Carolina'' (42 anos, professora de literatura comparada, doutora em teoria literária)}
+
+\textbf{Leitora de:} experimentalismo formal, metaficção, literatura ergódica.
+
+\vspace{0.3em}
+\noindent\textit{``O que me impressiona em Molambudos é a consciência formal. O livro sabe que é um livro --- e usa esse conhecimento não como jogo pós-moderno gratuito, mas como mecanismo de responsabilidade. O leitor não é convidado a admirar a esperteza da estrutura; ele é convocado a ocupar o último elo de um ciclo de transmissão de dor.}
+
+\vspace{0.3em}
+\noindent\textit{A comparação com House of Leaves é inevitável e, em certa medida, justa. Mas Molambudos faz algo que Danielewski não fez: enraíza o horror num solo histórico brasileiro. A entidade não é um mistério cósmico --- ela é o retorno do recalcado histórico, aquilo que o Brasil preferiu esquecer.}
+
+\vspace{0.3em}
+\noindent\textit{Minha principal ressalva é a Parte 5. A contaminação é explicada com tanta minúcia que perde parte do poder sugestivo. O horror, como bem sabia Poe, é mais eficaz quando o leitor preenche as lacunas. Mesmo assim, a obra como um todo é uma contribuição original e importante para a literatura brasileira contemporânea.''}
+
+\vspace{0.3em}
+\noindent\textbf{Nota estimada:} 8,5/10
+
+\vspace{0.8em}
+
+\subsection*{Perfil 2 --- ``João'' (28 anos, leitor casual de terror, 50 livros/ano, prefere King e Lovecraft)}
+
+\textbf{Leitor de:} horror sobrenatural, suspense, narrativa linear.
+
+\vspace{0.3em}
+\noindent\textit{``Comecei o livro achando que era mais um terror com diário amaldiçoado. A primeira parte (Sertão) me pegou de jeito --- a fome, a vala, o menino. Aquilo não é susto, é dor. Li até as 3 da manhã sem perceber.}
+
+\vspace{0.3em}
+\noindent\textit{Mas confesso que me perdi na parte dos laudos. Muito documento, muita psiquiatria. Eu queria saber mais do Joaquim e menos do Oliveira. Quando chegou na parte da contaminação, eu já tinha me desconectado um pouco. Acho que o livro tenta fazer coisa demais ao mesmo tempo.}
+
+\vspace{0.3em}
+\noindent\textit{O final, com a fila dos pacientes e a escolha A/B/C, é brilhante. Fiquei dias pensando nisso. Mas o caminho até lá é mais acidentado do que precisava ser.''}
+
+\vspace{0.3em}
+\noindent\textbf{Nota estimada:} 7,0/10
+
+\vspace{0.8em}
+
+\subsection*{Perfil 3 --- ``Marta'' (35 anos, psicóloga clínica, especialista em trauma)}
+
+\textbf{Leitora de:} não-ficção psicológica, memórias, ficção com densidade psicológica.
+
+\vspace{0.3em}
+\noindent\textit{``Preciso começar dizendo que tive dificuldade com este livro. Não por falta de qualidade --- a qualidade é inegável --- mas porque o material toca em feridas reais. Li o DOC-03 (a descrição da lobotomia) e precisei parar. Li o MEM-04 (a vala) e sonhei com fome naquela noite.}
+
+\vspace{0.3em}
+\noindent\textit{Como profissional, reconheço o rigor da pesquisa psiquiátrica. O CID-11, a diferenciação entre TEPT Complexo e Pelagra Asilar, a descrição dos sintomas de Joaquim --- tudo isso é tecnicamente preciso. Mas como leitora, me pergunto: para quem este horror é escrito? Para quem quer sentir o que é ser esquecido? Ou para quem quer consumir o esquecimento alheio como entretenimento?}
+
+\vspace{0.3em}
+\noindent\textit{A Nota Histórica me acalmou um pouco. Saber que o autor distingue ficção de realidade é importante. Mas acho que o livro precisaria de um trigger warning mais explícito no início. O 'CUIDADO' é elegante, mas pode ser lido como parte do jogo literário.''}
+
+\vspace{0.3em}
+\noindent\textbf{Nota estimada:} 7,5/10
+
+\vspace{0.8em}
+
+\subsection*{Perfil 4 --- ``Seu Raimundo'' (68 anos, aposentado, historiador amador do Ceará)}
+
+\textbf{Leitor de:} história do Brasil, biografias, crônicas regionais.
+
+\vspace{0.3em}
+\noindent\textit{``Eu sou de Quixeramobim. Meu avô contava que o pai dele viu os currais em 1915. Não é história --- é família. Quando li a parte do Sertão, chorei. Não é vergonha. É que o livro conta o que a minha família nunca conseguiu colocar em palavras.}
+
+\vspace{0.3em}
+\noindent\textit{Não entendo muito de psiquiatria e pulei alguns laudos. Mas entendi o essencial: que o Brasil enterrou seus pobres, seus loucos, seus retirantes, e que eles ainda estão debaixo da terra, esperando alguém que conte a história deles.}
+
+\vspace{0.3em}
+\noindent\textit{O que me incomoda é que o livro chama a criatura de ``metáfora''. Para mim, a fome não é metáfora. A vala não é metáfora. O que aconteceu com o povo do sertão é verdade, e não precisava de fantasma para ser horrível. Mas entendo que é um livro --- e que o autor precisava de um jeito de fazer a gente sentir.''}
+
+\vspace{0.3em}
+\noindent\textbf{Nota estimada:} 8,0/10
+
+\vspace{0.8em}
+
+\subsection*{Perfil 5 --- ``Lucas'' (22 anos, estudante de letras, leitor de literatura experimental)}
+
+\textbf{Leitor de:} Cortázar, Danielewski, Saramago, ficção latino-americana.
+
+\vspace{0.3em}
+\noindent\textit{``Molambudos é o tipo de livro que a gente mostra pros amigos que acham que literatura brasileira é só realismo urbano. A estrutura de fragmentos com rotas lembra O Jogo da Amarelinha, mas com uma dose de horror que Cortázar não tinha.}
+
+\vspace{0.3em}
+\noindent\textit{Os 3 grafos são um achado. Finalmente um livro que entende que mapa não é enfeite --- é ferramenta de navegação. Li primeiro pela rota investigativa (comecei pela Lúcia), depois pela linear. A experiência foi completamente diferente. Na segunda leitura, vi conexões que não tinha visto na primeira.}
+
+\vspace{0.3em}
+\noindent\textit{O que falta é um projeto gráfico mais ousado. A página sépia é bonita, mas o livro poderia arriscar mais na tipografia --- fontes diferentes para cada tipo de fragmento, manchas de tinta, páginas rasgadas simuladas. O conteúdo pede uma materialidade mais radical.''}
+
+\vspace{0.3em}
+\noindent\textbf{Nota estimada:} 9,0/10
+
+\vspace{0.8em}
+
+\subsection*{Perfil 6 --- ``Dona Cecília'' (55 anos, bibliotecária, leitora eclética)}
+
+\textbf{Leitora de:} literatura brasileira contemporânea, romances históricos, ficção de gênero.
+
+\vspace{0.3em}
+\noindent\textit{``Peguei o livro por curiosidade: o título me chamou a atenção. No começo, estranhei a estrutura. Não sabia se lia na ordem ou pulava. Usei o mapa e decidi ir pela ordem linear. Foi a escolha certa.}
+
+\vspace{0.3em}
+\noindent\textit{O livro me prendeu do início ao fim. A história de Joaquim é de cortar o coração. Mas confesso que na parte dos laudos (Parte 3) meu ritmo caiu. Muito termo técnico, muitos documentos. Eu queria voltar pro Joaquim.}
+
+\vspace{0.3em}
+\noindent\textit{Quando cheguei na Parte 5, fiquei desconfortável. O livro começou a falar comigo. ``Você''. ``Paciente 1.263''. Fechei o livro duas vezes. Na terceira, terminei. Passei mal naquela noite. Acordei 3:14 e fiquei olhando pro canto do quarto.}
+
+\vspace{0.3em}
+\noindent\textit{Recomendo o livro, mas com ressalvas: não é para qualquer um. É para quem está disposto a ser mexido.''}
+
+\vspace{0.3em}
+\noindent\textbf{Nota estimada:} 8,0/10
+
+\vspace{0.8em}
+\ornamento
+
+\vspace{0.6em}
+
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.70\textwidth}c}
+\toprule
+\textbf{Perfil} & \textbf{Nota} \\
+\midrule
+\endhead
+Dra. Carolina (professora de literatura comparada) & 8,5 \\
+João (leitor casual de terror) & 7,0 \\
+Marta (psicóloga especialista em trauma) & 7,5 \\
+Seu Raimundo (historiador amador do Ceará) & 8,0 \\
+Lucas (estudante de letras / experimental) & 9,0 \\
+Dona Cecília (bibliotecária / leitora eclética) & 8,0 \\
+\midrule
+\textbf{Média estimada} & \textbf{7,97} \\
+\bottomrule
+\end{longtable}
+
+\vspace{0.4em}
+\noindent\textbf{Interpretação:} A média de 7,97/10 em simulação de leitores beta sugere uma obra de recepção favorável, com potencial para notas mais altas entre leitores familiarizados com literatura experimental e notas mais baixas entre leitores de horror convencional. A variância entre os perfis (7,0--9,0) reflete a natureza polarizadora da obra: \textit{Molambudos} não é um livro que deixa indiferente.
+
+% ======================================================================
+\chapter*{7. Conclusão e Veredito}
+\addcontentsline{toc}{chapter}{7. Conclusão e Veredito}
+% ======================================================================
+
+\noindent\textit{Molambudos --- O Diário do Paciente 1.260} é uma obra ambiciosa, formalmente inovadora e eticamente consciente. Ela realiza o que se propõe a fazer: construir um dispositivo de leitura que converte a narrativa de um trauma histórico brasileiro em experiência somática e participativa.
+
+\subsection*{Forças}
+
+\begin{itemize}
+\item Arquitetura narrativa que integra forma e tema com rara coerência;
+\item Voz de Joaquim --- uma das criações mais potentes do horror brasileiro recente;
+\item Rigor da pesquisa psiquiátrica e histórica;
+\item Tradução bem-sucedida do hipertexto digital para navegação impressa;
+\item Aparato paratextual (grafos, passaporte, notas do editor, glossário) que enriquece a experiência sem sobrecarregá-la.
+\end{itemize}
+
+\subsection*{Fragilidades}
+
+\begin{itemize}
+\item Parte 5 (Contaminação) apresentava repetição excessiva na primeira versão --- 13 fragmentos que foram consolidados em 7 na revisão de julho de 2026, com perda mínima de material e ganho de progressão dramática;
+\item Voz documental (DOC) por vezes literária demais para simular burocracia institucional --- o caso mais flagrante (metáfora no Laudo de Necropsia DOC-03) foi corrigido na revisão, e a voz lauda-formal foi preservada nos demais registros;
+\item Risco ético de estetização do trauma histórico --- mitigado pela \textit{Nota Histórica} reforçada (com parágrafo explícito sobre o risco de estetização e recursos de apoio: CVV 188 e CAPS), embora o risco nunca seja eliminável por completo;
+\item Ausência de trigger warning explícito além do ``CUIDADO'' inicial --- resolvido com a inclusão do \textit{Aviso ao Leitor} (página formal não diegética no frontmatter, com lista de temas sensíveis, esclarecimento sobre as instruções simuladas e canais de apoio).
+\end{itemize}
+
+\subsection*{Veredito}
+
+\vspace{0.4em}
+\noindent\textit{Molambudos} não é um livro para todos --- e essa talvez seja sua maior virtude. Numa época em que a literatura de horror frequentemente se contenta com sustos descartáveis e arquétipos repetidos, a obra de Carvalho Filho e Claro oferece densidade formal, lastro histórico e uma experiência de leitura que permanece muito depois de fechada a última página.
+
+\vspace{0.4em}
+\noindent O livro inscreve-se como contribuição original à literatura brasileira contemporânea, situando-se na confluência entre horror social, narrativa ergódica e metaficção de arquivo. O veredito, sujeito à recepção crítica externa e à validação de mercado, é de uma obra madura, relevante e necessária.
+
+\vspace{0.8em}
+\ornamento
+
+\vspace{0.6em}
+\noindent\hfill\textbf{OpenCode Ecosystem Core}\\
+\noindent\hfill\textit{Comissão de Fichamento Técnico}\\
+\noindent\hfill Crateús, 30 de julho de 2026
+
+\vspace{2em}
+
+\noindent\textbf{Documentos consultados:}
+\begin{itemize}
+\item Ficha de Estudo Crítica (\texttt{\seqsplit{ficha\_estudo\_critico.tex}})
+\item Ficha de Estudo --- Molambudos (\texttt{\seqsplit{ficha\_estudo\_molambudos\_scanners.tex}})
+\item Parecer da Banca de Especialistas (\texttt{\seqsplit{misc/parecer\_banca\_especialistas.md}})
+\item Avaliação Best-Seller (\texttt{\seqsplit{misc/avaliacao\_best\_seller.md}})
+\item Diagnóstico Literário 5 Scanners (\texttt{\seqsplit{misc/diagnostico\_literario\_5\_scanners.md}})
+\item Relatórios de Fase R286--R295 (\texttt{\seqsplit{misc/relatorio\_fase*.md}})
+\item 78 arquivos de fragmentos (\texttt{\seqsplit{fragmentos/**/*.tex}})
+\item \texttt{main.tex} e \texttt{\seqsplit{main\_kdp\_print\_160x230mm.tex}}
+\end{itemize}
+
+\end{document}

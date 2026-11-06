@@ -1,0 +1,29 @@
+% =============================================================================
+% Wrapper de impressão Amazon/KDP — edição inglesa (EN) em 160 × 230 mm
+% =============================================================================
+% Um arquivo por edição, com jobname próprio (R402). Antes existiam QUATRO
+% wrappers chamados `main_kdp_print_160x230mm.tex` — na raiz (PT), em `en/`,
+% em `zh/` e em `tri/` — todos compilados a partir da raiz do livro e todos
+% produzindo o MESMO `main_kdp_print_160x230mm.pdf`. Quem compilasse dois
+% sobrescrevia o outro sem aviso, e o PDF na raiz era, na prática, o último
+% que tivesse rodado.
+%
+% Compilar a partir da raiz do livro, duas passadas:
+%   pdflatex -interaction=nonstopmode main_kdp_en_160x230mm.tex
+%   pdflatex -interaction=nonstopmode main_kdp_en_160x230mm.tex
+%
+% Herda integralmente o miolo de en/main_en.tex — mesmo texto, mesmos fragmentos,
+% mesma navegação. O que este arquivo muda é só a geometria de impressão.
+% =============================================================================
+
+\def\KDPPRINT{1}
+\def\MolambudosPaperWidth{160mm}
+\def\MolambudosPaperHeight{230mm}
+\def\MolambudosInnerMargin{20mm}
+\def\MolambudosOuterMargin{15mm}
+\def\MolambudosTopMargin{18mm}
+\def\MolambudosBottomMargin{18mm}
+\def\MolambudosKDPSafeFolios{1}
+\def\MolambudosCompactIndex{1}
+
+\input{en/main_en.tex}

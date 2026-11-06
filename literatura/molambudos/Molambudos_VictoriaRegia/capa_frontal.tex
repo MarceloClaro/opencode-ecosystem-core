@@ -1,0 +1,41 @@
+% =============================================================================
+% CAPA FRONTAL INDEPENDENTE — MOLAMBUDOS
+% Dimensões de Corte: 6.197in x 9.236in (com Sangria: 6.447in x 9.486in)
+% =============================================================================
+
+\documentclass[12pt]{article}
+\usepackage[
+  paperwidth=6.447in,
+  paperheight=9.486in,
+  margin=0in
+]{geometry}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[brazilian]{babel}
+\usepackage{ebgaramond}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tikz}
+
+\pagestyle{empty}
+
+\definecolor{fundoescuro}{HTML}{1A1410}
+\definecolor{customgold}{HTML}{CBA135}
+
+\begin{document}
+
+\begin{tikzpicture}[remember picture, overlay, x=1in, y=1in]
+  % Fundo Sangrado integral
+  \fill[fundoescuro] (current page.south west) rectangle (current page.north east);
+
+  % Imagem da Capa Frontal (centralizada com 0.125in de sangria em volta)
+  \node[anchor=center] at (current page.center) {%
+    \includegraphics[width=6.197in, height=9.236in, keepaspectratio=true]{frontmatter/capa.png}%
+  };
+
+  % Guias sutis de corte (Trim area 6.197in x 9.236in)
+  \draw[customgold!30, dashed, line width=0.4pt] (0.125, 0.125) rectangle (6.322, 9.361);
+\end{tikzpicture}
+
+\end{document}

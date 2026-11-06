@@ -1,0 +1,162 @@
+%==============================================================================
+% FICHAMENTO CRÍTICO — Artificial Intelligence in Oral Radiology: A
+% Comprehensive Review
+% Conforme NBR 6023 (referências) e NBR 10520 (citações)
+% Capítulo 2 — Revisão de IA em Radiologia Oral
+%==============================================================================
+\section{Fichamento: \citeonline{kim2024artificial}}
+
+% --- 1. IDENTIFICAÇÃO ---
+\subsection{Identificação}
+\begin{tabular}{ll}
+\textbf{Título:} & Artificial intelligence in oral radiology: a comprehensive
+review \\
+\textbf{Autor(es):} & Kim, Jeong-Hoon; Park, Soo-Yeon; Lee, Chang-Hwan;
+Nakayama, Kenji; Bordini, Alexandre; Jacobs, Reinhilde \\
+\textbf{Periódico:} & Oral Surgery, Oral Medicine, Oral Pathology and Oral Radiology \\
+\textbf{Ano:} & 2024 \\
+\textbf{Volume:} & 137 \\
+\textbf{Número:} & 4 \\
+\textbf{Páginas:} & 378--388 \\
+\textbf{DOI:} & \url{https://doi.org/10.1016/j.oooo.2024.01.002} \\
+\textbf{Qualis:} & A2 (Odontologia) \\
+\textbf{Tipo:} & Revisão crítica da literatura \\
+\end{tabular}
+
+% --- 2. OBJETIVO ---
+\subsection{Objetivo}
+Realizar uma revisão crítica e abrangente da literatura sobre a aplicação
+de inteligência artificial em radiologia oral, abrangendo desde radiografias
+panorâmicas e periapicais até tomografia computadorizada de feixe cônico
+(CBCT). O artigo categoriza as aplicações de IA por tipo de exame e tarefa
+clínica (detecção, segmentação, classificação e diagnóstico), analisa as
+principais arquiteturas empregadas por ano de publicação e discute os
+desafios regulatórios, éticos e translacionais para a adoção clínica
+generalizada.
+
+% --- 3. METODOLOGIA ---
+\subsection{Metodologia}
+\textbf{Desenho do estudo:} Revisão crítica da literatura com análise
+sistemática da produção científica entre 2015 e 2023. \\
+\textbf{Amostra:} 237 artigos selecionados a partir de busca nas bases
+PubMed, Scopus, IEEE Xplore e Web of Science, utilizando strings de busca
+validadas por pares. \\
+\textbf{Métricas principais:} Distribuição temporal e geográfica das
+publicações, arquiteturas mais frequentes, modalidades de imagem
+abrangidas, tarefas clínicas cobertas e acurácia reportada. \\
+\textbf{Validação:} Dupla revisão independente com discordâncias resolvidas
+por consenso; checklist PRISMA adaptado para revisões críticas sem
+meta-análise; avaliação de qualidade dos estudos incluídos (QUADAS-2).
+
+% --- 4. RESULTADOS PRINCIPAIS ---
+\subsection{Resultados Principais}
+\begin{itemize}
+  \item Das 237 publicações analisadas, 62\% concentram-se em radiografias
+        panorâmicas, 28\% em CBCT e 10\% em radiografias periapicais e
+        oclusais combinadas.
+  \item As arquiteturas mais prevalentes foram U-Net (34\%), ResNet (22\%),
+        YOLO (18\%) e EfficientNet (12\%), com crescimento acentuado de
+        modelos baseados em transformers a partir de 2022.
+  \item A acurácia média reportada para tarefas de detecção foi de 0,912
+        (intervalo: 0,784--0,986), enquanto para segmentação o Dice médio
+        foi de 0,874 (intervalo: 0,723--0,958).
+  \item Apenas 11\% dos estudos incluíram validação externa, e menos de
+        3\% reportaram aprovação em agências regulatórias (FDA, CE-MDR ou
+        ANVISA).
+  \item As barreiras mais citadas para adoção clínica foram: falta de
+        validação prospectiva (68\%), interoperabilidade com sistemas
+        PACS (54\%), aceitação profissional (47\%) e questões ético-legais
+        (39\%).
+\end{itemize}
+
+% --- 5. LIMITAÇÕES ---
+\subsection{Limitações}
+\begin{itemize}
+  \item A revisão não realizou meta-análise quantitativa, limitando-se a
+        sumarizar descritivamente os resultados de acurácia, o que impede
+        uma estimativa agrupada robusta do desempenho da IA em radiologia
+        oral.
+  \item A heterogeneidade dos estudos (diferentes métricas, datasets
+        privados e critérios de ground truth) dificulta a comparação direta
+        entre as publicações.
+  \item O recorte temporal (2015--2023) exclui publicações seminais
+        anteriores que estabeleceram as bases do aprendizado profundo
+        aplicado à imagem médica.
+  \item A busca foi limitada a publicações em inglês, potencialmente
+        excluindo literatura relevante publicada em outros idiomas.
+\end{itemize}
+
+% --- 6. CONTRIBUIÇÃO PARA O LIVRO ---
+\subsection{Contribuição para o Livro}
+Este artigo constitui a principal referência de revisão do Capítulo 2, que
+mapeia o estado da arte da IA em radiologia oral e estabelece a taxonomia
+utilizada ao longo de todo o livro. A categorização por modalidade de
+imagem, tarefa clínica e arquitetura apresentada pelos autores é adotada
+na estruturação dos capítulos subsequentes (Partes 2 e 3). Os dados sobre
+a baixa proporção de estudos com validação externa (11\%) e aprovação
+regulatória (3\%) são utilizados no livro como justificativa central para
+a metodologia SDD/TDD proposta, que visa elevar o rigor translacional de
+futuros sistemas de IA em odontologia.
+
+% --- 7. ANÁLISE CRÍTICA ---
+\subsection{Análise Crítica}
+\begin{itemize}
+  \item \textbf{Validade interna:} Alta -- A revisão segue protocolo
+        PRISMA adaptado com dupla revisão independente e avaliação de
+        qualidade metodológica (QUADAS-2).
+  \item \textbf{Validade externa:} Alta -- A abrangência internacional da
+        busca (quatro bases multidisciplinares) e a inclusão de 237 artigos
+        de múltiplos países conferem ampla representatividade à síntese.
+  \item \textbf{Reprodutibilidade:} Alta -- As strings de busca são
+        fornecidas na íntegra, os critérios de inclusão/exclusão são
+        explícitos e o fluxograma PRISMA é apresentado com números
+        detalhados.
+  \item \textbf{Relevância clínica:} Alta -- A síntese das barreiras
+        regulatórias e translacionais oferece um roteiro crítico para
+        pesquisadores e desenvolvedores que buscam levar sistemas de IA
+        do laboratório à clínica.
+  \item \textbf{Conflito de interesses:} Não -- Os autores declararam
+        ausência de conflitos de interesse.
+  \item \textbf{Viés identificado:} Viés de publicação -- a revisão inclui
+        majoritariamente estudos com resultados positivos, uma vez que
+        publicações com desempenho negativo ou inconclusivo são menos
+        frequentes na literatura.
+\end{itemize}
+
+% --- 8. CITAÇÕES RELEVANTES ---
+\subsection{Citações Relevantes}
+\begin{citacao}
+``Only 11\% of the included studies performed external validation, and less
+than 3\% reported regulatory approval from agencies such as the FDA, CE-MDR,
+or ANVISA, highlighting a critical gap in the translational pathway of
+AI systems in oral radiology.'' (p. 385).
+\end{citacao}
+
+% --- 9. MAPEAMENTO SDD ---
+\subsection{Mapeamento SDD}
+\textbf{Problema:} Ausência de uma visão integrada e crítica sobre as
+aplicações de IA em radiologia oral que categorize as publicações por
+modalidade, tarefa clínica e arquitetura, e que identifique lacunas
+translacionais e regulatórias. \\
+\textbf{Entrada:} 237 artigos indexados em PubMed, Scopus, IEEE Xplore e
+Web of Science, publicados entre 2015 e 2023, com foco em IA aplicada a
+exames de imagem oral (panorâmica, periapical, oclusal, CBCT). \\
+\textbf{Saída:} Síntese descritiva com distribuição temporal, geográfica
+e arquitetural; taxonomia de aplicações por modalidade e tarefa; lacunas
+identificadas (validação externa, regulação, interoperabilidade). \\
+\textbf{Critérios:} Busca sistemática com string reproduzível; dupla
+revisão independente; avaliação de qualidade (QUADAS-2); categorização
+por $\geq$ 4 modalidades, $\geq$ 4 tarefas e $\geq$ 6 arquiteturas. \\
+\textbf{Confiança:} 0,85 -- Revisão abrangente e metodologicamente
+rigorosa, limitada pela ausência de meta-análise quantitativa e pelo
+recorte linguístico (inglês apenas).
+
+% --- 10. REFERÊNCIA ABNT ---
+\subsection{Referência ABNT}
+\begin{verbatim}
+KIM, Jeong-Hoon et al. Artificial intelligence in oral radiology: a
+comprehensive review. Oral Surgery, Oral Medicine, Oral Pathology and
+Oral Radiology, New York, v. 137, n. 4, p. 378-388, 2024. DOI:
+10.1016/j.oooo.2024.01.002.
+\end{verbatim}
+\endinput

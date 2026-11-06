@@ -1,0 +1,68 @@
+name: OdontoIA Book CI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        theme: [dark, light]
+
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: 🔧 Install TeX Live
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq --no-install-recommends \
+            texlive-xetex \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            texlive-fonts-extra \
+            texlive-bibtex-extra \
+            texlive-science \
+            texlive-pictures \
+            texlive-lang-portuguese \
+            biber \
+            makeindex \
+            latexmk \
+            fonts-inconsolata
+          sudo fc-cache -fv 2>/dev/null
+
+      - name: 🏗️ Build ${{ matrix.theme }} theme
+        run: |
+          mkdir -p build
+          make ${{ matrix.theme }} 2>&1 | tail -20
+
+      - name: 📄 Check PDF
+        run: |
+          if [ ! -f "build/odontoia-lathex-${{ matrix.theme }}.pdf" ]; then
+            echo "❌ PDF not generated for ${{ matrix.theme }} theme!"
+            exit 1
+          fi
+          echo "📊 PDF size: $(du -h build/odontoia-lathex-${{ matrix.theme }}.pdf | cut -f1)"
+          xelatex --version | head -1
+          echo "✅ Build ${{ matrix.theme }} successful!"
+
+      - name: 📤 Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: odontoia-lathex-${{ matrix.theme }}
+          path: build/odontoia-lathex-${{ matrix.theme }}.pdf
+          retention-days: 30

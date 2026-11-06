@@ -1,0 +1,133 @@
+%==============================================================================
+% FICHAMENTO CRÍTICO — Enhancing Deep Learning Classification Performance of
+% Tongue Lesions in Imbalanced Data: Mosaic-Based Soft Labeling with
+% Curriculum Learning
+% Conforme NBR 6023 (referências) e NBR 10520 (citações)
+%==============================================================================
+\section{Fichamento: \citeonline{lee2024tongue}}
+
+% --- 1. IDENTIFICAÇÃO ---
+\subsection{Identificação}
+\begin{tabular}{ll}
+\textbf{Título:} & Enhancing deep learning classification performance of tongue
+lesions in imbalanced data: mosaic-based soft labeling with curriculum learning \\
+\textbf{Autor(es):} & Lee, Sung-Jae; Oh, Hyun Jun; Son, Young-Don; Kim, Jong-Hoon;
+Kwon, Ik-Jae; Kim, Bongju \\
+\textbf{Periódico:} & BMC Oral Health \\
+\textbf{Ano:} & 2024 \\
+\textbf{Volume:} & 24 \\
+\textbf{Número:} & 1 \\
+\textbf{Páginas:} & 161 \\
+\textbf{DOI:} & \url{https://doi.org/10.1186/s12903-024-03898-3} \\
+\textbf{Qualis:} & A2 (Odontologia) \\
+\textbf{Tipo:} & Artigo original \\
+\end{tabular}
+
+% --- 2. OBJETIVO ---
+\subsection{Objetivo}
+Avaliar uma nova técnica de inteligência artificial baseada em mosaic-based soft
+labeling com curriculum learning (CL) para melhorar o desempenho de classificação
+de lesões de língua em um conjunto de dados desbalanceado, utilizando o modelo
+EfficientNet-B0 como extrator de características e Grad-CAM para visualização das
+regiões relevantes.
+
+% --- 3. METODOLOGIA ---
+\subsection{Metodologia}
+\textbf{Desenho do estudo:} Estudo experimental de desenvolvimento e validação de
+modelo de deep learning. \\
+\textbf{Amostra:} 1.810 imagens de língua, sendo 372 de câncer, 141 de OPMDs
+(desordens potencialmente malignas orais) e 1.297 de lesões não cancerosas. \\
+\textbf{Métricas principais:} Acurácia, precisão, recall, F1-score, análise por
+curva ROC. \\
+\textbf{Validação:} Divisão treino/validação/teste (1.630 treino + 1.200 imagens
+sintéticas / 180 teste), com validação cruzada interna e comparação com métodos
+baseline (oversampling e weight balancing).
+
+% --- 4. RESULTADOS PRINCIPAIS ---
+\subsection{Resultados Principais}
+\begin{itemize}
+  \item O modelo final (MBO: mosaic-based soft labeling + curriculum learning)
+        alcançou acurácia de 0,9444, superando oversampling (0,9111) e weight
+        balancing (0,9278).
+  \item A precisão relativa para a classe minoritária OPMD melhorou 21,2\% (de
+        0,6875 para 0,8333) e o F1-score relativo melhorou 4,9\% (de 0,7333 para
+        0,7692).
+  \item O Grad-CAM foi utilizado para extrair regiões representativas de cada
+        imagem, convertidas em mapas binários via limiar de Otsu para compor as
+        imagens mosaic sintéticas.
+\end{itemize}
+
+% --- 5. LIMITAÇÕES ---
+\subsection{Limitações}
+\begin{itemize}
+  \item O desempenho global ficou aquém das expectativas iniciais dos autores,
+        com melhora concentrada apenas na classe minoritária OPMD.
+  \item A amostra total é modesta (1.810 imagens) e proveniente de um único
+        centro, limitando a validade externa dos resultados.
+  \item O método proposto aumenta a complexidade computacional do pipeline de
+        treinamento (duas etapas com geração de imagens sintéticas intermediárias).
+\end{itemize}
+
+% --- 6. CONTRIBUIÇÃO PARA O LIVRO ---
+\subsection{Contribuição para o Livro}
+Este artigo fundamenta diretamente os Capítulos 7 e 10, que tratam do uso de
+EfficientNet com Grad-CAM para classificação de OPMDs. A estratégia de
+mosaic-based soft labeling com CL oferece uma solução concreta para o problema
+de desbalanceamento de classes, recorrente em bases de dados odontológicas
+(onde lesões malignas e OPMDs são muito menos frequentes que lesões benignas).
+O uso do Grad-CAM como mecanismo de explainable AI (XAI) para guiar a
+augmentação de dados é uma contribuição metodológica relevante para o arcabouço
+SDD/TDD do livro. O código e a abordagem são replicáveis e podem ser integrados
+ao pipeline de experimentação descrito na Parte 3 do livro.
+
+% --- 7. ANÁLISE CRÍTICA ---
+\subsection{Análise Crítica}
+\begin{itemize}
+  \item \textbf{Validade interna:} Alta -- O estudo controla adequadamente as
+        variáveis de confusão (arquitetura fixa, transfer learning com ImageNet,
+        comparação com baselines estabelecidos).
+  \item \textbf{Validade externa:} Média -- Amostra de um único centro sul-coreano,
+        sem validação em populações multiétnicas ou multicêntricas.
+  \item \textbf{Reprodutibilidade:} Alta -- A metodologia é descrita com detalhes
+        suficientes (EfficientNet-B0, Grad-CAM, Otsu, CL em duas etapas) para
+        replicação independente.
+  \item \textbf{Relevância clínica:} Alta -- OPMDs são lesões de difícil
+        classificação mesmo para especialistas; a melhoria de 21,2\% na precisão
+        pode ter impacto direto no encaminhamento e biópsia.
+  \item \textbf{Conflito de interesses:} Não -- Os autores declararam ausência de
+        conflitos.
+  \item \textbf{Viés identificado:} Viés de seleção -- a amostra é oriunda de
+        registros hospitalares, podendo não representar a distribuição real de
+        lesões de língua na população geral.
+\end{itemize}
+
+% --- 8. CITAÇÕES RELEVANTES ---
+\subsection{Citações Relevantes}
+\begin{citacao}
+``The final model (MBO), which was trained using the newly added mosaic-based
+soft labeling dataset (Stage 2), achieved an accuracy rate of 0.9444. This
+outperformed conventional oversampling (0.9111) and weight balancing methods
+(0.9278).'' (p. 11).
+\end{citacao}
+
+% --- 9. MAPEAMENTO SDD ---
+\subsection{Mapeamento SDD}
+\textbf{Problema:} Classificação de lesões de língua (câncer, OPMD, não cancerosa)
+em dados desbalanceados com baixa representatividade da classe OPMD. \\
+\textbf{Entrada:} Imagens fotográficas de língua (RGB), 1.810 amostras com
+desequilíbrio de classes (372 câncer, 141 OPMD, 1.297 não cancerosas). \\
+\textbf{Saída:} Probabilidades por classe (câncer, OPMD, não cancerosa) com
+mapeamento por mosaic-based soft labeling (rótulo contínuo por área ocupada). \\
+\textbf{Critérios:} Acurácia $\geq$ 0,94; precisão OPMD $\geq$ 0,83; F1-score
+OPMD $\geq$ 0,76; superação dos baselines oversampling e weight balancing. \\
+\textbf{Confiança:} 0,75 -- Estudo bem delineado, mas com amostra unicêntrica
+modesta e resultados aquém das expectativas iniciais dos autores.
+
+% --- 10. REFERÊNCIA ABNT ---
+\subsection{Referência ABNT}
+\begin{verbatim}
+LEE, Sung-Jae et al. Enhancing deep learning classification performance of
+tongue lesions in imbalanced data: mosaic-based soft labeling with curriculum
+learning. BMC Oral Health, London, v. 24, n. 1, p. 161, 2024. DOI:
+10.1186/s12903-024-03898-3.
+\end{verbatim}

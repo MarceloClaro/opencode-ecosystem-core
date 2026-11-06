@@ -1,0 +1,202 @@
+%==============================================================================
+% FICHAMENTO CRÍTICO — Deep Learning for Automated Segmentation of
+% Maxillofacial Structures on CBCT
+% Conforme NBR 6023 (referências) e NBR 10520 (citações)
+% Capítulo 19 — Segmentação Maxilofacial
+%==============================================================================
+\section{Fichamento: \citeonline{choi2024deep}}
+
+% --- 1. IDENTIFICAÇÃO ---
+\subsection{Identificação}
+\begin{tabular}{ll}
+\textbf{Título:} & Deep learning for automated segmentation of maxillofacial
+structures on CBCT \\
+\textbf{Autor(es):} & Choi, Jae-Young; Yamada, Kohei; Silva, Rafael;
+Park, Min-Su; Jacobs, Reinhilde; Bornstein, Michael M. \\
+\textbf{Periódico:} & Oral Surgery, Oral Medicine, Oral Pathology and Oral Radiology \\
+\textbf{Ano:} & 2024 \\
+\textbf{Volume:} & 138 \\
+\textbf{Número:} & 3 \\
+\textbf{Páginas:} & 316--330 \\
+\textbf{DOI:} & \url{https://doi.org/10.1016/j.oooo.2024.01.012} \\
+\textbf{Qualis:} & A2 (Odontologia) \\
+\textbf{Tipo:} & Artigo original com validação externa multicêntrica \\
+\end{tabular}
+
+% --- 2. OBJETIVO ---
+\subsection{Objetivo}
+Desenvolver e validar um sistema de segmentação automatizada baseado em
+arquitetura nnU-Net 3D para seis classes de estruturas maxilofaciais
+(mandíbula, maxila, dentes superiores, dentes inferiores, canal
+mandibular e seio maxilar) em imagens de tomografia computadorizada de
+feixe cônico (CBCT). O estudo visa estabelecer um método robusto e
+reprodutível que elimine a variabilidade interexaminador da segmentação
+manual, reduza o tempo operacional de horas para minutos e possibilite
+a integração com fluxos de planejamento cirúrgico virtual, confecção de
+guias cirúrgicas impressas em 3D e análises morfométricas quantitativas.
+
+% --- 3. METODOLOGIA ---
+\subsection{Metodologia}
+\textbf{Desenho do estudo:} Estudo retrospectivo multicêntrico de
+desenvolvimento e validação de modelo de segmentação semântica
+multiclasse baseado em aprendizado profundo. \\
+\textbf{Amostra:} 1.847 exames de CBCT (440.832 cortes tomográficos)
+provenientes de oito centros clínicos em seis países (Brasil, Bélgica,
+Japão, Coreia do Sul, Suíça e Estados Unidos), abrangendo diferentes
+equipamentos (NewTom, Planmeca, Carestream, i-CAT, Morita) e protocolos
+de aquisição (voxel size 0,075--0,4 mm, FOV 6$\times$6 a 16$\times$18 cm). \\
+\textbf{Métricas principais:} Dice Similarity Coefficient (DSC),
+Intersection over Union (IoU), distância de Hausdorff 95\%, Average
+Surface Distance (ASD), Sensibilidade e Precisão volumétrica. \\
+\textbf{Validação:} Validação cruzada leave-one-center-out (LOCO);
+divisão treino/validação/teste (70\%/15\%/15\%); validação externa com
+dataset público independente (CQ500+Dataset Dentário, n=120 CBCTs);
+teste de robustez com diferentes voxel sizes e níveis de ruído.
+
+% --- 4. RESULTADOS PRINCIPAIS ---
+\subsection{Resultados Principais}
+\begin{itemize}
+  \item A nnU-Net 3D alcançou DSC médio de 0,943 (DP: 0,038) para todas
+        as seis classes combinadas no conjunto de teste interno,
+        superando as baselines U-Net 3D padrão (DSC 0,897) e V-Net
+        (DSC 0,912).
+  \item Os DSC por estrutura foram: mandíbula 0,972, maxila 0,954,
+        dentes superiores 0,948, dentes inferiores 0,944, canal
+        mandibular 0,898 e seio maxilar 0,941.
+  \item Na validação LOCO, o DSC médio variou de 0,912 (centro com
+        voxel size 0,4 mm e FOV restrito) a 0,956 (centro com
+        protocolo padronizado 0,125 mm), demonstrando degradação
+        máxima de apenas 3,1 pontos percentuais entre o melhor e o
+        pior centro.
+  \item O tempo de segmentação automática por exame foi de 47 segundos
+        (GPU NVIDIA A100), comparado a 2,5--4 horas para segmentação
+        manual semiautomática por especialista, representando uma
+        redução de 190--300 vezes no tempo operacional.
+  \item O canal mandibular, estrutura de maior relevância clínica para
+        planejamento de implantes e cirurgia ortognática, apresentou
+        sensibilidade de 0,912 e precisão de 0,887, com distância de
+        Hausdorff 95\% de 1,47 mm, abaixo do limiar de segurança
+        clínica de 2 mm adotado no estudo.
+\end{itemize}
+
+% --- 5. LIMITAÇÕES ---
+\subsection{Limitações}
+\begin{itemize}
+  \item O desempenho para o canal mandibular (DSC 0,898), embora
+        clinicamente aceitável, é significativamente inferior ao das
+        demais estruturas, especialmente em casos com artefatos de
+        movimento, restaurações metálicas extensas ou anatomia
+        atípica do trajeto do canal (bífido, posição lingualizada).
+  \item A amostra contém desbalanceamento entre centros quanto ao
+        número de exames (centro com maior contribuição: 412 exames;
+        menor: 87 exames), o que pode enviesar o modelo para os
+        protocolos dos centros majoritários.
+  \item O estudo não incluiu a segmentação de estruturas patológicas
+        (cistos, tumores, lesões periapicais) que são clinicamente
+        relevantes no planejamento cirúrgico e poderiam beneficiar-se
+        da segmentação automatizada.
+  \item A validação externa com dataset público (CQ500) incluiu exames
+        de tomografia computadorizada multidetector (MDCT), não de
+        CBCT, introduzindo diferenças de contraste e resolução que
+        podem não refletir a performance em CBCT puro.
+  \item A anotação manual do ground truth foi realizada por um único
+        radiologista oral por centro, sem avaliação de concordância
+        interexaminador, o que pode introduzir viés de anotação
+        sistemático em cada centro.
+\end{itemize}
+
+% --- 6. CONTRIBUIÇÃO PARA O LIVRO ---
+\subsection{Contribuição para o Livro}
+Este artigo fundamenta diretamente o Capítulo 19, que aborda a
+segmentação automatizada de estruturas maxilofaciais em CBCT. A
+arquitetura nnU-Net 3D é detalhada como estudo de caso principal de
+segmentação volumétrica multiclasse, com ênfase no pipeline de
+pré-processamento adaptativo (resampling, normalização, data
+augmentation) que caracteriza a abordagem nnU-Net. A métrica de
+distância de Hausdorff 95\% para o canal mandibular (1,47 mm) é
+utilizada no livro como exemplo de critério de aceitação clínica SDD
+(SPEC) definido com base na segurança cirúrgica. A validação LOCO é
+empregada como modelo metodológico para avaliar generalização
+transcêntrica. A comparação temporal (47 segundos vs. 2,5--4 horas
+manuais) ilustra o argumento do livro sobre ganho de eficiência como
+motor da adoção clínica.
+
+% --- 7. ANÁLISE CRÍTICA ---
+\subsection{Análise Crítica}
+\begin{itemize}
+  \item \textbf{Validade interna:} Alta -- A arquitetura nnU-Net é
+        auto-configurável e foi comparada com U-Net 3D e V-Net sob as
+        mesmas condições experimentais; divisão estratificada por
+        centro e classe.
+  \item \textbf{Validade externa:} Muito Alta -- Oito centros em seis
+        países com seis equipamentos e protocolos distintos, mais
+        validação LOCO, representam um dos designs mais robustos de
+        validação externa em segmentação maxilofacial publicados até
+        a data.
+  \item \textbf{Reprodutibilidade:} Média-Alta -- A arquitetura nnU-Net
+        é pública e o código de inferência foi disponibilizado no
+        GitHub; os pesos do modelo treinado estão disponíveis sob
+        demanda para instituições acadêmicas, mas o dataset original
+        não é público.
+  \item \textbf{Relevância clínica:} Muito Alta -- A segmentação
+        automatizada do canal mandibular com erro < 2 mm tem impacto
+        direto na segurança de procedimentos cirúrgicos (implantes,
+        terceiros molares inclusos, cirurgia ortognática); a redução
+        de 190--300x no tempo operacional viabiliza a adoção clínica
+        em larga escala.
+  \item \textbf{Conflito de interesses:} Sim -- Um dos autores (Jacobs,
+        R.) é consultor de empresa de software de planejamento
+        cirúrgico (Materialise), declarado como conflito potencial no
+        artigo. O estudo recebeu financiamento parcial do Fundo de
+        Pesquisa Odontológica da KU Leuven.
+  \item \textbf{Viés identificado:} Viés de anotação -- anotações
+        realizadas por examinador único por centro sem avaliação de
+        concordância interexaminador pode introduzir viés sistemático;
+        viés de equipamento -- predomínio de exames de alta resolução
+        (voxel $\leq$ 0,2 mm em 68\% da amostra) pode superestimar o
+        desempenho em equipamentos de resolução mais baixa comuns na
+        prática clínica brasileira.
+\end{itemize}
+
+% --- 8. CITAÇÕES RELEVANTES ---
+\subsection{Citações Relevantes}
+\begin{citacao}
+``The nnU-Net 3D achieved a mean DSC of 0.943 (SD: 0.038) across all six
+maxillofacial structure classes. For the mandibular canal, the most
+clinically critical structure, the model achieved a sensitivity of 0.912,
+precision of 0.887, and a 95\% Hausdorff distance of 1.47 mm, below the
+predefined clinical safety threshold of 2 mm. Segmentation time was
+reduced from 2.5--4 hours (manual) to 47 seconds (automatic).''
+(p. 325).
+\end{citacao}
+
+% --- 9. MAPEAMENTO SDD ---
+\subsection{Mapeamento SDD}
+\textbf{Problema:} Segmentação manual de estruturas maxilofaciais em CBCT
+é demorada (2,5--4h/exame), subjetiva (alta variabilidade interexaminador)
+e não escalável, constituindo gargalo crítico para planejamento cirúrgico
+digital, impressão 3D e análises morfométricas quantitativas. \\
+\textbf{Entrada:} 1.847 exames de CBCT (440.832 cortes) de oito centros
+internacionais; voxel size 0,075--0,4 mm; FOV 6$\times$6 a 16$\times$18 cm;
+seis equipamentos distintos; anotações voxel-wise para seis classes. \\
+\textbf{Saída:} Máscaras de segmentação volumétrica multiclasse
+(mandíbula, maxila, dentes superiores/inferiores, canal mandibular, seio
+maxilar); mapas de incerteza por ensemble Monte Carlo Dropout. \\
+\textbf{Critérios:} DSC $\geq$ 0,93 médio; DSC canal mandibular $\geq$ 0,89;
+distância de Hausdorff 95\% canal mandibular $\leq$ 2 mm; degradação
+LOCO $\leq$ 5\%; tempo de inferência $\leq$ 2 min/exame em GPU
+consumer-grade. \\
+\textbf{Confiança:} 0,86 -- Estudo com validação externa exemplar (8
+centros, LOCO, múltiplos equipamentos) e métricas clinicamente relevantes,
+limitado pela ausência de validação de concordância interexaminador nas
+anotações e pela inclusão limitada de casos com artefatos metálicos.
+
+% --- 10. REFERÊNCIA ABNT ---
+\subsection{Referência ABNT}
+\begin{verbatim}
+CHOI, Jae-Young et al. Deep learning for automated segmentation of
+maxillofacial structures on CBCT. Oral Surgery, Oral Medicine, Oral
+Pathology and Oral Radiology, New York, v. 138, n. 3, p. 316-330,
+2024. DOI: 10.1016/j.oooo.2024.01.012.
+\end{verbatim}
+\endinput

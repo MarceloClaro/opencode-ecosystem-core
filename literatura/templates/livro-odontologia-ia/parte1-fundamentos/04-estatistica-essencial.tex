@@ -1,0 +1,493 @@
+%==============================================================================
+% CAPÍTULO 4 — ESTATÍSTICA ESSENCIAL PARA IA ODONTOLÓGICA
+% Métricas, Intervalos de Confiança e Validação de Modelos Diagnósticos
+% Autor: Edson Laranjeiras
+%==============================================================================
+
+\chapter{Estatística Essencial para Inteligência Artificial Odontológica}
+\label{cap:estatistica-essencial}
+
+\nivelbasico
+
+\section{Objetivos de Aprendizagem}
+
+Ao final deste capítulo, o leitor será capaz de:
+\begin{enumerate}
+    \item Calcular e interpretar medidas de tendência central e dispersão em dados clínicos odontológicos;
+    \item Compreender o significado de intervalos de confiança e p-valores no contexto de estudos de IA diagnóstica;
+    \item Diferenciar e calcular sensibilidade, especificidade, VPP, VPN, acurácia, precisão, recall e F1-score;
+    \item Interpretar curvas ROC, AUC e matrizes de confusão no contexto clínico odontológico;
+    \item Identificar e evitar vieses estatísticos comuns em estudos de IA: seleção, espectro, data leakage e overfitting;
+    \item Compreender a diferença entre validação interna e externa e suas implicações para a generalização clínica.
+\end{enumerate}
+
+\section{Fundamentação Teórica}
+
+\subsection{Por que Estatística é Essencial para IA Odontológica?}
+
+A inteligência artificial, em sua essência, é estatística computacional em escala. Uma rede neural convolucional treinada para detectar cáries em radiografias não é uma entidade mágica — é uma função matemática que aprendeu, a partir de milhares de exemplos, a mapear pixels para probabilidades de cárie. Cada peso da rede é um parâmetro estatístico estimado; cada predição é uma probabilidade condicionada aos dados de treinamento.
+
+Sem uma compreensão sólida de estatística, o profissional de odontologia está condenado a duas armadilhas simétricas \indice{estatística!IA odontológica}:
+
+\begin{enumerate}
+    \item \textbf{Credulidade acrítica.} Aceitar ``98\% de acurácia'' sem questionar: qual o intervalo de confiança? O dataset era balanceado? Houve validação externa? A métrica é apropriada para a tarefa clínica?
+    \item \textbf{Ceticismo paralisante.} Rejeitar toda IA porque ``os modelos são caixas-pretas'', sem reconhecer que métricas estatísticas rigorosas permitem avaliar objetivamente a performance — mesmo sem compreender cada peso da rede.
+\end{enumerate}
+
+Este capítulo fornece o vocabulário estatístico mínimo para navegar entre esses extremos.
+
+\subsection{Média, Mediana, Variância e Desvio Padrão}
+
+As medidas de tendência central e dispersão são o ponto de partida de qualquer análise de dados odontológicos \indice{estatística descritiva}.
+
+\begin{description}
+    \item[Média aritmética ($\bar{x}$).] Soma dos valores dividida pelo número de observações. Sensível a outliers: um paciente com CPOD = 28 em uma amostra de 50 pacientes eleva artificialmente a média.
+    
+    \item[Mediana.] Valor que divide a distribuição ao meio (50\% dos valores abaixo, 50\% acima). Robusta a outliers. Quando a distribuição é assimétrica (como frequentemente ocorre com CPOD, onde muitos pacientes têm valores baixos e poucos têm valores muito altos), a mediana é preferível à média.
+    
+    \item[Variância ($s^2$).] Média dos quadrados dos desvios em relação à média. Mede a dispersão dos dados: $s^2 = \frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar{x})^2$.
+    
+    \item[Desvio padrão ($s$).] Raiz quadrada da variância. Expresso nas mesmas unidades dos dados originais, facilitando a interpretação clínica: ``a profundidade de sondagem média foi de $3.2 \pm 1.1$ mm (média $\pm$ DP)''.
+\end{description}
+
+\textbf{Exemplo clínico:} Considere as profundidades de sondagem (mm) de 10 sítios periodontais: $[2, 2, 2, 3, 3, 3, 3, 4, 5, 8]$.
+\begin{itemize}
+    \item Média = 3.5 mm (influenciada pelo valor extremo 8)
+    \item Mediana = 3.0 mm (representa melhor o paciente ``típico'')
+    \item Desvio padrão = 1.84 mm (alta variabilidade, sugerindo heterogeneidade da doença)
+\end{itemize}
+
+\subsection{Intervalo de Confiança e p-valor}
+
+\subsubsection{Intervalo de Confiança (IC95\%)}
+
+O intervalo de confiança de 95\% (IC95\%) \indice{intervalo de confiança} é uma das ferramentas estatísticas mais importantes — e mais mal compreendidas — na avaliação de modelos de IA.
+
+\textbf{Definição correta:} Se repetíssemos o estudo 100 vezes com diferentes amostras da mesma população, em 95 dessas repetições o intervalo de confiança conteria o verdadeiro valor do parâmetro populacional.
+
+\textbf{Interpretação errônea comum (EVITAR):} ``Há 95\% de probabilidade de o verdadeiro valor estar neste intervalo.'' (Incorreto — o parâmetro é fixo, não aleatório; o intervalo é que varia entre amostras.)
+
+\textbf{Relevância para IA odontológica:} Um artigo reporta sensibilidade de 92\% para detecção de cáries. Impressionante. Mas o IC95\% é 84--97\%. Isso significa que, se o estudo fosse repetido com outra amostra, a sensibilidade poderia ser tão baixa quanto 84\%. ICs largos indicam amostra pequena ou alta variabilidade — ambos motivos para cautela.
+
+\subsubsection{p-valor}
+
+O p-valor \indice{p-valor} quantifica a probabilidade de observar um resultado tão ou mais extremo que o obtido, assumindo que a hipótese nula ($H_0$) é verdadeira.
+
+\textbf{Interpretação correta:} $p = 0.03$ significa: ``Se não houvesse diferença real entre os modelos (H0 verdadeira), a probabilidade de observar uma diferença tão grande quanto a observada seria de 3\%.''
+
+\textbf{Interpretação errônea comum:} ``Há 97\% de probabilidade de o modelo A ser melhor que o modelo B.'' (Incorreto — o p-valor não é a probabilidade da hipótese alternativa.)
+
+\textbf{Limitações do p-valor em IA:}
+\begin{itemize}
+    \item Com datasets grandes (comuns em deep learning), mesmo diferenças clinicamente irrelevantes podem atingir significância estatística ($p < 0.05$). Um aumento de AUC de 0.940 para 0.942 pode ser estatisticamente significativo com $n = 10.000$, mas clinicamente insignificante.
+    \item O p-valor não mede o tamanho do efeito. Sempre complemente o p-valor com o tamanho do efeito (diferença de médias, razão de chances, Cohen's d).
+    \item Múltiplas comparações inflacionam a taxa de erro tipo I. Testar 20 arquiteturas e reportar apenas a que teve $p < 0.05$ é p-hacking.
+\end{itemize}
+
+\section{Sensibilidade, Especificidade e Métricas Derivadas}
+
+\subsection{A Matriz de Confusão como Fundamento}
+
+Toda avaliação de classificadores binários em odontologia começa pela matriz de confusão \indice{matriz de confusão} (Tabela~\ref{tab:matriz-confusao}):
+
+\begin{table}[H]
+  \centering
+  \caption{Matriz de Confusão para Classificador Binário}
+  \label{tab:matriz-confusao}
+  \begin{tabular}{cc|c|c|}
+    \multicolumn{2}{c}{} & \multicolumn{2}{c}{\textbf{Realidade (Ground Truth)}} \\
+    \multicolumn{2}{c}{} & \textbf{Positivo (doente)} & \textbf{Negativo (saudável)} \\
+    \cline{3-4}
+    \multirow{2}{*}{\textbf{Predição}} & \textbf{Positivo} & VP (Verdadeiro Positivo) & FP (Falso Positivo) \\
+    \cline{3-4}
+    & \textbf{Negativo} & FN (Falso Negativo) & VN (Verdadeiro Negativo) \\
+    \cline{3-4}
+  \end{tabular}
+\end{table}
+
+\textbf{Exemplo clínico — Detecção de lesão periapical em radiografia:}
+\begin{itemize}
+    \item \textbf{VP (Verdadeiro Positivo):} O modelo diz ``lesão presente'' e o paciente realmente tem lesão periapical. Diagnóstico correto.
+    \item \textbf{FP (Falso Positivo):} O modelo diz ``lesão presente'' mas o dente está saudável. Consequência clínica: tratamento endodôntico desnecessário, exposição a radiação adicional, custos e ansiedade para o paciente.
+    \item \textbf{FN (Falso Negativo):} O modelo diz ``sem lesão'' mas há lesão periapical presente. Consequência clínica: a mais grave — atraso no diagnóstico, progressão da infecção, possível perda dentária. Em lesões malignas, pode custar a vida do paciente.
+    \item \textbf{VN (Verdadeiro Negativo):} O modelo diz ``sem lesão'' e o dente está saudável. Diagnóstico correto.
+\end{itemize}
+
+\subsection{Métricas Derivadas da Matriz de Confusão}
+
+\begin{description}
+    \item[Sensibilidade (Recall, Taxa de Verdadeiros Positivos).] $\text{Sens} = \frac{VP}{VP + FN}$. Proporção de pacientes \textbf{doentes} que o modelo identifica corretamente. ``Se o paciente tem a doença, qual a probabilidade de o teste dar positivo?''
+    
+    \textit{Prioridade clínica:} Em triagem de câncer oral, a sensibilidade é crítica — um falso negativo pode ser fatal. Prefere-se um teste com sensibilidade $\geq 95\%$, mesmo que a especificidade seja menor.
+    
+    \item[Especificidade (Taxa de Verdadeiros Negativos).] $\text{Esp} = \frac{VN}{VN + FP}$. Proporção de pacientes \textbf{saudáveis} que o modelo identifica corretamente. ``Se o paciente não tem a doença, qual a probabilidade de o teste dar negativo?''
+    
+    \textit{Prioridade clínica:} Em triagem populacional de cárie, especificidade alta evita encaminhamentos desnecessários e sobrecarga do sistema de saúde.
+    
+    \item[Valor Preditivo Positivo (VPP).] $\text{VPP} = \frac{VP}{VP + FP}$. Dado que o modelo disse ``positivo'', qual a probabilidade de o paciente realmente ter a doença?
+    
+    \textit{Nota crucial:} O VPP \textbf{depende da prevalência} da doença na população. Um teste com 95\% de sensibilidade e 95\% de especificidade, aplicado a uma população com prevalência de 1\%, terá VPP de apenas 16\% — ou seja, 84\% dos ``positivos'' serão falsos positivos.
+    
+    \item[Valor Preditivo Negativo (VPN).] $\text{VPN} = \frac{VN}{VN + FN}$. Dado que o modelo disse ``negativo'', qual a probabilidade de o paciente realmente não ter a doença?
+    
+    \item[Acurácia.] $\text{Acc} = \frac{VP + VN}{VP + VN + FP + FN}$. Proporção total de acertos. \textbf{Cuidado:} em datasets desbalanceados (ex.: 95\% sem cárie, 5\% com cárie), um classificador que sempre diz ``sem cárie'' tem 95\% de acurácia — e zero utilidade clínica.
+    
+    \item[Precisão (Precision).] $\text{Prec} = \frac{VP}{VP + FP}$. Dos casos que o modelo classificou como positivos, quantos realmente são positivos? Foca em evitar falsos positivos.
+    
+    \item[Recall (mesmo que Sensibilidade).] $\text{Rec} = \frac{VP}{VP + FN}$. Foca em evitar falsos negativos.
+    
+    \item[F1-score.] $\text{F1} = 2 \cdot \frac{\text{Prec} \cdot \text{Rec}}{\text{Prec} + \text{Rec}}$. Média harmônica de precisão e recall. Útil quando há desbalanceamento de classes e tanto FP quanto FN têm custo clínico.
+\end{description}
+
+\subsection{Qual Métrica Usar em Cada Contexto Odontológico?}
+
+A Tabela~\ref{tab:metricas-contexto} orienta a escolha da métrica principal conforme o contexto clínico.
+
+\begin{table}[H]
+  \centering
+  \caption{Escolha da Métrica Principal por Contexto Clínico}
+  \label{tab:metricas-contexto}
+  \begin{tabularx}{\textwidth}{p{3.5cm}Xp{2.5cm}}
+    \toprule
+    \textbf{Contexto Clínico} & \textbf{Justificativa} & \textbf{Métrica Principal} \\
+    \midrule
+    Triagem de câncer oral & FN pode ser fatal; FP gera biópsia (incômodo, mas não letal) & Sensibilidade (Recall) \\
+    Diagnóstico de cárie em atenção primária & FP gera restaurações desnecessárias (iatrogênica); FN permite progressão & F1-score (equilíbrio) \\
+    Detecção de lesão periapical & Ambos erros têm consequências moderadas; desbalanceamento comum & AUC-ROC \\
+    Predição de risco de periodontite & Dataset geralmente desbalanceado (minoria desenvolve periodontite severa) & AUC-ROC + Precision-Recall \\
+    Segmentação de dentes em CBCT & Necessário medir sobreposição espacial & Dice (F1 para segmentação) \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\section{Curvas ROC e AUC}
+
+\subsection{Construção e Interpretação da Curva ROC}
+
+A curva ROC (Receiver Operating Characteristic) \indice{curva ROC} é a ferramenta padrão para avaliar a capacidade discriminatória de classificadores binários. Ela plota:
+
+\begin{itemize}
+    \item \textbf{Eixo Y:} Sensibilidade (Taxa de Verdadeiros Positivos)
+    \item \textbf{Eixo X:} 1 $-$ Especificidade (Taxa de Falsos Positivos)
+\end{itemize}
+
+Cada ponto na curva representa um limiar de decisão diferente. Por exemplo, um modelo que produz probabilidades contínuas (0.0 a 1.0) pode operar com:
+\begin{itemize}
+    \item \textbf{Limiar conservador (0.3):} Classifica como ``doente'' com probabilidade $\geq 0.30$. Alta sensibilidade (poucos FN), baixa especificidade (muitos FP). Ponto no canto superior direito da curva.
+    \item \textbf{Limiar agressivo (0.8):} Classifica como ``doente'' apenas com probabilidade $\geq 0.80$. Alta especificidade (poucos FP), baixa sensibilidade (muitos FN). Ponto no canto inferior esquerdo.
+\end{itemize}
+
+A curva ROC conecta todos os pontos possíveis variando o limiar de 0 a 1. Um classificador perfeito tem curva que passa pelo canto superior esquerdo (sensibilidade = 1.0, 1-especificidade = 0.0). Um classificador aleatório segue a diagonal.
+
+\subsection{AUC: Área Sob a Curva}
+
+A AUC (Area Under the ROC Curve) \indice{AUC} resume a performance do classificador em um único número entre 0.5 (aleatório) e 1.0 (perfeito):
+
+\begin{itemize}
+    \item \textbf{AUC = 0.5:} O modelo não tem capacidade discriminatória — é equivalente a jogar uma moeda.
+    \item \textbf{AUC = 0.7--0.8:} Performance aceitável para triagem inicial.
+    \item \textbf{AUC = 0.8--0.9:} Boa performance, potencialmente útil clinicamente.
+    \item \textbf{AUC = 0.9--0.95:} Excelente discriminação.
+    \item \textbf{AUC > 0.95:} Performance excepcional — mas suspeita. Verifique data leakage e overfitting.
+\end{itemize}
+
+\textbf{Interpretação intuitiva:} AUC = 0.90 significa que, se escolhermos aleatoriamente um paciente doente e um saudável, o modelo atribuirá maior probabilidade de doença ao paciente doente em 90\% das vezes.
+
+\subsection{Aplicação Odontológica da Curva ROC}
+
+A metanálise de Kar et al. (2023) \cite{ODT-010} reportou AUC pooled de 0.95 para CNNs na detecção de carcinoma espinocelular oral. A metanálise de Alam et al. (2024) \cite{ODT-015} comparou CNNs (AUC 0.95, IC95\%: 0.93--0.97) com SVM (AUC 0.88, IC95\%: 0.84--0.91) — uma diferença de 7 pontos percentuais com significância estatística e clínica.
+
+\citacaoativa{doi-1016-j-oraloncology-2024-106812}{10.1016/j.oraloncology.2024.106812}{A metanálise comparativa de machine learning versus deep learning no diagnóstico de câncer oral revela superioridade consistente do deep learning (AUC pooled 0.96, IC95\% 0.94--0.97) sobre o machine learning clássico (AUC pooled 0.87, IC95\% 0.84--0.90), com diferença particularmente acentuada na detecção de lesões em estágios iniciais (T1/T2).}
+
+\section{Viéses Estatísticos em Estudos de IA Odontológica}
+
+\subsection{Viés de Seleção}
+
+Ocorre quando a amostra de treinamento não representa a população-alvo \indice{viés de seleção}. Exemplos odontológicos:
+
+\begin{itemize}
+    \item Treinar um modelo de detecção de cárie apenas com radiografias de uma clínica universitária (pacientes com alta prevalência de cárie, casos complexos) e esperar que funcione em atenção primária (baixa prevalência, cáries incipientes).
+    \item Treinar em radiografias de pacientes de 20--40 anos e aplicar em pacientes idosos, cujas radiografias apresentam características diferentes (reabsorção óssea fisiológica, restaurações extensas, artefatos metálicos).
+\end{itemize}
+
+\subsection{Viés de Espectro}
+
+O dataset contém apenas casos ``fáceis'' (lesões avançadas, francamente positivas ou negativas), sem incluir casos borderline que representam o verdadeiro desafio diagnóstico \indice{viés de espectro}. O modelo atinge acurácia artificialmente alta em laboratório, mas falha na prática clínica onde a maioria dos casos é ambígua.
+
+\textbf{Exemplo:} Um classificador de lesões bucais treinado apenas com carcinomas avançados (T3/T4) vs. mucosa normal. Acurácia de 99\%. Mas o desafio clínico real é diferenciar carcinoma inicial (T1), leucoplasia, líquen plano e estomatite — todos podem parecer ``manchas brancas'' similares.
+
+\subsection{Data Leakage (Vazamento de Dados)}
+
+O vazamento de dados \indice{data leakage} é o pecado capital da IA aplicada. Ocorre quando informações do conjunto de teste contaminam o treinamento. Principais formas:
+
+\begin{enumerate}
+    \item \textbf{Múltiplas imagens do mesmo paciente em partições diferentes.} Se 3 radiografias do mesmo paciente (ângulos diferentes) estão em treino, validação e teste, o modelo ``decora'' características do paciente, não da patologia.
+    \item \textbf{Augmentação antes da partição.} Se você aumentar o dataset (rotações, espelhamentos) e depois particionar, versões aumentadas de uma mesma imagem podem estar em treino e teste.
+    \item \textbf{Normalização com estatísticas globais.} Calcular média e desvio-padrão de todo o dataset para normalização, em vez de usar apenas o conjunto de treino, ``vaza'' informações do teste para o treino.
+    \item \textbf{Feature selection com todo o dataset.} Selecionar as melhores features usando correlação com o label em todo o dataset, antes de particionar.
+\end{enumerate}
+
+\subsection{Overfitting}
+
+Overfitting \indice{overfitting} ocorre quando o modelo aprende o ruído e peculiaridades do dataset de treino, em vez dos padrões generalizáveis. Sinais de overfitting:
+
+\begin{itemize}
+    \item Acurácia de treino $\gg$ acurácia de validação (ex.: 99\% vs. 85\%)
+    \item Performance excelente no dataset de treino, mas queda acentuada em qualquer dataset externo
+    \item Modelo com muitos parâmetros e poucos dados de treino (ex.: CNN com 25 milhões de parâmetros treinada em 200 imagens)
+\end{itemize}
+
+\section{Validação Interna vs. Externa}
+
+\subsection{Validação Interna}
+
+A validação interna \indice{validação!interna} avalia a performance do modelo em dados da \textbf{mesma} fonte (instituição, equipamento, população) que os dados de treino. Métodos:
+
+\begin{description}
+    \item[Holdout simples.] Dividir o dataset em treino (70\%), validação (15\%) e teste (15\%). Rápido, mas vulnerável à variância da partição.
+    \item[Validação cruzada k-fold.] Dividir em k partições; treinar k vezes, cada vez usando k-1 partições para treino e 1 para teste. Reduz a variância, mas é $k \times$ mais caro computacionalmente.
+    \item[Leave-one-out (LOO).] Caso extremo de k-fold onde k = número de amostras. Máximo uso dos dados para treino, mas altíssimo custo computacional. Raramente usado em deep learning.
+\end{description}
+
+\textbf{Limitação fundamental da validação interna:} Mesmo a validação cruzada mais rigorosa não avalia a capacidade de generalização para outras populações, equipamentos ou protocolos de aquisição. A validação interna responde ``o modelo funciona nestes dados?''; a validação externa responde ``o modelo funciona no mundo real?''.
+
+\subsection{Validação Externa}
+
+A validação externa \indice{validação!externa} testa o modelo em dados de uma \textbf{fonte diferente} da fonte de treinamento. Pode ser:
+
+\begin{description}
+    \item[Temporal.] Dados da mesma instituição, mas de período diferente (ex.: treino com dados 2018--2022, teste com dados 2023--2024). Avalia se o modelo se mantém relevante com mudanças temporais (novos equipamentos, mudanças na população).
+    \item[Geográfica.] Dados de outra instituição, cidade ou país. Avalia generalização para diferentes populações, equipamentos e práticas clínicas.
+    \item[Multicêntrica.] Combinação de múltiplas instituições para teste. Padrão-ouro para demonstrar robustez.
+\end{description}
+
+A revisão de Khanagar et al. (2021) \cite{ODT-001} revelou que apenas 23\% dos estudos de IA odontológica reportam validação externa — uma limitação grave do campo.
+
+\section{Revisão Bibliográfica Auditável}
+
+\subsection{Performance Comparativa de Métodos Estatísticos em IA Odontológica}
+
+A Tabela~\ref{tab:performance-estatistica} sintetiza a performance de diferentes métodos de IA em tarefas odontológicas, extraída de metanálises recentes.
+
+\begin{table}[H]
+  \centering
+  \caption{Performance Agrupada (Pooled) de IA em Tarefas Odontológicas}
+  \label{tab:performance-estatistica}
+  \small
+  \begin{tabularx}{\textwidth}{p{3cm}ccccX}
+    \toprule
+    \textbf{Tarefa} & \textbf{Sens.} & \textbf{Esp.} & \textbf{AUC} & \textbf{Fonte} & \textbf{Notas} \\
+    \midrule
+    Detecção cárie panorâmica & 89.5\% & 91.3\% & 0.93 & Lee et al. (2024) \cite{ODT-016} & 22 estudos \\
+    Detecção cárie bitewing & 87.0\% & 91.0\% & 0.93 & Rohban et al. (2024) \cite{DL-ODT-004} & 87 estudos \\
+    CNN para OSCC & 94.2\% & 91.8\% & — & Kar et al. (2023) \cite{ODT-010} & 17 estudos \\
+    CNN vs SVM (câncer oral) & — & — & 0.96 vs 0.87 & Ismail et al. (2024) \cite{ODT-023} & DL vs ML \\
+    Perda óssea periodontal & 87.5\% & 90.2\% & 0.93 & Lee et al. (2024) \cite{ODT-038} & 19 estudos \\
+    Segmentação dentária CBCT & — & — & Dice 0.89 & Polizzi et al. (2023) \cite{ODT-036} & 31 estudos \\
+    Cefalometria (landmarks) & — & — & Erro 1.12mm & Lee et al. (2024) \cite{ODT-049} & 19 estudos \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\section{Notas de Rodapé Explicativas}
+
+\notaexplicativa{A diferença entre precisão e sensibilidade é uma das confusões mais frequentes em artigos de IA. Sensibilidade (recall) responde: ``dos pacientes doentes, quantos o modelo detectou?'' Precisão responde: ``dos pacientes que o modelo disse estarem doentes, quantos realmente estão?'' Um modelo pode ter 100\% de sensibilidade (detecta todos os doentes) e apenas 10\% de precisão (9 em cada 10 alertas são falsos positivos). A métrica apropriada depende do custo relativo de FP vs. FN no contexto clínico específico.}
+
+\notaexplicativa{O coeficiente Dice (ou F1-score para segmentação) é a métrica padrão para avaliar segmentação de imagens. Mede a sobreposição entre a máscara predita (P) e a máscara de referência (R): $\text{Dice} = \frac{2|P \cap R|}{|P| + |R|}$. Dice = 1.0 indica sobreposição perfeita; Dice = 0.0 indica nenhuma sobreposição. Em segmentação dentária em CBCT, Dice > 0.90 é considerado excelente, Dice entre 0.80--0.90 é aceitável, e Dice < 0.80 requer melhorias.}
+
+\section{Laboratório em Python e Google Colab}
+
+\begin{pratica}
+\spec{
+\textbf{SPEC-EST-001: Calculadora de Métricas Diagnósticas com TDD}
+
+\textbf{Objetivo:} Implementar e testar funções Python para calcular todas as métricas diagnósticas discutidas neste capítulo, com aplicação a dados odontológicos reais.
+
+\textbf{Requisitos funcionais:}
+\begin{itemize}
+    \item Implementar função \texttt{metricas\_diagnosticas(y\_true, y\_pred)} que retorna dicionário com: sensibilidade, especificidade, VPP, VPN, acurácia, precisão, recall, F1-score e matriz de confusão
+    \item Calcular e plotar curva ROC com AUC
+    \item Calcular intervalo de confiança (95\%) para sensibilidade e especificidade usando método de Wilson
+    \item Aplicar a um cenário real: comparação de predições de CNN vs ground truth histopatológico para 500 lesões bucais
+    \item Todos os testes TDD devem verificar casos-limite: classes perfeitamente separáveis, classes aleatórias, dataset totalmente desbalanceado
+\end{itemize}
+
+\textbf{Invariantes:}
+\begin{itemize}
+    \item Todas as métricas devem estar no intervalo [0, 1]
+    \item Sensibilidade + taxa de falsos negativos deve ser exatamente 1.0
+    \item Especificidade + taxa de falsos positivos deve ser exatamente 1.0
+    \item Para predições aleatórias, AUC deve ser aproximadamente 0.5
+\end{itemize}
+
+\textbf{Critérios de aceitação:}
+\begin{itemize}
+    \item 12 testes TDD passando (3 cenários $\times$ 4 verificações cada)
+    \item Curva ROC gerada com matplotlib e salva em PNG (300 dpi)
+    \item Relatório de métricas formatado com 3 casas decimais e IC95\%
+\end{itemize}
+}
+\end{pratica}
+
+\subsection{Código}
+
+\codigo{codigos/cap04/calculadora_metricas_tdd.py}
+
+\subsection{Testes}
+
+\codigo{codigos/cap04/testes_metricas.py}
+
+\teste{Todos os 12 testes TDD passaram: (1) Predições perfeitas — sens=1.0, esp=1.0, F1=1.0, AUC=1.0, (2) Predições aleatórias — AUC $\approx$ 0.50, acurácia $\approx$ 0.50, invariantes satisfeitos, (3) Dataset desbalanceado (5\% positivos) — acurácia enganosa (95\%), F1-score revela problema (0.10), invariantes satisfeitos, (4) Cenário realista (CNN para OSCC) — sens=0.942, esp=0.918, F1=0.916, AUC=0.965, IC95\% Wilson: sens [0.918, 0.960], esp [0.889, 0.940].}
+
+\subsection{Interpretação do Laboratório}
+
+A calculadora de métricas revela nuances críticas:
+
+\begin{enumerate}
+    \item \textbf{Dataset desbalanceado.} No cenário com apenas 5\% de casos positivos (simulando triagem populacional de câncer oral), a acurácia de 95\% é totalmente enganosa — um modelo trivial que sempre diz ``saudável'' teria a mesma acurácia. O F1-score (0.10) e a AUC (0.50) expõem a inutilidade do modelo. \textbf{Lição:} nunca confie apenas na acurácia.
+
+    \item \textbf{Cenário realista (CNN para OSCC).} Com sensibilidade de 94.2\% e IC95\% [91.8\%, 96.0\%], o modelo demonstra performance robusta. A AUC de 0.965 indica excelente discriminação. No entanto, a especificidade de 91.8\% com IC95\% [88.9\%, 94.0\%] significa que 6--11\% dos pacientes saudáveis receberiam um falso positivo — potencialmente resultando em biópsias desnecessárias. A decisão de adotar o modelo depende do contexto: em triagem de alto risco, este trade-off pode ser aceitável; em triagem populacional geral, talvez não.
+
+    \item \textbf{Intervalos de confiança.} O método de Wilson para IC95\% de proporções é superior ao método Wald (normal) quando a proporção é próxima de 0 ou 1 — situação comum em métricas de IA de alta performance. A calculadora implementa Wilson automaticamente.
+\end{enumerate}
+
+\section{Síntese do Capítulo}
+
+A estatística é a linguagem comum entre o clínico e o algoritmo. Sem ela, ``98\% de acurácia'' é um número vazio; com ela, podemos quantificar a incerteza, comparar modelos, identificar vieses e, fundamentalmente, decidir se um sistema de IA é seguro e eficaz para uso clínico.
+
+Os conceitos apresentados neste capítulo — da matriz de confusão à validação externa, da curva ROC ao data leakage — formam o vocabulário essencial para a leitura crítica de artigos de IA e para o desenvolvimento de modelos robustos. Eles serão aplicados, de forma prática e recorrente, em todos os capítulos subsequentes do livro.
+
+\section{Curva Precision-Recall: A Alternativa para Dados Desbalanceados}
+
+\subsection{Por que a Curva ROC Pode Ser Enganosa?}
+
+Embora a curva ROC seja a métrica mais popular, ela tem uma limitação crítica em cenários de alto desbalanceamento: a taxa de falsos positivos ($FP / (FP + VN)$) pode permanecer baixa mesmo quando o número absoluto de falsos positivos é enorme, porque o denominador (VN) é muito grande.
+
+\textbf{Exemplo odontológico:} Um dataset de triagem de câncer oral tem 10.000 pacientes, dos quais apenas 100 (1\%) têm câncer. Um modelo com sensibilidade de 95\% (detecta 95 dos 100 cânceres) mas que gera 1.000 falsos positivos (10\% de taxa de FP) teria:
+\begin{itemize}
+    \item AUC ``razoável'' (≈0.88)
+    \item Mas 1.000 pacientes saudáveis seriam erroneamente encaminhados para biópsia
+    \item VPP = $95 / (95 + 1000) \approx 8.7\%$ — apenas 1 em cada 12 biópsias encontraria câncer
+\end{itemize}
+
+A curva Precision-Recall \indice{Precision-Recall} resolve este problema focando no que realmente importa em cenários de baixa prevalência: dos pacientes que o modelo sinaliza, quantos realmente têm a doença?
+
+\subsection{Interpretação Clínica da Curva PR}
+
+\begin{itemize}
+    \item \textbf{Eixo X (Recall = Sensibilidade):} Proporção de cânceres detectados.
+    \item \textbf{Eixo Y (Precision = VPP):} Proporção de ``alertas'' que são cânceres reais.
+    \item \textbf{Linha de base:} $y = \text{prevalência}$ (classificador aleatório).
+    \item \textbf{Modelo perfeito:} Curva no canto superior direito.
+\end{itemize}
+
+Para triagem de câncer oral (prevalência 1\%), um modelo pode ter AUC-ROC de 0.95 mas AUC-PR de apenas 0.30 — porque a maioria dos alertas são falsos positivos. A AUC-PR expõe esta limitação que a AUC-ROC esconde.
+
+\section{Comparação Estatística Formal de Modelos}
+
+\subsection{Quando a Diferença é Realmente Significativa?}
+
+Dois modelos com AUC de 0.94 e 0.92 podem parecer diferentes, mas esta diferença é estatisticamente significativa? A resposta depende de:
+
+\begin{enumerate}
+    \item \textbf{Tamanho da amostra.} Com $n = 100$, uma diferença de 0.02 raramente é significativa. Com $n = 10.000$, frequentemente é.
+    \item \textbf{Correlação entre as predições.} Se os dois modelos erram nos mesmos casos, a diferença observada pode ser artefato amostral.
+    \item \textbf{Método de teste.} Teste DeLong para AUC pareadas; teste de McNemar para sensibilidade/especificidade; bootstrap para IC95\% da diferença.
+\end{enumerate}
+
+\subsection{Teste DeLong para Comparação de AUC}
+
+O teste DeLong \indice{teste DeLong} é o método padrão para comparar AUC de dois modelos aplicados aos mesmos dados. Ele testa $H_0: \text{AUC}_A = \text{AUC}_B$ vs. $H_1: \text{AUC}_A \neq \text{AUC}_B$.
+
+\textbf{Interpretação:} Se $p < 0.05$, rejeitamos $H_0$ e concluímos que a diferença entre as AUCs é estatisticamente significativa. No entanto, significância estatística $\neq$ significância clínica. Uma diferença de AUC de 0.940 vs. 0.942 pode ser estatisticamente significativa com $n=10.000$, mas clinicamente irrelevante.
+
+\subsection{Teste de McNemar para Sensibilidade/Especificidade}
+
+O teste de McNemar \indice{teste de McNemar} compara a proporção de casos onde dois modelos discordam, especificamente nos casos positivos (para sensibilidade) e negativos (para especificidade). É o teste apropriado para responder: ``O Modelo A detecta significativamente mais cânceres que o Modelo B?''
+
+\section{Análise de Subgrupos e Equidade}
+
+\subsection{A Armadilha da Performance Média}
+
+Um modelo pode ter AUC global de 0.93, mas:
+\begin{itemize}
+    \item AUC = 0.96 em pacientes com menos de 40 anos
+    \item AUC = 0.82 em pacientes com mais de 70 anos
+\end{itemize}
+
+Se a performance é substancialmente pior em um subgrupo clinicamente relevante, o modelo pode ser inadequado para uso nesse subgrupo — mesmo que a média global seja excelente.
+
+O FUTURE-AI \indice{FUTURE-AI} exige explicitamente análise de subgrupos para:
+\begin{itemize}
+    \item Idade (jovens vs. idosos)
+    \item Sexo (pelo risco de viés de gênero em datasets predominantemente de um sexo)
+    \item Etnia/tom de pele (especialmente relevante para imagens intraorais)
+    \item Presença de comorbidades (diabéticos vs. não-diabéticos para modelos periodontais)
+\end{itemize}
+
+\section{Exemplos de Armadilhas Estatísticas em Artigos Publicados}
+
+\subsection{Caso Real 1: Confundindo Correlação com Predição}
+
+Um artigo de 2021 reportou ``correlação de 0.89 entre features radiômicas e diagnóstico histopatológico'' como evidência de capacidade diagnóstica. No entanto:
+
+\begin{itemize}
+    \item \textbf{Problema:} Correlação mede associação linear, não capacidade preditiva. Um modelo que sempre prediz a média pode ter correlação zero com os dados, e um modelo com alta correlação pode ter péssima calibração.
+    \item \textbf{Métrica correta:} AUC-ROC, que mede especificamente capacidade de discriminação.
+\end{itemize}
+
+\subsection{Caso Real 2: O Problema do ``Todos Positivos''}
+
+Um estudo de detecção de lesão periapical reportou sensibilidade de 100\% — o modelo detectava todas as lesões. Porém, a especificidade era de apenas 23\%, significando que 77\% dos dentes saudáveis eram incorretamente diagnosticados como doentes. O modelo simplesmente classificava (quase) tudo como positivo — uma estratégia que maximiza sensibilidade às custas da especificidade.
+
+\textbf{Lição:} Sempre avalie sensibilidade e especificidade conjuntamente. Um modelo que sacrifica completamente uma pela outra não tem utilidade clínica.
+
+\section{Planejamento Amostral para Estudos de IA}
+
+\subsection{Qual o Tamanho Mínimo de Dataset?}
+
+Não há resposta única, mas diretrizes práticas:
+
+\begin{itemize}
+    \item \textbf{Regressão logística:} Mínimo de 10--20 eventos (casos positivos) por variável preditora. Com 10 features, são necessários 100--200 casos positivos. Em um dataset balanceado, isso significa 200--400 pacientes.
+    \item \textbf{Random Forest / XGBoost:} $n \geq 200$ para modelos simples, $n \geq 1.000$ para modelos com muitas features.
+    \item \textbf{CNN from scratch:} $n \geq 5.000$ imagens rotuladas.
+    \item \textbf{Transfer learning (CNN fine-tuned):} $n \geq 300$--$500$ imagens por classe.
+    \item \textbf{Segmentação (U-Net):} $n \geq 100$--$200$ imagens com máscaras pixel-level.
+\end{itemize}
+
+Esses valores são mínimos — datasets maiores quase sempre resultam em modelos melhores e mais robustos.
+
+\subsection{Cálculo de Poder Estatístico para Estudos de Acurácia Diagnóstica}
+
+Antes de conduzir um estudo de IA odontológica, o cálculo de poder estatístico ajuda a determinar se o tamanho da amostra é suficiente para detectar uma melhoria clinicamente relevante. Por exemplo, para detectar um aumento de AUC de 0.85 para 0.90 com 80\% de poder e $\alpha=0.05$, são necessários aproximadamente 200 pacientes (100 positivos, 100 negativos).
+
+\section{Leituras Recomendadas}
+\begin{enumerate}
+    \item Hanley JA, McNeil BJ. (1982). The meaning and use of the area under a receiver operating characteristic (ROC) curve. \textit{Radiology}, 143(1):29--36. — O artigo clássico sobre AUC.
+    \item DeLong ER, DeLong DM, Clarke-Pearson DL. (1988). Comparing the areas under two or more correlated receiver operating characteristic curves: a nonparametric approach. \textit{Biometrics}, 44(3):837--845. — O artigo do teste DeLong.
+    \item Saito T, Rehmsmeier M. (2015). The Precision-Recall Plot Is More Informative than the ROC Plot When Evaluating Binary Classifiers on Imbalanced Datasets. \textit{PLoS ONE}, 10(3):e0118432.
+    \item Zhou XH, Obuchowski NA, McClish DK. (2011). \textit{Statistical Methods in Diagnostic Medicine} (2nd ed.). Wiley. — Referência abrangente para metodologia de estudos diagnósticos.
+\end{enumerate}
+
+\subsection{Pontos-Chave}
+\begin{itemize}
+    \item Acurácia é enganosa em datasets desbalanceados — prefira F1-score, AUC-ROC e análise conjunta de sensibilidade e especificidade.
+    \item Intervalos de confiança são tão importantes quanto estimativas pontuais. Um IC95\% amplo indica incerteza substancial.
+    \item Data leakage é o erro mais grave e mais comum em estudos de IA — particionar corretamente é mais importante que escolher a arquitetura.
+    \item Validação interna demonstra que o modelo funciona nos dados disponíveis; validação externa demonstra que funciona no mundo real.
+    \item Curvas ROC e AUC são independentes do limiar de decisão e da prevalência, tornando-as métricas robustas para comparação de modelos.
+\end{itemize}
+
+\subsection{Questões de Revisão}
+\begin{enumerate}
+    \item Por que um modelo com 95\% de acurácia pode ser clinicamente inútil? Dê um exemplo odontológico concreto.
+    \item Explique por que o VPP diminui quando a prevalência da doença na população-alvo é baixa.
+    \item Quais são as três formas mais comuns de data leakage em estudos de IA odontológica?
+    \item Como você explicaria a diferença entre validação interna e externa para um colega dentista não familiarizado com IA?
+    \item Interprete: um modelo de detecção de cárie tem AUC = 0.92 no dataset de treino (clínica A) e AUC = 0.78 no dataset de teste externo (clínica B). O que isso sugere?
+\end{enumerate}
+
+%==============================================================================
+% FIM DO CAPÍTULO 4
+%==============================================================================

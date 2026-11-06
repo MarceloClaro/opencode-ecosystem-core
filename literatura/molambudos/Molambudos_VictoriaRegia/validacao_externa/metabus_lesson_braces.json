@@ -1,0 +1,20 @@
+[
+  {
+    "id": "lesson-braces-trilangref-20260801",
+    "timestamp": "2026-08-01T09:35:43.335151+00:00",
+    "type": "reflection",
+    "agent_id": "marceloclaro",
+    "context": "Correção de 6 referências de página erradas no main_tri.pdf (DOC-25/27, LUC-14) — rotas trilíngues mostravam valores de outra língua",
+    "reflection": "CAUSA RAIZ: 18 arquivos de fragmentos tinham chaves desbalanceadas (padrão \\textquotedblleft{\\textit{...\"} com 1 '}' faltando por linha — ~51-52 no DOC-25, 12-14 no LUC-14, -2 no DOC-27). Grupos abertos vazavam para o \\triinput seguinte, fazendo os \\let\\trilangref\\... executarem em escopo local errado; ao fechar o grupo, trilangref revertia ao valor externo (ex: PT mostrava página de ZH). LIÇÃO 1: contador ingênuo de chaves com split('%') é INCORRETO — \\% (percentual escapado) corta a linha; usar parser fiel ao TeX (\\% não inicia comentário). LIÇÃO 2: adicionar '}' no fim do arquivo (sem remover literais) causa 'Too many }'s' em linhas com '}' literal no texto; a correção correta é simular o TeX: remover '}' em nível 0 (literais, não imprimem) e balancear o final. LIÇÃO 3: verificação de rotas: \\newlabel no aux tem formato {{contador}{página}} — \\pageref retorna o SEGUNDO número; regex de fragmento precisa de (?<![A-Z]) para não capturar 'ONT-05' dentro de 'CONT-05'.",
+    "score": 1.0
+  },
+  {
+    "id": "lesson-curated-routes-20260801",
+    "timestamp": "2026-08-01T13:10:01.728680+00:00",
+    "type": "reflection",
+    "agent_id": "marceloclaro",
+    "context": "Tornar trilíngues as rotas curadas (frontmatter como_ler.tex) e o índice de fragmentos (fraglinktri) do main_tri.pdf",
+    "reflection": "As rotas curadas usavam \\rota{}, que resolve \\trilangref global (PT por padrão), então os blocos EN/ZH mostravam páginas PT. Correção: dentro do \\begingroup...\\endgroup já existente no como_ler.tex, adicionar \\let\\trilangref\\trilangrefpt|en|zh antes de cada bloco de rotas — escopo local, sem vazar. O índice de fragmentos usava \\pageref{frag:#1} fixo; mudado para \\pageref{frag:#1}\\,·\\,\\pageref{fragen:#1}\\,·\\,\\pageref{fragzh:#1} mostrando (p. PT · EN · ZH). Validado: 462 rotas do miolo continuam com 0 divergências após recompilação; páginas conferem com o .aux (ex: CONT-03 PT=895 EN=898 ZH=902).",
+    "score": 1.0
+  }
+]

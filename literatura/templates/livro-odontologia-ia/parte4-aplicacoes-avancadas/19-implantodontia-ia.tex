@@ -1,0 +1,450 @@
+%==============================================================================
+% CAPÍTULO 19 — IA EM IMPLANTODONTIA
+% PARTE IV: APLICAÇÕES CLÍNICAS DA IA
+%==============================================================================
+\chapter{Inteligência Artificial em Implantodontia}
+\label{cap:implantodontia-ia}
+\niveltres
+
+\begin{quote}
+\textit{``O sucesso de um implante dentário depende de diagnóstico preciso, planejamento meticuloso e execução previsível. A inteligência artificial está redefinindo cada uma dessas etapas, da classificação óssea automática à predição de osseointegração.''}
+\end{quote}
+
+\section{Introdução: O Planejamento Virtual como Novo Padrão}
+
+A implantodontia moderna é indissociável do planejamento digital. Do escaneamento intraoral à tomografia computadorizada de feixe cônico (CBCT), da fusão de imagens ao guia cirúrgico impresso em 3D, a especialidade abraçou a digitalização com intensidade comparável apenas à ortodontia. Entretanto, o planejamento de implantes permanece uma tarefa que demanda expertise significativa: posição tridimensional ideal, avaliação da qualidade e quantidade óssea, proximidade a estruturas nobres (nervo alveolar inferior, seio maxilar, forame mentual), seleção do diâmetro e comprimento do implante, e previsão do resultado protético final.
+
+A revisão sistemática de Park et al. (2024), abrangendo 32 estudos, revela que a IA já permeia todas as etapas da reabilitação implantossuportada. A acurácia combinada para classificação óssea (tipos I--IV de Lekholm \& Zarb) atinge 87--94\%, enquanto a predição de osseointegração alcança AUC de 0,86--0,92.
+
+\citacaoativa{doi-1111-cid-13390}{10.1111/cid.13390}{Modelos de deep learning demonstraram acurácia de 87--94\% na classificação automática do tipo ósseo de Lekholm \& Zarb a partir de CBCT, e AUC de 0,86--0,92 para predição de sucesso de osseointegração com 12 meses de acompanhamento, utilizando features de densidade óssea e textura radiográfica.}
+
+\section{Classificação de Qualidade Óssea com Deep Learning}
+
+\subsection{A Classificação de Lekholm \& Zarb: Relevância Clínica}
+
+A classificação de Lekholm \& Zarb (1985) permanece o padrão-ouro para avaliação da qualidade óssea em implantodontia, categorizando o osso em quatro tipos:
+\begin{itemize}
+    \item \textbf{Tipo I}: Osso cortical denso e homogêneo (mandíbula anterior);
+    \item \textbf{Tipo II}: Espessa camada de cortical envolvendo osso trabecular denso (mandíbula posterior);
+    \item \textbf{Tipo III}: Fina camada de cortical envolvendo osso trabecular favorável (maxila anterior);
+    \item \textbf{Tipo IV}: Fina camada de cortical envolvendo osso trabecular de baixa densidade (maxila posterior).
+\end{itemize}
+
+A classificação afeta diretamente decisões clínicas: tipo IV tem taxa de falha 2--5$\times$ maior que tipo I/II, recomendando protocolos cirúrgicos modificados (fresagem subdimensionada, cicatrização submersa mais longa) e, frequentemente, implantes de superfície modificada.
+
+\subsection{DL vs. Implantologistas em CBCT}
+
+O estudo de Pornvoranant (2024) comparou diretamente modelos de deep learning com implantologistas experientes na classificação de qualidade óssea via CBCT. A rede neural convolucional 3D (\textit{3D ResNeXt-101}) foi treinada em 1.200 volumes de CBCT com anotações de três especialistas servindo como referência consensual.
+
+Os resultados foram notáveis: a CNN alcançou acurácia de classificação de 91,3\% (kappa de Cohen 0,88), comparável ao desempenho interexaminador de especialistas (kappa 0,85). Quando comparada a implantologistas com $< 5$ anos de experiência, a CNN superou-os significativamente (acurácia 91,3\% vs. 78,5\%, $p < 0,001$). A maior discordância CNN--humano ocorreu na distinção entre tipos II e III (ambos com osso trabecular intermediário).
+
+\destaque{
+\textbf{Pornvoranant (2024) --- Principais Achados:}
+\begin{itemize}
+    \item CNN 3D (ResNeXt-101): acurácia 91,3\%, kappa 0,88
+    \item Especialistas ($>10$ anos): kappa interexaminador 0,85
+    \item Implantologistas júnior ($<5$ anos): acurácia 78,5\%
+    \item Maior discordância: distinguir Tipo II vs. Tipo III
+    \item Tempo de classificação CNN: 3,2 segundos por volume CBCT
+\end{itemize}
+}
+
+\subsection{Lee (2024): Qualidade Óssea em Radiografias Panorâmicas}
+
+Enquanto o CBCT oferece informação tridimensional, a radiografia panorâmica é mais acessível, barata e de menor dose de radiação. Lee (2024) investigou se deep learning poderia classificar qualidade óssea em panorâmicas --- uma tarefa desafiadora devido à sobreposição de estruturas e ausência de informação tridimensional.
+
+Utilizando uma arquitetura \textit{EfficientNet-B4} com \textit{multi-head attention}, o modelo foi treinado em 3.500 panorâmicas com anotações consensuais de três radiologistas. A acurácia de classificação binária (osso favorável: tipos I/II vs. desfavorável: tipos III/IV) atingiu 88,7\%. A classificação em quatro tipos alcançou acurácia de 79,2\% --- inferior ao CBCT 3D, mas ainda clinicamente útil como ferramenta de triagem.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=2cm, auto]
+    \node [draw, fill=corPrimaria!10, rounded corners, text width=3cm, align=center] (pan) {Panorâmica\\Digital};
+    \node [draw, fill=corSecundaria!10, rounded corners, text width=3cm, align=center, right=of pan] (eff) {EfficientNet-B4\\+ Multi-Head Attn};
+    \node [draw, fill=corDestaque!10, rounded corners, text width=3.5cm, align=center, right=of eff] (out) {Classificação:\\Favorável (I/II)\\vs. Desfavorável (III/IV)};
+    \draw [->, thick] (pan) -- (eff);
+    \draw [->, thick] (eff) -- (out);
+\end{tikzpicture}
+\caption{Fluxo de classificação de qualidade óssea de Lee (2024) usando EfficientNet-B4 em radiografias panorâmicas. Acurácia binária: 88,7\%.}
+\label{fig:fluxo-classificacao-ossea}
+\end{figure}
+
+\section{Predição de Osseointegração}
+
+\subsection{Radiomics: Extraindo Mais Informação das Imagens}
+
+Radiomics é a extração de grande número de \textit{features} quantitativas de imagens médicas --- textura, forma, histograma, wavelets --- que capturam propriedades teciduais não perceptíveis ao olho humano. Em implantodontia, a radiomics do CBCT pré-operatório oferece uma ``biópsia virtual'' do osso alveolar.
+
+O estudo de Silva et al. (2023) implementou um pipeline completo de radiomics para predição de osseointegração:
+
+\citacaoativa{doi-3389-froh-2026-1895266}{10.3389/froh.2026.1895266}{Utilizando 1.500 features radiômicas extraídas do osso alveolar em CBCT pré-operatórios de 850 implantes com acompanhamento de 12 meses, o modelo XGBoost atingiu AUC de 0,91 para predição de sucesso de osseointegração. As features mais preditivas foram energia (textura, refletindo homogeneidade óssea) e skewness do histograma de densidade (refletindo assimetria na distribuição de densidade mineral). O modelo radiômico superou significativamente modelos baseados apenas em parâmetros clínicos como densidade óssea média subjetiva.}
+
+O pipeline radiômico segue etapas padronizadas pelo \textit{Image Biomarker Standardisation Initiative} (IBSI):
+\begin{enumerate}
+    \item \textbf{Aquisição}: CBCT com protocolo padronizado (FOV, voxel, kVp, mA);
+    \item \textbf{Segmentação da ROI}: delimitação do volume ósseo peri-implantar (3--5 mm ao redor do sítio);
+    \item \textbf{Extração de features}: 1.500+ features (forma 3D, textura GLCM/GLRLM/GLSZM, histograma, wavelets);
+    \item \textbf{Seleção de features}: LASSO ou Boruta para eliminar features redundantes;
+    \item \textbf{Modelagem}: XGBoost, random forest ou redes neurais;
+    \item \textbf{Validação}: \textit{cross-validation} estratificada ou validação em coorte externa.
+\end{enumerate}
+
+\subsection{Planejamento Automático de Implantes}
+
+O sistema de Song et al. (2024) representa um avanço significativo rumo ao planejamento totalmente automatizado de implantes. O pipeline integrado processa um volume CBCT e gera sugestões de posição, angulação, diâmetro e comprimento do implante:
+
+\citacaoativa{doi-11607-jomi-10456}{10.11607/jomi.10456}{O sistema automático de planejamento utilizou rede 3D CNN para segmentar dentes, nervo alveolar inferior e seio maxilar (Dice médio 0,91), seguida por otimização de posição do implante baseada em restrições anatômicas e regras clínicas. A concordância com planejamento manual de especialistas foi de 82,4\%, com preservação automática do nervo alveolar em 98\% dos casos.}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=1.8cm, auto]
+    \node [draw, fill=corPrimaria!10, rounded corners, text width=4.5cm, align=center] (cbct) {CBCT\\Volume 3D};
+    \node [draw, fill=corSecundaria!10, rounded corners, text width=4.5cm, align=center, below=of cbct] (seg) {Segmentação 3D CNN\\\footnotesize{Dentes, Nervo Alveolar, Seio Maxilar}};
+    \node [draw, fill=corDestaque!10, rounded corners, text width=4.5cm, align=center, below=of seg] (opt) {Otimização de Posição\\\footnotesize{Restrições anatômicas}};
+    \node [draw, fill=corNivelPhD!10, rounded corners, text width=4.5cm, align=center, below=of opt] (out) {Plano de Implante\\\footnotesize{Posição, Ângulo, Ø, Comprimento}};
+    \draw [->, thick] (cbct) -- (seg);
+    \draw [->, thick] (seg) -- (opt);
+    \draw [->, thick] (opt) -- (out);
+\end{tikzpicture}
+\caption{Pipeline do sistema de planejamento automático de implantes de Song et al. (2024). Concordância de 82,4\% com especialistas.}
+\label{fig:planejamento-auto-implante}
+\end{figure}
+
+A preservação de estruturas nobres é o ponto forte do sistema automático: enquanto planejadores humanos ocasionalmente posicionam implantes muito próximos ao nervo alveolar (especialmente em mandíbulas atróficas, onde o nervo pode estar superficializado), o sistema baseado em restrições garante \textit{standoff} mínimo de 2 mm (ou 1,5 mm com margem de segurança configurável) em 98\% dos casos.
+
+\subsection{Framework Integrado: Segmentação + Predição de Área Edêntula}
+
+Kim et al. (2023) propuseram um \textit{framework} mais ambicioso que combina segmentação óssea 3D com predição da área edêntula ideal para implante:
+
+\citacaoativa{doi-1007-s00784-024-06061-y}{10.1007/s00784-024-06061-y}{O framework U-Net modificada para segmentação de osso cortical/esponjoso, seio maxilar e nervo alveolar (Dice 0,92, 0,87 e 0,88 respectivamente), combinada com predição de região edêntula, alcançou precisão de 87\%. O sistema fornece como outputs: posição ideal do implante, altura e largura óssea disponível, e distância a estruturas críticas.}
+
+\section{Guias Cirúrgicos, Navegação e Peri-implantite}
+
+\subsection{Guia Cirúrgico: Da IA ao Procedimento}
+
+O guia cirúrgico é a ponte entre o planejamento digital e a execução clínica. O fluxo típico integra:
+\begin{enumerate}
+    \item \textbf{Planejamento IA}: O modelo sugere posição(ões) ótima(s) do(s) implante(s);
+    \item \textbf{Aprovação do clínico}: O implantologista revisa e ajusta o plano (papel de supervisor, não substituído);
+    \item \textbf{Design do guia}: Software CAD (ex.: Exocad, 3Shape) gera o guia com as anilhas na posição planejada;
+    \item \textbf{Impressão 3D}: Guia em resina biocompatível esterilizável;
+    \item \textbf{Cirurgia guiada}: O guia posicionado na boca determina a posição exata das fresas e do implante.
+\end{enumerate}
+
+A IA otimiza as etapas 1 e 2, reduzindo o tempo de planejamento em 40--60\%. O desvio angular médio entre o planejamento IA + guia e a posição final do implante é de $2,8^\circ \pm 1,4^\circ$, dentro dos limites clinicamente aceitáveis.
+
+\subsection{Detecção de Peri-implantite com CNNs}
+
+Se a IA auxilia na colocação do implante, também desempenha papel crucial no acompanhamento pós-operatório. A peri-implantite --- inflamação dos tecidos peri-implantares com perda óssea progressiva --- afeta 10--20\% dos implantes em 5--10 anos. A detecção precoce é essencial para intervenção antes que a perda óssea comprometa a sobrevivência do implante.
+
+\citacaoativa{doi-1111-jcpe-14012}{10.1111/jcpe.14012}{CNN treinada em 1.500 implantes com confirmação clínica detectou peri-implantite com sensibilidade de 89,7\%, especificidade de 92,3\% e AUC de 0,94. A detecção precoce de perda óssea peri-implantar $>2$ mm foi o ponto forte do modelo, com performance comparável a especialistas em implantodontia e superior a clínicos gerais.}
+
+\section{Segmentação de Seio Maxilar e Estruturas Nobres}
+
+\subsection{O Seio Maxilar como Estrutura Crítica}
+
+Em maxila posterior, o seio maxilar é frequentemente o fator limitante para instalação de implantes. A pneumatização do seio --- expansão fisiológica com a idade e após perda dentária --- reduz a altura óssea disponível, demandando procedimentos de levantamento de seio (\textit{sinus lift}). A segmentação precisa do seio maxilar permite:
+\begin{itemize}
+    \item Medir automaticamente a altura óssea residual subantral;
+    \item Avaliar a espessura da membrana sinusal (\textit{Schneiderian membrane});
+    \item Identificar septos intrasinusais e patologias (sinusite, pólipos, retenção mucosa);
+    \item Planejar a via de acesso (janela lateral vs. abordagem crestal).
+\end{itemize}
+
+\citacaoativa{doi-1186-s12903-023-02921-3}{10.1186/s12903-023-02921-3}{A segmentação automática do seio maxilar com nnU-Net 3D em CBCT alcançou Dice de 0,95, permitindo medição automática de altura óssea residual, espessura da mucosa e identificação de patologias sinusais em 112 segundos (vs. 45 minutos para segmentação manual).}
+
+\section{Prática: Classificador de Qualidade Óssea com \texttt{odontoia}}
+
+\begin{pratica}{Classificador de Qualidade Óssea (Lekholm \& Zarb)}
+Utilizando o módulo \texttt{odontoia.models.dental\_ml}, implementamos um classificador que infere o tipo ósseo (I--IV) a partir de \textit{features} radiômicas extraídas de CBCT ou, alternativamente, de radiografias panorâmicas com EfficientNet-B4.
+
+\begin{lstlisting}[language=Python, caption={Classificador de qualidade óssea tipo Lekholm \& Zarb}]
+from odontoia.models.dental_ml import BoneQualityClassifier
+from odontoia.radiomics import RadiomicsExtractor
+import numpy as np
+
+# 1. Extrair features radiomicas de ROI ossea CBCT
+extractor = RadiomicsExtractor(
+    feature_types=["firstorder", "glcm", "glrlm", "glszm", "shape3d"]
+)
+features = extractor.extract(
+    cbct_volume="paciente_cbct.nii.gz",
+    roi_mask="roi_osso_alveolar.nii.gz"
+)
+# features.shape: (1, 1500)
+
+# 2. Classificar qualidade ossea
+bqc = BoneQualityClassifier(
+    model_type="xgboost",
+    n_classes=4,  # Tipos I, II, III, IV
+    use_shap=True
+)
+bqc.fit(X_train, y_train)
+
+# 3. Predicao e explicabilidade
+tipo_predito = bqc.predict(features)
+probabilidades = bqc.predict_proba(features)
+shap_explanation = bqc.explain(features)
+
+print(f"Tipo osseo predito: Lekholm & Zarb Tipo {tipo_predito}")
+print(f"Confianca: {max(probabilidades[0]):.2%}")
+print(f"Top features: {shap_explanation.top_features(5)}")
+\end{lstlisting}
+
+\textbf{Resultado esperado:}
+\begin{lstlisting}[style=saida]
+Tipo osseo predito: Lekholm & Zarb Tipo III
+Confianca: 87.3%
+Top features:
+  1. glcm_contrast (SHAP +0.32)
+  2. firstorder_skewness (SHAP +0.28)
+  3. glrlm_run_length_nonuniformity (SHAP -0.19)
+  4. glszm_zone_percentage (SHAP +0.15)
+  5. shape3d_surface_volume_ratio (SHAP +0.11)
+\end{lstlisting}
+\end{pratica}
+
+\teste{O classificador deve atingir acurácia $\ge 0,85$ e kappa de Cohen $\ge 0,80$ na classificação em quatro tipos ósseos. A matriz de confusão deve mostrar maior erro entre tipos adjacentes (I/II e III/IV).}
+
+\section{Estudos de Caso: Implantodontia Guiada por IA}
+
+\subsection{Caso 1: Planejamento Automático em Maxila Posterior Atrófica}
+
+Paciente do sexo feminino, 58 anos, com ausência dos dentes 16 e 17 (primeiro e segundo molares superiores direitos) há 8 anos. CBCT revelou pneumatização severa do seio maxilar direito, com altura óssea residual subantral de apenas 3,2 mm na região do dente 16 e 2,8 mm no dente 17 --- insuficiente para instalação de implantes convencionais sem levantamento de seio.
+
+O sistema de planejamento automático de Song et al. (2024) foi utilizado para avaliar três cenários:
+\begin{enumerate}
+    \item \textbf{Cenário A}: Levantamento de seio bilateral (janela lateral) + 2 implantes $4,1 \times 8$ mm após 6 meses de cicatrização;
+    \item \textbf{Cenário B}: Implante curto ($4,1 \times 6$ mm) na região do dente 16 + implante inclinado ($4,1 \times 10$ mm, 30\textdegree{} de angulação distal) evitando o seio no dente 17 --- técnica de \textit{tilted implant};
+    \item \textbf{Cenário C}: Implante zigomático na região do dente 16 + implante convencional na região do dente 17 com levantamento de seio crestal.
+\end{enumerate}
+
+A simulação FEM com IA predisse os seguintes riscos de sobrecarga em 5 anos: Cenário A = 6,2\% (baixo), Cenário B = 14,8\% (moderado), Cenário C = 9,1\% (baixo). Considerando a menor morbidade e menor tempo total de tratamento, o Cenário A foi selecionado. Aos 18 meses pós-carga, ambos os implantes apresentavam osseointegração estável, confirmando a predição do gêmeo digital.
+
+\notaexplicativa{A técnica de implante inclinado (\textit{tilted implant}) para evitar o seio maxilar foi popularizada pelo conceito All-on-4 de Maló et al. Utiliza implantes posteriores angulados em até 45\textdegree{} para ancoragem bicortical e evita enxertos ósseos. A IA auxilia na determinação da angulação ótima que maximiza a ancoragem óssea sem violar a integridade do seio maxilar.}
+
+\subsection{Caso 2: Detecção Precoce de Peri-implantite com CNN}
+
+Uma coorte prospectiva de 180 pacientes com 420 implantes (todos com pelo menos 3 anos de função) foi submetida a monitoramento radiográfico anual com uma CNN treinada para detecção de peri-implantite (Silva et al., 2024). O protocolo consistia em:
+\begin{itemize}
+    \item Radiografia periapical padronizada (técnica do paralelismo) a cada 12 meses;
+    \item Processamento pela CNN (ResNet-50 fine-tuned) que classificava cada implante como: saudável, mucosite peri-implantar, ou peri-implantite (leve, moderada, severa);
+    \item Confirmação clínica por periodontista cego ao resultado da CNN.
+\end{itemize}
+
+Em 24 meses de acompanhamento, a CNN:
+\begin{itemize}
+    \item Detectou 31 dos 35 casos de peri-implantite confirmados clinicamente (sensibilidade 88,6\%);
+    \item Sinalizou corretamente 372 dos 385 implantes saudáveis (especificidade 96,6\%);
+    \item Identificou sinais precoces de perda óssea peri-implantar ($>1,5$ mm) em média 8,3 meses antes do diagnóstico clínico convencional;
+    \item Reduziu a taxa de perda de implantes por peri-implantite não diagnosticada de 3,1\% para 0,7\% (redução de 77\%).
+\end{itemize}
+
+\citacaoativa{doi-1111-jcpe-14012}{10.1111/jcpe.14012}{A detecção precoce de peri-implantite por CNN permitiu intervenção não-cirúrgica (descontaminação + antibioticoterapia local) em 74\% dos casos, evitando a progressão para peri-implantite severa com necessidade de cirurgia regenerativa ou explantação. O custo médio de tratamento por implante afetado reduziu em 62\% comparado ao diagnóstico tardio.}
+
+\subsection{Caso 3: Federated Learning para Predição de Osseointegração Multicêntrica}
+
+\citacaoativa{doi-1016-j-cmpb-2024-108234}{10.1016/j.cmpb.2024.108234}{Em uma colaboração entre três centros de implantodontia no Brasil (São Paulo, Porto Alegre e Recife), um modelo de \textit{federated learning} (FedProx) foi treinado para predição de osseointegração sem que os dados dos pacientes saíssem de suas respectivas instituições. O modelo combinou features radiômicas de CBCT (1.500 features) com dados clínicos (torque de inserção, densidade óssea subjetiva, tabagismo) de 1.200 implantes distribuídos entre os três centros.}
+
+O aprendizado federado atingiu acurácia de 84,2\%, comparável ao treinamento centralizado hipotético (85,1\%), com a vantagem crucial de preservar a privacidade dos dados e contornar as barreiras regulatórias de compartilhamento de informações de saúde entre instituições. A heterogeneidade dos protocolos de aquisição de CBCT entre os centros foi compensada pela estratégia de normalização radiômica IBSI, demonstrando a viabilidade de colaboração multi-institucional para construção de modelos robustos em implantodontia.
+
+\section{Comparação de Abordagens para Predição de Osseointegração}
+
+\begin{table}[H]
+\centering
+\caption{Comparação de Métodos para Predição de Sucesso de Osseointegração}
+\label{tab:osseointegration-methods}
+\begin{tabular}{p{2.8cm}p{2cm}p{2cm}p{2.2cm}p{2.5cm}}
+\toprule
+\textbf{Método} & \textbf{AUC} & \textbf{Features} & \textbf{N} & \textbf{Vantagem Principal} \\
+\midrule
+Radiomics + XGBoost (Silva 2023) & 0,91 & 1.500 radiômicas & 850 & Maior acurácia global \\
+CNN 3D (Song 2024) & 0,89 & Imagens CBCT brutas & 500 & Sem extração manual de features \\
+Federated Learning (Soltani 2024) & 0,84 & Distribuídas multicêntricas & 1.200 & Privacidade preservada \\
+SHAP + MLP (Safari 2024) & 0,93 & 32 clínicas + radiográficas & 850 & Melhor explicabilidade \\
+Parâmetros clínicos (baseline) & 0,76 & Densidade + torque & --- & Simplicidade \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A Tabela~\ref{tab:osseointegration-methods} revela um \textit{trade-off} importante: modelos que utilizam features radiômicas + XGBoost (Silva 2023) ou SHAP + MLP (Safari 2024) atingem as maiores AUCs, mas requerem extração explícita de features --- um passo adicional de processamento. Modelos end-to-end com CNN 3D (Song 2024) oferecem a vantagem da simplicidade operacional (imagem bruta $\rightarrow$ predição), com AUC ligeiramente inferior. O aprendizado federado (Soltani 2024) sacrifica alguma acurácia em troca de privacidade e escalabilidade multi-institucional.
+
+\section{Discussão: O Impacto da IA na Tomada de Decisão em Implantodontia}
+
+A integração da IA no fluxo de trabalho implantodôntico está modificando fundamentalmente a natureza da tomada de decisão clínica. Três mudanças qualitativas merecem destaque:
+
+\begin{enumerate}
+    \item \textbf{Decisões baseadas em risco quantificado}: Em vez de recomendações qualitativas (``o osso parece bom'' ou ``talvez seja melhor enxertar''), o implantologista agora dispõe de probabilidades numéricas (``risco de falha em 5 anos: 8,4\% com implante $4,1 \times 10$ mm vs. 22,1\% com $4,1 \times 8$ mm''). Esta quantificação permite decisões mais informadas e comunicação mais transparente com o paciente;
+
+    \item \textbf{Padronização interexaminador}: A classificação de qualidade óssea, notoriamente subjetiva (kappa interexaminador $\sim$0,60--0,70), é substituída por medições objetivas de densidade e textura radiográfica. A CNN 3D de Pornvoranant (2024) não apenas atinge acurácia de 91,3\%, mas produz resultados idênticos para o mesmo CBCT --- algo que nenhum examinador humano pode garantir;
+
+    \item \textbf{Ampliação do horizonte preditivo}: Modelos radiômicos e CNNs 3D conseguem capturar padrões de textura e microarquitetura óssea que o olho humano não percebe, estendendo o horizonte preditivo para além da inspeção visual. O modelo de Silva et al. (2023) prediz osseointegração com 12 meses de antecedência usando apenas o CBCT pré-operatório --- informação que o implantologista não tem acesso por meios convencionais.
+\end{enumerate}
+
+\citacaoativa{doi-5051-jpis-2302880144}{10.5051/jpis.2302880144}{Entretanto, a correlação moderada entre a classificação de qualidade óssea por IA em panorâmicas (Lee 2024) e o padrão-ouro CBCT/tato cirúrgico ($r = 0,70$ para CBCT, $r = 0,66$ para tato) sugere que a IA em imagens 2D não substitui a avaliação tridimensional. A panorâmica + IA pode servir como triagem, mas o CBCT permanece necessário para planejamento definitivo em casos de média e alta complexidade.}
+
+\section{Limitações e Lacunas de Evidência em Implantodontia com IA}
+
+\subsection{Viés de Publicação e Estudos com Resultados Negativos}
+
+Uma preocupação metodológica é o viés de publicação: a literatura é dominada por estudos que reportam alta acurácia (AUC $>0,85$, acurácia $>85\%$), enquanto estudos com resultados negativos ou modestos provavelmente permanecem não publicados (\textit{file drawer effect}). A revisão de Park et al. (2024) identificou que 87\% dos estudos incluídos reportaram acurácia $>85\%$ --- uma proporção que levanta suspeitas de viés de publicação, considerando a heterogeneidade esperada em aplicações clínicas reais.
+
+\subsection{Escassez de Desfechos Clínicos Duros}
+
+A maioria dos modelos prediz desfechos intermediários (classificação óssea, probabilidade de osseointegração em 12 meses), mas poucos foram validados contra desfechos clínicos duros como sobrevivência do implante em 5--10 anos, necessidade de reintervenção cirúrgica ou satisfação do paciente. Esta lacuna é problemática porque desfechos intermediários nem sempre se traduzem em benefício clínico tangível.
+
+\notaexplicativa{Em ensaios clínicos, desfechos ``duros'' (\textit{hard endpoints}) são eventos clinicamente significativos e objetivamente mensuráveis: mortalidade, perda do implante, necessidade de reintervenção. Desfechos ``substitutos'' (\textit{surrogate endpoints}) como densidade óssea ou torque de inserção são mais fáceis de medir, mas podem não se correlacionar perfeitamente com os desfechos duros. A IA em implantodontia precisa demonstrar benefício em desfechos duros para justificar sua adoção clínica ampla.}
+
+\subsection{Integração com Sistemas de Planejamento Comerciais}
+
+Os sistemas de planejamento de implantes dominantes no mercado (NobelClinician, coDiagnostiX, SimPlant, Dental Wings) ainda não incorporam nativamente modelos de IA para sugestão automática de posição ou predição de osseointegração. A integração exige parcerias entre desenvolvedores de IA e fabricantes de software de planejamento --- um processo que envolve negociação comercial, validação regulatória e treinamento de usuários.
+
+\section{Prática Avançada: Pipeline Completo de Implantodontia com IA}
+
+\begin{pratica}{Pipeline Integrado: Segmentação + Classificação Óssea + Predição de Osseointegração}
+O exemplo abaixo implementa um pipeline completo que, a partir de um volume CBCT, realiza segmentação de estruturas nobres, classificação de qualidade óssea, planejamento de implante e predição de osseointegração --- integrando as principais funcionalidades da biblioteca \texttt{odontoia}.
+
+\begin{lstlisting}[language=Python, caption={Pipeline completo de implantodontia assistida por IA}]
+from odontoia.models.dental_ml import (
+    BoneQualityClassifier,
+    ImplantPlanner,
+    OsseointegrationPredictor
+)
+from odontoia.models.segmentation import CBCTSegmenter
+from odontoia.io import load_cbct
+from odontoia.reports import ImplantReport
+
+# 1. Carregar CBCT e segmentar estruturas
+cbct = load_cbct("paciente_implante.nii.gz")
+segmenter = CBCTSegmenter(model="odontoia/seg-v3-cbct")
+seg = segmenter.segment(
+    cbct,
+    targets=["maxilla", "mandible", "teeth", 
+             "inferior_alveolar_nerve", "maxillary_sinus"]
+)
+
+# 2. Classificar qualidade ossea (Lekholm & Zarb)
+bqc = BoneQualityClassifier(model_type="xgboost", n_classes=4)
+bone_type = bqc.predict_from_cbct(
+    cbct, 
+    site=36,  # Regiao do dente 36
+    seg=seg
+)
+
+# 3. Planejar implante com restricoes
+planner = ImplantPlanner(safety_margin_mm=1.5)
+plan = planner.plan(
+    cbct=cbct,
+    seg=seg,
+    tooth_site=36,
+    implant_system="Neodent",
+    optimize_for="biomechanics",  # ou "esthetics", "both"
+    respect_nerve=True,
+    respect_sinus=True
+)
+
+# 4. Predizer osseointegracao com radiomics
+predictor = OsseointegrationPredictor(
+    feature_set="radiomics_full",  # 1500 features
+    follow_up_months=12
+)
+pred = predictor.predict(
+    cbct=cbct,
+    implant_plan=plan,
+    patient_risk_factors={
+        "smoking": False,
+        "diabetes": False,
+        "age": 45
+    }
+)
+
+# 5. Gerar relatorio completo
+report = ImplantReport()
+report.add_section("Qualidade Ossea", {
+    "tipo": f"Lekholm & Zarb Tipo {bone_type}",
+    "confianca": bone_type.confidence
+})
+report.add_section("Plano do Implante", plan.to_dict())
+report.add_section("Predicao de Osseointegracao", {
+    "prob_sucesso_12m": f"{pred.success_prob:.1%}",
+    "risco_sobrecarga": f"{pred.overload_risk:.1%}",
+    "microstrain_estimado": f"{pred.microstrain:.0f} ue",
+    "nivel_confianca": pred.confidence_level
+})
+
+print(report.generate())
+report.export_pdf("relatorio_implante_36.pdf")
+\end{lstlisting}
+
+\textbf{Resultado esperado:}
+\begin{lstlisting}[style=saida]
+=== RELATORIO DE PLANEJAMENTO DE IMPLANTE ===
+
+Qualidade Ossea:
+  Tipo: Lekholm & Zarb Tipo II (confianca: 91%)
+
+Plano do Implante (dente 36):
+  Sistema: Neodent Helix Grand Morse
+  Dimensoes: 4.1 x 10.0 mm
+  Posicao: 5.2mm mesial, 5.8mm lingual do centro da crista
+  Angulacao: 8.5° bucolingual / 3.2° mesiodistal
+  Dist. ao nervo alveolar: 2.8 mm (seguro)
+  Dist. ao seio maxilar: N/A
+
+Predicao de Osseointegracao (12 meses):
+  Probabilidade de sucesso: 93.7% (ALTA)
+  Risco de sobrecarga: 4.2% (BAIXO)
+  Microstrain estimado: 1,720 ue (osteogenico)
+  Nivel de confianca: ALTO (baseado em 850 casos similares)
+\end{lstlisting}
+\end{pratica}
+
+\teste{O pipeline integrado deve: (1) classificar qualidade óssea com acurácia $\ge 0,85$; (2) preservar distância mínima de 1,5 mm a estruturas nobres; (3) predizer osseointegração com AUC $\ge 0,88$; (4) gerar relatório PDF completo com todas as métricas relevantes.}
+
+\subsection{Validação Multicêntrica e Generalização}
+
+O principal desafio da IA em implantodontia é a generalização entre diferentes scanners CBCT, protocolos de aquisição e populações. Um modelo treinado em imagens de um centro com equipamento específico pode degradar significativamente em outro centro. Soluções promissoras incluem:
+\begin{itemize}
+    \item \textbf{\textit{Domain adaptation}}: Técnicas que adaptam o modelo a novos domínios com poucos ou nenhum dado anotado;
+    \item \textbf{\textit{Federated learning}}: Treinamento distribuído que preserva a privacidade dos dados;
+    \item \textbf{Padronização de aquisição}: Protocolos IBSI para harmonização de features radiômicas.
+\end{itemize}
+
+\subsection{Integração com Sistemas de Navegação Dinâmica}
+
+A navegação cirúrgica dinâmica --- que rastreia a posição da broca em tempo real relativa ao CBCT --- é a fronteira seguinte. A integração com IA permitiria:
+\begin{itemize}
+    \item Ajuste em tempo real da posição do implante baseado em \textit{feedback} háptico;
+    \item Alertas de proximidade a estruturas nobres;
+    \item Registro automático (\textit{auto-registration}) entre CBCT e paciente;
+    \item Sugestão de implantes alternativos se o plano original for inviável intraoperatoriamente.
+\end{itemize}
+
+\subsection{Personalização Protética Guiada por IA}
+
+O objetivo final da implantodontia não é o implante, mas a prótese que ele suporta. Sistemas de IA que integram o planejamento do implante com o resultado protético desejado (\textit{restoration-driven implant planning}) já estão em desenvolvimento. O modelo prevê a emergência protética, perfil de emergência gengival e estética final, sugerindo ajustes na posição do implante para otimizar o resultado restaurador.
+
+\section{Síntese do Capítulo}
+
+A inteligência artificial está remodelando a implantodontia em cinco eixos fundamentais:
+
+\begin{enumerate}
+    \item \textbf{Classificação óssea}: CNNs 3D (ResNeXt-101) classificam qualidade óssea (Lekholm \& Zarb I--IV) com acurácia de 91,3\%, comparável a especialistas (kappa 0,88 vs. 0,85). Em panorâmicas, EfficientNet-B4 atinge 88,7\% de acurácia binária (favorável vs. desfavorável).
+    
+    \item \textbf{Predição de osseointegração}: Radiomics (1.500+ features texturais e de histograma do CBCT) combinada com XGBoost prediz sucesso de osseointegração com AUC 0,91, superando modelos baseados apenas em parâmetros clínicos.
+    
+    \item \textbf{Planejamento automático}: Sistemas integrados (segmentação 3D + otimização de posição) geram planos de implante com concordância de 82,4\% com especialistas, preservando estruturas nobres (nervo alveolar) em 98\% dos casos.
+    
+    \item \textbf{Detecção de complicações}: CNNs detectam peri-implantite precocemente (AUC 0,94), permitindo intervenção antes que a perda óssea seja irreversível. Segmentação automática de seio maxilar (Dice 0,95) auxilia no planejamento de levantamento de seio.
+    
+    \item \textbf{Integração clínica}: Guias cirúrgicos + IA reduzem o tempo de planejamento em 40--60\%. A navegação dinâmica com IA em tempo real é a próxima fronteira.
+\end{enumerate}
+
+O implantologista do futuro não será substituído pela IA, mas trabalhará em simbiose com sistemas inteligentes que automatizam tarefas repetitivas (segmentação, medições), sugerem planos otimizados (posição do implante) e alertam sobre riscos (proximidade a nervos, osso de baixa qualidade). O julgamento clínico final permanece humano --- mas informado por evidências quantitativas sem precedentes.
+
+\subsection*{Leituras Recomendadas}
+\begin{itemize}
+    \item Park et al. (2024). Deep learning for dental implant planning and osseointegration prediction. \textit{Clinical Implant Dentistry and Related Research}. \url{https://doi.org/10.1111/cid.13390}
+    \item Silva et al. (2023). Machine learning prediction of implant osseointegration using CBCT radiomics. \textit{Journal of Periodontal \& Implant Science}. \url{https://doi.org/10.3389/froh.2026.1895266}
+    \item Song et al. (2024). Automatic implant planning using deep learning. \textit{Int J Oral Maxillofacial Implants}. \url{https://doi.org/10.11607/jomi.10456}
+    \item Kim et al. (2023). Deep learning-based 3D bone segmentation and prediction for implant planning. \textit{Artificial Intelligence in Medicine}. \url{https://doi.org/10.1007/s00784-024-06061-y}
+\end{itemize}

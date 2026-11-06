@@ -1,0 +1,131 @@
+%==============================================================================
+% FICHAMENTO CRÍTICO — Use of the Deep Learning Approach to Measure Alveolar
+% Bone Level
+% Conforme NBR 6023 (referências) e NBR 10520 (citações)
+%==============================================================================
+\section{Fichamento: \citeonline{lee2022alveolar}}
+
+% --- 1. IDENTIFICAÇÃO ---
+\subsection{Identificação}
+\begin{tabular}{ll}
+\textbf{Título:} & Use of the deep learning approach to measure alveolar bone
+level \\
+\textbf{Autor(es):} & Lee, Chun-Teh; Kabir, Tanjida; Nelson, Jiman; Sheng, Sally;
+Meng, Hsiu-Wan; Van Dyke, Thomas E.; Walji, Muhammad F.; Jiang, Xiaoqian;
+Shams, Shayan \\
+\textbf{Periódico:} & Journal of Clinical Periodontology \\
+\textbf{Ano:} & 2022 \\
+\textbf{Volume:} & 49 \\
+\textbf{Número:} & 3 \\
+\textbf{Páginas:} & 260--269 \\
+\textbf{DOI:} & \url{https://doi.org/10.1111/jcpe.13574} \\
+\textbf{Qualis:} & A1 (Odontologia) \\
+\textbf{Tipo:} & Artigo original \\
+\end{tabular}
+
+% --- 2. OBJETIVO ---
+\subsection{Objetivo}
+Desenvolver e validar um modelo de deep learning baseado em redes neurais
+convolucionais para medir automaticamente o nível ósseo alveolar radiográfico
+em radiografias periapicais, atribuir estágios de perda óssea radiográfica
+(RBL) conforme a classificação de periodontite de 2018 e comparar o desempenho
+com examinadores humanos independentes.
+
+% --- 3. METODOLOGIA ---
+\subsection{Metodologia}
+\textbf{Desenho do estudo:} Estudo transversal de desenvolvimento e validação de
+modelo CAD baseado em DL. \\
+\textbf{Amostra:} Radiografias periapicais de 46 casos (644 imagens adicionais
+para validação externa independente), além do conjunto principal de treino
+(70\%), validação (10\%) e teste (20\%). \\
+\textbf{Métricas principais:} Dice Similarity Coefficient (DSC) para
+segmentação; AUROC, sensibilidade, especificidade e acurácia para estadiamento;
+comparação de porcentagem de RBL por DL versus examinadores (teste t pareado). \\
+\textbf{Validação:} Três redes de segmentação integradas (osso alveolar, dente,
+junção cemento-esmalte) seguidas de análise de imagem; validação em dataset
+adicional independente (644 imagens de 46 casos distintos).
+
+% --- 4. RESULTADOS PRINCIPAIS ---
+\subsection{Resultados Principais}
+\begin{itemize}
+  \item DSC médio para segmentação foi superior a 0,91 para todas as estruturas.
+  \item AUROC para estadiamento RBL: estágio I = 0,89; estágio II = 0,90;
+        estágio III = 0,90; ausência de perda = 0,98.
+  \item Acurácia do diagnóstico do caso (periodontite) foi de 0,85, com
+        acurácia por extensão (0,96), estágio (0,87) e grau (0,96).
+  \item Não houve diferença significativa entre DL e examinadores na medição
+        de RBL (p = 0,65), mas o DL foi 15 vezes mais rápido (9 min vs. 137 min).
+\end{itemize}
+
+% --- 5. LIMITAÇÕES ---
+\subsection{Limitações}
+\begin{itemize}
+  \item A amostra para validação do diagnóstico (46 casos) é limitada, com
+        distribuição desigual dos estágios periodontais.
+  \item O modelo foi desenvolvido apenas para radiografias periapicais, não
+        tendo sido testado em radiografias panorâmicas ou CBCT.
+  \item A classificação utilizou apenas o componente radiográfico, sem integrar
+        dados clínicos (sondagem, sangramento, mobilidade).
+\end{itemize}
+
+% --- 6. CONTRIBUIÇÃO PARA O LIVRO ---
+\subsection{Contribuição para o Livro}
+Este artigo fundamenta o Capítulo 14, que trata de deep learning para
+periodontia. A abordagem de três redes de segmentação integradas (osso, dente,
+JCE) para medir o nível ósseo alveolar é um exemplo didático de arquitetura
+modular baseada em CNNs. A comparação direta com examinadores humanos (p = 0,65)
+e a economia de tempo (9 min vs. 137 min) são evidências usadas no livro para
+discutir o valor clínico da automação em periodontia. A classificação conforme
+a classificação de 2018 alinha-se à prática clínica contemporânea.
+
+% --- 7. ANÁLISE CRÍTICA ---
+\subsection{Análise Crítica}
+\begin{itemize}
+  \item \textbf{Validade interna:} Alta -- Desenho controlado com divisão
+        treino/validação/teste e dataset adicional independente para evitar
+        data snooping.
+  \item \textbf{Validade externa:} Média -- Amostra de um único centro
+        (UTHealth, EUA), mas com validação em dataset adicional de 46 casos
+        distintos dos originais.
+  \item \textbf{Reprodutibilidade:} Alta -- Arquitetura descrita em detalhes;
+        três segmentadores CNN com parâmetros e pipeline de pós-processamento
+        claramente especificados.
+  \item \textbf{Relevância clínica:} Alta -- Redução de 137 para 9 minutos por
+        exame completo; potencial para triagem populacional e auditoria de
+        qualidade diagnóstica.
+  \item \textbf{Conflito de interesses:} Não -- Os autores declararam ausência de
+        conflitos.
+  \item \textbf{Viés identificado:} Viés de verificação -- o ground truth foi
+        estabelecido por examinadores que também serviram como comparador;
+        apesar do cuidado, não houve padrão-ouro histológico.
+\end{itemize}
+
+% --- 8. CITAÇÕES RELEVANTES ---
+\subsection{Citações Relevantes}
+\begin{citacao}
+``The average Dice Similarity Coefficient (DSC) for segmentation was over 0.91.
+There was no significant difference in the RBL percentage measurements determined
+by DL and examiners (p = .65).'' (p. 265).
+\end{citacao}
+
+% --- 9. MAPEAMENTO SDD ---
+\subsection{Mapeamento SDD}
+\textbf{Problema:} Medição manual do nível ósseo alveolar em radiografias
+periapicais é subjetiva, demorada e com variabilidade interexaminador. \\
+\textbf{Entrada:} Radiografias periapicais digitalizadas (intraorais) com
+posicionador padronizado. \\
+\textbf{Saída:} Porcentagem de RBL por sítio (mesial/distal), estágio RBL
+(0--III) e diagnóstico periodontal provisório (extensão, estágio, grau). \\
+\textbf{Critérios:} DSC $\geq$ 0,90; AUROC $\geq$ 0,85 por estágio; diferença
+não significativa versus examinadores (p $>$ 0,05); tempo de processamento
+$\leq$ 10 min por série completa. \\
+\textbf{Confiança:} 0,82 -- Estudo robusto com validação em dataset independente,
+mas limitado por amostra moderada e ausência de padrão-ouro histológico.
+
+% --- 10. REFERÊNCIA ABNT ---
+\subsection{Referência ABNT}
+\begin{verbatim}
+LEE, Chun-Teh et al. Use of the deep learning approach to measure alveolar
+bone level. Journal of Clinical Periodontology, Copenhagen, v. 49, n. 3,
+p. 260-269, 2022. DOI: 10.1111/jcpe.13574.
+\end{verbatim}

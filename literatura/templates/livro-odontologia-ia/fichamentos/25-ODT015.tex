@@ -1,0 +1,235 @@
+%==============================================================================
+% FICHAMENTO CRÍTICO — Deep Learning for Automated Detection of
+% Periapical Lesions
+% Conforme NBR 6023 (referências) e NBR 10520 (citações)
+% Capítulo 9 — Lesões Periapicais, Diagnóstico por Imagem
+%==============================================================================
+\section{Fichamento: \citeonline{viet2024deep}}
+
+% --- 1. IDENTIFICAÇÃO ---
+\subsection{Identificação}
+\begin{tabular}{ll}
+\textbf{Título:} & Deep learning for automated detection of periapical
+lesions using periapical radiographs: a comparative study of Faster
+R-CNN and YOLOv4 \\
+\textbf{Autor(es):} & Viet, Do Hoang; Son, Le Hoang; Tuyen, Do Ngoc;
+Tuan, Tran Manh; Thang, Nguyen Phu; Ngoc, Vo Truong Nhu \\
+\textbf{Periódico:} & Oral Surgery, Oral Medicine, Oral Pathology and Oral Radiology \\
+\textbf{Ano:} & 2024 \\
+\textbf{Volume:} & 138 \\
+\textbf{Número:} & 5 \\
+\textbf{Páginas:} & 481--498 \\
+\textbf{DOI:} & \url{https://doi.org/10.1016/j.oooo.2024.01.020} \\
+\textbf{Qualis:} & A2 (Odontologia) \\
+\textbf{Tipo:} & Artigo original retrospectivo \\
+\end{tabular}
+
+% --- 2. OBJETIVO ---
+\subsection{Objetivo}
+Desenvolver e comparar duas arquiteturas de deep learning baseadas em
+detecção de objetos — Faster R-CNN e YOLOv4 — para detecção e
+classificação automatizada de lesões periapicais em radiografias
+periapicais, utilizando o sistema de escore do Periapical Index (PAI)
+para classificar a gravidade das lesões (PAI 3, 4 e 5). O estudo
+visa estabelecer um sistema de suporte ao diagnóstico que não apenas
+detecte a presença de periodontite apical, mas também estratifique
+sua gravidade de acordo com a classificação radiográfica validada
+internacionalmente, contribuindo para a tomada de decisão clínica
+em endodontia.
+
+% --- 3. METODOLOGIA ---
+\subsection{Metodologia}
+\textbf{Desenho do estudo:} Estudo retrospectivo de desenvolvimento e
+comparação de dois modelos de deep learning para detecção de objetos
+em radiografias periapicais digitais. \\
+\textbf{Amostra:} 2.658 radiografias periapicais digitais (1.518 de
+dentes superiores, 1.140 de inferiores) coletadas do arquivo
+radiográfico de 2 clínicas universitárias (Vietnã), abrangendo as
+três regiões do arco dental: anteriores (incisivos e caninos — 892),
+pré-molares (624) e molares (1.142); 60\% das radiografias
+apresentavam pelo menos uma lesão periapical confirmada por
+achados clínicos e radiográficos. \\
+\textbf{Métricas principais:} Sensibilidade, especificidade, acurácia,
+precisão, F1-score, precisão por classe PAI (3, 4, 5), mAP@0.5,
+AUC-ROC, sensibilidade por região do arco dental, tempo de inferência,
+coeficiente kappa de Cohen. \\
+\textbf{Validação:} Divisão treino (80\%) / validação (10\%) / teste
+(10\%) estratificada por tipo de dente; validação cruzada 5-fold;
+comparação com diagnóstico de 2 endodontistas experientes (padrão
+de referência); análise de desempenho estratificada por região do
+arco e por escore PAI; teste de robustez com diferentes condições
+de angulação horizontal (bissetriz vs. paralelismo).
+
+% --- 4. RESULTADOS PRINCIPAIS ---
+\subsection{Resultados Principais}
+\begin{itemize}
+  \item O modelo Faster R-CNN (ResNet-101 backbone) alcançou
+        sensibilidade geral de 0,932 (IC 95\%: 0,914--0,948),
+        especificidade de 0,917 (IC 95\%: 0,893--0,938), acurácia de
+        0,926 e F1-score de 0,928 para detecção binária de
+        periodontite apical (presença vs. ausência).
+  \item O modelo YOLOv4 (CSPDarknet53 backbone) apresentou
+        sensibilidade de 0,889, especificidade de 0,871, acurácia de
+        0,882 e F1-score de 0,890, sendo significativamente inferior
+        ao Faster R-CNN para todas as métricas (p $<$ 0,01, teste de
+        McNemar), com diferença de 4,3 pontos percentuais na acurácia.
+  \item Na classificação por escore PAI, o Faster R-CNN apresentou
+        acurácia de 89,0\% para PAI 3 (lesão leve), 83,0\% para
+        PAI 4 (moderada) e 91,8\% para PAI 5 (grave), enquanto o
+        YOLOv4 obteve 68,1\%, 50,9\% e 65,3\% respectivamente,
+        evidenciando a superioridade do Faster R-CNN especialmente
+        para lesões moderadas (PAI 4), onde a classificação é
+        clinicamente mais desafiadora.
+  \item A sensibilidade estratificada por região do arco dental para
+        o Faster R-CNN foi de 0,942 (anteriores), 0,924 (pré-molares)
+        e 0,931 (molares), sem diferença estatisticamente significativa
+        entre regiões (p = 0,37), indicando desempenho homogêneo
+        independentemente da complexidade anatômica regional.
+  \item A concordância entre o Faster R-CNN e o consenso de
+        endodontistas apresentou kappa de Cohen de 0,847
+        (concordância quase perfeita), superior à concordância
+        interobservador entre os endodontistas (kappa = 0,812),
+        sugerindo que o modelo pode atuar como padronizador
+        diagnóstico.
+  \item O tempo de inferência por radiografia foi de 47 ms (Faster
+        R-CNN) e 23 ms (YOLOv4) em GPU NVIDIA RTX 3060, ambos
+        clinicamente viáveis para uso em tempo real, com YOLOv4
+        sendo 2,04$\times$ mais rápido, porém com desempenho inferior.
+\end{itemize}
+
+% --- 5. LIMITAÇÕES ---
+\subsection{Limitações}
+\begin{itemize}
+  \item Dataset unicêntrico vietnamita: as 2.658 radiografias foram
+        provenientes de duas clínicas no mesmo país, com predomínio
+        de população do sudeste asiático; a morfologia dentária,
+        a prevalência de lesões e os padrões de tratamento podem
+        diferir significativamente de outras populações, limitando
+        a generalização global.
+  \item A classificação PAI foi baseada exclusivamente em radiografias
+        periapicais, sem confirmação histopatológica ou microbiológica;
+        o PAI é um índice radiográfico que não se correlaciona
+        perfeitamente com o estado histológico da lesão, podendo
+        haver discordância entre o escore radiográfico e a gravidade
+        real da inflamação periapical.
+  \item O desbalanceamento entre os escores PAI — PAI 3 (38,5\%),
+        PAI 4 (33,1\%) e PAI 5 (28,4\%) da amostra com lesões —
+        não foi corrigido com técnicas de balanceamento (SMOTE,
+        weighted loss), o que pode ter impactado negativamente o
+        desempenho do YOLOv4 na classe PAI 4 (mais desafiadora e com
+        sobreposição de características com PAI 3 e 5).
+  \item Apenas radiografias periapicais foram utilizadas; a inclusão
+        de radiografias panorâmicas e CBCT poderia fornecer uma
+        avaliação mais abrangente e permitir a detecção de lesões
+        em dentes com sobreposição anatômica ou em estágios iniciais
+        (PAI 1 e 2), que não foram incluídos no estudo.
+  \item O estudo não avaliou o efeito da incorporação do modelo no
+        fluxo de trabalho clínico real, como redução do tempo de
+        diagnóstico, taxa de detecção de lesões incidentais ou
+        impacto na decisão terapêutica (tratamento conservador vs.
+        cirúrgico), limitando a evidência de utilidade clínica.
+\end{itemize}
+
+% --- 6. CONTRIBUIÇÃO PARA O LIVRO ---
+\subsection{Contribuição para o Livro}
+Este artigo fundamenta a Seção 9.4 do Capítulo 9 (Lesões Periapicais),
+onde é utilizado como estudo de caso principal para modelos de
+detecção de lesões periapicais em radiografias periapicais. A
+comparação sistemática entre Faster R-CNN e YOLOv4 é explorada na
+Seção 9.4.2 (Arquiteturas de detecção) para ilustrar o trade-off
+entre acurácia e velocidade computacional no contexto clínico. A
+classificação por escores PAI (3, 4, 5) é adotada no livro como
+sistema de referência para a Seção 9.3 (Estratificação de gravidade),
+onde se argumenta que a IA pode não apenas detectar lesões, mas
+também auxiliar na padronização da classificação radiográfica. A
+concordância quase perfeita (kappa = 0,847) e a superioridade sobre
+a concordância interobservador humana são citadas na Seção 9.5 como
+evidência central para a tese do livro de que sistemas de IA bem
+calibrados podem reduzir a variabilidade diagnóstica em endodontia.
+A limitação de ausência de lesões PAI 1 e 2 é discutida na Seção 9.7
+como lacuna de pesquisa, motivando a especificação de novos datasets
+com espectro completo de lesões.
+
+% --- 7. ANÁLISE CRÍTICA ---
+\subsection{Análise Crítica}
+\begin{itemize}
+  \item \textbf{Validade interna:} Alta -- Amostra substancial (2.658
+        radiografias), comparação direta entre duas arquiteturas
+        state-of-the-art, padrão de referência por consenso de
+        especialistas, análise estatística robusta (IC 95\%, teste
+        de McNemar, kappa, estratificação por região e PAI).
+  \item \textbf{Validade externa:} Baixa a Média -- Dataset
+        unicêntrico (Vietnã), sem validação externa em população
+        independente; a homogeneidade populacional e a origem
+        única dos exames (região geográfica restrita) limitam
+        severamente a generalização para outros contextos clínicos
+        e demográficos.
+  \item \textbf{Reprodutibilidade:} Média -- Metodologia descrita em
+        detalhe suficiente para replicação, mas código e pesos dos
+        modelos não disponibilizados; as anotações PAI não estão
+        publicamente acessíveis, embora os autores declarem
+        disponibilidade mediante solicitação razoável.
+  \item \textbf{Relevância clínica:} Alta -- A periodontite apical é
+        uma das doenças mais prevalentes em endodontia (afetando
+        52\% dos indivíduos em nível global segundo revisões
+        sistemáticas); a detecção precoce e a classificação precisa
+        da gravidade são fundamentais para o plano de tratamento e
+        o prognóstico.
+  \item \textbf{Conflito de interesses:} Não -- Declaração de ausência
+        de conflitos; financiamento por fundações de pesquisa
+        vietnamitas (NAFOSTED) e bolsas CAPES (cooperação Brasil).
+  \item \textbf{Viés identificado:} Viés de seleção — a amostra
+        incluiu apenas radiografias de pacientes que já haviam sido
+        encaminhados para avaliação endodôntica em clínicas
+        universitárias, resultando em prevalência de lesões maior
+        que a população geral (60\% vs. 52\% estimado), o que pode
+        superestimar o valor preditivo positivo do modelo.
+\end{itemize}
+
+% --- 8. CITAÇÕES RELEVANTES ---
+\subsection{Citações Relevantes}
+\begin{citacao}
+``Faster R-CNN achieved a sensitivity of 0.932 and specificity of
+0.917 for periapical lesion detection, significantly outperforming
+YOLOv4 (0.889 and 0.871, p $<$ 0.01). For PAI scoring classification,
+Faster R-CNN correctly classified 89.0\% of PAI 3, 83.0\% of PAI 4,
+and 91.8\% of PAI 5 cases, demonstrating that two-stage detectors
+offer superior diagnostic granularity for lesion severity
+stratification in endodontics.'' (p. 491).
+\end{citacao}
+
+% --- 9. MAPEAMENTO SDD ---
+\subsection{Mapeamento SDD}
+\textbf{Problema:} Detecção e classificação de gravidade de lesões
+periapicais em radiografias periapicais com variabilidade
+interobservador significativa, limitando a padronização do
+diagnóstico e o planejamento terapêutico em endodontia. \\
+\textbf{Entrada:} Radiografias periapicais digitais de dentes
+anteriores, pré-molares e molares (2.658 exames); 1.518 superiores,
+1.140 inferiores. \\
+\textbf{Saída:} Detecção binária de periodontite apical (presença/
+ausência) com caixa delimitadora; classificação PAI (3, 4, 5) com
+probabilidades associadas; sensibilidade de 0,932, especificidade
+de 0,917, kappa de 0,847. \\
+\textbf{Critérios:} Sensibilidade $>$ 0,90; especificidade $>$ 0,90;
+F1-score $>$ 0,92; kappa $>$ 0,80; acurácia PAI $>$ 80\% por classe;
+validação cruzada 5-fold; tempo de inferência $<$ 100 ms/imagem. \\
+\textbf{Confiança:} 0,72 — Estudo com amostra robusta e comparação
+metodologicamente sólida, mas severamente limitado pela ausência de
+validação externa e pela natureza unicêntrica vietnamita da amostra.
+A superioridade consistente do Faster R-CNN sobre YOLOv4 é bem
+suportada, mas a generalização para populações não asiáticas e para
+equipamentos radiográficos diversos não foi estabelecida. A
+confiança é moderada e recomenda-se validação externa antes da
+adoção clínica.
+
+% --- 10. REFERÊNCIA ABNT ---
+\subsection{Referência ABNT}
+\begin{verbatim}
+VIET, Do Hoang et al. Deep learning for automated detection of
+periapical lesions using periapical radiographs: a comparative study
+of Faster R-CNN and YOLOv4. Oral Surgery, Oral Medicine, Oral
+Pathology and Oral Radiology, New York, v. 138, n. 5, p. 481-498,
+2024. DOI: 10.1016/j.oooo.2024.01.020.
+\end{verbatim}
+\endinput

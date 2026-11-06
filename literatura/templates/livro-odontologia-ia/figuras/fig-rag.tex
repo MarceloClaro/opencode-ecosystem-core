@@ -1,0 +1,38 @@
+% ======================================================================
+% FIGURA: Arquitetura RAG Odontológico (Capítulo 23)
+% ======================================================================
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    node distance=1.5cm and 2cm,
+    box/.style={rectangle, draw=blueaccent, fill=blueaccent!15, minimum width=2.5cm, minimum height=0.8cm, font=\footnotesize, rounded corners=3pt, align=center},
+    db/.style={cylinder, draw=cyanaccent, fill=cyanaccent!15, minimum width=2cm, minimum height=1.2cm, font=\footnotesize, shape border rotate=90, align=center},
+    arrow/.style={-latex, thick},
+]
+% Usuário
+\node[box, fill=codegreen!20] (user) {Usuário\\Pergunta clínica};
+
+% Retrieval
+\node[box, right=of user] (embed) {Embedding\\Transformer\\768-d};
+\node[db, right=of embed] (vectordb) {Vector DB\\100 artigos\\ChromaDB};
+
+% Generation
+\node[box, below=of embed] (retrieve) {Top-K\\Recuperação\\k=5};
+\node[box, right=of retrieve] (llm) {LLM\\GPT-4/LLaMA\\Geração};
+\node[box, right=of llm, fill=codegreen!20] (answer) {Resposta\\com DOI\\+ Confiança};
+
+% Setas
+\draw[arrow] (user) -- (embed) node[midway, above, font=\tiny] {Query};
+\draw[arrow] (embed) -- (vectordb) node[midway, above, font=\tiny] {similaridade};
+\draw[arrow] (vectordb) -- (retrieve) node[midway, right, font=\tiny] {trechos};
+\draw[arrow] (retrieve) -- (llm) node[midway, above, font=\tiny] {contexto};
+\draw[arrow] (llm) -- (answer) node[midway, above, font=\tiny] {resposta};
+\draw[arrow, bend left=20] (answer.south) to (user.south);
+
+% Título
+\node[font=\small\bfseries, above=0.5cm of embed] {RAG Odontológico: Recuperação + Geração};
+
+\end{tikzpicture}
+\caption{Arquitetura de Retrieval-Augmented Generation (RAG) para consulta odontológica. A pergunta do usuário é convertida em embedding (768-d), comparada com a base vetorial de 100 artigos científicos, e os 5 trechos mais relevantes são usados como contexto pelo LLM para gerar uma resposta com citação DOI.}
+\label{fig:rag-architecture}
+\end{figure}

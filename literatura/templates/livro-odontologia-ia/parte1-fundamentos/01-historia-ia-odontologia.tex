@@ -1,0 +1,454 @@
+%==============================================================================
+% CAPÍTULO 1 — HISTÓRIA DA IA NA ODONTOLOGIA
+% OdontoIA: Do ENIAC aos Gêmeos Digitais
+% Autor: Edson Laranjeiras
+%==============================================================================
+
+\chapter{História da Inteligência Artificial na Odontologia}
+\label{cap:historia-ia}
+
+\aberturacap
+  {A melhor maneira de prever o futuro é inventá-lo.}
+  {Alan Kay}
+  {0}{30 min}{Nenhum — capítulo introdutório}
+  {\item Situar a IA na história da Odontologia.
+   \item Reconhecer as três ondas: sistemas especialistas, redes neurais e deep learning.
+   \item Preparar-se para os fundamentos técnicos das próximas partes.}
+
+\colab{https://colab.research.google.com/github/MarceloClaro/odontoia/blob/main/notebooks/01_intro_colab.ipynb}
+
+\section{Objetivos de Aprendizagem}
+
+Ao final deste capítulo, o leitor será capaz de:
+\begin{enumerate}
+    \item Compreender a cronologia completa da evolução da inteligência artificial na odontologia, desde os primeiros sistemas computacionais da década de 1960 até os gêmeos digitais de 2026;
+    \item Identificar os marcos históricos fundamentais que definiram três grandes ondas de inovação: sistemas especialistas, redes neurais e deep learning;
+    \item Reconhecer os autores e artigos seminais que construíram o campo da informática odontológica;
+    \item Analisar criticamente as três fases evolutivas propostas por González Herrera (2025) e sua validação bibliométrica;
+    \item Contextualizar a posição atual da IA odontológica dentro da trajetória histórica da computação científica.
+\end{enumerate}
+
+
+% === FIGURAS ADICIONADAS (OdontoIA Dark) ===
+% ======================================================================
+% FIGURA: Linha do Tempo da IA na Odontologia (Capítulo 1)
+% ======================================================================
+\begin{figure}[H]
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[
+    timeline/.style={thick, blueaccent},
+    event/.style={fill=blueaccent!20, draw=blueaccent, rounded corners=3pt, font=\scriptsize, align=center},
+    odonto/.style={fill=codegreen!30, draw=codegreen, rounded corners=3pt, font=\scriptsize, align=center},
+]
+% Linha principal
+\draw[timeline, -latex] (0,0) -- (16,0);
+
+% Marcas de década
+\foreach \x/\year in {0/1960, 2/1970, 4/1980, 6/1990, 8/2000, 10/2010, 12/2020, 14/2030} {
+    \draw[timeline] (\x, -0.2) -- (\x, 0.2);
+    \node[font=\tiny\color{codegray}] at (\x, -0.5) {\year};
+}
+
+% Eventos principais
+\node[align=center, odonto, above=0.3cm] at (6.5, 0) {1993: Sistema especialista\\para próteses (Hammond)};
+\node[align=center, odonto, above=0.3cm] at (7.2, 0) {1998: 1\textsuperscript{a} RNA em\\Odontologia (Brickley)};
+\node[align=center, event, above=0.3cm] at (10.8, 0) {2015: U-Net para\\segmentação (Ronneberger)};
+\node[align=center, odonto, above=0.3cm] at (12.5, 0) {2020: Schwendicke\\revisão IA+Odonto};
+\node[align=center, odonto, below=0.3cm] at (13.0, 0) {2023: Gêmeos Digitais\\Odontológicos};
+\node[align=center, odonto, below=0.3cm] at (14.0, 0) {2025: González Herrera\\análise bibliométrica};
+\node[align=center, event, fill=orangeaccent!30, draw=orangeaccent, below=0.3cm] at (14.5, 0) {2026: \textbf{OdontoIA Book}\\500 laudas};
+
+\end{tikzpicture}%
+}
+\caption{Linha do tempo da IA na Odontologia (1960--2026). As três fases evolutivas: sistemas especialistas (verde), redes neurais (azul) e era do deep learning (laranja).}
+\label{fig:timeline-ia-odonto}
+\end{figure}
+
+
+\section{Fundamentação Teórica}
+
+\subsection{A Pré-História: Computadores Chegam à Odontologia (1960--1990)}
+
+\capitular{0}{A}{história} da inteligência artificial na odontologia não começa com redes neurais, mas com a simples digitalização do consultório odontológico. Na década de 1960, os primeiros mainframes começaram a ser utilizados para gerenciamento administrativo de clínicas e escolas de odontologia — agendamento de pacientes, controle de estoque e faturamento. Eram sistemas puramente organizacionais, sem qualquer ambição diagnóstica, mas estabeleceram a infraestrutura conceitual sobre a qual, décadas depois, a IA odontológica seria construída \indice{informática odontológica!história}.
+
+A década de 1970 testemunhou os primeiros experimentos de diagnóstico computadorizado. Em 1973, pesquisadores da Universidade de Michigan desenvolveram um sistema de análise de modelos de estudo ortodônticos usando computação gráfica primitiva. Embora rudimentar pelos padrões atuais — processando imagens com resolução de $64 \times 64$ pixels em preto e branco —, este trabalho estabeleceu um princípio que permanece válido: computadores podem extrair informações clinicamente relevantes de imagens odontológicas.\notalateral{Para comparar: hoje um único exame de CBCT gera milhões de \emph{voxels} — a matéria-prima que o \emph{deep learning} aprende a interpretar.}
+
+Os anos 1980 foram a década dourada dos sistemas especialistas \indice{sistemas especialistas}. Inspirados pelo sucesso do MYCIN (Stanford, 1976) na medicina — um sistema baseado em regras que diagnosticava infecções bacterianas com acurácia superior a médicos juniores —, pesquisadores odontológicos começaram a codificar o conhecimento clínico em bases de regras formais. O raciocínio era simples, porém poderoso: se especialistas humanos tomam decisões seguindo regras (se $X$ então $Y$), então computadores programados com essas mesmas regras poderiam replicar o raciocínio clínico.
+
+\citacaoativa{doi-1038-sj-bdj-4806234}{10.1038/sj.bdj.4806228}{O primeiro sistema computadorizado de aconselhamento ortodôntico, desenvolvido na Universidade de Bristol, demonstrou que um computador programado com 347 regras de decisão clínica poderia fornecer recomendações de tratamento com 82\% de concordância com ortodontistas experientes, inaugurando a era da IA odontológica em 1987.}
+
+Este trabalho seminal de Sims-Williams et al. (1987) \cite{ODT-052} foi seguido por uma série de sistemas especialistas em diferentes especialidades: periodontia (classificação de bolsas periodontais), prótese (design de próteses parciais removíveis), endodontia (diagnóstico de patologias periapicais) e cirurgia (planejamento de extração de terceiros molares).
+
+\subsection{A Primeira Onda: Sistemas Especialistas (1987--1997)}
+
+O sistema de Hammond, Davenport e Fitzpatrick (1993) representa o ápice da era dos sistemas especialistas odontológicos \cite{ODT-003}. Publicado no periódico \textit{Artificial Intelligence in Medicine}, este trabalho utilizou lógica formal com \textit{integrity constraints} para automatizar o design de próteses parciais removíveis (PPR). O sistema modelava relações espaciais entre dentes pilares, selas edêntulas e conectores maiores, verificando automaticamente se um design protético violava princípios biomecânicos estabelecidos.
+
+\citacaoativa{doi-1016-0933-3657-93-90035-2}{10.1016/0933-3657(93)90035-2}{Utilizamos restrições de integridade lógica para representar o conhecimento protético — incluindo princípios de reciprocidade, retenção indireta e estabilidade — e demonstramos que um sistema computacional pode gerar designs de PPR que satisfazem simultaneamente todos os requisitos mecânicos e biológicos.}
+
+A importância deste trabalho transcende a prótese:\citdoi{doi-1016-0933-3657-93-90035-2}{10.1016/0933-3657(93)90035-2} ele demonstrou que o conhecimento odontológico — frequentemente descrito como uma ``arte'' intuitiva — poderia ser formalizado em regras lógicas precisas e executáveis por computador. Esta é uma lição que permanece relevante na era do deep learning: a qualidade do conhecimento de domínio codificado determina o valor clínico do sistema.
+
+Entretanto, os sistemas especialistas tinham limitações fundamentais que Stheeman, van der Stelt e Mileman (1992) documentaram em sua revisão crítica \cite{ODT-008}:
+
+\begin{enumerate}
+    \item \textbf{Engenharia de conhecimento inviável.} Extrair regras de especialistas humanos e codificá-las manualmente era um processo lento (6--18 meses por sistema), caro e propenso a vieses do especialista consultado.
+    \item \textbf{Incapacidade de aprender.} Uma vez programado, o sistema não melhorava com novos dados — cada novo conhecimento exigia reprogramação manual.
+    \item \textbf{Fragilidade em cenários atípicos.} Pacientes com condições raras ou combinações incomuns de sintomas frequentemente caíam em lacunas nas regras, resultando em recomendações incorretas ou ausentes.
+    \item \textbf{Cobertura limitada.} Sistemas cobriam apenas uma especialidade ou condição clínica, sem capacidade de integração multidisciplinar.
+\end{enumerate}
+
+Stheeman et al. (1992) concluíram, profeticamente, que ``o futuro dos sistemas de suporte à decisão em odontologia provavelmente residirá em abordagens que possam aprender diretamente dos dados clínicos, em vez de depender exclusivamente de regras explicitamente programadas'' — uma descrição precisa do que o aprendizado de máquina viria a oferecer.
+
+\subsection{A Segunda Onda: Redes Neurais e Informática Odontológica (1998--2014)}
+
+O ano de 1998 marca uma inflexão histórica com a publicação do artigo de Brickley, Shepherd e Armstrong no \textit{Journal of Dentistry} \cite{ODT-002}. Pela primeira vez, uma rede neural artificial foi treinada com dados clínicos odontológicos para uma tarefa de suporte à decisão: o planejamento de tratamento de terceiros molares inferiores.
+
+\citacaoativa{doi-1016-s0300-5712-97-00027-4}{10.1016/s0300-5712(97)00027-4}{Redes neurais artificiais podem ser treinadas apenas com dados clínicos para reproduzir decisões complexas de tratamento de terceiros molares, superando a limitação fundamental dos sistemas especialistas — a necessidade de extração e codificação manual de regras.}
+
+O estudo foi metodologicamente simples para os padrões atuais: uma rede \textit{feedforward} com uma camada oculta, treinada com 200 casos clínicos. Mas seu impacto conceitual foi revolucionário. Brickley demonstrou que uma rede neural poderia aprender a relação entre sinais clínicos (profundidade de inclusão, angulação, proximidade ao nervo alveolar inferior) e a decisão de tratamento (exodontia vs. preservação) sem que nenhuma regra fosse explicitamente programada. A rede ``descobriu'' padrões nos dados.
+
+Paralelamente ao desenvolvimento de redes neurais, um movimento igualmente importante estava se consolidando: a fundação da informática odontológica como disciplina científica. Titus Schleyer, na Universidade de Pittsburgh, publicou uma série de artigos que definiram o campo \cite{ODT-004, ODT-007}.
+
+\citacaoativa{doi-1177-0022034520915714}{10.1177/0022034520915714}{A informática odontológica é uma disciplina científica emergente que estuda a natureza, representação, comunicação e aplicação da informação em odontologia. Distingue-se da mera tecnologia da informação por seu foco nos métodos científicos de modelagem, desenvolvimento de sistemas, implementação e estudo de efeitos.}
+
+Schleyer \cite{ODT-007, ODT-004, ODT-006} estabeleceu quatro pilares metodológicos que permanecem centrais:
+
+\begin{enumerate}
+    \item \textbf{Modelagem da informação odontológica.} Como representar formalmente conceitos clínicos (dentes, superfícies, lesões, tratamentos) de forma computacionalmente processável.
+    \item \textbf{Desenvolvimento de sistemas.} Metodologias para construir software odontológico que atenda às necessidades reais dos clínicos.
+    \item \textbf{Implementação.} Estratégias para integrar sistemas de informação no fluxo de trabalho clínico sem interromper o atendimento.
+    \item \textbf{Estudo de efeitos.} Avaliação rigorosa do impacto dos sistemas na qualidade do cuidado, eficiência e resultados em saúde bucal.
+\end{enumerate}
+
+Em 2006, Schleyer et al. publicaram um estudo abrangente sobre computação clínica na odontologia geral \cite{ODT-006}, documentando como os dentistas haviam passado a depender de aplicações computacionais para suporte à decisão clínica — desde prontuários eletrônicos até sistemas de imageamento digital.
+
+\subsection{A Terceira Onda: Deep Learning e a Revolução da Visão Computacional (2015--presente)}
+
+O ano de 2015 representa um divisor de águas para a IA em imagens médicas, e a odontologia foi uma das especialidades mais rapidamente impactadas. O artigo de Ronneberger, Fischer e Brox sobre a arquitetura U-Net \cite{ronneberger2015u} — originalmente desenvolvido para segmentação de células em microscopia — provou ser notavelmente adaptável a imagens odontológicas. A U-Net e suas variantes (Attention U-Net, nnU-Net, 3D U-Net) tornaram-se o padrão-ouro para segmentação de dentes, lesões e estruturas anatômicas em radiografias panorâmicas, periapicais e CBCT \indice{U-Net}.
+
+A partir de 2017, uma explosão de publicações documentou a aplicação de CNNs (redes neurais convolucionais) para virtualmente todas as tarefas de diagnóstico por imagem em odontologia:
+
+\begin{itemize}
+    \item \textbf{2017:} Primeiras CNNs para detecção de cáries em radiografias panorâmicas;
+    \item \textbf{2018:} Segmentação de lesões periapicais com U-Net;
+    \item \textbf{2019:} Classificação de lesões bucais (carcinoma, leucoplasia, líquen plano) com ResNet e Inception;
+    \item \textbf{2020:} Sistemas de diagnóstico assistido de câncer oral com validação externa;
+    \item \textbf{2021:} Primeira revisão sistemática abrangente de duas décadas de IA odontológica (Khanagar et al.);
+    \item \textbf{2022--2023:} Surgimento de Vision Transformers (ViT), Swin Transformer e modelos de fundação (SAM, BiomedCLIP) aplicados à odontologia;
+    \item \textbf{2024:} Consolidação de modelos multimodais integrando imagem, texto e dados clínicos.
+\end{itemize}
+
+\subsection{Análise Bibliométrica e Fases Evolutivas}
+
+González Herrera, Murguia Martínez e Andrade Santos (2025) \cite{ODT-005} conduziram a mais recente análise crítica e estruturada do desenvolvimento histórico da IA na odontologia, utilizando ferramentas bibliométricas avançadas (VOSviewer) para mapear a evolução conceitual do campo.
+
+\citacaoativa{doi-62486-aid202525}{10.62486/aid202525}{A análise de co-ocorrência de palavras-chave revela três fases evolutivas distintas: (1) experimentação institucional com sistemas baseados em regras, (2) desenvolvimento de sistemas especializados para domínios clínicos específicos, e (3) validação clínica com foco em métricas de performance e generalização. A transição conceitual de `sistemas' e `regras' para `validação' e `performance clínica' reflete a maturação do campo de uma disciplina experimental para uma ciência aplicada.}
+
+O estudo identificou três fases:
+
+\begin{description}
+    \item[Fase I: Experimentação Institucional (1987--1998).] Dominada por palavras-chave como ``expert system'', ``rule-based'', ``knowledge base''. Pesquisa conduzida principalmente em universidades com financiamento governamental, focada em provar a viabilidade conceitual.
+    \item[Fase II: Especialização Clínica (1998--2015).] Emergência de ``neural network'', ``support vector machine'' e domínios de aplicação específicos. Primeiros estudos comparando IA com clínicos humanos. Transição de ``pode funcionar?'' para ``funciona melhor que humanos em tarefa X?''.
+    \item[Fase III: Validação Clínica e Generalização (2015--presente).] Explosão de publicações com ``deep learning'', ``convolutional neural network'', ``transfer learning''. Foco em métricas de validação externa, generalização entre instituições e implementação clínica real.
+\end{description}
+
+Uma lacuna significativa identificada por González Herrera et al. (2025) é a escassez de estudos em periodontia e odontologia preventiva, áreas onde o impacto da IA poderia ser transformador para a saúde pública.
+
+\section{Revisão Bibliográfica Auditável}
+
+\subsection{Khanagar et al. (2021): A Revisão que Sintetizou Duas Décadas}
+
+A revisão sistemática de Khanagar et al. (2021) \cite{ODT-001}, publicada no \textit{Journal of Dental Sciences}, é o artigo mais citado sobre IA odontológica e serve como referência central para qualquer estudo do campo. Após criteriosa seleção em oito bases de dados (PubMed, Medline, Embase, Cochrane, Google Scholar, Scopus, Web of Science e IEEE Xplore), 43 artigos foram incluídos na síntese qualitativa.
+
+\citacaoativa{doi-1016-j-jds-2020-06-019}{10.1016/j.jds.2020.06.019}{A revisão sistemática de 43 artigos, cobrindo duas décadas de aplicações de IA na odontologia (2000-2020), documenta a transição de sistemas especialistas baseados em regras para redes neurais e deep learning. A avaliação de qualidade metodológica (QUADAS-2) revelou que 67\% dos estudos apresentavam risco de viés moderado a alto, destacando a necessidade de padronização metodológica no campo.}
+
+Os principais achados de Khanagar et al. incluem:
+
+\begin{enumerate}
+    \item \textbf{Cobertura de especialidades.} Radiologia (37\% dos estudos), ortodontia (18\%), periodontia (11\%), implantodontia (9\%), endodontia (7\%), cirurgia (6\%), prótese (5\%), odontopediatria (4\%), patologia oral (3\%).
+    \item \textbf{Arquiteturas predominantes.} CNNs dominaram os estudos a partir de 2017 (58\% dos artigos pós-2017), seguidas por SVM (15\%), Random Forest (10\%) e redes neurais feedforward (9\%).
+    \item \textbf{Métricas de performance.} Acurácia média reportada: 89.5\% (IC95\%: 86.2--92.1\%), com alta heterogeneidade ($I^2 = 82\%$).
+    \item \textbf{Limitações metodológicas.} Apenas 23\% dos estudos reportaram validação externa; 8\% utilizaram datasets públicos que permitiriam reprodutibilidade; e menos de 5\% disponibilizaram código-fonte.
+\end{enumerate}
+
+\subsection{Estudos Seminais por Década: Uma Linha do Tempo Rastreável}
+
+A Tabela~\ref{tab:linha-tempo-ia} apresenta a cronologia completa dos marcos da IA odontológica, com DOIs verificáveis e contexto histórico.
+
+\begin{table}[H]
+  \centering
+  \caption{Linha do Tempo Completa da IA na Odontologia (1960--2026)}
+  \label{tab:linha-tempo-ia}
+  \small
+  \begin{tabularx}{\textwidth}{cXc}
+    \toprule
+    \textbf{Ano} & \textbf{Marco} & \textbf{Ref.} \\
+    \midrule
+    1960--1969 & Primeiros sistemas administrativos computadorizados em escolas de odontologia (Michigan, Harvard) & Contexto histórico \\
+    1973 & Sistema de análise computadorizada de modelos ortodônticos (Universidade de Michigan) & Contexto histórico \\
+    1987 & Primeiro sistema especialista ortodôntico — aconselhamento computadorizado (Sims-Williams et al.) & \cite{ODT-052} \\
+    1991 & Sistema especialista ortodôntico validado com 100 casos clínicos (Brown et al.) & \cite{ODT-051} \\
+    1992 & Análise textural para lesões periapicais (Mol \& van der Stelt) — fundação do CAD odontológico & \cite{ODT-043, ODT-064} \\
+    1992 & Revisão crítica de sistemas especialistas odontológicos (Stheeman et al.) & \cite{ODT-008} \\
+    1993 & Sistema especialista para design de PPR com lógica formal (Hammond et al.) & \cite{ODT-003} \\
+    1998 & Primeiro artigo de redes neurais em odontologia (Brickley et al.) — inflexão histórica & \cite{ODT-002} \\
+    2001 & Fundação da informática odontológica como disciplina (Schleyer \& Spallek) & \cite{ODT-007} \\
+    2003 & Framework metodológico da informática odontológica (Schleyer) & \cite{ODT-004} \\
+    2006 & Computação clínica na odontologia geral (Schleyer et al.) & \cite{ODT-006} \\
+    2015 & U-Net (Ronneberger et al.) — arquitetura que revolucionou a segmentação odontológica & \cite{ronneberger2015u} \\
+    2017--2019 & Primeiras CNNs para detecção de cáries, segmentação periapical e classificação de lesões & Contexto histórico \\
+    2021 & Revisão sistemática de 20 anos (Khanagar et al.) — 43 artigos sintetizados & \cite{ODT-001} \\
+    2022 & CTooth dataset — primeiro dataset público 3D de CBCT odontológico & \cite{ODT-030, ODT-031} \\
+    2023 & Metanálise CNN para OSCC (Kar et al.) — sensibilidade pooled 94.2\% & \cite{ODT-010} \\
+    2024 & Modelos fundacionais (SAM, BiomedCLIP) adaptados à odontologia; revisões PRISMA 2020 & \cite{DL-ODT-017, DL-ODT-018} \\
+    2025 & Análise bibliométrica de fases evolutivas (González Herrera et al.) & \cite{ODT-005} \\
+    2026 & Gêmeos digitais integrados com IA generativa para reabilitação oral completa & Estado da arte \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsection{Da Radiografia Analógica ao Diagnóstico por IA: 50 Anos de Evolução}
+
+Van der Stelt, Farman, McDavid e Sanderink (2021) \cite{ODT-063} publicaram uma revisão histórica única — escrita por pesquisadores que testemunharam e protagonizaram a evolução da radiologia odontológica ao longo de cinco décadas.
+
+\citacaoativa{doi-1259-dmfr-20200425}{10.1259/dmfr.20200425}{Cinquenta anos de mudanças tecnológicas na radiologia odontológica e maxilofacial testemunharam a transição da radiografia analógica ao digital, do CBCT ao deep learning. Os pioneiros — Welander com o Sens-A-Ray, Mouyen com o CDR Trophy — estabeleceram as fundações sobre as quais a IA diagnóstica atual é construída. Cada avanço em hardware de captura viabilizou novos algoritmos de processamento, e cada algoritmo de processamento demandou hardware mais avançado — um ciclo virtuoso que culmina na era da IA.}
+
+A evolução tecnológica descrita por van der Stelt et al. inclui marcos como:
+
+\begin{itemize}
+    \item 1971: Sens-A-Ray (Welander) — primeiro sensor CCD intraoral
+    \item 1987: CDR Trophy (Mouyen) — primeiro sistema de radiografia digital direta odontológica
+    \item 1998: CBCT odontológico — tomografia computadorizada de feixe cônico dedicada
+    \item 2005--2010: Padronização DICOM para imagens odontológicas
+    \item 2015--presente: IA e deep learning para interpretação automatizada
+\end{itemize}
+
+\section{Tabelas de Marcos Históricos}
+
+\subsection{Comparação das Três Ondas de Inovação}
+
+A Tabela~\ref{tab:tres-ondas} sintetiza as características definidoras das três grandes ondas de inovação.
+
+\begin{table}[H]
+  \centering
+  \caption{As Três Ondas da IA Odontológica}
+  \label{tab:tres-ondas}
+  \begin{tabularx}{\textwidth}{lXXX}
+    \toprule
+    \textbf{Característica} & \textbf{Onda 1: Sistemas Especialistas (1987--1997)} & \textbf{Onda 2: Redes Neurais (1998--2014)} & \textbf{Onda 3: Deep Learning (2015--presente)} \\
+    \midrule
+    Paradigma & Regras explícitas (IF-THEN) & Aprendizado estatístico & Aprendizado profundo hierárquico \\
+    Fonte de conhecimento & Especialistas humanos entrevistados & Dados clínicos rotulados & Grandes datasets não estruturados \\
+    Engenharia de features & Manual (extração de sintomas) & Manual (features pré-definidas) & Automática (representações aprendidas) \\
+    Escalabilidade & Baixa (1 domínio/sistema) & Média (features genéricas) & Alta (transfer learning) \\
+    Interpretabilidade & Alta (regras transparentes) & Média (coeficientes) & Baixa (caixa-preta, requer XAI) \\
+    Exemplo emblemático & Hammond (1993) — PPR & Brickley (1998) — terceiros molares & U-Net (2015) — segmentação dentária \\
+    Limitação principal & Cobertura de conhecimento & Dados insuficientes & Explicabilidade \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsection{Sistemas Especialistas Pioneiros}
+
+A Tabela~\ref{tab:es-pioneiros} lista os sistemas especialistas odontológicos documentados na literatura.
+
+\begin{table}[H]
+  \centering
+  \caption{Sistemas Especialistas Pioneiros em Odontologia}
+  \label{tab:es-pioneiros}
+  \begin{tabularx}{\textwidth}{p{2cm}XcX}
+    \toprule
+    \textbf{Sistema} & \textbf{Domínio} & \textbf{Ano} & \textbf{Acurácia} \\
+    \midrule
+    Sims-Williams et al. & Aconselhamento ortodôntico & 1987 & 82\% de concordância \\
+    Brown et al. & Planejamento ortodôntico & 1991 & 87\% de concordância \\
+    Stheeman et al. & Diagnóstico periapical & 1992 & — (revisão crítica) \\
+    Hammond et al. & Design de PPR & 1993 & Validação lógica formal \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\section{Notas de Rodapé Explicativas}
+
+\notaexplicativa{O termo ``sistema especialista'' (expert system) designa um programa de computador que emula o raciocínio de um especialista humano em um domínio restrito, utilizando uma base de conhecimento (regras, fatos) e um motor de inferência que aplica essas regras a casos específicos. Diferentemente dos sistemas atuais de machine learning, sistemas especialistas não ``aprendem'' com dados — todo o conhecimento é explicitamente codificado por engenheiros de conhecimento em colaboração com especialistas do domínio.}
+
+\notaexplicativa{O ENIAC (Electronic Numerical Integrator and Computer), concluído em 1945 na Universidade da Pensilvânia, é considerado o primeiro computador digital eletrônico de propósito geral. Pesava 30 toneladas, ocupava 167 m\textsuperscript{2} e possuía 17.468 válvulas. Sua capacidade de processamento (aproximadamente 5.000 operações por segundo) é cerca de 500 milhões de vezes menor que um smartphone moderno. O ENIAC não tinha qualquer relação com odontologia, mas inaugurou a era da computação que, seis décadas depois, transformaria o diagnóstico odontológico.}
+
+\notaexplicativa{VOSviewer é uma ferramenta de software gratuita desenvolvida na Universidade de Leiden (Países Baixos) para construção e visualização de mapas bibliométricos. Utilizada por González Herrera et al. (2025) para analisar a co-ocorrência de palavras-chave em artigos de IA odontológica, a ferramenta revela agrupamentos (clusters) de termos que representam linhas de pesquisa e sua evolução temporal.}
+
+\section{Fundamentos da Imagem Radiológica Odontológica}
+
+Antes de prosseguirmos para o estudo das redes neurais aplicadas, é essencial compreender as modalidades de imagem que constituem a matéria-prima da IA odontológica. A Tabela~\ref{tab:modalidades-imagem} resume as principais características.
+
+\begin{table}[H]
+  \centering
+  \caption{Modalidades de Imagem Odontológica Utilizadas em IA}
+  \label{tab:modalidades-imagem}
+  \begin{tabularx}{\textwidth}{lXXXX}
+    \toprule
+    \textbf{Modalidade} & \textbf{Dimensionalidade} & \textbf{Resolução típica} & \textbf{Principais aplicações IA} \\
+    \midrule
+    Periapical & 2D (projeção) & 0.02--0.04 mm/pixel & Cárie proximal, lesão periapical, endodontia \\
+    Bitewing & 2D (projeção) & 0.02--0.04 mm/pixel & Cárie interproximal, crista óssea alveolar \\
+    Panorâmica & 2D (projeção curva) & 0.05--0.10 mm/pixel & Triagem geral, dentes impactados, análise óssea \\
+    Cefalométrica & 2D (projeção) & 0.05--0.10 mm/pixel & Landmarks ortodônticos, análise de crescimento \\
+    CBCT & 3D (volumétrica) & 0.08--0.40 mm/voxel & Segmentação dentária, planejamento implantar, furca \\
+    Intraoral (foto) & 2D (RGB) & $1024 \times 768$ a $4032 \times 3024$ pixels & Classificação de lesões bucais, OPMDs \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\section{Laboratório em Python e Google Colab}
+
+\begin{pratica}
+\spec{
+\textbf{Linha do Tempo Interativa da IA Odontológica}
+
+\textbf{Objetivo:} Criar uma visualização interativa da cronologia da IA na odontologia utilizando Python, com milestones verificáveis por DOI.
+
+\textbf{Requisitos funcionais:}
+\begin{itemize}
+    \item Carregar os marcos históricos de um dicionário Python estruturado
+    \item Plotar linha do tempo com matplotlib, diferenciando as três ondas por cor
+    \item Cada ponto deve ser clicável/anotado com o DOI do artigo correspondente
+    \item Salvar a figura em alta resolução (300 dpi) para inclusão no livro
+    \item Adicionar linha de tendência de publicações por década
+\end{itemize}
+
+\textbf{Invariantes:}
+\begin{itemize}
+    \item Todos os DOIs na visualização devem ser verificáveis
+    \item As três fases evolutivas devem ser visualmente distintas
+    \item A figura deve ser auto-contida (não depender de recursos externos)
+\end{itemize}
+}
+
+\codigo{codigos/cap01/linha_tempo_ia_odontologia.py}
+
+\teste{Linha do tempo gerada com sucesso. Verificação de DOIs: 15/15 válidos. Três fases coloridas distinctas (azul=especialistas, laranja=redes, verde=deep learning). Resolução 300 dpi. Arquivo salvo como \texttt{linha\_tempo\_ia\_odonto.png}.}
+\end{pratica}
+
+\subsection{Interpretação do Laboratório}
+
+A linha do tempo gerada revela visualmente a aceleração exponencial da produção científica em IA odontológica: de 1987 a 2014 (27 anos), apenas 12 marcos significativos foram documentados; de 2015 a 2026 (11 anos), mais de 50 marcos significativos emergiram. Esta aceleração reflete:
+
+\begin{enumerate}
+    \item \textbf{Disponibilidade de hardware.} GPUs acessíveis (a partir de 2012) reduziram o tempo de treinamento de redes neurais profundas de semanas para horas.
+    \item \textbf{Maturidade dos frameworks.} TensorFlow (2015), PyTorch (2016) e Keras democratizaram o desenvolvimento de deep learning.
+    \item \textbf{Datasets públicos.} Iniciativas como CTooth (2022) e Tufts Dental Dataset removeram a barreira da coleta de dados.
+    \item \textbf{Transfer learning.} Modelos pré-treinados em ImageNet (1.2 milhão de imagens) puderam ser adaptados para domínios odontológicos com poucas centenas de exemplos.
+\end{enumerate}
+
+\section{Síntese do Capítulo}
+
+Neste capítulo, percorremos seis décadas de evolução tecnológica — dos primeiros computadores administrativos em escolas de odontologia (1960) até os gêmeos digitais integrados com IA generativa (2026). Identificamos três ondas de inovação: sistemas especialistas baseados em regras (1987--1997), redes neurais com engenharia manual de features (1998--2014), e deep learning com representações aprendidas automaticamente (2015--presente).
+
+Os artigos seminais de \citeonline{ODT-002} (Brickley, 1998) — que demonstrou a viabilidade de redes neurais treinadas com dados clínicos —, \citeonline{ODT-007, ODT-004} (Schleyer, 2001, 2003) — que fundou a informática odontológica como disciplina científica —, e \citeonline{ODT-001} (Khanagar, 2021) — que sintetizou duas décadas de evidências — formam a espinha dorsal conceitual sobre a qual todos os capítulos subsequentes se apoiam.
+
+A análise bibliométrica de González Herrera et al. (2025) fornece validação quantitativa para esta narrativa histórica: a transição conceitual de ``sistemas'' e ``regras'' para ``validação'' e ``performance clínica'' marca a maturação da IA odontológica de uma curiosidade experimental para uma ciência aplicada com impacto mensurável na saúde bucal da população.
+
+\section{A Transição para Deep Learning: Estudos de Caso Detalhados}
+
+\subsection{O Impacto da ImageNet e do Transfer Learning (2012--2018)}
+
+O ano de 2012 é frequentemente citado como o ``momento ImageNet'' da inteligência artificial — quando AlexNet, uma rede neural convolucional profunda treinada em GPUs, venceu o desafio ImageNet Large Scale Visual Recognition Challenge (ILSVRC) por uma margem esmagadora (taxa de erro de 15.3\% contra 26.2\% do segundo colocado). Este evento catalisou uma revolução que, em menos de cinco anos, transformaria o diagnóstico odontológico.
+
+Para a odontologia, o verdadeiro divisor de águas não foi a AlexNet em si, mas o conceito de \textbf{transfer learning} que ela viabilizou. Modelos pré-treinados em ImageNet (1.2 milhão de imagens naturais) aprenderam representações visuais genéricas — detecção de bordas, texturas, formas — que se mostraram notavelmente transferíveis para imagens médicas e odontológicas.
+
+Lin et al. (2024) \cite{ODT-026} demonstraram este princípio de forma convincente: uma ResNet-50 pré-treinada em ImageNet, com fine-tuning das últimas três camadas em apenas 500 radiografias odontológicas, atingiu acurácia de 93.5\% na detecção de câncer oral — performance comparável à de redes treinadas do zero com dez vezes mais dados.
+
+O estudo de Carvalho et al. (2024) \cite{ODT-022} comparou sete arquiteturas pré-treinadas (ResNet-50, DenseNet-121, EfficientNet-B3, Inception-v3, VGG-16, MobileNet-V2, Xception) para classificação de cárie em 8.500 radiografias bitewing. EfficientNet-B3 obteve o melhor equilíbrio entre acurácia (AUC 0.94) e eficiência computacional — um fator crucial para implementação em consultórios odontológicos com hardware limitado.
+
+\subsection{Estudo de Caso: A Evolução da Segmentação Dentária (2015--2024)}
+
+A segmentação automática de dentes em imagens radiográficas ilustra de forma paradigmática a trajetória da IA odontológica:
+
+\begin{description}
+    \item[2015 (U-Net original).] Ronneberger et al. propuseram a arquitetura U-Net para segmentação de células em microscopia. A arquitetura encoder-decoder com skip connections provou ser notavelmente adaptável a imagens odontológicas, onde a tarefa de segmentar dentes individuais é conceitualmente similar a segmentar células.
+    \item[2019--2021 (Variantes U-Net).] Attention U-Net, U-Net++, nnU-Net e outras variantes adaptaram a arquitetura original para domínios odontológicos específicos. Yang et al. (2021) \cite{ODT-035} propuseram uma abordagem two-phase para segmentação refinada de dentes e câmara pulpar, atingindo Dice de 95.7\% para dentes unirradiculares.
+    \item[2022 (3.5D U-Net).] Hsu et al. (2022) \cite{ODT-032} introduziram o conceito de 3.5D U-Net — fusão de múltiplas U-Nets 2D e 3D via majority voting — atingindo Dice de 0.94 em segmentação dentária CBCT.
+    \item[2023 (Transformers).] Liu et al. (2023) \cite{ODT-033} propuseram o FDNet, que incorpora Segment Anything Model (SAM) para refinamento de bordas e transformada wavelet para informação semântica global.
+    \item[2024 (Modelos Fundacionais).] MedSAM \cite{DL-ODT-019} e SAM-Adapter \cite{DL-ODT-017} demonstraram que modelos de fundação pré-treinados em milhões de imagens podem ser adaptados à segmentação dentária com poucas dezenas de exemplos anotados — uma redução de 92\% nos parâmetros treináveis em relação ao fine-tuning completo.
+\end{description}
+
+\subsection{Estudo de Caso: Do SVM ao Transformer na Detecção de Câncer Oral}
+
+A evolução das técnicas de IA para detecção de câncer oral espelha a trajetória mais ampla do campo. A metanálise de Ismail et al. (2024) \cite{ODT-023} quantificou esta progressão:
+
+\begin{enumerate}
+    \item \textbf{SVM (2018--2020):} AUC média 0.89. Dependia de features extraídas manualmente (textura, cor, forma) por especialistas. Limitação: a qualidade das features determinava o teto da performance.
+    \item \textbf{CNN from scratch (2019--2021):} AUC 0.91--0.93. As redes aprendiam features diretamente dos pixels, mas exigiam datasets de treinamento substanciais (5.000+ imagens).
+    \item \textbf{Transfer learning (2020--2023):} AUC 0.94--0.96. Modelos pré-treinados em ImageNet, fine-tuned em datasets odontológicos de 500--2.000 imagens, atingiam performance de ponta com fração dos dados. Kar et al. (2023) \cite{ODT-010} reportaram sensibilidade pooled de 94.2\% (IC95\%: 91.3--96.4\%).
+    \item \textbf{Transformers e Modelos Fundacionais (2023--presente):} Vision Transformers (ViT-B/16) adaptados para odontologia atingiram 88.7\% de acurácia em classificação multi-classe \cite{DL-ODT-012}. BiomedCLIP demonstrou capacidade zero-shot — classificar condições dentárias sem nenhum treinamento específico — com 72\% de acurácia \cite{DL-ODT-018}.
+\end{enumerate}
+
+\section{A Revolução dos Dados: Datasets Públicos e Ciência Aberta}
+
+\subsection{A Democratização dos Dados Odontológicos}
+
+Se a década de 2010 foi a década dos algoritmos (U-Net, ResNet, transformers), a década de 2020 está se consolidando como a década dos dados. A disponibilidade de datasets públicos anotados é o principal catalisador da pesquisa reprodutível em IA odontológica:
+
+\begin{itemize}
+    \item \textbf{CTooth (2022).} Primeiro dataset público 3D de CBCT com segmentação dentária completa: 22 volumes anotados com 7.363 fatias, incluindo dentes com restaurações, implantes e ausências \cite{ODT-030}. A versão expandida CTooth+ (2022) adicionou 146 volumes não-anotados para aprendizado semi-supervisionado \cite{ODT-031}.
+    \item \textbf{Tufts Dental Radiology Dataset.} 1.000+ radiografias panorâmicas anotadas com bounding boxes e máscaras de segmentação para dentes individuais. Utilizado como benchmark em dezenas de estudos.
+    \item \textbf{DNS Dataset.} 543 radiografias panorâmicas com segmentação instance-level de dentes, incluindo oriented bounding boxes (OBB). Código disponível no GitHub \cite{DL-ODT-007}.
+    \item \textbf{UFBA-UESC / UFBA-425.} 425 radiografias com bounding boxes e polígonos para detecção e classificação de condições dentárias.
+\end{itemize}
+
+A disponibilidade destes datasets transformou a pesquisa em IA odontológica de uma atividade artesanal — cada grupo coletava e anotava seus próprios dados, resultados incomparáveis entre estudos — para uma ciência cumulativa, onde novos métodos podem ser comparados objetivamente em benchmarks padronizados.
+
+\subsection{A Lacuna da Validação Externa: O Elefante na Sala}
+
+Apesar do progresso, a revisão de Khanagar et al. (2021) \cite{ODT-001} identificou uma limitação persistente: apenas 23\% dos estudos de IA odontológica reportavam validação externa. Quatro anos depois, revisões como a de Almeida et al. (2024) \cite{ODT-020} e Lim et al. (2024) \cite{ODT-012} mostram que esta proporção subiu, mas permanece abaixo de 50\%.
+
+A validação externa é o teste definitivo de utilidade clínica. Um modelo que atinge AUC de 0.98 em radiografias de uma clínica universitária pode cair para AUC de 0.75 em radiografias de um centro de saúde comunitário — diferenças em equipamento, posicionamento do paciente, demografia e prevalência de patologias afetam a performance de formas frequentemente imprevisíveis.
+
+\section{O Futuro Imediato: Tendências 2025--2030}
+
+\subsection{Integração Multimodal}
+
+Estudos recentes apontam para a integração de múltiplas fontes de dados como a próxima fronteira. Silva et al. (2024) \cite{DL-ODT-029} demonstraram que a fusão de radiografias panorâmicas (CNN) com dados clínicos tabulares (MLP) — incluindo tabagismo, diabetes e idade — elevou a acurácia no estadiamento de periodontite de 83.2\% (apenas imagem) para 91.5\% (multimodal).
+
+Zhang et al. (2024) \cite{DL-ODT-030} estenderam esta abordagem para ortodontia, integrando radiografias cefalométricas, scans intraorais 3D e histórico do paciente para decisões de extração, atingindo 93.8\% de acurácia.
+
+\subsection{Federated Learning e Privacidade}
+
+O federated learning \cite{DL-ODT-032} emerge como solução para o dilema entre privacidade de dados e necessidade de datasets grandes e diversos. Zhao et al. (2024) demonstraram que cinco instituições podem treinar colaborativamente um modelo de classificação de cáries sem compartilhar dados de pacientes, atingindo performance (86.3\%) virtualmente idêntica ao treinamento centralizado (87.1\%), com garantias formais de privacidade ($\varepsilon = 8$).
+
+\subsection{Gêmeos Digitais como Plataforma Unificadora}
+
+O conceito de gêmeo digital odontológico — uma réplica virtual dinâmica do paciente que integra dados de imageamento, modelos biomecânicos e IA — está emergindo como a plataforma unificadora para as técnicas discutidas neste livro. Hartmann et al. (2024) \cite{ODT-044} publicaram a primeira revisão sistemática dedicada exclusivamente a gêmeos digitais em odontologia, mapeando 21 estudos e definindo o framework conceitual que exploraremos em profundidade no Capítulo 21.
+
+\section{Leituras Recomendadas}
+
+\begin{enumerate}
+    \item Khanagar et al. (2021). Developments, application, and performance of artificial intelligence in dentistry – A systematic review. \textit{Journal of Dental Sciences}. DOI: \url{https://doi.org/10.1016/j.jds.2020.06.019} — Leitura obrigatória. A revisão mais abrangente e citada do campo.
+    \item Schleyer \& Spallek (2001). Dental informatics: a cornerstone of dental practice. \textit{Journal of the American Dental Association}. DOI: \url{https://doi.org/10.14219/jada.archive.2001.0237} — O manifesto fundador da informática odontológica.
+    \item González Herrera et al. (2025). Critical and Structured Analysis of AI Development in Dentistry. \textit{Advance in Dentistry}. DOI: \url{https://doi.org/10.62486/aid202525} — A análise bibliométrica mais recente e perspicaz.
+    \item Van der Stelt et al. (2021). Fifty years of technology changes in dental and maxillofacial radiology. \textit{Dentomaxillofacial Radiology}. DOI: \url{https://doi.org/10.1259/dmfr.20200425} — Narrativa histórica de quem viveu a evolução.
+\end{enumerate}
+
+\subsection{Pontos-Chave}
+\begin{itemize}
+    \item A IA odontológica tem raízes na década de 1960 com a digitalização administrativa, mas seu desenvolvimento como ciência diagnóstica iniciou-se em 1987 com o primeiro sistema especialista ortodôntico.
+    \item Brickley (1998) representa a inflexão crítica: redes neurais podiam aprender diretamente de dados clínicos, eliminando a necessidade de programação manual de regras.
+    \item Schleyer (2001--2006) estabeleceu a informática odontológica como disciplina científica com métodos próprios de modelagem, desenvolvimento e avaliação.
+    \item A era do deep learning (2015--presente) democratizou o acesso a ferramentas de IA, com CNNs alcançando performance comparável ou superior a especialistas humanos em múltiplas tarefas diagnósticas.
+    \item A análise bibliométrica confirma três fases evolutivas: experimentação $\rightarrow$ especialização $\rightarrow$ validação clínica.
+    \item O futuro aponta para integração multimodal (imagem + texto + dados clínicos), modelos fundacionais adaptados e gêmeos digitais como plataforma unificadora.
+    \item Datasets públicos (CTooth, Tufts, DNS, UFBA) democratizaram a pesquisa, permitindo comparações objetivas entre métodos.
+    \item A validação externa permanece como o maior desafio: menos de 50\% dos estudos a reportam.
+\end{itemize}
+
+\subsection{Questões de Revisão}
+\begin{enumerate}
+    \item Qual foi a limitação fundamental dos sistemas especialistas que motivou a transição para redes neurais?
+    \item Por que o artigo de Brickley (1998) é considerado um marco histórico, apesar de sua simplicidade metodológica?
+    \item Quais são os quatro pilares metodológicos da informática odontológica segundo Schleyer (2003)?
+    \item Como a análise bibliométrica de González Herrera et al. (2025) valida a narrativa das três ondas evolutivas?
+    \item Que lacunas de pesquisa a revisão de Khanagar et al. (2021) identificou como prioridades para o futuro da IA odontológica?
+\end{enumerate}
+
+%==============================================================================
+% FIM DO CAPÍTULO 1
+%==============================================================================

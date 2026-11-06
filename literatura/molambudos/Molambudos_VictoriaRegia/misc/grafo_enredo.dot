@@ -1,0 +1,43 @@
+digraph Enredo {
+  rankdir=TB; bgcolor="#F5EED7"; pad=0.4; dpi=150; splines=curved; ratio=auto; size="8,10!";
+  fontname="Palatino"; labelloc=t; fontsize=28; fontcolor="#2B2117";
+  label=<<b>MOLAMBUDOS</b><br/><font point-size="14" color="#5b4a2f">Estrutura Narrativa — 3 Atos</font>>;
+  node [shape="box", style="filled,rounded", fontname="Helvetica", fontsize=11, fontcolor="white", penwidth=2, margin="0.12,0.06", height=0.35, width=1.8];
+  edge [penwidth=1.5, arrowsize=0.5, color="#5b4a2f"];
+
+  /* ATO I — clusters com margem extra para evitar sobreposição */
+  subgraph cluster_ato1 { label="ATO I — O Trauma"; fontsize=14; fontcolor="#8B4513"; style="rounded,dashed"; color="#8B4513"; fontname="Palatino-Bold"; bgcolor="#F5E6D0"; margin=22;
+    node [fillcolor="#8B4513", height=0.48, width=2.0];
+    "Seca 1853" [label="Seca de 1853\nA entidade nasce"];
+    "Seca 1915" [label="Seca de 1915\nJoaquim encontra a entidade"];
+    "Aceite" [label="O pacto na vala\nMenino de 8 anos"];
+  }
+
+  /* ATO II */
+  subgraph cluster_ato2 { label="ATO II — Institucionalização"; fontsize=14; fontcolor="#2F4F4F"; style="rounded,dashed"; color="#2F4F4F"; fontname="Palatino-Bold"; bgcolor="#E8E0D0"; margin=22;
+    node [fillcolor="#2F4F4F", height=0.48, width=2.0];
+    "Colonia" [label="62 anos no Colônia\nO diário como testemunha"];
+    "Exumacao" [label="Exumação (1979)\nO diário é encontrado"];
+    "Oliveira" [label="Dr. Heitor Oliveira\nO médico que leu e foi lido"];
+  }
+
+  /* ATO III */
+  subgraph cluster_ato3 { label="ATO III — O Ciclo"; fontsize=14; fontcolor="#8B0000"; style="rounded,dashed"; color="#8B0000"; fontname="Palatino-Bold"; bgcolor="#E8D0D0"; margin=22;
+    node [fillcolor="#8B0000", height=0.48, width=2.0];
+    "Lucia" [label="Dra. Lúcia Menezes\nPaciente 1.262"];
+    "Contaminacao" [label="Contaminação do leitor\nPaciente 1.263"];
+    "Ciclo" [label="O ciclo recomeça\nA cada leitor"];
+  }
+
+  /* Arestas com label (não xlabel) + posicionamento explícito para não colidir com nós */
+  "Seca 1853" -> "Seca 1915" [label="62 anos", fontsize=8, fontcolor="#5b4a2f", labeldistance=2.5, labelangle=-15];
+  "Seca 1915" -> "Aceite" [label="fome como portal", fontsize=8, fontcolor="#5b4a2f", labeldistance=2.5, labelangle=-15];
+  "Aceite" -> "Colonia" [label="institucionalização", fontsize=8, fontcolor="#5b4a2f", labeldistance=2.5, labelangle=-15];
+  "Colonia" -> "Exumacao" [label="o diário emerge", fontsize=8, fontcolor="#5b4a2f", labeldistance=2.5, labelangle=-15];
+  "Exumacao" -> "Oliveira" [label="leitura = contágio", fontsize=8, fontcolor="#5b4a2f", labeldistance=2.5, labelangle=-15];
+  "Oliveira" -> "Lucia" [label="entrega 47 anos depois", fontsize=8, fontcolor="#5b4a2f", labeldistance=2.5, labelangle=-15];
+  "Lucia" -> "Contaminacao" [label="o diário é lido de novo", fontsize=8, fontcolor="#5b4a2f", labeldistance=2.5, labelangle=-15];
+  "Contaminacao" -> "Ciclo" [style=dashed, color="#8B0000", fontcolor="#8B0000", label="∞", fontsize=12, labeldistance=2.5];
+  /* Aresta dourada — cor escura para legibilidade, label reposicionado para evitar colisão com nós */
+  "Ciclo" -> "Seca 1853" [style=dotted, color="#B8962E", fontcolor="#8B6914", label="o ciclo recomeça", fontsize=8, constraint=false, labeldistance=6, labelangle=60];
+}

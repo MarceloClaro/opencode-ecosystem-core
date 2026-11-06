@@ -1,0 +1,72 @@
+% Arte editorial de Molambudos. Compilar com XeLaTeX; parâmetros em variante.tex.
+\input{variante.tex}
+\documentclass{article}
+\usepackage[paperwidth=\CoverWidth mm,paperheight=236.35mm,margin=0pt]{geometry}
+\usepackage{fontspec,graphicx,tikz,xcolor}
+\setmainfont{EB Garamond}
+\setsansfont{Lato}
+\usepackage[pdfencoding=auto,unicode]{hyperref}
+\hypersetup{pdftitle={Molambudos: capa completa, \Pages\ páginas},pdfauthor={Marcelo Dias de Carvalho Filho},pdfsubject={Brochura 160 x 230 mm; cor premium em papel branco; sangria 3,175 mm}}
+\pagestyle{empty}
+\definecolor{coal}{HTML}{010100}
+\definecolor{backcoal}{HTML}{11120D}
+\definecolor{gold}{HTML}{C3A574}
+\definecolor{softgold}{HTML}{8E7955}
+\definecolor{ivory}{HTML}{EDE1C9}
+\begin{document}
+\null
+\begin{tikzpicture}[remember picture,overlay]
+\begin{scope}[shift={(current page.north west)},x=1mm,y=-1mm]
+\pgfmathsetmacro{\FrontX}{163.175+\Spine}
+\pgfmathsetmacro{\FrontCenter}{\FrontX+80}
+\pgfmathsetmacro{\SpineCenter}{163.175+\Spine/2}
+\fill[backcoal] (0,0) rectangle (163.175,236.35);
+\fill[coal] (163.175,0) rectangle (\CoverWidth,236.35);
+
+% CONTRACAPA. A arte fica a 302,4 dpi efetivos, sem reamostragem.
+\begin{scope}
+\clip (0,0) rectangle (163.175,236.35);
+\node[anchor=north west,inner sep=0] at (3.175,108) {\includegraphics[width=86mm]{arte_contracapa_original.png}};
+\end{scope}
+\draw[softgold,line width=.3pt] (19.175,19) -- (147.175,19);
+\node[anchor=north west,inner sep=0,text=gold,align=left] at (19.175,28) {\fontsize{20}{22}\selectfont HÁ HISTÓRIAS QUE\vphantom{Á}\\\fontsize{20}{22}\selectfont O TEMPO ENTERRA.\\\fontsize{20}{22}\selectfont MAS NÃO APAGA.};
+\node[anchor=north west,inner sep=0,text=ivory,text width=126mm,align=left,font=\fontsize{12.5}{16}\selectfont] at (19.175,63) {\hyphenpenalty=10000\exhyphenpenalty=10000\raggedright
+Em 1915, a seca arranca Joaquim Antônio Correia de seu sertão. Anos depois, reduzido ao número 1.260 em uma instituição psiquiátrica, ele escreve para não desaparecer. Suas memórias atravessam a fome, o confinamento e os silêncios que nenhum prontuário consegue explicar.
+
+\vspace{3mm}
+Décadas mais tarde, a psiquiatra forense Lúcia Mendes reúne diários, laudos, cartas e fotografias para reconstituir uma história que parece resistir ao esquecimento. Mas cada fragmento abre outro caminho, e o arquivo começa a interpelar quem o lê.
+
+\vspace{3mm}
+Em \textit{Molambudos}, o horror nasce da memória ferida — e continua onde termina a página.
+};
+\node[anchor=north west,inner sep=0,text=gold,align=left,font=\fontsize{15}{18}\selectfont\itshape] at (19.175,158) {O ciclo recomeça\\a cada leitor.};
+\node[anchor=north west,inner sep=0,text=ivory,align=left,font=\sffamily\fontsize{7.3}{10}\selectfont] at (19.175,180) {ROMANCE BRASILEIRO\\HORROR PSICOLÓGICO};
+% Reserva silenciosa para código automático: 2 x 1,2 pol.; 6,35 mm do corte e da lombada.
+\fill[white] (106.025,196.345) rectangle (156.825,226.825);
+
+% LOMBADA. Toda a tipografia tem folga superior a 1,6 mm em relação às dobras.
+\draw[softgold,line width=.35pt] (\SpineCenter,18) -- (\SpineCenter,30);
+\node[rotate=-90,inner sep=0,text=gold] at (\SpineCenter,82) {\fontsize{22}{24}\selectfont\bfseries MOLAMBUDOS};
+\node[rotate=-90,inner sep=0,text=ivory] at (\SpineCenter,158) {\fontsize{9.5}{12}\selectfont MARCELO DIAS DE CARVALHO FILHO};
+\node[inner sep=0,text=gold,align=center,font=\sffamily\fontsize{7.3}{9}\selectfont] at (\SpineCenter,213) {OPENCODE\\BOOKS};
+
+% FRENTE. Ilustração em prancha editorial, conservando resolução nativa >= 300 dpi.
+\draw[softgold,line width=.3pt] (\FrontX+14,17) -- (\FrontX+146,17);
+\node[inner sep=0,text=gold] at (\FrontCenter,33) {\resizebox{136mm}{!}{\bfseries MOLAMBUDOS}};
+\node[inner sep=0,text=ivory] at (\FrontCenter,50) {\fontsize{16}{19}\selectfont O Diário do Paciente 1.260};
+\node[inner sep=0,text=softgold] at (\FrontCenter,62) {\sffamily\addfontfeatures{LetterSpace=14}\fontsize{7.8}{10}\selectfont UM ROMANCE EM FRAGMENTOS};
+\begin{scope}
+\clip (\FrontCenter-43,73) rectangle (\FrontCenter+43,169);
+\node[anchor=north,inner sep=0] at (\FrontCenter,40) {\includegraphics[width=86mm]{arte_frontal_original.png}};
+\end{scope}
+\draw[softgold,line width=.35pt] (\FrontCenter-44,72) rectangle (\FrontCenter+44,170);
+\draw[gold,line width=.4pt] (\FrontCenter-46,72) -- (\FrontCenter-46,83);
+\draw[gold,line width=.4pt] (\FrontCenter+46,159) -- (\FrontCenter+46,170);
+\node[inner sep=0,text=ivory,align=center,font=\fontsize{12.5}{15}\selectfont\itshape] at (\FrontCenter,184) {Ela não é um monstro.\\Ela é uma consequência.};
+\node[inner sep=0,text=gold] at (\FrontCenter,202) {\fontsize{13.4}{16}\selectfont Marcelo Dias de Carvalho Filho};
+\node[inner sep=0,text=ivory] at (\FrontCenter,211) {\fontsize{10}{13}\selectfont\itshape Coautor e ilustrador: Marcelo Claro};
+\draw[softgold,line width=.3pt] (\FrontX+14,220) -- (\FrontX+146,220);
+\node[inner sep=0,text=softgold] at (\FrontCenter,225) {\sffamily\addfontfeatures{LetterSpace=12}\fontsize{7.2}{9}\selectfont OPENCODE BOOKS};
+\end{scope}
+\end{tikzpicture}
+\end{document}

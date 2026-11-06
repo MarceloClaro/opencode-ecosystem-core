@@ -1,0 +1,605 @@
+%==============================================================================
+% CAPÍTULO 28 — CONCLUSÃO: DA LEITURA À PRÁTICA
+% PARTE V — Futuro, Ética e Regulação da IA em Odontologia
+% ÚLTIMO CAPÍTULO DA OBRA
+%==============================================================================
+\chapter{Conclusão: Da Leitura à Prática}
+\label{cap:conclusao-final}
+
+\nivelzero
+
+Chegamos ao final de uma jornada de 500 laudas, 28 capítulos e incontáveis
+linhas de código. Mas, como toda boa conclusão, este capítulo não é um ponto
+final -- é um ponto de partida.
+
+%-----------------------------------------------------------------------------
+% SEÇÃO 28.1
+%-----------------------------------------------------------------------------
+\section{Síntese dos 27 Capítulos: O Que Construímos Juntos}
+\label{sec:sintese}
+
+\nivelum
+
+Permita-me, leitor, recapitular o caminho que percorremos. Cada etapa foi
+projetada para construir sobre a anterior, em uma arquitetura pedagógica
+deliberada:
+
+\subsection{Parte I -- Fundamentos Históricos e Tecnológicos (Capítulos 1--5)}
+
+Começamos pelo chão. Nos Capítulos 1 e 2, fincamos as estacas históricas:
+compreendemos de onde viemos -- os primeiros sistemas computacionais
+odontológicos, as três ondas da informatização, a emergência da IA como
+ferramenta diagnóstica. Revisamos a evidência científica disponível, aprendendo
+a separar o joio do trigo em um campo onde o \textit{hype} frequentemente
+precede a substância.
+
+Nos Capítulos 3, 4 e 5, colocamos a mão na massa: configuramos o Google Colab,
+aprendemos Python aplicado à Odontologia, dominamos a estatística essencial
+para não sermos enganados por números mal interpretados, e exploramos os
+algoritmos de \textit{machine learning} clássico -- regressão logística,
+\textit{random forests}, SVMs -- que, em muitos problemas odontológicos,
+oferecem excelente relação custo-benefício.
+
+\subsection{Parte II -- Teoria e Modelos de Deep Learning (Capítulos 6--11)}
+
+Com as bases estabelecidas, mergulhamos fundo. Os Capítulos 6 e 7 desvendaram
+as redes neurais artificiais e as CNNs -- as arquiteturas que revolucionaram a
+visão computacional e, por extensão, a radiologia odontológica. O Capítulo 8
+nos deu a U-Net e a segmentação semântica -- a capacidade de isolar dentes,
+lesões e estruturas anatômicas com precisão de pixel.
+
+Os Capítulos 9, 10 e 11 aplicaram esse conhecimento a problemas odontológicos
+concretos: radiologia panorâmica e TCFC, classificação de lesões bucais e --
+o ápice da Parte II -- detecção de câncer oral e desordens potencialmente
+malignas, onde a IA pode, literalmente, salvar vidas.
+
+\subsection{Parte III -- Engenharia de Software Odontológico com SDD/TDD (Capítulos 12--17)}
+
+A Parte III foi o divisor de águas. Aqui deixamos de ser ``usuários de IA''
+para nos tornarmos ``construtores de sistemas confiáveis''. O Capítulo 12
+introduziu o SDD (\textit{Specification-Driven Development}) como metodologia
+para especificar antes de implementar. O Capítulo 13 nos deu o TDD
+(\textit{Test-Driven Development}) -- escrever testes antes do código, garantindo
+que cada linha produzida tenha uma razão de existir verificável.
+
+Os Capítulos 14, 15, 16 e 17 consolidaram o ferramental do engenheiro de
+\textit{software} odontológico: projetos guiados completos, interpretabilidade
+de modelos (Grad-CAM, SHAP, LIME), auditoria de código no GitHub e -- talvez o
+capítulo mais importante para a credibilidade científica -- reprodutibilidade.
+Um modelo que só funciona no seu computador não é ciência; é anedota.
+
+\subsection{Parte IV -- Aplicações Avançadas em Especialidades (Capítulos 18--23)}
+
+Na Parte IV, especializamos. A Periodontia (Capítulo 18) ganhou modelos para
+classificação de doença periodontal, medição de perda óssea radiográfica e
+predição de progressão. A Implantodontia (Capítulo 19) recebeu planejamento
+cirúrgico assistido por IA e predição de osseointegração. A Ortodontia
+(Capítulo 20) foi transformada por cefalometria automatizada, predição de
+crescimento facial e \textit{clear aligners} otimizados por IA.
+
+O Capítulo 21 -- Gêmeos Digitais -- foi, para muitos leitores, o ponto alto
+da obra: a criação de réplicas virtuais dinâmicas da boca do paciente, que
+evoluem com ele ao longo do tempo e permitem simular tratamentos antes de
+executá-los. Os Capítulos 22 e 23 nos levaram às fronteiras da IA generativa:
+modelos fundacionais odontológicos e sistemas de RAG (\textit{Retrieval-Augmented
+Generation}) para responder perguntas clínicas com evidências rastreáveis.
+
+\subsection{Parte V -- Futuro, Ética e Regulação (Capítulos 24--28)}
+
+A última parte -- que este capítulo encerra -- olhou para fora do código e para
+dentro da sociedade. Aprendemos a publicar (Capítulo 24), a nos proteger
+legalmente (Capítulo 25), a ensinar (Capítulo 26) e a vislumbrar o futuro
+(Capítulo 27). A mensagem central da Parte V é inequívoca: \textbf{a excelência
+técnica sem responsabilidade ética é uma ameaça; a responsabilidade ética sem
+excelência técnica é impotência.}
+
+%-----------------------------------------------------------------------------
+% SEÇÃO 28.2
+%-----------------------------------------------------------------------------
+
+% === FIGURAS ADICIONADAS (OdontoIA Dark) ===
+% ======================================================================
+% FIGURA: Estrutura do Livro (Capítulo 28 — Conclusão)
+% ======================================================================
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    box/.style={rectangle, draw=blueaccent, fill=blueaccent!20, align=center, minimum width=3.5cm, align=center, minimum height=0.8cm, font=\small, rounded corners=3pt, align=center},
+    arrow/.style={-latex, thick, blueaccent},
+]
+% Parte I
+\node[align=center, box, fill=codegreen!25] (p1) at (0,0) {Parte I: Fundamentos\\\footnotesize 5 capítulos $\cdot$ $\bigstar$};
+% Parte II
+\node[align=center, box, fill=orangeaccent!25] (p2) at (0,-1.5) {Parte II: Teoria \& Modelos\\\footnotesize 6 capítulos $\cdot$ $\bigstar\bigstar\bigstar$};
+% Parte III
+\node[align=center, box, fill=red!20] (p3) at (0,-3.0) {Parte III: SDD/TDD\\\footnotesize 6 capítulos $\cdot$ $\bigstar\bigstar\bigstar\bigstar$};
+% Parte IV
+\node[align=center, box, fill=magenta!20] (p4) at (0,-4.5) {Parte IV: Aplicações\\\footnotesize 6 capítulos $\cdot$ $\bigstar\bigstar\bigstar\bigstar$};
+% Parte V
+\node[align=center, box, fill=cyanaccent!25] (p5) at (0,-6.0) {Parte V: Futuro \& Ética\\\footnotesize 5 capítulos $\cdot$ $\bigstar\bigstar\bigstar\bigstar\bigstar$};
+
+% Setas de progressão
+\draw[arrow] (p1) -- (p2);
+\draw[arrow] (p2) -- (p3);
+\draw[arrow] (p3) -- (p4);
+\draw[arrow] (p4) -- (p5);
+
+% Níveis à direita
+\node[font=\small, anchor=west] at (4.5,0) {Nível 0-3: Leigo $\rightarrow$ Iniciante};
+\node[font=\small, anchor=west] at (4.5,-1.5) {Nível 4-7: Intermediário clínico};
+\node[font=\small, anchor=west] at (4.5,-3.0) {Nível 8-9: Avançado IA};
+\node[font=\small, anchor=west] at (4.5,-4.5) {Nível 10+: Especialista};
+\node[font=\small, anchor=west] at (4.5,-6.0) {PhD: Pesquisador};
+
+% Total
+\node[font=\bfseries, below=0.5cm of p5] {28 capítulos $\cdot$ 500+ laudas $\cdot$ 100+ artigos DOI};
+
+\end{tikzpicture}
+\caption{Estrutura progressiva do livro OdontoIA. O leitor avança do nível zero (leigo) ao nível PhD/pesquisador, passando por 28 capítulos organizados em 5 partes com dificuldade crescente.}
+\label{fig:book-structure}
+\end{figure}
+
+
+\section{A Linhagem de Progressão do Leitor: De Onde Veio, a Onde Foi}
+\label{sec:linhagem}
+
+\niveldois
+
+Se você seguiu este livro na ordem proposta, com disciplina e prática, sua
+trajetória pode ser descrita em cinco estágios de transformação:
+
+\begin{table}[H]
+  \centering
+  \caption{Linhagem de progressão do leitor do OdontoIA.}
+  \label{tab:linhagem-leitor}
+  \begin{tabularx}{\textwidth}{clX}
+    \toprule
+    \textbf{Estágio} & \textbf{Parte(s)} & \textbf{Você era... $\rightarrow$ Você se tornou...} \\
+    \midrule
+    1. Despertar & Parte I & Leigo curioso $\rightarrow$ Alfabetizado em IA
+      odontológica \\
+    2. Fundação & Parte II & Usuário passivo $\rightarrow$ Praticante de
+      \textit{deep learning} \\
+    3. Maestria & Parte III & Praticante $\rightarrow$ Engenheiro de software
+      odontológico confiável \\
+    4. Especialização & Parte IV & Generalista $\rightarrow$ Especialista em
+      aplicações clínicas de IA \\
+    5. Liderança & Parte V & Especialista $\rightarrow$ Líder ético, educador
+      e visionário \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+Se você chegou até aqui, você não é mais o mesmo profissional que abriu este
+livro pela primeira vez. Você agora:
+
+\begin{itemize}
+  \item Compreende como uma CNN processa uma radiografia panorâmica.
+  \item Sabe especificar um sistema de IA odontológica antes de implementá-lo
+    (SDD).
+  \item Escreve testes antes do código (TDD) e não confia em nenhum modelo que
+    não passe por todos eles.
+  \item Conhece os \textit{checklists} CLAIM, PRISMA e TRIPOD e sabe como
+    reportar sua pesquisa para periódicos Qualis A1.
+  \item Compreende a LGPD, o PL 2338/2023 e a responsabilidade civil que
+    acompanha o uso de IA na clínica.
+  \item Sabe que a IA não substitui o dentista -- mas o dentista que ignora a
+    IA será substituído pelo dentista que a domina.
+  \item Tem um ecossistema -- o OdontoIA -- como parceiro nessa jornada.
+\end{itemize}
+
+%-----------------------------------------------------------------------------
+% SEÇÃO 28.3
+%-----------------------------------------------------------------------------
+\section{A Tríade: Evidência + Código + Ética}
+\label{sec:triade}
+
+\nivelcinco
+
+Se este livro pudesse ser resumido em uma única frase, seria esta:
+
+\destaque{Não basta que a IA funcione. É preciso que a IA funcione com
+evidência, com código aberto e reprodutível, e com responsabilidade ética.}
+
+Esta tríade -- \textbf{Evidência + Código + Ética} -- é o fio condutor que
+atravessa todas as 500 laudas desta obra:
+
+\begin{description}
+  \item[Evidência:] Cada modelo que você construir deve estar ancorado na
+    literatura odontológica. Não importa quão alta seja sua acurácia -- se o
+    problema clínico que você resolveu não é relevante, ou se seu \textit{
+    ground truth} é frágil, seu modelo é cientificamente vazio. Os Capítulos 2
+    e 24 ensinaram como buscar, avaliar e produzir evidência de qualidade.
+
+  \item[Código:] Código fechado não é ciência -- é prestidigitação. A
+    reprodutibilidade é o alicerce do método científico, e \textit{software}
+    proprietário a viola. Os Capítulos 12--17 forneceram a metodologia (SDD/TDD)
+    e as ferramentas (GitHub, Colab, Zenodo) para que cada modelo que você
+    construir seja verificável, reproduzível e auditável por qualquer pessoa,
+    em qualquer lugar do mundo.
+
+  \item[Ética:] A IA odontológica lida com os dados mais íntimos de um ser
+    humano -- seu sorriso, sua face, sua saúde. Violar a privacidade, perpetuar
+    vieses, delegar decisões que deveriam ser humanas -- esses não são ``danos
+    colaterais'' da inovação; são falhas de projeto. O Capítulo 25 forneceu o
+    arcabouço legal e ético para que sua prática seja não apenas eficaz, mas
+    justa.
+\end{description}
+
+\citacaoativa{doi-3389-fdmed-2023-1085251}{10.3389/fdmed.2023.1085251}{%
+  ``A tríade evidência-código-ética não é uma restrição à inovação -- é a
+  condição para que a inovação seja durável, escalável e digna da confiança
+  que pacientes e profissionais depositam na Odontologia.''}
+
+%-----------------------------------------------------------------------------
+% SEÇÃO 28.4
+%-----------------------------------------------------------------------------
+\section{Call to Action: O Que Fazer Depois de Ler Este Livro}
+\label{sec:call-to-action}
+
+\niveldois
+
+Você concluiu a leitura. O conhecimento está em sua mente. Agora, a pergunta
+que realmente importa: \textbf{o que você vai fazer com ele?}
+
+Eis um roteiro de ação, organizado por perfil. Escolha o seu -- ou crie o seu
+próprio:
+
+\subsection{Se Você é Estudante de Odontologia...}
+
+\begin{enumerate}
+  \item \textbf{Crie seu primeiro notebook ainda esta semana.} Vá ao Google
+    Colab, abra um notebook em branco e execute \texttt{import tensorflow as tf;
+    print(tf.\_\_version\_\_)}. A primeira linha de código é a mais difícil; as
+    próximas virão naturalmente.
+
+  \item \textbf{Convença seu professor a integrar IA à disciplina.} Leve este
+    livro para a sala de aula. Mostre o Capítulo 26. Ofereça-se para apresentar
+    um seminário sobre IA aplicada à especialidade da disciplina. Seja o
+    catalisador.
+
+  \item \textbf{Participe da comunidade OdontoIA.} Entre no Discord, no grupo
+    de WhatsApp. Pergunte, responda, compartilhe. A comunidade existe para
+    apoiar sua jornada.
+
+  \item \textbf{Pense no seu TCC.} Um Trabalho de Conclusão de Curso envolvendo
+    IA odontológica -- com metodologia SDD/TDD, código no GitHub, dataset
+    documentado, checklist CLAIM -- não é apenas um requisito curricular; é um
+    artigo publicável e um diferencial de currículo.
+\end{enumerate}
+
+\subsection{Se Você é Cirurgião-Dentista Clínico...}
+
+\begin{enumerate}
+  \item \textbf{Implemente uma ferramenta de IA no seu consultório nos próximos
+    3 meses.} Pode ser um sistema de detecção de cáries em radiografias, um
+    \textit{software} de planejamento ortodôntico com IA, ou simplesmente o
+    Odontinho® como ferramenta de educação de pacientes. Dê o primeiro passo.
+
+  \item \textbf{Audite a conformidade LGPD do seu consultório.} Use o template
+    do Capítulo 25. Verifique seus termos de consentimento. Documente o uso de
+    IA no prontuário.
+
+  \item \textbf{Torne-se um produtor de dados de qualidade.} Comece a anotar
+    suas radiografias e imagens clínicas de forma estruturada. Participe de
+    estudos multicêntricos. A comunidade de IA odontológica precisa de dados
+    anotados por especialistas brasileiros -- e você pode fornecê-los.
+
+  \item \textbf{Seja um multiplicador.} Conte para seus colegas o que aprendeu.
+    Indique este livro. Apresente casos clínicos em congressos mostrando como
+    a IA auxiliou seu diagnóstico. Combata o ceticismo com evidência e o
+    \textit{hype} com sobriedade.
+\end{enumerate}
+
+\subsection{Se Você é Pesquisador ou Pós-Graduando...}
+
+\begin{enumerate}
+  \item \textbf{Publique um artigo seguindo os padrões deste livro.} CLAIM 2024,
+    código no GitHub com DOI (Zenodo), \textit{dataset} documentado com
+    \textit{Datasheets for Datasets}, análise de vieses por subgrupo. Eleve o
+    padrão da pesquisa brasileira em IA odontológica.
+
+  \item \textbf{Colabore com o OdontoIA.} Submeta \textit{pull requests} no
+    GitHub, contribua com \textit{datasets}, escreva tutoriais, grave episódios
+    para o Podcast do Odontinho. A plataforma é aberta e sua contribuição será
+    creditada.
+
+  \item \textbf{Oriente alunos de iniciação científica em IA odontológica.}
+    Use este livro como roteiro. Cada capítulo é uma porta de entrada para um
+    projeto de pesquisa.
+
+  \item \textbf{Candidate-se a editais de fomento.} CNPq, CAPES, FAPEAL,
+    FAPESP -- há linhas de financiamento para IA em saúde. Este livro e o
+    ecossistema OdontoIA fornecem a fundamentação e a infraestrutura para
+    projetos competitivos.
+\end{enumerate}
+
+\subsection{Se Você é Desenvolvedor ou Cientista da Computação...}
+
+\begin{enumerate}
+  \item \textbf{Mergulhe na Odontologia.} Leia os Capítulos 1 e 2 com atenção.
+    Entenda a anatomia dental, as patologias orais, o fluxo clínico. O melhor
+    modelo de IA para Odontologia será construído por quem entende de ambos os
+    mundos.
+
+  \item \textbf{Construa pontes.} Procure um dentista para colaborar. Ofereça
+    sua expertise técnica em troca de expertise clínica. As melhores inovações
+    nascem na interseção.
+
+  \item \textbf{Contribua com código aberto.} O ecossistema OdontoIA precisa
+    de \textit{front-end}, \textit{back-end}, \textit{MLOps}, documentação,
+    testes, segurança. Há espaço para todas as habilidades.
+\end{enumerate}
+
+%-----------------------------------------------------------------------------
+% SEÇÃO 28.5
+%-----------------------------------------------------------------------------
+\section{Comunidade OdontoIA: Como Continuar Aprendendo}
+\label{sec:comunidade}
+
+\nivelzero
+
+O aprendizado não termina na última página deste livro. O ecossistema OdontoIA
+oferece múltiplos caminhos para continuar sua jornada:
+
+\begin{itemize}
+  \item \textbf{Portal OdontoIA (\url{https://odontoia.com.br}):} Artigos
+    semanais, tutoriais, atualizações de literatura e novos módulos do
+    Odontinho®.
+
+  \item \textbf{GitHub (\url{https://github.com/odontoia}):} Código-fonte de
+    todos os notebooks, modelos e ferramentas. \textit{Issues}, \textit{pull
+    requests} e discussões técnicas.
+
+  \item \textbf{Discord e WhatsApp:} Comunidade ativa de aprendizagem
+    colaborativa, sessões semanais de \textit{coding}, revisão por pares,
+    desafios mensais.
+
+  \item \textbf{Podcast do Odontinho (Spotify):} Episódios quinzenais com
+    entrevistas, revisões de literatura e discussões sobre IA odontológica.
+
+  \item \textbf{Odontinho Games:} Plataforma gratuita de gamificação para
+    treinamento contínuo em diagnóstico, farmacologia e planejamento.
+
+  \item \textbf{YouTube OdontoIA:} Tutoriais em vídeo, \textit{webinars} ao
+    vivo e gravações de cursos e palestras.
+
+  \item \textbf{Newsletter mensal:} Resumo dos principais artigos de IA
+    odontológica publicados no mês, com curadoria e comentários.
+\end{itemize}
+
+\destaque{O OdontoIA não é um produto -- é uma comunidade. E você, leitor, está
+convidado a participar, contribuir e liderar.}  
+
+%-----------------------------------------------------------------------------
+% SEÇÃO 28.6
+%-----------------------------------------------------------------------------
+\section{Carta Final do Autor Edson Laranjeiras ao Leitor}
+\label{sec:carta-autor}
+
+\nivelzero
+
+\textit{Caro leitor, cara leitora,}
+
+\textit{Quando comecei a escrever este livro, eu tinha uma ideia clara do que
+queria entregar: uma obra que fosse, ao mesmo tempo, rigorosa e acolhedora;
+técnica e inspiradora; que partisse do zero absoluto e chegasse às fronteiras
+do conhecimento.}
+
+\textit{O que eu não sabia -- e só descobri ao longo das mais de 500 laudas que
+você acaba de percorrer -- era que este livro seria, também, uma carta de amor
+à Odontologia brasileira.}
+
+\textit{Amor porque este livro é gratuito. Amor porque cada linha de código está
+em repositório aberto. Amor porque cada capítulo foi escrito pensando no
+estudante que não tem dinheiro para um simulador de USD 100.000, no dentista
+do interior que atende 40 pacientes por dia no SUS, na pesquisadora que luta
+para publicar com os recursos limitados de uma universidade pública.}
+
+\textit{Este livro é minha tentativa de retribuir um pouco do que a Odontologia
+me deu. A profissão que me formou, os pacientes que me ensinaram, os colegas
+que me inspiraram, os alunos que me desafiaram -- todos estão nestas páginas.}
+
+\textit{Se você chegou até aqui, quero lhe fazer um pedido: não deixe este
+conhecimento parado. Use-o. Aplique-o. Critique-o. Melhore-o. Ensine-o.
+O Brasil precisa de dentistas que compreendam IA. O SUS precisa de sistemas
+inteligentes que reduzam desigualdades. A ciência odontológica precisa de
+pesquisadores que publiquem com reprodutibilidade e ética.}
+
+\textit{Você é, agora, parte dessa vanguarda.}
+
+\textit{Obrigado pela confiança de me acompanhar até aqui. Nos encontramos na
+comunidade OdontoIA, nos congressos, nos artigos, nas trincheiras do SUS e nas
+salas de aula. A jornada continua -- e mal começou.}
+
+\begin{flushright}
+\textit{Com gratidão e esperança,}
+
+\textit{Edson Laranjeiras} \\
+Cirurgião-Dentista | Criador do OdontoIA e do Odontinho® \\
+Maceió, Alagoas, Brasil \\
+Julho de 2026
+\end{flushright}
+
+%-----------------------------------------------------------------------------
+% SEÇÃO 28.7
+%-----------------------------------------------------------------------------
+\section{Dedicatória ao Futuro da Odontologia Brasileira}
+\label{sec:dedicatoria-futuro}
+
+\nivelzero
+
+\begin{center}
+\itshape
+
+\bigskip
+
+Este livro é dedicado:
+
+\medskip
+
+Ao estudante de Odontologia que, nesta noite, \\
+abrirá o Google Colab pela primeira vez. \\
+Que seu primeiro \texttt{import} seja o início de uma revolução silenciosa.
+
+\medskip
+
+Ao cirurgião-dentista do SUS que atende 40 pacientes por dia \\
+e ainda encontra forças para se atualizar. \\
+Que a IA seja sua aliada, não sua substituta.
+
+\medskip
+
+À pesquisadora brasileira que luta para publicar \\
+com equipamentos limitados e financiamento escasso. \\
+Que este livro lhe dê método, rigor e esperança.
+
+\medskip
+
+Ao paciente do sistema público que espera meses por uma consulta \\
+e merece o melhor que a tecnologia pode oferecer. \\
+Que a IA reduza o tempo entre o sintoma e o tratamento.
+
+\medskip
+
+Aos meus pais, que me ensinaram que o conhecimento \\
+só tem valor quando compartilhado.
+
+\medskip
+
+E a você, leitor, que dedicou seu tempo e sua atenção a esta obra. \\
+Que ela tenha valido cada minuto.
+
+\bigskip
+
+\textit{A Odontologia brasileira merece o futuro que estamos construindo.} \\
+\textit{E esse futuro começa agora.}
+
+\end{center}
+
+%-----------------------------------------------------------------------------
+% SEÇÃO 28.8
+%-----------------------------------------------------------------------------
+\section{``Se Este Livro Inspirou ao Menos Um Dentista a Abrir o Colab...''}
+\label{sec:fecho}
+
+\nivelzero
+
+No Prefácio, prometi que este livro seria diferente. Prometi que não seria mais
+um livro de Odontologia que menciona IA superficialmente, nem mais um livro de
+IA que ignora a realidade clínica. Prometi código real, dados reais, ética real.
+
+Se, ao final destas 500 laudas, você sente que essa promessa foi cumprida, então
+este livro cumpriu sua missão.
+
+Mas a verdadeira medida de sucesso desta obra não está nestas páginas -- está
+no que acontecerá depois delas. Está no notebook do Google Colab que você abrirá
+amanhã. Está na primeira radiografia que você submeterá a um modelo treinado
+por você mesmo. Está no artigo que você publicará seguindo o CLAIM 2024. Está
+no paciente que receberá um diagnóstico mais precoce porque você decidiu, hoje,
+aprender IA.
+
+\textbf{Se este livro inspirou ao menos um dentista a abrir o Colab e executar
+seu primeiro \texttt{import tensorflow as tf}, sua missão terá sido cumprida.}
+
+Se inspirou mais do que um -- e tenho esperança de que inspirou --, então
+estamos diante do início de uma transformação geracional na Odontologia
+brasileira.
+
+\medskip
+
+\begin{center}
+\Large
+
+A Odontologia mudou.
+
+A IA chegou.
+
+E você está pronto.
+
+\bigskip
+
+\textbf{Fim da Parte V -- e do Livro.}
+
+\medskip
+
+Mas o começo da sua jornada.
+
+\vspace{1cm}
+
+\includegraphics[width=0.3\textwidth]{imagens/odontoia-logo.png}
+
+\url{https://odontoia.com.br}
+
+\bigskip
+
+\textit{``Odontologia + Inteligência Artificial: o futuro começa agora.''}
+
+\vspace{0.5cm}
+
+\today
+\end{center}
+
+%-----------------------------------------------------------------------------
+% SEÇÃO 28.9
+%-----------------------------------------------------------------------------
+\section{Última Síntese: O Que Levamos Deste Livro}
+\label{sec:ultima-sintese}
+
+\niveldois
+
+\begin{itemize}
+  \item A Odontologia e a Inteligência Artificial não são campos separados --
+    são aliados naturais na busca por diagnósticos mais precisos, tratamentos
+    mais eficazes e cuidados mais acessíveis.
+
+  \item \textbf{Evidência} (Capítulos 2, 24), \textbf{Código} (Capítulos 3--17)
+    e \textbf{Ética} (Capítulo 25) formam a tríade indissociável que deve guiar
+    toda aplicação de IA em saúde bucal.
+
+  \item O \textbf{OdontoIA} e o \textbf{Odontinho®} não são apenas ferramentas
+    -- são a materialização de uma visão: a de que o conhecimento de ponta deve
+    ser gratuito, aberto e acessível a todos os profissionais de Odontologia,
+    independentemente de sua localização geográfica ou condição socioeconômica.
+
+  \item O \textbf{futuro} (Capítulo 27) não é algo a temer, mas a construir.
+    Bioimpressão 3D, nanotecnologia, IoT, teleodontologia e Odontologia 5P são
+    horizontes alcançáveis -- e o Brasil pode ser protagonista.
+
+  \item A \textbf{educação} (Capítulo 26) é a chave. Formar dentistas
+    alfabetizados em IA, críticos, éticos e criativos é a missão central deste
+    livro e do ecossistema OdontoIA.
+
+  \item E, acima de tudo, \textbf{você, leitor, é o recurso mais valioso desta
+    obra.} Seu tempo, sua atenção, sua curiosidade e sua coragem de aprender
+    algo novo são o que dará vida a estas páginas.
+\end{itemize}
+
+\vspace{1cm}
+
+\begin{center}
+\begin{mdframed}[
+  linecolor=corPrimaria,
+  linewidth=3pt,
+  backgroundcolor=corPrimaria!5,
+  roundcorner=4pt,
+  innertopmargin=15pt,
+  innerbottommargin=15pt
+]
+  \Large\textbf{\textcolor{corPrimaria}{Obrigado.}}
+
+  \bigskip
+
+  \normalsize
+  Este livro é para você. \\
+  Este livro é por você. \\
+  Este livro é com você.
+
+  \bigskip
+
+  \textit{A jornada continua.} \\
+  \textit{-- Edson Laranjeiras e toda a comunidade OdontoIA}
+\end{mdframed}
+\end{center}
+
+\endinput

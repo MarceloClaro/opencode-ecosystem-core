@@ -1,0 +1,158 @@
+%==============================================================================
+% FICHAMENTO CRÍTICO — Automated Detection of Periodontal Bone Loss on
+% Panoramic Radiographs Using Deep Learning
+% Conforme NBR 6023 (referências) e NBR 10520 (citações)
+%==============================================================================
+\section{Fichamento: \citeonline{kurtbayrakdar2024periodontal}}
+
+% --- 1. IDENTIFICAÇÃO ---
+\subsection{Identificação}
+\begin{tabular}{ll}
+\textbf{Título:} & Detection of periodontal bone loss patterns and furcation
+defects from panoramic radiographs using deep learning algorithm:
+a retrospective study \\
+\textbf{Autor(es):} & Kurt-Bayrakdar, Sevda; Bayrakdar, İbrahim Şevki;
+Yavuz, Muhammet Burak; Sali, Nichal; Çelik, Özer; Köse, Oğuz; Uzun Saylan,
+Bilge Cansu; Kuleli, Batuhan; Jagtap, Rohan; Orhan, Kaan \\
+\textbf{Periódico:} & BMC Oral Health \\
+\textbf{Ano:} & 2024 \\
+\textbf{Volume:} & 24 \\
+\textbf{Número:} & 1 \\
+\textbf{Páginas:} & 155 \\
+\textbf{DOI:} & \url{https://doi.org/10.1186/s12903-024-03896-5} \\
+\textbf{Qualis:} & A2 (Odontologia) \\
+\textbf{Tipo:} & Artigo original retrospectivo \\
+\end{tabular}
+
+% --- 2. OBJETIVO ---
+\subsection{Objetivo}
+Desenvolver e avaliar o desempenho de um algoritmo de deep learning baseado
+em redes neurais convolutionais (CNN) com arquitetura U-Net para a detecção
+automatizada de perda óssea alveolar total, padrões de perda óssea
+interdental (horizontal e vertical) e defeitos de furca em radiografias
+panorâmicas, visando criar um sistema de suporte ao diagnóstico
+periodontal.
+
+% --- 3. METODOLOGIA ---
+\subsection{Metodologia}
+\textbf{Desenho do estudo:} Estudo retrospectivo de desenvolvimento e
+validação de algoritmo de deep learning com segmentação semântica. \\
+\textbf{Amostra:} 1.121 radiografias panorâmicas com 2.251 marcações de
+perda óssea alveolar total, 25.303 de perda óssea interdental (21.839
+horizontal e 3.464 vertical) e 2.815 defeitos de furca. \\
+\textbf{Métricas principais:} AUC, sensibilidade, precisão, F1-score,
+acurácia, matriz de confusão. \\
+\textbf{Validação:} Divisão treino/validação/teste; arquitetura U-Net
+com 800 épocas; otimizador Adam; PyTorch; validação cruzada com
+hiperparâmetros ajustados por parâmetro (learning rate 0,0001 para perda
+óssea e horizontal; 0,00001 para vertical e furca).
+
+% --- 4. RESULTADOS PRINCIPAIS ---
+\subsection{Resultados Principais}
+\begin{itemize}
+  \item O sistema apresentou o maior desempenho na detecção de perda óssea
+        alveolar total (AUC = 0,951; sensibilidade = 1,0; precisão = 0,995;
+        acurácia = 0,994).
+  \item Para perda óssea horizontal: AUC = 0,910; sensibilidade = 0,947;
+        F1-score = 0,943; acurácia = 0,892.
+  \item Para perda óssea vertical: AUC = 0,733; sensibilidade = 0,558;
+        F1-score = 0,673 — o pior desempenho entre todas as classes.
+  \item Para defeitos de furca: AUC = 0,868; sensibilidade = 0,892;
+        precisão = 0,933; acurácia = 0,837.
+\end{itemize}
+
+% --- 5. LIMITAÇÕES ---
+\subsection{Limitações}
+\begin{itemize}
+  \item O desempenho significativamente inferior na detecção de perda óssea
+        vertical (AUC = 0,733) limita a aplicabilidade clínica do modelo
+        para casos de defeitos infraósseos, que são clinicamente relevantes
+        para o planejamento cirúrgico periodontal.
+  \item Estudo retrospectivo unicêntrico, sem validação externa em
+        populações com diferentes características demográficas e
+        distribuições de doença periodontal.
+  \item O padrão-ouro utilizado foi a anotação manual por observadores
+        especialistas, introduzindo potencial viés de subjetividade na
+        demarcação dos defeitos ósseos.
+  \item Ausência de correlação com parâmetros clínicos periodontais
+        (sondagem, nível de inserção clínica, sangramento) para confirmar
+        os achados radiográficos.
+\end{itemize}
+
+% --- 6. CONTRIBUIÇÃO PARA O LIVRO ---
+\subsection{Contribuição para o Livro}
+Este artigo fundamenta diretamente o Capítulo 14, que aborda a aplicação
+de deep learning em periodontia para detecção de perda óssea em
+radiografias panorâmicas. O estudo é particularmente valioso por ser o
+primeiro a utilizar segmentação semântica (U-Net) para distinguir padrões
+de perda óssea (horizontal vs. vertical) e defeitos de furca, indo além
+da simples classificação binária presença/ausência. O contraste entre o
+alto desempenho para perda óssea total (AUC = 0,951) e o baixo desempenho
+para perda vertical (AUC = 0,733) é discutido no livro como um desafio
+aberto para o SDD, destacando a necessidade de arquiteturas específicas
+para diferentes padrões de destruição periodontal.
+
+% --- 7. ANÁLISE CRÍTICA ---
+\subsection{Análise Crítica}
+\begin{itemize}
+  \item \textbf{Validade interna:} Alta -- Amostra robusta (1.121
+        radiografias), arquitetura U-Net bem estabelecida, treinamento
+        com 800 épocas e ajuste de learning rate por parâmetro.
+  \item \textbf{Validade externa:} Média -- Dados de um único centro
+        turco, sem validação em equipamentos de diferentes fabricantes
+        ou populações etnicamente diversas.
+  \item \textbf{Reprodutibilidade:} Alta -- Metodologia detalhada com
+        especificação completa da arquitetura, hiperparâmetros e pipeline
+        de treinamento em PyTorch.
+  \item \textbf{Relevância clínica:} Alta -- A detecção automatizada de
+        perda óssea total (AUC = 0,951) pode servir como ferramenta de
+        triagem populacional; a discriminação horizontal/vertical auxilia
+        no planejamento terapêutico.
+  \item \textbf{Conflito de interesses:} Não -- Os autores declararam
+        ausência de conflitos de interesse.
+  \item \textbf{Viés identificado:} Viés de verificação parcial — os
+        achados radiográficos não foram correlacionados com medidas
+        clínicas periodontais (sondagem), que é o padrão-ouro para
+        diagnóstico de periodontite.
+\end{itemize}
+
+% --- 8. CITAÇÕES RELEVANTES ---
+\subsection{Citações Relevantes}
+\begin{citacao}
+``The system showed the highest diagnostic performance in the detection of
+total alveolar bone losses (AUC = 0.951) and the lowest in the detection
+of vertical bone losses (AUC = 0.733).'' (p. 6).
+\end{citacao}
+
+\begin{citacao}
+``The sensitivity, precision, F1 score, accuracy, and AUC values were found
+as 1, 0.995, 0.997, 0.994, 0.951 for total alveolar bone loss; ... 0.558,
+0.846, 0.673, 0.506, 0.733 for vertical bone losses.'' (p. 7).
+\end{citacao}
+
+% --- 9. MAPEAMENTO SDD ---
+\subsection{Mapeamento SDD}
+\textbf{Problema:} Detecção e classificação automatizada de padrões de
+perda óssea periodontal (total, horizontal, vertical) e defeitos de furca
+em radiografias panorâmicas para auxílio ao diagnóstico periodontal. \\
+\textbf{Entrada:} Radiografias panorâmicas anonimizadas (1.121 imagens)
+com segmentação manual por especialistas como ground truth. \\
+\textbf{Saída:} Mapas de segmentação semântica com identificação de perda
+óssea total, horizontal, vertical e defeitos de furca por dente. \\
+\textbf{Critérios:} AUC $\geq$ 0,85 para perda óssea total e horizontal;
+AUC $\geq$ 0,75 para defeitos de furca; sensibilidade $\geq$ 0,55 para
+perda vertical (aceitando desempenho inferior devido à complexidade do
+padrão). \\
+\textbf{Confiança:} 0,80 — Estudo com amostra ampla e metodologia robusta,
+mas limitado pela natureza retrospectiva unicêntrica e ausência de
+correlação clínica.
+\end{tabular}
+
+% --- 10. REFERÊNCIA ABNT ---
+\subsection{Referência ABNT}
+\begin{verbatim}
+KURT-BAYRAKDAR, Sevda et al. Detection of periodontal bone loss patterns
+and furcation defects from panoramic radiographs using deep learning
+algorithm: a retrospective study. BMC Oral Health, London, v. 24, n. 1,
+p. 155, 2024. DOI: 10.1186/s12903-024-03896-5.
+\end{verbatim}

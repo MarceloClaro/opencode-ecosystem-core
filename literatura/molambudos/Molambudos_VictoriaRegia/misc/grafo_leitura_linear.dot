@@ -1,0 +1,59 @@
+digraph Linear {
+  rankdir=LR; bgcolor="#F5EED7"; pad=0.4; dpi=150; splines=ortho; nodesep=0.8; ranksep=1.6;
+  fontname="Palatino"; labelloc=t; fontsize=32; fontcolor="#2B2117";
+  label=<<b>MOLAMBUDOS — Leitura Linear</b><br/><font point-size="14" color="#5b4a2f">{len(ids)-1} fragmentos em ordem cronológico-narrativa recomendada</font>>;
+  node [shape="box", style="filled,rounded", fontname="Helvetica", fontsize=11, fontcolor="white",
+        penwidth=2.5, margin="0.18,0.12", height=0.5];
+  edge [penwidth=3, arrowsize=0.8, color="#5b4a2f", fontname="Palatino-Italic", fontsize=10, fontcolor="#5b4a2f"];
+  
+  /* --- SERTÃO (1914-1917) --- */
+  subgraph cluster_sertao { label="✦  SERTÃO  1914–1917"; fontsize=15; fontcolor="#8B4513";
+    style="rounded,dashed"; color="#8B4513"; bgcolor="#F5E6D0"; fontname="Palatino-Bold"; margin=18;
+    node [fillcolor="#8B4513"];
+    "Sertao" [label="SERTÃO\n9 fragmentos\nA infância de Joaquim", shape=box, height=0.6, width=2.4];
+  }
+  
+  /* --- COLÔNIA (1917-1979) --- */
+  subgraph cluster_colonia { label="◆  COLÔNIA  1917–1979"; fontsize=15; fontcolor="#2F4F4F";
+    style="rounded,dashed"; color="#2F4F4F"; bgcolor="#E8E0D0"; fontname="Palatino-Bold"; margin=18;
+    node [fillcolor="#2F4F4F"];
+    "Colonia" [label="COLÔNIA\n16 fragmentos\n62 anos de internação", height=0.6, width=2.4];
+  }
+  
+  /* --- DIÁRIO DE OLIVEIRA (1979) --- */
+  subgraph cluster_diario { label="▣  DIÁRIO DE OLIVEIRA  1979"; fontsize=15; fontcolor="#2F4F4F";
+    style="rounded,dashed"; color="#2F4F4F"; bgcolor="#D5E0D8"; fontname="Palatino-Bold"; margin=18;
+    node [fillcolor="#2F4F4F"];
+    "Diario" [label="DIÁRIO + LAUDOS\n25 fragmentos\nA exumação e seus ecos", height=0.6, width=2.4];
+  }
+  
+  /* --- INVESTIGAÇÃO LÚCIA (2026) --- */
+  subgraph cluster_lucia { label="◈  INVESTIGAÇÃO LÚCIA  2026"; fontsize=15; fontcolor="#4B0082";
+    style="rounded,dashed"; color="#4B0082"; bgcolor="#DCD0E8"; fontname="Palatino-Bold"; margin=18;
+    node [fillcolor="#4B0082"];
+    "Lucia" [label="INVESTIGAÇÃO\n20 fragmentos\nPaciente 1.262", height=0.6, width=2.4];
+  }
+  
+  /* --- CONTAMINAÇÃO (VOCÊ) --- */
+  subgraph cluster_cont { label="⚠  CONTAMINAÇÃO  VOCÊ"; fontsize=15; fontcolor="#8B0000";
+    style="rounded,dashed"; color="#8B0000"; bgcolor="#E8D0D0"; fontname="Palatino-Bold"; margin=18;
+    node [fillcolor="#8B0000"];
+    "Contaminacao" [label="CONTAMINAÇÃO\n13 fragmentos\nPaciente 1.263", height=0.6, width=2.4];
+  }
+  
+  /* --- EPÍLOGO --- */
+  subgraph cluster_epilogo { label="◇  EPÍLOGO"; fontsize=15; fontcolor="#7a6b30";
+    style="rounded"; color="#DAA520"; bgcolor="#F0E8C8"; fontname="Palatino-Bold"; margin=18;
+    node [fillcolor="#DAA520", fontcolor="#2B2117"];
+    "Epilogo" [label="EPÍLOGO\nO ciclo recomeça\nSempre", height=0.6, width=2.4];
+  }
+  
+  /* Arestas com label (não xlabel) + posicionamento explícito */
+  "Sertao" -> "Colonia" [label="Joaquim é internado aos 11 anos", fontsize=9, fontcolor="#5b4a2f", labeldistance=2.5, labelangle=-15];
+  "Colonia" -> "Diario" [label="exumação de 1979 revela o diário", fontsize=9, fontcolor="#5b4a2f", labeldistance=2.5, labelangle=-15];
+  "Diario" -> "Lucia" [label="material entregue a Lúcia em 2026", fontsize=9, fontcolor="#5b4a2f", labeldistance=2.5, labelangle=-15];
+  "Lucia" -> "Contaminacao" [label="a leitura contamina a investigadora", fontsize=9, fontcolor="#5b4a2f", labeldistance=2.5, labelangle=-15];
+  "Contaminacao" -> "Epilogo" [label="você é o próximo paciente", fontsize=9, fontcolor="#8B0000", labeldistance=2.5, labelangle=-15];
+  /* Aresta dourada — cor escura, label reposicionado para não sobrepor */
+  "Epilogo" -> "Sertao" [style=dashed, color="#B8962E", fontcolor="#8B6914", label="o ciclo sempre recomeça", fontsize=9, labeldistance=5, labelangle=45];
+}

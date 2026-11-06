@@ -1,0 +1,259 @@
+// Molambudos — Grafo Narrativo
+// 62 fragmentos · 142 conexões
+
+digraph Molambudos {
+    rankdir=LR;
+    bgcolor="white";
+    fontcolor="black";
+    fontname="Helvetica";
+    label="MOLAMBUDOS — Grafo Narrativo\n62 fragmentos · 142 rotas de leitura";
+    labelloc=t;
+    labeljust=l;
+    fontsize=24;
+    dpi=150;
+    pad=0.5;
+    nodesep=0.4;
+    ranksep=1.2;
+
+    // Estilo global
+    node [style="filled,rounded", fontname="Helvetica", fontsize=9, penwidth=1.5, shape=box];
+    edge [color="#999999", penwidth=0.6, arrowsize=0.4];
+
+    subgraph cluster_Sert_o_1915_1928 {
+        label="Sertão (1915-1928)";
+        fontcolor="#555555";
+        fontsize=11;
+        style="rounded,dashed";
+        color="#dddddd";
+        bgcolor="#f5f5f5";
+        pencolor="#cccccc";
+        "MEM-01" [fillcolor="#8B451330", fontcolor="black", color="#8B4513", tooltip="MEM-01: O Sertão Antes do Fim"];
+        "MEM-02" [fillcolor="#8B451330", fontcolor="black", color="#8B4513", tooltip="MEM-02: A Caminhada dos Retirantes"];
+        "MEM-03" [fillcolor="#8B451330", fontcolor="black", color="#8B4513", tooltip="MEM-03: A Morte do Pai"];
+        "MEM-04" [fillcolor="#8B451330", fontcolor="black", color="#8B4513", tooltip="MEM-04: A Vala"];
+        "MEM-05" [fillcolor="#8B451330", fontcolor="black", color="#8B4513", tooltip="MEM-05: O Olho Amarelo"];
+        "MEM-06" [fillcolor="#8B451330", fontcolor="black", color="#8B4513", tooltip="MEM-06: O Curral do Governo"];
+        "MEM-07" [fillcolor="#8B451330", fontcolor="black", color="#8B4513", tooltip="MEM-07: A Mãe Levada"];
+        "DOC-17" [fillcolor="#2F4F4F30", fontcolor="black", color="#2F4F4F", tooltip="DOC-17: Carta de um Soldado"];
+        "DOC-18" [fillcolor="#2F4F4F30", fontcolor="black", color="#2F4F4F", tooltip="DOC-18: Relatório Oficial do Curral"];
+    }
+
+    subgraph cluster_Col_nia_I_1928_1940 {
+        label="Colônia I (1928-1940)";
+        fontcolor="#555555";
+        fontsize=11;
+        style="rounded,dashed";
+        color="#dddddd";
+        bgcolor="#f5f5f5";
+        pencolor="#cccccc";
+        "MEM-08" [fillcolor="#8B451330", fontcolor="black", color="#8B4513", tooltip="MEM-08: A Chegada ao Colônia"];
+        "DOC-02" [fillcolor="#2F4F4F30", fontcolor="black", color="#2F4F4F", tooltip="DOC-02: Prontuário do Paciente 1.260"];
+        "MEM-09" [fillcolor="#8B451330", fontcolor="black", color="#8B4513", tooltip="MEM-09: Os Primeiros Anos"];
+        "MEM-10" [fillcolor="#8B451330", fontcolor="black", color="#8B4513", tooltip="MEM-10: O Primeiro Homicídio"];
+        "MEM-11" [fillcolor="#8B451330", fontcolor="black", color="#8B4513", tooltip="MEM-11: O Isolamento"];
+        "MEM-17" [fillcolor="#8B451330", fontcolor="black", color="#8B4513", tooltip="MEM-17: O Eletrochoque"];
+        "MEM-18" [fillcolor="#8B451330", fontcolor="black", color="#8B4513", tooltip="MEM-18: A Tentativa de Fuga"];
+        "MEM-12" [fillcolor="#8B451330", fontcolor="black", color="#8B4513", tooltip="MEM-12: A Rasga Mortalha"];
+    }
+
+    subgraph cluster_Procedimentos_1940_1960 {
+        label="Procedimentos (1940-1960)";
+        fontcolor="#555555";
+        fontsize=11;
+        style="rounded,dashed";
+        color="#dddddd";
+        bgcolor="#f5f5f5";
+        pencolor="#cccccc";
+        "MEM-21" [fillcolor="#8B451330", fontcolor="black", color="#8B4513", tooltip="MEM-21: O Jornal"];
+        "MEM-19" [fillcolor="#8B451330", fontcolor="black", color="#8B4513", tooltip="MEM-19: O Visitante"];
+        "DOC-10" [fillcolor="#2F4F4F30", fontcolor="black", color="#2F4F4F", tooltip="DOC-10: Registro de Eletroconvulsoterapia"];
+        "MEM-22" [fillcolor="#8B451330", fontcolor="black", color="#8B4513", tooltip="MEM-22: As Vozes"];
+        "MEM-23" [fillcolor="#8B451330", fontcolor="black", color="#8B4513", tooltip="MEM-23: A Neve de Cinzas"];
+        "MEM-20" [fillcolor="#8B451330", fontcolor="black", color="#8B4513", tooltip="MEM-20: A Morte do Vizinho de Cela"];
+        "MEM-24" [fillcolor="#8B451330", fontcolor="black", color="#8B4513", tooltip="MEM-24: A Enfermeira que Chorava"];
+        "MEM-25" [fillcolor="#8B451330", fontcolor="black", color="#8B4513", tooltip="MEM-25: A Morte no Espelho"];
+        "DOC-01" [fillcolor="#2F4F4F30", fontcolor="black", color="#2F4F4F", tooltip="DOC-01: A Exumação"];
+    }
+
+    subgraph cluster_Di_rio_Oliveira_1979 {
+        label="Diário Oliveira (1979)";
+        fontcolor="#555555";
+        fontsize=11;
+        style="rounded,dashed";
+        color="#dddddd";
+        bgcolor="#f5f5f5";
+        pencolor="#cccccc";
+        "DOC-03" [fillcolor="#2F4F4F30", fontcolor="black", color="#2F4F4F", tooltip="DOC-03: Laudo de Necropsia"];
+        "DOC-04" [fillcolor="#2F4F4F30", fontcolor="black", color="#2F4F4F", tooltip="DOC-04: Relatório de Sessão I"];
+        "DOC-05" [fillcolor="#2F4F4F30", fontcolor="black", color="#2F4F4F", tooltip="DOC-05: Relatório de Sessão II"];
+        "DOC-06" [fillcolor="#2F4F4F30", fontcolor="black", color="#2F4F4F", tooltip="DOC-06: Relatório de Sessão III"];
+        "DOC-07" [fillcolor="#2F4F4F30", fontcolor="black", color="#2F4F4F", tooltip="DOC-07: Diagnóstico Psiquiátrico (1979)"];
+        "MEM-13" [fillcolor="#8B451330", fontcolor="black", color="#8B4513", tooltip="MEM-13: O Médico Novo"];
+        "MEM-14" [fillcolor="#8B451330", fontcolor="black", color="#8B4513", tooltip="MEM-14: O Diário Emerge"];
+        "MEM-15" [fillcolor="#8B451330", fontcolor="black", color="#8B4513", tooltip="MEM-15: A Entidade Fala"];
+        "MEM-16" [fillcolor="#8B451330", fontcolor="black", color="#8B4513", tooltip="MEM-16: A Morte no Colônia"];
+        "MEM-26" [fillcolor="#8B451330", fontcolor="black", color="#8B4513", tooltip="MEM-26: A Última Página"];
+        "DOC-11" [fillcolor="#2F4F4F30", fontcolor="black", color="#2F4F4F", tooltip="DOC-11: Diário de Oliveira I"];
+    }
+
+    subgraph cluster_Exuma__o_1979_2026 {
+        label="Exumação (1979-2026)";
+        fontcolor="#555555";
+        fontsize=11;
+        style="rounded,dashed";
+        color="#dddddd";
+        bgcolor="#f5f5f5";
+        pencolor="#cccccc";
+        "DOC-12" [fillcolor="#2F4F4F30", fontcolor="black", color="#2F4F4F", tooltip="DOC-12: Diário de Oliveira II"];
+        "DOC-13" [fillcolor="#2F4F4F30", fontcolor="black", color="#2F4F4F", tooltip="DOC-13: Diário de Oliveira III"];
+    }
+
+    subgraph cluster_Investiga__o_L_cia_2026 {
+        label="Investigação Lúcia (2026)";
+        fontcolor="#555555";
+        fontsize=11;
+        style="rounded,dashed";
+        color="#dddddd";
+        bgcolor="#f5f5f5";
+        pencolor="#cccccc";
+        "DOC-14" [fillcolor="#2F4F4F30", fontcolor="black", color="#2F4F4F", tooltip="DOC-14: Diário de Oliveira IV"];
+        "DOC-15" [fillcolor="#2F4F4F30", fontcolor="black", color="#2F4F4F", tooltip="DOC-15: Diário de Oliveira V"];
+        "DOC-16" [fillcolor="#2F4F4F30", fontcolor="black", color="#2F4F4F", tooltip="DOC-16: Diário de Oliveira VI"];
+        "DOC-19" [fillcolor="#2F4F4F30", fontcolor="black", color="#2F4F4F", tooltip="DOC-19: Holocausto Brasileiro"];
+        "DOC-08" [fillcolor="#2F4F4F30", fontcolor="black", color="#2F4F4F", tooltip="DOC-08: Re-Diagnóstico Psiquiátrico (2026)"];
+        "LUC-01" [fillcolor="#4B008230", fontcolor="black", color="#4B0082", tooltip="LUC-01: O Convite"];
+        "LUC-02" [fillcolor="#4B008230", fontcolor="black", color="#4B0082", tooltip="LUC-02: O Arquivo"];
+        "LUC-03" [fillcolor="#4B008230", fontcolor="black", color="#4B0082", tooltip="LUC-03: As Ruínas"];
+        "LUC-04" [fillcolor="#4B008230", fontcolor="black", color="#4B0082", tooltip="LUC-04: A Fotografia"];
+        "LUC-05" [fillcolor="#4B008230", fontcolor="black", color="#4B0082", tooltip="LUC-05: O Sonho de Lúcia"];
+        "LUC-06" [fillcolor="#4B008230", fontcolor="black", color="#4B0082", tooltip="LUC-06: O Desaparecimento"];
+        "LUC-07" [fillcolor="#4B008230", fontcolor="black", color="#4B0082", tooltip="LUC-07: O Rastro de Oliveira"];
+    }
+
+    subgraph cluster_Contamina__o_Voc_ {
+        label="Contaminação (Você)";
+        fontcolor="#555555";
+        fontsize=11;
+        style="rounded,dashed";
+        color="#dddddd";
+        bgcolor="#f5f5f5";
+        pencolor="#cccccc";
+        "LUC-08" [fillcolor="#4B008230", fontcolor="black", color="#4B0082", tooltip="LUC-08: A Última Sessão de Lúcia"];
+        "LUC-09" [fillcolor="#4B008230", fontcolor="black", color="#4B0082", tooltip="LUC-09: A Exumação de Oliveira"];
+        "LUC-10" [fillcolor="#4B008230", fontcolor="black", color="#4B0082", tooltip="LUC-10: O Laudo de Lúcia"];
+        "LUC-11" [fillcolor="#4B008230", fontcolor="black", color="#4B0082", tooltip="LUC-11: O Diário Digital"];
+        "LUC-12" [fillcolor="#4B008230", fontcolor="black", color="#4B0082", tooltip="LUC-12: A Última Foto"];
+        "CONT-01" [fillcolor="#8B000030", fontcolor="black", color="#8B0000", tooltip="CONT-01: Você Abriu o Diário"];"CONT-04" [fillcolor="#8B000030", fontcolor="black", color="#8B0000", tooltip="CONT-04: Você Começa a Sonhar"];"CONT-07" [fillcolor="#8B000030", fontcolor="black", color="#8B0000", tooltip="CONT-07: O Diagnóstico Final"];
+        "DOC-09" [fillcolor="#2F4F4F30", fontcolor="black", color="#2F4F4F", tooltip="DOC-09: Escala de Avaliação do Paciente 1.261"];"CONT-12" [fillcolor="#8B000030", fontcolor="black", color="#8B0000", tooltip="CONT-12: 3:14"];
+        "CONT-13" [fillcolor="#8B000030", fontcolor="black", color="#8B0000", tooltip="CONT-13: A Fila"];
+    }"MEM-03" -> "MEM-07";
+    "CONT-01" ->"MEM-20" -> "MEM-19";
+    "LUC-01" -> "LUC-02";
+    "LUC-09" -> "LUC-10";
+    "DOC-08" -> "DOC-07";
+    "MEM-16" ->"MEM-21" -> "DOC-19";
+    "MEM-15" -> "CONT-04";"DOC-18" -> "MEM-06";
+    "MEM-06" -> "MEM-07";
+    "MEM-02" -> "MEM-06";
+    "MEM-23" -> "MEM-24";
+    "MEM-08" -> "MEM-09";"DOC-18" -> "DOC-19";
+    "MEM-19" -> "MEM-15";
+    "DOC-07" -> "DOC-08";
+    "MEM-13" -> "MEM-14";
+    "MEM-25" -> "MEM-26";
+    "MEM-10" ->"MEM-06" -> "MEM-01";
+    "MEM-03" -> "MEM-02";
+    "LUC-06" -> "CONT-07";
+    "DOC-14" -> "DOC-11";
+    "LUC-11" -> "LUC-12";
+    "CONT-04" ->"DOC-04" -> "DOC-05";
+    "MEM-09" -> "MEM-10";
+    "CONT-01" -> "DOC-01";
+    "CONT-04" -> "MEM-15";
+    "MEM-19" -> "MEM-20";
+    "MEM-04" -> "MEM-05";
+    "MEM-08" -> "MEM-12";
+    "LUC-07" -> "DOC-11";
+    "DOC-06" -> "MEM-16";
+    "LUC-12" -> "CONT-07";
+    "DOC-15" -> "DOC-16";"DOC-09" ->"MEM-14" -> "MEM-15";
+    "LUC-10" -> "DOC-08";"MEM-12" -> "MEM-13";"LUC-08" -> "CONT-04";
+    "MEM-05" -> "MEM-04";
+    "MEM-15" -> "DOC-05";
+    "LUC-07" -> "LUC-08";"CONT-13" -> "DOC-01";
+    "MEM-10" -> "MEM-09";
+    "DOC-07" -> "DOC-04";"LUC-01" -> "DOC-08";
+    "LUC-08" -> "LUC-09";
+    "MEM-12" -> "MEM-11";
+    "DOC-01" -> "CONT-01";
+    "MEM-16" -> "DOC-03";
+    "DOC-17" -> "DOC-18";
+    "MEM-01" -> "MEM-02";
+    "DOC-10" -> "MEM-17";
+    "DOC-06" ->"DOC-01" -> "MEM-04";
+    "MEM-09" -> "MEM-08";
+    "MEM-13" -> "MEM-12";"LUC-10" -> "LUC-11";
+    "LUC-09" -> "DOC-15";
+    "CONT-07" -> "DOC-01";
+    "MEM-07" -> "MEM-06";
+    "MEM-17" -> "MEM-11";
+    "DOC-16" -> "DOC-01";
+    "DOC-19" -> "DOC-02";
+    "MEM-04" ->"MEM-18" -> "MEM-19";
+    "LUC-03" -> "LUC-04";
+    "MEM-02" -> "MEM-01";
+    "LUC-05" -> "LUC-06";
+    "LUC-03" -> "MEM-08";"MEM-14" -> "DOC-05";
+    "MEM-08" -> "DOC-02";
+    "MEM-11" -> "MEM-10";
+    "DOC-02" -> "MEM-08";"MEM-03" -> "MEM-04";
+    "MEM-01" -> "DOC-02";
+    "DOC-02" -> "CONT-01";
+    "DOC-04" -> "MEM-13";
+    "DOC-08" -> "CONT-04";
+    "MEM-24" -> "MEM-25";
+    "DOC-13" -> "DOC-14";
+    "MEM-22" -> "MEM-23";
+    "LUC-04" -> "LUC-05";
+    "DOC-05" -> "DOC-07";"MEM-14" -> "DOC-04";
+    "DOC-12" -> "CONT-01";
+    "LUC-04" -> "MEM-12";
+    "CONT-01" ->"LUC-05" -> "CONT-04";
+    "MEM-21" -> "MEM-22";
+    "MEM-16" -> "DOC-06";
+    "LUC-06" -> "DOC-01";"DOC-13" -> "MEM-16";
+    "MEM-05" ->"DOC-14" -> "DOC-15";"CONT-12" -> "CONT-07";
+    "MEM-07" -> "MEM-08";
+    "LUC-12" -> "DOC-01";
+    "DOC-10" -> "DOC-02";
+    "MEM-15" -> "MEM-16";
+    "MEM-26" -> "DOC-06";
+    "DOC-09" ->"DOC-04" -> "MEM-14";
+    "MEM-12" -> "CONT-04";
+    "MEM-13" -> "DOC-04";
+    "MEM-10" -> "MEM-11";
+    "MEM-18" -> "MEM-09";
+    "MEM-20" -> "DOC-04";
+    "DOC-05" -> "MEM-15";
+    "MEM-23" -> "MEM-25";
+    "MEM-11" -> "MEM-12";
+    "CONT-13" -> "CONT-07";
+    "LUC-02" -> "DOC-01";
+    "DOC-19" -> "MEM-16";
+    "MEM-05" -> "MEM-12";
+    "LUC-02" -> "LUC-03";
+    "CONT-07" ->"CONT-12" -> "CONT-13";
+    "MEM-02" -> "MEM-03";
+    "DOC-05" ->"MEM-24" -> "MEM-12";
+    "DOC-11" -> "DOC-06";
+    "MEM-25" -> "MEM-12";
+    "MEM-17" -> "DOC-10";
+    "LUC-11" -> "CONT-13";
+    "MEM-04" -> "DOC-01";
+    "DOC-02" -> "DOC-03";
+    "DOC-12" -> "DOC-13";
+    "MEM-07" ->"MEM-26" -> "CONT-07";
+    "DOC-11" -> "DOC-12";
+    "DOC-16" -> "CONT-07";
+    "DOC-15" -> "MEM-04";
+}

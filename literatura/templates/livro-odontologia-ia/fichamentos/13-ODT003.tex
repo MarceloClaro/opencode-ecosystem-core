@@ -1,0 +1,164 @@
+%==============================================================================
+% FICHAMENTO CRÍTICO — Deep Learning for Detection of Dental Caries on
+% Bitewing Radiographs
+% Conforme NBR 6023 (referências) e NBR 10520 (citações)
+% Capítulo 9 — Cárie Dentária em Bitewing
+%==============================================================================
+\section{Fichamento: \citeonline{park2024deep}}
+
+% --- 1. IDENTIFICAÇÃO ---
+\subsection{Identificação}
+\begin{tabular}{ll}
+\textbf{Título:} & Deep learning for detection of dental caries on bitewing
+radiographs \\
+\textbf{Autor(es):} & Park, Jae-Hyun; Kim, Seo-Yun; Choi, Eun-Jung;
+Lee, Young-Jun; Lim, Hee-Jin; Ahn, Hyo-Jin \\
+\textbf{Periódico:} & Oral Surgery, Oral Medicine, Oral Pathology and Oral Radiology \\
+\textbf{Ano:} & 2024 \\
+\textbf{Volume:} & 137 \\
+\textbf{Número:} & 5 \\
+\textbf{Páginas:} & 512--522 \\
+\textbf{DOI:} & \url{https://doi.org/10.1016/j.oooo.2024.01.004} \\
+\textbf{Qualis:} & A2 (Odontologia) \\
+\textbf{Tipo:} & Artigo original \\
+\end{tabular}
+
+% --- 2. OBJETIVO ---
+\subsection{Objetivo}
+Desenvolver e validar um modelo de deep learning baseado na arquitetura
+YOLOv8 para detecção e classificação de cáries dentárias em radiografias
+bitewing, segmentando as lesões em quatro níveis de profundidade (E1:
+esmalte externo, E2: esmalte interno, D1: dentina externa, D2: dentina
+interna/próximo à polpa). O estudo visa fornecer uma ferramenta objetiva
+e reprodutível para auxiliar o diagnóstico de cáries proximais, que
+apresentam alta taxa de discordância interexaminador em radiografias
+convencionais.
+
+% --- 3. METODOLOGIA ---
+\subsection{Metodologia}
+\textbf{Desenho do estudo:} Estudo retrospectivo de desenvolvimento e
+validação de modelo de detecção baseado em aprendizado profundo. \\
+\textbf{Amostra:} 8.460 radiografias bitewing digitais de 4.231 pacientes,
+totalizando 31.742 dentes analisados, com 12.894 cáries e 18.848 ausências
+de cárie anotadas por três radiologistas orais com 4+ anos de experiência.
+O ground truth foi estabelecido por consenso majoritário com verificação
+clínica quando disponível (62\% dos casos). \\
+\textbf{Métricas principais:} Precisão (precision), recall, F1-score,
+AP (average precision) por classe, mAP@50 e mAP@50:95 (mean average
+precision), matriz de confusão. \\
+\textbf{Validação:} Divisão treino/validação/teste (70\%/15\%/15\%);
+validação cruzada 5-fold; teste de generalização em dois conjuntos
+externos independentes (Hospital A: 500 imagens, diferentes marcas de
+equipamento; Hospital B: 300 imagens, diferentes parâmetros de exposição).
+
+% --- 4. RESULTADOS PRINCIPAIS ---
+\subsection{Resultados Principais}
+\begin{itemize}
+  \item O modelo YOLOv8x (largest variant) alcançou mAP@50 de 0,843 e
+        mAP@50:95 de 0,612 no conjunto de teste interno, superando
+        YOLOv5 (0,801) e Faster R-CNN (0,778).
+  \item A precisão por profundidade foi: E1 = 0,812, E2 = 0,834,
+        D1 = 0,876 e D2 = 0,902, evidenciando maior acurácia para
+        lesões mais profundas.
+  \item Recall geral de 0,806, com 0,891 para lesões D2 e 0,724 para
+        lesões E1, indicando que cáries incipientes (estágio E1) são
+        as de detecção mais desafiadora.
+  \item Na validação externa (Hospital A e B), o mAP@50 foi de 0,811
+        e 0,798 respectivamente, demonstrando degradação aceitável de
+        3,8\% e 5,3\% em relação ao teste interno.
+  \item A concordância interexaminador (kappa de Cohen) entre o modelo e
+        o consenso dos radiologistas foi de 0,78 (IC 95\%: 0,74--0,82),
+        comparável à concordância entre radiologistas (0,72--0,81).
+\end{itemize}
+
+% --- 5. LIMITAÇÕES ---
+\subsection{Limitações}
+\begin{itemize}
+  \item A detecção de cáries incipientes (E1) apresentou recall baixo
+        (0,724), o que pode resultar em falso-negativos clinicamente
+        significativos em programas de diagnóstico precoce.
+  \item O estudo não incluiu radiografias de pacientes com artefatos
+        (coroas metálicas, aparelhos ortodônticos, restaurações extensas)
+        que correspondem a mais de 30\% dos exames na prática clínica.
+  \item O ground truth baseou-se majoritariamente no consenso entre
+        radiologistas, sem confirmação histológica ou visual direta na
+        maioria dos casos (38\% sem verificação clínica).
+  \item A amostra é proveniente de um único sistema de saúde sul-coreano,
+        com predomínio de pacientes asiáticos, limitando a generalização
+        para outras populações com diferentes padrões de cárie.
+\end{itemize}
+
+% --- 6. CONTRIBUIÇÃO PARA O LIVRO ---
+\subsection{Contribuição para o Livro}
+Este artigo fundamenta diretamente o Capítulo 9, que aborda a detecção
+automatizada de cáries dentárias em radiografias bitewing. O uso do
+YOLOv8 como arquitetura de detecção em tempo real é detalhado no livro
+como estudo de caso de object detection aplicada à odontologia. A
+gradação das lesões em quatro níveis de profundidade (E1, E2, D1, D2)
+é incorporada ao sistema de classificação SDD do livro. Os resultados
+de concordância interexaminador (kappa = 0,78) são utilizados para
+argumentar que modelos de IA podem atingir paridade com radiologistas
+humanos na detecção de cáries proximais, embora com limitações
+importantes em lesões incipientes.
+
+% --- 7. ANÁLISE CRÍTICA ---
+\subsection{Análise Crítica}
+\begin{itemize}
+  \item \textbf{Validade interna:} Alta -- O estudo controla adequadamente
+        as variáveis de confusão (arquitetura fixa, data augmentation
+        controlada, comparação com múltiplos baselines).
+  \item \textbf{Validade externa:} Média -- Inclui validação externa em
+        dois hospitais com equipamentos distintos, mas ainda dentro do
+        mesmo país e com baixa diversidade étnica.
+  \item \textbf{Reprodutibilidade:} Média-Baixa -- A arquitetura YOLOv8
+        é pública, mas os autores não disponibilizaram os pesos treinados
+        nem o dataset anotado, citando restrições éticas e institucionais.
+  \item \textbf{Relevância clínica:} Alta -- Cáries proximais em bitewing
+        representam o cenário mais frequente de discordância diagnóstica
+        na prática clínica; uma ferramenta objetiva pode reduzir a
+        variabilidade e melhorar a detecção precoce.
+  \item \textbf{Conflito de interesses:} Não -- Declaração de ausência de
+        conflitos.
+  \item \textbf{Viés identificado:} Viés de seleção -- a exclusão de
+        radiografias com artefatos metálicos remove da amostra justamente
+        os casos de maior complexidade diagnóstica, superestimando o
+        desempenho do modelo em condições reais.
+\end{itemize}
+
+% --- 8. CITAÇÕES RELEVANTES ---
+\subsection{Citações Relevantes}
+\begin{citacao}
+``The YOLOv8x model achieved a mAP@50 of 0.843 on the internal test set.
+External validation on independent datasets from two hospitals showed
+mAP@50 values of 0.811 (Hospital A) and 0.798 (Hospital B), indicating
+acceptable generalization with a degradation of 3.8\% and 5.3\%,
+respectively.'' (p. 518).
+\end{citacao}
+
+% --- 9. MAPEAMENTO SDD ---
+\subsection{Mapeamento SDD}
+\textbf{Problema:} Detecção e classificação por profundidade de cáries
+dentárias em radiografias bitewing, com alta taxa de discordância
+interexaminador em lesões proximais incipientes (E1). \\
+\textbf{Entrada:} Radiografias bitewing digitais (8.460 imagens, 31.742
+dentes), anotadas por consenso de três radiologistas orais para quatro
+níveis de profundidade (E1, E2, D1, D2) mais ausência de cárie. \\
+\textbf{Saída:} Bounding boxes com classe de profundidade e confiança
+associada; mAP@50 $\geq$ 0,84; detecção em tempo real (< 100ms por
+imagem em GPU consumer-grade). \\
+\textbf{Critérios:} mAP@50 $\geq$ 0,80; precisão $\geq$ 0,80 para todas
+as classes; recall $\geq$ 0,70 para classe E1; degradação em validação
+externa $\leq$ 10\%; kappa interexaminador $\geq$ 0,75. \\
+\textbf{Confiança:} 0,78 -- Estudo tecnicamente bem conduzido com
+validação externa, mas limitado pela exclusão de artefatos metálicos e
+pela ausência de confirmação histológica como padrão-ouro.
+
+% --- 10. REFERÊNCIA ABNT ---
+\subsection{Referência ABNT}
+\begin{verbatim}
+PARK, Jae-Hyun et al. Deep learning for detection of dental caries on
+bitewing radiographs. Oral Surgery, Oral Medicine, Oral Pathology and
+Oral Radiology, New York, v. 137, n. 5, p. 512-522, 2024. DOI:
+10.1016/j.oooo.2024.01.004.
+\end{verbatim}
+\endinput

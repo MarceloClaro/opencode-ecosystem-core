@@ -1,0 +1,40 @@
+% ======================================================================
+% FIGURA: Estrutura do Livro (Capítulo 28 — Conclusão)
+% ======================================================================
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    box/.style={rectangle, draw=blueaccent, fill=blueaccent!20, minimum width=3.5cm, minimum height=0.8cm, font=\small, rounded corners=3pt, align=center},
+    arrow/.style={-latex, thick, blueaccent},
+]
+% Parte I
+\node[box, fill=codegreen!25] (p1) at (0,0) {Parte I: Fundamentos\\\footnotesize 5 capítulos $\cdot$ $\bigstar$};
+% Parte II
+\node[box, fill=orangeaccent!25] (p2) at (0,-1.5) {Parte II: Teoria \& Modelos\\\footnotesize 6 capítulos $\cdot$ $\bigstar\bigstar\bigstar$};
+% Parte III
+\node[box, fill=red!20] (p3) at (0,-3.0) {Parte III: SDD/TDD\\\footnotesize 6 capítulos $\cdot$ $\bigstar\bigstar\bigstar\bigstar$};
+% Parte IV
+\node[box, fill=magenta!20] (p4) at (0,-4.5) {Parte IV: Aplicações\\\footnotesize 6 capítulos $\cdot$ $\bigstar\bigstar\bigstar\bigstar$};
+% Parte V
+\node[box, fill=cyanaccent!25] (p5) at (0,-6.0) {Parte V: Futuro \& Ética\\\footnotesize 5 capítulos $\cdot$ $\bigstar\bigstar\bigstar\bigstar\bigstar$};
+
+% Setas de progressão
+\draw[arrow] (p1) -- (p2);
+\draw[arrow] (p2) -- (p3);
+\draw[arrow] (p3) -- (p4);
+\draw[arrow] (p4) -- (p5);
+
+% Níveis à direita
+\node[font=\small, anchor=west] at (4.5,0) {Nível 0-3: Leigo $\rightarrow$ Iniciante};
+\node[font=\small, anchor=west] at (4.5,-1.5) {Nível 4-7: Intermediário clínico};
+\node[font=\small, anchor=west] at (4.5,-3.0) {Nível 8-9: Avançado IA};
+\node[font=\small, anchor=west] at (4.5,-4.5) {Nível 10+: Especialista};
+\node[font=\small, anchor=west] at (4.5,-6.0) {PhD: Pesquisador};
+
+% Total
+\node[font=\bfseries, below=0.5cm of p5] {28 capítulos $\cdot$ 500+ laudas $\cdot$ 100+ artigos DOI};
+
+\end{tikzpicture}
+\caption{Estrutura progressiva do livro OdontoIA. O leitor avança do nível zero (leigo) ao nível PhD/pesquisador, passando por 28 capítulos organizados em 5 partes com dificuldade crescente.}
+\label{fig:book-structure}
+\end{figure}

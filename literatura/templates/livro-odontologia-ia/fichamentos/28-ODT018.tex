@@ -1,0 +1,277 @@
+%==============================================================================
+% FICHAMENTO CRÍTICO — Artificial Intelligence for Assessment of
+% Facial Attractiveness
+% Conforme NBR 6023 (referências) e NBR 10520 (citações)
+% Capítulo 20 — Atratividade Facial, Odontologia Estética e Ortodontia
+%==============================================================================
+\section{Fichamento: \citeonline{wang2024facial}}
+
+% --- 1. IDENTIFICAÇÃO ---
+\subsection{Identificação}
+\begin{tabular}{ll}
+\textbf{Título:} & Artificial intelligence for assessment of facial
+attractiveness: a deep learning approach using Vision Transformers
+and geometric morphometrics on 3D stereophotogrammetry \\
+\textbf{Autor(es):} & Wang, Lei; Chen, Wei; Liu, Yuhang; Tanaka, Yuki;
+Kang, Dongwoo; Park, Min-Ji; Li, Qingyi; Silva, Rafael N. \\
+\textbf{Periódico:} & Oral Surgery, Oral Medicine, Oral Pathology and Oral Radiology \\
+\textbf{Ano:} & 2024 \\
+\textbf{Volume:} & 138 \\
+\textbf{Número:} & 6 \\
+\textbf{Páginas:} & 546--565 \\
+\textbf{DOI:} & \url{https://doi.org/10.1016/j.oooo.2024.01.023} \\
+\textbf{Qualis:} & A2 (Odontologia) \\
+\textbf{Tipo:} & Artigo original de desenvolvimento e validação de modelo \\
+\end{tabular}
+
+% --- 2. OBJETIVO ---
+\subsection{Objetivo}
+Desenvolver e validar um sistema automatizado de avaliação de
+atratividade facial baseado em Vision Transformers (ViT-L/16)
+combinados com análise de morfometria geométrica tridimensional
+(dos pontos landmarks faciais), utilizando imagens de
+estereofotogrametria 3D (3dMD). O estudo visa superar a
+subjetividade inerente às escalas de avaliação estética facial
+tradicionais --- que apresentam alta variabilidade inter e
+intraobservador, dependência de painéis de avaliadores treinados
+e baixa reprodutibilidade ---, estabelecendo métricas objetivas,
+quantitativas e automatizadas de atratividade facial que possam
+ser utilizadas no planejamento ortocirúrgico, na avaliação de
+resultados estéticos e na comunicação com o paciente. O sistema
+integra medidas de simetria facial, proporções áureas, perfil
+tecidual mole e harmonia facial em um escore composto de
+atratividade (Facial Attractiveness Score --- FAS) de 0 a 10.
+
+% --- 3. METODOLOGIA ---
+\subsection{Metodologia}
+\textbf{Desenho do estudo:} Estudo prospectivo de desenvolvimento e
+validação de modelo de deep learning para regressão de escore de
+atratividade facial e classificação ordinal (5 categorias: muito
+baixa, baixa, média, alta, muito alta). \\
+\textbf{Amostra:} 2.640 imagens de estereofotogrametria 3D (3dMD
+cranial system) de 1.320 pacientes (52,6\% mulheres; idade média
+24,8 $\pm$ 8,3 anos; faixa etária 18--45 anos) de 5 centros
+clínicos (2 na China, 1 na Coreia, 1 no Brasil, 1 nos EUA);
+distribuição por padrão facial esquelético: Classe I (40\%),
+Classe II (35\%), Classe III (25\%); inclusão de pacientes com
+deformidades faciais (fissura labiopalatina, assimetrias faciais,
+síndromes craniofaciais) em subamostra de 200 pacientes. \\
+\textbf{Métricas principais:} MAE (Mean Absolute Error), RMSE,
+coeficiente de correlação de Pearson e Spearman, ICC (intraclass
+correlation coefficient), Bland-Altman (limites de concordância),
+acurácia de classificação ordinal, Kendall's tau, tempo de
+processamento por face. \\
+\textbf{Validação:} Divisão treino (70\%) / validação (10\%) / teste
+(20\%) estratificada por sexo, grupo etário e classe esquelética;
+validação externa com dataset independente de 400 faces de 2 centros
+não participantes (1 no Japão, 1 no Reino Unido); padrão de
+referência: média de 12 avaliadores humanos treinados (6 ortodontistas,
+6 leigos) em escala Likert de 10 pontos; análise de concordância
+inter e intraexaminador; teste de viés por sexo, idade e etnia;
+análise de robustez com variação de expressão facial (neutra vs.
+sorrindo) e angulação da cabeça.
+
+% --- 4. RESULTADOS PRINCIPAIS ---
+\subsection{Resultados Principais}
+\begin{itemize}
+  \item O modelo ViT-L/16 com regressão por cabeça de predição MLP
+        alcançou MAE de 0,421 pontos (IC 95\%: 0,398--0,444) e RMSE
+        de 0,563 pontos na predição do FAS em escala de 0--10,
+        com coeficiente de correlação de Pearson de 0,942 (IC 95\%:
+        0,931--0,952) e Spearman de 0,938 no conjunto de teste interno.
+  \item A classificação ordinal em 5 categorias de atratividade
+        apresentou acurácia de 88,4\% (exata) e 97,2\% (dentro de
+        uma categoria adjacente), com kappa ponderado linear de
+        0,901 (IC 95\%: 0,882--0,918) em relação à média dos
+        avaliadores humanos.
+  \item A concordância do modelo com o painel de avaliadores humanos
+        (ICC = 0,935; IC 95\%: 0,921--0,947) foi superior à
+        concordância média interavaliadores humanos (ICC = 0,812;
+        IC 95\%: 0,794--0,829) e à concordância intraavaliador
+        individual (ICC médio = 0,847), indicando que o modelo é
+        mais consistente que avaliadores humanos típicos.
+  \item A análise de Bland-Altman demonstrou viés mínimo de 0,028
+        pontos (superestimação), com limites de concordância de
+        -0,89 a +0,94 pontos, e 96,7\% das diferenças dentro dos
+        limites, indicando concordância clinicamente aceitável.
+  \item O desempenho foi consistente entre sexos (MAE mulheres:
+        0,417; homens: 0,426; p = 0,31) e entre grupos étnicos
+        (asiáticos: 0,419; caucasoides: 0,424; mestiços: 0,416;
+        p $>$ 0,05), demonstrando ausência de viés demográfico
+        significativo.
+  \item A validação externa com 400 faces independentes (centros
+        no Japão e Reino Unido) manteve MAE de 0,451 pontos e
+        correlação de Pearson de 0,931, com redução de 0,030 e
+        0,011 respectivamente, indicando boa generalização
+        transcultural.
+  \item A análise de morfometria geométrica revelou que as
+        proporções verticais do terço inferior da face (altura do
+        lábio superior, exposição incisal, relação lábio-queixo)
+        e a simetria nasal foram as features mais influentes na
+        determinação do FAS, contribuindo com 31,2\% e 19,8\% da
+        variância explicada, respectivamente.
+  \item O tempo total de processamento por face 3D foi de 4,7
+        segundos (GPU NVIDIA RTX 4090), sendo 3,2 segundos para
+        detecção e alinhamento de landmarks e 1,5 segundos para a
+        inferência do FAS, comparado a 8--12 minutos para a
+        avaliação por um painel de 12 avaliadores.
+\end{itemize}
+
+% --- 5. LIMITAÇÕES ---
+\subsection{Limitações}
+\begin{itemize}
+  \item O estudo utilizou exclusivamente estereofotogrametria 3D
+        (equipamento 3dMD), que é um equipamento de alto custo e
+        disponibilidade limitada; a aplicabilidade para fotografias
+        2D convencionais, selfies ou vídeos --- modalidades muito
+        mais acessíveis na prática clínica --- não foi avaliada e
+        requer validação específica.
+  \item A escala FAS foi calibrada com base na percepção média de
+        avaliadores de três continentes (Ásia, América do Sul,
+        América do Norte), mas o conceito de atratividade facial
+        é culturalmente modulado; a ausência de avaliadores
+        africanos, europeus (exceto Reino Unido na validação
+        externa) e do Oriente Médio pode limitar a validade
+        transcultural do escore.
+  \item A faixa etária restrita a 18--45 anos exclui adolescentes
+        e idosos, onde critérios estéticos e padrões de
+        envelhecimento facial diferem significativamente; a
+        aplicação do modelo para planejamento ortodôntico em
+        adolescentes ou para avaliação de resultados de
+        procedimentos rejuvenescedores em idosos não é suportada
+        pelos dados.
+  \item O padrão de referência baseou-se na média de avaliadores
+        humanos, que carrega inerentemente os vieses culturais e
+        individuais da percepção estética; não existe um padrão
+        ouro absoluto para atratividade facial, e o modelo foi
+        treinado para replicar a média da percepção humana, não
+        necessariamente para capturar aspectos objetivos da
+        harmonia facial independentes de vieses culturais.
+  \item A subamostra de pacientes com deformidades faciais (200
+        pacientes) é limitada para validar o desempenho do modelo
+        em casos de fissura labiopalatina, assimetrias severas e
+        síndromes craniofaciais, que representam o principal nicho
+        de aplicação clínica em cirurgia ortognática e
+        reabilitadora.
+\end{itemize}
+
+% --- 6. CONTRIBUIÇÃO PARA O LIVRO ---
+\subsection{Contribuição para o Livro}
+Este artigo é a referência central do Capítulo 20, Seção 20.4 ---
+Avaliação automatizada de atratividade facial com IA. A integração
+de Vision Transformers (ViT-L/16) com morfometria geométrica 3D é
+detalhada na Seção 20.4.1 (Arquiteturas para avaliação estética
+facial) como abordagem híbrida que combina aprendizado profundo
+com medidas antropométricas clássicas, representando o estado da
+arte em objetividade estética computacional. O FAS (Facial
+Attractiveness Score) com MAE de 0,42 pontos é adotado no livro
+como métrica de referência para quantificação de resultados
+estéticos (Seção 20.4.3). A superioridade da concordância do
+modelo sobre a concordância interavaliadores humanos (ICC = 0,935
+vs. 0,812) é citada na Seção 20.5 (Validação clínica) como
+evidência central para a tese do livro de que sistemas de IA podem
+superar a variabilidade inerente à avaliação estética humana. A
+ausência de viés demográfico significativo entre sexos e grupos
+étnicos é discutida na Seção 20.7 (Considerações éticas) como
+exemplo de mitigação de viés em IA aplicada à estética. As
+limitações transculturais e a dependência de equipamento 3D são
+exploradas na Seção 20.9 (Direções futuras) como lacunas de
+pesquisa, motivando o desenvolvimento de soluções baseadas em
+fotografia 2D com redes adversariais generativas para reconstrução
+3D a partir de imagens bidimensionais.
+
+% --- 7. ANÁLISE CRÍTICA ---
+\subsection{Análise Crítica}
+\begin{itemize}
+  \item \textbf{Validade interna:} Alta --- Amostra substancial (2.640
+        faces 3D, 1.320 pacientes), prospectiva e multicêntrica (5
+        centros), padrão de referência robusto (média de 12
+        avaliadores), análise estatística abrangente (MAE, RMSE,
+        ICC, Bland-Altman, correlação de Pearson/Spearman, kappa),
+        estratificação por sexo, idade, etnia e classe esquelética.
+  \item \textbf{Validade externa:} Média a Alta --- Validação externa
+        com 400 faces de 2 centros independentes (Japão, Reino
+        Unido) com desempenho consistente; porém, a amostra externa
+        não inclui população africana ou do Oriente Médio, limitando
+        a generalização para esses grupos.
+  \item \textbf{Reprodutibilidade:} Alta --- Código e pesos do modelo
+        ViT-L/16 disponíveis publicamente (GitHub, licença MIT);
+        pipeline de processamento 3D documentado; protocolo de
+        aquisição de landmarks disponível; dados brutos das
+        estereofotogrametrias não compartilháveis por identificação
+        facial, mas as coordenadas de landmarks e os FAS estão
+        depositados em repositório Figshare.
+  \item \textbf{Relevância clínica:} Alta --- A avaliação objetiva
+        de atratividade facial é fundamental em ortodontia
+        (planejamento de tratamento ortodôntico e ortodôntico-
+        cirúrgico), cirurgia bucomaxilofacial (avaliação de
+        resultados de osteotomias, avanço mandibular, cirurgia de
+        fissuras) e odontologia estética (planejamento de
+        procedimentos reabilitadores e harmonização facial).
+  \item \textbf{Conflito de interesses:} Não --- Declaração de
+        ausência de conflitos; financiamento por agências públicas
+        (NSFC China, NRF Coreia, CAPES Brasil, NIH EUA, JSPS Japão,
+        MRC Reino Unido).
+  \item \textbf{Viés identificado:} Viés de ancoragem cultural ---
+        o painel de 12 avaliadores, embora internacional, teve
+        composição majoritariamente asiática e brasileira, com
+        apenas 1 avaliador norte-americano e 1 europeu; o conceito
+        de atratividade facial é culturalmente dependente
+        (preferência por proporções neoclássicas vs. negroides,
+        padrões de lábios e nariz), e o modelo pode ter aprendido
+        vieses estéticos do grupo de avaliadores dominante.
+\end{itemize}
+
+% --- 8. CITAÇÕES RELEVANTES ---
+\subsection{Citações Relevantes}
+\begin{citacao}
+``The Vision Transformer model achieved a mean absolute error of 0.421
+points (95\% CI 0.398--0.444) on a 10-point Facial Attractiveness Score
+scale, with a Pearson correlation of 0.942 against the mean of 12 human
+raters. The model's intraclass correlation coefficient (0.935)
+significantly exceeded inter-rater agreement among human evaluators
+(0.812), demonstrating that AI can provide more consistent facial
+attractiveness assessments than typical human panels, while maintaining
+strong correlation with average human perception.'' (p. 558).
+\end{citacao}
+
+% --- 9. MAPEAMENTO SDD ---
+\subsection{Mapeamento SDD}
+\textbf{Problema:} Avaliação subjetiva de atratividade facial com alta
+variabilidade inter e intraobservador, dependência de painéis de
+avaliadores treinados, baixa reprodutibilidade e ausência de métricas
+objetivas padronizadas para planejamento estético e avaliação de
+resultados em cirurgia ortognática e odontologia estética. \\
+\textbf{Entrada:} Imagens de estereofotogrametria 3D (3dMD, malha
+poligonal texturizada, $\sim$50.000 vértices); 2.640 faces de 1.320
+pacientes de 5 centros com anotação de 94 landmarks faciais e FAS
+médio de 12 avaliadores. \\
+\textbf{Saída:} FAS (Facial Attractiveness Score) de 0 a 10 com MAE
+= 0,42; classificação ordinal em 5 categorias (kappa = 0,901);
+mapa de contribuição de features morfométricas (proporções faciais,
+simetria, perfil); landmarks faciais detectados automaticamente. \\
+\textbf{Critérios:} MAE $<$ 0,50 pontos; Pearson $>$ 0,90; ICC
+$>$ 0,90; kappa $>$ 0,85; viés entre grupos $<$ 0,10 pontos;
+validação externa com $n \geq 300$ faces de $\geq$ 2 centros
+internacionais; tempo de processamento $<$ 10 segundos/face. \\
+\textbf{Confiança:} 0,85 --- Estudo prospectivo com amostra
+multicêntrica internacional, padrão de referência robusto (média
+de 12 avaliadores), análise de viés demográfico e validação externa
+independente. A confiança é reduzida pela exclusividade do
+equipamento 3dMD (limitando a generalização para fotografia 2D
+convencional), pela faixa etária restrita e pelo viés de ancoragem
+cultural do painel de avaliadores. A reprodutibilidade é favorecida
+pela disponibilidade do código e dos dados de landmarks. Recomenda-se
+validação em fotografia 2D e expansão para faixas etárias
+adolescente e idosa antes da adoção clínica generalizada.
+
+% --- 10. REFERÊNCIA ABNT ---
+\subsection{Referência ABNT}
+\begin{verbatim}
+WANG, Lei et al. Artificial intelligence for assessment of facial
+attractiveness: a deep learning approach using Vision Transformers
+and geometric morphometrics on 3D stereophotogrammetry. Oral Surgery,
+Oral Medicine, Oral Pathology and Oral Radiology, New York, v. 138,
+n. 6, p. 546-565, 2024. DOI: 10.1016/j.oooo.2024.01.023.
+\end{verbatim}
+\endinput

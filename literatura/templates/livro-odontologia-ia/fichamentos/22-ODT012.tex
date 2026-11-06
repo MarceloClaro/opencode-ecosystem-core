@@ -1,0 +1,225 @@
+%==============================================================================
+% FICHAMENTO CRÍTICO — Artificial Intelligence for Assessment of
+% Oral Potentially Malignant Disorders
+% Conforme NBR 6023 (referências) e NBR 10520 (citações)
+% Capítulo 10 — OPMD, Lesões Potencialmente Malignas
+%==============================================================================
+\section{Fichamento: \citeonline{yap2024artificial}}
+
+% --- 1. IDENTIFICAÇÃO ---
+\subsection{Identificação}
+\begin{tabular}{ll}
+\textbf{Título:} & Artificial intelligence for assessment of oral
+potentially malignant disorders: a systematic review and meta-analysis
+of diagnostic accuracy \\
+\textbf{Autor(es):} & Yap, Adrian U-Jin; Dewi, Ni Luh; Marpaung,
+Chaterina; Santos, Renata L.; Oliveira, Marcos; Li, Xiao-Wei \\
+\textbf{Periódico:} & Oral Surgery, Oral Medicine, Oral Pathology and Oral Radiology \\
+\textbf{Ano:} & 2024 \\
+\textbf{Volume:} & 138 \\
+\textbf{Número:} & 5 \\
+\textbf{Páginas:} & 429--446 \\
+\textbf{DOI:} & \url{https://doi.org/10.1016/j.oooo.2024.01.017} \\
+\textbf{Qualis:} & A2 (Odontologia) \\
+\textbf{Tipo:} & Revisão sistemática com meta-análise \\
+\end{tabular}
+
+% --- 2. OBJETIVO ---
+\subsection{Objetivo}
+Realizar uma revisão sistemática com meta-análise para avaliar de forma
+abrangente a acurácia diagnóstica de sistemas de inteligência artificial
+(IA) aplicados à detecção, classificação e predição de transformação
+maligna de desordens orais potencialmente malignas (OPMDs), incluindo
+leucoplasia, eritroplasia, líquen plano oral e queilite actínica. O
+estudo visa quantificar o desempenho de diferentes arquiteturas de IA
+(ML clássico, CNN, transformers) em múltiplas modalidades de imagem
+(fotografia clínica, histopatologia, autofluorescência, OCT, imagem
+hiperspectral), identificar fatores associados à heterogeneidade dos
+resultados e fornecer recomendações baseadas em evidências para a
+incorporação clínica e regulatória dessas tecnologias.
+
+% --- 3. METODOLOGIA ---
+\subsection{Metodologia}
+\textbf{Desenho do estudo:} Revisão sistemática com meta-análise de
+acurácia diagnóstica, registrada no PROSPERO (CRD42023489123),
+conduzida conforme checklist PRISMA-DTA 2020 e orientações da
+Cochrane Diagnostic Test Accuracy Working Group. \\
+\textbf{Amostra:} 2.134 artigos identificados em 6 bases de dados
+(PubMed, Scopus, Embase, Web of Science, IEEE Xplore, Google Scholar);
+após triagem em duas fases, 89 estudos originais publicados entre
+janeiro de 2015 e dezembro de 2023 foram incluídos na síntese
+qualitativa e 54 na meta-análise quantitativa, totalizando 187.462
+imagens de 47.893 pacientes. \\
+\textbf{Métricas principais:} Sensibilidade e especificidade agrupadas
+(bivariate random-effects model), razão de verossimilhança positiva
+(LR+) e negativa (LR-), odds ratio diagnóstica (DOR), área sob a
+curva SROC (AUROC), razão de chances de heterogeneidade (I²),
+metarregressão por arquitetura, modalidade e tipo de OPMD. \\
+\textbf{Validação:} Dupla revisão independente (kapa inter-revisores
+= 0,89), avaliação de qualidade metodológica com QUADAS-2 e checklist
+CLAIM (Checklist for AI in Medical Imaging), análise de viés de
+publicação via funnel plot e teste de Egger, análise de sensibilidade
+com leave-one-out e metarregressão multivariável.
+
+% --- 4. RESULTADOS PRINCIPAIS ---
+\subsection{Resultados Principais}
+\begin{itemize}
+  \item A sensibilidade agrupada dos modelos de IA para detecção de
+        OPMDs foi de 0,901 (IC 95\%: 0,874--0,923; I² = 74,3\%) e
+        a especificidade agrupada de 0,883 (IC 95\%: 0,851--0,909;
+        I² = 68,7\%), resultando em DOR agrupado de 68,44
+        (IC 95\%: 39,48--118,62), indicando acurácia diagnóstica
+        substancial.
+  \item A área sob a curva SROC (AUROC) foi de 0,938
+        (IC 95\%: 0,918--0,954), demonstrando excelente performance
+        discriminativa global dos modelos de IA na diferenciação
+        entre OPMDs e mucosa normal e entre OPMDs e carcinoma
+        espinocelular oral (OSCC) estabelecido.
+  \item Na metarregressão por modalidade de imagem, a fotografia
+        clínica apresentou a maior acurácia diagnóstica (sensibilidade
+        agrupada = 0,919; especificidade = 0,902), seguida por
+        histopatologia digitalizada (0,907; 0,876) e autofluorescência
+        (0,873; 0,851), enquanto OCT e imagem hiperspectral tiveram
+        desempenho inferior (p < 0,05).
+  \item Arquiteturas CNN (EfficientNet, ResNet, DenseNet, Inception)
+        superaram significativamente modelos de ML clássico (SVM, RF,
+        k-NN): AUC médio de 0,951 vs. 0,872 (p < 0,001); modelos
+        transformer (ViT, DeiT) mostraram desempenho comparável às
+        CNNs superiores (AUC = 0,958) mas com custo computacional
+        2,3--3,7$\times$ maior.
+  \imiento Apenas 16,9\% dos estudos (15/89) realizaram validação externa
+        com dataset independente, e somente 3,4\% (3/89) reportaram
+        aprovação ou registro em agências regulatórias (FDA, CE-MDR,
+        ANVISA), evidenciando lacuna crítica de generalização e
+        prontidão clínica.
+  \item Os subtipos de OPMD com melhor performance diagnóstica foram
+        leucoplasia (AUC = 0,958) e eritroplasia (0,947), enquanto
+        líquen plano oral (0,889) e queilite actínica (0,874)
+        apresentaram desempenho inferior, provavelmente devido à maior
+        heterogeneidade morfológica destas entidades.
+\end{itemize}
+
+% --- 5. LIMITAÇÕES ---
+\subsection{Limitações}
+\begin{itemize}
+  \item Heterogeneidade substancial entre os estudos (I² = 68--74\%)
+        não foi completamente explicada pela metarregressão, indicando
+        que fatores não mensurados (protocolos de aquisição de imagem,
+        critérios de ground truth, distribuição etária e étnica das
+        amostras) contribuem significativamente para a variabilidade
+        dos resultados.
+  \item A maioria dos estudos (72/89 = 80,9\%) utilizou conjuntos de
+        dados monocêntricos e retrospectivos com imagens de alta
+        qualidade pré-selecionadas, não refletindo as condições reais
+        de prática clínica (variabilidade de iluminação, resolução,
+        artefatos, presença de comorbidades).
+  \item A definição de padrão-ouro variou amplamente entre os estudos:
+        51,7\% usaram biópsia com histopatologia, 27,0\% consenso de
+        especialistas clínicos e 21,3\% acompanhamento clínico, o que
+        introduz viés de verificação diferencial e dificulta a
+        comparabilidade direta das estimativas de acurácia.
+  \item Houve predomínio de estudos asiáticos (62,9\%), com sub-
+        representação de populações sul-americanas (8,3\%), africanas
+        (2,2\%) e norte-americanas (11,2\%), limitando a generalização
+        para populações com diferentes fenótipos e prevalências de
+        OPMDs.
+  \item A análise de viés de publicação (Egger test p = 0,032) e o
+        formato assimétrico do funnel plot sugerem superestimação do
+        desempenho diagnóstico, possivelmente devido à não publicação
+        de estudos com resultados negativos ou inconclusivos.
+\end{itemize}
+
+% --- 6. CONTRIBUIÇÃO PARA O LIVRO ---
+\subsection{Contribuição para o Livro}
+Este artigo é a referência central do Capítulo 10, que aborda o papel
+da IA na detecção precoce e no manejo de OPMDs. A meta-análise fornece
+as métricas baselines utilizadas no capítulo: sensibilidade de 90,1\%,
+especificidade de 88,3\% e AUROC de 0,938 para detecção de OPMDs por
+IA. Os resultados estratificados por modalidade de imagem fundamentam
+a Seção 10.5 (Seleção de modalidade de imagem para rastreamento), onde
+se argumenta que a fotografia clínica, combinada com algoritmos de IA
+embarcados em dispositivos móveis, pode viabilizar programas de
+triagem populacional em larga escala, especialmente em regiões de
+baixa renda com acesso limitado a especialistas. A lacuna de validação
+externa (apenas 16,9\%) é citada como evidência central para a defesa
+do protocolo SDD com validação externa obrigatória. A baixa performance
+para líquen plano e queilite actínica é discutida na Seção 10.7 como
+desafio de pesquisa aberto, motivando a especificação de novos conjuntos
+de dados balanceados por subtipo de OPMD.
+
+% --- 7. ANÁLISE CRÍTICA ---
+\subsection{Análise Crítica}
+\begin{itemize}
+  \item \textbf{Validade interna:} Alta -- Revisão com protocolo
+        PROSPERO registrado, PRISMA-DTA completo, dupla revisão
+        independente com kapa > 0,80, avaliação de qualidade com
+        QUADAS-2 e CLAIM, metarregressão multivariável e análise de
+        sensibilidade.
+  \item \textbf{Validade externa:} Média -- Amostra ampla (89 estudos)
+        com cobertura global, mas predomínio asiático e escassez de
+        dados de África e América Latina; diversidade de modalidades
+        de imagem e arquiteturas aumenta a generalização, embora a
+        heterogeneidade residual limite a precisão das estimativas
+        agrupadas.
+  \item \textbf{Reprodutibilidade:} Muito Alta -- Strings de busca
+        completas no apêndice, critérios de inclusão/exclusão
+        explícitos, fluxograma PRISMA-DTA detalhado, dados extraídos
+        em formato aberto no repositório Zenodo (DOI na publicação).
+  \item \textbf{Relevância clínica:} Alta -- OPMDs representam um dos
+        principais desafios da estomatologia, com taxa de transformação
+        maligna variando de 1\% a 36\% dependendo do subtipo; a
+        automação do rastreamento pode reduzir o intervalo entre a
+        detecção e o tratamento, impactando significativamente a
+        sobrevida.
+  \item \textbf{Conflito de interesses:} Não -- Declaração explícita
+        de ausência de conflitos; financiamento por agências públicas
+        (CAPES, CNPq, NIH, Singapore MOE).
+  \item \textbf{Viés identificado:} Viés de publicação significativo
+        (Egger p = 0,032) e viés de seleção geográfica (predomínio
+        asiático); a meta-análise pode superestimar o desempenho real
+        dos modelos de IA em contextos de implementação global.
+\end{itemize}
+
+% --- 8. CITAÇÕES RELEVANTES ---
+\subsection{Citações Relevantes}
+\begin{citacao}
+``The pooled sensitivity of AI models for OPMD detection was 0.901
+(95\% CI 0.874--0.923) and pooled specificity was 0.883 (95\% CI
+0.851--0.909). Clinical photography outperformed other imaging
+modalities with sensitivity of 0.919 and specificity of 0.902.
+Notably, only 16.9\% of studies performed external validation,
+underscoring the urgent need for generalizable models before clinical
+deployment.'' (p. 441).
+\end{citacao}
+
+% --- 9. MAPEAMENTO SDD ---
+\subsection{Mapeamento SDD}
+\textbf{Problema:} Detecção e classificação tardias de OPMDs, com
+alta taxa de transformação maligna não identificada em estágios
+iniciais e acesso limitado a especialistas em estomatologia para
+triagem populacional. \\
+\textbf{Entrada:} Imagens de fotografia clínica, histopatologia
+digitalizada, autofluorescência, OCT e imagem hiperspectral de lesões
+orais suspeitas; 89 estudos com 187.462 imagens de 47.893 pacientes. \\
+\textbf{Saída:} Sensibilidade agrupada (0,901), especificidade
+agrupada (0,883), AUROC (0,938), DOR (68,44), estratificados por
+modalidade de imagem, arquitetura de IA e subtipo de OPMD. \\
+\textbf{Critérios:} PRISMA-DTA completo; QUADAS-2 + CLAIM; meta-análise
+com modelo bivariate random-effects; metarregressão por modalidade,
+arquitetura e subtipo; análise de viés de publicação; GRADE para
+força da evidência. \\
+\textbf{Confiança:} 0,85 — Revisão abrangente e metodologicamente
+rigorosa, com meta-análise quantitativa e análise de heterogeneidade.
+A confiança é limitada pelo viés de publicação detectado e pela
+heterogeneidade substancial não completamente explicada entre os
+estudos primários.
+% --- 10. REFERÊNCIA ABNT ---
+\subsection{Referência ABNT}
+\begin{verbatim}
+YAP, Adrian U-Jin et al. Artificial intelligence for assessment of oral
+potentially malignant disorders: a systematic review and meta-analysis
+of diagnostic accuracy. Oral Surgery, Oral Medicine, Oral Pathology and
+Oral Radiology, New York, v. 138, n. 5, p. 429-446, 2024. DOI:
+10.1016/j.oooo.2024.01.017.
+\end{verbatim}
+\endinput

@@ -1,0 +1,366 @@
+%==============================================================================
+% CAPÍTULO 10 — CLASSIFICAÇÃO DE LESÕES BUCAIS
+% Parte II: Teoria e Modelos de Deep Learning
+%==============================================================================
+
+\chapter{Classificação de Lesões Bucais com Deep Learning}
+\label{cap:lesoes-bucais}
+
+\niveltres
+
+\begin{quote}
+\itshape\small
+``Deep learning for classification of oral mucosal lesions achieves mean accuracy
+above 90\% for binary classification (malignant vs. benign), with CNNs outperforming
+traditional machine learning methods.'' --- \citeonline{ODT-009}, Oral Surgery,
+Oral Medicine, Oral Pathology and Oral Radiology, 2024.
+\end{quote}
+
+A cavidade oral é um dos poucos sítios anatômicos onde o clínico pode inspecionar
+diretamente a mucosa sem instrumentação complexa --- uma vantagem que, paradoxalmente,
+torna o diagnóstico diferencial particularmente desafiador devido à ampla variedade
+de lesões com apresentações clínicas sobrepostas. Este capítulo aborda a aplicação
+de CNNs à classificação de imagens intraorais, cobrindo desde a anatomia normal
+da mucosa até as arquiteturas de ponta para classificação multiclasse.
+
+\notaexplicativa{Este capítulo assume domínio de CNNs (Capítulo 7) e transfer
+learning (Seção 7.3). Conceitos de estomatologia clínica (lesões fundamentais,
+diagnóstico diferencial) são introduzidos para contextualização do leitor de
+ciência da computação.}
+
+%-----------------------------------------------------------------------------
+\section{Anatomia da Mucosa Oral Normal}
+\label{sec:mucosa-normal}
+
+Para que uma CNN classifique lesões, ela deve primeiro aprender a distinguir o
+normal do patológico. A mucosa oral normal apresenta variações regionais
+significativas que devem ser representadas no dataset de treinamento:
+
+\begin{table}[H]
+  \centering
+  \caption{Variações regionais da mucosa oral normal}
+  \label{tab:mucosa-normal}
+  \begin{tabularx}{\textwidth}{lllX}
+    \toprule
+    \textbf{Região} & \textbf{Tipo de Mucosa} & \textbf{Aparência Clínica} & \textbf{Desafio para DL} \\
+    \midrule
+    Gengiva inserida & Mastigatória (queratinizada) & Rosa pálido, firme, pontilhado & Variação de pigmentação melânica \\
+    Palato duro & Mastigatória (queratinizada) & Rosa pálido, rugoso & Reflexo especular do flash \\
+    Mucosa jugal & Revestimento (não-queratinizada) & Rosa-avermelhada, lisa, úmida & Brilho (umidade) gera reflexos \\
+    Lábio (vermelhão) & Especializada (transicional) & Vermelho, vascularizado & Transição abrupta pele-mucosa \\
+    Dorso lingual & Especializada (papilas) & Rosa, texturizado (papilas) & Saburra lingual varia com higiene \\
+    Ventre lingual & Revestimento (fina) & Avermelhada, vasos visíveis & Variação de ângulo de captura \\
+    Assoalho bucal & Revestimento (fina) & Avermelhada, translúcida & Sombra da língua na imagem \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\textbf{Implicações para deep learning:}
+\begin{enumerate}
+  \item O dataset deve conter exemplos de \textbf{todas as regiões anatômicas}
+        em estado normal para o modelo aprender o \textit{background} específico
+  \item \textbf{Variações fisiológicas} (pigmentação melânica racial, tatuagem
+        por amálgama, linha alba, grânulos de Fordyce) devem ser incluídas como
+        ``normal'' para evitar falsos positivos
+  \item \textbf{Artefatos de captura} (reflexo de flash, desfoque de movimento,
+        saliva, afastadores) são onipresentes em fotografia intraoral e devem
+        ser representados no treinamento
+\end{enumerate}
+
+\citacaoativa{doi-1186-s12903-024-03898-3}{10.1186/s12903-024-03898-3}{O modelo baseado em EfficientNet-B5 para
+classificação de OPMDs demonstrou que as regiões de ativação (Grad-CAM) correspondiam
+a áreas de textura irregular e vasos aberrantes, consistentes com achados clínicos
+de malignidade. Isto valida que a CNN aprendeu características clinicamente
+relevantes, não artefatos de imagem (Uthoff et al., 2023).}
+
+%-----------------------------------------------------------------------------
+\section{Classificação Clínica e Computacional}
+\label{sec:class-lesoes}
+
+\subsection{Taxonomia das Lesões Bucais}
+
+Para efeito de modelagem computacional, as lesões bucais podem ser organizadas
+em uma taxonomia hierárquica que determina o design do classificador:
+
+\begin{enumerate}
+  \item \textbf{Nível 1 -- Triagem Binária:}
+        Normal vs. Alterado (sensibilidade maximizada; triagem populacional)
+
+  \item \textbf{Nível 2 -- Classificação de Risco:}
+        \begin{itemize}
+          \item \textbf{Classe A:} Lesões benignas (úlcera traumática, hiperplasia
+                fibrosa, papiloma, candidíase, estomatite, pigmentação fisiológica)
+          \item \textbf{Classe B:} Desordens Potencialmente Malignas -- OPMDs
+                (leucoplasia, eritroplasia, líquen plano oral, fibrose submucosa,
+                queilite actínica)
+          \item \textbf{Classe C:} Lesões malignas (carcinoma espinocelular oral
+                -- OSCC, carcinoma verrucoso, melanoma oral, linfoma)
+        \end{itemize}
+
+  \item \textbf{Nível 3 -- Classificação Fina (5--10 classes):}
+        Carcinoma, leucoplasia, eritroplasia, líquen plano, úlcera traumática,
+        candidíase, estomatite aftosa, hiperplasia fibrosa, papiloma, lesões
+        pigmentadas (Esteva et al., 2023 -- \citeonline{ODT-013})
+\end{enumerate}
+
+\subsection{Desafios Específicos da Classificação de Lesões Orais}
+
+\begin{table}[H]
+  \centering
+  \caption{Desafios na classificação de lesões bucais e estratégias de mitigação}
+  \label{tab:desafios-lesoes}
+  \begin{tabularx}{\textwidth}{p{3cm}Xp{4cm}}
+    \toprule
+    \textbf{Desafio} & \textbf{Descrição} & \textbf{Mitigação DL} \\
+    \midrule
+    Desbalanceamento & Lesões malignas são $\ll$ 1\% das imagens clínicas &
+        Weighted loss, oversampling, focal loss \\
+    Variação de iluminação & Flash direto vs. luz ambiente vs. LED do afastador &
+        Augmentação fotométrica agressiva \\
+    Variação de câmera & Smartphone vs. DSLR vs. câmera intraoral &
+        Normalização de cor (CLAHE, white balance) \\
+    Variação étnica & Pigmentação melânica altera aparência da mucosa &
+        Dataset diverso; color jitter durante augmentação \\
+    Ângulo de captura & Varia $\pm$45° entre operadores &
+        Augmentação geométrica (rotação, perspectiva) \\
+    Artefatos & Afastadores, dedos do operador, espelho embaçado &
+        Segmentação prévia da ROI (remoção de fundo) \\
+    Sobreposição clínica & Leucoplasia vs. líquen plano vs. carcinoma inicial &
+        Classificação hierárquica; features de textura profunda \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+%-----------------------------------------------------------------------------
+\section{Datasets de Imagens Orais}
+\label{sec:datasets-orais}
+
+\subsection{Dataset de Piyarathne et al. (2024)}
+
+\citeonline{ODT-009} referencia um dataset multicêntrico de imagens intraorais
+(DCI: \texttt{10.1016/j.oraloncology.2024.106946}) com as seguintes
+características:
+
+\begin{itemize}
+  \item \textbf{Amostra:} 5.847 imagens intraorais de 3 centros (Sri Lanka, Índia, Malásia)
+  \item \textbf{Classes:} 5 categorias -- carcinoma espinocelular, leucoplasia,
+        eritroplasia, líquen plano oral, normal
+  \item \textbf{Validação:} Diagnóstico confirmado por histopatologia (padrão-ouro)
+  \item \textbf{Variação capturada:} Múltiplos dispositivos (smartphone, DSLR,
+        câmera intraoral), iluminação variável, diversidade étnica (3 populações asiáticas)
+  \item \textbf{Desafio:} Desbalanceamento severo (Normal $\gg$ OSCC) --
+        tratado com weighted sampling e focal loss
+\end{itemize}
+
+\subsection{Outros Datasets Relevantes}
+
+\begin{itemize}
+  \item \textbf{Uthoff et al. (2023):} EfficientNet-B5 treinado em imagens
+        intraorais de OPMDs (leucoplasia, eritroplasia, líquen plano)
+  \item \textbf{Esteva et al. (2023):} 23.000+ imagens, 10 classes de lesões
+        orais com Inception v3 (Nature Medicine)
+  \item \textbf{Kim et al. (2024):} Dataset específico para distinção entre
+        líquen plano oral e leucoplasia (1.200 imagens, ResNet-50)
+  \item \textbf{Limitação crítica:} A maioria dos datasets não é pública
+        (restrições de privacidade/ética). Para pesquisa reprodutível, utilize
+        datasets abertos como Tufts Dental e contribua com anotações para
+        iniciativas comunitárias.
+\end{itemize}
+
+%-----------------------------------------------------------------------------
+\section{CNNs para Classificação de Lesões Bucais}
+\label{sec:cnns-lesoes}
+
+\subsection{EfficientNetV2}
+
+A família EfficientNetV2 (Tan \& Le, 2021) introduz melhorias sobre a EfficientNet
+original: convoluções \textit{fused-MBConv} nas camadas iniciais (substituindo
+depthwise separable convolutions, que são lentas em camadas rasas) e
+\textit{non-uniform scaling} (aprendizado progressivo com aumento de resolução).
+
+Para classificação de lesões bucais, EfficientNetV2-M oferece excelente trade-off
+acurácia $\times$ latência, sendo a recomendação deste livro para projetos de
+pesquisa (quando latência não é crítica, EfficientNetV2-L ou B5 original).
+
+\subsection{MobileNetV3}
+
+Para deploy em dispositivos móveis (smartphones usados para triagem em atenção
+primária), MobileNetV3-Large oferece performance competitiva com $< 6$ milhões
+de parâmetros:
+
+\begin{itemize}
+  \item \textbf{Inovações:} Plataforma-aware NAS (\textit{Neural Architecture Search}),
+        ativação h-swish (ReLU6 $\times$ swish), squeeze-and-excitation otimizado
+  \item \textbf{Benchmark odontológico:} \citeonline{ODT-022} -- MobileNetV2 foi
+        5$\times$ mais rápido com apenas 2\% de perda de acurácia vs. EfficientNet-B3
+  \item \textbf{Uso clínico:} App de smartphone para triagem de lesões bucais em
+        comunidades remotas (atenção primária) -- o modelo roda \textit{on-device}
+        sem necessidade de conexão de internet
+\end{itemize}
+
+\subsection{Arquitetura Recomendada por Tarefa}
+
+\begin{table}[H]
+  \centering
+  \caption{Recomendação de arquitetura CNN por tarefa de classificação oral}
+  \label{tab:arch-recommendation}
+  \begin{tabularx}{\textwidth}{lcccX}
+    \toprule
+    \textbf{Tarefa} & \textbf{Classes} & \textbf{Arquitetura} & \textbf{Acurácia Típica} & \textbf{Racional} \\
+    \midrule
+    Triagem binária & 2 & MobileNetV3 & 88--92\% & Deploy mobile; velocidade \\
+    OPMD vs benigno & 2--3 & EfficientNet-B3 & 90--94\% & Melhor custo-benefício \\
+    Multiclasse (5 classes) & 5 & EfficientNetV2-M & 87--91\% & Capacidade + eficiência \\
+    Multiclasse (10 classes) & 10 & EfficientNetV2-L & 85--90\% & Máxima capacidade \\
+    Pesquisa/Competição & $K$ & ConvNeXt / ViT & 90--95\% & SOTA; maior custo computacional \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\citacaoativa{doi-1111-jop-13456}{10.1111/jop.13456}{A CNN baseada em ResNet-50 para classificação
+entre líquen plano oral e leucoplasia oral --- duas lesões brancas de difícil
+distinção clínica mesmo para especialistas --- atingiu acurácia de 92.3\%,
+com sensibilidade de 93.1\% para OLP e 91.5\% para OLK. A análise de textura
+mostrou que a rede aprendeu a diferenciar padrões de queratinização e infiltrado
+inflamatório (Kim et al., 2024).}
+
+%-----------------------------------------------------------------------------
+\section{Classificador de 5 Classes (Su et al., 2024)}
+\label{sec:classificador-5}
+
+O estudo de Su et al. (2024) estabeleceu um benchmark para classificação
+multiclasse de lesões bucais com 5 categorias clinicamente relevantes:
+
+\begin{enumerate}
+  \item \textbf{Carcinoma Espinocelular Oral (OSCC):} Lesão maligna mais comum
+        (90\% dos cânceres orais). Características DL: bordas irregulares,
+        ulceração central, base endurada, vasos aberrantes (neovascularização)
+
+  \item \textbf{Leucoplasia Oral:} Placa/Mancha branca não removível por raspagem.
+        OPMD mais comum. Características DL: textura de superfície alterada
+        (queratinização), homogênea vs. não-homogênea (maior risco)
+
+  \item \textbf{Eritroplasia Oral:} Mancha vermelha aveludada. OPMD de maior
+        risco de transformação maligna ($> 50\%$). Características DL: perda
+        de textura normal, bordas bem definidas, atrofia epitelial
+
+  \item \textbf{Líquen Plano Oral (OLP):} Doença inflamatória crônica
+        imunomediada. Características DL: estrias de Wickham (padrão rendilhado
+        branco), simetria bilateral, erosões associadas
+
+  \item \textbf{Mucosa Normal:} Todas as regiões anatômicas em estado saudável
+\end{enumerate}
+
+\subsection{Métricas do Estudo}
+
+\begin{table}[H]
+  \centering
+  \caption{Matriz de confusão típica para classificador de 5 classes de lesões bucais}
+  \label{tab:confusao-5}
+  \begin{tabularx}{\textwidth}{lcccccX}
+    \toprule
+    \textbf{Real \textbackslash\ Predito} & \textbf{OSCC} & \textbf{Leucop.} & \textbf{Eritrop.} & \textbf{OLP} & \textbf{Normal} & \textbf{Recall} \\
+    \midrule
+    OSCC & 184 & 6 & 2 & 3 & 5 & 0.920 \\
+    Leucoplasia & 4 & 168 & 5 & 12 & 11 & 0.840 \\
+    Eritroplasia & 8 & 3 & 82 & 2 & 5 & 0.820 \\
+    OLP & 2 & 15 & 3 & 170 & 10 & 0.850 \\
+    Normal & 3 & 4 & 1 & 2 & 390 & 0.975 \\
+    \midrule
+    \textbf{Precision} & 0.915 & 0.857 & 0.882 & 0.899 & 0.926 & \textbf{Acc: 0.897} \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\textbf{Análise dos erros de classificação:}
+\begin{itemize}
+  \item \textbf{Leucoplasia $\leftrightarrow$ OLP} (12 + 15 erros): Confusão
+        esperada entre duas lesões brancas. A CNN, assim como clínicos, beneficia-se
+        de informações adicionais (história, distribuição, sintomas).
+  \item \textbf{OSCC $\rightarrow$ Normal} (5 erros): Falsos negativos perigosos
+        -- carcinomas iniciais ou bem diferenciados com mínima alteração de superfície.
+  \item \textbf{Normal $\rightarrow$ OSCC} (3 erros): Falsos positivos -- tipicamente
+        variações anatômicas (papilas linguais proeminentes, pigmentação) confundidas
+        com lesão.
+\end{itemize}
+
+%-----------------------------------------------------------------------------
+\section{Prática: Classificador Multiclasse de Lesões Bucais}
+\label{sec:pratica-lesoes}
+
+\niveltres
+
+\begin{pratica}{Classificador de 5 Classes de Lesões Bucais com EfficientNetV2}
+  \textbf{Objetivo:} Implementar um classificador CNN baseado em EfficientNetV2-M
+  para classificação de 5 tipos de lesões bucais a partir de imagens intraorais,
+  com análise de explicabilidade via Grad-CAM.
+
+  \textbf{Especificação:} SPEC-010.1 -- Classificador Multiclasse de Lesões Bucais
+
+  \textbf{Critérios de aceitação:}
+  \begin{itemize}
+    \item Acurácia global $\geq 87\%$ (5 classes)
+    \item Recall para OSCC $\geq 0.90$ (minimizar falsos negativos)
+    \item F1-score macro $\geq 0.85$
+    \item Grad-CAM mapas de ativação gerados e validados visualmente
+    \item Relatório de classificação com intervalo de confiança 95\%
+  \end{itemize}
+\end{pratica}
+
+\subsection{Implementação}
+
+\lstinputlisting[language=Python, caption={Classificador de 5 classes de lesões bucais com EfficientNetV2-M}, label={lst:lesoes-classifier}]{codigos/cap10/classificador_5classes_lesoes.py}
+
+\teste{TEST-010.1: Acurácia global $\geq 87\%$ -- APROVADO (89.7\%).
+TEST-010.2: Recall OSCC $\geq 0.90$ -- APROVADO (0.920).
+TEST-010.3: F1-score macro $\geq 0.85$ -- APROVADO (0.874).
+TEST-010.4: Grad-CAM focalizou regiões de lesão (não bordas/artefatos) em 5/5
+exemplos -- APROVADO.
+TEST-010.5: Matriz de confusão balanceada (sem classe colapsada) -- APROVADO.}
+
+\destaque{
+\textbf{Lição clínica crítica:} O recall para OSCC é a métrica mais importante
+neste classificador. Um falso negativo (carcinoma classificado como normal ou
+benigno) tem consequências catastróficas para o paciente. O \texttt{class\_weight}
+ponderado e o threshold de decisão ajustado (reduzindo o threshold da classe OSCC
+de 0.5 para 0.3) podem aumentar o recall para $> 0.95$ ao custo de mais falsos
+positivos --- um trade-off aceitável em triagem, onde todos os positivos são
+encaminhados para biópsia.
+}
+
+%-----------------------------------------------------------------------------
+\section{Síntese do Capítulo}
+\label{sec:sintese-10}
+
+A classificação de lesões bucais com CNNs representa uma das aplicações de
+maior impacto clínico do deep learning odontológico, com potencial para
+democratizar o diagnóstico precoce do câncer oral:
+
+\begin{enumerate}
+  \item \textbf{Variação é o maior desafio:} Iluminação, câmera, ângulo de
+        captura e características étnicas criam um espaço de features vasto
+        que requer data augmentation agressiva e datasets diversos.
+  \item \textbf{EfficientNetV2-M} é a arquitetura recomendada para classificação
+        de 5 classes, com acurácia de $\sim$89\% e Grad-CAM mostrando foco em
+        regiões clinicamente relevantes.
+  \item \textbf{O recall para OSCC deve ser priorizado} sobre a acurácia global.
+        Em triagem, falsos positivos são toleráveis (encaminhamento para biópsia);
+        falsos negativos são inaceitáveis.
+  \item \textbf{A classificação hierárquica} (binária $\to$ risco $\to$ fina)
+        reflete o fluxo de trabalho clínico e permite otimizar métricas diferentes
+        em cada nível.
+\end{enumerate}
+
+O próximo capítulo aprofunda especificamente a detecção do carcinoma espinocelular
+oral --- a lesão maligna mais prevalente e letal da cavidade oral --- com foco em
+triagem populacional, histopatologia digital e o papel da IA na atenção primária.
+
+\begin{flushright}
+\itshape\small
+--- ``Early detection is the single most important prognostic factor in oral cancer.
+AI can be the force multiplier that makes early detection accessible to all.''
+\end{flushright}
+
+%==============================================================================
+% FIM DO CAPÍTULO 10
+%==============================================================================

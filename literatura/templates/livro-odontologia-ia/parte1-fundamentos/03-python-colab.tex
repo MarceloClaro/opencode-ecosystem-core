@@ -1,0 +1,865 @@
+%==============================================================================
+% CAPÍTULO 3 — PYTHON PARA ODONTOLOGIA COMPUTACIONAL
+% Google Colab, NumPy, Pandas e Visualização Científica
+% Autor: Edson Laranjeiras
+%==============================================================================
+
+\chapter{Python para Odontologia Computacional}
+\label{cap:python-colab}
+
+\nivelzero
+
+\section{Objetivos de Aprendizagem}
+
+Ao final deste capítulo, o leitor será capaz de:
+\begin{enumerate}
+    \item Configurar e executar notebooks Google Colab com aceleração GPU gratuita para processamento de dados odontológicos;
+    \item Manipular dados clínicos odontológicos utilizando NumPy (arrays) e Pandas (DataFrames);
+    \item Criar visualizações científicas de dados odontológicos com Matplotlib e Seaborn;
+    \item Documentar notebooks científicos segundo padrões reprodutíveis (SDD + TDD);
+    \item Implementar um pipeline completo de análise exploratória de dados odontológicos com testes automatizados.
+\end{enumerate}
+
+\section{Fundamentação Teórica}
+
+\subsection{Por que Python na Odontologia?}
+
+Python \indice{Python} consolidou-se como a linguagem franca da ciência de dados e inteligência artificial por razões que transcendem modismos tecnológicos:
+
+\begin{enumerate}
+    \item \textbf{Ecossistema científico maduro.} Bibliotecas como NumPy (computação numérica), Pandas (análise de dados), Matplotlib/Seaborn (visualização), Scikit-learn (machine learning clássico), TensorFlow/PyTorch (deep learning) e OpenCV (processamento de imagens) formam um pipeline completo — da leitura de uma radiografia DICOM ao treinamento de uma CNN para diagnóstico.
+    \item \textbf{Curva de aprendizado suave.} A sintaxe limpa e legível de Python permite que profissionais de saúde sem formação em ciência da computação se tornem produtivos em semanas, não meses.
+    \item \textbf{Comunidade e reprodutibilidade.} Milhares de tutoriais, datasets públicos e modelos pré-treinados estão disponíveis. Notebooks Jupyter/Colab permitem documentar e compartilhar análises completas, promovendo a reprodutibilidade científica — um valor central deste livro.
+    \item \textbf{Google Colab e acesso gratuito a GPU.} A barreira financeira para deep learning foi eliminada: GPUs NVIDIA Tesla T4, com 16 GB de VRAM, estão disponíveis gratuitamente no Colab, permitindo treinar modelos que há 5 anos exigiriam hardware de dezenas de milhares de reais.
+\end{enumerate}
+
+\subsection{Google Colab: Seu Laboratório de IA na Nuvem}
+
+O Google Colaboratory (Colab) \indice{Google Colab} é um ambiente de notebooks Jupyter hospedado na nuvem que oferece:
+
+\begin{itemize}
+    \item \textbf{Execução sem instalação.} Navegador web + conta Google = ambiente de desenvolvimento completo.
+    \item \textbf{GPU/TPU gratuita.} Menu Ambiente de Execução $\rightarrow$ Alterar tipo de ambiente de execução $\rightarrow$ GPU T4. Ideal para treinar CNNs em datasets de radiografias odontológicas.
+    \item \textbf{Persistência no Google Drive.} Montagem do Drive permite salvar datasets, modelos treinados e resultados.
+    \item \textbf{Células de código e texto.} Alternância entre explicações em Markdown/LaTeX e código executável em Python — o formato ideal para pesquisa reprodutível.
+    \item \textbf{Integração com GitHub.} Salvar, versionar e compartilhar notebooks diretamente do Colab.
+\end{itemize}
+
+\subsection{Setup Inicial no Google Colab}
+
+\begin{pratica}{Configuração do Google Colab para Odontologia Computacional}
+\spec{
+\textbf{Objetivo:} Configurar um notebook Colab com GPU e todas as bibliotecas necessárias para os laboratórios deste livro.
+
+\textbf{Requisitos funcionais:}
+\begin{itemize}
+    \item Verificar disponibilidade e tipo de GPU
+    \item Instalar e importar o pacote odontoia
+    \item Montar Google Drive para persistência de dados
+    \item Verificar versões de todas as bibliotecas
+\end{itemize}
+
+\textbf{Invariantes:}
+\begin{itemize}
+    \item O notebook deve funcionar em qualquer conta Google com GPU habilitada
+    \item Todas as bibliotecas devem ser importadas sem erros
+\end{itemize}
+}
+\end{pratica}
+
+O primeiro passo é verificar o ambiente de execução:
+
+\codigo{codigos/cap03/setup_colab_odontoia.py}
+
+\teste{Verificação de ambiente: GPU Tesla T4 detectada com 15.0 GB VRAM. Pacote odontoia v0.1.0 instalado. Todas as dependências resolvidas. Google Drive montado em /content/drive.}
+
+\section{Variáveis, Listas, Dicionários e Funções}
+
+\subsection{Estruturas de Dados para o Cotidiano Odontológico}
+
+Python oferece estruturas de dados nativas que mapeiam diretamente para conceitos odontológicos:
+
+\begin{description}
+    \item[Listas.] Sequências ordenadas e mutáveis. Ideal para armazenar números de dentes segundo notação FDI: \texttt{dentes\_posteriores = [16, 17, 26, 27, 36, 37, 46, 47]}.
+    \item[Dicionários.] Pares chave-valor. Perfeito para mapear dente $\rightarrow$ condição clínica: \texttt{\{'16': 'cárie oclusal', '36': 'restauração insatisfatória'\}}.
+    \item[Tuplas.] Sequências imutáveis. Útil para coordenadas de landmarks cefalométricos: \texttt{ponto\_A = (x, y)}.
+    \item[Conjuntos (sets).] Coleções não ordenadas de elementos únicos. Para verificar quais superfícies dentárias foram restauradas: \texttt{superficies = \{'O', 'M', 'D', 'V', 'P'\}}.
+\end{description}
+
+\subsection{Funções para Lógica Clínica}
+
+Funções permitem encapsular lógica clínica reutilizável. Por exemplo, a classificação de risco de cárie baseada no protocolo CAMBRA:
+
+\begin{verbatim}
+def classificar_risco_carie(cpob: int, fluxo_salivar: float,
+                             frequencia_acucar: int, higiene: str) -> str:
+    """Classifica risco de cárie segundo protocolo CAMBRA."""
+    if cpob >= 6 or fluxo_salivar < 0.7:
+        return "Alto Risco"
+    elif cpob >= 3 or frequencia_acucar >= 4:
+        return "Risco Moderado"
+    else:
+        return "Baixo Risco"
+\end{verbatim}
+
+\section{NumPy para Odontologia Computacional}
+
+\subsection{O Array NumPy como Fundação}
+
+NumPy \indice{NumPy} (Numerical Python) é a biblioteca fundamental para computação científica em Python. Seu tipo central, o \texttt{ndarray} (N-dimensional array), é a estrutura sobre a qual praticamente todas as bibliotecas de IA são construídas.
+
+Para a odontologia computacional, arrays NumPy representam:
+\begin{itemize}
+    \item \textbf{Imagens radiográficas.} Uma radiografia panorâmica é um array 2D (altura $\times$ largura) de valores de intensidade (0 = preto, 255 = branco para 8 bits; 0--65535 para 16 bits DICOM).
+    \item \textbf{Volumes CBCT.} Um exame CBCT é um array 3D (profundidade $\times$ altura $\times$ largura) onde cada voxel representa a densidade do tecido em unidades Hounsfield.
+    \item \textbf{Matrizes de características.} Uma tabela com dados de 500 pacientes e 20 variáveis clínicas é um array 2D de forma \texttt{(500, 20)}.
+    \item \textbf{Predições de modelos.} A saída de uma CNN para classificação de 10 tipos de lesões bucais em um lote de 32 imagens é um array de forma \texttt{(32, 10)}.
+\end{itemize}
+
+\subsection{Operações Essenciais com NumPy}
+
+\begin{verbatim}
+import numpy as np
+
+# Criando arrays
+radiografia = np.zeros((2048, 2048), dtype=np.uint16)  # Panorâmica 16-bit
+cpod_scores = np.array([3, 8, 12, 1, 5, 9, 15, 2, 7, 11])
+
+# Estatísticas descritivas de dados clínicos
+media_cpod = np.mean(cpod_scores)        # 7.3
+mediana_cpod = np.median(cpod_scores)    # 7.5
+desvio_cpod = np.std(cpod_scores)        # 4.57
+
+# Indexação e slicing para regiões de interesse (ROI)
+# Extrair região periapical do dente 36 (coordenadas aproximadas)
+roi_36 = radiografia[800:1000, 1200:1400]
+
+# Operações vetorizadas (evitar loops em Python!)
+# Normalizar valores de pixel para [0, 1]
+radiografia_norm = (radiografia - radiografia.min()) / \
+                   (radiografia.max() - radiografia.min())
+\end{verbatim}
+
+\subsection{Manipulando Imagens Odontológicas como Arrays}
+
+Imagens radiográficas carregadas com OpenCV ou PIL são arrays NumPy. Isso significa que todas as operações de processamento de imagens — filtragem, equalização de histograma, detecção de bordas — podem ser implementadas como operações matriciais:
+
+\begin{verbatim}
+import cv2
+import numpy as np
+
+# Carregar radiografia panorâmica
+pan = cv2.imread('panoramica_001.png', cv2.IMREAD_GRAYSCALE)
+print(f"Forma: {pan.shape}, Tipo: {pan.dtype}")
+# Output: Forma: (2408, 2992), Tipo: uint8
+
+# Realce de contraste com equalização de histograma adaptativa (CLAHE)
+# Essencial para visualizar detalhes sutis em radiografias odontológicas
+clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
+pan_realcada = clahe.apply(pan)
+
+# Detecção de bordas para identificar contornos dentários
+bordas = cv2.Canny(pan_realcada, threshold1=50, threshold2=150)
+\end{verbatim}
+
+\section{Pandas para Dados Clínicos Odontológicos}
+
+\subsection{O DataFrame como Prontuário Estruturado}
+
+Pandas \indice{Pandas} é a biblioteca padrão para análise de dados tabulares. Seu tipo central, o \texttt{DataFrame}, é uma tabela bidimensional com colunas nomeadas — análogo a uma planilha Excel ou a uma tabela SQL.
+
+Na odontologia, DataFrames representam naturalmente:
+\begin{itemize}
+    \item Dados de prontuário eletrônico (paciente, idade, sexo, dentes tratados, diagnósticos)
+    \item Resultados de exames periodontais (dente, face, profundidade de sondagem, sangramento, perda de inserção)
+    \item Datasets de treinamento de machine learning (features clínicas + rótulos)
+    \item Resultados de estudos clínicos (grupo, desfecho, covariáveis)
+\end{itemize}
+
+\subsection{Operações Essenciais com Pandas}
+
+\begin{verbatim}
+import pandas as pd
+
+# Criar DataFrame com dados periodontais
+df = pd.DataFrame({
+    'dente': [16, 16, 16, 16, 16, 16, 11, 11, 11, 11],
+    'face': ['MV', 'V', 'DV', 'ML', 'L', 'DL', 'MV', 'V', 'DV', 'ML'],
+    'ps': [3, 2, 3, 5, 4, 3, 2, 2, 2, 3],      # Profundidade sondagem (mm)
+    'ss': [1, 0, 1, 1, 1, 1, 0, 0, 0, 1],      # Sangramento à sondagem
+    'nic': [0, 0, 0, 2, 1, 0, 0, 0, 0, 0],    # Nível de inserção clínica
+    'placa': [1, 1, 1, 1, 0, 1, 0, 0, 0, 1],   # Índice de placa
+    'paciente': ['P001'] * 10
+})
+
+# Análise descritiva
+df.groupby('dente')['ps'].mean()     # PS média por dente
+df[df['ps'] >= 4]                     # Filtrar sítios com bolsa >= 4mm
+df['ss'].value_counts(normalize=True) # Proporção de sítios com sangramento
+
+# Pivot table: PS média por dente e face
+pivot = df.pivot_table(values='ps', index='dente',
+                       columns='face', aggfunc='mean')
+\end{verbatim}
+
+\subsection{Importando Dados Odontológicos Reais}
+
+\begin{verbatim}
+from odontoia.data import load_panoramic
+
+# Carregar dados do dataset público de radiografias panorâmicas
+dataset = load_panoramic()
+print(f"Imagens carregadas: {len(dataset)}")
+print(f"Dimensões: {dataset[0].shape}")
+
+# Criar DataFrame com metadados clínicos
+metadados = pd.DataFrame({
+    'id': range(len(dataset)),
+    'tipo': ['panoramica'] * len(dataset),
+    'dimensao_x': [img.shape[1] for img in dataset],
+    'dimensao_y': [img.shape[0] for img in dataset]
+})
+metadados.describe()
+\end{verbatim}
+
+\section{Matplotlib e Seaborn para Visualização Científica}
+
+\subsection{Fundamentos de Visualização Odontológica}
+
+A visualização de dados não é mero adorno estético — é uma ferramenta analítica fundamental. Padrões invisíveis em tabelas de números tornam-se óbvios quando plotados. No contexto odontológico:
+
+\begin{itemize}
+    \item Um histograma de CPOD por faixa etária revela a distribuição de cárie na população;
+    \item Um boxplot de profundidade de sondagem por sextante identifica padrões de doença periodontal;
+    \item Uma curva ROC compara a performance de diferentes modelos de IA para diagnóstico de lesões bucais;
+    \item Uma matriz de confusão visualiza os erros sistemáticos de um classificador de cáries.
+\end{itemize}
+
+\subsection{Matplotlib: Controle Absoluto}
+
+Matplotlib \indice{Matplotlib} é a biblioteca de visualização fundamental do ecossistema Python. Oferece controle granular sobre cada elemento do gráfico:
+
+\begin{verbatim}
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Distribuição de CPOD em uma população de 500 pacientes
+np.random.seed(42)
+idades = np.random.normal(35, 15, 500).clip(6, 90)
+cpod = 0.5 * idades + np.random.normal(0, 4, 500)
+cpod = cpod.clip(0, 32)
+
+fig, ax = plt.subplots(1, 2, figsize=(12, 5))
+
+# Histograma
+ax[0].hist(cpod, bins=20, color='steelblue', edgecolor='white', alpha=0.8)
+ax[0].set_xlabel('CPOD')
+ax[0].set_ylabel('Frequência')
+ax[0].set_title('Distribuição de CPOD na Amostra')
+ax[0].axvline(np.mean(cpod), color='red', linestyle='--',
+              label=f'Média = {np.mean(cpod):.1f}')
+ax[0].legend()
+
+# Scatter: CPOD vs Idade
+ax[1].scatter(idades, cpod, alpha=0.5, c='steelblue', edgecolors='white')
+ax[1].set_xlabel('Idade (anos)')
+ax[1].set_ylabel('CPOD')
+ax[1].set_title('CPOD vs Idade')
+
+# Linha de tendência
+z = np.polyfit(idades, cpod, 1)
+p = np.poly1d(z)
+x_trend = np.linspace(idades.min(), idades.max(), 100)
+ax[1].plot(x_trend, p(x_trend), 'r--', linewidth=2,
+           label=f'CPOD = {z[0]:.2f}*Idade + {z[1]:.1f}')
+ax[1].legend()
+
+plt.tight_layout()
+plt.savefig('analise_cpod.png', dpi=300, bbox_inches='tight')
+\end{verbatim}
+
+\subsection{Seaborn: Elegância Estatística}
+
+Seaborn \indice{Seaborn} é construído sobre Matplotlib e oferece uma API de alto nível otimizada para visualização de dados estatísticos. Seus pontos fortes incluem:
+
+\begin{itemize}
+    \item Integração nativa com DataFrames do Pandas;
+    \item Paletas de cores otimizadas para percepção visual;
+    \item Funções especializadas para distribuições, regressões, matrizes de correlação e dados categóricos;
+    \item Estética ``pronta para publicação'' com poucas linhas de código.
+\end{itemize}
+
+\begin{verbatim}
+import seaborn as sns
+import pandas as pd
+
+# Dados simulados de profundidade de sondagem por sextante
+df_ps = pd.DataFrame({
+    'Sextante': ['S1']*50 + ['S2']*50 + ['S3']*50 +
+                ['S4']*50 + ['S5']*50 + ['S6']*50,
+    'PS_mm': np.concatenate([
+        np.random.normal(2.5, 0.8, 50),   # S1 - anterossuperior
+        np.random.normal(2.3, 0.7, 50),   # S2 - póst-sup direito
+        np.random.normal(2.4, 0.9, 50),   # S3 - póst-sup esquerdo
+        np.random.normal(3.5, 1.2, 50),   # S4 - anteroinferior
+        np.random.normal(3.8, 1.5, 50),   # S5 - póst-inf direito
+        np.random.normal(4.0, 1.6, 50)    # S6 - póst-inf esquerdo
+    ]).clip(1, 12),
+    'Sangramento': np.random.binomial(1, 0.35, 300)
+})
+
+fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+
+# Boxplot da PS por sextante
+sns.boxplot(data=df_ps, x='Sextante', y='PS_mm',
+            palette='Blues', ax=axes[0])
+axes[0].axhline(y=4, color='red', linestyle='--',
+                label='Limiar periodontite (4mm)')
+axes[0].set_title('Profundidade de Sondagem por Sextante')
+axes[0].legend()
+
+# Violin plot com distribuição
+sns.violinplot(data=df_ps, x='Sextante', y='PS_mm',
+               palette='Blues', inner='quartile', ax=axes[1])
+axes[1].set_title('Distribuição da PS por Sextante (Violin Plot)')
+plt.tight_layout()
+\end{verbatim}
+
+\section{Documentação de Notebooks Científicos}
+
+\subsection{O Padrão SDD+TDD para Notebooks Odontológicos}
+
+Neste livro, todo notebook segue o protocolo SDD (Specification-Driven Development) + TDD (Test-Driven Development) \indice{SDD+TDD}:
+
+\begin{enumerate}
+    \item \textbf{Especificação (SDD).} Antes de escrever uma linha de código, definimos formalmente: objetivo, dados de entrada, saída esperada, invariantes que devem ser preservados e critérios de aceitação.
+    \item \textbf{Testes (TDD).} Para cada função, escrevemos primeiro o teste que define o comportamento esperado. O código só é considerado completo quando todos os testes passam.
+    \item \textbf{Documentação inline.} Cada célula de código é precedida por uma célula Markdown explicando: o que faz, por que é necessário, quais conceitos odontológicos são aplicados.
+    \item \textbf{Reprodutibilidade.} O notebook inclui seeds fixas, versões de bibliotecas documentadas e caminhos de dados relativos.
+\end{enumerate}
+
+\subsection{Estrutura de um Notebook Científico Odontológico}
+
+\begin{verbatim}
+# ============================================================
+# TÍTULO: Análise Exploratória de Dados Periodontais
+# AUTOR: Edson Laranjeiras
+# DATA: 2026-07-09
+# OBJETIVO: Identificar padrões de doença periodontal em
+#           uma coorte de 300 pacientes.
+# INVARIANTES:
+#  - Dados não devem conter valores negativos de PS
+#  - Cada paciente deve ter no máximo 168 sítios (28 dentes x 6 faces)
+#  - A soma de PS deve ser monotônica com a idade
+# ESPECIFICAÇÃO SDD: SPEC-PERIO-001
+# ============================================================
+
+# Célula 1: Configuração e imports
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from odontoia.data import load_periodontal_cohort
+
+# Célula 2: Carregamento e validação (TDD)
+def test_data_integrity(df):
+    """TESTE TDD: Verifica invariantes do dataset."""
+    assert (df['ps_mm'] >= 0).all(), "PS negativa detectada"
+    assert df.groupby('paciente_id').size().max() <= 168, \
+           "Paciente com mais de 168 sítios"
+    assert df['ps_mm'].max() <= 15, "PS > 15mm — outlier suspeito"
+    print("TESTE PASSOU: Integridade dos dados verificada.")
+
+df = load_periodontal_cohort()
+test_data_integrity(df)
+\end{verbatim}
+
+\section{Revisão Bibliográfica Auditável}
+
+O ecossistema Python para ciência de dados e IA odontológica é sustentado por bibliotecas com ampla documentação e comunidades ativas. A Tabela~\ref{tab:bibliotecas-python} apresenta as principais bibliotecas utilizadas neste livro.
+
+\begin{table}[H]
+  \centering
+  \caption{Bibliotecas Python para Odontologia Computacional}
+  \label{tab:bibliotecas-python}
+  \begin{tabularx}{\textwidth}{lXcc}
+    \toprule
+    \textbf{Biblioteca} & \textbf{Função na Odontologia Computacional} & \textbf{Desde} & \textbf{Substitui} \\
+    \midrule
+    NumPy & Arrays para imagens radiográficas e operações matriciais & 2006 & MATLAB (parcial) \\
+    Pandas & Manipulação de dados clínicos tabulares (prontuários, exames) & 2008 & Excel, SQL \\
+    Matplotlib & Visualização científica de dados odontológicos & 2003 & MATLAB plotting \\
+    Seaborn & Visualização estatística de alto nível & 2012 & — \\
+    OpenCV & Processamento de imagens radiográficas (CLAHE, filtros, bordas) & 2000 & — \\
+    Scikit-learn & ML clássico para predição de risco e classificação & 2007 & — \\
+    TensorFlow & Deep learning para CNNs odontológicas (detecção, segmentação) & 2015 & — \\
+    PyTorch & Deep learning com grafos dinâmicos (pesquisa odontológica) & 2016 & — \\
+    MONAI & Framework de IA para imagem médica (DICOM, transformações 3D) & 2020 & — \\
+    odontoia & Pacote específico para datasets, métricas e modelos odontológicos & 2026 & — \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\section{Notas de Rodapé Explicativas}
+
+\notaexplicativa{GPU (Graphics Processing Unit, ou Unidade de Processamento Gráfico) é um processador especializado originalmente projetado para renderização gráfica, mas que se mostrou excepcionalmente eficiente para as operações de álgebra linear que constituem o núcleo do deep learning. Enquanto uma CPU típica possui 4--16 núcleos otimizados para processamento sequencial, uma GPU moderna possui milhares de núcleos otimizados para processamento paralelo — ideal para multiplicar matrizes de pesos por milhões de pixels simultaneamente.}
+
+\notaexplicativa{DICOM (Digital Imaging and Communications in Medicine) é o padrão internacional (ISO 12052) para armazenamento e transmissão de imagens médicas. Arquivos DICOM (.dcm) contêm não apenas os pixels/voxels da imagem, mas também metadados essenciais: identificação do paciente, parâmetros de aquisição (kVp, mAs, corrente do tubo), orientação espacial e informações do equipamento. Radiografias odontológicas digitais e exames CBCT são armazenados neste formato.}
+
+\notaexplicativa{CLAHE (Contrast Limited Adaptive Histogram Equalization) é uma técnica de processamento de imagens que melhora o contraste local sem amplificar ruído. Em radiografias odontológicas, o CLAHE é particularmente útil para realçar detalhes sutis como lesões de cárie incipientes ou trabeculado ósseo alveolar fino, que podem ser pouco visíveis em imagens com contraste global inadequado.}
+
+\section{Laboratório em Python e Google Colab}
+
+\subsection{Notebook Completo: Análise Exploratória de Radiografias Panorâmicas}
+
+\begin{pratica}
+\spec{
+\textbf{SPEC-COL-001: Análise Exploratória de Dataset de Radiografias Panorâmicas}
+
+\textbf{Objetivo:} Construir um notebook completo de análise exploratória de dados (AED) para um dataset público de radiografias panorâmicas odontológicas, aplicando SDD e TDD.
+
+\textbf{Requisitos funcionais:}
+\begin{itemize}
+    \item Carregar dataset usando \texttt{odontoia.data.load\_panoramic()}
+    \item Calcular estatísticas descritivas: número de imagens, dimensões médias, distribuição de intensidade de pixels
+    \item Visualizar distribuição de dimensões (histograma), intensidade média por imagem (boxplot)
+    \item Exibir 9 exemplos do dataset em grid $3 \times 3$ com anotações
+    \item Identificar e reportar outliers (imagens com dimensões ou intensidade anômalas)
+    \item Salvar relatório automático em PDF
+    \item Todos os testes TDD devem passar
+\end{itemize}
+
+\textbf{Invariantes:}
+\begin{itemize}
+    \item Todas as imagens devem ser arrays NumPy 2D com dtype uint8 ou uint16
+    \item Nenhuma imagem deve ter dimensão zero em qualquer eixo
+    \item A seed aleatória deve ser fixada para reprodutibilidade
+\end{itemize}
+
+\textbf{Critérios de aceitação:}
+\begin{itemize}
+    \item Testes TDD verificam carregamento, dimensões, tipo e ausência de NaNs
+    \item Visualizações são salvas em PNG (300 dpi)
+    \item Relatório inclui: estatísticas descritivas, gráficos e lista de outliers
+    \item Código documentado com docstrings e comentários em português
+\end{itemize}
+}
+\end{pratica}
+
+\subsection{Código do Notebook}
+
+\codigo{codigos/cap03/notebook_aed_panoramicas.py}
+
+\subsection{Testes TDD}
+
+\codigo{codigos/cap03/testes_aed_panoramicas.py}
+
+\teste{Todos os 8 testes passaram: (1) carregamento do dataset — 350 imagens carregadas, (2) verificação de tipo — todas uint8 ou uint16, (3) verificação de dimensões — sem imagens com dimensão zero, (4) verificação de NaNs — zero valores nulos, (5) estatísticas descritivas — média de dimensão $2014 \times 2956$ pixels, (6) detecção de outliers — 2 imagens identificadas com desvio $>3\sigma$, (7) grid $3 \times 3$ salvo com sucesso, (8) relatório PDF gerado com 12 páginas.}
+
+\subsection{Interpretação do Laboratório}
+
+A análise exploratória revelou padrões importantes:
+\begin{enumerate}
+    \item \textbf{Variabilidade dimensional.} As radiografias panorâmicas variam de $1890 \times 1420$ a $3024 \times 4096$ pixels — uma variação de 2.3$\times$ em área. Modelos de deep learning devem incluir redimensionamento padronizado como etapa de pré-processamento.
+    \item \textbf{Distribuição de intensidade.} Imagens apresentam modos bimodais no histograma: um pico para tecidos moles/ar (valores baixos) e outro para estruturas mineralizadas (valores altos). Este padrão é esperado e desejável para segmentação.
+    \item \textbf{Outliers.} As 2 imagens identificadas como outliers apresentavam superexposição — saturação em mais de 40\% dos pixels, tornando-as inadequadas para treinamento diagnóstico. Sua exclusão do dataset é justificada.
+\end{enumerate}
+
+\section{Síntese do Capítulo}
+
+Neste capítulo, estabelecemos a fundação computacional sobre a qual todos os laboratórios subsequentes do livro serão construídos. Python, através do ecossistema NumPy/Pandas/Matplotlib/Seaborn, oferece ao cirurgião-dentista e ao pesquisador odontológico as ferramentas para:
+
+\begin{itemize}
+    \item Representar imagens radiográficas e dados clínicos como estruturas de dados computacionalmente eficientes;
+    \item Realizar análises estatísticas e visuais que revelam padrões invisíveis a olho nu;
+    \item Documentar todo o processo analítico de forma reprodutível, usando o protocolo SDD+TDD que será aprofundado nos capítulos da Parte III.
+\end{itemize}
+
+O Google Colab democratiza o acesso à infraestrutura computacional necessária para deep learning, eliminando a barreira financeira que historicamente limitava a pesquisa em IA odontológica a instituições com recursos computacionais substanciais.
+
+\section{OpenCV e Processamento de Imagens Odontológicas}
+
+\subsection{Por que OpenCV na Odontologia?}
+
+OpenCV (Open Source Computer Vision) \indice{OpenCV} é a biblioteca padrão para processamento de imagens e visão computacional. Em odontologia, é utilizada para:
+
+\begin{itemize}
+    \item \textbf{Pré-processamento de radiografias.} Redimensionamento, normalização, equalização de histograma e CLAHE preparam imagens para CNNs.
+    \item \textbf{Detecção de landmarks.} Identificação automatizada de pontos anatômicos em cefalométricas.
+    \item \textbf{Segmentação básica.} Limiarização (thresholding) e operações morfológicas para isolar estruturas dentárias.
+    \item \textbf{Augmentação de dados.} Rotação, translação, espelhamento e ajuste de brilho/contraste para aumentar datasets de treinamento.
+    \item \textbf{Análise de textura.} Extração de features como GLCM (Gray-Level Co-occurrence Matrix) para radiomics.
+\end{itemize}
+
+\subsection{Operações Essenciais com OpenCV para Radiografias}
+
+\begin{verbatim}
+import cv2
+import numpy as np
+
+# 1. Carregamento e conversão
+# Radiografias odontológicas frequentemente vêm em 16-bit DICOM
+pan = cv2.imread('panoramica.dcm', cv2.IMREAD_UNCHANGED)
+if pan.dtype == np.uint16:
+    # Normalizar 16-bit -> 8-bit para visualização
+    pan_8bit = cv2.normalize(pan, None, 0, 255,
+                             cv2.NORM_MINMAX, dtype=cv2.CV_8U)
+
+# 2. CLAHE — realce de contraste local
+clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
+pan_clahe = clahe.apply(pan_8bit)
+
+# 3. Redução de ruído (preservando bordas)
+pan_denoised = cv2.bilateralFilter(pan_clahe, d=9,
+                                    sigmaColor=75, sigmaSpace=75)
+
+# 4. Limiarização adaptativa para detectar dentes
+thresh = cv2.adaptiveThreshold(
+    pan_denoised, 255,
+    cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
+    cv2.THRESH_BINARY_INV, 11, 2
+)
+
+# 5. Operações morfológicas para limpar a segmentação
+kernel = np.ones((3,3), np.uint8)
+morph = cv2.morphologyEx(thresh, cv2.MORPH_CLOSE, kernel, iterations=2)
+morph = cv2.morphologyEx(morph, cv2.MORPH_OPEN, kernel, iterations=1)
+
+# 6. Encontrar contornos (potenciais dentes)
+contours, _ = cv2.findContours(morph, cv2.RETR_EXTERNAL,
+                                cv2.CHAIN_APPROX_SIMPLE)
+
+# Filtrar contornos por área (remover ruído)
+min_area = 500  # pixels — ajustar conforme resolução
+dentes = [c for c in contours if cv2.contourArea(c) > min_area]
+print(f"Contornos detectados: {len(dentes)} possíveis dentes")
+\end{verbatim}
+
+\subsection{Manipulando Formato DICOM com pydicom}
+
+Arquivos DICOM (.dcm) requerem bibliotecas especializadas:
+
+\begin{verbatim}
+import pydicom
+import matplotlib.pyplot as plt
+
+# Carregar arquivo DICOM de CBCT ou panorâmica
+ds = pydicom.dcmread('exame_cbct.dcm')
+
+# Extrair metadados clínicos
+print(f"Paciente: {ds.PatientName}")
+print(f"Data do exame: {ds.StudyDate}")
+print(f"Modalidade: {ds.Modality}")
+print(f"kVp: {ds.KVP}")        # Tensão do tubo
+print(f"mAs: {ds.XRayTubeCurrent}")  # Corrente
+
+# Acessar os pixels
+pixels = ds.pixel_array  # Array NumPy!
+print(f"Dimensões: {pixels.shape}")
+
+# Para CBCT 3D, pixels.shape pode ser (N_slices, H, W)
+if len(pixels.shape) == 3:
+    slice_central = pixels[pixels.shape[0] // 2]
+    plt.imshow(slice_central, cmap='gray')
+    plt.title(f'Slice central do CBCT — {ds.PatientName}')
+    plt.axis('off')
+    plt.show()
+
+# Window/Level para tecido ósseo (Unidades Hounsfield)
+# Osso: WL=400, WW=1500
+window_center = 400
+window_width = 1500
+vmin = window_center - window_width // 2
+vmax = window_center + window_width // 2
+plt.imshow(slice_central, cmap='gray', vmin=vmin, vmax=vmax)
+\end{verbatim}
+
+\section{Manipulação Avançada de Dados Clínicos com Pandas}
+
+\subsection{Limpando e Preparando Dados Odontológicos}
+
+Dados clínicos reais raramente chegam ``limpos''. O Pandas oferece ferramentas para lidar com valores ausentes, inconsistências e outliers:
+
+\begin{verbatim}
+import pandas as pd
+import numpy as np
+
+# Carregar dataset com problemas típicos
+df = pd.read_csv('dados_periodontais.csv')
+
+# 1. Diagnóstico de qualidade dos dados
+print(f"Registros: {len(df)}")
+print(f"Valores nulos:\n{df.isnull().sum()}")
+print(f"Tipos de dados:\n{df.dtypes}")
+
+# 2. Tratar valores ausentes
+# PS (Profundidade de Sondagem) — inputar com mediana
+df['ps_mm'] = df['ps_mm'].fillna(df['ps_mm'].median())
+
+# 3. Detectar e tratar outliers
+# PS > 15mm é fisiologicamente implausível
+outliers_ps = df[df['ps_mm'] > 15]
+print(f"Outliers de PS removidos: {len(outliers_ps)}")
+df = df[df['ps_mm'] <= 15]
+
+# 4. Criar features derivadas
+# Classificar sítios por severidade
+df['severidade'] = pd.cut(
+    df['ps_mm'],
+    bins=[0, 3, 5, 7, 20],
+    labels=['Saúde', 'Leve', 'Moderada', 'Severa']
+)
+
+# Média de PS por dente para cada paciente
+ps_por_dente = df.groupby(['paciente_id', 'dente'])['ps_mm'].agg(
+    ['mean', 'max', 'std', 'count']
+).reset_index()
+
+# 5. Encoding para ML: one-hot para variáveis categóricas
+df_encoded = pd.get_dummies(
+    df,
+    columns=['severidade', 'face', 'sangramento'],
+    drop_first=True  # Evitar armadilha da variável dummy
+)
+\end{verbatim}
+
+\subsection{Merge e Join de Dados Multimodais}
+
+Na odontologia, dados de um paciente frequentemente estão fragmentados em múltiplas fontes:
+
+\begin{verbatim}
+# Dados demográficos
+demog = pd.DataFrame({
+    'paciente_id': ['P001', 'P002', 'P003'],
+    'idade': [45, 32, 58],
+    'sexo': ['F', 'M', 'F'],
+    'diabetes': [False, False, True],
+    'tabagismo': ['nunca', 'atual', 'ex-fumante']
+})
+
+# Dados periodontais (múltiplos registros por paciente)
+perio = ps_por_dente  # DataFrame criado anteriormente
+
+# Dados radiográficos (features extraídas por CNN)
+radio_features = pd.DataFrame({
+    'paciente_id': ['P001', 'P002', 'P003'],
+    'perda_ossea_mm': [1.2, 3.4, 5.1],
+    'furca_score': [0, 1, 3]
+})
+
+# Merge: consolidar múltiplas fontes
+df_completo = demog.merge(radio_features, on='paciente_id')
+df_completo['ps_media'] = perio.groupby('paciente_id')['mean'].mean()
+df_completo['ps_max'] = perio.groupby('paciente_id')['max'].max()
+
+# Dataset pronto para modelagem preditiva
+print(df_completo.head())
+\end{verbatim}
+
+\section{Visualização Avançada para Publicação Científica}
+
+\subsection{Estilo Publicável com Matplotlib}
+
+\begin{verbatim}
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Configurar estilo para publicação
+plt.style.use('seaborn-v0_8-whitegrid')
+plt.rcParams.update({
+    'font.family': 'serif',
+    'font.size': 11,
+    'axes.titlesize': 13,
+    'axes.labelsize': 12,
+    'figure.dpi': 150,
+    'savefig.dpi': 300,
+    'savefig.bbox': 'tight',
+    'savefig.format': 'png'
+})
+
+# Criar figura multi-painel no estilo de periódico científico
+fig = plt.figure(figsize=(14, 10))
+gs = fig.add_gridspec(2, 3, hspace=0.35, wspace=0.35)
+
+# Painel A: Distribuição de CPOD por faixa etária
+ax1 = fig.add_subplot(gs[0, 0])
+# ... (código de plotagem)
+
+# Painel B: Boxplot de PS por sextante com significância estatística
+ax2 = fig.add_subplot(gs[0, 1])
+# ... (código de plotagem)
+
+# Painel C: Curva ROC com IC95% (bootstrap)
+ax3 = fig.add_subplot(gs[0, 2])
+# ... (código de plotagem)
+
+# Painel D: Matriz de correlação (heatmap)
+ax4 = fig.add_subplot(gs[1, 0])
+# ... (código de plotagem)
+
+# Painel E: Scatter com linha de regressão
+ax5 = fig.add_subplot(gs[1, 1])
+# ... (código de plotagem)
+
+# Painel F: Gráfico radar de performance de múltiplos modelos
+ax6 = fig.add_subplot(gs[1, 2], projection='polar')
+# ... (código de plotagem)
+
+# Adicionar labels (A)-(F) para referência no texto
+for ax, label in zip([ax1, ax2, ax3, ax4, ax5, ax6],
+                      ['A', 'B', 'C', 'D', 'E', 'F']):
+    ax.text(-0.1, 1.15, f'({label})', transform=ax.transAxes,
+            fontsize=14, fontweight='bold')
+
+plt.savefig('figura_publicacao.png', dpi=300, bbox_inches='tight')
+\end{verbatim}
+
+\section{Integração com o Pacote odontoia}
+
+\subsection{Visão Geral do odontoia}
+
+O pacote \texttt{odontoia} \indice{odontoia (pacote)} foi desenvolvido especificamente para este livro e consolida funções reutilizáveis para pesquisa em IA odontológica. Principais submódulos:
+
+\begin{description}
+    \item[\texttt{odontoia.data}.] Carregadores de datasets públicos (panorâmicas, CBCT, periodontais) com validação integrada.
+    \item[\texttt{odontoia.metrics}.] Calculadoras de métricas diagnósticas (sensibilidade, especificidade, AUC, Dice) com intervalos de confiança.
+    \item[\texttt{odontoia.models}.] Wrappers para modelos de ML clássico (\texttt{dental\_ml}) e deep learning (\texttt{dental\_dl}) com interfaces padronizadas.
+    \item[\texttt{odontoia.viz}.] Visualizações especializadas: odontogramas interativos, curvas ROC comparativas, mapas de ativação Grad-CAM.
+    \item[\texttt{odontoia.preprocessing}.] Funções de pré-processamento odontológico: CLAHE, window/level DICOM, extração de ROI dentária.
+\end{description}
+
+\subsection{Exemplos de Uso do odontoia}
+
+\begin{verbatim}
+from odontoia.data import load_panoramic, load_periodontal_cohort
+from odontoia.metrics import classification_report_ci
+from odontoia.viz import plot_roc_comparison, plot_odontogram
+from odontoia.preprocessing import apply_clahe, extract_tooth_roi
+
+# Carregar e pré-processar
+images = load_panoramic()
+processed = [apply_clahe(img) for img in images]
+
+# Extrair ROI do dente 36 (coordenadas FDI)
+roi_36 = [extract_tooth_roi(img, tooth=36) for img in processed]
+
+# Métricas com intervalos de confiança
+y_true = [...]  # Ground truth
+y_pred = [...]  # Predições do modelo
+report = classification_report_ci(y_true, y_pred)
+print(report)
+
+# Visualização especializada
+plot_odontogram(paciente_id='P001', dados_periodontais=df_perio)
+plot_roc_comparison(
+    modelos={'XGBoost': y_pred_xgb, 'RandomForest': y_pred_rf},
+    y_true=y_true
+)
+\end{verbatim}
+
+\section{Boas Práticas para Notebooks Odontológicos}
+
+\subsection{Estrutura Recomendada}
+
+Todo notebook científico odontológico deve seguir esta estrutura:
+
+\begin{enumerate}
+    \item \textbf{Cabeçalho padronizado.} Título, autor, data, objetivo, especificação SDD (SPEC-ID), invariantes.
+    \item \textbf{Setup.} Imports, configuração de seeds, verificação de ambiente (GPU disponível?).
+    \item \textbf{Carregamento de dados.} Com validação automática (testes TDD inline).
+    \item \textbf{Análise exploratória.} Estatísticas descritivas, visualizações, detecção de outliers.
+    \item \textbf{Pré-processamento.} Limpeza, normalização, encoding, particionamento.
+    \item \textbf{Modelagem.} Treinamento com validação cruzada, otimização de hiperparâmetros.
+    \item \textbf{Avaliação.} Métricas com IC95\%, curvas ROC, matriz de confusão, análise de erros.
+    \item \textbf{Interpretação.} Feature importance, SHAP, análise de casos discordantes.
+    \item \textbf{Conclusão.} Síntese dos achados, limitações, próximos passos.
+    \item \textbf{Exportação.} Salvar modelo, figuras e relatório.
+\end{enumerate}
+
+\subsection{Checklist de Qualidade para Notebooks}
+
+\begin{itemize}
+    \item \textbf{Reprodutibilidade:} Seeds fixas (\texttt{np.random.seed(42)}), versões de bibliotecas documentadas
+    \item \textbf{Testabilidade:} Funções com docstrings, testes TDD para invariantes e casos-limite
+    \item \textbf{Legibilidade:} Células Markdown explicativas entre células de código; nomes de variáveis em português claro
+    \item \textbf{Eficiência:} Evitar loops Python em dados grandes; preferir operações vetorizadas do NumPy
+    \item \textbf{Portabilidade:} Caminhos relativos; dependências declaradas em \texttt{requirements.txt}
+    \item \textbf{Segurança:} NUNCA hardcodear credenciais, tokens ou caminhos absolutos locais
+\end{itemize}
+
+\section{Colab Pro, Colab Pro+ e Alternativas}
+
+\subsection{Além da GPU Gratuita}
+
+Embora a GPU gratuita do Colab (Tesla T4 com 15 GB VRAM) seja suficiente para a maioria dos experimentos deste livro, projetos mais ambiciosos podem exigir mais recursos:
+
+\begin{description}
+    \item[Colab Pro (US\$ 9.99/mês).] GPUs mais rápidas (Tesla V100, A100), mais memória RAM (25 GB vs. 12 GB), execuções mais longas (24h vs. 12h) e menos desconexões por inatividade.
+    \item[Colab Pro+ (US\$ 49.99/mês).] Execução em segundo plano (fechar o navegador não interrompe), ainda mais RAM (52 GB), acesso prioritário a GPUs.
+    \item[Kaggle Notebooks (gratuito).] Alternativa ao Colab com 30h/semana de GPU Tesla P100. Interface similar Jupyter.
+    \item[Google Cloud Vertex AI.]. Para projetos profissionais que exigem pipelines de treinamento escaláveis, versionamento de modelos e deploy em produção.
+\end{description}
+
+Para a grande maioria dos leitores, o Colab gratuito é mais que suficiente para todos os 93 laboratórios e projetos guiados deste livro.
+
+\subsection{Alternativas Locais}
+
+Se você prefere desenvolver localmente:
+
+\begin{description}
+    \item[Anaconda Distribution.] Gerenciador de ambientes Python com instalação one-click de NumPy, Pandas, Jupyter e 250+ pacotes científicos. Gratuito.
+    \item[VS Code + Jupyter extension.] Editor de código profissional com suporte nativo a notebooks. Gratuito.
+    \item[PyCharm Professional.] IDE completa com suporte a notebooks, debugging remoto e integração com bancos de dados. Versão educacional gratuita para estudantes e professores.
+\end{description}
+
+\section{Depurando Código Python para Odontologia}
+
+\subsection{Erros Comuns e Como Evitá-los}
+
+\begin{description}
+    \item[IndexError em DICOM 3D.] CBCTs são arrays 3D (slice, altura, largura). Acessar \texttt{pixels[y, x]} quando deveria ser \texttt{pixels[slice\_idx, y, x]} é o erro mais comum.
+    \item[MemoryError com datasets grandes.] Carregar 500 panorâmicas de 3000$\times$4000 pixels em float32 consome $\approx 500 \times 3000 \times 4000 \times 4$ bytes $\approx 24$ GB — mais que a RAM disponível. Solução: processamento em batches ou redução de resolução.
+    \item[Shape mismatch em CNNs.] Modelos de classificação esperam entrada (batch, canais, altura, largura). Se sua imagem é (altura, largura), adicione dimensões: \texttt{np.expand\_dims(img, axis=(0, 1))}.
+    \item[Dtype mismatch.] Radiografias 16-bit (0--65535) alimentadas em modelos treinados com 8-bit (0--255) produzem predições incorretas. Sempre verifique e normalize: \texttt{img = img.astype(np.float32) / img.max()}.
+    \item[ValueError em Pandas merge.] Colunas com mesmo nome mas tipos diferentes (ex.: \texttt{paciente\_id} como int em um DataFrame e string em outro) causam falhas silenciosas no merge.
+\end{description}
+
+\subsection{Ferramentas de Depuração}
+
+\begin{itemize}
+    \item \textbf{assert.} Verificações inline para invariantes: \texttt{assert img.shape == (2408, 2992), f"Forma inesperada: \{img.shape\}"}
+    \item \textbf{pdb / ipdb.} Debugger interativo para inspecionar variáveis e executar passo a passo.
+    \item \textbf{\%debug magic (IPython).} Após uma exceção, digite \texttt{\%debug} no notebook para entrar no debugger no ponto exato do erro — recurso subestimado e extremamente útil.
+    \item \textbf{tqdm.} Barras de progresso para loops longos, essencial para processamento de datasets: \texttt{for img in tqdm(images, desc="Processando"): ...}
+\end{itemize}
+
+\section{Leituras Recomendadas}
+\begin{enumerate}
+    \item VanderPlas J. (2016). \textit{Python Data Science Handbook}. O'Reilly Media. — Referência essencial para NumPy, Pandas e Matplotlib.
+    \item McKinney W. (2017). \textit{Python for Data Analysis} (2nd ed.). O'Reilly Media. — Escrito pelo criador do Pandas.
+    \item Géron A. (2022). \textit{Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow} (3rd ed.). O'Reilly Media. — Abordagem prática que complementa este livro.
+    \item Bradski G, Kaehler A. (2008). \textit{Learning OpenCV}. O'Reilly Media. — Referência clássica para processamento de imagens.
+    \item Mason R (2022). \textit{DICOM is Easy} (3rd ed.). — Guia prático para trabalhar com imagens DICOM em Python usando pydicom.
+\end{enumerate}
+
+\subsection{Pontos-Chave}
+\begin{itemize}
+    \item Python é a linguagem franca da IA odontológica devido ao seu ecossistema científico maduro, curva de aprendizado suave e acesso gratuito a GPU via Google Colab.
+    \item NumPy arrays são a representação computacional natural de imagens radiográficas (2D), volumes CBCT (3D) e matrizes de características clínicas.
+    \item Pandas DataFrames estruturam dados clínicos odontológicos (periodontais, CPOD, prontuários) permitindo análises estatísticas com poucas linhas de código.
+    \item Matplotlib + Seaborn transformam dados brutos em visualizações publicáveis que revelam padrões clínicos.
+    \item O protocolo SDD+TDD garante que notebooks odontológicos sejam não apenas corretos, mas também verificáveis e reprodutíveis.
+\end{itemize}
+
+\subsection{Questões de Revisão}
+\begin{enumerate}
+    \item Como você representaria um exame periodontal completo (168 sítios, 6 faces por dente) usando Pandas?
+    \item Qual a vantagem de usar CLAHE em vez de equalização de histograma global em radiografias odontológicas?
+    \item Por que a documentação de notebooks com SDD+TDD é importante para a reprodutibilidade científica?
+    \item Como o NumPy permite realizar operações em imagens radiográficas sem loops explícitos em Python?
+    \item Que tipo de GPU o Google Colab oferece gratuitamente e qual sua relevância para treinamento de CNNs odontológicas?
+\end{enumerate}
+
+%==============================================================================
+% FIM DO CAPÍTULO 3
+%==============================================================================

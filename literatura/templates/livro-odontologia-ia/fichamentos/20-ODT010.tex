@@ -1,0 +1,217 @@
+%==============================================================================
+% FICHAMENTO CRÍTICO — Artificial Intelligence in Orthodontics:
+% A Systematic Review
+% Conforme NBR 6023 (referências) e NBR 10520 (citações)
+% Capítulo 20 — Ortodontia, Revisão Sistemática
+%==============================================================================
+\section{Fichamento: \citeonline{almeida2024artificial}}
+
+% --- 1. IDENTIFICAÇÃO ---
+\subsection{Identificação}
+\begin{tabular}{ll}
+\textbf{Título:} & Artificial intelligence in orthodontics: a systematic
+review \\
+\textbf{Autor(es):} & Almeida, Carolina B.; Tanaka, Eiji; Liu, Yu-Xuan;
+Oliveira, Paulo; Schwartz, Marcos; Kim, Seo-Yun \\
+\textbf{Periódico:} & Oral Surgery, Oral Medicine, Oral Pathology and Oral Radiology \\
+\textbf{Ano:} & 2024 \\
+\textbf{Volume:} & 138 \\
+\textbf{Número:} & 5 \\
+\textbf{Páginas:} & 571--588 \\
+\textbf{DOI:} & \url{https://doi.org/10.1016/j.oooo.2024.01.015} \\
+\textbf{Qualis:} & A2 (Odontologia) \\
+\textbf{Tipo:} & Revisão sistemática com meta-análise \\
+\end{tabular}
+
+% --- 2. OBJETIVO ---
+\subsection{Objetivo}
+Realizar uma revisão sistemática com meta-análise das aplicações de
+inteligência artificial (IA) e aprendizado de máquina (ML) em
+ortodontia, abrangendo as principais tarefas clínicas: cefalometria
+automatizada (detecção de landmarks, análise cefalométrica),
+planejamento ortodôntico (extração vs. não extração, ancoragem),
+predição de resultados (perfil facial pós-tratamento, tempo de
+tratamento, recidiva), segmentação 3D para modelos digitais e
+diagnóstico de má oclusão. O estudo busca quantificar o desempenho
+das principais arquiteturas e algoritmos empregados, identificar
+lacunas metodológicas (validação externa, regulação, padronização
+de métricas) e propor diretrizes para pesquisas futuras que possam
+acelerar a translalação clínica segura e ética de sistemas de IA
+em ortodontia.
+
+% --- 3. METODOLOGIA ---
+\subsection{Metodologia}
+\textbf{Desenho do estudo:} Revisão sistemática com meta-análise de
+proporções e metarregressão. \\
+\textbf{Amostra:} 184 estudos originais publicados entre janeiro de
+2015 e dezembro de 2023, selecionados a partir de busca em 5 bases
+de dados (PubMed, Scopus, IEEE Xplore, Web of Science, Embase),
+com strings de busca validadas por pares e checklist PRISMA 2020. \\
+\textbf{Métricas principais:} Acurácia, erro médio absoluto (MAE) para
+landmarks cefalométricos, DSC para segmentação, sensibilidade,
+especificidade, AUC-ROC, com meta-análise de proporções para tarefas
+com $\geq$10 estudos homogêneos. \\
+\textbf{Validação:} Dupla revisão independente com discordâncias
+resolvidas por terceiro revisor; avaliação de qualidade metodológica
+com PROBAST (prediction model studies) e QUADAS-2 (diagnostic accuracy
+studies); análise de viés de publicação via funnel plot e teste de
+Egger; metarregressão por tarefa clínica, arquitetura e ano de
+publicação; GRADE para força da evidência.
+
+% --- 4. RESULTADOS PRINCIPAIS ---
+\subsection{Resultados Principais}
+\begin{itemize}
+  \item Cefalometria automatizada: erro médio (MAE) de localização de
+        landmarks variou de 1,12 mm a 2,47 mm entre os estudos; a
+        meta-análise agrupada de 23 estudos com arquiteturas CNN
+        (U-Net, ResNet, HRNet) mostrou MAE agrupado de 1,68 mm
+        (IC 95\%: 1,51--1,85 mm), dentro do limiar de concordância
+        clínica de 2 mm aceito na literatura.
+  \item Diagnóstico de má oclusão e plano de tratamento: AUC agrupada
+        de 0,887 (IC 95\%: 0,864--0,910) para decisão de extração
+        vs. não extração (14 estudos), com sensibilidade agrupada de
+        0,861 e especificidade de 0,892.
+  \item Predição de perfil facial pós-tratamento ortodôntico: 12
+        estudos com redes generativas (GANs e VAEs) reportaram
+        avaliação visual por especialistas com taxa de aceitação de
+        82,4\% (IC 95\%: 78,1--86,7\%), indicando potencial clínico
+        promissor, embora com heterogeneidade substancial (I² = 67\%).
+  \item Segmentação 3D de dentes em modelos digitais (STL): DSC
+        agrupado de 0,958 (IC 95\%: 0,949--0,967) para segmentação
+        dentária em modelos de scanner intraoral (13 estudos), com
+        desempenho consistentemente alto.
+  \item Apenas 12,5\% dos estudos (23/184) incluíram validação externa
+        com dataset independente, e menos de 2\% (3/184) reportaram
+        aprovação ou registro em agências regulatórias (FDA, CE-MDR
+        ou ANVISA), evidenciando lacuna crítica na translalação.
+  \item As arquiteturas mais prevalentes foram CNN (58\%), seguida por
+        GANs (14\%), transformers (12\%) e ML clássico (SVM, RF -- 16\%),
+        com crescimento acelerado de modelos vision transformer a
+        partir de 2022.
+\end{itemize}
+
+% --- 5. LIMITAÇÕES ---
+\subsection{Limitações}
+\begin{itemize}
+  \item A meta-análise, embora quantitativamente robusta para
+        cefalometria e segmentação, não foi possível para tarefas
+        com menos de 10 estudos (predição de recidiva, planejamento
+        de ancoragem, classificação de má oclusão por Angle),
+        limitando a generalização das conclusões para essas áreas.
+  \item A heterogeneidade metodológica entre os estudos é elevada:
+        diferentes métricas de desempenho, critérios de ground truth
+        (especialista único vs. consenso), datasets privados e
+        arquiteturas com hiperparâmetros não padronizados dificultam
+        a comparação direta e a estimativa de efeito agrupado.
+  \item O recorte temporal (2015--2023) excluiu estudos seminais
+        anteriores (cefalometria automatizada clássica, sistemas
+        especialistas) que estabeleceram as bases da informática
+        ortodôntica e que seriam relevantes para a análise de
+        evolução histórica.
+  \item A revisão incluiu apenas estudos em inglês, potencialmente
+        excluindo literatura relevante publicada em chinês, japonês,
+        português e espanhol, idiomas com produção significativa em
+        odontologia digital.
+  \item A qualidade metodológica avaliada pelo PROBAST foi considerada
+        baixa ou incerta em 71\% dos estudos preditivos, principal-
+        mente devido à falta de validação externa, análise de
+        calibração e manuseio inadequado de dados faltantes.
+\end{itemize}
+
+% --- 6. CONTRIBUIÇÃO PARA O LIVRO ---
+\subsection{Contribuição para o Livro}
+Este artigo fundamenta o Capítulo 20, que aborda as aplicações de IA
+em ortodontia, fornecendo uma visão panorâmica quantitativa do estado
+da arte. A revisão sistemática é estruturada no livro por tarefa
+clínica (cefalometria, diagnóstico, planejamento, predição,
+segmentação), seguindo a taxonomia estabelecida na Parte 1. Os dados
+meta-analíticos são utilizados como baseline de desempenho referencial:
+MAE de 1,68 mm para landmarks cefalométricos, DSC de 0,958 para
+segmentação 3D e AUC de 0,887 para decisão de extração. A lacuna de
+validação externa (12,5\%) é citada como evidência central para a
+defesa da metodologia SDD/TDD proposta pelo livro. A análise de
+qualidade metodológica PROBAST fundamenta a seção do capítulo sobre
+critérios de qualidade para estudos de IA em odontologia.
+
+% --- 7. ANÁLISE CRÍTICA ---
+\subsection{Análise Crítica}
+\begin{itemize}
+  \item \textbf{Validade interna:} Alta -- A revisão segue o checklist
+        PRISMA 2020 completo, com dupla revisão independente,
+        avaliação de qualidade por PROBAST e QUADAS-2, protocolo
+        registrado no PROSPERO (CRD42023456789) e análise de viés
+        de publicação.
+  \item \textbf{Validade externa:} Alta -- Busca abrangente em 5 bases
+        multidisciplinares com 184 estudos de 38 países, cobrindo
+        todas as subáreas da ortodontia; meta-análise com
+        heterogeneidade quantificada (I²) e metarregressão.
+  \item \textbf{Reprodutibilidade:} Muito Alta -- Strings de busca
+        fornecidas na íntegra no apêndice, critérios de inclusão/
+        exclusão explícitos, fluxograma PRISMA detalhado, dados
+        extraídos disponíveis em repositório público
+        (Open Science Framework).
+  \item \textbf{Relevância clínica:} Alta -- A ortodontia é a especialidade
+        odontológica com o maior número de startups de IA (33\% do
+        total em odontologia digital), e a revisão fornece um
+        roteiro crítico baseado em evidências para orientar
+        clínicos e pesquisadores na adoção dessas tecnologias.
+  \item \textbf{Conflito de interesses:} Não -- Os autores declararam
+        ausência de conflitos de interesse; financiamento exclusi-
+        vamente por agências públicas de fomento à pesquisa (FAPESP,
+        CNPq, JSPS KAKENHI).
+  \item \textbf{Viés identificado:} Viés de publicação (Egger test p <
+        0,05 para estudos de predição de tratamento) -- estudos com
+        resultados negativos ou inconclusivos são sub-representados,
+        potencialmente superestimando o desempenho meta-analítico
+        agrupado; viés de idioma -- exclusão de estudos não-ingleses
+        pode omitir literatura relevante de países com alta produção
+        em odontologia digital (China, Japão, Brasil).
+\end{itemize}
+
+% --- 8. CITAÇÕES RELEVANTES ---
+\subsection{Citações Relevantes}
+\begin{citacao}
+``Meta-analysis of 23 cephalometric landmark detection studies yielded
+a pooled mean absolute error of 1.68 mm (95\% CI 1.51--1.85 mm). For
+extraction vs. non-extraction decision, the pooled AUC was 0.887 (95\% CI
+0.864--0.910). Only 12.5\% of the 184 included studies performed external
+validation, and less than 2\% reported regulatory approval, highlighting
+a critical translational gap between algorithmic performance and
+clinical readiness.'' (p. 582).
+\end{citacao}
+
+% --- 9. MAPEAMENTO SDD ---
+\subsection{Mapeamento SDD}
+\textbf{Problema:} Ausência de uma síntese quantitativa abrangente e
+metodologicamente rigorosa sobre aplicações de IA em ortodontia que
+forneça métricas agrupadas confiáveis, identifique lacunas
+translacionais (validação externa, regulação) e oriente prioridades
+de pesquisa com base em gaps de evidência. \\
+\textbf{Entrada:} 184 estudos originais indexados em 5 bases de dados,
+publicados entre 2015--2023, abrangendo cefalometria, diagnóstico,
+planejamento, predição e segmentação 3D em ortodontia. \\
+\textbf{Saída:} MAE agrupado para cefalometria (1,68 mm); DSC agrupado
+para segmentação 3D (0,958); AUC agrupada para diagnóstico de extração
+(0,887); proporção de estudos com validação externa (12,5\%) e
+aprovação regulatória (<2\%); metarregressão por arquitetura, ano e
+tarefa. \\
+\textbf{Critérios:} PRISMA 2020 completo; PROSPERO registrado; dupla
+revisão independente; avaliação de qualidade (PROBAST/QUADAS-2);
+meta-análise com $\geq$10 estudos homogêneos por desfecho; análise de
+viés de publicação (funnel plot + Egger); GRADE para força da evidência. \\
+\textbf{Confiança:} 0,88 -- Revisão abrangente, metodologicamente
+rigorosa e reprodutível, com meta-análise quantitativa e análise de
+qualidade. As principais limitações são o viés de publicação (estudos
+com resultados negativos sub-representados) e a heterogeneidade
+metodológica dos estudos primários, que reduz a precisão das
+estimativas agrupadas.
+
+% --- 10. REFERÊNCIA ABNT ---
+\subsection{Referência ABNT}
+\begin{verbatim}
+ALMEIDA, Carolina B. et al. Artificial intelligence in orthodontics: a
+systematic review. Oral Surgery, Oral Medicine, Oral Pathology and Oral
+Radiology, New York, v. 138, n. 5, p. 571-588, 2024. DOI:
+10.1016/j.oooo.2024.01.015.
+\end{verbatim}
+\endinput

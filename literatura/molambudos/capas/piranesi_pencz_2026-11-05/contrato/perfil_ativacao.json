@@ -1,0 +1,108 @@
+{
+  "mode": "managed-v1",
+  "agent_id": "romance-psicologico-molambudos",
+  "definition_validated": true,
+  "validation_scope": "definition_policy_and_references",
+  "executed": false,
+  "source_file": "agents/catalog/romance-psicologico-molambudos.md",
+  "source_sha256": "134c0bf18dca09a4604ef270b1276927f734ade24073b4a1e824f98bfa805248",
+  "profile": {
+    "agent_id": "romance-psicologico-molambudos",
+    "name": "Romance Psicológico Molambudos",
+    "description": "Assistente de escrita e revisão de romance de terror psicológico com voz sensorial e sistêmica, indução narrativa, catálogo de 16 estilos e protocolo de tradução PT-BR/EN/ZH com revisão de sensibilidade.",
+    "version": "1.0.0",
+    "type": "specialist",
+    "category": "engineering",
+    "language": "pt-BR",
+    "lifecycle": "managed-v1",
+    "parent": "marceloclaro",
+    "spec_file": "specs/SPEC-935-R1080-literary-assistant.md",
+    "test_file": "tests/test_r1080_style_catalog.py",
+    "source": "reports/r1080/assistant_prompt.md",
+    "allow_edit": true,
+    "tags": [
+      "profile_romance_psicologico_molambudos",
+      "literary_style",
+      "psychological_tension",
+      "sensory_writing",
+      "narrative_induction",
+      "translation_ptbr_en_zh",
+      "content_safety",
+      "tagline_engineering",
+      "manuscript_revision"
+    ],
+    "skills": [
+      {
+        "id": "romance-psicologico-molambudos",
+        "name": "Romance Psicológico Molambudos",
+        "description": "Assistente de escrita e revisão de romance de terror psicológico com voz sensorial e sistêmica, indução narrativa, catálogo de 16 estilos e protocolo de tradução PT-BR/EN/ZH com revisão de sensibilidade.",
+        "tags": [
+          "profile_romance_psicologico_molambudos",
+          "literary_style",
+          "psychological_tension",
+          "sensory_writing",
+          "narrative_induction",
+          "translation_ptbr_en_zh",
+          "content_safety",
+          "tagline_engineering",
+          "manuscript_revision"
+        ],
+        "examples": [
+          "Execute o escopo solicitado e cite os arquivos e limites observados."
+        ]
+      }
+    ],
+    "capabilities": {
+      "extendedAgentCard": true
+    },
+    "permission": {
+      "read": "allow",
+      "glob": "allow",
+      "grep": "allow",
+      "edit": "allow",
+      "webfetch": "deny",
+      "task": "deny",
+      "bash": {
+        "*": "deny",
+        "python3 -m marceloclaro.cli doctor": "allow",
+        "python3 -m pytest tests/test_r1080_style_catalog.py -q": "allow"
+      }
+    },
+    "tools": {
+      "read": true,
+      "glob": true,
+      "grep": true,
+      "bash": true,
+      "edit": true,
+      "write": true
+    },
+    "output_contract": {
+      "required_fields": [
+        "status",
+        "findings",
+        "evidence",
+        "limitations"
+      ],
+      "evidence_required": true,
+      "external_validation": false
+    }
+  },
+  "unique_capability": "profile_romance_psicologico_molambudos",
+  "external_validation": false,
+  "registered": true,
+  "confidence_promoted": false,
+  "task_id": "task-16e5a510",
+  "status": "assigned",
+  "assigned_to": "romance-psicologico-molambudos",
+  "execution_status": "pending_executor",
+  "metacognition": {
+    "observation_id": "8e8d6690-1e46-42e0-aa87-ae0230a3af0e",
+    "persisted": true,
+    "scope_id": "166f506816ab9551024fa639375cd37c97602befc384ce5356fa78134f6e1f64",
+    "previous_observation_id": null,
+    "state_transition": {
+      "from": null,
+      "to": "assigned"
+    }
+  }
+}

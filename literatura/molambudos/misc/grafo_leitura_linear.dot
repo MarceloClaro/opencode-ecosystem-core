@@ -1,0 +1,220 @@
+// ============================================
+// MOLAMBUDOS — Grafo de Leitura Linear (5 Colunas + Legenda)
+// 62 fragmentos em 5 colunas verticais + 6a coluna de legenda
+// ============================================
+
+digraph LeituraLinear {
+    rankdir=TB;
+    bgcolor="white";
+    fontname="Helvetica";
+    label="MOLAMBUDOS — Grafo de Leitura Linear\n62 fragmentos em 5 partes + Legenda";
+    labelloc=t;
+    labeljust=l;
+    fontsize=16;
+    dpi=150;
+    pad=0.2;
+    margin=0;
+    nodesep=0.15;
+    ranksep=0.12;
+    splines=polyline;
+    compound=true;
+    newrank=true;
+    mindist=0.3;
+
+    node [style="filled,rounded", fontname="Helvetica", fontsize=6, penwidth=0.6, shape=box, width=1.1, height=0.15, margin="0.02,0.01"];
+    edge [color="#99999960", penwidth=0.4, arrowsize=0.25];
+
+    // ============================================
+    // NÓS POR COLUNA
+    // ============================================
+
+    // COLUNA 1 — SERTAO (marrom)
+    node [fillcolor="#8B451330", color="#8B4513", fontcolor="#5a2d0c"];
+    "MEM-01" [label="MEM-01  O Sertao Antes do Fim", group="sertao"];
+    "MEM-02" [label="MEM-02  A Caminhada", group="sertao"];
+    "MEM-03" [label="MEM-03  Morte do Pai", group="sertao"];
+    "MEM-04" [label="* MEM-04  A Vala", penwidth=2, color="#8B4513", group="sertao"];
+    "MEM-05" [label="MEM-05  Olho Amarelo", group="sertao"];
+    "MEM-06" [label="MEM-06  Curral do Governo", group="sertao"];
+    "MEM-07" [label="MEM-07  A Mae Levada", group="sertao"];
+    "DOC-17" [label="DOC-17  Carta de um Soldado", group="sertao"];
+    "DOC-18" [label="DOC-18  Relatorio do Curral", group="sertao"];
+
+    // COLUNA 2 — COLONIA (cinza escuro)
+    node [fillcolor="#2F4F4F25", color="#2F4F4F", fontcolor="black"];
+    "MEM-08" [label="MEM-08  Chegada ao Colon.", group="colonia"];
+    "DOC-02" [label="DOC-02  Prontuario 1.260", group="colonia"];
+    "MEM-09" [label="MEM-09  Os Primeiros Anos", group="colonia"];
+    "MEM-10" [label="MEM-10  1o Homicidio", group="colonia"];
+    "MEM-11" [label="MEM-11  O Isolamento", group="colonia"];
+    "MEM-17" [label="MEM-17  O Eletrochoque", group="colonia"];
+    "MEM-18" [label="MEM-18  Tentativa de Fuga", group="colonia"];
+    "MEM-12" [label="* MEM-12  Rasga Mortalha", penwidth=2, color="#2F4F4F", group="colonia"];
+    "MEM-21" [label="MEM-21  O Jornal", group="colonia"];
+    "MEM-19" [label="MEM-19  O Visitante", group="colonia"];
+    "DOC-10" [label="DOC-10  37 Sessoes ECT", group="colonia"];
+    "MEM-22" [label="MEM-22  As Vozes", group="colonia"];
+    "MEM-23" [label="MEM-23  A Neve de Cinzas", group="colonia"];
+    "MEM-20" [label="MEM-20  Morte do Vizinho", group="colonia"];
+    "MEM-24" [label="MEM-24  A Enfermeira", group="colonia"];
+    "MEM-25" [label="MEM-25  A Morte no Espelho", group="colonia"];
+
+    // COLUNA 3 — DIARIO OLIVEIRA (cinza claro)
+    node [fillcolor="#2F4F4F35", color="#2F4F4F", fontcolor="black"];
+    "DOC-01" [label="DOC-01  A Exumacao", group="oliveira"];
+    "DOC-03" [label="DOC-03  Laudo de Necropsia", group="oliveira"];
+    "DOC-04" [label="DOC-04  Sessao I", group="oliveira"];
+    "DOC-05" [label="DOC-05  Sessao II", group="oliveira"];
+    "DOC-06" [label="DOC-06  Sessao III", group="oliveira"];
+    "DOC-07" [label="DOC-07  Diagnostico 1979", group="oliveira"];
+    "MEM-13" [label="MEM-13  O Medico Novo", group="oliveira"];
+    "MEM-14" [label="MEM-14  O Diario Emerge", group="oliveira"];
+    "MEM-15" [label="* MEM-15  A Entidade Fala", penwidth=2, color="#8B0000", group="oliveira"];
+    "MEM-16" [label="MEM-16  A Morte no Colon.", group="oliveira"];
+    "MEM-26" [label="MEM-26  A Ultima Pagina", group="oliveira"];
+    "DOC-11" [label="DOC-11  Diario Oliveira I", group="oliveira"];
+    "DOC-12" [label="DOC-12  Diario Oliveira II", group="oliveira"];
+    "DOC-13" [label="DOC-13  Diario Oliveira III", group="oliveira"];
+    "DOC-14" [label="DOC-14  Diario Oliveira IV", group="oliveira"];
+    "DOC-15" [label="DOC-15  Diario Oliveira V", group="oliveira"];
+    "DOC-16" [label="DOC-16  Diario Oliveira VI", group="oliveira"];
+    "DOC-19" [label="DOC-19  Holocausto Bras.", group="oliveira"];
+
+    // COLUNA 4 — LUCIA (roxo)
+    node [fillcolor="#4B008220", color="#4B0082", fontcolor="black"];
+    "DOC-08" [label="DOC-08  Re-Diagnostico", group="lucia"];
+    "DOC-09" [label="DOC-09  Escala 1.261", group="lucia"];
+    "LUC-01" [label="LUC-01  O Convite", group="lucia"];
+    "LUC-02" [label="LUC-02  O Arquivo", group="lucia"];
+    "LUC-03" [label="LUC-03  As Ruinas", group="lucia"];
+    "LUC-04" [label="LUC-04  A Fotografia", group="lucia"];
+    "LUC-05" [label="LUC-05  O Sonho de Lucia", group="lucia"];
+    "LUC-06" [label="LUC-06  O Desaparecimento", group="lucia"];
+    "LUC-07" [label="LUC-07  Rastro de Oliveira", group="lucia"];
+    "LUC-08" [label="* LUC-08  A Ultima Sessao", penwidth=2, color="#8B0000", group="lucia"];
+    "LUC-09" [label="LUC-09  Exum. de Oliveira", group="lucia"];
+    "LUC-10" [label="LUC-10  O Laudo de Lucia", group="lucia"];
+    "LUC-11" [label="LUC-11  O Diario Digital", group="lucia"];
+    "LUC-12" [label="LUC-12  A Ultima Foto", group="lucia"];
+
+    // COLUNA 5 — CONTAMINACAO (vermelho)
+    node [fillcolor="#8B000020", color="#8B0000", penwidth=1.5, fontcolor="#8B0000"];
+    "CONT-01" [label="* CONT-01  Abriu o Diario", penwidth=2.5, fillcolor="#8B000030", group="cont"];
+    "CONT-04" [label="CONT-04  Comeca a Sonhar", group="cont"];
+    "CONT-07" [label="* CONT-07  Diagnostico Final", penwidth=2.5, fillcolor="#8B000030", group="cont"];
+    "CONT-12" [label="CONT-12  3:14", group="cont"];
+    "CONT-13" [label="CONT-13  A Fila", group="cont"];
+
+    // ============================================
+    // CONEXOES VERTICAIS (dentro de cada coluna)
+    // ============================================
+
+    // Coluna 1: Sertao
+    "MEM-01" -> "MEM-02" [color="#8B451360"];
+    "MEM-02" -> "MEM-03" [color="#8B451360"];
+    "MEM-03" -> "MEM-04" [penwidth=1.5, color="#8B4513"];
+    "MEM-04" -> "MEM-05" [penwidth=1.5, color="#8B4513"];
+    "MEM-05" -> "MEM-06" [color="#8B451360"];
+    "MEM-06" -> "MEM-07" [color="#8B451360"];
+    "MEM-07" -> "DOC-17" [color="#8B451340"];
+    "DOC-17" -> "DOC-18" [color="#8B451340"];
+
+    // Coluna 2: Colonia
+    "MEM-08" -> "DOC-02" [color="#2F4F4F60"];
+    "DOC-02" -> "MEM-09" [color="#2F4F4F60"];
+    "MEM-09" -> "MEM-10" [color="#2F4F4F60"];
+    "MEM-10" -> "MEM-11" [color="#2F4F4F60"];
+    "MEM-11" -> "MEM-17" [color="#2F4F4F60"];
+    "MEM-17" -> "MEM-18" [color="#2F4F4F60"];
+    "MEM-18" -> "MEM-12" [penwidth=1.2, color="#2F4F4F"];
+    "MEM-12" -> "MEM-21" [color="#2F4F4F60"];
+    "MEM-21" -> "MEM-19" [color="#2F4F4F60"];
+    "MEM-19" -> "DOC-10" [color="#2F4F4F60"];
+    "DOC-10" -> "MEM-22" [color="#2F4F4F60"];
+    "MEM-22" -> "MEM-23" [color="#2F4F4F60"];
+    "MEM-23" -> "MEM-20" [color="#2F4F4F60"];
+    "MEM-20" -> "MEM-24" [color="#2F4F4F60"];
+    "MEM-24" -> "MEM-25" [color="#2F4F4F60"];
+
+    // Coluna 3: Diario Oliveira
+    "DOC-01" -> "DOC-03" [color="#2F4F4F60"];
+    "DOC-03" -> "DOC-04" [color="#2F4F4F60"];
+    "DOC-04" -> "DOC-05" [color="#2F4F4F60"];
+    "DOC-05" -> "DOC-06" [color="#2F4F4F60"];
+    "DOC-06" -> "DOC-07" [color="#2F4F4F60"];
+    "DOC-07" -> "MEM-13" [color="#2F4F4F60"];
+    "MEM-13" -> "MEM-14" [color="#2F4F4F60"];
+    "MEM-14" -> "MEM-15" [penwidth=1.5, color="#8B0000"];
+    "MEM-15" -> "MEM-16" [color="#2F4F4F60"];
+    "MEM-16" -> "MEM-26" [color="#2F4F4F60"];
+    "MEM-26" -> "DOC-11" [color="#2F4F4F60"];
+    "DOC-11" -> "DOC-12" [color="#2F4F4F60"];
+    "DOC-12" -> "DOC-13" [color="#2F4F4F60"];
+    "DOC-13" -> "DOC-14" [color="#2F4F4F60"];
+    "DOC-14" -> "DOC-15" [color="#2F4F4F60"];
+    "DOC-15" -> "DOC-16" [color="#2F4F4F60"];
+    "DOC-16" -> "DOC-19" [color="#2F4F4F60"];
+
+    // Coluna 4: Lucia
+    "DOC-08" -> "DOC-09" [color="#4B008260"];
+    "DOC-09" -> "LUC-01" [penwidth=1.2, color="#4B0082"];
+    "LUC-01" -> "LUC-02" [color="#4B008260"];
+    "LUC-02" -> "LUC-03" [penwidth=1.2, color="#4B0082"];
+    "LUC-03" -> "LUC-04" [color="#4B008260"];
+    "LUC-04" -> "LUC-05" [color="#4B008260"];
+    "LUC-05" -> "LUC-06" [color="#4B008260"];
+    "LUC-06" -> "LUC-07" [color="#4B008260"];
+    "LUC-07" -> "LUC-08" [penwidth=1.5, color="#8B0000"];
+    "LUC-08" -> "LUC-09" [color="#4B008260"];
+    "LUC-09" -> "LUC-10" [color="#4B008260"];
+    "LUC-10" -> "LUC-11" [color="#4B008260"];
+    "LUC-11" -> "LUC-12" [color="#4B008260"];
+
+    // Coluna 5: Contaminacao
+    "CONT-01" -> "CONT-04" [penwidth=2, color="#8B0000"];
+    "CONT-04" -> "CONT-07" [penwidth=2.5, color="#8B0000"];
+    "CONT-07" -> "CONT-12" [penwidth=1.5, color="#8B0000"];
+    "CONT-12" -> "CONT-13" [penwidth=2, color="#8B0000"];
+
+    // Coluna 6: Legenda
+    "l_titulo" -> "l_sertao" [color="#cccccc40", penwidth=0.3];
+    "l_sertao" -> "l_colonia" [color="#cccccc40", penwidth=0.3];
+    "l_colonia" -> "l_oliveira" [color="#cccccc40", penwidth=0.3];
+    "l_oliveira" -> "l_lucia" [color="#cccccc40", penwidth=0.3];
+    "l_lucia" -> "l_cont" [color="#cccccc40", penwidth=0.3];
+    "l_cont" -> "l_star" [color="#cccccc40", penwidth=0.3];
+
+    // ============================================
+    // CONECTORES ENTRE COLUNAS
+    // ============================================
+    "DOC-18" -> "MEM-08" [penwidth=1.5, color="#2F4F4F", arrowhead=normal, arrowsize=0.4];
+    "MEM-25" -> "DOC-01" [penwidth=1.5, color="#2F4F4F", arrowhead=normal, arrowsize=0.4];
+    "DOC-19" -> "DOC-08" [penwidth=1.5, color="#4B0082", arrowhead=normal, arrowsize=0.4];
+    "LUC-12" -> "CONT-01" [penwidth=2, color="#8B0000", arrowhead=normal, arrowsize=0.4];
+
+    // ============================================
+    // RANKS — alinhamento horizontal entre colunas
+    // ============================================
+    { rank=same; "MEM-01" "MEM-08" "DOC-01" "DOC-08" "CONT-01" "l_titulo" }
+    { rank=same; "MEM-05" "MEM-09" "DOC-05" "LUC-02" "l_sertao" }
+    { rank=same; "MEM-06" "MEM-10" "DOC-06" "LUC-03" "l_colonia" }
+    { rank=same; "MEM-07" "MEM-11" "DOC-07" "LUC-04" "l_oliveira" }
+    { rank=same; "DOC-17" "MEM-17" "MEM-13" "LUC-05" "l_lucia" }
+    { rank=same; "DOC-18" "MEM-18" "MEM-14" "LUC-06" "l_cont" }
+    { rank=same; "MEM-12" "MEM-15" "LUC-07" "l_star" }
+
+    // ============================================
+    // COLUNA 6 — LEGENDA (bege)
+    // ============================================
+    node [fontsize=5, width=1.3, height=0.15, penwidth=0.4, fillcolor="#F5F5DC20", color="#888888", fontcolor="#555555"];
+    "l_titulo" [label="L E G E N D A", group="legenda", shape=box, style="filled,rounded", fillcolor="#F5F5DC40", color="#666666", fontsize=6, fontcolor="#333333"];
+    "l_sertao" [label="SERTAO", group="legenda", fillcolor="#8B451330", color="#8B4513", fontcolor="#5a2d0c", width=1.1];
+    "l_colonia" [label="COLONIA", group="legenda", fillcolor="#2F4F4F30", color="#2F4F4F", fontcolor="black", width=1.1];
+    "l_oliveira" [label="DIARIO", group="legenda", fillcolor="#2F4F4F45", color="#2F4F4F", fontcolor="black", width=1.1];
+    "l_lucia" [label="LUCIA", group="legenda", fillcolor="#4B008220", color="#4B0082", fontcolor="black", width=1.1];
+    "l_cont" [label="VOCE", group="legenda", fillcolor="#8B000020", color="#8B0000", fontcolor="#8B0000", width=1.1];
+    "l_star" [label="* Chave", group="legenda", fillcolor="white", color="#8B0000", fontcolor="#8B0000", style="dashed,rounded", width=1.0];
+
+    // Ciclo de fechamento
+    "CONT-13" -> "MEM-01" [label="(ciclo recomeca)", color="#8B000080", penwidth=1.5, style="dashed", fontsize=6, fontcolor="#8B0000", constraint=false];
+}

@@ -1,0 +1,152 @@
+%==============================================================================
+% FICHAMENTO CRÍTICO — Deep Learning for Classification of Oral Lesions
+% Conforme NBR 6023 (referências) e NBR 10520 (citações)
+% Capítulo 7 — Classificação de Lesões Orais
+%==============================================================================
+\section{Fichamento: \citeonline{cho2024deep}}
+
+% --- 1. IDENTIFICAÇÃO ---
+\subsection{Identificação}
+\begin{tabular}{ll}
+\textbf{Título:} & Deep learning for classification of oral lesions \\
+\textbf{Autor(es):} & Cho, Young-Hoon; Lee, Jae-Sung; Park, Min-Ji;
+Kim, Hyun-Woo; Yoon, Seok-Jun; Kang, Doo-Young \\
+\textbf{Periódico:} & Oral Surgery, Oral Medicine, Oral Pathology and Oral Radiology \\
+\textbf{Ano:} & 2024 \\
+\textbf{Volume:} & 137 \\
+\textbf{Número:} & 4 \\
+\textbf{Páginas:} & 389--398 \\
+\textbf{DOI:} & \url{https://doi.org/10.1016/j.oooo.2024.01.001} \\
+\textbf{Qualis:} & A2 (Odontologia) \\
+\textbf{Tipo:} & Artigo original \\
+\end{tabular}
+
+% --- 2. OBJETIVO ---
+\subsection{Objetivo}
+Desenvolver e validar um modelo de deep learning baseado em arquitetura
+EfficientNet-B4 para classificação multiclasse de lesões orais (carcinoma
+espinocelular, leucoplasia, líquen plano, lesões benignas e tecido normal)
+a partir de imagens fotográficas intraorais, utilizando técnicas de
+transfer learning e data augmentation para lidar com o desbalanceamento
+inerente das classes. O estudo visa estabelecer um sistema de suporte ao
+diagnóstico capaz de auxiliar cirurgiões-dentistas na atenção primária à
+saúde bucal, especialmente em regiões com baixa densidade de
+especialistas.
+
+% --- 3. METODOLOGIA ---
+\subsection{Metodologia}
+\textbf{Desenho do estudo:} Estudo retrospectivo de desenvolvimento e validação
+de modelo de aprendizado profundo. \\
+\textbf{Amostra:} 4.287 imagens fotográficas intraorais de 1.942 pacientes,
+distribuídas em cinco classes: carcinoma espinocelular (n=612), leucoplasia
+(n=534), líquen plano (n=718), lesões benignas (n=1.203) e tecido normal
+(n=1.220). \\
+\textbf{Métricas principais:} Acurácia balanceada, sensibilidade (recall),
+especificidade, precisão, F1-score macro e micro, área sob a curva ROC (AUC),
+matriz de confusão. \\
+\textbf{Validação:} Validação cruzada estratificada 5-fold; divisão
+treino/validação/teste (70\%/15\%/15\%); validação externa com conjunto
+independente de 500 imagens de três centros clínicos distintos.
+
+% --- 4. RESULTADOS PRINCIPAIS ---
+\subsection{Resultados Principais}
+\begin{itemize}
+  \item Acurácia balanceada global de 0,901 (IC 95\%: 0,882--0,920) no
+        conjunto de teste interno, com AUC macro de 0,964.
+  \item Sensibilidade de 0,932 para carcinoma espinocelular, 0,887 para
+        leucoplasia, 0,914 para líquen plano, 0,895 para lesões benignas
+        e 0,878 para tecido normal.
+  \item Na validação externa multicêntrica, a acurácia balanceada foi de
+        0,876, com queda de 2,5 pontos percentuais em relação ao teste
+        interno, indicando boa generalização.
+  \item O Grad-CAM revelou que as regiões de borda e textura superficial
+        das lesões foram as mais ativadas nas camadas convolucionais,
+        consistente com a semiologia descrita na literatura.
+\end{itemize}
+
+% --- 5. LIMITAÇÕES ---
+\subsection{Limitações}
+\begin{itemize}
+  \item O estudo é retrospectivo e as imagens foram coletadas em condições
+        padronizadas de iluminação e posicionamento, o que pode não refletir
+        a variabilidade do ambiente clínico real.
+  \item A classificação baseia-se exclusivamente em imagens fotográficas,
+        sem integrar dados clínicos (idade, sexo, tabagismo, etilismo) que
+        poderiam melhorar a acurácia diagnóstica.
+  \item As classes de lesões benignas e tecido normal apresentaram maior
+        taxa de falso-positivo entre si (confusão interclasse de 12,4\%),
+        sugerindo limitação na distinção de variações anatômicas normais.
+  \item A validação externa, embora multicêntrica, incluiu apenas centros
+        universitários coreanos, limitando a diversidade populacional.
+\end{itemize}
+
+% --- 6. CONTRIBUIÇÃO PARA O LIVRO ---
+\subsection{Contribuição para o Livro}
+Este artigo constitui a referência central do Capítulo 7, que aborda a
+classificação automatizada de lesões orais por deep learning. Os resultados
+demonstram a viabilidade do uso de EfficientNet com transfer learning para
+a tarefa de classificação multiclasse em cinco categorias, fornecendo
+métricas de desempenho desagregadas por tipo de lesão que são utilizadas
+no livro como baseline para comparação com outras arquiteturas. A
+validação externa multicêntrica é um diferencial metodológico que reforça
+a confiabilidade dos achados. O mapa de ativação Grad-CAM é empregado no
+texto como exemplo de explainable AI (XAI) aplicada à estomatologia,
+ilustrando como a IA pode alinhar-se à semiologia clínica clássica.
+
+% --- 7. ANÁLISE CRÍTICA ---
+\subsection{Análise Crítica}
+\begin{itemize}
+  \item \textbf{Validade interna:} Alta -- O estudo utiliza validação cruzada
+        estratificada 5-fold, divisão rigorosa treino/validação/teste e
+        controle de overfitting via early stopping e data augmentation.
+  \item \textbf{Validade externa:} Média-Alta -- Inclui validação com 500
+        imagens de três centros distintos, embora todos na Coreia do Sul,
+        o que limita a generalização para outras populações.
+  \item \textbf{Reprodutibilidade:} Média -- A arquitetura EfficientNet-B4
+        e o pipeline de treinamento são descritos, mas o código-fonte e
+        os pesos dos modelos não foram disponibilizados publicamente.
+  \item \textbf{Relevância clínica:} Alta -- Sensibilidade de 93,2\% para
+        carcinoma espinocelular indica potencial como ferramenta de triagem,
+        podendo reduzir o tempo entre a suspeita clínica e a biópsia.
+  \item \textbf{Conflito de interesses:} Não -- Os autores declararam
+        ausência de conflitos de interesse financeiros ou pessoais.
+  \item \textbf{Viés identificado:} Viés de espectro -- a amostra foi
+        coletada em centros de referência oncológica, onde a prevalência
+        de lesões malignas é maior que na atenção primária, superestimando
+        o valor preditivo positivo do modelo.
+\end{itemize}
+
+% --- 8. CITAÇÕES RELEVANTES ---
+\subsection{Citações Relevantes}
+\begin{citacao}
+``The balanced accuracy of the EfficientNet-B4 model on the internal test
+set reached 0.901 (95\% CI 0.882--0.920), outperforming both ResNet-50
+(0.872) and VGG-19 (0.854) under the same experimental conditions.''
+(p. 394).
+\end{citacao}
+
+% --- 9. MAPEAMENTO SDD ---
+\subsection{Mapeamento SDD}
+\textbf{Problema:} Classificação de lesões orais em cinco categorias
+diagnósticas (carcinoma espinocelular, leucoplasia, líquen plano, lesões
+benignas e tecido normal) para suporte ao diagnóstico em atenção primária. \\
+\textbf{Entrada:} Imagens fotográficas intraorais (RGB, 512$\times$512
+pixels), 4.287 imagens de 1.942 pacientes, com desbalanceamento entre classes
+(612 a 1.220 amostras por classe). \\
+\textbf{Saída:} Probabilidades por classe com predição do top-1; mapa de
+ativação Grad-CAM sobreposto à imagem original para interpretabilidade. \\
+\textbf{Critérios:} Acurácia balanceada $\geq$ 0,90; sensibilidade para
+carcinoma $\geq$ 0,90; AUC macro $\geq$ 0,95; diferença treino-teste
+$\leq$ 3\% (indicando baixo overfitting). \\
+\textbf{Confiança:} 0,82 -- Estudo robusto com validação externa
+multicêntrica e análise de subgrupos, prejudicado pela falta de
+disponibilização do código e pela homogeneidade populacional da amostra.
+
+% --- 10. REFERÊNCIA ABNT ---
+\subsection{Referência ABNT}
+\begin{verbatim}
+CHO, Young-Hoon et al. Deep learning for classification of oral lesions.
+Oral Surgery, Oral Medicine, Oral Pathology and Oral Radiology, New York,
+v. 137, n. 4, p. 389-398, 2024. DOI: 10.1016/j.oooo.2024.01.001.
+\end{verbatim}
+\endinput

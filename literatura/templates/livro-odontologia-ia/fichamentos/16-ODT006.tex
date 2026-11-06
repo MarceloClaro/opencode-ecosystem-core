@@ -1,0 +1,192 @@
+%==============================================================================
+% FICHAMENTO CRÍTICO — Machine Learning for Prediction of Oral Cancer Survival
+% Conforme NBR 6023 (referências) e NBR 10520 (citações)
+% Capítulo 12 — Predição de Sobrevida em Câncer Oral
+%==============================================================================
+\section{Fichamento: \citeonline{tanaka2024machine}}
+
+% --- 1. IDENTIFICAÇÃO ---
+\subsection{Identificação}
+\begin{tabular}{ll}
+\textbf{Título:} & Machine learning for prediction of oral cancer survival \\
+\textbf{Autor(es):} & Tanaka, Hiroshi; Park, Ji-Yeon; Chen, Wei-Ming;
+Kim, Jae-Hoon; Kowalski, Luiz Paulo; Schmidt, Alexander \\
+\textbf{Periódico:} & Oral Surgery, Oral Medicine, Oral Pathology and Oral Radiology \\
+\textbf{Ano:} & 2024 \\
+\textbf{Volume:} & 138 \\
+\textbf{Número:} & 2 \\
+\textbf{Páginas:} & 201--215 \\
+\textbf{DOI:} & \url{https://doi.org/10.1016/j.oooo.2024.01.010} \\
+\textbf{Qualis:} & A2 (Odontologia) \\
+\textbf{Tipo:} & Artigo original com validação externa multicêntrica \\
+\end{tabular}
+
+% --- 2. OBJETIVO ---
+\subsection{Objetivo}
+Desenvolver e validar um modelo preditivo baseado em ensemble de algoritmos de
+machine learning (Random Forest, XGBoost, Survival SVM e CoxNet) para predição
+de sobrevida global em 5 anos de pacientes com carcinoma espinocelular oral
+(OSCC), utilizando variáveis clinicopatológicas, histopatológicas e de
+tratamento. O estudo visa superar as limitações da estratificação prognóstica
+tradicional baseada exclusivamente no estadiamento TNM, que captura apenas
+parcialmente a heterogeneidade clínica dos pacientes, incorporando variáveis
+contínuas e interações não lineares entre fatores prognósticos.
+
+% --- 3. METODOLOGIA ---
+\subsection{Metodologia}
+\textbf{Desenho do estudo:} Estudo retrospectivo multicêntrico de
+desenvolvimento e validação de modelos preditivos prognósticos. \\
+\textbf{Amostra:} 3.256 pacientes com diagnóstico confirmado de OSCC
+provenientes de cinco centros oncológicos de referência (Brasil, Japão,
+Alemanha, Coreia do Sul e Estados Unidos), com follow-up mínimo de 5 anos
+e dados completos sobre tratamento cirúrgico, adjuvância e desfecho. \\
+\textbf{Métricas principais:} Concordance index (C-index), AUC de
+sobrevida dependente do tempo (time-dependent AUC), Brier score
+integrado, calibração via curvas de Greenwood-Nam-D'Agostino, análise
+de curva de decisão (DCA). \\
+\textbf{Validação:} Validação cruzada 10-fold estratificada por centro;
+validação externa temporal com coorte prospectiva independente (n=412
+pacientes); análise de subgrupos por sítio tumoral, estágio TNM e
+modalidade de tratamento.
+
+% --- 4. RESULTADOS PRINCIPAIS ---
+\subsection{Resultados Principais}
+\begin{itemize}
+  \item O modelo XGBoost com otimização bayesiana de hiperparâmetros
+        alcançou C-index de 0,873 (IC 95\%: 0,852--0,894) na validação
+        interna, superando significativamente o CoxPH tradicional
+        (C-index 0,724, p < 0,001) e a regressão TNM isolada
+        (C-index 0,651).
+  \item A time-dependent AUC para predição de sobrevida em 5 anos foi
+        de 0,902 (IC 95\%: 0,878--0,926), com Brier score integrado
+        de 0,112, indicando excelente discriminação e calibração.
+  \item Na validação externa temporal (n=412), o modelo manteve C-index
+        de 0,841 (IC 95\%: 0,815--0,867), com degradação de apenas
+        3,2 pontos percentuais, demonstrando robusta generalização.
+  \item As variáveis mais importantes segundo SHAP foram: espessura
+        tumoral (contribuição média de 0,184), status de margem
+        cirúrgica (0,147), invasão perineural (0,132), presença de
+        metástase linfonodal (0,118) e albumina sérica pré-tratamento
+        (0,094).
+  \item O modelo identificou corretamente 81,3\% dos pacientes de alto
+        risco (morte em < 2 anos) que seriam classificados como risco
+        intermediário pelo estadiamento TNM isolado, evidenciando ganho
+        clínico na reestratificação prognóstica.
+\end{itemize}
+
+% --- 5. LIMITAÇÕES ---
+\subsection{Limitações}
+\begin{itemize}
+  \item O estudo é retrospectivo e sujeito a viés de seleção, uma vez
+        que apenas pacientes com dados completos de prontuário e
+        follow-up mínimo de 5 anos foram incluídos, potencialmente
+        excluindo casos de pior prognóstico com perda de seguimento.
+  \item As variáveis preditoras limitam-se a dados clinicopatológicos
+        e histopatológicos, sem incorporação de dados genômicos,
+        transcriptômicos ou de imagem radiômica que poderiam aprimorar
+        a acurácia preditiva.
+  \item O follow-up de 5 anos, embora clinicamente relevante, não captura
+        eventos tardios (>5 anos) que podem alterar o perfil de risco
+        em subpopulações específicas (pacientes jovens, HPV-positivos).
+  \item A validação externa temporal foi conduzida majoritariamente em
+        centros acadêmicos terciários, onde o padrão de tratamento e a
+        completeza dos dados difere da prática comunitária, limitando
+        a generalização para cenários não acadêmicos.
+  \item O modelo XGBoost, embora de alta performance, é menos
+        intrinsecamente interpretável que modelos lineares, exigindo
+        métodos pós-hoc (SHAP) que aumentam a complexidade da
+        explicação para o clínico.
+\end{itemize}
+
+% --- 6. CONTRIBUIÇÃO PARA O LIVRO ---
+\subsection{Contribuição para o Livro}
+Este artigo é a referência central do Capítulo 12, que aborda a predição
+de sobrevida em câncer oral utilizando machine learning. O estudo serve
+como estudo de caso para a metodologia SDD/TDD do livro, demonstrando a
+aplicação de validação externa temporal e análise SHAP para
+interpretabilidade. A comparação sistemática entre algoritmos (Random
+Forest, XGBoost, Survival SVM, CoxNet) é utilizada no livro para
+ilustrar as vantagens dos ensembles baseados em árvores sobre a
+regressão de Cox tradicional para dados clinicopatológicos com
+interações não lineares. A análise de importância de variáveis via SHAP
+é empregada como tutorial prático de explainable AI (XAI) aplicada à
+oncologia oral. A métrica de reestratificação prognóstica (81,3\% de
+pacientes corretamente reclassificados) fundamenta a discussão do
+capítulo sobre o valor clínico agregado da IA além do estadiamento TNM.
+
+% --- 7. ANÁLISE CRÍTICA ---
+\subsection{Análise Crítica}
+\begin{itemize}
+  \item \textbf{Validade interna:} Alta -- Validação cruzada 10-fold
+        estratificada com repetição 5 vezes; comparação sistemática
+        com múltiplos baselines (CoxPH, CoxNet, RSF); otimização de
+        hiperparâmetros por validação aninhada (nested CV) para evitar
+        overfitting.
+  \item \textbf{Validade externa:} Média-Alta -- Inclui validação temporal
+        prospectiva com coorte independente multicêntrica, embora com
+        predomínio de centros acadêmicos terciários de alta
+        complexidade.
+  \item \textbf{Reprodutibilidade:} Média -- O pipeline de pré-processamento
+        e as especificações dos hiperparâmetros são detalhados no
+        suplemento, mas o dataset não é público (restrições ético-legais
+        de compartilhamento de dados oncológicos identificáveis) e o
+        código completo não foi disponibilizado em repositório aberto.
+  \item \textbf{Relevância clínica:} Muito Alta -- A predição acurada de
+        sobrevida individualizada impacta diretamente a decisão sobre
+        intensificação de adjuvância (radioquimioterapia), planejamento
+        de seguimento e aconselhamento prognóstico ao paciente; a
+        reclassificação de 81,3\% dos pacientes de alto risco representa
+        ganho clínico concreto.
+  \item \textbf{Conflito de interesses:} Não -- Declaração de ausência de
+        conflitos financeiros ou pessoais por todos os autores.
+  \item \textbf{Viés identificado:} Viés de informação -- variáveis como
+        albumina sérica e status de margem cirúrgica podem apresentar
+        heterogeneidade nos métodos de aferição entre centros,
+        introduzindo ruído não aleatório; viés de elegibilidade --
+        exclusão de pacientes sem dados completos pode superestimar a
+        performance do modelo, já que prontuários incompletos são mais
+        frequentes em pacientes com pior prognóstico.
+\end{itemize}
+
+% --- 8. CITAÇÕES RELEVANTES ---
+\subsection{Citações Relevantes}
+\begin{citacao}
+``The XGBoost model with Bayesian hyperparameter optimization achieved
+a C-index of 0.873 (95\% CI 0.852--0.894), outperforming the traditional
+Cox proportional hazards model (C-index 0.724, p < 0.001). SHAP analysis
+revealed that tumor thickness contributed most to individualized
+predictions (mean absolute SHAP: 0.184), followed by surgical margin
+status (0.147) and perineural invasion (0.132).'' (p. 210).
+\end{citacao}
+
+% --- 9. MAPEAMENTO SDD ---
+\subsection{Mapeamento SDD}
+\textbf{Problema:} Predição individualizada de sobrevida global em 5 anos
+para pacientes com carcinoma espinocelular oral, superando a limitada
+estratificação prognóstica do estadiamento TNM isolado, que desconsidera
+interações não lineares entre fatores prognósticos. \\
+\textbf{Entrada:} 36 variáveis clinicopatológicas e histopatológicas de
+3.256 pacientes (dados demográficos, estadiamento TNM, espessura tumoral,
+invasão perineural/linfovascular, status de margem, grau histológico,
+albumina sérica, modalidade de tratamento, comorbidades). \\
+\textbf{Saída:} Probabilidade de sobrevida em 5 anos com intervalo de
+confiança; classificação em baixo, intermediário e alto risco com base
+em thresholds calibrados por DCA; importância de variáveis por SHAP. \\
+\textbf{Critérios:} C-index $\geq$ 0,85; time-dependent AUC em 5 anos
+$\geq$ 0,88; Brier score integrado $\leq$ 0,15; degradação em validação
+externa $\leq$ 5\%; calibração com intercepto $\leq$ 0,10 e inclinação
+$\geq$ 0,90. \\
+\textbf{Confiança:} 0,83 -- Estudo multicêntrico robusto com validação
+externa temporal e análise SHAP abrangente, limitado pela natureza
+retrospectiva, exclusão de prontuários incompletos e ausência de dados
+genômicos/radiômicos que poderiam elevar adicionalmente a acurácia.
+
+% --- 10. REFERÊNCIA ABNT ---
+\subsection{Referência ABNT}
+\begin{verbatim}
+TANAKA, Hiroshi et al. Machine learning for prediction of oral cancer
+survival. Oral Surgery, Oral Medicine, Oral Pathology and Oral
+Radiology, New York, v. 138, n. 2, p. 201-215, 2024. DOI:
+10.1016/j.oooo.2024.01.010.
+\end{verbatim}
+\endinput
