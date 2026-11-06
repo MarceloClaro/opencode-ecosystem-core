@@ -9790,6 +9790,39 @@
       },
       "model": "opencode-go/mimo-v2.6-flash"
     },
+    "romance-psicologico-molambudos": {
+      "description": "Assistente de escrita e revisão de romance de terror psicológico com voz sensorial e sistêmica, indução narrativa, catálogo de 16 estilos e protocolo de tradução PT-BR/EN/ZH com revisão de sensibilida",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/romance-psicologico-molambudos.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1080_style_catalog.py -q": "allow"
+        },
+        "edit": "allow",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/mimo-v2.6-flash",
+          "opencode-go/deepseek-v4.1-flash",
+          "opencode-go/minimax-m3.1-flash"
+        ],
+        "model_economy": {
+          "complexity": "media",
+          "ceiling": "capaz",
+          "head": "opencode-go/mimo-v2.6-flash",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/mimo-v2.6-flash"
+    },
     "runtime-regression": {
       "description": "Reproduzir regressões de execução, prazo e cancelamento.",
       "mode": "subagent",
