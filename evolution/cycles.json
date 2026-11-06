@@ -23989,6 +23989,32 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1088",
+      "objective": "Corrigir hero SVG do README em main com acessibilidade, legibilidade e alegações calibradas",
+      "changes": [
+        "SVG vetorial autocontido com título e descrição, sem números fixos",
+        "README alt alinhado ao novo título e revisão humana",
+        "RED visual de estouro e regressão; GREEN 91 testes com .venv local temporário; preview 1200 e 600 px revisada"
+      ],
+      "score": null,
+      "lessons": [
+        "Alt do README é a descrição efetiva quando SVG está embutido como img",
+        "Renderização raster e inspeção revelam overflow que XML válido não detecta",
+        "Não tratar checks de doctor, badges ou estatísticas em banner como mérito científico"
+      ],
+      "timestamp": 1793959144.8716707,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [

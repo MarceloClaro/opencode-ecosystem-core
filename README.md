@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/images/readme-hero.svg" alt="OpenCode Ecosystem Core — pesquisa, agentes e evidência" width="100%">
+<img src="docs/images/readme-hero.svg" alt="OpenCode Ecosystem Core — evidência antes da narrativa, agentes coordenados e revisão humana" width="100%">
 
 # OpenCode Ecosystem Core
 
