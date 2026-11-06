@@ -98,7 +98,9 @@ arquivo que o livro já possuía.
 | PDF SHA-256 | `cc0c5c2110f0a334a9650044191dabaf5da168a701dc194604069c16444991ab` |
 | EPUB | 84 seções; 105 links; 0 quebrados; 0 LaTeX cru; **13 imagens** |
 | EPUB palavras | 53.554 |
-| EPUB SHA-256 | `b0fad09043777b1d0e4d743524d78a37056488fa6f26a94e035efa708460e9ac` |
+| EPUB SHA-256 | `0269e8c0c1d26c1f66eb1c7773c732afa2332a58bd1ce5acf2c4fe6b2a4b9c4c` |
+| EPUBCheck | 5.4.0: 0 erros, 0 avisos |
+| Ace | 1.4.6: 26 pass, 0 fail |
 | Fragmentos com capitular | 84/84 |
 | Contraste mínimo | 6,68:1 (EPI) |
 | Gate | `tests/test_r1076_molambudos_design.py` |

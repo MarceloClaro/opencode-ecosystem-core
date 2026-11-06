@@ -1,0 +1,537 @@
+{
+  "tool": "LanguageTool 6.6",
+  "language": "pt-BR",
+  "files": 84,
+  "matches": 650,
+  "by_type": {
+    "Other": 477,
+    "Hint": 100,
+    "UnknownWord": 73
+  },
+  "by_category": {
+    "Estilo": 216,
+    "Tipografia": 138,
+    "Erro de Escrita": 73,
+    "Linguagem formal": 68,
+    "Redundância": 38,
+    "Pontuação": 26,
+    "Gramática Geral": 23,
+    "Maiúsculo / Minúsculo": 21,
+    "Remoção de pronomes": 14,
+    "Clareza": 8,
+    "Linguagem concisa": 7,
+    "Confusão de Palavras": 5,
+    "Capitalização": 4,
+    "Linguagem acadêmica": 2,
+    "Composição": 2,
+    "Acentuação": 2,
+    "Contrações": 1,
+    "Semântica": 1,
+    "Linguagem objetiva": 1
+  },
+  "top_rules": {
+    "PORTUGUESE_WORD_REPEAT_BEGINNING_RULE": 207,
+    "MORFOLOGIK_RULE_PT_BR": 73,
+    "FORMAL_PRA_PARA": 49,
+    "COMMA_PARENTHESIS_WHITESPACE": 44,
+    "PARENTESESE_AND_QUOTES_SPACING": 38,
+    "UNPAIRED_BRACKET_SUGGESTIONS": 22,
+    "UPPERCASE_SENTENCE_START": 21,
+    "VERB_COMMA_CONJUNCTION": 17,
+    "REMOVER_EU_NÓS": 14,
+    "DEPOIS_DE_APÓS": 12,
+    "SENTENCE_WHITESPACE": 11,
+    "SPACE_BEFORE_PUNCTUATION2": 10,
+    "PT_WORDINESS_REPLACE_DENTRO_DE_UM": 7,
+    "REDUNDANCY_JUNTO_COM": 6,
+    "NUMBER_ABREVIATION": 6,
+    "PT_WORDINESS_REPLACE_DE_VEZ_EM_QUANDO": 6,
+    "GENERAL_VERB_AGREEMENT_ERRORS": 5,
+    "CRASE_CONFUSION_2": 5,
+    "PT_WORDINESS_REPLACE_AINDA_ESTÁ": 5,
+    "ATRAVES_DE_POR_VIA": 5,
+    "DECIMAL_COMMA": 4,
+    "SPACE_AFTER_PUNCTUATION": 4,
+    "UPPERCASE_AFTER_COMMA": 3,
+    "PT_WORDINESS_REPLACE_DENTRO_DE_UMA": 3,
+    "PT_WORDINESS_REPLACE_A_MESMA_COISA": 3,
+    "QUE_SUBJ_VS_INF_PESS": 3,
+    "PARA-POR_TER_PARTICIPIO-PASSADO": 2,
+    "PT_REDUNDANCY_REPLACE_SI_MESMO": 2,
+    "WHITESPACE_RULE": 2,
+    "PT_WORDINESS_REPLACE_CAUSA_MORTIS": 2
+  },
+  "top_files": {
+    "doc__DOC-09.txt": 53,
+    "cont__CONT-05.txt": 39,
+    "luc__LUC-13.txt": 20,
+    "mem__MEM-12.txt": 20,
+    "luc__LUC-14.txt": 19,
+    "doc__DOC-13.txt": 16,
+    "mem__MEM-06.txt": 16,
+    "doc__DOC-03.txt": 15,
+    "doc__DOC-12.txt": 13,
+    "doc__DOC-16.txt": 12,
+    "doc__DOC-27.txt": 12,
+    "mem__MEM-05.txt": 12,
+    "luc__LUC-04.txt": 11,
+    "luc__LUC-10.txt": 11,
+    "luc__LUC-17.txt": 11
+  },
+  "samples": {
+    "REDUNDANCY_JUNTO_COM": [
+      {
+        "file": "cont__CONT-01.txt",
+        "message": "Para conferir mais clareza ao seu texto, evite pleonasmos.",
+        "sentence": "Como se algo tivesse sido impresso junto com a tinta.",
+        "context": "...pel. Como se algo tivesse sido impresso junto com a tinta. Algo que estava esperando ser ...",
+        "offset": 449,
+        "length": 9
+      },
+      {
+        "file": "doc__DOC-12.txt",
+        "message": "Para conferir mais clareza ao seu texto, evite pleonasmos.",
+        "sentence": "Junto com um bilhete:",
+        "context": "...  O diário foi encontrado na casa dela. Junto com um bilhete:  “O ciclo não pode ser queb...",
+        "offset": 2679,
+        "length": 9
+      },
+      {
+        "file": "doc__DOC-21.txt",
+        "message": "Para conferir mais clareza ao seu texto, evite pleonasmos.",
+        "sentence": "Nota do arquivista: a carta foi encontrada em 2026, dentro do caderno pessoal do Dr. Oliveira, devolvido ao Arquivo Público Mineiro junto com o diário do paciente 1.260, 47 anos depois de ter sido escrita.",
+        "context": "...a, devolvido ao Arquivo Público Mineiro junto com o diário do paciente 1.260, 47 anos dep...",
+        "offset": 2998,
+        "length": 9
+      }
+    ],
+    "VERB_COMMA_CONJUNCTION": [
+      {
+        "file": "cont__CONT-01.txt",
+        "message": "Esta conjunção deve ser separada por vírgulas e só deve ser utilizada no início duma frase para efeitos de estilo.",
+        "sentence": "Como carne que passou do ponto mas ainda não estragou.",
+        "context": "...flores mornas. Como carne que passou do ponto mas ainda não estragou. Como o hálito de al...",
+        "offset": 716,
+        "length": 9
+      },
+      {
+        "file": "cont__CONT-03.txt",
+        "message": "Esta locução deve ser separada por vírgulas.",
+        "sentence": "As duas coisas acontecem ao mesmo tempo quando a contaminação começa.",
+        "context": "...Difícil saber. As duas coisas acontecem ao mesmo tempo quando a contaminação começa.  A Criatu...",
+        "offset": 5071,
+        "length": 14
+      },
+      {
+        "file": "doc__DOC-02.txt",
+        "message": "Esta conjunção deve ser separada por vírgulas e só deve ser utilizada no início duma frase para efeitos de estilo.",
+        "sentence": "- Brometo de potássio (1920-1945) — sedativo - Eletrochoque (1937, 1945, 1952) — sem anestesia - Lobotomia transorbital — indicada em 1948 mas não realizada (paciente reagiu com violência extrema à mera tentativa de apro",
+        "context": "... - Lobotomia transorbital — indicada em 1948 mas não realizada (paciente reagiu com viol...",
+        "offset": 2811,
+        "length": 8
+      }
+    ],
+    "PORTUGUESE_WORD_REPEAT_BEGINNING_RULE": [
+      {
+        "file": "cont__CONT-01.txt",
+        "message": "Três frases seguidas começam com a mesma palavra. Considere reformular a frase ou use um dicionário para encontrar um sinônimo.",
+        "sentence": "Como o hálito de alguém que não come há dias.",
+        "context": "...passou do ponto mas ainda não estragou. Como o hálito de alguém que não come há dias...",
+        "offset": 746,
+        "length": 4
+      },
+      {
+        "file": "cont__CONT-01.txt",
+        "message": "Três frases seguidas começam com a mesma palavra. Considere reformular a frase ou use um dicionário para encontrar um sinônimo.",
+        "sentence": "Você o trouxe para casa.",
+        "context": "...não devolveu o livro.  Você o comprou.  Você o trouxe para casa.  Agora está lendo e...",
+        "offset": 838,
+        "length": 4
+      },
+      {
+        "file": "cont__CONT-03.txt",
+        "message": "Três frases seguidas começam com a mesma palavra. Considere reformular a frase ou use um dicionário para encontrar um sinônimo.",
+        "sentence": "Achou que era impressão sua.",
+        "context": "...era o livro novo. Achou que era a sala. Achou que era impressão sua.  Pare.  Agora me...",
+        "offset": 168,
+        "length": 5
+      }
+    ],
+    "UPPERCASE_SENTENCE_START": [
+      {
+        "file": "cont__CONT-01.txt",
+        "message": "Esta frase não inicia com um letra maiúscula",
+        "sentence": "— você vai entender que o diário nunca foi dele.",
+        "context": "...aquim escreveu.  E quando terminar —  — você vai entender que o diário nunca foi del...",
+        "offset": 1511,
+        "length": 4
+      },
+      {
+        "file": "doc__DOC-06.txt",
+        "message": "Esta frase não inicia com um letra maiúscula",
+        "sentence": "preciso saber o que é preciso saber o que é preciso saber o que é preciso saber o que é",
+        "context": "...a coisa.  O que é?  O que é?  O que é?  preciso saber o que é preciso saber o que é pre...",
+        "offset": 7142,
+        "length": 7
+      },
+      {
+        "file": "doc__DOC-13.txt",
+        "message": "Esta frase não inicia com um letra maiúscula",
+        "sentence": "tô escrevendo com a mão esquerda agora.",
+        "context": "...É UM DELÍRIO. ISTO É SUGESTÃO. ISTO É—  tô escrevendo com a mão esquerda agora. a ...",
+        "offset": 2504,
+        "length": 2
+      }
+    ],
+    "INTERJECTIONS_PUNTUATION": [
+      {
+        "file": "cont__CONT-03.txt",
+        "message": "Quando não estão acompanhadas de vocativo, as interjeições devem ser finalizadas com pontos de exclamação ou interrogação. Quando houver vocativo, deve usar a vírgula. Para indicar hesitação ou prolongamento de ideias, utilize as reticências.",
+        "sentence": "Não voltou, né.",
+        "context": ".... Vou esperar.  ...  Voltou?  Não voltou, né. Você seguiu lendo. Achou que a instruçã...",
+        "offset": 416,
+        "length": 5
+      }
+    ],
+    "PT_WORDINESS_REPLACE_DENTRO_DE_UM": [
+      {
+        "file": "cont__CONT-03.txt",
+        "message": "“dentro de um” é uma expressão prolixa. É preferível dizer “num” ou “em um”.",
+        "sentence": "Lembra flor murcha dentro de um quarto fechado.",
+        "context": "... O doce tem sujeira. Lembra flor murcha dentro de um quarto fechado. Lembra a roupa de cama ...",
+        "offset": 797,
+        "length": 12
+      },
+      {
+        "file": "doc__DOC-25.txt",
+        "message": "“Dentro de um” é uma expressão prolixa. É preferível dizer “num” ou “em um”.",
+        "sentence": "Dentro de um saco amarrado.",
+        "context": "...ellington: Joguei fora. Na mesma noite. Dentro de um saco amarrado. (pausa) No dia seguinte,...",
+        "offset": 2110,
+        "length": 12
+      },
+      {
+        "file": "doc__DOC-27.txt",
+        "message": "“dentro de um” é uma expressão prolixa. É preferível dizer “num” ou “em um”.",
+        "sentence": "Nota do Arquivo Público do Ceará: a carta foi encontrada em 1916, dentro de um livro de tombo da freguesia, durante a reforma do prédio.",
+        "context": "... Ceará: a carta foi encontrada em 1916, dentro de um livro de tombo da freguesia, durante a ...",
+        "offset": 4789,
+        "length": 12
+      }
+    ],
+    "PARA-POR_TER_PARTICIPIO-PASSADO": [
+      {
+        "file": "cont__CONT-04.txt",
+        "message": "Para conferir mais clareza ao seu texto, busque usar uma linguagem mais concisa.",
+        "sentence": "E, por não ter vindo, você passou o dia inteiro com medo do susto que poderia vir.",
+        "context": "...erando o susto que não veio. E, por não ter vindo, você passou o dia inteiro com medo do ...",
+        "offset": 4700,
+        "length": 9
+      },
+      {
+        "file": "mem__MEM-19.txt",
+        "message": "Para conferir mais clareza ao seu texto, busque usar uma linguagem mais concisa.",
+        "sentence": "“Por ter deixado tu.”",
+        "context": "...oa”, ela disse.  “Perdoar o quê?”  “Por ter deixado tu.”  “A senhora não deixou. Levaram.” ...",
+        "offset": 2431,
+        "length": 11
+      }
+    ],
+    "GENERAL_VERB_AGREEMENT_ERRORS": [
+      {
+        "file": "cont__CONT-05.txt",
+        "message": "Possível erro de concordância verbal.",
+        "sentence": "PACIENTE: Você REGISTRO: 1.263 DATA: Data atual AVALIADOR: A Criatura (via texto)",
+        "context": "Diagnóstico do Paciente 1.263  PACIENTE: Você REGISTRO: 1.263 DATA: Data atual AVALIADOR: A Cr...",
+        "offset": 39,
+        "length": 15
+      },
+      {
+        "file": "mem__MEM-03.txt",
+        "message": "Possível erro de concordância verbal.",
+        "sentence": "Tu sempre disse que dava.”",
+        "context": "...Antônio, levanta.”  “Não dá.”  “Dá sim. Tu sempre disse que dava.”  Ele abriu os olhos. Olhou p...",
+        "offset": 398,
+        "length": 15
+      },
+      {
+        "file": "mem__MEM-05.txt",
+        "message": "Possível erro de concordância verbal.",
+        "sentence": "“Diz que o diário não acaba quando tu morrer.”",
+        "context": "...rra. “Diz que o diário não acaba quando tu morrer.”  Eu vou morrer em breve. Sei disso. D...",
+        "offset": 5408,
+        "length": 9
+      }
+    ],
+    "COMMA_PARENTHESIS_WHITESPACE": [
+      {
+        "file": "cont__CONT-05.txt",
+        "message": "Não insira um espaço depois de abrir parênteses",
+        "sentence": "( ) Você abriu este livro.",
+        "context": "...rio A — Exposição ao agente traumático  ( ) Você abriu este livro. ( ) Você leu as...",
+        "offset": 671,
+        "length": 2
+      },
+      {
+        "file": "cont__CONT-05.txt",
+        "message": "Não insira um espaço depois de abrir parênteses",
+        "sentence": "( ) Você leu as palavras de Joaquim.",
+        "context": "... traumático  ( ) Você abriu este livro. ( ) Você leu as palavras de Joaquim. ( ) V...",
+        "offset": 698,
+        "length": 2
+      },
+      {
+        "file": "cont__CONT-05.txt",
+        "message": "Não insira um espaço depois de abrir parênteses",
+        "sentence": "( ) Você sentiu o cheiro descrito nas páginas.",
+        "context": "...o. ( ) Você leu as palavras de Joaquim. ( ) Você sentiu o cheiro descrito nas pági...",
+        "offset": 735,
+        "length": 2
+      }
+    ],
+    "MORFOLOGIK_RULE_PT_BR": [
+      {
+        "file": "cont__CONT-05.txt",
+        "message": "Encontrado possível erro de ortografia.",
+        "sentence": "Critério B — Reexperiência intrusiva",
+        "context": "...-------------------------  Critério B — Reexperiência intrusiva  ( ) Você já sonhou com olhos...",
+        "offset": 1150,
+        "length": 13
+      },
+      {
+        "file": "cont__CONT-05.txt",
+        "message": "Encontrado possível erro de ortografia.",
+        "sentence": "Os sintomas de reexperiência começaram no primeiro sonho.",
+        "context": "...  ☑ Critério preenchido. Os sintomas de reexperiência começaram no primeiro sonho. Se você ai...",
+        "offset": 1478,
+        "length": 13
+      },
+      {
+        "file": "cont__CONT-05.txt",
+        "message": "Encontrado possível erro de ortografia.",
+        "sentence": "Transtorno de Estresse Pós-Traumático Complexo (F43.10) — Induzido por leitura — Com manifestações dissociativas (o texto que você leu não parece mais texto — parece memória) — Com especificador de contágio: a fonte do t",
+        "context": "...no de Estresse Pós-Traumático Complexo (F43.10) — Induzido por leitura — Com manifesta...",
+        "offset": 4724,
+        "length": 6
+      }
+    ],
+    "AO90_CARDINAL_POINTS_CASING": [
+      {
+        "file": "cont__CONT-05.txt",
+        "message": "Os pontos cardeais se escrevem com minúscula, a não ser que estejam dando nome a uma região geográfica específica.",
+        "sentence": "☑ Este critério está sendo preenchido agora.",
+        "context": "...--------------  Critério F — Duração  ☑ Este critério está sendo preenchido agora. A...",
+        "offset": 3760,
+        "length": 4
+      }
+    ],
+    "QUE_VERBOPASSADO_VERBOPARTPASSADO": [
+      {
+        "file": "cont__CONT-05.txt",
+        "message": "Para conferir mais clareza ao seu texto, busque usar uma linguagem mais concisa.",
+        "sentence": "A leitura durou o tempo que levou para você chegar até aqui.",
+        "context": "...eenchido agora. A leitura durou o tempo que levou para você chegar até aqui. A contaminaç...",
+        "offset": 3827,
+        "length": 9
+      }
+    ],
+    "UPPERCASE_AFTER_COMMA": [
+      {
+        "file": "cont__CONT-09.txt",
+        "message": ", não encerra frases; portanto, se não for um nome próprio, a palavra seguinte deve ser iniciada com letra minúscula.",
+        "sentence": "— Bem-vindo ao ciclo, Paciente 1.263.",
+        "context": "...ê.  — Vai ser ele.  — Bem-vindo ao ciclo, Paciente 1.263.  — O espelho sabe. O espelho sem...",
+        "offset": 2609,
+        "length": 10
+      },
+      {
+        "file": "doc__DOC-09.txt",
+        "message": ": não encerra frases; portanto, se não for um nome próprio, a palavra seguinte deve ser iniciada com letra minúscula.",
+        "sentence": "0-5 pontos: Você está na fase inicial da contaminação.",
+        "context": "...--------------------  ESCORE  0-5 pontos: Você está na fase inicial da contaminação. O...",
+        "offset": 3347,
+        "length": 6
+      },
+      {
+        "file": "luc__LUC-18.txt",
+        "message": ": não encerra frases; portanto, se não for um nome próprio, a palavra seguinte deve ser iniciada com letra minúscula.",
+        "sentence": "Uma vez, ele me pegou pelo braço e disse: Não deixa ninguém ler o que está no meu armário.",
+        "context": "...Uma vez, ele me pegou pelo braço e disse: Não deixa ninguém ler o que está no meu arm...",
+        "offset": 1347,
+        "length": 5
+      }
+    ],
+    "PT_REDUNDANCY_REPLACE_SI_MESMO": [
+      {
+        "file": "cont__CONT-13.txt",
+        "message": "“si mesmo” é um pleonasmo. É preferível dizer “si”",
+        "sentence": "Você vai dizer a si mesmo que é impressão.",
+        "context": "...com um fundo de terra. Você vai dizer a si mesmo que é impressão. Vai abrir a janela. O ...",
+        "offset": 1181,
+        "length": 8
+      },
+      {
+        "file": "doc__DOC-08.txt",
+        "message": "“si mesmo” é um pleonasmo. É preferível dizer “si”",
+        "sentence": "Joaquim refere-se a si mesmo em terceira pessoa (“ele comeu minha humanidade”).",
+        "context": "...81), forma parcial  Joaquim refere-se a si mesmo em terceira pessoa (“ele comeu minha hu...",
+        "offset": 1473,
+        "length": 8
+      }
+    ],
+    "FORMAL_PRA_PARA": [
+      {
+        "file": "doc__DOC-01.txt",
+        "message": "Em contextos mais formais, prefira “para”.",
+        "sentence": "Covas recentes, a terra fica fofa, dá pra cavar com as mãos quase.",
+        "context": ".... Covas recentes, a terra fica fofa, dá pra cavar com as mãos quase. As antigas, nã...",
+        "offset": 408,
+        "length": 3
+      },
+      {
+        "file": "doc__DOC-01.txt",
+        "message": "Em contextos mais formais, prefira “para”.",
+        "sentence": "É que não dava pra puxar a tampa — ela já era parte do chão.",
+        "context": "...pá. Não por desrespeito. É que não dava pra puxar a tampa — ela já era parte do chã...",
+        "offset": 956,
+        "length": 3
+      },
+      {
+        "file": "doc__DOC-01.txt",
+        "message": "Em contextos mais formais, prefira “para”.",
+        "sentence": "O senhor pode perguntar pro Seu Nilo, que tava comigo.",
+        "context": "...semana passada. O senhor pode perguntar pro Seu Nilo, que tava comigo. Ele viu tamb...",
+        "offset": 1223,
+        "length": 3
+      }
+    ],
+    "REMOVER_EU_NÓS": [
+      {
+        "file": "doc__DOC-01.txt",
+        "message": "Poderá omitir o pronome pessoal nesta perífrase.",
+        "sentence": "O que eu vi dentro não era um esqueleto.",
+        "context": "... a tampa — ela já era parte do chão.  O que eu vi dentro não era um esqueleto.  Era um co...",
+        "offset": 1005,
+        "length": 9
+      },
+      {
+        "file": "doc__DOC-01.txt",
+        "message": "Poderá omitir o pronome pessoal nesta perífrase.",
+        "sentence": "1917 — o ano que eu entrei aqui",
+        "context": "...ciente 1.260  E uma data.  1917 — o ano que eu entrei aqui  Mas o diário continuava depois. P...",
+        "offset": 2534,
+        "length": 13
+      },
+      {
+        "file": "doc__DOC-16.txt",
+        "message": "Poderá omitir o pronome pessoal nesta perífrase.",
+        "sentence": "O que importa é que eu vim avisar o senhor.”",
+        "context": ".... Mas isso não importa. O que importa é que eu vim avisar o senhor.”  “Avisar o quê?”  “O ...",
+        "offset": 1875,
+        "length": 10
+      }
+    ],
+    "NUMBER_ABREVIATION": [
+      {
+        "file": "doc__DOC-02.txt",
+        "message": "As abreviaturas para número são: “n.º” ou “núm.”",
+        "sentence": "Nº de Registro: 1.260 Nome: Joaquim Antônio Correia Data de Nascimento:  1907 (estimado) Naturalidade: Quixeramobim, Ceará Filiação: Pai: Antônio Correia (falecido — inanição, 1915); Mãe: Maria do Rosário Correia (desapa",
+        "context": "...--------------------------------------  Nº de Registro: 1.260 Nome: Joaquim Antôni...",
+        "offset": 368,
+        "length": 2
+      },
+      {
+        "file": "doc__DOC-20.txt",
+        "message": "As abreviaturas para número são: “n.º” ou “núm.”",
+        "sentence": "A entrada nº 3 (Dr. Heitor Oliveira) não possui autorização formal de retirada.",
+        "context": "...o]  Observações anexadas:  1. A entrada nº 3 (Dr. Heitor Oliveira) não possui auto...",
+        "offset": 1033,
+        "length": 2
+      },
+      {
+        "file": "doc__DOC-20.txt",
+        "message": "As abreviaturas para número são: “n.º” ou “núm.”",
+        "sentence": "A entrada nº 4 foi reconstituída a partir de menção indireta em correspondência interna do Arquivo Público Mineiro.",
+        "context": "...justificativa por escrito. 2. A entrada nº 4 foi reconstituída a partir de menção ...",
+        "offset": 1270,
+        "length": 2
+      }
+    ],
+    "WHITESPACE_RULE": [
+      {
+        "file": "doc__DOC-02.txt",
+        "message": "Possível erro de escrita: você repetiu um espaço em branco",
+        "sentence": "Nº de Registro: 1.260 Nome: Joaquim Antônio Correia Data de Nascimento:  1907 (estimado) Naturalidade: Quixeramobim, Ceará Filiação: Pai: Antônio Correia (falecido — inanição, 1915); Mãe: Maria do Rosário Correia (desapa",
+        "context": "...quim Antônio Correia Data de Nascimento:  1907 (estimado) Naturalidade: Quixeramob...",
+        "offset": 439,
+        "length": 2
+      },
+      {
+        "file": "luc__LUC-Escolha.txt",
+        "message": "Possível erro de escrita: você repetiu um espaço em branco",
+        "sentence": "Nota do arquivo: os pontos não são cumulativos.",
+        "context": "... formação. A criatura já tem seu nome.    Nota do arquivo: os pontos não são cumul...",
+        "offset": 2870,
+        "length": 2
+      }
+    ],
+    "CRASE_CONFUSION_2": [
+      {
+        "file": "doc__DOC-02.txt",
+        "message": "Possível erro de crase.",
+        "sentence": "Nº de Registro: 1.260 Nome: Joaquim Antônio Correia Data de Nascimento:  1907 (estimado) Naturalidade: Quixeramobim, Ceará Filiação: Pai: Antônio Correia (falecido — inanição, 1915); Mãe: Maria do Rosário Correia (desapa",
+        "context": "...1915 e confinado no Campo do Alagadiço, próximo a Fortaleza. Transferido em 1917 via Sant...",
+        "offset": 713,
+        "length": 9
+      },
+      {
+        "file": "doc__DOC-17.txt",
+        "message": "Possível erro de crase.",
+        "sentence": "Carta ficcional atribuída ao soldado Antônio Alves Neto, lotado no Campo do Alagadiço, próximo a Fortaleza.",
+        "context": "...ves Neto, lotado no Campo do Alagadiço, próximo a Fortaleza.  Reconstituição ficcional en...",
+        "offset": 305,
+        "length": 9
+      },
+      {
+        "file": "doc__DOC-18.txt",
+        "message": "Possível erro de crase.",
+        "sentence": "Campo: Alagadiço, próximo a Fortaleza Capacidade oficial: não indicada nesta reconstituição Número de internados durante o período: impreciso; as fontes consultadas registram milhares de confinados Óbitos: sem total veri",
+        "context": "...--------------------  Campo: Alagadiço, próximo a Fortaleza Capacidade oficial: não indic...",
+        "offset": 471,
+        "length": 9
+      }
+    ],
+    "SPACE_BEFORE_PUNCTUATION2": [
+      {
+        "file": "doc__DOC-02.txt",
+        "message": "Remova o espaço antes deste sinal de pontuação.",
+        "sentence": "Paciente alega que ’um bicho’ mudou a cor.",
+        "context": "...ro, ausente na esquerda. Paciente alega que ’um bicho’ mudou a cor. Provável sequela ...",
+        "offset": 1325,
+        "length": 5
+      },
+      {
+        "file": "doc__DOC-02.txt",
+        "message": "Remova o espaço antes deste sinal de pontuação.",
+        "sentence": "Set/1945 & Episódio de vocalização incontrolável (alega que ’a Rasga Mortalha’ está falando através dele) & Sedação com brometo",
+        "context": "...dio de vocalização incontrolável (alega que ’a Rasga Mortalha’ está falando através d...",
+        "offset": 2220,
+        "length": 5
+      },
+      {
+        "file": "doc__DOC-02.txt",
+        "message": "Remova o espaço antes deste sinal de pontuação.",
+        "sentence": "Jan/1948 & Homicídio — Visitante (entrou na ala proibida) & Isolamento perpétuo\n1949-1956 & Mutismo seletivo (7 anos sem falar com a equipe) & —\n1956 & Retomada da fala: primeira frase ’O diário’ & —\n1979 & Sessões com D",
+        "context": "...) & — 1956 & Retomada da fala: primeira frase ’O diário’ & — 1979 & Sessões com Dr. Hei...",
+        "offset": 2471,
+        "length": 7
+      }
+    ]
+  },
+  "errors": [],
+  "limits": [
+    "Diagnóstico linguístico; não é aprovação editorial nem nota literária.",
+    "O texto foi convertido de LaTeX para texto plano; posições se referem ao texto convertido.",
+    "Repetições e fragmentos podem ser escolhas estéticas intencionais."
+  ]
+}

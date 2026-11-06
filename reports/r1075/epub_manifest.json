@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-06T00:12:34.499891+00:00",
+  "generated_at": "2026-11-06T01:41:36.621272+00:00",
   "status": "completed",
   "source_project": "literatura/molambudos/Molambudos_Revisada_R1075",
   "source_order": "main.tex",
@@ -15,8 +15,8 @@
   ],
   "epub": {
     "path": "literatura/molambudos/Molambudos_Revisada_R1075/release/Molambudos_PT_revisado.epub",
-    "bytes": 12523629,
-    "sha256": "b0fad09043777b1d0e4d743524d78a37056488fa6f26a94e035efa708460e9ac"
+    "bytes": 12524260,
+    "sha256": "0269e8c0c1d26c1f66eb1c7773c732afa2332a58bd1ce5acf2c4fe6b2a4b9c4c"
   },
   "validation": {
     "zip_ok": true,
@@ -48,12 +48,14 @@
       "identifier": "ISBN 9798189170492",
       "publisher": "OpenCode Books"
     },
-    "epubcheck": "não instalado; validação estrutural local"
+    "epubcheck": "5.4.0: 0 fatals / 0 errors / 0 warnings / 0 infos",
+    "accessibility_summary": true,
+    "ace": "1.4.6: 26 pass / 0 fail"
   },
   "problems": [],
   "limits": [
     "Edição de leitura derivada da canônica; não substitui o PDF KDP.",
-    "Validação estrutural local; EPUBCheck não está instalado.",
+    "EPUBCheck 5.4.0 e Ace 1.4.6 executados como ferramentas externas; sem revisão humana de galerada.",
     "Sem revisão humana de galerada ou validação editorial externa."
   ]
 }

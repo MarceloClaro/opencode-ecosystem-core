@@ -1,14 +1,18 @@
 # R1078 — Book Studio Universal: landscape GitHub e arquitetura de gaps
 
 **Data:** 2026-11-05  
-**Status:** pesquisa concluída; **nenhum repositório foi clonado, instalado ou executado**.  
+**Status:** pesquisa concluída; fase 0 executada com ferramentas externas em
+`/tmp/opencode` (EPUBCheck, Ace, Vale e LanguageTool). Nenhum dos 109
+repositórios do landscape foi clonado ou embutido no Core.
 **Escopo:** mapear candidatos no GitHub para transformar o Core/Book Studio em
 diagramador, editor e assistente literário universal, cobrindo os gaps observados
 no Molambudos e no pipeline editorial atual.
 
 > Este relatório não declara que os repositórios “resolvem” os gaps. Ele registra
-> candidatos, licença, atividade, modo de integração e risco. A integração exige
-> spec, teste, revisão de licença e aprovação humana.
+> candidatos, licença, atividade, modo de integração e risco. As ferramentas
+> executadas na fase 0 são externas, com versão registrada, e não foram
+> incorporadas ao Core. A integração exige spec, teste, revisão de licença e
+> aprovação humana.
 
 ## 1. Diagnóstico: os gaps que o Molambudos expôs
 
@@ -39,7 +43,7 @@ no Molambudos e no pipeline editorial atual.
   11,7%; máximo 173,4%.
 - Catálogo: 48 registros.
 - Checksums: 16/16, 3/3, 2/2.
-- Testes: 152 (147 anteriores + 5 do gate R1078); `doctor` 22/22.
+- Testes: 165 (147 anteriores + 5 do landscape + 13 do Book Studio); `doctor` 22/22.
 - Nenhuma nota 10/10, publicação ou validação externa é declarada.
 
 ## 2. Método e critérios
@@ -421,16 +425,17 @@ O Studio é a camada de UX, não o motor. Proposta:
   plataforma.
 - **Nenhuma nota 10/10, Qualis A1 ou aceite editorial é declarada.**
 
-## 10. Próximos passos
+## 10. Estado da execução
 
-1. Aprovar o escopo da fase R1078 (contratos + KDP + design tokens).
-2. Criar `SPEC-935-R1078-book-studio-universal.md` com critérios de aceitação.
-3. Implementar `core-native` do KDP/spine/TAC/contraste antes de adotar engines.
-4. Adotar primeiro o conjunto P0: Typst, Quarto, WeasyPrint, pdfcpu/qpdf,
-   veraPDF, EPUBCheck/Ace, Thoth, LanguageTool/Vale, BookNLP/spaCy/NetworkX,
-   Docling/pdfplumber/pypdf, ColorAide/FontTools, FFmpeg/Whisper.
-5. Manter R1076 e R1077 intactas; toda mudança em projeto separado.
-6. Resolver o gargalo de capa 300 DPI e lombada antes de qualquer publicação.
+- **R1078 aprovada e fase 0 implementada** em `marceloclaro/bookstudio/`:
+  contratos, KDP, design tokens, gate de licença, manifesto de release e CLI.
+- **R1079–R1083 autorizadas**, mas não concluídas neste ciclo. O piloto de
+  PDF/UA, o EPUBCheck/Ace e o LanguageTool/Vale já produziram evidência inicial.
+- A capa 300 DPI foi investigada: a frente é vetorial e pode ser re-renderizada;
+  a contracapa precisa de re-layout por proporção incompatível.
+- A edição R1076/R1077 permanece intacta; o EPUB revisado recebeu apenas o
+  `accessibilitySummary` e foi revalidado.
+- Nenhuma publicação, ISBN nova ou upload KDP foi executado.
 
 ## 11. Arquivos
 
@@ -438,8 +443,27 @@ O Studio é a camada de UX, não o motor. Proposta:
 |---|---|
 | `reports/r1078/README.md` | este relatório |
 | `reports/r1078/github_landscape.json` | 109 repositórios com licença, stars, gap, modo e prioridade |
-| `specs/SPEC-935-R1078-book-studio-universal.md` | proposta de arquitetura e fase 0 |
+| `reports/r1078/kdp_specs.json` | lombada e capa completa para 421/422/435 pp |
+| `reports/r1078/cover/` | template KDP 422 pp, achados de capa e 300 DPI |
+| `reports/r1078/pdfua/` | piloto Typst × WeasyPrint com métricas de estrutura |
+| `reports/r1078/editorial/` | LanguageTool 6.6 e Vale 3.26 sobre os 84 fragmentos |
+| `marceloclaro/bookstudio/` | contratos, KDP, tokens, licença, release, EPUB e CLI |
+| `specs/SPEC-935-R1078-book-studio-universal.md` | arquitetura e critérios da fase 0 |
+| `tests/test_r1078_bookstudio_contracts.py` | 13 testes de contratos, KDP, tokens, licença e release |
 | `tests/test_r1078_book_studio_landscape.py` | gate do manifesto (schema, cobertura, licença) |
+
+## 12. Fase 0 executada (evidência)
+
+| Entrega | Resultado |
+|---|---|
+| Contratos | `BookProject`, `DesignTokens`, `KDPCoverSpec`, `ReleaseManifest`; `DocumentIR` segue pendente |
+| KDP | 422 pp premium color: lombada 0,9904 in; capa 13,8389 × 9,3051 in; 4152 × 2792 px |
+| Capa | frente vetorial re-renderizada em 1890 × 2717 px; contracapa com proporção incompatível |
+| EPUB | EPUBCheck 5.4.0: 0 erros/0 avisos; Ace 1.4.6: 26 pass/0 fail |
+| PDF/UA | WeasyPrint 67: 58 nós, `pt-BR`, XMP `pdfuaid`; Typst 0.15.1: 39 nós, `pt`, XMP `pdfuaid` |
+| Editorial | LanguageTool 6.6: 650 ocorrências; Vale 3.26: 95 alertas |
+| Licença | 109 repos: nenhuma violação GPL/AGPL como biblioteca |
+| Testes | 13 testes novos do Book Studio; **165 testes** na suíte; `doctor` 22/22 |
 
 **Nota final:** o valor desta pesquisa não está na lista, mas na disciplina de
 não confundir catálogo com execução, licença permissiva com qualidade e

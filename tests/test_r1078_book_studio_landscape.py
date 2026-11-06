@@ -70,19 +70,19 @@ def test_license_gate_blocks_copyleft_libraries():
 
 
 def test_readme_documents_gaps_and_limits():
-    text = README.read_text(encoding="utf-8").lower()
+    text = re.sub(r"\s+", " ", README.read_text(encoding="utf-8").lower())
     for i in range(1, 16):
         assert f"g{i}" in text, f"gap G{i} ausente no relatório"
     for term in (
         "300 dpi", "pdf/ua", "onix", "isbn", "epub", "tac",
-        "nenhum repositório foi clonado", "10/10",
+        "nenhum dos 109 repositórios", "10/10",
     ):
         assert term in text, term
 
 
-def test_spec_declares_proposed_status_and_requirements():
+def test_spec_declares_status_and_requirements():
     text = SPEC.read_text(encoding="utf-8")
-    assert "Status:** proposta" in text
+    assert "Status:** fase 0 implementada" in text
     assert "não objetivos" in text.lower()
     for i in range(1, 13):
         assert re.search(rf"\|\s*R{i}\s*\|", text), f"requisito R{i} ausente"

@@ -1,0 +1,6 @@
+extends: existence
+message: "Advérbio em -mente: '%s'."
+level: suggestion
+ignorecase: true
+tokens:
+  - '\b\w+mente\b'

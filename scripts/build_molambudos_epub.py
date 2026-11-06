@@ -28,6 +28,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from xml.etree import ElementTree as ET
 
+from marceloclaro.bookstudio.epub import patch_accessibility_summary
+
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_PROJECT = ROOT / "literatura/molambudos/Molambudos_VictoriaRegia"
 DEFAULT_OUTPUT = ROOT / "literatura/molambudos/release/2026-11-05/epub/Molambudos_PT.epub"
@@ -64,6 +66,12 @@ TABLE_SPECS = {
     "moltablefive": "lllll",
     "moltablesix": "llllll",
 }
+
+ACCESSIBILITY_SUMMARY = (
+    "Edição em português com estrutura navegável, texto alternativo nas imagens, "
+    "ordem de leitura definida e sumário. A obra é uma ficção documental; as "
+    "imagens são reconstituições ficcionais, não documentos históricos."
+)
 
 CSS = """\
 body { font-family: serif; line-height: 1.55; margin: 0 1.2em; }
@@ -550,6 +558,7 @@ def validate_epub(epub: Path, canonical_words: int) -> dict:
                 "dc": "http://purl.org/dc/elements/1.1/",
             }
             result["opf_ok"] = True
+            result["accessibility_summary"] = "schema:accessibilitySummary" in z.read(opf_path).decode("utf-8", "replace")
             result["metadata"] = {
                 "title": (opf.findtext(".//dc:title", namespaces=ns) or "").strip(),
                 "creator": [e.text.strip() for e in opf.findall(".//dc:creator", ns) if e.text],
@@ -675,6 +684,7 @@ def main() -> int:
         "--resource-path", str(project),
         "--output", str(output),
     ], cwd=project)
+    patch_accessibility_summary(output, ACCESSIBILITY_SUMMARY)
 
     pdf = project / "main_kdp_pt_160x230mm.pdf"
     canonical_words = 0
@@ -691,6 +701,8 @@ def main() -> int:
         problems.append("OPF inválido")
     if not validation.get("nav_ok"):
         problems.append("nav ausente")
+    if not validation.get("accessibility_summary"):
+        problems.append("schema:accessibilitySummary ausente")
     if validation.get("raw_latex"):
         problems.append(f"{len(validation['raw_latex'])} comandos LaTeX crus")
     if validation.get("missing_images"):
@@ -730,7 +742,7 @@ def main() -> int:
         "problems": problems,
         "limits": [
             "Edição de leitura derivada da canônica; não substitui o PDF KDP.",
-            "Validação estrutural local; EPUBCheck não está instalado.",
+            "Validação estrutural local; EPUBCheck/Ace são executados como ferramentas externas.",
             "Sem revisão humana de galerada ou validação editorial externa.",
         ],
     }

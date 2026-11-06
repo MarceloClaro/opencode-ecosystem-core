@@ -1,6 +1,6 @@
 # SPEC-935-R1078 — Book Studio Universal
 
-**Status:** proposta; nenhuma implementação iniciada.  
+**Status:** fase 0 implementada (R1078); R1079–R1083 permanecem propostas.
 **Data:** 2026-11-05  
 **Objetivo:** transformar o Book Studio em um estúdio editorial universal —
 diagramador, editor e assistente literário — por contratos e adaptadores,
@@ -89,3 +89,20 @@ report() -> structured JSON
 A fase 0 está pronta quando os contratos, a calculadora KDP, o gate de licença e
 o manifesto de release estiverem testados e documentados, sem que nenhuma
 ferramenta externa tenha sido embutida no Core.
+
+## 8. Evidência da fase 0
+
+| Item | Resultado |
+|---|---|
+| Pacote | `marceloclaro/bookstudio/` com `kdp.py`, `tokens.py`, `license_gate.py`, `release.py`, `contracts.py`, `epub.py`, `cli.py` |
+| Testes | `tests/test_r1078_bookstudio_contracts.py` — 13 testes; suíte de 165 testes; `doctor` 22/22 |
+| KDP | 422 pp premium color: lombada 0,9904 in; capa 13,8389 × 9,3051 in; 4152 × 2792 px |
+| Licença | 109 repos do landscape; nenhuma violação GPL/AGPL como `library` |
+| EPUB | `schema:accessibilitySummary` inserido; EPUBCheck 5.4.0: 0 erros/0 avisos; Ace 1.4.6: 26 pass/0 fail |
+| PDF/UA | WeasyPrint 67: 58 nós, `pt-BR`; Typst 0.15.1: 39 nós, `pt`; ambos com XMP `pdfuaid` |
+| Editorial | LanguageTool 6.6: 650 ocorrências; Vale 3.26: 95 alertas |
+| Capa | template 422 pp com guias; frente vetorial em 300 DPI; contracapa exige re-layout |
+
+**Limites:** a fase 0 não certifica PDF/UA, não valida arte final, não publica
+e não substitui revisão humana. O `DocumentIR`, o assistente literário completo
+e a tradução QA permanecem nas fases seguintes.
