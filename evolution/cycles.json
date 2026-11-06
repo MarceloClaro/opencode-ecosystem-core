@@ -23962,6 +23962,33 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1086",
+      "objective": "Triar três repositórios e sanear apenas objetos de build do histórico local antes de publicar",
+      "changes": [
+        "Parecer documental R1085 (MIT/MIT/AGPL) sem executar terceiros",
+        "Rebase local a partir de aba3fae1, retirando somente dois resíduos de build desde a introdução",
+        "Literatura preservada (árvore Git f88b8141), 79 testes focados e doctor 22/22 antes do push"
+      ],
+      "score": null,
+      "lessons": [
+        "Nunca confundir clone/configuração com qualidade auditiva; ensaio cego com consentimento antes de adotar TTS",
+        "Reescrever apenas commits ainda locais evita substituição de histórico remoto",
+        "Não remover whitespace de manuscrito em massa: Markdown pode usar espaços para quebras de linha",
+        "Roteamento exigente do executor não teve agente elegível; revisão textual geral funcionou apenas no escopo informado"
+      ],
+      "timestamp": 1793956612.1293378,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [

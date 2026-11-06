@@ -41,3 +41,17 @@ histórico já compartilhado.
   como está, salvo autorização específica. Não criar tag para o novo HEAD.
 - Testes e `doctor` aferem contratos locais; não comprovam qualidade de voz,
   segurança integral de todos os arquivos nem aceitação editorial/KDP.
+
+## Evidência local antes da atualização remota
+
+- RED: `tests/test_r1085_avaliacao_historico.py` falhou 2/2 antes do parecer;
+  depois do parecer falhou apenas a busca dos dois resíduos no intervalo.
+- GREEN após rebase local: 79 testes focados incluindo R1084/R864/R822/R1085,
+  `doctor` 22/22 e reconciliador `--check` sem drift.
+- `literatura/` no HEAD anterior `595ecb1a` e no novo HEAD `c3c9c15c`:
+  mesma árvore Git `f88b81418b8f750e5dec89ad8babe3d8d0799f95`. Os dois
+  resíduos não aparecem em `git log 0e501aed..HEAD -- <path>`.
+- **Não resolvidos:** o commit literário reescrito `0a0694fd` ainda tem 919
+  avisos de whitespace de origens diversas, inclusive espaços de Markdown.
+  Não atribuir limpeza desses avisos à reescrita; não modificar texto literário
+  automaticamente. Esta evidência não prova ausência de segredos em todo o Git.
