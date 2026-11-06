@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-11-06T00:14:11.137386+00:00",
+  "status": "completed",
+  "palette": {
+    "mem": {
+      "hex": "#8A3B1F",
+      "contrast": 6.76,
+      "family": "Memória",
+      "use": "abertura, capitular, filete"
+    },
+    "doc": {
+      "hex": "#1F5C57",
+      "contrast": 6.76,
+      "family": "Documento",
+      "use": "abertura, capitular, filete"
+    },
+    "luc": {
+      "hex": "#552A7A",
+      "contrast": 9.23,
+      "family": "Lucidez",
+      "use": "abertura, capitular, filete"
+    },
+    "cont": {
+      "hex": "#9B1B1B",
+      "contrast": 7.18,
+      "family": "Contaminação",
+      "use": "abertura, capitular, filete"
+    },
+    "epi": {
+      "hex": "#6E4E10",
+      "contrast": 6.68,
+      "family": "Epílogo/arquivo",
+      "use": "filete do caderno"
+    },
+    "ink": {
+      "hex": "#2B2117",
+      "contrast": 13.83,
+      "family": "Tinta",
+      "use": "corpo do texto"
+    },
+    "paper": {
+      "hex": "#F8F0D7",
+      "contrast": null,
+      "family": "Papel",
+      "use": "fundo sépia"
+    },
+    "gold": {
+      "hex": "#CBA135",
+      "contrast": null,
+      "family": "Dourado",
+      "use": "apenas fundo escuro (capa/parte)"
+    },
+    "olho": {
+      "hex": "#FFD700",
+      "contrast": null,
+      "family": "Olho",
+      "use": "apenas fundo escuro"
+    }
+  },
+  "typography": {
+    "body": "EB Garamond 14/17,5 pt",
+    "fragment_title": "EB Garamond bold 18/22 pt",
+    "family_label": "CM Sans bold 8/9 pt, small caps",
+    "family_initial": "40 pt, cor da família",
+    "rule": "1,2 pt, 28% da largura do texto"
+  },
+  "fragments": {
+    "total": 84,
+    "fragtitle": 84,
+    "families": {
+      "MEM": 27,
+      "DOC": 27,
+      "LUC": 23,
+      "CONT": 7
+    },
+    "capitular_rule": "inicial da família (M/D/L/C), não uma segunda capitular textual; evita duas iniciais concorrentes na mesma página."
+  },
+  "plates": {
+    "count": 6,
+    "files": [
+      {
+        "path": "figures/immersao/placa_00.png",
+        "sha256": "5949687eb4aae3f39f6f1638256a4061596c7a1265bad1b062af1e1d91406aed"
+      },
+      {
+        "path": "figures/immersao/placa_01.png",
+        "sha256": "12ce4ef2eb87deff9f30a36f63149114dd256e64d4a095ebc08d3c6562f66159"
+      },
+      {
+        "path": "figures/immersao/placa_02.png",
+        "sha256": "d1d44512fc8762c385aeca86cd79c6dc6d26c36c9b96f2b8862f2869ecf372ba"
+      },
+      {
+        "path": "figures/immersao/placa_03.png",
+        "sha256": "4202b9b7a7f8f128444e621a381c87abe6cc550a82036acdea90455009dd5e6a"
+      },
+      {
+        "path": "figures/immersao/placa_04.png",
+        "sha256": "188dee5e5f7da86e09f5ccc2099d0aa6650bc361d8487ff6cf163e47d56750a3"
+      },
+      {
+        "path": "figures/immersao/placa_05.png",
+        "sha256": "a32e148ba27c1ce343fc7d15d541cd41ca6668d1cf62d5ae6185060a91c12c87"
+      }
+    ],
+    "source": "arquivo iconográfico existente do projeto (5 fotos sépia + retrato joaquim.png)",
+    "note": "As imagens são ficção documental; não são provas históricas. O modelo de geração estava indisponível; usou-se o arquivo existente (5 fotos sépia + retrato), recortado e legendado, sem inventar imagens de vítimas."
+  },
+  "pdf": {
+    "pages": 421,
+    "bytes": 19400527,
+    "sha256": "9ee4c4679fe7d42b1c30605f3bebaae5dfe42cfb18567cf93f96444f5cb955be"
+  },
+  "epub": {
+    "images": 13,
+    "words": 53554,
+    "bytes": 12523629,
+    "sha256": "b0fad09043777b1d0e4d743524d78a37056488fa6f26a94e035efa708460e9ac"
+  },
+  "checks": [
+    {
+      "id": "palette_contrast",
+      "status": "pass",
+      "detail": "MEM 6,76; DOC 6,76; LUC 9,23; CONT 7,18; tinta 13,83 sobre papel sépia."
+    },
+    {
+      "id": "fragtitle_all",
+      "status": "pass",
+      "detail": "84 fragmentos com capitular de família e filete colorido."
+    },
+    {
+      "id": "legend",
+      "status": "pass",
+      "detail": "Legenda dos Códigos com quatro famílias e contraste declarado."
+    },
+    {
+      "id": "caderno",
+      "status": "pass",
+      "detail": "6 pranchas, legendas de ficção documental e nota ética."
+    },
+    {
+      "id": "pdf_pages",
+      "status": "pass",
+      "detail": "421 pp; 160×230 mm; fontes embutidas."
+    },
+    {
+      "id": "epub_images",
+      "status": "pass",
+      "detail": "13 imagens; 84 seções; 0 links quebrados; 0 LaTeX cru."
+    }
+  ],
+  "limits": [
+    "Design editorial interno; não é validação profissional independente.",
+    "Capa e lombada precisam ser recalculadas para 421 pp; capa em 300 DPI continua pendente.",
+    "As imagens são ficção documental; não são provas históricas.",
+    "O modelo de geração de imagens estava indisponível; usou-se o arquivo existente.",
+    "Traduções EN/ZH/TRI não foram atualizadas; PDF tagged segue bloqueado.",
+    "Nenhuma nota 10/10 é declarada."
+  ]
+}

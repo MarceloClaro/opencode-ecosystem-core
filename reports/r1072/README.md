@@ -79,9 +79,10 @@ edições excluídas. A escolha da edição canônica é editorial e pertence ao
 - PDF tagged: bloqueado pelo toolchain (`luaotfload` ausente; `tagpdf` aborta na
   mudança de versão PDF). Nenhum PDF/UA foi produzido.
 - **Edição revista R1075**: `literatura/molambudos/Molambudos_Revisada_R1075/`
-  — 415 pp, 84 fragmentos, DOC −18,3%, CONT 7, LUC 23. PDF e EPUB revisados;
+  — 421 pp, 84 fragmentos, DOC −18,3%, CONT 7, LUC 23; design R1076 com
+  legenda e 6 pranchas. PDF e EPUB revisados;
   não substitui a canônica; capa/lombada a recalcular; sem nova ISBN. Ver
-  `reports/r1075/README.md`.
+  `reports/r1076/README.md`.
 
 ### Podcast
 

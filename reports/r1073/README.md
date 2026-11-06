@@ -71,6 +71,7 @@ provam mérito literário, aprovação editorial ou validação externa.
 ## Atualização R1075
 
 - Edição revista em `literatura/molambudos/Molambudos_Revisada_R1075/`:
-  415 pp, 84 fragmentos, DOC −18,3%, CONT 7, LUC 23. PDF/EPUB revisados;
-  não substitui a canônica; capa/lombada a recalcular; sem nova ISBN.
+  421 pp, 84 fragmentos, DOC −18,3%, CONT 7, LUC 23; design R1076 com
+  legenda e 6 pranchas. PDF/EPUB revisados; não substitui a canônica;
+  capa/lombada a recalcular; sem nova ISBN.
 - Relatório: `reports/r1075/README.md`.

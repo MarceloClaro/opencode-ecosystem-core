@@ -78,6 +78,12 @@ img { max-width: 100%; height: auto; }
 .smallcaps { font-variant: small-caps; }
 table { border-collapse: collapse; width: 100%; margin: 1em 0; font-size: 0.92em; }
 th, td { border: 1px solid #999; padding: 0.25em 0.35em; vertical-align: top; }
+.code-mem { color: #8A3B1F; font-weight: bold; }
+.code-doc { color: #1F5C57; font-weight: bold; }
+.code-luc { color: #552A7A; font-weight: bold; }
+.code-cont { color: #9B1B1B; font-weight: bold; }
+figure { margin: 1.2em 0; text-align: center; }
+figcaption { font-size: 0.9em; font-style: italic; color: #2B2117; }
 """
 
 
@@ -108,6 +114,48 @@ def parse_braced(text: str, pos: int) -> tuple[str, int]:
             if depth == 0:
                 return text[pos + 1:i], i + 1
     raise ValueError("chaves não balanceadas")
+
+
+def parse_fragtitle(tex_text: str) -> list[str] | None:
+    j = tex_text.find("\\fragtitle{")
+    if j < 0:
+        return None
+    pos = j + len("\\fragtitle")
+    args: list[str] = []
+    try:
+        for _ in range(5):
+            pos = tex_text.index("{", pos)
+            arg, pos = parse_braced(tex_text, pos)
+            args.append(arg)
+    except ValueError:
+        return None
+    return args
+
+
+def replace_fragtitle(text: str) -> str:
+    out: list[str] = []
+    i = 0
+    needle = "\\fragtitle{"
+    while True:
+        j = text.find(needle, i)
+        if j < 0:
+            out.append(text[i:])
+            break
+        out.append(text[i:j])
+        pos = j + len("\\fragtitle")
+        args: list[str] = []
+        try:
+            for _ in range(5):
+                pos = text.index("{", pos)
+                arg, pos = parse_braced(text, pos)
+                args.append(arg)
+        except ValueError:
+            out.append(text[j:pos])
+            i = pos
+            continue
+        out.append(f"\\section*{{\\textbf{{{args[2]}-{args[3]}}} --- {args[4]}}}")
+        i = pos
+    return "".join(out)
 
 
 def extract_args(line: str, command: str, count: int) -> list[str]:
@@ -170,6 +218,8 @@ def replace_braced(text: str, command: str, func) -> str:
 def preprocess_latex(text: str, project: Path) -> str:
     # Comentários de linha inteira
     text = re.sub(r"(?m)^\s*%.*$\n?", "", text)
+    # Cabeçalho visual R1076 -> heading LaTeX compreensível pelo Pandoc
+    text = replace_fragtitle(text)
     # Ambientes de tabela -> tabular
     def table_begin(m: re.Match) -> str:
         env = m.group(1)
@@ -264,6 +314,9 @@ def pandoc_tex_to_md(tex_text: str, workdir: Path, project: Path, name: str) -> 
 
 
 def fragment_title(tex_text: str, fid: str) -> str:
+    args = parse_fragtitle(tex_text)
+    if args:
+        return clean_inline(args[4])
     m = re.search(r"\\section\*\{\\textbf\{([^}]*)\}\s*---\s*(.+?)\}", tex_text, re.S)
     if not m:
         return fid
@@ -369,6 +422,16 @@ description: "Romance em fragmentos. Edição digital de leitura derivada da edi
     add_frontmatter("nota_arquivista", None, project / "frontmatter/nota_arquivista.tex")
     add_frontmatter("como_ler", None, project / "frontmatter/como_ler.tex")
 
+    chunks.append("# Legenda dos Códigos")
+    chunks.append(
+        "Cada fragmento pertence a uma família. A cor e a capitular de abertura "
+        "indicam essa família antes de o leitor começar a ler.\n\n"
+        '**<span class="code-mem">MEM</span> Memória.** A voz de Joaquim: sertão, fome, colônia, o diário.\n\n'
+        '**<span class="code-doc">DOC</span> Documento.** Laudos, prontuários, cartas, registros e provas.\n\n'
+        '**<span class="code-luc">LUC</span> Lucidez.** A investigação de Lúcia Mendes em 2026.\n\n'
+        '**<span class="code-cont">CONT</span> Contaminação.** A segunda pessoa, o leitor, o ciclo.'
+    )
+
     for idx, part in enumerate(parts, start=1):
         chunks.append(f"# Parte {idx} — {PART_TITLES[idx-1]}")
         if idx in PART_NOTES:
@@ -383,7 +446,8 @@ description: "Romance em fragmentos. Edição digital de leitura derivada da edi
             md = normalize_md(pandoc_tex_to_md(pre, workdir, project, f"frag_{fid.replace('-', '_')}"))
             md = drop_first_heading(md)
             md = "\n".join(("#" + line) if line.startswith("#") else line for line in md.splitlines())
-            chunks.append(f"## {fid} — {title}")
+            code = fid.split("-", 1)[0].lower()
+            chunks.append(f'## <span class="code-{code}">{fid}</span> — {title}')
             chunks.append(md)
 
     # Epílogo: bloco entre \fragdef{EPI-01} e o apêndice editorial
@@ -398,6 +462,24 @@ description: "Romance em fragmentos. Edição digital de leitura derivada da edi
     chunks.append(epi_md)
 
     add_frontmatter("nota_editorial", None, project / "frontmatter/nota_editorial.tex")
+
+    chunks.append("# Caderno de Provas Iconográficas")
+    chunks.append(
+        "*As imagens deste caderno pertencem à ficção documental do romance. "
+        "Não são reproduções de documentos históricos, nem provas de arquivo. "
+        "Foram compostas para este volume; o horror real de Barbacena e da seca "
+        "não é reconstituído aqui.*"
+    )
+    for placa, caption in [
+        ("placa_00", "Paciente 1.260. Retrato de arquivo. Reconstituição ficcional."),
+        ("placa_01", "Registro de admissão. Colônia de Barbacena, 1917. Reconstituição ficcional."),
+        ("placa_02", "Dr. Heitor Oliveira. Arquivo pessoal, 1979. Reconstituição ficcional."),
+        ("placa_03", "O homem do pano preto. Imagem não catalogada. Reconstituição ficcional."),
+        ("placa_04", "Dra. Lúcia Mendes. Rodoviária de Barbacena, 2026. Reconstituição ficcional."),
+        ("placa_05", "Fotografia 5. Arquivo pessoal de Lúcia Mendes, 2026. Reconstituição ficcional."),
+    ]:
+        chunks.append(f"![](figures/immersao/{placa}.png)\n\n*{caption}*")
+
     add_frontmatter("glossario", None, project / "frontmatter/glossario_historico.tex")
     add_frontmatter("nota_historica", None, project / "frontmatter/nota_historica.tex")
     add_frontmatter("ficha_beta", None, project / "frontmatter/ficha_beta_diegetica.tex")

@@ -14,12 +14,12 @@ externa.
 | LUC | 17 / 11.182 | **23 / 15.596** | **+39,5%** |
 | CONT | **13 / 7.000** | **7 / 4.551** | **−35,0%** |
 | Total | 84 / 52.577 | **84 / 51.152** | −2,7% |
-| PDF | 435 pp | **415 pp** | −20 pp |
+| PDF | 435 pp | **421 pp** | −14 pp |
 
 A redução do total é pequena porque os cortes de DOC/CONT foram reinvestidos no
 arco de Lúcia. O livro ficou mais equilibrado, não apenas mais curto.
 
-> O total da tabela soma apenas os 84 fragmentos. O EPUB completo tem **53.390
+> O total da tabela soma apenas os 84 fragmentos. O EPUB completo tem **53.554
 > palavras**, incluindo frontmatter, notas e apêndice.
 
 ### Fórmulas repetidas
@@ -117,19 +117,20 @@ mental. Não há alegação de eficácia terapêutica.
 
 | Item | Resultado |
 |---|---|
-| PDF revisado | 415 pp; 160×230 mm; fontes embutidas; sem referências indefinidas |
-| PDF SHA-256 | `24bed43aa91b601205061079ba1a579467e7ffccdf333df3b2ced19c0eae6342` |
-| EPUB revisado | 84 seções; 105 links no TOC; 0 quebrados; 0 LaTeX cru; 7 imagens |
-| EPUB palavras | 53.390 (96,9% da extração do PDF revisado) |
-| EPUB SHA-256 | `8509741d6a2e622df88d63e9be0a5701d127d772900058882411374f471cfa18` |
+| PDF revisado | 421 pp; 160×230 mm; fontes embutidas; sem referências indefinidas |
+| PDF SHA-256 | `9ee4c4679fe7d42b1c30605f3bebaae5dfe42cfb18567cf93f96444f5cb955be` |
+| EPUB revisado | 84 seções; 105 links no TOC; 0 quebrados; 0 LaTeX cru; 13 imagens |
+| EPUB palavras | 53.554 |
+| EPUB SHA-256 | `b0fad09043777b1d0e4d743524d78a37056488fa6f26a94e035efa708460e9ac` |
 | Canônico | intacto; PDF `3378f438…` |
+| Design | R1076: legenda dos códigos + Caderno de Provas Iconográficas (6 pranchas) |
 | Gate | `tests/test_r1075_molambudos_revision.py` |
 
 ## 5. Limites
 
 - É uma **edição de trabalho**. Não é publicação, não é nova ISBN e não é
   validação por banca externa.
-- A capa e a lombada precisam ser recalculadas para 415 pp; a capa em 300 DPI
+- A capa e a lombada precisam ser recalculadas para 421 pp; a capa em 300 DPI
   continua pendente.
 - As traduções EN/ZH/TRI não foram atualizadas.
 - O PDF tagged/PDF-UA continua bloqueado pelo toolchain.
