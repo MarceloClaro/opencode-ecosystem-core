@@ -157,6 +157,9 @@ def montar(limite: int | None = None) -> str:
     laboratorio = RAIZ / "LABORATORIO_LEITOR.md"
     if laboratorio.exists():
         partes.append(fragmento(laboratorio))
+    gjq = RAIZ / "GJQ_RESULTADOS.md"
+    if gjq.exists():
+        partes.append(fragmento(gjq))
     codigo_exp = RAIZ / "CODIGO_EXPERIMENTOS.md"
     if codigo_exp.exists():
         partes.append(fragmento(codigo_exp))
@@ -230,11 +233,18 @@ def main() -> int:
     if args.no_pdf:
         return 0
 
-    weasyprint = shutil.which("weasyprint")
-    if not weasyprint:
-        print("weasyprint ausente", file=sys.stderr)
-        return 2
-    subprocess.run([weasyprint, HTML.name, PDF.name], cwd=RAIZ, check=True)
+    # Preferir o venv local com pyphen completo (dicionário pt_BR) para
+    # hifenização real; o pyphen do sistema pode ter só inglês.
+    venv_pdf = RAIZ.parents[1] / ".venv-pdf" / "bin" / "python"
+    if venv_pdf.exists():
+        comando = [str(venv_pdf), "-m", "weasyprint", HTML.name, PDF.name]
+    else:
+        weasyprint = shutil.which("weasyprint")
+        if not weasyprint:
+            print("weasyprint ausente", file=sys.stderr)
+            return 2
+        comando = [weasyprint, HTML.name, PDF.name]
+    subprocess.run(comando, cwd=RAIZ, check=True)
     print(f"PDF: {PDF} ({PDF.stat().st_size:,} bytes)")
     return 0
 

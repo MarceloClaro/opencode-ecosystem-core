@@ -84,7 +84,46 @@ body {
   text-align: left;
 }
 
-p { margin: 0 0 2mm 0; }
+p {
+  margin: 0 0 2mm 0;
+  text-align: justify;
+  hyphens: auto;
+  hyphenate-limit-chars: 6 3 3;
+  hyphenate-character: "-";
+}
+
+/* R1099: corpo justificado e hifenizado; notas e legendas ficam à esquerda. */
+.lauda .corpo p,
+.lauda .rigor p,
+.ficha .corpo p,
+.resultado p {
+  text-align: justify;
+  hyphens: auto;
+  hyphenate-limit-chars: 6 3 3;
+  hyphenate-character: "-";
+}
+.lauda .corpo p.mini,
+.lauda .corpo p.ponte,
+.lauda .corpo p.proximo,
+.lauda .rigor p.mini,
+.ficha .corpo p.mini,
+.resultado p.mini,
+p.proximo,
+p.ficha-nota,
+.rosto p,
+.capa-conteudo p,
+.ficha-catalografica p {
+  text-align: inherit;
+  hyphens: manual;
+}
+.lauda .rigor p.prof,
+.lauda .check p {
+  text-align: left;
+  hyphens: manual;
+}
+code, pre, .hanzi, .termo, .fn {
+  hyphens: manual;
+}
 strong { color: #FFFFFF; }
 em { color: #F2C94C; font-style: normal; }
 
@@ -1036,3 +1075,5 @@ td { padding: 0.4mm 1.3mm; }
   margin: -0.5mm 1mm -0.5mm 0;
   image-rendering: pixelated;
 }
+
+figure img.fig-pequena.fig-mini { max-height: 16mm; }

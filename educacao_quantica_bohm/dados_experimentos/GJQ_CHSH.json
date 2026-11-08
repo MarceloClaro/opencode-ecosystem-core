@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0",
+  "kind": "chsh",
+  "generated_at": "2026-11-08T14:41:00.188315+00:00",
+  "backend": "FAS-GPU",
+  "hardware": false,
+  "shots": 1024,
+  "cases": {
+    "A0B0": {
+      "basis": {
+        "A": "Z",
+        "B": "B0"
+      },
+      "task_id": "8651f95c-dba8-474b-a5e2-ad3b913c9472",
+      "status": "DONE",
+      "counts": {
+        "10": 77,
+        "11": 434,
+        "00": 441,
+        "01": 72
+      },
+      "total": 1024,
+      "E": 0.708984375,
+      "E_se": 0.022038256,
+      "qasm_sha256": "c906ed61b91eded1739ed14a7bf55332550601017d8659e6485bad70341eaf3c"
+    },
+    "A0B1": {
+      "basis": {
+        "A": "Z",
+        "B": "B1"
+      },
+      "task_id": "b2bc4f8a-a1da-4185-acd4-de9cd8ea40db",
+      "status": "DONE",
+      "counts": {
+        "00": 435,
+        "11": 437,
+        "01": 83,
+        "10": 69
+      },
+      "total": 1024,
+      "E": 0.703125,
+      "E_se": 0.022220821,
+      "qasm_sha256": "d06663ea85fc646119b5fa1d404b74b1357fee80f54bbe15133f0a3c380d3c17"
+    },
+    "A1B0": {
+      "basis": {
+        "A": "X",
+        "B": "B0"
+      },
+      "task_id": "950c9a34-cbc0-47f0-b22b-fdd4da84f8a0",
+      "status": "DONE",
+      "counts": {
+        "00": 440,
+        "11": 453,
+        "01": 60,
+        "10": 71
+      },
+      "total": 1024,
+      "E": 0.744140625,
+      "E_se": 0.020875719,
+      "qasm_sha256": "34a371577e2590b9154f6bd561eb5ab3ef94442c665bd0184b4d4879575bd508"
+    },
+    "A1B1": {
+      "basis": {
+        "A": "X",
+        "B": "B1"
+      },
+      "task_id": "77da2f60-0bd0-4a43-a341-f2d564f0c31d",
+      "status": "DONE",
+      "counts": {
+        "10": 450,
+        "01": 428,
+        "11": 78,
+        "00": 68
+      },
+      "total": 1024,
+      "E": -0.71484375,
+      "E_se": 0.021852632,
+      "qasm_sha256": "ddb346f764a3756ac1ffac0c299c29e528aded4b50bf06c6fb271564b06782a6"
+    }
+  },
+  "S": 2.87109375,
+  "S_se": 0.043506124,
+  "S_ideal": 2.828427125,
+  "classical_bound": 2.0,
+  "violates_classical_bound": true,
+  "limits": [
+    "Simulador local da plataforma; não é hardware.",
+    "Uma execução não prova emaranhamento físico nem vantagem quântica.",
+    "S > 2 indica correlação incompatível com modelo local clássico no circuito e nas shots medidos.",
+    "S=2.871094 e consistente com 2*sqrt(2)=2.828427 dentro de ~1 SE; nao excede o limite de Tsirelson."
+  ],
+  "tsirelson_bound": 2.828427125,
+  "consistent_with_tsirelson_within_1se": true
+}

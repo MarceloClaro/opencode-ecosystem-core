@@ -13395,6 +13395,412 @@ Se você chegar ao mesmo número com lápis e papel, o experimento é
 seu.</p>
 </blockquote>
 
+<h1 id="apendice-gjq">Apêndice GJQ — resultados explícitos</h1>
+<p class="mini">
+Leia este apêndice depois da lauda do estado de Bell. Ele mostra os
+números que sustentam a frase “S = 2,871 ± 0,044” e separa o que foi
+medido do que foi simulado.
+</p>
+<h2 id="gjq-1">1. O que foi executado</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Item</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Plataforma</td>
+<td>GJQ / CETC-ICQ (Tiangong)</td>
+</tr>
+<tr>
+<td>SDK</td>
+<td><code>gjq-client==0.2.1</code></td>
+</tr>
+<tr>
+<td>Qiskit</td>
+<td>2.3.0</td>
+</tr>
+<tr>
+<td>Backend</td>
+<td><code>FAS-GPU</code> — simulador GPU, 32 qubits</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>1024 por circuito</td>
+</tr>
+<tr>
+<td>Data</td>
+<td>2026-11-08</td>
+</tr>
+<tr>
+<td>Hardware</td>
+<td>Não</td>
+</tr>
+<tr>
+<td>Credencial</td>
+<td>apenas <code>GJQ_API_KEY</code> no ambiente; não registrada no
+livro</td>
+</tr>
+</tbody>
+</table>
+<p>O <code>FAS-GPU</code> é um simulador. Ele não tem T1, T2,
+acoplamento físico nem fila de QPU. Por isso, o resultado serve para
+<strong>verificar o circuito e a leitura dos counts</strong>, não para
+medir fidelidade de hardware.</p>
+<h2 id="gjq-2">2. Bell state: o preparo</h2>
+<p>O primeiro teste prepara</p>
+<pre class="text"><code>|Φ+&gt; = (|00&gt; + |11&gt;) / √2</code></pre>
+<p>com <code>H</code> no qubit 0 e <code>CNOT(0,1)</code>, e mede os
+dois qubits.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Task ID</td>
+<td><code>5db11f42-fcdc-4b80-a5c7-cabe0432ef90</code></td>
+</tr>
+<tr>
+<td>Backend</td>
+<td><code>FAS-GPU</code></td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>1024</td>
+</tr>
+<tr>
+<td>Counts <code>00</code></td>
+<td>507</td>
+</tr>
+<tr>
+<td>Counts <code>11</code></td>
+<td>517</td>
+</tr>
+<tr>
+<td>Total</td>
+<td>1024</td>
+</tr>
+<tr>
+<td>P(00)</td>
+<td>0,495117</td>
+</tr>
+<tr>
+<td>P(11)</td>
+<td>0,504883</td>
+</tr>
+<tr>
+<td>Auditoria</td>
+<td>soma 1024; sem alerta</td>
+</tr>
+<tr>
+<td>QASM SHA-256</td>
+<td><code>ae0cd142574796138ef95bd28378ae0a56b611999e3e31369cdacefe51a7b825</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Leitura:</strong> apenas <code>00</code> e <code>11</code>
+aparecem, em proporção próxima de 50/50. O Bell é o controle do
+experimento: se ele não produzisse <code>00</code> e <code>11</code>, o
+CHSH não deveria ser interpretado.</p>
+<h2 id="gjq-3">3. CHSH: as quatro bases</h2>
+<p>O teste usa duas bases para o qubit A e duas para o qubit B:</p>
+<ul>
+<li><code>A0 = Z</code>, medida direta;</li>
+<li><code>A1 = X</code>, obtida com <code>H</code> antes da medida;</li>
+<li><code>B0 = (Z + X)/√2</code>, obtida com <code>Ry(-π/4)</code>;</li>
+<li><code>B1 = (Z − X)/√2</code>, obtida com <code>Ry(+π/4)</code>.</li>
+</ul>
+<p>Cada circuito começa pelo Bell state. A rotação de base é aplicada
+antes da medida.</p>
+<table>
+<thead>
+<tr>
+<th>Caso</th>
+<th>A</th>
+<th style="text-align: right;">B</th>
+<th style="text-align: right;">N00</th>
+<th style="text-align: right;">N01</th>
+<th style="text-align: right;">N10</th>
+<th style="text-align: right;">N11</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A0B0</td>
+<td>Z</td>
+<td style="text-align: right;">B0</td>
+<td style="text-align: right;">441</td>
+<td style="text-align: right;">72</td>
+<td style="text-align: right;">77</td>
+<td style="text-align: right;">434</td>
+</tr>
+<tr>
+<td>A0B1</td>
+<td>Z</td>
+<td style="text-align: right;">B1</td>
+<td style="text-align: right;">435</td>
+<td style="text-align: right;">83</td>
+<td style="text-align: right;">69</td>
+<td style="text-align: right;">437</td>
+</tr>
+<tr>
+<td>A1B0</td>
+<td>X</td>
+<td style="text-align: right;">B0</td>
+<td style="text-align: right;">440</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">71</td>
+<td style="text-align: right;">453</td>
+</tr>
+<tr>
+<td>A1B1</td>
+<td>X</td>
+<td style="text-align: right;">B1</td>
+<td style="text-align: right;">68</td>
+<td style="text-align: right;">428</td>
+<td style="text-align: right;">450</td>
+<td style="text-align: right;">78</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Task IDs — prova de submissão:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Caso</th>
+<th>Task ID</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A0B0</td>
+<td><code>8651f95c-dba8-474b-a5e2-ad3b913c9472</code></td>
+</tr>
+<tr>
+<td>A0B1</td>
+<td><code>b2bc4f8a-a1da-4185-acd4-de9cd8ea40db</code></td>
+</tr>
+<tr>
+<td>A1B0</td>
+<td><code>950c9a34-cbc0-47f0-b22b-fdd4da84f8a0</code></td>
+</tr>
+<tr>
+<td>A1B1</td>
+<td><code>77da2f60-0bd0-4a43-a341-f2d564f0c31d</code></td>
+</tr>
+</tbody>
+</table>
+<p>Cada linha soma 1024. O correlacionador é</p>
+<pre class="text"><code>E = (N00 + N11 − N01 − N10) / N</code></pre>
+<p>e o parâmetro CHSH é</p>
+<pre class="text"><code>S = E00 + E01 + E10 − E11</code></pre>
+<p>Conta com os valores da tabela:</p>
+<pre class="text"><code>E00 = (441 + 434 − 72 − 77) / 1024 = +0,708984
+E01 = (435 + 437 − 83 − 69) / 1024 = +0,703125
+E10 = (440 + 453 − 60 − 71) / 1024 = +0,744141
+E11 = (68 + 78 − 428 − 450) / 1024 = −0,714844
+
+S = 0,708984 + 0,703125 + 0,744141 − (−0,714844)
+S = 2,871094</code></pre>
+<table>
+<thead>
+<tr>
+<th>Grandeza</th>
+<th style="text-align: right;">Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>S</code></td>
+<td style="text-align: right;"><strong>2,871094</strong></td>
+</tr>
+<tr>
+<td>Erro padrão de <code>S</code></td>
+<td style="text-align: right;"><strong>0,043506</strong></td>
+</tr>
+<tr>
+<td>Ideal quântico <code>2√2</code></td>
+<td style="text-align: right;">2,828427</td>
+</tr>
+<tr>
+<td>Limite clássico</td>
+<td style="text-align: right;">2,000000</td>
+</tr>
+<tr>
+<td><code>S − 2</code></td>
+<td style="text-align: right;">0,871094</td>
+</tr>
+<tr>
+<td><code>S − 2</code> em erros padrão</td>
+<td style="text-align: right;">≈ 20,0</td>
+</tr>
+<tr>
+<td><code>S − 2√2</code></td>
+<td style="text-align: right;">0,042667</td>
+</tr>
+<tr>
+<td><code>S − 2√2</code> em erros padrão</td>
+<td style="text-align: right;">≈ 0,98</td>
+</tr>
+<tr>
+<td>Excede Tsirelson?</td>
+<td style="text-align: right;">Não; consistente com <code>2√2</code>
+dentro de ~1 SE</td>
+</tr>
+</tbody>
+</table>
+<h2 id="gjq-4">4. Hardware e simulador</h2>
+<p>O mesmo CHSH foi executado antes no <code>Guoji08</code> (hardware
+supercondutor, 20 qubits), com 1024 shots por circuito. O resultado foi
+<code>S = 2,383</code>, também acima de 2, mas abaixo de
+<code>2√2</code>.</p>
+<table>
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 23%" />
+<col style="width: 30%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr>
+<th>Backend</th>
+<th>Tipo</th>
+<th style="text-align: right;">S</th>
+<th>Leitura</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Guoji08</code></td>
+<td>hardware supercondutor</td>
+<td style="text-align: right;">2,383</td>
+<td>desvia do ideal por ruído, calibração e leitura</td>
+</tr>
+<tr>
+<td><code>FAS-GPU</code></td>
+<td>simulador GPU</td>
+<td style="text-align: right;">2,871 ± 0,044</td>
+<td>próximo de <code>2√2</code>, sem ruído físico de hardware</td>
+</tr>
+</tbody>
+</table>
+<p>A diferença <code>2,871 − 2,383 = 0,488</code> não é uma “melhora
+quântica”: é a diferença entre um simulador e um dispositivo físico. O
+hardware perde correlação; o simulador preserva o circuito ideal.</p>
+<h2 id="gjq-5">5. Como ler <code>S</code></h2>
+<ul>
+<li><code>S &gt; 2</code> afasta o modelo local clássico para as
+correlações medidas no circuito e nas shots usados.</li>
+<li><code>S = 2,871</code> está a cerca de <strong>20 erros
+padrão</strong> acima de 2. Isso é forte contra o modelo local
+clássico.</li>
+<li><code>S = 2,871</code> está a cerca de <strong>1 erro
+padrão</strong> de <code>2√2</code>. Portanto, <strong>não</strong> é
+uma violação do limite de Tsirelson; é consistente com o valor quântico
+ideal dentro da flutuação estatística.</li>
+<li>Uma execução de 1024 shots não é prova definitiva. Aumentar shots
+reduz o erro padrão; repetir em outro backend testa robustez.</li>
+<li>Simulador não prova emaranhamento físico, fidelidade de hardware ou
+vantagem quântica.</li>
+</ul>
+<h2 id="gjq-6">6. Reproduza</h2>
+<p>Com o MCP <code>gjq-runtime</code>:</p>
+<pre class="text"><code>gjq_runtime_status()
+gjq_list_backends()
+gjq_sample(qasm=QASM, backend_name=&quot;FAS-GPU&quot;, shots=1024, confirm=True)
+gjq_task_status(task_id=&quot;...&quot;)
+gjq_task_result(task_id=&quot;...&quot;)
+gjq_audit_counts(counts={...}, shots=1024)</code></pre>
+<p>Modelo de QASM para <code>A0B0</code>:</p>
+<pre class="qasm"><code>OPENQASM 2.0;
+include &quot;qelib1.inc&quot;;
+qreg q[2];
+creg c[2];
+h q[0];
+cx q[0],q[1];
+ry(-0.785398) q[1];
+measure q[0] -&gt; c[0];
+measure q[1] -&gt; c[1];</code></pre>
+<p>Para os outros casos:</p>
+<table>
+<thead>
+<tr>
+<th>Caso</th>
+<th>Acrescente antes das medidas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A0B1</td>
+<td><code>ry(+0.785398) q[1];</code></td>
+</tr>
+<tr>
+<td>A1B0</td>
+<td><code>h q[0];</code> e <code>ry(-0.785398) q[1];</code></td>
+</tr>
+<tr>
+<td>A1B1</td>
+<td><code>h q[0];</code> e <code>ry(+0.785398) q[1];</code></td>
+</tr>
+</tbody>
+</table>
+<p>Para hardware, <code>allow_hardware=True</code> e aprovação explícita
+de custo. Para E01–E18, use o MCP <code>gjq-experiments</code>, que
+exige simulação prévia.</p>
+<h2 id="gjq-7">7. Checklist de estudo</h2>
+<ol type="1">
+<li>Qual é o <code>S</code> do <code>Guoji08</code>?
+<strong>2,383</strong>.</li>
+<li>Qual é o <code>S</code> do <code>FAS-GPU</code>? <strong>2,871 ±
+0,044</strong>.</li>
+<li>Por que o simulador fica mais perto de <code>2√2</code>? Porque não
+tem ruído físico de hardware.</li>
+<li>O que <code>S &gt; 2</code> prova? Que as correlações medidas não
+são explicadas por um modelo local clássico.</li>
+<li>O que <code>S &gt; 2</code> <strong>não</strong> prova?
+Emaranhamento físico, fidelidade de hardware ou vantagem quântica.</li>
+<li>O que muda se você aumentar os shots? O erro padrão cai; o valor
+central pode oscilar.</li>
+<li>Onde estão os task IDs? Na tabela da seção 3 e nos JSON de
+proveniência.</li>
+</ol>
+<h2 id="gjq-8">8. Proveniência</h2>
+<ul>
+<li><code>docs/gjq-runtime/bell-2026-11-08.json</code></li>
+<li><code>docs/gjq-runtime/chsh-2026-11-08.json</code></li>
+<li><code>docs/gjq-runtime/README.md</code></li>
+<li><code>educacao_quantica_bohm/dados_experimentos/GJQ_CHSH.json</code></li>
+<li><code>educacao_quantica_bohm/dados_experimentos/GJQ_BELL.json</code></li>
+</ul>
+<p>Nenhuma API key foi gravada nesses arquivos. O job do
+<code>FAS-CPU</code> (<code>b3c9a748-5528-4f0a-81cd-81a36a96ef4b</code>)
+permaneceu na fila e não entrou nestes resultados.</p>
+<h2 id="gjq-9">9. Limites</h2>
+<ul>
+<li>Resultados de simulador, não de hardware.</li>
+<li>Uma execução por base, 1024 shots.</li>
+<li>O <code>S</code> de 2,871 é consistente com <code>2√2</code> dentro
+de ~1 SE; não excede Tsirelson.</li>
+<li>Não há estudo de eficácia, peer review ou replicação
+independente.</li>
+<li>A documentação e os backends da GJQ podem mudar; cite a data e a
+versão.</li>
+</ul>
+
 <h1 id="codigo-experimentos">Código completo: os 18 experimentos, da
 instalação ao resultado</h1>
 <p>Este capítulo existe porque uma referência não basta. Quando a lauda
@@ -57647,19 +58053,17 @@ Guoji08, de 20 qubits. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><s
 <h2 id="l-1094" class="titulo">Estado de Bell — laboratório</h2>
 <div class="corpo">
 
-<p>O estado de Bell é a base do teste CHSH. Quatro configurações foram enviadas ao <strong>Guoji08</strong>, com 1024 tiros cada.</p>
+<p>O estado de Bell é a base do teste CHSH. Quatro configurações foram enviadas ao <strong>Guoji08</strong> (hardware) e repetidas no <strong>FAS-GPU</strong> (simulador GJQ), com 1024 tiros cada.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">贝尔态</span> <em>bèi ěr tài</em> <span class="tom">· tons 4-3-4 · leitura bei-er-tai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">观察贝尔态。</span> <em>Guān chá bèi ěr tài.</em> — Observe “Estado de Bell”.</span></p>
 
 <table class="dados">
-<tr><th>Configuração</th><th>E ideal</th><th>E medido</th></tr>
-<tr><td>E00</td><td>+0,707</td><td>+0,574</td></tr><tr><td>E01</td><td>+0,707</td><td>+0,576</td></tr><tr><td>E10</td><td>+0,707</td><td>+0,566</td></tr><tr><td>E11</td><td>-0,707</td><td>-0,666</td></tr>
+<tr><th>Configuração</th><th>E ideal</th><th>E Guoji08</th><th>E FAS-GPU</th></tr>
+<tr><td>E00</td><td>+0,707</td><td>+0,574</td><td>+0,709</td></tr><tr><td>E01</td><td>+0,707</td><td>+0,576</td><td>+0,703</td></tr><tr><td>E10</td><td>+0,707</td><td>+0,566</td><td>+0,744</td></tr><tr><td>E11</td><td>-0,707</td><td>-0,666</td><td>-0,715</td></tr>
 </table>
-<p class="mini">S = E00 + E01 + E10 − E11 = <strong>2,383</strong>.
-Limite clássico 2; ideal quântico 2√2 ≈ 2,828. O valor observado viola o limite clássico |S| ≤ 2.
-Uma execução não é prova estatística: com 1024 tiros por circuito, o erro de S
-é da ordem de 0,06. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> E = (N₀₀+N₁₁−N₀₁−N₁₀)/N; S = E₀₀+E₀₁+E₁₀−E₁₁.<br><strong>Conta:</strong> E₀₀=588/1024=0,5742; E₀₁=590/1024=0,5762; E₁₀=580/1024=0,5664; E₁₁=−682/1024=−0,6660.<br><strong>Resultado:</strong> S = 0,5742+0,5762+0,5664+0,6660 = 2,3828.<br><em>Limite:</em> S>2 viola a desigualdade clássica; uma execução não é prova estatística definitiva.</span></p>
+<p class="mini">S = E00 + E01 + E10 − E11. Guoji08 (hardware): <strong>2,383</strong>. No <strong>FAS-GPU</strong> (simulador GJQ), S = <strong>2,871 ± 0,044</strong>.
+Limite clássico 2; ideal quântico 2√2 ≈ 2,828. S > 2 nos dois casos; 2,871 é consistente com 2√2 dentro de ~1 SE. <a href="#apendice-gjq">Apêndice GJQ</a>: contas, task IDs e reprodução. <span class="fn"><strong>NOTA DE CÁLCULO.</strong> E = (N₀₀+N₁₁−N₀₁−N₁₀)/N; S = E₀₀+E₀₁+E₁₀−E₁₁. Guoji08: 2,383. FAS-GPU: 2,871±0,044.</span></p>
 
-<figure class="fig"><img class="fig-pequena" src="../livro/figuras_geradas/fig15_chsh.png" alt="CHSH no Guoji08: S ≈ 2,38, acima do limite clássico 2 e abaixo do ideal 2√2."><figcaption>CHSH no Guoji08: S ≈ 2,38, acima do limite clássico 2 e abaixo do ideal 2√2.</figcaption></figure>
+<figure class="fig"><img class="fig-pequena fig-mini" src="../livro/figuras_geradas/fig15_chsh.png" alt="CHSH no Guoji08: S ≈ 2,38, acima do limite clássico 2 e abaixo do ideal 2√2."><figcaption>CHSH no Guoji08: S ≈ 2,38, acima do limite clássico 2 e abaixo do ideal 2√2.</figcaption></figure>
 
 </div>
 <div class="rigor">
@@ -93758,19 +94162,17 @@ Guoji08, de 20 qubits. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><s
 <h2 id="l-2094" class="titulo">Estado de Bell — laboratório</h2>
 <div class="corpo">
 
-<p>O estado de Bell é a base do teste CHSH. Quatro configurações foram enviadas ao <strong>Guoji08</strong>, com 1024 tiros cada.</p>
+<p>O estado de Bell é a base do teste CHSH. Quatro configurações foram enviadas ao <strong>Guoji08</strong> (hardware) e repetidas no <strong>FAS-GPU</strong> (simulador GJQ), com 1024 tiros cada.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">贝尔态</span> <em>bèi ěr tài</em> <span class="tom">· tons 4-3-4 · leitura bei-er-tai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">观察贝尔态。</span> <em>Guān chá bèi ěr tài.</em> — Observe “Estado de Bell”.</span></p>
 
 <table class="dados">
-<tr><th>Configuração</th><th>E ideal</th><th>E medido</th></tr>
-<tr><td>E00</td><td>+0,707</td><td>+0,574</td></tr><tr><td>E01</td><td>+0,707</td><td>+0,576</td></tr><tr><td>E10</td><td>+0,707</td><td>+0,566</td></tr><tr><td>E11</td><td>-0,707</td><td>-0,666</td></tr>
+<tr><th>Configuração</th><th>E ideal</th><th>E Guoji08</th><th>E FAS-GPU</th></tr>
+<tr><td>E00</td><td>+0,707</td><td>+0,574</td><td>+0,709</td></tr><tr><td>E01</td><td>+0,707</td><td>+0,576</td><td>+0,703</td></tr><tr><td>E10</td><td>+0,707</td><td>+0,566</td><td>+0,744</td></tr><tr><td>E11</td><td>-0,707</td><td>-0,666</td><td>-0,715</td></tr>
 </table>
-<p class="mini">S = E00 + E01 + E10 − E11 = <strong>2,383</strong>.
-Limite clássico 2; ideal quântico 2√2 ≈ 2,828. O valor observado viola o limite clássico |S| ≤ 2.
-Uma execução não é prova estatística: com 1024 tiros por circuito, o erro de S
-é da ordem de 0,06. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> E = (N₀₀+N₁₁−N₀₁−N₁₀)/N; S = E₀₀+E₀₁+E₁₀−E₁₁.<br><strong>Conta:</strong> E₀₀=588/1024=0,5742; E₀₁=590/1024=0,5762; E₁₀=580/1024=0,5664; E₁₁=−682/1024=−0,6660.<br><strong>Resultado:</strong> S = 0,5742+0,5762+0,5664+0,6660 = 2,3828.<br><em>Limite:</em> S>2 viola a desigualdade clássica; uma execução não é prova estatística definitiva.</span></p>
+<p class="mini">S = E00 + E01 + E10 − E11. Guoji08 (hardware): <strong>2,383</strong>. No <strong>FAS-GPU</strong> (simulador GJQ), S = <strong>2,871 ± 0,044</strong>.
+Limite clássico 2; ideal quântico 2√2 ≈ 2,828. S > 2 nos dois casos; 2,871 é consistente com 2√2 dentro de ~1 SE. <a href="#apendice-gjq">Apêndice GJQ</a>: contas, task IDs e reprodução. <span class="fn"><strong>NOTA DE CÁLCULO.</strong> E = (N₀₀+N₁₁−N₀₁−N₁₀)/N; S = E₀₀+E₀₁+E₁₀−E₁₁. Guoji08: 2,383. FAS-GPU: 2,871±0,044.</span></p>
 
-<figure class="fig"><img class="fig-pequena" src="../livro/figuras_geradas/fig15_chsh.png" alt="CHSH no Guoji08: S ≈ 2,38, acima do limite clássico 2 e abaixo do ideal 2√2."><figcaption>CHSH no Guoji08: S ≈ 2,38, acima do limite clássico 2 e abaixo do ideal 2√2.</figcaption></figure>
+<figure class="fig"><img class="fig-pequena fig-mini" src="../livro/figuras_geradas/fig15_chsh.png" alt="CHSH no Guoji08: S ≈ 2,38, acima do limite clássico 2 e abaixo do ideal 2√2."><figcaption>CHSH no Guoji08: S ≈ 2,38, acima do limite clássico 2 e abaixo do ideal 2√2.</figcaption></figure>
 
 </div>
 <div class="rigor">

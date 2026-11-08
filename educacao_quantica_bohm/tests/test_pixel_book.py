@@ -401,6 +401,8 @@ def test_pdf_paginas_e_rodapes():
     assert len(contagem) == 3000
     assert set(contagem) == {f"{i:04d}" for i in range(1, 3001)}
     assert set(contagem.values()) == {1}, "rodapé duplicado indica lauda que transbordou"
+    assert "Apêndice GJQ" in texto
+    assert "2,871094" in texto
 
 
 def test_pdf_marcadores():
@@ -764,3 +766,19 @@ def test_trilhas_de_ferramentas():
     assert "#trilhas-ferramentas" in (LIVRO / "SUMARIO.md").read_text(encoding="utf-8")
     trilhas = (LIVRO / "TRILHAS_NIVEIS.md").read_text(encoding="utf-8")
     assert "#trilhas-ferramentas" in trilhas
+
+
+def test_apendice_gjq_e_dados():
+    ap = LIVRO / "GJQ_RESULTADOS.md"
+    assert ap.is_file()
+    texto = ap.read_text(encoding="utf-8")
+    assert "2,871094" in texto
+    assert "5db11f42-fcdc-4b80-a5c7-cabe0432ef90" in texto
+    assert "8651f95c-dba8-474b-a5e2-ad3b913c9472" in texto
+    for nome in ("GJQ_CHSH.json", "GJQ_BELL.json"):
+        caminho = RAIZ / "dados_experimentos" / nome
+        assert caminho.is_file(), caminho
+        json.loads(caminho.read_text(encoding="utf-8"))
+    bell = (SECOES / "1094_bell_laboratorio.md").read_text(encoding="utf-8")
+    assert "fig-mini" in bell
+    assert "FAS-GPU" in bell

@@ -300,35 +300,64 @@ def _resumo_ghz(dados: dict) -> tuple[dict[str, int], int, float]:
     return c, total, fidelidade
 
 
+def _fmt_signed(valor: float, casas: int = 3) -> str:
+    sinal = "+" if valor >= 0 else ""
+    return f"{sinal}{valor:.{casas}f}".replace(".", ",")
+
+
+def _gjq_chsh() -> dict | None:
+    dados = _carregar_exp("GJQ_CHSH")
+    if not dados or "cases" not in dados:
+        return None
+    return dados
+
+
 def tabela_chsh() -> str:
     dados = _carregar_json("chsh_guoji08.json")
     if not dados or "E" not in dados:
         return ('<p class="mini">O resultado CHSH ainda não está disponível; '
                 'rode <code>executar_nuvem.py --only chsh</code>.</p>')
     E = dados["E"]
+    gjq = _gjq_chsh()
+    mapa = {"E00": "A0B0", "E01": "A0B1", "E10": "A1B0", "E11": "A1B1"}
+    E_gjq = {}
+    if gjq:
+        for nome, caso in mapa.items():
+            if caso in gjq["cases"]:
+                E_gjq[nome] = float(gjq["cases"][caso].get("E", 0.0))
     ideais = {"E00": 0.7071, "E01": 0.7071, "E10": 0.7071, "E11": -0.7071}
     linhas = []
     for nome in ("E00", "E01", "E10", "E11"):
         medido = float(E.get(nome, 0.0))
-        sinal = "+" if medido >= 0 else ""
+        gjq_txt = _fmt_signed(E_gjq[nome]) if nome in E_gjq else "—"
         linhas.append(
-            f"<tr><td>{nome}</td><td>{ideais[nome]:+.3f}</td>"
-            f"<td>{sinal}{_num(medido)}</td></tr>".replace(".", ",")
+            f"<tr><td>{nome}</td><td>{_fmt_signed(ideais[nome])}</td>"
+            f"<td>{_fmt_signed(medido)}</td><td>{gjq_txt}</td></tr>"
         )
     S = float(dados.get("S", 0.0))
     ideal_S = float(dados.get("ideal_S", 2 * (2 ** 0.5)))
-    leitura = ("O valor observado viola o limite clássico |S| ≤ 2."
-               if abs(S) > 2 else
-               "O valor observado não viola o limite clássico |S| ≤ 2.")
+    if gjq:
+        S_gjq = float(gjq.get("S", 0.0))
+        se_gjq = float(gjq.get("S_se", 0.0))
+        gjq_txt = (f" No <strong>FAS-GPU</strong> (simulador GJQ), "
+                   f"S = <strong>{_num(S_gjq)} ± {_num(se_gjq)}</strong>.")
+        leitura = (f"S > 2 nos dois casos; {_num(S_gjq)} é consistente "
+                   "com 2√2 dentro de ~1 SE.")
+        link = (' <a href="#apendice-gjq">Apêndice GJQ</a>: contas, task IDs '
+                'e reprodução.')
+    else:
+        gjq_txt = ""
+        leitura = ("O valor observado viola o limite clássico |S| ≤ 2."
+                   if abs(S) > 2 else
+                   "O valor observado não viola o limite clássico |S| ≤ 2.")
+        link = ""
     return f"""
 <table class="dados">
-<tr><th>Configuração</th><th>E ideal</th><th>E medido</th></tr>
+<tr><th>Configuração</th><th>E ideal</th><th>E Guoji08</th><th>E FAS-GPU</th></tr>
 {''.join(linhas)}
 </table>
-<p class="mini">S = E00 + E01 + E10 − E11 = <strong>{_num(S)}</strong>.
-Limite clássico 2; ideal quântico 2√2 ≈ {_num(ideal_S)}. {leitura}
-Uma execução não é prova estatística: com 1024 tiros por circuito, o erro de S
-é da ordem de 0,06.</p>
+<p class="mini">S = E00 + E01 + E10 − E11. Guoji08 (hardware): <strong>{_num(S)}</strong>.{gjq_txt}
+Limite clássico 2; ideal quântico 2√2 ≈ {_num(ideal_S)}. {leitura}{link}</p>
 """
 
 
@@ -431,6 +460,12 @@ def nota_calculo(c: dict, nivel: int, lente_id: str) -> str:
     """Nota de rodapé de cálculo para N1/N2, em laboratório e 'para ir além'."""
     if nivel == 0 or lente_id not in ("laboratorio", "alem"):
         return ""
+    if lente_id == "laboratorio" and c.get("id") == "bell":
+        return (
+            ' <span class="fn"><strong>NOTA DE CÁLCULO.</strong> '
+            'E = (N₀₀+N₁₁−N₀₁−N₁₀)/N; S = E₀₀+E₀₁+E₁₀−E₁₁. '
+            'Guoji08: 2,383. FAS-GPU: 2,871±0,044.</span>'
+        )
     if lente_id == "laboratorio":
         exp_id = MAPA_EXPERIMENTOS.get(c["id"])
         nota = NOTAS_EXPERIMENTO.get(exp_id) if exp_id else None
@@ -473,11 +508,11 @@ def esc(texto: str) -> str:
     return html.escape(texto or "", quote=False)
 
 
-def figura(pid: str) -> str:
+def figura(pid: str, classe: str = "fig-pequena") -> str:
     if pid not in FIGURAS:
         return ""
     src, legenda = FIGURAS[pid]
-    return (f'<figure class="fig"><img class="fig-pequena" src="{src}" alt="{esc(legenda)}">'
+    return (f'<figure class="fig"><img class="{classe}" src="{src}" alt="{esc(legenda)}">'
             f'<figcaption>{esc(legenda)}</figcaption></figure>')
 
 
@@ -529,9 +564,9 @@ def _corpo_lente_base(c: dict, lente_id: str) -> str:
     if lente_id == "laboratorio":
         if pid == "bell":
             return f"""
-<p>O estado de Bell é a base do teste CHSH. Quatro configurações foram enviadas ao <strong>Guoji08</strong>, com 1024 tiros cada.</p>
+<p>O estado de Bell é a base do teste CHSH. Quatro configurações foram enviadas ao <strong>Guoji08</strong> (hardware) e repetidas no <strong>FAS-GPU</strong> (simulador GJQ), com 1024 tiros cada.</p>
 {tabela_chsh()}
-{figura("chsh")}
+{figura("chsh", "fig-pequena fig-mini")}
 """
         if pid == "emaranhamento":
             return f"""
