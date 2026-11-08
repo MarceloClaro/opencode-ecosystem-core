@@ -36,9 +36,18 @@ GROUPS = {
         'A04', 'A05', 'A08', 'A10', 'A13', 'A18', 'A22', 'A24',
         'A26', 'A30', 'A31', 'A32',
     ),
+    'revisores_13': (
+        'A01', 'A02', 'A03', 'A05', 'A08', 'A10', 'A13', 'A18',
+        'A24', 'A25', 'A30', 'A35', 'A36',
+    ),
+    'revisores_20': (
+        'A01', 'A02', 'A03', 'A04', 'A05', 'A06', 'A07', 'A08',
+        'A09', 'A10', 'A11', 'A12', 'A13', 'A14', 'A18', 'A24',
+        'A25', 'A30', 'A35', 'A36',
+    ),
 }
 DEFAULT_LIMITS = {
-    'max_steps': 34, 'max_rounds': 288, 'max_actions': 3456,
+    'max_steps': 36, 'max_rounds': 288, 'max_actions': 3456,
     'timeout_seconds': 30,
 }
 _USAGE_FIELDS = (
@@ -153,8 +162,10 @@ def _cases(value: Any) -> list[dict[str, Any]]:
                 raise ValueError(field + ' desconhecido')
         item = {**row, 'rounds': row.get('rounds', 4), 'agents': row.get('agents', 6)}
         for field in ('rounds', 'agents'):
-            if type(item[field]) is not int or not 1 <= item[field] <= 12:
-                raise ValueError(field + ' deve ser inteiro de 1 a 12')
+            if type(item[field]) is not int or not 1 <= item[field] <= 20:
+                raise ValueError(field + ' deve ser inteiro de 1 a 20')
+        if item['agents'] > len(GROUPS[item['group']]):
+            raise ValueError('agents excede o grupo')
         result.append(item)
     return result
 

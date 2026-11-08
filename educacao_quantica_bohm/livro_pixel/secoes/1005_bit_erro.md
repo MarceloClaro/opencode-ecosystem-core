@@ -1,0 +1,34 @@
+::: {.lauda .lente-erro .nivel-1}
+<div class="topo">
+  <span class="cod">L1005</span>
+  <span class="lente"><img class="ico" src="sprites/erro.png" alt=""> ERRO COMUM</span>
+  <span class="conc"><img class="ico-conceito" src="sprites_conceitos/C001.png" alt=""> N1 · C001 · BIT</span>
+</div>
+<div class="xp"><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class="on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div>
+<h2 id="l-1005" class="titulo">Bit — erro comum</h2>
+<div class="corpo">
+
+<p><strong>O erro comum:</strong> Achar que um bit pode ser 'meio 0, meio 1' no mundo clássico.</p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">比特</span> <em>bǐ tè</em> <span class="tom">· tons 3-4 · leitura bi-te</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">比特不是魔法。</span> <em>Bǐ tè bú shì mó fǎ.</em> — “Bit” não é magia.</span></p>
+<p><strong>Por que acontece:</strong> o cérebro procura uma imagem simples e apaga a parte matemática que não se encaixa.</p>
+<p><strong>Como testar:</strong> escreva um contraexemplo em uma frase e veja se ele derruba sua explicação.</p>
+
+</div>
+<div class="rigor">
+<span class="rotulo">RIGOR CIENTÍFICO</span>
+<p>Com 8 bits, há 256 combinações; uma letra ASCII cabe em 8 bits.</p>
+<p class="prof"><strong>Para o professor:</strong> Use a notação de ket apenas depois do concreto; verifique P(0)+P(1)=1.</p>
+</div>
+<div class="check">
+<span class="rotulo">CHECKPOINT</span>
+<p>Você consegue escrever seu primeiro nome em binário?</p>
+</div>
+
+<div class="mini-barras">
+<span class="rotulo-mini">RESULTADO VISUAL · SIMULADO × BACKEND</span>
+<div class="linha"><em>sim</em><div class="trilho"><span style="width:100%"></span></div><b>100%</b></div>
+<div class="linha"><em>backend</em><div class="trilho"><span style="width:99.2%"></span></div><b>99,2%</b></div>
+</div>
+
+<div class="rodape">P01 · C001/100 · L1005/3000 · <a class="gab" href="#g-001">[G001]</a> · <a class="ficha-link" href="#f-001">[F001]</a></div>
+:::

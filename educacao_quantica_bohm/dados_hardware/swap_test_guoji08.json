@@ -1,0 +1,17 @@
+{
+  "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[3];\ncreg c[1];\nry(1.000000) q[2];\nh q[0];\ncswap q[0],q[1],q[2];\nh q[0];\nmeasure q[0] -> c[0];\n",
+  "p0_sim": 0.8850755764670345,
+  "overlap_sim": 0.770151152934069,
+  "real": {
+    "backend": "Guoji08",
+    "shots": 1024,
+    "counts": {
+      "0": 834,
+      "1": 190
+    },
+    "p0": 0.814453125,
+    "overlap": 0.62890625,
+    "task_id": "33130b7c-dee9-4a6f-b5dc-e79ff6c00804"
+  },
+  "timestamp": "2026-11-07T06:11:10-0300"
+}

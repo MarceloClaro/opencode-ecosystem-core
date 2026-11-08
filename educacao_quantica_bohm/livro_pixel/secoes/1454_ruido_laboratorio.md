@@ -1,0 +1,43 @@
+::: {.lauda .lente-laboratorio .nivel-1}
+<div class="topo">
+  <span class="cod">L1454</span>
+  <span class="lente"><img class="ico" src="sprites/laboratorio.png" alt=""> LABORATÓRIO</span>
+  <span class="conc"><img class="ico-conceito" src="sprites_conceitos/C046.png" alt=""> N1 · C046 · RUÍDO</span>
+</div>
+<div class="xp"><span class=""></span><span class=""></span><span class=""></span><span class="on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div>
+<h2 id="l-1454" class="titulo">Ruído — laboratório</h2>
+<div class="corpo">
+
+<p><strong>Protocolo de bancada:</strong> escolha um exemplo de <em>ruído</em>, preveja o resultado e teste com um colega.</p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">噪声</span> <em>zào shēng</em> <span class="tom">· tons 4-1 · leitura dzau-sheng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">观察噪声。</span> <em>Guān chá zào shēng.</em> — Observe “Ruído”.</span></p>
+<ol>
+<li>Escreva a previsão em uma frase.</li>
+<li>Execute ou observe o fenômeno.</li>
+<li>Registre a diferença e uma possível explicação.</li>
+</ol>
+<p><strong>O que observar:</strong> não basta acertar; é preciso explicar por que acertou.</p>
+
+<div class="resultado">
+<span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
+<p><strong>Experimento:</strong> Ruído de fase — H-X-H deveria devolver P(0)=1; o backend perde coerência.</p>
+<p><strong>Simulado:</strong> P(0) = 1,000 (ideal 1,000)<br>
+<strong>Backend:</strong> P(0) = 0,992 (ideal 1,000)<br>
+<strong>Sobreposição:</strong> 99,2% · <strong>task:</strong> aae54f46</p>
+<p class="mini">Sobreposição ≠ fidelidade de estado.</p>
+<p class="mini">Script: <code>scripts/experimentos_100.py</code> · E14 · Guoji08 · <a href="#oficina-e14">oficina E14</a> · <a href="#codigo-e14">código E14</a> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> H-X-H deveria devolver |0⟩; P(0)=N₀/N.<br><strong>Conta:</strong> N₀=1016, N=1024: 1016/1024 = 0,9922.<br><strong>Resultado:</strong> P(0)=99,22% (ideal 100%).<br><em>Limite:</em> O ruído de fase não é visível na população Z; ele aparece na coerência.</span></p>
+</div>
+
+
+</div>
+<div class="rigor">
+<span class="rotulo">RIGOR CIENTÍFICO</span>
+<p>Backends têm ruído, calibração e deriva. Fidelidade proxy não é prova de emaranhamento.</p>
+<p class="prof"><strong>Para o professor:</strong> T1, T2, erro de leitura e ruído de porta são coisas distintas; não os trate como um número único.</p>
+</div>
+<div class="check">
+<span class="rotulo">CHECKPOINT</span>
+<p>Quem decide o nível de ruído aceitável em um serviço público?</p>
+</div>
+
+<div class="rodape">P05 · C046/100 · L1454/3000 · <a class="gab" href="#g-046">[G046]</a> · <a class="ficha-link" href="#f-046">[F046]</a></div>
+:::

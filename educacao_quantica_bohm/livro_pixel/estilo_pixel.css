@@ -1,0 +1,1038 @@
+/* ============================================================
+   1000 LAUDAS — design editorial pixel
+   ============================================================ */
+
+@font-face {
+  font-family: "Press Start";
+  src: url("fontes/PressStart2P-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "VT323";
+  src: url("fontes/VT323-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Atkinson";
+  src: url("fontes/AtkinsonHyperlegible-Regular.ttf") format("truetype");
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Atkinson";
+  src: url("fontes/AtkinsonHyperlegible-Bold.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@page {
+  size: A5;
+  margin: 9mm 9mm 10mm 9mm;
+  background: #070B12;
+  @bottom-center {
+    content: counter(page);
+    font-family: "Press Start", monospace;
+    font-size: 5.5pt;
+    color: #5C677A;
+  }
+  @footnote {
+    border-top: 1px solid #5EEAD4;
+    padding-top: 1.6mm;
+    margin-top: 2mm;
+  }
+}
+
+.fn {
+  float: footnote;
+  font-size: 7.8pt;
+  line-height: 1.28;
+  color: #C9D4E3;
+  text-align: left;
+}
+
+.fn strong { color: #5EEAD4; }
+.fn em { color: #FBBF24; font-style: normal; }
+
+::footnote-call {
+  content: counter(footnote);
+  vertical-align: super;
+  font-size: 6.5pt;
+  color: #5EEAD4;
+  font-family: "Press Start", monospace;
+}
+
+::footnote-marker {
+  content: counter(footnote) " · ";
+  color: #5EEAD4;
+  font-family: "Press Start", monospace;
+}
+
+@page:first {
+  margin: 0;
+  background: #070B12;
+  @bottom-center { content: none; }
+}
+
+html, body {
+  background: #070B12;
+}
+
+body {
+  margin: 0;
+  background-image: url("grade.png");
+  background-repeat: repeat;
+  color: #E8F0FF;
+  font-family: "Atkinson", "Noto Serif CJK SC", "DejaVu Sans", sans-serif;
+  font-size: 10.8pt;
+  line-height: 1.35;
+  text-align: left;
+}
+
+p { margin: 0 0 2mm 0; }
+strong { color: #FFFFFF; }
+em { color: #F2C94C; font-style: normal; }
+
+a { color: #5EEAD4; text-decoration: none; }
+
+#title-block-header { display: none; }
+
+/* ---------- capa ---------- */
+
+.capa {
+  position: relative;
+  width: 148mm;
+  height: 210mm;
+  overflow: hidden;
+  background: #070B12;
+}
+
+.capa-arte {
+  position: absolute;
+  top: 0; left: 0;
+  width: 148mm;
+  height: 210mm;
+  background-image: url("capa_livro.png");
+  background-size: cover;
+  background-position: center center;
+}
+
+.capa-autor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  padding: 5mm 0 4mm 0;
+  text-align: center;
+  font-family: "Press Start", monospace;
+  font-size: 6.6pt;
+  letter-spacing: 1.2pt;
+  color: #E8F0FF;
+  background: linear-gradient(to bottom,
+    rgba(7, 11, 18, 0.88) 0%,
+    rgba(7, 11, 18, 0) 100%);
+  text-shadow: 2px 2px 0 #000000;
+}
+
+.capa-conteudo {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 10mm 10mm 4mm 10mm;
+  background: linear-gradient(to bottom,
+    rgba(7, 11, 18, 0) 0%,
+    rgba(7, 11, 18, 0.55) 32%,
+    rgba(7, 11, 18, 0.97) 100%);
+}
+
+.capa-eyebrow {
+  font-family: "Press Start", "Noto Serif CJK SC", monospace;
+  font-size: 5.2pt;
+  letter-spacing: 0.8pt;
+  color: #5EEAD4;
+  margin-bottom: 3mm;
+}
+
+.capa-titulo {
+  font-family: "Press Start", monospace;
+  break-before: auto;
+  font-size: 22pt;
+  line-height: 1.05;
+  color: #F2C94C;
+  margin: 0 0 3mm 0;
+  text-shadow: 3px 3px 0 #000000;
+  bookmark-level: 1;
+  bookmark-label: "Capa";
+}
+
+.capa-subtitulo {
+  font-family: "VT323", monospace;
+  font-size: 12pt;
+  line-height: 1.1;
+  color: #E8F0FF;
+  margin: 0 0 2mm 0;
+}
+
+.capa-promessa {
+  font-family: "Atkinson", "Noto Serif CJK SC", "DejaVu Sans", sans-serif;
+  font-size: 8.6pt;
+  line-height: 1.25;
+  color: #C9D4E3;
+  margin: 0 0 2mm 0;
+}
+
+.capa-livro {
+  font-family: "VT323", monospace;
+  font-size: 10pt;
+  color: #5EEAD4;
+  margin: 0 0 1.5mm 0;
+}
+
+.capa-publico {
+  font-family: "VT323", monospace;
+  font-size: 9pt;
+  color: #C9D4E3;
+  margin: 0 0 2mm 0;
+}
+
+.capa-selo {
+  display: inline-block;
+  font-family: "Press Start", monospace;
+  font-size: 5pt;
+  color: #070B12;
+  background: #A3E635;
+  padding: 1.6mm 2.4mm;
+  border: 2px solid #FFFFFF;
+}
+
+/* ---------- rosto ---------- */
+
+.rosto {
+  break-before: page;
+  padding-top: 14mm;
+  text-align: center;
+}
+
+.rosto-titulo {
+  bookmark-level: 1;
+  bookmark-label: "Rosto";
+}
+
+.rosto-colecao {
+  font-family: "Press Start", monospace;
+  font-size: 6pt;
+  letter-spacing: 0.6pt;
+  color: #5EEAD4;
+  margin-bottom: 6mm;
+}
+
+.rosto-titulo {
+  font-family: "Press Start", monospace;
+  break-before: auto;
+  font-size: 15pt;
+  line-height: 1.35;
+  color: #F2C94C;
+  margin: 0 0 3mm 0;
+  bookmark-level: 1;
+  bookmark-label: "Rosto";
+}
+
+.rosto-subtitulo {
+  font-family: "Atkinson", "Noto Serif CJK SC", "DejaVu Sans", sans-serif;
+  font-size: 12pt;
+  color: #E8F0FF;
+  margin: 0 0 3mm 0;
+}
+
+.rosto-autor {
+  font-family: "Atkinson", "Noto Serif CJK SC", "DejaVu Sans", sans-serif;
+  font-size: 11pt;
+  font-weight: bold;
+  letter-spacing: 0.4pt;
+  color: #E8F0FF;
+  margin: 0 0 5mm 0;
+}
+
+.ficha-catalografica {
+  border: 1px solid #2A3640;
+  background: #0B1119;
+  padding: 3mm 3.5mm;
+  margin: 5mm 0 3mm 0;
+  text-align: left;
+  font-family: "Atkinson", "Noto Serif CJK SC", "DejaVu Sans", sans-serif;
+  font-size: 8pt;
+  line-height: 1.3;
+  color: #C9D4E3;
+  break-inside: avoid;
+}
+
+.ficha-catalografica p {
+  margin: 0 0 1.2mm 0;
+}
+
+.ficha-titulo {
+  font-family: "Press Start", monospace;
+  font-size: 6pt;
+  letter-spacing: 0.6pt;
+  color: #5EEAD4;
+  margin-bottom: 2mm;
+}
+
+.ficha-nota {
+  font-size: 7pt;
+  color: #94A3B8;
+}
+
+.rosto-linha {
+  width: 34mm;
+  height: 3px;
+  background: #5EEAD4;
+  margin: 0 auto 8mm auto;
+}
+
+.rosto-descricao {
+  font-family: "Atkinson", "Noto Serif CJK SC", "DejaVu Sans", sans-serif;
+  font-size: 10.5pt;
+  color: #C9D4E3;
+  margin: 0 0 8mm 0;
+}
+
+.rosto-autoria {
+  font-family: "Atkinson", "Noto Serif CJK SC", "DejaVu Sans", sans-serif;
+  font-size: 10.5pt;
+  color: #E8F0FF;
+  margin: 0 0 5mm 0;
+}
+
+.rosto-edicao {
+  font-family: "Atkinson", "Noto Serif CJK SC", "DejaVu Sans", sans-serif;
+  font-size: 9.5pt;
+  color: #94A3B8;
+  margin: 0 0 12mm 0;
+}
+
+.rosto-aviso {
+  font-family: "Atkinson", "Noto Serif CJK SC", "DejaVu Sans", sans-serif;
+  font-size: 9pt;
+  color: #94A3B8;
+}
+
+/* ---------- títulos ---------- */
+
+h1, h2, h3 {
+  font-family: "Press Start", monospace;
+  color: #F2C94C;
+  line-height: 1.45;
+  break-after: avoid;
+  text-align: left;
+}
+
+h1 {
+  font-size: 15pt;
+  margin: 0 0 5mm 0;
+  padding-bottom: 3mm;
+  border-bottom: 4px solid #5EEAD4;
+  break-before: page;
+  bookmark-level: 1;
+  bookmark-label: content(text);
+}
+
+h1::before {
+  content: "";
+  display: block;
+  width: 12mm;
+  height: 4mm;
+  background: #A3E635;
+  margin-bottom: 4mm;
+}
+
+h2 {
+  font-size: 11pt;
+  margin: 0 0 2.5mm 0;
+  color: #5EEAD4;
+}
+
+h3 {
+  font-size: 9pt;
+  margin: 3mm 0 1.5mm 0;
+  color: #A3E635;
+}
+
+/* ---------- lauda ---------- */
+
+.lauda {
+  break-before: page;
+  border: 3px solid #2A3640;
+  background: #0F1620;
+  padding: 4mm;
+  min-height: 190mm;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.lauda .topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #2A3640;
+  padding-bottom: 1.6mm;
+  margin-bottom: 2.2mm;
+  font-family: "Press Start", monospace;
+  font-size: 5.4pt;
+  color: #94A3B8;
+  line-height: 1.4;
+}
+
+.lauda .cod { color: #A3E635; }
+.lauda .lente { color: #5EEAD4; }
+.lauda .conc { color: #F2C94C; }
+
+.ico {
+  width: 4.2mm;
+  height: 4.2mm;
+  vertical-align: middle;
+  image-rendering: pixelated;
+}
+
+.lauda .titulo {
+  font-family: "Press Start", monospace;
+  font-size: 8.8pt;
+  line-height: 1.5;
+  color: #F2C94C;
+  text-transform: uppercase;
+  margin: 0 0 2.6mm 0;
+  bookmark-level: 2;
+  bookmark-label: content(text);
+}
+
+.lauda .corpo {
+  font-family: "Atkinson", "Noto Serif CJK SC", "DejaVu Sans", sans-serif;
+  font-size: 10.6pt;
+  line-height: 1.36;
+  color: #E8F0FF;
+}
+
+.lauda .corpo p { margin: 0 0 1.4mm 0; }
+.lauda .corpo ol {
+  margin: 0 0 2mm 0;
+  padding-left: 5mm;
+}
+.lauda .corpo li { margin: 0 0 0.8mm 0; }
+
+.lauda pre {
+  font-family: "DejaVu Sans Mono", monospace;
+  font-size: 7.2pt;
+  line-height: 1.3;
+  background: #080D14;
+  border-left: 3px solid #A78BFA;
+  padding: 2mm;
+  margin: 1.5mm 0;
+  white-space: pre-wrap;
+  color: #D7E1F0;
+}
+
+.lauda .rigor {
+  border: 2px solid #334155;
+  background: #0A1018;
+  padding: 1.8mm;
+  margin-top: 2mm;
+  font-family: "Atkinson", "Noto Serif CJK SC", "DejaVu Sans", sans-serif;
+  font-size: 9.2pt;
+  line-height: 1.3;
+  color: #C9D4E3;
+}
+
+.lauda .rigor p { margin: 0 0 1.2mm 0; }
+
+.lauda .rotulo {
+  display: block;
+  font-family: "Press Start", "Noto Serif CJK SC", monospace;
+  font-size: 5.2pt;
+  color: #94A3B8;
+  margin-bottom: 1.2mm;
+  line-height: 1.4;
+}
+
+.lauda .prof {
+  color: #A9B6C8;
+  font-size: 8.6pt;
+  border-top: 1px dashed #334155;
+  padding-top: 1.2mm;
+  margin-top: 1.2mm;
+}
+
+.lauda .check {
+  border: 2px solid #A3E635;
+  background: #0D1A11;
+  padding: 1.6mm 1.8mm 1.8mm 1.8mm;
+  margin-top: 1.2mm;
+  font-family: "Atkinson", "Noto Serif CJK SC", "DejaVu Sans", sans-serif;
+  font-size: 9.2pt;
+  line-height: 1.25;
+  color: #E8F0FF;
+}
+
+.lauda .check .rotulo { color: #A3E635; }
+.lauda .check p { margin: 0 0 0.5mm 0; line-height: 1.35; }
+
+.lauda .rodape {
+  margin-top: 2.4mm;
+  border-top: 1px solid #2A3640;
+  padding-top: 1mm;
+  font-family: "Atkinson", "Noto Serif CJK SC", "DejaVu Sans", sans-serif;
+  font-size: 7pt;
+  color: #5C677A;
+  line-height: 1.4;
+}
+
+/* cores das lentes */
+.lente-ideia { border-top-color: #5EEAD4; }
+.lente-analogia { border-top-color: #F2C94C; }
+.lente-pratica { border-top-color: #34D399; }
+.lente-laboratorio { border-top-color: #A78BFA; }
+.lente-erro { border-top-color: #FB7185; }
+.lente-alem { border-top-color: #60A5FA; }
+.lente-dialogo { border-top-color: #F472B6; }
+.lente-etica { border-top-color: #FB923C; }
+.lente-vida { border-top-color: #2DD4BF; }
+.lente-checkpoint { border-top-color: #A3E635; }
+
+.lente-ideia .lente { color: #5EEAD4; }
+.lente-analogia .lente { color: #F2C94C; }
+.lente-pratica .lente { color: #34D399; }
+.lente-laboratorio .lente { color: #A78BFA; }
+.lente-erro .lente { color: #FB7185; }
+.lente-alem .lente { color: #60A5FA; }
+.lente-dialogo .lente { color: #F472B6; }
+.lente-etica .lente { color: #FB923C; }
+.lente-vida .lente { color: #2DD4BF; }
+.lente-checkpoint .lente { color: #A3E635; }
+
+/* ---------- figuras e tabelas ---------- */
+
+figure {
+  margin: 1.5mm 0;
+  text-align: center;
+  break-inside: avoid;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+figure img {
+  max-width: 100%;
+  max-height: 55mm;
+  height: auto;
+}
+
+.fig-pequena {
+  max-width: 100%;
+  max-height: 26mm;
+  border: 2px solid #2A3640;
+}
+
+figcaption {
+  font-family: "Atkinson", "Noto Serif CJK SC", "DejaVu Sans", sans-serif;
+  font-size: 8pt;
+  line-height: 1.25;
+  color: #94A3B8;
+  margin-top: 1mm;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.2mm 0;
+  font-family: "Atkinson", "Noto Serif CJK SC", "DejaVu Sans", sans-serif;
+  font-size: 8.2pt;
+  line-height: 1.2;
+  break-inside: auto;
+}
+
+thead {
+  display: table-header-group;
+}
+
+tr {
+  break-inside: avoid;
+}
+
+th {
+  background: #1E293B;
+  color: #E8F0FF;
+  text-align: left;
+  padding: 1mm 1.5mm;
+  border: 1px solid #2A3640;
+  font-family: "Atkinson", "Noto Serif CJK SC", "DejaVu Sans", sans-serif;
+  font-weight: bold;
+  font-size: 8pt;
+  line-height: 1.25;
+}
+
+td {
+  padding: 0.5mm 1.4mm;
+  border: 1px solid #2A3640;
+  color: #D7E1F0;
+  vertical-align: top;
+}
+
+tbody tr:nth-child(even) td { background: #0B1119; }
+
+.dados {
+  font-size: 9.5pt;
+  margin: 1.5mm 0;
+}
+
+.dados td { padding: 0.8mm 1.2mm; }
+
+.mini {
+  font-size: 8pt;
+  color: #94A3B8;
+  line-height: 1.25;
+}
+
+/* ---------- mapa e referências ---------- */
+
+a.ref::after {
+  content: " · p." target-counter(attr(href), page);
+  color: #94A3B8;
+  font-size: 8pt;
+}
+
+.pag a::after {
+  content: target-counter(attr(href), page);
+  color: #94A3B8;
+  font-size: 8pt;
+}
+
+.pg a::after {
+  content: target-counter(attr(href), page);
+  color: #5EEAD4;
+  font-size: 8pt;
+}
+
+.sumario {
+  font-size: 8.4pt;
+}
+
+.sumario td, .sumario th {
+  padding: 0.8mm 1.4mm;
+  vertical-align: top;
+}
+
+.sumario .pg {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.tabela-experimentos table {
+  table-layout: auto;
+  font-size: 7.2pt;
+  line-height: 1.15;
+}
+
+.tabela-experimentos th,
+.tabela-experimentos td {
+  padding: 0.35mm 0.9mm;
+}
+
+/* ---------- parte ---------- */
+
+.banner-parte {
+  width: 100%;
+  max-height: 26mm;
+  border: 3px solid #2A3640;
+  margin-bottom: 4mm;
+  image-rendering: pixelated;
+}
+
+.parte-nivel {
+  font-family: "Press Start", monospace;
+  font-size: 6.6pt;
+  line-height: 1.6;
+  letter-spacing: 0.6pt;
+  color: #5EEAD4;
+  margin: 0 0 3mm 0;
+}
+
+.parte h1 {
+  border-bottom-color: #F2C94C;
+}
+
+.parte ul {
+  padding-left: 5mm;
+  margin: 0 0 3mm 0;
+}
+
+.parte li {
+  margin: 0 0 1.4mm 0;
+  font-size: 10.2pt;
+}
+
+/* ---------- utilidades ---------- */
+
+blockquote {
+  margin: 3mm 0;
+  padding: 2mm 3mm;
+  border-left: 4px solid #A78BFA;
+  background: #0B1119;
+  color: #C9D4E3;
+  font-size: 10pt;
+}
+
+hr {
+  border: none;
+  border-top: 2px solid #2A3640;
+  margin: 4mm 0;
+}
+
+ul, ol { margin: 1.5mm 0 2.5mm 0; }
+
+h1 + p { margin-top: 1mm; }
+
+
+/* marca d'água e barra de progresso pixel */
+.xp {
+  margin: 0.8mm 0 0.8mm 0;
+  display: flex;
+}
+
+.proximo {
+  margin-top: 2.5mm;
+  padding-top: 2mm;
+  border-top: 1px dashed #2A3640;
+  font-size: 8.8pt;
+  color: #94A3B8;
+}
+
+.xp span {
+  display: inline-block;
+  width: 6mm;
+  height: 2.2mm;
+  margin-right: 1mm;
+  background: #1E293B;
+  border: 1px solid #2A3640;
+}
+
+.xp span.on {
+  background: #A3E635;
+  border-color: #A3E635;
+}
+
+
+.autor-pixel {
+  display: block;
+  width: 18mm;
+  margin: 0 auto 2mm auto;
+  border: 3px solid #5EEAD4;
+  image-rendering: pixelated;
+}
+
+.autor-legenda {
+  font-family: "Atkinson", "Noto Serif CJK SC", "DejaVu Sans", sans-serif;
+  font-size: 7.5pt;
+  color: #94A3B8;
+  text-align: center;
+  margin-bottom: 3mm;
+}
+
+
+/* ---------- ponte sonora: chinês no meio da lauda ---------- */
+
+p.ponte {
+  margin: 2.2mm 0 2.2mm 0;
+  padding: 1.8mm 2.2mm 1.8mm 2.6mm;
+  border-left: 3px solid #FBBF24;
+  background: #14100A;
+  font-size: 8.4pt;
+  line-height: 1.3;
+  color: #E8F0FF;
+  break-inside: avoid;
+}
+
+p.ponte strong {
+  color: #FBBF24;
+  font-weight: bold;
+}
+
+p.ponte .hanzi {
+  font-family: "Noto Serif CJK SC", "Droid Sans Fallback", serif;
+  font-size: 11pt;
+  color: #FDE68A;
+}
+
+p.ponte em {
+  color: #FBBF24;
+  font-style: normal;
+}
+
+p.ponte .tom {
+  color: #94A3B8;
+  font-size: 7.4pt;
+}
+
+/* tabela longa do glossário: pode quebrar entre páginas */
+.tabela-longa,
+.tabela-longa table {
+  break-inside: auto;
+}
+
+.tabela-longa thead {
+  display: table-header-group;
+}
+
+.parte-zh {
+  font-family: "Noto Serif CJK SC", "Atkinson", serif;
+  font-size: 10.5pt;
+  color: #94A3B8;
+  margin: -1mm 0 3.5mm 0;
+  letter-spacing: 0;
+  line-height: 1.35;
+}
+
+/* ---------- resultado do experimento (simulado x backend) ---------- */
+
+.resultado {
+  border: 2px solid #60A5FA;
+  background: #0A1220;
+  padding: 1.8mm 2mm;
+  margin-top: 2mm;
+  font-family: "Atkinson", "Noto Serif CJK SC", "DejaVu Sans", sans-serif;
+  font-size: 8.4pt;
+  line-height: 1.25;
+  color: #E8F0FF;
+  break-inside: avoid;
+}
+
+.resultado .rotulo {
+  display: block;
+  font-family: "Press Start", "Noto Serif CJK SC", monospace;
+  font-size: 4.8pt;
+  color: #60A5FA;
+  margin-bottom: 1mm;
+  line-height: 1.4;
+}
+
+.resultado p { margin: 0 0 0.6mm 0; }
+.resultado .mini { font-size: 7.2pt; color: #94A3B8; }
+.resultado code { font-size: 7pt; color: #5EEAD4; }
+
+/* ---------- trilhas por nível ---------- */
+
+.nivel-0 .corpo {
+  font-size: 11.2pt;
+  line-height: 1.42;
+}
+
+.nivel-0 .lauda .corpo p {
+  margin-bottom: 1.8mm;
+}
+
+.nivel-0 .rigor {
+  font-size: 9.6pt;
+}
+
+.nivel-2 .corpo {
+  font-size: 9.8pt;
+  line-height: 1.32;
+}
+
+.nivel-2 .rigor {
+  font-size: 8.8pt;
+}
+
+.nivel-2 .resultado {
+  border-color: #FB7185;
+}
+
+/* ---------- leia em 3 passos ---------- */
+
+.tres-passos {
+  border-left: 3px solid #A3E635;
+  background: #0A140C;
+  padding: 1.6mm 2mm;
+  margin: 1.5mm 0 1.8mm 0;
+  font-family: "Atkinson", "Noto Serif CJK SC", "DejaVu Sans", sans-serif;
+  font-size: 8.5pt;
+  line-height: 1.28;
+  color: #E8F0FF;
+}
+
+.tres-passos .rotulo {
+  display: block;
+  font-family: "Press Start", "Noto Serif CJK SC", monospace;
+  font-size: 4.8pt;
+  color: #A3E635;
+  margin-bottom: 0.9mm;
+}
+
+.tres-passos p { margin: 0 0 0.7mm 0; }
+
+.check .micro {
+  margin-top: 1mm;
+  padding-top: 1mm;
+  border-top: 1px dashed #2A3640;
+  font-size: 8pt;
+  line-height: 1.25;
+  color: #FBBF24;
+}
+
+.check .micro strong { color: #FBBF24; }
+
+/* ---------- fichas de evidência ---------- */
+
+.ficha .grau {
+  margin-top: 2mm;
+  padding: 1.8mm 2.2mm;
+  border-left: 3px solid #FBBF24;
+  background: #14100A;
+  font-size: 8.6pt;
+  line-height: 1.3;
+  color: #E8F0FF;
+}
+
+.ficha .grau strong { color: #FBBF24; }
+
+.ficha .corpo { font-size: 8.9pt; line-height: 1.32; }
+.ficha .corpo p { margin: 0 0 1.5mm 0; }
+
+.ficha .topo { font-size: 4.8pt; }
+
+.capa-fichas {
+  font-family: "Press Start", "Noto Serif CJK SC", monospace;
+  font-size: 6pt;
+  letter-spacing: 1pt;
+  color: #A3E635;
+  margin: -1mm 0 2mm 0;
+}
+
+.formula {
+  margin: 2mm 0;
+  padding: 1.8mm 2.2mm;
+  border-left: 3px solid #A78BFA;
+  background: #0B1220;
+  font-family: "DejaVu Sans", "Atkinson", sans-serif;
+  font-size: 9.5pt;
+  line-height: 1.4;
+  color: #E8F0FF;
+}
+
+p.ponte .guia {
+  display: block;
+  font-size: 7.4pt;
+  color: #C9D4E3;
+  margin: 0.5mm 0;
+}
+
+p.ponte .termo,
+p.ponte .frase {
+  display: block;
+  margin: 0.5mm 0;
+}
+/* ---------- contenção de texto, código e tabelas ---------- */
+
+pre {
+  box-sizing: border-box;
+  max-width: 100%;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+code {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+table {
+  table-layout: fixed;
+}
+
+th, td {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+p, li, a {
+  overflow-wrap: anywhere;
+}
+
+a.gab {
+  font-size: 6.5pt;
+  color: #FBBF24;
+  text-decoration: none;
+}
+
+a.ficha-link {
+  font-size: 6.5pt;
+  color: #5EEAD4;
+  text-decoration: none;
+}
+
+/* ---------- barras de resultado em cada lauda ---------- */
+
+.mini-barras {
+  margin: 1.4mm 0 0 0;
+  font-family: "Atkinson", "Noto Serif CJK SC", "DejaVu Sans", sans-serif;
+  font-size: 7pt;
+  color: #94A3B8;
+}
+
+.mini-barras .rotulo-mini {
+  display: block;
+  font-family: "Press Start", "Noto Serif CJK SC", monospace;
+  font-size: 4.5pt;
+  color: #60A5FA;
+  margin-bottom: 0.6mm;
+}
+
+.mini-barras .linha {
+  display: flex;
+  align-items: center;
+  gap: 1.5mm;
+  margin-top: 0.5mm;
+}
+
+.mini-barras em {
+  width: 13mm;
+  font-style: normal;
+  color: #C9D4E3;
+}
+
+.mini-barras .trilho {
+  flex: 1;
+  height: 2mm;
+  background: #1E293B;
+  border: 1px solid #2A3640;
+}
+
+.mini-barras .trilho span {
+  display: block;
+  height: 100%;
+  background: #5EEAD4;
+}
+
+.mini-barras b {
+  width: 12mm;
+  text-align: right;
+  color: #E8F0FF;
+  font-weight: normal;
+}
+
+/* figuras de lauda: limite efetivo (a regra figure img tinha prioridade) */
+figure img.fig-pequena {
+  max-height: 30mm;
+}
+
+figure img.fig-pequena { max-height: 26mm; }
+.check .micro { font-size: 7.6pt; }
+
+figure img.fig-pequena { max-height: 22mm; }
+table { font-size: 7.9pt; }
+td { padding: 0.4mm 1.3mm; }
+.lauda .check { padding: 1.4mm 1.6mm 1.5mm 1.6mm; }
+
+.ico-conceito {
+  width: 3.2mm;
+  height: 3.2mm;
+  vertical-align: middle;
+  margin: -0.5mm 1mm -0.5mm 0;
+  image-rendering: pixelated;
+}

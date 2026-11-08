@@ -1,0 +1,31 @@
+{
+  "experimento": "qasm",
+  "backend": "Guoji08",
+  "n_qubits": 4,
+  "shots": 1024,
+  "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[4];\ncreg c[4];\nh q[0];\ncx q[0], q[1];\ncx q[0], q[2];\ncx q[0], q[3];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];\nmeasure q[2] -> c[2];\nmeasure q[3] -> c[3];\n",
+  "depth_original": 5,
+  "depth_transpilado": 13,
+  "counts": {
+    "1111": 389,
+    "1011": 38,
+    "0000": 418,
+    "0001": 19,
+    "1101": 36,
+    "0010": 29,
+    "0110": 11,
+    "0111": 13,
+    "0011": 1,
+    "0101": 5,
+    "0100": 18,
+    "1010": 2,
+    "1000": 13,
+    "1110": 6,
+    "1001": 26
+  },
+  "fidelidade_proxy": 0.7880859375,
+  "task_ids": [
+    "a88818df-402a-47c5-8e75-81e6224e7b08"
+  ],
+  "timestamp": "2026-11-07T00:07:48-0300"
+}

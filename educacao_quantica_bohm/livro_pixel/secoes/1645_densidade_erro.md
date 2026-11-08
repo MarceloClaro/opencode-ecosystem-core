@@ -1,0 +1,34 @@
+::: {.lauda .lente-erro .nivel-1}
+<div class="topo">
+  <span class="cod">L1645</span>
+  <span class="lente"><img class="ico" src="sprites/erro.png" alt=""> ERRO COMUM</span>
+  <span class="conc"><img class="ico-conceito" src="sprites_conceitos/C065.png" alt=""> N1 · C065 · MATRIZ DENSIDADE</span>
+</div>
+<div class="xp"><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class="on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div>
+<h2 id="l-1645" class="titulo">Matriz densidade — erro comum</h2>
+<div class="corpo">
+
+<p><strong>O erro comum:</strong> Compare a densidade de |0⟩ com a de uma mistura 50/50.</p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">密度矩阵</span> <em>mì dù jǔ zhèn</em> <span class="tom">· tons 4-4-3-4 · leitura mi-du-djyu-djen</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">密度矩阵不是魔法。</span> <em>Mì dù jǔ zhèn bú shì mó fǎ.</em> — “Matriz densidade” não é magia.</span></p>
+<p><strong>Por que acontece:</strong> o cérebro procura uma imagem simples e apaga a parte matemática que não se encaixa.</p>
+<p><strong>Como testar:</strong> escreva um contraexemplo em uma frase e veja se ele derruba sua explicação.</p>
+
+</div>
+<div class="rigor">
+<span class="rotulo">RIGOR CIENTÍFICO</span>
+<p>A matemática é representação; não é o fenômeno. Não confunda o mapa com o território.</p>
+<p class="prof"><strong>Para o professor:</strong> A fórmula deve vir depois da intuição; use exemplos numéricos pequenos.</p>
+</div>
+<div class="check">
+<span class="rotulo">CHECKPOINT</span>
+<p>Uma mistura estatística pode esconder responsabilidade?</p>
+</div>
+
+<div class="mini-barras">
+<span class="rotulo-mini">RESULTADO VISUAL · SIMULADO × BACKEND</span>
+<div class="linha"><em>sim</em><div class="trilho"><span style="width:100%"></span></div><b>100%</b></div>
+<div class="linha"><em>backend</em><div class="trilho"><span style="width:94.1%"></span></div><b>94,1%</b></div>
+</div>
+
+<div class="rodape">P07 · C065/100 · L1645/3000 · <a class="gab" href="#g-065">[G065]</a> · <a class="ficha-link" href="#f-065">[F065]</a></div>
+:::

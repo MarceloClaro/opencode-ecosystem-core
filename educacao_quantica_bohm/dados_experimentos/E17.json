@@ -1,0 +1,46 @@
+{
+  "id": "E17",
+  "nome": "Interferência de três qubits",
+  "descricao": "Uma caminhada curta distribui amplitude em 000/010/101/111.",
+  "conceitos": [
+    "holomovimento",
+    "holograma",
+    "narrativa"
+  ],
+  "simulado": {
+    "counts": [
+      {
+        "000": 264,
+        "010": 254,
+        "101": 265,
+        "111": 241
+      }
+    ],
+    "leitura": "P(000) = 0.258 (ideal 0,250)",
+    "shots": 1024,
+    "metodo": "statevector + amostragem"
+  },
+  "real": {
+    "counts": [
+      {
+        "101": 236,
+        "111": 215,
+        "100": 29,
+        "000": 235,
+        "010": 244,
+        "110": 30,
+        "011": 19,
+        "001": 16
+      }
+    ],
+    "leitura": "P(000) = 0.229 (ideal 0,250)",
+    "task_ids": [
+      "c92beefa-a283-40a7-9415-3f1b7ffe4757"
+    ],
+    "backend": "Guoji08",
+    "shots": 1024,
+    "timestamp": "2026-11-07T00:31:23-0300"
+  },
+  "sobreposicao": 0.908203125,
+  "timestamp": "2026-11-07T00:25:54-0300"
+}

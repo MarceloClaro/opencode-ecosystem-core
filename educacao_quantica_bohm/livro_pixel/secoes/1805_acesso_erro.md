@@ -1,0 +1,34 @@
+::: {.lauda .lente-erro .nivel-1}
+<div class="topo">
+  <span class="cod">L1805</span>
+  <span class="lente"><img class="ico" src="sprites/erro.png" alt=""> ERRO COMUM</span>
+  <span class="conc"><img class="ico-conceito" src="sprites_conceitos/C081.png" alt=""> N1 · C081 · ACESSO</span>
+</div>
+<div class="xp"><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class="on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div>
+<h2 id="l-1805" class="titulo">Acesso — erro comum</h2>
+<div class="corpo">
+
+<p><strong>O erro comum:</strong> Liste quem pode usar o CIQuanta e em que condições.</p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">访问</span> <em>fǎng wèn</em> <span class="tom">· tons 3-4 · leitura fang-uen</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">访问不是魔法。</span> <em>Fǎng wèn bú shì mó fǎ.</em> — “Acesso” não é magia.</span></p>
+<p><strong>Por que acontece:</strong> o cérebro procura uma imagem simples e apaga a parte matemática que não se encaixa.</p>
+<p><strong>Como testar:</strong> escreva um contraexemplo em uma frase e veja se ele derruba sua explicação.</p>
+
+</div>
+<div class="rigor">
+<span class="rotulo">RIGOR CIENTÍFICO</span>
+<p>Ética envolve valores e poder. Não há resposta automática; há deliberação e consequências.</p>
+<p class="prof"><strong>Para o professor:</strong> Não transforme ética em opinião pessoal: peça evidência, afetados e alternativas.</p>
+</div>
+<div class="check">
+<span class="rotulo">CHECKPOINT</span>
+<p>Uma política de acesso pode reproduzir desigualdades regionais?</p>
+</div>
+
+<div class="mini-barras">
+<span class="rotulo-mini">RESULTADO VISUAL · SIMULADO × BACKEND</span>
+<div class="linha"><em>sim</em><div class="trilho"><span style="width:100%"></span></div><b>100%</b></div>
+<div class="linha"><em>backend</em><div class="trilho"><span style="width:96.4%"></span></div><b>96,4%</b></div>
+</div>
+
+<div class="rodape">P09 · C081/100 · L1805/3000 · <a class="gab" href="#g-081">[G081]</a> · <a class="ficha-link" href="#f-081">[F081]</a></div>
+:::

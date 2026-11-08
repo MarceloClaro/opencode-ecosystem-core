@@ -1,0 +1,42 @@
+{
+  "id": "E08",
+  "nome": "Gerador quântico de números",
+  "descricao": "H + medição produzem bits aproximadamente equilibrados.",
+  "conceitos": [
+    "dialogo",
+    "fila",
+    "api_key",
+    "acessibilidade",
+    "acesso",
+    "privacidade",
+    "lgpd"
+  ],
+  "simulado": {
+    "counts": [
+      {
+        "0": 493,
+        "1": 531
+      }
+    ],
+    "leitura": "|P(0)-P(1)| = 0.037 (ideal 0,000)",
+    "shots": 1024,
+    "metodo": "statevector + amostragem"
+  },
+  "real": {
+    "counts": [
+      {
+        "1": 494,
+        "0": 530
+      }
+    ],
+    "leitura": "|P(0)-P(1)| = 0.035 (ideal 0,000)",
+    "task_ids": [
+      "58eedaa5-295c-41cc-887c-13ba436660a8"
+    ],
+    "backend": "Guoji08",
+    "shots": 1024,
+    "timestamp": "2026-11-07T00:28:38-0300"
+  },
+  "sobreposicao": 0.9638671875,
+  "timestamp": "2026-11-07T00:25:54-0300"
+}

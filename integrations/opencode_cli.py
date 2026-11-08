@@ -819,6 +819,20 @@ def build_config() -> Dict[str, Any]:
                 "command": [".venv/bin/python", "integrations/artigo_academico_mcp.py"],
                 "enabled": True,
             },
+            # R1099: estado, experimentos, counts, Lean e checklist do livro quântico.
+            "livro-quantico": {
+                "type": "local",
+                "command": [".venv/bin/python", "-m", "integrations.livro_quantico_mcp"],
+                "enabled": True,
+                "timeout": 30000,
+            },
+            # R1099: execução e auditoria de E01–E18 no backend GJQ.
+            "gjq-experiments": {
+                "type": "local",
+                "command": [".venv/bin/python", "-m", "integrations.gjq_experiments_mcp"],
+                "enabled": True,
+                "timeout": 120000,
+            },
             # R944: matrizes CAEd/SPAECE locais e fontes legais oficiais allowlisted.
             "caed-spaece-data": {
                 "type": "local",

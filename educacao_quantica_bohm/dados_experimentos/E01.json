@@ -1,0 +1,35 @@
+{
+  "id": "E01",
+  "nome": "Base |0⟩",
+  "descricao": "Prepara |0⟩ e mede 1024 vezes.",
+  "conceitos": [
+    "bit"
+  ],
+  "simulado": {
+    "counts": [
+      {
+        "0": 1024
+      }
+    ],
+    "leitura": "P(0) = 1.000 (ideal 1,000)",
+    "shots": 1024,
+    "metodo": "statevector + amostragem"
+  },
+  "real": {
+    "counts": [
+      {
+        "0": 1016,
+        "1": 8
+      }
+    ],
+    "leitura": "P(0) = 0.992 (ideal 1,000)",
+    "task_ids": [
+      "9fd44816-2f18-4857-9129-55c509caa51c"
+    ],
+    "backend": "Guoji08",
+    "shots": 1024,
+    "timestamp": "2026-11-07T00:26:58-0300"
+  },
+  "sobreposicao": 0.9921875,
+  "timestamp": "2026-11-07T00:25:54-0300"
+}

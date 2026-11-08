@@ -9,7 +9,7 @@ from .router import route
 from .banca import BancaSessionStore
 
 def review_research(project,*,max_steps=34,timeout_seconds=30,cancelled=False,on_start=None,on_result=None):
-    if type(max_steps) is not int or not 1<=max_steps<=34: raise ValueError('Orçamento de 1 a 34 especialistas')
+    if type(max_steps) is not int or not 1<=max_steps<=36: raise ValueError('Orçamento de 1 a 36 especialistas')
     if isinstance(timeout_seconds,bool) or not isinstance(timeout_seconds,(int,float)) or not math.isfinite(timeout_seconds) or not 0<timeout_seconds<=120: raise ValueError('Prazo inválido')
     if type(cancelled) is not bool: raise ValueError('Cancelamento inválido')
     started=time.monotonic(); p,artifact,manifest=intake(project)

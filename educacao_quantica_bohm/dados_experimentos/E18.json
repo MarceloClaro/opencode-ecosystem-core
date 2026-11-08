@@ -1,0 +1,41 @@
+{
+  "id": "E18",
+  "nome": "Amostragem binomial",
+  "descricao": "H + medição; o desvio de P(1) cai com o número de tiros.",
+  "conceitos": [
+    "probabilidade",
+    "equilibrio_quantico",
+    "medicao_multipla",
+    "amostragem",
+    "nanoaula",
+    "custo"
+  ],
+  "simulado": {
+    "counts": [
+      {
+        "0": 529,
+        "1": 495
+      }
+    ],
+    "leitura": "P(1) = 0.483 (ideal 0,500)",
+    "shots": 1024,
+    "metodo": "statevector + amostragem"
+  },
+  "real": {
+    "counts": [
+      {
+        "1": 494,
+        "0": 530
+      }
+    ],
+    "leitura": "P(1) = 0.482 (ideal 0,500)",
+    "task_ids": [
+      "54de9107-54fd-4aa5-8c85-53012550ed22"
+    ],
+    "backend": "Guoji08",
+    "shots": 1024,
+    "timestamp": "2026-11-07T00:31:39-0300"
+  },
+  "sobreposicao": 0.9990234375,
+  "timestamp": "2026-11-07T00:25:54-0300"
+}

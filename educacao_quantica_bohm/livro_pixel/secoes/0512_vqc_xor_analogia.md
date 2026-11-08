@@ -1,0 +1,34 @@
+::: {.lauda .lente-analogia .nivel-0}
+<div class="topo">
+  <span class="cod">L0512</span>
+  <span class="lente"><img class="ico" src="sprites/analogia.png" alt=""> ANALOGIA + LIMITE</span>
+  <span class="conc"><img class="ico-conceito" src="sprites_conceitos/C052.png" alt=""> N0 · C052 · VQC XOR</span>
+</div>
+<div class="xp"><span class=""></span><span class="on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div>
+<h2 id="l-0512" class="titulo">VQC XOR — analogia + limite</h2>
+<div class="corpo">
+
+<p>Um aluno que acerta quatro questões de um treino curto.</p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">变分分类器</span> <em>biàn fēn fēn lèi qì</em> <span class="tom">· tons 4-1-1-4-4 · leitura bien-fen-fen-lei-tchi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像变分分类器。</span> <em>Zhè xiàng biàn fēn fēn lèi qì.</em> — Isto se parece com “VQC XOR”.</span></p>
+<p><strong>Onde a imagem não vale:</strong> O teste é pequeno; não generaliza para outros dados ou modelos.</p>
+<p>Desenhe a imagem e marque com um X o ponto em que ela falha.</p>
+
+</div>
+<div class="rigor">
+<span class="rotulo">RIGOR CIENTÍFICO</span>
+<p>Amostra pequena não generaliza; 4 pontos não são um artigo.</p>
+<p class="prof"><strong>Para o professor:</strong> Explique o teto e o tamanho da amostra.</p>
+</div>
+<div class="check">
+<span class="rotulo">CHECKPOINT</span>
+<p>Um resultado de 100% em 4 pontos pode enganar uma política pública?</p>
+</div>
+
+<div class="mini-barras">
+<span class="rotulo-mini">RESULTADO VISUAL · SIMULADO × BACKEND</span>
+<div class="linha"><em>sim</em><div class="trilho"><span style="width:100%"></span></div><b>100%</b></div>
+<div class="linha"><em>backend</em><div class="trilho"><span style="width:95.9%"></span></div><b>95,9%</b></div>
+</div>
+
+<div class="rodape">P06 · C052/100 · L0512/3000 · <a class="gab" href="#g-052">[G052]</a> · <a class="ficha-link" href="#f-052">[F052]</a></div>
+:::

@@ -1,0 +1,41 @@
+{
+  "backend": "Guoji08",
+  "shots": 1024,
+  "experimentos": [
+    "ghz"
+  ],
+  "resultados": {
+    "ghz": {
+      "experimento": "ghz",
+      "backend": "Guoji08",
+      "n_qubits": 4,
+      "shots": 1024,
+      "depth_original": 5,
+      "depth_transpilado": 13,
+      "counts": {
+        "1111": 389,
+        "1011": 38,
+        "0000": 418,
+        "0001": 19,
+        "1101": 36,
+        "0010": 29,
+        "0110": 11,
+        "0111": 13,
+        "0011": 1,
+        "0101": 5,
+        "0100": 18,
+        "1010": 2,
+        "1000": 13,
+        "1110": 6,
+        "1001": 26
+      },
+      "fidelidade_proxy": 0.7880859375,
+      "task_ids": [
+        "5cb55b12-b77d-4bcd-94f1-122a3c3f1a64"
+      ],
+      "timestamp": "2026-11-07T00:07:18-0300"
+    }
+  },
+  "falhas": 0,
+  "timestamp": "2026-11-07T00:07:18-0300"
+}

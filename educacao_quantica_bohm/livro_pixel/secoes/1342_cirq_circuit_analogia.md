@@ -1,0 +1,34 @@
+::: {.lauda .lente-analogia .nivel-1}
+<div class="topo">
+  <span class="cod">L1342</span>
+  <span class="lente"><img class="ico" src="sprites/analogia.png" alt=""> ANALOGIA + LIMITE</span>
+  <span class="conc"><img class="ico-conceito" src="sprites_conceitos/C035.png" alt=""> N1 · C035 · CIRQ CIRCUIT</span>
+</div>
+<div class="xp"><span class=""></span><span class="on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div>
+<h2 id="l-1342" class="titulo">Cirq Circuit — analogia + limite</h2>
+<div class="corpo">
+
+<p>Uma linha do tempo com eventos em ordem.</p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子线路</span> <em>liàng zǐ xiàn lù</em> <span class="tom">· tons 4-3-4-4 · leitura liang-dzi-shien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像量子线路。</span> <em>Zhè xiàng liàng zǐ xiàn lù.</em> — Isto se parece com “Cirq Circuit”.</span></p>
+<p><strong>Onde a imagem quebra:</strong> Momentos não são tempo físico; são uma ordenação lógica.</p>
+<p><strong>Teste rápido:</strong> desenhe a analogia e marque com um X o ponto em que ela deixa de explicar o conceito.</p>
+
+</div>
+<div class="rigor">
+<span class="rotulo">RIGOR CIENTÍFICO</span>
+<p>O Cirq usa momentos para organizar operações paralelas.</p>
+<p class="prof"><strong>Para o professor:</strong> Compare a mesma grandeza nas três bibliotecas; se divergir, verifique convenção antes de concluir erro.</p>
+</div>
+<div class="check">
+<span class="rotulo">CHECKPOINT</span>
+<p>Você consegue desenhar um circuito com dois momentos?</p>
+</div>
+
+<div class="mini-barras">
+<span class="rotulo-mini">RESULTADO VISUAL · SIMULADO × BACKEND</span>
+<div class="linha"><em>sim</em><div class="trilho"><span style="width:100%"></span></div><b>100%</b></div>
+<div class="linha"><em>backend</em><div class="trilho"><span style="width:94.1%"></span></div><b>94,1%</b></div>
+</div>
+
+<div class="rodape">P04 · C035/100 · L1342/3000 · <a class="gab" href="#g-035">[G035]</a> · <a class="ficha-link" href="#f-035">[F035]</a></div>
+:::

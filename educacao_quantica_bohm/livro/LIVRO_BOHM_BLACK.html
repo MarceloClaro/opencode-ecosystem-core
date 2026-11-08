@@ -1,0 +1,2291 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xml:lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="OpenCode Ecosystem Core" />
+  <title>Bohm na Escola — Edição Black</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="estilo_black.css" />
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Bohm na Escola — Edição Black</h1>
+<p class="author">OpenCode Ecosystem Core</p>
+</header>
+<div class="capa">
+  <div class="capa-arte"></div>
+  <div class="capa-conteudo">
+    <p class="capa-eyebrow">OPENCODE ECOSYSTEM CORE · EDIÇÃO BLACK</p>
+    <h1 class="capa-titulo">Bohm na Escola</h1>
+    <p class="capa-subtitulo">Onda piloto, diálogo e totalidade no ensino de informação quântica</p>
+    <p class="capa-livro">Livro didático e laboratório · PennyLane · Cirq · Qiskit</p>
+    <p class="capa-publico">9º ano do Ensino Fundamental e Ensino Médio</p>
+    <div class="capa-selo">BNCC Computação · Design black · Práticas de laboratório</div>
+  </div>
+</div>
+<div class="rosto">
+  <p class="rosto-colecao">Coleção Educação Básica · Edição Black</p>
+  <h1 class="rosto-titulo">Bohm na Escola</h1>
+  <p class="rosto-subtitulo">Onda piloto, diálogo e totalidade no ensino de informação quântica</p>
+  <p class="rosto-linha"></p>
+  <p class="rosto-descricao">Livro do estudante, laboratório de práticas e manual do professor.<br>
+  Uma aula sobre o que pode estar acontecendo — e sobre como pensar juntos.</p>
+  <p class="rosto-autoria">Orquestração editorial: <strong>marceloclaro</strong><br>
+  OpenCode Ecosystem Core</p>
+  <p class="rosto-edicao">1.ª edição · 2026</p>
+  <p class="rosto-aviso">Material didático para uso em sala de aula.<br>
+  Bohm é apresentado como uma lente entre várias — não como consenso científico.<br>
+  </p>
+</div>
+<h1 id="como-ler">Como ler este livro</h1>
+<p>Esta edição foi desenhada em <strong>preto</strong>, para tela,
+projetor e leitura noturna. Ela não substitui a edição clara: para
+impressão em grande quantidade, o fundo escuro consome tinta. Use esta
+versão quando a tela for o meio principal.</p>
+<h2 id="os-sinais-do-caminho">Os sinais do caminho</h2>
+<div class="box-bohm">
+<p><strong>🌊 Lente de Bohm.</strong> Uma ideia de David Bohm — onda
+piloto, diálogo, ordem implicada — apresentada com o cuidado de
+distinguir <strong>interpretação</strong>, <strong>analogia</strong> e
+<strong>fato experimental</strong>.</p>
+</div>
+<div class="box-pratica">
+<p><strong>🧪 Prática de laboratório.</strong> Código executável em
+PennyLane, Cirq ou Qiskit. Toda prática tem objetivo, código, resultado
+esperado e um checkpoint.</p>
+</div>
+<div class="box-limite">
+<p><strong>⚠️ Limite.</strong> O ponto em que a analogia, o modelo ou a
+interpretação deixa de funcionar. Não é um detalhe: é parte do
+conceito.</p>
+</div>
+<div class="box-dialogo">
+<p><strong>🗣️ Roda de diálogo.</strong> Um gesto bohminiano: suspender
+suposições, escutar, desacelerar e investigar o pensamento em
+conjunto.</p>
+</div>
+<div class="box-diario">
+<p><strong>✍️ Diário de bordo.</strong> Três perguntas: o que eu vi, o
+que eu suponho, o que eu quero testar. O diário é o elo entre a prática
+e o pensamento.</p>
+</div>
+<h2 id="a-promessa-e-o-limite-desta-edição">A promessa e o limite desta
+edição</h2>
+<p>A promessa é simples: você vai <strong>ver</strong> a mecânica
+quântica funcionando em três bibliotecas diferentes, vai
+<strong>desenhar</strong> o mesmo estado de Bell em PennyLane, Cirq e
+Qiskit, e vai <strong>discutir</strong> o que essas representações não
+mostram.</p>
+<p>O limite é igualmente simples: nenhuma dessas bibliotecas prova que a
+onda piloto é a descrição correta do mundo. Elas calculam previsões. A
+interpretação de Bohm é uma das leituras possíveis dessas previsões —
+não a única, nem a majoritária.</p>
+<blockquote>
+<p><strong>Regra de ouro desta edição:</strong> sempre que alguém disser
+“a física quântica é assim”, pergunte: <em>isso é um resultado
+experimental, uma interpretação ou uma analogia?</em> As três coisas têm
+valor, mas não são a mesma coisa.</p>
+</blockquote>
+<h2 id="o-que-você-precisa-ter-em-mãos">O que você precisa ter em
+mãos</h2>
+<ul>
+<li>Este livro (PDF ou HTML).</li>
+<li>O notebook <code>AULA_BOHM_LABORATORIO.ipynb</code> no Google Colab
+ou Jupyter.</li>
+<li>Acesso à internet para instalar as bibliotecas na primeira vez.</li>
+<li>Caderno, lápis e, se possível, um projetor para as rodas de
+diálogo.</li>
+</ul>
+<h2 id="instalação-rápida-colab">Instalação rápida (Colab)</h2>
+<p>No início do notebook, execute uma vez:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">!pip</span> install <span class="at">-q</span> pennylane qiskit cirq pylatexenc</span></code></pre></div>
+<p>As três bibliotecas são gratuitas e de código aberto. O notebook foi
+testado com PennyLane 0.45, Cirq 1.7 e Qiskit 2.6. Versões diferentes
+podem mudar pequenos detalhes de desenho, mas os conceitos
+permanecem.</p>
+<h1 id="carta-estudante">Carta ao estudante</h1>
+<p>Você já ouviu que a mecânica quântica é estranha. Provavelmente ouviu
+também que ninguém entende. As duas frases são meio verdadeiras e meio
+preguiçosas.</p>
+<p>David Bohm foi um físico que levou a estranheza a sério. Em vez de
+dizer “não pergunte o que acontece antes da medição”, ele propôs uma
+imagem: <strong>uma onda que guia partículas que sempre têm uma
+posição</strong>. Essa imagem não é a única, mas é poderosa — e nos
+obriga a dizer, com clareza, o que estamos supondo.</p>
+<p>Este livro usa Bohm de três modos:</p>
+<ol type="1">
+<li><strong>Como lente ontológica:</strong> e se houver uma trajetória?
+O que ganhamos e o que perdemos ao imaginar isso?</li>
+<li><strong>Como pedagogia do diálogo:</strong> como pensar junto sem
+transformar a conversa em disputa?</li>
+<li><strong>Como poética da totalidade:</strong> a ideia de que o todo
+pode estar presente em cada parte — uma analogia para o emaranhamento,
+não uma prova.</li>
+</ol>
+<p>Você não precisa concordar com Bohm. Precisa saber <strong>o que ele
+propôs</strong>, <strong>por que isso faz as mesmas previsões</strong> e
+<strong>qual é o preço</strong> da proposta. Isso é educação científica:
+não é colecionar nomes, é aprender a avaliar modelos.</p>
+<div class="box-diario">
+<p><strong>✍️ Antes de começar.</strong> Escreva em uma frase: <em>o que
+eu acho que acontece entre duas medições?</em> Guarde. No final, releia
+e veja se a pergunta mudou.</p>
+</div>
+<h1 id="carta-professor">Carta ao professor</h1>
+<p>Esta edição nasceu de um pedido: ensinar Bohm na educação básica, com
+rigor e com prática o tempo todo, usando ilustrações geradas por
+PennyLane, Cirq e Qiskit.</p>
+<h2 id="o-que-esta-edição-é">O que esta edição é</h2>
+<ul>
+<li>Uma <strong>lente interpretativa</strong> sobre a informação
+quântica, não um curso de mecânica quântica completa.</li>
+<li>Um <strong>laboratório</strong> com três bibliotecas reais e figuras
+geradas por código.</li>
+<li>Uma <strong>pedagogia de diálogo</strong> inspirada em Bohm, com
+protocolo de sala.</li>
+<li>Um material <strong>visual black</strong>, pensado para tela e
+projetor.</li>
+<li>Um convite a separar <strong>fato</strong>,
+<strong>interpretação</strong> e <strong>analogia</strong>.</li>
+</ul>
+<h2 id="o-que-esta-edição-não-é">O que esta edição não é</h2>
+<ul>
+<li>Não afirma que a onda piloto é a interpretação correta.</li>
+<li>Não afirma que a ordem implicada é uma teoria física
+comprovada.</li>
+<li>Não substitui a edição clara para impressão em massa.</li>
+<li>Não promete aprendizagem, nota ou aprovação.</li>
+<li></li>
+</ul>
+<h2 id="como-usar-em-100-minutos">Como usar em 100 minutos</h2>
+<table>
+<thead>
+<tr>
+<th>Tempo</th>
+<th>Bloco</th>
+<th>O que fazer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0–10</td>
+<td>Abertura</td>
+<td>pergunta: “o que acontece entre duas medições?”</td>
+</tr>
+<tr>
+<td>10–25</td>
+<td>Lente de Bohm</td>
+<td>cap. 1–2 + figura da onda piloto</td>
+</tr>
+<tr>
+<td>25–45</td>
+<td>Diálogo</td>
+<td>cap. 3 + roda de 15 min</td>
+</tr>
+<tr>
+<td>45–70</td>
+<td>Laboratório</td>
+<td>cap. 6–7 + PennyLane/Cirq/Qiskit</td>
+</tr>
+<tr>
+<td>70–85</td>
+<td>Totalidade</td>
+<td>cap. 4–5 + holograma/emaranhamento</td>
+</tr>
+<tr>
+<td>85–100</td>
+<td>Síntese</td>
+<td>projeto + diário + checkpoint</td>
+</tr>
+</tbody>
+</table>
+<h2 id="como-usar-em-duas-aulas-de-50-minutos">Como usar em duas aulas
+de 50 minutos</h2>
+<ul>
+<li><strong>Aula A:</strong> cap. 1–3 + roda de diálogo + prática
+PennyLane.</li>
+<li><strong>Aula B:</strong> cap. 4–6 + práticas Cirq/Qiskit +
+projeto.</li>
+</ul>
+<h2 id="uma-advertência-sobre-o-design-black">Uma advertência sobre o
+design black</h2>
+<p>O fundo preto é ótimo para projetor e tela, mas <strong>não é
+econômico para impressão</strong>. Se a escola for imprimir para 40
+estudantes, use a edição clara ou imprima apenas as páginas de prática.
+Esta edição foi feita para ser lida com luz baixa e para destacar as
+figuras geradas por código.</p>
+<h2 id="uma-advertência-sobre-bohm">Uma advertência sobre Bohm</h2>
+<p>Bohm não é consenso. A interpretação de onda piloto faz as mesmas
+previsões da mecânica quântica não relativística, mas paga um preço:
+<strong>não localidade</strong> e uma descrição em espaço de
+configuração. Apresente-a como uma lente, não como a verdade revelada. O
+valor pedagógico está em comparar modelos — não em recrutar adeptos.</p>
+<h1 id="sumario">Sumário</h1>
+<div class="toc">
+<p class="toc-parte">
+Abertura
+</p>
+<ul>
+<li>
+<a href="#como-ler">Como ler este livro</a>
+</li>
+<li>
+<a href="#carta-estudante">Carta ao estudante</a>
+</li>
+<li>
+<a href="#carta-professor">Carta ao professor</a>
+</li>
+</ul>
+<p class="toc-parte">
+Parte I — A lente de Bohm
+</p>
+<ul>
+<li>
+<a href="#cap1">1. Por que Bohm?</a>
+</li>
+<li>
+<a href="#cap2">2. A onda piloto: uma imagem do que pode acontecer</a>
+</li>
+<li>
+<a href="#cap3">3. Diálogo: pensar juntos sem vencer</a>
+</li>
+</ul>
+<p class="toc-parte">
+Parte II — Totalidade
+</p>
+<ul>
+<li>
+<a href="#cap4">4. A ordem implicada: o todo em cada parte</a>
+</li>
+<li>
+<a href="#cap5">5. Emaranhamento e não separabilidade</a>
+</li>
+</ul>
+<p class="toc-parte">
+Parte III — Laboratório
+</p>
+<ul>
+<li>
+<a href="#cap6">6. Três linguagens, um mesmo estado</a>
+</li>
+<li>
+<a href="#cap7">7. Prática 1 — PennyLane</a>
+</li>
+<li>
+<a href="#cap8">8. Prática 2 — Cirq</a>
+</li>
+<li>
+<a href="#cap9">9. Prática 3 — Qiskit</a>
+</li>
+<li>
+<a href="#cap10">10. Prática 4 — Onda piloto e interferência</a>
+</li>
+<li>
+<a href="#cap11">11. Prática 5 — Holograma e ordem implicada</a>
+</li>
+<li>
+<a href="#cap12">12. Prática 6 — Diálogo como experimento</a>
+</li>
+</ul>
+<p class="toc-parte">
+Parte IV — Limites e projeto
+</p>
+<ul>
+<li>
+<a href="#cap13">13. Limites, ética e o que Bohm não resolve</a>
+</li>
+<li>
+<a href="#cap14">14. Projeto final: Diálogo quântico</a>
+</li>
+<li>
+<a href="#cap15">15. Manual do professor</a>
+</li>
+</ul>
+<p class="toc-parte">
+Apêndices
+</p>
+<ul>
+<li>
+<a href="#glossario">Glossário</a>
+</li>
+<li>
+<a href="#referencias">Referências</a>
+</li>
+<li>
+<a href="#anexo">Anexo: instalação e Colab</a>
+</li>
+</ul>
+</div>
+<h1 id="cap1">1. Por que Bohm?</h1>
+<div class="epigrafe">
+<p>“A fragmentação do pensamento é o problema; a totalidade é a
+investigação.”</p>
+</div>
+<p>David Bohm (1917–1992) foi um físico teórico que trabalhou com
+plasmas, teoria quântica e filosofia da ciência. Ele ficou conhecido por
+duas contribuições muito diferentes:</p>
+<ol type="1">
+<li>uma <strong>interpretação da mecânica quântica</strong> com
+variáveis ocultas não locais — a teoria da onda piloto, também chamada
+de mecânica bohmiana;</li>
+<li>uma <strong>proposta pedagógica e filosófica</strong> de diálogo e
+de totalidade, expressa em obras como <em>Wholeness and the Implicate
+Order</em> e <em>On Dialogue</em>.</li>
+</ol>
+<p>Nenhuma das duas é consenso. E é justamente por isso que Bohm é útil
+na escola: ele nos obriga a perguntar <strong>o que estamos
+supondo</strong> quando dizemos que uma partícula “não tem trajetória”,
+que a medição “colapsa” o estado ou que o mundo é feito de partes
+separadas.</p>
+<h2 id="a-fragmentação">1.1 A fragmentação</h2>
+<p>Bohm observou que o pensamento humano tende a dividir o mundo em
+pedaços: ciências e humanidades, teoria e prática, mente e corpo, nós e
+eles. A divisão é útil para organizar o estudo, mas pode se tornar uma
+armadilha quando esquecemos que foi <strong>nós</strong> que a
+fizemos.</p>
+<p>Na física quântica, a fragmentação aparece em várias formas:</p>
+<ul>
+<li><strong>observador × observado:</strong> quem mede está fora do
+sistema?</li>
+<li><strong>onda × partícula:</strong> são duas coisas ou duas
+descrições?</li>
+<li><strong>estado × medição:</strong> o que existe entre uma medição e
+outra?</li>
+<li><strong>local × global:</strong> o todo pode ser explicado pelas
+partes?</li>
+</ul>
+<p>Bohm não oferece uma resposta definitiva para todas elas. Oferece uma
+<strong>disciplina de perguntar</strong> e uma <strong>imagem</strong>
+para testar.</p>
+<h2 id="três-gestos-bohminianos">1.2 Três gestos bohminianos</h2>
+<h3 id="gesto-1-ontologia-explícita">Gesto 1 — Ontologia explícita</h3>
+<p>A interpretação de Bohm diz: <strong>partículas têm posições
+definidas o tempo todo</strong>. Uma onda (a função de onda) as guia.
+Isso não é uma afirmação experimental; é uma escolha sobre o que existe.
+O ganho é uma imagem clara do que pode estar acontecendo. O preço é a
+não localidade.</p>
+<h3 id="gesto-2-diálogo">Gesto 2 — Diálogo</h3>
+<p>Bohm propôs que pensemos juntos de um modo diferente do debate. Em
+vez de defender posições, suspendemos as suposições e investigamos o que
+está por trás delas. Isso não é uma técnica de “conversa mole”: é uma
+prática exigente de escuta e de observação do próprio pensamento.</p>
+<h3 id="gesto-3-totalidade">Gesto 3 — Totalidade</h3>
+<p>A ideia de <strong>ordem implicada</strong> sugere que o todo pode
+estar presente em cada parte, como em um holograma. É uma metáfora
+poderosa para o emaranhamento e para a interdisciplinaridade — mas
+<strong>não</strong> é uma teoria física comprovada. Voltaremos a isso
+no capítulo 4.</p>
+<h2 id="o-que-bohm-não-é">1.3 O que Bohm não é</h2>
+<ul>
+<li><strong>Não é um algoritmo quântico.</strong> A onda piloto não
+acelera cálculo; é uma interpretação.</li>
+<li><strong>Não é uma refutação da mecânica quântica.</strong> Ela
+reproduz as previsões.</li>
+<li><strong>Não é uma seita.</strong> Não há dogma; há modelos, custos e
+críticas.</li>
+<li><strong>Não é a única leitura.</strong> Copenhagen, múltiplos
+mundos, QBism e outras interpretações continuam em debate.</li>
+</ul>
+<div class="box-limite">
+<p><strong>⚠️ Limite da lente.</strong> A teoria de Bohm é não
+relativística na sua forma padrão. Extensões relativísticas existem, mas
+são tecnicamente difíceis e não são consenso. Não diga “Bohm explica
+tudo”; diga “Bohm oferece uma imagem com um preço”.</p>
+</div>
+<div class="box-pratica">
+<p><strong>🧪 Prática 1 — Mapa da fragmentação (10 min, sem
+código).</strong></p>
+<p>Em grupos de quatro, listem cinco divisões que vocês usam no estudo
+(por exemplo: “exatas × humanas”, “teoria × prática”, “eu × grupo”).
+Para cada divisão, respondam:</p>
+<ol type="1">
+<li>Quem se beneficia dela?</li>
+<li>O que ela deixa de fora?</li>
+<li>O que aconteceria se fosse borrada?</li>
+</ol>
+<p>Depois, escolham <strong>uma</strong> divisão e escrevam uma frase
+que comece com “E se…”. Guardem no diário. Na roda de diálogo do
+capítulo 3, essa frase será o ponto de partida.</p>
+<p><strong>Checkpoint:</strong> você consegue nomear uma divisão e o que
+ela exclui? Então a prática funcionou.</p>
+</div>
+<h1 id="cap2">2. A onda piloto: uma imagem do que pode acontecer</h1>
+<div class="epigrafe">
+<p>“A partícula sempre está em algum lugar; a onda diz para onde ela
+vai.”</p>
+</div>
+<p>A mecânica quântica padrão costuma ser ensinada assim: o estado é uma
+função de onda; a medição produz um resultado probabilístico; antes da
+medição, não faz sentido falar em trajetória. Essa é uma leitura
+possível — e muito útil para calcular.</p>
+<p>Bohm propôs outra leitura. Ele manteve a função de onda, mas
+acrescentou algo: <strong>partículas com posições definidas</strong>,
+guiadas pela onda. A função de onda não é apenas um cálculo de
+probabilidades; ela é um <strong>campo que pilota</strong> o
+movimento.</p>
+<h2 id="a-equação-do-guia">2.1 A equação do guia</h2>
+<p>Para uma partícula de massa
+<img class="math-inline" src="figuras_geradas/math/4dea7e1fede7cd18.svg" alt="m">,
+a velocidade é dada por</p>
+<div class="math-display">
+<img src="figuras_geradas/math/1275f52ff609df4e.svg" alt="\frac{dQ}{dt} = \frac{\hbar}{m}\operatorname{Im}\!\left(\frac{\nabla\psi}{\psi}\right),">
+</div>
+<p>avaliada na posição
+<img class="math-inline" src="figuras_geradas/math/7848cbc74b7d1bd7.svg" alt="Q(t)">
+da partícula. Em palavras: a fase da função de onda funciona como um
+<strong>campo de velocidades</strong>. Onde a fase muda rapidamente, a
+partícula se move mais depressa; onde a fase é plana, ela quase
+para.</p>
+<p>A função de onda evolui pela equação de Schrödinger, como sempre. O
+que muda é que a partícula tem uma trajetória — e a trajetória é guiada
+pelo todo da função de onda, não apenas por uma região local.</p>
+<div class="box-bohm">
+<p><strong>🌊 Lente de Bohm.</strong> Imagine uma folha flutuando em um
+rio. A folha tem uma posição definida; o rio a carrega. A função de onda
+é o rio; a partícula é a folha. A analogia é imperfeita: o “rio” é um
+campo matemático, e para várias partículas ele vive em um espaço de
+configuração de muitas dimensões. Mas a intuição ajuda: <strong>a
+partícula não é a onda, e a onda não é a partícula.</strong></p>
+</div>
+<h2 id="duas-fendas-duas-histórias">2.2 Duas fendas, duas histórias</h2>
+<p>No experimento de dupla fenda, a história padrão diz que não podemos
+dizer por qual fenda a partícula passou sem destruir o padrão de
+interferência. A história bohmiana diz algo diferente:</p>
+<ul>
+<li>a <strong>partícula</strong> passa por <strong>uma</strong>
+fenda;</li>
+<li>a <strong>onda</strong> passa pelas <strong>duas</strong>;</li>
+<li>a onda que passou pela outra fenda ainda guia a partícula;</li>
+<li>o resultado é um padrão de franjas, mesmo que cada partícula tenha
+ido por um caminho definido.</li>
+</ul>
+<p>Isso é mostrado na figura 1. As trajetórias se curvam e se agrupam
+nas regiões claras do padrão. O padrão de intensidade está à
+direita.</p>
+<figure id="fig01">
+<img src="figuras_geradas/fig01_onda_piloto.png"
+alt="Figura 1. Modelo didático da onda piloto em duas fendas. As trajetórias são guiadas por um campo de fase estilizado e se agrupam nas franjas claras. O painel da direita mostra a intensidade no anteparo. É uma imagem pedagógica, não uma integração numérica da equação de Bohm." />
+<figcaption aria-hidden="true"><strong>Figura 1.</strong> Modelo
+didático da onda piloto em duas fendas. As trajetórias são guiadas por
+um campo de fase estilizado e se agrupam nas franjas claras. O painel da
+direita mostra a intensidade no anteparo. É uma imagem pedagógica, não
+uma integração numérica da equação de Bohm.</figcaption>
+</figure>
+<p>O padrão de interferência em si é calculado pela fórmula usual:</p>
+<figure id="fig02">
+<img src="figuras_geradas/fig02_interferencia.png"
+alt="Figura 2. Padrão de interferência de duas fendas: . A curva é uma previsão quantitativa; as trajetórias da figura 1 são uma imagem qualitativa." />
+<figcaption aria-hidden="true"><strong>Figura 2.</strong> Padrão de
+interferência de duas fendas:
+<img class="math-inline" src="figuras_geradas/math/7e9c963b351e22b1.svg" alt="I(\theta) \propto \cos^2(\pi d \operatorname{sen}\theta/\lambda)\operatorname{sinc}^2(\pi a \operatorname{sen}\theta/\lambda)">.
+A curva é uma previsão quantitativa; as trajetórias da figura 1 são uma
+imagem qualitativa.</figcaption>
+</figure>
+<div class="box-limite">
+<p><strong>⚠️ Limite da figura 1.</strong> O campo de velocidades usado
+na figura é <strong>estilizado</strong>. Ele foi desenhado para mostrar
+o agrupamento nas franjas, não para resolver a equação de Bohm com um
+potencial real. A figura 2, sim, é uma curva física padrão. Não misture
+as duas: uma é imagem, a outra é cálculo.</p>
+</div>
+<h2 id="o-que-acontece-na-medição">2.3 O que acontece na medição?</h2>
+<p>Na leitura de Bohm, não há “colapso” como um processo físico
+fundamental. O que acontece é mais parecido com isto:</p>
+<ol type="1">
+<li>o sistema (partícula) interage com o aparelho;</li>
+<li>a função de onda do conjunto sistema+aparelho se ramifica em várias
+componentes;</li>
+<li>a partícula, que sempre tem posição, termina em <strong>uma</strong>
+das componentes;</li>
+<li>para todos os efeitos práticos, o resultado é o que a componente
+escolhida diz.</li>
+</ol>
+<p>Isso é chamado às vezes de <strong>colapso efetivo</strong>. A
+palavra “efetivo” é importante: não é um postulado adicional; é uma
+consequência da dinâmica, desde que a distribuição inicial das posições
+seja
+<img class="math-inline" src="figuras_geradas/math/89b570a23dabf086.svg" alt="|\psi|^2">.</p>
+<h2 id="por-que-a-regra-de-born-funciona">2.4 Por que a regra de Born
+funciona?</h2>
+<p>Se as posições iniciais forem distribuídas segundo
+<img class="math-inline" src="figuras_geradas/math/89b570a23dabf086.svg" alt="|\psi|^2">,
+a dinâmica de Bohm preserva essa distribuição para sempre. Essa
+propriedade se chama <strong>equivariância</strong>. É por isso que a
+teoria reproduz as probabilidades quânticas: a regra de Born não é um
+postulado independente; ela é uma <strong>distribuição de
+equilíbrio</strong> — a “hipótese de equilíbrio quântico”.</p>
+<p>Isso não é uma demonstração de que a natureza siga Bohm. É uma
+explicação de por que, <strong>se</strong> ela seguir, os números
+batem.</p>
+<h2 id="o-preço-não-localidade">2.5 O preço: não localidade</h2>
+<p>Para uma partícula, a onda vive no espaço tridimensional. Para duas
+partículas emaranhadas, a função de onda vive em um espaço de
+<strong>seis</strong> dimensões (3 por partícula); para
+<img class="math-inline" src="figuras_geradas/math/fed1d872f6d540f4.svg" alt="N">
+partículas,
+<img class="math-inline" src="figuras_geradas/math/45786a150b58c210.svg" alt="3N">.
+A velocidade de uma partícula depende da posição de todas as outras,
+através da função de onda.</p>
+<p>É assim que Bohm reproduz as correlações de Bell: a influência é
+<strong>não local</strong>. Mas não há envio de mensagem mais rápido que
+a luz, porque a distribuição de equilíbrio impede que essa influência
+seja controlada para codificar um sinal.</p>
+<div class="box-limite">
+<p><strong>⚠️ O que Bohm não resolve.</strong> A não localidade
+explícita torna a extensão relativística difícil. A teoria padrão também
+tem correlações não locais, mas não precisa de um “guia” que conecte
+posições instantaneamente. Não apresente Bohm como uma solução fácil
+para a relatividade.</p>
+</div>
+<div class="box-pratica">
+<p><strong>🧪 Prática 2 — Ver a onda guiar (15 min,
+notebook).</strong></p>
+<p>No notebook, execute a célula da prática 4. Ela desenha trajetórias
+em um campo de fase estilizado. Depois:</p>
+<ol type="1">
+<li>mude a largura das fendas ou a distância entre elas;</li>
+<li>observe o espaçamento das franjas;</li>
+<li>escreva uma frase explicando por que as trajetórias se agrupam.</li>
+</ol>
+<p><strong>Checkpoint:</strong> você consegue dizer o que é modelo e o
+que é medida? Se sim, avançou.</p>
+</div>
+<h1 id="cap3">3. Diálogo: pensar juntos sem vencer</h1>
+<div class="epigrafe">
+<p>“O objetivo não é concordar; é ver o que estamos pensando.”</p>
+</div>
+<p>Bohm não foi apenas um físico de interpretações. Ele também propôs
+uma prática coletiva: o <strong>diálogo</strong>. Não é debate, não é
+terapia, não é assembleia. É uma investigação em grupo sobre as próprias
+suposições.</p>
+<h2 id="debate-diálogo">3.1 Debate × diálogo</h2>
+<table>
+<thead>
+<tr>
+<th>Debate</th>
+<th>Diálogo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>defende posições</td>
+<td>examina suposições</td>
+</tr>
+<tr>
+<td>busca vencer</td>
+<td>busca compreender</td>
+</tr>
+<tr>
+<td>interrompe</td>
+<td>escuta</td>
+</tr>
+<tr>
+<td>pressupõe que um está certo</td>
+<td>pressupõe que todos podem aprender</td>
+</tr>
+<tr>
+<td>termina com vencedor</td>
+<td>termina com mais consciência</td>
+</tr>
+</tbody>
+</table>
+<p>O diálogo bohminiano não exige consenso. Exige
+<strong>presença</strong> e <strong>honestidade</strong>.</p>
+<h2 id="os-oito-gestos">3.2 Os oito gestos</h2>
+<p>A figura 3 resume oito gestos que sustentam uma roda de diálogo.</p>
+<figure id="fig03">
+<img src="figuras_geradas/fig04_dialogo.png"
+alt="Figura 3. Oito gestos de uma roda de diálogo bohminiana. Não é um protocolo rígido: é um lembrete visual para sustentar a qualidade da conversa." />
+<figcaption aria-hidden="true"><strong>Figura 3.</strong> Oito gestos de
+uma roda de diálogo bohminiana. Não é um protocolo rígido: é um lembrete
+visual para sustentar a qualidade da conversa.</figcaption>
+</figure>
+<ol type="1">
+<li><strong>Suspender suposições.</strong> Não abandonar; colocar entre
+parênteses para examinar.</li>
+<li><strong>Escutar sem julgar.</strong> Ouvir o que o outro diz, não
+apenas preparar a resposta.</li>
+<li><strong>Falar com honestidade.</strong> Dizer o que se pensa, sem
+performance.</li>
+<li><strong>Não buscar consenso.</strong> A diferença pode ser
+informative.</li>
+<li><strong>Observar o pensamento.</strong> Notar quando uma emoção ou
+um hábito assume o controle.</li>
+<li><strong>Desacelerar.</strong> Dar tempo para que a ideia
+apareça.</li>
+<li><strong>Acolher o silêncio.</strong> O silêncio não é falha; é
+espaço.</li>
+<li><strong>Pergunta compartilhada.</strong> Todos investigam a mesma
+pergunta, não a mesma resposta.</li>
+</ol>
+<h2 id="protocolo-de-15-minutos">3.3 Protocolo de 15 minutos</h2>
+<p><strong>Material:</strong> uma pergunta, um objeto para passar
+(talking piece), um caderno.</p>
+<ol type="1">
+<li><strong>Roda (2 min).</strong> Cada pessoa diz uma palavra sobre
+como chegou.</li>
+<li><strong>Pergunta (1 min).</strong> O facilitador lê a pergunta e não
+a explica demais.</li>
+<li><strong>Rodada 1 (4 min).</strong> Cada pessoa fala <strong>uma
+vez</strong>, sem ser interrompida.</li>
+<li><strong>Silêncio (1 min).</strong> Todos escrevem uma suposição que
+apareceu.</li>
+<li><strong>Rodada 2 (5 min).</strong> Quem quiser responde ao que
+ouviu, não à pessoa.</li>
+<li><strong>Fechamento (2 min).</strong> Uma frase: “o que eu levo desta
+conversa?”.</li>
+</ol>
+<p><strong>Regras de segurança:</strong> ninguém é obrigado a falar; não
+se corrige a fala do outro; não se transforma a roda em julgamento
+pessoal; o professor facilita, não doutrina.</p>
+<div class="box-dialogo">
+<p><strong>🗣️ Perguntas que funcionam.</strong> “O que é medir?”; “O que
+muda quando alguém observa?”; “O que queremos dizer com ‘real’?”;
+“Quando uma analogia ajuda e quando ela engana?”. Evite perguntas com
+resposta única ou com tom de prova.</p>
+</div>
+<h2 id="o-diário-de-suposições">3.4 O diário de suposições</h2>
+<p>Depois da roda, cada estudante registra:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pergunta</td>
+<td>O que é medir?</td>
+</tr>
+<tr>
+<td>Suposição que eu trouxe</td>
+<td>“Medir é descobrir um valor que já estava lá.”</td>
+</tr>
+<tr>
+<td>O que mudou</td>
+<td>“Percebi que eu confundia medir com ler.”</td>
+</tr>
+<tr>
+<td>O que quero testar</td>
+<td>“Ver se a ordem das portas muda o resultado.”</td>
+</tr>
+</tbody>
+</table>
+<p>O diário não é confissão. É registro de pensamento.</p>
+<div class="box-pratica">
+<p><strong>🧪 Prática 3 — Roda de diálogo (15 min, sem
+código).</strong></p>
+<p>Pergunta: <strong>“O que acontece entre duas medições?”</strong></p>
+<p>Dividam-se em facilitador, observador e participantes. O observador
+não participa da fala; anota:</p>
+<ul>
+<li>quantas vezes alguém defendeu uma posição em vez de examinar uma
+suposição;</li>
+<li>quantos silêncios aconteceram;</li>
+<li>que pergunta nova apareceu.</li>
+</ul>
+<p>No fim, o observador lê as notas sem julgar. A turma decide se a
+pergunta mudou.</p>
+<p><strong>Checkpoint:</strong> a pergunta inicial ainda é a mesma? Se
+mudou, o diálogo fez seu trabalho.</p>
+</div>
+<h1 id="cap4">4. A ordem implicada: o todo em cada parte</h1>
+<div class="epigrafe">
+<p>“O explícito é o desdobramento do implícito.” — David Bohm
+(paráfrase)</p>
+</div>
+<p>Bohm propôs uma distinção filosófica entre duas ordens:</p>
+<ul>
+<li><strong>ordem explícita</strong> (<em>explicate order</em>): o mundo
+das coisas separadas, visíveis, localizadas, que podemos apontar;</li>
+<li><strong>ordem implícita</strong> (<em>implicate order</em>): um
+fundo de relações e informações que se “desdobra” no mundo
+explícito.</li>
+</ul>
+<p>A imagem que ele usou é a do <strong>holograma</strong>: cada parte
+de um holograma contém informação sobre o todo. Se você corta um
+holograma em pedaços, cada pedaço ainda reconstrói uma versão borrada da
+imagem inteira — não porque cada pedaço seja mágico, mas porque a
+informação está distribuída de forma não local.</p>
+<h2 id="o-holograma-como-analogia-computacional">4.1 O holograma como
+analogia computacional</h2>
+<p>A figura 4 mostra uma versão computacional dessa ideia. A imagem
+original é a letra “B”. O espectro de Fourier contém a informação
+distribuída. Quando mantemos apenas <strong>1,1%</strong> dos
+coeficientes, ainda reconstruímos uma versão borrada do “B”.</p>
+<figure id="fig04">
+<img src="figuras_geradas/fig03_holograma.png"
+alt="Figura 4. Analogia computacional da ordem implicada. A reconstrução usa apenas 1,1% dos coeficientes de Fourier e ainda preserva a forma global. É uma analogia da distribuição não local da informação — não uma holografia física nem uma teoria quântica." />
+<figcaption aria-hidden="true"><strong>Figura 4.</strong> Analogia
+computacional da ordem implicada. A reconstrução usa apenas 1,1% dos
+coeficientes de Fourier e ainda preserva a forma global. É uma analogia
+da distribuição não local da informação — não uma holografia física nem
+uma teoria quântica.</figcaption>
+</figure>
+<p>O ponto pedagógico é: <strong>a informação pode estar no todo, não
+apenas nas partes</strong>. Isso ajuda a imaginar por que o
+emaranhamento não é uma soma de duas histórias independentes. Mas há um
+limite importante.</p>
+<div class="box-limite">
+<p><strong>⚠️ Limite da analogia.</strong> Um holograma é um padrão de
+interferência clássico. A ordem implicada é uma proposta filosófica de
+Bohm, não uma teoria física comprovada. Não diga “o universo é um
+holograma” como se fosse fato. Diga: “essa imagem nos ajuda a pensar
+sobre totalidade; ela não substitui a matemática”.</p>
+</div>
+<h2 id="o-que-a-ordem-implicada-não-é">4.2 O que a ordem implicada não
+é</h2>
+<ul>
+<li><strong>Não é emaranhamento.</strong> Emaranhamento é um fenômeno
+físico com previsões testáveis; ordem implicada é uma interpretação
+filosófica.</li>
+<li><strong>Não é um mecanismo de comunicação.</strong> A distribuição
+da informação não permite enviar sinais mais rápido que a luz.</li>
+<li><strong>Não é uma teoria de tudo.</strong> Bohm não a apresentou
+como uma teoria completa da física; é uma visão de mundo em diálogo com
+a ciência.</li>
+</ul>
+<h2 id="totalidade-na-sala-de-aula">4.3 Totalidade na sala de aula</h2>
+<p>A ideia de totalidade tem uma consequência pedagógica: um conceito
+não é uma ilha. “Medição” envolve aparelho, teoria, probabilidade e
+interpretação. “Qubit” envolve álgebra, física e tecnologia. Ensinar por
+fragmentos pode até funcionar na prova, mas não forma compreensão.</p>
+<div class="box-dialogo">
+<p><strong>🗣️ Pergunta para a roda.</strong> “O que muda no meu jeito de
+estudar se eu acreditar que as partes carregam o todo?” Não há resposta
+certa. O objetivo é observar como a suposição altera a prática.</p>
+</div>
+<div class="box-pratica">
+<p><strong>🧪 Prática 4 — O todo em 1% (10 min, notebook).</strong></p>
+<p>Execute a célula do holograma. Depois:</p>
+<ol type="1">
+<li>reconstrua com 0,5%, 1%, 2% e 5% dos coeficientes;</li>
+<li>compare a nitidez;</li>
+<li>escreva uma frase sobre o que se ganha e o que se perde.</li>
+</ol>
+<p><strong>Checkpoint:</strong> você consegue explicar por que a imagem
+borrada ainda é reconhecível? Se sim, entendeu a ideia de informação
+distribuída.</p>
+</div>
+<h1 id="cap5">5. Emaranhamento e não separabilidade</h1>
+<div class="epigrafe">
+<p>“Duas partes, um estado. Correlação não é mensagem.”</p>
+</div>
+<p>O emaranhamento é o fenômeno que mais desafia a imagem de um mundo
+feito de partes independentes. Dois qubits podem ser descritos por um
+único estado:</p>
+<div class="math-display">
+<img src="figuras_geradas/math/362af188342abc6b.svg" alt="|\Phi^+\rangle = \frac{|00\rangle+|11\rangle}{\sqrt{2}}.">
+</div>
+<p>Se Alice mede o primeiro qubit e obtém 0, o segundo qubit de Bob está
+em 0. Se ela obtém 1, o de Bob está em 1. A correlação é perfeita — mas
+cada resultado isolado é 50%/50%.</p>
+<figure id="fig05">
+<img src="figuras_geradas/fig11_emaranhamento.png"
+alt="Figura 5. Correlações do estado de Bell medidas com Qiskit (4000 amostras). Apenas |00⟩ e |11⟩ aparecem; |01⟩ e |10⟩ têm probabilidade zero. A correlação é perfeita, mas não permite enviar mensagem mais rápido que a luz." />
+<figcaption aria-hidden="true"><strong>Figura 5.</strong> Correlações do
+estado de Bell medidas com Qiskit (4000 amostras). Apenas |00⟩ e |11⟩
+aparecem; |01⟩ e |10⟩ têm probabilidade zero. A correlação é perfeita,
+mas não permite enviar mensagem mais rápido que a luz.</figcaption>
+</figure>
+<h2 id="não-separabilidade">5.1 Não separabilidade</h2>
+<p>Na leitura padrão, o estado de Bell é <strong>não separável</strong>:
+não podemos escrevê-lo como “estado de Alice × estado de Bob”. Não é que
+não saibamos os estados individuais; é que o todo não se decompõe em
+partes independentes.</p>
+<p>Na leitura de Bohm, o guia (a função de onda) vive em um espaço de
+configuração de dimensão maior. A velocidade de uma partícula depende da
+posição da outra. A não separabilidade é explícita: o todo guia as
+partes.</p>
+<h2 id="o-teorema-de-bell">5.2 O teorema de Bell</h2>
+<p>Bell mostrou que nenhuma teoria de <strong>variáveis ocultas
+locais</strong> consegue reproduzir todas as correlações quânticas. Isso
+não refuta Bohm, porque a teoria de Bohm é <strong>não local</strong>. O
+preço da imagem clara é a não localidade.</p>
+<table>
+<thead>
+<tr>
+<th>Modelo</th>
+<th>Variáveis ocultas?</th>
+<th>Local?</th>
+<th>Reproduz Bell?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Quântica padrão</td>
+<td>não (ou contextual)</td>
+<td>não</td>
+<td>sim</td>
+</tr>
+<tr>
+<td>Bohm</td>
+<td>sim (posições)</td>
+<td>não</td>
+<td>sim</td>
+</tr>
+<tr>
+<td>Variáveis ocultas locais</td>
+<td>sim</td>
+<td>sim</td>
+<td><strong>não</strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="por-que-não-há-mensagem-mais-rápida-que-a-luz">5.3 Por que não
+há mensagem mais rápida que a luz</h2>
+<p>Alice não escolhe o resultado que vai obter. Bob, sozinho, vê 50/50.
+A correlação só aparece quando eles comparam os registros — e a
+comparação exige um canal clássico, que respeita o limite da velocidade
+da luz.</p>
+<p>Na teoria de Bohm, a influência não local existe, mas não é
+controlável. A distribuição de equilíbrio
+<img class="math-inline" src="figuras_geradas/math/89b570a23dabf086.svg" alt="|\psi|^2">
+garante que nenhum sinal possa ser codificado nela. Não localidade não é
+o mesmo que comunicação.</p>
+<div class="box-limite">
+<p><strong>⚠️ Cuidado com a palavra “instantâneo”.</strong> A onda
+piloto descreve uma dependência instantânea no espaço de configuração,
+mas isso não significa que um experimentador possa enviar um bit
+instantaneamente. A teoria é não local; a signaling é proibida.</p>
+</div>
+<div class="box-pratica">
+<p><strong>🧪 Prática 5 — Correlação e anti-correlação (15 min,
+notebook).</strong></p>
+<p>No notebook, execute a prática 3 com Qiskit. Depois, troque o estado
+de Bell
+<img class="math-inline" src="figuras_geradas/math/58e807729bee19cc.svg" alt="(|00\rangle+|11\rangle)/\sqrt{2}">
+por
+<img class="math-inline" src="figuras_geradas/math/6f6139cd1ca0d480.svg" alt="(|01\rangle+|10\rangle)/\sqrt{2}">
+e repita a amostragem.</p>
+<ol type="1">
+<li>O que aparece na matriz de correlação?</li>
+<li>Qual é a diferença entre correlação e anti-correlação?</li>
+<li>A conclusão sobre “não há mensagem” muda?</li>
+</ol>
+<p><strong>Checkpoint:</strong> você consegue explicar a diferença entre
+“resultados iguais” e “resultados opostos” sem dizer que um sinal foi
+enviado? Se sim, avançou.</p>
+</div>
+<h2 id="o-que-bohm-acrescenta-e-o-que-não-acrescenta">5.4 O que Bohm
+acrescenta — e o que não acrescenta</h2>
+<p>Bohm acrescenta uma <strong>imagem</strong>: partículas com
+trajetórias, guiadas por uma onda não local. Isso pode ajudar a pensar
+sobre o que acontece entre medições.</p>
+<p>Bohm <strong>não</strong> acrescenta uma nova previsão experimental
+para os fenômenos desta aula. As probabilidades, as correlações e a
+violação de Bell são as mesmas. A diferença é interpretativa — e
+interpretações não são descartáveis, mas também não são fatos
+experimentais.</p>
+<blockquote>
+<p><strong>Pergunta para levar adiante:</strong> se duas interpretações
+fazem as mesmas previsões, o que mais conta na escolha? Simplicidade?
+Intuição? Ontologia? Ensino? Essa é uma pergunta filosófica legítima — e
+uma ótima roda de diálogo.</p>
+</blockquote>
+<h1 id="cap6">6. Três linguagens, um mesmo estado</h1>
+<div class="epigrafe">
+<p>“O mapa não é o território — mas três mapas bons ajudam a ver o
+território.”</p>
+</div>
+<p>PennyLane, Cirq e Qiskit são bibliotecas de código aberto para
+computação quântica. Elas têm filosofias diferentes, mas descrevem o
+mesmo estado de Bell com as mesmas portas. Comparar as três é uma
+excelente prática meticulosa: você percebe o que é
+<strong>conceito</strong> e o que é <strong>convenção da
+ferramenta</strong>.</p>
+<figure id="fig06">
+<img src="figuras_geradas/fig08_tres_frameworks.png"
+alt="Figura 6. O mesmo circuito de Bell desenhado por PennyLane, Cirq e Qiskit. As três bibliotecas usam H e CNOT; mudam a notação, a ordem dos qubits e o estilo do desenho. O estado final é o mesmo." />
+<figcaption aria-hidden="true"><strong>Figura 6.</strong> O mesmo
+circuito de Bell desenhado por PennyLane, Cirq e Qiskit. As três
+bibliotecas usam H e CNOT; mudam a notação, a ordem dos qubits e o
+estilo do desenho. O estado final é o mesmo.</figcaption>
+</figure>
+<h2 id="o-que-é-igual">6.1 O que é igual</h2>
+<ul>
+<li>O estado final:
+<img class="math-inline" src="figuras_geradas/math/58e807729bee19cc.svg" alt="(|00\rangle+|11\rangle)/\sqrt{2}">.</li>
+<li>As probabilidades: 50% para |00⟩, 50% para |11⟩, 0% para |01⟩ e
+|10⟩.</li>
+<li>A correlação: os resultados de Alice e Bob concordam.</li>
+</ul>
+<h2 id="o-que-muda">6.2 O que muda</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>PennyLane</th>
+<th>Cirq</th>
+<th>Qiskit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unidade</td>
+<td><em>wires</em> (fios)</td>
+<td><code>LineQubit</code></td>
+<td><code>QuantumCircuit</code></td>
+</tr>
+<tr>
+<td>Porta H</td>
+<td><code>qml.Hadamard(0)</code></td>
+<td><code>cirq.H(q0)</code></td>
+<td><code>qc.h(0)</code></td>
+</tr>
+<tr>
+<td>CNOT</td>
+<td><code>qml.CNOT([0,1])</code></td>
+<td><code>cirq.CNOT(q0,q1)</code></td>
+<td><code>qc.cx(0,1)</code></td>
+</tr>
+<tr>
+<td>Medição</td>
+<td><code>qml.probs</code> / <code>qml.sample</code></td>
+<td><code>cirq.measure</code></td>
+<td><code>Statevector</code> / <code>sample_counts</code></td>
+</tr>
+<tr>
+<td>Desenho</td>
+<td><code>qml.draw_mpl</code></td>
+<td>diagrama textual</td>
+<td><code>qc.draw("mpl")</code></td>
+</tr>
+<tr>
+<td>Ordem dos qubits</td>
+<td>declarada nos wires</td>
+<td>linha</td>
+<td>convenção little-endian</td>
+</tr>
+</tbody>
+</table>
+<p>A diferença de ordem é a fonte mais comum de erro. Em Qiskit, o
+bitstring <code>10</code> pode significar “qubit 1 = 1, qubit 0 = 0”; em
+Cirq, a ordem é a dos qubits na linha. <strong>Sempre confira a
+convenção antes de comparar resultados.</strong></p>
+<h2 id="as-probabilidades-coincidem">6.3 As probabilidades
+coincidem</h2>
+<p>A figura 7 mostra as probabilidades calculadas por PennyLane (exatas)
+e as frequências observadas em Cirq e Qiskit (2000 tiros cada). As
+barras de |00⟩ e |11⟩ ficam em torno de 50%; |01⟩ e |10⟩ ficam em
+zero.</p>
+<figure id="fig07">
+<img src="figuras_geradas/fig09_probabilidades.png"
+alt="Figura 7. Mesmo estado, três motores. PennyLane calcula probabilidades exatas; Cirq e Qiskit amostram 2000 tiros. As pequenas diferenças são flutuação estatística, não erro conceitual." />
+<figcaption aria-hidden="true"><strong>Figura 7.</strong> Mesmo estado,
+três motores. PennyLane calcula probabilidades exatas; Cirq e Qiskit
+amostram 2000 tiros. As pequenas diferenças são flutuação estatística,
+não erro conceitual.</figcaption>
+</figure>
+<div class="box-pratica">
+<p><strong>🧪 Prática 6 — Três linguagens, uma tabela (20
+min).</strong></p>
+<p>No notebook, execute as três práticas (PennyLane, Cirq e Qiskit).
+Preencha:</p>
+<table>
+<thead>
+<tr>
+<th>Grandeza</th>
+<th>PennyLane</th>
+<th>Cirq</th>
+<th>Qiskit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P(00)</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>P(11)</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>P(01)</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>P(10)</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Depois, responda: as diferenças são conceituais ou estatísticas? Como
+você pode distinguir?</p>
+<p><strong>Checkpoint:</strong> você consegue explicar por que as três
+bibliotecas concordam?</p>
+</div>
+<h1 id="cap7">7. Prática 1 — PennyLane</h1>
+<div class="epigrafe">
+<p>“Um circuito é uma função; a medição é o retorno.”</p>
+</div>
+<p>PennyLane foi desenhada para <strong>diferenciação
+automática</strong> de circuitos quânticos. Para esta aula, usaremos
+apenas o básico: um dispositivo <code>default.qubit</code>, um QNode e
+medições de probabilidade.</p>
+<h2 id="código-mínimo">7.1 Código mínimo</h2>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pennylane <span class="im">as</span> qml</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>dev <span class="op">=</span> qml.device(<span class="st">&quot;default.qubit&quot;</span>, wires<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">@qml.qnode</span>(dev)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> bell():</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    qml.Hadamard(wires<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    qml.CNOT(wires<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>])</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> qml.probs(wires<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>])</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(bell())          <span class="co"># [0.5 0.  0.  0.5]</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>qml.draw_mpl(bell)()   <span class="co"># desenha o circuito</span></span></code></pre></div>
+<figure id="fig08">
+<img src="figuras_geradas/fig05_pennylane.svg"
+alt="Figura 8. Circuito de Bell desenhado por PennyLane com qml.draw_mpl. O estado final é ; as probabilidades são 50% para 00 e 50% para 11." />
+<figcaption aria-hidden="true"><strong>Figura 8.</strong> Circuito de
+Bell desenhado por PennyLane com <code>qml.draw_mpl</code>. O estado
+final é
+<img class="math-inline" src="figuras_geradas/math/58e807729bee19cc.svg" alt="(|00\rangle+|11\rangle)/\sqrt{2}">;
+as probabilidades são 50% para 00 e 50% para 11.</figcaption>
+</figure>
+<h2 id="o-que-observar">7.2 O que observar</h2>
+<ul>
+<li><code>qml.Hadamard(0)</code> cria
+<img class="math-inline" src="figuras_geradas/math/5f36adec5cc0024d.svg" alt="(|0\rangle+|1\rangle)/\sqrt{2}">
+no fio 0.</li>
+<li><code>qml.CNOT([0,1])</code> inverte o fio 1 quando o fio 0 é
+1.</li>
+<li><code>qml.probs(wires=[0,1])</code> devolve um vetor de quatro
+posições.</li>
+<li>A ordem do vetor é
+<img class="math-inline" src="figuras_geradas/math/e827b9182fe5d7e1.svg" alt="|00\rangle, |01\rangle, |10\rangle, |11\rangle">
+para os wires declarados.</li>
+</ul>
+<h2 id="prática-guiada">7.3 Prática guiada</h2>
+<ol type="1">
+<li>Rode o código e confira <code>[0.5, 0, 0, 0.5]</code>.</li>
+<li>Troque <code>qml.CNOT</code> por <code>qml.Z(1)</code> e observe o
+que muda.</li>
+<li>Troque <code>qml.Hadamard(0)</code> por <code>qml.Hadamard(1)</code>
+e compare.</li>
+<li>Use <code>qml.draw_mpl(bell)</code> para ver o desenho.</li>
+</ol>
+<div class="box-limite">
+<p><strong>⚠️ Limite.</strong> PennyLane calcula probabilidades
+<strong>exatas</strong> no simulador. Isso não é o mesmo que medir 2000
+vezes. Para comparar com Cirq/Qiskit, use <code>qml.sample</code> ou
+amostre a distribuição.</p>
+</div>
+<div class="box-pratica">
+<p><strong>🧪 Checkpoint da prática 1.</strong></p>
+<ul class="task-list">
+<li><label><input type="checkbox" />O vetor tem quatro
+posições.</label></li>
+<li><label><input type="checkbox" />As posições 00 e 11 valem
+0,5.</label></li>
+<li><label><input type="checkbox" />Você sabe explicar o que o CNOT
+faz.</label></li>
+<li><label><input type="checkbox" />Você desenhou o
+circuito.</label></li>
+</ul>
+<p>Se faltou algum, releia a seção 6.1 e refaça.</p>
+</div>
+<h1 id="cap8">8. Prática 2 — Cirq</h1>
+<div class="epigrafe">
+<p>“A linha é o palco; as portas são os gestos.”</p>
+</div>
+<p>Cirq organiza o circuito em <strong>linhas de qubits</strong>. É uma
+biblioteca muito usada em pesquisa com hardware supercondutor. Para nós,
+o valor está no diagrama textual e na simulação de medições.</p>
+<h2 id="código-mínimo-1">8.1 Código mínimo</h2>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cirq</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>q0, q1 <span class="op">=</span> cirq.LineQubit.<span class="bu">range</span>(<span class="dv">2</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>circuito <span class="op">=</span> cirq.Circuit(</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    cirq.H(q0),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    cirq.CNOT(q0, q1),</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    cirq.measure(q0, q1, key<span class="op">=</span><span class="st">&quot;m&quot;</span>),</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(circuito)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> cirq.Simulator().run(circuito, repetitions<span class="op">=</span><span class="dv">2000</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(resultado.measurements[<span class="st">&quot;m&quot;</span>][:<span class="dv">10</span>])</span></code></pre></div>
+<figure id="fig09">
+<img src="figuras_geradas/fig06_cirq.svg"
+alt="Figura 9. Circuito de Bell em Cirq. O diagrama textual mostra H, CNOT e a medição dos dois qubits. A simulação de 2000 tiros produz apenas 00 e 11." />
+<figcaption aria-hidden="true"><strong>Figura 9.</strong> Circuito de
+Bell em Cirq. O diagrama textual mostra H, CNOT e a medição dos dois
+qubits. A simulação de 2000 tiros produz apenas 00 e 11.</figcaption>
+</figure>
+<h2 id="o-que-observar-1">8.2 O que observar</h2>
+<ul>
+<li><code>cirq.H(q0)</code> cria a superposição.</li>
+<li><code>cirq.CNOT(q0, q1)</code> emaranha.</li>
+<li><code>cirq.measure(..., key="m")</code> registra os resultados.</li>
+<li><code>Simulator().run(...)</code> devolve um dicionário de
+medições.</li>
+</ul>
+<h2 id="prática-guiada-1">8.3 Prática guiada</h2>
+<ol type="1">
+<li>Rode 2000 tiros e conte quantos 00 e 11 aparecem.</li>
+<li>Adicione <code>cirq.H(q0)</code> <strong>antes</strong> da medição e
+meça de novo. O que muda?</li>
+<li>Meça apenas <code>q0</code> e depois apenas <code>q1</code>. As
+marginais são 50/50?</li>
+<li>Desenhe o circuito com <code>print(circuito)</code> e compare com a
+figura 9.</li>
+</ol>
+<div class="box-limite">
+<p><strong>⚠️ Limite.</strong> O diagrama textual é ótimo para o
+terminal, mas não é uma figura pronta para o livro. Para a versão
+visual, usamos um renderizador que transforma o texto em imagem — o
+conteúdo é o mesmo.</p>
+</div>
+<div class="box-pratica">
+<p><strong>🧪 Checkpoint da prática 2.</strong></p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Você obteve 00 e 11, sem
+01/10.</label></li>
+<li><label><input type="checkbox" />Você explicou o efeito de um H extra
+antes da medição.</label></li>
+<li><label><input type="checkbox" />Você comparou as
+marginais.</label></li>
+<li><label><input type="checkbox" />Você identificou a ordem dos qubits
+no diagrama.</label></li>
+</ul>
+</div>
+<h1 id="cap9">9. Prática 3 — Qiskit</h1>
+<div class="epigrafe">
+<p>“O estado é um vetor; a esfera é uma janela.”</p>
+</div>
+<p>Qiskit é a biblioteca da IBM. Ela oferece
+<code>QuantumCircuit</code>, <code>Statevector</code>, desenho de
+circuito e ferramentas de visualização. Usaremos três recursos:
+circuito, esfera de Bloch e amostragem.</p>
+<h2 id="código-mínimo-2">9.1 Código mínimo</h2>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit <span class="im">import</span> QuantumCircuit</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.quantum_info <span class="im">import</span> Statevector</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>qc <span class="op">=</span> QuantumCircuit(<span class="dv">2</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>qc.h(<span class="dv">0</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>qc.cx(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>estado <span class="op">=</span> Statevector(qc)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(estado)                 <span class="co"># amplitudes</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(estado.probabilities()) <span class="co"># [0.5 0. 0. 0.5]</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(estado.sample_counts(<span class="dv">2000</span>, qargs<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>]))</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>qc.draw(<span class="st">&quot;mpl&quot;</span>)</span></code></pre></div>
+<figure id="fig10">
+<img src="figuras_geradas/fig07_qiskit.svg"
+alt="Figura 10. Circuito de Bell em Qiskit. O desenho mostra q0, q1, H e CNOT. A ordem dos qubits e a convenção de bitstring devem ser conferidas antes de comparar com Cirq." />
+<figcaption aria-hidden="true"><strong>Figura 10.</strong> Circuito de
+Bell em Qiskit. O desenho mostra <code>q0</code>, <code>q1</code>, H e
+CNOT. A ordem dos qubits e a convenção de bitstring devem ser conferidas
+antes de comparar com Cirq.</figcaption>
+</figure>
+<h2 id="a-esfera-de-bloch">9.2 A esfera de Bloch</h2>
+<p>Para um único qubit, a esfera de Bloch é uma representação visual do
+estado. A figura 11 mostra
+<img class="math-inline" src="figuras_geradas/math/28e10723e3123de0.svg" alt="H|0\rangle">,
+que aponta para o equador (superposição equilibrada).</p>
+<figure id="fig11">
+<img src="figuras_geradas/fig10_bloch.png"
+alt="Figura 11. Esfera de Bloch de , gerada com Qiskit. O vetor aponta para o equador: probabilidades iguais de 0 e 1. Para o estado de Bell, a esfera de cada qubit isolado não mostra a correlação; é preciso olhar o estado conjunto." />
+<figcaption aria-hidden="true"><strong>Figura 11.</strong> Esfera de
+Bloch de
+<img class="math-inline" src="figuras_geradas/math/28e10723e3123de0.svg" alt="H|0\rangle">,
+gerada com Qiskit. O vetor aponta para o equador: probabilidades iguais
+de 0 e 1. Para o estado de Bell, a esfera de cada qubit isolado não
+mostra a correlação; é preciso olhar o estado conjunto.</figcaption>
+</figure>
+<h2 id="prática-guiada-2">9.3 Prática guiada</h2>
+<ol type="1">
+<li>Rode o código e confira as probabilidades.</li>
+<li>Troque <code>qc.cx(0,1)</code> por <code>qc.x(1)</code> e observe o
+estado.</li>
+<li>Troque o estado de Bell por
+<img class="math-inline" src="figuras_geradas/math/6f6139cd1ca0d480.svg" alt="(|01\rangle+|10\rangle)/\sqrt{2}">
+e repita a amostragem. O que aparece na matriz de correlação?</li>
+<li>Compare a saída de Qiskit com a de Cirq. As probabilidades
+coincidem?</li>
+</ol>
+<div class="box-limite">
+<p><strong>⚠️ Limite.</strong> A esfera de Bloch de um qubit isolado
+<strong>não</strong> mostra emaranhamento. Para ver a correlação, é
+preciso olhar o estado de dois qubits ou a matriz de probabilidades
+conjuntas. Não confunda “estado de um qubit” com “estado do par”.</p>
+</div>
+<div class="box-pratica">
+<p><strong>🧪 Checkpoint da prática 3.</strong></p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Você obteve
+<code>[0.5, 0, 0, 0.5]</code>.</label></li>
+<li><label><input type="checkbox" />Você viu a esfera de Bloch de
+H|0⟩.</label></li>
+<li><label><input type="checkbox" />Você gerou a matriz de
+correlação.</label></li>
+<li><label><input type="checkbox" />Você explicou por que a esfera
+isolada não mostra a correlação.</label></li>
+</ul>
+</div>
+<h1 id="cap10">10. Prática 4 — Onda piloto e interferência</h1>
+<div class="epigrafe">
+<p>“Ver a trajetória é fácil; ver o que a trajetória significa é o
+trabalho.”</p>
+</div>
+<p>Esta prática usa NumPy e Matplotlib para construir um <strong>modelo
+didático</strong> de trajetórias guiadas por um campo de fase. O
+objetivo não é resolver a equação de Bohm, mas tornar visível a ideia:
+<strong>a partícula segue uma trajetória; a onda guia essa
+trajetória</strong>.</p>
+<h2 id="o-campo-de-velocidade">10.1 O campo de velocidade</h2>
+<p>No modelo, a velocidade vertical é</p>
+<div class="math-display">
+<img src="figuras_geradas/math/2d30534447cc216e.svg" alt="v_y(y,x) = -A\sin\!\left(\frac{2\pi y}{\lambda}\right) \exp\!\left[-\left(\frac{x-x_0}{L}\right)^2\right].">
+</div>
+<p>Isso cria “poços” de velocidade em
+<img class="math-inline" src="figuras_geradas/math/74e5c048c4efb205.svg" alt="y=0,\pm\lambda,\pm2\lambda">.
+As trajetórias são integradas passo a passo:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> np.linspace(<span class="fl">0.20</span>, <span class="fl">0.98</span>, <span class="dv">650</span>)[<span class="dv">1</span>:]:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> y <span class="op">+</span> dx <span class="op">*</span> vy(y, x)</span></code></pre></div>
+<p>O resultado são trajetórias que se agrupam nas franjas claras. A
+figura 1 do capítulo 2 mostra o resultado.</p>
+<h2 id="a-intensidade">10.2 A intensidade</h2>
+<p>A intensidade no anteparo é calculada pela fórmula de duas
+fendas:</p>
+<div class="math-display">
+<img src="figuras_geradas/math/b58eec4d76f3dfc3.svg" alt="I(\theta) \propto \cos^2\!\left(\frac{\pi d\,\operatorname{sen}\theta}{\lambda}\right) \operatorname{sinc}^2\!\left(\frac{\pi a\,\operatorname{sen}\theta}{\lambda}\right).">
+</div>
+<p>A figura 2 mostra a curva. Repare: a <strong>curva</strong> é uma
+previsão quantitativa; as <strong>trajetórias</strong> são uma imagem
+qualitativa.</p>
+<h2 id="prática-guiada-3">10.3 Prática guiada</h2>
+<ol type="1">
+<li>Rode a célula da prática 4 no notebook.</li>
+<li>Mude a distância entre as fendas
+<img class="math-inline" src="figuras_geradas/math/12156e921bdb6085.svg" alt="d">.
+O espaçamento das franjas aumenta ou diminui?</li>
+<li>Mude o número de trajetórias. O padrão muda?</li>
+<li>Mude a fase relativa entre as duas fendas. As trajetórias se
+deslocam?</li>
+<li>Escreva uma frase: “o que este modelo mostra e o que ele não
+mostra?”.</li>
+</ol>
+<div class="box-limite">
+<p><strong>⚠️ Limite.</strong> O modelo não inclui a equação de
+Schrödinger, potenciais, spin ou interação com o aparelho. Ele mostra
+<strong>uma ideia</strong> (guia + trajetória), não uma solução. Se você
+apresentar a figura como “prova” da teoria de Bohm, estará confundindo
+pedagogia com evidência.</p>
+</div>
+<div class="box-pratica">
+<p><strong>🧪 Checkpoint da prática 4.</strong></p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Você rodou o modelo.</label></li>
+<li><label><input type="checkbox" />Você variou
+<img class="math-inline" src="figuras_geradas/math/12156e921bdb6085.svg" alt="d">
+e observou o espaçamento.</label></li>
+<li><label><input type="checkbox" />Você distinguiu a curva de
+intensidade das trajetórias.</label></li>
+<li><label><input type="checkbox" />Você escreveu uma frase sobre o
+limite.</label></li>
+</ul>
+</div>
+<h1 id="cap11">11. Prática 5 — Holograma e ordem implicada</h1>
+<div class="epigrafe">
+<p>“Cada parte do holograma conta uma versão borrada do todo.”</p>
+</div>
+<p>Esta prática usa a transformada de Fourier para construir uma
+<strong>analogia computacional</strong> da ordem implicada. Não é
+holografia física; é uma forma de ver como a informação pode estar
+distribuída.</p>
+<h2 id="o-código">11.1 O código</h2>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>letra <span class="op">=</span> _letra_b(<span class="dv">256</span>)                     <span class="co"># imagem 256x256</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>F <span class="op">=</span> np.fft.fftshift(np.fft.fft2(letra))   <span class="co"># espectro</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>yy, xx <span class="op">=</span> np.mgrid[<span class="dv">0</span>:<span class="dv">256</span>, <span class="dv">0</span>:<span class="dv">256</span>]</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> ((xx<span class="op">-</span><span class="dv">128</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> (yy<span class="op">-</span><span class="dv">128</span>)<span class="op">**</span><span class="dv">2</span>) <span class="op">&lt;</span> (<span class="fl">0.06</span><span class="op">*</span><span class="dv">256</span>)<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>rec <span class="op">=</span> np.<span class="bu">abs</span>(np.fft.ifft2(np.fft.ifftshift(F <span class="op">*</span> mask)))</span></code></pre></div>
+<p>A máscara mantém apenas <strong>1,1%</strong> dos coeficientes. Mesmo
+assim, a reconstrução mostra a letra “B” borrada.</p>
+<h2 id="prática-guiada-4">11.2 Prática guiada</h2>
+<ol type="1">
+<li>Rode a célula e compare original, espectro e reconstrução.</li>
+<li>Diminua a máscara para 0,5%. O que acontece?</li>
+<li>Aumente para 5%. O que melhora?</li>
+<li>Retire o centro do espectro (frequências baixas). O que
+desaparece?</li>
+<li>Escreva uma frase sobre a diferença entre “informação distribuída” e
+“holografia”.</li>
+</ol>
+<div class="box-limite">
+<p><strong>⚠️ Limite.</strong> A analogia da ordem implicada é
+filosófica. Ela não explica o emaranhamento, não prevê resultados e não
+substitui a teoria quântica. Use-a para <strong>pensar</strong>, não
+para <strong>provar</strong>.</p>
+</div>
+<div class="box-pratica">
+<p><strong>🧪 Checkpoint da prática 5.</strong></p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Você viu a reconstrução com
+1,1%.</label></li>
+<li><label><input type="checkbox" />Você comparou 0,5% e
+5%.</label></li>
+<li><label><input type="checkbox" />Você entendeu que a informação está
+distribuída.</label></li>
+<li><label><input type="checkbox" />Você escreveu o limite da
+analogia.</label></li>
+</ul>
+</div>
+<h1 id="cap12">12. Prática 6 — Diálogo como experimento</h1>
+<div class="epigrafe">
+<p>“O diálogo é um experimento com o próprio pensamento.”</p>
+</div>
+<p>As práticas anteriores usaram código. Esta usa
+<strong>presença</strong>. O “dado” é qualitativo: o que muda na
+pergunta, nas suposições e na escuta.</p>
+<h2 id="desenho-do-experimento">12.1 Desenho do experimento</h2>
+<table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pergunta</td>
+<td>“O que acontece entre duas medições?”</td>
+</tr>
+<tr>
+<td>Participantes</td>
+<td>6 a 10 estudantes</td>
+</tr>
+<tr>
+<td>Facilitador</td>
+<td>lê a pergunta, guarda o tempo, não opina</td>
+</tr>
+<tr>
+<td>Observador</td>
+<td>não fala; registra gestos, silêncios e suposições</td>
+</tr>
+<tr>
+<td>Duração</td>
+<td>15 min</td>
+</tr>
+<tr>
+<td>Registro</td>
+<td>diário de suposições + notas do observador</td>
+</tr>
+</tbody>
+</table>
+<h2 id="roteiro">12.2 Roteiro</h2>
+<ol type="1">
+<li><strong>Roda inicial (2 min).</strong> Uma palavra por pessoa.</li>
+<li><strong>Pergunta (1 min).</strong> O facilitador lê e não
+explica.</li>
+<li><strong>Rodada 1 (4 min).</strong> Uma fala por pessoa, sem
+interrupção.</li>
+<li><strong>Silêncio (1 min).</strong> Todos escrevem uma
+suposição.</li>
+<li><strong>Rodada 2 (5 min).</strong> Respostas ao que foi ouvido, não
+à pessoa.</li>
+<li><strong>Fechamento (2 min).</strong> “O que eu levo?”.</li>
+</ol>
+<h2 id="o-que-observar-2">12.3 O que observar</h2>
+<p>O observador registra:</p>
+<ul>
+<li>quantas vezes alguém defendeu uma posição;</li>
+<li>quantas vezes alguém reformulou a própria fala;</li>
+<li>quantos silêncios de mais de 3 segundos;</li>
+<li>que pergunta nova apareceu;</li>
+<li>se a pergunta inicial mudou.</li>
+</ul>
+<p>Não há “certo” ou “errado”. Há evidência de qualidade do diálogo.</p>
+<div class="box-dialogo">
+<p><strong>🗣️ Regra de ouro.</strong> Não corrija a fala do outro.
+Pergunte: “o que te levou a dizer isso?”. A correção vem depois, se
+vier. O objetivo é ver o pensamento funcionando, não vencer a
+conversa.</p>
+</div>
+<div class="box-pratica">
+<p><strong>🧪 Checkpoint da prática 6.</strong></p>
+<ul class="task-list">
+<li><label><input type="checkbox" />A roda aconteceu com tempo
+protegido.</label></li>
+<li><label><input type="checkbox" />O observador registrou sem
+julgar.</label></li>
+<li><label><input type="checkbox" />Cada participante escreveu uma
+suposição.</label></li>
+<li><label><input type="checkbox" />A turma identificou uma pergunta
+nova.</label></li>
+<li><label><input type="checkbox" />O diário foi
+preenchido.</label></li>
+</ul>
+<p>Se algum item faltou, a prática não foi concluída — e tudo bem:
+dialogue é prática, não performance.</p>
+</div>
+<h1 id="cap13">13. Limites, ética e o que Bohm não resolve</h1>
+<div class="epigrafe">
+<p>“Uma interpretação que não declara seu preço não é uma boa
+interpretação.”</p>
+</div>
+<p>Bohm é uma lente poderosa, mas não é uma varinha mágica. Este
+capítulo separa o que a teoria faz, o que ela não faz e o que a
+tecnologia quântica pode ou não fazer. A disciplina de distinguir é
+parte da educação científica.</p>
+<h2 id="limites-da-teoria-de-bohm">13.1 Limites da teoria de Bohm</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Questão</th>
+<th>O que a teoria diz</th>
+<th>O que ainda é difícil</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Relatividade</td>
+<td>extensões existem</td>
+<td>não há consenso; a forma padrão é não relativística</td>
+</tr>
+<tr>
+<td>Várias partículas</td>
+<td>guia vive em
+<img class="math-inline" src="figuras_geradas/math/45786a150b58c210.svg" alt="3N">
+dimensões</td>
+<td>a não localidade é explícita</td>
+</tr>
+<tr>
+<td>Regra de Born</td>
+<td>distribuição de equilíbrio</td>
+<td>por que o universo começou em equilíbrio?</td>
+</tr>
+<tr>
+<td>Medição</td>
+<td>colapso efetivo</td>
+<td>a análise completa do aparelho é complexa</td>
+</tr>
+<tr>
+<td>Spin</td>
+<td>extensão com feixe de campos</td>
+<td>detalhes técnicos para especialistas</td>
+</tr>
+</tbody>
+</table>
+<p>Nada disso torna a teoria “falsa”. Torna-a <strong>uma interpretação
+com custos</strong>. A mecânica quântica padrão também tem custos: o
+problema da medição, a ausência de uma ontologia consensual, a
+dificuldade de conciliar gravidade e quântica.</p>
+<h2 id="limites-da-ordem-implicada">13.2 Limites da ordem implicada</h2>
+<p>A ordem implicada é uma <strong>visão filosófica</strong>. Ela sugere
+uma totalidade indivisível, mas não fornece um modelo calculável que
+substitua a função de onda. Não diga:</p>
+<ul>
+<li>“o universo é um holograma” (como fato);</li>
+<li>“a ordem implicada explica o emaranhamento” (ela inspira, não
+explica);</li>
+<li>“Bohm provou que a consciência cria a realidade” (não é isso que a
+teoria diz).</li>
+</ul>
+<p>Diga:</p>
+<ul>
+<li>“Bohm propôs uma imagem de totalidade”;</li>
+<li>“a analogia do holograma ajuda a pensar”;</li>
+<li>“a física testável é outra coisa”.</li>
+</ul>
+<h2 id="limites-da-tecnologia-quântica">13.3 Limites da tecnologia
+quântica</h2>
+<ul>
+<li><strong>Não é mais rápida em tudo.</strong> Só há vantagem quando
+existe algoritmo adequado.</li>
+<li><strong>Não é barata.</strong> Refrigeração, controle e correção de
+erros são caros.</li>
+<li><strong>Não é imune a erros.</strong> Decoerência e ruído são
+obstáculos centrais.</li>
+<li><strong>Não é mágica.</strong> Sem um problema bem formulado, não há
+ganho.</li>
+</ul>
+<h2 id="ética">13.4 Ética</h2>
+<p>Toda tecnologia poderosa levanta perguntas:</p>
+<ul>
+<li><strong>Acesso:</strong> quem terá computadores quânticos? Quem
+ficará de fora?</li>
+<li><strong>Dupla finalidade:</strong> a mesma capacidade que simula
+remédios pode apoiar vigilância ou quebra de sigilo.</li>
+<li><strong>Ambiente:</strong> refrigeração e energia têm custo
+ecológico.</li>
+<li><strong>Trabalho:</strong> novas profissões exigem formação; quem
+será incluído?</li>
+<li><strong>Educação:</strong> ensinar o quê, para quem e com que
+propósito?</li>
+</ul>
+<p>A escola não precisa resolver tudo. Precisa <strong>formular
+bem</strong>.</p>
+<div class="box-pratica">
+<p><strong>🧪 Prática 7 — Teste dos quatro filtros (15 min, sem
+código).</strong></p>
+<p>Aplique os filtros a três afirmações:</p>
+<ol type="1">
+<li>“O computador quântico do Nordeste vai resolver problemas da
+escola.”</li>
+<li>“Bohm provou que a consciência cria a realidade.”</li>
+<li>“A criptografia quântica é invulnerável.”</li>
+</ol>
+<p>Para cada uma, responda:</p>
+<ul>
+<li><strong>Problema:</strong> que problema exato?</li>
+<li><strong>Algoritmo/teoria:</strong> qual mecanismo?</li>
+<li><strong>Hardware/evidência:</strong> qual evidência?</li>
+<li><strong>Limite:</strong> o que falta?</li>
+</ul>
+<p><strong>Checkpoint:</strong> você consegue classificar cada afirmação
+como fato, promessa ou exagero? Se sim, a prática funcionou.</p>
+</div>
+<h1 id="cap14">14. Projeto final: Diálogo quântico</h1>
+<div class="epigrafe">
+<p>“O projeto é uma pergunta que vira prática e uma prática que vira
+pergunta.”</p>
+</div>
+<p>O projeto final combina as duas metades da edição:
+<strong>laboratório</strong> e <strong>diálogo</strong>. Cada grupo
+produz uma investigação pequena, mas completa.</p>
+<h2 id="o-que-entregar">14.1 O que entregar</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Componente</th>
+<th>O que é</th>
+<th>Evidência</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Pergunta</strong></td>
+<td>uma pergunta que não tem resposta pronta</td>
+<td>frase + justificativa</td>
+</tr>
+<tr>
+<td><strong>Suposições</strong></td>
+<td>três suposições do grupo</td>
+<td>diário de suposições</td>
+</tr>
+<tr>
+<td><strong>Experimento</strong></td>
+<td>um circuito em PennyLane, Cirq ou Qiskit</td>
+<td>código + figura</td>
+</tr>
+<tr>
+<td><strong>Evidência</strong></td>
+<td>dados ou resultados</td>
+<td>tabela/gráfico</td>
+</tr>
+<tr>
+<td><strong>Limite</strong></td>
+<td>o que o experimento não mostra</td>
+<td>parágrafo específico</td>
+</tr>
+<tr>
+<td><strong>Diálogo</strong></td>
+<td>registro de uma roda de 15 min</td>
+<td>notas do observador</td>
+</tr>
+</tbody>
+</table>
+<h2 id="roteiro-1">14.2 Roteiro</h2>
+<table>
+<thead>
+<tr>
+<th>Etapa</th>
+<th>Tempo</th>
+<th>Entrega</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Escolha da pergunta</td>
+<td>10 min</td>
+<td>pergunta + suposições</td>
+</tr>
+<tr>
+<td>Desenho do experimento</td>
+<td>20 min</td>
+<td>circuito no papel</td>
+</tr>
+<tr>
+<td>Implementação</td>
+<td>40 min</td>
+<td>código rodando</td>
+</tr>
+<tr>
+<td>Roda de diálogo</td>
+<td>15 min</td>
+<td>notas do observador</td>
+</tr>
+<tr>
+<td>Revisão</td>
+<td>20 min</td>
+<td>versão 2</td>
+</tr>
+<tr>
+<td>Apresentação</td>
+<td>3 min/grupo</td>
+<td>pitch + figura</td>
+</tr>
+</tbody>
+</table>
+<h2 id="exemplos-de-perguntas">14.3 Exemplos de perguntas</h2>
+<ul>
+<li>“O que muda se eu medir na base X em vez da base Z?”</li>
+<li>“Por que a esfera de Bloch não mostra emaranhamento?”</li>
+<li>“A ordem das portas muda o resultado? Sempre?”</li>
+<li>“O que a palavra ‘observar’ esconde?”</li>
+<li>“Quando uma analogia deixa de ajudar?”</li>
+</ul>
+<h2 id="rubrica">14.4 Rubrica</h2>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th>Critério</th>
+<th>4 — Excelente</th>
+<th>3 — Bom</th>
+<th>2 — Em desenvolvimento</th>
+<th>1 — Insuficiente</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pergunta</td>
+<td>aberta, delimitada, investigável</td>
+<td>clara, pouco delimitada</td>
+<td>vaga</td>
+<td>não há pergunta</td>
+</tr>
+<tr>
+<td>Suposições</td>
+<td>explícitas e examinadas</td>
+<td>listadas</td>
+<td>mencionadas</td>
+<td>ausentes</td>
+</tr>
+<tr>
+<td>Experimento</td>
+<td>circuito correto e reproduzível</td>
+<td>correto com apoio</td>
+<td>parcial</td>
+<td>não funciona</td>
+</tr>
+<tr>
+<td>Evidência</td>
+<td>dados + interpretação</td>
+<td>dados parciais</td>
+<td>opinião</td>
+<td>nenhuma</td>
+</tr>
+<tr>
+<td>Limite</td>
+<td>específico e justificado</td>
+<td>genérico</td>
+<td>reconhece sem detalhar</td>
+<td>ausente</td>
+</tr>
+<tr>
+<td>Diálogo</td>
+<td>escuta e reformulação visíveis</td>
+<td>participação</td>
+<td>registro mínimo</td>
+<td>não houve</td>
+</tr>
+</tbody>
+</table>
+<h2 id="exemplo-forte-e-exemplo-fraco">14.5 Exemplo forte e exemplo
+fraco</h2>
+<p><strong>Forte:</strong> “Medir na base X muda a correlação do estado
+de Bell?” O grupo mostra o circuito em Qiskit, mede em Z e em X, compara
+as matrizes, explica por que a correlação desaparece na base errada e
+declara que o experimento não testa a interpretação de Bohm.</p>
+<p><strong>Fraco:</strong> “Bohm é a verdadeira física quântica.” Não há
+pergunta investigável, não há experimento, não há limite. É opinião, não
+projeto.</p>
+<div class="box-checkpoint">
+<p><strong>🎯 Checkpoint do projeto.</strong> Sua pergunta pode ser
+respondida com um experimento de 40 minutos? Suas suposições estão
+escritas? Seu limite é específico? Se alguma resposta for “não”, revise
+antes de apresentar.</p>
+</div>
+<h1 id="cap15">15. Manual do professor</h1>
+<div class="epigrafe">
+<p>“O professor não entrega a resposta; desenha as condições para
+investigar.”</p>
+</div>
+<h2 id="plano-de-100-minutos">15.1 Plano de 100 minutos</h2>
+<table>
+<thead>
+<tr>
+<th>Tempo</th>
+<th>Bloco</th>
+<th>Condução</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0–10</td>
+<td>Abertura</td>
+<td>pergunta “o que acontece entre duas medições?”</td>
+</tr>
+<tr>
+<td>10–25</td>
+<td>Bohm</td>
+<td>cap. 1–2 + figura 1</td>
+</tr>
+<tr>
+<td>25–40</td>
+<td>Diálogo</td>
+<td>cap. 3 + roda de 15 min</td>
+</tr>
+<tr>
+<td>40–65</td>
+<td>Laboratório</td>
+<td>cap. 6–7 + PennyLane/Cirq/Qiskit</td>
+</tr>
+<tr>
+<td>65–80</td>
+<td>Totalidade</td>
+<td>cap. 4–5 + holograma/emaranhamento</td>
+</tr>
+<tr>
+<td>80–95</td>
+<td>Limites</td>
+<td>cap. 13 + teste dos filtros</td>
+</tr>
+<tr>
+<td>95–100</td>
+<td>Síntese</td>
+<td>diário + projeto</td>
+</tr>
+</tbody>
+</table>
+<h2 id="duas-aulas-de-50-minutos">15.2 Duas aulas de 50 minutos</h2>
+<p><strong>Aula A:</strong> cap. 1–3; roda de diálogo; prática
+PennyLane. <strong>Aula B:</strong> cap. 4–6; práticas Cirq/Qiskit;
+projeto.</p>
+<h2 id="materiais-e-instalação">15.3 Materiais e instalação</h2>
+<ul>
+<li>Notebook <code>AULA_BOHM_LABORATORIO.ipynb</code>.</li>
+<li>Projetor ou dispositivos dos estudantes.</li>
+<li>Internet para <code>pip install</code> na primeira vez.</li>
+<li>Caderno para o diário de suposições.</li>
+<li>Objeto para a roda (talking piece).</li>
+</ul>
+<p>No Colab:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">!pip</span> install <span class="at">-q</span> pennylane qiskit cirq pylatexenc</span></code></pre></div>
+<p>Teste antes da aula. Se a rede falhar, use as figuras já geradas e
+faça as práticas desplugadas (cap. 10–12).</p>
+<h2 id="erros-comuns">15.4 Erros comuns</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Erro</th>
+<th>O que está por trás</th>
+<th>Resposta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>“Bohm provou que a partícula tem trajetória.”</td>
+<td>confunde interpretação com experimento</td>
+<td>“A teoria prevê o mesmo; a trajetória é uma escolha
+ontológica.”</td>
+</tr>
+<tr>
+<td>“Emaranhamento transmite mensagem.”</td>
+<td>confunde correlação com sinal</td>
+<td>“Qual é a marginal de Bob? 50/50.”</td>
+</tr>
+<tr>
+<td>“A esfera de Bloch mostra o emaranhamento.”</td>
+<td>confunde um qubit com o par</td>
+<td>“A esfera é de um qubit; o par precisa de outra representação.”</td>
+</tr>
+<tr>
+<td>“A ordem implicada é uma teoria quântica.”</td>
+<td>confunde filosofia com física</td>
+<td>“É uma visão de totalidade; não faz previsões.”</td>
+</tr>
+<tr>
+<td>“Quântico é sempre mais rápido.”</td>
+<td>slogan</td>
+<td>“Qual problema? Qual algoritmo? Qual hardware?”</td>
+</tr>
+<tr>
+<td>“O diálogo precisa terminar em consenso.”</td>
+<td>confunde diálogo com assembleia</td>
+<td>“O objetivo é compreender, não concordar.”</td>
+</tr>
+</tbody>
+</table>
+<h2 id="avaliação">15.5 Avaliação</h2>
+<p>Combine:</p>
+<ul>
+<li><strong>checkpoints do notebook</strong> (formativos);</li>
+<li><strong>práticas</strong> (execução e explicação);</li>
+<li><strong>diálogo</strong> (observação qualitativa);</li>
+<li><strong>projeto</strong> (rubrica do cap. 14).</li>
+</ul>
+<p>Sugestão de pesos: 20% práticas, 20% diálogo, 20% diário, 40%
+projeto. Ajuste ao seu currículo.</p>
+<h2 id="adaptações">15.6 Adaptações</h2>
+<ul>
+<li><strong>6º–7º ano:</strong> sem equações; usar as figuras e a roda
+de diálogo; prática desplugada de duas fendas com corda/ondas.</li>
+<li><strong>Ensino Médio:</strong> incluir a equação do guia e a
+discussão de não localidade.</li>
+<li><strong>Sem internet:</strong> usar as figuras geradas e os códigos
+impressos; rodar o notebook do professor.</li>
+<li><strong>Deficiência visual:</strong> descrever as figuras; usar
+saídas numéricas; diário em áudio.</li>
+<li><strong>Turma grande:</strong> dividir em grupos de 8 para a roda;
+usar observadores.</li>
+</ul>
+<h2 id="segurança-e-ética">15.7 Segurança e ética</h2>
+<ul>
+<li>Não prometa acesso a hardware quântico.</li>
+<li>Não trate Bohm como consenso.</li>
+<li>Não incentive invasão ou quebra de sistemas.</li>
+<li>Respeite a LGPD ao coletar dados dos estudantes.</li>
+<li>Proteja a roda de diálogo de julgamentos pessoais.</li>
+</ul>
+<h2 id="respostas-dos-checkpoints">15.8 Respostas dos checkpoints</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Capítulo</th>
+<th>Ideia central</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>a fragmentação é uma escolha; Bohm propõe totalidade e diálogo</td>
+</tr>
+<tr>
+<td>2</td>
+<td>a partícula tem trajetória; a onda guia; o preço é não
+localidade</td>
+</tr>
+<tr>
+<td>3</td>
+<td>diálogo não é debate; o objetivo é examinar suposições</td>
+</tr>
+<tr>
+<td>4</td>
+<td>a informação pode estar distribuída; a analogia tem limite</td>
+</tr>
+<tr>
+<td>5</td>
+<td>correlação não é comunicação; Bohm é não local</td>
+</tr>
+<tr>
+<td>6</td>
+<td>as três bibliotecas concordam; as convenções mudam</td>
+</tr>
+<tr>
+<td>7</td>
+<td>PennyLane calcula probabilidades exatas</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Cirq amostra medições e desenha texto</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Qiskit mostra estado, Bloch e correlações</td>
+</tr>
+<tr>
+<td>10</td>
+<td>o modelo de trajetórias é qualitativo; a curva é quantitativa</td>
+</tr>
+<tr>
+<td>11</td>
+<td>1,1% dos coeficientes reconstrói o todo borrado</td>
+</tr>
+<tr>
+<td>12</td>
+<td>o diálogo produz dados qualitativos</td>
+</tr>
+<tr>
+<td>13</td>
+<td>fato, promessa e exagero são categorias diferentes</td>
+</tr>
+<tr>
+<td>14</td>
+<td>projeto = pergunta + suposição + experimento + limite</td>
+</tr>
+</tbody>
+</table>
+<h2 id="perguntas-frequentes">15.9 Perguntas frequentes</h2>
+<p><strong>“Preciso saber Bohm para dar a aula?”</strong> Não. O livro
+apresenta o necessário. O importante é não transformar Bohm em
+dogma.</p>
+<p><strong>“As três bibliotecas são gratuitas?”</strong> Sim. PennyLane,
+Cirq e Qiskit são open source.</p>
+<p><strong>“Posso usar só uma biblioteca?”</strong> Sim. O capítulo 6
+mostra o mesmo estado nas três; escolha a que funcionar melhor na sua
+escola.</p>
+<p><strong>“O design black funciona no projetor?”</strong> Sim, se o
+projetor tiver bom contraste. Para impressão em massa, use a edição
+clara.</p>
+<p><strong>“Bohm é a interpretação correta?”</strong> Não há consenso.
+Bohm é uma interpretação entre várias; o valor pedagógico está na
+comparação.</p>
+<h1 id="glossario">Glossário</h1>
+<p><strong>Amplitude.</strong> Número (real ou complexo) que descreve o
+peso de um estado de base. A probabilidade é o quadrado do módulo.</p>
+<p><strong>Bohm, David (1917–1992).</strong> Físico teórico
+britânico-brasileiro. Propôs a interpretação de onda piloto e uma
+filosofia de totalidade e diálogo.</p>
+<p><strong>Bohmian mechanics.</strong> Interpretação não local da
+mecânica quântica em que partículas têm posições definidas e são guiadas
+pela função de onda.</p>
+<p><strong>Cirq.</strong> Biblioteca open source do Google para
+circuitos quânticos, com ênfase em linhas de qubits e simulação.</p>
+<p><strong>Colapso efetivo.</strong> Na teoria de Bohm, o fato de a
+partícula terminar em uma das componentes da função de onda após a
+interação com o aparelho, sem postular um colapso fundamental.</p>
+<p><strong>Configuração (espaço de).</strong> Espaço de
+<img class="math-inline" src="figuras_geradas/math/45786a150b58c210.svg" alt="3N">
+dimensões que descreve as posições de
+<img class="math-inline" src="figuras_geradas/math/fed1d872f6d540f4.svg" alt="N">
+partículas. A função de onda de Bohm vive nesse espaço.</p>
+<p><strong>Diálogo (bohminiano).</strong> Prática coletiva de investigar
+suposições por meio de escuta, suspensão de julgamento e desaceleração,
+sem buscar consenso forçado.</p>
+<p><strong>Equivariância.</strong> Propriedade pela qual a distribuição
+<img class="math-inline" src="figuras_geradas/math/89b570a23dabf086.svg" alt="|\psi|^2">
+é preservada pela dinâmica de Bohm. É a base da regra de Born na
+teoria.</p>
+<p><strong>Emaranhamento.</strong> Correlação quântica entre partes de
+um sistema, descrita por um estado conjunto não separável.</p>
+<p><strong>Esfera de Bloch.</strong> Representação geométrica do estado
+de um qubit.</p>
+<p><strong>Estado de Bell.</strong> Estado maximalmente emaranhado de
+dois qubits, como
+<img class="math-inline" src="figuras_geradas/math/58e807729bee19cc.svg" alt="(|00\rangle+|11\rangle)/\sqrt{2}">.</p>
+<p><strong>Explicate order.</strong> Ordem explícita: o mundo das coisas
+separadas e localizadas.</p>
+<p><strong>Holomovimento.</strong> Termo de Bohm para o fluxo dinâmico
+do qual emergem as formas explícitas.</p>
+<p><strong>Implicate order.</strong> Ordem implicada: a totalidade de
+relações que se desdobra no mundo explícito.</p>
+<p><strong>Interpretação.</strong> Leitura filosófica de uma teoria
+física que preserva as previsões experimentais.</p>
+<p><strong>Não localidade.</strong> Dependência instantânea entre partes
+separadas no espaço. Em Bohm, é explícita na equação do guia.</p>
+<p><strong>Onda piloto.</strong> Função de onda que guia o movimento das
+partículas na teoria de Bohm.</p>
+<p><strong>PennyLane.</strong> Biblioteca open source para computação
+quântica diferenciável.</p>
+<p><strong>Qiskit.</strong> Biblioteca open source da IBM para
+circuitos, estados e visualização.</p>
+<p><strong>Qubit.</strong> Unidade de informação quântica descrita por
+duas amplitudes.</p>
+<p><strong>Regra de Born.</strong>
+<img class="math-inline" src="figuras_geradas/math/5b2345cfeac78834.svg" alt="P(0)=|\alpha|^2">,
+<img class="math-inline" src="figuras_geradas/math/8c4255092e087091.svg" alt="P(1)=|\beta|^2">.</p>
+<p><strong>Suspensão de suposições.</strong> Gesto de colocar uma crença
+entre parênteses para examiná-la, sem necessariamente abandoná-la.</p>
+<p><strong>Totalidade.</strong> Ideia de que o todo não se reduz à soma
+de partes independentes.</p>
+<h1 id="referencias">Referências</h1>
+<p>BELL, J. S. On the Einstein Podolsky Rosen paradox. <em>Physics</em>,
+v. 1, n. 3, p. 195–200, 1964.</p>
+<p>BLACK, P.; WILIAM, D. Assessment and classroom learning.
+<em>Assessment in Education</em>, v. 5, n. 1, p. 7–74, 1998.</p>
+<p>BLOOM, B. S. Learning for mastery. <em>Evaluation Comment</em>, v. 1,
+n. 2, 1968.</p>
+<p>BOHM, D. <em>Quantum Theory</em>. New York: Prentice-Hall, 1951.</p>
+<p>BOHM, D. <em>Causality and Chance in Modern Physics</em>. London:
+Routledge, 1957.</p>
+<p>BOHM, D. <em>Wholeness and the Implicate Order</em>. London:
+Routledge, 1980.</p>
+<p>BOHM, D. <em>Thought as a System</em>. London: Routledge, 1992.</p>
+<p>BOHM, D. <em>On Dialogue</em>. Edited by Lee Nichol. London:
+Routledge, 1996.</p>
+<p>BOHM, D.; HILEY, B. J. <em>The Undivided Universe: An Ontological
+Interpretation of Quantum Theory</em>. London: Routledge, 1993.</p>
+<p>BOHM, D.; PEAT, F. D. <em>Science, Order, and Creativity</em>. New
+York: Bantam, 1987.</p>
+<p>BRASIL. Ministério da Educação. <em>Base Nacional Comum
+Curricular</em>. Brasília: MEC, 2018.</p>
+<p>BRASIL. Conselho Nacional de Educação. <em>Normas sobre Computação na
+Educação Básica — Complemento à BNCC</em>. Brasília: CNE, 2022.</p>
+<p>BRUNER, J. S. <em>Toward a Theory of Instruction</em>. Cambridge:
+Harvard University Press, 1966.</p>
+<p>CIRQ DEVELOPERS. <em>Cirq Documentation</em>. Disponível em:
+https://quantumai.google/cirq. Acesso em: 6 nov. 2026.</p>
+<p>FEYNMAN, R. P. Simulating physics with computers. <em>International
+Journal of Theoretical Physics</em>, v. 21, n. 6–7, p. 467–488,
+1982.</p>
+<p>HOLLAND, P. R. <em>The Quantum Theory of Motion: An Account of the de
+Broglie–Bohm Causal Interpretation of Quantum Mechanics</em>. Cambridge:
+Cambridge University Press, 1993.</p>
+<p>MAYER, R. E. <em>Multimedia Learning</em>. 2. ed. Cambridge:
+Cambridge University Press, 2009.</p>
+<p>NIELSEN, M. A.; CHUANG, I. L. <em>Quantum Computation and Quantum
+Information</em>. Cambridge: Cambridge University Press, 2000.</p>
+<p>NIST. <em>FIPS 203, 204 e 205</em>: padrões de criptografia
+pós-quântica. Gaithersburg: NIST, 2024.</p>
+<p>PENNYLANE DEVELOPERS. <em>PennyLane Documentation</em>. Disponível
+em: https://docs.pennylane.ai. Acesso em: 6 nov. 2026.</p>
+<p>PRESKILL, J. Quantum computing in the NISQ era and beyond.
+<em>Quantum</em>, v. 2, p. 79, 2018.</p>
+<p>QISKIT DEVELOPERS. <em>Qiskit Documentation</em>. Disponível em:
+https://docs.quantum.ibm.com. Acesso em: 6 nov. 2026.</p>
+<p>ROEDIGER, H. L.; KARPICKE, J. D. Test-enhanced learning: taking
+memory tests improves long-term retention. <em>Psychological
+Science</em>, v. 17, n. 3, p. 249–255, 2006.</p>
+<p>SWELLER, J. Cognitive load during problem solving: effects on
+learning. <em>Cognitive Science</em>, v. 12, n. 2, p. 257–285, 1988.</p>
+<p>VYGOTSKY, L. S. <em>Mind in Society: The Development of Higher
+Psychological Processes</em>. Cambridge: Harvard University Press,
+1978.</p>
+<h1 id="anexo">Anexo: instalação e Colab</h1>
+<h2 id="abrir-o-notebook">1. Abrir o notebook</h2>
+<ol type="1">
+<li>Acesse <code>colab.research.google.com</code>.</li>
+<li><strong>Arquivo → Fazer upload de notebook</strong>.</li>
+<li>Selecione <code>AULA_BOHM_LABORATORIO.ipynb</code>.</li>
+<li>Execute a primeira célula para checar as bibliotecas.</li>
+<li>Se faltar alguma, rode no início:</li>
+</ol>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">!pip</span> install <span class="at">-q</span> pennylane qiskit cirq pylatexenc</span></code></pre></div>
+<ol start="6" type="1">
+<li><strong>Ambiente de execução → Executar tudo</strong>.</li>
+</ol>
+<h2 id="versões-testadas">2. Versões testadas</h2>
+<table>
+<thead>
+<tr>
+<th>Biblioteca</th>
+<th>Versão testada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PennyLane</td>
+<td>0.45.1</td>
+</tr>
+<tr>
+<td>Cirq</td>
+<td>1.7.0</td>
+</tr>
+<tr>
+<td>Qiskit</td>
+<td>2.6.2</td>
+</tr>
+<tr>
+<td>pylatexenc</td>
+<td>2.11</td>
+</tr>
+<tr>
+<td>Python</td>
+<td>3.14</td>
+</tr>
+</tbody>
+</table>
+<p>Versões diferentes podem mudar detalhes de desenho, mas não os
+conceitos.</p>
+<h2 id="se-algo-der-errado">3. Se algo der errado</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Sintoma</th>
+<th>Causa provável</th>
+<th>Solução</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ModuleNotFoundError: pennylane</code></td>
+<td>biblioteca ausente</td>
+<td>rode o <code>pip install</code> acima</td>
+</tr>
+<tr>
+<td><code>ModuleNotFoundError: cirq</code></td>
+<td>biblioteca ausente</td>
+<td>rode o <code>pip install</code> acima</td>
+</tr>
+<tr>
+<td><code>ModuleNotFoundError: qiskit</code></td>
+<td>biblioteca ausente</td>
+<td>rode o <code>pip install</code> acima</td>
+</tr>
+<tr>
+<td>desenho do circuito estranho</td>
+<td>versão diferente</td>
+<td>use o diagrama textual ou atualize</td>
+</tr>
+<tr>
+<td>figura não aparece</td>
+<td>célula não executada</td>
+<td>rode a célula de ambiente e a célula da figura</td>
+</tr>
+<tr>
+<td>resultado diferente de 0,5</td>
+<td>convenção de ordem ou amostragem</td>
+<td>confira a ordem dos qubits e o número de tiros</td>
+</tr>
+</tbody>
+</table>
+<h2 id="licenças">4. Licenças</h2>
+<p>PennyLane, Cirq e Qiskit são projetos open source com licenças
+próprias. Consulte os repositórios oficiais antes de redistribuir
+código. Este livro é material didático; as figuras foram geradas por
+código e podem ser reutilizadas em sala com atribuição.</p>
+<h2 id="como-citar">5. Como citar</h2>
+<blockquote>
+<p>OPENCODE ECOSYSTEM CORE. <em>Bohm na Escola: onda piloto, diálogo e
+totalidade no ensino de informação quântica — edição black</em>. 1.
+ed. 2026. Material didático.</p>
+</blockquote>
+<p>Para redistribuição, mantenha a atribuição, a seção de limites e a
+nota de que Bohm é apresentado como uma interpretação entre várias.</p>
+</body>
+</html>

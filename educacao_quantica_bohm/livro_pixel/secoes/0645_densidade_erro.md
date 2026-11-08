@@ -1,0 +1,33 @@
+::: {.lauda .lente-erro .nivel-0}
+<div class="topo">
+  <span class="cod">L0645</span>
+  <span class="lente"><img class="ico" src="sprites/erro.png" alt=""> ERRO COMUM</span>
+  <span class="conc"><img class="ico-conceito" src="sprites_conceitos/C065.png" alt=""> N0 · C065 · MATRIZ DENSIDADE</span>
+</div>
+<div class="xp"><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class="on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div>
+<h2 id="l-0645" class="titulo">Matriz densidade — erro comum</h2>
+<div class="corpo">
+
+<p><strong>O erro comum:</strong> Compare a densidade de |0⟩ com a de uma mistura 50/50.</p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">密度矩阵</span> <em>mì dù jǔ zhèn</em> <span class="tom">· tons 4-4-3-4 · leitura mi-du-djyu-djen</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">密度矩阵不是魔法。</span> <em>Mì dù jǔ zhèn bú shì mó fǎ.</em> — “Matriz densidade” não é magia.</span></p>
+<p><strong>Como não cair:</strong> escreva um contraexemplo e teste com um colega.</p>
+
+</div>
+<div class="rigor">
+<span class="rotulo">RIGOR CIENTÍFICO</span>
+<p>A matemática é representação; não é o fenômeno.</p>
+<p class="prof"><strong>Para o professor:</strong> Use exemplos pequenos antes da fórmula.</p>
+</div>
+<div class="check">
+<span class="rotulo">CHECKPOINT</span>
+<p>Uma mistura estatística pode esconder responsabilidade?</p>
+</div>
+
+<div class="mini-barras">
+<span class="rotulo-mini">RESULTADO VISUAL · SIMULADO × BACKEND</span>
+<div class="linha"><em>sim</em><div class="trilho"><span style="width:100%"></span></div><b>100%</b></div>
+<div class="linha"><em>backend</em><div class="trilho"><span style="width:94.1%"></span></div><b>94,1%</b></div>
+</div>
+
+<div class="rodape">P07 · C065/100 · L0645/3000 · <a class="gab" href="#g-065">[G065]</a> · <a class="ficha-link" href="#f-065">[F065]</a></div>
+:::

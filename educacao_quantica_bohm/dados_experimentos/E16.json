@@ -1,0 +1,53 @@
+{
+  "id": "E16",
+  "nome": "Esfera de Bloch",
+  "descricao": "Mede Z e X do estado H|0⟩.",
+  "conceitos": [
+    "base",
+    "suspensao",
+    "statevector",
+    "bloch",
+    "vetor",
+    "produto_interno",
+    "autovalor",
+    "checkpoint",
+    "evidencia",
+    "visualizacao"
+  ],
+  "simulado": {
+    "counts": [
+      {
+        "0": 516,
+        "1": 508
+      },
+      {
+        "0": 1024
+      }
+    ],
+    "leitura": "⟨Z⟩ = +0.008, ⟨X⟩ = +1.000 (ideal 0, +1)",
+    "shots": 1024,
+    "metodo": "statevector + amostragem"
+  },
+  "real": {
+    "counts": [
+      {
+        "1": 494,
+        "0": 530
+      },
+      {
+        "0": 1016,
+        "1": 8
+      }
+    ],
+    "leitura": "⟨Z⟩ = +0.035, ⟨X⟩ = +0.984 (ideal 0, +1)",
+    "task_ids": [
+      "9da79d10-8f39-41f0-8868-0591c6dfaf5d",
+      "2c70d357-ec4b-4aa1-ae4f-85eca57cef73"
+    ],
+    "backend": "Guoji08",
+    "shots": 1024,
+    "timestamp": "2026-11-07T00:30:59-0300"
+  },
+  "sobreposicao": 0.9892578125,
+  "timestamp": "2026-11-07T00:25:54-0300"
+}

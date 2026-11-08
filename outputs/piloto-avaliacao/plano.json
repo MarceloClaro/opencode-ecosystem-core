@@ -1,0 +1,311 @@
+{
+  "project": {
+    "research_id": "avaliacao-eficacia-livro",
+    "spec_id": "SPEC-BOHM-PIXEL-001",
+    "artifact_path": "/home/marceloclaro/opencode-ecosystem-core/educacao_quantica_bohm/livro_pixel/AVALIACAO_EFICACIA.md",
+    "problem": "O protocolo de avaliação de eficácia é executável, claro e analisável antes da coleta?",
+    "objectives": [
+      "Ensaiar o protocolo com perfis e cenários sintéticos.",
+      "Identificar lacunas de método, instrumentos, ética e análise.",
+      "Ajustar o protocolo antes do CEP; não medir aprendizagem."
+    ],
+    "study_type": "protocol",
+    "context": {
+      "humans": false,
+      "personal_data": false,
+      "control_group": true,
+      "synthetic": true
+    },
+    "sources": [
+      {
+        "source_id": "s1",
+        "path": "/home/marceloclaro/opencode-ecosystem-core/educacao_quantica_bohm/livro_pixel/AVALIACAO_EFICACIA.md",
+        "locator": "protocolo completo",
+        "sha256": "6155ae00f5e2955f81291496c0ff3ffa7823b9c2a8961751ac7d7c57f1786eaa",
+        "verification": "not_checked"
+      },
+      {
+        "source_id": "s2",
+        "path": "/home/marceloclaro/opencode-ecosystem-core/educacao_quantica_bohm/livro_pixel/TRILHAS_NIVEIS.md",
+        "locator": "trilhas por nível",
+        "sha256": "4870dab4b9dc0c5d53414bccf697c73b1a02b6c8dd74eca4e816d69acba7ddd9",
+        "verification": "not_checked"
+      }
+    ],
+    "claims": [
+      {
+        "claim_id": "c1",
+        "statement": "O protocolo é executável em 12 semanas, com instrumentos claros e análise pré-registrada.",
+        "claim_type": "inferential",
+        "source_refs": [
+          "s1",
+          "s2"
+        ],
+        "evidence_status": "proposed",
+        "limitations": [
+          "Ainda não executado com estudantes reais; requer CEP."
+        ],
+        "reviewer_agent_ids": [],
+        "attributes": {}
+      },
+      {
+        "claim_id": "c2",
+        "statement": "O desenho com 440 estudantes detecta d=0,40 com poder de 80% e ICC=0,05.",
+        "claim_type": "inferential",
+        "source_refs": [
+          "s1"
+        ],
+        "evidence_status": "proposed",
+        "limitations": [
+          "Cálculo depende de ICC e taxa de atrito assumidos."
+        ],
+        "reviewer_agent_ids": [],
+        "attributes": {}
+      },
+      {
+        "claim_id": "c3",
+        "statement": "ANCOVA com pré-teste e erros cluster-robustos é adequada ao desenho por turma.",
+        "claim_type": "inferential",
+        "source_refs": [
+          "s1"
+        ],
+        "evidence_status": "proposed",
+        "limitations": [
+          "Requer verificação de pressupostos e dados faltantes."
+        ],
+        "reviewer_agent_ids": [],
+        "attributes": {}
+      },
+      {
+        "claim_id": "c4",
+        "statement": "O estudo exige CEP, consentimento dos responsáveis e assentimento dos estudantes.",
+        "claim_type": "normative",
+        "source_refs": [
+          "s1"
+        ],
+        "evidence_status": "reported",
+        "limitations": [],
+        "reviewer_agent_ids": [],
+        "attributes": {}
+      }
+    ]
+  },
+  "cases": [
+    {
+      "case_id": "projeto-base",
+      "stage": "projeto",
+      "group": "banca_interdisciplinar",
+      "scenario": "base",
+      "rounds": 2,
+      "agents": 6
+    },
+    {
+      "case_id": "projeto-banca_divergente",
+      "stage": "projeto",
+      "group": "banca_interdisciplinar",
+      "scenario": "banca_divergente",
+      "rounds": 2,
+      "agents": 6
+    },
+    {
+      "case_id": "projeto-fonte_indisponivel",
+      "stage": "projeto",
+      "group": "banca_interdisciplinar",
+      "scenario": "fonte_indisponivel",
+      "rounds": 2,
+      "agents": 6
+    },
+    {
+      "case_id": "metodologia-base",
+      "stage": "metodologia",
+      "group": "cientistas_metodo",
+      "scenario": "base",
+      "rounds": 2,
+      "agents": 6
+    },
+    {
+      "case_id": "metodologia-banca_divergente",
+      "stage": "metodologia",
+      "group": "cientistas_metodo",
+      "scenario": "banca_divergente",
+      "rounds": 2,
+      "agents": 6
+    },
+    {
+      "case_id": "metodologia-fonte_indisponivel",
+      "stage": "metodologia",
+      "group": "cientistas_metodo",
+      "scenario": "fonte_indisponivel",
+      "rounds": 2,
+      "agents": 6
+    },
+    {
+      "case_id": "qualificacao-base",
+      "stage": "qualificacao",
+      "group": "banca_interdisciplinar",
+      "scenario": "base",
+      "rounds": 2,
+      "agents": 6
+    },
+    {
+      "case_id": "qualificacao-banca_divergente",
+      "stage": "qualificacao",
+      "group": "banca_interdisciplinar",
+      "scenario": "banca_divergente",
+      "rounds": 2,
+      "agents": 6
+    },
+    {
+      "case_id": "qualificacao-fonte_indisponivel",
+      "stage": "qualificacao",
+      "group": "banca_interdisciplinar",
+      "scenario": "fonte_indisponivel",
+      "rounds": 2,
+      "agents": 6
+    },
+    {
+      "case_id": "analise-base",
+      "stage": "analise",
+      "group": "cientistas_resultados",
+      "scenario": "base",
+      "rounds": 2,
+      "agents": 6
+    },
+    {
+      "case_id": "analise-banca_divergente",
+      "stage": "analise",
+      "group": "cientistas_resultados",
+      "scenario": "banca_divergente",
+      "rounds": 2,
+      "agents": 6
+    },
+    {
+      "case_id": "analise-fonte_indisponivel",
+      "stage": "analise",
+      "group": "cientistas_resultados",
+      "scenario": "fonte_indisponivel",
+      "rounds": 2,
+      "agents": 6
+    },
+    {
+      "case_id": "resultados-base",
+      "stage": "resultados",
+      "group": "cientistas_resultados",
+      "scenario": "base",
+      "rounds": 2,
+      "agents": 6
+    },
+    {
+      "case_id": "resultados-banca_divergente",
+      "stage": "resultados",
+      "group": "cientistas_resultados",
+      "scenario": "banca_divergente",
+      "rounds": 2,
+      "agents": 6
+    },
+    {
+      "case_id": "resultados-fonte_indisponivel",
+      "stage": "resultados",
+      "group": "cientistas_resultados",
+      "scenario": "fonte_indisponivel",
+      "rounds": 2,
+      "agents": 6
+    },
+    {
+      "case_id": "pre_defesa-base",
+      "stage": "pre_defesa",
+      "group": "banca_interdisciplinar",
+      "scenario": "base",
+      "rounds": 2,
+      "agents": 6
+    },
+    {
+      "case_id": "pre_defesa-banca_divergente",
+      "stage": "pre_defesa",
+      "group": "banca_interdisciplinar",
+      "scenario": "banca_divergente",
+      "rounds": 2,
+      "agents": 6
+    },
+    {
+      "case_id": "pre_defesa-fonte_indisponivel",
+      "stage": "pre_defesa",
+      "group": "banca_interdisciplinar",
+      "scenario": "fonte_indisponivel",
+      "rounds": 2,
+      "agents": 6
+    },
+    {
+      "case_id": "defesa-base",
+      "stage": "defesa",
+      "group": "banca_interdisciplinar",
+      "scenario": "base",
+      "rounds": 2,
+      "agents": 6
+    },
+    {
+      "case_id": "defesa-banca_divergente",
+      "stage": "defesa",
+      "group": "banca_interdisciplinar",
+      "scenario": "banca_divergente",
+      "rounds": 2,
+      "agents": 6
+    },
+    {
+      "case_id": "defesa-fonte_indisponivel",
+      "stage": "defesa",
+      "group": "banca_interdisciplinar",
+      "scenario": "fonte_indisponivel",
+      "rounds": 2,
+      "agents": 6
+    }
+  ],
+  "seed": 42,
+  "limits": {
+    "max_steps": 34,
+    "max_rounds": 64,
+    "max_actions": 512,
+    "timeout_seconds": 30
+  },
+  "artifact_sha256": "6155ae00f5e2955f81291496c0ff3ffa7823b9c2a8961751ac7d7c57f1786eaa",
+  "evidence_manifest": [
+    {
+      "source_id": "s1",
+      "locator": "protocolo completo",
+      "integrity_checked": true,
+      "verification_scope": "local_artifact_integrity_only",
+      "declared_verification": "not_checked",
+      "path": "/home/marceloclaro/opencode-ecosystem-core/educacao_quantica_bohm/livro_pixel/AVALIACAO_EFICACIA.md",
+      "sha256": "6155ae00f5e2955f81291496c0ff3ffa7823b9c2a8961751ac7d7c57f1786eaa"
+    },
+    {
+      "source_id": "s2",
+      "locator": "trilhas por nível",
+      "integrity_checked": true,
+      "verification_scope": "local_artifact_integrity_only",
+      "declared_verification": "not_checked",
+      "path": "/home/marceloclaro/opencode-ecosystem-core/educacao_quantica_bohm/livro_pixel/TRILHAS_NIVEIS.md",
+      "sha256": "4870dab4b9dc0c5d53414bccf697c73b1a02b6c8dd74eca4e816d69acba7ddd9"
+    }
+  ],
+  "spec_id": "SPEC-935-R920",
+  "status": "planned",
+  "simulation_id": "academic-sim-ea33fecb53430854b34f30ee1d059abf",
+  "execution_started": false,
+  "simulation_executed": false,
+  "execution_complete": false,
+  "usage": {
+    "review_steps": 0,
+    "cases_executed": 0,
+    "rounds_executed": 0,
+    "actions_executed": 0,
+    "actions_reserved": 0
+  },
+  "scientifically_approved": false,
+  "external_validation": false,
+  "agent_inference_executed": false,
+  "llm_inference_executed": false,
+  "confidence_promoted": false,
+  "human_review_required": true,
+  "plan_sha256": "550dd6900a6dfcf97dac77284847968f0e592391cec630e0b23c6b3f6a766d7a"
+}

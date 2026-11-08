@@ -115,9 +115,15 @@ def test_inventory_does_not_claim_missing_profiles_are_validated(research):
     inventory = primary.academic_rigor_action({"operation": "inventory"})
 
     assert inventory["status"] == "profiles_missing_or_unvalidated"
-    assert inventory["count"] == 34
+    assert inventory["count"] == 36
     assert inventory["scientific_validation"] is False
-    assert all(row["definition_validated"] is False for row in inventory["profiles"])
+    by_id = {row["agent_id"]: row for row in inventory["profiles"]}
+    assert by_id["david-bohm-wholeness"]["definition_validated"] is True
+    assert by_id["richard-feynman-explainer"]["definition_validated"] is True
+    research_rows = [row for row in inventory["profiles"]
+                     if row["agent_id"].startswith("research-")]
+    assert research_rows
+    assert all(row["definition_validated"] is False for row in research_rows)
 
 
 def test_preflight_requires_explicit_claim_intake(research):

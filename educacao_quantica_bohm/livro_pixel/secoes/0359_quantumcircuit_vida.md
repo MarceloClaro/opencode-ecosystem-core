@@ -1,0 +1,33 @@
+::: {.lauda .lente-vida .nivel-0}
+<div class="topo">
+  <span class="cod">L0359</span>
+  <span class="lente"><img class="ico" src="sprites/vida.png" alt=""> CONEXÃO COM A VIDA</span>
+  <span class="conc"><img class="ico-conceito" src="sprites_conceitos/C036.png" alt=""> N0 · C036 · QUANTUMCIRCUIT</span>
+</div>
+<div class="xp"><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class="on"></span><span class=""></span></div>
+<h2 id="l-0359" class="titulo">QuantumCircuit — conexão com a vida</h2>
+<div class="corpo">
+
+<p>Fluxogramas também têm entradas, etapas e saídas.</p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子电路</span> <em>liàng zǐ diàn lù</em> <span class="tom">· tons 4-3-4-4 · leitura liang-dzi-dien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到量子电路。</span> <em>Wǒ zài shēng huó zhōng kàn dào liàng zǐ diàn lù.</em> — Vejo “QuantumCircuit” na vida.</span></p>
+<p><strong>Onde isso aparece:</strong> procure um exemplo na sua casa ou na escola.</p>
+
+</div>
+<div class="rigor">
+<span class="rotulo">RIGOR CIENTÍFICO</span>
+<p>Bibliotecas simulam; convenções podem mudar o resultado.</p>
+<p class="prof"><strong>Para o professor:</strong> Se as bibliotecas divergirem, verifique a convenção.</p>
+</div>
+<div class="check">
+<span class="rotulo">CHECKPOINT</span>
+<p>Você consegue explicar a diferença entre qreg e creg?</p>
+</div>
+
+<div class="mini-barras">
+<span class="rotulo-mini">RESULTADO VISUAL · SIMULADO × BACKEND</span>
+<div class="linha"><em>sim</em><div class="trilho"><span style="width:100%"></span></div><b>100%</b></div>
+<div class="linha"><em>backend</em><div class="trilho"><span style="width:94.1%"></span></div><b>94,1%</b></div>
+</div>
+
+<div class="rodape">P04 · C036/100 · L0359/3000 · <a class="gab" href="#g-036">[G036]</a> · <a class="ficha-link" href="#f-036">[F036]</a></div>
+:::

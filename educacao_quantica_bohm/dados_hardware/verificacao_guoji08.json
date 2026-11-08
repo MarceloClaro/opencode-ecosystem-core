@@ -1,0 +1,98 @@
+{
+  "backend": "Guoji08",
+  "backend_name": "Guoji08",
+  "n_qubits": 20,
+  "simulator": false,
+  "basis_gates": [
+    "id",
+    "h",
+    "x",
+    "y",
+    "rz",
+    "cz",
+    "measure"
+  ],
+  "coupling_map": [
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      5,
+      6
+    ],
+    [
+      6,
+      7
+    ],
+    [
+      7,
+      8
+    ],
+    [
+      8,
+      9
+    ],
+    [
+      9,
+      10
+    ],
+    [
+      10,
+      11
+    ],
+    [
+      11,
+      12
+    ],
+    [
+      12,
+      13
+    ],
+    [
+      13,
+      14
+    ],
+    [
+      14,
+      15
+    ],
+    [
+      15,
+      16
+    ],
+    [
+      16,
+      17
+    ],
+    [
+      17,
+      18
+    ],
+    [
+      18,
+      19
+    ]
+  ],
+  "max_shots": 10000,
+  "status": "<gjq_client.backend.backend_status.BackendStatus object at 0x70b684668050>",
+  "properties": "None",
+  "veredito": "hardware",
+  "timestamp": "2026-11-07T05:53:46-0300"
+}

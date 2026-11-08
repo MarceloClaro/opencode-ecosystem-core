@@ -1,0 +1,45 @@
+{
+  "id": "E11",
+  "nome": "Interferência de dois qubits",
+  "descricao": "H, CZ e H concentram a distribuição em 00/11.",
+  "conceitos": [
+    "ordem_implicada",
+    "circuito",
+    "qnode",
+    "ansatz",
+    "matriz",
+    "roda",
+    "projeto",
+    "trabalho"
+  ],
+  "simulado": {
+    "counts": [
+      {
+        "00": 500,
+        "11": 524
+      }
+    ],
+    "leitura": "P(00) = 0.488 (ideal 0,500)",
+    "shots": 1024,
+    "metodo": "statevector + amostragem"
+  },
+  "real": {
+    "counts": [
+      {
+        "11": 481,
+        "00": 485,
+        "10": 32,
+        "01": 26
+      }
+    ],
+    "leitura": "P(00) = 0.474 (ideal 0,500)",
+    "task_ids": [
+      "a9be9213-57d5-4036-8a59-41766fbcbe76"
+    ],
+    "backend": "Guoji08",
+    "shots": 1024,
+    "timestamp": "2026-11-07T00:29:18-0300"
+  },
+  "sobreposicao": 0.943359375,
+  "timestamp": "2026-11-07T00:25:54-0300"
+}

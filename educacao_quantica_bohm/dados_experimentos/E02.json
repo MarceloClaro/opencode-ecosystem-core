@@ -1,0 +1,41 @@
+{
+  "id": "E02",
+  "nome": "Base |1⟩ e leitura",
+  "descricao": "Prepara |1⟩ e mede; a discrepância é erro de leitura.",
+  "conceitos": [
+    "medicao",
+    "colapso_efetivo",
+    "porta_x",
+    "qubit_fisico",
+    "erro_leitura",
+    "feedback",
+    "responsabilidade"
+  ],
+  "simulado": {
+    "counts": [
+      {
+        "1": 1024
+      }
+    ],
+    "leitura": "P(1) = 1.000 (ideal 1,000)",
+    "shots": 1024,
+    "metodo": "statevector + amostragem"
+  },
+  "real": {
+    "counts": [
+      {
+        "1": 1010,
+        "0": 14
+      }
+    ],
+    "leitura": "P(1) = 0.986 (ideal 1,000)",
+    "task_ids": [
+      "6018c711-5649-4eb7-96a1-3b4aa48b7e7e"
+    ],
+    "backend": "Guoji08",
+    "shots": 1024,
+    "timestamp": "2026-11-07T00:27:18-0300"
+  },
+  "sobreposicao": 0.986328125,
+  "timestamp": "2026-11-07T00:25:54-0300"
+}

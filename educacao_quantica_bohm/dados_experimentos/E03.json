@@ -1,0 +1,42 @@
+{
+  "id": "E03",
+  "nome": "Superposição H|0⟩",
+  "descricao": "H cria uma superposição; a medição produz 0 ou 1.",
+  "conceitos": [
+    "qubit",
+    "onda_piloto",
+    "porta_h",
+    "pennylane",
+    "cirq",
+    "qiskit",
+    "pergunta"
+  ],
+  "simulado": {
+    "counts": [
+      {
+        "0": 516,
+        "1": 508
+      }
+    ],
+    "leitura": "P(1) = 0.496 (ideal 0,500)",
+    "shots": 1024,
+    "metodo": "statevector + amostragem"
+  },
+  "real": {
+    "counts": [
+      {
+        "1": 494,
+        "0": 530
+      }
+    ],
+    "leitura": "P(1) = 0.482 (ideal 0,500)",
+    "task_ids": [
+      "268a67b7-1d43-49a4-919d-3c151f3feef6"
+    ],
+    "backend": "Guoji08",
+    "shots": 1024,
+    "timestamp": "2026-11-07T00:27:39-0300"
+  },
+  "sobreposicao": 0.986328125,
+  "timestamp": "2026-11-07T00:25:54-0300"
+}

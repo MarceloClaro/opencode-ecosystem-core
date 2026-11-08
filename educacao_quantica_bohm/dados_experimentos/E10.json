@@ -1,0 +1,62 @@
+{
+  "id": "E10",
+  "nome": "Classificador XOR (VQC)",
+  "descricao": "Quatro entradas, quatro medições, uma acurácia.",
+  "conceitos": [
+    "vqc_xor",
+    "classificador",
+    "treino",
+    "acuracia",
+    "ruido_benefico",
+    "autodidatismo",
+    "rubrica",
+    "portfolio",
+    "proximo_passo"
+  ],
+  "simulado": {
+    "counts": [
+      {
+        "0": 1024
+      },
+      {
+        "1": 1024
+      },
+      {
+        "1": 1024
+      },
+      {
+        "0": 1024
+      }
+    ],
+    "leitura": "Acurácia = 4/4",
+    "shots": 1024,
+    "metodo": "statevector + amostragem"
+  },
+  "real": {
+    "counts": [
+      {
+        "0": 982,
+        "1": 42
+      },
+      {
+        "1": 990,
+        "0": 34
+      },
+      {
+        "1": 975,
+        "0": 49
+      },
+      {
+        "0": 980,
+        "1": 44
+      }
+    ],
+    "leitura": "Acurácia = 4/4",
+    "task_ids": [],
+    "backend": "Guoji08",
+    "shots": 1024,
+    "timestamp": "2026-11-07T00:28:58-0300"
+  },
+  "sobreposicao": 0.958740234375,
+  "timestamp": "2026-11-07T00:25:54-0300"
+}

@@ -5125,6 +5125,39 @@
       },
       "model": "opencode-zen/mimo-v2.6-flash-free"
     },
+    "david-bohm-wholeness": {
+      "description": "Persona de revisão inspirada na obra pública de Bohm para examinar totalidade, diálogo, fragmentação e suspensão de suposições. Não é o Bohm histórico, não fala em nome dele e não aprova o texto.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/david-bohm-wholeness.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1099_livro_quantico_package.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code",
+          "opencode-zen/deepseek-v4-pro"
+        ],
+        "model_economy": {
+          "complexity": "critica",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4-pro",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4-pro"
+    },
     "debugger": {
       "description": "Agente especializado debugger",
       "mode": "subagent",
@@ -5797,6 +5830,39 @@
           "*": "deny",
           "python3 -m marceloclaro.cli doctor": "allow",
           "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code",
+          "opencode-zen/deepseek-v4-pro"
+        ],
+        "model_economy": {
+          "complexity": "critica",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4-pro",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4-pro"
+    },
+    "gjq-experiment-runner": {
+      "description": "Executa E01–E18 no backend GJQ/Tiangong com simulação prévia, API key só no ambiente, task ID, counts e auditoria; não declara fidelidade ou vantagem sem evidência.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/gjq-experiment-runner.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1099_livro_quantico_package.py -q": "allow"
         },
         "edit": "deny",
         "webfetch": "deny",
@@ -6619,6 +6685,40 @@
         }
       },
       "model": "opencode-go/deepseek-v4-pro"
+    },
+    "livro-quantico-orchestrator": {
+      "description": "Orquestra produção, build, testes, auditoria de repetição, Lean 4 e publicação do livro quântico, sem declarar eficácia ou peer review sem evidência externa.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/livro-quantico-orchestrator.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1099_livro_quantico_package.py -q": "allow"
+        },
+        "edit": "allow",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4.1-flash",
+          "opencode-go/mimo-v2.6-flash",
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code"
+        ],
+        "model_economy": {
+          "complexity": "complexa",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4.1-flash",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4.1-flash"
     },
     "llm-reduction": {
       "description": "Agente especializado llm-reduction",
@@ -8528,6 +8628,72 @@
       },
       "model": "opencode-go/deepseek-v4.1-flash"
     },
+    "quantum-experiment-auditor": {
+      "description": "Audita counts, task IDs, incerteza, sobreposição e limites de E01–E18; não trata sobreposição como fidelidade de estado.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/quantum-experiment-auditor.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1099_livro_quantico_package.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code",
+          "opencode-zen/deepseek-v4-pro"
+        ],
+        "model_economy": {
+          "complexity": "critica",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4-pro",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4-pro"
+    },
+    "quantum-lean-verifier": {
+      "description": "Verifica identidades matemáticas em Lean 4 + Mathlib e classifica claims; não declara hardware, calibração ou Bohm como provados.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/quantum-lean-verifier.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1099_livro_quantico_package.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code",
+          "opencode-zen/deepseek-v4-pro"
+        ],
+        "model_economy": {
+          "complexity": "critica",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4-pro",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4-pro"
+    },
     "quantum-nexus-phd": {
       "description": "Agente especializado quantum-nexus-phd",
       "mode": "subagent",
@@ -8552,6 +8718,39 @@
         }
       },
       "model": "opencode-go/deepseek-v4.1-flash"
+    },
+    "quantum-tools-coach": {
+      "description": "Guia instalação e uso de Python, Qiskit, PennyLane, Cirq, gjq-client e Lean 4 para leitores em primeiro contato, com segurança de chave e conta.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/quantum-tools-coach.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1099_livro_quantico_package.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code",
+          "opencode-zen/deepseek-v4-pro"
+        ],
+        "model_economy": {
+          "complexity": "critica",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4-pro",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4-pro"
     },
     "r881-final-audit": {
       "description": "Auditar artefatos históricos R881 na versão correspondente.",
@@ -8952,6 +9151,39 @@
           "*": "deny",
           "python3 -m marceloclaro.cli doctor": "allow",
           "python3 -m pytest tests/test_r894_agent_lifecycle.py -q": "allow"
+        },
+        "edit": "allow",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/mimo-v2.6-flash",
+          "opencode-go/deepseek-v4.1-flash",
+          "opencode-go/minimax-m3.1-flash"
+        ],
+        "model_economy": {
+          "complexity": "media",
+          "ceiling": "capaz",
+          "head": "opencode-go/mimo-v2.6-flash",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/mimo-v2.6-flash"
+    },
+    "repetition-editor": {
+      "description": "Audita e reduz repetição em obras longas sem perder lentes, checkpoints, pontes e sequência didática.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/repetition-editor.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1099_livro_quantico_package.py -q": "allow"
         },
         "edit": "allow",
         "webfetch": "deny",
@@ -9789,6 +10021,39 @@
         }
       },
       "model": "opencode-go/mimo-v2.6-flash"
+    },
+    "richard-feynman-explainer": {
+      "description": "Persona de revisão inspirada na obra pública de Feynman para clareza, estimativa, contraexemplo e limite do que se sabe. Não é o Feynman histórico, não fala em nome dele e não aprova o texto.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/richard-feynman-explainer.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1099_livro_quantico_package.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code",
+          "opencode-zen/deepseek-v4-pro"
+        ],
+        "model_economy": {
+          "complexity": "critica",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4-pro",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4-pro"
     },
     "romance-psicologico-molambudos": {
       "description": "Assistente de escrita e revisão de romance de terror psicológico com voz sensorial e sistêmica, indução narrativa, catálogo de 16 estilos e protocolo de tradução PT-BR/EN/ZH com revisão de sensibilida",
@@ -11146,6 +11411,26 @@
         "integrations/artigo_academico_mcp.py"
       ],
       "enabled": true
+    },
+    "livro-quantico": {
+      "type": "local",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "integrations.livro_quantico_mcp"
+      ],
+      "enabled": true,
+      "timeout": 30000
+    },
+    "gjq-experiments": {
+      "type": "local",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "integrations.gjq_experiments_mcp"
+      ],
+      "enabled": true,
+      "timeout": 120000
     },
     "caed-spaece-data": {
       "type": "local",

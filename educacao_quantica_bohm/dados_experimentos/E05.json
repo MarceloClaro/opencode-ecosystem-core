@@ -1,0 +1,44 @@
+{
+  "id": "E05",
+  "nome": "Estado de Bell",
+  "descricao": "H + CNOT criam uma correlação 00/11.",
+  "conceitos": [
+    "emaranhamento",
+    "cnot",
+    "bell_circuito",
+    "cirq_circuit",
+    "quantumcircuit",
+    "densidade",
+    "traco"
+  ],
+  "simulado": {
+    "counts": [
+      {
+        "11": 493,
+        "00": 531
+      }
+    ],
+    "leitura": "P(00)+P(11) = 1.000 (ideal 1,000)",
+    "shots": 1024,
+    "metodo": "statevector + amostragem"
+  },
+  "real": {
+    "counts": [
+      {
+        "11": 480,
+        "00": 484,
+        "10": 33,
+        "01": 27
+      }
+    ],
+    "leitura": "P(00)+P(11) = 0.941 (ideal 1,000)",
+    "task_ids": [
+      "705bf99c-0bce-4ea3-851d-4efd4db73f7e"
+    ],
+    "backend": "Guoji08",
+    "shots": 1024,
+    "timestamp": "2026-11-07T00:28:18-0300"
+  },
+  "sobreposicao": 0.94140625,
+  "timestamp": "2026-11-07T00:25:54-0300"
+}

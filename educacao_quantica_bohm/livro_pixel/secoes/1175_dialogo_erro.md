@@ -1,0 +1,34 @@
+::: {.lauda .lente-erro .nivel-1}
+<div class="topo">
+  <span class="cod">L1175</span>
+  <span class="lente"><img class="ico" src="sprites/erro.png" alt=""> ERRO COMUM</span>
+  <span class="conc"><img class="ico-conceito" src="sprites_conceitos/C018.png" alt=""> N1 · C018 · DIÁLOGO</span>
+</div>
+<div class="xp"><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class="on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div>
+<h2 id="l-1175" class="titulo">Diálogo — erro comum</h2>
+<div class="corpo">
+
+<p><strong>O erro comum:</strong> Transformar o diálogo em julgamento pessoal ou competição.</p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">对话</span> <em>duì huà</em> <span class="tom">· tons 4-4 · leitura duei-rua</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">对话不是魔法。</span> <em>Duì huà bú shì mó fǎ.</em> — “Diálogo” não é magia.</span></p>
+<p><strong>Por que acontece:</strong> o cérebro procura uma imagem simples e apaga a parte matemática que não se encaixa.</p>
+<p><strong>Como testar:</strong> escreva um contraexemplo em uma frase e veja se ele derruba sua explicação.</p>
+
+</div>
+<div class="rigor">
+<span class="rotulo">RIGOR CIENTÍFICO</span>
+<p>Bohm distingue diálogo de debate em 'On Dialogue'.</p>
+<p class="prof"><strong>Para o professor:</strong> Diga 'interpretação', não 'prova'. Compare com a leitura padrão e nomeie o preço: não localidade.</p>
+</div>
+<div class="check">
+<span class="rotulo">CHECKPOINT</span>
+<p>Você consegue listar três gestos do diálogo?</p>
+</div>
+
+<div class="mini-barras">
+<span class="rotulo-mini">RESULTADO VISUAL · SIMULADO × BACKEND</span>
+<div class="linha"><em>sim</em><div class="trilho"><span style="width:100%"></span></div><b>100%</b></div>
+<div class="linha"><em>backend</em><div class="trilho"><span style="width:96.4%"></span></div><b>96,4%</b></div>
+</div>
+
+<div class="rodape">P02 · C018/100 · L1175/3000 · <a class="gab" href="#g-018">[G018]</a> · <a class="ficha-link" href="#f-018">[F018]</a></div>
+:::

@@ -1,0 +1,51 @@
+{
+  "id": "E06",
+  "nome": "GHZ de 4 qubits",
+  "descricao": "Quatro qubits compartilham 0000/1111.",
+  "conceitos": [
+    "totalidade",
+    "ghz",
+    "ghz_real",
+    "consenso",
+    "replicacao"
+  ],
+  "simulado": {
+    "counts": [
+      {
+        "1111": 497,
+        "0000": 527
+      }
+    ],
+    "leitura": "P(0000)+P(1111) = 1.000 (ideal 1,000)",
+    "shots": 1024,
+    "metodo": "statevector + amostragem"
+  },
+  "real": {
+    "counts": [
+      {
+        "1111": 389,
+        "1011": 38,
+        "0000": 418,
+        "0001": 19,
+        "1101": 36,
+        "0010": 29,
+        "0110": 11,
+        "0111": 13,
+        "0011": 1,
+        "0101": 5,
+        "0100": 18,
+        "1010": 2,
+        "1000": 13,
+        "1110": 6,
+        "1001": 26
+      }
+    ],
+    "leitura": "P(0000)+P(1111) = 0.788 (ideal 1,000)",
+    "task_ids": [],
+    "backend": "Guoji08",
+    "shots": 1024,
+    "timestamp": "2026-11-07T00:28:18-0300"
+  },
+  "sobreposicao": 0.7880859375,
+  "timestamp": "2026-11-07T00:25:54-0300"
+}

@@ -1,0 +1,104 @@
+{
+  "dataset": "two_moons_sintetico",
+  "n_amostras": 70,
+  "folds": 2,
+  "qubits": [
+    2
+  ],
+  "configuracoes": [
+    "baseline",
+    "phase_005",
+    "phase_010",
+    "depol_005",
+    "amp_005"
+  ],
+  "resultados": {
+    "2": {
+      "baseline": {
+        "n_qubits": 2,
+        "arquitetura": "strongly",
+        "ruido": "none",
+        "gamma": 0.0,
+        "acc_treino_media": 0.9272875816993464,
+        "acc_teste_media": 0.9272875816993464,
+        "acc_teste_desvio": 0.06354717804781065,
+        "acc_teste_folds": [
+          0.9722222222222222,
+          0.8823529411764706
+        ],
+        "ic95": [
+          0.8823529411764706,
+          0.9722222222222222
+        ]
+      },
+      "phase_005": {
+        "n_qubits": 2,
+        "arquitetura": "strongly",
+        "ruido": "phase",
+        "gamma": 0.005,
+        "acc_treino_media": 0.9272875816993464,
+        "acc_teste_media": 0.9272875816993464,
+        "acc_teste_desvio": 0.06354717804781065,
+        "acc_teste_folds": [
+          0.9722222222222222,
+          0.8823529411764706
+        ],
+        "ic95": [
+          0.8823529411764706,
+          0.9722222222222222
+        ]
+      },
+      "phase_010": {
+        "n_qubits": 2,
+        "arquitetura": "strongly",
+        "ruido": "phase",
+        "gamma": 0.01,
+        "acc_treino_media": 0.9272875816993464,
+        "acc_teste_media": 0.9272875816993464,
+        "acc_teste_desvio": 0.06354717804781065,
+        "acc_teste_folds": [
+          0.9722222222222222,
+          0.8823529411764706
+        ],
+        "ic95": [
+          0.8823529411764706,
+          0.9722222222222222
+        ]
+      },
+      "depol_005": {
+        "n_qubits": 2,
+        "arquitetura": "strongly",
+        "ruido": "depolarizing",
+        "gamma": 0.005,
+        "acc_treino_media": 0.9272875816993464,
+        "acc_teste_media": 0.9272875816993464,
+        "acc_teste_desvio": 0.06354717804781065,
+        "acc_teste_folds": [
+          0.9722222222222222,
+          0.8823529411764706
+        ],
+        "ic95": [
+          0.8823529411764706,
+          0.9722222222222222
+        ]
+      },
+      "amp_005": {
+        "n_qubits": 2,
+        "arquitetura": "strongly",
+        "ruido": "amplitude",
+        "gamma": 0.005,
+        "acc_treino_media": 0.9272875816993464,
+        "acc_teste_media": 0.9272875816993464,
+        "acc_teste_desvio": 0.06354717804781065,
+        "acc_teste_folds": [
+          0.9722222222222222,
+          0.8823529411764706
+        ],
+        "ic95": [
+          0.8823529411764706,
+          0.9722222222222222
+        ]
+      }
+    }
+  }
+}

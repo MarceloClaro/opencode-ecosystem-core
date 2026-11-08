@@ -1,0 +1,34 @@
+::: {.lauda .lente-etica .nivel-1}
+<div class="topo">
+  <span class="cod">L1408</span>
+  <span class="lente"><img class="ico" src="sprites/etica.png" alt=""> ÉTICA E SOCIEDADE</span>
+  <span class="conc"><img class="ico-conceito" src="sprites_conceitos/C041.png" alt=""> N1 · C041 · SUPERCONDUTOR</span>
+</div>
+<div class="xp"><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class="on"></span><span class=""></span><span class=""></span></div>
+<h2 id="l-1408" class="titulo">Supercondutor — ética e sociedade</h2>
+<div class="corpo">
+
+<p>Quem paga a conta energética e quem fica na fila?</p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">超导体</span> <em>chāo dǎo tǐ</em> <span class="tom">· tons 1-3-3 · leitura tchau-dau-ti</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于超导体？</span> <em>Shéi shòu yì yú chāo dǎo tǐ?</em> — Quem se beneficia de “Supercondutor”?</span></p>
+<p><strong>Quem ganha? Quem perde?</strong> Liste um grupo que se beneficia e um que pode ser prejudicado.</p>
+<p><strong>O que a escola pode fazer?</strong> Transforme o dilema em uma pergunta investigável, não em um julgamento pessoal.</p>
+
+</div>
+<div class="rigor">
+<span class="rotulo">RIGOR CIENTÍFICO</span>
+<p>Backends têm ruído, calibração e deriva. Fidelidade proxy não é prova de emaranhamento.</p>
+<p class="prof"><strong>Para o professor:</strong> T1, T2, erro de leitura e ruído de porta são coisas distintas; não os trate como um número único.</p>
+</div>
+<div class="check">
+<span class="rotulo">CHECKPOINT</span>
+<p>Quem paga a energia e a manutenção de um criostato?</p>
+</div>
+
+<div class="mini-barras">
+<span class="rotulo-mini">RESULTADO VISUAL · SIMULADO × BACKEND</span>
+<div class="linha"><em>sim</em><div class="trilho"><span style="width:100%"></span></div><b>100%</b></div>
+<div class="linha"><em>backend</em><div class="trilho"><span style="width:99.2%"></span></div><b>99,2%</b></div>
+</div>
+
+<div class="rodape">P05 · C041/100 · L1408/3000 · <a class="gab" href="#g-041">[G041]</a> · <a class="ficha-link" href="#f-041">[F041]</a></div>
+:::

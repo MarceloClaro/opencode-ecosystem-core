@@ -1,0 +1,52 @@
+{
+  "id": "E15",
+  "nome": "GHZ via QASM 2.0",
+  "descricao": "O mesmo GHZ carregado de um texto OpenQASM 2.0.",
+  "conceitos": [
+    "qasm",
+    "transpilacao",
+    "gjq_client",
+    "ciquanta",
+    "tiangong",
+    "apresentacao"
+  ],
+  "simulado": {
+    "counts": [
+      {
+        "0000": 484,
+        "1111": 540
+      }
+    ],
+    "leitura": "P(0000)+P(1111) = 1.000 (ideal 1,000)",
+    "shots": 1024,
+    "metodo": "statevector + amostragem"
+  },
+  "real": {
+    "counts": [
+      {
+        "1111": 389,
+        "1011": 38,
+        "0000": 418,
+        "0001": 19,
+        "1101": 36,
+        "0010": 29,
+        "0110": 11,
+        "0111": 13,
+        "0011": 1,
+        "0101": 5,
+        "0100": 18,
+        "1010": 2,
+        "1000": 13,
+        "1110": 6,
+        "1001": 26
+      }
+    ],
+    "leitura": "P(0000)+P(1111) = 0.788 (ideal 1,000)",
+    "task_ids": [],
+    "backend": "Guoji08",
+    "shots": 1024,
+    "timestamp": "2026-11-07T00:30:18-0300"
+  },
+  "sobreposicao": 0.7880859375,
+  "timestamp": "2026-11-07T00:25:54-0300"
+}

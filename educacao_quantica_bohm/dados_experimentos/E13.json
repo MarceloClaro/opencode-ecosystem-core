@@ -1,0 +1,36 @@
+{
+  "id": "E13",
+  "nome": "Produto tensorial |01⟩",
+  "descricao": "X no qubit 1 prepara |01⟩.",
+  "conceitos": [
+    "tensor"
+  ],
+  "simulado": {
+    "counts": [
+      {
+        "01": 1024
+      }
+    ],
+    "leitura": "P(01) = 1.000 (ideal 1,000)",
+    "shots": 1024,
+    "metodo": "statevector + amostragem"
+  },
+  "real": {
+    "counts": [
+      {
+        "01": 980,
+        "00": 16,
+        "11": 28
+      }
+    ],
+    "leitura": "P(01) = 0.957 (ideal 1,000)",
+    "task_ids": [
+      "b29350bd-90e9-4bc7-84c1-3b37e039a7d6"
+    ],
+    "backend": "Guoji08",
+    "shots": 1024,
+    "timestamp": "2026-11-07T00:29:58-0300"
+  },
+  "sobreposicao": 0.95703125,
+  "timestamp": "2026-11-07T00:25:54-0300"
+}

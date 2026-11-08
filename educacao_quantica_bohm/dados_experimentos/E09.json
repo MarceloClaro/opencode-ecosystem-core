@@ -1,0 +1,38 @@
+{
+  "id": "E09",
+  "nome": "Codificação de amplitude",
+  "descricao": "Ry(π/3) prepara P(1)=0,75.",
+  "conceitos": [
+    "amplitude",
+    "encoding",
+    "adaptacao"
+  ],
+  "simulado": {
+    "counts": [
+      {
+        "0": 271,
+        "1": 753
+      }
+    ],
+    "leitura": "P(1) = 0.735 (ideal 0,750)",
+    "shots": 1024,
+    "metodo": "statevector + amostragem"
+  },
+  "real": {
+    "counts": [
+      {
+        "1": 761,
+        "0": 263
+      }
+    ],
+    "leitura": "P(1) = 0.743 (ideal 0,750)",
+    "task_ids": [
+      "90f9f88a-2470-4725-bc6c-f63b95590581"
+    ],
+    "backend": "Guoji08",
+    "shots": 1024,
+    "timestamp": "2026-11-07T00:28:58-0300"
+  },
+  "sobreposicao": 0.9921875,
+  "timestamp": "2026-11-07T00:25:54-0300"
+}

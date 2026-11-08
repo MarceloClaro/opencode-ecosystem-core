@@ -1,0 +1,34 @@
+::: {.lauda .lente-erro .nivel-1}
+<div class="topo">
+  <span class="cod">L1615</span>
+  <span class="lente"><img class="ico" src="sprites/erro.png" alt=""> ERRO COMUM</span>
+  <span class="conc"><img class="ico-conceito" src="sprites_conceitos/C062.png" alt=""> N1 · C062 · MATRIZ</span>
+</div>
+<div class="xp"><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class="on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div>
+<h2 id="l-1615" class="titulo">Matriz — erro comum</h2>
+<div class="corpo">
+
+<p><strong>O erro comum:</strong> Multiplique a matriz X pelo vetor |0⟩.</p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">矩阵</span> <em>jǔ zhèn</em> <span class="tom">· tons 3-4 · leitura djyu-djen</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">矩阵不是魔法。</span> <em>Jǔ zhèn bú shì mó fǎ.</em> — “Matriz” não é magia.</span></p>
+<p><strong>Por que acontece:</strong> o cérebro procura uma imagem simples e apaga a parte matemática que não se encaixa.</p>
+<p><strong>Como testar:</strong> escreva um contraexemplo em uma frase e veja se ele derruba sua explicação.</p>
+
+</div>
+<div class="rigor">
+<span class="rotulo">RIGOR CIENTÍFICO</span>
+<p>A matemática é representação; não é o fenômeno. Não confunda o mapa com o território.</p>
+<p class="prof"><strong>Para o professor:</strong> A fórmula deve vir depois da intuição; use exemplos numéricos pequenos.</p>
+</div>
+<div class="check">
+<span class="rotulo">CHECKPOINT</span>
+<p>Uma operação linear pode ser auditada?</p>
+</div>
+
+<div class="mini-barras">
+<span class="rotulo-mini">RESULTADO VISUAL · SIMULADO × BACKEND</span>
+<div class="linha"><em>sim</em><div class="trilho"><span style="width:100%"></span></div><b>100%</b></div>
+<div class="linha"><em>backend</em><div class="trilho"><span style="width:94.3%"></span></div><b>94,3%</b></div>
+</div>
+
+<div class="rodape">P07 · C062/100 · L1615/3000 · <a class="gab" href="#g-062">[G062]</a> · <a class="ficha-link" href="#f-062">[F062]</a></div>
+:::

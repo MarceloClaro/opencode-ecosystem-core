@@ -1,0 +1,49 @@
+{
+  "id": "E12",
+  "nome": "QFT de 3 qubits",
+  "descricao": "A transformada de Fourier quântica uniformiza a saída.",
+  "conceitos": [
+    "fourier",
+    "fourier_quantico"
+  ],
+  "simulado": {
+    "counts": [
+      {
+        "111": 137,
+        "101": 126,
+        "000": 120,
+        "001": 132,
+        "011": 138,
+        "110": 118,
+        "100": 125,
+        "010": 128
+      }
+    ],
+    "leitura": "P(000) = 0.117 (ideal 0,125)",
+    "shots": 1024,
+    "metodo": "statevector + amostragem"
+  },
+  "real": {
+    "counts": [
+      {
+        "011": 120,
+        "110": 118,
+        "000": 123,
+        "010": 128,
+        "100": 126,
+        "101": 161,
+        "111": 111,
+        "001": 137
+      }
+    ],
+    "leitura": "P(000) = 0.120 (ideal 0,125)",
+    "task_ids": [
+      "2e281bbe-d26e-477f-8121-51485a7210d1"
+    ],
+    "backend": "Guoji08",
+    "shots": 1024,
+    "timestamp": "2026-11-07T00:29:38-0300"
+  },
+  "sobreposicao": 0.95703125,
+  "timestamp": "2026-11-07T00:25:54-0300"
+}

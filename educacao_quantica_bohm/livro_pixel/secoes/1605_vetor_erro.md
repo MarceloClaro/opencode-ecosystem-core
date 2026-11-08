@@ -1,0 +1,34 @@
+::: {.lauda .lente-erro .nivel-1}
+<div class="topo">
+  <span class="cod">L1605</span>
+  <span class="lente"><img class="ico" src="sprites/erro.png" alt=""> ERRO COMUM</span>
+  <span class="conc"><img class="ico-conceito" src="sprites_conceitos/C061.png" alt=""> N1 · C061 · VETOR</span>
+</div>
+<div class="xp"><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class="on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div>
+<h2 id="l-1605" class="titulo">Vetor — erro comum</h2>
+<div class="corpo">
+
+<p><strong>O erro comum:</strong> Escreva o vetor de H|0⟩ e calcule sua norma.</p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">向量</span> <em>xiàng liàng</em> <span class="tom">· tons 4-4 · leitura shiang-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">向量不是魔法。</span> <em>Xiàng liàng bú shì mó fǎ.</em> — “Vetor” não é magia.</span></p>
+<p><strong>Por que acontece:</strong> o cérebro procura uma imagem simples e apaga a parte matemática que não se encaixa.</p>
+<p><strong>Como testar:</strong> escreva um contraexemplo em uma frase e veja se ele derruba sua explicação.</p>
+
+</div>
+<div class="rigor">
+<span class="rotulo">RIGOR CIENTÍFICO</span>
+<p>A matemática é representação; não é o fenômeno. Não confunda o mapa com o território.</p>
+<p class="prof"><strong>Para o professor:</strong> A fórmula deve vir depois da intuição; use exemplos numéricos pequenos.</p>
+</div>
+<div class="check">
+<span class="rotulo">CHECKPOINT</span>
+<p>Quem pode visualizar um vetor de 50 qubits?</p>
+</div>
+
+<div class="mini-barras">
+<span class="rotulo-mini">RESULTADO VISUAL · SIMULADO × BACKEND</span>
+<div class="linha"><em>sim</em><div class="trilho"><span style="width:100%"></span></div><b>100%</b></div>
+<div class="linha"><em>backend</em><div class="trilho"><span style="width:98.9%"></span></div><b>98,9%</b></div>
+</div>
+
+<div class="rodape">P07 · C061/100 · L1605/3000 · <a class="gab" href="#g-061">[G061]</a> · <a class="ficha-link" href="#f-061">[F061]</a></div>
+:::

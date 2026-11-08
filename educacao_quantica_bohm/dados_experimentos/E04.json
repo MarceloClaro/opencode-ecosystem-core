@@ -1,0 +1,38 @@
+{
+  "id": "E04",
+  "nome": "Interferência H-Z-H",
+  "descricao": "A fase Z inverte a interferência: o resultado vira |1⟩.",
+  "conceitos": [
+    "fase",
+    "interferencia",
+    "equacao_guia",
+    "porta_z"
+  ],
+  "simulado": {
+    "counts": [
+      {
+        "1": 1024
+      }
+    ],
+    "leitura": "P(1) = 1.000 (ideal 1,000)",
+    "shots": 1024,
+    "metodo": "statevector + amostragem"
+  },
+  "real": {
+    "counts": [
+      {
+        "1": 1010,
+        "0": 14
+      }
+    ],
+    "leitura": "P(1) = 0.986 (ideal 1,000)",
+    "task_ids": [
+      "00a6d70a-0529-44da-a3c9-750446161f26"
+    ],
+    "backend": "Guoji08",
+    "shots": 1024,
+    "timestamp": "2026-11-07T00:27:58-0300"
+  },
+  "sobreposicao": 0.986328125,
+  "timestamp": "2026-11-07T00:25:54-0300"
+}
