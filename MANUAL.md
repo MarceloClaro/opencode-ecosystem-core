@@ -22,7 +22,7 @@ Não use esta contagem como indicador de cobertura, qualidade ou validação
 externa.
 
 <!-- core-state:start -->
-**337 agentes** · **30 MCPs** · **35 comandos** · **22 checks**
+**347 agentes** · **34 MCPs** · **35 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 
@@ -84,6 +84,10 @@ No OpenCode, use `/runtime-cientifico`, `/datasets` e `/plugins-cientificos`.
 - O [piloto R1055](pilots/r1055-qubit/README.md) tem arquivos MP4 locais em
   `pilots/r1055-qubit/out/`, não disponíveis num clone Git novo. Consulte
   [QC/hashes](reports/r1055/README.md) antes de revisar ou distribuir.
+- Vídeo promocional R1097: `python3 -m integrations.promo_video stages`,
+  `scaffold` e `audit` validam briefing, ritmo, capturas reais e proveniência;
+  a skill `promo-video-produtor` conduz o método. O módulo não renderiza nem
+  baixa mídia; o render usa o editor R1042/R1046 sob aprovação humana.
 
 - [ChatGPT/OpenAI, Gemini/Google e NotebookLM](docs/AUTENTICACAO_CHATGPT_NOTEBOOKLM.md)
   usam autenticações distintas. Login não comprova inferência, cota ou

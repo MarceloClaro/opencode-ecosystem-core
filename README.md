@@ -12,8 +12,8 @@
 [![Tests](https://img.shields.io/badge/tests-local%20suite-3b82f6?style=for-the-badge&logo=pytest)](tests/)
 <!-- core-badges:start -->
 [![Checks](https://img.shields.io/badge/checks-22%20estruturais-64748b?style=for-the-badge)](marceloclaro/doctor.py)
-[![MCP](https://img.shields.io/badge/MCP-30%20servers-8b5cf6?style=for-the-badge)](opencode.json)
-[![Agents](https://img.shields.io/badge/agents-337-7c3aed?style=for-the-badge)](agents/catalog)
+[![MCP](https://img.shields.io/badge/MCP-34%20servers-8b5cf6?style=for-the-badge)](opencode.json)
+[![Agents](https://img.shields.io/badge/agents-347-7c3aed?style=for-the-badge)](agents/catalog)
 <!-- core-badges:end -->
 [![Evidence](https://img.shields.io/badge/evidence--first-f59e0b?style=for-the-badge)](reports/r1054/README.md)
 
@@ -26,14 +26,14 @@
 [Manual](MANUAL.md) ·
 [Arquitetura](ARCHITECTURE.md)
 
-**Mapa rápido:** [Visão geral](#visão-geral) · [Pipeline](#pesquisador-científico-r1051-r1054) · [Capacidades](#capacidades-principais) · [Livro e clone](#o-que-entra-no-git-e-o-que-fica-local) · [Arquitetura](#arquitetura-em-60-segundos) · [Quickstart](#início-rápido-local) · [Evidência](#trilha-de-evidências) · [Documentação](#documentação) · [Roadmap](#roadmap)
+**Mapa rápido:** [Visão geral](#visão-geral) · [Pipeline](#pesquisador-científico-r1051-r1054) · [Capacidades](#capacidades-principais) · [GJQ](#gjq-r1099) · [Loop Engineering](#loop-engineering-r1100) · [Livro quântico](#livro-quantico-r1099) · [Livro e clone](#o-que-entra-no-git-e-o-que-fica-local) · [Arquitetura](#arquitetura-em-60-segundos) · [Quickstart](#início-rápido-local) · [Evidência](#trilha-de-evidências) · [Documentação](#documentação) · [Roadmap](#roadmap)
 
 <sub>Social preview: <a href="docs/images/social-preview.png">1280×640</a> · Maintained by <a href="https://github.com/MarceloClaro">Marcelo Claro Laranjeira</a></sub>
 
 </div>
 
 <!-- core-state:start -->
-**337 agentes** · **30 MCPs** · **35 comandos** · **22 checks**
+**347 agentes** · **34 MCPs** · **35 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 
@@ -76,6 +76,10 @@ fonte, qual hash e qual limite?”**.
   ASR, legendas, câmera por frames, mapa narrativo e QC técnico (piloto R1055).
 - **MCP e ferramentas locais** — servidores configurados, federação, probes e
   smoke tests delimitados.
+- **Pesquisa quântica e GJQ** — MCPs para E01–E18, pesquisa livre e simulação
+  local; Bell/CHSH com task ID, counts auditados e limites declarados.
+- **Loop Engineering** — projeto e auditoria de loops com trigger, parada
+  verificável, maker-checker, estado, orçamento e gates humanos.
 - **Book Studio e Molambudos** — fontes, testes, capas selecionadas e provas
   documentadas; os miolos compilados e pacotes de mídia não acompanham o clone.
 
@@ -94,6 +98,9 @@ fonte, qual hash e qual limite?”**.
 | Você quer… | Comece por… | Primeiro comando |
 |---|---|---|
 | Pesquisar um tema e chegar a um artigo | [Pipeline R1051–R1054](docs/SCIENTIFIC_RESEARCH_PIPELINE_R1054.md) | `research project --theme ... --dry-run` |
+| Pesquisar ou executar na GJQ | [GJQ R1099](#gjq-r1099) | `gjq_runtime_status` |
+| Projetar ou auditar um loop | [Loop Engineering R1100](#loop-engineering-r1100) | `python3 -m loops.loop_engineering ...` |
+| Ler ou recompilar o livro quântico | [Livro Do Bit ao Todo](#livro-quantico-r1099) | `./educacao_quantica_bohm/livro_pixel/build_pdf.sh` |
 | Auditar evidência e claims | [R1054](reports/r1054/README.md), [gate metacognitivo](mci/metacognitive_gate.py) | `research benchmark-meta ...` |
 | Construir ou registrar agentes | [AGENTS.md](AGENTS.md), [catálogo](agents/catalog) | `agentes list` |
 | Diagramar, editar e ilustrar um livro | [Book Studio](reports/r1078/README.md), [R1082](reports/r1082/README.md) | `python3 -m marceloclaro.bookstudio status` |
@@ -173,11 +180,78 @@ registrada, não escondida. Evidência:
 | REA | 🟡 com limites | inspeção local, camadas de provedores, recibos | formato, engine, licença e isolamento precisam ser conferidos |
 | Vídeo e dublagem | ✅ R1046–R1055 | multifaixa, TTS, ASR, legendas, mapa e câmera; piloto 16:9/9:16 nativo | render/QC técnico ≠ aprovação estética, naturalidade ou rigor científico |
 | MCP | 🟡 servidores configurados (inventário acima) | federação, probes, smoke, recibos | configuração ≠ disponibilidade no momento de uso |
+| Quântica e GJQ | 🟡 com limites | MCPs `gjq-experiments`, `gjq-runtime` e `quantum-sim-core`; agente e skills; Bell/CHSH no FAS-GPU | simulador; nenhum hardware executado; chave não versionada |
+| Loop Engineering | ✅ implementado/testado | skill, agente, auditor L0–L3 e harness | checklist não prova funcionamento; não executa loop nem auto-merge |
+| Livro quântico | ✅ build/testes | 3553 páginas, 3000 laudas, PDF versionado e build reproduzível | peer review, ISBN/DOI e tradução pendentes |
 | Governança | ✅ | gate metacognitivo, TrustEngine, slashing, EvolutionRegistry | `externally_supported` não é verdade absoluta |
 | Publicação | 🧭 gate | validação externa, aceite, autorização | nenhum upload/publicação automática |
 | Book Studio | 🟡 R1078–R1082 | KDP, tokens, licença, auditoria EPUB, capas e 6 pranchas de prova | arte final, 2× 300 DPI, CMYK/PDF-X e prova física pendentes |
 
 **Legenda:** ✅ implementado e testado; 🟡 implementado com limites; 🧪 experimental; 📋 apenas especificado.
+
+<a id="gjq-r1099"></a>
+## Pesquisa quântica e GJQ (R1099)
+
+A trilha quântica conecta a plataforma GJQ/CETC-ICQ ao Core por três MCPs,
+um agente e duas skills. O objetivo é tornar explícito o que foi simulado,
+o que foi medido, qual task ID sustenta cada número e qual limite permanece.
+
+| Componente | Entrega | Gate |
+|---|---|---|
+| MCP `gjq-experiments` | 7 ferramentas para E01–E18 pelo script canônico | `confirm=True` e JSON simulado antes do hardware |
+| MCP `gjq-runtime` | 12 ferramentas para backends, sampling, estimativa e tarefas | `confirm=True`; hardware só com `allow_hardware=True`; 200 qubits/100.000 shots/20 submissões |
+| MCP `quantum-sim-core` | 4 ferramentas para OpenQASM local | 12 qubits/10.000 shots; sem rede, arquivos ou código arbitrário |
+| Agente | `gjq-quantum-research` | proveniência, custo e limites |
+| Skills | `gjq-pesquisa-quantica`, `gjq-experimentos-quanticos` | fluxo e segurança |
+
+Resultados registrados em 2026-11-08 no backend `FAS-GPU` (simulador):
+
+| Experimento | Resultado | Leitura |
+|---|---|---|
+| Bell state | 1024 shots; `00`=507, `11`=517; auditoria ok | proporção 50/50 dentro da flutuação |
+| CHSH | `S=2,871094 ± 0,043506` | `S>2`; ~1 SE de `2√2=2,828427`; não excede Tsirelson |
+
+O livro também registra o CHSH no `Guoji08` (hardware), com `S=2,383`, em
+campanha anterior; a comparação com o simulador está no apêndice. O `Guoji08`
+não foi executado nesta rodada.
+
+Task IDs, counts e hashes QASM estão em `docs/gjq-runtime/*.json`; a conta
+completa está no [Apêndice GJQ](educacao_quantica_bohm/livro_pixel/GJQ_RESULTADOS.md).
+A chave `GJQ_API_KEY` nunca é versionada. Nenhum hardware foi executado nesta
+série; execução real exige chave, conta e autorização de custo.
+
+Docs: [GJQ R1099](docs/GJQ_PESQUISA_QUANTICA_R1099.md) ·
+[auditoria de MCPs](docs/AUDITORIA_MCPS_QUANTICOS_R1099.md) ·
+[catálogo de repositórios](docs/REPOSITORIOS_QUANTICOS.md).
+
+<a id="loop-engineering-r1100"></a>
+## Loop Engineering (R1100)
+
+O Core passou a ter uma camada de projeto e auditoria de loops: a skill
+`loop-engineering`, o agente `loop-engineering-architect`, o auditor
+`loops/loop_engineering.py` e o harness. Ela não executa loops, não instala
+CLI npm e não habilita auto-merge.
+
+```bash
+python3 -m loops.loop_engineering specs/loops/harness-reasoning-97.md
+```
+
+O auditor pontua 10 dimensões e classifica L0–L3. Gates críticos: stop/hard
+cap, verificação independente, maker-checker, estado durável e safety.
+
+| Caso | Score | Nível calculado | Nível permitido |
+|---|---:|---|---|
+| Spec completa (teste) | 10,0 | L3 | L3 |
+| Spec com maker=checker, sem stop/estado e auto-merge (teste) | 5,0 | L1 | L1 |
+| `harness-reasoning-97.md` | 7,25 | L2 | L1 (0 dias de L1) |
+
+L3 exige **7 dias de L1 observado**; L2 exige 1 dia. O resultado sempre declara
+`human_review_required=true` e `scientifically_validated=false`. O checklist
+não prova que o loop funciona; ele mostra o que falta documentar.
+
+Docs: [Loop Engineering R1100](docs/LOOP_ENGINEERING_R1100.md) ·
+[spec](specs/SPEC-935-R1100-loop-engineering.md) ·
+[harness](harnesses/loop-engineering/HARNESS.md).
 
 ## Book Studio e Molambudos (R1078–R1082)
 
@@ -224,6 +298,14 @@ foi enviada à KDP nem publicada por esta rodada.
 | [README do Molambudos](literatura/molambudos/README.md), fontes `.tex/.md`, manifestos e [capas selecionadas](literatura/molambudos/capas/molambudos_final/manifesto.json) (PDFs e PNGs de capa especificados) | PDFs de **miolo**, EPUBs, áudio, vídeo, ZIPs e o caderno de prova em PDF; seus manifestos não os recriam automaticamente |
 | [Pranchas e preflight rastreados](reports/r1082/plate_proof/plates_manifest.json) | Parte da arte original fora da seleção Git, arte nova a 2× e prova gráfica física |
 
+### Livro quântico: PDF versionado
+
+O PDF de **3553 páginas** e **3000 laudas** está versionado em
+`educacao_quantica_bohm/livro_pixel/LIVRO_3000_LAUDAS.pdf` (21.053.947 bytes).
+O HTML e as fontes também estão no Git; o `.venv-pdf` é local e recriado por
+`build_pdf.sh`. O build usa `pyphen==0.16.0` com dicionário `pt_BR` para
+hifenizar o corpo. Ver [BUILD_PDF.md](educacao_quantica_bohm/livro_pixel/BUILD_PDF.md).
+
 Esta é uma política **deny-by-default para novos arquivos em `literatura/`**:
 fontes/documentos escolhidos entram, segredos e artefatos de build ficam de
 fora. O `.gitignore` não faz varredura de segredos e não remove objetos já
@@ -242,6 +324,34 @@ python3 -m marceloclaro.cli doctor
 
 Os testes do Book Studio que dependem de PDFs excluídos podem ser ignorados
 (`skip`) num clone sem os artefatos; testes coletados não são testes aprovados.
+
+<a id="livro-quantico-r1099"></a>
+## Livro Do Bit ao Todo (R1099)
+
+O livro **3000 Laudas de Física Quântica: do bit ao todo** está em
+`educacao_quantica_bohm/livro_pixel/` com:
+
+- **3000 laudas**, **100 fichas** e **400 notas de cálculo**;
+- **3553 páginas** no PDF final;
+- **3000 códigos únicos** de lauda;
+- **PDF versionado** em `LIVRO_3000_LAUDAS.pdf` (21.053.947 bytes);
+- apêndice GJQ com Bell, CHSH, task IDs e contas;
+- corpo justificado e hifenizado em pt-BR; notas e legendas à esquerda.
+
+Build reproduzível:
+
+```bash
+./educacao_quantica_bohm/livro_pixel/build_pdf.sh
+```
+
+O script cria `.venv-pdf` com `pyphen==0.16.0` (dicionário `pt_BR`) e chama
+`build_pixel_fast.py`. O `.venv-pdf` é local; o PDF e o HTML são versionados.
+Ver [BUILD_PDF.md](educacao_quantica_bohm/livro_pixel/BUILD_PDF.md) e
+[Apêndice GJQ](educacao_quantica_bohm/livro_pixel/GJQ_RESULTADOS.md).
+
+**Limites:** o PDF é um artefato de build; não houve peer review, ISBN/DOI,
+tradução inglesa ou estudo de eficácia. 59 testes do livro passam no escopo
+local; isso não é validação externa.
 
 ## Arquitetura em 60 segundos
 
@@ -347,9 +457,9 @@ cd opencode-ecosystem-core
 .venv/bin/python -m marceloclaro.cli doctor
 ```
 
-Neste checkout foram observados **22/22 checks estruturais**; rode o `doctor`
-novamente na sua instalação. Uma passagem local não prova autenticação,
-inferência ou validação externa.
+Neste checkout foram observados **21/22 checks estruturais**, com **1 aviso**
+de runtime Colibri ausente; rode o `doctor` novamente na sua instalação. Uma
+passagem local não prova autenticação, inferência ou validação externa.
 
 Primeiro projeto de pesquisa, sem rede:
 
@@ -389,6 +499,12 @@ não é aceite editorial.
 | [Piloto R1055](pilots/r1055-qubit/README.md) | vídeo de qubit, fontes, código e limites |
 | [Molambudos](literatura/molambudos/README.md) | edições, fontes, capas e limites do clone |
 | [Política Git R1084](specs/SPEC-935-R1084-git-policy-readme-reconciliation.md) | allowlist, testes e divergência de paginação |
+| [GJQ R1099](docs/GJQ_PESQUISA_QUANTICA_R1099.md) | MCPs, backends, auditoria e resultados Bell/CHSH |
+| [Auditoria de MCPs R1099](docs/AUDITORIA_MCPS_QUANTICOS_R1099.md) | hashes, licenças e bloqueios dos MCPs de terceiro |
+| [Loop Engineering R1100](docs/LOOP_ENGINEERING_R1100.md) | skill, agente, auditor L0–L3 e limites |
+| [Spec R1100](specs/SPEC-935-R1100-loop-engineering.md) | contrato do Loop Engineering |
+| [Livro quântico — build](educacao_quantica_bohm/livro_pixel/BUILD_PDF.md) | PDF versionado, `.venv-pdf` e hifenização |
+| [Apêndice GJQ do livro](educacao_quantica_bohm/livro_pixel/GJQ_RESULTADOS.md) | Bell, CHSH, task IDs e contas |
 | [Vídeo R1058](pilots/r1058-airam-veras/README.md) | plano de ação Airam Veras, mapa, cronograma e exemplos |
 | [Atlas animado R1056](docs/architecture/ANIMATED.md) | GIF/PNG/SVG e Mermaid de todos os diagramas do escopo |
 | [Reprodução R1056](reports/r1056/README.md) | exportador local, cobertura, testes e hashes |
@@ -411,6 +527,8 @@ não é aceite editorial.
 | R1055 | ✅ técnico; revisão humana pendente | vídeo didático de qubit, câmera, mapa e versões 16:9/9:16 |
 | R1056 | ✅ documental; não valida runtime | atlas animado, fontes preservadas, manifesto e testes |
 | R1078–R1084 | 🟡 estúdio editorial; publicação bloqueada | Book Studio, fontes e capas versionadas; revisão de lombada, CMYK/PDF-X e prova física pendentes |
+| R1099 | ✅ build/testes locais | livro quântico 3553 pp, GJQ MCPs, 20 revisores e PDF versionado |
+| R1100 | ✅ | Loop Engineering: skill, agente, auditor L0–L3 e harness |
 | Próximos ciclos | 🧭 | backend real de submissão, perfis brasileiros, UI, tabelas e validação externa assistida |
 
 O roadmap é uma direção, não uma promessa de data. Cada ciclo só é marcado
@@ -620,7 +738,9 @@ Nenhum código de terceiro foi copiado ou executado; instruções permissivas fo
 
 **Macro-rede e gate metacognitivo (R1050):** `mci/macro_network.py` projeta
 **584 nós e 776 arestas** no snapshot local conferido em 06/11/2026 — orquestrador, 337 agentes, 54 skills, 177
-skills K-Dense, 11 categorias e 4 gates. `mci/metacognitive_gate.py` impede que
+skills K-Dense, 11 categorias e 4 gates. O inventário de configuração atual
+tem **347 agentes** e **64 skills**; o grafo precisa ser regenerado para
+refletir os novos perfis. `mci/metacognitive_gate.py` impede que
 confiança, voto, nota ou payoff virem verdade; o conselho ganhou
 `validate_claims` com evidência literal, falseabilidade, mecanismo e
 contradições. Ver [evidência R1050](reports/r1050/README.md) e
@@ -1137,8 +1257,8 @@ flowchart TB
     Orq2 --> TDDRunner2[TDDRunner]
     Orq2 --> MetaBus2[MetaBus]
     Orq2 --> Blackboard2[Blackboard]
-    Orq2 --> MCP2[30 MCPs configurados]
-    Orq2 --> Agents2[337 agentes configurados]
+    Orq2 --> MCP2[34 MCPs configurados]
+    Orq2 --> Agents2[347 agentes configurados]
     Orq2 --> Mira2[mira-presenter]
     Mira2 --> Deck2[MiraDeckPipeline]
     Deck2 --> Engine2[MiraEngine]
@@ -2729,6 +2849,9 @@ execução de todas as integrações disponíveis na sua máquina.
 | [Arquitetura R879](docs/architecture/verification-local-r879.json) | 58 testes na invocação final, 13 renders Mermaid e 78 âncoras conferidas | Gerador, página, documentação e verificação de segredos; não repete a suíte integral |
 | [Orquestração real](docs/evidencias-r868/verificacao-final.json) | Codex retornou `15` para `8 + 7` em 9,303 s | Uma tarefa textual somente com leitura, sem alvo REA |
 | [Inspeção REA direta](docs/evidencias-r868/analise-direta-controlada.json) | HTML controlado de 115 bytes, dois achados, alvo intocado | Caminho direto local; não comprova todos os formatos ou engines |
+| [Loop Engineering R1100](docs/LOOP_ENGINEERING_R1100.md) | 8 testes R1100; 43 na integração R1100/R1099/R917/R920 | Checklist e integração local; não prova funcionamento de loop |
+| [Livro quântico R1099](educacao_quantica_bohm/livro_pixel/BUILD_PDF.md) | 59 testes do livro; PDF 3553 pp; 3000 códigos | Build local; não é peer review |
+| [GJQ R1099](docs/GJQ_PESQUISA_QUANTICA_R1099.md) | 4 testes `gjq-runtime` + 5 `quantum-sim-core`; Bell/CHSH no FAS-GPU | Simulador; nenhum hardware executado |
 
 A análise REA autônoma pelo LLM local permanece sem entrega aceita nos registros.
 O lint global possui pendências. A CI remota não foi executada nesses recibos;
@@ -2857,8 +2980,9 @@ O [prefácio ampliado R909](docs/PREFACIO_ASSINATURA_COGNITIVA_R909.md) discute 
 ### Integridade operacional
 
 O diagnóstico estrutural R868 registrou 22 checks aprovados, com alcance
-`installation_only`. Autenticação, inferência e execução de cada operação
-exigem seus próprios recibos. Configuração, memória privada, evidências de
+`installation_only`. No checkout atual (2026-11-08), o `doctor` registra
+**21/22 checks** e **1 aviso** de runtime Colibri ausente. Autenticação,
+inferência e execução de cada operação exigem seus próprios recibos. Configuração, memória privada, evidências de
 alvos e resultados locais completos ficam fora do Git conforme
 [as regras de reprodução](docs/REPOSITORIO_REPRODUZIVEL.md).
 

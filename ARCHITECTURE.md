@@ -20,7 +20,7 @@ python3 -c "import json; c=json.load(open('opencode.json', encoding='utf-8')); p
 ```
 
 <!-- core-state:start -->
-**337 agentes** · **30 MCPs** · **35 comandos** · **22 checks**
+**347 agentes** · **34 MCPs** · **35 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 
@@ -174,24 +174,28 @@ As entradas abaixo são derivadas das chaves `mcp` de `opencode.json`:
 10. `educacao-legislacao`;
 11. `fetch`;
 12. `filesystem`;
-13. `latexmk-mcp`;
-14. `litert-lm`;
-15. `mcp-memory`;
-16. `mcp-time`;
-17. `metacognitive-interconnect`;
-18. `oa-resolver`;
-19. `playwright`;
-20. `polymath-labs-mcp`;
-21. `pypi-search`;
-22. `qdrant`;
-23. `rea`;
-24. `remotion-audit`;
-25. `scanners-mcp`;
-26. `scientific-data`;
-27. `sequential-thinking`;
-28. `servers`;
-29. `storage-operator`;
-30. `web-deploy-mcp`;
+13. `gjq-experiments`;
+14. `gjq-runtime`;
+15. `latexmk-mcp`;
+16. `litert-lm`;
+17. `livro-quantico`;
+18. `mcp-memory`;
+19. `mcp-time`;
+20. `metacognitive-interconnect`;
+21. `oa-resolver`;
+22. `playwright`;
+23. `polymath-labs-mcp`;
+24. `pypi-search`;
+25. `qdrant`;
+26. `quantum-sim-core`;
+27. `rea`;
+28. `remotion-audit`;
+29. `scanners-mcp`;
+30. `scientific-data`;
+31. `sequential-thinking`;
+32. `servers`;
+33. `storage-operator`;
+34. `web-deploy-mcp`;
 <!-- core-mcp:end -->
 
 O MCP `ecosystem-network` conecta o `MarceloClaroOrchestrator`, o roteamento
@@ -311,6 +315,15 @@ preto/silêncio; conformidade de fps com arredondamento explícito; transições
 restringem protocolos/formatos. Isso não é paridade com Premiere/DaVinci: não
 há UI NLE, keyframes, LUT/ACES/HDR, tracking, multicam ou aprovação estética
 automática.
+
+A R1097 acrescenta, em `integrations/promo_video.py`, o pipeline editorial de
+vídeo promocional: 11 estágios, briefing com aprovação humana obrigatória,
+storyboard medido em segundos, quota de 8+ capturas reais distintas, capturas
+4K com proporção preservada, claims com fonte/localizador e recibo técnico de
+entrega. O módulo só valida JSON; não renderiza, não baixa mídia, não abre
+arquivos e não instala dependências. O render continua no editor R1042/R1046 e
+no gate Remotion R1025. `ready_for_render` não é autorização de render;
+`delivery_verified` não é aprovação estética, de voz ou científica.
 
 A dublagem é uma cadeia separada: `dubbing_batch` prepara as partes,
 `dubbing_evidence` coleta OCR, `video_diarization_nemotron` identifica locutores,
