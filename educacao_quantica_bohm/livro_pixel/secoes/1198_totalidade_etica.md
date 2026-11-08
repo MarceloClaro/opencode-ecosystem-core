@@ -10,14 +10,11 @@
 
 <p>Quem se beneficia de uma narrativa de 'todo harmônico'?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">整体性</span> <em>zhěng tǐ xìng</em> <span class="tom">· tons 3-3-4 · leitura djeng-ti-shing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于整体性？</span> <em>Shéi shòu yì yú zhěng tǐ xìng?</em> — Quem se beneficia de “Totalidade”?</span></p>
-<p><strong>Quem ganha? Quem perde?</strong> Liste um grupo que se beneficia e um que pode ser prejudicado.</p>
-<p><strong>O que a escola pode fazer?</strong> Transforme o dilema em uma pergunta investigável, não em um julgamento pessoal.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A totalidade aparece na física, na ecologia e na pedagogia.</p>
-<p class="prof"><strong>Para o professor:</strong> Diga 'interpretação', não 'prova'. Compare com a leitura padrão e nomeie o preço: não localidade.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

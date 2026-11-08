@@ -11,13 +11,11 @@
 <p><strong>O erro comum:</strong> Achar que 50% significa exatamente 5 caras em 10 lançamentos.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">概率</span> <em>gài lǜ</em> <span class="tom">· tons 4-4 · leitura gai-lyu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">概率不是魔法。</span> <em>Gài lǜ bú shì mó fǎ.</em> — “Probabilidade” não é magia.</span></p>
 <p><strong>Correção formal:</strong> A lei dos grandes números explica por que a frequência se estabiliza.</p>
-<p>Teste a correção com um exemplo numérico pequeno.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Uma amostra pequena flutua; a probabilidade não garante o próximo resultado.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

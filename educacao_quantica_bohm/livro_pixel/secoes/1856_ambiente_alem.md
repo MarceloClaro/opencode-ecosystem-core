@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>A LGPD exige base legal, finalidade e transparência.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">环境</span> <em>huán jìng</em> <span class="tom">· tons 2-4 · leitura ruan-djing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解环境。</span> <em>Shēn rù liǎo jiě huán jìng.</em> — Aprofunde-se em “Ambiente”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Energia ilustrativa = potência × tempo.<br><strong>Conta:</strong> Se 1 shot gasta 0,1 J, 4096 shots gastam 409,6 J.<br><strong>Resultado:</strong> 409,6 J ≈ 0,11 Wh (conta ilustrativa).<br><em>Limite:</em> Os números são ilustrativos; a pegada real depende da infraestrutura.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">环境</span> <em>huán jìng</em> <span class="tom">· tons 2-4 · leitura ruan-djing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解环境。</span> <em>Shēn rù liǎo jiě huán jìng.</em> — Aprofunde-se em “Ambiente”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Energia ilustrativa = potência × tempo.<br><strong>Conta:</strong> Se 1 shot gasta 0,1 J, 4096 shots gastam 409,6 J.<br><strong>Resultado:</strong> 409,6 J ≈ 0,11 Wh (conta ilustrativa).<br><em>Limite:</em> Os números são ilustrativos; a pegada real depende da infraestrutura.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Ética envolve valores e poder. Não há resposta automática; há deliberação e consequências.</p>
-<p class="prof"><strong>Para o professor:</strong> Não transforme ética em opinião pessoal: peça evidência, afetados e alternativas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

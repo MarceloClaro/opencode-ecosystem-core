@@ -10,14 +10,12 @@
 
 <p>A fidelidade proxy mede a população ideal, não a pureza do estado.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">实验多体态</span> <em>shí yàn duō tǐ tài</em> <span class="tom">· tons 2-4-1-3-4 · leitura shi-ien-duo-ti-tai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解实验多体态。</span> <em>Shēn rù liǎo jiě shí yàn duō tǐ tài.</em> — Aprofunde-se em “GHZ real”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> O teste é pequeno; não generaliza para outros dados ou modelos.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Fidelidade proxy = (N0000 + N1111)/N.<br><strong>Conta:</strong> Guoji08: (418+389)/1024 = 807/1024 = 0,7881.<br><strong>Resultado:</strong> 78,8% no Guoji08; Baihua: (437+230)/1024 = 667/1024 = 65,1%.<br><em>Limite:</em> A proxy não mede a fase nem o estado completo.</span></p>
+<p><strong>O que ainda não sabemos:</strong> O teste é pequeno; não generaliza para outros dados ou modelos. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Fidelidade proxy = (N0000 + N1111)/N.<br><strong>Conta:</strong> Guoji08: (418+389)/1024 = 807/1024 = 0,7881.<br><strong>Resultado:</strong> 78,8% no Guoji08; Baihua: (437+230)/1024 = 667/1024 = 65,1%.<br><em>Limite:</em> A proxy não mede a fase nem o estado completo.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O teste é pequeno; não generaliza para outros dados ou modelos.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -11,13 +11,11 @@
 <p>Uma peneira que separa grãos por tamanho.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">分类器</span> <em>fēn lèi qì</em> <span class="tom">· tons 1-4-4 · leitura fen-lei-tchi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像分类器。</span> <em>Zhè xiàng fēn lèi qì.</em> — Isto se parece com “Classificador”.</span></p>
 <p><strong>Limite formal:</strong> O teste é pequeno; não generaliza para outros dados ou modelos.</p>
-<p>Construa um contraexemplo quantitativo e verifique se a analogia sobrevive.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O teste é pequeno; não generaliza para outros dados ou modelos.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

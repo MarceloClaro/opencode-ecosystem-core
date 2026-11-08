@@ -10,12 +10,6 @@
 
 <p>Uma pegada não conta a história inteira; evidência precisa de interpretação.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">证据</span> <em>zhèng jù</em> <span class="tom">· tons 4-4 · leitura djeng-djyu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习证据。</span> <em>Liàn xí zhèng jù.</em> — Pratique “Evidência”.</span></p>
-<ol>
-<li>Faça a atividade sem pressa, em 5 minutos.</li>
-<li>Anote o que esperava antes de começar.</li>
-<li>Compare a previsão com o que observou.</li>
-</ol>
-<p><strong>O que observar:</strong> a diferença entre o que você esperava e o que aconteceu é o dado mais valioso.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -32,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Todo projeto é um recorte. Declare limite, evidência e o que ficou fora.</p>
-<p class="prof"><strong>Para o professor:</strong> Exija um limite específico; 'tem limitações' não é suficiente.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

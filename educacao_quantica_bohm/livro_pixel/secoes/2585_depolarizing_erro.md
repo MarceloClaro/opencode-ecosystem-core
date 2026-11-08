@@ -11,13 +11,11 @@
 <p><strong>O erro comum:</strong> Aumente p e observe a margem até o limiar.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">去极化</span> <em>qù jí huà</em> <span class="tom">· tons 4-2-4 · leitura tchyu-dji-rua</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">去极化不是魔法。</span> <em>Qù jí huà bú shì mó fǎ.</em> — “Depolarizing” não é magia.</span></p>
 <p><strong>Correção formal:</strong> A fidelidade proxy mede a população ideal, não a pureza do estado.</p>
-<p>Teste a correção com um exemplo numérico pequeno.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O teste é pequeno; não generaliza para outros dados ou modelos.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -10,13 +10,11 @@
 
 <p><strong>Tarefa:</strong> Uma dependência externa pode comprometer a soberania de dados?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">天宫</span> <em>tiān gōng</em> <span class="tom">· tons 1-1 · leitura tien-gong</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了天宫。</span> <em>Wǒ xué huì le tiān gōng.</em> — Eu aprendi “Tiangong”.</span></p>
-<p><strong>Diário:</strong> o que entendi? onde travei? o que vou testar amanhã?</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Backend tem ruído; um número não prova o estado.</p>
-<p class="prof"><strong>Para o professor:</strong> Ruído, leitura e calibração são coisas distintas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

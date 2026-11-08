@@ -10,14 +10,12 @@
 
 <p>Bohm publicou a teoria em 1952; ela reproduz as previsões não relativísticas.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">导波</span> <em>dǎo bō</em> <span class="tom">· tons 3-1 · leitura dau-bo</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解导波。</span> <em>Shēn rù liǎo jiě dǎo bō.</em> — Aprofunde-se em “Onda piloto”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> O rio é matemático e, para várias partículas, vive em muitas dimensões.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> ψ = R e^{iS/ħ}; a velocidade guiada é v = ∇S/m.<br><strong>Conta:</strong> Para uma onda plana, S = ħkx; então ∇S = ħk e v = ħk/m.<br><strong>Resultado:</strong> v = ħk/m; a fase codifica o momento.<br><em>Limite:</em> A onda piloto é uma interpretação; a previsão coincide com a mecânica quântica usual.</span></p>
+<p><strong>O que ainda não sabemos:</strong> O rio é matemático e, para várias partículas, vive em muitas dimensões. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> ψ = R e^{iS/ħ}; a velocidade guiada é v = ∇S/m.<br><strong>Conta:</strong> Para uma onda plana, S = ħkx; então ∇S = ħk e v = ħk/m.<br><strong>Resultado:</strong> v = ħk/m; a fase codifica o momento.<br><em>Limite:</em> A onda piloto é uma interpretação; a previsão coincide com a mecânica quântica usual.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O rio é matemático e, para várias partículas, vive em muitas dimensões.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

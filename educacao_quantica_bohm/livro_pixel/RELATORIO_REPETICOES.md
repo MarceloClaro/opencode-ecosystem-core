@@ -5,9 +5,10 @@
 > repetição editorial sem função é candidata a corte na edição enxuta.
 
 - Laudas analisadas: **3000**
-- Palavras (texto limpo): **451.411**
-- Parágrafos repetidos (≥ 2 ocorrências): **21.031**
-- N-gramas distintos: **48.154**
+- Palavras (texto limpo): **375.141**
+- Parágrafos repetidos (≥ 2 ocorrências): **15.178**
+- Baseline R1099: **21.031** parágrafos repetidos; após a poda R1102: **15.178**.
+- N-gramas distintos: **43.819**
 
 ## 1. Laudas por lente
 
@@ -28,36 +29,36 @@
 
 | Ocorrências | Parágrafo |
 |---:|---|
-| 1000 | Para pesquisa: repita com outra seed/backend. |
-| 200 | Para o professor: Diga 'interpretação', não 'prova'. |
-| 179 | RIGOR CIENTÍFICO A matemática é representação; não é o fenômeno. |
+| 169 | RIGOR CIENTÍFICO A matemática é representação; não é o fenômeno. |
 | 146 | Registre a diferença e uma possível explicação. |
 | 146 | O que observar: não basta acertar; é preciso explicar por que acertou. |
-| 100 | Para o professor: Comece pelo concreto; só depois use a notação. |
 | 100 | Desenhe a imagem e marque com um X o ponto em que ela falha. |
-| 100 | Faça em 5 minutos; anote o que esperava antes de começar. |
-| 100 | Como não cair: escreva um contraexemplo e teste com um colega. |
-| 100 | Guarde uma pergunta para a próxima aula; não precisa resolver tudo hoje. |
-| 100 | Ouça sem interromper; anote uma ideia que mudou sua opinião. |
-| 100 | Onde isso aparece: procure um exemplo na sua casa ou na escola. |
-| 100 | Para o professor: Confira a ordem dos qubits antes de comparar. |
-| 100 | Para o professor: Se as bibliotecas divergirem, verifique a convenção. |
-| 100 | Para o professor: Ruído, leitura e calibração são coisas distintas. |
-| 100 | Para o professor: Explique o teto e o tamanho da amostra. |
-| 100 | Para o professor: Use exemplos pequenos antes da fórmula. |
-| 100 | Para o professor: Nanoaula é tempo e evidência, não fragmento. |
-| 100 | Para o professor: Peça evidência, afetados e alternativas. |
-| 100 | Para o professor: Exija um limite específico. |
-| 100 | Para o professor: Use a notação de ket apenas depois do concreto; verifique P(0)+P(1)=1. |
-| 100 | Teste rápido: desenhe a analogia e marque com um X o ponto em que ela deixa de explicar o conceito. |
-| 100 | Por que acontece: o cérebro procura uma imagem simples e apaga a parte matemática que não se encaixa. |
-| 100 | Como testar: escreva um contraexemplo em uma frase e veja se ele derruba sua explicação. |
-| 100 | Conexão científica: este é o ponto em que a intuição precisa dar lugar a uma definição precisa. |
-| 100 | A caixa de rigor abaixo guarda essa definição. |
-| 100 | Para ir além: procure um exemplo em que a ideia falha e explique por quê. |
-| 100 | Roteiro de 9 minutos: 1 minuto de silêncio; 4 minutos de falas sem interrupção; 2 minutos de respostas ao que foi ouvido; 2 minutos de síntese. |
-| 100 | Regra: não corrija a fala do outro; pergunte o que o levou a dizer aquilo. |
-| 100 | Registre: uma suposição que apareceu e uma pergunta nova. |
+| 100 | Fidelidade proxy não é prova de emaranhamento. |
+| 100 | Não há método com efeito garantido para toda turma. |
+| 100 | Não há resposta automática; há deliberação e consequências. |
+| 100 | Declare limite, evidência e o que ficou fora. |
+| 100 | Governança: quem audita, quem responde e como reparar? |
+| 90 | RIGOR CIENTÍFICO Backends têm ruído, calibração e deriva. |
+| 90 | RIGOR CIENTÍFICO Quatro pontos e 1024 tiros não generalizam. |
+| 90 | RIGOR CIENTÍFICO Ética envolve valores e poder. |
+| 90 | RIGOR CIENTÍFICO O resultado de hoje não garante o de amanhã; calibração muda. |
+| 90 | RIGOR CIENTÍFICO O teste é pequeno; não generaliza para outros dados ou modelos. |
+| 90 | RIGOR CIENTÍFICO A técnica não funciona igual para todos os estudantes. |
+| 90 | RIGOR CIENTÍFICO Não há consenso moral automático; há trade-offs. |
+| 90 | RIGOR CIENTÍFICO O projeto não esgota o problema; escolhe um recorte. |
+| 89 | RIGOR CIENTÍFICO A equação não explica por que o mundo segue a equação. |
+| 80 | RIGOR CIENTÍFICO Medir produz uma amostra; não é ler um valor escondido. |
+| 80 | RIGOR CIENTÍFICO Bohm é uma interpretação entre várias; não é consenso. |
+| 80 | RIGOR CIENTÍFICO Circuito é um modelo; a ordem dos qubits importa. |
+| 80 | RIGOR CIENTÍFICO Bibliotecas simulam; convenções podem mudar o resultado. |
+| 80 | RIGOR CIENTÍFICO Backend tem ruído; um número não prova o estado. |
+| 80 | RIGOR CIENTÍFICO Amostra pequena não generaliza; 4 pontos não são um artigo. |
+| 80 | RIGOR CIENTÍFICO Pedagogia é contextual; não há método garantido. |
+| 80 | RIGOR CIENTÍFICO Ética envolve valores e poder; não há resposta automática. |
+| 80 | RIGOR CIENTÍFICO Todo projeto é um recorte; declare o limite. |
+| 64 | Simulado: P(0000)+P(1111) = 1,000 (ideal 1,000) Backend: P(0000)+P(1111) = 0,788 (ideal 1,000) Sobreposição: 78,8% · task: — Sobreposição ≠ fidelidade de estado. |
+| 58 | Simulado: ⟨Z⟩ = +0,008, ⟨X⟩ = +1,000 (ideal 0, +1) Backend: ⟨Z⟩ = +0,035, ⟨X⟩ = +0,984 (ideal 0, +1) Sobreposição: 98,9% · task: 9da79d10 Sobreposição ≠ fidelidade de estado. |
+| 56 | RESULTADO · SIMULADO × BACKEND Experimento: Esfera de Bloch — Mede Z e X do estado H&#124;0⟩. |
 
 ## 3. N-gramas mais repetidos (5 palavras)
 
@@ -70,10 +71,6 @@
 | 2400 | backend sim backend p c |
 | 2400 | sim backend p c l |
 | 2400 | backend p c l g |
-| 1000 | para pesquisa repita com outra |
-| 1000 | pesquisa repita com outra seed |
-| 1000 | repita com outra seed backend |
-| 1000 | com outra seed backend checkpoint |
 | 578 | sobreposição fidelidade de estado script |
 | 578 | fidelidade de estado script scripts |
 | 578 | de estado script scripts experimentos |
@@ -84,15 +81,19 @@
 | 578 | py e guoji oficina e |
 | 578 | e guoji oficina e código |
 | 578 | guoji oficina e código e |
-| 400 | outra seed backend checkpoint você |
-| 400 | seed backend checkpoint você consegue |
+| 400 | oficina e código e rigor |
+| 400 | e código e rigor científico |
 | 360 | ponte sonora termo liàng z |
-| 340 | outra seed backend checkpoint quem |
 | 300 | lauda lente ideia nivel l |
 | 300 | lente ideia nivel l ideia |
 | 300 | ideia nivel l ideia em |
 | 300 | nivel l ideia em s |
 | 300 | l ideia em s n |
+| 300 | ideia em s n c |
+| 300 | sh hé x n gài |
+| 300 | hé x n gài niàn |
+| 300 | é o conceito central leia |
+| 300 | o conceito central leia em |
 
 ## 4. Leitura
 

@@ -28,7 +28,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Em hardware real, o GHZ perde coerência rapidamente com o número de qubits.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

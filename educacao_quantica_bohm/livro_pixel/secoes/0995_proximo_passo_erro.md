@@ -10,13 +10,11 @@
 
 <p><strong>O erro comum:</strong> Escreva uma ação para amanhã, uma para a semana e uma para o mês.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">下一步</span> <em>xià yí bù</em> <span class="tom">· tons 4-2-4 · leitura shia-i-bu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">下一步不是魔法。</span> <em>Xià yí bù bú shì mó fǎ.</em> — “Próximo passo” não é magia.</span></p>
-<p><strong>Como não cair:</strong> escreva um contraexemplo e teste com um colega.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Todo projeto é um recorte; declare o limite.</p>
-<p class="prof"><strong>Para o professor:</strong> Exija um limite específico.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

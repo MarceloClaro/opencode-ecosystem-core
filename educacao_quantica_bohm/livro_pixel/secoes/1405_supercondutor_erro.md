@@ -10,14 +10,11 @@
 
 <p><strong>O erro comum:</strong> Achar que o chip fica na sala de aula; ele fica no criostato.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">超导体</span> <em>chāo dǎo tǐ</em> <span class="tom">· tons 1-3-3 · leitura tchau-dau-ti</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">超导体不是魔法。</span> <em>Chāo dǎo tǐ bú shì mó fǎ.</em> — “Supercondutor” não é magia.</span></p>
-<p><strong>Por que acontece:</strong> o cérebro procura uma imagem simples e apaga a parte matemática que não se encaixa.</p>
-<p><strong>Como testar:</strong> escreva um contraexemplo em uma frase e veja se ele derruba sua explicação.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Backends têm ruído, calibração e deriva. Fidelidade proxy não é prova de emaranhamento.</p>
-<p class="prof"><strong>Para o professor:</strong> T1, T2, erro de leitura e ruído de porta são coisas distintas; não os trate como um número único.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

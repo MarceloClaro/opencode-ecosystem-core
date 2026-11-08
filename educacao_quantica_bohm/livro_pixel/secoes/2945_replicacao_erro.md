@@ -11,13 +11,11 @@
 <p><strong>O erro comum:</strong> Anote ambiente, seed, shots e versões.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">复现</span> <em>fù xiàn</em> <span class="tom">· tons 4-4 · leitura fu-shien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">复现不是魔法。</span> <em>Fù xiàn bú shì mó fǎ.</em> — “Replicação” não é magia.</span></p>
 <p><strong>Correção formal:</strong> Um bom projeto declara o que não prova.</p>
-<p>Teste a correção com um exemplo numérico pequeno.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O projeto não esgota o problema; escolhe um recorte.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

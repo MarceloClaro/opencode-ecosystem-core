@@ -11,13 +11,11 @@
 <p>Tirar várias fotos para estimar a frequência de um evento.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">采样</span> <em>cǎi yàng</em> <span class="tom">· tons 3-4 · leitura tsai-iang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像采样。</span> <em>Zhè xiàng cǎi yàng.</em> — Isto se parece com “Amostragem”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> A amostra não é o estado; é uma sombra estatística.</p>
-<p><strong>Teste rápido:</strong> desenhe a analogia e marque com um X o ponto em que ela deixa de explicar o conceito.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O erro padrão cai com a raiz do número de tiros.</p>
-<p class="prof"><strong>Para o professor:</strong> Compare a mesma grandeza nas três bibliotecas; se divergir, verifique convenção antes de concluir erro.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

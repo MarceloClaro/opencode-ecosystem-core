@@ -10,14 +10,12 @@
 
 <p>A suspensão é uma prática, não uma prova lógica.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">悬置</span> <em>xuán zhì</em> <span class="tom">· tons 2-4 · leitura shyuan-dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解悬置。</span> <em>Shēn rù liǎo jiě xuán zhì.</em> — Aprofunde-se em “Suspensão de suposições”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> Suspender não é abandonar; é ganhar distância para observar.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Atualização bayesiana: P(H|E) = P(E|H)P(H) / P(E).<br><strong>Conta:</strong> P(H)=0,5; P(E|H)=0,8; P(E|¬H)=0,2; P(E)=0,8×0,5+0,2×0,5=0,5.<br><strong>Resultado:</strong> P(H|E)=0,8×0,5/0,5=0,8.<br><em>Limite:</em> Suspender não é abandonar a crença; é colocá-la entre parênteses e testá-la.</span></p>
+<p><strong>O que ainda não sabemos:</strong> Suspender não é abandonar; é ganhar distância para observar. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Atualização bayesiana: P(H|E) = P(E|H)P(H) / P(E).<br><strong>Conta:</strong> P(H)=0,5; P(E|H)=0,8; P(E|¬H)=0,2; P(E)=0,8×0,5+0,2×0,5=0,5.<br><strong>Resultado:</strong> P(H|E)=0,8×0,5/0,5=0,8.<br><em>Limite:</em> Suspender não é abandonar a crença; é colocá-la entre parênteses e testá-la.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Suspender não é abandonar; é ganhar distância para observar.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

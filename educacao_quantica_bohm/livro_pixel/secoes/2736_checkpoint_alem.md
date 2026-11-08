@@ -10,14 +10,12 @@
 
 <p>A prática distribuída e a recuperação ativa têm apoio em pesquisa.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">检查点</span> <em>jiǎn chá diǎn</em> <span class="tom">· tons 3-2-3 · leitura djien-tcha-dien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解检查点。</span> <em>Shēn rù liǎo jiě jiǎn chá diǎn.</em> — Aprofunde-se em “Checkpoint”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> A técnica não funciona igual para todos os estudantes.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> 100 conceitos × 1 checkpoint = 100 checkpoints.<br><strong>Conta:</strong> Cada checkpoint aparece nas 10 lentes e nos 3 níveis.<br><strong>Resultado:</strong> O gabarito dá critério e resposta esperada, não uma resposta única.<br><em>Limite:</em> Checkpoint não é exame; é um teste de compreensão.</span></p>
+<p><strong>O que ainda não sabemos:</strong> A técnica não funciona igual para todos os estudantes. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> 100 conceitos × 1 checkpoint = 100 checkpoints.<br><strong>Conta:</strong> Cada checkpoint aparece nas 10 lentes e nos 3 níveis.<br><strong>Resultado:</strong> O gabarito dá critério e resposta esperada, não uma resposta única.<br><em>Limite:</em> Checkpoint não é exame; é um teste de compreensão.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A técnica não funciona igual para todos os estudantes.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

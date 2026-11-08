@@ -10,12 +10,6 @@
 
 <p>Escreva uma suposição e liste o que ela exclui.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">悬置</span> <em>xuán zhì</em> <span class="tom">· tons 2-4 · leitura shyuan-dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习悬置。</span> <em>Liàn xí xuán zhì.</em> — Pratique “Suspensão de suposições”.</span></p>
-<ol>
-<li>Faça a atividade sem pressa, em 5 minutos.</li>
-<li>Anote o que esperava antes de começar.</li>
-<li>Compare a previsão com o que observou.</li>
-</ol>
-<p><strong>O que observar:</strong> a diferença entre o que você esperava e o que aconteceu é o dado mais valioso.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -32,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A suspensão é uma prática, não uma prova lógica.</p>
-<p class="prof"><strong>Para o professor:</strong> Diga 'interpretação', não 'prova'. Compare com a leitura padrão e nomeie o preço: não localidade.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

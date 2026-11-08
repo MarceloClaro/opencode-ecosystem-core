@@ -11,13 +11,11 @@
 <p>Um quarteto que deveria aparecer sempre junto, mas às vezes se separa.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">实验多体态</span> <em>shí yàn duō tǐ tài</em> <span class="tom">· tons 2-4-1-3-4 · leitura shi-ien-duo-ti-tai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像实验多体态。</span> <em>Zhè xiàng shí yàn duō tǐ tài.</em> — Isto se parece com “GHZ real”.</span></p>
 <p><strong>Limite formal:</strong> O teste é pequeno; não generaliza para outros dados ou modelos.</p>
-<p>Construa um contraexemplo quantitativo e verifique se a analogia sobrevive.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O teste é pequeno; não generaliza para outros dados ou modelos.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

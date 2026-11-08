@@ -21,13 +21,11 @@
 <p class="mini">Script: <code>scripts/experimentos_100.py</code> · E04 · Guoji08 · <a href="#oficina-e04">oficina E04</a> · <a href="#codigo-e04">código E04</a></p>
 </div>
 
-<p><strong>O que isso mostra:</strong> o resultado é uma amostra de medidas, não um retrato mágico do mundo.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Circuito é um modelo; a ordem dos qubits importa.</p>
-<p class="prof"><strong>Para o professor:</strong> Confira a ordem dos qubits antes de comparar.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

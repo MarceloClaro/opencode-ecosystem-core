@@ -10,7 +10,6 @@
 
 <p>Calcule a direção do movimento a partir de uma fase que muda.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">导波方程</span> <em>dǎo bō fāng chéng</em> <span class="tom">· tons 3-1-1-2 · leitura dau-bo-fang-tcheng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习导波方程。</span> <em>Liàn xí dǎo bō fāng chéng.</em> — Pratique “Equação do guia”.</span></p>
-<p><strong>Protocolo:</strong> varie um parâmetro, repita com outra seed e compare.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -27,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A equação é não local para várias partículas; não é uma força clássica.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -10,13 +10,11 @@
 
 <p>Funções e APIs escondem complexidade atrás de uma interface.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子节点</span> <em>liàng zǐ jié diǎn</em> <span class="tom">· tons 4-3-2-3 · leitura liang-dzi-djie-dien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到量子节点。</span> <em>Wǒ zài shēng huó zhōng kàn dào liàng zǐ jié diǎn.</em> — Vejo “QNode” na vida.</span></p>
-<p><strong>Onde isso aparece:</strong> procure um exemplo na sua casa ou na escola.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Bibliotecas simulam; convenções podem mudar o resultado.</p>
-<p class="prof"><strong>Para o professor:</strong> Se as bibliotecas divergirem, verifique a convenção.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

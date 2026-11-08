@@ -10,14 +10,12 @@
 
 <p>O produto tensorial faz a dimensão crescer como 2^n.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">全息图</span> <em>quán xī tú</em> <span class="tom">· tons 2-1-2 · leitura tchyuan-shi-tu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解全息图。</span> <em>Shēn rù liǎo jiě quán xī tú.</em> — Aprofunde-se em “Holograma”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> A equação não explica por que o mundo segue a equação.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> I = I₁ + I₂ + 2√(I₁I₂)cos φ.<br><strong>Conta:</strong> Com I₁=I₂=1: I = 2 + 2cos φ.<br><strong>Resultado:</strong> φ=0 → I=4; φ=π → I=0.<br><em>Limite:</em> O holograma é uma analogia de interferência; não é uma prova da ordem implicada.</span></p>
+<p><strong>O que ainda não sabemos:</strong> A equação não explica por que o mundo segue a equação. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> I = I₁ + I₂ + 2√(I₁I₂)cos φ.<br><strong>Conta:</strong> Com I₁=I₂=1: I = 2 + 2cos φ.<br><strong>Resultado:</strong> φ=0 → I=4; φ=π → I=0.<br><em>Limite:</em> O holograma é uma analogia de interferência; não é uma prova da ordem implicada.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A equação não explica por que o mundo segue a equação.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

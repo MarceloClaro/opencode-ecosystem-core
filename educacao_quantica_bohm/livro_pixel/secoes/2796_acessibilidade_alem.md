@@ -10,14 +10,12 @@
 
 <p>A prática distribuída e a recuperação ativa têm apoio em pesquisa.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">无障碍</span> <em>wú zhàng ài</em> <span class="tom">· tons 2-4-4 · leitura u-djang-ai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解无障碍。</span> <em>Shēn rù liǎo jiě wú zhàng ài.</em> — Aprofunde-se em “Acessibilidade”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> A técnica não funciona igual para todos os estudantes.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Contraste mínimo recomendado: 4,5:1 para texto normal.<br><strong>Conta:</strong> Fundo #070B12 e texto #E8F0FF têm contraste alto.<br><strong>Resultado:</strong> A fonte de corpo é 10,8 pt; o leitor pode ampliar no PDF.<br><em>Limite:</em> Acessibilidade não é opcional; é parte do contrato de leitura.</span></p>
+<p><strong>O que ainda não sabemos:</strong> A técnica não funciona igual para todos os estudantes. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Contraste mínimo recomendado: 4,5:1 para texto normal.<br><strong>Conta:</strong> Fundo #070B12 e texto #E8F0FF têm contraste alto.<br><strong>Resultado:</strong> A fonte de corpo é 10,8 pt; o leitor pode ampliar no PDF.<br><em>Limite:</em> Acessibilidade não é opcional; é parte do contrato de leitura.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A técnica não funciona igual para todos os estudantes.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -10,13 +10,11 @@
 
 <p>Uma visualização pode dar falsa sensação de controle?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">布洛赫球</span> <em>bù luò hè qiú</em> <span class="tom">· tons 4-4-4-2 · leitura bu-luo-re-tchiu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于布洛赫球？</span> <em>Shéi shòu yì yú bù luò hè qiú?</em> — Quem se beneficia de “Esfera de Bloch”?</span></p>
-<p><strong>Quem ganha? Quem perde?</strong> Cite um grupo para cada lado.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Bibliotecas simulam; convenções podem mudar o resultado.</p>
-<p class="prof"><strong>Para o professor:</strong> Se as bibliotecas divergirem, verifique a convenção.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

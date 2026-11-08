@@ -24,7 +24,6 @@ Limite clássico 2; ideal quântico 2√2 ≈ 2,828. S > 2 nos dois casos; 2,871
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A imagem das moedas sugere um mecanismo que a teoria não afirma.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

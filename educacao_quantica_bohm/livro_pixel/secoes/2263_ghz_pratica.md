@@ -10,7 +10,6 @@
 
 <p>Prepare (|0000⟩+|1111⟩)/√2 em quatro qubits.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">多体纠缠态</span> <em>duō tǐ jiū chán tài</em> <span class="tom">· tons 1-3-1-2-4 · leitura duo-ti-djiu-tchan-tai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习多体纠缠态。</span> <em>Liàn xí duō tǐ jiū chán tài.</em> — Pratique “GHZ”.</span></p>
-<p><strong>Protocolo:</strong> varie um parâmetro, repita com outra seed e compare.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -27,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Em hardware real, o GHZ perde coerência rapidamente com o número de qubits.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

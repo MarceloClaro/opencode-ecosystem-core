@@ -21,13 +21,11 @@
 <p class="mini">Script: <code>scripts/experimentos_100.py</code> · E06 · Guoji08 · <a href="#oficina-e06">oficina E06</a> · <a href="#codigo-e06">código E06</a></p>
 </div>
 
-<p><strong>O que isso mostra:</strong> o resultado é uma amostra de medidas, não um retrato mágico do mundo.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Ética envolve valores e poder; não há resposta automática.</p>
-<p class="prof"><strong>Para o professor:</strong> Peça evidência, afetados e alternativas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

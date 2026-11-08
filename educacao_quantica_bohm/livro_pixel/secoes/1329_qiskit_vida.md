@@ -10,14 +10,11 @@
 
 <p>Mapas e gráficos também escolhem o que destacar.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子开发包</span> <em>liàng zǐ kāi fā bāo</em> <span class="tom">· tons 4-3-1-1-1 · leitura liang-dzi-kai-fa-bau</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到量子开发包。</span> <em>Wǒ zài shēng huó zhōng kàn dào liàng zǐ kāi fā bāo.</em> — Vejo “Qiskit” na vida.</span></p>
-<p><strong>Onde isso aparece:</strong> procure um exemplo na sua casa, na escola ou no bairro. Descreva em duas frases.</p>
-<p><strong>O que muda no seu jeito de olhar?</strong> A ideia de qiskit pode mudar uma decisão cotidiana?</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Qiskit inclui Statevector, transpilação e visualizações.</p>
-<p class="prof"><strong>Para o professor:</strong> Compare a mesma grandeza nas três bibliotecas; se divergir, verifique convenção antes de concluir erro.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

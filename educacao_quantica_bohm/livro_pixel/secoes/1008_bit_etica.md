@@ -10,14 +10,11 @@
 
 <p>Quem decide o que conta como 0 e 1 em um sistema público?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">比特</span> <em>bǐ tè</em> <span class="tom">· tons 3-4 · leitura bi-te</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于比特？</span> <em>Shéi shòu yì yú bǐ tè?</em> — Quem se beneficia de “Bit”?</span></p>
-<p><strong>Quem ganha? Quem perde?</strong> Liste um grupo que se beneficia e um que pode ser prejudicado.</p>
-<p><strong>O que a escola pode fazer?</strong> Transforme o dilema em uma pergunta investigável, não em um julgamento pessoal.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Com 8 bits, há 256 combinações; uma letra ASCII cabe em 8 bits.</p>
-<p class="prof"><strong>Para o professor:</strong> Use a notação de ket apenas depois do concreto; verifique P(0)+P(1)=1.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

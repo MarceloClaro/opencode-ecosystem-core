@@ -10,14 +10,12 @@
 
 <p>A lei dos grandes números explica por que a frequência se estabiliza.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">概率</span> <em>gài lǜ</em> <span class="tom">· tons 4-4 · leitura gai-lyu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解概率。</span> <em>Shēn rù liǎo jiě gài lǜ.</em> — Aprofunde-se em “Probabilidade”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> Uma amostra pequena flutua; a probabilidade não garante o próximo resultado.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> p = N_evento / N_total; EP = √(p(1−p)/N).<br><strong>Conta:</strong> p = 484/1024 = 0,4727. EP = √(0,4727×0,5273/1024) = 0,0156.<br><strong>Resultado:</strong> p = 47,27% e intervalo de 95% ≈ 47,27% ± 3,06%.<br><em>Limite:</em> Uma amostra de 1024 tiros não prova o valor de longo prazo; apenas o estima.</span></p>
+<p><strong>O que ainda não sabemos:</strong> Uma amostra pequena flutua; a probabilidade não garante o próximo resultado. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> p = N_evento / N_total; EP = √(p(1−p)/N).<br><strong>Conta:</strong> p = 484/1024 = 0,4727. EP = √(0,4727×0,5273/1024) = 0,0156.<br><strong>Resultado:</strong> p = 47,27% e intervalo de 95% ≈ 47,27% ± 3,06%.<br><em>Limite:</em> Uma amostra de 1024 tiros não prova o valor de longo prazo; apenas o estima.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Uma amostra pequena flutua; a probabilidade não garante o próximo resultado.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

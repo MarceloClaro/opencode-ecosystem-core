@@ -10,13 +10,11 @@
 
 <p>Aprender com erro e ajustar parâmetros é comum em ML.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子软件</span> <em>liàng zǐ ruǎn jiàn</em> <span class="tom">· tons 4-3-3-4 · leitura liang-dzi-juan-djien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到量子软件。</span> <em>Wǒ zài shēng huó zhōng kàn dào liàng zǐ ruǎn jiàn.</em> — Vejo “PennyLane” na vida.</span></p>
-<p><strong>Onde medir:</strong> proponha um indicador e uma fonte de dados.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A diferenciação automática não substitui a interpretação física.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

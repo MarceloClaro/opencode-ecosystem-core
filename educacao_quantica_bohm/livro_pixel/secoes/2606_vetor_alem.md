@@ -10,14 +10,12 @@
 
 <p>O produto tensorial faz a dimensão crescer como 2^n.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">向量</span> <em>xiàng liàng</em> <span class="tom">· tons 4-4 · leitura shiang-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解向量。</span> <em>Shēn rù liǎo jiě xiàng liàng.</em> — Aprofunde-se em “Vetor”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> A equação não explica por que o mundo segue a equação.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> |r| = √(x² + y² + z²).<br><strong>Conta:</strong> S5 no hardware: x=0,877, y=0,035, z=0,539.<br><strong>Resultado:</strong> |r| = √(0,769+0,001+0,291) = √1,061 = 1,030.<br><em>Limite:</em> Um vetor físico não passa de 1; o excesso revela viés de leitura e estimativa linear.</span></p>
+<p><strong>O que ainda não sabemos:</strong> A equação não explica por que o mundo segue a equação. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> |r| = √(x² + y² + z²).<br><strong>Conta:</strong> S5 no hardware: x=0,877, y=0,035, z=0,539.<br><strong>Resultado:</strong> |r| = √(0,769+0,001+0,291) = √1,061 = 1,030.<br><em>Limite:</em> Um vetor físico não passa de 1; o excesso revela viés de leitura e estimativa linear.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A equação não explica por que o mundo segue a equação.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

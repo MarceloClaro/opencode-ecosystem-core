@@ -10,13 +10,11 @@
 
 <p><strong>Tarefa:</strong> Quem pode usar os computadores e em que condições?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子中心</span> <em>liàng zǐ zhōng xīn</em> <span class="tom">· tons 4-3-1-1 · leitura liang-dzi-djong-shin</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了量子中心。</span> <em>Wǒ xué huì le liàng zǐ zhōng xīn.</em> — Eu aprendi “CIQuanta”.</span></p>
-<p><strong>Replicação:</strong> outra seed, outro backend, a mesma pergunta.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O resultado de hoje não garante o de amanhã; calibração muda.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

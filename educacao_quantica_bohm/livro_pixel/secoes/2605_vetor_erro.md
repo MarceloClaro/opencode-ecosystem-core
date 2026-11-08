@@ -11,13 +11,11 @@
 <p><strong>O erro comum:</strong> Escreva o vetor de H|0⟩ e calcule sua norma.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">向量</span> <em>xiàng liàng</em> <span class="tom">· tons 4-4 · leitura shiang-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">向量不是魔法。</span> <em>Xiàng liàng bú shì mó fǎ.</em> — “Vetor” não é magia.</span></p>
 <p><strong>Correção formal:</strong> O produto tensorial faz a dimensão crescer como 2^n.</p>
-<p>Teste a correção com um exemplo numérico pequeno.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A equação não explica por que o mundo segue a equação.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

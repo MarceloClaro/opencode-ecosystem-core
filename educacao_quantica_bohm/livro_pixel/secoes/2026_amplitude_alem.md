@@ -10,14 +10,12 @@
 
 <p>A regra de Born transforma amplitude em probabilidade.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">振幅</span> <em>zhèn fú</em> <span class="tom">· tons 4-2 · leitura djen-fu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解振幅。</span> <em>Shēn rù liǎo jiě zhèn fú.</em> — Aprofunde-se em “Amplitude”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> A amplitude não é uma probabilidade; é preciso elevar ao quadrado.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> A probabilidade é o módulo ao quadrado da amplitude: P = |α|².<br><strong>Conta:</strong> α = 0,6 → P = 0,6² = 0,36. α = −0,6 → P = (−0,6)² = 0,36.<br><strong>Resultado:</strong> O sinal muda a fase, não a probabilidade isolada.<br><em>Limite:</em> Duas amplitudes iguais em módulo e opostas em fase podem cancelar na interferência.</span></p>
+<p><strong>O que ainda não sabemos:</strong> A amplitude não é uma probabilidade; é preciso elevar ao quadrado. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> A probabilidade é o módulo ao quadrado da amplitude: P = |α|².<br><strong>Conta:</strong> α = 0,6 → P = 0,6² = 0,36. α = −0,6 → P = (−0,6)² = 0,36.<br><strong>Resultado:</strong> O sinal muda a fase, não a probabilidade isolada.<br><em>Limite:</em> Duas amplitudes iguais em módulo e opostas em fase podem cancelar na interferência.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A amplitude não é uma probabilidade; é preciso elevar ao quadrado.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

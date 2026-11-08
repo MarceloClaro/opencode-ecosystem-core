@@ -10,13 +10,11 @@
 
 <p><strong>Pergunta da roda:</strong> O que é uma função quântica?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子节点</span> <em>liàng zǐ jié diǎn</em> <span class="tom">· tons 4-3-2-3 · leitura liang-dzi-djie-dien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看量子节点？</span> <em>Nǐ zěn me kàn liàng zǐ jié diǎn?</em> — O que você pensa de “QNode”?</span></p>
-<p>Ouça sem interromper; anote uma ideia que mudou sua opinião.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Bibliotecas simulam; convenções podem mudar o resultado.</p>
-<p class="prof"><strong>Para o professor:</strong> Se as bibliotecas divergirem, verifique a convenção.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

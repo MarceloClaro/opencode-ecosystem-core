@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>T1 e T2 são tempos de relaxação e coerência; não são a mesma coisa.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">天宫</span> <em>tiān gōng</em> <span class="tom">· tons 1-1 · leitura tien-gong</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解天宫。</span> <em>Shēn rù liǎo jiě tiān gōng.</em> — Aprofunde-se em “Tiangong”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Comparação de escala: 156 qubits / 20 qubits = 7,8.<br><strong>Conta:</strong> Baihua tem 7,8× mais qubits que Guoji08.<br><strong>Resultado:</strong> A fidelidade proxy do GHZ, porém, foi menor no Baihua (65,1% vs 78,8%).<br><em>Limite:</em> Número de qubits não é medida de qualidade.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">天宫</span> <em>tiān gōng</em> <span class="tom">· tons 1-1 · leitura tien-gong</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解天宫。</span> <em>Shēn rù liǎo jiě tiān gōng.</em> — Aprofunde-se em “Tiangong”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Comparação de escala: 156 qubits / 20 qubits = 7,8.<br><strong>Conta:</strong> Baihua tem 7,8× mais qubits que Guoji08.<br><strong>Resultado:</strong> A fidelidade proxy do GHZ, porém, foi menor no Baihua (65,1% vs 78,8%).<br><em>Limite:</em> Número de qubits não é medida de qualidade.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Backends têm ruído, calibração e deriva. Fidelidade proxy não é prova de emaranhamento.</p>
-<p class="prof"><strong>Para o professor:</strong> T1, T2, erro de leitura e ruído de porta são coisas distintas; não os trate como um número único.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

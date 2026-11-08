@@ -10,13 +10,11 @@
 
 <p>Quem tem tempo e silêncio para estudar sozinho?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">检查点</span> <em>jiǎn chá diǎn</em> <span class="tom">· tons 3-2-3 · leitura djien-tcha-dien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于检查点？</span> <em>Shéi shòu yì yú jiǎn chá diǎn?</em> — Quem se beneficia de “Checkpoint”?</span></p>
-<p><strong>Quem ganha? Quem perde?</strong> Cite um grupo para cada lado.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Pedagogia é contextual; não há método garantido.</p>
-<p class="prof"><strong>Para o professor:</strong> Nanoaula é tempo e evidência, não fragmento.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

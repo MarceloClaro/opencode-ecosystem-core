@@ -10,13 +10,11 @@
 
 <p><strong>Pergunta da roda:</strong> O que se perde no encoding?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">编码</span> <em>biān mǎ</em> <span class="tom">· tons 1-3 · leitura bien-ma</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看编码？</span> <em>Nǐ zěn me kàn biān mǎ?</em> — O que você pensa de “Encoding”?</span></p>
-<p>Ouça sem interromper; anote uma ideia que mudou sua opinião.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Amostra pequena não generaliza; 4 pontos não são um artigo.</p>
-<p class="prof"><strong>Para o professor:</strong> Explique o teto e o tamanho da amostra.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

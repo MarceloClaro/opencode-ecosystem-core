@@ -10,13 +10,11 @@
 
 <p><strong>Tarefa:</strong> Você consegue explicar a diferença entre soma e relação?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">整体性</span> <em>zhěng tǐ xìng</em> <span class="tom">· tons 3-3-4 · leitura djeng-ti-shing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了整体性。</span> <em>Wǒ xué huì le zhěng tǐ xìng.</em> — Eu aprendi “Totalidade”.</span></p>
-<p><strong>Replicação:</strong> outra seed, outro backend, a mesma pergunta.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Totalidade não significa harmonia; pode haver conflito e desordem.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

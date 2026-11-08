@@ -10,12 +10,6 @@
 
 <p>Qubits físicos não são ideais; vários formam um qubit lógico.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">物理量子比特</span> <em>wù lǐ liàng zǐ bǐ tè</em> <span class="tom">· tons 4-3-4-3-3-4 · leitura u-li-liang-dzi-bi-te</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习物理量子比特。</span> <em>Liàn xí wù lǐ liàng zǐ bǐ tè.</em> — Pratique “Qubit físico”.</span></p>
-<ol>
-<li>Faça a atividade sem pressa, em 5 minutos.</li>
-<li>Anote o que esperava antes de começar.</li>
-<li>Compare a previsão com o que observou.</li>
-</ol>
-<p><strong>O que observar:</strong> a diferença entre o que você esperava e o que aconteceu é o dado mais valioso.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -32,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Backends têm ruído, calibração e deriva. Fidelidade proxy não é prova de emaranhamento.</p>
-<p class="prof"><strong>Para o professor:</strong> T1, T2, erro de leitura e ruído de porta são coisas distintas; não os trate como um número único.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

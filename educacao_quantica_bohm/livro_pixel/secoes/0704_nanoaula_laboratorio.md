@@ -21,13 +21,11 @@
 <p class="mini">Script: <code>scripts/experimentos_100.py</code> · E18 · Guoji08 · <a href="#oficina-e18">oficina E18</a> · <a href="#codigo-e18">código E18</a></p>
 </div>
 
-<p><strong>O que isso mostra:</strong> o resultado é uma amostra de medidas, não um retrato mágico do mundo.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Pedagogia é contextual; não há método garantido.</p>
-<p class="prof"><strong>Para o professor:</strong> Nanoaula é tempo e evidência, não fragmento.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

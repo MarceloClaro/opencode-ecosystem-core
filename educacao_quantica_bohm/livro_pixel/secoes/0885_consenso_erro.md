@@ -10,13 +10,11 @@
 
 <p><strong>O erro comum:</strong> Faça uma rodada de diálogo e registre dissensos.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">共识</span> <em>gòng shí</em> <span class="tom">· tons 4-2 · leitura gong-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">共识不是魔法。</span> <em>Gòng shí bú shì mó fǎ.</em> — “Consenso” não é magia.</span></p>
-<p><strong>Como não cair:</strong> escreva um contraexemplo e teste com um colega.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Ética envolve valores e poder; não há resposta automática.</p>
-<p class="prof"><strong>Para o professor:</strong> Peça evidência, afetados e alternativas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

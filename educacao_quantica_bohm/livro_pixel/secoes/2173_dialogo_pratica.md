@@ -10,7 +10,6 @@
 
 <p>Faça uma roda de 15 minutos com uma pergunta aberta.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">对话</span> <em>duì huà</em> <span class="tom">· tons 4-4 · leitura duei-rua</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习对话。</span> <em>Liàn xí duì huà.</em> — Pratique “Diálogo”.</span></p>
-<p><strong>Protocolo:</strong> varie um parâmetro, repita com outra seed e compare.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -27,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Diálogo não é terapia, assembleia ou busca obrigatória de consenso.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

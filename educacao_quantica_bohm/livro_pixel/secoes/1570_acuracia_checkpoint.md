@@ -10,14 +10,11 @@
 
 <p><strong>Tarefa:</strong> Uma métrica única pode esconder desigualdades?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">准确率</span> <em>zhǔn què lǜ</em> <span class="tom">· tons 3-4-4 · leitura djuen-tchyue-lyu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了准确率。</span> <em>Wǒ xué huì le zhǔn què lǜ.</em> — Eu aprendi “Acurácia”.</span></p>
-<p><strong>Diário de bordo:</strong> o que eu entendi? onde eu travei? o que vou testar amanhã?</p>
-<p><strong>Próximo passo:</strong> escolha uma lauda da mesma lente e compare as duas respostas.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Quatro pontos e 1024 tiros não generalizam. Ruído benéfico é hipótese, não garantia.</p>
-<p class="prof"><strong>Para o professor:</strong> A acurácia de 4/4 não é generalized accuracy. Explique o teto e o tamanho da amostra.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

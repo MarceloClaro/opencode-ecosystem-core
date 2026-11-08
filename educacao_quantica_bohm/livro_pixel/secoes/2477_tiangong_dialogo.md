@@ -11,13 +11,11 @@
 <p><strong>Pergunta de pesquisa:</strong> Quem é o dono dos dados enviados à nuvem?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">天宫</span> <em>tiān gōng</em> <span class="tom">· tons 1-1 · leitura tien-gong</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看天宫？</span> <em>Nǐ zěn me kàn tiān gōng?</em> — O que você pensa de “Tiangong”?</span></p>
 <p><strong>Hipótese rival:</strong> O resultado de hoje não garante o de amanhã; calibração muda.</p>
-<p>Desenhe um experimento que separe as duas hipóteses.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O resultado de hoje não garante o de amanhã; calibração muda.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

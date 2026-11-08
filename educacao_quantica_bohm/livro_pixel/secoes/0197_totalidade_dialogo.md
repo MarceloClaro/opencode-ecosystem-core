@@ -10,13 +10,11 @@
 
 <p><strong>Pergunta da roda:</strong> O todo é maior que a soma?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">整体性</span> <em>zhěng tǐ xìng</em> <span class="tom">· tons 3-3-4 · leitura djeng-ti-shing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看整体性？</span> <em>Nǐ zěn me kàn zhěng tǐ xìng?</em> — O que você pensa de “Totalidade”?</span></p>
-<p>Ouça sem interromper; anote uma ideia que mudou sua opinião.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Bohm é uma interpretação entre várias; não é consenso.</p>
-<p class="prof"><strong>Para o professor:</strong> Diga 'interpretação', não 'prova'.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

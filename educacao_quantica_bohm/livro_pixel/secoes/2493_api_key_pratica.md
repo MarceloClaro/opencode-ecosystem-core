@@ -10,7 +10,6 @@
 
 <p>A chave não é uma prova de identidade forte; pode vazar.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">密钥</span> <em>mì yuè</em> <span class="tom">· tons 4-4 · leitura mi-yue</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习密钥。</span> <em>Liàn xí mì yuè.</em> — Pratique “API key”.</span></p>
-<p><strong>Protocolo:</strong> varie um parâmetro, repita com outra seed e compare.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -27,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O resultado de hoje não garante o de amanhã; calibração muda.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

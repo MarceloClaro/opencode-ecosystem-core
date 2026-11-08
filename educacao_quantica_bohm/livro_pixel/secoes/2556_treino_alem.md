@@ -10,14 +10,12 @@
 
 <p>A fidelidade proxy mede a população ideal, não a pureza do estado.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">训练</span> <em>xùn liàn</em> <span class="tom">· tons 4-4 · leitura shyun-lien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解训练。</span> <em>Shēn rù liǎo jiě xùn liàn.</em> — Aprofunde-se em “Treino”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> O teste é pequeno; não generaliza para outros dados ou modelos.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> COBYLA com 120 iterações e 5 seeds = 600 avaliações.<br><strong>Conta:</strong> Cada avaliação calcula P(1) para 4 entradas de treino.<br><strong>Resultado:</strong> O custo cresce com iterações × seeds × pontos.<br><em>Limite:</em> Otimização é estocástica; uma seed não é uma prova.</span></p>
+<p><strong>O que ainda não sabemos:</strong> O teste é pequeno; não generaliza para outros dados ou modelos. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> COBYLA com 120 iterações e 5 seeds = 600 avaliações.<br><strong>Conta:</strong> Cada avaliação calcula P(1) para 4 entradas de treino.<br><strong>Resultado:</strong> O custo cresce com iterações × seeds × pontos.<br><em>Limite:</em> Otimização é estocástica; uma seed não é uma prova.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O teste é pequeno; não generaliza para outros dados ou modelos.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

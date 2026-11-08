@@ -10,14 +10,11 @@
 
 <p>Pesquisas eleitorais também estimam distribuições por amostragem.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">多次测量</span> <em>duō cì cè liáng</em> <span class="tom">· tons 1-4-4-2 · leitura duo-tsi-tse-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到多次测量。</span> <em>Wǒ zài shēng huó zhōng kàn dào duō cì cè liáng.</em> — Vejo “Medição múltipla” na vida.</span></p>
-<p><strong>Onde isso aparece:</strong> procure um exemplo na sua casa, na escola ou no bairro. Descreva em duas frases.</p>
-<p><strong>O que muda no seu jeito de olhar?</strong> A ideia de medição múltipla pode mudar uma decisão cotidiana?</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A amostragem tem erro estatístico que diminui com o número de tiros.</p>
-<p class="prof"><strong>Para o professor:</strong> Confira a ordem dos qubits e a diferença entre circuito lógico e transpilado.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

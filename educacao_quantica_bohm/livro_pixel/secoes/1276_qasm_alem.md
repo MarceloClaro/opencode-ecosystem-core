@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>QASM 2.0 é aceito por CIQuanta, Tiangong e Qiskit.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子汇编</span> <em>liàng zǐ huì biān</em> <span class="tom">· tons 4-3-4-1 · leitura liang-dzi-ruei-bien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解量子汇编。</span> <em>Shēn rù liǎo jiě liàng zǐ huì biān.</em> — Aprofunde-se em “QASM 2.0”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> OPENQASM 2.0 é um texto com registradores, portas e medidas.<br><strong>Conta:</strong> Um GHZ de 4 qubits usa 1 h, 3 cx e 4 measure.<br><strong>Resultado:</strong> qreg q[4]; creg c[4]; h q[0]; cx q[0],q[1]; ...<br><em>Limite:</em> O texto descreve o circuito; não prova que o backend o executou.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子汇编</span> <em>liàng zǐ huì biān</em> <span class="tom">· tons 4-3-4-1 · leitura liang-dzi-ruei-bien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解量子汇编。</span> <em>Shēn rù liǎo jiě liàng zǐ huì biān.</em> — Aprofunde-se em “QASM 2.0”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> OPENQASM 2.0 é um texto com registradores, portas e medidas.<br><strong>Conta:</strong> Um GHZ de 4 qubits usa 1 h, 3 cx e 4 measure.<br><strong>Resultado:</strong> qreg q[4]; creg c[4]; h q[0]; cx q[0],q[1]; ...<br><em>Limite:</em> O texto descreve o circuito; não prova que o backend o executou.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>QASM 2.0 é aceito por CIQuanta, Tiangong e Qiskit.</p>
-<p class="prof"><strong>Para o professor:</strong> Confira a ordem dos qubits e a diferença entre circuito lógico e transpilado.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

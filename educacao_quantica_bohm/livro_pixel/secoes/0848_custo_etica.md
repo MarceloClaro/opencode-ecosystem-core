@@ -10,13 +10,11 @@
 
 <p>Quem ganha e quem perde com esta decisão?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">成本</span> <em>chéng běn</em> <span class="tom">· tons 2-3 · leitura tcheng-ben</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于成本？</span> <em>Shéi shòu yì yú chéng běn?</em> — Quem se beneficia de “Custo”?</span></p>
-<p><strong>Quem ganha? Quem perde?</strong> Cite um grupo para cada lado.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Ética envolve valores e poder; não há resposta automática.</p>
-<p class="prof"><strong>Para o professor:</strong> Peça evidência, afetados e alternativas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

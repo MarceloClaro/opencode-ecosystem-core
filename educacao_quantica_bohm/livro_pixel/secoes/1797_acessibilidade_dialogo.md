@@ -10,15 +10,11 @@
 
 <p><strong>Pergunta da roda:</strong> A descrição preserva a informação?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">无障碍</span> <em>wú zhàng ài</em> <span class="tom">· tons 2-4-4 · leitura u-djang-ai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看无障碍？</span> <em>Nǐ zěn me kàn wú zhàng ài?</em> — O que você pensa de “Acessibilidade”?</span></p>
-<p><strong>Roteiro de 9 minutos:</strong> 1 minuto de silêncio; 4 minutos de falas sem interrupção; 2 minutos de respostas ao que foi ouvido; 2 minutos de síntese.</p>
-<p><strong>Regra:</strong> não corrija a fala do outro; pergunte o que o levou a dizer aquilo.</p>
-<p><strong>Registre:</strong> uma suposição que apareceu e uma pergunta nova.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Pedagogia é contextual. Não há método com efeito garantido para toda turma.</p>
-<p class="prof"><strong>Para o professor:</strong> Nanoaula é unidade de tempo e evidência, não fragmento sem síntese.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

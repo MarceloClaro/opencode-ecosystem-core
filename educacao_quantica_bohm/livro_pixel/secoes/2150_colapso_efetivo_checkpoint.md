@@ -10,13 +10,11 @@
 
 <p><strong>Tarefa:</strong> Você consegue explicar a diferença entre colapso e colapso efetivo?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">有效坍缩</span> <em>yǒu xiào tān suō</em> <span class="tom">· tons 3-4-1-1 · leitura iu-shiau-tan-suo</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了有效坍缩。</span> <em>Wǒ xué huì le yǒu xiào tān suō.</em> — Eu aprendi “Colapso efetivo”.</span></p>
-<p><strong>Replicação:</strong> outra seed, outro backend, a mesma pergunta.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A imagem do galho é clássica; a função de onda é matemática.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

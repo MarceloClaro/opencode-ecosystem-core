@@ -10,13 +10,11 @@
 
 <p><strong>Pergunta da roda:</strong> Quando a margem desaparece?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">去极化</span> <em>qù jí huà</em> <span class="tom">· tons 4-2-4 · leitura tchyu-dji-rua</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看去极化？</span> <em>Nǐ zěn me kàn qù jí huà?</em> — O que você pensa de “Depolarizing”?</span></p>
-<p>Ouça sem interromper; anote uma ideia que mudou sua opinião.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Amostra pequena não generaliza; 4 pontos não são um artigo.</p>
-<p class="prof"><strong>Para o professor:</strong> Explique o teto e o tamanho da amostra.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

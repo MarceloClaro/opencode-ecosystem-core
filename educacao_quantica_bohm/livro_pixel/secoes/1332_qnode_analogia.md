@@ -11,13 +11,11 @@
 <p>Uma função de planilha que calcula um resultado a partir de entradas.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子节点</span> <em>liàng zǐ jié diǎn</em> <span class="tom">· tons 4-3-2-3 · leitura liang-dzi-djie-dien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像量子节点。</span> <em>Zhè xiàng liàng zǐ jié diǎn.</em> — Isto se parece com “QNode”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> O QNode não é o hardware; é a descrição executável.</p>
-<p><strong>Teste rápido:</strong> desenhe a analogia e marque com um X o ponto em que ela deixa de explicar o conceito.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>QNodes podem ser diferenciados e otimizados.</p>
-<p class="prof"><strong>Para o professor:</strong> Compare a mesma grandeza nas três bibliotecas; se divergir, verifique convenção antes de concluir erro.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

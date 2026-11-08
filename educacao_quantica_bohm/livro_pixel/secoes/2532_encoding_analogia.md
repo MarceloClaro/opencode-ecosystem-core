@@ -11,13 +11,11 @@
 <p>Traduzir uma música para uma partitura que o instrumento entende.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">编码</span> <em>biān mǎ</em> <span class="tom">· tons 1-3 · leitura bien-ma</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像编码。</span> <em>Zhè xiàng biān mǎ.</em> — Isto se parece com “Encoding”.</span></p>
 <p><strong>Limite formal:</strong> O teste é pequeno; não generaliza para outros dados ou modelos.</p>
-<p>Construa um contraexemplo quantitativo e verifique se a analogia sobrevive.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O teste é pequeno; não generaliza para outros dados ou modelos.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -28,7 +28,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>QNodes podem ser diferenciados e otimizados.</p>
-<p class="prof"><strong>Para o professor:</strong> Compare a mesma grandeza nas três bibliotecas; se divergir, verifique convenção antes de concluir erro.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

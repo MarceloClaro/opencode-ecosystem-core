@@ -11,13 +11,11 @@
 <p>Um kit de montagem com peças, diagramas e medidor.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子开发包</span> <em>liàng zǐ kāi fā bāo</em> <span class="tom">· tons 4-3-1-1-1 · leitura liang-dzi-kai-fa-bau</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像量子开发包。</span> <em>Zhè xiàng liàng zǐ kāi fā bāo.</em> — Isto se parece com “Qiskit”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> O desenho do circuito não é o circuito físico; é uma representação.</p>
-<p><strong>Teste rápido:</strong> desenhe a analogia e marque com um X o ponto em que ela deixa de explicar o conceito.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Qiskit inclui Statevector, transpilação e visualizações.</p>
-<p class="prof"><strong>Para o professor:</strong> Compare a mesma grandeza nas três bibliotecas; se divergir, verifique convenção antes de concluir erro.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

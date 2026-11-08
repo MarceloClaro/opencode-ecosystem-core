@@ -10,13 +10,11 @@
 
 <p><strong>Tarefa:</strong> Quem não consegue falar em roda e como incluir?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">对话圈</span> <em>duì huà quān</em> <span class="tom">· tons 4-4-1 · leitura duei-rua-tchyuan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了对话圈。</span> <em>Wǒ xué huì le duì huà quān.</em> — Eu aprendi “Roda de diálogo”.</span></p>
-<p><strong>Replicação:</strong> outra seed, outro backend, a mesma pergunta.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A técnica não funciona igual para todos os estudantes.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

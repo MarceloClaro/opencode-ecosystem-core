@@ -10,13 +10,11 @@
 
 <p><strong>O erro comum:</strong> Compare P(1) com e sem phase damping.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">相位阻尼</span> <em>xiàng wèi zǔ ní</em> <span class="tom">· tons 4-4-3-2 · leitura shiang-uei-dzu-ni</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">相位阻尼不是魔法。</span> <em>Xiàng wèi zǔ ní bú shì mó fǎ.</em> — “Phase damping” não é magia.</span></p>
-<p><strong>Como não cair:</strong> escreva um contraexemplo e teste com um colega.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Amostra pequena não generaliza; 4 pontos não são um artigo.</p>
-<p class="prof"><strong>Para o professor:</strong> Explique o teto e o tamanho da amostra.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

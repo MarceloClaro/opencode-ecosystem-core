@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>O estado de Bell é usado em teleportação e criptografia.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">贝尔态</span> <em>bèi ěr tài</em> <span class="tom">· tons 4-3-4 · leitura bei-er-tai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解贝尔态。</span> <em>Shēn rù liǎo jiě bèi ěr tài.</em> — Aprofunde-se em “Estado de Bell”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Fidelidade proxy = (N00 + N11) / N_total.<br><strong>Conta:</strong> N00 = 484, N11 = 480, N = 1024: (484+480)/1024 = 964/1024.<br><strong>Resultado:</strong> 0,9414 = 94,1%; os 5,9% restantes são 01 e 10.<br><em>Limite:</em> É uma proxy de fidelidade, não uma tomografia completa do estado.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">贝尔态</span> <em>bèi ěr tài</em> <span class="tom">· tons 4-3-4 · leitura bei-er-tai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解贝尔态。</span> <em>Shēn rù liǎo jiě bèi ěr tài.</em> — Aprofunde-se em “Estado de Bell”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Fidelidade proxy = (N00 + N11) / N_total.<br><strong>Conta:</strong> N00 = 484, N11 = 480, N = 1024: (484+480)/1024 = 964/1024.<br><strong>Resultado:</strong> 0,9414 = 94,1%; os 5,9% restantes são 01 e 10.<br><em>Limite:</em> É uma proxy de fidelidade, não uma tomografia completa do estado.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O estado de Bell é usado em teleportação e criptografia.</p>
-<p class="prof"><strong>Para o professor:</strong> Use a notação de ket apenas depois do concreto; verifique P(0)+P(1)=1.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

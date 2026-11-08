@@ -10,14 +10,12 @@
 
 <p>Um bom projeto declara o que não prova.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">作品集</span> <em>zuò pǐn jí</em> <span class="tom">· tons 4-3-2 · leitura dzuo-pin-dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解作品集。</span> <em>Shēn rù liǎo jiě zuò pǐn jí.</em> — Aprofunde-se em “Portfólio”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> O projeto não esgota o problema; escolhe um recorte.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Portfólio mínimo: pergunta, experimento, reflexão.<br><strong>Conta:</strong> 3 artefatos, 1 página cada = 3 páginas.<br><strong>Resultado:</strong> O portfólio mostra o processo, não só o resultado.<br><em>Limite:</em> Portfólio não é nota.</span></p>
+<p><strong>O que ainda não sabemos:</strong> O projeto não esgota o problema; escolhe um recorte. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Portfólio mínimo: pergunta, experimento, reflexão.<br><strong>Conta:</strong> 3 artefatos, 1 página cada = 3 páginas.<br><strong>Resultado:</strong> O portfólio mostra o processo, não só o resultado.<br><em>Limite:</em> Portfólio não é nota.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O projeto não esgota o problema; escolhe um recorte.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

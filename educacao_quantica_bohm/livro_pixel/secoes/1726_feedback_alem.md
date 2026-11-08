@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>A prática distribuída e a recuperação ativa têm apoio em pesquisa.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">反馈</span> <em>fǎn kuì</em> <span class="tom">· tons 3-4 · leitura fan-kuei</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解反馈。</span> <em>Shēn rù liǎo jiě fǎn kuì.</em> — Aprofunde-se em “Feedback”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Rubrica de 5 critérios × 2 pontos = 10 pontos.<br><strong>Conta:</strong> Se 4 critérios valem 2 e 1 vale 1, o total é 9.<br><strong>Resultado:</strong> A nota é uma soma ponderada, não uma verdade absoluta.<br><em>Limite:</em> Feedback sem critério vira opinião.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">反馈</span> <em>fǎn kuì</em> <span class="tom">· tons 3-4 · leitura fan-kuei</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解反馈。</span> <em>Shēn rù liǎo jiě fǎn kuì.</em> — Aprofunde-se em “Feedback”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Rubrica de 5 critérios × 2 pontos = 10 pontos.<br><strong>Conta:</strong> Se 4 critérios valem 2 e 1 vale 1, o total é 9.<br><strong>Resultado:</strong> A nota é uma soma ponderada, não uma verdade absoluta.<br><em>Limite:</em> Feedback sem critério vira opinião.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Pedagogia é contextual. Não há método com efeito garantido para toda turma.</p>
-<p class="prof"><strong>Para o professor:</strong> Nanoaula é unidade de tempo e evidência, não fragmento sem síntese.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

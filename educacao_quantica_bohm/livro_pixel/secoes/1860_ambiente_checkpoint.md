@@ -10,14 +10,11 @@
 
 <p><strong>Tarefa:</strong> Quem arca com o passivo ambiental?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">环境</span> <em>huán jìng</em> <span class="tom">· tons 2-4 · leitura ruan-djing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了环境。</span> <em>Wǒ xué huì le huán jìng.</em> — Eu aprendi “Ambiente”.</span></p>
-<p><strong>Diário de bordo:</strong> o que eu entendi? onde eu travei? o que vou testar amanhã?</p>
-<p><strong>Próximo passo:</strong> escolha uma lauda da mesma lente e compare as duas respostas.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Ética envolve valores e poder. Não há resposta automática; há deliberação e consequências.</p>
-<p class="prof"><strong>Para o professor:</strong> Não transforme ética em opinião pessoal: peça evidência, afetados e alternativas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

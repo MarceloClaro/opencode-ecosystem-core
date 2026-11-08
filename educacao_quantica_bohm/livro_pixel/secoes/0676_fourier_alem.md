@@ -10,13 +10,11 @@
 
 <p>O produto tensorial faz a dimensão crescer como 2^n.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">傅里叶</span> <em>fù lǐ yè</em> <span class="tom">· tons 4-3-4 · leitura fu-li-ie</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解傅里叶。</span> <em>Shēn rù liǎo jiě fù lǐ yè.</em> — Aprofunde-se em “Fourier”.</span></p>
-<p>Guarde uma pergunta para a próxima aula; não precisa resolver tudo hoje.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A matemática é representação; não é o fenômeno.</p>
-<p class="prof"><strong>Para o professor:</strong> Use exemplos pequenos antes da fórmula.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

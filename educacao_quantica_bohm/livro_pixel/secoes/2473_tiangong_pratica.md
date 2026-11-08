@@ -10,7 +10,6 @@
 
 <p>A plataforma é externa; disponibilidade, preço e regras podem mudar.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">天宫</span> <em>tiān gōng</em> <span class="tom">· tons 1-1 · leitura tien-gong</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习天宫。</span> <em>Liàn xí tiān gōng.</em> — Pratique “Tiangong”.</span></p>
-<p><strong>Protocolo:</strong> varie um parâmetro, repita com outra seed e compare.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -27,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O resultado de hoje não garante o de amanhã; calibração muda.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

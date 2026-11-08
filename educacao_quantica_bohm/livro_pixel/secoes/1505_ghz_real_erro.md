@@ -10,14 +10,11 @@
 
 <p><strong>O erro comum:</strong> Leia os counts e calcule a fração 0000+1111.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">实验多体态</span> <em>shí yàn duō tǐ tài</em> <span class="tom">· tons 2-4-1-3-4 · leitura shi-ien-duo-ti-tai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">实验多体态不是魔法。</span> <em>Shí yàn duō tǐ tài bú shì mó fǎ.</em> — “GHZ real” não é magia.</span></p>
-<p><strong>Por que acontece:</strong> o cérebro procura uma imagem simples e apaga a parte matemática que não se encaixa.</p>
-<p><strong>Como testar:</strong> escreva um contraexemplo em uma frase e veja se ele derruba sua explicação.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Quatro pontos e 1024 tiros não generalizam. Ruído benéfico é hipótese, não garantia.</p>
-<p class="prof"><strong>Para o professor:</strong> A acurácia de 4/4 não é generalized accuracy. Explique o teto e o tamanho da amostra.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

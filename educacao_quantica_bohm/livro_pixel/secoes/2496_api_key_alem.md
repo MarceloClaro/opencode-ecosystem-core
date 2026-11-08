@@ -10,14 +10,12 @@
 
 <p>T1 e T2 são tempos de relaxação e coerência; não são a mesma coisa.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">密钥</span> <em>mì yuè</em> <span class="tom">· tons 4-4 · leitura mi-yue</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解密钥。</span> <em>Shēn rù liǎo jiě mì yuè.</em> — Aprofunde-se em “API key”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> O resultado de hoje não garante o de amanhã; calibração muda.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Uma chave hexadecimal de 32 caracteres tem 16 bytes = 128 bits.<br><strong>Conta:</strong> Espaço de busca ≈ 2¹²⁸.<br><strong>Resultado:</strong> A segurança depende de não vazar a chave e de rotacioná-la.<br><em>Limite:</em> Chave forte não protege dados mal configurados.</span></p>
+<p><strong>O que ainda não sabemos:</strong> O resultado de hoje não garante o de amanhã; calibração muda. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Uma chave hexadecimal de 32 caracteres tem 16 bytes = 128 bits.<br><strong>Conta:</strong> Espaço de busca ≈ 2¹²⁸.<br><strong>Resultado:</strong> A segurança depende de não vazar a chave e de rotacioná-la.<br><em>Limite:</em> Chave forte não protege dados mal configurados.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O resultado de hoje não garante o de amanhã; calibração muda.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

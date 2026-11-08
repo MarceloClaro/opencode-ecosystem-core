@@ -10,13 +10,11 @@
 
 <p><strong>Pergunta da roda:</strong> Quantos tiros são suficientes?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">采样</span> <em>cǎi yàng</em> <span class="tom">· tons 3-4 · leitura tsai-iang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看采样？</span> <em>Nǐ zěn me kàn cǎi yàng?</em> — O que você pensa de “Amostragem”?</span></p>
-<p>Ouça sem interromper; anote uma ideia que mudou sua opinião.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Bibliotecas simulam; convenções podem mudar o resultado.</p>
-<p class="prof"><strong>Para o professor:</strong> Se as bibliotecas divergirem, verifique a convenção.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

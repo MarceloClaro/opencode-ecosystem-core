@@ -10,14 +10,11 @@
 
 <p><strong>O erro comum:</strong> Rode um assert e interprete o resultado.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">检查点</span> <em>jiǎn chá diǎn</em> <span class="tom">· tons 3-2-3 · leitura djien-tcha-dien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">检查点不是魔法。</span> <em>Jiǎn chá diǎn bú shì mó fǎ.</em> — “Checkpoint” não é magia.</span></p>
-<p><strong>Por que acontece:</strong> o cérebro procura uma imagem simples e apaga a parte matemática que não se encaixa.</p>
-<p><strong>Como testar:</strong> escreva um contraexemplo em uma frase e veja se ele derruba sua explicação.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Pedagogia é contextual. Não há método com efeito garantido para toda turma.</p>
-<p class="prof"><strong>Para o professor:</strong> Nanoaula é unidade de tempo e evidência, não fragmento sem síntese.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

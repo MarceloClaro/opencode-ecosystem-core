@@ -10,14 +10,12 @@
 
 <p>O produto tensorial faz a dimensão crescer como 2^n.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">矩阵</span> <em>jǔ zhèn</em> <span class="tom">· tons 3-4 · leitura djyu-djen</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解矩阵。</span> <em>Shēn rù liǎo jiě jǔ zhèn.</em> — Aprofunde-se em “Matriz”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> A equação não explica por que o mundo segue a equação.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> X = [[0,1],[1,0]]; X|0⟩ = [0,1]ᵀ.<br><strong>Conta:</strong> X·[1,0]ᵀ = [0,1]ᵀ = |1⟩.<br><strong>Resultado:</strong> A matriz transforma o vetor de estado.<br><em>Limite:</em> Matrizes unitárias preservam a norma; nem toda matriz é uma porta válida.</span></p>
+<p><strong>O que ainda não sabemos:</strong> A equação não explica por que o mundo segue a equação. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> X = [[0,1],[1,0]]; X|0⟩ = [0,1]ᵀ.<br><strong>Conta:</strong> X·[1,0]ᵀ = [0,1]ᵀ = |1⟩.<br><strong>Resultado:</strong> A matriz transforma o vetor de estado.<br><em>Limite:</em> Matrizes unitárias preservam a norma; nem toda matriz é uma porta válida.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A equação não explica por que o mundo segue a equação.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

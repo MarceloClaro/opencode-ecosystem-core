@@ -11,13 +11,11 @@
 <p><strong>O erro comum:</strong> Liste os backends e identifique os de hardware real.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">天宫</span> <em>tiān gōng</em> <span class="tom">· tons 1-1 · leitura tien-gong</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">天宫不是魔法。</span> <em>Tiān gōng bú shì mó fǎ.</em> — “Tiangong” não é magia.</span></p>
 <p><strong>Correção formal:</strong> T1 e T2 são tempos de relaxação e coerência; não são a mesma coisa.</p>
-<p>Teste a correção com um exemplo numérico pequeno.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O resultado de hoje não garante o de amanhã; calibração muda.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

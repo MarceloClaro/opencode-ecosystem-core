@@ -10,14 +10,11 @@
 
 <p><strong>O erro comum:</strong> Compare a densidade de |0⟩ com a de uma mistura 50/50.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">密度矩阵</span> <em>mì dù jǔ zhèn</em> <span class="tom">· tons 4-4-3-4 · leitura mi-du-djyu-djen</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">密度矩阵不是魔法。</span> <em>Mì dù jǔ zhèn bú shì mó fǎ.</em> — “Matriz densidade” não é magia.</span></p>
-<p><strong>Por que acontece:</strong> o cérebro procura uma imagem simples e apaga a parte matemática que não se encaixa.</p>
-<p><strong>Como testar:</strong> escreva um contraexemplo em uma frase e veja se ele derruba sua explicação.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A matemática é representação; não é o fenômeno. Não confunda o mapa com o território.</p>
-<p class="prof"><strong>Para o professor:</strong> A fórmula deve vir depois da intuição; use exemplos numéricos pequenos.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

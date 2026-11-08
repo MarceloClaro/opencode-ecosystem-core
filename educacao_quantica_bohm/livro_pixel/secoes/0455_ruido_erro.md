@@ -10,13 +10,11 @@
 
 <p><strong>O erro comum:</strong> Liste ruído de porta, leitura e ambiente.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">噪声</span> <em>zào shēng</em> <span class="tom">· tons 4-1 · leitura dzau-sheng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">噪声不是魔法。</span> <em>Zào shēng bú shì mó fǎ.</em> — “Ruído” não é magia.</span></p>
-<p><strong>Como não cair:</strong> escreva um contraexemplo e teste com um colega.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Backend tem ruído; um número não prova o estado.</p>
-<p class="prof"><strong>Para o professor:</strong> Ruído, leitura e calibração são coisas distintas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

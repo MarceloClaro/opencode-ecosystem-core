@@ -10,14 +10,11 @@
 
 <p>Quem tem tempo e silêncio para estudar sozinho?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">对话圈</span> <em>duì huà quān</em> <span class="tom">· tons 4-4-1 · leitura duei-rua-tchyuan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于对话圈？</span> <em>Shéi shòu yì yú duì huà quān?</em> — Quem se beneficia de “Roda de diálogo”?</span></p>
-<p><strong>Quem ganha? Quem perde?</strong> Liste um grupo que se beneficia e um que pode ser prejudicado.</p>
-<p><strong>O que a escola pode fazer?</strong> Transforme o dilema em uma pergunta investigável, não em um julgamento pessoal.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Pedagogia é contextual. Não há método com efeito garantido para toda turma.</p>
-<p class="prof"><strong>Para o professor:</strong> Nanoaula é unidade de tempo e evidência, não fragmento sem síntese.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

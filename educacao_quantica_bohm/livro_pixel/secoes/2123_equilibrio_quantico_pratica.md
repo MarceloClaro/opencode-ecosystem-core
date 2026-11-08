@@ -10,7 +10,6 @@
 
 <p>Compare uma distribuição inicial |ψ|² com a evolução.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子平衡</span> <em>liàng zǐ píng héng</em> <span class="tom">· tons 4-3-2-2 · leitura liang-dzi-ping-reng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习量子平衡。</span> <em>Liàn xí liàng zǐ píng héng.</em> — Pratique “Equilíbrio quântico”.</span></p>
-<p><strong>Protocolo:</strong> varie um parâmetro, repita com outra seed e compare.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -27,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A hipótese explica por que a regra de Born funciona, mas não por que o universo começou assim.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

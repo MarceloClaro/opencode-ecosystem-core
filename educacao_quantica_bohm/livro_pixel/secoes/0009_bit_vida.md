@@ -10,13 +10,11 @@
 
 <p>Semáforos, senhas e códigos de barras são bits em ação.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">比特</span> <em>bǐ tè</em> <span class="tom">· tons 3-4 · leitura bi-te</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到比特。</span> <em>Wǒ zài shēng huó zhōng kàn dào bǐ tè.</em> — Vejo “Bit” na vida.</span></p>
-<p><strong>Onde isso aparece:</strong> procure um exemplo na sua casa ou na escola.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Medir produz uma amostra; não é ler um valor escondido.</p>
-<p class="prof"><strong>Para o professor:</strong> Comece pelo concreto; só depois use a notação.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

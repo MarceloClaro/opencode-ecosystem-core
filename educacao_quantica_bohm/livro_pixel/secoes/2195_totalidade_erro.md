@@ -11,13 +11,11 @@
 <p><strong>O erro comum:</strong> Romantizar o todo e ignorar desigualdades internas.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">整体性</span> <em>zhěng tǐ xìng</em> <span class="tom">· tons 3-3-4 · leitura djeng-ti-shing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">整体性不是魔法。</span> <em>Zhěng tǐ xìng bú shì mó fǎ.</em> — “Totalidade” não é magia.</span></p>
 <p><strong>Correção formal:</strong> A totalidade aparece na física, na ecologia e na pedagogia.</p>
-<p>Teste a correção com um exemplo numérico pequeno.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Totalidade não significa harmonia; pode haver conflito e desordem.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

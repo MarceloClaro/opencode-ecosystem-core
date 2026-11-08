@@ -10,15 +10,11 @@
 
 <p><strong>Pergunta da roda:</strong> Quem será treinado?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">工作</span> <em>gōng zuò</em> <span class="tom">· tons 1-4 · leitura gong-dzuo</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看工作？</span> <em>Nǐ zěn me kàn gōng zuò?</em> — O que você pensa de “Trabalho”?</span></p>
-<p><strong>Roteiro de 9 minutos:</strong> 1 minuto de silêncio; 4 minutos de falas sem interrupção; 2 minutos de respostas ao que foi ouvido; 2 minutos de síntese.</p>
-<p><strong>Regra:</strong> não corrija a fala do outro; pergunte o que o levou a dizer aquilo.</p>
-<p><strong>Registre:</strong> uma suposição que apareceu e uma pergunta nova.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Ética envolve valores e poder. Não há resposta automática; há deliberação e consequências.</p>
-<p class="prof"><strong>Para o professor:</strong> Não transforme ética em opinião pessoal: peça evidência, afetados e alternativas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

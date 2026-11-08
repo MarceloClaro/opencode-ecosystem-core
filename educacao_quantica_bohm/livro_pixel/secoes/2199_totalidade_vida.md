@@ -10,13 +10,11 @@
 
 <p>Um time, uma família e um ecossistema são mais que listas.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">整体性</span> <em>zhěng tǐ xìng</em> <span class="tom">· tons 3-3-4 · leitura djeng-ti-shing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到整体性。</span> <em>Wǒ zài shēng huó zhōng kàn dào zhěng tǐ xìng.</em> — Vejo “Totalidade” na vida.</span></p>
-<p><strong>Onde medir:</strong> proponha um indicador e uma fonte de dados.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Totalidade não significa harmonia; pode haver conflito e desordem.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

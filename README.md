@@ -182,7 +182,7 @@ registrada, não escondida. Evidência:
 | MCP | 🟡 servidores configurados (inventário acima) | federação, probes, smoke, recibos | configuração ≠ disponibilidade no momento de uso |
 | Quântica e GJQ | 🟡 com limites | MCPs `gjq-experiments`, `gjq-runtime` e `quantum-sim-core`; agente e skills; Bell/CHSH no FAS-GPU | simulador; nenhum hardware executado; chave não versionada |
 | Loop Engineering | ✅ implementado/testado | skill, agente, auditor L0–L3 e harness | checklist não prova funcionamento; não executa loop nem auto-merge |
-| Livro quântico | ✅ build/testes | 3553 páginas, 3000 laudas, PDF versionado e build reproduzível | peer review, ISBN/DOI e tradução pendentes |
+| Livro quântico | ✅ build/testes | 3504 páginas, 3000 laudas, PDF versionado e build reproduzível | peer review, ISBN/DOI e tradução pendentes |
 | Governança | ✅ | gate metacognitivo, TrustEngine, slashing, EvolutionRegistry | `externally_supported` não é verdade absoluta |
 | Publicação | 🧭 gate | validação externa, aceite, autorização | nenhum upload/publicação automática |
 | Book Studio | 🟡 R1078–R1082 | KDP, tokens, licença, auditoria EPUB, capas e 6 pranchas de prova | arte final, 2× 300 DPI, CMYK/PDF-X e prova física pendentes |
@@ -300,8 +300,8 @@ foi enviada à KDP nem publicada por esta rodada.
 
 ### Livro quântico: PDF versionado
 
-O PDF de **3553 páginas** e **3000 laudas** está versionado em
-`educacao_quantica_bohm/livro_pixel/LIVRO_3000_LAUDAS.pdf` (21.053.947 bytes).
+O PDF de **3504 páginas** e **3000 laudas** está versionado em
+`educacao_quantica_bohm/livro_pixel/LIVRO_3000_LAUDAS.pdf` (18.422.988 bytes).
 O HTML e as fontes também estão no Git; o `.venv-pdf` é local e recriado por
 `build_pdf.sh`. O build usa `pyphen==0.16.0` com dicionário `pt_BR` para
 hifenizar o corpo. Ver [BUILD_PDF.md](educacao_quantica_bohm/livro_pixel/BUILD_PDF.md).
@@ -332,9 +332,11 @@ O livro **3000 Laudas de Física Quântica: do bit ao todo** está em
 `educacao_quantica_bohm/livro_pixel/` com:
 
 - **3000 laudas**, **100 fichas** e **400 notas de cálculo**;
-- **3553 páginas** no PDF final;
+- **repetição reduzida** de 21.031 para 15.178 parágrafos e de 451.411 para 375.141 palavras;
+- **apêndice de aprofundamento** com densidade, canais, algoritmos e QEC;
+- **3504 páginas** no PDF final;
 - **3000 códigos únicos** de lauda;
-- **PDF versionado** em `LIVRO_3000_LAUDAS.pdf` (21.053.947 bytes);
+- **PDF versionado** em `LIVRO_3000_LAUDAS.pdf` (18.422.988 bytes);
 - apêndice GJQ com Bell, CHSH, task IDs e contas;
 - corpo justificado e hifenizado em pt-BR; notas e legendas à esquerda.
 
@@ -348,6 +350,12 @@ O script cria `.venv-pdf` com `pyphen==0.16.0` (dicionário `pt_BR`) e chama
 `build_pixel_fast.py`. O `.venv-pdf` é local; o PDF e o HTML são versionados.
 Ver [BUILD_PDF.md](educacao_quantica_bohm/livro_pixel/BUILD_PDF.md) e
 [Apêndice GJQ](educacao_quantica_bohm/livro_pixel/GJQ_RESULTADOS.md).
+
+**Piloto de edição enxuta (R1102):** 12 módulos, 60 laudas, 12 figuras e
+**76 páginas** em papel claro; [PDF](educacao_quantica_bohm/livro_pixel/EDICAO_ENXUTA_PILOTO.pdf)
+e [EPUB](educacao_quantica_bohm/livro_pixel/EDICAO_ENXUTA_PILOTO.epub).
+Build: `python3 educacao_quantica_bohm/livro_pixel/build_enxuta.py`. É um
+**piloto** para curso/impressão, não a edição final de 600–800 páginas.
 
 **Limites:** o PDF é um artefato de build; não houve peer review, ISBN/DOI,
 tradução inglesa ou estudo de eficácia. 59 testes do livro passam no escopo
@@ -506,6 +514,10 @@ não é aceite editorial.
 | [Spec R1100](specs/SPEC-935-R1100-loop-engineering.md) | contrato do Loop Engineering |
 | [Livro quântico — build](educacao_quantica_bohm/livro_pixel/BUILD_PDF.md) | PDF versionado, `.venv-pdf` e hifenização |
 | [Apêndice GJQ do livro](educacao_quantica_bohm/livro_pixel/GJQ_RESULTADOS.md) | Bell, CHSH, task IDs e contas |
+| [Aprofundamento quântico](educacao_quantica_bohm/livro_pixel/APROFUNDAMENTO_QUANTICO.md) | estados, canais, algoritmos, QEC e VQC |
+| [Notas ao professor](educacao_quantica_bohm/livro_pixel/NOTAS_PROFESSOR.md) | orientação consolidada por parte |
+| [Edição enxuta — piloto](educacao_quantica_bohm/livro_pixel/EDICAO_ENXUTA_PILOTO.pdf) | 12 módulos, 60 laudas, 76 páginas; PDF claro |
+| [Edição enxuta — EPUB](educacao_quantica_bohm/livro_pixel/EDICAO_ENXUTA_PILOTO.epub) | versão reflowable do piloto |
 | [Vídeo R1058](pilots/r1058-airam-veras/README.md) | plano de ação Airam Veras, mapa, cronograma e exemplos |
 | [Atlas animado R1056](docs/architecture/ANIMATED.md) | GIF/PNG/SVG e Mermaid de todos os diagramas do escopo |
 | [Reprodução R1056](reports/r1056/README.md) | exportador local, cobertura, testes e hashes |
@@ -528,7 +540,7 @@ não é aceite editorial.
 | R1055 | ✅ técnico; revisão humana pendente | vídeo didático de qubit, câmera, mapa e versões 16:9/9:16 |
 | R1056 | ✅ documental; não valida runtime | atlas animado, fontes preservadas, manifesto e testes |
 | R1078–R1084 | 🟡 estúdio editorial; publicação bloqueada | Book Studio, fontes e capas versionadas; revisão de lombada, CMYK/PDF-X e prova física pendentes |
-| R1099 | ✅ build/testes locais | livro quântico 3553 pp, GJQ MCPs, 20 revisores e PDF versionado |
+| R1099 | ✅ build/testes locais | livro quântico 3504 pp, GJQ MCPs, 20 revisores e PDF versionado |
 | R1100 | ✅ | Loop Engineering: skill, agente, auditor L0–L3 e harness |
 | Próximos ciclos | 🧭 | backend real de submissão, perfis brasileiros, UI, tabelas e validação externa assistida |
 
@@ -2851,7 +2863,7 @@ execução de todas as integrações disponíveis na sua máquina.
 | [Orquestração real](docs/evidencias-r868/verificacao-final.json) | Codex retornou `15` para `8 + 7` em 9,303 s | Uma tarefa textual somente com leitura, sem alvo REA |
 | [Inspeção REA direta](docs/evidencias-r868/analise-direta-controlada.json) | HTML controlado de 115 bytes, dois achados, alvo intocado | Caminho direto local; não comprova todos os formatos ou engines |
 | [Loop Engineering R1100](docs/LOOP_ENGINEERING_R1100.md) | 8 testes R1100; 43 na integração R1100/R1099/R917/R920 | Checklist e integração local; não prova funcionamento de loop |
-| [Livro quântico R1099](educacao_quantica_bohm/livro_pixel/BUILD_PDF.md) | 59 testes do livro; PDF 3553 pp; 3000 códigos | Build local; não é peer review |
+| [Livro quântico R1099](educacao_quantica_bohm/livro_pixel/BUILD_PDF.md) | 59 testes do livro; PDF 3504 pp; 3000 códigos | Build local; não é peer review |
 | [GJQ R1099](docs/GJQ_PESQUISA_QUANTICA_R1099.md) | 4 testes `gjq-runtime` + 5 `quantum-sim-core`; Bell/CHSH no FAS-GPU | Simulador; nenhum hardware executado |
 
 A análise REA autônoma pelo LLM local permanece sem entrega aceita nos registros.

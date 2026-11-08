@@ -10,13 +10,11 @@
 
 <p>X é a matriz [[0,1],[1,0]]; X² = I.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">翻转门</span> <em>fān zhuǎn mén</em> <span class="tom">· tons 1-3-2 · leitura fan-djuan-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解翻转门。</span> <em>Shēn rù liǎo jiě fān zhuǎn mén.</em> — Aprofunde-se em “Porta X”.</span></p>
-<p>Guarde uma pergunta para a próxima aula; não precisa resolver tudo hoje.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Circuito é um modelo; a ordem dos qubits importa.</p>
-<p class="prof"><strong>Para o professor:</strong> Confira a ordem dos qubits antes de comparar.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

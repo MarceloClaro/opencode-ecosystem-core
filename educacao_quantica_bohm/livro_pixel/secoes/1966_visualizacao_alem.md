@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>Um bom projeto declara o que não prova.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">可视化</span> <em>kě shì huà</em> <span class="tom">· tons 3-4-4 · leitura ke-shi-rua</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解可视化。</span> <em>Shēn rù liǎo jiě kě shì huà.</em> — Aprofunde-se em “Visualização”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Um gráfico honesto declara eixo, unidade, fonte e n.<br><strong>Conta:</strong> Sem unidade, o número não significa nada.<br><strong>Resultado:</strong> Sem n, a incerteza fica invisível.<br><em>Limite:</em> Um gráfico pode enganar mesmo com dados corretos.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">可视化</span> <em>kě shì huà</em> <span class="tom">· tons 3-4-4 · leitura ke-shi-rua</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解可视化。</span> <em>Shēn rù liǎo jiě kě shì huà.</em> — Aprofunde-se em “Visualização”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Um gráfico honesto declara eixo, unidade, fonte e n.<br><strong>Conta:</strong> Sem unidade, o número não significa nada.<br><strong>Resultado:</strong> Sem n, a incerteza fica invisível.<br><em>Limite:</em> Um gráfico pode enganar mesmo com dados corretos.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Todo projeto é um recorte. Declare limite, evidência e o que ficou fora.</p>
-<p class="prof"><strong>Para o professor:</strong> Exija um limite específico; 'tem limitações' não é suficiente.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

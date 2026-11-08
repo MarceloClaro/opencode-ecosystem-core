@@ -28,7 +28,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>QASM 2.0 é aceito por CIQuanta, Tiangong e Qiskit.</p>
-<p class="prof"><strong>Para o professor:</strong> Confira a ordem dos qubits e a diferença entre circuito lógico e transpilado.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

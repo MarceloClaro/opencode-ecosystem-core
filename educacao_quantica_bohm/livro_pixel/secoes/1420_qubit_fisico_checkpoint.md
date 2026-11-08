@@ -10,14 +10,11 @@
 
 <p><strong>Tarefa:</strong> Quem tem acesso ao hardware e quem só vê resultados?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">物理量子比特</span> <em>wù lǐ liàng zǐ bǐ tè</em> <span class="tom">· tons 4-3-4-3-3-4 · leitura u-li-liang-dzi-bi-te</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了物理量子比特。</span> <em>Wǒ xué huì le wù lǐ liàng zǐ bǐ tè.</em> — Eu aprendi “Qubit físico”.</span></p>
-<p><strong>Diário de bordo:</strong> o que eu entendi? onde eu travei? o que vou testar amanhã?</p>
-<p><strong>Próximo passo:</strong> escolha uma lauda da mesma lente e compare as duas respostas.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Backends têm ruído, calibração e deriva. Fidelidade proxy não é prova de emaranhamento.</p>
-<p class="prof"><strong>Para o professor:</strong> T1, T2, erro de leitura e ruído de porta são coisas distintas; não os trate como um número único.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

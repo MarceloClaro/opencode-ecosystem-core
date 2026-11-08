@@ -10,13 +10,11 @@
 
 <p>O GHZ é usado em metrologia e testes de não localidade.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">多体纠缠态</span> <em>duō tǐ jiū chán tài</em> <span class="tom">· tons 1-3-1-2-4 · leitura duo-ti-djiu-tchan-tai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解多体纠缠态。</span> <em>Shēn rù liǎo jiě duō tǐ jiū chán tài.</em> — Aprofunde-se em “GHZ”.</span></p>
-<p>Guarde uma pergunta para a próxima aula; não precisa resolver tudo hoje.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Circuito é um modelo; a ordem dos qubits importa.</p>
-<p class="prof"><strong>Para o professor:</strong> Confira a ordem dos qubits antes de comparar.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

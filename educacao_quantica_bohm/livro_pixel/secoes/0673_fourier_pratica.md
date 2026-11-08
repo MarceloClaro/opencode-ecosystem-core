@@ -10,7 +10,6 @@
 
 <p>A analogia óptica é boa, mas a transformada é matemática.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">傅里叶</span> <em>fù lǐ yè</em> <span class="tom">· tons 4-3-4 · leitura fu-li-ie</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习傅里叶。</span> <em>Liàn xí fù lǐ yè.</em> — Pratique “Fourier”.</span></p>
-<p>Faça em 5 minutos; anote o que esperava antes de começar.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -27,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A matemática é representação; não é o fenômeno.</p>
-<p class="prof"><strong>Para o professor:</strong> Use exemplos pequenos antes da fórmula.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

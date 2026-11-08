@@ -21,13 +21,11 @@
 <p class="mini">Script: <code>scripts/experimentos_100.py</code> · E11 · Guoji08 · <a href="#oficina-e11">oficina E11</a> · <a href="#codigo-e11">código E11</a></p>
 </div>
 
-<p><strong>O que isso mostra:</strong> o resultado é uma amostra de medidas, não um retrato mágico do mundo.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Amostra pequena não generaliza; 4 pontos não são um artigo.</p>
-<p class="prof"><strong>Para o professor:</strong> Explique o teto e o tamanho da amostra.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

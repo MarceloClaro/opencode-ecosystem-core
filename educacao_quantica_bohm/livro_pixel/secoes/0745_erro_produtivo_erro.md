@@ -10,13 +10,11 @@
 
 <p><strong>O erro comum:</strong> Registre um erro no diário com tipo e correção.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">建设性错误</span> <em>jiàn shè xìng cuò wù</em> <span class="tom">· tons 4-4-4-4-4 · leitura djien-she-shing-tsuo-u</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">建设性错误不是魔法。</span> <em>Jiàn shè xìng cuò wù bú shì mó fǎ.</em> — “Erro produtivo” não é magia.</span></p>
-<p><strong>Como não cair:</strong> escreva um contraexemplo e teste com um colega.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Pedagogia é contextual; não há método garantido.</p>
-<p class="prof"><strong>Para o professor:</strong> Nanoaula é tempo e evidência, não fragmento.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

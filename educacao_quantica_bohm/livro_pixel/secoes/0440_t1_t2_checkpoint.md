@@ -10,13 +10,11 @@
 
 <p><strong>Tarefa:</strong> Quem publica esses dados e com que frequência?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">弛豫与相干</span> <em>chí yù yǔ xiāng gān</em> <span class="tom">· tons 2-4-3-1-1 · leitura tchi-yu-yu-shiang-gan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了弛豫与相干。</span> <em>Wǒ xué huì le chí yù yǔ xiāng gān.</em> — Eu aprendi “T1 e T2”.</span></p>
-<p><strong>Diário:</strong> o que entendi? onde travei? o que vou testar amanhã?</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Backend tem ruído; um número não prova o estado.</p>
-<p class="prof"><strong>Para o professor:</strong> Ruído, leitura e calibração são coisas distintas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

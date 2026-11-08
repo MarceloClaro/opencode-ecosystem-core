@@ -10,13 +10,11 @@
 
 <p><strong>Pergunta da roda:</strong> O que o teste não prova?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">变分分类器</span> <em>biàn fēn fēn lèi qì</em> <span class="tom">· tons 4-1-1-4-4 · leitura bien-fen-fen-lei-tchi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看变分分类器？</span> <em>Nǐ zěn me kàn biàn fēn fēn lèi qì?</em> — O que você pensa de “VQC XOR”?</span></p>
-<p>Ouça sem interromper; anote uma ideia que mudou sua opinião.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Amostra pequena não generaliza; 4 pontos não são um artigo.</p>
-<p class="prof"><strong>Para o professor:</strong> Explique o teto e o tamanho da amostra.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

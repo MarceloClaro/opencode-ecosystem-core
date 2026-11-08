@@ -10,14 +10,11 @@
 
 <p><strong>O erro comum:</strong> Desenhe uma curva de acurácia versus ruído com um ponto ótimo.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">有益噪声</span> <em>yǒu yì zào shēng</em> <span class="tom">· tons 3-4-4-1 · leitura iu-i-dzau-sheng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">有益噪声不是魔法。</span> <em>Yǒu yì zào shēng bú shì mó fǎ.</em> — “Ruído benéfico?” não é magia.</span></p>
-<p><strong>Por que acontece:</strong> o cérebro procura uma imagem simples e apaga a parte matemática que não se encaixa.</p>
-<p><strong>Como testar:</strong> escreva um contraexemplo em uma frase e veja se ele derruba sua explicação.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Quatro pontos e 1024 tiros não generalizam. Ruído benéfico é hipótese, não garantia.</p>
-<p class="prof"><strong>Para o professor:</strong> A acurácia de 4/4 não é generalized accuracy. Explique o teto e o tamanho da amostra.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

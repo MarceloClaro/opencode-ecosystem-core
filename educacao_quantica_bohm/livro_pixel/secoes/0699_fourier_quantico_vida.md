@@ -10,13 +10,11 @@
 
 <p>Gráficos e mapas também escolhem o que destacar.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子傅里叶</span> <em>liàng zǐ fù lǐ yè</em> <span class="tom">· tons 4-3-4-3-4 · leitura liang-dzi-fu-li-ie</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到量子傅里叶。</span> <em>Wǒ zài shēng huó zhōng kàn dào liàng zǐ fù lǐ yè.</em> — Vejo “Fourier quântico” na vida.</span></p>
-<p><strong>Onde isso aparece:</strong> procure um exemplo na sua casa ou na escola.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A matemática é representação; não é o fenômeno.</p>
-<p class="prof"><strong>Para o professor:</strong> Use exemplos pequenos antes da fórmula.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

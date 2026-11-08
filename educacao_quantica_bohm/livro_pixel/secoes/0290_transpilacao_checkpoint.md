@@ -10,13 +10,11 @@
 
 <p><strong>Tarefa:</strong> Você consegue explicar por que a profundidade aumentou?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">转译</span> <em>zhuǎn yì</em> <span class="tom">· tons 3-4 · leitura djuan-i</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了转译。</span> <em>Wǒ xué huì le zhuǎn yì.</em> — Eu aprendi “Transpilação”.</span></p>
-<p><strong>Diário:</strong> o que entendi? onde travei? o que vou testar amanhã?</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Circuito é um modelo; a ordem dos qubits importa.</p>
-<p class="prof"><strong>Para o professor:</strong> Confira a ordem dos qubits antes de comparar.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

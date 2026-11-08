@@ -11,13 +11,11 @@
 <p><strong>Pergunta de pesquisa:</strong> O que significa 'juntos'?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">纠缠</span> <em>jiū chán</em> <span class="tom">· tons 1-2 · leitura djiu-tchan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看纠缠？</span> <em>Nǐ zěn me kàn jiū chán?</em> — O que você pensa de “Emaranhamento”?</span></p>
 <p><strong>Hipótese rival:</strong> As luvas têm valores escondidos; o emaranhamento não é explicado por variáveis locais.</p>
-<p>Desenhe um experimento que separe as duas hipóteses.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>As luvas têm valores escondidos; o emaranhamento não é explicado por variáveis locais.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

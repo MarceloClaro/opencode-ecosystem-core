@@ -10,13 +10,11 @@
 
 <p>Quem paga a conta energética e quem fica na fila?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子中心</span> <em>liàng zǐ zhōng xīn</em> <span class="tom">· tons 4-3-1-1 · leitura liang-dzi-djong-shin</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于量子中心？</span> <em>Shéi shòu yì yú liàng zǐ zhōng xīn?</em> — Quem se beneficia de “CIQuanta”?</span></p>
-<p><strong>Quem ganha? Quem perde?</strong> Cite um grupo para cada lado.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Backend tem ruído; um número não prova o estado.</p>
-<p class="prof"><strong>Para o professor:</strong> Ruído, leitura e calibração são coisas distintas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -21,13 +21,11 @@
 <p class="mini">Script: <code>scripts/experimentos_100.py</code> · E17 · Guoji08 · <a href="#oficina-e17">oficina E17</a> · <a href="#codigo-e17">código E17</a></p>
 </div>
 
-<p><strong>O que isso mostra:</strong> o resultado é uma amostra de medidas, não um retrato mágico do mundo.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A matemática é representação; não é o fenômeno.</p>
-<p class="prof"><strong>Para o professor:</strong> Use exemplos pequenos antes da fórmula.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

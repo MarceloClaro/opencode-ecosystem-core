@@ -10,14 +10,11 @@
 
 <p>Ecossistemas e redes também têm informação distribuída.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">隐缠序</span> <em>yǐn chán xù</em> <span class="tom">· tons 3-2-4 · leitura in-tchan-shyu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到隐缠序。</span> <em>Wǒ zài shēng huó zhōng kàn dào yǐn chán xù.</em> — Vejo “Ordem implicada” na vida.</span></p>
-<p><strong>Onde isso aparece:</strong> procure um exemplo na sua casa, na escola ou no bairro. Descreva em duas frases.</p>
-<p><strong>O que muda no seu jeito de olhar?</strong> A ideia de ordem implicada pode mudar uma decisão cotidiana?</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A analogia do holograma é matemática e clássica.</p>
-<p class="prof"><strong>Para o professor:</strong> Diga 'interpretação', não 'prova'. Compare com a leitura padrão e nomeie o preço: não localidade.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

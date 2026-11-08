@@ -10,14 +10,12 @@
 
 <p>A LGPD exige base legal, finalidade e transparência.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">虚假信息</span> <em>xū jiǎ xìn xī</em> <span class="tom">· tons 1-3-4-1 · leitura shyu-djia-shin-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解虚假信息。</span> <em>Shēn rù liǎo jiě xū jiǎ xìn xī.</em> — Aprofunde-se em “Desinformação”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> Não há consenso moral automático; há trade-offs.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Uma afirmação sem fonte verificável não é evidência.<br><strong>Conta:</strong> Se 1 em 10 claims não tem DOI, a taxa de claims frágeis é 10%.<br><strong>Resultado:</strong> A checagem reduz o risco, mas não o elimina.<br><em>Limite:</em> Desinformação não é uma propriedade quântica.</span></p>
+<p><strong>O que ainda não sabemos:</strong> Não há consenso moral automático; há trade-offs. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Uma afirmação sem fonte verificável não é evidência.<br><strong>Conta:</strong> Se 1 em 10 claims não tem DOI, a taxa de claims frágeis é 10%.<br><strong>Resultado:</strong> A checagem reduz o risco, mas não o elimina.<br><em>Limite:</em> Desinformação não é uma propriedade quântica.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Não há consenso moral automático; há trade-offs.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

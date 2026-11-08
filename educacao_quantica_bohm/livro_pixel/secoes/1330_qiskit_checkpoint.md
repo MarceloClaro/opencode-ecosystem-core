@@ -10,14 +10,11 @@
 
 <p><strong>Tarefa:</strong> Você consegue comparar o Bell de Qiskit com o de Cirq?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子开发包</span> <em>liàng zǐ kāi fā bāo</em> <span class="tom">· tons 4-3-1-1-1 · leitura liang-dzi-kai-fa-bau</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了量子开发包。</span> <em>Wǒ xué huì le liàng zǐ kāi fā bāo.</em> — Eu aprendi “Qiskit”.</span></p>
-<p><strong>Diário de bordo:</strong> o que eu entendi? onde eu travei? o que vou testar amanhã?</p>
-<p><strong>Próximo passo:</strong> escolha uma lauda da mesma lente e compare as duas respostas.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Qiskit inclui Statevector, transpilação e visualizações.</p>
-<p class="prof"><strong>Para o professor:</strong> Compare a mesma grandeza nas três bibliotecas; se divergir, verifique convenção antes de concluir erro.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

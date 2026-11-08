@@ -28,7 +28,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>X é a matriz [[0,1],[1,0]]; X² = I.</p>
-<p class="prof"><strong>Para o professor:</strong> Confira a ordem dos qubits e a diferença entre circuito lógico e transpilado.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

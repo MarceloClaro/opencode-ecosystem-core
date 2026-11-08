@@ -10,13 +10,11 @@
 
 <p>O Qiskit separa circuito lógico e circuito transpilado.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子电路</span> <em>liàng zǐ diàn lù</em> <span class="tom">· tons 4-3-4-4 · leitura liang-dzi-dien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解量子电路。</span> <em>Shēn rù liǎo jiě liàng zǐ diàn lù.</em> — Aprofunde-se em “QuantumCircuit”.</span></p>
-<p>Guarde uma pergunta para a próxima aula; não precisa resolver tudo hoje.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Bibliotecas simulam; convenções podem mudar o resultado.</p>
-<p class="prof"><strong>Para o professor:</strong> Se as bibliotecas divergirem, verifique a convenção.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

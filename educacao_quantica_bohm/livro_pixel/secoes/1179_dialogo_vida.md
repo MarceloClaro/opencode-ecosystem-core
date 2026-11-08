@@ -10,14 +10,11 @@
 
 <p>Famílias, equipes e escolas usam rodas para decidir.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">对话</span> <em>duì huà</em> <span class="tom">· tons 4-4 · leitura duei-rua</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到对话。</span> <em>Wǒ zài shēng huó zhōng kàn dào duì huà.</em> — Vejo “Diálogo” na vida.</span></p>
-<p><strong>Onde isso aparece:</strong> procure um exemplo na sua casa, na escola ou no bairro. Descreva em duas frases.</p>
-<p><strong>O que muda no seu jeito de olhar?</strong> A ideia de diálogo pode mudar uma decisão cotidiana?</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Bohm distingue diálogo de debate em 'On Dialogue'.</p>
-<p class="prof"><strong>Para o professor:</strong> Diga 'interpretação', não 'prova'. Compare com a leitura padrão e nomeie o preço: não localidade.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

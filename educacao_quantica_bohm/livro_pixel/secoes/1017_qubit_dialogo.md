@@ -10,15 +10,11 @@
 
 <p><strong>Pergunta da roda:</strong> O que significa 'não decidido'?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子比特</span> <em>liàng zǐ bǐ tè</em> <span class="tom">· tons 4-3-3-4 · leitura liang-dzi-bi-te</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看量子比特？</span> <em>Nǐ zěn me kàn liàng zǐ bǐ tè?</em> — O que você pensa de “Qubit”?</span></p>
-<p><strong>Roteiro de 9 minutos:</strong> 1 minuto de silêncio; 4 minutos de falas sem interrupção; 2 minutos de respostas ao que foi ouvido; 2 minutos de síntese.</p>
-<p><strong>Regra:</strong> não corrija a fala do outro; pergunte o que o levou a dizer aquilo.</p>
-<p><strong>Registre:</strong> uma suposição que apareceu e uma pergunta nova.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A esfera de Bloch representa um qubit; o interior não é acessível.</p>
-<p class="prof"><strong>Para o professor:</strong> Use a notação de ket apenas depois do concreto; verifique P(0)+P(1)=1.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

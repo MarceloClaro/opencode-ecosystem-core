@@ -10,13 +10,11 @@
 
 <p><strong>O erro comum:</strong> Achar que X é uma 'rotação de 180°' em qualquer base.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">翻转门</span> <em>fān zhuǎn mén</em> <span class="tom">· tons 1-3-2 · leitura fan-djuan-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">翻转门不是魔法。</span> <em>Fān zhuǎn mén bú shì mó fǎ.</em> — “Porta X” não é magia.</span></p>
-<p><strong>Como não cair:</strong> escreva um contraexemplo e teste com um colega.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Circuito é um modelo; a ordem dos qubits importa.</p>
-<p class="prof"><strong>Para o professor:</strong> Confira a ordem dos qubits antes de comparar.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

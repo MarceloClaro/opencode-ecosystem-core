@@ -10,13 +10,11 @@
 
 <p>PennyLane integra com simuladores e vários provedores.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子软件</span> <em>liàng zǐ ruǎn jiàn</em> <span class="tom">· tons 4-3-3-4 · leitura liang-dzi-juan-djien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解量子软件。</span> <em>Shēn rù liǎo jiě liàng zǐ ruǎn jiàn.</em> — Aprofunde-se em “PennyLane”.</span></p>
-<p>Guarde uma pergunta para a próxima aula; não precisa resolver tudo hoje.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Bibliotecas simulam; convenções podem mudar o resultado.</p>
-<p class="prof"><strong>Para o professor:</strong> Se as bibliotecas divergirem, verifique a convenção.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -10,13 +10,11 @@
 
 <p><strong>Tarefa:</strong> Você consegue escrever um QNode de Bell?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子软件</span> <em>liàng zǐ ruǎn jiàn</em> <span class="tom">· tons 4-3-3-4 · leitura liang-dzi-juan-djien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了量子软件。</span> <em>Wǒ xué huì le liàng zǐ ruǎn jiàn.</em> — Eu aprendi “PennyLane”.</span></p>
-<p><strong>Replicação:</strong> outra seed, outro backend, a mesma pergunta.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A diferenciação automática não substitui a interpretação física.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -10,14 +10,11 @@
 
 <p><strong>O erro comum:</strong> Liste os autovalores de Z.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">特征值</span> <em>tè zhēng zhí</em> <span class="tom">· tons 4-1-2 · leitura te-djeng-dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">特征值不是魔法。</span> <em>Tè zhēng zhí bú shì mó fǎ.</em> — “Autovalor” não é magia.</span></p>
-<p><strong>Por que acontece:</strong> o cérebro procura uma imagem simples e apaga a parte matemática que não se encaixa.</p>
-<p><strong>Como testar:</strong> escreva um contraexemplo em uma frase e veja se ele derruba sua explicação.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A matemática é representação; não é o fenômeno. Não confunda o mapa com o território.</p>
-<p class="prof"><strong>Para o professor:</strong> A fórmula deve vir depois da intuição; use exemplos numéricos pequenos.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

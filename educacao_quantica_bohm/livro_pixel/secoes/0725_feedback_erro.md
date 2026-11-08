@@ -10,13 +10,11 @@
 
 <p><strong>O erro comum:</strong> Escreva um feedback com 'certo, melhorar, próximo passo'.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">反馈</span> <em>fǎn kuì</em> <span class="tom">· tons 3-4 · leitura fan-kuei</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">反馈不是魔法。</span> <em>Fǎn kuì bú shì mó fǎ.</em> — “Feedback” não é magia.</span></p>
-<p><strong>Como não cair:</strong> escreva um contraexemplo e teste com um colega.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Pedagogia é contextual; não há método garantido.</p>
-<p class="prof"><strong>Para o professor:</strong> Nanoaula é tempo e evidência, não fragmento.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -10,7 +10,6 @@
 
 <p>Aplique X em |0⟩ e em |1⟩ e desenhe as amplitudes.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">翻转门</span> <em>fān zhuǎn mén</em> <span class="tom">· tons 1-3-2 · leitura fan-djuan-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习翻转门。</span> <em>Liàn xí fān zhuǎn mén.</em> — Pratique “Porta X”.</span></p>
-<p>Faça em 5 minutos; anote o que esperava antes de começar.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -27,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Circuito é um modelo; a ordem dos qubits importa.</p>
-<p class="prof"><strong>Para o professor:</strong> Confira a ordem dos qubits antes de comparar.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

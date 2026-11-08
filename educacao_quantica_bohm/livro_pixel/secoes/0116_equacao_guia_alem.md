@@ -10,13 +10,11 @@
 
 <p>A equação de Bohm é uma releitura da equação de Schrödinger.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">导波方程</span> <em>dǎo bō fāng chéng</em> <span class="tom">· tons 3-1-1-2 · leitura dau-bo-fang-tcheng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解导波方程。</span> <em>Shēn rù liǎo jiě dǎo bō fāng chéng.</em> — Aprofunde-se em “Equação do guia”.</span></p>
-<p>Guarde uma pergunta para a próxima aula; não precisa resolver tudo hoje.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Bohm é uma interpretação entre várias; não é consenso.</p>
-<p class="prof"><strong>Para o professor:</strong> Diga 'interpretação', não 'prova'.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -10,13 +10,11 @@
 
 <p><strong>Pergunta da roda:</strong> Quem paga a conta?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">成本</span> <em>chéng běn</em> <span class="tom">· tons 2-3 · leitura tcheng-ben</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看成本？</span> <em>Nǐ zěn me kàn chéng běn?</em> — O que você pensa de “Custo”?</span></p>
-<p>Ouça sem interromper; anote uma ideia que mudou sua opinião.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Ética envolve valores e poder; não há resposta automática.</p>
-<p class="prof"><strong>Para o professor:</strong> Peça evidência, afetados e alternativas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

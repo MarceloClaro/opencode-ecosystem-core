@@ -10,7 +10,6 @@
 
 <p>Imprima as amplitudes de um Bell e confira 0,707.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">态矢量</span> <em>tài shǐ liàng</em> <span class="tom">· tons 4-3-4 · leitura tai-shi-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习态矢量。</span> <em>Liàn xí tài shǐ liàng.</em> — Pratique “Statevector”.</span></p>
-<p><strong>Protocolo:</strong> varie um parâmetro, repita com outra seed e compare.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -27,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O vetor cresce como 2^n; não é acessível por medição única.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

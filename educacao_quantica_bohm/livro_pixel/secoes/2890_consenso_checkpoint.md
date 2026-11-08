@@ -10,13 +10,11 @@
 
 <p><strong>Tarefa:</strong> Quem tem poder para encerrar a conversa?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">共识</span> <em>gòng shí</em> <span class="tom">· tons 4-2 · leitura gong-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了共识。</span> <em>Wǒ xué huì le gòng shí.</em> — Eu aprendi “Consenso”.</span></p>
-<p><strong>Replicação:</strong> outra seed, outro backend, a mesma pergunta.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Não há consenso moral automático; há trade-offs.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

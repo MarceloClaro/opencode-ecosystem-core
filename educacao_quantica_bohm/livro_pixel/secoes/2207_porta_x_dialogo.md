@@ -11,13 +11,11 @@
 <p><strong>Pergunta de pesquisa:</strong> O que significa inverter um estado?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">翻转门</span> <em>fān zhuǎn mén</em> <span class="tom">· tons 1-3-2 · leitura fan-djuan-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看翻转门？</span> <em>Nǐ zěn me kàn fān zhuǎn mén?</em> — O que você pensa de “Porta X”?</span></p>
 <p><strong>Hipótese rival:</strong> X não cria superposição; ela apenas troca os estados de base.</p>
-<p>Desenhe um experimento que separe as duas hipóteses.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>X não cria superposição; ela apenas troca os estados de base.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

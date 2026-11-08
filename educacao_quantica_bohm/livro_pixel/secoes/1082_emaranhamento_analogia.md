@@ -11,13 +11,11 @@
 <p>Duas luvas de um par: uma revela a outra.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">纠缠</span> <em>jiū chán</em> <span class="tom">· tons 1-2 · leitura djiu-tchan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像纠缠。</span> <em>Zhè xiàng jiū chán.</em> — Isto se parece com “Emaranhamento”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> As luvas têm valores escondidos; o emaranhamento não é explicado por variáveis locais.</p>
-<p><strong>Teste rápido:</strong> desenhe a analogia e marque com um X o ponto em que ela deixa de explicar o conceito.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Bell mostrou que variáveis ocultas locais não reproduzem as correlações.</p>
-<p class="prof"><strong>Para o professor:</strong> Use a notação de ket apenas depois do concreto; verifique P(0)+P(1)=1.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

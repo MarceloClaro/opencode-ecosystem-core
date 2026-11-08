@@ -10,14 +10,12 @@
 
 <p>A LGPD exige base legal, finalidade e transparência.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">成本</span> <em>chéng běn</em> <span class="tom">· tons 2-3 · leitura tcheng-ben</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解成本。</span> <em>Shēn rù liǎo jiě chéng běn.</em> — Aprofunde-se em “Custo”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> Não há consenso moral automático; há trade-offs.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Custo total = shots × preço por shot + tempo de fila.<br><strong>Conta:</strong> 4096 shots × R$ 0,01 = R$ 40,96 (ilustrativo).<br><strong>Resultado:</strong> O orçamento precisa incluir repetições e falhas.<br><em>Limite:</em> Custo não é qualidade.</span></p>
+<p><strong>O que ainda não sabemos:</strong> Não há consenso moral automático; há trade-offs. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Custo total = shots × preço por shot + tempo de fila.<br><strong>Conta:</strong> 4096 shots × R$ 0,01 = R$ 40,96 (ilustrativo).<br><strong>Resultado:</strong> O orçamento precisa incluir repetições e falhas.<br><em>Limite:</em> Custo não é qualidade.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Não há consenso moral automático; há trade-offs.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

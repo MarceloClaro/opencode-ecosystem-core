@@ -10,13 +10,11 @@
 
 <p><strong>Pergunta da roda:</strong> O que eu vou fazer com a resposta?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">问题</span> <em>wèn tí</em> <span class="tom">· tons 4-2 · leitura uen-ti</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看问题？</span> <em>Nǐ zěn me kàn wèn tí?</em> — O que você pensa de “Pergunta”?</span></p>
-<p>Ouça sem interromper; anote uma ideia que mudou sua opinião.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Todo projeto é um recorte; declare o limite.</p>
-<p class="prof"><strong>Para o professor:</strong> Exija um limite específico.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

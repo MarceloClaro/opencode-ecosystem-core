@@ -10,13 +10,11 @@
 
 <p><strong>Tarefa:</strong> Quem é prejudicado quando o limite é escondido?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">局限</span> <em>jú xiàn</em> <span class="tom">· tons 2-4 · leitura djyu-shien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了局限。</span> <em>Wǒ xué huì le jú xiàn.</em> — Eu aprendi “Limite”.</span></p>
-<p><strong>Diário:</strong> o que entendi? onde travei? o que vou testar amanhã?</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Todo projeto é um recorte; declare o limite.</p>
-<p class="prof"><strong>Para o professor:</strong> Exija um limite específico.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

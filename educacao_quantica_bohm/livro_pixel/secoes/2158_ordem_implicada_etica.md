@@ -11,13 +11,11 @@
 <p>Uma metáfora de totalidade pode apagar diferenças e conflitos?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">隐缠序</span> <em>yǐn chán xù</em> <span class="tom">· tons 3-2-4 · leitura in-tchan-shyu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于隐缠序？</span> <em>Shéi shòu yì yú yǐn chán xù?</em> — Quem se beneficia de “Ordem implicada”?</span></p>
 <p><strong>Governança:</strong> quem audita, quem responde e como reparar?</p>
-<p>Mapeie os afetados e uma medida de mitigação.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>É uma visão filosófica, não uma teoria física testável por si só.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

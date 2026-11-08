@@ -10,13 +10,11 @@
 
 <p><strong>Tarefa:</strong> Um recurso caro deve ser reservado a que tipo de pergunta?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">成本</span> <em>chéng běn</em> <span class="tom">· tons 2-3 · leitura tcheng-ben</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了成本。</span> <em>Wǒ xué huì le chéng běn.</em> — Eu aprendi “Custo”.</span></p>
-<p><strong>Diário:</strong> o que entendi? onde travei? o que vou testar amanhã?</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Ética envolve valores e poder; não há resposta automática.</p>
-<p class="prof"><strong>Para o professor:</strong> Peça evidência, afetados e alternativas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

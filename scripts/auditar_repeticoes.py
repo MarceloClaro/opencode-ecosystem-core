@@ -52,6 +52,7 @@ def main() -> None:
         f"- Laudas analisadas: **{len(arquivos)}**",
         f"- Palavras (texto limpo): **{total_palavras:,}**".replace(",", "."),
         f"- Parágrafos repetidos (≥ 2 ocorrências): **{repetidos:,}**".replace(",", "."),
+        f"- Baseline R1099: **21.031** parágrafos repetidos; após a poda R1102: **{repetidos:,}**.".replace(",", "."),
         f"- N-gramas distintos: **{len(ngramas):,}**".replace(",", "."),
         "",
         "## 1. Laudas por lente",

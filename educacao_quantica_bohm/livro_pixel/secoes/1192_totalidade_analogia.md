@@ -11,13 +11,11 @@
 <p>Uma melodia que não é apenas a soma das notas.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">整体性</span> <em>zhěng tǐ xìng</em> <span class="tom">· tons 3-3-4 · leitura djeng-ti-shing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像整体性。</span> <em>Zhè xiàng zhěng tǐ xìng.</em> — Isto se parece com “Totalidade”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> Totalidade não significa harmonia; pode haver conflito e desordem.</p>
-<p><strong>Teste rápido:</strong> desenhe a analogia e marque com um X o ponto em que ela deixa de explicar o conceito.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A totalidade aparece na física, na ecologia e na pedagogia.</p>
-<p class="prof"><strong>Para o professor:</strong> Diga 'interpretação', não 'prova'. Compare com a leitura padrão e nomeie o preço: não localidade.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

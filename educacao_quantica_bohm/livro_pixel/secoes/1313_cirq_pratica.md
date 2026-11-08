@@ -10,12 +10,6 @@
 
 <p>Monte um Bell e rode 1000 tiros no simulador.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子框架</span> <em>liàng zǐ kuàng jià</em> <span class="tom">· tons 4-3-4-4 · leitura liang-dzi-kuang-djia</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习量子框架。</span> <em>Liàn xí liàng zǐ kuàng jià.</em> — Pratique “Cirq”.</span></p>
-<ol>
-<li>Faça a atividade sem pressa, em 5 minutos.</li>
-<li>Anote o que esperava antes de começar.</li>
-<li>Compare a previsão com o que observou.</li>
-</ol>
-<p><strong>O que observar:</strong> a diferença entre o que você esperava e o que aconteceu é o dado mais valioso.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -32,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Cirq é usado em pesquisa com hardware supercondutor.</p>
-<p class="prof"><strong>Para o professor:</strong> Compare a mesma grandeza nas três bibliotecas; se divergir, verifique convenção antes de concluir erro.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -11,13 +11,11 @@
 <p><strong>O erro comum:</strong> Desenhe uma cadeia de decisão com papéis e deveres.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">责任</span> <em>zé rèn</em> <span class="tom">· tons 2-4 · leitura dze-jen</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">责任不是魔法。</span> <em>Zé rèn bú shì mó fǎ.</em> — “Responsabilidade” não é magia.</span></p>
 <p><strong>Correção formal:</strong> A LGPD exige base legal, finalidade e transparência.</p>
-<p>Teste a correção com um exemplo numérico pequeno.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Não há consenso moral automático; há trade-offs.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

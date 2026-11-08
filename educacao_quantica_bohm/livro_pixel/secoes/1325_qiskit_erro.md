@@ -10,14 +10,11 @@
 
 <p><strong>O erro comum:</strong> Ignorar a convenção little-endian ao comparar resultados.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子开发包</span> <em>liàng zǐ kāi fā bāo</em> <span class="tom">· tons 4-3-1-1-1 · leitura liang-dzi-kai-fa-bau</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">量子开发包不是魔法。</span> <em>Liàng zǐ kāi fā bāo bú shì mó fǎ.</em> — “Qiskit” não é magia.</span></p>
-<p><strong>Por que acontece:</strong> o cérebro procura uma imagem simples e apaga a parte matemática que não se encaixa.</p>
-<p><strong>Como testar:</strong> escreva um contraexemplo em uma frase e veja se ele derruba sua explicação.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Qiskit inclui Statevector, transpilação e visualizações.</p>
-<p class="prof"><strong>Para o professor:</strong> Compare a mesma grandeza nas três bibliotecas; se divergir, verifique convenção antes de concluir erro.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

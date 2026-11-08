@@ -10,13 +10,11 @@
 
 <p>O produto tensorial faz a dimensão crescer como 2^n.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">向量</span> <em>xiàng liàng</em> <span class="tom">· tons 4-4 · leitura shiang-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解向量。</span> <em>Shēn rù liǎo jiě xiàng liàng.</em> — Aprofunde-se em “Vetor”.</span></p>
-<p>Guarde uma pergunta para a próxima aula; não precisa resolver tudo hoje.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A matemática é representação; não é o fenômeno.</p>
-<p class="prof"><strong>Para o professor:</strong> Use exemplos pequenos antes da fórmula.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

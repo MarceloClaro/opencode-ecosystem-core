@@ -10,13 +10,11 @@
 
 <p><strong>Tarefa:</strong> Você consegue explicar por que não há signaling?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">非定域性</span> <em>fēi dìng yù xìng</em> <span class="tom">· tons 1-4-4-4 · leitura fei-ding-yu-shing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了非定域性。</span> <em>Wǒ xué huì le fēi dìng yù xìng.</em> — Eu aprendi “Não localidade”.</span></p>
-<p><strong>Replicação:</strong> outra seed, outro backend, a mesma pergunta.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A não localidade não permite enviar sinais controláveis.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

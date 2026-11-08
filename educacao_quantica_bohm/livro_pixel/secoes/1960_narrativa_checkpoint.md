@@ -10,14 +10,11 @@
 
 <p><strong>Tarefa:</strong> Uma narrativa heroica pode esconder custos e fracassos?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">叙事</span> <em>xù shì</em> <span class="tom">· tons 4-4 · leitura shyu-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了叙事。</span> <em>Wǒ xué huì le xù shì.</em> — Eu aprendi “Narrativa”.</span></p>
-<p><strong>Diário de bordo:</strong> o que eu entendi? onde eu travei? o que vou testar amanhã?</p>
-<p><strong>Próximo passo:</strong> escolha uma lauda da mesma lente e compare as duas respostas.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Todo projeto é um recorte. Declare limite, evidência e o que ficou fora.</p>
-<p class="prof"><strong>Para o professor:</strong> Exija um limite específico; 'tem limitações' não é suficiente.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

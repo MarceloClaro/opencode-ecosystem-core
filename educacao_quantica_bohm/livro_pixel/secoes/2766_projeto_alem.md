@@ -10,14 +10,12 @@
 
 <p>A prática distribuída e a recuperação ativa têm apoio em pesquisa.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">项目</span> <em>xiàng mù</em> <span class="tom">· tons 4-4 · leitura shiang-mu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解项目。</span> <em>Shēn rù liǎo jiě xiàng mù.</em> — Aprofunde-se em “Projeto”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> A técnica não funciona igual para todos os estudantes.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Um projeto mínimo tem 4 partes: pergunta, hipótese, experimento, limite.<br><strong>Conta:</strong> Se cada parte leva 1 página, o projeto tem 4 páginas.<br><strong>Resultado:</strong> A saída é um documento replicável, não uma promessa.<br><em>Limite:</em> Projeto não é marketing.</span></p>
+<p><strong>O que ainda não sabemos:</strong> A técnica não funciona igual para todos os estudantes. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Um projeto mínimo tem 4 partes: pergunta, hipótese, experimento, limite.<br><strong>Conta:</strong> Se cada parte leva 1 página, o projeto tem 4 páginas.<br><strong>Resultado:</strong> A saída é um documento replicável, não uma promessa.<br><em>Limite:</em> Projeto não é marketing.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A técnica não funciona igual para todos os estudantes.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

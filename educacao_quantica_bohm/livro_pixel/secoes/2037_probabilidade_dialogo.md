@@ -11,13 +11,11 @@
 <p><strong>Pergunta de pesquisa:</strong> O que significa 'provável'?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">概率</span> <em>gài lǜ</em> <span class="tom">· tons 4-4 · leitura gai-lyu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看概率？</span> <em>Nǐ zěn me kàn gài lǜ?</em> — O que você pensa de “Probabilidade”?</span></p>
 <p><strong>Hipótese rival:</strong> Uma amostra pequena flutua; a probabilidade não garante o próximo resultado.</p>
-<p>Desenhe um experimento que separe as duas hipóteses.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Uma amostra pequena flutua; a probabilidade não garante o próximo resultado.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

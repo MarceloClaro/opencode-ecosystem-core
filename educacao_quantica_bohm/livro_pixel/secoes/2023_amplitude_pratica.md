@@ -10,7 +10,6 @@
 
 <p>Use uma barra de 0 a 1 para representar α e β.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">振幅</span> <em>zhèn fú</em> <span class="tom">· tons 4-2 · leitura djen-fu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习振幅。</span> <em>Liàn xí zhèn fú.</em> — Pratique “Amplitude”.</span></p>
-<p><strong>Protocolo:</strong> varie um parâmetro, repita com outra seed e compare.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -27,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A amplitude não é uma probabilidade; é preciso elevar ao quadrado.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

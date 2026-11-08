@@ -10,14 +10,11 @@
 
 <p><strong>Tarefa:</strong> Quem escolhe quais observáveis medir?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">特征值</span> <em>tè zhēng zhí</em> <span class="tom">· tons 4-1-2 · leitura te-djeng-dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了特征值。</span> <em>Wǒ xué huì le tè zhēng zhí.</em> — Eu aprendi “Autovalor”.</span></p>
-<p><strong>Diário de bordo:</strong> o que eu entendi? onde eu travei? o que vou testar amanhã?</p>
-<p><strong>Próximo passo:</strong> escolha uma lauda da mesma lente e compare as duas respostas.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A matemática é representação; não é o fenômeno. Não confunda o mapa com o território.</p>
-<p class="prof"><strong>Para o professor:</strong> A fórmula deve vir depois da intuição; use exemplos numéricos pequenos.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

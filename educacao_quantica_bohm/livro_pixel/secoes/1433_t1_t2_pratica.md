@@ -10,12 +10,6 @@
 
 <p>T1 e T2 não são a mesma coisa; T2 pode ser menor que T1.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">弛豫与相干</span> <em>chí yù yǔ xiāng gān</em> <span class="tom">· tons 2-4-3-1-1 · leitura tchi-yu-yu-shiang-gan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习弛豫与相干。</span> <em>Liàn xí chí yù yǔ xiāng gān.</em> — Pratique “T1 e T2”.</span></p>
-<ol>
-<li>Faça a atividade sem pressa, em 5 minutos.</li>
-<li>Anote o que esperava antes de começar.</li>
-<li>Compare a previsão com o que observou.</li>
-</ol>
-<p><strong>O que observar:</strong> a diferença entre o que você esperava e o que aconteceu é o dado mais valioso.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -32,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Backends têm ruído, calibração e deriva. Fidelidade proxy não é prova de emaranhamento.</p>
-<p class="prof"><strong>Para o professor:</strong> T1, T2, erro de leitura e ruído de porta são coisas distintas; não os trate como um número único.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

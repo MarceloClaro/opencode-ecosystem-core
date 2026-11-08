@@ -10,7 +10,6 @@
 
 <p>A dimensão cresce exponencialmente, não linearmente.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">张量积</span> <em>zhāng liàng jī</em> <span class="tom">· tons 1-4-1 · leitura djang-liang-dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习张量积。</span> <em>Liàn xí zhāng liàng jī.</em> — Pratique “Produto tensorial”.</span></p>
-<p>Faça em 5 minutos; anote o que esperava antes de começar.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -27,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A matemática é representação; não é o fenômeno.</p>
-<p class="prof"><strong>Para o professor:</strong> Use exemplos pequenos antes da fórmula.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

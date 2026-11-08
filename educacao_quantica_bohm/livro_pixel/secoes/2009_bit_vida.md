@@ -10,13 +10,11 @@
 
 <p>Semáforos, senhas e códigos de barras são bits em ação.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">比特</span> <em>bǐ tè</em> <span class="tom">· tons 3-4 · leitura bi-te</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到比特。</span> <em>Wǒ zài shēng huó zhōng kàn dào bǐ tè.</em> — Vejo “Bit” na vida.</span></p>
-<p><strong>Onde medir:</strong> proponha um indicador e uma fonte de dados.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A analogia não explica probabilidade; o bit clássico é exclusivo.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

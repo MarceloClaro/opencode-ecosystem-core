@@ -10,13 +10,11 @@
 
 <p><strong>Tarefa:</strong> Um checkpoint pode ser usado para excluir em vez de ensinar?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">检查点</span> <em>jiǎn chá diǎn</em> <span class="tom">· tons 3-2-3 · leitura djien-tcha-dien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了检查点。</span> <em>Wǒ xué huì le jiǎn chá diǎn.</em> — Eu aprendi “Checkpoint”.</span></p>
-<p><strong>Diário:</strong> o que entendi? onde travei? o que vou testar amanhã?</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Pedagogia é contextual; não há método garantido.</p>
-<p class="prof"><strong>Para o professor:</strong> Nanoaula é tempo e evidência, não fragmento.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

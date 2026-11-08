@@ -10,14 +10,11 @@
 
 <p><strong>O erro comum:</strong> Achar que uma única medição revela todas as amplitudes.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">多次测量</span> <em>duō cì cè liáng</em> <span class="tom">· tons 1-4-4-2 · leitura duo-tsi-tse-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">多次测量不是魔法。</span> <em>Duō cì cè liáng bú shì mó fǎ.</em> — “Medição múltipla” não é magia.</span></p>
-<p><strong>Por que acontece:</strong> o cérebro procura uma imagem simples e apaga a parte matemática que não se encaixa.</p>
-<p><strong>Como testar:</strong> escreva um contraexemplo em uma frase e veja se ele derruba sua explicação.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A amostragem tem erro estatístico que diminui com o número de tiros.</p>
-<p class="prof"><strong>Para o professor:</strong> Confira a ordem dos qubits e a diferença entre circuito lógico e transpilado.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

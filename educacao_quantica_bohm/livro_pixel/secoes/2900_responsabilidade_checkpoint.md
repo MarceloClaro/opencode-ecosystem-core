@@ -10,13 +10,11 @@
 
 <p><strong>Tarefa:</strong> Uma empresa pode terceirizar a responsabilidade para o usuário?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">责任</span> <em>zé rèn</em> <span class="tom">· tons 2-4 · leitura dze-jen</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了责任。</span> <em>Wǒ xué huì le zé rèn.</em> — Eu aprendi “Responsabilidade”.</span></p>
-<p><strong>Replicação:</strong> outra seed, outro backend, a mesma pergunta.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Não há consenso moral automático; há trade-offs.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -11,13 +11,11 @@
 <p>Lançar uma moeda muitas vezes e contar as caras.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">概率</span> <em>gài lǜ</em> <span class="tom">· tons 4-4 · leitura gai-lyu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像概率。</span> <em>Zhè xiàng gài lǜ.</em> — Isto se parece com “Probabilidade”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> Uma amostra pequena flutua; a probabilidade não garante o próximo resultado.</p>
-<p><strong>Teste rápido:</strong> desenhe a analogia e marque com um X o ponto em que ela deixa de explicar o conceito.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A lei dos grandes números explica por que a frequência se estabiliza.</p>
-<p class="prof"><strong>Para o professor:</strong> Use a notação de ket apenas depois do concreto; verifique P(0)+P(1)=1.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

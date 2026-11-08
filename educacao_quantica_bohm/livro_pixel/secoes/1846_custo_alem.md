@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>A LGPD exige base legal, finalidade e transparência.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">成本</span> <em>chéng běn</em> <span class="tom">· tons 2-3 · leitura tcheng-ben</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解成本。</span> <em>Shēn rù liǎo jiě chéng běn.</em> — Aprofunde-se em “Custo”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Custo total = shots × preço por shot + tempo de fila.<br><strong>Conta:</strong> 4096 shots × R$ 0,01 = R$ 40,96 (ilustrativo).<br><strong>Resultado:</strong> O orçamento precisa incluir repetições e falhas.<br><em>Limite:</em> Custo não é qualidade.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">成本</span> <em>chéng běn</em> <span class="tom">· tons 2-3 · leitura tcheng-ben</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解成本。</span> <em>Shēn rù liǎo jiě chéng běn.</em> — Aprofunde-se em “Custo”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Custo total = shots × preço por shot + tempo de fila.<br><strong>Conta:</strong> 4096 shots × R$ 0,01 = R$ 40,96 (ilustrativo).<br><strong>Resultado:</strong> O orçamento precisa incluir repetições e falhas.<br><em>Limite:</em> Custo não é qualidade.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Ética envolve valores e poder. Não há resposta automática; há deliberação e consequências.</p>
-<p class="prof"><strong>Para o professor:</strong> Não transforme ética em opinião pessoal: peça evidência, afetados e alternativas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

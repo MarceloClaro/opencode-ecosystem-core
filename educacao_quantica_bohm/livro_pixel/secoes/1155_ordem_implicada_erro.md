@@ -10,14 +10,11 @@
 
 <p><strong>O erro comum:</strong> Dizer que 'o universo é um holograma' como fato científico.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">隐缠序</span> <em>yǐn chán xù</em> <span class="tom">· tons 3-2-4 · leitura in-tchan-shyu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">隐缠序不是魔法。</span> <em>Yǐn chán xù bú shì mó fǎ.</em> — “Ordem implicada” não é magia.</span></p>
-<p><strong>Por que acontece:</strong> o cérebro procura uma imagem simples e apaga a parte matemática que não se encaixa.</p>
-<p><strong>Como testar:</strong> escreva um contraexemplo em uma frase e veja se ele derruba sua explicação.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A analogia do holograma é matemática e clássica.</p>
-<p class="prof"><strong>Para o professor:</strong> Diga 'interpretação', não 'prova'. Compare com a leitura padrão e nomeie o preço: não localidade.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

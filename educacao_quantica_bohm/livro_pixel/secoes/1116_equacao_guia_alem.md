@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>A equação de Bohm é uma releitura da equação de Schrödinger.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">导波方程</span> <em>dǎo bō fāng chéng</em> <span class="tom">· tons 3-1-1-2 · leitura dau-bo-fang-tcheng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解导波方程。</span> <em>Shēn rù liǎo jiě dǎo bō fāng chéng.</em> — Aprofunde-se em “Equação do guia”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> v = (ħ/m) Im(∇ψ/ψ).<br><strong>Conta:</strong> Para ψ = e^{ikx}: ∇ψ/ψ = ik; Im(ik) = k; v = ħk/m.<br><strong>Resultado:</strong> v = ħk/m, o mesmo resultado da onda plana.<br><em>Limite:</em> Para várias partículas, a velocidade de uma depende das posições das outras.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">导波方程</span> <em>dǎo bō fāng chéng</em> <span class="tom">· tons 3-1-1-2 · leitura dau-bo-fang-tcheng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解导波方程。</span> <em>Shēn rù liǎo jiě dǎo bō fāng chéng.</em> — Aprofunde-se em “Equação do guia”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> v = (ħ/m) Im(∇ψ/ψ).<br><strong>Conta:</strong> Para ψ = e^{ikx}: ∇ψ/ψ = ik; Im(ik) = k; v = ħk/m.<br><strong>Resultado:</strong> v = ħk/m, o mesmo resultado da onda plana.<br><em>Limite:</em> Para várias partículas, a velocidade de uma depende das posições das outras.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A equação de Bohm é uma releitura da equação de Schrödinger.</p>
-<p class="prof"><strong>Para o professor:</strong> Diga 'interpretação', não 'prova'. Compare com a leitura padrão e nomeie o preço: não localidade.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -10,13 +10,11 @@
 
 <p><strong>Tarefa:</strong> Algoritmos de fatoração podem ameaçar a privacidade?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子傅里叶</span> <em>liàng zǐ fù lǐ yè</em> <span class="tom">· tons 4-3-4-3-4 · leitura liang-dzi-fu-li-ie</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了量子傅里叶。</span> <em>Wǒ xué huì le liàng zǐ fù lǐ yè.</em> — Eu aprendi “Fourier quântico”.</span></p>
-<p><strong>Replicação:</strong> outra seed, outro backend, a mesma pergunta.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A equação não explica por que o mundo segue a equação.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

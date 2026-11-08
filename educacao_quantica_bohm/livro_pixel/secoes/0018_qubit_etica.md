@@ -10,13 +10,11 @@
 
 <p>Quem controla a preparação de um qubit controla a informação?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子比特</span> <em>liàng zǐ bǐ tè</em> <span class="tom">· tons 4-3-3-4 · leitura liang-dzi-bi-te</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于量子比特？</span> <em>Shéi shòu yì yú liàng zǐ bǐ tè?</em> — Quem se beneficia de “Qubit”?</span></p>
-<p><strong>Quem ganha? Quem perde?</strong> Cite um grupo para cada lado.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Medir produz uma amostra; não é ler um valor escondido.</p>
-<p class="prof"><strong>Para o professor:</strong> Comece pelo concreto; só depois use a notação.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

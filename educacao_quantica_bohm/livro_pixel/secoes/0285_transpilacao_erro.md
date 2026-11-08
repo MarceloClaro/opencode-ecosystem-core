@@ -10,13 +10,11 @@
 
 <p><strong>O erro comum:</strong> Achar que o circuito enviado é idêntico ao que roda no chip.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">转译</span> <em>zhuǎn yì</em> <span class="tom">· tons 3-4 · leitura djuan-i</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">转译不是魔法。</span> <em>Zhuǎn yì bú shì mó fǎ.</em> — “Transpilação” não é magia.</span></p>
-<p><strong>Como não cair:</strong> escreva um contraexemplo e teste com um colega.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Circuito é um modelo; a ordem dos qubits importa.</p>
-<p class="prof"><strong>Para o professor:</strong> Confira a ordem dos qubits antes de comparar.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

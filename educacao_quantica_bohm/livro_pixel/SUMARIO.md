@@ -64,6 +64,8 @@ ao abridor da parte naquele nível.
 | [Manual do leitor](#laboratorio-leitor) | Instalação, API key, código, CSV e figuras | <span class="pg"><a href="#laboratorio-leitor"></a></span> |
 | [Código dos 18 experimentos](#codigo-experimentos) | O script completo, da instalação ao resultado | <span class="pg"><a href="#codigo-experimentos"></a></span> |
 | [Verificação em Lean 4](#lean-quantum) | Teoremas de H, X, Z, CNOT e CHSH | <span class="pg"><a href="#lean-quantum"></a></span> |
+| [Aprofundamento quântico](#aprofundamento) | Estados, canais, algoritmos, QEC e VQC | <span class="pg"><a href="#aprofundamento"></a></span> |
+| [Notas ao professor](#notas-professor) | Orientação por parte, sem repetir em cada lauda | <span class="pg"><a href="#notas-professor"></a></span> |
 | [Gabarito comentado](#gabarito) | 100 checkpoints com critério e resultado | <span class="pg"><a href="#gabarito"></a></span> |
 | [Prática SWAP](#swap-test) | O teste de sobreposição passo a passo | <span class="pg"><a href="#swap-test"></a></span> |
 | [Esfera de Bloch](#bloch-suite) | Seis circuitos, simulação e hardware | <span class="pg"><a href="#bloch-suite"></a></span> |

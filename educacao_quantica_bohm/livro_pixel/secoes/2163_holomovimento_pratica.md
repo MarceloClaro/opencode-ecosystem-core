@@ -10,7 +10,6 @@
 
 <p>Desenhe um processo que se desdobra em etapas.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">整体运动</span> <em>zhěng tǐ yùn dòng</em> <span class="tom">· tons 3-3-4-4 · leitura djeng-ti-yun-dong</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习整体运动。</span> <em>Liàn xí zhěng tǐ yùn dòng.</em> — Pratique “Holomovimento”.</span></p>
-<p><strong>Protocolo:</strong> varie um parâmetro, repita com outra seed e compare.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -27,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O termo é filosófico; não é uma equação operacional.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

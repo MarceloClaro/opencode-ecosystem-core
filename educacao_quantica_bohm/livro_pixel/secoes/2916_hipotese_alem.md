@@ -10,14 +10,12 @@
 
 <p>Um bom projeto declara o que não prova.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">假设</span> <em>jiǎ shè</em> <span class="tom">· tons 3-4 · leitura djia-she</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解假设。</span> <em>Shēn rù liǎo jiě jiǎ shè.</em> — Aprofunde-se em “Hipótese”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> O projeto não esgota o problema; escolhe um recorte.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> H₀: não há diferença; H₁: há diferença.<br><strong>Conta:</strong> Se a acurácia é 100% em 4 pontos, o teste tem pouca potência.<br><strong>Resultado:</strong> A hipótese precisa de um desenho que possa refutá-la.<br><em>Limite:</em> Hipótese não é opinião.</span></p>
+<p><strong>O que ainda não sabemos:</strong> O projeto não esgota o problema; escolhe um recorte. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> H₀: não há diferença; H₁: há diferença.<br><strong>Conta:</strong> Se a acurácia é 100% em 4 pontos, o teste tem pouca potência.<br><strong>Resultado:</strong> A hipótese precisa de um desenho que possa refutá-la.<br><em>Limite:</em> Hipótese não é opinião.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O projeto não esgota o problema; escolhe um recorte.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

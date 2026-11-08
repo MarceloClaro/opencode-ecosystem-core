@@ -10,14 +10,11 @@
 
 <p>Uma hipótese de equilíbrio pode ser testada ou é metafísica?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子平衡</span> <em>liàng zǐ píng héng</em> <span class="tom">· tons 4-3-2-2 · leitura liang-dzi-ping-reng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于量子平衡？</span> <em>Shéi shòu yì yú liàng zǐ píng héng?</em> — Quem se beneficia de “Equilíbrio quântico”?</span></p>
-<p><strong>Quem ganha? Quem perde?</strong> Liste um grupo que se beneficia e um que pode ser prejudicado.</p>
-<p><strong>O que a escola pode fazer?</strong> Transforme o dilema em uma pergunta investigável, não em um julgamento pessoal.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A equivariância é a propriedade matemática central.</p>
-<p class="prof"><strong>Para o professor:</strong> Diga 'interpretação', não 'prova'. Compare com a leitura padrão e nomeie o preço: não localidade.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -10,14 +10,12 @@
 
 <p>CNOT é a porta de duas entradas que gera o estado de Bell.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">受控非门</span> <em>shòu kòng fēi mén</em> <span class="tom">· tons 4-4-1-2 · leitura shou-kong-fei-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解受控非门。</span> <em>Shēn rù liǎo jiě shòu kòng fēi mén.</em> — Aprofunde-se em “CNOT”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> CNOT não copia um estado quântico arbitrário; ela cria correlação.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> CNOT: |00⟩→|00⟩, |01⟩→|01⟩, |10⟩→|11⟩, |11⟩→|10⟩.<br><strong>Conta:</strong> O primeiro bit é o controle; o segundo é o alvo.<br><strong>Resultado:</strong> CNOT|10⟩ = |11⟩; CNOT|11⟩ = |10⟩.<br><em>Limite:</em> CNOT é condicional; sem superposição, ele é uma cópia clássica condicional.</span></p>
+<p><strong>O que ainda não sabemos:</strong> CNOT não copia um estado quântico arbitrário; ela cria correlação. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> CNOT: |00⟩→|00⟩, |01⟩→|01⟩, |10⟩→|11⟩, |11⟩→|10⟩.<br><strong>Conta:</strong> O primeiro bit é o controle; o segundo é o alvo.<br><strong>Resultado:</strong> CNOT|10⟩ = |11⟩; CNOT|11⟩ = |10⟩.<br><em>Limite:</em> CNOT é condicional; sem superposição, ele é uma cópia clássica condicional.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>CNOT não copia um estado quântico arbitrário; ela cria correlação.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

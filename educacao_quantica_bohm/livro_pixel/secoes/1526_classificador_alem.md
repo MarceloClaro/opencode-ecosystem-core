@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>A fidelidade proxy mede a população ideal, não a pureza do estado.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">分类器</span> <em>fēn lèi qì</em> <span class="tom">· tons 1-4-4 · leitura fen-lei-tchi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解分类器。</span> <em>Shēn rù liǎo jiě fēn lèi qì.</em> — Aprofunde-se em “Classificador”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Acurácia = (TP+TN)/N; precisão = TP/(TP+FP); recall = TP/(TP+FN).<br><strong>Conta:</strong> TP=2, TN=2, FP=0, FN=0: acurácia=(2+2)/4=1,0.<br><strong>Resultado:</strong> Precisão=2/2=1,0; recall=2/2=1,0.<br><em>Limite:</em> Métricas perfeitas em 4 pontos não garantem desempenho em novos dados.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">分类器</span> <em>fēn lèi qì</em> <span class="tom">· tons 1-4-4 · leitura fen-lei-tchi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解分类器。</span> <em>Shēn rù liǎo jiě fēn lèi qì.</em> — Aprofunde-se em “Classificador”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Acurácia = (TP+TN)/N; precisão = TP/(TP+FP); recall = TP/(TP+FN).<br><strong>Conta:</strong> TP=2, TN=2, FP=0, FN=0: acurácia=(2+2)/4=1,0.<br><strong>Resultado:</strong> Precisão=2/2=1,0; recall=2/2=1,0.<br><em>Limite:</em> Métricas perfeitas em 4 pontos não garantem desempenho em novos dados.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Quatro pontos e 1024 tiros não generalizam. Ruído benéfico é hipótese, não garantia.</p>
-<p class="prof"><strong>Para o professor:</strong> A acurácia de 4/4 não é generalized accuracy. Explique o teto e o tamanho da amostra.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

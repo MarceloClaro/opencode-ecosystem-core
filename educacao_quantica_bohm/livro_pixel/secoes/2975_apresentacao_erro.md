@@ -11,13 +11,11 @@
 <p><strong>O erro comum:</strong> Faça um pitch de 3 minutos com pergunta, evidência e limite.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">展示</span> <em>zhǎn shì</em> <span class="tom">· tons 3-4 · leitura djan-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">展示不是魔法。</span> <em>Zhǎn shì bú shì mó fǎ.</em> — “Apresentação” não é magia.</span></p>
 <p><strong>Correção formal:</strong> Um bom projeto declara o que não prova.</p>
-<p>Teste a correção com um exemplo numérico pequeno.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O projeto não esgota o problema; escolhe um recorte.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

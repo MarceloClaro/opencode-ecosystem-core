@@ -10,13 +10,11 @@
 
 <p><strong>Tarefa:</strong> A automação pode precarizar o trabalho de quem opera o sistema?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">工作</span> <em>gōng zuò</em> <span class="tom">· tons 1-4 · leitura gong-dzuo</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了工作。</span> <em>Wǒ xué huì le gōng zuò.</em> — Eu aprendi “Trabalho”.</span></p>
-<p><strong>Replicação:</strong> outra seed, outro backend, a mesma pergunta.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Não há consenso moral automático; há trade-offs.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

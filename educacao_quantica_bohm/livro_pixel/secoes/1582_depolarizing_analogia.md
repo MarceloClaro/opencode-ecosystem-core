@@ -11,13 +11,11 @@
 <p>Uma tinta cinza que cobre todas as cores.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">去极化</span> <em>qù jí huà</em> <span class="tom">· tons 4-2-4 · leitura tchyu-dji-rua</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像去极化。</span> <em>Zhè xiàng qù jí huà.</em> — Isto se parece com “Depolarizing”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> O teste é pequeno; não generaliza para outros dados ou modelos.</p>
-<p><strong>Teste rápido:</strong> desenhe a analogia e marque com um X o ponto em que ela deixa de explicar o conceito.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Quatro pontos e 1024 tiros não generalizam. Ruído benéfico é hipótese, não garantia.</p>
-<p class="prof"><strong>Para o professor:</strong> A acurácia de 4/4 não é generalized accuracy. Explique o teto e o tamanho da amostra.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

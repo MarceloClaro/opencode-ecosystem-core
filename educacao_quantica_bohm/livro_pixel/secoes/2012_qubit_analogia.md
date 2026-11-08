@@ -11,13 +11,11 @@
 <p>Uma moeda girando: o resultado ainda não foi decidido.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子比特</span> <em>liàng zǐ bǐ tè</em> <span class="tom">· tons 4-3-3-4 · leitura liang-dzi-bi-te</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像量子比特。</span> <em>Zhè xiàng liàng zǐ bǐ tè.</em> — Isto se parece com “Qubit”.</span></p>
 <p><strong>Limite formal:</strong> A moeda tem lado definido; o qubit não tem valor escondido.</p>
-<p>Construa um contraexemplo quantitativo e verifique se a analogia sobrevive.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A moeda tem lado definido; o qubit não tem valor escondido.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

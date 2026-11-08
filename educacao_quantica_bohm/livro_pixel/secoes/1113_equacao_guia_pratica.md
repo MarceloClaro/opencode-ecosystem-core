@@ -10,12 +10,6 @@
 
 <p>Calcule a direção do movimento a partir de uma fase que muda.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">导波方程</span> <em>dǎo bō fāng chéng</em> <span class="tom">· tons 3-1-1-2 · leitura dau-bo-fang-tcheng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习导波方程。</span> <em>Liàn xí dǎo bō fāng chéng.</em> — Pratique “Equação do guia”.</span></p>
-<ol>
-<li>Faça a atividade sem pressa, em 5 minutos.</li>
-<li>Anote o que esperava antes de começar.</li>
-<li>Compare a previsão com o que observou.</li>
-</ol>
-<p><strong>O que observar:</strong> a diferença entre o que você esperava e o que aconteceu é o dado mais valioso.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -32,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A equação de Bohm é uma releitura da equação de Schrödinger.</p>
-<p class="prof"><strong>Para o professor:</strong> Diga 'interpretação', não 'prova'. Compare com a leitura padrão e nomeie o preço: não localidade.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -10,7 +10,6 @@
 
 <p>Liste partes de um sistema e mostre uma relação que se perde na lista.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">整体性</span> <em>zhěng tǐ xìng</em> <span class="tom">· tons 3-3-4 · leitura djeng-ti-shing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习整体性。</span> <em>Liàn xí zhěng tǐ xìng.</em> — Pratique “Totalidade”.</span></p>
-<p>Faça em 5 minutos; anote o que esperava antes de começar.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -27,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Bohm é uma interpretação entre várias; não é consenso.</p>
-<p class="prof"><strong>Para o professor:</strong> Diga 'interpretação', não 'prova'.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

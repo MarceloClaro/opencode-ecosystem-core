@@ -10,7 +10,6 @@
 
 <p>Liste os backends e veja quais são hardware real.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子客户端</span> <em>liàng zǐ kè hù duān</em> <span class="tom">· tons 4-3-4-4-1 · leitura liang-dzi-ke-ru-duan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习量子客户端。</span> <em>Liàn xí liàng zǐ kè hù duān.</em> — Pratique “gjq-client”.</span></p>
-<p>Faça em 5 minutos; anote o que esperava antes de começar.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -27,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Bibliotecas simulam; convenções podem mudar o resultado.</p>
-<p class="prof"><strong>Para o professor:</strong> Se as bibliotecas divergirem, verifique a convenção.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

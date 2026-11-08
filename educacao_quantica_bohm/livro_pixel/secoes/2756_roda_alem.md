@@ -10,14 +10,12 @@
 
 <p>A prática distribuída e a recuperação ativa têm apoio em pesquisa.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">对话圈</span> <em>duì huà quān</em> <span class="tom">· tons 4-4-1 · leitura duei-rua-tchyuan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解对话圈。</span> <em>Shēn rù liǎo jiě duì huà quān.</em> — Aprofunde-se em “Roda de diálogo”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> A técnica não funciona igual para todos os estudantes.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> 9 min = 1 + 4 + 2 + 2.<br><strong>Conta:</strong> 10 pessoas → 240 s / 10 = 24 s por pessoa na fala.<br><strong>Resultado:</strong> O roteiro protege o tempo de quem ouve.<br><em>Limite:</em> Diálogo não é terapia nem debate.</span></p>
+<p><strong>O que ainda não sabemos:</strong> A técnica não funciona igual para todos os estudantes. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> 9 min = 1 + 4 + 2 + 2.<br><strong>Conta:</strong> 10 pessoas → 240 s / 10 = 24 s por pessoa na fala.<br><strong>Resultado:</strong> O roteiro protege o tempo de quem ouve.<br><em>Limite:</em> Diálogo não é terapia nem debate.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A técnica não funciona igual para todos os estudantes.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

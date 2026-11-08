@@ -10,14 +10,11 @@
 
 <p><strong>Tarefa:</strong> Você consegue escrever o QASM 2.0 do GHZ de 4 qubits?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">多体纠缠态</span> <em>duō tǐ jiū chán tài</em> <span class="tom">· tons 1-3-1-2-4 · leitura duo-ti-djiu-tchan-tai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了多体纠缠态。</span> <em>Wǒ xué huì le duō tǐ jiū chán tài.</em> — Eu aprendi “GHZ”.</span></p>
-<p><strong>Diário de bordo:</strong> o que eu entendi? onde eu travei? o que vou testar amanhã?</p>
-<p><strong>Próximo passo:</strong> escolha uma lauda da mesma lente e compare as duas respostas.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O GHZ é usado em metrologia e testes de não localidade.</p>
-<p class="prof"><strong>Para o professor:</strong> Confira a ordem dos qubits e a diferença entre circuito lógico e transpilado.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

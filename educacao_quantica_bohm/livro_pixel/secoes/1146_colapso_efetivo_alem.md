@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>A medição é um processo físico, não um postulado místico.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">有效坍缩</span> <em>yǒu xiào tān suō</em> <span class="tom">· tons 3-4-1-1 · leitura iu-shiau-tan-suo</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解有效坍缩。</span> <em>Shēn rù liǎo jiě yǒu xiào tān suō.</em> — Aprofunde-se em “Colapso efetivo”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> A trajetória entra em um dos pacotes; a probabilidade é |c_i|².<br><strong>Conta:</strong> Se c₁ = 0,7, então |c₁|² = 0,49.<br><strong>Resultado:</strong> Há 49% de chance de a partícula terminar no pacote 1.<br><em>Limite:</em> Em Bohm não há colapso fundamental: a partícula já estava em uma trajetória.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">有效坍缩</span> <em>yǒu xiào tān suō</em> <span class="tom">· tons 3-4-1-1 · leitura iu-shiau-tan-suo</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解有效坍缩。</span> <em>Shēn rù liǎo jiě yǒu xiào tān suō.</em> — Aprofunde-se em “Colapso efetivo”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> A trajetória entra em um dos pacotes; a probabilidade é |c_i|².<br><strong>Conta:</strong> Se c₁ = 0,7, então |c₁|² = 0,49.<br><strong>Resultado:</strong> Há 49% de chance de a partícula terminar no pacote 1.<br><em>Limite:</em> Em Bohm não há colapso fundamental: a partícula já estava em uma trajetória.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A medição é um processo físico, não um postulado místico.</p>
-<p class="prof"><strong>Para o professor:</strong> Diga 'interpretação', não 'prova'. Compare com a leitura padrão e nomeie o preço: não localidade.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

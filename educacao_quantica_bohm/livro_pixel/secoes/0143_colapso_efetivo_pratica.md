@@ -10,7 +10,6 @@
 
 <p>Descreva a medição como interação com um aparelho.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">有效坍缩</span> <em>yǒu xiào tān suō</em> <span class="tom">· tons 3-4-1-1 · leitura iu-shiau-tan-suo</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习有效坍缩。</span> <em>Liàn xí yǒu xiào tān suō.</em> — Pratique “Colapso efetivo”.</span></p>
-<p>Faça em 5 minutos; anote o que esperava antes de começar.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -27,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Bohm é uma interpretação entre várias; não é consenso.</p>
-<p class="prof"><strong>Para o professor:</strong> Diga 'interpretação', não 'prova'.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

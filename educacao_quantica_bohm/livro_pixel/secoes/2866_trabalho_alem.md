@@ -10,14 +10,12 @@
 
 <p>A LGPD exige base legal, finalidade e transparência.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">工作</span> <em>gōng zuò</em> <span class="tom">· tons 1-4 · leitura gong-dzuo</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解工作。</span> <em>Shēn rù liǎo jiě gōng zuò.</em> — Aprofunde-se em “Trabalho”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> Não há consenso moral automático; há trade-offs.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> 3000 laudas × 7 min = 21.000 min = 350 h.<br><strong>Conta:</strong> A 20 h por semana, 350/20 = 17,5 semanas.<br><strong>Resultado:</strong> O trabalho de leitura é comparável a um semestre intenso.<br><em>Limite:</em> Trabalho invisível não é trabalho inexistente.</span></p>
+<p><strong>O que ainda não sabemos:</strong> Não há consenso moral automático; há trade-offs. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> 3000 laudas × 7 min = 21.000 min = 350 h.<br><strong>Conta:</strong> A 20 h por semana, 350/20 = 17,5 semanas.<br><strong>Resultado:</strong> O trabalho de leitura é comparável a um semestre intenso.<br><em>Limite:</em> Trabalho invisível não é trabalho inexistente.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Não há consenso moral automático; há trade-offs.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

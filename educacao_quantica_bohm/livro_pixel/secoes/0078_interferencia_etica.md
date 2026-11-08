@@ -10,13 +10,11 @@
 
 <p>Quem decide quais caminhos podem interferir?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">干涉</span> <em>gān shè</em> <span class="tom">· tons 1-4 · leitura gan-she</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于干涉？</span> <em>Shéi shòu yì yú gān shè?</em> — Quem se beneficia de “Interferência”?</span></p>
-<p><strong>Quem ganha? Quem perde?</strong> Cite um grupo para cada lado.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Medir produz uma amostra; não é ler um valor escondido.</p>
-<p class="prof"><strong>Para o professor:</strong> Comece pelo concreto; só depois use a notação.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

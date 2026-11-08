@@ -11,13 +11,11 @@
 <p>Abrir uma caixa que estava fechada: o conteúdo passa a ser conhecido.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">测量</span> <em>cè liáng</em> <span class="tom">· tons 4-2 · leitura tse-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像测量。</span> <em>Zhè xiàng cè liáng.</em> — Isto se parece com “Medição”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> A caixa pode já ter um valor; o qubit não é assim.</p>
-<p><strong>Teste rápido:</strong> desenhe a analogia e marque com um X o ponto em que ela deixa de explicar o conceito.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O 'colapso' é um nome para a atualização do estado após a medição.</p>
-<p class="prof"><strong>Para o professor:</strong> Use a notação de ket apenas depois do concreto; verifique P(0)+P(1)=1.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -10,14 +10,11 @@
 
 <p>Contas de luz, privacidade e emprego são afetados por tecnologia.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">数据保护</span> <em>shù jù bǎo hù</em> <span class="tom">· tons 4-4-3-4 · leitura shu-djyu-bau-ru</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到数据保护。</span> <em>Wǒ zài shēng huó zhōng kàn dào shù jù bǎo hù.</em> — Vejo “LGPD” na vida.</span></p>
-<p><strong>Onde isso aparece:</strong> procure um exemplo na sua casa, na escola ou no bairro. Descreva em duas frases.</p>
-<p><strong>O que muda no seu jeito de olhar?</strong> A ideia de lgpd pode mudar uma decisão cotidiana?</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Ética envolve valores e poder. Não há resposta automática; há deliberação e consequências.</p>
-<p class="prof"><strong>Para o professor:</strong> Não transforme ética em opinião pessoal: peça evidência, afetados e alternativas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

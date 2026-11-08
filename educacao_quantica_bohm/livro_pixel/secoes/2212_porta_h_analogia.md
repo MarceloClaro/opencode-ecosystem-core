@@ -11,13 +11,11 @@
 <p>Um divisor de águas que separa um caminho em dois.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">哈达玛门</span> <em>hā dá mǎ mén</em> <span class="tom">· tons 1-2-3-2 · leitura ra-da-ma-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像哈达玛门。</span> <em>Zhè xiàng hā dá mǎ mén.</em> — Isto se parece com “Porta H”.</span></p>
 <p><strong>Limite formal:</strong> H não é 'um pouco de 0 e um pouco de 1'; é uma transformação precisa.</p>
-<p>Construa um contraexemplo quantitativo e verifique se a analogia sobrevive.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>H não é 'um pouco de 0 e um pouco de 1'; é uma transformação precisa.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

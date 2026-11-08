@@ -10,14 +10,11 @@
 
 <p><strong>O erro comum:</strong> Transforme um tema em pergunta com escopo e critério.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">问题</span> <em>wèn tí</em> <span class="tom">· tons 4-2 · leitura uen-ti</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">问题不是魔法。</span> <em>Wèn tí bú shì mó fǎ.</em> — “Pergunta” não é magia.</span></p>
-<p><strong>Por que acontece:</strong> o cérebro procura uma imagem simples e apaga a parte matemática que não se encaixa.</p>
-<p><strong>Como testar:</strong> escreva um contraexemplo em uma frase e veja se ele derruba sua explicação.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Todo projeto é um recorte. Declare limite, evidência e o que ficou fora.</p>
-<p class="prof"><strong>Para o professor:</strong> Exija um limite específico; 'tem limitações' não é suficiente.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

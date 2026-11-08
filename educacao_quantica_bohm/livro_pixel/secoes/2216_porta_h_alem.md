@@ -10,14 +10,12 @@
 
 <p>H é a matriz (1/√2)[[1,1],[1,-1]]; H² = I.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">哈达玛门</span> <em>hā dá mǎ mén</em> <span class="tom">· tons 1-2-3-2 · leitura ra-da-ma-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解哈达玛门。</span> <em>Shēn rù liǎo jiě hā dá mǎ mén.</em> — Aprofunde-se em “Porta H”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> H não é 'um pouco de 0 e um pouco de 1'; é uma transformação precisa.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> H = (1/√2)[[1,1],[1,−1]]; H|0⟩=(|0⟩+|1⟩)/√2.<br><strong>Conta:</strong> H|0⟩ = (1/√2)(|0⟩+|1⟩); P(0)=P(1)=1/2.<br><strong>Resultado:</strong> H cria superposição e também muda a base de medida.<br><em>Limite:</em> H não é um sorteio: é uma rotação de base reversível.</span></p>
+<p><strong>O que ainda não sabemos:</strong> H não é 'um pouco de 0 e um pouco de 1'; é uma transformação precisa. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> H = (1/√2)[[1,1],[1,−1]]; H|0⟩=(|0⟩+|1⟩)/√2.<br><strong>Conta:</strong> H|0⟩ = (1/√2)(|0⟩+|1⟩); P(0)=P(1)=1/2.<br><strong>Resultado:</strong> H cria superposição e também muda a base de medida.<br><em>Limite:</em> H não é um sorteio: é uma rotação de base reversível.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>H não é 'um pouco de 0 e um pouco de 1'; é uma transformação precisa.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

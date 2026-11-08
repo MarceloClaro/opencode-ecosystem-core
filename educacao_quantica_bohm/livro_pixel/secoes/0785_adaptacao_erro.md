@@ -10,13 +10,11 @@
 
 <p><strong>O erro comum:</strong> Reescreva uma atividade para 6º ano sem perder a ideia central.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">适应</span> <em>shì yìng</em> <span class="tom">· tons 4-4 · leitura shi-ing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">适应不是魔法。</span> <em>Shì yìng bú shì mó fǎ.</em> — “Adaptação” não é magia.</span></p>
-<p><strong>Como não cair:</strong> escreva um contraexemplo e teste com um colega.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Pedagogia é contextual; não há método garantido.</p>
-<p class="prof"><strong>Para o professor:</strong> Nanoaula é tempo e evidência, não fragmento.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

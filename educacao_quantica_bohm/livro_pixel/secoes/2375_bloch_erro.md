@@ -11,13 +11,11 @@
 <p><strong>O erro comum:</strong> Achar que a esfera de um qubit isolado revela o estado do par.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">布洛赫球</span> <em>bù luò hè qiú</em> <span class="tom">· tons 4-4-4-2 · leitura bu-luo-re-tchiu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">布洛赫球不是魔法。</span> <em>Bù luò hè qiú bú shì mó fǎ.</em> — “Esfera de Bloch” não é magia.</span></p>
 <p><strong>Correção formal:</strong> O interior da esfera não é acessível; a superfície é o estado puro.</p>
-<p>Teste a correção com um exemplo numérico pequeno.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A esfera não mostra emaranhamento de dois qubits.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

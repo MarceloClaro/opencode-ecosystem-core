@@ -10,14 +10,11 @@
 
 <p>Tradutores automáticos também tomam decisões que não vemos.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">转译</span> <em>zhuǎn yì</em> <span class="tom">· tons 3-4 · leitura djuan-i</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到转译。</span> <em>Wǒ zài shēng huó zhōng kàn dào zhuǎn yì.</em> — Vejo “Transpilação” na vida.</span></p>
-<p><strong>Onde isso aparece:</strong> procure um exemplo na sua casa, na escola ou no bairro. Descreva em duas frases.</p>
-<p><strong>O que muda no seu jeito de olhar?</strong> A ideia de transpilação pode mudar uma decisão cotidiana?</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O mapeamento de qubits lógicos para físicos é parte do processo.</p>
-<p class="prof"><strong>Para o professor:</strong> Confira a ordem dos qubits e a diferença entre circuito lógico e transpilado.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

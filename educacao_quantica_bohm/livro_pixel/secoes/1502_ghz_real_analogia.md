@@ -11,13 +11,11 @@
 <p>Um quarteto que deveria aparecer sempre junto, mas às vezes se separa.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">实验多体态</span> <em>shí yàn duō tǐ tài</em> <span class="tom">· tons 2-4-1-3-4 · leitura shi-ien-duo-ti-tai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像实验多体态。</span> <em>Zhè xiàng shí yàn duō tǐ tài.</em> — Isto se parece com “GHZ real”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> O teste é pequeno; não generaliza para outros dados ou modelos.</p>
-<p><strong>Teste rápido:</strong> desenhe a analogia e marque com um X o ponto em que ela deixa de explicar o conceito.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Quatro pontos e 1024 tiros não generalizam. Ruído benéfico é hipótese, não garantia.</p>
-<p class="prof"><strong>Para o professor:</strong> A acurácia de 4/4 não é generalized accuracy. Explique o teto e o tamanho da amostra.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

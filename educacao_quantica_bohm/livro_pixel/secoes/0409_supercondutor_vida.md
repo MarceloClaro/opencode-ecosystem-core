@@ -10,13 +10,11 @@
 
 <p>Serviços de nuvem já mediam nossa confiança e nossos dados.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">超导体</span> <em>chāo dǎo tǐ</em> <span class="tom">· tons 1-3-3 · leitura tchau-dau-ti</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到超导体。</span> <em>Wǒ zài shēng huó zhōng kàn dào chāo dǎo tǐ.</em> — Vejo “Supercondutor” na vida.</span></p>
-<p><strong>Onde isso aparece:</strong> procure um exemplo na sua casa ou na escola.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Backend tem ruído; um número não prova o estado.</p>
-<p class="prof"><strong>Para o professor:</strong> Ruído, leitura e calibração são coisas distintas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

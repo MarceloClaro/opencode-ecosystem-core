@@ -10,7 +10,6 @@
 
 <p>A hipótese é empírica e depende de dataset, ansatz, seed e métrica.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">有益噪声</span> <em>yǒu yì zào shēng</em> <span class="tom">· tons 3-4-4-1 · leitura iu-i-dzau-sheng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习有益噪声。</span> <em>Liàn xí yǒu yì zào shēng.</em> — Pratique “Ruído benéfico?”.</span></p>
-<p>Faça em 5 minutos; anote o que esperava antes de começar.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -27,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Amostra pequena não generaliza; 4 pontos não são um artigo.</p>
-<p class="prof"><strong>Para o professor:</strong> Explique o teto e o tamanho da amostra.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

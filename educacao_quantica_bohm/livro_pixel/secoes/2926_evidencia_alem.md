@@ -10,14 +10,12 @@
 
 <p>Um bom projeto declara o que não prova.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">证据</span> <em>zhèng jù</em> <span class="tom">· tons 4-4 · leitura djeng-djyu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解证据。</span> <em>Shēn rù liǎo jiě zhèng jù.</em> — Aprofunde-se em “Evidência”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> O projeto não esgota o problema; escolhe um recorte.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Evidência = contagem + total + incerteza + fonte.<br><strong>Conta:</strong> 484/1024 = 0,4727 ± 0,0156.<br><strong>Resultado:</strong> O número vem com um intervalo e uma origem.<br><em>Limite:</em> Evidência não é prova definitiva.</span></p>
+<p><strong>O que ainda não sabemos:</strong> O projeto não esgota o problema; escolhe um recorte. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Evidência = contagem + total + incerteza + fonte.<br><strong>Conta:</strong> 484/1024 = 0,4727 ± 0,0156.<br><strong>Resultado:</strong> O número vem com um intervalo e uma origem.<br><em>Limite:</em> Evidência não é prova definitiva.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O projeto não esgota o problema; escolhe um recorte.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -10,14 +10,11 @@
 
 <p><strong>Tarefa:</strong> Você consegue localizar |0⟩, |1⟩ e H|0⟩ na esfera?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">布洛赫球</span> <em>bù luò hè qiú</em> <span class="tom">· tons 4-4-4-2 · leitura bu-luo-re-tchiu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了布洛赫球。</span> <em>Wǒ xué huì le bù luò hè qiú.</em> — Eu aprendi “Esfera de Bloch”.</span></p>
-<p><strong>Diário de bordo:</strong> o que eu entendi? onde eu travei? o que vou testar amanhã?</p>
-<p><strong>Próximo passo:</strong> escolha uma lauda da mesma lente e compare as duas respostas.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O interior da esfera não é acessível; a superfície é o estado puro.</p>
-<p class="prof"><strong>Para o professor:</strong> Compare a mesma grandeza nas três bibliotecas; se divergir, verifique convenção antes de concluir erro.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

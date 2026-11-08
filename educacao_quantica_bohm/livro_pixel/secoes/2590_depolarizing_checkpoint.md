@@ -10,13 +10,11 @@
 
 <p><strong>Tarefa:</strong> Quem aceita a perda de precisão em troca de velocidade?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">去极化</span> <em>qù jí huà</em> <span class="tom">· tons 4-2-4 · leitura tchyu-dji-rua</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了去极化。</span> <em>Wǒ xué huì le qù jí huà.</em> — Eu aprendi “Depolarizing”.</span></p>
-<p><strong>Replicação:</strong> outra seed, outro backend, a mesma pergunta.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O teste é pequeno; não generaliza para outros dados ou modelos.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

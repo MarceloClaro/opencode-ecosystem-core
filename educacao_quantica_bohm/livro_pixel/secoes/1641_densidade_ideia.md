@@ -24,7 +24,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A matemática é representação; não é o fenômeno. Não confunda o mapa com o território.</p>
-<p class="prof"><strong>Para o professor:</strong> A fórmula deve vir depois da intuição; use exemplos numéricos pequenos.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

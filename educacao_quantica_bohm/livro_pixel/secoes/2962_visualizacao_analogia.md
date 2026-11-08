@@ -11,13 +11,11 @@
 <p>Um mapa que transforma território em símbolos.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">可视化</span> <em>kě shì huà</em> <span class="tom">· tons 3-4-4 · leitura ke-shi-rua</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像可视化。</span> <em>Zhè xiàng kě shì huà.</em> — Isto se parece com “Visualização”.</span></p>
 <p><strong>Limite formal:</strong> O projeto não esgota o problema; escolhe um recorte.</p>
-<p>Construa um contraexemplo quantitativo e verifique se a analogia sobrevive.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O projeto não esgota o problema; escolhe um recorte.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

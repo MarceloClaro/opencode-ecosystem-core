@@ -11,13 +11,11 @@
 <p><strong>O erro comum:</strong> Leia a chave de uma variável de ambiente, nunca do código.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">密钥</span> <em>mì yuè</em> <span class="tom">· tons 4-4 · leitura mi-yue</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">密钥不是魔法。</span> <em>Mì yuè bú shì mó fǎ.</em> — “API key” não é magia.</span></p>
 <p><strong>Correção formal:</strong> T1 e T2 são tempos de relaxação e coerência; não são a mesma coisa.</p>
-<p>Teste a correção com um exemplo numérico pequeno.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O resultado de hoje não garante o de amanhã; calibração muda.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

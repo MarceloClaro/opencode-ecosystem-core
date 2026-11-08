@@ -10,12 +10,6 @@
 
 <p>O centro é uma infraestrutura pública; o acesso ao hardware depende de políticas.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子中心</span> <em>liàng zǐ zhōng xīn</em> <span class="tom">· tons 4-3-1-1 · leitura liang-dzi-djong-shin</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习量子中心。</span> <em>Liàn xí liàng zǐ zhōng xīn.</em> — Pratique “CIQuanta”.</span></p>
-<ol>
-<li>Faça a atividade sem pressa, em 5 minutos.</li>
-<li>Anote o que esperava antes de começar.</li>
-<li>Compare a previsão com o que observou.</li>
-</ol>
-<p><strong>O que observar:</strong> a diferença entre o que você esperava e o que aconteceu é o dado mais valioso.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -32,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Backends têm ruído, calibração e deriva. Fidelidade proxy não é prova de emaranhamento.</p>
-<p class="prof"><strong>Para o professor:</strong> T1, T2, erro de leitura e ruído de porta são coisas distintas; não os trate como um número único.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

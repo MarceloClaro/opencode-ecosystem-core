@@ -11,13 +11,11 @@
 <p>Uma lanterna que ilumina um pedaço do problema.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">问题</span> <em>wèn tí</em> <span class="tom">· tons 4-2 · leitura uen-ti</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像问题。</span> <em>Zhè xiàng wèn tí.</em> — Isto se parece com “Pergunta”.</span></p>
 <p><strong>Limite formal:</strong> O projeto não esgota o problema; escolhe um recorte.</p>
-<p>Construa um contraexemplo quantitativo e verifique se a analogia sobrevive.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O projeto não esgota o problema; escolhe um recorte.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

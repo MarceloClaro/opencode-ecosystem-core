@@ -11,13 +11,11 @@
 <p><strong>Pergunta de pesquisa:</strong> O que este feedback me pede para fazer?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">反馈</span> <em>fǎn kuì</em> <span class="tom">· tons 3-4 · leitura fan-kuei</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看反馈？</span> <em>Nǐ zěn me kàn fǎn kuì?</em> — O que você pensa de “Feedback”?</span></p>
 <p><strong>Hipótese rival:</strong> A técnica não funciona igual para todos os estudantes.</p>
-<p>Desenhe um experimento que separe as duas hipóteses.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A técnica não funciona igual para todos os estudantes.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

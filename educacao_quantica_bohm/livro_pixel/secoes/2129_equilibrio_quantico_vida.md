@@ -10,13 +10,11 @@
 
 <p>Multidões, fluidos e trânsito também têm distribuições estáveis.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子平衡</span> <em>liàng zǐ píng héng</em> <span class="tom">· tons 4-3-2-2 · leitura liang-dzi-ping-reng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到量子平衡。</span> <em>Wǒ zài shēng huó zhōng kàn dào liàng zǐ píng héng.</em> — Vejo “Equilíbrio quântico” na vida.</span></p>
-<p><strong>Onde medir:</strong> proponha um indicador e uma fonte de dados.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A hipótese explica por que a regra de Born funciona, mas não por que o universo começou assim.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

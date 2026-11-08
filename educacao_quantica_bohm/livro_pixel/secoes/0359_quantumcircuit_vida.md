@@ -10,13 +10,11 @@
 
 <p>Fluxogramas também têm entradas, etapas e saídas.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子电路</span> <em>liàng zǐ diàn lù</em> <span class="tom">· tons 4-3-4-4 · leitura liang-dzi-dien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到量子电路。</span> <em>Wǒ zài shēng huó zhōng kàn dào liàng zǐ diàn lù.</em> — Vejo “QuantumCircuit” na vida.</span></p>
-<p><strong>Onde isso aparece:</strong> procure um exemplo na sua casa ou na escola.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Bibliotecas simulam; convenções podem mudar o resultado.</p>
-<p class="prof"><strong>Para o professor:</strong> Se as bibliotecas divergirem, verifique a convenção.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

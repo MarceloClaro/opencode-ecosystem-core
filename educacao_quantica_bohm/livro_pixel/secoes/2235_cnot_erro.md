@@ -11,13 +11,11 @@
 <p><strong>O erro comum:</strong> Achar que CNOT é uma 'cópia' do controle no alvo.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">受控非门</span> <em>shòu kòng fēi mén</em> <span class="tom">· tons 4-4-1-2 · leitura shou-kong-fei-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">受控非门不是魔法。</span> <em>Shòu kòng fēi mén bú shì mó fǎ.</em> — “CNOT” não é magia.</span></p>
 <p><strong>Correção formal:</strong> CNOT é a porta de duas entradas que gera o estado de Bell.</p>
-<p>Teste a correção com um exemplo numérico pequeno.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>CNOT não copia um estado quântico arbitrário; ela cria correlação.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

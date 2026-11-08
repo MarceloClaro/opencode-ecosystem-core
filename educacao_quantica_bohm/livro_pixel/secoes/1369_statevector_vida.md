@@ -10,14 +10,11 @@
 
 <p>Bases de dados também têm representações internas não visíveis.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">态矢量</span> <em>tài shǐ liàng</em> <span class="tom">· tons 4-3-4 · leitura tai-shi-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到态矢量。</span> <em>Wǒ zài shēng huó zhōng kàn dào tài shǐ liàng.</em> — Vejo “Statevector” na vida.</span></p>
-<p><strong>Onde isso aparece:</strong> procure um exemplo na sua casa, na escola ou no bairro. Descreva em duas frases.</p>
-<p><strong>O que muda no seu jeito de olhar?</strong> A ideia de statevector pode mudar uma decisão cotidiana?</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O estado é uma descrição matemática; a medição é uma amostra.</p>
-<p class="prof"><strong>Para o professor:</strong> Compare a mesma grandeza nas três bibliotecas; se divergir, verifique convenção antes de concluir erro.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

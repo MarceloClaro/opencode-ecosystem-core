@@ -11,13 +11,11 @@
 <p>Um esqueleto de casa que será ajustado.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">拟设</span> <em>nǐ shè</em> <span class="tom">· tons 3-4 · leitura ni-she</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像拟设。</span> <em>Zhè xiàng nǐ shè.</em> — Isto se parece com “Ansatz”.</span></p>
 <p><strong>Limite formal:</strong> O teste é pequeno; não generaliza para outros dados ou modelos.</p>
-<p>Construa um contraexemplo quantitativo e verifique se a analogia sobrevive.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O teste é pequeno; não generaliza para outros dados ou modelos.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

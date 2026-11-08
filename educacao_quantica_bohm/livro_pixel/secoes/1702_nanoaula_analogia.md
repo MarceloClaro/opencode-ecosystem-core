@@ -11,13 +11,11 @@
 <p>Um tijolo pequeno que se encaixa em muitas paredes.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">微课</span> <em>wēi kè</em> <span class="tom">· tons 1-4 · leitura uei-ke</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像微课。</span> <em>Zhè xiàng wēi kè.</em> — Isto se parece com “Nanoaula”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> A técnica não funciona igual para todos os estudantes.</p>
-<p><strong>Teste rápido:</strong> desenhe a analogia e marque com um X o ponto em que ela deixa de explicar o conceito.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Pedagogia é contextual. Não há método com efeito garantido para toda turma.</p>
-<p class="prof"><strong>Para o professor:</strong> Nanoaula é unidade de tempo e evidência, não fragmento sem síntese.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

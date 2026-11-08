@@ -11,13 +11,11 @@
 <p><strong>O erro comum:</strong> Medir várias vezes o mesmo qubit sem preparar e esperar estatística.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">测量</span> <em>cè liáng</em> <span class="tom">· tons 4-2 · leitura tse-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">测量不是魔法。</span> <em>Cè liáng bú shì mó fǎ.</em> — “Medição” não é magia.</span></p>
 <p><strong>Correção formal:</strong> O 'colapso' é um nome para a atualização do estado após a medição.</p>
-<p>Teste a correção com um exemplo numérico pequeno.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A caixa pode já ter um valor; o qubit não é assim.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -10,13 +10,11 @@
 
 <p><strong>O erro comum:</strong> Teste RY(πx) para x=0 e x=1.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">编码</span> <em>biān mǎ</em> <span class="tom">· tons 1-3 · leitura bien-ma</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">编码不是魔法。</span> <em>Biān mǎ bú shì mó fǎ.</em> — “Encoding” não é magia.</span></p>
-<p><strong>Como não cair:</strong> escreva um contraexemplo e teste com um colega.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Amostra pequena não generaliza; 4 pontos não são um artigo.</p>
-<p class="prof"><strong>Para o professor:</strong> Explique o teto e o tamanho da amostra.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

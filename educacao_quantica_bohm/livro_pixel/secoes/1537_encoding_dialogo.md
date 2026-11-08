@@ -10,15 +10,11 @@
 
 <p><strong>Pergunta da roda:</strong> O que se perde no encoding?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">编码</span> <em>biān mǎ</em> <span class="tom">· tons 1-3 · leitura bien-ma</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看编码？</span> <em>Nǐ zěn me kàn biān mǎ?</em> — O que você pensa de “Encoding”?</span></p>
-<p><strong>Roteiro de 9 minutos:</strong> 1 minuto de silêncio; 4 minutos de falas sem interrupção; 2 minutos de respostas ao que foi ouvido; 2 minutos de síntese.</p>
-<p><strong>Regra:</strong> não corrija a fala do outro; pergunte o que o levou a dizer aquilo.</p>
-<p><strong>Registre:</strong> uma suposição que apareceu e uma pergunta nova.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Quatro pontos e 1024 tiros não generalizam. Ruído benéfico é hipótese, não garantia.</p>
-<p class="prof"><strong>Para o professor:</strong> A acurácia de 4/4 não é generalized accuracy. Explique o teto e o tamanho da amostra.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

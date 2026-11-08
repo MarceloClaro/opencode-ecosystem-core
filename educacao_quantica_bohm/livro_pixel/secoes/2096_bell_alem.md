@@ -10,14 +10,12 @@
 
 <p>O estado de Bell é usado em teleportação e criptografia.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">贝尔态</span> <em>bèi ěr tài</em> <span class="tom">· tons 4-3-4 · leitura bei-er-tai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解贝尔态。</span> <em>Shēn rù liǎo jiě bèi ěr tài.</em> — Aprofunde-se em “Estado de Bell”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> A imagem das moedas sugere um mecanismo que a teoria não afirma.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Fidelidade proxy = (N00 + N11) / N_total.<br><strong>Conta:</strong> N00 = 484, N11 = 480, N = 1024: (484+480)/1024 = 964/1024.<br><strong>Resultado:</strong> 0,9414 = 94,1%; os 5,9% restantes são 01 e 10.<br><em>Limite:</em> É uma proxy de fidelidade, não uma tomografia completa do estado.</span></p>
+<p><strong>O que ainda não sabemos:</strong> A imagem das moedas sugere um mecanismo que a teoria não afirma. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Fidelidade proxy = (N00 + N11) / N_total.<br><strong>Conta:</strong> N00 = 484, N11 = 480, N = 1024: (484+480)/1024 = 964/1024.<br><strong>Resultado:</strong> 0,9414 = 94,1%; os 5,9% restantes são 01 e 10.<br><em>Limite:</em> É uma proxy de fidelidade, não uma tomografia completa do estado.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A imagem das moedas sugere um mecanismo que a teoria não afirma.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

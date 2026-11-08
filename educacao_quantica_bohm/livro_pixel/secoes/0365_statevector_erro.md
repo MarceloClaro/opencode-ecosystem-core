@@ -10,13 +10,11 @@
 
 <p><strong>O erro comum:</strong> Achar que o vetor é observável diretamente no hardware.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">态矢量</span> <em>tài shǐ liàng</em> <span class="tom">· tons 4-3-4 · leitura tai-shi-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">态矢量不是魔法。</span> <em>Tài shǐ liàng bú shì mó fǎ.</em> — “Statevector” não é magia.</span></p>
-<p><strong>Como não cair:</strong> escreva um contraexemplo e teste com um colega.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Bibliotecas simulam; convenções podem mudar o resultado.</p>
-<p class="prof"><strong>Para o professor:</strong> Se as bibliotecas divergirem, verifique a convenção.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

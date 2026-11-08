@@ -11,13 +11,11 @@
 <p><strong>O erro comum:</strong> Somar amplitudes como se fossem probabilidades.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">振幅</span> <em>zhèn fú</em> <span class="tom">· tons 4-2 · leitura djen-fu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">振幅不是魔法。</span> <em>Zhèn fú bú shì mó fǎ.</em> — “Amplitude” não é magia.</span></p>
 <p><strong>Correção formal:</strong> A regra de Born transforma amplitude em probabilidade.</p>
-<p>Teste a correção com um exemplo numérico pequeno.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A amplitude não é uma probabilidade; é preciso elevar ao quadrado.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

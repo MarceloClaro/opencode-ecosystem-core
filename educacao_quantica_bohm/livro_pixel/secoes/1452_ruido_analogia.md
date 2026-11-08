@@ -11,13 +11,11 @@
 <p>Chiado em uma rádio que atrapalha a música.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">噪声</span> <em>zào shēng</em> <span class="tom">· tons 4-1 · leitura dzau-sheng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像噪声。</span> <em>Zhè xiàng zào shēng.</em> — Isto se parece com “Ruído”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> O resultado de hoje não garante o de amanhã; calibração muda.</p>
-<p><strong>Teste rápido:</strong> desenhe a analogia e marque com um X o ponto em que ela deixa de explicar o conceito.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Backends têm ruído, calibração e deriva. Fidelidade proxy não é prova de emaranhamento.</p>
-<p class="prof"><strong>Para o professor:</strong> T1, T2, erro de leitura e ruído de porta são coisas distintas; não os trate como um número único.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

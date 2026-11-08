@@ -10,14 +10,12 @@
 
 <p>O Cirq usa momentos para organizar operações paralelas.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子线路</span> <em>liàng zǐ xiàn lù</em> <span class="tom">· tons 4-3-4-4 · leitura liang-dzi-shien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解量子线路。</span> <em>Shēn rù liǎo jiě liàng zǐ xiàn lù.</em> — Aprofunde-se em “Cirq Circuit”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> Momentos não são tempo físico; são uma ordenação lógica.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> O Circuit agrupa operações em momentos.<br><strong>Conta:</strong> X(q0) no momento 1; CNOT(q0,q1) no momento 2; measure no momento 3.<br><strong>Resultado:</strong> 3 momentos, 2 qubits.<br><em>Limite:</em> A ordem dos qubits e os nomes das portas mudam entre bibliotecas.</span></p>
+<p><strong>O que ainda não sabemos:</strong> Momentos não são tempo físico; são uma ordenação lógica. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> O Circuit agrupa operações em momentos.<br><strong>Conta:</strong> X(q0) no momento 1; CNOT(q0,q1) no momento 2; measure no momento 3.<br><strong>Resultado:</strong> 3 momentos, 2 qubits.<br><em>Limite:</em> A ordem dos qubits e os nomes das portas mudam entre bibliotecas.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Momentos não são tempo físico; são uma ordenação lógica.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

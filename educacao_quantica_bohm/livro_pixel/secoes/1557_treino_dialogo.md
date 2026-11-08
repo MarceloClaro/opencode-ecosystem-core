@@ -10,15 +10,11 @@
 
 <p><strong>Pergunta da roda:</strong> O que significa 'aprender' aqui?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">训练</span> <em>xùn liàn</em> <span class="tom">· tons 4-4 · leitura shyun-lien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看训练？</span> <em>Nǐ zěn me kàn xùn liàn?</em> — O que você pensa de “Treino”?</span></p>
-<p><strong>Roteiro de 9 minutos:</strong> 1 minuto de silêncio; 4 minutos de falas sem interrupção; 2 minutos de respostas ao que foi ouvido; 2 minutos de síntese.</p>
-<p><strong>Regra:</strong> não corrija a fala do outro; pergunte o que o levou a dizer aquilo.</p>
-<p><strong>Registre:</strong> uma suposição que apareceu e uma pergunta nova.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Quatro pontos e 1024 tiros não generalizam. Ruído benéfico é hipótese, não garantia.</p>
-<p class="prof"><strong>Para o professor:</strong> A acurácia de 4/4 não é generalized accuracy. Explique o teto e o tamanho da amostra.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

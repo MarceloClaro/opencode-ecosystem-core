@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>O mapeamento de qubits lógicos para físicos é parte do processo.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">转译</span> <em>zhuǎn yì</em> <span class="tom">· tons 3-4 · leitura djuan-i</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解转译。</span> <em>Shēn rù liǎo jiě zhuǎn yì.</em> — Aprofunde-se em “Transpilação”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Transpilar reescreve o circuito nas portas nativas do backend.<br><strong>Conta:</strong> Um H pode virar U2; um CNOT pode virar uma sequência de portas nativas.<br><strong>Resultado:</strong> O unitário ideal é preservado; a profundidade e o erro mudam.<br><em>Limite:</em> Transpilação não é otimização gratuita: cada porta nativa tem erro.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">转译</span> <em>zhuǎn yì</em> <span class="tom">· tons 3-4 · leitura djuan-i</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解转译。</span> <em>Shēn rù liǎo jiě zhuǎn yì.</em> — Aprofunde-se em “Transpilação”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Transpilar reescreve o circuito nas portas nativas do backend.<br><strong>Conta:</strong> Um H pode virar U2; um CNOT pode virar uma sequência de portas nativas.<br><strong>Resultado:</strong> O unitário ideal é preservado; a profundidade e o erro mudam.<br><em>Limite:</em> Transpilação não é otimização gratuita: cada porta nativa tem erro.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O mapeamento de qubits lógicos para físicos é parte do processo.</p>
-<p class="prof"><strong>Para o professor:</strong> Confira a ordem dos qubits e a diferença entre circuito lógico e transpilado.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

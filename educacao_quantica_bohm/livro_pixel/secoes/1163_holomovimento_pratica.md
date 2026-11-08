@@ -10,12 +10,6 @@
 
 <p>Desenhe um processo que se desdobra em etapas.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">整体运动</span> <em>zhěng tǐ yùn dòng</em> <span class="tom">· tons 3-3-4-4 · leitura djeng-ti-yun-dong</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习整体运动。</span> <em>Liàn xí zhěng tǐ yùn dòng.</em> — Pratique “Holomovimento”.</span></p>
-<ol>
-<li>Faça a atividade sem pressa, em 5 minutos.</li>
-<li>Anote o que esperava antes de começar.</li>
-<li>Compare a previsão com o que observou.</li>
-</ol>
-<p><strong>O que observar:</strong> a diferença entre o que você esperava e o que aconteceu é o dado mais valioso.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -32,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Bohm usou a imagem para pensar processo em vez de coisas.</p>
-<p class="prof"><strong>Para o professor:</strong> Diga 'interpretação', não 'prova'. Compare com a leitura padrão e nomeie o preço: não localidade.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

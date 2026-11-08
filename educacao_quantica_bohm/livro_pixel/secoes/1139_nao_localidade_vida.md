@@ -10,14 +10,11 @@
 
 <p>Sensores distribuídos também mostram correlações sem mensagem.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">非定域性</span> <em>fēi dìng yù xìng</em> <span class="tom">· tons 1-4-4-4 · leitura fei-ding-yu-shing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到非定域性。</span> <em>Wǒ zài shēng huó zhōng kàn dào fēi dìng yù xìng.</em> — Vejo “Não localidade” na vida.</span></p>
-<p><strong>Onde isso aparece:</strong> procure um exemplo na sua casa, na escola ou no bairro. Descreva em duas frases.</p>
-<p><strong>O que muda no seu jeito de olhar?</strong> A ideia de não localidade pode mudar uma decisão cotidiana?</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O teorema de Bell mostra que a não localidade é difícil de evitar.</p>
-<p class="prof"><strong>Para o professor:</strong> Diga 'interpretação', não 'prova'. Compare com a leitura padrão e nomeie o preço: não localidade.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

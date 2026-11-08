@@ -11,13 +11,11 @@
 <p><strong>O erro comum:</strong> Liste três funções que surgem com a nuvem quântica.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">工作</span> <em>gōng zuò</em> <span class="tom">· tons 1-4 · leitura gong-dzuo</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">工作不是魔法。</span> <em>Gōng zuò bú shì mó fǎ.</em> — “Trabalho” não é magia.</span></p>
 <p><strong>Correção formal:</strong> A LGPD exige base legal, finalidade e transparência.</p>
-<p>Teste a correção com um exemplo numérico pequeno.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Não há consenso moral automático; há trade-offs.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

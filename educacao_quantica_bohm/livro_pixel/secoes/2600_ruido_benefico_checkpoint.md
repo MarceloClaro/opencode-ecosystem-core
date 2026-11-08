@@ -10,13 +10,11 @@
 
 <p><strong>Tarefa:</strong> Quem repete o experimento e publica o resultado negativo?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">有益噪声</span> <em>yǒu yì zào shēng</em> <span class="tom">· tons 3-4-4-1 · leitura iu-i-dzau-sheng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了有益噪声。</span> <em>Wǒ xué huì le yǒu yì zào shēng.</em> — Eu aprendi “Ruído benéfico?”.</span></p>
-<p><strong>Replicação:</strong> outra seed, outro backend, a mesma pergunta.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O teste é pequeno; não generaliza para outros dados ou modelos.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

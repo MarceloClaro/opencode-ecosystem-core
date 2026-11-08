@@ -10,13 +10,11 @@
 
 <p><strong>Tarefa:</strong> Quem responde quando o classificador erra?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">分类器</span> <em>fēn lèi qì</em> <span class="tom">· tons 1-4-4 · leitura fen-lei-tchi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了分类器。</span> <em>Wǒ xué huì le fēn lèi qì.</em> — Eu aprendi “Classificador”.</span></p>
-<p><strong>Diário:</strong> o que entendi? onde travei? o que vou testar amanhã?</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Amostra pequena não generaliza; 4 pontos não são um artigo.</p>
-<p class="prof"><strong>Para o professor:</strong> Explique o teto e o tamanho da amostra.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

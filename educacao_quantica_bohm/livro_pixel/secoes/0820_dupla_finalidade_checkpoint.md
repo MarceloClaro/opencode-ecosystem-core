@@ -10,13 +10,11 @@
 
 <p><strong>Tarefa:</strong> Uma ferramenta usada para vigiar pode ser justificada por segurança?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">双重用途</span> <em>shuāng chóng yòng tú</em> <span class="tom">· tons 1-2-4-2 · leitura shuang-tchong-iong-tu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了双重用途。</span> <em>Wǒ xué huì le shuāng chóng yòng tú.</em> — Eu aprendi “Dupla finalidade”.</span></p>
-<p><strong>Diário:</strong> o que entendi? onde travei? o que vou testar amanhã?</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Ética envolve valores e poder; não há resposta automática.</p>
-<p class="prof"><strong>Para o professor:</strong> Peça evidência, afetados e alternativas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

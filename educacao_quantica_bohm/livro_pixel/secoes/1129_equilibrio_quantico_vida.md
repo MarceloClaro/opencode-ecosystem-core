@@ -10,14 +10,11 @@
 
 <p>Multidões, fluidos e trânsito também têm distribuições estáveis.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子平衡</span> <em>liàng zǐ píng héng</em> <span class="tom">· tons 4-3-2-2 · leitura liang-dzi-ping-reng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到量子平衡。</span> <em>Wǒ zài shēng huó zhōng kàn dào liàng zǐ píng héng.</em> — Vejo “Equilíbrio quântico” na vida.</span></p>
-<p><strong>Onde isso aparece:</strong> procure um exemplo na sua casa, na escola ou no bairro. Descreva em duas frases.</p>
-<p><strong>O que muda no seu jeito de olhar?</strong> A ideia de equilíbrio quântico pode mudar uma decisão cotidiana?</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A equivariância é a propriedade matemática central.</p>
-<p class="prof"><strong>Para o professor:</strong> Diga 'interpretação', não 'prova'. Compare com a leitura padrão e nomeie o preço: não localidade.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

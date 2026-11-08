@@ -11,13 +11,11 @@
 <p><strong>O erro comum:</strong> Achar que a base é só uma convenção sem consequência física.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">基</span> <em>jī</em> <span class="tom">· tons 1 · leitura dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">基不是魔法。</span> <em>Jī bú shì mó fǎ.</em> — “Base” não é magia.</span></p>
 <p><strong>Correção formal:</strong> BB84 usa duas bases incompatíveis para detectar espionagem.</p>
-<p>Teste a correção com um exemplo numérico pequeno.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Bases diferentes não são 'ângulos' da mesma foto; são perguntas diferentes.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

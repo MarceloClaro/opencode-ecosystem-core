@@ -11,13 +11,11 @@
 <p>Uma folha carregada por um rio.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">导波</span> <em>dǎo bō</em> <span class="tom">· tons 3-1 · leitura dau-bo</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像导波。</span> <em>Zhè xiàng dǎo bō.</em> — Isto se parece com “Onda piloto”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> O rio é matemático e, para várias partículas, vive em muitas dimensões.</p>
-<p><strong>Teste rápido:</strong> desenhe a analogia e marque com um X o ponto em que ela deixa de explicar o conceito.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Bohm publicou a teoria em 1952; ela reproduz as previsões não relativísticas.</p>
-<p class="prof"><strong>Para o professor:</strong> Diga 'interpretação', não 'prova'. Compare com a leitura padrão e nomeie o preço: não localidade.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

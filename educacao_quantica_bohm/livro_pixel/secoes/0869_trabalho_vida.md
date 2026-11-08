@@ -10,13 +10,11 @@
 
 <p>Contas de luz, privacidade e emprego são afetados por tecnologia.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">工作</span> <em>gōng zuò</em> <span class="tom">· tons 1-4 · leitura gong-dzuo</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到工作。</span> <em>Wǒ zài shēng huó zhōng kàn dào gōng zuò.</em> — Vejo “Trabalho” na vida.</span></p>
-<p><strong>Onde isso aparece:</strong> procure um exemplo na sua casa ou na escola.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Ética envolve valores e poder; não há resposta automática.</p>
-<p class="prof"><strong>Para o professor:</strong> Peça evidência, afetados e alternativas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

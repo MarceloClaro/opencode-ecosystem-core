@@ -10,13 +10,11 @@
 
 <p>A medição é um processo físico, não um postulado místico.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">有效坍缩</span> <em>yǒu xiào tān suō</em> <span class="tom">· tons 3-4-1-1 · leitura iu-shiau-tan-suo</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解有效坍缩。</span> <em>Shēn rù liǎo jiě yǒu xiào tān suō.</em> — Aprofunde-se em “Colapso efetivo”.</span></p>
-<p>Guarde uma pergunta para a próxima aula; não precisa resolver tudo hoje.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Bohm é uma interpretação entre várias; não é consenso.</p>
-<p class="prof"><strong>Para o professor:</strong> Diga 'interpretação', não 'prova'.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

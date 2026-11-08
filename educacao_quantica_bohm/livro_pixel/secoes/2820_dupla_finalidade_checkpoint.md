@@ -10,13 +10,11 @@
 
 <p><strong>Tarefa:</strong> Uma ferramenta usada para vigiar pode ser justificada por segurança?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">双重用途</span> <em>shuāng chóng yòng tú</em> <span class="tom">· tons 1-2-4-2 · leitura shuang-tchong-iong-tu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了双重用途。</span> <em>Wǒ xué huì le shuāng chóng yòng tú.</em> — Eu aprendi “Dupla finalidade”.</span></p>
-<p><strong>Replicação:</strong> outra seed, outro backend, a mesma pergunta.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Não há consenso moral automático; há trade-offs.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -10,14 +10,11 @@
 
 <p><strong>O erro comum:</strong> Faça um pitch de 3 minutos com pergunta, evidência e limite.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">展示</span> <em>zhǎn shì</em> <span class="tom">· tons 3-4 · leitura djan-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">展示不是魔法。</span> <em>Zhǎn shì bú shì mó fǎ.</em> — “Apresentação” não é magia.</span></p>
-<p><strong>Por que acontece:</strong> o cérebro procura uma imagem simples e apaga a parte matemática que não se encaixa.</p>
-<p><strong>Como testar:</strong> escreva um contraexemplo em uma frase e veja se ele derruba sua explicação.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Todo projeto é um recorte. Declare limite, evidência e o que ficou fora.</p>
-<p class="prof"><strong>Para o professor:</strong> Exija um limite específico; 'tem limitações' não é suficiente.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

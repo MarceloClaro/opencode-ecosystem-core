@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>A fidelidade proxy mede a população ideal, não a pureza do estado.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">编码</span> <em>biān mǎ</em> <span class="tom">· tons 1-3 · leitura bien-ma</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解编码。</span> <em>Shēn rù liǎo jiě biān mǎ.</em> — Aprofunde-se em “Encoding”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Ry(θ)|0⟩ = cos(θ/2)|0⟩ + sen(θ/2)|1⟩; P(1)=sen²(θ/2).<br><strong>Conta:</strong> O experimento usa θ=2π/3: sen²(π/3)=0,75.<br><strong>Resultado:</strong> P(1)=0,75; a descrição antiga dizia π/3, que daria 0,25.<br><em>Limite:</em> O ângulo de codificação é uma escolha; a conta fixa a convenção.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">编码</span> <em>biān mǎ</em> <span class="tom">· tons 1-3 · leitura bien-ma</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解编码。</span> <em>Shēn rù liǎo jiě biān mǎ.</em> — Aprofunde-se em “Encoding”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Ry(θ)|0⟩ = cos(θ/2)|0⟩ + sen(θ/2)|1⟩; P(1)=sen²(θ/2).<br><strong>Conta:</strong> O experimento usa θ=2π/3: sen²(π/3)=0,75.<br><strong>Resultado:</strong> P(1)=0,75; a descrição antiga dizia π/3, que daria 0,25.<br><em>Limite:</em> O ângulo de codificação é uma escolha; a conta fixa a convenção.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Quatro pontos e 1024 tiros não generalizam. Ruído benéfico é hipótese, não garantia.</p>
-<p class="prof"><strong>Para o professor:</strong> A acurácia de 4/4 não é generalized accuracy. Explique o teto e o tamanho da amostra.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

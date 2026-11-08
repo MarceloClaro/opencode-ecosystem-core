@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>A prática distribuída e a recuperação ativa têm apoio em pesquisa.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">微课</span> <em>wēi kè</em> <span class="tom">· tons 1-4 · leitura uei-ke</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解微课。</span> <em>Shēn rù liǎo jiě wēi kè.</em> — Aprofunde-se em “Nanoaula”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> 7 min = 420 s; 10 lentes = 70 min por conceito.<br><strong>Conta:</strong> 100 conceitos × 70 min = 7000 min = 116,7 h por nível.<br><strong>Resultado:</strong> Os três níveis somam ≈ 350 h de leitura ativa.<br><em>Limite:</em> O tempo é uma estimativa; compreensão não é proporcional ao tempo.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">微课</span> <em>wēi kè</em> <span class="tom">· tons 1-4 · leitura uei-ke</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解微课。</span> <em>Shēn rù liǎo jiě wēi kè.</em> — Aprofunde-se em “Nanoaula”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> 7 min = 420 s; 10 lentes = 70 min por conceito.<br><strong>Conta:</strong> 100 conceitos × 70 min = 7000 min = 116,7 h por nível.<br><strong>Resultado:</strong> Os três níveis somam ≈ 350 h de leitura ativa.<br><em>Limite:</em> O tempo é uma estimativa; compreensão não é proporcional ao tempo.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Pedagogia é contextual. Não há método com efeito garantido para toda turma.</p>
-<p class="prof"><strong>Para o professor:</strong> Nanoaula é unidade de tempo e evidência, não fragmento sem síntese.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

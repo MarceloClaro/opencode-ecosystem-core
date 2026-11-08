@@ -10,13 +10,11 @@
 
 <p><strong>O erro comum:</strong> Explique por que o tempo de coerência limita a profundidade.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">退相干</span> <em>tuì xiāng gān</em> <span class="tom">· tons 4-1-1 · leitura tuei-shiang-gan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">退相干不是魔法。</span> <em>Tuì xiāng gān bú shì mó fǎ.</em> — “Decoerência” não é magia.</span></p>
-<p><strong>Como não cair:</strong> escreva um contraexemplo e teste com um colega.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Backend tem ruído; um número não prova o estado.</p>
-<p class="prof"><strong>Para o professor:</strong> Ruído, leitura e calibração são coisas distintas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

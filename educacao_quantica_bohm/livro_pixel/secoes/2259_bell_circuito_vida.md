@@ -10,13 +10,11 @@
 
 <p>Pares correlacionados aparecem em sensores e comunicações.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">贝尔电路</span> <em>bèi ěr diàn lù</em> <span class="tom">· tons 4-3-4-4 · leitura bei-er-dien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到贝尔电路。</span> <em>Wǒ zài shēng huó zhōng kàn dào bèi ěr diàn lù.</em> — Vejo “Circuito de Bell” na vida.</span></p>
-<p><strong>Onde medir:</strong> proponha um indicador e uma fonte de dados.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A imagem clássica não explica a violação de Bell.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

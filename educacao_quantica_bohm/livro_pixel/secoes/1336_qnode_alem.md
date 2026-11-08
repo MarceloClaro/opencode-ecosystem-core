@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>QNodes podem ser diferenciados e otimizados.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子节点</span> <em>liàng zǐ jié diǎn</em> <span class="tom">· tons 4-3-2-3 · leitura liang-dzi-djie-dien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解量子节点。</span> <em>Shēn rù liǎo jiě liàng zǐ jié diǎn.</em> — Aprofunde-se em “QNode”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Regra do deslocamento: ∂⟨Z⟩/∂θ = [⟨Z⟩(θ+π/2) − ⟨Z⟩(θ−π/2)]/2.<br><strong>Conta:</strong> Se ⟨Z⟩(θ)=cos θ, então a derivada é −sen θ.<br><strong>Resultado:</strong> A regra avalia o circuito em dois pontos e combina os resultados.<br><em>Limite:</em> Nem toda porta é diferenciável; a regra vale para geradores conhecidos.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子节点</span> <em>liàng zǐ jié diǎn</em> <span class="tom">· tons 4-3-2-3 · leitura liang-dzi-djie-dien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解量子节点。</span> <em>Shēn rù liǎo jiě liàng zǐ jié diǎn.</em> — Aprofunde-se em “QNode”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Regra do deslocamento: ∂⟨Z⟩/∂θ = [⟨Z⟩(θ+π/2) − ⟨Z⟩(θ−π/2)]/2.<br><strong>Conta:</strong> Se ⟨Z⟩(θ)=cos θ, então a derivada é −sen θ.<br><strong>Resultado:</strong> A regra avalia o circuito em dois pontos e combina os resultados.<br><em>Limite:</em> Nem toda porta é diferenciável; a regra vale para geradores conhecidos.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>QNodes podem ser diferenciados e otimizados.</p>
-<p class="prof"><strong>Para o professor:</strong> Compare a mesma grandeza nas três bibliotecas; se divergir, verifique convenção antes de concluir erro.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -10,13 +10,11 @@
 
 <p><strong>O erro comum:</strong> Descreva uma figura para quem não a vê.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">无障碍</span> <em>wú zhàng ài</em> <span class="tom">· tons 2-4-4 · leitura u-djang-ai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">无障碍不是魔法。</span> <em>Wú zhàng ài bú shì mó fǎ.</em> — “Acessibilidade” não é magia.</span></p>
-<p><strong>Como não cair:</strong> escreva um contraexemplo e teste com um colega.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Pedagogia é contextual; não há método garantido.</p>
-<p class="prof"><strong>Para o professor:</strong> Nanoaula é tempo e evidência, não fragmento.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

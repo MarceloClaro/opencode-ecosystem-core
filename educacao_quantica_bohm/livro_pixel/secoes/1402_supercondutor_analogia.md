@@ -11,13 +11,11 @@
 <p>Um chip que só funciona dentro de um freezer extremo.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">超导体</span> <em>chāo dǎo tǐ</em> <span class="tom">· tons 1-3-3 · leitura tchau-dau-ti</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像超导体。</span> <em>Zhè xiàng chāo dǎo tǐ.</em> — Isto se parece com “Supercondutor”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> O resultado de hoje não garante o de amanhã; calibração muda.</p>
-<p><strong>Teste rápido:</strong> desenhe a analogia e marque com um X o ponto em que ela deixa de explicar o conceito.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Backends têm ruído, calibração e deriva. Fidelidade proxy não é prova de emaranhamento.</p>
-<p class="prof"><strong>Para o professor:</strong> T1, T2, erro de leitura e ruído de porta são coisas distintas; não os trate como um número único.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

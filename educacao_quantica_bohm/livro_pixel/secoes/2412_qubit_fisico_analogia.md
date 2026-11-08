@@ -11,13 +11,11 @@
 <p>Um atleta que precisa de aquecimento e cuidado.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">物理量子比特</span> <em>wù lǐ liàng zǐ bǐ tè</em> <span class="tom">· tons 4-3-4-3-3-4 · leitura u-li-liang-dzi-bi-te</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像物理量子比特。</span> <em>Zhè xiàng wù lǐ liàng zǐ bǐ tè.</em> — Isto se parece com “Qubit físico”.</span></p>
 <p><strong>Limite formal:</strong> O resultado de hoje não garante o de amanhã; calibração muda.</p>
-<p>Construa um contraexemplo quantitativo e verifique se a analogia sobrevive.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O resultado de hoje não garante o de amanhã; calibração muda.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

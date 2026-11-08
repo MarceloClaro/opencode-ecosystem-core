@@ -10,14 +10,12 @@
 
 <p>T1 e T2 são tempos de relaxação e coerência; não são a mesma coisa.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子中心</span> <em>liàng zǐ zhōng xīn</em> <span class="tom">· tons 4-3-1-1 · leitura liang-dzi-djong-shin</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解量子中心。</span> <em>Shēn rù liǎo jiě liàng zǐ zhōng xīn.</em> — Aprofunde-se em “CIQuanta”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> O resultado de hoje não garante o de amanhã; calibração muda.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Acesso é pré-requisito; o experimento precisa de conta, fila e shots.<br><strong>Conta:</strong> 1024 shots por circuito; 4 circuitos = 4096 shots.<br><strong>Resultado:</strong> O custo e o tempo crescem com o número de circuitos.<br><em>Limite:</em> Acesso não é reprodutibilidade: outro usuário pode receber outra calibração.</span></p>
+<p><strong>O que ainda não sabemos:</strong> O resultado de hoje não garante o de amanhã; calibração muda. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Acesso é pré-requisito; o experimento precisa de conta, fila e shots.<br><strong>Conta:</strong> 1024 shots por circuito; 4 circuitos = 4096 shots.<br><strong>Resultado:</strong> O custo e o tempo crescem com o número de circuitos.<br><em>Limite:</em> Acesso não é reprodutibilidade: outro usuário pode receber outra calibração.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O resultado de hoje não garante o de amanhã; calibração muda.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

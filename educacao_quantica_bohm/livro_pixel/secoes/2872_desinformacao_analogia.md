@@ -11,13 +11,11 @@
 <p>Um boato que corre mais rápido que a correção.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">虚假信息</span> <em>xū jiǎ xìn xī</em> <span class="tom">· tons 1-3-4-1 · leitura shyu-djia-shin-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像虚假信息。</span> <em>Zhè xiàng xū jiǎ xìn xī.</em> — Isto se parece com “Desinformação”.</span></p>
 <p><strong>Limite formal:</strong> Não há consenso moral automático; há trade-offs.</p>
-<p>Construa um contraexemplo quantitativo e verifique se a analogia sobrevive.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Não há consenso moral automático; há trade-offs.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

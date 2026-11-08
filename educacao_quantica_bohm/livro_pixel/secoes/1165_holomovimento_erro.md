@@ -10,14 +10,11 @@
 
 <p><strong>O erro comum:</strong> Tratar 'holomovimento' como um mecanismo físico já comprovado.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">整体运动</span> <em>zhěng tǐ yùn dòng</em> <span class="tom">· tons 3-3-4-4 · leitura djeng-ti-yun-dong</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">整体运动不是魔法。</span> <em>Zhěng tǐ yùn dòng bú shì mó fǎ.</em> — “Holomovimento” não é magia.</span></p>
-<p><strong>Por que acontece:</strong> o cérebro procura uma imagem simples e apaga a parte matemática que não se encaixa.</p>
-<p><strong>Como testar:</strong> escreva um contraexemplo em uma frase e veja se ele derruba sua explicação.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Bohm usou a imagem para pensar processo em vez de coisas.</p>
-<p class="prof"><strong>Para o professor:</strong> Diga 'interpretação', não 'prova'. Compare com a leitura padrão e nomeie o preço: não localidade.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

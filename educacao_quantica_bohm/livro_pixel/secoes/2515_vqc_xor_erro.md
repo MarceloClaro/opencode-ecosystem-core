@@ -11,13 +11,11 @@
 <p><strong>O erro comum:</strong> Calcule P(1) para os quatro pontos e compare com o ideal.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">变分分类器</span> <em>biàn fēn fēn lèi qì</em> <span class="tom">· tons 4-1-1-4-4 · leitura bien-fen-fen-lei-tchi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">变分分类器不是魔法。</span> <em>Biàn fēn fēn lèi qì bú shì mó fǎ.</em> — “VQC XOR” não é magia.</span></p>
 <p><strong>Correção formal:</strong> A fidelidade proxy mede a população ideal, não a pureza do estado.</p>
-<p>Teste a correção com um exemplo numérico pequeno.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O teste é pequeno; não generaliza para outros dados ou modelos.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

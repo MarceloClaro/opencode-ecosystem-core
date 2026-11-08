@@ -10,13 +10,11 @@
 
 <p>Sensores distribuídos também mostram correlações sem mensagem.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">非定域性</span> <em>fēi dìng yù xìng</em> <span class="tom">· tons 1-4-4-4 · leitura fei-ding-yu-shing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到非定域性。</span> <em>Wǒ zài shēng huó zhōng kàn dào fēi dìng yù xìng.</em> — Vejo “Não localidade” na vida.</span></p>
-<p><strong>Onde isso aparece:</strong> procure um exemplo na sua casa ou na escola.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Bohm é uma interpretação entre várias; não é consenso.</p>
-<p class="prof"><strong>Para o professor:</strong> Diga 'interpretação', não 'prova'.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

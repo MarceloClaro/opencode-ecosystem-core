@@ -10,13 +10,11 @@
 
 <p>O teorema de Bell mostra que a não localidade é difícil de evitar.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">非定域性</span> <em>fēi dìng yù xìng</em> <span class="tom">· tons 1-4-4-4 · leitura fei-ding-yu-shing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解非定域性。</span> <em>Shēn rù liǎo jiě fēi dìng yù xìng.</em> — Aprofunde-se em “Não localidade”.</span></p>
-<p>Guarde uma pergunta para a próxima aula; não precisa resolver tudo hoje.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Bohm é uma interpretação entre várias; não é consenso.</p>
-<p class="prof"><strong>Para o professor:</strong> Diga 'interpretação', não 'prova'.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -10,14 +10,12 @@
 
 <p>A equivariância é a propriedade matemática central.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子平衡</span> <em>liàng zǐ píng héng</em> <span class="tom">· tons 4-3-2-2 · leitura liang-dzi-ping-reng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解量子平衡。</span> <em>Shēn rù liǎo jiě liàng zǐ píng héng.</em> — Aprofunde-se em “Equilíbrio quântico”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> A hipótese explica por que a regra de Born funciona, mas não por que o universo começou assim.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> ρ = |ψ|²; a continuidade exige ∂ρ/∂t + ∇·(ρv) = 0.<br><strong>Conta:</strong> Para ψ = e^{ikx}, ρ = 1 e v = ħk/m; ∂ρ/∂t = 0 e ∇·(ρv) = 0.<br><strong>Resultado:</strong> A distribuição se conserva: 0 + 0 = 0.<br><em>Limite:</em> O equilíbrio quântico é um postulado da interpretação, não um teorema geral.</span></p>
+<p><strong>O que ainda não sabemos:</strong> A hipótese explica por que a regra de Born funciona, mas não por que o universo começou assim. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> ρ = |ψ|²; a continuidade exige ∂ρ/∂t + ∇·(ρv) = 0.<br><strong>Conta:</strong> Para ψ = e^{ikx}, ρ = 1 e v = ħk/m; ∂ρ/∂t = 0 e ∇·(ρv) = 0.<br><strong>Resultado:</strong> A distribuição se conserva: 0 + 0 = 0.<br><em>Limite:</em> O equilíbrio quântico é um postulado da interpretação, não um teorema geral.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A hipótese explica por que a regra de Born funciona, mas não por que o universo começou assim.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

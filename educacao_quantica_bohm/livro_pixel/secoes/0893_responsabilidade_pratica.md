@@ -10,7 +10,6 @@
 
 <p>A metáfora individual esconde responsabilidades coletivas.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">责任</span> <em>zé rèn</em> <span class="tom">· tons 2-4 · leitura dze-jen</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习责任。</span> <em>Liàn xí zé rèn.</em> — Pratique “Responsabilidade”.</span></p>
-<p>Faça em 5 minutos; anote o que esperava antes de começar.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -27,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Ética envolve valores e poder; não há resposta automática.</p>
-<p class="prof"><strong>Para o professor:</strong> Peça evidência, afetados e alternativas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

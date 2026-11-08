@@ -11,13 +11,11 @@
 <p>Uma lista de pesos para cada configuração possível.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">态矢量</span> <em>tài shǐ liàng</em> <span class="tom">· tons 4-3-4 · leitura tai-shi-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像态矢量。</span> <em>Zhè xiàng tài shǐ liàng.</em> — Isto se parece com “Statevector”.</span></p>
 <p><strong>Limite formal:</strong> O vetor cresce como 2^n; não é acessível por medição única.</p>
-<p>Construa um contraexemplo quantitativo e verifique se a analogia sobrevive.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O vetor cresce como 2^n; não é acessível por medição única.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

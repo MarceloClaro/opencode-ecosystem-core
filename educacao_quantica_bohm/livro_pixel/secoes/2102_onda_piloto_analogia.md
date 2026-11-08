@@ -11,13 +11,11 @@
 <p>Uma folha carregada por um rio.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">导波</span> <em>dǎo bō</em> <span class="tom">· tons 3-1 · leitura dau-bo</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像导波。</span> <em>Zhè xiàng dǎo bō.</em> — Isto se parece com “Onda piloto”.</span></p>
 <p><strong>Limite formal:</strong> O rio é matemático e, para várias partículas, vive em muitas dimensões.</p>
-<p>Construa um contraexemplo quantitativo e verifique se a analogia sobrevive.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O rio é matemático e, para várias partículas, vive em muitas dimensões.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

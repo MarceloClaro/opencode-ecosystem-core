@@ -10,14 +10,12 @@
 
 <p>T1 e T2 são tempos de relaxação e coerência; não são a mesma coisa.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">天宫</span> <em>tiān gōng</em> <span class="tom">· tons 1-1 · leitura tien-gong</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解天宫。</span> <em>Shēn rù liǎo jiě tiān gōng.</em> — Aprofunde-se em “Tiangong”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> O resultado de hoje não garante o de amanhã; calibração muda.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Comparação de escala: 156 qubits / 20 qubits = 7,8.<br><strong>Conta:</strong> Baihua tem 7,8× mais qubits que Guoji08.<br><strong>Resultado:</strong> A fidelidade proxy do GHZ, porém, foi menor no Baihua (65,1% vs 78,8%).<br><em>Limite:</em> Número de qubits não é medida de qualidade.</span></p>
+<p><strong>O que ainda não sabemos:</strong> O resultado de hoje não garante o de amanhã; calibração muda. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Comparação de escala: 156 qubits / 20 qubits = 7,8.<br><strong>Conta:</strong> Baihua tem 7,8× mais qubits que Guoji08.<br><strong>Resultado:</strong> A fidelidade proxy do GHZ, porém, foi menor no Baihua (65,1% vs 78,8%).<br><em>Limite:</em> Número de qubits não é medida de qualidade.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O resultado de hoje não garante o de amanhã; calibração muda.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

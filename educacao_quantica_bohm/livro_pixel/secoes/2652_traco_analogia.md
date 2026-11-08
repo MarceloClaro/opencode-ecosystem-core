@@ -11,13 +11,11 @@
 <p>A soma dos pesos de uma distribuição.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">迹</span> <em>jì</em> <span class="tom">· tons 4 · leitura dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像迹。</span> <em>Zhè xiàng jì.</em> — Isto se parece com “Traço”.</span></p>
 <p><strong>Limite formal:</strong> A equação não explica por que o mundo segue a equação.</p>
-<p>Construa um contraexemplo quantitativo e verifique se a analogia sobrevive.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A equação não explica por que o mundo segue a equação.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

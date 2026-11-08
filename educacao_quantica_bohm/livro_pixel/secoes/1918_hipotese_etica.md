@@ -10,14 +10,11 @@
 
 <p>Quem participou da pergunta e quem ficou fora?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">假设</span> <em>jiǎ shè</em> <span class="tom">· tons 3-4 · leitura djia-she</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于假设？</span> <em>Shéi shòu yì yú jiǎ shè?</em> — Quem se beneficia de “Hipótese”?</span></p>
-<p><strong>Quem ganha? Quem perde?</strong> Liste um grupo que se beneficia e um que pode ser prejudicado.</p>
-<p><strong>O que a escola pode fazer?</strong> Transforme o dilema em uma pergunta investigável, não em um julgamento pessoal.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Todo projeto é um recorte. Declare limite, evidência e o que ficou fora.</p>
-<p class="prof"><strong>Para o professor:</strong> Exija um limite específico; 'tem limitações' não é suficiente.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

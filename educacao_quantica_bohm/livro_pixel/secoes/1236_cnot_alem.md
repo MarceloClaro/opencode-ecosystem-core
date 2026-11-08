@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>CNOT é a porta de duas entradas que gera o estado de Bell.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">受控非门</span> <em>shòu kòng fēi mén</em> <span class="tom">· tons 4-4-1-2 · leitura shou-kong-fei-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解受控非门。</span> <em>Shēn rù liǎo jiě shòu kòng fēi mén.</em> — Aprofunde-se em “CNOT”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> CNOT: |00⟩→|00⟩, |01⟩→|01⟩, |10⟩→|11⟩, |11⟩→|10⟩.<br><strong>Conta:</strong> O primeiro bit é o controle; o segundo é o alvo.<br><strong>Resultado:</strong> CNOT|10⟩ = |11⟩; CNOT|11⟩ = |10⟩.<br><em>Limite:</em> CNOT é condicional; sem superposição, ele é uma cópia clássica condicional.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">受控非门</span> <em>shòu kòng fēi mén</em> <span class="tom">· tons 4-4-1-2 · leitura shou-kong-fei-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解受控非门。</span> <em>Shēn rù liǎo jiě shòu kòng fēi mén.</em> — Aprofunde-se em “CNOT”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> CNOT: |00⟩→|00⟩, |01⟩→|01⟩, |10⟩→|11⟩, |11⟩→|10⟩.<br><strong>Conta:</strong> O primeiro bit é o controle; o segundo é o alvo.<br><strong>Resultado:</strong> CNOT|10⟩ = |11⟩; CNOT|11⟩ = |10⟩.<br><em>Limite:</em> CNOT é condicional; sem superposição, ele é uma cópia clássica condicional.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>CNOT é a porta de duas entradas que gera o estado de Bell.</p>
-<p class="prof"><strong>Para o professor:</strong> Confira a ordem dos qubits e a diferença entre circuito lógico e transpilado.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

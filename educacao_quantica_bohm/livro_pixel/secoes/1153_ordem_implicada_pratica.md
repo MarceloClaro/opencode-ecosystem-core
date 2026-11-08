@@ -10,12 +10,6 @@
 
 <p>Reconstrua uma letra com 1% dos coeficientes de Fourier.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">隐缠序</span> <em>yǐn chán xù</em> <span class="tom">· tons 3-2-4 · leitura in-tchan-shyu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习隐缠序。</span> <em>Liàn xí yǐn chán xù.</em> — Pratique “Ordem implicada”.</span></p>
-<ol>
-<li>Faça a atividade sem pressa, em 5 minutos.</li>
-<li>Anote o que esperava antes de começar.</li>
-<li>Compare a previsão com o que observou.</li>
-</ol>
-<p><strong>O que observar:</strong> a diferença entre o que você esperava e o que aconteceu é o dado mais valioso.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -32,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A analogia do holograma é matemática e clássica.</p>
-<p class="prof"><strong>Para o professor:</strong> Diga 'interpretação', não 'prova'. Compare com a leitura padrão e nomeie o preço: não localidade.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

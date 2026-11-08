@@ -10,13 +10,11 @@
 
 <p><strong>Tarefa:</strong> Você consegue dar um exemplo de processo que vira forma?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">整体运动</span> <em>zhěng tǐ yùn dòng</em> <span class="tom">· tons 3-3-4-4 · leitura djeng-ti-yun-dong</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了整体运动。</span> <em>Wǒ xué huì le zhěng tǐ yùn dòng.</em> — Eu aprendi “Holomovimento”.</span></p>
-<p><strong>Replicação:</strong> outra seed, outro backend, a mesma pergunta.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O termo é filosófico; não é uma equação operacional.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

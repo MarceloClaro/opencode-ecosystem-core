@@ -11,13 +11,11 @@
 <p>Ajustar a mira de uma flecha depois de cada tiro.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">训练</span> <em>xùn liàn</em> <span class="tom">· tons 4-4 · leitura shyun-lien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像训练。</span> <em>Zhè xiàng xùn liàn.</em> — Isto se parece com “Treino”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> O teste é pequeno; não generaliza para outros dados ou modelos.</p>
-<p><strong>Teste rápido:</strong> desenhe a analogia e marque com um X o ponto em que ela deixa de explicar o conceito.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Quatro pontos e 1024 tiros não generalizam. Ruído benéfico é hipótese, não garantia.</p>
-<p class="prof"><strong>Para o professor:</strong> A acurácia de 4/4 não é generalized accuracy. Explique o teto e o tamanho da amostra.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

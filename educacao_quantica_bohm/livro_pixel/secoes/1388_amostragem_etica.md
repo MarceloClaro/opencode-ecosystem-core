@@ -10,14 +10,11 @@
 
 <p>Amostras pequenas podem alimentar conclusões injustas?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">采样</span> <em>cǎi yàng</em> <span class="tom">· tons 3-4 · leitura tsai-iang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于采样？</span> <em>Shéi shòu yì yú cǎi yàng?</em> — Quem se beneficia de “Amostragem”?</span></p>
-<p><strong>Quem ganha? Quem perde?</strong> Liste um grupo que se beneficia e um que pode ser prejudicado.</p>
-<p><strong>O que a escola pode fazer?</strong> Transforme o dilema em uma pergunta investigável, não em um julgamento pessoal.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O erro padrão cai com a raiz do número de tiros.</p>
-<p class="prof"><strong>Para o professor:</strong> Compare a mesma grandeza nas três bibliotecas; se divergir, verifique convenção antes de concluir erro.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

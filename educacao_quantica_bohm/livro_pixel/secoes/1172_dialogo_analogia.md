@@ -11,13 +11,11 @@
 <p>Uma roda em que cada pessoa fala uma vez e escuta sem interromper.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">对话</span> <em>duì huà</em> <span class="tom">· tons 4-4 · leitura duei-rua</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像对话。</span> <em>Zhè xiàng duì huà.</em> — Isto se parece com “Diálogo”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> Diálogo não é terapia, assembleia ou busca obrigatória de consenso.</p>
-<p><strong>Teste rápido:</strong> desenhe a analogia e marque com um X o ponto em que ela deixa de explicar o conceito.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Bohm distingue diálogo de debate em 'On Dialogue'.</p>
-<p class="prof"><strong>Para o professor:</strong> Diga 'interpretação', não 'prova'. Compare com a leitura padrão e nomeie o preço: não localidade.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

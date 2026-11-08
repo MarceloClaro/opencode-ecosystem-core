@@ -10,14 +10,11 @@
 
 <p>Quem coleta dados de usuários precisa de consentimento?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">多次测量</span> <em>duō cì cè liáng</em> <span class="tom">· tons 1-4-4-2 · leitura duo-tsi-tse-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于多次测量？</span> <em>Shéi shòu yì yú duō cì cè liáng?</em> — Quem se beneficia de “Medição múltipla”?</span></p>
-<p><strong>Quem ganha? Quem perde?</strong> Liste um grupo que se beneficia e um que pode ser prejudicado.</p>
-<p><strong>O que a escola pode fazer?</strong> Transforme o dilema em uma pergunta investigável, não em um julgamento pessoal.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A amostragem tem erro estatístico que diminui com o número de tiros.</p>
-<p class="prof"><strong>Para o professor:</strong> Confira a ordem dos qubits e a diferença entre circuito lógico e transpilado.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

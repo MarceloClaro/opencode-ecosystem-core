@@ -10,13 +10,11 @@
 
 <p><strong>Tarefa:</strong> Você consegue listar três gestos do diálogo?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">对话</span> <em>duì huà</em> <span class="tom">· tons 4-4 · leitura duei-rua</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了对话。</span> <em>Wǒ xué huì le duì huà.</em> — Eu aprendi “Diálogo”.</span></p>
-<p><strong>Diário:</strong> o que entendi? onde travei? o que vou testar amanhã?</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Bohm é uma interpretação entre várias; não é consenso.</p>
-<p class="prof"><strong>Para o professor:</strong> Diga 'interpretação', não 'prova'.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

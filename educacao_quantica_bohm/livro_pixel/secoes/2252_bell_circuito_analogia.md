@@ -11,13 +11,11 @@
 <p>Duas lâmpadas que acendem sempre juntas.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">贝尔电路</span> <em>bèi ěr diàn lù</em> <span class="tom">· tons 4-3-4-4 · leitura bei-er-dien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像贝尔电路。</span> <em>Zhè xiàng bèi ěr diàn lù.</em> — Isto se parece com “Circuito de Bell”.</span></p>
 <p><strong>Limite formal:</strong> A imagem clássica não explica a violação de Bell.</p>
-<p>Construa um contraexemplo quantitativo e verifique se a analogia sobrevive.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A imagem clássica não explica a violação de Bell.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

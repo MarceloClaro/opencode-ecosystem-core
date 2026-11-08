@@ -11,13 +11,11 @@
 <p>Um interruptor que troca de posição.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">翻转门</span> <em>fān zhuǎn mén</em> <span class="tom">· tons 1-3-2 · leitura fan-djuan-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像翻转门。</span> <em>Zhè xiàng fān zhuǎn mén.</em> — Isto se parece com “Porta X”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> X não cria superposição; ela apenas troca os estados de base.</p>
-<p><strong>Teste rápido:</strong> desenhe a analogia e marque com um X o ponto em que ela deixa de explicar o conceito.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>X é a matriz [[0,1],[1,0]]; X² = I.</p>
-<p class="prof"><strong>Para o professor:</strong> Confira a ordem dos qubits e a diferença entre circuito lógico e transpilado.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

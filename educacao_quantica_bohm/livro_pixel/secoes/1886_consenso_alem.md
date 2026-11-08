@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>A LGPD exige base legal, finalidade e transparência.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">共识</span> <em>gòng shí</em> <span class="tom">· tons 4-2 · leitura gong-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解共识。</span> <em>Shēn rù liǎo jiě gòng shí.</em> — Aprofunde-se em “Consenso”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Consenso não é unanimidade.<br><strong>Conta:</strong> 7 de 10 especialistas concordam → 70% de concordância.<br><strong>Resultado:</strong> Os 30% discordantes precisam ser ouvidos.<br><em>Limite:</em> Consenso não é verdade.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">共识</span> <em>gòng shí</em> <span class="tom">· tons 4-2 · leitura gong-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解共识。</span> <em>Shēn rù liǎo jiě gòng shí.</em> — Aprofunde-se em “Consenso”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Consenso não é unanimidade.<br><strong>Conta:</strong> 7 de 10 especialistas concordam → 70% de concordância.<br><strong>Resultado:</strong> Os 30% discordantes precisam ser ouvidos.<br><em>Limite:</em> Consenso não é verdade.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Ética envolve valores e poder. Não há resposta automática; há deliberação e consequências.</p>
-<p class="prof"><strong>Para o professor:</strong> Não transforme ética em opinião pessoal: peça evidência, afetados e alternativas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

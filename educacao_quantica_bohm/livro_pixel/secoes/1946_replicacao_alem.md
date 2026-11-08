@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>Um bom projeto declara o que não prova.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">复现</span> <em>fù xiàn</em> <span class="tom">· tons 4-4 · leitura fu-shien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解复现。</span> <em>Shēn rù liǎo jiě fù xiàn.</em> — Aprofunde-se em “Replicação”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Replicar = mesmo código, mesmo backend, mesma seed, nova execução.<br><strong>Conta:</strong> Duas execuções com 1024 tiros podem diferir em ≈ ±3%.<br><strong>Resultado:</strong> A comparação precisa considerar a incerteza.<br><em>Limite:</em> Replicação não é garantia de generalização.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">复现</span> <em>fù xiàn</em> <span class="tom">· tons 4-4 · leitura fu-shien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解复现。</span> <em>Shēn rù liǎo jiě fù xiàn.</em> — Aprofunde-se em “Replicação”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Replicar = mesmo código, mesmo backend, mesma seed, nova execução.<br><strong>Conta:</strong> Duas execuções com 1024 tiros podem diferir em ≈ ±3%.<br><strong>Resultado:</strong> A comparação precisa considerar a incerteza.<br><em>Limite:</em> Replicação não é garantia de generalização.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Todo projeto é um recorte. Declare limite, evidência e o que ficou fora.</p>
-<p class="prof"><strong>Para o professor:</strong> Exija um limite específico; 'tem limitações' não é suficiente.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

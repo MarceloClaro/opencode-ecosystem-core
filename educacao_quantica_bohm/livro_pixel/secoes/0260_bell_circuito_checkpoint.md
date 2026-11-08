@@ -10,13 +10,11 @@
 
 <p><strong>Tarefa:</strong> Você consegue prever os quatro resultados possíveis?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">贝尔电路</span> <em>bèi ěr diàn lù</em> <span class="tom">· tons 4-3-4-4 · leitura bei-er-dien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了贝尔电路。</span> <em>Wǒ xué huì le bèi ěr diàn lù.</em> — Eu aprendi “Circuito de Bell”.</span></p>
-<p><strong>Diário:</strong> o que entendi? onde travei? o que vou testar amanhã?</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Circuito é um modelo; a ordem dos qubits importa.</p>
-<p class="prof"><strong>Para o professor:</strong> Confira a ordem dos qubits antes de comparar.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

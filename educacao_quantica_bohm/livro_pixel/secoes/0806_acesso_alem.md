@@ -10,13 +10,11 @@
 
 <p>A LGPD exige base legal, finalidade e transparência.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">访问</span> <em>fǎng wèn</em> <span class="tom">· tons 3-4 · leitura fang-uen</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解访问。</span> <em>Shēn rù liǎo jiě fǎng wèn.</em> — Aprofunde-se em “Acesso”.</span></p>
-<p>Guarde uma pergunta para a próxima aula; não precisa resolver tudo hoje.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Ética envolve valores e poder; não há resposta automática.</p>
-<p class="prof"><strong>Para o professor:</strong> Peça evidência, afetados e alternativas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

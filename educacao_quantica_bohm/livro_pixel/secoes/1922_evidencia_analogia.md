@@ -11,13 +11,11 @@
 <p>Uma pegada que indica que alguém passou.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">证据</span> <em>zhèng jù</em> <span class="tom">· tons 4-4 · leitura djeng-djyu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像证据。</span> <em>Zhè xiàng zhèng jù.</em> — Isto se parece com “Evidência”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> O projeto não esgota o problema; escolhe um recorte.</p>
-<p><strong>Teste rápido:</strong> desenhe a analogia e marque com um X o ponto em que ela deixa de explicar o conceito.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Todo projeto é um recorte. Declare limite, evidência e o que ficou fora.</p>
-<p class="prof"><strong>Para o professor:</strong> Exija um limite específico; 'tem limitações' não é suficiente.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

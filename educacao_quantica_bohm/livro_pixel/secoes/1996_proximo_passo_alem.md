@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>Um bom projeto declara o que não prova.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">下一步</span> <em>xià yí bù</em> <span class="tom">· tons 4-2-4 · leitura shia-i-bu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解下一步。</span> <em>Shēn rù liǎo jiě xià yí bù.</em> — Aprofunde-se em “Próximo passo”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Compromisso: 1 pergunta, 1 experimento, 1 data.<br><strong>Conta:</strong> Se a data é em 7 dias, o experimento precisa caber em 7 dias.<br><strong>Resultado:</strong> O próximo passo é pequeno, verificável e datado.<br><em>Limite:</em> O próximo passo é seu; o livro não decide por você.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">下一步</span> <em>xià yí bù</em> <span class="tom">· tons 4-2-4 · leitura shia-i-bu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解下一步。</span> <em>Shēn rù liǎo jiě xià yí bù.</em> — Aprofunde-se em “Próximo passo”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Compromisso: 1 pergunta, 1 experimento, 1 data.<br><strong>Conta:</strong> Se a data é em 7 dias, o experimento precisa caber em 7 dias.<br><strong>Resultado:</strong> O próximo passo é pequeno, verificável e datado.<br><em>Limite:</em> O próximo passo é seu; o livro não decide por você.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Todo projeto é um recorte. Declare limite, evidência e o que ficou fora.</p>
-<p class="prof"><strong>Para o professor:</strong> Exija um limite específico; 'tem limitações' não é suficiente.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

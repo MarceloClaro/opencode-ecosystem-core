@@ -10,13 +10,11 @@
 
 <p><strong>O erro comum:</strong> Dizer que H 'escolhe aleatoriamente' antes da medição.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">哈达玛门</span> <em>hā dá mǎ mén</em> <span class="tom">· tons 1-2-3-2 · leitura ra-da-ma-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">哈达玛门不是魔法。</span> <em>Hā dá mǎ mén bú shì mó fǎ.</em> — “Porta H” não é magia.</span></p>
-<p><strong>Como não cair:</strong> escreva um contraexemplo e teste com um colega.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Circuito é um modelo; a ordem dos qubits importa.</p>
-<p class="prof"><strong>Para o professor:</strong> Confira a ordem dos qubits antes de comparar.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

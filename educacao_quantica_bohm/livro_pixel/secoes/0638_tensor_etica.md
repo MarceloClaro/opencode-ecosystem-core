@@ -10,13 +10,11 @@
 
 <p>Uma métrica pode esconder desigualdades?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">张量积</span> <em>zhāng liàng jī</em> <span class="tom">· tons 1-4-1 · leitura djang-liang-dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于张量积？</span> <em>Shéi shòu yì yú zhāng liàng jī?</em> — Quem se beneficia de “Produto tensorial”?</span></p>
-<p><strong>Quem ganha? Quem perde?</strong> Cite um grupo para cada lado.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A matemática é representação; não é o fenômeno.</p>
-<p class="prof"><strong>Para o professor:</strong> Use exemplos pequenos antes da fórmula.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

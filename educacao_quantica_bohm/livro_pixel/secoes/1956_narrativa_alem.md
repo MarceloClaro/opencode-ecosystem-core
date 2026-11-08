@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>Um bom projeto declara o que não prova.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">叙事</span> <em>xù shì</em> <span class="tom">· tons 4-4 · leitura shyu-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解叙事。</span> <em>Shēn rù liǎo jiě xù shì.</em> — Aprofunde-se em “Narrativa”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Uma narrativa de evidência tem 3 partes: afirmação, evidência, limite.<br><strong>Conta:</strong> Se falta o limite, a narrativa vira propaganda.<br><strong>Resultado:</strong> A estrutura de 3 partes mantém a honestidade.<br><em>Limite:</em> Narrativa não é manipulação.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">叙事</span> <em>xù shì</em> <span class="tom">· tons 4-4 · leitura shyu-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解叙事。</span> <em>Shēn rù liǎo jiě xù shì.</em> — Aprofunde-se em “Narrativa”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Uma narrativa de evidência tem 3 partes: afirmação, evidência, limite.<br><strong>Conta:</strong> Se falta o limite, a narrativa vira propaganda.<br><strong>Resultado:</strong> A estrutura de 3 partes mantém a honestidade.<br><em>Limite:</em> Narrativa não é manipulação.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Todo projeto é um recorte. Declare limite, evidência e o que ficou fora.</p>
-<p class="prof"><strong>Para o professor:</strong> Exija um limite específico; 'tem limitações' não é suficiente.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

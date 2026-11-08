@@ -10,13 +10,11 @@
 
 <p>A amostragem tem erro estatístico que diminui com o número de tiros.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">多次测量</span> <em>duō cì cè liáng</em> <span class="tom">· tons 1-4-4-2 · leitura duo-tsi-tse-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解多次测量。</span> <em>Shēn rù liǎo jiě duō cì cè liáng.</em> — Aprofunde-se em “Medição múltipla”.</span></p>
-<p>Guarde uma pergunta para a próxima aula; não precisa resolver tudo hoje.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Circuito é um modelo; a ordem dos qubits importa.</p>
-<p class="prof"><strong>Para o professor:</strong> Confira a ordem dos qubits antes de comparar.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

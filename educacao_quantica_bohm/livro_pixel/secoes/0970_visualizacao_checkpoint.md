@@ -10,13 +10,11 @@
 
 <p><strong>Tarefa:</strong> Quem escolheu as cores e os destaques?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">可视化</span> <em>kě shì huà</em> <span class="tom">· tons 3-4-4 · leitura ke-shi-rua</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了可视化。</span> <em>Wǒ xué huì le kě shì huà.</em> — Eu aprendi “Visualização”.</span></p>
-<p><strong>Diário:</strong> o que entendi? onde travei? o que vou testar amanhã?</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Todo projeto é um recorte; declare o limite.</p>
-<p class="prof"><strong>Para o professor:</strong> Exija um limite específico.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

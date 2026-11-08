@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>O teorema de Bell mostra que a não localidade é difícil de evitar.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">非定域性</span> <em>fēi dìng yù xìng</em> <span class="tom">· tons 1-4-4-4 · leitura fei-ding-yu-shing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解非定域性。</span> <em>Shēn rù liǎo jiě fēi dìng yù xìng.</em> — Aprofunde-se em “Não localidade”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> v₁ = (ħ/m) Im(∇₁ψ/ψ), que depende de x₂.<br><strong>Conta:</strong> Se ψ = f(x₁−x₂), então ∇₁f = −∇₂f; a velocidade de 1 depende da posição de 2.<br><strong>Resultado:</strong> A dependência é instantânea no formalismo, mas não permite enviar sinais.<br><em>Limite:</em> Não localidade não é violação da relatividade: não há mensagem controlável.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">非定域性</span> <em>fēi dìng yù xìng</em> <span class="tom">· tons 1-4-4-4 · leitura fei-ding-yu-shing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解非定域性。</span> <em>Shēn rù liǎo jiě fēi dìng yù xìng.</em> — Aprofunde-se em “Não localidade”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> v₁ = (ħ/m) Im(∇₁ψ/ψ), que depende de x₂.<br><strong>Conta:</strong> Se ψ = f(x₁−x₂), então ∇₁f = −∇₂f; a velocidade de 1 depende da posição de 2.<br><strong>Resultado:</strong> A dependência é instantânea no formalismo, mas não permite enviar sinais.<br><em>Limite:</em> Não localidade não é violação da relatividade: não há mensagem controlável.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O teorema de Bell mostra que a não localidade é difícil de evitar.</p>
-<p class="prof"><strong>Para o professor:</strong> Diga 'interpretação', não 'prova'. Compare com a leitura padrão e nomeie o preço: não localidade.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

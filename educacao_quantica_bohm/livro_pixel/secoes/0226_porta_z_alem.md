@@ -10,13 +10,11 @@
 
 <p>Z é diag(1,-1); a fase relativa é o recurso da interferência.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">相位门</span> <em>xiàng wèi mén</em> <span class="tom">· tons 4-4-2 · leitura shiang-uei-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解相位门。</span> <em>Shēn rù liǎo jiě xiàng wèi mén.</em> — Aprofunde-se em “Porta Z”.</span></p>
-<p>Guarde uma pergunta para a próxima aula; não precisa resolver tudo hoje.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Circuito é um modelo; a ordem dos qubits importa.</p>
-<p class="prof"><strong>Para o professor:</strong> Confira a ordem dos qubits antes de comparar.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

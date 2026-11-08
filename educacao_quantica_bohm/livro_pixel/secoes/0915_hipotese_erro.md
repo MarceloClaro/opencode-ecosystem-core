@@ -10,13 +10,11 @@
 
 <p><strong>O erro comum:</strong> Escreva uma hipótese e o resultado que a refutaria.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">假设</span> <em>jiǎ shè</em> <span class="tom">· tons 3-4 · leitura djia-she</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">假设不是魔法。</span> <em>Jiǎ shè bú shì mó fǎ.</em> — “Hipótese” não é magia.</span></p>
-<p><strong>Como não cair:</strong> escreva um contraexemplo e teste com um colega.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Todo projeto é um recorte; declare o limite.</p>
-<p class="prof"><strong>Para o professor:</strong> Exija um limite específico.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

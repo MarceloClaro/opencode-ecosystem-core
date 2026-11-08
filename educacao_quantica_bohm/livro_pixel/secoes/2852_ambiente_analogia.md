@@ -11,13 +11,11 @@
 <p>Um ar-condicionado gigante que nunca desliga.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">环境</span> <em>huán jìng</em> <span class="tom">· tons 2-4 · leitura ruan-djing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像环境。</span> <em>Zhè xiàng huán jìng.</em> — Isto se parece com “Ambiente”.</span></p>
 <p><strong>Limite formal:</strong> Não há consenso moral automático; há trade-offs.</p>
-<p>Construa um contraexemplo quantitativo e verifique se a analogia sobrevive.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Não há consenso moral automático; há trade-offs.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

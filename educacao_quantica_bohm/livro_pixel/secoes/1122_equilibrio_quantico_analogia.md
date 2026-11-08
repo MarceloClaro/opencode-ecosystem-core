@@ -11,13 +11,11 @@
 <p>Uma multidão que mantém a mesma densidade ao se mover.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子平衡</span> <em>liàng zǐ píng héng</em> <span class="tom">· tons 4-3-2-2 · leitura liang-dzi-ping-reng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像量子平衡。</span> <em>Zhè xiàng liàng zǐ píng héng.</em> — Isto se parece com “Equilíbrio quântico”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> A hipótese explica por que a regra de Born funciona, mas não por que o universo começou assim.</p>
-<p><strong>Teste rápido:</strong> desenhe a analogia e marque com um X o ponto em que ela deixa de explicar o conceito.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A equivariância é a propriedade matemática central.</p>
-<p class="prof"><strong>Para o professor:</strong> Diga 'interpretação', não 'prova'. Compare com a leitura padrão e nomeie o preço: não localidade.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

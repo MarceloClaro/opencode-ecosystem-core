@@ -11,13 +11,11 @@
 <p><strong>O erro comum:</strong> Compare P(1) com e sem phase damping.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">相位阻尼</span> <em>xiàng wèi zǔ ní</em> <span class="tom">· tons 4-4-3-2 · leitura shiang-uei-dzu-ni</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">相位阻尼不是魔法。</span> <em>Xiàng wèi zǔ ní bú shì mó fǎ.</em> — “Phase damping” não é magia.</span></p>
 <p><strong>Correção formal:</strong> A fidelidade proxy mede a população ideal, não a pureza do estado.</p>
-<p>Teste a correção com um exemplo numérico pequeno.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O teste é pequeno; não generaliza para outros dados ou modelos.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

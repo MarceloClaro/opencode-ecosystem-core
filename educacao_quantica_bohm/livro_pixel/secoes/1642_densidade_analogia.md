@@ -11,13 +11,11 @@
 <p>Uma média ponderada de várias fotos possíveis.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">密度矩阵</span> <em>mì dù jǔ zhèn</em> <span class="tom">· tons 4-4-3-4 · leitura mi-du-djyu-djen</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像密度矩阵。</span> <em>Zhè xiàng mì dù jǔ zhèn.</em> — Isto se parece com “Matriz densidade”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> A equação não explica por que o mundo segue a equação.</p>
-<p><strong>Teste rápido:</strong> desenhe a analogia e marque com um X o ponto em que ela deixa de explicar o conceito.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A matemática é representação; não é o fenômeno. Não confunda o mapa com o território.</p>
-<p class="prof"><strong>Para o professor:</strong> A fórmula deve vir depois da intuição; use exemplos numéricos pequenos.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

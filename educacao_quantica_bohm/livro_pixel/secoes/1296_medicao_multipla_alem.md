@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>A amostragem tem erro estatístico que diminui com o número de tiros.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">多次测量</span> <em>duō cì cè liáng</em> <span class="tom">· tons 1-4-4-2 · leitura duo-tsi-tse-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解多次测量。</span> <em>Shēn rù liǎo jiě duō cì cè liáng.</em> — Aprofunde-se em “Medição múltipla”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> p̂ = N_evento/N; EP = √(p̂(1−p̂)/N).<br><strong>Conta:</strong> Com p̂=0,5 e N=1024: EP=√(0,25/1024)=0,0156.<br><strong>Resultado:</strong> Intervalo de 95% ≈ 0,5 ± 0,031.<br><em>Limite:</em> A medida é destrutiva; repetir exige preparar o estado de novo.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">多次测量</span> <em>duō cì cè liáng</em> <span class="tom">· tons 1-4-4-2 · leitura duo-tsi-tse-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解多次测量。</span> <em>Shēn rù liǎo jiě duō cì cè liáng.</em> — Aprofunde-se em “Medição múltipla”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> p̂ = N_evento/N; EP = √(p̂(1−p̂)/N).<br><strong>Conta:</strong> Com p̂=0,5 e N=1024: EP=√(0,25/1024)=0,0156.<br><strong>Resultado:</strong> Intervalo de 95% ≈ 0,5 ± 0,031.<br><em>Limite:</em> A medida é destrutiva; repetir exige preparar o estado de novo.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A amostragem tem erro estatístico que diminui com o número de tiros.</p>
-<p class="prof"><strong>Para o professor:</strong> Confira a ordem dos qubits e a diferença entre circuito lógico e transpilado.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

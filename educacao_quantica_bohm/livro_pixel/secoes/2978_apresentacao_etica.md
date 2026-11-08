@@ -11,13 +11,11 @@
 <p>Quem participou da pergunta e quem ficou fora?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">展示</span> <em>zhǎn shì</em> <span class="tom">· tons 3-4 · leitura djan-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于展示？</span> <em>Shéi shòu yì yú zhǎn shì?</em> — Quem se beneficia de “Apresentação”?</span></p>
 <p><strong>Governança:</strong> quem audita, quem responde e como reparar?</p>
-<p>Mapeie os afetados e uma medida de mitigação.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O projeto não esgota o problema; escolhe um recorte.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -10,13 +10,11 @@
 
 <p>A esfera de Bloch representa um qubit; o interior não é acessível.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子比特</span> <em>liàng zǐ bǐ tè</em> <span class="tom">· tons 4-3-3-4 · leitura liang-dzi-bi-te</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解量子比特。</span> <em>Shēn rù liǎo jiě liàng zǐ bǐ tè.</em> — Aprofunde-se em “Qubit”.</span></p>
-<p>Guarde uma pergunta para a próxima aula; não precisa resolver tudo hoje.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Medir produz uma amostra; não é ler um valor escondido.</p>
-<p class="prof"><strong>Para o professor:</strong> Comece pelo concreto; só depois use a notação.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

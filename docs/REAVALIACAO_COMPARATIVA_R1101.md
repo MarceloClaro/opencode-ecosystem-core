@@ -2,7 +2,7 @@
 
 **Data:** 2026-11-08
 **Obra avaliada:** *3000 Laudas de Física Quântica: do bit ao todo — Bohm, onda piloto e informação quântica do fundamental ao PhD*.
-**Versão observada:** PDF de 3553 páginas, 3000 laudas, 100 fichas, 400 notas de cálculo, 3000 códigos únicos.
+**Versão observada:** PDF de 3504 páginas, 3000 laudas, 100 fichas, 400 notas de cálculo, 3000 códigos únicos; 375.141 palavras e 15.178 parágrafos repetidos.
 **Natureza:** avaliação editorial e comparativa. Não é peer review, certificação, estudo de eficácia ou parecer editorial.
 
 > **Escopo:** esta rodada avalia o livro quântico. *Molambudos* é uma obra literária e exige outro conjunto de comparações; não é misturado aqui.
@@ -77,7 +77,7 @@ Legenda: **●** cobertura forte/central; **◐** parcial ou limitada; **○** a
 
 | Obra | Força | Limite | Use quando |
 |---|---|---|---|
-| **Este livro** | integra Bohm, informação quântica, código, hardware, Lean e proveniência em PT-BR; 3000 laudas e 100 fichas | 3553 páginas, repetição de template, sem peer review/eficácia/ISBN/DOI/tradução | ponte didática em português, do bit ao PhD |
+| **Este livro** | integra Bohm, informação quântica, código, hardware, Lean e proveniência em PT-BR; 3000 laudas e 100 fichas | 3504 páginas, 15.178 parágrafos repetidos, sem peer review/eficácia/ISBN/DOI/tradução | ponte didática em português, do bit ao PhD |
 | Nielsen & Chuang | referência completa de computação e informação quântica | matemática densa; não cobre Bohm nem operação de hardware real | profundidade em algoritmos, canais e QEC |
 | Preskill | panorama NISQ, complexidade e fronteira | notas avançadas, não é curso introdutório | pesquisa e fronteira NISQ |
 | Bohm & Hiley | ontologia bohmiana técnica e sistemática | não cobre computação quântica | interpretação e fundamentos |
@@ -94,27 +94,27 @@ Legenda: **●** cobertura forte/central; **◐** parcial ou limitada; **○** a
 | Dimensão | Peso | Nota | Evidência | Lacuna |
 |---|---:|---:|---|---|
 | Fundamentos físicos | 15% | 8,5 | postulados, medida, Bell, Bohm, QFT, ruído | menos profundidade matemática que Nielsen/Preskill |
-| Info/computação | 15% | 7,0 | circuitos, Deutsch–Jozsa, Grover, Shor, VQC, QEC panorâmico | algoritmos e QEC não são implementação completa |
+| Info/computação | 15% | 8,0 | circuitos, Deutsch–Jozsa, Grover, Shor, VQC, QEC; apêndice com densidade, canais e algoritmos | ainda não é implementação completa nem paridade com Nielsen/Preskill |
 | Bohm/interpretação | 10% | 8,5 | Bohm como lente, ordem implicada, diálogo, limites | não substitui Bohm & Hiley |
 | Prática/hardware | 15% | 9,0 | manual, Python, Qiskit/PennyLane/Cirq, GJQ, counts, task IDs | hardware executado é limitado; grande parte é simulador |
-| Didática/autoinstrução | 15% | 8,5 | N0–N2, 10 lentes, checkpoints, 100 fichas, 400 notas | 3553 páginas e repetição dificultam leitura linear |
-| Exercícios/avaliação | 10% | 7,0 | fichas, gabarito, checkpoints, protocolo de eficácia | não há estudo de eficácia concluído |
+| Didática/autoinstrução | 15% | 8,5 | N0–N2, 10 lentes, checkpoints, 100 fichas, 400 notas | 3504 páginas e 15.178 repetições ainda dificultam leitura linear |
+| Exercícios/avaliação | 10% | 7,2 | fichas, gabarito, checkpoints, exercícios do apêndice, protocolo de eficácia | não há estudo de eficácia concluído |
 | Rigor/formal | 10% | 8,0 | ledger, Lean, DOI, limites explícitos | Lean cobre identidades específicas, não todo o livro |
 | Reprodutibilidade | 5% | 9,0 | JSONs, task IDs, QASM hashes, build script | depende de conta/chave para execução real |
-| Produção/navegação | 5% | 7,5 | 3553 pp, 3000 códigos, links internos e PDF versionado | PDF escuro/A5, repetição, sem EPUB/audiobook |
+| Produção/navegação | 5% | 7,5 | 3504 pp na referência; piloto de 76 pp com PDF claro e EPUB | PDF escuro/A5 na referência; piloto ainda é 60 laudas, falta audiolivro |
 | Validação externa | 10% | 2,5 | pacote de peer review e protocolo | nenhum parecer, nenhum dado de eficácia, sem ISBN/DOI |
 
 ### Conta da nota
 
 ```text
-(8,5×15 + 7,0×15 + 8,5×10 + 9,0×15 + 8,5×15
- + 7,0×10 + 8,0×10 + 9,0×5 + 7,5×5 + 2,5×10) / 100
-= 8,375
-≈ 8,4/10
+(8,5×15 + 8,0×15 + 8,5×10 + 9,0×15 + 8,5×15
+ + 7,2×10 + 8,0×10 + 9,0×5 + 7,5×5 + 2,5×10) / 100
+= 8,545
+≈ 8,5/10
 ```
 
 **Nota anterior:** 8,2/10.
-**Variação:** +0,2, puxada pelo apêndice GJQ, pelos resultados explícitos, pela tipografia justificada/hifenizada e pelo PDF versionado com build reproduzível.
+**Variação:** +0,3, puxada pelo apêndice de aprofundamento, pela redução de repetição, pelo apêndice GJQ, pela tipografia justificada/hifenizada e pelo PDF versionado com build reproduzível.
 **Intervalo subjetivo:** 7,8–8,8. A nota é um julgamento editorial; não é certificação.
 
 ## 7. Onde o livro é único
@@ -125,9 +125,11 @@ Nenhuma obra comparada faz, ao mesmo tempo:
 - Bohm como lente explícita, sem convertê-lo em prova;
 - manual → simulação → hardware → síntese;
 - 100 fichas, 400 notas de cálculo e 3000 laudas;
+- apêndice de aprofundamento com densidade, canais, algoritmos e QEC;
 - ledger de afirmações e verificação Lean;
 - apêndice GJQ com Bell/CHSH, task IDs, counts e QASM hashes;
-- build reproduzível com `pyphen` pt-BR e PDF versionado.
+- build reproduzível com `pyphen` pt-BR e PDF versionado;
+- piloto de edição enxuta com 12 módulos, 60 laudas, 76 páginas, PDF claro e EPUB.
 
 O valor está na **integração didática**, não na substituição de uma referência canônica.
 
@@ -135,7 +137,7 @@ O valor está na **integração didática**, não na substituição de uma refer
 
 | Comparação | O livro perde porque |
 |---|---|
-| Nielsen & Chuang | não cobre álgebra, algoritmos, canais e QEC com a mesma profundidade |
+| Nielsen & Chuang | o apêndice de aprofundamento reduziu o gap, mas o livro ainda não cobre álgebra, algoritmos, canais e QEC com a mesma profundidade |
 | Preskill | não está na fronteira NISQ nem na análise de complexidade |
 | Bohm & Hiley | não desenvolve a ontologia bohmiana com o mesmo detalhe técnico |
 | Eisberg & Resnick | não é um curso completo de física quântica geral |
@@ -147,27 +149,28 @@ O valor está na **integração didática**, não na substituição de uma refer
 Além disso:
 
 - **Validação externa:** 0 pareceres, 0 dados de eficácia, sem ISBN/DOI, sem edição inglesa.
-- **Repetição:** 451.411 palavras, 21.031 parágrafos repetidos; parte é template, parte é candidata a corte.
-- **Tamanho:** 3553 páginas em A5 e tema escuro; a edição de curso/print é um projeto separado.
-- **Acessibilidade:** sem EPUB, audiobook ou versão de alto contraste para impressão.
-- **Inconsistência documental:** `PACOTE_PEER_REVIEW.md`, `EDICAO_ENXUTA.md` e `INTERNATIONAL_EDITION.md` ainda citam 3580 páginas; o PDF atual tem 3553.
+- **Repetição:** caiu de 451.411 para 375.141 palavras e de 21.031 para 15.178 parágrafos repetidos; o restante é repetição estrutural de lente/parte.
+- **Tamanho:** 3504 páginas em A5 e tema escuro; a edição de curso/print é um projeto separado.
+- **Acessibilidade:** a referência não tem EPUB/audiobook; o piloto enxuto tem PDF claro e EPUB de 76 páginas, mas ainda cobre 60 laudas, não a edição final de 600–800 páginas.
+- **Correções P0 aplicadas:** os três documentos agora citam 3504 páginas; o PDF foi recompilado. Restam P1 (peer review, eficácia, ISBN/DOI, inglês) e P2 (EPUB/print, revisão fina).
 
 ## 9. Correções pendentes no livro
 
-| Prioridade | Arquivo | Correção |
+| Status | Arquivo | Correção |
 |---|---|---|
-| P0 | `PACOTE_PEER_REVIEW.md` | 3580 → 3553 páginas |
-| P0 | `EDICAO_ENXUTA.md` | 3580 → 3553 páginas |
-| P0 | `INTERNATIONAL_EDITION.md` | 3580 → 3553 páginas |
-| P0 | `PROFUNDIDADE_CIENTIFICA.md` | acrescentar FAS-GPU `S=2,871094 ± 0,043506` como simulador; separar de Guoji08 `S=2,383` |
-| P0 | `LEDGER_AFIRMACOES.md` | adicionar linha do Bell/CHSH GJQ como `measured`/`calculated` no simulador, com task IDs |
-| P0 | PDF | recompilar depois das correções e atualizar contagem/tamanho no README |
-| P1 | `PACOTE_PEER_REVIEW.md` | executar 3 pareceres externos; hoje a nota de peer review é 3/10 |
-| P1 | `AVALIACAO_EFICACIA.md` | aprovar no CEP e executar o estudo; hoje é protocolo |
-| P1 | metadados | ISBN/DOI e edição inglesa |
-| P2 | `RELATORIO_REPETICOES.md` | revisar os 30 parágrafos mais repetidos e a edição enxuta |
-| P2 | produção | EPUB, versão clara para impressão, audiolivro e revisão de acessibilidade |
-| P3 | adoção | usar em curso/piloto e medir retenção; publicar também resultados negativos |
+| ✅ | `PACOTE_PEER_REVIEW.md` | 3580 → 3504 páginas |
+| ✅ | `EDICAO_ENXUTA.md` | 3580 → 3504 páginas |
+| ✅ | `INTERNATIONAL_EDITION.md` | 3580 → 3504 páginas |
+| ✅ | `PROFUNDIDADE_CIENTIFICA.md` | FAS-GPU `S=2,871094 ± 0,043506` como simulador; separado de Guoji08 `S=2,383` |
+| ✅ | `LEDGER_AFIRMACOES.md` | Bell/CHSH GJQ como `measured (simulador)`, com task IDs |
+| ✅ | `RELATORIO_REPETICOES.md` | 21.031 → 15.178 parágrafos; 451.411 → 375.141 palavras |
+| ✅ | PDF | recompilado; 3504 páginas; 18.422.988 bytes |
+| ✅ | README | contagem, tamanho e links atualizados |
+| ⏳ | `PACOTE_PEER_REVIEW.md` | executar 3 pareceres externos; hoje a nota de peer review é 3/10 |
+| ⏳ | `AVALIACAO_EFICACIA.md` | aprovar no CEP e executar o estudo; hoje é protocolo |
+| ⏳ | metadados | ISBN/DOI e edição inglesa |
+| ✅/⏳ | produção | Piloto enxuto com PDF claro e EPUB (76 pp) pronto; faltam expansão para 600–800 pp, audiolivro e revisão de acessibilidade |
+| ⏳ | adoção | usar em curso/piloto e medir retenção; publicar também resultados negativos |
 
 ## 10. O que levaria a 9/10
 
@@ -182,11 +185,11 @@ Não é “mais páginas”. É evidência externa e edição:
 7. redução de repetição sem perder a sequência;
 8. adoção documentada em curso ou clube de leitura.
 
-Sem esses itens, a nota fica em **8,4/10**; com eles, 9/10 é plausível. 10/10 exigiria, além disso, replicação independente e contribuição reconhecida na área.
+Sem esses itens, a nota fica em **8,5/10**; com eles, 9/10 é plausível. 10/10 exigiria, além disso, replicação independente e contribuição reconhecida na área.
 
 ## 11. Veredito
 
-**8,4/10 — obra didática singular, não referência canônica.**
+**8,5/10 — obra didática singular, não referência canônica.**
 
 | Se você quer… | Use… |
 |---|---|

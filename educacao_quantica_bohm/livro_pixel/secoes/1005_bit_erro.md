@@ -10,14 +10,11 @@
 
 <p><strong>O erro comum:</strong> Achar que um bit pode ser 'meio 0, meio 1' no mundo clássico.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">比特</span> <em>bǐ tè</em> <span class="tom">· tons 3-4 · leitura bi-te</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">比特不是魔法。</span> <em>Bǐ tè bú shì mó fǎ.</em> — “Bit” não é magia.</span></p>
-<p><strong>Por que acontece:</strong> o cérebro procura uma imagem simples e apaga a parte matemática que não se encaixa.</p>
-<p><strong>Como testar:</strong> escreva um contraexemplo em uma frase e veja se ele derruba sua explicação.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Com 8 bits, há 256 combinações; uma letra ASCII cabe em 8 bits.</p>
-<p class="prof"><strong>Para o professor:</strong> Use a notação de ket apenas depois do concreto; verifique P(0)+P(1)=1.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

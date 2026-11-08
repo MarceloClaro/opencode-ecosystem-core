@@ -10,13 +10,11 @@
 
 <p>A fidelidade proxy mede a população ideal, não a pureza do estado.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">有益噪声</span> <em>yǒu yì zào shēng</em> <span class="tom">· tons 3-4-4-1 · leitura iu-i-dzau-sheng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解有益噪声。</span> <em>Shēn rù liǎo jiě yǒu yì zào shēng.</em> — Aprofunde-se em “Ruído benéfico?”.</span></p>
-<p>Guarde uma pergunta para a próxima aula; não precisa resolver tudo hoje.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Amostra pequena não generaliza; 4 pontos não são um artigo.</p>
-<p class="prof"><strong>Para o professor:</strong> Explique o teto e o tamanho da amostra.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

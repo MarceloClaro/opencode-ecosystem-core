@@ -11,13 +11,11 @@
 <p>Quem controla o campo que guia as partículas?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">导波方程</span> <em>dǎo bō fāng chéng</em> <span class="tom">· tons 3-1-1-2 · leitura dau-bo-fang-tcheng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于导波方程？</span> <em>Shéi shòu yì yú dǎo bō fāng chéng?</em> — Quem se beneficia de “Equação do guia”?</span></p>
 <p><strong>Governança:</strong> quem audita, quem responde e como reparar?</p>
-<p>Mapeie os afetados e uma medida de mitigação.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A equação é não local para várias partículas; não é uma força clássica.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

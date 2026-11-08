@@ -11,13 +11,11 @@
 <p>Quem tem tempo e silêncio para estudar sozinho?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">评分标准</span> <em>píng fēn biāo zhǔn</em> <span class="tom">· tons 2-1-1-3 · leitura ping-fen-biau-djuen</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于评分标准？</span> <em>Shéi shòu yì yú píng fēn biāo zhǔn?</em> — Quem se beneficia de “Rubrica”?</span></p>
 <p><strong>Governança:</strong> quem audita, quem responde e como reparar?</p>
-<p>Mapeie os afetados e uma medida de mitigação.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A técnica não funciona igual para todos os estudantes.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -10,13 +10,11 @@
 
 <p>Todo projeto começa com uma pergunta e termina com um próximo passo.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">问题</span> <em>wèn tí</em> <span class="tom">· tons 4-2 · leitura uen-ti</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到问题。</span> <em>Wǒ zài shēng huó zhōng kàn dào wèn tí.</em> — Vejo “Pergunta” na vida.</span></p>
-<p><strong>Onde isso aparece:</strong> procure um exemplo na sua casa ou na escola.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Todo projeto é um recorte; declare o limite.</p>
-<p class="prof"><strong>Para o professor:</strong> Exija um limite específico.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

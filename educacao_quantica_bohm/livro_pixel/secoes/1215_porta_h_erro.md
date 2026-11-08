@@ -10,14 +10,11 @@
 
 <p><strong>O erro comum:</strong> Dizer que H 'escolhe aleatoriamente' antes da medição.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">哈达玛门</span> <em>hā dá mǎ mén</em> <span class="tom">· tons 1-2-3-2 · leitura ra-da-ma-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">哈达玛门不是魔法。</span> <em>Hā dá mǎ mén bú shì mó fǎ.</em> — “Porta H” não é magia.</span></p>
-<p><strong>Por que acontece:</strong> o cérebro procura uma imagem simples e apaga a parte matemática que não se encaixa.</p>
-<p><strong>Como testar:</strong> escreva um contraexemplo em uma frase e veja se ele derruba sua explicação.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>H é a matriz (1/√2)[[1,1],[1,-1]]; H² = I.</p>
-<p class="prof"><strong>Para o professor:</strong> Confira a ordem dos qubits e a diferença entre circuito lógico e transpilado.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

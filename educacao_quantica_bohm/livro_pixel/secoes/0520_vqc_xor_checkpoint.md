@@ -10,13 +10,11 @@
 
 <p><strong>Tarefa:</strong> Um resultado de 100% em 4 pontos pode enganar uma política pública?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">变分分类器</span> <em>biàn fēn fēn lèi qì</em> <span class="tom">· tons 4-1-1-4-4 · leitura bien-fen-fen-lei-tchi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了变分分类器。</span> <em>Wǒ xué huì le biàn fēn fēn lèi qì.</em> — Eu aprendi “VQC XOR”.</span></p>
-<p><strong>Diário:</strong> o que entendi? onde travei? o que vou testar amanhã?</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Amostra pequena não generaliza; 4 pontos não são um artigo.</p>
-<p class="prof"><strong>Para o professor:</strong> Explique o teto e o tamanho da amostra.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

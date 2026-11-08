@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>A totalidade aparece na física, na ecologia e na pedagogia.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">整体性</span> <em>zhěng tǐ xìng</em> <span class="tom">· tons 3-3-4 · leitura djeng-ti-shing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解整体性。</span> <em>Shēn rù liǎo jiě zhěng tǐ xìng.</em> — Aprofunde-se em “Totalidade”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Correlação de Bell: E(a,b) = −cos(a−b).<br><strong>Conta:</strong> a=b → E=−1; a−b=90° → E=0; a−b=180° → E=+1.<br><strong>Resultado:</strong> O todo correlaciona as partes de um modo que não se reduz a valores locais.<br><em>Limite:</em> Totalidade é uma lente filosófica; o número que a testa é a correlação.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">整体性</span> <em>zhěng tǐ xìng</em> <span class="tom">· tons 3-3-4 · leitura djeng-ti-shing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解整体性。</span> <em>Shēn rù liǎo jiě zhěng tǐ xìng.</em> — Aprofunde-se em “Totalidade”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Correlação de Bell: E(a,b) = −cos(a−b).<br><strong>Conta:</strong> a=b → E=−1; a−b=90° → E=0; a−b=180° → E=+1.<br><strong>Resultado:</strong> O todo correlaciona as partes de um modo que não se reduz a valores locais.<br><em>Limite:</em> Totalidade é uma lente filosófica; o número que a testa é a correlação.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A totalidade aparece na física, na ecologia e na pedagogia.</p>
-<p class="prof"><strong>Para o professor:</strong> Diga 'interpretação', não 'prova'. Compare com a leitura padrão e nomeie o preço: não localidade.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

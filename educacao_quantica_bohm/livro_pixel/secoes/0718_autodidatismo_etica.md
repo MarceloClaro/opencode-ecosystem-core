@@ -10,13 +10,11 @@
 
 <p>Quem tem tempo e silêncio para estudar sozinho?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">自学</span> <em>zì xué</em> <span class="tom">· tons 4-2 · leitura dzi-shyue</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于自学？</span> <em>Shéi shòu yì yú zì xué?</em> — Quem se beneficia de “Autodidatismo”?</span></p>
-<p><strong>Quem ganha? Quem perde?</strong> Cite um grupo para cada lado.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Pedagogia é contextual; não há método garantido.</p>
-<p class="prof"><strong>Para o professor:</strong> Nanoaula é tempo e evidência, não fragmento.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

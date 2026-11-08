@@ -10,13 +10,11 @@
 
 <p>Quem define o que é um 'aparelho de medição'?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">有效坍缩</span> <em>yǒu xiào tān suō</em> <span class="tom">· tons 3-4-1-1 · leitura iu-shiau-tan-suo</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于有效坍缩？</span> <em>Shéi shòu yì yú yǒu xiào tān suō?</em> — Quem se beneficia de “Colapso efetivo”?</span></p>
-<p><strong>Quem ganha? Quem perde?</strong> Cite um grupo para cada lado.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Bohm é uma interpretação entre várias; não é consenso.</p>
-<p class="prof"><strong>Para o professor:</strong> Diga 'interpretação', não 'prova'.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

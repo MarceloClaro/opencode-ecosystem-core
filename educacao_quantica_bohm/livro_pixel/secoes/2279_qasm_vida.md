@@ -10,13 +10,11 @@
 
 <p>JSON, partituras e receitas também são linguagens de instruções.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子汇编</span> <em>liàng zǐ huì biān</em> <span class="tom">· tons 4-3-4-1 · leitura liang-dzi-ruei-bien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到量子汇编。</span> <em>Wǒ zài shēng huó zhōng kàn dào liàng zǐ huì biān.</em> — Vejo “QASM 2.0” na vida.</span></p>
-<p><strong>Onde medir:</strong> proponha um indicador e uma fonte de dados.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>QASM não é um algoritmo; é uma notação de circuito.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

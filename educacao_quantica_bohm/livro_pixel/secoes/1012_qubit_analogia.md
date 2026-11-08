@@ -11,13 +11,11 @@
 <p>Uma moeda girando: o resultado ainda não foi decidido.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子比特</span> <em>liàng zǐ bǐ tè</em> <span class="tom">· tons 4-3-3-4 · leitura liang-dzi-bi-te</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像量子比特。</span> <em>Zhè xiàng liàng zǐ bǐ tè.</em> — Isto se parece com “Qubit”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> A moeda tem lado definido; o qubit não tem valor escondido.</p>
-<p><strong>Teste rápido:</strong> desenhe a analogia e marque com um X o ponto em que ela deixa de explicar o conceito.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A esfera de Bloch representa um qubit; o interior não é acessível.</p>
-<p class="prof"><strong>Para o professor:</strong> Use a notação de ket apenas depois do concreto; verifique P(0)+P(1)=1.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

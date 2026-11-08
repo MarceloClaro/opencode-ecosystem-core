@@ -10,7 +10,6 @@
 
 <p>Pergunta ampla não é profunda; muitas vezes é apenas difícil de responder.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">问题</span> <em>wèn tí</em> <span class="tom">· tons 4-2 · leitura uen-ti</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习问题。</span> <em>Liàn xí wèn tí.</em> — Pratique “Pergunta”.</span></p>
-<p><strong>Protocolo:</strong> varie um parâmetro, repita com outra seed e compare.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -27,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O projeto não esgota o problema; escolhe um recorte.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

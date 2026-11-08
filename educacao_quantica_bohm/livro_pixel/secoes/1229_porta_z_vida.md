@@ -10,14 +10,11 @@
 
 <p>Cancelamento de ruído e óptica usam fases.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">相位门</span> <em>xiàng wèi mén</em> <span class="tom">· tons 4-4-2 · leitura shiang-uei-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到相位门。</span> <em>Wǒ zài shēng huó zhōng kàn dào xiàng wèi mén.</em> — Vejo “Porta Z” na vida.</span></p>
-<p><strong>Onde isso aparece:</strong> procure um exemplo na sua casa, na escola ou no bairro. Descreva em duas frases.</p>
-<p><strong>O que muda no seu jeito de olhar?</strong> A ideia de porta z pode mudar uma decisão cotidiana?</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Z é diag(1,-1); a fase relativa é o recurso da interferência.</p>
-<p class="prof"><strong>Para o professor:</strong> Confira a ordem dos qubits e a diferença entre circuito lógico e transpilado.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

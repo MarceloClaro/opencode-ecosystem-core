@@ -11,13 +11,11 @@
 <p>Uma rachadura que mostra onde a parede precisa de reforço.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">建设性错误</span> <em>jiàn shè xìng cuò wù</em> <span class="tom">· tons 4-4-4-4-4 · leitura djien-she-shing-tsuo-u</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像建设性错误。</span> <em>Zhè xiàng jiàn shè xìng cuò wù.</em> — Isto se parece com “Erro produtivo”.</span></p>
 <p><strong>Limite formal:</strong> A técnica não funciona igual para todos os estudantes.</p>
-<p>Construa um contraexemplo quantitativo e verifique se a analogia sobrevive.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A técnica não funciona igual para todos os estudantes.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -10,13 +10,11 @@
 
 <p><strong>Pergunta da roda:</strong> O que estamos deixando de fora para concordar?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">共识</span> <em>gòng shí</em> <span class="tom">· tons 4-2 · leitura gong-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看共识？</span> <em>Nǐ zěn me kàn gòng shí?</em> — O que você pensa de “Consenso”?</span></p>
-<p>Ouça sem interromper; anote uma ideia que mudou sua opinião.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Ética envolve valores e poder; não há resposta automática.</p>
-<p class="prof"><strong>Para o professor:</strong> Peça evidência, afetados e alternativas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -172,6 +172,8 @@ def montar(limite: int | None = None) -> str:
         "PACOTE_PEER_REVIEW.md",
         "LEDGER_AFIRMACOES.md",
         "PROFUNDIDADE_CIENTIFICA.md",
+        "APROFUNDAMENTO_QUANTICO.md",
+        "NOTAS_PROFESSOR.md",
         "EDICAO_ENXUTA.md",
         "INTERNATIONAL_EDITION.md",
         "RELATORIO_REPETICOES.md",

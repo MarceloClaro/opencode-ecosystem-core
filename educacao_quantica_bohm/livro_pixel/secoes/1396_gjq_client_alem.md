@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>O SDK suporta Sampler, Estimator e Sessões; o servidor MCP gjq-runtime-mcp-server expõe sample_tool e estimate_tool para agentes.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子客户端</span> <em>liàng zǐ kè hù duān</em> <span class="tom">· tons 4-3-4-4-1 · leitura liang-dzi-ke-ru-duan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解量子客户端。</span> <em>Shēn rù liǎo jiě liàng zǐ kè hù duān.</em> — Aprofunde-se em “gjq-client”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> A soma dos counts deve ser igual ao número de tiros.<br><strong>Conta:</strong> 1024 tiros → Σ counts = 1024.<br><strong>Resultado:</strong> Se a soma não for 1024, o experimento não teve os tiros declarados.<br><em>Limite:</em> A API entrega counts; ela não garante que o backend estava calibrado.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子客户端</span> <em>liàng zǐ kè hù duān</em> <span class="tom">· tons 4-3-4-4-1 · leitura liang-dzi-ke-ru-duan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解量子客户端。</span> <em>Shēn rù liǎo jiě liàng zǐ kè hù duān.</em> — Aprofunde-se em “gjq-client”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> A soma dos counts deve ser igual ao número de tiros.<br><strong>Conta:</strong> 1024 tiros → Σ counts = 1024.<br><strong>Resultado:</strong> Se a soma não for 1024, o experimento não teve os tiros declarados.<br><em>Limite:</em> A API entrega counts; ela não garante que o backend estava calibrado.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O SDK suporta Sampler, Estimator e Sessões; o servidor MCP gjq-runtime-mcp-server expõe sample_tool e estimate_tool para agentes.</p>
-<p class="prof"><strong>Para o professor:</strong> Compare a mesma grandeza nas três bibliotecas; se divergir, verifique convenção antes de concluir erro.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

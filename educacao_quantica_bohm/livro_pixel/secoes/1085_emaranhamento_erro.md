@@ -10,14 +10,11 @@
 
 <p><strong>O erro comum:</strong> Dizer que emaranhamento transmite mensagem instantânea.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">纠缠</span> <em>jiū chán</em> <span class="tom">· tons 1-2 · leitura djiu-tchan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">纠缠不是魔法。</span> <em>Jiū chán bú shì mó fǎ.</em> — “Emaranhamento” não é magia.</span></p>
-<p><strong>Por que acontece:</strong> o cérebro procura uma imagem simples e apaga a parte matemática que não se encaixa.</p>
-<p><strong>Como testar:</strong> escreva um contraexemplo em uma frase e veja se ele derruba sua explicação.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Bell mostrou que variáveis ocultas locais não reproduzem as correlações.</p>
-<p class="prof"><strong>Para o professor:</strong> Use a notação de ket apenas depois do concreto; verifique P(0)+P(1)=1.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

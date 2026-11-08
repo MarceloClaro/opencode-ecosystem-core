@@ -10,14 +10,12 @@
 
 <p>A prática distribuída e a recuperação ativa têm apoio em pesquisa.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">建设性错误</span> <em>jiàn shè xìng cuò wù</em> <span class="tom">· tons 4-4-4-4-4 · leitura djien-she-shing-tsuo-u</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解建设性错误。</span> <em>Shēn rù liǎo jiě jiàn shè xìng cuò wù.</em> — Aprofunde-se em “Erro produtivo”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> A técnica não funciona igual para todos os estudantes.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Taxa de erro = erros/exercícios.<br><strong>Conta:</strong> 1 erro em 10 = 10%; 3 em 10 = 30%.<br><strong>Resultado:</strong> 10% pede revisão pontual; 30% pede retomar o conceito.<br><em>Limite:</em> Erro é dado; não é fracasso.</span></p>
+<p><strong>O que ainda não sabemos:</strong> A técnica não funciona igual para todos os estudantes. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Taxa de erro = erros/exercícios.<br><strong>Conta:</strong> 1 erro em 10 = 10%; 3 em 10 = 30%.<br><strong>Resultado:</strong> 10% pede revisão pontual; 30% pede retomar o conceito.<br><em>Limite:</em> Erro é dado; não é fracasso.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A técnica não funciona igual para todos os estudantes.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -10,13 +10,11 @@
 
 <p><strong>O erro comum:</strong> Dizer que emaranhamento transmite mensagem instantânea.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">纠缠</span> <em>jiū chán</em> <span class="tom">· tons 1-2 · leitura djiu-tchan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">纠缠不是魔法。</span> <em>Jiū chán bú shì mó fǎ.</em> — “Emaranhamento” não é magia.</span></p>
-<p><strong>Como não cair:</strong> escreva um contraexemplo e teste com um colega.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Medir produz uma amostra; não é ler um valor escondido.</p>
-<p class="prof"><strong>Para o professor:</strong> Comece pelo concreto; só depois use a notação.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

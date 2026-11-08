@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>O Qiskit separa circuito lógico e circuito transpilado.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子电路</span> <em>liàng zǐ diàn lù</em> <span class="tom">· tons 4-3-4-4 · leitura liang-dzi-dien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解量子电路。</span> <em>Shēn rù liǎo jiě liàng zǐ diàn lù.</em> — Aprofunde-se em “QuantumCircuit”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Um circuito de 2 qubits e 2 bits clássicos tem 4 amplitudes e 4 resultados.<br><strong>Conta:</strong> As medidas mapeiam q0→c0 e q1→c1.<br><strong>Resultado:</strong> O circuito é uma receita; o resultado só existe depois da execução.<br><em>Limite:</em> Circuito não é o mesmo que estado; o estado é o que o circuito prepara.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子电路</span> <em>liàng zǐ diàn lù</em> <span class="tom">· tons 4-3-4-4 · leitura liang-dzi-dien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解量子电路。</span> <em>Shēn rù liǎo jiě liàng zǐ diàn lù.</em> — Aprofunde-se em “QuantumCircuit”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Um circuito de 2 qubits e 2 bits clássicos tem 4 amplitudes e 4 resultados.<br><strong>Conta:</strong> As medidas mapeiam q0→c0 e q1→c1.<br><strong>Resultado:</strong> O circuito é uma receita; o resultado só existe depois da execução.<br><em>Limite:</em> Circuito não é o mesmo que estado; o estado é o que o circuito prepara.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O Qiskit separa circuito lógico e circuito transpilado.</p>
-<p class="prof"><strong>Para o professor:</strong> Compare a mesma grandeza nas três bibliotecas; se divergir, verifique convenção antes de concluir erro.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

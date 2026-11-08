@@ -10,13 +10,11 @@
 
 <p>Uma correlação pode ser usada para controlar sem consentimento?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">受控非门</span> <em>shòu kòng fēi mén</em> <span class="tom">· tons 4-4-1-2 · leitura shou-kong-fei-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于受控非门？</span> <em>Shéi shòu yì yú shòu kòng fēi mén?</em> — Quem se beneficia de “CNOT”?</span></p>
-<p><strong>Quem ganha? Quem perde?</strong> Cite um grupo para cada lado.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Circuito é um modelo; a ordem dos qubits importa.</p>
-<p class="prof"><strong>Para o professor:</strong> Confira a ordem dos qubits antes de comparar.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

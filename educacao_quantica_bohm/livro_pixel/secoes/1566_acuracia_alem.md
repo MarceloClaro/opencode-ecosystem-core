@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>A fidelidade proxy mede a população ideal, não a pureza do estado.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">准确率</span> <em>zhǔn què lǜ</em> <span class="tom">· tons 3-4-4 · leitura djuen-tchyue-lyu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解准确率。</span> <em>Shēn rù liǎo jiě zhǔn què lǜ.</em> — Aprofunde-se em “Acurácia”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Acurácia = acertos/N.<br><strong>Conta:</strong> 4/4 = 1,0 = 100%.<br><strong>Resultado:</strong> Com n=4 e 100%, o intervalo de 95% é largo; a regra de três dá limite inferior ≈ 25%.<br><em>Limite:</em> Acurácia alta em amostra pequena não é evidência de generalização.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">准确率</span> <em>zhǔn què lǜ</em> <span class="tom">· tons 3-4-4 · leitura djuen-tchyue-lyu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解准确率。</span> <em>Shēn rù liǎo jiě zhǔn què lǜ.</em> — Aprofunde-se em “Acurácia”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Acurácia = acertos/N.<br><strong>Conta:</strong> 4/4 = 1,0 = 100%.<br><strong>Resultado:</strong> Com n=4 e 100%, o intervalo de 95% é largo; a regra de três dá limite inferior ≈ 25%.<br><em>Limite:</em> Acurácia alta em amostra pequena não é evidência de generalização.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Quatro pontos e 1024 tiros não generalizam. Ruído benéfico é hipótese, não garantia.</p>
-<p class="prof"><strong>Para o professor:</strong> A acurácia de 4/4 não é generalized accuracy. Explique o teto e o tamanho da amostra.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

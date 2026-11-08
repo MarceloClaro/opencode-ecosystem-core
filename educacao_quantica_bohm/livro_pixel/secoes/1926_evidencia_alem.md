@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>Um bom projeto declara o que não prova.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">证据</span> <em>zhèng jù</em> <span class="tom">· tons 4-4 · leitura djeng-djyu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解证据。</span> <em>Shēn rù liǎo jiě zhèng jù.</em> — Aprofunde-se em “Evidência”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Evidência = contagem + total + incerteza + fonte.<br><strong>Conta:</strong> 484/1024 = 0,4727 ± 0,0156.<br><strong>Resultado:</strong> O número vem com um intervalo e uma origem.<br><em>Limite:</em> Evidência não é prova definitiva.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">证据</span> <em>zhèng jù</em> <span class="tom">· tons 4-4 · leitura djeng-djyu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解证据。</span> <em>Shēn rù liǎo jiě zhèng jù.</em> — Aprofunde-se em “Evidência”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Evidência = contagem + total + incerteza + fonte.<br><strong>Conta:</strong> 484/1024 = 0,4727 ± 0,0156.<br><strong>Resultado:</strong> O número vem com um intervalo e uma origem.<br><em>Limite:</em> Evidência não é prova definitiva.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Todo projeto é um recorte. Declare limite, evidência e o que ficou fora.</p>
-<p class="prof"><strong>Para o professor:</strong> Exija um limite específico; 'tem limitações' não é suficiente.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

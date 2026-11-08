@@ -10,14 +10,11 @@
 
 <p><strong>O erro comum:</strong> Achar que Z 'não faz nada' porque a medição isolada não muda.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">相位门</span> <em>xiàng wèi mén</em> <span class="tom">· tons 4-4-2 · leitura shiang-uei-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">相位门不是魔法。</span> <em>Xiàng wèi mén bú shì mó fǎ.</em> — “Porta Z” não é magia.</span></p>
-<p><strong>Por que acontece:</strong> o cérebro procura uma imagem simples e apaga a parte matemática que não se encaixa.</p>
-<p><strong>Como testar:</strong> escreva um contraexemplo em uma frase e veja se ele derruba sua explicação.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Z é diag(1,-1); a fase relativa é o recurso da interferência.</p>
-<p class="prof"><strong>Para o professor:</strong> Confira a ordem dos qubits e a diferença entre circuito lógico e transpilado.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

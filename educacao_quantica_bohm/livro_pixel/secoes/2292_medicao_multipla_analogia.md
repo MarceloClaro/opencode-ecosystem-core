@@ -11,13 +11,11 @@
 <p>Tirar uma foto de um time em vez de uma pessoa.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">多次测量</span> <em>duō cì cè liáng</em> <span class="tom">· tons 1-4-4-2 · leitura duo-tsi-tse-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像多次测量。</span> <em>Zhè xiàng duō cì cè liáng.</em> — Isto se parece com “Medição múltipla”.</span></p>
 <p><strong>Limite formal:</strong> A distribuição não mostra o estado completo; mostra uma amostra.</p>
-<p>Construa um contraexemplo quantitativo e verifique se a analogia sobrevive.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A distribuição não mostra o estado completo; mostra uma amostra.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

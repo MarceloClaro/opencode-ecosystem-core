@@ -10,13 +10,11 @@
 
 <p><strong>Tarefa:</strong> Dois estados distintos podem ser confundidos por um observador?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">内积</span> <em>nèi jī</em> <span class="tom">· tons 4-1 · leitura nei-dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了内积。</span> <em>Wǒ xué huì le nèi jī.</em> — Eu aprendi “Produto interno”.</span></p>
-<p><strong>Diário:</strong> o que entendi? onde travei? o que vou testar amanhã?</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A matemática é representação; não é o fenômeno.</p>
-<p class="prof"><strong>Para o professor:</strong> Use exemplos pequenos antes da fórmula.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

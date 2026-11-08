@@ -10,7 +10,6 @@
 
 <p>Um gráfico pode distorcer eixos, escalas e comparações.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">可视化</span> <em>kě shì huà</em> <span class="tom">· tons 3-4-4 · leitura ke-shi-rua</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习可视化。</span> <em>Liàn xí kě shì huà.</em> — Pratique “Visualização”.</span></p>
-<p><strong>Protocolo:</strong> varie um parâmetro, repita com outra seed e compare.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -27,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O projeto não esgota o problema; escolhe um recorte.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

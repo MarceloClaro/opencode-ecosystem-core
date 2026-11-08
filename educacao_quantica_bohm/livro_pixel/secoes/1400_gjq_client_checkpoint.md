@@ -10,14 +10,11 @@
 
 <p><strong>Tarefa:</strong> Você consegue listar um backend sem executar um circuito?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子客户端</span> <em>liàng zǐ kè hù duān</em> <span class="tom">· tons 4-3-4-4-1 · leitura liang-dzi-ke-ru-duan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了量子客户端。</span> <em>Wǒ xué huì le liàng zǐ kè hù duān.</em> — Eu aprendi “gjq-client”.</span></p>
-<p><strong>Diário de bordo:</strong> o que eu entendi? onde eu travei? o que vou testar amanhã?</p>
-<p><strong>Próximo passo:</strong> escolha uma lauda da mesma lente e compare as duas respostas.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O SDK suporta Sampler, Estimator e Sessões; o servidor MCP gjq-runtime-mcp-server expõe sample_tool e estimate_tool para agentes.</p>
-<p class="prof"><strong>Para o professor:</strong> Compare a mesma grandeza nas três bibliotecas; se divergir, verifique convenção antes de concluir erro.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

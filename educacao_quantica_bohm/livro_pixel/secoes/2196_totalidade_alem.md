@@ -10,14 +10,12 @@
 
 <p>A totalidade aparece na física, na ecologia e na pedagogia.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">整体性</span> <em>zhěng tǐ xìng</em> <span class="tom">· tons 3-3-4 · leitura djeng-ti-shing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解整体性。</span> <em>Shēn rù liǎo jiě zhěng tǐ xìng.</em> — Aprofunde-se em “Totalidade”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> Totalidade não significa harmonia; pode haver conflito e desordem.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Correlação de Bell: E(a,b) = −cos(a−b).<br><strong>Conta:</strong> a=b → E=−1; a−b=90° → E=0; a−b=180° → E=+1.<br><strong>Resultado:</strong> O todo correlaciona as partes de um modo que não se reduz a valores locais.<br><em>Limite:</em> Totalidade é uma lente filosófica; o número que a testa é a correlação.</span></p>
+<p><strong>O que ainda não sabemos:</strong> Totalidade não significa harmonia; pode haver conflito e desordem. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Correlação de Bell: E(a,b) = −cos(a−b).<br><strong>Conta:</strong> a=b → E=−1; a−b=90° → E=0; a−b=180° → E=+1.<br><strong>Resultado:</strong> O todo correlaciona as partes de um modo que não se reduz a valores locais.<br><em>Limite:</em> Totalidade é uma lente filosófica; o número que a testa é a correlação.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Totalidade não significa harmonia; pode haver conflito e desordem.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -11,13 +11,11 @@
 <p>Quem tem tempo e silêncio para estudar sozinho?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">对话圈</span> <em>duì huà quān</em> <span class="tom">· tons 4-4-1 · leitura duei-rua-tchyuan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于对话圈？</span> <em>Shéi shòu yì yú duì huà quān?</em> — Quem se beneficia de “Roda de diálogo”?</span></p>
 <p><strong>Governança:</strong> quem audita, quem responde e como reparar?</p>
-<p>Mapeie os afetados e uma medida de mitigação.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A técnica não funciona igual para todos os estudantes.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

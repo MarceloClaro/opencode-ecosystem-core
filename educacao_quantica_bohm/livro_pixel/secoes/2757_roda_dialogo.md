@@ -11,13 +11,11 @@
 <p><strong>Pergunta de pesquisa:</strong> O que mudou na pergunta?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">对话圈</span> <em>duì huà quān</em> <span class="tom">· tons 4-4-1 · leitura duei-rua-tchyuan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看对话圈？</span> <em>Nǐ zěn me kàn duì huà quān?</em> — O que você pensa de “Roda de diálogo”?</span></p>
 <p><strong>Hipótese rival:</strong> A técnica não funciona igual para todos os estudantes.</p>
-<p>Desenhe um experimento que separe as duas hipóteses.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A técnica não funciona igual para todos os estudantes.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

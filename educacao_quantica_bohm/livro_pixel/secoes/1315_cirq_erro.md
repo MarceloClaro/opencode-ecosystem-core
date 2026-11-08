@@ -10,14 +10,11 @@
 
 <p><strong>O erro comum:</strong> Confundir a ordem dos qubits na linha com a ordem dos bits.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子框架</span> <em>liàng zǐ kuàng jià</em> <span class="tom">· tons 4-3-4-4 · leitura liang-dzi-kuang-djia</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">量子框架不是魔法。</span> <em>Liàng zǐ kuàng jià bú shì mó fǎ.</em> — “Cirq” não é magia.</span></p>
-<p><strong>Por que acontece:</strong> o cérebro procura uma imagem simples e apaga a parte matemática que não se encaixa.</p>
-<p><strong>Como testar:</strong> escreva um contraexemplo em uma frase e veja se ele derruba sua explicação.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Cirq é usado em pesquisa com hardware supercondutor.</p>
-<p class="prof"><strong>Para o professor:</strong> Compare a mesma grandeza nas três bibliotecas; se divergir, verifique convenção antes de concluir erro.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

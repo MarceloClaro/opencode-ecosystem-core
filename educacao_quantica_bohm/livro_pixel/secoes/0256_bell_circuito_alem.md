@@ -10,13 +10,11 @@
 
 <p>O circuito de Bell é o 'olá, mundo' do emaranhamento.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">贝尔电路</span> <em>bèi ěr diàn lù</em> <span class="tom">· tons 4-3-4-4 · leitura bei-er-dien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解贝尔电路。</span> <em>Shēn rù liǎo jiě bèi ěr diàn lù.</em> — Aprofunde-se em “Circuito de Bell”.</span></p>
-<p>Guarde uma pergunta para a próxima aula; não precisa resolver tudo hoje.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Circuito é um modelo; a ordem dos qubits importa.</p>
-<p class="prof"><strong>Para o professor:</strong> Confira a ordem dos qubits antes de comparar.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

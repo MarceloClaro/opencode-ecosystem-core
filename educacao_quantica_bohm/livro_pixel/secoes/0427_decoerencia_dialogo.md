@@ -10,13 +10,11 @@
 
 <p><strong>Pergunta da roda:</strong> O que o ambiente 'sabe' sobre o qubit?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">退相干</span> <em>tuì xiāng gān</em> <span class="tom">· tons 4-1-1 · leitura tuei-shiang-gan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看退相干？</span> <em>Nǐ zěn me kàn tuì xiāng gān?</em> — O que você pensa de “Decoerência”?</span></p>
-<p>Ouça sem interromper; anote uma ideia que mudou sua opinião.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Backend tem ruído; um número não prova o estado.</p>
-<p class="prof"><strong>Para o professor:</strong> Ruído, leitura e calibração são coisas distintas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

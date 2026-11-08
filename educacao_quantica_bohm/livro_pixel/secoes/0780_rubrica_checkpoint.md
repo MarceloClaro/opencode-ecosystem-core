@@ -10,13 +10,11 @@
 
 <p><strong>Tarefa:</strong> Uma rubrica pode reproduzir privilégios de linguagem?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">评分标准</span> <em>píng fēn biāo zhǔn</em> <span class="tom">· tons 2-1-1-3 · leitura ping-fen-biau-djuen</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了评分标准。</span> <em>Wǒ xué huì le píng fēn biāo zhǔn.</em> — Eu aprendi “Rubrica”.</span></p>
-<p><strong>Diário:</strong> o que entendi? onde travei? o que vou testar amanhã?</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Pedagogia é contextual; não há método garantido.</p>
-<p class="prof"><strong>Para o professor:</strong> Nanoaula é tempo e evidência, não fragmento.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

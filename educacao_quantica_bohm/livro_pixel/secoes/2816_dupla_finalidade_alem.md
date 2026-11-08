@@ -10,14 +10,12 @@
 
 <p>A LGPD exige base legal, finalidade e transparência.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">双重用途</span> <em>shuāng chóng yòng tú</em> <span class="tom">· tons 1-2-4-2 · leitura shuang-tchong-iong-tu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解双重用途。</span> <em>Shēn rù liǎo jiě shuāng chóng yòng tú.</em> — Aprofunde-se em “Dupla finalidade”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> Não há consenso moral automático; há trade-offs.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> A mesma tecnologia pode servir a fins civis e militares.<br><strong>Conta:</strong> Uma matriz de risco cruza probabilidade e impacto.<br><strong>Resultado:</strong> Risco = probabilidade × impacto (escala ilustrativa).<br><em>Limite:</em> A tecnologia não é neutra; o uso precisa de governança.</span></p>
+<p><strong>O que ainda não sabemos:</strong> Não há consenso moral automático; há trade-offs. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> A mesma tecnologia pode servir a fins civis e militares.<br><strong>Conta:</strong> Uma matriz de risco cruza probabilidade e impacto.<br><strong>Resultado:</strong> Risco = probabilidade × impacto (escala ilustrativa).<br><em>Limite:</em> A tecnologia não é neutra; o uso precisa de governança.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Não há consenso moral automático; há trade-offs.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

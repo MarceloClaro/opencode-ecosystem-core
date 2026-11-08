@@ -10,7 +10,6 @@
 
 <p>A LGPD não proíbe todo uso; exige base legal e finalidade.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">数据保护</span> <em>shù jù bǎo hù</em> <span class="tom">· tons 4-4-3-4 · leitura shu-djyu-bau-ru</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习数据保护。</span> <em>Liàn xí shù jù bǎo hù.</em> — Pratique “LGPD”.</span></p>
-<p><strong>Protocolo:</strong> varie um parâmetro, repita com outra seed e compare.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -27,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Não há consenso moral automático; há trade-offs.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

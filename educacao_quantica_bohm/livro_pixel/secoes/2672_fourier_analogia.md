@@ -11,13 +11,11 @@
 <p>Um prisma que separa a luz em cores.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">傅里叶</span> <em>fù lǐ yè</em> <span class="tom">· tons 4-3-4 · leitura fu-li-ie</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像傅里叶。</span> <em>Zhè xiàng fù lǐ yè.</em> — Isto se parece com “Fourier”.</span></p>
 <p><strong>Limite formal:</strong> A equação não explica por que o mundo segue a equação.</p>
-<p>Construa um contraexemplo quantitativo e verifique se a analogia sobrevive.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A equação não explica por que o mundo segue a equação.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

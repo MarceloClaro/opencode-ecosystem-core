@@ -11,13 +11,11 @@
 <p>Um goleiro que defende 8 de 10 chutes.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">准确率</span> <em>zhǔn què lǜ</em> <span class="tom">· tons 3-4-4 · leitura djuen-tchyue-lyu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像准确率。</span> <em>Zhè xiàng zhǔn què lǜ.</em> — Isto se parece com “Acurácia”.</span></p>
 <p><strong>Limite formal:</strong> O teste é pequeno; não generaliza para outros dados ou modelos.</p>
-<p>Construa um contraexemplo quantitativo e verifique se a analogia sobrevive.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O teste é pequeno; não generaliza para outros dados ou modelos.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

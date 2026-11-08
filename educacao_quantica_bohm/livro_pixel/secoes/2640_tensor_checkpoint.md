@@ -10,13 +10,11 @@
 
 <p><strong>Tarefa:</strong> Quem consegue armazenar o estado completo de muitos qubits?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">张量积</span> <em>zhāng liàng jī</em> <span class="tom">· tons 1-4-1 · leitura djang-liang-dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了张量积。</span> <em>Wǒ xué huì le zhāng liàng jī.</em> — Eu aprendi “Produto tensorial”.</span></p>
-<p><strong>Replicação:</strong> outra seed, outro backend, a mesma pergunta.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A equação não explica por que o mundo segue a equação.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -10,13 +10,11 @@
 
 <p><strong>O erro comum:</strong> Classifique um dado como pessoal, sensível ou anônimo.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">数据保护</span> <em>shù jù bǎo hù</em> <span class="tom">· tons 4-4-3-4 · leitura shu-djyu-bau-ru</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">数据保护不是魔法。</span> <em>Shù jù bǎo hù bú shì mó fǎ.</em> — “LGPD” não é magia.</span></p>
-<p><strong>Como não cair:</strong> escreva um contraexemplo e teste com um colega.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Ética envolve valores e poder; não há resposta automática.</p>
-<p class="prof"><strong>Para o professor:</strong> Peça evidência, afetados e alternativas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

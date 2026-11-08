@@ -10,13 +10,11 @@
 
 <p>Uma métrica pode esconder desigualdades?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">矩阵</span> <em>jǔ zhèn</em> <span class="tom">· tons 3-4 · leitura djyu-djen</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于矩阵？</span> <em>Shéi shòu yì yú jǔ zhèn?</em> — Quem se beneficia de “Matriz”?</span></p>
-<p><strong>Quem ganha? Quem perde?</strong> Cite um grupo para cada lado.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A matemática é representação; não é o fenômeno.</p>
-<p class="prof"><strong>Para o professor:</strong> Use exemplos pequenos antes da fórmula.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

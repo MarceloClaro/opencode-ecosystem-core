@@ -10,7 +10,6 @@
 
 <p>Replicação não é cópia; é teste de robustez.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">复现</span> <em>fù xiàn</em> <span class="tom">· tons 4-4 · leitura fu-shien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习复现。</span> <em>Liàn xí fù xiàn.</em> — Pratique “Replicação”.</span></p>
-<p><strong>Protocolo:</strong> varie um parâmetro, repita com outra seed e compare.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -27,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O projeto não esgota o problema; escolhe um recorte.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

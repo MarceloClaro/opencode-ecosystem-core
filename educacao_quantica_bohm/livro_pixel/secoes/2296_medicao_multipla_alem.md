@@ -10,14 +10,12 @@
 
 <p>A amostragem tem erro estatístico que diminui com o número de tiros.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">多次测量</span> <em>duō cì cè liáng</em> <span class="tom">· tons 1-4-4-2 · leitura duo-tsi-tse-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解多次测量。</span> <em>Shēn rù liǎo jiě duō cì cè liáng.</em> — Aprofunde-se em “Medição múltipla”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> A distribuição não mostra o estado completo; mostra uma amostra.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> p̂ = N_evento/N; EP = √(p̂(1−p̂)/N).<br><strong>Conta:</strong> Com p̂=0,5 e N=1024: EP=√(0,25/1024)=0,0156.<br><strong>Resultado:</strong> Intervalo de 95% ≈ 0,5 ± 0,031.<br><em>Limite:</em> A medida é destrutiva; repetir exige preparar o estado de novo.</span></p>
+<p><strong>O que ainda não sabemos:</strong> A distribuição não mostra o estado completo; mostra uma amostra. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> p̂ = N_evento/N; EP = √(p̂(1−p̂)/N).<br><strong>Conta:</strong> Com p̂=0,5 e N=1024: EP=√(0,25/1024)=0,0156.<br><strong>Resultado:</strong> Intervalo de 95% ≈ 0,5 ± 0,031.<br><em>Limite:</em> A medida é destrutiva; repetir exige preparar o estado de novo.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A distribuição não mostra o estado completo; mostra uma amostra.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

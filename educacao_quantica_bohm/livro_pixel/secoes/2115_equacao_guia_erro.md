@@ -11,13 +11,11 @@
 <p><strong>O erro comum:</strong> Achar que a equação é uma força newtoniana disfarçada.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">导波方程</span> <em>dǎo bō fāng chéng</em> <span class="tom">· tons 3-1-1-2 · leitura dau-bo-fang-tcheng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">导波方程不是魔法。</span> <em>Dǎo bō fāng chéng bú shì mó fǎ.</em> — “Equação do guia” não é magia.</span></p>
 <p><strong>Correção formal:</strong> A equação de Bohm é uma releitura da equação de Schrödinger.</p>
-<p>Teste a correção com um exemplo numérico pequeno.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A equação é não local para várias partículas; não é uma força clássica.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

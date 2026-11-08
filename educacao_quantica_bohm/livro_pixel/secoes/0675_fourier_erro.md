@@ -10,13 +10,11 @@
 
 <p><strong>O erro comum:</strong> Reconstrua uma imagem com poucos coeficientes.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">傅里叶</span> <em>fù lǐ yè</em> <span class="tom">· tons 4-3-4 · leitura fu-li-ie</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">傅里叶不是魔法。</span> <em>Fù lǐ yè bú shì mó fǎ.</em> — “Fourier” não é magia.</span></p>
-<p><strong>Como não cair:</strong> escreva um contraexemplo e teste com um colega.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A matemática é representação; não é o fenômeno.</p>
-<p class="prof"><strong>Para o professor:</strong> Use exemplos pequenos antes da fórmula.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

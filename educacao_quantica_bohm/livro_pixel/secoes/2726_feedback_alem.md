@@ -10,14 +10,12 @@
 
 <p>A prática distribuída e a recuperação ativa têm apoio em pesquisa.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">反馈</span> <em>fǎn kuì</em> <span class="tom">· tons 3-4 · leitura fan-kuei</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解反馈。</span> <em>Shēn rù liǎo jiě fǎn kuì.</em> — Aprofunde-se em “Feedback”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> A técnica não funciona igual para todos os estudantes.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Rubrica de 5 critérios × 2 pontos = 10 pontos.<br><strong>Conta:</strong> Se 4 critérios valem 2 e 1 vale 1, o total é 9.<br><strong>Resultado:</strong> A nota é uma soma ponderada, não uma verdade absoluta.<br><em>Limite:</em> Feedback sem critério vira opinião.</span></p>
+<p><strong>O que ainda não sabemos:</strong> A técnica não funciona igual para todos os estudantes. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Rubrica de 5 critérios × 2 pontos = 10 pontos.<br><strong>Conta:</strong> Se 4 critérios valem 2 e 1 vale 1, o total é 9.<br><strong>Resultado:</strong> A nota é uma soma ponderada, não uma verdade absoluta.<br><em>Limite:</em> Feedback sem critério vira opinião.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A técnica não funciona igual para todos os estudantes.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

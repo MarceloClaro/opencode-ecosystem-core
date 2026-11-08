@@ -10,14 +10,12 @@
 
 <p>A LGPD exige base legal, finalidade e transparência.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">环境</span> <em>huán jìng</em> <span class="tom">· tons 2-4 · leitura ruan-djing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解环境。</span> <em>Shēn rù liǎo jiě huán jìng.</em> — Aprofunde-se em “Ambiente”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> Não há consenso moral automático; há trade-offs.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Energia ilustrativa = potência × tempo.<br><strong>Conta:</strong> Se 1 shot gasta 0,1 J, 4096 shots gastam 409,6 J.<br><strong>Resultado:</strong> 409,6 J ≈ 0,11 Wh (conta ilustrativa).<br><em>Limite:</em> Os números são ilustrativos; a pegada real depende da infraestrutura.</span></p>
+<p><strong>O que ainda não sabemos:</strong> Não há consenso moral automático; há trade-offs. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Energia ilustrativa = potência × tempo.<br><strong>Conta:</strong> Se 1 shot gasta 0,1 J, 4096 shots gastam 409,6 J.<br><strong>Resultado:</strong> 409,6 J ≈ 0,11 Wh (conta ilustrativa).<br><em>Limite:</em> Os números são ilustrativos; a pegada real depende da infraestrutura.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Não há consenso moral automático; há trade-offs.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

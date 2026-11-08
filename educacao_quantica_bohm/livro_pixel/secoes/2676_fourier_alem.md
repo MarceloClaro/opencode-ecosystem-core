@@ -10,14 +10,12 @@
 
 <p>O produto tensorial faz a dimensão crescer como 2^n.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">傅里叶</span> <em>fù lǐ yè</em> <span class="tom">· tons 4-3-4 · leitura fu-li-ie</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解傅里叶。</span> <em>Shēn rù liǎo jiě fù lǐ yè.</em> — Aprofunde-se em “Fourier”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> A equação não explica por que o mundo segue a equação.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> F = (1/√N)[e^{2πijk/N}].<br><strong>Conta:</strong> Para N=4, F|0⟩ = (|0⟩+|1⟩+|2⟩+|3⟩)/2.<br><strong>Resultado:</strong> As quatro probabilidades são 1/4.<br><em>Limite:</em> A QFT é unitária; não é a FFT clássica.</span></p>
+<p><strong>O que ainda não sabemos:</strong> A equação não explica por que o mundo segue a equação. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> F = (1/√N)[e^{2πijk/N}].<br><strong>Conta:</strong> Para N=4, F|0⟩ = (|0⟩+|1⟩+|2⟩+|3⟩)/2.<br><strong>Resultado:</strong> As quatro probabilidades são 1/4.<br><em>Limite:</em> A QFT é unitária; não é a FFT clássica.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A equação não explica por que o mundo segue a equação.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -11,13 +11,11 @@
 <p><strong>Pergunta de pesquisa:</strong> Como separar erro de leitura de erro de preparação?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">读取错误</span> <em>dú qǔ cuò wù</em> <span class="tom">· tons 2-3-4-4 · leitura du-tchyu-tsuo-u</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看读取错误？</span> <em>Nǐ zěn me kàn dú qǔ cuò wù?</em> — O que você pensa de “Erro de leitura”?</span></p>
 <p><strong>Hipótese rival:</strong> O resultado de hoje não garante o de amanhã; calibração muda.</p>
-<p>Desenhe um experimento que separe as duas hipóteses.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O resultado de hoje não garante o de amanhã; calibração muda.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

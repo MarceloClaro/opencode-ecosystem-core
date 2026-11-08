@@ -10,13 +10,11 @@
 
 <p><strong>O erro comum:</strong> Anote ambiente, seed, shots e versões.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">复现</span> <em>fù xiàn</em> <span class="tom">· tons 4-4 · leitura fu-shien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">复现不是魔法。</span> <em>Fù xiàn bú shì mó fǎ.</em> — “Replicação” não é magia.</span></p>
-<p><strong>Como não cair:</strong> escreva um contraexemplo e teste com um colega.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Todo projeto é um recorte; declare o limite.</p>
-<p class="prof"><strong>Para o professor:</strong> Exija um limite específico.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

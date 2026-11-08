@@ -11,13 +11,11 @@
 <p><strong>Pergunta de pesquisa:</strong> Quando a margem desaparece?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">去极化</span> <em>qù jí huà</em> <span class="tom">· tons 4-2-4 · leitura tchyu-dji-rua</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看去极化？</span> <em>Nǐ zěn me kàn qù jí huà?</em> — O que você pensa de “Depolarizing”?</span></p>
 <p><strong>Hipótese rival:</strong> O teste é pequeno; não generaliza para outros dados ou modelos.</p>
-<p>Desenhe um experimento que separe as duas hipóteses.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O teste é pequeno; não generaliza para outros dados ou modelos.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

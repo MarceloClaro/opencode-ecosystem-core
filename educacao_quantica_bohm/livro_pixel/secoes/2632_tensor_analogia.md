@@ -11,13 +11,11 @@
 <p>Duas salas que viram uma casa com muitos cômodos.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">张量积</span> <em>zhāng liàng jī</em> <span class="tom">· tons 1-4-1 · leitura djang-liang-dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像张量积。</span> <em>Zhè xiàng zhāng liàng jī.</em> — Isto se parece com “Produto tensorial”.</span></p>
 <p><strong>Limite formal:</strong> A equação não explica por que o mundo segue a equação.</p>
-<p>Construa um contraexemplo quantitativo e verifique se a analogia sobrevive.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A equação não explica por que o mundo segue a equação.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

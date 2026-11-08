@@ -11,13 +11,11 @@
 <p>Uma lista de pesos para cada configuração possível.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">态矢量</span> <em>tài shǐ liàng</em> <span class="tom">· tons 4-3-4 · leitura tai-shi-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像态矢量。</span> <em>Zhè xiàng tài shǐ liàng.</em> — Isto se parece com “Statevector”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> O vetor cresce como 2^n; não é acessível por medição única.</p>
-<p><strong>Teste rápido:</strong> desenhe a analogia e marque com um X o ponto em que ela deixa de explicar o conceito.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O estado é uma descrição matemática; a medição é uma amostra.</p>
-<p class="prof"><strong>Para o professor:</strong> Compare a mesma grandeza nas três bibliotecas; se divergir, verifique convenção antes de concluir erro.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

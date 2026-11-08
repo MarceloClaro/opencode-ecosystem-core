@@ -10,7 +10,6 @@
 
 <p>Adicione uma porta e veja em que momento ela cai.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子线路</span> <em>liàng zǐ xiàn lù</em> <span class="tom">· tons 4-3-4-4 · leitura liang-dzi-shien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习量子线路。</span> <em>Liàn xí liàng zǐ xiàn lù.</em> — Pratique “Cirq Circuit”.</span></p>
-<p>Faça em 5 minutos; anote o que esperava antes de começar.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -27,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Bibliotecas simulam; convenções podem mudar o resultado.</p>
-<p class="prof"><strong>Para o professor:</strong> Se as bibliotecas divergirem, verifique a convenção.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

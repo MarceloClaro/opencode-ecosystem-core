@@ -10,14 +10,11 @@
 
 <p>Aprender sozinho é uma habilidade, não um dom.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">无障碍</span> <em>wú zhàng ài</em> <span class="tom">· tons 2-4-4 · leitura u-djang-ai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到无障碍。</span> <em>Wǒ zài shēng huó zhōng kàn dào wú zhàng ài.</em> — Vejo “Acessibilidade” na vida.</span></p>
-<p><strong>Onde isso aparece:</strong> procure um exemplo na sua casa, na escola ou no bairro. Descreva em duas frases.</p>
-<p><strong>O que muda no seu jeito de olhar?</strong> A ideia de acessibilidade pode mudar uma decisão cotidiana?</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Pedagogia é contextual. Não há método com efeito garantido para toda turma.</p>
-<p class="prof"><strong>Para o professor:</strong> Nanoaula é unidade de tempo e evidência, não fragmento sem síntese.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

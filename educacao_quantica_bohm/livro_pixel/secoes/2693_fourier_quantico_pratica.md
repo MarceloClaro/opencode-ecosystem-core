@@ -10,7 +10,6 @@
 
 <p>A QFT não é apenas 'Fourier mais rápido'; ela exige um circuito.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子傅里叶</span> <em>liàng zǐ fù lǐ yè</em> <span class="tom">· tons 4-3-4-3-4 · leitura liang-dzi-fu-li-ie</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习量子傅里叶。</span> <em>Liàn xí liàng zǐ fù lǐ yè.</em> — Pratique “Fourier quântico”.</span></p>
-<p><strong>Protocolo:</strong> varie um parâmetro, repita com outra seed e compare.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -27,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A equação não explica por que o mundo segue a equação.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

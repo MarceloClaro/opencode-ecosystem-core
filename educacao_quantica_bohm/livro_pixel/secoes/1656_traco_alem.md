@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>O produto tensorial faz a dimensão crescer como 2^n.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">迹</span> <em>jì</em> <span class="tom">· tons 4 · leitura dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解迹。</span> <em>Shēn rù liǎo jiě jì.</em> — Aprofunde-se em “Traço”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Tr(ρ) = soma dos autovalores = 1.<br><strong>Conta:</strong> ρ = [[0,5,0,5],[0,5,0,5]] → Tr=0,5+0,5=1.<br><strong>Resultado:</strong> A pureza é Tr(ρ²)=0,5²+0,5²+2×0,5²=1.<br><em>Limite:</em> O traço é independente da base; a pureza mede a mistura.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">迹</span> <em>jì</em> <span class="tom">· tons 4 · leitura dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解迹。</span> <em>Shēn rù liǎo jiě jì.</em> — Aprofunde-se em “Traço”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Tr(ρ) = soma dos autovalores = 1.<br><strong>Conta:</strong> ρ = [[0,5,0,5],[0,5,0,5]] → Tr=0,5+0,5=1.<br><strong>Resultado:</strong> A pureza é Tr(ρ²)=0,5²+0,5²+2×0,5²=1.<br><em>Limite:</em> O traço é independente da base; a pureza mede a mistura.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A matemática é representação; não é o fenômeno. Não confunda o mapa com o território.</p>
-<p class="prof"><strong>Para o professor:</strong> A fórmula deve vir depois da intuição; use exemplos numéricos pequenos.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

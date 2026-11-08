@@ -11,13 +11,11 @@
 <p>Duas ondas de som que podem se somar ou se cancelar.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">振幅</span> <em>zhèn fú</em> <span class="tom">· tons 4-2 · leitura djen-fu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像振幅。</span> <em>Zhè xiàng zhèn fú.</em> — Isto se parece com “Amplitude”.</span></p>
 <p><strong>Limite formal:</strong> A amplitude não é uma probabilidade; é preciso elevar ao quadrado.</p>
-<p>Construa um contraexemplo quantitativo e verifique se a analogia sobrevive.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A amplitude não é uma probabilidade; é preciso elevar ao quadrado.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

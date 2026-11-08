@@ -10,13 +10,11 @@
 
 <p>Termômetros, provas e pesquisas também 'medem' com escolhas.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">测量</span> <em>cè liáng</em> <span class="tom">· tons 4-2 · leitura tse-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到测量。</span> <em>Wǒ zài shēng huó zhōng kàn dào cè liáng.</em> — Vejo “Medição” na vida.</span></p>
-<p><strong>Onde isso aparece:</strong> procure um exemplo na sua casa ou na escola.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Medir produz uma amostra; não é ler um valor escondido.</p>
-<p class="prof"><strong>Para o professor:</strong> Comece pelo concreto; só depois use a notação.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -11,13 +11,11 @@
 <p><strong>Pergunta de pesquisa:</strong> Quem responde quando o sistema falha?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">责任</span> <em>zé rèn</em> <span class="tom">· tons 2-4 · leitura dze-jen</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看责任？</span> <em>Nǐ zěn me kàn zé rèn?</em> — O que você pensa de “Responsabilidade”?</span></p>
 <p><strong>Hipótese rival:</strong> Não há consenso moral automático; há trade-offs.</p>
-<p>Desenhe um experimento que separe as duas hipóteses.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Não há consenso moral automático; há trade-offs.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

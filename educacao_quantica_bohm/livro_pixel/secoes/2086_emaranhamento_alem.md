@@ -10,14 +10,12 @@
 
 <p>Bell mostrou que variáveis ocultas locais não reproduzem as correlações.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">纠缠</span> <em>jiū chán</em> <span class="tom">· tons 1-2 · leitura djiu-tchan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解纠缠。</span> <em>Shēn rù liǎo jiě jiū chán.</em> — Aprofunde-se em “Emaranhamento”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> As luvas têm valores escondidos; o emaranhamento não é explicado por variáveis locais.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> |Φ⁺⟩ = (|00⟩+|11⟩)/√2.<br><strong>Conta:</strong> P(00) = |1/√2|² = 1/2; P(11) = 1/2; P(01) = P(10) = 0.<br><strong>Resultado:</strong> Cada qubit isolado tem P(0) = 1/2, mas os resultados são correlacionados.<br><em>Limite:</em> Correlação não é sinal: não se transmite informação mais rápido que a luz.</span></p>
+<p><strong>O que ainda não sabemos:</strong> As luvas têm valores escondidos; o emaranhamento não é explicado por variáveis locais. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> |Φ⁺⟩ = (|00⟩+|11⟩)/√2.<br><strong>Conta:</strong> P(00) = |1/√2|² = 1/2; P(11) = 1/2; P(01) = P(10) = 0.<br><strong>Resultado:</strong> Cada qubit isolado tem P(0) = 1/2, mas os resultados são correlacionados.<br><em>Limite:</em> Correlação não é sinal: não se transmite informação mais rápido que a luz.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>As luvas têm valores escondidos; o emaranhamento não é explicado por variáveis locais.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -10,14 +10,11 @@
 
 <p><strong>O erro comum:</strong> Escreva um feedback com 'certo, melhorar, próximo passo'.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">反馈</span> <em>fǎn kuì</em> <span class="tom">· tons 3-4 · leitura fan-kuei</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">反馈不是魔法。</span> <em>Fǎn kuì bú shì mó fǎ.</em> — “Feedback” não é magia.</span></p>
-<p><strong>Por que acontece:</strong> o cérebro procura uma imagem simples e apaga a parte matemática que não se encaixa.</p>
-<p><strong>Como testar:</strong> escreva um contraexemplo em uma frase e veja se ele derruba sua explicação.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Pedagogia é contextual. Não há método com efeito garantido para toda turma.</p>
-<p class="prof"><strong>Para o professor:</strong> Nanoaula é unidade de tempo e evidência, não fragmento sem síntese.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

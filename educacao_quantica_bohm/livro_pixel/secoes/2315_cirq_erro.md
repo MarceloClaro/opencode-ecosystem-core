@@ -11,13 +11,11 @@
 <p><strong>O erro comum:</strong> Confundir a ordem dos qubits na linha com a ordem dos bits.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子框架</span> <em>liàng zǐ kuàng jià</em> <span class="tom">· tons 4-3-4-4 · leitura liang-dzi-kuang-djia</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">量子框架不是魔法。</span> <em>Liàng zǐ kuàng jià bú shì mó fǎ.</em> — “Cirq” não é magia.</span></p>
 <p><strong>Correção formal:</strong> Cirq é usado em pesquisa com hardware supercondutor.</p>
-<p>Teste a correção com um exemplo numérico pequeno.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O diagrama textual é útil, mas não é uma figura de livro.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

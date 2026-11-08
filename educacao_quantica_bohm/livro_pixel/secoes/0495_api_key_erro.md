@@ -10,13 +10,11 @@
 
 <p><strong>O erro comum:</strong> Leia a chave de uma variável de ambiente, nunca do código.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">密钥</span> <em>mì yuè</em> <span class="tom">· tons 4-4 · leitura mi-yue</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">密钥不是魔法。</span> <em>Mì yuè bú shì mó fǎ.</em> — “API key” não é magia.</span></p>
-<p><strong>Como não cair:</strong> escreva um contraexemplo e teste com um colega.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Backend tem ruído; um número não prova o estado.</p>
-<p class="prof"><strong>Para o professor:</strong> Ruído, leitura e calibração são coisas distintas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

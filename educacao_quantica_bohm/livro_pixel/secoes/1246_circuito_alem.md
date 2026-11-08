@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>A profundidade do circuito mede o número de camadas.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">电路</span> <em>diàn lù</em> <span class="tom">· tons 4-4 · leitura dien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解电路。</span> <em>Shēn rù liǎo jiě diàn lù.</em> — Aprofunde-se em “Circuito”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Aplicar portas é multiplicar matrizes; a ordem importa.<br><strong>Conta:</strong> CNOT(H⊗I)|00⟩ = (|00⟩+|11⟩)/√2; P(00)=P(11)=1/2.<br><strong>Resultado:</strong> O circuito de Bell produz duas amplitudes iguais.<br><em>Limite:</em> Inverter a ordem de H e CNOT muda o estado resultante.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">电路</span> <em>diàn lù</em> <span class="tom">· tons 4-4 · leitura dien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解电路。</span> <em>Shēn rù liǎo jiě diàn lù.</em> — Aprofunde-se em “Circuito”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Aplicar portas é multiplicar matrizes; a ordem importa.<br><strong>Conta:</strong> CNOT(H⊗I)|00⟩ = (|00⟩+|11⟩)/√2; P(00)=P(11)=1/2.<br><strong>Resultado:</strong> O circuito de Bell produz duas amplitudes iguais.<br><em>Limite:</em> Inverter a ordem de H e CNOT muda o estado resultante.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A profundidade do circuito mede o número de camadas.</p>
-<p class="prof"><strong>Para o professor:</strong> Confira a ordem dos qubits e a diferença entre circuito lógico e transpilado.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

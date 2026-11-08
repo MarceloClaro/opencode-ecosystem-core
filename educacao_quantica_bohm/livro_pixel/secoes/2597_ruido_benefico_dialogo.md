@@ -11,13 +11,11 @@
 <p><strong>Pergunta de pesquisa:</strong> O que seria preciso para confirmar a hipótese?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">有益噪声</span> <em>yǒu yì zào shēng</em> <span class="tom">· tons 3-4-4-1 · leitura iu-i-dzau-sheng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看有益噪声？</span> <em>Nǐ zěn me kàn yǒu yì zào shēng?</em> — O que você pensa de “Ruído benéfico?”?</span></p>
 <p><strong>Hipótese rival:</strong> O teste é pequeno; não generaliza para outros dados ou modelos.</p>
-<p>Desenhe um experimento que separe as duas hipóteses.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O teste é pequeno; não generaliza para outros dados ou modelos.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -10,7 +10,6 @@
 
 <p>Desenhe H, CNOT e medição em um papel quadriculado.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">电路</span> <em>diàn lù</em> <span class="tom">· tons 4-4 · leitura dien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习电路。</span> <em>Liàn xí diàn lù.</em> — Pratique “Circuito”.</span></p>
-<p><strong>Protocolo:</strong> varie um parâmetro, repita com outra seed e compare.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -27,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A ordem importa; matrizes não comutam em geral.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

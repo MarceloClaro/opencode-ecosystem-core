@@ -11,13 +11,11 @@
 <p>Uma função de planilha que calcula um resultado a partir de entradas.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子节点</span> <em>liàng zǐ jié diǎn</em> <span class="tom">· tons 4-3-2-3 · leitura liang-dzi-djie-dien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像量子节点。</span> <em>Zhè xiàng liàng zǐ jié diǎn.</em> — Isto se parece com “QNode”.</span></p>
 <p><strong>Limite formal:</strong> O QNode não é o hardware; é a descrição executável.</p>
-<p>Construa um contraexemplo quantitativo e verifique se a analogia sobrevive.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O QNode não é o hardware; é a descrição executável.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

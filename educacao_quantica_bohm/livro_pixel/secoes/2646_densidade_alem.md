@@ -10,14 +10,12 @@
 
 <p>O produto tensorial faz a dimensão crescer como 2^n.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">密度矩阵</span> <em>mì dù jǔ zhèn</em> <span class="tom">· tons 4-4-3-4 · leitura mi-du-djyu-djen</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解密度矩阵。</span> <em>Shēn rù liǎo jiě mì dù jǔ zhèn.</em> — Aprofunde-se em “Matriz densidade”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> A equação não explica por que o mundo segue a equação.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> ρ = |ψ⟩⟨ψ| para estado puro; Tr(ρ)=1; ρ²=ρ.<br><strong>Conta:</strong> Para |+⟩: ρ = 1/2[[1,1],[1,1]].<br><strong>Resultado:</strong> Tr(ρ)=1; ρ²=ρ, então o estado é puro.<br><em>Limite:</em> Para estado misto, ρ²≠ρ e Tr(ρ²)<1.</span></p>
+<p><strong>O que ainda não sabemos:</strong> A equação não explica por que o mundo segue a equação. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> ρ = |ψ⟩⟨ψ| para estado puro; Tr(ρ)=1; ρ²=ρ.<br><strong>Conta:</strong> Para |+⟩: ρ = 1/2[[1,1],[1,1]].<br><strong>Resultado:</strong> Tr(ρ)=1; ρ²=ρ, então o estado é puro.<br><em>Limite:</em> Para estado misto, ρ²≠ρ e Tr(ρ²)<1.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A equação não explica por que o mundo segue a equação.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

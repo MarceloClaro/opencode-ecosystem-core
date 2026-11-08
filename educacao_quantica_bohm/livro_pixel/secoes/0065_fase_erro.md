@@ -10,13 +10,11 @@
 
 <p><strong>O erro comum:</strong> Dizer que Z 'não faz nada' porque a probabilidade não muda.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">相位</span> <em>xiàng wèi</em> <span class="tom">· tons 4-4 · leitura shiang-uei</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">相位不是魔法。</span> <em>Xiàng wèi bú shì mó fǎ.</em> — “Fase” não é magia.</span></p>
-<p><strong>Como não cair:</strong> escreva um contraexemplo e teste com um colega.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Medir produz uma amostra; não é ler um valor escondido.</p>
-<p class="prof"><strong>Para o professor:</strong> Comece pelo concreto; só depois use a notação.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

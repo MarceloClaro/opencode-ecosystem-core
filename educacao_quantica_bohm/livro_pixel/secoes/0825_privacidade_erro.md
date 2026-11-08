@@ -10,13 +10,11 @@
 
 <p><strong>O erro comum:</strong> Identifique dados pessoais em um circuito ou dataset.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">隐私</span> <em>yǐn sī</em> <span class="tom">· tons 3-1 · leitura in-si</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">隐私不是魔法。</span> <em>Yǐn sī bú shì mó fǎ.</em> — “Privacidade” não é magia.</span></p>
-<p><strong>Como não cair:</strong> escreva um contraexemplo e teste com um colega.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Ética envolve valores e poder; não há resposta automática.</p>
-<p class="prof"><strong>Para o professor:</strong> Peça evidência, afetados e alternativas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

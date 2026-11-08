@@ -10,13 +10,11 @@
 
 <p><strong>Tarefa:</strong> Você consegue explicar o que é uma distribuição de equilíbrio?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子平衡</span> <em>liàng zǐ píng héng</em> <span class="tom">· tons 4-3-2-2 · leitura liang-dzi-ping-reng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了量子平衡。</span> <em>Wǒ xué huì le liàng zǐ píng héng.</em> — Eu aprendi “Equilíbrio quântico”.</span></p>
-<p><strong>Replicação:</strong> outra seed, outro backend, a mesma pergunta.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A hipótese explica por que a regra de Born funciona, mas não por que o universo começou assim.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

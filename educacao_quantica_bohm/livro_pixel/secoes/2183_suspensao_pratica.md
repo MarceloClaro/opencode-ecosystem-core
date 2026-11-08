@@ -10,7 +10,6 @@
 
 <p>Escreva uma suposição e liste o que ela exclui.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">悬置</span> <em>xuán zhì</em> <span class="tom">· tons 2-4 · leitura shyuan-dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习悬置。</span> <em>Liàn xí xuán zhì.</em> — Pratique “Suspensão de suposições”.</span></p>
-<p><strong>Protocolo:</strong> varie um parâmetro, repita com outra seed e compare.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -27,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Suspender não é abandonar; é ganhar distância para observar.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

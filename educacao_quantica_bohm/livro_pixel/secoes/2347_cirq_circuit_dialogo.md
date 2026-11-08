@@ -11,13 +11,11 @@
 <p><strong>Pergunta de pesquisa:</strong> O que é um momento?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子线路</span> <em>liàng zǐ xiàn lù</em> <span class="tom">· tons 4-3-4-4 · leitura liang-dzi-shien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看量子线路？</span> <em>Nǐ zěn me kàn liàng zǐ xiàn lù?</em> — O que você pensa de “Cirq Circuit”?</span></p>
 <p><strong>Hipótese rival:</strong> Momentos não são tempo físico; são uma ordenação lógica.</p>
-<p>Desenhe um experimento que separe as duas hipóteses.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Momentos não são tempo físico; são uma ordenação lógica.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -10,13 +10,11 @@
 
 <p>Serviços de nuvem já mediam nossa confiança e nossos dados.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">任务队列</span> <em>rèn wù duì liè</em> <span class="tom">· tons 4-4-4-4 · leitura jen-u-duei-lie</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到任务队列。</span> <em>Wǒ zài shēng huó zhōng kàn dào rèn wù duì liè.</em> — Vejo “Fila de jobs” na vida.</span></p>
-<p><strong>Onde isso aparece:</strong> procure um exemplo na sua casa ou na escola.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Backend tem ruído; um número não prova o estado.</p>
-<p class="prof"><strong>Para o professor:</strong> Ruído, leitura e calibração são coisas distintas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -11,13 +11,11 @@
 <p><strong>O erro comum:</strong> Achar que Bell é um algoritmo ou um hardware.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">贝尔态</span> <em>bèi ěr tài</em> <span class="tom">· tons 4-3-4 · leitura bei-er-tai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">贝尔态不是魔法。</span> <em>Bèi ěr tài bú shì mó fǎ.</em> — “Estado de Bell” não é magia.</span></p>
 <p><strong>Correção formal:</strong> O estado de Bell é usado em teleportação e criptografia.</p>
-<p>Teste a correção com um exemplo numérico pequeno.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A imagem das moedas sugere um mecanismo que a teoria não afirma.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

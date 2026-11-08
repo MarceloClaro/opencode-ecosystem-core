@@ -11,13 +11,11 @@
 <p><strong>O erro comum:</strong> Esquecer a medição e tentar ler o estado sem amostrar.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">贝尔电路</span> <em>bèi ěr diàn lù</em> <span class="tom">· tons 4-3-4-4 · leitura bei-er-dien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">贝尔电路不是魔法。</span> <em>Bèi ěr diàn lù bú shì mó fǎ.</em> — “Circuito de Bell” não é magia.</span></p>
 <p><strong>Correção formal:</strong> O circuito de Bell é o 'olá, mundo' do emaranhamento.</p>
-<p>Teste a correção com um exemplo numérico pequeno.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A imagem clássica não explica a violação de Bell.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -10,13 +10,11 @@
 
 <p>A prática distribuída e a recuperação ativa têm apoio em pesquisa.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">微课</span> <em>wēi kè</em> <span class="tom">· tons 1-4 · leitura uei-ke</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解微课。</span> <em>Shēn rù liǎo jiě wēi kè.</em> — Aprofunde-se em “Nanoaula”.</span></p>
-<p>Guarde uma pergunta para a próxima aula; não precisa resolver tudo hoje.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Pedagogia é contextual; não há método garantido.</p>
-<p class="prof"><strong>Para o professor:</strong> Nanoaula é tempo e evidência, não fragmento.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

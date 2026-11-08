@@ -10,13 +10,11 @@
 
 <p><strong>Pergunta da roda:</strong> O que significa 'aprender' aqui?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">训练</span> <em>xùn liàn</em> <span class="tom">· tons 4-4 · leitura shyun-lien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看训练？</span> <em>Nǐ zěn me kàn xùn liàn?</em> — O que você pensa de “Treino”?</span></p>
-<p>Ouça sem interromper; anote uma ideia que mudou sua opinião.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Amostra pequena não generaliza; 4 pontos não são um artigo.</p>
-<p class="prof"><strong>Para o professor:</strong> Explique o teto e o tamanho da amostra.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

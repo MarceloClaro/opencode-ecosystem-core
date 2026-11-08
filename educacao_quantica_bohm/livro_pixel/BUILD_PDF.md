@@ -28,6 +28,17 @@ não substitui o WeasyPrint do sistema: ele só garante o `pyphen` completo.
 ## Saída
 
 - `LIVRO_3000_LAUDAS.html`;
-- `LIVRO_3000_LAUDAS.pdf` (3553 páginas na versão de 2026-11-08);
+- `LIVRO_3000_LAUDAS.pdf` (3504 páginas na versão de 2026-11-08);
 - PDF e HTML são gerados a partir de `secoes/`, `GJQ_RESULTADOS.md` e demais
   arquivos editoriais.
+
+## Edição enxuta (piloto)
+
+```bash
+python3 educacao_quantica_bohm/livro_pixel/build_enxuta.py
+```
+
+Gera `EDICAO_ENXUTA_PILOTO.pdf`, `.epub` e `.html`: 12 módulos, 60 laudas N0,
+12 figuras e 76 páginas em papel claro. O piloto remove a repetição de
+micropráticas e converte links para seções não incluídas em texto. Ele não é a
+edição final de 600–800 páginas nem substitui a obra de referência.

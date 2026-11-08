@@ -1,0 +1,53 @@
+@page {
+  size: 160mm 230mm;
+  margin: 18mm 16mm 20mm 16mm;
+  @bottom-center { content: counter(page); font-size: 8pt; color: #555; }
+}
+@page:first { @bottom-center { content: ""; } }
+html, body { background: #fff; color: #111; }
+body { font-family: "Atkinson", "DejaVu Sans", sans-serif; font-size: 10.5pt; line-height: 1.45; margin: 0; }
+p { text-align: justify; hyphens: auto; margin: 0 0 2.2mm 0; }
+h1, h2, h3 { color: #12324a; font-family: "DejaVu Sans", sans-serif; }
+h1 { font-size: 19pt; margin: 0 0 6mm 0; break-before: page; }
+h2 { font-size: 13pt; margin: 4mm 0 2mm 0; break-after: avoid; }
+h3 { font-size: 11pt; margin: 3mm 0 1.5mm 0; }
+.capa { break-after: page; text-align: center; padding-top: 35mm; }
+.capa h1 { break-before: auto; font-size: 30pt; margin-bottom: 4mm; }
+.capa .sub { font-size: 15pt; color: #345; margin-bottom: 8mm; }
+.capa .meta { font-size: 10pt; color: #555; }
+.capa .selo { display: inline-block; margin-top: 8mm; padding: 2mm 4mm; border: 1px solid #12324a; font-size: 8pt; }
+.modulo h1 { break-before: page; }
+.modulo p { font-size: 11pt; color: #333; }
+.lauda { border: 0; background: #fff; padding: 0; margin: 0 0 4mm 0; break-inside: avoid; }
+.lauda .topo { display: flex; justify-content: space-between; gap: 2mm; font-family: "DejaVu Sans", sans-serif; font-size: 6.8pt; color: #555; border-bottom: 1px solid #bbb; padding-bottom: 1mm; margin-bottom: 1.5mm; }
+.lauda .cod { color: #12324a; font-weight: bold; }
+.lauda .titulo { font-family: "DejaVu Sans", sans-serif; font-size: 12.5pt; color: #12324a; text-transform: none; margin: 0 0 2mm 0; }
+.lauda .corpo { font-size: 10.5pt; line-height: 1.45; }
+.lauda .rigor { border: 1px solid #999; background: #f7f7f7; color: #111; font-size: 9pt; padding: 2mm; margin-top: 2mm; }
+.lauda .rigor .rotulo, .lauda .check .rotulo { color: #12324a; font-family: "DejaVu Sans", sans-serif; font-size: 7pt; letter-spacing: .5pt; }
+.lauda .check { border: 1px solid #12324a; background: #eef3f6; color: #111; font-size: 9.5pt; padding: 2mm; margin-top: 1.5mm; }
+.lauda .rodape { border-top: 1px solid #bbb; color: #555; font-size: 7pt; padding-top: 1mm; margin-top: 2mm; }
+.lauda .prof { display: none; }
+.lauda .xp, .ico, .ico-conceito { display: none; }
+.ponte { background: #f2f2f2; border-left: 3px solid #12324a; padding: 2mm; font-size: 9.2pt; }
+.ponte .hanzi { font-family: "Noto Serif CJK SC", "DejaVu Sans", serif; }
+table { width: 100%; border-collapse: collapse; margin: 2mm 0; font-size: 8.2pt; line-height: 1.25; }
+th { background: #e6ebef; color: #111; border: 1px solid #888; padding: 1mm; text-align: left; }
+td { border: 1px solid #aaa; padding: .8mm 1.2mm; color: #111; vertical-align: top; }
+figure { margin: 2mm 0; text-align: center; break-inside: avoid; }
+figure img { max-width: 100%; max-height: 62mm; height: auto; }
+figcaption { font-size: 8pt; color: #444; margin-top: 1mm; }
+pre { background: #f4f4f4; border-left: 3px solid #12324a; color: #111; padding: 2mm; font-size: 7.6pt; white-space: pre-wrap; }
+code { font-family: "DejaVu Sans Mono", monospace; font-size: .9em; }
+.fn { display: block; border-top: 1px dashed #999; margin-top: 1.5mm; padding-top: 1mm; font-size: 8pt; color: #333; }
+
+figure.modulo-fig { margin: 2mm 0 4mm 0; }
+figure.modulo-fig img { max-height: 52mm; }
+
+.capa p { text-align: center; hyphens: manual; }
+.mini-barras { border: 1px solid #999; background: #f7f7f7; padding: 1.5mm; margin: 2mm 0; font-size: 8pt; }
+.mini-barras .rotulo-mini { display: block; font-family: "DejaVu Sans", sans-serif; font-size: 6.5pt; color: #12324a; margin-bottom: 1mm; }
+.mini-barras .linha { display: flex; align-items: center; gap: 2mm; margin: .8mm 0; }
+.mini-barras .trilho { flex: 1; height: 3mm; background: #ddd; }
+.mini-barras .trilho span { display: block; height: 100%; background: #12324a; }
+.mini-barras b { width: 12mm; text-align: right; font-weight: normal; }

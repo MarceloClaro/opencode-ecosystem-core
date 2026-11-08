@@ -11,13 +11,11 @@
 <p>Um globo em que cada ponto é um estado.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">布洛赫球</span> <em>bù luò hè qiú</em> <span class="tom">· tons 4-4-4-2 · leitura bu-luo-re-tchiu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像布洛赫球。</span> <em>Zhè xiàng bù luò hè qiú.</em> — Isto se parece com “Esfera de Bloch”.</span></p>
 <p><strong>Limite formal:</strong> A esfera não mostra emaranhamento de dois qubits.</p>
-<p>Construa um contraexemplo quantitativo e verifique se a analogia sobrevive.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A esfera não mostra emaranhamento de dois qubits.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

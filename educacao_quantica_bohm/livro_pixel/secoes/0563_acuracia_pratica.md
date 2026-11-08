@@ -10,7 +10,6 @@
 
 <p>Acurácia sozinha não mede justiça, incerteza ou generalização.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">准确率</span> <em>zhǔn què lǜ</em> <span class="tom">· tons 3-4-4 · leitura djuen-tchyue-lyu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习准确率。</span> <em>Liàn xí zhǔn què lǜ.</em> — Pratique “Acurácia”.</span></p>
-<p>Faça em 5 minutos; anote o que esperava antes de começar.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -27,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Amostra pequena não generaliza; 4 pontos não são um artigo.</p>
-<p class="prof"><strong>Para o professor:</strong> Explique o teto e o tamanho da amostra.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

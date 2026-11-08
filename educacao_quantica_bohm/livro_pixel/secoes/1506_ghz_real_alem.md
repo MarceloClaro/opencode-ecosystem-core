@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>A fidelidade proxy mede a população ideal, não a pureza do estado.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">实验多体态</span> <em>shí yàn duō tǐ tài</em> <span class="tom">· tons 2-4-1-3-4 · leitura shi-ien-duo-ti-tai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解实验多体态。</span> <em>Shēn rù liǎo jiě shí yàn duō tǐ tài.</em> — Aprofunde-se em “GHZ real”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Fidelidade proxy = (N0000 + N1111)/N.<br><strong>Conta:</strong> Guoji08: (418+389)/1024 = 807/1024 = 0,7881.<br><strong>Resultado:</strong> 78,8% no Guoji08; Baihua: (437+230)/1024 = 667/1024 = 65,1%.<br><em>Limite:</em> A proxy não mede a fase nem o estado completo.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">实验多体态</span> <em>shí yàn duō tǐ tài</em> <span class="tom">· tons 2-4-1-3-4 · leitura shi-ien-duo-ti-tai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解实验多体态。</span> <em>Shēn rù liǎo jiě shí yàn duō tǐ tài.</em> — Aprofunde-se em “GHZ real”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Fidelidade proxy = (N0000 + N1111)/N.<br><strong>Conta:</strong> Guoji08: (418+389)/1024 = 807/1024 = 0,7881.<br><strong>Resultado:</strong> 78,8% no Guoji08; Baihua: (437+230)/1024 = 667/1024 = 65,1%.<br><em>Limite:</em> A proxy não mede a fase nem o estado completo.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Quatro pontos e 1024 tiros não generalizam. Ruído benéfico é hipótese, não garantia.</p>
-<p class="prof"><strong>Para o professor:</strong> A acurácia de 4/4 não é generalized accuracy. Explique o teto e o tamanho da amostra.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -10,14 +10,11 @@
 
 <p>Música, luz e conversas dependem de fases e sincronia.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">相位</span> <em>xiàng wèi</em> <span class="tom">· tons 4-4 · leitura shiang-uei</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到相位。</span> <em>Wǒ zài shēng huó zhōng kàn dào xiàng wèi.</em> — Vejo “Fase” na vida.</span></p>
-<p><strong>Onde isso aparece:</strong> procure um exemplo na sua casa, na escola ou no bairro. Descreva em duas frases.</p>
-<p><strong>O que muda no seu jeito de olhar?</strong> A ideia de fase pode mudar uma decisão cotidiana?</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A fase relativa é o recurso que permite a interferência.</p>
-<p class="prof"><strong>Para o professor:</strong> Use a notação de ket apenas depois do concreto; verifique P(0)+P(1)=1.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

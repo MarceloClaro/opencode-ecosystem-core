@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>A suspensão é uma prática, não uma prova lógica.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">悬置</span> <em>xuán zhì</em> <span class="tom">· tons 2-4 · leitura shyuan-dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解悬置。</span> <em>Shēn rù liǎo jiě xuán zhì.</em> — Aprofunde-se em “Suspensão de suposições”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Atualização bayesiana: P(H|E) = P(E|H)P(H) / P(E).<br><strong>Conta:</strong> P(H)=0,5; P(E|H)=0,8; P(E|¬H)=0,2; P(E)=0,8×0,5+0,2×0,5=0,5.<br><strong>Resultado:</strong> P(H|E)=0,8×0,5/0,5=0,8.<br><em>Limite:</em> Suspender não é abandonar a crença; é colocá-la entre parênteses e testá-la.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">悬置</span> <em>xuán zhì</em> <span class="tom">· tons 2-4 · leitura shyuan-dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解悬置。</span> <em>Shēn rù liǎo jiě xuán zhì.</em> — Aprofunde-se em “Suspensão de suposições”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Atualização bayesiana: P(H|E) = P(E|H)P(H) / P(E).<br><strong>Conta:</strong> P(H)=0,5; P(E|H)=0,8; P(E|¬H)=0,2; P(E)=0,8×0,5+0,2×0,5=0,5.<br><strong>Resultado:</strong> P(H|E)=0,8×0,5/0,5=0,8.<br><em>Limite:</em> Suspender não é abandonar a crença; é colocá-la entre parênteses e testá-la.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A suspensão é uma prática, não uma prova lógica.</p>
-<p class="prof"><strong>Para o professor:</strong> Diga 'interpretação', não 'prova'. Compare com a leitura padrão e nomeie o preço: não localidade.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

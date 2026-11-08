@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>Um bom projeto declara o que não prova.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">假设</span> <em>jiǎ shè</em> <span class="tom">· tons 3-4 · leitura djia-she</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解假设。</span> <em>Shēn rù liǎo jiě jiǎ shè.</em> — Aprofunde-se em “Hipótese”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> H₀: não há diferença; H₁: há diferença.<br><strong>Conta:</strong> Se a acurácia é 100% em 4 pontos, o teste tem pouca potência.<br><strong>Resultado:</strong> A hipótese precisa de um desenho que possa refutá-la.<br><em>Limite:</em> Hipótese não é opinião.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">假设</span> <em>jiǎ shè</em> <span class="tom">· tons 3-4 · leitura djia-she</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解假设。</span> <em>Shēn rù liǎo jiě jiǎ shè.</em> — Aprofunde-se em “Hipótese”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> H₀: não há diferença; H₁: há diferença.<br><strong>Conta:</strong> Se a acurácia é 100% em 4 pontos, o teste tem pouca potência.<br><strong>Resultado:</strong> A hipótese precisa de um desenho que possa refutá-la.<br><em>Limite:</em> Hipótese não é opinião.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Todo projeto é um recorte. Declare limite, evidência e o que ficou fora.</p>
-<p class="prof"><strong>Para o professor:</strong> Exija um limite específico; 'tem limitações' não é suficiente.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

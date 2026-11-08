@@ -10,13 +10,11 @@
 
 <p><strong>Tarefa:</strong> Você consegue prever o resultado de H→Z→H?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">相位</span> <em>xiàng wèi</em> <span class="tom">· tons 4-4 · leitura shiang-uei</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了相位。</span> <em>Wǒ xué huì le xiàng wèi.</em> — Eu aprendi “Fase”.</span></p>
-<p><strong>Replicação:</strong> outra seed, outro backend, a mesma pergunta.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A fase não é um atraso no tempo real; é uma relação matemática.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

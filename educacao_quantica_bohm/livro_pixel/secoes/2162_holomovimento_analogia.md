@@ -11,13 +11,11 @@
 <p>Um oceano que produz ondas e redemoinhos transitórios.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">整体运动</span> <em>zhěng tǐ yùn dòng</em> <span class="tom">· tons 3-3-4-4 · leitura djeng-ti-yun-dong</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像整体运动。</span> <em>Zhè xiàng zhěng tǐ yùn dòng.</em> — Isto se parece com “Holomovimento”.</span></p>
 <p><strong>Limite formal:</strong> O termo é filosófico; não é uma equação operacional.</p>
-<p>Construa um contraexemplo quantitativo e verifique se a analogia sobrevive.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O termo é filosófico; não é uma equação operacional.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

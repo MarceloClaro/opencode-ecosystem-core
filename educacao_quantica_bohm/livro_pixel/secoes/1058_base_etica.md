@@ -10,14 +10,11 @@
 
 <p>A escolha da base pode revelar ou esconder informação?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">基</span> <em>jī</em> <span class="tom">· tons 1 · leitura dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于基？</span> <em>Shéi shòu yì yú jī?</em> — Quem se beneficia de “Base”?</span></p>
-<p><strong>Quem ganha? Quem perde?</strong> Liste um grupo que se beneficia e um que pode ser prejudicado.</p>
-<p><strong>O que a escola pode fazer?</strong> Transforme o dilema em uma pergunta investigável, não em um julgamento pessoal.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>BB84 usa duas bases incompatíveis para detectar espionagem.</p>
-<p class="prof"><strong>Para o professor:</strong> Use a notação de ket apenas depois do concreto; verifique P(0)+P(1)=1.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -10,13 +10,11 @@
 
 <p><strong>Pergunta da roda:</strong> Por que 2^n cresce tão rápido?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">张量积</span> <em>zhāng liàng jī</em> <span class="tom">· tons 1-4-1 · leitura djang-liang-dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看张量积？</span> <em>Nǐ zěn me kàn zhāng liàng jī?</em> — O que você pensa de “Produto tensorial”?</span></p>
-<p>Ouça sem interromper; anote uma ideia que mudou sua opinião.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A matemática é representação; não é o fenômeno.</p>
-<p class="prof"><strong>Para o professor:</strong> Use exemplos pequenos antes da fórmula.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

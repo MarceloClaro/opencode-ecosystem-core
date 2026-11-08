@@ -10,13 +10,11 @@
 
 <p><strong>Pergunta da roda:</strong> O que limita mais o seu circuito?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">弛豫与相干</span> <em>chí yù yǔ xiāng gān</em> <span class="tom">· tons 2-4-3-1-1 · leitura tchi-yu-yu-shiang-gan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看弛豫与相干？</span> <em>Nǐ zěn me kàn chí yù yǔ xiāng gān?</em> — O que você pensa de “T1 e T2”?</span></p>
-<p>Ouça sem interromper; anote uma ideia que mudou sua opinião.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Backend tem ruído; um número não prova o estado.</p>
-<p class="prof"><strong>Para o professor:</strong> Ruído, leitura e calibração são coisas distintas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

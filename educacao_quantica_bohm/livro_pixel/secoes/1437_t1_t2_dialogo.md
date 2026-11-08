@@ -10,15 +10,11 @@
 
 <p><strong>Pergunta da roda:</strong> O que limita mais o seu circuito?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">弛豫与相干</span> <em>chí yù yǔ xiāng gān</em> <span class="tom">· tons 2-4-3-1-1 · leitura tchi-yu-yu-shiang-gan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看弛豫与相干？</span> <em>Nǐ zěn me kàn chí yù yǔ xiāng gān?</em> — O que você pensa de “T1 e T2”?</span></p>
-<p><strong>Roteiro de 9 minutos:</strong> 1 minuto de silêncio; 4 minutos de falas sem interrupção; 2 minutos de respostas ao que foi ouvido; 2 minutos de síntese.</p>
-<p><strong>Regra:</strong> não corrija a fala do outro; pergunte o que o levou a dizer aquilo.</p>
-<p><strong>Registre:</strong> uma suposição que apareceu e uma pergunta nova.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Backends têm ruído, calibração e deriva. Fidelidade proxy não é prova de emaranhamento.</p>
-<p class="prof"><strong>Para o professor:</strong> T1, T2, erro de leitura e ruído de porta são coisas distintas; não os trate como um número único.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

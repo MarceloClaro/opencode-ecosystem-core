@@ -10,13 +10,11 @@
 
 <p><strong>Pergunta da roda:</strong> O que a plateia precisa saber primeiro?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">展示</span> <em>zhǎn shì</em> <span class="tom">· tons 3-4 · leitura djan-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看展示？</span> <em>Nǐ zěn me kàn zhǎn shì?</em> — O que você pensa de “Apresentação”?</span></p>
-<p>Ouça sem interromper; anote uma ideia que mudou sua opinião.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Todo projeto é um recorte; declare o limite.</p>
-<p class="prof"><strong>Para o professor:</strong> Exija um limite específico.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

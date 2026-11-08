@@ -10,14 +10,11 @@
 
 <p>Todo projeto começa com uma pergunta e termina com um próximo passo.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">局限</span> <em>jú xiàn</em> <span class="tom">· tons 2-4 · leitura djyu-shien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到局限。</span> <em>Wǒ zài shēng huó zhōng kàn dào jú xiàn.</em> — Vejo “Limite” na vida.</span></p>
-<p><strong>Onde isso aparece:</strong> procure um exemplo na sua casa, na escola ou no bairro. Descreva em duas frases.</p>
-<p><strong>O que muda no seu jeito de olhar?</strong> A ideia de limite pode mudar uma decisão cotidiana?</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Todo projeto é um recorte. Declare limite, evidência e o que ficou fora.</p>
-<p class="prof"><strong>Para o professor:</strong> Exija um limite específico; 'tem limitações' não é suficiente.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

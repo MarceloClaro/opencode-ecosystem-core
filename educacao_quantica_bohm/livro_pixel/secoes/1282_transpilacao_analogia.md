@@ -11,13 +11,11 @@
 <p>Traduzir uma receita para os ingredientes disponíveis na cozinha.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">转译</span> <em>zhuǎn yì</em> <span class="tom">· tons 3-4 · leitura djuan-i</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像转译。</span> <em>Zhè xiàng zhuǎn yì.</em> — Isto se parece com “Transpilação”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> A tradução pode aumentar a profundidade e o ruído.</p>
-<p><strong>Teste rápido:</strong> desenhe a analogia e marque com um X o ponto em que ela deixa de explicar o conceito.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O mapeamento de qubits lógicos para físicos é parte do processo.</p>
-<p class="prof"><strong>Para o professor:</strong> Confira a ordem dos qubits e a diferença entre circuito lógico e transpilado.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

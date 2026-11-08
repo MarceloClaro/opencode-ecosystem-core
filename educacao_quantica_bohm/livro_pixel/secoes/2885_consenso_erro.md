@@ -11,13 +11,11 @@
 <p><strong>O erro comum:</strong> Faça uma rodada de diálogo e registre dissensos.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">共识</span> <em>gòng shí</em> <span class="tom">· tons 4-2 · leitura gong-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">共识不是魔法。</span> <em>Gòng shí bú shì mó fǎ.</em> — “Consenso” não é magia.</span></p>
 <p><strong>Correção formal:</strong> A LGPD exige base legal, finalidade e transparência.</p>
-<p>Teste a correção com um exemplo numérico pequeno.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Não há consenso moral automático; há trade-offs.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

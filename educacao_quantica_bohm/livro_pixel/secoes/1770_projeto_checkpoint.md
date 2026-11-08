@@ -10,14 +10,11 @@
 
 <p><strong>Tarefa:</strong> Quem se beneficia e quem arca com os custos?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">项目</span> <em>xiàng mù</em> <span class="tom">· tons 4-4 · leitura shiang-mu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了项目。</span> <em>Wǒ xué huì le xiàng mù.</em> — Eu aprendi “Projeto”.</span></p>
-<p><strong>Diário de bordo:</strong> o que eu entendi? onde eu travei? o que vou testar amanhã?</p>
-<p><strong>Próximo passo:</strong> escolha uma lauda da mesma lente e compare as duas respostas.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Pedagogia é contextual. Não há método com efeito garantido para toda turma.</p>
-<p class="prof"><strong>Para o professor:</strong> Nanoaula é unidade de tempo e evidência, não fragmento sem síntese.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -10,13 +10,11 @@
 
 <p><strong>Pergunta da roda:</strong> Quanto tempo é aceitável esperar?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">任务队列</span> <em>rèn wù duì liè</em> <span class="tom">· tons 4-4-4-4 · leitura jen-u-duei-lie</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看任务队列？</span> <em>Nǐ zěn me kàn rèn wù duì liè?</em> — O que você pensa de “Fila de jobs”?</span></p>
-<p>Ouça sem interromper; anote uma ideia que mudou sua opinião.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Backend tem ruído; um número não prova o estado.</p>
-<p class="prof"><strong>Para o professor:</strong> Ruído, leitura e calibração são coisas distintas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

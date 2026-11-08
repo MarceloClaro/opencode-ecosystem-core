@@ -11,13 +11,11 @@
 <p>Uma bateria que descarrega (T1) e um relógio que perde sincronia (T2).</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">弛豫与相干</span> <em>chí yù yǔ xiāng gān</em> <span class="tom">· tons 2-4-3-1-1 · leitura tchi-yu-yu-shiang-gan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像弛豫与相干。</span> <em>Zhè xiàng chí yù yǔ xiāng gān.</em> — Isto se parece com “T1 e T2”.</span></p>
 <p><strong>Limite formal:</strong> O resultado de hoje não garante o de amanhã; calibração muda.</p>
-<p>Construa um contraexemplo quantitativo e verifique se a analogia sobrevive.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O resultado de hoje não garante o de amanhã; calibração muda.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

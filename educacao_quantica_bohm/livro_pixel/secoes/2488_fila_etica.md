@@ -11,13 +11,11 @@
 <p>Quem paga a conta energética e quem fica na fila?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">任务队列</span> <em>rèn wù duì liè</em> <span class="tom">· tons 4-4-4-4 · leitura jen-u-duei-lie</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于任务队列？</span> <em>Shéi shòu yì yú rèn wù duì liè?</em> — Quem se beneficia de “Fila de jobs”?</span></p>
 <p><strong>Governança:</strong> quem audita, quem responde e como reparar?</p>
-<p>Mapeie os afetados e uma medida de mitigação.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O resultado de hoje não garante o de amanhã; calibração muda.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

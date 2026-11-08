@@ -11,13 +11,11 @@
 <p><strong>O erro comum:</strong> Achar que 100 tiros bastam para qualquer conclusão.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">采样</span> <em>cǎi yàng</em> <span class="tom">· tons 3-4 · leitura tsai-iang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">采样不是魔法。</span> <em>Cǎi yàng bú shì mó fǎ.</em> — “Amostragem” não é magia.</span></p>
 <p><strong>Correção formal:</strong> O erro padrão cai com a raiz do número de tiros.</p>
-<p>Teste a correção com um exemplo numérico pequeno.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A amostra não é o estado; é uma sombra estatística.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

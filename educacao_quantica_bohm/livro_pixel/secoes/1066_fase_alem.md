@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>A fase relativa é o recurso que permite a interferência.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">相位</span> <em>xiàng wèi</em> <span class="tom">· tons 4-4 · leitura shiang-uei</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解相位。</span> <em>Shēn rù liǎo jiě xiàng wèi.</em> — Aprofunde-se em “Fase”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> H Z H = X. A fase relativa inverte a interferência.<br><strong>Conta:</strong> H Z H |0⟩ = X|0⟩ = |1⟩; portanto P(1) = 1.<br><strong>Resultado:</strong> Sem a fase Z, H H |0⟩ = |0⟩ e P(0) = 1.<br><em>Limite:</em> A fase global (multiplicar todo o estado por −1) não muda nada; só a fase relativa importa.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">相位</span> <em>xiàng wèi</em> <span class="tom">· tons 4-4 · leitura shiang-uei</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解相位。</span> <em>Shēn rù liǎo jiě xiàng wèi.</em> — Aprofunde-se em “Fase”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> H Z H = X. A fase relativa inverte a interferência.<br><strong>Conta:</strong> H Z H |0⟩ = X|0⟩ = |1⟩; portanto P(1) = 1.<br><strong>Resultado:</strong> Sem a fase Z, H H |0⟩ = |0⟩ e P(0) = 1.<br><em>Limite:</em> A fase global (multiplicar todo o estado por −1) não muda nada; só a fase relativa importa.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A fase relativa é o recurso que permite a interferência.</p>
-<p class="prof"><strong>Para o professor:</strong> Use a notação de ket apenas depois do concreto; verifique P(0)+P(1)=1.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

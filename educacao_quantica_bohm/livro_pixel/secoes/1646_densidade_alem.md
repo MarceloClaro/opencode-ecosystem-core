@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>O produto tensorial faz a dimensão crescer como 2^n.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">密度矩阵</span> <em>mì dù jǔ zhèn</em> <span class="tom">· tons 4-4-3-4 · leitura mi-du-djyu-djen</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解密度矩阵。</span> <em>Shēn rù liǎo jiě mì dù jǔ zhèn.</em> — Aprofunde-se em “Matriz densidade”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> ρ = |ψ⟩⟨ψ| para estado puro; Tr(ρ)=1; ρ²=ρ.<br><strong>Conta:</strong> Para |+⟩: ρ = 1/2[[1,1],[1,1]].<br><strong>Resultado:</strong> Tr(ρ)=1; ρ²=ρ, então o estado é puro.<br><em>Limite:</em> Para estado misto, ρ²≠ρ e Tr(ρ²)<1.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">密度矩阵</span> <em>mì dù jǔ zhèn</em> <span class="tom">· tons 4-4-3-4 · leitura mi-du-djyu-djen</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解密度矩阵。</span> <em>Shēn rù liǎo jiě mì dù jǔ zhèn.</em> — Aprofunde-se em “Matriz densidade”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> ρ = |ψ⟩⟨ψ| para estado puro; Tr(ρ)=1; ρ²=ρ.<br><strong>Conta:</strong> Para |+⟩: ρ = 1/2[[1,1],[1,1]].<br><strong>Resultado:</strong> Tr(ρ)=1; ρ²=ρ, então o estado é puro.<br><em>Limite:</em> Para estado misto, ρ²≠ρ e Tr(ρ²)<1.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A matemática é representação; não é o fenômeno. Não confunda o mapa com o território.</p>
-<p class="prof"><strong>Para o professor:</strong> A fórmula deve vir depois da intuição; use exemplos numéricos pequenos.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

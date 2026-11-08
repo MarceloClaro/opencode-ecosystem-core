@@ -11,13 +11,11 @@
 <p><strong>Pergunta de pesquisa:</strong> O que é uma convenção de bits?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子开发包</span> <em>liàng zǐ kāi fā bāo</em> <span class="tom">· tons 4-3-1-1-1 · leitura liang-dzi-kai-fa-bau</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看量子开发包？</span> <em>Nǐ zěn me kàn liàng zǐ kāi fā bāo?</em> — O que você pensa de “Qiskit”?</span></p>
 <p><strong>Hipótese rival:</strong> O desenho do circuito não é o circuito físico; é uma representação.</p>
-<p>Desenhe um experimento que separe as duas hipóteses.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O desenho do circuito não é o circuito físico; é uma representação.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

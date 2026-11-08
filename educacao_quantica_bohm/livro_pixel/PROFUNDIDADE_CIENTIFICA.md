@@ -83,8 +83,10 @@ S = E(a0,b0) + E(a0,b1) + E(a1,b0) − E(a1,b1)
 ```
 
 A mecânica quântica permite `S = 2√2 ≈ 2,828` (limite de Tsirelson). O livro
-mede `S = 2,383` no Guoji08; o valor é compatível com a violação, mas uma
-execução não é prova estatística definitiva.
+registra `S = 2,383` no Guoji08 (hardware) e `S = 2,871094 ± 0,043506` no
+FAS-GPU (simulador GJQ). O primeiro desvia por ruído e calibração; o segundo
+fica perto de `2√2`. Nenhum dos dois é prova estatística definitiva, e o
+segundo é simulação, não hardware.
 
 ## 4. QFT
 

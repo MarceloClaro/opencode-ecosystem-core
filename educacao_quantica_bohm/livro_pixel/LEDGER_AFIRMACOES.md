@@ -12,6 +12,7 @@
 | **machine-checked** | provado no Lean 4 + Mathlib | `lake env lean QuantumTrails.lean` |
 | **calculated** | conta reproduzível à mão ou por script | fórmula + substituição + resultado |
 | **measured** | medido em hardware, com data, backend e task ID | JSON/CSV + task ID |
+| **measured (simulador)** | medido em simulador da plataforma, não em hardware | JSON + task ID + backend |
 | **bibliographic** | referência com DOI/URL verificada | Crossref/DataCite + ficha |
 | **interpretive** | interpretação filosófica, não teste empírico | argumento + referência |
 | **protocol** | plano de pesquisa, ainda não executado | protocolo + critérios |
@@ -42,6 +43,8 @@
 | Fidelidade proxy 78,81% | empírico/cálculo | `(418+389)/1024` | conta + JSON | calculated |
 | Baihua: 437 e 230 counts | empírico | `ghz4_baihua.json` | JSON + data | measured |
 | CHSH `S=2,3828` | empírico/cálculo | `chsh_guoji08.json` | conta + JSON | calculated |
+| CHSH GJQ no FAS-GPU `S=2,871094 ± 0,043506` | empírico/simulado | `docs/gjq-runtime/chsh-2026-11-08.json`; task IDs | conta + JSON | measured (simulador) |
+| Bell GJQ no FAS-GPU: `00`=507, `11`=517 | empírico/simulado | `docs/gjq-runtime/bell-2026-11-08.json`; task ID | JSON + conta | measured (simulador) |
 | VQC 4/4 | empírico/cálculo | `vqc_xor_guoji08.json` | JSON + conta | measured |
 | Phase damping igual ao baseline | modelo/empírico | `vqc_forte.json` | script + dados | measured/model |
 | Ruído benéfico não observado | empírico | 4 pontos, sem curva | dados + limite | measured |

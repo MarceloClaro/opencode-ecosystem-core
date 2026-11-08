@@ -11,13 +11,11 @@
 <p><strong>O erro comum:</strong> Achar que um bit pode ser 'meio 0, meio 1' no mundo clássico.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">比特</span> <em>bǐ tè</em> <span class="tom">· tons 3-4 · leitura bi-te</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">比特不是魔法。</span> <em>Bǐ tè bú shì mó fǎ.</em> — “Bit” não é magia.</span></p>
 <p><strong>Correção formal:</strong> Com 8 bits, há 256 combinações; uma letra ASCII cabe em 8 bits.</p>
-<p>Teste a correção com um exemplo numérico pequeno.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A analogia não explica probabilidade; o bit clássico é exclusivo.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

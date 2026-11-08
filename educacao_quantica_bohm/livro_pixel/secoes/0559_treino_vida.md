@@ -10,13 +10,11 @@
 
 <p>Um treino curto pode dar 100% e não servir para o mundo real.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">训练</span> <em>xùn liàn</em> <span class="tom">· tons 4-4 · leitura shyun-lien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到训练。</span> <em>Wǒ zài shēng huó zhōng kàn dào xùn liàn.</em> — Vejo “Treino” na vida.</span></p>
-<p><strong>Onde isso aparece:</strong> procure um exemplo na sua casa ou na escola.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Amostra pequena não generaliza; 4 pontos não são um artigo.</p>
-<p class="prof"><strong>Para o professor:</strong> Explique o teto e o tamanho da amostra.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

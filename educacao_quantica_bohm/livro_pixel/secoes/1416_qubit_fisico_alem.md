@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>T1 e T2 são tempos de relaxação e coerência; não são a mesma coisa.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">物理量子比特</span> <em>wù lǐ liàng zǐ bǐ tè</em> <span class="tom">· tons 4-3-4-3-3-4 · leitura u-li-liang-dzi-bi-te</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解物理量子比特。</span> <em>Shēn rù liǎo jiě wù lǐ liàng zǐ bǐ tè.</em> — Aprofunde-se em “Qubit físico”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Energia do fóton: E = hf; h = 6,626×10⁻³⁴ J·s.<br><strong>Conta:</strong> f = 4,20 GHz = 4,20×10⁹ Hz.<br><strong>Resultado:</strong> E = 6,626×10⁻³⁴ × 4,20×10⁹ ≈ 2,78×10⁻²⁴ J.<br><em>Limite:</em> A frequência é uma fotografia; a fidelidade depende de portas, leitura e ambiente.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">物理量子比特</span> <em>wù lǐ liàng zǐ bǐ tè</em> <span class="tom">· tons 4-3-4-3-3-4 · leitura u-li-liang-dzi-bi-te</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解物理量子比特。</span> <em>Shēn rù liǎo jiě wù lǐ liàng zǐ bǐ tè.</em> — Aprofunde-se em “Qubit físico”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Energia do fóton: E = hf; h = 6,626×10⁻³⁴ J·s.<br><strong>Conta:</strong> f = 4,20 GHz = 4,20×10⁹ Hz.<br><strong>Resultado:</strong> E = 6,626×10⁻³⁴ × 4,20×10⁹ ≈ 2,78×10⁻²⁴ J.<br><em>Limite:</em> A frequência é uma fotografia; a fidelidade depende de portas, leitura e ambiente.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Backends têm ruído, calibração e deriva. Fidelidade proxy não é prova de emaranhamento.</p>
-<p class="prof"><strong>Para o professor:</strong> T1, T2, erro de leitura e ruído de porta são coisas distintas; não os trate como um número único.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

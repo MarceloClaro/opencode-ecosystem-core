@@ -11,13 +11,11 @@
 <p><strong>Pergunta de pesquisa:</strong> O que a norma representa?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">向量</span> <em>xiàng liàng</em> <span class="tom">· tons 4-4 · leitura shiang-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看向量？</span> <em>Nǐ zěn me kàn xiàng liàng?</em> — O que você pensa de “Vetor”?</span></p>
 <p><strong>Hipótese rival:</strong> A equação não explica por que o mundo segue a equação.</p>
-<p>Desenhe um experimento que separe as duas hipóteses.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A equação não explica por que o mundo segue a equação.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

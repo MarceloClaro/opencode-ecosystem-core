@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>Bohm usou a imagem para pensar processo em vez de coisas.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">整体运动</span> <em>zhěng tǐ yùn dòng</em> <span class="tom">· tons 3-3-4-4 · leitura djeng-ti-yun-dong</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解整体运动。</span> <em>Shēn rù liǎo jiě zhěng tǐ yùn dòng.</em> — Aprofunde-se em “Holomovimento”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> O fluxo é dado por v = ∇S/m; a forma explícita emerge do movimento.<br><strong>Conta:</strong> Com S = ħ(kx − ωt), ∇S = ħk e v = ħk/m.<br><strong>Resultado:</strong> A velocidade é constante para uma onda plana; a forma fica implícita na fase.<br><em>Limite:</em> Holomovimento é metáfora; a conta operacional é a equação do guia.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">整体运动</span> <em>zhěng tǐ yùn dòng</em> <span class="tom">· tons 3-3-4-4 · leitura djeng-ti-yun-dong</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解整体运动。</span> <em>Shēn rù liǎo jiě zhěng tǐ yùn dòng.</em> — Aprofunde-se em “Holomovimento”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> O fluxo é dado por v = ∇S/m; a forma explícita emerge do movimento.<br><strong>Conta:</strong> Com S = ħ(kx − ωt), ∇S = ħk e v = ħk/m.<br><strong>Resultado:</strong> A velocidade é constante para uma onda plana; a forma fica implícita na fase.<br><em>Limite:</em> Holomovimento é metáfora; a conta operacional é a equação do guia.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Bohm usou a imagem para pensar processo em vez de coisas.</p>
-<p class="prof"><strong>Para o professor:</strong> Diga 'interpretação', não 'prova'. Compare com a leitura padrão e nomeie o preço: não localidade.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

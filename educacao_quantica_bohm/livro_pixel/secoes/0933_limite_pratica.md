@@ -10,7 +10,6 @@
 
 <p>Declarar limite não enfraquece o trabalho; fortalece a confiança.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">局限</span> <em>jú xiàn</em> <span class="tom">· tons 2-4 · leitura djyu-shien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习局限。</span> <em>Liàn xí jú xiàn.</em> — Pratique “Limite”.</span></p>
-<p>Faça em 5 minutos; anote o que esperava antes de começar.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -27,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Todo projeto é um recorte; declare o limite.</p>
-<p class="prof"><strong>Para o professor:</strong> Exija um limite específico.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

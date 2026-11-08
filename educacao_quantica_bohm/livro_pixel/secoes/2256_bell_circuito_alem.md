@@ -10,14 +10,12 @@
 
 <p>O circuito de Bell é o 'olá, mundo' do emaranhamento.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">贝尔电路</span> <em>bèi ěr diàn lù</em> <span class="tom">· tons 4-3-4-4 · leitura bei-er-dien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解贝尔电路。</span> <em>Shēn rù liǎo jiě bèi ěr diàn lù.</em> — Aprofunde-se em “Circuito de Bell”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> A imagem clássica não explica a violação de Bell.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> H no qubit 0 e CNOT(0,1).<br><strong>Conta:</strong> H|0⟩=(|0⟩+|1⟩)/√2; CNOT → (|00⟩+|11⟩)/√2.<br><strong>Resultado:</strong> As probabilidades são 0,5 para 00 e 0,5 para 11.<br><em>Limite:</em> O circuito ideal não tem ruído; o backend acrescenta erro de porta e leitura.</span></p>
+<p><strong>O que ainda não sabemos:</strong> A imagem clássica não explica a violação de Bell. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> H no qubit 0 e CNOT(0,1).<br><strong>Conta:</strong> H|0⟩=(|0⟩+|1⟩)/√2; CNOT → (|00⟩+|11⟩)/√2.<br><strong>Resultado:</strong> As probabilidades são 0,5 para 00 e 0,5 para 11.<br><em>Limite:</em> O circuito ideal não tem ruído; o backend acrescenta erro de porta e leitura.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A imagem clássica não explica a violação de Bell.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -11,13 +11,11 @@
 <p>Uma receita com etapas em ordem.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">电路</span> <em>diàn lù</em> <span class="tom">· tons 4-4 · leitura dien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像电路。</span> <em>Zhè xiàng diàn lù.</em> — Isto se parece com “Circuito”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> A ordem importa; matrizes não comutam em geral.</p>
-<p><strong>Teste rápido:</strong> desenhe a analogia e marque com um X o ponto em que ela deixa de explicar o conceito.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A profundidade do circuito mede o número de camadas.</p>
-<p class="prof"><strong>Para o professor:</strong> Confira a ordem dos qubits e a diferença entre circuito lógico e transpilado.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

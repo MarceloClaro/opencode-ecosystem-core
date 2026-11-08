@@ -11,13 +11,11 @@
 <p><strong>O erro comum:</strong> Desenhe as portas H e rotações controladas da QFT.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子傅里叶</span> <em>liàng zǐ fù lǐ yè</em> <span class="tom">· tons 4-3-4-3-4 · leitura liang-dzi-fu-li-ie</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">量子傅里叶不是魔法。</span> <em>Liàng zǐ fù lǐ yè bú shì mó fǎ.</em> — “Fourier quântico” não é magia.</span></p>
 <p><strong>Correção formal:</strong> O produto tensorial faz a dimensão crescer como 2^n.</p>
-<p>Teste a correção com um exemplo numérico pequeno.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A equação não explica por que o mundo segue a equação.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

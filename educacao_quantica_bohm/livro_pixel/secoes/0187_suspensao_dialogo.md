@@ -10,13 +10,11 @@
 
 <p><strong>Pergunta da roda:</strong> O que eu estou supondo agora?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">悬置</span> <em>xuán zhì</em> <span class="tom">· tons 2-4 · leitura shyuan-dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看悬置？</span> <em>Nǐ zěn me kàn xuán zhì?</em> — O que você pensa de “Suspensão de suposições”?</span></p>
-<p>Ouça sem interromper; anote uma ideia que mudou sua opinião.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Bohm é uma interpretação entre várias; não é consenso.</p>
-<p class="prof"><strong>Para o professor:</strong> Diga 'interpretação', não 'prova'.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

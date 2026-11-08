@@ -11,13 +11,11 @@
 <p>Um trilho que guia a atenção do leitor.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">叙事</span> <em>xù shì</em> <span class="tom">· tons 4-4 · leitura shyu-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像叙事。</span> <em>Zhè xiàng xù shì.</em> — Isto se parece com “Narrativa”.</span></p>
 <p><strong>Limite formal:</strong> O projeto não esgota o problema; escolhe um recorte.</p>
-<p>Construa um contraexemplo quantitativo e verifique se a analogia sobrevive.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O projeto não esgota o problema; escolhe um recorte.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

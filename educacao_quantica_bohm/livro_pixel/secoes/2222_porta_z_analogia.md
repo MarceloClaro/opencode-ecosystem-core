@@ -11,13 +11,11 @@
 <p>Um espelho que inverte a fase de um dos caminhos.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">相位门</span> <em>xiàng wèi mén</em> <span class="tom">· tons 4-4-2 · leitura shiang-uei-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像相位门。</span> <em>Zhè xiàng xiàng wèi mén.</em> — Isto se parece com “Porta Z”.</span></p>
 <p><strong>Limite formal:</strong> Z não muda a probabilidade; ela muda o que acontece depois.</p>
-<p>Construa um contraexemplo quantitativo e verifique se a analogia sobrevive.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Z não muda a probabilidade; ela muda o que acontece depois.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

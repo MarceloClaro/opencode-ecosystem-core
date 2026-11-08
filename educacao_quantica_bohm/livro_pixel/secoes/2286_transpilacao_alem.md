@@ -10,14 +10,12 @@
 
 <p>O mapeamento de qubits lógicos para físicos é parte do processo.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">转译</span> <em>zhuǎn yì</em> <span class="tom">· tons 3-4 · leitura djuan-i</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解转译。</span> <em>Shēn rù liǎo jiě zhuǎn yì.</em> — Aprofunde-se em “Transpilação”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> A tradução pode aumentar a profundidade e o ruído.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Transpilar reescreve o circuito nas portas nativas do backend.<br><strong>Conta:</strong> Um H pode virar U2; um CNOT pode virar uma sequência de portas nativas.<br><strong>Resultado:</strong> O unitário ideal é preservado; a profundidade e o erro mudam.<br><em>Limite:</em> Transpilação não é otimização gratuita: cada porta nativa tem erro.</span></p>
+<p><strong>O que ainda não sabemos:</strong> A tradução pode aumentar a profundidade e o ruído. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Transpilar reescreve o circuito nas portas nativas do backend.<br><strong>Conta:</strong> Um H pode virar U2; um CNOT pode virar uma sequência de portas nativas.<br><strong>Resultado:</strong> O unitário ideal é preservado; a profundidade e o erro mudam.<br><em>Limite:</em> Transpilação não é otimização gratuita: cada porta nativa tem erro.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A tradução pode aumentar a profundidade e o ruído.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

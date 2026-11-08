@@ -10,12 +10,6 @@
 
 <p>Crie um QNode, rode e desenhe o circuito.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子软件</span> <em>liàng zǐ ruǎn jiàn</em> <span class="tom">· tons 4-3-3-4 · leitura liang-dzi-juan-djien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习量子软件。</span> <em>Liàn xí liàng zǐ ruǎn jiàn.</em> — Pratique “PennyLane”.</span></p>
-<ol>
-<li>Faça a atividade sem pressa, em 5 minutos.</li>
-<li>Anote o que esperava antes de começar.</li>
-<li>Compare a previsão com o que observou.</li>
-</ol>
-<p><strong>O que observar:</strong> a diferença entre o que você esperava e o que aconteceu é o dado mais valioso.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -32,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>PennyLane integra com simuladores e vários provedores.</p>
-<p class="prof"><strong>Para o professor:</strong> Compare a mesma grandeza nas três bibliotecas; se divergir, verifique convenção antes de concluir erro.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

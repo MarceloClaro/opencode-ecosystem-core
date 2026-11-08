@@ -10,13 +10,11 @@
 
 <p><strong>O erro comum:</strong> Liste os autovalores de Z.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">特征值</span> <em>tè zhēng zhí</em> <span class="tom">· tons 4-1-2 · leitura te-djeng-dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">特征值不是魔法。</span> <em>Tè zhēng zhí bú shì mó fǎ.</em> — “Autovalor” não é magia.</span></p>
-<p><strong>Como não cair:</strong> escreva um contraexemplo e teste com um colega.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A matemática é representação; não é o fenômeno.</p>
-<p class="prof"><strong>Para o professor:</strong> Use exemplos pequenos antes da fórmula.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

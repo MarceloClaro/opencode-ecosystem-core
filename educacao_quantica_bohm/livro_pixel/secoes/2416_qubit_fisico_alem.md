@@ -10,14 +10,12 @@
 
 <p>T1 e T2 são tempos de relaxação e coerência; não são a mesma coisa.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">物理量子比特</span> <em>wù lǐ liàng zǐ bǐ tè</em> <span class="tom">· tons 4-3-4-3-3-4 · leitura u-li-liang-dzi-bi-te</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解物理量子比特。</span> <em>Shēn rù liǎo jiě wù lǐ liàng zǐ bǐ tè.</em> — Aprofunde-se em “Qubit físico”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> O resultado de hoje não garante o de amanhã; calibração muda.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Energia do fóton: E = hf; h = 6,626×10⁻³⁴ J·s.<br><strong>Conta:</strong> f = 4,20 GHz = 4,20×10⁹ Hz.<br><strong>Resultado:</strong> E = 6,626×10⁻³⁴ × 4,20×10⁹ ≈ 2,78×10⁻²⁴ J.<br><em>Limite:</em> A frequência é uma fotografia; a fidelidade depende de portas, leitura e ambiente.</span></p>
+<p><strong>O que ainda não sabemos:</strong> O resultado de hoje não garante o de amanhã; calibração muda. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Energia do fóton: E = hf; h = 6,626×10⁻³⁴ J·s.<br><strong>Conta:</strong> f = 4,20 GHz = 4,20×10⁹ Hz.<br><strong>Resultado:</strong> E = 6,626×10⁻³⁴ × 4,20×10⁹ ≈ 2,78×10⁻²⁴ J.<br><em>Limite:</em> A frequência é uma fotografia; a fidelidade depende de portas, leitura e ambiente.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O resultado de hoje não garante o de amanhã; calibração muda.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

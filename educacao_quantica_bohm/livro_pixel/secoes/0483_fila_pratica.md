@@ -10,7 +10,6 @@
 
 <p>A fila não é neutra; prioridades e recursos afetam quem espera.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">任务队列</span> <em>rèn wù duì liè</em> <span class="tom">· tons 4-4-4-4 · leitura jen-u-duei-lie</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习任务队列。</span> <em>Liàn xí rèn wù duì liè.</em> — Pratique “Fila de jobs”.</span></p>
-<p>Faça em 5 minutos; anote o que esperava antes de começar.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -27,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Backend tem ruído; um número não prova o estado.</p>
-<p class="prof"><strong>Para o professor:</strong> Ruído, leitura e calibração são coisas distintas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

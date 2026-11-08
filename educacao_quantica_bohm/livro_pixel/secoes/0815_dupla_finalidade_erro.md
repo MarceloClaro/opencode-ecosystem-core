@@ -10,13 +10,11 @@
 
 <p><strong>O erro comum:</strong> Liste um uso benéfico e um risco da mesma capacidade.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">双重用途</span> <em>shuāng chóng yòng tú</em> <span class="tom">· tons 1-2-4-2 · leitura shuang-tchong-iong-tu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">双重用途不是魔法。</span> <em>Shuāng chóng yòng tú bú shì mó fǎ.</em> — “Dupla finalidade” não é magia.</span></p>
-<p><strong>Como não cair:</strong> escreva um contraexemplo e teste com um colega.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Ética envolve valores e poder; não há resposta automática.</p>
-<p class="prof"><strong>Para o professor:</strong> Peça evidência, afetados e alternativas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

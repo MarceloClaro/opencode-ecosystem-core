@@ -10,7 +10,6 @@
 
 <p>Portfólio não é álbum de melhores momentos; inclui erros e versões.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">作品集</span> <em>zuò pǐn jí</em> <span class="tom">· tons 4-3-2 · leitura dzuo-pin-dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习作品集。</span> <em>Liàn xí zuò pǐn jí.</em> — Pratique “Portfólio”.</span></p>
-<p>Faça em 5 minutos; anote o que esperava antes de começar.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -27,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Todo projeto é um recorte; declare o limite.</p>
-<p class="prof"><strong>Para o professor:</strong> Exija um limite específico.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -10,13 +10,11 @@
 
 <p><strong>O erro comum:</strong> Reescreva um resultado em três frases: fato, interpretação e limite.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">叙事</span> <em>xù shì</em> <span class="tom">· tons 4-4 · leitura shyu-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">叙事不是魔法。</span> <em>Xù shì bú shì mó fǎ.</em> — “Narrativa” não é magia.</span></p>
-<p><strong>Como não cair:</strong> escreva um contraexemplo e teste com um colega.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Todo projeto é um recorte; declare o limite.</p>
-<p class="prof"><strong>Para o professor:</strong> Exija um limite específico.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

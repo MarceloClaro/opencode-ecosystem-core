@@ -10,14 +10,11 @@
 
 <p>Previsão de chuva, filas e exames médicos usam a mesma lógica.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">概率</span> <em>gài lǜ</em> <span class="tom">· tons 4-4 · leitura gai-lyu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到概率。</span> <em>Wǒ zài shēng huó zhōng kàn dào gài lǜ.</em> — Vejo “Probabilidade” na vida.</span></p>
-<p><strong>Onde isso aparece:</strong> procure um exemplo na sua casa, na escola ou no bairro. Descreva em duas frases.</p>
-<p><strong>O que muda no seu jeito de olhar?</strong> A ideia de probabilidade pode mudar uma decisão cotidiana?</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A lei dos grandes números explica por que a frequência se estabiliza.</p>
-<p class="prof"><strong>Para o professor:</strong> Use a notação de ket apenas depois do concreto; verifique P(0)+P(1)=1.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

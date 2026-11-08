@@ -11,13 +11,11 @@
 <p>Um galho que se divide e a folha segue um ramo.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">有效坍缩</span> <em>yǒu xiào tān suō</em> <span class="tom">· tons 3-4-1-1 · leitura iu-shiau-tan-suo</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像有效坍缩。</span> <em>Zhè xiàng yǒu xiào tān suō.</em> — Isto se parece com “Colapso efetivo”.</span></p>
 <p><strong>Limite formal:</strong> A imagem do galho é clássica; a função de onda é matemática.</p>
-<p>Construa um contraexemplo quantitativo e verifique se a analogia sobrevive.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A imagem do galho é clássica; a função de onda é matemática.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

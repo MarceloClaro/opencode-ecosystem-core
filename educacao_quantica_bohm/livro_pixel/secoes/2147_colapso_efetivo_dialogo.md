@@ -11,13 +11,11 @@
 <p><strong>Pergunta de pesquisa:</strong> O que acontece quando medimos?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">有效坍缩</span> <em>yǒu xiào tān suō</em> <span class="tom">· tons 3-4-1-1 · leitura iu-shiau-tan-suo</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看有效坍缩？</span> <em>Nǐ zěn me kàn yǒu xiào tān suō?</em> — O que você pensa de “Colapso efetivo”?</span></p>
 <p><strong>Hipótese rival:</strong> A imagem do galho é clássica; a função de onda é matemática.</p>
-<p>Desenhe um experimento que separe as duas hipóteses.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A imagem do galho é clássica; a função de onda é matemática.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

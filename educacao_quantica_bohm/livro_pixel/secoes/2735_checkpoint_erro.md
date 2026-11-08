@@ -11,13 +11,11 @@
 <p><strong>O erro comum:</strong> Rode um assert e interprete o resultado.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">检查点</span> <em>jiǎn chá diǎn</em> <span class="tom">· tons 3-2-3 · leitura djien-tcha-dien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">检查点不是魔法。</span> <em>Jiǎn chá diǎn bú shì mó fǎ.</em> — “Checkpoint” não é magia.</span></p>
 <p><strong>Correção formal:</strong> A prática distribuída e a recuperação ativa têm apoio em pesquisa.</p>
-<p>Teste a correção com um exemplo numérico pequeno.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A técnica não funciona igual para todos os estudantes.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

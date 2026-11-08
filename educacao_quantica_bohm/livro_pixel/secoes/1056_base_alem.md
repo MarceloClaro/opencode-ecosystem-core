@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>BB84 usa duas bases incompatíveis para detectar espionagem.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">基</span> <em>jī</em> <span class="tom">· tons 1 · leitura dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解基。</span> <em>Shēn rù liǎo jiě jī.</em> — Aprofunde-se em “Base”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> |+⟩ = (|0⟩+|1⟩)/√2. Na base Z, P(0) = 1/2; na base X, P(+) = 1.<br><strong>Conta:</strong> Medir |+⟩ em Z: 0,5. Medir |+⟩ em X: 1,0.<br><strong>Resultado:</strong> A mesma preparação dá respostas diferentes porque a pergunta mudou.<br><em>Limite:</em> Base não é um ângulo da mesma foto; é uma escolha experimental com consequência física.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">基</span> <em>jī</em> <span class="tom">· tons 1 · leitura dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解基。</span> <em>Shēn rù liǎo jiě jī.</em> — Aprofunde-se em “Base”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> |+⟩ = (|0⟩+|1⟩)/√2. Na base Z, P(0) = 1/2; na base X, P(+) = 1.<br><strong>Conta:</strong> Medir |+⟩ em Z: 0,5. Medir |+⟩ em X: 1,0.<br><strong>Resultado:</strong> A mesma preparação dá respostas diferentes porque a pergunta mudou.<br><em>Limite:</em> Base não é um ângulo da mesma foto; é uma escolha experimental com consequência física.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>BB84 usa duas bases incompatíveis para detectar espionagem.</p>
-<p class="prof"><strong>Para o professor:</strong> Use a notação de ket apenas depois do concreto; verifique P(0)+P(1)=1.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -10,13 +10,11 @@
 
 <p><strong>Tarefa:</strong> Uma hipótese conveniente pode ser protegida de testes?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">假设</span> <em>jiǎ shè</em> <span class="tom">· tons 3-4 · leitura djia-she</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了假设。</span> <em>Wǒ xué huì le jiǎ shè.</em> — Eu aprendi “Hipótese”.</span></p>
-<p><strong>Replicação:</strong> outra seed, outro backend, a mesma pergunta.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O projeto não esgota o problema; escolhe um recorte.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

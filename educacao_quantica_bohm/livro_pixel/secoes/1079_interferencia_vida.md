@@ -10,14 +10,11 @@
 
 <p>Cancelamento de ruído em fones usa a mesma ideia.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">干涉</span> <em>gān shè</em> <span class="tom">· tons 1-4 · leitura gan-she</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到干涉。</span> <em>Wǒ zài shēng huó zhōng kàn dào gān shè.</em> — Vejo “Interferência” na vida.</span></p>
-<p><strong>Onde isso aparece:</strong> procure um exemplo na sua casa, na escola ou no bairro. Descreva em duas frases.</p>
-<p><strong>O que muda no seu jeito de olhar?</strong> A ideia de interferência pode mudar uma decisão cotidiana?</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O experimento de dupla fenda é a demonstração clássica.</p>
-<p class="prof"><strong>Para o professor:</strong> Use a notação de ket apenas depois do concreto; verifique P(0)+P(1)=1.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

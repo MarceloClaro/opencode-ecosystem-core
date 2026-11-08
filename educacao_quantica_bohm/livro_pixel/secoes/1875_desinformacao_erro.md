@@ -10,14 +10,11 @@
 
 <p><strong>O erro comum:</strong> Aplique os quatro filtros a uma manchete.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">虚假信息</span> <em>xū jiǎ xìn xī</em> <span class="tom">· tons 1-3-4-1 · leitura shyu-djia-shin-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">虚假信息不是魔法。</span> <em>Xū jiǎ xìn xī bú shì mó fǎ.</em> — “Desinformação” não é magia.</span></p>
-<p><strong>Por que acontece:</strong> o cérebro procura uma imagem simples e apaga a parte matemática que não se encaixa.</p>
-<p><strong>Como testar:</strong> escreva um contraexemplo em uma frase e veja se ele derruba sua explicação.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Ética envolve valores e poder. Não há resposta automática; há deliberação e consequências.</p>
-<p class="prof"><strong>Para o professor:</strong> Não transforme ética em opinião pessoal: peça evidência, afetados e alternativas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

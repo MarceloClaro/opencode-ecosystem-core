@@ -10,14 +10,11 @@
 
 <p><strong>O erro comum:</strong> Liste três evidências para uma afirmação e uma contraevidência.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">证据</span> <em>zhèng jù</em> <span class="tom">· tons 4-4 · leitura djeng-djyu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">证据不是魔法。</span> <em>Zhèng jù bú shì mó fǎ.</em> — “Evidência” não é magia.</span></p>
-<p><strong>Por que acontece:</strong> o cérebro procura uma imagem simples e apaga a parte matemática que não se encaixa.</p>
-<p><strong>Como testar:</strong> escreva um contraexemplo em uma frase e veja se ele derruba sua explicação.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Todo projeto é um recorte. Declare limite, evidência e o que ficou fora.</p>
-<p class="prof"><strong>Para o professor:</strong> Exija um limite específico; 'tem limitações' não é suficiente.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

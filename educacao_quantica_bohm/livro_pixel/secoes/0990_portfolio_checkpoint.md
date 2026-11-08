@@ -10,13 +10,11 @@
 
 <p><strong>Tarefa:</strong> Quem pode acessar o portfólio e por quanto tempo?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">作品集</span> <em>zuò pǐn jí</em> <span class="tom">· tons 4-3-2 · leitura dzuo-pin-dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了作品集。</span> <em>Wǒ xué huì le zuò pǐn jí.</em> — Eu aprendi “Portfólio”.</span></p>
-<p><strong>Diário:</strong> o que entendi? onde travei? o que vou testar amanhã?</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Todo projeto é um recorte; declare o limite.</p>
-<p class="prof"><strong>Para o professor:</strong> Exija um limite específico.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

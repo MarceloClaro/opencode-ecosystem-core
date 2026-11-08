@@ -10,13 +10,11 @@
 
 <p><strong>O erro comum:</strong> Desenhe RY-CNOT-RY para dois qubits.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">拟设</span> <em>nǐ shè</em> <span class="tom">· tons 3-4 · leitura ni-she</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">拟设不是魔法。</span> <em>Nǐ shè bú shì mó fǎ.</em> — “Ansatz” não é magia.</span></p>
-<p><strong>Como não cair:</strong> escreva um contraexemplo e teste com um colega.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Amostra pequena não generaliza; 4 pontos não são um artigo.</p>
-<p class="prof"><strong>Para o professor:</strong> Explique o teto e o tamanho da amostra.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

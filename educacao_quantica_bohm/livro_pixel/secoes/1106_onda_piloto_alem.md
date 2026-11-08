@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>Bohm publicou a teoria em 1952; ela reproduz as previsões não relativísticas.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">导波</span> <em>dǎo bō</em> <span class="tom">· tons 3-1 · leitura dau-bo</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解导波。</span> <em>Shēn rù liǎo jiě dǎo bō.</em> — Aprofunde-se em “Onda piloto”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> ψ = R e^{iS/ħ}; a velocidade guiada é v = ∇S/m.<br><strong>Conta:</strong> Para uma onda plana, S = ħkx; então ∇S = ħk e v = ħk/m.<br><strong>Resultado:</strong> v = ħk/m; a fase codifica o momento.<br><em>Limite:</em> A onda piloto é uma interpretação; a previsão coincide com a mecânica quântica usual.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">导波</span> <em>dǎo bō</em> <span class="tom">· tons 3-1 · leitura dau-bo</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解导波。</span> <em>Shēn rù liǎo jiě dǎo bō.</em> — Aprofunde-se em “Onda piloto”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> ψ = R e^{iS/ħ}; a velocidade guiada é v = ∇S/m.<br><strong>Conta:</strong> Para uma onda plana, S = ħkx; então ∇S = ħk e v = ħk/m.<br><strong>Resultado:</strong> v = ħk/m; a fase codifica o momento.<br><em>Limite:</em> A onda piloto é uma interpretação; a previsão coincide com a mecânica quântica usual.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Bohm publicou a teoria em 1952; ela reproduz as previsões não relativísticas.</p>
-<p class="prof"><strong>Para o professor:</strong> Diga 'interpretação', não 'prova'. Compare com a leitura padrão e nomeie o preço: não localidade.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>A regra de Born transforma amplitude em probabilidade.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">振幅</span> <em>zhèn fú</em> <span class="tom">· tons 4-2 · leitura djen-fu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解振幅。</span> <em>Shēn rù liǎo jiě zhèn fú.</em> — Aprofunde-se em “Amplitude”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> A probabilidade é o módulo ao quadrado da amplitude: P = |α|².<br><strong>Conta:</strong> α = 0,6 → P = 0,6² = 0,36. α = −0,6 → P = (−0,6)² = 0,36.<br><strong>Resultado:</strong> O sinal muda a fase, não a probabilidade isolada.<br><em>Limite:</em> Duas amplitudes iguais em módulo e opostas em fase podem cancelar na interferência.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">振幅</span> <em>zhèn fú</em> <span class="tom">· tons 4-2 · leitura djen-fu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解振幅。</span> <em>Shēn rù liǎo jiě zhèn fú.</em> — Aprofunde-se em “Amplitude”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> A probabilidade é o módulo ao quadrado da amplitude: P = |α|².<br><strong>Conta:</strong> α = 0,6 → P = 0,6² = 0,36. α = −0,6 → P = (−0,6)² = 0,36.<br><strong>Resultado:</strong> O sinal muda a fase, não a probabilidade isolada.<br><em>Limite:</em> Duas amplitudes iguais em módulo e opostas em fase podem cancelar na interferência.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A regra de Born transforma amplitude em probabilidade.</p>
-<p class="prof"><strong>Para o professor:</strong> Use a notação de ket apenas depois do concreto; verifique P(0)+P(1)=1.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -11,13 +11,11 @@
 <p><strong>Pergunta de pesquisa:</strong> A descrição preserva a informação?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">无障碍</span> <em>wú zhàng ài</em> <span class="tom">· tons 2-4-4 · leitura u-djang-ai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看无障碍？</span> <em>Nǐ zěn me kàn wú zhàng ài?</em> — O que você pensa de “Acessibilidade”?</span></p>
 <p><strong>Hipótese rival:</strong> A técnica não funciona igual para todos os estudantes.</p>
-<p>Desenhe um experimento que separe as duas hipóteses.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A técnica não funciona igual para todos os estudantes.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

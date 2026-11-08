@@ -11,13 +11,11 @@
 <p>Dois pêndulos que parecem conversar à distância.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">非定域性</span> <em>fēi dìng yù xìng</em> <span class="tom">· tons 1-4-4-4 · leitura fei-ding-yu-shing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像非定域性。</span> <em>Zhè xiàng fēi dìng yù xìng.</em> — Isto se parece com “Não localidade”.</span></p>
 <p><strong>Limite formal:</strong> A não localidade não permite enviar sinais controláveis.</p>
-<p>Construa um contraexemplo quantitativo e verifique se a analogia sobrevive.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A não localidade não permite enviar sinais controláveis.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

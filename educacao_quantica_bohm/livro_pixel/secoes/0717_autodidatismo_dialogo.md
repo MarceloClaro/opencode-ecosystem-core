@@ -10,13 +10,11 @@
 
 <p><strong>Pergunta da roda:</strong> Como saber se eu aprendi?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">自学</span> <em>zì xué</em> <span class="tom">· tons 4-2 · leitura dzi-shyue</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看自学？</span> <em>Nǐ zěn me kàn zì xué?</em> — O que você pensa de “Autodidatismo”?</span></p>
-<p>Ouça sem interromper; anote uma ideia que mudou sua opinião.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Pedagogia é contextual; não há método garantido.</p>
-<p class="prof"><strong>Para o professor:</strong> Nanoaula é tempo e evidência, não fragmento.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -10,14 +10,11 @@
 
 <p><strong>O erro comum:</strong> Reescreva uma atividade para 6º ano sem perder a ideia central.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">适应</span> <em>shì yìng</em> <span class="tom">· tons 4-4 · leitura shi-ing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">适应不是魔法。</span> <em>Shì yìng bú shì mó fǎ.</em> — “Adaptação” não é magia.</span></p>
-<p><strong>Por que acontece:</strong> o cérebro procura uma imagem simples e apaga a parte matemática que não se encaixa.</p>
-<p><strong>Como testar:</strong> escreva um contraexemplo em uma frase e veja se ele derruba sua explicação.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Pedagogia é contextual. Não há método com efeito garantido para toda turma.</p>
-<p class="prof"><strong>Para o professor:</strong> Nanoaula é unidade de tempo e evidência, não fragmento sem síntese.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

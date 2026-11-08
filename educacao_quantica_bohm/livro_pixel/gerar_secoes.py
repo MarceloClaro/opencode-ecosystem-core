@@ -835,6 +835,48 @@ def _rigor_prof(nivel: int, c: dict, parte: int) -> tuple[str, str, str]:
     return c["alem"] or RIGOR[parte], PROF[parte], "Para o professor"
 
 
+PODA_REPETICAO = (
+    r"\n<p><strong>Teste rápido:</strong>.*?</p>",
+    r"\n<ol>\n<li>Faça a atividade sem pressa.*?</ol>\n<p><strong>O que observar:</strong> a diferença.*?</p>",
+    r"\n<p><strong>Por que acontece:</strong>.*?</p>",
+    r"\n<p><strong>Como testar:</strong>.*?</p>",
+    r"\n<p><strong>Conexão científica:</strong>.*?</p>",
+    r"\n<p><strong>Para ir além:</strong>.*?</p>",
+    r"\n<p><strong>Roteiro de 9 minutos:</strong>.*?</p>",
+    r"\n<p><strong>Regra:</strong> não corrija.*?</p>",
+    r"\n<p><strong>Registre:</strong> uma suposição.*?</p>",
+    r"\n<p><strong>Quem ganha\? Quem perde\?</strong>.*?</p>",
+    r"\n<p><strong>O que a escola pode fazer\?</strong>.*?</p>",
+    r"\n<p><strong>Onde isso aparece:</strong>.*?</p>",
+    r"\n<p><strong>O que muda no seu jeito de olhar\?</strong>.*?</p>",
+    r"\n<p><strong>Diário de bordo:</strong>.*?</p>",
+    r"\n<p><strong>Próximo passo:</strong>.*?</p>",
+    r"\n<p><strong>Desenhe a imagem e marque.*?</p>",
+    r"\n<p>Faça em 5 minutos;.*?</p>",
+    r"\n<p><strong>O que isso mostra:</strong>.*?</p>",
+    r"\n<p><strong>Como não cair:</strong>.*?</p>",
+    r"\n<p>Guarde uma pergunta.*?</p>",
+    r"\n<p>Ouça sem interromper.*?</p>",
+    r"\n<p><strong>Diário:</strong>.*?</p>",
+    r"\n<p>Construa um contraexemplo.*?</p>",
+    r"\n<p><strong>Protocolo:</strong> varie.*?</p>",
+    r"\n<p>Teste a correção.*?</p>",
+    r"\n<p>Procure um artigo.*?</p>",
+    r"\n<p>Desenhe um experimento.*?</p>",
+    r"\n<p>Mapeie os afetados.*?</p>",
+    r"\n<p><strong>Onde medir:</strong>.*?</p>",
+    r"\n<p><strong>Replicação:</strong>.*?</p>",
+    r"\n<p class=\"prof\">.*?</p>",
+)
+
+
+def podar_repeticao(texto: str) -> str:
+    """Remove micropráticas e notas genéricas repetidas em todas as laudas."""
+    for pattern in PODA_REPETICAO:
+        texto = re.sub(pattern, "", texto, flags=re.S)
+    return texto
+
+
 def gerar(nivel: int = 0) -> tuple[list[dict], list[dict]]:
     mapa = []
     laudas = []
@@ -853,13 +895,14 @@ def gerar(nivel: int = 0) -> tuple[list[dict], list[dict]]:
                     corpo = inserir_ponte(corpo_lente_n2(c, lente_id), c, lente_id)
                 else:
                     corpo = corpo_lente(c, lente_id)
+                corpo = podar_repeticao(corpo)
                 corpo = inserir_nota_calculo(corpo, c, nivel, lente_id)
                 zh_conceito = CHINES[c["id"]][0]
                 xp = "".join(
                     f'<span class="{"on" if j == li else ""}"></span>'
                     for j in range(10)
                 )
-                rigor, prof, rotulo_prof = _rigor_prof(nivel, c, parte)
+                rigor, _, _ = _rigor_prof(nivel, c, parte)
                 gab_id = (parte - 1) * 10 + ci
                 ico_conceito = (f'<img class="ico-conceito" '
                                 f'src="sprites_conceitos/C{gab_id:03d}.png" alt="">')
@@ -878,7 +921,6 @@ def gerar(nivel: int = 0) -> tuple[list[dict], list[dict]]:
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>{esc(rigor)}</p>
-<p class="prof"><strong>{rotulo_prof}:</strong> {esc(prof)}</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

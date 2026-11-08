@@ -11,13 +11,11 @@
 <p>Abrir uma caixa que estava fechada: o conteúdo passa a ser conhecido.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">测量</span> <em>cè liáng</em> <span class="tom">· tons 4-2 · leitura tse-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像测量。</span> <em>Zhè xiàng cè liáng.</em> — Isto se parece com “Medição”.</span></p>
 <p><strong>Limite formal:</strong> A caixa pode já ter um valor; o qubit não é assim.</p>
-<p>Construa um contraexemplo quantitativo e verifique se a analogia sobrevive.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A caixa pode já ter um valor; o qubit não é assim.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

@@ -11,13 +11,11 @@
 <p><strong>O erro comum:</strong> Achar que suspender é concordar com tudo.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">悬置</span> <em>xuán zhì</em> <span class="tom">· tons 2-4 · leitura shyuan-dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">悬置不是魔法。</span> <em>Xuán zhì bú shì mó fǎ.</em> — “Suspensão de suposições” não é magia.</span></p>
 <p><strong>Correção formal:</strong> A suspensão é uma prática, não uma prova lógica.</p>
-<p>Teste a correção com um exemplo numérico pequeno.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Suspender não é abandonar; é ganhar distância para observar.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

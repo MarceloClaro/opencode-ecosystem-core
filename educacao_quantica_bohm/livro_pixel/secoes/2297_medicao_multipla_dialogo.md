@@ -11,13 +11,11 @@
 <p><strong>Pergunta de pesquisa:</strong> Quantas medições são suficientes?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">多次测量</span> <em>duō cì cè liáng</em> <span class="tom">· tons 1-4-4-2 · leitura duo-tsi-tse-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看多次测量？</span> <em>Nǐ zěn me kàn duō cì cè liáng?</em> — O que você pensa de “Medição múltipla”?</span></p>
 <p><strong>Hipótese rival:</strong> A distribuição não mostra o estado completo; mostra uma amostra.</p>
-<p>Desenhe um experimento que separe as duas hipóteses.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A distribuição não mostra o estado completo; mostra uma amostra.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

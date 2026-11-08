@@ -10,13 +10,11 @@
 
 <p>Quem participou da pergunta e quem ficou fora?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">叙事</span> <em>xù shì</em> <span class="tom">· tons 4-4 · leitura shyu-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于叙事？</span> <em>Shéi shòu yì yú xù shì?</em> — Quem se beneficia de “Narrativa”?</span></p>
-<p><strong>Quem ganha? Quem perde?</strong> Cite um grupo para cada lado.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Todo projeto é um recorte; declare o limite.</p>
-<p class="prof"><strong>Para o professor:</strong> Exija um limite específico.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

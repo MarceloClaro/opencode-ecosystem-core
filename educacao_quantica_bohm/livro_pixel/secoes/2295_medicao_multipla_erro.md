@@ -11,13 +11,11 @@
 <p><strong>O erro comum:</strong> Achar que uma única medição revela todas as amplitudes.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">多次测量</span> <em>duō cì cè liáng</em> <span class="tom">· tons 1-4-4-2 · leitura duo-tsi-tse-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">多次测量不是魔法。</span> <em>Duō cì cè liáng bú shì mó fǎ.</em> — “Medição múltipla” não é magia.</span></p>
 <p><strong>Correção formal:</strong> A amostragem tem erro estatístico que diminui com o número de tiros.</p>
-<p>Teste a correção com um exemplo numérico pequeno.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A distribuição não mostra o estado completo; mostra uma amostra.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

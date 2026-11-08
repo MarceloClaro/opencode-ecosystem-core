@@ -10,14 +10,12 @@
 
 <p>Um bom projeto declara o que não prova.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">复现</span> <em>fù xiàn</em> <span class="tom">· tons 4-4 · leitura fu-shien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解复现。</span> <em>Shēn rù liǎo jiě fù xiàn.</em> — Aprofunde-se em “Replicação”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> O projeto não esgota o problema; escolhe um recorte.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Replicar = mesmo código, mesmo backend, mesma seed, nova execução.<br><strong>Conta:</strong> Duas execuções com 1024 tiros podem diferir em ≈ ±3%.<br><strong>Resultado:</strong> A comparação precisa considerar a incerteza.<br><em>Limite:</em> Replicação não é garantia de generalização.</span></p>
+<p><strong>O que ainda não sabemos:</strong> O projeto não esgota o problema; escolhe um recorte. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Replicar = mesmo código, mesmo backend, mesma seed, nova execução.<br><strong>Conta:</strong> Duas execuções com 1024 tiros podem diferir em ≈ ±3%.<br><strong>Resultado:</strong> A comparação precisa considerar a incerteza.<br><em>Limite:</em> Replicação não é garantia de generalização.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O projeto não esgota o problema; escolhe um recorte.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

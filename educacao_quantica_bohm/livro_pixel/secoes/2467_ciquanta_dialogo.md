@@ -11,13 +11,11 @@
 <p><strong>Pergunta de pesquisa:</strong> O que é público no CIQuanta?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子中心</span> <em>liàng zǐ zhōng xīn</em> <span class="tom">· tons 4-3-1-1 · leitura liang-dzi-djong-shin</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看量子中心？</span> <em>Nǐ zěn me kàn liàng zǐ zhōng xīn?</em> — O que você pensa de “CIQuanta”?</span></p>
 <p><strong>Hipótese rival:</strong> O resultado de hoje não garante o de amanhã; calibração muda.</p>
-<p>Desenhe um experimento que separe as duas hipóteses.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O resultado de hoje não garante o de amanhã; calibração muda.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

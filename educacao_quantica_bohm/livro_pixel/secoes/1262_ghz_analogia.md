@@ -11,13 +11,11 @@
 <p>Um trio que combinou aparecer sempre junto.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">多体纠缠态</span> <em>duō tǐ jiū chán tài</em> <span class="tom">· tons 1-3-1-2-4 · leitura duo-ti-djiu-tchan-tai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像多体纠缠态。</span> <em>Zhè xiàng duō tǐ jiū chán tài.</em> — Isto se parece com “GHZ”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> Em hardware real, o GHZ perde coerência rapidamente com o número de qubits.</p>
-<p><strong>Teste rápido:</strong> desenhe a analogia e marque com um X o ponto em que ela deixa de explicar o conceito.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O GHZ é usado em metrologia e testes de não localidade.</p>
-<p class="prof"><strong>Para o professor:</strong> Confira a ordem dos qubits e a diferença entre circuito lógico e transpilado.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

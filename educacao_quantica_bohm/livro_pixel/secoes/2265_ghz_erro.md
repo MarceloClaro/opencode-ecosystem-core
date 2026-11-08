@@ -11,13 +11,11 @@
 <p><strong>O erro comum:</strong> Achar que GHZ é só 'um Bell maior' sem mudança de escala.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">多体纠缠态</span> <em>duō tǐ jiū chán tài</em> <span class="tom">· tons 1-3-1-2-4 · leitura duo-ti-djiu-tchan-tai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">多体纠缠态不是魔法。</span> <em>Duō tǐ jiū chán tài bú shì mó fǎ.</em> — “GHZ” não é magia.</span></p>
 <p><strong>Correção formal:</strong> O GHZ é usado em metrologia e testes de não localidade.</p>
-<p>Teste a correção com um exemplo numérico pequeno.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Em hardware real, o GHZ perde coerência rapidamente com o número de qubits.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

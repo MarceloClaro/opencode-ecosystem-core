@@ -11,13 +11,11 @@
 <p><strong>O erro comum:</strong> Desenhe uma curva de acurácia versus ruído com um ponto ótimo.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">有益噪声</span> <em>yǒu yì zào shēng</em> <span class="tom">· tons 3-4-4-1 · leitura iu-i-dzau-sheng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">有益噪声不是魔法。</span> <em>Yǒu yì zào shēng bú shì mó fǎ.</em> — “Ruído benéfico?” não é magia.</span></p>
 <p><strong>Correção formal:</strong> A fidelidade proxy mede a população ideal, não a pureza do estado.</p>
-<p>Teste a correção com um exemplo numérico pequeno.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O teste é pequeno; não generaliza para outros dados ou modelos.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

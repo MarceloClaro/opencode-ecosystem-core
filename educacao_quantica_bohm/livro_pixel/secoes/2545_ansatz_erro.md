@@ -11,13 +11,11 @@
 <p><strong>O erro comum:</strong> Desenhe RY-CNOT-RY para dois qubits.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">拟设</span> <em>nǐ shè</em> <span class="tom">· tons 3-4 · leitura ni-she</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">拟设不是魔法。</span> <em>Nǐ shè bú shì mó fǎ.</em> — “Ansatz” não é magia.</span></p>
 <p><strong>Correção formal:</strong> A fidelidade proxy mede a população ideal, não a pureza do estado.</p>
-<p>Teste a correção com um exemplo numérico pequeno.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O teste é pequeno; não generaliza para outros dados ou modelos.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

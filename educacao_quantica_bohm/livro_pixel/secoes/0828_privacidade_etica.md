@@ -10,13 +10,11 @@
 
 <p>Quem ganha e quem perde com esta decisão?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">隐私</span> <em>yǐn sī</em> <span class="tom">· tons 3-1 · leitura in-si</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于隐私？</span> <em>Shéi shòu yì yú yǐn sī?</em> — Quem se beneficia de “Privacidade”?</span></p>
-<p><strong>Quem ganha? Quem perde?</strong> Cite um grupo para cada lado.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Ética envolve valores e poder; não há resposta automática.</p>
-<p class="prof"><strong>Para o professor:</strong> Peça evidência, afetados e alternativas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

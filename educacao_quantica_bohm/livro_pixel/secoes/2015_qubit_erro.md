@@ -11,13 +11,11 @@
 <p><strong>O erro comum:</strong> Dizer que o qubit 'é 0 e 1 ao mesmo tempo' sem explicar a medição.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子比特</span> <em>liàng zǐ bǐ tè</em> <span class="tom">· tons 4-3-3-4 · leitura liang-dzi-bi-te</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">量子比特不是魔法。</span> <em>Liàng zǐ bǐ tè bú shì mó fǎ.</em> — “Qubit” não é magia.</span></p>
 <p><strong>Correção formal:</strong> A esfera de Bloch representa um qubit; o interior não é acessível.</p>
-<p>Teste a correção com um exemplo numérico pequeno.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A moeda tem lado definido; o qubit não tem valor escondido.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

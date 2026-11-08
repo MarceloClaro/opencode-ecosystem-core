@@ -10,14 +10,12 @@
 
 <p>Um bom projeto declara o que não prova.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">下一步</span> <em>xià yí bù</em> <span class="tom">· tons 4-2-4 · leitura shia-i-bu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解下一步。</span> <em>Shēn rù liǎo jiě xià yí bù.</em> — Aprofunde-se em “Próximo passo”.</span></p>
-<p><strong>O que ainda não sabemos:</strong> O projeto não esgota o problema; escolhe um recorte.</p>
-<p>Procure um artigo que tente responder e anote o desenho experimental. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Compromisso: 1 pergunta, 1 experimento, 1 data.<br><strong>Conta:</strong> Se a data é em 7 dias, o experimento precisa caber em 7 dias.<br><strong>Resultado:</strong> O próximo passo é pequeno, verificável e datado.<br><em>Limite:</em> O próximo passo é seu; o livro não decide por você.</span></p>
+<p><strong>O que ainda não sabemos:</strong> O projeto não esgota o problema; escolhe um recorte. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Compromisso: 1 pergunta, 1 experimento, 1 data.<br><strong>Conta:</strong> Se a data é em 7 dias, o experimento precisa caber em 7 dias.<br><strong>Resultado:</strong> O próximo passo é pequeno, verificável e datado.<br><em>Limite:</em> O próximo passo é seu; o livro não decide por você.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O projeto não esgota o problema; escolhe um recorte.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

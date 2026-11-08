@@ -11,13 +11,11 @@
 <p><strong>Pergunta de pesquisa:</strong> Quem avalia o risco antes do uso?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">双重用途</span> <em>shuāng chóng yòng tú</em> <span class="tom">· tons 1-2-4-2 · leitura shuang-tchong-iong-tu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看双重用途？</span> <em>Nǐ zěn me kàn shuāng chóng yòng tú?</em> — O que você pensa de “Dupla finalidade”?</span></p>
 <p><strong>Hipótese rival:</strong> Não há consenso moral automático; há trade-offs.</p>
-<p>Desenhe um experimento que separe as duas hipóteses.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Não há consenso moral automático; há trade-offs.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

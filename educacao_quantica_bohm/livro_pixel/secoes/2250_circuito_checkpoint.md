@@ -10,13 +10,11 @@
 
 <p><strong>Tarefa:</strong> Você consegue desenhar um circuito de Bell?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">电路</span> <em>diàn lù</em> <span class="tom">· tons 4-4 · leitura dien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了电路。</span> <em>Wǒ xué huì le diàn lù.</em> — Eu aprendi “Circuito”.</span></p>
-<p><strong>Replicação:</strong> outra seed, outro backend, a mesma pergunta.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A ordem importa; matrizes não comutam em geral.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

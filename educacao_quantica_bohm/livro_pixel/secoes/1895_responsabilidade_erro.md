@@ -10,14 +10,11 @@
 
 <p><strong>O erro comum:</strong> Desenhe uma cadeia de decisão com papéis e deveres.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">责任</span> <em>zé rèn</em> <span class="tom">· tons 2-4 · leitura dze-jen</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">责任不是魔法。</span> <em>Zé rèn bú shì mó fǎ.</em> — “Responsabilidade” não é magia.</span></p>
-<p><strong>Por que acontece:</strong> o cérebro procura uma imagem simples e apaga a parte matemática que não se encaixa.</p>
-<p><strong>Como testar:</strong> escreva um contraexemplo em uma frase e veja se ele derruba sua explicação.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Ética envolve valores e poder. Não há resposta automática; há deliberação e consequências.</p>
-<p class="prof"><strong>Para o professor:</strong> Não transforme ética em opinião pessoal: peça evidência, afetados e alternativas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

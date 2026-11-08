@@ -11,13 +11,11 @@
 <p><strong>Pergunta de pesquisa:</strong> Quem pode ver meus dados de treino?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">隐私</span> <em>yǐn sī</em> <span class="tom">· tons 3-1 · leitura in-si</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看隐私？</span> <em>Nǐ zěn me kàn yǐn sī?</em> — O que você pensa de “Privacidade”?</span></p>
 <p><strong>Hipótese rival:</strong> Não há consenso moral automático; há trade-offs.</p>
-<p>Desenhe um experimento que separe as duas hipóteses.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Não há consenso moral automático; há trade-offs.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

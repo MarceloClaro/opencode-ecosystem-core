@@ -11,13 +11,11 @@
 <p>Um holograma: cada parte contém informação do todo.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">隐缠序</span> <em>yǐn chán xù</em> <span class="tom">· tons 3-2-4 · leitura in-tchan-shyu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像隐缠序。</span> <em>Zhè xiàng yǐn chán xù.</em> — Isto se parece com “Ordem implicada”.</span></p>
 <p><strong>Limite formal:</strong> É uma visão filosófica, não uma teoria física testável por si só.</p>
-<p>Construa um contraexemplo quantitativo e verifique se a analogia sobrevive.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>É uma visão filosófica, não uma teoria física testável por si só.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

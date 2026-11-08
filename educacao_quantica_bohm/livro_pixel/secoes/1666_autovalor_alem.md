@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>O produto tensorial faz a dimensão crescer como 2^n.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">特征值</span> <em>tè zhēng zhí</em> <span class="tom">· tons 4-1-2 · leitura te-djeng-dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解特征值。</span> <em>Shēn rù liǎo jiě tè zhēng zhí.</em> — Aprofunde-se em “Autovalor”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Z|0⟩=+1|0⟩; Z|1⟩=−1|1⟩; ⟨Z⟩=p0−p1.<br><strong>Conta:</strong> Com p0=0,6 e p1=0,4: ⟨Z⟩=0,2.<br><strong>Resultado:</strong> O valor esperado fica entre −1 e +1.<br><em>Limite:</em> Autovalores são resultados possíveis; o valor esperado é uma média.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">特征值</span> <em>tè zhēng zhí</em> <span class="tom">· tons 4-1-2 · leitura te-djeng-dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解特征值。</span> <em>Shēn rù liǎo jiě tè zhēng zhí.</em> — Aprofunde-se em “Autovalor”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Z|0⟩=+1|0⟩; Z|1⟩=−1|1⟩; ⟨Z⟩=p0−p1.<br><strong>Conta:</strong> Com p0=0,6 e p1=0,4: ⟨Z⟩=0,2.<br><strong>Resultado:</strong> O valor esperado fica entre −1 e +1.<br><em>Limite:</em> Autovalores são resultados possíveis; o valor esperado é uma média.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A matemática é representação; não é o fenômeno. Não confunda o mapa com o território.</p>
-<p class="prof"><strong>Para o professor:</strong> A fórmula deve vir depois da intuição; use exemplos numéricos pequenos.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

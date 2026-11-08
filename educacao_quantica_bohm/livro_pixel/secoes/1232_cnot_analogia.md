@@ -11,13 +11,11 @@
 <p>Uma porta que só abre se a chave estiver girada.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">受控非门</span> <em>shòu kòng fēi mén</em> <span class="tom">· tons 4-4-1-2 · leitura shou-kong-fei-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像受控非门。</span> <em>Zhè xiàng shòu kòng fēi mén.</em> — Isto se parece com “CNOT”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> CNOT não copia um estado quântico arbitrário; ela cria correlação.</p>
-<p><strong>Teste rápido:</strong> desenhe a analogia e marque com um X o ponto em que ela deixa de explicar o conceito.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>CNOT é a porta de duas entradas que gera o estado de Bell.</p>
-<p class="prof"><strong>Para o professor:</strong> Confira a ordem dos qubits e a diferença entre circuito lógico e transpilado.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

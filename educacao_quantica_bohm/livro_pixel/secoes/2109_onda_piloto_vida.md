@@ -10,13 +10,11 @@
 
 <p>Um carro autônomo também é guiado por um 'campo' de regras.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">导波</span> <em>dǎo bō</em> <span class="tom">· tons 3-1 · leitura dau-bo</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到导波。</span> <em>Wǒ zài shēng huó zhōng kàn dào dǎo bō.</em> — Vejo “Onda piloto” na vida.</span></p>
-<p><strong>Onde medir:</strong> proponha um indicador e uma fonte de dados.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O rio é matemático e, para várias partículas, vive em muitas dimensões.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

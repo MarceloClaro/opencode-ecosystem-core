@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>O produto tensorial faz a dimensão crescer como 2^n.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">傅里叶</span> <em>fù lǐ yè</em> <span class="tom">· tons 4-3-4 · leitura fu-li-ie</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解傅里叶。</span> <em>Shēn rù liǎo jiě fù lǐ yè.</em> — Aprofunde-se em “Fourier”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> F = (1/√N)[e^{2πijk/N}].<br><strong>Conta:</strong> Para N=4, F|0⟩ = (|0⟩+|1⟩+|2⟩+|3⟩)/2.<br><strong>Resultado:</strong> As quatro probabilidades são 1/4.<br><em>Limite:</em> A QFT é unitária; não é a FFT clássica.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">傅里叶</span> <em>fù lǐ yè</em> <span class="tom">· tons 4-3-4 · leitura fu-li-ie</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解傅里叶。</span> <em>Shēn rù liǎo jiě fù lǐ yè.</em> — Aprofunde-se em “Fourier”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> F = (1/√N)[e^{2πijk/N}].<br><strong>Conta:</strong> Para N=4, F|0⟩ = (|0⟩+|1⟩+|2⟩+|3⟩)/2.<br><strong>Resultado:</strong> As quatro probabilidades são 1/4.<br><em>Limite:</em> A QFT é unitária; não é a FFT clássica.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A matemática é representação; não é o fenômeno. Não confunda o mapa com o território.</p>
-<p class="prof"><strong>Para o professor:</strong> A fórmula deve vir depois da intuição; use exemplos numéricos pequenos.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

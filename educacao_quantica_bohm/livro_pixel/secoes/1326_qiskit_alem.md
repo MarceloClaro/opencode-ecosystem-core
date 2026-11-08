@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>Qiskit inclui Statevector, transpilação e visualizações.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子开发包</span> <em>liàng zǐ kāi fā bāo</em> <span class="tom">· tons 4-3-1-1-1 · leitura liang-dzi-kai-fa-bau</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解量子开发包。</span> <em>Shēn rù liǎo jiě liàng zǐ kāi fā bāo.</em> — Aprofunde-se em “Qiskit”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Um QuantumCircuit de n qubits tem 2ⁿ amplitudes.<br><strong>Conta:</strong> Para n=2, 2²=4 amplitudes: |00⟩, |01⟩, |10⟩, |11⟩.<br><strong>Resultado:</strong> O statevector é um vetor de 4 números complexos.<br><em>Limite:</em> O simulador é exato sem ruído; o backend não é.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子开发包</span> <em>liàng zǐ kāi fā bāo</em> <span class="tom">· tons 4-3-1-1-1 · leitura liang-dzi-kai-fa-bau</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解量子开发包。</span> <em>Shēn rù liǎo jiě liàng zǐ kāi fā bāo.</em> — Aprofunde-se em “Qiskit”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Um QuantumCircuit de n qubits tem 2ⁿ amplitudes.<br><strong>Conta:</strong> Para n=2, 2²=4 amplitudes: |00⟩, |01⟩, |10⟩, |11⟩.<br><strong>Resultado:</strong> O statevector é um vetor de 4 números complexos.<br><em>Limite:</em> O simulador é exato sem ruído; o backend não é.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Qiskit inclui Statevector, transpilação e visualizações.</p>
-<p class="prof"><strong>Para o professor:</strong> Compare a mesma grandeza nas três bibliotecas; se divergir, verifique convenção antes de concluir erro.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

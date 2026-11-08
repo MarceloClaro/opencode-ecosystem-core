@@ -11,13 +11,11 @@
 <p><strong>O erro comum:</strong> Achar que o circuito enviado é idêntico ao que roda no chip.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">转译</span> <em>zhuǎn yì</em> <span class="tom">· tons 3-4 · leitura djuan-i</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">转译不是魔法。</span> <em>Zhuǎn yì bú shì mó fǎ.</em> — “Transpilação” não é magia.</span></p>
 <p><strong>Correção formal:</strong> O mapeamento de qubits lógicos para físicos é parte do processo.</p>
-<p>Teste a correção com um exemplo numérico pequeno.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>A tradução pode aumentar a profundidade e o ruído.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

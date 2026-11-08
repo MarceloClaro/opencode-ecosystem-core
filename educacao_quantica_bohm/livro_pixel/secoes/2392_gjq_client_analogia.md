@@ -11,13 +11,11 @@
 <p>Um controle remoto para enviar circuitos à nuvem.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子客户端</span> <em>liàng zǐ kè hù duān</em> <span class="tom">· tons 4-3-4-4-1 · leitura liang-dzi-ke-ru-duan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像量子客户端。</span> <em>Zhè xiàng liàng zǐ kè hù duān.</em> — Isto se parece com “gjq-client”.</span></p>
 <p><strong>Limite formal:</strong> O cliente não garante acesso; depende de conta, fila e backend.</p>
-<p>Construa um contraexemplo quantitativo e verifique se a analogia sobrevive.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>O cliente não garante acesso; depende de conta, fila e backend.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

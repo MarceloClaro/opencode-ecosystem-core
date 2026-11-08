@@ -10,7 +10,6 @@
 
 <p>Nem todo erro é produtivo; repetir sem análise não ensina.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">建设性错误</span> <em>jiàn shè xìng cuò wù</em> <span class="tom">· tons 4-4-4-4-4 · leitura djien-she-shing-tsuo-u</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">练习建设性错误。</span> <em>Liàn xí jiàn shè xìng cuò wù.</em> — Pratique “Erro produtivo”.</span></p>
-<p>Faça em 5 minutos; anote o que esperava antes de começar.</p>
 
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
@@ -27,7 +26,6 @@
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Pedagogia é contextual; não há método garantido.</p>
-<p class="prof"><strong>Para o professor:</strong> Nanoaula é tempo e evidência, não fragmento.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

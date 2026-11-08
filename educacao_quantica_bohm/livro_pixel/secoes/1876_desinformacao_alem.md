@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>A LGPD exige base legal, finalidade e transparência.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">虚假信息</span> <em>xū jiǎ xìn xī</em> <span class="tom">· tons 1-3-4-1 · leitura shyu-djia-shin-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解虚假信息。</span> <em>Shēn rù liǎo jiě xū jiǎ xìn xī.</em> — Aprofunde-se em “Desinformação”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Uma afirmação sem fonte verificável não é evidência.<br><strong>Conta:</strong> Se 1 em 10 claims não tem DOI, a taxa de claims frágeis é 10%.<br><strong>Resultado:</strong> A checagem reduz o risco, mas não o elimina.<br><em>Limite:</em> Desinformação não é uma propriedade quântica.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">虚假信息</span> <em>xū jiǎ xìn xī</em> <span class="tom">· tons 1-3-4-1 · leitura shyu-djia-shin-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解虚假信息。</span> <em>Shēn rù liǎo jiě xū jiǎ xìn xī.</em> — Aprofunde-se em “Desinformação”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Uma afirmação sem fonte verificável não é evidência.<br><strong>Conta:</strong> Se 1 em 10 claims não tem DOI, a taxa de claims frágeis é 10%.<br><strong>Resultado:</strong> A checagem reduz o risco, mas não o elimina.<br><em>Limite:</em> Desinformação não é uma propriedade quântica.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Ética envolve valores e poder. Não há resposta automática; há deliberação e consequências.</p>
-<p class="prof"><strong>Para o professor:</strong> Não transforme ética em opinião pessoal: peça evidência, afetados e alternativas.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

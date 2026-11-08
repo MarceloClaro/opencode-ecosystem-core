@@ -11,13 +11,11 @@
 <p>Uma partitura que o computador quântico consegue ler.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子汇编</span> <em>liàng zǐ huì biān</em> <span class="tom">· tons 4-3-4-1 · leitura liang-dzi-ruei-bien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像量子汇编。</span> <em>Zhè xiàng liàng zǐ huì biān.</em> — Isto se parece com “QASM 2.0”.</span></p>
 <p><strong>Limite formal:</strong> QASM não é um algoritmo; é uma notação de circuito.</p>
-<p>Construa um contraexemplo quantitativo e verifique se a analogia sobrevive.</p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>QASM não é um algoritmo; é uma notação de circuito.</p>
-<p class="prof"><strong>Para pesquisa:</strong> repita com outra seed/backend.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

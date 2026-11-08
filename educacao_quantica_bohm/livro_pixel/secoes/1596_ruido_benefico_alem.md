@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>A fidelidade proxy mede a população ideal, não a pureza do estado.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">有益噪声</span> <em>yǒu yì zào shēng</em> <span class="tom">· tons 3-4-4-1 · leitura iu-i-dzau-sheng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解有益噪声。</span> <em>Shēn rù liǎo jiě yǒu yì zào shēng.</em> — Aprofunde-se em “Ruído benéfico?”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Para detectar uma diferença de 5% com 95% de confiança, n ≈ 1,96²×0,25/0,05².<br><strong>Conta:</strong> n ≈ 3,8416×0,25/0,0025 = 384,16.<br><strong>Resultado:</strong> São necessários ≈ 385 pontos por grupo, não 4.<br><em>Limite:</em> O teste com 4 pontos não sustenta a hipótese de ruído benéfico.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">有益噪声</span> <em>yǒu yì zào shēng</em> <span class="tom">· tons 3-4-4-1 · leitura iu-i-dzau-sheng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解有益噪声。</span> <em>Shēn rù liǎo jiě yǒu yì zào shēng.</em> — Aprofunde-se em “Ruído benéfico?”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Para detectar uma diferença de 5% com 95% de confiança, n ≈ 1,96²×0,25/0,05².<br><strong>Conta:</strong> n ≈ 3,8416×0,25/0,0025 = 384,16.<br><strong>Resultado:</strong> São necessários ≈ 385 pontos por grupo, não 4.<br><em>Limite:</em> O teste com 4 pontos não sustenta a hipótese de ruído benéfico.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Quatro pontos e 1024 tiros não generalizam. Ruído benéfico é hipótese, não garantia.</p>
-<p class="prof"><strong>Para o professor:</strong> A acurácia de 4/4 não é generalized accuracy. Explique o teto e o tamanho da amostra.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>

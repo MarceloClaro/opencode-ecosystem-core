@@ -9,15 +9,12 @@
 <div class="corpo">
 
 <p>Um bom projeto declara o que não prova.</p>
-<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">展示</span> <em>zhǎn shì</em> <span class="tom">· tons 3-4 · leitura djan-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解展示。</span> <em>Shēn rù liǎo jiě zhǎn shì.</em> — Aprofunde-se em “Apresentação”.</span></p>
-<p><strong>Conexão científica:</strong> este é o ponto em que a intuição precisa dar lugar a uma definição precisa. A caixa de rigor abaixo guarda essa definição.</p>
-<p><strong>Para ir além:</strong> procure um exemplo em que a ideia falha e explique por quê. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> 10 slides × 1 ideia = 10 ideias em 7 minutos.<br><strong>Conta:</strong> 7 min = 420 s; 420/10 = 42 s por slide.<br><strong>Resultado:</strong> O tempo impõe prioridade.<br><em>Limite:</em> Slides não são a pesquisa.</span></p>
+<p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">展示</span> <em>zhǎn shì</em> <span class="tom">· tons 3-4 · leitura djan-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解展示。</span> <em>Shēn rù liǎo jiě zhǎn shì.</em> — Aprofunde-se em “Apresentação”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> 10 slides × 1 ideia = 10 ideias em 7 minutos.<br><strong>Conta:</strong> 7 min = 420 s; 420/10 = 42 s por slide.<br><strong>Resultado:</strong> O tempo impõe prioridade.<br><em>Limite:</em> Slides não são a pesquisa.</span></p>
 
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
 <p>Todo projeto é um recorte. Declare limite, evidência e o que ficou fora.</p>
-<p class="prof"><strong>Para o professor:</strong> Exija um limite específico; 'tem limitações' não é suficiente.</p>
 </div>
 <div class="check">
 <span class="rotulo">CHECKPOINT</span>
