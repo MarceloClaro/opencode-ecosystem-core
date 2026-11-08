@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -145,3 +146,36 @@ def test_mirofish_13_reviewers_group():
     assert len(GROUPS["revisores_13"]) == 13
     assert BY_NUMBER["A35"]["agent_id"] == "david-bohm-wholeness"
     assert BY_NUMBER["A36"]["agent_id"] == "richard-feynman-explainer"
+
+
+def test_quantum_simulator_source_has_no_arbitrary_execution():
+    source = (ROOT / "integrations" / "quantum_simulator_mcp.py").read_text(encoding="utf-8")
+    assert re.search(r"\bexec\s*\(", source) is None
+    assert re.search(r"\beval\s*\(", source) is None
+    assert "subprocess" not in source
+    assert "os.system" not in source
+    assert "shell=True" not in source
+
+
+def test_opencode_registers_only_audited_simulator():
+    config = json.loads((ROOT / "opencode.json").read_text(encoding="utf-8"))
+    mcp = config.get("mcp", {})
+    assert "quantum-sim-core" in mcp
+    entry = mcp["quantum-sim-core"]
+    assert entry.get("enabled") is True
+    assert entry["command"][0].endswith("python")
+    assert "integrations.quantum_simulator_mcp" in entry["command"]
+    assert "quantum-simulator" not in mcp
+    assert "symbolica" not in mcp
+    assert "quantum-hardware" not in mcp
+
+
+def test_audit_report_records_decisions_and_hashes():
+    report = ROOT / "docs" / "AUDITORIA_MCPS_QUANTICOS_R1099.md"
+    assert report.is_file()
+    texto = report.read_text(encoding="utf-8")
+    assert "5ac7d0c0d294feb76f1a3142345b331304dcc2cf" in texto
+    assert "9dcb2ad377ef785bf7a981d57c7a15b7414306cc" in texto
+    assert "3a4c39358821fae25602db069d32acc4f294c2c6" in texto
+    assert "exec(full_code, globals_dict)" in texto
+    assert "BLOCKED" in texto or "BLOQUEADO" in texto

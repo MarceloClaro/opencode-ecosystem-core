@@ -11432,6 +11432,16 @@
       "enabled": true,
       "timeout": 120000
     },
+    "quantum-sim-core": {
+      "type": "local",
+      "command": [
+        ".venv-quantum/bin/python",
+        "-m",
+        "integrations.quantum_simulator_mcp"
+      ],
+      "enabled": true,
+      "timeout": 60000
+    },
     "caed-spaece-data": {
       "type": "local",
       "command": [

@@ -833,6 +833,13 @@ def build_config() -> Dict[str, Any]:
                 "enabled": True,
                 "timeout": 120000,
             },
+            # R1099: simulador Qiskit 2.x local, sem exec arbitrário e sem rede.
+            "quantum-sim-core": {
+                "type": "local",
+                "command": [".venv-quantum/bin/python", "-m", "integrations.quantum_simulator_mcp"],
+                "enabled": True,
+                "timeout": 60000,
+            },
             # R944: matrizes CAEd/SPAECE locais e fontes legais oficiais allowlisted.
             "caed-spaece-data": {
                 "type": "local",

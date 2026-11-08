@@ -77,9 +77,9 @@
 
 | Repositório | Licença | Função | Decisão |
 |---|---|---|---|
-| <https://github.com/Lokesh-2025/quantum-hardware-mcp> | MIT | MCP para hardware quântico | **Integrar** somente após revisão de segurança e teste local |
-| <https://github.com/YuChenSSR/quantum-simulator-mcp> | MIT | MCP de simulador quântico | **Integrar** candidato |
-| <https://github.com/YuChenSSR/symbolica-mcp> | MIT | MCP de álgebra simbólica | **Integrar** candidato para derivações |
+| <https://github.com/Lokesh-2025/quantum-hardware-mcp> | MIT | MCP para hardware quântico; 52 ferramentas e jobs pagos | **Auditado; não registrar automaticamente** — habilitação manual com controle de custo |
+| <https://github.com/YuChenSSR/quantum-simulator-mcp> | MIT | MCP de simulador em imagem Docker; Qiskit antigo | **Não registrar** — substituído pelo `quantum-sim-core` nativo |
+| <https://github.com/YuChenSSR/symbolica-mcp> | MIT | MCP de computação em imagem Docker; `exec` arbitrário | **BLOQUEADO** — ver auditoria R1099 |
 | <https://github.com/barvhaim/qiskit-mcp-server> | Sem licença localizada | MCP Qiskit | **Não integrar** até licença explícita |
 | <https://github.com/PhelanShao/orca-mcp-server> | Sem licença localizada | MCP química quântica (ORCA) | **Não integrar** |
 | <https://github.com/qu3ai/qu3-app> | Sem licença localizada | Aplicação quântica | **Não integrar** |
@@ -128,7 +128,7 @@
 ## 7. Propostas de integração ao ecossistema
 
 1. **`quantum-tools-coach`**: acrescentar uma trilha MindQuantum (VQC, ruído, simulador HiQ) ao lado da trilha Qiskit, com versão fixada e citação arXiv:2406.17248.
-2. **MCPs quânticos**: avaliar `quantum-hardware-mcp`, `quantum-simulator-mcp` e `symbolica-mcp` em ambiente isolado. Registrar em `opencode.json` apenas depois de teste de instalação, leitura de código e confirmação de licença. `qiskit-mcp-server`, `orca-mcp-server` e `qu3-app` ficam bloqueados por ausência de licença localizada.
+2. **MCPs quânticos**: a auditoria R1099 está em `docs/AUDITORIA_MCPS_QUANTICOS_R1099.md`. O `quantum-hardware-mcp` foi auditado e permanece para habilitação manual; `quantum-simulator-mcp` foi substituído pelo `quantum-sim-core` nativo; `symbolica-mcp` está BLOQUEADO por execução arbitrária de código. `qiskit-mcp-server`, `orca-mcp-server` e `qu3-app` continuam bloqueados por ausência de licença localizada.
 3. **Figuras bohmianas**: usar `BohmianFlow` (MIT), `pilot_wave` (BSD-3-Clause), `BohmianSternGerlach3D-public` (MIT) e `bohmian_density_matrix` (MIT) como referência para gráficos, com atribuição e sem copiar assets de terceiros.
 4. **Lean 4**: manter `Lean-QuantumInfo`, `QICLean` e `TNLean` como referência bibliográfica; o apêndice do livro continua provado apenas pelo `livro-core/lean/QuantumTrails.lean` compilado.
 5. **Didática**: usar `Qiskit/textbook` (Apache-2.0) e `qmlcourse` (CC BY 4.0) para conferir sequência e exercícios, com atribuição explícita.

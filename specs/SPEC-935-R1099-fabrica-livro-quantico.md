@@ -35,6 +35,8 @@ harness de execução, handoff e um servidor MCP local somente leitura.
 | Handoff | `handoffs/livro-quantico/HANDOFF.md` | passagem de estado |
 | MCP | `integrations/livro_quantico_mcp.py` | estado, experimentos, counts, Lean, repetição, checklist, Bohm/Feynman e painel de 13 |
 | MCP | `integrations/gjq_experiments_mcp.py` | executa E01–E18 no GJQ com gates e auditoria |
+| MCP | `integrations/quantum_simulator_mcp.py` | simulador Qiskit 2.x local, 12 qubits/10.000 shots, sem rede ou exec arbitrário |
+| Auditoria | `docs/AUDITORIA_MCPS_QUANTICOS_R1099.md` | hashes, decisões e bloqueios dos MCPs quânticos de terceiro |
 | Scanner | `scanners/bohm_scanner.py` | triagem lexical de totalidade, diálogo, fragmentação e limites |
 | Painel | `academic/bohm_feynman_panel.py` | 20 revisores, incluindo personas Bohm e Feynman |
 
@@ -45,8 +47,12 @@ harness de execução, handoff e um servidor MCP local somente leitura.
 - [ ] Hook de segredo retorna GRANTED em fontes sem chave.
 - [ ] `audit_counts` rejeita soma diferente de shots.
 - [ ] Harness e handoff existem e citam os artefatos.
-- [ ] MCP é registrado em `opencode.json` como local, read-only.
+- [ ] MCPs de consulta são read-only; execução exige `confirm=True` e limites.
+- [ ] `quantum-sim-core` está registrado e habilitado em `opencode.json`.
+- [ ] `symbolica-mcp`/`computing-mcp` não está registrado por execução arbitrária.
+- [ ] `quantum-simulator-mcp` (Docker) e `quantum-hardware-mcp` não são habilitados automaticamente.
 - [ ] Testes `tests/test_r1099_livro_quantico_package.py` passam.
+- [ ] Testes `tests/test_r1099_quantum_simulator_mcp.py` passam no `.venv-quantum`.
 - [ ] PDF do livro continua com 3550 páginas e links resolvidos.
 - [ ] Grupo MiroFish `revisores_20` tem 20 membros, incluindo A35/A36; `revisores_13` permanece como compatibilidade.
 - [ ] MCP `gjq-experiments` exige `confirm=True` e simulação prévia.
