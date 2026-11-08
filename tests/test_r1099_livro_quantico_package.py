@@ -12,10 +12,12 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 AGENTS = ["livro-quantico-orchestrator", "quantum-experiment-auditor",
-          "quantum-lean-verifier", "quantum-tools-coach", "repetition-editor"]
+          "quantum-lean-verifier", "quantum-tools-coach", "repetition-editor",
+          "gjq-quantum-research"]
 SKILLS = ["producao-livro-quantico", "auditoria-experimentos-quanticos",
           "verificacao-lean-quantum", "trilhas-ferramentas-quanticas",
-          "edicao-antirrepeticao", "pacote-publicacao-cientifica"]
+          "edicao-antirrepeticao", "pacote-publicacao-cientifica",
+          "gjq-pesquisa-quantica"]
 
 
 def test_agent_cards_validate():
@@ -179,3 +181,67 @@ def test_audit_report_records_decisions_and_hashes():
     assert "3a4c39358821fae25602db069d32acc4f294c2c6" in texto
     assert "exec(full_code, globals_dict)" in texto
     assert "BLOCKED" in texto or "BLOQUEADO" in texto
+
+
+def test_gjq_runtime_agent_and_skill():
+    from agents.lifecycle import AgentLifecycleService
+
+    service = AgentLifecycleService(ROOT)
+    result = service.validate("gjq-quantum-research")
+    assert result.get("definition_validated") is True
+    skill = ROOT / ".opencode" / "skills" / "gjq-pesquisa-quantica" / "SKILL.md"
+    assert skill.is_file()
+    texto = skill.read_text(encoding="utf-8")
+    assert "gjq-client==0.2.1" in texto
+    assert "confirm=True" in texto
+    assert "allow_hardware=True" in texto
+    assert "gjq-experiments" in texto
+
+
+def test_opencode_registers_gjq_runtime():
+    config = json.loads((ROOT / "opencode.json").read_text(encoding="utf-8"))
+    mcp = config.get("mcp", {})
+    assert "gjq-runtime" in mcp
+    entry = mcp["gjq-runtime"]
+    assert entry.get("enabled") is True
+    assert "integrations.gjq_runtime_mcp" in entry["command"]
+    assert "gjq-experiments" in mcp
+
+
+def test_gjq_runtime_source_has_no_arbitrary_execution():
+    source = (ROOT / "integrations" / "gjq_runtime_mcp.py").read_text(encoding="utf-8")
+    assert re.search(r"\bexec\s*\(", source) is None
+    assert re.search(r"\beval\s*\(", source) is None
+    assert "subprocess" not in source
+    assert "os.system" not in source
+    assert "shell=True" not in source
+
+
+def test_quantum_tools_coach_has_mindquantum_trail():
+    agent = (ROOT / "agents" / "catalog" / "quantum-tools-coach.md").read_text(encoding="utf-8")
+    skill = (ROOT / ".opencode" / "skills" / "trilhas-ferramentas-quanticas" / "SKILL.md").read_text(encoding="utf-8")
+    for texto in (agent, skill):
+        assert "mindquantum==0.11.0" in texto
+        assert "2406.17248" in texto
+        assert "MindQuantum" in texto
+
+
+def test_quantum_trails_docs_exist_and_state_limits():
+    paths = [
+        ROOT / "docs" / "GJQ_PESQUISA_QUANTICA_R1099.md",
+        ROOT / "docs" / "FIGURAS_BOHMIANAS_R1099.md",
+        ROOT / "docs" / "LEAN_REFERENCIAS_R1099.md",
+        ROOT / "docs" / "DIDATICA_QUANTICA_R1099.md",
+    ]
+    for path in paths:
+        assert path.is_file(), path
+    gjq = paths[0].read_text(encoding="utf-8")
+    assert "gjq-client==0.2.1" in gjq
+    assert "allow_hardware=True" in gjq
+    assert "observable=" in gjq
+    assert "89897458" in gjq
+    lean = paths[2].read_text(encoding="utf-8")
+    assert "QuantumTrails.lean" in lean
+    assert "Tsirelson" in lean
+    bohm = paths[1].read_text(encoding="utf-8")
+    assert "BohmianFlow" in bohm and "BSD-3-Clause" in bohm

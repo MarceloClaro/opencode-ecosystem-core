@@ -11,8 +11,8 @@ metadata:
 ## Ordem
 
 1. Python + venv + pip.
-2. Qiskit/Aer, PennyLane, Cirq, NumPy.
-3. `gjq-client` + `GJQ_API_KEY`.
+2. Qiskit 2.3.0/Aer, PennyLane, Cirq, NumPy.
+3. MindQuantum 0.11.0 + MindSpore + `GJQ_API_KEY`.
 4. Lean 4 + Mathlib.
 5. Auditoria.
 
@@ -21,12 +21,22 @@ metadata:
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-pip install qiskit qiskit-aer pennylane cirq gjq-client numpy scipy matplotlib optuna
-python -c "import qiskit, pennylane, cirq; print('ok')"
+pip install 'qiskit==2.3.0' 'qiskit-aer==0.18.2' 'gjq-client==0.2.1' pennylane cirq numpy scipy matplotlib optuna
+pip install 'mindquantum==0.11.0'
+python -c "import qiskit, pennylane, cirq, mindquantum, gjq_client; print('ok')"
 python 08_experimentos_18.py --sim --only E09
 python 08_experimentos_18.py --real --backend Guoji08 --only E09
 cd livro-core/lean && lake env lean QuantumTrails.lean
 ```
+
+## MindQuantum
+
+- Versão fixada: `mindquantum==0.11.0`; espelho GitHub em 0.12.0.
+- Trilha: VQC, ruído, simulador HiQ, QML, química e otimização.
+- Citação: arXiv:2406.17248.
+- Docs: <https://www.mindspore.cn/mindquantum/docs/en/stable/index.html>.
+- O Gitee é snapshot migrado para o AtomGit; confirme a versão antes de citar.
+- Não copie tutorial ou código sem preservar a licença Apache-2.0.
 
 ## Segurança
 

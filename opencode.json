@@ -5884,6 +5884,39 @@
       },
       "model": "opencode-go/deepseek-v4-pro"
     },
+    "gjq-quantum-research": {
+      "description": "Projeta e conduz pesquisa quântica na plataforma GJQ/CETC-ICQ: descoberta de backends, sampling, estimativa, MPS, sessões e proveniência de tarefas. Exige confirmação e controle de custo; não expõe AP",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/gjq-quantum-research.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1099_gjq_runtime_mcp.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code",
+          "opencode-zen/deepseek-v4-pro"
+        ],
+        "model_economy": {
+          "complexity": "critica",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4-pro",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4-pro"
+    },
     "goose-cli": {
       "description": "Você é o agente proxy do **Goose**, agente de IA nativo open source da Agentic",
       "mode": "subagent",
@@ -11431,6 +11464,16 @@
       ],
       "enabled": true,
       "timeout": 120000
+    },
+    "gjq-runtime": {
+      "type": "local",
+      "command": [
+        ".venv-quantum/bin/python",
+        "-m",
+        "integrations.gjq_runtime_mcp"
+      ],
+      "enabled": true,
+      "timeout": 180000
     },
     "quantum-sim-core": {
       "type": "local",

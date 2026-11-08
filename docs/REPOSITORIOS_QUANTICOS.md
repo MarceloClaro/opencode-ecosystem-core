@@ -84,6 +84,17 @@
 | <https://github.com/PhelanShao/orca-mcp-server> | Sem licença localizada | MCP química quântica (ORCA) | **Não integrar** |
 | <https://github.com/qu3ai/qu3-app> | Sem licença localizada | Aplicação quântica | **Não integrar** |
 
+### 2.5 GJQ / CETC-ICQ
+
+| Fonte | Licença | Função | Decisão |
+|---|---|---|---|
+| <https://tiangongqs.com/docs/quantum/QuantumProgrammingFramework.html> | Documentação oficial | SDK, backends, Sampler/Estimator, MPS, sessões e PQC | **Referência** |
+| <https://github.com/guoji-quantum/gjq_client> | Apache-2.0 | SDK oficial `gjq-client==0.2.1` | **Instalar** a partir do PyPI |
+| <https://github.com/MarceloClaro/gjq_client> | Apache-2.0 | Fork-espelho `0.2.1.post1` | **Referência**; não substitui o PyPI |
+| <https://github.com/guoji-quantum/gjq-runtime-mcp-server> | Apache-2.0 | MCP oficial com 12 ferramentas | **Auditado; não registrar** — `obs=` incompatível e sem `confirm` |
+| <https://github.com/MarceloClaro/gjq-runtime-mcp-server> | Apache-2.0 | Fork auditado em `89897458` | **Referência**; o Core usa `gjq-runtime` nativo |
+| <https://github.com/guoji-quantum/industry_solution> | README apenas | Repositório institucional de casos | **Referência**; sem código executável |
+
 ## 3. Gitee
 
 | Repositório | Licença | Função | Decisão |
@@ -127,11 +138,12 @@
 
 ## 7. Propostas de integração ao ecossistema
 
-1. **`quantum-tools-coach`**: acrescentar uma trilha MindQuantum (VQC, ruído, simulador HiQ) ao lado da trilha Qiskit, com versão fixada e citação arXiv:2406.17248.
-2. **MCPs quânticos**: a auditoria R1099 está em `docs/AUDITORIA_MCPS_QUANTICOS_R1099.md`. O `quantum-hardware-mcp` foi auditado e permanece para habilitação manual; `quantum-simulator-mcp` foi substituído pelo `quantum-sim-core` nativo; `symbolica-mcp` está BLOQUEADO por execução arbitrária de código. `qiskit-mcp-server`, `orca-mcp-server` e `qu3-app` continuam bloqueados por ausência de licença localizada.
-3. **Figuras bohmianas**: usar `BohmianFlow` (MIT), `pilot_wave` (BSD-3-Clause), `BohmianSternGerlach3D-public` (MIT) e `bohmian_density_matrix` (MIT) como referência para gráficos, com atribuição e sem copiar assets de terceiros.
-4. **Lean 4**: manter `Lean-QuantumInfo`, `QICLean` e `TNLean` como referência bibliográfica; o apêndice do livro continua provado apenas pelo `livro-core/lean/QuantumTrails.lean` compilado.
-5. **Didática**: usar `Qiskit/textbook` (Apache-2.0) e `qmlcourse` (CC BY 4.0) para conferir sequência e exercícios, com atribuição explícita.
+1. **`quantum-tools-coach`**: trilha MindQuantum acrescentada com `mindquantum==0.11.0`, VQC, ruído, simulador HiQ e citação arXiv:2406.17248; espelho GitHub em 0.12.0 e Gitee migrado ao AtomGit.
+2. **MCPs quânticos**: a auditoria R1099 está em `docs/AUDITORIA_MCPS_QUANTICOS_R1099.md`. O `quantum-hardware-mcp` foi auditado e permanece para habilitação manual; `quantum-simulator-mcp` foi substituído pelo `quantum-sim-core` nativo; `symbolica-mcp` está BLOQUEADO por execução arbitrária de código. O `gjq-runtime` nativo foi registrado com `confirm=True` e gate de hardware; o servidor oficial GJQ não foi registrado por incompatibilidade de assinatura e ausência de confirmação. `qiskit-mcp-server`, `orca-mcp-server` e `qu3-app` continuam bloqueados por ausência de licença localizada.
+3. **Figuras bohmianas**: usar `BohmianFlow` (MIT), `pilot_wave` (BSD-3-Clause), `BohmianSternGerlach3D-public` (MIT) e `bohmian_density_matrix` (MIT) como referência para gráficos, com atribuição e sem copiar assets de terceiros. Regras em `docs/FIGURAS_BOHMIANAS_R1099.md`.
+4. **Lean 4**: manter `Lean-QuantumInfo`, `QICLean` e `TNLean` como referência bibliográfica; o apêndice do livro continua provado apenas pelo `livro-core/lean/QuantumTrails.lean` compilado. Limites em `docs/LEAN_REFERENCIAS_R1099.md`.
+5. **Didática**: usar `Qiskit/textbook` (Apache-2.0) e `qmlcourse` (CC BY 4.0) para conferir sequência e exercícios, com atribuição explícita. Mapa em `docs/DIDATICA_QUANTICA_R1099.md`.
+6. **GJQ**: instalar `gjq-client==0.2.1` no `.venv-quantum`, registrar o MCP `gjq-runtime` e manter o agente `gjq-quantum-research` e a skill `gjq-pesquisa-quantica`. Detalhes em `docs/GJQ_PESQUISA_QUANTICA_R1099.md`.
 
 ## 8. Riscos e limites
 
@@ -139,7 +151,7 @@
 - **Sem licença = todos os direitos reservados:** não copiar, não adaptar e não redistribuir.
 - **GPL-3.0 e licença não comercial:** não incorporar ao código MIT do livro; usar somente como referência conceitual.
 - **Estrelas e versões não medem rigor:** a decisão do catálogo é editorial e de licença, não uma nota científica.
-- **Nenhuma execução:** não houve clone, instalação, `pip install`, execução de simulador ou acesso a hardware.
+- **Execução limitada:** o simulador local e os testes de MCP foram executados; nenhum job real foi submetido à GJQ nesta sessão.
 - **Gitee/GitCode podem espelhar repositórios desatualizados:** confirmar o endereço canônico e a versão antes de citar.
 
 ## 9. Próximos passos

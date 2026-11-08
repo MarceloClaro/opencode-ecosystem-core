@@ -833,6 +833,13 @@ def build_config() -> Dict[str, Any]:
                 "enabled": True,
                 "timeout": 120000,
             },
+            # R1099: SDK GJQ para pesquisa quântica; confirm=True e hardware gate.
+            "gjq-runtime": {
+                "type": "local",
+                "command": [".venv-quantum/bin/python", "-m", "integrations.gjq_runtime_mcp"],
+                "enabled": True,
+                "timeout": 180000,
+            },
             # R1099: simulador Qiskit 2.x local, sem exec arbitrário e sem rede.
             "quantum-sim-core": {
                 "type": "local",
