@@ -6810,6 +6810,39 @@
       },
       "model": "opencode-go/mimo-v2.6-flash"
     },
+    "loop-engineering-architect": {
+      "description": "Projeta e audita loops de agentes com trigger, ação, parada verificável, hard stop, verificação independente, maker-checker, estado durável, orçamento, observabilidade e gates humanos. Não executa loo",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/loop-engineering-architect.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1100_loop_engineering.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code",
+          "opencode-zen/deepseek-v4-pro"
+        ],
+        "model_economy": {
+          "complexity": "critica",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4-pro",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4-pro"
+    },
     "master-orchestrator": {
       "description": "Orquestrador mestre e controlador de ciclo de vida (end-to-end) para o Ecossistema OpenCode e Polimata. Inicializa e finaliza as demandas do usuário, garantindo auditoria e reprodutibilidade de longo ",
       "mode": "subagent",
