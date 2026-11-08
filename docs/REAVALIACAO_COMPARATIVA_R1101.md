@@ -101,16 +101,16 @@ Legenda: **●** cobertura forte/central; **◐** parcial ou limitada; **○** a
 | Exercícios/avaliação | 10% | 7,2 | fichas, gabarito, checkpoints, exercícios do apêndice, protocolo de eficácia | não há estudo de eficácia concluído |
 | Rigor/formal | 10% | 8,0 | ledger, Lean, DOI, limites explícitos | Lean cobre identidades específicas, não todo o livro |
 | Reprodutibilidade | 5% | 9,0 | JSONs, task IDs, QASM hashes, build script | depende de conta/chave para execução real |
-| Produção/navegação | 5% | 7,5 | 3504 pp na referência; piloto de 76 pp com PDF claro e EPUB | PDF escuro/A5 na referência; piloto ainda é 60 laudas, falta audiolivro |
+| Produção/navegação | 5% | 8,0 | 3504 pp na referência; curso de 626 pp e piloto de 76 pp com PDF claro/EPUB | PDF escuro na referência; audiolivro de 12:50 é seleção, não narração integral |
 | Validação externa | 10% | 2,5 | pacote de peer review e protocolo | nenhum parecer, nenhum dado de eficácia, sem ISBN/DOI |
 
 ### Conta da nota
 
 ```text
 (8,5×15 + 8,0×15 + 8,5×10 + 9,0×15 + 8,5×15
- + 7,2×10 + 8,0×10 + 9,0×5 + 7,5×5 + 2,5×10) / 100
-= 8,545
-≈ 8,5/10
+ + 7,2×10 + 8,0×10 + 9,0×5 + 8,0×5 + 2,5×10) / 100
+= 8,570
+≈ 8,6/10
 ```
 
 **Nota anterior:** 8,2/10.
@@ -129,7 +129,9 @@ Nenhuma obra comparada faz, ao mesmo tempo:
 - ledger de afirmações e verificação Lean;
 - apêndice GJQ com Bell/CHSH, task IDs, counts e QASM hashes;
 - build reproduzível com `pyphen` pt-BR e PDF versionado;
-- piloto de edição enxuta com 12 módulos, 60 laudas, 76 páginas, PDF claro e EPUB.
+- piloto de edição enxuta com 12 módulos, 60 laudas, 76 páginas, PDF claro e EPUB;
+- edição de curso com 12 módulos, 60 conceitos, 600 laudas, 626 páginas, PDF claro e EPUB;
+- audiolivro piloto com 12 capítulos + abertura, 12:50, voz sintética sem clonagem e manifesto com hashes.
 
 O valor está na **integração didática**, não na substituição de uma referência canônica.
 
@@ -169,7 +171,7 @@ Além disso:
 | ⏳ | `PACOTE_PEER_REVIEW.md` | executar 3 pareceres externos; hoje a nota de peer review é 3/10 |
 | ⏳ | `AVALIACAO_EFICACIA.md` | aprovar no CEP e executar o estudo; hoje é protocolo |
 | ⏳ | metadados | ISBN/DOI e edição inglesa |
-| ✅/⏳ | produção | Piloto enxuto com PDF claro e EPUB (76 pp) pronto; faltam expansão para 600–800 pp, audiolivro e revisão de acessibilidade |
+| ✅/⏳ | produção | Edição de curso com 626 pp (600 laudas), piloto de 76 pp e audiolivro de 12:50 em PDF/EPUB/MP3; falta revisão de acessibilidade |
 | ⏳ | adoção | usar em curso/piloto e medir retenção; publicar também resultados negativos |
 
 ## 10. O que levaria a 9/10
@@ -185,11 +187,11 @@ Não é “mais páginas”. É evidência externa e edição:
 7. redução de repetição sem perder a sequência;
 8. adoção documentada em curso ou clube de leitura.
 
-Sem esses itens, a nota fica em **8,5/10**; com eles, 9/10 é plausível. 10/10 exigiria, além disso, replicação independente e contribuição reconhecida na área.
+Sem esses itens, a nota fica em **8,6/10**; com eles, 9/10 é plausível. 10/10 exigiria, além disso, replicação independente e contribuição reconhecida na área.
 
 ## 11. Veredito
 
-**8,5/10 — obra didática singular, não referência canônica.**
+**8,6/10 — obra didática singular, não referência canônica.**
 
 | Se você quer… | Use… |
 |---|---|

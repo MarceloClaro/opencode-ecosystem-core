@@ -351,11 +351,27 @@ O script cria `.venv-pdf` com `pyphen==0.16.0` (dicionário `pt_BR`) e chama
 Ver [BUILD_PDF.md](educacao_quantica_bohm/livro_pixel/BUILD_PDF.md) e
 [Apêndice GJQ](educacao_quantica_bohm/livro_pixel/GJQ_RESULTADOS.md).
 
+**Edição de curso (R1103):** 12 módulos, 60 conceitos, 600 laudas, 12 figuras
+e **626 páginas** em papel claro; [PDF](educacao_quantica_bohm/livro_pixel/EDICAO_CURSO_600.pdf)
+(3.167.486 bytes) e [EPUB](educacao_quantica_bohm/livro_pixel/EDICAO_CURSO_600.epub)
+(1.576.391 bytes). Build: `python3 educacao_quantica_bohm/livro_pixel/build_curso.py`.
+A edição não inclui o gabarito nem as 100 fichas completas; traz as
+[notas ao professor](educacao_quantica_bohm/livro_pixel/NOTAS_PROFESSOR.md) e o
+[apêndice de aprofundamento](educacao_quantica_bohm/livro_pixel/APROFUNDAMENTO_QUANTICO.md).
+
+**Audiolivro piloto (R1103):** 12 capítulos + abertura, **12:50** no total, voz
+sintética `pt-BR-FranciscaNeural` (Edge TTS) e **sem clonagem**. Arquivos em
+[`AUDIOLIVRO_CURSO/`](educacao_quantica_bohm/livro_pixel/AUDIOLIVRO_CURSO/README.md),
+com [manifesto](educacao_quantica_bohm/livro_pixel/AUDIOLIVRO_CURSO/manifest.json)
+de durações, SHA-256 e origem. É uma **seleção de leitura** de 12 módulos, não a
+narração integral das 600 laudas. Verifique os termos do serviço de voz antes de
+redistribuir o áudio em outro contexto.
+
 **Piloto de edição enxuta (R1102):** 12 módulos, 60 laudas, 12 figuras e
 **76 páginas** em papel claro; [PDF](educacao_quantica_bohm/livro_pixel/EDICAO_ENXUTA_PILOTO.pdf)
 e [EPUB](educacao_quantica_bohm/livro_pixel/EDICAO_ENXUTA_PILOTO.epub).
 Build: `python3 educacao_quantica_bohm/livro_pixel/build_enxuta.py`. É um
-**piloto** para curso/impressão, não a edição final de 600–800 páginas.
+recorte de 60 laudas, não a edição de curso nem a obra de referência.
 
 **Limites:** o PDF é um artefato de build; não houve peer review, ISBN/DOI,
 tradução inglesa ou estudo de eficácia. 59 testes do livro passam no escopo
@@ -516,6 +532,10 @@ não é aceite editorial.
 | [Apêndice GJQ do livro](educacao_quantica_bohm/livro_pixel/GJQ_RESULTADOS.md) | Bell, CHSH, task IDs e contas |
 | [Aprofundamento quântico](educacao_quantica_bohm/livro_pixel/APROFUNDAMENTO_QUANTICO.md) | estados, canais, algoritmos, QEC e VQC |
 | [Notas ao professor](educacao_quantica_bohm/livro_pixel/NOTAS_PROFESSOR.md) | orientação consolidada por parte |
+| [Edição de curso — PDF](educacao_quantica_bohm/livro_pixel/EDICAO_CURSO_600.pdf) | 12 módulos, 600 laudas, 626 páginas; papel claro |
+| [Edição de curso — EPUB](educacao_quantica_bohm/livro_pixel/EDICAO_CURSO_600.epub) | versão reflowable da edição de curso |
+| [Audiolivro do curso](educacao_quantica_bohm/livro_pixel/AUDIOLIVRO_CURSO/README.md) | 12 capítulos + abertura; 12:50; voz sintética sem clonagem |
+| [Manifesto do audiolivro](educacao_quantica_bohm/livro_pixel/AUDIOLIVRO_CURSO/manifest.json) | durações, hashes e origem das faixas |
 | [Edição enxuta — piloto](educacao_quantica_bohm/livro_pixel/EDICAO_ENXUTA_PILOTO.pdf) | 12 módulos, 60 laudas, 76 páginas; PDF claro |
 | [Edição enxuta — EPUB](educacao_quantica_bohm/livro_pixel/EDICAO_ENXUTA_PILOTO.epub) | versão reflowable do piloto |
 | [Vídeo R1058](pilots/r1058-airam-veras/README.md) | plano de ação Airam Veras, mapa, cronograma e exemplos |

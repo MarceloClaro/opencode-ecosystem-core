@@ -42,3 +42,28 @@ Gera `EDICAO_ENXUTA_PILOTO.pdf`, `.epub` e `.html`: 12 módulos, 60 laudas N0,
 12 figuras e 76 páginas em papel claro. O piloto remove a repetição de
 micropráticas e converte links para seções não incluídas em texto. Ele não é a
 edição final de 600–800 páginas nem substitui a obra de referência.
+
+## Edição de curso (600 laudas)
+
+```bash
+python3 educacao_quantica_bohm/livro_pixel/build_curso.py
+```
+
+Gera `EDICAO_CURSO_600.pdf`, `.epub` e `.html`: 12 módulos, 60 conceitos,
+600 laudas, 12 figuras e **626 páginas** em papel claro (3.167.486 bytes no PDF,
+1.576.391 bytes no EPUB). O build reutiliza as funções de `build_enxuta.py`,
+inclui `NOTAS_PROFESSOR.md` e `APROFUNDAMENTO_QUANTICO.md`, e exclui o gabarito
+e as 100 fichas completas, que permanecem na edição de referência.
+
+## Audiolivro piloto
+
+```bash
+.venv/bin/python educacao_quantica_bohm/livro_pixel/build_audiolivro.py
+```
+
+Requer `edge-tts`, `beautifulsoup4` e `ffmpeg`/`ffprobe`. Gera 12 capítulos mais
+abertura, concatena em `AUDIOLIVRO_CURSO/AUDIOLIVRO_CURSO.mp3` e grava
+`manifest.json` com duração, SHA-256 e laudas de origem. A voz é sintética
+(`pt-BR-FranciscaNeural`), sem clonagem; o áudio é uma seleção de leitura, não a
+narração integral das 600 laudas. Confira os termos do serviço de voz antes de
+redistribuir.
