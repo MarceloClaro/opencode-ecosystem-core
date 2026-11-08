@@ -1,4 +1,4 @@
-"""Compila a edição de curso expandida (12 módulos, 480 laudas) em PDF e EPUB.
+"""Compila a edição de curso expandida (12 módulos, 600 laudas) em PDF e EPUB.
 
 Quatro conceitos por módulo, um em N0, um em N1, um em N2 e um em N1. Cada
 conceito entra com as dez lentes. O gabarito e as 100 fichas completas ficam

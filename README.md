@@ -526,7 +526,7 @@ não é aceite editorial.
 | [GJQ R1099](docs/GJQ_PESQUISA_QUANTICA_R1099.md) | MCPs, backends, auditoria e resultados Bell/CHSH |
 | [Auditoria de MCPs R1099](docs/AUDITORIA_MCPS_QUANTICOS_R1099.md) | hashes, licenças e bloqueios dos MCPs de terceiro |
 | [Loop Engineering R1100](docs/LOOP_ENGINEERING_R1100.md) | skill, agente, auditor L0–L3 e limites |
-| [Reavaliação comparativa R1101](docs/REAVALIACAO_COMPARATIVA_R1101.md) | matriz de cobertura, forças/limites e nota 8,4/10 |
+| [Reavaliação comparativa R1101](docs/REAVALIACAO_COMPARATIVA_R1101.md) | matriz de cobertura, forças/limites e nota 8,6/10 |
 | [Spec R1100](specs/SPEC-935-R1100-loop-engineering.md) | contrato do Loop Engineering |
 | [Livro quântico — build](educacao_quantica_bohm/livro_pixel/BUILD_PDF.md) | PDF versionado, `.venv-pdf` e hifenização |
 | [Apêndice GJQ do livro](educacao_quantica_bohm/livro_pixel/GJQ_RESULTADOS.md) | Bell, CHSH, task IDs e contas |
