@@ -245,3 +245,23 @@ def test_quantum_trails_docs_exist_and_state_limits():
     assert "Tsirelson" in lean
     bohm = paths[1].read_text(encoding="utf-8")
     assert "BohmianFlow" in bohm and "BSD-3-Clause" in bohm
+
+
+def test_gjq_provenance_results_are_sane():
+    base = ROOT / "docs" / "gjq-runtime"
+    assert (base / "README.md").is_file()
+    bell = json.loads((base / "bell-2026-11-08.json").read_text(encoding="utf-8"))
+    chsh = json.loads((base / "chsh-2026-11-08.json").read_text(encoding="utf-8"))
+    assert bell["total"] == 1024
+    assert sum(bell["counts"].values()) == 1024
+    assert bell["audit"]["ok"] is True
+    assert chsh["shots"] == 1024
+    assert len(chsh["cases"]) == 4
+    assert all(c["status"] == "DONE" for c in chsh["cases"].values())
+    assert chsh["S"] > 2
+    assert chsh["S_se"] > 0
+    assert chsh["consistent_with_tsirelson_within_1se"] is True
+    for payload in (bell, chsh):
+        text = json.dumps(payload).lower()
+        assert "api_key" not in text
+        assert "secret" not in text

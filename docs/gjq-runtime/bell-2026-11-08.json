@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "kind": "bell",
+  "generated_at": "2026-11-08T14:41:14.766902+00:00",
+  "backend": "FAS-GPU",
+  "hardware": false,
+  "shots": 1024,
+  "task_id": "5db11f42-fcdc-4b80-a5c7-cabe0432ef90",
+  "status": "DONE",
+  "platform_submit_time": "2026-11-08T22:38:03Z",
+  "qasm_sha256": "ae0cd142574796138ef95bd28378ae0a56b611999e3e31369cdacefe51a7b825",
+  "counts": {
+    "00": 507,
+    "11": 517
+  },
+  "total": 1024,
+  "probabilities": {
+    "00": 0.4951171875,
+    "11": 0.5048828125
+  },
+  "expected": "Bell state |Phi+>; only 00 and 11",
+  "audit": {
+    "ok": true,
+    "alerts": []
+  },
+  "limits": [
+    "Simulador da plataforma; nao e hardware.",
+    "Uma execucao nao prova fidelidade, emaranhamento fisico ou vantagem quantica.",
+    "A divisao 507/517 e compatavel com 50/50 dentro da flutuacao binomial."
+  ]
+}

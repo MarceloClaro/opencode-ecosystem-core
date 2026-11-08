@@ -152,7 +152,48 @@ O handshake MCP stdio do `gjq-runtime` foi verificado com 12 ferramentas. Sem
 `GJQ_API_KEY`, `gjq_list_backends` e `gjq_sample` retornam `blocked`; nenhum job
 foi submetido nesta sessão.
 
-## 9. Limites
+## 9. Resultados registrados (2026-11-08)
+
+Os registros brutos estão em `docs/gjq-runtime/`:
+
+- `bell-2026-11-08.json`;
+- `chsh-2026-11-08.json`;
+- `README.md` com o esquema e os limites.
+
+### Bell state
+
+| Campo | Valor |
+|---|---|
+| Task ID | `5db11f42-fcdc-4b80-a5c7-cabe0432ef90` |
+| Backend | `FAS-GPU` (simulador) |
+| Shots | 1024 |
+| Counts | `00`: 507; `11`: 517 |
+| Total | 1024 |
+| Auditoria | `ok = true`, sem alertas |
+| QASM SHA-256 | `ae0cd142574796138ef95bd28378ae0a56b611999e3e31369cdacefe51a7b825` |
+
+### CHSH
+
+| Caso | Bases | Task ID | E |
+|---|---|---|---|
+| A0B0 | Z, B0 | `8651f95c-dba8-474b-a5e2-ad3b913c9472` | 0,708984 |
+| A0B1 | Z, B1 | `b2bc4f8a-a1da-4185-acd4-de9cd8ea40db` | 0,703125 |
+| A1B0 | X, B0 | `950c9a34-cbc0-47f0-b22b-fdd4da84f8a0` | 0,744141 |
+| A1B1 | X, B1 | `77da2f60-0bd0-4a43-a341-f2d564f0c31d` | -0,714844 |
+
+`S = E00 + E01 + E10 - E11 = 2,871094` com `SE = 0,043506`.
+O valor ideal é `2√2 = 2,828427`; o limite clássico é 2. O resultado é de
+simulador, não de hardware.
+
+`S > 2` afasta o modelo local clássico no circuito e nas shots medidos. O valor
+2,871094 está a cerca de 1 SE de `2√2`; portanto, **não** excede o limite de
+Tsirelson de forma significativa e não deve ser lido como violação desse limite.
+
+O job `b3c9a748-5528-4f0a-81cd-81a36a96ef4b` no `FAS-CPU` permaneceu
+`QUEUED` e não entrou nesses resultados.
+
+## 10. Limites
+
 
 - Não houve execução real na GJQ: a chave não está no ambiente.
 - Não houve validação de fidelidade, calibração ou vantagem quântica.
