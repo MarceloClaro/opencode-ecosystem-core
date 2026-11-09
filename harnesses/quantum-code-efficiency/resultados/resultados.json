@@ -1,0 +1,394 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-11-09T08:57:15-03:00",
+  "seed": 42,
+  "software": {
+    "transpilador": "qiskit",
+    "optimization_level_baseline": 0,
+    "optimization_level_otimizado": 3,
+    "basis_gates": [
+      "u",
+      "cx"
+    ]
+  },
+  "resumo": {
+    "benchmarks": 7,
+    "pass": 7,
+    "fail": 0,
+    "tvd_medio": 9.020562075079397e-17,
+    "reducao_media_2q": 0.3129251700680272,
+    "reducao_media_depth": 0.2564625850340136
+  },
+  "benchmarks": [
+    {
+      "benchmark": "bell",
+      "seed": 42,
+      "coupling_map": null,
+      "baseline": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "size": 4,
+        "depth": 3,
+        "num_1q": 1,
+        "num_2q": 1,
+        "num_measure": 2,
+        "ops": {
+          "measure": 2,
+          "u": 1,
+          "cx": 1
+        },
+        "transpile_seconds": 0.4078998280019732
+      },
+      "otimizado": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "size": 4,
+        "depth": 3,
+        "num_1q": 1,
+        "num_2q": 1,
+        "num_measure": 2,
+        "ops": {
+          "measure": 2,
+          "u": 1,
+          "cx": 1
+        },
+        "transpile_seconds": 0.00849433901021257
+      },
+      "reducao": {
+        "size": 0.0,
+        "depth": 0.0,
+        "num_2q": 0.0,
+        "num_1q": 0.0
+      },
+      "tvd": 0.0,
+      "tvd_tolerancia": 1e-09,
+      "gates": {
+        "tvd": true,
+        "num_2q": true,
+        "depth": true
+      },
+      "status": "pass",
+      "hardware": false,
+      "network": false
+    },
+    {
+      "benchmark": "ghz4",
+      "seed": 42,
+      "coupling_map": null,
+      "baseline": {
+        "num_qubits": 4,
+        "num_clbits": 4,
+        "size": 8,
+        "depth": 5,
+        "num_1q": 1,
+        "num_2q": 3,
+        "num_measure": 4,
+        "ops": {
+          "measure": 4,
+          "cx": 3,
+          "u": 1
+        },
+        "transpile_seconds": 0.002355335993343033
+      },
+      "otimizado": {
+        "num_qubits": 4,
+        "num_clbits": 4,
+        "size": 8,
+        "depth": 5,
+        "num_1q": 1,
+        "num_2q": 3,
+        "num_measure": 4,
+        "ops": {
+          "measure": 4,
+          "cx": 3,
+          "u": 1
+        },
+        "transpile_seconds": 0.007133263992727734
+      },
+      "reducao": {
+        "size": 0.0,
+        "depth": 0.0,
+        "num_2q": 0.0,
+        "num_1q": 0.0
+      },
+      "tvd": 0.0,
+      "tvd_tolerancia": 1e-09,
+      "gates": {
+        "tvd": true,
+        "num_2q": true,
+        "depth": true
+      },
+      "status": "pass",
+      "hardware": false,
+      "network": false
+    },
+    {
+      "benchmark": "qft4",
+      "seed": 42,
+      "coupling_map": null,
+      "baseline": {
+        "num_qubits": 4,
+        "num_clbits": 4,
+        "size": 45,
+        "depth": 28,
+        "num_1q": 23,
+        "num_2q": 18,
+        "num_measure": 4,
+        "ops": {
+          "u": 23,
+          "cx": 18,
+          "measure": 4
+        },
+        "transpile_seconds": 0.002505648008082062
+      },
+      "otimizado": {
+        "num_qubits": 4,
+        "num_clbits": 4,
+        "size": 32,
+        "depth": 22,
+        "num_1q": 16,
+        "num_2q": 12,
+        "num_measure": 4,
+        "ops": {
+          "u": 16,
+          "cx": 12,
+          "measure": 4
+        },
+        "transpile_seconds": 0.007433324994053692
+      },
+      "reducao": {
+        "size": 0.28888888888888886,
+        "depth": 0.21428571428571427,
+        "num_2q": 0.3333333333333333,
+        "num_1q": 0.30434782608695654
+      },
+      "tvd": 1.5265566588595902e-16,
+      "tvd_tolerancia": 1e-09,
+      "gates": {
+        "tvd": true,
+        "num_2q": true,
+        "depth": true
+      },
+      "status": "pass",
+      "hardware": false,
+      "network": false
+    },
+    {
+      "benchmark": "vqe2",
+      "seed": 42,
+      "coupling_map": null,
+      "baseline": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "size": 7,
+        "depth": 4,
+        "num_1q": 4,
+        "num_2q": 1,
+        "num_measure": 2,
+        "ops": {
+          "u": 4,
+          "measure": 2,
+          "cx": 1
+        },
+        "transpile_seconds": 0.0024942750023910776
+      },
+      "otimizado": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "size": 7,
+        "depth": 4,
+        "num_1q": 4,
+        "num_2q": 1,
+        "num_measure": 2,
+        "ops": {
+          "u": 4,
+          "measure": 2,
+          "cx": 1
+        },
+        "transpile_seconds": 0.006696210999507457
+      },
+      "reducao": {
+        "size": 0.0,
+        "depth": 0.0,
+        "num_2q": 0.0,
+        "num_1q": 0.0
+      },
+      "tvd": 0.0,
+      "tvd_tolerancia": 1e-09,
+      "gates": {
+        "tvd": true,
+        "num_2q": true,
+        "depth": true
+      },
+      "status": "pass",
+      "hardware": false,
+      "network": false
+    },
+    {
+      "benchmark": "layered4",
+      "seed": 42,
+      "coupling_map": null,
+      "baseline": {
+        "num_qubits": 4,
+        "num_clbits": 4,
+        "size": 37,
+        "depth": 14,
+        "num_1q": 24,
+        "num_2q": 9,
+        "num_measure": 4,
+        "ops": {
+          "u": 24,
+          "cx": 9,
+          "measure": 4
+        },
+        "transpile_seconds": 0.002364644009503536
+      },
+      "otimizado": {
+        "num_qubits": 4,
+        "num_clbits": 4,
+        "size": 25,
+        "depth": 11,
+        "num_1q": 12,
+        "num_2q": 9,
+        "num_measure": 4,
+        "ops": {
+          "u": 12,
+          "cx": 9,
+          "measure": 4
+        },
+        "transpile_seconds": 0.00559580500703305
+      },
+      "reducao": {
+        "size": 0.32432432432432434,
+        "depth": 0.21428571428571427,
+        "num_2q": 0.0,
+        "num_1q": 0.5
+      },
+      "tvd": 2.2898349882893854e-16,
+      "tvd_tolerancia": 1e-09,
+      "gates": {
+        "tvd": true,
+        "num_2q": true,
+        "depth": true
+      },
+      "status": "pass",
+      "hardware": false,
+      "network": false
+    },
+    {
+      "benchmark": "redundant",
+      "seed": 42,
+      "coupling_map": null,
+      "baseline": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "size": 9,
+        "depth": 6,
+        "num_1q": 5,
+        "num_2q": 2,
+        "num_measure": 2,
+        "ops": {
+          "u": 5,
+          "cx": 2,
+          "measure": 2
+        },
+        "transpile_seconds": 0.001992647987208329
+      },
+      "otimizado": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "size": 3,
+        "depth": 2,
+        "num_1q": 1,
+        "num_2q": 0,
+        "num_measure": 2,
+        "ops": {
+          "measure": 2,
+          "u": 1
+        },
+        "transpile_seconds": 0.004704983992269263
+      },
+      "reducao": {
+        "size": 0.6666666666666666,
+        "depth": 0.6666666666666666,
+        "num_2q": 1.0,
+        "num_1q": 0.8
+      },
+      "tvd": 1.9261758283550625e-33,
+      "tvd_tolerancia": 1e-09,
+      "gates": {
+        "tvd": true,
+        "num_2q": true,
+        "depth": true
+      },
+      "status": "pass",
+      "hardware": false,
+      "network": false
+    },
+    {
+      "benchmark": "nonadjacent",
+      "seed": 42,
+      "coupling_map": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "baseline": {
+        "num_qubits": 4,
+        "num_clbits": 4,
+        "size": 24,
+        "depth": 10,
+        "num_1q": 13,
+        "num_2q": 7,
+        "num_measure": 4,
+        "ops": {
+          "u": 13,
+          "cx": 7,
+          "measure": 4
+        },
+        "transpile_seconds": 0.005260678008198738
+      },
+      "otimizado": {
+        "num_qubits": 4,
+        "num_clbits": 4,
+        "size": 6,
+        "depth": 3,
+        "num_1q": 1,
+        "num_2q": 1,
+        "num_measure": 4,
+        "ops": {
+          "measure": 4,
+          "u": 1,
+          "cx": 1
+        },
+        "transpile_seconds": 0.007274907999089919
+      },
+      "reducao": {
+        "size": 0.75,
+        "depth": 0.7,
+        "num_2q": 0.8571428571428571,
+        "num_1q": 0.9230769230769231
+      },
+      "tvd": 2.498001805406602e-16,
+      "tvd_tolerancia": 1e-09,
+      "gates": {
+        "tvd": true,
+        "num_2q": true,
+        "depth": true
+      },
+      "status": "pass",
+      "hardware": false,
+      "network": false
+    }
+  ],
+  "limites": "Métricas de transpilação e distribuição ideal; não é execução em hardware, não mede fidelidade de estado e não prova vantagem quântica. O resultado depende da versão do Qiskit, do seed e do conjunto de portas base."
+}

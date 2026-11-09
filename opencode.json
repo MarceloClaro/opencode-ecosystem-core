@@ -9355,6 +9355,73 @@
       },
       "model": "opencode-go/deepseek-v4.1-flash"
     },
+    "quantum-benchmark-audit": {
+      "description": "Audita benchmarks de eficiência quântica: mesmo circuito, seed, versão, TVD, gates e limites; recusa speedup ou vantagem quântica sem tarefa completa e hardware.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/quantum-benchmark-audit.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1108_quantum_code_efficiency.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code",
+          "opencode-zen/deepseek-v4-pro"
+        ],
+        "model_economy": {
+          "complexity": "critica",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4-pro",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4-pro"
+    },
+    "quantum-code-efficiency": {
+      "description": "Otimiza circuitos e scripts quânticos com baseline, transpilação, métricas de portas/profundidade e gate de correção distribucional; não declara speedup ou vantagem quântica sem tarefa completa.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/quantum-code-efficiency.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1108_quantum_code_efficiency.py -q": "allow"
+        },
+        "edit": "allow",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4.1-flash",
+          "opencode-go/mimo-v2.6-flash",
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code"
+        ],
+        "model_economy": {
+          "complexity": "complexa",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4.1-flash",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4.1-flash"
+    },
     "quantum-experiment-auditor": {
       "description": "Audita counts, task IDs, incerteza, sobreposição e limites de E01–E18; não trata sobreposição como fidelidade de estado.",
       "mode": "subagent",
