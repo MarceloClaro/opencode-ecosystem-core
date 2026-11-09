@@ -121,6 +121,19 @@ agent_qem.py audit --report RELATORIO.md
 - `RELATORIO.md`;
 - status, findings, evidence e limitations.
 
+## Resultados recentes
+
+- **RC em hardware (R1123):** 16 jobs, 2 conjuntos × 4 baseline + 4 twirls,
+  9.600 shots. Baseline TVD 0,0962; twirlado 0,0978; Δ +0,0018
+  [−0,0071, +0,0108]; **sem efeito detectável**. O resultado negativo é
+  registrado.
+- **Leitura (R1124):** três runs de mitigação 4×4; sinal instável. O layout
+  otimizado usa 106/107 e o baseline 0/1; a diferença mistura layout com
+  qualidade de qubit. Mitigação ≠ correção do r1 físico.
+- **Pré-registro:** não comparar layouts; n=38.411 por circuito/layout.
+- **Cycle benchmarking:** plano de 150 jobs; nenhuma taxa medida.
+- **GST:** bloqueada; pyGSTi ausente e protocolo não validado.
+
 ## Limites
 
 - ZNE não é QEC; no Baihua a curva continuou não monotônica mesmo com 4 escalas e a extrapolação foi inválida.

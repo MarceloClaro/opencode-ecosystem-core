@@ -118,6 +118,13 @@ Três runs de mitigação 4×4: baseline 0,0247 (faixa 0,0228–0,0263); otimiza
 106/107 e o baseline usa 0/1, então a diferença mistura layout com qualidade
 de qubit. Mitigação de leitura **não** reduz o r1 físico.
 
+## CB e GST
+
+- **Cycle benchmarking:** plano de 150 jobs pronto; nenhuma taxa medida. O
+  gerador/ajuste precisa ser validado em simulador antes do hardware.
+- **GST:** bloqueada; pyGSTi ausente e protocolo não validado.
+- Handoff: `docs/HANDOFF_CB_GST.md`.
+
 ## Pré-registro e literatura
 
 - `harnesses/quantum-error-mitigation/preregister_layout.py` pré-registra n e

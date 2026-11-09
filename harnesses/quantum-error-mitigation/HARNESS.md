@@ -76,6 +76,13 @@ Três runs de mitigação 4×4. Sinal instável; baseline usa 0/1 e otimizado us
 106/107. Mitigação de leitura não reduz o r1 físico; decisão: não comparar
 layouts.
 
+## CB e GST
+
+Cycle benchmarking e GST permanecem bloqueados por protocolo/dependência:
+`docs/HANDOFF_CB_GST.md`. O plano de 150 jobs existe, mas nenhuma taxa foi
+medida; pyGSTi não está instalado e a GST exige gate set, fiduciais, germs e
+análise de diamond norm.
+
 ## Pré-registro e planos
 
 ```bash

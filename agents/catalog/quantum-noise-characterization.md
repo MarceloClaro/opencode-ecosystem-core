@@ -128,6 +128,16 @@ agent_qem.py audit --report RELATORIO.md
 - `RELATORIO.md`;
 - status, findings, evidence e limitations.
 
+## Resultados recentes
+
+- **Rabi de q1 (R1118):** ε(rx) = −0,0006 ± 0,0091 rad; ε(ry) = +0,0012 ±
+  0,0129 rad; nenhum desvio coerente acima de 2σ; r1 0,0695–0,0786.
+- **Tomografia simétrica (R1117):** q0/q1 com dois conjuntos cada; Δ r1
+  +0,0072, ICs se sobrepõem, spread 0,0115/0,0127; não conclusivo.
+- **Redundância:** prep |0>/|1> = 1 − r0/r1; não são evidências independentes.
+- **Leitura (R1124):** mitigação não reduz o r1 físico; sinal de layout
+  instável e confundido por qubits diferentes.
+
 ## Limites
 
 - A calibração |11> inclui preparação do |1>.
