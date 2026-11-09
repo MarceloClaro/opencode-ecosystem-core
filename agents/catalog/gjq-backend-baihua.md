@@ -74,6 +74,24 @@ no snapshot de 2026-11-09.
 - T1: 73.06 µs; T2: 26.36 µs; calibração: `2026-11-09T07:45:38`.
 - Aliases: `Baihua 156`.
 
+## Melhor uso
+
+- hardware real
+- benchmark de calibração
+- Bell/CHSH com ruído real
+
+## Evitar
+
+- generalizar uma execução
+- circuitos longos sem correção de erro
+
+## Experimentos recomendados
+
+- `bell`
+- `chsh`
+- `ghz3`
+- `swap_test`
+
 ## Regras de uso
 
 - Hardware/emulação: use `allow_hardware=True` e `confirm=True` no MCP `gjq-runtime`; sem isso, a submissão deve retornar bloqueada.

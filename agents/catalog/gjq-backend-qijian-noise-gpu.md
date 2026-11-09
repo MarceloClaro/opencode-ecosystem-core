@@ -72,6 +72,21 @@ no snapshot de 2026-11-09.
 - T1: não se aplica; T2: não se aplica; calibração: `não se aplica`.
 - Aliases: `Qijian`, `Noise GPU`.
 
+## Melhor uso
+
+- estudo de ruído modelado
+- robustez a depolarização
+
+## Evitar
+
+- inferir T1/T2 do chip
+- tratar ruído modelado como calibração real
+
+## Experimentos recomendados
+
+- `chsh_noise_sweep`
+- `bell_repetition`
+
 ## Regras de uso
 
 - Simulador: não é hardware. A execução não mede um chip e não deve ser descrita como medida física.

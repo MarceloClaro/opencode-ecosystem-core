@@ -19,7 +19,9 @@ from integrations.gjq_backend_registry import (
     resolve_backend,
     select_backends,
     snapshot_summary,
+    validate_provenance,
 )
+from integrations.gjq_experiment_templates import get_template, template_catalog
 
 FAMILIES = ("hardware", "cpu", "gpu", "mps", "npu")
 
@@ -73,6 +75,27 @@ def create_server() -> FastMCP:
                 "Nome de API não verificado deve ser confirmado com "
                 "gjq_list_backends antes de qualquer submissão."
             ),
+        }
+
+    @server.tool(name="gjq_backend_profile", annotations=readonly)
+    def gjq_backend_profile(name: str) -> dict:
+        """Perfil de um backend com melhor uso, o que evitar e experimentos."""
+        matches = resolve_backend(name)
+        if len(matches) == 1:
+            return {
+                "query": name,
+                "profile": matches[0],
+                "executed": False,
+                "network_access": False,
+            }
+        return {
+            "query": name,
+            "matches": matches,
+            "total": len(matches),
+            "ambiguous": len(matches) > 1,
+            "executed": False,
+            "network_access": False,
+            "note": "Nenhum perfil único; resolva o nome antes de usar.",
         }
 
     @server.tool(name="gjq_select_backend", annotations=readonly)
@@ -133,6 +156,23 @@ def create_server() -> FastMCP:
     def gjq_backend_limits() -> dict:
         """Limites por família e restrições conhecidas."""
         return backend_limits()
+
+    @server.tool(name="gjq_provenance_validate", annotations=readonly)
+    def gjq_provenance_validate(record: dict) -> dict:
+        """Valida um registro de proveniência sem gravar nem executar."""
+        return validate_provenance(record)
+
+    @server.tool(name="gjq_experiment_template", annotations=readonly)
+    def gjq_experiment_template(name: str | None = None) -> dict:
+        """Lista templates ou retorna um QASM de referência; não executa."""
+        if name is None:
+            return template_catalog()
+        return {
+            "template": get_template(name),
+            "executed": False,
+            "network_access": False,
+            "note": "Template de referência; não executado.",
+        }
 
     @server.tool(name="gjq_provenance_template", annotations=readonly)
     def gjq_provenance_template() -> dict:

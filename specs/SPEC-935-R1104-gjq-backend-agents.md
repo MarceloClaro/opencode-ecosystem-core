@@ -1,5 +1,10 @@
 # SPEC-935-R1104 — Agentes e MCP para os recursos GJQ/Tiangong
 
+> **Atualização R1105 (2026-11-09):** a camada foi ampliada com orientação
+> `best_for`/`avoid` por backend, frescor do snapshot, `gjq_backend_drift` no
+> runtime, validação de proveniência e 5 templates de experimento. O MCP
+> `gjq-backend-research` passou de 9 para 12 ferramentas.
+
 **Status:** implementação local
 **Data:** 2026-11-09
 **Escopo:** catálogo canônico dos recursos do serviço de computação quântica

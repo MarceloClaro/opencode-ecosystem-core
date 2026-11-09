@@ -1,4 +1,4 @@
-# Backends GJQ/Tiangong — R1104
+# Backends GJQ/Tiangong — R1104/R1105
 
 **Data do snapshot:** 2026-11-09
 **Fonte informada:** <https://www.tiangongqs.com/cloud/server>
@@ -60,18 +60,22 @@ silenciosamente.
 
 ## 3. MCP `gjq-backend-research`
 
-Servidor local, somente leitura, sem chave e sem rede:
+Servidor local, somente leitura, sem chave e sem rede. A R1105 acrescentou
+perfil orientado, validação de proveniência e templates; são 12 ferramentas:
 
 | Ferramenta | Função |
 |---|---|
 | `gjq_backend_catalog` | catálogo completo; filtros por família |
-| `gjq_backend_snapshot` | contagens por família/status |
+| `gjq_backend_snapshot` | contagens, idade e validade do snapshot |
+| `gjq_backend_profile` | perfil com melhor uso, o que evitar e experimentos |
 | `gjq_resolve_backend` | resolve ID, nome exibido, API ou alias |
 | `gjq_select_backend` | seleção por família, qubits e status |
 | `gjq_research_plan` | recomenda backend e protocolo |
 | `gjq_compare_plan` | plano simulador versus hardware |
 | `gjq_backend_limits` | limites por família e restrições |
 | `gjq_provenance_template` | campos de proveniência |
+| `gjq_provenance_validate` | valida registro, hash, shots e soma |
+| `gjq_experiment_template` | Bell, GHZ-3, CHSH, QFT-2 e ansatz VQE |
 | `gjq_calibration_snapshot` | T1/T2 do snapshot, com aviso |
 
 Exemplo de plano para Bell em 2 qubits:
@@ -90,6 +94,18 @@ gjq_research_plan(goal="Bell", num_qubits=2, hardware_allowed=True, prefer="hard
 
 O MCP **não** substitui o `gjq-runtime`: ele não lista a fila ao vivo, não lê
 calibração ao vivo e não submete. Use o runtime para isso.
+
+### Frescor, drift e proveniência
+
+- `gjq_backend_snapshot` informa `age_days`, `stale` e `clock_skew`. Data
+  futura não é tratada como “fresca”.
+- `gjq-runtime.gjq_backend_drift` compara o registro com `list_backends` ao
+  vivo e retorna `missing_in_registry`, `missing_live`, `ambiguous` e nomes
+  de API não verificados. Não submete job.
+- `gjq_provenance_validate` rejeita campo ausente, hash inválido, shots
+  inválido e soma de counts incompatível.
+- `gjq_experiment_template` entrega QASM de referência; CHSH retorna quatro
+  circuitos (ZZ, ZX, XZ, XX).
 
 ## 4. Agentes
 
@@ -146,6 +162,7 @@ preserva cards existentes.
 
 ```bash
 .venv/bin/python -m pytest tests/test_r1104_gjq_backend_agents.py -q
+.venv/bin/python -m pytest tests/test_r1105_gjq_backend_improvements.py -q
 .venv-quantum/bin/python -m pytest tests/test_r1099_gjq_runtime_mcp.py -q
 python3 -m integrations.opencode_cli
 ```

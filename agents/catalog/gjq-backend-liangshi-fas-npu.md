@@ -72,6 +72,26 @@ no snapshot de 2026-11-09.
 - T1: não se aplica; T2: não se aplica; calibração: `não se aplica`.
 - Aliases: `Liangshi`, `Full Amplitude NPU`.
 
+## Melhor uso
+
+- validação rápida
+- distribuição completa
+- Bell/GHZ/CHSH pequenos
+- benchmark pequeno e prototipagem
+
+## Evitar
+
+- confundir simulação com hardware
+- profundidade excessiva
+- escala
+
+## Experimentos recomendados
+
+- `bell`
+- `ghz3`
+- `chsh`
+- `qft2`
+
 ## Regras de uso
 
 - Simulador: não é hardware. A execução não mede um chip e não deve ser descrita como medida física.

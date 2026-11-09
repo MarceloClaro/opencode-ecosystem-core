@@ -74,6 +74,26 @@ no snapshot de 2026-11-09.
 - T1: 20.57 µs; T2: 5.43 µs; calibração: `2026-10-16T17:56:02`.
 - Aliases: `Guoji7`, `Guoji07`, `Guoji No. 7`.
 
+## Melhor uso
+
+- hardware real
+- benchmark de calibração
+- Bell/CHSH com ruído real
+- planejamento e leitura de calibração
+
+## Evitar
+
+- generalizar uma execução
+- circuitos longos sem correção de erro
+- submeter enquanto manutenção
+
+## Experimentos recomendados
+
+- `bell`
+- `chsh`
+- `ghz3`
+- `swap_test`
+
 ## Regras de uso
 
 - Hardware/emulação: use `allow_hardware=True` e `confirm=True` no MCP `gjq-runtime`; sem isso, a submissão deve retornar bloqueada.

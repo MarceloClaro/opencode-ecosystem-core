@@ -199,9 +199,9 @@ o que foi medido, qual task ID sustenta cada número e qual limite permanece.
 | Componente | Entrega | Gate |
 |---|---|---|
 | MCP `gjq-experiments` | 7 ferramentas para E01–E18 pelo script canônico | `confirm=True` e JSON simulado antes do hardware |
-| MCP `gjq-runtime` | 12 ferramentas para backends, sampling, estimativa e tarefas | `confirm=True`; hardware só com `allow_hardware=True`; 200 qubits/100.000 shots/20 submissões |
+| MCP `gjq-runtime` | 13 ferramentas para backends, drift, sampling, estimativa e tarefas | `confirm=True`; hardware só com `allow_hardware=True`; 200 qubits/100.000 shots/20 submissões |
 | MCP `quantum-sim-core` | 4 ferramentas para OpenQASM local | 12 qubits/10.000 shots; sem rede, arquivos ou código arbitrário |
-| MCP `gjq-backend-research` | 9 ferramentas somente leitura para catálogo, resolução, seleção e plano | sem chave e sem rede; não submete |
+| MCP `gjq-backend-research` | 12 ferramentas somente leitura para catálogo, perfil, seleção, plano, proveniência e templates | sem chave e sem rede; não submete |
 | Agentes | `gjq-quantum-research`, `gjq-experiment-runner` e 19 `gjq-backend-*` | proveniência, custo, gate e limites |
 | Skills | `gjq-pesquisa-quantica`, `gjq-experimentos-quanticos` | fluxo e segurança |
 
@@ -218,10 +218,12 @@ não foi executado nesta rodada. A UI de 2026-11-09 mostra
 `Guoji No.8 (simulate)`; o gate R1104 o trata como emulação de hardware e
 preserva a leitura histórica com a data e a calibração da época.
 
-O catálogo R1104 lista **19 recursos** (6 hardware/emulação, 4 CPU, 4 GPU,
-1 MPS e 4 NPU), com 19 agentes `gjq-backend-*` e o MCP
-`gjq-backend-research`. Nomes de API não verificados não são inventados:
-`gjq_list_backends` confirma o nome vivo antes da submissão.
+O catálogo R1104/R1105 lista **19 recursos** (6 hardware/emulação, 4 CPU,
+4 GPU, 1 MPS e 4 NPU), com 19 agentes `gjq-backend-*` e o MCP
+`gjq-backend-research`. Cada perfil traz melhor uso, o que evitar e
+experimentos recomendados. `gjq_backend_drift` compara o registro com a lista
+viva; nomes de API não verificados não são inventados: `gjq_list_backends`
+confirma o nome antes da submissão.
 
 Task IDs, counts e hashes QASM estão em `docs/gjq-runtime/*.json`; a conta
 completa está no [Apêndice GJQ](educacao_quantica_bohm/livro_pixel/GJQ_RESULTADOS.md).

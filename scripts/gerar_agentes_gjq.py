@@ -18,7 +18,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from integrations.gjq_backend_registry import BACKENDS, Backend  # noqa: E402
+from integrations.gjq_backend_registry import BACKENDS, Backend, guidance_for  # noqa: E402
 
 SPEC = "specs/SPEC-935-R1104-gjq-backend-agents.md"
 TEST = "tests/test_r1104_gjq_backend_agents.py"
@@ -97,6 +97,10 @@ def _body(backend: Backend) -> str:
         )
     if not restrictions:
         restrictions.append("nenhuma restrição específica além dos limites do runtime")
+    guidance = guidance_for(backend)
+    melhor = "\n".join(f"- {item}" for item in guidance["best_for"])
+    evitar = "\n".join(f"- {item}" for item in guidance["avoid"])
+    experimentos = "\n".join(f"- `{item}`" for item in guidance["recommended_experiments"])
 
     return f"""# Especialista GJQ — {backend.display_name}
 
@@ -110,6 +114,18 @@ no snapshot de 2026-11-09.
 - Status: `{backend.status}`; jobs no snapshot: `{backend.jobs}`.
 - T1: {t1}; T2: {t2}; calibração: `{calibration}`.
 - Aliases: {", ".join(f"`{a}`" for a in backend.aliases)}.
+
+## Melhor uso
+
+{melhor}
+
+## Evitar
+
+{evitar}
+
+## Experimentos recomendados
+
+{experimentos}
 
 ## Regras de uso
 

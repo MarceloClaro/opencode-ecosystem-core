@@ -74,6 +74,21 @@ no snapshot de 2026-11-09.
 - T1: 85.2 µs; T2: 48.6 µs; calibração: `2026-11-09T08:34:35`.
 - Aliases: `Guoji8`, `Guoji08`, `Guoji No. 8`, `Guoji No.8 (simulate)`.
 
+## Melhor uso
+
+- ensaiar o fluxo de hardware
+- comparar com dados históricos
+
+## Evitar
+
+- alegar medida física
+- tratar como hardware real
+
+## Experimentos recomendados
+
+- `bell`
+- `chsh`
+
 ## Regras de uso
 
 - Hardware/emulação: use `allow_hardware=True` e `confirm=True` no MCP `gjq-runtime`; sem isso, a submissão deve retornar bloqueada.

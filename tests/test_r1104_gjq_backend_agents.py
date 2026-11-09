@@ -92,12 +92,15 @@ def test_mcp_tools_somente_leitura_e_sem_chave():
     assert set(tools) == {
         "gjq_backend_catalog",
         "gjq_backend_snapshot",
+        "gjq_backend_profile",
         "gjq_resolve_backend",
         "gjq_select_backend",
         "gjq_research_plan",
         "gjq_compare_plan",
         "gjq_backend_limits",
         "gjq_provenance_template",
+        "gjq_provenance_validate",
+        "gjq_experiment_template",
         "gjq_calibration_snapshot",
     }
     catalog = tools["gjq_backend_catalog"].fn()

@@ -10,6 +10,7 @@ from __future__ import annotations
 import re
 import unicodedata
 from dataclasses import asdict, dataclass
+from datetime import date
 from typing import Any, Iterable
 
 SNAPSHOT: dict[str, Any] = {
@@ -47,6 +48,9 @@ class Backend:
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
+
+    def profile(self) -> dict[str, Any]:
+        return {**self.to_dict(), "guidance": guidance_for(self)}
 
 
 BACKENDS: tuple[Backend, ...] = (
@@ -413,6 +417,98 @@ BACKENDS: tuple[Backend, ...] = (
 
 BY_ID: dict[str, Backend] = {b.id: b for b in BACKENDS}
 
+STALE_AFTER_DAYS = 7
+GUIDANCE_BY_KIND: dict[str, dict[str, list[str]]] = {
+    "superconducting": {
+        "best_for": ["hardware real", "benchmark de calibração", "Bell/CHSH com ruído real"],
+        "avoid": ["generalizar uma execução", "circuitos longos sem correção de erro"],
+        "recommended_experiments": ["bell", "chsh", "ghz3", "swap_test"],
+    },
+    "emulated_hardware": {
+        "best_for": ["ensaiar o fluxo de hardware", "comparar com dados históricos"],
+        "avoid": ["alegar medida física", "tratar como hardware real"],
+        "recommended_experiments": ["bell", "chsh"],
+    },
+    "full_amplitude": {
+        "best_for": ["validação rápida", "distribuição completa", "Bell/GHZ/CHSH pequenos"],
+        "avoid": ["confundir simulação com hardware", "profundidade excessiva"],
+        "recommended_experiments": ["bell", "ghz3", "chsh", "qft2"],
+    },
+    "noise": {
+        "best_for": ["estudo de ruído modelado", "robustez a depolarização"],
+        "avoid": ["inferir T1/T2 do chip", "tratar ruído modelado como calibração real"],
+        "recommended_experiments": ["chsh_noise_sweep", "bell_repetition"],
+    },
+    "single_amplitude": {
+        "best_for": ["uma amplitude específica", "interferência"],
+        "avoid": ["sampling geral", "distribuição completa"],
+        "recommended_experiments": ["qft2_amplitude", "interference_amplitude"],
+    },
+    "partial_amplitude": {
+        "best_for": ["subconjunto de amplitudes", "estimativa de probabilidade"],
+        "avoid": ["distribuição completa", "sampling geral"],
+        "recommended_experiments": ["qft2_subset", "amplitude_estimation"],
+    },
+    "tensor_network": {
+        "best_for": ["muitos qubits com baixo emaranhamento", "tensor network"],
+        "avoid": ["circuitos profundos/altamente emaranhados", "assumir 997 qubits úteis"],
+        "recommended_experiments": ["ghz_sparse", "mps_depth_sweep"],
+    },
+}
+
+
+def guidance_for(backend: Backend) -> dict[str, list[str]]:
+    """Orientação prática derivada do tipo, com ajustes de família/estado."""
+    base = GUIDANCE_BY_KIND.get(backend.kind, {
+        "best_for": ["uso geral"],
+        "avoid": ["generalizar sem evidência"],
+        "recommended_experiments": ["bell"],
+    })
+    best = list(base["best_for"])
+    avoid = list(base["avoid"])
+    experiments = list(base["recommended_experiments"])
+    if backend.family == "npu":
+        best.append("benchmark pequeno e prototipagem")
+        avoid.append("escala")
+    if backend.family == "hardware" and backend.status == "maintenance":
+        best.append("planejamento e leitura de calibração")
+        avoid.append("submeter enquanto manutenção")
+    if backend.simulator_config_required:
+        experiments.append("mps_preset_sweep")
+    return {
+        "best_for": best,
+        "avoid": avoid,
+        "recommended_experiments": experiments,
+    }
+
+
+def snapshot_freshness(as_of: date | None = None) -> dict[str, Any]:
+    """Idade do snapshot; data futura vira clock_skew, não 'fresco'."""
+    raw = str(SNAPSHOT.get("captured_at", ""))[:10]
+    try:
+        captured = date.fromisoformat(raw)
+    except ValueError:
+        return {
+            "captured_at": raw or None,
+            "as_of": (as_of or date.today()).isoformat(),
+            "age_days": None,
+            "stale": True,
+            "stale_after_days": STALE_AFTER_DAYS,
+            "clock_skew": False,
+            "error": "captured_at inválido",
+        }
+    ref = as_of or date.today()
+    delta = (ref - captured).days
+    age = max(delta, 0)
+    return {
+        "captured_at": captured.isoformat(),
+        "as_of": ref.isoformat(),
+        "age_days": age,
+        "stale": age > STALE_AFTER_DAYS,
+        "stale_after_days": STALE_AFTER_DAYS,
+        "clock_skew": delta < 0,
+    }
+
 
 def normalize_name(value: str) -> str:
     """Normaliza rótulos da UI/API para comparação tolerante a pontuação."""
@@ -444,7 +540,7 @@ def resolve_backend(query: str) -> list[dict[str, Any]]:
         return []
     raw = query.strip()
     if raw in BY_ID:
-        return [BY_ID[raw].to_dict()]
+        return [BY_ID[raw].profile()]
     wanted = normalize_name(raw)
     matches = [b for b in BACKENDS if wanted in _keys(b)]
     if not matches:
@@ -453,7 +549,7 @@ def resolve_backend(query: str) -> list[dict[str, Any]]:
             b for b in BACKENDS
             if any(k.startswith(wanted) or wanted.startswith(k) for k in _keys(b))
         ]
-    return [b.to_dict() for b in matches]
+    return [b.profile() for b in matches]
 
 
 def get_backend(backend_id: str) -> Backend | None:
@@ -474,8 +570,9 @@ def catalog(
         rows = [b for b in rows if b.status != "maintenance"]
     return {
         "snapshot": SNAPSHOT,
+        "freshness": snapshot_freshness(),
         "total": len(rows),
-        "backends": [b.to_dict() for b in rows],
+        "backends": [b.profile() for b in rows],
     }
 
 
@@ -487,6 +584,7 @@ def snapshot_summary() -> dict[str, Any]:
         statuses[backend.status] = statuses.get(backend.status, 0) + 1
     return {
         "snapshot": SNAPSHOT,
+        "freshness": snapshot_freshness(),
         "total": len(BACKENDS),
         "families": families,
         "statuses": statuses,
@@ -512,7 +610,7 @@ def select_backends(
     if status:
         rows = [b for b in rows if b.status == status]
     rows.sort(key=lambda b: (b.qubits, b.family, b.id))
-    return [b.to_dict() for b in rows[:limit]]
+    return [b.profile() for b in rows[:limit]]
 
 
 def is_hardware_name(name: str) -> bool:
@@ -599,11 +697,16 @@ def research_plan(
         candidates.sort(key=lambda b: (rank.get(b.family, 9), kind_rank.get(b.kind, 9), b.qubits, b.id))
     chosen = candidates[0]
     alternatives = candidates[1:4]
+    fresh = snapshot_freshness()
     warnings = [
-        "Snapshot de 2026-11-09; confirme o nome e o estado com gjq_list_backends.",
+        "Confirme o nome e o estado com gjq_list_backends.",
         "Capacidade de qubits não garante que o circuito seja prático.",
         "Counts corretos não provam fidelidade, emaranhamento ou vantagem quântica.",
     ]
+    if fresh.get("clock_skew"):
+        warnings.append("Data do snapshot está à frente do relógio local; trate como data informada.")
+    elif fresh.get("stale"):
+        warnings.append(f"Snapshot com {fresh['age_days']} dias; confirme o estado ao vivo.")
     if chosen.requires_allow_hardware:
         warnings.append("Backend de hardware/emulação: exige allow_hardware=True e confirm=True.")
     if chosen.amplitude_index_required:
@@ -620,8 +723,8 @@ def research_plan(
                       "hardware_allowed": hardware_allowed,
                       "needs_single_amplitude": needs_single_amplitude,
                       "needs_partial_amplitude": needs_partial_amplitude},
-        "recommended": chosen.to_dict(),
-        "alternatives": [b.to_dict() for b in alternatives],
+        "recommended": chosen.profile(),
+        "alternatives": [b.profile() for b in alternatives],
         "protocol": [
             "Confirme o nome e o estado com gjq_list_backends.",
             "Leia configuração/calibração com gjq_backend_config e gjq_backend_properties.",
@@ -662,8 +765,8 @@ def compare_plan(
         "status": "planned" if sim else "blocked",
         "num_qubits": num_qubits,
         "shots": shots,
-        "simulator": sim.to_dict() if sim else None,
-        "hardware": hardware.to_dict() if hardware else None,
+        "simulator": sim.profile() if sim else None,
+        "hardware": hardware.profile() if hardware else None,
         "protocol": [
             "Execute o mesmo QASM no simulador e, se autorizado, no hardware.",
             "Compare distribuições, não apenas o resultado mais frequente.",
@@ -730,6 +833,62 @@ def provenance_template() -> dict[str, Any]:
         },
         "limits": "Soma correta não prova fidelidade, emaranhamento ou vantagem quântica.",
         "executed": False,
+    }
+
+
+def validate_provenance(record: dict[str, Any]) -> dict[str, Any]:
+    """Valida um registro de proveniência sem gravar nem executar."""
+    if not isinstance(record, dict):
+        return {"ok": False, "errors": ["record deve ser um dicionário"],
+                "warnings": [], "resolved_backend": None, "executed": False}
+    errors: list[str] = []
+    warnings: list[str] = []
+    required = provenance_template()["required"]
+    for field in required:
+        if field not in record or record[field] in (None, "", [], {}):
+            errors.append(f"campo obrigatório ausente/vazio: {field}")
+
+    backend_value = record.get("backend")
+    matches = resolve_backend(str(backend_value)) if backend_value else []
+    resolved = matches[0] if len(matches) == 1 else None
+    if not matches:
+        errors.append(f"backend não encontrado no catálogo: {backend_value!r}")
+    elif len(matches) > 1:
+        warnings.append(f"backend ambíguo: {backend_value!r} casa com {[m['id'] for m in matches]}")
+
+    qasm_sha = record.get("qasm_sha256")
+    if not isinstance(qasm_sha, str) or not re.fullmatch(r"[a-fA-F0-9]{64}", qasm_sha):
+        errors.append("qasm_sha256 deve ter 64 hexadecimais")
+
+    shots = record.get("shots")
+    shots_ok = isinstance(shots, int) and not isinstance(shots, bool) and shots > 0
+    if not shots_ok:
+        errors.append("shots deve ser inteiro positivo")
+
+    counts = record.get("counts_or_evs")
+    if not isinstance(counts, dict) or not counts:
+        errors.append("counts_or_evs deve ser um dicionário não vazio")
+    elif shots_ok and all(isinstance(v, int) and not isinstance(v, bool) for v in counts.values()):
+        total = sum(counts.values())
+        if total != shots:
+            errors.append(f"soma dos counts ({total}) != shots ({shots})")
+
+    status = str(record.get("status", "")).upper()
+    if status not in {"INITIALIZING", "QUEUED", "RUNNING", "DONE", "ERROR", "CANCELLED"}:
+        errors.append("status inválido")
+
+    limitations = record.get("limitations")
+    if not limitations or (isinstance(limitations, str) and not limitations.strip()):
+        errors.append("limitations não pode ser vazio")
+
+    return {
+        "ok": not errors,
+        "errors": errors,
+        "warnings": warnings,
+        "resolved_backend": resolved,
+        "executed": False,
+        "network_access": False,
+        "note": "Validação local; não prova fidelidade nem executa o circuito.",
     }
 
 

@@ -23,7 +23,7 @@ from typing import Any
 from mcp.server.fastmcp import FastMCP
 from mcp.types import ToolAnnotations
 
-from integrations.gjq_backend_registry import BACKENDS, is_hardware_name
+from integrations.gjq_backend_registry import BACKENDS, is_hardware_name, resolve_backend
 
 DEFAULT_MAX_QUBITS = 200
 MAX_QUBITS_CAP = 997
@@ -229,6 +229,25 @@ def _prepare_circuit(backend: Any, qasm: str, transpile: bool, optimization_leve
     return circuit
 
 
+def _live_backend_name(item: Any) -> str:
+    """Extrai o nome de um item de list_backends sem presumir o formato."""
+    if isinstance(item, dict):
+        for key in ("name", "backend_name", "id", "device_name"):
+            value = item.get(key)
+            if value:
+                return str(value)
+    for attr in ("name", "backend_name", "id"):
+        value = getattr(item, attr, None)
+        if callable(value):
+            try:
+                value = value()
+            except Exception:
+                value = None
+        if value:
+            return str(value)
+    return str(item)
+
+
 def _distribution(counts: dict[str, int]) -> dict[str, Any]:
     total = sum(counts.values())
     if total <= 0:
@@ -293,6 +312,64 @@ def create_server() -> FastMCP:
             backends = _get_service().list_backends()
         backends = _jsonable(backends)
         return {"status": "success", "total": len(backends), "backends": backends}
+
+    @server.tool(name="gjq_backend_drift", annotations=network_read)
+    def gjq_backend_drift() -> dict:
+        """Compara o registro estático com list_backends; não submete job."""
+        if not _key_present():
+            return {"status": "blocked", "reason": "GJQ_API_KEY ausente",
+                    "executed": False, "jobs_submitted": False}
+        try:
+            with _stdout_to_stderr():
+                live = _jsonable(_get_service().list_backends())
+        except Exception as exc:
+            return {
+                "status": "error",
+                "reason": type(exc).__name__,
+                "executed": False,
+                "jobs_submitted": False,
+                "network_access": True,
+                "note": "Falha ao listar; nenhum job foi submetido.",
+            }
+        if isinstance(live, dict):
+            live = live.get("backends") or live.get("items") or []
+        if not isinstance(live, list):
+            return {"status": "error", "reason": "formato de list_backends inesperado",
+                    "executed": False, "jobs_submitted": False, "network_access": True}
+        matched, missing_in_registry, ambiguous = [], [], []
+        matched_ids: set[str] = set()
+        for item in live:
+            name = _live_backend_name(item)
+            matches = resolve_backend(name)
+            if not matches:
+                missing_in_registry.append(name)
+            elif len(matches) > 1:
+                ambiguous.append({"live_name": name, "matches": [m["id"] for m in matches]})
+            else:
+                row = matches[0]
+                matched.append({
+                    "live_name": name,
+                    "registry_id": row["id"],
+                    "api_name": row.get("api_name"),
+                    "api_name_verified": bool(row.get("api_name_verified")),
+                })
+                matched_ids.add(row["id"])
+        missing_live = [b.id for b in BACKENDS if b.id not in matched_ids]
+        unverified = [m for m in matched if not m["api_name_verified"]]
+        return {
+            "status": "success",
+            "live_count": len(live),
+            "registry_count": len(BACKENDS),
+            "matched": matched,
+            "missing_in_registry": missing_in_registry,
+            "missing_live": missing_live,
+            "ambiguous": ambiguous,
+            "unverified_api_names": unverified,
+            "network_access": True,
+            "executed": False,
+            "jobs_submitted": False,
+            "note": "Drift só compara nomes; confirme configuração, calibração e fila antes de submeter.",
+        }
 
     @server.tool(name="gjq_least_busy", annotations=network_read)
     def gjq_least_busy() -> dict:

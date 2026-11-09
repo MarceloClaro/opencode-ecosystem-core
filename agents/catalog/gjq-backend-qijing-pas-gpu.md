@@ -74,6 +74,21 @@ no snapshot de 2026-11-09.
 - T1: não se aplica; T2: não se aplica; calibração: `não se aplica`.
 - Aliases: `Qijing`, `Partial Amplitude GPU`.
 
+## Melhor uso
+
+- subconjunto de amplitudes
+- estimativa de probabilidade
+
+## Evitar
+
+- distribuição completa
+- sampling geral
+
+## Experimentos recomendados
+
+- `qft2_subset`
+- `amplitude_estimation`
+
 ## Regras de uso
 
 - Simulador: não é hardware. A execução não mede um chip e não deve ser descrita como medida física.

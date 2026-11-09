@@ -72,6 +72,23 @@ no snapshot de 2026-11-09.
 - T1: não se aplica; T2: não se aplica; calibração: `não se aplica`.
 - Aliases: `Weina`, `Noise NPU`.
 
+## Melhor uso
+
+- estudo de ruído modelado
+- robustez a depolarização
+- benchmark pequeno e prototipagem
+
+## Evitar
+
+- inferir T1/T2 do chip
+- tratar ruído modelado como calibração real
+- escala
+
+## Experimentos recomendados
+
+- `chsh_noise_sweep`
+- `bell_repetition`
+
 ## Regras de uso
 
 - Simulador: não é hardware. A execução não mede um chip e não deve ser descrita como medida física.

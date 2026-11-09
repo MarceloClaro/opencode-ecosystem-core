@@ -77,11 +77,14 @@ Não faça polling apertado. Consulte a cada poucos segundos e reutilize o
 ## MCP `gjq-backend-research`
 
 Somente leitura, sem chave e sem rede. Ferramentas: `gjq_backend_catalog`,
-`gjq_backend_snapshot`, `gjq_resolve_backend`, `gjq_select_backend`,
-`gjq_research_plan`, `gjq_compare_plan`, `gjq_backend_limits`,
-`gjq_provenance_template` e `gjq_calibration_snapshot`. Use-o antes do runtime
-para escolher o backend, evitar single-amplitude por engano e preencher a
-proveniência. Ele não lista fila ao vivo nem submete jobs.
+`gjq_backend_snapshot`, `gjq_backend_profile`, `gjq_resolve_backend`,
+`gjq_select_backend`, `gjq_research_plan`, `gjq_compare_plan`,
+`gjq_backend_limits`, `gjq_provenance_template`, `gjq_provenance_validate`,
+`gjq_experiment_template` e `gjq_calibration_snapshot`. Use-o antes do runtime
+para escolher o backend, evitar single-amplitude por engano, validar a
+proveniência e obter QASM de Bell/GHZ/CHSH/QFT/VQE. Ele não lista fila ao vivo
+nem submete jobs. O `gjq_backend_snapshot` informa idade e `clock_skew` do
+snapshot.
 
 ## Ferramentas do MCP `gjq-runtime`
 
@@ -99,6 +102,7 @@ proveniência. Ele não lista fila ao vivo nem submete jobs.
 | `gjq_task_detail` | detalhes da tarefa |
 | `gjq_list_tasks` | tarefas ativas |
 | `gjq_audit_counts` | local; soma, probabilidades e erro padrão |
+| `gjq_backend_drift` | rede; compara registro e `list_backends`, sem submeter |
 
 ## Gates de segurança
 

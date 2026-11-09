@@ -74,6 +74,22 @@ no snapshot de 2026-11-09.
 - T1: não se aplica; T2: não se aplica; calibração: `não se aplica`.
 - Aliases: `MPS`, `Tensor Network`, `Matrix Product State`.
 
+## Melhor uso
+
+- muitos qubits com baixo emaranhamento
+- tensor network
+
+## Evitar
+
+- circuitos profundos/altamente emaranhados
+- assumir 997 qubits úteis
+
+## Experimentos recomendados
+
+- `ghz_sparse`
+- `mps_depth_sweep`
+- `mps_preset_sweep`
+
 ## Regras de uso
 
 - Simulador: não é hardware. A execução não mede um chip e não deve ser descrita como medida física.

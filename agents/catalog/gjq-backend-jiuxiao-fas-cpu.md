@@ -72,6 +72,24 @@ no snapshot de 2026-11-09.
 - T1: não se aplica; T2: não se aplica; calibração: `não se aplica`.
 - Aliases: `Jiuxiao`, `FAS-CPU`, `Full Amplitude CPU`.
 
+## Melhor uso
+
+- validação rápida
+- distribuição completa
+- Bell/GHZ/CHSH pequenos
+
+## Evitar
+
+- confundir simulação com hardware
+- profundidade excessiva
+
+## Experimentos recomendados
+
+- `bell`
+- `ghz3`
+- `chsh`
+- `qft2`
+
 ## Regras de uso
 
 - Simulador: não é hardware. A execução não mede um chip e não deve ser descrita como medida física.
