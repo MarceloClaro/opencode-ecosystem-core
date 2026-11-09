@@ -55,6 +55,20 @@ O wrapper é `agent_qem.py`. Nenhum agente executa hardware.
 - [ ] bootstrap/Wilson não são significância universal;
 - [ ] nenhuma chave em arquivo.
 
+## Pré-registro e planos
+
+```bash
+.venv-quantum/bin/python harnesses/quantum-error-mitigation/preregister_layout.py
+.venv-quantum/bin/python harnesses/quantum-error-mitigation/cycle_benchmarking_plan.py
+```
+
+- Layout: decisão **não comparar agora**; n=38.411 por circuito/layout;
+  12 jobs e 460.932 shots no orçamento.
+- Cycle benchmarking: 15 Paulis × 5 profundidades × 2 conjuntos = 150 jobs;
+  nenhuma taxa foi medida.
+- Literatura: `docs/LITERATURA_MITIGACAO_QUANTICA_R1121.md` (18 referências
+  verificadas).
+
 ## Passe de Pauli-frame (RC)
 
 ```bash

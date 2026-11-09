@@ -99,6 +99,15 @@ leitura de desvio coerente. Em q1: ε(rx) = −0,0006 ± 0,0091 rad;
 ε(ry) = +0,0012 ± 0,0129 rad; nenhum desvio acima de 2σ; r1 0,0695–0,0786.
 Não corrigir o ângulo do π; priorizar leitura.
 
+## Pré-registro e literatura
+
+- `harnesses/quantum-error-mitigation/preregister_layout.py` pré-registra n e
+  gates; decisão atual: não comparar layouts (n=38.411 por circuito/layout).
+- `harnesses/quantum-error-mitigation/cycle_benchmarking_plan.py` planeja 150
+  jobs para as 15 taxas Pauli-Lindblad; nenhuma taxa foi medida.
+- `docs/LITERATURA_MITIGACAO_QUANTICA_R1121.md` mapeia gap → técnica →
+  referência verificada por DOI/arXiv.
+
 ## Passe de Pauli-frame (RC)
 
 O passe implementa o twirl `P' · G · P = G` para portas Clifford 1q/2q:

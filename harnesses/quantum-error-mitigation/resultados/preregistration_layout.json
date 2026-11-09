@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-11-09T18:13:39-03:00",
+  "metric": "mitigated_tvd_vs_ideal",
+  "planning": {
+    "p": 0.5,
+    "confidence": 0.95,
+    "effect_size": 0.01,
+    "chosen_half_width": 0.005,
+    "difference_half_width_approx": 0.007071067811865476
+  },
+  "n_options": {
+    "0.005": {
+      "n_per_circuit": 38411,
+      "observed_half_width": 0.004999983516896012,
+      "expected_interval": {
+        "p": 0.5000130171044753,
+        "low": 0.49501303228587745,
+        "high": 0.5050129993196695,
+        "z": 1.959963984540054,
+        "trials": 38411
+      }
+    },
+    "0.01": {
+      "n_per_circuit": 9600,
+      "observed_half_width": 0.009999898786298145,
+      "expected_interval": {
+        "p": 0.5,
+        "low": 0.49000010121370186,
+        "high": 0.5099998987862981,
+        "z": 1.959963984540054,
+        "trials": 9600
+      }
+    },
+    "0.015": {
+      "n_per_circuit": 4265,
+      "observed_half_width": 0.014999026434872359,
+      "expected_interval": {
+        "p": 0.49988276670574444,
+        "low": 0.4848838457671471,
+        "high": 0.5148818986368918,
+        "z": 1.959963984540054,
+        "trials": 4265
+      }
+    }
+  },
+  "chosen": {
+    "p": 0.5,
+    "confidence": 0.95,
+    "half_width": 0.005,
+    "n_per_circuit": 38411
+  },
+  "budget": {
+    "layouts": [
+      "baseline",
+      "optimized"
+    ],
+    "circuits_per_layout": 3,
+    "sets": 2,
+    "jobs": 12,
+    "shots_per_job": 38411,
+    "total_shots": 460932,
+    "note": "3 circuitos = E05 + calibração 00 + calibração 11; 2 conjuntos para estimar drift."
+  },
+  "gates": {
+    "coherence_prep_ge_0.99": {
+      "pass": false,
+      "q0": 0.9849853515625,
+      "q1": 0.9822998046875
+    },
+    "r1_le_0.05": {
+      "pass": false,
+      "q0": 0.0765380859375,
+      "q1": 0.083740234375
+    },
+    "layout_effect_ge_0.01": {
+      "pass": false,
+      "observed": 0.0028443542670762156
+    },
+    "drift_resolved": {
+      "pass": false,
+      "delta_r1": 0.0072021484375,
+      "q0_set_spread": 0.011474609375,
+      "q1_set_spread": 0.0126953125
+    }
+  },
+  "current_evidence": {
+    "q0": {
+      "n_sets": 2,
+      "coherence_prep": 0.9849853515625,
+      "r0": 0.01611328125,
+      "r1": 0.0765380859375
+    },
+    "q1": {
+      "n_sets": 2,
+      "coherence_prep": 0.9822998046875,
+      "r0": 0.015869140625,
+      "r1": 0.083740234375
+    },
+    "readout": {
+      "baseline_mitigated_tvd": 0.02488619706632378,
+      "optimized_mitigated_tvd": 0.027730551333399994,
+      "abs_difference": 0.0028443542670762156,
+      "shots_per_job": 4096
+    },
+    "r1_delta": {
+      "q0": 0.0765380859375,
+      "q1": 0.083740234375,
+      "delta_q1_minus_q0": 0.0072021484375,
+      "q0_ci": [
+        0.071044921875,
+        0.0821533203125
+      ],
+      "q1_ci": [
+        0.077880859375,
+        0.0899658203125
+      ],
+      "ci_overlap": true,
+      "q0_set_spread": 0.011474609375,
+      "q1_set_spread": 0.0126953125
+    }
+  },
+  "decision": {
+    "compare_layouts_now": false,
+    "reasons": [
+      "prep coerente abaixo de 0,99 em q0 e/ou q1",
+      "r1 acima de 0,05 em q0 e/ou q1",
+      "diferença de layout observada abaixo do efeito pré-registrado de 0,01",
+      "drift entre conjuntos não resolvido para r1"
+    ]
+  },
+  "stopping_rules": [
+    "Não comparar layouts se qualquer gate falhar.",
+    "Não interpretar sobreposição de IC como equivalência.",
+    "Repetir 2 conjuntos e reportar drift antes de concluir.",
+    "Não declarar vantagem de layout sem efeito ≥ 0,01 e IC excluindo 0."
+  ],
+  "limits": "Pré-registro local baseado em p=0,5 e meia-largura conservadora. TVD não é proporção; o cálculo é uma aproximação de planejamento.",
+  "hardware_executed": false,
+  "hash": "a6ec35c50111fca236217101046235bfee3b8e22dbdeaad12247d643f0ab5599"
+}

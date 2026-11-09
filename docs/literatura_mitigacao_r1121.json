@@ -1,0 +1,287 @@
+{
+  "schema_version": 1,
+  "verified_at": "2026-11-09",
+  "verification": "Crossref DOI lookup and arXiv abs pages; no reference is cited without a DOI or arXiv ID verified in this session.",
+  "references": [
+    {
+      "id": "wallman2016",
+      "doi": "10.1103/PhysRevA.94.052325",
+      "arxiv": null,
+      "title": "Noise tailoring for scalable quantum computation via randomized compiling",
+      "authors": "Wallman & Emerson",
+      "year": 2016,
+      "venue": "Phys. Rev. A 94, 052325",
+      "gaps": [
+        "RC/Pauli-frame"
+      ],
+      "technique": "randomized compiling / Pauli twirling",
+      "verified_via": "Crossref DOI lookup 2026-11-09",
+      "url": "https://doi.org/10.1103/PhysRevA.94.052325"
+    },
+    {
+      "id": "kurita2023",
+      "doi": "10.22331/q-2023-11-20-1184",
+      "arxiv": null,
+      "title": "Synergetic quantum error mitigation by randomized compiling and zero-noise extrapolation for the variational quantum eigensolver",
+      "authors": "Kurita, Qassim, Ishii, Oshima, Sato & Emerson",
+      "year": 2023,
+      "venue": "Quantum 7, 1184",
+      "gaps": [
+        "RC/Pauli-frame",
+        "ZNE",
+        "hybrid stack"
+      ],
+      "technique": "RC combined with ZNE",
+      "verified_via": "Crossref DOI lookup 2026-11-09",
+      "url": "https://doi.org/10.22331/q-2023-11-20-1184"
+    },
+    {
+      "id": "erhard2019",
+      "doi": "10.1038/s41467-019-13068-7",
+      "arxiv": null,
+      "title": "Characterizing large-scale quantum computers via cycle benchmarking",
+      "authors": "Erhard, Wallman, Postler, Meth, Stricker, Martinez, Schindler, Monz, Emerson & Blatt",
+      "year": 2019,
+      "venue": "Nat. Commun. 10, 5347",
+      "gaps": [
+        "Pauli-Lindblad rates",
+        "cycle benchmarking"
+      ],
+      "technique": "cycle benchmarking of multi-qubit gates",
+      "verified_via": "Crossref DOI lookup 2026-11-09",
+      "url": "https://doi.org/10.1038/s41467-019-13068-7"
+    },
+    {
+      "id": "harper2020",
+      "doi": "10.1038/s41567-020-0992-8",
+      "arxiv": null,
+      "title": "Efficient learning of quantum noise",
+      "authors": "Harper, Flammia & Wallman",
+      "year": 2020,
+      "venue": "Nat. Phys. 16, 1184-1188",
+      "gaps": [
+        "Pauli-Lindblad rates"
+      ],
+      "technique": "Pauli channel learning / noise learning",
+      "verified_via": "Crossref DOI lookup 2026-11-09",
+      "url": "https://doi.org/10.1038/s41567-020-0992-8"
+    },
+    {
+      "id": "flammia2020",
+      "doi": "10.1145/3408039",
+      "arxiv": null,
+      "title": "Efficient estimation of Pauli channels",
+      "authors": "Flammia & Wallman",
+      "year": 2020,
+      "venue": "ACM Trans. Quantum Comput. 1, 3",
+      "gaps": [
+        "Pauli-Lindblad rates"
+      ],
+      "technique": "Pauli channel estimation",
+      "verified_via": "Crossref DOI lookup 2026-11-09",
+      "url": "https://doi.org/10.1145/3408039"
+    },
+    {
+      "id": "vandenberg2023",
+      "doi": "10.1038/s41567-023-02042-2",
+      "arxiv": null,
+      "title": "Probabilistic error cancellation with sparse Pauli-Lindblad models on noisy quantum processors",
+      "authors": "van den Berg, Minev, Kandala & Temme",
+      "year": 2023,
+      "venue": "Nat. Phys. 19, 1116-1121",
+      "gaps": [
+        "PEC 2q",
+        "Pauli-Lindblad rates"
+      ],
+      "technique": "sparse Pauli-Lindblad PEC",
+      "verified_via": "Crossref DOI lookup 2026-11-09",
+      "url": "https://doi.org/10.1038/s41567-023-02042-2"
+    },
+    {
+      "id": "temme2017",
+      "doi": "10.1103/PhysRevLett.119.180509",
+      "arxiv": null,
+      "title": "Error mitigation for short-depth quantum circuits",
+      "authors": "Temme, Bravyi & Gambetta",
+      "year": 2017,
+      "venue": "Phys. Rev. Lett. 119, 180509",
+      "gaps": [
+        "PEC 2q",
+        "ZNE"
+      ],
+      "technique": "probabilistic error cancellation and zero-noise extrapolation",
+      "verified_via": "Crossref DOI lookup 2026-11-09",
+      "url": "https://doi.org/10.1103/PhysRevLett.119.180509"
+    },
+    {
+      "id": "blumekohout2017",
+      "doi": "10.1038/ncomms14485",
+      "arxiv": null,
+      "title": "Demonstration of qubit operations below a rigorous fault tolerance threshold with gate set tomography",
+      "authors": "Blume-Kohout, Gamble, Nielsen, Rudinger, Mizrahi, Fortier & Maunz",
+      "year": 2017,
+      "venue": "Nat. Commun. 8, 14485",
+      "gaps": [
+        "GST",
+        "SPAM",
+        "diamond norm"
+      ],
+      "technique": "gate set tomography",
+      "verified_via": "Crossref DOI lookup 2026-11-09",
+      "url": "https://doi.org/10.1038/ncomms14485"
+    },
+    {
+      "id": "brieger2023",
+      "doi": "10.1103/PRXQuantum.4.010325",
+      "arxiv": null,
+      "title": "Compressive Gate Set Tomography",
+      "authors": "Brieger, Roth & Kliesch",
+      "year": 2023,
+      "venue": "PRX Quantum 4, 010325",
+      "gaps": [
+        "GST"
+      ],
+      "technique": "compressive GST",
+      "verified_via": "Crossref DOI lookup 2026-11-09",
+      "url": "https://doi.org/10.1103/PRXQuantum.4.010325"
+    },
+    {
+      "id": "gu2021",
+      "doi": "10.1103/PRXQuantum.2.030328",
+      "arxiv": null,
+      "title": "Randomized Linear Gate-Set Tomography",
+      "authors": "Gu, Mishra, Englert & Ng",
+      "year": 2021,
+      "venue": "PRX Quantum 2, 030328",
+      "gaps": [
+        "GST"
+      ],
+      "technique": "randomized linear GST",
+      "verified_via": "Crossref DOI lookup 2026-11-09",
+      "url": "https://doi.org/10.1103/PRXQuantum.2.030328"
+    },
+    {
+      "id": "bravyi2021",
+      "doi": "10.1103/PhysRevA.103.042605",
+      "arxiv": null,
+      "title": "Mitigating measurement errors in multiqubit experiments",
+      "authors": "Bravyi, Sheldon, Kandala, McKay & Gambetta",
+      "year": 2021,
+      "venue": "Phys. Rev. A 103, 042605",
+      "gaps": [
+        "readout",
+        "SPAM"
+      ],
+      "technique": "calibration-matrix readout mitigation",
+      "verified_via": "Crossref DOI lookup 2026-11-09",
+      "url": "https://doi.org/10.1103/PhysRevA.103.042605"
+    },
+    {
+      "id": "vandenberg2022",
+      "doi": "10.1103/PhysRevA.105.032620",
+      "arxiv": null,
+      "title": "Model-free readout-error mitigation for quantum expectation values",
+      "authors": "van den Berg, Minev & Temme",
+      "year": 2022,
+      "venue": "Phys. Rev. A 105, 032620",
+      "gaps": [
+        "readout"
+      ],
+      "technique": "model-free readout-error mitigation",
+      "verified_via": "Crossref DOI lookup 2026-11-09",
+      "url": "https://doi.org/10.1103/PhysRevA.105.032620"
+    },
+    {
+      "id": "barber2025",
+      "doi": "10.1038/s41928-024-01319-5",
+      "arxiv": "2309.05558",
+      "title": "A real-time, scalable, fast and highly resource efficient decoder for a quantum computer",
+      "authors": "Barber, Barnes, Bialas, Bugdayci, Campbell, Gillespie, Johar, Rajan, Richardson, Skoric, Topal, Turner & Ziad",
+      "year": 2025,
+      "venue": "Nature Electronics; arXiv:2309.05558",
+      "gaps": [
+        "surface code",
+        "real-time decoder"
+      ],
+      "technique": "Collision Clustering decoder on FPGA/ASIC",
+      "verified_via": "Crossref DOI lookup and arXiv abs page 2026-11-09",
+      "url": "https://doi.org/10.1038/s41928-024-01319-5"
+    },
+    {
+      "id": "li2017",
+      "doi": "10.1103/PhysRevX.7.021050",
+      "arxiv": null,
+      "title": "Efficient variational quantum simulator incorporating active error minimization",
+      "authors": "Li & Benjamin",
+      "year": 2017,
+      "venue": "Phys. Rev. X 7, 021050",
+      "gaps": [
+        "ZNE"
+      ],
+      "technique": "zero-noise extrapolation",
+      "verified_via": "Crossref DOI lookup 2026-11-09",
+      "url": "https://doi.org/10.1103/PhysRevX.7.021050"
+    },
+    {
+      "id": "greenbaum2015",
+      "doi": null,
+      "arxiv": "1509.02921",
+      "title": "Introduction to Quantum Gate Set Tomography",
+      "authors": "Greenbaum",
+      "year": 2015,
+      "venue": "arXiv:1509.02921",
+      "gaps": [
+        "GST",
+        "SPAM"
+      ],
+      "technique": "GST tutorial / implementation guide",
+      "verified_via": "arXiv abs page 2026-11-09",
+      "url": "https://arxiv.org/abs/1509.02921"
+    },
+    {
+      "id": "gambetta2012",
+      "doi": "10.1103/PhysRevLett.109.240504",
+      "arxiv": null,
+      "title": "Characterization of addressability by simultaneous randomized benchmarking",
+      "authors": "Gambetta, Corcoles, Merkel, Smolin, Chow, Cervero, Magesan, Johnson & Steffen",
+      "year": 2012,
+      "venue": "Phys. Rev. Lett. 109, 240504",
+      "gaps": [
+        "crosstalk"
+      ],
+      "technique": "simultaneous randomized benchmarking",
+      "verified_via": "Crossref DOI lookup 2026-11-09",
+      "url": "https://doi.org/10.1103/PhysRevLett.109.240504"
+    },
+    {
+      "id": "wallman2014",
+      "doi": "10.1088/1367-2630/16/10/103032",
+      "arxiv": null,
+      "title": "Randomized benchmarking with confidence",
+      "authors": "Wallman & Flammia",
+      "year": 2014,
+      "venue": "New J. Phys. 16, 103032",
+      "gaps": [
+        "uncertainty"
+      ],
+      "technique": "confidence intervals for RB",
+      "verified_via": "Crossref DOI lookup 2026-11-09",
+      "url": "https://doi.org/10.1088/1367-2630/16/10/103032"
+    },
+    {
+      "id": "carignan2015",
+      "doi": "10.1103/PhysRevA.92.060302",
+      "arxiv": null,
+      "title": "Characterizing universal gate sets via dihedral benchmarking",
+      "authors": "Carignan-Dugas, Wallman & Emerson",
+      "year": 2015,
+      "venue": "Phys. Rev. A 92, 060302",
+      "gaps": [
+        "benchmarking"
+      ],
+      "technique": "dihedral benchmarking",
+      "verified_via": "Crossref DOI lookup 2026-11-09",
+      "url": "https://doi.org/10.1103/PhysRevA.92.060302"
+    }
+  ]
+}
