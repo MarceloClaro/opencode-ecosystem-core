@@ -60,7 +60,8 @@ O wrapper é `agent_qem.py`. Nenhum agente executa hardware.
 ```bash
 .venv-quantum/bin/python harnesses/quantum-error-mitigation/runner.py resilience \
   --readout comparacao.json --zne zne.json \
-  --tomography-q0 tomography.json --tomography-q1 comparison.json \
+  --tomography-q0 comparison.json --tomography-q1 comparison.json \
+  --comparison comparison_q0_q1.json \
   --pec pec.json --surface --pulse-dd
 ```
 
@@ -77,7 +78,11 @@ No Baihua (q0/q1, 4096 shots, 9 jobs):
   0,9824 / 0,9839; r0=0,0125 e r1=0,0708.
 - ZNE 4 escalas: TVD 0,0645 / 0,0747 / 0,0735 / 0,0967; ainda não monotônica.
 - Tomografia q1 (2 conjuntos): |1> 0,9163 [0,9100; 0,9221]; r1 0,0837
-  [0,0779; 0,0900]; q1 é pior que q0 no |1> e no readout.
+  [0,0779; 0,0900].
+- Tomografia q0 (2 conjuntos): |1> 0,9235 [0,9178; 0,9290]; r1 0,0765
+  [0,0710; 0,0822].
+- Δ q1−q0: r1 +0,0072; ICs se sobrepõem e Δ < spread entre conjuntos; não
+  conclusivo. `prep |0>/|1>` e `r0/r1` são a mesma contagem Z.
 - PEC 2q, superfície e DD pulse-level não foram executados.
 
 ## Limites

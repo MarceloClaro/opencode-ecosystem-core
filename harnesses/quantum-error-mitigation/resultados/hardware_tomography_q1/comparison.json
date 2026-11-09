@@ -1,436 +1,291 @@
 {
   "schema_version": 1,
-  "q0": {
-    "fit": {
-      "schema_version": 1,
-      "method": "tomografia de preparação em 3 bases + leitura Z",
-      "states": {
-        "0": {
-          "bloch": {
-            "x": 0.017578125,
-            "y": 0.05419921875,
-            "z": 0.97509765625
-          },
-          "length": 0.9767609661610507,
-          "expectations": {
-            "X": 0.017578125,
-            "Y": 0.05419921875,
-            "Z": 0.97509765625
-          }
+  "prefix": "q1",
+  "n_sets": 2,
+  "shots_per_set": 4096,
+  "fit_combined": {
+    "schema_version": 1,
+    "method": "tomografia de preparação em 3 bases + leitura Z",
+    "states": {
+      "0": {
+        "bloch": {
+          "x": 0.04296875,
+          "y": 0.052490234375,
+          "z": 0.96826171875
         },
-        "1": {
-          "bloch": {
-            "x": 0.0458984375,
-            "y": 0.03369140625,
-            "z": -0.8583984375
-          },
-          "length": 0.8602846359911848,
-          "expectations": {
-            "X": 0.0458984375,
-            "Y": 0.03369140625,
-            "Z": -0.8583984375
-          }
-        },
-        "+": {
-          "bloch": {
-            "x": 0.96484375,
-            "y": 0.02880859375,
-            "z": 0.0751953125
-          },
-          "length": 0.9681981883942398,
-          "expectations": {
-            "X": 0.96484375,
-            "Y": 0.02880859375,
-            "Z": 0.0751953125
-          }
-        },
-        "+i": {
-          "bloch": {
-            "x": 0.0390625,
-            "y": 0.9677734375,
-            "z": 0.04736328125
-          },
-          "length": 0.969718817826891,
-          "expectations": {
-            "X": 0.0390625,
-            "Y": 0.9677734375,
-            "Z": 0.04736328125
-          }
+        "length": 0.9706349953396535,
+        "expectations": {
+          "X": 0.04296875,
+          "Y": 0.052490234375,
+          "Z": 0.96826171875
         }
       },
-      "prep_fidelity": {
-        "0": 0.987548828125,
-        "1": 0.92919921875,
-        "+": 0.982421875,
-        "+i": 0.98388671875
+      "1": {
+        "bloch": {
+          "x": 0.033935546875,
+          "y": 0.05419921875,
+          "z": -0.83251953125
+        },
+        "length": 0.8349718238165498,
+        "expectations": {
+          "X": 0.033935546875,
+          "Y": 0.05419921875,
+          "Z": -0.83251953125
+        }
       },
-      "readout_p1_given_prep0": 0.012451171875,
-      "readout_p0_given_prep1": 0.07080078125,
-      "identified": true,
-      "limits": "Assume rotações de base ideais e ausência de crosstalk; não é GST completa. A fidelidade de preparação usa a projeção no estado ideal; erro coerente pode reduzir a fidelidade sem reduzir o comprimento.",
-      "task_ids": {
-        "q0_0_X": "bed8c719-7b8d-4933-9a20-a18e55eae32d",
-        "q0_0_Y": "100efc2e-2510-4e63-950d-ad97ec180884",
-        "q0_0_Z": "1ba89730-31cd-490c-a8f5-a1aa9976be9d",
-        "q0_1_X": "e2fa9365-5c38-4f80-80b8-d9085e7c553e",
-        "q0_1_Y": "cdd6c95f-d6ca-49d5-b1f2-40e32a9cef34",
-        "q0_1_Z": "a9b34d80-4bd4-4e95-8cab-ade79f561f84",
-        "q0_+_X": "0055b3dd-a302-4796-a69d-3fda10f63783",
-        "q0_+_Y": "02a99eb2-6342-4fb8-804a-293d69f69456",
-        "q0_+_Z": "4a5fae33-6705-4c44-9704-8ddf62d4247a",
-        "q0_+i_X": "b64b7a76-5156-4fb5-84c4-789747251c18",
-        "q0_+i_Y": "4e9dfb7c-64ce-4b97-abf9-85b96141ba15",
-        "q0_+i_Z": "3b0b9855-d4e9-4fc4-a681-b377ea1265a4"
+      "+": {
+        "bloch": {
+          "x": 0.964599609375,
+          "y": 0.059814453125,
+          "z": 0.0615234375
+        },
+        "length": 0.9684086475093362,
+        "expectations": {
+          "X": 0.964599609375,
+          "Y": 0.059814453125,
+          "Z": 0.0615234375
+        }
       },
-      "counts": {
-        "q0_0_X": {
-          "0": 2084,
-          "1": 2012
+      "+i": {
+        "bloch": {
+          "x": 0.0576171875,
+          "y": 0.9697265625,
+          "z": 0.053466796875
         },
-        "q0_0_Y": {
-          "1": 1937,
-          "0": 2159
-        },
-        "q0_0_Z": {
-          "0": 4045,
-          "1": 51
-        },
-        "q0_1_X": {
-          "1": 1954,
-          "0": 2142
-        },
-        "q0_1_Y": {
-          "1": 1979,
-          "0": 2117
-        },
-        "q0_1_Z": {
-          "1": 3806,
-          "0": 290
-        },
-        "q0_+_X": {
-          "0": 4024,
-          "1": 72
-        },
-        "q0_+_Y": {
-          "1": 1989,
-          "0": 2107
-        },
-        "q0_+_Z": {
-          "0": 2202,
-          "1": 1894
-        },
-        "q0_+i_X": {
-          "0": 2128,
-          "1": 1968
-        },
-        "q0_+i_Y": {
-          "0": 4030,
-          "1": 66
-        },
-        "q0_+i_Z": {
-          "0": 2145,
-          "1": 1951
+        "length": 0.97290700721166,
+        "expectations": {
+          "X": 0.0576171875,
+          "Y": 0.9697265625,
+          "Z": 0.053466796875
         }
       }
     },
-    "bootstrap": {
-      "schema_version": 1,
-      "prefix": "q0",
-      "n_bootstrap": 2000,
-      "prep_fidelity": {
-        "0": {
-          "mean": 0.9875679931640625,
-          "low": 0.984130859375,
-          "high": 0.99072265625,
-          "std": 0.0017419017103226175
-        },
-        "1": {
-          "mean": 0.9292440185546875,
-          "low": 0.92138671875,
-          "high": 0.936767578125,
-          "std": 0.003917415382277362
-        },
-        "+": {
-          "mean": 0.982445068359375,
-          "low": 0.978271484375,
-          "high": 0.986328125,
-          "std": 0.002065157700624753
-        },
-        "+i": {
-          "mean": 0.9837891845703125,
-          "low": 0.979736328125,
-          "high": 0.987548828125,
-          "std": 0.001998591984697089
-        }
+    "prep_fidelity": {
+      "0": 0.984130859375,
+      "1": 0.916259765625,
+      "+": 0.9822998046875,
+      "+i": 0.98486328125
+    },
+    "readout_p1_given_prep0": 0.015869140625,
+    "readout_p0_given_prep1": 0.083740234375,
+    "identified": true,
+    "limits": "Assume rotações de base ideais e ausência de crosstalk; não é GST completa. A fidelidade de preparação usa a projeção no estado ideal; erro coerente pode reduzir a fidelidade sem reduzir o comprimento."
+  },
+  "bootstrap_combined": {
+    "schema_version": 1,
+    "prefix": "q1",
+    "n_bootstrap": 2000,
+    "prep_fidelity": {
+      "0": {
+        "mean": 0.9841265869140625,
+        "low": 0.9813232421875,
+        "high": 0.98681640625,
+        "std": 0.0014067520601115852
       },
-      "readout": {
-        "r0": {
-          "mean": 0.0124320068359375,
-          "low": 0.00927734375,
-          "high": 0.015869140625,
-          "std": 0.0017419017103226175
-        },
-        "r1": {
-          "mean": 0.0707559814453125,
-          "low": 0.063232421875,
-          "high": 0.07861328125,
-          "std": 0.003917415382277361
-        }
+      "1": {
+        "mean": 0.9162767944335938,
+        "low": 0.9100341796875,
+        "high": 0.922119140625,
+        "std": 0.0030970464822825724
       },
-      "limits": "Bootstrap multinomial dos counts; não inclui drift entre execuções. A fidelidade de preparação assume rotações de base ideais."
+      "+": {
+        "mean": 0.9822632446289062,
+        "low": 0.9793701171875,
+        "high": 0.985107421875,
+        "std": 0.0014611129730163366
+      },
+      "+i": {
+        "mean": 0.984843505859375,
+        "low": 0.9820556640625,
+        "high": 0.9874267578125,
+        "std": 0.001381492951750006
+      }
+    },
+    "readout": {
+      "r0": {
+        "mean": 0.0158734130859375,
+        "low": 0.01318359375,
+        "high": 0.0186767578125,
+        "std": 0.0014067520601115852
+      },
+      "r1": {
+        "mean": 0.08372320556640625,
+        "low": 0.077880859375,
+        "high": 0.0899658203125,
+        "std": 0.003097046482282573
+      }
+    },
+    "limits": "Bootstrap multinomial dos counts; não inclui drift entre execuções. A fidelidade de preparação assume rotações de base ideais."
+  },
+  "sets": {
+    "set1": {
+      "fit": {
+        "schema_version": 1,
+        "method": "tomografia de preparação em 3 bases + leitura Z",
+        "states": {
+          "0": {
+            "bloch": {
+              "x": 0.03662109375,
+              "y": 0.03173828125,
+              "z": 0.97119140625
+            },
+            "length": 0.9723996969240596,
+            "expectations": {
+              "X": 0.03662109375,
+              "Y": 0.03173828125,
+              "Z": 0.97119140625
+            }
+          },
+          "1": {
+            "bloch": {
+              "x": 0.05126953125,
+              "y": 0.06201171875,
+              "z": -0.81982421875
+            },
+            "length": 0.8237631745507756,
+            "expectations": {
+              "X": 0.05126953125,
+              "Y": 0.06201171875,
+              "Z": -0.81982421875
+            }
+          },
+          "+": {
+            "bloch": {
+              "x": 0.96484375,
+              "y": 0.078125,
+              "z": 0.05322265625
+            },
+            "length": 0.9694635777982421,
+            "expectations": {
+              "X": 0.96484375,
+              "Y": 0.078125,
+              "Z": 0.05322265625
+            }
+          },
+          "+i": {
+            "bloch": {
+              "x": 0.06982421875,
+              "y": 0.966796875,
+              "z": 0.06005859375
+            },
+            "length": 0.9711738534974266,
+            "expectations": {
+              "X": 0.06982421875,
+              "Y": 0.966796875,
+              "Z": 0.06005859375
+            }
+          }
+        },
+        "prep_fidelity": {
+          "0": 0.985595703125,
+          "1": 0.909912109375,
+          "+": 0.982421875,
+          "+i": 0.9833984375
+        },
+        "readout_p1_given_prep0": 0.014404296875,
+        "readout_p0_given_prep1": 0.090087890625,
+        "identified": true,
+        "limits": "Assume rotações de base ideais e ausência de crosstalk; não é GST completa. A fidelidade de preparação usa a projeção no estado ideal; erro coerente pode reduzir a fidelidade sem reduzir o comprimento."
+      },
+      "task_ids": {
+        "q1_0_X": "7b7d8aa2-f214-48dd-a5f4-6f224f0206fe",
+        "q1_0_Y": "5a0e7845-0844-4685-b7a2-091431319f11",
+        "q1_0_Z": "d882a386-d294-404f-8913-120322873c83",
+        "q1_1_X": "acf183c0-bac4-4d0a-90a9-463143d7e567",
+        "q1_1_Y": "be675086-c0b9-410a-b28e-a735573ebddb",
+        "q1_1_Z": "fcad6822-7e73-4450-a3c1-76f19a9e23e7",
+        "q1_+_X": "4439a0d7-d897-4b8e-a776-6e55a67f4072",
+        "q1_+_Y": "a5c28f29-cd14-4b50-825a-63f94a913b7c",
+        "q1_+_Z": "6ea529c2-c056-454b-90ea-790d005dcaf5",
+        "q1_+i_X": "7e4b5165-6106-4818-994b-5732ddde2086",
+        "q1_+i_Y": "002a957d-59fa-4311-b146-9414d84365a3",
+        "q1_+i_Z": "39e2b729-8d2b-4629-931b-a78c8517ba6a"
+      }
+    },
+    "set2": {
+      "fit": {
+        "schema_version": 1,
+        "method": "tomografia de preparação em 3 bases + leitura Z",
+        "states": {
+          "0": {
+            "bloch": {
+              "x": 0.04931640625,
+              "y": 0.0732421875,
+              "z": 0.96533203125
+            },
+            "length": 0.9693618810910872,
+            "expectations": {
+              "X": 0.04931640625,
+              "Y": 0.0732421875,
+              "Z": 0.96533203125
+            }
+          },
+          "1": {
+            "bloch": {
+              "x": 0.0166015625,
+              "y": 0.04638671875,
+              "z": -0.84521484375
+            },
+            "length": 0.8466495565753105,
+            "expectations": {
+              "X": 0.0166015625,
+              "Y": 0.04638671875,
+              "Z": -0.84521484375
+            }
+          },
+          "+": {
+            "bloch": {
+              "x": 0.96435546875,
+              "y": 0.04150390625,
+              "z": 0.06982421875
+            },
+            "length": 0.9677703580220304,
+            "expectations": {
+              "X": 0.96435546875,
+              "Y": 0.04150390625,
+              "Z": 0.06982421875
+            }
+          },
+          "+i": {
+            "bloch": {
+              "x": 0.04541015625,
+              "y": 0.97265625,
+              "z": 0.046875
+            },
+            "length": 0.9748433354030338,
+            "expectations": {
+              "X": 0.04541015625,
+              "Y": 0.97265625,
+              "Z": 0.046875
+            }
+          }
+        },
+        "prep_fidelity": {
+          "0": 0.982666015625,
+          "1": 0.922607421875,
+          "+": 0.982177734375,
+          "+i": 0.986328125
+        },
+        "readout_p1_given_prep0": 0.017333984375,
+        "readout_p0_given_prep1": 0.077392578125,
+        "identified": true,
+        "limits": "Assume rotações de base ideais e ausência de crosstalk; não é GST completa. A fidelidade de preparação usa a projeção no estado ideal; erro coerente pode reduzir a fidelidade sem reduzir o comprimento."
+      },
+      "task_ids": {
+        "q1_0_X": "295fefc4-2a78-45be-94fd-2f9a68994c87",
+        "q1_0_Y": "0959d295-00e0-4d63-9383-11dd4c045be6",
+        "q1_0_Z": "4ac676f6-9fc0-4783-9a43-25c5a9a4bc93",
+        "q1_1_X": "b69d6b02-b1f3-46e6-ad1d-f934e10e9e16",
+        "q1_1_Y": "a3b65077-0c49-4386-afe1-b2d7a387556a",
+        "q1_1_Z": "092dad51-24f8-4d38-893a-e89a222b2470",
+        "q1_+_X": "b220da13-b9d0-44ad-9ef3-c519b075aad7",
+        "q1_+_Y": "d254acf8-b980-4bf7-8834-2b7b348dc16d",
+        "q1_+_Z": "509e7aba-15af-46ed-9e5a-ecd9af3c9392",
+        "q1_+i_X": "5e9c77d5-a42e-4323-ad88-97252a4c8213",
+        "q1_+i_Y": "dda0446a-a8bb-4e0b-b086-d79bb394d453",
+        "q1_+i_Z": "b944fd1c-5223-4aaf-a2c9-88cc5a2d9445"
+      }
     }
   },
-  "q1": {
-    "fit_set1": {
-      "schema_version": 1,
-      "method": "tomografia de preparação em 3 bases + leitura Z",
-      "states": {
-        "0": {
-          "bloch": {
-            "x": 0.03662109375,
-            "y": 0.03173828125,
-            "z": 0.97119140625
-          },
-          "length": 0.9723996969240596,
-          "expectations": {
-            "X": 0.03662109375,
-            "Y": 0.03173828125,
-            "Z": 0.97119140625
-          }
-        },
-        "1": {
-          "bloch": {
-            "x": 0.05126953125,
-            "y": 0.06201171875,
-            "z": -0.81982421875
-          },
-          "length": 0.8237631745507756,
-          "expectations": {
-            "X": 0.05126953125,
-            "Y": 0.06201171875,
-            "Z": -0.81982421875
-          }
-        },
-        "+": {
-          "bloch": {
-            "x": 0.96484375,
-            "y": 0.078125,
-            "z": 0.05322265625
-          },
-          "length": 0.9694635777982421,
-          "expectations": {
-            "X": 0.96484375,
-            "Y": 0.078125,
-            "Z": 0.05322265625
-          }
-        },
-        "+i": {
-          "bloch": {
-            "x": 0.06982421875,
-            "y": 0.966796875,
-            "z": 0.06005859375
-          },
-          "length": 0.9711738534974266,
-          "expectations": {
-            "X": 0.06982421875,
-            "Y": 0.966796875,
-            "Z": 0.06005859375
-          }
-        }
-      },
-      "prep_fidelity": {
-        "0": 0.985595703125,
-        "1": 0.909912109375,
-        "+": 0.982421875,
-        "+i": 0.9833984375
-      },
-      "readout_p1_given_prep0": 0.014404296875,
-      "readout_p0_given_prep1": 0.090087890625,
-      "identified": true,
-      "limits": "Assume rotações de base ideais e ausência de crosstalk; não é GST completa. A fidelidade de preparação usa a projeção no estado ideal; erro coerente pode reduzir a fidelidade sem reduzir o comprimento."
-    },
-    "fit_set2": {
-      "schema_version": 1,
-      "method": "tomografia de preparação em 3 bases + leitura Z",
-      "states": {
-        "0": {
-          "bloch": {
-            "x": 0.04931640625,
-            "y": 0.0732421875,
-            "z": 0.96533203125
-          },
-          "length": 0.9693618810910872,
-          "expectations": {
-            "X": 0.04931640625,
-            "Y": 0.0732421875,
-            "Z": 0.96533203125
-          }
-        },
-        "1": {
-          "bloch": {
-            "x": 0.0166015625,
-            "y": 0.04638671875,
-            "z": -0.84521484375
-          },
-          "length": 0.8466495565753105,
-          "expectations": {
-            "X": 0.0166015625,
-            "Y": 0.04638671875,
-            "Z": -0.84521484375
-          }
-        },
-        "+": {
-          "bloch": {
-            "x": 0.96435546875,
-            "y": 0.04150390625,
-            "z": 0.06982421875
-          },
-          "length": 0.9677703580220304,
-          "expectations": {
-            "X": 0.96435546875,
-            "Y": 0.04150390625,
-            "Z": 0.06982421875
-          }
-        },
-        "+i": {
-          "bloch": {
-            "x": 0.04541015625,
-            "y": 0.97265625,
-            "z": 0.046875
-          },
-          "length": 0.9748433354030338,
-          "expectations": {
-            "X": 0.04541015625,
-            "Y": 0.97265625,
-            "Z": 0.046875
-          }
-        }
-      },
-      "prep_fidelity": {
-        "0": 0.982666015625,
-        "1": 0.922607421875,
-        "+": 0.982177734375,
-        "+i": 0.986328125
-      },
-      "readout_p1_given_prep0": 0.017333984375,
-      "readout_p0_given_prep1": 0.077392578125,
-      "identified": true,
-      "limits": "Assume rotações de base ideais e ausência de crosstalk; não é GST completa. A fidelidade de preparação usa a projeção no estado ideal; erro coerente pode reduzir a fidelidade sem reduzir o comprimento."
-    },
-    "fit_combined": {
-      "schema_version": 1,
-      "method": "tomografia de preparação em 3 bases + leitura Z",
-      "states": {
-        "0": {
-          "bloch": {
-            "x": 0.04296875,
-            "y": 0.052490234375,
-            "z": 0.96826171875
-          },
-          "length": 0.9706349953396535,
-          "expectations": {
-            "X": 0.04296875,
-            "Y": 0.052490234375,
-            "Z": 0.96826171875
-          }
-        },
-        "1": {
-          "bloch": {
-            "x": 0.033935546875,
-            "y": 0.05419921875,
-            "z": -0.83251953125
-          },
-          "length": 0.8349718238165498,
-          "expectations": {
-            "X": 0.033935546875,
-            "Y": 0.05419921875,
-            "Z": -0.83251953125
-          }
-        },
-        "+": {
-          "bloch": {
-            "x": 0.964599609375,
-            "y": 0.059814453125,
-            "z": 0.0615234375
-          },
-          "length": 0.9684086475093362,
-          "expectations": {
-            "X": 0.964599609375,
-            "Y": 0.059814453125,
-            "Z": 0.0615234375
-          }
-        },
-        "+i": {
-          "bloch": {
-            "x": 0.0576171875,
-            "y": 0.9697265625,
-            "z": 0.053466796875
-          },
-          "length": 0.97290700721166,
-          "expectations": {
-            "X": 0.0576171875,
-            "Y": 0.9697265625,
-            "Z": 0.053466796875
-          }
-        }
-      },
-      "prep_fidelity": {
-        "0": 0.984130859375,
-        "1": 0.916259765625,
-        "+": 0.9822998046875,
-        "+i": 0.98486328125
-      },
-      "readout_p1_given_prep0": 0.015869140625,
-      "readout_p0_given_prep1": 0.083740234375,
-      "identified": true,
-      "limits": "Assume rotações de base ideais e ausência de crosstalk; não é GST completa. A fidelidade de preparação usa a projeção no estado ideal; erro coerente pode reduzir a fidelidade sem reduzir o comprimento."
-    },
-    "bootstrap_combined": {
-      "schema_version": 1,
-      "prefix": "q1",
-      "n_bootstrap": 2000,
-      "prep_fidelity": {
-        "0": {
-          "mean": 0.9841265869140625,
-          "low": 0.9813232421875,
-          "high": 0.98681640625,
-          "std": 0.0014067520601115852
-        },
-        "1": {
-          "mean": 0.9162767944335938,
-          "low": 0.9100341796875,
-          "high": 0.922119140625,
-          "std": 0.0030970464822825724
-        },
-        "+": {
-          "mean": 0.9822632446289062,
-          "low": 0.9793701171875,
-          "high": 0.985107421875,
-          "std": 0.0014611129730163366
-        },
-        "+i": {
-          "mean": 0.984843505859375,
-          "low": 0.9820556640625,
-          "high": 0.9874267578125,
-          "std": 0.001381492951750006
-        }
-      },
-      "readout": {
-        "r0": {
-          "mean": 0.0158734130859375,
-          "low": 0.01318359375,
-          "high": 0.0186767578125,
-          "std": 0.0014067520601115852
-        },
-        "r1": {
-          "mean": 0.08372320556640625,
-          "low": 0.077880859375,
-          "high": 0.0899658203125,
-          "std": 0.003097046482282573
-        }
-      },
-      "limits": "Bootstrap multinomial dos counts; não inclui drift entre execuções. A fidelidade de preparação assume rotações de base ideais."
-    }
-  },
-  "limits": "q0 tem um conjunto e q1 tem dois; a comparação é descritiva, não um teste de hipótese. Bootstrap multinomial não captura drift."
+  "limits": "Bootstrap multinomial dos counts combinados; não captura drift entre conjuntos. A tomografia assume rotações de base ideais e ausência de crosstalk; não é GST completa."
 }

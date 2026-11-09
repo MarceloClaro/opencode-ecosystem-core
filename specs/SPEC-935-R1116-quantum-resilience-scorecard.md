@@ -52,7 +52,22 @@ prioridades, bloqueios e limites.
 - testes R1116 passam;
 - nenhuma chave ou overclaim.
 
-## 5. Não objetivos
+## 5. Revisão 2026-11-09 (R1117)
+
+O run simétrico com dois conjuntos de q0 mostrou que:
+
+- o Δ q1−q0 em `prep |1>` é −0,0072 e em `r1` é +0,0072;
+- os ICs bootstrap se sobrepõem e o Δ é menor que o spread entre conjuntos;
+- portanto a diferença **não é conclusiva**;
+- `prep |0>` = 1 − r0 e `prep |1>` = 1 − r1 neste desenho: o scorecard não
+  deve tratar preparação e leitura como duas evidências independentes.
+
+O scorecard v2 (R1117) usa `prep coerente` (|+>, |+i>) para preparação
+independente de readout e declara explicitamente a redundância. O critério de
+aceitação original "identifica q1 com menor fidelidade e maior r1" passa a ser
+"identifica a direção, sem declarar diferença conclusiva".
+
+## 6. Não objetivos
 
 - Certificar qualidade quântica.
 - Somar técnicas como se fossem independentes.

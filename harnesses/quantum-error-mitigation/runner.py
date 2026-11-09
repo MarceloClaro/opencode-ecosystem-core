@@ -415,13 +415,21 @@ def cmd_resilience(args) -> int:
     zne = load(args.zne)
     q0_payload = load(args.tomography_q0)
     q1_payload = load(args.tomography_q1)
-    tomography_q0 = q0_payload.get("fit", q0_payload) if q0_payload else None
+    tomography_q0 = None
+    if q0_payload:
+        tomography_q0 = (
+            q0_payload.get("q0", {}).get("fit_combined")
+            or q0_payload.get("fit_combined")
+            or q0_payload.get("fit")
+            or q0_payload
+        )
     tomography_q1 = None
     uncertainty = None
     if q1_payload:
         tomography_q1 = (
             q1_payload.get("q1", {}).get("fit_combined")
             or q1_payload.get("fit_combined")
+            or q1_payload.get("fit")
             or q1_payload
         )
         uncertainty = (
@@ -433,6 +441,7 @@ def cmd_resilience(args) -> int:
         zne=zne,
         tomography_q0=tomography_q0,
         tomography_q1=tomography_q1,
+        comparison=load(args.comparison),
         pec=load(args.pec),
         uncertainty=uncertainty,
         surface={"planned": True} if args.surface else None,
@@ -638,6 +647,7 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--zne")
     p.add_argument("--tomography-q0")
     p.add_argument("--tomography-q1")
+    p.add_argument("--comparison", help="comparison_q0_q1.json")
     p.add_argument("--pec")
     p.add_argument("--surface", action="store_true")
     p.add_argument("--pulse-dd", action="store_true")

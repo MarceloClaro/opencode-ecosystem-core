@@ -95,13 +95,17 @@ incerteza para recomendar o próximo passo e listar técnicas bloqueadas:
 ```bash
 .venv-quantum/bin/python harnesses/quantum-error-mitigation/runner.py resilience \
   --readout comparacao.json --zne zne.json \
-  --tomography-q0 tomography.json --tomography-q1 comparison.json \
+  --tomography-q0 comparison.json --tomography-q1 comparison.json \
+  --comparison comparison_q0_q1.json \
   --pec pec.json --surface --pulse-dd
 ```
 
-No run atual: ZNE bloqueado por não monotonicidade; q1 tem menor fidelidade de
-preparação e maior r1 que q0; superfície e DD pulse-level bloqueados; PEC 2q
-com 15 taxas não caracterizadas.
+No run simétrico (2 conjuntos por qubit): ZNE bloqueado por não monotonicidade;
+Δ r1 q1−q0 = +0,0072, mas ICs se sobrepõem e o Δ é menor que o spread entre
+conjuntos, então a diferença não é conclusiva. `prep |0>/|1>` e `r0/r1` são a
+mesma contagem Z; a preparação independente de readout é medida por `|+>` e
+`|+i>`. Superfície e DD pulse-level bloqueados; PEC 2q com 15 taxas não
+caracterizadas.
 
 ## Resultado R1115
 

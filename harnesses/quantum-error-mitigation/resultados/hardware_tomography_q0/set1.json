@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "backend": "Baihua",
+  "set": 1,
+  "shots": 4096,
+  "qubit": 0,
+  "gates": {
+    "source": "hardware_zne_tomography R1115"
+  },
+  "task_ids": {
+    "q0_0_X": "bed8c719-7b8d-4933-9a20-a18e55eae32d",
+    "q0_0_Y": "100efc2e-2510-4e63-950d-ad97ec180884",
+    "q0_0_Z": "1ba89730-31cd-490c-a8f5-a1aa9976be9d",
+    "q0_1_X": "e2fa9365-5c38-4f80-80b8-d9085e7c553e",
+    "q0_1_Y": "cdd6c95f-d6ca-49d5-b1f2-40e32a9cef34",
+    "q0_1_Z": "a9b34d80-4bd4-4e95-8cab-ade79f561f84",
+    "q0_+_X": "0055b3dd-a302-4796-a69d-3fda10f63783",
+    "q0_+_Y": "02a99eb2-6342-4fb8-804a-293d69f69456",
+    "q0_+_Z": "4a5fae33-6705-4c44-9704-8ddf62d4247a",
+    "q0_+i_X": "b64b7a76-5156-4fb5-84c4-789747251c18",
+    "q0_+i_Y": "4e9dfb7c-64ce-4b97-abf9-85b96141ba15",
+    "q0_+i_Z": "3b0b9855-d4e9-4fc4-a681-b377ea1265a4"
+  },
+  "counts": {
+    "q0_0_X": {
+      "0": 2084,
+      "1": 2012
+    },
+    "q0_0_Y": {
+      "1": 1937,
+      "0": 2159
+    },
+    "q0_0_Z": {
+      "0": 4045,
+      "1": 51
+    },
+    "q0_1_X": {
+      "1": 1954,
+      "0": 2142
+    },
+    "q0_1_Y": {
+      "1": 1979,
+      "0": 2117
+    },
+    "q0_1_Z": {
+      "1": 3806,
+      "0": 290
+    },
+    "q0_+_X": {
+      "0": 4024,
+      "1": 72
+    },
+    "q0_+_Y": {
+      "1": 1989,
+      "0": 2107
+    },
+    "q0_+_Z": {
+      "0": 2202,
+      "1": 1894
+    },
+    "q0_+i_X": {
+      "0": 2128,
+      "1": 1968
+    },
+    "q0_+i_Y": {
+      "0": 4030,
+      "1": 66
+    },
+    "q0_+i_Z": {
+      "0": 2145,
+      "1": 1951
+    }
+  },
+  "fit": {
+    "schema_version": 1,
+    "method": "tomografia de preparação em 3 bases + leitura Z",
+    "states": {
+      "0": {
+        "bloch": {
+          "x": 0.017578125,
+          "y": 0.05419921875,
+          "z": 0.97509765625
+        },
+        "length": 0.9767609661610507,
+        "expectations": {
+          "X": 0.017578125,
+          "Y": 0.05419921875,
+          "Z": 0.97509765625
+        }
+      },
+      "1": {
+        "bloch": {
+          "x": 0.0458984375,
+          "y": 0.03369140625,
+          "z": -0.8583984375
+        },
+        "length": 0.8602846359911848,
+        "expectations": {
+          "X": 0.0458984375,
+          "Y": 0.03369140625,
+          "Z": -0.8583984375
+        }
+      },
+      "+": {
+        "bloch": {
+          "x": 0.96484375,
+          "y": 0.02880859375,
+          "z": 0.0751953125
+        },
+        "length": 0.9681981883942398,
+        "expectations": {
+          "X": 0.96484375,
+          "Y": 0.02880859375,
+          "Z": 0.0751953125
+        }
+      },
+      "+i": {
+        "bloch": {
+          "x": 0.0390625,
+          "y": 0.9677734375,
+          "z": 0.04736328125
+        },
+        "length": 0.969718817826891,
+        "expectations": {
+          "X": 0.0390625,
+          "Y": 0.9677734375,
+          "Z": 0.04736328125
+        }
+      }
+    },
+    "prep_fidelity": {
+      "0": 0.987548828125,
+      "1": 0.92919921875,
+      "+": 0.982421875,
+      "+i": 0.98388671875
+    },
+    "readout_p1_given_prep0": 0.012451171875,
+    "readout_p0_given_prep1": 0.07080078125,
+    "identified": true,
+    "limits": "Assume rotações de base ideais e ausência de crosstalk; não é GST completa. A fidelidade de preparação usa a projeção no estado ideal; erro coerente pode reduzir a fidelidade sem reduzir o comprimento."
+  },
+  "limits": "Conjunto 1 de q0 reaproveitado do run de 16 jobs."
+}

@@ -19,8 +19,9 @@ MODULE = RAIZ / "quantum_mitigation" / "resilience.py"
 RUNNER = RAIZ / "harnesses" / "quantum-error-mitigation" / "runner.py"
 AGENTE = RAIZ / "agents" / "catalog" / "quantum-error-mitigation.md"
 ZNE = RAIZ / "harnesses" / "quantum-error-mitigation" / "resultados" / "hardware_zne_tomography" / "zne.json"
-TOMO_Q0 = RAIZ / "harnesses" / "quantum-error-mitigation" / "resultados" / "hardware_zne_tomography" / "tomography.json"
+TOMO_Q0 = RAIZ / "harnesses" / "quantum-error-mitigation" / "resultados" / "hardware_tomography_q0" / "comparison.json"
 TOMO_Q1 = RAIZ / "harnesses" / "quantum-error-mitigation" / "resultados" / "hardware_tomography_q1" / "comparison.json"
+COMPARISON = RAIZ / "harnesses" / "quantum-error-mitigation" / "resultados" / "comparison_q0_q1.json"
 READOUT = RAIZ / "harnesses" / "gjq-hardware-optimizers" / "resultados" / "baihua" / "E05_comparacao" / "comparacao.json"
 
 
@@ -32,7 +33,7 @@ def _frontmatter(path: Path) -> dict:
 
 
 def test_arquivos_existem():
-    for caminho in (SPEC, DOC, MODULE, RUNNER, ZNE, TOMO_Q0, TOMO_Q1, READOUT):
+    for caminho in (SPEC, DOC, MODULE, RUNNER, ZNE, TOMO_Q0, TOMO_Q1, COMPARISON, READOUT):
         assert caminho.exists(), caminho
 
 
@@ -43,9 +44,10 @@ def _real_inputs():
     return {
         "readout": json.loads(READOUT.read_text(encoding="utf-8")),
         "zne": zne,
-        "tomography_q0": q0_payload.get("fit", q0_payload),
-        "tomography_q1": q1_payload["q1"]["fit_combined"],
-        "uncertainty": q1_payload["q1"]["bootstrap_combined"],
+        "tomography_q0": q0_payload["fit_combined"],
+        "tomography_q1": q1_payload["fit_combined"],
+        "comparison": json.loads(COMPARISON.read_text(encoding="utf-8")),
+        "uncertainty": q1_payload["bootstrap_combined"],
         "pec": {"gamma_total": 1.006, "samples_required": 10120.78},
         "surface": {"planned": True},
         "pulse_dd": {"planned": True},
@@ -63,24 +65,38 @@ def test_scorecard_real():
     assert "DD pulse-level" in blocked
     actions = " ".join(item["action"] for item in payload["recommendations"])
     assert "q1" in actions
-    assert "state preparation" in actions
+    assert "preparação coerente" in actions
     assert "layout" in actions
     assert payload["readout"]["winner"] == "baseline"
     assert payload["tomography"]["q1"]["min_prep_fidelity"] < payload["tomography"]["q0"]["min_prep_fidelity"]
+    assert payload["tomography"]["q0"]["prep_readout_redundant"] is True
+    assert payload["tomography"]["q1"]["prep_readout_redundant"] is True
+    findings = " ".join(payload["findings"]).lower()
+    assert "mesma contagem" in findings
+    assert "não é conclusiva" in findings
 
 
 def test_scorecard_flags():
     from quantum_mitigation import resilience_scorecard
 
     payload = resilience_scorecard(
-        tomography_q0={"prep_fidelity": {"0": 0.99, "1": 0.98}, "readout_p1_given_prep0": 0.01, "readout_p0_given_prep1": 0.02},
-        tomography_q1={"prep_fidelity": {"0": 0.99, "1": 0.90}, "readout_p1_given_prep0": 0.01, "readout_p0_given_prep1": 0.08},
+        tomography_q0={
+            "prep_fidelity": {"0": 0.99, "1": 0.98, "+": 0.99, "+i": 0.99},
+            "readout_p1_given_prep0": 0.01,
+            "readout_p0_given_prep1": 0.02,
+        },
+        tomography_q1={
+            "prep_fidelity": {"0": 0.99, "1": 0.90, "+": 0.97, "+i": 0.97},
+            "readout_p1_given_prep0": 0.01,
+            "readout_p0_given_prep1": 0.08,
+        },
         uncertainty={"prep_fidelity": {"1": {"low": 0.88, "high": 0.92}}, "readout": {"r1": {"low": 0.07, "high": 0.09}}},
     )
     actions = " ".join(item["action"] for item in payload["recommendations"])
-    assert "state preparation" in actions
+    assert "preparação em q1" in actions
     assert "leitura em q1" in actions
     assert "repetições" in actions
+    assert "layout" in actions
 
 
 def test_harness_resilience(tmp_path: Path):
@@ -93,6 +109,7 @@ def test_harness_resilience(tmp_path: Path):
             "--zne", str(ZNE),
             "--tomography-q0", str(TOMO_Q0),
             "--tomography-q1", str(TOMO_Q1),
+            "--comparison", str(COMPARISON),
             "--pec", str(pec),
             "--surface", "--pulse-dd",
             "--out", str(tmp_path / "res"),

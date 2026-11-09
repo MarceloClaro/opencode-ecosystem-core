@@ -34,8 +34,11 @@ Com os dados de q0/q1/ZNE/readout/PEC:
 
 - **Status:** `partial`.
 - **Readout 4×4:** baseline venceu o layout otimizado.
-- **q0:** fidelidade mínima de preparação 0,9292; r0=0,0125; r1=0,0708.
-- **q1:** fidelidade mínima 0,9163; r0=0,0159; r1=0,0837.
+- **q0 (2 conjuntos):** prep mínima 0,9235; prep coerente 0,9850; r0=0,0161; r1=0,0765.
+- **q1 (2 conjuntos):** prep mínima 0,9163; prep coerente 0,9823; r0=0,0159; r1=0,0837.
+- **Δ q1−q0:** r1 +0,0072, mas ICs se sobrepõem e o Δ é menor que o spread
+  entre conjuntos; a diferença **não é conclusiva**.
+- **Redundância:** prep |0>/|1> = 1 − r0/r1; não são duas evidências.
 - **ZNE:** bloqueado por não monotonicidade.
 - **PEC:** gamma≈1,006; amostras≈10.121 (orçamento baixo, mas 15 taxas não caracterizadas).
 - **Incerteza:** maior largura de IC 0,0121.
@@ -45,9 +48,9 @@ Com os dados de q0/q1/ZNE/readout/PEC:
 Recomendações:
 
 1. Não promover o layout otimizado; usar baseline como referência.
-2. Priorizar state preparation em q1.
-3. Expandir mitigação de leitura em q1.
-4. Não comparar layouts antes de melhorar state preparation.
+2. Medir mais conjuntos para leitura em q1 antes de atribuir a diferença de r1 a q1.
+3. Aplicar/expandir mitigação de leitura em q0 e q1 (r1 > 0,05).
+4. Não comparar layouts antes de preparação coerente ≥ 0,99 em ambos os qubits.
 5. Aumentar repetições antes de concluir.
 
 ## 4. Comando
@@ -58,6 +61,7 @@ Recomendações:
   --zne zne.json \
   --tomography-q0 tomography.json \
   --tomography-q1 comparison.json \
+  --comparison comparison_q0_q1.json \
   --pec pec.json \
   --surface --pulse-dd \
   --out resultados/resilience
@@ -69,4 +73,5 @@ Recomendações:
 - As técnicas têm hipóteses diferentes; a comparação é local.
 - Não executa hardware.
 - Não declara vantagem quântica, threshold ou fidelidade.
-- q0 tem um conjunto; q1 tem dois; a comparação é descritiva.
+- q0 e q1 têm dois conjuntos cada; a comparação é descritiva.
+- Prep |0>/|1> e r0/r1 são a mesma contagem Z; não são evidências independentes.
