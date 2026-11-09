@@ -10,7 +10,9 @@ Os anos iniciais do ensino fundamental são um período especialmente sensível.
 
 Os dados oficiais dimensionam o desafio. Entre 2021 e 2024, as matrículas de TEA na educação básica passaram de 294.394 para 918.877, crescimento de 212% (INEP, 2021; INEP, 2022; INEP, 2023; INEP, 2024). O aumento expressa, sobretudo, a ampliação da identificação e do registro, não necessariamente da prevalência. Ele não informa se a escola oferece condições de participação: um estudante pode estar matriculado em classe comum e permanecer à margem das atividades, sem apoio adequado ou sem acesso ao currículo.
 
-A literatura diagnostica obstáculos recorrentes: formação inicial insuficiente, escassez de recursos e de apoio especializado, rigidez curricular e barreiras atitudinais (CABRAL; MARIN, 2017; COUTO et al., 2019; SCHMIDT et al., 2016). Falta, porém, uma leitura que articule política, prática, formação e dados oficiais. É nesse intervalo que este trabalho se situa.
+A literatura diagnostica obstáculos recorrentes: formação inicial insuficiente, escassez de recursos e de apoio especializado, rigidez curricular e barreiras atitudinais (CABRAL; MARIN, 2017; COUTO et al., 2019; SCHMIDT et al., 2016). Uma distinção conceitual importante é entre integração e inclusão. A integração pressupõe que o estudante se ajuste à escola; a inclusão pressupõe que a escola se reorganize para acolher a diversidade. A PNEEPEI de 2008 desloca o foco para a escola comum e para o atendimento especializado como apoio complementar (BRASIL, 2008). A distinção não é semântica: ela define quem deve mudar — o estudante ou a instituição — e orienta as decisões sobre currículo, avaliação e agrupamento. A inclusão, nesses termos, exige transformação institucional, e não apenas adaptação individual.
+
+Falta, porém, uma leitura que articule política, prática, formação e dados oficiais. É nesse intervalo que este trabalho se situa.
 
 ## 1.2 Problema e pergunta de pesquisa
 
@@ -19,6 +21,8 @@ O problema pode ser formulado assim: embora o direito à educação inclusiva es
 A pergunta que orienta a investigação é: **como políticas educacionais, práticas pedagógicas e formação docente se articulam, na literatura, para viabilizar a participação e a aprendizagem de estudantes com TEA nos anos iniciais, e o que os dados do Censo Escolar (2021–2024) revelam sobre a expansão e a distribuição dessas matrículas?**
 
 A pergunta tem duas dimensões complementares: interpretativa, sobre a articulação entre os três eixos; e descritiva, sobre a evolução e a distribuição das matrículas. O estudo não pretende medir a eficácia de uma intervenção nem estimar a prevalência do TEA.
+
+A opção por não testar hipóteses causais é deliberada. Os dados disponíveis são agregados, administrativos e sujeitos a mudanças de critério; não permitem isolar o efeito de políticas ou de práticas específicas. O que se pode fazer é descrever a evolução, comparar unidades e interpretar os padrões à luz da literatura. Essa escolha é coerente com o alcance exploratório do trabalho e com a natureza do objeto, que envolve processos institucionais e pedagógicos dificilmente redutíveis a uma única variável.
 
 ## 1.3 Objetivos
 
@@ -76,6 +80,8 @@ A literatura internacional reforça o diagnóstico. Lindsay et al. (2013) identi
 
 Em síntese, há três lacunas: **normativa** (tensões entre princípios e regulamentações), **operacional** (faltam recursos, profissionais e tempo) e **avaliativa** (faltam mecanismos de acompanhamento). Elas se reforçam: uma política sem recursos produz práticas frágeis; práticas sem avaliação perpetuam a ideia de que a inclusão é impossível.
 
+O atendimento educacional especializado (AEE) ocupa lugar central nesse arranjo. Ele não substitui a classe comum nem se confunde com reforço escolar; sua função é complementar a escolarização, oferecendo apoios, recursos e orientação. A eficácia do AEE depende da articulação com o professor regente e com a família. Quando o atendimento ocorre em horário separado, sem diálogo com a sala, o estudante pode receber dois projetos pedagógicos desconectados. A colaboração entre AEE e ensino comum é, portanto, uma condição de coerência.
+
 ## 2.2 Transtorno do Espectro Autista: conceitos e implicações educacionais
 
 O TEA organiza-se em dois domínios: déficits persistentes na comunicação e na interação social; e padrões restritos e repetitivos de comportamento, interesses ou atividades. A esses domínios associam-se, com frequência, alterações sensoriais e dificuldades de regulação. O termo "espectro" não designa gradação linear de gravidade, mas ampla variabilidade: duas pessoas com o mesmo diagnóstico podem ter necessidades muito diferentes (CABRAL; MARIN, 2017; NUNES; AZEVEDO; SCHMIDT, 2013).
@@ -92,6 +98,8 @@ Suassuna (2021) reforça a importância dos anos iniciais como período de const
 
 O brincar ocupa lugar central. Fam et al. (2021) argumentam que o brincar no espaço escolar pode funcionar como estratégia de inclusão, criando oportunidades de interação e comunicação. O brincar, porém, não é espontaneamente inclusivo: exige mediação, estrutura e adaptação. Sem apoio, a criança pode permanecer à margem mesmo em um pátio cheio de colegas.
 
+A regulação emocional é outra dimensão relevante. Mudanças de rotina, transições entre atividades, ruídos e imprevistos podem gerar ansiedade e comportamentos de esquiva. A escola pode antecipar transições, usar apoios visuais, oferecer pausas e criar espaços de regulação. Essas adaptações não "mimam" o estudante; reduzem barreiras e ampliam a possibilidade de participação. A regulação não é responsabilidade exclusiva do estudante: é uma relação entre suas condições e as demandas do ambiente.
+
 Em síntese, o TEA não é um conjunto de déficits a corrigir, mas uma forma de funcionamento que demanda condições específicas. A escola precisa reconhecer a variabilidade, organizar o ambiente para reduzir barreiras e mediar a participação social.
 
 ## 2.3 Práticas pedagógicas inclusivas nos anos iniciais
@@ -103,6 +111,8 @@ Harrower e Dunlap (2001) sistematizam estratégias comportamentais e pedagógica
 Koegel et al. (2012) combinam treino de resposta pivotal, autogestão e mediação por pares. O treino de resposta pivotal desenvolve habilidades centrais — motivação, responsividade a múltiplos estímulos, autogestão e generalização — que podem se difundir para outras áreas. A mediação por pares amplia oportunidades de interação e aprendizagem social. A combinação é relevante nos anos iniciais, quando as crianças constroem repertórios de comunicação e relação com os colegas.
 
 A adaptação curricular é eixo central. Cabral e Marin (2017) e Bezerra e Pantoni (2022) destacam que a adaptação deve considerar as particularidades de cada aluno e promover participação ativa. Adaptar não é simplificar até retirar a oportunidade de aprender; é decidir o que é essencial, quais objetivos são prioritários e quais caminhos permitem alcançá-los. Em vez de reduzir expectativas, trata-se de diversificar percursos.
+
+Na prática, a adaptação pode assumir formas diversas: priorizar objetivos essenciais, oferecer diferentes formas de acesso ao conteúdo, permitir respostas por meio de desenho, fala, escrita ou recursos digitais, ampliar o tempo de realização e fragmentar tarefas longas em etapas. O critério não é a quantidade de adaptações, mas a coerência com as barreiras identificadas. Uma adaptação que não dialoga com o objetivo da aula pode se tornar uma atividade paralela, sem relação com o currículo comum. A pergunta orientadora é: o estudante está aprendendo o mesmo conteúdo, com apoios adequados, ou está realizando outra coisa que não se conecta ao projeto da turma?
 
 O planejamento e a diversificação metodológica são condições para que a adaptação se realize. Schmidt et al. (2016) sugerem recursos visuais, auditivos e táteis para facilitar a compreensão. A combinação de linguagens amplia o acesso ao conhecimento e reduz a dependência de uma única forma de expressão. O planejamento não é documento burocrático; é o espaço em que o professor antecipa barreiras e imagina alternativas.
 
@@ -121,6 +131,8 @@ O brincar e as atividades colaborativas ocupam lugar central. Fam et al. (2021) 
 A mediação por pares tem respaldo na literatura. Chang e Locke (2016), em revisão sistemática, mostram que intervenções mediadas por pares podem favorecer habilidades sociais, comunicação e interação. Os colegas aprendem a iniciar, responder e manter interações, e o estudante com TEA passa a ter mais oportunidades de participação. A estratégia exige planejamento, treinamento dos pares e acompanhamento do professor; sem isso, pode transferir responsabilidade para as crianças sem garantir qualidade.
 
 A avaliação é outro elemento decisivo. Cabral e Marin (2017) e Fam et al. (2021) destacam avaliação contínua, dinâmica e participativa. Avaliar não é medir a aproximação a um padrão, mas acompanhar o progresso em relação às próprias possibilidades e às metas do plano educacional. Instrumentos padronizados, aplicados sem adaptações, tendem a refletir mais as barreiras do instrumento do que as competências do estudante.
+
+A avaliação inclusiva combina observação em sala, análise de produções, registros de progresso, autoavaliação e entrevistas com a família. O portfólio é um recurso útil porque permite acompanhar a trajetória ao longo do tempo, em vez de congelar o desempenho em uma única prova. A avaliação também precisa considerar o que o estudante sabe fazer com apoios, e não apenas o que faz sozinho. Essa distinção é importante para evitar que o instrumento meça a ausência de apoio, e não a aprendizagem.
 
 O trabalho colaborativo sustenta essas práticas. Cabral e Marin (2017) argumentam que a abordagem interdisciplinar é essencial. A colaboração não se decreta: exige tempo institucional, canais de comunicação e clareza sobre responsabilidades. Quando cada profissional atua isoladamente, o estudante recebe intervenções fragmentadas. A relação família-escola completa o conjunto: a família não é extensão da escola nem fonte de informação a ser extraída; é parceira na tomada de decisões.
 
@@ -146,19 +158,49 @@ Fang et al. (2023), em revisão sistemática de intervenções na primeira infâ
 
 A transposição de modelos exige cautela. Práticas baseadas em evidências foram desenvolvidas em contextos com recursos, formação e equipes que não correspondem à realidade de muitas escolas brasileiras. A contribuição internacional não é um modelo a copiar, mas um repertório de princípios que precisa ser traduzido para o contexto local (HUME et al., 2021; WONG et al., 2015).
 
+## 2.5 Lacunas da literatura brasileira
+
+A produção brasileira sobre inclusão de estudantes com TEA é recente e apresenta características específicas. Grande parte dos trabalhos é de natureza qualitativa, com estudos de caso, relatos de experiência e revisões de literatura. Há poucos estudos longitudinais e poucas pesquisas que articulem dados de matrícula, práticas pedagógicas e formação docente. Essa configuração limita a compreensão do fenômeno e dificulta a construção de políticas baseadas em evidências.
+
+Nunes, Azevedo e Schmidt (2013) e Cabral e Marin (2017) oferecem revisões importantes, mas destacam a dispersão metodológica e a ausência de critérios comuns de identificação. Suassuna (2021) e Sousa e Menezes (2020) contribuem para a compreensão da educação infantil e da formação docente, mas seus achados não podem ser generalizados para todo o país. Bezerra e Pantoni (2022) e Fam et al. (2021) ampliam o repertório de práticas, mas também evidenciam a falta de avaliação sistemática dos efeitos.
+
+É possível identificar cinco lacunas principais:
+
+a) **lacuna de prevalência**: não há estimativas brasileiras sobre a prevalência do TEA em idade escolar, e os dados do Censo medem matrículas, não prevalência;
+
+b) **lacuna de identificação**: não há instrumentos validados para o contexto brasileiro nem protocolos nacionais de triagem;
+
+c) **lacuna de intervenção**: poucos estudos avaliam os efeitos de programas de inclusão sobre a aprendizagem e a participação;
+
+d) **lacuna de trajetória**: faltam estudos longitudinais que acompanhem estudantes com TEA ao longo da educação básica;
+
+e) **lacuna de política**: não há avaliação sistemática das políticas de identificação e de atendimento.
+
+A superação dessas lacunas exige articulação entre pesquisa, formação e política. A produção nacional precisa dialogar com a literatura internacional, mas também construir categorias e instrumentos adequados ao contexto brasileiro. A simples transposição de modelos importados pode reproduzir vieses e invisibilizar especificidades locais. A agenda de pesquisa, nesse sentido, deve ser construída com escolas, famílias e estudantes, e não apenas com base em interesses acadêmicos.
+
+## 2.6 Síntese do referencial
+
+Os três eixos analisados — políticas, práticas e formação — não são independentes. Uma política sem condições operacionais produz práticas frágeis; uma prática sem formação tende ao improviso; uma formação sem tempo e recursos tende ao discurso. A literatura converge para a ideia de que a inclusão é uma articulação, e não a soma de iniciativas isoladas. O desafio está em construir coerência entre objetivos, condições e decisões pedagógicas.
+
+Dessa síntese derivam três implicações para a pesquisa. A primeira é que os diagnósticos sobre a inclusão precisam considerar as condições institucionais, e não apenas as atitudes individuais. A segunda é que as práticas precisam ser avaliadas em contexto, com atenção aos efeitos sobre a participação e a aprendizagem. A terceira é que os dados oficiais, embora limitados, oferecem um panorama indispensável para dimensionar a demanda e as desigualdades territoriais.
+
+Este trabalho parte dessa síntese e a confronta com os dados do Censo Escolar. A expectativa não é confirmar hipóteses causais, mas verificar se a expansão das matrículas foi acompanhada de condições compatíveis com a inclusão e se a distribuição territorial revela padrões que a literatura ajuda a interpretar.
+
 # 3 METODOLOGIA
 
 ## 3.1 Desenho da pesquisa
 
 O estudo combina **revisão narrativa com protocolo explícito de busca** e **análise de dados secundários oficiais**. A revisão narrativa é adequada para mapear conceitos, identificar lacunas e construir interpretação fundamentada; não estima magnitude de efeito nem esgota a evidência. A análise de dados utiliza as Sinopses Estatísticas da Educação Básica do INEP (2021–2024). A combinação articula construção conceitual e evidência estatística, sem confundir uma com a outra.
 
-A abordagem é quantitativa na descrição das séries e qualitativa na interpretação. O estudo não é experimental, não envolve coleta primária e não estabelece relações causais. Seu alcance é exploratório e descritivo.
+A abordagem é quantitativa na descrição das séries e qualitativa na interpretação. O estudo não é experimental, não envolve coleta primária e não estabelece relações causais. Seu alcance é exploratório e descritivo. A coerência do desenho pode ser sintetizada em uma matriz de amarração: a pergunta orienta os objetivos; os objetivos definem os procedimentos; os procedimentos produzem os resultados; e os resultados são discutidos à luz da literatura. A pergunta sobre a articulação entre política, prática e formação é respondida pela revisão; a pergunta sobre a expansão e a distribuição das matrículas é respondida pela análise dos dados. As seções 2, 3, 4 e 5 correspondem, respectivamente, ao referencial, ao método, aos resultados e à discussão, mantendo correspondência entre cada objetivo específico e o procedimento adotado.
 
 ## 3.2 Fontes de dados e variáveis
 
 Foram utilizadas as Sinopses de 2021 a 2024 (INEP, 2021; INEP, 2022; INEP, 2023; INEP, 2024), com as tabelas 1.3 (total de matrículas da educação básica por região e UF), 1.43/1.49 (2021–2022) e 1.44/1.50 (2023–2024), que registram matrículas da educação especial em classes comuns e exclusivas por tipo de deficiência. As matrículas de TEA foram somadas entre classes comuns e exclusivas. O total da educação básica foi o denominador dos percentuais e das taxas por mil.
 
 As variáveis são: matrículas de TEA; total da educação básica; percentual de TEA; taxa por mil estudantes; participação do TEA na educação especial; crescimento anual; crescimento acumulado.
+
+A extração foi realizada diretamente das planilhas, com conferência dos totais do Brasil contra a soma das regiões e das unidades da federação. Foram verificados os totais de TEA em classes comuns e exclusivas, o total da educação especial e o total da educação básica. As divergências encontradas foram registradas e corrigidas antes do cálculo dos indicadores. O script de extração acompanha o trabalho para permitir a reprodução.
 
 Uma limitação deve ser declarada: as Sinopses não cruzam tipo de deficiência e etapa de ensino. Não é possível isolar as matrículas de TEA nos anos iniciais. Os indicadores referem-se ao conjunto da educação básica e oferecem o contexto institucional da etapa; a análise específica exigiria microdados.
 
@@ -168,11 +210,15 @@ O corpus reúne **20 obras com DOI ativo e auditável**, publicadas entre 2001 e
 
 A busca foi realizada em 6 de novembro de 2026, com consultas à API Crossref, Google Acadêmico, SciELO e páginas de editoras, usando termos em português e inglês sobre inclusão, TEA, práticas, formação e evidências. As consultas combinaram descritores como "autismo inclusão escolar", "transtorno do espectro autista educação infantil", "formação de professores autismo", "práticas pedagógicas inclusivas autismo", "autism inclusion general education", "evidence-based practices autism", "peer-mediated interventions autism" e "early childhood autism inclusion". A triagem priorizou revisões, estudos empíricos e ensaios teóricos com implicações educacionais; relatos clínicos sem interface escolar foram descartados. Os critérios de inclusão foram: aderência ao tema, publicação em português ou inglês, DOI ativo e acesso a informações bibliográficas mínimas. Foram excluídos estudos estritamente clínicos, obras sem DOI e duplicatas. A seleção teve duas etapas: leitura de títulos e resumos; conferência de DOI e metadados.
 
+A seleção final não seguiu um fluxo PRISMA, pois a revisão é narrativa. Ainda assim, é possível descrever o percurso: identificação de candidatos em buscas e leituras prévias; triagem por título e resumo; verificação de DOI e metadados; leitura dos textos selecionados; e categorização por eixos. Esse percurso não garante exaustividade, mas torna a seleção auditável. A ausência de triagem em dupla e de avaliação de risco de viés é uma limitação assumida.
+
 A legislação e as Sinopses do INEP não possuem DOI e foram tratadas como **fontes primárias oficiais**, com URL, por serem a base normativa e estatística do estudo.
 
 ## 3.4 Procedimentos e cenários
 
 Os procedimentos foram: extração dos totais; cálculo de percentuais, taxas por mil e participação na educação especial; cálculo de crescimento; ajuste linear; construção de cenários. O ajuste linear descreve a tendência 2021–2024, e a inclinação é a variação média anual. Foram construídos três cenários para 2025–2027: linear (mantém a inclinação), moderado (15% ao ano) e acelerado (25% ao ano). Os cenários são condicionais e exploratórios; não são previsões.
+
+A escolha das taxas de crescimento merece justificativa. A taxa linear usa a inclinação observada entre 2021 e 2024; a moderada (15% ao ano) supõe desaceleração; a acelerada (25% ao ano) supõe manutenção de um ritmo elevado. As três taxas são plausíveis em algum cenário, mas nenhuma deve ser tratada como prognóstico. O objetivo é mostrar a sensibilidade do resultado a diferentes hipóteses e dimensionar a incerteza. A apresentação de um intervalo é mais honesta do que a projeção de um único número.
 
 ## 3.5 Limitações e aspectos éticos
 
@@ -232,9 +278,13 @@ As matrículas cresceram 212% entre 2021 e 2024. A taxa por mil passou de 6,31 p
 
 O crescimento tem consequências concretas. Mais estudantes identificados significam maior demanda por apoio especializado, adaptação curricular, formação e acessibilidade. Se a expansão das matrículas não for acompanhada da expansão das condições de atendimento, o risco é uma inclusão mais formal do que efetiva.
 
+O crescimento não é homogêneo. As taxas anuais foram de 45,9% em 2022, 48,1% em 2023 e 44,4% em 2024. A taxa por mil estudantes quase quadruplicou em quatro anos, passando de 6,31 para 19,51. Esse ritmo é superior ao crescimento do total de matrículas da educação básica, que permaneceu praticamente estável. O resultado é que o TEA ganhou centralidade na educação especial: em 2024, representava 44,2% das matrículas dessa modalidade, contra 15,3% em 2021. A mudança na composição da educação especial tem consequências para a formação, para a alocação de recursos e para a organização do atendimento.
+
 ## 4.3 Classes comuns e exclusivas
 
 Em 2024, 884.403 matrículas de TEA estavam em classes comuns e 34.474 em classes exclusivas. As classes comuns concentram 96,2% do total; as exclusivas, 3,8%. O crescimento não se explica por segregação: a maioria está na escola regular. A presença majoritária, porém, não garante participação. A literatura mostra que a inclusão pode ser formal quando o estudante está na sala, mas não participa, não recebe apoio ou não tem suas formas de comunicação reconhecidas (CABRAL; MARIN, 2017; SCHMIDT et al., 2016).
+
+As 34.474 matrículas em classes exclusivas merecem atenção. Elas representam 3,8% do total e podem indicar tanto situações de maior necessidade de apoio quanto limites da oferta inclusiva em determinadas redes. A classe exclusiva não é, por si só, sinônimo de exclusão: em alguns casos, pode ser a alternativa disponível para garantir atendimento especializado. O problema surge quando ela se torna a única trajetória possível ou quando substitui a experiência na escola comum. A literatura recomenda cautela: a decisão sobre o tipo de classe deve ser individualizada, revista periodicamente e orientada pelo interesse do estudante.
 
 ## 4.4 Distribuição regional em 2024
 
@@ -252,6 +302,10 @@ Em 2024, 884.403 matrículas de TEA estavam em classes comuns e 34.474 em classe
 Fonte: elaborado pela autora com base em INEP (2024).
 
 O Sudeste concentra o maior número absoluto (340.751), seguido do Nordeste (282.410). Em taxa por mil, o Sul lidera (22,25), seguido do Nordeste (20,96), Norte (18,66), Sudeste (18,34) e Centro-Oeste (16,51). A participação na educação especial é maior no Sudeste (48,6%) e menor no Centro-Oeste (37,6%). As diferenças sugerem que a identificação é sensível ao contexto institucional: redes com mais profissionais, formação e instrumentos tendem a identificar mais; redes com menor estrutura podem concentrar a identificação em outras categorias ou deixar de registrar estudantes.
+
+A leitura conjunta das duas medidas permite distinguir quatro padrões. O primeiro combina taxa alta e participação alta, como no Amapá e no Ceará: o TEA é identificado com frequência e ocupa parte expressiva da educação especial. O segundo combina taxa alta e participação baixa: a educação especial é ampla e o TEA é uma entre várias categorias. O terceiro combina taxa baixa e participação alta, como no Amazonas: o TEA é a principal categoria identificada, mas o total de estudantes atendidos é proporcionalmente menor. O quarto combina taxa baixa e participação baixa, como na Bahia: pode haver subidentificação de TEA ou maior presença de outras categorias. Nenhum padrão permite concluir qual rede está "mais correta"; eles mostram que a identificação é uma prática institucional.
+
+A desigualdade regional também dialoga com o financiamento e com a capacidade técnica das redes. Redes com mais recursos podem contratar profissionais, adquirir instrumentos e oferecer formação continuada; redes com menos recursos dependem de iniciativas isoladas. O resultado é uma distribuição desigual da capacidade de identificação e de atendimento. A política nacional pode reduzir essa desigualdade por meio de critérios mínimos, apoio técnico e financiamento induzido. Sem isso, a inclusão tende a acompanhar as desigualdades estruturais do país.
 
 ## 4.5 Extremos estaduais
 
@@ -277,6 +331,8 @@ A maior taxa (Acre, 35,27) é cerca de 2,35 vezes a menor (Amazonas, 15,02). O c
 
 Os casos extremos ajudam a interpretar. O Amapá combina taxa alta e participação alta, sugerindo sistema de educação especial relativamente pequeno, no qual o TEA concentra a maior parte das matrículas. O Ceará combina taxa alta e participação alta, indicando identificação robusta. A Bahia combina taxa baixa e participação baixa, o que pode indicar subidentificação de TEA ou educação especial mais ampla, com maior presença de outras categorias. O Amazonas combina taxa baixa e participação alta: o TEA é a principal categoria, mas o total atendido é proporcionalmente menor. Sem microdados, não é possível distinguir essas hipóteses.
 
+Os extremos estaduais também sugerem que a identificação não acompanha necessariamente o tamanho da rede. São Paulo, o estado mais populoso, tem taxa de 16,15 por mil, próxima da média nacional, enquanto o Acre, com rede muito menor, apresenta 35,27. O Ceará, com 69.888 matrículas, tem taxa de 32,77, superior à de Minas Gerais (20,11) e à do Paraná (20,24), que têm redes maiores. A variação de 2,35 vezes entre o maior e o menor valor é um indicador de desigualdade que não pode ser atribuído apenas à prevalência. A implicação é que a política de identificação precisa ser fortalecida com protocolos, formação e instrumentos, e que a comparação entre redes deve ser usada para formular perguntas, não para ranquear estados.
+
 ## 4.6 Cenários exploratórios 2025–2027
 
 **Quadro 6 — Cenários exploratórios para as matrículas de TEA (2025–2027)**
@@ -291,6 +347,8 @@ Fonte: elaborado pela autora com base em INEP (2021; 2022; 2023; 2024). Cenário
 
 Em 2027, o cenário linear projeta 1,54 milhão de matrículas (3,28% da educação básica); o moderado, 1,40 milhão (2,97%); o acelerado, 1,79 milhão (3,81%). A diferença entre o menor e o maior é de aproximadamente 397 mil matrículas. Os cenários não incorporam mudanças de política, demografia ou critérios de registro; são exercícios de plausibilidade para dimensionar a demanda por formação, apoio e infraestrutura.
 
+A leitura dos cenários deve evitar dois erros. O primeiro é tratá-los como previsões: eles não incorporam mudanças de política, demografia ou critérios de registro. O segundo é ignorá-los: mesmo o cenário moderado projeta 1,40 milhão de matrículas em 2027, o que representa quase 3% da educação básica. O intervalo entre os cenários é amplo, mas todos apontam para a mesma direção: a demanda por inclusão continuará crescendo. O planejamento precisa considerar essa trajetória, com formação, equipes de apoio, materiais e infraestrutura.
+
 ## 4.7 Síntese dos achados
 
 A análise permite sintetizar seis achados:
@@ -302,6 +360,19 @@ A análise permite sintetizar seis achados:
 5. Entre os estados, a taxa varia de 15,02 (Amazonas) a 35,27 (Acre), razão de 2,35.
 6. Os dados medem identificação e registro, não prevalência, qualidade ou participação efetiva.
 
+**Quadro 7 — Síntese dos achados, implicações e lacunas**
+
+| Achado | Implicação | Lacuna |
+|------------------------------|-----------------------------------|-----------------------------------|
+| Crescimento de 212% | Maior demanda por apoio e formação | Qualidade da inclusão não é medida |
+| Taxa de 19,51 por mil | TEA se torna central na educação especial | Indicador não mede prevalência |
+| 96,2% em classes comuns | Inclusão majoritária na escola regular | Participação efetiva não é garantida |
+| Sul 22,25 e Centro-Oeste 16,51 | Desigualdade regional | Capacidade institucional de identificação |
+| Acre 35,27 e Amazonas 15,02 | Variação de 2,35 vezes entre estados | Critérios e instrumentos locais |
+| Cenários 2027 | Demanda potencial crescente | Ausência de planejamento prospectivo |
+
+Fonte: elaborado pela autora com base em INEP (2021; 2022; 2023; 2024) e na literatura revisada.
+
 # 5 DISCUSSÃO
 
 ## 5.1 Norma, acesso e participação
@@ -312,6 +383,8 @@ O Censo mede matrículas, não qualidade. Um aumento pode indicar maior identifi
 
 A expansão coloca uma questão de escala. Se o crescimento se mantiver, o país terá entre 1,40 e 1,79 milhão de estudantes com TEA na educação básica em 2027. O contingente exige planejamento de longo prazo: formação, equipes de apoio, adaptação de espaços, materiais acessíveis e tempo de planejamento. Sem isso, a inclusão tende a ser de baixa qualidade.
 
+A expansão também coloca uma questão de equidade. Se o crescimento ocorrer de forma desigual entre redes, a distância entre estados pode aumentar. A taxa por mil já varia 2,35 vezes entre o maior e o menor valor; sem política de identificação, essa diferença tende a se reproduzir. A equidade não exige uniformidade, mas critérios mínimos que garantam a todas as redes condições de reconhecer e atender estudantes com TEA. A ausência de critérios comuns transforma a identificação em privilégio de algumas redes.
+
 ## 5.2 Formação docente e práticas pedagógicas
 
 A formação docente funciona como gargalo estrutural. Schmidt et al. (2016) mostram que professores reconhecem a inclusão, mas relatam insegurança e falta de preparo. Lindsay et al. (2013) e Humphrey e Symes (2013) identificam desafios semelhantes em outros contextos. Sousa e Menezes (2020) e Bezerra e Pantoni (2022) mostram que, no Brasil, a formação inicial é genérica e a continuada, fragmentada. A formação não pode ser responsabilidade individual do professor; precisa ser política pública, com tempo, apoio e continuidade.
@@ -321,6 +394,8 @@ A literatura oferece repertório consistente de práticas: organização do ambi
 A mediação por pares ilustra a questão. Chang e Locke (2016) mostram que intervenções mediadas por pares podem favorecer habilidades sociais e comunicação; Rotheram-Fuller et al. (2010) mostram que crianças com TEA tendem a ocupar posições periféricas nas redes da turma. Juntos, os estudos sugerem que a inclusão social precisa ser planejada. A simples colocação na mesma sala não garante interação.
 
 Fang et al. (2023) acrescentam que a prontidão escolar é relação entre a criança e as oportunidades do ambiente. Programas que combinam suporte à comunicação, mediação de pares e adaptação do ambiente podem favorecer a participação. A intervenção deve incidir sobre as condições de ensino, não apenas sobre o estudante.
+
+Há um risco de tecnificação da inclusão. Quando o repertório de práticas é transformado em lista de técnicas aplicadas sem julgamento pedagógico, a inclusão perde sua dimensão ética e política. A técnica não substitui a decisão sobre o que ensinar, para quê e em que condições. O professor precisa de repertório, mas também de tempo, apoio e liberdade para adaptar. A formação, nesse sentido, não é treinamento de procedimentos; é construção de capacidade de análise e de julgamento situado.
 
 ## 5.3 Desigualdades regionais e capacidade institucional
 
@@ -338,6 +413,8 @@ Os dados não permitem isolar as matrículas de TEA nos anos iniciais, mas o cre
 
 A gestão pode organizar espaço, rotinas, recursos, tempo e comunicação com as famílias. Pode construir cultura escolar que valorize a diversidade e enfrente barreiras atitudinais. No plano das políticas, três movimentos são necessários: formação inicial e continuada; produção de dados com tabulação conjunta entre deficiência e etapa; e articulação intersetorial. O monitoramento é condição para que a política não se reduza à matrícula.
 
+A transição entre os anos iniciais e os anos finais merece atenção. Muitos estudantes com TEA que conseguiram participar nos primeiros anos encontram, nos anos finais, turmas maiores, mais professores e maior complexidade organizacional. A continuidade do apoio e a comunicação entre etapas são condições para que a inclusão não se interrompa. A gestão pode prever reuniões de passagem, registros compartilhados e adaptações que acompanhem o estudante. A inclusão é uma trajetória, não um conjunto de experiências isoladas.
+
 ## 5.5 Implicações neuropsicopedagógicas
 
 A neuropsicopedagogia articula conhecimentos da neurociência, da psicologia e da pedagogia para compreender os processos de aprendizagem e propor intervenções. Ela não se confunde com diagnóstico clínico nem substitui avaliações médicas ou psicológicas. Sua contribuição está na leitura integrada do funcionamento cognitivo, das condições emocionais, das relações sociais e do contexto escolar, com foco na aprendizagem e no desenvolvimento (CABRAL; MARIN, 2017).
@@ -348,9 +425,25 @@ A intervenção, por sua vez, pode partir das potencialidades do estudante, e n�
 
 A atuação exige articulação em rede. A neuropsicopedagogia pode ajudar a construir pontes entre escola, família e profissionais de apoio, traduzindo avaliações em decisões pedagógicas. Essa função de tradução é especialmente importante quando os relatórios são fragmentados ou contraditórios. O profissional não substitui o professor, o psicólogo ou o médico; ele articula saberes e ajuda a construir condições de aprendizagem. A inclusão, nesse sentido, é uma tarefa coletiva, e a neuropsicopedagogia é uma das vozes dessa rede.
 
-## 5.6 Limitações e agenda de pesquisa
+## 5.6 Implicações para a gestão escolar
+
+A gestão escolar tem papel decisivo na transformação das condições de inclusão. Ela organiza o espaço, as rotinas, os recursos, o tempo e os canais de comunicação com as famílias. Também é responsável por construir uma cultura escolar que valorize a diversidade e enfrente as barreiras atitudinais. A inclusão não é tarefa individual do professor; é responsabilidade coletiva da escola.
+
+As implicações podem ser organizadas em cinco frentes. A primeira é a **identificação**: a escola precisa de um protocolo que combine observação pedagógica, análise de desempenho, entrevista com a família e, quando possível, avaliação especializada. O protocolo não deve ser instrumento de rotulação, mas roteiro para compreender o estudante e planejar apoios. A segunda é a **adaptação curricular**: garantir acesso ao currículo comum com apoios, evitando tanto a redução de expectativas quanto a produção de um currículo paralelo que isole o estudante. A terceira é a **organização do ambiente**: previsibilidade, controle de estímulos, espaços de regulação e acessibilidade comunicacional. A quarta é a **avaliação formativa**: diversificar instrumentos e acompanhar o progresso em relação às metas do plano, e não a um padrão único. A quinta é a **parceria com a família e com a rede de apoio**: criar canais de escuta e decisão conjunta, evitando a fragmentação das intervenções.
+
+Essas frentes não são independentes. A identificação sem adaptação pode levar à estagnação; a adaptação sem avaliação pode levar ao improviso; a avaliação sem parceria pode levar à exclusão de saberes que a família e a rede de apoio possuem. A coerência entre as ações é o que sustenta a inclusão. A gestão, nesse sentido, é também uma produtora de evidências: pode acompanhar indicadores locais de participação, aprendizagem e satisfação das famílias, dialogando com os dados do Censo.
+
+Esses indicadores locais devem ser usados com cuidado. Eles não substituem a avaliação externa nem servem para comparar escolas sem considerar contextos distintos. Sua função é orientar a revisão do plano, identificar barreiras e ajustar prioridades. A publicação de dados desagregados, quando possível, amplia a transparência e permite que famílias e comunidade acompanhem os esforços da escola. A avaliação, nesse sentido, é um instrumento de diálogo, não de punição.
+
+## 5.7 Limitações e agenda de pesquisa
 
 As limitações são a natureza narrativa da revisão, a ausência de desagregação por etapa, a série de quatro anos e a impossibilidade de medir qualidade com os dados disponíveis. A agenda inclui: análise de microdados; estudos de caso em escolas; validação de instrumentos; pesquisas longitudinais; estudos sobre formação baseada na escola; comparação de políticas entre redes; e estudos sobre custos e financiamento.
+
+Essa agenda deve ser acompanhada de cautela quanto à validade externa. Os achados deste trabalho descrevem um período específico e um conjunto de fontes; não podem ser generalizados automaticamente para outras etapas ou redes. A comparação com estudos futuros exige atenção às definições, aos critérios de registro e às mudanças de nomenclatura. A transparência metodológica é condição para que o conhecimento se acumule.
+
+A replicação depende de dados acessíveis e de procedimentos documentados. Por isso, os scripts de extração e os arquivos CSV que sustentam os quadros acompanham este trabalho. A disponibilização de dados agregados não resolve a ausência de microdados, mas permite que outros pesquisadores verifiquem os cálculos e atualizem as séries. A ciência aberta, nesse sentido, não é apenas uma escolha técnica; é uma condição para que a política pública possa ser debatida com transparência.
+
+Além da replicação, a agenda deve incluir pesquisas participativas, com professores, estudantes e famílias como coautores do processo. A inclusão é um fenômeno vivido, e a experiência dos sujeitos é uma fonte de conhecimento que não se reduz a indicadores. Estudos de caso, grupos focais e pesquisas-ação podem revelar barreiras que os dados agregados não captam. A combinação entre evidência estatística e evidência experiencial é mais robusta do que qualquer uma isolada.
 
 # 6 CONCLUSÃO
 
@@ -362,7 +455,17 @@ Segundo, os dados mostram crescimento de 212% e presença majoritária em classe
 
 Terceiro, a articulação entre literatura e dados sugere que a inclusão nos anos iniciais é uma questão de visibilidade e de condições. A visibilidade estatística do TEA aumentou, mas a visibilidade pedagógica das necessidades desses estudantes ainda é desigual. A escola que reconhece a variabilidade, organiza o ambiente, apoia a comunicação e medeia a participação tem mais chances de oferecer inclusão efetiva. A que se limita à matrícula produz presença sem pertencimento.
 
+Em termos de contribuição, o estudo articula três planos que costumam ser tratados separadamente: a discussão conceitual sobre inclusão, a análise de dados oficiais e as implicações para a prática. Oferece um panorama da expansão das matrículas de TEA entre 2021 e 2024, mostra a desigualdade territorial e propõe uma leitura que não reduz os números à prevalência. Também organiza um repertório de práticas e tensões que pode apoiar a formação docente e a gestão escolar. Não pretende esgotar o tema, mas oferecer uma base para novas perguntas.
+
+A principal contribuição prática é a explicitação das tensões que atravessam a inclusão. Nomeá-las — norma e prática, identificação e estigma, adaptação e segregação, formação inicial e continuada — ajuda gestores e professores a evitar soluções simplistas. A inclusão não se resolve com uma técnica, uma lei ou um curso isolado; exige articulação entre condições institucionais, formação e decisão pedagógica. Os dados e a literatura, juntos, oferecem um mapa provisório para essa tarefa coletiva.
+
 O estudo tem limitações: revisão narrativa, série de quatro anos, dados não desagregados por etapa e ausência de medida de qualidade. Apesar disso, permite afirmar que a expansão das matrículas não foi acompanhada, na mesma medida, da expansão das condições de atendimento. A lacuna é de política, formação e organização do trabalho pedagógico.
+
+Metodologicamente, o trabalho mostra que é possível articular revisão e dados oficiais sem confundir uma coisa com outra. A literatura ajuda a interpretar os números, e os números ajudam a situar a literatura. Essa articulação não resolve a ausência de microdados, mas oferece um caminho para que a pesquisa educacional dialogue com as estatísticas disponíveis. O mesmo procedimento pode ser aplicado a outras etapas e a outros recortes, com os devidos ajustes.
+
+Politicamente, o estudo oferece três subsídios. O primeiro é a explicitação da desigualdade territorial: a taxa por mil varia 2,35 vezes entre os estados, e a participação na educação especial varia mais de 30 pontos percentuais. O segundo é a defesa de protocolos nacionais de identificação, com adaptações locais, para reduzir a variação injustificada. O terceiro é a necessidade de tabulação conjunta entre tipo de deficiência e etapa de ensino no Censo Escolar, sem a qual os anos iniciais permanecem invisíveis nas estatísticas. Esses subsídios não esgotam a política, mas indicam caminhos para que os dados se convertam em decisões.
+
+Academicamente, o estudo contribui ao organizar um corpus de 20 obras com DOI auditável, ao articular literatura nacional e internacional e ao propor uma leitura dos dados que não se limita à descrição. A combinação entre revisão e análise estatística oferece um modelo replicável para outros objetos e outras etapas. Ao explicitar as limitações, o trabalho também indica o que ainda precisa ser investigado.
 
 Por fim, a inclusão é um direito, não uma concessão. A escola que reconhece o TEA amplia as possibilidades de aprendizagem para todos. A tarefa é coletiva: professores, gestores, famílias, profissionais de apoio e formuladores de políticas. Os dados são ponto de partida; a mudança depende de decisões informadas por eles e de compromisso com a equidade.
 

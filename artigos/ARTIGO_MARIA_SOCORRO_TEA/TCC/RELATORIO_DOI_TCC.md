@@ -87,7 +87,7 @@ A legislação brasileira e as Sinopses do INEP não possuem DOI. Elas foram man
 - O TCC incorporou análise de dados secundários do Censo Escolar (2021–2024), com série nacional, decomposição por tipo de classe, distribuição regional, extremos estaduais e cenários exploratórios.
 - O resumo e o abstract informam **20 obras** e os principais indicadores.
 - A metodologia declara o protocolo de busca, a regra de DOI e a exceção das fontes primárias.
-- A versão final tem **27 páginas**, com **6 quadros** e **33 entradas** no sumário, dentro do limite institucional de 25 a 32 páginas.
+- A versão final tem **35 páginas**, com **25 páginas completas de corpo textual** (p. 1–25), **7 quadros** e **37 entradas** no sumário. As referências começam na p. 26.
 
 ---
 
@@ -95,16 +95,17 @@ A legislação brasileira e as Sinopses do INEP não possuem DOI. Elas foram man
 
 | Item | Situação |
 |---|---|
-| PDF | 27 páginas, A4 (595,28 × 841,89 pt) |
+| Corpo textual | 25 páginas completas (p. 1–25), sem pré-textuais, referências ou apêndices |
+| PDF | 35 páginas, A4 (595,28 × 841,89 pt) |
 | Margens | 2,5 cm em todos os lados |
 | Fonte | TeX Gyre Termes 12 pt (clone métrico de Times New Roman) |
 | Espaçamento | 1,5 |
 | Pré-textuais | Capa, folha de rosto, resumo, abstract e lista de abreviaturas sem numeração |
 | Paginação | Arábica a partir da introdução (página 1) |
-| Sumário | 33 entradas, com títulos e páginas |
-| Quadros | 6, com título acima e fonte abaixo |
+| Sumário | 37 entradas, com títulos e páginas |
+| Quadros | 7, com título acima e fonte abaixo |
 | Overfull boxes | Nenhuma acima de 10 pt |
-| DOCX | 2,5 cm, Times New Roman 12, 1,5; 217 parágrafos, 7 tabelas |
+| DOCX | 2,5 cm, Times New Roman 12, 1,5; 264 parágrafos, 8 tabelas |
 
 ---
 
