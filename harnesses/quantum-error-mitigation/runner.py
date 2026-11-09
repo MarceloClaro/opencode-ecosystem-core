@@ -24,6 +24,7 @@ from quantum_mitigation import (  # noqa: E402
     fit_spam,
     fit_spam_separation,
     fit_spam_tomography,
+    pauli_frame_pass,
     pec_plan,
     preregister_ci,
     pulse_dd_plan,
@@ -35,6 +36,7 @@ from quantum_mitigation import (  # noqa: E402
     spam_tomography_plan,
     surface_code_plan,
     uncertainty_report,
+    verify_equivalence,
 )
 
 OUT_PADRAO = Path(__file__).resolve().parent / "resultados"
@@ -476,6 +478,86 @@ def cmd_resilience(args) -> int:
     return 0
 
 
+def cmd_rc(args) -> int:
+    from qiskit import qasm2
+
+    if args.qasm:
+        source = Path(args.qasm)
+        original = qasm2.loads(source.read_text(encoding="utf-8"))
+        label = source.stem
+    else:
+        plan = spam_tomography_plan(args.qubit)
+        key = args.circuit or next(iter(plan))
+        if key not in plan:
+            _json_print(
+                {"status": "blocked", "reason": f"circuito ausente: {key}"}
+            )
+            return 2
+        original = qasm2.loads(plan[key])
+        label = key
+    if original.num_qubits > args.max_qubits:
+        _json_print(
+            {
+                "status": "blocked",
+                "reason": (
+                    f"{original.num_qubits} qubits excede --max-qubits "
+                    f"{args.max_qubits} para verificação unitária"
+                ),
+            }
+        )
+        return 2
+    result = pauli_frame_pass(
+        original, seed=args.seed, strict=not args.allow_non_clifford
+    )
+    verification = verify_equivalence(original, result["circuit"])
+    twirled_qasm = qasm2.dumps(result["circuit"])
+    payload = {
+        "schema_version": 1,
+        "source": label,
+        "qubit": int(args.qubit),
+        "seed": int(args.seed),
+        "n_twirls": result["n_twirls"],
+        "twirls": result["twirls"],
+        "skipped": result["skipped"],
+        "verification": verification,
+        "qasm": twirled_qasm,
+        "limits": result["limits"],
+        "hardware_executed": False,
+    }
+    out = Path(args.out)
+    out.mkdir(parents=True, exist_ok=True)
+    (out / "twirled.qasm").write_text(twirled_qasm, encoding="utf-8")
+    lines = [
+        "## Passe de Pauli-frame",
+        "",
+        f"- Fonte: `{label}`.",
+        f"- Portas twirladas: **{result['n_twirls']}**.",
+        f"- Seed: {args.seed}.",
+        f"- Equivalente up to fase: **{verification['equivalent_up_to_phase']}**.",
+        f"- Portas ignoradas: {result['skipped'] or 'nenhuma'}.",
+        "",
+        "### Twirls",
+        "",
+        *[
+            f"- `{item['gate']}` em {item['qubits']}: "
+            f"{item['pauli']} → {item['conjugated']}"
+            for item in result["twirls"]
+        ],
+    ]
+    exported = _write(out, payload, "Pauli-frame RC (offline)", lines)
+    _json_print(
+        {
+            "status": "ok",
+            "command": "rc",
+            **exported,
+            "n_twirls": result["n_twirls"],
+            "verification": verification,
+            "hardware_executed": False,
+        }
+    )
+    return 0
+
+
 def cmd_lessons(args) -> int:
     state = _read_json(args.loop_state)
     lessons = state.get("lessons") or []
@@ -655,6 +737,16 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--pulse-dd", action="store_true")
     p.add_argument("--out", default=str(OUT_PADRAO / "resilience"))
     p.set_defaults(func=cmd_resilience)
+
+    p = sub.add_parser("rc", help="passe de Pauli-frame RC (offline)")
+    p.add_argument("--qasm", help="circuito QASM de entrada")
+    p.add_argument("--circuit", help="chave do plano de tomografia")
+    p.add_argument("--qubit", type=int, choices=[0, 1], default=1)
+    p.add_argument("--seed", type=int, default=1234)
+    p.add_argument("--allow-non-clifford", action="store_true")
+    p.add_argument("--max-qubits", type=int, default=6)
+    p.add_argument("--out", default=str(OUT_PADRAO / "rc"))
+    p.set_defaults(func=cmd_rc)
 
     p = sub.add_parser("lessons", help="extrai lições do loop")
     p.add_argument("--loop-state", required=True)

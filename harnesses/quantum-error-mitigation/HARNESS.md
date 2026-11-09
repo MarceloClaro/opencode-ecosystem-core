@@ -55,6 +55,19 @@ O wrapper é `agent_qem.py`. Nenhum agente executa hardware.
 - [ ] bootstrap/Wilson não são significância universal;
 - [ ] nenhuma chave em arquivo.
 
+## Passe de Pauli-frame (RC)
+
+```bash
+.venv-quantum/bin/python harnesses/quantum-error-mitigation/runner.py rc \
+  --qubit 1 --seed 1234 --out resultados/rc
+```
+
+Twirl de portas Clifford 1q/2q com verificação unitária. Saída:
+`resultado.json`, `twirled.qasm` e `RELATORIO.md`. Não executa hardware.
+No circuito de tomografia de q1: 1 twirl, equivalência up to fase `true`.
+Portas não-Clifford são recusadas em modo estrito (`--allow-non-clifford`
+permite e registra).
+
 ## Calibração Rabi da preparação
 
 ```bash

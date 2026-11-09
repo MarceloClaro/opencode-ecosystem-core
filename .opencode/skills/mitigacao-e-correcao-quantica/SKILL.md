@@ -99,6 +99,20 @@ leitura de desvio coerente. Em q1: ε(rx) = −0,0006 ± 0,0091 rad;
 ε(ry) = +0,0012 ± 0,0129 rad; nenhum desvio acima de 2σ; r1 0,0695–0,0786.
 Não corrigir o ângulo do π; priorizar leitura.
 
+## Passe de Pauli-frame (RC)
+
+O passe implementa o twirl `P' · G · P = G` para portas Clifford 1q/2q:
+
+```bash
+.venv-quantum/bin/python harnesses/quantum-error-mitigation/runner.py rc \
+  --qubit 1 --seed 1234 --out resultados/rc
+```
+
+Gera QASM twirlado, relatório e verificação unitária. No circuito de tomografia
+de q1, `n_twirls=1` e equivalência up to fase confirmada. **RC real em hardware
+não foi executado**; o passe é pré-requisito, não prova de redução de erro.
+Portas não-Clifford são recusadas em modo estrito.
+
 ## Scorecard híbrido
 
 O comando `resilience` combina readout 4x4, tomografia q0/q1, ZNE, PEC e

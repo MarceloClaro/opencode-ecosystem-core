@@ -33,6 +33,12 @@ from .pec import (
     uniform_depolarizing_rates,
 )
 from .preparation import fit_rabi_calibration, rabi_calibration_plan
+from .randomized_compiling import (
+    conjugate_pauli,
+    pauli_frame_pass,
+    random_pauli,
+    verify_equivalence,
+)
 from .resilience import resilience_scorecard
 from .qec import (
     qec_plan,
@@ -76,4 +82,8 @@ __all__ = [
     "resilience_scorecard",
     "rabi_calibration_plan",
     "fit_rabi_calibration",
+    "conjugate_pauli",
+    "pauli_frame_pass",
+    "random_pauli",
+    "verify_equivalence",
 ]
