@@ -7,6 +7,7 @@ Comandos:
     optimize   otimiza um circuito (não submete)
     benchmark  otimiza vários circuitos (não submete)
     compare    compara baseline vs otimizado e mitiga leitura
+    mitigate   aplica mitigação de leitura a counts locais
     run        otimiza e submete ao GJQ com confirm/allow_hardware
     status     consulta o status de um task_id
     result     lê o resultado de um task_id

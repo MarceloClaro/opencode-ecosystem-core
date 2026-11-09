@@ -74,12 +74,16 @@ output_contract:
 
 # Otimizador de hardware GJQ
 
-**Specs:** `specs/SPEC-935-R1109-gjq-hardware-optimizers.md` e
-`specs/SPEC-935-R1110-gjq-readout-mitigation.md`
+**Specs:** `specs/SPEC-935-R1109-gjq-hardware-optimizers.md`,
+`specs/SPEC-935-R1110-gjq-readout-mitigation.md` e
+`specs/SPEC-935-R1112-gjq-loop-engineering.md`
 
 **Skill operacional:** `.opencode/skills/gjq-hardware-optimizers/SKILL.md`
 
 **Harness:** `harnesses/gjq-hardware-optimizers/runner.py`
+
+Para o ciclo SDD → TDD → simulação → hardware → mitigação, use o agente
+`gjq-readout-mitigation` e o `loop_runner.py`.
 
 ## Papel
 

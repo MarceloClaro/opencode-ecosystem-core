@@ -6578,7 +6578,7 @@
       "model": "opencode-go/deepseek-v4-pro"
     },
     "gjq-readout-mitigation": {
-      "description": "Planeja a comparação baseline vs otimizado e aplica mitigação de leitura 00/11 com calibração |00>/|11>; não executa hardware, não roda run e não declara fidelidade ou vantagem quântica.",
+      "description": "Planeja, simula, calibra, mitiga e executa loops auditáveis no hardware GJQ; o hardware só roda após SDD, TDD, simulação e confirmação do primário; não declara fidelidade ou vantagem quântica.",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/gjq-readout-mitigation.md}",
       "permission": {
@@ -6590,7 +6590,14 @@
           "python3 -m marceloclaro.cli doctor": "allow",
           "python3 -m pytest tests/test_r1111_gjq_readout_mitigation_agent.py -q": "allow",
           ".venv-quantum/bin/python harnesses/gjq-hardware-optimizers/agent_readout.py compare-plan*": "allow",
-          ".venv-quantum/bin/python harnesses/gjq-hardware-optimizers/agent_readout.py mitigate*": "allow"
+          ".venv-quantum/bin/python harnesses/gjq-hardware-optimizers/agent_readout.py mitigate*": "allow",
+          ".venv-quantum/bin/python harnesses/gjq-hardware-optimizers/agent_readout.py loop-plan*": "allow",
+          ".venv-quantum/bin/python harnesses/gjq-hardware-optimizers/agent_readout.py loop-simulate*": "allow",
+          ".venv-quantum/bin/python harnesses/gjq-hardware-optimizers/agent_readout.py loop-execute*": "allow",
+          ".venv-quantum/bin/python harnesses/gjq-hardware-optimizers/agent_readout.py loop-score*": "allow",
+          ".venv-quantum/bin/python harnesses/gjq-hardware-optimizers/agent_readout.py loop-run*": "allow",
+          ".venv-quantum/bin/python harnesses/gjq-hardware-optimizers/agent_readout.py loop-status*": "allow",
+          ".venv-quantum/bin/python harnesses/gjq-hardware-optimizers/agent_readout.py loop-report*": "allow"
         },
         "edit": "allow",
         "webfetch": "deny",

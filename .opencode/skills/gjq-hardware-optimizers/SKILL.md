@@ -1,6 +1,6 @@
 ---
 name: gjq-hardware-optimizers
-description: Otimiza circuitos para o hardware real da GJQ (Baihua e aliases) usando o Target e a calibração ao vivo, layout noise-aware, QASM2/QASM3, comparação baseline vs otimizado e mitigação de leitura. Use para perfil, otimização, benchmark, comparação e execução real; não declara fidelidade, vantagem quântica ou emaranhamento como provados.
+description: Otimiza circuitos para o hardware real da GJQ (Baihua e aliases) usando o Target e a calibração ao vivo, layout noise-aware, QASM2/QASM3, comparação baseline vs otimizado, mitigação de leitura e engenharia de loop SDD/TDD/simulação/hardware. Use para perfil, otimização, benchmark, comparação, mitigação, loop e execução real; não declara fidelidade, vantagem quântica ou emaranhamento como provados.
 metadata:
   version: "1"
   origem: "R1109 — otimizadores para hardware GJQ"
@@ -89,6 +89,25 @@ O agente `gjq-readout-mitigation` é `managed-v1` e tem permissão apenas para
 Ele não executa `runner.py run` nem `runner.py compare` direto. O wrapper
 rejeita esses comandos. A submissão de hardware permanece no primário, com
 `--confirm` e `--allow-hardware`.
+
+## Loop
+
+```bash
+# plano + SDD + TDD + simulação (sem hardware)
+.venv-quantum/bin/python harnesses/gjq-hardware-optimizers/loop_runner.py run \
+  --backend Baihua --circuit E05 --shots 2048 --quick --use-cached-account \
+  --out resultados/E05_loop
+
+# ciclo completo com hardware após os gates
+.venv-quantum/bin/python harnesses/gjq-hardware-optimizers/loop_runner.py run \
+  --backend Baihua --circuit E05 --shots 2048 --quick \
+  --confirm --allow-hardware --use-cached-account \
+  --out resultados/E05_loop
+```
+
+O `loop-run` sem `--confirm` para depois da simulação. O `loop-execute`
+bloqueia sem SDD, TDD, simulação, `--confirm` e `--allow-hardware`. A simulação
+usa modelo depolarizante do perfil e **não** prevê o hardware.
 
 ## Mitigação de leitura
 

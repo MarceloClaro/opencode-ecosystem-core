@@ -1,0 +1,165 @@
+{
+  "name": "baseline",
+  "task_id": "f36d0036-1994-4281-a42e-e7fcbf332bc0",
+  "shots": 2048,
+  "candidate": {
+    "layout_kind": "trivial",
+    "optimization_level": 1,
+    "layout_method": null,
+    "routing_method": "basic",
+    "seed": 42,
+    "initial_layout": [
+      0,
+      1
+    ],
+    "metrics": {
+      "num_qubits": 2,
+      "num_clbits": 2,
+      "size": 6,
+      "depth": 4,
+      "num_1q": 3,
+      "num_2q": 1,
+      "num_measure": 2,
+      "ops": {
+        "h": 3,
+        "measure": 2,
+        "cz": 1
+      }
+    },
+    "estimate": {
+      "success_proxy": 0.9662074626905641,
+      "error_budget_proxy": 0.03379253730943588,
+      "log_success_proxy": -0.034376703138228784,
+      "operations": 6,
+      "per_gate": {
+        "cz": 1,
+        "h": 3,
+        "measure": 2
+      },
+      "unknown_operations": [],
+      "method": "produto de (1 - erro) por porta e leitura; proxy independente, não é fidelidade de estado"
+    },
+    "transpile_seconds": 0.0,
+    "used_physical": [
+      0,
+      1
+    ],
+    "status": "pass",
+    "error": null
+  },
+  "counts": {
+    "00": 996,
+    "11": 922,
+    "10": 59,
+    "01": 71
+  },
+  "audit": {
+    "ok": true,
+    "total": 2048,
+    "shots_expected": 2048,
+    "alert": null,
+    "probabilities": {
+      "00": 0.486328125,
+      "11": 0.450195312,
+      "10": 0.028808594,
+      "01": 0.034667969
+    },
+    "standard_error": {
+      "00": 0.011044412,
+      "11": 0.010993595,
+      "10": 0.00369614,
+      "01": 0.004042384
+    }
+  },
+  "probabilities": {
+    "00": 0.486328125,
+    "11": 0.4501953125,
+    "10": 0.02880859375,
+    "01": 0.03466796875
+  },
+  "raw_correlation_00_11": 0.9365234375,
+  "raw_tvd_vs_ideal": 0.0634765625,
+  "calibration_task_ids": {
+    "00": "2244ce58-48d8-4370-9d7e-41f0883457ee",
+    "11": "d80bd485-1228-44c7-9cdf-7ebd4dbd384f"
+  },
+  "calibration_counts": {
+    "00": {
+      "00": 1993,
+      "01": 31,
+      "10": 24
+    },
+    "11": {
+      "11": 1803,
+      "01": 124,
+      "10": 105,
+      "00": 16
+    }
+  },
+  "mitigation": {
+    "method": "inverse",
+    "states": [
+      "00",
+      "11"
+    ],
+    "matrix": [
+      [
+        1.0,
+        0.008796041781198461
+      ],
+      [
+        0.0,
+        0.9912039582188016
+      ]
+    ],
+    "condition_number": 1.0125728550281958,
+    "negative_mass_clipped": -0.0,
+    "leakage_outside_subspace": 0.0634765625,
+    "probabilities": {
+      "00": 0.5150250682878784,
+      "11": 0.4849749317121215
+    },
+    "leakage_by_prepared": {
+      "00": 0.02685546875,
+      "11": 0.11181640625
+    },
+    "calibration_counts": {
+      "00": {
+        "00": 1993,
+        "01": 31,
+        "10": 24
+      },
+      "11": {
+        "11": 1803,
+        "01": 124,
+        "10": 105,
+        "00": 16
+      }
+    },
+    "calibration_task_ids": {
+      "00": "2244ce58-48d8-4370-9d7e-41f0883457ee",
+      "11": "d80bd485-1228-44c7-9cdf-7ebd4dbd384f"
+    }
+  },
+  "mitigated_correlation_00_11": 1.0,
+  "mitigated_tvd_subspace": 0.015025068287878446,
+  "qasm2": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nh q[1];\ncz q[0],q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+  "qasm3": "OPENQASM 3.0;\ninclude \"stdgates.inc\";\nbit[2] c;\nqubit[2] q;\nh q[0];\nh q[1];\ncz q[0], q[1];\nh q[1];\nc[0] = measure q[0];\nc[1] = measure q[1];\n",
+  "measurement_order": [
+    1,
+    0
+  ],
+  "wait": {
+    "status": "done",
+    "task_id": "f36d0036-1994-4281-a42e-e7fcbf332bc0",
+    "task_status": "DONE",
+    "waited_seconds": 52.773,
+    "result": {
+      "00": 996,
+      "11": 922,
+      "10": 59,
+      "01": 71
+    },
+    "detail": null
+  }
+}

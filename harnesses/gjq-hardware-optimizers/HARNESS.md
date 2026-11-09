@@ -56,6 +56,29 @@ e simetriza `cz`, `swap` e `iswap`.
 Níveis: `1, 3` no modo rápido; `1, 2, 3` no completo. Seeds: `42` no rápido;
 `42, 43` no completo. O baseline não participa da seleção.
 
+## Loop
+
+```bash
+# plano + SDD + TDD + simulação, sem hardware
+.venv-quantum/bin/python harnesses/gjq-hardware-optimizers/loop_runner.py run \
+  --backend Baihua --circuit E05 --shots 2048 --quick --use-cached-account \
+  --out resultados/E05_loop
+
+# ciclo completo, hardware após os gates
+.venv-quantum/bin/python harnesses/gjq-hardware-optimizers/loop_runner.py run \
+  --backend Baihua --circuit E05 --shots 2048 --quick \
+  --confirm --allow-hardware --use-cached-account \
+  --out resultados/E05_loop
+
+# etapas separadas
+loop_runner.py plan --profile perfil.json --circuit E05 --shots 2048 --quick --out resultados/E05_loop
+loop_runner.py simulate --state resultados/E05_loop/loop_state.json
+loop_runner.py execute --state resultados/E05_loop/loop_state.json --confirm --allow-hardware --use-cached-account
+loop_runner.py score --state resultados/E05_loop/loop_state.json
+loop_runner.py status --state resultados/E05_loop/loop_state.json
+loop_runner.py report --state resultados/E05_loop/loop_state.json
+```
+
 ## Agente dedicado
 
 O agente `gjq-readout-mitigation` é `managed-v1` e só pode rodar `doctor`, o
@@ -165,6 +188,23 @@ confirmou** no hardware. O baseline foi ligeiramente melhor na correlação raw
 e na TVD mitigada. O leakage de |11> foi de 14–15%, muito acima do
 `readout_error` reportado; ele inclui preparação do |1> via `rx(pi)`, não só
 readout. A diferença mitigada de 0,0028 não sustenta vantagem.
+
+## Loop real de referência
+
+| Item | Resultado |
+|---|---|
+| Loop | `gjq-loop-20261109T122129` |
+| Backend | Baihua |
+| Shots | 2048 por circuito |
+| Gates | SDD, TDD e simulação aprovados |
+| Baseline | task `f36d0036-1994-4281-a42e-e7fcbf332bc0`, raw 0,9365, mitigado 0,0150 |
+| Otimizado | task `25fab68e-27d6-4ca2-9bb2-71908fc07d4c`, raw 0,9253, mitigado 0,0141 |
+| Δ mitigado | −0,0009 (otimizado levemente à frente) |
+
+O raw favoreceu o baseline; o mitigado favoreceu o otimizado por 0,0009. Na
+comparação anterior de 4096 shots, o baseline venceu o mitigado. O vencedor
+inverteu entre execuções; a diferença não sustenta vantagem. O loop registra a
+lição e recomenda mais shots e calibração dos 4 estados.
 
 ## Artefatos
 

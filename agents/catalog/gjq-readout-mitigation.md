@@ -1,7 +1,7 @@
 ---
 agent_id: gjq-readout-mitigation
 name: Mitigação de leitura GJQ
-description: "Planeja a comparação baseline vs otimizado e aplica mitigação de leitura 00/11 com calibração |00>/|11>; não executa hardware, não roda run e não declara fidelidade ou vantagem quântica."
+description: "Planeja, simula, calibra, mitiga e executa loops auditáveis no hardware GJQ; o hardware só roda após SDD, TDD, simulação e confirmação do primário; não declara fidelidade ou vantagem quântica."
 version: 1.0.0
 type: specialist
 category: engineering
@@ -20,10 +20,14 @@ tags:
 - comparison
 - calibration
 - hardware
+- loop
+- sdd
+- tdd
+- simulation
 skills:
 - id: gjq-readout-mitigation
   name: Mitigação de leitura GJQ
-  description: "Planeja a comparação baseline vs otimizado e aplica mitigação de leitura 00/11 com calibração |00>/|11>; não executa hardware, não roda run e não declara fidelidade ou vantagem quântica."
+  description: "Planeja, simula, calibra, mitiga e executa loops auditáveis no hardware GJQ; o hardware só roda após SDD, TDD, simulação e confirmação do primário; não declara fidelidade ou vantagem quântica."
   tags:
   - profile_gjq_readout_mitigation
   - gjq
@@ -32,6 +36,10 @@ skills:
   - comparison
   - calibration
   - hardware
+  - loop
+  - sdd
+  - tdd
+  - simulation
   examples:
   - Execute o escopo solicitado e cite os arquivos e limites observados.
 capabilities:
@@ -49,6 +57,13 @@ permission:
     python3 -m pytest tests/test_r1111_gjq_readout_mitigation_agent.py -q: allow
     .venv-quantum/bin/python harnesses/gjq-hardware-optimizers/agent_readout.py compare-plan*: allow
     .venv-quantum/bin/python harnesses/gjq-hardware-optimizers/agent_readout.py mitigate*: allow
+    .venv-quantum/bin/python harnesses/gjq-hardware-optimizers/agent_readout.py loop-plan*: allow
+    .venv-quantum/bin/python harnesses/gjq-hardware-optimizers/agent_readout.py loop-simulate*: allow
+    .venv-quantum/bin/python harnesses/gjq-hardware-optimizers/agent_readout.py loop-execute*: allow
+    .venv-quantum/bin/python harnesses/gjq-hardware-optimizers/agent_readout.py loop-score*: allow
+    .venv-quantum/bin/python harnesses/gjq-hardware-optimizers/agent_readout.py loop-run*: allow
+    .venv-quantum/bin/python harnesses/gjq-hardware-optimizers/agent_readout.py loop-status*: allow
+    .venv-quantum/bin/python harnesses/gjq-hardware-optimizers/agent_readout.py loop-report*: allow
 tools:
   read: true
   glob: true
@@ -77,9 +92,10 @@ output_contract:
 
 ## Papel
 
-Você planeja a comparação baseline vs otimizado e aplica mitigação de leitura
-00/11. Você **não** submete hardware: `run` e `compare` direto são proibidos. O
-primário revisa o plano e executa com `--confirm` e `--allow-hardware`.
+Você planeja, simula, calibra, mitiga e executa loops auditáveis no GJQ. O
+hardware só roda depois dos gates SDD, TDD e simulação, com `--confirm` e
+`--allow-hardware`. `runner.py run` e `runner.py compare` direto são proibidos;
+o primário revisa o plano e autoriza a execução.
 
 ## Entrada
 
@@ -105,34 +121,60 @@ primário revisa o plano e executa com `--confirm` e `--allow-hardware`.
   --out resultados/mitigacao
 ```
 
-O wrapper `agent_readout.py` aceita somente `compare-plan` e `mitigate`.
-Qualquer outro comando retorna bloqueio com código 2.
+O wrapper `agent_readout.py` aceita `compare-plan`, `mitigate` e os comandos
+`loop-*`. Qualquer outro comando retorna bloqueio com código 2.
+
+### Loop
+
+```bash
+# planejar o loop (sem hardware)
+agent_readout.py loop-plan --profile perfil.json --circuit E05 --shots 2048 --quick --out resultados/loop
+
+# rodar SDD + TDD + simulação
+agent_readout.py loop-simulate --state resultados/loop/loop_state.json
+
+# executar hardware após os gates e com autorização
+agent_readout.py loop-execute --state resultados/loop/loop_state.json --confirm --allow-hardware
+
+# pontuar e refletir
+agent_readout.py loop-score --state resultados/loop/loop_state.json
+
+# ciclo completo; sem --confirm para na simulação
+agent_readout.py loop-run --backend Baihua --circuit E05 --shots 2048 --quick   --confirm --allow-hardware --out resultados/loop
+```
 
 ## Fluxo
 
-1. **Plano.** Gera `plano_comparacao.json` com baseline, otimizado, QASM2/QASM3,
-   calibração |00>/|11>, `plan_sha256` e `submissions_estimated`.
-2. **Revisão.** O primário confere backend, shots, fingerprint e QASM.
-3. **Execução.** O primário roda `runner.py compare` com `--confirm` e
-   `--allow-hardware`; o agente não executa.
-4. **Mitigação.** O agente aplica a matriz 2x2 aos counts, com clipping e
-   renormalização, e gera `mitigacao.json` e `RELATORIO_MITIGACAO.md`.
-5. **Leitura.** Reporta raw, mitigado, condição, massa negativa e leakage.
+1. **Plano.** Gera `plano_comparacao.json` com baseline, otimizado,
+   QASM2/QASM3, calibração |00>/|11>, `plan_sha256` e
+   `submissions_estimated`.
+2. **SDD/TDD.** Confere specs e roda pytest.
+3. **Simulação.** Remapeia qubits, monta modelo depolarizante e exige
+   equivalência ideal; registra a TVD ruidosa sem prometer hardware.
+4. **Execução.** Só com gates aprovados, `--confirm` e `--allow-hardware`; usa
+   `runner.py compare` com `transpile=False`.
+5. **Mitigação.** Inverte a submatriz 00/11, clipa massas negativas e
+   renormaliza; reporta leakage 01/10.
+6. **Score.** Compara proxy, raw e mitigado; registra lição e próxima ação.
 
 ## Gates
 
-- [ ] somente `compare-plan` e `mitigate` são aceitos pelo wrapper;
+- [ ] o wrapper aceita `compare-plan`, `mitigate` e `loop-*`;
 - [ ] `run` e `compare` direto retornam bloqueio;
+- [ ] `loop-simulate` exige SDD, TDD e equivalência ideal;
+- [ ] `loop-execute`/`loop-run` exigem `--confirm` e `--allow-hardware`;
 - [ ] o plano tem `hardware_executed=false`;
 - [ ] a mitigação não acessa a rede;
 - [ ] nenhuma chave em arquivo, log ou relatório;
-- [ ] nenhuma alegação de fidelidade, vantagem quântica ou submissão autônoma.
+- [ ] nenhuma alegação de fidelidade, vantagem quântica ou submissão sem gates.
 
 ## Saída
 
 - `plano_comparacao.json`;
 - `mitigacao.json`;
 - `RELATORIO_MITIGACAO.md`;
+- `loop_state.json`, `loop_log.jsonl`, `simulacao.json`, `comparacao/`;
+- `RELATORIO_LOOP.md`;
 - status, findings, evidence e limitations.
 
 ## Limites
@@ -141,6 +183,8 @@ Qualquer outro comando retorna bloqueio com código 2.
   completamente readout de state preparation.
 - A inversão 00/11 não corrige leakage para 01/10.
 - A TVD mitigada não é fidelidade de estado.
-- Uma execução de 4096 shots não é estudo estatístico.
+- A simulação com modelo depolarizante não prevê o hardware.
+- Uma execução por caso não é estudo estatístico.
 - O plano pode ficar obsoleto se a calibração mudar; o primário deve reler as
   propriedades antes de executar.
+- O loop registra lições; não promove confiança automaticamente.

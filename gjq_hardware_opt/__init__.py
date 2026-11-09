@@ -47,6 +47,14 @@ from .export import (
     render_result_markdown,
 )
 from .layout import LayoutResult, circuit_interactions, noise_aware_layout
+from .loop import (
+    export_loop,
+    render_loop_report,
+    run_sdd_gate,
+    run_tdd_gate,
+    score_comparison,
+    simulation_gate,
+)
 from .mitigation import (
     ReadoutModel,
     calibration_circuit,
@@ -71,6 +79,7 @@ from .optimizer import (
     initial_layout_from_transpiled,
 )
 from .profile import HardwareProfile
+from .simulation import simulate_case, simulate_plan
 from .target import build_target_from_profile
 
 __all__ = [
@@ -83,6 +92,14 @@ __all__ = [
     "noise_aware_layout",
     "circuit_interactions",
     "ReadoutModel",
+    "simulate_case",
+    "simulate_plan",
+    "simulation_gate",
+    "run_sdd_gate",
+    "run_tdd_gate",
+    "score_comparison",
+    "render_loop_report",
+    "export_loop",
     "readout_confusion_matrix",
     "confusion_from_calibration_counts",
     "subspace_matrix_from_calibration",

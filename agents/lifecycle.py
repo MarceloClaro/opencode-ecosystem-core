@@ -97,10 +97,20 @@ def _permissions(test_file, allow_edit, agent_id=None):
         f"python3 -m pytest {test_file} -q": "allow",
     }
     if agent_id == READOUT_MITIGATION_AGENT_ID:
-        bash.update({
-            ".venv-quantum/bin/python harnesses/gjq-hardware-optimizers/agent_readout.py compare-plan*": "allow",
-            ".venv-quantum/bin/python harnesses/gjq-hardware-optimizers/agent_readout.py mitigate*": "allow",
-        })
+        for command in (
+            "compare-plan",
+            "mitigate",
+            "loop-plan",
+            "loop-simulate",
+            "loop-execute",
+            "loop-score",
+            "loop-run",
+            "loop-status",
+            "loop-report",
+        ):
+            bash[
+                f".venv-quantum/bin/python harnesses/gjq-hardware-optimizers/agent_readout.py {command}*"
+            ] = "allow"
     return {"read": "allow", "glob": "allow", "grep": "allow",
             "edit": "allow" if allow_edit else "deny", "webfetch": "deny", "task": "deny",
             "bash": bash}
