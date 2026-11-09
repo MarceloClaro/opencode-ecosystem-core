@@ -1,0 +1,256 @@
+{
+  "name": "otimizado",
+  "task_id": "042e43b5-88e9-4d82-a8cc-20c99e8a7635",
+  "task_ids": [
+    "042e43b5-88e9-4d82-a8cc-20c99e8a7635"
+  ],
+  "shots": 4096,
+  "shots_per_repetition": 4096,
+  "repetitions_count": 1,
+  "candidate": {
+    "layout_kind": "noise_aware",
+    "optimization_level": 1,
+    "layout_method": null,
+    "routing_method": "sabre",
+    "seed": 44,
+    "initial_layout": [
+      106,
+      107
+    ],
+    "metrics": {
+      "num_qubits": 108,
+      "num_clbits": 2,
+      "size": 6,
+      "depth": 4,
+      "num_1q": 3,
+      "num_2q": 1,
+      "num_measure": 2,
+      "ops": {
+        "h": 3,
+        "measure": 2,
+        "cz": 1
+      }
+    },
+    "estimate": {
+      "success_proxy": 0.994014980014994,
+      "error_budget_proxy": 0.0059850199850060015,
+      "log_success_proxy": -0.006003002001501207,
+      "operations": 6,
+      "per_gate": {
+        "cz": 1,
+        "h": 3,
+        "measure": 2
+      },
+      "unknown_operations": [],
+      "method": "produto de (1 - erro) por porta e leitura; proxy independente, não é fidelidade de estado"
+    },
+    "transpile_seconds": 0.008085879002464935,
+    "used_physical": [
+      106,
+      107
+    ],
+    "status": "pass",
+    "error": null
+  },
+  "counts": {
+    "00": 1938,
+    "11": 1845,
+    "01": 164,
+    "10": 149
+  },
+  "audit": {
+    "ok": true,
+    "total": 4096,
+    "shots_expected": 4096,
+    "alert": null,
+    "probabilities": {
+      "00": 0.473144531,
+      "11": 0.450439453,
+      "01": 0.040039062,
+      "10": 0.036376953
+    },
+    "standard_error": {
+      "00": 0.007801223,
+      "11": 0.007774026,
+      "01": 0.003063295,
+      "10": 0.00292541
+    }
+  },
+  "probabilities": {
+    "00": 0.47314453125,
+    "11": 0.450439453125,
+    "01": 0.0400390625,
+    "10": 0.036376953125
+  },
+  "raw_correlation_00_11": 0.923583984375,
+  "raw_tvd_vs_ideal": 0.076416015625,
+  "calibration_task_ids": {
+    "00": "86b6484e-b782-4491-a3a3-df11a5bb0c63",
+    "11": "6814ddc5-366c-426c-a0ce-cf3686fcb997"
+  },
+  "calibration_counts": {
+    "00": {
+      "00": 4016,
+      "01": 38,
+      "10": 42
+    },
+    "11": {
+      "11": 3416,
+      "01": 275,
+      "00": 31,
+      "10": 374
+    }
+  },
+  "mitigation": {
+    "method": "inverse",
+    "states": [
+      "00",
+      "11"
+    ],
+    "matrix": [
+      [
+        1.0,
+        0.00899332753118654
+      ],
+      [
+        0.0,
+        0.9910066724688135
+      ]
+    ],
+    "condition_number": 1.0128579397792135,
+    "negative_mass_clipped": -0.0,
+    "leakage_outside_subspace": 0.076416015625,
+    "probabilities": {
+      "00": 0.5078659088081092,
+      "11": 0.4921340911918908
+    },
+    "leakage_by_prepared": {
+      "00": 0.01953125,
+      "11": 0.158447265625
+    },
+    "calibration_counts": {
+      "00": {
+        "00": 4016,
+        "01": 38,
+        "10": 42
+      },
+      "11": {
+        "11": 3416,
+        "01": 275,
+        "00": 31,
+        "10": 374
+      }
+    },
+    "calibration_task_ids": {
+      "00": "86b6484e-b782-4491-a3a3-df11a5bb0c63",
+      "11": "6814ddc5-366c-426c-a0ce-cf3686fcb997"
+    }
+  },
+  "mitigated_correlation_00_11": 1.0,
+  "mitigated_tvd_subspace": 0.007865908808109223,
+  "mitigated_tvd_vs_ideal": 0.007865908808109223,
+  "repetitions": [
+    {
+      "repetition": 1,
+      "task_id": "042e43b5-88e9-4d82-a8cc-20c99e8a7635",
+      "counts": {
+        "00": 1938,
+        "11": 1845,
+        "01": 164,
+        "10": 149
+      },
+      "audit": {
+        "ok": true,
+        "total": 4096,
+        "shots_expected": 4096,
+        "alert": null,
+        "probabilities": {
+          "00": 0.473144531,
+          "11": 0.450439453,
+          "01": 0.040039062,
+          "10": 0.036376953
+        },
+        "standard_error": {
+          "00": 0.007801223,
+          "11": 0.007774026,
+          "01": 0.003063295,
+          "10": 0.00292541
+        }
+      },
+      "raw_correlation_00_11": 0.923583984375,
+      "raw_tvd_vs_ideal": 0.076416015625,
+      "mitigated_correlation_00_11": 1.0,
+      "mitigated_tvd_vs_ideal": 0.007865908808109223,
+      "mitigated_tvd_subspace": 0.007865908808109223,
+      "mitigation": {
+        "method": "inverse",
+        "states": [
+          "00",
+          "11"
+        ],
+        "matrix": [
+          [
+            1.0,
+            0.00899332753118654
+          ],
+          [
+            0.0,
+            0.9910066724688135
+          ]
+        ],
+        "condition_number": 1.0128579397792135,
+        "negative_mass_clipped": -0.0,
+        "leakage_outside_subspace": 0.076416015625,
+        "probabilities": {
+          "00": 0.5078659088081092,
+          "11": 0.4921340911918908
+        }
+      }
+    }
+  ],
+  "repetition_stats": {
+    "raw_correlation_00_11": {
+      "mean": 0.923583984375,
+      "std": 0.0,
+      "min": 0.923583984375,
+      "max": 0.923583984375
+    },
+    "raw_tvd_vs_ideal": {
+      "mean": 0.076416015625,
+      "std": 0.0,
+      "min": 0.076416015625,
+      "max": 0.076416015625
+    },
+    "mitigated_tvd_vs_ideal": {
+      "mean": 0.007865908808109223,
+      "std": 0.0,
+      "min": 0.007865908808109223,
+      "max": 0.007865908808109223
+    },
+    "mitigated_correlation_00_11": {
+      "mean": 1.0,
+      "std": 0.0,
+      "min": 1.0,
+      "max": 1.0
+    }
+  },
+  "qasm2": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[108];\ncreg c[2];\nh q[106];\nh q[107];\ncz q[106],q[107];\nh q[107];\nmeasure q[106] -> c[0];\nmeasure q[107] -> c[1];",
+  "qasm3": "OPENQASM 3.0;\ninclude \"stdgates.inc\";\nbit[2] c;\nqubit[108] q;\nh q[106];\nh q[107];\ncz q[106], q[107];\nh q[107];\nc[0] = measure q[106];\nc[1] = measure q[107];\n",
+  "measurement_order": [
+    107,
+    106
+  ],
+  "wait": {
+    "status": "done",
+    "task_id": "042e43b5-88e9-4d82-a8cc-20c99e8a7635",
+    "task_status": "DONE",
+    "waited_seconds": 54.861,
+    "result": {
+      "00": 1938,
+      "11": 1845,
+      "01": 164,
+      "10": 149
+    },
+    "detail": null
+  }
+}

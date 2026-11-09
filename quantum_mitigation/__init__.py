@@ -33,6 +33,14 @@ from .pec import (
     uniform_depolarizing_rates,
 )
 from .preparation import fit_rabi_calibration, rabi_calibration_plan
+from .rc_validation import (
+    base_circuit,
+    bootstrap_tvd_difference,
+    decision,
+    ideal_probabilities,
+    rc_validation_plan,
+    tvd,
+)
 from .randomized_compiling import (
     conjugate_pauli,
     pauli_frame_pass,
@@ -86,4 +94,10 @@ __all__ = [
     "pauli_frame_pass",
     "random_pauli",
     "verify_equivalence",
+    "base_circuit",
+    "bootstrap_tvd_difference",
+    "decision",
+    "ideal_probabilities",
+    "rc_validation_plan",
+    "tvd",
 ]

@@ -99,6 +99,25 @@ leitura de desvio coerente. Em q1: ε(rx) = −0,0006 ± 0,0091 rad;
 ε(ry) = +0,0012 ± 0,0129 rad; nenhum desvio acima de 2σ; r1 0,0695–0,0786.
 Não corrigir o ângulo do π; priorizar leitura.
 
+## Validação RC em hardware
+
+Duas pernas, 2 conjuntos × 4 circuitos, 9.600 shots, 16 jobs:
+
+- baseline: TVD 0,0962;
+- twirlado: TVD 0,0978;
+- Δ = +0,0018 [−0,0071, +0,0108];
+- decisão: **sem efeito detectável**.
+
+O resultado negativo é registrado. O twirl adiciona portas; o benefício de
+tailoring não superou esse custo neste circuito.
+
+## Repetição de leitura
+
+Três runs de mitigação 4×4: baseline 0,0247 (faixa 0,0228–0,0263); otimizado
+0,0170 (faixa 0,0079–0,0277); sinal instável. O layout otimizado usa qubits
+106/107 e o baseline usa 0/1, então a diferença mistura layout com qualidade
+de qubit. Mitigação de leitura **não** reduz o r1 físico.
+
 ## Pré-registro e literatura
 
 - `harnesses/quantum-error-mitigation/preregister_layout.py` pré-registra n e

@@ -1,0 +1,296 @@
+{
+  "schema_version": 1,
+  "backend": "Baihua",
+  "set": 2,
+  "shots": 9600,
+  "n_preregistered": {
+    "p": 0.5,
+    "half_width": 0.01,
+    "confidence": 0.95,
+    "n": 9600,
+    "observed_half_width": 0.009999898786298145,
+    "effect_size": 0.02
+  },
+  "seeds": [
+    201,
+    202,
+    203,
+    204
+  ],
+  "ideal": {
+    "00": 0.4999999999999998,
+    "01": 5.286997409534849e-34,
+    "10": 5.286997409534849e-34,
+    "11": 0.4999999999999998
+  },
+  "twirls": [
+    {
+      "seed": 201,
+      "n_twirls": 4,
+      "twirls": [
+        {
+          "gate": "h",
+          "qubits": [
+            0
+          ],
+          "pauli": "X",
+          "conjugated": "Z"
+        },
+        {
+          "gate": "h",
+          "qubits": [
+            1
+          ],
+          "pauli": "Z",
+          "conjugated": "X"
+        },
+        {
+          "gate": "cz",
+          "qubits": [
+            0,
+            1
+          ],
+          "pauli": "IY",
+          "conjugated": "ZY"
+        },
+        {
+          "gate": "h",
+          "qubits": [
+            0
+          ],
+          "pauli": "Z",
+          "conjugated": "X"
+        }
+      ]
+    },
+    {
+      "seed": 202,
+      "n_twirls": 4,
+      "twirls": [
+        {
+          "gate": "h",
+          "qubits": [
+            0
+          ],
+          "pauli": "I",
+          "conjugated": "I"
+        },
+        {
+          "gate": "h",
+          "qubits": [
+            1
+          ],
+          "pauli": "X",
+          "conjugated": "Z"
+        },
+        {
+          "gate": "cz",
+          "qubits": [
+            0,
+            1
+          ],
+          "pauli": "XX",
+          "conjugated": "YY"
+        },
+        {
+          "gate": "h",
+          "qubits": [
+            0
+          ],
+          "pauli": "X",
+          "conjugated": "Z"
+        }
+      ]
+    },
+    {
+      "seed": 203,
+      "n_twirls": 4,
+      "twirls": [
+        {
+          "gate": "h",
+          "qubits": [
+            0
+          ],
+          "pauli": "X",
+          "conjugated": "Z"
+        },
+        {
+          "gate": "h",
+          "qubits": [
+            1
+          ],
+          "pauli": "Z",
+          "conjugated": "X"
+        },
+        {
+          "gate": "cz",
+          "qubits": [
+            0,
+            1
+          ],
+          "pauli": "ZX",
+          "conjugated": "IX"
+        },
+        {
+          "gate": "h",
+          "qubits": [
+            0
+          ],
+          "pauli": "Z",
+          "conjugated": "X"
+        }
+      ]
+    },
+    {
+      "seed": 204,
+      "n_twirls": 4,
+      "twirls": [
+        {
+          "gate": "h",
+          "qubits": [
+            0
+          ],
+          "pauli": "Y",
+          "conjugated": "Y"
+        },
+        {
+          "gate": "h",
+          "qubits": [
+            1
+          ],
+          "pauli": "Y",
+          "conjugated": "Y"
+        },
+        {
+          "gate": "cz",
+          "qubits": [
+            0,
+            1
+          ],
+          "pauli": "ZZ",
+          "conjugated": "ZZ"
+        },
+        {
+          "gate": "h",
+          "qubits": [
+            0
+          ],
+          "pauli": "I",
+          "conjugated": "I"
+        }
+      ]
+    }
+  ],
+  "verifications": [
+    {
+      "equivalent_up_to_phase": true,
+      "overlap": {
+        "real": 0.9999999999999996,
+        "imag": 0.0,
+        "abs": 0.9999999999999996
+      },
+      "atol": 1e-08
+    },
+    {
+      "equivalent_up_to_phase": true,
+      "overlap": {
+        "real": 0.9999999999999996,
+        "imag": 0.0,
+        "abs": 0.9999999999999996
+      },
+      "atol": 1e-08
+    },
+    {
+      "equivalent_up_to_phase": true,
+      "overlap": {
+        "real": 0.9999999999999996,
+        "imag": 0.0,
+        "abs": 0.9999999999999996
+      },
+      "atol": 1e-08
+    },
+    {
+      "equivalent_up_to_phase": true,
+      "overlap": {
+        "real": 0.9999999999999996,
+        "imag": 0.0,
+        "abs": 0.9999999999999996
+      },
+      "atol": 1e-08
+    }
+  ],
+  "gates": {
+    "tdd": true,
+    "simulation": true
+  },
+  "counts": {
+    "baseline": [
+      {
+        "00": 4582,
+        "10": 597,
+        "01": 430,
+        "11": 3991
+      },
+      {
+        "00": 4536,
+        "11": 4177,
+        "01": 458,
+        "10": 429
+      },
+      {
+        "11": 4019,
+        "00": 4610,
+        "10": 554,
+        "01": 417
+      },
+      {
+        "11": 3961,
+        "00": 4650,
+        "01": 455,
+        "10": 534
+      }
+    ],
+    "twirled": [
+      {
+        "00": 4584,
+        "01": 413,
+        "11": 4202,
+        "10": 401
+      },
+      {
+        "00": 4595,
+        "11": 3981,
+        "10": 544,
+        "01": 480
+      },
+      {
+        "00": 4611,
+        "11": 3941,
+        "10": 562,
+        "01": 486
+      },
+      {
+        "00": 4654,
+        "11": 3946,
+        "10": 574,
+        "01": 426
+      }
+    ]
+  },
+  "task_ids": {
+    "baseline": [
+      "1133e3e6-f5a5-401c-8b01-b7213474c9b5",
+      "19bf042a-7134-4bf7-b1a4-3acb2c9658d3",
+      "9204c3d5-6ce3-41a8-9524-640007b6afe7",
+      "30778759-c4ed-4786-8f2f-6faaf0ea705c"
+    ],
+    "twirled": [
+      "7eef969d-0023-45e8-ba11-a071951eeaa2",
+      "1b906b0f-b58e-4f5f-9c27-a79171ebecbb",
+      "8d6c8aac-5bf3-4fc1-888b-fd441f993edd",
+      "dc2bc0b6-960a-4ade-8f6a-4fc45cfe1ead"
+    ]
+  },
+  "generated_at": "2026-11-09T18:52:54-03:00",
+  "limits": "Duas pernas no mesmo layout; comparação descritiva de TVD. Não separa todos os erros e não declara vantagem quântica."
+}

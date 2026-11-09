@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-11-09T19:02:09-03:00",
+  "runs": {
+    "original": {
+      "status": "ok",
+      "shots": 4096,
+      "baseline_mitigated_tvd": 0.02488619706632378,
+      "optimized_mitigated_tvd": 0.027730551333399994,
+      "delta_mitigated_tvd": 0.0028443542670762156,
+      "baseline_physical": [
+        0,
+        1
+      ],
+      "optimized_physical": [
+        106,
+        107
+      ],
+      "task_ids": {
+        "baseline": "ff6e6d03-5bdc-4a6c-ae58-7f222c38833e",
+        "optimized": "96cfb671-678f-40f6-b01b-02358f20478a"
+      }
+    },
+    "set1": {
+      "status": "ok",
+      "shots": 4096,
+      "baseline_mitigated_tvd": 0.0262802274049585,
+      "optimized_mitigated_tvd": 0.015261749218160536,
+      "delta_mitigated_tvd": -0.011018478186797964,
+      "baseline_physical": [
+        0,
+        1
+      ],
+      "optimized_physical": [
+        106,
+        107
+      ],
+      "task_ids": {
+        "baseline": "65c01d2b-2e64-406a-8f48-fd194d2d99bb",
+        "optimized": "61099ada-0562-4ace-8523-67f58f131a25"
+      }
+    },
+    "set2": {
+      "status": "ok",
+      "shots": 4096,
+      "baseline_mitigated_tvd": 0.02280910916322354,
+      "optimized_mitigated_tvd": 0.007865908808109223,
+      "delta_mitigated_tvd": -0.014943200355114317,
+      "baseline_physical": [
+        0,
+        1
+      ],
+      "optimized_physical": [
+        106,
+        107
+      ],
+      "task_ids": {
+        "baseline": "892898a5-e089-43a1-ae74-5194cfb00d49",
+        "optimized": "042e43b5-88e9-4d82-a8cc-20c99e8a7635"
+      }
+    }
+  },
+  "summary": {
+    "n_runs": 3,
+    "baseline_mean": 0.02465851121150194,
+    "baseline_range": [
+      0.02280910916322354,
+      0.0262802274049585
+    ],
+    "optimized_mean": 0.01695273645322325,
+    "optimized_range": [
+      0.007865908808109223,
+      0.027730551333399994
+    ],
+    "delta_mean": -0.007705774758278688,
+    "delta_range": [
+      -0.014943200355114317,
+      0.0028443542670762156
+    ],
+    "sign_stable": false,
+    "different_physical_qubits": true
+  },
+  "decision": {
+    "compare_layouts_now": false,
+    "reasons": [
+      "o layout otimizado usa qubits físicos diferentes do baseline",
+      "o sinal da diferença não é estável entre o run original e os dois novos",
+      "os gates de prep coerente e r1 da R1120 continuam falhando",
+      "a mitigação de leitura não reduz o r1 físico; mitigation ≠ correção do readout"
+    ]
+  },
+  "limits": "Três runs de 1 job por caso; não é série temporal. O layout otimizado usa 106/107 e o baseline usa 0/1, então a diferença mistura layout com qualidade de qubit.",
+  "hardware_executed": false
+}

@@ -55,6 +55,27 @@ O wrapper é `agent_qem.py`. Nenhum agente executa hardware.
 - [ ] bootstrap/Wilson não são significância universal;
 - [ ] nenhuma chave em arquivo.
 
+## Validação RC em hardware
+
+```bash
+.venv-quantum/bin/python harnesses/quantum-error-mitigation/hardware_rc_validation.py \
+  --set 1 --shots 9600 --confirm --allow-hardware --use-cached-account
+.venv-quantum/bin/python harnesses/quantum-error-mitigation/hardware_rc_validation.py --analyze
+```
+
+16 jobs (2 conjuntos × 4 baseline + 4 twirls). Resultado: baseline 0,0962;
+twirlado 0,0978; Δ +0,0018 [−0,0071, +0,0108]; **sem efeito detectável**.
+
+## Repetição de leitura
+
+```bash
+.venv-quantum/bin/python harnesses/quantum-error-mitigation/readout_repeat_analysis.py
+```
+
+Três runs de mitigação 4×4. Sinal instável; baseline usa 0/1 e otimizado usa
+106/107. Mitigação de leitura não reduz o r1 físico; decisão: não comparar
+layouts.
+
 ## Pré-registro e planos
 
 ```bash

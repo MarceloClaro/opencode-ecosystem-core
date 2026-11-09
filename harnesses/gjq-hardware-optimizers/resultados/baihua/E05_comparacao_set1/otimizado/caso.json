@@ -1,0 +1,258 @@
+{
+  "name": "otimizado",
+  "task_id": "61099ada-0562-4ace-8523-67f58f131a25",
+  "task_ids": [
+    "61099ada-0562-4ace-8523-67f58f131a25"
+  ],
+  "shots": 4096,
+  "shots_per_repetition": 4096,
+  "repetitions_count": 1,
+  "candidate": {
+    "layout_kind": "noise_aware",
+    "optimization_level": 1,
+    "layout_method": null,
+    "routing_method": "sabre",
+    "seed": 43,
+    "initial_layout": [
+      106,
+      107
+    ],
+    "metrics": {
+      "num_qubits": 108,
+      "num_clbits": 2,
+      "size": 6,
+      "depth": 4,
+      "num_1q": 3,
+      "num_2q": 1,
+      "num_measure": 2,
+      "ops": {
+        "h": 3,
+        "measure": 2,
+        "cz": 1
+      }
+    },
+    "estimate": {
+      "success_proxy": 0.994014980014994,
+      "error_budget_proxy": 0.0059850199850060015,
+      "log_success_proxy": -0.006003002001501207,
+      "operations": 6,
+      "per_gate": {
+        "cz": 1,
+        "h": 3,
+        "measure": 2
+      },
+      "unknown_operations": [],
+      "method": "produto de (1 - erro) por porta e leitura; proxy independente, não é fidelidade de estado"
+    },
+    "transpile_seconds": 0.008670434006489813,
+    "used_physical": [
+      106,
+      107
+    ],
+    "status": "pass",
+    "error": null
+  },
+  "counts": {
+    "01": 170,
+    "00": 1959,
+    "11": 1824,
+    "10": 143
+  },
+  "audit": {
+    "ok": true,
+    "total": 4096,
+    "shots_expected": 4096,
+    "alert": null,
+    "probabilities": {
+      "01": 0.041503906,
+      "00": 0.478271484,
+      "11": 0.4453125,
+      "10": 0.034912109
+    },
+    "standard_error": {
+      "01": 0.003116447,
+      "00": 0.00780512,
+      "11": 0.007765629,
+      "10": 0.002868082
+    }
+  },
+  "probabilities": {
+    "01": 0.04150390625,
+    "00": 0.478271484375,
+    "11": 0.4453125,
+    "10": 0.034912109375
+  },
+  "raw_correlation_00_11": 0.923583984375,
+  "raw_tvd_vs_ideal": 0.076416015625,
+  "calibration_task_ids": {
+    "00": "18828b6e-e87f-4a21-b397-ce447ac0ac98",
+    "11": "72abd340-3a67-4b9c-9704-15402d328a3f"
+  },
+  "calibration_counts": {
+    "00": {
+      "00": 3991,
+      "01": 41,
+      "10": 63,
+      "11": 1
+    },
+    "11": {
+      "11": 3557,
+      "01": 281,
+      "00": 20,
+      "10": 238
+    }
+  },
+  "mitigation": {
+    "method": "inverse",
+    "states": [
+      "00",
+      "11"
+    ],
+    "matrix": [
+      [
+        0.999749498997996,
+        0.005591277606933185
+      ],
+      [
+        0.000250501002004008,
+        0.9944087223930668
+      ]
+    ],
+    "condition_number": 1.0079699854134518,
+    "negative_mass_clipped": -0.0,
+    "leakage_outside_subspace": 0.076416015625,
+    "probabilities": {
+      "00": 0.5152617492181606,
+      "11": 0.4847382507818395
+    },
+    "leakage_by_prepared": {
+      "00": 0.025390625,
+      "11": 0.126708984375
+    },
+    "calibration_counts": {
+      "00": {
+        "00": 3991,
+        "01": 41,
+        "10": 63,
+        "11": 1
+      },
+      "11": {
+        "11": 3557,
+        "01": 281,
+        "00": 20,
+        "10": 238
+      }
+    },
+    "calibration_task_ids": {
+      "00": "18828b6e-e87f-4a21-b397-ce447ac0ac98",
+      "11": "72abd340-3a67-4b9c-9704-15402d328a3f"
+    }
+  },
+  "mitigated_correlation_00_11": 1.0,
+  "mitigated_tvd_subspace": 0.015261749218160536,
+  "mitigated_tvd_vs_ideal": 0.015261749218160536,
+  "repetitions": [
+    {
+      "repetition": 1,
+      "task_id": "61099ada-0562-4ace-8523-67f58f131a25",
+      "counts": {
+        "01": 170,
+        "00": 1959,
+        "11": 1824,
+        "10": 143
+      },
+      "audit": {
+        "ok": true,
+        "total": 4096,
+        "shots_expected": 4096,
+        "alert": null,
+        "probabilities": {
+          "01": 0.041503906,
+          "00": 0.478271484,
+          "11": 0.4453125,
+          "10": 0.034912109
+        },
+        "standard_error": {
+          "01": 0.003116447,
+          "00": 0.00780512,
+          "11": 0.007765629,
+          "10": 0.002868082
+        }
+      },
+      "raw_correlation_00_11": 0.923583984375,
+      "raw_tvd_vs_ideal": 0.076416015625,
+      "mitigated_correlation_00_11": 1.0,
+      "mitigated_tvd_vs_ideal": 0.015261749218160536,
+      "mitigated_tvd_subspace": 0.015261749218160536,
+      "mitigation": {
+        "method": "inverse",
+        "states": [
+          "00",
+          "11"
+        ],
+        "matrix": [
+          [
+            0.999749498997996,
+            0.005591277606933185
+          ],
+          [
+            0.000250501002004008,
+            0.9944087223930668
+          ]
+        ],
+        "condition_number": 1.0079699854134518,
+        "negative_mass_clipped": -0.0,
+        "leakage_outside_subspace": 0.076416015625,
+        "probabilities": {
+          "00": 0.5152617492181606,
+          "11": 0.4847382507818395
+        }
+      }
+    }
+  ],
+  "repetition_stats": {
+    "raw_correlation_00_11": {
+      "mean": 0.923583984375,
+      "std": 0.0,
+      "min": 0.923583984375,
+      "max": 0.923583984375
+    },
+    "raw_tvd_vs_ideal": {
+      "mean": 0.076416015625,
+      "std": 0.0,
+      "min": 0.076416015625,
+      "max": 0.076416015625
+    },
+    "mitigated_tvd_vs_ideal": {
+      "mean": 0.015261749218160536,
+      "std": 0.0,
+      "min": 0.015261749218160536,
+      "max": 0.015261749218160536
+    },
+    "mitigated_correlation_00_11": {
+      "mean": 1.0,
+      "std": 0.0,
+      "min": 1.0,
+      "max": 1.0
+    }
+  },
+  "qasm2": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[108];\ncreg c[2];\nh q[106];\nh q[107];\ncz q[106],q[107];\nh q[107];\nmeasure q[106] -> c[0];\nmeasure q[107] -> c[1];",
+  "qasm3": "OPENQASM 3.0;\ninclude \"stdgates.inc\";\nbit[2] c;\nqubit[108] q;\nh q[106];\nh q[107];\ncz q[106], q[107];\nh q[107];\nc[0] = measure q[106];\nc[1] = measure q[107];\n",
+  "measurement_order": [
+    107,
+    106
+  ],
+  "wait": {
+    "status": "done",
+    "task_id": "61099ada-0562-4ace-8523-67f58f131a25",
+    "task_status": "DONE",
+    "waited_seconds": 49.769,
+    "result": {
+      "01": 170,
+      "00": 1959,
+      "11": 1824,
+      "10": 143
+    },
+    "detail": null
+  }
+}

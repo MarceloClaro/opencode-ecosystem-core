@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "shots": 9600,
+  "ideal": {
+    "00": 0.4999999999999998,
+    "01": 5.286997409534849e-34,
+    "10": 5.286997409534849e-34,
+    "11": 0.4999999999999998
+  },
+  "per_set": {
+    "set1": {
+      "baseline_tvd": [
+        0.08572916666666643,
+        0.09541666666666643,
+        0.09822916666666644,
+        0.08666666666666645
+      ],
+      "twirled_tvd": [
+        0.10083333333333311,
+        0.08531249999999976,
+        0.10197916666666645,
+        0.08947916666666644
+      ]
+    },
+    "set2": {
+      "baseline_tvd": [
+        0.10697916666666646,
+        0.09239583333333312,
+        0.1011458333333331,
+        0.10302083333333312
+      ],
+      "twirled_tvd": [
+        0.08479166666666646,
+        0.10666666666666645,
+        0.10916666666666645,
+        0.10416666666666642
+      ]
+    }
+  },
+  "summary": {
+    "schema_version": 1,
+    "n_bootstrap": 2000,
+    "mean_difference": 0.0017970638020833349,
+    "low": -0.007097981770833333,
+    "high": 0.010810221354166673,
+    "std": 0.004518703847552446,
+    "baseline_mean_tvd": 0.09619791666666644,
+    "twirled_mean_tvd": 0.09779947916666644,
+    "limits": "Bootstrap de TVD com jobs finitos; não captura drift sistemático fora dos dois conjuntos. Diferença negativa favorece o twirl."
+  },
+  "decision": {
+    "verdict": "sem efeito detectável",
+    "reason": "IC 95% inclui zero",
+    "difference": 0.0017970638020833349,
+    "ci": [
+      -0.007097981770833333,
+      0.010810221354166673
+    ]
+  },
+  "limits": "16 jobs totais; 2 conjuntos; não é série temporal. TVD mede a distribuição, não fidelidade de estado.",
+  "hardware_executed": true
+}

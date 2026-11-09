@@ -1,0 +1,256 @@
+{
+  "name": "baseline",
+  "task_id": "892898a5-e089-43a1-ae74-5194cfb00d49",
+  "task_ids": [
+    "892898a5-e089-43a1-ae74-5194cfb00d49"
+  ],
+  "shots": 4096,
+  "shots_per_repetition": 4096,
+  "repetitions_count": 1,
+  "candidate": {
+    "layout_kind": "trivial",
+    "optimization_level": 1,
+    "layout_method": null,
+    "routing_method": "basic",
+    "seed": 44,
+    "initial_layout": [
+      0,
+      1
+    ],
+    "metrics": {
+      "num_qubits": 2,
+      "num_clbits": 2,
+      "size": 6,
+      "depth": 4,
+      "num_1q": 3,
+      "num_2q": 1,
+      "num_measure": 2,
+      "ops": {
+        "h": 3,
+        "measure": 2,
+        "cz": 1
+      }
+    },
+    "estimate": {
+      "success_proxy": 0.9662074626905641,
+      "error_budget_proxy": 0.03379253730943588,
+      "log_success_proxy": -0.034376703138228784,
+      "operations": 6,
+      "per_gate": {
+        "cz": 1,
+        "h": 3,
+        "measure": 2
+      },
+      "unknown_operations": [],
+      "method": "produto de (1 - erro) por porta e leitura; proxy independente, não é fidelidade de estado"
+    },
+    "transpile_seconds": 0.0,
+    "used_physical": [
+      0,
+      1
+    ],
+    "status": "pass",
+    "error": null
+  },
+  "counts": {
+    "11": 1760,
+    "00": 1952,
+    "10": 218,
+    "01": 166
+  },
+  "audit": {
+    "ok": true,
+    "total": 4096,
+    "shots_expected": 4096,
+    "alert": null,
+    "probabilities": {
+      "11": 0.4296875,
+      "00": 0.4765625,
+      "10": 0.053222656,
+      "01": 0.040527344
+    },
+    "standard_error": {
+      "11": 0.007734867,
+      "00": 0.007803912,
+      "10": 0.003507456,
+      "01": 0.003081133
+    }
+  },
+  "probabilities": {
+    "11": 0.4296875,
+    "00": 0.4765625,
+    "10": 0.05322265625,
+    "01": 0.04052734375
+  },
+  "raw_correlation_00_11": 0.90625,
+  "raw_tvd_vs_ideal": 0.09375,
+  "calibration_task_ids": {
+    "00": "fe0795aa-9e6f-4689-8fcd-0908cae85af4",
+    "11": "c686d3ea-48c7-4dbd-b20b-d058393308b0"
+  },
+  "calibration_counts": {
+    "00": {
+      "00": 3987,
+      "10": 63,
+      "01": 46
+    },
+    "11": {
+      "11": 3572,
+      "01": 304,
+      "10": 197,
+      "00": 23
+    }
+  },
+  "mitigation": {
+    "method": "inverse",
+    "states": [
+      "00",
+      "11"
+    ],
+    "matrix": [
+      [
+        1.0,
+        0.006397774687065368
+      ],
+      [
+        0.0,
+        0.9936022253129346
+      ]
+    ],
+    "condition_number": 1.0091181908681723,
+    "negative_mass_clipped": -0.0,
+    "leakage_outside_subspace": 0.09375,
+    "probabilities": {
+      "00": 0.5228091091632235,
+      "11": 0.47719089083677646
+    },
+    "leakage_by_prepared": {
+      "00": 0.026611328125,
+      "11": 0.122314453125
+    },
+    "calibration_counts": {
+      "00": {
+        "00": 3987,
+        "10": 63,
+        "01": 46
+      },
+      "11": {
+        "11": 3572,
+        "01": 304,
+        "10": 197,
+        "00": 23
+      }
+    },
+    "calibration_task_ids": {
+      "00": "fe0795aa-9e6f-4689-8fcd-0908cae85af4",
+      "11": "c686d3ea-48c7-4dbd-b20b-d058393308b0"
+    }
+  },
+  "mitigated_correlation_00_11": 1.0,
+  "mitigated_tvd_subspace": 0.02280910916322354,
+  "mitigated_tvd_vs_ideal": 0.02280910916322354,
+  "repetitions": [
+    {
+      "repetition": 1,
+      "task_id": "892898a5-e089-43a1-ae74-5194cfb00d49",
+      "counts": {
+        "11": 1760,
+        "00": 1952,
+        "10": 218,
+        "01": 166
+      },
+      "audit": {
+        "ok": true,
+        "total": 4096,
+        "shots_expected": 4096,
+        "alert": null,
+        "probabilities": {
+          "11": 0.4296875,
+          "00": 0.4765625,
+          "10": 0.053222656,
+          "01": 0.040527344
+        },
+        "standard_error": {
+          "11": 0.007734867,
+          "00": 0.007803912,
+          "10": 0.003507456,
+          "01": 0.003081133
+        }
+      },
+      "raw_correlation_00_11": 0.90625,
+      "raw_tvd_vs_ideal": 0.09375,
+      "mitigated_correlation_00_11": 1.0,
+      "mitigated_tvd_vs_ideal": 0.02280910916322354,
+      "mitigated_tvd_subspace": 0.02280910916322354,
+      "mitigation": {
+        "method": "inverse",
+        "states": [
+          "00",
+          "11"
+        ],
+        "matrix": [
+          [
+            1.0,
+            0.006397774687065368
+          ],
+          [
+            0.0,
+            0.9936022253129346
+          ]
+        ],
+        "condition_number": 1.0091181908681723,
+        "negative_mass_clipped": -0.0,
+        "leakage_outside_subspace": 0.09375,
+        "probabilities": {
+          "00": 0.5228091091632235,
+          "11": 0.47719089083677646
+        }
+      }
+    }
+  ],
+  "repetition_stats": {
+    "raw_correlation_00_11": {
+      "mean": 0.90625,
+      "std": 0.0,
+      "min": 0.90625,
+      "max": 0.90625
+    },
+    "raw_tvd_vs_ideal": {
+      "mean": 0.09375,
+      "std": 0.0,
+      "min": 0.09375,
+      "max": 0.09375
+    },
+    "mitigated_tvd_vs_ideal": {
+      "mean": 0.02280910916322354,
+      "std": 0.0,
+      "min": 0.02280910916322354,
+      "max": 0.02280910916322354
+    },
+    "mitigated_correlation_00_11": {
+      "mean": 1.0,
+      "std": 0.0,
+      "min": 1.0,
+      "max": 1.0
+    }
+  },
+  "qasm2": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nh q[1];\ncz q[0],q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+  "qasm3": "OPENQASM 3.0;\ninclude \"stdgates.inc\";\nbit[2] c;\nqubit[2] q;\nh q[0];\nh q[1];\ncz q[0], q[1];\nh q[1];\nc[0] = measure q[0];\nc[1] = measure q[1];\n",
+  "measurement_order": [
+    1,
+    0
+  ],
+  "wait": {
+    "status": "done",
+    "task_id": "892898a5-e089-43a1-ae74-5194cfb00d49",
+    "task_status": "DONE",
+    "waited_seconds": 38.908,
+    "result": {
+      "11": 1760,
+      "00": 1952,
+      "10": 218,
+      "01": 166
+    },
+    "detail": null
+  }
+}

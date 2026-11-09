@@ -69,6 +69,19 @@ def conjugate_pauli(clifford: Clifford, pauli: Pauli) -> Pauli:
     return Pauli((z_out, x_out))
 
 
+def _append_pauli(
+    circuit: QuantumCircuit, pauli: Pauli, qubits: list
+) -> None:
+    """Acrescenta X/Y/Z padrão; o rótulo Pauli é big-endian."""
+    for qubit, char in zip(qubits, reversed(str(pauli))):
+        if char == "X":
+            circuit.x(qubit)
+        elif char == "Y":
+            circuit.y(qubit)
+        elif char == "Z":
+            circuit.z(qubit)
+
+
 def _gate_clifford(operation: Any) -> Clifford:
     if operation.name not in CLIFFORD_GATES:
         raise ValueError(
@@ -125,9 +138,9 @@ def pauli_frame_pass(
             continue
         pauli = random_pauli(len(qubits), rng)
         conjugated = conjugate_pauli(clifford, pauli)
-        new.append(pauli.to_instruction(), qubits)
+        _append_pauli(new, pauli, qubits)
         new.append(operation, qubits)
-        new.append(conjugated.to_instruction(), qubits)
+        _append_pauli(new, conjugated, qubits)
         twirls.append(
             {
                 "gate": operation.name,
