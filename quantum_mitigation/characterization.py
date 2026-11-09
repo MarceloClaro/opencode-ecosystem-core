@@ -321,7 +321,11 @@ def spam_tomography_plan(qubit: int = 0) -> dict[str, str]:
     return output
 
 
-def fit_spam_tomography(counts_by_key: dict[str, dict[str, int]]) -> dict:
+def fit_spam_tomography(
+    counts_by_key: dict[str, dict[str, int]],
+    *,
+    prefix: str = "q0",
+) -> dict:
     """Tomografia de preparação + leitura em 3 bases.
 
     Reconstrói o vetor de Bloch de cada estado preparado e compara com o ideal.
@@ -331,9 +335,9 @@ def fit_spam_tomography(counts_by_key: dict[str, dict[str, int]]) -> dict:
     for state in SPAM_STATES:
         expectations = {}
         for basis in SPAM_BASES:
-            key = f"q0_{state}_{basis}"
+            key = f"{prefix}_{state}_{basis}"
             if key not in counts_by_key:
-                # aceita chave sem o prefixo q0_
+                # aceita chave sem o prefixo do qubit
                 key = f"{state}_{basis}"
             if key not in counts_by_key:
                 raise ValueError(f"counts ausente para {state}/{basis}")
@@ -370,8 +374,8 @@ def fit_spam_tomography(counts_by_key: dict[str, dict[str, int]]) -> dict:
         target = np.array(ideal[state])
         fidelity = (1.0 + float(np.dot(vector, target))) / 2.0
         fidelities[state] = max(0.0, min(1.0, fidelity))
-    readout0 = counts_by_key.get("q0_0_Z") or counts_by_key.get("0_Z")
-    readout1 = counts_by_key.get("q0_1_Z") or counts_by_key.get("1_Z")
+    readout0 = counts_by_key.get(f"{prefix}_0_Z") or counts_by_key.get("0_Z")
+    readout1 = counts_by_key.get(f"{prefix}_1_Z") or counts_by_key.get("1_Z")
     p1_given_0 = (
         int(readout0.get("1", 0)) / sum(int(v) for v in readout0.values())
         if readout0 else None
@@ -392,5 +396,61 @@ def fit_spam_tomography(counts_by_key: dict[str, dict[str, int]]) -> dict:
             "Assume rotações de base ideais e ausência de crosstalk; não é GST "
             "completa. A fidelidade de preparação usa a projeção no estado ideal; "
             "erro coerente pode reduzir a fidelidade sem reduzir o comprimento."
+        ),
+    }
+
+
+def bootstrap_spam_tomography(
+    counts_by_key: dict[str, dict[str, int]],
+    *,
+    prefix: str = "q0",
+    n_bootstrap: int = 1000,
+    seed: int = 42,
+) -> dict:
+    """Bootstrap multinomial dos counts de tomografia SPAM."""
+    rng = np.random.default_rng(int(seed))
+    fidelity_samples = {state: [] for state in SPAM_STATES}
+    r0_samples = []
+    r1_samples = []
+    keys = list(counts_by_key)
+    for _ in range(int(n_bootstrap)):
+        sampled = {}
+        for key in keys:
+            counts = counts_by_key[key]
+            total = sum(int(v) for v in counts.values())
+            if total <= 0:
+                raise ValueError(f"counts vazios em {key}")
+            p0 = int(counts.get("0", 0)) / total
+            zeros, ones = rng.multinomial(total, [p0, 1.0 - p0])
+            sampled[key] = {"0": int(zeros), "1": int(ones)}
+        fit = fit_spam_tomography(sampled, prefix=prefix)
+        for state in SPAM_STATES:
+            fidelity_samples[state].append(fit["prep_fidelity"][state])
+        r0_samples.append(fit["readout_p1_given_prep0"])
+        r1_samples.append(fit["readout_p0_given_prep1"])
+
+    def interval(values):
+        array = np.asarray(values, dtype=float)
+        return {
+            "mean": float(np.mean(array)),
+            "low": float(np.quantile(array, 0.025)),
+            "high": float(np.quantile(array, 0.975)),
+            "std": float(np.std(array, ddof=1)),
+        }
+
+    return {
+        "schema_version": 1,
+        "prefix": prefix,
+        "n_bootstrap": int(n_bootstrap),
+        "prep_fidelity": {
+            state: interval(fidelity_samples[state]) for state in SPAM_STATES
+        },
+        "readout": {
+            "r0": interval(r0_samples),
+            "r1": interval(r1_samples),
+        },
+        "limits": (
+            "Bootstrap multinomial dos counts; não inclui drift entre execuções. "
+            "A fidelidade de preparação assume rotações de base ideais."
         ),
     }

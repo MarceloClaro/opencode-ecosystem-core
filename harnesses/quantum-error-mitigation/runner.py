@@ -28,6 +28,7 @@ from quantum_mitigation import (  # noqa: E402
     preregister_ci,
     pulse_dd_plan,
     qec_plan,
+    resilience_scorecard,
     run_repetition_code,
     run_zne,
     spam_separation_plan,
@@ -407,6 +408,64 @@ def cmd_preregister(args) -> int:
     return 0
 
 
+def cmd_resilience(args) -> int:
+    def load(path):
+        return _read_json(path) if path else None
+    readout = load(args.readout)
+    zne = load(args.zne)
+    q0_payload = load(args.tomography_q0)
+    q1_payload = load(args.tomography_q1)
+    tomography_q0 = q0_payload.get("fit", q0_payload) if q0_payload else None
+    tomography_q1 = None
+    uncertainty = None
+    if q1_payload:
+        tomography_q1 = (
+            q1_payload.get("q1", {}).get("fit_combined")
+            or q1_payload.get("fit_combined")
+            or q1_payload
+        )
+        uncertainty = (
+            q1_payload.get("q1", {}).get("bootstrap_combined")
+            or q1_payload.get("bootstrap_combined")
+        )
+    payload = resilience_scorecard(
+        readout=readout,
+        zne=zne,
+        tomography_q0=tomography_q0,
+        tomography_q1=tomography_q1,
+        pec=load(args.pec),
+        uncertainty=uncertainty,
+        surface={"planned": True} if args.surface else None,
+        pulse_dd={"planned": True} if args.pulse_dd else None,
+    )
+    lines = [
+        "## Scorecard",
+        "",
+        f"- Status: **{payload['status']}**.",
+        "",
+        "### Achados",
+        "",
+        *[f"- {item}" for item in payload["findings"]],
+        "",
+        "### Recomendações",
+        "",
+        *[
+            f"- [{item['priority']}] {item['action']} — {item['reason']}"
+            for item in payload["recommendations"]
+        ],
+        "",
+        "### Bloqueados",
+        "",
+        *[
+            f"- {item['technique']}: {item['reason']}"
+            for item in payload["blocked"]
+        ],
+    ]
+    exported = _write(Path(args.out), payload, "Resiliência quântica híbrida", lines)
+    _json_print({"status": "ok", "command": "resilience", **exported, "hardware_executed": False})
+    return 0
+
+
 def cmd_lessons(args) -> int:
     state = _read_json(args.loop_state)
     lessons = state.get("lessons") or []
@@ -573,6 +632,17 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--confidence", type=float, default=0.95)
     p.add_argument("--out", default=str(OUT_PADRAO / "preregister"))
     p.set_defaults(func=cmd_preregister)
+
+    p = sub.add_parser("resilience", help="scorecard híbrido de resiliência")
+    p.add_argument("--readout")
+    p.add_argument("--zne")
+    p.add_argument("--tomography-q0")
+    p.add_argument("--tomography-q1")
+    p.add_argument("--pec")
+    p.add_argument("--surface", action="store_true")
+    p.add_argument("--pulse-dd", action="store_true")
+    p.add_argument("--out", default=str(OUT_PADRAO / "resilience"))
+    p.set_defaults(func=cmd_resilience)
 
     p = sub.add_parser("lessons", help="extrai lições do loop")
     p.add_argument("--loop-state", required=True)

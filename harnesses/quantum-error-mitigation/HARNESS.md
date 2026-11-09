@@ -55,6 +55,17 @@ O wrapper é `agent_qem.py`. Nenhum agente executa hardware.
 - [ ] bootstrap/Wilson não são significância universal;
 - [ ] nenhuma chave em arquivo.
 
+## Scorecard híbrido
+
+```bash
+.venv-quantum/bin/python harnesses/quantum-error-mitigation/runner.py resilience \
+  --readout comparacao.json --zne zne.json \
+  --tomography-q0 tomography.json --tomography-q1 comparison.json \
+  --pec pec.json --surface --pulse-dd
+```
+
+Combina técnicas e aponta bloqueios/recomendações. Não executa hardware.
+
 ## Validação de hardware R1115
 
 No Baihua (q0/q1, 4096 shots, 9 jobs):
@@ -65,6 +76,8 @@ No Baihua (q0/q1, 4096 shots, 9 jobs):
 - Tomografia multi-base (16 jobs, 4096 shots): fidelidades 0,9875 / 0,9292 /
   0,9824 / 0,9839; r0=0,0125 e r1=0,0708.
 - ZNE 4 escalas: TVD 0,0645 / 0,0747 / 0,0735 / 0,0967; ainda não monotônica.
+- Tomografia q1 (2 conjuntos): |1> 0,9163 [0,9100; 0,9221]; r1 0,0837
+  [0,0779; 0,0900]; q1 é pior que q0 no |1> e no readout.
 - PEC 2q, superfície e DD pulse-level não foram executados.
 
 ## Limites

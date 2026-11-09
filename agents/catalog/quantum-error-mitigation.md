@@ -51,6 +51,7 @@ permission:
     .venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py dd*: allow
     .venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py dd-pulse*: allow
     .venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py pec*: allow
+    .venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py resilience*: allow
     .venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py audit*: allow
     .venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py lessons*: allow
 tools:
@@ -99,6 +100,7 @@ agent_qem.py zne --profile perfil.json --circuit E05 --scales 1 3 5 --shots 2048
 agent_qem.py dd --circuit E05 --qubits 0 1 --sequence xy4
 agent_qem.py dd-pulse --t1-us 70 --t2-us 20 --idle-us 10 --sequence cpmg
 agent_qem.py pec --profile perfil.json --circuit E05
+agent_qem.py resilience --readout comparacao.json --zne zne.json --tomography-q0 tomography.json --tomography-q1 comparison.json
 agent_qem.py lessons --loop-state loop_state.json
 agent_qem.py audit --report RELATORIO.md
 ```

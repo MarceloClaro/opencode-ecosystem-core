@@ -222,7 +222,9 @@ def test_harness_surface_dd_prereg(tmp_path: Path):
 
 def test_agentes_com_novos_comandos():
     expected = {
-        "quantum-error-mitigation": {"zne", "dd", "dd-pulse", "pec", "audit", "lessons"},
+        "quantum-error-mitigation": {
+            "zne", "dd", "dd-pulse", "pec", "resilience", "audit", "lessons",
+        },
         "quantum-error-correction": {"qec", "surface", "audit", "lessons"},
         "quantum-noise-characterization": {
             "spam", "spam-plan", "spam-separation", "spam-tomography-plan",

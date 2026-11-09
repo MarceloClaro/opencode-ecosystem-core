@@ -19,7 +19,7 @@ ALLOWED = {
     "zne", "dd", "dd-pulse", "pec", "qec", "surface",
     "spam", "spam-plan", "spam-separation", "spam-tomography-plan",
     "spam-tomography", "crosstalk",
-    "drift", "uncertainty", "preregister", "lessons", "audit",
+    "drift", "uncertainty", "preregister", "resilience", "lessons", "audit",
 }
 USO = "uso: agent_qem.py <" + "|".join(sorted(ALLOWED)) + "> [args]"
 

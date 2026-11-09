@@ -216,7 +216,7 @@ def test_agentes_managed_v1():
 def test_permissões_especificas():
     expected = {
         "quantum-error-mitigation": {
-            "zne", "dd", "dd-pulse", "pec", "audit", "lessons",
+            "zne", "dd", "dd-pulse", "pec", "resilience", "audit", "lessons",
         },
         "quantum-error-correction": {"qec", "surface", "audit", "lessons"},
         "quantum-noise-characterization": {

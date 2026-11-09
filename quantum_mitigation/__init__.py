@@ -17,6 +17,7 @@ from .characterization import (
     fit_spam,
     fit_spam_separation,
     fit_spam_tomography,
+    bootstrap_spam_tomography,
     preregister_ci,
     spam_circuits,
     spam_separation_plan,
@@ -31,6 +32,7 @@ from .pec import (
     pec_plan,
     uniform_depolarizing_rates,
 )
+from .resilience import resilience_scorecard
 from .qec import (
     qec_plan,
     repetition_code_circuit,
@@ -60,6 +62,7 @@ __all__ = [
     "fit_spam",
     "fit_spam_separation",
     "fit_spam_tomography",
+    "bootstrap_spam_tomography",
     "preregister_ci",
     "spam_circuits",
     "spam_separation_plan",
@@ -69,4 +72,5 @@ __all__ = [
     "wilson_interval",
     "bootstrap_ci",
     "uncertainty_report",
+    "resilience_scorecard",
 ]

@@ -91,7 +91,7 @@ READOUT_MITIGATION_AGENT_ID = "gjq-readout-mitigation"
 
 QEM_AGENT_COMMANDS = {
     "quantum-error-mitigation": (
-        "zne", "dd", "dd-pulse", "pec", "audit", "lessons",
+        "zne", "dd", "dd-pulse", "pec", "resilience", "audit", "lessons",
     ),
     "quantum-error-correction": (
         "qec", "surface", "audit", "lessons",

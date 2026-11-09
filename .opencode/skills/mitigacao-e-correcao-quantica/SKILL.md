@@ -87,6 +87,22 @@ drift e incerteza. Para executar em hardware, o primário precisa de gates,
 | SPAM, crosstalk, drift, incerteza | `quantum-noise-characterization` |
 | Auditoria de claim | `quantum-benchmark-audit` |
 
+## Scorecard híbrido
+
+O comando `resilience` combina readout 4x4, tomografia q0/q1, ZNE, PEC e
+incerteza para recomendar o próximo passo e listar técnicas bloqueadas:
+
+```bash
+.venv-quantum/bin/python harnesses/quantum-error-mitigation/runner.py resilience \
+  --readout comparacao.json --zne zne.json \
+  --tomography-q0 tomography.json --tomography-q1 comparison.json \
+  --pec pec.json --surface --pulse-dd
+```
+
+No run atual: ZNE bloqueado por não monotonicidade; q1 tem menor fidelidade de
+preparação e maior r1 que q0; superfície e DD pulse-level bloqueados; PEC 2q
+com 15 taxas não caracterizadas.
+
 ## Resultado R1115
 
 No Baihua, ZNE continuou não monotônica mesmo com 4 escalas; não use a
