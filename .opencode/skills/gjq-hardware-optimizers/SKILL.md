@@ -76,6 +76,20 @@ Sem `GJQ_API_KEY`, use `--use-cached-account` para a conta que o SDK já
 cacheou em `~/.gjq_client/gjq_client_account.json`. O flag é explícito e não
 lê nem imprime a chave.
 
+## Agente dedicado
+
+O agente `gjq-readout-mitigation` é `managed-v1` e tem permissão apenas para
+`doctor`, o próprio teste e o wrapper:
+
+```bash
+.venv-quantum/bin/python harnesses/gjq-hardware-optimizers/agent_readout.py compare-plan ...
+.venv-quantum/bin/python harnesses/gjq-hardware-optimizers/agent_readout.py mitigate ...
+```
+
+Ele não executa `runner.py run` nem `runner.py compare` direto. O wrapper
+rejeita esses comandos. A submissão de hardware permanece no primário, com
+`--confirm` e `--allow-hardware`.
+
 ## Mitigação de leitura
 
 O comando `compare` mede |00> e |11> nos mesmos qubits do baseline e do

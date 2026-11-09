@@ -56,6 +56,18 @@ e simetriza `cz`, `swap` e `iswap`.
 Níveis: `1, 3` no modo rápido; `1, 2, 3` no completo. Seeds: `42` no rápido;
 `42, 43` no completo. O baseline não participa da seleção.
 
+## Agente dedicado
+
+O agente `gjq-readout-mitigation` é `managed-v1` e só pode rodar `doctor`, o
+próprio teste e o wrapper `agent_readout.py` com `compare-plan*` ou
+`mitigate*`. Ele **não** roda `runner.py run` nem `runner.py compare` direto.
+A submissão de hardware permanece no primário, com `--confirm` e
+`--allow-hardware`.
+
+O modo `compare --plan` grava `plano_comparacao.json` com QASM2/QASM3,
+calibração |00>/|11>, `submissions_estimated`, `plan_sha256` e
+`hardware_executed=false`. Nenhum job é submetido nesse modo.
+
 ## Gates
 
 - [ ] credencial disponível: `GJQ_API_KEY` ou `--use-cached-account`;
@@ -91,6 +103,18 @@ Níveis: `1, 3` no modo rápido; `1, 2, 3` no completo. Seeds: `42` no rápido;
   --backend Baihua --circuit E05 --shots 4096 --quick \
   --confirm --allow-hardware --calibrate \
   --out resultados/E05_comparacao
+
+# planejar a comparação sem submeter (agente gjq-readout-mitigation)
+.venv-quantum/bin/python harnesses/gjq-hardware-optimizers/agent_readout.py compare-plan \
+  --profile resultados/baihua/perfil.json --circuit E05 --shots 4096 --quick --calibrate \
+  --out resultados/plano
+
+# mitigar counts locais sem rede
+.venv-quantum/bin/python harnesses/gjq-hardware-optimizers/agent_readout.py mitigate \
+  --counts resultados/baihua/E05_comparacao/otimizado/counts.json \
+  --profile resultados/baihua/E05_comparacao/perfil.json \
+  --qubits 107,106 --matrix resultados/matriz.json --shots 4096 \
+  --out resultados/mitigacao
 
 # executar hardware real
 .venv-quantum/bin/python harnesses/gjq-hardware-optimizers/runner.py run \

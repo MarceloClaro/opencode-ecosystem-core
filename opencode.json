@@ -6577,6 +6577,41 @@
       },
       "model": "opencode-go/deepseek-v4-pro"
     },
+    "gjq-readout-mitigation": {
+      "description": "Planeja a comparação baseline vs otimizado e aplica mitigação de leitura 00/11 com calibração |00>/|11>; não executa hardware, não roda run e não declara fidelidade ou vantagem quântica.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/gjq-readout-mitigation.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1111_gjq_readout_mitigation_agent.py -q": "allow",
+          ".venv-quantum/bin/python harnesses/gjq-hardware-optimizers/agent_readout.py compare-plan*": "allow",
+          ".venv-quantum/bin/python harnesses/gjq-hardware-optimizers/agent_readout.py mitigate*": "allow"
+        },
+        "edit": "allow",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/mimo-v2.6-flash",
+          "opencode-go/deepseek-v4.1-flash",
+          "opencode-go/minimax-m3.1-flash"
+        ],
+        "model_economy": {
+          "complexity": "media",
+          "ceiling": "capaz",
+          "head": "opencode-go/mimo-v2.6-flash",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/mimo-v2.6-flash"
+    },
     "goose-cli": {
       "description": "Você é o agente proxy do **Goose**, agente de IA nativo open source da Agentic",
       "mode": "subagent",

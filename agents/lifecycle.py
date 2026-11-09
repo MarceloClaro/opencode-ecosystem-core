@@ -87,11 +87,23 @@ def _metadata(raw):
     return meta, body
 
 
-def _permissions(test_file, allow_edit):
+READOUT_MITIGATION_AGENT_ID = "gjq-readout-mitigation"
+
+
+def _permissions(test_file, allow_edit, agent_id=None):
+    bash = {
+        "*": "deny",
+        "python3 -m marceloclaro.cli doctor": "allow",
+        f"python3 -m pytest {test_file} -q": "allow",
+    }
+    if agent_id == READOUT_MITIGATION_AGENT_ID:
+        bash.update({
+            ".venv-quantum/bin/python harnesses/gjq-hardware-optimizers/agent_readout.py compare-plan*": "allow",
+            ".venv-quantum/bin/python harnesses/gjq-hardware-optimizers/agent_readout.py mitigate*": "allow",
+        })
     return {"read": "allow", "glob": "allow", "grep": "allow",
             "edit": "allow" if allow_edit else "deny", "webfetch": "deny", "task": "deny",
-            "bash": {"*": "deny", "python3 -m marceloclaro.cli doctor": "allow",
-                     f"python3 -m pytest {test_file} -q": "allow"}}
+            "bash": bash}
 
 
 def _managed_capability(agent_id):
@@ -201,7 +213,7 @@ def validate_managed_card(root, path, raw):
             or meta["output_contract"]["evidence_required"] is not True
             or meta["output_contract"]["external_validation"] is not False):
         raise ValueError("Contrato de skill ou saída alterado")
-    if meta["permission"] != _permissions(meta["test_file"], meta["allow_edit"]):
+    if meta["permission"] != _permissions(meta["test_file"], meta["allow_edit"], aid):
         raise ValueError("Permissões excedem o contrato autorizado")
     tools = {"read": True, "glob": True, "grep": True, "bash": True,
              "edit": meta["allow_edit"], "write": meta["allow_edit"]}
@@ -288,7 +300,7 @@ class AgentLifecycleService:
                 "tags": tags, "skills": [{"id": aid, "name": name, "description": description,
                     "tags": list(tags), "examples": ["Execute o escopo solicitado e cite os arquivos e limites observados."]}],
                 "capabilities": {"extendedAgentCard": True},
-                "permission": _permissions(document.get("test_file"), edit),
+                "permission": _permissions(document.get("test_file"), edit, aid),
                 "tools": {"read": True, "glob": True, "grep": True, "bash": True, "edit": edit, "write": edit},
                 "output_contract": OUTPUT_CONTRACT}
         raw = ("---\n" + yaml.safe_dump(meta, allow_unicode=True, sort_keys=False) + "---\n# " + name +

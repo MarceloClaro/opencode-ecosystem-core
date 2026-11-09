@@ -6,6 +6,7 @@ Comandos:
     profile    lê o Target real e salva o perfil (não submete)
     optimize   otimiza um circuito (não submete)
     benchmark  otimiza vários circuitos (não submete)
+    compare    compara baseline vs otimizado e mitiga leitura
     run        otimiza e submete ao GJQ com confirm/allow_hardware
     status     consulta o status de um task_id
     result     lê o resultado de um task_id
@@ -15,6 +16,7 @@ Comandos:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import sys
 from datetime import datetime
@@ -327,26 +329,80 @@ def _submit_and_wait(service, backend, circuit, args, label: str):
     return submission, wait, counts
 
 
+def _build_comparison_plan(args, profile, baseline, optimized) -> dict:
+    cases = {}
+    for name, candidate in (("baseline", baseline), ("otimizado", optimized)):
+        circuit = candidate.circuit
+        order = measurement_order(circuit)
+        calibration_qasm = {}
+        if args.calibrate:
+            for prepared in ("00", "11"):
+                calibration_qasm[prepared] = qasm2.dumps(
+                    calibration_circuit(order, prepared)
+                )
+        cases[name] = {
+            "used_physical": candidate.used_physical,
+            "metrics": candidate.metrics,
+            "estimate": candidate.estimate,
+            "measurement_order": order,
+            "qasm2": qasm2.dumps(circuit),
+            "qasm3": qasm3.dumps(circuit),
+            "calibration_qasm2": calibration_qasm,
+        }
+    return {
+        "schema_version": 1,
+        "generated_at": datetime.now().astimezone().isoformat(timespec="seconds"),
+        "backend": args.backend or profile.backend_name,
+        "profile_name": profile.name,
+        "profile_kind": profile.profile_kind,
+        "profile_fingerprint": profile.target_fingerprint,
+        "calibration_date": profile.last_update_date,
+        "shots": args.shots,
+        "strategy": args.strategy,
+        "seed": args.seed,
+        "quick": bool(args.quick),
+        "calibrate": bool(args.calibrate),
+        "submissions_estimated": 2 + (4 if args.calibrate else 0),
+        "baseline": cases["baseline"],
+        "optimized": cases["otimizado"],
+        "hardware_executed": False,
+        "network": bool(args.backend),
+        "limits": (
+            "Plano apenas; nenhum job foi submetido. A execução exige o "
+            "primário com --confirm e --allow-hardware. A calibração |11> usa "
+            "rx(pi) e inclui preparação do |1>."
+        ),
+    }
+
+
 def cmd_compare(args) -> int:
-    if not credential_present(args.use_cached_account):
-        _json_print(
-            {
-                "status": "blocked",
-                "reason": (
-                    "GJQ_API_KEY ausente no ambiente; use --use-cached-account "
-                    "para a conta cacheada"
-                ),
-                "hardware_executed": False,
-                "network": False,
-            }
+    if args.plan:
+        profile, target, backend = _load_profile_input(args)
+        service = None
+    else:
+        if args.profile:
+            raise SystemExit(
+                "execução de hardware exige --backend; --profile serve apenas para --plan"
+            )
+        if not credential_present(args.use_cached_account):
+            _json_print(
+                {
+                    "status": "blocked",
+                    "reason": (
+                        "GJQ_API_KEY ausente no ambiente; use --use-cached-account "
+                        "para a conta cacheada"
+                    ),
+                    "hardware_executed": False,
+                    "network": False,
+                }
+            )
+            return 2
+        service, backend = connect_gjq(
+            args.backend,
+            use_cached_account=args.use_cached_account,
         )
-        return 2
-    service, backend = connect_gjq(
-        args.backend,
-        use_cached_account=args.use_cached_account,
-    )
-    profile = live_profile(backend)
-    target = build_target_from_profile(profile)
+        profile = live_profile(backend)
+        target = build_target_from_profile(profile)
     item = load_circuit(args.circuit)
     optimized = _optimizer(args, profile, target).optimize(item["circuit"])
     baseline = build_baseline_candidate(
@@ -358,6 +414,29 @@ def cmd_compare(args) -> int:
         json.dumps(profile.to_dict(), indent=2, ensure_ascii=False),
         encoding="utf-8",
     )
+    if args.plan:
+        plan = _build_comparison_plan(args, profile, baseline, optimized.chosen)
+        plan_text = json.dumps(plan, indent=2, ensure_ascii=False, sort_keys=True)
+        plan["plan_sha256"] = hashlib.sha256(plan_text.encode("utf-8")).hexdigest()
+        plan_path = out / "plano_comparacao.json"
+        plan_path.write_text(
+            json.dumps(plan, indent=2, ensure_ascii=False), encoding="utf-8"
+        )
+        _json_print(
+            {
+                "status": "planned",
+                "backend": plan["backend"],
+                "shots": plan["shots"],
+                "calibrate": plan["calibrate"],
+                "submissions_estimated": plan["submissions_estimated"],
+                "plan_sha256": plan["plan_sha256"],
+                "out_dir": str(out),
+                "plan_file": str(plan_path),
+                "hardware_executed": False,
+                "network": bool(args.backend),
+            }
+        )
+        return 0
     cases = {}
     for name, candidate in (("baseline", baseline), ("otimizado", optimized.chosen)):
         circuit = candidate.circuit
@@ -660,6 +739,118 @@ def cmd_result(args) -> int:
     return 0 if audit is None or audit.get("ok") else 1
 
 
+def cmd_mitigate(args) -> int:
+    counts = _read_json(args.counts)
+    profile = HardwareProfile.from_dict(_read_json(args.profile))
+    qubits = tuple(int(q) for q in args.qubits.split(",") if q.strip())
+    total = sum(int(v) for v in counts.values())
+    if total <= 0:
+        raise SystemExit("counts vazio")
+    probabilities = {str(k): int(v) / total for k, v in counts.items()}
+    if args.matrix:
+        matrix_payload = _read_json(args.matrix)
+        matrix = (
+            matrix_payload.get("matrix")
+            if isinstance(matrix_payload, dict)
+            else matrix_payload
+        )
+        states = tuple(s.strip() for s in args.states.split(",") if s.strip())
+        mitigation = mitigate_subspace(probabilities, matrix, states)
+        matrix_source = "matriz informada"
+    else:
+        mitigation = mitigate_probabilities(
+            probabilities, readout_confusion_matrix(profile, qubits)
+        )
+        matrix_source = "perfil"
+    audit = audit_counts(counts, args.shots)
+    out = Path(args.out)
+    out.mkdir(parents=True, exist_ok=True)
+    payload = {
+        "schema_version": 1,
+        "counts": counts,
+        "probabilities": probabilities,
+        "audit": audit,
+        "mitigation": mitigation,
+        "matrix_source": matrix_source,
+        "qubits": list(qubits),
+        "profile_name": profile.name,
+        "profile_fingerprint": profile.target_fingerprint,
+        "hardware_executed": False,
+        "network": False,
+        "limits": (
+            "Mitigação local; não é fidelidade. A calibração |11> usa rx(pi) e "
+            "inclui preparação do |1>; o leakage 01/10 não é corrigido pela "
+            "inversão 00/11."
+        ),
+    }
+    (out / "mitigacao.json").write_text(
+        json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8"
+    )
+    lines = [
+        "# Mitigação de leitura — resultado",
+        "",
+        f"Perfil **{profile.name}** · qubits {list(qubits)} · matriz: {matrix_source}.",
+        "",
+        "## Counts",
+        "",
+        "| Bitstring | Counts | Probabilidade |",
+        "|---|---:|---:|",
+    ]
+    for key in sorted(probabilities):
+        lines.append(f"| `{key}` | {counts[key]} | {probabilities[key]:.6f} |")
+    lines += [
+        "",
+        "## Mitigação",
+        "",
+        f"- Método: `{mitigation.get('method')}`.",
+        f"- Matriz: `{mitigation.get('matrix')}`.",
+        f"- Condição: {mitigation.get('condition_number'):.3f}.",
+        f"- Massa negativa clipada: {mitigation.get('negative_mass_clipped'):.6f}.",
+    ]
+    if "leakage_outside_subspace" in mitigation:
+        lines.append(
+            f"- Leakage fora do subespaço: {mitigation['leakage_outside_subspace']:.4f}."
+        )
+    lines += [
+        "",
+        "| Estado | Raw | Mitigado |",
+        "|---|---:|---:|",
+    ]
+    for key in sorted(mitigation["probabilities"]):
+        lines.append(
+            f"| `{key}` | {probabilities.get(key, 0):.6f} | "
+            f"{mitigation['probabilities'][key]:.6f} |"
+        )
+    lines += [
+        "",
+        "## Limites",
+        "",
+        "- Não é fidelidade de estado.",
+        "- A calibração |11> inclui preparação do |1> via `rx(pi)`.",
+        "- A inversão 00/11 não corrige leakage para 01/10.",
+        "- Uma execução não é estudo estatístico.",
+        "",
+    ]
+    (out / "RELATORIO_MITIGACAO.md").write_text("\n".join(lines), encoding="utf-8")
+    _json_print(
+        {
+            "status": "ok",
+            "qubits": list(qubits),
+            "matrix_source": matrix_source,
+            "mitigation": mitigation,
+            "audit": audit,
+            "out_dir": str(out),
+            "files": [
+                str(out / "mitigacao.json"),
+                str(out / "RELATORIO_MITIGACAO.md"),
+            ],
+            "hardware_executed": False,
+            "network": False,
+        }
+    )
+    return 0 if audit.get("ok") else 1
+
+
 def cmd_audit(args) -> int:
     counts = _read_json(args.counts)
     audit = audit_counts(counts, args.shots)
@@ -755,12 +946,17 @@ def build_parser() -> argparse.ArgumentParser:
         "compare",
         help="compara baseline vs otimizado e aplica mitigação de leitura",
     )
-    p_compare.add_argument("--backend", required=True)
+    p_compare.add_argument("--backend")
+    p_compare.add_argument("--profile", help="perfil JSON para --plan offline")
     p_compare.add_argument("--circuit", default="E05")
     p_compare.add_argument("--shots", type=int, default=4096)
     p_compare.add_argument("--strategy", default="balanced")
     p_compare.add_argument("--seed", type=int, default=42)
     p_compare.add_argument("--quick", action="store_true")
+    p_compare.add_argument(
+        "--plan", action="store_true",
+        help="gera o plano e os QASM sem submeter nenhum job",
+    )
     p_compare.add_argument("--confirm", action="store_true")
     p_compare.add_argument("--allow-hardware", action="store_true")
     p_compare.add_argument(
@@ -820,6 +1016,23 @@ def build_parser() -> argparse.ArgumentParser:
         help="usa a conta GJQ já cacheada pelo SDK, sem ler a chave",
     )
     p_result.set_defaults(func=cmd_result)
+
+    p_mitigate = sub.add_parser(
+        "mitigate", help="aplica mitigação de leitura a counts locais"
+    )
+    p_mitigate.add_argument("--counts", required=True)
+    p_mitigate.add_argument("--profile", required=True)
+    p_mitigate.add_argument(
+        "--qubits", required=True,
+        help="qubits físicos na ordem MSB->LSB, separados por vírgula",
+    )
+    p_mitigate.add_argument(
+        "--matrix", help="matriz 2x2 ou JSON com a chave matrix",
+    )
+    p_mitigate.add_argument("--states", default="00,11")
+    p_mitigate.add_argument("--shots", type=int, default=None)
+    p_mitigate.add_argument("--out", default=str(OUT_PADRAO))
+    p_mitigate.set_defaults(func=cmd_mitigate)
 
     p_audit = sub.add_parser("audit", help="audita counts locais")
     p_audit.add_argument("--counts", required=True)
