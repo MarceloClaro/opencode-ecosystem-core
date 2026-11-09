@@ -9321,6 +9321,40 @@
       },
       "model": "opencode-go/deepseek-v4.1-flash"
     },
+    "quantum-academic-study": {
+      "description": "Arquitetura de estudo acadêmico de mecânica quântica e computação quântica: diagnóstico em seis eixos, trilha de 16 semanas, caderno matemático, provas, laboratório de replicação, rubricas e pesquisa.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/quantum-academic-study.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1107_quantum_academic_study.py -q": "allow"
+        },
+        "edit": "allow",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4.1-flash",
+          "opencode-go/mimo-v2.6-flash",
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code"
+        ],
+        "model_economy": {
+          "complexity": "complexa",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4.1-flash",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4.1-flash"
+    },
     "quantum-experiment-auditor": {
       "description": "Audita counts, task IDs, incerteza, sobreposição e limites de E01–E18; não trata sobreposição como fidelidade de estado.",
       "mode": "subagent",
