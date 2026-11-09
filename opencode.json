@@ -9497,6 +9497,82 @@
       },
       "model": "opencode-go/deepseek-v4.1-flash"
     },
+    "quantum-error-correction": {
+      "description": "Planeja e simula códigos de correção de erro, síndromes e decodificação; foca no código de repetição de 3 qubits e não declara threshold, fault tolerance ou vantagem.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/quantum-error-correction.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1114_quantum_error_mitigation.py -q": "allow",
+          ".venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py qec*": "allow",
+          ".venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py audit*": "allow",
+          ".venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py lessons*": "allow"
+        },
+        "edit": "allow",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4.1-flash",
+          "opencode-go/mimo-v2.6-flash",
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code"
+        ],
+        "model_economy": {
+          "complexity": "complexa",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4.1-flash",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4.1-flash"
+    },
+    "quantum-error-mitigation": {
+      "description": "Planeja e simula ZNE, PEC e DD para mitigar erro em circuitos quânticos; não executa hardware e não declara fidelidade, vantagem ou correção total.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/quantum-error-mitigation.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1114_quantum_error_mitigation.py -q": "allow",
+          ".venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py zne*": "allow",
+          ".venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py dd*": "allow",
+          ".venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py pec*": "allow",
+          ".venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py audit*": "allow",
+          ".venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py lessons*": "allow"
+        },
+        "edit": "allow",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4.1-flash",
+          "opencode-go/mimo-v2.6-flash",
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code"
+        ],
+        "model_economy": {
+          "complexity": "complexa",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4.1-flash",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4.1-flash"
+    },
     "quantum-experiment-auditor": {
       "description": "Audita counts, task IDs, incerteza, sobreposição e limites de E01–E18; não trata sobreposição como fidelidade de estado.",
       "mode": "subagent",
@@ -9570,6 +9646,46 @@
       "permission": {
         "edit": "deny",
         "bash": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4.1-flash",
+          "opencode-go/mimo-v2.6-flash",
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code"
+        ],
+        "model_economy": {
+          "complexity": "complexa",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4.1-flash",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4.1-flash"
+    },
+    "quantum-noise-characterization": {
+      "description": "Caracteriza SPAM, crosstalk, drift e incerteza em dados quânticos; não executa hardware e não confunde dispersão com significância universal.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/quantum-noise-characterization.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1114_quantum_error_mitigation.py -q": "allow",
+          ".venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py spam*": "allow",
+          ".venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py crosstalk*": "allow",
+          ".venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py drift*": "allow",
+          ".venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py uncertainty*": "allow",
+          ".venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py audit*": "allow",
+          ".venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py lessons*": "allow"
+        },
+        "edit": "allow",
+        "webfetch": "deny",
+        "task": "deny"
       },
       "options": {
         "model_fallbacks": [

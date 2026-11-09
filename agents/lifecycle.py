@@ -89,6 +89,14 @@ def _metadata(raw):
 
 READOUT_MITIGATION_AGENT_ID = "gjq-readout-mitigation"
 
+QEM_AGENT_COMMANDS = {
+    "quantum-error-mitigation": ("zne", "dd", "pec", "audit", "lessons"),
+    "quantum-error-correction": ("qec", "audit", "lessons"),
+    "quantum-noise-characterization": (
+        "spam", "crosstalk", "drift", "uncertainty", "audit", "lessons",
+    ),
+}
+
 
 def _permissions(test_file, allow_edit, agent_id=None):
     bash = {
@@ -110,6 +118,11 @@ def _permissions(test_file, allow_edit, agent_id=None):
         ):
             bash[
                 f".venv-quantum/bin/python harnesses/gjq-hardware-optimizers/agent_readout.py {command}*"
+            ] = "allow"
+    if agent_id in QEM_AGENT_COMMANDS:
+        for command in QEM_AGENT_COMMANDS[agent_id]:
+            bash[
+                f".venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py {command}*"
             ] = "allow"
     return {"read": "allow", "glob": "allow", "grep": "allow",
             "edit": "allow" if allow_edit else "deny", "webfetch": "deny", "task": "deny",

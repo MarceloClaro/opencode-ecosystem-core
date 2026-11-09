@@ -1,0 +1,64 @@
+# HARNESS — Mitigação e correção de erro quântico (R1114)
+
+**Objetivo:** planejar, simular e auditar ZNE, PEC, DD, QEC, SPAM, crosstalk,
+drift e incerteza.
+
+**Não faz:** não executa hardware, não instala dependências, não acessa rede,
+não declara threshold, fidelidade ou vantagem.
+
+## Comandos
+
+| Comando | O que faz |
+|---|---|
+| `zne` | folding e extrapolação ZNE em simulação |
+| `dd` | plano DD circuit-level com verificação de identidade |
+| `pec` | planejador PEC 1q com overhead |
+| `qec` | repetição de 3 qubits com síndrome e decodificador |
+| `spam` | ajuste \|0>/\\|1> |
+| `crosstalk` | métrica isolado vs simultâneo |
+| `drift` | tendência linear e CUSUM |
+| `uncertainty` | Wilson/bootstrap |
+| `lessons` | extrai lições do `loop_state.json` |
+| `audit` | auditoria lexical de overclaim |
+
+## Exemplos
+
+```bash
+.venv-quantum/bin/python harnesses/quantum-error-mitigation/runner.py zne \
+  --profile perfil.json --circuit E05 --scales 1 3 5 --shots 2048 --out resultados/zne
+
+.venv-quantum/bin/python harnesses/quantum-error-mitigation/runner.py qec \
+  --p 0.01 --shots 20000 --out resultados/qec
+
+.venv-quantum/bin/python harnesses/quantum-error-mitigation/runner.py lessons \
+  --loop-state loop_state.json --out resultados/lessons
+```
+
+## Agentes
+
+| Agente | Comandos |
+|---|---|
+| `quantum-error-mitigation` | `zne*`, `dd*`, `pec*`, `audit*`, `lessons*` |
+| `quantum-error-correction` | `qec*`, `audit*`, `lessons*` |
+| `quantum-noise-characterization` | `spam*`, `crosstalk*`, `drift*`, `uncertainty*`, `audit*`, `lessons*` |
+
+O wrapper é `agent_qem.py`. Nenhum agente executa hardware.
+
+## Gates
+
+- [ ] ZNE declara folding e método de extrapolação;
+- [ ] PEC 2q é explicitamente não implementado;
+- [ ] DD é circuit-level;
+- [ ] QEC é repetição bit-flip, não superfície;
+- [ ] SPAM declara `rx(pi)` e preparação do |1>;
+- [ ] crosstalk/drift são descritivos;
+- [ ] bootstrap/Wilson não são significância universal;
+- [ ] nenhuma chave em arquivo.
+
+## Limites
+
+- ZNE não é QEC; PEC 2q não está implementado.
+- DD não é schedule pulse-level.
+- QEC de repetição não protege fase.
+- Nenhuma técnica elimina state preparation, crosstalk ou deriva.
+- O loop registra lições; não promove confiança automaticamente.
