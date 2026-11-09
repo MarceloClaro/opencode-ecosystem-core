@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "task_id": "1aeb1d6b-4d5b-4ecf-a434-789c579635d1",
+  "backend": "Baihua",
+  "hardware": true,
+  "shots": 1024,
+  "submitted_at": "2026-11-09T11:25:17-03:00",
+  "transpile": false,
+  "profile_name": "Baihua",
+  "profile_kind": "gjq_live_target",
+  "profile_fingerprint": "f79a19730b1c5cc025e344a5dacbb0ae0d67227f3a6cd936ad99f8cabed543de",
+  "calibration_source": "backend.target + backend.properties (live)",
+  "last_update_date": "2026-11-09 17:24:32-03:00",
+  "strategy": "balanced",
+  "chosen_layout_kind": "noise_aware",
+  "chosen_optimization_level": 1,
+  "chosen_seed": 42,
+  "chosen_metrics": {
+    "num_qubits": 108,
+    "num_clbits": 2,
+    "size": 6,
+    "depth": 4,
+    "num_1q": 3,
+    "num_2q": 1,
+    "num_measure": 2,
+    "ops": {
+      "h": 3,
+      "measure": 2,
+      "cz": 1
+    }
+  },
+  "chosen_estimate": {
+    "success_proxy": 0.994014980014994,
+    "error_budget_proxy": 0.0059850199850060015,
+    "log_success_proxy": -0.006003002001501207,
+    "operations": 6,
+    "per_gate": {
+      "cz": 1,
+      "h": 3,
+      "measure": 2
+    },
+    "unknown_operations": [],
+    "method": "produto de (1 - erro) por porta e leitura; proxy independente, não é fidelidade de estado"
+  },
+  "baseline_metrics": {
+    "num_qubits": 2,
+    "num_clbits": 2,
+    "size": 6,
+    "depth": 4,
+    "num_1q": 3,
+    "num_2q": 1,
+    "num_measure": 2,
+    "ops": {
+      "h": 3,
+      "measure": 2,
+      "cz": 1
+    }
+  },
+  "baseline_estimate": {
+    "success_proxy": 0.9662074626905641,
+    "error_budget_proxy": 0.03379253730943588,
+    "log_success_proxy": -0.034376703138228784,
+    "operations": 6,
+    "per_gate": {
+      "cz": 1,
+      "h": 3,
+      "measure": 2
+    },
+    "unknown_operations": [],
+    "method": "produto de (1 - erro) por porta e leitura; proxy independente, não é fidelidade de estado"
+  },
+  "qasm2_sha256": "b1451f60e7ed649253f7fca96774ea0adebbc0d4168f007b2bc5b17671c2bde8",
+  "qasm3_sha256": "b3da3c7a9d00f93f746ee8776eb6abfdf339896a2fb30361231c69baa47df219",
+  "wait": {
+    "status": "done",
+    "task_status": "DONE",
+    "result": {
+      "11": 449,
+      "00": 489,
+      "10": 48,
+      "01": 38
+    },
+    "note": "Resultado recuperado pelo comando result após DONE."
+  },
+  "counts": {
+    "11": 449,
+    "00": 489,
+    "10": 48,
+    "01": 38
+  },
+  "counts_audit": {
+    "ok": true,
+    "total": 1024,
+    "shots_expected": 1024,
+    "alert": null,
+    "probabilities": {
+      "11": 0.438476562,
+      "00": 0.477539062,
+      "10": 0.046875,
+      "01": 0.037109375
+    },
+    "standard_error": {
+      "11": 0.015506263,
+      "00": 0.015609227,
+      "10": 0.006605346,
+      "01": 0.005907182
+    }
+  },
+  "limits": "Uma execução não prova fidelidade, emaranhamento, vantagem quântica ou interpretação de Bohm. O proxy de erro não é calibração.",
+  "observed": {
+    "total": 1024,
+    "probabilities": {
+      "11": 0.438476562,
+      "00": 0.477539062,
+      "10": 0.046875,
+      "01": 0.037109375
+    },
+    "correlated_00_11": 0.916015625,
+    "correlated_standard_error": 0.00866763690108679,
+    "note": "A fração 00/11 é uma taxa de outcomes correlacionados, não fidelidade de estado nem prova de emaranhamento.",
+    "tvd_vs_ideal": 0.083984375,
+    "ideal_distribution": {
+      "00": 0.5,
+      "11": 0.5
+    }
+  },
+  "task_detail": {
+    "backend_name": "Baihua",
+    "shots": 1024,
+    "instanceId": "1aeb1d6b-4d5b-4ecf-a434-789c579635d1",
+    "submit_time": "2026-11-09T22:25:18Z"
+  },
+  "result_retrieved_at": "2026-11-09T11:27:17-03:00"
+}

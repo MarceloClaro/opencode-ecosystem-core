@@ -6511,6 +6511,39 @@
       },
       "model": "opencode-go/deepseek-v4-pro"
     },
+    "gjq-hardware-optimizer": {
+      "description": "Otimiza circuitos para o hardware real da GJQ com perfil ao vivo, layout noise-aware, QASM2/QASM3 e proveniência; não submete hardware sem confirmação explícita e não declara fidelidade ou vantagem qu",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/gjq-hardware-optimizer.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1109_gjq_hardware_optimizers.py -q": "allow"
+        },
+        "edit": "allow",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/mimo-v2.6-flash",
+          "opencode-go/deepseek-v4.1-flash",
+          "opencode-go/minimax-m3.1-flash"
+        ],
+        "model_economy": {
+          "complexity": "media",
+          "ceiling": "capaz",
+          "head": "opencode-go/mimo-v2.6-flash",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/mimo-v2.6-flash"
+    },
     "gjq-quantum-research": {
       "description": "Projeta e conduz pesquisa quântica na plataforma GJQ/CETC-ICQ: descoberta de backends, sampling, estimativa, MPS, sessões e proveniência de tarefas. Exige confirmação e controle de custo; não expõe AP",
       "mode": "subagent",

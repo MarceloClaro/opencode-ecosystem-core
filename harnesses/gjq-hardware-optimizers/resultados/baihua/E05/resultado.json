@@ -1,0 +1,444 @@
+{
+  "schema_version": 1,
+  "profile_name": "Baihua",
+  "profile_kind": "gjq_live_target",
+  "calibration_source": "backend.target + backend.properties (live)",
+  "backend_name": "Baihua",
+  "num_qubits": 156,
+  "target_fingerprint": "f79a19730b1c5cc025e344a5dacbb0ae0d67227f3a6cd936ad99f8cabed543de",
+  "strategy": "balanced",
+  "seed": 42,
+  "layout": {
+    "layout": [
+      106,
+      107
+    ],
+    "physical_region": [
+      106,
+      107
+    ],
+    "cost": 0.0037500000000000033,
+    "trivial_cost": 0.03150000000000003,
+    "method": "exact",
+    "used_logical": [
+      0,
+      1
+    ]
+  },
+  "baseline": {
+    "layout_kind": "trivial",
+    "optimization_level": 1,
+    "layout_method": null,
+    "routing_method": "basic",
+    "seed": 42,
+    "initial_layout": [
+      0,
+      1
+    ],
+    "metrics": {
+      "num_qubits": 2,
+      "num_clbits": 2,
+      "size": 6,
+      "depth": 4,
+      "num_1q": 3,
+      "num_2q": 1,
+      "num_measure": 2,
+      "ops": {
+        "h": 3,
+        "measure": 2,
+        "cz": 1
+      }
+    },
+    "estimate": {
+      "success_proxy": 0.9662074626905641,
+      "error_budget_proxy": 0.03379253730943588,
+      "log_success_proxy": -0.034376703138228784,
+      "operations": 6,
+      "per_gate": {
+        "cz": 1,
+        "h": 3,
+        "measure": 2
+      },
+      "unknown_operations": [],
+      "method": "produto de (1 - erro) por porta e leitura; proxy independente, não é fidelidade de estado"
+    },
+    "transpile_seconds": 0.7220953769865446,
+    "used_physical": [
+      0,
+      1
+    ],
+    "status": "pass",
+    "error": null
+  },
+  "chosen": {
+    "layout_kind": "noise_aware",
+    "optimization_level": 1,
+    "layout_method": null,
+    "routing_method": "sabre",
+    "seed": 42,
+    "initial_layout": [
+      106,
+      107
+    ],
+    "metrics": {
+      "num_qubits": 108,
+      "num_clbits": 2,
+      "size": 6,
+      "depth": 4,
+      "num_1q": 3,
+      "num_2q": 1,
+      "num_measure": 2,
+      "ops": {
+        "h": 3,
+        "measure": 2,
+        "cz": 1
+      }
+    },
+    "estimate": {
+      "success_proxy": 0.994014980014994,
+      "error_budget_proxy": 0.0059850199850060015,
+      "log_success_proxy": -0.006003002001501207,
+      "operations": 6,
+      "per_gate": {
+        "cz": 1,
+        "h": 3,
+        "measure": 2
+      },
+      "unknown_operations": [],
+      "method": "produto de (1 - erro) por porta e leitura; proxy independente, não é fidelidade de estado"
+    },
+    "transpile_seconds": 0.010699346021283418,
+    "used_physical": [
+      106,
+      107
+    ],
+    "status": "pass",
+    "error": null
+  },
+  "candidates": [
+    {
+      "layout_kind": "noise_aware",
+      "optimization_level": 1,
+      "layout_method": null,
+      "routing_method": "sabre",
+      "seed": 42,
+      "initial_layout": [
+        106,
+        107
+      ],
+      "metrics": {
+        "num_qubits": 108,
+        "num_clbits": 2,
+        "size": 6,
+        "depth": 4,
+        "num_1q": 3,
+        "num_2q": 1,
+        "num_measure": 2,
+        "ops": {
+          "h": 3,
+          "measure": 2,
+          "cz": 1
+        }
+      },
+      "estimate": {
+        "success_proxy": 0.994014980014994,
+        "error_budget_proxy": 0.0059850199850060015,
+        "log_success_proxy": -0.006003002001501207,
+        "operations": 6,
+        "per_gate": {
+          "cz": 1,
+          "h": 3,
+          "measure": 2
+        },
+        "unknown_operations": [],
+        "method": "produto de (1 - erro) por porta e leitura; proxy independente, não é fidelidade de estado"
+      },
+      "transpile_seconds": 0.010699346021283418,
+      "used_physical": [
+        106,
+        107
+      ],
+      "status": "pass",
+      "error": null
+    },
+    {
+      "layout_kind": "noise_aware",
+      "optimization_level": 3,
+      "layout_method": null,
+      "routing_method": "sabre",
+      "seed": 42,
+      "initial_layout": [
+        106,
+        107
+      ],
+      "metrics": {
+        "num_qubits": 108,
+        "num_clbits": 2,
+        "size": 6,
+        "depth": 4,
+        "num_1q": 3,
+        "num_2q": 1,
+        "num_measure": 2,
+        "ops": {
+          "h": 3,
+          "measure": 2,
+          "cz": 1
+        }
+      },
+      "estimate": {
+        "success_proxy": 0.994014980014994,
+        "error_budget_proxy": 0.0059850199850060015,
+        "log_success_proxy": -0.006003002001501207,
+        "operations": 6,
+        "per_gate": {
+          "cz": 1,
+          "h": 3,
+          "measure": 2
+        },
+        "unknown_operations": [],
+        "method": "produto de (1 - erro) por porta e leitura; proxy independente, não é fidelidade de estado"
+      },
+      "transpile_seconds": 0.016318031994160265,
+      "used_physical": [
+        106,
+        107
+      ],
+      "status": "pass",
+      "error": null
+    },
+    {
+      "layout_kind": "sabre",
+      "optimization_level": 1,
+      "layout_method": "sabre",
+      "routing_method": "sabre",
+      "seed": 42,
+      "initial_layout": [
+        73,
+        72
+      ],
+      "metrics": {
+        "num_qubits": 74,
+        "num_clbits": 2,
+        "size": 6,
+        "depth": 4,
+        "num_1q": 3,
+        "num_2q": 1,
+        "num_measure": 2,
+        "ops": {
+          "h": 3,
+          "measure": 2,
+          "cz": 1
+        }
+      },
+      "estimate": {
+        "success_proxy": 0.9615954299189985,
+        "error_budget_proxy": 0.03840457008100151,
+        "log_success_proxy": -0.03916146779256391,
+        "operations": 6,
+        "per_gate": {
+          "cz": 1,
+          "h": 3,
+          "measure": 2
+        },
+        "unknown_operations": [],
+        "method": "produto de (1 - erro) por porta e leitura; proxy independente, não é fidelidade de estado"
+      },
+      "transpile_seconds": 0.018762533989502117,
+      "used_physical": [
+        72,
+        73
+      ],
+      "status": "pass",
+      "error": null
+    },
+    {
+      "layout_kind": "dense",
+      "optimization_level": 1,
+      "layout_method": "dense",
+      "routing_method": "sabre",
+      "seed": 42,
+      "initial_layout": [
+        74,
+        75
+      ],
+      "metrics": {
+        "num_qubits": 76,
+        "num_clbits": 2,
+        "size": 6,
+        "depth": 4,
+        "num_1q": 3,
+        "num_2q": 1,
+        "num_measure": 2,
+        "ops": {
+          "h": 3,
+          "measure": 2,
+          "cz": 1
+        }
+      },
+      "estimate": {
+        "success_proxy": 0.991029950044979,
+        "error_budget_proxy": 0.008970049955021042,
+        "log_success_proxy": -0.009010523065456494,
+        "operations": 6,
+        "per_gate": {
+          "cz": 1,
+          "h": 3,
+          "measure": 2
+        },
+        "unknown_operations": [],
+        "method": "produto de (1 - erro) por porta e leitura; proxy independente, não é fidelidade de estado"
+      },
+      "transpile_seconds": 0.2966529839904979,
+      "used_physical": [
+        74,
+        75
+      ],
+      "status": "pass",
+      "error": null
+    },
+    {
+      "layout_kind": "sabre",
+      "optimization_level": 3,
+      "layout_method": "sabre",
+      "routing_method": "sabre",
+      "seed": 42,
+      "initial_layout": [
+        73,
+        72
+      ],
+      "metrics": {
+        "num_qubits": 74,
+        "num_clbits": 2,
+        "size": 6,
+        "depth": 4,
+        "num_1q": 3,
+        "num_2q": 1,
+        "num_measure": 2,
+        "ops": {
+          "h": 3,
+          "measure": 2,
+          "cz": 1
+        }
+      },
+      "estimate": {
+        "success_proxy": 0.9615954299189985,
+        "error_budget_proxy": 0.03840457008100151,
+        "log_success_proxy": -0.03916146779256391,
+        "operations": 6,
+        "per_gate": {
+          "cz": 1,
+          "h": 3,
+          "measure": 2
+        },
+        "unknown_operations": [],
+        "method": "produto de (1 - erro) por porta e leitura; proxy independente, não é fidelidade de estado"
+      },
+      "transpile_seconds": 0.027165235980646685,
+      "used_physical": [
+        72,
+        73
+      ],
+      "status": "pass",
+      "error": null
+    },
+    {
+      "layout_kind": "dense",
+      "optimization_level": 3,
+      "layout_method": "dense",
+      "routing_method": "sabre",
+      "seed": 42,
+      "initial_layout": [
+        74,
+        75
+      ],
+      "metrics": {
+        "num_qubits": 76,
+        "num_clbits": 2,
+        "size": 6,
+        "depth": 4,
+        "num_1q": 3,
+        "num_2q": 1,
+        "num_measure": 2,
+        "ops": {
+          "h": 3,
+          "measure": 2,
+          "cz": 1
+        }
+      },
+      "estimate": {
+        "success_proxy": 0.991029950044979,
+        "error_budget_proxy": 0.008970049955021042,
+        "log_success_proxy": -0.009010523065456494,
+        "operations": 6,
+        "per_gate": {
+          "cz": 1,
+          "h": 3,
+          "measure": 2
+        },
+        "unknown_operations": [],
+        "method": "produto de (1 - erro) por porta e leitura; proxy independente, não é fidelidade de estado"
+      },
+      "transpile_seconds": 0.028227531001903117,
+      "used_physical": [
+        74,
+        75
+      ],
+      "status": "pass",
+      "error": null
+    }
+  ],
+  "failures": [],
+  "selection": {
+    "strategy": "balanced",
+    "key": [
+      0.0059850199850060015,
+      4,
+      1,
+      6,
+      0,
+      1,
+      42
+    ],
+    "layout_kind": "noise_aware",
+    "optimization_level": 1,
+    "seed": 42,
+    "candidate_count": 6,
+    "failure_count": 0,
+    "fallback_used": false,
+    "improvement": {
+      "error_budget_abs": 0.027807517324429876,
+      "error_budget_rel": 0.8228892985986345,
+      "success_proxy_ratio": 1.0287800688756794,
+      "depth_abs": 0,
+      "num_2q_abs": 0,
+      "size_abs": 0
+    },
+    "note": "O baseline não participa da seleção; ele é apenas comparação. O proxy de erro não é fidelidade de estado."
+  },
+  "hardware_executed": false,
+  "network": false,
+  "limits": "Simulação de compilação e proxy de erro; não é execução física, não mede fidelidade de estado e não prova vantagem quântica.",
+  "files": {
+    "otimizado.qasm2": {
+      "path": "harnesses/gjq-hardware-optimizers/resultados/baihua/E05/otimizado.qasm2",
+      "bytes": 155,
+      "sha256": "b1451f60e7ed649253f7fca96774ea0adebbc0d4168f007b2bc5b17671c2bde8"
+    },
+    "otimizado.qasm3": {
+      "path": "harnesses/gjq-hardware-optimizers/resultados/baihua/E05/otimizado.qasm3",
+      "bytes": 157,
+      "sha256": "b3da3c7a9d00f93f746ee8776eb6abfdf339896a2fb30361231c69baa47df219"
+    },
+    "baseline.qasm2": {
+      "path": "harnesses/gjq-hardware-optimizers/resultados/baihua/E05/baseline.qasm2",
+      "bytes": 139,
+      "sha256": "ce9cc44df120745263b9ae4f292350c73e8ccc49784e732cdb30d27af1781e78"
+    },
+    "perfil.json": {
+      "path": "harnesses/gjq-hardware-optimizers/resultados/baihua/E05/perfil.json",
+      "bytes": 70340,
+      "sha256": "4dc9a0d558a2d4c9d29402d3f55211e2abeb81a31e1fafdf44debb3f75063ae8"
+    }
+  },
+  "generated_at": "2026-11-09T11:24:20-03:00"
+}
