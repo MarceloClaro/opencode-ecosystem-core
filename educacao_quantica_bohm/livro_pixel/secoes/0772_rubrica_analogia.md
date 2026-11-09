@@ -12,7 +12,7 @@
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">评分标准</span> <em>píng fēn biāo zhǔn</em> <span class="tom">· tons 2-1-1-3 · leitura ping-fen-biau-djuen</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像评分标准。</span> <em>Zhè xiàng píng fēn biāo zhǔn.</em> — Isto se parece com “Rubrica”.</span></p>
 <p><strong>Onde a imagem não vale:</strong> A técnica não funciona igual para todos os estudantes.</p>
 <p>Desenhe a imagem e marque com um X o ponto em que ela falha.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “Rubrica não é nota automática; precisa de evidência e julgamento” e o medido “A fonte discute o conceito e suas consequências” (conceito: Rubrica).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Rubrica e escreva um resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

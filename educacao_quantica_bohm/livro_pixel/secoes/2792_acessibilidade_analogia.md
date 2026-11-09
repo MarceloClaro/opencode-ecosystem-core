@@ -11,7 +11,7 @@
 <p>Legendas, rampas, alto contraste e leitores de tela.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">无障碍</span> <em>wú zhàng ài</em> <span class="tom">· tons 2-4-4 · leitura u-djang-ai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像无障碍。</span> <em>Zhè xiàng wú zhàng ài.</em> — Isto se parece com “Acessibilidade”.</span></p>
 <p><strong>Limite formal:</strong> A técnica não funciona igual para todos os estudantes.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “Acessibilidade não é um extra; é condição de participação” e o medido “A fonte discute o conceito e suas consequências” (conceito: Acessibilidade).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Acessibilidade e escreva o resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

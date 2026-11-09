@@ -11,7 +11,7 @@
 <p>Uma calculadora que também calcula derivadas.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子软件</span> <em>liàng zǐ ruǎn jiàn</em> <span class="tom">· tons 4-3-3-4 · leitura liang-dzi-juan-djien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像量子软件。</span> <em>Zhè xiàng liàng zǐ ruǎn jiàn.</em> — Isto se parece com “PennyLane”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> A diferenciação automática não substitui a interpretação física.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “Crie um QNode, rode e desenhe o circuito” e o medido “PennyLane integra com simuladores e vários provedores”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de PennyLane e escreva o resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

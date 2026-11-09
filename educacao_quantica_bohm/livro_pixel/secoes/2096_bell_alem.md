@@ -11,7 +11,7 @@
 <p>O estado de Bell é usado em teleportação e criptografia.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">贝尔态</span> <em>bèi ěr tài</em> <span class="tom">· tons 4-3-4 · leitura bei-er-tai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解贝尔态。</span> <em>Shēn rù liǎo jiě bèi ěr tài.</em> — Aprofunde-se em “Estado de Bell”.</span></p>
 <p><strong>O que ainda não sabemos:</strong> A imagem das moedas sugere um mecanismo que a teoria não afirma. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Fidelidade proxy = (N00 + N11) / N_total.<br><strong>Conta:</strong> N00 = 484, N11 = 480, N = 1024: (484+480)/1024 = 964/1024.<br><strong>Resultado:</strong> 0,9414 = 94,1%; os 5,9% restantes são 01 e 10.<br><em>Limite:</em> É uma proxy de fidelidade, não uma tomografia completa do estado.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.1103/PhysRevLett.23.880">10.1103/PhysRevLett.23.880</a>. Fonte: <a href="https://doi.org/10.1103/PhysicsPhysiqueFizika.1.195">10.1103/PhysicsPhysiqueFizika.1.195</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Leia a fonte complementar e formule uma pergunta de pesquisa que ela deixa aberta sobre Estado de Bell.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

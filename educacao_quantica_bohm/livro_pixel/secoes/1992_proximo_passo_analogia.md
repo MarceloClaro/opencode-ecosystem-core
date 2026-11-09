@@ -11,7 +11,7 @@
 <p>Uma pedra que permite atravessar o rio.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">下一步</span> <em>xià yí bù</em> <span class="tom">· tons 4-2-4 · leitura shia-i-bu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像下一步。</span> <em>Zhè xiàng xià yí bù.</em> — Isto se parece com “Próximo passo”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> O projeto não esgota o problema; escolhe um recorte.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “Próximo passo não é um desejo; precisa de prazo e evidência” e o medido “A fonte discute o conceito e suas consequências” (conceito: Próximo passo).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Próximo passo e escreva o resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

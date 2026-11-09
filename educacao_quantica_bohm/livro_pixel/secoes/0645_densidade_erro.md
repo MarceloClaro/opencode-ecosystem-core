@@ -10,7 +10,7 @@
 
 <p><strong>O erro comum:</strong> Compare a densidade de |0⟩ com a de uma mistura 50/50.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">密度矩阵</span> <em>mì dù jǔ zhèn</em> <span class="tom">· tons 4-4-3-4 · leitura mi-du-djyu-djen</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">密度矩阵不是魔法。</span> <em>Mì dù jǔ zhèn bú shì mó fǎ.</em> — “Matriz densidade” não é magia.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “A fonte discute o conceito e suas consequências” e admite “Não há garantia de generalização para outros contextos” (conceito: Matriz densidade).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Matriz densidade.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> A profundidade do circuito mede o número de camadas.</p>
 <p><strong>Pergunta de pesquisa:</strong> O que muda se eu trocar a ordem?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F025 ancora a proposição em <a href="https://doi.org/10.1017/CBO9780511976667">10.1017/CBO9780511976667</a>; grau A (definição ou teste consolidado). Limite: “A ordem importa; matrizes não comutam em geral”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Formule uma consequência testável de “Um circuito é uma sequência de portas e medições sobre qubits” e indique qual observação a refutaria.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

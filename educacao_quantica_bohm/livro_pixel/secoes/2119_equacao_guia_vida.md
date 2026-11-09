@@ -10,7 +10,7 @@
 
 <p>Rotas de navegação também usam campos de direção.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">导波方程</span> <em>dǎo bō fāng chéng</em> <span class="tom">· tons 3-1-1-2 · leitura dau-bo-fang-tcheng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到导波方程。</span> <em>Wǒ zài shēng huó zhōng kàn dào dǎo bō fāng chéng.</em> — Vejo “Equação do guia” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “Calcule a direção do movimento a partir de uma fase que muda”. Limite: “A equação é não local para várias partículas; não é uma força clássica”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Equação do guia.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

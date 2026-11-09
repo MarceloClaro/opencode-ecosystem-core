@@ -10,7 +10,7 @@
 
 <p><strong>Pergunta da roda:</strong> Que evidência falta?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">证据</span> <em>zhèng jù</em> <span class="tom">· tons 4-4 · leitura djeng-djyu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看证据？</span> <em>Nǐ zěn me kàn zhèng jù?</em> — O que você pensa de “Evidência”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Hipótese rival: “Não há garantia de generalização para outros contextos” (conceito: Evidência). Fonte: <a href="https://doi.org/10.1080/00031305.2016.1154108">10.1080/00031305.2016.1154108</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda a hipótese rival e peça a alguém para refutá-la em Evidência.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

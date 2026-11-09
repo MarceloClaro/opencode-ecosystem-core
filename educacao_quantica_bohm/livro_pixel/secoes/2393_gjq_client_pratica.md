@@ -20,8 +20,7 @@
 <p class="mini">Sobreposição ≠ fidelidade de estado.</p>
 <p class="mini">Script: <code>scripts/experimentos_100.py</code> · E15 · Guoji08 · <a href="#oficina-e15">oficina E15</a> · <a href="#codigo-e15">código E15</a></p>
 </div>
-
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F040 registra como medido “O SDK suporta Sampler, Estimator e Sessões; o servidor MCP gjq-runtime-mcp-server expõe sample_tool e estimate_tool para agentes”. Resultado bruto: Experimento: GHZ via QASM 2.0 — O mesmo GHZ carregado de um texto OpenQASM 2.0.; Simulado: P(0000)+P(1111) = 1,000 (ideal 1,000); Backend: P(0000)+P(1111) = 0,788 (ideal 1,000); Sobreposição: 78,8% · task: —.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Repita a prática com outra amostra ou seed e escreva o que a diferença não prova sobre gjq-client.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

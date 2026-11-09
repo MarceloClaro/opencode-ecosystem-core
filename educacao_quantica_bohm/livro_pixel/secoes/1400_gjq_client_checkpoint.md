@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Você consegue listar um backend sem executar um circuito?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子客户端</span> <em>liàng zǐ kè hù duān</em> <span class="tom">· tons 4-3-4-4-1 · leitura liang-dzi-ke-ru-duan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了量子客户端。</span> <em>Wǒ xué huì le liàng zǐ kè hù duān.</em> — Eu aprendi “gjq-client”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau B (evidência experimental ou metodológica com limites). Frase: “gjq-client é o cliente Python da plataforma quântica Guoji/Tiangong”; limite: “O cliente não garante acesso; depende de conta, fila e backend”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre gjq-client e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

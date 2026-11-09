@@ -11,7 +11,7 @@
 <p><strong>Pergunta de pesquisa:</strong> O que o ambiente 'sabe' sobre o qubit?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">退相干</span> <em>tuì xiāng gān</em> <span class="tom">· tons 4-1-1 · leitura tuei-shiang-gan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看退相干？</span> <em>Nǐ zěn me kàn tuì xiāng gān?</em> — O que você pensa de “Decoerência”?</span></p>
 <p><strong>Hipótese rival:</strong> O resultado de hoje não garante o de amanhã; calibração muda.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Hipótese rival: “Não há garantia de generalização para outros contextos” (conceito: Decoerência). Fonte: <a href="https://doi.org/10.22331/q-2018-08-06-79">10.22331/q-2018-08-06-79</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda a hipótese rival e peça a alguém para refutá-la em Decoerência.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

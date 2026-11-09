@@ -23,7 +23,7 @@
 </div>
 
 <p><strong>O que observar:</strong> confira a ordem dos qubits, o número de tiros e a diferença entre estado e amostra. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> P(1) = N₁/N; erro de leitura ≈ N₀/N.<br><strong>Conta:</strong> N₁=1010, N₀=14, N=1024: 1010/1024 = 0,9863.<br><strong>Resultado:</strong> P(1)=98,63%; 14 leituras erradas = 1,37%.<br><em>Limite:</em> O erro de leitura é uma propriedade do dispositivo, não do estado preparado.</span></p>
-
+<p>A ficha F021 declara o limite “X não cria superposição; ela apenas troca os estados de base”; o número não prova essa conclusão sobre Porta X.</p>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

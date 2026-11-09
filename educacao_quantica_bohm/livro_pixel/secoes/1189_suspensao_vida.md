@@ -10,7 +10,7 @@
 
 <p>Negociações e diagnósticos médicos exigem suspender hipóteses.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">悬置</span> <em>xuán zhì</em> <span class="tom">· tons 2-4 · leitura shyuan-dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到悬置。</span> <em>Wǒ zài shēng huó zhōng kàn dào xuán zhì.</em> — Vejo “Suspensão de suposições” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “Escreva uma suposição e liste o que ela exclui”. Limite: “Suspender não é abandonar; é ganhar distância para observar”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Suspensão de suposições.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

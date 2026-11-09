@@ -10,7 +10,7 @@
 
 <p>Quem ganha e quem perde com esta decisão?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">虚假信息</span> <em>xū jiǎ xìn xī</em> <span class="tom">· tons 1-3-4-1 · leitura shyu-djia-shin-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于虚假信息？</span> <em>Shéi shòu yì yú xū jiǎ xìn xī?</em> — Quem se beneficia de “Desinformação”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau C (resultado exploratório ou interpretativo); o limite é “Não há garantia de generalização para outros contextos” (conceito: Desinformação).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Liste um grupo afetado por Desinformação e uma mitigação, declarando esse limite.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

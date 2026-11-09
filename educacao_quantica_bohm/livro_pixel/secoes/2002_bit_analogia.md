@@ -11,7 +11,7 @@
 <p>Um interruptor de luz: apagado ou aceso.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">比特</span> <em>bǐ tè</em> <span class="tom">· tons 3-4 · leitura bi-te</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像比特。</span> <em>Zhè xiàng bǐ tè.</em> — Isto se parece com “Bit”.</span></p>
 <p><strong>Limite formal:</strong> A analogia não explica probabilidade; o bit clássico é exclusivo.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “Represente 13 em binário usando cinco cartões” e o medido “Com 8 bits, há 256 combinações; uma letra ASCII cabe em 8 bits”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Bit e escreva o resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

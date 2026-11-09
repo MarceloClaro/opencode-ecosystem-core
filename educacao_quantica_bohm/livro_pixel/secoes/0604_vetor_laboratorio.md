@@ -20,8 +20,7 @@
 <p class="mini">Sobreposição ≠ fidelidade de estado.</p>
 <p class="mini">Script: <code>scripts/experimentos_100.py</code> · E16 · Guoji08 · <a href="#oficina-e16">oficina E16</a> · <a href="#codigo-e16">código E16</a></p>
 </div>
-
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F061 diz que a evidência é definição ou teste consolidado; o número não prova “Não há garantia de generalização para outros contextos” (conceito: Vetor).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Explique com suas palavras por que o resultado não autoriza essa conclusão sobre Vetor.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

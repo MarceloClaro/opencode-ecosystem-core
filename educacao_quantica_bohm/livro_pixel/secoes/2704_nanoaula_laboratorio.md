@@ -8,15 +8,8 @@
 <h2 id="l-2704" class="titulo">Nanoaula — laboratório</h2>
 <div class="corpo">
 
-<p><strong>Protocolo de bancada:</strong> escolha um exemplo de <em>nanoaula</em>, preveja o resultado e teste com um colega.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">微课</span> <em>wēi kè</em> <span class="tom">· tons 1-4 · leitura uei-ke</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">观察微课。</span> <em>Guān chá wēi kè.</em> — Observe “Nanoaula”.</span></p>
-<ol>
-<li>Escreva a previsão em uma frase.</li>
-<li>Execute ou observe o fenômeno.</li>
-<li>Registre a diferença e uma possível explicação.</li>
-</ol>
-<p><strong>O que observar:</strong> não basta acertar; é preciso explicar por que acertou.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau A (definição ou teste consolidado); o número não prova “Não há garantia de generalização para outros contextos” (conceito: Nanoaula). Fonte do protocolo: <a href="https://doi.org/10.1103/PhysRevPhysEducRes.13.010109">10.1103/PhysRevPhysEducRes.13.010109</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Proponha uma replicação independente que poderia refutar “Não há garantia de generalização para outros contextos” (conceito: Nanoaula).</p></div>
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
 <p><strong>Experimento:</strong> Amostragem binomial — H + medição; o desvio de P(1) cai com o número de tiros.</p>

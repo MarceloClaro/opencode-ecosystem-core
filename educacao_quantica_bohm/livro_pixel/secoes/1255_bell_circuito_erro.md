@@ -10,7 +10,7 @@
 
 <p><strong>O erro comum:</strong> Esquecer a medição e tentar ler o estado sem amostrar.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">贝尔电路</span> <em>bèi ěr diàn lù</em> <span class="tom">· tons 4-3-4-4 · leitura bei-er-dien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">贝尔电路不是魔法。</span> <em>Bèi ěr diàn lù bú shì mó fǎ.</em> — “Circuito de Bell” não é magia.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “O circuito de Bell é o 'olá, mundo' do emaranhamento” e admite “A imagem clássica não explica a violação de Bell”. O erro está em tratar esse registro como definição de Circuito de Bell.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Circuito de Bell.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

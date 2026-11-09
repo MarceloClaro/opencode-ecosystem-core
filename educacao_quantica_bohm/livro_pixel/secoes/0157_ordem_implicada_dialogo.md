@@ -10,7 +10,7 @@
 
 <p><strong>Pergunta da roda:</strong> O todo está em cada parte?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">隐缠序</span> <em>yǐn chán xù</em> <span class="tom">· tons 3-2-4 · leitura in-tchan-shyu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看隐缠序？</span> <em>Nǐ zěn me kàn yǐn chán xù?</em> — O que você pensa de “Ordem implicada”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Outra explicação possível: “É uma visão filosófica, não uma teoria física testável por si só”. Fonte: BOHM (1952) DOI 10.1103/PhysRev.85.166.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda essa explicação por dois minutos e peça a alguém para refutá-la em Ordem implicada.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

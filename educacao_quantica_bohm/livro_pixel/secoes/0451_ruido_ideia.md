@@ -19,7 +19,7 @@
 </div>
 
 <p><strong>Pense:</strong> Quando o ruído ajuda e quando atrapalha?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F046 liga a ideia à fonte PRESKILL (2018) DOI 10.22331/q-2018-08-06-79; a evidência é evidência experimental ou metodológica com limites.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Explique com suas palavras por que a frase sobre Ruído não autoriza dizer mais do que a fonte permite.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

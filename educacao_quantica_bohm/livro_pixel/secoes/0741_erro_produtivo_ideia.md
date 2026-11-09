@@ -19,7 +19,7 @@
 </div>
 
 <p><strong>Pense:</strong> O que eu supus quando errei?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F075 liga a ideia à fonte KRIJTENBURG-LEWERISSA (2017) DOI 10.1103/PhysRevPhysEducRes.13.010109; a evidência é definição ou teste consolidado.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Explique com suas palavras por que a frase sobre Erro produtivo não autoriza dizer mais do que a fonte permite.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

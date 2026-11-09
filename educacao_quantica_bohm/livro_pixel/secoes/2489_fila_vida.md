@@ -10,7 +10,7 @@
 
 <p>Serviços de nuvem já mediam nossa confiança e nossos dados.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">任务队列</span> <em>rèn wù duì liè</em> <span class="tom">· tons 4-4-4-4 · leitura jen-u-duei-lie</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到任务队列。</span> <em>Wǒ zài shēng huó zhōng kàn dào rèn wù duì liè.</em> — Vejo “Fila de jobs” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “A fila não é neutra; prioridades e recursos afetam quem espera”. Limite: “Não há garantia de generalização para outros contextos” (conceito: Fila de jobs).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Fila de jobs.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

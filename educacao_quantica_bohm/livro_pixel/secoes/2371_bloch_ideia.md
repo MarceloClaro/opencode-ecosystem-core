@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> O interior da esfera não é acessível; a superfície é o estado puro.</p>
 <p><strong>Pergunta de pesquisa:</strong> O que é um estado puro?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F038 ancora a proposição em <a href="https://doi.org/10.5281/zenodo.2573505">10.5281/zenodo.2573505</a>; grau B (evidência experimental ou metodológica com limites). Limite: “A esfera não mostra emaranhamento de dois qubits”.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

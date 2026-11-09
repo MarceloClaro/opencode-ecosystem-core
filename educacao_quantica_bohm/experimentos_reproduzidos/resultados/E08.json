@@ -1,0 +1,60 @@
+{
+  "id": "E08",
+  "nome": "Gerador quântico de números",
+  "descricao": "H + medição produzem bits aproximadamente equilibrados.",
+  "protocolo": {
+    "sementes": 20,
+    "shots_por_semente": 4096,
+    "total_shots": 81920,
+    "simulador": "AerSimulator",
+    "transpilacao": "optimization_level=1",
+    "seed_base": 20261109
+  },
+  "ideal": {
+    "distribuicoes": [
+      {
+        "0": 0.4999999999999999,
+        "1": 0.4999999999999999
+      }
+    ]
+  },
+  "reproduzido": {
+    "dist_media": [
+      {
+        "0": 0.4993896484375,
+        "1": 0.5006103515625
+      }
+    ],
+    "dist_ic95": [
+      {
+        "0": [
+          0.4993896484375,
+          0.00346419058512388
+        ],
+        "1": [
+          0.5006103515625,
+          0.00346419058512388
+        ]
+      }
+    ],
+    "counts_agregados": [
+      {
+        "0": 40910,
+        "1": 41010
+      }
+    ],
+    "leitura_agregada": "|P(0)-P(1)| = 0.001 (ideal 0,000)",
+    "tvd_media": 0.006030273437500006,
+    "tvd_ic95": [
+      0.00410612161770159,
+      0.007954425257298421
+    ]
+  },
+  "comparacao": {
+    "tvd_arquivo_simulado": 0.0185546875,
+    "tvd_arquivo_real": 0.017578125,
+    "tvd_reproduzido_vs_arquivo_simulado": 0.0179443359375
+  },
+  "limites": "Simulação Aer; não é execução em hardware. A TVD mede diferença entre distribuições, não fidelidade de estado. O JSON real arquivado não foi reproduzido em hardware nesta rodada.",
+  "timestamp": "2026-11-09T00:49:14-0300"
+}

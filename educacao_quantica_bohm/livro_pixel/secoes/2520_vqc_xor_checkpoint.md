@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Um resultado de 100% em 4 pontos pode enganar uma política pública?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">变分分类器</span> <em>biàn fēn fēn lèi qì</em> <span class="tom">· tons 4-1-1-4-4 · leitura bien-fen-fen-lei-tchi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了变分分类器。</span> <em>Wǒ xué huì le biàn fēn fēn lèi qì.</em> — Eu aprendi “VQC XOR”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau C (resultado exploratório ou interpretativo). Frase: “Um classificador de 2 qubits aprendeu XOR com 4 pontos e 100% no backend”; limite: “Não há garantia de generalização para outros contextos” (conceito: VQC XOR).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre VQC XOR e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

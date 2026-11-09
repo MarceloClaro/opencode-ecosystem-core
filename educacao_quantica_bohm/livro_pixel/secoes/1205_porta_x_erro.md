@@ -10,7 +10,7 @@
 
 <p><strong>O erro comum:</strong> Achar que X é uma 'rotação de 180°' em qualquer base.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">翻转门</span> <em>fān zhuǎn mén</em> <span class="tom">· tons 1-3-2 · leitura fan-djuan-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">翻转门不是魔法。</span> <em>Fān zhuǎn mén bú shì mó fǎ.</em> — “Porta X” não é magia.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “X é a matriz [[0,1],[1,0]]; X² = I” e admite “X não cria superposição; ela apenas troca os estados de base”. O erro está em tratar esse registro como definição de Porta X.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Porta X.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

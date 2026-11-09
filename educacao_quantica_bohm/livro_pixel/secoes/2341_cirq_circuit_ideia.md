@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> O Cirq usa momentos para organizar operações paralelas.</p>
 <p><strong>Pergunta de pesquisa:</strong> O que é um momento?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F035 ancora a proposição em <a href="https://doi.org/10.5281/zenodo.2573505">10.5281/zenodo.2573505</a>; grau B (evidência experimental ou metodológica com limites). Limite: “Momentos não são tempo físico; são uma ordenação lógica”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Formule uma consequência testável de “Um Circuit do Cirq é uma sequência de momentos e operações” e indique qual observação a refutaria.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

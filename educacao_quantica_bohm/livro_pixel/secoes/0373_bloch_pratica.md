@@ -20,8 +20,7 @@
 <p class="mini">Sobreposição ≠ fidelidade de estado.</p>
 <p class="mini">Script: <code>scripts/experimentos_100.py</code> · E16 · Guoji08 · <a href="#oficina-e16">oficina E16</a> · <a href="#codigo-e16">código E16</a></p>
 </div>
-
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F038 registra como medido “O interior da esfera não é acessível; a superfície é o estado puro”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Repita a prática e explique por que o número não prova “A esfera não mostra emaranhamento de dois qubits”.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

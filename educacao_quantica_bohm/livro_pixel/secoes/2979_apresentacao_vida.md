@@ -10,7 +10,7 @@
 
 <p>Todo projeto começa com uma pergunta e termina com um próximo passo.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">展示</span> <em>zhǎn shì</em> <span class="tom">· tons 3-4 · leitura djan-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到展示。</span> <em>Wǒ zài shēng huó zhōng kàn dào zhǎn shì.</em> — Vejo “Apresentação” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “Apresentar não é ler slides; é responder a perguntas”. Limite: “Não há garantia de generalização para outros contextos” (conceito: Apresentação).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Apresentação.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

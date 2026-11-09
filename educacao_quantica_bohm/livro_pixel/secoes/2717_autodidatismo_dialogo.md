@@ -11,7 +11,7 @@
 <p><strong>Pergunta de pesquisa:</strong> Como saber se eu aprendi?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">自学</span> <em>zì xué</em> <span class="tom">· tons 4-2 · leitura dzi-shyue</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看自学？</span> <em>Nǐ zěn me kàn zì xué?</em> — O que você pensa de “Autodidatismo”?</span></p>
 <p><strong>Hipótese rival:</strong> A técnica não funciona igual para todos os estudantes.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Hipótese rival: “Não há garantia de generalização para outros contextos” (conceito: Autodidatismo). Fonte: <a href="https://doi.org/10.1103/PhysRevPhysEducRes.13.010109">10.1103/PhysRevPhysEducRes.13.010109</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda a hipótese rival e peça a alguém para refutá-la em Autodidatismo.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Você consegue escrever um QNode de Bell?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子软件</span> <em>liàng zǐ ruǎn jiàn</em> <span class="tom">· tons 4-3-3-4 · leitura liang-dzi-juan-djien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了量子软件。</span> <em>Wǒ xué huì le liàng zǐ ruǎn jiàn.</em> — Eu aprendi “PennyLane”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência evidência experimental ou metodológica com limites. Frase: “PennyLane é uma biblioteca de circuitos quânticos diferenciáveis”; limite: “A diferenciação automática não substitui a interpretação física”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre PennyLane e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

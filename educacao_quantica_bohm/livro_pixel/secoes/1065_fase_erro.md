@@ -10,7 +10,7 @@
 
 <p><strong>O erro comum:</strong> Dizer que Z 'não faz nada' porque a probabilidade não muda.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">相位</span> <em>xiàng wèi</em> <span class="tom">· tons 4-4 · leitura shiang-uei</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">相位不是魔法。</span> <em>Xiàng wèi bú shì mó fǎ.</em> — “Fase” não é magia.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “A fase relativa é o recurso que permite a interferência” e admite “A fase não é um atraso no tempo real; é uma relação matemática”. O erro está em tratar esse registro como definição de Fase.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Fase.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

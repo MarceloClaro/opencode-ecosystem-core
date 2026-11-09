@@ -20,8 +20,7 @@
 <p class="mini">Sobreposição ≠ fidelidade de estado.</p>
 <p class="mini">Script: <code>scripts/experimentos_100.py</code> · E08 · Guoji08 · <a href="#oficina-e08">oficina E08</a> · <a href="#codigo-e08">código E08</a></p>
 </div>
-
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F081 registra como medido “A fonte discute o conceito e suas consequências” (conceito: Acesso). Resultado bruto: Experimento: Gerador quântico de números — H + medição produzem bits aproximadamente equilibrados.; Simulado: |P(0)-P(1)| = 0,037 (ideal 0,000); Backend: |P(0)-P(1)| = 0,035 (ideal 0,000); Sobreposição: 96,4% · task: 58eedaa5.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Repita a prática com outra amostra ou seed e escreva o que a diferença não prova sobre Acesso.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

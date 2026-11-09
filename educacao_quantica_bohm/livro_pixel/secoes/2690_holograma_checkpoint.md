@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Quem controla a reconstrução controla a narrativa?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">全息图</span> <em>quán xī tú</em> <span class="tom">· tons 2-1-2 · leitura tchyuan-shi-tu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了全息图。</span> <em>Wǒ xué huì le quán xī tú.</em> — Eu aprendi “Holograma”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau A (definição ou teste consolidado). Frase: “Um holograma distribui informação sobre o todo”; limite: “Não há garantia de generalização para outros contextos” (conceito: Holograma).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Holograma e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

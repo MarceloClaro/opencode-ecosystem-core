@@ -19,7 +19,7 @@
 </div>
 
 <p><strong>Pense:</strong> O que se perde na tradução?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F029 liga a ideia à fonte QISKIT (2024) DOI 10.5281/zenodo.2573505; a evidência é definição ou teste consolidado.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Explique com suas palavras por que a frase sobre Transpilação não autoriza dizer mais do que a fonte permite.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

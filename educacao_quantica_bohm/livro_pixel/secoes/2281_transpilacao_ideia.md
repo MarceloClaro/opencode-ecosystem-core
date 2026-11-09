@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> O mapeamento de qubits lógicos para físicos é parte do processo.</p>
 <p><strong>Pergunta de pesquisa:</strong> O que se perde na tradução?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F029 ancora a proposição em <a href="https://doi.org/10.5281/zenodo.2573505">10.5281/zenodo.2573505</a>; grau A (definição ou teste consolidado). Limite: “A tradução pode aumentar a profundidade e o ruído”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Formule uma consequência testável de “Transpilar adapta o circuito às portas e conexões do hardware” e indique qual observação a refutaria.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

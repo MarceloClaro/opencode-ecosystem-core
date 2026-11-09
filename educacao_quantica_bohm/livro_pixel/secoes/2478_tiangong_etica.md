@@ -11,7 +11,7 @@
 <p>Quem paga a conta energética e quem fica na fila?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">天宫</span> <em>tiān gōng</em> <span class="tom">· tons 1-1 · leitura tien-gong</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于天宫？</span> <em>Shéi shòu yì yú tiān gōng?</em> — Quem se beneficia de “Tiangong”?</span></p>
 <p><strong>Governança:</strong> quem audita, quem responde e como reparar?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau B (evidência experimental ou metodológica com limites); o limite é “Não há garantia de generalização para outros contextos” (conceito: Tiangong).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Liste um grupo afetado por Tiangong e uma mitigação, declarando esse limite.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

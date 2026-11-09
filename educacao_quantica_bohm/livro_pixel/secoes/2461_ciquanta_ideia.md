@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> T1 e T2 são tempos de relaxação e coerência; não são a mesma coisa.</p>
 <p><strong>Pergunta de pesquisa:</strong> O que é público no CIQuanta?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F047 ancora a proposição em CIQUANTA (2026); grau B (evidência experimental ou metodológica com limites). Limite: “Não há garantia de generalização para outros contextos” (conceito: CIQuanta).</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

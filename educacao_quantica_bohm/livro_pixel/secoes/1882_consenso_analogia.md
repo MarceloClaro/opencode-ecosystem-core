@@ -11,7 +11,7 @@
 <p>Uma equipe que escolhe uma rota sem apagar as discordâncias.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">共识</span> <em>gòng shí</em> <span class="tom">· tons 4-2 · leitura gong-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像共识。</span> <em>Zhè xiàng gòng shí.</em> — Isto se parece com “Consenso”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> Não há consenso moral automático; há trade-offs.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “Consenso não é prova de verdade; pode ser conformismo” e o medido “A fonte discute o conceito e suas consequências” (conceito: Consenso).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Consenso e escreva o resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

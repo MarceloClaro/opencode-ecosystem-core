@@ -1,0 +1,102 @@
+{
+  "id": "E10",
+  "nome": "Classificador XOR (VQC)",
+  "descricao": "Quatro entradas, quatro medições, uma acurácia.",
+  "protocolo": {
+    "sementes": 20,
+    "shots_por_semente": 4096,
+    "total_shots": 81920,
+    "simulador": "AerSimulator",
+    "transpilacao": "optimization_level=1",
+    "seed_base": 20261109
+  },
+  "ideal": {
+    "distribuicoes": [
+      {
+        "0": 0.9999999999966265,
+        "1": 3.3731089327037828e-12
+      },
+      {
+        "0": 1.6865544663714785e-11,
+        "1": 0.9999999999831342
+      },
+      {
+        "0": 3.3731089326673715e-12,
+        "1": 0.9999999999966267
+      },
+      {
+        "0": 0.9999999999831342,
+        "1": 1.6865544663941978e-11
+      }
+    ]
+  },
+  "reproduzido": {
+    "dist_media": [
+      {
+        "0": 1.0
+      },
+      {
+        "1": 1.0
+      },
+      {
+        "1": 1.0
+      },
+      {
+        "0": 1.0
+      }
+    ],
+    "dist_ic95": [
+      {
+        "0": [
+          1.0,
+          0.0
+        ]
+      },
+      {
+        "1": [
+          1.0,
+          0.0
+        ]
+      },
+      {
+        "1": [
+          1.0,
+          0.0
+        ]
+      },
+      {
+        "0": [
+          1.0,
+          0.0
+        ]
+      }
+    ],
+    "counts_agregados": [
+      {
+        "0": 81920
+      },
+      {
+        "1": 81920
+      },
+      {
+        "1": 81920
+      },
+      {
+        "0": 81920
+      }
+    ],
+    "leitura_agregada": "Acurácia = 4/4",
+    "tvd_media": 1.0119477078282024e-11,
+    "tvd_ic95": [
+      1.0119477078282024e-11,
+      1.0119477078282024e-11
+    ]
+  },
+  "comparacao": {
+    "tvd_arquivo_simulado": 1.0119477078282024e-11,
+    "tvd_arquivo_real": 0.041259765614880525,
+    "tvd_reproduzido_vs_arquivo_simulado": 0.0
+  },
+  "limites": "Simulação Aer; não é execução em hardware. A TVD mede diferença entre distribuições, não fidelidade de estado. O JSON real arquivado não foi reproduzido em hardware nesta rodada.",
+  "timestamp": "2026-11-09T00:49:31-0300"
+}

@@ -11,7 +11,7 @@
 <p>Um atleta que precisa de aquecimento e cuidado.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">物理量子比特</span> <em>wù lǐ liàng zǐ bǐ tè</em> <span class="tom">· tons 4-3-4-3-3-4 · leitura u-li-liang-dzi-bi-te</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像物理量子比特。</span> <em>Zhè xiàng wù lǐ liàng zǐ bǐ tè.</em> — Isto se parece com “Qubit físico”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> O resultado de hoje não garante o de amanhã; calibração muda.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “Qubits físicos não são ideais; vários formam um qubit lógico” e o medido “A fonte discute o conceito e suas consequências” (conceito: Qubit físico).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Qubit físico e escreva o resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

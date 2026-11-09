@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Você consegue explicar a diferença entre soma e relação?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">整体性</span> <em>zhěng tǐ xìng</em> <span class="tom">· tons 3-3-4 · leitura djeng-ti-shing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了整体性。</span> <em>Wǒ xué huì le zhěng tǐ xìng.</em> — Eu aprendi “Totalidade”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau C (resultado exploratório ou interpretativo). Frase: “Totalidade é a ideia de que o todo não se reduz a partes independentes”; limite: “Totalidade não significa harmonia; pode haver conflito e desordem”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Totalidade e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

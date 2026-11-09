@@ -20,8 +20,7 @@
 <p class="mini">Sobreposição ≠ fidelidade de estado.</p>
 <p class="mini">Script: <code>scripts/experimentos_100.py</code> · E18 · Guoji08 · <a href="#oficina-e18">oficina E18</a> · <a href="#codigo-e18">código E18</a></p>
 </div>
-
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F004 registra como medido “A lei dos grandes números explica por que a frequência se estabiliza”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Repita a prática e explique por que o número não prova “Uma amostra pequena flutua; a probabilidade não garante o próximo resultado”.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

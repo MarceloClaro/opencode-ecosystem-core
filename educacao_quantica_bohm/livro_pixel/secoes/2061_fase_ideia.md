@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> A fase relativa é o recurso que permite a interferência.</p>
 <p><strong>Pergunta de pesquisa:</strong> O que não aparece ainda pode importar?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F007 ancora a proposição em <a href="https://doi.org/10.1002/j.1538-7305.1948.tb01338.x">10.1002/j.1538-7305.1948.tb01338.x</a>; grau A (definição ou teste consolidado). Limite: “A fase não é um atraso no tempo real; é uma relação matemática”.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

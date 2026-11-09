@@ -11,7 +11,7 @@
 <p>Uma porta com chave, horário e recepção.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">访问</span> <em>fǎng wèn</em> <span class="tom">· tons 3-4 · leitura fang-uen</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像访问。</span> <em>Zhè xiàng fǎng wèn.</em> — Isto se parece com “Acesso”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> Não há consenso moral automático; há trade-offs.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “Acesso formal no site não garante acesso efetivo ao hardware” e o medido “A fonte discute o conceito e suas consequências” (conceito: Acesso).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Acesso e escreva o resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

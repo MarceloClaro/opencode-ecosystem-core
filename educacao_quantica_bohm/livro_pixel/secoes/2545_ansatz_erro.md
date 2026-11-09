@@ -11,7 +11,7 @@
 <p><strong>O erro comum:</strong> Desenhe RY-CNOT-RY para dois qubits.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">拟设</span> <em>nǐ shè</em> <span class="tom">· tons 3-4 · leitura ni-she</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">拟设不是魔法。</span> <em>Nǐ shè bú shì mó fǎ.</em> — “Ansatz” não é magia.</span></p>
 <p><strong>Correção formal:</strong> A fidelidade proxy mede a população ideal, não a pureza do estado.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “A fonte discute o conceito e suas consequências” e admite “Não há garantia de generalização para outros contextos” (conceito: Ansatz). O erro está em tratar esse registro como definição de Ansatz.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Ansatz.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

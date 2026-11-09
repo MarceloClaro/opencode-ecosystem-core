@@ -10,7 +10,7 @@
 
 <p>Uma amplitude negativa não é 'menos real'; é uma relação de fase.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">振幅</span> <em>zhèn fú</em> <span class="tom">· tons 4-2 · leitura djen-fu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于振幅？</span> <em>Shéi shòu yì yú zhèn fú?</em> — Quem se beneficia de “Amplitude”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau A (definição ou teste consolidado); o limite é “A amplitude não é uma probabilidade; é preciso elevar ao quadrado”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Liste um grupo afetado por Amplitude e uma mitigação, declarando esse limite.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -11,7 +11,7 @@
 <p><strong>O erro comum:</strong> Liste os autovalores de Z.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">特征值</span> <em>tè zhēng zhí</em> <span class="tom">· tons 4-1-2 · leitura te-djeng-dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">特征值不是魔法。</span> <em>Tè zhēng zhí bú shì mó fǎ.</em> — “Autovalor” não é magia.</span></p>
 <p><strong>Correção formal:</strong> O produto tensorial faz a dimensão crescer como 2^n.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “A fonte discute o conceito e suas consequências” e admite “Não há garantia de generalização para outros contextos” (conceito: Autovalor). O erro está em tratar esse registro como definição de Autovalor.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Autovalor.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

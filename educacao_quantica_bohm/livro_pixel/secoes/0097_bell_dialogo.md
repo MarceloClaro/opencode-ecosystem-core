@@ -10,7 +10,7 @@
 
 <p><strong>Pergunta da roda:</strong> O que é uma correlação perfeita?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">贝尔态</span> <em>bèi ěr tài</em> <span class="tom">· tons 4-3-4 · leitura bei-er-tai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看贝尔态？</span> <em>Nǐ zěn me kàn bèi ěr tài?</em> — O que você pensa de “Estado de Bell”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Outra explicação possível: “A imagem das moedas sugere um mecanismo que a teoria não afirma”. Fonte: BELL (1964) DOI 10.1103/PhysicsPhysiqueFizika.1.195.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda essa explicação por dois minutos e peça a alguém para refutá-la em Estado de Bell.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

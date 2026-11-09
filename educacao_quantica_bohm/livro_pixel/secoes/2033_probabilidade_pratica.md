@@ -20,8 +20,7 @@
 <p class="mini">Sobreposição ≠ fidelidade de estado.</p>
 <p class="mini">Script: <code>scripts/experimentos_100.py</code> · E18 · Guoji08 · <a href="#oficina-e18">oficina E18</a> · <a href="#codigo-e18">código E18</a></p>
 </div>
-
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F004 registra como medido “A lei dos grandes números explica por que a frequência se estabiliza”. Resultado bruto: Experimento: Amostragem binomial — H + medição; o desvio de P(1) cai com o número de tiros.; Simulado: P(1) = 0,483 (ideal 0,500); Backend: P(1) = 0,482 (ideal 0,500); Sobreposição: 99,9% · task: 54de9107.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Repita a prática com outra amostra ou seed e escreva o que a diferença não prova sobre Probabilidade.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

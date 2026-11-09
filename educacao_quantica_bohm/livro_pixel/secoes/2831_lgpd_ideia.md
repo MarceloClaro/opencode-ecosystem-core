@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> A LGPD exige base legal, finalidade e transparência.</p>
 <p><strong>Pergunta de pesquisa:</strong> Qual é a base legal deste tratamento?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F084 ancora a proposição em BRASIL (2018); grau C (resultado exploratório ou interpretativo). Limite: “Não há garantia de generalização para outros contextos” (conceito: LGPD).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Formule uma consequência testável de “A LGPD regula o tratamento de dados pessoais no Brasil” e indique qual observação a refutaria.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

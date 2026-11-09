@@ -11,7 +11,7 @@
 <p><strong>Pergunta de pesquisa:</strong> A partícula tem trajetória?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">导波</span> <em>dǎo bō</em> <span class="tom">· tons 3-1 · leitura dau-bo</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看导波？</span> <em>Nǐ zěn me kàn dǎo bō?</em> — O que você pensa de “Onda piloto”?</span></p>
 <p><strong>Hipótese rival:</strong> O rio é matemático e, para várias partículas, vive em muitas dimensões.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Hipótese rival: “O rio é matemático e, para várias partículas, vive em muitas dimensões”. Fonte: <a href="https://doi.org/10.1103/PhysRev.85.166">10.1103/PhysRev.85.166</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda a hipótese rival e peça a alguém para refutá-la em Onda piloto.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

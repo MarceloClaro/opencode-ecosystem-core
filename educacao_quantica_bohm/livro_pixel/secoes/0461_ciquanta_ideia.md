@@ -19,7 +19,7 @@
 </div>
 
 <p><strong>Pense:</strong> O que é público no CIQuanta?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F047 liga a ideia à fonte CIQUANTA (2026); a evidência é evidência experimental ou metodológica com limites.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Explique com suas palavras por que a frase sobre CIQuanta não autoriza dizer mais do que a fonte permite.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

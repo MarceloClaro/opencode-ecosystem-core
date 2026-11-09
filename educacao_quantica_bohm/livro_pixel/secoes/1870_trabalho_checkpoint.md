@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> A automação pode precarizar o trabalho de quem opera o sistema?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">工作</span> <em>gōng zuò</em> <span class="tom">· tons 1-4 · leitura gong-dzuo</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了工作。</span> <em>Wǒ xué huì le gōng zuò.</em> — Eu aprendi “Trabalho”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau C (resultado exploratório ou interpretativo). Frase: “Novas tecnologias mudam tarefas e exigem novas formações”; limite: “Não há garantia de generalização para outros contextos” (conceito: Trabalho).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Trabalho e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

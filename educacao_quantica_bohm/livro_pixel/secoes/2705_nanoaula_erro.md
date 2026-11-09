@@ -11,7 +11,7 @@
 <p><strong>O erro comum:</strong> Escolha um conceito e escreva objetivo, prática e checkpoint.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">微课</span> <em>wēi kè</em> <span class="tom">· tons 1-4 · leitura uei-ke</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">微课不是魔法。</span> <em>Wēi kè bú shì mó fǎ.</em> — “Nanoaula” não é magia.</span></p>
 <p><strong>Correção formal:</strong> A prática distribuída e a recuperação ativa têm apoio em pesquisa.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “A fonte discute o conceito e suas consequências” e admite “Não há garantia de generalização para outros contextos” (conceito: Nanoaula). O erro está em tratar esse registro como definição de Nanoaula.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Nanoaula.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

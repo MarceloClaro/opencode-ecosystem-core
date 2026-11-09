@@ -20,8 +20,7 @@
 <p class="mini">Sobreposição ≠ fidelidade de estado.</p>
 <p class="mini">Script: <code>scripts/experimentos_100.py</code> · E03 · Guoji08 · <a href="#oficina-e03">oficina E03</a> · <a href="#codigo-e03">código E03</a></p>
 </div>
-
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F022 registra como medido “H é a matriz (1/√2)[[1,1],[1,-1]]; H² = I”. Resultado bruto: Experimento: Superposição H|0⟩ — H cria uma superposição; a medição produz 0 ou 1.; Simulado: P(1) = 0,496 (ideal 0,500); Backend: P(1) = 0,482 (ideal 0,500); Sobreposição: 98,6% · task: 268a67b7.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Repita a prática com outra amostra ou seed e escreva o que a diferença não prova sobre Porta H.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

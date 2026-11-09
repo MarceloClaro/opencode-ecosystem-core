@@ -19,7 +19,7 @@
 </div>
 
 <p><strong>Pare e pense:</strong> O que cabe em 7 minutos?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F071 ancora a ideia em <a href="https://doi.org/10.1103/PhysRevPhysEducRes.13.010109">10.1103/PhysRevPhysEducRes.13.010109</a>; grau A (definição ou teste consolidado).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Explique por que a frase sobre Nanoaula não autoriza mais do que a fonte permite.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

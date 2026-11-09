@@ -11,7 +11,7 @@
 <p><strong>Pergunta de pesquisa:</strong> O que mudou na pergunta?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">对话圈</span> <em>duì huà quān</em> <span class="tom">· tons 4-4-1 · leitura duei-rua-tchyuan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看对话圈？</span> <em>Nǐ zěn me kàn duì huà quān?</em> — O que você pensa de “Roda de diálogo”?</span></p>
 <p><strong>Hipótese rival:</strong> A técnica não funciona igual para todos os estudantes.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Hipótese rival: “Não há garantia de generalização para outros contextos” (conceito: Roda de diálogo). Fonte: <a href="https://doi.org/10.1103/PhysRevPhysEducRes.13.010109">10.1103/PhysRevPhysEducRes.13.010109</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda a hipótese rival e peça a alguém para refutá-la em Roda de diálogo.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

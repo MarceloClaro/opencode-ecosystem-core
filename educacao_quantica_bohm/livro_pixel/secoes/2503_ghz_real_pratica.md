@@ -20,8 +20,7 @@
 <p class="mini">Sobreposição ≠ fidelidade de estado.</p>
 <p class="mini">Script: <code>scripts/experimentos_100.py</code> · E06 · Guoji08 · <a href="#oficina-e06">oficina E06</a> · <a href="#codigo-e06">código E06</a></p>
 </div>
-
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F051 registra como medido “A fonte discute o conceito e suas consequências” (conceito: GHZ real). Resultado bruto: Experimento: GHZ de 4 qubits — Quatro qubits compartilham 0000/1111.; Simulado: P(0000)+P(1111) = 1,000 (ideal 1,000); Backend: P(0000)+P(1111) = 0,788 (ideal 1,000); Sobreposição: 78,8% · task: —.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Repita a prática com outra amostra ou seed e escreva o que a diferença não prova sobre GHZ real.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

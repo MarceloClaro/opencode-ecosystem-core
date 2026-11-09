@@ -11,7 +11,7 @@
 <p><strong>O erro comum:</strong> Achar que um bit pode ser 'meio 0, meio 1' no mundo clássico.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">比特</span> <em>bǐ tè</em> <span class="tom">· tons 3-4 · leitura bi-te</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">比特不是魔法。</span> <em>Bǐ tè bú shì mó fǎ.</em> — “Bit” não é magia.</span></p>
 <p><strong>Correção formal:</strong> Com 8 bits, há 256 combinações; uma letra ASCII cabe em 8 bits.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “Com 8 bits, há 256 combinações; uma letra ASCII cabe em 8 bits” e admite “A analogia não explica probabilidade; o bit clássico é exclusivo”. O erro está em tratar esse registro como definição de Bit.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Bit.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

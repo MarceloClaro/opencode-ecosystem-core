@@ -11,7 +11,7 @@
 <p><strong>O erro comum:</strong> Medir várias vezes o mesmo qubit sem preparar e esperar estatística.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">测量</span> <em>cè liáng</em> <span class="tom">· tons 4-2 · leitura tse-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">测量不是魔法。</span> <em>Cè liáng bú shì mó fǎ.</em> — “Medição” não é magia.</span></p>
 <p><strong>Correção formal:</strong> O 'colapso' é um nome para a atualização do estado após a medição.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “O 'colapso' é um nome para a atualização do estado após a medição” e admite “A caixa pode já ter um valor; o qubit não é assim”. O erro está em tratar esse registro como definição de Medição.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Medição.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

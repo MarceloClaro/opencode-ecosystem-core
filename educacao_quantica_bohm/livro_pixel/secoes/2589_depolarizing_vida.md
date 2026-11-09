@@ -10,7 +10,7 @@
 
 <p>Um treino curto pode dar 100% e não servir para o mundo real.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">去极化</span> <em>qù jí huà</em> <span class="tom">· tons 4-2-4 · leitura tchyu-dji-rua</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到去极化。</span> <em>Wǒ zài shēng huó zhōng kàn dào qù jí huà.</em> — Vejo “Depolarizing” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “O canal não é 'neutro'; ele reduz a informação útil”. Limite: “Não há garantia de generalização para outros contextos” (conceito: Depolarizing).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Depolarizing.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

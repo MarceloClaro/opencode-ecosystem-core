@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Quem coletou a evidência e com que interesse?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">证据</span> <em>zhèng jù</em> <span class="tom">· tons 4-4 · leitura djeng-djyu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了证据。</span> <em>Wǒ xué huì le zhèng jù.</em> — Eu aprendi “Evidência”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau B (evidência experimental ou metodológica com limites). Frase: “Evidência é um dado ou observação que sustenta ou enfraquece uma afirmação”; limite: “Não há garantia de generalização para outros contextos” (conceito: Evidência).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Evidência e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

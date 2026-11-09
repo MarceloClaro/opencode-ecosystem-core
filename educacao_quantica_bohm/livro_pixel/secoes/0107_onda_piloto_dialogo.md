@@ -10,7 +10,7 @@
 
 <p><strong>Pergunta da roda:</strong> A partícula tem trajetória?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">导波</span> <em>dǎo bō</em> <span class="tom">· tons 3-1 · leitura dau-bo</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看导波？</span> <em>Nǐ zěn me kàn dǎo bō?</em> — O que você pensa de “Onda piloto”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Outra explicação possível: “O rio é matemático e, para várias partículas, vive em muitas dimensões”. Fonte: BOHM (1952) DOI 10.1103/PhysRev.85.166.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda essa explicação por dois minutos e peça a alguém para refutá-la em Onda piloto.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

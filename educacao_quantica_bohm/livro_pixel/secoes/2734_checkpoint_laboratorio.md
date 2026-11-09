@@ -8,15 +8,8 @@
 <h2 id="l-2734" class="titulo">Checkpoint — laboratório</h2>
 <div class="corpo">
 
-<p><strong>Protocolo de bancada:</strong> escolha um exemplo de <em>checkpoint</em>, preveja o resultado e teste com um colega.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">检查点</span> <em>jiǎn chá diǎn</em> <span class="tom">· tons 3-2-3 · leitura djien-tcha-dien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">观察检查点。</span> <em>Guān chá jiǎn chá diǎn.</em> — Observe “Checkpoint”.</span></p>
-<ol>
-<li>Escreva a previsão em uma frase.</li>
-<li>Execute ou observe o fenômeno.</li>
-<li>Registre a diferença e uma possível explicação.</li>
-</ol>
-<p><strong>O que observar:</strong> não basta acertar; é preciso explicar por que acertou.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau A (definição ou teste consolidado); o número não prova “Não há garantia de generalização para outros contextos” (conceito: Checkpoint). Fonte do protocolo: <a href="https://doi.org/10.1103/PhysRevPhysEducRes.13.010109">10.1103/PhysRevPhysEducRes.13.010109</a>.</p></div>
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
 <p><strong>Experimento:</strong> Esfera de Bloch — Mede Z e X do estado H|0⟩.</p>

@@ -11,7 +11,7 @@
 <p><strong>Pergunta de pesquisa:</strong> O que significa 'à distância'?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">非定域性</span> <em>fēi dìng yù xìng</em> <span class="tom">· tons 1-4-4-4 · leitura fei-ding-yu-shing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看非定域性？</span> <em>Nǐ zěn me kàn fēi dìng yù xìng?</em> — O que você pensa de “Não localidade”?</span></p>
 <p><strong>Hipótese rival:</strong> A não localidade não permite enviar sinais controláveis.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Hipótese rival: “A não localidade não permite enviar sinais controláveis”. Fonte: <a href="https://doi.org/10.1103/PhysRev.85.166">10.1103/PhysRev.85.166</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda a hipótese rival e peça a alguém para refutá-la em Não localidade.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

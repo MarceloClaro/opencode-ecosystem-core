@@ -10,7 +10,7 @@
 
 <p>Semáforos, senhas e códigos de barras são bits em ação.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">比特</span> <em>bǐ tè</em> <span class="tom">· tons 3-4 · leitura bi-te</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到比特。</span> <em>Wǒ zài shēng huó zhōng kàn dào bǐ tè.</em> — Vejo “Bit” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “Represente 13 em binário usando cinco cartões”. Limite: “A analogia não explica probabilidade; o bit clássico é exclusivo”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Bit.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

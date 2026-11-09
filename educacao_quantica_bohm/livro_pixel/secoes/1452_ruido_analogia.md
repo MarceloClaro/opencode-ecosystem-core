@@ -11,7 +11,7 @@
 <p>Chiado em uma rádio que atrapalha a música.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">噪声</span> <em>zào shēng</em> <span class="tom">· tons 4-1 · leitura dzau-sheng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像噪声。</span> <em>Zhè xiàng zào shēng.</em> — Isto se parece com “Ruído”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> O resultado de hoje não garante o de amanhã; calibração muda.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “Ruído não é sempre aleatório; pode ser correlacionado e sistemático” e o medido “A fonte discute o conceito e suas consequências” (conceito: Ruído).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Ruído e escreva o resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

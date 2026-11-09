@@ -11,7 +11,7 @@
 <p><strong>Pergunta de pesquisa:</strong> O que me faria mudar de ideia?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">假设</span> <em>jiǎ shè</em> <span class="tom">· tons 3-4 · leitura djia-she</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看假设？</span> <em>Nǐ zěn me kàn jiǎ shè?</em> — O que você pensa de “Hipótese”?</span></p>
 <p><strong>Hipótese rival:</strong> O projeto não esgota o problema; escolhe um recorte.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Hipótese rival: “Não há garantia de generalização para outros contextos” (conceito: Hipótese). Fonte: <a href="https://doi.org/10.1126/science.aac4716">10.1126/science.aac4716</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda a hipótese rival e peça a alguém para refutá-la em Hipótese.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

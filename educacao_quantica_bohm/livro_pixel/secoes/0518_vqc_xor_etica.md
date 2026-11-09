@@ -10,7 +10,7 @@
 
 <p>Um resultado de 4 pontos pode enganar uma política pública?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">变分分类器</span> <em>biàn fēn fēn lèi qì</em> <span class="tom">· tons 4-1-1-4-4 · leitura bien-fen-fen-lei-tchi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于变分分类器？</span> <em>Shéi shòu yì yú biàn fēn fēn lèi qì?</em> — Quem se beneficia de “VQC XOR”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência resultado exploratório ou interpretativo; o limite é “Não há garantia de generalização para outros contextos” (conceito: VQC XOR).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Liste um grupo afetado por VQC XOR e uma mitigação, declarando esse limite.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

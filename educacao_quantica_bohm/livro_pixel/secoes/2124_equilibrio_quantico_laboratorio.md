@@ -8,15 +8,8 @@
 <h2 id="l-2124" class="titulo">Equilíbrio quântico — laboratório</h2>
 <div class="corpo">
 
-<p><strong>Protocolo de bancada:</strong> escolha um exemplo de <em>equilíbrio quântico</em>, preveja o resultado e teste com um colega.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子平衡</span> <em>liàng zǐ píng héng</em> <span class="tom">· tons 4-3-2-2 · leitura liang-dzi-ping-reng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">观察量子平衡。</span> <em>Guān chá liàng zǐ píng héng.</em> — Observe “Equilíbrio quântico”.</span></p>
-<ol>
-<li>Escreva a previsão em uma frase.</li>
-<li>Execute ou observe o fenômeno.</li>
-<li>Registre a diferença e uma possível explicação.</li>
-</ol>
-<p><strong>O que observar:</strong> não basta acertar; é preciso explicar por que acertou.</p>
-
+<p>A ficha F013 declara o limite “A hipótese explica por que a regra de Born funciona, mas não por que o universo começou assim”; o número não prova essa conclusão sobre Equilíbrio quântico.</p>
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
 <p><strong>Experimento:</strong> Amostragem binomial — H + medição; o desvio de P(1) cai com o número de tiros.</p>

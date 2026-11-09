@@ -10,7 +10,7 @@
 
 <p><strong>O erro comum:</strong> Reconstrua uma imagem com poucos coeficientes.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">傅里叶</span> <em>fù lǐ yè</em> <span class="tom">· tons 4-3-4 · leitura fu-li-ie</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">傅里叶不是魔法。</span> <em>Fù lǐ yè bú shì mó fǎ.</em> — “Fourier” não é magia.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “A fonte discute o conceito e suas consequências” e admite “Não há garantia de generalização para outros contextos” (conceito: Fourier).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Fourier.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

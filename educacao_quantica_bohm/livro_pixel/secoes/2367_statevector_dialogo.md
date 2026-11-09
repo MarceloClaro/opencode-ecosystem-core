@@ -11,7 +11,7 @@
 <p><strong>Pergunta de pesquisa:</strong> O que é uma amplitude complexa?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">态矢量</span> <em>tài shǐ liàng</em> <span class="tom">· tons 4-3-4 · leitura tai-shi-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看态矢量？</span> <em>Nǐ zěn me kàn tài shǐ liàng?</em> — O que você pensa de “Statevector”?</span></p>
 <p><strong>Hipótese rival:</strong> O vetor cresce como 2^n; não é acessível por medição única.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Hipótese rival: “O vetor cresce como 2^n; não é acessível por medição única”. Fonte: <a href="https://doi.org/10.5281/zenodo.2573505">10.5281/zenodo.2573505</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda a hipótese rival e peça a alguém para refutá-la em Statevector.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

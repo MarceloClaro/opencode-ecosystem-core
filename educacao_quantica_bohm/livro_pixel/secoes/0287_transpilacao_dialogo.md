@@ -10,7 +10,7 @@
 
 <p><strong>Pergunta da roda:</strong> O que se perde na tradução?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">转译</span> <em>zhuǎn yì</em> <span class="tom">· tons 3-4 · leitura djuan-i</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看转译？</span> <em>Nǐ zěn me kàn zhuǎn yì?</em> — O que você pensa de “Transpilação”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Outra explicação possível: “A tradução pode aumentar a profundidade e o ruído”. Fonte: QISKIT (2024) DOI 10.5281/zenodo.2573505.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda essa explicação por dois minutos e peça a alguém para refutá-la em Transpilação.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

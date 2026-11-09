@@ -20,8 +20,7 @@
 <p class="mini">Sobreposição ≠ fidelidade de estado.</p>
 <p class="mini">Script: <code>scripts/experimentos_100.py</code> · E01 · Guoji08 · <a href="#oficina-e01">oficina E01</a> · <a href="#codigo-e01">código E01</a></p>
 </div>
-
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F001 registra como medido “Com 8 bits, há 256 combinações; uma letra ASCII cabe em 8 bits”. Resultado bruto: Experimento: Base |0⟩ — Prepara |0⟩ e mede 1024 vezes.; Simulado: P(0) = 1,000 (ideal 1,000); Backend: P(0) = 0,992 (ideal 1,000); Sobreposição: 99,2% · task: 9fd44816.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Repita a prática com outra amostra ou seed e escreva o que a diferença não prova sobre Bit.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

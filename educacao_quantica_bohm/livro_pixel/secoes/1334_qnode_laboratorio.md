@@ -23,7 +23,7 @@
 </div>
 
 <p><strong>O que observar:</strong> confira a ordem dos qubits, o número de tiros e a diferença entre estado e amostra. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> P(00) = N₀₀/N.<br><strong>Conta:</strong> N₀₀=485, N=1024: 485/1024 = 0,4736.<br><strong>Resultado:</strong> P(00)=47,36% (ideal 50%).<br><em>Limite:</em> A interferência de dois qubits concentra a distribuição, mas o ruído espalha.</span></p>
-
+<p>A ficha F034 declara o limite “O QNode não é o hardware; é a descrição executável”; o número não prova essa conclusão sobre QNode.</p>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

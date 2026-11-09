@@ -10,7 +10,7 @@
 
 <p>A fidelidade proxy mede a população ideal, não a pureza do estado.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">有益噪声</span> <em>yǒu yì zào shēng</em> <span class="tom">· tons 3-4-4-1 · leitura iu-i-dzau-sheng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解有益噪声。</span> <em>Shēn rù liǎo jiě yǒu yì zào shēng.</em> — Aprofunde-se em “Ruído benéfico?”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: MCCLEAN (2018) DOI 10.1038/s41467-018-07090-4. Fonte: CEREZO (2021) DOI 10.1038/s42254-021-00348-9.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Anote uma pergunta que a leitura não responde sobre Ruído benéfico?.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

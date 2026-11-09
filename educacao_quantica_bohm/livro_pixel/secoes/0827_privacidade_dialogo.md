@@ -10,7 +10,7 @@
 
 <p><strong>Pergunta da roda:</strong> Quem pode ver meus dados de treino?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">隐私</span> <em>yǐn sī</em> <span class="tom">· tons 3-1 · leitura in-si</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看隐私？</span> <em>Nǐ zěn me kàn yǐn sī?</em> — O que você pensa de “Privacidade”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Outra explicação possível: “Não há garantia de generalização para outros contextos” (conceito: Privacidade). Fonte: BRASIL (2018).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda essa explicação por dois minutos e peça a alguém para refutá-la em Privacidade.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

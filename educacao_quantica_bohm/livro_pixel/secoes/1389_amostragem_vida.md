@@ -10,7 +10,7 @@
 
 <p>Pesquisas, testes e auditorias dependem de amostragem.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">采样</span> <em>cǎi yàng</em> <span class="tom">· tons 3-4 · leitura tsai-iang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到采样。</span> <em>Wǒ zài shēng huó zhōng kàn dào cǎi yàng.</em> — Vejo “Amostragem” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “Rode 100, 1000 e 10000 tiros e compare a flutuação”. Limite: “A amostra não é o estado; é uma sombra estatística”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Amostragem.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

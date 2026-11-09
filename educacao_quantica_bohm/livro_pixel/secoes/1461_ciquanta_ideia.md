@@ -19,7 +19,7 @@
 </div>
 
 <p><strong>Pare e pense:</strong> O que é público no CIQuanta?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F047 ancora a ideia em CIQUANTA (2026); grau B (evidência experimental ou metodológica com limites).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Explique por que a frase sobre CIQuanta não autoriza mais do que a fonte permite.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

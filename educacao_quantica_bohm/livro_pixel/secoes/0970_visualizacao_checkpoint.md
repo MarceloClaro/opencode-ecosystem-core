@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Quem escolheu as cores e os destaques?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">可视化</span> <em>kě shì huà</em> <span class="tom">· tons 3-4-4 · leitura ke-shi-rua</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了可视化。</span> <em>Wǒ xué huì le kě shì huà.</em> — Eu aprendi “Visualização”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência evidência experimental ou metodológica com limites. Frase: “Visualização codifica dados em posição, cor e forma”; limite: “Não há garantia de generalização para outros contextos” (conceito: Visualização).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Visualização e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

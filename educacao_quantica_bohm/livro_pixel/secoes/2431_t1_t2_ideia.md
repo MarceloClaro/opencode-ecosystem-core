@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> T1 e T2 são tempos de relaxação e coerência; não são a mesma coisa.</p>
 <p><strong>Pergunta de pesquisa:</strong> O que limita mais o seu circuito?</p>
-
+<p>A ficha F044 ancora a ideia em <a href="https://doi.org/10.22331/q-2018-08-06-79">10.22331/q-2018-08-06-79</a> e declara o limite “Não há garantia de generalização para outros contextos” (conceito: T1 e T2).</p>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

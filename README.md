@@ -182,7 +182,7 @@ registrada, não escondida. Evidência:
 | MCP | 🟡 servidores configurados (inventário acima) | federação, probes, smoke, recibos | configuração ≠ disponibilidade no momento de uso |
 | Quântica e GJQ | 🟡 com limites | MCPs `gjq-experiments`, `gjq-runtime` e `quantum-sim-core`; agente e skills; Bell/CHSH no FAS-GPU | simulador; nenhum hardware executado; chave não versionada |
 | Loop Engineering | ✅ implementado/testado | skill, agente, auditor L0–L3 e harness | checklist não prova funcionamento; não executa loop nem auto-merge |
-| Livro quântico | ✅ build/testes | 3504 páginas, 3000 laudas, PDF versionado e build reproduzível | peer review, ISBN/DOI e tradução pendentes |
+| Livro quântico | ✅ build/testes | 3502 páginas, 3000 laudas, PDF versionado e build reproduzível | peer review, ISBN/DOI e tradução pendentes |
 | Governança | ✅ | gate metacognitivo, TrustEngine, slashing, EvolutionRegistry | `externally_supported` não é verdade absoluta |
 | Publicação | 🧭 gate | validação externa, aceite, autorização | nenhum upload/publicação automática |
 | Book Studio | 🟡 R1078–R1082 | KDP, tokens, licença, auditoria EPUB, capas e 6 pranchas de prova | arte final, 2× 300 DPI, CMYK/PDF-X e prova física pendentes |
@@ -311,8 +311,8 @@ foi enviada à KDP nem publicada por esta rodada.
 
 ### Livro quântico: PDF versionado
 
-O PDF de **3504 páginas** e **3000 laudas** está versionado em
-`educacao_quantica_bohm/livro_pixel/LIVRO_3000_LAUDAS.pdf` (18.422.988 bytes).
+O PDF de **3502 páginas** e **3000 laudas** está versionado em
+`educacao_quantica_bohm/livro_pixel/LIVRO_3000_LAUDAS.pdf` (19.987.690 bytes).
 O HTML e as fontes também estão no Git; o `.venv-pdf` é local e recriado por
 `build_pdf.sh`. O build usa `pyphen==0.16.0` com dicionário `pt_BR` para
 hifenizar o corpo. Ver [BUILD_PDF.md](educacao_quantica_bohm/livro_pixel/BUILD_PDF.md).
@@ -343,13 +343,14 @@ O livro **3000 Laudas de Física Quântica: do bit ao todo** está em
 `educacao_quantica_bohm/livro_pixel/` com:
 
 - **3000 laudas**, **100 fichas** e **400 notas de cálculo**;
-- **repetição reduzida** de 21.031 para 15.178 parágrafos e de 451.411 para 375.141 palavras;
+- **repetição** de 21.031 para 20.346 parágrafos; **482.840 palavras** no total (a expansão aumentou o volume e manteve a repetição sob o limite de 22.000);
 - **apêndice de aprofundamento** com densidade, canais, algoritmos e QEC;
-- **3504 páginas** no PDF final;
+- **3502 páginas** no PDF final;
 - **3000 códigos únicos** de lauda;
-- **PDF versionado** em `LIVRO_3000_LAUDAS.pdf` (18.422.988 bytes);
+- **PDF versionado** em `LIVRO_3000_LAUDAS.pdf` (19.987.690 bytes);
 - apêndice GJQ com Bell, CHSH, task IDs e contas;
 - corpo justificado e hifenizado em pt-BR; notas e legendas à esquerda.
+- **artigo de revisão e cenários**: `educacao_quantica_bohm/artigo_educacao_quantica/ARTIGO.pdf` (21 páginas, 29 referências verificadas);
 
 Build reproduzível:
 

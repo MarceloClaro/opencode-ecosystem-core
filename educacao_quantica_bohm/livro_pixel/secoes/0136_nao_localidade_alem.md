@@ -10,7 +10,7 @@
 
 <p>O teorema de Bell mostra que a não localidade é difícil de evitar.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">非定域性</span> <em>fēi dìng yù xìng</em> <span class="tom">· tons 1-4-4-4 · leitura fei-ding-yu-shing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解非定域性。</span> <em>Shēn rù liǎo jiě fēi dìng yù xìng.</em> — Aprofunde-se em “Não localidade”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: BELL (1964) DOI 10.1103/PhysicsPhysiqueFizika.1.195. Fonte: BOHM (1952) DOI 10.1103/PhysRev.85.166.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Anote uma pergunta que a leitura não responde sobre Não localidade.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

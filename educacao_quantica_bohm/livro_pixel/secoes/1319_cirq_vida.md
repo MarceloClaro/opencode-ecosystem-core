@@ -10,7 +10,7 @@
 
 <p>Planilhas também têm linhas e colunas com ordem importante.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子框架</span> <em>liàng zǐ kuàng jià</em> <span class="tom">· tons 4-3-4-4 · leitura liang-dzi-kuang-djia</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到量子框架。</span> <em>Wǒ zài shēng huó zhōng kàn dào liàng zǐ kuàng jià.</em> — Vejo “Cirq” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “Monte um Bell e rode 1000 tiros no simulador”. Limite: “O diagrama textual é útil, mas não é uma figura de livro”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Cirq.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -10,7 +10,7 @@
 
 <p>O Qiskit separa circuito lógico e circuito transpilado.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子电路</span> <em>liàng zǐ diàn lù</em> <span class="tom">· tons 4-3-4-4 · leitura liang-dzi-dien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解量子电路。</span> <em>Shēn rù liǎo jiě liàng zǐ diàn lù.</em> — Aprofunde-se em “QuantumCircuit”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Um circuito de 2 qubits e 2 bits clássicos tem 4 amplitudes e 4 resultados.<br><strong>Conta:</strong> As medidas mapeiam q0→c0 e q1→c1.<br><strong>Resultado:</strong> O circuito é uma receita; o resultado só existe depois da execução.<br><em>Limite:</em> Circuito não é o mesmo que estado; o estado é o que o circuito prepara.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: BERGHOLM (2018). Fonte: <a href="https://doi.org/10.5281/zenodo.2573505">10.5281/zenodo.2573505</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Anote uma pergunta que a leitura não responde sobre QuantumCircuit.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

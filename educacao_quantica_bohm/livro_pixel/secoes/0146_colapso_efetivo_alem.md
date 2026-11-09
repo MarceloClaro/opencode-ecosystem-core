@@ -10,7 +10,7 @@
 
 <p>A medição é um processo físico, não um postulado místico.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">有效坍缩</span> <em>yǒu xiào tān suō</em> <span class="tom">· tons 3-4-1-1 · leitura iu-shiau-tan-suo</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解有效坍缩。</span> <em>Shēn rù liǎo jiě yǒu xiào tān suō.</em> — Aprofunde-se em “Colapso efetivo”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: BELL (1964) DOI 10.1103/PhysicsPhysiqueFizika.1.195. Fonte: BOHM (1952) DOI 10.1103/PhysRev.85.166.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Anote uma pergunta que a leitura não responde sobre Colapso efetivo.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

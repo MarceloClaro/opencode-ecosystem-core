@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Uma mistura estatística pode esconder responsabilidade?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">密度矩阵</span> <em>mì dù jǔ zhèn</em> <span class="tom">· tons 4-4-3-4 · leitura mi-du-djyu-djen</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了密度矩阵。</span> <em>Wǒ xué huì le mì dù jǔ zhèn.</em> — Eu aprendi “Matriz densidade”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência definição ou teste consolidado. Frase: “A matriz densidade descreve estados puros e mistos”; limite: “Não há garantia de generalização para outros contextos” (conceito: Matriz densidade).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Matriz densidade e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

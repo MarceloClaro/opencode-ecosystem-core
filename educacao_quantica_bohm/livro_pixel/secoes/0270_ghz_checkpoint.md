@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Você consegue escrever o QASM 2.0 do GHZ de 4 qubits?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">多体纠缠态</span> <em>duō tǐ jiū chán tài</em> <span class="tom">· tons 1-3-1-2-4 · leitura duo-ti-djiu-tchan-tai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了多体纠缠态。</span> <em>Wǒ xué huì le duō tǐ jiū chán tài.</em> — Eu aprendi “GHZ”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência definição ou teste consolidado. Frase: “GHZ é a generalização do Bell para três ou mais qubits”; limite: “Em hardware real, o GHZ perde coerência rapidamente com o número de qubits”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre GHZ e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

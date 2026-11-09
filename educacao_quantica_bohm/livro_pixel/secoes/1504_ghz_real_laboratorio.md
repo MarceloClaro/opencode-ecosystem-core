@@ -21,7 +21,7 @@
 
 <figure class="fig"><img class="fig-pequena" src="../livro/figuras_geradas/fig12_ghz4_resultados.png" alt="GHZ de 4 qubits no Guoji08: 78,8% de fidelidade proxy; 0000 e 1111 dominam, mas 21,2% ficam fora do ideal."><figcaption>GHZ de 4 qubits no Guoji08: 78,8% de fidelidade proxy; 0000 e 1111 dominam, mas 21,2% ficam fora do ideal.</figcaption></figure>
 <p><strong>Baihua (156 q):</strong> 0000=437, 1111=230, outros=357; fidelidade 65,1%. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Fidelidade proxy = (N₀₀₀₀ + N₁₁₁₁)/N.<br><strong>Conta:</strong> (418+389)/1024 = 807/1024 = 0,7881.<br><strong>Resultado:</strong> 78,81%; 217 tiros fora de 0000/1111.<br><em>Limite:</em> O GHZ é frágil; a proxy cai rápido com o número de qubits.</span></p>
-
+<p>A ficha F051 declara o limite “Não há garantia de generalização para outros contextos” (conceito: GHZ real); o número não prova essa conclusão sobre GHZ real.</p>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

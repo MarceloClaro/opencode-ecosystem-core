@@ -10,7 +10,7 @@
 
 <p>Gráficos e mapas também escolhem o que destacar.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">内积</span> <em>nèi jī</em> <span class="tom">· tons 4-1 · leitura nei-dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到内积。</span> <em>Wǒ zài shēng huó zhōng kàn dào nèi jī.</em> — Vejo “Produto interno” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “A sobreposição não é probabilidade de ser 'igual' sem medição”. Limite: “Não há garantia de generalização para outros contextos” (conceito: Produto interno).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Produto interno.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

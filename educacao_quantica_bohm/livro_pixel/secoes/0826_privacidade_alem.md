@@ -10,7 +10,7 @@
 
 <p>A LGPD exige base legal, finalidade e transparência.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">隐私</span> <em>yǐn sī</em> <span class="tom">· tons 3-1 · leitura in-si</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解隐私。</span> <em>Shēn rù liǎo jiě yǐn sī.</em> — Aprofunde-se em “Privacidade”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: MITTELSTADT (2016) DOI 10.1177/2053951716679679. Fonte: BRASIL (2018).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Anote uma pergunta que a leitura não responde sobre Privacidade.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

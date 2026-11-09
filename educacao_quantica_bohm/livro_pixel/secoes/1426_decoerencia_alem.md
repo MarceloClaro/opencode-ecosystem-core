@@ -10,7 +10,7 @@
 
 <p>T1 e T2 são tempos de relaxação e coerência; não são a mesma coisa.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">退相干</span> <em>tuì xiāng gān</em> <span class="tom">· tons 4-1-1 · leitura tuei-shiang-gan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解退相干。</span> <em>Shēn rù liǎo jiě tuì xiāng gān.</em> — Aprofunde-se em “Decoerência”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> A coerência decai como e^{−t/T2}; a população como e^{−t/T1}.<br><strong>Conta:</strong> Médias da calibração: T1=73,07 µs; T2=26,36 µs.<br><strong>Resultado:</strong> 2T1=146,14 µs; T2=26,36 µs ≤ 146,14 µs.<br><em>Limite:</em> Médias escondem a dispersão entre qubits; um qubit pode ser muito pior.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.1103/RevModPhys.75.715">10.1103/RevModPhys.75.715</a>. Fonte: <a href="https://doi.org/10.22331/q-2018-08-06-79">10.22331/q-2018-08-06-79</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Anote uma pergunta que a leitura não responde sobre Decoerência.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -12,7 +12,7 @@
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">受控非门</span> <em>shòu kòng fēi mén</em> <span class="tom">· tons 4-4-1-2 · leitura shou-kong-fei-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像受控非门。</span> <em>Zhè xiàng shòu kòng fēi mén.</em> — Isto se parece com “CNOT”.</span></p>
 <p><strong>Onde a imagem não vale:</strong> CNOT não copia um estado quântico arbitrário; ela cria correlação.</p>
 <p>Desenhe a imagem e marque com um X o ponto em que ela falha.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “Aplique H no controle, CNOT e meça os dois qubits” e o medido “CNOT é a porta de duas entradas que gera o estado de Bell”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de CNOT e escreva um resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -10,7 +10,7 @@
 
 <p>Contas de luz, privacidade e emprego são afetados por tecnologia.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">共识</span> <em>gòng shí</em> <span class="tom">· tons 4-2 · leitura gong-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到共识。</span> <em>Wǒ zài shēng huó zhōng kàn dào gòng shí.</em> — Vejo “Consenso” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “Consenso não é prova de verdade; pode ser conformismo”. Limite: “Não há garantia de generalização para outros contextos” (conceito: Consenso).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Consenso.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

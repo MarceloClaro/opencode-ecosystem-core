@@ -10,7 +10,7 @@
 
 <p>Uma métrica pode esconder desigualdades?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">迹</span> <em>jì</em> <span class="tom">· tons 4 · leitura dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于迹？</span> <em>Shéi shòu yì yú jì?</em> — Quem se beneficia de “Traço”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau A (definição ou teste consolidado); o limite é “Não há garantia de generalização para outros contextos” (conceito: Traço).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Liste um grupo afetado por Traço e uma mitigação, declarando esse limite.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

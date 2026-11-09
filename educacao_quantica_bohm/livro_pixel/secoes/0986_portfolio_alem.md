@@ -10,7 +10,7 @@
 
 <p>Um bom projeto declara o que não prova.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">作品集</span> <em>zuò pǐn jí</em> <span class="tom">· tons 4-3-2 · leitura dzuo-pin-dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解作品集。</span> <em>Shēn rù liǎo jiě zuò pǐn jí.</em> — Aprofunde-se em “Portfólio”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: IOANNIDIS (2005) DOI 10.1371/journal.pmed.0020124. Fonte: OPEN (2015) DOI 10.1126/science.aac4716.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Anote uma pergunta que a leitura não responde sobre Portfólio.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

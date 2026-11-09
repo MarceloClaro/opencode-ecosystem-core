@@ -1,0 +1,62 @@
+{
+  "id": "E11",
+  "nome": "Interferência de dois qubits",
+  "descricao": "H, CZ e H concentram a distribuição em 00/11.",
+  "protocolo": {
+    "sementes": 20,
+    "shots_por_semente": 4096,
+    "total_shots": 81920,
+    "simulador": "AerSimulator",
+    "transpilacao": "optimization_level=1",
+    "seed_base": 20261109
+  },
+  "ideal": {
+    "distribuicoes": [
+      {
+        "00": 0.4999999999999998,
+        "01": 5.286997409534849e-34,
+        "10": 5.286997409534849e-34,
+        "11": 0.4999999999999998
+      }
+    ]
+  },
+  "reproduzido": {
+    "dist_media": [
+      {
+        "00": 0.4985595703125,
+        "11": 0.5014404296875
+      }
+    ],
+    "dist_ic95": [
+      {
+        "00": [
+          0.4985595703125,
+          0.0030781973912641395
+        ],
+        "11": [
+          0.5014404296875,
+          0.0030781973912641395
+        ]
+      }
+    ],
+    "counts_agregados": [
+      {
+        "11": 41078,
+        "00": 40842
+      }
+    ],
+    "leitura_agregada": "P(00) = 0.499 (ideal 0,500)",
+    "tvd_media": 0.00498046875,
+    "tvd_ic95": [
+      0.0029226528477526333,
+      0.007038284652247366
+    ]
+  },
+  "comparacao": {
+    "tvd_arquivo_simulado": 0.01171875,
+    "tvd_arquivo_real": 0.05664062499999978,
+    "tvd_reproduzido_vs_arquivo_simulado": 0.010278320312499978
+  },
+  "limites": "Simulação Aer; não é execução em hardware. A TVD mede diferença entre distribuições, não fidelidade de estado. O JSON real arquivado não foi reproduzido em hardware nesta rodada.",
+  "timestamp": "2026-11-09T00:49:34-0300"
+}

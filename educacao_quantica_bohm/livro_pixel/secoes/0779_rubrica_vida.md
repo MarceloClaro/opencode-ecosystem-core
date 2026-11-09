@@ -10,7 +10,7 @@
 
 <p>Aprender sozinho é uma habilidade, não um dom.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">评分标准</span> <em>píng fēn biāo zhǔn</em> <span class="tom">· tons 2-1-1-3 · leitura ping-fen-biau-djuen</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到评分标准。</span> <em>Wǒ zài shēng huó zhōng kàn dào píng fēn biāo zhǔn.</em> — Vejo “Rubrica” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “Rubrica não é nota automática; precisa de evidência e julgamento”. Limite: “Não há garantia de generalização para outros contextos” (conceito: Rubrica).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Rubrica.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

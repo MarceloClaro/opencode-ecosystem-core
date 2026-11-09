@@ -10,7 +10,7 @@
 
 <p>Quem pode ler o código que você envia para a nuvem?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子汇编</span> <em>liàng zǐ huì biān</em> <span class="tom">· tons 4-3-4-1 · leitura liang-dzi-ruei-bien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于量子汇编？</span> <em>Shéi shòu yì yú liàng zǐ huì biān?</em> — Quem se beneficia de “QASM 2.0”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência definição ou teste consolidado; o limite é “QASM não é um algoritmo; é uma notação de circuito”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Liste um grupo afetado por QASM 2.0 e uma mitigação, declarando esse limite.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -10,7 +10,7 @@
 
 <p>O mapeamento de qubits lógicos para físicos é parte do processo.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">转译</span> <em>zhuǎn yì</em> <span class="tom">· tons 3-4 · leitura djuan-i</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解转译。</span> <em>Shēn rù liǎo jiě zhuǎn yì.</em> — Aprofunde-se em “Transpilação”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: PRESKILL (2018) DOI 10.22331/q-2018-08-06-79. Fonte: QISKIT (2024) DOI 10.5281/zenodo.2573505.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Anote uma pergunta que a leitura não responde sobre Transpilação.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

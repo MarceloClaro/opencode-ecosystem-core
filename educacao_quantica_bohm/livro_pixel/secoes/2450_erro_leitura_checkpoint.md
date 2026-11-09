@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Um erro sistemático pode prejudicar um grupo específico?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">读取错误</span> <em>dú qǔ cuò wù</em> <span class="tom">· tons 2-3-4-4 · leitura du-tchyu-tsuo-u</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了读取错误。</span> <em>Wǒ xué huì le dú qǔ cuò wù.</em> — Eu aprendi “Erro de leitura”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau B (evidência experimental ou metodológica com limites). Frase: “A leitura de um qubit pode inverter o resultado com alguma probabilidade”; limite: “Não há garantia de generalização para outros contextos” (conceito: Erro de leitura).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Erro de leitura e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

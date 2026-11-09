@@ -12,7 +12,7 @@
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">整体性</span> <em>zhěng tǐ xìng</em> <span class="tom">· tons 3-3-4 · leitura djeng-ti-shing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像整体性。</span> <em>Zhè xiàng zhěng tǐ xìng.</em> — Isto se parece com “Totalidade”.</span></p>
 <p><strong>Onde a imagem não vale:</strong> Totalidade não significa harmonia; pode haver conflito e desordem.</p>
 <p>Desenhe a imagem e marque com um X o ponto em que ela falha.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “Liste partes de um sistema e mostre uma relação que se perde na lista” e o medido “A totalidade aparece na física, na ecologia e na pedagogia”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Totalidade e escreva um resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -12,7 +12,7 @@
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">去极化</span> <em>qù jí huà</em> <span class="tom">· tons 4-2-4 · leitura tchyu-dji-rua</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像去极化。</span> <em>Zhè xiàng qù jí huà.</em> — Isto se parece com “Depolarizing”.</span></p>
 <p><strong>Onde a imagem não vale:</strong> O teste é pequeno; não generaliza para outros dados ou modelos.</p>
 <p>Desenhe a imagem e marque com um X o ponto em que ela falha.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “O canal não é 'neutro'; ele reduz a informação útil” e o medido “A fonte discute o conceito e suas consequências” (conceito: Depolarizing).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Depolarizing e escreva um resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

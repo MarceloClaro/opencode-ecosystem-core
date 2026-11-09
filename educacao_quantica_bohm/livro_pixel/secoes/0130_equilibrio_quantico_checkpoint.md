@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Você consegue explicar o que é uma distribuição de equilíbrio?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子平衡</span> <em>liàng zǐ píng héng</em> <span class="tom">· tons 4-3-2-2 · leitura liang-dzi-ping-reng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了量子平衡。</span> <em>Wǒ xué huì le liàng zǐ píng héng.</em> — Eu aprendi “Equilíbrio quântico”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência resultado exploratório ou interpretativo. Frase: “A distribuição |ψ|² é preservada pela dinâmica de Bohm”; limite: “A hipótese explica por que a regra de Born funciona, mas não por que o universo começou assim”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Equilíbrio quântico e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

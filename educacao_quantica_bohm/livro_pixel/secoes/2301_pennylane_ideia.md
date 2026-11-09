@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> PennyLane integra com simuladores e vários provedores.</p>
 <p><strong>Pergunta de pesquisa:</strong> O que significa 'diferenciável'?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F031 ancora a proposição em <a href="https://doi.org/10.5281/zenodo.2573505">10.5281/zenodo.2573505</a>; grau B (evidência experimental ou metodológica com limites). Limite: “A diferenciação automática não substitui a interpretação física”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Formule uma consequência testável de “PennyLane é uma biblioteca de circuitos quânticos diferenciáveis” e indique qual observação a refutaria.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

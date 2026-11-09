@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> A regra de Born transforma amplitude em probabilidade.</p>
 <p><strong>Pergunta de pesquisa:</strong> Por que a amplitude pode ser negativa?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F003 ancora a proposição em <a href="https://doi.org/10.1002/j.1538-7305.1948.tb01338.x">10.1002/j.1538-7305.1948.tb01338.x</a>; grau A (definição ou teste consolidado). Limite: “A amplitude não é uma probabilidade; é preciso elevar ao quadrado”.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

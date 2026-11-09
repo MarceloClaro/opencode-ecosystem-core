@@ -11,7 +11,7 @@
 <p>Dois relógios que batem no mesmo ritmo ou fora de sincronia.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">相位</span> <em>xiàng wèi</em> <span class="tom">· tons 4-4 · leitura shiang-uei</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像相位。</span> <em>Zhè xiàng xiàng wèi.</em> — Isto se parece com “Fase”.</span></p>
 <p><strong>Limite formal:</strong> A fase não é um atraso no tempo real; é uma relação matemática.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “Compare H|0⟩ com Z(H|0⟩) e depois aplique H” e o medido “A fase relativa é o recurso que permite a interferência”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Fase e escreva o resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

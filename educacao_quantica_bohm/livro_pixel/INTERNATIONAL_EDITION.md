@@ -51,7 +51,7 @@ Short title for catalog: *From Bit to Whole*.
 > does not prove: hardware counts, calibration, fidelity, noise and the Bohmian
 > interpretation remain empirical or interpretive claims.
 >
-> The Portuguese edition has 3504 pages, 3000 lauds, 400 calculation notes, 100
+> The Portuguese edition has 3502 pages, 3000 lauds, 400 calculation notes, 100
 > evidence cards, 18 experiments, 9427 internal links and 54 tests. It is
 > released under CC BY-NC-SA 4.0; the code is MIT. The English edition is a
 > translation and peer-review project, not a promise of acceptance or adoption.
@@ -67,7 +67,7 @@ CIQuanta; Lean 4; reproducibility; Brazil.
 | Item | Why | Status |
 |---|---|---|
 | Professional translation | Portuguese prose is central; machine translation is not enough | to do |
-| Copyediting | 3504 pages require line editing and consistency | to do |
+| Copyediting | 3502 pages require line editing and consistency | to do |
 | Peer review | international reference requires external reviewers | to do |
 | DOI and ISBN | cataloging and citation | to do |
 | Print edition | 600–800 pages, light theme, 5 volumes or lean edition | to do |

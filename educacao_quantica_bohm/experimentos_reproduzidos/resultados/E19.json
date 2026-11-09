@@ -1,0 +1,261 @@
+{
+  "id": "E19",
+  "nome": "Desigualdade de Mermin (3 qubits)",
+  "descricao": "Estado GHZ de 3 qubits e quatro configurações X/Y. M = E_XXX − E_XYY − E_YXY − E_YYX; limite clássico 2; ideal 4.",
+  "protocolo": {
+    "sementes": 20,
+    "shots_por_semente": 4096,
+    "total_por_setting": 81920,
+    "simulador": "AerSimulator",
+    "seed_base": 20261109
+  },
+  "ideal": {
+    "M": 4.0,
+    "limite_classico": 2.0,
+    "E": {
+      "XXX": 1.0,
+      "XYY": -1.0,
+      "YXY": -1.0,
+      "YYX": -1.0
+    }
+  },
+  "medido": {
+    "por_setting": {
+      "XXX": {
+        "bases": [
+          "X",
+          "X",
+          "X"
+        ],
+        "E_medio": 1.0,
+        "E_erro_padrao": 0.0,
+        "E_ic95": [
+          1.0,
+          1.0
+        ],
+        "E_por_semente": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "counts_ultima_semente": {
+          "110": 998,
+          "000": 1094,
+          "101": 1025,
+          "011": 979
+        }
+      },
+      "XYY": {
+        "bases": [
+          "X",
+          "Y",
+          "Y"
+        ],
+        "E_medio": -1.0,
+        "E_erro_padrao": 0.0,
+        "E_ic95": [
+          -1.0,
+          -1.0
+        ],
+        "E_por_semente": [
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0
+        ],
+        "counts_ultima_semente": {
+          "100": 982,
+          "111": 985,
+          "010": 1076,
+          "001": 1053
+        }
+      },
+      "YXY": {
+        "bases": [
+          "Y",
+          "X",
+          "Y"
+        ],
+        "E_medio": -1.0,
+        "E_erro_padrao": 0.0,
+        "E_ic95": [
+          -1.0,
+          -1.0
+        ],
+        "E_por_semente": [
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0
+        ],
+        "counts_ultima_semente": {
+          "100": 982,
+          "111": 985,
+          "010": 1076,
+          "001": 1053
+        }
+      },
+      "YYX": {
+        "bases": [
+          "Y",
+          "Y",
+          "X"
+        ],
+        "E_medio": -1.0,
+        "E_erro_padrao": 0.0,
+        "E_ic95": [
+          -1.0,
+          -1.0
+        ],
+        "E_por_semente": [
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0
+        ],
+        "counts_ultima_semente": {
+          "100": 982,
+          "111": 985,
+          "010": 1076,
+          "001": 1053
+        }
+      }
+    },
+    "M": 4.0,
+    "M_por_semente": [
+      4.0,
+      4.0,
+      4.0,
+      4.0,
+      4.0,
+      4.0,
+      4.0,
+      4.0,
+      4.0,
+      4.0,
+      4.0,
+      4.0,
+      4.0,
+      4.0,
+      4.0,
+      4.0,
+      4.0,
+      4.0,
+      4.0,
+      4.0
+    ],
+    "erro_padrao": 0.0,
+    "ic95": [
+      4.0,
+      4.0
+    ],
+    "p_valor_M_maior_que_2": 0.0,
+    "p_valor_nota": "p < 1e-300; no caso ideal não há variação entre sementes",
+    "significancia_sigma": null
+  },
+  "ruido": [
+    {
+      "p": 0.0,
+      "M": 4.0,
+      "erro_padrao": 0.0,
+      "ic95": [
+        4.0,
+        4.0
+      ]
+    },
+    {
+      "p": 0.01,
+      "M": 3.700048828125,
+      "erro_padrao": 0.0038954181959945083,
+      "ic95": [
+        3.692413808460851,
+        3.707683847789149
+      ]
+    },
+    {
+      "p": 0.02,
+      "M": 3.435791015625,
+      "erro_padrao": 0.008477693121962249,
+      "ic95": [
+        3.419174737105954,
+        3.452407294144046
+      ]
+    },
+    {
+      "p": 0.05,
+      "M": 2.720166015625,
+      "erro_padrao": 0.010148330600466887,
+      "ic95": [
+        2.700275287648085,
+        2.7400567436019148
+      ]
+    }
+  ],
+  "limites": "Simulação Aer; não é hardware. O IC de M combina as variâncias dos quatro correlatores e usa t de Student com as sementes. A varredura de ruído usa um modelo depolarizante de porta, não calibração real de um backend.",
+  "timestamp": "2026-11-09T00:51:27-0300"
+}

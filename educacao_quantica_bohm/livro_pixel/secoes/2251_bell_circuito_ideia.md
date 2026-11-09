@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> O circuito de Bell é o 'olá, mundo' do emaranhamento.</p>
 <p><strong>Pergunta de pesquisa:</strong> O que é um estado maximamente emaranhado?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F026 ancora a proposição em <a href="https://doi.org/10.1017/CBO9780511976667">10.1017/CBO9780511976667</a>; grau A (definição ou teste consolidado). Limite: “A imagem clássica não explica a violação de Bell”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Formule uma consequência testável de “H no controle e CNOT produzem (|00⟩+|11⟩)/√2” e indique qual observação a refutaria.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

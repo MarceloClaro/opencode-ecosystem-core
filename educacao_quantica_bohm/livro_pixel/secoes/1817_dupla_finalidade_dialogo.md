@@ -10,7 +10,7 @@
 
 <p><strong>Pergunta da roda:</strong> Quem avalia o risco antes do uso?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">双重用途</span> <em>shuāng chóng yòng tú</em> <span class="tom">· tons 1-2-4-2 · leitura shuang-tchong-iong-tu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看双重用途？</span> <em>Nǐ zěn me kàn shuāng chóng yòng tú?</em> — O que você pensa de “Dupla finalidade”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Hipótese rival: “Não há garantia de generalização para outros contextos” (conceito: Dupla finalidade). Fonte: <a href="https://doi.org/10.1038/s42256-019-0088-2">10.1038/s42256-019-0088-2</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda a hipótese rival e peça a alguém para refutá-la em Dupla finalidade.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

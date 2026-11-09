@@ -10,7 +10,7 @@
 
 <p>Um treino curto pode dar 100% e não servir para o mundo real.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">变分分类器</span> <em>biàn fēn fēn lèi qì</em> <span class="tom">· tons 4-1-1-4-4 · leitura bien-fen-fen-lei-tchi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到变分分类器。</span> <em>Wǒ zài shēng huó zhōng kàn dào biàn fēn fēn lèi qì.</em> — Vejo “VQC XOR” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “Quatro pontos não testam generalização; o teto de 100% impede ver ganho”. Limite: “Não há garantia de generalização para outros contextos” (conceito: VQC XOR).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de VQC XOR.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

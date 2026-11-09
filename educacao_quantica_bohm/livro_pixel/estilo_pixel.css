@@ -398,7 +398,7 @@ h3 {
   break-before: page;
   border: 3px solid #2A3640;
   background: #0F1620;
-  padding: 4mm;
+  padding: 3.6mm;
   min-height: 190mm;
   box-sizing: border-box;
   position: relative;
@@ -441,8 +441,8 @@ h3 {
 
 .lauda .corpo {
   font-family: "Atkinson", "Noto Serif CJK SC", "DejaVu Sans", sans-serif;
-  font-size: 10.6pt;
-  line-height: 1.36;
+  font-size: 10.4pt;
+  line-height: 1.33;
   color: #E8F0FF;
 }
 
@@ -452,6 +452,39 @@ h3 {
   padding-left: 5mm;
 }
 .lauda .corpo li { margin: 0 0 0.8mm 0; }
+
+.lauda .dossie,
+.lauda .exercicio {
+  border-left: 3px solid #5EEAD4;
+  background: #0A1018;
+  padding: 1mm 1.3mm 1mm 1.3mm;
+  margin: 1.2mm 0 0.8mm 0;
+  font-family: "Atkinson", "Noto Serif CJK SC", "DejaVu Sans", sans-serif;
+  font-size: 9.2pt;
+  line-height: 1.24;
+  color: #DCE6F5;
+}
+
+.lauda .exercicio {
+  border-left-color: #FBBF24;
+  margin-top: 0.8mm;
+}
+
+.lauda .dossie p,
+.lauda .exercicio p { margin: 0; }
+
+.lauda .dossie .rotulo-dossie,
+.lauda .exercicio .rotulo-dossie {
+  display: block;
+  font-family: "Press Start", monospace;
+  font-size: 4.6pt;
+  line-height: 1.3;
+  color: #5EEAD4;
+  margin-bottom: 0.6mm;
+  letter-spacing: 0.02em;
+}
+
+.lauda .exercicio .rotulo-dossie { color: #FBBF24; }
 
 .lauda pre {
   font-family: "DejaVu Sans Mono", monospace;
@@ -468,11 +501,11 @@ h3 {
 .lauda .rigor {
   border: 2px solid #334155;
   background: #0A1018;
-  padding: 1.8mm;
-  margin-top: 2mm;
+  padding: 1.6mm;
+  margin-top: 1.8mm;
   font-family: "Atkinson", "Noto Serif CJK SC", "DejaVu Sans", sans-serif;
-  font-size: 9.2pt;
-  line-height: 1.3;
+  font-size: 9.0pt;
+  line-height: 1.25;
   color: #C9D4E3;
 }
 
@@ -498,11 +531,11 @@ h3 {
 .lauda .check {
   border: 2px solid #A3E635;
   background: #0D1A11;
-  padding: 1.6mm 1.8mm 1.8mm 1.8mm;
-  margin-top: 1.2mm;
+  padding: 1.4mm 1.6mm 1.5mm 1.6mm;
+  margin-top: 1mm;
   font-family: "Atkinson", "Noto Serif CJK SC", "DejaVu Sans", sans-serif;
-  font-size: 9.2pt;
-  line-height: 1.25;
+  font-size: 9.0pt;
+  line-height: 1.2;
   color: #E8F0FF;
 }
 
@@ -510,9 +543,9 @@ h3 {
 .lauda .check p { margin: 0 0 0.5mm 0; line-height: 1.35; }
 
 .lauda .rodape {
-  margin-top: 2.4mm;
+  margin-top: 1.8mm;
   border-top: 1px solid #2A3640;
-  padding-top: 1mm;
+  padding-top: 0.8mm;
   font-family: "Atkinson", "Noto Serif CJK SC", "DejaVu Sans", sans-serif;
   font-size: 7pt;
   color: #5C677A;
@@ -565,6 +598,33 @@ figure img {
   max-width: 100%;
   max-height: 26mm;
   border: 2px solid #2A3640;
+}
+
+/* Laudas de laboratório com figura: reduz a imagem para o checkpoint
+   caber na mesma página. */
+.lauda.lauda-fig .fig-pequena {
+  max-height: 16mm;
+}
+
+.lauda.lauda-fig figure {
+  margin: 0.6mm 0;
+}
+
+.lauda.lauda-fig figcaption {
+  font-size: 6.8pt;
+  line-height: 1.12;
+  margin-top: 0.4mm;
+}
+
+.lauda.lauda-fig .check {
+  font-size: 8.6pt;
+  line-height: 1.16;
+  padding: 1.1mm 1.4mm 1.2mm 1.4mm;
+}
+
+.lauda.lauda-fig .rodape {
+  margin-top: 1.2mm;
+  padding-top: 0.5mm;
 }
 
 figcaption {

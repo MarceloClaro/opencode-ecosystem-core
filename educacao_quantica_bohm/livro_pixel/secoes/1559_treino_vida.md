@@ -10,7 +10,7 @@
 
 <p>Um treino curto pode dar 100% e não servir para o mundo real.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">训练</span> <em>xùn liàn</em> <span class="tom">· tons 4-4 · leitura shyun-lien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到训练。</span> <em>Wǒ zài shēng huó zhōng kàn dào xùn liàn.</em> — Vejo “Treino” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “Treinar no simulador não é treinar no hardware; o ruído muda o jogo”. Limite: “Não há garantia de generalização para outros contextos” (conceito: Treino).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Treino.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -20,8 +20,7 @@
 <p class="mini">Sobreposição ≠ fidelidade de estado.</p>
 <p class="mini">Script: <code>scripts/experimentos_100.py</code> · E09 · Guoji08 · <a href="#oficina-e09">oficina E09</a> · <a href="#codigo-e09">código E09</a></p>
 </div>
-
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F003 diz que a evidência é definição ou teste consolidado; o número não prova “A amplitude não é uma probabilidade; é preciso elevar ao quadrado”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Explique com suas palavras por que o resultado não autoriza essa conclusão sobre Amplitude.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -10,7 +10,7 @@
 
 <p><strong>Pergunta da roda:</strong> Qual é o próximo passo?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">下一步</span> <em>xià yí bù</em> <span class="tom">· tons 4-2-4 · leitura shia-i-bu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看下一步？</span> <em>Nǐ zěn me kàn xià yí bù?</em> — O que você pensa de “Próximo passo”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Hipótese rival: “Não há garantia de generalização para outros contextos” (conceito: Próximo passo). Fonte: <a href="https://doi.org/10.1126/science.aac4716">10.1126/science.aac4716</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda a hipótese rival e peça a alguém para refutá-la em Próximo passo.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

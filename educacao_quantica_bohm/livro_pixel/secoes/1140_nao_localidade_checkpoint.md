@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Você consegue explicar por que não há signaling?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">非定域性</span> <em>fēi dìng yù xìng</em> <span class="tom">· tons 1-4-4-4 · leitura fei-ding-yu-shing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了非定域性。</span> <em>Wǒ xué huì le fēi dìng yù xìng.</em> — Eu aprendi “Não localidade”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau C (resultado exploratório ou interpretativo). Frase: “Na teoria de Bohm, a velocidade de uma partícula depende das outras”; limite: “A não localidade não permite enviar sinais controláveis”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Não localidade e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

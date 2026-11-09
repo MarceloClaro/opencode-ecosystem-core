@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Um recurso caro deve ser reservado a que tipo de pergunta?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">成本</span> <em>chéng běn</em> <span class="tom">· tons 2-3 · leitura tcheng-ben</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了成本。</span> <em>Wǒ xué huì le chéng běn.</em> — Eu aprendi “Custo”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau C (resultado exploratório ou interpretativo). Frase: “Custo inclui hardware, energia, tempo, fila e formação de pessoas”; limite: “Não há garantia de generalização para outros contextos” (conceito: Custo).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Custo e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

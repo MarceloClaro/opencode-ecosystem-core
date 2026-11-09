@@ -13,7 +13,7 @@
 <pre><code>import pennylane as qml; dev = qml.device('default.qubit', wires=2)</code></pre>
 <figure class="fig"><img class="fig-pequena" src="../livro/figuras_geradas/fig05_pennylane.svg" alt="Circuito de Bell desenhado por PennyLane."><figcaption>Circuito de Bell desenhado por PennyLane.</figcaption></figure>
 <p><strong>O que observar:</strong> confira a ordem dos qubits, o número de tiros e a diferença entre estado e amostra. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> P(1) = N₁/N; desvio = |P(1) − 1/2|.<br><strong>Conta:</strong> N₁=494, N=1024: 494/1024 = 0,4824; |0,4824−0,5| = 0,0176.<br><strong>Resultado:</strong> P(1)=48,24%, dentro de ≈1,1 erro padrão de 50%.<br><em>Limite:</em> Uma execução não prova que a moeda é justa; o intervalo de confiança é largo.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau B (evidência experimental ou metodológica com limites); o número não prova “A diferenciação automática não substitui a interpretação física”. Fonte do protocolo: <a href="https://doi.org/10.5281/zenodo.2573505">10.5281/zenodo.2573505</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Proponha uma replicação independente que poderia refutar “A diferenciação automática não substitui a interpretação física”.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

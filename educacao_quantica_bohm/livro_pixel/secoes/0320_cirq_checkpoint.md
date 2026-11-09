@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Você consegue ler o diagrama textual do Cirq?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子框架</span> <em>liàng zǐ kuàng jià</em> <span class="tom">· tons 4-3-4-4 · leitura liang-dzi-kuang-djia</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了量子框架。</span> <em>Wǒ xué huì le liàng zǐ kuàng jià.</em> — Eu aprendi “Cirq”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência evidência experimental ou metodológica com limites. Frase: “Cirq é uma biblioteca do Google baseada em linhas de qubits”; limite: “O diagrama textual é útil, mas não é uma figura de livro”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Cirq e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

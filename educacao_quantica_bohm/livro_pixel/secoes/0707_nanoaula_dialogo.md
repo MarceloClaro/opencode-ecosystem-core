@@ -10,7 +10,7 @@
 
 <p><strong>Pergunta da roda:</strong> O que cabe em 7 minutos?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">微课</span> <em>wēi kè</em> <span class="tom">· tons 1-4 · leitura uei-ke</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看微课？</span> <em>Nǐ zěn me kàn wēi kè?</em> — O que você pensa de “Nanoaula”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Outra explicação possível: “Não há garantia de generalização para outros contextos” (conceito: Nanoaula). Fonte: KRIJTENBURG-LEWERISSA (2017) DOI 10.1103/PhysRevPhysEducRes.13.010109.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda essa explicação por dois minutos e peça a alguém para refutá-la em Nanoaula.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

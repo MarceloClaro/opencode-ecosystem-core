@@ -11,7 +11,7 @@
 <p>Um bom projeto declara o que não prova.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">可视化</span> <em>kě shì huà</em> <span class="tom">· tons 3-4-4 · leitura ke-shi-rua</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解可视化。</span> <em>Shēn rù liǎo jiě kě shì huà.</em> — Aprofunde-se em “Visualização”.</span></p>
 <p><strong>O que ainda não sabemos:</strong> O projeto não esgota o problema; escolhe um recorte. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Um gráfico honesto declara eixo, unidade, fonte e n.<br><strong>Conta:</strong> Sem unidade, o número não significa nada.<br><strong>Resultado:</strong> Sem n, a incerteza fica invisível.<br><em>Limite:</em> Um gráfico pode enganar mesmo com dados corretos.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.1371/journal.pmed.0020124">10.1371/journal.pmed.0020124</a>. Fonte: <a href="https://doi.org/10.1126/science.aac4716">10.1126/science.aac4716</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Leia a fonte complementar e formule uma pergunta de pesquisa que ela deixa aberta sobre Visualização.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

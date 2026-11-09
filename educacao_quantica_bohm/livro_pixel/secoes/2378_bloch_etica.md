@@ -11,7 +11,7 @@
 <p>Uma visualização pode dar falsa sensação de controle?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">布洛赫球</span> <em>bù luò hè qiú</em> <span class="tom">· tons 4-4-4-2 · leitura bu-luo-re-tchiu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于布洛赫球？</span> <em>Shéi shòu yì yú bù luò hè qiú?</em> — Quem se beneficia de “Esfera de Bloch”?</span></p>
 <p><strong>Governança:</strong> quem audita, quem responde e como reparar?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau B (evidência experimental ou metodológica com limites); o limite é “A esfera não mostra emaranhamento de dois qubits”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Liste um grupo afetado por Esfera de Bloch e uma mitigação, declarando esse limite.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

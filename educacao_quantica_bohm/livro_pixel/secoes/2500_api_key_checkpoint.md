@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Quem audita o uso da chave e por quanto tempo?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">密钥</span> <em>mì yuè</em> <span class="tom">· tons 4-4 · leitura mi-yue</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了密钥。</span> <em>Wǒ xué huì le mì yuè.</em> — Eu aprendi “API key”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau B (evidência experimental ou metodológica com limites). Frase: “Uma API key é uma credencial secreta que autoriza o acesso à nuvem”; limite: “Não há garantia de generalização para outros contextos” (conceito: API key).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre API key e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

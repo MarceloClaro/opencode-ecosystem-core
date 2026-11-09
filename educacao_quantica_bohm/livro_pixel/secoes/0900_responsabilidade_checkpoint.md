@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Uma empresa pode terceirizar a responsabilidade para o usuário?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">责任</span> <em>zé rèn</em> <span class="tom">· tons 2-4 · leitura dze-jen</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了责任。</span> <em>Wǒ xué huì le zé rèn.</em> — Eu aprendi “Responsabilidade”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência resultado exploratório ou interpretativo. Frase: “Responsabilidade é responder por decisões e consequências”; limite: “Não há garantia de generalização para outros contextos” (conceito: Responsabilidade).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Responsabilidade e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

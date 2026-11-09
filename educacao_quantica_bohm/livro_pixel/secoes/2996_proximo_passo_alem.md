@@ -11,7 +11,7 @@
 <p>Um bom projeto declara o que não prova.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">下一步</span> <em>xià yí bù</em> <span class="tom">· tons 4-2-4 · leitura shia-i-bu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解下一步。</span> <em>Shēn rù liǎo jiě xià yí bù.</em> — Aprofunde-se em “Próximo passo”.</span></p>
 <p><strong>O que ainda não sabemos:</strong> O projeto não esgota o problema; escolhe um recorte. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Compromisso: 1 pergunta, 1 experimento, 1 data.<br><strong>Conta:</strong> Se a data é em 7 dias, o experimento precisa caber em 7 dias.<br><strong>Resultado:</strong> O próximo passo é pequeno, verificável e datado.<br><em>Limite:</em> O próximo passo é seu; o livro não decide por você.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.1371/journal.pmed.0020124">10.1371/journal.pmed.0020124</a>. Fonte: <a href="https://doi.org/10.1126/science.aac4716">10.1126/science.aac4716</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Leia a fonte complementar e formule uma pergunta de pesquisa que ela deixa aberta sobre Próximo passo.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -11,7 +11,7 @@
 <p>Uma multidão que mantém a mesma densidade ao se mover.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子平衡</span> <em>liàng zǐ píng héng</em> <span class="tom">· tons 4-3-2-2 · leitura liang-dzi-ping-reng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像量子平衡。</span> <em>Zhè xiàng liàng zǐ píng héng.</em> — Isto se parece com “Equilíbrio quântico”.</span></p>
 <p><strong>Limite formal:</strong> A hipótese explica por que a regra de Born funciona, mas não por que o universo começou assim.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “Compare uma distribuição inicial |ψ|² com a evolução” e o medido “A equivariância é a propriedade matemática central”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Equilíbrio quântico e escreva o resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

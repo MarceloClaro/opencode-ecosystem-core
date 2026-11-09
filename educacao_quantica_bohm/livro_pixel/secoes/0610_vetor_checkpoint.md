@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Quem pode visualizar um vetor de 50 qubits?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">向量</span> <em>xiàng liàng</em> <span class="tom">· tons 4-4 · leitura shiang-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了向量。</span> <em>Wǒ xué huì le xiàng liàng.</em> — Eu aprendi “Vetor”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência definição ou teste consolidado. Frase: “Um vetor de estado lista as amplitudes de cada configuração”; limite: “Não há garantia de generalização para outros contextos” (conceito: Vetor).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Vetor e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

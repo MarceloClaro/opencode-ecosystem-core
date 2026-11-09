@@ -12,7 +12,7 @@
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">变分分类器</span> <em>biàn fēn fēn lèi qì</em> <span class="tom">· tons 4-1-1-4-4 · leitura bien-fen-fen-lei-tchi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像变分分类器。</span> <em>Zhè xiàng biàn fēn fēn lèi qì.</em> — Isto se parece com “VQC XOR”.</span></p>
 <p><strong>Onde a imagem não vale:</strong> O teste é pequeno; não generaliza para outros dados ou modelos.</p>
 <p>Desenhe a imagem e marque com um X o ponto em que ela falha.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “Quatro pontos não testam generalização; o teto de 100% impede ver ganho” e o medido “A fonte discute o conceito e suas consequências” (conceito: VQC XOR).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de VQC XOR e escreva um resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

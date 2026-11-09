@@ -10,7 +10,7 @@
 
 <p><strong>O erro comum:</strong> Dizer que emaranhamento transmite mensagem instantânea.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">纠缠</span> <em>jiū chán</em> <span class="tom">· tons 1-2 · leitura djiu-tchan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">纠缠不是魔法。</span> <em>Jiū chán bú shì mó fǎ.</em> — “Emaranhamento” não é magia.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “Bell mostrou que variáveis ocultas locais não reproduzem as correlações” e admite “As luvas têm valores escondidos; o emaranhamento não é explicado por variáveis locais”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Emaranhamento.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

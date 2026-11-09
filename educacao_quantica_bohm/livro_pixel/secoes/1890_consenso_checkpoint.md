@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Quem tem poder para encerrar a conversa?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">共识</span> <em>gòng shí</em> <span class="tom">· tons 4-2 · leitura gong-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了共识。</span> <em>Wǒ xué huì le gòng shí.</em> — Eu aprendi “Consenso”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau C (resultado exploratório ou interpretativo). Frase: “Consenso é acordo suficiente para agir, não unanimidade de crenças”; limite: “Não há garantia de generalização para outros contextos” (conceito: Consenso).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Consenso e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

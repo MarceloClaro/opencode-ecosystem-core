@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Uma operação linear pode ser auditada?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">矩阵</span> <em>jǔ zhèn</em> <span class="tom">· tons 3-4 · leitura djyu-djen</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了矩阵。</span> <em>Wǒ xué huì le jǔ zhèn.</em> — Eu aprendi “Matriz”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau A (definição ou teste consolidado). Frase: “Uma matriz representa uma operação linear sobre o vetor de estado”; limite: “Não há garantia de generalização para outros contextos” (conceito: Matriz).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Matriz e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

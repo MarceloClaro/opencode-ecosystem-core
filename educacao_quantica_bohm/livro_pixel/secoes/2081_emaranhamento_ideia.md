@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> Bell mostrou que variáveis ocultas locais não reproduzem as correlações.</p>
 <p><strong>Pergunta de pesquisa:</strong> O que significa 'juntos'?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F009 ancora a proposição em <a href="https://doi.org/10.1103/PhysicsPhysiqueFizika.1.195">10.1103/PhysicsPhysiqueFizika.1.195</a>; grau A (definição ou teste consolidado). Limite: “As luvas têm valores escondidos; o emaranhamento não é explicado por variáveis locais”.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

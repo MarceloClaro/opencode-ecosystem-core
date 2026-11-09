@@ -10,7 +10,7 @@
 
 <p>Um bom projeto declara o que não prova.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">问题</span> <em>wèn tí</em> <span class="tom">· tons 4-2 · leitura uen-ti</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解问题。</span> <em>Shēn rù liǎo jiě wèn tí.</em> — Aprofunde-se em “Pergunta”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Operacionalizar: variável, população, comparação.<br><strong>Conta:</strong> Exemplo: P(1) do VQC em 4 entradas, comparado ao acaso (0,5).<br><strong>Resultado:</strong> A pergunta vira um teste com métrica e limite.<br><em>Limite:</em> Pergunta não é hipótese; a hipótese precisa ser falsificável.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.1371/journal.pmed.0020124">10.1371/journal.pmed.0020124</a>. Fonte: <a href="https://doi.org/10.1126/science.aac4716">10.1126/science.aac4716</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Anote uma pergunta que a leitura não responde sobre Pergunta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

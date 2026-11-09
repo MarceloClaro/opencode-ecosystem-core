@@ -20,8 +20,7 @@
 <p class="mini">Sobreposição ≠ fidelidade de estado.</p>
 <p class="mini">Script: <code>scripts/experimentos_100.py</code> · E03 · Guoji08 · <a href="#oficina-e03">oficina E03</a> · <a href="#codigo-e03">código E03</a></p>
 </div>
-
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F002 registra como medido “A esfera de Bloch representa um qubit; o interior não é acessível”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Repita a prática e explique por que o número não prova “A moeda tem lado definido; o qubit não tem valor escondido”.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

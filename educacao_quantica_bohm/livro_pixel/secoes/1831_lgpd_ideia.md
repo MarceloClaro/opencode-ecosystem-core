@@ -19,7 +19,7 @@
 </div>
 
 <p><strong>Pare e pense:</strong> Qual é a base legal deste tratamento?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F084 ancora a ideia em BRASIL (2018); grau C (resultado exploratório ou interpretativo).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Explique por que a frase sobre LGPD não autoriza mais do que a fonte permite.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

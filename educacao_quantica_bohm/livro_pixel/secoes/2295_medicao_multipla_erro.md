@@ -11,7 +11,7 @@
 <p><strong>O erro comum:</strong> Achar que uma única medição revela todas as amplitudes.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">多次测量</span> <em>duō cì cè liáng</em> <span class="tom">· tons 1-4-4-2 · leitura duo-tsi-tse-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">多次测量不是魔法。</span> <em>Duō cì cè liáng bú shì mó fǎ.</em> — “Medição múltipla” não é magia.</span></p>
 <p><strong>Correção formal:</strong> A amostragem tem erro estatístico que diminui com o número de tiros.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “A amostragem tem erro estatístico que diminui com o número de tiros” e admite “A distribuição não mostra o estado completo; mostra uma amostra”. O erro está em tratar esse registro como definição de Medição múltipla.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Medição múltipla.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

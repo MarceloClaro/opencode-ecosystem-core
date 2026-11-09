@@ -10,7 +10,7 @@
 
 <p>A equivariância é a propriedade matemática central.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子平衡</span> <em>liàng zǐ píng héng</em> <span class="tom">· tons 4-3-2-2 · leitura liang-dzi-ping-reng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解量子平衡。</span> <em>Shēn rù liǎo jiě liàng zǐ píng héng.</em> — Aprofunde-se em “Equilíbrio quântico”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: BELL (1964) DOI 10.1103/PhysicsPhysiqueFizika.1.195. Fonte: BOHM (1952) DOI 10.1103/PhysRev.85.166.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Anote uma pergunta que a leitura não responde sobre Equilíbrio quântico.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

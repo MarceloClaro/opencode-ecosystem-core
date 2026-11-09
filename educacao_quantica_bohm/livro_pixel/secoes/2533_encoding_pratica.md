@@ -20,8 +20,7 @@
 <p class="mini">Sobreposição ≠ fidelidade de estado.</p>
 <p class="mini">Script: <code>scripts/experimentos_100.py</code> · E09 · Guoji08 · <a href="#oficina-e09">oficina E09</a> · <a href="#codigo-e09">código E09</a></p>
 </div>
-
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F054 registra como medido “A fonte discute o conceito e suas consequências” (conceito: Encoding). Resultado bruto: Experimento: Codificação de amplitude — Ry(2π/3) prepara P(1)=0,75.; Simulado: P(1) = 0,735 (ideal 0,750); Backend: P(1) = 0,743 (ideal 0,750); Sobreposição: 99,2% · task: 90f9f88a.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Repita a prática com outra amostra ou seed e escreva o que a diferença não prova sobre Encoding.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

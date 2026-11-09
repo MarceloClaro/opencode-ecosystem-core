@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Você consegue localizar |0⟩, |1⟩ e H|0⟩ na esfera?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">布洛赫球</span> <em>bù luò hè qiú</em> <span class="tom">· tons 4-4-4-2 · leitura bu-luo-re-tchiu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了布洛赫球。</span> <em>Wǒ xué huì le bù luò hè qiú.</em> — Eu aprendi “Esfera de Bloch”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau B (evidência experimental ou metodológica com limites). Frase: “A esfera de Bloch representa o estado de um único qubit”; limite: “A esfera não mostra emaranhamento de dois qubits”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Esfera de Bloch e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

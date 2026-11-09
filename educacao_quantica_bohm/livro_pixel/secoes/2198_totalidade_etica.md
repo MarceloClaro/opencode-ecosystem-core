@@ -11,7 +11,7 @@
 <p>Quem se beneficia de uma narrativa de 'todo harmônico'?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">整体性</span> <em>zhěng tǐ xìng</em> <span class="tom">· tons 3-3-4 · leitura djeng-ti-shing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于整体性？</span> <em>Shéi shòu yì yú zhěng tǐ xìng?</em> — Quem se beneficia de “Totalidade”?</span></p>
 <p><strong>Governança:</strong> quem audita, quem responde e como reparar?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau C (resultado exploratório ou interpretativo); o limite é “Totalidade não significa harmonia; pode haver conflito e desordem”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Liste um grupo afetado por Totalidade e uma mitigação, declarando esse limite.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

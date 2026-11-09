@@ -21,7 +21,7 @@
 <p class="mini">Phase damping não muda a população Z; depolarização reduz a margem até o limiar.</p>
 
 <p><strong>Conclusão:</strong> phase damping não muda a população Z; depolarização reduz a margem. O tipo de ruído importa. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> H-X-H deveria devolver |0⟩; P(0)=N₀/N.<br><strong>Conta:</strong> N₀=1016, N=1024: 1016/1024 = 0,9922.<br><strong>Resultado:</strong> P(0)=99,22% (ideal 100%).<br><em>Limite:</em> O ruído de fase não é visível na população Z; ele aparece na coerência.</span></p>
-
+<p>A ficha F058 declara o limite “Não há garantia de generalização para outros contextos” (conceito: Phase damping); o número não prova essa conclusão sobre Phase damping.</p>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

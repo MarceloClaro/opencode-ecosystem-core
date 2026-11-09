@@ -11,7 +11,7 @@
 <p>A escolha da base pode revelar ou esconder informação?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">基</span> <em>jī</em> <span class="tom">· tons 1 · leitura dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于基？</span> <em>Shéi shòu yì yú jī?</em> — Quem se beneficia de “Base”?</span></p>
 <p><strong>Governança:</strong> quem audita, quem responde e como reparar?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau A (definição ou teste consolidado); o limite é “Bases diferentes não são 'ângulos' da mesma foto; são perguntas diferentes”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Liste um grupo afetado por Base e uma mitigação, declarando esse limite.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -10,7 +10,7 @@
 
 <p><strong>Pergunta da roda:</strong> O que é um momento?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子线路</span> <em>liàng zǐ xiàn lù</em> <span class="tom">· tons 4-3-4-4 · leitura liang-dzi-shien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看量子线路？</span> <em>Nǐ zěn me kàn liàng zǐ xiàn lù?</em> — O que você pensa de “Cirq Circuit”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Outra explicação possível: “Momentos não são tempo físico; são uma ordenação lógica”. Fonte: QISKIT (2024) DOI 10.5281/zenodo.2573505.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda essa explicação por dois minutos e peça a alguém para refutá-la em Cirq Circuit.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

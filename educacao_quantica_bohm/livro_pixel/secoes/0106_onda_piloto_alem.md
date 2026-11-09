@@ -10,7 +10,7 @@
 
 <p>Bohm publicou a teoria em 1952; ela reproduz as previsões não relativísticas.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">导波</span> <em>dǎo bō</em> <span class="tom">· tons 3-1 · leitura dau-bo</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解导波。</span> <em>Shēn rù liǎo jiě dǎo bō.</em> — Aprofunde-se em “Onda piloto”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: BELL (1964) DOI 10.1103/PhysicsPhysiqueFizika.1.195. Fonte: BOHM (1952) DOI 10.1103/PhysRev.85.166.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Anote uma pergunta que a leitura não responde sobre Onda piloto.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

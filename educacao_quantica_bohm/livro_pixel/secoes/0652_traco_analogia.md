@@ -12,7 +12,7 @@
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">迹</span> <em>jì</em> <span class="tom">· tons 4 · leitura dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像迹。</span> <em>Zhè xiàng jì.</em> — Isto se parece com “Traço”.</span></p>
 <p><strong>Onde a imagem não vale:</strong> A equação não explica por que o mundo segue a equação.</p>
 <p>Desenhe a imagem e marque com um X o ponto em que ela falha.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “O traço não é uma medida de pureza” e o medido “A fonte discute o conceito e suas consequências” (conceito: Traço).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Traço e escreva um resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

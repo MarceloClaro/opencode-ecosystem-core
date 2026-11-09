@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Você consegue comparar o Bell de Qiskit com o de Cirq?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子开发包</span> <em>liàng zǐ kāi fā bāo</em> <span class="tom">· tons 4-3-1-1-1 · leitura liang-dzi-kai-fa-bau</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了量子开发包。</span> <em>Wǒ xué huì le liàng zǐ kāi fā bāo.</em> — Eu aprendi “Qiskit”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência evidência experimental ou metodológica com limites. Frase: “Qiskit é a biblioteca da IBM para circuitos, estados e visualização”; limite: “O desenho do circuito não é o circuito físico; é uma representação”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Qiskit e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

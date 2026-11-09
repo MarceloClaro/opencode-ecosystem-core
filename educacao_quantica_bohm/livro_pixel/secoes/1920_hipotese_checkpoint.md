@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Uma hipótese conveniente pode ser protegida de testes?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">假设</span> <em>jiǎ shè</em> <span class="tom">· tons 3-4 · leitura djia-she</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了假设。</span> <em>Wǒ xué huì le jiǎ shè.</em> — Eu aprendi “Hipótese”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau B (evidência experimental ou metodológica com limites). Frase: “Uma hipótese é uma explicação testável, não uma opinião”; limite: “Não há garantia de generalização para outros contextos” (conceito: Hipótese).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Hipótese e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

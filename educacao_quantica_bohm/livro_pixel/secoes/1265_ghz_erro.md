@@ -10,7 +10,7 @@
 
 <p><strong>O erro comum:</strong> Achar que GHZ é só 'um Bell maior' sem mudança de escala.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">多体纠缠态</span> <em>duō tǐ jiū chán tài</em> <span class="tom">· tons 1-3-1-2-4 · leitura duo-ti-djiu-tchan-tai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">多体纠缠态不是魔法。</span> <em>Duō tǐ jiū chán tài bú shì mó fǎ.</em> — “GHZ” não é magia.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “O GHZ é usado em metrologia e testes de não localidade” e admite “Em hardware real, o GHZ perde coerência rapidamente com o número de qubits”. O erro está em tratar esse registro como definição de GHZ.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de GHZ.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

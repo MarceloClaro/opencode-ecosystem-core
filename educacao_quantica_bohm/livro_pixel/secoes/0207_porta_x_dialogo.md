@@ -10,7 +10,7 @@
 
 <p><strong>Pergunta da roda:</strong> O que significa inverter um estado?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">翻转门</span> <em>fān zhuǎn mén</em> <span class="tom">· tons 1-3-2 · leitura fan-djuan-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看翻转门？</span> <em>Nǐ zěn me kàn fān zhuǎn mén?</em> — O que você pensa de “Porta X”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Outra explicação possível: “X não cria superposição; ela apenas troca os estados de base”. Fonte: NIELSEN (2010) DOI 10.1017/CBO9780511976667.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda essa explicação por dois minutos e peça a alguém para refutá-la em Porta X.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

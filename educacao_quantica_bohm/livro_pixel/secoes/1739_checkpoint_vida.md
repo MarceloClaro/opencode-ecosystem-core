@@ -10,7 +10,7 @@
 
 <p>Aprender sozinho é uma habilidade, não um dom.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">检查点</span> <em>jiǎn chá diǎn</em> <span class="tom">· tons 3-2-3 · leitura djien-tcha-dien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到检查点。</span> <em>Wǒ zài shēng huó zhōng kàn dào jiǎn chá diǎn.</em> — Vejo “Checkpoint” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “Checkpoint não é prova; é diagnóstico de passagem”. Limite: “Não há garantia de generalização para outros contextos” (conceito: Checkpoint).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Checkpoint.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -10,7 +10,7 @@
 
 <p>Inversores aparecem em lógica, memória e criptografia.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">翻转门</span> <em>fān zhuǎn mén</em> <span class="tom">· tons 1-3-2 · leitura fan-djuan-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到翻转门。</span> <em>Wǒ zài shēng huó zhōng kàn dào fān zhuǎn mén.</em> — Vejo “Porta X” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “Aplique X em |0⟩ e em |1⟩ e desenhe as amplitudes”. Limite: “X não cria superposição; ela apenas troca os estados de base”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Porta X.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

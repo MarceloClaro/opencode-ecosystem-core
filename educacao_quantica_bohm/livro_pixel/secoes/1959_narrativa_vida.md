@@ -10,7 +10,7 @@
 
 <p>Todo projeto começa com uma pergunta e termina com um próximo passo.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">叙事</span> <em>xù shì</em> <span class="tom">· tons 4-4 · leitura shyu-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到叙事。</span> <em>Wǒ zài shēng huó zhōng kàn dào xù shì.</em> — Vejo “Narrativa” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “Toda narrativa seleciona e exclui; não é neutra”. Limite: “Não há garantia de generalização para outros contextos” (conceito: Narrativa).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Narrativa.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

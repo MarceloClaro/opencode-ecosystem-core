@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> Com 8 bits, há 256 combinações; uma letra ASCII cabe em 8 bits.</p>
 <p><strong>Pergunta de pesquisa:</strong> Quando uma diferença vira informação?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F001 ancora a proposição em <a href="https://doi.org/10.1002/j.1538-7305.1948.tb01338.x">10.1002/j.1538-7305.1948.tb01338.x</a>; grau A (definição ou teste consolidado). Limite: “A analogia não explica probabilidade; o bit clássico é exclusivo”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Formule uma consequência testável de “Um bit é a menor diferença que decidimos registrar: 0 ou 1” e indique qual observação a refutaria.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

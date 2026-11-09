@@ -8,15 +8,8 @@
 <h2 id="l-1954" class="titulo">Narrativa — laboratório</h2>
 <div class="corpo">
 
-<p><strong>Protocolo de bancada:</strong> escolha um exemplo de <em>narrativa</em>, preveja o resultado e teste com um colega.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">叙事</span> <em>xù shì</em> <span class="tom">· tons 4-4 · leitura shyu-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">观察叙事。</span> <em>Guān chá xù shì.</em> — Observe “Narrativa”.</span></p>
-<ol>
-<li>Escreva a previsão em uma frase.</li>
-<li>Execute ou observe o fenômeno.</li>
-<li>Registre a diferença e uma possível explicação.</li>
-</ol>
-<p><strong>O que observar:</strong> não basta acertar; é preciso explicar por que acertou.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau B (evidência experimental ou metodológica com limites); o número não prova “Não há garantia de generalização para outros contextos” (conceito: Narrativa).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Explique por que o resultado não autoriza essa conclusão sobre Narrativa.</p></div>
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
 <p><strong>Experimento:</strong> Interferência de três qubits — Uma caminhada curta distribui amplitude em 000/010/101/111.</p>

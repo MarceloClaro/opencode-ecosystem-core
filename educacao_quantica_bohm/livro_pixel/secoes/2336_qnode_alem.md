@@ -11,7 +11,7 @@
 <p>QNodes podem ser diferenciados e otimizados.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子节点</span> <em>liàng zǐ jié diǎn</em> <span class="tom">· tons 4-3-2-3 · leitura liang-dzi-djie-dien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解量子节点。</span> <em>Shēn rù liǎo jiě liàng zǐ jié diǎn.</em> — Aprofunde-se em “QNode”.</span></p>
 <p><strong>O que ainda não sabemos:</strong> O QNode não é o hardware; é a descrição executável. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Regra do deslocamento: ∂⟨Z⟩/∂θ = [⟨Z⟩(θ+π/2) − ⟨Z⟩(θ−π/2)]/2.<br><strong>Conta:</strong> Se ⟨Z⟩(θ)=cos θ, então a derivada é −sen θ.<br><strong>Resultado:</strong> A regra avalia o circuito em dois pontos e combina os resultados.<br><em>Limite:</em> Nem toda porta é diferenciável; a regra vale para geradores conhecidos.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: BERGHOLM (2018). Fonte: <a href="https://doi.org/10.5281/zenodo.2573505">10.5281/zenodo.2573505</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Leia a fonte complementar e formule uma pergunta de pesquisa que ela deixa aberta sobre QNode.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

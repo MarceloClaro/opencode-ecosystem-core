@@ -10,7 +10,7 @@
 
 <p><strong>Pergunta da roda:</strong> Como separar erro de leitura de erro de preparação?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">读取错误</span> <em>dú qǔ cuò wù</em> <span class="tom">· tons 2-3-4-4 · leitura du-tchyu-tsuo-u</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看读取错误？</span> <em>Nǐ zěn me kàn dú qǔ cuò wù?</em> — O que você pensa de “Erro de leitura”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Outra explicação possível: “Não há garantia de generalização para outros contextos” (conceito: Erro de leitura). Fonte: PRESKILL (2018) DOI 10.22331/q-2018-08-06-79.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda essa explicação por dois minutos e peça a alguém para refutá-la em Erro de leitura.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

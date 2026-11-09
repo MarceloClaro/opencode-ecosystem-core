@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Um ambiente monitorado pode ser tão invasivo quanto um espião?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">退相干</span> <em>tuì xiāng gān</em> <span class="tom">· tons 4-1-1 · leitura tuei-shiang-gan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了退相干。</span> <em>Wǒ xué huì le tuì xiāng gān.</em> — Eu aprendi “Decoerência”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau B (evidência experimental ou metodológica com limites). Frase: “Decoerência é a perda de informação quântica para o ambiente”; limite: “Não há garantia de generalização para outros contextos” (conceito: Decoerência).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Decoerência e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

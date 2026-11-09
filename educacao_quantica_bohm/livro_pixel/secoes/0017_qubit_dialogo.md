@@ -10,7 +10,7 @@
 
 <p><strong>Pergunta da roda:</strong> O que significa 'não decidido'?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子比特</span> <em>liàng zǐ bǐ tè</em> <span class="tom">· tons 4-3-3-4 · leitura liang-dzi-bi-te</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看量子比特？</span> <em>Nǐ zěn me kàn liàng zǐ bǐ tè?</em> — O que você pensa de “Qubit”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Outra explicação possível: “A moeda tem lado definido; o qubit não tem valor escondido”. Fonte: NIELSEN (2010) DOI 10.1017/CBO9780511976667.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda essa explicação por dois minutos e peça a alguém para refutá-la em Qubit.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

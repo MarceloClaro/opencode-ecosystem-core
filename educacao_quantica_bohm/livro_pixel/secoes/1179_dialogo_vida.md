@@ -10,7 +10,7 @@
 
 <p>Famílias, equipes e escolas usam rodas para decidir.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">对话</span> <em>duì huà</em> <span class="tom">· tons 4-4 · leitura duei-rua</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到对话。</span> <em>Wǒ zài shēng huó zhōng kàn dào duì huà.</em> — Vejo “Diálogo” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “Faça uma roda de 15 minutos com uma pergunta aberta”. Limite: “Diálogo não é terapia, assembleia ou busca obrigatória de consenso”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Diálogo.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

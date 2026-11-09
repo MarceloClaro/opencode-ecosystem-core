@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Você consegue desenhar um circuito com dois momentos?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子线路</span> <em>liàng zǐ xiàn lù</em> <span class="tom">· tons 4-3-4-4 · leitura liang-dzi-shien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了量子线路。</span> <em>Wǒ xué huì le liàng zǐ xiàn lù.</em> — Eu aprendi “Cirq Circuit”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau B (evidência experimental ou metodológica com limites). Frase: “Um Circuit do Cirq é uma sequência de momentos e operações”; limite: “Momentos não são tempo físico; são uma ordenação lógica”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Cirq Circuit e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

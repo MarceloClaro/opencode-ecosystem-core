@@ -10,7 +10,7 @@
 
 <p>A fidelidade proxy mede a população ideal, não a pureza do estado.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">有益噪声</span> <em>yǒu yì zào shēng</em> <span class="tom">· tons 3-4-4-1 · leitura iu-i-dzau-sheng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解有益噪声。</span> <em>Shēn rù liǎo jiě yǒu yì zào shēng.</em> — Aprofunde-se em “Ruído benéfico?”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Para detectar uma diferença de 5% com 95% de confiança, n ≈ 1,96²×0,25/0,05².<br><strong>Conta:</strong> n ≈ 3,8416×0,25/0,0025 = 384,16.<br><strong>Resultado:</strong> São necessários ≈ 385 pontos por grupo, não 4.<br><em>Limite:</em> O teste com 4 pontos não sustenta a hipótese de ruído benéfico.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.1038/s41467-018-07090-4">10.1038/s41467-018-07090-4</a>. Fonte: <a href="https://doi.org/10.1038/s42254-021-00348-9">10.1038/s42254-021-00348-9</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Anote uma pergunta que a leitura não responde sobre Ruído benéfico?.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

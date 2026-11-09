@@ -8,15 +8,8 @@
 <h2 id="l-1164" class="titulo">Holomovimento — laboratório</h2>
 <div class="corpo">
 
-<p><strong>Protocolo de bancada:</strong> escolha um exemplo de <em>holomovimento</em>, preveja o resultado e teste com um colega.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">整体运动</span> <em>zhěng tǐ yùn dòng</em> <span class="tom">· tons 3-3-4-4 · leitura djeng-ti-yun-dong</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">观察整体运动。</span> <em>Guān chá zhěng tǐ yùn dòng.</em> — Observe “Holomovimento”.</span></p>
-<ol>
-<li>Escreva a previsão em uma frase.</li>
-<li>Execute ou observe o fenômeno.</li>
-<li>Registre a diferença e uma possível explicação.</li>
-</ol>
-<p><strong>O que observar:</strong> não basta acertar; é preciso explicar por que acertou.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau C (resultado exploratório ou interpretativo); o número não prova “O termo é filosófico; não é uma equação operacional”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Explique por que o resultado não autoriza essa conclusão sobre Holomovimento.</p></div>
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
 <p><strong>Experimento:</strong> Interferência de três qubits — Uma caminhada curta distribui amplitude em 000/010/101/111.</p>

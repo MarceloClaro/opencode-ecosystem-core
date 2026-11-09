@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> X é a matriz [[0,1],[1,0]]; X² = I.</p>
 <p><strong>Pergunta de pesquisa:</strong> O que significa inverter um estado?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F021 ancora a proposição em <a href="https://doi.org/10.1017/CBO9780511976667">10.1017/CBO9780511976667</a>; grau A (definição ou teste consolidado). Limite: “X não cria superposição; ela apenas troca os estados de base”.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

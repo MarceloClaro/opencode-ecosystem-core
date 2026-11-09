@@ -10,7 +10,7 @@
 
 <p><strong>O erro comum:</strong> Medir sem registrar em um creg e perder os resultados.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子电路</span> <em>liàng zǐ diàn lù</em> <span class="tom">· tons 4-3-4-4 · leitura liang-dzi-dien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">量子电路不是魔法。</span> <em>Liàng zǐ diàn lù bú shì mó fǎ.</em> — “QuantumCircuit” não é magia.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “O Qiskit separa circuito lógico e circuito transpilado” e admite “O circuito lógico precisa ser transpilado para o hardware”. O erro está em tratar esse registro como definição de QuantumCircuit.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de QuantumCircuit.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

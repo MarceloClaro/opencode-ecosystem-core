@@ -10,7 +10,7 @@
 
 <p><strong>Pergunta da roda:</strong> O que é ortogonalidade?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">内积</span> <em>nèi jī</em> <span class="tom">· tons 4-1 · leitura nei-dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看内积？</span> <em>Nǐ zěn me kàn nèi jī?</em> — O que você pensa de “Produto interno”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Outra explicação possível: “Não há garantia de generalização para outros contextos” (conceito: Produto interno). Fonte: NIELSEN (2010) DOI 10.1017/CBO9780511976667.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda essa explicação por dois minutos e peça a alguém para refutá-la em Produto interno.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

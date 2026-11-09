@@ -10,7 +10,7 @@
 
 <p>JSON, partituras e receitas também são linguagens de instruções.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子汇编</span> <em>liàng zǐ huì biān</em> <span class="tom">· tons 4-3-4-1 · leitura liang-dzi-ruei-bien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到量子汇编。</span> <em>Wǒ zài shēng huó zhōng kàn dào liàng zǐ huì biān.</em> — Vejo “QASM 2.0” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “Escreva um Bell em QASM e cole no editor da nuvem”. Limite: “QASM não é um algoritmo; é uma notação de circuito”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de QASM 2.0.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

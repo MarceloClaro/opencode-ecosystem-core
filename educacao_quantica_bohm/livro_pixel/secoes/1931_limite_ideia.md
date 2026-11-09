@@ -19,7 +19,7 @@
 </div>
 
 <p><strong>Pare e pense:</strong> O que este resultado não prova?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F094 ancora a ideia em <a href="https://doi.org/10.1080/00031305.2016.1154108">10.1080/00031305.2016.1154108</a>; grau B (evidência experimental ou metodológica com limites).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Explique por que a frase sobre Limite não autoriza mais do que a fonte permite.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

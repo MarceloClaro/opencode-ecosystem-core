@@ -11,7 +11,7 @@
 <p>Dois pêndulos que parecem conversar à distância.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">非定域性</span> <em>fēi dìng yù xìng</em> <span class="tom">· tons 1-4-4-4 · leitura fei-ding-yu-shing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像非定域性。</span> <em>Zhè xiàng fēi dìng yù xìng.</em> — Isto se parece com “Não localidade”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> A não localidade não permite enviar sinais controláveis.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “Meça um par de Bell e mostre que a marginal de Bob não muda” e o medido “O teorema de Bell mostra que a não localidade é difícil de evitar”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Não localidade e escreva o resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

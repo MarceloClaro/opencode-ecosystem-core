@@ -11,7 +11,7 @@
 <p>Um bom projeto declara o que não prova.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">证据</span> <em>zhèng jù</em> <span class="tom">· tons 4-4 · leitura djeng-djyu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解证据。</span> <em>Shēn rù liǎo jiě zhèng jù.</em> — Aprofunde-se em “Evidência”.</span></p>
 <p><strong>O que ainda não sabemos:</strong> O projeto não esgota o problema; escolhe um recorte. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Evidência = contagem + total + incerteza + fonte.<br><strong>Conta:</strong> 484/1024 = 0,4727 ± 0,0156.<br><strong>Resultado:</strong> O número vem com um intervalo e uma origem.<br><em>Limite:</em> Evidência não é prova definitiva.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.1371/journal.pmed.0020124">10.1371/journal.pmed.0020124</a>. Fonte: <a href="https://doi.org/10.1080/00031305.2016.1154108">10.1080/00031305.2016.1154108</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Leia a fonte complementar e formule uma pergunta de pesquisa que ela deixa aberta sobre Evidência.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -10,7 +10,7 @@
 
 <p><strong>Pergunta da roda:</strong> Por que o resultado não mudou?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">相位阻尼</span> <em>xiàng wèi zǔ ní</em> <span class="tom">· tons 4-4-3-2 · leitura shiang-uei-dzu-ni</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看相位阻尼？</span> <em>Nǐ zěn me kàn xiàng wèi zǔ ní?</em> — O que você pensa de “Phase damping”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Hipótese rival: “Não há garantia de generalização para outros contextos” (conceito: Phase damping). Fonte: <a href="https://doi.org/10.1103/RevModPhys.75.715">10.1103/RevModPhys.75.715</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda a hipótese rival e peça a alguém para refutá-la em Phase damping.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

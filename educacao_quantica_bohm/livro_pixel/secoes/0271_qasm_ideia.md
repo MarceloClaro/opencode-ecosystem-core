@@ -19,7 +19,7 @@
 </div>
 
 <p><strong>Pense:</strong> Uma notação comum ajuda a comparar plataformas?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F028 liga a ideia à fonte QISKIT (2024) DOI 10.5281/zenodo.2573505; a evidência é definição ou teste consolidado.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Explique com suas palavras por que a frase sobre QASM 2.0 não autoriza dizer mais do que a fonte permite.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

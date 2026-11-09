@@ -20,8 +20,7 @@
 <p class="mini">Sobreposição ≠ fidelidade de estado.</p>
 <p class="mini">Script: <code>scripts/experimentos_100.py</code> · E14 · Guoji08 · <a href="#oficina-e14">oficina E14</a> · <a href="#codigo-e14">código E14</a></p>
 </div>
-
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F058 registra como medido “A fonte discute o conceito e suas consequências” (conceito: Phase damping). Resultado bruto: Experimento: Ruído de fase — H-X-H deveria devolver P(0)=1; o backend perde coerência.; Simulado: P(0) = 1,000 (ideal 1,000); Backend: P(0) = 0,992 (ideal 1,000); Sobreposição: 99,2% · task: aae54f46.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Repita a prática com outra amostra ou seed e escreva o que a diferença não prova sobre Phase damping.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

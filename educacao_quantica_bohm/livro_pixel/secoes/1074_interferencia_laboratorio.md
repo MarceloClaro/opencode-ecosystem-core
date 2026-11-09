@@ -8,15 +8,8 @@
 <h2 id="l-1074" class="titulo">Interferência — laboratório</h2>
 <div class="corpo">
 
-<p><strong>Protocolo de bancada:</strong> escolha um exemplo de <em>interferência</em>, preveja o resultado e teste com um colega.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">干涉</span> <em>gān shè</em> <span class="tom">· tons 1-4 · leitura gan-she</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">观察干涉。</span> <em>Guān chá gān shè.</em> — Observe “Interferência”.</span></p>
-<ol>
-<li>Escreva a previsão em uma frase.</li>
-<li>Execute ou observe o fenômeno.</li>
-<li>Registre a diferença e uma possível explicação.</li>
-</ol>
-<p><strong>O que observar:</strong> não basta acertar; é preciso explicar por que acertou.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau A (definição ou teste consolidado); o número não prova “A amplitude quântica não é uma vibração material”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Explique por que o resultado não autoriza essa conclusão sobre Interferência.</p></div>
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
 <p><strong>Experimento:</strong> Interferência H-Z-H — A fase Z inverte a interferência: o resultado vira |1⟩.</p>

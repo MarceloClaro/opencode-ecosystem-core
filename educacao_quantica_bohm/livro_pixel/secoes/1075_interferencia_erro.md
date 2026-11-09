@@ -10,7 +10,7 @@
 
 <p><strong>O erro comum:</strong> Achar que interferência é 'mágica' e não matemática.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">干涉</span> <em>gān shè</em> <span class="tom">· tons 1-4 · leitura gan-she</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">干涉不是魔法。</span> <em>Gān shè bú shì mó fǎ.</em> — “Interferência” não é magia.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “O experimento de dupla fenda é a demonstração clássica” e admite “A amplitude quântica não é uma vibração material”. O erro está em tratar esse registro como definição de Interferência.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Interferência.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

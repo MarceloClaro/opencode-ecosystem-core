@@ -10,7 +10,7 @@
 
 <p><strong>Pergunta da roda:</strong> O que significa uma matriz unitária?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">矩阵</span> <em>jǔ zhèn</em> <span class="tom">· tons 3-4 · leitura djyu-djen</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看矩阵？</span> <em>Nǐ zěn me kàn jǔ zhèn?</em> — O que você pensa de “Matriz”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Hipótese rival: “Não há garantia de generalização para outros contextos” (conceito: Matriz). Fonte: <a href="https://doi.org/10.1017/CBO9780511976667">10.1017/CBO9780511976667</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda a hipótese rival e peça a alguém para refutá-la em Matriz.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

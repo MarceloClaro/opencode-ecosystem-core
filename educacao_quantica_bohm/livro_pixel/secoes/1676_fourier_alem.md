@@ -10,7 +10,7 @@
 
 <p>O produto tensorial faz a dimensão crescer como 2^n.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">傅里叶</span> <em>fù lǐ yè</em> <span class="tom">· tons 4-3-4 · leitura fu-li-ie</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解傅里叶。</span> <em>Shēn rù liǎo jiě fù lǐ yè.</em> — Aprofunde-se em “Fourier”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> F = (1/√N)[e^{2πijk/N}].<br><strong>Conta:</strong> Para N=4, F|0⟩ = (|0⟩+|1⟩+|2⟩+|3⟩)/2.<br><strong>Resultado:</strong> As quatro probabilidades são 1/4.<br><em>Limite:</em> A QFT é unitária; não é a FFT clássica.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.1038/s42254-021-00348-9">10.1038/s42254-021-00348-9</a>. Fonte: <a href="https://doi.org/10.1017/CBO9780511976667">10.1017/CBO9780511976667</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Anote uma pergunta que a leitura não responde sobre Fourier.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

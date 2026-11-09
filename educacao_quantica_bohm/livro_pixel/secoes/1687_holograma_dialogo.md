@@ -10,7 +10,7 @@
 
 <p><strong>Pergunta da roda:</strong> O que é informação distribuída?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">全息图</span> <em>quán xī tú</em> <span class="tom">· tons 2-1-2 · leitura tchyuan-shi-tu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看全息图？</span> <em>Nǐ zěn me kàn quán xī tú?</em> — O que você pensa de “Holograma”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Hipótese rival: “Não há garantia de generalização para outros contextos” (conceito: Holograma). Fonte: <a href="https://doi.org/10.1017/CBO9780511976667">10.1017/CBO9780511976667</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda a hipótese rival e peça a alguém para refutá-la em Holograma.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

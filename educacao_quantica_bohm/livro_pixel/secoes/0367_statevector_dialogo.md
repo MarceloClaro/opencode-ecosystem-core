@@ -10,7 +10,7 @@
 
 <p><strong>Pergunta da roda:</strong> O que é uma amplitude complexa?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">态矢量</span> <em>tài shǐ liàng</em> <span class="tom">· tons 4-3-4 · leitura tai-shi-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看态矢量？</span> <em>Nǐ zěn me kàn tài shǐ liàng?</em> — O que você pensa de “Statevector”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Outra explicação possível: “O vetor cresce como 2^n; não é acessível por medição única”. Fonte: QISKIT (2024) DOI 10.5281/zenodo.2573505.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda essa explicação por dois minutos e peça a alguém para refutá-la em Statevector.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

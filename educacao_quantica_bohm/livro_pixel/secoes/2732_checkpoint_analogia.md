@@ -11,7 +11,7 @@
 <p>Um semáforo no meio de uma estrada.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">检查点</span> <em>jiǎn chá diǎn</em> <span class="tom">· tons 3-2-3 · leitura djien-tcha-dien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像检查点。</span> <em>Zhè xiàng jiǎn chá diǎn.</em> — Isto se parece com “Checkpoint”.</span></p>
 <p><strong>Limite formal:</strong> A técnica não funciona igual para todos os estudantes.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “Checkpoint não é prova; é diagnóstico de passagem” e o medido “A fonte discute o conceito e suas consequências” (conceito: Checkpoint).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Checkpoint e escreva o resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

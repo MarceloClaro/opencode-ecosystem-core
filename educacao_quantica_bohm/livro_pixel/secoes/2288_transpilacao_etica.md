@@ -11,7 +11,7 @@
 <p>Uma otimização pode esconder custos ou riscos?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">转译</span> <em>zhuǎn yì</em> <span class="tom">· tons 3-4 · leitura djuan-i</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于转译？</span> <em>Shéi shòu yì yú zhuǎn yì?</em> — Quem se beneficia de “Transpilação”?</span></p>
 <p><strong>Governança:</strong> quem audita, quem responde e como reparar?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau A (definição ou teste consolidado); o limite é “A tradução pode aumentar a profundidade e o ruído”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Liste um grupo afetado por Transpilação e uma mitigação, declarando esse limite.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

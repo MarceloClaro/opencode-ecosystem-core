@@ -11,7 +11,7 @@
 <p>Uma seta que aponta para uma direção no espaço de estados.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">向量</span> <em>xiàng liàng</em> <span class="tom">· tons 4-4 · leitura shiang-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像向量。</span> <em>Zhè xiàng xiàng liàng.</em> — Isto se parece com “Vetor”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> A equação não explica por que o mundo segue a equação.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “A seta é uma visualização; o vetor pode ter dimensão 2^n” e o medido “A fonte discute o conceito e suas consequências” (conceito: Vetor).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Vetor e escreva o resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

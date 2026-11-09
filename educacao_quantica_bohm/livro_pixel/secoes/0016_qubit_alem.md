@@ -10,7 +10,7 @@
 
 <p>A esfera de Bloch representa um qubit; o interior não é acessível.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子比特</span> <em>liàng zǐ bǐ tè</em> <span class="tom">· tons 4-3-3-4 · leitura liang-dzi-bi-te</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解量子比特。</span> <em>Shēn rù liǎo jiě liàng zǐ bǐ tè.</em> — Aprofunde-se em “Qubit”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: PRESKILL (2018) DOI 10.22331/q-2018-08-06-79. Fonte: NIELSEN (2010) DOI 10.1017/CBO9780511976667.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Anote uma pergunta que a leitura não responde sobre Qubit.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

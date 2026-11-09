@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Você consegue explicar H→H e H→Z→H?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">干涉</span> <em>gān shè</em> <span class="tom">· tons 1-4 · leitura gan-she</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了干涉。</span> <em>Wǒ xué huì le gān shè.</em> — Eu aprendi “Interferência”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência definição ou teste consolidado. Frase: “Interferência é a soma de amplitudes que reforça ou cancela probabilidades”; limite: “A amplitude quântica não é uma vibração material”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Interferência e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

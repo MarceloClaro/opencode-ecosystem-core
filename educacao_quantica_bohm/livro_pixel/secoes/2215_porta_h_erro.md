@@ -11,7 +11,7 @@
 <p><strong>O erro comum:</strong> Dizer que H 'escolhe aleatoriamente' antes da medição.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">哈达玛门</span> <em>hā dá mǎ mén</em> <span class="tom">· tons 1-2-3-2 · leitura ra-da-ma-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">哈达玛门不是魔法。</span> <em>Hā dá mǎ mén bú shì mó fǎ.</em> — “Porta H” não é magia.</span></p>
 <p><strong>Correção formal:</strong> H é a matriz (1/√2)[[1,1],[1,-1]]; H² = I.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “H é a matriz (1/√2)[[1,1],[1,-1]]; H² = I” e admite “H não é 'um pouco de 0 e um pouco de 1'; é uma transformação precisa”. O erro está em tratar esse registro como definição de Porta H.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Porta H.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> A suspensão é uma prática, não uma prova lógica.</p>
 <p><strong>Pergunta de pesquisa:</strong> O que eu estou supondo agora?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F019 ancora a proposição em <a href="https://doi.org/10.1103/PhysRev.85.166">10.1103/PhysRev.85.166</a>; grau C (resultado exploratório ou interpretativo). Limite: “Suspender não é abandonar; é ganhar distância para observar”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Formule uma consequência testável de “Suspender é colocar uma crença entre parênteses para examiná-la” e indique qual observação a refutaria.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

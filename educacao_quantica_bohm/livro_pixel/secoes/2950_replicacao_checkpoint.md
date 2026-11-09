@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Quem tem recursos para replicar um experimento caro?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">复现</span> <em>fù xiàn</em> <span class="tom">· tons 4-4 · leitura fu-shien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了复现。</span> <em>Wǒ xué huì le fù xiàn.</em> — Eu aprendi “Replicação”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau B (evidência experimental ou metodológica com limites). Frase: “Replicar é repetir um experimento com registros e condições explícitas”; limite: “Não há garantia de generalização para outros contextos” (conceito: Replicação).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Replicação e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

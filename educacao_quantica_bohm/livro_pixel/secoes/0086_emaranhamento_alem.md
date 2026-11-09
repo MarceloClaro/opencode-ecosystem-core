@@ -10,7 +10,7 @@
 
 <p>Bell mostrou que variáveis ocultas locais não reproduzem as correlações.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">纠缠</span> <em>jiū chán</em> <span class="tom">· tons 1-2 · leitura djiu-tchan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解纠缠。</span> <em>Shēn rù liǎo jiě jiū chán.</em> — Aprofunde-se em “Emaranhamento”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: ASPECT (1982) DOI 10.1103/PhysRevLett.49.1804. Fonte: BELL (1964) DOI 10.1103/PhysicsPhysiqueFizika.1.195.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Anote uma pergunta que a leitura não responde sobre Emaranhamento.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

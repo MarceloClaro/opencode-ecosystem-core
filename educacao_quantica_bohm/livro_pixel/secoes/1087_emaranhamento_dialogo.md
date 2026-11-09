@@ -10,7 +10,7 @@
 
 <p><strong>Pergunta da roda:</strong> O que significa 'juntos'?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">纠缠</span> <em>jiū chán</em> <span class="tom">· tons 1-2 · leitura djiu-tchan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看纠缠？</span> <em>Nǐ zěn me kàn jiū chán?</em> — O que você pensa de “Emaranhamento”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Hipótese rival: “As luvas têm valores escondidos; o emaranhamento não é explicado por variáveis locais”. Fonte: <a href="https://doi.org/10.1103/PhysicsPhysiqueFizika.1.195">10.1103/PhysicsPhysiqueFizika.1.195</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda a hipótese rival e peça a alguém para refutá-la em Emaranhamento.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

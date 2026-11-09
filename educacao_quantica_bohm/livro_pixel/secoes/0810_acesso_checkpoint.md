@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Uma política de acesso pode reproduzir desigualdades regionais?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">访问</span> <em>fǎng wèn</em> <span class="tom">· tons 3-4 · leitura fang-uen</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了访问。</span> <em>Wǒ xué huì le fǎng wèn.</em> — Eu aprendi “Acesso”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência resultado exploratório ou interpretativo. Frase: “Acesso é a possibilidade real de usar infraestrutura, dados e formação”; limite: “Não há garantia de generalização para outros contextos” (conceito: Acesso).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Acesso e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

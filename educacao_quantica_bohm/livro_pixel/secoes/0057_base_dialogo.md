@@ -10,7 +10,7 @@
 
 <p><strong>Pergunta da roda:</strong> O que muda quando mudamos a pergunta?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">基</span> <em>jī</em> <span class="tom">· tons 1 · leitura dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看基？</span> <em>Nǐ zěn me kàn jī?</em> — O que você pensa de “Base”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Outra explicação possível: “Bases diferentes não são 'ângulos' da mesma foto; são perguntas diferentes”. Fonte: SHANNON (1948) DOI 10.1002/j.1538-7305.1948.tb01338.x.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda essa explicação por dois minutos e peça a alguém para refutá-la em Base.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

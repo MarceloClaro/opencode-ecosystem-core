@@ -1,0 +1,140 @@
+@page {
+  size: A4;
+  margin: 3cm 2cm 2cm 3cm;
+  @top-right {
+    content: counter(page);
+    font-family: "Times New Roman", serif;
+    font-size: 10pt;
+    color: #333;
+  }
+}
+
+body {
+  font-family: "Times New Roman", "DejaVu Serif", serif;
+  font-size: 12pt;
+  line-height: 1.5;
+  text-align: justify;
+  color: #111;
+}
+
+h1 {
+  font-size: 14pt;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1.3;
+  margin: 0 0 0.4cm 0;
+}
+
+h2 {
+  font-size: 12pt;
+  font-weight: bold;
+  text-align: left;
+  margin: 0.8cm 0 0.3cm 0;
+  page-break-after: avoid;
+}
+
+h3 {
+  font-size: 12pt;
+  font-weight: bold;
+  font-style: italic;
+  text-align: left;
+  margin: 0.6cm 0 0.2cm 0;
+  page-break-after: avoid;
+}
+
+p {
+  margin: 0 0 0.3cm 0;
+  text-indent: 1.25cm;
+}
+
+p:first-of-type,
+h1 + p,
+h2 + p,
+h3 + p,
+blockquote p,
+li p {
+  text-indent: 0;
+}
+
+strong { font-weight: bold; }
+em { font-style: italic; }
+
+blockquote {
+  margin: 0.4cm 0 0.4cm 4cm;
+  font-size: 10pt;
+  line-height: 1.2;
+  text-align: justify;
+  text-indent: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.4cm 0 0.5cm 0;
+  font-size: 9pt;
+  line-height: 1.2;
+}
+
+th, td {
+  border: 0.5pt solid #555;
+  padding: 2pt 3pt;
+  vertical-align: top;
+  text-align: left;
+}
+
+th {
+  background: #eee;
+  font-weight: bold;
+}
+
+caption {
+  caption-side: top;
+  font-size: 9pt;
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 2pt;
+}
+
+code, pre {
+  font-family: "DejaVu Sans Mono", monospace;
+  font-size: 9pt;
+}
+
+pre {
+  white-space: pre-wrap;
+  background: #f5f5f5;
+  padding: 4pt;
+  border-left: 2pt solid #999;
+}
+
+ul, ol {
+  margin: 0.2cm 0 0.3cm 1.2cm;
+  text-align: justify;
+}
+
+li { margin-bottom: 0.1cm; }
+
+hr {
+  border: none;
+  border-top: 0.5pt solid #999;
+  margin: 0.6cm 0;
+}
+
+a { color: #111; text-decoration: none; }
+
+/* Referências: recuo pendente e espaço simples */
+.referencias p {
+  text-indent: 0;
+  text-align: left;
+  line-height: 1.0;
+  margin: 0 0 0.25cm 0;
+}
+
+/* Resumo e abstract em corpo menor e espaço simples */
+.resumo p,
+.abstract p {
+  font-size: 10pt;
+  line-height: 1.15;
+  text-indent: 0;
+  margin: 0 0 0.2cm 0;
+}

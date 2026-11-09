@@ -10,7 +10,7 @@
 
 <p>Quem participou da pergunta e quem ficou fora?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">作品集</span> <em>zuò pǐn jí</em> <span class="tom">· tons 4-3-2 · leitura dzuo-pin-dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于作品集？</span> <em>Shéi shòu yì yú zuò pǐn jí?</em> — Quem se beneficia de “Portfólio”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau B (evidência experimental ou metodológica com limites); o limite é “Não há garantia de generalização para outros contextos” (conceito: Portfólio).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Liste um grupo afetado por Portfólio e uma mitigação, declarando esse limite.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -7,7 +7,7 @@
 
 ## 1. Por que um pacote de revisão
 
-Um livro de 3504 páginas não deve ser avaliado por um leitor solitário. A
+Um livro de 3502 páginas não deve ser avaliado por um leitor solitário. A
 revisão por pares exige:
 
 - critérios explícitos;
@@ -152,7 +152,7 @@ corrigir, explicar por quê e registrar o limite.
 Prezado(a) [nome],
 
 Convido você a avaliar o manuscrito “Do Bit ao Todo — 3000 Laudas de Física Quântica”, de
-Marcelo Claro Laranjeira. O livro tem 3504 páginas, 3000 laudas, 100 fichas,
+Marcelo Claro Laranjeira. O livro tem 3502 páginas, 3000 laudas, 100 fichas,
 18 experimentos e verificação formal em Lean 4.
 
 Sua função é avaliar [dimensão] com base no formulário anexo. O prazo é de 30

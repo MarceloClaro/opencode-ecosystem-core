@@ -10,7 +10,7 @@
 
 <p>O produto tensorial faz a dimensão crescer como 2^n.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">全息图</span> <em>quán xī tú</em> <span class="tom">· tons 2-1-2 · leitura tchyuan-shi-tu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解全息图。</span> <em>Shēn rù liǎo jiě quán xī tú.</em> — Aprofunde-se em “Holograma”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: CEREZO (2021) DOI 10.1038/s42254-021-00348-9. Fonte: NIELSEN (2010) DOI 10.1017/CBO9780511976667.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Anote uma pergunta que a leitura não responde sobre Holograma.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

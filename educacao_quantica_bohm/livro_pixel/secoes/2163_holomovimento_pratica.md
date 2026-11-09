@@ -20,8 +20,7 @@
 <p class="mini">Sobreposição ≠ fidelidade de estado.</p>
 <p class="mini">Script: <code>scripts/experimentos_100.py</code> · E17 · Guoji08 · <a href="#oficina-e17">oficina E17</a> · <a href="#codigo-e17">código E17</a></p>
 </div>
-
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F017 registra como medido “Bohm usou a imagem para pensar processo em vez de coisas”. Resultado bruto: Experimento: Interferência de três qubits — Uma caminhada curta distribui amplitude em 000/010/101/111.; Simulado: P(000) = 0,258 (ideal 0,250); Backend: P(000) = 0,229 (ideal 0,250); Sobreposição: 90,8% · task: c92beefa.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Repita a prática com outra amostra ou seed e escreva o que a diferença não prova sobre Holomovimento.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

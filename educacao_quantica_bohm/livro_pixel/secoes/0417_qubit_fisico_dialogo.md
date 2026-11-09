@@ -10,7 +10,7 @@
 
 <p><strong>Pergunta da roda:</strong> O que é um qubit lógico?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">物理量子比特</span> <em>wù lǐ liàng zǐ bǐ tè</em> <span class="tom">· tons 4-3-4-3-3-4 · leitura u-li-liang-dzi-bi-te</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看物理量子比特？</span> <em>Nǐ zěn me kàn wù lǐ liàng zǐ bǐ tè?</em> — O que você pensa de “Qubit físico”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Outra explicação possível: “Não há garantia de generalização para outros contextos” (conceito: Qubit físico). Fonte: PRESKILL (2018) DOI 10.22331/q-2018-08-06-79.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda essa explicação por dois minutos e peça a alguém para refutá-la em Qubit físico.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

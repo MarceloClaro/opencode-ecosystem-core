@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> A totalidade aparece na física, na ecologia e na pedagogia.</p>
 <p><strong>Pergunta de pesquisa:</strong> O todo é maior que a soma?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F020 ancora a proposição em <a href="https://doi.org/10.1103/PhysRev.85.166">10.1103/PhysRev.85.166</a>; grau C (resultado exploratório ou interpretativo). Limite: “Totalidade não significa harmonia; pode haver conflito e desordem”.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

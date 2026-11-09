@@ -11,7 +11,7 @@
 <p><strong>O erro comum:</strong> Achar que a base é só uma convenção sem consequência física.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">基</span> <em>jī</em> <span class="tom">· tons 1 · leitura dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">基不是魔法。</span> <em>Jī bú shì mó fǎ.</em> — “Base” não é magia.</span></p>
 <p><strong>Correção formal:</strong> BB84 usa duas bases incompatíveis para detectar espionagem.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “BB84 usa duas bases incompatíveis para detectar espionagem” e admite “Bases diferentes não são 'ângulos' da mesma foto; são perguntas diferentes”. O erro está em tratar esse registro como definição de Base.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Base.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

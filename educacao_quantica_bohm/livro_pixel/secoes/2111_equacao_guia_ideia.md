@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> A equação de Bohm é uma releitura da equação de Schrödinger.</p>
 <p><strong>Pergunta de pesquisa:</strong> O que move uma partícula?</p>
-
+<p>A ficha F012 ancora a ideia em <a href="https://doi.org/10.1103/PhysRev.85.166">10.1103/PhysRev.85.166</a> e declara o limite “A equação é não local para várias partículas; não é uma força clássica”.</p>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

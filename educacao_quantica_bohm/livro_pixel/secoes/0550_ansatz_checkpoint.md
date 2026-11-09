@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Quem decide a arquitetura e com base em quê?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">拟设</span> <em>nǐ shè</em> <span class="tom">· tons 3-4 · leitura ni-she</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了拟设。</span> <em>Wǒ xué huì le nǐ shè.</em> — Eu aprendi “Ansatz”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência resultado exploratório ou interpretativo. Frase: “Ansatz é a arquitetura parametrizada do circuito”; limite: “Não há garantia de generalização para outros contextos” (conceito: Ansatz).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Ansatz e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -10,7 +10,7 @@
 
 <p><strong>O erro comum:</strong> Verifique que o traço de uma matriz densidade é 1.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">迹</span> <em>jì</em> <span class="tom">· tons 4 · leitura dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">迹不是魔法。</span> <em>Jì bú shì mó fǎ.</em> — “Traço” não é magia.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “A fonte discute o conceito e suas consequências” e admite “Não há garantia de generalização para outros contextos” (conceito: Traço). O erro está em tratar esse registro como definição de Traço.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Traço.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

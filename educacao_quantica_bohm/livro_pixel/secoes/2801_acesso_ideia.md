@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> A LGPD exige base legal, finalidade e transparência.</p>
 <p><strong>Pergunta de pesquisa:</strong> Quem fica de fora?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F081 ancora a proposição em BRASIL (2018); grau C (resultado exploratório ou interpretativo). Limite: “Não há garantia de generalização para outros contextos” (conceito: Acesso).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Formule uma consequência testável de “Acesso é a possibilidade real de usar infraestrutura, dados e formação” e indique qual observação a refutaria.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

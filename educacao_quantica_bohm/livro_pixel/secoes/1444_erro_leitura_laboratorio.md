@@ -8,15 +8,8 @@
 <h2 id="l-1444" class="titulo">Erro de leitura — laboratório</h2>
 <div class="corpo">
 
-<p><strong>Protocolo de bancada:</strong> escolha um exemplo de <em>erro de leitura</em>, preveja o resultado e teste com um colega.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">读取错误</span> <em>dú qǔ cuò wù</em> <span class="tom">· tons 2-3-4-4 · leitura du-tchyu-tsuo-u</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">观察读取错误。</span> <em>Guān chá dú qǔ cuò wù.</em> — Observe “Erro de leitura”.</span></p>
-<ol>
-<li>Escreva a previsão em uma frase.</li>
-<li>Execute ou observe o fenômeno.</li>
-<li>Registre a diferença e uma possível explicação.</li>
-</ol>
-<p><strong>O que observar:</strong> não basta acertar; é preciso explicar por que acertou.</p>
-
+<p>A ficha F045 declara o limite “Não há garantia de generalização para outros contextos” (conceito: Erro de leitura); o número não prova essa conclusão sobre Erro de leitura.</p>
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
 <p><strong>Experimento:</strong> Base |1⟩ e leitura — Prepara |1⟩ e mede; a discrepância é erro de leitura.</p>

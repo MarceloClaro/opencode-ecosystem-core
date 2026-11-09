@@ -11,7 +11,7 @@
 <p>A LGPD exige base legal, finalidade e transparência.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">隐私</span> <em>yǐn sī</em> <span class="tom">· tons 3-1 · leitura in-si</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解隐私。</span> <em>Shēn rù liǎo jiě yǐn sī.</em> — Aprofunde-se em “Privacidade”.</span></p>
 <p><strong>O que ainda não sabemos:</strong> Não há consenso moral automático; há trade-offs. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> k-anonimato: cada registro se confunde com k−1 outros.<br><strong>Conta:</strong> Se k=5, cada registro se esconde entre 5.<br><strong>Resultado:</strong> k maior reduz reidentificação, mas não a elimina.<br><em>Limite:</em> Anonimização não é garantia absoluta.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.1177/2053951716679679">10.1177/2053951716679679</a>. Fonte: BRASIL (2018).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Leia a fonte complementar e formule uma pergunta de pesquisa que ela deixa aberta sobre Privacidade.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> T1 e T2 são tempos de relaxação e coerência; não são a mesma coisa.</p>
 <p><strong>Pergunta de pesquisa:</strong> Quem é o dono dos dados enviados à nuvem?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F048 ancora a proposição em TIANGONG (2026); grau B (evidência experimental ou metodológica com limites). Limite: “Não há garantia de generalização para outros contextos” (conceito: Tiangong).</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

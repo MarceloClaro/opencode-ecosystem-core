@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Você consegue validar seu QASM no Qiskit localmente?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子汇编</span> <em>liàng zǐ huì biān</em> <span class="tom">· tons 4-3-4-1 · leitura liang-dzi-ruei-bien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了量子汇编。</span> <em>Wǒ xué huì le liàng zǐ huì biān.</em> — Eu aprendi “QASM 2.0”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau A (definição ou teste consolidado). Frase: “QASM 2.0 é uma linguagem textual para descrever circuitos quânticos”; limite: “QASM não é um algoritmo; é uma notação de circuito”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre QASM 2.0 e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

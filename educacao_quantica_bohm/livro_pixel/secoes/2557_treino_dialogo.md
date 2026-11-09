@@ -11,7 +11,7 @@
 <p><strong>Pergunta de pesquisa:</strong> O que significa 'aprender' aqui?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">训练</span> <em>xùn liàn</em> <span class="tom">· tons 4-4 · leitura shyun-lien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看训练？</span> <em>Nǐ zěn me kàn xùn liàn?</em> — O que você pensa de “Treino”?</span></p>
 <p><strong>Hipótese rival:</strong> O teste é pequeno; não generaliza para outros dados ou modelos.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Hipótese rival: “Não há garantia de generalização para outros contextos” (conceito: Treino). Fonte: <a href="https://doi.org/10.1038/s42254-021-00348-9">10.1038/s42254-021-00348-9</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda a hipótese rival e peça a alguém para refutá-la em Treino.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

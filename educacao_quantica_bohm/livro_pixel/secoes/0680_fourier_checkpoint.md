@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Uma compressão pode apagar detalhes importantes?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">傅里叶</span> <em>fù lǐ yè</em> <span class="tom">· tons 4-3-4 · leitura fu-li-ie</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了傅里叶。</span> <em>Wǒ xué huì le fù lǐ yè.</em> — Eu aprendi “Fourier”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência definição ou teste consolidado. Frase: “A transformada de Fourier decompõe um sinal em frequências”; limite: “Não há garantia de generalização para outros contextos” (conceito: Fourier).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Fourier e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

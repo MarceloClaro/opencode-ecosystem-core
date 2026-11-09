@@ -11,7 +11,7 @@
 <p>Duas salas que viram uma casa com muitos cômodos.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">张量积</span> <em>zhāng liàng jī</em> <span class="tom">· tons 1-4-1 · leitura djang-liang-dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像张量积。</span> <em>Zhè xiàng zhāng liàng jī.</em> — Isto se parece com “Produto tensorial”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> A equação não explica por que o mundo segue a equação.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “A dimensão cresce exponencialmente, não linearmente” e o medido “A fonte discute o conceito e suas consequências” (conceito: Produto tensorial).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Produto tensorial e escreva o resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

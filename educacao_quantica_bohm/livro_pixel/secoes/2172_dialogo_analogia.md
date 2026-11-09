@@ -11,7 +11,7 @@
 <p>Uma roda em que cada pessoa fala uma vez e escuta sem interromper.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">对话</span> <em>duì huà</em> <span class="tom">· tons 4-4 · leitura duei-rua</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像对话。</span> <em>Zhè xiàng duì huà.</em> — Isto se parece com “Diálogo”.</span></p>
 <p><strong>Limite formal:</strong> Diálogo não é terapia, assembleia ou busca obrigatória de consenso.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “Faça uma roda de 15 minutos com uma pergunta aberta” e o medido “Bohm distingue diálogo de debate em 'On Dialogue'”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Diálogo e escreva o resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

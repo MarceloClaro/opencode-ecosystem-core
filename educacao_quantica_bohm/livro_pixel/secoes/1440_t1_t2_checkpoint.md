@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Quem publica esses dados e com que frequência?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">弛豫与相干</span> <em>chí yù yǔ xiāng gān</em> <span class="tom">· tons 2-4-3-1-1 · leitura tchi-yu-yu-shiang-gan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了弛豫与相干。</span> <em>Wǒ xué huì le chí yù yǔ xiāng gān.</em> — Eu aprendi “T1 e T2”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau B (evidência experimental ou metodológica com limites). Frase: “T1 mede relaxação de energia; T2 mede perda de coerência de fase”; limite: “Não há garantia de generalização para outros contextos” (conceito: T1 e T2).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre T1 e T2 e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

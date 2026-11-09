@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> BB84 usa duas bases incompatíveis para detectar espionagem.</p>
 <p><strong>Pergunta de pesquisa:</strong> O que muda quando mudamos a pergunta?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F006 ancora a proposição em <a href="https://doi.org/10.1002/j.1538-7305.1948.tb01338.x">10.1002/j.1538-7305.1948.tb01338.x</a>; grau A (definição ou teste consolidado). Limite: “Bases diferentes não são 'ângulos' da mesma foto; são perguntas diferentes”.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

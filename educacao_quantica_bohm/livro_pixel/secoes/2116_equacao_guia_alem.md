@@ -11,7 +11,7 @@
 <p>A equação de Bohm é uma releitura da equação de Schrödinger.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">导波方程</span> <em>dǎo bō fāng chéng</em> <span class="tom">· tons 3-1-1-2 · leitura dau-bo-fang-tcheng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解导波方程。</span> <em>Shēn rù liǎo jiě dǎo bō fāng chéng.</em> — Aprofunde-se em “Equação do guia”.</span></p>
 <p><strong>O que ainda não sabemos:</strong> A equação é não local para várias partículas; não é uma força clássica. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> v = (ħ/m) Im(∇ψ/ψ).<br><strong>Conta:</strong> Para ψ = e^{ikx}: ∇ψ/ψ = ik; Im(ik) = k; v = ħk/m.<br><strong>Resultado:</strong> v = ħk/m, o mesmo resultado da onda plana.<br><em>Limite:</em> Para várias partículas, a velocidade de uma depende das posições das outras.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.1103/PhysicsPhysiqueFizika.1.195">10.1103/PhysicsPhysiqueFizika.1.195</a>. Fonte: <a href="https://doi.org/10.1103/PhysRev.85.166">10.1103/PhysRev.85.166</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Leia a fonte complementar e formule uma pergunta de pesquisa que ela deixa aberta sobre Equação do guia.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

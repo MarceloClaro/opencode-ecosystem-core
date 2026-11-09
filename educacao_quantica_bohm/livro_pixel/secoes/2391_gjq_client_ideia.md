@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> O SDK suporta Sampler, Estimator e Sessões; o servidor MCP gjq-runtime-mcp-server expõe sample_tool e estimate_tool para agentes.</p>
 <p><strong>Pergunta de pesquisa:</strong> Quem controla a chave controla o acesso?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F040 ancora a proposição em <a href="https://doi.org/10.5281/zenodo.2573505">10.5281/zenodo.2573505</a>; grau B (evidência experimental ou metodológica com limites). Limite: “O cliente não garante acesso; depende de conta, fila e backend”.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

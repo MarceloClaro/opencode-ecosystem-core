@@ -11,7 +11,7 @@
 <p><strong>O erro comum:</strong> Identifique dados pessoais em um circuito ou dataset.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">隐私</span> <em>yǐn sī</em> <span class="tom">· tons 3-1 · leitura in-si</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">隐私不是魔法。</span> <em>Yǐn sī bú shì mó fǎ.</em> — “Privacidade” não é magia.</span></p>
 <p><strong>Correção formal:</strong> A LGPD exige base legal, finalidade e transparência.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “A fonte discute o conceito e suas consequências” e admite “Não há garantia de generalização para outros contextos” (conceito: Privacidade). O erro está em tratar esse registro como definição de Privacidade.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Privacidade.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

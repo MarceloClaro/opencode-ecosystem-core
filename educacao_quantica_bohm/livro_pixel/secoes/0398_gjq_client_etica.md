@@ -10,7 +10,7 @@
 
 <p>Uma API key é uma credencial; deve ser rotacionada e protegida.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子客户端</span> <em>liàng zǐ kè hù duān</em> <span class="tom">· tons 4-3-4-4-1 · leitura liang-dzi-ke-ru-duan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于量子客户端？</span> <em>Shéi shòu yì yú liàng zǐ kè hù duān?</em> — Quem se beneficia de “gjq-client”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência evidência experimental ou metodológica com limites; o limite é “O cliente não garante acesso; depende de conta, fila e backend”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Liste um grupo afetado por gjq-client e uma mitigação, declarando esse limite.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

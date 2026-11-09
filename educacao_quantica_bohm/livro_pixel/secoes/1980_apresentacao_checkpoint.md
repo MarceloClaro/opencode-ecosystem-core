@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Quem não terá acesso à sua apresentação?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">展示</span> <em>zhǎn shì</em> <span class="tom">· tons 3-4 · leitura djan-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了展示。</span> <em>Wǒ xué huì le zhǎn shì.</em> — Eu aprendi “Apresentação”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau B (evidência experimental ou metodológica com limites). Frase: “Apresentar é tornar uma ideia compreensível para uma plateia específica”; limite: “Não há garantia de generalização para outros contextos” (conceito: Apresentação).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Apresentação e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

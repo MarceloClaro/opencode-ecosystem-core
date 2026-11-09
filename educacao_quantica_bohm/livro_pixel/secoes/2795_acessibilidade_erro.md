@@ -11,7 +11,7 @@
 <p><strong>O erro comum:</strong> Descreva uma figura para quem não a vê.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">无障碍</span> <em>wú zhàng ài</em> <span class="tom">· tons 2-4-4 · leitura u-djang-ai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">无障碍不是魔法。</span> <em>Wú zhàng ài bú shì mó fǎ.</em> — “Acessibilidade” não é magia.</span></p>
 <p><strong>Correção formal:</strong> A prática distribuída e a recuperação ativa têm apoio em pesquisa.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “A fonte discute o conceito e suas consequências” e admite “Não há garantia de generalização para outros contextos” (conceito: Acessibilidade). O erro está em tratar esse registro como definição de Acessibilidade.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Acessibilidade.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

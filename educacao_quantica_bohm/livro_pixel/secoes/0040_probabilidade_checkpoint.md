@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Você consegue distinguir probabilidade de frequência observada?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">概率</span> <em>gài lǜ</em> <span class="tom">· tons 4-4 · leitura gai-lyu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了概率。</span> <em>Wǒ xué huì le gài lǜ.</em> — Eu aprendi “Probabilidade”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência definição ou teste consolidado. Frase: “Probabilidade é a previsão de longo prazo para um resultado”; limite: “Uma amostra pequena flutua; a probabilidade não garante o próximo resultado”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Probabilidade e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

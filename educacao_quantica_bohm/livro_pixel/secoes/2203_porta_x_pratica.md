@@ -20,8 +20,7 @@
 <p class="mini">Sobreposição ≠ fidelidade de estado.</p>
 <p class="mini">Script: <code>scripts/experimentos_100.py</code> · E02 · Guoji08 · <a href="#oficina-e02">oficina E02</a> · <a href="#codigo-e02">código E02</a></p>
 </div>
-
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F021 registra como medido “X é a matriz [[0,1],[1,0]]; X² = I”. Resultado bruto: Experimento: Base |1⟩ e leitura — Prepara |1⟩ e mede; a discrepância é erro de leitura.; Simulado: P(1) = 1,000 (ideal 1,000); Backend: P(1) = 0,986 (ideal 1,000); Sobreposição: 98,6% · task: 6018c711.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Repita a prática com outra amostra ou seed e escreva o que a diferença não prova sobre Porta X.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

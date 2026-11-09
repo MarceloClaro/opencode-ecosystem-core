@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Você consegue prever X|0⟩ e X|1⟩?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">翻转门</span> <em>fān zhuǎn mén</em> <span class="tom">· tons 1-3-2 · leitura fan-djuan-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了翻转门。</span> <em>Wǒ xué huì le fān zhuǎn mén.</em> — Eu aprendi “Porta X”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência definição ou teste consolidado. Frase: “A porta X inverte 0 e 1, como um NOT quântico”; limite: “X não cria superposição; ela apenas troca os estados de base”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Porta X e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

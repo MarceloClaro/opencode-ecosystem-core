@@ -20,8 +20,7 @@
 <p class="mini">Sobreposição ≠ fidelidade de estado.</p>
 <p class="mini">Script: <code>scripts/experimentos_100.py</code> · E12 · Guoji08 · <a href="#oficina-e12">oficina E12</a> · <a href="#codigo-e12">código E12</a></p>
 </div>
-
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F070 diz que a evidência é definição ou teste consolidado; o número não prova “Não há garantia de generalização para outros contextos” (conceito: Fourier quântico).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Explique com suas palavras por que o resultado não autoriza essa conclusão sobre Fourier quântico.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -11,7 +11,7 @@
 <p><strong>Pergunta de pesquisa:</strong> O que é um estado puro?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">布洛赫球</span> <em>bù luò hè qiú</em> <span class="tom">· tons 4-4-4-2 · leitura bu-luo-re-tchiu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看布洛赫球？</span> <em>Nǐ zěn me kàn bù luò hè qiú?</em> — O que você pensa de “Esfera de Bloch”?</span></p>
 <p><strong>Hipótese rival:</strong> A esfera não mostra emaranhamento de dois qubits.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Hipótese rival: “A esfera não mostra emaranhamento de dois qubits”. Fonte: <a href="https://doi.org/10.5281/zenodo.2573505">10.5281/zenodo.2573505</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda a hipótese rival e peça a alguém para refutá-la em Esfera de Bloch.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

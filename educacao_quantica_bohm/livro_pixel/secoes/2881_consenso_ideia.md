@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> A LGPD exige base legal, finalidade e transparência.</p>
 <p><strong>Pergunta de pesquisa:</strong> O que estamos deixando de fora para concordar?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F089 ancora a proposição em <a href="https://doi.org/10.1126/science.aac4716">10.1126/science.aac4716</a>; grau C (resultado exploratório ou interpretativo). Limite: “Não há garantia de generalização para outros contextos” (conceito: Consenso).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Formule uma consequência testável de “Consenso é acordo suficiente para agir, não unanimidade de crenças” e indique qual observação a refutaria.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

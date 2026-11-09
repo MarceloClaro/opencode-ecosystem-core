@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Você consegue explicar o que a onda guia e o que ela não guia?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">导波</span> <em>dǎo bō</em> <span class="tom">· tons 3-1 · leitura dau-bo</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了导波。</span> <em>Wǒ xué huì le dǎo bō.</em> — Eu aprendi “Onda piloto”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência resultado exploratório ou interpretativo. Frase: “Na teoria de Bohm, a função de onda guia partículas com posição definida”; limite: “O rio é matemático e, para várias partículas, vive em muitas dimensões”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Onda piloto e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

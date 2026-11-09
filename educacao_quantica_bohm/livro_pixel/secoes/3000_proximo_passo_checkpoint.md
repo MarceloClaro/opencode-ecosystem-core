@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Quem pode me ajudar a dar esse passo?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">下一步</span> <em>xià yí bù</em> <span class="tom">· tons 4-2-4 · leitura shia-i-bu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了下一步。</span> <em>Wǒ xué huì le xià yí bù.</em> — Eu aprendi “Próximo passo”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau B (evidência experimental ou metodológica com limites). Frase: “Próximo passo é a menor ação concreta que reduz incerteza”; limite: “Não há garantia de generalização para outros contextos” (conceito: Próximo passo).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Próximo passo e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

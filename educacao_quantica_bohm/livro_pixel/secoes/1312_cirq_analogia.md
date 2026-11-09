@@ -11,7 +11,7 @@
 <p>Um caderno de partituras com qubits em linhas.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子框架</span> <em>liàng zǐ kuàng jià</em> <span class="tom">· tons 4-3-4-4 · leitura liang-dzi-kuang-djia</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像量子框架。</span> <em>Zhè xiàng liàng zǐ kuàng jià.</em> — Isto se parece com “Cirq”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> O diagrama textual é útil, mas não é uma figura de livro.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “Monte um Bell e rode 1000 tiros no simulador” e o medido “Cirq é usado em pesquisa com hardware supercondutor”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Cirq e escreva o resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

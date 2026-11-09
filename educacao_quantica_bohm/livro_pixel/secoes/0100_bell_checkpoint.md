@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Você consegue listar os quatro estados de Bell?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">贝尔态</span> <em>bèi ěr tài</em> <span class="tom">· tons 4-3-4 · leitura bei-er-tai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了贝尔态。</span> <em>Wǒ xué huì le bèi ěr tài.</em> — Eu aprendi “Estado de Bell”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência definição ou teste consolidado. Frase: “O estado de Bell é a forma mais simples de emaranhamento maximal”; limite: “A imagem das moedas sugere um mecanismo que a teoria não afirma”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Estado de Bell e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

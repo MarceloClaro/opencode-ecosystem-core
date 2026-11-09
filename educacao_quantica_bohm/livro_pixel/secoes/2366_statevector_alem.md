@@ -11,7 +11,7 @@
 <p>O estado é uma descrição matemática; a medição é uma amostra.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">态矢量</span> <em>tài shǐ liàng</em> <span class="tom">· tons 4-3-4 · leitura tai-shi-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解态矢量。</span> <em>Shēn rù liǎo jiě tài shǐ liàng.</em> — Aprofunde-se em “Statevector”.</span></p>
 <p><strong>O que ainda não sabemos:</strong> O vetor cresce como 2^n; não é acessível por medição única. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Dimensão do statevector = 2ⁿ.<br><strong>Conta:</strong> n=4 → 2⁴=16 amplitudes; cada amplitude é um número complexo.<br><strong>Resultado:</strong> 16 complexos ≈ 256 bytes em complex128.<br><em>Limite:</em> A simulação exata cresce exponencialmente; por isso existem simuladores de tensor network.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: BERGHOLM (2018). Fonte: <a href="https://doi.org/10.5281/zenodo.2573505">10.5281/zenodo.2573505</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Leia a fonte complementar e formule uma pergunta de pesquisa que ela deixa aberta sobre Statevector.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

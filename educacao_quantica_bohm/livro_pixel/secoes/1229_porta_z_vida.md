@@ -10,7 +10,7 @@
 
 <p>Cancelamento de ruído e óptica usam fases.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">相位门</span> <em>xiàng wèi mén</em> <span class="tom">· tons 4-4-2 · leitura shiang-uei-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到相位门。</span> <em>Wǒ zài shēng huó zhōng kàn dào xiàng wèi mén.</em> — Vejo “Porta Z” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “Compare Z(H|0⟩) com H|0⟩ e depois aplique H”. Limite: “Z não muda a probabilidade; ela muda o que acontece depois”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Porta Z.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -10,7 +10,7 @@
 
 <p>Pares correlacionados aparecem em sensores e comunicações.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">贝尔电路</span> <em>bèi ěr diàn lù</em> <span class="tom">· tons 4-3-4-4 · leitura bei-er-dien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到贝尔电路。</span> <em>Wǒ zài shēng huó zhōng kàn dào bèi ěr diàn lù.</em> — Vejo “Circuito de Bell” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “Monte o circuito e verifique as probabilidades 00/11”. Limite: “A imagem clássica não explica a violação de Bell”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Circuito de Bell.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

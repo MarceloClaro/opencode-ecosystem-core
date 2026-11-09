@@ -10,7 +10,7 @@
 
 <p>Um qubit é a unidade da computação quântica, como o bit é a do clássico.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子比特</span> <em>liàng zǐ bǐ tè</em> <span class="tom">· tons 4-3-3-4 · leitura liang-dzi-bi-te</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到量子比特。</span> <em>Wǒ zài shēng huó zhōng kàn dào liàng zǐ bǐ tè.</em> — Vejo “Qubit” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “Desenhe duas barras de amplitude e calcule os quadrados”. Limite: “A moeda tem lado definido; o qubit não tem valor escondido”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Qubit.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -11,7 +11,7 @@
 <p>O interior da esfera não é acessível; a superfície é o estado puro.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">布洛赫球</span> <em>bù luò hè qiú</em> <span class="tom">· tons 4-4-4-2 · leitura bu-luo-re-tchiu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解布洛赫球。</span> <em>Shēn rù liǎo jiě bù luò hè qiú.</em> — Aprofunde-se em “Esfera de Bloch”.</span></p>
 <p><strong>O que ainda não sabemos:</strong> A esfera não mostra emaranhamento de dois qubits. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> x = 2P(0)_X − 1; z = 2P(0)_Z − 1; |r| = √(x²+y²+z²).<br><strong>Conta:</strong> Para H|0⟩: P(0)_X=1 → x=1; P(0)_Z=0,5 → z=0.<br><strong>Resultado:</strong> |r| = √(1²+0²+0²) = 1.<br><em>Limite:</em> A esfera de Bloch só representa um qubit; para dois ou mais, use matriz densidade.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: BERGHOLM (2018). Fonte: <a href="https://doi.org/10.5281/zenodo.2573505">10.5281/zenodo.2573505</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Leia a fonte complementar e formule uma pergunta de pesquisa que ela deixa aberta sobre Esfera de Bloch.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

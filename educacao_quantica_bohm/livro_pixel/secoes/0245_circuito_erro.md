@@ -10,7 +10,7 @@
 
 <p><strong>O erro comum:</strong> Achar que a ordem das portas não altera o resultado.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">电路</span> <em>diàn lù</em> <span class="tom">· tons 4-4 · leitura dien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">电路不是魔法。</span> <em>Diàn lù bú shì mó fǎ.</em> — “Circuito” não é magia.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “A profundidade do circuito mede o número de camadas” e admite “A ordem importa; matrizes não comutam em geral”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Circuito.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

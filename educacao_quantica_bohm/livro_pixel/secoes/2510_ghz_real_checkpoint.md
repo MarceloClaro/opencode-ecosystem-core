@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Quem deve saber que o resultado tem 21% de erro?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">实验多体态</span> <em>shí yàn duō tǐ tài</em> <span class="tom">· tons 2-4-1-3-4 · leitura shi-ien-duo-ti-tai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了实验多体态。</span> <em>Wǒ xué huì le shí yàn duō tǐ tài.</em> — Eu aprendi “GHZ real”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau B (evidência experimental ou metodológica com limites). Frase: “O GHZ de 4 qubits no Guoji08 mostrou 78,8% de fidelidade proxy”; limite: “Não há garantia de generalização para outros contextos” (conceito: GHZ real).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre GHZ real e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

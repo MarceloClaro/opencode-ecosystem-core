@@ -19,7 +19,7 @@
 </div>
 
 <p><strong>Pense:</strong> O que é ortogonalidade?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F063 liga a ideia à fonte NIELSEN (2010) DOI 10.1017/CBO9780511976667; a evidência é definição ou teste consolidado.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Explique com suas palavras por que a frase sobre Produto interno não autoriza dizer mais do que a fonte permite.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -10,7 +10,7 @@
 
 <p>Contas de luz, privacidade e emprego são afetados por tecnologia.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">成本</span> <em>chéng běn</em> <span class="tom">· tons 2-3 · leitura tcheng-ben</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到成本。</span> <em>Wǒ zài shēng huó zhōng kàn dào chéng běn.</em> — Vejo “Custo” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “O custo por job não é o custo total do projeto”. Limite: “Não há garantia de generalização para outros contextos” (conceito: Custo).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Custo.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

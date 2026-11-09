@@ -11,7 +11,7 @@
 <p><strong>O erro comum:</strong> Aplique os quatro filtros a uma manchete.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">虚假信息</span> <em>xū jiǎ xìn xī</em> <span class="tom">· tons 1-3-4-1 · leitura shyu-djia-shin-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">虚假信息不是魔法。</span> <em>Xū jiǎ xìn xī bú shì mó fǎ.</em> — “Desinformação” não é magia.</span></p>
 <p><strong>Correção formal:</strong> A LGPD exige base legal, finalidade e transparência.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “A fonte discute o conceito e suas consequências” e admite “Não há garantia de generalização para outros contextos” (conceito: Desinformação). O erro está em tratar esse registro como definição de Desinformação.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Desinformação.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

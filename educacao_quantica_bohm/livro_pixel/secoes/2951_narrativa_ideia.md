@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> Um bom projeto declara o que não prova.</p>
 <p><strong>Pergunta de pesquisa:</strong> Que história estou contando sem perceber?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F096 ancora a proposição em <a href="https://doi.org/10.1126/science.aac4716">10.1126/science.aac4716</a>; grau B (evidência experimental ou metodológica com limites). Limite: “Não há garantia de generalização para outros contextos” (conceito: Narrativa).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Formule uma consequência testável de “Narrativa organiza fatos em uma sequência com sentido” e indique qual observação a refutaria.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

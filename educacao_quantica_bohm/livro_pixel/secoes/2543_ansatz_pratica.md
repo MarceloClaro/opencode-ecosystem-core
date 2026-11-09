@@ -20,8 +20,7 @@
 <p class="mini">Sobreposição ≠ fidelidade de estado.</p>
 <p class="mini">Script: <code>scripts/experimentos_100.py</code> · E11 · Guoji08 · <a href="#oficina-e11">oficina E11</a> · <a href="#codigo-e11">código E11</a></p>
 </div>
-
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F055 registra como medido “A fonte discute o conceito e suas consequências” (conceito: Ansatz). Resultado bruto: Experimento: Interferência de dois qubits — H, CZ e H concentram a distribuição em 00/11.; Simulado: P(00) = 0,488 (ideal 0,500); Backend: P(00) = 0,474 (ideal 0,500); Sobreposição: 94,3% · task: a9be9213.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Repita a prática com outra amostra ou seed e escreva o que a diferença não prova sobre Ansatz.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

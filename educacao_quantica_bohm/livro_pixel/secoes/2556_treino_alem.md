@@ -11,7 +11,7 @@
 <p>A fidelidade proxy mede a população ideal, não a pureza do estado.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">训练</span> <em>xùn liàn</em> <span class="tom">· tons 4-4 · leitura shyun-lien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解训练。</span> <em>Shēn rù liǎo jiě xùn liàn.</em> — Aprofunde-se em “Treino”.</span></p>
 <p><strong>O que ainda não sabemos:</strong> O teste é pequeno; não generaliza para outros dados ou modelos. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> COBYLA com 120 iterações e 5 seeds = 600 avaliações.<br><strong>Conta:</strong> Cada avaliação calcula P(1) para 4 entradas de treino.<br><strong>Resultado:</strong> O custo cresce com iterações × seeds × pontos.<br><em>Limite:</em> Otimização é estocástica; uma seed não é uma prova.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.1038/s41586-019-0980-2">10.1038/s41586-019-0980-2</a>. Fonte: <a href="https://doi.org/10.1038/s42254-021-00348-9">10.1038/s42254-021-00348-9</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Leia a fonte complementar e formule uma pergunta de pesquisa que ela deixa aberta sobre Treino.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

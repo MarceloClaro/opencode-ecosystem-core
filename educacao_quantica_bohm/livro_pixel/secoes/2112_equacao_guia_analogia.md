@@ -11,7 +11,7 @@
 <p>Um ponteiro que segue a inclinação de um mapa.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">导波方程</span> <em>dǎo bō fāng chéng</em> <span class="tom">· tons 3-1-1-2 · leitura dau-bo-fang-tcheng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像导波方程。</span> <em>Zhè xiàng dǎo bō fāng chéng.</em> — Isto se parece com “Equação do guia”.</span></p>
 <p><strong>Limite formal:</strong> A equação é não local para várias partículas; não é uma força clássica.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “Calcule a direção do movimento a partir de uma fase que muda” e o medido “A equação de Bohm é uma releitura da equação de Schrödinger”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Equação do guia e escreva o resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

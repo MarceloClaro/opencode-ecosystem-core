@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Você consegue explicar por que a fase importa para a trajetória?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">导波方程</span> <em>dǎo bō fāng chéng</em> <span class="tom">· tons 3-1-1-2 · leitura dau-bo-fang-tcheng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了导波方程。</span> <em>Wǒ xué huì le dǎo bō fāng chéng.</em> — Eu aprendi “Equação do guia”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência resultado exploratório ou interpretativo. Frase: “A velocidade da partícula depende do gradiente da fase da função de onda”; limite: “A equação é não local para várias partículas; não é uma força clássica”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Equação do guia e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

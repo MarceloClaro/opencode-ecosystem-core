@@ -20,8 +20,7 @@
 <p class="mini">Sobreposição ≠ fidelidade de estado.</p>
 <p class="mini">Script: <code>scripts/experimentos_100.py</code> · E13 · Guoji08 · <a href="#oficina-e13">oficina E13</a> · <a href="#codigo-e13">código E13</a></p>
 </div>
-
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F064 registra como medido “A fonte discute o conceito e suas consequências” (conceito: Produto tensorial). Resultado bruto: Experimento: Produto tensorial |01⟩ — X no qubit 1 prepara |01⟩.; Simulado: P(01) = 1,000 (ideal 1,000); Backend: P(01) = 0,957 (ideal 1,000); Sobreposição: 95,7% · task: b29350bd.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Repita a prática com outra amostra ou seed e escreva o que a diferença não prova sobre Produto tensorial.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

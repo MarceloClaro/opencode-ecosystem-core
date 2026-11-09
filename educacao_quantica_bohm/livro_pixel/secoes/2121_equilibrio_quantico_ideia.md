@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> A equivariância é a propriedade matemática central.</p>
 <p><strong>Pergunta de pesquisa:</strong> Por que as probabilidades batem?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F013 ancora a proposição em <a href="https://doi.org/10.1103/PhysRev.85.166">10.1103/PhysRev.85.166</a>; grau C (resultado exploratório ou interpretativo). Limite: “A hipótese explica por que a regra de Born funciona, mas não por que o universo começou assim”.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

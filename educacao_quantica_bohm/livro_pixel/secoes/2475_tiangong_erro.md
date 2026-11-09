@@ -11,7 +11,7 @@
 <p><strong>O erro comum:</strong> Liste os backends e identifique os de hardware real.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">天宫</span> <em>tiān gōng</em> <span class="tom">· tons 1-1 · leitura tien-gong</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">天宫不是魔法。</span> <em>Tiān gōng bú shì mó fǎ.</em> — “Tiangong” não é magia.</span></p>
 <p><strong>Correção formal:</strong> T1 e T2 são tempos de relaxação e coerência; não são a mesma coisa.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “A fonte discute o conceito e suas consequências” e admite “Não há garantia de generalização para outros contextos” (conceito: Tiangong). O erro está em tratar esse registro como definição de Tiangong.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Tiangong.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

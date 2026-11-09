@@ -10,7 +10,7 @@
 
 <p><strong>Pergunta da roda:</strong> O que é um estado puro?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">布洛赫球</span> <em>bù luò hè qiú</em> <span class="tom">· tons 4-4-4-2 · leitura bu-luo-re-tchiu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看布洛赫球？</span> <em>Nǐ zěn me kàn bù luò hè qiú?</em> — O que você pensa de “Esfera de Bloch”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Outra explicação possível: “A esfera não mostra emaranhamento de dois qubits”. Fonte: QISKIT (2024) DOI 10.5281/zenodo.2573505.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda essa explicação por dois minutos e peça a alguém para refutá-la em Esfera de Bloch.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

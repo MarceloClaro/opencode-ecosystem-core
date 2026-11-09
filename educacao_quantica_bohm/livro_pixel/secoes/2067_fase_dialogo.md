@@ -11,7 +11,7 @@
 <p><strong>Pergunta de pesquisa:</strong> O que não aparece ainda pode importar?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">相位</span> <em>xiàng wèi</em> <span class="tom">· tons 4-4 · leitura shiang-uei</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看相位？</span> <em>Nǐ zěn me kàn xiàng wèi?</em> — O que você pensa de “Fase”?</span></p>
 <p><strong>Hipótese rival:</strong> A fase não é um atraso no tempo real; é uma relação matemática.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Hipótese rival: “A fase não é um atraso no tempo real; é uma relação matemática”. Fonte: <a href="https://doi.org/10.1002/j.1538-7305.1948.tb01338.x">10.1002/j.1538-7305.1948.tb01338.x</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda a hipótese rival e peça a alguém para refutá-la em Fase.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

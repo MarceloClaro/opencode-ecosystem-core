@@ -10,7 +10,7 @@
 
 <p><strong>Pergunta da roda:</strong> O critério é observável?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">评分标准</span> <em>píng fēn biāo zhǔn</em> <span class="tom">· tons 2-1-1-3 · leitura ping-fen-biau-djuen</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看评分标准？</span> <em>Nǐ zěn me kàn píng fēn biāo zhǔn?</em> — O que você pensa de “Rubrica”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Hipótese rival: “Não há garantia de generalização para outros contextos” (conceito: Rubrica). Fonte: <a href="https://doi.org/10.1103/PhysRevPhysEducRes.13.010109">10.1103/PhysRevPhysEducRes.13.010109</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda a hipótese rival e peça a alguém para refutá-la em Rubrica.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

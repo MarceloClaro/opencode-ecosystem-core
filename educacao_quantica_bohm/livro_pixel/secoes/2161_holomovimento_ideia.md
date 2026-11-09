@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> Bohm usou a imagem para pensar processo em vez de coisas.</p>
 <p><strong>Pergunta de pesquisa:</strong> O mundo é feito de coisas ou de processos?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F017 ancora a proposição em <a href="https://doi.org/10.1103/PhysRev.85.166">10.1103/PhysRev.85.166</a>; grau C (resultado exploratório ou interpretativo). Limite: “O termo é filosófico; não é uma equação operacional”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Formule uma consequência testável de “Holomovimento é o fluxo dinâmico do qual emergem formas explícitas” e indique qual observação a refutaria.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

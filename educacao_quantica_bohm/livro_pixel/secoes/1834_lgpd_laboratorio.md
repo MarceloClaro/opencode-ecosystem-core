@@ -8,15 +8,8 @@
 <h2 id="l-1834" class="titulo">LGPD — laboratório</h2>
 <div class="corpo">
 
-<p><strong>Protocolo de bancada:</strong> escolha um exemplo de <em>lgpd</em>, preveja o resultado e teste com um colega.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">数据保护</span> <em>shù jù bǎo hù</em> <span class="tom">· tons 4-4-3-4 · leitura shu-djyu-bau-ru</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">观察数据保护。</span> <em>Guān chá shù jù bǎo hù.</em> — Observe “LGPD”.</span></p>
-<ol>
-<li>Escreva a previsão em uma frase.</li>
-<li>Execute ou observe o fenômeno.</li>
-<li>Registre a diferença e uma possível explicação.</li>
-</ol>
-<p><strong>O que observar:</strong> não basta acertar; é preciso explicar por que acertou.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau C (resultado exploratório ou interpretativo); o número não prova “Não há garantia de generalização para outros contextos” (conceito: LGPD).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Explique por que o resultado não autoriza essa conclusão sobre LGPD.</p></div>
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
 <p><strong>Experimento:</strong> Gerador quântico de números — H + medição produzem bits aproximadamente equilibrados.</p>

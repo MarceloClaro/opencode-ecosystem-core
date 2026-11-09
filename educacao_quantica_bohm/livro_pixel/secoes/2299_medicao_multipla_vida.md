@@ -10,7 +10,7 @@
 
 <p>Pesquisas eleitorais também estimam distribuições por amostragem.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">多次测量</span> <em>duō cì cè liáng</em> <span class="tom">· tons 1-4-4-2 · leitura duo-tsi-tse-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到多次测量。</span> <em>Wǒ zài shēng huó zhōng kàn dào duō cì cè liáng.</em> — Vejo “Medição múltipla” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “Meça 1000 vezes e compare as frequências com as probabilidades”. Limite: “A distribuição não mostra o estado completo; mostra uma amostra”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Medição múltipla.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

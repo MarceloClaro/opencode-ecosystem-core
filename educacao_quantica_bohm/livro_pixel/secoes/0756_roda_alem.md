@@ -10,7 +10,7 @@
 
 <p>A prática distribuída e a recuperação ativa têm apoio em pesquisa.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">对话圈</span> <em>duì huà quān</em> <span class="tom">· tons 4-4-1 · leitura duei-rua-tchyuan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解对话圈。</span> <em>Shēn rù liǎo jiě duì huà quān.</em> — Aprofunde-se em “Roda de diálogo”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: FREEMAN (2014) DOI 10.1073/pnas.1319030111. Fonte: KRIJTENBURG-LEWERISSA (2017) DOI 10.1103/PhysRevPhysEducRes.13.010109.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Anote uma pergunta que a leitura não responde sobre Roda de diálogo.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

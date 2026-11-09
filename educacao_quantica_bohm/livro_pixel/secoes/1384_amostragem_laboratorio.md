@@ -23,7 +23,7 @@
 </div>
 
 <p><strong>O que observar:</strong> confira a ordem dos qubits, o número de tiros e a diferença entre estado e amostra. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> P(1)=N₁/N; EP=√(p(1−p)/N).<br><strong>Conta:</strong> N₁=494, N=1024: p=0,4824; EP=√(0,4824×0,5176/1024)=0,0156.<br><strong>Resultado:</strong> P(1)=48,24% ± 1,56% (1 EP).<br><em>Limite:</em> O desvio de 50% é compatível com amostragem; não prova viés do backend.</span></p>
-
+<p>A ficha F039 declara o limite “A amostra não é o estado; é uma sombra estatística”; o número não prova essa conclusão sobre Amostragem.</p>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

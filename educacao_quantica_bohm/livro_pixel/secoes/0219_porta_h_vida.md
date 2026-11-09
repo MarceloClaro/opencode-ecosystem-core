@@ -10,7 +10,7 @@
 
 <p>Sorteios, senhas e simulações precisam de aleatoriedade.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">哈达玛门</span> <em>hā dá mǎ mén</em> <span class="tom">· tons 1-2-3-2 · leitura ra-da-ma-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到哈达玛门。</span> <em>Wǒ zài shēng huó zhōng kàn dào hā dá mǎ mén.</em> — Vejo “Porta H” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “Aplique H em |0⟩ e meça 1000 vezes”. Limite: “H não é 'um pouco de 0 e um pouco de 1'; é uma transformação precisa”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Porta H.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

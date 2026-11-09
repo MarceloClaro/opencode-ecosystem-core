@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Você consegue explicar por que H(H|0⟩)=|0⟩?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">哈达玛门</span> <em>hā dá mǎ mén</em> <span class="tom">· tons 1-2-3-2 · leitura ra-da-ma-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了哈达玛门。</span> <em>Wǒ xué huì le hā dá mǎ mén.</em> — Eu aprendi “Porta H”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência definição ou teste consolidado. Frase: “H cria uma superposição equilibrada a partir de um estado de base”; limite: “H não é 'um pouco de 0 e um pouco de 1'; é uma transformação precisa”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Porta H e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

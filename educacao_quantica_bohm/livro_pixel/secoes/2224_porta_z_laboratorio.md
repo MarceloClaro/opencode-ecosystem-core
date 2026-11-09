@@ -23,7 +23,7 @@
 </div>
 
 <p><strong>O que observar:</strong> confira a ordem dos qubits, o número de tiros e a diferença entre estado e amostra. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> H-Z-H devolve |1⟩; P(1) = N₁/N.<br><strong>Conta:</strong> N₁=1010, N=1024: 1010/1024 = 0,9863.<br><strong>Resultado:</strong> P(1)=98,63% (ideal 100%); 14 tiros em 0.<br><em>Limite:</em> A fase Z foi aplicada; o desvio restante é ruído, não uma fase residual.</span></p>
-
+<p>A ficha F023 declara o limite “Z não muda a probabilidade; ela muda o que acontece depois”; o número não prova essa conclusão sobre Porta Z.</p>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

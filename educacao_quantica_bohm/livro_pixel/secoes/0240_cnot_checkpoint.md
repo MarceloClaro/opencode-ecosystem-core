@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Você consegue listar a tabela verdade do CNOT?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">受控非门</span> <em>shòu kòng fēi mén</em> <span class="tom">· tons 4-4-1-2 · leitura shou-kong-fei-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了受控非门。</span> <em>Wǒ xué huì le shòu kòng fēi mén.</em> — Eu aprendi “CNOT”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência definição ou teste consolidado. Frase: “CNOT inverte o alvo quando o controle é 1”; limite: “CNOT não copia um estado quântico arbitrário; ela cria correlação”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre CNOT e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

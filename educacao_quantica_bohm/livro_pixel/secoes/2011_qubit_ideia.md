@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> A esfera de Bloch representa um qubit; o interior não é acessível.</p>
 <p><strong>Pergunta de pesquisa:</strong> O que significa 'não decidido'?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F002 ancora a proposição em <a href="https://doi.org/10.1017/CBO9780511976667">10.1017/CBO9780511976667</a>; grau A (definição ou teste consolidado). Limite: “A moeda tem lado definido; o qubit não tem valor escondido”.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

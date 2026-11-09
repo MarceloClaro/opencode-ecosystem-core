@@ -11,7 +11,7 @@
 <p>A fidelidade proxy mede a população ideal, não a pureza do estado.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">编码</span> <em>biān mǎ</em> <span class="tom">· tons 1-3 · leitura bien-ma</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解编码。</span> <em>Shēn rù liǎo jiě biān mǎ.</em> — Aprofunde-se em “Encoding”.</span></p>
 <p><strong>O que ainda não sabemos:</strong> O teste é pequeno; não generaliza para outros dados ou modelos. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Ry(θ)|0⟩ = cos(θ/2)|0⟩ + sen(θ/2)|1⟩; P(1)=sen²(θ/2).<br><strong>Conta:</strong> O experimento usa θ=2π/3: sen²(π/3)=0,75.<br><strong>Resultado:</strong> P(1)=0,75; a descrição antiga dizia π/3, que daria 0,25.<br><em>Limite:</em> O ângulo de codificação é uma escolha; a conta fixa a convenção.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.1038/s41586-019-0980-2">10.1038/s41586-019-0980-2</a>. Fonte: <a href="https://doi.org/10.1038/s42254-021-00348-9">10.1038/s42254-021-00348-9</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Leia a fonte complementar e formule uma pergunta de pesquisa que ela deixa aberta sobre Encoding.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

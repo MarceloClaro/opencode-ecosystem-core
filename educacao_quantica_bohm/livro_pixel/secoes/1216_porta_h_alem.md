@@ -10,7 +10,7 @@
 
 <p>H é a matriz (1/√2)[[1,1],[1,-1]]; H² = I.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">哈达玛门</span> <em>hā dá mǎ mén</em> <span class="tom">· tons 1-2-3-2 · leitura ra-da-ma-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解哈达玛门。</span> <em>Shēn rù liǎo jiě hā dá mǎ mén.</em> — Aprofunde-se em “Porta H”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> H = (1/√2)[[1,1],[1,−1]]; H|0⟩=(|0⟩+|1⟩)/√2.<br><strong>Conta:</strong> H|0⟩ = (1/√2)(|0⟩+|1⟩); P(0)=P(1)=1/2.<br><strong>Resultado:</strong> H cria superposição e também muda a base de medida.<br><em>Limite:</em> H não é um sorteio: é uma rotação de base reversível.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.5281/zenodo.2573505">10.5281/zenodo.2573505</a>. Fonte: <a href="https://doi.org/10.1017/CBO9780511976667">10.1017/CBO9780511976667</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Anote uma pergunta que a leitura não responde sobre Porta H.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

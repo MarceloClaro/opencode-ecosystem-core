@@ -11,7 +11,7 @@
 <p>O produto tensorial faz a dimensão crescer como 2^n.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">向量</span> <em>xiàng liàng</em> <span class="tom">· tons 4-4 · leitura shiang-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解向量。</span> <em>Shēn rù liǎo jiě xiàng liàng.</em> — Aprofunde-se em “Vetor”.</span></p>
 <p><strong>O que ainda não sabemos:</strong> A equação não explica por que o mundo segue a equação. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> |r| = √(x² + y² + z²).<br><strong>Conta:</strong> S5 no hardware: x=0,877, y=0,035, z=0,539.<br><strong>Resultado:</strong> |r| = √(0,769+0,001+0,291) = √1,061 = 1,030.<br><em>Limite:</em> Um vetor físico não passa de 1; o excesso revela viés de leitura e estimativa linear.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.1038/s42254-021-00348-9">10.1038/s42254-021-00348-9</a>. Fonte: <a href="https://doi.org/10.1017/CBO9780511976667">10.1017/CBO9780511976667</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Leia a fonte complementar e formule uma pergunta de pesquisa que ela deixa aberta sobre Vetor.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

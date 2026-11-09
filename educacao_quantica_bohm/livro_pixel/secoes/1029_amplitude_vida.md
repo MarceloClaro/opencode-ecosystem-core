@@ -10,7 +10,7 @@
 
 <p>Receitas, ondas e música usam a ideia de peso e fase.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">振幅</span> <em>zhèn fú</em> <span class="tom">· tons 4-2 · leitura djen-fu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到振幅。</span> <em>Wǒ zài shēng huó zhōng kàn dào zhèn fú.</em> — Vejo “Amplitude” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “Use uma barra de 0 a 1 para representar α e β”. Limite: “A amplitude não é uma probabilidade; é preciso elevar ao quadrado”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Amplitude.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

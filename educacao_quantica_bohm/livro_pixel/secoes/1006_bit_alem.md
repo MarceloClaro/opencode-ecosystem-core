@@ -10,7 +10,7 @@
 
 <p>Com 8 bits, há 256 combinações; uma letra ASCII cabe em 8 bits.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">比特</span> <em>bǐ tè</em> <span class="tom">· tons 3-4 · leitura bi-te</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解比特。</span> <em>Shēn rù liǎo jiě bǐ tè.</em> — Aprofunde-se em “Bit”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Um número em base 2 é uma soma de potências de 2.<br><strong>Conta:</strong> 13 = 8 + 4 + 1 = 1×2³ + 1×2² + 0×2¹ + 1×2⁰.<br><strong>Resultado:</strong> 13₁₀ = 1101₂. Conferindo: 8 + 4 + 0 + 1 = 13.<br><em>Limite:</em> A conta mostra a representação; não explica por que o bit é a menor diferença registrável.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.1017/CBO9780511976667">10.1017/CBO9780511976667</a>. Fonte: <a href="https://doi.org/10.1002/j.1538-7305.1948.tb01338.x">10.1002/j.1538-7305.1948.tb01338.x</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Anote uma pergunta que a leitura não responde sobre Bit.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

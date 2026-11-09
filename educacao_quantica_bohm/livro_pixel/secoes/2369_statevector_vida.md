@@ -10,7 +10,7 @@
 
 <p>Bases de dados também têm representações internas não visíveis.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">态矢量</span> <em>tài shǐ liàng</em> <span class="tom">· tons 4-3-4 · leitura tai-shi-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到态矢量。</span> <em>Wǒ zài shēng huó zhōng kàn dào tài shǐ liàng.</em> — Vejo “Statevector” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “Imprima as amplitudes de um Bell e confira 0,707”. Limite: “O vetor cresce como 2^n; não é acessível por medição única”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Statevector.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

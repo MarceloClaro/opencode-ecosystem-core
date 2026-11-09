@@ -10,7 +10,7 @@
 
 <p><strong>Pergunta da roda:</strong> O que eu supus quando errei?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">建设性错误</span> <em>jiàn shè xìng cuò wù</em> <span class="tom">· tons 4-4-4-4-4 · leitura djien-she-shing-tsuo-u</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看建设性错误？</span> <em>Nǐ zěn me kàn jiàn shè xìng cuò wù?</em> — O que você pensa de “Erro produtivo”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Outra explicação possível: “Não há garantia de generalização para outros contextos” (conceito: Erro produtivo). Fonte: KRIJTENBURG-LEWERISSA (2017) DOI 10.1103/PhysRevPhysEducRes.13.010109.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda essa explicação por dois minutos e peça a alguém para refutá-la em Erro produtivo.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

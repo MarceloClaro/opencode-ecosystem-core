@@ -11,7 +11,7 @@
 <p><strong>Pergunta de pesquisa:</strong> O que acontece quando medimos?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">有效坍缩</span> <em>yǒu xiào tān suō</em> <span class="tom">· tons 3-4-1-1 · leitura iu-shiau-tan-suo</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看有效坍缩？</span> <em>Nǐ zěn me kàn yǒu xiào tān suō?</em> — O que você pensa de “Colapso efetivo”?</span></p>
 <p><strong>Hipótese rival:</strong> A imagem do galho é clássica; a função de onda é matemática.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Hipótese rival: “A imagem do galho é clássica; a função de onda é matemática”. Fonte: <a href="https://doi.org/10.1103/PhysRev.85.166">10.1103/PhysRev.85.166</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda a hipótese rival e peça a alguém para refutá-la em Colapso efetivo.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

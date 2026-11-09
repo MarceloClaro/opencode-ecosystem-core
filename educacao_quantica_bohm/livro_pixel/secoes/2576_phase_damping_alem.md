@@ -11,7 +11,7 @@
 <p>A fidelidade proxy mede a população ideal, não a pureza do estado.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">相位阻尼</span> <em>xiàng wèi zǔ ní</em> <span class="tom">· tons 4-4-3-2 · leitura shiang-uei-dzu-ni</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解相位阻尼。</span> <em>Shēn rù liǎo jiě xiàng wèi zǔ ní.</em> — Aprofunde-se em “Phase damping”.</span></p>
 <p><strong>O que ainda não sabemos:</strong> O teste é pequeno; não generaliza para outros dados ou modelos. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Phase damping preserva a população: P(1) não muda.<br><strong>Conta:</strong> Modelo efetivo: (1−γ)P(1) + γP(1) = P(1).<br><strong>Resultado:</strong> Para γ=0,05, P(1) permanece o mesmo.<br><em>Limite:</em> O modelo é efetivo no observable Z; não é uma simulação completa do canal.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.22331/q-2018-08-06-79">10.22331/q-2018-08-06-79</a>. Fonte: <a href="https://doi.org/10.1103/RevModPhys.75.715">10.1103/RevModPhys.75.715</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Leia a fonte complementar e formule uma pergunta de pesquisa que ela deixa aberta sobre Phase damping.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

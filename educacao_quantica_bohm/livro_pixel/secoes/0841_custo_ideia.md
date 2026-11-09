@@ -19,7 +19,7 @@
 </div>
 
 <p><strong>Pense:</strong> Quem paga a conta?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F085 liga a ideia à fonte JOBIN (2019) DOI 10.1038/s42256-019-0088-2; a evidência é resultado exploratório ou interpretativo.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Explique com suas palavras por que a frase sobre Custo não autoriza dizer mais do que a fonte permite.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

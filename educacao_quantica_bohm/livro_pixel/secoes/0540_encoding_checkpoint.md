@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Dados pessoais podem ser reconstruídos a partir do encoding?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">编码</span> <em>biān mǎ</em> <span class="tom">· tons 1-3 · leitura bien-ma</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了编码。</span> <em>Wǒ xué huì le biān mǎ.</em> — Eu aprendi “Encoding”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência resultado exploratório ou interpretativo. Frase: “Encoding é a forma de colocar dados clássicos em um circuito quântico”; limite: “Não há garantia de generalização para outros contextos” (conceito: Encoding).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Encoding e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

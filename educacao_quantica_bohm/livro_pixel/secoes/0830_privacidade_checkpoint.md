@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Um modelo pode revelar dados usados no treinamento?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">隐私</span> <em>yǐn sī</em> <span class="tom">· tons 3-1 · leitura in-si</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了隐私。</span> <em>Wǒ xué huì le yǐn sī.</em> — Eu aprendi “Privacidade”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência resultado exploratório ou interpretativo. Frase: “Privacidade é o controle sobre informação que diz respeito a você”; limite: “Não há garantia de generalização para outros contextos” (conceito: Privacidade).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Privacidade e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

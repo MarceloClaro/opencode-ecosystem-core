@@ -11,7 +11,7 @@
 <p>O quanto duas setas apontam para a mesma direção.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">内积</span> <em>nèi jī</em> <span class="tom">· tons 4-1 · leitura nei-dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像内积。</span> <em>Zhè xiàng nèi jī.</em> — Isto se parece com “Produto interno”.</span></p>
 <p><strong>Limite formal:</strong> A equação não explica por que o mundo segue a equação.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “A sobreposição não é probabilidade de ser 'igual' sem medição” e o medido “A fonte discute o conceito e suas consequências” (conceito: Produto interno).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Produto interno e escreva o resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -10,7 +10,7 @@
 
 <p>Gráficos e mapas também escolhem o que destacar.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">傅里叶</span> <em>fù lǐ yè</em> <span class="tom">· tons 4-3-4 · leitura fu-li-ie</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到傅里叶。</span> <em>Wǒ zài shēng huó zhōng kàn dào fù lǐ yè.</em> — Vejo “Fourier” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “A analogia óptica é boa, mas a transformada é matemática”. Limite: “Não há garantia de generalização para outros contextos” (conceito: Fourier).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Fourier.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

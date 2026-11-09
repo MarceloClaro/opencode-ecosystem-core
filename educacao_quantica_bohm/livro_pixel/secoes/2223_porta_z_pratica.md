@@ -20,8 +20,7 @@
 <p class="mini">Sobreposição ≠ fidelidade de estado.</p>
 <p class="mini">Script: <code>scripts/experimentos_100.py</code> · E04 · Guoji08 · <a href="#oficina-e04">oficina E04</a> · <a href="#codigo-e04">código E04</a></p>
 </div>
-
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F023 registra como medido “Z é diag(1,-1); a fase relativa é o recurso da interferência”. Resultado bruto: Experimento: Interferência H-Z-H — A fase Z inverte a interferência: o resultado vira |1⟩.; Simulado: P(1) = 1,000 (ideal 1,000); Backend: P(1) = 0,986 (ideal 1,000); Sobreposição: 98,6% · task: 00a6d70a.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Repita a prática com outra amostra ou seed e escreva o que a diferença não prova sobre Porta Z.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -10,7 +10,7 @@
 
 <p>Aprender sozinho é uma habilidade, não um dom.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">建设性错误</span> <em>jiàn shè xìng cuò wù</em> <span class="tom">· tons 4-4-4-4-4 · leitura djien-she-shing-tsuo-u</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到建设性错误。</span> <em>Wǒ zài shēng huó zhōng kàn dào jiàn shè xìng cuò wù.</em> — Vejo “Erro produtivo” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “Nem todo erro é produtivo; repetir sem análise não ensina”. Limite: “Não há garantia de generalização para outros contextos” (conceito: Erro produtivo).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Erro produtivo.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

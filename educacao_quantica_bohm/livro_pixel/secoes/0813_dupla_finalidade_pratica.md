@@ -20,8 +20,7 @@
 <p class="mini">Sobreposição ≠ fidelidade de estado.</p>
 <p class="mini">Script: <code>scripts/experimentos_100.py</code> · E07 · Guoji08 · <a href="#oficina-e07">oficina E07</a> · <a href="#codigo-e07">código E07</a></p>
 </div>
-
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F082 registra como medido “A fonte discute o conceito e suas consequências” (conceito: Dupla finalidade).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Repita a prática e explique por que o número não prova “Não há garantia de generalização para outros contextos” (conceito: Dupla finalidade).</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

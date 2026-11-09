@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> T1 e T2 são tempos de relaxação e coerência; não são a mesma coisa.</p>
 <p><strong>Pergunta de pesquisa:</strong> Por que tanto frio?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F041 ancora a proposição em <a href="https://doi.org/10.22331/q-2018-08-06-79">10.22331/q-2018-08-06-79</a>; grau B (evidência experimental ou metodológica com limites). Limite: “Não há garantia de generalização para outros contextos” (conceito: Supercondutor).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Formule uma consequência testável de “Computadores supercondutores usam circuitos resfriados a milikelvin” e indique qual observação a refutaria.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

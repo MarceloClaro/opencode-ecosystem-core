@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Você consegue explicar por que |α|² + |β|² = 1?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">振幅</span> <em>zhèn fú</em> <span class="tom">· tons 4-2 · leitura djen-fu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了振幅。</span> <em>Wǒ xué huì le zhèn fú.</em> — Eu aprendi “Amplitude”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência definição ou teste consolidado. Frase: “Amplitude é o número que dá peso a cada estado de base”; limite: “A amplitude não é uma probabilidade; é preciso elevar ao quadrado”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Amplitude e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

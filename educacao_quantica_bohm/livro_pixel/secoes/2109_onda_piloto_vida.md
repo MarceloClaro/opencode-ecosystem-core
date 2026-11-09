@@ -10,7 +10,7 @@
 
 <p>Um carro autônomo também é guiado por um 'campo' de regras.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">导波</span> <em>dǎo bō</em> <span class="tom">· tons 3-1 · leitura dau-bo</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到导波。</span> <em>Wǒ zài shēng huó zhōng kàn dào dǎo bō.</em> — Vejo “Onda piloto” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “Desenhe trajetórias que se agrupam em franjas claras”. Limite: “O rio é matemático e, para várias partículas, vive em muitas dimensões”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Onda piloto.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

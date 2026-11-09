@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> CNOT é a porta de duas entradas que gera o estado de Bell.</p>
 <p><strong>Pergunta de pesquisa:</strong> Como duas partes passam a depender uma da outra?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F024 ancora a proposição em <a href="https://doi.org/10.1017/CBO9780511976667">10.1017/CBO9780511976667</a>; grau A (definição ou teste consolidado). Limite: “CNOT não copia um estado quântico arbitrário; ela cria correlação”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Formule uma consequência testável de “CNOT inverte o alvo quando o controle é 1” e indique qual observação a refutaria.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

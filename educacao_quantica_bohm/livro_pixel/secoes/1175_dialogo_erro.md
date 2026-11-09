@@ -10,7 +10,7 @@
 
 <p><strong>O erro comum:</strong> Transformar o diálogo em julgamento pessoal ou competição.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">对话</span> <em>duì huà</em> <span class="tom">· tons 4-4 · leitura duei-rua</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">对话不是魔法。</span> <em>Duì huà bú shì mó fǎ.</em> — “Diálogo” não é magia.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “Bohm distingue diálogo de debate em 'On Dialogue'” e admite “Diálogo não é terapia, assembleia ou busca obrigatória de consenso”. O erro está em tratar esse registro como definição de Diálogo.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Diálogo.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

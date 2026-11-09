@@ -90,7 +90,10 @@ def secao_html(path: Path) -> str:
     lente = m.group(1)
     corpo = texto.split("\n", 1)[1]
     corpo = re.sub(r"\n:::\s*$", "", corpo)
-    return f'<div class="lauda lente-{lente}">{corpo}</div>\n'
+    classes = f"lauda lente-{lente}"
+    if lente == "laboratorio" and "<figure" in corpo:
+        classes += " lauda-fig"
+    return f'<div class="{classes}">{corpo}</div>\n'
 
 
 def limpar_ancoras_codigo(html: str) -> str:

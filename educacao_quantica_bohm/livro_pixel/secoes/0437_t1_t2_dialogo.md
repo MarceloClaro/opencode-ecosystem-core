@@ -10,7 +10,7 @@
 
 <p><strong>Pergunta da roda:</strong> O que limita mais o seu circuito?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">弛豫与相干</span> <em>chí yù yǔ xiāng gān</em> <span class="tom">· tons 2-4-3-1-1 · leitura tchi-yu-yu-shiang-gan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看弛豫与相干？</span> <em>Nǐ zěn me kàn chí yù yǔ xiāng gān?</em> — O que você pensa de “T1 e T2”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Outra explicação possível: “Não há garantia de generalização para outros contextos” (conceito: T1 e T2). Fonte: PRESKILL (2018) DOI 10.22331/q-2018-08-06-79.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda essa explicação por dois minutos e peça a alguém para refutá-la em T1 e T2.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

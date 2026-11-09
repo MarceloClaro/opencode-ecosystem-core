@@ -11,7 +11,7 @@
 <p><strong>Pergunta de pesquisa:</strong> Quando uma diferença vira informação?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">比特</span> <em>bǐ tè</em> <span class="tom">· tons 3-4 · leitura bi-te</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看比特？</span> <em>Nǐ zěn me kàn bǐ tè?</em> — O que você pensa de “Bit”?</span></p>
 <p><strong>Hipótese rival:</strong> A analogia não explica probabilidade; o bit clássico é exclusivo.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Hipótese rival: “A analogia não explica probabilidade; o bit clássico é exclusivo”. Fonte: <a href="https://doi.org/10.1002/j.1538-7305.1948.tb01338.x">10.1002/j.1538-7305.1948.tb01338.x</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda a hipótese rival e peça a alguém para refutá-la em Bit.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

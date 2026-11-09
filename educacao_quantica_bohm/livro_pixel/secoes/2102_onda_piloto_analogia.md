@@ -11,7 +11,7 @@
 <p>Uma folha carregada por um rio.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">导波</span> <em>dǎo bō</em> <span class="tom">· tons 3-1 · leitura dau-bo</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像导波。</span> <em>Zhè xiàng dǎo bō.</em> — Isto se parece com “Onda piloto”.</span></p>
 <p><strong>Limite formal:</strong> O rio é matemático e, para várias partículas, vive em muitas dimensões.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “Desenhe trajetórias que se agrupam em franjas claras” e o medido “Bohm publicou a teoria em 1952; ela reproduz as previsões não relativísticas”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Onda piloto e escreva o resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

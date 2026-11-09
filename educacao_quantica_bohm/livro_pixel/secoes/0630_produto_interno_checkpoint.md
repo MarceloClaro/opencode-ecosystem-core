@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Dois estados distintos podem ser confundidos por um observador?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">内积</span> <em>nèi jī</em> <span class="tom">· tons 4-1 · leitura nei-dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了内积。</span> <em>Wǒ xué huì le nèi jī.</em> — Eu aprendi “Produto interno”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência definição ou teste consolidado. Frase: “O produto interno mede a sobreposição entre dois estados”; limite: “Não há garantia de generalização para outros contextos” (conceito: Produto interno).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Produto interno e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

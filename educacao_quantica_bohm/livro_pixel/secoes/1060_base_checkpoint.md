@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Você consegue explicar por que medir na base errada dá ruído?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">基</span> <em>jī</em> <span class="tom">· tons 1 · leitura dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了基。</span> <em>Wǒ xué huì le jī.</em> — Eu aprendi “Base”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau A (definição ou teste consolidado). Frase: “Uma base é o conjunto de estados em relação ao qual medimos”; limite: “Bases diferentes não são 'ângulos' da mesma foto; são perguntas diferentes”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Base e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

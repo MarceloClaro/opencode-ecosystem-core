@@ -12,7 +12,7 @@
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">相位门</span> <em>xiàng wèi mén</em> <span class="tom">· tons 4-4-2 · leitura shiang-uei-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像相位门。</span> <em>Zhè xiàng xiàng wèi mén.</em> — Isto se parece com “Porta Z”.</span></p>
 <p><strong>Onde a imagem não vale:</strong> Z não muda a probabilidade; ela muda o que acontece depois.</p>
 <p>Desenhe a imagem e marque com um X o ponto em que ela falha.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “Compare Z(H|0⟩) com H|0⟩ e depois aplique H” e o medido “Z é diag(1,-1); a fase relativa é o recurso da interferência”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Porta Z e escreva um resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

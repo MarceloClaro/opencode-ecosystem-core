@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Você consegue dar um exemplo de processo que vira forma?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">整体运动</span> <em>zhěng tǐ yùn dòng</em> <span class="tom">· tons 3-3-4-4 · leitura djeng-ti-yun-dong</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了整体运动。</span> <em>Wǒ xué huì le zhěng tǐ yùn dòng.</em> — Eu aprendi “Holomovimento”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau C (resultado exploratório ou interpretativo). Frase: “Holomovimento é o fluxo dinâmico do qual emergem formas explícitas”; limite: “O termo é filosófico; não é uma equação operacional”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Holomovimento e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

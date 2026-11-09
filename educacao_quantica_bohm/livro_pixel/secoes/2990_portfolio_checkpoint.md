@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Quem pode acessar o portfólio e por quanto tempo?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">作品集</span> <em>zuò pǐn jí</em> <span class="tom">· tons 4-3-2 · leitura dzuo-pin-dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了作品集。</span> <em>Wǒ xué huì le zuò pǐn jí.</em> — Eu aprendi “Portfólio”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau B (evidência experimental ou metodológica com limites). Frase: “Portfólio é uma coleção organizada de evidências de aprendizagem”; limite: “Não há garantia de generalização para outros contextos” (conceito: Portfólio).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Portfólio e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -19,7 +19,7 @@
 Limite clássico 2; ideal quântico 2√2 ≈ 2,828. S > 2 nos dois casos; 2,871 é consistente com 2√2 dentro de ~1 SE. <a href="#apendice-gjq">Apêndice GJQ</a>: contas, task IDs e reprodução. <span class="fn"><strong>NOTA DE CÁLCULO.</strong> E = (N₀₀+N₁₁−N₀₁−N₁₀)/N; S = E₀₀+E₀₁+E₁₀−E₁₁. Guoji08: 2,383. FAS-GPU: 2,871±0,044.</span></p>
 
 <figure class="fig"><img class="fig-pequena fig-mini" src="../livro/figuras_geradas/fig15_chsh.png" alt="CHSH no Guoji08: S ≈ 2,38, acima do limite clássico 2 e abaixo do ideal 2√2."><figcaption>CHSH no Guoji08: S ≈ 2,38, acima do limite clássico 2 e abaixo do ideal 2√2.</figcaption></figure>
-
+<p>A ficha F010 declara o limite “A imagem das moedas sugere um mecanismo que a teoria não afirma”; o número não prova essa conclusão sobre Estado de Bell.</p>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

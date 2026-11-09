@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Quem participa da decisão de adaptar?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">适应</span> <em>shì yìng</em> <span class="tom">· tons 4-4 · leitura shi-ing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了适应。</span> <em>Wǒ xué huì le shì yìng.</em> — Eu aprendi “Adaptação”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau A (definição ou teste consolidado). Frase: “Adaptar é ajustar acesso, tempo e linguagem sem baixar a meta conceitual”; limite: “Não há garantia de generalização para outros contextos” (conceito: Adaptação).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Adaptação e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

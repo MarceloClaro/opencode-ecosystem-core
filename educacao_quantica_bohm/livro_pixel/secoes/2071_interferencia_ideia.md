@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> O experimento de dupla fenda é a demonstração clássica.</p>
 <p><strong>Pergunta de pesquisa:</strong> Quando duas possibilidades se encontram?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F008 ancora a proposição em <a href="https://doi.org/10.1002/j.1538-7305.1948.tb01338.x">10.1002/j.1538-7305.1948.tb01338.x</a>; grau A (definição ou teste consolidado). Limite: “A amplitude quântica não é uma vibração material”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Formule uma consequência testável de “Interferência é a soma de amplitudes que reforça ou cancela probabilidades” e indique qual observação a refutaria.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

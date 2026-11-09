@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> O GHZ é usado em metrologia e testes de não localidade.</p>
 <p><strong>Pergunta de pesquisa:</strong> O que muda quando o grupo cresce?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F027 ancora a proposição em <a href="https://doi.org/10.1017/CBO9780511976667">10.1017/CBO9780511976667</a>; grau A (definição ou teste consolidado). Limite: “Em hardware real, o GHZ perde coerência rapidamente com o número de qubits”.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -19,7 +19,7 @@
 </div>
 
 <p><strong>Pare e pense:</strong> Vale a pena para este problema?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F086 ancora a ideia em <a href="https://doi.org/10.1038/s42256-019-0088-2">10.1038/s42256-019-0088-2</a>; grau C (resultado exploratório ou interpretativo).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Explique por que a frase sobre Ambiente não autoriza mais do que a fonte permite.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> O 'colapso' é um nome para a atualização do estado após a medição.</p>
 <p><strong>Pergunta de pesquisa:</strong> O que muda quando medimos?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F005 ancora a proposição em <a href="https://doi.org/10.1002/j.1538-7305.1948.tb01338.x">10.1002/j.1538-7305.1948.tb01338.x</a>; grau A (definição ou teste consolidado). Limite: “A caixa pode já ter um valor; o qubit não é assim”.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

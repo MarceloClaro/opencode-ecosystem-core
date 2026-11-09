@@ -11,7 +11,7 @@
 <p><strong>Pergunta de pesquisa:</strong> O que é uma superposição equilibrada?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">哈达玛门</span> <em>hā dá mǎ mén</em> <span class="tom">· tons 1-2-3-2 · leitura ra-da-ma-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看哈达玛门？</span> <em>Nǐ zěn me kàn hā dá mǎ mén?</em> — O que você pensa de “Porta H”?</span></p>
 <p><strong>Hipótese rival:</strong> H não é 'um pouco de 0 e um pouco de 1'; é uma transformação precisa.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Hipótese rival: “H não é 'um pouco de 0 e um pouco de 1'; é uma transformação precisa”. Fonte: <a href="https://doi.org/10.1017/CBO9780511976667">10.1017/CBO9780511976667</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda a hipótese rival e peça a alguém para refutá-la em Porta H.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

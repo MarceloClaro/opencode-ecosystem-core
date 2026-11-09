@@ -10,7 +10,7 @@
 
 <p>Música, luz e conversas dependem de fases e sincronia.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">相位</span> <em>xiàng wèi</em> <span class="tom">· tons 4-4 · leitura shiang-uei</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到相位。</span> <em>Wǒ zài shēng huó zhōng kàn dào xiàng wèi.</em> — Vejo “Fase” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “Compare H|0⟩ com Z(H|0⟩) e depois aplique H”. Limite: “A fase não é um atraso no tempo real; é uma relação matemática”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Fase.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

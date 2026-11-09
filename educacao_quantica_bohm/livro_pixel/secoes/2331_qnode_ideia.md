@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> QNodes podem ser diferenciados e otimizados.</p>
 <p><strong>Pergunta de pesquisa:</strong> O que é uma função quântica?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F034 ancora a proposição em <a href="https://doi.org/10.5281/zenodo.2573505">10.5281/zenodo.2573505</a>; grau B (evidência experimental ou metodológica com limites). Limite: “O QNode não é o hardware; é a descrição executável”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Formule uma consequência testável de “Um QNode é uma função quântica que retorna uma medição” e indique qual observação a refutaria.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

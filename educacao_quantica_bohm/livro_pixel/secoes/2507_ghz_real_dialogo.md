@@ -11,7 +11,7 @@
 <p><strong>Pergunta de pesquisa:</strong> Por que aparecem 1011 e 1101?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">实验多体态</span> <em>shí yàn duō tǐ tài</em> <span class="tom">· tons 2-4-1-3-4 · leitura shi-ien-duo-ti-tai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看实验多体态？</span> <em>Nǐ zěn me kàn shí yàn duō tǐ tài?</em> — O que você pensa de “GHZ real”?</span></p>
 <p><strong>Hipótese rival:</strong> O teste é pequeno; não generaliza para outros dados ou modelos.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Hipótese rival: “Não há garantia de generalização para outros contextos” (conceito: GHZ real). Fonte: <a href="https://doi.org/10.1038/s41586-019-1666-5">10.1038/s41586-019-1666-5</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda a hipótese rival e peça a alguém para refutá-la em GHZ real.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

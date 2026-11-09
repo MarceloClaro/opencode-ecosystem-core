@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Quem arca com o passivo ambiental?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">环境</span> <em>huán jìng</em> <span class="tom">· tons 2-4 · leitura ruan-djing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了环境。</span> <em>Wǒ xué huì le huán jìng.</em> — Eu aprendi “Ambiente”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência resultado exploratório ou interpretativo. Frase: “Refrigeração e energia têm impacto ambiental”; limite: “Não há garantia de generalização para outros contextos” (conceito: Ambiente).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Ambiente e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

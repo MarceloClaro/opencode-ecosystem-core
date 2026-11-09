@@ -11,7 +11,7 @@
 <p>A prática distribuída e a recuperação ativa têm apoio em pesquisa.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">反馈</span> <em>fǎn kuì</em> <span class="tom">· tons 3-4 · leitura fan-kuei</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解反馈。</span> <em>Shēn rù liǎo jiě fǎn kuì.</em> — Aprofunde-se em “Feedback”.</span></p>
 <p><strong>O que ainda não sabemos:</strong> A técnica não funciona igual para todos os estudantes. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Rubrica de 5 critérios × 2 pontos = 10 pontos.<br><strong>Conta:</strong> Se 4 critérios valem 2 e 1 vale 1, o total é 9.<br><strong>Resultado:</strong> A nota é uma soma ponderada, não uma verdade absoluta.<br><em>Limite:</em> Feedback sem critério vira opinião.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.1073/pnas.1319030111">10.1073/pnas.1319030111</a>. Fonte: <a href="https://doi.org/10.1103/PhysRevPhysEducRes.13.010109">10.1103/PhysRevPhysEducRes.13.010109</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Leia a fonte complementar e formule uma pergunta de pesquisa que ela deixa aberta sobre Feedback.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

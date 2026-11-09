@@ -11,7 +11,7 @@
 <p>Duas moedas que caem sempre iguais.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">贝尔态</span> <em>bèi ěr tài</em> <span class="tom">· tons 4-3-4 · leitura bei-er-tai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像贝尔态。</span> <em>Zhè xiàng bèi ěr tài.</em> — Isto se parece com “Estado de Bell”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> A imagem das moedas sugere um mecanismo que a teoria não afirma.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “Prepare (|00⟩+|11⟩)/√2 e meça 1000 vezes” e o medido “O estado de Bell é usado em teleportação e criptografia”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Estado de Bell e escreva o resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Quem escolhe quais observáveis medir?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">特征值</span> <em>tè zhēng zhí</em> <span class="tom">· tons 4-1-2 · leitura te-djeng-dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了特征值。</span> <em>Wǒ xué huì le tè zhēng zhí.</em> — Eu aprendi “Autovalor”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau A (definição ou teste consolidado). Frase: “Autovalores são os valores possíveis de uma medição”; limite: “Não há garantia de generalização para outros contextos” (conceito: Autovalor).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Autovalor e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

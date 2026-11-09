@@ -11,7 +11,7 @@
 <p>Uma métrica pode esconder desigualdades?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">全息图</span> <em>quán xī tú</em> <span class="tom">· tons 2-1-2 · leitura tchyuan-shi-tu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于全息图？</span> <em>Shéi shòu yì yú quán xī tú?</em> — Quem se beneficia de “Holograma”?</span></p>
 <p><strong>Governança:</strong> quem audita, quem responde e como reparar?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau A (definição ou teste consolidado); o limite é “Não há garantia de generalização para outros contextos” (conceito: Holograma).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Liste um grupo afetado por Holograma e uma mitigação, declarando esse limite.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

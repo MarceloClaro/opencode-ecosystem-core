@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> A prática distribuída e a recuperação ativa têm apoio em pesquisa.</p>
 <p><strong>Pergunta de pesquisa:</strong> O que este feedback me pede para fazer?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F073 ancora a proposição em <a href="https://doi.org/10.1103/PhysRevPhysEducRes.13.010109">10.1103/PhysRevPhysEducRes.13.010109</a>; grau A (definição ou teste consolidado). Limite: “Não há garantia de generalização para outros contextos” (conceito: Feedback).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Formule uma consequência testável de “Feedback é informação sobre a diferença entre o resultado e a meta” e indique qual observação a refutaria.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

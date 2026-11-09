@@ -10,7 +10,7 @@
 
 <p>Com 8 bits, há 256 combinações; uma letra ASCII cabe em 8 bits.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">比特</span> <em>bǐ tè</em> <span class="tom">· tons 3-4 · leitura bi-te</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解比特。</span> <em>Shēn rù liǎo jiě bǐ tè.</em> — Aprofunde-se em “Bit”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: NIELSEN (2010) DOI 10.1017/CBO9780511976667. Fonte: SHANNON (1948) DOI 10.1002/j.1538-7305.1948.tb01338.x.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Anote uma pergunta que a leitura não responde sobre Bit.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

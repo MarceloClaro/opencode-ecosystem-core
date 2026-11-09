@@ -10,7 +10,7 @@
 
 <p><strong>Pergunta da roda:</strong> Qual é a base legal deste tratamento?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">数据保护</span> <em>shù jù bǎo hù</em> <span class="tom">· tons 4-4-3-4 · leitura shu-djyu-bau-ru</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看数据保护？</span> <em>Nǐ zěn me kàn shù jù bǎo hù?</em> — O que você pensa de “LGPD”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Outra explicação possível: “Não há garantia de generalização para outros contextos” (conceito: LGPD). Fonte: BRASIL (2018).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda essa explicação por dois minutos e peça a alguém para refutá-la em LGPD.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

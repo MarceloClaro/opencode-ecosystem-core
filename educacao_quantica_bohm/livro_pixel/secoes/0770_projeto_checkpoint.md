@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Quem se beneficia e quem arca com os custos?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">项目</span> <em>xiàng mù</em> <span class="tom">· tons 4-4 · leitura shiang-mu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了项目。</span> <em>Wǒ xué huì le xiàng mù.</em> — Eu aprendi “Projeto”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência definição ou teste consolidado. Frase: “Um projeto articula pergunta, hipótese, experimento, evidência e limite”; limite: “Não há garantia de generalização para outros contextos” (conceito: Projeto).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Projeto e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

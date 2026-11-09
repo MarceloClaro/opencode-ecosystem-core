@@ -10,7 +10,7 @@
 
 <p>A regra de Born transforma amplitude em probabilidade.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">振幅</span> <em>zhèn fú</em> <span class="tom">· tons 4-2 · leitura djen-fu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解振幅。</span> <em>Shēn rù liǎo jiě zhèn fú.</em> — Aprofunde-se em “Amplitude”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: NIELSEN (2010) DOI 10.1017/CBO9780511976667. Fonte: SHANNON (1948) DOI 10.1002/j.1538-7305.1948.tb01338.x.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Anote uma pergunta que a leitura não responde sobre Amplitude.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

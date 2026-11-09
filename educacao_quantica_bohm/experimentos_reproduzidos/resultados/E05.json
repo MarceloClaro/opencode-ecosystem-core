@@ -1,0 +1,60 @@
+{
+  "id": "E05",
+  "nome": "Estado de Bell",
+  "descricao": "H + CNOT criam uma correlação 00/11.",
+  "protocolo": {
+    "sementes": 20,
+    "shots_por_semente": 4096,
+    "total_shots": 81920,
+    "simulador": "AerSimulator",
+    "transpilacao": "optimization_level=1",
+    "seed_base": 20261109
+  },
+  "ideal": {
+    "distribuicoes": [
+      {
+        "00": 0.4999999999999999,
+        "11": 0.4999999999999999
+      }
+    ]
+  },
+  "reproduzido": {
+    "dist_media": [
+      {
+        "00": 0.4985595703125,
+        "11": 0.5014404296875
+      }
+    ],
+    "dist_ic95": [
+      {
+        "00": [
+          0.4985595703125,
+          0.0030781973912641395
+        ],
+        "11": [
+          0.5014404296875,
+          0.0030781973912641395
+        ]
+      }
+    ],
+    "counts_agregados": [
+      {
+        "11": 41078,
+        "00": 40842
+      }
+    ],
+    "leitura_agregada": "P(00)+P(11) = 1.000 (ideal 1,000)",
+    "tvd_media": 0.00498046875,
+    "tvd_ic95": [
+      0.0029226528477526333,
+      0.007038284652247366
+    ]
+  },
+  "comparacao": {
+    "tvd_arquivo_simulado": 0.0185546875,
+    "tvd_arquivo_real": 0.05859374999999989,
+    "tvd_reproduzido_vs_arquivo_simulado": 0.019995117187500022
+  },
+  "limites": "Simulação Aer; não é execução em hardware. A TVD mede diferença entre distribuições, não fidelidade de estado. O JSON real arquivado não foi reproduzido em hardware nesta rodada.",
+  "timestamp": "2026-11-09T00:48:54-0300"
+}

@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Uma dependência externa pode comprometer a soberania de dados?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">天宫</span> <em>tiān gōng</em> <span class="tom">· tons 1-1 · leitura tien-gong</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了天宫。</span> <em>Wǒ xué huì le tiān gōng.</em> — Eu aprendi “Tiangong”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência evidência experimental ou metodológica com limites. Frase: “Tiangong/Guoji é a plataforma de nuvem quântica com simuladores e hardware”; limite: “Não há garantia de generalização para outros contextos” (conceito: Tiangong).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Tiangong e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -20,8 +20,7 @@
 <p class="mini">Sobreposição ≠ fidelidade de estado.</p>
 <p class="mini">Script: <code>scripts/experimentos_100.py</code> · E03 · Guoji08 · <a href="#oficina-e03">oficina E03</a> · <a href="#codigo-e03">código E03</a></p>
 </div>
-
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F022 registra como medido “H é a matriz (1/√2)[[1,1],[1,-1]]; H² = I”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Repita a prática e explique por que o número não prova “H não é 'um pouco de 0 e um pouco de 1'; é uma transformação precisa”.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

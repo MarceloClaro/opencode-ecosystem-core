@@ -10,7 +10,7 @@
 
 <p><strong>O erro comum:</strong> Esquecer o decorador e tentar chamar a função como circuito.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子节点</span> <em>liàng zǐ jié diǎn</em> <span class="tom">· tons 4-3-2-3 · leitura liang-dzi-djie-dien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">量子节点不是魔法。</span> <em>Liàng zǐ jié diǎn bú shì mó fǎ.</em> — “QNode” não é magia.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “QNodes podem ser diferenciados e otimizados” e admite “O QNode não é o hardware; é a descrição executável”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de QNode.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

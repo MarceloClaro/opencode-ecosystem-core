@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Uma narrativa heroica pode esconder custos e fracassos?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">叙事</span> <em>xù shì</em> <span class="tom">· tons 4-4 · leitura shyu-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了叙事。</span> <em>Wǒ xué huì le xù shì.</em> — Eu aprendi “Narrativa”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência evidência experimental ou metodológica com limites. Frase: “Narrativa organiza fatos em uma sequência com sentido”; limite: “Não há garantia de generalização para outros contextos” (conceito: Narrativa).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Narrativa e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

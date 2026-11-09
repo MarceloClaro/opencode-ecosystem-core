@@ -8,15 +8,8 @@
 <h2 id="l-2814" class="titulo">Dupla finalidade — laboratório</h2>
 <div class="corpo">
 
-<p><strong>Protocolo de bancada:</strong> escolha um exemplo de <em>dupla finalidade</em>, preveja o resultado e teste com um colega.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">双重用途</span> <em>shuāng chóng yòng tú</em> <span class="tom">· tons 1-2-4-2 · leitura shuang-tchong-iong-tu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">观察双重用途。</span> <em>Guān chá shuāng chóng yòng tú.</em> — Observe “Dupla finalidade”.</span></p>
-<ol>
-<li>Escreva a previsão em uma frase.</li>
-<li>Execute ou observe o fenômeno.</li>
-<li>Registre a diferença e uma possível explicação.</li>
-</ol>
-<p><strong>O que observar:</strong> não basta acertar; é preciso explicar por que acertou.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau C (resultado exploratório ou interpretativo); o número não prova “Não há garantia de generalização para outros contextos” (conceito: Dupla finalidade). Fonte do protocolo: <a href="https://doi.org/10.1038/s42256-019-0088-2">10.1038/s42256-019-0088-2</a>.</p></div>
 <div class="resultado">
 <span class="rotulo">RESULTADO · SIMULADO × BACKEND</span>
 <p><strong>Experimento:</strong> CHSH — Quatro configurações medem S.</p>

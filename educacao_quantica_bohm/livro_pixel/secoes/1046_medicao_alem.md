@@ -10,7 +10,7 @@
 
 <p>O 'colapso' é um nome para a atualização do estado após a medição.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">测量</span> <em>cè liáng</em> <span class="tom">· tons 4-2 · leitura tse-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解测量。</span> <em>Shēn rù liǎo jiě cè liáng.</em> — Aprofunde-se em “Medição”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Para H|0⟩ = (|0⟩+|1⟩)/√2, P(0) = P(1) = 1/2.<br><strong>Conta:</strong> Em 1024 tiros, o esperado é 512; o desvio padrão é √(1024×0,5×0,5) = 16.<br><strong>Resultado:</strong> Uma contagem típica fica em 512 ± 32 (dois desvios).<br><em>Limite:</em> Cada tiro exige preparar o estado de novo; medir o mesmo qubit repetidamente não dá a mesma estatística.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.1017/CBO9780511976667">10.1017/CBO9780511976667</a>. Fonte: <a href="https://doi.org/10.1002/j.1538-7305.1948.tb01338.x">10.1002/j.1538-7305.1948.tb01338.x</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Anote uma pergunta que a leitura não responde sobre Medição.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

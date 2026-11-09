@@ -11,7 +11,7 @@
 <p><strong>O erro comum:</strong> Dizer que a onda piloto é consenso ou que dispensa a matemática.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">导波</span> <em>dǎo bō</em> <span class="tom">· tons 3-1 · leitura dau-bo</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">导波不是魔法。</span> <em>Dǎo bō bú shì mó fǎ.</em> — “Onda piloto” não é magia.</span></p>
 <p><strong>Correção formal:</strong> Bohm publicou a teoria em 1952; ela reproduz as previsões não relativísticas.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “Bohm publicou a teoria em 1952; ela reproduz as previsões não relativísticas” e admite “O rio é matemático e, para várias partículas, vive em muitas dimensões”. O erro está em tratar esse registro como definição de Onda piloto.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Onda piloto.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -11,7 +11,7 @@
 <p><strong>O erro comum:</strong> Preencha o cartão de projeto em cinco campos.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">项目</span> <em>xiàng mù</em> <span class="tom">· tons 4-4 · leitura shiang-mu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">项目不是魔法。</span> <em>Xiàng mù bú shì mó fǎ.</em> — “Projeto” não é magia.</span></p>
 <p><strong>Correção formal:</strong> A prática distribuída e a recuperação ativa têm apoio em pesquisa.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “A fonte discute o conceito e suas consequências” e admite “Não há garantia de generalização para outros contextos” (conceito: Projeto). O erro está em tratar esse registro como definição de Projeto.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Projeto.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

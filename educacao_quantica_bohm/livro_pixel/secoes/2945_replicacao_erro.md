@@ -11,7 +11,7 @@
 <p><strong>O erro comum:</strong> Anote ambiente, seed, shots e versões.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">复现</span> <em>fù xiàn</em> <span class="tom">· tons 4-4 · leitura fu-shien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">复现不是魔法。</span> <em>Fù xiàn bú shì mó fǎ.</em> — “Replicação” não é magia.</span></p>
 <p><strong>Correção formal:</strong> Um bom projeto declara o que não prova.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “A fonte discute o conceito e suas consequências” e admite “Não há garantia de generalização para outros contextos” (conceito: Replicação). O erro está em tratar esse registro como definição de Replicação.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Replicação.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

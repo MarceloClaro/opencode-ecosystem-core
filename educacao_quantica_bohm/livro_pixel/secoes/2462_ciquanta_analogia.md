@@ -11,7 +11,7 @@
 <p>Um parque tecnológico com um freezer gigante e uma réplica para visitas.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子中心</span> <em>liàng zǐ zhōng xīn</em> <span class="tom">· tons 4-3-1-1 · leitura liang-dzi-djong-shin</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像量子中心。</span> <em>Zhè xiàng liàng zǐ zhōng xīn.</em> — Isto se parece com “CIQuanta”.</span></p>
 <p><strong>Limite formal:</strong> O resultado de hoje não garante o de amanhã; calibração muda.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “O centro é uma infraestrutura pública; o acesso ao hardware depende de políticas” e o medido “A fonte discute o conceito e suas consequências” (conceito: CIQuanta).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de CIQuanta e escreva o resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

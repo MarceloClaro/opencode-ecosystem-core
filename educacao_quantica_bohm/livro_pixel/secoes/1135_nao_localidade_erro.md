@@ -10,7 +10,7 @@
 
 <p><strong>O erro comum:</strong> Confundir não localidade com comunicação mais rápida que a luz.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">非定域性</span> <em>fēi dìng yù xìng</em> <span class="tom">· tons 1-4-4-4 · leitura fei-ding-yu-shing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">非定域性不是魔法。</span> <em>Fēi dìng yù xìng bú shì mó fǎ.</em> — “Não localidade” não é magia.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “O teorema de Bell mostra que a não localidade é difícil de evitar” e admite “A não localidade não permite enviar sinais controláveis”. O erro está em tratar esse registro como definição de Não localidade.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Não localidade.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

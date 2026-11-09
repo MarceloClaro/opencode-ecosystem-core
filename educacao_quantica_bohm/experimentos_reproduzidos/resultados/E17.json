@@ -1,0 +1,78 @@
+{
+  "id": "E17",
+  "nome": "Interferência de três qubits",
+  "descricao": "Uma caminhada curta distribui amplitude em 000/010/101/111.",
+  "protocolo": {
+    "sementes": 20,
+    "shots_por_semente": 4096,
+    "total_shots": 81920,
+    "simulador": "AerSimulator",
+    "transpilacao": "optimization_level=1",
+    "seed_base": 20261109
+  },
+  "ideal": {
+    "distribuicoes": [
+      {
+        "000": 0.24999999999999978,
+        "001": 1.3942650518608993e-34,
+        "010": 0.24999999999999978,
+        "011": 1.3942650518608993e-34,
+        "100": 1.3942650518608993e-34,
+        "101": 0.24999999999999978,
+        "110": 1.3942650518608993e-34,
+        "111": 0.24999999999999978
+      }
+    ]
+  },
+  "reproduzido": {
+    "dist_media": [
+      {
+        "000": 0.24827880859375,
+        "010": 0.25162353515625,
+        "101": 0.2511474609375,
+        "111": 0.2489501953125
+      }
+    ],
+    "dist_ic95": [
+      {
+        "000": [
+          0.24827880859375,
+          0.002669995247028751
+        ],
+        "010": [
+          0.25162353515625,
+          0.0025428748432106425
+        ],
+        "101": [
+          0.2511474609375,
+          0.002239367455522545
+        ],
+        "111": [
+          0.2489501953125,
+          0.003268357897443666
+        ]
+      }
+    ],
+    "counts_agregados": [
+      {
+        "000": 20339,
+        "010": 20613,
+        "101": 20574,
+        "111": 20394
+      }
+    ],
+    "leitura_agregada": "P(000) = 0.248 (ideal 0,250)",
+    "tvd_media": 0.008959960937499989,
+    "tvd_ic95": [
+      0.006625939822010856,
+      0.011293982052989121
+    ]
+  },
+  "comparacao": {
+    "tvd_arquivo_simulado": 0.0166015625,
+    "tvd_arquivo_real": 0.09179687499999956,
+    "tvd_reproduzido_vs_arquivo_simulado": 0.017175292968750006
+  },
+  "limites": "Simulação Aer; não é execução em hardware. A TVD mede diferença entre distribuições, não fidelidade de estado. O JSON real arquivado não foi reproduzido em hardware nesta rodada.",
+  "timestamp": "2026-11-09T00:49:55-0300"
+}

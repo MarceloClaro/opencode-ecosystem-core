@@ -11,7 +11,7 @@
 <p>T1 e T2 são tempos de relaxação e coerência; não são a mesma coisa.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子中心</span> <em>liàng zǐ zhōng xīn</em> <span class="tom">· tons 4-3-1-1 · leitura liang-dzi-djong-shin</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解量子中心。</span> <em>Shēn rù liǎo jiě liàng zǐ zhōng xīn.</em> — Aprofunde-se em “CIQuanta”.</span></p>
 <p><strong>O que ainda não sabemos:</strong> O resultado de hoje não garante o de amanhã; calibração muda. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Acesso é pré-requisito; o experimento precisa de conta, fila e shots.<br><strong>Conta:</strong> 1024 shots por circuito; 4 circuitos = 4096 shots.<br><strong>Resultado:</strong> O custo e o tempo crescem com o número de circuitos.<br><em>Limite:</em> Acesso não é reprodutibilidade: outro usuário pode receber outra calibração.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.22331/q-2018-08-06-79">10.22331/q-2018-08-06-79</a>. Fonte: CIQUANTA (2026).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Leia a fonte complementar e formule uma pergunta de pesquisa que ela deixa aberta sobre CIQuanta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -19,7 +19,7 @@
 </div>
 
 <p><strong>Pense:</strong> Quem ganha com esta narrativa?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F088 liga a ideia à fonte OPEN (2015) DOI 10.1126/science.aac4716; a evidência é resultado exploratório ou interpretativo.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Explique com suas palavras por que a frase sobre Desinformação não autoriza dizer mais do que a fonte permite.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

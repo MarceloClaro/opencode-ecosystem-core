@@ -1,6 +1,6 @@
 # Edição enxuta: 12 módulos para curso e impressão {#edicao-enxuta}
 
-> A edição de 3504 páginas é uma **obra de referência**. Para curso, clube,
+> A edição de 3502 páginas é uma **obra de referência**. Para curso, clube,
 > escola e impressão, ela precisa de uma edição enxuta. Este capítulo define a
 > versão de **12 módulos, 60 laudas e 18 experimentos**, com cerca de 600–800
 > páginas.
@@ -9,7 +9,7 @@
 
 - Um leitor de 12 anos precisa de **trilha**, não de leitura linear de 3000
   laudas.
-- A impressão de 3504 páginas em fundo escuro é inviável.
+- A impressão de 3502 páginas em fundo escuro é inviável.
 - Muitas repetições são **pedagógicas** (mesma lente em conceitos diferentes),
   mas algumas são **editoriais** (template repetido).
 - Um curso precisa de 12–16 semanas, não de três anos.
@@ -82,7 +82,7 @@ As lentes “analogia”, “erro”, “para ir além”, “diálogo”, “é
 | Ficha catalográfica | elaborada por bibliotecário |
 | Prova | 1 prova de bloco + 1 prova de capa |
 
-A edição escura de 3504 páginas continua sendo a **edição de tela**.
+A edição escura de 3502 páginas continua sendo a **edição de tela**.
 
 ## 7. Cronograma de produção
 

@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> A fidelidade proxy mede a população ideal, não a pureza do estado.</p>
 <p><strong>Pergunta de pesquisa:</strong> Quando a margem desaparece?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F059 ancora a proposição em <a href="https://doi.org/10.1103/RevModPhys.75.715">10.1103/RevModPhys.75.715</a>; grau C (resultado exploratório ou interpretativo). Limite: “Não há garantia de generalização para outros contextos” (conceito: Depolarizing).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Formule uma consequência testável de “Depolarizing mistura o estado com ruído isotrópico” e indique qual observação a refutaria.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

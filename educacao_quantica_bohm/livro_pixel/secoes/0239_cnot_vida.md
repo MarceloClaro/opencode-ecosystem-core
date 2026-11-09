@@ -10,7 +10,7 @@
 
 <p>Portas lógicas e travas também dependem de condições.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">受控非门</span> <em>shòu kòng fēi mén</em> <span class="tom">· tons 4-4-1-2 · leitura shou-kong-fei-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到受控非门。</span> <em>Wǒ zài shēng huó zhōng kàn dào shòu kòng fēi mén.</em> — Vejo “CNOT” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “Aplique H no controle, CNOT e meça os dois qubits”. Limite: “CNOT não copia um estado quântico arbitrário; ela cria correlação”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de CNOT.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

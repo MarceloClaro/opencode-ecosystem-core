@@ -11,7 +11,7 @@
 <p>A medição é um processo físico, não um postulado místico.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">有效坍缩</span> <em>yǒu xiào tān suō</em> <span class="tom">· tons 3-4-1-1 · leitura iu-shiau-tan-suo</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解有效坍缩。</span> <em>Shēn rù liǎo jiě yǒu xiào tān suō.</em> — Aprofunde-se em “Colapso efetivo”.</span></p>
 <p><strong>O que ainda não sabemos:</strong> A imagem do galho é clássica; a função de onda é matemática. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> A trajetória entra em um dos pacotes; a probabilidade é |c_i|².<br><strong>Conta:</strong> Se c₁ = 0,7, então |c₁|² = 0,49.<br><strong>Resultado:</strong> Há 49% de chance de a partícula terminar no pacote 1.<br><em>Limite:</em> Em Bohm não há colapso fundamental: a partícula já estava em uma trajetória.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.1103/PhysicsPhysiqueFizika.1.195">10.1103/PhysicsPhysiqueFizika.1.195</a>. Fonte: <a href="https://doi.org/10.1103/PhysRev.85.166">10.1103/PhysRev.85.166</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Leia a fonte complementar e formule uma pergunta de pesquisa que ela deixa aberta sobre Colapso efetivo.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

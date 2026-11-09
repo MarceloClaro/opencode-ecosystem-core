@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> O estado é uma descrição matemática; a medição é uma amostra.</p>
 <p><strong>Pergunta de pesquisa:</strong> O que é uma amplitude complexa?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F037 ancora a proposição em <a href="https://doi.org/10.5281/zenodo.2573505">10.5281/zenodo.2573505</a>; grau B (evidência experimental ou metodológica com limites). Limite: “O vetor cresce como 2^n; não é acessível por medição única”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Formule uma consequência testável de “Statevector é o vetor de amplitudes de um sistema quântico” e indique qual observação a refutaria.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

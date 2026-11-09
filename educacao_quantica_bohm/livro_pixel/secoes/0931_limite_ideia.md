@@ -19,7 +19,7 @@
 </div>
 
 <p><strong>Pense:</strong> O que este resultado não prova?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F094 liga a ideia à fonte WASSERSTEIN (2016) DOI 10.1080/00031305.2016.1154108; a evidência é evidência experimental ou metodológica com limites.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Explique com suas palavras por que a frase sobre Limite não autoriza dizer mais do que a fonte permite.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

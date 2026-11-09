@@ -11,7 +11,7 @@
 <p><strong>O erro comum:</strong> Liste três fontes de erro de um qubit físico.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">物理量子比特</span> <em>wù lǐ liàng zǐ bǐ tè</em> <span class="tom">· tons 4-3-4-3-3-4 · leitura u-li-liang-dzi-bi-te</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">物理量子比特不是魔法。</span> <em>Wù lǐ liàng zǐ bǐ tè bú shì mó fǎ.</em> — “Qubit físico” não é magia.</span></p>
 <p><strong>Correção formal:</strong> T1 e T2 são tempos de relaxação e coerência; não são a mesma coisa.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “A fonte discute o conceito e suas consequências” e admite “Não há garantia de generalização para outros contextos” (conceito: Qubit físico). O erro está em tratar esse registro como definição de Qubit físico.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Qubit físico.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

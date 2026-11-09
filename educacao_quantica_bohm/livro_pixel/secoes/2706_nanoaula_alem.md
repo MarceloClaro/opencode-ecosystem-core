@@ -11,7 +11,7 @@
 <p>A prática distribuída e a recuperação ativa têm apoio em pesquisa.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">微课</span> <em>wēi kè</em> <span class="tom">· tons 1-4 · leitura uei-ke</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解微课。</span> <em>Shēn rù liǎo jiě wēi kè.</em> — Aprofunde-se em “Nanoaula”.</span></p>
 <p><strong>O que ainda não sabemos:</strong> A técnica não funciona igual para todos os estudantes. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> 7 min = 420 s; 10 lentes = 70 min por conceito.<br><strong>Conta:</strong> 100 conceitos × 70 min = 7000 min = 116,7 h por nível.<br><strong>Resultado:</strong> Os três níveis somam ≈ 350 h de leitura ativa.<br><em>Limite:</em> O tempo é uma estimativa; compreensão não é proporcional ao tempo.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.1073/pnas.1319030111">10.1073/pnas.1319030111</a>. Fonte: <a href="https://doi.org/10.1103/PhysRevPhysEducRes.13.010109">10.1103/PhysRevPhysEducRes.13.010109</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Leia a fonte complementar e formule uma pergunta de pesquisa que ela deixa aberta sobre Nanoaula.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

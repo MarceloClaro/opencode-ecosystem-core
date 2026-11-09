@@ -19,7 +19,7 @@
 </div>
 
 <p><strong>Pense:</strong> O que o teste não prova?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F052 liga a ideia à fonte CEREZO (2021) DOI 10.1038/s42254-021-00348-9; a evidência é resultado exploratório ou interpretativo.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Explique com suas palavras por que a frase sobre VQC XOR não autoriza dizer mais do que a fonte permite.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

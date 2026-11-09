@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Uma notícia verdadeira pode ser usada para enganar pelo enquadramento?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">虚假信息</span> <em>xū jiǎ xìn xī</em> <span class="tom">· tons 1-3-4-1 · leitura shyu-djia-shin-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了虚假信息。</span> <em>Wǒ xué huì le xū jiǎ xìn xī.</em> — Eu aprendi “Desinformação”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência resultado exploratório ou interpretativo. Frase: “Desinformação é informação falsa ou fora de contexto que circula como verdade”; limite: “Não há garantia de generalização para outros contextos” (conceito: Desinformação).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Desinformação e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

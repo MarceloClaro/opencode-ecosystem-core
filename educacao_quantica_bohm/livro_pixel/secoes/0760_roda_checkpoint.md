@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Quem não consegue falar em roda e como incluir?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">对话圈</span> <em>duì huà quān</em> <span class="tom">· tons 4-4-1 · leitura duei-rua-tchyuan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了对话圈。</span> <em>Wǒ xué huì le duì huà quān.</em> — Eu aprendi “Roda de diálogo”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência definição ou teste consolidado. Frase: “A roda organiza falas, escuta e silêncio em um tempo protegido”; limite: “Não há garantia de generalização para outros contextos” (conceito: Roda de diálogo).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Roda de diálogo e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

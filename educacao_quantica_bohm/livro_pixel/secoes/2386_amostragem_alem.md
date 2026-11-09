@@ -11,7 +11,7 @@
 <p>O erro padrão cai com a raiz do número de tiros.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">采样</span> <em>cǎi yàng</em> <span class="tom">· tons 3-4 · leitura tsai-iang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解采样。</span> <em>Shēn rù liǎo jiě cǎi yàng.</em> — Aprofunde-se em “Amostragem”.</span></p>
 <p><strong>O que ainda não sabemos:</strong> A amostra não é o estado; é uma sombra estatística. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> EP = √(p(1−p)/N); intervalo de 95% ≈ p ± 1,96·EP.<br><strong>Conta:</strong> p=0,5, N=1024: EP=0,0156; 1,96×0,0156=0,0306.<br><strong>Resultado:</strong> Intervalo ≈ [0,469; 0,531].<br><em>Limite:</em> O erro de amostragem não é o erro de porta; são fontes diferentes.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: BERGHOLM (2018). Fonte: <a href="https://doi.org/10.5281/zenodo.2573505">10.5281/zenodo.2573505</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Leia a fonte complementar e formule uma pergunta de pesquisa que ela deixa aberta sobre Amostragem.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

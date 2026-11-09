@@ -19,7 +19,7 @@
 </div>
 
 <p><strong>Pense:</strong> Por que aparecem 1011 e 1101?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F051 liga a ideia à fonte ARUTE (2019) DOI 10.1038/s41586-019-1666-5; a evidência é evidência experimental ou metodológica com limites.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Explique com suas palavras por que a frase sobre GHZ real não autoriza dizer mais do que a fonte permite.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

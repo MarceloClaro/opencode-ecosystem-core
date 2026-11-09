@@ -12,7 +12,7 @@
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">有益噪声</span> <em>yǒu yì zào shēng</em> <span class="tom">· tons 3-4-4-1 · leitura iu-i-dzau-sheng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像有益噪声。</span> <em>Zhè xiàng yǒu yì zào shēng.</em> — Isto se parece com “Ruído benéfico?”.</span></p>
 <p><strong>Onde a imagem não vale:</strong> O teste é pequeno; não generaliza para outros dados ou modelos.</p>
 <p>Desenhe a imagem e marque com um X o ponto em que ela falha.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “A hipótese é empírica e depende de dataset, ansatz, seed e métrica” e o medido “A fonte discute o conceito e suas consequências” (conceito: Ruído benéfico?).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Ruído benéfico? e escreva um resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -11,7 +11,7 @@
 <p>A esfera de Bloch representa um qubit; o interior não é acessível.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子比特</span> <em>liàng zǐ bǐ tè</em> <span class="tom">· tons 4-3-3-4 · leitura liang-dzi-bi-te</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解量子比特。</span> <em>Shēn rù liǎo jiě liàng zǐ bǐ tè.</em> — Aprofunde-se em “Qubit”.</span></p>
 <p><strong>O que ainda não sabemos:</strong> A moeda tem lado definido; o qubit não tem valor escondido. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> |ψ⟩ = α|0⟩ + β|1⟩, com |α|² + |β|² = 1.<br><strong>Conta:</strong> Com α = 0,6 e β = 0,8: 0,6² + 0,8² = 0,36 + 0,64 = 1.<br><strong>Resultado:</strong> P(0) = |α|² = 0,36 e P(1) = |β|² = 0,64.<br><em>Limite:</em> As amplitudes não são probabilidades; a medição entrega um resultado, não os dois.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.22331/q-2018-08-06-79">10.22331/q-2018-08-06-79</a>. Fonte: <a href="https://doi.org/10.1017/CBO9780511976667">10.1017/CBO9780511976667</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Leia a fonte complementar e formule uma pergunta de pesquisa que ela deixa aberta sobre Qubit.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

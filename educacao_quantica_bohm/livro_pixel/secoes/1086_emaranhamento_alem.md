@@ -10,7 +10,7 @@
 
 <p>Bell mostrou que variáveis ocultas locais não reproduzem as correlações.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">纠缠</span> <em>jiū chán</em> <span class="tom">· tons 1-2 · leitura djiu-tchan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解纠缠。</span> <em>Shēn rù liǎo jiě jiū chán.</em> — Aprofunde-se em “Emaranhamento”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> |Φ⁺⟩ = (|00⟩+|11⟩)/√2.<br><strong>Conta:</strong> P(00) = |1/√2|² = 1/2; P(11) = 1/2; P(01) = P(10) = 0.<br><strong>Resultado:</strong> Cada qubit isolado tem P(0) = 1/2, mas os resultados são correlacionados.<br><em>Limite:</em> Correlação não é sinal: não se transmite informação mais rápido que a luz.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.1103/PhysRevLett.49.1804">10.1103/PhysRevLett.49.1804</a>. Fonte: <a href="https://doi.org/10.1103/PhysicsPhysiqueFizika.1.195">10.1103/PhysicsPhysiqueFizika.1.195</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Anote uma pergunta que a leitura não responde sobre Emaranhamento.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

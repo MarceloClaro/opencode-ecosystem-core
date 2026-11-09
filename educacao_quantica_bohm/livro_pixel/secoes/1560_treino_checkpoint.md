@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Um modelo treinado com dados enviesados pode ser corrigido?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">训练</span> <em>xùn liàn</em> <span class="tom">· tons 4-4 · leitura shyun-lien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了训练。</span> <em>Wǒ xué huì le xùn liàn.</em> — Eu aprendi “Treino”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau C (resultado exploratório ou interpretativo). Frase: “Treinar é ajustar parâmetros para reduzir uma função de perda”; limite: “Não há garantia de generalização para outros contextos” (conceito: Treino).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Treino e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

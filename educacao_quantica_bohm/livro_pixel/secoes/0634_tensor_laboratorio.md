@@ -20,8 +20,7 @@
 <p class="mini">Sobreposição ≠ fidelidade de estado.</p>
 <p class="mini">Script: <code>scripts/experimentos_100.py</code> · E13 · Guoji08 · <a href="#oficina-e13">oficina E13</a> · <a href="#codigo-e13">código E13</a></p>
 </div>
-
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F064 diz que a evidência é definição ou teste consolidado; o número não prova “Não há garantia de generalização para outros contextos” (conceito: Produto tensorial).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Explique com suas palavras por que o resultado não autoriza essa conclusão sobre Produto tensorial.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

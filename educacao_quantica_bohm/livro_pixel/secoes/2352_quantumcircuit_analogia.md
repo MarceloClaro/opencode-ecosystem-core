@@ -11,7 +11,7 @@
 <p>Uma prancheta com fios e espaços para colar portas.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子电路</span> <em>liàng zǐ diàn lù</em> <span class="tom">· tons 4-3-4-4 · leitura liang-dzi-dien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像量子电路。</span> <em>Zhè xiàng liàng zǐ diàn lù.</em> — Isto se parece com “QuantumCircuit”.</span></p>
 <p><strong>Limite formal:</strong> O circuito lógico precisa ser transpilado para o hardware.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “Crie um circuito de 4 qubits e meça todos” e o medido “O Qiskit separa circuito lógico e circuito transpilado”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de QuantumCircuit e escreva o resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

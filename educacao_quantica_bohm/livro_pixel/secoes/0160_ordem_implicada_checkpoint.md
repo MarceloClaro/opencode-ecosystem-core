@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Você consegue explicar o limite da analogia?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">隐缠序</span> <em>yǐn chán xù</em> <span class="tom">· tons 3-2-4 · leitura in-tchan-shyu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了隐缠序。</span> <em>Wǒ xué huì le yǐn chán xù.</em> — Eu aprendi “Ordem implicada”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência resultado exploratório ou interpretativo. Frase: “Bohm propôs que o mundo explícito se desdobra de uma totalidade implicada”; limite: “É uma visão filosófica, não uma teoria física testável por si só”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Ordem implicada e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

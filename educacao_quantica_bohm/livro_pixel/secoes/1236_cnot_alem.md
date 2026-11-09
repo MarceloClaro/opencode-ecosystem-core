@@ -10,7 +10,7 @@
 
 <p>CNOT é a porta de duas entradas que gera o estado de Bell.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">受控非门</span> <em>shòu kòng fēi mén</em> <span class="tom">· tons 4-4-1-2 · leitura shou-kong-fei-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解受控非门。</span> <em>Shēn rù liǎo jiě shòu kòng fēi mén.</em> — Aprofunde-se em “CNOT”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> CNOT: |00⟩→|00⟩, |01⟩→|01⟩, |10⟩→|11⟩, |11⟩→|10⟩.<br><strong>Conta:</strong> O primeiro bit é o controle; o segundo é o alvo.<br><strong>Resultado:</strong> CNOT|10⟩ = |11⟩; CNOT|11⟩ = |10⟩.<br><em>Limite:</em> CNOT é condicional; sem superposição, ele é uma cópia clássica condicional.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.5281/zenodo.2573505">10.5281/zenodo.2573505</a>. Fonte: <a href="https://doi.org/10.1017/CBO9780511976667">10.1017/CBO9780511976667</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Anote uma pergunta que a leitura não responde sobre CNOT.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

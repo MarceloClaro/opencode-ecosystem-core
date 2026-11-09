@@ -1,0 +1,60 @@
+{
+  "id": "E06",
+  "nome": "GHZ de 4 qubits",
+  "descricao": "Quatro qubits compartilham 0000/1111.",
+  "protocolo": {
+    "sementes": 20,
+    "shots_por_semente": 4096,
+    "total_shots": 81920,
+    "simulador": "AerSimulator",
+    "transpilacao": "optimization_level=1",
+    "seed_base": 20261109
+  },
+  "ideal": {
+    "distribuicoes": [
+      {
+        "0000": 0.4999999999999999,
+        "1111": 0.4999999999999999
+      }
+    ]
+  },
+  "reproduzido": {
+    "dist_media": [
+      {
+        "0000": 0.5010009765625,
+        "1111": 0.4989990234375
+      }
+    ],
+    "dist_ic95": [
+      {
+        "0000": [
+          0.5010009765625,
+          0.0026364382218473795
+        ],
+        "1111": [
+          0.4989990234375,
+          0.0026364382218473795
+        ]
+      }
+    ],
+    "counts_agregados": [
+      {
+        "0000": 41042,
+        "1111": 40878
+      }
+    ],
+    "leitura_agregada": "P(0000)+P(1111) = 1.000 (ideal 1,000)",
+    "tvd_media": 0.0046875,
+    "tvd_ic95": [
+      0.0032329239547186197,
+      0.00614207604528138
+    ]
+  },
+  "comparacao": {
+    "tvd_arquivo_simulado": 0.0146484375,
+    "tvd_arquivo_real": 0.2119140624999999,
+    "tvd_reproduzido_vs_arquivo_simulado": 0.013647460937500022
+  },
+  "limites": "Simulação Aer; não é execução em hardware. A TVD mede diferença entre distribuições, não fidelidade de estado. O JSON real arquivado não foi reproduzido em hardware nesta rodada.",
+  "timestamp": "2026-11-09T00:48:57-0300"
+}

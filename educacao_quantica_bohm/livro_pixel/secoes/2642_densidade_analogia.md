@@ -11,7 +11,7 @@
 <p>Uma média ponderada de várias fotos possíveis.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">密度矩阵</span> <em>mì dù jǔ zhèn</em> <span class="tom">· tons 4-4-3-4 · leitura mi-du-djyu-djen</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像密度矩阵。</span> <em>Zhè xiàng mì dù jǔ zhèn.</em> — Isto se parece com “Matriz densidade”.</span></p>
 <p><strong>Limite formal:</strong> A equação não explica por que o mundo segue a equação.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “Ela não revela uma única trajetória; descreve uma mistura” e o medido “A fonte discute o conceito e suas consequências” (conceito: Matriz densidade).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Matriz densidade e escreva o resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

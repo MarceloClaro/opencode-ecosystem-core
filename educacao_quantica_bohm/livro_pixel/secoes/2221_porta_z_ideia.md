@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> Z é diag(1,-1); a fase relativa é o recurso da interferência.</p>
 <p><strong>Pergunta de pesquisa:</strong> O que uma mudança invisível pode causar?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F023 ancora a proposição em <a href="https://doi.org/10.1017/CBO9780511976667">10.1017/CBO9780511976667</a>; grau A (definição ou teste consolidado). Limite: “Z não muda a probabilidade; ela muda o que acontece depois”.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

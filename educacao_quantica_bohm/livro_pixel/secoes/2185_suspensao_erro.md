@@ -11,7 +11,7 @@
 <p><strong>O erro comum:</strong> Achar que suspender é concordar com tudo.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">悬置</span> <em>xuán zhì</em> <span class="tom">· tons 2-4 · leitura shyuan-dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">悬置不是魔法。</span> <em>Xuán zhì bú shì mó fǎ.</em> — “Suspensão de suposições” não é magia.</span></p>
 <p><strong>Correção formal:</strong> A suspensão é uma prática, não uma prova lógica.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “A suspensão é uma prática, não uma prova lógica” e admite “Suspender não é abandonar; é ganhar distância para observar”. O erro está em tratar esse registro como definição de Suspensão de suposições.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Suspensão de suposições.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

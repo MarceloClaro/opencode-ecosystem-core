@@ -12,7 +12,7 @@
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">有益噪声</span> <em>yǒu yì zào shēng</em> <span class="tom">· tons 3-4-4-1 · leitura iu-i-dzau-sheng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">观察有益噪声。</span> <em>Guān chá yǒu yì zào shēng.</em> — Observe “Ruído benéfico?”.</span></p>
 <figure class="fig"><img class="fig-pequena" src="../livro/figuras_geradas/fig14_escada_desafios.png" alt="A escada do teste quântico real: do fácil ao research-grade."><figcaption>A escada do teste quântico real: do fácil ao research-grade.</figcaption></figure>
 <p><strong>Para testar de verdade:</strong> dataset maior, split treino/teste, múltiplas seeds e curva de ruído. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Predição = 1 se P(1) ≥ 0,5; acurácia = acertos/4.<br><strong>Conta:</strong> P(1): 42/1024=0,041; 990/1024=0,967; 975/1024=0,952; 44/1024=0,043.<br><strong>Resultado:</strong> Predições 0,1,1,0; 4 acertos em 4.<br><em>Limite:</em> Quatro pontos não medem generalização; o teste é pequeno.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau C (resultado exploratório ou interpretativo); o número não prova “Não há garantia de generalização para outros contextos” (conceito: Ruído benéfico?). Fonte do protocolo: <a href="https://doi.org/10.1038/s42254-021-00348-9">10.1038/s42254-021-00348-9</a>.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

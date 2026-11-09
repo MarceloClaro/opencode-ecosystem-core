@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> H é a matriz (1/√2)[[1,1],[1,-1]]; H² = I.</p>
 <p><strong>Pergunta de pesquisa:</strong> O que é uma superposição equilibrada?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F022 ancora a proposição em <a href="https://doi.org/10.1017/CBO9780511976667">10.1017/CBO9780511976667</a>; grau A (definição ou teste consolidado). Limite: “H não é 'um pouco de 0 e um pouco de 1'; é uma transformação precisa”.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

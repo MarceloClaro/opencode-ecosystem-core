@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> Cirq é usado em pesquisa com hardware supercondutor.</p>
 <p><strong>Pergunta de pesquisa:</strong> O que é uma linha de qubits?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F032 ancora a proposição em <a href="https://doi.org/10.5281/zenodo.2573505">10.5281/zenodo.2573505</a>; grau B (evidência experimental ou metodológica com limites). Limite: “O diagrama textual é útil, mas não é uma figura de livro”.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

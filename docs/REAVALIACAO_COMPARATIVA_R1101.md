@@ -2,7 +2,7 @@
 
 **Data:** 2026-11-08
 **Obra avaliada:** *3000 Laudas de Física Quântica: do bit ao todo — Bohm, onda piloto e informação quântica do fundamental ao PhD*.
-**Versão observada:** PDF de 3504 páginas, 3000 laudas, 100 fichas, 400 notas de cálculo, 3000 códigos únicos; 375.141 palavras e 15.178 parágrafos repetidos.
+**Versão observada:** PDF de 3502 páginas, 3000 laudas, 100 fichas, 400 notas de cálculo, 3000 códigos únicos; 482.840 palavras e 20.346 parágrafos repetidos.
 **Natureza:** avaliação editorial e comparativa. Não é peer review, certificação, estudo de eficácia ou parecer editorial.
 
 > **Escopo:** esta rodada avalia o livro quântico. *Molambudos* é uma obra literária e exige outro conjunto de comparações; não é misturado aqui.
@@ -77,7 +77,7 @@ Legenda: **●** cobertura forte/central; **◐** parcial ou limitada; **○** a
 
 | Obra | Força | Limite | Use quando |
 |---|---|---|---|
-| **Este livro** | integra Bohm, informação quântica, código, hardware, Lean e proveniência em PT-BR; 3000 laudas e 100 fichas | 3504 páginas, 15.178 parágrafos repetidos, sem peer review/eficácia/ISBN/DOI/tradução | ponte didática em português, do bit ao PhD |
+| **Este livro** | integra Bohm, informação quântica, código, hardware, Lean e proveniência em PT-BR; 3000 laudas e 100 fichas | 3502 páginas, 20.346 parágrafos repetidos, sem peer review/eficácia/ISBN/DOI/tradução | ponte didática em português, do bit ao PhD |
 | Nielsen & Chuang | referência completa de computação e informação quântica | matemática densa; não cobre Bohm nem operação de hardware real | profundidade em algoritmos, canais e QEC |
 | Preskill | panorama NISQ, complexidade e fronteira | notas avançadas, não é curso introdutório | pesquisa e fronteira NISQ |
 | Bohm & Hiley | ontologia bohmiana técnica e sistemática | não cobre computação quântica | interpretação e fundamentos |
@@ -97,11 +97,11 @@ Legenda: **●** cobertura forte/central; **◐** parcial ou limitada; **○** a
 | Info/computação | 15% | 8,0 | circuitos, Deutsch–Jozsa, Grover, Shor, VQC, QEC; apêndice com densidade, canais e algoritmos | ainda não é implementação completa nem paridade com Nielsen/Preskill |
 | Bohm/interpretação | 10% | 8,5 | Bohm como lente, ordem implicada, diálogo, limites | não substitui Bohm & Hiley |
 | Prática/hardware | 15% | 9,0 | manual, Python, Qiskit/PennyLane/Cirq, GJQ, counts, task IDs | hardware executado é limitado; grande parte é simulador |
-| Didática/autoinstrução | 15% | 8,5 | N0–N2, 10 lentes, checkpoints, 100 fichas, 400 notas | 3504 páginas e 15.178 repetições ainda dificultam leitura linear |
+| Didática/autoinstrução | 15% | 8,5 | N0–N2, 10 lentes, checkpoints, 100 fichas, 400 notas | 3502 páginas e 20.346 repetições ainda dificultam leitura linear |
 | Exercícios/avaliação | 10% | 7,2 | fichas, gabarito, checkpoints, exercícios do apêndice, protocolo de eficácia | não há estudo de eficácia concluído |
 | Rigor/formal | 10% | 8,0 | ledger, Lean, DOI, limites explícitos | Lean cobre identidades específicas, não todo o livro |
 | Reprodutibilidade | 5% | 9,0 | JSONs, task IDs, QASM hashes, build script | depende de conta/chave para execução real |
-| Produção/navegação | 5% | 8,0 | 3504 pp na referência; curso de 626 pp e piloto de 76 pp com PDF claro/EPUB | PDF escuro na referência; audiolivro de 12:50 é seleção, não narração integral |
+| Produção/navegação | 5% | 8,0 | 3502 pp na referência; curso de 626 pp e piloto de 76 pp com PDF claro/EPUB | PDF escuro na referência; audiolivro de 12:50 é seleção, não narração integral |
 | Validação externa | 10% | 2,5 | pacote de peer review e protocolo | nenhum parecer, nenhum dado de eficácia, sem ISBN/DOI |
 
 ### Conta da nota
@@ -151,22 +151,22 @@ O valor está na **integração didática**, não na substituição de uma refer
 Além disso:
 
 - **Validação externa:** 0 pareceres, 0 dados de eficácia, sem ISBN/DOI, sem edição inglesa.
-- **Repetição:** caiu de 451.411 para 375.141 palavras e de 21.031 para 15.178 parágrafos repetidos; o restante é repetição estrutural de lente/parte.
-- **Tamanho:** 3504 páginas em A5 e tema escuro; a edição de curso/print é um projeto separado.
+- **Repetição:** os parágrafos repetidos caíram de 21.031 para 20.346; o total de palavras subiu de 451.411 para 482.840 com a expansão por dossiês específicos, mantendo a repetição abaixo do limite de 22.000.
+- **Tamanho:** 3502 páginas em A5 e tema escuro; a edição de curso/print é um projeto separado.
 - **Acessibilidade:** a referência não tem EPUB/audiobook; o piloto enxuto tem PDF claro e EPUB de 76 páginas, mas ainda cobre 60 laudas, não a edição final de 600–800 páginas.
-- **Correções P0 aplicadas:** os três documentos agora citam 3504 páginas; o PDF foi recompilado. Restam P1 (peer review, eficácia, ISBN/DOI, inglês) e P2 (EPUB/print, revisão fina).
+- **Correções P0 aplicadas:** os três documentos agora citam 3502 páginas; o PDF foi recompilado. Restam P1 (peer review, eficácia, ISBN/DOI, inglês) e P2 (EPUB/print, revisão fina).
 
 ## 9. Correções pendentes no livro
 
 | Status | Arquivo | Correção |
 |---|---|---|
-| ✅ | `PACOTE_PEER_REVIEW.md` | 3580 → 3504 páginas |
-| ✅ | `EDICAO_ENXUTA.md` | 3580 → 3504 páginas |
-| ✅ | `INTERNATIONAL_EDITION.md` | 3580 → 3504 páginas |
+| ✅ | `PACOTE_PEER_REVIEW.md` | 3580 → 3502 páginas |
+| ✅ | `EDICAO_ENXUTA.md` | 3580 → 3502 páginas |
+| ✅ | `INTERNATIONAL_EDITION.md` | 3580 → 3502 páginas |
 | ✅ | `PROFUNDIDADE_CIENTIFICA.md` | FAS-GPU `S=2,871094 ± 0,043506` como simulador; separado de Guoji08 `S=2,383` |
 | ✅ | `LEDGER_AFIRMACOES.md` | Bell/CHSH GJQ como `measured (simulador)`, com task IDs |
-| ✅ | `RELATORIO_REPETICOES.md` | 21.031 → 15.178 parágrafos; 451.411 → 375.141 palavras |
-| ✅ | PDF | recompilado; 3504 páginas; 18.422.988 bytes |
+| ✅ | `RELATORIO_REPETICOES.md` | 21.031 → 20.346 parágrafos; 451.411 → 482.840 palavras |
+| ✅ | PDF | recompilado; 3502 páginas; 19.987.690 bytes |
 | ✅ | README | contagem, tamanho e links atualizados |
 | ⏳ | `PACOTE_PEER_REVIEW.md` | executar 3 pareceres externos; hoje a nota de peer review é 3/10 |
 | ⏳ | `AVALIACAO_EFICACIA.md` | aprovar no CEP e executar o estudo; hoje é protocolo |

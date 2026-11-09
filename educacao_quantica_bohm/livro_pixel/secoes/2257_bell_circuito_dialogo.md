@@ -11,7 +11,7 @@
 <p><strong>Pergunta de pesquisa:</strong> O que é um estado maximamente emaranhado?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">贝尔电路</span> <em>bèi ěr diàn lù</em> <span class="tom">· tons 4-3-4-4 · leitura bei-er-dien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看贝尔电路？</span> <em>Nǐ zěn me kàn bèi ěr diàn lù?</em> — O que você pensa de “Circuito de Bell”?</span></p>
 <p><strong>Hipótese rival:</strong> A imagem clássica não explica a violação de Bell.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Hipótese rival: “A imagem clássica não explica a violação de Bell”. Fonte: <a href="https://doi.org/10.1017/CBO9780511976667">10.1017/CBO9780511976667</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda a hipótese rival e peça a alguém para refutá-la em Circuito de Bell.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -11,7 +11,7 @@
 <p>Uma rachadura que mostra onde a parede precisa de reforço.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">建设性错误</span> <em>jiàn shè xìng cuò wù</em> <span class="tom">· tons 4-4-4-4-4 · leitura djien-she-shing-tsuo-u</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像建设性错误。</span> <em>Zhè xiàng jiàn shè xìng cuò wù.</em> — Isto se parece com “Erro produtivo”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> A técnica não funciona igual para todos os estudantes.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “Nem todo erro é produtivo; repetir sem análise não ensina” e o medido “A fonte discute o conceito e suas consequências” (conceito: Erro produtivo).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Erro produtivo e escreva o resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

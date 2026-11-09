@@ -1,0 +1,53 @@
+{
+  "id": "E04",
+  "nome": "Interferência H-Z-H",
+  "descricao": "A fase Z inverte a interferência: o resultado vira |1⟩.",
+  "protocolo": {
+    "sementes": 20,
+    "shots_por_semente": 4096,
+    "total_shots": 81920,
+    "simulador": "AerSimulator",
+    "transpilacao": "optimization_level=1",
+    "seed_base": 20261109
+  },
+  "ideal": {
+    "distribuicoes": [
+      {
+        "1": 0.9999999999999996
+      }
+    ]
+  },
+  "reproduzido": {
+    "dist_media": [
+      {
+        "1": 1.0
+      }
+    ],
+    "dist_ic95": [
+      {
+        "1": [
+          1.0,
+          0.0
+        ]
+      }
+    ],
+    "counts_agregados": [
+      {
+        "1": 81920
+      }
+    ],
+    "leitura_agregada": "P(1) = 1.000 (ideal 1,000)",
+    "tvd_media": 2.220446049250313e-16,
+    "tvd_ic95": [
+      2.220446049250313e-16,
+      2.220446049250313e-16
+    ]
+  },
+  "comparacao": {
+    "tvd_arquivo_simulado": 2.220446049250313e-16,
+    "tvd_arquivo_real": 0.013671874999999778,
+    "tvd_reproduzido_vs_arquivo_simulado": 0.0
+  },
+  "limites": "Simulação Aer; não é execução em hardware. A TVD mede diferença entre distribuições, não fidelidade de estado. O JSON real arquivado não foi reproduzido em hardware nesta rodada.",
+  "timestamp": "2026-11-09T00:48:51-0300"
+}

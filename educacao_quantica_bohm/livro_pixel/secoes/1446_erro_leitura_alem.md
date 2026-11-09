@@ -10,7 +10,7 @@
 
 <p>T1 e T2 são tempos de relaxação e coerência; não são a mesma coisa.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">读取错误</span> <em>dú qǔ cuò wù</em> <span class="tom">· tons 2-3-4-4 · leitura du-tchyu-tsuo-u</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解读取错误。</span> <em>Shēn rù liǎo jiě dú qǔ cuò wù.</em> — Aprofunde-se em “Erro de leitura”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Erro de leitura = média de P(1|0) e P(0|1).<br><strong>Conta:</strong> Exemplo: P(1|0)=0,008 e P(0|1)=0,008.<br><strong>Resultado:</strong> Erro médio = 0,8%; em 1024 tiros, ≈ 8 leituras erradas.<br><em>Limite:</em> Erro de leitura não é erro de porta; a mitigação é outra.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.1103/RevModPhys.75.715">10.1103/RevModPhys.75.715</a>. Fonte: <a href="https://doi.org/10.22331/q-2018-08-06-79">10.22331/q-2018-08-06-79</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Anote uma pergunta que a leitura não responde sobre Erro de leitura.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

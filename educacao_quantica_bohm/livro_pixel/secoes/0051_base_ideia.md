@@ -19,7 +19,7 @@
 </div>
 
 <p><strong>Pense:</strong> O que muda quando mudamos a pergunta?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F006 liga a ideia à fonte SHANNON (1948) DOI 10.1002/j.1538-7305.1948.tb01338.x; a evidência é definição ou teste consolidado.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Explique com suas palavras por que a frase sobre Base não autoriza dizer mais do que a fonte permite.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

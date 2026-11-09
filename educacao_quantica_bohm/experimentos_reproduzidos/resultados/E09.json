@@ -1,0 +1,60 @@
+{
+  "id": "E09",
+  "nome": "Codificação de amplitude",
+  "descricao": "Ry(2π/3) prepara P(1)=0,75.",
+  "protocolo": {
+    "sementes": 20,
+    "shots_por_semente": 4096,
+    "total_shots": 81920,
+    "simulador": "AerSimulator",
+    "transpilacao": "optimization_level=1",
+    "seed_base": 20261109
+  },
+  "ideal": {
+    "distribuicoes": [
+      {
+        "0": 0.2500000000000001,
+        "1": 0.7499999999999999
+      }
+    ]
+  },
+  "reproduzido": {
+    "dist_media": [
+      {
+        "0": 0.2498779296875,
+        "1": 0.7501220703125
+      }
+    ],
+    "dist_ic95": [
+      {
+        "0": [
+          0.2498779296875,
+          0.0024403486634022725
+        ],
+        "1": [
+          0.7501220703125,
+          0.0024403486634022725
+        ]
+      }
+    ],
+    "counts_agregados": [
+      {
+        "0": 20470,
+        "1": 61450
+      }
+    ],
+    "leitura_agregada": "P(1) = 0.750 (ideal 0,750)",
+    "tvd_media": 0.0042724609375000226,
+    "tvd_ic95": [
+      0.0029495458955520856,
+      0.00559537597944796
+    ]
+  },
+  "comparacao": {
+    "tvd_arquivo_simulado": 0.014648437499999889,
+    "tvd_arquivo_real": 0.006835937499999889,
+    "tvd_reproduzido_vs_arquivo_simulado": 0.0147705078125
+  },
+  "limites": "Simulação Aer; não é execução em hardware. A TVD mede diferença entre distribuições, não fidelidade de estado. O JSON real arquivado não foi reproduzido em hardware nesta rodada.",
+  "timestamp": "2026-11-09T00:49:17-0300"
+}

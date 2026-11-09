@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> Qiskit inclui Statevector, transpilação e visualizações.</p>
 <p><strong>Pergunta de pesquisa:</strong> O que é uma convenção de bits?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F033 ancora a proposição em <a href="https://doi.org/10.5281/zenodo.2573505">10.5281/zenodo.2573505</a>; grau B (evidência experimental ou metodológica com limites). Limite: “O desenho do circuito não é o circuito físico; é uma representação”.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

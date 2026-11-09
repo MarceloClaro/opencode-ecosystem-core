@@ -1,0 +1,1298 @@
+{
+  "timestamp": "2026-11-09T00:49:58-0300",
+  "protocolo": {
+    "simulador": "AerSimulator",
+    "sementes": 20,
+    "shots_por_semente": 4096,
+    "total_shots": 81920,
+    "seed_base": 20261109
+  },
+  "experimentos": {
+    "E01": {
+      "id": "E01",
+      "nome": "Base |0⟩",
+      "descricao": "Prepara |0⟩ e mede 1024 vezes.",
+      "protocolo": {
+        "sementes": 20,
+        "shots_por_semente": 4096,
+        "total_shots": 81920,
+        "simulador": "AerSimulator",
+        "transpilacao": "optimization_level=1",
+        "seed_base": 20261109
+      },
+      "ideal": {
+        "distribuicoes": [
+          {
+            "0": 1.0
+          }
+        ]
+      },
+      "reproduzido": {
+        "dist_media": [
+          {
+            "0": 1.0
+          }
+        ],
+        "dist_ic95": [
+          {
+            "0": [
+              1.0,
+              0.0
+            ]
+          }
+        ],
+        "counts_agregados": [
+          {
+            "0": 81920
+          }
+        ],
+        "leitura_agregada": "P(0) = 1.000 (ideal 1,000)",
+        "tvd_media": 0.0,
+        "tvd_ic95": [
+          0.0,
+          0.0
+        ]
+      },
+      "comparacao": {
+        "tvd_arquivo_simulado": 0.0,
+        "tvd_arquivo_real": 0.0078125,
+        "tvd_reproduzido_vs_arquivo_simulado": 0.0
+      },
+      "limites": "Simulação Aer; não é execução em hardware. A TVD mede diferença entre distribuições, não fidelidade de estado. O JSON real arquivado não foi reproduzido em hardware nesta rodada.",
+      "timestamp": "2026-11-09T00:48:42-0300"
+    },
+    "E02": {
+      "id": "E02",
+      "nome": "Base |1⟩ e leitura",
+      "descricao": "Prepara |1⟩ e mede; a discrepância é erro de leitura.",
+      "protocolo": {
+        "sementes": 20,
+        "shots_por_semente": 4096,
+        "total_shots": 81920,
+        "simulador": "AerSimulator",
+        "transpilacao": "optimization_level=1",
+        "seed_base": 20261109
+      },
+      "ideal": {
+        "distribuicoes": [
+          {
+            "1": 1.0
+          }
+        ]
+      },
+      "reproduzido": {
+        "dist_media": [
+          {
+            "1": 1.0
+          }
+        ],
+        "dist_ic95": [
+          {
+            "1": [
+              1.0,
+              0.0
+            ]
+          }
+        ],
+        "counts_agregados": [
+          {
+            "1": 81920
+          }
+        ],
+        "leitura_agregada": "P(1) = 1.000 (ideal 1,000)",
+        "tvd_media": 0.0,
+        "tvd_ic95": [
+          0.0,
+          0.0
+        ]
+      },
+      "comparacao": {
+        "tvd_arquivo_simulado": 0.0,
+        "tvd_arquivo_real": 0.013671875,
+        "tvd_reproduzido_vs_arquivo_simulado": 0.0
+      },
+      "limites": "Simulação Aer; não é execução em hardware. A TVD mede diferença entre distribuições, não fidelidade de estado. O JSON real arquivado não foi reproduzido em hardware nesta rodada.",
+      "timestamp": "2026-11-09T00:48:45-0300"
+    },
+    "E03": {
+      "id": "E03",
+      "nome": "Superposição H|0⟩",
+      "descricao": "H cria uma superposição; a medição produz 0 ou 1.",
+      "protocolo": {
+        "sementes": 20,
+        "shots_por_semente": 4096,
+        "total_shots": 81920,
+        "simulador": "AerSimulator",
+        "transpilacao": "optimization_level=1",
+        "seed_base": 20261109
+      },
+      "ideal": {
+        "distribuicoes": [
+          {
+            "0": 0.4999999999999999,
+            "1": 0.4999999999999999
+          }
+        ]
+      },
+      "reproduzido": {
+        "dist_media": [
+          {
+            "0": 0.4993896484375,
+            "1": 0.5006103515625
+          }
+        ],
+        "dist_ic95": [
+          {
+            "0": [
+              0.4993896484375,
+              0.00346419058512388
+            ],
+            "1": [
+              0.5006103515625,
+              0.00346419058512388
+            ]
+          }
+        ],
+        "counts_agregados": [
+          {
+            "0": 40910,
+            "1": 41010
+          }
+        ],
+        "leitura_agregada": "P(1) = 0.501 (ideal 0,500)",
+        "tvd_media": 0.006030273437500006,
+        "tvd_ic95": [
+          0.00410612161770159,
+          0.007954425257298421
+        ]
+      },
+      "comparacao": {
+        "tvd_arquivo_simulado": 0.00390625,
+        "tvd_arquivo_real": 0.017578125,
+        "tvd_reproduzido_vs_arquivo_simulado": 0.0045166015625
+      },
+      "limites": "Simulação Aer; não é execução em hardware. A TVD mede diferença entre distribuições, não fidelidade de estado. O JSON real arquivado não foi reproduzido em hardware nesta rodada.",
+      "timestamp": "2026-11-09T00:48:48-0300"
+    },
+    "E04": {
+      "id": "E04",
+      "nome": "Interferência H-Z-H",
+      "descricao": "A fase Z inverte a interferência: o resultado vira |1⟩.",
+      "protocolo": {
+        "sementes": 20,
+        "shots_por_semente": 4096,
+        "total_shots": 81920,
+        "simulador": "AerSimulator",
+        "transpilacao": "optimization_level=1",
+        "seed_base": 20261109
+      },
+      "ideal": {
+        "distribuicoes": [
+          {
+            "1": 0.9999999999999996
+          }
+        ]
+      },
+      "reproduzido": {
+        "dist_media": [
+          {
+            "1": 1.0
+          }
+        ],
+        "dist_ic95": [
+          {
+            "1": [
+              1.0,
+              0.0
+            ]
+          }
+        ],
+        "counts_agregados": [
+          {
+            "1": 81920
+          }
+        ],
+        "leitura_agregada": "P(1) = 1.000 (ideal 1,000)",
+        "tvd_media": 2.220446049250313e-16,
+        "tvd_ic95": [
+          2.220446049250313e-16,
+          2.220446049250313e-16
+        ]
+      },
+      "comparacao": {
+        "tvd_arquivo_simulado": 2.220446049250313e-16,
+        "tvd_arquivo_real": 0.013671874999999778,
+        "tvd_reproduzido_vs_arquivo_simulado": 0.0
+      },
+      "limites": "Simulação Aer; não é execução em hardware. A TVD mede diferença entre distribuições, não fidelidade de estado. O JSON real arquivado não foi reproduzido em hardware nesta rodada.",
+      "timestamp": "2026-11-09T00:48:51-0300"
+    },
+    "E05": {
+      "id": "E05",
+      "nome": "Estado de Bell",
+      "descricao": "H + CNOT criam uma correlação 00/11.",
+      "protocolo": {
+        "sementes": 20,
+        "shots_por_semente": 4096,
+        "total_shots": 81920,
+        "simulador": "AerSimulator",
+        "transpilacao": "optimization_level=1",
+        "seed_base": 20261109
+      },
+      "ideal": {
+        "distribuicoes": [
+          {
+            "00": 0.4999999999999999,
+            "11": 0.4999999999999999
+          }
+        ]
+      },
+      "reproduzido": {
+        "dist_media": [
+          {
+            "00": 0.4985595703125,
+            "11": 0.5014404296875
+          }
+        ],
+        "dist_ic95": [
+          {
+            "00": [
+              0.4985595703125,
+              0.0030781973912641395
+            ],
+            "11": [
+              0.5014404296875,
+              0.0030781973912641395
+            ]
+          }
+        ],
+        "counts_agregados": [
+          {
+            "11": 41078,
+            "00": 40842
+          }
+        ],
+        "leitura_agregada": "P(00)+P(11) = 1.000 (ideal 1,000)",
+        "tvd_media": 0.00498046875,
+        "tvd_ic95": [
+          0.0029226528477526333,
+          0.007038284652247366
+        ]
+      },
+      "comparacao": {
+        "tvd_arquivo_simulado": 0.0185546875,
+        "tvd_arquivo_real": 0.05859374999999989,
+        "tvd_reproduzido_vs_arquivo_simulado": 0.019995117187500022
+      },
+      "limites": "Simulação Aer; não é execução em hardware. A TVD mede diferença entre distribuições, não fidelidade de estado. O JSON real arquivado não foi reproduzido em hardware nesta rodada.",
+      "timestamp": "2026-11-09T00:48:54-0300"
+    },
+    "E06": {
+      "id": "E06",
+      "nome": "GHZ de 4 qubits",
+      "descricao": "Quatro qubits compartilham 0000/1111.",
+      "protocolo": {
+        "sementes": 20,
+        "shots_por_semente": 4096,
+        "total_shots": 81920,
+        "simulador": "AerSimulator",
+        "transpilacao": "optimization_level=1",
+        "seed_base": 20261109
+      },
+      "ideal": {
+        "distribuicoes": [
+          {
+            "0000": 0.4999999999999999,
+            "1111": 0.4999999999999999
+          }
+        ]
+      },
+      "reproduzido": {
+        "dist_media": [
+          {
+            "0000": 0.5010009765625,
+            "1111": 0.4989990234375
+          }
+        ],
+        "dist_ic95": [
+          {
+            "0000": [
+              0.5010009765625,
+              0.0026364382218473795
+            ],
+            "1111": [
+              0.4989990234375,
+              0.0026364382218473795
+            ]
+          }
+        ],
+        "counts_agregados": [
+          {
+            "0000": 41042,
+            "1111": 40878
+          }
+        ],
+        "leitura_agregada": "P(0000)+P(1111) = 1.000 (ideal 1,000)",
+        "tvd_media": 0.0046875,
+        "tvd_ic95": [
+          0.0032329239547186197,
+          0.00614207604528138
+        ]
+      },
+      "comparacao": {
+        "tvd_arquivo_simulado": 0.0146484375,
+        "tvd_arquivo_real": 0.2119140624999999,
+        "tvd_reproduzido_vs_arquivo_simulado": 0.013647460937500022
+      },
+      "limites": "Simulação Aer; não é execução em hardware. A TVD mede diferença entre distribuições, não fidelidade de estado. O JSON real arquivado não foi reproduzido em hardware nesta rodada.",
+      "timestamp": "2026-11-09T00:48:57-0300"
+    },
+    "E07": {
+      "id": "E07",
+      "nome": "CHSH",
+      "descricao": "Quatro configurações medem S.",
+      "protocolo": {
+        "sementes": 20,
+        "shots_por_semente": 4096,
+        "total_shots": 81920,
+        "simulador": "AerSimulator",
+        "transpilacao": "optimization_level=1",
+        "seed_base": 20261109
+      },
+      "ideal": {
+        "distribuicoes": [
+          {
+            "00": 0.42677669529663675,
+            "01": 0.07322330470336309,
+            "10": 0.07322330470336309,
+            "11": 0.42677669529663675
+          },
+          {
+            "00": 0.42677669529663675,
+            "01": 0.07322330470336309,
+            "10": 0.07322330470336309,
+            "11": 0.42677669529663675
+          },
+          {
+            "00": 0.42677669529663664,
+            "01": 0.07322330470336307,
+            "10": 0.07322330470336309,
+            "11": 0.42677669529663664
+          },
+          {
+            "00": 0.07322330470336307,
+            "01": 0.42677669529663664,
+            "10": 0.42677669529663664,
+            "11": 0.07322330470336309
+          }
+        ]
+      },
+      "reproduzido": {
+        "dist_media": [
+          {
+            "00": 0.42664794921875,
+            "01": 0.07274169921875,
+            "10": 0.07320556640625,
+            "11": 0.42740478515625
+          },
+          {
+            "00": 0.42742919921875,
+            "01": 0.075048828125,
+            "10": 0.07279052734375,
+            "11": 0.4247314453125
+          },
+          {
+            "00": 0.42772216796875,
+            "01": 0.07193603515625,
+            "10": 0.07388916015625,
+            "11": 0.42645263671875
+          },
+          {
+            "00": 0.07386474609375,
+            "01": 0.431201171875,
+            "10": 0.42313232421875,
+            "11": 0.0718017578125
+          }
+        ],
+        "dist_ic95": [
+          {
+            "00": [
+              0.42664794921875,
+              0.002651919548784195
+            ],
+            "01": [
+              0.07274169921875,
+              0.0024100254685078034
+            ],
+            "10": [
+              0.07320556640625,
+              0.0019008615495565808
+            ],
+            "11": [
+              0.42740478515625,
+              0.0041302436127786495
+            ]
+          },
+          {
+            "00": [
+              0.42742919921875,
+              0.003608056944220077
+            ],
+            "01": [
+              0.075048828125,
+              0.0015646355870384103
+            ],
+            "10": [
+              0.07279052734375,
+              0.002074733990125544
+            ],
+            "11": [
+              0.4247314453125,
+              0.003202521915093383
+            ]
+          },
+          {
+            "00": [
+              0.42772216796875,
+              0.0031353859778888303
+            ],
+            "01": [
+              0.07193603515625,
+              0.001632075243020063
+            ],
+            "10": [
+              0.07388916015625,
+              0.0024131026981875654
+            ],
+            "11": [
+              0.42645263671875,
+              0.002488686754413057
+            ]
+          },
+          {
+            "00": [
+              0.07386474609375,
+              0.00153541110224964
+            ],
+            "01": [
+              0.431201171875,
+              0.0037501332446067247
+            ],
+            "10": [
+              0.42313232421875,
+              0.004083564281933462
+            ],
+            "11": [
+              0.0718017578125,
+              0.0020539723564690373
+            ]
+          }
+        ],
+        "counts_agregados": [
+          {
+            "01": 5959,
+            "10": 5997,
+            "00": 34951,
+            "11": 35013
+          },
+          {
+            "11": 34794,
+            "01": 6148,
+            "10": 5963,
+            "00": 35015
+          },
+          {
+            "01": 5893,
+            "11": 34935,
+            "10": 6053,
+            "00": 35039
+          },
+          {
+            "11": 5882,
+            "00": 6051,
+            "10": 34663,
+            "01": 35324
+          }
+        ],
+        "leitura_agregada": "S = 2.829 (ideal 2,828)",
+        "tvd_media": 0.009456925391021583,
+        "tvd_ic95": [
+          0.008561633609471715,
+          0.01035221717257145
+        ]
+      },
+      "comparacao": {
+        "tvd_arquivo_simulado": 0.017578125000000038,
+        "tvd_arquivo_real": 0.05570182809327361,
+        "tvd_reproduzido_vs_arquivo_simulado": 0.01835021972656249
+      },
+      "limites": "Simulação Aer; não é execução em hardware. A TVD mede diferença entre distribuições, não fidelidade de estado. O JSON real arquivado não foi reproduzido em hardware nesta rodada.",
+      "timestamp": "2026-11-09T00:49:11-0300"
+    },
+    "E08": {
+      "id": "E08",
+      "nome": "Gerador quântico de números",
+      "descricao": "H + medição produzem bits aproximadamente equilibrados.",
+      "protocolo": {
+        "sementes": 20,
+        "shots_por_semente": 4096,
+        "total_shots": 81920,
+        "simulador": "AerSimulator",
+        "transpilacao": "optimization_level=1",
+        "seed_base": 20261109
+      },
+      "ideal": {
+        "distribuicoes": [
+          {
+            "0": 0.4999999999999999,
+            "1": 0.4999999999999999
+          }
+        ]
+      },
+      "reproduzido": {
+        "dist_media": [
+          {
+            "0": 0.4993896484375,
+            "1": 0.5006103515625
+          }
+        ],
+        "dist_ic95": [
+          {
+            "0": [
+              0.4993896484375,
+              0.00346419058512388
+            ],
+            "1": [
+              0.5006103515625,
+              0.00346419058512388
+            ]
+          }
+        ],
+        "counts_agregados": [
+          {
+            "0": 40910,
+            "1": 41010
+          }
+        ],
+        "leitura_agregada": "|P(0)-P(1)| = 0.001 (ideal 0,000)",
+        "tvd_media": 0.006030273437500006,
+        "tvd_ic95": [
+          0.00410612161770159,
+          0.007954425257298421
+        ]
+      },
+      "comparacao": {
+        "tvd_arquivo_simulado": 0.0185546875,
+        "tvd_arquivo_real": 0.017578125,
+        "tvd_reproduzido_vs_arquivo_simulado": 0.0179443359375
+      },
+      "limites": "Simulação Aer; não é execução em hardware. A TVD mede diferença entre distribuições, não fidelidade de estado. O JSON real arquivado não foi reproduzido em hardware nesta rodada.",
+      "timestamp": "2026-11-09T00:49:14-0300"
+    },
+    "E09": {
+      "id": "E09",
+      "nome": "Codificação de amplitude",
+      "descricao": "Ry(2π/3) prepara P(1)=0,75.",
+      "protocolo": {
+        "sementes": 20,
+        "shots_por_semente": 4096,
+        "total_shots": 81920,
+        "simulador": "AerSimulator",
+        "transpilacao": "optimization_level=1",
+        "seed_base": 20261109
+      },
+      "ideal": {
+        "distribuicoes": [
+          {
+            "0": 0.2500000000000001,
+            "1": 0.7499999999999999
+          }
+        ]
+      },
+      "reproduzido": {
+        "dist_media": [
+          {
+            "0": 0.2498779296875,
+            "1": 0.7501220703125
+          }
+        ],
+        "dist_ic95": [
+          {
+            "0": [
+              0.2498779296875,
+              0.0024403486634022725
+            ],
+            "1": [
+              0.7501220703125,
+              0.0024403486634022725
+            ]
+          }
+        ],
+        "counts_agregados": [
+          {
+            "0": 20470,
+            "1": 61450
+          }
+        ],
+        "leitura_agregada": "P(1) = 0.750 (ideal 0,750)",
+        "tvd_media": 0.0042724609375000226,
+        "tvd_ic95": [
+          0.0029495458955520856,
+          0.00559537597944796
+        ]
+      },
+      "comparacao": {
+        "tvd_arquivo_simulado": 0.014648437499999889,
+        "tvd_arquivo_real": 0.006835937499999889,
+        "tvd_reproduzido_vs_arquivo_simulado": 0.0147705078125
+      },
+      "limites": "Simulação Aer; não é execução em hardware. A TVD mede diferença entre distribuições, não fidelidade de estado. O JSON real arquivado não foi reproduzido em hardware nesta rodada.",
+      "timestamp": "2026-11-09T00:49:17-0300"
+    },
+    "E10": {
+      "id": "E10",
+      "nome": "Classificador XOR (VQC)",
+      "descricao": "Quatro entradas, quatro medições, uma acurácia.",
+      "protocolo": {
+        "sementes": 20,
+        "shots_por_semente": 4096,
+        "total_shots": 81920,
+        "simulador": "AerSimulator",
+        "transpilacao": "optimization_level=1",
+        "seed_base": 20261109
+      },
+      "ideal": {
+        "distribuicoes": [
+          {
+            "0": 0.9999999999966265,
+            "1": 3.3731089327037828e-12
+          },
+          {
+            "0": 1.6865544663714785e-11,
+            "1": 0.9999999999831342
+          },
+          {
+            "0": 3.3731089326673715e-12,
+            "1": 0.9999999999966267
+          },
+          {
+            "0": 0.9999999999831342,
+            "1": 1.6865544663941978e-11
+          }
+        ]
+      },
+      "reproduzido": {
+        "dist_media": [
+          {
+            "0": 1.0
+          },
+          {
+            "1": 1.0
+          },
+          {
+            "1": 1.0
+          },
+          {
+            "0": 1.0
+          }
+        ],
+        "dist_ic95": [
+          {
+            "0": [
+              1.0,
+              0.0
+            ]
+          },
+          {
+            "1": [
+              1.0,
+              0.0
+            ]
+          },
+          {
+            "1": [
+              1.0,
+              0.0
+            ]
+          },
+          {
+            "0": [
+              1.0,
+              0.0
+            ]
+          }
+        ],
+        "counts_agregados": [
+          {
+            "0": 81920
+          },
+          {
+            "1": 81920
+          },
+          {
+            "1": 81920
+          },
+          {
+            "0": 81920
+          }
+        ],
+        "leitura_agregada": "Acurácia = 4/4",
+        "tvd_media": 1.0119477078282024e-11,
+        "tvd_ic95": [
+          1.0119477078282024e-11,
+          1.0119477078282024e-11
+        ]
+      },
+      "comparacao": {
+        "tvd_arquivo_simulado": 1.0119477078282024e-11,
+        "tvd_arquivo_real": 0.041259765614880525,
+        "tvd_reproduzido_vs_arquivo_simulado": 0.0
+      },
+      "limites": "Simulação Aer; não é execução em hardware. A TVD mede diferença entre distribuições, não fidelidade de estado. O JSON real arquivado não foi reproduzido em hardware nesta rodada.",
+      "timestamp": "2026-11-09T00:49:31-0300"
+    },
+    "E11": {
+      "id": "E11",
+      "nome": "Interferência de dois qubits",
+      "descricao": "H, CZ e H concentram a distribuição em 00/11.",
+      "protocolo": {
+        "sementes": 20,
+        "shots_por_semente": 4096,
+        "total_shots": 81920,
+        "simulador": "AerSimulator",
+        "transpilacao": "optimization_level=1",
+        "seed_base": 20261109
+      },
+      "ideal": {
+        "distribuicoes": [
+          {
+            "00": 0.4999999999999998,
+            "01": 5.286997409534849e-34,
+            "10": 5.286997409534849e-34,
+            "11": 0.4999999999999998
+          }
+        ]
+      },
+      "reproduzido": {
+        "dist_media": [
+          {
+            "00": 0.4985595703125,
+            "11": 0.5014404296875
+          }
+        ],
+        "dist_ic95": [
+          {
+            "00": [
+              0.4985595703125,
+              0.0030781973912641395
+            ],
+            "11": [
+              0.5014404296875,
+              0.0030781973912641395
+            ]
+          }
+        ],
+        "counts_agregados": [
+          {
+            "11": 41078,
+            "00": 40842
+          }
+        ],
+        "leitura_agregada": "P(00) = 0.499 (ideal 0,500)",
+        "tvd_media": 0.00498046875,
+        "tvd_ic95": [
+          0.0029226528477526333,
+          0.007038284652247366
+        ]
+      },
+      "comparacao": {
+        "tvd_arquivo_simulado": 0.01171875,
+        "tvd_arquivo_real": 0.05664062499999978,
+        "tvd_reproduzido_vs_arquivo_simulado": 0.010278320312499978
+      },
+      "limites": "Simulação Aer; não é execução em hardware. A TVD mede diferença entre distribuições, não fidelidade de estado. O JSON real arquivado não foi reproduzido em hardware nesta rodada.",
+      "timestamp": "2026-11-09T00:49:34-0300"
+    },
+    "E12": {
+      "id": "E12",
+      "nome": "QFT de 3 qubits",
+      "descricao": "A transformada de Fourier quântica uniformiza a saída.",
+      "protocolo": {
+        "sementes": 20,
+        "shots_por_semente": 4096,
+        "total_shots": 81920,
+        "simulador": "AerSimulator",
+        "transpilacao": "optimization_level=1",
+        "seed_base": 20261109
+      },
+      "ideal": {
+        "distribuicoes": [
+          {
+            "000": 0.12500000000000003,
+            "001": 0.12500000000000003,
+            "010": 0.12500000000000003,
+            "011": 0.12500000000000003,
+            "100": 0.12500000000000003,
+            "101": 0.12500000000000003,
+            "110": 0.12500000000000003,
+            "111": 0.12500000000000003
+          }
+        ]
+      },
+      "reproduzido": {
+        "dist_media": [
+          {
+            "000": 0.1238037109375,
+            "001": 0.12607421875,
+            "010": 0.1249755859375,
+            "011": 0.1245361328125,
+            "100": 0.1254638671875,
+            "101": 0.12418212890625,
+            "110": 0.12471923828125,
+            "111": 0.1262451171875
+          }
+        ],
+        "dist_ic95": [
+          {
+            "000": [
+              0.1238037109375,
+              0.0020348145696548786
+            ],
+            "001": [
+              0.12607421875,
+              0.0019878408638013163
+            ],
+            "010": [
+              0.1249755859375,
+              0.0017626787009729376
+            ],
+            "011": [
+              0.1245361328125,
+              0.002830984647243238
+            ],
+            "100": [
+              0.1254638671875,
+              0.0019158490763430617
+            ],
+            "101": [
+              0.12418212890625,
+              0.0034394622417928703
+            ],
+            "110": [
+              0.12471923828125,
+              0.002517619401238966
+            ],
+            "111": [
+              0.1262451171875,
+              0.002843819472317616
+            ]
+          }
+        ],
+        "counts_agregados": [
+          {
+            "001": 10328,
+            "011": 10202,
+            "111": 10342,
+            "100": 10278,
+            "000": 10142,
+            "010": 10238,
+            "110": 10217,
+            "101": 10173
+          }
+        ],
+        "leitura_agregada": "P(000) = 0.124 (ideal 0,125)",
+        "tvd_media": 0.01669921875,
+        "tvd_ic95": [
+          0.014044211180364828,
+          0.019354226319635175
+        ]
+      },
+      "comparacao": {
+        "tvd_arquivo_simulado": 0.022460937500000028,
+        "tvd_arquivo_real": 0.041015625000000056,
+        "tvd_reproduzido_vs_arquivo_simulado": 0.0206298828125
+      },
+      "limites": "Simulação Aer; não é execução em hardware. A TVD mede diferença entre distribuições, não fidelidade de estado. O JSON real arquivado não foi reproduzido em hardware nesta rodada.",
+      "timestamp": "2026-11-09T00:49:37-0300"
+    },
+    "E13": {
+      "id": "E13",
+      "nome": "Produto tensorial |01⟩",
+      "descricao": "X no qubit 1 prepara |01⟩.",
+      "protocolo": {
+        "sementes": 20,
+        "shots_por_semente": 4096,
+        "total_shots": 81920,
+        "simulador": "AerSimulator",
+        "transpilacao": "optimization_level=1",
+        "seed_base": 20261109
+      },
+      "ideal": {
+        "distribuicoes": [
+          {
+            "01": 1.0
+          }
+        ]
+      },
+      "reproduzido": {
+        "dist_media": [
+          {
+            "01": 1.0
+          }
+        ],
+        "dist_ic95": [
+          {
+            "01": [
+              1.0,
+              0.0
+            ]
+          }
+        ],
+        "counts_agregados": [
+          {
+            "01": 81920
+          }
+        ],
+        "leitura_agregada": "P(01) = 1.000 (ideal 1,000)",
+        "tvd_media": 0.0,
+        "tvd_ic95": [
+          0.0,
+          0.0
+        ]
+      },
+      "comparacao": {
+        "tvd_arquivo_simulado": 0.0,
+        "tvd_arquivo_real": 0.04296875,
+        "tvd_reproduzido_vs_arquivo_simulado": 0.0
+      },
+      "limites": "Simulação Aer; não é execução em hardware. A TVD mede diferença entre distribuições, não fidelidade de estado. O JSON real arquivado não foi reproduzido em hardware nesta rodada.",
+      "timestamp": "2026-11-09T00:49:40-0300"
+    },
+    "E14": {
+      "id": "E14",
+      "nome": "Ruído de fase",
+      "descricao": "H-X-H deveria devolver P(0)=1; o backend perde coerência.",
+      "protocolo": {
+        "sementes": 20,
+        "shots_por_semente": 4096,
+        "total_shots": 81920,
+        "simulador": "AerSimulator",
+        "transpilacao": "optimization_level=1",
+        "seed_base": 20261109
+      },
+      "ideal": {
+        "distribuicoes": [
+          {
+            "0": 0.9999999999999996
+          }
+        ]
+      },
+      "reproduzido": {
+        "dist_media": [
+          {
+            "0": 1.0
+          }
+        ],
+        "dist_ic95": [
+          {
+            "0": [
+              1.0,
+              0.0
+            ]
+          }
+        ],
+        "counts_agregados": [
+          {
+            "0": 81920
+          }
+        ],
+        "leitura_agregada": "P(0) = 1.000 (ideal 1,000)",
+        "tvd_media": 2.220446049250313e-16,
+        "tvd_ic95": [
+          2.220446049250313e-16,
+          2.220446049250313e-16
+        ]
+      },
+      "comparacao": {
+        "tvd_arquivo_simulado": 2.220446049250313e-16,
+        "tvd_arquivo_real": 0.007812499999999778,
+        "tvd_reproduzido_vs_arquivo_simulado": 0.0
+      },
+      "limites": "Simulação Aer; não é execução em hardware. A TVD mede diferença entre distribuições, não fidelidade de estado. O JSON real arquivado não foi reproduzido em hardware nesta rodada.",
+      "timestamp": "2026-11-09T00:49:43-0300"
+    },
+    "E15": {
+      "id": "E15",
+      "nome": "GHZ via QASM 2.0",
+      "descricao": "O mesmo GHZ carregado de um texto OpenQASM 2.0.",
+      "protocolo": {
+        "sementes": 20,
+        "shots_por_semente": 4096,
+        "total_shots": 81920,
+        "simulador": "AerSimulator",
+        "transpilacao": "optimization_level=1",
+        "seed_base": 20261109
+      },
+      "ideal": {
+        "distribuicoes": [
+          {
+            "0000": 0.4999999999999999,
+            "1111": 0.4999999999999999
+          }
+        ]
+      },
+      "reproduzido": {
+        "dist_media": [
+          {
+            "0000": 0.5010009765625,
+            "1111": 0.4989990234375
+          }
+        ],
+        "dist_ic95": [
+          {
+            "0000": [
+              0.5010009765625,
+              0.0026364382218473795
+            ],
+            "1111": [
+              0.4989990234375,
+              0.0026364382218473795
+            ]
+          }
+        ],
+        "counts_agregados": [
+          {
+            "0000": 41042,
+            "1111": 40878
+          }
+        ],
+        "leitura_agregada": "P(0000)+P(1111) = 1.000 (ideal 1,000)",
+        "tvd_media": 0.0046875,
+        "tvd_ic95": [
+          0.0032329239547186197,
+          0.00614207604528138
+        ]
+      },
+      "comparacao": {
+        "tvd_arquivo_simulado": 0.02734375,
+        "tvd_arquivo_real": 0.2119140624999999,
+        "tvd_reproduzido_vs_arquivo_simulado": 0.028344726562499978
+      },
+      "limites": "Simulação Aer; não é execução em hardware. A TVD mede diferença entre distribuições, não fidelidade de estado. O JSON real arquivado não foi reproduzido em hardware nesta rodada.",
+      "timestamp": "2026-11-09T00:49:46-0300"
+    },
+    "E16": {
+      "id": "E16",
+      "nome": "Esfera de Bloch",
+      "descricao": "Mede Z e X do estado H|0⟩.",
+      "protocolo": {
+        "sementes": 20,
+        "shots_por_semente": 4096,
+        "total_shots": 81920,
+        "simulador": "AerSimulator",
+        "transpilacao": "optimization_level=1",
+        "seed_base": 20261109
+      },
+      "ideal": {
+        "distribuicoes": [
+          {
+            "0": 0.4999999999999999,
+            "1": 0.4999999999999999
+          },
+          {
+            "0": 0.9999999999999996
+          }
+        ]
+      },
+      "reproduzido": {
+        "dist_media": [
+          {
+            "0": 0.4993896484375,
+            "1": 0.5006103515625
+          },
+          {
+            "0": 1.0
+          }
+        ],
+        "dist_ic95": [
+          {
+            "0": [
+              0.4993896484375,
+              0.00346419058512388
+            ],
+            "1": [
+              0.5006103515625,
+              0.00346419058512388
+            ]
+          },
+          {
+            "0": [
+              1.0,
+              0.0
+            ]
+          }
+        ],
+        "counts_agregados": [
+          {
+            "0": 40910,
+            "1": 41010
+          },
+          {
+            "0": 81920
+          }
+        ],
+        "leitura_agregada": "⟨Z⟩ = -0.001, ⟨X⟩ = +1.000 (ideal 0, +1)",
+        "tvd_media": 0.003015136718750114,
+        "tvd_ic95": [
+          0.002053060808850906,
+          0.003977212628649322
+        ]
+      },
+      "comparacao": {
+        "tvd_arquivo_simulado": 0.001953125000000111,
+        "tvd_arquivo_real": 0.012695312499999889,
+        "tvd_reproduzido_vs_arquivo_simulado": 0.00225830078125
+      },
+      "limites": "Simulação Aer; não é execução em hardware. A TVD mede diferença entre distribuições, não fidelidade de estado. O JSON real arquivado não foi reproduzido em hardware nesta rodada.",
+      "timestamp": "2026-11-09T00:49:52-0300"
+    },
+    "E17": {
+      "id": "E17",
+      "nome": "Interferência de três qubits",
+      "descricao": "Uma caminhada curta distribui amplitude em 000/010/101/111.",
+      "protocolo": {
+        "sementes": 20,
+        "shots_por_semente": 4096,
+        "total_shots": 81920,
+        "simulador": "AerSimulator",
+        "transpilacao": "optimization_level=1",
+        "seed_base": 20261109
+      },
+      "ideal": {
+        "distribuicoes": [
+          {
+            "000": 0.24999999999999978,
+            "001": 1.3942650518608993e-34,
+            "010": 0.24999999999999978,
+            "011": 1.3942650518608993e-34,
+            "100": 1.3942650518608993e-34,
+            "101": 0.24999999999999978,
+            "110": 1.3942650518608993e-34,
+            "111": 0.24999999999999978
+          }
+        ]
+      },
+      "reproduzido": {
+        "dist_media": [
+          {
+            "000": 0.24827880859375,
+            "010": 0.25162353515625,
+            "101": 0.2511474609375,
+            "111": 0.2489501953125
+          }
+        ],
+        "dist_ic95": [
+          {
+            "000": [
+              0.24827880859375,
+              0.002669995247028751
+            ],
+            "010": [
+              0.25162353515625,
+              0.0025428748432106425
+            ],
+            "101": [
+              0.2511474609375,
+              0.002239367455522545
+            ],
+            "111": [
+              0.2489501953125,
+              0.003268357897443666
+            ]
+          }
+        ],
+        "counts_agregados": [
+          {
+            "000": 20339,
+            "010": 20613,
+            "101": 20574,
+            "111": 20394
+          }
+        ],
+        "leitura_agregada": "P(000) = 0.248 (ideal 0,250)",
+        "tvd_media": 0.008959960937499989,
+        "tvd_ic95": [
+          0.006625939822010856,
+          0.011293982052989121
+        ]
+      },
+      "comparacao": {
+        "tvd_arquivo_simulado": 0.0166015625,
+        "tvd_arquivo_real": 0.09179687499999956,
+        "tvd_reproduzido_vs_arquivo_simulado": 0.017175292968750006
+      },
+      "limites": "Simulação Aer; não é execução em hardware. A TVD mede diferença entre distribuições, não fidelidade de estado. O JSON real arquivado não foi reproduzido em hardware nesta rodada.",
+      "timestamp": "2026-11-09T00:49:55-0300"
+    },
+    "E18": {
+      "id": "E18",
+      "nome": "Amostragem binomial",
+      "descricao": "H + medição; o desvio de P(1) cai com o número de tiros.",
+      "protocolo": {
+        "sementes": 20,
+        "shots_por_semente": 4096,
+        "total_shots": 81920,
+        "simulador": "AerSimulator",
+        "transpilacao": "optimization_level=1",
+        "seed_base": 20261109
+      },
+      "ideal": {
+        "distribuicoes": [
+          {
+            "0": 0.4999999999999999,
+            "1": 0.4999999999999999
+          }
+        ]
+      },
+      "reproduzido": {
+        "dist_media": [
+          {
+            "0": 0.4993896484375,
+            "1": 0.5006103515625
+          }
+        ],
+        "dist_ic95": [
+          {
+            "0": [
+              0.4993896484375,
+              0.00346419058512388
+            ],
+            "1": [
+              0.5006103515625,
+              0.00346419058512388
+            ]
+          }
+        ],
+        "counts_agregados": [
+          {
+            "0": 40910,
+            "1": 41010
+          }
+        ],
+        "leitura_agregada": "P(1) = 0.501 (ideal 0,500)",
+        "tvd_media": 0.006030273437500006,
+        "tvd_ic95": [
+          0.00410612161770159,
+          0.007954425257298421
+        ]
+      },
+      "comparacao": {
+        "tvd_arquivo_simulado": 0.0166015625,
+        "tvd_arquivo_real": 0.017578125,
+        "tvd_reproduzido_vs_arquivo_simulado": 0.0172119140625
+      },
+      "limites": "Simulação Aer; não é execução em hardware. A TVD mede diferença entre distribuições, não fidelidade de estado. O JSON real arquivado não foi reproduzido em hardware nesta rodada.",
+      "timestamp": "2026-11-09T00:49:58-0300"
+    }
+  }
+}

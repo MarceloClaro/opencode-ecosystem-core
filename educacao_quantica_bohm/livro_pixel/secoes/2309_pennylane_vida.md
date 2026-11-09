@@ -10,7 +10,7 @@
 
 <p>Aprender com erro e ajustar parâmetros é comum em ML.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子软件</span> <em>liàng zǐ ruǎn jiàn</em> <span class="tom">· tons 4-3-3-4 · leitura liang-dzi-juan-djien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到量子软件。</span> <em>Wǒ zài shēng huó zhōng kàn dào liàng zǐ ruǎn jiàn.</em> — Vejo “PennyLane” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “Crie um QNode, rode e desenhe o circuito”. Limite: “A diferenciação automática não substitui a interpretação física”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de PennyLane.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

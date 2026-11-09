@@ -19,7 +19,7 @@
 </div>
 
 <p><strong>Pense:</strong> Quem controla a chave controla o acesso?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F040 liga a ideia à fonte QISKIT (2024) DOI 10.5281/zenodo.2573505; a evidência é evidência experimental ou metodológica com limites.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Explique com suas palavras por que a frase sobre gjq-client não autoriza dizer mais do que a fonte permite.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

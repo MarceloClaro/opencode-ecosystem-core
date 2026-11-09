@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> A fidelidade proxy mede a população ideal, não a pureza do estado.</p>
 <p><strong>Pergunta de pesquisa:</strong> Por que aparecem 1011 e 1101?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F051 ancora a proposição em <a href="https://doi.org/10.1038/s41586-019-1666-5">10.1038/s41586-019-1666-5</a>; grau B (evidência experimental ou metodológica com limites). Limite: “Não há garantia de generalização para outros contextos” (conceito: GHZ real).</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

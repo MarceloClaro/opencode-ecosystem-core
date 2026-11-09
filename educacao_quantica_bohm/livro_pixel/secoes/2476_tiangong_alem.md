@@ -11,7 +11,7 @@
 <p>T1 e T2 são tempos de relaxação e coerência; não são a mesma coisa.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">天宫</span> <em>tiān gōng</em> <span class="tom">· tons 1-1 · leitura tien-gong</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解天宫。</span> <em>Shēn rù liǎo jiě tiān gōng.</em> — Aprofunde-se em “Tiangong”.</span></p>
 <p><strong>O que ainda não sabemos:</strong> O resultado de hoje não garante o de amanhã; calibração muda. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Comparação de escala: 156 qubits / 20 qubits = 7,8.<br><strong>Conta:</strong> Baihua tem 7,8× mais qubits que Guoji08.<br><strong>Resultado:</strong> A fidelidade proxy do GHZ, porém, foi menor no Baihua (65,1% vs 78,8%).<br><em>Limite:</em> Número de qubits não é medida de qualidade.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.22331/q-2018-08-06-79">10.22331/q-2018-08-06-79</a>. Fonte: TIANGONG (2026).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Leia a fonte complementar e formule uma pergunta de pesquisa que ela deixa aberta sobre Tiangong.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

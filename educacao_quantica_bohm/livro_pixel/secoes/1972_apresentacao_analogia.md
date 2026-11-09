@@ -11,7 +11,7 @@
 <p>Uma ponte entre o seu modelo e o mundo do outro.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">展示</span> <em>zhǎn shì</em> <span class="tom">· tons 3-4 · leitura djan-shi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像展示。</span> <em>Zhè xiàng zhǎn shì.</em> — Isto se parece com “Apresentação”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> O projeto não esgota o problema; escolhe um recorte.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “Apresentar não é ler slides; é responder a perguntas” e o medido “A fonte discute o conceito e suas consequências” (conceito: Apresentação).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Apresentação e escreva o resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -10,7 +10,7 @@
 
 <p><strong>O erro comum:</strong> Achar que cada momento é um nanossegundo real.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子线路</span> <em>liàng zǐ xiàn lù</em> <span class="tom">· tons 4-3-4-4 · leitura liang-dzi-shien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">量子线路不是魔法。</span> <em>Liàng zǐ xiàn lù bú shì mó fǎ.</em> — “Cirq Circuit” não é magia.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “O Cirq usa momentos para organizar operações paralelas” e admite “Momentos não são tempo físico; são uma ordenação lógica”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Cirq Circuit.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

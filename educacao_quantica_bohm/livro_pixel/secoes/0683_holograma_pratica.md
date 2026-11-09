@@ -20,8 +20,7 @@
 <p class="mini">Sobreposição ≠ fidelidade de estado.</p>
 <p class="mini">Script: <code>scripts/experimentos_100.py</code> · E17 · Guoji08 · <a href="#oficina-e17">oficina E17</a> · <a href="#codigo-e17">código E17</a></p>
 </div>
-
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F069 registra como medido “A fonte discute o conceito e suas consequências” (conceito: Holograma).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Repita a prática e explique por que o número não prova “Não há garantia de generalização para outros contextos” (conceito: Holograma).</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

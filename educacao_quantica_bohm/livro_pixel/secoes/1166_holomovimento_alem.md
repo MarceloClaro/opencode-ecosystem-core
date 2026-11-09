@@ -10,7 +10,7 @@
 
 <p>Bohm usou a imagem para pensar processo em vez de coisas.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">整体运动</span> <em>zhěng tǐ yùn dòng</em> <span class="tom">· tons 3-3-4-4 · leitura djeng-ti-yun-dong</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解整体运动。</span> <em>Shēn rù liǎo jiě zhěng tǐ yùn dòng.</em> — Aprofunde-se em “Holomovimento”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> O fluxo é dado por v = ∇S/m; a forma explícita emerge do movimento.<br><strong>Conta:</strong> Com S = ħ(kx − ωt), ∇S = ħk e v = ħk/m.<br><strong>Resultado:</strong> A velocidade é constante para uma onda plana; a forma fica implícita na fase.<br><em>Limite:</em> Holomovimento é metáfora; a conta operacional é a equação do guia.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.1103/PhysicsPhysiqueFizika.1.195">10.1103/PhysicsPhysiqueFizika.1.195</a>. Fonte: <a href="https://doi.org/10.1103/PhysRev.85.166">10.1103/PhysRev.85.166</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Anote uma pergunta que a leitura não responde sobre Holomovimento.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

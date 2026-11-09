@@ -10,7 +10,7 @@
 
 <p>A fase relativa é o recurso que permite a interferência.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">相位</span> <em>xiàng wèi</em> <span class="tom">· tons 4-4 · leitura shiang-uei</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解相位。</span> <em>Shēn rù liǎo jiě xiàng wèi.</em> — Aprofunde-se em “Fase”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: NIELSEN (2010) DOI 10.1017/CBO9780511976667. Fonte: SHANNON (1948) DOI 10.1002/j.1538-7305.1948.tb01338.x.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Anote uma pergunta que a leitura não responde sobre Fase.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

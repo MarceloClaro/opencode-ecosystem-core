@@ -20,8 +20,7 @@
 <p class="mini">Sobreposição ≠ fidelidade de estado.</p>
 <p class="mini">Script: <code>scripts/experimentos_100.py</code> · E16 · Guoji08 · <a href="#oficina-e16">oficina E16</a> · <a href="#codigo-e16">código E16</a></p>
 </div>
-
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F038 registra como medido “O interior da esfera não é acessível; a superfície é o estado puro”. Resultado bruto: Experimento: Esfera de Bloch — Mede Z e X do estado H|0⟩.; Simulado: ⟨Z⟩ = +0,008, ⟨X⟩ = +1,000 (ideal 0, +1); Backend: ⟨Z⟩ = +0,035, ⟨X⟩ = +0,984 (ideal 0, +1); Sobreposição: 98,9% · task: 9da79d10.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Repita a prática com outra amostra ou seed e escreva o que a diferença não prova sobre Esfera de Bloch.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

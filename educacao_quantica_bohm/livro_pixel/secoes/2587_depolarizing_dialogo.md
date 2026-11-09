@@ -11,7 +11,7 @@
 <p><strong>Pergunta de pesquisa:</strong> Quando a margem desaparece?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">去极化</span> <em>qù jí huà</em> <span class="tom">· tons 4-2-4 · leitura tchyu-dji-rua</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看去极化？</span> <em>Nǐ zěn me kàn qù jí huà?</em> — O que você pensa de “Depolarizing”?</span></p>
 <p><strong>Hipótese rival:</strong> O teste é pequeno; não generaliza para outros dados ou modelos.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Hipótese rival: “Não há garantia de generalização para outros contextos” (conceito: Depolarizing). Fonte: <a href="https://doi.org/10.1103/RevModPhys.75.715">10.1103/RevModPhys.75.715</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda a hipótese rival e peça a alguém para refutá-la em Depolarizing.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

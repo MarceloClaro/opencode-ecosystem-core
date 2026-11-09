@@ -11,7 +11,7 @@
 <p><strong>O erro comum:</strong> Monte uma trilha de 3 nanoaulas para uma semana.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">自学</span> <em>zì xué</em> <span class="tom">· tons 4-2 · leitura dzi-shyue</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">自学不是魔法。</span> <em>Zì xué bú shì mó fǎ.</em> — “Autodidatismo” não é magia.</span></p>
 <p><strong>Correção formal:</strong> A prática distribuída e a recuperação ativa têm apoio em pesquisa.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “A fonte discute o conceito e suas consequências” e admite “Não há garantia de generalização para outros contextos” (conceito: Autodidatismo). O erro está em tratar esse registro como definição de Autodidatismo.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Autodidatismo.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

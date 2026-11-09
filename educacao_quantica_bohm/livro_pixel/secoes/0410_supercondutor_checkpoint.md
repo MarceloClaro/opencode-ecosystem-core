@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Quem paga a energia e a manutenção de um criostato?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">超导体</span> <em>chāo dǎo tǐ</em> <span class="tom">· tons 1-3-3 · leitura tchau-dau-ti</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了超导体。</span> <em>Wǒ xué huì le chāo dǎo tǐ.</em> — Eu aprendi “Supercondutor”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência evidência experimental ou metodológica com limites. Frase: “Computadores supercondutores usam circuitos resfriados a milikelvin”; limite: “Não há garantia de generalização para outros contextos” (conceito: Supercondutor).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Supercondutor e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

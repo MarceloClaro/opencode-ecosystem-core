@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Quem responde quando o classificador erra?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">分类器</span> <em>fēn lèi qì</em> <span class="tom">· tons 1-4-4 · leitura fen-lei-tchi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了分类器。</span> <em>Wǒ xué huì le fēn lèi qì.</em> — Eu aprendi “Classificador”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência resultado exploratório ou interpretativo. Frase: “Um classificador mapeia dados para rótulos por meio de um modelo”; limite: “Não há garantia de generalização para outros contextos” (conceito: Classificador).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Classificador e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

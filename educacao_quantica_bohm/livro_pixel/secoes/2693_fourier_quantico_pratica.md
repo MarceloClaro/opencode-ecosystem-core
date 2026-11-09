@@ -20,8 +20,7 @@
 <p class="mini">Sobreposição ≠ fidelidade de estado.</p>
 <p class="mini">Script: <code>scripts/experimentos_100.py</code> · E12 · Guoji08 · <a href="#oficina-e12">oficina E12</a> · <a href="#codigo-e12">código E12</a></p>
 </div>
-
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F070 registra como medido “A fonte discute o conceito e suas consequências” (conceito: Fourier quântico). Resultado bruto: Experimento: QFT de 3 qubits — A transformada de Fourier quântica uniformiza a saída.; Simulado: P(000) = 0,117 (ideal 0,125); Backend: P(000) = 0,120 (ideal 0,125); Sobreposição: 95,7% · task: 2e281bbe.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Repita a prática com outra amostra ou seed e escreva o que a diferença não prova sobre Fourier quântico.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

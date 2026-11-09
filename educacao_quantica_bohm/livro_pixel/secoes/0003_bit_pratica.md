@@ -20,8 +20,7 @@
 <p class="mini">Sobreposição ≠ fidelidade de estado.</p>
 <p class="mini">Script: <code>scripts/experimentos_100.py</code> · E01 · Guoji08 · <a href="#oficina-e01">oficina E01</a> · <a href="#codigo-e01">código E01</a></p>
 </div>
-
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F001 registra como medido “Com 8 bits, há 256 combinações; uma letra ASCII cabe em 8 bits”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Repita a prática e explique por que o número não prova “A analogia não explica probabilidade; o bit clássico é exclusivo”.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

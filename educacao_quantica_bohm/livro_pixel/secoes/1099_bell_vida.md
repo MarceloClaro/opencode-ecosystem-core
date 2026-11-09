@@ -10,7 +10,7 @@
 
 <p>Dois dados viciados podem imitar parte da correlação, mas não toda.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">贝尔态</span> <em>bèi ěr tài</em> <span class="tom">· tons 4-3-4 · leitura bei-er-tai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到贝尔态。</span> <em>Wǒ zài shēng huó zhōng kàn dào bèi ěr tài.</em> — Vejo “Estado de Bell” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “Prepare (|00⟩+|11⟩)/√2 e meça 1000 vezes”. Limite: “A imagem das moedas sugere um mecanismo que a teoria não afirma”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Estado de Bell.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

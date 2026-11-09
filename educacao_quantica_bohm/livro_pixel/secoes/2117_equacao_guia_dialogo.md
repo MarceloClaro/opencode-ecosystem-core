@@ -11,7 +11,7 @@
 <p><strong>Pergunta de pesquisa:</strong> O que move uma partícula?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">导波方程</span> <em>dǎo bō fāng chéng</em> <span class="tom">· tons 3-1-1-2 · leitura dau-bo-fang-tcheng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看导波方程？</span> <em>Nǐ zěn me kàn dǎo bō fāng chéng?</em> — O que você pensa de “Equação do guia”?</span></p>
 <p><strong>Hipótese rival:</strong> A equação é não local para várias partículas; não é uma força clássica.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Hipótese rival: “A equação é não local para várias partículas; não é uma força clássica”. Fonte: <a href="https://doi.org/10.1103/PhysRev.85.166">10.1103/PhysRev.85.166</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda a hipótese rival e peça a alguém para refutá-la em Equação do guia.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

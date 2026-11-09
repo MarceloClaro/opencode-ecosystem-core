@@ -11,7 +11,7 @@
 <p>A LGPD exige base legal, finalidade e transparência.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">责任</span> <em>zé rèn</em> <span class="tom">· tons 2-4 · leitura dze-jen</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解责任。</span> <em>Shēn rù liǎo jiě zé rèn.</em> — Aprofunde-se em “Responsabilidade”.</span></p>
 <p><strong>O que ainda não sabemos:</strong> Não há consenso moral automático; há trade-offs. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Matriz: quem decide, quem paga, quem é afetado.<br><strong>Conta:</strong> Se 3 grupos são afetados e 1 decide, há assimetria.<br><strong>Resultado:</strong> A assimetria precisa ser declarada e corrigida.<br><em>Limite:</em> Responsabilidade não pode ser delegada ao algoritmo.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.1177/2053951716679679">10.1177/2053951716679679</a>. Fonte: <a href="https://doi.org/10.1038/s42256-019-0088-2">10.1038/s42256-019-0088-2</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Leia a fonte complementar e formule uma pergunta de pesquisa que ela deixa aberta sobre Responsabilidade.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

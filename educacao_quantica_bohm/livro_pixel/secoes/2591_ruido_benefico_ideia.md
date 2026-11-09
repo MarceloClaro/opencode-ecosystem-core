@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> A fidelidade proxy mede a população ideal, não a pureza do estado.</p>
 <p><strong>Pergunta de pesquisa:</strong> O que seria preciso para confirmar a hipótese?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F060 ancora a proposição em <a href="https://doi.org/10.1038/s42254-021-00348-9">10.1038/s42254-021-00348-9</a>; grau C (resultado exploratório ou interpretativo). Limite: “Não há garantia de generalização para outros contextos” (conceito: Ruído benéfico?).</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

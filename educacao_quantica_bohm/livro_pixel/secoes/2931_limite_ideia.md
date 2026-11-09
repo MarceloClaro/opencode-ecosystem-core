@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> Um bom projeto declara o que não prova.</p>
 <p><strong>Pergunta de pesquisa:</strong> O que este resultado não prova?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F094 ancora a proposição em <a href="https://doi.org/10.1080/00031305.2016.1154108">10.1080/00031305.2016.1154108</a>; grau B (evidência experimental ou metodológica com limites). Limite: “Não há garantia de generalização para outros contextos” (conceito: Limite).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Formule uma consequência testável de “Limite é o que o modelo, o experimento ou a analogia não alcança” e indique qual observação a refutaria.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

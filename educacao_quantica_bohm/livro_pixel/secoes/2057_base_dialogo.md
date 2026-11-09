@@ -11,7 +11,7 @@
 <p><strong>Pergunta de pesquisa:</strong> O que muda quando mudamos a pergunta?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">基</span> <em>jī</em> <span class="tom">· tons 1 · leitura dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看基？</span> <em>Nǐ zěn me kàn jī?</em> — O que você pensa de “Base”?</span></p>
 <p><strong>Hipótese rival:</strong> Bases diferentes não são 'ângulos' da mesma foto; são perguntas diferentes.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Hipótese rival: “Bases diferentes não são 'ângulos' da mesma foto; são perguntas diferentes”. Fonte: <a href="https://doi.org/10.1002/j.1538-7305.1948.tb01338.x">10.1002/j.1538-7305.1948.tb01338.x</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda a hipótese rival e peça a alguém para refutá-la em Base.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

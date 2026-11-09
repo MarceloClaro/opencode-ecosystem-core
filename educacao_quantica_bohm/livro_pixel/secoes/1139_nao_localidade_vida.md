@@ -10,7 +10,7 @@
 
 <p>Sensores distribuídos também mostram correlações sem mensagem.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">非定域性</span> <em>fēi dìng yù xìng</em> <span class="tom">· tons 1-4-4-4 · leitura fei-ding-yu-shing</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到非定域性。</span> <em>Wǒ zài shēng huó zhōng kàn dào fēi dìng yù xìng.</em> — Vejo “Não localidade” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “Meça um par de Bell e mostre que a marginal de Bob não muda”. Limite: “A não localidade não permite enviar sinais controláveis”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Não localidade.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

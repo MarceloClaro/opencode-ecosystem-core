@@ -10,7 +10,7 @@
 
 <p>Previsão de chuva, filas e exames médicos usam a mesma lógica.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">概率</span> <em>gài lǜ</em> <span class="tom">· tons 4-4 · leitura gai-lyu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到概率。</span> <em>Wǒ zài shēng huó zhōng kàn dào gài lǜ.</em> — Vejo “Probabilidade” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “Jogue uma moeda 20 vezes e compare com 50%”. Limite: “Uma amostra pequena flutua; a probabilidade não garante o próximo resultado”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Probabilidade.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

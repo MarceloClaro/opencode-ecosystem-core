@@ -10,7 +10,7 @@
 
 <p>A prática distribuída e a recuperação ativa têm apoio em pesquisa.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">项目</span> <em>xiàng mù</em> <span class="tom">· tons 4-4 · leitura shiang-mu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解项目。</span> <em>Shēn rù liǎo jiě xiàng mù.</em> — Aprofunde-se em “Projeto”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Um projeto mínimo tem 4 partes: pergunta, hipótese, experimento, limite.<br><strong>Conta:</strong> Se cada parte leva 1 página, o projeto tem 4 páginas.<br><strong>Resultado:</strong> A saída é um documento replicável, não uma promessa.<br><em>Limite:</em> Projeto não é marketing.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.1073/pnas.1319030111">10.1073/pnas.1319030111</a>. Fonte: <a href="https://doi.org/10.1103/PhysRevPhysEducRes.13.010109">10.1103/PhysRevPhysEducRes.13.010109</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Anote uma pergunta que a leitura não responde sobre Projeto.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

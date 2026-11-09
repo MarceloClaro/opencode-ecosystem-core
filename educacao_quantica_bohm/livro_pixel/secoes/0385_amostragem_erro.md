@@ -10,7 +10,7 @@
 
 <p><strong>O erro comum:</strong> Achar que 100 tiros bastam para qualquer conclusão.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">采样</span> <em>cǎi yàng</em> <span class="tom">· tons 3-4 · leitura tsai-iang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">采样不是魔法。</span> <em>Cǎi yàng bú shì mó fǎ.</em> — “Amostragem” não é magia.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “O erro padrão cai com a raiz do número de tiros” e admite “A amostra não é o estado; é uma sombra estatística”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Amostragem.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

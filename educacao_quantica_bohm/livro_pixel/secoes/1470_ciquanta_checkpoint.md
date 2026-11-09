@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Quem pode usar os computadores e em que condições?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子中心</span> <em>liàng zǐ zhōng xīn</em> <span class="tom">· tons 4-3-1-1 · leitura liang-dzi-djong-shin</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了量子中心。</span> <em>Wǒ xué huì le liàng zǐ zhōng xīn.</em> — Eu aprendi “CIQuanta”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau B (evidência experimental ou metodológica com limites). Frase: “O CIQuanta é o centro de computação quântica da Paraíba, em João Pessoa”; limite: “Não há garantia de generalização para outros contextos” (conceito: CIQuanta).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre CIQuanta e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

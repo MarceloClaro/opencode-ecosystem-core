@@ -11,7 +11,7 @@
 <p>Duas lâmpadas que acendem sempre juntas.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">贝尔电路</span> <em>bèi ěr diàn lù</em> <span class="tom">· tons 4-3-4-4 · leitura bei-er-dien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像贝尔电路。</span> <em>Zhè xiàng bèi ěr diàn lù.</em> — Isto se parece com “Circuito de Bell”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> A imagem clássica não explica a violação de Bell.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “Monte o circuito e verifique as probabilidades 00/11” e o medido “O circuito de Bell é o 'olá, mundo' do emaranhamento”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Circuito de Bell e escreva o resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

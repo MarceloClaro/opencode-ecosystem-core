@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> A lei dos grandes números explica por que a frequência se estabiliza.</p>
 <p><strong>Pergunta de pesquisa:</strong> O que significa 'provável'?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F004 ancora a proposição em <a href="https://doi.org/10.1002/j.1538-7305.1948.tb01338.x">10.1002/j.1538-7305.1948.tb01338.x</a>; grau A (definição ou teste consolidado). Limite: “Uma amostra pequena flutua; a probabilidade não garante o próximo resultado”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Formule uma consequência testável de “Probabilidade é a previsão de longo prazo para um resultado” e indique qual observação a refutaria.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

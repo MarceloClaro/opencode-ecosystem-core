@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> O estado de Bell é usado em teleportação e criptografia.</p>
 <p><strong>Pergunta de pesquisa:</strong> O que é uma correlação perfeita?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F010 ancora a proposição em <a href="https://doi.org/10.1103/PhysicsPhysiqueFizika.1.195">10.1103/PhysicsPhysiqueFizika.1.195</a>; grau A (definição ou teste consolidado). Limite: “A imagem das moedas sugere um mecanismo que a teoria não afirma”.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

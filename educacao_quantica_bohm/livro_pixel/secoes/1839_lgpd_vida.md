@@ -10,7 +10,7 @@
 
 <p>Contas de luz, privacidade e emprego são afetados por tecnologia.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">数据保护</span> <em>shù jù bǎo hù</em> <span class="tom">· tons 4-4-3-4 · leitura shu-djyu-bau-ru</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到数据保护。</span> <em>Wǒ zài shēng huó zhōng kàn dào shù jù bǎo hù.</em> — Vejo “LGPD” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “A LGPD não proíbe todo uso; exige base legal e finalidade”. Limite: “Não há garantia de generalização para outros contextos” (conceito: LGPD).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de LGPD.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

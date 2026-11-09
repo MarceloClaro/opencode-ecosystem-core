@@ -10,7 +10,7 @@
 
 <p>A profundidade do circuito mede o número de camadas.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">电路</span> <em>diàn lù</em> <span class="tom">· tons 4-4 · leitura dien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解电路。</span> <em>Shēn rù liǎo jiě diàn lù.</em> — Aprofunde-se em “Circuito”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Aplicar portas é multiplicar matrizes; a ordem importa.<br><strong>Conta:</strong> CNOT(H⊗I)|00⟩ = (|00⟩+|11⟩)/√2; P(00)=P(11)=1/2.<br><strong>Resultado:</strong> O circuito de Bell produz duas amplitudes iguais.<br><em>Limite:</em> Inverter a ordem de H e CNOT muda o estado resultante.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.5281/zenodo.2573505">10.5281/zenodo.2573505</a>. Fonte: <a href="https://doi.org/10.1017/CBO9780511976667">10.1017/CBO9780511976667</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Anote uma pergunta que a leitura não responde sobre Circuito.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

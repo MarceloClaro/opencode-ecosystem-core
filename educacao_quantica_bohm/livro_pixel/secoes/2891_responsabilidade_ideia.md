@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> A LGPD exige base legal, finalidade e transparência.</p>
 <p><strong>Pergunta de pesquisa:</strong> Quem responde quando o sistema falha?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F090 ancora a proposição em <a href="https://doi.org/10.1038/s42256-019-0088-2">10.1038/s42256-019-0088-2</a>; grau C (resultado exploratório ou interpretativo). Limite: “Não há garantia de generalização para outros contextos” (conceito: Responsabilidade).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Formule uma consequência testável de “Responsabilidade é responder por decisões e consequências” e indique qual observação a refutaria.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

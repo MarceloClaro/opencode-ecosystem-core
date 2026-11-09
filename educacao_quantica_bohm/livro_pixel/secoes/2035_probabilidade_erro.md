@@ -11,7 +11,7 @@
 <p><strong>O erro comum:</strong> Achar que 50% significa exatamente 5 caras em 10 lançamentos.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">概率</span> <em>gài lǜ</em> <span class="tom">· tons 4-4 · leitura gai-lyu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">概率不是魔法。</span> <em>Gài lǜ bú shì mó fǎ.</em> — “Probabilidade” não é magia.</span></p>
 <p><strong>Correção formal:</strong> A lei dos grandes números explica por que a frequência se estabiliza.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “A lei dos grandes números explica por que a frequência se estabiliza” e admite “Uma amostra pequena flutua; a probabilidade não garante o próximo resultado”. O erro está em tratar esse registro como definição de Probabilidade.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Probabilidade.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

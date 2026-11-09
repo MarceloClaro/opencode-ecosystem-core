@@ -11,7 +11,7 @@
 <p>Uma estante com trabalhos, revisões e reflexões.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">作品集</span> <em>zuò pǐn jí</em> <span class="tom">· tons 4-3-2 · leitura dzuo-pin-dji</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像作品集。</span> <em>Zhè xiàng zuò pǐn jí.</em> — Isto se parece com “Portfólio”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> O projeto não esgota o problema; escolhe um recorte.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “Portfólio não é álbum de melhores momentos; inclui erros e versões” e o medido “A fonte discute o conceito e suas consequências” (conceito: Portfólio).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Portfólio e escreva o resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

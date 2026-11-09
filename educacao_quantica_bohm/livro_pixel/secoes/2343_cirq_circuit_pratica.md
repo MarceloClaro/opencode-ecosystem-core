@@ -20,8 +20,7 @@
 <p class="mini">Sobreposição ≠ fidelidade de estado.</p>
 <p class="mini">Script: <code>scripts/experimentos_100.py</code> · E05 · Guoji08 · <a href="#oficina-e05">oficina E05</a> · <a href="#codigo-e05">código E05</a></p>
 </div>
-
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F035 registra como medido “O Cirq usa momentos para organizar operações paralelas”. Resultado bruto: Experimento: Estado de Bell — H + CNOT criam uma correlação 00/11.; Simulado: P(00)+P(11) = 1,000 (ideal 1,000); Backend: P(00)+P(11) = 0,941 (ideal 1,000); Sobreposição: 94,1% · task: 705bf99c.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Repita a prática com outra amostra ou seed e escreva o que a diferença não prova sobre Cirq Circuit.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

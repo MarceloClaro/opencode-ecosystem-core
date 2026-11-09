@@ -10,7 +10,7 @@
 
 <p>A lei dos grandes números explica por que a frequência se estabiliza.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">概率</span> <em>gài lǜ</em> <span class="tom">· tons 4-4 · leitura gai-lyu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解概率。</span> <em>Shēn rù liǎo jiě gài lǜ.</em> — Aprofunde-se em “Probabilidade”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> p = N_evento / N_total; EP = √(p(1−p)/N).<br><strong>Conta:</strong> p = 484/1024 = 0,4727. EP = √(0,4727×0,5273/1024) = 0,0156.<br><strong>Resultado:</strong> p = 47,27% e intervalo de 95% ≈ 47,27% ± 3,06%.<br><em>Limite:</em> Uma amostra de 1024 tiros não prova o valor de longo prazo; apenas o estima.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.1017/CBO9780511976667">10.1017/CBO9780511976667</a>. Fonte: <a href="https://doi.org/10.1002/j.1538-7305.1948.tb01338.x">10.1002/j.1538-7305.1948.tb01338.x</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Anote uma pergunta que a leitura não responde sobre Probabilidade.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

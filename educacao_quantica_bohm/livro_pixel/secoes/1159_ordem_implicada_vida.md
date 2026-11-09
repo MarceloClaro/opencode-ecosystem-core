@@ -10,7 +10,7 @@
 
 <p>Ecossistemas e redes também têm informação distribuída.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">隐缠序</span> <em>yǐn chán xù</em> <span class="tom">· tons 3-2-4 · leitura in-tchan-shyu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到隐缠序。</span> <em>Wǒ zài shēng huó zhōng kàn dào yǐn chán xù.</em> — Vejo “Ordem implicada” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “Reconstrua uma letra com 1% dos coeficientes de Fourier”. Limite: “É uma visão filosófica, não uma teoria física testável por si só”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Ordem implicada.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

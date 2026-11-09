@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Quem tem acesso ao hardware e quem só vê resultados?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">物理量子比特</span> <em>wù lǐ liàng zǐ bǐ tè</em> <span class="tom">· tons 4-3-4-3-3-4 · leitura u-li-liang-dzi-bi-te</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了物理量子比特。</span> <em>Wǒ xué huì le wù lǐ liàng zǐ bǐ tè.</em> — Eu aprendi “Qubit físico”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência evidência experimental ou metodológica com limites. Frase: “Um qubit físico é um dispositivo concreto, com erros e calibração”; limite: “Não há garantia de generalização para outros contextos” (conceito: Qubit físico).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Qubit físico e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

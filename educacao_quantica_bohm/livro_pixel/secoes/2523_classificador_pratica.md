@@ -20,8 +20,7 @@
 <p class="mini">Sobreposição ≠ fidelidade de estado.</p>
 <p class="mini">Script: <code>scripts/experimentos_100.py</code> · E10 · Guoji08 · <a href="#oficina-e10">oficina E10</a> · <a href="#codigo-e10">código E10</a></p>
 </div>
-
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F053 registra como medido “A fonte discute o conceito e suas consequências” (conceito: Classificador). Resultado bruto: Experimento: Classificador XOR (VQC) — Quatro entradas, quatro medições, uma acurácia.; Simulado: Acurácia = 4/4; Backend: Acurácia = 4/4; Sobreposição: 95,9% · task: —.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Repita a prática com outra amostra ou seed e escreva o que a diferença não prova sobre Classificador.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

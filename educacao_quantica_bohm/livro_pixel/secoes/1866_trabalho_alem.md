@@ -10,7 +10,7 @@
 
 <p>A LGPD exige base legal, finalidade e transparência.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">工作</span> <em>gōng zuò</em> <span class="tom">· tons 1-4 · leitura gong-dzuo</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解工作。</span> <em>Shēn rù liǎo jiě gōng zuò.</em> — Aprofunde-se em “Trabalho”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> 3000 laudas × 7 min = 21.000 min = 350 h.<br><strong>Conta:</strong> A 20 h por semana, 350/20 = 17,5 semanas.<br><strong>Resultado:</strong> O trabalho de leitura é comparável a um semestre intenso.<br><em>Limite:</em> Trabalho invisível não é trabalho inexistente.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.1177/2053951716679679">10.1177/2053951716679679</a>. Fonte: <a href="https://doi.org/10.1038/s42256-019-0088-2">10.1038/s42256-019-0088-2</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Anote uma pergunta que a leitura não responde sobre Trabalho.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

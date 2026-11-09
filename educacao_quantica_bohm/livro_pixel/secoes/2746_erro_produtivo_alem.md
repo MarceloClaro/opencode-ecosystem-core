@@ -11,7 +11,7 @@
 <p>A prática distribuída e a recuperação ativa têm apoio em pesquisa.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">建设性错误</span> <em>jiàn shè xìng cuò wù</em> <span class="tom">· tons 4-4-4-4-4 · leitura djien-she-shing-tsuo-u</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解建设性错误。</span> <em>Shēn rù liǎo jiě jiàn shè xìng cuò wù.</em> — Aprofunde-se em “Erro produtivo”.</span></p>
 <p><strong>O que ainda não sabemos:</strong> A técnica não funciona igual para todos os estudantes. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Taxa de erro = erros/exercícios.<br><strong>Conta:</strong> 1 erro em 10 = 10%; 3 em 10 = 30%.<br><strong>Resultado:</strong> 10% pede revisão pontual; 30% pede retomar o conceito.<br><em>Limite:</em> Erro é dado; não é fracasso.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.1073/pnas.1319030111">10.1073/pnas.1319030111</a>. Fonte: <a href="https://doi.org/10.1103/PhysRevPhysEducRes.13.010109">10.1103/PhysRevPhysEducRes.13.010109</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Leia a fonte complementar e formule uma pergunta de pesquisa que ela deixa aberta sobre Erro produtivo.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

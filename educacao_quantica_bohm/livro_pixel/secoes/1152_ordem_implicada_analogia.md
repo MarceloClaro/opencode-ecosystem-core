@@ -11,7 +11,7 @@
 <p>Um holograma: cada parte contém informação do todo.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">隐缠序</span> <em>yǐn chán xù</em> <span class="tom">· tons 3-2-4 · leitura in-tchan-shyu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像隐缠序。</span> <em>Zhè xiàng yǐn chán xù.</em> — Isto se parece com “Ordem implicada”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> É uma visão filosófica, não uma teoria física testável por si só.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “Reconstrua uma letra com 1% dos coeficientes de Fourier” e o medido “A analogia do holograma é matemática e clássica”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Ordem implicada e escreva o resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

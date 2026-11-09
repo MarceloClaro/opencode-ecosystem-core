@@ -11,7 +11,7 @@
 <p>Uma moeda girando: o resultado ainda não foi decidido.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子比特</span> <em>liàng zǐ bǐ tè</em> <span class="tom">· tons 4-3-3-4 · leitura liang-dzi-bi-te</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像量子比特。</span> <em>Zhè xiàng liàng zǐ bǐ tè.</em> — Isto se parece com “Qubit”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> A moeda tem lado definido; o qubit não tem valor escondido.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “Desenhe duas barras de amplitude e calcule os quadrados” e o medido “A esfera de Bloch representa um qubit; o interior não é acessível”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Qubit e escreva o resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

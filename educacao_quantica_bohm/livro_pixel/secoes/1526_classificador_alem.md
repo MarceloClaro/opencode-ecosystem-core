@@ -10,7 +10,7 @@
 
 <p>A fidelidade proxy mede a população ideal, não a pureza do estado.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">分类器</span> <em>fēn lèi qì</em> <span class="tom">· tons 1-4-4 · leitura fen-lei-tchi</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解分类器。</span> <em>Shēn rù liǎo jiě fēn lèi qì.</em> — Aprofunde-se em “Classificador”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Acurácia = (TP+TN)/N; precisão = TP/(TP+FP); recall = TP/(TP+FN).<br><strong>Conta:</strong> TP=2, TN=2, FP=0, FN=0: acurácia=(2+2)/4=1,0.<br><strong>Resultado:</strong> Precisão=2/2=1,0; recall=2/2=1,0.<br><em>Limite:</em> Métricas perfeitas em 4 pontos não garantem desempenho em novos dados.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.1038/s41586-019-0980-2">10.1038/s41586-019-0980-2</a>. Fonte: <a href="https://doi.org/10.1038/s42254-021-00348-9">10.1038/s42254-021-00348-9</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Anote uma pergunta que a leitura não responde sobre Classificador.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

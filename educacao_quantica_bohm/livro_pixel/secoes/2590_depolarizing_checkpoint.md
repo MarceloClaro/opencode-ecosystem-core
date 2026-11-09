@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Quem aceita a perda de precisão em troca de velocidade?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">去极化</span> <em>qù jí huà</em> <span class="tom">· tons 4-2-4 · leitura tchyu-dji-rua</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了去极化。</span> <em>Wǒ xué huì le qù jí huà.</em> — Eu aprendi “Depolarizing”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau C (resultado exploratório ou interpretativo). Frase: “Depolarizing mistura o estado com ruído isotrópico”; limite: “Não há garantia de generalização para outros contextos” (conceito: Depolarizing).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Depolarizing e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

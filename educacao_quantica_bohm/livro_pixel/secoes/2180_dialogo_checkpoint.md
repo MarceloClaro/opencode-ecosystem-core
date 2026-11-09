@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Você consegue listar três gestos do diálogo?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">对话</span> <em>duì huà</em> <span class="tom">· tons 4-4 · leitura duei-rua</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了对话。</span> <em>Wǒ xué huì le duì huà.</em> — Eu aprendi “Diálogo”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau C (resultado exploratório ou interpretativo). Frase: “Diálogo é investigação coletiva de suposições, não debate para vencer”; limite: “Diálogo não é terapia, assembleia ou busca obrigatória de consenso”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Diálogo e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

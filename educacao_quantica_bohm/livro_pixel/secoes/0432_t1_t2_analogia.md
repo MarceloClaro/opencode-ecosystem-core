@@ -12,7 +12,7 @@
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">弛豫与相干</span> <em>chí yù yǔ xiāng gān</em> <span class="tom">· tons 2-4-3-1-1 · leitura tchi-yu-yu-shiang-gan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像弛豫与相干。</span> <em>Zhè xiàng chí yù yǔ xiāng gān.</em> — Isto se parece com “T1 e T2”.</span></p>
 <p><strong>Onde a imagem não vale:</strong> O resultado de hoje não garante o de amanhã; calibração muda.</p>
 <p>Desenhe a imagem e marque com um X o ponto em que ela falha.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “T1 e T2 não são a mesma coisa; T2 pode ser menor que T1” e o medido “A fonte discute o conceito e suas consequências” (conceito: T1 e T2).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de T1 e T2 e escreva um resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

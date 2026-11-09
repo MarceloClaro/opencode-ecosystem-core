@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> O teorema de Bell mostra que a não localidade é difícil de evitar.</p>
 <p><strong>Pergunta de pesquisa:</strong> O que significa 'à distância'?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F014 ancora a proposição em <a href="https://doi.org/10.1103/PhysRev.85.166">10.1103/PhysRev.85.166</a>; grau C (resultado exploratório ou interpretativo). Limite: “A não localidade não permite enviar sinais controláveis”.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

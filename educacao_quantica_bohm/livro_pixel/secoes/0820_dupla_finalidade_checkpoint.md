@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Uma ferramenta usada para vigiar pode ser justificada por segurança?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">双重用途</span> <em>shuāng chóng yòng tú</em> <span class="tom">· tons 1-2-4-2 · leitura shuang-tchong-iong-tu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了双重用途。</span> <em>Wǒ xué huì le shuāng chóng yòng tú.</em> — Eu aprendi “Dupla finalidade”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência resultado exploratório ou interpretativo. Frase: “A mesma tecnologia pode servir a fins benéficos e danosos”; limite: “Não há garantia de generalização para outros contextos” (conceito: Dupla finalidade).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Dupla finalidade e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

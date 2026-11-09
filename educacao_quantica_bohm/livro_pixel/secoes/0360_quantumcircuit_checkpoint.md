@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Você consegue explicar a diferença entre qreg e creg?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子电路</span> <em>liàng zǐ diàn lù</em> <span class="tom">· tons 4-3-4-4 · leitura liang-dzi-dien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了量子电路。</span> <em>Wǒ xué huì le liàng zǐ diàn lù.</em> — Eu aprendi “QuantumCircuit”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência evidência experimental ou metodológica com limites. Frase: “QuantumCircuit é a estrutura do Qiskit para portas e medições”; limite: “O circuito lógico precisa ser transpilado para o hardware”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre QuantumCircuit e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

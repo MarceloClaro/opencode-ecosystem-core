@@ -10,7 +10,7 @@
 
 <p>Câmeras e sensores também transformam um estado em registro.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">有效坍缩</span> <em>yǒu xiào tān suō</em> <span class="tom">· tons 3-4-1-1 · leitura iu-shiau-tan-suo</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到有效坍缩。</span> <em>Wǒ zài shēng huó zhōng kàn dào yǒu xiào tān suō.</em> — Vejo “Colapso efetivo” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “Descreva a medição como interação com um aparelho”. Limite: “A imagem do galho é clássica; a função de onda é matemática”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Colapso efetivo.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

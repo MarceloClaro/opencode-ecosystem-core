@@ -20,8 +20,7 @@
 <p class="mini">Sobreposição ≠ fidelidade de estado.</p>
 <p class="mini">Script: <code>scripts/experimentos_100.py</code> · E08 · Guoji08 · <a href="#oficina-e08">oficina E08</a> · <a href="#codigo-e08">código E08</a></p>
 </div>
-
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F018 registra como medido “Bohm distingue diálogo de debate em 'On Dialogue'”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Repita a prática e explique por que o número não prova “Diálogo não é terapia, assembleia ou busca obrigatória de consenso”.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Um checkpoint pode ser usado para excluir em vez de ensinar?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">检查点</span> <em>jiǎn chá diǎn</em> <span class="tom">· tons 3-2-3 · leitura djien-tcha-dien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了检查点。</span> <em>Wǒ xué huì le jiǎn chá diǎn.</em> — Eu aprendi “Checkpoint”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência definição ou teste consolidado. Frase: “Um checkpoint é uma parada verificável antes de avançar”; limite: “Não há garantia de generalização para outros contextos” (conceito: Checkpoint).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Checkpoint e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

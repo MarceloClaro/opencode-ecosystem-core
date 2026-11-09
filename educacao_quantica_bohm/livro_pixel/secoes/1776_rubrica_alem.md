@@ -10,7 +10,7 @@
 
 <p>A prática distribuída e a recuperação ativa têm apoio em pesquisa.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">评分标准</span> <em>píng fēn biāo zhǔn</em> <span class="tom">· tons 2-1-1-3 · leitura ping-fen-biau-djuen</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解评分标准。</span> <em>Shēn rù liǎo jiě píng fēn biāo zhǔn.</em> — Aprofunde-se em “Rubrica”.</span> <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> 5 critérios × 4 níveis = 20 células.<br><strong>Conta:</strong> Se 3 avaliadores discordam em 2 células, a confiabilidade precisa ser discutida.<br><strong>Resultado:</strong> A rubrica organiza o julgamento; não o elimina.<br><em>Limite:</em> Rubrica não é verdade objetiva.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.1073/pnas.1319030111">10.1073/pnas.1319030111</a>. Fonte: <a href="https://doi.org/10.1103/PhysRevPhysEducRes.13.010109">10.1103/PhysRevPhysEducRes.13.010109</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Anote uma pergunta que a leitura não responde sobre Rubrica.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

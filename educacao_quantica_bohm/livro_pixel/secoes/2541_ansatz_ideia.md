@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> A fidelidade proxy mede a população ideal, não a pureza do estado.</p>
 <p><strong>Pergunta de pesquisa:</strong> Por que a escolha do ansatz importa?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F055 ancora a proposição em <a href="https://doi.org/10.1038/s42254-021-00348-9">10.1038/s42254-021-00348-9</a>; grau C (resultado exploratório ou interpretativo). Limite: “Não há garantia de generalização para outros contextos” (conceito: Ansatz).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Formule uma consequência testável de “Ansatz é a arquitetura parametrizada do circuito” e indique qual observação a refutaria.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

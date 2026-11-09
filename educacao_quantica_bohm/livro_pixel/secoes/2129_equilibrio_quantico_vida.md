@@ -10,7 +10,7 @@
 
 <p>Multidões, fluidos e trânsito também têm distribuições estáveis.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子平衡</span> <em>liàng zǐ píng héng</em> <span class="tom">· tons 4-3-2-2 · leitura liang-dzi-ping-reng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到量子平衡。</span> <em>Wǒ zài shēng huó zhōng kàn dào liàng zǐ píng héng.</em> — Vejo “Equilíbrio quântico” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “Compare uma distribuição inicial |ψ|² com a evolução”. Limite: “A hipótese explica por que a regra de Born funciona, mas não por que o universo começou assim”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Equilíbrio quântico.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

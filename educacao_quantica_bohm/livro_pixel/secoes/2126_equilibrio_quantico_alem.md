@@ -11,7 +11,7 @@
 <p>A equivariância é a propriedade matemática central.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子平衡</span> <em>liàng zǐ píng héng</em> <span class="tom">· tons 4-3-2-2 · leitura liang-dzi-ping-reng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解量子平衡。</span> <em>Shēn rù liǎo jiě liàng zǐ píng héng.</em> — Aprofunde-se em “Equilíbrio quântico”.</span></p>
 <p><strong>O que ainda não sabemos:</strong> A hipótese explica por que a regra de Born funciona, mas não por que o universo começou assim. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> ρ = |ψ|²; a continuidade exige ∂ρ/∂t + ∇·(ρv) = 0.<br><strong>Conta:</strong> Para ψ = e^{ikx}, ρ = 1 e v = ħk/m; ∂ρ/∂t = 0 e ∇·(ρv) = 0.<br><strong>Resultado:</strong> A distribuição se conserva: 0 + 0 = 0.<br><em>Limite:</em> O equilíbrio quântico é um postulado da interpretação, não um teorema geral.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.1103/PhysicsPhysiqueFizika.1.195">10.1103/PhysicsPhysiqueFizika.1.195</a>. Fonte: <a href="https://doi.org/10.1103/PhysRev.85.166">10.1103/PhysRev.85.166</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Leia a fonte complementar e formule uma pergunta de pesquisa que ela deixa aberta sobre Equilíbrio quântico.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> O erro padrão cai com a raiz do número de tiros.</p>
 <p><strong>Pergunta de pesquisa:</strong> Quantos tiros são suficientes?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F039 ancora a proposição em <a href="https://doi.org/10.5281/zenodo.2573505">10.5281/zenodo.2573505</a>; grau B (evidência experimental ou metodológica com limites). Limite: “A amostra não é o estado; é uma sombra estatística”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Formule uma consequência testável de “Amostrar é repetir preparo e medição para estimar probabilidades” e indique qual observação a refutaria.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

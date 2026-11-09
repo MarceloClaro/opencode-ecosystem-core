@@ -1,0 +1,53 @@
+{
+  "id": "E13",
+  "nome": "Produto tensorial |01⟩",
+  "descricao": "X no qubit 1 prepara |01⟩.",
+  "protocolo": {
+    "sementes": 20,
+    "shots_por_semente": 4096,
+    "total_shots": 81920,
+    "simulador": "AerSimulator",
+    "transpilacao": "optimization_level=1",
+    "seed_base": 20261109
+  },
+  "ideal": {
+    "distribuicoes": [
+      {
+        "01": 1.0
+      }
+    ]
+  },
+  "reproduzido": {
+    "dist_media": [
+      {
+        "01": 1.0
+      }
+    ],
+    "dist_ic95": [
+      {
+        "01": [
+          1.0,
+          0.0
+        ]
+      }
+    ],
+    "counts_agregados": [
+      {
+        "01": 81920
+      }
+    ],
+    "leitura_agregada": "P(01) = 1.000 (ideal 1,000)",
+    "tvd_media": 0.0,
+    "tvd_ic95": [
+      0.0,
+      0.0
+    ]
+  },
+  "comparacao": {
+    "tvd_arquivo_simulado": 0.0,
+    "tvd_arquivo_real": 0.04296875,
+    "tvd_reproduzido_vs_arquivo_simulado": 0.0
+  },
+  "limites": "Simulação Aer; não é execução em hardware. A TVD mede diferença entre distribuições, não fidelidade de estado. O JSON real arquivado não foi reproduzido em hardware nesta rodada.",
+  "timestamp": "2026-11-09T00:49:40-0300"
+}

@@ -10,7 +10,7 @@
 
 <p>Dois sensores sincronizados podem parecer 'telepatia' sem serem.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">纠缠</span> <em>jiū chán</em> <span class="tom">· tons 1-2 · leitura djiu-tchan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我在生活中看到纠缠。</span> <em>Wǒ zài shēng huó zhōng kàn dào jiū chán.</em> — Vejo “Emaranhamento” na vida.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Prática: “Gere 100 pares de Bell e compare os resultados”. Limite: “As luvas têm valores escondidos; o emaranhamento não é explicado por variáveis locais”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Aplique a prática a uma situação cotidiana e declare o limite de Emaranhamento.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

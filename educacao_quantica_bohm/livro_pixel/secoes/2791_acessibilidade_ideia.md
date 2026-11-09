@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> A prática distribuída e a recuperação ativa têm apoio em pesquisa.</p>
 <p><strong>Pergunta de pesquisa:</strong> A descrição preserva a informação?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F080 ancora a proposição em <a href="https://doi.org/10.1103/PhysRevPhysEducRes.13.010109">10.1103/PhysRevPhysEducRes.13.010109</a>; grau A (definição ou teste consolidado). Limite: “Não há garantia de generalização para outros contextos” (conceito: Acessibilidade).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Formule uma consequência testável de “Acessibilidade é remover barreiras para que todos possam participar” e indique qual observação a refutaria.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -11,7 +11,7 @@
 <p><strong>Pergunta de pesquisa:</strong> O que muda se eu trocar a ordem?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">电路</span> <em>diàn lù</em> <span class="tom">· tons 4-4 · leitura dien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看电路？</span> <em>Nǐ zěn me kàn diàn lù?</em> — O que você pensa de “Circuito”?</span></p>
 <p><strong>Hipótese rival:</strong> A ordem importa; matrizes não comutam em geral.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Hipótese rival: “A ordem importa; matrizes não comutam em geral”. Fonte: <a href="https://doi.org/10.1017/CBO9780511976667">10.1017/CBO9780511976667</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda a hipótese rival e peça a alguém para refutá-la em Circuito.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

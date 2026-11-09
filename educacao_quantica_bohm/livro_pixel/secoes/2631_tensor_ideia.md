@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> O produto tensorial faz a dimensão crescer como 2^n.</p>
 <p><strong>Pergunta de pesquisa:</strong> Por que 2^n cresce tão rápido?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F064 ancora a proposição em <a href="https://doi.org/10.1017/CBO9780511976667">10.1017/CBO9780511976667</a>; grau A (definição ou teste consolidado). Limite: “Não há garantia de generalização para outros contextos” (conceito: Produto tensorial).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Formule uma consequência testável de “O produto tensorial combina espaços de qubits” e indique qual observação a refutaria.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

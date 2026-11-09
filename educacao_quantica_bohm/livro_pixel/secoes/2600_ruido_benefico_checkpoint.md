@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Quem repete o experimento e publica o resultado negativo?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">有益噪声</span> <em>yǒu yì zào shēng</em> <span class="tom">· tons 3-4-4-1 · leitura iu-i-dzau-sheng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了有益噪声。</span> <em>Wǒ xué huì le yǒu yì zào shēng.</em> — Eu aprendi “Ruído benéfico?”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau C (resultado exploratório ou interpretativo). Frase: “A hipótese do repositório é que um nível pequeno de ruído pode regularizar o treino”; limite: “Não há garantia de generalização para outros contextos” (conceito: Ruído benéfico?).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Ruído benéfico? e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

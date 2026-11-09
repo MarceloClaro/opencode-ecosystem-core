@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Quem tem tempo e silêncio para estudar sozinho?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">自学</span> <em>zì xué</em> <span class="tom">· tons 4-2 · leitura dzi-shyue</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了自学。</span> <em>Wǒ xué huì le zì xué.</em> — Eu aprendi “Autodidatismo”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência definição ou teste consolidado. Frase: “Autodidatismo é a capacidade de organizar o próprio estudo com critérios”; limite: “Não há garantia de generalização para outros contextos” (conceito: Autodidatismo).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Autodidatismo e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

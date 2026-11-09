@@ -11,7 +11,7 @@
 <p><strong>Pergunta de pesquisa:</strong> Como duas partes passam a depender uma da outra?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">受控非门</span> <em>shòu kòng fēi mén</em> <span class="tom">· tons 4-4-1-2 · leitura shou-kong-fei-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看受控非门？</span> <em>Nǐ zěn me kàn shòu kòng fēi mén?</em> — O que você pensa de “CNOT”?</span></p>
 <p><strong>Hipótese rival:</strong> CNOT não copia um estado quântico arbitrário; ela cria correlação.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Hipótese rival: “CNOT não copia um estado quântico arbitrário; ela cria correlação”. Fonte: <a href="https://doi.org/10.1017/CBO9780511976667">10.1017/CBO9780511976667</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda a hipótese rival e peça a alguém para refutá-la em CNOT.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

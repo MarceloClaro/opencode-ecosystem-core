@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> Bohm distingue diálogo de debate em 'On Dialogue'.</p>
 <p><strong>Pergunta de pesquisa:</strong> Como pensar juntos?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F018 ancora a proposição em <a href="https://doi.org/10.1103/PhysRev.85.166">10.1103/PhysRev.85.166</a>; grau C (resultado exploratório ou interpretativo). Limite: “Diálogo não é terapia, assembleia ou busca obrigatória de consenso”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Formule uma consequência testável de “Diálogo é investigação coletiva de suposições, não debate para vencer” e indique qual observação a refutaria.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

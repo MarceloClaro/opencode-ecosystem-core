@@ -21,7 +21,7 @@
 <p class="mini">Phase damping não muda a população Z; depolarização reduz a margem até o limiar.</p>
 
 <p><strong>O que observar:</strong> a margem até 0,5 diminui quando p cresce. Em p=0,20, a decisão ainda acerta, mas fica frágil. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> H-X-H deveria devolver |0⟩; P(0)=N₀/N.<br><strong>Conta:</strong> N₀=1016, N=1024: 1016/1024 = 0,9922.<br><strong>Resultado:</strong> P(0)=99,22% (ideal 100%).<br><em>Limite:</em> O ruído de fase não é visível na população Z; ele aparece na coerência.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau C (resultado exploratório ou interpretativo); o número não prova “Não há garantia de generalização para outros contextos” (conceito: Depolarizing).</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

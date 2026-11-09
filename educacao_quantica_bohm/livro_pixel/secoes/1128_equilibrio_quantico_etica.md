@@ -10,7 +10,7 @@
 
 <p>Uma hipótese de equilíbrio pode ser testada ou é metafísica?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子平衡</span> <em>liàng zǐ píng héng</em> <span class="tom">· tons 4-3-2-2 · leitura liang-dzi-ping-reng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">谁受益于量子平衡？</span> <em>Shéi shòu yì yú liàng zǐ píng héng?</em> — Quem se beneficia de “Equilíbrio quântico”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau C (resultado exploratório ou interpretativo); o limite é “A hipótese explica por que a regra de Born funciona, mas não por que o universo começou assim”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Liste um grupo afetado por Equilíbrio quântico e uma mitigação, declarando esse limite.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

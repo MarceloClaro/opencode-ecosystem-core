@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> Um bom projeto declara o que não prova.</p>
 <p><strong>Pergunta de pesquisa:</strong> Qual é o próximo passo?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F100 ancora a proposição em <a href="https://doi.org/10.1126/science.aac4716">10.1126/science.aac4716</a>; grau B (evidência experimental ou metodológica com limites). Limite: “Não há garantia de generalização para outros contextos” (conceito: Próximo passo).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Formule uma consequência testável de “Próximo passo é a menor ação concreta que reduz incerteza” e indique qual observação a refutaria.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

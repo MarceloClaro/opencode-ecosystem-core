@@ -11,7 +11,7 @@
 <p>Qiskit inclui Statevector, transpilação e visualizações.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子开发包</span> <em>liàng zǐ kāi fā bāo</em> <span class="tom">· tons 4-3-1-1-1 · leitura liang-dzi-kai-fa-bau</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解量子开发包。</span> <em>Shēn rù liǎo jiě liàng zǐ kāi fā bāo.</em> — Aprofunde-se em “Qiskit”.</span></p>
 <p><strong>O que ainda não sabemos:</strong> O desenho do circuito não é o circuito físico; é uma representação. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Um QuantumCircuit de n qubits tem 2ⁿ amplitudes.<br><strong>Conta:</strong> Para n=2, 2²=4 amplitudes: |00⟩, |01⟩, |10⟩, |11⟩.<br><strong>Resultado:</strong> O statevector é um vetor de 4 números complexos.<br><em>Limite:</em> O simulador é exato sem ruído; o backend não é.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: BERGHOLM (2018). Fonte: <a href="https://doi.org/10.5281/zenodo.2573505">10.5281/zenodo.2573505</a>.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Leia a fonte complementar e formule uma pergunta de pesquisa que ela deixa aberta sobre Qiskit.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -11,7 +11,7 @@
 <p><strong>O erro comum:</strong> Achar que Bell é um algoritmo ou um hardware.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">贝尔态</span> <em>bèi ěr tài</em> <span class="tom">· tons 4-3-4 · leitura bei-er-tai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">贝尔态不是魔法。</span> <em>Bèi ěr tài bú shì mó fǎ.</em> — “Estado de Bell” não é magia.</span></p>
 <p><strong>Correção formal:</strong> O estado de Bell é usado em teleportação e criptografia.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “O estado de Bell é usado em teleportação e criptografia” e admite “A imagem das moedas sugere um mecanismo que a teoria não afirma”. O erro está em tratar esse registro como definição de Estado de Bell.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Estado de Bell.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

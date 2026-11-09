@@ -10,7 +10,7 @@
 
 <p><strong>O erro comum:</strong> Dizer que Bohm 'elimina' a medição; ele a analisa dinamicamente.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">有效坍缩</span> <em>yǒu xiào tān suō</em> <span class="tom">· tons 3-4-1-1 · leitura iu-shiau-tan-suo</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">有效坍缩不是魔法。</span> <em>Yǒu xiào tān suō bú shì mó fǎ.</em> — “Colapso efetivo” não é magia.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “A medição é um processo físico, não um postulado místico” e admite “A imagem do galho é clássica; a função de onda é matemática”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Colapso efetivo.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -19,7 +19,7 @@
 </div>
 
 <p><strong>Pense:</strong> Por que as probabilidades batem?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F013 liga a ideia à fonte BOHM (1952) DOI 10.1103/PhysRev.85.166; a evidência é resultado exploratório ou interpretativo.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Explique com suas palavras por que a frase sobre Equilíbrio quântico não autoriza dizer mais do que a fonte permite.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

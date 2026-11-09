@@ -12,7 +12,7 @@
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">纠缠</span> <em>jiū chán</em> <span class="tom">· tons 1-2 · leitura djiu-tchan</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像纠缠。</span> <em>Zhè xiàng jiū chán.</em> — Isto se parece com “Emaranhamento”.</span></p>
 <p><strong>Onde a imagem não vale:</strong> As luvas têm valores escondidos; o emaranhamento não é explicado por variáveis locais.</p>
 <p>Desenhe a imagem e marque com um X o ponto em que ela falha.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “Gere 100 pares de Bell e compare os resultados” e o medido “Bell mostrou que variáveis ocultas locais não reproduzem as correlações”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Emaranhamento e escreva um resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

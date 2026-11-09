@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Você consegue prever os quatro resultados possíveis?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">贝尔电路</span> <em>bèi ěr diàn lù</em> <span class="tom">· tons 4-3-4-4 · leitura bei-er-dien-lu</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了贝尔电路。</span> <em>Wǒ xué huì le bèi ěr diàn lù.</em> — Eu aprendi “Circuito de Bell”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau A (definição ou teste consolidado). Frase: “H no controle e CNOT produzem (|00⟩+|11⟩)/√2”; limite: “A imagem clássica não explica a violação de Bell”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Circuito de Bell e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

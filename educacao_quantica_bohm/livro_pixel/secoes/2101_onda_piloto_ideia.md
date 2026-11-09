@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> Bohm publicou a teoria em 1952; ela reproduz as previsões não relativísticas.</p>
 <p><strong>Pergunta de pesquisa:</strong> A partícula tem trajetória?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F011 ancora a proposição em <a href="https://doi.org/10.1103/PhysRev.85.166">10.1103/PhysRev.85.166</a>; grau C (resultado exploratório ou interpretativo). Limite: “O rio é matemático e, para várias partículas, vive em muitas dimensões”.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

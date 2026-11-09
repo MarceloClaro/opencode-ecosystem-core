@@ -12,7 +12,7 @@
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">读取错误</span> <em>dú qǔ cuò wù</em> <span class="tom">· tons 2-3-4-4 · leitura du-tchyu-tsuo-u</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像读取错误。</span> <em>Zhè xiàng dú qǔ cuò wù.</em> — Isto se parece com “Erro de leitura”.</span></p>
 <p><strong>Onde a imagem não vale:</strong> O resultado de hoje não garante o de amanhã; calibração muda.</p>
 <p>Desenhe a imagem e marque com um X o ponto em que ela falha.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “O erro de leitura não é o mesmo que erro de porta” e o medido “A fonte discute o conceito e suas consequências” (conceito: Erro de leitura).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Erro de leitura e escreva um resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

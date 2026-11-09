@@ -23,7 +23,15 @@ sys.path.insert(0, str(RAIZ))
 from base.base_chines import CHINES, FRASES, leitura, tons, validar  # noqa: E402
 from base.base_conceitos import CONCEITOS  # noqa: E402
 from base.base_experimentos import EXPERIMENTOS, MAPA as MAPA_EXPERIMENTOS  # noqa: E402
+from base.base_fichas import FICHAS  # noqa: E402
 from base.base_notas import NOTAS, NOTAS_EXPERIMENTO  # noqa: E402
+from base.base_aprofundamento import (  # noqa: E402
+    bloco_aprofundamento,
+    contar_palavras,
+    limite_pagina,
+    substituir_generico,
+    tem_generico,
+)
 
 DADOS = RAIZ.parent / "dados_hardware"
 DADOS_EXP = RAIZ.parent / "dados_experimentos"
@@ -835,8 +843,7 @@ def _rigor_prof(nivel: int, c: dict, parte: int) -> tuple[str, str, str]:
     return c["alem"] or RIGOR[parte], PROF[parte], "Para o professor"
 
 
-PODA_REPETICAO = (
-    r"\n<p><strong>Teste rápido:</strong>.*?</p>",
+PODA_REPETICAO = (    r"\n<p><strong>Teste rápido:</strong>.*?</p>",
     r"\n<ol>\n<li>Faça a atividade sem pressa.*?</ol>\n<p><strong>O que observar:</strong> a diferença.*?</p>",
     r"\n<p><strong>Por que acontece:</strong>.*?</p>",
     r"\n<p><strong>Como testar:</strong>.*?</p>",
@@ -877,6 +884,14 @@ def podar_repeticao(texto: str) -> str:
     return texto
 
 
+# Laudas de laboratório com figura densa: a tabela/figura já é a evidência
+# específica. O dossiê extra é omitido para o checkpoint caber na página.
+SEM_BLOCO = {
+    ("emaranhamento", "laboratorio"),
+    ("vqc_xor", "laboratorio"),
+}
+
+
 def gerar(nivel: int = 0) -> tuple[list[dict], list[dict]]:
     mapa = []
     laudas = []
@@ -889,6 +904,7 @@ def gerar(nivel: int = 0) -> tuple[list[dict], list[dict]]:
                 n += 1
                 codigo = f"L{n:04d}"
                 titulo = f"{c['titulo']} — {lente_nome.lower()}"
+                gab_id = (parte - 1) * 10 + ci
                 if nivel == 0:
                     corpo = inserir_ponte(corpo_lente_n0(c, lente_id), c, lente_id)
                 elif nivel == 2:
@@ -896,18 +912,46 @@ def gerar(nivel: int = 0) -> tuple[list[dict], list[dict]]:
                 else:
                     corpo = corpo_lente(c, lente_id)
                 corpo = podar_repeticao(corpo)
-                corpo = inserir_nota_calculo(corpo, c, nivel, lente_id)
+                ficha = FICHAS.get(gab_id)
+                bloco = ""
+                if ficha is not None and (c["id"], lente_id) in SEM_BLOCO:
+                    corpo = inserir_nota_calculo(corpo, c, nivel, lente_id)
+                elif ficha is not None and tem_generico(corpo):
+                    bloco = bloco_aprofundamento(
+                        c,
+                        ficha,
+                        nivel,
+                        lente_id,
+                        palavras_atuais=contar_palavras(corpo),
+                        substituiu_generico=True,
+                    )
+                    corpo, _ = substituir_generico(corpo, bloco)
+                    corpo = inserir_nota_calculo(corpo, c, nivel, lente_id)
+                elif ficha is not None:
+                    corpo = inserir_nota_calculo(corpo, c, nivel, lente_id)
+                    bloco = bloco_aprofundamento(
+                        c,
+                        ficha,
+                        nivel,
+                        lente_id,
+                        palavras_atuais=contar_palavras(corpo),
+                    )
+                    if bloco:
+                        corpo = corpo.rstrip() + "\n" + bloco
+                else:
+                    corpo = inserir_nota_calculo(corpo, c, nivel, lente_id)
                 zh_conceito = CHINES[c["id"]][0]
                 xp = "".join(
                     f'<span class="{"on" if j == li else ""}"></span>'
                     for j in range(10)
                 )
                 rigor, _, _ = _rigor_prof(nivel, c, parte)
-                gab_id = (parte - 1) * 10 + ci
                 ico_conceito = (f'<img class="ico-conceito" '
                                 f'src="sprites_conceitos/C{gab_id:03d}.png" alt="">')
                 arquivo = SECOES / f"{n:04d}_{c['id']}_{lente_id}.md"
-                texto = f"""::: {{.lauda .lente-{lente_id} .nivel-{nivel}}}
+
+                def montar_texto(corpo_atual: str) -> str:
+                    return f"""::: {{.lauda .lente-{lente_id} .nivel-{nivel}}}
 <div class="topo">
   <span class="cod">{codigo}</span>
   <span class="lente"><img class="ico" src="sprites/{sprite}.png" alt=""> {lente_nome}</span>
@@ -916,7 +960,7 @@ def gerar(nivel: int = 0) -> tuple[list[dict], list[dict]]:
 <div class="xp">{xp}</div>
 <h2 id="l-{n:04d}" class="titulo">{esc(titulo)}</h2>
 <div class="corpo">
-{corpo}
+{corpo_atual}
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
@@ -930,6 +974,23 @@ def gerar(nivel: int = 0) -> tuple[list[dict], list[dict]]:
 <div class="rodape">P{parte:02d} · C{(parte-1)*10+ci:03d}/100 · {codigo}/3000 · <a class="gab" href="#g-{gab_id:03d}">[G{gab_id:03d}]</a> · <a class="ficha-link" href="#f-{gab_id:03d}">[F{gab_id:03d}]</a></div>
 :::
 """
+
+                texto = montar_texto(corpo)
+                limite = limite_pagina(lente_id, corpo)
+                if ficha is not None and limite:
+                    if contar_palavras(texto) > limite and bloco:
+                        compacto = bloco_aprofundamento(
+                            c, ficha, nivel, lente_id, forcar="dossie"
+                        )
+                        corpo = corpo.replace(bloco, compacto, 1)
+                        bloco = compacto
+                        texto = montar_texto(corpo)
+                    if contar_palavras(texto) > limite and bloco:
+                        minimo = bloco_aprofundamento(
+                            c, ficha, nivel, lente_id, forcar="frase"
+                        )
+                        corpo = corpo.replace(bloco, minimo, 1)
+                        texto = montar_texto(corpo)
                 arquivo.write_text(texto, encoding="utf-8")
                 laudas.append({
                     "lauda": codigo,

@@ -10,7 +10,7 @@
 
 <p><strong>Pergunta da roda:</strong> O que seria preciso para confirmar a hipótese?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">有益噪声</span> <em>yǒu yì zào shēng</em> <span class="tom">· tons 3-4-4-1 · leitura iu-i-dzau-sheng</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">你怎么看有益噪声？</span> <em>Nǐ zěn me kàn yǒu yì zào shēng?</em> — O que você pensa de “Ruído benéfico?”?</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Outra explicação possível: “Não há garantia de generalização para outros contextos” (conceito: Ruído benéfico?). Fonte: CEREZO (2021) DOI 10.1038/s42254-021-00348-9.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Defenda essa explicação por dois minutos e peça a alguém para refutá-la em Ruído benéfico?.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

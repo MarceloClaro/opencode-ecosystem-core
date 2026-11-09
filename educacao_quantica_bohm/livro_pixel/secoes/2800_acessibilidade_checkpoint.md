@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Quem foi consultado no design?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">无障碍</span> <em>wú zhàng ài</em> <span class="tom">· tons 2-4-4 · leitura u-djang-ai</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了无障碍。</span> <em>Wǒ xué huì le wú zhàng ài.</em> — Eu aprendi “Acessibilidade”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau A (definição ou teste consolidado). Frase: “Acessibilidade é remover barreiras para que todos possam participar”; limite: “Não há garantia de generalização para outros contextos” (conceito: Acessibilidade).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Acessibilidade e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

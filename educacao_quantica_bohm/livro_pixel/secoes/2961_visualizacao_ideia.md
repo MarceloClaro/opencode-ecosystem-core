@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> Um bom projeto declara o que não prova.</p>
 <p><strong>Pergunta de pesquisa:</strong> O gráfico está honesto?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F097 ancora a proposição em <a href="https://doi.org/10.1126/science.aac4716">10.1126/science.aac4716</a>; grau B (evidência experimental ou metodológica com limites). Limite: “Não há garantia de generalização para outros contextos” (conceito: Visualização).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Formule uma consequência testável de “Visualização codifica dados em posição, cor e forma” e indique qual observação a refutaria.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

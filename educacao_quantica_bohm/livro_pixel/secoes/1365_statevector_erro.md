@@ -10,7 +10,7 @@
 
 <p><strong>O erro comum:</strong> Achar que o vetor é observável diretamente no hardware.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">态矢量</span> <em>tài shǐ liàng</em> <span class="tom">· tons 4-3-4 · leitura tai-shi-liang</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">态矢量不是魔法。</span> <em>Tài shǐ liàng bú shì mó fǎ.</em> — “Statevector” não é magia.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “O estado é uma descrição matemática; a medição é uma amostra” e admite “O vetor cresce como 2^n; não é acessível por medição única”. O erro está em tratar esse registro como definição de Statevector.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Statevector.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

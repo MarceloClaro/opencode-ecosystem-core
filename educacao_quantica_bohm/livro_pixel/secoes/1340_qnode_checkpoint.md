@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Você consegue explicar o papel do dispositivo no QNode?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子节点</span> <em>liàng zǐ jié diǎn</em> <span class="tom">· tons 4-3-2-3 · leitura liang-dzi-djie-dien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了量子节点。</span> <em>Wǒ xué huì le liàng zǐ jié diǎn.</em> — Eu aprendi “QNode”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau B (evidência experimental ou metodológica com limites). Frase: “Um QNode é uma função quântica que retorna uma medição”; limite: “O QNode não é o hardware; é a descrição executável”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre QNode e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

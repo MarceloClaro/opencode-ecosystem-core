@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> QASM 2.0 é aceito por CIQuanta, Tiangong e Qiskit.</p>
 <p><strong>Pergunta de pesquisa:</strong> Uma notação comum ajuda a comparar plataformas?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F028 ancora a proposição em <a href="https://doi.org/10.5281/zenodo.2573505">10.5281/zenodo.2573505</a>; grau A (definição ou teste consolidado). Limite: “QASM não é um algoritmo; é uma notação de circuito”.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

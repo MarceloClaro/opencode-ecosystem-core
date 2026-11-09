@@ -20,7 +20,7 @@
 
 <p><strong>Conexão:</strong> A medição é um processo físico, não um postulado místico.</p>
 <p><strong>Pergunta de pesquisa:</strong> O que acontece quando medimos?</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha F015 ancora a proposição em <a href="https://doi.org/10.1103/PhysRev.85.166">10.1103/PhysRev.85.166</a>; grau C (resultado exploratório ou interpretativo). Limite: “A imagem do galho é clássica; a função de onda é matemática”.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

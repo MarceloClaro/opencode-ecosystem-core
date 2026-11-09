@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Você consegue explicar H→Z→H?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">相位门</span> <em>xiàng wèi mén</em> <span class="tom">· tons 4-4-2 · leitura shiang-uei-men</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了相位门。</span> <em>Wǒ xué huì le xiàng wèi mén.</em> — Eu aprendi “Porta Z”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau A (definição ou teste consolidado). Frase: “Z troca o sinal da amplitude de |1⟩ sem mudar probabilidades isoladas”; limite: “Z não muda a probabilidade; ela muda o que acontece depois”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Porta Z e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

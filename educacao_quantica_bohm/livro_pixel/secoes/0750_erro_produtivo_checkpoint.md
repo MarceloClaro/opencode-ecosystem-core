@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Quem é punido por errar em público?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">建设性错误</span> <em>jiàn shè xìng cuò wù</em> <span class="tom">· tons 4-4-4-4-4 · leitura djien-she-shing-tsuo-u</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了建设性错误。</span> <em>Wǒ xué huì le jiàn shè xìng cuò wù.</em> — Eu aprendi “Erro produtivo”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha considera a evidência definição ou teste consolidado. Frase: “Erro produtivo é aquele que revela uma hipótese ou lacuna”; limite: “Não há garantia de generalização para outros contextos” (conceito: Erro produtivo).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Erro produtivo e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

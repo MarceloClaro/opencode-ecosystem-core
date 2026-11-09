@@ -11,7 +11,7 @@
 <p>A LGPD exige base legal, finalidade e transparência.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">访问</span> <em>fǎng wèn</em> <span class="tom">· tons 3-4 · leitura fang-uen</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">深入了解访问。</span> <em>Shēn rù liǎo jiě fǎng wèn.</em> — Aprofunde-se em “Acesso”.</span></p>
 <p><strong>O que ainda não sabemos:</strong> Não há consenso moral automático; há trade-offs. <span class="fn"><strong>NOTA DE CÁLCULO.</strong><br><strong>Fórmula:</strong> Custo ilustrativo = custo por shot × número de shots.<br><strong>Conta:</strong> A R$ 0,01 por shot, 1024 shots = R$ 10,24.<br><strong>Resultado:</strong> Quatro circuitos = R$ 40,96 (conta ilustrativa).<br><em>Limite:</em> O custo real varia com backend, fila e política de acesso.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Leitura: <a href="https://doi.org/10.1038/s42256-019-0088-2">10.1038/s42256-019-0088-2</a>. Fonte: BRASIL (2018).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Leia a fonte complementar e formule uma pergunta de pesquisa que ela deixa aberta sobre Acesso.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

@@ -11,7 +11,7 @@
 <p>Uma cortina que você pode abrir ou fechar.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">隐私</span> <em>yǐn sī</em> <span class="tom">· tons 3-1 · leitura in-si</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像隐私。</span> <em>Zhè xiàng yǐn sī.</em> — Isto se parece com “Privacidade”.</span></p>
 <p><strong>Limite formal:</strong> Não há consenso moral automático; há trade-offs.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “Privacidade não é esconder tudo; é controlar o fluxo” e o medido “A fonte discute o conceito e suas consequências” (conceito: Privacidade).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Privacidade e escreva o resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

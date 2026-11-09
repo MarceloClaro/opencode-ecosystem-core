@@ -10,7 +10,7 @@
 
 <p><strong>O erro comum:</strong> Tratar 'holomovimento' como um mecanismo físico já comprovado.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">整体运动</span> <em>zhěng tǐ yùn dòng</em> <span class="tom">· tons 3-3-4-4 · leitura djeng-ti-yun-dong</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">整体运动不是魔法。</span> <em>Zhěng tǐ yùn dòng bú shì mó fǎ.</em> — “Holomovimento” não é magia.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>A ficha mede “Bohm usou a imagem para pensar processo em vez de coisas” e admite “O termo é filosófico; não é uma equação operacional”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Escreva um contraexemplo que separe esse registro de Holomovimento.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

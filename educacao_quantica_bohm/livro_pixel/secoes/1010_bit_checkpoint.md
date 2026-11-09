@@ -10,7 +10,7 @@
 
 <p><strong>Tarefa:</strong> Você consegue escrever seu primeiro nome em binário?</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">比特</span> <em>bǐ tè</em> <span class="tom">· tons 3-4 · leitura bi-te</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">我学会了比特。</span> <em>Wǒ xué huì le bǐ tè.</em> — Eu aprendi “Bit”.</span></p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Grau A (definição ou teste consolidado). Frase: “Um bit é a menor diferença que decidimos registrar: 0 ou 1”; limite: “A analogia não explica probabilidade; o bit clássico é exclusivo”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Responda à tarefa sobre Bit e registre uma pergunta aberta.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

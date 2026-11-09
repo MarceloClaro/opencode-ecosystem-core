@@ -11,7 +11,7 @@
 <p>Uma partitura que o computador quântico consegue ler.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">量子汇编</span> <em>liàng zǐ huì biān</em> <span class="tom">· tons 4-3-4-1 · leitura liang-dzi-ruei-bien</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像量子汇编。</span> <em>Zhè xiàng liàng zǐ huì biān.</em> — Isto se parece com “QASM 2.0”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> QASM não é um algoritmo; é uma notação de circuito.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “Escreva um Bell em QASM e cole no editor da nuvem” e o medido “QASM 2.0 é aceito por CIQuanta, Tiangong e Qiskit”.</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de QASM 2.0 e escreva o resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>

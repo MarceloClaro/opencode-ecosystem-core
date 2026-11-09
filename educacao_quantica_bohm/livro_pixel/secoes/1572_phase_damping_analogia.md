@@ -11,7 +11,7 @@
 <p>Relógios que perdem sincronia, mas continuam andando.</p>
 <p class="ponte"><strong>PONTE SONORA · 中文</strong> <span class="termo"><strong>Termo:</strong> <span class="hanzi">相位阻尼</span> <em>xiàng wèi zǔ ní</em> <span class="tom">· tons 4-4-3-2 · leitura shiang-uei-dzu-ni</span>.</span> <span class="frase"><strong>Microfrase:</strong> <span class="hanzi">这像相位阻尼。</span> <em>Zhè xiàng xiàng wèi zǔ ní.</em> — Isto se parece com “Phase damping”.</span></p>
 <p><strong>Onde a imagem quebra:</strong> O teste é pequeno; não generaliza para outros dados ou modelos.</p>
-
+<div class="dossie"><span class="rotulo-dossie">DOSSIÊ</span><p>Teste da imagem: a ficha registra a prática “Ele não afeta uma medição Z de um estado já diagonal” e o medido “A fonte discute o conceito e suas consequências” (conceito: Phase damping).</p></div><div class="exercicio"><span class="rotulo-dossie">EXERCÍCIO</span><p>Desenhe a analogia de Phase damping e escreva o resultado que ela não conseguiria prever.</p></div>
 </div>
 <div class="rigor">
 <span class="rotulo">RIGOR CIENTÍFICO</span>
