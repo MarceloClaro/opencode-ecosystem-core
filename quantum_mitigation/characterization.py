@@ -8,6 +8,8 @@ from statistics import mean, pstdev
 
 import numpy as np
 from qiskit import QuantumCircuit, qasm2
+from scipy.optimize import least_squares
+from scipy.stats import norm
 
 
 def fit_spam(counts0: dict[str, int], counts1: dict[str, int]) -> dict:
@@ -156,3 +158,121 @@ def uncertainty_report(values: list[float]) -> dict:
             "Três repetições não estimam caudas extremas."
         ),
     }
+
+
+def spam_separation_plan(
+    qubits: list[int],
+    ks: tuple[int, ...] = (1, 3, 5),
+) -> dict[str, str]:
+    """Circuitos de pulsos pi repetidos para separar preparação de leitura."""
+    output = {}
+    for q in qubits:
+        for k in ks:
+            circuit = QuantumCircuit(max(qubits) + 1, 1)
+            for _ in range(int(k)):
+                circuit.rx(math.pi, q)
+            circuit.measure(q, 0)
+            output[f"q{q}_k{int(k)}"] = qasm2.dumps(circuit)
+    return output
+
+
+def _spam_p1(k: int, e: float, r0: float, r1: float) -> float:
+    p0 = (1.0 + (1.0 - 2.0 * e) ** int(k)) / 2.0
+    return (1.0 - r1) + p0 * (r0 - (1.0 - r1))
+
+
+def fit_spam_separation(counts_by_k: dict) -> dict:
+    """Ajusta e (erro por pulso), r0 e r1 a partir de k=1,3,5."""
+    items = []
+    for key, counts in counts_by_k.items():
+        k = int(key)
+        total = sum(int(v) for v in counts.values())
+        if total <= 0:
+            raise ValueError(f"counts vazios para k={k}")
+        items.append((k, int(counts.get("1", 0)) / total))
+    items.sort()
+    if len(items) < 3:
+        raise ValueError("SPAM separation exige ao menos três valores de k")
+    def residuals(x):
+        e, r0, r1 = x
+        return [
+            _spam_p1(k, e, r0, r1) - observed
+            for k, observed in items
+        ]
+    result = least_squares(
+        residuals,
+        x0=[0.01, 0.02, 0.03],
+        bounds=([0.0, 0.0, 0.0], [0.5, 0.5, 0.5]),
+    )
+    e, r0, r1 = [float(v) for v in result.x]
+    residual_norm = float(result.cost)
+    at_bound = (
+        min(abs(e - 0.5), abs(r0 - 0.5), abs(r1 - 0.5)) < 1e-6
+        or min(abs(e), abs(r0), abs(r1)) < 1e-6
+    )
+    identified = (
+        not at_bound
+        and 0.001 < e < 0.499
+        and 0.001 < r0 < 0.499
+        and 0.001 < r1 < 0.499
+        and residual_norm < 1e-4
+    )
+    return {
+        "schema_version": 1,
+        "identified": identified,
+        "reason": (
+            "ajuste identificável"
+            if identified
+            else "ajuste no limite ou resíduo alto; e/r0/r1 não são físicos"
+        ),
+        "prep_error_per_pi": e,
+        "readout_p1_given_prep0": r0,
+        "readout_p0_given_prep1": r1,
+        "ks": [k for k, _ in items],
+        "observed_p1": {str(k): p1 for k, p1 in items},
+        "predicted_p1": {
+            str(k): _spam_p1(k, e, r0, r1) for k, _ in items
+        },
+        "residual_norm": residual_norm,
+        "limits": (
+            "Modelo de pulsos pi independentes com erro e e leitura r0/r1; "
+            "não separa crosstalk, drift ou erro correlacionado. |1> usa "
+            "rx(pi), então a preparação do |1> está no modelo."
+        ),
+    }
+
+
+def preregister_ci(
+    p: float,
+    half_width: float,
+    *,
+    confidence: float = 0.95,
+) -> dict:
+    """Calcula n para meia-largura Wilson pré-registrada."""
+    if not 0.0 < p < 1.0:
+        raise ValueError("p deve estar em (0, 1)")
+    if not 0.0 < half_width < 1.0:
+        raise ValueError("half_width deve estar em (0, 1)")
+    if not 0.0 < confidence < 1.0:
+        raise ValueError("confidence deve estar em (0, 1)")
+    z = float(norm.ppf((1.0 + confidence) / 2.0))
+    estimate = max(1, int((z * z * p * (1.0 - p)) / (half_width**2)))
+    n = max(1, int(estimate * 0.5))
+    for candidate in range(n, n + 2_000_000):
+        interval = wilson_interval(
+            round(p * candidate), candidate, z=z
+        )
+        observed_half = (interval["high"] - interval["low"]) / 2.0
+        if observed_half <= half_width:
+            return {
+                "schema_version": 1,
+                "p": p,
+                "half_width": half_width,
+                "confidence": confidence,
+                "z": z,
+                "n": candidate,
+                "expected_interval": interval,
+                "observed_half_width": observed_half,
+                "limits": "Cálculo pré-registrado; não garante poder estatístico.",
+            }
+    raise ValueError("não foi possível atingir a meia-largura")

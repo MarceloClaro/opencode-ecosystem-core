@@ -102,3 +102,61 @@ def qec_plan(distance: int = 3, p: float = 0.01) -> dict:
             "fault-tolerant e não garante threshold."
         ),
     }
+
+
+def surface_code_plan(
+    distance: int = 3,
+    rounds: int = 3,
+    physical_error_rate: float = 0.001,
+    threshold: float | None = None,
+) -> dict:
+    """Orçamento de qubits e interface de decodificador para código de superfície.
+
+    Não simula o código de superfície. O threshold é um parâmetro declarado,
+    não uma medida. A estimativa só é calculada se o operador fornecer um
+    threshold explícito e p < threshold.
+    """
+    distance = int(distance)
+    rounds = int(rounds)
+    if distance < 3 or distance % 2 == 0:
+        raise ValueError("distance deve ser ímpar >= 3")
+    if rounds < 1:
+        raise ValueError("rounds deve ser >= 1")
+    if not 0.0 <= physical_error_rate < 1.0:
+        raise ValueError("physical_error_rate deve estar em [0, 1)")
+    data_qubits = distance * distance
+    ancilla_qubits = data_qubits - 1
+    total_qubits = data_qubits + ancilla_qubits
+    syndrome_bits = ancilla_qubits * rounds
+    estimate = None
+    if threshold is not None:
+        threshold = float(threshold)
+        if not 0.0 < threshold < 1.0:
+            raise ValueError("threshold deve estar em (0, 1)")
+        if physical_error_rate < threshold:
+            estimate = (physical_error_rate / threshold) ** ((distance + 1) // 2)
+    return {
+        "schema_version": 1,
+        "code": "rotated_surface_code",
+        "distance": distance,
+        "rounds": rounds,
+        "physical_error_rate": physical_error_rate,
+        "threshold_declared": threshold,
+        "logical_error_estimate": estimate,
+        "qubit_budget": {
+            "data": data_qubits,
+            "ancilla": ancilla_qubits,
+            "total": total_qubits,
+            "syndrome_bits": syndrome_bits,
+        },
+        "decoder": {
+            "name": "MWPM interface",
+            "executed": False,
+            "note": "interface de planejamento; nenhum decodificador foi executado",
+        },
+        "limits": (
+            "Planejamento de orçamento e interface de decodificador; não é "
+            "simulação do código de superfície, não prova threshold e não "
+            "demonstra fault tolerance."
+        ),
+    }

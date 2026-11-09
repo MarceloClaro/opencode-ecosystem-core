@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "backend": "Baihua",
+  "shots": 4096,
+  "profile_fingerprint": "f79a19730b1c5cc025e344a5dacbb0ae0d67227f3a6cd936ad99f8cabed543de",
+  "calibration_date": "2026-11-09 17:23:30-03:00",
+  "gates": {
+    "sdd": true,
+    "tdd": true,
+    "simulation": true
+  },
+  "submissions": {
+    "zne": 3,
+    "spam": 6,
+    "total": 9
+  },
+  "zne": {
+    "schema_version": 1,
+    "shots": 4096,
+    "rows": [
+      {
+        "scale": 1,
+        "task_id": "cfff51d4-072a-45e6-9fbd-4ba62d4c4527",
+        "counts": {
+          "11": 1803,
+          "00": 2004,
+          "01": 169,
+          "10": 120
+        },
+        "probabilities": {
+          "11": 0.440185546875,
+          "00": 0.4892578125,
+          "01": 0.041259765625,
+          "10": 0.029296875
+        },
+        "tvd_vs_bell": 0.070556640625
+      },
+      {
+        "scale": 3,
+        "task_id": "bdb63435-5517-427a-ab6b-3d4cf4758738",
+        "counts": {
+          "11": 1752,
+          "00": 1933,
+          "01": 167,
+          "10": 244
+        },
+        "probabilities": {
+          "11": 0.427734375,
+          "00": 0.471923828125,
+          "01": 0.040771484375,
+          "10": 0.0595703125
+        },
+        "tvd_vs_bell": 0.100341796875
+      },
+      {
+        "scale": 5,
+        "task_id": "08f5e45e-fba4-44ad-b030-79b29cdf9f24",
+        "counts": {
+          "00": 1971,
+          "10": 115,
+          "01": 160,
+          "11": 1850
+        },
+        "probabilities": {
+          "00": 0.481201171875,
+          "10": 0.028076171875,
+          "01": 0.0390625,
+          "11": 0.45166015625
+        },
+        "tvd_vs_bell": 0.067138671875
+      }
+    ],
+    "extrapolation_linear": {
+      "method": "linear",
+      "extrapolated": 0.08190917968750003,
+      "coefficients": [
+        -0.0008544921875000089,
+        0.08190917968750003
+      ]
+    },
+    "extrapolation_quadratic": {
+      "method": "quadratic",
+      "extrapolated": 0.03204345703125022,
+      "coefficients": [
+        -0.00787353515624999,
+        0.0463867187499999,
+        0.03204345703125022
+      ]
+    },
+    "limits": "ZNE extrapola TVD; não é fidelidade de estado.",
+    "applicability": {
+      "monotonic": false,
+      "applicable": false,
+      "reason": "curva não monotônica; extrapolação não é confiável"
+    },
+    "conclusion": "A curva ZNE não é monotônica; as extrapolações linear e quadrática divergem. Não há extrapolação válida nem ganho demonstrado."
+  },
+  "spam": {
+    "q0": {
+      "schema_version": 1,
+      "identified": false,
+      "reason": "ajuste no limite ou resíduo alto; e/r0/r1 não são físicos",
+      "prep_error_per_pi": 0.4999999856283531,
+      "readout_p1_given_prep0": 0.4999999969829146,
+      "readout_p0_given_prep1": 2.491685045009414e-10,
+      "ks": [
+        1,
+        3,
+        5
+      ],
+      "observed_p1": {
+        "1": 0.93310546875,
+        "3": 0.92333984375,
+        "5": 0.9248046875
+      },
+      "predicted_p1": {
+        "1": 0.7499999911810495,
+        "3": 0.749999998366873,
+        "5": 0.749999998366873
+      },
+      "residual_norm": 0.04706549862806447,
+      "limits": "Modelo de pulsos pi independentes com erro e e leitura r0/r1; não separa crosstalk, drift ou erro correlacionado. |1> usa rx(pi), então a preparação do |1> está no modelo.",
+      "task_ids": {
+        "1": "0488c599-9d5b-47ab-9858-e8c4a44da4af",
+        "3": "3ea01899-2ed6-46e6-bf93-8d69692d4ec6",
+        "5": "68316e94-b256-4823-83df-08ebf76f542f"
+      },
+      "counts": {
+        "1": {
+          "1": 3822,
+          "0": 274
+        },
+        "3": {
+          "1": 3782,
+          "0": 314
+        },
+        "5": {
+          "1": 3788,
+          "0": 308
+        }
+      }
+    },
+    "q1": {
+      "schema_version": 1,
+      "identified": false,
+      "reason": "ajuste no limite ou resíduo alto; e/r0/r1 não são físicos",
+      "prep_error_per_pi": 0.4999999802652507,
+      "readout_p1_given_prep0": 0.4999999965312334,
+      "readout_p0_given_prep1": 2.819592346646669e-10,
+      "ks": [
+        1,
+        3,
+        5
+      ],
+      "observed_p1": {
+        "1": 0.925537109375,
+        "3": 0.9248046875,
+        "5": 0.93017578125
+      },
+      "predicted_p1": {
+        "1": 0.7499999882572623,
+        "3": 0.749999998124637,
+        "5": 0.749999998124637
+      },
+      "residual_norm": 0.046916636571379136,
+      "limits": "Modelo de pulsos pi independentes com erro e e leitura r0/r1; não separa crosstalk, drift ou erro correlacionado. |1> usa rx(pi), então a preparação do |1> está no modelo.",
+      "task_ids": {
+        "1": "a147c708-e903-49ae-808f-c22876b4bc70",
+        "3": "b4dea322-d531-446a-86fd-e69a4c2895a5",
+        "5": "78835f36-9c5e-4b2b-9a8b-c98e598123e6"
+      },
+      "counts": {
+        "1": {
+          "1": 3791,
+          "0": 305
+        },
+        "3": {
+          "1": 3788,
+          "0": 308
+        },
+        "5": {
+          "1": 3810,
+          "0": 286
+        }
+      }
+    }
+  },
+  "generated_at": "2026-11-09T15:32:21-03:00",
+  "hardware_executed": true,
+  "network": true,
+  "limits": "ZNE e SPAM separation em q0/q1; PEC 2q, superfície e DD pulse-level não foram executados. Não é prova de vantagem.",
+  "conclusion": "ZNE inconclusivo por não monotonicidade; SPAM separation não identificável no modelo de pulsos pi independentes. Nenhum ganho de mitigação é declarado.",
+  "updated_at": "2026-11-09T15:32:59-03:00"
+}

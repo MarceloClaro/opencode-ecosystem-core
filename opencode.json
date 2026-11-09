@@ -9510,6 +9510,7 @@
           "python3 -m marceloclaro.cli doctor": "allow",
           "python3 -m pytest tests/test_r1114_quantum_error_mitigation.py -q": "allow",
           ".venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py qec*": "allow",
+          ".venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py surface*": "allow",
           ".venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py audit*": "allow",
           ".venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py lessons*": "allow"
         },
@@ -9548,6 +9549,7 @@
           "python3 -m pytest tests/test_r1114_quantum_error_mitigation.py -q": "allow",
           ".venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py zne*": "allow",
           ".venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py dd*": "allow",
+          ".venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py dd-pulse*": "allow",
           ".venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py pec*": "allow",
           ".venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py audit*": "allow",
           ".venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py lessons*": "allow"
@@ -9677,9 +9679,12 @@
           "python3 -m marceloclaro.cli doctor": "allow",
           "python3 -m pytest tests/test_r1114_quantum_error_mitigation.py -q": "allow",
           ".venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py spam*": "allow",
+          ".venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py spam-plan*": "allow",
+          ".venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py spam-separation*": "allow",
           ".venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py crosstalk*": "allow",
           ".venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py drift*": "allow",
           ".venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py uncertainty*": "allow",
+          ".venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py preregister*": "allow",
           ".venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py audit*": "allow",
           ".venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py lessons*": "allow"
         },

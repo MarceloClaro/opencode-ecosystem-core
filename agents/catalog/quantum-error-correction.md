@@ -46,6 +46,7 @@ permission:
     python3 -m marceloclaro.cli doctor: allow
     python3 -m pytest tests/test_r1114_quantum_error_mitigation.py -q: allow
     .venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py qec*: allow
+    .venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py surface*: allow
     .venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py audit*: allow
     .venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py lessons*: allow
 tools:
@@ -91,6 +92,7 @@ executa hardware e **não** declara threshold de superfície ou fault tolerance.
 
 ```bash
 agent_qem.py qec --p 0.01 --shots 20000
+agent_qem.py surface --distance 3 --rounds 3 --p 0.001
 agent_qem.py lessons --loop-state loop_state.json
 agent_qem.py audit --report RELATORIO.md
 ```
@@ -112,7 +114,7 @@ agent_qem.py audit --report RELATORIO.md
 ## Limites
 
 - Repetição de 3 qubits não protege fase.
-- Não é código de superfície.
+- O plano de superfície calcula orçamento e interface de decodificador; não simula o código.
 - Não há threshold de fault tolerance.
 - O simulador usa bit-flip independente; não modela crosstalk ou deriva.
 - O loop registra lições; não promove confiança automaticamente.

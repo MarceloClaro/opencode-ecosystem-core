@@ -16,8 +16,9 @@ sys.path.insert(0, str(RAIZ))
 from runner import main  # noqa: E402
 
 ALLOWED = {
-    "zne", "dd", "pec", "qec", "spam", "crosstalk",
-    "drift", "uncertainty", "lessons", "audit",
+    "zne", "dd", "dd-pulse", "pec", "qec", "surface",
+    "spam", "spam-plan", "spam-separation", "crosstalk",
+    "drift", "uncertainty", "preregister", "lessons", "audit",
 }
 USO = "uso: agent_qem.py <" + "|".join(sorted(ALLOWED)) + "> [args]"
 

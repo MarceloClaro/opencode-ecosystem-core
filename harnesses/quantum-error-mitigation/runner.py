@@ -22,10 +22,15 @@ from quantum_mitigation import (  # noqa: E402
     dd_plan,
     drift_detection,
     fit_spam,
+    fit_spam_separation,
     pec_plan,
+    preregister_ci,
+    pulse_dd_plan,
     qec_plan,
     run_repetition_code,
     run_zne,
+    spam_separation_plan,
+    surface_code_plan,
     uncertainty_report,
 )
 
@@ -144,7 +149,7 @@ def cmd_pec(args) -> int:
     lines = [
         "## Plano PEC",
         "",
-        f"- Gates 1q no plano: **{len(payload['gates_1q'])}**.",
+        f"- Gates no plano: **{len(payload['gates'])}** (1q/2q).",
         f"- Overhead γ total: **{payload['gamma_total']:.4f}**.",
         f"- Amostras estimadas para erro relativo "
         f"{payload['target_relative_error']:.0%}: **{payload['samples_required']:.3e}**.",
@@ -254,6 +259,107 @@ def cmd_uncertainty(args) -> int:
         )
     exported = _write(Path(args.out), payload, "Incerteza — dispersão e bootstrap", lines)
     _json_print({"status": "ok", "command": "uncertainty", **exported, "hardware_executed": False})
+    return 0
+
+
+def cmd_surface(args) -> int:
+    payload = surface_code_plan(
+        distance=args.distance,
+        rounds=args.rounds,
+        physical_error_rate=args.p,
+        threshold=args.threshold,
+    )
+    budget = payload["qubit_budget"]
+    lines = [
+        "## Código de superfície",
+        "",
+        f"- Distância: {payload['distance']} · rodadas: {payload['rounds']}.",
+        f"- Qubits de dados: {budget['data']}.",
+        f"- Qubits de ancilla: {budget['ancilla']}.",
+        f"- Total: **{budget['total']}**.",
+        f"- Bits de síndrome: {budget['syndrome_bits']}.",
+        f"- Decodificador: {payload['decoder']['name']} (não executado).",
+        f"- Estimativa lógica: {payload['logical_error_estimate']}.",
+    ]
+    exported = _write(Path(args.out), payload, "QEC — orçamento de superfície", lines)
+    _json_print({"status": "ok", "command": "surface", **exported, "hardware_executed": False})
+    return 0
+
+
+def cmd_dd_pulse(args) -> int:
+    payload = pulse_dd_plan(
+        t1_us=args.t1_us,
+        t2_us=args.t2_us,
+        idle_time_us=args.idle_us,
+        sequence=args.sequence,
+        min_spacing_us=args.min_spacing_us,
+    )
+    lines = [
+        "## DD pulse-level",
+        "",
+        f"- Sequência: `{payload['sequence']}`.",
+        f"- T1/T2: {payload['t1_us']} / {payload['t2_us']} µs.",
+        f"- Janela ociosa: {payload['idle_time_us']} µs.",
+        f"- Pulsos: **{payload['n_pulses']}**.",
+        f"- Razão idle/T2: {payload['idle_over_t2']:.3f}.",
+    ]
+    exported = _write(Path(args.out), payload, "DD — planejamento pulse-level", lines)
+    _json_print({"status": "ok", "command": "dd-pulse", **exported, "hardware_executed": False})
+    return 0
+
+
+def cmd_spam_plan(args) -> int:
+    circuits = spam_separation_plan(args.qubits, tuple(args.ks))
+    payload = {
+        "schema_version": 1,
+        "qubits": args.qubits,
+        "ks": args.ks,
+        "circuits_qasm2": circuits,
+        "limits": (
+            "Plano de pulsos pi repetidos; |1> usa rx(pi). Não executa hardware."
+        ),
+    }
+    lines = [
+        "## Plano SPAM separation",
+        "",
+        f"- Qubits: {args.qubits}.",
+        f"- k: {args.ks}.",
+        f"- Circuitos: {len(circuits)}.",
+    ]
+    exported = _write(Path(args.out), payload, "SPAM — separação preparação/leitura", lines)
+    _json_print({"status": "ok", "command": "spam-plan", **exported, "hardware_executed": False})
+    return 0
+
+
+def cmd_spam_separation(args) -> int:
+    payload = fit_spam_separation(_read_json(args.counts))
+    lines = [
+        "## SPAM separation",
+        "",
+        f"- Erro por pulso pi: **{payload['prep_error_per_pi']:.6f}**.",
+        f"- r0 = P(1|prep0): {payload['readout_p1_given_prep0']:.6f}.",
+        f"- r1 = P(0|prep1): {payload['readout_p0_given_prep1']:.6f}.",
+        f"- Resíduo: {payload['residual_norm']:.6e}.",
+    ]
+    exported = _write(Path(args.out), payload, "SPAM — separação por pulsos repetidos", lines)
+    _json_print({"status": "ok", "command": "spam-separation", **exported, "hardware_executed": False})
+    return 0
+
+
+def cmd_preregister(args) -> int:
+    payload = preregister_ci(args.p, args.half_width, confidence=args.confidence)
+    lines = [
+        "## Pré-registro de incerteza",
+        "",
+        f"- p: {payload['p']}.",
+        f"- Meia-largura alvo: {payload['half_width']}.",
+        f"- Confiança: {payload['confidence']}.",
+        f"- n necessário: **{payload['n']}**.",
+        f"- Intervalo esperado: [{payload['expected_interval']['low']:.6f}, "
+        f"{payload['expected_interval']['high']:.6f}].",
+    ]
+    exported = _write(Path(args.out), payload, "Incerteza — pré-registro", lines)
+    _json_print({"status": "ok", "command": "preregister", **exported, "hardware_executed": False})
     return 0
 
 
@@ -378,6 +484,41 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--values", nargs="+", type=float, required=True)
     p.add_argument("--out", default=str(OUT_PADRAO / "uncertainty"))
     p.set_defaults(func=cmd_uncertainty)
+
+    p = sub.add_parser("surface", help="orçamento de código de superfície")
+    p.add_argument("--distance", type=int, default=3)
+    p.add_argument("--rounds", type=int, default=3)
+    p.add_argument("--p", type=float, default=0.001)
+    p.add_argument("--threshold", type=float, default=None)
+    p.add_argument("--out", default=str(OUT_PADRAO / "surface"))
+    p.set_defaults(func=cmd_surface)
+
+    p = sub.add_parser("dd-pulse", help="plano DD pulse-level")
+    p.add_argument("--t1-us", type=float, required=True)
+    p.add_argument("--t2-us", type=float, required=True)
+    p.add_argument("--idle-us", type=float, required=True)
+    p.add_argument("--sequence", default="cpmg", choices=["xy4", "cpmg", "echo"])
+    p.add_argument("--min-spacing-us", type=float, default=0.1)
+    p.add_argument("--out", default=str(OUT_PADRAO / "dd-pulse"))
+    p.set_defaults(func=cmd_dd_pulse)
+
+    p = sub.add_parser("spam-plan", help="circuitos de separação SPAM")
+    p.add_argument("--qubits", nargs="+", type=int, default=[0, 1])
+    p.add_argument("--ks", nargs="+", type=int, default=[1, 3, 5])
+    p.add_argument("--out", default=str(OUT_PADRAO / "spam-plan"))
+    p.set_defaults(func=cmd_spam_plan)
+
+    p = sub.add_parser("spam-separation", help="ajuste SPAM por pulsos repetidos")
+    p.add_argument("--counts", required=True)
+    p.add_argument("--out", default=str(OUT_PADRAO / "spam-separation"))
+    p.set_defaults(func=cmd_spam_separation)
+
+    p = sub.add_parser("preregister", help="n para meia-largura pré-registrada")
+    p.add_argument("--p", type=float, required=True)
+    p.add_argument("--half-width", type=float, required=True)
+    p.add_argument("--confidence", type=float, default=0.95)
+    p.add_argument("--out", default=str(OUT_PADRAO / "preregister"))
+    p.set_defaults(func=cmd_preregister)
 
     p = sub.add_parser("lessons", help="extrai lições do loop")
     p.add_argument("--loop-state", required=True)

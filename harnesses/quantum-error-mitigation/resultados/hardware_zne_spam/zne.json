@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "shots": 4096,
+  "rows": [
+    {
+      "scale": 1,
+      "task_id": "cfff51d4-072a-45e6-9fbd-4ba62d4c4527",
+      "counts": {
+        "11": 1803,
+        "00": 2004,
+        "01": 169,
+        "10": 120
+      },
+      "probabilities": {
+        "11": 0.440185546875,
+        "00": 0.4892578125,
+        "01": 0.041259765625,
+        "10": 0.029296875
+      },
+      "tvd_vs_bell": 0.070556640625
+    },
+    {
+      "scale": 3,
+      "task_id": "bdb63435-5517-427a-ab6b-3d4cf4758738",
+      "counts": {
+        "11": 1752,
+        "00": 1933,
+        "01": 167,
+        "10": 244
+      },
+      "probabilities": {
+        "11": 0.427734375,
+        "00": 0.471923828125,
+        "01": 0.040771484375,
+        "10": 0.0595703125
+      },
+      "tvd_vs_bell": 0.100341796875
+    },
+    {
+      "scale": 5,
+      "task_id": "08f5e45e-fba4-44ad-b030-79b29cdf9f24",
+      "counts": {
+        "00": 1971,
+        "10": 115,
+        "01": 160,
+        "11": 1850
+      },
+      "probabilities": {
+        "00": 0.481201171875,
+        "10": 0.028076171875,
+        "01": 0.0390625,
+        "11": 0.45166015625
+      },
+      "tvd_vs_bell": 0.067138671875
+    }
+  ],
+  "extrapolation_linear": {
+    "method": "linear",
+    "extrapolated": 0.08190917968750003,
+    "coefficients": [
+      -0.0008544921875000089,
+      0.08190917968750003
+    ]
+  },
+  "extrapolation_quadratic": {
+    "method": "quadratic",
+    "extrapolated": 0.03204345703125022,
+    "coefficients": [
+      -0.00787353515624999,
+      0.0463867187499999,
+      0.03204345703125022
+    ]
+  },
+  "limits": "ZNE extrapola TVD; não é fidelidade de estado.",
+  "applicability": {
+    "monotonic": false,
+    "applicable": false,
+    "reason": "curva não monotônica; extrapolação não é confiável"
+  },
+  "conclusion": "A curva ZNE não é monotônica; as extrapolações linear e quadrática divergem. Não há extrapolação válida nem ganho demonstrado."
+}

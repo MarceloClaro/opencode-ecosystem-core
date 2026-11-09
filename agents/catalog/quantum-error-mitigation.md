@@ -49,6 +49,7 @@ permission:
     python3 -m pytest tests/test_r1114_quantum_error_mitigation.py -q: allow
     .venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py zne*: allow
     .venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py dd*: allow
+    .venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py dd-pulse*: allow
     .venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py pec*: allow
     .venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py audit*: allow
     .venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py lessons*: allow
@@ -96,6 +97,7 @@ pode usar os resultados como evidência local, mas não como prova de vantagem.
 ```bash
 agent_qem.py zne --profile perfil.json --circuit E05 --scales 1 3 5 --shots 2048
 agent_qem.py dd --circuit E05 --qubits 0 1 --sequence xy4
+agent_qem.py dd-pulse --t1-us 70 --t2-us 20 --idle-us 10 --sequence cpmg
 agent_qem.py pec --profile perfil.json --circuit E05
 agent_qem.py lessons --loop-state loop_state.json
 agent_qem.py audit --report RELATORIO.md
@@ -117,8 +119,8 @@ agent_qem.py audit --report RELATORIO.md
 
 ## Limites
 
-- ZNE não é QEC; a extrapolação pode ser instável.
-- PEC 1q não cobre 2q; o overhead cresce com γ².
+- ZNE não é QEC; no Baihua a curva não foi monotônica e a extrapolação foi inválida.
+- PEC cobre 1q e 2q por inversão de canal Pauli; o perfil escalar assume depolarização uniforme. O overhead cresce com γ²; a execução em hardware não foi feita.
 - DD no fim do circuito não é schedule ideal.
 - Nenhuma técnica elimina state preparation, crosstalk ou deriva.
 - O loop registra lições; não promove confiança automaticamente.

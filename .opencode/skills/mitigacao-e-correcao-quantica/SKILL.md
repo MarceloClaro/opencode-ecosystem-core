@@ -87,6 +87,12 @@ drift e incerteza. Para executar em hardware, o primário precisa de gates,
 | SPAM, crosstalk, drift, incerteza | `quantum-noise-characterization` |
 | Auditoria de claim | `quantum-benchmark-audit` |
 
+## Resultado R1115
+
+No Baihua, ZNE não foi monotônica e o SPAM separation por pulsos π repetidos
+não foi identificável. Não use a extrapolação ZNE como ganho nem os valores
+e/r0/r1 como físicos. PEC 2q, superfície e DD pulse-level não foram executados.
+
 ## Limites
 
 - Nenhum comando executa hardware.

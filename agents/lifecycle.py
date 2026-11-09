@@ -90,10 +90,15 @@ def _metadata(raw):
 READOUT_MITIGATION_AGENT_ID = "gjq-readout-mitigation"
 
 QEM_AGENT_COMMANDS = {
-    "quantum-error-mitigation": ("zne", "dd", "pec", "audit", "lessons"),
-    "quantum-error-correction": ("qec", "audit", "lessons"),
+    "quantum-error-mitigation": (
+        "zne", "dd", "dd-pulse", "pec", "audit", "lessons",
+    ),
+    "quantum-error-correction": (
+        "qec", "surface", "audit", "lessons",
+    ),
     "quantum-noise-characterization": (
-        "spam", "crosstalk", "drift", "uncertainty", "audit", "lessons",
+        "spam", "spam-plan", "spam-separation", "crosstalk", "drift",
+        "uncertainty", "preregister", "audit", "lessons",
     ),
 }
 

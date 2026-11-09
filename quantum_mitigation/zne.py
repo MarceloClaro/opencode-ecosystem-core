@@ -112,6 +112,28 @@ def extrapolate(
     }
 
 
+def zne_applicability(
+    scales: list[int],
+    values: list[float],
+    *,
+    tolerance: float = 0.0,
+) -> dict:
+    """A ZNE exige que a métrica cresça com a escala de ruído."""
+    monotonic = all(
+        later >= earlier - tolerance
+        for earlier, later in zip(values, values[1:])
+    )
+    return {
+        "monotonic": monotonic,
+        "applicable": monotonic,
+        "reason": (
+            "curva monotônica; extrapolação condicional"
+            if monotonic
+            else "curva não monotônica; extrapolação não é confiável"
+        ),
+    }
+
+
 def run_zne(
     circuit: QuantumCircuit,
     profile,
@@ -144,10 +166,15 @@ def run_zne(
         [row["tvd"] for row in rows],
         method=method,
     )
+    applicability = zne_applicability(
+        [row["scale"] for row in rows],
+        [row["tvd"] for row in rows],
+    )
     return {
         "schema_version": 1,
         "scales": rows,
         "extrapolation": extrapolation,
+        "applicability": applicability,
         "shots": int(shots),
         "seed": int(seed),
         "limits": (

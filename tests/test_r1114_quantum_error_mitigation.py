@@ -102,7 +102,8 @@ def test_pec_planejador():
     plan = pec_plan(load_circuit("E05")["circuit"], profile)
     assert plan["gamma_total"] > 1.0
     assert plan["samples_required"] > 1.0
-    assert any("PEC 2q" in warning for warning in plan["warnings"])
+    assert any(item["n_qubits"] == 2 for item in plan["gates"])
+    assert not any("PEC 2q" in warning for warning in plan["warnings"])
 
 
 def test_qec_repeticao():
@@ -214,10 +215,13 @@ def test_agentes_managed_v1():
 
 def test_permissões_especificas():
     expected = {
-        "quantum-error-mitigation": {"zne", "dd", "pec", "audit", "lessons"},
-        "quantum-error-correction": {"qec", "audit", "lessons"},
+        "quantum-error-mitigation": {
+            "zne", "dd", "dd-pulse", "pec", "audit", "lessons",
+        },
+        "quantum-error-correction": {"qec", "surface", "audit", "lessons"},
         "quantum-noise-characterization": {
-            "spam", "crosstalk", "drift", "uncertainty", "audit", "lessons",
+            "spam", "spam-plan", "spam-separation", "crosstalk",
+            "drift", "uncertainty", "preregister", "audit", "lessons",
         },
     }
     for path in AGENTES:

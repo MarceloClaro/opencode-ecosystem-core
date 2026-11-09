@@ -55,6 +55,16 @@ O wrapper é `agent_qem.py`. Nenhum agente executa hardware.
 - [ ] bootstrap/Wilson não são significância universal;
 - [ ] nenhuma chave em arquivo.
 
+## Validação de hardware R1115
+
+No Baihua (q0/q1, 4096 shots, 9 jobs):
+
+- ZNE escalas 1/3/5: TVD 0,0706 / 0,1003 / 0,0671; não monotônica; extrapolações
+  linear 0,0819 e quadrática 0,0320 divergem; sem ganho.
+- SPAM separation: P1≈0,93 constante; ajuste não identificável; e/r0/r1 não
+  são físicos.
+- PEC 2q, superfície e DD pulse-level não foram executados.
+
 ## Limites
 
 - ZNE não é QEC; PEC 2q não está implementado.

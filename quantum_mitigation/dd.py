@@ -77,3 +77,47 @@ def dd_plan(
             "não é schedule pulse-level nem prova de redução de erro em hardware."
         ),
     }
+
+
+def pulse_dd_plan(
+    *,
+    t1_us: float,
+    t2_us: float,
+    idle_time_us: float,
+    sequence: str = "cpmg",
+    min_spacing_us: float = 0.1,
+) -> dict:
+    """Plano de DD pulse-level a partir de T1/T2 e janela ociosa.
+
+    Não executa pulsos; o runtime GJQ atual não expõe controle pulse-level.
+    """
+    if t1_us <= 0 or t2_us <= 0 or idle_time_us <= 0 or min_spacing_us <= 0:
+        raise ValueError("T1, T2, idle_time e min_spacing devem ser > 0")
+    if sequence not in DD_SEQUENCES:
+        raise ValueError(f"sequência inválida: {sequence!r}")
+    if sequence == "xy4":
+        blocks = max(1, int(idle_time_us / (4.0 * min_spacing_us)))
+        n_pulses = 4 * blocks
+    else:
+        n_pulses = max(1, int(idle_time_us / min_spacing_us))
+    timings = [
+        (index + 0.5) * idle_time_us / n_pulses
+        for index in range(n_pulses)
+    ]
+    return {
+        "schema_version": 1,
+        "sequence": sequence,
+        "t1_us": float(t1_us),
+        "t2_us": float(t2_us),
+        "idle_time_us": float(idle_time_us),
+        "min_spacing_us": float(min_spacing_us),
+        "n_pulses": n_pulses,
+        "timings_us": timings,
+        "idle_over_t2": idle_time_us / t2_us,
+        "decoder": None,
+        "limits": (
+            "Plano de timing pulse-level; não executa pulsos e não prevê "
+            "ganho de coerência. O runtime GJQ atual não expõe controle de "
+            "pulso para implementar este plano em hardware."
+        ),
+    }
