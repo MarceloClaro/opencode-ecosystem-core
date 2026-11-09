@@ -140,7 +140,53 @@ negativa, não ganho. Para separar state preparation de readout, o próximo
 passo é tomografia/GST com bases múltiplas. PEC 2q, superfície e DD
 pulse-level permanecem em planejamento.
 
-## 6. Limites
+## 6. Resultado 16 jobs — ZNE 4 escalas + tomografia
+
+Backend Baihua, 4096 shots, gates SDD/TDD/simulação aprovados.
+
+### 6.1 ZNE
+
+| Escala | TVD vs Bell | Task ID |
+|---:|---:|---|
+| 1 | 0,0645 | `52b8c44d-f322-468e-b75a-eb9140b2d7cc` |
+| 3 | 0,0747 | `52268fb6-bb0d-4680-8cb5-06a672ecb71c` |
+| 5 | 0,0735 | `e947cb8c-7442-4f16-9dc2-e72d82ed53cd` |
+| 7 | 0,0967 | `a605ab51-66dd-4c80-972c-acc70b0d9327` |
+
+A curva continua **não monotônica**. Linear 0,0582 e quadrática 0,0671; não
+há extrapolação válida nem ganho. O randomized compiling completo (Pauli-frame
+twirling) não foi executado; apenas o plano foi preparado.
+
+### 6.2 Tomografia SPAM
+
+| Estado | Fidelidade de preparação | Comprimento de Bloch |
+|---|---:|---:|
+| 0 | 0,9875 | 0,9768 |
+| 1 | 0,9292 | 0,8603 |
+| + | 0,9824 | 0,9682 |
+| +i | 0,9839 | 0,9697 |
+
+Leitura: `r0 = P(1|prep0) = 0,0125` e `r1 = P(0|prep1) = 0,0708`.
+
+A tomografia multi-base separou preparação e leitura sob a hipótese de
+rotações de base ideais. O |1> tem a menor fidelidade/comprimento, compatível
+com erro de preparação do `rx(pi)`. Não é GST completa: crosstalk e erros
+coerentes nas rotações não são modelados.
+
+### 6.3 Pré-registro
+
+A execução foi pré-registrada com 4096 shots, confiança 95% e método Wilson
+para as probabilidades; o `n` não foi ajustado após ver os dados. O ZNE não foi
+usado para comparar layouts.
+
+### 6.4 Conclusão
+
+- Tomografia SPAM: **funcionou** como caracterização, com limites declarados.
+- ZNE: **não aplicável** nesta curva; sem ganho.
+- PEC 2q, superfície e DD pulse-level: planejamento, não executados.
+- Nenhuma vantagem quântica é declarada.
+
+## 7. Limites
 
 - PEC 2q é planejamento; o perfil escalar assume depolarização uniforme.
 - Superfície não é simulada; o orçamento não prova threshold.

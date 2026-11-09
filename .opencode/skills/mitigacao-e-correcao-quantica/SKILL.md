@@ -89,9 +89,10 @@ drift e incerteza. Para executar em hardware, o primário precisa de gates,
 
 ## Resultado R1115
 
-No Baihua, ZNE não foi monotônica e o SPAM separation por pulsos π repetidos
-não foi identificável. Não use a extrapolação ZNE como ganho nem os valores
-e/r0/r1 como físicos. PEC 2q, superfície e DD pulse-level não foram executados.
+No Baihua, ZNE continuou não monotônica mesmo com 4 escalas; não use a
+extrapolação como ganho. O SPAM por pulsos π repetidos falhou, mas a
+tomografia multi-base (4 estados x 3 bases) separou preparação e leitura sob
+hipóteses declaradas. PEC 2q, superfície e DD pulse-level não foram executados.
 
 ## Limites
 

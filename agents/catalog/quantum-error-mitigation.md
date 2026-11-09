@@ -119,7 +119,7 @@ agent_qem.py audit --report RELATORIO.md
 
 ## Limites
 
-- ZNE não é QEC; no Baihua a curva não foi monotônica e a extrapolação foi inválida.
+- ZNE não é QEC; no Baihua a curva continuou não monotônica mesmo com 4 escalas e a extrapolação foi inválida.
 - PEC cobre 1q e 2q por inversão de canal Pauli; o perfil escalar assume depolarização uniforme. O overhead cresce com γ²; a execução em hardware não foi feita.
 - DD no fim do circuito não é schedule ideal.
 - Nenhuma técnica elimina state preparation, crosstalk ou deriva.

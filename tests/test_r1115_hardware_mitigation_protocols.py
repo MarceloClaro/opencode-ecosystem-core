@@ -17,6 +17,7 @@ SPEC = RAIZ / "specs" / "SPEC-935-R1115-hardware-mitigation-protocols.md"
 DOC = RAIZ / "docs" / "PROTOCOLOS_MITIGACAO_HARDWARE_R1115.md"
 RUNNER = RAIZ / "harnesses" / "quantum-error-mitigation" / "runner.py"
 HARDWARE = RAIZ / "harnesses" / "quantum-error-mitigation" / "resultados" / "hardware_zne_spam"
+TOMOGRAPHY = RAIZ / "harnesses" / "quantum-error-mitigation" / "resultados" / "hardware_zne_tomography"
 PERFIL = (
     RAIZ
     / "harnesses"
@@ -51,7 +52,10 @@ def _frontmatter(path: Path) -> dict:
 
 
 def test_arquivos_existem():
-    for caminho in (SPEC, DOC, RUNNER, HARDWARE / "execucao.json", *AGENTES):
+    for caminho in (
+        SPEC, DOC, RUNNER, HARDWARE / "execucao.json",
+        TOMOGRAPHY / "execucao.json", *AGENTES,
+    ):
         assert caminho.exists(), caminho
         assert caminho.stat().st_size > 400, caminho
 
@@ -140,6 +144,31 @@ def test_spam_separation():
     assert "rx(pi)" in plan["q0_k1"]
 
 
+def test_spam_tomography():
+    from quantum_mitigation import fit_spam_tomography, spam_tomography_plan
+
+    plan = spam_tomography_plan(0)
+    assert len(plan) == 12
+    assert "rz(-pi/2)" in plan["q0_0_Y"]
+    shots = 100000
+    ideal_p0 = {
+        ("0", "Z"): 1.0, ("0", "X"): 0.5, ("0", "Y"): 0.5,
+        ("1", "Z"): 0.0, ("1", "X"): 0.5, ("1", "Y"): 0.5,
+        ("+", "Z"): 0.5, ("+", "X"): 1.0, ("+", "Y"): 0.5,
+        ("+i", "Z"): 0.5, ("+i", "X"): 0.5, ("+i", "Y"): 1.0,
+    }
+    counts = {}
+    for (state, basis), p0 in ideal_p0.items():
+        ones = round((1.0 - p0) * shots)
+        counts[f"q0_{state}_{basis}"] = {"0": shots - ones, "1": ones}
+    fit = fit_spam_tomography(counts)
+    assert fit["identified"] is True
+    for state in ("0", "1", "+", "+i"):
+        assert fit["prep_fidelity"][state] == pytest.approx(1.0, abs=1e-6)
+    assert fit["readout_p1_given_prep0"] == pytest.approx(0.0, abs=1e-9)
+    assert fit["readout_p0_given_prep1"] == pytest.approx(0.0, abs=1e-9)
+
+
 def test_zne_applicability():
     from quantum_mitigation import zne_applicability
 
@@ -196,8 +225,9 @@ def test_agentes_com_novos_comandos():
         "quantum-error-mitigation": {"zne", "dd", "dd-pulse", "pec", "audit", "lessons"},
         "quantum-error-correction": {"qec", "surface", "audit", "lessons"},
         "quantum-noise-characterization": {
-            "spam", "spam-plan", "spam-separation", "crosstalk",
-            "drift", "uncertainty", "preregister", "audit", "lessons",
+            "spam", "spam-plan", "spam-separation", "spam-tomography-plan",
+            "spam-tomography", "crosstalk", "drift", "uncertainty",
+            "preregister", "audit", "lessons",
         },
     }
     from agents.lifecycle import validate_managed_card
@@ -242,13 +272,39 @@ def test_hardware_artefatos():
     assert "não são físicos" in report
 
 
+def test_hardware_tomography_artefatos():
+    if not (TOMOGRAPHY / "execucao.json").exists():
+        pytest.skip("hardware de tomografia ainda não executado")
+    data = json.loads((TOMOGRAPHY / "execucao.json").read_text(encoding="utf-8"))
+    assert data["hardware_executed"] is True
+    assert data["submissions"] == {"zne": 4, "tomography": 12, "total": 16}
+    assert len(data["zne"]["rows"]) == 4
+    assert data["zne"]["applicability"]["monotonic"] is False
+    for row in data["zne"]["rows"]:
+        assert sum(row["counts"].values()) == 4096
+    fit = data["tomography"]
+    assert set(fit["prep_fidelity"]) == {"0", "1", "+", "+i"}
+    assert fit["prep_fidelity"]["1"] < fit["prep_fidelity"]["0"]
+    assert 0.0 < fit["readout_p1_given_prep0"] < 1.0
+    assert 0.0 < fit["readout_p0_given_prep1"] < 1.0
+    assert len(fit["task_ids"]) == 12
+    for counts in fit["counts"].values():
+        assert sum(counts.values()) == 4096
+    report = (TOMOGRAPHY / "RELATORIO.md").read_text(encoding="utf-8")
+    assert "Tomografia SPAM" in report
+    assert "não monotônica" in report
+
+
 def test_sem_segredo():
     padroes = [
         re.compile(r"GJQ_API_KEY\s*=\s*['\"][A-Za-z0-9_-]{16,}['\"]"),
         re.compile(r"sk-[A-Za-z0-9]{20,}"),
         re.compile(r"Bearer\s+[A-Za-z0-9._-]{20,}"),
     ]
-    for caminho in (SPEC, DOC, RUNNER, HARDWARE / "execucao.json", *AGENTES):
+    for caminho in (
+        SPEC, DOC, RUNNER, HARDWARE / "execucao.json",
+        TOMOGRAPHY / "execucao.json", *AGENTES,
+    ):
         text = caminho.read_text(encoding="utf-8")
         for padrao in padroes:
             assert not padrao.search(text), f"segredo em {caminho}"

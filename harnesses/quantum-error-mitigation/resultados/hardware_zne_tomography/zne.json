@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "shots": 4096,
+  "rows": [
+    {
+      "scale": 1,
+      "task_id": "52b8c44d-f322-468e-b75a-eb9140b2d7cc",
+      "counts": {
+        "00": 1969,
+        "01": 137,
+        "11": 1863,
+        "10": 127
+      },
+      "probabilities": {
+        "00": 0.480712890625,
+        "01": 0.033447265625,
+        "11": 0.454833984375,
+        "10": 0.031005859375
+      },
+      "tvd_vs_bell": 0.064453125
+    },
+    {
+      "scale": 3,
+      "task_id": "52268fb6-bb0d-4680-8cb5-06a672ecb71c",
+      "counts": {
+        "00": 1943,
+        "01": 177,
+        "11": 1847,
+        "10": 129
+      },
+      "probabilities": {
+        "00": 0.474365234375,
+        "01": 0.043212890625,
+        "11": 0.450927734375,
+        "10": 0.031494140625
+      },
+      "tvd_vs_bell": 0.07470703125
+    },
+    {
+      "scale": 5,
+      "task_id": "e947cb8c-7442-4f16-9dc2-e72d82ed53cd",
+      "counts": {
+        "11": 1849,
+        "10": 153,
+        "00": 1946,
+        "01": 148
+      },
+      "probabilities": {
+        "11": 0.451416015625,
+        "10": 0.037353515625,
+        "00": 0.47509765625,
+        "01": 0.0361328125
+      },
+      "tvd_vs_bell": 0.073486328125
+    },
+    {
+      "scale": 7,
+      "task_id": "a605ab51-66dd-4c80-972c-acc70b0d9327",
+      "counts": {
+        "00": 1963,
+        "11": 1737,
+        "10": 236,
+        "01": 160
+      },
+      "probabilities": {
+        "00": 0.479248046875,
+        "11": 0.424072265625,
+        "10": 0.0576171875,
+        "01": 0.0390625
+      },
+      "tvd_vs_bell": 0.0966796875
+    }
+  ],
+  "applicability": {
+    "monotonic": false,
+    "applicable": false,
+    "reason": "curva não monotônica; extrapolação não é confiável"
+  },
+  "extrapolation_linear": {
+    "method": "linear",
+    "extrapolated": 0.05823974609375001,
+    "coefficients": [
+      0.004772949218750003,
+      0.05823974609375001
+    ]
+  },
+  "extrapolation_quadratic": {
+    "method": "quadratic",
+    "extrapolated": 0.06713562011718757,
+    "coefficients": [
+      0.0008087158203125014,
+      -0.0016967773437500204,
+      0.06713562011718757
+    ]
+  },
+  "conclusion": "Curva não monotônica; extrapolação inválida e sem ganho demonstrado.",
+  "limits": "ZNE extrapola TVD; não é fidelidade de estado."
+}

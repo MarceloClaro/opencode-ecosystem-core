@@ -61,8 +61,10 @@ No Baihua (q0/q1, 4096 shots, 9 jobs):
 
 - ZNE escalas 1/3/5: TVD 0,0706 / 0,1003 / 0,0671; não monotônica; extrapolações
   linear 0,0819 e quadrática 0,0320 divergem; sem ganho.
-- SPAM separation: P1≈0,93 constante; ajuste não identificável; e/r0/r1 não
-  são físicos.
+- SPAM por pulsos π repetidos: P1≈0,93 constante; ajuste não identificável.
+- Tomografia multi-base (16 jobs, 4096 shots): fidelidades 0,9875 / 0,9292 /
+  0,9824 / 0,9839; r0=0,0125 e r1=0,0708.
+- ZNE 4 escalas: TVD 0,0645 / 0,0747 / 0,0735 / 0,0967; ainda não monotônica.
 - PEC 2q, superfície e DD pulse-level não foram executados.
 
 ## Limites

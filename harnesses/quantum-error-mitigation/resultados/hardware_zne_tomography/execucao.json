@@ -1,0 +1,257 @@
+{
+  "schema_version": 1,
+  "backend": "Baihua",
+  "shots": 4096,
+  "profile_fingerprint": "f79a19730b1c5cc025e344a5dacbb0ae0d67227f3a6cd936ad99f8cabed543de",
+  "calibration_date": "2026-11-09 17:23:30-03:00",
+  "gates": {
+    "sdd": true,
+    "tdd": true,
+    "simulation": true
+  },
+  "submissions": {
+    "zne": 4,
+    "tomography": 12,
+    "total": 16
+  },
+  "preregistration": {
+    "shots": 4096,
+    "confidence": 0.95,
+    "method": "Wilson por probabilidade",
+    "note": "n fixado antes da execução; não ajustar após ver os dados."
+  },
+  "zne": {
+    "schema_version": 1,
+    "shots": 4096,
+    "rows": [
+      {
+        "scale": 1,
+        "task_id": "52b8c44d-f322-468e-b75a-eb9140b2d7cc",
+        "counts": {
+          "00": 1969,
+          "01": 137,
+          "11": 1863,
+          "10": 127
+        },
+        "probabilities": {
+          "00": 0.480712890625,
+          "01": 0.033447265625,
+          "11": 0.454833984375,
+          "10": 0.031005859375
+        },
+        "tvd_vs_bell": 0.064453125
+      },
+      {
+        "scale": 3,
+        "task_id": "52268fb6-bb0d-4680-8cb5-06a672ecb71c",
+        "counts": {
+          "00": 1943,
+          "01": 177,
+          "11": 1847,
+          "10": 129
+        },
+        "probabilities": {
+          "00": 0.474365234375,
+          "01": 0.043212890625,
+          "11": 0.450927734375,
+          "10": 0.031494140625
+        },
+        "tvd_vs_bell": 0.07470703125
+      },
+      {
+        "scale": 5,
+        "task_id": "e947cb8c-7442-4f16-9dc2-e72d82ed53cd",
+        "counts": {
+          "11": 1849,
+          "10": 153,
+          "00": 1946,
+          "01": 148
+        },
+        "probabilities": {
+          "11": 0.451416015625,
+          "10": 0.037353515625,
+          "00": 0.47509765625,
+          "01": 0.0361328125
+        },
+        "tvd_vs_bell": 0.073486328125
+      },
+      {
+        "scale": 7,
+        "task_id": "a605ab51-66dd-4c80-972c-acc70b0d9327",
+        "counts": {
+          "00": 1963,
+          "11": 1737,
+          "10": 236,
+          "01": 160
+        },
+        "probabilities": {
+          "00": 0.479248046875,
+          "11": 0.424072265625,
+          "10": 0.0576171875,
+          "01": 0.0390625
+        },
+        "tvd_vs_bell": 0.0966796875
+      }
+    ],
+    "applicability": {
+      "monotonic": false,
+      "applicable": false,
+      "reason": "curva não monotônica; extrapolação não é confiável"
+    },
+    "extrapolation_linear": {
+      "method": "linear",
+      "extrapolated": 0.05823974609375001,
+      "coefficients": [
+        0.004772949218750003,
+        0.05823974609375001
+      ]
+    },
+    "extrapolation_quadratic": {
+      "method": "quadratic",
+      "extrapolated": 0.06713562011718757,
+      "coefficients": [
+        0.0008087158203125014,
+        -0.0016967773437500204,
+        0.06713562011718757
+      ]
+    },
+    "conclusion": "Curva não monotônica; extrapolação inválida e sem ganho demonstrado.",
+    "limits": "ZNE extrapola TVD; não é fidelidade de estado."
+  },
+  "tomography": {
+    "schema_version": 1,
+    "method": "tomografia de preparação em 3 bases + leitura Z",
+    "states": {
+      "0": {
+        "bloch": {
+          "x": 0.017578125,
+          "y": 0.05419921875,
+          "z": 0.97509765625
+        },
+        "length": 0.9767609661610507,
+        "expectations": {
+          "X": 0.017578125,
+          "Y": 0.05419921875,
+          "Z": 0.97509765625
+        }
+      },
+      "1": {
+        "bloch": {
+          "x": 0.0458984375,
+          "y": 0.03369140625,
+          "z": -0.8583984375
+        },
+        "length": 0.8602846359911848,
+        "expectations": {
+          "X": 0.0458984375,
+          "Y": 0.03369140625,
+          "Z": -0.8583984375
+        }
+      },
+      "+": {
+        "bloch": {
+          "x": 0.96484375,
+          "y": 0.02880859375,
+          "z": 0.0751953125
+        },
+        "length": 0.9681981883942398,
+        "expectations": {
+          "X": 0.96484375,
+          "Y": 0.02880859375,
+          "Z": 0.0751953125
+        }
+      },
+      "+i": {
+        "bloch": {
+          "x": 0.0390625,
+          "y": 0.9677734375,
+          "z": 0.04736328125
+        },
+        "length": 0.969718817826891,
+        "expectations": {
+          "X": 0.0390625,
+          "Y": 0.9677734375,
+          "Z": 0.04736328125
+        }
+      }
+    },
+    "prep_fidelity": {
+      "0": 0.987548828125,
+      "1": 0.92919921875,
+      "+": 0.982421875,
+      "+i": 0.98388671875
+    },
+    "readout_p1_given_prep0": 0.012451171875,
+    "readout_p0_given_prep1": 0.07080078125,
+    "identified": true,
+    "limits": "Assume rotações de base ideais e ausência de crosstalk; não é GST completa. A fidelidade de preparação usa a projeção no estado ideal; erro coerente pode reduzir a fidelidade sem reduzir o comprimento.",
+    "task_ids": {
+      "q0_0_X": "bed8c719-7b8d-4933-9a20-a18e55eae32d",
+      "q0_0_Y": "100efc2e-2510-4e63-950d-ad97ec180884",
+      "q0_0_Z": "1ba89730-31cd-490c-a8f5-a1aa9976be9d",
+      "q0_1_X": "e2fa9365-5c38-4f80-80b8-d9085e7c553e",
+      "q0_1_Y": "cdd6c95f-d6ca-49d5-b1f2-40e32a9cef34",
+      "q0_1_Z": "a9b34d80-4bd4-4e95-8cab-ade79f561f84",
+      "q0_+_X": "0055b3dd-a302-4796-a69d-3fda10f63783",
+      "q0_+_Y": "02a99eb2-6342-4fb8-804a-293d69f69456",
+      "q0_+_Z": "4a5fae33-6705-4c44-9704-8ddf62d4247a",
+      "q0_+i_X": "b64b7a76-5156-4fb5-84c4-789747251c18",
+      "q0_+i_Y": "4e9dfb7c-64ce-4b97-abf9-85b96141ba15",
+      "q0_+i_Z": "3b0b9855-d4e9-4fc4-a681-b377ea1265a4"
+    },
+    "counts": {
+      "q0_0_X": {
+        "0": 2084,
+        "1": 2012
+      },
+      "q0_0_Y": {
+        "1": 1937,
+        "0": 2159
+      },
+      "q0_0_Z": {
+        "0": 4045,
+        "1": 51
+      },
+      "q0_1_X": {
+        "1": 1954,
+        "0": 2142
+      },
+      "q0_1_Y": {
+        "1": 1979,
+        "0": 2117
+      },
+      "q0_1_Z": {
+        "1": 3806,
+        "0": 290
+      },
+      "q0_+_X": {
+        "0": 4024,
+        "1": 72
+      },
+      "q0_+_Y": {
+        "1": 1989,
+        "0": 2107
+      },
+      "q0_+_Z": {
+        "0": 2202,
+        "1": 1894
+      },
+      "q0_+i_X": {
+        "0": 2128,
+        "1": 1968
+      },
+      "q0_+i_Y": {
+        "0": 4030,
+        "1": 66
+      },
+      "q0_+i_Z": {
+        "0": 2145,
+        "1": 1951
+      }
+    }
+  },
+  "generated_at": "2026-11-09T15:59:50-03:00",
+  "hardware_executed": true,
+  "network": true,
+  "limits": "ZNE e tomografia SPAM em q0; PEC 2q, superfície e DD pulse-level não foram executados. Não é prova de vantagem."
+}

@@ -220,8 +220,9 @@ def test_permissões_especificas():
         },
         "quantum-error-correction": {"qec", "surface", "audit", "lessons"},
         "quantum-noise-characterization": {
-            "spam", "spam-plan", "spam-separation", "crosstalk",
-            "drift", "uncertainty", "preregister", "audit", "lessons",
+            "spam", "spam-plan", "spam-separation", "spam-tomography-plan",
+            "spam-tomography", "crosstalk", "drift", "uncertainty",
+            "preregister", "audit", "lessons",
         },
     }
     for path in AGENTES:

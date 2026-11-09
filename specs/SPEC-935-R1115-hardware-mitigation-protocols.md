@@ -21,8 +21,9 @@ capacidade da API**.
 - **R2.** Orçamento de código de superfície (dados, ancillas, síndrome) e
   interface de decodificador, sem simular o código.
 - **R3.** Plano DD pulse-level a partir de T1/T2, janela ociosa e espaçamento.
-- **R4.** Plano e ajuste de SPAM por pulsos π repetidos (k=1,3,5), separando
-  erro de preparação e leitura em modelo declarado.
+- **R4.** Plano e ajuste de SPAM por tomografia multi-base (4 estados × 3
+  bases), separando preparação e leitura sob hipóteses declaradas. O método
+  antigo de pulsos π repetidos fica documentado como falho.
 - **R5.** Pré-registro de `n` para meia-largura Wilson.
 - **R6.** Protocolo de hardware para ZNE no Bell e SPAM separation, com gates
   SDD/TDD/simulação.

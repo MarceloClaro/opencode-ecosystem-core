@@ -17,7 +17,8 @@ from runner import main  # noqa: E402
 
 ALLOWED = {
     "zne", "dd", "dd-pulse", "pec", "qec", "surface",
-    "spam", "spam-plan", "spam-separation", "crosstalk",
+    "spam", "spam-plan", "spam-separation", "spam-tomography-plan",
+    "spam-tomography", "crosstalk",
     "drift", "uncertainty", "preregister", "lessons", "audit",
 }
 USO = "uso: agent_qem.py <" + "|".join(sorted(ALLOWED)) + "> [args]"

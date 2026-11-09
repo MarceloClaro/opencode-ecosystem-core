@@ -23,6 +23,7 @@ from quantum_mitigation import (  # noqa: E402
     drift_detection,
     fit_spam,
     fit_spam_separation,
+    fit_spam_tomography,
     pec_plan,
     preregister_ci,
     pulse_dd_plan,
@@ -30,6 +31,7 @@ from quantum_mitigation import (  # noqa: E402
     run_repetition_code,
     run_zne,
     spam_separation_plan,
+    spam_tomography_plan,
     surface_code_plan,
     uncertainty_report,
 )
@@ -331,6 +333,48 @@ def cmd_spam_plan(args) -> int:
     return 0
 
 
+def cmd_spam_tomography_plan(args) -> int:
+    circuits = spam_tomography_plan(args.qubit)
+    payload = {
+        "schema_version": 1,
+        "qubit": args.qubit,
+        "states": ["0", "1", "+", "+i"],
+        "bases": ["X", "Y", "Z"],
+        "circuits_qasm2": circuits,
+        "limits": "12 circuitos; não executa hardware.",
+    }
+    lines = [
+        "## Plano de tomografia SPAM",
+        "",
+        f"- Qubit: {args.qubit}.",
+        f"- Circuitos: {len(circuits)} (4 estados x 3 bases).",
+    ]
+    exported = _write(Path(args.out), payload, "SPAM — tomografia multi-base", lines)
+    _json_print({"status": "ok", "command": "spam-tomography-plan", **exported, "hardware_executed": False})
+    return 0
+
+
+def cmd_spam_tomography(args) -> int:
+    payload = fit_spam_tomography(_read_json(args.counts))
+    lines = [
+        "## Tomografia SPAM",
+        "",
+        "| Estado | Fidelidade de preparação | Comprimento de Bloch |",
+        "|---|---:|---:|",
+        *[
+            f"| {state} | {payload['prep_fidelity'][state]:.4f} | "
+            f"{payload['states'][state]['length']:.4f} |"
+            for state in ("0", "1", "+", "+i")
+        ],
+        "",
+        f"- r0 = P(1|prep0): {payload['readout_p1_given_prep0']}.",
+        f"- r1 = P(0|prep1): {payload['readout_p0_given_prep1']}.",
+    ]
+    exported = _write(Path(args.out), payload, "SPAM — tomografia de preparação e leitura", lines)
+    _json_print({"status": "ok", "command": "spam-tomography", **exported, "hardware_executed": False})
+    return 0
+
+
 def cmd_spam_separation(args) -> int:
     payload = fit_spam_separation(_read_json(args.counts))
     lines = [
@@ -507,6 +551,16 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--ks", nargs="+", type=int, default=[1, 3, 5])
     p.add_argument("--out", default=str(OUT_PADRAO / "spam-plan"))
     p.set_defaults(func=cmd_spam_plan)
+
+    p = sub.add_parser("spam-tomography-plan", help="12 circuitos de tomografia SPAM")
+    p.add_argument("--qubit", type=int, default=0)
+    p.add_argument("--out", default=str(OUT_PADRAO / "spam-tomography-plan"))
+    p.set_defaults(func=cmd_spam_tomography_plan)
+
+    p = sub.add_parser("spam-tomography", help="ajuste de tomografia SPAM")
+    p.add_argument("--counts", required=True)
+    p.add_argument("--out", default=str(OUT_PADRAO / "spam-tomography"))
+    p.set_defaults(func=cmd_spam_tomography)
 
     p = sub.add_parser("spam-separation", help="ajuste SPAM por pulsos repetidos")
     p.add_argument("--counts", required=True)

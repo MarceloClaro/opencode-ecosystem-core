@@ -276,3 +276,121 @@ def preregister_ci(
                 "limits": "Cálculo pré-registrado; não garante poder estatístico.",
             }
     raise ValueError("não foi possível atingir a meia-largura")
+
+
+SPAM_STATES = ("0", "1", "+", "+i")
+SPAM_BASES = ("X", "Y", "Z")
+
+
+def _prepare_state(circuit: QuantumCircuit, qubit: int, state: str) -> None:
+    if state == "0":
+        return
+    if state == "1":
+        circuit.rx(math.pi, qubit)
+    elif state == "+":
+        circuit.h(qubit)
+    elif state == "+i":
+        circuit.h(qubit)
+        circuit.rz(math.pi / 2.0, qubit)
+    else:
+        raise ValueError(f"estado inválido: {state}")
+
+
+def _rotate_basis(circuit: QuantumCircuit, qubit: int, basis: str) -> None:
+    if basis == "Z":
+        return
+    if basis == "X":
+        circuit.h(qubit)
+    elif basis == "Y":
+        circuit.rz(-math.pi / 2.0, qubit)
+        circuit.h(qubit)
+    else:
+        raise ValueError(f"base inválida: {basis}")
+
+
+def spam_tomography_plan(qubit: int = 0) -> dict[str, str]:
+    """12 circuitos: 4 estados preparados x 3 bases de medida."""
+    output = {}
+    for state in SPAM_STATES:
+        for basis in SPAM_BASES:
+            circuit = QuantumCircuit(max(qubit + 1, 1), 1)
+            _prepare_state(circuit, qubit, state)
+            _rotate_basis(circuit, qubit, basis)
+            circuit.measure(qubit, 0)
+            output[f"q{qubit}_{state}_{basis}"] = qasm2.dumps(circuit)
+    return output
+
+
+def fit_spam_tomography(counts_by_key: dict[str, dict[str, int]]) -> dict:
+    """Tomografia de preparação + leitura em 3 bases.
+
+    Reconstrói o vetor de Bloch de cada estado preparado e compara com o ideal.
+    Assume rotações de base ideais e ausência de crosstalk; não é GST completa.
+    """
+    states = {}
+    for state in SPAM_STATES:
+        expectations = {}
+        for basis in SPAM_BASES:
+            key = f"q0_{state}_{basis}"
+            if key not in counts_by_key:
+                # aceita chave sem o prefixo q0_
+                key = f"{state}_{basis}"
+            if key not in counts_by_key:
+                raise ValueError(f"counts ausente para {state}/{basis}")
+            counts = counts_by_key[key]
+            total = sum(int(v) for v in counts.values())
+            if total <= 0:
+                raise ValueError(f"counts vazios para {state}/{basis}")
+            p0 = int(counts.get("0", 0)) / total
+            expectations[basis] = 2.0 * p0 - 1.0
+        vector = np.array(
+            [expectations["X"], expectations["Y"], expectations["Z"]],
+            dtype=float,
+        )
+        states[state] = {
+            "bloch": {
+                "x": float(vector[0]),
+                "y": float(vector[1]),
+                "z": float(vector[2]),
+            },
+            "length": float(np.linalg.norm(vector)),
+            "expectations": expectations,
+        }
+    ideal = {
+        "0": (0.0, 0.0, 1.0),
+        "1": (0.0, 0.0, -1.0),
+        "+": (1.0, 0.0, 0.0),
+        "+i": (0.0, 1.0, 0.0),
+    }
+    fidelities = {}
+    for state, item in states.items():
+        vector = np.array(
+            [item["bloch"]["x"], item["bloch"]["y"], item["bloch"]["z"]]
+        )
+        target = np.array(ideal[state])
+        fidelity = (1.0 + float(np.dot(vector, target))) / 2.0
+        fidelities[state] = max(0.0, min(1.0, fidelity))
+    readout0 = counts_by_key.get("q0_0_Z") or counts_by_key.get("0_Z")
+    readout1 = counts_by_key.get("q0_1_Z") or counts_by_key.get("1_Z")
+    p1_given_0 = (
+        int(readout0.get("1", 0)) / sum(int(v) for v in readout0.values())
+        if readout0 else None
+    )
+    p0_given_1 = (
+        int(readout1.get("0", 0)) / sum(int(v) for v in readout1.values())
+        if readout1 else None
+    )
+    return {
+        "schema_version": 1,
+        "method": "tomografia de preparação em 3 bases + leitura Z",
+        "states": states,
+        "prep_fidelity": fidelities,
+        "readout_p1_given_prep0": p1_given_0,
+        "readout_p0_given_prep1": p0_given_1,
+        "identified": True,
+        "limits": (
+            "Assume rotações de base ideais e ausência de crosstalk; não é GST "
+            "completa. A fidelidade de preparação usa a projeção no estado ideal; "
+            "erro coerente pode reduzir a fidelidade sem reduzir o comprimento."
+        ),
+    }

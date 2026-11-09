@@ -50,6 +50,8 @@ permission:
     .venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py spam*: allow
     .venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py spam-plan*: allow
     .venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py spam-separation*: allow
+    .venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py spam-tomography-plan*: allow
+    .venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py spam-tomography*: allow
     .venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py crosstalk*: allow
     .venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py drift*: allow
     .venv-quantum/bin/python harnesses/quantum-error-mitigation/agent_qem.py uncertainty*: allow
@@ -101,6 +103,8 @@ hardware e não trata dispersão como prova estatística universal.
 agent_qem.py spam --counts0 counts0.json --counts1 counts1.json
 agent_qem.py spam-plan --qubits 0 1 --ks 1 3 5
 agent_qem.py spam-separation --counts spam_ks.json
+agent_qem.py spam-tomography-plan --qubit 0
+agent_qem.py spam-tomography --counts tomography.json
 agent_qem.py crosstalk --isolated 0.01 --simultaneous 0.02
 agent_qem.py drift --values 0.010 0.011 0.013 0.016 0.020
 agent_qem.py uncertainty --values 0.020 0.025 0.022 0.024
@@ -127,7 +131,7 @@ agent_qem.py audit --report RELATORIO.md
 ## Limites
 
 - A calibração |11> inclui preparação do |1>.
-- No Baihua, o SPAM separation por pulsos π repetidos não foi identificável; e/r0/r1 não são físicos.
+- No Baihua, o SPAM por pulsos π repetidos falhou; a tomografia multi-base funcionou e é o método recomendado.
 - Crosstalk isolado vs simultâneo não identifica a causa.
 - Drift não corrige calibração.
 - Três repetições não estimam caudas extremas.
