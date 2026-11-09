@@ -35,20 +35,28 @@ export GJQ_API_KEY="sua-chave"
 A chave é cacheada pelo SDK em `~/.gjq_client/gjq_client_account.json`.
 Proteja o arquivo com `chmod 600` e nunca o versione.
 
-## Backends documentados
+## Catálogo de backends (R1104)
 
-| Backend | Tipo | Qubits | Uso |
-|---|---|---:|---|
-| `FAS-CPU` | simulador full-amplitude CPU | 20 | validação rápida |
-| `FAS-GPU` | simulador full-amplitude GPU | 32 | circuitos maiores |
-| `SAS-CPU` | simulador single-amplitude CPU | 200 | uma amplitude; exige `amplitude_index` |
-| `SAS-GPU` | simulador single-amplitude GPU | 32 | uma amplitude; exige `amplitude_index` |
-| `MPS` | tensor network GPU | 1000 | escala; exige `simulator_config` |
-| `Baihua` | hardware supercondutor | 156 | hardware; custo e fila |
-| `Guoji08` | hardware supercondutor | 20 | hardware; sessões |
+O catálogo canônico tem **19 recursos** no snapshot de 2026-11-09. Use o MCP
+`gjq-backend-research` (`gjq_backend_catalog`, `gjq_resolve_backend`,
+`gjq_research_plan`) para ver a lista completa, resolver aliases e montar o
+plano. Resumo por família:
+
+| Família | Recursos | Exemplos de API | Gate |
+|---|---|---|---|
+| hardware/emulação | Guoji No.1/4/7/8, Baihua, Yudu | `Guoji08`, `Baihua` | `allow_hardware=True` |
+| CPU | Jiuxiao, Jiuyun, Jiuyuan, Jiuci | `FAS-CPU`, `SAS-CPU` | simulador |
+| GPU | Qilv, Qijian, Qiyao, Qijing | `FAS-GPU`, `SAS-GPU` | simulador |
+| MPS | MPS | `MPS` | `simulator_config` |
+| NPU | Liangshi, Weina, Weichi, Weixin | nomes a confirmar | simulador |
 
 A disponibilidade e a fila mudam. Sempre consulte `gjq_list_backends` antes de
-escolher. `gjq_least_busy` pode retornar simulador.
+escolher. `gjq_least_busy` pode retornar simulador. O nome exibido na UI pode
+não ser o nome da API; confirme antes de submeter.
+
+> **Guoji08:** a UI de 2026-11-09 mostra `Guoji No.8 (simulate)`. O gate trata
+> como emulação de hardware e continua exigindo `allow_hardware=True`; resultados
+> históricos devem ser lidos com a data e a calibração da época.
 
 ## Fluxo
 
@@ -65,6 +73,15 @@ escolher. `gjq_least_busy` pode retornar simulador.
 
 Não faça polling apertado. Consulte a cada poucos segundos e reutilize o
 `task_id`; não reenvie o mesmo circuito.
+
+## MCP `gjq-backend-research`
+
+Somente leitura, sem chave e sem rede. Ferramentas: `gjq_backend_catalog`,
+`gjq_backend_snapshot`, `gjq_resolve_backend`, `gjq_select_backend`,
+`gjq_research_plan`, `gjq_compare_plan`, `gjq_backend_limits`,
+`gjq_provenance_template` e `gjq_calibration_snapshot`. Use-o antes do runtime
+para escolher o backend, evitar single-amplitude por engano e preencher a
+proveniência. Ele não lista fila ao vivo nem submete jobs.
 
 ## Ferramentas do MCP `gjq-runtime`
 
@@ -86,7 +103,7 @@ Não faça polling apertado. Consulte a cada poucos segundos e reutilize o
 ## Gates de segurança
 
 - `confirm=True` é obrigatório em `gjq_sample` e `gjq_estimate`.
-- `Guoji08` e `Baihua` exigem `allow_hardware=True` e aprovação de custo.
+- Hardware/emulação (Guoji01/04/07/08, Baihua e Yudu) exige `allow_hardware=True` e aprovação de custo.
 - `GJQ_MAX_SHOTS` limita shots; padrão 100.000.
 - `GJQ_MAX_SUBMISSIONS_PER_SESSION` limita submissões; padrão 20.
 - A chave vem só de `GJQ_API_KEY`; não há ferramenta para digitá-la no prompt.
@@ -128,7 +145,7 @@ declare violação somente se o intervalo experimental sustentar `|S| > 2`.
 
 - Simulação ou uma execução não provam fidelidade, emaranhamento, vantagem
   quântica ou interpretação de Bohm.
-- MPS acima de 200 qubits exige o SDK diretamente; o MCP limita a 200 qubits.
+- MPS tem 997 qubits de capacidade, mas o MCP limita a 200 por padrão; elevar `GJQ_MAX_QUBITS` exige revisão explícita.
 - O servidor oficial `gjq-runtime-mcp-server` não é usado: ele chama
   `Estimator.run(..., obs=...)` e `task_result(..., obs=...)`, assinaturas
   incompatíveis com `gjq-client 0.2.1`, e não exige `confirm=True`.
@@ -141,3 +158,4 @@ declare violação somente se o intervalo experimental sustentar `|S| > 2`.
 - <https://tiangongqs.com/docs/quantum/JupyterNotebookUserGuide.html>
 - <https://github.com/guoji-quantum/gjq_client>
 - <https://github.com/guoji-quantum/gjq-runtime-mcp-server>
+- [Backends R1104](../../../docs/GJQ_BACKENDS_R1104.md)

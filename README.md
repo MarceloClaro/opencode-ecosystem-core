@@ -12,8 +12,8 @@
 [![Tests](https://img.shields.io/badge/tests-local%20suite-3b82f6?style=for-the-badge&logo=pytest)](tests/)
 <!-- core-badges:start -->
 [![Checks](https://img.shields.io/badge/checks-22%20estruturais-64748b?style=for-the-badge)](marceloclaro/doctor.py)
-[![MCP](https://img.shields.io/badge/MCP-34%20servers-8b5cf6?style=for-the-badge)](opencode.json)
-[![Agents](https://img.shields.io/badge/agents-347-7c3aed?style=for-the-badge)](agents/catalog)
+[![MCP](https://img.shields.io/badge/MCP-35%20servers-8b5cf6?style=for-the-badge)](opencode.json)
+[![Agents](https://img.shields.io/badge/agents-366-7c3aed?style=for-the-badge)](agents/catalog)
 <!-- core-badges:end -->
 [![Evidence](https://img.shields.io/badge/evidence--first-f59e0b?style=for-the-badge)](reports/r1054/README.md)
 
@@ -33,7 +33,7 @@
 </div>
 
 <!-- core-state:start -->
-**347 agentes** · **34 MCPs** · **35 comandos** · **22 checks**
+**366 agentes** · **35 MCPs** · **35 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 
@@ -192,8 +192,8 @@ registrada, não escondida. Evidência:
 <a id="gjq-r1099"></a>
 ## Pesquisa quântica e GJQ (R1099)
 
-A trilha quântica conecta a plataforma GJQ/CETC-ICQ ao Core por três MCPs,
-um agente e duas skills. O objetivo é tornar explícito o que foi simulado,
+A trilha quântica conecta a plataforma GJQ/CETC-ICQ ao Core por quatro MCPs,
+21 agentes GJQ e duas skills. O objetivo é tornar explícito o que foi simulado,
 o que foi medido, qual task ID sustenta cada número e qual limite permanece.
 
 | Componente | Entrega | Gate |
@@ -201,7 +201,8 @@ o que foi medido, qual task ID sustenta cada número e qual limite permanece.
 | MCP `gjq-experiments` | 7 ferramentas para E01–E18 pelo script canônico | `confirm=True` e JSON simulado antes do hardware |
 | MCP `gjq-runtime` | 12 ferramentas para backends, sampling, estimativa e tarefas | `confirm=True`; hardware só com `allow_hardware=True`; 200 qubits/100.000 shots/20 submissões |
 | MCP `quantum-sim-core` | 4 ferramentas para OpenQASM local | 12 qubits/10.000 shots; sem rede, arquivos ou código arbitrário |
-| Agente | `gjq-quantum-research` | proveniência, custo e limites |
+| MCP `gjq-backend-research` | 9 ferramentas somente leitura para catálogo, resolução, seleção e plano | sem chave e sem rede; não submete |
+| Agentes | `gjq-quantum-research`, `gjq-experiment-runner` e 19 `gjq-backend-*` | proveniência, custo, gate e limites |
 | Skills | `gjq-pesquisa-quantica`, `gjq-experimentos-quanticos` | fluxo e segurança |
 
 Resultados registrados em 2026-11-08 no backend `FAS-GPU` (simulador):
@@ -213,7 +214,14 @@ Resultados registrados em 2026-11-08 no backend `FAS-GPU` (simulador):
 
 O livro também registra o CHSH no `Guoji08` (hardware), com `S=2,383`, em
 campanha anterior; a comparação com o simulador está no apêndice. O `Guoji08`
-não foi executado nesta rodada.
+não foi executado nesta rodada. A UI de 2026-11-09 mostra
+`Guoji No.8 (simulate)`; o gate R1104 o trata como emulação de hardware e
+preserva a leitura histórica com a data e a calibração da época.
+
+O catálogo R1104 lista **19 recursos** (6 hardware/emulação, 4 CPU, 4 GPU,
+1 MPS e 4 NPU), com 19 agentes `gjq-backend-*` e o MCP
+`gjq-backend-research`. Nomes de API não verificados não são inventados:
+`gjq_list_backends` confirma o nome vivo antes da submissão.
 
 Task IDs, counts e hashes QASM estão em `docs/gjq-runtime/*.json`; a conta
 completa está no [Apêndice GJQ](educacao_quantica_bohm/livro_pixel/GJQ_RESULTADOS.md).
@@ -221,6 +229,7 @@ A chave `GJQ_API_KEY` nunca é versionada. Nenhum hardware foi executado nesta
 série; execução real exige chave, conta e autorização de custo.
 
 Docs: [GJQ R1099](docs/GJQ_PESQUISA_QUANTICA_R1099.md) ·
+[backends R1104](docs/GJQ_BACKENDS_R1104.md) ·
 [auditoria de MCPs](docs/AUDITORIA_MCPS_QUANTICOS_R1099.md) ·
 [catálogo de repositórios](docs/REPOSITORIOS_QUANTICOS.md).
 
@@ -524,6 +533,7 @@ não é aceite editorial.
 | [Molambudos](literatura/molambudos/README.md) | edições, fontes, capas e limites do clone |
 | [Política Git R1084](specs/SPEC-935-R1084-git-policy-readme-reconciliation.md) | allowlist, testes e divergência de paginação |
 | [GJQ R1099](docs/GJQ_PESQUISA_QUANTICA_R1099.md) | MCPs, backends, auditoria e resultados Bell/CHSH |
+| [Backends GJQ R1104](docs/GJQ_BACKENDS_R1104.md) | 19 recursos, MCP somente leitura e 19 agentes especialistas |
 | [Auditoria de MCPs R1099](docs/AUDITORIA_MCPS_QUANTICOS_R1099.md) | hashes, licenças e bloqueios dos MCPs de terceiro |
 | [Loop Engineering R1100](docs/LOOP_ENGINEERING_R1100.md) | skill, agente, auditor L0–L3 e limites |
 | [Reavaliação comparativa R1101](docs/REAVALIACAO_COMPARATIVA_R1101.md) | matriz de cobertura, forças/limites e nota 8,6/10 |
@@ -1290,8 +1300,8 @@ flowchart TB
     Orq2 --> TDDRunner2[TDDRunner]
     Orq2 --> MetaBus2[MetaBus]
     Orq2 --> Blackboard2[Blackboard]
-    Orq2 --> MCP2[34 MCPs configurados]
-    Orq2 --> Agents2[347 agentes configurados]
+    Orq2 --> MCP2[35 MCPs configurados]
+    Orq2 --> Agents2[366 agentes configurados]
     Orq2 --> Mira2[mira-presenter]
     Mira2 --> Deck2[MiraDeckPipeline]
     Deck2 --> Engine2[MiraEngine]

@@ -23,11 +23,16 @@ from typing import Any
 from mcp.server.fastmcp import FastMCP
 from mcp.types import ToolAnnotations
 
-MAX_QUBITS = 200
+from integrations.gjq_backend_registry import BACKENDS, is_hardware_name
+
+DEFAULT_MAX_QUBITS = 200
+MAX_QUBITS_CAP = 997
 MAX_QASM_CHARS = 50_000
 DEFAULT_MAX_SHOTS = 100_000
 DEFAULT_MAX_SUBMISSIONS = 20
-HARDWARE_BACKENDS = {"guoji08", "baihua"}
+HARDWARE_BACKENDS = {
+    backend.id for backend in BACKENDS if backend.requires_allow_hardware
+}
 
 _service = None
 _service_lock = threading.Lock()
@@ -49,6 +54,15 @@ def _import_gjq():
             "gjq-client ausente. Instale gjq-client==0.2.1 no .venv-quantum."
         ) from exc
     return gjq_client, GJQRuntimeService, Sampler, Estimator, generate_preset_pass_manager
+
+
+def _max_qubits() -> int:
+    raw = os.environ.get("GJQ_MAX_QUBITS", "")
+    try:
+        value = int(raw)
+    except ValueError:
+        return DEFAULT_MAX_QUBITS
+    return min(value, MAX_QUBITS_CAP) if value > 0 else DEFAULT_MAX_QUBITS
 
 
 def _max_shots() -> int:
@@ -153,13 +167,15 @@ def _parse_qasm(qasm: str):
                 raise ValueError(f"OpenQASM inválido: {exc}") from exc
     if circuit.num_qubits < 1:
         raise ValueError("o circuito não tem qubits")
-    if circuit.num_qubits > MAX_QUBITS:
-        raise ValueError(f"o circuito excede {MAX_QUBITS} qubits")
+    limit = _max_qubits()
+    if circuit.num_qubits > limit:
+        raise ValueError(f"o circuito excede {limit} qubits")
     return circuit
 
 
 def _is_hardware(backend_name: str) -> bool:
-    return backend_name.strip().lower() in HARDWARE_BACKENDS
+    """Gate conservador: aliases de hardware/emulação exigem allow_hardware."""
+    return is_hardware_name(backend_name)
 
 
 def _reserve_submission() -> int:
@@ -253,8 +269,15 @@ def create_server() -> FastMCP:
             "max_shots": _max_shots(),
             "max_submissions": _max_submissions(),
             "submissions_used": _submission_count_value(),
-            "max_qubits": MAX_QUBITS,
-            "hardware_backends": sorted(HARDWARE_BACKENDS),
+            "max_qubits": _max_qubits(),
+            "max_qubits_default": DEFAULT_MAX_QUBITS,
+            "max_qubits_env": "GJQ_MAX_QUBITS",
+            "max_qubits_cap": MAX_QUBITS_CAP,
+            "hardware_backends": sorted(
+                {backend.api_name or backend.display_name for backend in BACKENDS
+                 if backend.requires_allow_hardware}
+            ),
+            "hardware_backend_ids": sorted(HARDWARE_BACKENDS),
             "confirm_required": True,
             "allow_hardware_required": True,
             "executed": False,

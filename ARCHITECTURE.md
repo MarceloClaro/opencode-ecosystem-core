@@ -20,7 +20,7 @@ python3 -c "import json; c=json.load(open('opencode.json', encoding='utf-8')); p
 ```
 
 <!-- core-state:start -->
-**347 agentes** · **34 MCPs** · **35 comandos** · **22 checks**
+**366 agentes** · **35 MCPs** · **35 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 
@@ -174,28 +174,29 @@ As entradas abaixo são derivadas das chaves `mcp` de `opencode.json`:
 10. `educacao-legislacao`;
 11. `fetch`;
 12. `filesystem`;
-13. `gjq-experiments`;
-14. `gjq-runtime`;
-15. `latexmk-mcp`;
-16. `litert-lm`;
-17. `livro-quantico`;
-18. `mcp-memory`;
-19. `mcp-time`;
-20. `metacognitive-interconnect`;
-21. `oa-resolver`;
-22. `playwright`;
-23. `polymath-labs-mcp`;
-24. `pypi-search`;
-25. `qdrant`;
-26. `quantum-sim-core`;
-27. `rea`;
-28. `remotion-audit`;
-29. `scanners-mcp`;
-30. `scientific-data`;
-31. `sequential-thinking`;
-32. `servers`;
-33. `storage-operator`;
-34. `web-deploy-mcp`;
+13. `gjq-backend-research`;
+14. `gjq-experiments`;
+15. `gjq-runtime`;
+16. `latexmk-mcp`;
+17. `litert-lm`;
+18. `livro-quantico`;
+19. `mcp-memory`;
+20. `mcp-time`;
+21. `metacognitive-interconnect`;
+22. `oa-resolver`;
+23. `playwright`;
+24. `polymath-labs-mcp`;
+25. `pypi-search`;
+26. `qdrant`;
+27. `quantum-sim-core`;
+28. `rea`;
+29. `remotion-audit`;
+30. `scanners-mcp`;
+31. `scientific-data`;
+32. `sequential-thinking`;
+33. `servers`;
+34. `storage-operator`;
+35. `web-deploy-mcp`;
 <!-- core-mcp:end -->
 
 O MCP `ecosystem-network` conecta o `MarceloClaroOrchestrator`, o roteamento

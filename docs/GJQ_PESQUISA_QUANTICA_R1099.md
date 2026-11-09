@@ -1,5 +1,11 @@
 # GJQ para pesquisa quântica — R1099
 
+> **Atualização R1104 (2026-11-09):** o snapshot atual lista 19 recursos
+> (hardware, CPU, GPU, MPS e NPU). O catálogo canônico, o MCP
+> `gjq-backend-research` e os 19 agentes estão em
+> [GJQ_BACKENDS_R1104.md](GJQ_BACKENDS_R1104.md). A tabela de sete backends
+> abaixo é histórica e não deve ser usada como lista exaustiva.
+
 **Data:** 2026-11-08
 **Escopo:** instalação e auditoria da pilha GJQ/CETC-ICQ no Core, com MCPs, agente e skill para experimentos e pesquisa quântica.
 **Fontes oficiais consultadas:**

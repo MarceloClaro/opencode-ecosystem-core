@@ -2,7 +2,7 @@
 %  MÓDULO 10 — Catálogo Completo de Agentes e Subagentes
 %  ARQUIVO GERADO — não editar à mão. Rode: python3 gen_mod10.py
 % ============================================================
-\chapter{Catálogo Completo — 329 Fichas de Agente (329 declaradas na configuração)}
+\chapter{Catálogo Completo — 366 Fichas de Agente (366 declaradas na configuração)}
 
 \roteirodidatico
 {Este catálogo é um inventário de perfis descritos no projeto. Para encontrar um agente, comece pela categoria e leia a ficha como uma declaração de escopo e instruções.}
@@ -13,11 +13,11 @@
 
 Este apêndice é uma obra de consulta: a leitura principal já acompanhou a tarefa até a reprodução. Volte a uma categoria quando precisar escolher um perfil, e retorne ao capítulo de ativação antes de lhe encaminhar trabalho.
 \begin{resultado}
-O \pth{opencode.json} registra \textbf{329} agentes (1 orquestrador, 328 subagentes), e o acervo \pth{agents/catalog/} traz \textbf{329} fichas. Cada agente tem exatamente uma ficha e cada ficha um agente: a cobertura documental é \textbf{1:1} (0 fichas sem registro, 0 agentes sem ficha). As 329 fichas abaixo são geradas deterministicamente por \pth{gen_mod10.py} e agrupam-se por categoria.
+O \pth{opencode.json} registra \textbf{366} agentes (1 orquestrador, 365 subagentes), e o acervo \pth{agents/catalog/} traz \textbf{366} fichas. Cada agente tem exatamente uma ficha e cada ficha um agente: a cobertura documental é \textbf{1:1} (0 fichas sem registro, 0 agentes sem ficha). As 366 fichas abaixo são geradas deterministicamente por \pth{gen_mod10.py} e agrupam-se por categoria.
 \end{resultado}
 
 \begin{aviso}
-\textbf{Convenção de nomes (verificada em 29/09/2026, SPEC-935-R618).} O \pth{frontmatter} de cada card usa o \emph{nome humano} (ex.: \emph{Cloud SQL PostgreSQL Specialist}), enquanto \pth{opencode.json} registra o \emph{slug} em kebab-case (ex.: \cod{cloud-sql-postgres-specialist}). Uma versão anterior deste capítulo comparava os dois textos literalmente e reportava trinta e nove fichas como não registradas — falso positivo de convenção, não lacuna de runtime: reconciliadas pelo slug e por alias declarado, todas as 329 fichas estão registradas. Ficha documentada ainda $\neq$ agente testado: registrar não prova que o agente funcione.
+\textbf{Convenção de nomes (verificada em 29/09/2026, SPEC-935-R618).} O \pth{frontmatter} de cada card usa o \emph{nome humano} (ex.: \emph{Cloud SQL PostgreSQL Specialist}), enquanto \pth{opencode.json} registra o \emph{slug} em kebab-case (ex.: \cod{cloud-sql-postgres-specialist}). Uma versão anterior deste capítulo comparava os dois textos literalmente e reportava trinta e nove fichas como não registradas — falso positivo de convenção, não lacuna de runtime: reconciliadas pelo slug e por alias declarado, todas as 366 fichas estão registradas. Ficha documentada ainda $\neq$ agente testado: registrar não prova que o agente funcione.
 \end{aviso}
 
 \begin{processo}
@@ -29,7 +29,7 @@ FUNCAO. transformar o catalogo enumerativo em um teste de consistencia executave
 \section[Leitura guiada]{Leitura guiada — Módulo 10: o catálogo como teste de consistência}
 
 \begin{descricao}
-\textbf{O fenômeno.} Um capítulo que enumera 329 agentes produz a impressão de catálogo fiel. Mas a enumeração é a forma mais fácil de mascarar um erro de reconciliação: se o procedimento de contagem compara o nome humano do card com o slug do runtime, a lista parece cheia de agentes faltantes que não faltam. Foi exatamente o que aconteceu: o capítulo afirmava não estarem registradas fichas que estavam todas registradas, apenas sob outra convenção de nome.
+\textbf{O fenômeno.} Um capítulo que enumera 366 agentes produz a impressão de catálogo fiel. Mas a enumeração é a forma mais fácil de mascarar um erro de reconciliação: se o procedimento de contagem compara o nome humano do card com o slug do runtime, a lista parece cheia de agentes faltantes que não faltam. Foi exatamente o que aconteceu: o capítulo afirmava não estarem registradas fichas que estavam todas registradas, apenas sob outra convenção de nome.
 \end{descricao}
 
 \begin{definicao}
@@ -51,16 +51,16 @@ FUNCAO. transformar o catalogo enumerativo em um teste de consistencia executave
 \end{metodo}
 
 \begin{resultado}
-\textbf{Exemplo resolvido.} Estado da configuração consultada nesta geração, com $N = 329$ agentes no \pth{opencode.json} e $F = 329$ fichas em \pth{agents/catalog/}.\par
-(1) Contagem ingênua por igualdade textual: $116$ fichas sem correspondência exata, o que sugeriria cobertura de $\frac{213}{329} \approx 65\%$ — número plausível, e por isso mesmo perigoso.\par
-(2) Reconciliação por slug: os $116$ casos se resolvem em $98$ por identidade canônica de perfil ou de arquivo e em $18$ por alias declarado (ex.: \emph{Synthetic University — Orquestrador Acadêmico Transversal} $\to$ \cod{university_synthetic}).\par
-(3) Resíduo: $116 - 98 - 18 = 0$ fichas sem agente; e $0$ agentes sem ficha.\par
-(4) Cobertura documental correta: $\frac{329}{329} = 1 = 100\%$.\par
+\textbf{Exemplo resolvido.} Estado da configuração consultada nesta geração, com $N = 366$ agentes no \pth{opencode.json} e $F = 366$ fichas em \pth{agents/catalog/}.\par
+(1) Contagem ingênua por igualdade textual: $153$ fichas sem correspondência exata, o que sugeriria cobertura de $\frac{213}{366} \approx 58\%$ — número plausível, e por isso mesmo perigoso.\par
+(2) Reconciliação por slug: os $153$ casos se resolvem em $135$ por identidade canônica de perfil ou de arquivo e em $18$ por alias declarado (ex.: \emph{Synthetic University — Orquestrador Acadêmico Transversal} $\to$ \cod{university_synthetic}).\par
+(3) Resíduo: $153 - 135 - 18 = 0$ fichas sem agente; e $0$ agentes sem ficha.\par
+(4) Cobertura documental correta: $\frac{366}{366} = 1 = 100\%$.\par
 (5) Leitura correta do número verdadeiro: uma versão anterior somava os dois acervos como se fossem disjuntos e obtinha um total maior que o número real de agentes — supercontagem devida a aliases contados em duplicidade.
 \end{resultado}
 
 \begin{resultado}
-\textbf{Ordem de grandeza e verificação.} A cobertura de $100\%$ é exata e, ainda assim, diz pouco: as duas maiores categorias ($128$ e $75$ fichas, de 11 no total) somam $\frac{203}{329} \approx 61,7\%$, de modo que a média por categoria ($329/11 \approx 29,9$) descreve mal a distribuição — o mesmo mecanismo de concentração que oculta o desequilíbrio no Módulo 8. \emph{Verifique você mesmo:} rode \cod{python3 gen_mod10.py} e confira quantos elementos são emitidos; alterar o \pth{opencode.json} e reexecutar deve mover esse número na mesma medida.
+\textbf{Ordem de grandeza e verificação.} A cobertura de $100\%$ é exata e, ainda assim, diz pouco: as duas maiores categorias ($128$ e $108$ fichas, de 11 no total) somam $\frac{236}{366} \approx 64,5\%$, de modo que a média por categoria ($366/11 \approx 33,3$) descreve mal a distribuição — o mesmo mecanismo de concentração que oculta o desequilíbrio no Módulo 8. \emph{Verifique você mesmo:} rode \cod{python3 gen_mod10.py} e confira quantos elementos são emitidos; alterar o \pth{opencode.json} e reexecutar deve mover esse número na mesma medida.
 \end{resultado}
 
 
@@ -102,7 +102,7 @@ FUNCAO. transformar o catalogo enumerativo em um teste de consistencia executave
 \elemento{Cobertura de fichas do catálogo}{\metainfo{ID}{DID-CAT} \hfill \metainfo{Fonte}{\pth{gen_mod10.py}, reconciliação e contagens desta geração}}
 
 \begin{descricao}
-\textbf{O problema concreto.} A configuração declara $N = 329$ agentes no \pth{opencode.json} e o catálogo tem $F = 329$ fichas em \pth{agents/catalog/}. Uma contagem ingênua por igualdade textual encontra $116$ fichas sem correspondência exata. Isso significa que o catálogo está incompleto? Como reconciliar antes de somar?
+\textbf{O problema concreto.} A configuração declara $N = 366$ agentes no \pth{opencode.json} e o catálogo tem $F = 366$ fichas em \pth{agents/catalog/}. Uma contagem ingênua por igualdade textual encontra $153$ fichas sem correspondência exata. Isso significa que o catálogo está incompleto? Como reconciliar antes de somar?
 \end{descricao}
 
 \begin{definicao}
@@ -112,9 +112,9 @@ FUNCAO. transformar o catalogo enumerativo em um teste de consistencia executave
 \begin{tabularx}{\linewidth}{YYY}
 Símbolo & Significado & Valor no exemplo \\
 \midrule
-$N$ & Agentes na configuração & $N = 329$ \\
-$F$ & Fichas no catálogo & $F = 329$ \\
-$S$ & Fichas sem correspondência exata (contagem ingênua) & $S = 116$ \\
+$N$ & Agentes na configuração & $N = 366$ \\
+$F$ & Fichas no catálogo & $F = 366$ \\
+$S$ & Fichas sem correspondência exata (contagem ingênua) & $S = 153$ \\
 \end{tabularx}
 \end{center}
 \end{definicao}
@@ -123,25 +123,25 @@ $S$ & Fichas sem correspondência exata (contagem ingênua) & $S = 116$ \\
 \textbf{Dedução da reconciliação e da cobertura correta.}
 
 \paragraph{Passo 1 — Contagem ingênua (perigosa).}
-Comparar nomes texto a texto encontra $116$ fichas sem correspondência exata. Isso sugeriria cobertura de:
+Comparar nomes texto a texto encontra $153$ fichas sem correspondência exata. Isso sugeriria cobertura de:
 
 \[
-\frac{329 - 116}{329} = \frac{213}{329} \approx 0{,}6474164133738601 \approx 65\%
+\frac{366 - 153}{366} = \frac{213}{366} \approx 0{,}5819672131147541 \approx 58\%
 \]
 
 Esse número é plausível, e por isso mesmo perigoso: pode levar à conclusão errada de que o catálogo está faltando agentes.
 
 \paragraph{Passo 2 — Reconciliação por slug e alias.}
-Dos $116$ casos sem correspondência exata:
+Dos $153$ casos sem correspondência exata:
 \begin{itemize}[leftmargin=1.3em,itemsep=1pt]
-  \item $98$ se resolvem por identidade canônica de perfil ou de arquivo;
+  \item $135$ se resolvem por identidade canônica de perfil ou de arquivo;
   \item $18$ se resolvem por alias declarado (ex.: \emph{Synthetic University — Orquestrador Acadêmico Transversal} $\to$ \cod{university_synthetic}).
 \end{itemize}
 
 \paragraph{Passo 3 — Resíduo da reconciliação.}
 
 \[
-\text{Resíduo} = 116 - 98 - 18 = 0
+\text{Resíduo} = 153 - 135 - 18 = 0
 \]
 
 Não há fichas sem agente, e não há agentes sem ficha.
@@ -149,20 +149,20 @@ Não há fichas sem agente, e não há agentes sem ficha.
 \paragraph{Passo 4 — Cobertura documental correta.}
 
 \[
-\boxed{\text{Cobertura} = \frac{329}{329} = 1 = 100\%}
+\boxed{\text{Cobertura} = \frac{366}{366} = 1 = 100\%}
 \]
 
 \paragraph{Passo 5 — Concentração por categoria.}
-As duas maiores categorias ($128$ e $75$ fichas, de 11 no total) somam:
+As duas maiores categorias ($128$ e $108$ fichas, de 11 no total) somam:
 
 \[
-\frac{128 + 75}{329} = \frac{203}{329} \approx 0{,}6170212765957447 \approx 61,7\%
+\frac{128 + 108}{366} = \frac{236}{366} \approx 0{,}644808743169399 \approx 64,5\%
 \]
 
 A média por categoria é:
 
 \[
-\frac{329}{11} \approx 29,9
+\frac{366}{11} \approx 33,3
 \]
 
 Essa média descreve mal a distribuição porque oculta a concentração em poucas categorias.
@@ -176,7 +176,7 @@ Essa média descreve mal a distribuição porque oculta a concentração em pouc
 \begin{itemize}[leftmargin=1.3em,itemsep=1pt]
   \item $100\%$ de cobertura documental não significa que todos os agentes estejam funcionando.
   \item Somar os dois acervos (configuração + catálogo) como se fossem disjuntos gera supercontagem devida a aliases contados em duplicidade.
-  \item A média por categoria ($29,9$) mascara a desigualdade real da distribuição.
+  \item A média por categoria ($33,3$) mascara a desigualdade real da distribuição.
 \end{itemize}
 \end{descricao}
 
@@ -210,9 +210,9 @@ Contagem por categoria (ordem decrescente de fichas):\par
 Categoria & Fichas & Exemplo de agentes \\
 \midrule
 Ferramentas e apoio transversal & 128 & Gestor de decisões arquiteturais, Moderador de fórum e debates multiagente, Pipeline de extração e análise de documentos \\
-Auditoria e qualidade & 75 & Integração de Anthropic Skills, Fluxos de arquitetura, Inventário de arquitetura \\
+Auditoria e qualidade & 108 & Integração de Anthropic Skills, Fluxos de arquitetura, Inventário de arquitetura \\
 Produção acadêmica & 58 & 00 editor chefe phd, 01 agente diagnostico escopo, 02 agente busca curadoria \\
-Engenharia & 29 & Abnt latex modular, Preparação e verificação do livro, Backend de contexto de código \\
+Engenharia & 33 & Abnt latex modular, Preparação e verificação do livro, Backend de contexto de código \\
 Pesquisa e evidências & 14 & Auditoria reprodutibilidade, Bibtex crossref auditor, Inferencia causal did iv rdd \\
 Escrita e tradução & 13 & Author voice guardian, Back translation verifier, Cultural episteme agente \\
 Apoio jurídico & 4 & Especialista em síntese de documentos jurídicos, Auxjuris email drafter, Auxjuris jurídico assistant \\
@@ -1371,7 +1371,7 @@ Trilha de pesquisa: pode apoiar busca ou síntese de evidências; registre fonte
 \end{arquitetura}
 
 \clearpage
-\section{Categoria: Auditoria e qualidade (75 perfis)}
+\section{Categoria: Auditoria e qualidade (108 perfis)}
 
 \begin{descricao}
 Reúne perfis de inspeção e revisão. Seus achados podem informar verificações de qualidade e rigor, mas a existência de um auditor não equivale a aprovação independente (Módulos 4 e 6).
@@ -1437,6 +1437,21 @@ Trilha de auditoria: pode localizar problemas segundo os critérios descritos; a
 \textbf{Modo de execução declarado:} subagente
 \end{arquitetura}
 
+\elemento{Arquiteto de Loop Engineering (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Arquiteto de Loop Engineering} \hfill \metainfo{Ficha}{loop-engineering-architect.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Projeta e audita loops de agentes com trigger, ação, parada verificável,
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
 \elemento{Auditor (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{auditor} \hfill \metainfo{Ficha}{auditor.md}}
 
 \begin{descricao}
@@ -1450,6 +1465,21 @@ Trilha de auditoria: pode localizar problemas segundo os critérios descritos; a
 
 \begin{arquitetura}
 \textbf{Modo de execução declarado:} subagente · \textbf{Permissões:} edit: deny; bash: deny
+\end{arquitetura}
+
+\elemento{Auditor de experimentos quânticos (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Auditor de experimentos quânticos} \hfill \metainfo{Ficha}{quantum-experiment-auditor.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Audita counts, task IDs, incerteza, sobreposição e limites de E01–E18;
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
 \end{arquitetura}
 
 \elemento{Integração de pesquisa biológica (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Bio Research — integração Core} \hfill \metainfo{Ficha}{plugin-bio-research.md}}
@@ -1722,6 +1752,21 @@ Trilha de auditoria: pode localizar problemas segundo os critérios descritos; a
 \textbf{Modo de execução declarado:} subagente
 \end{arquitetura}
 
+\elemento{Coach de ferramentas quânticas (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Coach de ferramentas quânticas} \hfill \metainfo{Ficha}{quantum-tools-coach.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Guia instalação e uso de Python, Qiskit, PennyLane, Cirq, gjq-client
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
 \elemento{Análise das fontes do Codesight (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Codesight Source} \hfill \metainfo{Ficha}{codesight-source.md}}
 
 \begin{descricao}
@@ -1767,6 +1812,21 @@ Trilha de auditoria: pode localizar problemas segundo os critérios descritos; a
 \textbf{Modo de execução declarado:} subagente
 \end{arquitetura}
 
+\elemento{Continuidade de vozes e personagens (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Continuidade de vozes e personagens} \hfill \metainfo{Ficha}{dubbing-voice-continuity.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Audita mapa global de personagens, referências originais, hashes e marcações
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
 \elemento{Integração de gestão de plugins Cowork (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{cowork-plugin-management — integração Core} \hfill \metainfo{Ficha}{plugin-cowork-plugin-management.md}}
 
 \begin{descricao}
@@ -1797,11 +1857,56 @@ Trilha de auditoria: pode localizar problemas segundo os critérios descritos; a
 \textbf{Modo de execução declarado:} subagente
 \end{arquitetura}
 
+\elemento{David Bohm — lente de totalidade (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{David Bohm — lente de totalidade} \hfill \metainfo{Ficha}{david-bohm-wholeness.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Persona de revisão inspirada na obra pública de Bohm para examinar totalidade,
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
 \elemento{Integração de design (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Design — integração Core} \hfill \metainfo{Ficha}{plugin-design.md}}
 
 \begin{descricao}
 \textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
 Coordenar capacidades de Design sob o MarceloClaro com proveniência e
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Desktop Operator — apps nativos com política (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Desktop Operator — apps nativos com política} \hfill \metainfo{Ficha}{desktop-operator.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Opera apps nativos por árvore de acessibilidade com allowlist, aprovação
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Direção de diálogo e pragmática (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Direção de diálogo e pragmática} \hfill \metainfo{Ficha}{dubbing-dialogue-director.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Revisa fonte, sentido, gênero gramatical, conjugação, ironia, intenção
 \end{descricao}
 
 \begin{funcao}
@@ -1917,11 +2022,311 @@ Trilha de auditoria: pode localizar problemas segundo os critérios descritos; a
 \textbf{Modo de execução declarado:} subagente
 \end{arquitetura}
 
+\elemento{Especialista GJQ — Baihua (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Especialista GJQ — Baihua} \hfill \metainfo{Ficha}{gjq-backend-baihua.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Especialista no backend GJQ Baihua (hardware, superconducting, 156 qubits). Resolve o nome vivo, respeita o gate de hardware e não declara fidelidade sem evidência.
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Especialista GJQ — Guoji No.1 (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Especialista GJQ — Guoji No.1} \hfill \metainfo{Ficha}{gjq-backend-guoji-01.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Especialista no backend GJQ Guoji No.1 (hardware, superconducting, 20 qubits). Resolve o nome vivo, respeita o gate de hardware e não declara fidelidade sem evidência.
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Especialista GJQ — Guoji No.4 (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Especialista GJQ — Guoji No.4} \hfill \metainfo{Ficha}{gjq-backend-guoji-04.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Especialista no backend GJQ Guoji No.4 (hardware, superconducting, 100 qubits). Resolve o nome vivo, respeita o gate de hardware e não declara fidelidade sem evidência.
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Especialista GJQ — Guoji No.7 (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Especialista GJQ — Guoji No.7} \hfill \metainfo{Ficha}{gjq-backend-guoji-07.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Especialista no backend GJQ Guoji No.7 (hardware, superconducting, 100 qubits). Resolve o nome vivo, respeita o gate de hardware e não declara fidelidade sem evidência.
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Especialista GJQ — Guoji No.8 (simulate) (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Especialista GJQ — Guoji No.8 (simulate)} \hfill \metainfo{Ficha}{gjq-backend-guoji-08-sim.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Especialista no backend GJQ Guoji No.8 (simulate) (hardware, emulação de hardware, 20 qubits). Resolve o nome vivo, respeita o gate de hardware e não declara fidelidade sem evidência.
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Especialista GJQ — Jiuci Partial Amplitude Simulator (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Especialista GJQ — Jiuci-Partial Amplitude Simulator} \hfill \metainfo{Ficha}{gjq-backend-jiuci-pas-cpu.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Especialista no backend GJQ Jiuci-Partial Amplitude Simulator (cpu, partial\_amplitude, 20 qubits). Resolve o nome vivo, respeita o limite de simulador e não declara fidelidade sem evidência.
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Especialista GJQ — Jiuxiao Full Amplitude Simulator (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Especialista GJQ — Jiuxiao-Full Amplitude Simulator} \hfill \metainfo{Ficha}{gjq-backend-jiuxiao-fas-cpu.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Especialista no backend GJQ Jiuxiao-Full Amplitude Simulator (cpu, full\_amplitude, 20 qubits). Resolve o nome vivo, respeita o limite de simulador e não declara fidelidade sem evidência.
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Especialista GJQ — Jiuyuan Single Amplitude Simulator (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Especialista GJQ — Jiuyuan-Single Amplitude Simulator} \hfill \metainfo{Ficha}{gjq-backend-jiuyuan-sas-cpu.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Especialista no backend GJQ Jiuyuan-Single Amplitude Simulator (cpu, single\_amplitude, 200 qubits). Resolve o nome vivo, respeita o limite de simulador e não declara fidelidade sem evidência.
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Especialista GJQ — Jiuyun Noise Simulator (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Especialista GJQ — Jiuyun-Noise Simulator} \hfill \metainfo{Ficha}{gjq-backend-jiuyun-noise-cpu.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Especialista no backend GJQ Jiuyun-Noise Simulator (cpu, noise, 20 qubits). Resolve o nome vivo, respeita o limite de simulador e não declara fidelidade sem evidência.
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Especialista GJQ — Liangshi Full Amplitude Simulator (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Especialista GJQ — Liangshi-Full Amplitude Simulator} \hfill \metainfo{Ficha}{gjq-backend-liangshi-fas-npu.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Especialista no backend GJQ Liangshi-Full Amplitude Simulator (npu, full\_amplitude, 10 qubits). Resolve o nome vivo, respeita o limite de simulador e não declara fidelidade sem evidência.
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Especialista GJQ — MPS Simulator (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Especialista GJQ — MPS Simulator} \hfill \metainfo{Ficha}{gjq-backend-mps.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Especialista no backend GJQ MPS Simulator (mps, tensor\_network, 997 qubits). Resolve o nome vivo, respeita o limite de simulador e não declara fidelidade sem evidência.
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Especialista GJQ — Qijian Noise Simulator (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Especialista GJQ — Qijian-Noise Simulator} \hfill \metainfo{Ficha}{gjq-backend-qijian-noise-gpu.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Especialista no backend GJQ Qijian-Noise Simulator (gpu, noise, 29 qubits). Resolve o nome vivo, respeita o limite de simulador e não declara fidelidade sem evidência.
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Especialista GJQ — Qijing Partial Amplitude Simulator (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Especialista GJQ — Qijing-Partial Amplitude Simulator} \hfill \metainfo{Ficha}{gjq-backend-qijing-pas-gpu.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Especialista no backend GJQ Qijing-Partial Amplitude Simulator (gpu, partial\_amplitude, 29 qubits). Resolve o nome vivo, respeita o limite de simulador e não declara fidelidade sem evidência.
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Especialista GJQ — Qilv Full Amplitude Simulator (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Especialista GJQ — Qilv-Full Amplitude Simulator} \hfill \metainfo{Ficha}{gjq-backend-qilv-fas-gpu.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Especialista no backend GJQ Qilv-Full Amplitude Simulator (gpu, full\_amplitude, 29 qubits). Resolve o nome vivo, respeita o limite de simulador e não declara fidelidade sem evidência.
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Especialista GJQ — Qiyao Single Amplitude Simulator (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Especialista GJQ — Qiyao-Single Amplitude Simulator} \hfill \metainfo{Ficha}{gjq-backend-qiyao-sas-gpu.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Especialista no backend GJQ Qiyao-Single Amplitude Simulator (gpu, single\_amplitude, 29 qubits). Resolve o nome vivo, respeita o limite de simulador e não declara fidelidade sem evidência.
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Especialista GJQ — Weichi Single Amplitude Simulator (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Especialista GJQ — Weichi-Single Amplitude Simulator} \hfill \metainfo{Ficha}{gjq-backend-weichi-sas-npu.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Especialista no backend GJQ Weichi-Single Amplitude Simulator (npu, single\_amplitude, 10 qubits). Resolve o nome vivo, respeita o limite de simulador e não declara fidelidade sem evidência.
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Especialista GJQ — Weina Noise Simulator (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Especialista GJQ — Weina-Noise Simulator} \hfill \metainfo{Ficha}{gjq-backend-weina-noise-npu.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Especialista no backend GJQ Weina-Noise Simulator (npu, noise, 10 qubits). Resolve o nome vivo, respeita o limite de simulador e não declara fidelidade sem evidência.
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Especialista GJQ — Weixin Partial Amplitude Simulator (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Especialista GJQ — Weixin-Partial Amplitude Simulator} \hfill \metainfo{Ficha}{gjq-backend-weixin-pas-npu.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Especialista no backend GJQ Weixin-Partial Amplitude Simulator (npu, partial\_amplitude, 10 qubits). Resolve o nome vivo, respeita o limite de simulador e não declara fidelidade sem evidência.
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Especialista GJQ — Yudu (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Especialista GJQ — Yudu} \hfill \metainfo{Ficha}{gjq-backend-yudu.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Especialista no backend GJQ Yudu (hardware, superconducting, 72 qubits). Resolve o nome vivo, respeita o gate de hardware e não declara fidelidade sem evidência.
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
 \elemento{Avaliação de repositórios (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Evaluate Repositories} \hfill \metainfo{Ficha}{evaluate-repositories.md}}
 
 \begin{descricao}
 \textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
 Avaliar licença, adequação e sobreposição de repositórios candidatos.
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Executor de experimentos GJQ (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Executor de experimentos GJQ} \hfill \metainfo{Ficha}{gjq-experiment-runner.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Executa E01–E18 no backend GJQ/Tiangong com simulação prévia, API key
 \end{descricao}
 
 \begin{funcao}
@@ -2172,6 +2577,21 @@ Trilha de auditoria: pode localizar problemas segundo os critérios descritos; a
 \textbf{Modo de execução declarado:} subagente
 \end{arquitetura}
 
+\elemento{Pesquisador quântico GJQ (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Pesquisador quântico GJQ} \hfill \metainfo{Ficha}{gjq-quantum-research.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Projeta e conduz pesquisa quântica na plataforma GJQ/CETC-ICQ: descoberta
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
 \elemento{Integração de criação de plugins (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Plugin Creator — integração Core} \hfill \metainfo{Ficha}{plugin-plugin-creator.md}}
 
 \begin{descricao}
@@ -2192,6 +2612,21 @@ Trilha de auditoria: pode localizar problemas segundo os critérios descritos; a
 \begin{descricao}
 \textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
 Coordenar capacidades de Productivity sob o MarceloClaro com proveniência
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Qa de áudio de dublagem (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{QA de áudio de dublagem} \hfill \metainfo{Ficha}{dubbing-audio-qa.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Investiga palavras excedentes, duração real, clipping, fonte textual
 \end{descricao}
 
 \begin{funcao}
@@ -2367,6 +2802,36 @@ Trilha de auditoria: pode localizar problemas segundo os critérios descritos; a
 \textbf{Modo de execução declarado:} subagente
 \end{arquitetura}
 
+\elemento{Richard Feynman — lente de clareza (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Richard Feynman — lente de clareza} \hfill \metainfo{Ficha}{richard-feynman-explainer.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Persona de revisão inspirada na obra pública de Feynman para clareza,
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Scientific dados analista — Net CDF, HDF5, Zarr e Geo TIFF (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Scientific Data Analyst — NetCDF, HDF5, Zarr e GeoTIFF} \hfill \metainfo{Ficha}{scientific-data-analyst.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Inspeciona metadados e prévias limitadas de dados científicos locais
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
 \elemento{Revisão científica (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Scientific Review} \hfill \metainfo{Ficha}{scientific-review.md}}
 
 \begin{descricao}
@@ -2442,11 +2907,41 @@ Trilha de auditoria: pode localizar problemas segundo os critérios descritos; a
 \textbf{Modo de execução declarado:} subagente
 \end{arquitetura}
 
+\elemento{Storage Operator — espaço, Drive e purge verificado (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Storage Operator — espaço, Drive e purge verificado} \hfill \metainfo{Ficha}{storage-operator.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Inventaria raízes allowlisted, envia ao Drive com manifesto e checksum,
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
 \elemento{Integração de Superpowers (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Superpowers — integração Core} \hfill \metainfo{Ficha}{plugin-superpowers.md}}
 
 \begin{descricao}
 \textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
 Coordenar capacidades de Superpowers sob o MarceloClaro com proveniência
+\end{descricao}
+
+\begin{funcao}
+Trilha de auditoria: pode localizar problemas segundo os critérios descritos; achados são subsídios à revisão, não certificação automática. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Verificador Lean 4 do livro quântico (v1.0.0)}{\metainfo{Categoria}{Auditoria e qualidade} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Verificador Lean 4 do livro quântico} \hfill \metainfo{Ficha}{quantum-lean-verifier.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Verifica identidades matemáticas em Lean 4 + Mathlib e classifica claims;
 \end{descricao}
 
 \begin{funcao}
@@ -2644,7 +3139,7 @@ Trilha de raciocínio: pode apoiar análise ou modelagem; explicite premissas e 
 \end{arquitetura}
 
 \clearpage
-\section{Categoria: Engenharia (29 perfis)}
+\section{Categoria: Engenharia (33 perfis)}
 
 \begin{descricao}
 Agrupa perfis que apoiam análise, implementação e manutenção de software. No Core, o trabalho deve ser ligado a especificações e verificações quando aplicável (Módulos 1 e 4).
@@ -2740,6 +3235,21 @@ Trilha de engenharia: pode apoiar a mudança de software descrita; conecte o tra
 \textbf{Modo de execução declarado:} subagente · \textbf{Permissões:} edit: deny; bash: deny
 \end{arquitetura}
 
+\elemento{Editor antirrepetição (v1.0.0)}{\metainfo{Categoria}{Engenharia} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Editor antirrepetição} \hfill \metainfo{Ficha}{repetition-editor.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Audita e reduz repetição em obras longas sem perder lentes, checkpoints,
+\end{descricao}
+
+\begin{funcao}
+Trilha de engenharia: pode apoiar a mudança de software descrita; conecte o trabalho aos requisitos, à implementação e às verificações pertinentes. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
 \elemento{Editor científico do livro (v1.0.0)}{\metainfo{Categoria}{Engenharia} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Editor científico do livro} \hfill \metainfo{Ficha}{book-science-editor.md}}
 
 \begin{descricao}
@@ -2760,6 +3270,21 @@ Trilha de engenharia: pode apoiar a mudança de software descrita; conecte o tra
 \begin{descricao}
 \textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
 Revisar a narrativa de orquestração, memória, ativação e atlas com fontes
+\end{descricao}
+
+\begin{funcao}
+Trilha de engenharia: pode apoiar a mudança de software descrita; conecte o trabalho aos requisitos, à implementação e às verificações pertinentes. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Engenharia de lote de dublagem (v1.0.0)}{\metainfo{Categoria}{Engenharia} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Engenharia de lote de dublagem} \hfill \metainfo{Ficha}{dubbing-batch-engineer.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Implementa pipeline local CPU retomável, cache de conteúdo, hooks de
 \end{descricao}
 
 \begin{funcao}
@@ -2995,6 +3520,21 @@ Trilha de engenharia: pode apoiar a mudança de software descrita; conecte o tra
 \textbf{Modo de execução declarado:} subagente · \textbf{Permissões:} edit: deny; bash: deny
 \end{arquitetura}
 
+\elemento{Orquestrador da fábrica do livro quântico (v1.0.0)}{\metainfo{Categoria}{Engenharia} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Orquestrador da fábrica do livro quântico} \hfill \metainfo{Ficha}{livro-quantico-orchestrator.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Orquestra produção, build, testes, auditoria de repetição, Lean 4 e publicação
+\end{descricao}
+
+\begin{funcao}
+Trilha de engenharia: pode apoiar a mudança de software descrita; conecte o trabalho aos requisitos, à implementação e às verificações pertinentes. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
 \elemento{Adaptação do REA (v1.0.0)}{\metainfo{Categoria}{Engenharia} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Rea Adapter} \hfill \metainfo{Ficha}{rea-adapter.md}}
 
 \begin{descricao}
@@ -3030,6 +3570,21 @@ Trilha de engenharia: pode apoiar a mudança de software descrita; conecte o tra
 \begin{descricao}
 \textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
 Corrigir regressões remanescentes por contraprovas executadas.
+\end{descricao}
+
+\begin{funcao}
+Trilha de engenharia: pode apoiar a mudança de software descrita; conecte o trabalho aos requisitos, à implementação e às verificações pertinentes. No caso condutor, declare a entrada que será entregue ao perfil e o critério para incorporar sua saída à nota científica. O primário integra o resultado; esta ficha não comprova ativação, inferência nem qualidade da entrega.
+\end{funcao}
+
+\begin{arquitetura}
+\textbf{Modo de execução declarado:} subagente
+\end{arquitetura}
+
+\elemento{Romance Psicológico Molambudos (v1.0.0)}{\metainfo{Categoria}{Engenharia} \hfill \metainfo{Tipo}{especialista} \hfill \metainfo{Identificador}{Romance Psicológico Molambudos} \hfill \metainfo{Ficha}{romance-psicologico-molambudos.md}}
+
+\begin{descricao}
+\textbf{Escopo declarado na fonte, sem avaliação de desempenho.}
+Assistente de escrita e revisão de romance de terror psicológico com
 \end{descricao}
 
 \begin{funcao}

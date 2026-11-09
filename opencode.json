@@ -5851,6 +5851,633 @@
       },
       "model": "opencode-go/deepseek-v4-pro"
     },
+    "gjq-backend-baihua": {
+      "description": "Especialista no backend GJQ Baihua (hardware, superconducting, 156 qubits). Resolve o nome vivo, respeita o gate de hardware e não declara fidelidade sem evidência.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/gjq-backend-baihua.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1104_gjq_backend_agents.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code",
+          "opencode-zen/deepseek-v4-pro"
+        ],
+        "model_economy": {
+          "complexity": "critica",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4-pro",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4-pro"
+    },
+    "gjq-backend-guoji-01": {
+      "description": "Especialista no backend GJQ Guoji No.1 (hardware, superconducting, 20 qubits). Resolve o nome vivo, respeita o gate de hardware e não declara fidelidade sem evidência.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/gjq-backend-guoji-01.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1104_gjq_backend_agents.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code",
+          "opencode-zen/deepseek-v4-pro"
+        ],
+        "model_economy": {
+          "complexity": "critica",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4-pro",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4-pro"
+    },
+    "gjq-backend-guoji-04": {
+      "description": "Especialista no backend GJQ Guoji No.4 (hardware, superconducting, 100 qubits). Resolve o nome vivo, respeita o gate de hardware e não declara fidelidade sem evidência.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/gjq-backend-guoji-04.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1104_gjq_backend_agents.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code",
+          "opencode-zen/deepseek-v4-pro"
+        ],
+        "model_economy": {
+          "complexity": "critica",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4-pro",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4-pro"
+    },
+    "gjq-backend-guoji-07": {
+      "description": "Especialista no backend GJQ Guoji No.7 (hardware, superconducting, 100 qubits). Resolve o nome vivo, respeita o gate de hardware e não declara fidelidade sem evidência.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/gjq-backend-guoji-07.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1104_gjq_backend_agents.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code",
+          "opencode-zen/deepseek-v4-pro"
+        ],
+        "model_economy": {
+          "complexity": "critica",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4-pro",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4-pro"
+    },
+    "gjq-backend-guoji-08-sim": {
+      "description": "Especialista no backend GJQ Guoji No.8 (simulate) (hardware, emulação de hardware, 20 qubits). Resolve o nome vivo, respeita o gate de hardware e não declara fidelidade sem evidência.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/gjq-backend-guoji-08-sim.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1104_gjq_backend_agents.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code",
+          "opencode-zen/deepseek-v4-pro"
+        ],
+        "model_economy": {
+          "complexity": "critica",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4-pro",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4-pro"
+    },
+    "gjq-backend-jiuci-pas-cpu": {
+      "description": "Especialista no backend GJQ Jiuci-Partial Amplitude Simulator (cpu, partial_amplitude, 20 qubits). Resolve o nome vivo, respeita o limite de simulador e não declara fidelidade sem evidência.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/gjq-backend-jiuci-pas-cpu.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1104_gjq_backend_agents.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code",
+          "opencode-zen/deepseek-v4-pro"
+        ],
+        "model_economy": {
+          "complexity": "critica",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4-pro",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4-pro"
+    },
+    "gjq-backend-jiuxiao-fas-cpu": {
+      "description": "Especialista no backend GJQ Jiuxiao-Full Amplitude Simulator (cpu, full_amplitude, 20 qubits). Resolve o nome vivo, respeita o limite de simulador e não declara fidelidade sem evidência.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/gjq-backend-jiuxiao-fas-cpu.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1104_gjq_backend_agents.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code",
+          "opencode-zen/deepseek-v4-pro"
+        ],
+        "model_economy": {
+          "complexity": "critica",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4-pro",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4-pro"
+    },
+    "gjq-backend-jiuyuan-sas-cpu": {
+      "description": "Especialista no backend GJQ Jiuyuan-Single Amplitude Simulator (cpu, single_amplitude, 200 qubits). Resolve o nome vivo, respeita o limite de simulador e não declara fidelidade sem evidência.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/gjq-backend-jiuyuan-sas-cpu.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1104_gjq_backend_agents.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code",
+          "opencode-zen/deepseek-v4-pro"
+        ],
+        "model_economy": {
+          "complexity": "critica",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4-pro",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4-pro"
+    },
+    "gjq-backend-jiuyun-noise-cpu": {
+      "description": "Especialista no backend GJQ Jiuyun-Noise Simulator (cpu, noise, 20 qubits). Resolve o nome vivo, respeita o limite de simulador e não declara fidelidade sem evidência.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/gjq-backend-jiuyun-noise-cpu.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1104_gjq_backend_agents.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code",
+          "opencode-zen/deepseek-v4-pro"
+        ],
+        "model_economy": {
+          "complexity": "critica",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4-pro",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4-pro"
+    },
+    "gjq-backend-liangshi-fas-npu": {
+      "description": "Especialista no backend GJQ Liangshi-Full Amplitude Simulator (npu, full_amplitude, 10 qubits). Resolve o nome vivo, respeita o limite de simulador e não declara fidelidade sem evidência.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/gjq-backend-liangshi-fas-npu.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1104_gjq_backend_agents.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code",
+          "opencode-zen/deepseek-v4-pro"
+        ],
+        "model_economy": {
+          "complexity": "critica",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4-pro",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4-pro"
+    },
+    "gjq-backend-mps": {
+      "description": "Especialista no backend GJQ MPS Simulator (mps, tensor_network, 997 qubits). Resolve o nome vivo, respeita o limite de simulador e não declara fidelidade sem evidência.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/gjq-backend-mps.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1104_gjq_backend_agents.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code",
+          "opencode-zen/deepseek-v4-pro"
+        ],
+        "model_economy": {
+          "complexity": "critica",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4-pro",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4-pro"
+    },
+    "gjq-backend-qijian-noise-gpu": {
+      "description": "Especialista no backend GJQ Qijian-Noise Simulator (gpu, noise, 29 qubits). Resolve o nome vivo, respeita o limite de simulador e não declara fidelidade sem evidência.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/gjq-backend-qijian-noise-gpu.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1104_gjq_backend_agents.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code",
+          "opencode-zen/deepseek-v4-pro"
+        ],
+        "model_economy": {
+          "complexity": "critica",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4-pro",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4-pro"
+    },
+    "gjq-backend-qijing-pas-gpu": {
+      "description": "Especialista no backend GJQ Qijing-Partial Amplitude Simulator (gpu, partial_amplitude, 29 qubits). Resolve o nome vivo, respeita o limite de simulador e não declara fidelidade sem evidência.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/gjq-backend-qijing-pas-gpu.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1104_gjq_backend_agents.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code",
+          "opencode-zen/deepseek-v4-pro"
+        ],
+        "model_economy": {
+          "complexity": "critica",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4-pro",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4-pro"
+    },
+    "gjq-backend-qilv-fas-gpu": {
+      "description": "Especialista no backend GJQ Qilv-Full Amplitude Simulator (gpu, full_amplitude, 29 qubits). Resolve o nome vivo, respeita o limite de simulador e não declara fidelidade sem evidência.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/gjq-backend-qilv-fas-gpu.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1104_gjq_backend_agents.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code",
+          "opencode-zen/deepseek-v4-pro"
+        ],
+        "model_economy": {
+          "complexity": "critica",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4-pro",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4-pro"
+    },
+    "gjq-backend-qiyao-sas-gpu": {
+      "description": "Especialista no backend GJQ Qiyao-Single Amplitude Simulator (gpu, single_amplitude, 29 qubits). Resolve o nome vivo, respeita o limite de simulador e não declara fidelidade sem evidência.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/gjq-backend-qiyao-sas-gpu.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1104_gjq_backend_agents.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code",
+          "opencode-zen/deepseek-v4-pro"
+        ],
+        "model_economy": {
+          "complexity": "critica",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4-pro",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4-pro"
+    },
+    "gjq-backend-weichi-sas-npu": {
+      "description": "Especialista no backend GJQ Weichi-Single Amplitude Simulator (npu, single_amplitude, 10 qubits). Resolve o nome vivo, respeita o limite de simulador e não declara fidelidade sem evidência.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/gjq-backend-weichi-sas-npu.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1104_gjq_backend_agents.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code",
+          "opencode-zen/deepseek-v4-pro"
+        ],
+        "model_economy": {
+          "complexity": "critica",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4-pro",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4-pro"
+    },
+    "gjq-backend-weina-noise-npu": {
+      "description": "Especialista no backend GJQ Weina-Noise Simulator (npu, noise, 10 qubits). Resolve o nome vivo, respeita o limite de simulador e não declara fidelidade sem evidência.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/gjq-backend-weina-noise-npu.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1104_gjq_backend_agents.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code",
+          "opencode-zen/deepseek-v4-pro"
+        ],
+        "model_economy": {
+          "complexity": "critica",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4-pro",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4-pro"
+    },
+    "gjq-backend-weixin-pas-npu": {
+      "description": "Especialista no backend GJQ Weixin-Partial Amplitude Simulator (npu, partial_amplitude, 10 qubits). Resolve o nome vivo, respeita o limite de simulador e não declara fidelidade sem evidência.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/gjq-backend-weixin-pas-npu.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1104_gjq_backend_agents.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code",
+          "opencode-zen/deepseek-v4-pro"
+        ],
+        "model_economy": {
+          "complexity": "critica",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4-pro",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4-pro"
+    },
+    "gjq-backend-yudu": {
+      "description": "Especialista no backend GJQ Yudu (hardware, superconducting, 72 qubits). Resolve o nome vivo, respeita o gate de hardware e não declara fidelidade sem evidência.",
+      "mode": "subagent",
+      "prompt": "{file:./agents/catalog/gjq-backend-yudu.md}",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "bash": {
+          "*": "deny",
+          "python3 -m marceloclaro.cli doctor": "allow",
+          "python3 -m pytest tests/test_r1104_gjq_backend_agents.py -q": "allow"
+        },
+        "edit": "deny",
+        "webfetch": "deny",
+        "task": "deny"
+      },
+      "options": {
+        "model_fallbacks": [
+          "opencode-go/deepseek-v4-pro",
+          "opencode-go/kimi-k2.7-code",
+          "opencode-zen/deepseek-v4-pro"
+        ],
+        "model_economy": {
+          "complexity": "critica",
+          "ceiling": "capaz",
+          "head": "opencode-go/deepseek-v4-pro",
+          "tariff_source": "https://models.dev/api.json",
+          "tariff_source_date": "2026-10-30"
+        }
+      },
+      "model": "opencode-go/deepseek-v4-pro"
+    },
     "gjq-experiment-runner": {
       "description": "Executa E01–E18 no backend GJQ/Tiangong com simulação prévia, API key só no ambiente, task ID, counts e auditoria; não declara fidelidade ou vantagem sem evidência.",
       "mode": "subagent",
@@ -11507,6 +12134,16 @@
       ],
       "enabled": true,
       "timeout": 180000
+    },
+    "gjq-backend-research": {
+      "type": "local",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "integrations.gjq_backend_research_mcp"
+      ],
+      "enabled": true,
+      "timeout": 30000
     },
     "quantum-sim-core": {
       "type": "local",

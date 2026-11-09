@@ -840,6 +840,13 @@ def build_config() -> Dict[str, Any]:
                 "enabled": True,
                 "timeout": 180000,
             },
+            # R1104: catálogo estático dos 19 recursos, resolução de nomes e plano.
+            "gjq-backend-research": {
+                "type": "local",
+                "command": [".venv/bin/python", "-m", "integrations.gjq_backend_research_mcp"],
+                "enabled": True,
+                "timeout": 30000,
+            },
             # R1099: simulador Qiskit 2.x local, sem exec arbitrário e sem rede.
             "quantum-sim-core": {
                 "type": "local",
