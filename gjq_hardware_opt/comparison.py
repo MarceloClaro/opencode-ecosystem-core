@@ -5,7 +5,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from statistics import mean
+from statistics import mean, stdev
 from typing import Any
 
 from qiskit import QuantumCircuit, qasm2, qasm3, transpile
@@ -62,6 +62,30 @@ def build_baseline_candidate(
     )
 
 
+def _mitigated_tvd(case: dict[str, Any]) -> float | None:
+    value = case.get("mitigated_tvd_vs_ideal")
+    if value is None:
+        value = case.get("mitigated_tvd_subspace")
+    return None if value is None else float(value)
+
+
+def _mitigated_corr(case: dict[str, Any]) -> float | None:
+    value = case.get("mitigated_correlation_00_11")
+    return None if value is None else float(value)
+
+
+def _stats(values: list[Any]) -> dict[str, float] | None:
+    clean = [float(v) for v in values if v is not None]
+    if not clean:
+        return None
+    return {
+        "mean": mean(clean),
+        "std": stdev(clean) if len(clean) > 1 else 0.0,
+        "min": min(clean),
+        "max": max(clean),
+    }
+
+
 def case_payload(
     name: str,
     candidate: Candidate,
@@ -69,9 +93,12 @@ def case_payload(
     shots: int,
     *,
     task_id: str | None = None,
+    task_ids: list[str] | None = None,
     calibration_task_ids: dict[str, str] | None = None,
     calibration_counts: dict[str, dict[str, int]] | None = None,
     mitigation: dict[str, Any] | None = None,
+    repetitions: list[dict[str, Any]] | None = None,
+    shots_per_repetition: int | None = None,
 ) -> dict[str, Any]:
     total = sum(int(v) for v in counts.values())
     probabilities = {
@@ -80,7 +107,10 @@ def case_payload(
     payload: dict[str, Any] = {
         "name": name,
         "task_id": task_id,
+        "task_ids": task_ids or ([task_id] if task_id else []),
         "shots": int(shots),
+        "shots_per_repetition": shots_per_repetition,
+        "repetitions_count": len(repetitions) if repetitions else 1,
         "candidate": candidate.to_dict(),
         "counts": counts,
         "audit": audit_counts(counts, shots),
@@ -100,6 +130,25 @@ def case_payload(
             payload["mitigated_tvd_subspace"] = 0.5 * (
                 abs(p00 - 0.5) + abs(p11 - 0.5)
             )
+            payload["mitigated_tvd_vs_ideal"] = tvd_vs_ideal(
+                {str(k): float(v) for k, v in mitigated.items()}
+            )
+    if repetitions:
+        payload["repetitions"] = repetitions
+        payload["repetition_stats"] = {
+            "raw_correlation_00_11": _stats(
+                [r.get("raw_correlation_00_11") for r in repetitions]
+            ),
+            "raw_tvd_vs_ideal": _stats(
+                [r.get("raw_tvd_vs_ideal") for r in repetitions]
+            ),
+            "mitigated_tvd_vs_ideal": _stats(
+                [r.get("mitigated_tvd_vs_ideal", r.get("mitigated_tvd_subspace")) for r in repetitions]
+            ),
+            "mitigated_correlation_00_11": _stats(
+                [r.get("mitigated_correlation_00_11") for r in repetitions]
+            ),
+        }
     return payload
 
 
@@ -118,7 +167,8 @@ def render_comparison_markdown(data: dict[str, Any]) -> str:
     lines = [
         "# Comparação baseline vs otimizado — GJQ / Baihua",
         "",
-        f"Gerado em {data['generated_at']} · {data['shots']} shots por circuito.",
+        f"Gerado em {data['generated_at']} · {data['shots']} shots por circuito · "
+        f"{data.get('repetitions', 1)} repetições.",
         "",
         "## Protocolo",
         "",
@@ -126,7 +176,11 @@ def render_comparison_markdown(data: dict[str, Any]) -> str:
         "- Baseline: layout trivial-operacional, roteamento basic, nível 1.",
         "- Otimizado: layout noise-aware, roteamento sabre, candidato escolhido.",
         "- Submissão com `transpile=False`; nenhuma dupla transpilação.",
-        "- Calibração de leitura: |00> e |11> nos mesmos qubits físicos.",
+        (
+            "- Calibração de leitura: |00>, |01>, |10> e |11> nos mesmos qubits físicos."
+            if data.get("full_calibration")
+            else "- Calibração de leitura: |00> e |11> nos mesmos qubits físicos."
+        ),
         "",
         "## Resultados",
         "",
@@ -141,9 +195,48 @@ def render_comparison_markdown(data: dict[str, Any]) -> str:
             f"{case['candidate']['estimate'].get('error_budget_proxy', 0):.4e} | "
             f"{case['raw_correlation_00_11']:.4f} | {case['raw_tvd_vs_ideal']:.4f} | "
             f"{_fmt(probabilities.get('00'))} | {_fmt(probabilities.get('11'))} | "
-            f"{_fmt(case.get('mitigated_tvd_subspace'))} | `{case.get('task_id')}` |"
+            f"{_fmt(_mitigated_tvd(case))} | `{case.get('task_id')}` |"
         )
+    lines.append("")
+    if data.get("full_calibration"):
+        lines += [
+            "## Miticação 4x4".replace("icação", "igação"),
+            "",
+            "| Caso | Estado | Raw | Mitigado |",
+            "|---|---:|---:|---:|",
+        ]
+        for case in (baseline, optimized):
+            raw = case.get("probabilities") or {}
+            mit = (case.get("mitigation") or {}).get("probabilities") or {}
+            for state in ("00", "01", "10", "11"):
+                lines.append(
+                    f"| {case['name']} | `{state}` | {_fmt(raw.get(state), 6)} | "
+                    f"{_fmt(mit.get(state), 6)} |"
+                )
+        lines.append("")
     improvement = data["comparison"]
+    for case in (baseline, optimized):
+        stats = case.get("repetition_stats") or {}
+        if not stats:
+            continue
+        lines += [
+            f"### Repetições — {case['name']}",
+            "",
+            "| Métrica | Média | Desvio | Mín. | Máx. |",
+            "|---|---:|---:|---:|---:|",
+        ]
+        for label, key in (
+            ("Raw 00/11", "raw_correlation_00_11"),
+            ("TVD raw", "raw_tvd_vs_ideal"),
+            ("TVD mitigada", "mitigated_tvd_vs_ideal"),
+            ("Correlação mitigada", "mitigated_correlation_00_11"),
+        ):
+            item = stats.get(key) or {}
+            lines.append(
+                f"| {label} | {_fmt(item.get('mean'))} | {_fmt(item.get('std'))} | "
+                f"{_fmt(item.get('min'))} | {_fmt(item.get('max'))} |"
+            )
+        lines.append("")
     lines += [
         "",
         "## Diferença (otimizado − baseline)",
@@ -152,7 +245,11 @@ def render_comparison_markdown(data: dict[str, Any]) -> str:
         "|---|---:|",
         f"| Correlação raw 00/11 | {improvement['delta_raw_correlation']:+.4f} |",
         f"| TVD raw vs ideal | {improvement['delta_raw_tvd']:+.4f} |",
-        f"| TVD mitigada | {_fmt(improvement.get('delta_mitigated_tvd'), 4)} |",
+        (
+            f"| TVD mitigada | {improvement['delta_mitigated_tvd']:+.4f} |"
+            if improvement.get('delta_mitigated_tvd') is not None
+            else "| TVD mitigada | — |"
+        ),
         "",
         "## Interpretação",
         "",
@@ -183,8 +280,8 @@ def render_comparison_markdown(data: dict[str, Any]) -> str:
         )
         lines.append(
             f"- Após a mitigação de leitura, a TVD foi "
-            f"{baseline.get('mitigated_tvd_subspace', float('nan')):.4f} no baseline "
-            f"e {optimized.get('mitigated_tvd_subspace', float('nan')):.4f} no "
+            f"{_mitigated_tvd(baseline) or float('nan'):.4f} no baseline "
+            f"e {_mitigated_tvd(optimized) or float('nan'):.4f} no "
             f"otimizado; o caso com menor TVD mitigada foi **{mitigated_rank}**."
         )
     leakage_baseline = (baseline.get("mitigation") or {}).get("leakage_by_prepared") or {}
@@ -196,8 +293,9 @@ def render_comparison_markdown(data: dict[str, Any]) -> str:
             "não corrige a população que sai para 01/10."
         )
     lines += [
-        "- Uma execução por caso, com 4096 shots, não é estudo estatístico; "
-        "diferenças pequenas não sustentam vantagem.",
+        f"- {data.get('repetitions', 1)} repetições de {data['shots']} shots por "
+        "caso; a incerteza é a dispersão entre repetições, não uma prova "
+        "estatística definitiva.",
         "",
         "## Calibração de leitura",
         "",
@@ -217,13 +315,22 @@ def render_comparison_markdown(data: dict[str, Any]) -> str:
     lines += [
         "## Limites",
         "",
-        "- Uma execução por caso não é estudo estatístico nem prova de vantagem.",
-        "- A calibração de leitura mede |00> e |11> nos mesmos qubits; |11> "
-        "usa rx(pi) e inclui preparação do |1>, então não separa completamente "
-        "readout de state preparation. Crosstalk, deriva e leakage fora do "
-        "subespaço também não são capturados.",
-        "- A TVD mitigada é uma estimativa dentro do subespaço 00/11; não é "
-        "fidelidade de estado.",
+        "- Repetições estimam dispersão; não são prova estatística definitiva.",
+        (
+            "- A matriz 4x4 corrige 01/10; |11> usa rx(pi) e inclui preparação "
+            "do |1>, então não separa completamente readout de state preparation. "
+            "Crosstalk e deriva não são capturados."
+            if data.get("full_calibration")
+            else "- A calibração |00>/|11> não corrige 01/10; |11> usa rx(pi) e "
+            "inclui preparação do |1>. Crosstalk e deriva não são capturados."
+        ),
+        (
+            "- A TVD mitigada é uma estimativa sobre os 4 estados; não é "
+            "fidelidade de estado."
+            if data.get("full_calibration")
+            else "- A TVD mitigada é uma estimativa no subespaço 00/11; não é "
+            "fidelidade de estado."
+        ),
         "- O proxy de erro é um produto de `(1 - erro)` por porta e leitura; não "
         "é fidelidade.",
         "- Custo, fila e calibração podem mudar.",

@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-11-09T12:58:54-03:00",
+  "backend": "Baihua",
+  "profile_name": "Baihua",
+  "profile_kind": "gjq_live_target",
+  "profile_fingerprint": "f79a19730b1c5cc025e344a5dacbb0ae0d67227f3a6cd936ad99f8cabed543de",
+  "calibration_date": "2026-11-09 18:58:42-03:00",
+  "shots": 8192,
+  "repetitions": 3,
+  "full_calibration": true,
+  "strategy": "balanced",
+  "seed": 42,
+  "quick": false,
+  "calibrate": true,
+  "submissions_estimated": 14,
+  "baseline": {
+    "used_physical": [
+      0,
+      1
+    ],
+    "metrics": {
+      "num_qubits": 2,
+      "num_clbits": 2,
+      "size": 6,
+      "depth": 4,
+      "num_1q": 3,
+      "num_2q": 1,
+      "num_measure": 2,
+      "ops": {
+        "h": 3,
+        "measure": 2,
+        "cz": 1
+      }
+    },
+    "estimate": {
+      "success_proxy": 0.9662074626905641,
+      "error_budget_proxy": 0.03379253730943588,
+      "log_success_proxy": -0.034376703138228784,
+      "operations": 6,
+      "per_gate": {
+        "cz": 1,
+        "h": 3,
+        "measure": 2
+      },
+      "unknown_operations": [],
+      "method": "produto de (1 - erro) por porta e leitura; proxy independente, não é fidelidade de estado"
+    },
+    "measurement_order": [
+      1,
+      0
+    ],
+    "qasm2": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nh q[1];\ncz q[0],q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+    "qasm3": "OPENQASM 3.0;\ninclude \"stdgates.inc\";\nbit[2] c;\nqubit[2] q;\nh q[0];\nh q[1];\ncz q[0], q[1];\nh q[1];\nc[0] = measure q[0];\nc[1] = measure q[1];\n",
+    "calibration_qasm2": {
+      "00": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nmeasure q[1] -> c[1];\nmeasure q[0] -> c[0];",
+      "01": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nrx(pi) q[0];\nmeasure q[1] -> c[1];\nmeasure q[0] -> c[0];",
+      "10": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nrx(pi) q[1];\nmeasure q[1] -> c[1];\nmeasure q[0] -> c[0];",
+      "11": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nrx(pi) q[1];\nrx(pi) q[0];\nmeasure q[1] -> c[1];\nmeasure q[0] -> c[0];"
+    }
+  },
+  "optimized": {
+    "used_physical": [
+      106,
+      107
+    ],
+    "metrics": {
+      "num_qubits": 108,
+      "num_clbits": 2,
+      "size": 6,
+      "depth": 4,
+      "num_1q": 3,
+      "num_2q": 1,
+      "num_measure": 2,
+      "ops": {
+        "h": 3,
+        "measure": 2,
+        "cz": 1
+      }
+    },
+    "estimate": {
+      "success_proxy": 0.994014980014994,
+      "error_budget_proxy": 0.0059850199850060015,
+      "log_success_proxy": -0.006003002001501207,
+      "operations": 6,
+      "per_gate": {
+        "cz": 1,
+        "h": 3,
+        "measure": 2
+      },
+      "unknown_operations": [],
+      "method": "produto de (1 - erro) por porta e leitura; proxy independente, não é fidelidade de estado"
+    },
+    "measurement_order": [
+      107,
+      106
+    ],
+    "qasm2": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[108];\ncreg c[2];\nh q[106];\nh q[107];\ncz q[106],q[107];\nh q[107];\nmeasure q[106] -> c[0];\nmeasure q[107] -> c[1];",
+    "qasm3": "OPENQASM 3.0;\ninclude \"stdgates.inc\";\nbit[2] c;\nqubit[108] q;\nh q[106];\nh q[107];\ncz q[106], q[107];\nh q[107];\nc[0] = measure q[106];\nc[1] = measure q[107];\n",
+    "calibration_qasm2": {
+      "00": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[108];\ncreg c[2];\nmeasure q[107] -> c[1];\nmeasure q[106] -> c[0];",
+      "01": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[108];\ncreg c[2];\nrx(pi) q[106];\nmeasure q[107] -> c[1];\nmeasure q[106] -> c[0];",
+      "10": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[108];\ncreg c[2];\nrx(pi) q[107];\nmeasure q[107] -> c[1];\nmeasure q[106] -> c[0];",
+      "11": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[108];\ncreg c[2];\nrx(pi) q[107];\nrx(pi) q[106];\nmeasure q[107] -> c[1];\nmeasure q[106] -> c[0];"
+    }
+  },
+  "hardware_executed": false,
+  "network": true,
+  "limits": "Plano apenas; nenhum job foi submetido. A execução exige o primário com --confirm e --allow-hardware. A calibração |11> usa rx(pi) e inclui preparação do |1>.",
+  "plan_sha256": "6b09361f314c14a20806604c73c0e2d6f82c1e942ca2a750ce4880ab00446cae"
+}

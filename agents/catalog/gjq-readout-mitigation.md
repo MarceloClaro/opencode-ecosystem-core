@@ -128,7 +128,8 @@ O wrapper `agent_readout.py` aceita `compare-plan`, `mitigate` e os comandos
 
 ```bash
 # planejar o loop (sem hardware)
-agent_readout.py loop-plan --profile perfil.json --circuit E05 --shots 2048 --quick --out resultados/loop
+agent_readout.py loop-plan --profile perfil.json --circuit E05 --shots 8192 \
+  --repetitions 3 --full-calibration --quick --out resultados/loop
 
 # rodar SDD + TDD + simulação
 agent_readout.py loop-simulate --state resultados/loop/loop_state.json
@@ -181,7 +182,7 @@ agent_readout.py loop-run --backend Baihua --circuit E05 --shots 2048 --quick   
 
 - A calibração |11> usa `rx(pi)` e inclui preparação do |1>; não separa
   completamente readout de state preparation.
-- A inversão 00/11 não corrige leakage para 01/10.
+- A matriz 4x4 corrige 01/10; a submatriz 00/11 não corrige.
 - A TVD mitigada não é fidelidade de estado.
 - A simulação com modelo depolarizante não prevê o hardware.
 - Uma execução por caso não é estudo estatístico.

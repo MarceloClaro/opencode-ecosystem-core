@@ -1,0 +1,132 @@
+{
+  "sdd": {
+    "ok": true,
+    "specs": [
+      {
+        "path": "/home/marceloclaro/opencode-ecosystem-core/specs/SPEC-935-R1113-gjq-uncertainty-full-calibration.md",
+        "ok": true,
+        "bytes": 3088
+      },
+      {
+        "path": "/home/marceloclaro/opencode-ecosystem-core/specs/SPEC-935-R1112-gjq-loop-engineering.md",
+        "ok": true,
+        "bytes": 4480
+      },
+      {
+        "path": "/home/marceloclaro/opencode-ecosystem-core/specs/SPEC-935-R1110-gjq-readout-mitigation.md",
+        "ok": true,
+        "bytes": 5722
+      }
+    ],
+    "tests": [
+      {
+        "path": "/home/marceloclaro/opencode-ecosystem-core/tests/test_r1113_gjq_uncertainty.py",
+        "ok": true,
+        "bytes": 6066
+      },
+      {
+        "path": "/home/marceloclaro/opencode-ecosystem-core/tests/test_r1112_gjq_loop_engineering.py",
+        "ok": true,
+        "bytes": 10036
+      },
+      {
+        "path": "/home/marceloclaro/opencode-ecosystem-core/tests/test_r1110_gjq_readout_mitigation.py",
+        "ok": true,
+        "bytes": 6757
+      }
+    ],
+    "failures": []
+  },
+  "tdd": {
+    "ok": true,
+    "command": [
+      "/home/marceloclaro/opencode-ecosystem-core/.venv-quantum/bin/python",
+      "-m",
+      "pytest",
+      "/home/marceloclaro/opencode-ecosystem-core/tests/test_r1113_gjq_uncertainty.py",
+      "/home/marceloclaro/opencode-ecosystem-core/tests/test_r1112_gjq_loop_engineering.py",
+      "/home/marceloclaro/opencode-ecosystem-core/tests/test_r1110_gjq_readout_mitigation.py",
+      "-q"
+    ],
+    "returncode": 0,
+    "stdout_tail": "....s.........................                                           [100%]\n29 passed, 1 skipped in 28.57s\n",
+    "stderr_tail": ""
+  },
+  "simulation": {
+    "schema_version": 1,
+    "baseline": {
+      "used_physical": [
+        0,
+        1
+      ],
+      "local_map": {
+        "0": 0,
+        "1": 1
+      },
+      "counts": {
+        "01": 76,
+        "11": 4061,
+        "10": 80,
+        "00": 3975
+      },
+      "noisy_probabilities": {
+        "01": 0.00927734375,
+        "11": 0.4957275390625,
+        "10": 0.009765625,
+        "00": 0.4852294921875
+      },
+      "ideal_probabilities": {
+        "00": 0.4999999999999998,
+        "01": 5.286997409534849e-34,
+        "10": 5.286997409534849e-34,
+        "11": 0.4999999999999998
+      },
+      "tvd_noisy_vs_ideal": 0.019042968749999778,
+      "shots": 8192,
+      "total": 8192,
+      "noise_model": {
+        "kind": "depolarizing_per_gate_and_readout",
+        "source": "perfil do backend"
+      }
+    },
+    "optimized": {
+      "used_physical": [
+        106,
+        107
+      ],
+      "local_map": {
+        "106": 0,
+        "107": 1
+      },
+      "counts": {
+        "01": 15,
+        "11": 4123,
+        "10": 18,
+        "00": 4036
+      },
+      "noisy_probabilities": {
+        "01": 0.0018310546875,
+        "11": 0.5032958984375,
+        "10": 0.002197265625,
+        "00": 0.49267578125
+      },
+      "ideal_probabilities": {
+        "00": 0.4999999999999998,
+        "01": 5.286997409534849e-34,
+        "10": 5.286997409534849e-34,
+        "11": 0.4999999999999998
+      },
+      "tvd_noisy_vs_ideal": 0.00732421875,
+      "shots": 8192,
+      "total": 8192,
+      "noise_model": {
+        "kind": "depolarizing_per_gate_and_readout",
+        "source": "perfil do backend"
+      }
+    },
+    "ideal_equivalence_tvd": 0.0,
+    "gate_ok": true,
+    "simulated_winner": "optimized",
+    "limits": "Simulação com modelo depolarizante derivado do perfil; não é execução física e não prevê fidelidade de hardware."
+  }
+}

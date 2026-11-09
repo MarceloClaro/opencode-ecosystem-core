@@ -40,7 +40,9 @@ from gjq_hardware_opt import (  # noqa: E402
     cached_account_present,
     calibration_circuit,
     case_payload,
+    confusion_from_calibration_counts,
     connect_gjq,
+    correlation,
     credential_present,
     execution_record,
     export_comparison,
@@ -49,6 +51,7 @@ from gjq_hardware_opt import (  # noqa: E402
     mitigate_subspace,
     readout_confusion_matrix,
     subspace_matrix_from_calibration,
+    tvd_vs_ideal,
     export_benchmark,
     export_execution,
     export_result,
@@ -337,7 +340,12 @@ def _build_comparison_plan(args, profile, baseline, optimized) -> dict:
         order = measurement_order(circuit)
         calibration_qasm = {}
         if args.calibrate:
-            for prepared in ("00", "11"):
+            states = (
+                ("00", "01", "10", "11")
+                if args.full_calibration
+                else ("00", "11")
+            )
+            for prepared in states:
                 calibration_qasm[prepared] = qasm2.dumps(
                     calibration_circuit(order, prepared)
                 )
@@ -359,11 +367,19 @@ def _build_comparison_plan(args, profile, baseline, optimized) -> dict:
         "profile_fingerprint": profile.target_fingerprint,
         "calibration_date": profile.last_update_date,
         "shots": args.shots,
+        "repetitions": int(args.repetitions),
+        "full_calibration": bool(args.full_calibration),
         "strategy": args.strategy,
         "seed": args.seed,
         "quick": bool(args.quick),
         "calibrate": bool(args.calibrate),
-        "submissions_estimated": 2 + (4 if args.calibrate else 0),
+        "full_calibration": bool(args.full_calibration),
+        "repetitions": int(args.repetitions),
+        "submissions_estimated": (
+            2 * int(args.repetitions)
+            + (2 * 4 if args.calibrate and args.full_calibration else 0)
+            + (2 * 2 if args.calibrate and not args.full_calibration else 0)
+        ),
         "baseline": cases["baseline"],
         "optimized": cases["otimizado"],
         "hardware_executed": False,
@@ -446,8 +462,14 @@ def cmd_compare(args) -> int:
         calibration_ids = {}
         matrix = None
         leakage = {}
+        model = None
         if args.calibrate:
-            for prepared in ("00", "11"):
+            states = (
+                ("00", "01", "10", "11")
+                if args.full_calibration
+                else ("00", "11")
+            )
+            for prepared in states:
                 calibration = calibration_circuit(order, prepared)
                 sub, wait, counts = _submit_and_wait(
                     service, backend, calibration, args,
@@ -455,35 +477,92 @@ def cmd_compare(args) -> int:
                 )
                 calibration_counts[prepared] = counts
                 calibration_ids[prepared] = sub["task_id"]
-            matrix, leakage = subspace_matrix_from_calibration(
-                calibration_counts, ("00", "11")
+            if args.full_calibration:
+                model = confusion_from_calibration_counts(
+                    calibration_counts, order
+                )
+                matrix = model.matrix
+                leakage = {}
+            else:
+                matrix, leakage = subspace_matrix_from_calibration(
+                    calibration_counts, ("00", "11")
+                )
+        repetitions = []
+        task_ids = []
+        aggregate: dict[str, int] = {}
+        for repetition in range(int(args.repetitions)):
+            submission, wait, counts = _submit_and_wait(
+                service, backend, circuit, args,
+                f"{name}/repeticao/{repetition + 1}",
             )
-        submission, wait, counts = _submit_and_wait(
-            service, backend, circuit, args, name
-        )
+            task_ids.append(submission["task_id"])
+            total = sum(int(v) for v in counts.values())
+            probabilities = {
+                str(k): int(v) / total for k, v in counts.items()
+            } if total else {}
+            if args.calibrate and args.full_calibration:
+                mitigation_rep = mitigate_probabilities(probabilities, model)
+            elif args.calibrate:
+                mitigation_rep = mitigate_subspace(
+                    probabilities, matrix, ("00", "11")
+                )
+            else:
+                mitigation_rep = mitigate_probabilities(
+                    probabilities, readout_confusion_matrix(profile, order)
+                )
+            mitigated = mitigation_rep.get("probabilities", {})
+            rep_payload = {
+                "repetition": repetition + 1,
+                "task_id": submission["task_id"],
+                "counts": counts,
+                "audit": audit_counts(counts, args.shots),
+                "raw_correlation_00_11": correlation(probabilities),
+                "raw_tvd_vs_ideal": tvd_vs_ideal(probabilities),
+                "mitigated_correlation_00_11": correlation(mitigated),
+                "mitigated_tvd_vs_ideal": tvd_vs_ideal(mitigated),
+                "mitigated_tvd_subspace": (
+                    0.5 * (
+                        abs(float(mitigated.get("00", 0.0)) - 0.5)
+                        + abs(float(mitigated.get("11", 0.0)) - 0.5)
+                    )
+                    if "00" in mitigated and "11" in mitigated
+                    else None
+                ),
+                "mitigation": mitigation_rep,
+            }
+            repetitions.append(rep_payload)
+            for key, value in counts.items():
+                aggregate[str(key)] = aggregate.get(str(key), 0) + int(value)
+        counts = aggregate
         total = sum(int(v) for v in counts.values())
         probabilities = {
             str(k): int(v) / total for k, v in counts.items()
         } if total else {}
-        if args.calibrate:
+        if args.calibrate and args.full_calibration:
+            mitigation = mitigate_probabilities(probabilities, model)
+            mitigation["leakage_by_prepared"] = {}
+        elif args.calibrate:
             mitigation = mitigate_subspace(probabilities, matrix, ("00", "11"))
             mitigation["leakage_by_prepared"] = leakage
-            mitigation["calibration_counts"] = calibration_counts
-            mitigation["calibration_task_ids"] = calibration_ids
         else:
             mitigation = mitigate_probabilities(
                 probabilities, readout_confusion_matrix(profile, order)
             )
             mitigation["leakage_by_prepared"] = {}
+        mitigation["calibration_counts"] = calibration_counts
+        mitigation["calibration_task_ids"] = calibration_ids
         payload = case_payload(
             name,
             candidate,
             counts,
-            args.shots,
-            task_id=submission["task_id"],
+            args.shots * int(args.repetitions),
+            task_id=task_ids[0] if task_ids else None,
+            task_ids=task_ids,
             calibration_task_ids=calibration_ids,
             calibration_counts=calibration_counts,
             mitigation=mitigation,
+            repetitions=repetitions,
+            shots_per_repetition=args.shots,
         )
         payload["qasm2"] = qasm2.dumps(circuit)
         payload["qasm3"] = qasm3.dumps(circuit)
@@ -519,6 +598,8 @@ def cmd_compare(args) -> int:
         "profile_fingerprint": profile.target_fingerprint,
         "calibration_date": profile.last_update_date,
         "shots": args.shots,
+        "repetitions": int(args.repetitions),
+        "full_calibration": bool(args.full_calibration),
         "strategy": args.strategy,
         "seed": args.seed,
         "quick": bool(args.quick),
@@ -540,9 +621,12 @@ def cmd_compare(args) -> int:
             "status": "ok",
             "backend": args.backend,
             "shots": args.shots,
+            "repetitions": int(args.repetitions),
+            "full_calibration": bool(args.full_calibration),
             "calibrate": bool(args.calibrate),
             "baseline": {
                 "task_id": cases["baseline"]["task_id"],
+                "task_ids": cases["baseline"]["task_ids"],
                 "raw_correlation_00_11": cases["baseline"]["raw_correlation_00_11"],
                 "raw_tvd_vs_ideal": cases["baseline"]["raw_tvd_vs_ideal"],
                 "mitigated_tvd_subspace": cases["baseline"].get("mitigated_tvd_subspace"),
@@ -550,6 +634,7 @@ def cmd_compare(args) -> int:
             },
             "otimizado": {
                 "task_id": cases["otimizado"]["task_id"],
+                "task_ids": cases["otimizado"]["task_ids"],
                 "raw_correlation_00_11": cases["otimizado"]["raw_correlation_00_11"],
                 "raw_tvd_vs_ideal": cases["otimizado"]["raw_tvd_vs_ideal"],
                 "mitigated_tvd_subspace": cases["otimizado"].get("mitigated_tvd_subspace"),
@@ -951,6 +1036,13 @@ def build_parser() -> argparse.ArgumentParser:
     p_compare.add_argument("--profile", help="perfil JSON para --plan offline")
     p_compare.add_argument("--circuit", default="E05")
     p_compare.add_argument("--shots", type=int, default=4096)
+    p_compare.add_argument("--repetitions", type=int, default=1)
+    p_compare.add_argument(
+        "--full-calibration",
+        action=argparse.BooleanOptionalAction,
+        default=False,
+        help="calibra |00>, |01>, |10> e |11> e usa matriz 4x4",
+    )
     p_compare.add_argument("--strategy", default="balanced")
     p_compare.add_argument("--seed", type=int, default=42)
     p_compare.add_argument("--quick", action="store_true")

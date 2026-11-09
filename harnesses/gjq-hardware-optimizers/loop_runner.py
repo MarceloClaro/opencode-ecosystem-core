@@ -32,10 +32,12 @@ from gjq_hardware_opt.loop import (  # noqa: E402
 )
 
 SPECS = [
+    str(ROOT / "specs" / "SPEC-935-R1113-gjq-uncertainty-full-calibration.md"),
     str(ROOT / "specs" / "SPEC-935-R1112-gjq-loop-engineering.md"),
     str(ROOT / "specs" / "SPEC-935-R1110-gjq-readout-mitigation.md"),
 ]
 TESTS = [
+    str(ROOT / "tests" / "test_r1113_gjq_uncertainty.py"),
     str(ROOT / "tests" / "test_r1112_gjq_loop_engineering.py"),
     str(ROOT / "tests" / "test_r1110_gjq_readout_mitigation.py"),
 ]
@@ -85,6 +87,7 @@ def cmd_plan(args) -> int:
         "compare", "--plan",
         "--circuit", args.circuit,
         "--shots", str(args.shots),
+        "--repetitions", str(args.repetitions),
         "--strategy", args.strategy,
         "--seed", str(args.seed),
         "--out", str(plan_dir),
@@ -92,6 +95,9 @@ def cmd_plan(args) -> int:
     if args.quick:
         compare_args.append("--quick")
     compare_args.append("--calibrate" if args.calibrate else "--no-calibrate")
+    compare_args.append(
+        "--full-calibration" if args.full_calibration else "--no-full-calibration"
+    )
     if args.profile:
         compare_args.extend(["--profile", args.profile])
     if args.backend:
@@ -125,6 +131,8 @@ def cmd_plan(args) -> int:
     state["strategy"] = args.strategy
     state["quick"] = bool(args.quick)
     state["calibrate"] = bool(args.calibrate)
+    state["repetitions"] = int(args.repetitions)
+    state["full_calibration"] = bool(args.full_calibration)
     state["submissions_estimated"] = int(plan.get("submissions_estimated", 0))
     state["status"] = "planned"
     save_state(state, out / "loop_state.json")
@@ -246,6 +254,7 @@ def cmd_execute(args) -> int:
         "--backend", state["backend"],
         "--circuit", state["circuit"],
         "--shots", str(state["shots"]),
+        "--repetitions", str(state.get("repetitions", 1)),
         "--strategy", state.get("strategy", "balanced"),
         "--seed", str(state.get("seed", 42)),
         "--out", str(comparison_dir),
@@ -253,6 +262,11 @@ def cmd_execute(args) -> int:
     if state.get("quick"):
         compare_args.append("--quick")
     compare_args.append("--calibrate" if state.get("calibrate") else "--no-calibrate")
+    compare_args.append(
+        "--full-calibration"
+        if state.get("full_calibration")
+        else "--no-full-calibration"
+    )
     compare_args.extend(["--confirm", "--allow-hardware"])
     if args.use_cached_account:
         compare_args.append("--use-cached-account")
@@ -411,6 +425,12 @@ def build_parser() -> argparse.ArgumentParser:
     p_plan.add_argument("--profile")
     p_plan.add_argument("--circuit", default="E05")
     p_plan.add_argument("--shots", type=int, default=4096)
+    p_plan.add_argument("--repetitions", type=int, default=1)
+    p_plan.add_argument(
+        "--full-calibration",
+        action=argparse.BooleanOptionalAction,
+        default=False,
+    )
     p_plan.add_argument("--strategy", default="balanced")
     p_plan.add_argument("--seed", type=int, default=42)
     p_plan.add_argument("--quick", action="store_true")
@@ -450,6 +470,12 @@ def build_parser() -> argparse.ArgumentParser:
     p_run.add_argument("--profile")
     p_run.add_argument("--circuit", default="E05")
     p_run.add_argument("--shots", type=int, default=4096)
+    p_run.add_argument("--repetitions", type=int, default=1)
+    p_run.add_argument(
+        "--full-calibration",
+        action=argparse.BooleanOptionalAction,
+        default=False,
+    )
     p_run.add_argument("--strategy", default="balanced")
     p_run.add_argument("--seed", type=int, default=42)
     p_run.add_argument("--quick", action="store_true")

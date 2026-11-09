@@ -172,6 +172,13 @@ def simulation_gate(
     return result
 
 
+def _case_mitigated_tvd(case: dict[str, Any]) -> float | None:
+    value = case.get("mitigated_tvd_vs_ideal")
+    if value is None:
+        value = case.get("mitigated_tvd_subspace")
+    return None if value is None else float(value)
+
+
 def score_comparison(comparison: dict[str, Any]) -> dict[str, Any]:
     baseline = comparison["baseline"]
     optimized = comparison["optimized"]
@@ -187,20 +194,18 @@ def score_comparison(comparison: dict[str, Any]) -> dict[str, Any]:
         if baseline["raw_tvd_vs_ideal"] <= optimized["raw_tvd_vs_ideal"]
         else "optimized"
     )
+    baseline_mitigated = _case_mitigated_tvd(baseline)
+    optimized_mitigated = _case_mitigated_tvd(optimized)
+    mitigated_available = (
+        baseline_mitigated is not None and optimized_mitigated is not None
+    )
     mitigated_winner = raw_winner
-    if (
-        baseline.get("mitigated_tvd_subspace") is not None
-        and optimized.get("mitigated_tvd_subspace") is not None
-    ):
+    if mitigated_available:
         mitigated_winner = (
             "baseline"
-            if baseline["mitigated_tvd_subspace"] <= optimized["mitigated_tvd_subspace"]
+            if baseline_mitigated <= optimized_mitigated
             else "optimized"
         )
-    mitigated_available = (
-        baseline.get("mitigated_tvd_subspace") is not None
-        and optimized.get("mitigated_tvd_subspace") is not None
-    )
     proxy_confirmed_raw = proxy_winner == raw_winner
     proxy_confirmed_mitigated = (
         proxy_winner == mitigated_winner if mitigated_available else None
@@ -250,10 +255,10 @@ def score_comparison(comparison: dict[str, Any]) -> dict[str, Any]:
         "proxy_confirmed_mitigated": proxy_confirmed_mitigated,
         "baseline_raw_tvd": baseline["raw_tvd_vs_ideal"],
         "optimized_raw_tvd": optimized["raw_tvd_vs_ideal"],
-        "baseline_mitigated_tvd": baseline.get("mitigated_tvd_subspace"),
-        "optimized_mitigated_tvd": optimized.get("mitigated_tvd_subspace"),
+        "baseline_mitigated_tvd": baseline_mitigated,
+        "optimized_mitigated_tvd": optimized_mitigated,
         "score": (
-            1.0 - float(optimized.get("mitigated_tvd_subspace") or optimized["raw_tvd_vs_ideal"])
+            1.0 - float(optimized_mitigated if optimized_mitigated is not None else optimized["raw_tvd_vs_ideal"])
         ),
         "lesson": lesson,
         "next_action": next_action,
@@ -276,7 +281,9 @@ def render_loop_report(
         "# Loop GJQ — plano, simulação, hardware e mitigação",
         "",
         f"Loop `{state.get('loop_id')}` · backend **{state.get('backend') or 'perfil offline'}** · "
-        f"circuito **{state.get('circuit')}** · **{state.get('shots')} shots**.",
+        f"circuito **{state.get('circuit')}** · **{state.get('shots')} shots** por repetição · "
+        f"{state.get('repetitions', 1)} repetições · calibração 4x4: "
+        f"{state.get('full_calibration', False)}.",
         "",
         "## Gates",
         "",
@@ -288,9 +295,24 @@ def render_loop_report(
         f"| Hardware | {gates.get('hardware')} |",
         "",
         f"Submissões estimadas: **{state.get('submissions_estimated')}** · usadas: "
-        f"**{state.get('submissions_used')}**.",
+        f"**{state.get('submissions_used')}** · órfãs: "
+        f"**{state.get('submissions_failed', 0)}**.",
         "",
     ]
+    failed = state.get("failed_attempts") or []
+    if failed:
+        lines += [
+            "## Tentativas anteriores",
+            "",
+            "| Etapa | Task IDs | Motivo | Usado no resultado final |",
+            "|---|---|---|---|",
+        ]
+        for item in failed:
+            lines.append(
+                f"| {item.get('stage')} | `{', '.join(item.get('task_ids', []))}` | "
+                f"{item.get('reason')} | {item.get('used_in_final', False)} |"
+            )
+        lines.append("")
     if simulation:
         lines += [
             "## Simulação",
@@ -317,10 +339,35 @@ def render_loop_report(
                 f"| {label} | {case['candidate']['used_physical']} | "
                 f"{case['raw_correlation_00_11']:.4f} | "
                 f"{case['raw_tvd_vs_ideal']:.4f} | "
-                f"{case.get('mitigated_tvd_subspace', float('nan')):.4f} | "
+                f"{_case_mitigated_tvd(case) if _case_mitigated_tvd(case) is not None else float('nan'):.4f} | "
                 f"`{case.get('task_id')}` |"
             )
         lines.append("")
+    if comparison:
+        for key, label in (("baseline", "baseline"), ("optimized", "otimizado")):
+            stats = comparison[key].get("repetition_stats") or {}
+            if not stats:
+                continue
+            lines += [
+                f"### Repetições — {label}",
+                "",
+                "| Métrica | Média | Desvio | Mín. | Máx. |",
+                "|---|---:|---:|---:|---:|",
+            ]
+            for metric, metric_key in (
+                ("Raw 00/11", "raw_correlation_00_11"),
+                ("TVD raw", "raw_tvd_vs_ideal"),
+                ("TVD mitigada", "mitigated_tvd_vs_ideal"),
+                ("Correlação mitigada", "mitigated_correlation_00_11"),
+            ):
+                item = stats.get(metric_key) or {}
+                lines.append(
+                    f"| {metric} | {item.get('mean', float('nan')):.4f} | "
+                    f"{item.get('std', float('nan')):.4f} | "
+                    f"{item.get('min', float('nan')):.4f} | "
+                    f"{item.get('max', float('nan')):.4f} |"
+                )
+            lines.append("")
     if score:
         lines += [
             "## Score e reflexão",
@@ -342,7 +389,7 @@ def render_loop_report(
         "- Simulação não é hardware; o modelo depolarizante não prevê fidelidade.",
         "- Uma execução por caso não é estudo estatístico.",
         "- A calibração |11> usa `rx(pi)` e inclui preparação do |1>.",
-        "- A inversão 00/11 não corrige leakage para 01/10.",
+        "- A matriz 4x4 corrige 01/10, mas não state preparation, crosstalk ou deriva.",
         "- Não há ZNE, PEC, DD ou correção quântica de erro.",
         "- O loop registra lições; não promove confiança automaticamente.",
         "",

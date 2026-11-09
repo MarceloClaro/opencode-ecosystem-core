@@ -95,12 +95,12 @@ rejeita esses comandos. A submissão de hardware permanece no primário, com
 ```bash
 # plano + SDD + TDD + simulação (sem hardware)
 .venv-quantum/bin/python harnesses/gjq-hardware-optimizers/loop_runner.py run \
-  --backend Baihua --circuit E05 --shots 2048 --quick --use-cached-account \
-  --out resultados/E05_loop
+  --backend Baihua --circuit E05 --shots 8192 --repetitions 3 --full-calibration \
+  --quick --use-cached-account --out resultados/E05_loop
 
 # ciclo completo com hardware após os gates
 .venv-quantum/bin/python harnesses/gjq-hardware-optimizers/loop_runner.py run \
-  --backend Baihua --circuit E05 --shots 2048 --quick \
+  --backend Baihua --circuit E05 --shots 8192 --repetitions 3 --full-calibration \
   --confirm --allow-hardware --use-cached-account \
   --out resultados/E05_loop
 ```

@@ -206,6 +206,18 @@ comparação anterior de 4096 shots, o baseline venceu o mitigado. O vencedor
 inverteu entre execuções; a diferença não sustenta vantagem. O loop registra a
 lição e recomenda mais shots e calibração dos 4 estados.
 
+## Loop 4x4 de referência (3 × 8192 shots)
+
+| Caso | Raw 00/11 | TVD mitigada 4x4 | Média ± desvio | Mín.–máx. |
+|---|---:|---:|---:|---:|
+| Baseline 0/1 | 0,9268 | **0,0092** | 0,0092 ± 0,0029 | 0,0058–0,0109 |
+| Otimizado 106/107 | 0,9152 | 0,0168 | 0,0168 ± 0,0019 | 0,0147–0,0183 |
+
+As faixas não se sobrepõem; o baseline venceu nas três repetições. Proxy e
+simulação favoreceram o otimizado; o hardware não confirmou. Foram 14 jobs
+usados e 6 órfãos (5 da primeira tentativa e 1 preso em RUNNING). Ver
+`resultados/baihua/E05_loop_uncertainty/`.
+
 ## Artefatos
 
 - `resultados/baihua/perfil.json`;
