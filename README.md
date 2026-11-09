@@ -279,6 +279,11 @@ provas **local**, sem aprovação para impressão ou distribuição.
 | **R1081** | direção Piranesi/Pencz, 6 tipos de prancha, provas determinísticas | ✅ 5 testes |
 | **R1082** | capa preta/ouro 422/436 pp, 6 pranchas de prova, caderno local de 8 pp e preflight | ✅ testes locais; uso gráfico pendente |
 | **R1083** | fontes literárias e capas selecionadas passam a ser rastreadas; binários extensos permanecem locais | 🟡 política revista em R1084 |
+| **R1096** | teaser geográfico Molambudos v1/v2, fora do feed; metadados e transcrições versionados | ✅ artefatos leves; mídia pesada local |
+
+O teaser geográfico R1096 (v1/v2) é uma peça separada do feed: metadados e
+transcrições são versionados; vídeo, áudio e capa ficam locais. A v2 é a
+recomendada; a v1 permanece para comparação.
 
 **Limites:** a capa selecionada tem 300 DPI, mas ainda não tem CMYK/PDF-X,
 prova física ou confirmação KDP; as 6 pranchas estão a 316–345 DPI no tamanho
@@ -287,6 +292,11 @@ Gemini com cota zero para imagem; nenhuma arte nova foi gerada. O perfil local
 está configurado, mas a inferência não foi comprovada. Detalhes:
 [R1082](reports/r1082/README.md), [R1081](reports/r1081/illustration_style/README.md),
 [R1080](reports/r1080/README.md) e [R1078](reports/r1078/README.md).
+
+O catálogo [templates/README.md](templates/README.md) organiza classes e
+templates por gênero editorial (bíblicos, ficção, infantis, científicos,
+matemáticos, RPG, mangá, HQs, didáticos e livros-jogo). É um banco de opções:
+listar não é instalar, instalar não é compilar e compilar não é aprovar.
 
 ### Edições e capas: não trocar uma variante pela outra
 
@@ -573,7 +583,7 @@ não é aceite editorial.
 | R1055 | ✅ técnico; revisão humana pendente | vídeo didático de qubit, câmera, mapa e versões 16:9/9:16 |
 | R1056 | ✅ documental; não valida runtime | atlas animado, fontes preservadas, manifesto e testes |
 | R1078–R1084 | 🟡 estúdio editorial; publicação bloqueada | Book Studio, fontes e capas versionadas; revisão de lombada, CMYK/PDF-X e prova física pendentes |
-| R1099 | ✅ build/testes locais | livro quântico 3504 pp, GJQ MCPs, 20 revisores e PDF versionado |
+| R1099 | ✅ build/testes locais | livro quântico 3502 pp, GJQ MCPs, reprodução E01–E19, artigo e PDF versionado |
 | R1100 | ✅ | Loop Engineering: skill, agente, auditor L0–L3 e harness |
 | Próximos ciclos | 🧭 | backend real de submissão, perfis brasileiros, UI, tabelas e validação externa assistida |
 
@@ -2896,7 +2906,7 @@ execução de todas as integrações disponíveis na sua máquina.
 | [Orquestração real](docs/evidencias-r868/verificacao-final.json) | Codex retornou `15` para `8 + 7` em 9,303 s | Uma tarefa textual somente com leitura, sem alvo REA |
 | [Inspeção REA direta](docs/evidencias-r868/analise-direta-controlada.json) | HTML controlado de 115 bytes, dois achados, alvo intocado | Caminho direto local; não comprova todos os formatos ou engines |
 | [Loop Engineering R1100](docs/LOOP_ENGINEERING_R1100.md) | 8 testes R1100; 43 na integração R1100/R1099/R917/R920 | Checklist e integração local; não prova funcionamento de loop |
-| [Livro quântico R1099](educacao_quantica_bohm/livro_pixel/BUILD_PDF.md) | 59 testes do livro; PDF 3504 pp; 3000 códigos | Build local; não é peer review |
+| [Livro quântico R1099](educacao_quantica_bohm/livro_pixel/BUILD_PDF.md) | 59 testes do livro + 8 da reprodução; PDF 3502 pp; 3000 códigos; E19 Mermin | Build local; não é peer review |
 | [GJQ R1099](docs/GJQ_PESQUISA_QUANTICA_R1099.md) | 4 testes `gjq-runtime` + 5 `quantum-sim-core`; Bell/CHSH no FAS-GPU | Simulador; nenhum hardware executado |
 
 A análise REA autônoma pelo LLM local permanece sem entrega aceita nos registros.
