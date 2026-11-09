@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "id": "R1096-teaser-geografia",
+  "title": "Molambudos — Uma geografia do arquivo",
+  "subtitle": "Teaser narrado",
+  "duration_seconds": 76,
+  "video": {
+    "path": "literatura/molambudos/podcast/producao/trailer_geografia_r1096.mp4",
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "codec": "h264",
+    "bytes": 68618948,
+    "sha256": "641e7afe728dce301b579e9621123d82ca9d744946a2f5c25899057219a7a293"
+  },
+  "audio": {
+    "path": "literatura/molambudos/podcast/producao/audio/teaser_geografia_r1096.m4a",
+    "codec": "aac",
+    "sample_rate": 48000,
+    "channels": 2,
+    "bytes": 1974792,
+    "sha256": "f515d1dfbed1779e1c61c94ed8a40efa0ae248f0f878ddd9e3f40313d340462b"
+  },
+  "cover": {
+    "path": "literatura/molambudos/podcast/producao/capa_teaser_geografia_1400.jpg",
+    "width": 1400,
+    "height": 1400,
+    "bytes": 423879,
+    "sha256": "64577ec3da6c5a93b96977be2630490a5a9929966cd7f20af558517acd2f9543",
+    "note": "capa quadrada derivada da frente real; contracapa como textura de fundo"
+  },
+  "art": {
+    "source": "literatura/molambudos/capas/Sem nome (3012 x 4425 px) (37 x 26 cm).png",
+    "source_sha256": "ed5824c2948e306a7585d662d3b58ed85bb710e5522f7586a60e9d9da0aec077",
+    "source_size": [
+      2000,
+      1405
+    ],
+    "note": "Recortes da arte de capa/contracapa do livro; nenhum pixel esticado.",
+    "panels": {
+      "front": {
+        "file": "videos/r1096-molambudos-geografia/assets/cover.png",
+        "box": [
+          1146,
+          173,
+          1867,
+          1252
+        ],
+        "width": 721,
+        "height": 1079,
+        "sha256": "3f71c8b4a56462249e8eac4abb29e8775c6934b3c76b937a95caa73d1d04abd7"
+      },
+      "back": {
+        "file": "videos/r1096-molambudos-geografia/assets/cover_back.png",
+        "box": [
+          152,
+          167,
+          897,
+          1249
+        ],
+        "width": 745,
+        "height": 1082,
+        "sha256": "3cc086636deed700ae23a0c5adde1f11c4086580ef483ff712f010ba957a5cc2"
+      },
+      "spine": {
+        "file": "videos/r1096-molambudos-geografia/assets/cover_spine.png",
+        "box": [
+          938,
+          167,
+          1086,
+          1244
+        ],
+        "width": 148,
+        "height": 1077,
+        "sha256": "c78e67692c68835ef75f5c747667473d23e83d2758bbbdd5ad23ae15b397b268"
+      },
+      "wrap": {
+        "file": "videos/r1096-molambudos-geografia/assets/cover_wrap.png",
+        "box": [
+          152,
+          167,
+          1867,
+          1252
+        ],
+        "width": 1715,
+        "height": 1085,
+        "sha256": "9377376528e7df981bb1dc534013d884833dbfe02d8897635bc4ea87fb06bc43"
+      }
+    }
+  },
+  "voice": {
+    "engine": "edge-tts",
+    "voice": "pt-BR-AntonioNeural",
+    "rate": "-10%",
+    "pitch": "-2Hz",
+    "note": "voz sintetizada; não é leitura humana"
+  },
+  "sound": {
+    "music": "sintetizada localmente: drone, pulso, sino, vento",
+    "sfx": [
+      "porta",
+      "janela",
+      "corvo",
+      "coruja",
+      "trem"
+    ],
+    "third_party_samples": false
+  },
+  "maps": {
+    "sources": [
+      "Natural Earth 110m admin_0 (domínio público)",
+      "Brazil states GeoJSON, Code for America/IBGE"
+    ],
+    "illustrative": true,
+    "historical_proof": false
+  },
+  "characters": [
+    "Joaquim Antônio Correia — Paciente 1.260",
+    "Dr. Heitor Oliveira — Paciente 1.261",
+    "Dra. Lúcia Mendes — Paciente 1.262",
+    "O homem do pano preto",
+    "Você — Paciente 1.263"
+  ],
+  "transcript": "transcricao_teaser_geografia_r1096.md",
+  "feed": "fora do feed de 26 episódios; teaser separado",
+  "limits": [
+    "Mapas ilustrativos; não são prova histórica ou geográfica.",
+    "Imagens dos personagens são reconstituições ficcionais do Caderno Iconográfico.",
+    "Voz sintetizada; não é leitura humana nem validação editorial.",
+    "Trilha e sound design sintetizados; sem samples de terceiros.",
+    "Capa e contracapa são a arte do livro; os recortes preservam a proporção, mas a resolução de origem limita ampliações.",
+    "Nenhuma publicação automática; feed de 26 episódios inalterado."
+  ]
+}

@@ -53,6 +53,39 @@ Quando você solicitar a criação de um documento acadêmico ao agente `marcelo
 | Base | memoir | Própria |
 | Comunidade | Grande | Emergente |
 
+## Banco de opções por gênero (Book Editor)
+
+O catálogo [`templates/books/catalogo-generos.json`](books/catalogo-generos.json)
+registra classes, pacotes e templates por gênero editorial. Ele é um artefato
+de dados: **listar não é instalar, instalar não é compilar e compilar não é
+aprovar**.
+
+| Gênero | Destaques | Observação |
+|---|---|---|
+| Bíblicos | `scripture`, `bibletext`, `bibleref` | Citação e passagem; Bíblia completa exige classe de livro + texto licenciado. |
+| Romances e ficção | `novel`, `ElegantBook` | `novel` é focado em print-on-demand, mas não é mais mantido. |
+| Infantis | `photobook`, `book-two`, `medievalMurderMistery` | Livro ilustrado/álbum; não há classe infantil dedicada madura no CTAN. |
+| Científicos | `kaobook`, `nature-tex`, `elsarticle`, `RevTeX` | Separa livro, relatório e artigo de periódico. |
+| Artísticos | `pagelayout`, `bookcover`, `VividBook` | Página, capa e estética ilustrada; não é curadoria de arte. |
+| Matemáticos | `amsbook`, `Tufte-LaTeX` | Classe AMS e margens para teoremas, provas e figuras. |
+| Históricos | `memoir`, `biblatex-chicago`, `chronology` | Miolo, citação Chicago e linha do tempo. |
+| RPG | `rpgtex`, `DND-5e-LaTeX-Template` | Caixas, tabelas, statblocks e temas. |
+| Mangá | `laboticgate`, `jlreq`, `pxrubrica`, `gentombow` | Tipografia japonesa, B5 com sangria e furigana; não desenha painéis. |
+| HQs | `comictex`, `GraphicNovel`, `hqfamiliar` | Roteiro e estrutura de quadrinhos; não desenha arte final. |
+| Livros didáticos | `livro-aberto`, `tex-book-template` | Referência brasileira e estrutura genérica. |
+| Livros-jogo | `gamebook`, `gamebooklib` | Seções numeradas e escolhas. |
+
+**Política de licença:** itens `reference_only: true` não têm licença
+explícita, são GPL/AGPL ou têm licença incerta; eles não são vendorizados e
+não têm instalação automática. Os demais registram `tlmgr install ...` ou
+`git clone ...` apenas como instrução declarativa.
+
+**Verificação:** o campo `verified.compile_tested` distingue o que foi
+compilado nesta máquina do que foi apenas documentado. Antes de oferecer uma
+opção no Book Editor, rode o smoke test no ambiente de destino.
+
+- `SPEC-1072` — Especificação formal deste banco de opções.
+
 ## Referências
 
 - [abnTeX2 — Site oficial](https://www.abntex.net.br/)

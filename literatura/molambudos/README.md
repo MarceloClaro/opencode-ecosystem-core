@@ -29,7 +29,7 @@ Ver [política e edição](../../README.md#o-que-entra-no-git-e-o-que-fica-local
 | `capas/piranesi_pencz_2026-11-05/` | alternativa Piranesi/Pencz: capas, tríptico, masters 600 DPI e manifesto |
 | `reports/r1081/` | direção de arte Piranesi/Pencz e provas determinísticas |
 | `reports/r1082/` | 6 pranchas de prova, caderno de 8 pp, preflight, revisão e perfil local |
-| `podcast/producao/` | 26 episódios + piloto R550, pacotes, slides, infográficos, feed, trailer e deploy |
+| `podcast/producao/` | 26 episódios + piloto R550, pacotes, slides, infográficos, feed, trailer, teaser R1096 (v1/v2) e deploy |
 | `auditorias/` | revisão antiga, banca, cultural-episteme, Book Studio e catálogo |
 | `capas/` | capa frontal e contracapa corrigidas |
 | `scripts/` | scripts de cânon, índice, rotas, selo e normalização |

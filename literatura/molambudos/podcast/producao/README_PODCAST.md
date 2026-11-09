@@ -90,6 +90,39 @@ Produzido via NotebookLM (`nlm` CLI v0.11.6) pelo executor físico SPEC-973
 
 ---
 
+## Teaser geográfico R1096 (fora do feed)
+
+Peça promocional narrada, separada da série de 26 episódios e derivada da
+edição R1075 (SPEC-935-R1096).
+
+- `trailer_geografia_r1096.mp4` — vídeo 1920 × 1080, 30 fps, 76 s, H.264/AAC.
+- `audio/teaser_geografia_r1096.m4a` — áudio AAC 48 kHz estéreo, capa
+  embutida 1400 × 1400.
+- `capa_teaser_geografia_1400.jpg` — capa quadrada.
+- `TEASER_GEOGRAFIA_R1096.json` — metadados, hashes, fontes e limites.
+- `transcricao_teaser_geografia_r1096.md` — narração por bloco, créditos,
+  fontes e limites.
+
+### Corte de impacto (v2)
+
+- `trailer_geografia_r1096_v2.mp4` — abertura fria, corte seco, textura do
+  podcast, leito de 26 vozes e letreiro dos episódios.
+- `audio/teaser_geografia_r1096_v2.m4a` — áudio AAC 48 kHz estéreo, capa
+  embutida.
+- `TEASER_GEOGRAFIA_R1096_V2.json` — metadados, hashes e limites.
+- `transcricao_teaser_geografia_r1096_v2.md` — transcrição e camadas de áudio.
+
+A v2 é a versão recomendada para teste de impacto; a v1 permanece para
+comparação.
+
+Limites: voz sintetizada (`edge-tts`), mapas ilustrativos (Natural Earth e
+GeoJSON de estados), retratos ficcionais, trilha e sound design sintetizados.
+A capa quadrada usa a frente real do livro; a contracapa aparece ao fundo,
+como textura. O teaser **não** está no `podcast_feed.xml`, não altera a
+tracklist e não substitui a leitura da obra. Publicação exige autorização.
+
+---
+
 ## Conteúdo do pacote
 
 - `audio/*.m4a` — 26 episódios
@@ -98,3 +131,6 @@ Produzido via NotebookLM (`nlm` CLI v0.11.6) pelo executor físico SPEC-973
 - `README_PODCAST.md` — este documento
 - `gerar_episodios.py` / `retomar_episodios.py` / `recuperar_downloads.py` / `gerar_ep26.py`
   — pipeline executável (reprodutibilidade)
+- `trailer_geografia_r1096.mp4`, `audio/teaser_geografia_r1096.m4a`,
+  `capa_teaser_geografia_1400.jpg`, `TEASER_GEOGRAFIA_R1096.json` e
+  `transcricao_teaser_geografia_r1096.md` — teaser R1096 (fora do feed)
