@@ -102,6 +102,65 @@ def test_harness_quick():
             assert b["network"] is False
 
 
+def test_experimentos_benchmarks():
+    pytest.importorskip("qiskit")
+    from quantum_efficiency.experiment_benchmarks import benchmarks_experimentos
+
+    itens = benchmarks_experimentos()
+    assert len(itens) == 25
+    assert len({x["experiment"] for x in itens}) == 18
+    assert {"E01", "E07", "E10"} <= {x["experiment"] for x in itens}
+
+
+def test_sweep_bell():
+    pytest.importorskip("qiskit")
+    from quantum_efficiency.benchmarks import bell
+    from quantum_efficiency.sweep import varrer_circuito
+
+    r = varrer_circuito(
+        bell(), "bell", "E05", "Bell", niveis=(0, 3), ruidos=(0.0,), shots=256
+    )
+    assert r["melhor"]["status"] == "pass"
+    assert r["melhor"]["tvd"] <= 1e-9
+    assert r["hardware"] is False
+    assert r["network"] is False
+    assert all(n["status"] == "pass" for n in r["niveis"])
+
+
+def test_runner_experiments_quick(tmp_path: Path):
+    pytest.importorskip("qiskit")
+    r = subprocess.run(
+        [
+            sys.executable,
+            str(RUNNER),
+            "--mode",
+            "experiments",
+            "--quick",
+            "--only",
+            "E01",
+            "E05",
+            "--out",
+            str(tmp_path),
+        ],
+        capture_output=True,
+        text=True,
+        timeout=300,
+        cwd=RAIZ,
+    )
+    assert r.returncode == 0, r.stderr[-2000:]
+    dados = json.loads(
+        (tmp_path / "resultados_experimentos.json").read_text(encoding="utf-8")
+    )
+    assert dados["resumo"]["circuitos"] == 2
+    assert dados["resumo"]["fail"] == 0
+    for c in dados["circuitos"]:
+        assert c["hardware"] is False
+        assert c["network"] is False
+    relatorio = (tmp_path / "RELATORIO_EXPERIMENTOS.md").read_text(encoding="utf-8")
+    assert "p = 0" in relatorio
+    assert "ruído de amostragem" in relatorio
+
+
 def test_registro_no_opencode():
     cfg = json.loads((RAIZ / "opencode.json").read_text(encoding="utf-8"))
     for agent_id in ("quantum-code-efficiency", "quantum-benchmark-audit"):

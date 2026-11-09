@@ -68,6 +68,45 @@ caiu de 18 para 12 portas de dois qubits e de 28 para 22 de profundidade; o
 circuito redundante caiu de 2 para 0 portas de dois qubits; o CNOT não
 adjacente caiu de 7 para 1 porta de dois qubits com roteamento.
 
+### 4.1 Experimentos do livro (E01–E18)
+
+O harness também importa os circuitos reais do livro: **25 circuitos em 18
+experimentos**. Resultado local com níveis 0–3, seed 42:
+
+| Métrica | Valor |
+|---|---:|
+| Circuitos | 25 |
+| Experimentos | 18 |
+| Pass | 25 |
+| Fail | 0 |
+| Redução média de 2q | 1,3% |
+| Redução média de profundidade | 12,9% |
+| TVD médio do melhor nível | 1,69 × 10⁻¹⁷ |
+
+O caso mais visível é o E12 (QFT): 9 → 6 portas de dois qubits e 20 → 14 de
+profundidade. A maioria dos circuitos pequenos não tem 2q para reduzir; o
+ganho aparece em profundidade e tamanho.
+
+Varredura de ruído depolarizante (2048 tiros):
+
+| p | TVD baseline | TVD melhor nível | Δ |
+|---:|---:|---:|---:|
+| 0 | 0,0068 | 0,0077 | +0,0009 |
+| 0,001 | 0,0061 | 0,0063 | +0,0002 |
+| 0,005 | 0,0094 | 0,0073 | −0,0021 |
+| 0,01 | 0,0142 | 0,0094 | −0,0048 |
+
+Em `p = 0`, a TVD é apenas ruído de amostragem (2048 tiros); não é erro de
+porta. A diferença positiva em p = 0 e p = 0,001 é compatível com esse ruído
+de amostragem. A varredura é descritiva: não prova fidelidade de backend nem
+vantagem quântica.
+
+Comando:
+
+```bash
+.venv-quantum/bin/python harnesses/quantum-code-efficiency/runner.py --mode experiments
+```
+
 ## 5. Técnicas que o agente pode propor
 
 - cancelamento de portas inversas;

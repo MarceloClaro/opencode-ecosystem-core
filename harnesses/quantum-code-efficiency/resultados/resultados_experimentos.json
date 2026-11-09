@@ -1,0 +1,5578 @@
+{
+  "schema_version": 1,
+  "seed": 42,
+  "niveis": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "ruidos": [
+    0.0,
+    0.001,
+    0.005,
+    0.01
+  ],
+  "shots_ruido": 2048,
+  "resumo": {
+    "circuitos": 25,
+    "experimentos": 18,
+    "pass": 25,
+    "fail": 0,
+    "reducao_media_2q": 0.013333333333333332,
+    "reducao_media_depth": 0.12866666666666668,
+    "tvd_medio_melhor": 1.693092439943955e-17
+  },
+  "circuitos": [
+    {
+      "name": "E01_1",
+      "experiment": "E01",
+      "description": "Base |0⟩",
+      "seed": 42,
+      "baseline": {
+        "num_qubits": 1,
+        "num_clbits": 1,
+        "size": 1,
+        "depth": 1,
+        "num_1q": 0,
+        "num_2q": 0,
+        "num_measure": 1,
+        "ops": {
+          "measure": 1
+        },
+        "transpile_seconds": 0.38247786099964287
+      },
+      "niveis": [
+        {
+          "level": 0,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 1,
+            "depth": 1,
+            "num_1q": 0,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "measure": 1
+            },
+            "transpile_seconds": 0.0020225089974701405
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 1,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 1,
+            "depth": 1,
+            "num_1q": 0,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "measure": 1
+            },
+            "transpile_seconds": 0.003917612993973307
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 2,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 1,
+            "depth": 1,
+            "num_1q": 0,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "measure": 1
+            },
+            "transpile_seconds": 0.009071615000721067
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 3,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 1,
+            "depth": 1,
+            "num_1q": 0,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "measure": 1
+            },
+            "transpile_seconds": 0.00570693300687708
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        }
+      ],
+      "melhor": {
+        "level": 0,
+        "metrics": {
+          "num_qubits": 1,
+          "num_clbits": 1,
+          "size": 1,
+          "depth": 1,
+          "num_1q": 0,
+          "num_2q": 0,
+          "num_measure": 1,
+          "ops": {
+            "measure": 1
+          },
+          "transpile_seconds": 0.0020225089974701405
+        },
+        "tvd": 0.0,
+        "reducao": {
+          "num_2q": 0.0,
+          "depth": 0.0,
+          "size": 0.0
+        },
+        "gates": {
+          "tvd": true,
+          "num_2q": true,
+          "depth": true
+        },
+        "status": "pass"
+      },
+      "ruido": [
+        {
+          "p": 0.0,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.0
+        },
+        {
+          "p": 0.0,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.0
+        },
+        {
+          "p": 0.001,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.0
+        },
+        {
+          "p": 0.001,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.0
+        },
+        {
+          "p": 0.005,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.0
+        },
+        {
+          "p": 0.005,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.0
+        },
+        {
+          "p": 0.01,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.0
+        },
+        {
+          "p": 0.01,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.0
+        }
+      ],
+      "hardware": false,
+      "network": false
+    },
+    {
+      "name": "E02_1",
+      "experiment": "E02",
+      "description": "Base |1⟩ e leitura",
+      "seed": 42,
+      "baseline": {
+        "num_qubits": 1,
+        "num_clbits": 1,
+        "size": 2,
+        "depth": 2,
+        "num_1q": 1,
+        "num_2q": 0,
+        "num_measure": 1,
+        "ops": {
+          "u": 1,
+          "measure": 1
+        },
+        "transpile_seconds": 0.0036844449932686985
+      },
+      "niveis": [
+        {
+          "level": 0,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 2,
+            "depth": 2,
+            "num_1q": 1,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "u": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.0032017060002544895
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 1,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 2,
+            "depth": 2,
+            "num_1q": 1,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "u": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.005273433998809196
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 2,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 2,
+            "depth": 2,
+            "num_1q": 1,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "u": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.009465729992371053
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 3,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 2,
+            "depth": 2,
+            "num_1q": 1,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "u": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.007328962004976347
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        }
+      ],
+      "melhor": {
+        "level": 0,
+        "metrics": {
+          "num_qubits": 1,
+          "num_clbits": 1,
+          "size": 2,
+          "depth": 2,
+          "num_1q": 1,
+          "num_2q": 0,
+          "num_measure": 1,
+          "ops": {
+            "u": 1,
+            "measure": 1
+          },
+          "transpile_seconds": 0.0032017060002544895
+        },
+        "tvd": 0.0,
+        "reducao": {
+          "num_2q": 0.0,
+          "depth": 0.0,
+          "size": 0.0
+        },
+        "gates": {
+          "tvd": true,
+          "num_2q": true,
+          "depth": true
+        },
+        "status": "pass"
+      },
+      "ruido": [
+        {
+          "p": 0.0,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 1.874699728327322e-33
+        },
+        {
+          "p": 0.0,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 1.874699728327322e-33
+        },
+        {
+          "p": 0.001,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.00048828125
+        },
+        {
+          "p": 0.001,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.00048828125
+        },
+        {
+          "p": 0.005,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.0029296875
+        },
+        {
+          "p": 0.005,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.0029296875
+        },
+        {
+          "p": 0.01,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.00439453125
+        },
+        {
+          "p": 0.01,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.00439453125
+        }
+      ],
+      "hardware": false,
+      "network": false
+    },
+    {
+      "name": "E03_1",
+      "experiment": "E03",
+      "description": "Superposição H|0⟩",
+      "seed": 42,
+      "baseline": {
+        "num_qubits": 1,
+        "num_clbits": 1,
+        "size": 2,
+        "depth": 2,
+        "num_1q": 1,
+        "num_2q": 0,
+        "num_measure": 1,
+        "ops": {
+          "u": 1,
+          "measure": 1
+        },
+        "transpile_seconds": 0.002284425005200319
+      },
+      "niveis": [
+        {
+          "level": 0,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 2,
+            "depth": 2,
+            "num_1q": 1,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "u": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.0016619409871054813
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 1,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 2,
+            "depth": 2,
+            "num_1q": 1,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "u": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.006724476013914682
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 2,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 2,
+            "depth": 2,
+            "num_1q": 1,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "u": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.006209918996319175
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 3,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 2,
+            "depth": 2,
+            "num_1q": 1,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "u": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.0055941239988897
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        }
+      ],
+      "melhor": {
+        "level": 0,
+        "metrics": {
+          "num_qubits": 1,
+          "num_clbits": 1,
+          "size": 2,
+          "depth": 2,
+          "num_1q": 1,
+          "num_2q": 0,
+          "num_measure": 1,
+          "ops": {
+            "u": 1,
+            "measure": 1
+          },
+          "transpile_seconds": 0.0016619409871054813
+        },
+        "tvd": 0.0,
+        "reducao": {
+          "num_2q": 0.0,
+          "depth": 0.0,
+          "size": 0.0
+        },
+        "gates": {
+          "tvd": true,
+          "num_2q": true,
+          "depth": true
+        },
+        "status": "pass"
+      },
+      "ruido": [
+        {
+          "p": 0.0,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.005859374999999889
+        },
+        {
+          "p": 0.0,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.005859374999999889
+        },
+        {
+          "p": 0.001,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.005859374999999889
+        },
+        {
+          "p": 0.001,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.005859374999999889
+        },
+        {
+          "p": 0.005,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.005859374999999889
+        },
+        {
+          "p": 0.005,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.005859374999999889
+        },
+        {
+          "p": 0.01,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.005859374999999889
+        },
+        {
+          "p": 0.01,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.005859374999999889
+        }
+      ],
+      "hardware": false,
+      "network": false
+    },
+    {
+      "name": "E04_1",
+      "experiment": "E04",
+      "description": "Interferência H-Z-H",
+      "seed": 42,
+      "baseline": {
+        "num_qubits": 1,
+        "num_clbits": 1,
+        "size": 4,
+        "depth": 4,
+        "num_1q": 3,
+        "num_2q": 0,
+        "num_measure": 1,
+        "ops": {
+          "u": 3,
+          "measure": 1
+        },
+        "transpile_seconds": 0.003970928999478929
+      },
+      "niveis": [
+        {
+          "level": 0,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 4,
+            "depth": 4,
+            "num_1q": 3,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "u": 3,
+              "measure": 1
+            },
+            "transpile_seconds": 0.002462285992805846
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 1,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 2,
+            "depth": 2,
+            "num_1q": 1,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "u": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.0030288220004877076
+          },
+          "tvd": 7.972211549486955e-33,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.5,
+            "size": 0.5
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 2,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 2,
+            "depth": 2,
+            "num_1q": 1,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "u": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.004929514994728379
+          },
+          "tvd": 7.972211549486955e-33,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.5,
+            "size": 0.5
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 3,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 2,
+            "depth": 2,
+            "num_1q": 1,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "u": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.004884144000243396
+          },
+          "tvd": 7.972211549486955e-33,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.5,
+            "size": 0.5
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        }
+      ],
+      "melhor": {
+        "level": 1,
+        "metrics": {
+          "num_qubits": 1,
+          "num_clbits": 1,
+          "size": 2,
+          "depth": 2,
+          "num_1q": 1,
+          "num_2q": 0,
+          "num_measure": 1,
+          "ops": {
+            "u": 1,
+            "measure": 1
+          },
+          "transpile_seconds": 0.0030288220004877076
+        },
+        "tvd": 7.972211549486955e-33,
+        "reducao": {
+          "num_2q": 0.0,
+          "depth": 0.5,
+          "size": 0.5
+        },
+        "gates": {
+          "tvd": true,
+          "num_2q": true,
+          "depth": true
+        },
+        "status": "pass"
+      },
+      "ruido": [
+        {
+          "p": 0.0,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 3.215070220146591e-32
+        },
+        {
+          "p": 0.0,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 3.215070220146591e-32
+        },
+        {
+          "p": 0.001,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.001953125
+        },
+        {
+          "p": 0.001,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.00048828125
+        },
+        {
+          "p": 0.005,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.00634765625
+        },
+        {
+          "p": 0.005,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.0029296875
+        },
+        {
+          "p": 0.01,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.01220703125
+        },
+        {
+          "p": 0.01,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.00439453125
+        }
+      ],
+      "hardware": false,
+      "network": false
+    },
+    {
+      "name": "E05_1",
+      "experiment": "E05",
+      "description": "Estado de Bell",
+      "seed": 42,
+      "baseline": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "size": 4,
+        "depth": 3,
+        "num_1q": 1,
+        "num_2q": 1,
+        "num_measure": 2,
+        "ops": {
+          "measure": 2,
+          "u": 1,
+          "cx": 1
+        },
+        "transpile_seconds": 0.003048804006539285
+      },
+      "niveis": [
+        {
+          "level": 0,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 2,
+            "size": 4,
+            "depth": 3,
+            "num_1q": 1,
+            "num_2q": 1,
+            "num_measure": 2,
+            "ops": {
+              "measure": 2,
+              "u": 1,
+              "cx": 1
+            },
+            "transpile_seconds": 0.0029913839971413836
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 1,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 2,
+            "size": 4,
+            "depth": 3,
+            "num_1q": 1,
+            "num_2q": 1,
+            "num_measure": 2,
+            "ops": {
+              "measure": 2,
+              "u": 1,
+              "cx": 1
+            },
+            "transpile_seconds": 0.0039017289964249358
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 2,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 2,
+            "size": 4,
+            "depth": 3,
+            "num_1q": 1,
+            "num_2q": 1,
+            "num_measure": 2,
+            "ops": {
+              "measure": 2,
+              "u": 1,
+              "cx": 1
+            },
+            "transpile_seconds": 0.0060735110018868
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 3,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 2,
+            "size": 4,
+            "depth": 3,
+            "num_1q": 1,
+            "num_2q": 1,
+            "num_measure": 2,
+            "ops": {
+              "measure": 2,
+              "u": 1,
+              "cx": 1
+            },
+            "transpile_seconds": 0.00681058999907691
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        }
+      ],
+      "melhor": {
+        "level": 0,
+        "metrics": {
+          "num_qubits": 2,
+          "num_clbits": 2,
+          "size": 4,
+          "depth": 3,
+          "num_1q": 1,
+          "num_2q": 1,
+          "num_measure": 2,
+          "ops": {
+            "measure": 2,
+            "u": 1,
+            "cx": 1
+          },
+          "transpile_seconds": 0.0029913839971413836
+        },
+        "tvd": 0.0,
+        "reducao": {
+          "num_2q": 0.0,
+          "depth": 0.0,
+          "size": 0.0
+        },
+        "gates": {
+          "tvd": true,
+          "num_2q": true,
+          "depth": true
+        },
+        "status": "pass"
+      },
+      "ruido": [
+        {
+          "p": 0.0,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.011230468750000111
+        },
+        {
+          "p": 0.0,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.011230468750000111
+        },
+        {
+          "p": 0.001,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.006347656249999889
+        },
+        {
+          "p": 0.001,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.006347656249999889
+        },
+        {
+          "p": 0.005,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.006835937499999889
+        },
+        {
+          "p": 0.005,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.006835937499999889
+        },
+        {
+          "p": 0.01,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.007812499999999889
+        },
+        {
+          "p": 0.01,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.007812499999999889
+        }
+      ],
+      "hardware": false,
+      "network": false
+    },
+    {
+      "name": "E06_1",
+      "experiment": "E06",
+      "description": "GHZ de 4 qubits",
+      "seed": 42,
+      "baseline": {
+        "num_qubits": 4,
+        "num_clbits": 4,
+        "size": 8,
+        "depth": 5,
+        "num_1q": 1,
+        "num_2q": 3,
+        "num_measure": 4,
+        "ops": {
+          "measure": 4,
+          "cx": 3,
+          "u": 1
+        },
+        "transpile_seconds": 0.0023622590088052675
+      },
+      "niveis": [
+        {
+          "level": 0,
+          "metrics": {
+            "num_qubits": 4,
+            "num_clbits": 4,
+            "size": 8,
+            "depth": 5,
+            "num_1q": 1,
+            "num_2q": 3,
+            "num_measure": 4,
+            "ops": {
+              "measure": 4,
+              "cx": 3,
+              "u": 1
+            },
+            "transpile_seconds": 0.0020141639979556203
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 1,
+          "metrics": {
+            "num_qubits": 4,
+            "num_clbits": 4,
+            "size": 8,
+            "depth": 5,
+            "num_1q": 1,
+            "num_2q": 3,
+            "num_measure": 4,
+            "ops": {
+              "measure": 4,
+              "cx": 3,
+              "u": 1
+            },
+            "transpile_seconds": 0.007286751002538949
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 2,
+          "metrics": {
+            "num_qubits": 4,
+            "num_clbits": 4,
+            "size": 8,
+            "depth": 5,
+            "num_1q": 1,
+            "num_2q": 3,
+            "num_measure": 4,
+            "ops": {
+              "measure": 4,
+              "cx": 3,
+              "u": 1
+            },
+            "transpile_seconds": 0.004964537001796998
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 3,
+          "metrics": {
+            "num_qubits": 4,
+            "num_clbits": 4,
+            "size": 8,
+            "depth": 5,
+            "num_1q": 1,
+            "num_2q": 3,
+            "num_measure": 4,
+            "ops": {
+              "measure": 4,
+              "cx": 3,
+              "u": 1
+            },
+            "transpile_seconds": 0.005428207005024888
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        }
+      ],
+      "melhor": {
+        "level": 0,
+        "metrics": {
+          "num_qubits": 4,
+          "num_clbits": 4,
+          "size": 8,
+          "depth": 5,
+          "num_1q": 1,
+          "num_2q": 3,
+          "num_measure": 4,
+          "ops": {
+            "measure": 4,
+            "cx": 3,
+            "u": 1
+          },
+          "transpile_seconds": 0.0020141639979556203
+        },
+        "tvd": 0.0,
+        "reducao": {
+          "num_2q": 0.0,
+          "depth": 0.0,
+          "size": 0.0
+        },
+        "gates": {
+          "tvd": true,
+          "num_2q": true,
+          "depth": true
+        },
+        "status": "pass"
+      },
+      "ruido": [
+        {
+          "p": 0.0,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.014648437500000111
+        },
+        {
+          "p": 0.0,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.014648437500000111
+        },
+        {
+          "p": 0.001,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.006835937499999889
+        },
+        {
+          "p": 0.001,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.006835937499999889
+        },
+        {
+          "p": 0.005,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.0087890625
+        },
+        {
+          "p": 0.005,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.0087890625
+        },
+        {
+          "p": 0.01,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.01708984375
+        },
+        {
+          "p": 0.01,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.01708984375
+        }
+      ],
+      "hardware": false,
+      "network": false
+    },
+    {
+      "name": "E07_1",
+      "experiment": "E07",
+      "description": "CHSH",
+      "seed": 42,
+      "baseline": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "size": 5,
+        "depth": 4,
+        "num_1q": 2,
+        "num_2q": 1,
+        "num_measure": 2,
+        "ops": {
+          "u": 2,
+          "measure": 2,
+          "cx": 1
+        },
+        "transpile_seconds": 0.0026727199874585494
+      },
+      "niveis": [
+        {
+          "level": 0,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 2,
+            "size": 5,
+            "depth": 4,
+            "num_1q": 2,
+            "num_2q": 1,
+            "num_measure": 2,
+            "ops": {
+              "u": 2,
+              "measure": 2,
+              "cx": 1
+            },
+            "transpile_seconds": 0.0025152879970846698
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 1,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 2,
+            "size": 5,
+            "depth": 4,
+            "num_1q": 2,
+            "num_2q": 1,
+            "num_measure": 2,
+            "ops": {
+              "u": 2,
+              "measure": 2,
+              "cx": 1
+            },
+            "transpile_seconds": 0.005928006008616649
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 2,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 2,
+            "size": 5,
+            "depth": 4,
+            "num_1q": 2,
+            "num_2q": 1,
+            "num_measure": 2,
+            "ops": {
+              "u": 2,
+              "measure": 2,
+              "cx": 1
+            },
+            "transpile_seconds": 0.005895512993447483
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 3,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 2,
+            "size": 5,
+            "depth": 4,
+            "num_1q": 2,
+            "num_2q": 1,
+            "num_measure": 2,
+            "ops": {
+              "u": 2,
+              "measure": 2,
+              "cx": 1
+            },
+            "transpile_seconds": 0.005601679004030302
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        }
+      ],
+      "melhor": {
+        "level": 0,
+        "metrics": {
+          "num_qubits": 2,
+          "num_clbits": 2,
+          "size": 5,
+          "depth": 4,
+          "num_1q": 2,
+          "num_2q": 1,
+          "num_measure": 2,
+          "ops": {
+            "u": 2,
+            "measure": 2,
+            "cx": 1
+          },
+          "transpile_seconds": 0.0025152879970846698
+        },
+        "tvd": 0.0,
+        "reducao": {
+          "num_2q": 0.0,
+          "depth": 0.0,
+          "size": 0.0
+        },
+        "gates": {
+          "tvd": true,
+          "num_2q": true,
+          "depth": true
+        },
+        "status": "pass"
+      },
+      "ruido": [
+        {
+          "p": 0.0,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.011737632796636852
+        },
+        {
+          "p": 0.0,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.011737632796636852
+        },
+        {
+          "p": 0.001,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.011737632796636852
+        },
+        {
+          "p": 0.001,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.011737632796636852
+        },
+        {
+          "p": 0.005,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.014667320296636852
+        },
+        {
+          "p": 0.005,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.014667320296636852
+        },
+        {
+          "p": 0.01,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.01662044529663685
+        },
+        {
+          "p": 0.01,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.01662044529663685
+        }
+      ],
+      "hardware": false,
+      "network": false
+    },
+    {
+      "name": "E07_2",
+      "experiment": "E07",
+      "description": "CHSH",
+      "seed": 42,
+      "baseline": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "size": 5,
+        "depth": 4,
+        "num_1q": 2,
+        "num_2q": 1,
+        "num_measure": 2,
+        "ops": {
+          "u": 2,
+          "measure": 2,
+          "cx": 1
+        },
+        "transpile_seconds": 0.005170171003555879
+      },
+      "niveis": [
+        {
+          "level": 0,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 2,
+            "size": 5,
+            "depth": 4,
+            "num_1q": 2,
+            "num_2q": 1,
+            "num_measure": 2,
+            "ops": {
+              "u": 2,
+              "measure": 2,
+              "cx": 1
+            },
+            "transpile_seconds": 0.006368956994265318
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 1,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 2,
+            "size": 5,
+            "depth": 4,
+            "num_1q": 2,
+            "num_2q": 1,
+            "num_measure": 2,
+            "ops": {
+              "u": 2,
+              "measure": 2,
+              "cx": 1
+            },
+            "transpile_seconds": 0.002670752990525216
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 2,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 2,
+            "size": 5,
+            "depth": 4,
+            "num_1q": 2,
+            "num_2q": 1,
+            "num_measure": 2,
+            "ops": {
+              "u": 2,
+              "measure": 2,
+              "cx": 1
+            },
+            "transpile_seconds": 0.005679818001226522
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 3,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 2,
+            "size": 5,
+            "depth": 4,
+            "num_1q": 2,
+            "num_2q": 1,
+            "num_measure": 2,
+            "ops": {
+              "u": 2,
+              "measure": 2,
+              "cx": 1
+            },
+            "transpile_seconds": 0.005451074001030065
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        }
+      ],
+      "melhor": {
+        "level": 0,
+        "metrics": {
+          "num_qubits": 2,
+          "num_clbits": 2,
+          "size": 5,
+          "depth": 4,
+          "num_1q": 2,
+          "num_2q": 1,
+          "num_measure": 2,
+          "ops": {
+            "u": 2,
+            "measure": 2,
+            "cx": 1
+          },
+          "transpile_seconds": 0.006368956994265318
+        },
+        "tvd": 0.0,
+        "reducao": {
+          "num_2q": 0.0,
+          "depth": 0.0,
+          "size": 0.0
+        },
+        "gates": {
+          "tvd": true,
+          "num_2q": true,
+          "depth": true
+        },
+        "status": "pass"
+      },
+      "ruido": [
+        {
+          "p": 0.0,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.011737632796636852
+        },
+        {
+          "p": 0.0,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.011737632796636852
+        },
+        {
+          "p": 0.001,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.011737632796636852
+        },
+        {
+          "p": 0.001,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.011737632796636852
+        },
+        {
+          "p": 0.005,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.014667320296636852
+        },
+        {
+          "p": 0.005,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.014667320296636852
+        },
+        {
+          "p": 0.01,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.01662044529663685
+        },
+        {
+          "p": 0.01,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.01662044529663685
+        }
+      ],
+      "hardware": false,
+      "network": false
+    },
+    {
+      "name": "E07_3",
+      "experiment": "E07",
+      "description": "CHSH",
+      "seed": 42,
+      "baseline": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "size": 6,
+        "depth": 4,
+        "num_1q": 3,
+        "num_2q": 1,
+        "num_measure": 2,
+        "ops": {
+          "u": 3,
+          "measure": 2,
+          "cx": 1
+        },
+        "transpile_seconds": 0.002818512002704665
+      },
+      "niveis": [
+        {
+          "level": 0,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 2,
+            "size": 6,
+            "depth": 4,
+            "num_1q": 3,
+            "num_2q": 1,
+            "num_measure": 2,
+            "ops": {
+              "u": 3,
+              "measure": 2,
+              "cx": 1
+            },
+            "transpile_seconds": 0.0022689910110784695
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 1,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 2,
+            "size": 6,
+            "depth": 4,
+            "num_1q": 3,
+            "num_2q": 1,
+            "num_measure": 2,
+            "ops": {
+              "u": 3,
+              "measure": 2,
+              "cx": 1
+            },
+            "transpile_seconds": 0.0027679439954226837
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 2,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 2,
+            "size": 6,
+            "depth": 4,
+            "num_1q": 3,
+            "num_2q": 1,
+            "num_measure": 2,
+            "ops": {
+              "u": 3,
+              "measure": 2,
+              "cx": 1
+            },
+            "transpile_seconds": 0.005775683006504551
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 3,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 2,
+            "size": 6,
+            "depth": 4,
+            "num_1q": 3,
+            "num_2q": 1,
+            "num_measure": 2,
+            "ops": {
+              "u": 3,
+              "measure": 2,
+              "cx": 1
+            },
+            "transpile_seconds": 0.004991280002286658
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        }
+      ],
+      "melhor": {
+        "level": 0,
+        "metrics": {
+          "num_qubits": 2,
+          "num_clbits": 2,
+          "size": 6,
+          "depth": 4,
+          "num_1q": 3,
+          "num_2q": 1,
+          "num_measure": 2,
+          "ops": {
+            "u": 3,
+            "measure": 2,
+            "cx": 1
+          },
+          "transpile_seconds": 0.0022689910110784695
+        },
+        "tvd": 0.0,
+        "reducao": {
+          "num_2q": 0.0,
+          "depth": 0.0,
+          "size": 0.0
+        },
+        "gates": {
+          "tvd": true,
+          "num_2q": true,
+          "depth": true
+        },
+        "status": "pass"
+      },
+      "ruido": [
+        {
+          "p": 0.0,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.011737632796636893
+        },
+        {
+          "p": 0.0,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.011737632796636893
+        },
+        {
+          "p": 0.001,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.012714195296636893
+        },
+        {
+          "p": 0.001,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.012714195296636893
+        },
+        {
+          "p": 0.005,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.016620445296636893
+        },
+        {
+          "p": 0.005,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.016620445296636893
+        },
+        {
+          "p": 0.01,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.024940109343273856
+        },
+        {
+          "p": 0.01,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.024940109343273856
+        }
+      ],
+      "hardware": false,
+      "network": false
+    },
+    {
+      "name": "E07_4",
+      "experiment": "E07",
+      "description": "CHSH",
+      "seed": 42,
+      "baseline": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "size": 6,
+        "depth": 4,
+        "num_1q": 3,
+        "num_2q": 1,
+        "num_measure": 2,
+        "ops": {
+          "u": 3,
+          "measure": 2,
+          "cx": 1
+        },
+        "transpile_seconds": 0.002132112000253983
+      },
+      "niveis": [
+        {
+          "level": 0,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 2,
+            "size": 6,
+            "depth": 4,
+            "num_1q": 3,
+            "num_2q": 1,
+            "num_measure": 2,
+            "ops": {
+              "u": 3,
+              "measure": 2,
+              "cx": 1
+            },
+            "transpile_seconds": 0.006353518998366781
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 1,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 2,
+            "size": 6,
+            "depth": 4,
+            "num_1q": 3,
+            "num_2q": 1,
+            "num_measure": 2,
+            "ops": {
+              "u": 3,
+              "measure": 2,
+              "cx": 1
+            },
+            "transpile_seconds": 0.003317862006952055
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 2,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 2,
+            "size": 6,
+            "depth": 4,
+            "num_1q": 3,
+            "num_2q": 1,
+            "num_measure": 2,
+            "ops": {
+              "u": 3,
+              "measure": 2,
+              "cx": 1
+            },
+            "transpile_seconds": 0.0056065390090225264
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 3,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 2,
+            "size": 6,
+            "depth": 4,
+            "num_1q": 3,
+            "num_2q": 1,
+            "num_measure": 2,
+            "ops": {
+              "u": 3,
+              "measure": 2,
+              "cx": 1
+            },
+            "transpile_seconds": 0.0051982669974677265
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        }
+      ],
+      "melhor": {
+        "level": 0,
+        "metrics": {
+          "num_qubits": 2,
+          "num_clbits": 2,
+          "size": 6,
+          "depth": 4,
+          "num_1q": 3,
+          "num_2q": 1,
+          "num_measure": 2,
+          "ops": {
+            "u": 3,
+            "measure": 2,
+            "cx": 1
+          },
+          "transpile_seconds": 0.006353518998366781
+        },
+        "tvd": 0.0,
+        "reducao": {
+          "num_2q": 0.0,
+          "depth": 0.0,
+          "size": 0.0
+        },
+        "gates": {
+          "tvd": true,
+          "num_2q": true,
+          "depth": true
+        },
+        "status": "pass"
+      },
+      "ruido": [
+        {
+          "p": 0.0,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.014610671906726304
+        },
+        {
+          "p": 0.0,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.014610671906726304
+        },
+        {
+          "p": 0.001,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.011699867203363058
+        },
+        {
+          "p": 0.001,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.011699867203363058
+        },
+        {
+          "p": 0.005,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.008770179703363058
+        },
+        {
+          "p": 0.005,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.008770179703363058
+        },
+        {
+          "p": 0.01,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.008319664046636775
+        },
+        {
+          "p": 0.01,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.008319664046636775
+        }
+      ],
+      "hardware": false,
+      "network": false
+    },
+    {
+      "name": "E08_1",
+      "experiment": "E08",
+      "description": "Gerador quântico de números",
+      "seed": 42,
+      "baseline": {
+        "num_qubits": 1,
+        "num_clbits": 1,
+        "size": 2,
+        "depth": 2,
+        "num_1q": 1,
+        "num_2q": 0,
+        "num_measure": 1,
+        "ops": {
+          "u": 1,
+          "measure": 1
+        },
+        "transpile_seconds": 0.008796458001597784
+      },
+      "niveis": [
+        {
+          "level": 0,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 2,
+            "depth": 2,
+            "num_1q": 1,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "u": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.00851315600448288
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 1,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 2,
+            "depth": 2,
+            "num_1q": 1,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "u": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.00547784699301701
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 2,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 2,
+            "depth": 2,
+            "num_1q": 1,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "u": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.00921505999576766
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 3,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 2,
+            "depth": 2,
+            "num_1q": 1,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "u": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.007080060007865541
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        }
+      ],
+      "melhor": {
+        "level": 0,
+        "metrics": {
+          "num_qubits": 1,
+          "num_clbits": 1,
+          "size": 2,
+          "depth": 2,
+          "num_1q": 1,
+          "num_2q": 0,
+          "num_measure": 1,
+          "ops": {
+            "u": 1,
+            "measure": 1
+          },
+          "transpile_seconds": 0.00851315600448288
+        },
+        "tvd": 0.0,
+        "reducao": {
+          "num_2q": 0.0,
+          "depth": 0.0,
+          "size": 0.0
+        },
+        "gates": {
+          "tvd": true,
+          "num_2q": true,
+          "depth": true
+        },
+        "status": "pass"
+      },
+      "ruido": [
+        {
+          "p": 0.0,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.005859374999999889
+        },
+        {
+          "p": 0.0,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.005859374999999889
+        },
+        {
+          "p": 0.001,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.005859374999999889
+        },
+        {
+          "p": 0.001,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.005859374999999889
+        },
+        {
+          "p": 0.005,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.005859374999999889
+        },
+        {
+          "p": 0.005,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.005859374999999889
+        },
+        {
+          "p": 0.01,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.005859374999999889
+        },
+        {
+          "p": 0.01,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.005859374999999889
+        }
+      ],
+      "hardware": false,
+      "network": false
+    },
+    {
+      "name": "E09_1",
+      "experiment": "E09",
+      "description": "Codificação de amplitude",
+      "seed": 42,
+      "baseline": {
+        "num_qubits": 1,
+        "num_clbits": 1,
+        "size": 2,
+        "depth": 2,
+        "num_1q": 1,
+        "num_2q": 0,
+        "num_measure": 1,
+        "ops": {
+          "u": 1,
+          "measure": 1
+        },
+        "transpile_seconds": 0.0029742210026597604
+      },
+      "niveis": [
+        {
+          "level": 0,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 2,
+            "depth": 2,
+            "num_1q": 1,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "u": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.002295564001542516
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 1,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 2,
+            "depth": 2,
+            "num_1q": 1,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "u": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.0047085609985515475
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 2,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 2,
+            "depth": 2,
+            "num_1q": 1,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "u": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.006151298992335796
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 3,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 2,
+            "depth": 2,
+            "num_1q": 1,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "u": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.005485449990374036
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        }
+      ],
+      "melhor": {
+        "level": 0,
+        "metrics": {
+          "num_qubits": 1,
+          "num_clbits": 1,
+          "size": 2,
+          "depth": 2,
+          "num_1q": 1,
+          "num_2q": 0,
+          "num_measure": 1,
+          "ops": {
+            "u": 1,
+            "measure": 1
+          },
+          "transpile_seconds": 0.002295564001542516
+        },
+        "tvd": 0.0,
+        "reducao": {
+          "num_2q": 0.0,
+          "depth": 0.0,
+          "size": 0.0
+        },
+        "gates": {
+          "tvd": true,
+          "num_2q": true,
+          "depth": true
+        },
+        "status": "pass"
+      },
+      "ruido": [
+        {
+          "p": 0.0,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.001953125000000111
+        },
+        {
+          "p": 0.0,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.001953125000000111
+        },
+        {
+          "p": 0.001,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.001953125000000111
+        },
+        {
+          "p": 0.001,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.001953125000000111
+        },
+        {
+          "p": 0.005,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.000976562500000111
+        },
+        {
+          "p": 0.005,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.000976562500000111
+        },
+        {
+          "p": 0.01,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.000976562499999889
+        },
+        {
+          "p": 0.01,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.000976562499999889
+        }
+      ],
+      "hardware": false,
+      "network": false
+    },
+    {
+      "name": "E10_1",
+      "experiment": "E10",
+      "description": "Classificador XOR (VQC)",
+      "seed": 42,
+      "baseline": {
+        "num_qubits": 2,
+        "num_clbits": 1,
+        "size": 8,
+        "depth": 5,
+        "num_1q": 6,
+        "num_2q": 1,
+        "num_measure": 1,
+        "ops": {
+          "u": 6,
+          "cx": 1,
+          "measure": 1
+        },
+        "transpile_seconds": 0.003679686997202225
+      },
+      "niveis": [
+        {
+          "level": 0,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 1,
+            "size": 8,
+            "depth": 5,
+            "num_1q": 6,
+            "num_2q": 1,
+            "num_measure": 1,
+            "ops": {
+              "u": 6,
+              "cx": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.0031674729980295524
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 1,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 1,
+            "size": 6,
+            "depth": 4,
+            "num_1q": 4,
+            "num_2q": 1,
+            "num_measure": 1,
+            "ops": {
+              "u": 4,
+              "cx": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.004791172992554493
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.2,
+            "size": 0.25
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 2,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 1,
+            "size": 6,
+            "depth": 4,
+            "num_1q": 4,
+            "num_2q": 1,
+            "num_measure": 1,
+            "ops": {
+              "u": 4,
+              "cx": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.007244354987051338
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.2,
+            "size": 0.25
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 3,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 1,
+            "size": 6,
+            "depth": 4,
+            "num_1q": 4,
+            "num_2q": 1,
+            "num_measure": 1,
+            "ops": {
+              "u": 4,
+              "cx": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.0073154309939127415
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.2,
+            "size": 0.25
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        }
+      ],
+      "melhor": {
+        "level": 1,
+        "metrics": {
+          "num_qubits": 2,
+          "num_clbits": 1,
+          "size": 6,
+          "depth": 4,
+          "num_1q": 4,
+          "num_2q": 1,
+          "num_measure": 1,
+          "ops": {
+            "u": 4,
+            "cx": 1,
+            "measure": 1
+          },
+          "transpile_seconds": 0.004791172992554493
+        },
+        "tvd": 0.0,
+        "reducao": {
+          "num_2q": 0.0,
+          "depth": 0.2,
+          "size": 0.25
+        },
+        "gates": {
+          "tvd": true,
+          "num_2q": true,
+          "depth": true
+        },
+        "status": "pass"
+      },
+      "ruido": [
+        {
+          "p": 0.0,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 3.3733163076648917e-12
+        },
+        {
+          "p": 0.0,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 3.3733163076648917e-12
+        },
+        {
+          "p": 0.001,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.0029296874966266836
+        },
+        {
+          "p": 0.001,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.0019531249966266836
+        },
+        {
+          "p": 0.005,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.018066406246626684
+        },
+        {
+          "p": 0.005,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.010742187496626684
+        },
+        {
+          "p": 0.01,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.028808593746626684
+        },
+        {
+          "p": 0.01,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.022460937496626684
+        }
+      ],
+      "hardware": false,
+      "network": false
+    },
+    {
+      "name": "E10_2",
+      "experiment": "E10",
+      "description": "Classificador XOR (VQC)",
+      "seed": 42,
+      "baseline": {
+        "num_qubits": 2,
+        "num_clbits": 1,
+        "size": 8,
+        "depth": 5,
+        "num_1q": 6,
+        "num_2q": 1,
+        "num_measure": 1,
+        "ops": {
+          "u": 6,
+          "cx": 1,
+          "measure": 1
+        },
+        "transpile_seconds": 0.003812428010860458
+      },
+      "niveis": [
+        {
+          "level": 0,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 1,
+            "size": 8,
+            "depth": 5,
+            "num_1q": 6,
+            "num_2q": 1,
+            "num_measure": 1,
+            "ops": {
+              "u": 6,
+              "cx": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.007803994987625629
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 1,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 1,
+            "size": 6,
+            "depth": 4,
+            "num_1q": 4,
+            "num_2q": 1,
+            "num_measure": 1,
+            "ops": {
+              "u": 4,
+              "cx": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.006390797003405169
+          },
+          "tvd": 1.1102232357985508e-16,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.2,
+            "size": 0.25
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 2,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 1,
+            "size": 6,
+            "depth": 4,
+            "num_1q": 4,
+            "num_2q": 1,
+            "num_measure": 1,
+            "ops": {
+              "u": 4,
+              "cx": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.008286336000310257
+          },
+          "tvd": 1.1102232357985508e-16,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.2,
+            "size": 0.25
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 3,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 1,
+            "size": 6,
+            "depth": 4,
+            "num_1q": 4,
+            "num_2q": 1,
+            "num_measure": 1,
+            "ops": {
+              "u": 4,
+              "cx": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.0075898049981333315
+          },
+          "tvd": 1.1102232357985508e-16,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.2,
+            "size": 0.25
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        }
+      ],
+      "melhor": {
+        "level": 1,
+        "metrics": {
+          "num_qubits": 2,
+          "num_clbits": 1,
+          "size": 6,
+          "depth": 4,
+          "num_1q": 4,
+          "num_2q": 1,
+          "num_measure": 1,
+          "ops": {
+            "u": 4,
+            "cx": 1,
+            "measure": 1
+          },
+          "transpile_seconds": 0.006390797003405169
+        },
+        "tvd": 1.1102232357985508e-16,
+        "reducao": {
+          "num_2q": 0.0,
+          "depth": 0.2,
+          "size": 0.25
+        },
+        "gates": {
+          "tvd": true,
+          "num_2q": true,
+          "depth": true
+        },
+        "status": "pass"
+      },
+      "ruido": [
+        {
+          "p": 0.0,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 1.6865693360002694e-11
+        },
+        {
+          "p": 0.0,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 1.6865693360002694e-11
+        },
+        {
+          "p": 0.001,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.0029296874831343067
+        },
+        {
+          "p": 0.001,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.0024414062331343067
+        },
+        {
+          "p": 0.005,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.010253906233134307
+        },
+        {
+          "p": 0.005,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.007324218733134307
+        },
+        {
+          "p": 0.01,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.021972656233134307
+        },
+        {
+          "p": 0.01,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.013183593733134307
+        }
+      ],
+      "hardware": false,
+      "network": false
+    },
+    {
+      "name": "E10_3",
+      "experiment": "E10",
+      "description": "Classificador XOR (VQC)",
+      "seed": 42,
+      "baseline": {
+        "num_qubits": 2,
+        "num_clbits": 1,
+        "size": 8,
+        "depth": 5,
+        "num_1q": 6,
+        "num_2q": 1,
+        "num_measure": 1,
+        "ops": {
+          "u": 6,
+          "cx": 1,
+          "measure": 1
+        },
+        "transpile_seconds": 0.004093057999853045
+      },
+      "niveis": [
+        {
+          "level": 0,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 1,
+            "size": 8,
+            "depth": 5,
+            "num_1q": 6,
+            "num_2q": 1,
+            "num_measure": 1,
+            "ops": {
+              "u": 6,
+              "cx": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.003565922990674153
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 1,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 1,
+            "size": 6,
+            "depth": 4,
+            "num_1q": 4,
+            "num_2q": 1,
+            "num_measure": 1,
+            "ops": {
+              "u": 4,
+              "cx": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.00502368199522607
+          },
+          "tvd": 5.551115123166172e-17,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.2,
+            "size": 0.25
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 2,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 1,
+            "size": 6,
+            "depth": 4,
+            "num_1q": 4,
+            "num_2q": 1,
+            "num_measure": 1,
+            "ops": {
+              "u": 4,
+              "cx": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.007015988987404853
+          },
+          "tvd": 5.551115123166172e-17,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.2,
+            "size": 0.25
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 3,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 1,
+            "size": 6,
+            "depth": 4,
+            "num_1q": 4,
+            "num_2q": 1,
+            "num_measure": 1,
+            "ops": {
+              "u": 4,
+              "cx": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.006608185998629779
+          },
+          "tvd": 5.551115123166172e-17,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.2,
+            "size": 0.25
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        }
+      ],
+      "melhor": {
+        "level": 1,
+        "metrics": {
+          "num_qubits": 2,
+          "num_clbits": 1,
+          "size": 6,
+          "depth": 4,
+          "num_1q": 4,
+          "num_2q": 1,
+          "num_measure": 1,
+          "ops": {
+            "u": 4,
+            "cx": 1,
+            "measure": 1
+          },
+          "transpile_seconds": 0.00502368199522607
+        },
+        "tvd": 5.551115123166172e-17,
+        "reducao": {
+          "num_2q": 0.0,
+          "depth": 0.2,
+          "size": 0.25
+        },
+        "gates": {
+          "tvd": true,
+          "num_2q": true,
+          "depth": true
+        },
+        "status": "pass"
+      },
+      "ruido": [
+        {
+          "p": 0.0,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 3.3732052853442236e-12
+        },
+        {
+          "p": 0.0,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 3.3732052853442236e-12
+        },
+        {
+          "p": 0.001,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.0029296874966267946
+        },
+        {
+          "p": 0.001,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.0024414062466267946
+        },
+        {
+          "p": 0.005,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.010253906246626796
+        },
+        {
+          "p": 0.005,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.007324218746626795
+        },
+        {
+          "p": 0.01,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.021972656246626796
+        },
+        {
+          "p": 0.01,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.013183593746626796
+        }
+      ],
+      "hardware": false,
+      "network": false
+    },
+    {
+      "name": "E10_4",
+      "experiment": "E10",
+      "description": "Classificador XOR (VQC)",
+      "seed": 42,
+      "baseline": {
+        "num_qubits": 2,
+        "num_clbits": 1,
+        "size": 8,
+        "depth": 5,
+        "num_1q": 6,
+        "num_2q": 1,
+        "num_measure": 1,
+        "ops": {
+          "u": 6,
+          "cx": 1,
+          "measure": 1
+        },
+        "transpile_seconds": 0.0027459990087663755
+      },
+      "niveis": [
+        {
+          "level": 0,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 1,
+            "size": 8,
+            "depth": 5,
+            "num_1q": 6,
+            "num_2q": 1,
+            "num_measure": 1,
+            "ops": {
+              "u": 6,
+              "cx": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.0033978689898503944
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 1,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 1,
+            "size": 6,
+            "depth": 4,
+            "num_1q": 4,
+            "num_2q": 1,
+            "num_measure": 1,
+            "ops": {
+              "u": 4,
+              "cx": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.005485148009029217
+          },
+          "tvd": 1.1102286319242015e-16,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.2,
+            "size": 0.25
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 2,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 1,
+            "size": 6,
+            "depth": 4,
+            "num_1q": 4,
+            "num_2q": 1,
+            "num_measure": 1,
+            "ops": {
+              "u": 4,
+              "cx": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.0063428430003114045
+          },
+          "tvd": 1.1102286319242015e-16,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.2,
+            "size": 0.25
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 3,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 1,
+            "size": 6,
+            "depth": 4,
+            "num_1q": 4,
+            "num_2q": 1,
+            "num_measure": 1,
+            "ops": {
+              "u": 4,
+              "cx": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.007726216994342394
+          },
+          "tvd": 1.1102286319242015e-16,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.2,
+            "size": 0.25
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        }
+      ],
+      "melhor": {
+        "level": 1,
+        "metrics": {
+          "num_qubits": 2,
+          "num_clbits": 1,
+          "size": 6,
+          "depth": 4,
+          "num_1q": 4,
+          "num_2q": 1,
+          "num_measure": 1,
+          "ops": {
+            "u": 4,
+            "cx": 1,
+            "measure": 1
+          },
+          "transpile_seconds": 0.005485148009029217
+        },
+        "tvd": 1.1102286319242015e-16,
+        "reducao": {
+          "num_2q": 0.0,
+          "depth": 0.2,
+          "size": 0.25
+        },
+        "gates": {
+          "tvd": true,
+          "num_2q": true,
+          "depth": true
+        },
+        "status": "pass"
+      },
+      "ruido": [
+        {
+          "p": 0.0,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 1.686569336011629e-11
+        },
+        {
+          "p": 0.0,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 1.686569336011629e-11
+        },
+        {
+          "p": 0.001,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.0029296874831343067
+        },
+        {
+          "p": 0.001,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.0019531249831343067
+        },
+        {
+          "p": 0.005,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.018066406233134307
+        },
+        {
+          "p": 0.005,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.010742187483134307
+        },
+        {
+          "p": 0.01,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.028808593733134307
+        },
+        {
+          "p": 0.01,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.022460937483134307
+        }
+      ],
+      "hardware": false,
+      "network": false
+    },
+    {
+      "name": "E11_1",
+      "experiment": "E11",
+      "description": "Interferência de dois qubits",
+      "seed": 42,
+      "baseline": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "size": 8,
+        "depth": 5,
+        "num_1q": 5,
+        "num_2q": 1,
+        "num_measure": 2,
+        "ops": {
+          "u": 5,
+          "measure": 2,
+          "cx": 1
+        },
+        "transpile_seconds": 0.0032551829935982823
+      },
+      "niveis": [
+        {
+          "level": 0,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 2,
+            "size": 8,
+            "depth": 5,
+            "num_1q": 5,
+            "num_2q": 1,
+            "num_measure": 2,
+            "ops": {
+              "u": 5,
+              "measure": 2,
+              "cx": 1
+            },
+            "transpile_seconds": 0.004198819995508529
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 1,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 2,
+            "size": 7,
+            "depth": 4,
+            "num_1q": 4,
+            "num_2q": 1,
+            "num_measure": 2,
+            "ops": {
+              "u": 4,
+              "measure": 2,
+              "cx": 1
+            },
+            "transpile_seconds": 0.0049765839939936996
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.2,
+            "size": 0.125
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 2,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 2,
+            "size": 6,
+            "depth": 4,
+            "num_1q": 3,
+            "num_2q": 1,
+            "num_measure": 2,
+            "ops": {
+              "u": 3,
+              "measure": 2,
+              "cx": 1
+            },
+            "transpile_seconds": 0.007035375005216338
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.2,
+            "size": 0.25
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 3,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 2,
+            "size": 6,
+            "depth": 4,
+            "num_1q": 3,
+            "num_2q": 1,
+            "num_measure": 2,
+            "ops": {
+              "u": 3,
+              "measure": 2,
+              "cx": 1
+            },
+            "transpile_seconds": 0.008289536999654956
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.2,
+            "size": 0.25
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        }
+      ],
+      "melhor": {
+        "level": 1,
+        "metrics": {
+          "num_qubits": 2,
+          "num_clbits": 2,
+          "size": 7,
+          "depth": 4,
+          "num_1q": 4,
+          "num_2q": 1,
+          "num_measure": 2,
+          "ops": {
+            "u": 4,
+            "measure": 2,
+            "cx": 1
+          },
+          "transpile_seconds": 0.0049765839939936996
+        },
+        "tvd": 0.0,
+        "reducao": {
+          "num_2q": 0.0,
+          "depth": 0.2,
+          "size": 0.125
+        },
+        "gates": {
+          "tvd": true,
+          "num_2q": true,
+          "depth": true
+        },
+        "status": "pass"
+      },
+      "ruido": [
+        {
+          "p": 0.0,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.01123046875
+        },
+        {
+          "p": 0.0,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.01123046875
+        },
+        {
+          "p": 0.001,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.0068359375
+        },
+        {
+          "p": 0.001,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.0068359375
+        },
+        {
+          "p": 0.005,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.0087890625
+        },
+        {
+          "p": 0.005,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.0087890625
+        },
+        {
+          "p": 0.01,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.01708984374999989
+        },
+        {
+          "p": 0.01,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.01708984374999989
+        }
+      ],
+      "hardware": false,
+      "network": false
+    },
+    {
+      "name": "E12_1",
+      "experiment": "E12",
+      "description": "QFT de 3 qubits",
+      "seed": 42,
+      "baseline": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "size": 25,
+        "depth": 20,
+        "num_1q": 13,
+        "num_2q": 9,
+        "num_measure": 3,
+        "ops": {
+          "u": 13,
+          "cx": 9,
+          "measure": 3
+        },
+        "transpile_seconds": 0.009157889013295062
+      },
+      "niveis": [
+        {
+          "level": 0,
+          "metrics": {
+            "num_qubits": 3,
+            "num_clbits": 3,
+            "size": 25,
+            "depth": 20,
+            "num_1q": 13,
+            "num_2q": 9,
+            "num_measure": 3,
+            "ops": {
+              "u": 13,
+              "cx": 9,
+              "measure": 3
+            },
+            "transpile_seconds": 0.00340115099970717
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 1,
+          "metrics": {
+            "num_qubits": 3,
+            "num_clbits": 3,
+            "size": 20,
+            "depth": 17,
+            "num_1q": 8,
+            "num_2q": 9,
+            "num_measure": 3,
+            "ops": {
+              "cx": 9,
+              "u": 8,
+              "measure": 3
+            },
+            "transpile_seconds": 0.005094281994388439
+          },
+          "tvd": 1.1796119636642288e-16,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.15,
+            "size": 0.2
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 2,
+          "metrics": {
+            "num_qubits": 3,
+            "num_clbits": 3,
+            "size": 17,
+            "depth": 14,
+            "num_1q": 8,
+            "num_2q": 6,
+            "num_measure": 3,
+            "ops": {
+              "u": 8,
+              "cx": 6,
+              "measure": 3
+            },
+            "transpile_seconds": 0.00857611300307326
+          },
+          "tvd": 1.1796119636642288e-16,
+          "reducao": {
+            "num_2q": 0.3333333333333333,
+            "depth": 0.3,
+            "size": 0.32
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 3,
+          "metrics": {
+            "num_qubits": 3,
+            "num_clbits": 3,
+            "size": 17,
+            "depth": 14,
+            "num_1q": 8,
+            "num_2q": 6,
+            "num_measure": 3,
+            "ops": {
+              "u": 8,
+              "cx": 6,
+              "measure": 3
+            },
+            "transpile_seconds": 0.008123551000608131
+          },
+          "tvd": 1.1796119636642288e-16,
+          "reducao": {
+            "num_2q": 0.3333333333333333,
+            "depth": 0.3,
+            "size": 0.32
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        }
+      ],
+      "melhor": {
+        "level": 2,
+        "metrics": {
+          "num_qubits": 3,
+          "num_clbits": 3,
+          "size": 17,
+          "depth": 14,
+          "num_1q": 8,
+          "num_2q": 6,
+          "num_measure": 3,
+          "ops": {
+            "u": 8,
+            "cx": 6,
+            "measure": 3
+          },
+          "transpile_seconds": 0.00857611300307326
+        },
+        "tvd": 1.1796119636642288e-16,
+        "reducao": {
+          "num_2q": 0.3333333333333333,
+          "depth": 0.3,
+          "size": 0.32
+        },
+        "gates": {
+          "tvd": true,
+          "num_2q": true,
+          "depth": true
+        },
+        "status": "pass"
+      },
+      "ruido": [
+        {
+          "p": 0.0,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.021484374999999917
+        },
+        {
+          "p": 0.0,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.021484375
+        },
+        {
+          "p": 0.001,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.021484374999999917
+        },
+        {
+          "p": 0.001,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.021484375
+        },
+        {
+          "p": 0.005,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.021484374999999917
+        },
+        {
+          "p": 0.005,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.021484375
+        },
+        {
+          "p": 0.01,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.021484374999999917
+        },
+        {
+          "p": 0.01,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.021484375
+        }
+      ],
+      "hardware": false,
+      "network": false
+    },
+    {
+      "name": "E13_1",
+      "experiment": "E13",
+      "description": "Produto tensorial |01⟩",
+      "seed": 42,
+      "baseline": {
+        "num_qubits": 2,
+        "num_clbits": 2,
+        "size": 3,
+        "depth": 2,
+        "num_1q": 1,
+        "num_2q": 0,
+        "num_measure": 2,
+        "ops": {
+          "measure": 2,
+          "u": 1
+        },
+        "transpile_seconds": 0.002606013003969565
+      },
+      "niveis": [
+        {
+          "level": 0,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 2,
+            "size": 3,
+            "depth": 2,
+            "num_1q": 1,
+            "num_2q": 0,
+            "num_measure": 2,
+            "ops": {
+              "measure": 2,
+              "u": 1
+            },
+            "transpile_seconds": 0.0024781799875199795
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 1,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 2,
+            "size": 3,
+            "depth": 2,
+            "num_1q": 1,
+            "num_2q": 0,
+            "num_measure": 2,
+            "ops": {
+              "measure": 2,
+              "u": 1
+            },
+            "transpile_seconds": 0.007047752005746588
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 2,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 2,
+            "size": 3,
+            "depth": 2,
+            "num_1q": 1,
+            "num_2q": 0,
+            "num_measure": 2,
+            "ops": {
+              "measure": 2,
+              "u": 1
+            },
+            "transpile_seconds": 0.006238419999135658
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 3,
+          "metrics": {
+            "num_qubits": 2,
+            "num_clbits": 2,
+            "size": 3,
+            "depth": 2,
+            "num_1q": 1,
+            "num_2q": 0,
+            "num_measure": 2,
+            "ops": {
+              "measure": 2,
+              "u": 1
+            },
+            "transpile_seconds": 0.0059245599986752495
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        }
+      ],
+      "melhor": {
+        "level": 0,
+        "metrics": {
+          "num_qubits": 2,
+          "num_clbits": 2,
+          "size": 3,
+          "depth": 2,
+          "num_1q": 1,
+          "num_2q": 0,
+          "num_measure": 2,
+          "ops": {
+            "measure": 2,
+            "u": 1
+          },
+          "transpile_seconds": 0.0024781799875199795
+        },
+        "tvd": 0.0,
+        "reducao": {
+          "num_2q": 0.0,
+          "depth": 0.0,
+          "size": 0.0
+        },
+        "gates": {
+          "tvd": true,
+          "num_2q": true,
+          "depth": true
+        },
+        "status": "pass"
+      },
+      "ruido": [
+        {
+          "p": 0.0,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 1.874699728327322e-33
+        },
+        {
+          "p": 0.0,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 1.874699728327322e-33
+        },
+        {
+          "p": 0.001,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.00048828125
+        },
+        {
+          "p": 0.001,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.00048828125
+        },
+        {
+          "p": 0.005,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.0029296875
+        },
+        {
+          "p": 0.005,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.0029296875
+        },
+        {
+          "p": 0.01,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.00439453125
+        },
+        {
+          "p": 0.01,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.00439453125
+        }
+      ],
+      "hardware": false,
+      "network": false
+    },
+    {
+      "name": "E14_1",
+      "experiment": "E14",
+      "description": "Ruído de fase",
+      "seed": 42,
+      "baseline": {
+        "num_qubits": 1,
+        "num_clbits": 1,
+        "size": 4,
+        "depth": 4,
+        "num_1q": 3,
+        "num_2q": 0,
+        "num_measure": 1,
+        "ops": {
+          "u": 3,
+          "measure": 1
+        },
+        "transpile_seconds": 0.003505815999233164
+      },
+      "niveis": [
+        {
+          "level": 0,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 4,
+            "depth": 4,
+            "num_1q": 3,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "u": 3,
+              "measure": 1
+            },
+            "transpile_seconds": 0.0026680489972932264
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 1,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 2,
+            "depth": 2,
+            "num_1q": 1,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "u": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.004818424989935011
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.5,
+            "size": 0.5
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 2,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 2,
+            "depth": 2,
+            "num_1q": 1,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "u": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.0062351070082513615
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.5,
+            "size": 0.5
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 3,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 2,
+            "depth": 2,
+            "num_1q": 1,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "u": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.006035607002559118
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.5,
+            "size": 0.5
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        }
+      ],
+      "melhor": {
+        "level": 1,
+        "metrics": {
+          "num_qubits": 1,
+          "num_clbits": 1,
+          "size": 2,
+          "depth": 2,
+          "num_1q": 1,
+          "num_2q": 0,
+          "num_measure": 1,
+          "ops": {
+            "u": 1,
+            "measure": 1
+          },
+          "transpile_seconds": 0.004818424989935011
+        },
+        "tvd": 0.0,
+        "reducao": {
+          "num_2q": 0.0,
+          "depth": 0.5,
+          "size": 0.5
+        },
+        "gates": {
+          "tvd": true,
+          "num_2q": true,
+          "depth": true
+        },
+        "status": "pass"
+      },
+      "ruido": [
+        {
+          "p": 0.0,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 2.465190328815662e-32
+        },
+        {
+          "p": 0.0,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 2.465190328815662e-32
+        },
+        {
+          "p": 0.001,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.0009765625
+        },
+        {
+          "p": 0.001,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 2.465190328815662e-32
+        },
+        {
+          "p": 0.005,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.00732421875
+        },
+        {
+          "p": 0.005,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.00146484375
+        },
+        {
+          "p": 0.01,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.01513671875
+        },
+        {
+          "p": 0.01,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.0048828125
+        }
+      ],
+      "hardware": false,
+      "network": false
+    },
+    {
+      "name": "E15_1",
+      "experiment": "E15",
+      "description": "GHZ via QASM 2.0",
+      "seed": 42,
+      "baseline": {
+        "num_qubits": 4,
+        "num_clbits": 4,
+        "size": 8,
+        "depth": 5,
+        "num_1q": 1,
+        "num_2q": 3,
+        "num_measure": 4,
+        "ops": {
+          "measure": 4,
+          "cx": 3,
+          "u": 1
+        },
+        "transpile_seconds": 0.002363402003538795
+      },
+      "niveis": [
+        {
+          "level": 0,
+          "metrics": {
+            "num_qubits": 4,
+            "num_clbits": 4,
+            "size": 8,
+            "depth": 5,
+            "num_1q": 1,
+            "num_2q": 3,
+            "num_measure": 4,
+            "ops": {
+              "measure": 4,
+              "cx": 3,
+              "u": 1
+            },
+            "transpile_seconds": 0.006584411006770097
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 1,
+          "metrics": {
+            "num_qubits": 4,
+            "num_clbits": 4,
+            "size": 8,
+            "depth": 5,
+            "num_1q": 1,
+            "num_2q": 3,
+            "num_measure": 4,
+            "ops": {
+              "measure": 4,
+              "cx": 3,
+              "u": 1
+            },
+            "transpile_seconds": 0.006698712008073926
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 2,
+          "metrics": {
+            "num_qubits": 4,
+            "num_clbits": 4,
+            "size": 8,
+            "depth": 5,
+            "num_1q": 1,
+            "num_2q": 3,
+            "num_measure": 4,
+            "ops": {
+              "measure": 4,
+              "cx": 3,
+              "u": 1
+            },
+            "transpile_seconds": 0.004957338998792693
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 3,
+          "metrics": {
+            "num_qubits": 4,
+            "num_clbits": 4,
+            "size": 8,
+            "depth": 5,
+            "num_1q": 1,
+            "num_2q": 3,
+            "num_measure": 4,
+            "ops": {
+              "measure": 4,
+              "cx": 3,
+              "u": 1
+            },
+            "transpile_seconds": 0.005451048011309467
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        }
+      ],
+      "melhor": {
+        "level": 0,
+        "metrics": {
+          "num_qubits": 4,
+          "num_clbits": 4,
+          "size": 8,
+          "depth": 5,
+          "num_1q": 1,
+          "num_2q": 3,
+          "num_measure": 4,
+          "ops": {
+            "measure": 4,
+            "cx": 3,
+            "u": 1
+          },
+          "transpile_seconds": 0.006584411006770097
+        },
+        "tvd": 0.0,
+        "reducao": {
+          "num_2q": 0.0,
+          "depth": 0.0,
+          "size": 0.0
+        },
+        "gates": {
+          "tvd": true,
+          "num_2q": true,
+          "depth": true
+        },
+        "status": "pass"
+      },
+      "ruido": [
+        {
+          "p": 0.0,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.014648437500000111
+        },
+        {
+          "p": 0.0,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.014648437500000111
+        },
+        {
+          "p": 0.001,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.006835937499999889
+        },
+        {
+          "p": 0.001,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.006835937499999889
+        },
+        {
+          "p": 0.005,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.0087890625
+        },
+        {
+          "p": 0.005,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.0087890625
+        },
+        {
+          "p": 0.01,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.01708984375
+        },
+        {
+          "p": 0.01,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.01708984375
+        }
+      ],
+      "hardware": false,
+      "network": false
+    },
+    {
+      "name": "E16_1",
+      "experiment": "E16",
+      "description": "Esfera de Bloch",
+      "seed": 42,
+      "baseline": {
+        "num_qubits": 1,
+        "num_clbits": 1,
+        "size": 2,
+        "depth": 2,
+        "num_1q": 1,
+        "num_2q": 0,
+        "num_measure": 1,
+        "ops": {
+          "u": 1,
+          "measure": 1
+        },
+        "transpile_seconds": 0.003055256005609408
+      },
+      "niveis": [
+        {
+          "level": 0,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 2,
+            "depth": 2,
+            "num_1q": 1,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "u": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.002988210995681584
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 1,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 2,
+            "depth": 2,
+            "num_1q": 1,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "u": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.004674851996242069
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 2,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 2,
+            "depth": 2,
+            "num_1q": 1,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "u": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.00492168300843332
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 3,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 2,
+            "depth": 2,
+            "num_1q": 1,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "u": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.005777849000878632
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        }
+      ],
+      "melhor": {
+        "level": 0,
+        "metrics": {
+          "num_qubits": 1,
+          "num_clbits": 1,
+          "size": 2,
+          "depth": 2,
+          "num_1q": 1,
+          "num_2q": 0,
+          "num_measure": 1,
+          "ops": {
+            "u": 1,
+            "measure": 1
+          },
+          "transpile_seconds": 0.002988210995681584
+        },
+        "tvd": 0.0,
+        "reducao": {
+          "num_2q": 0.0,
+          "depth": 0.0,
+          "size": 0.0
+        },
+        "gates": {
+          "tvd": true,
+          "num_2q": true,
+          "depth": true
+        },
+        "status": "pass"
+      },
+      "ruido": [
+        {
+          "p": 0.0,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.005859374999999889
+        },
+        {
+          "p": 0.0,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.005859374999999889
+        },
+        {
+          "p": 0.001,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.005859374999999889
+        },
+        {
+          "p": 0.001,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.005859374999999889
+        },
+        {
+          "p": 0.005,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.005859374999999889
+        },
+        {
+          "p": 0.005,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.005859374999999889
+        },
+        {
+          "p": 0.01,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.005859374999999889
+        },
+        {
+          "p": 0.01,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.005859374999999889
+        }
+      ],
+      "hardware": false,
+      "network": false
+    },
+    {
+      "name": "E16_2",
+      "experiment": "E16",
+      "description": "Esfera de Bloch",
+      "seed": 42,
+      "baseline": {
+        "num_qubits": 1,
+        "num_clbits": 1,
+        "size": 3,
+        "depth": 3,
+        "num_1q": 2,
+        "num_2q": 0,
+        "num_measure": 1,
+        "ops": {
+          "u": 2,
+          "measure": 1
+        },
+        "transpile_seconds": 0.0023395619937218726
+      },
+      "niveis": [
+        {
+          "level": 0,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 3,
+            "depth": 3,
+            "num_1q": 2,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "u": 2,
+              "measure": 1
+            },
+            "transpile_seconds": 0.002168335995520465
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 1,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 1,
+            "depth": 1,
+            "num_1q": 0,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "measure": 1
+            },
+            "transpile_seconds": 0.0038973360060481355
+          },
+          "tvd": 1.874699728327322e-33,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.6666666666666666,
+            "size": 0.6666666666666666
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 2,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 1,
+            "depth": 1,
+            "num_1q": 0,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "measure": 1
+            },
+            "transpile_seconds": 0.005792957002995536
+          },
+          "tvd": 1.874699728327322e-33,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.6666666666666666,
+            "size": 0.6666666666666666
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 3,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 1,
+            "depth": 1,
+            "num_1q": 0,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "measure": 1
+            },
+            "transpile_seconds": 0.005996038991725072
+          },
+          "tvd": 1.874699728327322e-33,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.6666666666666666,
+            "size": 0.6666666666666666
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        }
+      ],
+      "melhor": {
+        "level": 1,
+        "metrics": {
+          "num_qubits": 1,
+          "num_clbits": 1,
+          "size": 1,
+          "depth": 1,
+          "num_1q": 0,
+          "num_2q": 0,
+          "num_measure": 1,
+          "ops": {
+            "measure": 1
+          },
+          "transpile_seconds": 0.0038973360060481355
+        },
+        "tvd": 1.874699728327322e-33,
+        "reducao": {
+          "num_2q": 0.0,
+          "depth": 0.6666666666666666,
+          "size": 0.6666666666666666
+        },
+        "gates": {
+          "tvd": true,
+          "num_2q": true,
+          "depth": true
+        },
+        "status": "pass"
+      },
+      "ruido": [
+        {
+          "p": 0.0,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 1.874699728327322e-33
+        },
+        {
+          "p": 0.0,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 1.874699728327322e-33
+        },
+        {
+          "p": 0.001,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.00048828125
+        },
+        {
+          "p": 0.001,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 1.874699728327322e-33
+        },
+        {
+          "p": 0.005,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.0048828125
+        },
+        {
+          "p": 0.005,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 1.874699728327322e-33
+        },
+        {
+          "p": 0.01,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.01025390625
+        },
+        {
+          "p": 0.01,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 1.874699728327322e-33
+        }
+      ],
+      "hardware": false,
+      "network": false
+    },
+    {
+      "name": "E17_1",
+      "experiment": "E17",
+      "description": "Interferência de três qubits",
+      "seed": 42,
+      "baseline": {
+        "num_qubits": 3,
+        "num_clbits": 3,
+        "size": 15,
+        "depth": 8,
+        "num_1q": 10,
+        "num_2q": 2,
+        "num_measure": 3,
+        "ops": {
+          "u": 10,
+          "measure": 3,
+          "cx": 2
+        },
+        "transpile_seconds": 0.0025216329959221184
+      },
+      "niveis": [
+        {
+          "level": 0,
+          "metrics": {
+            "num_qubits": 3,
+            "num_clbits": 3,
+            "size": 15,
+            "depth": 8,
+            "num_1q": 10,
+            "num_2q": 2,
+            "num_measure": 3,
+            "ops": {
+              "u": 10,
+              "measure": 3,
+              "cx": 2
+            },
+            "transpile_seconds": 0.002266858995426446
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 1,
+          "metrics": {
+            "num_qubits": 3,
+            "num_clbits": 3,
+            "size": 12,
+            "depth": 6,
+            "num_1q": 7,
+            "num_2q": 2,
+            "num_measure": 3,
+            "ops": {
+              "u": 7,
+              "measure": 3,
+              "cx": 2
+            },
+            "transpile_seconds": 0.0031899120076559484
+          },
+          "tvd": 2.775557561562892e-17,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.25,
+            "size": 0.2
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 2,
+          "metrics": {
+            "num_qubits": 3,
+            "num_clbits": 3,
+            "size": 9,
+            "depth": 6,
+            "num_1q": 4,
+            "num_2q": 2,
+            "num_measure": 3,
+            "ops": {
+              "u": 4,
+              "measure": 3,
+              "cx": 2
+            },
+            "transpile_seconds": 0.005462436995003372
+          },
+          "tvd": 2.775557561562893e-17,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.25,
+            "size": 0.4
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 3,
+          "metrics": {
+            "num_qubits": 3,
+            "num_clbits": 3,
+            "size": 9,
+            "depth": 6,
+            "num_1q": 4,
+            "num_2q": 2,
+            "num_measure": 3,
+            "ops": {
+              "u": 4,
+              "measure": 3,
+              "cx": 2
+            },
+            "transpile_seconds": 0.005405962991062552
+          },
+          "tvd": 2.775557561562893e-17,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.25,
+            "size": 0.4
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        }
+      ],
+      "melhor": {
+        "level": 1,
+        "metrics": {
+          "num_qubits": 3,
+          "num_clbits": 3,
+          "size": 12,
+          "depth": 6,
+          "num_1q": 7,
+          "num_2q": 2,
+          "num_measure": 3,
+          "ops": {
+            "u": 7,
+            "measure": 3,
+            "cx": 2
+          },
+          "transpile_seconds": 0.0031899120076559484
+        },
+        "tvd": 2.775557561562892e-17,
+        "reducao": {
+          "num_2q": 0.0,
+          "depth": 0.25,
+          "size": 0.2
+        },
+        "gates": {
+          "tvd": true,
+          "num_2q": true,
+          "depth": true
+        },
+        "status": "pass"
+      },
+      "ruido": [
+        {
+          "p": 0.0,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.021484375000000083
+        },
+        {
+          "p": 0.0,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.021484375000000083
+        },
+        {
+          "p": 0.001,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.014648437500000083
+        },
+        {
+          "p": 0.001,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.014160156250000083
+        },
+        {
+          "p": 0.005,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.020996093750000083
+        },
+        {
+          "p": 0.005,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.016601562500000083
+        },
+        {
+          "p": 0.01,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.03613281249999997
+        },
+        {
+          "p": 0.01,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.021484375000000083
+        }
+      ],
+      "hardware": false,
+      "network": false
+    },
+    {
+      "name": "E18_1",
+      "experiment": "E18",
+      "description": "Amostragem binomial",
+      "seed": 42,
+      "baseline": {
+        "num_qubits": 1,
+        "num_clbits": 1,
+        "size": 2,
+        "depth": 2,
+        "num_1q": 1,
+        "num_2q": 0,
+        "num_measure": 1,
+        "ops": {
+          "u": 1,
+          "measure": 1
+        },
+        "transpile_seconds": 0.0020309530082158744
+      },
+      "niveis": [
+        {
+          "level": 0,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 2,
+            "depth": 2,
+            "num_1q": 1,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "u": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.0021609279938274994
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 1,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 2,
+            "depth": 2,
+            "num_1q": 1,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "u": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.00583113799802959
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 2,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 2,
+            "depth": 2,
+            "num_1q": 1,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "u": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.0057978309923782945
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        },
+        {
+          "level": 3,
+          "metrics": {
+            "num_qubits": 1,
+            "num_clbits": 1,
+            "size": 2,
+            "depth": 2,
+            "num_1q": 1,
+            "num_2q": 0,
+            "num_measure": 1,
+            "ops": {
+              "u": 1,
+              "measure": 1
+            },
+            "transpile_seconds": 0.00585155600856524
+          },
+          "tvd": 0.0,
+          "reducao": {
+            "num_2q": 0.0,
+            "depth": 0.0,
+            "size": 0.0
+          },
+          "gates": {
+            "tvd": true,
+            "num_2q": true,
+            "depth": true
+          },
+          "status": "pass"
+        }
+      ],
+      "melhor": {
+        "level": 0,
+        "metrics": {
+          "num_qubits": 1,
+          "num_clbits": 1,
+          "size": 2,
+          "depth": 2,
+          "num_1q": 1,
+          "num_2q": 0,
+          "num_measure": 1,
+          "ops": {
+            "u": 1,
+            "measure": 1
+          },
+          "transpile_seconds": 0.0021609279938274994
+        },
+        "tvd": 0.0,
+        "reducao": {
+          "num_2q": 0.0,
+          "depth": 0.0,
+          "size": 0.0
+        },
+        "gates": {
+          "tvd": true,
+          "num_2q": true,
+          "depth": true
+        },
+        "status": "pass"
+      },
+      "ruido": [
+        {
+          "p": 0.0,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.005859374999999889
+        },
+        {
+          "p": 0.0,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.005859374999999889
+        },
+        {
+          "p": 0.001,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.005859374999999889
+        },
+        {
+          "p": 0.001,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.005859374999999889
+        },
+        {
+          "p": 0.005,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.005859374999999889
+        },
+        {
+          "p": 0.005,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.005859374999999889
+        },
+        {
+          "p": 0.01,
+          "level": 0,
+          "shots": 2048,
+          "tvd": 0.005859374999999889
+        },
+        {
+          "p": 0.01,
+          "level": 3,
+          "shots": 2048,
+          "tvd": 0.005859374999999889
+        }
+      ],
+      "hardware": false,
+      "network": false
+    }
+  ],
+  "limites": "Simulação e distribuição ideal; não é hardware. A TVD com ruído é um proxy do efeito do modelo depolarizante, não uma previsão de fidelidade de um backend real."
+}

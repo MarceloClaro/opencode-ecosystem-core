@@ -40,6 +40,16 @@ ideais.
   métricas, técnicas, protocolo e leitura dos resultados.
 - **R10.** Não adicionar dependência nova; usar Qiskit/Aer do
   `.venv-quantum`.
+- **R11.** Importar os circuitos de E01–E18 do livro e tratá-los como
+  benchmarks nomeados (25 circuitos em 18 experimentos).
+- **R12.** Varrer os níveis de otimização 0, 1, 2 e 3 e registrar, por
+  circuito, 2q, profundidade, tamanho, TVD, redução e status.
+- **R13.** Executar uma varredura de ruído depolarizante de porta em
+  `p = 0; 0,001; 0,005; 0,01`, com 2048 tiros, comparando baseline e melhor
+  nível; a varredura é descritiva e não é gate de aprovação.
+- **R14.** Gerar `resultados_experimentos.json` e
+  `RELATORIO_EXPERIMENTOS.md`, com resumo, tabela por circuito, tabela de
+  ruído e limites.
 
 ## 3. Benchmarks
 
@@ -64,7 +74,9 @@ ideais.
 
 ## 5. Critérios de aceitação
 
-- 7 benchmarks executam e todos passam nos gates;
+- 7 benchmarks sintéticos executam e todos passam nos gates;
+- 25 circuitos de E01–E18 executam, com 25/25 pass;
+- a varredura de níveis e a varredura de ruído geram JSON e Markdown;
 - JSON e Markdown são gerados;
 - testes R1108 passam;
 - `opencode.json` contém os dois agentes;

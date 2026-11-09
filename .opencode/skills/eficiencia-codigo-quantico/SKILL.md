@@ -40,6 +40,23 @@ cat harnesses/quantum-code-efficiency/resultados/RELATORIO.md
 .venv-quantum/bin/python -m pytest tests/test_r1108_quantum_code_efficiency.py -q
 ```
 
+## Experimentos do livro
+
+Além dos benchmarks sintéticos, o harness importa os circuitos de E01–E18:
+**25 circuitos em 18 experimentos**.
+
+```bash
+# varredura completa (níveis 0–3 e ruído 0; 0,001; 0,005; 0,01)
+.venv-quantum/bin/python harnesses/quantum-code-efficiency/runner.py --mode experiments
+
+# recorte rápido
+.venv-quantum/bin/python harnesses/quantum-code-efficiency/runner.py --mode experiments --quick --only E01 E05 E07
+```
+
+A varredura de ruído é **descritiva**: mede o efeito de um modelo
+depolarizante de porta, não a fidelidade de um backend. Em `p = 0`, a TVD
+reflete apenas ruído de amostragem.
+
 ## Métricas
 
 | Métrica | Pergunta | Cuidado |
