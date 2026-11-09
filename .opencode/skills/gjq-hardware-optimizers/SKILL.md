@@ -1,6 +1,6 @@
 ---
 name: gjq-hardware-optimizers
-description: Otimiza circuitos para o hardware real da GJQ (Baihua e aliases) usando o Target e a calibração ao vivo, layout noise-aware, QASM2/QASM3 e submissão com confirm=True e allow_hardware=True. Use para perfil de backend, otimização, benchmark e execução real; não declara fidelidade, vantagem quântica ou emaranhamento como provados.
+description: Otimiza circuitos para o hardware real da GJQ (Baihua e aliases) usando o Target e a calibração ao vivo, layout noise-aware, QASM2/QASM3, comparação baseline vs otimizado e mitigação de leitura. Use para perfil, otimização, benchmark, comparação e execução real; não declara fidelidade, vantagem quântica ou emaranhamento como provados.
 metadata:
   version: "1"
   origem: "R1109 — otimizadores para hardware GJQ"

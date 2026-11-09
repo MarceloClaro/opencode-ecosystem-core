@@ -6512,7 +6512,7 @@
       "model": "opencode-go/deepseek-v4-pro"
     },
     "gjq-hardware-optimizer": {
-      "description": "Otimiza circuitos para o hardware real da GJQ com perfil ao vivo, layout noise-aware, QASM2/QASM3 e proveniência; não submete hardware sem confirmação explícita e não declara fidelidade ou vantagem qu",
+      "description": "Otimiza circuitos para o hardware real da GJQ com perfil ao vivo, layout noise-aware, QASM2/QASM3, comparação baseline vs otimizado e mitigação de leitura; não submete hardware sem confirmação explíci",
       "mode": "subagent",
       "prompt": "{file:./agents/catalog/gjq-hardware-optimizer.md}",
       "permission": {
