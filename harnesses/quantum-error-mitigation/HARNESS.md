@@ -55,6 +55,20 @@ O wrapper é `agent_qem.py`. Nenhum agente executa hardware.
 - [ ] bootstrap/Wilson não são significância universal;
 - [ ] nenhuma chave em arquivo.
 
+## Calibração Rabi da preparação
+
+```bash
+.venv-quantum/bin/python harnesses/quantum-error-mitigation/hardware_rabi_calibration.py \
+  --qubit 1 --shots 4096 --confirm --allow-hardware --use-cached-account
+.venv-quantum/bin/python harnesses/quantum-error-mitigation/hardware_rabi_calibration.py \
+  --qubit 1 --analyze
+```
+
+16 jobs (8 ângulos × 2 eixos). Em q1: ε(rx) = −0,0006 ± 0,0091 rad;
+ε(ry) = +0,0012 ± 0,0129 rad; eixo preferido `none`; r1 0,0695–0,0786.
+Nenhum desvio coerente acima de 2σ; o erro dominante é leitura. O comando não
+declara melhora sem validação.
+
 ## Scorecard híbrido
 
 ```bash
@@ -62,6 +76,7 @@ O wrapper é `agent_qem.py`. Nenhum agente executa hardware.
   --readout comparacao.json --zne zne.json \
   --tomography-q0 comparison.json --tomography-q1 comparison.json \
   --comparison comparison_q0_q1.json \
+  --rabi rabi_q1.json \
   --pec pec.json --surface --pulse-dd
 ```
 

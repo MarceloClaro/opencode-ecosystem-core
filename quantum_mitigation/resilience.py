@@ -89,6 +89,38 @@ def _uncertainty_widths(bootstrap: dict[str, Any] | None) -> dict[str, float]:
     return widths
 
 
+def _rabi_summary(rabi: dict[str, Any] | None) -> dict[str, Any] | None:
+    if not rabi:
+        return None
+    fit = rabi.get("fit", rabi)
+    axes = fit.get("axes") or {}
+    if not axes:
+        return None
+    entries = {
+        axis: {
+            "epsilon": float(item["epsilon"]),
+            "epsilon_se": float(item["epsilon_se"]),
+            "r0": float(item["r0"]),
+            "r1": float(item["r1"]),
+            "contrast": float(item["contrast"]),
+            "identified": bool(item.get("identified")),
+        }
+        for axis, item in axes.items()
+    }
+    max_abs = max(abs(item["epsilon"]) for item in entries.values())
+    max_two_sigma = max(2.0 * item["epsilon_se"] for item in entries.values())
+    r1_values = [item["r1"] for item in entries.values()]
+    return {
+        "preferred_axis": fit.get("preferred_axis"),
+        "max_abs_epsilon": max_abs,
+        "max_two_sigma": max_two_sigma,
+        "coherent_offset_detected": max_abs > max_two_sigma,
+        "r1_range": [min(r1_values), max(r1_values)],
+        "identified": bool(fit.get("identified")),
+        "axes": entries,
+    }
+
+
 def _comparison_summary(
     comparison: dict[str, Any] | None,
 ) -> dict[str, dict[str, Any]]:
@@ -128,6 +160,7 @@ def resilience_scorecard(
     tomography_q0: dict[str, Any] | None = None,
     tomography_q1: dict[str, Any] | None = None,
     comparison: dict[str, Any] | None = None,
+    rabi: dict[str, Any] | None = None,
     pec: dict[str, Any] | None = None,
     uncertainty: dict[str, Any] | None = None,
     surface: dict[str, Any] | None = None,
@@ -262,6 +295,36 @@ def resilience_scorecard(
                 }
             )
 
+    rabi_summary = _rabi_summary(rabi)
+    if rabi_summary:
+        detected = rabi_summary["coherent_offset_detected"]
+        findings.append(
+            "Rabi: |ε|max = "
+            f"{rabi_summary['max_abs_epsilon']:.4f} rad; 2σ = "
+            f"{rabi_summary['max_two_sigma']:.4f} rad; desvio coerente "
+            f"{'detectado' if detected else 'não detectado'}; r1 "
+            f"{rabi_summary['r1_range'][0]:.4f}–{rabi_summary['r1_range'][1]:.4f}."
+        )
+        if detected:
+            recommendations.append(
+                {
+                    "priority": "alta",
+                    "action": (
+                        "validar o ângulo corrigido θ* = π − ε em run separado "
+                        "antes de adotar"
+                    ),
+                    "reason": "desvio coerente de π acima de 2σ",
+                }
+            )
+        else:
+            recommendations.append(
+                {
+                    "priority": "baixa",
+                    "action": "manter o pulso π padrão; não corrigir o ângulo",
+                    "reason": "nenhum desvio coerente acima de 2σ foi detectado",
+                }
+            )
+
     if zne:
         applicability = zne.get("applicability") or {}
         if applicability.get("applicable") is False:
@@ -334,6 +397,7 @@ def resilience_scorecard(
         "readout": readout_summary,
         "tomography": {"q0": q0, "q1": q1},
         "comparison": deltas,
+        "rabi": rabi_summary,
         "uncertainty_widths": widths,
         "findings": findings,
         "recommendations": recommendations,

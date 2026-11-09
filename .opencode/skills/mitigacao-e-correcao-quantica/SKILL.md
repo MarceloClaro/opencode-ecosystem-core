@@ -87,6 +87,18 @@ drift e incerteza. Para executar em hardware, o primário precisa de gates,
 | SPAM, crosstalk, drift, incerteza | `quantum-noise-characterization` |
 | Auditoria de claim | `quantum-benchmark-audit` |
 
+## Calibração Rabi
+
+```bash
+.venv-quantum/bin/python harnesses/quantum-error-mitigation/hardware_rabi_calibration.py \
+  --qubit 1 --shots 4096 --confirm --allow-hardware --use-cached-account
+```
+
+16 jobs (8 ângulos × 2 eixos) ajustam `p1(θ) = r0 + A·sin²((θ+ε)/2)` e separam
+leitura de desvio coerente. Em q1: ε(rx) = −0,0006 ± 0,0091 rad;
+ε(ry) = +0,0012 ± 0,0129 rad; nenhum desvio acima de 2σ; r1 0,0695–0,0786.
+Não corrigir o ângulo do π; priorizar leitura.
+
 ## Scorecard híbrido
 
 O comando `resilience` combina readout 4x4, tomografia q0/q1, ZNE, PEC e
@@ -97,6 +109,7 @@ incerteza para recomendar o próximo passo e listar técnicas bloqueadas:
   --readout comparacao.json --zne zne.json \
   --tomography-q0 comparison.json --tomography-q1 comparison.json \
   --comparison comparison_q0_q1.json \
+  --rabi rabi_q1.json \
   --pec pec.json --surface --pulse-dd
 ```
 

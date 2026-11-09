@@ -32,6 +32,7 @@ from .pec import (
     pec_plan,
     uniform_depolarizing_rates,
 )
+from .preparation import fit_rabi_calibration, rabi_calibration_plan
 from .resilience import resilience_scorecard
 from .qec import (
     qec_plan,
@@ -73,4 +74,6 @@ __all__ = [
     "bootstrap_ci",
     "uncertainty_report",
     "resilience_scorecard",
+    "rabi_calibration_plan",
+    "fit_rabi_calibration",
 ]

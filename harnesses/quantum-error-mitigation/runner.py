@@ -63,7 +63,7 @@ def _write(out: Path, payload: dict, title: str, lines: list[str]) -> dict:
         "## Limites",
         "",
         "- Técnica de mitigação/correção local; não é prova de vantagem.",
-        "- Não houve execução em hardware.",
+        "- O comando não executa hardware; evidências de runs anteriores são citadas quando fornecidas.",
         "- Nenhuma chave ou segredo é usado.",
         "",
     ]
@@ -442,6 +442,7 @@ def cmd_resilience(args) -> int:
         tomography_q0=tomography_q0,
         tomography_q1=tomography_q1,
         comparison=load(args.comparison),
+        rabi=load(args.rabi),
         pec=load(args.pec),
         uncertainty=uncertainty,
         surface={"planned": True} if args.surface else None,
@@ -648,6 +649,7 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--tomography-q0")
     p.add_argument("--tomography-q1")
     p.add_argument("--comparison", help="comparison_q0_q1.json")
+    p.add_argument("--rabi", help="rabi_q1.json")
     p.add_argument("--pec")
     p.add_argument("--surface", action="store_true")
     p.add_argument("--pulse-dd", action="store_true")
