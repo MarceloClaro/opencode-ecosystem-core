@@ -57,6 +57,12 @@ interpretação de Bohm a partir de counts.
   --confirm --allow-hardware --wait --timeout 600 --poll 5 \
   --out resultados/E05_execucao
 
+# comparar baseline vs otimizado + calibrar |00>/|11> + mitigar leitura
+.venv-quantum/bin/python harnesses/gjq-hardware-optimizers/runner.py compare \
+  --backend Baihua --circuit E05 --shots 4096 --quick \
+  --confirm --allow-hardware --calibrate \
+  --out resultados/E05_comparacao
+
 # reler o resultado sem reenviar
 .venv-quantum/bin/python harnesses/gjq-hardware-optimizers/runner.py result \
   --backend Baihua --task-id <TASK_ID> --shots 1024 --out resultados/E05_execucao
@@ -69,6 +75,20 @@ interpretação de Bohm a partir de counts.
 Sem `GJQ_API_KEY`, use `--use-cached-account` para a conta que o SDK já
 cacheou em `~/.gjq_client/gjq_client_account.json`. O flag é explícito e não
 lê nem imprime a chave.
+
+## Mitigação de leitura
+
+O comando `compare` mede |00> e |11> nos mesmos qubits do baseline e do
+otimizado, constrói a submatriz 00/11 e inverte:
+
+```text
+p_mit = A^{-1} p_obs
+```
+
+Massas negativas são clipadas e o vetor é renormalizado. A matriz 00/11 não
+corrige a população que sai para 01/10: o leakage é reportado separadamente.
+No Baihua, o leakage de |11> ficou em 14–15%, muito acima do `readout_error`
+reportado (0,1–0,2%). A TVD mitigada não é fidelidade.
 
 ## Gates
 
@@ -87,7 +107,9 @@ lê nem imprime a chave.
   interpretação de Bohm.
 - A fração `00`/`11` é taxa de outcomes correlacionados, não fidelidade.
 - O proxy de erro não é calibração; no Baihua ele foi otimista frente à TVD
-  observada.
+  observada e o ranking baseline vs otimizado não se confirmou no hardware.
+- A mitigação 00/11 não corrige leakage para 01/10; a TVD mitigada não é
+  fidelidade de estado.
 - A calibração muda; releia as propriedades antes de comparar execuções.
 - Não há mitigação de erro (ZNE/PEC/DD) nesta versão.
 - Custo, fila e disponibilidade mudam; o snapshot não é garantia.

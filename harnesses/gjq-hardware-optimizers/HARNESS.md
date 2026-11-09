@@ -86,6 +86,12 @@ Níveis: `1, 3` no modo rápido; `1, 2, 3` no completo. Seeds: `42` no rápido;
 .venv-quantum/bin/python harnesses/gjq-hardware-optimizers/runner.py benchmark \
   --backend Baihua --set experiments --only E05 E06 E12 --quick --out resultados/bench
 
+# comparar baseline vs otimizado + calibrar |00>/|11> + mitigar leitura
+.venv-quantum/bin/python harnesses/gjq-hardware-optimizers/runner.py compare \
+  --backend Baihua --circuit E05 --shots 4096 --quick \
+  --confirm --allow-hardware --calibrate \
+  --out resultados/E05_comparacao
+
 # executar hardware real
 .venv-quantum/bin/python harnesses/gjq-hardware-optimizers/runner.py run \
   --backend Baihua --circuit E05 --shots 1024 --quick --strategy balanced \
@@ -122,6 +128,19 @@ Níveis: `1, 3` no modo rápido; `1, 2, 3` no completo. Seeds: `42` no rápido;
 O proxy foi otimista. Ele é um produto de `(1 - erro)` por porta e leitura e
 não modela state preparation, crosstalk, deriva, leakage ou correlação. Não é
 fidelidade.
+
+## Comparação real de referência
+
+| Caso | Qubits | Raw 00/11 | TVD raw | TVD mitigada |
+|---|---|---:|---:|---:|
+| Baseline | 0, 1 | 0,9329 | 0,0671 | 0,0249 |
+| Otimizado | 106, 107 | 0,8982 | 0,1018 | 0,0277 |
+
+O proxy previa o otimizado melhor (0,0060 vs 0,0338), mas o ranking **não se
+confirmou** no hardware. O baseline foi ligeiramente melhor na correlação raw
+e na TVD mitigada. O leakage de |11> foi de 14–15%, muito acima do
+`readout_error` reportado; ele inclui preparação do |1> via `rx(pi)`, não só
+readout. A diferença mitigada de 0,0028 não sustenta vantagem.
 
 ## Artefatos
 

@@ -33,10 +33,19 @@ from gjq_hardware_opt import (  # noqa: E402
     MissingGJQKey,
     SubmissionBlocked,
     audit_counts,
+    build_baseline_candidate,
     cached_account_present,
+    calibration_circuit,
+    case_payload,
     connect_gjq,
     credential_present,
     execution_record,
+    export_comparison,
+    measurement_order,
+    mitigate_probabilities,
+    mitigate_subspace,
+    readout_confusion_matrix,
+    subspace_matrix_from_calibration,
     export_benchmark,
     export_execution,
     export_result,
@@ -280,6 +289,200 @@ def cmd_benchmark(args) -> int:
         }
     )
     return 0 if summary["fail"] == 0 else 1
+
+
+def _submit_and_wait(service, backend, circuit, args, label: str):
+    gate = submission_gate(
+        args.backend,
+        shots=args.shots,
+        circuit=circuit,
+        confirm=args.confirm,
+        allow_hardware=args.allow_hardware,
+        api_key_present=True,
+    )
+    if not gate["allowed"]:
+        raise SubmissionBlocked(f"{label}: {gate['reason']}")
+    submission = submit_optimized(
+        backend,
+        circuit,
+        shots=args.shots,
+        confirm=args.confirm,
+        allow_hardware=args.allow_hardware,
+        api_key_present=True,
+    )
+    wait = wait_for_result(
+        service,
+        submission["task_id"],
+        timeout=args.timeout,
+        poll_interval=args.poll,
+    )
+    counts = wait.get("result")
+    if not counts and wait.get("task_status") == "DONE":
+        fallback = task_result(service, submission["task_id"])
+        counts = fallback.get("result")
+    if not isinstance(counts, dict) or not counts:
+        raise GJQExecutionError(
+            f"{label}: counts indisponíveis (status {wait.get('task_status')})"
+        )
+    return submission, wait, counts
+
+
+def cmd_compare(args) -> int:
+    if not credential_present(args.use_cached_account):
+        _json_print(
+            {
+                "status": "blocked",
+                "reason": (
+                    "GJQ_API_KEY ausente no ambiente; use --use-cached-account "
+                    "para a conta cacheada"
+                ),
+                "hardware_executed": False,
+                "network": False,
+            }
+        )
+        return 2
+    service, backend = connect_gjq(
+        args.backend,
+        use_cached_account=args.use_cached_account,
+    )
+    profile = live_profile(backend)
+    target = build_target_from_profile(profile)
+    item = load_circuit(args.circuit)
+    optimized = _optimizer(args, profile, target).optimize(item["circuit"])
+    baseline = build_baseline_candidate(
+        item["circuit"], profile, target, seed=args.seed
+    )
+    out = Path(args.out)
+    out.mkdir(parents=True, exist_ok=True)
+    (out / "perfil.json").write_text(
+        json.dumps(profile.to_dict(), indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+    cases = {}
+    for name, candidate in (("baseline", baseline), ("otimizado", optimized.chosen)):
+        circuit = candidate.circuit
+        order = measurement_order(circuit)
+        calibration_counts = {}
+        calibration_ids = {}
+        matrix = None
+        leakage = {}
+        if args.calibrate:
+            for prepared in ("00", "11"):
+                calibration = calibration_circuit(order, prepared)
+                sub, wait, counts = _submit_and_wait(
+                    service, backend, calibration, args,
+                    f"{name}/calibracao/{prepared}",
+                )
+                calibration_counts[prepared] = counts
+                calibration_ids[prepared] = sub["task_id"]
+            matrix, leakage = subspace_matrix_from_calibration(
+                calibration_counts, ("00", "11")
+            )
+        submission, wait, counts = _submit_and_wait(
+            service, backend, circuit, args, name
+        )
+        total = sum(int(v) for v in counts.values())
+        probabilities = {
+            str(k): int(v) / total for k, v in counts.items()
+        } if total else {}
+        if args.calibrate:
+            mitigation = mitigate_subspace(probabilities, matrix, ("00", "11"))
+            mitigation["leakage_by_prepared"] = leakage
+            mitigation["calibration_counts"] = calibration_counts
+            mitigation["calibration_task_ids"] = calibration_ids
+        else:
+            mitigation = mitigate_probabilities(
+                probabilities, readout_confusion_matrix(profile, order)
+            )
+            mitigation["leakage_by_prepared"] = {}
+        payload = case_payload(
+            name,
+            candidate,
+            counts,
+            args.shots,
+            task_id=submission["task_id"],
+            calibration_task_ids=calibration_ids,
+            calibration_counts=calibration_counts,
+            mitigation=mitigation,
+        )
+        payload["qasm2"] = qasm2.dumps(circuit)
+        payload["qasm3"] = qasm3.dumps(circuit)
+        payload["measurement_order"] = order
+        payload["wait"] = wait
+        cases[name] = payload
+
+    comparison = {
+        "delta_raw_correlation": (
+            cases["otimizado"]["raw_correlation_00_11"]
+            - cases["baseline"]["raw_correlation_00_11"]
+        ),
+        "delta_raw_tvd": (
+            cases["otimizado"]["raw_tvd_vs_ideal"]
+            - cases["baseline"]["raw_tvd_vs_ideal"]
+        ),
+    }
+    if (
+        cases["baseline"].get("mitigated_tvd_subspace") is not None
+        and cases["otimizado"].get("mitigated_tvd_subspace") is not None
+    ):
+        comparison["delta_mitigated_tvd"] = (
+            cases["otimizado"]["mitigated_tvd_subspace"]
+            - cases["baseline"]["mitigated_tvd_subspace"]
+        )
+    data = {
+        "schema_version": 1,
+        "generated_at": datetime.now().astimezone().isoformat(timespec="seconds"),
+        "backend": args.backend,
+        "hardware": True,
+        "profile_name": profile.name,
+        "profile_kind": profile.profile_kind,
+        "profile_fingerprint": profile.target_fingerprint,
+        "calibration_date": profile.last_update_date,
+        "shots": args.shots,
+        "strategy": args.strategy,
+        "seed": args.seed,
+        "quick": bool(args.quick),
+        "calibrate": bool(args.calibrate),
+        "baseline": cases["baseline"],
+        "optimized": cases["otimizado"],
+        "comparison": comparison,
+        "hardware_executed": True,
+        "network": True,
+        "limits": (
+            "Uma execução por caso não é estudo estatístico nem prova de "
+            "vantagem quântica. A mitigação de leitura é uma estimativa dentro "
+            "do subespaço calibrado; não é fidelidade de estado."
+        ),
+    }
+    exported = export_comparison(data, out)
+    _json_print(
+        {
+            "status": "ok",
+            "backend": args.backend,
+            "shots": args.shots,
+            "calibrate": bool(args.calibrate),
+            "baseline": {
+                "task_id": cases["baseline"]["task_id"],
+                "raw_correlation_00_11": cases["baseline"]["raw_correlation_00_11"],
+                "raw_tvd_vs_ideal": cases["baseline"]["raw_tvd_vs_ideal"],
+                "mitigated_tvd_subspace": cases["baseline"].get("mitigated_tvd_subspace"),
+                "used_physical": cases["baseline"]["candidate"]["used_physical"],
+            },
+            "otimizado": {
+                "task_id": cases["otimizado"]["task_id"],
+                "raw_correlation_00_11": cases["otimizado"]["raw_correlation_00_11"],
+                "raw_tvd_vs_ideal": cases["otimizado"]["raw_tvd_vs_ideal"],
+                "mitigated_tvd_subspace": cases["otimizado"].get("mitigated_tvd_subspace"),
+                "used_physical": cases["otimizado"]["candidate"]["used_physical"],
+            },
+            "comparison": comparison,
+            "out_dir": exported["out_dir"],
+            "files": exported["files"],
+            "hardware_executed": True,
+            "network": True,
+        }
+    )
+    return 0
 
 
 def cmd_run(args) -> int:
@@ -547,6 +750,33 @@ def build_parser() -> argparse.ArgumentParser:
             help="usa a conta GJQ já cacheada pelo SDK, sem ler a chave",
         )
         p.set_defaults(func=func)
+
+    p_compare = sub.add_parser(
+        "compare",
+        help="compara baseline vs otimizado e aplica mitigação de leitura",
+    )
+    p_compare.add_argument("--backend", required=True)
+    p_compare.add_argument("--circuit", default="E05")
+    p_compare.add_argument("--shots", type=int, default=4096)
+    p_compare.add_argument("--strategy", default="balanced")
+    p_compare.add_argument("--seed", type=int, default=42)
+    p_compare.add_argument("--quick", action="store_true")
+    p_compare.add_argument("--confirm", action="store_true")
+    p_compare.add_argument("--allow-hardware", action="store_true")
+    p_compare.add_argument(
+        "--calibrate",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="roda |00> e |11> nos mesmos qubits para a matriz de leitura",
+    )
+    p_compare.add_argument("--timeout", type=float, default=900.0)
+    p_compare.add_argument("--poll", type=float, default=5.0)
+    p_compare.add_argument("--out", default=str(OUT_PADRAO))
+    p_compare.add_argument(
+        "--use-cached-account", action="store_true",
+        help="usa a conta GJQ já cacheada pelo SDK, sem ler a chave",
+    )
+    p_compare.set_defaults(func=cmd_compare)
 
     p_run = sub.add_parser("run", help="otimiza e submete ao GJQ")
     p_run.add_argument("--backend", required=True, help="backend GJQ ao vivo")

@@ -14,6 +14,12 @@ Componentes:
 - ``benchmarks``: circuitos sintéticos e E01–E18.
 """
 from .benchmarks import all_circuits, list_circuits, load_circuit, select_circuits
+from .comparison import (
+    build_baseline_candidate,
+    case_payload,
+    export_comparison,
+    render_comparison_markdown,
+)
 from .estimator import estimate_success
 from .execution import (
     BackendUnavailable,
@@ -41,6 +47,22 @@ from .export import (
     render_result_markdown,
 )
 from .layout import LayoutResult, circuit_interactions, noise_aware_layout
+from .mitigation import (
+    ReadoutModel,
+    calibration_circuit,
+    calibration_circuits,
+    confusion_from_calibration_counts,
+    correlation,
+    ideal_bell_subspace,
+    measurement_order,
+    mitigate_counts_for_circuit,
+    mitigate_probabilities,
+    mitigate_subspace,
+    readout_confusion_matrix,
+    states_for,
+    subspace_matrix_from_calibration,
+    tvd_vs_ideal,
+)
 from .optimizer import (
     Candidate,
     GJQOptimizer,
@@ -60,7 +82,25 @@ __all__ = [
     "build_target_from_profile",
     "noise_aware_layout",
     "circuit_interactions",
+    "ReadoutModel",
+    "readout_confusion_matrix",
+    "confusion_from_calibration_counts",
+    "subspace_matrix_from_calibration",
+    "mitigate_probabilities",
+    "mitigate_subspace",
+    "mitigate_counts_for_circuit",
+    "calibration_circuit",
+    "calibration_circuits",
+    "measurement_order",
+    "states_for",
+    "correlation",
+    "tvd_vs_ideal",
+    "ideal_bell_subspace",
     "estimate_success",
+    "build_baseline_candidate",
+    "case_payload",
+    "export_comparison",
+    "render_comparison_markdown",
     "compact_to_used_physical",
     "initial_layout_from_transpiled",
     "connect_gjq",
