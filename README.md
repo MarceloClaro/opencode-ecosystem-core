@@ -11,9 +11,9 @@
 [![Python](https://img.shields.io/badge/python-3.10%2B-3b82f6?style=for-the-badge&logo=python)](https://www.python.org/)
 [![Tests](https://img.shields.io/badge/tests-local%20suite-3b82f6?style=for-the-badge&logo=pytest)](tests/)
 <!-- core-badges:start -->
-[![Checks](https://img.shields.io/badge/checks-22%20estruturais-64748b?style=for-the-badge)](marceloclaro/doctor.py)
+[![Checks](https://img.shields.io/badge/checks-25%20estruturais-64748b?style=for-the-badge)](marceloclaro/doctor.py)
 [![MCP](https://img.shields.io/badge/MCP-35%20servers-8b5cf6?style=for-the-badge)](opencode.json)
-[![Agents](https://img.shields.io/badge/agents-366-7c3aed?style=for-the-badge)](agents/catalog)
+[![Agents](https://img.shields.io/badge/agents-374-7c3aed?style=for-the-badge)](agents/catalog)
 <!-- core-badges:end -->
 [![Evidence](https://img.shields.io/badge/evidence--first-f59e0b?style=for-the-badge)](reports/r1054/README.md)
 
@@ -33,7 +33,7 @@
 </div>
 
 <!-- core-state:start -->
-**366 agentes** · **35 MCPs** · **35 comandos** · **22 checks**
+**374 agentes** · **35 MCPs** · **35 comandos** · **25 checks**
 
 Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 
@@ -70,6 +70,9 @@ fonte, qual hash e qual limite?”**.
   manuscrito e pacote de submissão.
 - **Orquestração governada** — perfis de agente configurados, Blackboard, MetaBus,
   Trust Engine, EvolutionRegistry e gates de evidência.
+- **Cognição e risco epistêmico** — mapa de funções cognitivas, regras de parada,
+  claims ledger, contestabilidade e validação N-of-1 (R1132;
+  [docs/CORE_COGNITION.md](docs/CORE_COGNITION.md)).
 - **Engenharia reversa local (REA)** — inspeção controlada, camadas de provedores
   e recibos por hash.
 - **Vídeo e dublagem** — editor multifaixa, FFmpeg, Remotion, XTTS/Edge TTS,
@@ -1314,7 +1317,7 @@ flowchart TB
     Orq2 --> MetaBus2[MetaBus]
     Orq2 --> Blackboard2[Blackboard]
     Orq2 --> MCP2[35 MCPs configurados]
-    Orq2 --> Agents2[366 agentes configurados]
+    Orq2 --> Agents2[374 agentes configurados]
     Orq2 --> Mira2[mira-presenter]
     Mira2 --> Deck2[MiraDeckPipeline]
     Deck2 --> Engine2[MiraEngine]

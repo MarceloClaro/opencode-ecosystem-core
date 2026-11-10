@@ -64,6 +64,7 @@ não precise adivinhar onde está a verdade, a especificação ou o limite.
 | Criar/registrar agentes | [AGENTS.md](../AGENTS.md), [CLAUDE.md](../CLAUDE.md) |
 | Workflows retomáveis | [Workflows](WORKFLOWS_R644.md) |
 | Memória e metacognição | [Ciclo metacognitivo](../README.md#ciclo-metacognitivo-integrado), [MCI](../mci/) |
+| Camada de cognição e risco epistêmico | [CORE_COGNITION.md](CORE_COGNITION.md), [técnicas adaptadas](CORE_COGNITION_TECHNIQUES.md) |
 | Governança de custo de tokens | [Custo de tokens](GOVERNANCA_DE_CUSTO_DE_TOKENS.md), [Modelos e tokens](MODELOS_E_CUSTO_DE_TOKENS.md) |
 | Federação e prontidão | [Prontidão R868](PRONTIDAO_LOCAL_CORE_R868.md), [Federação](../federation/activation.md) |
 

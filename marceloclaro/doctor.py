@@ -925,6 +925,19 @@ def _check_browser() -> DoctorCheck:
         return DoctorCheck("browser", "warn", f"Inventário do navegador indisponível: {type(exc).__name__}.")
 
 
+def _check_core_cognition() -> List[DoctorCheck]:
+    """R1132: mapa cognitivo, risco epistêmico e contestabilidade."""
+    try:
+        from core_cognition.doctor_checks import run_cognition_checks
+
+        return [
+            DoctorCheck(item.name, item.status, item.detail)
+            for item in run_cognition_checks(REPO_ROOT)
+        ]
+    except Exception as exc:  # pragma: no cover - defensive
+        return [DoctorCheck("core_cognition", "warn", f"Camada de cognição indisponível: {type(exc).__name__}.")]
+
+
 def run_doctor(*, live: bool = False) -> Dict[str, Any]:
     """Agrega checks estruturais, com sondagens operacionais opt-in via live.
 
@@ -959,6 +972,7 @@ def run_doctor(*, live: bool = False) -> Dict[str, Any]:
         _check_geometry_autoformalization_engine(live=live),
         _check_clinical_game_theory_engine(live=live),
     ]
+    checks.extend(_check_core_cognition())
 
     has_fail = any(c.status == "fail" for c in checks)
     has_warn = any(c.status == "warn" for c in checks)
