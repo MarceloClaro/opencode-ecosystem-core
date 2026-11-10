@@ -20,7 +20,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from . import claims_ledger, cognitive_function_map, contestability, epistemic_risk, n_of_1, stop_rules
+from . import claims_ledger, cognitive_function_map, contestability, epistemic_risk, n_of_1, runtime_contract, stop_rules
 from .doctor_checks import run_cognition_checks
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -54,6 +54,10 @@ def main(argv: list[str] | None = None) -> int:
     n1_parser.add_argument("--template", default=None)
     n1_parser.add_argument("--validate", default=None)
 
+    runtime_parser = sub.add_parser("runtime", help="avalia o contrato de runtime")
+    runtime_parser.add_argument("--request", required=True, help="JSON com ActionRequest")
+    runtime_parser.add_argument("--state", required=True, help="JSON com RuntimeState")
+
     args = parser.parse_args(argv)
 
     if args.command == "map":
@@ -85,6 +89,12 @@ def main(argv: list[str] | None = None) -> int:
             _print(n_of_1.validate_protocol(_load_json(args.validate)).to_dict())
         else:
             _print(n_of_1.template())
+        return 0
+    if args.command == "runtime":
+        request = runtime_contract.ActionRequest(**_load_json(args.request))
+        state = runtime_contract.RuntimeState(**_load_json(args.state))
+        decision = runtime_contract.RuntimeContract().authorize(request, state)
+        _print(decision.to_dict())
         return 0
 
     parser.error("comando desconhecido")

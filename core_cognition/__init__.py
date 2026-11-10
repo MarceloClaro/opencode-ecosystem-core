@@ -17,5 +17,6 @@ __all__ = [
     "claims_ledger",
     "contestability",
     "n_of_1",
+    "runtime_contract",
     "doctor_checks",
 ]

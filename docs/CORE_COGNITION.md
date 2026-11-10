@@ -16,6 +16,7 @@ aplicável.
 | `claims_ledger.py` | Claims com status, falsificador, evidência e validação externa | Organiza evidência; não a produz |
 | `contestability.py` | Exportação, segunda pessoa, documentação, apelação e saída | Proxies estruturais; não prova usabilidade |
 | `n_of_1.py` | Validação de protocolo N-of-1 e resumo descritivo | Não executa o estudo nem infere causalidade |
+| `runtime_contract.py` | Contrato de runtime: allow/ask/defer/block por classe de ação | Só aplica o que consegue observar |
 | `doctor_checks.py` | Três checks para o `doctor` | Estruturais; não substituem a suíte |
 | `cli.py` | Interface de linha de comando | Sem rede, hardware ou LLM |
 
@@ -50,6 +51,45 @@ python3 -m core_cognition.cli n-of-1 --validate protocol.json
 
 A decisão inclui `action`, `rule`, `reason` e um `humane_default` com
 explicação, alternativa, contato humano e saída.
+
+## Contrato de runtime (R1133)
+
+O contrato classifica ações em `read_only`, `reversible`, `irreversible` e
+`high_risk`. Antes de uma ação, `RuntimeContract.evaluate` aplica as stop rules
+e as exigências de aprovação humana. Decisões possíveis: `allow`, `ask`,
+`defer`, `block`.
+
+- `read_only`: permitido em `ask`/`defer`; adiado em `stop`.
+- `reversible`: bloqueado em `stop`; pergunta em `ask`.
+- `irreversible`: exige `human_approved=True`.
+- `high_risk`: exige aprovação humana e, se configurado, validação externa.
+- Classe desconhecida: tratada como `high_risk` (fail-closed).
+
+### No orquestrador
+
+```python
+from marceloclaro.orchestrator import MarceloClaroOrchestrator
+
+orch = MarceloClaroOrchestrator()
+orch.update_runtime_context(session_minutes=130, local_hour=12)
+decision = orch.authorize_action("publicar", "irreversible", human_approved=False)
+# decision.decision == "ask"
+```
+
+`dispatch_ready` consulta o contrato antes de conceder leases. Se a decisão
+não for `allow`, as tarefas prontas são bloqueadas e a explicação fica em
+`explain_assignment`. `report_completion` registra o outcome e publica
+`runtime_contract.stop` quando o limiar de falhas é atingido.
+
+### CLI
+
+```bash
+python3 -m core_cognition.cli runtime --request request.json --state state.json
+```
+
+`request.json` deve conter `action_id`, `actor_id`, `tool`, `action_class` e,
+opcionalmente, `human_approved`, `external_validation` e `metadata`.
+`state.json` aceita os campos de `RuntimeState`.
 
 ## Mapa de funções cognitivas
 

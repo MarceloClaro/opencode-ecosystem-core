@@ -24576,6 +24576,114 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1144",
+      "objective": "R1144: melhoria controlada de classificacao e QAOA",
+      "changes": [
+        "busca em validacao e multi-seed",
+        "QAOA p=1..3",
+        "306 quanticos e 30 lifecycle passaram",
+        "sem hardware"
+      ],
+      "score": 0.5,
+      "lessons": [
+        "Busca em validacao melhorou o piloto: ruido .15 quantum .854 vs RBF .896; ruido .20 quantum .833 vs .771; sem vantagem robusta e teste de 16 pontos. QAOA p=3 subiu ratio .742->.925, energia -2.462 vs -2.6. Nenhum hardware; nao declarar vantagem."
+      ],
+      "timestamp": 1794319072.7067513,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1146",
+      "objective": "R1146: provas e contraprovas com numeros complexos em Lean 4 + Mathlib",
+      "changes": [
+        "lean/quantum-cb/ComplexProofs.lean com 9 teoremas e 3 contraprovas",
+        "quantum_mitigation/complex_proof_gate.py fail-closed",
+        "certificado com SHA-256 e log canonico",
+        "skill verificacao-lean-complexos",
+        "325 testes quanticos/complexos e 30 lifecycle passaram"
+      ],
+      "score": 0.5,
+      "lessons": [
+        "ComplexProofs.lean compilou com retorno 0: 9 teoremas kernel-checked (propext, Classical.choice, Quot.sound), sem sorry/admit/axiom/native_decide. Gate exige prova+contraprova e aceitou 4/4 alegacoes. Prova algebrica; nao prova hardware, ruido, canal ou vantagem. Pareamento alegacao-contraprova e editorial."
+      ],
+      "timestamp": 1794325808.8789864,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1147",
+      "objective": "R1147: correlacoes de leitura, arranjos e contraprovas",
+      "changes": [
+        "quantum_mitigation/correlation_layout.py com phi, cotas, layout e contraexemplos",
+        "lean/quantum-cb/CorrelationCounterproof.lean com 10 teoremas kernel-checked",
+        "quantum_mitigation/correlation_gate.py fail-closed",
+        "skill correlacoes-arranjos-contraprovas",
+        "183 testes no subconjunto e 30 lifecycle passaram"
+      ],
+      "score": 0.5,
+      "lessons": [
+        "Marginais iguais nao determinam a junta: tabelas com p=0.15 tiveram phi 0.608 vs 0 e P(>=1 erro) 0.20 vs 0.2775. Correlacao positiva aumenta P(0 erro) e P(2 erros) mas diminui P(>=1 erro). Layout ciente da correlacao reduziu custo total 1.78->1.32 no modelo declarado; greedy perdeu por 3.01 e o otimo de A foi 4x pior em B. Lean: 10 teoremas kernel-checked e gate 4/4; sem hardware e sem vantagem."
+      ],
+      "timestamp": 1794327012.495719,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1133",
+      "objective": "R1133: contrato de runtime e ativação das stop rules no orquestrador",
+      "changes": [
+        "core_cognition/runtime_contract.py: ActionClass, RuntimeState, RuntimeContract, ContractViolation e auditoria",
+        "marceloclaro/orchestrator.py: authorize_action, require_action, update_runtime_context, runtime_contract_status, gate em dispatch_ready e outcome em report_completion",
+        "core_cognition/cli.py: comando runtime --request --state",
+        "tests/test_r1133_runtime_contract.py: 14 testes",
+        "specs/SPEC-935-R1133-runtime-contract-stop-rules.md",
+        "docs/CORE_COGNITION.md e docs/CORE_COGNITION_RESEARCH.md"
+      ],
+      "score": 0.5,
+      "lessons": [
+        "O contrato bloqueia dispatch quando a sessão excede o orçamento; read_only é adiado, não bloqueado.",
+        "Ações irreversíveis e de alto risco exigem aprovação humana explícita; classe desconhecida falha fechada.",
+        "O gate só aplica o que observa: ferramentas precisam chamar authorize_action para serem cobertas.",
+        "A aprovação humana é declarativa; identidade, consentimento e competência não são verificados.",
+        "14 testes novos e 86 testes focais passaram; doctor permanece com 25 checks, 0 fail."
+      ],
+      "timestamp": 1794327118.9666994,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [

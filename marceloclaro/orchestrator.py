@@ -59,6 +59,13 @@ from reasoning import multi_reasoning, run_experiment_suite
 from reasoning.production_scaffolds import audit_scientific_manuscript
 from agentic_science_v2.paper_composer import compose_paper as compose_paper_core
 from evolution import evolution_registry
+from core_cognition.runtime_contract import (
+    ActionRequest,
+    ContractDecision,
+    ContractViolation,
+    RuntimeContract,
+    RuntimeState,
+)
 from evolution.audit_gate import EvolutionAuditGate
 from integrations.antigravity import antigravity_bridge
 from marceloclaro.catalog_loader import register_catalog_agents
@@ -89,6 +96,11 @@ class MarceloClaroOrchestrator:
                  strict_sdd: bool = True,
                  reduction_layer: Optional[LLMReductionLayer] = None):
         self.id = "marceloclaro"
+        # R1133: contrato de runtime; local_hour=12 evita bloqueio por horário
+        # de silêncio em execuções determinísticas. O operador ativa o horário
+        # real via update_runtime_context(local_hour=...).
+        self.runtime_contract = RuntimeContract()
+        self._runtime_state = RuntimeState(local_hour=12)
         self.pending_cfps: Dict[str, List[str]] = {}  # task_id -> agentes elegíveis
         self.results: Dict[str, Any] = {}
         self._metacognitive_reports: Dict[str, Dict[str, Any]] = {}
@@ -477,6 +489,84 @@ class MarceloClaroOrchestrator:
         logger.info(f"[{self.id}] Tarefa delegada: {task_id} — {description}")
         return task_id
 
+    def authorize_action(
+        self,
+        action_id: str,
+        action_class: str = "reversible",
+        *,
+        description: str = "",
+        human_approved: bool = False,
+        external_validation: bool = False,
+        metadata: Optional[Dict[str, Any]] = None,
+    ) -> ContractDecision:
+        """Avalia uma ação contra o contrato de runtime (R1133)."""
+        request = ActionRequest(
+            action_id=action_id,
+            actor_id=self.id,
+            tool="orchestrator",
+            action_class=action_class,
+            description=description,
+            human_approved=human_approved,
+            external_validation=external_validation,
+            metadata=dict(metadata or {}),
+        )
+        decision = self.runtime_contract.authorize(request, self._runtime_state)
+        if decision.decision != "allow":
+            metabus.publish(
+                "runtime_contract.decision",
+                decision.to_dict(),
+                source_agent=self.id,
+            )
+        return decision
+
+    def require_action(
+        self,
+        action_id: str,
+        action_class: str = "reversible",
+        **kwargs: Any,
+    ) -> ContractDecision:
+        """Como authorize_action, mas levanta ContractViolation se não permitir."""
+        decision = self.authorize_action(action_id, action_class, **kwargs)
+        if decision.decision != "allow":
+            raise ContractViolation(decision)
+        return decision
+
+    def update_runtime_context(self, **fields: Any) -> Dict[str, Any]:
+        """Atualiza o estado usado pelas stop rules e devolve o status."""
+        allowed = {
+            "session_minutes",
+            "consecutive_failures",
+            "open_specs",
+            "maintenance_minutes",
+            "productive_minutes",
+            "context_switches",
+            "local_hour",
+            "user_requested_stop",
+            "human_approved",
+        }
+        unknown = sorted(set(fields) - allowed)
+        if unknown:
+            raise ValueError(f"campos de runtime desconhecidos: {unknown}")
+        for key, value in fields.items():
+            if key == "local_hour":
+                if isinstance(value, bool) or not isinstance(value, int) or not 0 <= value <= 23:
+                    raise ValueError("local_hour deve ser inteiro em [0, 23]")
+            elif key in {"consecutive_failures", "open_specs", "context_switches"}:
+                if isinstance(value, bool) or not isinstance(value, int) or value < 0:
+                    raise ValueError(f"{key} deve ser inteiro >= 0")
+            elif key in {"session_minutes", "maintenance_minutes", "productive_minutes"}:
+                if isinstance(value, bool) or not isinstance(value, (int, float)) or value < 0:
+                    raise ValueError(f"{key} deve ser numérico >= 0")
+            elif key in {"user_requested_stop", "human_approved"}:
+                if not isinstance(value, bool):
+                    raise ValueError(f"{key} deve ser booleano")
+            setattr(self._runtime_state, key, value)
+        return self.runtime_contract_status()
+
+    def runtime_contract_status(self) -> Dict[str, Any]:
+        """Estado do contrato, política e últimas decisões auditadas."""
+        return self.runtime_contract.status(self._runtime_state)
+
     # ------------------------------------------------------------------
     # 2a. RUNTIME NANOGRANULAR (SPEC-935-R212)
     # ------------------------------------------------------------------
@@ -696,6 +786,30 @@ class MarceloClaroOrchestrator:
         candidates: Optional[Iterable[Mapping[str, Any]]] = None,
     ) -> tuple[NanoTaskAssignment, ...]:
         """Ranqueia a fronteira pronta e concede leases somente após hard gates."""
+
+        gate = self.authorize_action(
+            f"dispatch:{graph_id}",
+            action_class="reversible",
+            description=f"dispatch ready tasks for graph {graph_id}",
+        )
+        if gate.decision != "allow":
+            for task in self.task_runtime.ready_tasks(graph_id):
+                reason = f"runtime_contract:{gate.rule}:{gate.reason}"
+                self.task_runtime.block_task(graph_id, task.task_id, reason)
+                key = (graph_id, task.task_id)
+                self._assignment_explanations[key] = {
+                    "graph_id": graph_id,
+                    "task_id": task.task_id,
+                    "selected_agent_id": None,
+                    "blocked_reason": reason,
+                    "contract": gate.to_dict(),
+                }
+            metabus.publish(
+                "runtime_contract.blocked",
+                gate.to_dict(),
+                source_agent=self.id,
+            )
+            return tuple()
 
         if candidates is None:
             candidate_snapshot: tuple[object, ...] = self._runtime_candidate_snapshot()
@@ -981,6 +1095,16 @@ class MarceloClaroOrchestrator:
         else:
             # R828 legado: aceita sem verificar, mas declara explicitamente.
             verification = {"verified": False, "status": "legacy_unverified"}
+
+        self._runtime_state.record_outcome(success)
+        if not success:
+            stop = self.runtime_contract.check_state(self._runtime_state)
+            if stop.action in {"ask", "stop"}:
+                metabus.publish(
+                    "runtime_contract.stop",
+                    stop.to_dict(),
+                    source_agent=self.id,
+                )
 
         metabus.publish("task.complete", {
             "task_id": task_id,
