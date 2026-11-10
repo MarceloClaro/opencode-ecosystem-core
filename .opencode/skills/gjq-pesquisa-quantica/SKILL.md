@@ -103,6 +103,26 @@ snapshot.
 | `gjq_list_tasks` | tarefas ativas |
 | `gjq_audit_counts` | local; soma, probabilidades e erro padrão |
 | `gjq_backend_drift` | rede; compara registro e `list_backends`, sem submeter |
+| `gjq_provider_status` | local; provider, orçamento e credencial |
+| `gjq_provider_compilation` | rede; audita layout/QASM, sem submeter |
+| `gjq_provider_submit` | submete com orçamento/hash; `confirm=True` |
+| `gjq_provider_result` | status/resultado/auditoria via provider |
+
+## Framework Core (R1141)
+
+O Core atua como framework de pesquisa:
+
+- `gjq_research_status` — catálogo E01–E18, provider, agentes e readiness;
+- `gjq_research_plan` — fases SDD/TDD, gates, backend, shots e roteamento.
+
+O plano não executa hardware. Para executar, use `gjq_provider_submit` com
+`confirm=True`, `allow_hardware=True` (se hardware) e orçamento. O framework
+não declara descoberta científica, fidelidade ou vantagem.
+
+Domínios `classification` e `cooking` adicionam fases/gates específicos.
+Classificação usa `quantum_research.classification`; cozimento é tratado como
+otimização de processo (`quantum_research.cooking`), não como campo
+estabelecido. Ver `docs/LITERATURA_CLASSIFICACAO_COZIMENTO_R1142.md`.
 
 ## Gates de segurança
 
@@ -110,7 +130,9 @@ snapshot.
 - Hardware/emulação (Guoji01/04/07/08, Baihua e Yudu) exige `allow_hardware=True` e aprovação de custo.
 - `GJQ_MAX_SHOTS` limita shots; padrão 100.000.
 - `GJQ_MAX_SUBMISSIONS_PER_SESSION` limita submissões; padrão 20.
-- A chave vem só de `GJQ_API_KEY`; não há ferramenta para digitá-la no prompt.
+- A chave vem de `GJQ_API_KEY`; o provider também aceita conta cacheada com
+  `use_cached_account=True`, sem ler nem imprimir a chave. Não há ferramenta
+  para digitá-la no prompt.
 - Não publique task ID com dado pessoal.
 - Menor de idade usa conta do responsável.
 

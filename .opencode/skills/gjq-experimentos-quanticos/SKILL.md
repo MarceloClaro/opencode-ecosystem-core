@@ -30,6 +30,19 @@ python 08_experimentos_18.py --real --backend Guoji08 --only E09
 Use `gjq_status`, `gjq_prepare`, `gjq_sim`, `gjq_run`, `gjq_result`, `gjq_audit`.
 `gjq_run` exige `confirm=True`; sem chave ou simulação, retorna blocked.
 
+## Provider Core (R1139)
+
+Prefira o provider integrado:
+
+- `gjq_provider_status`: credencial, orçamento e registry, sem rede;
+- `gjq_provider_compilation`: audita `initial_layout`/QASM, sem submeter;
+- `gjq_provider_submit`: `confirm=True`, `allow_hardware=True` para hardware,
+  orçamento local e `qasm_sha256`;
+- `gjq_provider_result`: status/resultado/auditoria.
+
+`use_cached_account=True` usa a conta cacheada sem ler nem imprimir a chave.
+Nenhum job é submetido sem autorização explícita.
+
 ## Auditoria
 
 - backend;

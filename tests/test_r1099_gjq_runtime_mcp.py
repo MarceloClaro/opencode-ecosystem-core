@@ -38,6 +38,12 @@ def test_gjq_runtime_tools_and_status():
         "gjq_task_detail",
         "gjq_list_tasks",
         "gjq_audit_counts",
+        "gjq_provider_status",
+        "gjq_provider_submit",
+        "gjq_provider_result",
+        "gjq_provider_compilation",
+        "gjq_research_status",
+        "gjq_research_plan",
     }
     status = tools["gjq_runtime_status"].fn()
     assert status["sdk_present"] is True
@@ -71,6 +77,22 @@ def test_gjq_runtime_without_key_is_blocked(monkeypatch):
         result = tools[name].fn(*args)
         assert result["status"] == "blocked"
         assert "GJQ_API_KEY" in result["reason"]
+
+
+def test_gjq_provider_tools_fail_closed(monkeypatch):
+    monkeypatch.delenv("GJQ_API_KEY", raising=False)
+    tools = _tools()
+    status = tools["gjq_provider_status"].fn()
+    assert status["network_access"] is False
+    assert status["hardware_executed"] is False
+    blocked = tools["gjq_provider_submit"].fn(
+        QASM, "FAS-CPU", 1024, False, False, False, 1, True, None
+    )
+    assert blocked["status"] == "blocked"
+    result = tools["gjq_provider_result"].fn("task-x", None, False)
+    assert result["status"] == "blocked"
+    compilation = tools["gjq_provider_compilation"].fn("Baihua", [106, 107], False)
+    assert compilation["status"] == "blocked"
 
 
 def test_gjq_runtime_audit_counts():

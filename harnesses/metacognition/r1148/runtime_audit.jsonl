@@ -1,0 +1,6 @@
+{"action_id": "read", "action_class": "read_only", "status": "executed", "elapsed_seconds": 0.0, "reasons": [], "error": null}
+{"action_id": "delete", "action_class": "irreversible", "status": "escalated", "elapsed_seconds": 0.0, "reasons": ["approval_required"], "error": null}
+{"action_id": "fail", "action_class": "read_only", "status": "failed", "elapsed_seconds": 0.0, "reasons": [], "error": "RuntimeError('falha simulada')"}
+{"action_id": "fail", "action_class": "read_only", "status": "failed", "elapsed_seconds": 0.0, "reasons": [], "error": "RuntimeError('falha simulada')"}
+{"action_id": "read", "action_class": "read_only", "status": "blocked", "elapsed_seconds": 0.0, "reasons": ["circuit_open"], "error": null}
+{"action_id": "read", "action_class": "read_only", "status": "executed", "elapsed_seconds": 0.0, "reasons": [], "error": null}

@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "round": "R1147",
+  "lean_file": {
+    "path": "lean/quantum-cb/CorrelationCounterproof.lean",
+    "sha256": "73b9ff8566d8effd48a8456bf9df7f706d6ff207689178cc1c43a51a5e861b92"
+  },
+  "compile": {
+    "status": "compiled",
+    "reason": null,
+    "returncode": 0,
+    "elapsed_seconds": 12.706998817000567,
+    "sha256": "73b9ff8566d8effd48a8456bf9df7f706d6ff207689178cc1c43a51a5e861b92",
+    "log_path": "harnesses/quantum-error-mitigation/resultados/r1147_correlation_layout/compile.log",
+    "canonical_log_path": "lean/quantum-cb/correlation_compile.log",
+    "log_sha256": "8339ccc5bbcfeca72ba98dca128e6066f6d6c767031430a322a9467301837f2f"
+  },
+  "source_scan": {
+    "sha256": "73b9ff8566d8effd48a8456bf9df7f706d6ff207689178cc1c43a51a5e861b92",
+    "theorems": [
+      "any_error_A_lt_B",
+      "any_error_direction_reverses",
+      "covariance_A_positive",
+      "covariance_B_not_positive",
+      "double_error_A_gt_B",
+      "joints_differ",
+      "marginals_do_not_determine_joint",
+      "marginals_equal",
+      "no_error_A_gt_B",
+      "union_bound_not_tight"
+    ],
+    "missing": [],
+    "forbidden": [],
+    "counterproofs_present": [
+      "joints_differ",
+      "covariance_B_not_positive",
+      "any_error_direction_reverses"
+    ],
+    "counterproofs_missing": [],
+    "counterproof_shape": {
+      "joints_differ": true,
+      "covariance_B_not_positive": true,
+      "any_error_direction_reverses": true
+    }
+  },
+  "axioms": {
+    "marginals_equal": {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "classification": "kernel_checked"
+    },
+    "joints_differ": {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "classification": "kernel_checked"
+    },
+    "covariance_A_positive": {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "classification": "kernel_checked"
+    },
+    "covariance_B_not_positive": {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "classification": "kernel_checked"
+    },
+    "no_error_A_gt_B": {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "classification": "kernel_checked"
+    },
+    "double_error_A_gt_B": {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "classification": "kernel_checked"
+    },
+    "any_error_A_lt_B": {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "classification": "kernel_checked"
+    },
+    "any_error_direction_reverses": {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "classification": "kernel_checked"
+    },
+    "union_bound_not_tight": {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "classification": "kernel_checked"
+    },
+    "marginals_do_not_determine_joint": {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "classification": "kernel_checked"
+    }
+  },
+  "claims": [
+    {
+      "id": "identifiability",
+      "kind": "correlation",
+      "theorem": "marginals_do_not_determine_joint",
+      "theorem_status": "kernel_checked",
+      "counterproof": "joints_differ",
+      "counterproof_status": "kernel_checked",
+      "accepted": true,
+      "reasons": []
+    },
+    {
+      "id": "covariance_sign",
+      "kind": "correlation",
+      "theorem": "covariance_A_positive",
+      "theorem_status": "kernel_checked",
+      "counterproof": "covariance_B_not_positive",
+      "counterproof_status": "kernel_checked",
+      "accepted": true,
+      "reasons": []
+    },
+    {
+      "id": "fidelity_direction",
+      "kind": "direction",
+      "theorem": "no_error_A_gt_B",
+      "theorem_status": "kernel_checked",
+      "counterproof": "any_error_direction_reverses",
+      "counterproof_status": "kernel_checked",
+      "accepted": true,
+      "reasons": []
+    },
+    {
+      "id": "union_bound",
+      "kind": "bound",
+      "theorem": "union_bound_not_tight",
+      "theorem_status": "kernel_checked",
+      "counterproof": "any_error_direction_reverses",
+      "counterproof_status": "kernel_checked",
+      "accepted": true,
+      "reasons": []
+    }
+  ],
+  "gate": {
+    "accepted": true,
+    "unreported_theorems": [],
+    "non_kernel_theorems": {},
+    "blocked_claims": 0,
+    "counterproofs_required": [
+      "joints_differ",
+      "covariance_B_not_positive",
+      "any_error_direction_reverses"
+    ]
+  },
+  "limits": "Contraprova de correlação clássica em ℚ; não prova hardware, ruído real, crosstalk, drift ou vantagem. Mostra que marginais não determinam a junta e que a direção do erro do modelo independente depende do estatístico. O pareamento alegação↔contraprova é editorial e exige revisão humana.",
+  "hardware_executed": false,
+  "externally_validated": false,
+  "confidence_promoted": false
+}

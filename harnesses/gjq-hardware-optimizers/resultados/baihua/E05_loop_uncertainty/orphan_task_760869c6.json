@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "task_id": "760869c6-b768-400e-8f63-b91ad2d7f2c1",
+  "backend": "Baihua",
+  "project": "SDKTask_2611100013_7f2c1",
+  "requested_shots": 8192,
+  "requested_indices": [
+    106,
+    107
+  ],
+  "forwarded_qasm_indices": [
+    0,
+    1
+  ],
+  "server_compile": true,
+  "status_observed": "RUNNING",
+  "status_observed_at": "2026-11-10T03:02:30-03:00",
+  "local_record": "loop_state.json: failed_attempts, RUNNING/timeout, used_in_final=false",
+  "action": "archived_no_cancel_no_resubmit",
+  "counts_available": false,
+  "counts_audited": false,
+  "used_in_final": false,
+  "physical_layout_verified": false,
+  "notes": [
+    "qreg q[108] declara o registrador; o circuito atua em dois fios.",
+    "A renumeracao 106/107 -> 0/1 com compile=True nao prova o par fisico executado.",
+    "Running/submitted nao e execucao concluida; nao ha counts.",
+    "Nao reenviar nem cancelar sem autorizacao; nao incorporar post hoc ao n final."
+  ],
+  "limits": "Registro de arquivamento; nao e resultado experimental nem prova de layout."
+}

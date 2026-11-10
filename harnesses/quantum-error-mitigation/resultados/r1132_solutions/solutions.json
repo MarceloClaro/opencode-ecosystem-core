@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "lre": {
+    "schema_version": 1,
+    "layers": 3,
+    "truth_zero_noise": 0.9,
+    "lre_estimate": 0.900000000000003,
+    "lre_error": 2.9976021664879227e-15,
+    "global_estimate": 0.8999999999999999,
+    "global_error": 1.1102230246251565e-16,
+    "lre_configurations": 27,
+    "global_configurations": 3,
+    "limits": "LRE planejada para ruído aditivo por camada; não executa hardware. A interpolação é exata para o modelo multilinear nas escalas; ruído não linear, drift e interações entre camadas exigem mais escalas e validação. Não substitui ZNE global nem QEC.",
+    "hardware_executed": false
+  },
+  "layout": {
+    "schema_version": 1,
+    "protocol": "r1133-layout-paired-preregistration",
+    "n_pairs": 32,
+    "n_required": 32,
+    "enough_pairs": true,
+    "circuits_per_pair": 4,
+    "effect": 0.01,
+    "sigma": 0.02,
+    "alpha": 0.05,
+    "power": 0.8,
+    "seed": 1133,
+    "randomized": true,
+    "assignment": [
+      "AB",
+      "BA",
+      "AB",
+      "BA",
+      "AB",
+      "BA",
+      "BA",
+      "BA",
+      "AB",
+      "AB",
+      "AB",
+      "AB",
+      "BA",
+      "BA",
+      "BA",
+      "AB",
+      "BA",
+      "AB",
+      "BA",
+      "AB",
+      "BA",
+      "AB",
+      "AB",
+      "BA",
+      "AB",
+      "BA",
+      "BA",
+      "BA",
+      "AB",
+      "AB",
+      "AB",
+      "BA"
+    ],
+    "baseline_qubits": [
+      0,
+      1
+    ],
+    "optimized_qubits": [
+      106,
+      107
+    ],
+    "confound": {
+      "allowed": true,
+      "design": "layout_randomized",
+      "reason": "pares físicos diferentes, mas atribuição randomizada e pareada"
+    },
+    "primary_metric": "diferença pareada de TVD mitigada",
+    "covariate": "r1 do par",
+    "decision_rule": "comparar somente se enough_pairs e confound.allowed; reportar IC pareado e efeito mínimo de 0,01",
+    "hardware_submission_allowed": false,
+    "limits": "Planejamento estatístico offline. n é aproximação normal para diferenças pareadas; não incorpora drift, caudas ou dependência temporal. A decisão final exige dados e revisão humana; nenhum hardware é executado."
+  },
+  "gauge_pec": {
+    "schema_version": 1,
+    "gauge": {
+      "step": 0.0001,
+      "learnable_change": 0.0,
+      "fidelity_change": 0.0001369771998848135,
+      "changed_fidelities": 8,
+      "invariant_learnable": true,
+      "gauge_changes_full_channel": true,
+      "note": "As 13 funções não mudam; as 15 fidelidades individuais mudam. Isso é gauge, não erro numérico."
+    },
+    "pec": {
+      "direct_15_rate_pec_allowed": false,
+      "reason": "2 funções de corte não são identificadas pelo CB; a matriz D completa tem posto 15, mas o desenho SPAM-robusto aprende 13.",
+      "route": "gate set Pauli noise learning (GSPN) + MLCB + gauge optimization",
+      "sources": {
+        "gspn": {
+          "title": "Efficient self-consistent learning of gate set Pauli noise",
+          "doi": "10.1103/1pnv-t9px",
+          "year": 2026
+        },
+        "mlcb": {
+          "title": "Multilayer cycle benchmarking for high-accuracy error characterization",
+          "doi": "10.1103/4hbl-hpl3",
+          "year": 2026
+        },
+        "disambiguating": {
+          "title": "Disambiguating Pauli noise in quantum computers",
+          "doi": "10.1103/69wc-gzl6",
+          "year": 2026
+        }
+      },
+      "requirements": [
+        "modelo do gate set incluindo SPAM, 1q e CZ",
+        "aprendizagem autoconsistente e ansatz declarado",
+        "otimização de gauge para o observável/overhead",
+        "validação fora do conjunto de treino",
+        "pré-registro e autorização antes de hardware"
+      ],
+      "not_claimed": [
+        "que as 2 funções de corte tenham sido medidas",
+        "que PEC 2q esteja desbloqueado",
+        "que GSPN/MLCB tenham sido executados no Baihua"
+      ]
+    },
+    "hardware_executed": false,
+    "rates_measured": false,
+    "limits": "Auditoria offline. A invariância vale para as 13 funções do desenho; não prova invariância de PEC para qualquer observável. A rota GSPN/MLCB exige implementação, dados e validação; as 2 funções de corte não foram medidas."
+  },
+  "hardware_executed": false,
+  "rates_measured": false,
+  "limits": "Rotas metodológicas offline; nenhuma execução no Baihua. PEC 2q, ZNE e layouts continuam condicionados a dados."
+}

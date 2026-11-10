@@ -1,0 +1,113 @@
+{
+  "found": true,
+  "n": 5,
+  "device_a": {
+    "n": 5,
+    "edges": [
+      [
+        0,
+        1,
+        0.001
+      ],
+      [
+        0,
+        4,
+        0.05
+      ],
+      [
+        1,
+        2,
+        0.05
+      ],
+      [
+        2,
+        3,
+        0.05
+      ],
+      [
+        3,
+        4,
+        0.05
+      ]
+    ],
+    "readout": [
+      0.01,
+      0.01,
+      0.01,
+      0.01,
+      0.01
+    ],
+    "crosstalk": []
+  },
+  "device_b": {
+    "n": 5,
+    "edges": [
+      [
+        0,
+        1,
+        0.05
+      ],
+      [
+        0,
+        4,
+        0.05
+      ],
+      [
+        1,
+        2,
+        0.05
+      ],
+      [
+        2,
+        3,
+        0.05
+      ],
+      [
+        3,
+        4,
+        0.001
+      ]
+    ],
+    "readout": [
+      0.01,
+      0.01,
+      0.01,
+      0.01,
+      0.01
+    ],
+    "crosstalk": []
+  },
+  "interactions": [
+    [
+      0,
+      1,
+      10.0
+    ],
+    [
+      3,
+      4,
+      1.0
+    ]
+  ],
+  "layout_optimal_on_a": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "layout_optimal_on_b": [
+    3,
+    4,
+    0,
+    1,
+    2
+  ],
+  "cost_optimal_on_a_on_b": 0.551,
+  "cost_optimal_on_b_on_b": 0.11000000000000001,
+  "gap": 0.44100000000000006,
+  "gap_relative": 4.009090909090909,
+  "construction": "contraste determinístico de aresta boa",
+  "limits": "Otimização combinatória sobre um modelo de ruído declarado. O ótimo é condicional ao modelo; não prova superioridade em hardware real. Contraexemplos mostram que arranjo ótimo não é universal.",
+  "hardware_executed": false
+}

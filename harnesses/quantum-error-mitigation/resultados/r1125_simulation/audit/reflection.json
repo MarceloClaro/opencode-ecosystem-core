@@ -1,0 +1,31 @@
+{
+  "observation_id": "794563d3-a883-4b34-812c-372fd59ba4c7",
+  "reflection_id": "8dae4797-f205-41a5-8550-e560186c98f2",
+  "evolution_round": "R1125",
+  "confidence_promoted": false,
+  "trust_engine_in_process": {
+    "gate_health": {
+      "threshold": 0.25,
+      "total_decisions": 0,
+      "block_rate": 0.0,
+      "safe_actions": 0,
+      "blocked_actions": 0
+    },
+    "memory_stats": {
+      "sensory": 1,
+      "total": 1
+    },
+    "recent_success_rate": 0.0,
+    "total_improvement": 0,
+    "trusted_actions": [
+      [
+        "R1125-formal-delivery",
+        0.0
+      ]
+    ],
+    "low_trust_actions": [
+      "R1125-formal-delivery"
+    ]
+  },
+  "persisted_feedback": "MetaBus observation/reflection; TrustEngine process snapshot only"
+}

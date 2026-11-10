@@ -1,0 +1,1837 @@
+{
+  "schema_version": 2,
+  "protocol": "r1125-cz-even-conditional-pilot",
+  "settings": {
+    "shots": 4096,
+    "seed": 1125,
+    "depths": [
+      0,
+      2,
+      4,
+      8,
+      16
+    ],
+    "sets": 2,
+    "logical_qubits": [
+      0,
+      1
+    ]
+  },
+  "budget": {
+    "jobs": 150,
+    "shots_per_job": 4096,
+    "total_shots": 614400
+  },
+  "plan": {
+    "cb_IX_0_s1": {
+      "pauli": "IX",
+      "depth": 0,
+      "set": 1,
+      "seed": 2563879099,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nbarrier q[0],q[1];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "d4a06d6e2e6bb5e8941c6a17e687fa8ebf986524cb29d9c98044c8a17072ce29"
+    },
+    "cb_IX_2_s1": {
+      "pauli": "IX",
+      "depth": 2,
+      "set": 1,
+      "seed": 4187881327,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "77d17cea50416415c39acc3e7d17a2b13ddc270568f3a9255e0c5574dd068328"
+    },
+    "cb_IX_4_s1": {
+      "pauli": "IX",
+      "depth": 4,
+      "set": 1,
+      "seed": 3016103791,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "0d7cf4ec7d8ef08e91a4dafd8b4514cd7e633e0fdbaf703df22bcef4d84a20f6"
+    },
+    "cb_IX_8_s1": {
+      "pauli": "IX",
+      "depth": 8,
+      "set": 1,
+      "seed": 1046117404,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "04d68f846042424f23c1cc229c53d802a6bb2b595f584f68575a3fe867030f27"
+    },
+    "cb_IX_16_s1": {
+      "pauli": "IX",
+      "depth": 16,
+      "set": 1,
+      "seed": 2588859435,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "618c3d57daf353729aa364a3c05700ab4c47a2b2586109c2ec48467e139f7fcd"
+    },
+    "cb_IY_0_s1": {
+      "pauli": "IY",
+      "depth": 0,
+      "set": 1,
+      "seed": 2582722886,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "f2dcd69bb2dc229c5b49bdf77c3278baaa286507c079f8dfa5fbeae0fb3558e3"
+    },
+    "cb_IY_2_s1": {
+      "pauli": "IY",
+      "depth": 2,
+      "set": 1,
+      "seed": 3343589963,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "57da9e3dc976aa5861e3ba786a1b9406d934f86226bf3b02187b3a670a437cf9"
+    },
+    "cb_IY_4_s1": {
+      "pauli": "IY",
+      "depth": 4,
+      "set": 1,
+      "seed": 3782228644,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "75367113fbc2d79cced1ff6cae587f4568e522a4bb4f8528afd4c8f1a31f2e72"
+    },
+    "cb_IY_8_s1": {
+      "pauli": "IY",
+      "depth": 8,
+      "set": 1,
+      "seed": 4145909945,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "9ad3a05fa5c05bd04bdb3c7722ca7055dc8852f5b225bbafc50181149a572c3d"
+    },
+    "cb_IY_16_s1": {
+      "pauli": "IY",
+      "depth": 16,
+      "set": 1,
+      "seed": 359082884,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "8ba126b2444f8f33aa338f824ebd5ec09b9b99d2d2412180cf07398ee17119fe"
+    },
+    "cb_IZ_0_s1": {
+      "pauli": "IZ",
+      "depth": 0,
+      "set": 1,
+      "seed": 3246393480,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nbarrier q[0],q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "f568ed8e0357ee5404b29aba93479abc43e64f9477175563ac2065648f40791b"
+    },
+    "cb_IZ_2_s1": {
+      "pauli": "IZ",
+      "depth": 2,
+      "set": 1,
+      "seed": 571113513,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "c9a592abe82e52d4ed4309424f7b834e683f47ae5efca2d27489e398927c2af3"
+    },
+    "cb_IZ_4_s1": {
+      "pauli": "IZ",
+      "depth": 4,
+      "set": 1,
+      "seed": 4178807325,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "9f8e60fbcc85da1e65bb9c9a498a70bb5ff7924c2b285bf368801ab0822eff71"
+    },
+    "cb_IZ_8_s1": {
+      "pauli": "IZ",
+      "depth": 8,
+      "set": 1,
+      "seed": 984564263,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "5d11ba4c54456603140979a68b9ae7b06ca8a65ef725bc36f1a537b0bc737709"
+    },
+    "cb_IZ_16_s1": {
+      "pauli": "IZ",
+      "depth": 16,
+      "set": 1,
+      "seed": 501404957,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "15921cf473a9da1c727aa40fe05092d06b27efee85bb9861074da9e851dadd05"
+    },
+    "cb_XI_0_s1": {
+      "pauli": "XI",
+      "depth": 0,
+      "set": 1,
+      "seed": 2784534430,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\nbarrier q[0],q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "b61b2ce71173ea563e947463f77fcb72fc9eb1a7f0b55e05de4cdd9eac1879c5"
+    },
+    "cb_XI_2_s1": {
+      "pauli": "XI",
+      "depth": 2,
+      "set": 1,
+      "seed": 2053875456,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "8f73910b57e828f20b6d566fad7fdb395c9a3a02077058c155d4a3e003ca978c"
+    },
+    "cb_XI_4_s1": {
+      "pauli": "XI",
+      "depth": 4,
+      "set": 1,
+      "seed": 1826434057,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "4b6353fc3d9ef2c891f7536f2313cf2db1d81d9b1820c32500ddb405676828a0"
+    },
+    "cb_XI_8_s1": {
+      "pauli": "XI",
+      "depth": 8,
+      "set": 1,
+      "seed": 2925745946,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "6b1d0064765e9cb589c74b539582395484d60073fd48853268ac53c67a5b0ee3"
+    },
+    "cb_XI_16_s1": {
+      "pauli": "XI",
+      "depth": 16,
+      "set": 1,
+      "seed": 184446427,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "5c79235903f9f8fa85973c6ee997b365f1b821527827f1041572262ccf7aa946"
+    },
+    "cb_XX_0_s1": {
+      "pauli": "XX",
+      "depth": 0,
+      "set": 1,
+      "seed": 3652666596,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nh q[1];\nbarrier q[0],q[1];\nh q[0];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "ae894cb98acfa36acef9a1031a9ee3eb612bacf6cb33a05b90c7ab6c65f124d0"
+    },
+    "cb_XX_2_s1": {
+      "pauli": "XX",
+      "depth": 2,
+      "set": 1,
+      "seed": 4009455313,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nh q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nh q[0];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "33cedf542600342f7ce60ca6ec3c7c531461d20d3851020743ec3555a822f821"
+    },
+    "cb_XX_4_s1": {
+      "pauli": "XX",
+      "depth": 4,
+      "set": 1,
+      "seed": 1880720572,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nh q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nh q[0];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "ac3cf90b697ed6d6fb2bfda9bda2e1425c5d2819911856876486a1c49d0b2c0e"
+    },
+    "cb_XX_8_s1": {
+      "pauli": "XX",
+      "depth": 8,
+      "set": 1,
+      "seed": 3002519329,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nh q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\nh q[0];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "6617609b2b4b4abd5cc8332f9c919bcdd2ff78167ad83a348bea2e12fa643c11"
+    },
+    "cb_XX_16_s1": {
+      "pauli": "XX",
+      "depth": 16,
+      "set": 1,
+      "seed": 1516750221,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nh q[1];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nh q[0];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "f52dfb58dddfe8257d7a93c3bec5fa9d6c5275c19355398cef70d1b76d6cc22e"
+    },
+    "cb_XY_0_s1": {
+      "pauli": "XY",
+      "depth": 0,
+      "set": 1,
+      "seed": 3744471782,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nh q[1];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "ab4fc78b5b6f965aa7e4eefd1c28cc5fc499131442fbdfc18825b1c08240a50b"
+    },
+    "cb_XY_2_s1": {
+      "pauli": "XY",
+      "depth": 2,
+      "set": 1,
+      "seed": 2205802674,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nh q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "ba374fb6703d5a3ccf61d1b1d7958bcbf108d512f6a93f8b1f65a7dc68767cbb"
+    },
+    "cb_XY_4_s1": {
+      "pauli": "XY",
+      "depth": 4,
+      "set": 1,
+      "seed": 2219205746,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nh q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "65813c2ecf83ce6d6b9eed2bdfcbba15c52b9513ec20398856ba5a0cbbff9cc5"
+    },
+    "cb_XY_8_s1": {
+      "pauli": "XY",
+      "depth": 8,
+      "set": 1,
+      "seed": 1657001113,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nh q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "c34644945eed16a4e385f1b72046a31310e137fac89883bfb8d6c9b0bef1e179"
+    },
+    "cb_XY_16_s1": {
+      "pauli": "XY",
+      "depth": 16,
+      "set": 1,
+      "seed": 1355903736,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nh q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "f99de55cd9814ec65b393b56b48cf0c4a0cbe768ab280524ac468744a5cc9a8e"
+    },
+    "cb_XZ_0_s1": {
+      "pauli": "XZ",
+      "depth": 0,
+      "set": 1,
+      "seed": 3522002827,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\nbarrier q[0],q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "b61b2ce71173ea563e947463f77fcb72fc9eb1a7f0b55e05de4cdd9eac1879c5"
+    },
+    "cb_XZ_2_s1": {
+      "pauli": "XZ",
+      "depth": 2,
+      "set": 1,
+      "seed": 470118064,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "fdc2b3a722261dbe71d26bf57da7802b8b0ea0dcfeb6f6d6777f58a9c95e8f47"
+    },
+    "cb_XZ_4_s1": {
+      "pauli": "XZ",
+      "depth": 4,
+      "set": 1,
+      "seed": 330958592,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "4304335685bb936297c51d7f519770b0b3e74b0a3d8f4ee38c119d1c84e7d649"
+    },
+    "cb_XZ_8_s1": {
+      "pauli": "XZ",
+      "depth": 8,
+      "set": 1,
+      "seed": 1231065896,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "2b2fb922bc62d158625e37e74be7d922383c7fa589dde9055c191639b89ef56a"
+    },
+    "cb_XZ_16_s1": {
+      "pauli": "XZ",
+      "depth": 16,
+      "set": 1,
+      "seed": 4242015166,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "9a710af82fc2ad4468e6b6876bf8f29f128b0315fa2169a8dfaec05f6c1e8b7b"
+    },
+    "cb_YI_0_s1": {
+      "pauli": "YI",
+      "depth": 0,
+      "set": 1,
+      "seed": 1316856422,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "4211657b94c878eface4705986ea525414956a29259cdc8b36922c0ea0ca7a7a"
+    },
+    "cb_YI_2_s1": {
+      "pauli": "YI",
+      "depth": 2,
+      "set": 1,
+      "seed": 1317142919,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "e0f4eff9b1bc8f3d0662b5c8ba31e327c26131452347069704495375f25dacdf"
+    },
+    "cb_YI_4_s1": {
+      "pauli": "YI",
+      "depth": 4,
+      "set": 1,
+      "seed": 1712818826,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "bd148d5a8dae746073cc3a0b296c399d47242c41f1afa05082c5d51093f06c59"
+    },
+    "cb_YI_8_s1": {
+      "pauli": "YI",
+      "depth": 8,
+      "set": 1,
+      "seed": 612740005,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "2d50033e336c5771c64a69f7c93f4639aa6be2fdb2be7cdea74f658cd528dda4"
+    },
+    "cb_YI_16_s1": {
+      "pauli": "YI",
+      "depth": 16,
+      "set": 1,
+      "seed": 3394160937,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "6726e3ff3a5180008552ceec9f4f7db9d14c74cd37fb91772f70f231fc7b9d65"
+    },
+    "cb_YX_0_s1": {
+      "pauli": "YX",
+      "depth": 0,
+      "set": 1,
+      "seed": 1358012137,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\nh q[0];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "61e0fbf99820dd53ec0d302034d80f3f3dab7a9223f1d86535c10aff676ad474"
+    },
+    "cb_YX_2_s1": {
+      "pauli": "YX",
+      "depth": 2,
+      "set": 1,
+      "seed": 3085421032,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nh q[0];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "ee72b0e85c4196ca74f40f850fe7c5ed790c136d58c958f5e102eb4834500b27"
+    },
+    "cb_YX_4_s1": {
+      "pauli": "YX",
+      "depth": 4,
+      "set": 1,
+      "seed": 2602011405,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nh q[0];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "87eea296683846caea0e9799e1dc54d5e595de9dcc8622fb8af1e650714ac692"
+    },
+    "cb_YX_8_s1": {
+      "pauli": "YX",
+      "depth": 8,
+      "set": 1,
+      "seed": 822681487,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nh q[0];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "8a023a611fe29f1ec805ba164f364950ed42a27489fdd7f6369858eeabd9ce3d"
+    },
+    "cb_YX_16_s1": {
+      "pauli": "YX",
+      "depth": 16,
+      "set": 1,
+      "seed": 1860854919,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nh q[0];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "e7fe6caee04abc7941f5c3859da059b3dd938547dbfbd7e2f51d27643cc4898a"
+    },
+    "cb_YY_0_s1": {
+      "pauli": "YY",
+      "depth": 0,
+      "set": 1,
+      "seed": 36587352,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "62d2b40c83bf18b28bcb1b6a6d59c8ce0a9ccfe16d6ae951bf9818f3dccfffbf"
+    },
+    "cb_YY_2_s1": {
+      "pauli": "YY",
+      "depth": 2,
+      "set": 1,
+      "seed": 4018019123,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "df6bc83c8eeb4d21cdbc033ea8c62017f5cf93a526f2d6ba6606e08596e1875f"
+    },
+    "cb_YY_4_s1": {
+      "pauli": "YY",
+      "depth": 4,
+      "set": 1,
+      "seed": 1408758323,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "5229b34126ad063030ed05f2b009d4b023dee5007d0d42c53572306b902418ba"
+    },
+    "cb_YY_8_s1": {
+      "pauli": "YY",
+      "depth": 8,
+      "set": 1,
+      "seed": 897518183,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "beb090ab1f18842a0c7203e5190b48354a1744033f216f94430b301f05a8c330"
+    },
+    "cb_YY_16_s1": {
+      "pauli": "YY",
+      "depth": 16,
+      "set": 1,
+      "seed": 2741870189,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "58c5f1daf720d71fdc49f0334f01e172140d2eacb07d985a9e8b9135771135f9"
+    },
+    "cb_YZ_0_s1": {
+      "pauli": "YZ",
+      "depth": 0,
+      "set": 1,
+      "seed": 341254452,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "4211657b94c878eface4705986ea525414956a29259cdc8b36922c0ea0ca7a7a"
+    },
+    "cb_YZ_2_s1": {
+      "pauli": "YZ",
+      "depth": 2,
+      "set": 1,
+      "seed": 3646711182,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "00bc143f282217db73a76dde635844ac1ebeac0e27859b0b601d8eafa39de4a1"
+    },
+    "cb_YZ_4_s1": {
+      "pauli": "YZ",
+      "depth": 4,
+      "set": 1,
+      "seed": 2288706872,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "49db7a60f0410ff364c6dad913d43ae2c19ca56a43737042a370680e3b003748"
+    },
+    "cb_YZ_8_s1": {
+      "pauli": "YZ",
+      "depth": 8,
+      "set": 1,
+      "seed": 1265468358,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "ca50cbec127d7d4b60850d072f471f4791df38d0f78aed80f4dbccc025664640"
+    },
+    "cb_YZ_16_s1": {
+      "pauli": "YZ",
+      "depth": 16,
+      "set": 1,
+      "seed": 3075142214,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "0896bb9eae7bb83f9bf8a859b1907c55ff268be30e05c13fe70a192c139fe7ec"
+    },
+    "cb_ZI_0_s1": {
+      "pauli": "ZI",
+      "depth": 0,
+      "set": 1,
+      "seed": 1836794305,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nbarrier q[0],q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "f568ed8e0357ee5404b29aba93479abc43e64f9477175563ac2065648f40791b"
+    },
+    "cb_ZI_2_s1": {
+      "pauli": "ZI",
+      "depth": 2,
+      "set": 1,
+      "seed": 1289316019,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "ee28c13c602620ab103c0d83f2be8c8a4cead4ee441aa828a55c04bb3501db93"
+    },
+    "cb_ZI_4_s1": {
+      "pauli": "ZI",
+      "depth": 4,
+      "set": 1,
+      "seed": 3462349103,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "402e53a9d230fe51e418c4edf91cee659d1cd5ca7dd6fb1e4a372f1c8491d950"
+    },
+    "cb_ZI_8_s1": {
+      "pauli": "ZI",
+      "depth": 8,
+      "set": 1,
+      "seed": 1587822866,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "284320062c405de291565e88cedcfe603c55727cefedaf834c44762b4774954d"
+    },
+    "cb_ZI_16_s1": {
+      "pauli": "ZI",
+      "depth": 16,
+      "set": 1,
+      "seed": 377312948,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "4801c95c894c1422712f9f5156cc6d7a26e9302f5810bd8799d9a7555dce4026"
+    },
+    "cb_ZX_0_s1": {
+      "pauli": "ZX",
+      "depth": 0,
+      "set": 1,
+      "seed": 43459727,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nbarrier q[0],q[1];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "d4a06d6e2e6bb5e8941c6a17e687fa8ebf986524cb29d9c98044c8a17072ce29"
+    },
+    "cb_ZX_2_s1": {
+      "pauli": "ZX",
+      "depth": 2,
+      "set": 1,
+      "seed": 2439614950,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "d2afef1e1a2c51ff4422417a7f6241518847c4f2c896028c3edd8c335bc1af9e"
+    },
+    "cb_ZX_4_s1": {
+      "pauli": "ZX",
+      "depth": 4,
+      "set": 1,
+      "seed": 2732731889,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "506ee3781286e6914647cf64bd6b908660fd04a3888fb284830f821c29834f2a"
+    },
+    "cb_ZX_8_s1": {
+      "pauli": "ZX",
+      "depth": 8,
+      "set": 1,
+      "seed": 567253397,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "e6148cde4621c18289ed51830077db5ff0c0882612ef40f25590e21582c75ab9"
+    },
+    "cb_ZX_16_s1": {
+      "pauli": "ZX",
+      "depth": 16,
+      "set": 1,
+      "seed": 2449928534,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "b95584dd637e018a18665824ddf1eda2edafb0ec3f1b5d825ed33847ceb337a2"
+    },
+    "cb_ZY_0_s1": {
+      "pauli": "ZY",
+      "depth": 0,
+      "set": 1,
+      "seed": 2431490353,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "f2dcd69bb2dc229c5b49bdf77c3278baaa286507c079f8dfa5fbeae0fb3558e3"
+    },
+    "cb_ZY_2_s1": {
+      "pauli": "ZY",
+      "depth": 2,
+      "set": 1,
+      "seed": 1476074173,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "6bbef7e0f5f49cd3d963e50344aeffe4243f4700493279f8677018b1ef9eed84"
+    },
+    "cb_ZY_4_s1": {
+      "pauli": "ZY",
+      "depth": 4,
+      "set": 1,
+      "seed": 986600476,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "725364f34845786ec922091ce01da376086a38bdfe67d36983e098c99146847d"
+    },
+    "cb_ZY_8_s1": {
+      "pauli": "ZY",
+      "depth": 8,
+      "set": 1,
+      "seed": 725239893,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "91f9464dce6317891b79bd19c0e28effca9d80ac473b8d5dc62e351cb51136e0"
+    },
+    "cb_ZY_16_s1": {
+      "pauli": "ZY",
+      "depth": 16,
+      "set": 1,
+      "seed": 2250732191,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "183a3d5284b5425b8e1e6fc33cd5433e9e9471561a517045b5d19be2cc72d43b"
+    },
+    "cb_ZZ_0_s1": {
+      "pauli": "ZZ",
+      "depth": 0,
+      "set": 1,
+      "seed": 1373851242,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nbarrier q[0],q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "f568ed8e0357ee5404b29aba93479abc43e64f9477175563ac2065648f40791b"
+    },
+    "cb_ZZ_2_s1": {
+      "pauli": "ZZ",
+      "depth": 2,
+      "set": 1,
+      "seed": 2851992455,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "30592e0dcd39c990553237670df5e468c63892c3eb1541eddb1291971714792b"
+    },
+    "cb_ZZ_4_s1": {
+      "pauli": "ZZ",
+      "depth": 4,
+      "set": 1,
+      "seed": 3382377866,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "b2600af289ca74dc818321ed09b750ac866e1c08b6ff04ee9716775bd0e4d86f"
+    },
+    "cb_ZZ_8_s1": {
+      "pauli": "ZZ",
+      "depth": 8,
+      "set": 1,
+      "seed": 1960226541,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "6f35f4c0987669a21d4db4782cc564f5caafc9cfea9d91cb22433efe4690ee15"
+    },
+    "cb_ZZ_16_s1": {
+      "pauli": "ZZ",
+      "depth": 16,
+      "set": 1,
+      "seed": 2676628611,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "d531bc814286d29f25432abb4bd313622f13abe9a4aa8d721057375d00ff6fc8"
+    },
+    "cb_IX_0_s2": {
+      "pauli": "IX",
+      "depth": 0,
+      "set": 2,
+      "seed": 1845374217,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nbarrier q[0],q[1];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "d4a06d6e2e6bb5e8941c6a17e687fa8ebf986524cb29d9c98044c8a17072ce29"
+    },
+    "cb_IX_2_s2": {
+      "pauli": "IX",
+      "depth": 2,
+      "set": 2,
+      "seed": 3936621127,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "54bf9d51b98d41a3562addb8295933d7a268583643bbf327134349130c8e87eb"
+    },
+    "cb_IX_4_s2": {
+      "pauli": "IX",
+      "depth": 4,
+      "set": 2,
+      "seed": 2959693267,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "8b056df366ac7ed0539b58e6c0e2826ef43d6f7260d838597674778164373fde"
+    },
+    "cb_IX_8_s2": {
+      "pauli": "IX",
+      "depth": 8,
+      "set": 2,
+      "seed": 3268096359,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "f0fbfbecab68a44f988e57fd91410adfb5c32a8a63cb2683559f75c39764c40d"
+    },
+    "cb_IX_16_s2": {
+      "pauli": "IX",
+      "depth": 16,
+      "set": 2,
+      "seed": 3989737209,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "be475ae373bbb36ab6691b287f344abd73df8fedc7efcb35eb203d04200ee2b4"
+    },
+    "cb_IY_0_s2": {
+      "pauli": "IY",
+      "depth": 0,
+      "set": 2,
+      "seed": 3636928649,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "f2dcd69bb2dc229c5b49bdf77c3278baaa286507c079f8dfa5fbeae0fb3558e3"
+    },
+    "cb_IY_2_s2": {
+      "pauli": "IY",
+      "depth": 2,
+      "set": 2,
+      "seed": 2077387163,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "ac802cb65db9e5655de5011c01e3e8d104be4d5d25f5438d812a3ca17147962e"
+    },
+    "cb_IY_4_s2": {
+      "pauli": "IY",
+      "depth": 4,
+      "set": 2,
+      "seed": 3255650329,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "1f9f9987d8e5d9508c41cddcb86039d6a4c94241abec18f265c3311f5a39d0e8"
+    },
+    "cb_IY_8_s2": {
+      "pauli": "IY",
+      "depth": 8,
+      "set": 2,
+      "seed": 300570127,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "f605465be47ed690865eac7277afab8890ced2b46b22657c3f5661abd0153a75"
+    },
+    "cb_IY_16_s2": {
+      "pauli": "IY",
+      "depth": 16,
+      "set": 2,
+      "seed": 476209244,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "e498ec23ac7052559f1a4b66019807c48ef3fa23a7313fea48659eace913f7da"
+    },
+    "cb_IZ_0_s2": {
+      "pauli": "IZ",
+      "depth": 0,
+      "set": 2,
+      "seed": 4230100319,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nbarrier q[0],q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "f568ed8e0357ee5404b29aba93479abc43e64f9477175563ac2065648f40791b"
+    },
+    "cb_IZ_2_s2": {
+      "pauli": "IZ",
+      "depth": 2,
+      "set": 2,
+      "seed": 1539698975,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "a159f308596b39a781c46f498f97996db1d12f8c615e3da4be6cc702f4917316"
+    },
+    "cb_IZ_4_s2": {
+      "pauli": "IZ",
+      "depth": 4,
+      "set": 2,
+      "seed": 3087663934,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "50bfa4d17243893d4253cba5fc4befe2184e881deb0902820b4ba64dec8ef980"
+    },
+    "cb_IZ_8_s2": {
+      "pauli": "IZ",
+      "depth": 8,
+      "set": 2,
+      "seed": 819833509,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "0b1527db458f5044500805aa4a367995f8babd493c9fbbb3624b8bcfb4fbc31d"
+    },
+    "cb_IZ_16_s2": {
+      "pauli": "IZ",
+      "depth": 16,
+      "set": 2,
+      "seed": 552703195,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "17cc4a89fee1a11f5f07a3429ea22654324c10f440b78a6af21bb77bb4c90b02"
+    },
+    "cb_XI_0_s2": {
+      "pauli": "XI",
+      "depth": 0,
+      "set": 2,
+      "seed": 218181388,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\nbarrier q[0],q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "b61b2ce71173ea563e947463f77fcb72fc9eb1a7f0b55e05de4cdd9eac1879c5"
+    },
+    "cb_XI_2_s2": {
+      "pauli": "XI",
+      "depth": 2,
+      "set": 2,
+      "seed": 4285250560,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "7e936f8c9470e1ed39e2503d7d8bea90ff5dd2534e1cf8521e63f80f65d88518"
+    },
+    "cb_XI_4_s2": {
+      "pauli": "XI",
+      "depth": 4,
+      "set": 2,
+      "seed": 3551312206,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "33408d1b81c62f36a84190d5f1ecd08c32f787b65dab6293a11308e992a274b1"
+    },
+    "cb_XI_8_s2": {
+      "pauli": "XI",
+      "depth": 8,
+      "set": 2,
+      "seed": 1404222318,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "802f24ab6b46ff3d774bd2ad01aad9945eed28015234f07f676fee472c00f0e5"
+    },
+    "cb_XI_16_s2": {
+      "pauli": "XI",
+      "depth": 16,
+      "set": 2,
+      "seed": 3409399583,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "0754bdf31da3780f693194498278ccd05637446848abbcb42cfaf23097dc8684"
+    },
+    "cb_XX_0_s2": {
+      "pauli": "XX",
+      "depth": 0,
+      "set": 2,
+      "seed": 1894525382,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nh q[1];\nbarrier q[0],q[1];\nh q[0];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "ae894cb98acfa36acef9a1031a9ee3eb612bacf6cb33a05b90c7ab6c65f124d0"
+    },
+    "cb_XX_2_s2": {
+      "pauli": "XX",
+      "depth": 2,
+      "set": 2,
+      "seed": 1910060635,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nh q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\nh q[0];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "0513ba7c6f2edfc35750c9fa0fc996fc9fa60aa26f603bf742715a6057b0b36a"
+    },
+    "cb_XX_4_s2": {
+      "pauli": "XX",
+      "depth": 4,
+      "set": 2,
+      "seed": 1865399439,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nh q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\nh q[0];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "69f1259ace6ba5edbdf6e8a7047965ed4fed01c7ce3bc73bb753d5c1846ed597"
+    },
+    "cb_XX_8_s2": {
+      "pauli": "XX",
+      "depth": 8,
+      "set": 2,
+      "seed": 1255376159,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nh q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\nh q[0];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "cd2880f6cc26d2c59ec8c4aed55b374a4baa27983379d3757c7a262cb5383225"
+    },
+    "cb_XX_16_s2": {
+      "pauli": "XX",
+      "depth": 16,
+      "set": 2,
+      "seed": 845213068,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nh q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nh q[0];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "a91c346f13ca06c9b31691156a72d41314365da7a52b4d0cec3b4e19384cbd60"
+    },
+    "cb_XY_0_s2": {
+      "pauli": "XY",
+      "depth": 0,
+      "set": 2,
+      "seed": 1253517478,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nh q[1];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "ab4fc78b5b6f965aa7e4eefd1c28cc5fc499131442fbdfc18825b1c08240a50b"
+    },
+    "cb_XY_2_s2": {
+      "pauli": "XY",
+      "depth": 2,
+      "set": 2,
+      "seed": 2808025097,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nh q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "27659e1a19058789cdc39e2b827855f4451058ea10355d9c55d95a12b7c8705b"
+    },
+    "cb_XY_4_s2": {
+      "pauli": "XY",
+      "depth": 4,
+      "set": 2,
+      "seed": 1620200564,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nh q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "d8ce22b480219a2dbaadafad920472afff893b5bbd329e059fae48aa300d87b0"
+    },
+    "cb_XY_8_s2": {
+      "pauli": "XY",
+      "depth": 8,
+      "set": 2,
+      "seed": 3660222275,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nh q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "bda148085c4b13c21783002fcc7704285a2d10e3f74bd99d1e3061395b40a327"
+    },
+    "cb_XY_16_s2": {
+      "pauli": "XY",
+      "depth": 16,
+      "set": 2,
+      "seed": 2887186122,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nh q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "e149005d93e66f9056101e43942504927f32b62933954f77b65b72486cf2f4bf"
+    },
+    "cb_XZ_0_s2": {
+      "pauli": "XZ",
+      "depth": 0,
+      "set": 2,
+      "seed": 3189271414,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\nbarrier q[0],q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "b61b2ce71173ea563e947463f77fcb72fc9eb1a7f0b55e05de4cdd9eac1879c5"
+    },
+    "cb_XZ_2_s2": {
+      "pauli": "XZ",
+      "depth": 2,
+      "set": 2,
+      "seed": 1538846263,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "9d50834c43f475bb36542b50a29ced47458988fcd881d7689324b17280b13341"
+    },
+    "cb_XZ_4_s2": {
+      "pauli": "XZ",
+      "depth": 4,
+      "set": 2,
+      "seed": 3712422498,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "a884eafc7fb500bb5ff86e055f0bfaae1132297a3a042cf33f1ce615e1ee004f"
+    },
+    "cb_XZ_8_s2": {
+      "pauli": "XZ",
+      "depth": 8,
+      "set": 2,
+      "seed": 2554975013,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "cd7a67a2dacff2d6b8441e0d24d7ad884dcf9b2931ba2956e6436b09de824e5a"
+    },
+    "cb_XZ_16_s2": {
+      "pauli": "XZ",
+      "depth": 16,
+      "set": 2,
+      "seed": 2153048381,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "6fc9ab48faa7a158ad7ec3b200754e29779d1d47ace48b36eff2ac3c6fda4608"
+    },
+    "cb_YI_0_s2": {
+      "pauli": "YI",
+      "depth": 0,
+      "set": 2,
+      "seed": 2842531994,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "4211657b94c878eface4705986ea525414956a29259cdc8b36922c0ea0ca7a7a"
+    },
+    "cb_YI_2_s2": {
+      "pauli": "YI",
+      "depth": 2,
+      "set": 2,
+      "seed": 2063486629,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "75130454af290f75824f41f505b7849fa5a58ee73dc3f1f6a3d03776c3b3127e"
+    },
+    "cb_YI_4_s2": {
+      "pauli": "YI",
+      "depth": 4,
+      "set": 2,
+      "seed": 3182410863,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "871b587e830de989b8098b2cbfb319168817158215217cf237fd55f2a222571d"
+    },
+    "cb_YI_8_s2": {
+      "pauli": "YI",
+      "depth": 8,
+      "set": 2,
+      "seed": 1255080970,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "95aede2f98408888d8454e561cb641ed8c639bfa96b78485b6384a3173b11aa2"
+    },
+    "cb_YI_16_s2": {
+      "pauli": "YI",
+      "depth": 16,
+      "set": 2,
+      "seed": 3370386471,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "8103bb8880ef3894f81c2e3f978861395c7d5a8e8dff3bf819e2802e1aa9c6b0"
+    },
+    "cb_YX_0_s2": {
+      "pauli": "YX",
+      "depth": 0,
+      "set": 2,
+      "seed": 1390128160,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\nh q[0];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "61e0fbf99820dd53ec0d302034d80f3f3dab7a9223f1d86535c10aff676ad474"
+    },
+    "cb_YX_2_s2": {
+      "pauli": "YX",
+      "depth": 2,
+      "set": 2,
+      "seed": 380156479,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nh q[0];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "79e1533fe703cdd2c3a521fb620520136a4a67c8bf117826e9092b160199d2b3"
+    },
+    "cb_YX_4_s2": {
+      "pauli": "YX",
+      "depth": 4,
+      "set": 2,
+      "seed": 236833161,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nh q[0];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "9989ff33698fb17a4ae524139623e8011cdfa09648cd4adb3ec3861cfc4ac410"
+    },
+    "cb_YX_8_s2": {
+      "pauli": "YX",
+      "depth": 8,
+      "set": 2,
+      "seed": 3032762172,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nh q[0];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "b7d18e577d2acc1b7527fb4377660b1e8336811f08828d13ee30f2d350187b9f"
+    },
+    "cb_YX_16_s2": {
+      "pauli": "YX",
+      "depth": 16,
+      "set": 2,
+      "seed": 1012319340,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nh q[0];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "17df2a85ae68ea2e458976de968efb5b0f0083df33bcb68e6e2f43c06a15902e"
+    },
+    "cb_YY_0_s2": {
+      "pauli": "YY",
+      "depth": 0,
+      "set": 2,
+      "seed": 4195246642,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "62d2b40c83bf18b28bcb1b6a6d59c8ce0a9ccfe16d6ae951bf9818f3dccfffbf"
+    },
+    "cb_YY_2_s2": {
+      "pauli": "YY",
+      "depth": 2,
+      "set": 2,
+      "seed": 3810100321,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "c26c7ce9dcc95c1efb1ecc6ffa8ecf7d455493fef1453f1fa458cfe39071a5c8"
+    },
+    "cb_YY_4_s2": {
+      "pauli": "YY",
+      "depth": 4,
+      "set": 2,
+      "seed": 4219257027,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "241f3d041807bd8aa5dbbabdc56e7a799b4eb0e0b48f59c912511132d4172065"
+    },
+    "cb_YY_8_s2": {
+      "pauli": "YY",
+      "depth": 8,
+      "set": 2,
+      "seed": 2650814927,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "74f54a38a7479a64dd81888e5a8be86bfb366cc59022ca617f19f6eda38aa0fb"
+    },
+    "cb_YY_16_s2": {
+      "pauli": "YY",
+      "depth": 16,
+      "set": 2,
+      "seed": 2902199309,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "1acd10ff0386a6a195f8e6c613fa9760c8b108b2170e326281e2c8c691c3238f"
+    },
+    "cb_YZ_0_s2": {
+      "pauli": "YZ",
+      "depth": 0,
+      "set": 2,
+      "seed": 1449278068,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "4211657b94c878eface4705986ea525414956a29259cdc8b36922c0ea0ca7a7a"
+    },
+    "cb_YZ_2_s2": {
+      "pauli": "YZ",
+      "depth": 2,
+      "set": 2,
+      "seed": 4095937219,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "605738a8172e20683d66bebb523c46439c9231db1b265ea89a3fbaf068ae1f90"
+    },
+    "cb_YZ_4_s2": {
+      "pauli": "YZ",
+      "depth": 4,
+      "set": 2,
+      "seed": 1602177482,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "ee8ae9052cda4da932d92491cb1a9c2de4d2d0632ea380c24d76cca2fdb90d37"
+    },
+    "cb_YZ_8_s2": {
+      "pauli": "YZ",
+      "depth": 8,
+      "set": 2,
+      "seed": 2526692094,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "22db68c68edf54ae084344b6fdc864608bfa6af1798cfa7f1b47056dffc2b10f"
+    },
+    "cb_YZ_16_s2": {
+      "pauli": "YZ",
+      "depth": 16,
+      "set": 2,
+      "seed": 352829731,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[1];\ns q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nsdg q[1];\nh q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "ea51febc6b71feb2b0cc35303be09a5a8d685392f65ae8439a436826357e08c5"
+    },
+    "cb_ZI_0_s2": {
+      "pauli": "ZI",
+      "depth": 0,
+      "set": 2,
+      "seed": 1112069042,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nbarrier q[0],q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "f568ed8e0357ee5404b29aba93479abc43e64f9477175563ac2065648f40791b"
+    },
+    "cb_ZI_2_s2": {
+      "pauli": "ZI",
+      "depth": 2,
+      "set": 2,
+      "seed": 1284344223,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "a2c270822292dc4ad0d3e53e66f1e500c6f95f3fd175d20285a79794c0b6ce8d"
+    },
+    "cb_ZI_4_s2": {
+      "pauli": "ZI",
+      "depth": 4,
+      "set": 2,
+      "seed": 28187786,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "4880d9c6eaad35d2eed194e45e8dad38abcb4bb0691b35a63ed284df5e7c80ae"
+    },
+    "cb_ZI_8_s2": {
+      "pauli": "ZI",
+      "depth": 8,
+      "set": 2,
+      "seed": 3979703352,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "3a842445c0a204fda79b8d2202a78fd5052bc13b9a78f2ff56a8e0e3b2dfd96e"
+    },
+    "cb_ZI_16_s2": {
+      "pauli": "ZI",
+      "depth": 16,
+      "set": 2,
+      "seed": 2361069102,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\ny q[1];\ncz q[0],q[1];\ny q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "0867e28d720ee54ed7bceda0881d665f7a0d11e9e9b39cee82eac6784b455686"
+    },
+    "cb_ZX_0_s2": {
+      "pauli": "ZX",
+      "depth": 0,
+      "set": 2,
+      "seed": 1489051224,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nbarrier q[0],q[1];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "d4a06d6e2e6bb5e8941c6a17e687fa8ebf986524cb29d9c98044c8a17072ce29"
+    },
+    "cb_ZX_2_s2": {
+      "pauli": "ZX",
+      "depth": 2,
+      "set": 2,
+      "seed": 527390243,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "be538375d2e38c00b2a6720f3a5c4da7565e30bf78439259d55a5fedbd154221"
+    },
+    "cb_ZX_4_s2": {
+      "pauli": "ZX",
+      "depth": 4,
+      "set": 2,
+      "seed": 992016479,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "0273f9a5ea4e785d1441edb64b7af5a94f8e2c493a669d9438a073f611a5fa61"
+    },
+    "cb_ZX_8_s2": {
+      "pauli": "ZX",
+      "depth": 8,
+      "set": 2,
+      "seed": 1428601466,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "a6a7077ab988c020688fc4494bab84fa6062319e95e8a0ed0de354ae8e8f3ee0"
+    },
+    "cb_ZX_16_s2": {
+      "pauli": "ZX",
+      "depth": 16,
+      "set": 2,
+      "seed": 983789242,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "e8622dee6f09c654a51aa2ab4bb20eccf581aa68a97cf9d3aa481aa6292ad528"
+    },
+    "cb_ZY_0_s2": {
+      "pauli": "ZY",
+      "depth": 0,
+      "set": 2,
+      "seed": 3434444889,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "f2dcd69bb2dc229c5b49bdf77c3278baaa286507c079f8dfa5fbeae0fb3558e3"
+    },
+    "cb_ZY_2_s2": {
+      "pauli": "ZY",
+      "depth": 2,
+      "set": 2,
+      "seed": 2098646606,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "5568ed3efffd64b72d1d50ecf8533ea5d3dfdc585fb6fc73b53cf5eddc89ba37"
+    },
+    "cb_ZY_4_s2": {
+      "pauli": "ZY",
+      "depth": 4,
+      "set": 2,
+      "seed": 665538718,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "5982a290baf3fd9829ef0243b4d01147acace17d0b4c10f4c27d44eab56019b8"
+    },
+    "cb_ZY_8_s2": {
+      "pauli": "ZY",
+      "depth": 8,
+      "set": 2,
+      "seed": 2586666981,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "fd90b94df00149626a189328024ad6f0ad144ce1962eff1c7e22e6b5d41f596c"
+    },
+    "cb_ZY_16_s2": {
+      "pauli": "ZY",
+      "depth": 16,
+      "set": 2,
+      "seed": 2457575249,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ns q[0];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nsdg q[0];\nh q[0];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "dd7e1601089e59ec4feb97d0aa42b416ec2cef62d75133548a44b66bdfbcc575"
+    },
+    "cb_ZZ_0_s2": {
+      "pauli": "ZZ",
+      "depth": 0,
+      "set": 2,
+      "seed": 2698079309,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nbarrier q[0],q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "f568ed8e0357ee5404b29aba93479abc43e64f9477175563ac2065648f40791b"
+    },
+    "cb_ZZ_2_s2": {
+      "pauli": "ZZ",
+      "depth": 2,
+      "set": 2,
+      "seed": 2807073615,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\nx q[1];\ncz q[0],q[1];\nx q[1];\nbarrier q[0],q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "efe0958b3934218a1869f8610166f16ddfa67f2c2be2539c4e49bfd4e820aa4b"
+    },
+    "cb_ZZ_4_s2": {
+      "pauli": "ZZ",
+      "depth": 4,
+      "set": 2,
+      "seed": 1816665646,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "32db2cc224401ab8c3dee7ba24d6705f3cac833ad9ea3ee383ca23143216e161"
+    },
+    "cb_ZZ_8_s2": {
+      "pauli": "ZZ",
+      "depth": 8,
+      "set": 2,
+      "seed": 1391238271,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\ncz q[0],q[1];\ny q[0];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\ncz q[0],q[1];\nbarrier q[0],q[1];\nx q[0];\ncz q[0],q[1];\nx q[0];\nz q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "c97c1a50d36bae2dea292490c1b3287dad0bfdc3c2adecaed4c0e6f3b7927e5e"
+    },
+    "cb_ZZ_16_s2": {
+      "pauli": "ZZ",
+      "depth": 16,
+      "set": 2,
+      "seed": 994971622,
+      "shots": 4096,
+      "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nx q[0];\nx q[1];\ncz q[0],q[1];\ny q[0];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\nx q[1];\ncz q[0],q[1];\nx q[0];\ny q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\ny q[1];\ncz q[0],q[1];\nz q[0];\ny q[1];\nbarrier q[0],q[1];\nx q[1];\ncz q[0],q[1];\nz q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[1];\ncz q[0],q[1];\nz q[1];\nbarrier q[0],q[1];\nx q[0];\nz q[1];\ncz q[0],q[1];\nx q[0];\nbarrier q[0],q[1];\ny q[0];\ny q[1];\ncz q[0],q[1];\nx q[0];\nx q[1];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\nz q[0];\ncz q[0],q[1];\nz q[0];\nbarrier q[0],q[1];\nz q[0];\ny q[1];\ncz q[0],q[1];\ny q[1];\nbarrier q[0],q[1];\ny q[0];\nz q[1];\ncz q[0],q[1];\ny q[0];\nbarrier q[0],q[1];\nz q[0];\nz q[1];\ncz q[0],q[1];\nz q[0];\nz q[1];\nbarrier q[0],q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];",
+      "qasm_sha256": "4e49a259e2d832127cf59fed85f3a3943e33cd8fc45077b7af96dee58c08925b"
+    }
+  },
+  "order": [
+    "cb_YX_2_s1",
+    "cb_ZI_2_s1",
+    "cb_XI_8_s1",
+    "cb_ZI_16_s1",
+    "cb_XZ_16_s1",
+    "cb_YY_16_s1",
+    "cb_YI_16_s1",
+    "cb_YX_0_s1",
+    "cb_ZZ_2_s1",
+    "cb_IY_0_s1",
+    "cb_XY_16_s1",
+    "cb_YZ_0_s1",
+    "cb_ZI_0_s1",
+    "cb_ZY_0_s1",
+    "cb_YI_4_s1",
+    "cb_XZ_2_s1",
+    "cb_XZ_0_s1",
+    "cb_ZX_16_s1",
+    "cb_IX_2_s1",
+    "cb_XX_2_s1",
+    "cb_IZ_8_s1",
+    "cb_IZ_4_s1",
+    "cb_ZX_8_s1",
+    "cb_XI_2_s1",
+    "cb_XX_16_s1",
+    "cb_XI_0_s1",
+    "cb_IY_16_s1",
+    "cb_YY_4_s1",
+    "cb_ZX_4_s1",
+    "cb_ZY_2_s1",
+    "cb_YY_2_s1",
+    "cb_ZY_8_s1",
+    "cb_IX_0_s1",
+    "cb_YY_8_s1",
+    "cb_YI_2_s1",
+    "cb_IX_4_s1",
+    "cb_ZZ_16_s1",
+    "cb_IZ_16_s1",
+    "cb_XZ_8_s1",
+    "cb_YZ_2_s1",
+    "cb_ZZ_4_s1",
+    "cb_IX_16_s1",
+    "cb_XX_8_s1",
+    "cb_YZ_4_s1",
+    "cb_ZX_0_s1",
+    "cb_IY_4_s1",
+    "cb_XI_4_s1",
+    "cb_YY_0_s1",
+    "cb_ZZ_8_s1",
+    "cb_XY_2_s1",
+    "cb_ZY_16_s1",
+    "cb_XX_0_s1",
+    "cb_ZI_8_s1",
+    "cb_XZ_4_s1",
+    "cb_XI_16_s1",
+    "cb_XY_0_s1",
+    "cb_IY_8_s1",
+    "cb_YI_8_s1",
+    "cb_YZ_8_s1",
+    "cb_XX_4_s1",
+    "cb_IZ_2_s1",
+    "cb_IY_2_s1",
+    "cb_YX_8_s1",
+    "cb_XY_4_s1",
+    "cb_YZ_16_s1",
+    "cb_ZY_4_s1",
+    "cb_YX_16_s1",
+    "cb_YX_4_s1",
+    "cb_XY_8_s1",
+    "cb_YI_0_s1",
+    "cb_IZ_0_s1",
+    "cb_ZI_4_s1",
+    "cb_IX_8_s1",
+    "cb_ZX_2_s1",
+    "cb_ZZ_0_s1",
+    "cb_YZ_8_s2",
+    "cb_YZ_2_s2",
+    "cb_XX_8_s2",
+    "cb_YX_0_s2",
+    "cb_ZZ_16_s2",
+    "cb_XY_0_s2",
+    "cb_XX_0_s2",
+    "cb_ZI_0_s2",
+    "cb_XZ_2_s2",
+    "cb_XX_16_s2",
+    "cb_YI_8_s2",
+    "cb_XZ_0_s2",
+    "cb_ZI_8_s2",
+    "cb_ZZ_8_s2",
+    "cb_IX_2_s2",
+    "cb_ZX_16_s2",
+    "cb_YI_16_s2",
+    "cb_YZ_0_s2",
+    "cb_YY_4_s2",
+    "cb_ZY_8_s2",
+    "cb_ZX_8_s2",
+    "cb_IZ_16_s2",
+    "cb_YZ_16_s2",
+    "cb_ZY_2_s2",
+    "cb_YY_2_s2",
+    "cb_YX_16_s2",
+    "cb_XZ_8_s2",
+    "cb_XI_2_s2",
+    "cb_YY_16_s2",
+    "cb_IY_0_s2",
+    "cb_XY_4_s2",
+    "cb_YX_2_s2",
+    "cb_ZI_16_s2",
+    "cb_ZY_0_s2",
+    "cb_XI_0_s2",
+    "cb_YY_8_s2",
+    "cb_YX_4_s2",
+    "cb_IZ_2_s2",
+    "cb_XY_8_s2",
+    "cb_ZI_4_s2",
+    "cb_ZX_2_s2",
+    "cb_ZX_4_s2",
+    "cb_IY_2_s2",
+    "cb_YI_0_s2",
+    "cb_ZX_0_s2",
+    "cb_IZ_8_s2",
+    "cb_YY_0_s2",
+    "cb_IY_4_s2",
+    "cb_YI_4_s2",
+    "cb_IY_8_s2",
+    "cb_YZ_4_s2",
+    "cb_IX_0_s2",
+    "cb_IX_4_s2",
+    "cb_ZZ_2_s2",
+    "cb_XI_4_s2",
+    "cb_YX_8_s2",
+    "cb_IX_16_s2",
+    "cb_IZ_0_s2",
+    "cb_XZ_4_s2",
+    "cb_IY_16_s2",
+    "cb_XX_2_s2",
+    "cb_XY_16_s2",
+    "cb_ZZ_4_s2",
+    "cb_IZ_4_s2",
+    "cb_XX_4_s2",
+    "cb_ZZ_0_s2",
+    "cb_ZY_16_s2",
+    "cb_XI_16_s2",
+    "cb_ZI_2_s2",
+    "cb_YI_2_s2",
+    "cb_XZ_16_s2",
+    "cb_IX_8_s2",
+    "cb_XY_2_s2",
+    "cb_ZY_4_s2",
+    "cb_XI_8_s2"
+  ],
+  "identifiability": {
+    "design": "cz_even",
+    "rank": 9,
+    "n_unknowns": 15,
+    "nullity": 6,
+    "identifiable": false,
+    "orbits": [
+      [
+        "IX",
+        "ZX"
+      ],
+      [
+        "IY",
+        "ZY"
+      ],
+      [
+        "IZ"
+      ],
+      [
+        "XI",
+        "XZ"
+      ],
+      [
+        "XX",
+        "YY"
+      ],
+      [
+        "XY",
+        "YX"
+      ],
+      [
+        "YI",
+        "YZ"
+      ],
+      [
+        "ZI"
+      ],
+      [
+        "ZZ"
+      ]
+    ],
+    "equation": "-log(f_eff)/2 = D @ gamma",
+    "matrix": [
+      [
+        0.0,
+        1.0,
+        1.0,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      [
+        1.0,
+        0.0,
+        1.0,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      [
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.5,
+        0.5,
+        0.0,
+        0.0,
+        0.5,
+        0.5,
+        0.0,
+        1.0,
+        0.5,
+        0.5,
+        1.0,
+        1.0,
+        0.5,
+        0.5,
+        1.0
+      ],
+      [
+        0.5,
+        0.5,
+        1.0,
+        0.5,
+        0.0,
+        1.0,
+        0.5,
+        0.5,
+        1.0,
+        0.0,
+        0.5,
+        1.0,
+        0.5,
+        0.5,
+        0.0
+      ],
+      [
+        0.5,
+        0.5,
+        1.0,
+        0.5,
+        1.0,
+        0.0,
+        0.5,
+        0.5,
+        0.0,
+        1.0,
+        0.5,
+        1.0,
+        0.5,
+        0.5,
+        0.0
+      ],
+      [
+        0.5,
+        0.5,
+        0.0,
+        0.0,
+        0.5,
+        0.5,
+        0.0,
+        1.0,
+        0.5,
+        0.5,
+        1.0,
+        1.0,
+        0.5,
+        0.5,
+        1.0
+      ],
+      [
+        0.5,
+        0.5,
+        0.0,
+        1.0,
+        0.5,
+        0.5,
+        1.0,
+        0.0,
+        0.5,
+        0.5,
+        0.0,
+        1.0,
+        0.5,
+        0.5,
+        1.0
+      ],
+      [
+        0.5,
+        0.5,
+        1.0,
+        0.5,
+        1.0,
+        0.0,
+        0.5,
+        0.5,
+        0.0,
+        1.0,
+        0.5,
+        1.0,
+        0.5,
+        0.5,
+        0.0
+      ],
+      [
+        0.5,
+        0.5,
+        1.0,
+        0.5,
+        0.0,
+        1.0,
+        0.5,
+        0.5,
+        1.0,
+        0.0,
+        0.5,
+        1.0,
+        0.5,
+        0.5,
+        0.0
+      ],
+      [
+        0.5,
+        0.5,
+        0.0,
+        1.0,
+        0.5,
+        0.5,
+        1.0,
+        0.0,
+        0.5,
+        0.5,
+        0.0,
+        1.0,
+        0.5,
+        0.5,
+        1.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        1.0,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      [
+        1.0,
+        0.0,
+        1.0,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      [
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        0.0
+      ]
+    ]
+  },
+  "hardware_submission_allowed": false,
+  "blockers": [
+    "posto 9/15",
+    "SPAM e randomizações não validados",
+    "compilação e layout físico não auditados"
+  ],
+  "limits": "Piloto offline condicionado a canal Pauli estacionário e SPAM multiplicativo. Twirls finitos não comprovam tailoring; portas locais e compilação física não auditadas. IC de shots não cobre drift, seeds ou erro de modelo. CZ par tem posto 9 para 15 taxas; PEC 2q permanece bloqueado.",
+  "manifest_sha256": "bcd35f00b1e99bbf01db9a28af9f317996ea1826492f1741cf3a8399823eb303"
+}

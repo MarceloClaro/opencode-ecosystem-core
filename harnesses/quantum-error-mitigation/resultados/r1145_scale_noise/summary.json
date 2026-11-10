@@ -1,0 +1,206 @@
+{
+  "bench15": {
+    "quantum": {
+      "mean": 0.9583333333333334,
+      "pooled": 0.9583333333333334,
+      "ci": [
+        0.9166666666666666,
+        0.9916666666666667
+      ]
+    },
+    "projected": {
+      "mean": 0.9249999999999999,
+      "pooled": 0.925,
+      "ci": [
+        0.875,
+        0.9666666666666667
+      ]
+    },
+    "classical": {
+      "mean": 0.9416666666666668,
+      "pooled": 0.9416666666666667,
+      "ci": [
+        0.9,
+        0.9833333333333333
+      ]
+    }
+  },
+  "bench20": {
+    "quantum": {
+      "mean": 0.8916666666666666,
+      "pooled": 0.8916666666666667,
+      "ci": [
+        0.8333333333333334,
+        0.9416666666666667
+      ]
+    },
+    "projected": {
+      "mean": 0.8583333333333334,
+      "pooled": 0.8583333333333333,
+      "ci": [
+        0.7916666666666666,
+        0.9166666666666666
+      ]
+    },
+    "classical": {
+      "mean": 0.8916666666666666,
+      "pooled": 0.8916666666666667,
+      "ci": [
+        0.8333333333333334,
+        0.9416666666666667
+      ]
+    }
+  },
+  "learning_curve": {
+    "sizes": [
+      20,
+      40,
+      80,
+      160
+    ],
+    "quantum_exponent": 0.524511249783654,
+    "quantum_fit": {
+      "a": 0.9373026531919284,
+      "exponent": 0.524511249783654,
+      "r2": 0.9161931265643598,
+      "points_used": 4,
+      "ci_low": -0.15329513734409278,
+      "ci_high": 1.0000000000000009,
+      "valid_resamples": 2000
+    },
+    "classical_fit": {
+      "a": 0.07136752549956135,
+      "exponent": 0.032192809488736776,
+      "r2": 0.0037022550892897854,
+      "points_used": 4,
+      "ci_low": -0.0736965594166206,
+      "ci_high": 1.0000000000000007,
+      "valid_resamples": 2000
+    },
+    "quantum_pooled": [
+      0.8333333333333334,
+      0.8541666666666666,
+      0.9270833333333334,
+      0.9375
+    ],
+    "classical_pooled": [
+      0.9583333333333334,
+      0.8958333333333334,
+      0.9166666666666666,
+      0.9583333333333334
+    ]
+  },
+  "noise_sweep": [
+    {
+      "shots": 512,
+      "readout_error": 0.0,
+      "mean_noisy_test_accuracy": 0.49999999999999994,
+      "std_noisy_test_accuracy": 0.04166666666666666,
+      "n": 3
+    },
+    {
+      "shots": 512,
+      "readout_error": 0.02,
+      "mean_noisy_test_accuracy": 0.5416666666666666,
+      "std_noisy_test_accuracy": 0.041666666666666685,
+      "n": 3
+    },
+    {
+      "shots": 512,
+      "readout_error": 0.05,
+      "mean_noisy_test_accuracy": 0.4444444444444445,
+      "std_noisy_test_accuracy": 0.08673608331108884,
+      "n": 3
+    },
+    {
+      "shots": 2048,
+      "readout_error": 0.0,
+      "mean_noisy_test_accuracy": 0.5277777777777778,
+      "std_noisy_test_accuracy": 0.06364688465216446,
+      "n": 3
+    },
+    {
+      "shots": 2048,
+      "readout_error": 0.02,
+      "mean_noisy_test_accuracy": 0.5416666666666666,
+      "std_noisy_test_accuracy": 0.18162078931419473,
+      "n": 3
+    },
+    {
+      "shots": 2048,
+      "readout_error": 0.05,
+      "mean_noisy_test_accuracy": 0.5,
+      "std_noisy_test_accuracy": 0.1102396379610246,
+      "n": 3
+    },
+    {
+      "shots": 8192,
+      "readout_error": 0.0,
+      "mean_noisy_test_accuracy": 0.48611111111111116,
+      "std_noisy_test_accuracy": 0.08673608331108888,
+      "n": 3
+    },
+    {
+      "shots": 8192,
+      "readout_error": 0.02,
+      "mean_noisy_test_accuracy": 0.4166666666666667,
+      "std_noisy_test_accuracy": 0.1102396379610246,
+      "n": 3
+    },
+    {
+      "shots": 8192,
+      "readout_error": 0.05,
+      "mean_noisy_test_accuracy": 0.5,
+      "std_noisy_test_accuracy": 0.07216878364870324,
+      "n": 3
+    }
+  ],
+  "qaoa": {
+    "depths": [
+      {
+        "reps": 1,
+        "energy": -2.1298020421301094,
+        "ratio": 0.742357283358964,
+        "status": "ok"
+      },
+      {
+        "reps": 2,
+        "energy": -2.344336699062883,
+        "ratio": 0.8599105200344563,
+        "status": "ok"
+      },
+      {
+        "reps": 3,
+        "energy": -2.4623119054957296,
+        "ratio": 0.9245544687647833,
+        "status": "ok"
+      },
+      {
+        "reps": 4,
+        "energy": -2.3355419233423653,
+        "ratio": 0.8550914648451317,
+        "status": "ok"
+      },
+      {
+        "reps": 5,
+        "energy": -2.4864851991908496,
+        "ratio": 0.937800109145671,
+        "status": "ok"
+      }
+    ],
+    "best_reps": 5,
+    "gap": 0.11351480080915044,
+    "exact": {
+      "method": "enumeração exata (brute force)",
+      "states": 16,
+      "energy": -2.6,
+      "bits": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "seconds": 7.286999971256591e-05
+    }
+  }
+}

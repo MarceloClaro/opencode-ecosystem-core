@@ -1,0 +1,52 @@
+{
+  "pec_2q": {
+    "gate": "PEC_2Q",
+    "allowed": false,
+    "reasons": [
+      "modelo GSPN do gate set não validado",
+      "erro em dados held-out ausente ou acima do limite",
+      "overhead de amostragem ausente ou acima do limite"
+    ],
+    "route": "GSPN/MLCB + gauge optimization",
+    "cuts_identified_required": false,
+    "limits": "Política offline e fail-closed. Aprovar um gate aqui não executa hardware; apenas declara quais evidências seriam necessárias. Nenhuma taxa foi medida."
+  },
+  "zne": {
+    "gate": "ZNE_LRE",
+    "allowed": false,
+    "reasons": [
+      "configurações LRE insuficientes",
+      "resíduo do modelo LRE ausente ou acima do limite",
+      "estimativa LRE não estável em held-out"
+    ],
+    "monotonic_global_required": false,
+    "limits": "Política offline e fail-closed. Aprovar um gate aqui não executa hardware; apenas declara quais evidências seriam necessárias. Nenhuma taxa foi medida."
+  },
+  "layout": {
+    "gate": "LAYOUT_PAIRED",
+    "allowed": false,
+    "reasons": [
+      "n de pares abaixo do pré-registro",
+      "pares diferentes sem randomização",
+      "r1 físico ausente ou acima de 0,05",
+      "drift não resolvido",
+      "efeito de layout ausente ou abaixo de 0,01"
+    ],
+    "r1_is_covariate": true,
+    "limits": "Política offline e fail-closed. Aprovar um gate aqui não executa hardware; apenas declara quais evidências seriam necessárias. Nenhuma taxa foi medida."
+  },
+  "cuts": {
+    "gate": "TWO_CUTS_GAUGE",
+    "allowed": false,
+    "reasons": [
+      "aprendizagem autoconsistente do gate set ausente",
+      "MLCB não aplicado"
+    ],
+    "identified": false,
+    "note": "As 2 funções de corte são tratadas como gauge; o gate permite PEC via GSPN/MLCB, não identificação direta.",
+    "limits": "Política offline e fail-closed. Aprovar um gate aqui não executa hardware; apenas declara quais evidências seriam necessárias. Nenhuma taxa foi medida."
+  },
+  "hardware_executed": false,
+  "rates_measured": false,
+  "limits": "Política offline e fail-closed. Aprovar um gate aqui não executa hardware; apenas declara quais evidências seriam necessárias. Nenhuma taxa foi medida."
+}

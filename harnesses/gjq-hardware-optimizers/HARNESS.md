@@ -19,6 +19,21 @@ declara fidelidade, emaranhamento ou vantagem quântica a partir de counts.
 - shots, quando houver submissão;
 - autorização explícita e revisão de custo.
 
+## Provider Core (R1139)
+
+O MCP `gjq-runtime` expõe o provider integrado:
+
+- `gjq_provider_status` — sem rede; credencial, orçamento e registry;
+- `gjq_provider_compilation` — audita `initial_layout`/QASM/qubits ativos;
+- `gjq_provider_submit` — gates, orçamento, hash e submissão;
+- `gjq_provider_result` — status/resultado/auditoria;
+- `gjq_research_status` — catálogo e readiness do framework;
+- `gjq_research_plan` — fases/gates/roteamento de pesquisa.
+
+`use_cached_account=True` evita ler a chave. O sampler envia o QASM original e
+o serviço compila sem devolver layout; a auditoria de compilação é local e
+`compile=False` no serviço não foi testado.
+
 ## Perfil do backend
 
 O perfil é extraído de `backend.configuration()`, `backend.properties()` e

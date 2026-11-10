@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "round": "R1146",
+  "lean_file": {
+    "path": "lean/quantum-cb/ComplexProofs.lean",
+    "sha256": "8e6c25f873fbd15c4ee4bf4a1faa57c81f933fe8775b4644d6730f0f63fe1f43"
+  },
+  "compile": {
+    "status": "compiled",
+    "reason": null,
+    "returncode": 0,
+    "elapsed_seconds": 11.838641150003241,
+    "sha256": "8e6c25f873fbd15c4ee4bf4a1faa57c81f933fe8775b4644d6730f0f63fe1f43",
+    "log_path": "harnesses/quantum-error-mitigation/resultados/r1146_complex_proofs/compile.log",
+    "canonical_log_path": "lean/quantum-cb/complex_compile.log",
+    "log_sha256": "ceda7809b553a74e1608c4e9832e64d2fa65741dccf4add80740f313d619e1c2"
+  },
+  "source_scan": {
+    "sha256": "8e6c25f873fbd15c4ee4bf4a1faa57c81f933fe8775b4644d6730f0f63fe1f43",
+    "theorems": [
+      "born_le_one",
+      "born_nonneg",
+      "interference",
+      "no_negative_normSq",
+      "normSq_conj",
+      "normSq_global_phase",
+      "phaseGate_unitary",
+      "relative_phase_not_one",
+      "scaling_changes_normSq"
+    ],
+    "missing": [],
+    "forbidden": [],
+    "counterproofs_present": [
+      "scaling_changes_normSq",
+      "relative_phase_not_one",
+      "no_negative_normSq"
+    ],
+    "counterproofs_missing": [],
+    "counterproof_shape": {
+      "scaling_changes_normSq": true,
+      "relative_phase_not_one": true,
+      "no_negative_normSq": true
+    }
+  },
+  "axioms": {
+    "normSq_global_phase": {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "classification": "kernel_checked"
+    },
+    "normSq_conj": {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "classification": "kernel_checked"
+    },
+    "born_nonneg": {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "classification": "kernel_checked"
+    },
+    "born_le_one": {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "classification": "kernel_checked"
+    },
+    "interference": {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "classification": "kernel_checked"
+    },
+    "phaseGate_unitary": {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "classification": "kernel_checked"
+    },
+    "scaling_changes_normSq": {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "classification": "kernel_checked"
+    },
+    "relative_phase_not_one": {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "classification": "kernel_checked"
+    },
+    "no_negative_normSq": {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "classification": "kernel_checked"
+    }
+  },
+  "claims": [
+    {
+      "id": "global_phase",
+      "kind": "invariance",
+      "theorem": "normSq_global_phase",
+      "theorem_status": "kernel_checked",
+      "counterproof": "relative_phase_not_one",
+      "counterproof_status": "kernel_checked",
+      "accepted": true,
+      "reasons": []
+    },
+    {
+      "id": "born_rule",
+      "kind": "probability",
+      "theorem": "born_nonneg",
+      "theorem_status": "kernel_checked",
+      "counterproof": "no_negative_normSq",
+      "counterproof_status": "kernel_checked",
+      "accepted": true,
+      "reasons": []
+    },
+    {
+      "id": "interference",
+      "kind": "coherence",
+      "theorem": "interference",
+      "theorem_status": "kernel_checked",
+      "counterproof": "scaling_changes_normSq",
+      "counterproof_status": "kernel_checked",
+      "accepted": true,
+      "reasons": []
+    },
+    {
+      "id": "phase_gate",
+      "kind": "unitary",
+      "theorem": "phaseGate_unitary",
+      "theorem_status": "kernel_checked",
+      "counterproof": "scaling_changes_normSq",
+      "counterproof_status": "kernel_checked",
+      "accepted": true,
+      "reasons": []
+    }
+  ],
+  "gate": {
+    "accepted": true,
+    "unreported_theorems": [],
+    "non_kernel_theorems": {},
+    "blocked_claims": 0,
+    "counterproofs_required": [
+      "scaling_changes_normSq",
+      "relative_phase_not_one",
+      "no_negative_normSq"
+    ]
+  },
+  "limits": "Prova algébrica em Lean 4 + Mathlib; não prova hardware, calibração, ruído, canal quântico, vantagem quântica ou resultado experimental. O pareamento alegação↔contraprova é editorial e exige revisão humana. Aceitar o gate não promove confiança nem autoriza execução.",
+  "hardware_executed": false,
+  "externally_validated": false,
+  "confidence_promoted": false
+}

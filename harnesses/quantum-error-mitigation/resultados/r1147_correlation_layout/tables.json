@@ -1,0 +1,98 @@
+{
+  "A": {
+    "schema_version": 1,
+    "qubits": [
+      0,
+      1
+    ],
+    "n_qubits": 2,
+    "shots": 10000,
+    "marginals": [
+      0.15,
+      0.15
+    ],
+    "pairs": [
+      {
+        "left": 0,
+        "right": 1,
+        "marginal_left": 0.15,
+        "marginal_right": 0.15,
+        "observed_joint": 0.1,
+        "independent_joint": 0.0225,
+        "covariance": 0.07750000000000001,
+        "phi": 0.607843137254902,
+        "phi_defined": true
+      }
+    ],
+    "all_zero_probability": 0.8,
+    "any_error_probability": 0.19999999999999996,
+    "any_error_ci95": [
+      0.19227586267758193,
+      0.20795454480907802
+    ],
+    "independent_no_error": 0.7224999999999999,
+    "independent_any_error": 0.2775000000000001,
+    "delta_any_error": -0.07750000000000012,
+    "delta_no_error": 0.07750000000000012,
+    "bounds": {
+      "lower": 0.19999999999999998,
+      "upper": 0.3,
+      "contain_observed": true,
+      "method": "primeira desigualdade de Bonferroni / union bound"
+    },
+    "max_abs_phi": 0.607843137254902,
+    "mean_phi": 0.607843137254902,
+    "correlation_class": "positive",
+    "limits": "Modelo offline. Correlação estimada de counts de calibração; não identifica mecanismo, crosstalk físico ou drift. O custo de layout é um proxy declarado, não uma previsão de fidelidade. Nenhum hardware é executado e nenhum resultado autoriza submissão.",
+    "hardware_executed": false,
+    "rates_measured": false
+  },
+  "B": {
+    "schema_version": 1,
+    "qubits": [
+      0,
+      1
+    ],
+    "n_qubits": 2,
+    "shots": 10000,
+    "marginals": [
+      0.15,
+      0.15
+    ],
+    "pairs": [
+      {
+        "left": 0,
+        "right": 1,
+        "marginal_left": 0.15,
+        "marginal_right": 0.15,
+        "observed_joint": 0.0225,
+        "independent_joint": 0.0225,
+        "covariance": 0.0,
+        "phi": 0.0,
+        "phi_defined": true
+      }
+    ],
+    "all_zero_probability": 0.7225,
+    "any_error_probability": 0.27749999999999997,
+    "any_error_ci95": [
+      0.268810512452806,
+      0.28636037309980006
+    ],
+    "independent_no_error": 0.7224999999999999,
+    "independent_any_error": 0.2775000000000001,
+    "delta_any_error": -1.1102230246251565e-16,
+    "delta_no_error": 1.1102230246251565e-16,
+    "bounds": {
+      "lower": 0.27749999999999997,
+      "upper": 0.3,
+      "contain_observed": true,
+      "method": "primeira desigualdade de Bonferroni / union bound"
+    },
+    "max_abs_phi": 0.0,
+    "mean_phi": 0.0,
+    "correlation_class": "near_zero",
+    "limits": "Modelo offline. Correlação estimada de counts de calibração; não identifica mecanismo, crosstalk físico ou drift. O custo de layout é um proxy declarado, não uma previsão de fidelidade. Nenhum hardware é executado e nenhum resultado autoriza submissão.",
+    "hardware_executed": false,
+    "rates_measured": false
+  }
+}

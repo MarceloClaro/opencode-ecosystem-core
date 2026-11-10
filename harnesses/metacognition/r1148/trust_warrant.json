@@ -1,0 +1,105 @@
+{
+  "calibrated": {
+    "schema_version": 1,
+    "coordination": {
+      "schema_version": 1,
+      "coordination_score": 0.7329329433526774,
+      "success_rate": 0.7,
+      "recency_weighted_success": 0.7,
+      "volume_factor": 0.8646647167633873,
+      "n": 40,
+      "status": "observed"
+    },
+    "epistemic_warrant": {
+      "schema_version": 1,
+      "status": "calibrated",
+      "warrant": 0.853,
+      "abstain": false,
+      "n": 40,
+      "brier": 0.21000000000000002,
+      "ece": 0.0,
+      "bias": 0.0,
+      "calibration_component": 0.79,
+      "reliability_component": 1.0,
+      "ece_bins": [
+        {
+          "bin_low": 0.7,
+          "bin_high": 0.8,
+          "n": 40,
+          "mean_prediction": 0.7,
+          "mean_outcome": 0.7,
+          "gap": 0.0
+        }
+      ],
+      "warrant_threshold": 0.6,
+      "ece_threshold": 0.15,
+      "recommendation": "usar com monitoramento e revisão humana",
+      "limits": "Brier/ECE medem calibração em resultados observados; não provam verdade, causalidade ou generalização. Coordination score não é warrant epistêmico. Sem histórico suficiente, a única saída honesta é abstenção."
+    },
+    "separation_note": "coordenação alta não implica warrant alto; coordenação mede entrega, warrant mede calibração",
+    "limits": "Brier/ECE medem calibração em resultados observados; não provam verdade, causalidade ou generalização. Coordination score não é warrant epistêmico. Sem histórico suficiente, a única saída honesta é abstenção.",
+    "hardware_executed": false
+  },
+  "overconfident": {
+    "schema_version": 1,
+    "coordination": {
+      "schema_version": 1,
+      "coordination_score": 0.7153739679703139,
+      "success_rate": 0.7,
+      "recency_weighted_success": 0.7,
+      "volume_factor": 0.7768698398515702,
+      "n": 30,
+      "status": "observed"
+    },
+    "epistemic_warrant": {
+      "schema_version": 1,
+      "status": "overconfident",
+      "warrant": 0.7649999999999999,
+      "abstain": true,
+      "n": 30,
+      "brier": 0.25,
+      "ece": 0.20000000000000007,
+      "bias": 0.20000000000000007,
+      "calibration_component": 0.75,
+      "reliability_component": 0.7999999999999999,
+      "ece_bins": [
+        {
+          "bin_low": 0.9,
+          "bin_high": 1.0,
+          "n": 30,
+          "mean_prediction": 0.9,
+          "mean_outcome": 0.7,
+          "gap": 0.20000000000000007
+        }
+      ],
+      "warrant_threshold": 0.6,
+      "ece_threshold": 0.15,
+      "recommendation": "abster; calibração insuficiente",
+      "limits": "Brier/ECE medem calibração em resultados observados; não provam verdade, causalidade ou generalização. Coordination score não é warrant epistêmico. Sem histórico suficiente, a única saída honesta é abstenção."
+    },
+    "separation_note": "coordenação alta não implica warrant alto; coordenação mede entrega, warrant mede calibração",
+    "limits": "Brier/ECE medem calibração em resultados observados; não provam verdade, causalidade ou generalização. Coordination score não é warrant epistêmico. Sem histórico suficiente, a única saída honesta é abstenção.",
+    "hardware_executed": false
+  },
+  "insufficient": {
+    "schema_version": 1,
+    "coordination": {
+      "schema_version": 1,
+      "coordination_score": 0.0,
+      "n": 0,
+      "status": "no_history"
+    },
+    "epistemic_warrant": {
+      "schema_version": 1,
+      "status": "calibration_insufficient_data",
+      "warrant": null,
+      "abstain": true,
+      "n": 0,
+      "recommendation": "abster; sem outcomes observados",
+      "limits": "Brier/ECE medem calibração em resultados observados; não provam verdade, causalidade ou generalização. Coordination score não é warrant epistêmico. Sem histórico suficiente, a única saída honesta é abstenção."
+    },
+    "separation_note": "coordenação alta não implica warrant alto; coordenação mede entrega, warrant mede calibração",
+    "limits": "Brier/ECE medem calibração em resultados observados; não provam verdade, causalidade ou generalização. Coordination score não é warrant epistêmico. Sem histórico suficiente, a única saída honesta é abstenção.",
+    "hardware_executed": false
+  }
+}

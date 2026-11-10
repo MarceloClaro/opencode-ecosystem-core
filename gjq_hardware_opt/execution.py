@@ -223,6 +223,7 @@ def submit_optimized(
     api_key_present: bool | None = None,
     max_shots: int = MAX_SHOTS_DEFAULT,
     amplitude_index: list[int] | None = None,
+    options: dict | None = None,
 ) -> dict[str, Any]:
     """Submete o circuito já otimizado, sem retranspilar."""
     gate = submission_gate(
@@ -241,7 +242,7 @@ def submit_optimized(
     except ImportError as exc:  # pragma: no cover
         raise GJQExecutionError("gjq-client ausente") from exc
     with _quiet_client():
-        job = Sampler(backend=backend).run(
+        job = Sampler(backend=backend, options=options).run(
             circuit,
             shots=shots,
             amplitude_index=amplitude_index,
@@ -255,6 +256,7 @@ def submit_optimized(
         "hardware": bool(gate["hardware"]),
         "submitted_at": datetime.now().astimezone().isoformat(timespec="seconds"),
         "amplitude_index": amplitude_index,
+        "options": options,
         "transpile": False,
         "executed": True,
         "note": "Use status/result com o task_id; não reenvie o mesmo circuito.",

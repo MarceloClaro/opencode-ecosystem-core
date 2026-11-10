@@ -29,8 +29,20 @@ REPORT = (
 )
 
 
+def _metric_scope(case: dict) -> str:
+    states = set(case.get("calibration_counts", {}))
+    if states == {"00", "11"}:
+        return "subspace_00_11"
+    if states == {"00", "01", "10", "11"}:
+        return "full_4x4"
+    return "unknown"
+
+
 def _mitigated(case: dict) -> float:
-    value = case.get("mitigated_tvd_vs_ideal")
+    # Campo vs_ideal também existia nos runs com calibração parcial.
+    # O nome do campo não transforma calibração 00/11 em matriz 4x4.
+    value = (case.get("mitigated_tvd_subspace") if _metric_scope(case) == "subspace_00_11"
+             else case.get("mitigated_tvd_vs_ideal"))
     if value is None:
         value = case.get("mitigated_tvd_subspace")
     if value is None:
@@ -56,6 +68,8 @@ def build() -> dict:
             "shots": int(payload.get("shots", 0)),
             "baseline_mitigated_tvd": _mitigated(baseline),
             "optimized_mitigated_tvd": _mitigated(optimized),
+            "baseline_metric_scope": _metric_scope(baseline),
+            "optimized_metric_scope": _metric_scope(optimized),
             "delta_mitigated_tvd": (
                 _mitigated(optimized) - _mitigated(baseline)
             ),
@@ -75,34 +89,50 @@ def build() -> dict:
         item["baseline_physical"] != item["optimized_physical"]
         for item in available.values()
     )
+    def mean(values):
+        return sum(values)/len(values) if values else None
+
+    def span(values):
+        return [min(values), max(values)] if values else None
+
+    reasons = [
+        "os gates de prep coerente e r1 da R1120 não foram reavaliados isoladamente aqui",
+        "a mitigação de leitura não reduz o r1 bruto, que inclui erro de preparação",
+    ]
+    if not available:
+        reasons.append("dados ausentes: nenhuma comparação possível")
+    elif len(signs) > 1:
+        reasons.append("o sinal da diferença não é estável entre runs")
+    if different_qubits:
+        reasons.append("qubits físicos diferentes: efeito total de mapeamento não isola a transpilação")
+    if any(item[f"{arm}_metric_scope"] != "full_4x4"
+           for item in available.values() for arm in ("baseline", "optimized")):
+        reasons.append("calibração de subespaço 00/11 ou desconhecida, não uma matriz 4x4 completa")
     payload = {
         "schema_version": 1,
         "generated_at": datetime.now().astimezone().isoformat(timespec="seconds"),
         "runs": runs,
         "summary": {
             "n_runs": len(available),
-            "baseline_mean": sum(baseline_values) / len(baseline_values),
-            "baseline_range": [min(baseline_values), max(baseline_values)],
-            "optimized_mean": sum(optimized_values) / len(optimized_values),
-            "optimized_range": [min(optimized_values), max(optimized_values)],
-            "delta_mean": sum(deltas) / len(deltas),
-            "delta_range": [min(deltas), max(deltas)],
-            "sign_stable": len(signs) == 1,
+            "baseline_mean": mean(baseline_values),
+            "baseline_range": span(baseline_values),
+            "optimized_mean": mean(optimized_values),
+            "optimized_range": span(optimized_values),
+            "delta_mean": mean(deltas),
+            "delta_range": span(deltas),
+            "sign_stable": bool(deltas) and len(signs) == 1,
             "different_physical_qubits": different_qubits,
         },
         "decision": {
             "compare_layouts_now": False,
-            "reasons": [
-                "o layout otimizado usa qubits físicos diferentes do baseline",
-                "o sinal da diferença não é estável entre o run original e os dois novos",
-                "os gates de prep coerente e r1 da R1120 continuam falhando",
-                "a mitigação de leitura não reduz o r1 físico; mitigation ≠ correção do readout",
-            ],
+            "r1_gate_remeasured": False,
+            "reasons": reasons,
         },
         "limits": (
-            "Três runs de 1 job por caso; não é série temporal. O layout "
-            "otimizado usa 106/107 e o baseline usa 0/1, então a diferença "
-            "mistura layout com qualidade de qubit."
+            "Runs históricos de 1 job por caso; não é série temporal nem ensaio "
+            "com n da R1120. Calibração somente 00/11 mede subespaço, não TVD "
+            "completa corrigida. Qubits diferentes são parte do efeito de "
+            "mapeamento; não invalidam por si uma comparação pré-registrada."
         ),
         "hardware_executed": False,
     }
@@ -114,6 +144,8 @@ def report(payload: dict) -> str:
         "# Repetição da leitura com mitigação",
         "",
         f"Gerado em {payload['generated_at']}.",
+        "",
+        "TVD do **subespaço 00/11** nos três runs históricos, não calibração 4×4.",
         "",
         "| Run | Baseline TVD | Otimizado TVD | Δ | Qubits baseline | Qubits otimizado |",
         "|---|---:|---:|---:|---|---|",
@@ -129,16 +161,18 @@ def report(payload: dict) -> str:
             f"{item['baseline_physical']} | {item['optimized_physical']} |"
         )
     summary = payload["summary"]
+    def fmt(value):
+        return "indisponível" if value is None else f"{value:.4f}"
     lines += [
         "",
         "## Resumo",
         "",
         f"- Runs disponíveis: {summary['n_runs']}.",
-        f"- Baseline: média {summary['baseline_mean']:.4f}; "
+        f"- Baseline: média {fmt(summary['baseline_mean'])}; "
         f"faixa {summary['baseline_range']}.",
-        f"- Otimizado: média {summary['optimized_mean']:.4f}; "
+        f"- Otimizado: média {fmt(summary['optimized_mean'])}; "
         f"faixa {summary['optimized_range']}.",
-        f"- Δ: média {summary['delta_mean']:+.4f}; faixa {summary['delta_range']}.",
+        f"- Δ: média {fmt(summary['delta_mean'])}; faixa {summary['delta_range']}.",
         f"- Sinal estável entre runs: {summary['sign_stable']}.",
         f"- Qubits físicos diferentes: {summary['different_physical_qubits']}.",
         "",

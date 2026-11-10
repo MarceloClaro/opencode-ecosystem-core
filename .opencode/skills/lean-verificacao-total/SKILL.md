@@ -33,6 +33,14 @@ Sem contrato completo: produzir protocolo, nunca veredito.
 - Sem binário `lean`/`lake` → máximo `syntax_verified`; escrever `não validado por compilador`.
 - Palavras como prova total, correção garantida, Qualis ou superhuman só com `machine_checked` + validação externa explícita.
 
+## Números complexos (R1146)
+
+Para amplitudes complexas, use a skill `verificacao-lean-complexos`:
+`lean/quantum-cb/ComplexProofs.lean` prova fase global, conjugação, Born,
+interferência e porta de fase; o gate `quantum_mitigation/complex_proof_gate.py`
+exige prova **e** contraprova, compila com Mathlib e aceita apenas axiomas
+padrão. Não use `native_decide` para alegar kernel-only.
+
 ## Ferramentas
 
 MCP `integrations/lean_proof_mcp.py`: `lean_verify`, `lean_export`, `lean_autoformalize`, `lean_saturate`.

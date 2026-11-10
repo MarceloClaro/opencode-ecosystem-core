@@ -1,0 +1,83 @@
+{
+  "found": true,
+  "n": 5,
+  "device": {
+    "n": 5,
+    "edges": [
+      [
+        0,
+        1,
+        0.01310227205910763
+      ],
+      [
+        0,
+        3,
+        0.0013140250750420528
+      ],
+      [
+        0,
+        4,
+        0.018342355968276713
+      ],
+      [
+        1,
+        2,
+        0.001778496954787699
+      ],
+      [
+        3,
+        4,
+        0.01729068125516382
+      ]
+    ],
+    "readout": [
+      0.013022701777491793,
+      0.07566899017869497,
+      0.025809005854230314,
+      0.0876861030114898,
+      0.05873150982241826
+    ],
+    "crosstalk": []
+  },
+  "interactions": [
+    [
+      0,
+      1,
+      4.0
+    ],
+    [
+      0,
+      2,
+      2.0
+    ],
+    [
+      0,
+      3,
+      1.0
+    ],
+    [
+      1,
+      4,
+      2.0
+    ]
+  ],
+  "greedy_layout": [
+    0,
+    3,
+    4,
+    2,
+    1
+  ],
+  "optimal_layout": [
+    0,
+    1,
+    3,
+    4,
+    2
+  ],
+  "greedy_cost": 3.3465724861632413,
+  "optimal_cost": 0.33785479890869186,
+  "gap": 3.0087176872545496,
+  "limits": "Otimização combinatória sobre um modelo de ruído declarado. O ótimo é condicional ao modelo; não prova superioridade em hardware real. Contraexemplos mostram que arranjo ótimo não é universal.",
+  "hardware_executed": false
+}

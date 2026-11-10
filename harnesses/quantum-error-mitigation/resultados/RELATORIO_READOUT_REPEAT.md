@@ -1,6 +1,8 @@
 # Repetição da leitura com mitigação
 
-Gerado em 2026-11-09T19:02:09-03:00.
+Gerado em 2026-11-10T13:12:13-03:00.
+
+TVD do **subespaço 00/11** nos três runs históricos, não calibração 4×4.
 
 | Run | Baseline TVD | Otimizado TVD | Δ | Qubits baseline | Qubits otimizado |
 |---|---:|---:|---:|---|---|
@@ -20,11 +22,12 @@ Gerado em 2026-11-09T19:02:09-03:00.
 ## Decisão
 
 - Comparar layouts agora: **False**.
-- o layout otimizado usa qubits físicos diferentes do baseline.
-- o sinal da diferença não é estável entre o run original e os dois novos.
-- os gates de prep coerente e r1 da R1120 continuam falhando.
-- a mitigação de leitura não reduz o r1 físico; mitigation ≠ correção do readout.
+- os gates de prep coerente e r1 da R1120 não foram reavaliados isoladamente aqui.
+- a mitigação de leitura não reduz o r1 bruto, que inclui erro de preparação.
+- o sinal da diferença não é estável entre runs.
+- qubits físicos diferentes: efeito total de mapeamento não isola a transpilação.
+- calibração de subespaço 00/11 ou desconhecida, não uma matriz 4x4 completa.
 
 ## Limites
 
-- Três runs de 1 job por caso; não é série temporal. O layout otimizado usa 106/107 e o baseline usa 0/1, então a diferença mistura layout com qualidade de qubit.
+- Runs históricos de 1 job por caso; não é série temporal nem ensaio com n da R1120. Calibração somente 00/11 mede subespaço, não TVD completa corrigida. Qubits diferentes são parte do efeito de mapeamento; não invalidam por si uma comparação pré-registrada.

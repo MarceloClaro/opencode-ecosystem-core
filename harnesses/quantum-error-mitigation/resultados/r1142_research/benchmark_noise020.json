@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "n_per_class": 40,
+  "noise": 0.2,
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "rows": [
+    {
+      "seed": 42,
+      "quantum": {
+        "kind": "zz",
+        "reps": 2,
+        "scale": 1.0,
+        "ridge": 0.1,
+        "validation_accuracy": 1.0,
+        "test_accuracy": 0.8125
+      },
+      "projected": {
+        "kind": "zz",
+        "reps": 1,
+        "scale": 1.0,
+        "ridge": 0.01,
+        "gamma": 1.0,
+        "validation_accuracy": 1.0,
+        "test_accuracy": 0.9375
+      },
+      "classical": {
+        "gamma": 0.5,
+        "ridge": 0.1,
+        "validation_accuracy": 0.875,
+        "test_accuracy": 0.75
+      }
+    },
+    {
+      "seed": 43,
+      "quantum": {
+        "kind": "zz",
+        "reps": 1,
+        "scale": 0.5,
+        "ridge": 0.01,
+        "validation_accuracy": 0.6875,
+        "test_accuracy": 0.875
+      },
+      "projected": {
+        "kind": "angle",
+        "reps": 1,
+        "scale": 0.5,
+        "ridge": 0.01,
+        "gamma": 0.5,
+        "validation_accuracy": 0.6875,
+        "test_accuracy": 0.875
+      },
+      "classical": {
+        "gamma": 0.5,
+        "ridge": 0.01,
+        "validation_accuracy": 0.6875,
+        "test_accuracy": 0.8125
+      }
+    },
+    {
+      "seed": 44,
+      "quantum": {
+        "kind": "reupload",
+        "reps": 2,
+        "scale": 1.5,
+        "ridge": 0.01,
+        "validation_accuracy": 0.9375,
+        "test_accuracy": 0.8125
+      },
+      "projected": {
+        "kind": "zz",
+        "reps": 1,
+        "scale": 0.5,
+        "ridge": 0.1,
+        "gamma": 0.5,
+        "validation_accuracy": 0.9375,
+        "test_accuracy": 0.6875
+      },
+      "classical": {
+        "gamma": 0.5,
+        "ridge": 0.01,
+        "validation_accuracy": 0.8125,
+        "test_accuracy": 0.75
+      }
+    }
+  ],
+  "summary": {
+    "quantum": {
+      "mean_test_accuracy": 0.8333333333333334,
+      "std_test_accuracy": 0.03608439182435161,
+      "values": [
+        0.8125,
+        0.875,
+        0.8125
+      ]
+    },
+    "projected": {
+      "mean_test_accuracy": 0.8333333333333334,
+      "std_test_accuracy": 0.13010412496663332,
+      "values": [
+        0.9375,
+        0.875,
+        0.6875
+      ]
+    },
+    "classical": {
+      "mean_test_accuracy": 0.7708333333333334,
+      "std_test_accuracy": 0.03608439182435161,
+      "values": [
+        0.75,
+        0.8125,
+        0.75
+      ]
+    }
+  },
+  "limits": "Dataset sintético 2D. Não prova vantagem quântica, generalização em dados reais ou superioridade sobre kernels clássicos. O kernel quântico é calculado por statevector, sem ruído ou shots.",
+  "hardware_executed": false,
+  "rates_measured": false
+}

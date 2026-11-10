@@ -123,6 +123,17 @@ corrige a população que sai para 01/10: o leakage é reportado separadamente.
 No Baihua, o leakage de |11> ficou em 14–15%, muito acima do `readout_error`
 reportado (0,1–0,2%). A TVD mitigada não é fidelidade.
 
+## Provider Core e compilação
+
+Prefira `gjq_provider_status`, `gjq_provider_submit` e `gjq_provider_result`:
+eles combinam credencial, orçamento, gates e hash do QASM. Para investigar
+layout, use `gjq_provider_compilation` ou
+`quantum_mitigation.compilation_audit`: o sampler GJQ envia o QASM original e
+o serviço compila sem devolver layout. A auditoria local pré-transpila com
+`initial_layout` e verifica qubits ativos/QASM. O teste controlado de
+`compile=False` (R1140) foi bloqueado antes da submissão por `Failed to fetch
+machine config for Baihua`; nenhum task ID foi criado.
+
 ## Gates
 
 - [ ] credencial disponível (ambiente ou cache explícito);

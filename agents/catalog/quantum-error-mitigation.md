@@ -127,11 +127,56 @@ agent_qem.py audit --report RELATORIO.md
   9.600 shots. Baseline TVD 0,0962; twirlado 0,0978; Δ +0,0018
   [−0,0071, +0,0108]; **sem efeito detectável**. O resultado negativo é
   registrado.
-- **Leitura (R1124):** três runs de mitigação 4×4; sinal instável. O layout
+- **Leitura (R1124, corrigido R1125):** três runs de mitigação do subespaço
+  00/11, não 4×4; sinal instável. O layout
   otimizado usa 106/107 e o baseline 0/1; a diferença mistura layout com
-  qualidade de qubit. Mitigação ≠ correção do r1 físico.
+  qualidade de qubit; isso não veta por si um ensaio do efeito de mapeamento.
+  Mitigação ≠ correção do r1 bruto; este inclui preparação.
 - **Pré-registro:** não comparar layouts; n=38.411 por circuito/layout.
-- **Cycle benchmarking:** plano de 150 jobs; nenhuma taxa medida.
+- **Cycle benchmarking R1125:** paridade, simulação e IC condicional disponíveis;
+  repetição par de CZ tem **posto 9**, não 15. Não transformar decaimentos de
+  órbita em taxas individuais; não liberar PEC por pseudoinversa/regularização.
+  Consultar `cb_protocol.py` pelo primário; permissões de hardware não mudaram.
+  Taxas Lindblad não são probabilidades do canal finito. Nenhuma taxa medida.
+- **R1126:** o posto 9 é do desenho somente-CZ; a matriz completa tem posto 15.
+  Aumento por ciclos só recupera 15 sob gerador compartilhado/conjugado; com
+  geradores separados, `9k < 15k`. Submodelos local/2q têm posto 6/9 e exigem
+  as demais taxas nulas. Caminho para 15 taxas gerais: GST/modelo estruturado,
+  não apenas mais ciclos. Somente análise offline.
+- **R1128:** Chen et al. 2023 (DOI `10.1038/s41467-022-35759-4`): o espaço
+  aprendível do CZ tem **13** funções e **2** não aprendíveis; o posto 9 é o
+  subespaço de órbitas. Faltam 4, recuperáveis com **Cliffords de 1 qubit
+  intercalados**; as 2 de corte exigem GST/preparação perfeita/restrição
+  física. Nenhuma taxa medida; PEC 2q continua bloqueado.
+- **R1129:** desenho com 7 ciclos individuais + 6 pares recupera **13/13**
+  funções em simulação exata (matriz 13×15, posto 13); as 2 de corte não são
+  medidas. Correções de 1 qubit ideais e ruído antes do CZ; hardware não
+  executado. Ver `docs/RELATORIO_CB_R1129.md`.
+- **R1130:** twirl/frame por CZ e ruído 1q simulado; 0,005 → erro máximo
+  ~1,29×10⁻². Pré-registro de 325 jobs/1.331.200 shots; hardware bloqueado.
+- **R1131:** Lean 4 core prova 13×15 com inversa à direita, 13/2 e
+  ortogonalidade; identidades usam `native_decide`. Não prova o canal nem o
+  hardware.
+- **R1132:** LRE para ZNE layerwise; exata no modelo multilinear, mas exige
+  mais configurações e não valida hardware.
+- **R1133:** desenho pareado randomizado para layouts; r1 como covariável e
+  bloqueio de pares diferentes sem randomização.
+- **R1134:** 13 funções invariantes ao corte, 15 fidelidades mudam; rota
+  PEC 2q/2 cortes via GSPN/MLCB com gauge autoconsistente, não por
+  identificação direta das 2 funções.
+- **R1135:** gates revisados fail-closed: PEC 2q exige GSPN/held-out/overhead;
+  ZNE exige LRE estável; layout exige n/randomização/r1/drift/efeito; cortes
+  são gauge, não identificação direta.
+- **R1137:** sampler GJQ envia QASM original; serviço compila sem devolver
+  layout. `compilation_audit.py` audita `initial_layout`/qubits ativos/QASM
+  localmente; `compile=False` no serviço não foi testado. REA foi usado para
+  status/catálogo/sessão; análise nativa do `.so` sem Evidence útil.
+- **R1138:** `gate_router.py --gate ...` roteia gate bloqueado para evidência
+  necessária; default fail-closed.
+- **Mathlib:** `MathlibCounterproof.lean` compilou com `lake env lean`,
+  retorno 0; `rank_D` usa `Matrix.rank` e as identidades usam `native_decide`
+  (338 axiomas nativos em `D_mul_R`). A contraprova leve é Lean 4 core.
+  Nenhuma das duas prova canal, twirl ou hardware.
 - **GST:** bloqueada; pyGSTi ausente e protocolo não validado.
 
 ## Limites

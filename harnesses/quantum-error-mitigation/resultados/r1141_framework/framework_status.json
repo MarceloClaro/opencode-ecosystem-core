@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "framework": "core-gjq-quantum-research",
+  "provider": {
+    "schema_version": 1,
+    "sdk": "0.2.1",
+    "credential": "cached_account",
+    "cached_account_present": true,
+    "registry_sha256": "0733cbd3ae3fc1a8e2671cf2760a3baf0e85684e3d3498e48c7b7572c43e64ce",
+    "budget": {
+      "limits": {
+        "daily_submissions": 20,
+        "daily_hardware_submissions": 1,
+        "daily_shots": 100000,
+        "daily_hardware_shots": 4096
+      },
+      "usage_today": {
+        "submissions": 0,
+        "hardware_submissions": 0,
+        "shots": 0,
+        "hardware_shots": 0
+      }
+    },
+    "compilation_audit": true,
+    "hardware_executed": false,
+    "network_access": false,
+    "limits": "Provider local. Não executa hardware sem confirmação explícita. O orçamento é local e não representa preço oficial. O layout do servidor não é devolvido; a auditoria de compilação é local."
+  },
+  "catalog": {
+    "synthetic": [
+      "bell",
+      "ghz4",
+      "qft4",
+      "vqe2",
+      "layered4",
+      "redundant",
+      "nonadjacent"
+    ],
+    "experiments": [
+      {
+        "name": "E01_1",
+        "experiment": "E01"
+      },
+      {
+        "name": "E02_1",
+        "experiment": "E02"
+      },
+      {
+        "name": "E03_1",
+        "experiment": "E03"
+      },
+      {
+        "name": "E04_1",
+        "experiment": "E04"
+      },
+      {
+        "name": "E05_1",
+        "experiment": "E05"
+      },
+      {
+        "name": "E06_1",
+        "experiment": "E06"
+      },
+      {
+        "name": "E07_1",
+        "experiment": "E07"
+      },
+      {
+        "name": "E07_2",
+        "experiment": "E07"
+      },
+      {
+        "name": "E07_3",
+        "experiment": "E07"
+      },
+      {
+        "name": "E07_4",
+        "experiment": "E07"
+      },
+      {
+        "name": "E08_1",
+        "experiment": "E08"
+      },
+      {
+        "name": "E09_1",
+        "experiment": "E09"
+      },
+      {
+        "name": "E10_1",
+        "experiment": "E10"
+      },
+      {
+        "name": "E10_2",
+        "experiment": "E10"
+      },
+      {
+        "name": "E10_3",
+        "experiment": "E10"
+      },
+      {
+        "name": "E10_4",
+        "experiment": "E10"
+      },
+      {
+        "name": "E11_1",
+        "experiment": "E11"
+      },
+      {
+        "name": "E12_1",
+        "experiment": "E12"
+      },
+      {
+        "name": "E13_1",
+        "experiment": "E13"
+      },
+      {
+        "name": "E14_1",
+        "experiment": "E14"
+      },
+      {
+        "name": "E15_1",
+        "experiment": "E15"
+      },
+      {
+        "name": "E16_1",
+        "experiment": "E16"
+      },
+      {
+        "name": "E16_2",
+        "experiment": "E16"
+      },
+      {
+        "name": "E17_1",
+        "experiment": "E17"
+      },
+      {
+        "name": "E18_1",
+        "experiment": "E18"
+      }
+    ]
+  },
+  "agents": {
+    "research": "gjq-quantum-research",
+    "experiment": "gjq-experiment-runner",
+    "optimization": "gjq-hardware-optimizer",
+    "readout": "gjq-readout-mitigation",
+    "audit": "quantum-experiment-auditor"
+  },
+  "mcp_server": "gjq-runtime",
+  "mcp_tools": [
+    "gjq_provider_status",
+    "gjq_provider_submit",
+    "gjq_provider_result",
+    "gjq_provider_compilation",
+    "gjq_research_status",
+    "gjq_research_plan"
+  ],
+  "framework_ready": true,
+  "hardware_executed": false,
+  "rates_measured": false,
+  "network_access": false,
+  "limits": "Framework de orquestração offline. Não executa hardware, não mede taxas e não declara descoberta científica. Hardware exige confirm, allow_hardware, orçamento e auditoria de compilação."
+}

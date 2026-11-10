@@ -26,7 +26,7 @@
 [Manual](MANUAL.md) ·
 [Arquitetura](ARCHITECTURE.md)
 
-**Mapa rápido:** [Visão geral](#visão-geral) · [Pipeline](#pesquisador-científico-r1051-r1054) · [Capacidades](#capacidades-principais) · [GJQ](#gjq-r1099) · [Loop Engineering](#loop-engineering-r1100) · [Livro quântico](#livro-quantico-r1099) · [Livro e clone](#o-que-entra-no-git-e-o-que-fica-local) · [Arquitetura](#arquitetura-em-60-segundos) · [Quickstart](#início-rápido-local) · [Evidência](#trilha-de-evidências) · [Documentação](#documentação) · [Roadmap](#roadmap)
+**Mapa rápido:** [Visão geral](#visão-geral) · [Pipeline](#pesquisador-científico-r1051-r1054) · [Capacidades](#capacidades-principais) · [GJQ](#gjq-r1099) · [Quântica avançada](#quantum-advanced-r1145) · [Loop Engineering](#loop-engineering-r1100) · [Livro quântico](#livro-quantico-r1099) · [Livro e clone](#o-que-entra-no-git-e-o-que-fica-local) · [Arquitetura](#arquitetura-em-60-segundos) · [Quickstart](#início-rápido-local) · [Evidência](#trilha-de-evidências) · [Documentação](#documentação) · [Roadmap](#roadmap)
 
 <sub>Social preview: <a href="docs/images/social-preview.png">1280×640</a> · Maintained by <a href="https://github.com/MarceloClaro">Marcelo Claro Laranjeira</a></sub>
 
@@ -72,7 +72,10 @@ fonte, qual hash e qual limite?”**.
   Trust Engine, EvolutionRegistry e gates de evidência.
 - **Cognição e risco epistêmico** — mapa de funções cognitivas, regras de parada,
   claims ledger, contestabilidade e validação N-of-1 (R1132;
-  [docs/CORE_COGNITION.md](docs/CORE_COGNITION.md)).
+  [docs/CORE_COGNITION.md](docs/CORE_COGNITION.md)). A camada R1148 adiciona EMA
+  com psicometria, N-of-1/SCED, grafo de claims com prova/contraprova, trust
+  warrant com Brier/ECE e contrato de runtime com circuit breaker
+  ([docs/METACOGNICAO_SUBJETIVA_LOGICA_QUANTICA_R1148.md](docs/METACOGNICAO_SUBJETIVA_LOGICA_QUANTICA_R1148.md)).
 - **Engenharia reversa local (REA)** — inspeção controlada, camadas de provedores
   e recibos por hash.
 - **Vídeo e dublagem** — editor multifaixa, FFmpeg, Remotion, XTTS/Edge TTS,
@@ -237,6 +240,52 @@ Docs: [GJQ R1099](docs/GJQ_PESQUISA_QUANTICA_R1099.md) ·
 [backends R1104](docs/GJQ_BACKENDS_R1104.md) ·
 [auditoria de MCPs](docs/AUDITORIA_MCPS_QUANTICOS_R1099.md) ·
 [catálogo de repositórios](docs/REPOSITORIOS_QUANTICOS.md).
+
+<a id="quantum-advanced-r1145"></a>
+## Pesquisa quântica avançada e metacognição (R1145–R1148)
+
+Esta série estende o Core em quatro frentes com evidência, prova e contraprova.
+Nenhum resultado abaixo demonstra vantagem quântica; todos os dados são
+sintéticos ou simulados, e o hardware continua atrás de gates explícitos.
+
+| Rodada | Entrega | Evidência |
+|---|---|---|
+| **R1145** | Escala amostral, IC bootstrap, curva de aprendizado, ruído de leitura/shots e QAOA p=1–5 | `n=100`: quantum 0,958 [0,917; 0,992] vs RBF 0,942 [0,900; 0,983] no ruído 0,15; ICs se sobrepõem. QAOA p=5: razão 0,938, gap 0,1135 vs ótimo exato |
+| **R1146** | Provas complexas kernel-checked em Lean 4 + Mathlib | 9 teoremas, 3 contraprovas; fase global, conjugação, Born, interferência e porta de fase; gate aceitou 4/4 |
+| **R1147** | Correlação de leitura, arranjos e contraprovas | Marginais iguais com juntas diferentes (`phi` 0,608 vs 0); layout ciente da correlação 1,32 vs 1,78; greedy 3,01 pior; reversão de regime 4,01×. Lean: 10 teoremas kernel-checked |
+| **R1148** | Metacognição em cinco camadas | EMA com psicometria; N-of-1 com lock e SCED; grafo de claims com evidência real/complexa/irreal; trust warrant com Brier/ECE; runtime com hooks e circuit breaker |
+
+### O que foi verificado
+
+- **Complexos**: `interference`, `normSq_global_phase`, `phaseGate_unitary` e
+  contraprovas como `relative_phase_not_one`, todos dependendo apenas de
+  `propext`, `Classical.choice` e `Quot.sound`.
+- **Correlação**: `marginals_do_not_determine_joint` prova que marginais iguais
+  não determinam a junta; a correlação positiva aumenta `P(0 erro)` e
+  `P(2 erros)`, mas diminui `P(≥1 erro)`.
+- **Metacognição**: evidência `irreal` é descontada; `subjective` exige
+  psicometria e abstém; `axiom` é declarado, não provado; `lemma`/`law`/`theory`
+  exigem teorema **e** contraprova kernel-checked; sem histórico de outcomes, o
+  trust warrant reporta `calibration_insufficient_data`.
+- **Runtime**: ações `read_only` executam; `irreversible` sem aprovação e token
+  escalam para humano; o circuit breaker abre após falhas e recupera após
+  cooldown.
+
+### Limites
+
+- Dados sintéticos; nenhum hardware, calibração real ou participante.
+- EMA e N-of-1 não substituem ética, consentimento, supervisão ou validação
+  clínica.
+- Brier/ECE medem calibração observada; não provam verdade ou causalidade.
+- O pareamento claim↔prova/contraprova é editorial e exige revisão humana.
+- Gates aceitarem não promove confiança, não valida eficácia e não autoriza
+  execução.
+
+Docs: [relatório R1145](docs/RELATORIO_PESQUISA_QUANTICA_R1142.md) ·
+[verificação complexa R1146](docs/VERIFICACAO_COMPLEXA_R1146.md) ·
+[correlações e arranjos R1147](docs/RELATORIO_CORRELACOES_ARRANJOS_R1147.md) ·
+[metacognição R1148](docs/METACOGNICAO_SUBJETIVA_LOGICA_QUANTICA_R1148.md) ·
+[literatura R1147](docs/LITERATURA_OTIMIZACAO_MITIGACAO_R1147.md).
 
 <a id="loop-engineering-r1100"></a>
 ## Loop Engineering (R1100)

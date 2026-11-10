@@ -1,12 +1,14 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-09T19:02:09-03:00",
+  "generated_at": "2026-11-10T13:12:13-03:00",
   "runs": {
     "original": {
       "status": "ok",
       "shots": 4096,
       "baseline_mitigated_tvd": 0.02488619706632378,
       "optimized_mitigated_tvd": 0.027730551333399994,
+      "baseline_metric_scope": "subspace_00_11",
+      "optimized_metric_scope": "subspace_00_11",
       "delta_mitigated_tvd": 0.0028443542670762156,
       "baseline_physical": [
         0,
@@ -26,6 +28,8 @@
       "shots": 4096,
       "baseline_mitigated_tvd": 0.0262802274049585,
       "optimized_mitigated_tvd": 0.015261749218160536,
+      "baseline_metric_scope": "subspace_00_11",
+      "optimized_metric_scope": "subspace_00_11",
       "delta_mitigated_tvd": -0.011018478186797964,
       "baseline_physical": [
         0,
@@ -45,6 +49,8 @@
       "shots": 4096,
       "baseline_mitigated_tvd": 0.02280910916322354,
       "optimized_mitigated_tvd": 0.007865908808109223,
+      "baseline_metric_scope": "subspace_00_11",
+      "optimized_metric_scope": "subspace_00_11",
       "delta_mitigated_tvd": -0.014943200355114317,
       "baseline_physical": [
         0,
@@ -82,13 +88,15 @@
   },
   "decision": {
     "compare_layouts_now": false,
+    "r1_gate_remeasured": false,
     "reasons": [
-      "o layout otimizado usa qubits físicos diferentes do baseline",
-      "o sinal da diferença não é estável entre o run original e os dois novos",
-      "os gates de prep coerente e r1 da R1120 continuam falhando",
-      "a mitigação de leitura não reduz o r1 físico; mitigation ≠ correção do readout"
+      "os gates de prep coerente e r1 da R1120 não foram reavaliados isoladamente aqui",
+      "a mitigação de leitura não reduz o r1 bruto, que inclui erro de preparação",
+      "o sinal da diferença não é estável entre runs",
+      "qubits físicos diferentes: efeito total de mapeamento não isola a transpilação",
+      "calibração de subespaço 00/11 ou desconhecida, não uma matriz 4x4 completa"
     ]
   },
-  "limits": "Três runs de 1 job por caso; não é série temporal. O layout otimizado usa 106/107 e o baseline usa 0/1, então a diferença mistura layout com qualidade de qubit.",
+  "limits": "Runs históricos de 1 job por caso; não é série temporal nem ensaio com n da R1120. Calibração somente 00/11 mede subespaço, não TVD completa corrigida. Qubits diferentes são parte do efeito de mapeamento; não invalidam por si uma comparação pré-registrada.",
   "hardware_executed": false
 }

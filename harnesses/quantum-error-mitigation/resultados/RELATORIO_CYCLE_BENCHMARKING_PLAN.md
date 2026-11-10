@@ -1,6 +1,6 @@
 # Plano de cycle benchmarking — 15 taxas Pauli-Lindblad
 
-Gerado em 2026-11-09T18:13:35-03:00.
+Gerado em 2026-11-10T13:12:12-03:00.
 
 ## Plano
 

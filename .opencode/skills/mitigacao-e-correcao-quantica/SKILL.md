@@ -34,7 +34,7 @@ drift e incerteza. Para executar em hardware, o primário precisa de gates,
 | Técnica | Implementação | Limite |
 |---|---|---|
 | ZNE | folding global + extrapolação linear/quadrática/exponencial | assume monotonicidade; não é QEC |
-| PEC | quasi-probabilidades do canal depolarizante 1q | 2q não implementado; overhead γ² |
+| PEC | inversão de canal Pauli 1q/2q no planejador | 2q não executado; probabilidades não são taxas Lindblad; overhead γ² |
 | DD | XY4/CPMG/echo circuit-level | não é schedule pulse-level |
 | QEC | repetição 3 qubits para bit-flip | não protege fase; não é superfície |
 | SPAM | \|0> e \|1> com rx(pi) | preparação e leitura parcialmente confundidas |
@@ -94,8 +94,8 @@ drift e incerteza. Para executar em hardware, o primário precisa de gates,
   --qubit 1 --shots 4096 --confirm --allow-hardware --use-cached-account
 ```
 
-16 jobs (8 ângulos × 2 eixos) ajustam `p1(θ) = r0 + A·sin²((θ+ε)/2)` e separam
-leitura de desvio coerente. Em q1: ε(rx) = −0,0006 ± 0,0091 rad;
+16 jobs (8 ângulos × 2 eixos) ajustam `p1(θ) = r0 + A·sin²((θ+ε)/2)` sob
+um modelo restrito, sem separação autoconsistente de SPAM. Em q1: ε(rx) = −0,0006 ± 0,0091 rad;
 ε(ry) = +0,0012 ± 0,0129 rad; nenhum desvio acima de 2σ; r1 0,0695–0,0786.
 Não corrigir o ângulo do π; priorizar leitura.
 
@@ -108,20 +108,78 @@ Duas pernas, 2 conjuntos × 4 circuitos, 9.600 shots, 16 jobs:
 - Δ = +0,0018 [−0,0071, +0,0108];
 - decisão: **sem efeito detectável**.
 
-O resultado negativo é registrado. O twirl adiciona portas; o benefício de
-tailoring não superou esse custo neste circuito.
+Não foi detectada melhora neste ensaio; isso não prova ausência de efeito nem
+identifica sua causa. +0,0018 é a média bootstrap do relatório legado;
+a diferença direta das médias observadas é +0,00160156. O IC legado não
+preserva os pares temporais; não é evidência de equivalência. A sobrevivência
+dos twirls após compilação do servidor não foi auditada.
 
 ## Repetição de leitura
 
-Três runs de mitigação 4×4: baseline 0,0247 (faixa 0,0228–0,0263); otimizado
+Três runs de mitigação do **subespaço 00/11**, não matriz 4×4: baseline 0,0247 (faixa 0,0228–0,0263); otimizado
 0,0170 (faixa 0,0079–0,0277); sinal instável. O layout otimizado usa qubits
 106/107 e o baseline usa 0/1, então a diferença mistura layout com qualidade
-de qubit. Mitigação de leitura **não** reduz o r1 físico.
+de qubit. Qubits diferentes são parte do efeito de mapeamento, não veto
+universal à comparação. A rodada usou 4.096 shots, não o n da R1120, e não
+cumpriu a sequência de gates prevista. Não repetir antes de corrigir o desenho.
+Mitigação de leitura **não** reduz o r1 bruto, que aqui também inclui preparação.
 
 ## CB e GST
 
-- **Cycle benchmarking:** plano de 150 jobs pronto; nenhuma taxa medida. O
-  gerador/ajuste precisa ser validado em simulador antes do hardware.
+- **Cycle benchmarking (R1125):** gerador, paridade, ajuste e IC condicional
+  testados em simulador. Repetição par de CZ tem **posto 9**, não 15: não
+  identificar taxas individuais por `−log(f)/2` ou pseudoinversa.
+- **R1126:** o posto 9 é do desenho **somente-CZ**; a matriz completa tem posto
+  15. Aumentar com outros Cliffords pode chegar a 15 apenas sob gerador
+  compartilhado/conjugado; com um gerador por ciclo, `9k < 15k`. Submodelo
+  local tem posto 6; dois qubits, 9; ambos exigem taxas externas nulas. Nada
+  foi executado em hardware; ver `docs/RELATORIO_CB_R1126.md`.
+- **R1128:** Chen et al. 2023, DOI `10.1038/s41467-022-35759-4`: para um
+  Clifford de 2 qubits, o espaço aprendível tem **13** funções e restam **2**
+  não aprendíveis (ciclos vs cortes). O posto 9 é só o subespaço de órbitas;
+  faltam 4 funções, recuperáveis com **Cliffords de 1 qubit intercalados**.
+  As 2 de corte exigem hipótese adicional (preparação perfeita, GST ou
+  restrição física). Nada medido; ver
+  `docs/LITERATURA_APRENDIZABILIDADE_R1128.md`.
+- **R1129:** desenho com 7 ciclos individuais + 6 produtos de pares recupera
+  as **13 funções** em simulação exata (matriz 13×15, posto 13). As 2 de corte
+  continuam fora. Correções de 1 qubit ideais e ruído antes do CZ; hardware
+  não executado. Ver `docs/RELATORIO_CB_R1129.md`.
+- **R1130:** twirl de Pauli por CZ com frames registrados; depolarização 1q
+  após correções. Taxa 0,005 → erro máximo ~1,29×10⁻²; 0,010 → ~2,57×10⁻².
+  O ajuste ainda retorna 13/13, mas isso não é precisão. Pré-registro local:
+  325 jobs, 1.331.200 shots, `hardware_submission_allowed=False`.
+- **R1131:** contraprova Lean 4 core dos invariantes finitos (13×15 com
+  inversa à direita, 13/2, ortogonalidade). Identidades matriciais usam
+  `native_decide`; não prova canal quântico, twirl ou hardware.
+- **R1132:** LRE (Russo & Mari 2024) para ZNE layerwise; exata no modelo
+  multilinear, mas exige mais configurações e não valida o Baihua.
+- **R1133:** desenho pareado randomizado para layouts; `n` normal, r1 como
+  covariável e bloqueio de pares diferentes sem randomização.
+- **R1134:** as 13 funções são invariantes ao corte; as 15 fidelidades mudam.
+  Rota para PEC 2q/2 cortes: GSPN/MLCB com gauge autoconsistente, não
+  identificação direta das 2 funções.
+- **R1135:** gates revisados e fail-closed: PEC 2q exige GSPN validado,
+  held-out ≤0,01 e overhead ≤10; ZNE exige LRE ≥9 configurações, resíduo
+  ≤0,005 e held-out estável; layout exige n, randomização, r1≤0,05, drift e
+  efeito≥0,01; cortes são gauge, não identificação direta.
+- **R1137:** o sampler GJQ envia QASM original e o serviço compila sem devolver
+  layout. `compilation_audit.py` pré-transpila com `initial_layout` explícito e
+  verifica layout/qubits ativos/QASM; `compile=False` no serviço não foi
+  testado. REA: status/catálogo/sessão; análise nativa do `.so` sem Evidence útil.
+- **R1138:** `gate_router.py --gate ...` roteia gate bloqueado para rota e
+  evidência necessária; default fail-closed.
+- **Mathlib:** `MathlibCounterproof.lean` compilou com `lake env lean`,
+  retorno 0; `rank_D` usa `Matrix.rank` e as identidades usam `native_decide`
+  (338 axiomas nativos em `D_mul_R`). A contraprova leve é Lean 4 core.
+  Nenhuma das duas prova canal, twirl ou hardware.
+- O piloto corrigido usa m=0,2,4,8,16, manifesto e hashes QASM. É proposta
+  offline, não pré-registro histórico já executado. 150 jobs não resolvem a
+  falta de identificação; nenhuma taxa foi medida em hardware.
+- O simulador injeta canal Pauli após CZ com portas locais ideais. Sanduíches
+  compensados não implementam toda a média de sinais SPAM-robusta de Erhard.
+- Inversão disponível apenas para espectro completo rotulado e posto 15;
+  `gamma_Q` do gerador não pode entrar como probabilidade em `pauli_channel_inverse`.
 - **GST:** bloqueada; pyGSTi ausente e protocolo não validado.
 - Handoff: `docs/HANDOFF_CB_GST.md`.
 
@@ -130,7 +188,7 @@ de qubit. Mitigação de leitura **não** reduz o r1 físico.
 - `harnesses/quantum-error-mitigation/preregister_layout.py` pré-registra n e
   gates; decisão atual: não comparar layouts (n=38.411 por circuito/layout).
 - `harnesses/quantum-error-mitigation/cycle_benchmarking_plan.py` planeja 150
-  jobs para as 15 taxas Pauli-Lindblad; nenhuma taxa foi medida.
+  jobs históricos; sua suficiência para as 15 taxas foi refutada na R1125.
 - `docs/LITERATURA_MITIGACAO_QUANTICA_R1121.md` mapeia gap → técnica →
   referência verificada por DOI/arXiv.
 
@@ -144,8 +202,8 @@ O passe implementa o twirl `P' · G · P = G` para portas Clifford 1q/2q:
 ```
 
 Gera QASM twirlado, relatório e verificação unitária. No circuito de tomografia
-de q1, `n_twirls=1` e equivalência up to fase confirmada. **RC real em hardware
-não foi executado**; o passe é pré-requisito, não prova de redução de erro.
+de q1, `n_twirls=1` e equivalência up to fase confirmada. **Houve ensaio em
+hardware na R1123**, sem ganho detectado; igualdade ideal não prova mitigação.
 Portas não-Clifford são recusadas em modo estrito.
 
 ## Scorecard híbrido
@@ -165,8 +223,9 @@ incerteza para recomendar o próximo passo e listar técnicas bloqueadas:
 No run simétrico (2 conjuntos por qubit): ZNE bloqueado por não monotonicidade;
 Δ r1 q1−q0 = +0,0072, mas ICs se sobrepõem e o Δ é menor que o spread entre
 conjuntos, então a diferença não é conclusiva. `prep |0>/|1>` e `r0/r1` são a
-mesma contagem Z; a preparação independente de readout é medida por `|+>` e
-`|+i>`. Superfície e DD pulse-level bloqueados; PEC 2q com 15 taxas não
+mesma contagem Z. Os indicadores `|+>` e `|+i>` ainda dependem de SPAM e das
+rotações de análise; não são preparação independente de leitura. Superfície e
+DD pulse-level bloqueados; PEC 2q com 15 taxas não
 caracterizadas.
 
 ## Resultado R1115
@@ -176,10 +235,19 @@ extrapolação como ganho. O SPAM por pulsos π repetidos falhou, mas a
 tomografia multi-base (4 estados x 3 bases) separou preparação e leitura sob
 hipóteses declaradas. PEC 2q, superfície e DD pulse-level não foram executados.
 
+## Correlação e arranjos (R1147)
+
+Para erro de leitura correlacionado, use a skill
+`correlacoes-arranjos-contraprovas`: `quantum_mitigation/correlation_layout.py`
+mede `p_ij`/`phi`, otimiza layout com custo de porta + leitura + crosstalk +
+correlação e produz contraprovas. A contraprova formal está em
+`lean/quantum-cb/CorrelationCounterproof.lean` (10 teoremas kernel-checked).
+Nunca decidir layout só por marginais.
+
 ## Limites
 
-- Nenhum comando executa hardware.
-- ZNE não é QEC; PEC 2q não está implementado.
+- Runner/wrapper são offline; scripts `hardware_*` só pelo primário com gates.
+- ZNE não é QEC; há planejamento PEC 2q, mas não execução caracterizada.
 - DD é circuit-level, não pulse-level.
 - QEC de repetição não protege fase.
 - SPAM |11> usa `rx(pi)` e inclui preparação do |1>.

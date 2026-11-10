@@ -23,6 +23,8 @@ from typing import Any
 from mcp.server.fastmcp import FastMCP
 from mcp.types import ToolAnnotations
 
+from integrations import gjq_core_provider as core_provider
+from integrations import gjq_research_framework as research_framework
 from integrations.gjq_backend_registry import BACKENDS, is_hardware_name, resolve_backend
 
 DEFAULT_MAX_QUBITS = 200
@@ -302,6 +304,93 @@ def create_server() -> FastMCP:
             "executed": False,
             "network_access": False,
         }
+
+    @server.tool(name="gjq_provider_status", annotations=readonly)
+    def gjq_provider_status() -> dict:
+        """Status do provider Core: credencial, orçamento e registry; sem rede."""
+        return core_provider.status()
+
+    @server.tool(name="gjq_provider_submit", annotations=submit)
+    def gjq_provider_submit(
+        qasm: str,
+        backend_name: str,
+        shots: int = 1024,
+        confirm: bool = False,
+        allow_hardware: bool = False,
+        use_cached_account: bool = False,
+        optimization_level: int = 1,
+        transpile_circuit: bool = True,
+        amplitude_index: list[int] | None = None,
+        compile: bool | None = None,
+        initial_layout: list | None = None,
+    ) -> dict:
+        """Provider único: gates, orçamento, hash do QASM e submissão."""
+        return core_provider.submit(
+            qasm,
+            backend_name,
+            shots=shots,
+            confirm=confirm,
+            allow_hardware=allow_hardware,
+            use_cached_account=use_cached_account,
+            optimization_level=optimization_level,
+            transpile_circuit=transpile_circuit,
+            amplitude_index=amplitude_index,
+            compile=compile,
+            initial_layout=initial_layout,
+        )
+
+    @server.tool(name="gjq_provider_result", annotations=network_read)
+    def gjq_provider_result(
+        task_id: str,
+        shots: int | None = None,
+        use_cached_account: bool = False,
+    ) -> dict:
+        """Status/resultado/auditoria via provider; não reenvia job."""
+        return core_provider.result(
+            task_id,
+            shots=shots,
+            use_cached_account=use_cached_account,
+        )
+
+    @server.tool(name="gjq_provider_compilation", annotations=network_read)
+    def gjq_provider_compilation(
+        backend_name: str,
+        pair: list | None = None,
+        use_cached_account: bool = False,
+    ) -> dict:
+        """Audita initial_layout/qubits ativos localmente; não submete QASM."""
+        selected = tuple(pair) if pair is not None else (106, 107)
+        return core_provider.compilation_audit(
+            backend_name,
+            selected,
+            use_cached_account=use_cached_account,
+        )
+
+    @server.tool(name="gjq_research_status", annotations=readonly)
+    def gjq_research_status() -> dict:
+        """Status do framework de pesquisa; catálogo local, sem rede."""
+        return research_framework.status()
+
+    @server.tool(name="gjq_research_plan", annotations=readonly)
+    def gjq_research_plan(
+        objective: str,
+        backend_name: str = "FAS-CPU",
+        experiment: str | None = None,
+        shots: int = 1024,
+        hardware: bool = False,
+        required_capabilities: list[str] | None = None,
+        domain: str = "general",
+    ) -> dict:
+        """Plano de fases/gates e roteamento; não executa hardware."""
+        return research_framework.plan(
+            objective,
+            backend_name=backend_name,
+            experiment=experiment,
+            shots=shots,
+            hardware=hardware,
+            required_capabilities=required_capabilities,
+            domain=domain,
+        )
 
     @server.tool(name="gjq_list_backends", annotations=network_read)
     def gjq_list_backends() -> dict:

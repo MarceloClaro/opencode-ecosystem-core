@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "status": "analyzed",
+  "analyzed": true,
+  "n_baseline": 6,
+  "n_treatment": 6,
+  "adherence_rate": 1.0,
+  "adverse_events": [],
+  "metrics": {
+    "nap": 1.0,
+    "pem": 1.0,
+    "tau_u": {
+      "tau_ab": 1.0,
+      "tau_baseline_trend": 0.2,
+      "tau_u": 0.8,
+      "formula": "tau_ab - tau_trend (Parker, simplificado)",
+      "limits": "NAP, PEM e Tau-U são medidas de não sobreposição; Tau-U usa correção simplificada de tendência de Parker e não substitui randomização, modelagem ou revisão especializada."
+    },
+    "autocorrelation_lag1": 0.7553191489361701,
+    "permutation": {
+      "observed_nap": 1.0,
+      "p_value_one_sided": 0.0004997501249375312,
+      "n_permutations": 2000,
+      "method": "permutação de rótulos de fase",
+      "limits": "NAP, PEM e Tau-U são medidas de não sobreposição; Tau-U usa correção simplificada de tendência de Parker e não substitui randomização, modelagem ou revisão especializada."
+    }
+  },
+  "warnings": [
+    "autocorrelação |rho| > 0,3; inferência pode ser frágil"
+  ],
+  "direction": "increase",
+  "limits": "N-of-1 é um desenho de caso único; não prova eficácia populacional, causalidade universal ou generalização. Exige participante, consentimento, ética e supervisão. Autocorrelação e poucas fases limitam a inferência. NAP, PEM e Tau-U são medidas de não sobreposição; Tau-U usa correção simplificada de tendência de Parker e não substitui randomização, modelagem ou revisão especializada.",
+  "hardware_executed": false
+}

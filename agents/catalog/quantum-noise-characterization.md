@@ -135,13 +135,49 @@ agent_qem.py audit --report RELATORIO.md
 - **Tomografia simétrica (R1117):** q0/q1 com dois conjuntos cada; Δ r1
   +0,0072, ICs se sobrepõem, spread 0,0115/0,0127; não conclusivo.
 - **Redundância:** prep |0>/|1> = 1 − r0/r1; não são evidências independentes.
-- **Leitura (R1124):** mitigação não reduz o r1 físico; sinal de layout
-  instável e confundido por qubits diferentes.
+- **Leitura (R1124):** mitigação não reduz o r1 bruto (inclui preparação);
+  sinal de layout instável, com efeito total de mapeamento não isolado.
+
+## Correções metodológicas R1125
+
+- CB de CZ par tem **posto 9** para 15 taxas; recuperar somente combinações
+  identificáveis. Um IC estreito não corrige falta de identificação.
+- Medir paridade no suporte Pauli, não P00. Não tratar `−log(f)/2` como uma
+  taxa individual; resolver a matriz anticomutação somente com espectro completo.
+- Calibração R1124 usou apenas 00/11, não matriz 4×4; r1 bruto também inclui
+  preparação. Qubits diferentes fazem parte do efeito total do mapeamento.
+- Tomografia/Rabi são condicionais às hipóteses de portas de análise e leitura;
+  não promovê-las a separação SPAM autoconsistente nem a diamond norm.
+- ICs R1125 são condicionais de shots, não simultâneos, sem cobertura validada
+  para drift/seeds. χ² é um diagnóstico heurístico, não gate científico validado.
+- `cb_protocol.py` é offline pelo primário; nenhuma permissão de hardware nova.
+- **R1126:** posto 9 é específico do CZ; a matriz completa tem posto 15.
+  Aumento por ciclos exige gerador compartilhado/conjugado; com geradores
+  separados, `9k < 15k`. Submodelos local/2q têm posto 6/9, condicionados a
+  taxas externas nulas. Um IC estreito não resolve posto; GST/modelo
+  estruturado é o caminho para as 15 taxas gerais.
+- **R1128:** Chen et al. 2023: 13 funções aprendíveis e 2 não aprendíveis para
+  o CZ; o posto 9 é apenas o subespaço de órbitas. As 4 restantes exigem
+  Cliffords de 1 qubit intercalados; as 2 de corte exigem hipótese adicional.
+  Nenhuma taxa medida; nenhum hardware nesta análise.
+- **R1129:** desenho 7 individuais + 6 pares recupera 13/13 funções em
+  simulação exata; matriz 13×15 posto 13; as 2 de corte não são medidas.
+  Correções de 1 qubit ideais e ruído antes do CZ; hardware não executado.
+- **R1130:** twirl/frame por CZ e depolarização 1q simulada após correções;
+  0,005 → erro máximo ~1,29×10⁻². Pré-registro local; nenhum hardware.
+- **R1131:** contraprova Lean 4 core dos invariantes finitos 13/2; não
+  substitui caracterização de ruído nem GST.
+- **R1132–R1134:** LRE para ZNE layerwise, desenho pareado randomizado para
+  layouts e auditoria de gauge; as 13 funções são invariantes ao corte, mas
+  PEC 2q continua na rota GSPN/MLCB, não desbloqueado.
+- **R1135:** gates revisados fail-closed; r1≤0,05, drift e n/randomização
+  continuam exigidos para layouts; cortes são gauge, não medida direta.
 
 ## Limites
 
 - A calibração |11> inclui preparação do |1>.
-- No Baihua, o SPAM por pulsos π repetidos falhou; a tomografia multi-base funcionou e é o método recomendado.
+- No Baihua, o SPAM por pulsos π repetidos não identificou os parâmetros;
+  a tomografia multi-base gerou estimativas condicionais, não uma GST validada.
 - Crosstalk isolado vs simultâneo não identifica a causa.
 - Drift não corrige calibração.
 - Três repetições não estimam caudas extremas.

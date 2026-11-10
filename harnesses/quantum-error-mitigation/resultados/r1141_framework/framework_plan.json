@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "framework": "core-gjq-quantum-research",
+  "objective": "Pesquisa quantica avancada com GJQ",
+  "created_at": "2026-11-10T07:24:44-03:00",
+  "backend": {
+    "id": "jiuxiao-fas-cpu",
+    "display_name": "Jiuxiao-Full Amplitude Simulator",
+    "family": "cpu",
+    "kind": "full_amplitude",
+    "qubits": 20,
+    "status": "online",
+    "jobs": 68,
+    "t1_us": null,
+    "t2_us": null,
+    "calibrated_at": null,
+    "api_name": "FAS-CPU",
+    "api_name_verified": true,
+    "aliases": [
+      "Jiuxiao",
+      "FAS-CPU",
+      "Full Amplitude CPU"
+    ],
+    "hardware": false,
+    "requires_allow_hardware": false,
+    "amplitude_index_required": false,
+    "partial_amplitude": false,
+    "simulator_config_required": false,
+    "notes": "Simulador full-amplitude de CPU; 68 jobs no snapshot.",
+    "guidance": {
+      "best_for": [
+        "validação rápida",
+        "distribuição completa",
+        "Bell/GHZ/CHSH pequenos"
+      ],
+      "avoid": [
+        "confundir simulação com hardware",
+        "profundidade excessiva"
+      ],
+      "recommended_experiments": [
+        "bell",
+        "ghz3",
+        "chsh",
+        "qft2"
+      ]
+    }
+  },
+  "experiment": null,
+  "shots": 2048,
+  "hardware": false,
+  "required_capabilities": [
+    "audit",
+    "research"
+  ],
+  "routed_agents": {
+    "research": "gjq-quantum-research",
+    "audit": "quantum-experiment-auditor"
+  },
+  "phases": [
+    "spec: objetivo, critérios e não objetivos",
+    "tdd: testes antes da implementação",
+    "simulation: executar em simulador e comparar",
+    "preregistration: n, shots, hipótese e gates",
+    "compilation_audit: initial_layout e QASM",
+    "hardware_gate: confirm, allow_hardware, orçamento",
+    "execution: provider submete um job",
+    "audit: soma, incerteza e limites",
+    "reflection: lições no MetaBus/Evolution"
+  ],
+  "gates": {
+    "confirm": true,
+    "allow_hardware": false,
+    "budget": {
+      "allowed": true,
+      "reason": null,
+      "backend": "jiuxiao-fas-cpu",
+      "shots": 2048,
+      "hardware": false,
+      "hardware_enabled": false,
+      "usage": {
+        "submissions": 0,
+        "hardware_submissions": 0,
+        "shots": 0,
+        "hardware_shots": 0
+      },
+      "limits": {
+        "daily_submissions": 20,
+        "daily_hardware_submissions": 1,
+        "daily_shots": 100000,
+        "daily_hardware_shots": 4096
+      },
+      "remaining": {
+        "daily_submissions": 20,
+        "daily_hardware_submissions": 1,
+        "daily_shots": 100000,
+        "daily_hardware_shots": 4096
+      },
+      "executed": false
+    },
+    "compilation_audit": true,
+    "provider_credential": true
+  },
+  "executed": false,
+  "hardware_executed": false,
+  "rates_measured": false,
+  "limits": "Framework de orquestração offline. Não executa hardware, não mede taxas e não declara descoberta científica. Hardware exige confirm, allow_hardware, orçamento e auditoria de compilação.",
+  "manifest_sha256": "b34786631a3c0c90883475bb7154402c1fb24dd5bf25c26829d16f5615148131"
+}

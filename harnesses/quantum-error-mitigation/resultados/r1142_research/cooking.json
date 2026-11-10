@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "variables": [
+    "temperatura_alta",
+    "tempo_longo",
+    "coberto",
+    "preaquecido"
+  ],
+  "linear": [
+    -0.6,
+    -0.4,
+    0.3,
+    0.2
+  ],
+  "quadratic": {
+    "0-1": -1.2,
+    "1-2": -0.7,
+    "0-3": -0.5,
+    "2-3": 0.3
+  },
+  "exact_energy": -2.6,
+  "exact_bits": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "qaoa_energy": -2.1298020421301094,
+  "qaoa_bits": [
+    1,
+    1,
+    0,
+    0
+  ],
+  "qaoa_probability": 0.234522962869597,
+  "random_mean_energy": -0.7749999999999999,
+  "approximation_ratio": 0.742357283358964,
+  "synthetic": true,
+  "hardware_executed": false,
+  "rates_measured": false,
+  "limits": "QUBO sintético de 4 decisões; não é estudo de alimentos, não usa dados sensoriais e não prova vantagem quântica. QAOA é simulada por statevector, sem ruído ou shots. Qualquer aplicação culinária exige dados reais, baseline clássico e validação sensorial."
+}

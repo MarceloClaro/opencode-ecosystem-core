@@ -1,0 +1,132 @@
+"""R1148 — contrato de runtime, hooks e circuit breaker."""
+from __future__ import annotations
+
+import json
+
+import pytest
+
+from mci import runtime_contract
+
+
+class FakeClock:
+    def __init__(self) -> None:
+        self.value = 0.0
+
+    def __call__(self) -> float:
+        return self.value
+
+    def advance(self, seconds: float) -> None:
+        self.value += seconds
+
+
+def test_read_only_action_executes():
+    contract = runtime_contract.RuntimeContract()
+    result = contract.execute(
+        {"action_id": "read", "action_class": "read_only"},
+        lambda payload: 42,
+    )
+    assert result["status"] == "executed"
+    assert result["result"] == 42
+    assert result["breaker"]["state"] == "closed"
+
+
+def test_irreversible_requires_approval_and_token():
+    called = []
+    contract = runtime_contract.RuntimeContract()
+    request = {"action_id": "delete", "action_class": "irreversible"}
+    blocked = contract.execute(request, lambda payload: called.append(1))
+    assert blocked["status"] == "escalated"
+    assert blocked["human_escalation"] is True
+    assert called == []
+
+    no_token = contract.execute(
+        {**request, "approved": True}, lambda payload: called.append(1)
+    )
+    assert no_token["status"] == "escalated"
+    assert no_token["reason"] == "approval_token_required"
+    assert called == []
+
+    executed = contract.execute(
+        {**request, "approved": True, "approval_token": "tok-1"},
+        lambda payload: "ok",
+    )
+    assert executed["status"] == "executed"
+    assert executed["result"] == "ok"
+
+
+def test_before_hook_can_deny():
+    contract = runtime_contract.RuntimeContract()
+    contract.register_hook(
+        "before",
+        lambda request: {"allow": False, "reason": "budget_exceeded"},
+    )
+    result = contract.execute(
+        {"action_id": "x", "action_class": "read_only"},
+        lambda payload: "never",
+    )
+    assert result["status"] == "blocked"
+    assert result["reason"] == "budget_exceeded"
+
+
+def test_after_hook_sees_outcome():
+    seen = []
+    contract = runtime_contract.RuntimeContract()
+    contract.register_hook("after", lambda request, outcome: seen.append(outcome))
+    contract.execute(
+        {"action_id": "x", "action_class": "reversible"},
+        lambda payload: 7,
+    )
+    assert seen[0]["status"] == "executed"
+    assert seen[0]["result"] == 7
+
+
+def test_circuit_breaker_opens_and_recovers():
+    clock = FakeClock()
+    breaker = runtime_contract.CircuitBreaker(
+        failure_threshold=3, cooldown_seconds=60, clock=clock
+    )
+    contract = runtime_contract.RuntimeContract(breaker=breaker, clock=clock)
+
+    def fail(payload):
+        raise RuntimeError("falha")
+
+    for _ in range(3):
+        result = contract.execute(
+            {"action_id": "x", "action_class": "read_only"}, fail
+        )
+        assert result["status"] == "failed"
+    assert breaker.state == "open"
+    blocked = contract.execute(
+        {"action_id": "x", "action_class": "read_only"}, lambda payload: 1
+    )
+    assert blocked["status"] == "blocked"
+    assert blocked["reason"] == "circuit_open"
+
+    clock.advance(61)
+    recovered = contract.execute(
+        {"action_id": "x", "action_class": "read_only"}, lambda payload: 1
+    )
+    assert recovered["status"] == "executed"
+    assert breaker.state == "closed"
+
+
+def test_audit_jsonl_is_written(tmp_path):
+    path = tmp_path / "audit.jsonl"
+    contract = runtime_contract.RuntimeContract(audit_path=path)
+    contract.execute(
+        {"action_id": "x", "action_class": "read_only"},
+        lambda payload: 1,
+    )
+    lines = path.read_text(encoding="utf-8").strip().splitlines()
+    assert len(lines) == 1
+    record = json.loads(lines[0])
+    assert record["action_id"] == "x"
+    assert record["status"] == "executed"
+
+
+def test_invalid_action_class_is_rejected():
+    contract = runtime_contract.RuntimeContract()
+    with pytest.raises(ValueError):
+        contract.execute(
+            {"action_id": "x", "action_class": "unknown"}, lambda payload: 1
+        )

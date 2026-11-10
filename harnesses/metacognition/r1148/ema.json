@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "status": "ready_for_review",
+  "psychometrics": {
+    "valid": true,
+    "missing": [],
+    "warnings": [],
+    "limits": "Metadados psicométricos são obrigatórios, mas não provam validade no contexto local. Reliabilidade e validade devem ser reportadas com fonte."
+  },
+  "compliance": {
+    "schema_version": 1,
+    "scheduled": 9,
+    "answered": 7,
+    "missing": 2,
+    "compliance_rate": 0.7777777777777778,
+    "missing_by_day": {
+      "2": 2
+    },
+    "answered_by_day": {
+      "0": 3,
+      "1": 3,
+      "2": 1
+    },
+    "missing_prompt_ids": [
+      "ema-02-01",
+      "ema-02-02"
+    ],
+    "latency_median_seconds": null,
+    "complete_cases": 7,
+    "imputation": "none",
+    "limits": "EMA mede autorrelato ecológico e não substitui validação clínica, diagnóstico, ética ou supervisão. O teste de transferência é descritivo; não identifica mecanismo nem causalidade. Dados faltantes não são imputados."
+  },
+  "transfer": {
+    "schema_version": 1,
+    "n_pairs": 6,
+    "delta_offloading": {
+      "mean": -1.0,
+      "ci_low": -1.0,
+      "ci_high": -1.0,
+      "confidence": 0.95,
+      "n_boot": 1000,
+      "method": "percentil bootstrap da média"
+    },
+    "delta_autonomy": {
+      "mean": 1.0,
+      "ci_low": 1.0,
+      "ci_high": 1.0,
+      "confidence": 0.95,
+      "n_boot": 1000,
+      "method": "percentil bootstrap da média"
+    },
+    "classification": "autonomous",
+    "evidence_strength": "strong",
+    "decision_rule": "dependent: Δoffloading>0 e Δautonomia<0; autonomous: Δoffloading<=0 e Δautonomia>0; caso contrário ambiguous",
+    "limits": "EMA mede autorrelato ecológico e não substitui validação clínica, diagnóstico, ética ou supervisão. O teste de transferência é descritivo; não identifica mecanismo nem causalidade. Dados faltantes não são imputados."
+  },
+  "limits": "EMA mede autorrelato ecológico e não substitui validação clínica, diagnóstico, ética ou supervisão. O teste de transferência é descritivo; não identifica mecanismo nem causalidade. Dados faltantes não são imputados.",
+  "clinical_validation": false,
+  "hardware_executed": false
+}

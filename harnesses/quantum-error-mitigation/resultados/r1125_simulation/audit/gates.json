@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "spec_verifier": {
+    "spec_id": "SPEC-935-R1125",
+    "verified": false,
+    "status": "red",
+    "spec_status": "red",
+    "criteria_results": [
+      {
+        "criterion_id": "R1125-1",
+        "description": "Paridade, identidade, bits, domínio e profundidades pares.",
+        "passed": false
+      },
+      {
+        "criterion_id": "R1125-2",
+        "description": "Posto, contraprova física, inversão completa e oráculo de canal.",
+        "passed": false
+      },
+      {
+        "criterion_id": "R1125-3",
+        "description": "Ajustes condicionais, incerteza sem projeção, heterogeneidade e limites.",
+        "passed": false
+      },
+      {
+        "criterion_id": "R1125-4",
+        "description": "Manifesto, hashes, dados completos, JSON inequívoco e offline sem sobrescrita.",
+        "passed": false
+      },
+      {
+        "criterion_id": "R1125-5",
+        "description": "Documentação e análise de leitura coerentes com os counts históricos.",
+        "passed": false
+      }
+    ],
+    "passed_count": 0,
+    "total_count": 5,
+    "runtime_evidence_required": true,
+    "runtime_evidence_valid": false,
+    "evidence_contract_mode": "criterion-runtime-v1",
+    "evidence_contract_valid": true,
+    "evidence_contract_error": null,
+    "evidence_contract_sha256": "8bd9ec6ed03fbbe629feae82f6c422d392353e9a2542ca9e5c7e6702108bd263",
+    "criterion_runtime_records_required": true,
+    "red_history_required": true,
+    "red_history_valid": false,
+    "red_history": {
+      "verified": false,
+      "reason_codes": [
+        "red_history_missing"
+      ]
+    },
+    "verification_scope": "software_delivery_gate"
+  },
+  "behavioral_gate": {
+    "action_id": "R1125-release",
+    "allowed": true,
+    "trust_score": 0.6627498725318642,
+    "threshold": 0.5,
+    "tier": "gold",
+    "reason": "behavioral_gate R830",
+    "risk_level": "moderate",
+    "gate": "BehavioralGate",
+    "decision": "GateDecision"
+  },
+  "formal_history_attempt": {
+    "receipt_id": "tdd-bb73b7243ff34e178ac117ab7027545b",
+    "accepted": false,
+    "reason_codes": [
+      "history_execution_or_persistence_error",
+      "source_manifest_limit"
+    ]
+  },
+  "raw_tests": {
+    "red1": {
+      "failed": 44,
+      "passed": 2
+    },
+    "green1": {
+      "passed": 46
+    },
+    "red2": {
+      "failed": 9,
+      "passed": 52
+    },
+    "green2_focal_with_readout": {
+      "passed": 67
+    },
+    "final_quantum": {
+      "passed": 218,
+      "warnings": 28
+    },
+    "final_lifecycle": {
+      "passed": 30
+    }
+  },
+  "release_allowed": false,
+  "externally_validated": false,
+  "hardware_executed": false,
+  "new_hardware_jobs": 0,
+  "reviews": [
+    {
+      "task_id": "task-b91ba825",
+      "executor": "codex",
+      "scope": "mathematical_text_only"
+    },
+    {
+      "task_id": "task-609659fc",
+      "scope": "adversarial_review_of_supplied_contract_not_source"
+    }
+  ],
+  "failed_delegation": {
+    "task_id": "task-573d67d5",
+    "session_id": "ses_e3d990deeffee475IST5zCZNE6",
+    "error": "OpenCode Go subscription required",
+    "execution_completed": false
+  },
+  "slashing": {
+    "status": "not_applied_no_accessible_stake",
+    "reason": "Não inventar posição de stake, débito ou execução. Falhas registradas no MetaBus; feedback de confiança não promove sucesso científico."
+  },
+  "limits": [
+    "Histórico RED/GREEN bruto não foi selado pelo coletor; gate formal recusado.",
+    "Teste lifecycle executado primeiro no venv quântico falhou em 3 imports whoosh; repetido em python3 correto e passou.",
+    "Artefatos sintéticos não caracterizam Baihua."
+  ]
+}

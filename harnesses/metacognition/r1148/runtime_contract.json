@@ -1,0 +1,81 @@
+{
+  "read_only": {
+    "status": "executed",
+    "action_id": "read",
+    "action_class": "read_only",
+    "result": 42,
+    "elapsed_seconds": 0.0,
+    "breaker": {
+      "state": "closed",
+      "failures": 0,
+      "failure_threshold": 2,
+      "cooldown_seconds": 30.0
+    }
+  },
+  "irreversible": {
+    "status": "escalated",
+    "action_id": "delete",
+    "action_class": "irreversible",
+    "reason": "approval_required",
+    "human_escalation": true
+  },
+  "failures": [
+    {
+      "status": "failed",
+      "action_id": "fail",
+      "action_class": "read_only",
+      "error": "RuntimeError('falha simulada')",
+      "elapsed_seconds": 0.0,
+      "breaker": {
+        "state": "closed",
+        "failures": 1,
+        "failure_threshold": 2,
+        "cooldown_seconds": 30.0
+      }
+    },
+    {
+      "status": "failed",
+      "action_id": "fail",
+      "action_class": "read_only",
+      "error": "RuntimeError('falha simulada')",
+      "elapsed_seconds": 0.0,
+      "breaker": {
+        "state": "open",
+        "failures": 2,
+        "failure_threshold": 2,
+        "cooldown_seconds": 30.0
+      }
+    }
+  ],
+  "blocked": {
+    "status": "blocked",
+    "action_id": "read",
+    "action_class": "read_only",
+    "reason": "circuit_open",
+    "breaker": {
+      "state": "open",
+      "failures": 2,
+      "failure_threshold": 2,
+      "cooldown_seconds": 30.0
+    }
+  },
+  "recovered": {
+    "status": "executed",
+    "action_id": "read",
+    "action_class": "read_only",
+    "result": 1,
+    "elapsed_seconds": 0.0,
+    "breaker": {
+      "state": "closed",
+      "failures": 0,
+      "failure_threshold": 2,
+      "cooldown_seconds": 30.0
+    }
+  },
+  "breaker": {
+    "state": "closed",
+    "failures": 0,
+    "failure_threshold": 2,
+    "cooldown_seconds": 30.0
+  }
+}

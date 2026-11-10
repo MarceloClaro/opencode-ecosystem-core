@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "n_train": 8,
+  "n_test": 8,
+  "quantum_accuracy": 0.625,
+  "classical_accuracy": 0.875,
+  "quantum_confusion": {
+    "tp": 1,
+    "tn": 4,
+    "fp": 0,
+    "fn": 3
+  },
+  "classical_confusion": {
+    "tp": 3,
+    "tn": 4,
+    "fp": 0,
+    "fn": 1
+  },
+  "leakage": {
+    "disjoint": true,
+    "train_size": 8,
+    "test_size": 8,
+    "overlap": []
+  },
+  "sources": {
+    "feature_spaces": "10.1038/s41586-019-0980-2",
+    "generalization": "10.1038/s41467-022-32550-3",
+    "data_power": "10.1038/s41467-021-22539-9"
+  },
+  "limits": "Dataset sintético 2D. Não prova vantagem quântica, generalização em dados reais ou superioridade sobre kernels clássicos. O kernel quântico é calculado por statevector, sem ruído ou shots.",
+  "hardware_executed": false,
+  "rates_measured": false
+}

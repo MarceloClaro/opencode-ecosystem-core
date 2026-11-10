@@ -1,6 +1,6 @@
 # Pré-registro de comparação de layouts
 
-Gerado em 2026-11-09T18:13:39-03:00.
+Gerado em 2026-11-10T13:12:11-03:00.
 
 ## Decisão
 
@@ -45,4 +45,4 @@ Escolhido: n = **38,411** por circuito/layout (meia-largura 0,005; p=0,5; 95%).
 
 - Pré-registro local baseado em p=0,5 e meia-largura conservadora. TVD não é proporção; o cálculo é uma aproximação de planejamento.
 
-Hash SHA-256: `a6ec35c50111fca236217101046235bfee3b8e22dbdeaad12247d643f0ab5599`.
+Hash SHA-256: `51d421c900f332f56e4e66b69a3a9bee06d023ebf32fce3cbbab3bf890dd63a4`.

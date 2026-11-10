@@ -1,0 +1,615 @@
+{
+  "graph": {
+    "schema_version": 1,
+    "nodes": {
+      "formal_complex": {
+        "id": "formal_complex",
+        "type": "claim",
+        "proposition": "Duas fases unitárias interferem como 2+2cos(a-b).",
+        "kind": "lemma",
+        "polarity": "affirm",
+        "proposition_key": "formal_complex",
+        "formal_link": {
+          "theorem": "interference",
+          "counterproof": "relative_phase_not_one",
+          "certificate_path": "harnesses/quantum-error-mitigation/resultados/r1146_complex_proofs/certificate.json",
+          "certificate_sha256": "5bdad31fe568f8141b221ff4db4df2bbf50bad7f4da4f08ba687fdc86fb46168",
+          "lean_file_sha256": "8e6c25f873fbd15c4ee4bf4a1faa57c81f933fe8775b4644d6730f0f63fe1f43"
+        },
+        "psychometric": null,
+        "prov": {
+          "agent": "unknown",
+          "activity": "assert_claim",
+          "generated_at": "2026-11-10T16:16:52.964738+00:00",
+          "source": null
+        }
+      },
+      "interference": {
+        "id": "interference",
+        "type": "theorem",
+        "lean_name": "interference",
+        "prov": {
+          "agent": "lean",
+          "activity": "kernel_check",
+          "generated_at": "2026-11-10T16:16:52.983241+00:00",
+          "source": null
+        }
+      },
+      "relative_phase_not_one": {
+        "id": "relative_phase_not_one",
+        "type": "counterproof",
+        "lean_name": "relative_phase_not_one",
+        "prov": {
+          "agent": "lean",
+          "activity": "kernel_check",
+          "generated_at": "2026-11-10T16:16:52.983269+00:00",
+          "source": null
+        }
+      },
+      "formal_correlation": {
+        "id": "formal_correlation",
+        "type": "claim",
+        "proposition": "Marginais não determinam a junta.",
+        "kind": "lemma",
+        "polarity": "affirm",
+        "proposition_key": "formal_correlation",
+        "formal_link": {
+          "theorem": "marginals_do_not_determine_joint",
+          "counterproof": "joints_differ",
+          "certificate_path": "harnesses/quantum-error-mitigation/resultados/r1147_correlation_layout/certificate.json",
+          "certificate_sha256": "182cc5f1a86a3f1c87d3259ea95b6e4d51598a9e483d3a191ec1c84fcf6f6273",
+          "lean_file_sha256": "73b9ff8566d8effd48a8456bf9df7f706d6ff207689178cc1c43a51a5e861b92"
+        },
+        "psychometric": null,
+        "prov": {
+          "agent": "unknown",
+          "activity": "assert_claim",
+          "generated_at": "2026-11-10T16:16:52.983535+00:00",
+          "source": null
+        }
+      },
+      "marginals_do_not_determine_joint": {
+        "id": "marginals_do_not_determine_joint",
+        "type": "theorem",
+        "lean_name": "marginals_do_not_determine_joint",
+        "prov": {
+          "agent": "lean",
+          "activity": "kernel_check",
+          "generated_at": "2026-11-10T16:16:52.983718+00:00",
+          "source": null
+        }
+      },
+      "joints_differ": {
+        "id": "joints_differ",
+        "type": "counterproof",
+        "lean_name": "joints_differ",
+        "prov": {
+          "agent": "lean",
+          "activity": "kernel_check",
+          "generated_at": "2026-11-10T16:16:52.983727+00:00",
+          "source": null
+        }
+      },
+      "src1": {
+        "id": "src1",
+        "type": "source",
+        "title": "Fonte real",
+        "doi": "10.0000/real",
+        "url": null,
+        "license": null,
+        "retrieved_at": null,
+        "prov": {
+          "agent": "unknown",
+          "activity": "retrieve_source",
+          "generated_at": "2026-11-10T16:16:52.983828+00:00",
+          "source": null
+        }
+      },
+      "empirical_real": {
+        "id": "empirical_real",
+        "type": "claim",
+        "proposition": "A intervenção reduz offloading em média.",
+        "kind": "empirical",
+        "polarity": "affirm",
+        "proposition_key": "empirical_real",
+        "formal_link": null,
+        "psychometric": null,
+        "prov": {
+          "agent": "unknown",
+          "activity": "assert_claim",
+          "generated_at": "2026-11-10T16:16:52.983838+00:00",
+          "source": null
+        }
+      },
+      "ev-real": {
+        "id": "ev-real",
+        "type": "evidence",
+        "domain": "real",
+        "value": 0.8,
+        "units": null,
+        "uncertainty": 0.05,
+        "source_id": "src1",
+        "synthetic": false,
+        "scenario": null,
+        "prov": {
+          "agent": "unknown",
+          "activity": "collect_evidence",
+          "generated_at": "2026-11-10T16:16:52.983857+00:00",
+          "source": "src1"
+        }
+      },
+      "empirical_complex": {
+        "id": "empirical_complex",
+        "type": "claim",
+        "proposition": "A amplitude complexa preserva a probabilidade.",
+        "kind": "empirical",
+        "polarity": "affirm",
+        "proposition_key": "empirical_complex",
+        "formal_link": null,
+        "psychometric": null,
+        "prov": {
+          "agent": "unknown",
+          "activity": "assert_claim",
+          "generated_at": "2026-11-10T16:16:52.983868+00:00",
+          "source": null
+        }
+      },
+      "ev-complex": {
+        "id": "ev-complex",
+        "type": "evidence",
+        "domain": "complex",
+        "value": {
+          "real": 0.6,
+          "imag": 0.8
+        },
+        "units": null,
+        "uncertainty": null,
+        "source_id": null,
+        "synthetic": false,
+        "scenario": null,
+        "prov": {
+          "agent": "unknown",
+          "activity": "collect_evidence",
+          "generated_at": "2026-11-10T16:16:52.983878+00:00",
+          "source": null
+        }
+      },
+      "subjective": {
+        "id": "subjective",
+        "type": "claim",
+        "proposition": "Sinto mais autonomia após a intervenção.",
+        "kind": "subjective",
+        "polarity": "affirm",
+        "proposition_key": "subjective",
+        "formal_link": null,
+        "psychometric": {
+          "valid": true,
+          "metadata": {
+            "instrument": "Core Self-Report",
+            "version": "1.0",
+            "scale": "Likert 1-7",
+            "reliability": {
+              "omega": 0.82,
+              "alpha": 0.8
+            },
+            "validity": {
+              "construct": "autonomia e offloading",
+              "notes": "fonte declarada"
+            },
+            "provenance": "doi:10.0000/exemplo",
+            "license": "CC-BY-4.0"
+          },
+          "warnings": [],
+          "missing": []
+        },
+        "prov": {
+          "agent": "unknown",
+          "activity": "assert_claim",
+          "generated_at": "2026-11-10T16:16:52.983887+00:00",
+          "source": null
+        }
+      },
+      "ev-subj": {
+        "id": "ev-subj",
+        "type": "evidence",
+        "domain": "real",
+        "value": 0.7,
+        "units": null,
+        "uncertainty": null,
+        "source_id": null,
+        "synthetic": false,
+        "scenario": null,
+        "prov": {
+          "agent": "unknown",
+          "activity": "collect_evidence",
+          "generated_at": "2026-11-10T16:16:52.983920+00:00",
+          "source": null
+        }
+      },
+      "irreal": {
+        "id": "irreal",
+        "type": "claim",
+        "proposition": "Simulação prevê ganho de 20%.",
+        "kind": "empirical",
+        "polarity": "affirm",
+        "proposition_key": "irreal",
+        "formal_link": null,
+        "psychometric": null,
+        "prov": {
+          "agent": "unknown",
+          "activity": "assert_claim",
+          "generated_at": "2026-11-10T16:16:52.983929+00:00",
+          "source": null
+        }
+      },
+      "ev-irreal": {
+        "id": "ev-irreal",
+        "type": "evidence",
+        "domain": "irreal",
+        "value": 0.2,
+        "units": null,
+        "uncertainty": null,
+        "source_id": null,
+        "synthetic": true,
+        "scenario": "mundo sintético A",
+        "prov": {
+          "agent": "unknown",
+          "activity": "collect_evidence",
+          "generated_at": "2026-11-10T16:16:52.983936+00:00",
+          "source": null
+        }
+      },
+      "affirm": {
+        "id": "affirm",
+        "type": "claim",
+        "proposition": "A intervenção funciona.",
+        "kind": "empirical",
+        "polarity": "affirm",
+        "proposition_key": "efeito",
+        "formal_link": null,
+        "psychometric": null,
+        "prov": {
+          "agent": "unknown",
+          "activity": "assert_claim",
+          "generated_at": "2026-11-10T16:16:52.983949+00:00",
+          "source": null
+        }
+      },
+      "deny": {
+        "id": "deny",
+        "type": "claim",
+        "proposition": "A intervenção não funciona.",
+        "kind": "empirical",
+        "polarity": "deny",
+        "proposition_key": "efeito",
+        "formal_link": null,
+        "psychometric": null,
+        "prov": {
+          "agent": "unknown",
+          "activity": "assert_claim",
+          "generated_at": "2026-11-10T16:16:52.983954+00:00",
+          "source": null
+        }
+      },
+      "ev-aff": {
+        "id": "ev-aff",
+        "type": "evidence",
+        "domain": "real",
+        "value": 0.8,
+        "units": null,
+        "uncertainty": null,
+        "source_id": null,
+        "synthetic": false,
+        "scenario": null,
+        "prov": {
+          "agent": "unknown",
+          "activity": "collect_evidence",
+          "generated_at": "2026-11-10T16:16:52.983958+00:00",
+          "source": null
+        }
+      },
+      "ev-den": {
+        "id": "ev-den",
+        "type": "evidence",
+        "domain": "real",
+        "value": 0.7,
+        "units": null,
+        "uncertainty": null,
+        "source_id": null,
+        "synthetic": false,
+        "scenario": null,
+        "prov": {
+          "agent": "unknown",
+          "activity": "collect_evidence",
+          "generated_at": "2026-11-10T16:16:52.983963+00:00",
+          "source": null
+        }
+      }
+    },
+    "edges": [
+      {
+        "source": "interference",
+        "target": "formal_complex",
+        "relation": "proves",
+        "weight": 1.0,
+        "rationale": "Lean kernel-checked",
+        "prov": {
+          "agent": "unknown",
+          "activity": "link_evidence",
+          "generated_at": "2026-11-10T16:16:52.983281+00:00",
+          "source": null
+        }
+      },
+      {
+        "source": "relative_phase_not_one",
+        "target": "formal_complex",
+        "relation": "counterproves",
+        "weight": 1.0,
+        "rationale": "contraprova Lean",
+        "prov": {
+          "agent": "unknown",
+          "activity": "link_evidence",
+          "generated_at": "2026-11-10T16:16:52.983303+00:00",
+          "source": null
+        }
+      },
+      {
+        "source": "marginals_do_not_determine_joint",
+        "target": "formal_correlation",
+        "relation": "proves",
+        "weight": 1.0,
+        "rationale": "Lean kernel-checked",
+        "prov": {
+          "agent": "unknown",
+          "activity": "link_evidence",
+          "generated_at": "2026-11-10T16:16:52.983734+00:00",
+          "source": null
+        }
+      },
+      {
+        "source": "joints_differ",
+        "target": "formal_correlation",
+        "relation": "counterproves",
+        "weight": 1.0,
+        "rationale": "contraprova Lean",
+        "prov": {
+          "agent": "unknown",
+          "activity": "link_evidence",
+          "generated_at": "2026-11-10T16:16:52.983739+00:00",
+          "source": null
+        }
+      },
+      {
+        "source": "ev-real",
+        "target": "empirical_real",
+        "relation": "supports",
+        "weight": 0.9,
+        "rationale": "",
+        "prov": {
+          "agent": "unknown",
+          "activity": "link_evidence",
+          "generated_at": "2026-11-10T16:16:52.983863+00:00",
+          "source": null
+        }
+      },
+      {
+        "source": "ev-complex",
+        "target": "empirical_complex",
+        "relation": "supports",
+        "weight": 0.8,
+        "rationale": "",
+        "prov": {
+          "agent": "unknown",
+          "activity": "link_evidence",
+          "generated_at": "2026-11-10T16:16:52.983883+00:00",
+          "source": null
+        }
+      },
+      {
+        "source": "ev-subj",
+        "target": "subjective",
+        "relation": "supports",
+        "weight": 0.9,
+        "rationale": "",
+        "prov": {
+          "agent": "unknown",
+          "activity": "link_evidence",
+          "generated_at": "2026-11-10T16:16:52.983925+00:00",
+          "source": null
+        }
+      },
+      {
+        "source": "ev-irreal",
+        "target": "irreal",
+        "relation": "supports",
+        "weight": 0.9,
+        "rationale": "",
+        "prov": {
+          "agent": "unknown",
+          "activity": "link_evidence",
+          "generated_at": "2026-11-10T16:16:52.983940+00:00",
+          "source": null
+        }
+      },
+      {
+        "source": "ev-aff",
+        "target": "affirm",
+        "relation": "supports",
+        "weight": 1.0,
+        "rationale": "",
+        "prov": {
+          "agent": "unknown",
+          "activity": "link_evidence",
+          "generated_at": "2026-11-10T16:16:52.983967+00:00",
+          "source": null
+        }
+      },
+      {
+        "source": "ev-den",
+        "target": "deny",
+        "relation": "supports",
+        "weight": 1.0,
+        "rationale": "",
+        "prov": {
+          "agent": "unknown",
+          "activity": "link_evidence",
+          "generated_at": "2026-11-10T16:16:52.983971+00:00",
+          "source": null
+        }
+      }
+    ],
+    "limits": "Grafo epistemológico: liga e contrapõe evidência, mas não inventa verdade. Evidência irreal é sintética/contrafactual e não sustenta alegação empírica. Warrant não é probabilidade de verdade. Exige revisão humana."
+  },
+  "warrants": {
+    "formal_complex": {
+      "schema_version": 1,
+      "claim_id": "formal_complex",
+      "kind": "lemma",
+      "warrant": 0.3,
+      "status": "formal_only",
+      "abstain": false,
+      "support": 0.0,
+      "contradiction": 0.0,
+      "formal": true,
+      "psychometric_valid": false,
+      "domains": {},
+      "reasons": [
+        "prova formal cobre apenas o enunciado formal"
+      ],
+      "limits": "Grafo epistemológico: liga e contrapõe evidência, mas não inventa verdade. Evidência irreal é sintética/contrafactual e não sustenta alegação empírica. Warrant não é probabilidade de verdade. Exige revisão humana."
+    },
+    "formal_correlation": {
+      "schema_version": 1,
+      "claim_id": "formal_correlation",
+      "kind": "lemma",
+      "warrant": 0.3,
+      "status": "formal_only",
+      "abstain": false,
+      "support": 0.0,
+      "contradiction": 0.0,
+      "formal": true,
+      "psychometric_valid": false,
+      "domains": {},
+      "reasons": [
+        "prova formal cobre apenas o enunciado formal"
+      ],
+      "limits": "Grafo epistemológico: liga e contrapõe evidência, mas não inventa verdade. Evidência irreal é sintética/contrafactual e não sustenta alegação empírica. Warrant não é probabilidade de verdade. Exige revisão humana."
+    },
+    "empirical_real": {
+      "schema_version": 1,
+      "claim_id": "empirical_real",
+      "kind": "empirical",
+      "warrant": 0.699999999611111,
+      "status": "supported",
+      "abstain": false,
+      "support": 0.9,
+      "contradiction": 0.0,
+      "formal": false,
+      "psychometric_valid": false,
+      "domains": {
+        "real": 1
+      },
+      "reasons": [],
+      "limits": "Grafo epistemológico: liga e contrapõe evidência, mas não inventa verdade. Evidência irreal é sintética/contrafactual e não sustenta alegação empírica. Warrant não é probabilidade de verdade. Exige revisão humana."
+    },
+    "empirical_complex": {
+      "schema_version": 1,
+      "claim_id": "empirical_complex",
+      "kind": "empirical",
+      "warrant": 0.6999999995624999,
+      "status": "supported",
+      "abstain": false,
+      "support": 0.8,
+      "contradiction": 0.0,
+      "formal": false,
+      "psychometric_valid": false,
+      "domains": {
+        "complex": 1
+      },
+      "reasons": [],
+      "limits": "Grafo epistemológico: liga e contrapõe evidência, mas não inventa verdade. Evidência irreal é sintética/contrafactual e não sustenta alegação empírica. Warrant não é probabilidade de verdade. Exige revisão humana."
+    },
+    "subjective": {
+      "schema_version": 1,
+      "claim_id": "subjective",
+      "kind": "subjective",
+      "warrant": 0.6,
+      "status": "subjective_review",
+      "abstain": true,
+      "support": 0.9,
+      "contradiction": 0.0,
+      "formal": false,
+      "psychometric_valid": true,
+      "domains": {
+        "real": 1
+      },
+      "reasons": [
+        "autorrelato exige validação clínica"
+      ],
+      "limits": "Grafo epistemológico: liga e contrapõe evidência, mas não inventa verdade. Evidência irreal é sintética/contrafactual e não sustenta alegação empírica. Warrant não é probabilidade de verdade. Exige revisão humana."
+    },
+    "irreal": {
+      "schema_version": 1,
+      "claim_id": "irreal",
+      "kind": "empirical",
+      "warrant": 0.5,
+      "status": "simulation_only",
+      "abstain": true,
+      "support": 0.27,
+      "contradiction": 0.0,
+      "formal": false,
+      "psychometric_valid": false,
+      "domains": {
+        "irreal": 1
+      },
+      "reasons": [
+        "apenas evidência irreal; não sustenta alegação empírica"
+      ],
+      "limits": "Grafo epistemológico: liga e contrapõe evidência, mas não inventa verdade. Evidência irreal é sintética/contrafactual e não sustenta alegação empírica. Warrant não é probabilidade de verdade. Exige revisão humana."
+    },
+    "affirm": {
+      "schema_version": 1,
+      "claim_id": "affirm",
+      "kind": "empirical",
+      "warrant": 0.6999999996499999,
+      "status": "supported",
+      "abstain": false,
+      "support": 1.0,
+      "contradiction": 0.0,
+      "formal": false,
+      "psychometric_valid": false,
+      "domains": {
+        "real": 1
+      },
+      "reasons": [],
+      "limits": "Grafo epistemológico: liga e contrapõe evidência, mas não inventa verdade. Evidência irreal é sintética/contrafactual e não sustenta alegação empírica. Warrant não é probabilidade de verdade. Exige revisão humana."
+    },
+    "deny": {
+      "schema_version": 1,
+      "claim_id": "deny",
+      "kind": "empirical",
+      "warrant": 0.6999999996499999,
+      "status": "supported",
+      "abstain": false,
+      "support": 1.0,
+      "contradiction": 0.0,
+      "formal": false,
+      "psychometric_valid": false,
+      "domains": {
+        "real": 1
+      },
+      "reasons": [],
+      "limits": "Grafo epistemológico: liga e contrapõe evidência, mas não inventa verdade. Evidência irreal é sintética/contrafactual e não sustenta alegação empírica. Warrant não é probabilidade de verdade. Exige revisão humana."
+    }
+  },
+  "contradictions": [
+    {
+      "type": "polarity_conflict",
+      "proposition_key": "efeito",
+      "affirm": "affirm",
+      "deny": "deny",
+      "affirm_support": 1.0,
+      "deny_support": 1.0
+    }
+  ]
+}

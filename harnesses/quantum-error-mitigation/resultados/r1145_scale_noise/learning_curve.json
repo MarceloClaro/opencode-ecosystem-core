@@ -1,0 +1,249 @@
+{
+  "schema_version": 1,
+  "per_class_sizes": [
+    20,
+    40,
+    80,
+    160
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "noise": 0.15,
+  "points": [
+    {
+      "n_per_class": 20,
+      "n_train": 24,
+      "n_validation": 8,
+      "n_test": 8,
+      "leakage": {
+        "disjoint": true,
+        "train_size": 32,
+        "test_size": 8,
+        "overlap": []
+      },
+      "quantum": {
+        "mean_test_accuracy": 0.8333333333333334,
+        "values": [
+          0.875,
+          0.625,
+          1.0
+        ],
+        "pooled_accuracy": 0.8333333333333334,
+        "ci_low": 0.6666666666666666,
+        "ci_high": 0.9583333333333334,
+        "n_test_pooled": 24
+      },
+      "projected": {
+        "mean_test_accuracy": 0.75,
+        "values": [
+          0.625,
+          0.875,
+          0.75
+        ],
+        "pooled_accuracy": 0.75,
+        "ci_low": 0.5833333333333334,
+        "ci_high": 0.9166666666666666,
+        "n_test_pooled": 24
+      },
+      "classical": {
+        "mean_test_accuracy": 0.9583333333333334,
+        "values": [
+          1.0,
+          0.875,
+          1.0
+        ],
+        "pooled_accuracy": 0.9583333333333334,
+        "ci_low": 0.875,
+        "ci_high": 1.0,
+        "n_test_pooled": 24
+      }
+    },
+    {
+      "n_per_class": 40,
+      "n_train": 48,
+      "n_validation": 16,
+      "n_test": 16,
+      "leakage": {
+        "disjoint": true,
+        "train_size": 64,
+        "test_size": 16,
+        "overlap": []
+      },
+      "quantum": {
+        "mean_test_accuracy": 0.8541666666666666,
+        "values": [
+          0.8125,
+          0.9375,
+          0.8125
+        ],
+        "pooled_accuracy": 0.8541666666666666,
+        "ci_low": 0.75,
+        "ci_high": 0.9375,
+        "n_test_pooled": 48
+      },
+      "projected": {
+        "mean_test_accuracy": 0.7916666666666666,
+        "values": [
+          0.75,
+          0.875,
+          0.75
+        ],
+        "pooled_accuracy": 0.7916666666666666,
+        "ci_low": 0.6666666666666666,
+        "ci_high": 0.8958333333333334,
+        "n_test_pooled": 48
+      },
+      "classical": {
+        "mean_test_accuracy": 0.8958333333333334,
+        "values": [
+          0.8125,
+          0.9375,
+          0.9375
+        ],
+        "pooled_accuracy": 0.8958333333333334,
+        "ci_low": 0.7916666666666666,
+        "ci_high": 0.9791666666666666,
+        "n_test_pooled": 48
+      }
+    },
+    {
+      "n_per_class": 80,
+      "n_train": 96,
+      "n_validation": 32,
+      "n_test": 32,
+      "leakage": {
+        "disjoint": true,
+        "train_size": 128,
+        "test_size": 32,
+        "overlap": []
+      },
+      "quantum": {
+        "mean_test_accuracy": 0.9270833333333334,
+        "values": [
+          0.9375,
+          0.875,
+          0.96875
+        ],
+        "pooled_accuracy": 0.9270833333333334,
+        "ci_low": 0.875,
+        "ci_high": 0.9791666666666666,
+        "n_test_pooled": 96
+      },
+      "projected": {
+        "mean_test_accuracy": 0.9375,
+        "values": [
+          0.90625,
+          0.9375,
+          0.96875
+        ],
+        "pooled_accuracy": 0.9375,
+        "ci_low": 0.8854166666666666,
+        "ci_high": 0.9791666666666666,
+        "n_test_pooled": 96
+      },
+      "classical": {
+        "mean_test_accuracy": 0.9166666666666666,
+        "values": [
+          0.9375,
+          0.875,
+          0.9375
+        ],
+        "pooled_accuracy": 0.9166666666666666,
+        "ci_low": 0.8541666666666666,
+        "ci_high": 0.96875,
+        "n_test_pooled": 96
+      }
+    },
+    {
+      "n_per_class": 160,
+      "n_train": 192,
+      "n_validation": 64,
+      "n_test": 64,
+      "leakage": {
+        "disjoint": true,
+        "train_size": 256,
+        "test_size": 64,
+        "overlap": []
+      },
+      "quantum": {
+        "mean_test_accuracy": 0.9375,
+        "values": [
+          0.921875,
+          0.96875,
+          0.921875
+        ],
+        "pooled_accuracy": 0.9375,
+        "ci_low": 0.9010416666666666,
+        "ci_high": 0.96875,
+        "n_test_pooled": 192
+      },
+      "projected": {
+        "mean_test_accuracy": 0.9739583333333334,
+        "values": [
+          0.953125,
+          0.984375,
+          0.984375
+        ],
+        "pooled_accuracy": 0.9739583333333334,
+        "ci_low": 0.9479166666666666,
+        "ci_high": 0.9947916666666666,
+        "n_test_pooled": 192
+      },
+      "classical": {
+        "mean_test_accuracy": 0.9583333333333334,
+        "values": [
+          0.953125,
+          0.96875,
+          0.953125
+        ],
+        "pooled_accuracy": 0.9583333333333334,
+        "ci_low": 0.9270833333333334,
+        "ci_high": 0.984375,
+        "n_test_pooled": 192
+      }
+    }
+  ],
+  "fits": {
+    "quantum": {
+      "a": 0.9373026531919284,
+      "exponent": 0.524511249783654,
+      "r2": 0.9161931265643598,
+      "points_used": 4,
+      "ci_low": -0.15329513734409278,
+      "ci_high": 1.0000000000000009,
+      "valid_resamples": 2000
+    },
+    "projected": {
+      "a": 12.398145603500092,
+      "exponent": 1.1526068811667616,
+      "r2": 0.9379137758339259,
+      "points_used": 4,
+      "ci_low": 0.8092508406656957,
+      "ci_high": 1.4989105358896733,
+      "valid_resamples": 2000
+    },
+    "classical": {
+      "a": 0.07136752549956135,
+      "exponent": 0.032192809488736776,
+      "r2": 0.0037022550892897854,
+      "points_used": 4,
+      "ci_low": -0.0736965594166206,
+      "ci_high": 1.0000000000000007,
+      "valid_resamples": 2000
+    }
+  },
+  "fitted_exponent": 0.524511249783654,
+  "caro_prediction_exponent": 0.5,
+  "interpretation": "Comparação descritiva com o expoente 0,5 de Caro 2022; não valida nem refuta o limite teórico. Erros zero são censurados no ajuste.",
+  "bootstrap": {
+    "n_boot": 2000,
+    "confidence": 0.95,
+    "resampling_unit": "seed dentro de cada tamanho"
+  },
+  "limits": "Dataset sintético 2D. Não prova vantagem quântica, generalização em dados reais ou superioridade sobre kernels clássicos. O kernel quântico é calculado por statevector; a variante ruidosa simula shots e erro de leitura, não calibração real. A curva de aprendizado é descritiva: um dataset por seed e um expoente ajustado não validam nem refutam o limite de Caro 2022.",
+  "hardware_executed": false,
+  "rates_measured": false
+}

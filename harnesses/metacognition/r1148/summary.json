@@ -1,0 +1,80 @@
+{
+  "round": "R1148",
+  "demo_data": "synthetic",
+  "ema": {
+    "status": "ready_for_review",
+    "compliance": 0.7777777777777778,
+    "transfer": "autonomous"
+  },
+  "n_of_1": {
+    "status": "analyzed",
+    "nap": 1.0,
+    "pem": 1.0,
+    "tau_u": 0.8,
+    "p_value": 0.0004997501249375312
+  },
+  "claims": {
+    "formal_complex": {
+      "status": "formal_only",
+      "warrant": 0.3,
+      "abstain": false
+    },
+    "formal_correlation": {
+      "status": "formal_only",
+      "warrant": 0.3,
+      "abstain": false
+    },
+    "empirical_real": {
+      "status": "supported",
+      "warrant": 0.699999999611111,
+      "abstain": false
+    },
+    "empirical_complex": {
+      "status": "supported",
+      "warrant": 0.6999999995624999,
+      "abstain": false
+    },
+    "subjective": {
+      "status": "subjective_review",
+      "warrant": 0.6,
+      "abstain": true
+    },
+    "irreal": {
+      "status": "simulation_only",
+      "warrant": 0.5,
+      "abstain": true
+    },
+    "affirm": {
+      "status": "supported",
+      "warrant": 0.6999999996499999,
+      "abstain": false
+    },
+    "deny": {
+      "status": "supported",
+      "warrant": 0.6999999996499999,
+      "abstain": false
+    }
+  },
+  "contradictions": 1,
+  "trust": {
+    "calibrated": {
+      "status": "calibrated",
+      "warrant": 0.853,
+      "abstain": false
+    },
+    "overconfident": {
+      "status": "overconfident",
+      "warrant": 0.7649999999999999,
+      "abstain": true
+    }
+  },
+  "runtime": {
+    "read_only": "executed",
+    "irreversible": "escalated",
+    "blocked": "blocked",
+    "recovered": "executed"
+  },
+  "hardware_executed": false,
+  "externally_validated": false,
+  "confidence_promoted": false
+}

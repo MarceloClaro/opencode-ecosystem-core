@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "protocol": "r1130-interleaved-cb-preregistration",
+  "source": {
+    "doi": "10.1038/s41467-022-35759-4",
+    "title": "The learnability of Pauli noise"
+  },
+  "functions": [
+    [
+      "IZ"
+    ],
+    [
+      "ZI"
+    ],
+    [
+      "XX"
+    ],
+    [
+      "XY"
+    ],
+    [
+      "YX"
+    ],
+    [
+      "YY"
+    ],
+    [
+      "ZZ"
+    ],
+    [
+      "IX",
+      "ZX"
+    ],
+    [
+      "IX",
+      "ZY"
+    ],
+    [
+      "IY",
+      "ZX"
+    ],
+    [
+      "XI",
+      "XZ"
+    ],
+    [
+      "XI",
+      "YZ"
+    ],
+    [
+      "YI",
+      "XZ"
+    ]
+  ],
+  "individual": [
+    "IZ",
+    "ZI",
+    "XX",
+    "XY",
+    "YX",
+    "YY",
+    "ZZ"
+  ],
+  "pair_cycles": [
+    [
+      "IX",
+      "ZX"
+    ],
+    [
+      "IX",
+      "ZY"
+    ],
+    [
+      "IY",
+      "ZX"
+    ],
+    [
+      "XI",
+      "XZ"
+    ],
+    [
+      "XI",
+      "YZ"
+    ],
+    [
+      "YI",
+      "XZ"
+    ]
+  ],
+  "depths": [
+    0,
+    2,
+    4,
+    8,
+    16
+  ],
+  "shots": 4096,
+  "twirl": true,
+  "twirl_seeds": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "correction_noise": {
+    "model": "depolarizacao 1q apos cada correcao",
+    "rate": 0.002
+  },
+  "seed": 1129,
+  "jobs": 325,
+  "total_shots": 1331200,
+  "decision_rules": [
+    "so avancar se 13/13 funcoes forem recuperadas em simulacao",
+    "se twirl ou ruido das correcoes reduzir a recuperacao, bloquear hardware",
+    "as 2 funcoes de corte nao sao medidas por este desenho",
+    "nenhuma submissao sem autorizacao explicita e compilacao auditada"
+  ],
+  "hardware_submission_allowed": false,
+  "analysis_allowed": false,
+  "limits": "Pre-registro de planejamento. Nao e prova de execucao, nao mede taxas e nao valida o ruido real das correcoes. As 2 funcoes de corte continuam fora do CB.",
+  "manifest_sha256": "4a74762ecd5f7a6a1a46be5472896f62375ee19fb24c7a8d4ef98fd2ca354f83"
+}

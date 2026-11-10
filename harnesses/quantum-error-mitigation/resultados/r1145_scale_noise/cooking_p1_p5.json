@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "variables": [
+    "temperatura_alta",
+    "tempo_longo",
+    "coberto",
+    "preaquecido"
+  ],
+  "linear": [
+    -0.6,
+    -0.4,
+    0.3,
+    0.2
+  ],
+  "quadratic": {
+    "0-1": -1.2,
+    "1-2": -0.7,
+    "0-3": -0.5,
+    "2-3": 0.3
+  },
+  "exact_energy": -2.6,
+  "exact_bits": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "exact_solver": {
+    "method": "enumeração exata (brute force)",
+    "states": 16,
+    "energy": -2.6,
+    "bits": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "seconds": 7.286999971256591e-05
+  },
+  "depths": [
+    {
+      "reps": 1,
+      "status": "ok",
+      "evaluations": 208,
+      "parameters": 2,
+      "energy": -2.1298020421301094,
+      "bits": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "probability": 0.234522962869597,
+      "approximation_ratio": 0.742357283358964
+    },
+    {
+      "reps": 2,
+      "status": "ok",
+      "evaluations": 450,
+      "parameters": 4,
+      "energy": -2.344336699062883,
+      "bits": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "probability": 0.4617865134640169,
+      "approximation_ratio": 0.8599105200344563
+    },
+    {
+      "reps": 3,
+      "status": "ok",
+      "evaluations": 450,
+      "parameters": 6,
+      "energy": -2.4623119054957296,
+      "bits": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "probability": 0.2612332367551999,
+      "approximation_ratio": 0.9245544687647833
+    },
+    {
+      "reps": 4,
+      "status": "ok",
+      "evaluations": 450,
+      "parameters": 8,
+      "energy": -2.3355419233423653,
+      "bits": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "probability": 0.2923568714284412,
+      "approximation_ratio": 0.8550914648451317
+    },
+    {
+      "reps": 5,
+      "status": "ok",
+      "evaluations": 450,
+      "parameters": 10,
+      "energy": -2.4864851991908496,
+      "bits": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "probability": 0.3383386814271493,
+      "approximation_ratio": 0.937800109145671
+    }
+  ],
+  "completed_depths": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "qaoa_energy": -2.4864851991908496,
+  "qaoa_bits": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "qaoa_probability": 0.3383386814271493,
+  "qaoa_reps": 5,
+  "random_mean_energy": -0.7749999999999999,
+  "approximation_ratio": 0.937800109145671,
+  "gap": 0.11351480080915044,
+  "budget": {
+    "max_evaluations_per_depth": 1500,
+    "total_evaluations": 2008
+  },
+  "synthetic": true,
+  "hardware_executed": false,
+  "rates_measured": false,
+  "limits": "QUBO sintético de 4 decisões; não é estudo de alimentos, não usa dados sensoriais e não prova vantagem quântica. QAOA é simulada por statevector, sem ruído ou shots. Qualquer aplicação culinária exige dados reais, baseline clássico e validação sensorial.",
+  "scale_limits": "Profundidades p>3 em 4 variáveis não demonstram escala, vantagem ou tolerância a ruído; o solver clássico exato enumera 16 estados."
+}

@@ -1,0 +1,412 @@
+{
+  "schema_version": 1,
+  "n_per_class": 100,
+  "noise": 0.2,
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "rows": [
+    {
+      "seed": 42,
+      "quantum": {
+        "kind": "zz",
+        "reps": 1,
+        "scale": 0.5,
+        "ridge": 0.1,
+        "validation_accuracy": 0.875,
+        "test_accuracy": 0.825,
+        "validation_confusion": {
+          "tp": 10,
+          "tn": 25,
+          "fp": 3,
+          "fn": 2
+        },
+        "test_confusion": {
+          "tp": 18,
+          "tn": 15,
+          "fp": 4,
+          "fn": 3
+        }
+      },
+      "projected": {
+        "kind": "zz",
+        "reps": 2,
+        "scale": 1.5,
+        "ridge": 0.01,
+        "gamma": 0.5,
+        "validation_accuracy": 0.875,
+        "test_accuracy": 0.775,
+        "validation_confusion": {
+          "tp": 12,
+          "tn": 23,
+          "fp": 5,
+          "fn": 0
+        },
+        "test_confusion": {
+          "tp": 17,
+          "tn": 14,
+          "fp": 5,
+          "fn": 4
+        }
+      },
+      "classical": {
+        "gamma": 0.5,
+        "ridge": 0.01,
+        "validation_accuracy": 0.825,
+        "test_accuracy": 0.825,
+        "validation_confusion": {
+          "tp": 11,
+          "tn": 22,
+          "fp": 6,
+          "fn": 1
+        },
+        "test_confusion": {
+          "tp": 19,
+          "tn": 14,
+          "fp": 5,
+          "fn": 2
+        }
+      },
+      "quantum_ci": {
+        "accuracy": 0.825,
+        "ci_low": 0.7,
+        "ci_high": 0.925,
+        "confidence": 0.95,
+        "n_boot": 5000,
+        "n_test": 40,
+        "method": "percentil bootstrap sobre a matriz de confusão"
+      },
+      "projected_ci": {
+        "accuracy": 0.775,
+        "ci_low": 0.625,
+        "ci_high": 0.9,
+        "confidence": 0.95,
+        "n_boot": 5000,
+        "n_test": 40,
+        "method": "percentil bootstrap sobre a matriz de confusão"
+      },
+      "classical_ci": {
+        "accuracy": 0.825,
+        "ci_low": 0.7,
+        "ci_high": 0.925,
+        "confidence": 0.95,
+        "n_boot": 5000,
+        "n_test": 40,
+        "method": "percentil bootstrap sobre a matriz de confusão"
+      }
+    },
+    {
+      "seed": 43,
+      "quantum": {
+        "kind": "angle",
+        "reps": 2,
+        "scale": 1.5,
+        "ridge": 0.01,
+        "validation_accuracy": 0.975,
+        "test_accuracy": 0.975,
+        "validation_confusion": {
+          "tp": 21,
+          "tn": 18,
+          "fp": 0,
+          "fn": 1
+        },
+        "test_confusion": {
+          "tp": 20,
+          "tn": 19,
+          "fp": 1,
+          "fn": 0
+        }
+      },
+      "projected": {
+        "kind": "angle",
+        "reps": 1,
+        "scale": 1.5,
+        "ridge": 0.01,
+        "gamma": 1.0,
+        "validation_accuracy": 0.975,
+        "test_accuracy": 0.95,
+        "validation_confusion": {
+          "tp": 21,
+          "tn": 18,
+          "fp": 0,
+          "fn": 1
+        },
+        "test_confusion": {
+          "tp": 19,
+          "tn": 19,
+          "fp": 1,
+          "fn": 1
+        }
+      },
+      "classical": {
+        "gamma": 0.5,
+        "ridge": 0.01,
+        "validation_accuracy": 0.95,
+        "test_accuracy": 0.975,
+        "validation_confusion": {
+          "tp": 20,
+          "tn": 18,
+          "fp": 0,
+          "fn": 2
+        },
+        "test_confusion": {
+          "tp": 20,
+          "tn": 19,
+          "fp": 1,
+          "fn": 0
+        }
+      },
+      "quantum_ci": {
+        "accuracy": 0.975,
+        "ci_low": 0.925,
+        "ci_high": 1.0,
+        "confidence": 0.95,
+        "n_boot": 5000,
+        "n_test": 40,
+        "method": "percentil bootstrap sobre a matriz de confusão"
+      },
+      "projected_ci": {
+        "accuracy": 0.95,
+        "ci_low": 0.875,
+        "ci_high": 1.0,
+        "confidence": 0.95,
+        "n_boot": 5000,
+        "n_test": 40,
+        "method": "percentil bootstrap sobre a matriz de confusão"
+      },
+      "classical_ci": {
+        "accuracy": 0.975,
+        "ci_low": 0.925,
+        "ci_high": 1.0,
+        "confidence": 0.95,
+        "n_boot": 5000,
+        "n_test": 40,
+        "method": "percentil bootstrap sobre a matriz de confusão"
+      }
+    },
+    {
+      "seed": 44,
+      "quantum": {
+        "kind": "angle",
+        "reps": 1,
+        "scale": 1.0,
+        "ridge": 0.01,
+        "validation_accuracy": 0.875,
+        "test_accuracy": 0.875,
+        "validation_confusion": {
+          "tp": 14,
+          "tn": 21,
+          "fp": 2,
+          "fn": 3
+        },
+        "test_confusion": {
+          "tp": 17,
+          "tn": 18,
+          "fp": 1,
+          "fn": 4
+        }
+      },
+      "projected": {
+        "kind": "angle",
+        "reps": 1,
+        "scale": 1.5,
+        "ridge": 0.01,
+        "gamma": 0.5,
+        "validation_accuracy": 0.9,
+        "test_accuracy": 0.85,
+        "validation_confusion": {
+          "tp": 15,
+          "tn": 21,
+          "fp": 2,
+          "fn": 2
+        },
+        "test_confusion": {
+          "tp": 17,
+          "tn": 17,
+          "fp": 2,
+          "fn": 4
+        }
+      },
+      "classical": {
+        "gamma": 2.0,
+        "ridge": 0.01,
+        "validation_accuracy": 0.9,
+        "test_accuracy": 0.875,
+        "validation_confusion": {
+          "tp": 15,
+          "tn": 21,
+          "fp": 2,
+          "fn": 2
+        },
+        "test_confusion": {
+          "tp": 18,
+          "tn": 17,
+          "fp": 2,
+          "fn": 3
+        }
+      },
+      "quantum_ci": {
+        "accuracy": 0.875,
+        "ci_low": 0.775,
+        "ci_high": 0.975,
+        "confidence": 0.95,
+        "n_boot": 5000,
+        "n_test": 40,
+        "method": "percentil bootstrap sobre a matriz de confusão"
+      },
+      "projected_ci": {
+        "accuracy": 0.85,
+        "ci_low": 0.725,
+        "ci_high": 0.95,
+        "confidence": 0.95,
+        "n_boot": 5000,
+        "n_test": 40,
+        "method": "percentil bootstrap sobre a matriz de confusão"
+      },
+      "classical_ci": {
+        "accuracy": 0.875,
+        "ci_low": 0.775,
+        "ci_high": 0.975,
+        "confidence": 0.95,
+        "n_boot": 5000,
+        "n_test": 40,
+        "method": "percentil bootstrap sobre a matriz de confusão"
+      }
+    }
+  ],
+  "summary": {
+    "quantum": {
+      "mean_test_accuracy": 0.8916666666666666,
+      "std_test_accuracy": 0.07637626158259735,
+      "values": [
+        0.825,
+        0.975,
+        0.875
+      ],
+      "pooled_accuracy": 0.8916666666666667,
+      "ci_low": 0.8333333333333334,
+      "ci_high": 0.9416666666666667,
+      "cis": [
+        {
+          "accuracy": 0.825,
+          "ci_low": 0.7,
+          "ci_high": 0.925,
+          "confidence": 0.95,
+          "n_boot": 5000,
+          "n_test": 40,
+          "method": "percentil bootstrap sobre a matriz de confusão"
+        },
+        {
+          "accuracy": 0.975,
+          "ci_low": 0.925,
+          "ci_high": 1.0,
+          "confidence": 0.95,
+          "n_boot": 5000,
+          "n_test": 40,
+          "method": "percentil bootstrap sobre a matriz de confusão"
+        },
+        {
+          "accuracy": 0.875,
+          "ci_low": 0.775,
+          "ci_high": 0.975,
+          "confidence": 0.95,
+          "n_boot": 5000,
+          "n_test": 40,
+          "method": "percentil bootstrap sobre a matriz de confusão"
+        }
+      ]
+    },
+    "projected": {
+      "mean_test_accuracy": 0.8583333333333334,
+      "std_test_accuracy": 0.08779711460710612,
+      "values": [
+        0.775,
+        0.95,
+        0.85
+      ],
+      "pooled_accuracy": 0.8583333333333333,
+      "ci_low": 0.7916666666666666,
+      "ci_high": 0.9166666666666666,
+      "cis": [
+        {
+          "accuracy": 0.775,
+          "ci_low": 0.625,
+          "ci_high": 0.9,
+          "confidence": 0.95,
+          "n_boot": 5000,
+          "n_test": 40,
+          "method": "percentil bootstrap sobre a matriz de confusão"
+        },
+        {
+          "accuracy": 0.95,
+          "ci_low": 0.875,
+          "ci_high": 1.0,
+          "confidence": 0.95,
+          "n_boot": 5000,
+          "n_test": 40,
+          "method": "percentil bootstrap sobre a matriz de confusão"
+        },
+        {
+          "accuracy": 0.85,
+          "ci_low": 0.725,
+          "ci_high": 0.95,
+          "confidence": 0.95,
+          "n_boot": 5000,
+          "n_test": 40,
+          "method": "percentil bootstrap sobre a matriz de confusão"
+        }
+      ]
+    },
+    "classical": {
+      "mean_test_accuracy": 0.8916666666666666,
+      "std_test_accuracy": 0.07637626158259735,
+      "values": [
+        0.825,
+        0.975,
+        0.875
+      ],
+      "pooled_accuracy": 0.8916666666666667,
+      "ci_low": 0.8333333333333334,
+      "ci_high": 0.9416666666666667,
+      "cis": [
+        {
+          "accuracy": 0.825,
+          "ci_low": 0.7,
+          "ci_high": 0.925,
+          "confidence": 0.95,
+          "n_boot": 5000,
+          "n_test": 40,
+          "method": "percentil bootstrap sobre a matriz de confusão"
+        },
+        {
+          "accuracy": 0.975,
+          "ci_low": 0.925,
+          "ci_high": 1.0,
+          "confidence": 0.95,
+          "n_boot": 5000,
+          "n_test": 40,
+          "method": "percentil bootstrap sobre a matriz de confusão"
+        },
+        {
+          "accuracy": 0.875,
+          "ci_low": 0.775,
+          "ci_high": 0.975,
+          "confidence": 0.95,
+          "n_boot": 5000,
+          "n_test": 40,
+          "method": "percentil bootstrap sobre a matriz de confusão"
+        }
+      ]
+    }
+  },
+  "bootstrap": {
+    "n_boot": 5000,
+    "confidence": 0.95,
+    "method": "percentil sobre a matriz de confusão; pooled entre seeds"
+  },
+  "limits": "Dataset sintético 2D. Não prova vantagem quântica, generalização em dados reais ou superioridade sobre kernels clássicos. O kernel quântico é calculado por statevector; a variante ruidosa simula shots e erro de leitura, não calibração real.",
+  "hardware_executed": false,
+  "rates_measured": false
+}

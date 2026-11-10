@@ -1,0 +1,216 @@
+{
+  "rho_0.6": {
+    "schema_version": 1,
+    "qubits": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "n_qubits": 4,
+    "shots": 50000,
+    "marginals": [
+      0.07898,
+      0.07884,
+      0.07804,
+      0.07886
+    ],
+    "pairs": [
+      {
+        "left": 0,
+        "right": 1,
+        "marginal_left": 0.07898,
+        "marginal_right": 0.07884,
+        "observed_joint": 0.0282,
+        "independent_joint": 0.006226783199999999,
+        "covariance": 0.0219732168,
+        "phi": 0.30231500417593105,
+        "phi_defined": true
+      },
+      {
+        "left": 0,
+        "right": 2,
+        "marginal_left": 0.07898,
+        "marginal_right": 0.07804,
+        "observed_joint": 0.02792,
+        "independent_joint": 0.0061635992,
+        "covariance": 0.0217564008,
+        "phi": 0.30073175287546644,
+        "phi_defined": true
+      },
+      {
+        "left": 0,
+        "right": 3,
+        "marginal_left": 0.07898,
+        "marginal_right": 0.07886,
+        "observed_joint": 0.02836,
+        "independent_joint": 0.0062283628,
+        "covariance": 0.0221316372,
+        "phi": 0.30445929671622435,
+        "phi_defined": true
+      },
+      {
+        "left": 1,
+        "right": 2,
+        "marginal_left": 0.07884,
+        "marginal_right": 0.07804,
+        "observed_joint": 0.02792,
+        "independent_joint": 0.006152673599999999,
+        "covariance": 0.021767326400000002,
+        "phi": 0.3011269159085781,
+        "phi_defined": true
+      },
+      {
+        "left": 1,
+        "right": 3,
+        "marginal_left": 0.07884,
+        "marginal_right": 0.07886,
+        "observed_joint": 0.028,
+        "independent_joint": 0.006217322399999999,
+        "covariance": 0.0217826776,
+        "phi": 0.29990189713797755,
+        "phi_defined": true
+      },
+      {
+        "left": 2,
+        "right": 3,
+        "marginal_left": 0.07804,
+        "marginal_right": 0.07886,
+        "observed_joint": 0.02782,
+        "independent_joint": 0.0061542344,
+        "covariance": 0.0216657656,
+        "phi": 0.2996871785632395,
+        "phi_defined": true
+      }
+    ],
+    "all_zero_probability": 0.80358,
+    "any_error_probability": 0.19642000000000004,
+    "any_error_ci95": [
+      0.19296097991499916,
+      0.1999256658182359
+    ],
+    "independent_no_error": 0.7205130531262828,
+    "independent_any_error": 0.2794869468737172,
+    "delta_any_error": -0.08306694687371718,
+    "delta_no_error": 0.08306694687371718,
+    "bounds": {
+      "lower": 0.1297,
+      "upper": 0.31472,
+      "contain_observed": true,
+      "method": "primeira desigualdade de Bonferroni / union bound"
+    },
+    "max_abs_phi": 0.30445929671622435,
+    "mean_phi": 0.30137034089623616,
+    "correlation_class": "positive",
+    "limits": "Modelo offline. Correlação estimada de counts de calibração; não identifica mecanismo, crosstalk físico ou drift. O custo de layout é um proxy declarado, não uma previsão de fidelidade. Nenhum hardware é executado e nenhum resultado autoriza submissão.",
+    "hardware_executed": false,
+    "rates_measured": false
+  },
+  "rho_0.0": {
+    "schema_version": 1,
+    "qubits": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "n_qubits": 4,
+    "shots": 50000,
+    "marginals": [
+      0.07938,
+      0.07888,
+      0.08078,
+      0.0779
+    ],
+    "pairs": [
+      {
+        "left": 0,
+        "right": 1,
+        "marginal_left": 0.07938,
+        "marginal_right": 0.07888,
+        "observed_joint": 0.00624,
+        "independent_joint": 0.006261494400000001,
+        "covariance": -2.1494400000001378e-05,
+        "phi": -0.0002949769084135398,
+        "phi_defined": true
+      },
+      {
+        "left": 0,
+        "right": 2,
+        "marginal_left": 0.07938,
+        "marginal_right": 0.08078,
+        "observed_joint": 0.00638,
+        "independent_joint": 0.0064123164000000005,
+        "covariance": -3.231640000000025e-05,
+        "phi": -0.00043869791272681496,
+        "phi_defined": true
+      },
+      {
+        "left": 0,
+        "right": 3,
+        "marginal_left": 0.07938,
+        "marginal_right": 0.0779,
+        "observed_joint": 0.00574,
+        "independent_joint": 0.006183702,
+        "covariance": -0.0004437019999999998,
+        "phi": -0.00612403827615226,
+        "phi_defined": true
+      },
+      {
+        "left": 1,
+        "right": 2,
+        "marginal_left": 0.07888,
+        "marginal_right": 0.08078,
+        "observed_joint": 0.00612,
+        "independent_joint": 0.006371926400000001,
+        "covariance": -0.0002519264000000014,
+        "phi": -0.0034298131946375074,
+        "phi_defined": true
+      },
+      {
+        "left": 1,
+        "right": 3,
+        "marginal_left": 0.07888,
+        "marginal_right": 0.0779,
+        "observed_joint": 0.00558,
+        "independent_joint": 0.006144752,
+        "covariance": -0.000564752,
+        "phi": -0.007817330632118969,
+        "phi_defined": true
+      },
+      {
+        "left": 2,
+        "right": 3,
+        "marginal_left": 0.08078,
+        "marginal_right": 0.0779,
+        "observed_joint": 0.00612,
+        "independent_joint": 0.006292762,
+        "covariance": -0.00017276200000000078,
+        "phi": -0.002365531994123684,
+        "phi_defined": true
+      }
+    ],
+    "all_zero_probability": 0.71758,
+    "any_error_probability": 0.28242,
+    "any_error_ci95": [
+      0.278490860384212,
+      0.2863825712602879
+    ],
+    "independent_no_error": 0.7187768888485115,
+    "independent_any_error": 0.28122311115148846,
+    "delta_any_error": 0.0011968888485115459,
+    "delta_no_error": -0.0011968888485115459,
+    "bounds": {
+      "lower": 0.15378000000000003,
+      "upper": 0.31694,
+      "contain_observed": true,
+      "method": "primeira desigualdade de Bonferroni / union bound"
+    },
+    "max_abs_phi": 0.007817330632118969,
+    "mean_phi": -0.003411731486362129,
+    "correlation_class": "near_zero",
+    "limits": "Modelo offline. Correlação estimada de counts de calibração; não identifica mecanismo, crosstalk físico ou drift. O custo de layout é um proxy declarado, não uma previsão de fidelidade. Nenhum hardware é executado e nenhum resultado autoriza submissão.",
+    "hardware_executed": false,
+    "rates_measured": false
+  }
+}

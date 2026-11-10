@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "full_matrix_rank": 15,
+  "cz_only_rank": 9,
+  "identity_rank": 15,
+  "identity_note": "não é um ciclo físico comparável ao CZ",
+  "cz_orbits": [
+    [
+      "IX",
+      "ZX"
+    ],
+    [
+      "IY",
+      "ZY"
+    ],
+    [
+      "IZ"
+    ],
+    [
+      "XI",
+      "XZ"
+    ],
+    [
+      "XX",
+      "YY"
+    ],
+    [
+      "XY",
+      "YX"
+    ],
+    [
+      "YI",
+      "YZ"
+    ],
+    [
+      "ZI"
+    ],
+    [
+      "ZZ"
+    ]
+  ],
+  "augmentation": {
+    "status": "design_found",
+    "selected_seeds": [
+      0
+    ],
+    "cycles": [
+      "cz",
+      "random:0"
+    ],
+    "rank": 15,
+    "condition_number": 15.454813220625098,
+    "per_cycle_ranks": [
+      9,
+      9
+    ],
+    "assumption": "mesmo gerador conjugado para todos os ciclos",
+    "limits": "Existência matemática, não validação física. Os ciclos aleatórios adicionam portas e ruído próprio; a hipótese de gerador compartilhado precisa de evidência independente.",
+    "hardware_executed": false,
+    "rank_possible": 15
+  },
+  "separate_generators": {
+    "cycles": 3,
+    "rank": 27,
+    "unknowns": 45,
+    "deficiency": 18,
+    "identifiable": false,
+    "reason": "cada ciclo tem 15 taxas próprias e fornece no máximo 9 combinações independentes; a deficiência cresce 6 por ciclo"
+  },
+  "local_submodel": {
+    "labels": [
+      "XI",
+      "YI",
+      "ZI",
+      "IX",
+      "IY",
+      "IZ"
+    ],
+    "n_parameters": 6,
+    "rank": 6,
+    "identifiable": true,
+    "requires_other_rates_zero": true,
+    "note": "O posto mede identificabilidade apenas sob a hipótese de que todas as taxas fora do submodelo são nulas."
+  },
+  "two_qubit_submodel": {
+    "labels": [
+      "XX",
+      "XY",
+      "XZ",
+      "YX",
+      "YY",
+      "YZ",
+      "ZX",
+      "ZY",
+      "ZZ"
+    ],
+    "n_parameters": 9,
+    "rank": 9,
+    "identifiable": true,
+    "requires_other_rates_zero": true,
+    "note": "O posto mede identificabilidade apenas sob a hipótese de que todas as taxas fora do submodelo são nulas."
+  },
+  "assumptions": [
+    "mesmo gerador de Pauli-Lindblad (ou conjugado conhecido) entre ciclos",
+    "profundidades pares e observáveis de paridade",
+    "submodelos exigem que as taxas excluídas sejam nulas"
+  ],
+  "limits": "Análise linear local. O posto 15 com ciclos extras supõe gerador compartilhado/conjugado; não foi medido nem validado no Baihua. Identidade não é um ciclo físico comparável ao CZ. Submodelos locais só são identificáveis se as demais taxas forem nulas por hipótese. Nenhuma taxa foi medida; nada foi executado em hardware; PEC 2q permanece bloqueado.",
+  "rates_measured": false,
+  "pec_hardware_allowed": false,
+  "hardware_executed": false
+}
