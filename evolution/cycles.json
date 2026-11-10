@@ -24128,6 +24128,454 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1125",
+      "objective": "R1125 CB por paridade e identificabilidade; promoção formal bloqueada",
+      "changes": [
+        "Novo pipeline offline e 61 testes focais",
+        "218 testes quânticos e 30 lifecycle passaram nos ambientes corretos",
+        "Simulação 150 circuitos; posto9/15; taxas não identificadas",
+        "Correções readout, skill, harness e agentes; nenhum hardware"
+      ],
+      "score": null,
+      "lessons": [],
+      "timestamp": 1794264088.5497866,
+      "artifact_hashes": {},
+      "external_verdict": {
+        "passed": false,
+        "reason": "source_manifest_limit impediu selar histórico TDD; não há aprovação externa",
+        "verifier": "local-SpecVerifier"
+      },
+      "verifier_identity": "local-SpecVerifier",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": false,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1126",
+      "objective": "R1126: limites de posto e aumento do desenho CB; nenhum hardware",
+      "changes": [
+        "cb_rank_bounds.py com CZ 9, D 15, aumento sob gerador compartilhado, geradores separados e submodelos",
+        "10 testes R1126; 228 quânticos e 30 lifecycle passaram",
+        "artefato r1126_rank_audit e docs; tarefa Baihua RUNNING apenas monitorada"
+      ],
+      "score": 0.4,
+      "lessons": [
+        "Posto 9 é do CZ, não da matriz D (posto 15). Aumento por ciclos só vale sob gerador compartilhado/conjugado; com geradores separados 9k<15k. Submodelo local 6, 2q 9, ambos exigem taxas externas nulas. Não confundir existência matemática com protocolo físico."
+      ],
+      "timestamp": 1794264992.3952694,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1128",
+      "objective": "R1128: aprendibilidade de Pauli, grafo de padroes do CZ e correcao do posto 9",
+      "changes": [
+        "cb_learnability.py com ciclo 13/corte 2, bases e comparacao com posto 9",
+        "8 testes R1128; 236 quanticos e 30 lifecycle passaram",
+        "dossie de literatura, handoff, skill, agentes e harness atualizados",
+        "nenhum hardware ou taxa medida"
+      ],
+      "score": 0.5,
+      "lessons": [
+        "Posto 9 e o subespaco de orbitas, nao o limite aprendivel. Chen et al. 2023: 13 funcoes aprendiveis e 2 nao aprendiveis para 2q Clifford; faltam 4 no desenho atual e elas exigem Cliffords de 1 qubit intercalados. Nao confundir rank matematico 15 sob gerador compartilhado com aprendibilidade SPAM-robusta. As 2 de corte exigem GST/preparacao perfeita/restricao fisica; PEC 2q continua bloqueado."
+      ],
+      "timestamp": 1794290988.7696857,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1129",
+      "objective": "R1129: CB intercalado com 13 funcoes e recuperacao exata",
+      "changes": [
+        "interleaved_cb.py com 7 individuais + 6 pares, matriz 13x15 posto 13",
+        "simulacao exata recupera 13/13 com erro 3.33e-16",
+        "9 testes R1129; 245 quanticos e 30 lifecycle passaram",
+        "docs, handoff, skill, agentes e harness atualizados",
+        "nenhum hardware ou taxa medida"
+      ],
+      "score": 0.5,
+      "lessons": [
+        "O desenho com 7 ciclos individuais + 6 produtos de pares forma base 13x15 de posto 13 e recupera 13/13 funcoes em simulacao exata. Isso valida o desenho, nao o hardware: ruido antes do CZ, correcoes de 1 qubit ideais, sem twirl e sem execucao no Baihua. As 2 funcoes de corte continuam nao aprendiveis; PEC 2q bloqueado."
+      ],
+      "timestamp": 1794298351.785787,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1130",
+      "objective": "R1130: twirl/frame, ruido 1q nas correcoes e preregistro",
+      "changes": [
+        "cycle_body_framed e correction_rate",
+        "noise_audit com 8 configuracoes",
+        "preregistro 325 jobs/1.331.200 shots",
+        "7 testes; sem hardware"
+      ],
+      "score": 0.5,
+      "lessons": [
+        "Twirl de Pauli por CZ preserva a recuperacao em simulacao; ruido 1q nas correcoes degrada (0.005 -> erro 1.29e-2) e 13/13 ajustes nao significa precisao. O pre-registro tem 325 jobs e nao autoriza hardware. Lean 4 core prova os invariantes finitos 13/2 com native_decide; nao prova canal, twirl ou hardware. Nao transferir resultados de Hashim/Ferracin/Kim para o Baihua."
+      ],
+      "timestamp": 1794299527.126511,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1131",
+      "objective": "R1131: contraprova Lean 4 core dos invariantes do CB",
+      "changes": [
+        "QuantumCB.lean com D*R=I, B/C ortogonais e 13/2",
+        "compila com lean; axiomas registrados",
+        "3 testes; sem hardware"
+      ],
+      "score": 0.5,
+      "lessons": [
+        "Twirl de Pauli por CZ preserva a recuperacao em simulacao; ruido 1q nas correcoes degrada (0.005 -> erro 1.29e-2) e 13/13 ajustes nao significa precisao. O pre-registro tem 325 jobs e nao autoriza hardware. Lean 4 core prova os invariantes finitos 13/2 com native_decide; nao prova canal, twirl ou hardware. Nao transferir resultados de Hashim/Ferracin/Kim para o Baihua."
+      ],
+      "timestamp": 1794299527.2323716,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1132",
+      "objective": "R1132: LRE para ZNE layerwise",
+      "changes": [
+        "lre.py e testes; exata no modelo multilinear",
+        "sem hardware"
+      ],
+      "score": 0.5,
+      "lessons": [
+        "Rotas offline: LRE para ZNE layerwise; desenho pareado randomizado para layouts; gauge mostra 13 funcoes invariantes e 15 fidelidades alteradas. PEC 2q/2 cortes exigem GSPN/MLCB autoconsistente, nao identificacao direta. Mathlib cache 6.7G existe, mas import Mathlib nao terminou em 10 min; a prova reprodutivel e Lean 4 core. Nenhum gate deve ser declarado desbloqueado sem dados."
+      ],
+      "timestamp": 1794301109.4537754,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1133",
+      "objective": "R1133: desenho pareado randomizado para layouts",
+      "changes": [
+        "layout_design.py e testes; confound audit",
+        "sem hardware"
+      ],
+      "score": 0.5,
+      "lessons": [
+        "Rotas offline: LRE para ZNE layerwise; desenho pareado randomizado para layouts; gauge mostra 13 funcoes invariantes e 15 fidelidades alteradas. PEC 2q/2 cortes exigem GSPN/MLCB autoconsistente, nao identificacao direta. Mathlib cache 6.7G existe, mas import Mathlib nao terminou em 10 min; a prova reprodutivel e Lean 4 core. Nenhum gate deve ser declarado desbloqueado sem dados."
+      ],
+      "timestamp": 1794301109.5579746,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1134",
+      "objective": "R1134: gauge, cortes e rota GSPN/MLCB para PEC",
+      "changes": [
+        "solution_audit.py e testes; 13 funcoes invariantes, 15 fidelidades mudam",
+        "PEC nao desbloqueado"
+      ],
+      "score": 0.5,
+      "lessons": [
+        "Rotas offline: LRE para ZNE layerwise; desenho pareado randomizado para layouts; gauge mostra 13 funcoes invariantes e 15 fidelidades alteradas. PEC 2q/2 cortes exigem GSPN/MLCB autoconsistente, nao identificacao direta. Mathlib cache 6.7G existe, mas import Mathlib nao terminou em 10 min; a prova reprodutivel e Lean 4 core. Nenhum gate deve ser declarado desbloqueado sem dados."
+      ],
+      "timestamp": 1794301109.6060188,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1135",
+      "objective": "R1135: gates revisados fail-closed e rotas de desbloqueio",
+      "changes": [
+        "gate_policy.py e testes",
+        "PEC/ZNE/layout/cortes com criterios explicitos",
+        "270 quanticos e 30 lifecycle passaram",
+        "job Mathlib dedicado iniciado; sem hardware"
+      ],
+      "score": 0.5,
+      "lessons": [
+        "Gates revisados: PEC 2q exige GSPN validado/held-out/overhead; ZNE exige LRE estavel; layout exige n/randomizacao/r1/drift/efeito; cortes sao gauge, nao identificacao direta. Default fail-closed. Job Mathlib dedicado iniciado, mas import Mathlib ainda nao concluiu; nao declarar Mathlib usado. Nenhum hardware."
+      ],
+      "timestamp": 1794302212.775903,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1136",
+      "objective": "R1136: contraprova Mathlib dedicada",
+      "changes": [
+        "MathlibCounterproof.lean compila com retorno 0",
+        "rank_D via Matrix.rank; identidades native_decide",
+        "271 quanticos e 30 lifecycle passaram",
+        "sem hardware"
+      ],
+      "score": 0.5,
+      "lessons": [
+        "MathlibCounterproof.lean compilou com lake env lean, retorno 0; rank_D usa Matrix.rank_le_height e rank_mul_le_left. As identidades finitas usam native_decide (338 axiomas nativos em D_mul_R, 1 em C_independent); nao e kernel-only. Mathlib nao prova canal, twirl ou hardware. Gates PEC/ZNE/layout continuam fail-closed ate dados."
+      ],
+      "timestamp": 1794302586.3180227,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1137",
+      "objective": "R1137: auditoria local de compilacao/layout GJQ",
+      "changes": [
+        "compilation_audit.py e 5 testes",
+        "initial_layout 106/107 e deteccao de troca",
+        "REA status/session/layers; native sem Evidence",
+        "sem hardware"
+      ],
+      "score": 0.5,
+      "lessons": [
+        "REA confirmou instalacao/sessao/catalogo, mas analyze_binary do runtime.abi3.so nao entregou Evidence util. A leitura do SDK mostrou: sampler envia QASM original; submit_payload remove measure-position em nao-MPS; servico compila e nao devolve layout. compilation_audit pre-transpilа com initial_layout e detecta troca 106/107; compile=False no servico nao foi testado. gate_router roteia gates bloqueados para evidencia, fail-closed."
+      ],
+      "timestamp": 1794304492.5408983,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1138",
+      "objective": "R1138: gate router fail-closed",
+      "changes": [
+        "gate_router.py e 4 testes",
+        "rotas PEC/ZNE/layout/cortes",
+        "sem hardware"
+      ],
+      "score": 0.5,
+      "lessons": [
+        "REA confirmou instalacao/sessao/catalogo, mas analyze_binary do runtime.abi3.so nao entregou Evidence util. A leitura do SDK mostrou: sampler envia QASM original; submit_payload remove measure-position em nao-MPS; servico compila e nao devolve layout. compilation_audit pre-transpilа com initial_layout e detecta troca 106/107; compile=False no servico nao foi testado. gate_router roteia gates bloqueados para evidencia, fail-closed."
+      ],
+      "timestamp": 1794304492.6429048,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1139",
+      "objective": "R1139: provider GJQ de primeira classe e tools MCP",
+      "changes": [
+        "gjq_core_provider com budget/proveniencia/gates",
+        "4 tools MCP gjq_provider_*",
+        "292 quanticos e 30 lifecycle passaram",
+        "REA native_offline_elf Evidence; sem hardware"
+      ],
+      "score": 0.5,
+      "lessons": [
+        "Provider GJQ integra credencial env/cache, budget, gates, submissao, hash QASM, status/resultado e auditoria de compilacao. MCP expoe gjq_provider_*. REA native_offline_elf entregou Evidence do runtime.abi3.so; Ghidra nao. Nenhum hardware executado; compile=False no servidor nao testado."
+      ],
+      "timestamp": 1794304908.970203,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1141",
+      "objective": "R1141: Core como framework de pesquisa GJQ",
+      "changes": [
+        "gjq_research_framework.py e tools MCP",
+        "catalogo/plano/gates/roteamento",
+        "299 quanticos e 30 lifecycle passaram",
+        "sem hardware"
+      ],
+      "score": 0.5,
+      "lessons": [
+        "Core habilitado como framework de orquestracao GJQ: status local, catalogo E01-E18, plano de fases/gates, roteamento de agentes e manifesto. MCP expoe gjq_research_status/plan. Nenhum hardware executado; compile=False segue bloqueado por machine config do Baihua."
+      ],
+      "timestamp": 1794306289.6761696,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1142",
+      "objective": "R1142: classificacao quantica e cozimento no framework",
+      "changes": [
+        "quantum_research/classification.py e cooking.py",
+        "domain classification/cooking no plano",
+        "305 quanticos e 30 lifecycle passaram",
+        "sem hardware"
+      ],
+      "score": 0.5,
+      "lessons": [
+        "Piloto sintetico: kernel quantico ZZ 0.625 vs RBF 0.875 (sem vantagem); QAOA p=1 -2.1298 vs brute force -2.6 (ratio 0.742). Cozimento quantico nao e campo estabelecido; tratar como QUBO de processo. Framework aceita domain classification/cooking. Nenhum hardware; resultados negativos registrados."
+      ],
+      "timestamp": 1794312551.6068048,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1143",
+      "objective": "R1143: QAOA para QUBO de processo",
+      "changes": [
+        "QUBO/brute force/QAOA",
+        "ratio 0.742; sem vantagem",
+        "sem hardware"
+      ],
+      "score": 0.5,
+      "lessons": [
+        "Piloto sintetico: kernel quantico ZZ 0.625 vs RBF 0.875 (sem vantagem); QAOA p=1 -2.1298 vs brute force -2.6 (ratio 0.742). Cozimento quantico nao e campo estabelecido; tratar como QUBO de processo. Framework aceita domain classification/cooking. Nenhum hardware; resultados negativos registrados."
+      ],
+      "timestamp": 1794312551.738402,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1132",
+      "objective": "R1132: camada de cognição auditável (mapa, risco, stop rules, claims ledger, contestabilidade, N-of-1)",
+      "changes": [
+        "core_cognition/: mapa de funções cognitivas, risco epistêmico, stop rules, claims ledger, contestabilidade, N-of-1 e CLI",
+        "specs/SPEC-935-R1132-core-cognition-prosthesis.md",
+        "tests/test_r1132_core_cognition.py (28 testes)",
+        "marceloclaro/doctor.py: 3 checks novos (25 no total)",
+        "docs/CORE_COGNITION.md e docs/CORE_COGNITION_TECHNIQUES.md",
+        "README/ARCHITECTURE/MANUAL/CLAUDE/PROGRESS/installer: contagens reconciliadas"
+      ],
+      "score": 0.5,
+      "lessons": [
+        "A camada é heurística e estrutural; não mede eficácia cognitiva nem valida clinicamente o sistema.",
+        "O mapa cognitivo é contrato de leitura; trust score e stake não são verdade.",
+        "O protocolo N-of-1 é um validador de desenho, não um estudo executado.",
+        "O claims ledger organiza evidência; não a produz."
+      ],
+      "timestamp": 1794312762.9009936,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
