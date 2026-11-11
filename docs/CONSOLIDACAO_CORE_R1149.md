@@ -108,5 +108,6 @@ python3 -m mci.claims_graph --from-ledger claims.jsonl --save graph.json
 - A ponte ledger↔grafo é **lossy**: evidência vira nó com peso 0,5 e o
   pareamento continua editorial.
 - `core_cognition.n_of_1` (validador de protocolo) e `mci.n_of_1` (runner
-  SCED) ainda coexistem; a fusão completa fica para a próxima rodada.
+  SCED) coexistiam; **resolvido em R1150**: o runner foi incorporado ao módulo
+  canônico e `mci.n_of_1` virou shim de compatibilidade.
 - Nenhum hardware foi executado; nenhuma confiança foi promovida.

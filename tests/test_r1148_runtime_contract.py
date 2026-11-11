@@ -22,8 +22,15 @@ class FakeClock:
         self.value += seconds
 
 
+def _contract(**kwargs):
+    contract = runtime_contract.RuntimeContract(**kwargs)
+    # Fixa horário produtivo para não depender de quiet_hours do relógio local.
+    contract.core_state.local_hour = 14
+    return contract
+
+
 def test_read_only_action_executes():
-    contract = runtime_contract.RuntimeContract()
+    contract = _contract()
     result = contract.execute(
         {"action_id": "read", "action_class": "read_only"},
         lambda payload: 42,
@@ -35,7 +42,7 @@ def test_read_only_action_executes():
 
 def test_irreversible_requires_approval_and_token():
     called = []
-    contract = runtime_contract.RuntimeContract()
+    contract = _contract()
     request = {"action_id": "delete", "action_class": "irreversible"}
     blocked = contract.execute(request, lambda payload: called.append(1))
     assert blocked["status"] == "escalated"
@@ -58,7 +65,7 @@ def test_irreversible_requires_approval_and_token():
 
 
 def test_before_hook_can_deny():
-    contract = runtime_contract.RuntimeContract()
+    contract = _contract()
     contract.register_hook(
         "before",
         lambda request: {"allow": False, "reason": "budget_exceeded"},
@@ -73,7 +80,7 @@ def test_before_hook_can_deny():
 
 def test_after_hook_sees_outcome():
     seen = []
-    contract = runtime_contract.RuntimeContract()
+    contract = _contract()
     contract.register_hook("after", lambda request, outcome: seen.append(outcome))
     contract.execute(
         {"action_id": "x", "action_class": "reversible"},
@@ -88,7 +95,7 @@ def test_circuit_breaker_opens_and_recovers():
     breaker = runtime_contract.CircuitBreaker(
         failure_threshold=3, cooldown_seconds=60, clock=clock
     )
-    contract = runtime_contract.RuntimeContract(breaker=breaker, clock=clock)
+    contract = _contract(breaker=breaker, clock=clock)
 
     def fail(payload):
         raise RuntimeError("falha")
@@ -115,7 +122,7 @@ def test_circuit_breaker_opens_and_recovers():
 
 def test_audit_jsonl_is_written(tmp_path):
     path = tmp_path / "audit.jsonl"
-    contract = runtime_contract.RuntimeContract(audit_path=path)
+    contract = _contract(audit_path=path)
     contract.execute(
         {"action_id": "x", "action_class": "read_only"},
         lambda payload: 1,
@@ -128,7 +135,7 @@ def test_audit_jsonl_is_written(tmp_path):
 
 
 def test_invalid_action_class_is_rejected():
-    contract = runtime_contract.RuntimeContract()
+    contract = _contract()
     with pytest.raises(ValueError):
         contract.execute(
             {"action_id": "x", "action_class": "unknown"}, lambda payload: 1
@@ -136,7 +143,7 @@ def test_invalid_action_class_is_rejected():
 
 
 def test_adapter_uses_core_runtime_contract():
-    contract = runtime_contract.RuntimeContract()
+    contract = _contract()
     assert isinstance(contract.core_contract, CoreRuntimeContract)
     result = contract.execute(
         {"action_id": "read", "action_class": "read_only"},
@@ -149,7 +156,7 @@ def test_adapter_uses_core_runtime_contract():
 
 
 def test_core_stop_state_blocks_action():
-    contract = runtime_contract.RuntimeContract()
+    contract = _contract()
     contract.core_state.user_requested_stop = True
     result = contract.execute(
         {"action_id": "read", "action_class": "read_only"},
@@ -160,8 +167,19 @@ def test_core_stop_state_blocks_action():
     assert result["core_decision"]["decision"] in {"defer", "block"}
 
 
+def test_quiet_hours_blocks_non_read_only():
+    contract = _contract()
+    contract.core_state.local_hour = 23
+    result = contract.execute(
+        {"action_id": "x", "action_class": "reversible"},
+        lambda payload: 1,
+    )
+    assert result["status"] == "blocked"
+    assert "quiet_hours" in result["reason"]
+
+
 def test_core_ask_escalates_irreversible():
-    contract = runtime_contract.RuntimeContract()
+    contract = _contract()
     result = contract.execute(
         {"action_id": "delete", "action_class": "irreversible"},
         lambda payload: "never",
@@ -172,7 +190,7 @@ def test_core_ask_escalates_irreversible():
 
 
 def test_core_state_tracks_failures():
-    contract = runtime_contract.RuntimeContract()
+    contract = _contract()
 
     def fail(payload):
         raise RuntimeError("falha")

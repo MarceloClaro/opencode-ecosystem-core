@@ -272,6 +272,18 @@ sintéticos ou simulados, e o hardware continua atrás de gates explícitos.
   cooldown. Em R1149 o contrato de execução passou a ser um adaptador sobre
   `core_cognition.runtime_contract`, sem duplicar a política de ação.
 
+### Consolidação R1149–R1150
+
+- `mci.runtime_contract` é adaptador de execução sobre
+  `core_cognition.runtime_contract`; não há segunda política de ação.
+- O N-of-1 canônico vive em `core_cognition.n_of_1` (validador + runner/SCED);
+  `mci.n_of_1` é apenas shim de compatibilidade.
+- `integrations/catalog_audit.py` audita 374 agentes e 35 MCPs: **0**
+  duplicatas de id/nome/prompt/MCP, **0** drift catálogo↔config e **0**
+  artefatos ausentes; 2 `agent_id` legados e 1 par de descrições quase
+  idênticas (backends distintos) ficam registrados para revisão.
+- Relatório: [docs/CONSOLIDACAO_CORE_R1150.md](docs/CONSOLIDACAO_CORE_R1150.md).
+
 ### Limites
 
 - Dados sintéticos; nenhum hardware, calibração real ou participante.

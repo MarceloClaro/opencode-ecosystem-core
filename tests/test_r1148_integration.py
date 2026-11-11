@@ -118,6 +118,7 @@ def test_five_layers_work_together(tmp_path):
 
     # 5. Runtime contract: irreversible escalates; read_only executes
     contract = runtime_contract.RuntimeContract()
+    contract.core_state.local_hour = 14
     escalated = contract.execute(
         {"action_id": "delete", "action_class": "irreversible"},
         lambda payload: "never",

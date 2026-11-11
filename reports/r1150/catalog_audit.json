@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "catalog_dir": "/home/marceloclaro/opencode-ecosystem-core/agents/catalog",
+  "config_path": "/home/marceloclaro/opencode-ecosystem-core/opencode.json",
+  "counts": {
+    "catalog_files": 374,
+    "catalog_ids": 374,
+    "config_agents": 374,
+    "config_mcps": 35
+  },
+  "duplicates": {
+    "catalog_ids": [],
+    "declared_agent_ids": [],
+    "metadata_id_mismatches": [
+      {
+        "file": "kdp-metadata-isbn-phd.md",
+        "declared_agent_id": "kdp-metadata-and-isbn-phd",
+        "canonical_agent_id": "kdp-metadata-isbn-phd"
+      },
+      {
+        "file": "university_synthetic.md",
+        "declared_agent_id": "synthetic_university",
+        "canonical_agent_id": "university_synthetic"
+      }
+    ],
+    "catalog_names": [],
+    "config_prompts": [],
+    "mcp_signatures": []
+  },
+  "near_duplicate_agents": [
+    {
+      "left": "gjq-backend-guoji-04",
+      "right": "gjq-backend-guoji-07",
+      "jaccard": 0.916667
+    }
+  ],
+  "drift": {
+    "catalog_not_in_config": [],
+    "config_not_in_catalog": []
+  },
+  "missing_artifacts": [],
+  "missing_artifacts_total": 0,
+  "recommendations": [
+    "Migrar agent_id legado divergente do nome do arquivo somente com atualização explícita do baseline de ciclo de vida.",
+    "Revisar descrições quase idênticas antes de fundir."
+  ],
+  "limits": "Auditoria textual e estrutural. Não avalia qualidade, trust, execução ou equivalência funcional. Duplicidade de descrição não autoriza remoção; toda fusão exige revisão humana e teste de contrato.",
+  "auto_removed": false,
+  "report_sha256": "cd813ad657471f0fb6277ee4710963fc19ebbbf82274d03b930f4c0c4be1d1c6"
+}
