@@ -269,7 +269,8 @@ sintéticos ou simulados, e o hardware continua atrás de gates explícitos.
   trust warrant reporta `calibration_insufficient_data`.
 - **Runtime**: ações `read_only` executam; `irreversible` sem aprovação e token
   escalam para humano; o circuit breaker abre após falhas e recupera após
-  cooldown.
+  cooldown. Em R1149 o contrato de execução passou a ser um adaptador sobre
+  `core_cognition.runtime_contract`, sem duplicar a política de ação.
 
 ### Limites
 

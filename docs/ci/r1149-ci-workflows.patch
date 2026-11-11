@@ -1,0 +1,90 @@
+diff --git a/.github/workflows/ci-escopos.yml b/.github/workflows/ci-escopos.yml
+index fa1f414f..af47b04d 100644
+--- a/.github/workflows/ci-escopos.yml
++++ b/.github/workflows/ci-escopos.yml
+@@ -2,9 +2,9 @@ name: CI por escopos (polímata verde-gate)
+ 
+ on:
+   push:
+-    branches: [main, master, develop]
++    branches: [main, master, develop, "codex/**", "feat/**"]
+   pull_request:
+-    branches: [main, master]
++    branches: [main, master, "codex/**", "feat/**"]
+ 
+ concurrency:
+   group: ${{ github.workflow }}-${{ github.ref }}
+diff --git a/.github/workflows/ci.yml b/.github/workflows/ci.yml
+index e6be3fd5..ba538a57 100644
+--- a/.github/workflows/ci.yml
++++ b/.github/workflows/ci.yml
+@@ -2,9 +2,10 @@ name: OpenCode Ecosystem Core CI
+ 
+ on:
+   push:
+-    branches: [main, master, develop]
++    branches: [main, master, develop, "codex/**", "feat/**"]
+   pull_request:
+-    branches: [main, master]
++    branches: [main, master, "codex/**", "feat/**"]
++  workflow_dispatch:
+ 
+ concurrency:
+   group: ${{ github.workflow }}-${{ github.ref }}
+@@ -93,6 +94,56 @@ jobs:
+           path: reports/
+           if-no-files-found: error
+ 
++  lean-proofs:
++    name: Lean 4 + Mathlib proofs
++    runs-on: ubuntu-latest
++    timeout-minutes: 60
++    permissions:
++      contents: read
++    steps:
++      - uses: actions/checkout@v4
++      - name: Install elan
++        run: |
++          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y
++          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
++      - name: Cache Lake packages
++        uses: actions/cache@v4
++        with:
++          path: livro-core/lean/.lake
++          key: lake-${{ runner.os }}-${{ hashFiles('livro-core/lean/lean-toolchain', 'livro-core/lean/lake-manifest.json') }}
++          restore-keys: |
++            lake-${{ runner.os }}-
++      - name: Fetch Mathlib cache
++        working-directory: livro-core/lean
++        run: |
++          set -euo pipefail
++          if ! lake exe cache get; then
++            echo "cache get failed; resolving dependencies once"
++            lake update
++            lake exe cache get
++          fi
++      - name: Compile complex proofs
++        working-directory: livro-core/lean
++        run: |
++          set -euo pipefail
++          lake env lean ../../lean/quantum-cb/ComplexProofs.lean 2>&1 | tee /tmp/complex.log
++          if grep -Eq "sorryAx|error:" /tmp/complex.log; then
++            echo "Complex proof failed"; exit 1
++          fi
++      - name: Compile correlation counterproof
++        working-directory: livro-core/lean
++        run: |
++          set -euo pipefail
++          lake env lean ../../lean/quantum-cb/CorrelationCounterproof.lean 2>&1 | tee /tmp/correlation.log
++          if grep -Eq "sorryAx|error:" /tmp/correlation.log; then
++            echo "Correlation proof failed"; exit 1
++          fi
++      - name: Compile Mathlib counterproof
++        working-directory: livro-core/lean
++        run: |
++          set -euo pipefail
++          lake env lean ../../lean/quantum-cb/MathlibCounterproof.lean
++
+   package:
+     name: Package Build
+     needs: test

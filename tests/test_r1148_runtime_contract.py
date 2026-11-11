@@ -5,6 +5,9 @@ import json
 
 import pytest
 
+from core_cognition.runtime_contract import (
+    RuntimeContract as CoreRuntimeContract,
+)
 from mci import runtime_contract
 
 
@@ -130,3 +133,52 @@ def test_invalid_action_class_is_rejected():
         contract.execute(
             {"action_id": "x", "action_class": "unknown"}, lambda payload: 1
         )
+
+
+def test_adapter_uses_core_runtime_contract():
+    contract = runtime_contract.RuntimeContract()
+    assert isinstance(contract.core_contract, CoreRuntimeContract)
+    result = contract.execute(
+        {"action_id": "read", "action_class": "read_only"},
+        lambda payload: 1,
+    )
+    assert result["status"] == "executed"
+    assert contract.core_state.allowed == 1
+    assert contract.core_contract.audit_events(limit=1)
+    assert result["core_decision"]["decision"] == "allow"
+
+
+def test_core_stop_state_blocks_action():
+    contract = runtime_contract.RuntimeContract()
+    contract.core_state.user_requested_stop = True
+    result = contract.execute(
+        {"action_id": "read", "action_class": "read_only"},
+        lambda payload: 1,
+    )
+    assert result["status"] == "blocked"
+    assert result["reason"].startswith("runtime_contract:stop:")
+    assert result["core_decision"]["decision"] in {"defer", "block"}
+
+
+def test_core_ask_escalates_irreversible():
+    contract = runtime_contract.RuntimeContract()
+    result = contract.execute(
+        {"action_id": "delete", "action_class": "irreversible"},
+        lambda payload: "never",
+    )
+    assert result["status"] == "escalated"
+    assert result["reason"] == "approval_required"
+    assert result["core_decision"]["rule"] == "irreversible_requires_human"
+
+
+def test_core_state_tracks_failures():
+    contract = runtime_contract.RuntimeContract()
+
+    def fail(payload):
+        raise RuntimeError("falha")
+
+    contract.execute(
+        {"action_id": "x", "action_class": "read_only"}, fail
+    )
+    assert contract.core_state.consecutive_failures == 1
+    assert contract.core_state.total_failures == 1

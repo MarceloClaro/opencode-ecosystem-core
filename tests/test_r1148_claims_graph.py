@@ -166,3 +166,75 @@ def test_irreal_requires_synthetic_and_scenario():
         graph.add_evidence(
             "ev1", domain="irreal", value=0.5, synthetic=True
         )
+
+
+def test_save_load_roundtrip(tmp_path):
+    graph = claims_graph.ClaimsGraph()
+    graph.add_claim("c1", "x", kind="empirical", falsifier="y")
+    graph.add_evidence("ev1", domain="real", value=0.8)
+    graph.add_edge("ev1", "c1", "supports", weight=0.9)
+    saved = graph.save(tmp_path / "graph.json")
+    assert saved["nodes"] == 2
+    assert saved["edges"] == 1
+    loaded = claims_graph.ClaimsGraph.load(tmp_path / "graph.json")
+    assert loaded.audit()["claims"] == 1
+    assert loaded.warrant("c1")["status"] == "supported"
+
+
+def test_load_rejects_edge_without_target(tmp_path):
+    path = tmp_path / "bad.json"
+    path.write_text(json.dumps({
+        "schema_version": 1,
+        "nodes": {"c1": {"id": "c1", "type": "claim"}},
+        "edges": [{
+            "source": "c1",
+            "target": "missing",
+            "relation": "supports",
+            "weight": 1.0,
+        }],
+    }), encoding="utf-8")
+    with pytest.raises(ValueError):
+        claims_graph.ClaimsGraph.load(path)
+
+
+def test_ledger_bridge_roundtrip(tmp_path):
+    from core_cognition.claims_ledger import validate_claim
+
+    ledger = tmp_path / "claims.jsonl"
+    ledger.write_text(json.dumps({
+        "claim_id": "C1",
+        "text": "A intervenção reduz offloading.",
+        "status": "tested",
+        "falsifier": "Aumento de offloading sem ganho de autonomia.",
+        "evidence": [{"source": "EMA", "value": 0.8}],
+        "source_sha256": "",
+        "external_validation": None,
+        "history": [],
+    }) + "\n", encoding="utf-8")
+    graph = claims_graph.ClaimsGraph.from_ledger(ledger)
+    assert graph.warrant("C1")["status"] == "supported"
+    exported = graph.to_ledger()
+    claim = validate_claim(exported[0])
+    assert claim.claim_id == "C1"
+    assert claim.status == "tested"
+
+
+def test_to_ledger_requires_falsifier():
+    graph = claims_graph.ClaimsGraph()
+    graph.add_claim("c1", "x", kind="empirical")
+    with pytest.raises(ValueError):
+        graph.to_ledger()
+
+
+def test_cli_load_and_save(tmp_path, capsys):
+    graph = claims_graph.ClaimsGraph()
+    graph.add_claim("c1", "x", kind="empirical", falsifier="y")
+    graph.add_evidence("ev1", domain="real", value=0.8)
+    graph.add_edge("ev1", "c1", "supports")
+    source = tmp_path / "graph.json"
+    graph.save(source)
+    target = tmp_path / "copy.json"
+    code = claims_graph.main(["--load", str(source), "--save", str(target)])
+    assert code == 0
+    assert target.exists()
+    assert "audit" in capsys.readouterr().out

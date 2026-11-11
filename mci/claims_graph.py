@@ -90,6 +90,7 @@ class ClaimsGraph:
         kind: str = "empirical",
         polarity: str = "affirm",
         proposition_key: str | None = None,
+        falsifier: str = "",
         agent: str = "unknown",
         source_id: str | None = None,
     ) -> dict:
@@ -108,6 +109,7 @@ class ClaimsGraph:
             "kind": kind,
             "polarity": polarity,
             "proposition_key": proposition_key or str(claim_id),
+            "falsifier": str(falsifier),
             "formal_link": None,
             "psychometric": None,
             "prov": self._prov(
@@ -483,3 +485,193 @@ class ClaimsGraph:
             "edges": self.edges,
             "limits": LIMITS,
         }
+
+    def save(self, path: str | Path) -> dict:
+        """Persiste o grafo com SHA-256 canônico; não promove confiança."""
+        target = Path(path)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        payload = self.to_dict()
+        canonical = json.dumps(
+            payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False
+        )
+        digest = hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+        target.write_text(
+            json.dumps(payload, indent=2, sort_keys=True, ensure_ascii=False)
+            + "\n",
+            encoding="utf-8",
+        )
+        return {
+            "path": str(target),
+            "sha256": digest,
+            "nodes": len(self.nodes),
+            "edges": len(self.edges),
+        }
+
+    @classmethod
+    def load(cls, path: str | Path) -> "ClaimsGraph":
+        target = Path(path)
+        payload = json.loads(target.read_text(encoding="utf-8"))
+        if payload.get("schema_version") != 1:
+            raise ValueError("schema_version do grafo deve ser 1")
+        graph = cls()
+        nodes = payload.get("nodes")
+        if not isinstance(nodes, dict):
+            raise ValueError("grafo exige nodes como objeto")
+        for node_id, node in nodes.items():
+            if not isinstance(node, dict):
+                raise ValueError(f"nó inválido: {node_id}")
+            if node.get("id") != node_id:
+                raise ValueError(f"id divergente no nó: {node_id}")
+            graph._add_node(node)
+        edges = payload.get("edges", [])
+        if not isinstance(edges, list):
+            raise ValueError("edges deve ser lista")
+        for edge in edges:
+            if not isinstance(edge, dict):
+                raise ValueError("aresta inválida")
+            if edge.get("source") not in graph.nodes:
+                raise ValueError(f"aresta com fonte ausente: {edge.get('source')}")
+            if edge.get("target") not in graph.nodes:
+                raise ValueError(f"aresta com alvo ausente: {edge.get('target')}")
+            if edge.get("relation") not in RELATIONS:
+                raise ValueError(f"relação inválida: {edge.get('relation')}")
+            if not 0.0 <= float(edge.get("weight", 0.0)) <= 1.0:
+                raise ValueError("peso de aresta fora de [0,1]")
+            graph.edges.append(edge)
+        return graph
+
+    def audit(self) -> dict:
+        claims = [
+            node["id"] for node in self.nodes.values()
+            if node.get("type") == "claim"
+        ]
+        warrants = {claim_id: self.warrant(claim_id) for claim_id in claims}
+        return {
+            "schema_version": 1,
+            "nodes": len(self.nodes),
+            "edges": len(self.edges),
+            "claims": len(claims),
+            "contradictions": len(self.detect_contradictions()),
+            "abstain": sum(
+                1 for entry in warrants.values() if entry["abstain"]
+            ),
+            "warrants": warrants,
+            "limits": LIMITS,
+        }
+
+    @classmethod
+    def from_ledger(cls, path: str | Path) -> "ClaimsGraph":
+        """Converte o ledger JSONL do core_cognition em grafo de claims."""
+        from core_cognition.claims_ledger import load_ledger
+
+        mapping = {
+            "observation": "empirical",
+            "inference": "hypothesis",
+            "hypothesis": "hypothesis",
+            "tested": "empirical",
+            "externally_validated": "empirical",
+            "refuted": "hypothesis",
+        }
+        graph = cls()
+        for claim in load_ledger(path):
+            node = graph.add_claim(
+                claim.claim_id,
+                claim.text,
+                kind=mapping.get(claim.status, "hypothesis"),
+                polarity="deny" if claim.status == "refuted" else "affirm",
+                proposition_key=claim.claim_id,
+                falsifier=claim.falsifier,
+                agent="core_cognition.claims_ledger",
+            )
+            node["ledger_status"] = claim.status
+            node["source_sha256"] = claim.source_sha256
+            node["external_validation"] = claim.external_validation
+            for index, evidence in enumerate(claim.evidence):
+                evidence_id = f"{claim.claim_id}-ev{index}"
+                value = evidence.get("value") if isinstance(evidence, dict) else None
+                if isinstance(value, (int, float)) and not isinstance(value, bool):
+                    graph.add_evidence(
+                        evidence_id, domain="real", value=float(value)
+                    )
+                else:
+                    graph.add_test(
+                        evidence_id,
+                        test_kind="survey",
+                        result=json.dumps(evidence, ensure_ascii=False, sort_keys=True),
+                    )
+                graph.add_edge(
+                    evidence_id,
+                    claim.claim_id,
+                    "contradicts" if claim.status == "refuted" else "supports",
+                    weight=0.5,
+                    rationale="evidência importada do claims_ledger",
+                )
+        return graph
+
+    def to_ledger(self) -> list[dict]:
+        """Exporta claims para o formato do core_cognition.claims_ledger."""
+        output = []
+        for node in self.nodes.values():
+            if node.get("type") != "claim":
+                continue
+            falsifier = str(node.get("falsifier", "")).strip()
+            if not falsifier:
+                raise ValueError(
+                    f"claim {node['id']} sem falsificador; exportação recusada"
+                )
+            incoming = self._incoming(node["id"])
+            evidence = [
+                {
+                    "source": edge["source"],
+                    "relation": edge["relation"],
+                    "weight": edge["weight"],
+                }
+                for edge in incoming
+                if edge["relation"] in {"supports", "contradicts"}
+            ]
+            status = node.get("ledger_status")
+            if status is None:
+                if node.get("kind") == "hypothesis":
+                    status = "refuted" if node.get("polarity") == "deny" else "hypothesis"
+                elif evidence:
+                    status = "tested"
+                else:
+                    status = "observation"
+            output.append({
+                "claim_id": node["id"],
+                "text": node["proposition"],
+                "status": status,
+                "falsifier": falsifier,
+                "evidence": evidence,
+                "source_sha256": node.get("source_sha256", ""),
+                "external_validation": node.get("external_validation"),
+                "history": [],
+            })
+        return output
+
+
+def main(argv=None) -> int:
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        description="Audita/exporta o grafo de claims (R1148)."
+    )
+    parser.add_argument("--load", type=Path, default=None)
+    parser.add_argument("--from-ledger", type=Path, default=None)
+    parser.add_argument("--save", type=Path, default=None)
+    args = parser.parse_args(argv)
+    if args.from_ledger:
+        graph = ClaimsGraph.from_ledger(args.from_ledger)
+    elif args.load:
+        graph = ClaimsGraph.load(args.load)
+    else:
+        parser.error("informe --load ou --from-ledger")
+    result = {"audit": graph.audit()}
+    if args.save:
+        result["saved"] = graph.save(args.save)
+    print(json.dumps(result, indent=2, ensure_ascii=False))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

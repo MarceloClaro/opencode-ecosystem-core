@@ -97,6 +97,13 @@ Coordenação alta não implica warrant alto. Sem outcomes, o Core abstém.
 | Após cooldown | `half_open` e recuperação |
 | Auditoria | JSONL com uma linha por execução |
 
+**R1149:** `mci.runtime_contract` passou a ser um **adaptador de execução**
+sobre `core_cognition.runtime_contract`. A decisão canônica (`allow`, `ask`,
+`defer`, `block`) é consultada antes de executar; hooks, breaker e auditoria
+continuam no adaptador. O grafo de claims ganhou persistência e ponte com
+`core_cognition.claims_ledger` (`from_ledger`/`to_ledger`). Ver
+[docs/CONSOLIDACAO_CORE_R1149.md](CONSOLIDACAO_CORE_R1149.md).
+
 ## 2. Números reais, complexos e irreais
 
 O grafo aceita três domínios de evidência:
