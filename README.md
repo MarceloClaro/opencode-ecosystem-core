@@ -272,7 +272,7 @@ sintéticos ou simulados, e o hardware continua atrás de gates explícitos.
   cooldown. Em R1149 o contrato de execução passou a ser um adaptador sobre
   `core_cognition.runtime_contract`, sem duplicar a política de ação.
 
-### Consolidação R1149–R1150
+### Consolidação R1149–R1151
 
 - `mci.runtime_contract` é adaptador de execução sobre
   `core_cognition.runtime_contract`; não há segunda política de ação.
@@ -283,7 +283,13 @@ sintéticos ou simulados, e o hardware continua atrás de gates explícitos.
   artefatos ausentes. Divergências não resolvidas: **0**; 2 `agent_id` legados
   ficam preservados por baseline e 1 par de descrições quase idênticas
   (backends distintos) está revisado e não deve ser fundido.
-- Relatório: [docs/CONSOLIDACAO_CORE_R1150.md](docs/CONSOLIDACAO_CORE_R1150.md).
+- R1151: gate local `scripts/local_ci.sh` (59 + 16 testes, config, catálogo e
+  Lean opcional), worktree limpo com stash dos artefatos locais e pacote
+  `validation/external_r1151` com verificação automatizada de certificados,
+  hashes e testes. Peer review humano, validação clínica e hardware continuam
+  pendentes; o workflow remoto segue bloqueado por escopo `workflow`.
+- Relatórios: [R1150](docs/CONSOLIDACAO_CORE_R1150.md) ·
+  [R1151](docs/CONSOLIDACAO_CORE_R1151.md).
 
 ### Limites
 

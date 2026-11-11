@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "round": "R1151",
+  "generated_at": "2026-11-11T03:03:15.656526+00:00",
+  "automated_verification": true,
+  "peer_review": false,
+  "clinical_validation": false,
+  "hardware_validation": false,
+  "reproducible_checks": true,
+  "claims": [
+    {
+      "id": "formal_complex",
+      "verdict": "supported",
+      "evidence": {
+        "ok": true,
+        "statuses": {
+          "interference": "kernel_checked",
+          "relative_phase_not_one": "kernel_checked"
+        },
+        "certificate_sha256": "5bdad31fe568f8141b221ff4db4df2bbf50bad7f4da4f08ba687fdc86fb46168",
+        "lean_file_sha256": "8e6c25f873fbd15c4ee4bf4a1faa57c81f933fe8775b4644d6730f0f63fe1f43"
+      },
+      "claim_status": "kernel_checked"
+    },
+    {
+      "id": "formal_correlation",
+      "verdict": "supported",
+      "evidence": {
+        "ok": true,
+        "statuses": {
+          "marginals_do_not_determine_joint": "kernel_checked",
+          "joints_differ": "kernel_checked"
+        },
+        "certificate_sha256": "182cc5f1a86a3f1c87d3259ea95b6e4d51598a9e483d3a191ec1c84fcf6f6273",
+        "lean_file_sha256": "73b9ff8566d8effd48a8456bf9df7f706d6ff207689178cc1c43a51a5e861b92"
+      },
+      "claim_status": "kernel_checked"
+    },
+    {
+      "id": "runtime_adapter",
+      "verdict": "supported",
+      "evidence": {
+        "ok": true,
+        "returncode": 0,
+        "tail": [
+          "13 passed in 0.29s"
+        ]
+      },
+      "claim_status": "unit_and_integration_tested"
+    },
+    {
+      "id": "n_of_1_unified",
+      "verdict": "supported",
+      "evidence": {
+        "ok": true,
+        "returncode": 0,
+        "tail": [
+          "2 passed in 0.19s"
+        ]
+      },
+      "claim_status": "unit_tested"
+    },
+    {
+      "id": "catalog_audit",
+      "verdict": "supported",
+      "evidence": {
+        "ok": true,
+        "report_sha256": "c497a1b31104a687408e3e77cd694e3ef60c1505224eec8c629f220a29cbbf42",
+        "legacy_baseline_mismatches": 2,
+        "reviewed_near_duplicates": 1
+      },
+      "claim_status": "audited_locally"
+    },
+    {
+      "id": "classification_pilot",
+      "verdict": "insufficient",
+      "evidence": {
+        "reason": "dados sintéticos; nenhuma vantagem quântica demonstrada"
+      },
+      "claim_status": "synthetic_only"
+    },
+    {
+      "id": "clinical_claims",
+      "verdict": "insufficient",
+      "evidence": {
+        "reason": "sem participante, ética, hardware ou peer review"
+      },
+      "claim_status": "not_tested"
+    }
+  ],
+  "overclaims": [],
+  "insufficient": [
+    "classification_pilot",
+    "clinical_claims"
+  ],
+  "limits": "Verificação automatizada de hashes, certificados e testes. Não é peer review, validação clínica ou de hardware. Não promove confiança."
+}

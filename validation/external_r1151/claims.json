@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "round": "R1151",
+  "scope": "R1145-R1150",
+  "claims": [
+    {
+      "id": "formal_complex",
+      "statement": "Fase global, conjugação, Born, interferência e porta de fase satisfazem as identidades provadas.",
+      "status": "kernel_checked",
+      "evidence": {
+        "lean_file": "lean/quantum-cb/ComplexProofs.lean",
+        "certificate": "harnesses/quantum-error-mitigation/resultados/r1146_complex_proofs/certificate.json",
+        "certificate_sha256": "5bdad31fe568f8141b221ff4db4df2bbf50bad7f4da4f08ba687fdc86fb46168"
+      },
+      "external_validation": "Lean 4 + Mathlib kernel; não é validação empírica",
+      "limits": "Não prova hardware, ruído, canal quântico ou vantagem."
+    },
+    {
+      "id": "formal_correlation",
+      "statement": "Marginais iguais não determinam a junta; correlação positiva altera as direções de fidelidade, erro duplo e união.",
+      "status": "kernel_checked",
+      "evidence": {
+        "lean_file": "lean/quantum-cb/CorrelationCounterproof.lean",
+        "certificate": "harnesses/quantum-error-mitigation/resultados/r1147_correlation_layout/certificate.json",
+        "certificate_sha256": "182cc5f1a86a3f1c87d3259ea95b6e4d51598a9e483d3a191ec1c84fcf6f6273"
+      },
+      "external_validation": "Lean 4 + Mathlib kernel; não é validação empírica",
+      "limits": "Modelo clássico de probabilidades; não mede hardware."
+    },
+    {
+      "id": "runtime_adapter",
+      "statement": "O adaptador de execução consulta o contrato canônico e respeita allow/ask/defer/block.",
+      "status": "unit_and_integration_tested",
+      "evidence": "tests/test_r1148_runtime_contract.py e tests/test_r1148_integration.py",
+      "external_validation": false,
+      "limits": "Testes locais; não cobre todas as ferramentas reais."
+    },
+    {
+      "id": "n_of_1_unified",
+      "statement": "Validador e runner/SCED vivem em core_cognition.n_of_1; mci.n_of_1 é shim.",
+      "status": "unit_tested",
+      "evidence": "tests/test_r1150_n_of_1_consolidation.py",
+      "external_validation": false,
+      "limits": "Sem participante, ética ou supervisão clínica."
+    },
+    {
+      "id": "catalog_audit",
+      "statement": "374 agentes e 35 MCPs não têm duplicatas de id/nome/prompt/MCP; drift zero; 2 ids legados preservados e 1 par revisado.",
+      "status": "audited_locally",
+      "evidence": {
+        "report": "reports/r1150/catalog_audit.json",
+        "report_sha256": "c497a1b31104a687408e3e77cd694e3ef60c1505224eec8c629f220a29cbbf42"
+      },
+      "external_validation": false,
+      "limits": "Auditoria textual; não prova equivalência funcional."
+    },
+    {
+      "id": "classification_pilot",
+      "statement": "Pilotos de classificação quântica e QAOA foram executados em simulação.",
+      "status": "synthetic_only",
+      "evidence": "docs/RELATORIO_PESQUISA_QUANTICA_R1142.md",
+      "external_validation": false,
+      "limits": "Sem hardware, sem dados reais, sem vantagem demonstrada."
+    },
+    {
+      "id": "clinical_claims",
+      "statement": "Não há claim clínico, nutricional ou de eficácia.",
+      "status": "not_tested",
+      "evidence": "docs/METACOGNICAO_SUBJETIVA_LOGICA_QUANTICA_R1148.md",
+      "external_validation": false,
+      "limits": "Requer ética, consentimento, participantes e supervisão."
+    }
+  ],
+  "limits": "Validação formal não é validação empírica. O pacote não promove confiança nem autoriza execução."
+}
