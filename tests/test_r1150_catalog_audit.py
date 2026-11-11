@@ -1,6 +1,7 @@
 """R1150 — auditoria de duplicidade de agentes e MCPs."""
 from __future__ import annotations
 
+import hashlib
 import json
 
 from integrations import catalog_audit
@@ -84,6 +85,48 @@ def test_detects_near_duplicates_and_drift(tmp_path):
     assert report["drift"]["config_not_in_catalog"] == []
 
 
+def test_legacy_baseline_mismatch_is_classified(tmp_path):
+    catalog, config = _fixture(tmp_path)
+    beta = catalog / "beta.md"
+    digest = hashlib.sha256(beta.read_bytes()).hexdigest()
+    baseline = tmp_path / "lifecycle_baseline.json"
+    baseline.write_text(json.dumps({
+        "schema_version": 1,
+        "files": {"agents/catalog/beta.md": digest},
+    }), encoding="utf-8")
+    report = catalog_audit.audit_catalog(
+        catalog_dir=catalog,
+        config_path=config,
+        baseline_path=baseline,
+    )
+    assert report["duplicates"]["metadata_id_mismatches"] == []
+    legacy = report["duplicates"]["legacy_baseline_mismatches"]
+    assert len(legacy) == 1
+    assert legacy[0]["file"] == "beta.md"
+    assert "baseline" in legacy[0]["reason"]
+
+
+def test_reviewed_near_duplicate_is_classified(tmp_path):
+    catalog, config = _fixture(tmp_path)
+    report = catalog_audit.audit_catalog(
+        catalog_dir=catalog,
+        config_path=config,
+        reviewed_near_duplicates={
+            ("alpha", "delta"): "mesma descrição no fixture; revisado"
+        },
+    )
+    reviewed = {
+        tuple(sorted((item["left"], item["right"])))
+        for item in report["reviewed_near_duplicates"]
+    }
+    unreviewed = {
+        tuple(sorted((item["left"], item["right"])))
+        for item in report["near_duplicate_agents"]
+    }
+    assert ("alpha", "delta") in reviewed
+    assert ("alpha", "delta") not in unreviewed
+
+
 def test_cli_writes_report(tmp_path):
     catalog, config = _fixture(tmp_path)
     output = tmp_path / "report.json"
@@ -99,10 +142,11 @@ def test_cli_writes_report(tmp_path):
 
 
 def test_real_catalog_has_auditable_shape():
-    report = catalog_audit.audit_catalog(
-        near_duplicate_threshold=0.95, max_near_duplicates=5
-    )
+    report = catalog_audit.audit_catalog(max_near_duplicates=5)
     assert report["counts"]["catalog_files"] > 0
     assert report["counts"]["config_agents"] > 0
     assert report["counts"]["config_mcps"] > 0
-    assert "duplicates" in report
+    assert report["duplicates"]["metadata_id_mismatches"] == []
+    assert len(report["duplicates"]["legacy_baseline_mismatches"]) == 2
+    assert report["near_duplicate_agents"] == []
+    assert len(report["reviewed_near_duplicates"]) == 1

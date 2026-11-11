@@ -23,6 +23,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_CATALOG = ROOT / "agents" / "catalog"
 DEFAULT_CONFIG = ROOT / "opencode.json"
+DEFAULT_BASELINE = ROOT / "agents" / "lifecycle_baseline.json"
 DEFAULT_OUTPUT = ROOT / "reports" / "r1150" / "catalog_audit.json"
 
 LIMITS = (
@@ -31,6 +32,12 @@ LIMITS = (
     "toda fusão exige revisão humana e teste de contrato."
 )
 _WORD = re.compile(r"[0-9A-Za-zÀ-ÖØ-öø-ÿ]+")
+REVIEWED_NEAR_DUPLICATES = {
+    ("gjq-backend-guoji-04", "gjq-backend-guoji-07"): (
+        "Backends distintos de 100 qubits; similaridade textual não implica "
+        "equivalência funcional. Não fundir sem calibração e revisão."
+    ),
+}
 
 
 def _scalar(value: str) -> str:
@@ -94,13 +101,29 @@ def audit_catalog(
     *,
     catalog_dir: str | Path = DEFAULT_CATALOG,
     config_path: str | Path = DEFAULT_CONFIG,
+    baseline_path: str | Path = ROOT / "agents" / "lifecycle_baseline.json",
     near_duplicate_threshold: float = 0.9,
     max_near_duplicates: int = 50,
     max_missing_examples: int = 50,
+    reviewed_near_duplicates: dict | None = None,
 ) -> dict:
     catalog_dir = Path(catalog_dir)
     config_path = Path(config_path)
     config = json.loads(config_path.read_text(encoding="utf-8"))
+    baseline_files = {}
+    baseline_path = Path(baseline_path)
+    if baseline_path.exists():
+        baseline_payload = json.loads(baseline_path.read_text(encoding="utf-8"))
+        baseline_files = baseline_payload.get("files", {})
+        if not isinstance(baseline_files, dict):
+            raise ValueError("lifecycle_baseline files deve ser objeto")
+    reviewed = reviewed_near_duplicates
+    if reviewed is None:
+        reviewed = REVIEWED_NEAR_DUPLICATES
+    reviewed_pairs = {
+        tuple(sorted((str(left), str(right)))): str(reason)
+        for (left, right), reason in reviewed.items()
+    }
     agents = config.get("agent", {})
     mcps = config.get("mcp", {})
     if not isinstance(agents, dict) or not isinstance(mcps, dict):
@@ -108,6 +131,7 @@ def audit_catalog(
 
     records = []
     for path in sorted(catalog_dir.glob("*.md")):
+        raw = path.read_bytes()
         front = parse_frontmatter(path)
         declared = str(front.get("agent_id") or path.stem).strip()
         records.append({
@@ -119,21 +143,35 @@ def audit_catalog(
             "spec_file": str(front.get("spec_file", "")).strip(),
             "test_file": str(front.get("test_file", "")).strip(),
             "source": str(front.get("source", "")).strip(),
+            "sha256": hashlib.sha256(raw).hexdigest(),
         })
 
     by_id: dict[str, list[str]] = {}
     by_declared: dict[str, list[str]] = {}
     by_name: dict[str, list[str]] = {}
     metadata_id_mismatches = []
+    legacy_baseline_mismatches = []
     for record in records:
         by_id.setdefault(record["agent_id"], []).append(record["file"])
         by_declared.setdefault(record["declared_agent_id"], []).append(record["file"])
         if record["declared_agent_id"] != record["agent_id"]:
-            metadata_id_mismatches.append({
+            relative = f"agents/catalog/{record['file']}"
+            baseline_hash = baseline_files.get(relative)
+            item = {
                 "file": record["file"],
                 "declared_agent_id": record["declared_agent_id"],
                 "canonical_agent_id": record["agent_id"],
-            })
+                "sha256": record["sha256"],
+            }
+            if baseline_hash == record["sha256"]:
+                item["reason"] = (
+                    "bytes históricos preservados pelo lifecycle_baseline; "
+                    "migração exige contrato managed-v1 e atualização de baseline"
+                )
+                legacy_baseline_mismatches.append(item)
+            else:
+                item["reason"] = "agent_id declarado diverge do nome do arquivo"
+                metadata_id_mismatches.append(item)
         if record["name"]:
             by_name.setdefault(_norm(record["name"]), []).append(record["file"])
     catalog_ids = set(by_id)
@@ -157,6 +195,7 @@ def audit_catalog(
         if len(_tokens(record["description"])) >= 8
     }
     near_duplicates = []
+    reviewed_near = []
     ids = sorted(token_cache)
     for index, left in enumerate(ids):
         for right in ids[index + 1:]:
@@ -164,13 +203,21 @@ def audit_catalog(
                 continue
             score = _jaccard(token_cache[left], token_cache[right])
             if score >= float(near_duplicate_threshold):
-                near_duplicates.append({
+                item = {
                     "left": left,
                     "right": right,
                     "jaccard": round(score, 6),
-                })
+                }
+                key = tuple(sorted((left, right)))
+                if key in reviewed_pairs:
+                    item["rationale"] = reviewed_pairs[key]
+                    reviewed_near.append(item)
+                else:
+                    near_duplicates.append(item)
     near_duplicates.sort(key=lambda item: item["jaccard"], reverse=True)
+    reviewed_near.sort(key=lambda item: item["jaccard"], reverse=True)
     near_duplicates = near_duplicates[: int(max_near_duplicates)]
+    reviewed_near = reviewed_near[: int(max_near_duplicates)]
 
     missing = []
     for record in records:
@@ -215,8 +262,13 @@ def audit_catalog(
         )
     if metadata_id_mismatches:
         recommendations.append(
-            "Migrar agent_id legado divergente do nome do arquivo somente com "
-            "atualização explícita do baseline de ciclo de vida."
+            "Migrar agent_id divergente do nome do arquivo; há divergência "
+            "não coberta pelo baseline."
+        )
+    if legacy_baseline_mismatches:
+        recommendations.append(
+            "Manter os agent_id legados preservados pelo baseline ou migrar "
+            "para managed-v1 com atualização explícita de hash."
         )
     if duplicate_names:
         recommendations.append("Revisar nomes de exibição repetidos.")
@@ -226,6 +278,11 @@ def audit_catalog(
         recommendations.append("Consolidar ou justificar MCPs com a mesma assinatura.")
     if near_duplicates:
         recommendations.append("Revisar descrições quase idênticas antes de fundir.")
+    if reviewed_near:
+        recommendations.append(
+            "Pares quase idênticos revisados: manter separados e registrar "
+            "justificativa; similaridade textual não é equivalência."
+        )
     if catalog_not_in_config or config_not_in_catalog:
         recommendations.append("Sincronizar catálogo e opencode.json.")
     if missing:
@@ -247,11 +304,13 @@ def audit_catalog(
             "catalog_ids": duplicate_ids,
             "declared_agent_ids": duplicate_declared_ids,
             "metadata_id_mismatches": metadata_id_mismatches,
+            "legacy_baseline_mismatches": legacy_baseline_mismatches,
             "catalog_names": duplicate_names,
             "config_prompts": duplicate_prompts,
             "mcp_signatures": duplicate_mcp,
         },
         "near_duplicate_agents": near_duplicates,
+        "reviewed_near_duplicates": reviewed_near,
         "drift": {
             "catalog_not_in_config": catalog_not_in_config,
             "config_not_in_catalog": config_not_in_catalog,
@@ -275,6 +334,7 @@ def main(argv=None) -> int:
     )
     parser.add_argument("--catalog", default=str(DEFAULT_CATALOG))
     parser.add_argument("--config", default=str(DEFAULT_CONFIG))
+    parser.add_argument("--baseline", default=str(DEFAULT_BASELINE))
     parser.add_argument("--output", default=str(DEFAULT_OUTPUT))
     parser.add_argument("--threshold", type=float, default=0.9)
     parser.add_argument("--max-near", type=int, default=50)
@@ -282,6 +342,7 @@ def main(argv=None) -> int:
     report = audit_catalog(
         catalog_dir=args.catalog,
         config_path=args.config,
+        baseline_path=args.baseline,
         near_duplicate_threshold=args.threshold,
         max_near_duplicates=args.max_near,
     )
@@ -296,10 +357,14 @@ def main(argv=None) -> int:
         "duplicate_ids": len(report["duplicates"]["catalog_ids"]),
         "duplicate_declared_ids": len(report["duplicates"]["declared_agent_ids"]),
         "metadata_id_mismatches": len(report["duplicates"]["metadata_id_mismatches"]),
+        "legacy_baseline_mismatches": len(
+            report["duplicates"]["legacy_baseline_mismatches"]
+        ),
         "duplicate_names": len(report["duplicates"]["catalog_names"]),
         "duplicate_prompts": len(report["duplicates"]["config_prompts"]),
         "duplicate_mcp": len(report["duplicates"]["mcp_signatures"]),
         "near_duplicates": len(report["near_duplicate_agents"]),
+        "reviewed_near_duplicates": len(report["reviewed_near_duplicates"]),
         "drift": {
             key: len(value)
             for key, value in report["drift"].items()

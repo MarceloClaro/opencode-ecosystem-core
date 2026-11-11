@@ -39,6 +39,9 @@ Fechar duas lacunas de consolidação:
 - catálogo real: 374 arquivos/ids, 374 agentes, 35 MCPs;
 - duplicatas de id/nome/prompt/MCP: 0;
 - drift: 0; artefatos ausentes: 0;
+- divergências de `agent_id` não resolvidas: 0; 2 legados preservados por
+  baseline com hash conferido;
+- quase-duplicatas não revisadas: 0; 1 par revisado com justificativa;
 - `opencode_cli --check` continua OK.
 
 ## 4. Limites

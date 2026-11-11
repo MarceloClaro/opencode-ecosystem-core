@@ -3,7 +3,7 @@
 **Data:** 2026-11-10
 **Depende de:** R1132, R1148, R1149
 **Relatório:** `reports/r1150/catalog_audit.json` (SHA-256
-`cd813ad657471f0fb6277ee4710963fc19ebbbf82274d03b930f4c0c4be1d1c6`)
+`c497a1b31104a687408e3e77cd694e3ef60c1505224eec8c629f220a29cbbf42`)
 
 ## 1. N-of-1: uma fonte, dois usos
 
@@ -55,8 +55,8 @@ report = canonical.run_n_of_1(protocol, observations, lock["hash"])
 | Comandos/URLs de MCP repetidos | **0** |
 | Drift catálogo ↔ config | **0** |
 | Specs/tests ausentes | **0** |
-| `agent_id` legado divergente | **2** |
-| Descrições quase idênticas | **1 par** |
+| `agent_id` legado divergente | **0 não resolvido; 2 preservados por baseline** |
+| Descrições quase idênticas | **0 não revisadas; 1 revisada** |
 
 ### Os dois metadados legados
 
@@ -67,14 +67,19 @@ report = canonical.run_n_of_1(protocol, observations, lock["hash"])
 
 Eles são mantidos como legado porque o baseline de ciclo de vida
 (`agents/lifecycle_baseline.json`) usa os hashes atuais. Alterar o `agent_id`
-sem migração quebra `opencode_cli --check`. O auditor reporta a divergência,
+sem migração quebra `opencode_cli --check`. O auditor calcula o SHA-256 de cada
+card: se ele bate com o baseline, classifica como **legado preservado**, não
+como divergência não resolvida. Migrar exige cumprir o contrato `managed-v1` e
+atualizar o hash do baseline explicitamente. O auditor reporta a divergência,
 mas não reescreve o baseline.
 
 ### O par quase idêntico
 
 `gjq-backend-guoji-04` × `gjq-backend-guoji-07` têm Jaccard **0,917** nas
 descrições. São backends distintos (dois hardwares de 100 qubits), com perfis
-próprios; **não devem ser fundidos** só pela similaridade textual.
+próprios; **não devem ser fundidos** só pela similaridade textual. O par está
+na allowlist revisada do auditor com justificativa; o relatório o mostra em
+`reviewed_near_duplicates`, não em `near_duplicate_agents`.
 
 ## 3. Comandos
 

@@ -11,27 +11,34 @@
   "duplicates": {
     "catalog_ids": [],
     "declared_agent_ids": [],
-    "metadata_id_mismatches": [
+    "metadata_id_mismatches": [],
+    "legacy_baseline_mismatches": [
       {
         "file": "kdp-metadata-isbn-phd.md",
         "declared_agent_id": "kdp-metadata-and-isbn-phd",
-        "canonical_agent_id": "kdp-metadata-isbn-phd"
+        "canonical_agent_id": "kdp-metadata-isbn-phd",
+        "sha256": "1104404fa5ef9fea9a13f707ede4187977abe0e1e84fa8b5979b583e25b7ccba",
+        "reason": "bytes históricos preservados pelo lifecycle_baseline; migração exige contrato managed-v1 e atualização de baseline"
       },
       {
         "file": "university_synthetic.md",
         "declared_agent_id": "synthetic_university",
-        "canonical_agent_id": "university_synthetic"
+        "canonical_agent_id": "university_synthetic",
+        "sha256": "ef96a1367da7b932f27779959959490ce9cc3421f2af52f15e051754f58e63b9",
+        "reason": "bytes históricos preservados pelo lifecycle_baseline; migração exige contrato managed-v1 e atualização de baseline"
       }
     ],
     "catalog_names": [],
     "config_prompts": [],
     "mcp_signatures": []
   },
-  "near_duplicate_agents": [
+  "near_duplicate_agents": [],
+  "reviewed_near_duplicates": [
     {
       "left": "gjq-backend-guoji-04",
       "right": "gjq-backend-guoji-07",
-      "jaccard": 0.916667
+      "jaccard": 0.916667,
+      "rationale": "Backends distintos de 100 qubits; similaridade textual não implica equivalência funcional. Não fundir sem calibração e revisão."
     }
   ],
   "drift": {
@@ -41,10 +48,10 @@
   "missing_artifacts": [],
   "missing_artifacts_total": 0,
   "recommendations": [
-    "Migrar agent_id legado divergente do nome do arquivo somente com atualização explícita do baseline de ciclo de vida.",
-    "Revisar descrições quase idênticas antes de fundir."
+    "Manter os agent_id legados preservados pelo baseline ou migrar para managed-v1 com atualização explícita de hash.",
+    "Pares quase idênticos revisados: manter separados e registrar justificativa; similaridade textual não é equivalência."
   ],
   "limits": "Auditoria textual e estrutural. Não avalia qualidade, trust, execução ou equivalência funcional. Duplicidade de descrição não autoriza remoção; toda fusão exige revisão humana e teste de contrato.",
   "auto_removed": false,
-  "report_sha256": "cd813ad657471f0fb6277ee4710963fc19ebbbf82274d03b930f4c0c4be1d1c6"
+  "report_sha256": "c497a1b31104a687408e3e77cd694e3ef60c1505224eec8c629f220a29cbbf42"
 }

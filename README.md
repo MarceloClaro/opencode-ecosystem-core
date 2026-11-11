@@ -280,8 +280,9 @@ sintéticos ou simulados, e o hardware continua atrás de gates explícitos.
   `mci.n_of_1` é apenas shim de compatibilidade.
 - `integrations/catalog_audit.py` audita 374 agentes e 35 MCPs: **0**
   duplicatas de id/nome/prompt/MCP, **0** drift catálogo↔config e **0**
-  artefatos ausentes; 2 `agent_id` legados e 1 par de descrições quase
-  idênticas (backends distintos) ficam registrados para revisão.
+  artefatos ausentes. Divergências não resolvidas: **0**; 2 `agent_id` legados
+  ficam preservados por baseline e 1 par de descrições quase idênticas
+  (backends distintos) está revisado e não deve ser fundido.
 - Relatório: [docs/CONSOLIDACAO_CORE_R1150.md](docs/CONSOLIDACAO_CORE_R1150.md).
 
 ### Limites
