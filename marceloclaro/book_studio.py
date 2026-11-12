@@ -273,7 +273,11 @@ def _qa_pdf(path: Path, trim: str | None = None) -> Dict[str, Any]:
     pdffonts = shutil.which("pdffonts")
     pdftotext = shutil.which("pdftotext")
     if not pdfinfo:
-        raise BookError("pdfinfo ausente")
+        from marceloclaro.bookstudio.tex import qa_pdf_native
+        try:
+            return qa_pdf_native(path, trim=trim)
+        except ValueError as exc:
+            raise BookError(str(exc)) from exc
     info = _run([pdfinfo, str(path)], 30)
     if info.returncode != 0:
         raise BookError(f"pdfinfo falhou: {info.stderr[-300:]}")
