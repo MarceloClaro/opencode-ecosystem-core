@@ -16,7 +16,7 @@ orquestração multi‑agente para pesquisa científica, automação e metacogni
 ## 2. Clonar e preparar
 
 ```bash
-git clone --branch codex/core-prontidao-rea https://github.com/MarceloClaro/opencode-ecosystem-core.git
+git clone https://github.com/MarceloClaro/opencode-ecosystem-core.git
 cd opencode-ecosystem-core
 python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt

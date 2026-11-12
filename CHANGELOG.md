@@ -26,7 +26,7 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.
 
 ### Documentado
 - `README.md`, `docs/README.md`, `ARCHITECTURE.md`, `MANUAL.md`, `CLAUDE.md`, `PROGRESS.md` e instaladores sincronizados para **337 agentes, 32 MCPs, 39 comandos e 22 checks**.
-- `PROGRESS.md` recebeu o checkpoint R1088–R1108 e `CHANGELOG.md` registra a rodada.
+- `PROGRESS.md` recebeu o checkpoint R1088–R1109 e `CHANGELOG.md` registra a rodada.
 
 ### Verificação
 - `pytest tests/test_r1088_mcp_recovery.py tests/test_r1089_tiangong_mcp.py tests/test_r1103_iit_research.py tests/test_r1104_iit_metrics_p0.py tests/test_r1105_autonomy_harness.py tests/test_r1106_ecosystem_adapter.py tests/test_r1107_opencode_cli_adapter.py` → **95 passed**.

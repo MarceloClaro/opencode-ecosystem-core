@@ -10,7 +10,7 @@
 É um ecossistema de inteligência artificial que ajuda você a:
 
 - 🔬 **Pesquisar** — Encontrar artigos científicos e fontes confiáveis
-- 🤖 **Orquestrar** — Coordenar 205 agentes especializados
+- 🤖 **Orquestrar** — Coordenar 337 agentes especializados
 - 📝 **Especificar** — Criar contratos formais para garantir qualidade
 - 🎯 **Executar** — Rodar tarefas com validação automática
 - 📊 **Apresentar** — Gerar apresentações profissionais

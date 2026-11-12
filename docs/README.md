@@ -54,7 +54,7 @@ não precise adivinhar onde está a verdade, a especificação ou o limite.
 | — | [Relatório R1054](../reports/r1054/README.md) | benchmark BCG, limites e evidências |
 | — | [Spec R1054](../specs/SPEC-1054-automacao-assistida-validacao-real.md) | contrato, critérios e RED/GREEN |
 
-## MCP, autonomia e métricas R1088–R1107
+## MCP, autonomia e métricas R1088–R1109
 
 | Ciclo | Documento | O que cobre |
 |---|---|---|

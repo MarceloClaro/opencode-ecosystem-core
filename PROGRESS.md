@@ -1,6 +1,6 @@
 # PROGRESS — Estado corrente e arquivo de checkpoints
 
-## Estado atual — orientação de 04/11/2026
+## Estado atual — orientação de 12/11/2026
 
 A retomada parte do checkout e da tarefa atual. O bloco abaixo deriva as
 contagens das fontes locais; o histórico R414 preservado ao final não representa
@@ -23,7 +23,7 @@ explicam integrações e limites específicos. Recibos datados em `outputs/` e
 `docs/evidence/` são evidências de execuções determinadas; uma suíte interrompida
 não comprova o aceite integral.
 
-## Checkpoint R1088–R1108 — MCP, autonomia e reconciliação
+## Checkpoint R1088–R1109 — MCP, autonomia, reconciliação e automação
 
 - **R1088** recuperou o MCP Colibri (`python -m integrations.colibri.colibri_mcp_server`),
   adicionou `colab-mcp`, moveu imports tardios para o topo de `build_config()` e
@@ -46,7 +46,7 @@ não comprova o aceite integral.
   via `GIT_ASKPASS`; o token não entra em argv nem no log. Arquivos acima de
   50 MB são recusados. **4 testes** herméticos passam; o push real foi validado em 2026-11-12 e
   é repetido automaticamente.
-- **Verificação local:** 95 testes R1088–R1107, 20 testes da skill Tiangong e 86
+- **Verificação local:** 95 testes R1088–R1107, 4 testes R1109, 20 testes da skill Tiangong e 86
   testes R660+R1088 passam; `doctor` 16 pass / 6 warn / 0 fail. O pacote externo
   `educacao_quantica_bohm-*` (177 MB) permanece fora do Git.
 - **Limite:** contagens de configuração não comprovam disponibilidade, autenticação,
@@ -1221,7 +1221,7 @@ de reutilizar uma conclusão científica ou uma pendência de publicação.
   "agent_count": 337,
   "mcp_count": 32,
   "command_count": 39,
-  "last_suite": "95 testes R1088-R1107 + 20 testes da skill Tiangong + 86 testes R660/R1088 (2026-11-12)"
+  "last_suite": "95 testes R1088-R1107 + 4 testes R1109 + 20 testes da skill Tiangong + 86 testes R660/R1088 (2026-11-12)"
 }
 ```
 
@@ -1237,7 +1237,7 @@ de reutilizar uma conclusão científica ou uma pendência de publicação.
 1. **Triagem das falhas pré-existentes da suíte** — as 13 falhas Colibri foram corrigidas em R1108; os demais escopos seguem sob demanda.
 2. **Molambudos — limite de páginas KDP:** a edição impressa trilíngue (`kdp_tri`) tem 1.143 páginas contra um limite assumido de 828 na Amazon KDP (não validado externamente); precisa de decisão editorial (reduzir corpo, dividir em volumes, ou confirmar limite real no painel KDP) antes de qualquer tentativa de publicação física.
 3. **Molambudos — validações humanas que não podem ser fabricadas:** revisão beta real, revisão de sensibilidade, revisão profissional de tradução nativa (EN/ZH), confirmação do ISBN numa conta KDP real, prova física impressa.
-4. **Push desta rodada:** `origin/main` recebe o commit R1088–R1108; conferir com `git status -sb` e `git log origin/main..HEAD`.
+4. **Push desta rodada:** `origin/main` está em `871c21d` (R1088–R1109); conferir com `git status -sb` e `git log origin/main..HEAD`.
 
 ## Como retomar
 

@@ -27,7 +27,7 @@ task_ids:
 # OpenCode Ecosystem Core
 
 > **Ecossistema completo de orquestração multi-agente, pesquisa científica e automação.**
-> 205 agentes · 303 specs · 160 propostas de pesquisa · Auto-score 97/100
+> 337 agentes · 656 specs · 160 propostas de pesquisa · 39 comandos · 32 MCPs configurados
 
 ---
 
@@ -93,10 +93,10 @@ dism.exe /online /disable-feature /featurename:VirtualMachinePlatform
 
 | Componente | Descrição | Quantidade |
 |---|---|---|
-| **Agentes** | Especialistas por domínio | 205 |
-| **Especificações** | Contratos formais SDD/TDD | 303 |
+| **Agentes** | Especialistas por domínio | 337 |
+| **Especificações** | Contratos formais SDD/TDD | 656 |
 | **Propostas de pesquisa** | Artigos acadêmicos prontos | 160 |
-| **MCPs** | Integrações de memória | 6 |
+| **MCPs** | Servidores configurados (disponibilidade varia por runtime) | 32 |
 | **Scanners** | Análise literária e científica | 8 |
 | **Modelos** | LiteRT-LM, Colibri, Z3, SymPy | Vários |
 
@@ -108,7 +108,7 @@ dism.exe /online /disable-feature /featurename:VirtualMachinePlatform
 ┌─────────────────────────────────────────────────────────┐
 │                    OpenCode Ecosystem                    │
 ├─────────────────────────────────────────────────────────┤
-│  CLI (marceloclaro)  →  Orquestrador  →  205 Agentes    │
+│  CLI (marceloclaro)  →  Orquestrador  →  337 Agentes    │
 │       ↓                   ↓                  ↓           │
 │   Comandos          SDD/TDD Gate        Blackboard A2A  │
 │       ↓                   ↓                  ↓           │
@@ -132,9 +132,9 @@ dism.exe /online /disable-feature /featurename:VirtualMachinePlatform
 
 | Dataset | Descrição | Itens |
 |---|---|---|
-| `research_proposals.json` | Propostas de pesquisa por domínio | 160 |
-| `scientific_datasets_catalog.json` | Datasets científicos reais | 243 |
-| `phd_agents.json` | Agentes PhD especializados | 8 |
+| `data/research_proposals.json` | Propostas de pesquisa por domínio | 160 |
+| `data/scientific_datasets_catalog.json` | Datasets científicos reais | 243 |
+| `data/phd_agents.json` | Agentes PhD especializados | 8 |
 
 ---
 
@@ -156,7 +156,7 @@ dism.exe /online /disable-feature /featurename:VirtualMachinePlatform
 |---|---|
 | [MANUAL.md](MANUAL.md) | Uso da CLI e comandos |
 | [ARCHITECTURE.md](ARCHITECTURE.md) | Arquitetura técnica |
-| [SCIENTIFIC_LAB_V41.md](docs/SCIENTIFIC_LAB_V41.md) | Lab científico v4.1 |
+| [SCIENTIFIC_LAB_V42.md](docs/SCIENTIFIC_LAB_V42.md) | Lab científico v4.2 |
 | [HF_HUB_PROFILE_SETUP.md](docs/HF_HUB_PROFILE_SETUP.md) | Configuração do profile |
 
 ---
