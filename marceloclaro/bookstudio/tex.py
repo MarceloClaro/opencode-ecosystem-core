@@ -198,7 +198,6 @@ class BookDesign:
             "\\usepackage{caption}",
             f"\\captionsetup{{font=small,labelfont=small}}",
             "\\usepackage{enumitem}",
-            "\\usepackage{bookmark}",
         ]
         if self.plots:
             lines += ["\\usepackage{tikz}", "\\usepackage{pgfplots}"]
@@ -215,6 +214,12 @@ class BookDesign:
         ]
         if not self.numbered_sections:
             lines.append("\\setsecnumdepth{none}")
+        # biblatex antes de hyperref; bookmark depois de hyperref (ordem exigida).
+        if self.bibliography:
+            lines += [
+                "\\usepackage[backend=biber,style=authoryear]{biblatex}",
+                "\\IfFileExists{references.bib}{\\addbibresource{references.bib}}{}",
+            ]
         keywords = ", ".join(escape_latex(k) for k in self.keywords)
         hyper = [
             "hidelinks",
@@ -223,11 +228,7 @@ class BookDesign:
         lines.append("\\usepackage[" + ",".join(hyper) + "]{hyperref}")
         if keywords:
             lines.append(f"\\hypersetup{{pdfkeywords={{{keywords}}}}}")
-        if self.bibliography:
-            lines += [
-                "\\usepackage[backend=biber,style=authoryear]{biblatex}",
-                "\\IfFileExists{references.bib}{\\addbibresource{references.bib}}{}",
-            ]
+        lines.append("\\usepackage{bookmark}")
         return "\n".join(lines)
 
 
