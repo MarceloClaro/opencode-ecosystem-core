@@ -82,3 +82,20 @@ sistema operacional e não corrige o bug upstream.
   `mcp list` → `opencode_console connected`; `get_context` → workspace
   `Default`, role `owner`; 13 testes R1110 passaram. O proxy foi reiniciado e a
   config foi recarregada sem perder a conexão.
+
+## Evidência upstream (issue #59806)
+
+- `GET https://opencode.ai/console/api/mcp/eligibility` com o token de membro
+  da integração `opencode`: HTTP 200, `eligible=true`, caller `owner` no
+  workspace `Default`.
+- O mesmo endpoint com o token OAuth emitido para o MCP: HTTP 200,
+  `eligible=false`, sem caller/papel/workspace.
+- `POST https://opencode.ai/console/mcp` com o token de membro: HTTP 200 e
+  `serverInfo.name=opencode_console`; com o token OAuth: HTTP 403 “not enabled
+  for this workspace”. Acrescentar `x-opencode-org-id` não altera o resultado.
+- Diagnóstico reproduzível: `scripts/opencode_console_eligibility.py` (5 testes
+  herméticos; não imprime tokens, e-mail ou IDs).
+- Dossiê com hipótese, correções propostas e limites:
+  `docs/upstream/opencode-59806-mcp-eligibility.md`.
+- A issue permanece aberta; nenhuma correção upstream foi merged. A evidência
+  separa “workspace sem MCP” de “token MCP sem vínculo de workspace”.
