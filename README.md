@@ -223,7 +223,7 @@ revisão literária com LanguageTool estão em
 | **R1081** | direção Piranesi/Pencz, 6 tipos de prancha, provas determinísticas | ✅ 5 testes |
 | **R1082** | capa preta/ouro 422/436 pp, 6 pranchas de prova, caderno local de 8 pp e preflight | ✅ testes locais; uso gráfico pendente |
 | **R1083** | fontes literárias e capas selecionadas passam a ser rastreadas; binários extensos permanecem locais | 🟡 política revista em R1084 |
-| **R1111** | TeX/LuaLaTeX (memoir, fontspec, microtype), QA nativo com pypdf e revisão PT-BR + LanguageTool | ✅ 15 testes; regressão 36 passed/3 skip |
+| **R1111** | TeX/LuaLaTeX (memoir, fontspec, microtype), QA nativo com pypdf e revisão PT-BR + LanguageTool | ✅ 16 testes; regressão 37 passed/3 skip |
 
 **Limites:** a capa selecionada tem 300 DPI, mas ainda não tem CMYK/PDF-X,
 prova física ou confirmação KDP; as 6 pranchas estão a 316–345 DPI no tamanho

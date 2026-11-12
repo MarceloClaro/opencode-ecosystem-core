@@ -28,6 +28,10 @@ cd /home/marceloclaro/opencode-ecosystem-core
 .venv/bin/python -m marceloclaro.book_studio design /tmp/meu-livro \
   --title "Título do Livro" --author "Autor" --trim 160x230mm
 
+# 1b. Ou criar já com 3 capítulos de exemplo
+.venv/bin/python -m marceloclaro.book_studio design /tmp/meu-livro \
+  --title "Título do Livro" --author "Autor" --chapter-count 3
+
 # 2. Editar os capítulos
 $EDITOR /tmp/meu-livro/chapters/01.tex
 
@@ -126,5 +130,5 @@ O teste de integração compila um livro de 3 capítulos quando `latexmk` e
 
 - Demo de fumaça: 10 páginas, 160×230 mm, 2 fontes embutidas, QA sem issues.
 - Demo via CLI: 6 páginas, 160×230 mm, fontes embutidas, QA sem issues.
-- R1111: 15/15 testes; regressão R1071/R1078: 36 passed, 3 skipped.
+- R1111: 16/16 testes; regressão R1071/R1078: 37 passed, 3 skipped.
 - LanguageTool 6.6 pt-BR: amostra com 1 erro, 6 avisos e 7 informativos.

@@ -117,7 +117,7 @@ sem certificação e com limites declarados.
 | Template | `memoir` + LuaLaTeX + `fontspec` + `microtype` + `babel` pt-BR; `biblatex`/`biber` e `makeidx` opcionais |
 | Demo de fumaça | 10 páginas, 160×230 mm, 2 fontes embutidas, 441 caracteres, QA sem issues |
 | Demo via CLI | 6 páginas, 160×230 mm, fontes embutidas, QA sem issues |
-| Testes | 15/15 em `tests/test_r1111_book_design.py`; 36 passed + 3 skipped na regressão R1071/R1078 |
+| Testes | 16/16 em `tests/test_r1111_book_design.py`; 37 passed + 3 skipped na regressão R1071/R1078 |
 | LanguageTool | 6.6, pt-BR, servidor local em `127.0.0.1:8081`; amostra com 1 erro, 6 avisos e 7 informativos |
 | QA | `pypdf` 6.14.2 nativo; `pdfinfo`/`pdffonts` ausentes, fallback exercitado |
 | Limites | QA não é aprovação editorial; LanguageTool é externo; PDF/UA e PDF/X não certificados |

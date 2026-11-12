@@ -78,6 +78,17 @@ def test_write_project_generates_manifest_and_template(tmp_path):
     assert Path(paths["design_json"]).is_file()
 
 
+def test_write_project_multiple_chapters(tmp_path):
+    paths = write_project(tmp_path / "multi", BookDesign(), title="T", author="A",
+                          chapters={"01": "\\chapter{Um}\n\nTexto.\n",
+                                    "02": "\\chapter{Dois}\n\nTexto.\n"})
+    main_tex = Path(paths["main_tex"]).read_text(encoding="utf-8")
+    assert "\\input{chapters/01}" in main_tex
+    assert "\\input{chapters/02}" in main_tex
+    manifest = json.loads(Path(paths["book_json"]).read_text(encoding="utf-8"))
+    assert manifest["chapters"] == ["chapters/01.tex", "chapters/02.tex"]
+
+
 def test_write_project_rejects_unsafe_chapter(tmp_path):
     with pytest.raises(TexError, match="inseguro"):
         write_project(tmp_path / "x", BookDesign(), title="T", author="A",

@@ -533,6 +533,7 @@ def main(argv: list[str] | None = None) -> int:
     design_cmd.add_argument("--trim", default="160x230mm")
     design_cmd.add_argument("--publisher", default="")
     design_cmd.add_argument("--edition", default="1")
+    design_cmd.add_argument("--chapter-count", type=int, default=1)
     design_cmd.add_argument("--bibliography", action="store_true")
     design_cmd.add_argument("--index", action="store_true")
     tex_cmd = sub.add_parser("tex", help="compila main.tex com latexmk/LuaLaTeX")
@@ -560,9 +561,15 @@ def main(argv: list[str] | None = None) -> int:
             width, height = parse_trim(args.trim)
             design = BookDesign(trim_width_mm=width, trim_height_mm=height,
                                 bibliography=args.bibliography, index=args.index)
+            count = max(1, min(50, args.chapter_count))
+            chapters = {
+                f"{index:02d}": f"\\chapter{{Capítulo {index}}}\n\n"
+                                f"Texto do capítulo {index}. Substitua pelo manuscrito.\n"
+                for index in range(1, count + 1)
+            }
             payload = write_project(args.root, design, title=args.title,
                                     author=args.author, publisher=args.publisher,
-                                    edition=args.edition)
+                                    edition=args.edition, chapters=chapters)
         elif args.command == "tex":
             from marceloclaro.bookstudio.tex import compile_project, parse_tex_log, qa_pdf_native
             payload = compile_project(args.root, timeout=args.timeout, clean=args.clean)

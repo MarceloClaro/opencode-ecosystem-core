@@ -30,7 +30,7 @@ com manifesto, capítulos, build e QA físico do PDF.
 |---|---|
 | `/book status [root]` | Motores disponíveis, projeto e capítulos |
 | `/book init <root> --title ... --author ... [--trim 6x9in] [--engine typst\|latex] [--source main.tex]` | Cria `book.json` e capítulo de exemplo |
-| `/book design <root> --title ... --author ... [--trim 160x230mm] [--bibliography] [--index]` | Cria projeto LaTeX `memoir`/LuaLaTeX com design tokens |
+| `/book design <root> --title ... --author ... [--trim 160x230mm] [--chapter-count N] [--bibliography] [--index]` | Cria projeto LaTeX `memoir`/LuaLaTeX com design tokens |
 | `/book tex <root> [--clean] [--timeout 600]` | Compila `main.tex` com `latexmk -lualatex` e roda QA |
 | `/book build <root> [--engine typst\|pandoc\|weasyprint\|latex] [--format pdf\|epub]` | Compila e roda QA |
 | `/book qa <pdf> [--trim 160x230mm]` | Metadados, páginas, trim, fontes e texto |
