@@ -96,7 +96,7 @@ fonte, qual hash e qual limite?”**.
 | Pesquisar um tema e chegar a um artigo | [Pipeline R1051–R1054](docs/SCIENTIFIC_RESEARCH_PIPELINE_R1054.md) | `research project --theme ... --dry-run` |
 | Auditar evidência e claims | [R1054](reports/r1054/README.md), [gate metacognitivo](mci/metacognitive_gate.py) | `research benchmark-meta ...` |
 | Construir ou registrar agentes | [AGENTS.md](AGENTS.md), [catálogo](agents/catalog) | `agentes list` |
-| Diagramar, editar e ilustrar um livro | [Book Studio](reports/r1078/README.md), [R1082](reports/r1082/README.md) | `python3 -m marceloclaro.bookstudio status` |
+| Diagramar, editar e ilustrar um livro | [Book Studio](reports/r1078/README.md), [TeX/R1111](docs/BOOK_STUDIO_TEX_R1111.md) | `python3 -m marceloclaro.book_studio status` |
 | Editar vídeo, dublar e legendar | [Editor universal](docs/EDITOR_VIDEO_UNIVERSAL_R1042.md) | `video_editor --help` |
 | Fazer engenharia reversa local | [REA](docs/REA.md) | `rea status` |
 | Entender a arquitetura completa | [ARCHITECTURE.md](ARCHITECTURE.md), [mapa R916](docs/ARQUITETURA_COMPLETA_CORE_R916.md) | leitura guiada |
@@ -204,12 +204,16 @@ delega ao MCP e mantém `recognize`/`analyze`/`classify` como `unavailable`
 enquanto o backend não for observado. Consciência fenomenal não é desfecho
 mensurável por entropia, informação mútua ou grafo de eventos.
 
-## Book Studio e Molambudos (R1078–R1082)
+## Book Studio e Molambudos (R1078–R1111)
 
 O Book Studio saiu de scripts isolados para um pacote com contratos, cálculos de
 capa KDP, design tokens, gate de licença, manifesto de release e auditoria de
 EPUB. O Molambudos ganhou uma direção de arte Piranesi/Pencz e um caderno de
 provas **local**, sem aprovação para impressão ou distribuição.
+
+O caminho TeX/LuaLaTeX (memoir, fontspec, microtype), o QA nativo de PDF e a
+revisão literária com LanguageTool estão em
+[docs/BOOK_STUDIO_TEX_R1111.md](docs/BOOK_STUDIO_TEX_R1111.md).
 
 | Ciclo | Entrega | Estado |
 |---|---|---|
@@ -219,6 +223,7 @@ provas **local**, sem aprovação para impressão ou distribuição.
 | **R1081** | direção Piranesi/Pencz, 6 tipos de prancha, provas determinísticas | ✅ 5 testes |
 | **R1082** | capa preta/ouro 422/436 pp, 6 pranchas de prova, caderno local de 8 pp e preflight | ✅ testes locais; uso gráfico pendente |
 | **R1083** | fontes literárias e capas selecionadas passam a ser rastreadas; binários extensos permanecem locais | 🟡 política revista em R1084 |
+| **R1111** | TeX/LuaLaTeX (memoir, fontspec, microtype), QA nativo com pypdf e revisão PT-BR + LanguageTool | ✅ 15 testes; regressão 36 passed/3 skip |
 
 **Limites:** a capa selecionada tem 300 DPI, mas ainda não tem CMYK/PDF-X,
 prova física ou confirmação KDP; as 6 pranchas estão a 316–345 DPI no tamanho

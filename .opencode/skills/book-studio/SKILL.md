@@ -13,11 +13,13 @@ description: >
 policy:
   allow_implicit_invocation: false
   disable-model-invocation: false
-round: R1071
-spec: SPEC-935-R1071-book-studio.md
+round: R1111
+spec: SPEC-935-R1111-book-studio-tex.md
 ---
 
-# Book Studio (R1071)
+# Book Studio (R1071/R1111)
+
+Base: R1071/R1078; esta revisão acrescenta TeX/LuaLaTeX e revisão literária (R1111).
 
 O Core deixa de apenas gerar manuscritos: passa a manter um **projeto de livro**
 com manifesto, capítulos, build e QA físico do PDF.
@@ -48,6 +50,36 @@ com manifesto, capítulos, build e QA físico do PDF.
 O Core **não copia** código GPL/AGPL. Scribus/Vivliostyle/CaSILE ficam no
 registro como engines externas.
 
+## Toolchain TeX (R1111)
+
+- TinyTeX em `~/.TinyTeX`; binários ligados em `~/.local/bin` (`latexmk` 4.89,
+  LuaHBTeX 1.24.0, `biber` 2.22).
+- Fontes Libertinus em
+  `~/.TinyTeX/texmf-dist/fonts/opentype/public/libertinus-fonts`.
+- O Core não embute TeX Live: `book tex` invoca `latexmk -lualatex` externo.
+- `book build --engine latex` é o caminho legado (`latexmk -pdf`);
+  `book tex` é o caminho `memoir` + LuaLaTeX + `fontspec` + `microtype`.
+- Sem `shell-escape`; o build não usa rede.
+
+## Revisão literária (R1111)
+
+- `book review` aplica regras nativas: aspas retas, reticências, travessão,
+  espaço antes de pontuação, muletas, clichês, repetição próxima, frase ou
+  parágrafo longo, advérbios em `-mente` e aspas desbalanceadas.
+- `--languagetool` consulta `http://127.0.0.1:8081/v2/check` em `pt-BR`. Se o
+  servidor não estiver ativo, o relatório declara a indisponibilidade e mantém
+  o gate nativo.
+- Iniciar o servidor:
+
+  ```bash
+  ~/.local/share/opencode-core/jre/bin/java \
+    -cp ~/.local/share/opencode-core/languagetool/languagetool-server.jar \
+    org.languagetool.server.HTTPServer --port 8081
+  ```
+
+- Todo relatório tem `human_review_required=true` e
+  `external_validation=false`; nenhum achado aprova o texto.
+
 ## Projeto Molambudos
 
 ```bash
@@ -68,9 +100,16 @@ Manifesto: `book.json` no projeto, `engine=latex`,
 4. Não publicar, não enviar à KDP e não declarar PDF/X sem inspeção externa.
 5. Scribus/Vivliostyle/CaSILE exigem decisão e instalação externas.
 6. Nenhuma validação externa é inferida de QA técnico.
+7. `book tex` não usa `shell-escape` e não declara PDF/UA ou PDF/X.
+8. `book review` é heurístico: não aprova, não atribui nota e não substitui
+   revisão humana; LanguageTool pode estar indisponível ou errar.
+9. Nenhum relatório pode usar "aprovado", "10/10", "publicável" ou
+   "Qualis" sem validação externa explícita.
 
 ## Limites
 
 - QA não avalia estética, voz, ritmo, verossimilhança ou adequação editorial.
 - Não substitui revisão humana, prova de página, leitura de galerada ou parecer.
 - EPUB gerado por Pandoc não preserva necessariamente o layout do PDF.
+- LanguageTool é externo e opcional; a indisponibilidade é declarada no relatório.
+- Regras nativas de revisão produzem falsos positivos e falsos negativos.

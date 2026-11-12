@@ -567,7 +567,14 @@ def main(argv: list[str] | None = None) -> int:
             from marceloclaro.bookstudio.tex import compile_project, parse_tex_log, qa_pdf_native
             payload = compile_project(args.root, timeout=args.timeout, clean=args.clean)
             payload["log_findings"] = parse_tex_log(payload["log"]) if payload.get("log") else []
-            payload["qa"] = qa_pdf_native(payload["pdf"]) if payload.get("pdf") else None
+            if payload.get("pdf"):
+                try:
+                    trim = load_manifest(args.root).trim
+                except BookError:
+                    trim = None
+                payload["qa"] = qa_pdf_native(payload["pdf"], trim=trim)
+            else:
+                payload["qa"] = None
         elif args.command == "review":
             from marceloclaro.bookstudio.review import review_file
             payload = review_file(args.path, use_languagetool=args.languagetool,

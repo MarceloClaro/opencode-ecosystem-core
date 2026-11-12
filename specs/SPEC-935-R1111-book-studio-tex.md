@@ -113,7 +113,7 @@ sem certificação e com limites declarados.
 | Item | Resultado |
 |---|---|
 | TinyTeX | TeX Live 2026, LuaHBTeX 1.24.0, latexmk 4.89 e biber 2.22 em `~/.TinyTeX` |
-| Fontes | Libertinus Serif/Sans/Mono OTF instaladas; fallback TeX Gyre/Latin Modern disponível |
+| Fontes | Libertinus Serif/Sans/Mono OTF instaladas; fallback TeX Gyre/Latin Modern disponíveis |
 | Template | `memoir` + LuaLaTeX + `fontspec` + `microtype` + `babel` pt-BR; `biblatex`/`biber` e `makeidx` opcionais |
 | Demo de fumaça | 10 páginas, 160×230 mm, 2 fontes embutidas, 441 caracteres, QA sem issues |
 | Demo via CLI | 6 páginas, 160×230 mm, fontes embutidas, QA sem issues |
@@ -129,4 +129,7 @@ python3 -m marceloclaro.book_studio design /tmp/livro --title "Livro" --author "
 python3 -m marceloclaro.book_studio tex /tmp/livro --clean
 python3 -m marceloclaro.book_studio review /tmp/texto.txt --languagetool
 ```
+
+Guia operacional: `docs/BOOK_STUDIO_TEX_R1111.md`. Skill `book-studio`
+atualizada com os comandos `design`, `tex` e `review`.
 
