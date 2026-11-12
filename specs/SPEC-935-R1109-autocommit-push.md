@@ -51,8 +51,8 @@ credencial e não havia mecanismo de checkpoint automático.
 - `bash -n scripts/autocommit_push.sh scripts/install_autocommit_hooks.sh
   scripts/install_autocommit_timer.sh` → OK.
 - `doctor` → 16 pass, 6 warn, 0 fail.
-- Push real: pendente até o operador preencher
-  `~/.config/opencode/github-pat`; o timer repete a tentativa a cada 2 min.
+- Push real: validado em 2026-11-12; commits `6bb51e9` e `26c450e` estão em
+  `origin/main`. O token fica em `~/.config/opencode/github-pat` (600).
 
 ## Limites
 

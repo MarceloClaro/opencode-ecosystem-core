@@ -196,7 +196,7 @@ desempenho de modelo.
 | **R1106** | `EcosystemRunAdapter` converte `AutonomousCoordinator` em `Response` fail-closed | ✅ testado com coordenador falso |
 | **R1107** | `OpenCodeCliAdapter` executa o CLI isolado, sem recursão e sem ferramentas | ✅ segurança testada; execução real depende de provider |
 | **R1108** | reconciliação de configuração/documentação, restauração do `federation/activated.json` válido e publicação da skill Tiangong em `.opencode/skills/tiangong-harness` | ✅ testes locais |
-| **R1109** | checkpoint automático: `scripts/autocommit_push.sh`, hook `post-commit` e timer systemd de 2 min; PAT lido de arquivo `600`, guarda de 50 MB e log fora do repositório | ✅ 4 testes; push real depende do PAT |
+| **R1109** | checkpoint automático: `scripts/autocommit_push.sh`, hook `post-commit` e timer systemd de 2 min; PAT lido de arquivo `600`, guarda de 50 MB e log fora do repositório | ✅ 4 testes; push real validado em 2026-11-12 |
 
 **Limites:** os adaptadores R1106–R1107 não foram executados contra modelos
 reais; o harness mede o adaptador, não a qualidade científica. A skill Tiangong
@@ -443,7 +443,7 @@ não é aceite editorial.
 | R1088–R1089 | ✅ MCP local | Colibri recuperado, `colab-mcp` e servidor Tiangong com `unavailable` honesto |
 | R1103–R1107 | 🧪 pesquisa e harness | dossiê IIT/autonomia, correções P0, tarefas reservadas e adaptadores; sem execução real de modelo |
 | R1108 | ✅ reconciliação | configuração, federação e skill Tiangong publicadas; documentação sincronizada |
-| R1109 | ✅ automação git | checkpoint, hook e timer; push real depende do PAT do operador |
+| R1109 | ✅ automação git | checkpoint, hook e timer; push real validado em 2026-11-12 |
 | Próximos ciclos | 🧭 | backend real de submissão, perfis brasileiros, UI, tabelas e validação externa assistida |
 
 O roadmap é uma direção, não uma promessa de data. Cada ciclo só é marcado
