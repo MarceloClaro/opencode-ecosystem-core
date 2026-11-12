@@ -1,6 +1,6 @@
 # SPEC-935-R1111 — Book Studio Universal: TeX, tipografia e revisão rigorosa
 
-**Status:** em implementação (fase TeX + revisão)
+**Status:** fase TeX + revisão implementada e verificada (R1111)
 **Data:** 2026-11-12
 **Base:** R1071 (Book Studio) e R1078 (Book Studio Universal, fase 0)
 **Objetivo:** tornar o Book Studio um editor universal de livros: diagramação
@@ -107,3 +107,26 @@ A fase está pronta quando o demo de 3 capítulos compila em PDF 160×230 mm com
 fontes embutidas, o QA nativo reporta sem issues, o gate nativo encontra e
 explica achados em um texto de teste, e a suíte R1111 passa — sem publicação,
 sem certificação e com limites declarados.
+
+## 9. Evidência da implementação (2026-11-12)
+
+| Item | Resultado |
+|---|---|
+| TinyTeX | TeX Live 2026, LuaHBTeX 1.24.0, latexmk 4.89 e biber 2.22 em `~/.TinyTeX` |
+| Fontes | Libertinus Serif/Sans/Mono OTF instaladas; fallback TeX Gyre/Latin Modern disponível |
+| Template | `memoir` + LuaLaTeX + `fontspec` + `microtype` + `babel` pt-BR; `biblatex`/`biber` e `makeidx` opcionais |
+| Demo de fumaça | 10 páginas, 160×230 mm, 2 fontes embutidas, 441 caracteres, QA sem issues |
+| Demo via CLI | 6 páginas, 160×230 mm, fontes embutidas, QA sem issues |
+| Testes | 15/15 em `tests/test_r1111_book_design.py`; 36 passed + 3 skipped na regressão R1071/R1078 |
+| LanguageTool | 6.6, pt-BR, servidor local em `127.0.0.1:8081`; amostra com 1 erro, 6 avisos e 7 informativos |
+| QA | `pypdf` 6.14.2 nativo; `pdfinfo`/`pdffonts` ausentes, fallback exercitado |
+| Limites | QA não é aprovação editorial; LanguageTool é externo; PDF/UA e PDF/X não certificados |
+
+Comandos verificados:
+
+```bash
+python3 -m marceloclaro.book_studio design /tmp/livro --title "Livro" --author "Autor"
+python3 -m marceloclaro.book_studio tex /tmp/livro --clean
+python3 -m marceloclaro.book_studio review /tmp/texto.txt --languagetool
+```
+

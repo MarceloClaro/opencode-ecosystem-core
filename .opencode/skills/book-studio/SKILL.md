@@ -3,10 +3,12 @@ name: book-studio
 description: >
   Estúdio editorial do Core para livros: manifesto, build PDF/EPUB e QA técnico.
   Use para diagramar manuscritos Markdown com Typst/Pandoc/WeasyPrint, compilar
-  projetos LaTeX existentes e revisar PDF (páginas, trim, fontes embutidas,
-  metadados, texto). Scribus, Vivliostyle e CaSILE são engines externas: o Core
-  verifica presença e prepara handoff, sem copiar código GPL/AGPL. Não publica,
-  não declara qualidade editorial sem revisão humana e não substitui leitura
+  projetos LaTeX com TinyTeX/LuaLaTeX (memoir, fontspec, microtype) e revisar
+  PDF (páginas, trim, fontes embutidas, metadados, texto) e manuscritos
+  (norma PT-BR, consistência, repetições, clichês). LanguageTool local é
+  opcional. Scribus, Vivliostyle e CaSILE são engines externas: o Core verifica
+  presença e prepara handoff, sem copiar código GPL/AGPL. Não publica, não
+  declara qualidade editorial sem revisão humana e não substitui leitura
   crítica.
 policy:
   allow_implicit_invocation: false
@@ -26,8 +28,11 @@ com manifesto, capítulos, build e QA físico do PDF.
 |---|---|
 | `/book status [root]` | Motores disponíveis, projeto e capítulos |
 | `/book init <root> --title ... --author ... [--trim 6x9in] [--engine typst\|latex] [--source main.tex]` | Cria `book.json` e capítulo de exemplo |
+| `/book design <root> --title ... --author ... [--trim 160x230mm] [--bibliography] [--index]` | Cria projeto LaTeX `memoir`/LuaLaTeX com design tokens |
+| `/book tex <root> [--clean] [--timeout 600]` | Compila `main.tex` com `latexmk -lualatex` e roda QA |
 | `/book build <root> [--engine typst\|pandoc\|weasyprint\|latex] [--format pdf\|epub]` | Compila e roda QA |
 | `/book qa <pdf> [--trim 160x230mm]` | Metadados, páginas, trim, fontes e texto |
+| `/book review <texto> [--languagetool] [--endpoint URL]` | Gate literário nativo PT-BR + LanguageTool |
 
 ## Motores
 

@@ -202,11 +202,12 @@ def status(root: str | Path | None = None) -> Dict[str, Any]:
                          "version": _version(path) if path else None}
     qa_tools = {name: bool(shutil.which(name)) for name in
                 ("pdfinfo", "pdffonts", "pdftotext")}
+    build_capable = [name for name in ("typst", "pandoc", "weasyprint", "latex")
+                     if engines[name]["available"]]
     payload: Dict[str, Any] = {
-        "status": "ready" if engines["typst"]["available"] or engines["pandoc"]["available"]
-        else "blocked",
+        "status": "ready" if build_capable else "blocked",
         "engines": engines, "qa_tools": qa_tools,
-        "default_engine": "typst" if engines["typst"]["available"] else "pandoc",
+        "default_engine": build_capable[0] if build_capable else "typst",
         "external_engines": ["scribus", "vivliostyle", "casile"],
         "policy": "motores GPL/AGPL permanecem externos; sem cópia para o Core",
         "external_validation": False,
@@ -525,6 +526,24 @@ def main(argv: list[str] | None = None) -> int:
     qa_cmd = sub.add_parser("qa")
     qa_cmd.add_argument("pdf")
     qa_cmd.add_argument("--trim")
+    design_cmd = sub.add_parser("design", help="cria projeto LaTeX memoir/LuaLaTeX")
+    design_cmd.add_argument("root")
+    design_cmd.add_argument("--title", required=True)
+    design_cmd.add_argument("--author", required=True)
+    design_cmd.add_argument("--trim", default="160x230mm")
+    design_cmd.add_argument("--publisher", default="")
+    design_cmd.add_argument("--edition", default="1")
+    design_cmd.add_argument("--bibliography", action="store_true")
+    design_cmd.add_argument("--index", action="store_true")
+    tex_cmd = sub.add_parser("tex", help="compila main.tex com latexmk/LuaLaTeX")
+    tex_cmd.add_argument("root")
+    tex_cmd.add_argument("--timeout", type=int, default=600)
+    tex_cmd.add_argument("--clean", action="store_true")
+    review_cmd = sub.add_parser("review", help="gate literário nativo + LanguageTool")
+    review_cmd.add_argument("path")
+    review_cmd.add_argument("--languagetool", action="store_true")
+    review_cmd.add_argument("--endpoint", default="http://127.0.0.1:8081/v2/check")
+    review_cmd.add_argument("--language", default="pt-BR")
     args = parser.parse_args(argv)
     try:
         if args.command == "status":
@@ -536,9 +555,26 @@ def main(argv: list[str] | None = None) -> int:
         elif args.command == "build":
             payload = build(args.root, engine=args.engine, output_format=args.format,
                             out=args.out, timeout=args.timeout)
+        elif args.command == "design":
+            from marceloclaro.bookstudio.tex import BookDesign, parse_trim, write_project
+            width, height = parse_trim(args.trim)
+            design = BookDesign(trim_width_mm=width, trim_height_mm=height,
+                                bibliography=args.bibliography, index=args.index)
+            payload = write_project(args.root, design, title=args.title,
+                                    author=args.author, publisher=args.publisher,
+                                    edition=args.edition)
+        elif args.command == "tex":
+            from marceloclaro.bookstudio.tex import compile_project, parse_tex_log, qa_pdf_native
+            payload = compile_project(args.root, timeout=args.timeout, clean=args.clean)
+            payload["log_findings"] = parse_tex_log(payload["log"]) if payload.get("log") else []
+            payload["qa"] = qa_pdf_native(payload["pdf"]) if payload.get("pdf") else None
+        elif args.command == "review":
+            from marceloclaro.bookstudio.review import review_file
+            payload = review_file(args.path, use_languagetool=args.languagetool,
+                                  endpoint=args.endpoint, language=args.language)
         else:
             payload = _qa_pdf(Path(args.pdf).expanduser().resolve(), args.trim)
-    except (BookError, OSError, subprocess.TimeoutExpired) as exc:
+    except (BookError, ValueError, OSError, subprocess.TimeoutExpired) as exc:
         payload = {"status": "blocked", "error": str(exc), "executed": False}
         print(json.dumps(payload, ensure_ascii=False, indent=2))
         return 2
