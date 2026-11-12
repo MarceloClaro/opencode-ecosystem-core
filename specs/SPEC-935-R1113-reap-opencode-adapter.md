@@ -1,3 +1,12 @@
+---
+spec_id: SPEC-935-R1113
+component: integrations.reap_adapter
+title: Adaptador REAP para OpenCode com dry-run, manifesto e rollback
+version: 1.0.0
+status: implemented
+test_file: tests/test_reap_adapter.py
+---
+
 # SPEC-935-R1113 — Adaptador REAP para OpenCode
 
 ## Objetivo

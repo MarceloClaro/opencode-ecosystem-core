@@ -1,3 +1,12 @@
+---
+spec_id: SPEC-935-R1114
+component: rag.evidence_ledger
+title: RAG Evidence Ledger para proveniência de embeddings e perguntas
+version: 1.0.0
+status: implemented
+test_file: tests/test_rag_evidence_ledger.py
+---
+
 # SPEC-935-R1114 — RAG Evidence Ledger
 
 ## Objetivo

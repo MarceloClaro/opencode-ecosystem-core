@@ -1,3 +1,12 @@
+---
+spec_id: SPEC-935-R1115
+component: .opencode.skills.reap-prompts
+title: Roteador REAP como uma skill índice
+version: 1.0.0
+status: implemented
+test_file: tests/test_reap_router.py
+---
+
 # SPEC-935-R1115 — Roteador REAP (uma skill índice, não 26)
 
 ## Objetivo

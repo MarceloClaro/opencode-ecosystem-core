@@ -1,3 +1,12 @@
+---
+spec_id: SPEC-935-R1112
+component: .opencode.skills.reverse-engineer-anything
+title: Alinhamento da skill REA v37 para v49
+version: 1.0.0
+status: implemented
+test_file: tests/test_rea_skill_alignment.py
+---
+
 # SPEC-935-R1112 — Alinhamento da skill REA v37 → v49
 
 ## Objetivo
