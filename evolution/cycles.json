@@ -24091,6 +24091,36 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1116-EVOL",
+      "objective": "Implementar SPEC-935-R1116: adaptador somente leitura do rea-video",
+      "changes": [
+        "SPEC-935-R1116 com frontmatter e status implemented",
+        "integrations/rea_video_cli.py: status, doctor, decompose, summary",
+        "Bloqueio explicito de remake-run e de argumentos pagos",
+        "Allowlist de ambiente, timeout e raizes de saida autorizadas",
+        "Inventario de artefatos com SHA-256 e bloco de verificacao local",
+        "15 testes em tests/test_rea_video_cli.py"
+      ],
+      "score": 8.0,
+      "lessons": [
+        "Adaptador de ferramenta externa deve separar analise local de comando pago; bloquear remake-run por padrao.",
+        "Allowlist de ambiente impede vazamento de segredos para subprocessos.",
+        "dry-run sem escrita e pre-condicao para consentimento explicito.",
+        "Raizes de saida autorizadas evitam escrita fora do sandbox."
+      ],
+      "timestamp": 1794525773.3204863,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
