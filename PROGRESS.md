@@ -41,6 +41,11 @@ não comprova o aceite integral.
   executado, nenhuma superioridade de política declarada.
 - **R1108** reconciliou configuração e documentação, publicou a skill Tiangong em
   `.opencode/skills/tiangong-harness` e removeu stubs que simulavam resultados.
+- **R1109** adicionou `scripts/autocommit_push.sh`, hook `post-commit` e timer
+  systemd `--user` de 2 minutos. O PAT é lido de `~/.config/opencode/github-pat`
+  via `GIT_ASKPASS`; o token não entra em argv nem no log. Arquivos acima de
+  50 MB são recusados. **4 testes** herméticos passam; o push real depende do
+  PAT do operador e é repetido automaticamente.
 - **Verificação local:** 95 testes R1088–R1107, 20 testes da skill Tiangong e 86
   testes R660+R1088 passam; `doctor` 16 pass / 6 warn / 0 fail. O pacote externo
   `educacao_quantica_bohm-*` (177 MB) permanece fora do Git.

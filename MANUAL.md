@@ -344,6 +344,22 @@ enquanto o backend não for observado. `vrp_handler solve` usa heurística
 clássica e declara `quantum=false` e `optimality=not_proven`. Para desativar,
 use `enabled: false` na entrada `mcp.tiangong-hdr` de `opencode.json`.
 
+## Automação de commit e push (R1109)
+
+O Core mantém três camadas para não deixar produção local fora do Git:
+
+```bash
+./scripts/install_autocommit_hooks.sh   # push após cada commit
+./scripts/install_autocommit_timer.sh   # checkpoint a cada 2 min
+./scripts/autocommit_push.sh            # commit + push imediatos
+```
+
+O PAT é lido de `~/.config/opencode/github-pat` (permissão `600`) ou de
+`GITHUB_TOKEN`; nunca aparece em `argv` ou no log. O log fica em
+`~/.local/state/opencode/autocommit-push.log`. Sem token, o commit permanece
+local e o timer repete a tentativa. Detalhes:
+[Automação git R1109](docs/operations/AUTOCOMMIT_PUSH_R1109.md).
+
 ## Limites e solução de problemas
 
 | Situação | Ação inicial |

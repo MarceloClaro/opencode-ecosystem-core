@@ -66,6 +66,7 @@ não precise adivinhar onde está a verdade, a especificação ou o limite.
 | R1105 | [Spec P1](../specs/SPEC-935-R1105-autonomy-holdout-p1.md) | harness de autonomia e tarefas reservadas |
 | R1106 | [Spec](../specs/SPEC-935-R1106-ecosystem-run-adapter.md) | adaptador do coordenador para o harness |
 | R1107 | [Spec](../specs/SPEC-935-R1107-opencode-cli-adapter.md) | execução isolada do OpenCode CLI |
+| R1109 | [Automação git](operations/AUTOCOMMIT_PUSH_R1109.md) | checkpoint, hook, timer e PAT |
 | — | [Verificação P0](research/iit-autonomia-r1103/p0-verification.md) | recibos RED/GREEN e contraprovas |
 | — | [Verificação P1](research/iit-autonomia-r1103/p1-verification.md) | dry-run, limites e ausência de execução real |
 

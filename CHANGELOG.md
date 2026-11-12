@@ -13,6 +13,7 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.
 - **Autonomia e métricas (SPEC-935-R1103–R1107)**: dossiê `docs/research/iit-autonomia-r1103/` com 12 fontes e 11 lacunas; correções P0 em `mci/iiit_metrics.py` e `mci/__main__.py`; harness `benchmarks/autonomy_harness.py` com tarefas reservadas; `EcosystemRunAdapter` e `OpenCodeCliAdapter`.
 - **MCP Colibri recuperado (SPEC-935-R1088)**: comando migrado para `python -m integrations.colibri.colibri_mcp_server`, validação JSON-RPC antes do provedor e entrada `colab-mcp`.
 - **Skills MindSpore**: `skills/mindspore-config/` e `.opencode/skills/mindspore-summary/` para parsing, validação e resumo de configurações JSON.
+- **Checkpoint automático (SPEC-935-R1109)**: `scripts/autocommit_push.sh`, hook `post-commit` e timer systemd `--user` de 2 minutos; commit e push automáticos, com PAT lido de arquivo `600` via `GIT_ASKPASS`, guarda de 50 MB e log fora do repositório.
 
 ### Corrigido
 - `federation/activated.json` restaurado como JSON válido (`federation-activated-mcp/v2`) após ter sido sobrescrito por Markdown; `federation/activation.md` reflete o smoke real do `playwright`.
@@ -31,7 +32,7 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.
 - `pytest tests/test_r1088_mcp_recovery.py tests/test_r1089_tiangong_mcp.py tests/test_r1103_iit_research.py tests/test_r1104_iit_metrics_p0.py tests/test_r1105_autonomy_harness.py tests/test_r1106_ecosystem_adapter.py tests/test_r1107_opencode_cli_adapter.py` → **95 passed**.
 - `pytest .opencode/skills/tiangong-harness/*/test_*_skill.py` → **20 passed**.
 - `pytest tests/test_r660_mcp_validation.py tests/test_r1088_mcp_recovery.py` → **86 passed**.
-- `pytest` da bateria final (R394, R621, R660, R1088–R1107, federação, R652 e skills Tiangong) → **322 passed**.
+- `pytest` da bateria final (R394, R621, R660, R1088–R1109, federação, R652 e skills Tiangong) → **322 passed** + **4 passed** R1109.
 - `doctor` (`.venv/bin/python -m marceloclaro.cli doctor`) → **16 pass, 6 warn, 0 fail**.
 - Limites: nenhum modelo real foi executado pelos adaptadores R1106–R1107; nenhum Φ foi calculado; nenhuma validação externa, publicação ou aceite editorial foi emitido.
 
