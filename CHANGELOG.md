@@ -7,6 +7,7 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.
 ## [Não lançado] - 2026-11-12
 
 ### Adicionado
+- **Proxy local do `opencode_console` (SPEC-935-R1110)**: `scripts/opencode_console_proxy.py` lê o token de membro da integração `opencode` no banco local e injeta `Authorization` no transporte Streamable HTTP, sem gravar segredo no `opencode.json`. Unit systemd `--user` em `~/.config/systemd/user/opencode-console-proxy.service`, 13 testes herméticos e `mcp list` conectado com 11 ferramentas.
 - **MCP Tiangong local (SPEC-935-R1089-MCP)**: servidor stdio `integrations/tiangong_mcp.py`, com `tiangong_catalog`, `hdr_handler`, `rsir_handler` e `vrp_handler`; PNG 8 bits sem Pillow, vetor 784, comparação L1/L2/cosseno e CVRP clássico. `recognize`, `analyze`, `classify` e `upload` retornam `unavailable`, sem dígito, rótulo ou confiança fabricados. Entrada `tiangong-hdr` no gerador e em `opencode.json`.
 - **Skill Tiangong publicada (R1108)**: `.opencode/skills/tiangong-harness/{HDR,RSIR,VRP}` agora contém `SKILL.md`, `skill.py` que delega ao MCP e testes próprios; os stubs que simulavam resultados foram substituídos por contrato honesto.
 - **Agentes Tiangong**: três cartões em `agents/catalog/tiangong/` com evidência REA, hashes e limites.
@@ -30,6 +31,7 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.
 
 ### Verificação
 - `pytest tests/test_r1088_mcp_recovery.py tests/test_r1089_tiangong_mcp.py tests/test_r1103_iit_research.py tests/test_r1104_iit_metrics_p0.py tests/test_r1105_autonomy_harness.py tests/test_r1106_ecosystem_adapter.py tests/test_r1107_opencode_cli_adapter.py` → **95 passed**.
+- `pytest tests/test_r1110_opencode_console_proxy.py` → **13 passed**; proxy real `--check` → HTTP 200 (`server=opencode_console`); `mcp list` → `opencode_console connected`; `get_context` → workspace `Default`, role `owner`.
 - `pytest .opencode/skills/tiangong-harness/*/test_*_skill.py` → **20 passed**.
 - `pytest tests/test_r660_mcp_validation.py tests/test_r1088_mcp_recovery.py` → **86 passed**.
 - `pytest` da bateria final (R394, R621, R660, R1088–R1109, federação, R652 e skills Tiangong) → **322 passed** + **4 passed** R1109.
