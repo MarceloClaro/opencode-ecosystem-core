@@ -3,7 +3,7 @@ name: reap-prompts
 description: Roteador da biblioteca REA-Prompts (REAP) para investigações de engenharia reversa com o REA. Use quando a tarefa pedir uma receita de investigação por alvo — feature tracing, binário nativo, Electron/JavaScript, Android, firmware, kernel, malware, deobfuscação, Go/Rust, clonagem comportamental ou comparação de versões. Carregue o pack correspondente em references/packs/ sob demanda; não é a skill de ferramentas (essa é reverse-engineer-anything).
 metadata:
   version: "1"
-  source: "https://github.com/JuneYaooo/rea-prompts"
+  source: "https://github.com/joasasantos/rea-prompts"
   fork: "https://github.com/MarceloClaro/REA-Prompts"
   license: "MIT"
   packs: 26
