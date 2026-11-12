@@ -2,6 +2,7 @@
 
 **Issue:** [anomalyco/opencode#59806](https://github.com/anomalyco/opencode/issues/59806)
 **Comentário publicado:** [issuecomment-6835517254](https://github.com/anomalyco/opencode/issues/59806#issuecomment-6835517254)
+**PR aberto:** [anomalyco/opencode#63608](https://github.com/anomalyco/opencode/pull/63608)
 **Estado observado:** aberto; reaberto em 2026-11-03.
 **Versão testada:** OpenCode `2.2.7` (Linux, serviço/CLI), workspace com papel
 `owner`.

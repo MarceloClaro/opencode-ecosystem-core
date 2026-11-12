@@ -105,5 +105,7 @@ sistema operacional e não corrige o bug upstream.
   `docs/upstream/opencode-59806-mcp-eligibility.md`.
 - Comentário upstream publicado com a evidência (sem tokens/PII):
   [issuecomment-6835517254](https://github.com/anomalyco/opencode/issues/59806#issuecomment-6835517254).
+- PR upstream aberto com preflight de elegibilidade e mensagem acionável:
+  [anomalyco/opencode#63608](https://github.com/anomalyco/opencode/pull/63608).
 - A issue permanece aberta; nenhuma correção upstream foi merged. A evidência
   separa “workspace sem MCP” de “token MCP sem vínculo de workspace”.
