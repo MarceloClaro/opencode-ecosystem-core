@@ -127,6 +127,21 @@ class _UpstreamHandler(BaseHTTPRequestHandler):
         self.wfile.write(type(self).response_body)
         self.wfile.flush()
 
+    def do_GET(self):
+        type(self).requests.append({
+            "method": "GET",
+            "path": self.path,
+            "headers": dict(self.headers),
+            "body": b"",
+        })
+        self.send_response(type(self).response_status)
+        for name, value in type(self).response_headers.items():
+            self.send_header(name, value)
+        self.send_header("Connection", "close")
+        self.end_headers()
+        self.wfile.write(type(self).response_body)
+        self.wfile.flush()
+
     def log_message(self, *args):
         return
 
@@ -186,8 +201,30 @@ def test_proxy_injects_member_token_and_streams_sse(tmp_path, upstream):
         proxy.server_close()
 
 
-def test_proxy_rejects_missing_token_without_calling_upstream(tmp_path, upstream):
-    db = _make_db(tmp_path, [])
+def test_proxy_streams_get_sse(tmp_path, upstream):
+    now_ms = int(time.time() * 1000)
+    db = _make_db(tmp_path, [
+        ("opencode", _credential("test-token", now_ms + 3_600_000), 1, 1),
+    ])
+    proxy = _start_proxy(upstream, db)
+    try:
+        request = urllib.request.Request(
+            f"http://127.0.0.1:{proxy.server_port}/mcp",
+            method="GET",
+            headers={"Accept": "text/event-stream"},
+        )
+        with urllib.request.urlopen(request, timeout=10) as response:
+            body = response.read()
+        assert response.status == 200
+        assert body == _UpstreamHandler.response_body
+        assert _UpstreamHandler.requests[-1]["method"] == "GET"
+        assert _UpstreamHandler.requests[-1]["headers"]["Authorization"] == "Bearer test-token"
+    finally:
+        proxy.shutdown()
+        proxy.server_close()
+
+
+def test_proxy_rejects_missing_token_without_calling_upstream(tmp_path, upstream):    db = _make_db(tmp_path, [])
     proxy = _start_proxy(upstream, db)
     try:
         with pytest.raises(urllib.error.HTTPError) as excinfo:
