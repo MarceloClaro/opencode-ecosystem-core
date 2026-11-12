@@ -1,0 +1,221 @@
+{
+  "round_id": "R1103",
+  "generated_at": "2026-11-12T03:49:12.837406+00:00",
+  "scope": "legacy_counterexamples_not_benchmark",
+  "production_unchanged_during_probes": true,
+  "state_isolation": {
+    "audit_dir": "/tmp/opencode/r1103-audit-cljnfi10",
+    "MCI_STATE_DIR": "/tmp/opencode/r1103-audit-cljnfi10/state/mci",
+    "EVOLUTION_STATE_PATH": "/tmp/opencode/r1103-audit-cljnfi10/state/cycles.json",
+    "production_files_hashed": [
+      ".mci_state/shared_memory.json",
+      "evolution/cycles.json"
+    ]
+  },
+  "source_sha256": {
+    "mci/iiit_metrics.py": "2007612e4a6934201764a15e498b2afb47b619577e6c7e96fc694e000074c63b",
+    "mci/__main__.py": "ed7354ecd146590a1a57e6ea2cc499cd647ba43183ac5f32fb44320ba1e6f658",
+    "mci/metabus.py": "2f70d0da69be020b7120034032c524a34170acf330ce2e07e842712968b14221",
+    "evolution/cycles.py": "af59f98a9f280747a5da4c216df9afedbc625aaa125fb78fea63956e61be1f49"
+  },
+  "production_state_sha256": {
+    "before": {
+      ".mci_state/shared_memory.json": "e700897f9d72bfdfca246d7865cf662012d8bbe4c07132cb5d972c819b43f9cc",
+      "evolution/cycles.json": "66e25696050e80b4ead8bdc1fb674b5497e4ed7806f9f730ead743a59a375209"
+    },
+    "after": {
+      ".mci_state/shared_memory.json": "e700897f9d72bfdfca246d7865cf662012d8bbe4c07132cb5d972c819b43f9cc",
+      "evolution/cycles.json": "66e25696050e80b4ead8bdc1fb674b5497e4ed7806f9f730ead743a59a375209"
+    }
+  },
+  "observations": [
+    {
+      "id": "G01_hash_nao_reprodutivel",
+      "path": "mci/iiit_metrics.py",
+      "locator": "357-358",
+      "expected_contract": "O mesmo JSON de traces deve produzir o mesmo mutual_info e score em processos distintos.",
+      "observed": {
+        "by_seed": {
+          "1": {
+            "score": 0.5615,
+            "mutual_info": 0.0,
+            "entropy": 0.9855
+          },
+          "2": {
+            "score": 0.614,
+            "mutual_info": 0.1749,
+            "entropy": 0.9855
+          },
+          "3": {
+            "score": 0.5953,
+            "mutual_info": 0.1126,
+            "entropy": 0.9855
+          },
+          "4": {
+            "score": 0.5948,
+            "mutual_info": 0.111,
+            "entropy": 0.9855
+          }
+        },
+        "distinct_score_mi_pairs": 4
+      },
+      "status": "reproduced",
+      "evidence": {}
+    },
+    {
+      "id": "G02_diversidade_sempre_um",
+      "path": "mci/iiit_metrics.py",
+      "locator": "389-391",
+      "expected_contract": "Uma estrategia deve ter diversidade 0; quatro estrategias equilibradas devem ter diversidade proxima de 1.",
+      "observed": {
+        "single_strategy": 1.0,
+        "four_balanced_strategies": 1.0,
+        "single_metadata_unique": 1,
+        "four_metadata_unique": 4
+      },
+      "status": "reproduced",
+      "evidence": {}
+    },
+    {
+      "id": "G03_adjacencia_temporal_como_causalidade",
+      "path": "mci/iiit_metrics.py",
+      "locator": "462-477",
+      "expected_contract": "Adjacencia temporal nao deve ser reportada como causalidade sem intervencao registrada.",
+      "observed": {
+        "nodes": 6,
+        "links": 5,
+        "density": 0.1667,
+        "causal_efficacy": 0.2944,
+        "interventions_recorded": false
+      },
+      "status": "reproduced",
+      "evidence": {}
+    },
+    {
+      "id": "G04_payload_ignorado",
+      "path": "mci/iiit_metrics.py",
+      "locator": "221-225",
+      "expected_contract": "Evento com payload.outcome='success' deve contar como success; ausencia de outcome nao deve virar abstained.",
+      "observed": {
+        "events_with_payload_outcome_success": 4,
+        "observed_success_count": 0,
+        "observed_abstained_count": 4,
+        "observed_confidences": [
+          0.5
+        ],
+        "observed_strategies": [
+          "default"
+        ]
+      },
+      "status": "reproduced",
+      "evidence": {}
+    },
+    {
+      "id": "G05_abstencao_penalizada",
+      "path": "mci/iiit_metrics.py",
+      "locator": "407-413",
+      "expected_contract": "Abstencao segura nao deve reduzir automaticamente o score de seguranca.",
+      "observed": {
+        "success_score": 0.2655,
+        "abstained_score": 0.1655,
+        "score_delta": 0.1,
+        "success_abstention_rate": 0.0,
+        "abstained_abstention_rate": 1.0
+      },
+      "status": "reproduced",
+      "evidence": {}
+    },
+    {
+      "id": "G06_fallback_sintetico_silencioso",
+      "path": "mci/__main__.py",
+      "locator": "bloco analyze",
+      "expected_contract": "Falha de telemetria deve resultar em status unavailable, nunca em dados sinteticos silenciosos.",
+      "observed": {
+        "inspection": "except Exception -> traces sinteticas; nenhum marcador de origem sintetica no score"
+      },
+      "status": "inspected",
+      "evidence": {}
+    },
+    {
+      "id": "G07_registry_assinatura_invalida",
+      "path": "mci/iiit_metrics.py",
+      "locator": "688-696",
+      "expected_contract": "record_to_evolution_registry deve gravar EvolutionCycle valido usando round_id e retornar dados serializaveis.",
+      "observed": {
+        "record_signature": "(objective: 'str', changes: 'List[str]', score: 'Optional[float]' = None, lessons: 'Optional[List[str]]' = None, round_id: 'Optional[str]' = None) -> 'EvolutionCycle'",
+        "call_result": {
+          "success": false,
+          "exception": "TypeError",
+          "message": "EvolutionRegistry.record() got an unexpected keyword argument 'cycle_id'"
+        }
+      },
+      "status": "reproduced",
+      "evidence": {}
+    },
+    {
+      "id": "G08_rotulo_publicacao",
+      "path": "mci/iiit_metrics.py",
+      "locator": "625-633",
+      "expected_contract": "Score heuristico nao deve declarar aptidao para publicacao.",
+      "observed": {
+        "score": 0.81,
+        "label": "research_grade_high - Dados consistentes, apto para publicação correlacional"
+      },
+      "status": "inspected",
+      "evidence": {}
+    },
+    {
+      "id": "G09_n_states_inconsistente",
+      "path": "mci/iiit_metrics.py",
+      "locator": "274 e 344-350",
+      "expected_contract": "n_states deve controlar bins e normalizacao de forma consistente.",
+      "observed": {
+        "requested_n_states": 4,
+        "distribution_length": 10,
+        "metadata_n_states": 4,
+        "entropy_normalized": 1.0
+      },
+      "status": "reproduced",
+      "evidence": {}
+    },
+    {
+      "id": "G10_cli_duplicado_e_help_quebrado",
+      "path": "mci/iiit_metrics.py e mci/__main__.py",
+      "locator": "duas definicoes; parse_args_cli",
+      "expected_contract": "--help deve sair com 0 e existir apenas uma definicao de iiit_metrics_cli.",
+      "observed": {
+        "cli": {
+          "definition_count": 2,
+          "effective_signature": "(session_id: 'Optional[str]' = None, limit: 'int' = 100, n_states: 'int' = 10) -> 'Dict[str, Any]'"
+        },
+        "help": {
+          "returncode": 1,
+          "stdout_tail": "Comando desconhecido: --help\nComandos disponíveis: analyze, score, classify, graph, synthetic\n",
+          "stderr_tail": ""
+        }
+      },
+      "status": "reproduced",
+      "evidence": {}
+    },
+    {
+      "id": "G11_ausencia_de_dados_vira_score_zero",
+      "path": "mci/iiit_metrics.py",
+      "locator": "328-339",
+      "expected_contract": "Ausencia de telemetria deve ser status insufficient_data, nao score 0.0.",
+      "observed": {
+        "score": 0.0,
+        "abstention_rate": 1.0,
+        "metadata": {
+          "reason": "no_traces_collected"
+        }
+      },
+      "status": "inspected",
+      "evidence": {}
+    }
+  ],
+  "limitations": [
+    "Contraprovas de implementacao; nao medem consciencia, Phi ou qualidade cientifica.",
+    "Nao substituem benchmark held-out nem revisao externa.",
+    "Nao executam PyPhi, MindSpore, LLMs ou repositorios de terceiros."
+  ]
+}

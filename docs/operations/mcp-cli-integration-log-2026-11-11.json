@@ -1,0 +1,44 @@
+{
+  "timestamp": "2026-11-11T00:00:00Z",
+  "orchestrator": "marceloclaro",
+  "mitigation_id": "MCP-CLI-INTEGRATION-R662",
+  "changes": [
+    {
+      "component": "opencode_cli.py",
+      "action": "Added colab-mcp import and entry to MCP section",
+      "spec": "SPEC-935-R645",
+      "details": "Colab MCP Server via uvx stdio transport"
+    },
+    {
+      "component": "opencode.json",
+      "action": "Added colab-mcp to mcp section",
+      "spec": "SPEC-935-R645",
+      "details": {
+        "type": "local",
+        "command": [
+          "uvx",
+          "colab-mcp"
+        ],
+        "enabled": true,
+        "timeout": 660000
+      }
+    },
+    {
+      "component": "opencode.json",
+      "action": "Added gjq to command section",
+      "details": "JSON Query executor externo orchestrável"
+    }
+  ],
+  "preserved": {
+    "original_mcps": 23,
+    "total_mcps": 31,
+    "command_entries": 36,
+    "resolved_failures_15": "R1088-R1015-R1020-R652-R1042 test suites: 66 tests pass"
+  },
+  "gates_respected": [
+    "R1015: Federation activation gate (only installation+probe+smoke entries)",
+    "R1088: Preservation of local choices (no regression of 15 resolved failures)",
+    "R110: Anti-overclaim (results never declared verified without Core validation)",
+    "SDD/TDD cycle: All functionality requires formal spec + passing tests"
+  ]
+}

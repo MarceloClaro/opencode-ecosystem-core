@@ -363,6 +363,22 @@ def parse_hook_manifest(text: str) -> Tuple[List[str], List[str]]:
     return list(dict.fromkeys(events)), list(dict.fromkeys(commands))
 
 
+def _metadata_license(metadata: Dict[str, Any]) -> str:
+    """Lê `license` no topo ou no bloco aninhado `metadata`.
+
+    Skills locais declaram a licença em `metadata.license`; aceitar apenas o
+    topo fazia o gate `--require-license` recusar artefatos que declaram a
+    licença de forma legítima.
+    """
+    direct = _coerce_text(metadata.get("license"))
+    if direct:
+        return direct
+    nested = metadata.get("metadata")
+    if isinstance(nested, dict):
+        return _coerce_text(nested.get("license"))
+    return ""
+
+
 def _detect_license(source_path: str, metadata: Dict[str, Any]) -> Tuple[str, bool]:
     """
     Descobre a licença declarada do artefato. Devolve ``(licença, declarada?)``.
@@ -373,7 +389,7 @@ def _detect_license(source_path: str, metadata: Dict[str, Any]) -> Tuple[str, bo
     INV-R621.1, então a ausência é registrada como degradação, não preenchida.
     """
 
-    declared = _coerce_text(metadata.get("license"))
+    declared = _metadata_license(metadata)
     if declared:
         return declared, True
 
@@ -588,7 +604,7 @@ def build_artifact(
     """
 
     meta = dict(metadata or {})
-    license_value = _coerce_text(license_declared) or _coerce_text(meta.get("license"))
+    license_value = _coerce_text(license_declared) or _metadata_license(meta)
     declared = bool(license_value)
     if not declared:
         license_value, declared = _detect_license(source_path, meta)

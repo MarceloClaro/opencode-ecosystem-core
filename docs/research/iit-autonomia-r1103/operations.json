@@ -1,0 +1,102 @@
+{
+  "round_id": "R1103",
+  "date": "2026-11-12",
+  "external_review_executed": false,
+  "trust_update": "unchanged",
+  "searches": [
+    {
+      "tool": "arxiv-mcp.search_papers",
+      "query": "(ti:\"integrated information\" OR ti:\"consciousness\" OR ti:\"metacognition\") AND (abs:\"artificial intelligence\" OR abs:\"language models\")",
+      "date_range": "2024-01-01 a 2026-11-12",
+      "returned": 6,
+      "scope": "Identificar preprints recentes de metacognicao e confiabilidade; nenhum foi tratado como tecnica implantada."
+    },
+    {
+      "tool": "webfetch",
+      "url": "https://arxiv.org/abs/2303.11366",
+      "scope": "Reflexion: abstract e versao v4; texto integral consultado para ablacao e limitacoes."
+    },
+    {
+      "tool": "webfetch",
+      "url": "https://arxiv.org/abs/2310.11511",
+      "scope": "Self-RAG: abstract e texto integral; reflection tokens e treino."
+    },
+    {
+      "tool": "webfetch",
+      "url": "https://arxiv.org/abs/2406.13352",
+      "scope": "AgentDojo: abstract; benchmark de injecao de prompt."
+    },
+    {
+      "tool": "webfetch",
+      "url": "https://arxiv.org/abs/2503.13657v3",
+      "scope": "MAST: abstract; taxonomia de falhas multiagente."
+    },
+    {
+      "tool": "webfetch",
+      "url": "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003588",
+      "scope": "IIT 3.0: abstract, axiomas, TPM e definicao de Phi."
+    },
+    {
+      "tool": "webfetch",
+      "url": "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1011465",
+      "scope": "IIT 4.0: texto integral; formalismo e limitacoes."
+    },
+    {
+      "tool": "webfetch",
+      "url": "https://www.nature.com/articles/s41586-025-08888-1",
+      "scope": "Cogitate: abstract e desenho adversarial; contraprova."
+    },
+    {
+      "tool": "webfetch",
+      "url": "https://pyphi.readthedocs.io/en/latest/",
+      "scope": "PyPhi: versao 2.0 RC e aviso de que pip install pyphi instala 1.2."
+    }
+  ],
+  "exclusions": [
+    "Resultados matematicos irrelevantes retornados pela consulta ampla de titulos; descartados por nao tratarem de agentes, IIT ou metacognicao.",
+    "Preprints recentes lidos apenas no resumo; nao foram promovidos a tecnica validada.",
+    "PyPhi nao foi instalado nem executado; nenhum valor de Phi foi calculado.",
+    "MindSpore e federation/activated.json nao foram revalidados nesta rodada.",
+    "Nenhum repositorio de terceiros foi clonado, compilado ou executado.",
+    "Nenhum dado sintetico foi usado para substituir telemetria real na auditoria."
+  ],
+  "incidents": [
+    {
+      "id": "I01",
+      "tool": "ecosystem_run",
+      "status": "blocked",
+      "detail": "Retornou status=blocked, steps=0, erro 'Nenhum agente interno elegivel foi atribuido pelo orquestrador'.",
+      "effect": "Nenhuma revisao delegada foi executada; a auditoria foi feita localmente."
+    },
+    {
+      "id": "I02",
+      "tool": "python3 -m marceloclaro.cli doctor",
+      "status": "failed",
+      "detail": "ModuleNotFoundError: No module named 'whoosh' no Python global.",
+      "effect": "O diagnostico foi refeito com .venv/bin/python3; 16 pass, 6 warn, 0 fail."
+    },
+    {
+      "id": "I03",
+      "tool": "context7.resolve-library-id",
+      "status": "insufficient",
+      "detail": "Retornou apenas o registro PyPI, sem identificador adequado para PyPhi.",
+      "effect": "A documentacao oficial do PyPhi foi consultada diretamente por webfetch."
+    },
+    {
+      "id": "I04",
+      "tool": "websearch",
+      "status": "unavailable_previous",
+      "detail": "Tentativa anterior retornou HTTP 402.",
+      "effect": "A pesquisa usou arXiv MCP e webfetch, com recibos registrados."
+    }
+  ],
+  "red_green": {
+    "red": "7 failed em tests/test_r1103_iit_research.py por ausencia do dossie",
+    "green": "7 passed apos a criacao dos artefatos; validacao documental, nao homologacao do modulo legado"
+  },
+  "notes": [
+    "Registro e roteamento nao significam inferencia ou analise executada.",
+    "Nenhuma permissao, MCP ou comportamento de producao foi alterado.",
+    "A auditoria usa estado temporario em /tmp/opencode e confere hashes do estado real antes/depois."
+  ]
+}

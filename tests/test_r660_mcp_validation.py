@@ -114,36 +114,53 @@ def test_scanners_required_field_rejected_before_audit(variant):
     audit.assert_not_called()
 
 
-@pytest.mark.parametrize("variant", ["async", "sync"])
-@pytest.mark.parametrize("arguments", [{}, {"prompt": "ok", "max_tokens": True}, {"prompt": "ok", "max_tokens": 0}, {"prompt": "ok", "auto_start": "no"}])
-def test_colibri_invalid_input_rejected_before_provider(variant, arguments):
-    from colibri.colibri_mcp_server import call_tool, ColibriMcpServer
-    with patch("colibri.colibri_mcp_server.provider.complete") as complete:
-        result = asyncio.run(call_tool("colibri_generate", arguments)) if variant == "async" else ColibriMcpServer().call_tool("colibri_generate", arguments)
-    assert result.isError if variant == "async" else result["ok"] is False
+@pytest.mark.parametrize("arguments", [
+    {}, {"prompt": "ok", "max_tokens": True}, {"prompt": "ok", "max_tokens": 0},
+    {"prompt": "ok", "max_tokens": 2.0}, {"prompt": "", "max_tokens": 2},
+    {"prompt": "ok", "temperature": 9},
+])
+def test_colibri_invalid_input_rejected_before_provider(arguments):
+    from integrations.colibri import colibri_mcp_server as colibri
+    with patch.object(colibri.ColibriBridge, "complete") as complete:
+        result = colibri.handle_request({
+            "jsonrpc": "2.0", "id": 1, "method": "tools/call",
+            "params": {"name": "colibri:complete", "arguments": arguments},
+        })
+    assert result["error"]["code"] == -32602
     complete.assert_not_called()
 
 
-@pytest.mark.parametrize("variant", ["async", "sync"])
 @pytest.mark.parametrize("success", [True, False])
-def test_colibri_uses_real_provider_contract_and_propagates_failure(variant, success):
-    from colibri.colibri_mcp_server import call_tool, ColibriMcpServer
-    provider_result = {"success": success, "content": "answer" if success else "", "error": "offline"}
-    with patch("colibri.colibri_mcp_server.provider.complete", return_value=provider_result) as complete:
-        arguments = {"prompt": "probe", "max_tokens": 2.0}
-        result = asyncio.run(call_tool("colibri_generate", arguments)) if variant == "async" else ColibriMcpServer().call_tool("colibri_generate", arguments)
-    complete.assert_called_once_with(prompt="probe", max_tokens=2)
-    assert result.isError is (not success) if variant == "async" else result["ok"] is success
-    if variant == "async" and success:
-        assert json.loads(result.content[0].text)["result"]["content"] == "answer"
+def test_colibri_uses_real_provider_contract_and_propagates_failure(success):
+    from integrations.colibri import colibri_mcp_server as colibri
+    provider_result = {"status": "ok" if success else "error",
+                       "content": "answer" if success else "",
+                       "error": "" if success else "offline"}
+    with patch.object(colibri.ColibriBridge, "complete", return_value=provider_result) as complete:
+        result = colibri.handle_request({
+            "jsonrpc": "2.0", "id": 2, "method": "tools/call",
+            "params": {"name": "colibri:complete",
+                       "arguments": {"prompt": "probe", "max_tokens": 2}},
+        })
+    complete.assert_called_once_with(prompt="probe", system=None,
+                                     max_tokens=2, temperature=0.7)
+    assert result["result"]["isError"] is (not success)
+    if success:
+        assert result["result"]["content"][0]["text"] == "answer"
 
 
-def test_colibri_can_explicitly_disable_engine_autostart():
-    from colibri.colibri_mcp_server import call_tool
-    with patch("colibri.colibri_mcp_server.provider.complete", return_value={"success": False, "error": "offline"}) as complete:
-        result = asyncio.run(call_tool("colibri_generate", {"prompt": "probe", "auto_start": False}))
-    assert result.isError is True
-    complete.assert_called_once_with(prompt="probe", max_tokens=512, auto_start=False)
+def test_colibri_reports_unavailable_provider_as_error():
+    from integrations.colibri import colibri_mcp_server as colibri
+    with patch.object(colibri.ColibriBridge, "complete",
+                      return_value={"status": "unavailable", "reason": "offline"}) as complete:
+        result = colibri.handle_request({
+            "jsonrpc": "2.0", "id": 3, "method": "tools/call",
+            "params": {"name": "colibri:complete",
+                       "arguments": {"prompt": "probe", "max_tokens": 512}},
+        })
+    assert result["result"]["isError"] is True
+    complete.assert_called_once_with(prompt="probe", system=None,
+                                     max_tokens=512, temperature=0.7)
 
 
 def test_mci_memory_range_and_integral_float_are_adapted():

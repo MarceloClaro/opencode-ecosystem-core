@@ -344,6 +344,7 @@ class HarnessHarvester:
             tags=[*(metadata or {}).get("tags", []), *(front.get("tags") or [])],
             metadata={"frontmatter_keys": sorted(str(k) for k in front),
                       "derived_source_artifact_id": front.get("x-source-artifact-id"),
+                      "license": (metadata or {}).get("license"),
                       "instruction_root": instruction_root,
                       "support_files": supports,
                       "validation_reasons": support_reasons,

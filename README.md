@@ -12,7 +12,7 @@
 [![Tests](https://img.shields.io/badge/tests-local%20suite-3b82f6?style=for-the-badge&logo=pytest)](tests/)
 <!-- core-badges:start -->
 [![Checks](https://img.shields.io/badge/checks-22%20estruturais-64748b?style=for-the-badge)](marceloclaro/doctor.py)
-[![MCP](https://img.shields.io/badge/MCP-30%20servers-8b5cf6?style=for-the-badge)](opencode.json)
+[![MCP](https://img.shields.io/badge/MCP-32%20servers-8b5cf6?style=for-the-badge)](opencode.json)
 [![Agents](https://img.shields.io/badge/agents-337-7c3aed?style=for-the-badge)](agents/catalog)
 <!-- core-badges:end -->
 [![Evidence](https://img.shields.io/badge/evidence--first-f59e0b?style=for-the-badge)](reports/r1054/README.md)
@@ -33,7 +33,7 @@
 </div>
 
 <!-- core-state:start -->
-**337 agentes** · **30 MCPs** · **35 comandos** · **22 checks**
+**337 agentes** · **32 MCPs** · **39 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 
@@ -178,6 +178,30 @@ registrada, não escondida. Evidência:
 | Book Studio | 🟡 R1078–R1082 | KDP, tokens, licença, auditoria EPUB, capas e 6 pranchas de prova | arte final, 2× 300 DPI, CMYK/PDF-X e prova física pendentes |
 
 **Legenda:** ✅ implementado e testado; 🟡 implementado com limites; 🧪 experimental; 📋 apenas especificado.
+
+## MCP, autonomia e métricas (R1088–R1108)
+
+Esta rodada corrigiu a camada de integração MCP, publicou um servidor local
+honesto para as aplicações Tiangong e abriu uma frente experimental de
+autonomia mensurável. Nada aqui promove consciência, Φ, validação externa ou
+desempenho de modelo.
+
+| Ciclo | Entrega | Estado |
+|---|---|---|
+| **R1088** | recuperação do MCP Colibri (`python -m integrations.colibri.colibri_mcp_server`), entrada `colab-mcp`, preservação de escolhas locais e gate federado R1015 | ✅ testes |
+| **R1089** | servidor MCP stdio `tiangong-hdr` com `tiangong_catalog`, `hdr_handler`, `rsir_handler` e `vrp_handler`; PNG 8 bits sem Pillow, CVRP clássico e `unavailable` sem resultado fabricado | ✅ 35 testes + transporte stdio |
+| **R1103** | dossiê `docs/research/iit-autonomia-r1103/` com 12 fontes, 11 lacunas, matriz técnica→teste e plano A0–A4 | ✅ documental; sem Φ calculado |
+| **R1104** | correções P0 em `mci/iiit_metrics.py` e `mci/__main__.py`: buckets determinísticos, `missing` ≠ `abstained`, abstenção não penalizada, sem fallback sintético | ✅ testes |
+| **R1105** | `benchmarks/autonomy_harness.py` com tarefas reservadas, adaptadores scriptados e dry-run rotulado | ✅ harness; nenhum LLM executado |
+| **R1106** | `EcosystemRunAdapter` converte `AutonomousCoordinator` em `Response` fail-closed | ✅ testado com coordenador falso |
+| **R1107** | `OpenCodeCliAdapter` executa o CLI isolado, sem recursão e sem ferramentas | ✅ segurança testada; execução real depende de provider |
+| **R1108** | reconciliação de configuração/documentação, restauração do `federation/activated.json` válido e publicação da skill Tiangong em `.opencode/skills/tiangong-harness` | ✅ testes locais |
+
+**Limites:** os adaptadores R1106–R1107 não foram executados contra modelos
+reais; o harness mede o adaptador, não a qualidade científica. A skill Tiangong
+delega ao MCP e mantém `recognize`/`analyze`/`classify` como `unavailable`
+enquanto o backend não for observado. Consciência fenomenal não é desfecho
+mensurável por entropia, informação mútua ou grafo de eventos.
 
 ## Book Studio e Molambudos (R1078–R1082)
 
@@ -389,6 +413,9 @@ não é aceite editorial.
 | [Piloto R1055](pilots/r1055-qubit/README.md) | vídeo de qubit, fontes, código e limites |
 | [Molambudos](literatura/molambudos/README.md) | edições, fontes, capas e limites do clone |
 | [Política Git R1084](specs/SPEC-935-R1084-git-policy-readme-reconciliation.md) | allowlist, testes e divergência de paginação |
+| [MCP Tiangong R1089](specs/SPEC-935-R1089-MCP.md) | servidor stdio local, quatro ferramentas e limites |
+| [Autonomia R1103–R1107](docs/research/iit-autonomia-r1103/README.md) | fontes, lacunas, harness e adaptadores |
+| [Métricas IIT P0 R1104](specs/SPEC-935-R1104-iit-metrics-p0.md) | correções de confiabilidade e o que não é Φ |
 | [Vídeo R1058](pilots/r1058-airam-veras/README.md) | plano de ação Airam Veras, mapa, cronograma e exemplos |
 | [Atlas animado R1056](docs/architecture/ANIMATED.md) | GIF/PNG/SVG e Mermaid de todos os diagramas do escopo |
 | [Reprodução R1056](reports/r1056/README.md) | exportador local, cobertura, testes e hashes |
@@ -411,6 +438,9 @@ não é aceite editorial.
 | R1055 | ✅ técnico; revisão humana pendente | vídeo didático de qubit, câmera, mapa e versões 16:9/9:16 |
 | R1056 | ✅ documental; não valida runtime | atlas animado, fontes preservadas, manifesto e testes |
 | R1078–R1084 | 🟡 estúdio editorial; publicação bloqueada | Book Studio, fontes e capas versionadas; revisão de lombada, CMYK/PDF-X e prova física pendentes |
+| R1088–R1089 | ✅ MCP local | Colibri recuperado, `colab-mcp` e servidor Tiangong com `unavailable` honesto |
+| R1103–R1107 | 🧪 pesquisa e harness | dossiê IIT/autonomia, correções P0, tarefas reservadas e adaptadores; sem execução real de modelo |
+| R1108 | ✅ reconciliação | configuração, federação e skill Tiangong publicadas; documentação sincronizada |
 | Próximos ciclos | 🧭 | backend real de submissão, perfis brasileiros, UI, tabelas e validação externa assistida |
 
 O roadmap é uma direção, não uma promessa de data. Cada ciclo só é marcado
@@ -1137,7 +1167,7 @@ flowchart TB
     Orq2 --> TDDRunner2[TDDRunner]
     Orq2 --> MetaBus2[MetaBus]
     Orq2 --> Blackboard2[Blackboard]
-    Orq2 --> MCP2[30 MCPs configurados]
+    Orq2 --> MCP2[32 MCPs configurados]
     Orq2 --> Agents2[337 agentes configurados]
     Orq2 --> Mira2[mira-presenter]
     Mira2 --> Deck2[MiraDeckPipeline]

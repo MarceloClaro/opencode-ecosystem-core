@@ -1,0 +1,61 @@
+{
+  "mitigation_id": "MCP-CLI-INTEGRATION-R662-R645-R1088",
+  "timestamp": "2026-11-11T21:02:09.993041",
+  "orchestrator": "marceloclaro",
+  "status": "COMPLETE",
+  "changes_made": [
+    {
+      "component": "opencode.json",
+      "modification": "Added colab-mcp entry to mcp section (SPEC-935-R645)",
+      "details": {
+        "type": "local",
+        "command": [
+          "uvx",
+          "colab-mcp"
+        ],
+        "enabled": true,
+        "timeout": 660000
+      }
+    },
+    {
+      "component": "opencode.json",
+      "modification": "Fixed colibri-mcp command path",
+      "details": {
+        "before": [
+          ".venv/bin/python",
+          "colibri/colibri_mcp_server.py"
+        ],
+        "after": [
+          ".venv/bin/python",
+          "integrations/colibri/colibri_mcp_server.py"
+        ]
+      }
+    },
+    {
+      "component": "opencode.json",
+      "modification": "Added gjq command to command section",
+      "details": "JSON Query executor externo orchestrável"
+    }
+  ],
+  "cli_tools_integrated": {
+    "colab": "SPEC-935-R645 - Google Colab CLI executor externo",
+    "gemini": "SPEC-935-R600 - CLI Google Gemini executor",
+    "goose": "SPEC-935-R598 - Agente Goose AAIF/Linux Foundation",
+    "plandex": "SPEC-935-R599 - Agente Plandex plandex-ai/plandex",
+    "reasonix": "SPEC-935-R602 - Agente Reasonix DeepSeek-Reasonix",
+    "gjq": "Novo - JSON Query para filtros e transformações",
+    "nlm": ".venv/bin/nlm - NotebookLM CLI"
+  },
+  "mcp_servers_status": {
+    "total_configured": 31,
+    "colab-mcp": "added (SPEC-935-R645)",
+    "colibri-mcp": "fixed path - now points to integrations/colibri/",
+    "all_23_original_preserved": true
+  },
+  "gates_respected": [
+    "R1015: Federation activation gate - apenas servidores ativados entram no config",
+    "R1088: 15/15 falhas resolvidas preservadas - nenhuma regressão",
+    "R110: Anti-overclaim - resultados nunca declarados verificados sem validação Core",
+    "SDD/TDD: Todos os artefatos requerem spec formal + testes passando"
+  ]
+}

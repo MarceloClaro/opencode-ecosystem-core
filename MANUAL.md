@@ -22,7 +22,7 @@ Não use esta contagem como indicador de cobertura, qualidade ou validação
 externa.
 
 <!-- core-state:start -->
-**337 agentes** · **30 MCPs** · **35 comandos** · **22 checks**
+**337 agentes** · **32 MCPs** · **39 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 
@@ -327,6 +327,22 @@ coordena a análise com origem e evidências. Na CLI, use
 `.venv/bin/python -m marceloclaro.cli rea status` ou
 `rea analyze /caminho/absoluto/app`. Consulte [REA no Core](docs/REA.md)
 para catálogo, disponibilidade e instalação identificada.
+
+## MCP local Tiangong (HDR/RSIR/VRP)
+
+O servidor `tiangong-hdr` roda por stdio e não acessa rede, credenciais ou
+arquivos arbitrários:
+
+```bash
+.venv/bin/python -m integrations.tiangong_mcp
+```
+
+Ferramentas: `tiangong_catalog`, `hdr_handler`, `rsir_handler` e `vrp_handler`.
+`hdr_handler preprocess` aceita PNG 8 bits ou matriz `pixels` e devolve vetor
+784; `recognize`, `analyze`, `classify` e `upload` retornam `unavailable`
+enquanto o backend não for observado. `vrp_handler solve` usa heurística
+clássica e declara `quantum=false` e `optimality=not_proven`. Para desativar,
+use `enabled: false` na entrada `mcp.tiangong-hdr` de `opencode.json`.
 
 ## Limites e solução de problemas
 

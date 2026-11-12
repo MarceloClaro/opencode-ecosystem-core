@@ -20,7 +20,7 @@ python3 -c "import json; c=json.load(open('opencode.json', encoding='utf-8')); p
 ```
 
 <!-- core-state:start -->
-**337 agentes** · **30 MCPs** · **35 comandos** · **22 checks**
+**337 agentes** · **32 MCPs** · **39 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 
@@ -167,31 +167,33 @@ As entradas abaixo são derivadas das chaves `mcp` de `opencode.json`:
 3. `arxiv-mcp`;
 4. `caed-spaece-data`;
 5. `chroma`;
-6. `colibri-mcp`;
-7. `context7`;
-8. `desktop-operator`;
-9. `ecosystem-network`;
-10. `educacao-legislacao`;
-11. `fetch`;
-12. `filesystem`;
-13. `latexmk-mcp`;
-14. `litert-lm`;
-15. `mcp-memory`;
-16. `mcp-time`;
-17. `metacognitive-interconnect`;
-18. `oa-resolver`;
-19. `playwright`;
-20. `polymath-labs-mcp`;
-21. `pypi-search`;
-22. `qdrant`;
-23. `rea`;
-24. `remotion-audit`;
-25. `scanners-mcp`;
-26. `scientific-data`;
-27. `sequential-thinking`;
-28. `servers`;
-29. `storage-operator`;
-30. `web-deploy-mcp`;
+6. `colab-mcp`;
+7. `colibri-mcp`;
+8. `context7`;
+9. `desktop-operator`;
+10. `ecosystem-network`;
+11. `educacao-legislacao`;
+12. `fetch`;
+13. `filesystem`;
+14. `latexmk-mcp`;
+15. `litert-lm`;
+16. `mcp-memory`;
+17. `mcp-time`;
+18. `metacognitive-interconnect`;
+19. `oa-resolver`;
+20. `playwright`;
+21. `polymath-labs-mcp`;
+22. `pypi-search`;
+23. `qdrant`;
+24. `rea`;
+25. `remotion-audit`;
+26. `scanners-mcp`;
+27. `scientific-data`;
+28. `sequential-thinking`;
+29. `servers`;
+30. `storage-operator`;
+31. `tiangong-hdr`;
+32. `web-deploy-mcp`;
 <!-- core-mcp:end -->
 
 O MCP `ecosystem-network` conecta o `MarceloClaroOrchestrator`, o roteamento
@@ -214,6 +216,14 @@ usa metadados sanitizados em SQLite e pausa automática de 120 segundos.
 A presença dessas entradas de configuração não implica disponibilidade de toda
 dependência externa em cada máquina. O `doctor` expõe a situação encontrada
 localmente nos checks do inventário estrutural acima.
+
+O MCP `tiangong-hdr` é local e fail-closed: `tiangong_catalog` lista HDR/RSIR/VRP
+com hashes das fontes observadas; `hdr_handler` cobre validação, PNG/pixels,
+comparação e export em memória; `rsir_handler` valida vetores e declara o modelo
+ViT/QViT indisponível; `vrp_handler` resolve CVRP com heurística clássica e
+declara `quantum=false`. Nenhuma ferramenta acessa rede, credenciais, shell ou
+arquivos arbitrários. A skill em `.opencode/skills/tiangong-harness` delega ao
+mesmo contrato e não simula resultados.
 
 ## Agentes e orquestração
 

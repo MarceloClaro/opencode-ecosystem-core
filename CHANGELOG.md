@@ -4,6 +4,37 @@ Todas as mudanças notáveis no **OpenCode Ecosystem Core** serão documentadas 
 
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/), e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [Não lançado] - 2026-11-12
+
+### Adicionado
+- **MCP Tiangong local (SPEC-935-R1089-MCP)**: servidor stdio `integrations/tiangong_mcp.py`, com `tiangong_catalog`, `hdr_handler`, `rsir_handler` e `vrp_handler`; PNG 8 bits sem Pillow, vetor 784, comparação L1/L2/cosseno e CVRP clássico. `recognize`, `analyze`, `classify` e `upload` retornam `unavailable`, sem dígito, rótulo ou confiança fabricados. Entrada `tiangong-hdr` no gerador e em `opencode.json`.
+- **Skill Tiangong publicada (R1108)**: `.opencode/skills/tiangong-harness/{HDR,RSIR,VRP}` agora contém `SKILL.md`, `skill.py` que delega ao MCP e testes próprios; os stubs que simulavam resultados foram substituídos por contrato honesto.
+- **Agentes Tiangong**: três cartões em `agents/catalog/tiangong/` com evidência REA, hashes e limites.
+- **Autonomia e métricas (SPEC-935-R1103–R1107)**: dossiê `docs/research/iit-autonomia-r1103/` com 12 fontes e 11 lacunas; correções P0 em `mci/iiit_metrics.py` e `mci/__main__.py`; harness `benchmarks/autonomy_harness.py` com tarefas reservadas; `EcosystemRunAdapter` e `OpenCodeCliAdapter`.
+- **MCP Colibri recuperado (SPEC-935-R1088)**: comando migrado para `python -m integrations.colibri.colibri_mcp_server`, validação JSON-RPC antes do provedor e entrada `colab-mcp`.
+- **Skills MindSpore**: `skills/mindspore-config/` e `.opencode/skills/mindspore-summary/` para parsing, validação e resumo de configurações JSON.
+
+### Corrigido
+- `federation/activated.json` restaurado como JSON válido (`federation-activated-mcp/v2`) após ter sido sobrescrito por Markdown; `federation/activation.md` reflete o smoke real do `playwright`.
+- `evolution/cycles.json` limpo de entradas de teste (`R-test-001`, `R1102-iit-003/004/005`); permanece apenas o ciclo `R1108`.
+- 13 testes obsoletos do Colibri em `tests/test_r660_mcp_validation.py` alinhados à API JSON-RPC atual; validação de `prompt`, `max_tokens`, `temperature` e `messages` ocorre antes do provedor.
+- `integrations/harness_federation/artifact.py` e `harvest.py` passam a reconhecer licença declarada em `metadata.license`; o gate `harness emit --require-license` deixou de recusar 9 skills legítimas.
+- `tests/test_r394_opencode_cli_commands_real_execution.py` envia `argv` explícito para `/federacao` e deixa de tratar a ausência de subcomando como falha do produto.
+- `tests/test_r652_awesome_mcp.py` aceita o binário local versionado e o fallback `npx`.
+- `.gitignore` bloqueia o pacote externo `educacao_quantica_bohm-*` (177 MB) e o staging `.skills/`/`.specs/`.
+
+### Documentado
+- `README.md`, `docs/README.md`, `ARCHITECTURE.md`, `MANUAL.md`, `CLAUDE.md`, `PROGRESS.md` e instaladores sincronizados para **337 agentes, 32 MCPs, 39 comandos e 22 checks**.
+- `PROGRESS.md` recebeu o checkpoint R1088–R1108 e `CHANGELOG.md` registra a rodada.
+
+### Verificação
+- `pytest tests/test_r1088_mcp_recovery.py tests/test_r1089_tiangong_mcp.py tests/test_r1103_iit_research.py tests/test_r1104_iit_metrics_p0.py tests/test_r1105_autonomy_harness.py tests/test_r1106_ecosystem_adapter.py tests/test_r1107_opencode_cli_adapter.py` → **95 passed**.
+- `pytest .opencode/skills/tiangong-harness/*/test_*_skill.py` → **20 passed**.
+- `pytest tests/test_r660_mcp_validation.py tests/test_r1088_mcp_recovery.py` → **86 passed**.
+- `pytest` da bateria final (R394, R621, R660, R1088–R1107, federação, R652 e skills Tiangong) → **322 passed**.
+- `doctor` (`.venv/bin/python -m marceloclaro.cli doctor`) → **16 pass, 6 warn, 0 fail**.
+- Limites: nenhum modelo real foi executado pelos adaptadores R1106–R1107; nenhum Φ foi calculado; nenhuma validação externa, publicação ou aceite editorial foi emitido.
+
 ## [Não lançado] - 2026-10-07
 
 ### Adicionado

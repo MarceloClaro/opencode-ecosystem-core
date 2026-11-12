@@ -46,6 +46,11 @@ _SAMPLE_ARGUMENTS = {
     "pypi": "requests",
 }
 
+# Comandos que só aceitam argv explícito, nunca texto interpretado por shell.
+_SAMPLE_ARGV = {
+    "federacao": ["status"],
+}
+
 # Padrões que indicam falha real escondida atrás de returncode 0 (comandos
 # encadeados com "|| true" ou capturas que engolem o traceback).
 _ERROR_MARKERS = (
@@ -79,11 +84,14 @@ def _command_names():
     return sorted(set(build_config()["command"]) - set(_PROMPT_TOOLS))
 
 
-def _execute(name, argument=""):
+def _execute(name, argument="", argv=None):
     """O prompt OpenCode não é shell: executa a API local que ele solicita."""
+    payload = {"command": name, "arguments": argument}
+    if argv is not None:
+        payload["argv"] = argv
     return subprocess.run(
         [sys.executable, "-m", "integrations.opencode_commands"],
-        input=json.dumps({"command": name, "arguments": argument}, ensure_ascii=False),
+        input=json.dumps(payload, ensure_ascii=False),
         shell=False, cwd=PROJECT_ROOT, capture_output=True, text=True, timeout=90,
     )
 
@@ -103,9 +111,10 @@ def test_prompt_commands_keep_orchestrator_and_available_tool(name, tool_name):
 def test_command_executes_without_hidden_python_error(name):
     command = build_config()["command"][name]
     argument = _SAMPLE_ARGUMENTS.get(name, "")
+    argv = _SAMPLE_ARGV.get(name)
     assert command["agent"] == "marceloclaro"
     assert "core_command" in command["template"]
-    completed = _execute(name, argument)
+    completed = _execute(name, argument, argv)
     combined = completed.stdout + completed.stderr
 
     for marker in _ERROR_MARKERS:

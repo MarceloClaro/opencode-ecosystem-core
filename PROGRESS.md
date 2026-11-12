@@ -7,7 +7,7 @@ contagens das fontes locais; o histórico R414 preservado ao final não represen
 o último estado operacional do Core.
 
 <!-- core-state:start -->
-**337 agentes** · **30 MCPs** · **35 comandos** · **22 checks**
+**337 agentes** · **32 MCPs** · **39 comandos** · **22 checks**
 
 Inventário derivado de [opencode.json](opencode.json) e do [diagnóstico estrutural](marceloclaro/doctor.py). Contagens de configuração e checks não comprovam disponibilidade, autenticação, inferência ou validação externa.
 
@@ -22,6 +22,30 @@ e [o contrato de interrupção](specs/SPEC-935-R825-execution-cancellation.md)
 explicam integrações e limites específicos. Recibos datados em `outputs/` e
 `docs/evidence/` são evidências de execuções determinadas; uma suíte interrompida
 não comprova o aceite integral.
+
+## Checkpoint R1088–R1108 — MCP, autonomia e reconciliação
+
+- **R1088** recuperou o MCP Colibri (`python -m integrations.colibri.colibri_mcp_server`),
+  adicionou `colab-mcp`, moveu imports tardios para o topo de `build_config()` e
+  passou a excluir nomes federados da preservação local. `federation/activated.json`
+  voltou a ser JSON válido; `playwright` aparece como smoke falho em `activation.md`.
+- **R1089** publicou o servidor MCP stdio `tiangong-hdr` com quatro ferramentas,
+  PNG 8 bits sem Pillow, CVRP clássico e `unavailable` explícito para backend não
+  observado. **35 testes** de unidade e transporte stdio real.
+- **R1103–R1104** produziram o dossiê IIT/autonomia com 12 fontes e 11 lacunas, e
+  corrigiram P0 em `mci/iiit_metrics.py`: buckets determinísticos, `missing` separado
+  de `abstained`, abstenção não penalizada, `n_states` coerente, CLI única e ausência
+  de fallback sintético. Nenhum Φ foi calculado.
+- **R1105–R1107** entregaram harness de tarefas reservadas, `EcosystemRunAdapter` e
+  `OpenCodeCliAdapter` com isolamento. Dry-run scriptado apenas; nenhum modelo real
+  executado, nenhuma superioridade de política declarada.
+- **R1108** reconciliou configuração e documentação, publicou a skill Tiangong em
+  `.opencode/skills/tiangong-harness` e removeu stubs que simulavam resultados.
+- **Verificação local:** 95 testes R1088–R1107, 20 testes da skill Tiangong e 86
+  testes R660+R1088 passam; `doctor` 16 pass / 6 warn / 0 fail. O pacote externo
+  `educacao_quantica_bohm-*` (177 MB) permanece fora do Git.
+- **Limite:** contagens de configuração não comprovam disponibilidade, autenticação,
+  inferência ou validação externa.
 
 ## Checkpoint R1055–R1056 — vídeo e documentação animada
 
@@ -1185,16 +1209,14 @@ de reutilizar uma conclusão científica ou uma pendência de publicação.
 
 ```json
 {
-  "checks_passed": 8,
-  "checks_warned": 3,
+  "checks_total": 22,
+  "checks_passed": 16,
+  "checks_warned": 6,
   "checks_failed": 0,
-  "warnings": [
-    "CLI externa faltando: scihub-cli (pip install scihub-cli)",
-    "LiteRT-LM daemon sem readiness (cold-start)",
-    "Pendente revisão: scripts/cloud/ (324 scripts externos)"
-  ],
-  "agent_count": 187,
-  "last_suite": "pendente de execução"
+  "agent_count": 337,
+  "mcp_count": 32,
+  "command_count": 39,
+  "last_suite": "95 testes R1088-R1107 + 20 testes da skill Tiangong + 86 testes R660/R1088 (2026-11-12)"
 }
 ```
 
@@ -1207,10 +1229,10 @@ de reutilizar uma conclusão científica ou uma pendência de publicação.
 
 ## Próximos passos
 
-1. **Triagem das ~31 falhas pré-existentes da suíte** (não relacionadas ao Molambudos, expostas desde o sync do R363/R380) — em andamento.
+1. **Triagem das falhas pré-existentes da suíte** — as 13 falhas Colibri foram corrigidas em R1108; os demais escopos seguem sob demanda.
 2. **Molambudos — limite de páginas KDP:** a edição impressa trilíngue (`kdp_tri`) tem 1.143 páginas contra um limite assumido de 828 na Amazon KDP (não validado externamente); precisa de decisão editorial (reduzir corpo, dividir em volumes, ou confirmar limite real no painel KDP) antes de qualquer tentativa de publicação física.
 3. **Molambudos — validações humanas que não podem ser fabricadas:** revisão beta real, revisão de sensibilidade, revisão profissional de tradução nativa (EN/ZH), confirmação do ISBN numa conta KDP real, prova física impressa.
-4. **Push pendente:** commits locais à frente de `origin/main` — enviar quando o usuário autorizar.
+4. **Push desta rodada:** `origin/main` recebe o commit R1088–R1108; conferir com `git status -sb` e `git log origin/main..HEAD`.
 
 ## Como retomar
 

@@ -65,13 +65,21 @@ def _mcp_launcher(name: str) -> str:
     return HarnessRuntime(ROOT).resolve_cli_path(name) or name
 
 
+def _reference_node_command(binary: str, fallback: list[str]) -> list[str]:
+    """Reutiliza instalação local versionada, sem download via npx no startup."""
+    path = Path(ROOT) / ".opencode/mcp/reference-node/node_modules/.bin" / binary
+    if path.is_file() and os.access(path, os.X_OK):
+        return [str(path)]
+    return fallback
+
+
 def _federation_activated_mcp() -> Dict[str, Dict[str, Any]]:
     """
     R1015: filtra entradas ativas pelo gate de instalação + probe + smoke.
 
     O arquivo de ativação não é uma fonte confiável por si só: recibos antigos
-    ou inválidos são excluídos até novo probe/smoke. Sem o arquivo, preserva
-    a configuração histórica.
+    ou inválidos são excluídos até novo probe/smoke. Sem o arquivo, nenhuma
+    entrada federada histórica é considerada autorizada.
     """
 
     from integrations.federation_sync.runtime import activated_servers
@@ -571,6 +579,12 @@ LOCAL_AGENT_FALLBACKS = {
 
 def build_config() -> Dict[str, Any]:
     """Monta o opencode.json completo do ecossistema."""
+    # R1088: usados tanto na montagem de MCPs quanto na preservação de
+    # escolhas locais. Ficam no topo para não criar nomes locais não ligados
+    # (o import tardio quebrava `--check` e a regeneração).
+    from integrations.federation_sync.runtime import server_specs
+    from integrations.colab_mcp import mcp_config as colab_mcp_config
+
     agents = _essential_agents()
     agents.update(_catalog_agents())
     # O orquestrador primário prevalece sobre eventuais homônimos do catálogo
@@ -796,7 +810,7 @@ def build_config() -> Dict[str, Any]:
             },
             "colibri-mcp": {
                 "type": "local",
-                "command": [".venv/bin/python", "colibri/colibri_mcp_server.py"],
+                "command": [".venv/bin/python", "-m", "integrations.colibri.colibri_mcp_server"],
                 "enabled": True,
             },
             "scanners-mcp": {
@@ -811,7 +825,7 @@ def build_config() -> Dict[str, Any]:
             },
             "latexmk-mcp": {
                 "type": "local",
-                "command": ["npx", "-y", "latexmk-mcp"],
+                "command": _reference_node_command("latexmk-mcp", ["npx", "-y", "latexmk-mcp"]),
                 "enabled": True,
             },
             "artigo-academico-mcp": {
@@ -881,6 +895,16 @@ def build_config() -> Dict[str, Any]:
                 "enabled": True,
                 "timeout": 180000,
             },
+            # SPEC-935-R1089-MCP: servidor stdio local HDR/RSIR/VRP. Sem rede,
+            # sem credenciais e sem acesso arbitrário a arquivos. Operações de
+            # backend não observado retornam "unavailable", nunca resultado simulado.
+            "tiangong-hdr": {
+                "type": "local",
+                "command": [".venv/bin/python", "-m", "integrations.tiangong_mcp"],
+                "cwd": ROOT,
+                "enabled": True,
+                "timeout": 30000,
+            },
             # SPEC-935-R652: servidores MCP de referência (modelcontextprotocol,
             # sem auth, provados ao vivo via stdio em 2026-10-04). filesystem
             # escopado à raiz do repo (contexto de trabalho dos agentes).
@@ -891,13 +915,21 @@ def build_config() -> Dict[str, Any]:
             },
             "sequential-thinking": {
                 "type": "local",
-                "command": ["npx", "-y", "@modelcontextprotocol/server-sequential-thinking"],
+                "command": _reference_node_command("mcp-server-sequential-thinking", [
+                    "npx", "-y", "@modelcontextprotocol/server-sequential-thinking"]),
                 "enabled": True,
             },
             "filesystem": {
                 "type": "local",
-                "command": ["npx", "-y", "@modelcontextprotocol/server-filesystem", ROOT],
+                "command": _reference_node_command("mcp-server-filesystem", [
+                    "npx", "-y", "@modelcontextprotocol/server-filesystem"]) + [ROOT],
                 "enabled": True,
+            },
+            "colab-mcp": {
+                "type": "local",
+                "command": colab_mcp_config()["command"],
+                "enabled": colab_mcp_config()["enabled"],
+                "timeout": colab_mcp_config()["timeout"],
             },
         },
         "command": {
@@ -1139,20 +1171,30 @@ def build_config() -> Dict[str, Any]:
         },
     }
 
-    # R1060: preserva MCPs existentes que não são gerados aqui (federados,
-    # experimentais ou locais do operador) para que regenerar não os remova.
+    # R1088: preservar escolhas locais não pode contornar o gate R1015.
+    # Nomes federados são exclusivamente geridos por activated_servers().
+    federated_names = set(server_specs(Path(ROOT)))
     if os.path.isfile(CONFIG_PATH):
         try:
             with open(CONFIG_PATH, "r", encoding="utf-8") as stream:
                 current = json.load(stream)
         except (OSError, json.JSONDecodeError):
             current = {}
-        if isinstance(current, dict):
-            for name, entry in (current.get("mcp") or {}).items():
+        current_mcp = current.get("mcp") if isinstance(current, dict) else None
+        if isinstance(current_mcp, dict):
+            for name, entry in current_mcp.items():
+                if name in federated_names:
+                    continue
+                if name == "servers" and isinstance(entry, dict):
+                    config["mcp"][name] = {
+                        key: value for key, value in entry.items()
+                        if key not in federated_names
+                    }
+                    continue
                 if isinstance(entry, dict):
                     config["mcp"].setdefault(name, entry)
 
-    # R1014: só entra no config o servidor federado que passou pelo probe.
+    # Só entram versões atuais aprovadas por instalação + probe + smoke.
     for name, entry in _federation_activated_mcp().items():
         config["mcp"].setdefault(name, entry)
     return config

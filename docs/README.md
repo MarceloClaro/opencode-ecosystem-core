@@ -54,6 +54,21 @@ não precise adivinhar onde está a verdade, a especificação ou o limite.
 | — | [Relatório R1054](../reports/r1054/README.md) | benchmark BCG, limites e evidências |
 | — | [Spec R1054](../specs/SPEC-1054-automacao-assistida-validacao-real.md) | contrato, critérios e RED/GREEN |
 
+## MCP, autonomia e métricas R1088–R1107
+
+| Ciclo | Documento | O que cobre |
+|---|---|---|
+| R1088 | [Spec](../specs/SPEC-935-R1088-mcp-recovery.md) | recuperação do Colibri, `colab-mcp` e gate federado |
+| R1089 | [Spec MCP](../specs/SPEC-935-R1089-MCP.md) | servidor stdio Tiangong, quatro ferramentas e limites |
+| R1089 | [Harness original](../specs/SPEC-935-R1089-tiangong-app-harness.md) | evidência REA, skill e contrato local |
+| R1103 | [Dossiê IIT/autonomia](research/iit-autonomia-r1103/README.md) | fontes, lacunas, matriz técnica→teste e plano A0–A4 |
+| R1104 | [Spec P0](../specs/SPEC-935-R1104-iit-metrics-p0.md) | correções de confiabilidade em `mci/iiit_metrics.py` |
+| R1105 | [Spec P1](../specs/SPEC-935-R1105-autonomy-holdout-p1.md) | harness de autonomia e tarefas reservadas |
+| R1106 | [Spec](../specs/SPEC-935-R1106-ecosystem-run-adapter.md) | adaptador do coordenador para o harness |
+| R1107 | [Spec](../specs/SPEC-935-R1107-opencode-cli-adapter.md) | execução isolada do OpenCode CLI |
+| — | [Verificação P0](research/iit-autonomia-r1103/p0-verification.md) | recibos RED/GREEN e contraprovas |
+| — | [Verificação P1](research/iit-autonomia-r1103/p1-verification.md) | dry-run, limites e ausência de execução real |
+
 ## Mapa por domínio
 
 ### Orquestração, agentes e governança
@@ -79,6 +94,7 @@ não precise adivinhar onde está a verdade, a especificação ou o limite.
 | Integrações científicas | [R667–R671](INTEGRACOES_CIENTIFICAS_R667_R671.md) |
 | Biblioteca e busca | [Biblioteca R657](BIBLIOTECA_AI_R657.md) |
 | Publicação e proveniência | [Fluxo 12](architecture/flows/12-ciencia-publicacao.svg), [CORRIGENDUM](../CORRIGENDUM.md) |
+| Autonomia mensurável e calibração | [R1103–R1107](research/iit-autonomia-r1103/README.md), [R1104](../specs/SPEC-935-R1104-iit-metrics-p0.md) |
 
 ### Vídeo, dublagem e motion
 
@@ -117,6 +133,7 @@ não precise adivinhar onde está a verdade, a especificação ou o limite.
 | ChatGPT, Gemini e NotebookLM | [Autenticação](AUTENTICACAO_CHATGPT_NOTEBOOKLM.md), [NotebookLM](GEMINI_NOTEBOOK_CORE.md) |
 | Plugins locais | [Plugins](PLUGINS_LOCAIS_CORE.md), [Core no ChatGPT](USAR_CORE_NO_CHATGPT.md) |
 | MCP e federação | [ARCHITECTURE.md](../ARCHITECTURE.md), [opencode.json](../opencode.json) |
+| MCP Tiangong local | [Spec R1089](../specs/SPEC-935-R1089-MCP.md), [servidor](../integrations/tiangong_mcp.py), [skill](../.opencode/skills/tiangong-harness/HDR/SKILL.md) |
 | Instalação e procedência | [Instalador](../installer/README.md), [One-click](../installer/ONECLICK.md) |
 
 ## Trilha de evidências

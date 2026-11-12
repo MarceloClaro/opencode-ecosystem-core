@@ -769,3 +769,12 @@ literatura/molambudos/podcast/producao/pacote_editorial_podcast_molambudos_gh/
 # R1083: metadados Windows em qualquer diretório
 *:Zone.Identifier
 *Zone.Identifier
+
+# R1108: downloads de cursos/pacotes externos não entram no clone
+/educacao_quantica_bohm-*/
+/educacao_quantica_bohm-*.zip
+/*.zip
+
+# R1108: staging local de skills/specs já publicado em .opencode/skills e specs/
+/.skills/
+/.specs/

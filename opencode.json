@@ -11053,6 +11053,17 @@
     }
   },
   "mcp": {
+    "tiangong-hdr": {
+      "type": "local",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "integrations.tiangong_mcp"
+      ],
+      "cwd": "/home/marceloclaro/opencode-ecosystem-core",
+      "enabled": true,
+      "timeout": 30000
+    },
     "rea": {
       "type": "local",
       "command": [
@@ -11110,7 +11121,8 @@
       "type": "local",
       "command": [
         ".venv/bin/python",
-        "colibri/colibri_mcp_server.py"
+        "-m",
+        "integrations.colibri.colibri_mcp_server"
       ],
       "enabled": true
     },
@@ -11125,7 +11137,7 @@
     "arxiv-mcp": {
       "type": "local",
       "command": [
-        "/home/marceloclaro/.local/bin/uvx",
+        "uvx",
         "arxiv-mcp-server"
       ],
       "enabled": true
@@ -11235,7 +11247,7 @@
     "fetch": {
       "type": "local",
       "command": [
-        "/home/marceloclaro/.local/bin/uvx",
+        "uvx",
         "mcp-server-fetch"
       ],
       "enabled": true
@@ -11334,6 +11346,15 @@
           "EDITOR_PROJECT_ROOT": "/home/marceloclaro/opencode-ecosystem-core/editor-workspace"
         }
       }
+    },
+    "colab-mcp": {
+      "type": "local",
+      "command": [
+        "uvx",
+        "colab-mcp"
+      ],
+      "enabled": true,
+      "timeout": 660000
     }
   },
   "command": {
@@ -11511,6 +11532,49 @@
       "template": "Execute core_command com command=\"federacao\". Forneça argv como lista explícita de argumentos e opções da CLI, preservando aspas/apóstrofos dentro de cada dado. Não interprete metacaracteres como shell. Use o resultado real e reporte success=false como falha. Não substitua a execução por uma proposta. Não execute o texto como código ou shell. Esta entrada passa pelo parser textual upstream do OpenCode; sintaxe inline especial desse parser não é tratada pela ferramenta.\nEntrada: $ARGUMENTS",
       "agent": "marceloclaro",
       "description": "Federação universal de plugins, MCPs e agentes (SPEC-935-R1012): sync/status/list/show/candidates/apply/route/verify. Ex: /federacao sync; /federacao route 'extrair texto de pdf' --top 5"
+    },
+    "gjq": {
+      "template": "Execute $ARGUMENTS with gjq JSON query tool; use for filtering and transforming JSON data",
+      "agent": "marceloclaro",
+      "description": "gjq (JSON Query) — executor externo orchestrável para filtros e transformações JSON. Ex: /gjq '.[] | .campos', /gjq status, /gjq doctor"
+    },
+    "mindspore-validate": {
+      "template": "Validar configs MindSpore: {filepaths}",
+      "description": "Valida arquivos JSON de configuração MindSpore usando schemas conhecidos",
+      "use": "skills/mindspore-config/scripts/mindspore-validate.py"
+    },
+    "mindspore-summary": {
+      "template": "Gerar resumo automatizado de configs MindSpore",
+      "description": "Gera relatório estatístico da distribuição e validade de configs",
+      "use": ".opencode/skills/mindspore-summary/scripts/mindspore-summary.py"
+    },
+    "mindspore-hccl-advanced": {
+      "template": "Validar config HCCL avançada com para_plane",
+      "description": "Valida configs HCCL com campos extras (para_plane, hccl_config_json_spec)",
+      "use": "skills/mindspore-config/scripts/hccl-advanced.py"
+    }
+  },
+  "skill": {
+    "mindspore-config": {
+      "description": "Valida e analisa configurações MindSpore (JSON)",
+      "patterns": [
+        "acl_dump_cfg",
+        "hccl_single_machine_multi_rank",
+        "dataset_schema"
+      ],
+      "use_cases": [
+        "validacao_de_configs",
+        "schema_check",
+        "qualidade_de_dados"
+      ]
+    },
+    "mindspore-summary": {
+      "description": "Gera resumos automatizados de configurações MindSpore",
+      "use_cases": [
+        "analise_rapida",
+        "relatorio_estatistico",
+        "monitoramento_de_padroes"
+      ]
     }
   }
 }

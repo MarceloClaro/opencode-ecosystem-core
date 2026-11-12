@@ -24015,6 +24015,53 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1108",
+      "objective": "R1108: reconciliar configuracao MCP/federacao, publicar a skill Tiangong, corrigir testes Colibri, limpar ciclos de teste e sincronizar documentacao operacional.",
+      "changes": [
+        "integrations/tiangong_mcp.py: servidor FastMCP com 4 ferramentas, PNG stdlib, CVRP classico e respostas unavailable sem fabricacao.",
+        "tests/test_r1089_tiangong_mcp.py: 35 testes unitarios e de transporte stdio real.",
+        "specs/SPEC-935-R1089-MCP.md: contrato, aceites, recibos RED/GREEN e limites.",
+        "integrations/opencode_cli.py: entrada tiangong-hdr, colab-mcp e correcao do import tardio que quebrava --check.",
+        "opencode.json: entradas tiangong-hdr e colab-mcp, comando Colibri versionado; 32 MCPs e 39 comandos.",
+        ".opencode/skills/tiangong-harness/{HDR,RSIR,VRP}: SKILL.md, skill.py delegando ao MCP e 20 testes verdes.",
+        "tests/test_r660_mcp_validation.py: 13 testes Colibri alinhados a API JSON-RPC atual e validacao antes do provedor.",
+        "federation/activated.json restaurado como JSON valido; federation/activation.md reflete smoke do playwright.",
+        "evolution/cycles.json: removidos R-test-001 e R1102-iit-003/004/005.",
+        "README, docs/README, ARCHITECTURE, MANUAL, CLAUDE, PROGRESS, CHANGELOG e instaladores sincronizados.",
+        ".gitignore: bloqueia educacao_quantica_bohm-* e staging .skills/.specs."
+      ],
+      "score": 9.0,
+      "lessons": [
+        "Pacote npm inexistente produz E404 ou timeout conforme retry do registry; nao registrar nome nao publicado.",
+        "disabled=true depois de -- e argumento do filho; desativar exige enabled=false ou disabled=true no campo de configuracao.",
+        "Regenerar opencode.json sem diff removeria MCPs federados ativos; edicao minima preservou o estado do operador.",
+        "Resultado unavailable e preferivel a success simulado quando o backend nao foi observado.",
+        "Teste stdio deve ser conversacional; EOF imediato apos tools/call cancela a resposta pendente.",
+        "Staging .skills/.specs pode divergir do diretorio carregado; publicar em .opencode/skills e specs e remover duplicatas.",
+        "Arquivo JSON de estado nao deve ser sobrescrito por Markdown; validar com json.load antes de commitar.",
+        "Testes antigos podem importar modulo movido; alinhar import e API antes de tratar falha como pre-existente."
+      ],
+      "timestamp": 1794474704.5818715,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [
+        "specs/SPEC-935-R1108-reconciliacao-mcp-docs.md",
+        "tests/test_r1088_mcp_recovery.py",
+        "tests/test_r1089_tiangong_mcp.py",
+        "tests/test_r1104_iit_metrics_p0.py",
+        ".opencode/skills/tiangong-harness/HDR/test_hdr_skill.py",
+        ".opencode/skills/tiangong-harness/RSIR/test_rsir_skill.py",
+        ".opencode/skills/tiangong-harness/VRP/test_vrp_skill.py"
+      ],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
