@@ -2,7 +2,7 @@
 
 O Core mantém três camadas de automação, todas locais e auditáveis:
 
-> **Status 2026-11-12:** push real validado; `origin/main` em `26c450e`.
+> **Status 2026-11-12:** push real validado; `origin/main` sincronizado com o HEAD.
 
 | Camada | Arquivo | Efeito |
 |---|---|---|

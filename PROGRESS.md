@@ -1237,7 +1237,7 @@ de reutilizar uma conclusão científica ou uma pendência de publicação.
 1. **Triagem das falhas pré-existentes da suíte** — as 13 falhas Colibri foram corrigidas em R1108; os demais escopos seguem sob demanda.
 2. **Molambudos — limite de páginas KDP:** a edição impressa trilíngue (`kdp_tri`) tem 1.143 páginas contra um limite assumido de 828 na Amazon KDP (não validado externamente); precisa de decisão editorial (reduzir corpo, dividir em volumes, ou confirmar limite real no painel KDP) antes de qualquer tentativa de publicação física.
 3. **Molambudos — validações humanas que não podem ser fabricadas:** revisão beta real, revisão de sensibilidade, revisão profissional de tradução nativa (EN/ZH), confirmação do ISBN numa conta KDP real, prova física impressa.
-4. **Push desta rodada:** `origin/main` está em `871c21d` (R1088–R1109); conferir com `git status -sb` e `git log origin/main..HEAD`.
+4. **Push desta rodada:** `origin/main` está sincronizado com o HEAD (R1088–R1109); conferir com `git status -sb` e `git log origin/main..HEAD`.
 
 ## Como retomar
 
