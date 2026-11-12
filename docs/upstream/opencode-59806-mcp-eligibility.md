@@ -27,8 +27,9 @@ local `scripts/opencode_console_eligibility.py` compara as duas credenciais sem
 imprimir tokens, e-mail ou IDs:
 
 ```text
-member    eligible=True  status=200 role=owner workspace=Default permissions=11
-mcp_oauth eligible=False status=200 role=None workspace=None permissions=0
+member             eligible=True  status=200 role=owner workspace=Default permissions=11
+mcp_oauth          eligible=False status=200 role=None workspace=None permissions=0
+mcp_oauth_with_org eligible=None  status=403 role=None workspace=None permissions=0 error={"_tag":"Forbidden"}
 ```
 
 O mesmo padrão aparece no endpoint MCP:
@@ -37,10 +38,18 @@ O mesmo padrão aparece no endpoint MCP:
 |---|---|---|
 | Token de membro da integração `opencode` | **200**, `serverInfo.name=opencode_console` | `eligible=true`, caller com papel `owner` |
 | Token OAuth emitido para o MCP | **403** “not enabled for this workspace” | `eligible=false`, sem caller/papel/workspace |
+| Token OAuth do MCP + `x-org-id` | **403** “The console refused access to the workspace.” | **403** `{"_tag":"Forbidden"}` |
 
-Acrescentar `x-opencode-org-id` ao request do token OAuth **não altera** o
-resultado. O token não é expirado: a troca OAuth retornou 200, refresh token
-presente, `expiresIn=2591999` (~30 dias), e a credencial estava ativa no banco.
+O header correto é **`x-org-id`**, não `x-opencode-org-id`. O código aberto
+`packages/core/src/console-access.ts` mostra que o token de membro envia
+`x-org-id` a partir de `metadata.orgID`. A credencial OAuth do MCP **não**
+possui `orgID` nos metadados; ao injetar o `x-org-id` manualmente, o servidor
+reconhece o workspace e muda a resposta de “not enabled” para “refused access”,
+mas ainda recusa o token. Ou seja, o header é necessário, mas não suficiente:
+falta ao token OAuth a autorização de workspace.
+
+O token não é expirado: a troca OAuth retornou 200, refresh token presente,
+`expiresIn=2591999` (~30 dias), e a credencial estava ativa no banco.
 
 ## Interpretação
 
@@ -69,12 +78,16 @@ separa “workspace sem MCP” de “token MCP sem vínculo de workspace”.
 
 ### Cliente (mitigação de UX)
 
-1. Antes de conectar, chamar `/api/mcp/eligibility` com o token OAuth e
+1. Guardar `orgID` nos metadados da credencial OAuth do MCP e enviar
+   `x-org-id` nas requisições; hoje o header só existe no caminho do token de
+   membro. Isso melhora o roteamento, mas o servidor ainda precisa autorizar o
+   token para o workspace.
+2. Antes de conectar, chamar `/api/mcp/eligibility` com o token OAuth e
    apresentar um erro acionável quando `eligible=false`, em vez de tentar
    reconectar em loop.
-2. Se o fluxo OAuth permitir escolher workspace, garantir que a seleção seja
+3. Se o fluxo OAuth permitir escolher workspace, garantir que a seleção seja
    explícita e que o token resultante seja vinculado ao workspace escolhido.
-3. Não silenciar o 403: mostrar o estado `failed`/`needs_auth` com a mensagem
+4. Não silenciar o 403: mostrar o estado `failed`/`needs_auth` com a mensagem
    do servidor e um link para a página de MCP do Console.
 
 ## Reprodução
@@ -85,8 +98,9 @@ cd /home/marceloclaro/opencode-ecosystem-core
 ```
 
 O script lê as credenciais ativas do banco local do OpenCode, consulta
-`/api/mcp/eligibility` com cada uma e imprime apenas `eligible`, status, papel,
-nome do workspace e contagem de permissões. Tokens, e-mail e IDs são redigidos.
+`/api/mcp/eligibility` em três caminhos — token de membro, token OAuth do MCP e
+token OAuth + `x-org-id` — e imprime apenas `eligible`, status, papel, nome do
+workspace e contagem de permissões. Tokens, e-mail e IDs são redigidos.
 
 ## Workaround local (não é correção upstream)
 

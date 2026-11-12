@@ -92,7 +92,13 @@ sistema operacional e não corrige o bug upstream.
   `eligible=false`, sem caller/papel/workspace.
 - `POST https://opencode.ai/console/mcp` com o token de membro: HTTP 200 e
   `serverInfo.name=opencode_console`; com o token OAuth: HTTP 403 “not enabled
-  for this workspace”. Acrescentar `x-opencode-org-id` não altera o resultado.
+  for this workspace”; com o token OAuth + `x-org-id`: HTTP 403 “The console
+  refused access to the workspace.” O header correto é `x-org-id`, não
+  `x-opencode-org-id`.
+- `packages/core/src/console-access.ts` mostra que o token de membro envia
+  `x-org-id` a partir de `metadata.orgID`; a credencial OAuth do MCP não possui
+  `orgID`. O header melhora o roteamento, mas o servidor ainda recusa o token
+  por falta de autorização de workspace.
 - Diagnóstico reproduzível: `scripts/opencode_console_eligibility.py` (5 testes
   herméticos; não imprime tokens, e-mail ou IDs).
 - Dossiê com hipótese, correções propostas e limites:

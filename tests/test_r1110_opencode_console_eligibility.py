@@ -31,8 +31,11 @@ def _make_db(tmp_path, rows):
     return db
 
 
-def _credential(token: str, expires_ms: int) -> dict:
-    return {"type": "oauth", "access": token, "expires": expires_ms}
+def _credential(token: str, expires_ms: int, metadata: dict | None = None) -> dict:
+    data = {"type": "oauth", "access": token, "expires": expires_ms}
+    if metadata is not None:
+        data["metadata"] = metadata
+    return data
 
 
 def test_read_credential_token_returns_latest_active(tmp_path):
@@ -98,11 +101,13 @@ def test_summarize_extracts_only_safe_fields():
 def test_collect_compares_member_and_mcp_without_leaking(tmp_path, monkeypatch):
     now_ms = int(time.time() * 1000)
     db = _make_db(tmp_path, [
-        ("opencode", _credential("member-token", now_ms + 3_600_000), 1, 1),
+        ("opencode", _credential("member-token", now_ms + 3_600_000, {"orgID": "wrk_01DEF"}), 1, 1),
         ("mcp_eec8489fdfd1e19a", _credential("mcp-token", now_ms + 3_600_000), 1, 2),
     ])
 
-    def fake_fetch(token, url=elig.ELIGIBILITY_URL):
+    def fake_fetch(token, url=elig.ELIGIBILITY_URL, org_id=None):
+        if org_id:
+            return {"http_status": 403, "payload": {}, "error": "Forbidden"}
         if token == "member-token":
             return {
                 "http_status": 200,
@@ -124,6 +129,7 @@ def test_collect_compares_member_and_mcp_without_leaking(tmp_path, monkeypatch):
     assert result["member"]["eligible"] is True
     assert result["member"]["role"] == "owner"
     assert result["mcp_oauth"]["eligible"] is False
+    assert result["mcp_oauth_with_org"]["http_status"] == 403
 
     rendered = json.dumps(result) + elig._format(result["member"])
     assert "member-token" not in rendered

@@ -49,6 +49,25 @@ def read_credential_token(
     now: float | None = None,
 ) -> str:
     """Lê a credencial ativa mais recente de uma integração."""
+    data = _read_credential(db_path, integration, now)
+    access = data.get("access")
+    if not isinstance(access, str) or not access.strip():
+        raise CredentialError(f"credential {integration} has no access token")
+    return access
+
+
+def read_credential_metadata(db_path: Path | str, integration: str) -> dict:
+    """Lê apenas os metadados não secretos de uma credencial ativa."""
+    data = _read_credential(db_path, integration, None)
+    metadata = data.get("metadata")
+    return metadata if isinstance(metadata, dict) else {}
+
+
+def _read_credential(
+    db_path: Path | str,
+    integration: str,
+    now: float | None = None,
+) -> dict:
     db_path = Path(db_path)
     if not db_path.exists():
         raise CredentialError("OpenCode database not found; run /connect in OpenCode")
@@ -75,20 +94,23 @@ def read_credential_token(
         raise CredentialError(f"credential {integration} is not valid JSON") from exc
     if not isinstance(data, dict):
         raise CredentialError(f"credential {integration} has an unexpected shape")
-    access = data.get("access")
-    if not isinstance(access, str) or not access.strip():
-        raise CredentialError(f"credential {integration} has no access token")
     expires = data.get("expires")
     if isinstance(expires, (int, float)) and expires / 1000.0 <= current + TOKEN_MARGIN_SECONDS:
         raise CredentialError(f"credential {integration} expired or expiring; run /connect")
-    return access
+    return data
 
 
-def fetch_eligibility(token: str, url: str = ELIGIBILITY_URL) -> dict:
+def fetch_eligibility(
+    token: str,
+    url: str = ELIGIBILITY_URL,
+    org_id: str | None = None,
+) -> dict:
     request = urllib.request.Request(url, method="GET")
     request.add_header("Authorization", f"Bearer {token}")
     request.add_header("Accept", "application/json")
     request.add_header("User-Agent", "opencode-console-eligibility/1.0")
+    if org_id:
+        request.add_header("x-org-id", org_id)
     try:
         with urllib.request.urlopen(request, timeout=30) as response:
             body = response.read(8192).decode("utf-8", "replace")
@@ -125,20 +147,33 @@ def summarize(result: dict) -> dict:
 
 def collect(db_path: Path | str = DEFAULT_DB) -> dict[str, dict]:
     out: dict[str, dict] = {}
-    for label, integration in (
-        ("member", MEMBER_INTEGRATION),
-        ("mcp_oauth", MCP_INTEGRATION),
-    ):
+    try:
+        member_token = read_credential_token(db_path, MEMBER_INTEGRATION)
+        out["member"] = summarize(fetch_eligibility(member_token))
+    except CredentialError as exc:
+        out["member"] = {
+            "eligible": None,
+            "http_status": None,
+            "error": str(exc),
+        }
+
+    try:
+        mcp_token = read_credential_token(db_path, MCP_INTEGRATION)
+        out["mcp_oauth"] = summarize(fetch_eligibility(mcp_token))
         try:
-            token = read_credential_token(db_path, integration)
-        except CredentialError as exc:
-            out[label] = {
-                "eligible": None,
-                "http_status": None,
-                "error": str(exc),
-            }
-            continue
-        out[label] = summarize(fetch_eligibility(token))
+            org_id = read_credential_metadata(db_path, MEMBER_INTEGRATION).get("orgID")
+        except CredentialError:
+            org_id = None
+        if isinstance(org_id, str) and org_id:
+            out["mcp_oauth_with_org"] = summarize(
+                fetch_eligibility(mcp_token, org_id=org_id)
+            )
+    except CredentialError as exc:
+        out["mcp_oauth"] = {
+            "eligible": None,
+            "http_status": None,
+            "error": str(exc),
+        }
     return out
 
 
@@ -171,8 +206,9 @@ def main(argv: list[str] | None = None) -> int:
     if args.json:
         print(json.dumps(result, ensure_ascii=False, indent=2))
     else:
-        for label in ("member", "mcp_oauth"):
-            print(f"{label:9} {_format(result[label])}")
+        for label in ("member", "mcp_oauth", "mcp_oauth_with_org"):
+            if label in result:
+                print(f"{label:18} {_format(result[label])}")
     return 0 if result.get("member", {}).get("eligible") is not None else 1
 
 
