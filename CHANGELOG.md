@@ -13,7 +13,7 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.
 - **Autonomia e métricas (SPEC-935-R1103–R1107)**: dossiê `docs/research/iit-autonomia-r1103/` com 12 fontes e 11 lacunas; correções P0 em `mci/iiit_metrics.py` e `mci/__main__.py`; harness `benchmarks/autonomy_harness.py` com tarefas reservadas; `EcosystemRunAdapter` e `OpenCodeCliAdapter`.
 - **MCP Colibri recuperado (SPEC-935-R1088)**: comando migrado para `python -m integrations.colibri.colibri_mcp_server`, validação JSON-RPC antes do provedor e entrada `colab-mcp`.
 - **Skills MindSpore**: `skills/mindspore-config/` e `.opencode/skills/mindspore-summary/` para parsing, validação e resumo de configurações JSON.
-- **Checkpoint automático (SPEC-935-R1109)**: `scripts/autocommit_push.sh`, hook `post-commit` e timer systemd `--user` de 2 minutos; commit e push automáticos, com PAT lido de arquivo `600` via `GIT_ASKPASS`, guarda de 50 MB e log fora do repositório.
+- **Checkpoint automático (SPEC-935-R1109)**: `scripts/autocommit_push.sh`, hook `post-commit` e timer systemd `--user` de 2 minutos; commit e push automáticos, com PAT lido de arquivo `600` via `GIT_ASKPASS`, guarda de 50 MB e log fora do repositório. Push real validado em 2026-11-12 (`6bb51e9` e `26c450e` em `origin/main`).
 
 ### Corrigido
 - `federation/activated.json` restaurado como JSON válido (`federation-activated-mcp/v2`) após ter sido sobrescrito por Markdown; `federation/activation.md` reflete o smoke real do `playwright`.

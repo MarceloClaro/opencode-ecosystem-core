@@ -1,7 +1,6 @@
 # SPEC-935-R1109 — Commit e push automáticos do Core
 
-Data: 2026-11-12. Estado: implementado e testado localmente; push real
-dependente de PAT fornecido pelo operador.
+Data: 2026-11-12. Estado: implementado, testado e com push real validado.
 
 ## Demanda
 

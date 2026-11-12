@@ -2,6 +2,8 @@
 
 O Core mantém três camadas de automação, todas locais e auditáveis:
 
+> **Status 2026-11-12:** push real validado; `origin/main` em `26c450e`.
+
 | Camada | Arquivo | Efeito |
 |---|---|---|
 | Checkpoint | `scripts/autocommit_push.sh` | `git add --sparse -A`, commit e push quando há mudanças |
