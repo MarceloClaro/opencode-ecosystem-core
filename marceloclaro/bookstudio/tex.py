@@ -99,8 +99,8 @@ class BookDesign:
     chapter_style: str = "veelo"
     toc: bool = True
     title_page: bool = True
-    bibliography: bool = True
-    index: bool = True
+    bibliography: bool = False
+    index: bool = False
     numbered_sections: bool = False
     plots: bool = False
     keywords: Tuple[str, ...] = field(default_factory=tuple)
@@ -330,7 +330,7 @@ def write_project(root: str | Path, design: BookDesign, *,
 
 
 def compile_project(root: str | Path, *, timeout: int = 600,
-                    jobname: str = "book") -> Dict[str, Any]:
+                    jobname: str = "book", clean: bool = False) -> Dict[str, Any]:
     """Compila com latexmk/LuaLaTeX. Não instala nada e não usa shell."""
     base = Path(root).expanduser().resolve()
     main_tex = base / "main.tex"
@@ -341,14 +341,27 @@ def compile_project(root: str | Path, *, timeout: int = 600,
         raise TexError(
             "latexmk ausente; instale TinyTeX (veja docs) ou use --engine typst")
     build = base / "build"
+    if clean and build.is_dir():
+        shutil.rmtree(build)
     build.mkdir(exist_ok=True)
     command = [
-        latexmk, "-lualatex", "-interaction=nonstopmode", "-halt-on-error",
+        latexmk, "-g", "-lualatex", "-interaction=nonstopmode", "-halt-on-error",
         "-file-line-error", f"-jobname={jobname}", f"-outdir={build}", "main.tex",
     ]
     try:
         result = subprocess.run(command, cwd=base, capture_output=True,
                                 text=True, timeout=timeout)
+        biber_ran = False
+        bcf = build / f"{jobname}.bcf"
+        bbl = build / f"{jobname}.bbl"
+        biber = shutil.which("biber")
+        if bcf.is_file() and biber and (
+                not bbl.is_file() or bbl.stat().st_mtime < bcf.stat().st_mtime):
+            subprocess.run([biber, "--output-directory", str(build), jobname],
+                           cwd=base, capture_output=True, text=True, timeout=timeout)
+            biber_ran = True
+            result = subprocess.run(command, cwd=base, capture_output=True,
+                                    text=True, timeout=timeout)
     except subprocess.TimeoutExpired as exc:
         raise TexError(f"latexmk excedeu {timeout}s") from exc
     pdf = build / f"{jobname}.pdf"
@@ -358,6 +371,7 @@ def compile_project(root: str | Path, *, timeout: int = 600,
         "returncode": result.returncode,
         "pdf": str(pdf) if pdf.is_file() else None,
         "log": str(log) if log.is_file() else None,
+        "biber_ran": biber_ran,
         "stdout_tail": (result.stdout or "")[-2000:],
         "stderr_tail": (result.stderr or "")[-2000:],
         "command": command,
@@ -466,6 +480,12 @@ def qa_pdf_native(path: str | Path, *, trim: str | None = None) -> Dict[str, Any
                 font = font_ref.get_object()
                 base = str(font.get("/BaseFont", "?"))
                 descriptor = font.get("/FontDescriptor")
+                if not descriptor and "/DescendantFonts" in font:
+                    descendants = font.get("/DescendantFonts") or []
+                    if descendants:
+                        child = descendants[0].get_object()
+                        base = str(child.get("/BaseFont", base))
+                        descriptor = child.get("/FontDescriptor")
                 embedded = False
                 if descriptor:
                     descriptor = descriptor.get_object()
