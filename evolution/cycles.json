@@ -24062,6 +24062,35 @@
       "origin_commit": "",
       "state_merkle_root": "",
       "prev_state_merkle_root": ""
+    },
+    {
+      "round_id": "R1115-EVOL",
+      "objective": "Resolver a defasagem da skill REA v37->v49, instalar o roteador REAP com adaptador auditavel e portar o RAG Evidence Ledger para o Core",
+      "changes": [
+        "SPEC-935-R1112: skill reverse-engineer-anything atualizada para v49 (229 ferramentas), backup v37 e origin.json com hashes",
+        "SPEC-935-R1113: integrations/reap_adapter.py com plan/install/validate/rollback, dry-run e manifesto",
+        "SPEC-935-R1114: rag/evidence_ledger.py com guarda de embeddings, ID estavel e join documentos-perguntas",
+        "SPEC-935-R1115: skill reap-prompts como indice unico com 26 packs em references/packs",
+        "SPECA-935-R1112 mitigacao: integrations/rea_applicability.py classifica superficie antes da camada JS"
+      ],
+      "score": 8.0,
+      "lessons": [
+        "Defasagem de skill deve ser medida contra o pacote instalado, nao contra o repositorio upstream.",
+        "0 findings da camada JS em alvo Python/Markdown e ausencia de superficie, nao analise concluida.",
+        "Instalador de skills de terceiros exige dry-run, manifesto, hash e rollback.",
+        "Specs sem frontmatter YAML com spec_id nao entram no registry formal do Core."
+      ],
+      "timestamp": 1794525382.614757,
+      "artifact_hashes": {},
+      "external_verdict": null,
+      "verifier_identity": "",
+      "evidence_trail": [],
+      "audited": false,
+      "legacy": true,
+      "merkle_root": "",
+      "origin_commit": "",
+      "state_merkle_root": "",
+      "prev_state_merkle_root": ""
     }
   ],
   "legacy_migrations": [
