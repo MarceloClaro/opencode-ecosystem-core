@@ -224,7 +224,8 @@ def test_proxy_streams_get_sse(tmp_path, upstream):
         proxy.server_close()
 
 
-def test_proxy_rejects_missing_token_without_calling_upstream(tmp_path, upstream):    db = _make_db(tmp_path, [])
+def test_proxy_rejects_missing_token_without_calling_upstream(tmp_path, upstream):
+    db = _make_db(tmp_path, [])
     proxy = _start_proxy(upstream, db)
     try:
         with pytest.raises(urllib.error.HTTPError) as excinfo:

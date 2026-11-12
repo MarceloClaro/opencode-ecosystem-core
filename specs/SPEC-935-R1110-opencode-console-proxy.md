@@ -78,3 +78,7 @@ sistema operacional e não corrige o bug upstream.
 - O proxy usa a mesma credencial de membro que respondeu 200, sem gravar o
   token no config. A disponibilidade contínua depende do processo do proxy e da
   validade da credencial; não há garantia de disponibilidade futura do upstream.
+- Após a implantação: `--check` → HTTP 200 (`server=opencode_console`);
+  `mcp list` → `opencode_console connected`; `get_context` → workspace
+  `Default`, role `owner`; 13 testes R1110 passaram. O proxy foi reiniciado e a
+  config foi recarregada sem perder a conexão.
